@@ -1,0 +1,16 @@
+created: 20140410103123179
+modified: 20150203192735000
+tags: [[Filter Operators]] [[String Operators]] [[Negatable Operators]]
+title: prefix Operator
+type: text/vnd.tiddlywiki
+caption: prefix
+op-purpose: filter the input titles by how they start
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: a string of characters
+op-parameter-name: S
+op-output: those input titles that start with <<.place S>>
+op-neg-output: those input tiddlers that do <<.em not>> start with <<.place S>>
+
+<<.s-matching-is-case-sensitive>>
+
+<<.operator-examples "prefix">>

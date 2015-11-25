@@ -1,0 +1,14 @@
+title: $:/language/Help/makelibrary
+description: Construeix el connector de la biblioteca necessari per a l'actualització
+
+Construeix el tiddler `$:/UpgradeLibrary` per al procés d'actualització.
+
+La biblioteca d'actualització es formata com un tiddler connector corrent amb el tipus de connector `library`. Conté una còpia de cada un dels connectors, temes i paquets de l'idioma disponibles al repositori del TiddlyWiki5.
+
+Aquesta ordre és per a ús intern; només és rellevant per als usuaris que dissenyen un procés d'actualització a mida.
+
+```
+--makelibrary <títol>
+```
+
+El valor per omisió de l'argument títol és `$:/UpgradeLibrary`.

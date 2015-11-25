@@ -78,10 +78,13 @@ exports.parse = function() {
 	}
 	// Save the macro definition
 	return [{
-		type: "macrodef",
-		name: this.match[1],
-		params: params,
-		text: text
+		type: "set",
+		attributes: {
+			name: {type: "string", value: this.match[1]},
+			value: {type: "string", value: text}
+		},
+		children: [],
+		params: params
 	}];
 };
 

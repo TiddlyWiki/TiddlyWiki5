@@ -1,0 +1,13 @@
+caption: ~TiddlyDesktop
+created: 20150419144649101
+fr-title: Versions de TiddlyDesktop
+modified: 20150531191328130
+tags: Releases
+title: TiddlyDesktop Releases
+type: text/vnd.tiddlywiki
+
+Voici la description des récentes mise à jour de TiddlyDesktop
+
+<$list filter="[tag[TiddlyDesktopReleaseNotes]!sort[created]limit[1]]">
+  <$macrocall $name="tabs" tabsList="[tag[TiddlyDesktopReleaseNotes]!sort[created]]"default={{!!title}} class="tc-vertical" template="ReleaseTemplate" />
+</$list>

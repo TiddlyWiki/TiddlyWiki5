@@ -1,0 +1,20 @@
+created: 20150221193056000
+fr-title: Macros Tables des matières (Exemples)
+modified: 20150621092418122
+tags: [[Table-of-Contents Macros]] [[Macro Examples]]
+title: Table-of-Contents Macros (Examples)
+type: text/vnd.tiddlywiki
+
+Cet exemple découle de tables des matières issues du tag racine <<.tag Contents>>.
+Vous pourrez découvrir leurs structures en cliquant sur ces tags pilules<<:>>
+
+* {{Contents||$:/core/ui/TagTemplate}}
+** {{First||$:/core/ui/TagTemplate}}
+** {{Second||$:/core/ui/TagTemplate}}
+*** {{SecondThree||$:/core/ui/TagTemplate}}
+** {{Third||$:/core/ui/TagTemplate}}
+** {{Fourth||$:/core/ui/TagTemplate}}
+
+Cet autre exemple avec onglets emploie, en plus, la [[table des matières|TableOfContents]] réelle de cette documentation.
+
+<<tabs "[tag[table-of-contents-example]nsort[order]]" "Example Table of Contents: Simple">>

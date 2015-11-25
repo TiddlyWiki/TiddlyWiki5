@@ -1,10 +1,12 @@
 title: $:/language/Help/rendertiddler
 description: Enregistre un tiddler avec un rendu correspondant au type de contenu spécifié
 
-Enregistre un tiddler sous le chemin de fichier indiqué, avec un rendu correspondant au type de contenu (ContentType) spécifié — par défaut `text/html` :
+Enregistre un tiddler sous le chemin de fichier indiqué, avec un rendu correspondant au type de contenu (ContentType) spécifié — par défaut `text/html`. Un tiddler modèle (template) peut être indiqué optionnellement. Dans ce cas, c'est le tiddler modèle qui est rendu, avec la variable "currentTiddler" initialisée avec le tiddler dont le titre est donné en valeur du premier paramètre.
 
 ```
---rendertiddler <titre> <chemindufichier> [<type>]
+--rendertiddler <titre> <chemindufichier> [<type>] [<modèle>]
 ```
+
+Par défaut, le nom de fichier est résolu relativement au sous-répertoire `output` du répertoire de l'édition. La commande `--output` peut servir à rediriger la sortie vers un répertoire différent.
 
 Les répertoires présents dans le chemin du fichier et qui n'existent pas encore sont créés automatiquement. 

@@ -1,0 +1,9 @@
+created: 20150221151358000
+modified: 20150221170425000
+tags: [[now Macro]] [[Macro Examples]]
+title: now Macro (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1" eg="""<<now>>"""/>
+<$macrocall $name=".example" n="2" eg="""<<now YYYY-0MM-0DD>>"""/>
+<$macrocall $name=".example" n="3" eg="""<<now "hh:0mm:0sspm">>"""/>

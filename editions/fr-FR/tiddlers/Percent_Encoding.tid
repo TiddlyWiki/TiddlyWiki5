@@ -1,0 +1,12 @@
+created: 20150228131248000
+fr-title: Encodage PourCent (%)
+modified: 20150624085737801
+tags: Definitions
+title: Percent Encoding
+type: text/vnd.tiddlywiki
+
+<<.dlink-ex "L'encodage ~PourCent" "http://en.wikipedia.org/wiki/Percent-encoding">> est une notation qui permet d'inclure des caractères invalides dans une [[URI]].
+
+Ce type de caractère est représenté par le signe `%` suivi de deux caractères additionnels.
+
+Par exemple, l'espace est représenté par `%20` et le signe pourcent est représenté ainsi `%25`.

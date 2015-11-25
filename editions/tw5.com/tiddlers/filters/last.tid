@@ -1,0 +1,13 @@
+created: 20140410103123179
+modified: 20150203192036000
+tags: [[Filter Operators]] [[Order Operators]]
+title: last Operator
+type: text/vnd.tiddlywiki
+caption: last
+op-purpose: select the last <<.place N>> input titles
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: an integer, defaulting to 1
+op-parameter-name: N
+op-output: the last <<.place N>> input titles
+
+<<.operator-examples "last">>

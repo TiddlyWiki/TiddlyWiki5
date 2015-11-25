@@ -1,0 +1,14 @@
+title: $:/language/Import/
+
+Listing/Cancel/Caption: Cancella
+Listing/Hint: Questi frammenti sono pronti per essere importati:
+Listing/Import/Caption: Importa
+Listing/Select/Caption: Seleziona
+Listing/Status/Caption: Stato
+Listing/Title/Caption: Titolo
+Upgrader/Plugins/Suppressed/Incompatible: Plugin bloccato incompatibile o obsoleto 
+Upgrader/Plugins/Suppressed/Version: Plugin bloccato (a causa di un in arrivo <<incoming>>  pi&ugrave; vecchio di un esistente <<existing>>)
+Upgrader/Plugins/Upgraded: Plugin aggiornato da <<incoming>> a <<upgraded>>
+Upgrader/State/Suppressed: Frammento in stato temporaneo bloccato
+Upgrader/System/Suppressed: Frammento di sistema bloccato
+Upgrader/ThemeTweaks/Created: Tema migrato da <$text text=<<from>>/>

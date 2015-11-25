@@ -1,0 +1,61 @@
+created: 20150719190741300
+modified: 20150719191131503
+tags: Options
+title: Layout Options
+
+\define thisMakeCheckbox()
+<$reveal type='nomatch' state='$:/settings/$(ThisResumeName)$/$(currentTiddler)$!!show' text=true>
+<$button class='tc-btn-invisible'>
+<$action-setfield $tiddler='$:/settings/$(ThisResumeName)$/$(currentTiddler)$' $field=show $value=true/>
+<input type="checkbox">
+</$button>
+</$reveal>
+<$reveal type='match' state='$:/settings/$(ThisResumeName)$/$(currentTiddler)$!!show' text=true>
+<$button class='tc-btn-invisible'>
+<$action-setfield $tiddler='$:/settings/$(ThisResumeName)$/$(currentTiddler)$' $field=show $value=false/>
+<input type="checkbox" checked="true">
+</$button>
+</$reveal>
+\end
+
+\define thisSelectTemplate()
+<$select tiddler="""$:/settings/$(ThisResumeName)$/$(currentTiddler)$""" field=template>
+<option value=''>--</option>
+<$list filter='[tag[DisplayTemplate]section_name{$:/display/$(currentTiddler)$!!section}]'>
+<option value={{!!title}}><$view field='template_name'><$view field='title'/></$view></option>
+</$list>
+</$select>
+\end
+
+\define thisSetOrder()
+<$edit-text tiddler='$:/settings/$(ThisResumeName)$/$(currentTiddler)$' field='order' size=2/>
+\end
+
+<$set name=ThisResumeName value={{$:/settings/Global!!selected_resume}}>
+<table>
+<tr>
+<th>Show section?</th>
+<th>Section Name</th>
+<th>Template</th>
+<th>Display Order</th>
+</tr>
+<$list filter='[tag[Section Display]sort[order]removeprefix[$:/display/]]'>
+<tr>
+<td>
+<<thisMakeCheckbox>>
+</td>
+<td>
+<$list filter='[<currentTiddler>addprefix[$:/display/]]'>
+<$view field='section'/>
+</$list>
+</td>
+<td>
+<<thisSelectTemplate>>
+</td>
+<td>
+<<thisSetOrder>>
+</td>
+</tr>
+</$list>
+</table>
+</$set>

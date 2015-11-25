@@ -1,7 +1,0 @@
-recipe: ../../../../core/tiddlywiki.html.recipe
-tiddler: locale.en.js
-shadow: GettingStarted.tiddler
-shadow: OptionsPanel.tiddler
-tiddler: Credits.tiddler
-tiddler: DefaultTiddlers.tiddler
-tiddler: DownloadedSoftware.tiddler

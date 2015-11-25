@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/static/list
+
+<$list filter="""[all[current]] $(tv-exclude-filter)$ +[limit[1]]""" variable="item">
+
+`<`<$text text={{!!toc-list-type}}/>` class="`{{||$:/plugins/tiddlywiki/text-slicer/templates/static/helpers/classes}}`">`
+
+<$list filter={{!!toc-list-filter}} template="$:/plugins/tiddlywiki/text-slicer/templates/static/tiddler"/>
+
+`</`<$text text={{!!toc-list-type}}/>`>`
+
+</$list>

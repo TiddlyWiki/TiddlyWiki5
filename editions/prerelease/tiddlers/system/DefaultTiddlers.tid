@@ -4,7 +4,6 @@ title: $:/DefaultTiddlers
 type: text/vnd.tiddlywiki
 
 [[TiddlyWiki Pre-release]]
-[tag[ReleaseNotes]!has[released]]
 HelloThere
 GettingStarted
 Community

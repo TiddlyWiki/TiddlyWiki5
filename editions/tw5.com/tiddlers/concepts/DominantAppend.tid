@@ -1,0 +1,11 @@
+created: 20150123220223000
+modified: 20150917193646675
+tags: Filters
+title: Dominant Append
+type: text/vnd.tiddlywiki
+
+[[Filters]] manipulate [[sets of titles|Title Selection]] in which no title may appear more than once. Furthermore, they often need to append one such set to another.
+
+This is done in such a way that, if a title would be duplicated, the earlier copy of that title is discarded. The titles being appended are dominant.
+
+For example, if a selection contains `Andrew Becky Clara Daniel` and `Andrew Barney Clara Daisy` is then appended to it, the result is `Becky Daniel Andrew Barney Clara Daisy`.

@@ -1,8 +1,9 @@
-title: CheckboxWidget
-created: 201310241419
-modified: 201407110837
-tags: Widgets
 caption: checkbox
+created: 20131024141900000
+modified: 20150626091305445
+tags: Widgets
+title: CheckboxWidget
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
@@ -16,12 +17,14 @@ The checkbox widget displays an HTML `<input type="checkbox">` element that is d
 The content of the `<$checkbox>` widget is displayed within an HTML `<label>` element immediately after the checkbox itself. This means that clicking on the content will toggle the checkbox.
 
 |!Attribute |!Description |
-|tiddler |Title of the tiddler to manipulate (defaults to the CurrentTiddler) |
+|tiddler |Title of the tiddler to manipulate (defaults to the [[current tiddler|Current Tiddler]]) |
 |tag |The name of the tag to which the checkbox should be bound |
+|invertTag |When set to ''yes'', flips the tag binding logic so that the absence of the tag causes the checkbox to be checked  |
 |field |The name of the field to which the checkbox should be bound |
 |checked |The value of the field corresponding to the checkbox being checked |
 |unchecked |The value of the field corresponding to the checkbox being unchecked |
 |default |The default value to use if the field is not defined |
+|class |The class that will be assigned to the label element |
 
 !! Tag Mode
 

@@ -1,0 +1,7 @@
+created: 20150221214110000
+modified: 20150221214129000
+tags: [[version Macro]] [[Macro Examples]]
+title: version Macro (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1" eg="""Version number: <<version>>"""/>

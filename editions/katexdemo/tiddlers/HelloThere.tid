@@ -38,11 +38,17 @@ $$\displaystyle \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} 
 
 !! Example 3
 
+Use a wrapper element with the class `katex-display` to render math in display mode, centred on a single line in display style.
+
 ```
+<div class="katex-display">
 $$\displaystyle \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
+</div>
 ```
 
+<div class="katex-display">
 $$\displaystyle \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
+</div>
 
 !! Example 4
 
@@ -64,7 +70,7 @@ For more flexibility the KaTeX widget can also be used via the full widget synta
 
 ! Error Handling
 
-An warning message is displayed if KaTeX detects a problem with the ~LaTeX syntax. For example:
+Any LaTeX syntax errors are flagged with the problematic syntax highlighted. For example:
 
 ```
 $$\displaystyle f(x) = \int_{-\infty}^\infinity\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$

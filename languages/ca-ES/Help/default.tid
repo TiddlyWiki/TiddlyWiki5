@@ -1,0 +1,23 @@
+title: $:/language/Help/default
+description: 
+
+\define títolDeLOrdre()
+$:/language/Help/$títolDeLOrdre(ordre)$
+\end
+```
+ús: tiddlywiki [<carpetawiki>] [--<ordre> [<args>...]...]
+```
+
+Ordres disponibles:
+
+<ul>
+<$list filtre="[commands[]sort[títol]]" variable="ordre">
+<li><$link to=<<títolDeLOrdre>>><$macrocall $name="ordre" $type="text/plain" $output="text/plain"/></$link>: <$transclude tiddler=<<títolDeLOrdre>> field="descripcio"/></li>
+</$list>
+</ul>
+
+Per obtenir ajuda sobre una ordre podeu fer:
+
+```
+tiddlywiki --help <ordre>
+```

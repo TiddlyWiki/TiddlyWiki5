@@ -1,6 +1,6 @@
 caption: 5.0.17-beta
 created: 20140910131615798
-modified: 20140912164804565
+modified: 20150221225235000
 tags: BetaReleaseNotes
 title: Release 5.0.17-beta
 type: text/vnd.tiddlywiki
@@ -30,7 +30,7 @@ The use of the `title` attribute in the ButtonWidget was not consistent with the
 
 As discussed in [[the associated ticket|https://github.com/Jermolene/TiddlyWiki5/issues/762]], the support for regular expression filter operands is incomplete and inconsistent. The plan is to remove support for this feature in the next release. A new filter operator has been provided to replace it, along with the addition of a deprecation warning that is displayed whenever regular expression filter operators are used.
 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f4fff7a33037ba9dd537379bcb44a52a280868d6]] new [[FilterOperator: regexp]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f4fff7a33037ba9dd537379bcb44a52a280868d6]] new <<.olink regexp>> operator
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d45c417c187fe3dcc35ee7a308e64feebc7b185b]] deprecation warning for regular expression filter operators
 
 !!! Repository Reorganisation
@@ -48,9 +48,9 @@ The goal is to make the TiddlyWiki repository easier to comprehend for newcomers
 * Moved developer documentation to http://tiddlywiki.com/dev
 * [[Improvements|https://github.com/Jermolene/TiddlyWiki5/commit/872e6fc2532012f0f9acfb29aa24a9cd5f340b9d]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/c8a131ffd4716f2b99ab508567422ff463f2849d]]) to `serve.sh`/`serve.cmd` scripts
 * [[Disable|https://github.com/Jermolene/TiddlyWiki5/commit/ac54fe33263cbe48bc294f9c14257ccc146be38e]] plugins when in SafeMode
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c1de85838f3d0d3e6a207152ecc9d61ff08a4b05]] new TimelineMacro
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f16d1832aae9a7ce71dea78b16c11afaf673acf2]] new DumpVariablesMacro
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/ba3f8002355607c8b00b7d184f01fa68bbcda152]] TableOfContentsMacro so that individual links can be disabled
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c1de85838f3d0d3e6a207152ecc9d61ff08a4b05]] new <<.mlink timeline>> macro
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f16d1832aae9a7ce71dea78b16c11afaf673acf2]] new <<.mlink dumpvariables>> macro
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/ba3f8002355607c8b00b7d184f01fa68bbcda152]] [[Table-of-Contents Macros]] so that individual links can be disabled
 * [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/542788bfeba98ec3bac0bb721293c16354bc1b34]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/487c4a40abda2b457b4015033bf1be76bd81dcc9]]) unnecessary `<p>` tag from edit tags and types dropdowns
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ccd916ca7cb45468ac30eb48bfdf86bea704d810]] ''multiple'' attribute to the BrowseWidget
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/ab944bbf02e9fae606632a11df1053a46573fa49]] view template to hide bodies of tiddlers with field ''hide-body'' set to ''yes''
@@ -60,7 +60,7 @@ The goal is to make the TiddlyWiki repository easier to comprehend for newcomers
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/c713eddbef50603e313a86f78c185753bab3d607]] problem with draft tiddlers not counting as dirty
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/f87ce7e98a083f1bdcff5b1887b56aa95b731efe]] problem with keyboard shortcuts introduced in 5.0.16-beta
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/756e05504b33c387da7d3f81446a18f9a8fefe49]] problem with stylesheets being parsed in inline mode
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/9adc30f69fba169813638021780263ff0df4e2bc]] bug with selective expandable TableOfContentsMacro
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/9adc30f69fba169813638021780263ff0df4e2bc]] bug with selective expandable [[Table-of-Contents Macros]]
 
 !! Contributors
 

@@ -38,6 +38,13 @@ Palette/Editor/Reset/Caption: Palette zurücksetzen
 Palette/HideEditor/Caption: Editor ausblenden
 Palette/Prompt: Ausgewählte Farbpalette:
 Palette/ShowEditor/Caption: Editor zeigen
+Parsing/Caption: Parser
+Parsing/Hint: Hier können Sie die globalen Parser Einstellungen ändern. ACHTUNG: Manche Einstellungen können dazu führen, dass ~TiddlyWiki nicht mehr richtig funktioniert. Sollte das der Fall sein, dann können Sie die Änderungen im [["safe mode"|http://tiddlywiki.com/#SafeMode]] rückgängig machen.
+Parsing/Block/Caption: Block Regeln
+Parsing/Inline/Caption: Inline Regeln
+Parsing/Pragma/Caption: Pragma Regeln
+Plugins/Add/Hint: Suche und installiere neue Plugins
+Plugins/Add/Caption: Suche
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: deaktivieren
 Plugins/Disable/Hint: Deaktivieren Sie dieses Plugin beim nächsten Laden der Seite.
@@ -45,9 +52,16 @@ Plugins/Disabled/Status: (deaktiviert)
 Plugins/Empty/Hint: keine
 Plugins/Enable/Caption: aktivieren
 Plugins/Enable/Hint: Aktivieren Sie dieses Plugin beim nächsten Laden der Seite.
-Plugins/Language/Prompt: Sprachen
-Plugins/Plugin/Prompt: Plugins
-Plugins/Theme/Prompt: Themen
+Plugins/Install: installieren
+Plugins/Installed/Hint: Momentan installierte Plugins
+Plugins/Languages/Caption: Sprachen
+Plugins/Languages/Hint: Spracherweiterungen
+Plugins/OpenPluginLibrary: Öffne das Plugin Verzeichnis
+Plugins/Plugins/Caption: Plugins
+Plugins/Plugins/Hint: Erweiterungen
+Plugins/Reinstall: erneut installieren
+Plugins/Themes/Caption: Themes
+Plugins/Themes/Hint: Theme Erweiterungen
 Saving/Caption: Speichern
 Saving/Heading: Speichern
 Saving/TiddlySpot/Advanced/Heading: Erweiterte Einstellungen
@@ -56,7 +70,7 @@ Saving/TiddlySpot/Backups: "Backups"
 Saving/TiddlySpot/Description: Diese Einstellungen sind nur für http://tiddlyspot.com und kompatible Server aktiv!
 Saving/TiddlySpot/Filename: "Upload" Dateiname
 Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //Die standard Server-URL ist `http://<wikiname>.tiddlyspot.com/store.cgi` und kann im Feld 'Server-URL' verändert werden.//
+Saving/TiddlySpot/Hint: //Die standard Server-URL ist `http://<wikiname>.tiddlyspot.com/store.cgi` und kann im Feld 'Server-URL' verändert werden. zB: http://example.com/store.php//
 Saving/TiddlySpot/Password: Passwort
 Saving/TiddlySpot/ServerURL: Server-URL
 Saving/TiddlySpot/UploadDir: "Upload" Verzeichnis
@@ -65,6 +79,9 @@ Settings/AutoSave/Caption: Automatisch speichern
 Settings/AutoSave/Disabled/Description: Änderungen NICHT automatisch speichern
 Settings/AutoSave/Enabled/Description: Änderungen automatisch speichern
 Settings/AutoSave/Hint: Änderungen des Wikis automatisch speichern
+Settings/CamelCase/Caption: Camel Case Wiki Links
+Settings/CamelCase/Hint: Hier können Sie die automatische Umwandlung von "~CamelCase Links" einstellen. ''Wichtig:'' Die Seite muss neu geladen werden, damit die Einstellungen wirksam werden.
+Settings/CamelCase/Description: Automatische ~CamelCase Umwandlung aktivieren
 Settings/Caption: Einstellungen
 Settings/Hint: Diese erweiterten Einstellungen ermöglichen Ihnen, das Verhalten von TiddlyWiki zu ändern.
 Settings/NavigationAddressBar/Caption: Navigation Adresszeile
@@ -76,10 +93,31 @@ Settings/NavigationHistory/Caption: Browser Chronik
 Settings/NavigationHistory/Hint: Die Browser Chronik ändern, wenn ein Tiddler angezeigt wird:
 Settings/NavigationHistory/No/Description: Browser Chronik nicht ändern.
 Settings/NavigationHistory/Yes/Description: Browser Chronik ändern.
+Settings/PerformanceInstrumentation/Caption: Performance Messung
+Settings/PerformanceInstrumentation/Hint: Anzeige der Performance Statistik in der Browser Entwickler Konsole. ''Wichtig:'' Seite neu laden um die Einstellung zu aktivieren!
+Settings/PerformanceInstrumentation/Description: Aktiviere Performance Messung
+Settings/ToolbarButtonStyle/Caption: Toolbar Button Stil
+Settings/ToolbarButtonStyle/Hint: Wählen Sie einen Stil:
+Settings/ToolbarButtonStyle/Styles/Borderless: Ohne Rand
+Settings/ToolbarButtonStyle/Styles/Boxed: Box
+Settings/ToolbarButtonStyle/Styles/Rounded: Abgerundet
 Settings/ToolbarButtons/Caption: Toolbar Buttons
 Settings/ToolbarButtons/Hint: Standard Toolbar Button Erscheinungsbild:
 Settings/ToolbarButtons/Icons/Description: Icon anzeigen
 Settings/ToolbarButtons/Text/Description: Text anzeigen
+Settings/DefaultSidebarTab/Caption: Standard Sidebar Tab
+Settings/DefaultSidebarTab/Hint: Definition, welcher Sidebar Tab standardmäßig aktiv ist.
+Settings/LinkToBehaviour/Caption: Tiddler Öffnen
+Settings/LinkToBehaviour/InsideRiver/Hint: Navigation bei Klicks //innerhalb// der Story
+Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation bei Klicks //außerhalb// der Story
+Settings/LinkToBehaviour/OpenAbove: Öffne vor dem aktuellen Tiddler
+Settings/LinkToBehaviour/OpenBelow: Öffne unter dem aktuellen Tiddler
+Settings/LinkToBehaviour/OpenAtTop: Öffne als ersten Tiddler in der Story
+Settings/LinkToBehaviour/OpenAtBottom: Öffne alse letzten Tiddler in der Story
+Settings/TitleLinks/Caption: Tiddler Titel
+Settings/TitleLinks/Hint: Tiddler Titel als Links anzeigen:
+Settings/TitleLinks/No/Description: Tiddler Titel normal anzeigen.
+Settings/TitleLinks/Yes/Description: Tiddler Titel als Link anzeigen.
 StoryView/Caption: Anzeige
 StoryView/Prompt: Ausgewählte Anzeige:
 Theme/Caption: Theme

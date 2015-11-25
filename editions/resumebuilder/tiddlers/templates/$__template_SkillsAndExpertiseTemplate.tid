@@ -1,0 +1,18 @@
+input_tiddler: $:/input/Skills and Expertise
+options_tiddler: $:/options/Skills Options
+section_name: Skills and Expertise
+tags: DisplayTemplate
+template_name: Skills and Expertise Template 1
+title: $:/template/SkillsAndExpertiseTemplate
+
+\define thisSkillsAndExpertiseList()
+<$list filter='[prefix[$:/data/Skills and Expertise/]removeprefix[$:/data/]addprefix[$:/settings/$(ThisResumeName)$/]!show[false]sort[order]removeprefix[$:/settings/$(ThisResumeName)$/]addprefix[$:/data/]]'>
+<li><$view field='skill'/></li>
+</$list>
+\end
+
+!!''Skills and Expertise''
+
+<ul>
+<<thisSkillsAndExpertiseList>>
+</ul>

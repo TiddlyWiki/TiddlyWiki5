@@ -1,0 +1,16 @@
+created: 20150117152418000
+fr-title: Liste de titres
+modified: 20150624092929542
+tags: Concepts
+title: Title List
+type: text/vnd.tiddlywiki
+
+Une <<.def "liste de titre">> est une liste de texte contenant un ou plusieurs titres de tiddlers, reliés par un espace entre chacun d'eux et le suivant.
+
+Si un de ses titres <<.em contient>> un espace, il devra être entouré de double crochets<<:>>
+
+`PourDémarrer [[Découvrir TiddlyWiki]] Communauté`
+
+Les listes de titres sont utilisées en des endroits variés, dont les [[PermaLiens|PermaLinks]] et les [[Champs list|ListField]].
+
+Elles sont en fait la plus simple expression d'un [[filtre|Filters]], et donc un moyen d'exprimer une [[sélection de titres|Title Selection]].

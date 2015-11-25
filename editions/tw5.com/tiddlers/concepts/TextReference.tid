@@ -1,20 +1,21 @@
-created: 201308270759
-modified: 201311011115
+created: 20130827075900000
+modified: 20150518180615650
 tags: Concepts
 title: TextReference
+type: text/vnd.tiddlywiki
 
 A TextReference identifies a chunk of text from a tiddler that can be retrieved or modified depending on the context.
 
 Text references are made up of several parts, most of which can be optional:
 
-* `<tiddler title>` - the text [[field|TiddlerFields]] of the specified tiddler
-* `<tiddler title>!!<metadata field>` - a tiddler metadata [[field|TiddlerFields]] (eg, `modified`, `modifier`, `type` etc)
-* `!!<metadata field>` - a metadata [[field|TiddlerFields]] of the current tiddler
-* `<tiddler title>##<property index>` - extracts a named property from DataTiddlers
+* `tiddlerTitle` - the text [[field|TiddlerFields]] of the specified tiddler
+* `tiddlerTitle!!field` - a [[tiddler field|TiddlerFields]] (eg, `modified`, `modifier`, `type` etc)
+* `!!field` - a [[field|TiddlerFields]] of the current tiddler
+* `tiddlerTitle##propertyIndex` - extracts a named property from DataTiddlers
 
 Text references can be used in several places:
 
-* As IndirectOperands within [[Filters]] (eg, `<$list filter="[tag{MyTag!!name}]"/>`)
+* As [[indirect parameters|Filter Parameter]] within [[Filters]] (eg, `<$list filter="[tag{MyTag!!name}]"/>`)
 * As IndirectAttributes of an element or widget (eg, `<$widget attrib={{Title!!description}}/>`)
 * As the operand of a shortcut transclusion (eg, `{{MyTiddler!!title}}`)
 * As the `state` attribute of the RevealWidget and the LinkCatcherWidget

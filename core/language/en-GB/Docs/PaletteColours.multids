@@ -6,6 +6,9 @@ alert-highlight: Alert highlight
 alert-muted-foreground: Alert muted foreground
 background: General background
 blockquote-bar: Blockquote bar
+button-background: Default button background
+button-border: Default button border
+button-foreground: Default button foreground
 dirty-indicator: Unsaved changes indicator
 code-background: Code background
 code-border: Code border
@@ -58,6 +61,7 @@ sidebar-tab-foreground-selected: Sidebar tab foreground for selected tabs
 sidebar-tab-foreground: Sidebar tab foreground
 sidebar-tiddler-link-foreground-hover: Sidebar tiddler link foreground hover
 sidebar-tiddler-link-foreground: Sidebar tiddler link foreground
+site-title-foreground: Site title foreground
 static-alert-foreground: Static alert foreground
 tab-background-selected: Tab background for selected tabs
 tab-background: Tab background

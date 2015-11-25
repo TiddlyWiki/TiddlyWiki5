@@ -1,0 +1,14 @@
+created: 20140410103123179
+modified: 20150203183356000
+tags: [[Filter Operators]]
+title: backlinks Operator
+type: text/vnd.tiddlywiki
+caption: backlinks
+op-purpose: find the titles that link to each input title
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: none
+op-output: any non-[[system|SystemTiddlers]] titles that contain [[hard links|Hard and Soft Links]] to the input titles
+
+Each input title is processed in turn. The corresponding tiddler's list of backlinks is generated, sorted alphabetically by title, and then [[dominantly appended|Dominant Append]] to the operator's overall output.
+
+<<.operator-examples "backlinks">>

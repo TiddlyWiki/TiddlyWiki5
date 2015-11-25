@@ -1,0 +1,71 @@
+created: 20140610213500000
+fr-title: Images externes
+modified: 20150624092640854
+tags: Concepts Features
+title: ExternalImages
+type: text/vnd.tiddlywiki
+
+Les images externes dans <<tw>> sont des tiddlers qui pointent sur l'URI d'une image, plutôt que d'avoir à incorporer toutes les données de l'image. Ils fonctionnent mieux que l'affichage d'images incorporées, notamment avec les images de grande taille. Cependant, leur utilisation détourne <<tw>> de sa vocation de fichier unique.
+
+Les images externes sont utilisées dans le navigateur. Elles peuvent être créées soit par la configuration Node.js lors de la production d'un <<tw>>, soit manuellement en éditant un <<tw>> dans le navigateur .
+
+! Qu'est-ce qu'une image externe
+
+Une image externe est un tiddler image ordinaire avec un champ ''_canonical_uri'' contenant l'URI de l'image. L'URI pointe de façon absolue ou relative vers le document HTML. Si le champ ''_canonical_uri'' est renseigné, alors le champ ''text'' du tiddler est ignoré et peut être omis.
+
+! Création manuelle d'Images Externes
+
+Pour créer manuellement une image externe, il suffit juste de créer un tiddler avec le type de contenu image approprié, puis d'ajouter un champ ''_canonical_uri'' dont l'URI pointe vers l'emplacement de stockage de l'image.
+
+''IMPORTANT&nbsp;:'' Revérifiez votre orthographe. ``_canonical_uri`` s'épelle [[URI|https://en.wikipedia.org/wiki/URI#The_relationship_between_URIs.2C_URLs.2C_and_URNs]], et pas URL.
+
+! Création d'images externes sous Node.js
+
+Suivre les étapes suivantes pour créer une version HTML statique d'un fichier wiki accompagné d'un dossier '' images '' contenant les références des images externes&nbsp;:
+
+# Créer des Tiddlers image dans votre TiddlyWikiFolders de façon habituelle
+# Sauvegardez les images en fichiers séparées (par convention, dans le sous-répertoire nommé ''images'')
+# Externalisez les Tiddlers image en leur attribuant un champ ''_canonical_uri'' 
+# Sauvegardez le fichier HTML principal
+
+Notez que les fichiers images doivent être sauvegardés avant d'être externalisés. Leur externalisation écrasera les champs ''text'' de la mémoire de votre wiki, ce qui signifie que toute tentative de sauvegarde échouera.
+
+Pour un exemple, voir la génération de la cible ''externalimages'' dans la demo ''tw5.com'' wiki&nbsp;:
+
+```
+--savetiddlers [is[image]] images
+--setfield [is[image]] _canonical_uri $:/core/templates/canonical-uri-external-image text/plain
+--setfield [is[image]] text "" text/plain
+--rendertiddler $:/core/save/all externalimages.html text/plain
+```
+
+!!  Sauvegardez les images en fichiers séparées
+
+La commande `--savetiddlers` suivante peut être utilisée pour sauvegarder les images d'un wiki dans un sous-répertoire ''images''&nbsp;:
+
+```
+--savetiddlers [is[image]] images
+```
+
+!! Externalisez les Tiddlers Image
+
+Deux commandes `--setfield` sont utilisées&nbsp;: la première affecte au champ ''_canonical_uri'' l'URI correspondant au titre du tiddler, et la deuxième efface le champ text.
+
+```
+--setfield [is[image]] _canonical_uri $:/core/templates/canonical-uri-external-image text/plain
+--setfield [is[image]] text "" text/plain
+```
+
+Le tiddler gabarit [[$:/core/templates/canonical-uri-external-image]] contient&nbsp;:
+
+<pre>
+
+<$view tiddler="$:/core/templates/canonical-uri-external-image" field="text" format="text"/>
+
+</pre>
+
+Notez que ces opérations modifient les tiddlers dans la mémoire du wiki et peuvent donc affecter le fonctionnement de commandes ultérieures.
+
+! Utilisation d'Images Externes
+
+Vous ne pouvez pas éditer une image externe directement dans le navigateur, sauf en changeant le champ URI pour pointer vers une image différente.

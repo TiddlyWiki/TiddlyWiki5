@@ -1,0 +1,26 @@
+input_tiddler: $:/input/Contact Information
+options_tiddler: $:/options/Contact Information Options
+section_name: Contact Information
+tags: DisplayTemplate
+template_name: Contact Information Template 1
+title: $:/template/ContactInformationTemplate
+
+<div style='text-align:center'>
+
+<h3>
+<$reveal type='nomatch' state='$:/settings/Resume Configuration!!show_name' text='false'><$reveal type='nomatch' state='$:/data/ResumeTitle!!use_name' text='true'>{{$:/data/Personal Information!!name}}<br></$reveal></$reveal>
+<$reveal type='nomatch' state='$:/settings/Resume Configuration!!show_address' text='false'>{{$:/data/Personal Information!!street_address}}<br>
+{{$:/data/Personal Information!!city}}, {{$:/data/Personal Information!!state}} {{$:/data/Personal Information!!zip_code}}, {{$:/data/Personal Information!!country}}<br></$reveal>
+<$reveal type='nomatch' state='$:/settings/Resume Configuration!!show_phone_number' text='false'>+{{$:/data/Personal Information!!phone_number}}<br></$reveal>
+<$reveal type='nomatch' state='$:/settings/Resume Configuration!!show_email_address' text='false'>{{$:/data/Personal Information!!email_address}}<br></$reveal>
+<$reveal type='nomatch' state='$:/settings/Resume Configuration!!show_date' text='false'>
+<$reveal type='nomatch' state='$:/settings/Resume Configuration!!show_current_date' text='false'>
+<<now "DDD DDth MMM YYYY">>
+</$reveal>
+<$reveal type='match' state='$:/settings/Resume Configuration!!show_current_date' text='false'>
+{{$:/data/Personal Information!!entered_date}}
+</$reveal>
+<br>
+</$reveal>
+</h3>
+</div>

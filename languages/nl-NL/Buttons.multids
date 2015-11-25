@@ -32,6 +32,8 @@ ExportTiddlers/Caption: exporteer tiddlers
 ExportTiddlers/Hint: Exporteer tiddlers
 FullScreen/Caption: volledig scherm
 FullScreen/Hint: Start of verlaat 'volledig scherm'
+Help/Caption: hulp
+Help/Hint: Toon hulppaneel
 HideSideBar/Caption: verberg zijpaneel
 HideSideBar/Hint: Verberg zijpaneel
 Home/Caption: home
@@ -52,6 +54,8 @@ NewJournalHere/Caption: nieuw journaal hier
 NewJournalHere/Hint: Maak een nieuwe journaaltiddler gelabeld met deze tiddler
 NewTiddler/Caption: nieuwe tiddler
 NewTiddler/Hint: Maak een nieuwe tiddler
+Palette/Caption: palet
+Palette/Hint: Kies het kleurpalet
 Permalink/Caption: permalink
 Permalink/Hint: Zet browseradres als directe link naar deze tiddler
 Permaview/Caption: permaview
@@ -64,7 +68,7 @@ SaveWiki/Caption: opslaan
 SaveWiki/Hint: Sla wijzigingen op
 ShowSideBar/Caption: toon zijpaneel
 ShowSideBar/Hint: Toon zijpaneel
-StoryView/Caption: story view
+StoryView/Caption: 'story' weergave
 StoryView/Hint: Kies de 'story' weergave
 TagManager/Caption: labelmanager
 TagManager/Hint: Open labelmanager

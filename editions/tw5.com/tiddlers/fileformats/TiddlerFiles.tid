@@ -1,5 +1,5 @@
 created: 20130825150000000
-modified: 20140912141751154
+modified: 20150216171751154
 tags: [[TiddlyWiki on Node.js]]
 title: TiddlerFiles
 type: text/vnd.tiddlywiki
@@ -34,7 +34,7 @@ text: This is the text of my tiddler.
 
 !! TiddlyWiki `<DIV>` .tiddler files
 
-Modern `*.tiddler` files look like this:
+In TiddlyWiki 5, `*.tiddler` files look like this:
 
 ```
 <div title="AnotherExampleStyleSheet" modifier="blaine" created="201102111106" modified="201102111310" tags="examples" creator="psd">
@@ -44,7 +44,7 @@ And, weirdly, there is no HTML encoding of the body.</pre>
 </div>
 ```
 
-These `*.tiddler` files are therefore not quite the same as the tiddlers found inside a TiddlyWiki HTML file, where the body is HTML encoded in the expected way.
+These `*.tiddler` files are not exactly the same as the tiddlers inside a TiddlyWiki HTML file where they are HTML encoded.
 
 Older `*.tiddler` files more closely matched the store format used by TiddlyWiki at the time:
 
@@ -56,7 +56,23 @@ Older `*.tiddler` files more closely matched the store format used by TiddlyWiki
 
 !! ~TiddlyWeb-style JSON files
 
-These files are a straightforward array of hashmaps of name:value fields. Currently only these known fields are processed: `title`, `text`, `created`, `creator`, `modified`, `modifier`, `type` and `tags`.
+These files are a straightforward array of hashmaps of `name:value` properties. All field values must be specified as strings.
+
+For example:
+
+```
+[
+	{
+		"title": "First Tiddler",
+		"text": "Text of first tiddler",
+		"tags": "one two [[t h r e e]]"
+	},{
+		"title": "Second Tiddler",
+		"text": "Text of second tiddler",
+		"modified": "20150216171751154"
+	}
+]
+```
 
 //The ContentType `application/json` is used internally for these files//
 
@@ -64,7 +80,7 @@ These files are a straightforward array of hashmaps of name:value fields. Curren
 
 TiddlyWiki HTML files contain a collection of tiddlers encoded in `<DIV>` format.
 
-The minimal requirement for an HTML file to be importable as an unencrypted TW file is that it has a `<div id="storeArea">` immediately preceding the tiddler DIVs, which must be followed by a `</div>`. For example:
+For TiddlyWiki to import an unencrypted HTML file, it requires a `<div id="storeArea">` containing tiddler DIVs as explained above. For example:
 
 ```
 <div id="storeArea">
@@ -75,5 +91,6 @@ The minimal requirement for an HTML file to be importable as an unencrypted TW f
 <div created="20140315085406905" modified="20140321084548184" tags="One Two [[Three with Space]]" title="Another title" customfield="field value">
 <pre>Text of this tiddler
 </pre>
+</div>
 </div>
 ```

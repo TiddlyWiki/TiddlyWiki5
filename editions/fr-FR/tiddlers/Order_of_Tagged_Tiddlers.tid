@@ -1,0 +1,17 @@
+created: 20150124125646000
+fr-title: Ordre des tiddlers tagués
+modified: 20150624092720866
+tags: Concepts
+title: Order of Tagged Tiddlers
+type: text/vnd.tiddlywiki
+
+Quand ~TiddlyWiki génère une liste de tiddlers portant un tag particulier (ex<<:>> la liste déroulante d'un tag pilule), it trie les tiddlers selon les règles suivantes<<:>>
+
+# Commencer par tout tiddler [[declaré|Title List]] dans le champ <<.field list>> du tiddler, en suivant l'ordre donné.
+
+# Pour chaque tiddler <<.place T>> restant, chercher un champ <<.field list-before>>. s'il a le titre du tiddler comme valeur, placer le tiddler <<.place T>> juste <<.em avant>> celle-ci.
+#* Au cas particulier, où le champ existe mais que sa valeur soit vide, placer <<.place T>> au tout début de la liste.
+
+# Pour chaque tiddler <<.place T>> restant, chercher un champ <<.field list-after>> field. S'il a le titre du tiddler title comme valeur, placer le tiddler <<.place T>> juste <<.em après>> ce dernier.
+
+# Si des tiddlers restent encore, les placer en queue de liste dans l'ordre alphabétique croissant des titres. Les différences entre majuscule et minuscule sont ignorées.

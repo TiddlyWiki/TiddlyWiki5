@@ -195,16 +195,23 @@ Widget.prototype.hasVariable = function(name,value) {
 Construct a qualifying string based on a hash of concatenating the values of a given variable in the parent chain
 */
 Widget.prototype.getStateQualifier = function(name) {
+	this.qualifiers = this.qualifiers || Object.create(null);
 	name = name || "transclusion";
-	var output = [],
-		node = this;
-	while(node && node.parentWidget) {
-		if($tw.utils.hop(node.parentWidget.variables,name)) {
-			output.push(node.getVariable(name));
+	if(this.qualifiers[name]) {
+		return this.qualifiers[name];
+	} else {
+		var output = [],
+			node = this;
+		while(node && node.parentWidget) {
+			if($tw.utils.hop(node.parentWidget.variables,name)) {
+				output.push(node.getVariable(name));
+			}
+			node = node.parentWidget;
 		}
-		node = node.parentWidget;
+		var value = $tw.utils.hashString(output.join(""));
+		this.qualifiers[name] = value;
+		return value;
 	}
-	return $tw.utils.hashString(output.join(""));
 };
 
 /*
@@ -434,7 +441,9 @@ if(index === -1) {
 	var grandParent = parent.parentWidget;
 	if(grandParent && parent.parentDomNode === this.parentDomNode) {
 		index = grandParent.children.indexOf(parent);
-		return parent.findNextSiblingDomNode(index);
+		if(index !== -1) {
+			return parent.findNextSiblingDomNode(index);
+		}
 	}
 	return null;
 };
@@ -476,17 +485,28 @@ Widget.prototype.removeChildDomNodes = function() {
 };
 
 /*
-Invoke any action widgets that are immediate children of this widget
+Invoke the action widgets that are descendents of the current widget.
 */
-Widget.prototype.invokeActions = function(event) {
+Widget.prototype.invokeActions = function(triggeringWidget,event) {
 	var handled = false;
+	// For each child widget
 	for(var t=0; t<this.children.length; t++) {
 		var child = this.children[t];
-		if(child.invokeAction && child.invokeAction(this,event)) {
+		// Invoke the child if it is an action widget
+		if(child.invokeAction && child.invokeAction(triggeringWidget,event)) {
+			handled = true;
+		}
+		// Propagate through through the child if it permits it
+		if(child.allowActionPropagation() && child.invokeActions(triggeringWidget,event)) {
 			handled = true;
 		}
 	}
 	return handled;
+};
+
+
+Widget.prototype.allowActionPropagation = function() {
+	return true;
 };
 
 exports.widget = Widget;

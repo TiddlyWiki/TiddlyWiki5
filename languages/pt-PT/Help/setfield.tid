@@ -1,0 +1,17 @@
+title: $:/language/Help/setfield
+description: Prepara tiddlers externos para utilização
+
+//Este comando é experimental e pode mudar ou ser substituído antes de ser finalizado//
+
+Define um determinado campo de um grupo de tiddlers para o resultado de interpretar um tiddler modelo com a variável `currentTiddler` definida como o tiddler.
+
+```
+--setfield <filter> <fieldname> <templatetitle> <rendertype>
+```
+
+Os parâmetros são:
+
+* ''filter'' - filtro que selecciona os tiddlers a ser afectados
+* ''fieldname'' - nome do campo a modificar (por defeito "texto")
+* ''templatetitle'' - o tiddler a interpretar para o campo especificado. Se for deixado em branco ou estiver em falta o campo especificado será eliminado
+* ''rendertype'' - O tipo de texto a interpretar (por defeito "text/plain"; "text/html" pode ser utilizado para incluir etiquetas HTML)

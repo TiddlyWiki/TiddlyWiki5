@@ -1,6 +1,6 @@
 caption: 5.1.3
 created: 20141020171015200
-modified: 20141020171015200
+modified: 20150221230151000
 tags: ReleaseNotes
 title: Release 5.1.3
 type: text/vnd.tiddlywiki
@@ -25,20 +25,20 @@ released: 20141020171015200
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/2ffe53f1916e4b746cc6d7e74e8f4ac75c72e38a]] audio "parser" for handling [[Audio]] content
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0dcf54c3b59ed04645928f0ec4ced647e5a0da7f]] support for ActionWidgets
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/65504d5d41e45326ab1b1b6c0c21eea4c9772797]] new [[FilterOperator: addprefix]] and [[FilterOperator: addsuffix]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/65504d5d41e45326ab1b1b6c0c21eea4c9772797]] new <<.olink addprefix>> and <<.olink addsuffix>> operators
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0c8e5380778303cdd3308bed4a15290214841f8b]] support for custom password prompts
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/c26bd4c5a872f56c47e9f5cfc3fada468c53ddde]] the ListMacro to display ''caption'' field if present
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/c26bd4c5a872f56c47e9f5cfc3fada468c53ddde]] the <<.mlink list-links>> macro to display ''caption'' field if present
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/12e26009eef5e29140ba1a880ff033428d673630]] ImageWidget to allow percentage width and height to be specified
 
 !! Bug Fixes
 
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/cc576b052e2b05fd93fcb4f3eb8d9ee5278abf3e]] [[FilterOperator: each]] to work with missing tiddlers
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/cc576b052e2b05fd93fcb4f3eb8d9ee5278abf3e]] the <<.olink each>> operator to work with missing tiddlers
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/5dd6ebff05a3380db2901294b2cfc89c1a0e71bf]] problem with tiddler width in zoomin storyview with the sidebar hidden
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/09b6540998fec6bf1fb14842be8e8c53dbd5c46a]] bug whereby the `tm-home` message wasn't navigating to a tiddler, causing problems in zoomin storyview
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/3ca8d7b6cca46ffa424bcf9bdc134da464fc84f4]] problem with jumping toolbar icons under Firefox
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/f85b07e70b71d0622a9459e4b04e2027540abda8]] problem with untagged label being incorrectly coloured
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/b3dcd7d625ec83701ef3a77f3fb8101af57c154f]] problem with title background colours with the "Sticky Titles" theme
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/5211f9c40c874a167174e8c0d439db34189d3329]] problem with subfilter parameter of TimelineMacro
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/5211f9c40c874a167174e8c0d439db34189d3329]] problem with subfilter parameter of <<.mlink timeline>> macro
 * [[Exclude|https://groups.google.com/d/topic/tiddlywiki/YPACpXhH9PY/discussion]] search string tiddler from search results
 
 !! Node.js Changes
@@ -65,4 +65,3 @@ released: 20141020171015200
 * [[@simonbaird|https://github.com/simonbaird]]
 * [[@TheDiveO|https://github.com/TheDiveO]]
 * [[@xcazin|https://github.com/xcazin]]
-

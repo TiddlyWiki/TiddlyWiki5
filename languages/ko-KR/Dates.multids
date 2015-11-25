@@ -1,0 +1,87 @@
+title: $:/language/
+
+Date/DaySuffix/1: 일
+Date/DaySuffix/10: 일
+Date/DaySuffix/11: 일
+Date/DaySuffix/12: 일
+Date/DaySuffix/13: 일
+Date/DaySuffix/14: 일
+Date/DaySuffix/15: 일
+Date/DaySuffix/16: 일
+Date/DaySuffix/17: 일
+Date/DaySuffix/18: 일
+Date/DaySuffix/19: 일
+Date/DaySuffix/2: 일
+Date/DaySuffix/20: 일
+Date/DaySuffix/21: 일
+Date/DaySuffix/22: 일
+Date/DaySuffix/23: 일
+Date/DaySuffix/24: 일
+Date/DaySuffix/25: 일
+Date/DaySuffix/26: 일
+Date/DaySuffix/27: 일
+Date/DaySuffix/28: 일
+Date/DaySuffix/29: 일
+Date/DaySuffix/3: 일
+Date/DaySuffix/30: 일
+Date/DaySuffix/31: 일
+Date/DaySuffix/4: 일
+Date/DaySuffix/5: 일
+Date/DaySuffix/6: 일
+Date/DaySuffix/7: 일
+Date/DaySuffix/8: 일
+Date/DaySuffix/9: 일
+Date/Long/Day/0: 일요일
+Date/Long/Day/1: 월요일
+Date/Long/Day/2: 화요일
+Date/Long/Day/3: 수요일
+Date/Long/Day/4: 목요일
+Date/Long/Day/5: 금요일
+Date/Long/Day/6: 토요일
+Date/Long/Month/1: 1월
+Date/Long/Month/10: 10월
+Date/Long/Month/11: 11월
+Date/Long/Month/12: 12월
+Date/Long/Month/2: 2월
+Date/Long/Month/3: 3월
+Date/Long/Month/4: 4월
+Date/Long/Month/5: 5월
+Date/Long/Month/6: 6월
+Date/Long/Month/7: 7월
+Date/Long/Month/8: 8월
+Date/Long/Month/9: 9월
+Date/Period/am: 오전
+Date/Period/pm: 오후
+Date/Short/Day/0: 일
+Date/Short/Day/1: 월
+Date/Short/Day/2: 화
+Date/Short/Day/3: 수
+Date/Short/Day/4: 목
+Date/Short/Day/5: 금
+Date/Short/Day/6: 토
+Date/Short/Month/1: 1월
+Date/Short/Month/10: 10월
+Date/Short/Month/11: 11월
+Date/Short/Month/12: 12월
+Date/Short/Month/2: 2월
+Date/Short/Month/3: 3월
+Date/Short/Month/4: 4월
+Date/Short/Month/5: 5월
+Date/Short/Month/6: 6월
+Date/Short/Month/7: 7월
+Date/Short/Month/8: 8월
+Date/Short/Month/9: 9월
+RelativeDate/Future/Days: 지금으로부터 <<period>>일
+RelativeDate/Future/Hours: 지금으로부터 <<period>>시간
+RelativeDate/Future/Minutes: 지금으로부터 <<period>>분
+RelativeDate/Future/Months: 지금으로부터 <<period>>개월
+RelativeDate/Future/Second: 지금으로부터 1초
+RelativeDate/Future/Seconds: 지금으로부터 <<period>>초
+RelativeDate/Future/Years: 지금으로부터 <<period>>년
+RelativeDate/Past/Days: <<period>>일 전
+RelativeDate/Past/Hours: <<period>>시간 전
+RelativeDate/Past/Minutes: <<period>>분 전
+RelativeDate/Past/Months: <<period>>개월 전
+RelativeDate/Past/Second: 1초 전
+RelativeDate/Past/Seconds: <<period>>초 전
+RelativeDate/Past/Years: <<period>>년 전

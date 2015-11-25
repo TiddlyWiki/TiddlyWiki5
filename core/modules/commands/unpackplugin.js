@@ -29,7 +29,7 @@ Command.prototype.execute = function() {
 	}
 	var self = this,
 		title = this.params[0],
-		pluginData = this.commander.wiki.getTiddlerData(title);
+		pluginData = this.commander.wiki.getTiddlerDataCached(title);
 	if(!pluginData) {
 		return "Plugin '" + title + "' not found";
 	}

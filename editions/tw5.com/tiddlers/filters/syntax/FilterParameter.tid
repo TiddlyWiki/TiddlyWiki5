@@ -1,0 +1,27 @@
+created: 20150220152540000
+modified: 20150220152540000
+tags: [[Filter Syntax]]
+title: Filter Parameter
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+( "[" [:{/"anything but ]"/}] "]"
+  |
+  "{" [:{/"anything but }"/}] "}"
+  |
+  "<" [:{/"anything but >"/}] ">"
+)
+"""/>
+
+The parameter to a [[filter operator|Filter Operators]] can be:
+
+;<<.def hard>>
+: `[like this]`
+: The parameter is the exact text that appears between the square brackets.
+;<<.def soft>>
+: <<.def indirect>>
+:: `{like this}`
+:: The parameter is the text indicated by the [[text reference|TextReference]] whose name appears between the curly brackets, i.e. a [[field|TiddlerFields]] of a specified tiddler, or the value of a property of a specified [[data tiddler|DataTiddlers]].
+: <<.def variable>>
+:: `<like this>`
+:: The parameter is the current value of the [[variable|Variables]] whose name appears between the angle brackets. Macro parameters are <<.em not>> supported.

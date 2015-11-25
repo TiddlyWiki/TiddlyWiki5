@@ -1,11 +1,11 @@
 title: $:/language/Help/makelibrary
-description: Konstruerer biblioteks plugin som er nødvendig til opgraderings processen
+description: Konstruerer biblioteksudvidelse som er nødvendig til opgraderingsprocessen
 
-Konstruerer `$:/UpgradeLibrary` tiddleren til opgraderings processen.
+Konstruerer `$:/UpgradeLibrary` tiddleren til opgraderingsprocessen.
 
-Opgraderings biblioteket er formatteret som en almindelig plugin tiddler med plugin typen `library`. Den indeholder en kopi af hver af plugin'ets, temaer og sprog pakker, som findes i  TiddlyWiki5 lager (repository).
+Opgraderingsbiblioteket er formateret som en almindelig udvidelsestiddler med udvidelsestypen `library`. Den indeholder en kopi af hver af udvidelsens, temaer og sprogpakker, som findes i ~TiddlyWiki5 lager (repository).
 
-Denne kommando er beregnet til internt brug; den er kun relevant for brugere som konstruerer en special tilpasset opgraderings procedure.
+Denne kommando er beregnet til internt brug; Den er kun relevant for brugere som konstruerer en specialtilpasset opgraderingsprocedure.
 
 ```
 --makelibrary <title>

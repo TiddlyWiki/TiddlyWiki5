@@ -1,5 +1,6 @@
 title: $:/language/
 
+AboveStory/ClassicPlugin/Warning: 您貌似要加载为 ~TiddlyWiki 经典版设计的插件。请注意，[[这些插件无法运行于 TiddlyWiki 5.x.x 版|http://tiddlywiki.com/#TiddlyWikiClassic]]。检测到 ~TiddlyWiki 经典版插件：
 BinaryWarning/Prompt: 此条目包含二进制数据
 ClassicWarning/Hint: 此条目以经典版 TiddlyWiki 标记格式撰写，不完全兼容新版 TiddlyWiki 的格式，详细信息请参阅：http://tiddlywiki.com/static/Upgrading。
 ClassicWarning/Upgrade/Caption: 升级
@@ -10,14 +11,28 @@ ConfirmOverwriteTiddler: 您确定要覆写条目 "<$text text=<<title>>/>"？
 ConfirmEditShadowTiddler: 您即将要编辑默认条目，任何更改将会覆盖默认的系统，使未来的升级不寻常。您确定要编辑 "<$text text=<<title>>/>"?
 DefaultNewTiddlerTitle: 新条目
 DropMessage: 拖放到此处 （或按 ESC 键取消）
-Encryption/ConfirmClearPassword: 您要清除密码？这将移除保存此维基时套用的加密
+Encryption/Cancel: 取消
+Encryption/ConfirmClearPassword: 您要清除密码吗？当保存此维基时，这将删除已套用的加密
+Encryption/Username: 用户名称
+Encryption/Password: 密码
 Encryption/PromptSetPassword: 为此 TiddlyWiki 设置一个新密码
+Encryption/RepeatPassword: 重复输入密码
+Encryption/PasswordNoMatch: 密码不匹配
+Encryption/SetPassword: 设定密码
+InternalJavaScriptError/Title: 内部的 JavaScript 错误
+InternalJavaScriptError/Hint: 喔，真是令人尴尬。建议刷新您的浏览器，重新启动 TiddlyWiki
 InvalidFieldName: 栏位名称 "<$text text=<<fieldName>>/>" 包含无效字符，栏位名称只能包含小写字母、数字、底线 (`_`)、 连字号 (`-`) 和小数点 (`.`)
+LazyLoadingWarning: <p>正在从 ''<$text text={{!!_canonical_uri}}/>'' 加载外部条目 ...</p><p>如果此信息未消失，可能您使用的浏览器不支援此配置的外部条目。请参阅 http://tiddlywiki.com/#ExternalText</p>
 MissingTiddler/Hint: 佚失条目 "<$text text=<<currentTiddler>>/>" - 点击 {{$:/core/images/edit-button}} 可创建此条目
+OfficialPluginLibrary: ~TiddlyWiki 官方插件程式库
+OfficialPluginLibrary/Hint: 此为在 tiddlywiki.com 的 ~TiddlyWiki 官方插件程式库。由核心团队维护的插件、主题和语言包。
+PluginReloadWarning: 请保存 {{$:/core/ui/Buttons/save-wiki}} 并刷新页面 {{$:/core/ui/Buttons/refresh}} 允许更改插件才能生效
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 SystemTiddler/Tooltip: 此为系统条目
 TagManager/Colour/Heading: 颜色
+TagManager/Count/Heading: 计数
 TagManager/Icon/Heading: 图标
 TagManager/Info/Heading: 信息
 TagManager/Tag/Heading: 标签
+Tiddler/DateFormat: YYYY年0MM月0DD日 0hh:0mm
 UnsavedChangesWarning: 在此 TiddlyWiki 您有尚未保存的变更

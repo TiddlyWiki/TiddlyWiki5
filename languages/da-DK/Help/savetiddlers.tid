@@ -7,6 +7,6 @@ Gemmer en gruppe af tiddlere i deres rå tekst eller binære format i den specif
 --savetiddlers <filter> <pathname>
 ```
 
-Efter standard, løses stinavnet relativt til `output` undermappen i udgavens mappe . `--output` kommandoen kan bruges til at dirigere output til en anden mappe .
+Som standard, løses stinavnet relativt til `output` undermappen i udgavens mappe . `--output` kommandoen kan bruges til at dirigere output til en anden mappe .
 
 Alle manglende mapper i stinavnet oprettes automatisk.

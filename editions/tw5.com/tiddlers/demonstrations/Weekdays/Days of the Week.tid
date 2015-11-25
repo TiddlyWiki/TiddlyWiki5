@@ -1,0 +1,13 @@
+created: 20150117192110000
+modified: 20150123214636000
+title: Days of the Week
+type: text/vnd.tiddlywiki
+list: Monday Tuesday Wednesday Thursday Friday Saturday Sunday
+short: Mon Tue Wed Thu Fri Sat Sun
+my-special-list: [[listed Operator (Examples)]]
+
+<<.this-is-operator-example>>
+
+It has a <<.field list>> field containing the following items:
+
+<<list-links "[list[]]">>

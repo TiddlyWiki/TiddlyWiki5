@@ -7,6 +7,30 @@
 				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_AMS-Regular.woff"
 			}
 		},{
+			"file": "fonts/KaTeX_Caligraphic-Bold.woff",
+			"fields": {
+				"type": "application/font-woff",
+				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Caligraphic-Bold.woff"
+			}
+		},{
+			"file": "fonts/KaTeX_Caligraphic-Regular.woff",
+			"fields": {
+				"type": "application/font-woff",
+				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Caligraphic-Regular.woff"
+			}
+		},{
+			"file": "fonts/KaTeX_Fraktur-Bold.woff",
+			"fields": {
+				"type": "application/font-woff",
+				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Fraktur-Bold.woff"
+			}
+		},{
+			"file": "fonts/KaTeX_Fraktur-Regular.woff",
+			"fields": {
+				"type": "application/font-woff",
+				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Fraktur-Regular.woff"
+			}
+		},{
 			"file": "fonts/KaTeX_Main-Bold.woff",
 			"fields": {
 				"type": "application/font-woff",
@@ -43,6 +67,30 @@
 				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Math-Regular.woff"
 			}
 		},{
+			"file": "fonts/KaTeX_SansSerif-Bold.woff",
+			"fields": {
+				"type": "application/font-woff",
+				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_SansSerif-Bold.woff"
+			}
+		},{
+			"file": "fonts/KaTeX_SansSerif-Italic.woff",
+			"fields": {
+				"type": "application/font-woff",
+				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_SansSerif-Italic.woff"
+			}
+		},{
+			"file": "fonts/KaTeX_SansSerif-Regular.woff",
+			"fields": {
+				"type": "application/font-woff",
+				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_SansSerif-Regular.woff"
+			}
+		},{
+			"file": "fonts/KaTeX_Script-Regular.woff",
+			"fields": {
+				"type": "application/font-woff",
+				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Script-Regular.woff"
+			}
+		},{
 			"file": "fonts/KaTeX_Size1-Regular.woff",
 			"fields": {
 				"type": "application/font-woff",
@@ -65,6 +113,12 @@
 			"fields": {
 				"type": "application/font-woff",
 				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Size4-Regular.woff"
+			}
+		},{
+			"file": "fonts/KaTeX_Typewriter-Regular.woff",
+			"fields": {
+				"type": "application/font-woff",
+				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Typewriter-Regular.woff"
 			}
 		},{
 			"file": "katex.without-font-face.min.css",

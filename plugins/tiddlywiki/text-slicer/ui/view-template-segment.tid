@@ -1,0 +1,26 @@
+title: $:/plugins/tiddlywiki/text-slicer/ui/view-template-segment
+tags: $:/tags/ViewTemplate
+
+<$reveal type="nomatch" state=<<folded-state>> text="hide" retain="yes" animate="yes">
+
+<$reveal type="nomatch" state="!!toc-type" text="">
+
+<div class="tc-view-template-document-tiddler-heading">
+
+//This tiddler is part of a document. The content as it appears in the document appears below.//
+
+</div>
+
+<div class="tc-view-template-document-tiddler">
+
+<$vars tv-default-heading-state="closed" tv-heading-status-config-prefix="view-template">
+
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler"/>
+
+</$vars>
+
+</div>
+
+</$reveal>
+
+</$reveal>

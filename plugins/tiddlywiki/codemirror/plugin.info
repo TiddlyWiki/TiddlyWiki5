@@ -1,6 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/codemirror",
-	"description": "Codemirror plugin",
+	"description": "CodeMirror: text editor",
 	"author": "JeremyRuston",
-	"list": "readme"
+	"list": "readme usage"
 }

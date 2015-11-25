@@ -1,5 +1,5 @@
 created: 20131024141900000
-modified: 20140125140636123
+modified: 20150220161229000
 tags: Widgets
 title: FieldManglerWidget
 type: text/vnd.tiddlywiki
@@ -20,4 +20,7 @@ The field mangler widget manipulates the fields and tags of a tiddler. It does s
 The field mangler widget displays any contained content, and responds to [[Messages]] dispatched within it.
 
 |!Attribute |!Description |
-|tiddler |Title of the tiddler to manipulate (defaults to the CurrentTiddler) |
+|tiddler |Title of the tiddler to manipulate (defaults to the [[current tiddler|Current Tiddler]]) |
+
+<<.widget-examples "FieldMangler">>
+

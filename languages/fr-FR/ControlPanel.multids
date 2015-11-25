@@ -20,7 +20,7 @@ Basics/Tags/Prompt: Nombre de tags
 Basics/Tiddlers/Prompt: Nombre de tiddlers
 Basics/Title/Prompt: Titre de ce ~TiddlyWiki
 Basics/Username/Prompt: Signer les modifications avec ce nom d'utilisateur
-Basics/Version/Prompt: Numéro de version :
+Basics/Version/Prompt: Version de ~TiddlyWiki :
 EditorTypes/Caption: Types d'éditeur
 EditorTypes/Editor/Caption: Éditeur
 EditorTypes/Hint: Ces tiddlers déterminent l'éditeur à utiliser pour éditer tel ou tel type de tiddler.
@@ -38,6 +38,8 @@ Palette/Editor/Reset/Caption: Réinitialiser
 Palette/HideEditor/Caption: Masquer l'éditeur
 Palette/Prompt: Palette en cours :
 Palette/ShowEditor/Caption: Afficher l'éditeur
+Plugins/Add/Hint: Installer des plugins à partir de la bibliothèque officielle
+Plugins/Add/Caption: Ajouter des plugins
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: désactiver
 Plugins/Disable/Hint: Désactive ce plugin au prochain rechargement de la page
@@ -45,9 +47,21 @@ Plugins/Disabled/Status: (désactivé)
 Plugins/Empty/Hint: Aucun
 Plugins/Enable/Caption: activer
 Plugins/Enable/Hint: Active ce plugin au prochain rechargement de la page
-Plugins/Language/Prompt: Langues
-Plugins/Plugin/Prompt: Plugins
-Plugins/Theme/Prompt: Thèmes
+Plugins/Install: installe
+Plugins/Installed/Hint: Plugins installés :
+Plugins/Languages/Caption: Languages
+Plugins/Languages/Hint: Plugins de langue
+Plugins/OpenPluginLibrary: ouvre la bibliothèque de plugins
+Plugins/Plugins/Caption: Plugins
+Plugins/Plugins/Hint: Plugins
+Plugins/Reinstall: réinstalle
+Plugins/Themes/Caption: Thèmes
+Plugins/Themes/Hint: Plugins de thème
+Parsing/Caption: Parsing
+Parsing/Hint: Ici, vous pouvez désactiver globalement des règles individuelles de parsing du wiki. Soyez prudent, car désactiver certaines règles peuvent empêcher ~TiddlyWiki de fonctionner correctement (vous pouvez revenir au parsing par défaut avec le [[safe mode|http://tiddlywiki.com/#SafeMode]] )
+Parsing/Block/Caption: Block Parse Rules
+Parsing/Inline/Caption: Inline Parse Rules
+Parsing/Pragma/Caption: Pragma Parse Rules
 Saving/Caption: Sauvegarde
 Saving/Heading: Sauvegarde
 Saving/TiddlySpot/Advanced/Heading: Paramètres avancés
@@ -65,6 +79,9 @@ Settings/AutoSave/Caption: Sauvegarde automatique
 Settings/AutoSave/Disabled/Description: Pas de sauvegarde automatique des modifications
 Settings/AutoSave/Enabled/Description: Sauvegarde automatique des modifications
 Settings/AutoSave/Hint: Sauvegarde automatique des modifications pendant l'édition
+Settings/CamelCase/Caption: Liens Wiki //Camel Case//
+Settings/CamelCase/Hint: Vous pouvez désactiver globalement les liens créés à partir des expressions de la forme ~CamelCase. Pour que ce paramètres prenne effet, il est nécessaire de recharger le wiki
+Settings/CamelCase/Description: Active les liens automatiques sur les expressions de la forme ~CamelCase
 Settings/Caption: Paramétrage
 Settings/Hint: Ce paramétrage vous permet de personnaliser le comportement de TiddlyWiki.
 Settings/NavigationAddressBar/Caption: Barre d'adresse pendant la navigation
@@ -76,16 +93,37 @@ Settings/NavigationHistory/Caption: Historique de navigation
 Settings/NavigationHistory/Hint: Mise à jour de l'historique de navigation du navigateur lorsqu'on pointe vers un tiddler :
 Settings/NavigationHistory/No/Description: Ne pas mettre à jour l'historique
 Settings/NavigationHistory/Yes/Description: Mettre à jour l'historique
+Settings/PerformanceInstrumentation/Caption: Instrumentation de la Performance
+Settings/PerformanceInstrumentation/Hint: Affiche des statistiques de performance dans la console de développement du navigateur. Nécessite de recharger la page pour prendre effet.
+Settings/PerformanceInstrumentation/Description: Active l'instrumentation de la performance
+Settings/ToolbarButtonStyle/Caption: Style des boutons de la barre d'outils
+Settings/ToolbarButtonStyle/Hint: Choix du style des boutons de la barre d'outils :
+Settings/ToolbarButtonStyle/Styles/Borderless: Sans bordure
+Settings/ToolbarButtonStyle/Styles/Boxed: Avec une bordure
+Settings/ToolbarButtonStyle/Styles/Rounded: Arrondis
 Settings/ToolbarButtons/Caption: Boutons de la barre d'outils
 Settings/ToolbarButtons/Hint: Apparence par défaut des boutons sur la barre d'outils :
-Settings/ToolbarButtons/Icons/Description: Afficher l'icone
+Settings/ToolbarButtons/Icons/Description: Afficher l'icône
 Settings/ToolbarButtons/Text/Description: Afficher le texte
+Settings/DefaultSidebarTab/Caption: Onglet par défaut sur la barre latérale
+Settings/DefaultSidebarTab/Hint: Indique l'onglet de la barre latérale qui sera affiché par défaut
+Settings/LinkToBehaviour/Caption: Comportement à l'ouverture du tiddler
+Settings/LinkToBehaviour/InsideRiver/Hint: Navigation depuis un emplacement //interne// au déroulé
+Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation depuis un emplacement //externe// au déroulé
+Settings/LinkToBehaviour/OpenAbove: Ouvrir au-dessus du tiddler courant
+Settings/LinkToBehaviour/OpenBelow: Ouvrir en dessous du tiddler courant
+Settings/LinkToBehaviour/OpenAtTop: Ouvrir tout en haut du déroulé
+Settings/LinkToBehaviour/OpenAtBottom: Ouvrir tout en bas du déroulé
+Settings/TitleLinks/Caption: Titres des tiddlers
+Settings/TitleLinks/Hint: Faut-il afficher les titres des tiddlers comme des liens ?
+Settings/TitleLinks/No/Description: Ne pas afficher les titres des tiddlers comme des liens
+Settings/TitleLinks/Yes/Description: Afficher les titres des tiddlers comme des liens
 StoryView/Caption: Vue sur le déroulé
 StoryView/Prompt: Vue courante :
 Theme/Caption: Thème
 Theme/Prompt: Thème courant :
-TiddlerFields/Caption: Champs
-TiddlerFields/Hint: Voici la totalité des [[champs|TiddlerFields]] utilisés dans ce wiki (y compris les tiddlers système, mais non compris les tiddlers //shadow//).
+TiddlerFields/Caption: Champs du tiddler
+TiddlerFields/Hint: Il s'agit de la totalité des [[champs|TiddlerFields]] utilisés dans ce wiki (y compris les tiddlers système, mais non compris les tiddlers //shadow//).
 Toolbars/Caption: Barres d'outils
 Toolbars/EditToolbar/Caption: Barre d'outils du mode édition
 Toolbars/EditToolbar/Hint: Choix des boutons à afficher pour les tiddlers en cours d'édition

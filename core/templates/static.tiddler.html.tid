@@ -16,7 +16,7 @@ title: $:/core/templates/static.tiddler.html
 <meta name="format-detection" content="telephone=no">
 <link id="faviconLink" rel="shortcut icon" href="favicon.ico">
 <link rel="stylesheet" href="static.css">
-<title>`{{$:/core/wiki/title}}`</title>
+<title>`<$view field="caption"><$view field="title"/></$view>: {{$:/core/wiki/title}}`</title>
 </head>
 <body class="tc-body">
 `{{$:/StaticBanner||$:/core/templates/html-tiddler}}`

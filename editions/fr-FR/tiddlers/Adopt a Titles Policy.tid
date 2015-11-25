@@ -1,6 +1,6 @@
-fr-title: Adoptez une politique pour vos titres
 created: 20130825103300000
-modified: 20141115221758884
+fr-title: Adoptez une politique pour vos titres
+modified: 20150620095126583
 tags: Learning
 title: Adopt a Titles Policy
 type: text/vnd.tiddlywiki
@@ -10,13 +10,13 @@ type: text/vnd.tiddlywiki
 Fixer une politique formelle concernant les titres peuvent aider à réduire les risques de confusion. Par exemple, la politique de titres de ce wiki sont<<dp>>
 
 * Utilisation de mots simples en minuscules pour les tags
-** exemples : [[task]], [[demo]]
-* Utilisation de la forme CamelCase pour les définitions et les concepts
+** exemples : [[tâche|task]], [[demo]]
+* Utilisation de la convention CamelCase pour les définitions et les concepts
 ** exemples : TiddlerFields, DeveloperDocs
 * Utilisation de mots séparés pour les titres qui sont des expressions ou des phrases complètes, comme des FAQ, des howtos ou des tâches
-** exemple : [[How to build a TiddlyWiki5 from individual tiddlers]]
+** exemple : [[Comment construire un TiddlyWiki5 à partir de tiddlers isolés|How to build a TiddlyWiki5 from individual tiddlers]]
 * Là où TiddlyWiki or TiddlyWiki5 est utilisé comme qualifieur au début du titre, toujours utiliser des mots séparés
-** exemple : [[TiddlyWiki on Node.js]]
+** exemple : [[TiddlyWiki sur Node.js|TiddlyWiki on Node.js]]
 
 Une politique qui inclurait la règle ci-dessous pourrait s'appliquer à vos propres wikis<<dp>>
 

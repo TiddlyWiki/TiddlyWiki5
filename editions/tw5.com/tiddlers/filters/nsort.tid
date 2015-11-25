@@ -1,0 +1,16 @@
+created: 20140410103123179
+modified: 20150203190051000
+tags: [[Filter Operators]] [[Field Operators]] [[Order Operators]] [[Negatable Operators]]
+title: nsort Operator
+type: text/vnd.tiddlywiki
+caption: nsort
+op-purpose: sort the input by number field
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: the name of a [[field|TiddlerFields]], defaulting to <<.field title>>
+op-parameter-name: F
+op-output: the input, sorted into ascending order by field <<.field F>>, treating field values as numbers
+op-neg-output: the input, likewise sorted into descending order
+
+Non-numeric values are treated as having a higher value than any number, and the difference between capital and lowercase letters is ignored. Compare <<.olink nsortcs>>.
+
+<<.operator-examples "nsort">>

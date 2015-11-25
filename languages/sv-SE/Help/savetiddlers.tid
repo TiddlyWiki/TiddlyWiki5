@@ -1,0 +1,12 @@
+title: $:/language/Help/savetiddlers
+description: Sparar en grupp av råa tiddlers till en mapp
+
+Sparar en grupp av tiddlers i dess råtext- eller binärformat till en specificerad mapp. 
+
+```
+--savetiddlers <filter> <pathname>
+```
+
+Som standard, sökvägen är satt realtivt till `output` undermappen av utgåvans mapp. `--output` kommandot kan användas för att ställa in output till en annan mapp.
+
+Alla saknade mappar i sökvägen kommer automatiskt skapas.

@@ -1,0 +1,31 @@
+created: 20140410103123179
+modified: 20150220160957000
+tags: [[Filter Operators]] [[Common Operators]] [[Selection Constructors]]
+title: all Operator
+type: text/vnd.tiddlywiki
+caption: all
+op-purpose: find all titles of a fundamental category
+op-input: ignored, unless the parameter is empty
+op-parameter: zero or more categories
+op-output: the titles that belong to all the specified categories
+
+The parameter specifies zero or more fundamental categories using the following syntax:
+
+<$railroad text="""
+[{: ("current" | "missing" |: "orphans" | "shadows" | "tiddlers" ) +"+" }]
+"""/>
+
+|!Category |!Members |!Sorted |
+|^`current` |just the [[current tiddler|Current Tiddler]] |^-- |
+|^`missing` |all non-existent tiddlers to which there is at least one [[hard link|Hard and Soft Links]] |^no |
+|^`orphans` |all tiddlers to which there are <<.em no>> hard links |^by title |
+|^`shadows` |all the [[shadow tiddlers|ShadowTiddlers]] that exist, including any that have been overridden with non-shadow tiddlers |^no |
+|^`tiddlers` |all the non-shadow tiddlers that exist |no |
+
+If the parameter specifies more than one category, they are processed from left to right. The overall output is initially empty, and each category's output is [[dominantly appended|Dominant Append]] to it in turn. Unrecognised categories contribute nothing to the output.
+
+As a special case, if the parameter is empty, the output is simply a copy of the input. This can be useful when the parameter is [[soft|Filter Parameter]].
+
+The <<.olink is>> operator is similar, but its scope is restricted to its input.
+
+<<.operator-examples "all">>

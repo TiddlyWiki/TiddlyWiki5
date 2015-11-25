@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/pa-IN",
+	"name": "pa-IN",
+	"plugin-type": "language",
+	"description": "Punjabi (India)",
+	"author": "Atul Grover",
+	"core-version": ">=5.0.8"
+}

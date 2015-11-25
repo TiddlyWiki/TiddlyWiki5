@@ -1,0 +1,47 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: Sfondo allarme
+alert-border: Bordo allarme
+alert-highlight: Evidenziazione allarme
+alert-muted-foreground: Primo piano allarme disattivato
+background: Sfondo generale
+button-background: Default sfondo pulsante
+button-border: Default bordo pulsante
+button-foreground: Default primo piano pulsante
+code-background: Sfondo codice
+code-border: Bordo codice
+code-foreground: Codice in primo piano
+dirty-indicator: Indicatore modifiche non salvate
+download-background: Sfondo pulsante download
+download-foreground: Primo piano pulsante download
+external-link-background: Sfondo link esterno
+external-link-background-visited: Sfondo link esterno visitato
+external-link-foreground: Primo piano link esterno
+external-link-foreground-visited: Primo piano link esterno visitato
+foreground: Primo piano generale
+message-background: Sfondo casella messaggio
+message-border: Bordo casella messaggio
+message-foreground: Primo piano casella messaggio
+notification-background: Sfondo notifica
+notification-border: Bordo notifica
+page-background: Sfondo pagina
+pre-background: Sfondo codice preformattato
+pre-border: Bordo codice preformattato
+sidebar-button-foreground: Sfondo pulsante sidebar
+sidebar-foreground: Sfondo sidebar
+site-title-foreground: Sfondo titolo sito
+static-alert-foreground: Primo piano alert statico
+tab-background: Sfondo tab
+tab-background-selected: Sfondo tab per tab selezionati
+tab-border: Bordo tab
+tab-border-selected: Bordo tab per tab selezionati
+table-border: Bordo tabella
+table-footer-background: Sfondo footer tabella
+table-header-background: Sfondo testata tabella
+tag-background: Sfondo etichetta
+tiddler-background: Sfondo frammento
+tiddler-border: Bordo frammento
+tiddler-editor-background: Sfondo editor frammenti
+tiddler-editor-border: Bordo editor frammenti
+tiddler-info-background: Sfondo pannello informazioni frammenti
+tiddler-info-border: Bordo pannello informazioni frammenti

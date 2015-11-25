@@ -1,0 +1,11 @@
+title: $:/language/Help/build
+description: Automaticky spusti nakonfigurované príkazy
+
+Vytvor špecifikované cieľové verzie pre aktuálny wiki. Ak nie sú špecifikované žiadne cieľové verzie, tak sa vytvoria všetky dostupné cieľové verzie.
+
+```
+--build <target> [<target> ...]
+```
+
+Vytvor cieľe definované v súbore `tiddlywiki.info` wiki adresára.
+

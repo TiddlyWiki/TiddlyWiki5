@@ -12,7 +12,7 @@ Serve tiddlers over http
 /*global $tw: false */
 "use strict";
 
-if(!$tw.browser) {
+if($tw.node) {
 	var util = require("util"),
 		fs = require("fs"),
 		url = require("url"),
@@ -170,7 +170,7 @@ var Command = function(params,commander,callback) {
 			if(fields.revision) {
 				delete fields.revision;
 			}
-			state.wiki.addTiddler(new $tw.Tiddler(state.wiki.getCreationFields(),fields,{title: title}));
+			state.wiki.addTiddler(new $tw.Tiddler(state.wiki.getCreationFields(),fields,{title: title},state.wiki.getModificationFields()));
 			var changeCount = state.wiki.getChangeCount(title).toString();
 			response.writeHead(204, "OK",{
 				Etag: "\"default/" + encodeURIComponent(title) + "/" + changeCount + ":\"",
@@ -300,6 +300,10 @@ Command.prototype.execute = function() {
 	this.server.listen(port,host);
 	console.log("Serving on " + host + ":" + port);
 	console.log("(press ctrl-C to exit)");
+	// Warn if required plugins are missing
+	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
+		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
+	}
 	return null;
 };
 

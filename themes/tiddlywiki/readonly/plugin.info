@@ -4,6 +4,6 @@
 	"author": "JeremyRuston",
 	"core-version": ">=5.0.0",
 	"plugin-type": "theme",
-	"description": "Theme for removing editing features",
+	"description": "Hides the ability to edit tiddlers",
 	"dependents": ["$:/themes/tiddlywiki/snowwhite"]
 }

@@ -25,7 +25,7 @@ exports.sameday = function(source,operator,options) {
 		};
 	source(function(tiddler,title) {
 		if(tiddler && tiddler.fields[fieldName]) {
-			if(isSameDay(tiddler.fields[fieldName])) {
+			if(isSameDay($tw.utils.parseDate(tiddler.fields[fieldName]))) {
 				results.push(title);
 			}
 		}

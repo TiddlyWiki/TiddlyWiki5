@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/text-slicer/ui/tiddler/toolbar
+
+<div class="tc-slice-toolbar">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TextSlicerToolbar]!has[draft.of]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
+</div>

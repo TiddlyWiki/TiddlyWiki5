@@ -1,0 +1,39 @@
+caption: Previous Employment
+created: 20150719182555935
+modified: 20150719182603681
+tags: Section
+title: $:/input/Previous Employment
+
+\define thisAddEmployment()
+<$action-setfield $tiddler='$:/temp/Previous Employment' $field='title' $value="""$:/data/Previous Employment/$(Employer)$/$(JobTitle)$"""/>
+\end
+
+This is a listing of any previous employment you have had, if any.
+
+Job Title:
+<$edit-text tiddler='$:/temp/Previous Employment' field='job_title' class='tc-edit-texteditor' placeholder='Job Title'/>
+
+Employer:
+<$edit-text tiddler='$:/temp/Previous Employment' field='employer' class='tc-edit-texteditor' placeholder='Employer'/>
+
+Dates:
+<$edit-text tiddler='$:/temp/Previous Employment' field='dates' class='tc-edit-texteditor' placeholder='Dates'/>
+
+<$set name=JobTitle value={{$:/temp/Previous Employment!!job_title}}>
+<$set name=Employer value={{$:/temp/Previous Employment!!employer}}>
+<$button>
+Add Employment
+<<thisAddEmployment>>
+<$action-setfield $tiddler='$:/temp/Previous Employment' job_title='' employer='' dates=''/>
+</$button>
+</$set>
+</$set>
+
+<h2>Current Listing:</h2>
+
+<table style='width:100%'>
+<tr><th></th><th>Visible</th><th>Entry</th><th>Order</th></tr>
+<$list filter='[prefix[$:/data/Previous Employment/]sort[order]]'>
+<tr><td><$button class='tc-btn-invisible' message='tm-delete-tiddler' param=<<currentTiddler>>>{{$:/core/images/delete-button}}</$button></td><td><$checkbox tiddler=<<currentTiddler>> field=show checked='true' unchecked=false default=true/></td><td><$view field='job_title'/>, <$view field='employer'/>, <$view field='dates'/></td><td><$edit-text field=order size=2/></td></tr>
+</$list>
+</table>

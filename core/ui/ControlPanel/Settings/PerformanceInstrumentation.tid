@@ -1,0 +1,8 @@
+title: $:/core/ui/ControlPanel/Settings/PerformanceInstrumentation
+tags: $:/tags/ControlPanel/Settings
+caption: {{$:/language/ControlPanel/Settings/PerformanceInstrumentation/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Settings/PerformanceInstrumentation/
+<<lingo Hint>>
+
+<$checkbox tiddler="$:/config/Performance/Instrumentation" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/Performance/Instrumentation"><<lingo Description>></$link> </$checkbox>

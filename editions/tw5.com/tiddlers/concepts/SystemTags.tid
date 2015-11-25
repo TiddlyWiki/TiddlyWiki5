@@ -22,6 +22,7 @@ These are the available system tags
 * {{$:/tags/ControlPanel/Toolbars||$:/core/ui/TagTemplate}} for control panel toolbar customisation tabs
 * {{$:/tags/EditTemplate||$:/core/ui/TagTemplate}} for the edit template
 * {{$:/tags/EditToolbar||$:/core/ui/TagTemplate}} for the edit mode tiddler toolbar
+* {{$:/tags/Exporter||$:/core/ui/TagTemplate}} for the exporters
 * {{$:/tags/Filter||$:/core/ui/TagTemplate}} for filters in advanced seach sample filter dropdown
 * {{$:/tags/Image||$:/core/ui/TagTemplate}} for (core) images
 * {{$:/tags/Macro||$:/core/ui/TagTemplate}} for global macros
@@ -29,7 +30,9 @@ These are the available system tags
 * {{$:/tags/PageControls||$:/core/ui/TagTemplate}} for the page control tools in the sidebar
 * {{$:/tags/PageTemplate||$:/core/ui/TagTemplate}} for the main page elements
 * {{$:/tags/Palette||$:/core/ui/TagTemplate}} for colour palettes
+* {{$:/tags/PluginLibrary||$:/core/ui/TagTemplate}} for the plugin library
 * {{$:/tags/RawMarkup||$:/core/ui/TagTemplate}} for raw markup to be included in the generated HTML file
+* {{$:/tags/SearchResults||$:/core/ui/TagTemplate}} for customised search results
 * {{$:/tags/SideBar||$:/core/ui/TagTemplate}} for sidebar tabs
 * {{$:/tags/Stylesheet||$:/core/ui/TagTemplate}} to indicate that a tiddler should be applied as a CSS stylesheet
 * {{$:/tags/TiddlerInfo||$:/core/ui/TagTemplate}} for tiddler info panel tabs

@@ -1,7 +1,7 @@
 title: $:/language/Help/unpackplugin
-description: Udtrækker payload tiddlere fra et plugin
+description: Udtrækker payload tiddlere fra en udvidelse
 
-Udtrækker payload tiddlere fra et plugin, i det de oprettes som ordinære tiddlere:
+Udtrækker payload tiddlere fra en udvidelse, idet de oprettes som ordinære tiddlere:
 
 ```
 --unpackplugin <title>

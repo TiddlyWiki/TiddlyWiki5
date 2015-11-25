@@ -7,4 +7,4 @@ Sætter  basis output mappe for efterfølgende kommandoer. Standard output mappe
 --output <pathname>
 ```
 
-Hvis det specificerede stinavn er relativt, sættes det relativt til den aktuelle arbejds mappe.
+Hvis det specificerede stinavn er relativt, sættes det relativt til den aktuelle arbejdsmappe.

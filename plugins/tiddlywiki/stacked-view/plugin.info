@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/stacked-view",
+	"description": "Stacked card storyview",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"list": "readme"
+}

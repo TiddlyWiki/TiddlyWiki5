@@ -1,0 +1,6 @@
+created: 20150719183128695
+modified: 20150720163126223
+tags: 
+title: Résumé Options
+
+<<tabs "[[Layout Options]][tag[Section Display]removeprefix[$:/display]addprefix{$:/settings/Global!!selected_resume}addprefix[$:/settings/]!show[false]sort[order]get[template]get[options_tiddler]]" [[Layout Options]]>>

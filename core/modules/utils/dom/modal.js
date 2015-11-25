@@ -29,6 +29,7 @@ Options include:
 Modal.prototype.display = function(title,options) {
 	options = options || {};
 	var self = this,
+		refreshHandler,
 		duration = $tw.utils.getAnimationDuration(),
 		tiddler = this.wiki.getTiddler(title);
 	// Don't do anything if the tiddler doesn't exist
@@ -70,6 +71,7 @@ Modal.prototype.display = function(title,options) {
 	// Render the title of the message
 	var headerWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		field: "subtitle",
+		mode: "inline",
 		children: [{
 			type: "text",
 			attributes: {
@@ -82,9 +84,6 @@ Modal.prototype.display = function(title,options) {
 		variables: variables
 	});
 	headerWidgetNode.render(headerTitle,null);
-	this.wiki.addEventListener("change",function(changes) {
-		headerWidgetNode.refresh(changes,modalHeader,null);
-	});
 	// Render the body of the message
 	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		parentWidget: $tw.rootWidget,
@@ -92,9 +91,6 @@ Modal.prototype.display = function(title,options) {
 		variables: variables
 	});
 	bodyWidgetNode.render(modalBody,null);
-	this.wiki.addEventListener("change",function(changes) {
-		bodyWidgetNode.refresh(changes,modalBody,null);
-	});
 	// Setup the link if present
 	if(options.downloadLink) {
 		modalLink.href = options.downloadLink;
@@ -112,6 +108,7 @@ Modal.prototype.display = function(title,options) {
 	}
 	var footerWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		field: "footer",
+		mode: "inline",
 		children: [{
 			type: "button",
 			attributes: {
@@ -133,11 +130,17 @@ Modal.prototype.display = function(title,options) {
 		variables: variables
 	});
 	footerWidgetNode.render(modalFooterButtons,null);
-	this.wiki.addEventListener("change",function(changes) {
+	// Set up the refresh handler
+	refreshHandler = function(changes) {
+		headerWidgetNode.refresh(changes,modalHeader,null);
+		bodyWidgetNode.refresh(changes,modalBody,null);
 		footerWidgetNode.refresh(changes,modalFooterButtons,null);
-	});
+	};
+	this.wiki.addEventListener("change",refreshHandler);
 	// Add the close event handler
 	var closeHandler = function(event) {
+		// Remove our refresh handler
+		self.wiki.removeEventListener("change",refreshHandler);
 		// Decrease the modal count and adjust the body class
 		self.modalCount--;
 		self.adjustPageClass();

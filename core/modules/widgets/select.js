@@ -127,10 +127,11 @@ SelectWidget.prototype.refresh = function(changedTiddlers) {
 		return true;
 	// If the target tiddler value has changed, just update setting and refresh the children
 	} else {
-		if(changedTiddlers[this.selectTitle]) {
+		var childrenRefreshed = this.refreshChildren(changedTiddlers);
+		if(changedTiddlers[this.selectTitle] || childrenRefreshed) {
 			this.setSelectValue();
 		} 
-		return this.refreshChildren(changedTiddlers);		
+		return childrenRefreshed;
 	}
 };
 

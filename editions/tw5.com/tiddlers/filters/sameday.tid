@@ -1,0 +1,19 @@
+created: 20140410103123179
+modified: 20150203190959000
+tags: [[Filter Operators]] [[Date Operators]]
+title: sameday Operator
+type: text/vnd.tiddlywiki
+caption: sameday
+op-purpose: filter the input by date
+op-input: a [[selection of titles|Title Selection]]
+op-suffix: the name of a [[date field|Date Fields]], defaulting to <<.field modified>>
+op-suffix-name: F
+op-parameter: a date, in the [[format|DateFormat]] `YYYYMMDD`
+op-parameter-name: D
+op-output: those input tiddlers in which field <<.place F>> has the value <<.place D>>, ignoring time
+
+If <<.place D>> is not a valid date, the output is empty.
+
+<<.place D>> may include a time of day, but this is ignored.
+
+<<.operator-examples "sameday">>

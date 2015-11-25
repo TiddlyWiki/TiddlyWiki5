@@ -1,0 +1,31 @@
+caption: Skills and Expertise
+created: 20150719182443671
+modified: 20150719182521401
+tags: Section
+title: $:/input/Skills and Expertise
+
+\define thisAddSkill()
+<$action-setfield $tiddler='$:/temp/Skills and Expertise' $field='title' $value="""$:/data/Skills and Expertise/$(ThisSkill)$"""/>
+\end
+
+Each of these should be short and descriptive. Just things like 'Advanced Underwater Basket Weaving' or 'Network Information Theory'.
+
+New Skill:
+<$edit-text tiddler='$:/temp/Skills and Expertise' field='skill' class='tc-edit-texteditor' placeholder='Skill/Expertise'/>
+
+<$set name=ThisSkill value={{$:/temp/Skills and Expertise!!skill}}>
+<$button>
+Add Skill
+<<thisAddSkill>>
+<$action-setfield $tiddler='$:/temp/Skills and Expertise' $field='skill' $value=''/>
+</$button>
+</$set>
+
+<h2>Current Listing:</h2>
+
+<table style='width:100%'>
+<tr><th></th><th>Visible</th><th>Entry</th><th>Order</th></tr>
+<$list filter='[prefix[$:/data/Skills and Expertise/]sort[order]]'>
+<tr><td><$button class='tc-btn-invisible' message='tm-delete-tiddler' param=<<currentTiddler>>>{{$:/core/images/delete-button}}</$button></td><td><$checkbox tiddler=<<currentTiddler>> field=show checked='true' unchecked=false default=true/></td><td><$view field='skill'/></td><td><$edit-text field=order size=2/></td></tr>
+</$list>
+</table>

@@ -1,0 +1,8 @@
+created: 20150124111726000
+modified: 20150124210736000
+tags: [[shadowsource Operator]] [[Operator Examples]]
+title: shadowsource Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[$:/core/copyright.txt]shadowsource[]]">>
+<<.operator-example 2 "$:/core/copyright.txt $:/plugins/tiddlywiki/railroad/parser.js +[shadowsource[]]">>

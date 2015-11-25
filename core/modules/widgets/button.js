@@ -34,7 +34,11 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	// Create element
-	var domNode = this.document.createElement("button");
+	var tag = "button";
+	if(this.buttonTag && $tw.config.htmlUnsafeElements.indexOf(this.buttonTag) === -1) {
+		tag = this.buttonTag;
+	}
+	var domNode = this.document.createElement(tag);
 	// Assign classes
 	var classes = this["class"].split(" ") || [],
 		isPoppedUp = this.popup && this.isPoppedUp();
@@ -63,7 +67,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
 		var handled = false;
-		if(self.invokeActions(event)) {
+		if(self.invokeActions(this,event)) {
 			handled = true;
 		}
 		if(self.to) {
@@ -94,13 +98,19 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	this.domNodes.push(domNode);
 };
 
+/*
+We don't allow actions to propagate because we trigger actions ourselves
+*/
+ButtonWidget.prototype.allowActionPropagation = function() {
+	return false;
+};
+
 ButtonWidget.prototype.getBoundingClientRect = function() {
 	return this.domNodes[0].getBoundingClientRect();
-}
+};
 
 ButtonWidget.prototype.isSelected = function() {
-	var tiddler = this.wiki.getTiddler(this.set);
-	return tiddler ? tiddler.fields.text === this.setTo : this.defaultSetValue === this.setTo;
+    return this.wiki.getTextReference(this.set,this.defaultSetValue,this.getVariable("currentTiddler")) === this.setTo;
 };
 
 ButtonWidget.prototype.isPoppedUp = function() {
@@ -155,7 +165,8 @@ ButtonWidget.prototype.execute = function() {
 	this.tooltip = this.getAttribute("tooltip");
 	this.style = this.getAttribute("style");
 	this.selectedClass = this.getAttribute("selectedClass");
-	this.defaultSetValue = this.getAttribute("default");
+	this.defaultSetValue = this.getAttribute("default","");
+	this.buttonTag = this.getAttribute("tag");
 	// Make child widgets
 	this.makeChildWidgets();
 };

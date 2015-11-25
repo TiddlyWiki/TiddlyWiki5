@@ -1,0 +1,72 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: ਤਕਨੀਕੀ ਖੋਜ
+AdvancedSearch/Hint: ਤਕਨੀਕੀ ਖੋਜ
+Cancel/Caption: ਰੱਦ ਕਰੋ
+Cancel/Hint: ਇਸ tiddler ਨੂੰ ਰੱਦ ਕਰੋ
+Clone/Caption: ਕਲੋਨ
+Clone/Hint: ਸੰਪਾਦਨ ਕਰਨਾਕਲੋਨ ਕਰੋ
+Close/Caption:  ਬੰਦ ਕਰੋ
+Close/Hint: ਇਸ tiddler ਨੂੰ  ਬੰਦ ਕਰੋ
+CloseAll/Caption: ਬੰਦ ਕਰੋ ਸਾਰੇ
+CloseAll/Hint: ਬੰਦ ਕਰੋ ਸਾਰੇ
+CloseOthers/Caption: ਬੰਦ ਕਰੋ ਹੋਰ
+CloseOthers/Hint: ਬੰਦ ਕਰੋ ਹੋਰ tiddlers
+ControlPanel/Caption: ਕਨ੍ਟ੍ਰੋਲ ਪੈਨਲ
+ControlPanel/Hint: ਕਨ੍ਟ੍ਰੋਲ ਪੈਨਲ ਨੂੰ ਖੋਲ੍ਹੋ
+Delete/Caption: ਕੱਟ ਦੇਣਾ
+Delete/Hint: ਸੰਪਾਦਨ ਕਰਨਾ ਮਿਟਾਉਣਾ
+Edit/Caption: ਸੰਪਾਦਨ ਕਰਨਾ
+Edit/Hint: ਇਸ tiddler ਨੂੰ ਸੰਪਾਦਨ ਕਰਨਾ
+Encryption/Caption: ਇੰਕ੍ਰਿਪਸ਼ਨ
+Encryption/ClearPassword/Caption: ਇੰਕ੍ਰਿਪਸ਼ਨ /ਸਾਫ ਪਾਸਵਰਡ/ਸੁਰਖੀ
+Encryption/ClearPassword/Hint: ਇੰਕ੍ਰਿਪਸ਼ਨ /ਸਾਫ ਪਾਸਵਰਡ /ਸੰਕੇਤ
+Encryption/Hint:  ਇਸ ਵਿਕੀ 'ਨੂੰ ਸੰਭਾਲਣ ਲਈ ਇੱਕ ਸਾਫ ਪਾਸਵਰਡ ਲਗਾਓ
+Encryption/SetPassword/Caption: ਸੈੱਟ ਗੁਪਤ-ਕੋਡ
+Encryption/SetPassword/Hint:  ਇੰਕ੍ਰਿਪਸ਼ਨ ਨਾਲ ਇਸ ਵਿਕੀ 'ਨੂੰ ਸੰਭਾਲਣ ਲਈ ਇੱਕ ਪਾਸਵਰਡ ਸੈੱਟ ਕਰੋ
+ExportPage/Caption: ਨਿਰਯਾਤ ਸਭ ਨੂੰ
+ExportPage/Hint: ਸਭ ਨੂੰ tiddlers ਨਿਰਯਾਤ
+ExportTiddler/Caption: ਨਿਰਯਾਤ tiddler
+ExportTiddler/Hint: ਨਿਰਯਾਤ tiddler
+ExportTiddlers/Caption: ਨਿਰਯਾਤ tiddler
+ExportTiddlers/Hint: ਨਿਰਯਾਤ tiddler /ਸੰਕੇਤ
+FullScreen/Caption: ਪੂਰਾ ਸਕਰੀਨ
+FullScreen/Hint: ਦਰਜ ਕਰੋ ਜ ਪੂਰੀ-ਸਕਰੀਨ ਮੋਡ ਛੱਡ
+HideSideBar/Caption: ਸਾਇਡਬਾਰ  /ਸੁਰਖੀ
+HideSideBar/Hint: ਸਾਇਡਬਾਰ /ਸੰਕੇਤ
+Home/Caption: ਘਰ /ਸੁਰਖੀ
+Home/Hint: ਘਰ /ਸੰਕੇਤ
+Import/Caption: ਅਯਾਤ / ਸੁਰਖੀ
+Import/Hint: ਅਯਾਤ ਫਾਇਲ
+Info/Caption: ਜਾਣਕਾਰੀ
+Info/Hint: ਇਸ  tiddler ਨੂੰ   ਜਾਣਕਾਰੀ ਲਈ ਵੇਖੋ
+Language/Caption: ਭਾਸ਼ਾ /ਸੁਰਖੀ
+Language/Hint: ਯੂਜ਼ਰ ਇੰਟਰਫੇਸ ਭਾਸ਼ਾ ਚੁਣੋ
+More/Caption: ਹੋਰ /ਸੁਰਖੀ
+More/Hint: ਹੋਰ ਕਾਰਵਾਈ /ਸੰਕੇਤ
+NewHere/Caption:  ਇੱਥੇ ਨਵੇਂ /ਸੁਰਖੀ
+NewHere/Hint: ਇੱਥੇ ਨਵੇਂ /ਸੰਕੇਤ 
+NewJournal/Caption:  ਨਵੇਂ ਪੱਤ੍ਰਿਕਾ
+NewJournal/Hint: ਇੱਕ ਨਵ ਪੱਤ੍ਰਿਕਾ tiddler ਬਣਾਓ
+NewJournalHere/Caption: ਇੱਥੇ ਨਿਊ ਜਰਨਲ / ਸੁਰਖੀ
+NewJournalHere/Hint: ਇਸ ਨੂੰ ਇੱਕ ਟੈਗ ਨਾਲ ਹੀ  ਇੱਕ ਨਵ ਪੱਤ੍ਰਿਕਾ tiddler ਬਣਾਓ
+NewTiddler/Caption: ਨਿਊ tiddler
+NewTiddler/Hint: ਇੱਕ ਨਵ tiddler ਬਣਾਓ
+Permalink/Caption: Permalink / ਸੁਰਖੀ
+Permalink/Hint:  ਇਸ  tiddler ਨੂੰ  ਸਿੱਧਾ ਲਿੰਕ ਕਰਨ ਇੱਕ  ਬਰਾਊਜ਼ਰ ਐਡਰੈਸ ਬਾਰ  ਸੈਟ ਕਰੋ 
+Permaview/Caption: Permaview / ਸੁਰਖੀ
+Permaview/Hint:  ਇਸ  ਵਿੱਚ ਸਾਰੇ tiddlers ਨੂੰ  ਸਿੱਧਾ ਲਿੰਕ ਕਰਨ ਇੱਕ  ਬਰਾਊਜ਼ਰ ਐਡਰੈਸ ਬਾਰ  ਸੈਟ ਕਰੋ 
+Refresh/Caption: ਤਾਜ਼ਾ ਕਰੋ
+Refresh/Hint: Wiki  ਨੂੰ  ਪੂਰਾ ਤਾਜ਼ਾ ਕਰਨ ਲਈ ਵਰਤੋ
+Save/Caption: ਜਮ੍ਹਾਂ ਕਰਨਾ
+Save/Hint: ਇਸ ਨੂੰ tiddler ਸੰਭਾਲੋ
+SaveWiki/Caption:  ਬਦਲਾਅ ਨੂੰ ਸੰਭਾਲਣਾ
+SaveWiki/Hint: ਸੰਭਾਲੋ ਵਿਕਿ / ਸੰਕੇਤ
+ShowSideBar/Caption: ਸੰਭਾਲੋ ਵਿਕਿ / ਸੰਕੇਤ
+ShowSideBar/Hint: ਵੇਖਾਓ ਸਾਇਡਬਾਰ
+StoryView/Caption: ਕਹਾਣੀ ਦਾ ਨਜ਼ਰੀਆ
+StoryView/Hint: ਕਹਾਣੀਵਿਜ਼ੁਅਲਾਈਜ਼ੇਸ਼ਨ ਨੂੰ ਚੁਣੋ
+TagManager/Caption: ਟੈਗ ਮੈਨੇਜਰ
+TagManager/Hint: ਖੋਲੋ ਟੈਗ ਮੈਨੇਜਰ ਖੋਲੋ
+Theme/Caption: ਥੀਮ
+Theme/Hint:  ਡਿਸਪਲੇਅ ਥੀਮ ਨੂੰ ਚੁਣੋ

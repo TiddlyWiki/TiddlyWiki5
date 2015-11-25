@@ -3,7 +3,7 @@ title: $:/language/Buttons/
 AdvancedSearch/Caption: Erweiterte Suche
 AdvancedSearch/Hint: Erweiterte Suche
 Cancel/Caption: Abbrechen
-Cancel/Hint: Tiddler bearbeiten abbrechen
+Cancel/Hint: Änderungen verwerfen
 Clone/Caption: Klone
 Clone/Hint: Klone diesen Tiddler
 Close/Caption: Schließen
@@ -30,10 +30,22 @@ ExportTiddler/Caption: Exportieren
 ExportTiddler/Hint: Diesen Tiddler Exportieren
 ExportTiddlers/Caption: Mehrere Exportieren
 ExportTiddlers/Hint: Mehrere Tiddler Exportieren
+Fold/Caption: Ausblenden Textbereich
+Fold/Hint: Der Tiddler Textbereich wird ausgeblendet
+Unfold/Caption: Einblenden Textbereich
+Unfold/Hint: Der Tiddler Textbereich wird eingeblendet
+FoldOthers/Caption: Ausblenden Andere Textbereiche
+FoldOthers/Hint: Die Textbereiche aller anderen Tiddler wird ausgeblendet
+FoldAll/Caption: Ausblenden Aller Textbereiche
+FoldAll/Hint: Ausblenden der Textbereiche aller Tiddler
+UnfoldAll/Caption: Einblenden Aller Textbereiche
+UnfoldAll/Hint: Einblenden der Textbereiche aller Tiddler
 FullScreen/Caption: Vollbild
 FullScreen/Hint: Aktivieren oder deaktivieren des Vollbild-Modus
+Help/Caption: Hilfe
+Help/Hint: Hilfe anzeigen
 Import/Caption: Import
-Import/Hint: Importiere Dateien
+Import/Hint: Importiere unterschiedliche Dateitypen. zB: Text, Bilder, TiddlyWiki oder JSON
 Info/Caption: Info
 Info/Hint: Informationen zu diesem Tiddler anzeigen
 Home/Caption: Home
@@ -50,14 +62,18 @@ NewJournalHere/Caption: Neues Journal Hier
 NewJournalHere/Hint: Erstelle ein neues Journal der mit diesem getaggt ist
 NewTiddler/Caption: Neuer Tiddler
 NewTiddler/Hint: Erstelle einen neuen Tiddler
+OpenWindow/Caption: Öffne in Neuem Fenster
+OpenWindow/Hint: Öffne diesen Tiddler in einem neuen Fenster
+Palette/Caption: Palette
+Palette/Hint: Wähle eine Farbpalette
 Permalink/Caption: Permalink
 Permalink/Hint: Die Adressleiste des Browsers enthält einen Link zu diesem Tiddler
 Permaview/Caption: Permaview
 Permaview/Hint: Die Adressleiste des Browsers enthält einen Link zu allen offenen Tiddlern in dieser [[Story]]
 Refresh/Caption: Aktualisieren
 Refresh/Hint: Die Seite wird neu in den Browser geladen
-Save/Caption: Speichern
-Save/Hint: Speichere diesen Tiddler
+Save/Caption: Fertig
+Save/Hint: Änderungen für diesen Tiddler bestätigen
 SaveWiki/Caption: Speichern
 SaveWiki/Hint: Das Wiki speichern
 StoryView/Caption: Story-Modus

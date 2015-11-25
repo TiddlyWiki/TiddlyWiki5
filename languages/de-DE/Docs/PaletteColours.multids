@@ -6,6 +6,9 @@ alert-highlight: Warnung Hervorhebung
 alert-muted-foreground: Warnung gedeckt Vordergrund
 background: Hintergrund Global
 blockquote-bar: Zitat Markierung
+button-background: Standard-Button Hintergrund
+button-border: Standard-Button Rahmen
+button-foreground: Standard-Button Vordergrund
 dirty-indicator: Speichern nötig - Indikator
 code-background: Code Hintergrund
 code-border: Code Rahmen
@@ -58,6 +61,7 @@ sidebar-tab-foreground-selected: Seitenleiste Reiter Vordergrund für selectiert
 sidebar-tab-foreground: Seitenleiste Reiter Vordergrund
 sidebar-tiddler-link-foreground-hover: Seitenleiste Tiddler Link Vordergrund (hover)
 sidebar-tiddler-link-foreground: Seitenleiste Tiddler Link Vordergrund
+site-title-foreground: Wiki Titel Vordergrund
 static-alert-foreground: Statische Warnung Vordergrund
 tab-background-selected: Reiter Hintergrund für selektierte Reiter
 tab-background: Reiter Hintergrund

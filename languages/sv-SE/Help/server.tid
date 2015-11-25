@@ -1,0 +1,37 @@
+title: $:/language/Help/server
+description: Tillhandahåller ett HTTP serverinterface till TiddlyWiki
+
+Server som är inbygdd i TiddlyWiki5 är väldigt simpel. Även om den är kompatibel med TiddlyWeb så stödjer den inte många av de funktioner som är nödvädniga för en pålitlig användning ut mot Internet.
+
+I roten, tillhandahåller den rendering av en specifik tiddler. Bort från roten, tillhandahåller den individuella tiddlers kodade i JSON, och stödjer basala HTTP funktioner som `GET`, `PUT` och `DELETE`.
+
+```
+--server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host> <pathprefix>
+```
+
+Parametrarna är:
+
+* ''port'' - portnummer för att tillhandahålla från (standard satt till "8080")
+* ''roottiddler'' - Tiddlern som tillhandahålls vid roten (standard satt till "$:/core/save/all") 
+* ''rendertype'' - Den innehållstyp rot-tiddlern ska renderas som (standard satt till "text/plain")
+* ''servetype'' -  Den innehållstyp rot-tiddlern ska tillhandahållas som som (standard satt till "text/html")
+* ''username'' - Standad användarnamnet till signering av redigeringar
+* ''password'' - frivilligt, lösenord för basic autentisering
+* ''host'' - frivilligt, värdnamn att tillhandahålla från (standard satt till "127.0.0.1" o.k.s. "localhost")
+* ''pathprefix'' - frivilligt, prefix för sökvägar
+
+Om lösenordsparametern är angiven, kommer webbläsaren be användaren om användarnamn och lösenord. Notera att lösenordet skickas i klartext så denna implementering är inte lämplig för generell användning.
+
+Till exempel:
+
+```
+--server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
+```
+
+Användarnamn och lösenord kan specificeras som tomma strängar om du har behov att sätta värdnamn eller sökvägsprefix och inte vill kräva ett lösenord:
+
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
+För att köra flera TiddlyWiki-servrar samtidigt, måste du ställa in varje med unik port.

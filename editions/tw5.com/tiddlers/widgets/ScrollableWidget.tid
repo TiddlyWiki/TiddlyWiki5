@@ -1,5 +1,5 @@
 created: 20140324223413403
-modified: 20140324223524945
+modified: 20150427123524945
 tags: Widgets
 title: ScrollableWidget
 type: text/vnd.tiddlywiki
@@ -29,6 +29,7 @@ This example requires the following CSS definitions from [[$:/_tw5.com-styles]]:
 	background-color: <<colour message-background>>;
 	padding: 1em;
 	height: 400px;
+	position: relative;
 }
 ```
 

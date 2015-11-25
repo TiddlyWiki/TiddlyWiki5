@@ -1,6 +1,0 @@
-{
-	"description": "Tools for building TiddlyWiki Classic files from individual tiddlers",
-	"plugins": [
-		"tiddlywiki/classictools"
-	]
-}

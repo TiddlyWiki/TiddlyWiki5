@@ -1,0 +1,19 @@
+created: 20130825144900000
+fr-title: Tiddler courant
+modified: 20150624092603762
+tags: Concepts
+title: Current Tiddler
+type: text/vnd.tiddlywiki
+
+Le <<.def "tiddler courant">> fournit le contexte dans lequel plusieurs aspects de Wikitext sont interprétés.
+
+Par exemple, `{{!!title}}` se réfère à la valeur du champ <<.field title>> du tiddler devenu courant, quel que soit-il. Cette technique peut être utilisée pour créer des [[tiddlers gabarit|TemplateTiddlers]] d'usage général.
+
+Le titre du tiddler courant peut toujours être trouvé dans la variable <<.vlink currentTiddler>>.
+
+Les deux façons les plus communes de modifier le tiddler courant sont<<:>>
+
+* le widget <<.wlink TiddlerWidget>>
+* le widget <<.wlink ListWidget>> (quand son attribut <<.attr variable>> n'a pas été modifié)
+
+Le tiddler courant n'est cependant <<.em pas>> souvent  le même que le [[tiddler en cours d'affichage ou d'édition|storyTiddler Variable]].

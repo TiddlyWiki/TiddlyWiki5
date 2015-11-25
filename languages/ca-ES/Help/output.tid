@@ -1,0 +1,11 @@
+title: $:/language/Help/output
+description: Tria la carpeta de sortida per a les ordres següents
+
+Tria la carpeta de sortida per a les ordres següents. La carpeta per omisió és la subcarpeta `output` de la carpeta de l'edició.
+
+```
+--output <ruta>
+```ordre
+
+Si la ruta indicada és relativa es resoldrà a partir de la carpeta actual de treball. Per exemple: `--output .` estableix la carpeta de sortida a la carpeta de treball actual.
+

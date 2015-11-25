@@ -1,0 +1,104 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: Avançat
+Advanced/Hint: Informació interna sobre aquest TiddlyWiki
+Appearance/Caption: Aparença
+Appearance/Hint: Formes de personalitzar l'aparença del vostre TiddlyWiki.
+Basics/AnimDuration/Prompt: Duració de l'animació:
+Basics/Caption: Bàsic
+Basics/DefaultTiddlers/BottomHint: Useu &#91;&#91;corxets dobles&#93;&#93; per als títols amb espais. O podeu triar <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">mantenir l'ordre de la cronologia</$button>
+Basics/DefaultTiddlers/Prompt: Tiddlers per omissió:
+Basics/DefaultTiddlers/TopHint: Trieu quins tiddlers s'han de mostrar a l'inici:
+Basics/Language/Prompt: Hola! Idioma actual:
+Basics/NewJournal/Tags/Prompt: Etiquetes per als nous tiddlers diaris
+Basics/NewJournal/Title/Prompt: Títol dels nous tiddlers diaris
+Basics/OverriddenShadowTiddlers/Prompt: Número de tiddlers ombra sobreescrits:
+Basics/ShadowTiddlers/Prompt: Número de tiddlers ombra:
+Basics/Subtitle/Prompt: Subtítol:
+Basics/SystemTiddlers/Prompt: Número de tiddlers del sistema:
+Basics/Tags/Prompt: Número d'etiquetes:
+Basics/Tiddlers/Prompt: Número de tiddlers:
+Basics/Title/Prompt: Títol d'aquest ~TiddlyWiki:
+Basics/Username/Prompt: Nom d'usuari per a signar les edicions:
+Basics/Version/Prompt: ~TiddlyWiki versió:
+EditorTypes/Caption: Tipus de l'editor
+EditorTypes/Editor/Caption: Editor
+EditorTypes/Hint: Aquests tiddlers determinen quin editor s'utilitza per a editar cada tipus de tiddler.
+EditorTypes/Type/Caption: Tipus
+Info/Caption: Informació
+Info/Hint: Informació sobre aquest TiddlyWiki
+LoadedModules/Caption: Mòduls carregats
+LoadedModules/Hint: Aquests són els mòduls tiddlers enllaçats a als seus tiddlers font. Els mòduls indicats en cursiva no disposen de tiddler font, amb freqüència per que s'han configurat a l'arrencada.
+Palette/Caption: Paleta
+Palette/Editor/Clone/Caption: clona paquets de connectors
+Palette/Editor/Clone/Prompt: Es recomana que cloneu aquesta paleta ombra abans d'editar-la
+Palette/Editor/Prompt: S'està editant
+Palette/Editor/Prompt/Modified: Aquesta paleta ombra ha estat modificada
+Palette/Editor/Reset/Caption: reinicia
+Palette/HideEditor/Caption: amaga l'editor
+Palette/Prompt: Paleta actual:
+Palette/ShowEditor/Caption: mostra l'editor
+Plugins/Add/Caption: Obtingueu més connectors
+Plugins/Add/Hint: Instal·leu connectors de la biblioteca oficial
+Plugins/Caption: Connectors
+Plugins/Disable/Caption: desactiva
+Plugins/Disable/Hint: Desactiva aquest connector quan la pàgina es torni a carregar
+Plugins/Disabled/Status: (desactivat)
+Plugins/Empty/Hint: Cap
+Plugins/Enable/Caption: activa
+Plugins/Enable/Hint: Activa aquest connector quan la pàgina es torni a carregar
+Plugins/Installed/Hint: Connectors que ara mateix estàn carregats:
+Plugins/Languages/Caption: Idiomes
+Plugins/Languages/Hint: Connectors del paquet de l'idioma
+Plugins/Plugins/Caption: Connectors
+Plugins/Plugins/Hint: Connectors
+Plugins/Themes/Caption: Temes
+Plugins/Themes/Hint: Connectors del tema
+Saving/Caption: Desa
+Saving/Heading: S'està desant
+Saving/TiddlySpot/Advanced/Heading: Paràmetres avançats
+Saving/TiddlySpot/BackupDir: Carpeta de les còpies de seguretat
+Saving/TiddlySpot/Backups: Còpies de seguretat
+Saving/TiddlySpot/Description: Aquests paràmetres només es fan servir quan es desa a http://tiddlyspot.com o a un servidor remot compatible
+Saving/TiddlySpot/Filename: Nom del fitxer que es pujarà
+Saving/TiddlySpot/Hint: //La URL per omisió del servidor és `http://<wikiname>.tiddlyspot.com/store.cgi` i es pot canviar per l'adreça d'un servidor personalitzat com ara `http://exemple.com/botiga.php`.//
+Saving/TiddlySpot/Password: Contrasenya
+Saving/TiddlySpot/ServerURL: URL del servidor
+Saving/TiddlySpot/UploadDir: Carpeta a la que es pujarà el fitxer
+Saving/TiddlySpot/UserName: Usuari
+Settings/AutoSave/Caption: DesaAutomàticament
+Settings/AutoSave/Disabled/Description: No desis els canvis de forma automàtica
+Settings/AutoSave/Enabled/Description: Desa els canvis de forma automàtica
+Settings/AutoSave/Hint: Desa els canvis de forma automàtica mentre s'està editant
+Settings/Caption: Paràmetres
+Settings/DefaultSidebarTab/Caption: Pestanya de la barra lateral es mostra per omisió
+Settings/DefaultSidebarTab/Hint: Indica quina pestanya de la barra lateral es mostra per omisió
+Settings/Hint: Aquests paràmetres us permeten personalitzar el comportament del TiddlyWiki.
+Settings/NavigationAddressBar/Caption: Barra d'adreces de navegació
+Settings/NavigationAddressBar/Hint: Comportament de la barra d'adreces en navegar cap a un tiddler:
+Settings/NavigationAddressBar/No/Description: No actualitzis la barra d'adreces
+Settings/NavigationAddressBar/Permalink/Description: Inclou el tiddler destí
+Settings/NavigationAddressBar/Permaview/Description: Inclou el tiddler destí i la seqùència actual
+Settings/NavigationHistory/Caption: Història de navegació
+Settings/NavigationHistory/Hint: Actualitza la història del navegador en navegar cap a un tiddler:
+Settings/NavigationHistory/No/Description: No actualitzis la cronologia
+Settings/NavigationHistory/Yes/Description: Actualitza la cronologia
+Settings/ToolbarButtons/Caption: Botons de la barra d'eines
+Settings/ToolbarButtons/Hint: Aparença del botó de la barra d'eines per omissió:
+Settings/ToolbarButtons/Icons/Description: Inclou la icona
+Settings/ToolbarButtons/Text/Description: Inclou el text
+StoryView/Caption: Vista de la cronologia
+StoryView/Prompt: Vista actual:
+Theme/Caption: Tema
+Theme/Prompt: Tema actual:
+TiddlerFields/Caption: Camps del tiddler
+TiddlerFields/Hint: Aquest és el conjunt complet de CampsDelsTiddlers utilitzats en aquest wiki (inclòs els tiddlers del sistema però sense incloure els tiddlers ombra).
+Toolbars/Caption: Barres d'eines
+Toolbars/EditToolbar/Caption: Edita la barra d'eines
+Toolbars/EditToolbar/Hint: Trieu quins botons es mostren als tiddlers en mode edició
+Toolbars/Hint: Trieu els botons de la barra d'eines que es mostren
+Toolbars/PageControls/Caption: Barres d'eines de la pàgina
+Toolbars/PageControls/Hint: Trieu quins botons es mostren a la barra d'eines de la pàgina principal
+Toolbars/ViewToolbar/Caption: Mostra la barra d'eines
+Toolbars/ViewToolbar/Hint: Trieu quins botons es mostren als tiddlers en mode vista
+Tools/Download/Full/Caption: Baixa tot el wiki

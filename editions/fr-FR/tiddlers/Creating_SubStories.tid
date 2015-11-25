@@ -1,0 +1,46 @@
+created: 20140214215718317
+fr-title: Créer des déroulés imbriqués
+modified: 20150614100236622
+tags: Learning
+title: Creating SubStories
+type: text/vnd.tiddlywiki
+
+Cet exemple montre comment créer un déroulé imbriqué avec un tiddler indépendant du déroulé principal.
+
+Voilà le code<<:>>
+
+```
+<$navigator story="MySubStoryList" history="MySubHistoryList">
+
+Cliquez sur ce lien pour commencer: HelloThere
+
+<$list filter="[list[MySubStoryList]]" history="MySubHistoryList">
+<div>
+
+! <$button message="tm-close-tiddler" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> <$view field="title"/>
+
+<$transclude/>
+</div>
+</$list>
+
+</$navigator>
+```
+
+Notez comment vous pouvez ouvrir le tiddler [[Bienvenue|HelloThere]]
+dans un déroulé imbriqué en cliquant sur le lien suivant. Les liens du déroulé imbriqué s'ouvre indépendament du déroulé principal.
+
+<$navigator story="MySubStoryList" history="MySubHistoryList">
+
+Cliquez sur ce lien pour commencer<<:>> [[Bienvenue|HelloThere]]
+
+<$list filter="[list[MySubStoryList]]" history="MySubHistoryList">
+<div>
+
+! <$button message="tm-close-tiddler" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> <$view field="title"/>
+
+<$transclude/>
+
+</div>
+</$list>
+
+</$navigator>

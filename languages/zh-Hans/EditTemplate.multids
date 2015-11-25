@@ -8,11 +8,13 @@ Body/Preview/Button/Show: 显示预览
 Field/Remove/Caption: 删除栏位
 Field/Remove/Hint: 删除栏位
 Fields/Add/Button: 添加
+Fields/Add/Dropdown/System: 系统栏位
+Fields/Add/Dropdown/User: 使用者栏位
 Fields/Add/Name/Placeholder: 栏位名称
 Fields/Add/Prompt: 添加栏位：
 Fields/Add/Value/Placeholder: 栏位内容
-Shadow/Warning: 这是默认条目，任何更改将会覆盖默认的版本。
-Shadow/OverriddenWarning: 这是修改过的默认条目，删除此条目可以还原为默认的版本。
+Shadow/Warning: 这是一个默认条目。您做的任何更改将会覆盖来自 <<pluginLink>> 插件的默认版本。
+Shadow/OverriddenWarning: 这是一个修改过的默认条目。删除此条目可以还原为 <<pluginLink>> 插件中的默认版本。
 Tags/Add/Button: 添加
 Tags/Add/Placeholder: 标签名称
 Tags/Dropdown/Caption: 标签清单

@@ -44,7 +44,7 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 		var mapping = MAPPINGS[title];
 		if(mapping) {
 			var tiddler = new $tw.Tiddler(tiddlers[title]),
-				tiddlerData = wiki.getTiddlerData(tiddler,{});
+				tiddlerData = wiki.getTiddlerDataCached(tiddler,{});
 			for(var index in mapping) {
 				var mappedTitle = mapping[index];
 				if(!tiddlers[mappedTitle] || tiddlers[mappedTitle].title !== mappedTitle) {

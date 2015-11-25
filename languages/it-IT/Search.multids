@@ -1,10 +1,17 @@
 title: $:/language/Search/
 
-Advanced/Matches: //<small><<resultCount>> Corrispondenze</small>//
+Advanced/Matches: //<small><<resultCount>> corrispondenze</small>//
+DefaultResults/Caption: Lista
 Filter/Caption: Filtro
 Filter/Hint: Cerca attraverso un [[filtro|http://tiddlywiki.com/static/Filters.html]]
-Matches: //<small><<resultCount>> Corrispondenze</small>//
+Filter/Matches: //<small><<resultCount>> corrispondenze</small>//
+Matches: //<small><<resultCount>> corrispondenze</small>//
 Shadows/Caption: Nascosti
 Shadows/Hint: Cerca frammenti nascosti
+Shadows/Matches: //<small><<resultCount>> corrispondenze</small>//
+Standard/Caption: Standard
+Standard/Hint: Cerca frammenti standard
+Standard/Matches: //<small><<resultCount>> corrispondenze</small>//
 System/Caption: Sistema
 System/Hint: Cerca frammenti di sistema
+System/Matches: //<small><<resultCount>> corrispondenze</small>//

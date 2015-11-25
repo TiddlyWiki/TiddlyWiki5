@@ -1,5 +1,5 @@
 created: 20131129090249275
-modified: 20140916140523223
+modified: 20150417155848443
 tags: [[Working with TiddlyWiki]]
 title: GettingStarted
 type: text/vnd.tiddlywiki
@@ -7,11 +7,15 @@ type: text/vnd.tiddlywiki
 \define default-platform()
 GettingStarted - $(browser-name)$
 \end
-Instructions for getting started using TiddlyWiki on the different platforms and configurations that it supports.
+Brief instructions for getting started on the different platforms and configurations that TiddlyWiki supports. See the [[A Gentle Guide to TiddlyWiki]] for a more leisurely introduction.
 
 <$set name="browser-name" value={{$:/info/browser/name}}>
 <$macrocall $name="tabs" state="$:/state/tabs/platform" tabsList="[prefix[GettingStarted - ]]" default=<<default-platform>> class="tc-vertical"/>
 </$set>
+
+Troubleshooting:
+
+* Don't attempt to use the browser ''File''/''Save'' menu option to save changes (it doesn't work)
 
 See also:
 

@@ -1,0 +1,12 @@
+created: 20150111145738451
+modified: 20150203184604000
+tags: [[Filter Operators]] [[Special Operators]] [[Selection Constructors]]
+title: editions Operator
+type: text/vnd.tiddlywiki
+caption: editions
+op-purpose: select the names of all the ~TiddlyWiki editions
+op-input: ignored
+op-parameter: none
+op-output: the name of each ~TiddlyWiki edition, in alphabetical order
+
+<<.node-only-operator>>

@@ -1,0 +1,17 @@
+title: $:/language/Help/setfield
+description: Pripraví na použitie externé tiddlery
+
+//Majte na pamäti, že tento príkaz je experimentálny a vo finálnej verzii môže byť zmenený alebo nahradený//
+
+Nastavuje určené pole skupiny tiddlerov na hodnotu výsledku do wiki prevedeného vzorového tiddlera s premennou `currentTiddler` pre daný tiddler.
+
+```
+--setfield <filter> <fieldname> <templatetitle> <rendertype>
+```
+
+Parametre sú:
+
+* ''filter'' - filter špecifikujúci tiddlery, na ktoré sa má aplikovať
+* ''fieldname'' - pole, ktoré treba modifikovať (štandardne "text")
+* ''templatetitle'' - tiddler, ktorý treba vložiť vo wiki podobe do daného poľa. Ak neexistuje alebo je prázdny, tak sa špecifikované pole vymaže
+* ''rendertype'' - typ textu, ktorý treba renderovať (štandardne "text/plain"; je možné použiť "text/html" na zahrnutie  HTML štítkov)

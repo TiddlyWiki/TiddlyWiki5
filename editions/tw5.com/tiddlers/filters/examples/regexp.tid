@@ -1,0 +1,21 @@
+created: 20150123221711000
+modified: 20150123225347000
+tags: [[regexp Operator]] [[Operator Examples]]
+title: regexp Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[!is[system]regexp[Wiki]]" "non-system tiddlers with `Wiki` in their title">>
+<<.operator-example 2 "[!is[system]regexp[(?i)Wiki]]" "non-system tiddlers with `Wiki` in their title, ignoring case">>
+<<.operator-example 3 "[!is[system]regexp[Wiki(?i)]]" "same again">>
+<<.operator-example 4 "[regexp[(?i)\.jpe?g$]]" "tiddlers with titles ending in `.jpg` or `.jpeg`, ignoring case">>
+<<.operator-example 5 "[regexp:created[^201408]]" "tiddlers created in August 2014">>
+
+The regular expression `[0-9]{2}` matches two consecutive digits. Because it contains square brackets, the way to use it with the <<.op regexp>> operator is via a [[variable|Variables]], as follows:
+
+<$macrocall
+$name="wikitext-example-without-html"
+src="""<$set name="digit-pattern" value="[0-9]{2}">
+<<list-links "[regexp:title<digit-pattern>]">>
+</$set>"""/>

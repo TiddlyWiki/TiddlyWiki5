@@ -1,0 +1,32 @@
+title: $:/core/templates/single.tiddler.window
+
+<$set name="themeTitle" value={{$:/view}}>
+
+<$set name="tempCurrentTiddler" value=<<currentTiddler>>>
+
+<$set name="currentTiddler" value={{$:/language}}>
+
+<$set name="languageTitle" value={{!!name}}>
+
+<$set name="currentTiddler" value=<<tempCurrentTiddler>>>
+
+<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
+
+<$navigator story="$:/StoryList" history="$:/HistoryList">
+
+<$transclude mode="block"/>
+
+</$navigator>
+
+</$importvariables>
+
+</$set>
+
+</$set>
+
+</$set>
+
+</$set>
+
+</$set>
+

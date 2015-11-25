@@ -1,5 +1,5 @@
 created: 20140526204527418
-modified: 20140912141318967
+modified: 20150514091409984
 tags: Features [[Working with TiddlyWiki]]
 title: KeyboardShortcuts
 type: text/vnd.tiddlywiki
@@ -9,5 +9,5 @@ Keyboard shortcut support is currently very limited but will be improved in late
 ! Editing Shortcuts
 
 |Key |Shortcut description |
-|`Ctrl-Enter` |Confirm changes to the draft tiddler containing the keyboard focus |
-|`Escape` |Abandon changes to the draft tiddler containing the keyboard focus |
+|<kbd>ctrl-enter</kbd> |Confirm changes to the draft tiddler containing the keyboard focus |
+|<kbd>escape</kbd> |Abandon changes to the draft tiddler containing the keyboard focus |

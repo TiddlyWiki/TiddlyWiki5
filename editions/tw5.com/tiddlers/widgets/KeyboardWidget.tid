@@ -1,9 +1,9 @@
+caption: keyboard
 created: 20140302192136805
-modified: 20140302192935781
+modified: 20150514091459257
 tags: Widgets
 title: KeyboardWidget
 type: text/vnd.tiddlywiki
-caption: keyboard
 
 ! Introduction
 
@@ -21,7 +21,7 @@ The content of the `<$keyboard>` widget is rendered normally. The keyboard short
 
 ! Key Strings
 
-Key strings are made up of zero or more of the modifiers ''alt'', ''shift'' or ''ctrl'' followed by the name of a key, all joined with "+" plus symbols. Key names are either the letter or digit printed on the key (eg "a" or "1"), or one of the special keys ''backspace'', ''tab'', ''enter'' or ''escape''.
+Key strings are made up of zero or more of the modifiers <kbd>alt</kbd>, <kbd>shift</kbd> or <kbd>ctrl</kbd> followed by the name of a key, all joined with "+" plus symbols. Key names are either the letter or digit printed on the key (eg "a" or "1"), or one of the special keys <kbd>backspace</kbd>, <kbd>tab</kbd>, <kbd>enter</kbd> or <kbd>escape</kbd>.
 
 For example:
 

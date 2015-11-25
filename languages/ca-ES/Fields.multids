@@ -1,0 +1,35 @@
+title: $:/language/Docs/Fields/
+
+_canonical_uri: La URI sencera d'una imatge externa al tiddler
+bag: El nom de la bossa de la que va venir un tiddler
+caption: El text que es mostrarà en una pestanya o botó
+color: El valor del color CSS associat amb un tiddler
+component: El nom del component responsable d'un [[tiddler d'avís|AlertMechanism]]
+created: La data en que es va generar el tiddler
+creator: El nom de la persona que va generar el tiddler
+current-tiddler: Utilitzat per desar la darrera còpia del tiddler a una [[cronologia|HistoryMechanism]]
+dependents: Per a un connector, llista els títols que depenen del connector
+description: El text que descriu un connector, o un diàleg modal
+draft.of: Per als tiddlers esborranys, conté el títol del tiddler del qual és un esborrany
+draft.title: Per als tiddlers esborranys, conté el títol proposat per al tiddler
+footer: El text del peu d'un assistent
+hack-to-give-us-something-to-compare-against: Un camp d'emmagatzemament temporal utilitzat a [[$:/core/templates/static.content]]
+icon: El títol del tiddler que conté la icona associada amb el tiddler
+library: Si està a "si" indica que un tiddler s'ha de sar com una biblioteca de JavaScript
+list: Una llista ordenada de títols de tiddlers associats amb un tiddler
+list-after: Si està activat, el títol del tiddler després del qual aquest tiddler s'hauria d'afegir a la llista ordenada de títols de tiddler
+list-before: Si està activat, el títol del tiddler abans del qual aquest tiddler s'hauria d'afegir a la llista ordenada de títols de tiddler, o a l'inici de la llista si aquest camp hi és però està buit
+modified: La data i hora a la que un tiddler es va modificar per darrer cop
+modifier: El títol del tiddler associat amb la persona que va modificar per darrer cop un tiddler
+name: El nom llegible pels humans associat a un tiddler connector
+plugin-priority: Un valor numèric que indica la prioritat d'un tiddler connector
+plugin-type: El tipus de connector d'un tiddler connector
+released: La data de llançament del TiddlyWiki
+revision: La revisió del tiddler que es manté al servidor
+source: La URL orígen associada a un tiddler
+subtitle: El text del subtítol d'un assistent
+tags: Una llista d'etiquetes associades a un tiddler
+text: El text del cos d'un tiddler
+title: El nom únic d'un tiddler
+type: El tipus de contingut d'un tiddler
+version: Informació de la versió d'un connector

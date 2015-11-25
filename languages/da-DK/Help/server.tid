@@ -1,7 +1,7 @@
 title: $:/language/Help/server
-description: Leverer et HTTP server interface til TiddlyWiki
+description: Leverer et HTTP serverinterface til TiddlyWiki
 
-Serveren som er indbygget i TiddlyWiki5 er meget simpel. Skønt kompatibel med TiddlyWeb har den ikke understøttelse af mange af de funktioner som er nødvendige til robust robust Internet-facing brug.
+Serveren som er indbygget i ~TiddlyWiki5 er meget simpel. Skønt kompatibel med ~TiddlyWeb har den ikke understøttelse af mange af de funktioner som er nødvendige til pålidelig Internet-facing brug.
 
 I roden, serverer den rendering af en angivet tiddler. Væk fra roden, serverer den individuelle tiddlere kodet i JSON, og understøtter de basale HTTP operationer for `GET`, `PUT`og `DELETE`.
 
@@ -34,4 +34,4 @@ Brugernavn og password kan specificeres som tomme strenge hvis du har behov for 
 --server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
 ```
 
-For at køre flere TiddlyWiki servere samtidigt, er du nødt til at sætte hver af dem til en en anden port.
+For at køre flere tiddlywikiservere samtidigt, er du nødt til at sætte hver af dem til sin egen port.

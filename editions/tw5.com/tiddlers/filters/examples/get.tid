@@ -1,0 +1,9 @@
+created: 20150118134611000
+modified: 20150124201839000
+tags: [[get Operator]] [[Operator Examples]]
+title: get Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[all[current]get[draft.of]]" "the title of the tiddler of which the current tiddler is a draft">>
+<<.operator-example 2 "[get[tags]]">>
+<<.operator-example 3 "[each[tags]get[tags]]">>

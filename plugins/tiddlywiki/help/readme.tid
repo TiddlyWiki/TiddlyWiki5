@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/help/readme
+
+This plugin provides an overlay help panel at the bottom right of the window.
+
+[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/help]]

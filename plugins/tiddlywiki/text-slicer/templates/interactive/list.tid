@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/list
+
+\define body(type:"ul")
+<$type$>
+<$list filter="""[all[current]] $(tv-exclude-filter)$ +[limit[1]]""" variable="item">
+<$list filter={{!!toc-list-filter}} template="$:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler"/>
+</$list>
+</$type$>
+\end
+
+<$macrocall $name="body" type={{!!toc-list-type}}/>

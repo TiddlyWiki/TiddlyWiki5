@@ -1,0 +1,10 @@
+created: 20150102163222184
+modified: 20150621144340024
+title: $:/plugins/tiddlywiki/railroad/readme
+type: text/vnd.tiddlywiki
+
+Ce plugin propose le widget `<$railroad>` pour générer des diagrammes chemin de fer en images SVG.
+
+De plus, le [[diagramme de notation|$:/plugins/tiddlywiki/railroad/syntax]] peut être stocké dans un tiddler dédié avec son champ `type` réglé sur `text/vnd.tiddlywiki.railroad`, ce tiddler pourra être ainsi simplement transclu partout où il sera nécessaire.
+
+Le plugin est basé sur [[une bibliothèque de Tab Atkins|https://github.com/tabatkins/railroad-diagrams]] qui a été étendue pour la rendre plus malléable, notamment par la possibilité des composant d'un diagramme de fonctionner comme des liens ou d'être transclus à partir d'autres tiddlers.

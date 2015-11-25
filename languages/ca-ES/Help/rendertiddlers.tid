@@ -1,0 +1,18 @@
+title: $:/language/Help/rendertiddlers
+description: Mostra els tiddlers que coincideixen amb el filtre indicat per ContentType
+
+Mostra un grup de tiddlers que coincideixen amb el filtre de fitxers separats indicat per ContentType (per omisió `text/html`) i extensió (per omisió `.html`).
+
+```
+--rendertiddlers <filtre> <plantilla> <ruta> [<tipus>] [<extensió>] ["noclean"]
+```
+
+Per exemple:
+
+```
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+```
+
+Per omisió, la ruta es resoldrà de forma relativa a la subcarpeta `output` de la carpeta d'edició. L'ordre `--output` es pot fer servir per dirigir la sortida a una altre carpeta.
+
+Tots els fitxers de la capeta destí es suprimiran a no ser que s'inclogui el paràmetre "noclean". La carpeta destí si no es troba es crearà de forma recursiva.

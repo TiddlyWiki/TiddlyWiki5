@@ -32,29 +32,39 @@ The exception is `skipWhiteSpace`, which just returns the position after the whi
 Look for a whitespace token. Returns null if not found, otherwise returns {type: "whitespace", start:, end:,}
 */
 exports.parseWhiteSpace = function(source,pos) {
-	var node = {
-		type: "whitespace",
-		start: pos
-	};
-	var re = /(\s)+/g;
-	re.lastIndex = pos;
-	var match = re.exec(source);
-	if(match && match.index === pos) {
-		node.end = pos + match[0].length;
-		return node;
+	var p = pos,c;
+	while(true) {
+		c = source.charAt(p);
+		if((c === " ") || (c === "\f") || (c === "\n") || (c === "\r") || (c === "\t") || (c === "\v") || (c === "\u00a0")) { // Ignores some obscure unicode spaces
+			p++;
+		} else {
+			break;
+		}
 	}
-	return null;
+	if(p === pos) {
+		return null;
+	} else {
+		return {
+			type: "whitespace",
+			start: pos,
+			end: p
+		}
+	}
 };
 
 /*
 Convenience wrapper for parseWhiteSpace. Returns the position after the whitespace
 */
 exports.skipWhiteSpace = function(source,pos) {
-	var whitespace = $tw.utils.parseWhiteSpace(source,pos);
-	if(whitespace) {
-		return whitespace.end;
+	var c;
+	while(true) {
+		c = source.charAt(pos);
+		if((c === " ") || (c === "\f") || (c === "\n") || (c === "\r") || (c === "\t") || (c === "\v") || (c === "\u00a0")) { // Ignores some obscure unicode spaces
+			pos++;
+		} else {
+			return pos;
+		}
 	}
-	return pos;
 };
 
 /*

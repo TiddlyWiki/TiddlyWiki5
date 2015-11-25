@@ -1,0 +1,16 @@
+created: 20140410103123179
+modified: 20150203191228000
+tags: [[Filter Operators]] [[Common Operators]] [[Field Operators]] [[Order Operators]] [[Negatable Operators]]
+title: sort Operator
+type: text/vnd.tiddlywiki
+caption: sort
+op-purpose: sort the input by text field
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: the name of a [[field|TiddlerFields]], defaulting to <<.field title>>
+op-parameter-name: F
+op-output: the input, sorted into ascending order by field <<.field F>>, treating field values as text
+op-neg-output: the input, likewise sorted into descending order
+
+The difference between capital and lowercase letters is ignored. Compare <<.olink sortcs>>.
+
+<<.operator-examples "sort">>

@@ -27,21 +27,26 @@ Options include:
 Notifier.prototype.display = function(title,options) {
 	options = options || {};
 	// Create the wrapper divs
-	var notification = document.createElement("div"),
+	var self = this,
+		notification = document.createElement("div"),
 		tiddler = this.wiki.getTiddler(title),
-		duration = $tw.utils.getAnimationDuration();
+		duration = $tw.utils.getAnimationDuration(),
+		refreshHandler;
 	// Don't do anything if the tiddler doesn't exist
 	if(!tiddler) {
 		return;
 	}
 	// Add classes
 	$tw.utils.addClass(notification,"tc-notification");
+	// Create the variables
+	var variables = $tw.utils.extend({currentTiddler: title},options.variables);
 	// Render the body of the notification
-	var widgetNode = this.wiki.makeTranscludeWidget(title,{parentWidget: $tw.rootWidget, document: document});
+	var widgetNode = this.wiki.makeTranscludeWidget(title,{parentWidget: $tw.rootWidget, document: document, variables: variables});
 	widgetNode.render(notification,null);
-	this.wiki.addEventListener("change",function(changes) {
+	refreshHandler = function(changes) {
 		widgetNode.refresh(changes,notification,null);
-	});
+	};
+	this.wiki.addEventListener("change",refreshHandler);
 	// Set the initial styles for the notification
 	$tw.utils.setStyle(notification,[
 		{opacity: "0"},
@@ -60,6 +65,8 @@ Notifier.prototype.display = function(title,options) {
 	]);
 	// Set a timer to remove the notification
 	window.setTimeout(function() {
+		// Remove our change event handler
+		self.wiki.removeEventListener("change",refreshHandler);
 		// Force layout and animate the notification away
 		$tw.utils.forceLayout(notification);
 		$tw.utils.setStyle(notification,[

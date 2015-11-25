@@ -1,0 +1,17 @@
+created: 20140410103123179
+modified: 20150203185745000
+tags: [[Filter Operators]] [[Field Operators]]
+title: listed Operator
+type: text/vnd.tiddlywiki
+caption: listed
+op-purpose: find the titles that list the input titles
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: the name of a [[field|TiddlerFields]], defaulting to <<.field list>>
+op-parameter-name: F
+op-output: the titles in which field <<.place F>> mentions any of the input titles
+
+<<.field F>> is assumed to be a [[title list|Title List]].
+
+Each input title is processed in turn. A list of tiddlers whose <<.place F>> field mentions it is generated (in no particular order) and [[dominantly appended|Dominant Append]] to the operator's overall output.
+
+<<.operator-examples "listed">>

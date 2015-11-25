@@ -38,6 +38,13 @@ Palette/Editor/Reset/Caption: reset
 Palette/HideEditor/Caption: hide editor
 Palette/Prompt: Current palette:
 Palette/ShowEditor/Caption: show editor
+Parsing/Caption: Parsing
+Parsing/Hint: Here you can globally disable individual wiki parser rules. Take care as disabling some parser rules can prevent ~TiddlyWiki functioning correctly (you can restore normal operation with [[safe mode|http://tiddlywiki.com/#SafeMode]] )
+Parsing/Block/Caption: Block Parse Rules
+Parsing/Inline/Caption: Inline Parse Rules
+Parsing/Pragma/Caption: Pragma Parse Rules
+Plugins/Add/Hint: Install plugins from the official library
+Plugins/Add/Caption: Get more plugins
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: disable
 Plugins/Disable/Hint: Disable this plugin when reloading page
@@ -45,9 +52,16 @@ Plugins/Disabled/Status: (disabled)
 Plugins/Empty/Hint: None
 Plugins/Enable/Caption: enable
 Plugins/Enable/Hint: Enable this plugin when reloading page
-Plugins/Language/Prompt: Languages
-Plugins/Plugin/Prompt: Plugins
-Plugins/Theme/Prompt: Themes
+Plugins/Install: install
+Plugins/Installed/Hint: Currently installed plugins:
+Plugins/Languages/Caption: Languages
+Plugins/Languages/Hint: Language pack plugins
+Plugins/OpenPluginLibrary: open plugin library
+Plugins/Plugins/Caption: Plugins
+Plugins/Plugins/Hint: Plugins
+Plugins/Reinstall: reinstall
+Plugins/Themes/Caption: Themes
+Plugins/Themes/Hint: Theme plugins
 Saving/Caption: Saving
 Saving/Heading: Saving
 Saving/TiddlySpot/Advanced/Heading: Advanced Settings
@@ -56,7 +70,7 @@ Saving/TiddlySpot/Backups: Backups
 Saving/TiddlySpot/Description: These settings are only used when saving to http://tiddlyspot.com or a compatible remote server
 Saving/TiddlySpot/Filename: Upload Filename
 Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address//
+Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address, e.g. `http://example.com/store.php`.//
 Saving/TiddlySpot/Password: Password
 Saving/TiddlySpot/ServerURL: Server URL
 Saving/TiddlySpot/UploadDir: Upload Directory
@@ -65,6 +79,9 @@ Settings/AutoSave/Caption: Autosave
 Settings/AutoSave/Disabled/Description: Do not save changes automatically
 Settings/AutoSave/Enabled/Description: Save changes automatically
 Settings/AutoSave/Hint: Automatically save changes during editing
+Settings/CamelCase/Caption: Camel Case Wiki Links
+Settings/CamelCase/Hint: You can globally disable automatic linking of ~CamelCase phrases. Requires reload to take effect
+Settings/CamelCase/Description: Enable automatic ~CamelCase linking
 Settings/Caption: Settings
 Settings/Hint: These settings let you customise the behaviour of TiddlyWiki.
 Settings/NavigationAddressBar/Caption: Navigation Address Bar
@@ -76,10 +93,31 @@ Settings/NavigationHistory/Caption: Navigation History
 Settings/NavigationHistory/Hint: Update browser history when navigating to a tiddler:
 Settings/NavigationHistory/No/Description: Do not update history
 Settings/NavigationHistory/Yes/Description: Update history
+Settings/PerformanceInstrumentation/Caption: Performance Instrumentation
+Settings/PerformanceInstrumentation/Hint: Displays performance statistics in the browser developer console. Requires reload to take effect
+Settings/PerformanceInstrumentation/Description: Enable performance instrumentation
+Settings/ToolbarButtonStyle/Caption: Toolbar Button Style
+Settings/ToolbarButtonStyle/Hint: Choose the style for toolbar buttons:
+Settings/ToolbarButtonStyle/Styles/Borderless: Borderless
+Settings/ToolbarButtonStyle/Styles/Boxed: Boxed
+Settings/ToolbarButtonStyle/Styles/Rounded: Rounded
 Settings/ToolbarButtons/Caption: Toolbar Buttons
 Settings/ToolbarButtons/Hint: Default toolbar button appearance:
 Settings/ToolbarButtons/Icons/Description: Include icon
 Settings/ToolbarButtons/Text/Description: Include text
+Settings/DefaultSidebarTab/Caption: Default Sidebar Tab
+Settings/DefaultSidebarTab/Hint: Specify which sidebar tab is displayed by default
+Settings/LinkToBehaviour/Caption: Tiddler Opening Behaviour
+Settings/LinkToBehaviour/InsideRiver/Hint: Navigation from //within// the story river
+Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation from //outside// the story river
+Settings/LinkToBehaviour/OpenAbove: Open above the current tiddler
+Settings/LinkToBehaviour/OpenBelow: Open below the current tiddler
+Settings/LinkToBehaviour/OpenAtTop: Open at the top of the story river
+Settings/LinkToBehaviour/OpenAtBottom: Open at the bottom of the story river
+Settings/TitleLinks/Caption: Tiddler Titles
+Settings/TitleLinks/Hint: Optionally display tiddler titles as links
+Settings/TitleLinks/No/Description: Do not display tiddler titles as links
+Settings/TitleLinks/Yes/Description: Display tiddler titles as links
 StoryView/Caption: Story View
 StoryView/Prompt: Current view:
 Theme/Caption: Theme
@@ -91,8 +129,7 @@ Toolbars/EditToolbar/Caption: Edit Toolbar
 Toolbars/EditToolbar/Hint: Choose which buttons are displayed for tiddlers in edit mode
 Toolbars/Hint: Select which toolbar buttons are displayed
 Toolbars/PageControls/Caption: Page Toolbar
-Toolbars/PageControls/Hint: Choose which buttons are displayed on the main page toolbar  
+Toolbars/PageControls/Hint: Choose which buttons are displayed on the main page toolbar
 Toolbars/ViewToolbar/Caption: View Toolbar
 Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode
 Tools/Download/Full/Caption: Download full wiki
-

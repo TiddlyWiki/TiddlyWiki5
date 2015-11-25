@@ -1,0 +1,21 @@
+caption: Listes groupées
+created: 20150106180000000
+fr-title: Listes groupées
+modified: 20150619151106553
+tags: ListWidget
+title: GroupedLists
+type: text/vnd.tiddlywiki
+
+Les onglets suivants du menu latéral offrent un exemple de listes groupées créées par imbrication.
+
+!! Option 'types' (de l'onglet plus)
+
+Pour l'option [[Types|$:/core/ui/MoreSideBar/Types]], la sortie de liste filtrée sélectionne chaque valeur trouvée dans le champ `type`, comme exposé çi-dessous. Le filtre d'entrée filtre les tiddlers (non-système) de ce type.
+
+<<tw-code "$:/core/ui/MoreSideBar/Types">>
+
+!! Onglet 'récent'
+
+Dans l'onglet [[Récent|$:/core/ui/SideBar/Recent]] la liste est générée en utilisant la macro <<.mlink timeline>>. Ici, la sortie de liste filtre chaque jour trouvé dans le champ `modifié`, tandis que l'entrée de liste filtre tous les tiddlers datés du même jour dans le champ `modifié`.
+
+<<tw-code-link "$:/core/macros/timeline">>

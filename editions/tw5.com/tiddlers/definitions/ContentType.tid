@@ -1,5 +1,5 @@
 created: 20130828185900000
-modified: 20140912145359306
+modified: 20150221120839000
 tags: Definitions
 title: ContentType
 type: text/vnd.tiddlywiki
@@ -22,10 +22,8 @@ In TiddlyWiki, the `type` field gives the content type to apply to the main `tex
 |~|PNG image |image/png|
 |~|Structured Vector Graphics image |image/svg+xml|
 |^''Text''|HTML markup |text/html|
-|~|Cascading Stylesheet text |text/css|
-|~|Comma-separated values |text/csv|
+|~|[[CSS|Cascading Style Sheets]] stylesheet |text/css|
+|~|[[Comma-separated values|Comma-Separated Values]] |text/csv|
 |~|Plain text |text/plain|
 |~|~TiddlyWiki 5 |text/vnd.tiddlywiki|
 |~|~TiddlyWiki Classic |text/x-tiddlywiki|
-
-

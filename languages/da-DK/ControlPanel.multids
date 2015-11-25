@@ -4,94 +4,127 @@ Advanced/Caption: Avanceret
 Advanced/Hint: Intern information om denne TiddlyWiki
 Appearance/Caption: Design
 Appearance/Hint: Måder at tilpasse udseendet af din TiddlyWiki.
-Basics/AnimDuration/Prompt: Animations varighed
+Basics/AnimDuration/Prompt: Animationsvarighed
 Basics/Caption: Basis
-Basics/DefaultTiddlers/BottomHint: Brug &#91;&#91;dobbelt  kantede parenteser&#93;&#93; for titler med mellemrum. Eller du kan vælge at <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">fastholde de aktuelt åbne tiddlere</$button>
-Basics/DefaultTiddlers/Prompt: Standard tiddlere:
+Basics/DefaultTiddlers/BottomHint: Brug &#91;&#91;dobbelt  firkantede parenteser&#93;&#93; for titler med mellemrum. Eller du kan vælge at <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">gemme de aktuelt åbne tiddlere</$button>
+Basics/DefaultTiddlers/Prompt: Standardtiddlere:
 Basics/DefaultTiddlers/TopHint: Vælg hvilke tiddlere der vises ved opstart:
 Basics/Language/Prompt: Hallo! Aktuelt sprog:
-Basics/NewJournal/Tags/Prompt: Tags for ny journal tiddlere
-Basics/NewJournal/Title/Prompt: Titel på ny journal tiddlere
-Basics/OverriddenShadowTiddlers/Prompt: Antal overskrevne skygge tiddlere:
-Basics/ShadowTiddlers/Prompt: Antal skygge tiddlere:
+Basics/NewJournal/Tags/Prompt: Tags for nye journaltiddlere
+Basics/NewJournal/Title/Prompt: Titel på nye journaltiddlere
+Basics/OverriddenShadowTiddlers/Prompt: Antal overskrevne skyggetiddlere:
+Basics/ShadowTiddlers/Prompt: Antal skyggetiddlere:
 Basics/Subtitle/Prompt: Undertitel
-Basics/SystemTiddlers/Prompt: Antal system tiddler:
+Basics/SystemTiddlers/Prompt: Antal systemtiddler:
 Basics/Tags/Prompt: Antal tags:
 Basics/Tiddlers/Prompt: Antal tiddlere:
 Basics/Title/Prompt: Titel på denne ~TiddlyWiki:
 Basics/Username/Prompt: Brugernavn til at signere redigeringer:
 Basics/Version/Prompt: ~TiddlyWiki version:
-EditorTypes/Caption: Editor typer
+EditorTypes/Caption: Editortyper
 EditorTypes/Editor/Caption: Editor
 EditorTypes/Hint: Disse tiddlere bestemmer hvilken editor der bruges til at redigere specifikke tiddler typer.
 EditorTypes/Type/Caption: Type
 Info/Caption: Info
 Info/Hint: Information om denne TiddlyWiki
 LoadedModules/Caption: Indlæste moduler
-LoadedModules/Hint: Dette er de aktuelt indlæste tiddler moduler linked til deres kilde tiddlere. Alle moduler med kursiv mangler en kilde tiddler, typisk fordi de blev sat op under boot processen.
+LoadedModules/Hint: Dette er de aktuelt indlæste tiddlermoduler der linkes til deres kildetiddlere. Alle moduler med kursiv mangler en kildetiddler, typisk fordi de blev sat op under bootprocessen.
 Palette/Caption: Palette
 Palette/Editor/Clone/Caption: klon
-Palette/Editor/Clone/Prompt: Det anbefales at du kloner denne skygge palette før redigering af den
+Palette/Editor/Clone/Prompt: Det anbefales at du kloner denne skyggepalette før du redigerer den
 Palette/Editor/Prompt: Redigering
-Palette/Editor/Prompt/Modified: Denne skygge palette er blevet ændret
+Palette/Editor/Prompt/Modified: Denne skyggepalette er blevet ændret
 Palette/Editor/Reset/Caption: nulstil
 Palette/HideEditor/Caption: skjul editor
 Palette/Prompt: Aktuel palette:
 Palette/ShowEditor/Caption: vis editor
-Plugins/Caption: Plugins
+Parsing/Block/Caption: Blok Parse regler
+Parsing/Hint: Her kan du globalt slå individuelle wiki parser regler fra. Vær påpasselig, da det at slå nogle parser regler fra, kan hindre ~TiddlyWiki i at fungere korrekt (du kan genskabe  normal funktion med [[safe mode|http://tiddlywiki.com/#SafeMode]] )
+Parsing/Inline/Caption: Inline Parse regler
+Parsing/Pragma/Caption: Pragma Parse regler
+Plugins/Add/Caption: Få flere udvidelser
+Plugins/Add/Hint: Installér udvidelser fra det officielle bibliotek
+Plugins/Caption: Udvidelser
 Plugins/Disable/Caption: slå fra
-Plugins/Disable/Hint: Slå dette plugin fra, når siden genindlæses
+Plugins/Disable/Hint: Slå denne udvidelse fra, når siden genindlæses
 Plugins/Disabled/Status: (slået fra)
 Plugins/Empty/Hint: Ingen
 Plugins/Enable/Caption: Slå til
-Plugins/Enable/Hint: Slå dette plugin til, når siden genindlæses
+Plugins/Enable/Hint: Slå denne udvidelse til, når siden genindlæses
+Plugins/Installed/Hint: Aktuelt installerede udvidelser:
 Plugins/Language/Prompt: Sprog
-Plugins/Plugin/Prompt: Plugins 
+Plugins/Languages/Caption: Sprog
+Plugins/Languages/Hint: Sprogpakkeudvidelser
+Plugins/Plugin/Prompt: Udvidelser 
+Plugins/Plugins/Caption: Udvidelser
+Plugins/Plugins/Hint: Udvidelser
 Plugins/Theme/Prompt: Temaer
+Plugins/Themes/Caption: Temaer
+Plugins/Themes/Hint: Tema udvidelser
 Saving/Caption: Gemning
 Saving/Heading: Gemning
 Saving/TiddlySpot/Advanced/Heading: Avancerede indstillinger
-Saving/TiddlySpot/BackupDir: Backup folder
+Saving/TiddlySpot/BackupDir: Backupmappe
 Saving/TiddlySpot/Backups: Backups 
-Saving/TiddlySpot/Description: Disse indstillinger bruges kun, når der gemmes til http://tiddlyspot.com eller en kompatibel fjern server
+Saving/TiddlySpot/Description: Disse indstillinger bruges kun, når der gemmes til http://tiddlyspot.com eller en kompatibel server
 Saving/TiddlySpot/Filename: Upload filnavn
 Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //The server URL forfalder til `http://<wikiname>.tiddlyspot.com/store.cgi` og kan ændres til en tilpasset  server adresse//
-Saving/TiddlySpot/Password: Adgangsord
+Saving/TiddlySpot/Hint: //The server URL forfalder til `http://<wikiname>.tiddlyspot.com/store.cgi` og kan ændres til en tilpasset  serveradresse//
+Saving/TiddlySpot/Password: Adgangskode
 Saving/TiddlySpot/ServerURL: Server URL
-Saving/TiddlySpot/UploadDir: Upload folder
-Saving/TiddlySpot/UserName: Wiki navn
-Settings/AutoSave/Caption: Automatisk gem
+Saving/TiddlySpot/UploadDir: Uploadmappe
+Saving/TiddlySpot/UserName: Wikinavn
+Settings/AutoSave/Caption: Automatisk gemning
 Settings/AutoSave/Disabled/Description: Gem ikke ændringer automatisk
 Settings/AutoSave/Enabled/Description: Gem ændringer atomatisk
 Settings/AutoSave/Hint: Gem automatisk ændringer i løbet af redigeringen
+Settings/CamelCase/Description: Slå automatisk ~CamelCase linking til
+Settings/CamelCase/Hint: Du kan globalt slå automatisk linking af ~CamelCase fraser fra. Kræver genindlæsning for at tage effekt.
 Settings/Caption: Indstillinger
-Settings/Hint: Disse indstillinger lader dig tilpasse din  TiddlyWiki's adfærd.
-Settings/NavigationAddressBar/Caption: Navigation adresse linie
-Settings/NavigationAddressBar/Hint: Opførsel i browserens adressse linie ved navigering til en tiddler:
-Settings/NavigationAddressBar/No/Description: Opdatér ikke adresse linien
-Settings/NavigationAddressBar/Permalink/Description: Inkludér mål tiddleren
-Settings/NavigationAddressBar/Permaview/Description: Inkludér mål tiddleren og den aktuelle historie sekvens
-Settings/NavigationHistory/Caption: Navigations historie
-Settings/NavigationHistory/Hint: Opdatér browser historik, når der navigeres til en tiddler:
+Settings/DefaultSidebarTab/Caption: Standard Sidepanelsfane
+Settings/DefaultSidebarTab/Hint: Specificér hvilken sidepanelsfane der vises som standard
+Settings/Hint: Disse indstillinger lader dig tilpasse din  TiddlyWikis opførsel.
+Settings/LinkToBehaviour/Caption: Tiddler åbnings adfærd
+Settings/LinkToBehaviour/InsideRiver/Hint: Navigation fra //indefra// the story river
+Settings/LinkToBehaviour/OpenAbove: Åben ovenover den aktuelle tiddler
+Settings/LinkToBehaviour/OpenAtBottom: Åbn i bunden af story river
+Settings/LinkToBehaviour/OpenAtTop: Åbn i toppen af story river
+Settings/LinkToBehaviour/OpenBelow: Åbn nedenunder den aktuelle tiddler
+Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation fra //udenfor// the story river
+Settings/NavigationAddressBar/Caption: Navigationsadressefelt
+Settings/NavigationAddressBar/Hint: Opførsel i browserens adresssefelt ved navigering til en tiddler:
+Settings/NavigationAddressBar/No/Description: Opdatér ikke adressefeltet
+Settings/NavigationAddressBar/Permalink/Description: Inkludér måltiddleren
+Settings/NavigationAddressBar/Permaview/Description: Inkludér måltiddleren og den aktuelle historiesekvens
+Settings/NavigationHistory/Caption: Navigationshistorie
+Settings/NavigationHistory/Hint: Opdatér browserhistorikken, når der navigeres til en tiddler:
 Settings/NavigationHistory/No/Description: Opdatér ikke historie
 Settings/NavigationHistory/Yes/Description: Opdatér historik
-Settings/ToolbarButtons/Caption: Værktøjslinie knapper
-Settings/ToolbarButtons/Hint: Standard udseende af værktøjslinie knap:
+Settings/TitleLinks/Caption: Tiddler titler
+Settings/TitleLinks/Hint: Valgfri visning af tiddler tiddler som links
+Settings/TitleLinks/No/Description: Vis ikke tiddler titler som links
+Settings/TitleLinks/Yes/Description: Vis tiddler titler som links
+Settings/ToolbarButtons/Caption: Værktøjslinieknapper
+Settings/ToolbarButtons/Hint: Standard udseende af værktøjslinieknap:
 Settings/ToolbarButtons/Icons/Description: Inkludér ikon
 Settings/ToolbarButtons/Text/Description: Inkludér tekst
-StoryView/Caption: Historie visning
+Settings/ToolbarButtonStyle/Caption: Værktøjslinie knap stil
+Settings/ToolbarButtonStyle/Hint: Vælg stil for værktøjslinie knapper:
+Settings/ToolbarButtonStyle/Styles/Borderless: Rammeløs
+Settings/ToolbarButtonStyle/Styles/Boxed: Indrammet
+Settings/ToolbarButtonStyle/Styles/Rounded: Afrundet
+StoryView/Caption: Historievisning
 StoryView/Prompt: Aktuel visning:
 Theme/Caption: Tema
 Theme/Prompt: Aktuelt tema
 TiddlerFields/Caption: Tiddler felter
-TiddlerFields/Hint: Dette er det fulde sæt af TiddlerFelter i brug i denne wiki (inklusiv system tiddlere men eksklusiv skygge tiddlere).
+TiddlerFields/Hint: Dette er alle de TiddlerFelter der er i brug i denne wiki (inklusive systemtiddlere men eksklusive skyggetiddlere).
 Toolbars/Caption: Værktøjslinier
-Toolbars/EditToolbar/Caption: Redigerings værktøjslinie
-Toolbars/EditToolbar/Hint: Vælg hvilke knapper der vises i tiddlere i redigerings tilstand
-Toolbars/Hint: Vælg hvilke værktøjslinie knapper der vises
-Toolbars/PageControls/Caption: Side værktøjslinie
-Toolbars/PageControls/Hint: Vælg hvilke knapper der vises på hoved side værktøjslinien
-Toolbars/ViewToolbar/Caption: Betragtnings værktøjslinie
-Toolbars/ViewToolbar/Hint: Vælg hvilke knapper der vises i tiddlere i betragtnings tilstand
-Tools/Download/Full/Caption: Hent fuld wiki
+Toolbars/EditToolbar/Caption: Redigeringsværktøjslinie
+Toolbars/EditToolbar/Hint: Vælg hvilke knapper der vises i tiddlere i redigeringstilstand
+Toolbars/Hint: Vælg hvilke værktøjslinieknapper der vises
+Toolbars/PageControls/Caption: Sideværktøjslinie
+Toolbars/PageControls/Hint: Vælg hvilke knapper der vises på hovedsideværktøjslinien
+Toolbars/ViewToolbar/Caption: Læseværktøjslinie
+Toolbars/ViewToolbar/Hint: Vælg hvilke knapper der vises i tiddlere i læsetilstand
+Tools/Download/Full/Caption: Hent hele wikien

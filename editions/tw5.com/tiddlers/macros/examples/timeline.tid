@@ -1,0 +1,8 @@
+created: 20150221213650000
+modified: 20150221224634000
+tags: [[timeline Macro]] [[Macro Examples]]
+title: timeline Macro (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1" eg="""<<timeline format:"DD/MM/YYYY">>"""/>
+<$macrocall $name=".example" n="2" eg="""<<timeline limit:30 subfilter:"tag[Definitions]" format:"DD/MM/YYYY">>"""/>

@@ -3,18 +3,13 @@ tags: $:/tags/SearchResults
 caption: {{$:/language/Search/DefaultResults/Caption}}
 
 \define searchResultList()
-<$set name="resultCount" value="""<$count filter="[!is[system]search{$(searchTiddler)$}]"/>""">
-
-{{$:/language/Search/Matches}}
-
-</$set>
-
-//<small>Title matches:</small>//
+//<small>{{$:/language/Search/Matches/Title}}</small>//
 
 <$list filter="[!is[system]search:title{$(searchTiddler)$}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
 
-//<small>All matches:</small>//
+//<small>{{$:/language/Search/Matches/All}}</small>//
 
 <$list filter="[!is[system]search{$(searchTiddler)$}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+
 \end
 <<searchResultList>>

@@ -177,10 +177,11 @@ Optional.prototype.toSvg = function() {
 	return railroad.Optional(this.child.toSvg(), this.normal ? undefined : "skip");
 }
 
-var OptionalRepeated = function(content,separator,normal) {
+var OptionalRepeated = function(content,separator,normal,wantArrow) {
 	this.initialiseWithChild("OptionalRepeated",content);
 	this.separator = toSingleChild(separator);
 	this.normal = normal;
+	this.wantArrow = wantArrow;
 };
 
 OptionalRepeated.prototype = new Component();
@@ -189,12 +190,13 @@ OptionalRepeated.prototype.toSvg = function() {
 	// Call ZeroOrMore(component,separator,"skip")
 	var separatorSvg = this.separator ? this.separator.toSvg() : null;
 	var skip = this.normal ? undefined : "skip";
-	return railroad.ZeroOrMore(this.child.toSvg(),separatorSvg,skip);
+	return railroad.ZeroOrMore(this.child.toSvg(),separatorSvg,skip,this.wantArrow);
 }
 
-var Repeated = function(content,separator) {
+var Repeated = function(content,separator,wantArrow) {
 	this.initialiseWithChild("Repeated",content);
 	this.separator = toSingleChild(separator);
+	this.wantArrow = wantArrow;
 };
 
 Repeated.prototype = new Component();
@@ -202,7 +204,7 @@ Repeated.prototype = new Component();
 Repeated.prototype.toSvg = function() {
 	// Call OneOrMore(component,separator)
 	var separatorSvg = this.separator ? this.separator.toSvg() : null;
-	return railroad.OneOrMore(this.child.toSvg(),separatorSvg);
+	return railroad.OneOrMore(this.child.toSvg(),separatorSvg,this.wantArrow);
 }
 
 var Link = function(content,options) {
@@ -234,9 +236,11 @@ var Root = function(content) {
 
 Root.prototype = new Component();
 
-Root.prototype.toSvg = function() {
-	// Call Diagram(component1,component2,...)
-	return railroad.Diagram.apply(null, this.getSvgOfChildren());
+Root.prototype.toSvg = function(options) {
+	var args = this.getSvgOfChildren();
+	args.unshift(options);
+	// Call Diagram(options,component1,component2,...)
+	return railroad.Diagram.apply(null,args);
 }
 
 var Sequence = function(content) {
@@ -247,7 +251,7 @@ Sequence.prototype = new Component();
 
 Sequence.prototype.toSvg = function() {
 	// Call Sequence(component1,component2,...)
-	return railroad.Sequence.apply(null, this.getSvgOfChildren());
+	return railroad.Sequence.apply(null,this.getSvgOfChildren());
 }
 
 var Choice = function(content,normal) {
@@ -264,7 +268,7 @@ Choice.prototype.toSvg = function() {
 	// Call Choice(normal,component1,component2,...)
 	var args = this.getSvgOfChildren();
 	args.unshift(this.normal);
-	return railroad.Choice.apply(null, args);
+	return railroad.Choice.apply(null,args);
 }
 
 /////////////////////////// Exports

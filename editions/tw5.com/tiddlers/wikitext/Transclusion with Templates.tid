@@ -1,5 +1,5 @@
 created: 20141129210304238
-modified: 20141209142028738
+modified: 20150220161405000
 tags: [[Transclusion in WikiText]]
 title: Transclusion with Templates
 caption: With Templates
@@ -22,9 +22,9 @@ Hello, my title is A
 @@
 <<<
 
-The style is applied as expected, but the title is wrong: we want ``{{!!title}}`` to refer to the target tiddler B, and not the source tiddler A. 
+The style is applied as expected, but the title is wrong: we want ``{{!!title}}`` to refer to the target tiddler B, and not the source tiddler A.
 
-The solution is to use a \\template\\. In this case, the source tiddler A is called the [[TemplateTiddler|TemplateTiddlers]], and it is //applied// to tiddler B using the notation ``{{||A}}``. The difference is that any TextReference which does not refer explicitly to a specific tiddler is applied to the [[current tiddler|CurrentTiddler]], that is, the target tiddler. As a result, tiddler B now looks as expected:
+The solution is to use a //template//. In this case, the source tiddler A is called the [[TemplateTiddler|TemplateTiddlers]], and it is //applied// to tiddler B using the notation ``{{||A}}``. The difference is that any TextReference which does not refer explicitly to a specific tiddler is applied to the [[current tiddler|Current Tiddler]], that is, the target tiddler. As a result, tiddler B now looks as expected:
 
 <<<
 @@background-color:yellow;
@@ -36,7 +36,7 @@ Hello, my title is B
 
 Transcluding via a template is like applying a mask: assuming that the source tiddler contains generic references (like eye holes in a mask), these will be replaced with the target tiddlers values (like the eyes of the person who wears the mask).
 
-A template can be applied to any tiddler, not necessarily the current one. This is achieved using the full notation ``{{<target>||<template>}}``. The default ``<target>`` is the [[current tiddler|CurrentTiddler]] (this is what we used in the above example). 
+A template can be applied to any tiddler, not necessarily the current one. This is achieved using the full notation ``{{<target>||<template>}}``. The default ``<target>`` is the [[current tiddler|Current Tiddler]] (this is what we used in the above example).
 
 ! Examples
 
@@ -57,4 +57,4 @@ See also:
 * TextReference
 * TemplateTiddlers
 * TranscludeWidget
-* CurrentTiddler
+* [[Current Tiddler]]

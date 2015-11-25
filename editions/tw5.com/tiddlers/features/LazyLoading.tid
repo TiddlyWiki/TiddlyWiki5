@@ -1,5 +1,5 @@
 created: 20140206214608586
-modified: 20140912141710950
+modified: 20151105122712982
 tags: Features
 title: LazyLoading
 type: text/vnd.tiddlywiki
@@ -8,17 +8,25 @@ Ordinarily with TiddlyWiki, the full content of all tiddlers is embedded into th
 
 Lazy loading can be used in two configurations:
 
-* When running [[TiddlyWiki on Node.js]], image tiddlers can be subject to lazy loading
+* When running [[TiddlyWiki on Node.js]], just image tiddlers or all non-system tiddlers can be subject to lazy loading
 * When running [[TiddlyWiki in the Sky for TiddlyWeb]], all tiddlers are subject to lazy loading
 
 See the LazyLoadingMechanism for details of how lazy loading is implemented.
 
 ! Lazy loading under Node.js
 
-To run TiddlyWiki with lazy loading for images, use this alternative ServerCommand to start the server:
+To start TiddlyWiki with lazy loading for image tiddlers use this command:
+
 
 ```
 tiddlywiki --server 8080 $:/core/save/lazy-images
+```
+
+To apply lazy loading to all non-system tiddlers use this command:
+
+
+```
+tiddlywiki --server 8080 $:/core/save/lazy-all
 ```
 
 ! Lazy loading under TiddlyWeb

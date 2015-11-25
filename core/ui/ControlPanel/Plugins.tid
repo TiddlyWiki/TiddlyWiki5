@@ -3,20 +3,25 @@ tags: $:/tags/ControlPanel
 caption: {{$:/language/ControlPanel/Plugins/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Plugins/
+
 \define popup-state-macro()
 $(qualified-state)$-$(currentTiddler)$
 \end
+
 \define tabs-state-macro()
 $(popup-state)$-$(pluginInfoType)$
 \end
+
 \define plugin-icon-title()
 $(currentTiddler)$/icon
 \end
+
 \define plugin-disable-title()
 $:/config/Plugins/Disabled/$(currentTiddler)$
 \end
+
 \define plugin-table-body(type,disabledMessage)
-<div class="tc-plugin-info-chunk">
+<div class="tc-plugin-info-chunk tc-small-icon">
 <$reveal type="nomatch" state=<<popup-state>> text="yes">
 <$button class="tc-btn-invisible tc-btn-dropdown" set=<<popup-state>> setTo="yes">
 {{$:/core/images/right-arrow}}
@@ -34,17 +39,18 @@ $:/config/Plugins/Disabled/$(currentTiddler)$
 </$transclude>
 </div>
 <div class="tc-plugin-info-chunk">
-<div>
+<h1>
 ''<$view field="description"><$view field="title"/></$view>'' $disabledMessage$
-</div>
-<div>
+</h1>
+<h2>
 <$view field="title"/>
-</div>
-<div>
-<$view field="version"/>
-</div>
+</h2>
+<h2>
+<div><em><$view field="version"/></em></div>
+</h2>
 </div>
 \end
+
 \define plugin-table(type)
 <$set name="qualified-state" value=<<qualify "$:/state/plugin-info">>>
 <$list filter="[!has[draft.of]plugin-type[$type$]sort[description]]" emptyMessage=<<lingo "Empty/Hint">>>
@@ -61,6 +67,7 @@ $:/config/Plugins/Disabled/$(currentTiddler)$
 </$reveal>
 <$reveal type="match" text="yes" state=<<popup-state>>>
 <div class="tc-plugin-info-dropdown">
+<div class="tc-plugin-info-dropdown-body">
 <$list filter="[all[current]] -[[$:/core]]">
 <div style="float:right;">
 <$reveal type="nomatch" state=<<plugin-disable-title>> text="yes">
@@ -82,20 +89,17 @@ $:/config/Plugins/Disabled/$(currentTiddler)$
 No information provided
 </$reveal>
 </div>
+</div>
 </$reveal>
 </$set>
 </$list>
 </$set>
 \end
 
-! <<lingo Plugin/Prompt>>
+<$button message="tm-modal" param="$:/core/ui/ControlPanel/Modals/AddPlugins" tooltip={{$:/language/ControlPanel/Plugins/Add/Hint}} class="tc-btn-big-green" style="background:blue;">
+{{$:/core/images/download-button}} <<lingo Add/Caption>>
+</$button>
 
-<<plugin-table plugin>>
+<<lingo Installed/Hint>>
 
-! <<lingo Theme/Prompt>>
-
-<<plugin-table theme>>
-
-! <<lingo Language/Prompt>>
-
-<<plugin-table language>>
+<<tabs "[[$:/core/ui/ControlPanel/Plugins/Installed/Plugins]] [[$:/core/ui/ControlPanel/Plugins/Installed/Themes]] [[$:/core/ui/ControlPanel/Plugins/Installed/Languages]]" "$:/core/ui/ControlPanel/Plugins/Installed/Plugins">>

@@ -1,0 +1,16 @@
+title: $:/language/Help/load
+description: Aperi notas de un file
+
+Aperi notas de files 2.x.x TiddlyWiki (`.html`), `.tiddler`, `.tid`, `.json` o altere files 
+
+```
+--aperi <filepath>
+```
+
+Pro aperir notas de un file codificate TiddlyWiki on debe primo indicar le conrasigno con le commando PasswordCommand. Per exemplo:
+
+```
+tiddlywiki ./MyWiki --password pa55w0rd --aperi_mi_wiki_codificate.html
+```
+
+Nota que TiddlyWiki non va aperir un version anterior de un extension ja activate.

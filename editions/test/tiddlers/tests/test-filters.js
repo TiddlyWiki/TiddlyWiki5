@@ -33,13 +33,13 @@ describe("Filter tests", function() {
 				tiddler: new $tw.Tiddler({title: "TiddlerSeventh",
 					text: "",
 					list: "TiddlerOne [[Tiddler Three]] [[a fourth tiddler]] MissingTiddler",
-					tags: []
+					tags: ["one"]
 				}),
 			},
 			"Tiddler8": {
 				tiddler: new $tw.Tiddler({title: "Tiddler8",
 					text: "Tidd",
-					tags: [],
+					tags: ["one"],
 					"test-field": "JoeBloggs"
 				})
 			}
@@ -51,12 +51,14 @@ describe("Filter tests", function() {
 		title: "TiddlerOne",
 		text: "The quick brown fox in $:/TiddlerTwo",
 		tags: ["one"],
+		authors: "Joe Bloggs",
 		modifier: "JoeBloggs",
 		modified: "201304152222"});
 	wiki.addTiddler({
 		title: "$:/TiddlerTwo",
 		text: "The rain in Spain\nfalls mainly on the plain and [[a fourth tiddler]]",
 		tags: ["two"],
+		authors: "[[John Doe]]",
 		modifier: "JohnDoe",
 		modified: "201304152211"});
 	wiki.addTiddler({
@@ -162,11 +164,11 @@ describe("Filter tests", function() {
 	});
 
 	it("should handle the tagging operator", function() {
-		expect(wiki.filterTiddlers("[[one]tagging[]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
-		expect(wiki.filterTiddlers("[[one]tagging[]]").join(",")).toBe("Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[[one]tagging[]sort[title]]").join(",")).toBe("Tiddler Three,Tiddler8,TiddlerOne,TiddlerSeventh");
+		expect(wiki.filterTiddlers("[[one]tagging[]]").join(",")).toBe("Tiddler Three,TiddlerOne,TiddlerSeventh,Tiddler8");
 		expect(wiki.filterTiddlers("[[two]tagging[]sort[title]]").join(",")).toBe("$:/TiddlerFive,$:/TiddlerTwo,Tiddler Three");
 		var fakeWidget = {getVariable: function() {return "one";}};
-		expect(wiki.filterTiddlers("[all[current]tagging[]sort[title]]",fakeWidget).join(",")).toBe("Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[all[current]tagging[]]",fakeWidget).join(",")).toBe("Tiddler Three,TiddlerOne,TiddlerSeventh,Tiddler8");
 	});
 
 	it("should handle the untagged operator", function() {
@@ -217,6 +219,8 @@ describe("Filter tests", function() {
 
 	it("should handle the each operator", function() {
 		expect(wiki.filterTiddlers("[each[modifier]sort[title]]").join(",")).toBe("$:/TiddlerTwo,TiddlerOne");
+		expect(wiki.filterTiddlers("[each:list-item[tags]sort[title]]").join(",")).toBe("one,two");
+		expect(wiki.filterTiddlers("[each:list-item[authors]sort[title]]").join(",")).toBe("Bloggs,Joe,John Doe");
 	});
 
 	it("should handle the eachday operator", function() {

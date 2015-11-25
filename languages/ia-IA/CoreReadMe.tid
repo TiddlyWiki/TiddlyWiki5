@@ -1,0 +1,8 @@
+title: $:/core/readme
+
+Iste addition contine componente nuclear del TiddlyWiki, includente:
+
+* Modulos de codice JavaScript
+* Icones
+* Modellos necessari pro crear le interfacie de usator del TiddlyWiki
+* Traductiones in anglese britannic (en-GB) de messages traducibile per usar le nucleo

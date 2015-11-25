@@ -1,0 +1,14 @@
+title: $:/language/Filters/
+
+AllTags: 시스템 태그를 제외한 모든 태그
+AllTiddlers: 시스템 태그를 제외한 모든 티들러
+Drafts: 초안 티들러
+Missing: 없는 티들러
+Orphans: 외톨이 티들러
+OverriddenShadowTiddlers: 덮어쓴 섀도우 티들러
+RecentSystemTiddlers: 시스템 티들러를 포함하여, 최근에 수정된 티들러
+RecentTiddlers: 최근에 수정된 티들러
+ShadowTiddlers: 섀도우 티들러
+SystemTags: 시스템 태그
+SystemTiddlers: 시스템 티들러
+TypedTiddlers: 위키 텍스트가 없는 티들러

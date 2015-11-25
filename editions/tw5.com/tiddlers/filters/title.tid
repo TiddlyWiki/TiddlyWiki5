@@ -1,0 +1,19 @@
+created: 20140410103123179
+modified: 20150203191749000
+tags: [[Filter Operators]] [[Common Operators]] [[Selection Constructors]] [[Negatable Operators]]
+title: title Operator
+type: text/vnd.tiddlywiki
+caption: title
+op-purpose: select a single title
+op-input: ignored
+op-neg-input: a [[selection of titles|Title Selection]]
+op-parameter: a tiddler title
+op-parameter-name: T
+op-output: a selection containing only <<.place T>>
+op-neg-output: the input, but with tiddler <<.place T>> filtered out if it exists in the wiki
+
+`[title[An Example]]` can be shortened to `[[An Example]]`, because <<.op title>> is the default filter operator.
+
+<<.op title>> is a [[constructor|Selection Constructors]] (except in the form `!title`), but <<.olink2 "field:title" field>> is a [[modifier|Selection Constructors]].
+
+<<.operator-examples "title">>

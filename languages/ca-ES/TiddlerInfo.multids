@@ -1,0 +1,21 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: Avançat
+Advanced/PluginInfo/Empty/Hint: cap
+Advanced/PluginInfo/Heading: Detalls del connector
+Advanced/PluginInfo/Hint: Aquest connector conté els següents tiddlers ombra:
+Advanced/ShadowInfo/Heading: Estat de l'Ombra
+Advanced/ShadowInfo/NotShadow/Hint: El tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> no és un tiddler ombra
+Advanced/ShadowInfo/OverriddenShadow/Hint: Està sobreescrit per un tiddler corrent
+Advanced/ShadowInfo/Shadow/Hint: El tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> és un tiddler ombra
+Advanced/ShadowInfo/Shadow/Source: Està definit al connector <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Fields/Caption: Camps
+List/Caption: Llista
+List/Empty: Aquest tiddler no té una llista
+Listed/Caption: Llistat
+Listed/Empty: Aquest tiddler no està llistat a cap d'altre
+References/Caption: Referències
+References/Empty: No hi ha cap tiddler que enllaçi cap aquest
+Tagging/Caption: Etiquetes
+Tagging/Empty: No hi ha cap tiddler etiquetat amb aquest
+Tools/Caption: Eines

@@ -1,0 +1,8 @@
+created: 20150221145803000
+modified: 20150601194542856
+title: $:/editions/tw5.com/macro-examples/say-hi
+type: text/vnd.tiddlywiki
+
+\define sayhi(name:"Bugs Bunny" address:"Rabbit Hole Hill")
+Salut, Je suis $name$ et je vis à $address$.
+\end

@@ -1,0 +1,26 @@
+title: HelloThere
+
+This edition of ~TiddlyWiki contains tools to help slice up long texts into individual tiddlers.
+
+//''This plugin is under active development, and is subject to change in the future''. It is currently only intended for advanced users. The tools are in the early stages of development, and likely to need some customisation to do what you need.//
+
+! Usage
+
+The source document must first be marked up as an ordinary wikitext tiddler. Currently only the following formatting is recognised:
+
+* Headings
+* Ordered and unordered lists
+* Paragraphs
+
+To try it out:
+
+# Click the ''text slicer'' icon on the [[Sample Text]] tiddler below
+# View the tiddler [[Sliced up Sample Text]]
+#* It should match the content of [[Sample Text]]
+#* The table of contents at the top allows the structure to be explored
+# Click the ''Show toolbar'' checkbox to display a simple toolbar for each tiddler
+# Use the text box and the ''rename'' button to rename tiddlers without breaking the tagging links
+
+! Plugin Instructions
+
+{{$:/plugins/tiddlywiki/text-slicer/docs}}

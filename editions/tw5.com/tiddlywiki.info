@@ -3,9 +3,8 @@
 	"plugins": [
 		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",
-		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/browser-sniff",
-                "tiddlywiki/railroad"
+		"tiddlywiki/railroad"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
@@ -14,30 +13,18 @@
 		"tiddlywiki/starlight",
 		"tiddlywiki/seamless",
 		"tiddlywiki/centralised",
+		"tiddlywiki/tight",
 		"tiddlywiki/readonly"
 	],
 	"languages": [
-		"da-DK",
-	    "el-GR",
-		"en-US",
-		"en-GB",
-		"de-AT",
-		"de-DE",
-		"es-ES",
-		"fr-FR",
-		"nl-NL",
-		"zh-Hans",
-		"zh-Hant",
-		"it-IT",
-		"ja-JP",
-		"cs-CZ",
-		"ru-RU"
 	],
 	"build": {
 		"index": [
 			"--savetiddlers","[tag[external-image]]","images",
+			"--rendertiddlers","[tag[external-text]]","$:/core/templates/tid-tiddler","text","text/plain",".tid",
 			"--setfield","[tag[external-image]]","_canonical_uri","$:/core/templates/canonical-uri-external-image","text/plain",
-			"--setfield","[tag[external-image]]","text","","text/plain",
+			"--setfield","[tag[external-text]]","_canonical_uri","$:/core/templates/canonical-uri-external-text","text/plain",
+			"--setfield","[tag[external-image]] [tag[external-text]]","text","","text/plain",
 			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
 		"encrypted": [
 			"--password", "password",

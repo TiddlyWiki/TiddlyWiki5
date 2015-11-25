@@ -1,0 +1,74 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: cerca avançada
+AdvancedSearch/Hint: Cerca avançada
+Cancel/Caption: anul·la
+Cancel/Hint: Descarta els canvis d'aquest tiddler
+Clone/Caption: clona
+Clone/Hint: Clona aquest tiddler
+Close/Caption: tanca
+Close/Hint: Tanca aquest tiddler
+CloseAll/Caption: tanca-ho tot
+CloseAll/Hint: Tanca tots els tiddlers
+CloseOthers/Caption: tanca els altres
+CloseOthers/Hint: Tanca els altres tiddlers
+ControlPanel/Caption: tauler de control
+ControlPanel/Hint: Obre el tauler de control
+Delete/Caption: suprimeix
+Delete/Hint: Suprimeix aquest tiddler
+Edit/Caption: edita
+Edit/Hint: Edita aquest tiddler
+Encryption/Caption: encriptació
+Encryption/ClearPassword/Caption: neteja la contrasenya
+Encryption/ClearPassword/Hint: Suprimeix la contrasenya per desar aquest wiki sense encriptació
+Encryption/Hint: Estableix o suprimeix la contrasenya per desar aquest wiki
+Encryption/SetPassword/Caption: tria la contrasenya
+Encryption/SetPassword/Hint: Estableix una contrasenya per desar aquest wiki amb encriptació
+ExportPage/Caption: exporta-ho tot
+ExportPage/Hint: Exporta tots els tiddlers
+ExportTiddler/Caption: exporta el tiddler
+ExportTiddler/Hint: Exporta el tiddler
+ExportTiddlers/Caption: exporta tiddlers
+ExportTiddlers/Hint: Exporta els tiddlers
+FullScreen/Caption: pantalla sencera
+FullScreen/Hint: Mostra o deixa de mostrar la finestra en pantalla sencera
+Help/Caption: ajuda
+Help/Hint: Mostra el tauler d'ajuda
+HideSideBar/Caption: amaga la barra lateral
+HideSideBar/Hint: Amaga la barra lateral
+Home/Caption: Inici
+Home/Hint: Obre els tiddlers per omissió
+Import/Caption: importa
+Import/Hint: Importa fitxers
+Info/Caption: informació
+Info/Hint: Mostra la informació d'aquest tiddler
+Language/Caption: idioma
+Language/Hint: Trieu l'idioma de la interfície
+More/Caption: més
+More/Hint: Més accions
+NewHere/Caption: nou aquí
+NewHere/Hint: Obre un nou tiddler etiquetat amb aquest
+NewJournal/Caption: nou diari
+NewJournal/Hint: Nou tiddler diari
+NewJournalHere/Caption: nou diari aquí
+NewJournalHere/Hint: Obre un nou tiddler diari etiquetat amb aquest
+NewTiddler/Caption: nou tiddler
+NewTiddler/Hint: Obre un nou tiddler
+Permalink/Caption: enllaç permanent
+Permalink/Hint: Fés que la barra d'adreces del navegador mostri un enllaç directe cap aquest tiddler
+Permaview/Caption: vista permanent
+Permaview/Hint: Fés que la barra d'adreces del navegador mostri un enllaç directe cap a tots els tiddlers d'aquesta història
+Refresh/Caption: actualitza
+Refresh/Hint: Actualitza tot el wiki
+Save/Caption: D'acord
+Save/Hint: Confirma els canvis d'aquest tiddler
+SaveWiki/Caption: desa els canvis
+SaveWiki/Hint: Desa els canvis
+ShowSideBar/Caption: mostra la barra lateral
+ShowSideBar/Hint: Mostra la barra lateral
+StoryView/Caption: visualització de la cronologia
+StoryView/Hint: Trieu la visualització de la cronologia
+TagManager/Caption: gestor d'etiquetes
+TagManager/Hint: Obre el gestor d'etiquetes
+Theme/Caption: tema
+Theme/Hint: Tria el tema de l'aparença

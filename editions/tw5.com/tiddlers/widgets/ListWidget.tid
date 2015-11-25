@@ -1,17 +1,19 @@
 created: 201310241419
-modified: 20150106180000000
+modified: 201502231037
 tags: Widgets
 title: ListWidget
 caption: list
 
 ! Introduction
 
-The list widget displays a sequence of tiddlers matching a [[filter|Filters]]. It is vital for a various use-cases, e.g.:
+The list widget displays a sequence of tiddlers that match a [[tiddler filter|Filters]]. It can be used for many purposes:
 
-* Displaying custom lists, e.g. "all tiddlers tagged ''task'' not tagged ''done''"
-* Listing the tags of a tiddler
-* Displaying lists of links, like in the sidebar
+* Displaying custom lists of links, like in TiddlyWiki5's sidebar
+* Custom lists, such as "all tiddlers tagged 'task' that are not tagged 'done'"
+* Listing each of the tags applied to a tiddler
 * Handling the main story river
+
+The tiddlers are displayed by transcluding each in turn through a template. There are several ways to specify the template and for controlling the behaviour of the list.
 
 ! Examples
 
@@ -61,18 +63,17 @@ Displays as:
 
 !! Grouped Lists
 
-See GroupedLists for how to generate nested and grouped lists using the ListWidget.
+See NestedLists for how to generate nested and grouped lists using the ListWidget.
 
 ! Content and Attributes
 
-A number of options controll the list behaviour....
+The content of the `<$list>` widget is an optional template to use for rendering each tiddler in the list. Alternatively, the template can be specified as a tiddler title in the ``template`` attribute. As a fallback, the default template just displays the tiddler title.
 
 |!Attribute |!Description |
 |filter |The [[tiddler filter|Filters]] to display |
 |template |The title of a template tiddler for transcluding each tiddler in the list. When no template is specified, the body of the ListWidget serves as the item template. With no body, a simple link to the tiddler is returned. |
 |editTemplate |An alternative template to use for [[DraftTiddlers|DraftMechanism]] in edit mode |
 |variable |The name for a [[variable|Variables]] in which the title of each listed tiddler is stored. Defaults to ''currentTiddler'' |
-|iterator|a custom iterator prefix, see IteratorVariables|
 |emptyMessage |Message to be displayed when the list is empty |
 |storyview |Optional name of module responsible for animating/processing the list |
 |history |The title of the tiddler containing the navigation history |

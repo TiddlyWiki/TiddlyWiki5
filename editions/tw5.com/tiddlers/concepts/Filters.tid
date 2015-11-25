@@ -1,25 +1,23 @@
-created: 20130827080000000=
-modified: 20140912145347313
+created: 20130827080000000
+modified: 20150221225414000
 tags: Reference Concepts
 title: Filters
 type: text/vnd.tiddlywiki
 list: [[Introduction to filter notation]] [[Filter Syntax]]
 
-You can think of TiddlyWiki as a database where the records are tiddlers. A database typically provides a way of discovering which records match a given pattern, and in ~TiddlyWiki this is done with filters.
+You can think of TiddlyWiki as a database in which the records are tiddlers. A database typically provides a way of discovering which records match a given pattern, and in ~TiddlyWiki this is done with filters.
 
-A <<doc-def filter>> is a concise notation for selecting a particular set of tiddlers, known as its <<doc-def "result">>. Whenever ~TiddlyWiki encounters a filter, it calculates the result. Further work can then be done with just those tiddlers, such as [[counting|CountWidget]] or [[listing|ListWidget]] them.
+A <<.def filter>> is a concise notation for selecting a particular [[set of tiddlers|Title Selection]], known as its <<.def "output">>. Whenever ~TiddlyWiki encounters a filter, it calculates the output. Further work can then be done with just those tiddlers, such as [[counting|CountWidget]] or [[listing|ListWidget]] them.
 
-The following example passes a filter to the [[list-links macro|ListMacro]] to display a list of all tiddlers whose titles start with the letter H:
+The following example passes a filter to the <<.mlink list-links>> macro to display a list of all tiddlers whose titles start with the letter H:
 
-```
-<<list-links "[prefix[H]]">>
-```
+> `<<list-links "[prefix[H]]">>`
 
-The result of a filter can change as tiddlers are added and deleted in the wiki. ~TiddlyWiki recalculates the results on the fly, automatically updating any filter-based counts or lists as well.
+A filter's output can change as tiddlers are added and deleted in the wiki. ~TiddlyWiki recalculates on the fly, automatically updating any filter-based counts or lists as well.
 
-[[Advanced Search|$:/AdvancedSearch]] has a <<doc-advancedsearch-tab Filter>> tab that makes it easy to experiment with filters.
+[[Advanced Search|$:/AdvancedSearch]] has a <<.advancedsearch-tab Filter>> tab that makes it easy to experiment with filters.
 
 ;Find out more:
 * [[Introduction to filter notation]] -- a step-by-step walkthrough
-* [[Filter Syntax]] -- the exact rules of the notation
-* [[FilterOperators]] -- the available methods of filtering
+* [[Filter Syntax]] -- the detailed technical rules
+* [[Filter Operators]] -- the available methods of filtering

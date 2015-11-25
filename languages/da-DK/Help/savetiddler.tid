@@ -1,7 +1,7 @@
 title: $:/language/Help/savetiddler
 description: Gemmer en rå tiddler til en fil
 
-Gemmer en individuel tiddler i dens rå tekst eller binære format til det specificerede filnavn. 
+Gemmer en individuel tiddler i dens rå tekst eller binære format til det angivne filnavn. 
 
 ```
 --savetiddler <title> <filename>

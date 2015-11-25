@@ -1,0 +1,18 @@
+input_tiddler: $:/input/Education
+options_tiddler: $:/options/Education Options
+section_name: Education
+tags: DisplayTemplate
+template_name: Education Template 1
+title: $:/template/EducationTemplate
+
+\define thisEducationList()
+<$list filter='[prefix[$:/data/Education/]removeprefix[$:/data/]addprefix[$:/settings/$(ThisResumeName)$/]!show[false]sort[order]removeprefix[$:/settings/$(ThisResumeName)$/]addprefix[$:/data/]]'>
+<li><$view field='degree_level'/><$reveal type='nomatch' state='!!ongoing' text='true'>, </$reveal><$reveal type='match' state='!!ongoing' text='true'> (Ongoing), </$reveal><$view field='major'/>, <$view field='institution'/>, <$view field='address'/>, <$reveal type='match' state='!!ongoing' text='true'>Expected Graduation Date: </$reveal> <$view field='graduation_date'/><$reveal type='match' state='!!show_gpa' text='true'>, GPA: <$view field='gpa'/></$reveal></li>
+</$list>
+\end
+
+!!''Education''
+
+<ul>
+<<thisEducationList>>
+</ul>

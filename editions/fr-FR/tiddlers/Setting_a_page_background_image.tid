@@ -1,0 +1,19 @@
+created: 20150417155912612
+fr-title: Mettre une image de fond de page
+modified: 20150615110349432
+tags: [[Customise TiddlyWiki]]
+title: Setting a page background image
+type: text/vnd.tiddlywiki
+
+# Importer votre image comme tiddler (voir [[Images dans WikiText|Images in WikiText]])
+#* Vous pouvez aussi faire appel à une [[image externe|ExternalImages]]
+# Ouvrez le $:/ControlPanel et sélectionnez  ''réglage thème'' dans l'onglet ''Apparence''
+# Choisissez votre image à partir de la liste déroulante "Page background image"
+# Réglez "Fixation de l'image de fond de page" à "Fixée à la fenêtre" pour un fond d'écran figé avec le contenu se déroulant au dessus, ou "Défile avec les tiddlers" pour le faire se déplacer (notez que les iPhone/iPad [[n'acceptent pas le réglage fixé|http://stackoverflow.com/a/20444219]] pour des raisons de performance)
+# Réglez "Taille de l'image de fond de page" comme suit<<:>>
+#* ''Auto'' permet à l'image de dépasser le cadre du fond de page
+#* ''Élargie'' étend l'image jusqu'à ce que sa taille couvre complètement la page. Une partie de l'image peut être tronquée
+#* ''Contenue'' ajuste l'image de façon à ce qu'elle s'inscrive complètement dans la page
+
+Notez que la palette ''DarkPhotos'' est proposée pour rendre le menu latéral plus lisible avec les images de fond sombres.
+

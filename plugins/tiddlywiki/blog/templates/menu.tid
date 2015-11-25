@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/blog/templates/menu
+
+<div class="tc-blog-menu">
+
+<div class="tc-blog-menu-item">
+
+<a href="../index.html">
+
+{{$:/core/images/home-button}}
+
+</a>
+
+</div>
+
+</div>

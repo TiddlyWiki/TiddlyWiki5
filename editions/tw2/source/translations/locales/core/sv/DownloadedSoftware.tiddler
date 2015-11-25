@@ -1,8 +1,0 @@
-<div title="DownloadSoftware"  modifier="JeremyRuston">
-<pre>Eftersom TiddlyWiki är en enda HTMl-fil så har du faktist redan laddat ner hela mjukvaran bara genom att titta på denna webbplats. Om du vill har möjlighet att SparaÄndringar kan du spara din egna tomma TiddlyWiki på din hårddisk genom att höger-klicka på [[denna länk till empty.html|empty.html]] och välja 'Spara länk som...' eller 'Spara mål som...'. Du kan välja var filen ska sparas, och vad den ska heta (men se till att den sparas i HTML-format och med en HTML-ändelse).
-
-@@Det kan förkomma förvirrande och subtila skillnaden mellan olika webbläsare. Ett par punkter att se upp med:@@
-* Använd ''inte'' Arkiv/Spara-kommandot i din webbläsare för att spara TiddlyWiki, på grund av SparningsOpålitlighet.
-* Se till att du sparar i HTML-format (eller &quot;sidkällformat&quot;), och inte ett av de nya-påhittade arkiveringsformaten.
-Om du redan använder TiddlyWiki, se HurManUppgraderar. Om du vill spara en komplett kopia av denna webbplats, inklusive alla instruktioner och annan text kan du använda [[denna länk|index.html]].</pre>
-</div>

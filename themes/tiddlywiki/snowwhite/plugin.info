@@ -4,6 +4,6 @@
 	"author": "JeremyRuston",
 	"core-version": ">=5.0.0",
 	"plugin-type": "theme",
-	"description": "A clean theme that emphasises individual tiddlers",
+	"description": "Emphasises individual tiddlers",
 	"dependents": ["$:/themes/tiddlywiki/vanilla"]
 }

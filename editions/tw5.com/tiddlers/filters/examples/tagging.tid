@@ -1,0 +1,9 @@
+created: 20150124133043000
+modified: 20150124133617000
+tags: [[tagging Operator]] [[Operator Examples]]
+title: tagging Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[task]tagging[]]" "same as `[tag[task]]`">>
+<<.operator-example 2 "Concepts task +[tagging[]]" "tiddlers that are tagged ''Concepts'' or ''task''">>
+<<.operator-example 3 "[all[current]tagging[]]" "tiddlers tagged with the current one">>

@@ -1,0 +1,20 @@
+created: 20150720170700740
+input_tiddler: $:/input/Resume Title
+modified: 20150720170702537
+options_tiddler: $:/options/Title Options
+section_name: Résumé Title
+tags: DisplayTemplate
+template_name: Title Template 1
+title: $:/template/ResumeTitleTemplate
+
+\define thisShowTitle()
+<h1><$reveal type='nomatch' state='$:/settings/$(ThisResume)$/ResumeTitle' text='use name'>''{{$:/settings/$(ThisResume)$/ResumeTitle}}''</$reveal><$reveal type='match' state='$:/settings/$(ThisResume)$/ResumeTitle' text='use name'>''{{$:/data/Personal Information!!name}}''</$reveal></h1>
+\end
+
+<div style='text-align:center'>
+
+<$vars ThisResume={{$:/settings/Global!!selected_resume}}>
+<<thisShowTitle>>
+</$vars>
+
+</div>
