@@ -107,3 +107,23 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 </$reveal>
 </$list>
 \end
+
+\define demo(text)
+```
+$text$
+```
+
+<<<
+$text$
+<<<
+\end
+
+\define via(text)
+$text$
+
+''rendered via...''
+
+```
+$text$
+```
+\end
