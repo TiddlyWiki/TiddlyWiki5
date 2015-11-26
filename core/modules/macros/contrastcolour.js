@@ -37,15 +37,14 @@ exports.run = function(target,fallbackTarget,colourA,colourB) {
 	if(target.indexOf("!!") >= 0) {
 		target = wiki.getTextReference(
 			target,
-			wiki.getTextReference(palette + "##tag-foreground"),
+			fallbackTarget || wiki.getTextReference(palette + "##tag-background"),
 			this.getVariable("currentTiddler")
 		);
 	}
-	fallbackTarget = fallbackTarget || wiki.getTextReference(palette + "##tag-background");
 	colourA = colourA || wiki.getTextReference(palette + "##foreground");
 	colourB = colourB || wiki.getTextReference(palette + "##background");
 
-	var rgbTarget = $tw.utils.parseCSSColor(target) || $tw.utils.parseCSSColor(fallbackTarget);
+	var rgbTarget = $tw.utils.parseCSSColor(target);
 	if(!rgbTarget) {
 		return colourA;
 	}
