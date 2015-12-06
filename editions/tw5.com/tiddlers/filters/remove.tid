@@ -1,8 +1,6 @@
 caption: remove
 created: 20151017144531676
-creator: matabele
 modified: 20151108052035773
-modifier: matabele
 op-input: a list of items
 op-neg-output: items removed from current list that appear at the tail of the operand array
 op-output: items removed from current list that appear at the head of the operand array
@@ -11,7 +9,6 @@ op-parameter-name: array
 op-prefix: causes N items from the end of the array to be removed
 op-purpose: remove a range of items in an array from the current list
 op-suffix: an integer N, defaulting to all
-revision: 0
 tags: [[Filter Operators]] [[Order Operators]] [[Listops Operators]]
 title: remove Operator
 type: text/vnd.tiddlywiki

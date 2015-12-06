@@ -1,5 +1,4 @@
 created: 20151014170727812
-creator: matabele
 days: Fri Wed Mon Tue
 dofwks: Mon Tue Wed Thu Fri Sat Sun
 item1: six
@@ -8,7 +7,6 @@ item3: eight
 list: Yesterday Today Tomorrow
 marker: Thursday
 modified: 20151108054957921
-modifier: matabele
 myfield: Monday Tuesday [[Middle of the Week]] Thursday Friday Saturday Sunday
 numbers: 1 2 3 4 five 6 7 8 9
 title: The Extended Listops Filters
