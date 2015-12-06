@@ -1,9 +1,3 @@
-created: 20140410103123179
-modified: 20150917193612610
-tags: Filters
-title: Filter Operators
-type: text/vnd.tiddlywiki
-
 \define .operator-rows(filter)
 <$list filter="$filter$"><tr>
 <td><$link to={{!!title}}>{{!!caption}}</$link></td>
@@ -28,7 +22,9 @@ The following table lists all the core operators. The commonest ones are checkma
 </tr>
 <<.operator-rows "[tag[Filter Operators]!tag[Order Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
 <<.group-heading "Order Operators">>
-<<.operator-rows "[tag[Filter Operators]tag[Order Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
+<<.operator-rows "[tag[Filter Operators]tag[Order Operators]!tag[Listops Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
+<<.group-heading "Listops Operators">>
+<<.operator-rows "[tag[Filter Operators]tag[Listops Operators]tag[Order Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
 <<.group-heading "String Operators">>
 <<.operator-rows "[tag[Filter Operators]!tag[Order Operators]tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
 <<.group-heading "Tag Operators">>
