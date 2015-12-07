@@ -258,7 +258,11 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 		confirmationTitle = title;
 	}
 	// Seek confirmation
-	if((this.wiki.getTiddler(originalTitle) || (tiddler.fields.text || "") !== "") && !confirm($tw.language.getString(
+	if(
+	  	(this.wiki.getTiddler(originalTitle) || (tiddler.fields.text || "") !== "") &&
+		confirmationTitle.indexOf("$:/temp/") !== 0 &&
+		confirmationTitle.indexOf("$:/state/") !== 0 &&
+		!confirm($tw.language.getString(
 				"ConfirmDeleteTiddler",
 				{variables:
 					{title: confirmationTitle}
