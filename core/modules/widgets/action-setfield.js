@@ -40,6 +40,7 @@ SetFieldWidget.prototype.execute = function() {
 	this.actionIndex = this.getAttribute("$index");
 	this.actionValue = this.getAttribute("$value");
 	this.actionTimestamp = this.getAttribute("$timestamp","yes") === "yes";
+	this.actionSuffix = this.getAttribute("$suffix") || "";
 };
 
 /*
@@ -47,7 +48,7 @@ Refresh the widget by ensuring our attributes are up to date
 */
 SetFieldWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes["$tiddler"] || changedAttributes["$field"] || changedAttributes["$index"] || changedAttributes["$value"]) {
+	if(changedAttributes["$tiddler"] || changedAttributes["$field"] || changedAttributes["$index"] || changedAttributes["$value"] || changedAttributes["$suffix"]) {
 		this.refreshSelf();
 		return true;
 	}
@@ -59,12 +60,13 @@ Invoke the action associated with this widget
 */
 SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var self = this,
-		options = {};
+		options = {},
+		targetTiddler = this.actionTiddler + this.actionSuffix;
 	options.suppressTimestamp = !this.actionTimestamp;
-	this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue,options);
+	this.wiki.setText(targetTiddler,this.actionField,this.actionIndex,this.actionValue,options);
 	$tw.utils.each(this.attributes,function(attribute,name) {
 		if(name.charAt(0) !== "$") {
-			self.wiki.setText(self.actionTiddler,name,undefined,attribute,options);
+			self.wiki.setText(targetTiddler,name,undefined,attribute,options);
 		}
 	});
 	return true; // Action was invoked
