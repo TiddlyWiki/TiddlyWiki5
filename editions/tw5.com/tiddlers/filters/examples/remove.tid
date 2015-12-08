@@ -1,0 +1,11 @@
+created: 20151018054129966
+modified: 20151108052052606
+tags: [[Operator Examples]] [[remove Operator]]
+title: remove Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[list[Days of the Week]] +[remove[Tuesday Wednesday Thursday]]">>
+<<.operator-example 2 "[list[Days of the Week]] +[remove:3[Monday Wednesday Friday Saturday]]">>
+<<.operator-example 3 "[list[Days of the Week]] +[!remove:2{Days of the Week!!list}]">>
