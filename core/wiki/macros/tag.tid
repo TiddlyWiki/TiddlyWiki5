@@ -1,6 +1,20 @@
 title: $:/core/macros/tag
 tags: $:/tags/Macro
 
-\define tag(tag)
-{{$tag$||$:/core/ui/TagTemplate}}
+\define tag(tag,mode:"button")
+<$reveal type="match" default="$mode$" text="button">
+{{||$:/core/ui/TagTemplate}}
+</$reveal>
+<$reveal type="match" default="$mode$" text="link">
+<$vars tag-no-popup="true">
+<$link>
+{{||$:/core/ui/TagTemplate}}
+</$link>
+</$vars>
+</$reveal>
+<$reveal type="match" default="$mode$" text="remove">
+<$vars tag-no-popup="true" tag-remove="true">
+{{||$:/core/ui/TagTemplate}}
+</$vars>
+</$reveal>
 \end

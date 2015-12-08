@@ -321,8 +321,13 @@ a.tc-tiddlylink-external:hover {
 ** Buttons
 */
 
-button svg, button img {
+button svg, button img,
+.tc-tag-label .tc-image-button{
 	vertical-align: middle;
+}
+
+.tc-tag-label .tc-image-button{
+margin-right: 3px;
 }
 
 .tc-btn-invisible {
@@ -820,6 +825,7 @@ button.tc-untagged-label {
 
 .tc-tiddler-title-icon {
 	vertical-align: middle;
+	margin-right:5px;
 }
 
 .tc-system-title-prefix {
