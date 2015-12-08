@@ -58,6 +58,7 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Set the text
 	if(this.editTag === "textarea") {
+		domNode.setAttribute("rows",1);
 		domNode.appendChild(this.document.createTextNode(editInfo.value));
 	} else {
 		domNode.value = editInfo.value;
