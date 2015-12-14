@@ -140,7 +140,8 @@ ButtonWidget.prototype.triggerPopup = function(event) {
 	$tw.popup.triggerPopup({
 		domNode: this.domNodes[0],
 		title: this.popup,
-		wiki: this.wiki
+		wiki: this.wiki,
+		absolute: this.absolute
 	});
 };
 
@@ -167,6 +168,7 @@ ButtonWidget.prototype.execute = function() {
 	this.selectedClass = this.getAttribute("selectedClass");
 	this.defaultSetValue = this.getAttribute("default","");
 	this.buttonTag = this.getAttribute("tag");
+	this.absolute = this.getAttribute("absolute") !== undefined;
 	// Make child widgets
 	this.makeChildWidgets();
 };

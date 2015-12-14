@@ -104,23 +104,40 @@ Display a popup by adding it to the stack
 */
 Popup.prototype.show = function(options) {
 	// Find out what was clicked on
-	var info = this.popupInfo(options.domNode);
+	var info = this.popupInfo(options.domNode),
+		offset = options.absolute ?
+			this.getAbsoluteOffset(options.domNode) :
+			{left:options.domNode.offsetLeft, top:options.domNode.offsetTop};
 	// Cancel any higher level popups
 	this.cancel(info.popupLevel);
 	// Store the popup details
 	this.popups.push({
 		title: options.title,
 		wiki: options.wiki,
-		domNode: options.domNode
+		domNode: options.domNode,
+		absolute: options.absolute
 	});
 	// Set the state tiddler
 	options.wiki.setTextReference(options.title,
-			"(" + options.domNode.offsetLeft + "," + options.domNode.offsetTop + "," + 
+			"(" + offset.left + "," + offset.top + "," +
 				options.domNode.offsetWidth + "," + options.domNode.offsetHeight + ")");
 	// Add the click handler if we have any popups
 	if(this.popups.length > 0) {
-		this.rootElement.addEventListener("click",this,true);		
+		this.rootElement.addEventListener("click",this,true);
 	}
+};
+
+/*
+Calculates absolute offset of anchor in document
+*/
+Popup.prototype.getAbsoluteOffset = function(element) {
+	var left = 0,top = 0;
+	do {
+		top += element.offsetTop  || 0;
+		left += element.offsetLeft || 0;
+		element = element.offsetParent;
+	} while(element);
+	return {left:left,top:top};
 };
 
 /*
