@@ -34,9 +34,10 @@ KaTeXWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Get the source text
 	var text = this.getAttribute("text",this.parseTreeNode.text || "");
+	var displayMode = this.getAttribute("displayMode",this.parseTreeNode.displayMode || "false") === "true";
 	// Render it into a span
 	var span = this.document.createElement("span"),
-		options = {throwOnError: false};
+		options = {throwOnError: false, displayMode: displayMode};
 	try {
 		if(!this.document.isTiddlyWikiFakeDom) {
 			katex.render(text,span,options);
