@@ -32,7 +32,7 @@ tags: $:/tags/EditTemplate
 <<lingo OverriddenWarning>>
 
 </div>
+</$set>
 </$list>
 
-</$list>
 </$list>
