@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 The <<.def tabs>> [[macro|Macros]] presents a [[selection of tiddlers|Title Selection]] as a set of tabs that the user can switch between.
 
-The tabs display the <<.field caption>> field of a tiddler if it has one, or the tiddler's title otherwise.
+The tabs display the <<.field caption>> field of a tiddler if it has one, or the tiddler's title otherwise. If specified, the tabs display the <<.field tooltip>> field of a tiddler as the respective button tooltip.
 
 By default the tabs are arranged horizontally above the content. To get vertical tabs, set the <<.param class>> parameter to <<.value tc-vertical>>.
 
