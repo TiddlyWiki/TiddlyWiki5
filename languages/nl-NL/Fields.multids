@@ -1,7 +1,7 @@
 title: $:/language/Docs/Fields/
 
 _canonical_uri: De volledige URI van een externe afbeeldingstiddler
-bag: De naam van de "bag" waaruit de tiddler kwam
+bag: De naam van de 'bag' waaruit de tiddler kwam
 caption: Tekst die op een tab of een knop getoond wordt
 color: De CSS-waarde van een kleur gekoppeld aan een tiddler
 component: De naam van de component die een [[alarmtiddler|AlertMechanism]] veroorzaakt
@@ -15,7 +15,7 @@ draft.title: Voor concepttiddlers; bevat de voorgestelde titel van de tiddler
 footer: De voettekst van een wizard
 hack-to-give-us-something-to-compare-against: Een tijdelijk opslagveld dat in [[$:/core/templates/static.content]] gebruikt wordt
 icon: De titel van de pictogramtiddler die met deze tiddler gekoppeld is
-library: Als "yes" ingevuld is, dient de tiddler als JavaScript-bibliotheek opgeslagen te worden
+library: Als 'yes' ingevuld is, dient de tiddler als JavaScript-bibliotheek opgeslagen te worden
 list: Een geordende lijst van tiddlertitels gekoppeld met een tiddler
 list-after: Indien ingevuld, de titel van de tiddler waarna deze tiddler toegevoegd moet worden in de reeks tiddlertitels
 list-before: Indien ingevuld, de titel van de tiddler waarvoor deze tiddler toegevoegd moet worden in de reeks tiddlertitels, of aan het begin van de reeks als dit veld wel aanwezig maar leeg is
