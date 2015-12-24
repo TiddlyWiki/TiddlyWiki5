@@ -99,3 +99,17 @@ This example uses a nested pair of list widgets. The outer one generates the `<o
 </optgroup>
 </$list>
 </$select>"/>
+
+!! Multiple Selections
+
+This example uses the `multiple` keyword to specify that we should be able to select multiple items.
+
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/generated-list-demo-state' field='testing' multiple>
+<$list filter='[tag[TableOfContents]]'>
+<option><$view field='title'/></option>
+</$list>
+</$select><br />
+<$list filter='[list[$:/generated-list-demo-state!!testing]]'>
+<$view field='title' /><br />
+</$list>
+"/>
