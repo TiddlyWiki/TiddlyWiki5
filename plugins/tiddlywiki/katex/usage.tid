@@ -6,7 +6,7 @@ The usual way to include ~LaTeX is to use `$$`. For example:
 $$\displaystyle f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
 ```
 
-To make math render in display mode, use `$$$` instead of `$$`.
+Single line equations will render in inline mode. If there are newlines between the `$$` delimiters, the equations will be rendered in display mode.
 
 The underlying widget can also be used directly, giving more flexibility:
 
