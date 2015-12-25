@@ -1,30 +1,49 @@
 title: $:/core/ui/TagTemplate
 
-\define tag-styles()
-background-color:$(backgroundColor)$;
-fill:$(foregroundColor)$;
-color:$(foregroundColor)$;
-\end
+\define tag-styles() color:$(foregroundColor)$;background-color:$(backgroundColor)$;
+\define svg-style() fill:$(foregroundColor)$;
 
-\define tag-body-inner(colour,fallbackTarget,colourA,colourB)
-<$set name="foregroundColor" value=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">>>
-<$set name="backgroundColor" value="""$colour$""">
-<$button popup=<<qualify "$:/state/popup/tag">> class="tc-btn-invisible tc-tag-label" style=<<tag-styles>>>
-<$transclude tiddler={{!!icon}}/> <$view field="title" format="text" />
+\define tag-body-inner()
+<$vars foregroundColor=<<contrastcolour
+	target:"""$(backgroundColor)$"""
+	fallbackTarget:"""$(fallbackTarget)$"""
+	colourA:"""$(colourA)$"""
+	colourB:"""$(colourB)$""">>>
+<$reveal type="nomatch" text="$(tag-no-popup)$" default="">
+<span class="tc-btn-invisible tc-tag-label" style=<<tag-styles>>>
+<$transclude tiddler={{!!icon}}/><$view field="title" format="text"/>
+<$reveal type="nomatch" text="$(tag-remove)$" default="">
+<$button message="tm-remove-tag" param={{!!title}}
+class="tc-btn-invisible tc-remove-tag-button">&times;</$button>
+</$reveal>
+</span>
+</$reveal>
+<$reveal type="match" text="$(tag-no-popup)$" default="">
+<$button popup=<<qualify "$:/state/popup/tag">>
+class="tc-btn-invisible tc-tag-label" style=<<tag-styles>>>
+<$transclude tiddler={{!!icon}}/><$view field="title" format="text"/>
 </$button>
-<$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes"><div class="tc-drop-down"><$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+<$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes">
+<div class="tc-drop-down">
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 <hr>
 <$list filter="[all[current]tagging[]]" template="$:/core/ui/ListItemTemplate"/>
 </div>
 </$reveal>
-</$set>
-</$set>
+</$reveal>
+</$vars>
 \end
 
-\define tag-body(colour,palette)
+\define tag-body(palette)
+<$vars
+	backgroundColor={{!!color}}
+	fallbackTarget={{$palette$##tag-background}}
+	colourA={{$palette$##foreground}}
+	colourB={{$palette$##background}}>
+<<tag-body-inner>>
+</$vars>
+\end
+
 <span class="tc-tag-list-item">
-<$macrocall $name="tag-body-inner" colour="""$colour$""" fallbackTarget={{$palette$##tag-background}} colourA={{$palette$##foreground}} colourB={{$palette$##background}}/>
+<$macrocall $name="tag-body" palette={{$:/palette}}>
 </span>
-\end
-
-<$macrocall $name="tag-body" colour={{!!color}} palette={{$:/palette}}/>

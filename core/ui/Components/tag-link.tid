@@ -1,9 +1,0 @@
-title: $:/core/ui/Components/tag-link
-
-<$link>
-<$set name="backgroundColor" value={{!!color}}>
-<span style=<<tag-styles>> class="tc-tag-label">
-<$view field="title" format="text"/>
-</span>
-</$set>
-</$link>
