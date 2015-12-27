@@ -134,7 +134,6 @@ checklist widget
         if (this.getAttribute("invert") === "yes" || this.getAttribute("invert", "") === "true") {
             this.checklistInvert = true;
         }
-        this.checklistInvert = this.getAttribute("invert", "");
         if (this.hasAttribute("list")) {
             this.checklistList = this.getAttribute("list");
         } else {
