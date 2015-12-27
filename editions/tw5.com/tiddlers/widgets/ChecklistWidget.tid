@@ -1,0 +1,66 @@
+caption: checkbox
+created: 20151227043306626
+grocery-list: milk cheese bread tea coffee sugar
+modified: 20151227045919828
+shopping-list: milk
+status: open
+tags: Widgets
+title: ChecklistWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The checklist widget displays an HTML `<input type="checkbox">` element that is dynamically bound to:
+
+* the presence or absence of a specified item in a specified field of a specified tiddler
+
+
+! Content and Attributes
+
+The content of the `<$checklist>` widget is displayed within an HTML `<label>` element immediately after the checkbox itself. This means that clicking on the content will toggle the checkbox.
+
+|!Attribute |!Description |
+|tiddler |Title of the tiddler to manipulate (defaults to the [[current tiddler|Current Tiddler]]) |
+|item |The name of the item to which the checkbox should be bound |
+|alt |Optional alternative item which, when specified, will exchange places with the specified item |
+|invert |When set to "yes" or "true", flips the tag binding logic so that the absence of the tag causes the checkbox to be checked  |
+|list or field |The name of the field to which the checkbox should be bound (defaults to the ''tags'' field) |
+|class |The class that will be assigned to the label element |
+
+!! Normal Mode
+
+Using the checklist widget in normal mode requires the ''item'' attribute to specify the name of the item. The ''tiddler'' attribute specifies the tiddler to target, defaulting to the current tiddler if not present.
+
+This example creates a checkbox that flips the ''done'' tag on the current tiddler:
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$checklist item="done">Is it done?</$checklist>"""/>
+
+
+!! Switch Mode
+
+Using the checkbox widget in switch mode requires the ''alt'' attribute to specify the name of the alternate item. 
+
+This example creates a checkbox that when checked, corresponds to the presence of of the item "open" in the field ''status'' of the current tiddler and when unchecked, corresponds to the presence of of the item "closed" in the field ''status''. The second instance reverses the checkbox display logic.
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$checklist field="status" item="open" alt="closed">Is it open?</$checklist>
+<$checklist field="status" item="open" alt="closed" invert="yes">Is it closed?</$checklist>
+
+status: {{!!status}}"""/>
+
+!! List Mode
+
+The widget may be used to toggle any of the items in a list. In this case, the lookup list refers to the static ''grocery-list'' field -- alternatively, a lookup list can be created dynamically with a suitable filter expression.
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<table>
+<$list filter="[list[!!grocery-list]]" variable="item">
+<$vars thing=<<item>>>
+<tr><td><<item>></td><td><$checklist list="shopping-list" item=<<item>>/></td></tr>
+</$vars>
+</$list>
+</table>"""/>
+
+shopping-list:  {{!!shopping-list}}
+
