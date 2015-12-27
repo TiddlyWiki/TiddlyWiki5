@@ -1,5 +1,8 @@
-title: $:/core/it-IT/readme
+title: $:/core/readme
 
-<!-- Replace with translation of the readme for the core plugin -->
+Questo plugin contiene componenti del nucleo di TiddlyWiki tra cui:
 
-{{$:/core/readme}}
+* Moduli codice JavaScript
+* Icone
+* Modelli necessari per creare l'interfaccia utente di TiddlyWiki
+* Traduzione Inglese (en-GB) per le stringhe di testo utilizzate dal nucleo

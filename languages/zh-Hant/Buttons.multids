@@ -32,6 +32,8 @@ ExportTiddlers/Caption: 導出條目
 ExportTiddlers/Hint: 導出條目
 Fold/Caption: 收合條目
 Fold/Hint: 收合此條目的內容
+Fold/FoldBar/Caption: 收合條
+Fold/FoldBar/Hint: 可選的收合與展開條目的長條按鈕
 Unfold/Caption: 展開條目
 Unfold/Hint: 展開此條目的內容
 FoldOthers/Caption: 收合其他條目

@@ -29,15 +29,11 @@ title: $:/core/ui/SideBarLists
 </$reveal>
 </div>
 
-<$reveal state="$:/temp/search" type="nomatch" text="">
+<$reveal tag="div" class="tc-block-dropdown-wrapper" state="$:/temp/search" type="nomatch" text="">
 
-<$reveal state=<<qualify "$:/state/popup/search-dropdown">> type="nomatch" text="" default="">
-
-<div class="tc-drop-down tc-search-drop-down tc-popup-handle">
+<$reveal tag="div" class="tc-block-dropdown tc-search-drop-down tc-popup-handle" state=<<qualify "$:/state/popup/search-dropdown">> type="nomatch" text="" default="">
 
 {{$:/core/ui/SearchResults}}
-
-</div>
 
 </$reveal>
 

@@ -1,7 +1,7 @@
 title: $:/language/Help/help
-description: Display help for TiddlyWiki commands
+description: Visualizza l'aiuto per i comandi TiddlyWiki
 
-Visualizza il testo di help per un comando:
+Visualizza il testo di aiuto per un comando:
 
 ```
 --help [<command>]

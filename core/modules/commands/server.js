@@ -12,7 +12,7 @@ Serve tiddlers over http
 /*global $tw: false */
 "use strict";
 
-if(!$tw.browser) {
+if($tw.node) {
 	var util = require("util"),
 		fs = require("fs"),
 		url = require("url"),

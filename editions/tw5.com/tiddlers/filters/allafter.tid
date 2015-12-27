@@ -1,0 +1,14 @@
+caption: allafter
+created: 20151017145021839
+modified: 20151108051523860
+op-input: a list of items
+op-output: all items after the marker
+op-parameter: the list item to be used as a marker
+op-parameter-name: marker
+op-purpose: discard all items except those after the marker
+op-suffix: specifying a suffix ('include') will include the marker in the output
+tags: [[Filter Operators]] [[Order Operators]] [[Listops Operators]]
+title: allafter Operator
+type: text/vnd.tiddlywiki
+
+<<.operator-examples "allafter">>

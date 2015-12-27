@@ -1,10 +1,12 @@
 title: $:/language/Help/rendertiddler
 description: Ausgabe eines individuellen Tiddlers, in einem spezifizierten Format.
 
-Ausgabe eines individuellen Tiddlers, in einem spezifizierten Format (standard: `text/html`) und Dateinamen:
+Ausgabe eines individuellen Tiddlers, in einem spezifizierten Format (standard: `text/html`) und Dateinamen.
+
+Optional kann ein Template tiddler angegeben werden. Die "currentTiddler" Variable wird auf den Tiddler gesetzt, der zu rendern ist.
 
 ```
---rendertiddler <title> <filename> [<type>]
+--rendertiddler <title> <filename> [<type>] [<template>]
 ```
 
 Standardmäßig ist das `output` Verzeichnis ein Unterverzeichnis im `edition` Verzeichnis. Der `--output` Befehl kann verwendet werden, um ein anderes Verzeichnis auszuwählen.

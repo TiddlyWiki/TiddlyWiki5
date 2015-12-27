@@ -11,8 +11,10 @@ Fields/Add/Button: ok
 Fields/Add/Name/Placeholder: Feld Name
 Fields/Add/Prompt: Feld einfügen:
 Fields/Add/Value/Placeholder: Feld Text / Wert
-Shadow/Warning: Dies ist ein Schatten-Tiddler. Jede Änderung überschreibt die Standardversion.
-Shadow/OverriddenWarning: Dies ist ein veränderter Tiddler. Um zur Standardversion zurückzukehren, löschen Sie diesen Tiddler.
+Fields/Add/Dropdown/System: System Felder
+Fields/Add/Dropdown/User: Anwender Felder
+Shadow/Warning: Dies ist ein Schatten-Tiddler. Jede Änderung überschreibt die Standardversion des Plugins: <<pluginLink>>
+Shadow/OverriddenWarning: Dies ist ein veränderter Tiddler. Um zur Standardversion zurückzukehren, löschen Sie diesen Tiddler. Plugin: <<pluginLink>>
 Tags/Add/Button: ok
 Tags/Add/Placeholder: neuer Tag
 Tags/Dropdown/Caption: Tag Liste

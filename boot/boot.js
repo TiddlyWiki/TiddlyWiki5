@@ -126,8 +126,8 @@ Display an error and exit
 */
 $tw.utils.error = function(err) {
 	// Prepare the error message
-	var errHeading = "Internal JavaScript Error",
-		promptMsg = "Well, this is embarrassing. It is recommended that you restart TiddlyWiki by refreshing your browser";
+	var errHeading = ( $tw.language == undefined ? "Internal JavaScript Error" : $tw.language.getString("InternalJavaScriptError/Title") ),
+		promptMsg = ( $tw.language == undefined ? "Well, this is embarrassing. It is recommended that you restart TiddlyWiki by refreshing your browser" : $tw.language.getString("InternalJavaScriptError/Hint") );
 	// Log the error to the console
 	console.error($tw.node ? "\x1b[1;31m" + err + "\x1b[0m" : err);
 	if($tw.browser && !$tw.node) {
@@ -590,7 +590,7 @@ Crypto helper object for encrypted content. It maintains the password text in a 
 the password, and to encrypt/decrypt a block of text
 */
 $tw.utils.Crypto = function() {
-	var sjcl = $tw.node ? require("./sjcl.js") : window.sjcl,
+	var sjcl = $tw.node ? (global.sjcl || require("./sjcl.js")) : window.sjcl,
 		currentPassword = null,
 		callSjcl = function(method,inputText,password) {
 			password = password || currentPassword;
@@ -1399,10 +1399,6 @@ $tw.loadTiddlersBrowser = function() {
 	for(var t=0; t<containerIds.length; t++) {
 		$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById(containerIds[t])));
 	}
-	// Load any preloaded tiddlers
-	if($tw.preloadTiddlers) {
-		$tw.wiki.addTiddlers($tw.preloadTiddlers);
-	}
 };
 
 } else {
@@ -1808,7 +1804,7 @@ $tw.boot.startup = function(options) {
 			$tw.boot.wikiPath = process.cwd();
 		}
 		// Read package info
-		$tw.packageInfo = require("../package.json");
+		$tw.packageInfo = $tw.packageInfo || require("../package.json");
 		// Check node version number
 		if(!$tw.utils.checkVersions(process.version.substr(1),$tw.packageInfo.engines.node.substr(2))) {
 			$tw.utils.error("TiddlyWiki5 requires node.js version " + $tw.packageInfo.engines.node);
@@ -1865,6 +1861,10 @@ $tw.boot.startup = function(options) {
 		$tw.loadTiddlersBrowser();
 	} else {
 		$tw.loadTiddlersNode();
+	}
+	// Load any preloaded tiddlers
+	if($tw.preloadTiddlers) {
+		$tw.wiki.addTiddlers($tw.preloadTiddlers);
 	}
 	// Unpack plugin tiddlers
 	$tw.wiki.readPluginInfo();

@@ -8,9 +8,9 @@ Clone/Caption: Klone
 Clone/Hint: Klone diesen Tiddler
 Close/Caption: Schließen
 Close/Hint: Schließe diesen Tiddler
-CloseAll/Caption: Alle Schließen
+CloseAll/Caption: Alle schließen
 CloseAll/Hint: Alle Tiddler schließen
-CloseOthers/Caption: Andere Schließen
+CloseOthers/Caption: Andere schließen
 CloseOthers/Hint: Alle anderen Tiddler schließen
 ControlPanel/Caption: Control-Panel
 ControlPanel/Hint: Öffne das Control-Panel
@@ -20,22 +20,34 @@ Edit/Caption: Bearbeiten
 Edit/Hint: Bearbeite diesen Tiddler
 Encryption/Caption: Verschlüsselung
 Encryption/Hint: Aktivieren oder löschen des Passworts für dieses Wiki
-Encryption/ClearPassword/Caption: Verschlüsselung Deaktivieren
+Encryption/ClearPassword/Caption: Verschlüsselung deaktivieren
 Encryption/ClearPassword/Hint: Lösche das Passwort und speichere ohne Verschlüsselung
 Encryption/SetPassword/Caption: Verschlüsselung
 Encryption/SetPassword/Hint: Definiert ein Passwort, um dieses Wiki zu verschlüsseln
-ExportPage/Caption: Alle Exportieren
+ExportPage/Caption: Alle exportieren
 ExportPage/Hint: Alle Tiddler exportieren
 ExportTiddler/Caption: Exportieren
-ExportTiddler/Hint: Diesen Tiddler Exportieren
-ExportTiddlers/Caption: Mehrere Exportieren
-ExportTiddlers/Hint: Mehrere Tiddler Exportieren
+ExportTiddler/Hint: Diesen Tiddler exportieren
+ExportTiddlers/Caption: Mehrere exportieren
+ExportTiddlers/Hint: Mehrere Tiddler exportieren
+Fold/Caption: Ausblenden Textbereich
+Fold/Hint: Der Tiddler Textbereich wird ausgeblendet
+Fold/FoldBar/Caption: Textbereich ein/aus
+Fold/FoldBar/Hint: Optionelle Buttons im Tiddler, um den Textbereich ein- bzw. auszublenden
+Unfold/Caption: Einblenden Textbereich
+Unfold/Hint: Der Tiddler Textbereich wird eingeblendet
+FoldOthers/Caption: Ausblenden andere Textbereiche
+FoldOthers/Hint: Die Textbereiche aller anderen Tiddler werden ausgeblendet
+FoldAll/Caption: Ausblenden aller Textbereiche
+FoldAll/Hint: Ausblenden der Textbereiche aller Tiddler
+UnfoldAll/Caption: Einblenden aller Textbereiche
+UnfoldAll/Hint: Einblenden der Textbereiche aller Tiddler
 FullScreen/Caption: Vollbild
 FullScreen/Hint: Aktivieren oder deaktivieren des Vollbild-Modus
 Help/Caption: Hilfe
 Help/Hint: Hilfe anzeigen
 Import/Caption: Import
-Import/Hint: Importiere Dateien
+Import/Hint: Importiere unterschiedliche Dateitypen. zB: Text, Bilder, TiddlyWiki oder JSON
 Info/Caption: Info
 Info/Hint: Informationen zu diesem Tiddler anzeigen
 Home/Caption: Home
@@ -44,15 +56,15 @@ Language/Caption: Sprache
 Language/Hint: Auswahldialog für die Systemsprache
 More/Caption: mehr
 More/Hint: Weitere Aktionen
-NewHere/Caption: Neu Hier
+NewHere/Caption: Neu hier
 NewHere/Hint: Erstelle einen neuen Tiddler der mit diesem getaggt ist
 NewJournal/Caption: Neues Journal
 NewJournal/Hint: Erstelle einen neuen Journal-Tiddler
-NewJournalHere/Caption: Neues Journal Hier
+NewJournalHere/Caption: Neues Journal hier
 NewJournalHere/Hint: Erstelle ein neues Journal der mit diesem getaggt ist
 NewTiddler/Caption: Neuer Tiddler
 NewTiddler/Hint: Erstelle einen neuen Tiddler
-OpenWindow/Caption: Öffne in Neuem Fenster
+OpenWindow/Caption: Öffne in neuem Fenster
 OpenWindow/Hint: Öffne diesen Tiddler in einem neuen Fenster
 Palette/Caption: Palette
 Palette/Hint: Wähle eine Farbpalette
@@ -68,9 +80,9 @@ SaveWiki/Caption: Speichern
 SaveWiki/Hint: Das Wiki speichern
 StoryView/Caption: Story-Modus
 StoryView/Hint: Auswahl des Anzeigemodus für die [[Story]]
-HideSideBar/Caption: Sidebar Ausblenden
+HideSideBar/Caption: Sidebar ausblenden
 HideSideBar/Hint: Sidebar ausblenden
-ShowSideBar/Caption: Sidebar Einblenden
+ShowSideBar/Caption: Sidebar einblenden
 ShowSideBar/Hint: Sidebar einblenden
 TagManager/Caption: Tag-Manager
 TagManager/Hint: Öffne den Tag-Manager

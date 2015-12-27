@@ -1191,8 +1191,6 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-drop-down {
-	position: absolute;
-	z-index: 1000;
 	min-width: 380px;
 	border: 1px solid <<colour dropdown-border>>;
 	background-color: <<colour dropdown-background>>;
@@ -1201,10 +1199,6 @@ html body.tc-body.tc-single-tiddler-window {
 	white-space: nowrap;
 	text-shadow: none;
 	line-height: 1.4;
-}
-
-.tc-search-drop-down {
-	margin-left: -12px;
 }
 
 .tc-drop-down .tc-drop-down {
@@ -1304,11 +1298,21 @@ html body.tc-body.tc-single-tiddler-window {
 	margin: 4px 0 0 0;
 	white-space: nowrap;
 	z-index: 1000;
+	text-shadow: none;
+}
+
+.tc-block-dropdown.tc-search-drop-down {
+	margin-left: -12px;
 }
 
 .tc-block-dropdown a {
 	display: block;
 	padding: 4px 14px 4px 14px;
+}
+
+.tc-block-dropdown.tc-search-drop-down a {
+	display: block;
+	padding: 0px 10px 0px 10px;
 }
 
 .tc-drop-down .tc-dropdown-item,
@@ -1321,6 +1325,10 @@ html body.tc-body.tc-single-tiddler-window {
 	color: <<colour tiddler-link-background>>;
 	background-color: <<colour tiddler-link-foreground>>;
 	text-decoration: none;
+}
+
+.tc-search-results {
+    padding: 0 7px 0 7px;
 }
 
 /*

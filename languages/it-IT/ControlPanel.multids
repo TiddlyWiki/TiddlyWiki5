@@ -3,13 +3,15 @@ title: $:/language/ControlPanel/
 Advanced/Caption: Avanzate
 Advanced/Hint: Informazioni interne di questo ~TiddlyWiki
 Appearance/Caption: Aspetto
-Appearance/Hint: Personalizza l'aspetto di TiddlyWiki
+Appearance/Hint: Personalizza l'aspetto del tuo ~TiddlyWiki
 Basics/AnimDuration/Prompt: Durata animazione:
 Basics/Caption: Impostazioni base
-Basics/DefaultTiddlers/BottomHint: Utilizza &#91;&#91;le doppie parentesi quadre&#93;&#93; per titoli di frammenti con spazi bianchi. In alternativa scegli di visualizzare i frammenti secondo la <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">cronologia</$button>
+Basics/DefaultTiddlers/BottomHint: Utilizza &#91;&#91;le doppie parentesi quadre&#93;&#93; per titoli di frammenti con spazi. In alternativa scegli di visualizzare i frammenti secondo la <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">cronologia</$button>
 Basics/DefaultTiddlers/Prompt: Frammenti di default:
 Basics/DefaultTiddlers/TopHint: Scegli quali frammenti vuoi visualizzare all'avvio:
 Basics/Language/Prompt: Ciao! Scegli la lingua:
+Basics/NewJournal/Tags/Prompt: Etichette per i nuovi frammenti diario
+Basics/NewJournal/Title/Prompt: Titolo dei nuovi frammenti diario
 Basics/OverriddenShadowTiddlers/Prompt: Numero di frammenti nascosti annullati:
 Basics/ShadowTiddlers/Prompt: Numero di frammenti nascosti:
 Basics/Subtitle/Prompt: Sottotitolo:
@@ -19,8 +21,12 @@ Basics/Tiddlers/Prompt: Numero di frammenti:
 Basics/Title/Prompt: Il titolo di questo ~TiddlyWiki:
 Basics/Username/Prompt: Digita il nome con cui firmare le modifiche:
 Basics/Version/Prompt: Versione di ~TiddlyWiki:
-EditorTypes/Caption: Editor Types
+EditorTypes/Caption: Tipi di editor
+EditorTypes/Editor/Caption: Editor
+EditorTypes/Hint: Questi frammenti definiscono quale editor utilizzare per modificare tipi specifici di frammenti.
 EditorTypes/Type/Caption: Tipo
+Info/Caption: Info
+Info/Hint: Informazioni su questo ~TiddlyWiki
 LoadedModules/Caption: Moduli caricati
 LoadedModules/Hint: Elenco dei moduli attualmente caricati e loro collegamento ai frammenti sorgente. I moduli in corsivo mancano di un frammento sorgente perch&eacute; in generale installati durante il processo di avvio.
 Palette/Caption: Tavolozza
@@ -35,17 +41,19 @@ Palette/ShowEditor/Caption: Mostra editor
 Plugins/Add/Caption: Aggiungi altri plugin
 Plugins/Add/Hint: Installa plugin dalla libreria ufficiale
 Plugins/Caption: Plugin
-Plugins/Disable/Caption: disabilita
+Plugins/Disable/Caption: Disabilita
 Plugins/Disable/Hint: Disabilita questo plugin al ricaricamento della pagina
 Plugins/Disabled/Status: (disabilitato)
 Plugins/Empty/Hint: Nessuno
-Plugins/Enable/Caption: abilita
+Plugins/Enable/Caption: Abilita
 Plugins/Enable/Hint: Abilita questo plugin al ricaricamento della pagina
 Plugins/Installed/Hint: Plugin attualmente installati:
 Plugins/Language/Prompt: Lingue:
 Plugins/Languages/Caption: Lingue
 Plugins/Languages/Hint: Plugin per lingue aggiuntive
 Plugins/Plugin/Prompt: Plugins
+Plugins/Plugins/Caption: Plugins
+Plugins/Plugins/Hint: Plugins
 Plugins/Theme/Prompt: Temi
 Plugins/Themes/Caption: Temi
 Plugins/Themes/Hint: Plugin dei temi
@@ -54,7 +62,7 @@ Saving/Heading: Salvataggio
 Saving/TiddlySpot/Advanced/Heading: Impostazioni avanzate
 Saving/TiddlySpot/BackupDir: Directory di backup
 Saving/TiddlySpot/Backups: Backups
-Saving/TiddlySpot/Description: Queste impostazioni sono usate solo per il salvataggio su http://tiddlyspot.com o un server remoto compatibile
+Saving/TiddlySpot/Description: Queste impostazioni sono usate solo per il salvataggio su http://tiddlyspot.com o su un server remoto compatibile
 Saving/TiddlySpot/Filename: Nome del file di upload
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //L'indirizzo del server di default &egrave; `http://<wikiname>.tiddlyspot.com/store.cgi` e pu&ograve; essere modificato per utilizzare un indirizzo server personalizzato//
@@ -68,29 +76,49 @@ Settings/AutoSave/Enabled/Description: Salva le modifiche in automatico
 Settings/AutoSave/Hint: Salva automaticamente le modifiche durante il lavoro
 Settings/Caption: Impostazioni
 Settings/DefaultSidebarTab/Caption: Tab predefinito della barra laterale
-Settings/DefaultSidebarTab/Hint: Specifica quale tab della barra laterale è mostrato di default
-Settings/Hint: Queste impostazioni ti permettono di personalizzare il funzionamento di TiddlyWiki.
+Settings/DefaultSidebarTab/Hint: Specifica quale tab della barra laterale &egrave; mostrato di default
+Settings/Hint: Queste impostazioni ti permettono di personalizzare il comportamento di TiddlyWiki.
+Settings/LinkToBehaviour/Caption: Comportamento apertura framnmenti
+Settings/LinkToBehaviour/InsideRiver/Hint: Navigazione dall' //interno// della cronologia
+Settings/LinkToBehaviour/OpenAbove: Apri sopra il frammento corrente
+Settings/LinkToBehaviour/OpenAtBottom: Apri in basso alla cronologia
+Settings/LinkToBehaviour/OpenAtTop: Apri in alto alla cronologia
+Settings/LinkToBehaviour/OpenBelow: Apri sotto il frammento corrente
+Settings/LinkToBehaviour/OutsideRiver/Hint: Navigazione dall' //esterno// della cronologia
 Settings/NavigationAddressBar/Caption: Barra degli indirizzi
-Settings/NavigationAddressBar/Hint: Comportamento della barra degli indirizzi del browser quando si visita un tiddler
+Settings/NavigationAddressBar/Hint: Comportamento della barra degli indirizzi del browser quando si visita un frammento:
 Settings/NavigationAddressBar/No/Description: Non aggiornare la barra degli indirizzi
-Settings/NavigationAddressBar/Permalink/Description: Includi il tiddler di destinazione
-Settings/NavigationAddressBar/Permaview/Description: Includi il tiddler di destinazione e la sequenza della storia corrente 
-Settings/NavigationHistory/Caption: Cronologia di Navigazione
-Settings/NavigationHistory/Hint: Aggiornamento della cronologia quando si visita un tiddler
+Settings/NavigationAddressBar/Permalink/Description: Includi il frammento di destinazione
+Settings/NavigationAddressBar/Permaview/Description: Includi il frammento di destinazione e la sequenza della cronologia corrente
+Settings/NavigationHistory/Caption: Cronologia di navigazione
+Settings/NavigationHistory/Hint: Aggiornamento della cronologia quando si visita un frammento
 Settings/NavigationHistory/No/Description: Non aggiornare la cronologia
 Settings/NavigationHistory/Yes/Description: Aggiorna la cronologia
-Settings/ToolbarButtons/Caption: Bottoni della Barra Strumenti
-Settings/ToolbarButtons/Hint: Aspetto predefinito dei bottoni della barra strumenti:
+Settings/TitleLinks/Caption: Titolo frammento
+Settings/TitleLinks/Hint: Mostra opzionalmente titoli frammenti come collegamenti
+Settings/TitleLinks/No/Description: Non mostrare titoli frammenti come collegamenti
+Settings/TitleLinks/Yes/Description: Mostra titoli frammenti come collegamenti
+Settings/ToolbarButtons/Caption: Pulsanti della barra strumenti
+Settings/ToolbarButtons/Hint: Aspetto predefinito dei pulsanti della barra strumenti:
 Settings/ToolbarButtons/Icons/Description: Mostra icona
 Settings/ToolbarButtons/Text/Description: Mostra testo
-StoryView/Caption: Vista
+Settings/ToolbarButtonStyle/Caption: Stile pulsanti della barra strumenti
+Settings/ToolbarButtonStyle/Hint: Scegli lo stile dei pulsanti della barra strumenti
+Settings/ToolbarButtonStyle/Styles/Borderless: Senza bordi
+Settings/ToolbarButtonStyle/Styles/Boxed: Incorniciati
+Settings/ToolbarButtonStyle/Styles/Rounded: Arrotondati
+StoryView/Caption: Vista cronologia
 StoryView/Prompt: Vista corrente:
 Theme/Caption: Tema
-Theme/Prompt: Tema corrente:
-TiddlerFields/Caption: Campi frammenti
+Theme/Prompt: Tema corrente: 
+TiddlerFields/Caption: Campi frammenti 
 TiddlerFields/Hint: Questa &egrave; la serie completa dei TiddlerFields utilizzati in questo wiki (sono inclusi i frammenti di sistema ed esclusi i frammenti nascosti).
 Toolbars/Caption: Barre strumenti
 Toolbars/EditToolbar/Caption: Barra strumenti di modifica
-Toolbars/EditToolbar/Hint: Scegli quali bottoni mostrare in modalità modifica tiddler
-Toolbars/Hint: Scegli quali bottoni mostrare nella barra strumenti
+Toolbars/EditToolbar/Hint: Scegli quali pulsanti mostrare nella modalità modifica frammenti
+Toolbars/Hint: Scegli quali pulsanti mostrare nella barra strumenti
+Toolbars/PageControls/Caption: Barra strumenti di pagina
+Toolbars/PageControls/Hint: Scegli quali pulsanti mostrare nella barra strumenti della pagina principale
+Toolbars/ViewToolbar/Caption: Barra strumenti visualizzazione
+Toolbars/ViewToolbar/Hint: Scegli quali pulsanti mostrare per i frammenti in modo visualizzazione
 Tools/Download/Full/Caption: Scarica l'intero wiki

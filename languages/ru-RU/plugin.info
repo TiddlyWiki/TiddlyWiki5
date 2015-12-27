@@ -3,6 +3,6 @@
 	"name": "ru-RU",
 	"plugin-type": "language",
 	"description": "Russian (Russia)",
-	"author": "AndreyYankin aka andrey013",
+	"author": "AndreyYankin aka andrey013, Глеб Прохожев <glebujka@gmail.com>",
 	"core-version": ">=5.0.0"
 }

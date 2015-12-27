@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 caption: each
 op-purpose: select one of each group of input titles by field
 op-input: a [[selection of titles|Title Selection]]
-op-suffix: optionally, `list`
+op-suffix: optionally, `list-item`
 op-parameter: the name of a [[field|TiddlerFields]], defaulting to <<.field title>>
 op-parameter-name: F
 op-output: a selection containing the first input title encountered for each distinct value of field <<.place F>>
@@ -15,7 +15,7 @@ Each input title is processed in turn. The value of field <<.place F>> in the co
 
 ;each
 :As long as the field's value has not been encountered before, the title is appended to the output.
-;each:list
+;each:list-item
 :The value is treated as a [[title list|Title List]]. Each title in the list considered in turn. If it has not been encountered before, it is appended to the output.
 
 If a tiddler doesn't contain field <<.place F>>, it is treated as if the field's value was empty.

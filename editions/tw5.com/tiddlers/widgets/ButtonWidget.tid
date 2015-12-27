@@ -37,4 +37,14 @@ The content of the `<$button>` widget is displayed within the button.
 |tag |An optional html tag to use instead of the default "button" |
 |default |Default value if `set` tiddler is missing for testing against `setTo` to determine `selectedClass` |
 
+''Note:'' In almost all other cases where a TextReference is used as a widget attribute, it will be placed between curly brackets, to [[transclude|Transclusion in WikiText]] the value currently stored there.  However, when we use a TextReference as the value of a button widget's `set` attribute, we are referencing //the storage location itself//, rather than the value stored there, so we do ''not'' use curly brackets there.  //Example:// we could code a button widget that sets the `caption` field of TiddlerA to be the same as that of TiddlerB as:
+
+```
+<$button set="TiddlerA!!caption" setTo={{TiddlerB!!caption}} >
+
+Press me!
+
+</$button>
+```
+
 ''Tip:'' Set ''class'' to `tc-btn-invisible tc-tiddlylink` to have a button look like an internal link.

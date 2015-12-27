@@ -1,0 +1,8 @@
+title: $:/language/Help/editions
+description: Elenca le edizioni disponibili di TiddlyWiki
+
+Elenca i nomi e le descrizioni delle edizioni disponibili. Puoi creare un nuovo wiki di una specifica edizione con il comando `--init`.
+
+```
+--editions
+```
