@@ -131,9 +131,7 @@ checklist widget
         this.checklistItem = this.getAttribute("item");
         this.checklistAlt = this.getAttribute("alt", "");
         this.checklistClass = this.getAttribute("class", "");
-        if (this.getAttribute("invert") === "yes" || this.getAttribute("invert", "") === "true") {
-            this.checklistInvert = true;
-        }
+        this.checklistInvert = this.getAttribute("invert", "");
         if (this.hasAttribute("list")) {
             this.checklistList = this.getAttribute("list");
         } else {
