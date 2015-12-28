@@ -1,7 +1,7 @@
 caption: checkbox
 created: 20151227043306626
-grocery-list: milk cheese bread tea coffee sugar
-modified: 20151227045919828
+grocery-list: milk cheese bread tea coffee suger
+modified: 20151228062413632
 shopping-list: milk
 status: open
 tags: Widgets
@@ -24,7 +24,7 @@ The content of the `<$checklist>` widget is displayed within an HTML `<label>` e
 |item |The name of the item to which the checkbox should be bound |
 |alt |Optional alternative item which, when specified, will exchange places with the specified item |
 |invert |When set to "yes" or "true", flips the tag binding logic so that the absence of the tag causes the checkbox to be checked  |
-|list or field |The name of the field to which the checkbox should be bound (defaults to the ''tags'' field) |
+|field |The name of the field to which the checkbox should be bound (defaults to the ''tags'' field) |
 |class |The class that will be assigned to the label element |
 
 !! Normal Mode
@@ -57,7 +57,7 @@ The widget may be used to toggle any of the items in a list. In this case, the l
 src="""<table>
 <$list filter="[list[!!grocery-list]]" variable="item">
 <$vars thing=<<item>>>
-<tr><td><<item>></td><td><$checklist list="shopping-list" item=<<item>>/></td></tr>
+<tr><td><<item>></td><td><$checklist field="shopping-list" item=<<item>>/></td></tr>
 </$vars>
 </$list>
 </table>"""/>
