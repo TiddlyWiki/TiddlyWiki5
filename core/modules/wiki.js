@@ -1166,7 +1166,7 @@ exports.findDraft = function(targetTitle) {
 /*
 Check whether the specified draft tiddler has been modified.
 If the original tiddler doesn't exist, create  a vanilla tiddler variable,
-to check if aditional fields have been added.
+to check if additional fields have been added.
 */
 exports.isDraftModified = function(title) {
 	var tiddler = this.getTiddler(title);
