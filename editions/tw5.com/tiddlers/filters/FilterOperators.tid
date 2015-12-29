@@ -1,3 +1,9 @@
+created: 20140410103123179
+modified: 20150917193612610
+tags: Filters
+title: Filter Operators
+type: text/vnd.tiddlywiki
+
 \define .operator-rows(filter)
 <$list filter="$filter$"><tr>
 <td><$link to={{!!title}}>{{!!caption}}</$link></td>
