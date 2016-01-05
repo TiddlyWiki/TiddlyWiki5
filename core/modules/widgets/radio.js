@@ -33,12 +33,15 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	// Execute our logic
 	this.execute();
+	var isChecked = this.getValue() === this.radioValue;
 	// Create our elements
 	this.labelDomNode = this.document.createElement("label");
-	this.labelDomNode.setAttribute("class",this.radioClass);
+	this.labelDomNode.setAttribute("class",
+   		this.radioClass + (isChecked ? " tc-radio-selected " + this.selectedClass : "")
+  	);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","radio");
-	if(this.getValue() == this.radioValue) {
+	if(isChecked) {
 		this.inputDomNode.setAttribute("checked","true");
 	}
 	this.labelDomNode.appendChild(this.inputDomNode);
@@ -92,6 +95,7 @@ RadioWidget.prototype.execute = function() {
 	this.radioIndex = this.getAttribute("index");
 	this.radioValue = this.getAttribute("value");
 	this.radioClass = this.getAttribute("class","");
+	this.selectedClass = this.getAttribute("selectedClass","");
 	if(this.radioClass !== "") {
 		this.radioClass += " ";
 	}
@@ -105,7 +109,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RadioWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.value || changedAttributes["class"]) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.value || changedAttributes["class"] || changedAttributes.selectedClass) {
 		this.refreshSelf();
 		return true;
 	} else {

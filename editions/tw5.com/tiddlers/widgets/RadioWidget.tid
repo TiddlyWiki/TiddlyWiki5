@@ -1,6 +1,6 @@
 caption: radio
 created: 20131212195353929
-modified: 20161217112444671
+modified: 20170112102444671
 tags: Widgets
 title: RadioWidget
 type: text/vnd.tiddlywiki
@@ -19,14 +19,14 @@ The content of the `<$radio>` widget is displayed within an HTML `<label>` eleme
 |index|<<.from-version "5.1.14">> The index of the //tiddler// being [[DataTiddler|DataTiddlers]] bound to the radio button<<.tip "takes precedence over //field//">>|
 |value |The value for the //field// or //index// of the //tiddler//|
 |class |CSS classes to be assigned to the label around the radio button |
+|selectedClass |<<.from-version "5.1.14">> a CSS class assigned to the wrapper when the radio button is selected<br>» `tc-radio-selected` is always applied when selected |
 
 !! Field Mode
 
 This example uses the radio widget to change the `modifier` field of this tiddler:
 
-<<wikitext-example-without-html """<$radio field="modifier" value="JoeBloggs"> Joe Bloggs</$radio>
+<<wikitext-example-without-html """<$radio field="modifier" value="JoeBloggs" selectedClass="tc-btn-big-green"> Joe Bloggs</$radio>
 <$radio field="modifier" value="JaneBloggs"> Jane Bloggs</$radio>""">>
-
 
 !! Index Mode
 
@@ -35,6 +35,6 @@ Using the radio widget in index mode requires the //index// attribute to specify
 This example sets the `Tree Frog` index in the tiddler AnimalColours:
 
 <$macrocall $name="wikitext-example-without-html" src="""<$tiddler tiddler="AnimalColours">
-<$radio index="Tree Frog" value="green"> green</$radio>
+<$radio index="Tree Frog" value="green" selectedClass="tc-btn-big-green"> green</$radio>
 <$radio index="Tree Frog" value="brown"> brown</$radio>
 </$tiddler>"""/>
