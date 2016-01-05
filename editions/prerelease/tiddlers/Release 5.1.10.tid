@@ -80,7 +80,6 @@ Revert
 !! Hackability Improvements
 
 * Updated to KaTeX v0.5.1, with [[several new features|https://github.com/Khan/KaTeX/releases]]
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c4397792f5d396288048bcc3bb4ee8e95dbc2c5e]] added [[recent Operator]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e0aacc84d5f084ff7a53153c590fbff3d24f2e2c]] `publishFilter` to default save template
 * [[Allow|https://github.com/Jermolene/TiddlyWiki5/commit/7dddc925ae93725552b98bc348a07572895da96c]] ''delete'' button to be used in the tiddler view-mode toolbar
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/742161675421a942051abed01cb47c0394f4db6d]] a new [[hidden setting for keyboard shortcuts|Hidden Setting: Keyboard Shortcuts]]
