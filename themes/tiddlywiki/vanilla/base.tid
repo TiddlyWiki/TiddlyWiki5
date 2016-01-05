@@ -1472,6 +1472,7 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-tab-buttons button {
 	color: <<colour tab-foreground>>;
 	padding: 3px 5px 3px 5px;
+	margin-right: 0.3em;
 	font-weight: 300;
 	border: none;
 	background: inherit;
@@ -1487,6 +1488,7 @@ html body.tc-body.tc-single-tiddler-window {
 	display: block;
 	width: 100%;
 	margin-top: 3px;
+	margin-right: 0;
 	text-align: right;
 	background-color: <<colour tab-background>>;
 	border-left: 1px solid <<colour tab-border>>;
