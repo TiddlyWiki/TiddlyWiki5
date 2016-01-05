@@ -59,14 +59,16 @@ Invoke the action associated with this widget
 */
 SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var self = this,
-		options = {};
+	    options = {};
 	options.suppressTimestamp = !this.actionTimestamp;
-	if((typeof this.actionField == "string") || (typeof this.actionIndex == "string")  || (typeof this.actionValue == "string")) {
-		this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue,options);
+	if (this.actionField) {
+		this.wiki.setText(this.actionTiddler, this.actionField, this.actionIndex, this.actionValue, options);
 	}
-	$tw.utils.each(this.attributes,function(attribute,name) {
-		if(name.charAt(0) !== "$") {
-			self.wiki.setText(self.actionTiddler,name,undefined,attribute,options);
+	$tw.utils.each(this.attributes, function (attribute, name) {
+		if (name.charAt(0) !== "$") {
+			(name.search("!!") !== -1 || name.search("##") !== -1) ?
+			self.wiki.setTextReference(name, attribute, self.actionTiddler):
+			self.wiki.setText(self.actionTiddler, name, undefined, attribute, options);
 		}
 	});
 	return true; // Action was invoked
