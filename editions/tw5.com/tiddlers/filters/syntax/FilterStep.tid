@@ -18,4 +18,6 @@ The step's <<.def operator>> is drawn from a list of [[predefined keywords|Filte
 
 The <<.def suffix>> is additional text, often the name of a [[field|TiddlerFields]], that extends the meaning of certain operators.
 
-Many steps require an explicit <<.def parameter>> value, also known as an <<.def operand>>, that further defines what the step is to do.
+Many [[filters|Filter Operators]] require an explicit <<.def parameter>> value, better known as the <<.def "filter operand">>, mostly specifying a value for the filter to operate on.
+
+Various filters allow to specify the optional <<.def prefix>> `!` for negation. For specifics about negated results, please refer to the documentation for the filter of interest.
