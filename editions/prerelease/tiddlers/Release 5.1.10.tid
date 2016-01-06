@@ -102,6 +102,7 @@ Revert
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/1909]] new [[days Operator]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/231d0a3dc8385fcb2173436754f00f464d7b018e]] official plugin wrappers for the JavaScript libraries [[async.js|https://github.com/caolan/async]] and [[JSZip|https://stuk.github.io/jszip/]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2037]] new ActionListopsWidget
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/791f97983e8bbbbb209cf0e7068f858dfd2d38eb]] ''rows'' attribute to EditTextWidget
 
 !! Bug Fixes
 
