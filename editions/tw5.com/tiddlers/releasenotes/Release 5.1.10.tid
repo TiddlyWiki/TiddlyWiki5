@@ -22,17 +22,13 @@ This release includes several low-level performance optimisations that should im
 
 There is a new setting in the control panel to enable performance instrumentation, making it much easier to measure and improve performance issues.
 
-!! Résumé Builder Edition
+!! New Editions
 
-The new [[Résumé Builder Edition]] by @inmysocks is a custom edition to guide you through the process of using TiddlyWiki to create a good looking résumé (or curriculum vitæ).
+Three new editions of TiddlyWiki are included in this release. These can be used as starting points for creating your own wiki for several purposes:
 
-!! Blog Edition
-
-The new [[Blog Edition]] provides tools for using TiddlyWiki under Node.js to create a static HTML blog that can be published on GitHub pages (or similar).
-
-!! Text-Slicer Edition
-
-The new [[Text-Slicer Edition]] is a custom edition with tools to help advanced users slice longer texts up into individual tiddlers.
+* The [[Résumé Builder Edition]] by @inmysocks is a custom edition to guide you through the process of using TiddlyWiki to create a good looking résumé (or curriculum vitæ)
+* The [[Blog Edition]] provides tools for using TiddlyWiki under Node.js to create a static HTML blog that can be published on GitHub pages (or similar)
+* The [[Text-Slicer Edition]] is a custom edition with tools to help advanced users slice longer texts up into individual tiddlers.
 
 !! External Text Tiddlers
 
