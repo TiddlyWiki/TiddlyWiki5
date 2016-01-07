@@ -1,0 +1,9 @@
+created: 20160107225753340
+modified: 20160107225855353
+tags: Features
+title: Notifications
+type: text/vnd.tiddlywiki
+
+Notifications are small informational messages that appear at the top right of the TiddlyWiki window, and automatically disappear after a preset time.
+
+<$button message="tm-notify" param="SampleNotification">Display sample notification</$button>
