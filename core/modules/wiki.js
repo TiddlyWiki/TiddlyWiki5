@@ -427,6 +427,38 @@ exports.getTiddlerLinks = function(title) {
 };
 
 /*
+Return an array of tiddler titles that are directly transcluded from the specified tiddler
+*/
+exports.getTiddlerTranscludes = function(title) {
+	var self = this;
+	// We'll cache the transcludes  so they only get computed if the tiddler changes
+	return this.getCacheForTiddler(title,"transcludes",function() {
+		// Parse the tiddler
+		var parser = self.parseTiddler(title);
+		// Count up the transcludes
+		var transcludes = [],
+			checkParseTree = function(parseTree) {
+				for(var t=0; t<parseTree.length; t++) {
+					var parseTreeNode = parseTree[t];
+					if(parseTreeNode.type === "transclude" && parseTreeNode.attributes.tiddler && parseTreeNode.attributes.tiddler.type === "string") {
+						var value = parseTreeNode.attributes.tiddler.value;
+						if(transcludes.indexOf(value) === -1) {
+							transcludes.push(value);
+						}
+					}
+					if(parseTreeNode.children) {
+						checkParseTree(parseTreeNode.children);
+					}
+				}
+			};
+		if(parser) {
+			checkParseTree(parser.tree);
+		}
+		return transcludes;
+	});
+};
+
+/*
 Return an array of tiddler titles that link to the specified tiddler
 */
 exports.getTiddlerBacklinks = function(targetTitle) {
