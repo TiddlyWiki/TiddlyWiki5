@@ -262,3 +262,5 @@ Santiago Pelufo, @spelufo, 2015/12/18
 Matthew Lauber, @mklauber, 2015/11/13
 
 Matthew DeAbreu, @mdeabreu, 2016/01/05
+
+Cameron Fischer, @flibbles, 2016/01/08
