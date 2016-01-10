@@ -395,24 +395,22 @@ exports.forEachTiddler = function(/* [options,]callback */) {
 };
 
 /*
-Return an array of tiddler titles that are directly linked from the specified tiddler
+Performs a method on each treeNode in the tiddler title, then returns the results of all calls in a list with no duplicates.
 */
-exports.getTiddlerLinks = function(title) {
+exports.collectFromEachTiddlerNode = function(title, cacheName, treeNodeMethod) {
 	var self = this;
 	// We'll cache the links so they only get computed if the tiddler changes
-	return this.getCacheForTiddler(title,"links",function() {
+	return this.getCacheForTiddler(title,cacheName,function() {
 		// Parse the tiddler
 		var parser = self.parseTiddler(title);
 		// Count up the links
-		var links = [],
+		var results = [],
 			checkParseTree = function(parseTree) {
 				for(var t=0; t<parseTree.length; t++) {
 					var parseTreeNode = parseTree[t];
-					if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
-						var value = parseTreeNode.attributes.to.value;
-						if(links.indexOf(value) === -1) {
-							links.push(value);
-						}
+					var value = treeNodeMethod(parseTreeNode);
+					if(value && results.indexOf(value) === -1) {
+						results.push(value);
 					}
 					if(parseTreeNode.children) {
 						checkParseTree(parseTreeNode.children);
@@ -422,41 +420,33 @@ exports.getTiddlerLinks = function(title) {
 		if(parser) {
 			checkParseTree(parser.tree);
 		}
-		return links;
+		return results;
 	});
 };
+
+/*
+Return an array of tiddler titles that are directly linked from the specified tiddler
+*/
+exports.getTiddlerLinks = function(title) {
+	var self = this;
+	return self.collectFromEachTiddlerNode(title, "link", function(parseTreeNode) {
+		if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
+			return parseTreeNode.attributes.to.value;
+		}
+	});
+}
 
 /*
 Return an array of tiddler titles that are directly transcluded from the specified tiddler
 */
 exports.getTiddlerTranscludes = function(title) {
 	var self = this;
-	// We'll cache the transcludes  so they only get computed if the tiddler changes
-	return this.getCacheForTiddler(title,"transcludes",function() {
-		// Parse the tiddler
-		var parser = self.parseTiddler(title);
-		// Count up the transcludes
-		var transcludes = [],
-			checkParseTree = function(parseTree) {
-				for(var t=0; t<parseTree.length; t++) {
-					var parseTreeNode = parseTree[t];
-					if(parseTreeNode.type === "transclude" && parseTreeNode.attributes.tiddler && parseTreeNode.attributes.tiddler.type === "string") {
-						var value = parseTreeNode.attributes.tiddler.value;
-						if(transcludes.indexOf(value) === -1) {
-							transcludes.push(value);
-						}
-					}
-					if(parseTreeNode.children) {
-						checkParseTree(parseTreeNode.children);
-					}
-				}
-			};
-		if(parser) {
-			checkParseTree(parser.tree);
+	return self.collectFromEachTiddlerNode(title, "transclude", function(parseTreeNode) {
+		if(parseTreeNode.type === "transclude" && parseTreeNode.attributes.tiddler && parseTreeNode.attributes.tiddler.type === "string") {
+			return parseTreeNode.attributes.tiddler.value;
 		}
-		return transcludes;
 	});
-};
+}
 
 /*
 Return an array of tiddler titles that link to the specified tiddler
