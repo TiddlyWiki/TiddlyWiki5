@@ -429,7 +429,7 @@ Return an array of tiddler titles that are directly linked from the specified ti
 */
 exports.getTiddlerLinks = function(title) {
 	var self = this;
-	return self.collectFromEachTiddlerNode(title, "link", function(parseTreeNode) {
+	return self.collectFromEachTiddlerNode(title, "links", function(parseTreeNode) {
 		if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
 			return parseTreeNode.attributes.to.value;
 		}
@@ -441,7 +441,7 @@ Return an array of tiddler titles that are directly transcluded from the specifi
 */
 exports.getTiddlerTranscludes = function(title) {
 	var self = this;
-	return self.collectFromEachTiddlerNode(title, "transclude", function(parseTreeNode) {
+	return self.collectFromEachTiddlerNode(title, "transcludes", function(parseTreeNode) {
 		if(parseTreeNode.type === "transclude" && parseTreeNode.attributes.tiddler && parseTreeNode.attributes.tiddler.type === "string") {
 			return parseTreeNode.attributes.tiddler.value;
 		}
