@@ -4,3 +4,5 @@ fontfamily: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "DejaVu Sans", 
 codefontfamily: Monaco, Consolas, "Lucida Console", "DejaVu Sans Mono", monospace
 backgroundimageattachment: fixed
 backgroundimagesize: auto
+backgroundposition: center
+backgroundimagerepeat: no-repeat
