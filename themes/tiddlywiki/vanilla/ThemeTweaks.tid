@@ -43,8 +43,8 @@ caption: Theme Tweaks
 </$select>
 \end
 
-\define backgroundposition()
-<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundposition" default="" tag="input"/>
+\define backgroundimageposition()
+<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimageposition" default="" tag="input"/>
 \end
 
 You can tweak certain aspects of the ''Vanilla'' theme.
@@ -61,7 +61,7 @@ You can tweak certain aspects of the ''Vanilla'' theme.
 |[[Page background image|$:/themes/tiddlywiki/vanilla/settings/backgroundimage]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimage" default="" tag="input"/> |<<backgroundimage-dropdown>> |
 |[[Page background image attachment |$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment]] |<<backgroundimageattachment-dropdown>> | |
 |[[Page background image size |$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize]] |<<backgroundimagesize-dropdown>> | |
-|[[Page background image position |$:/themes/tiddlywiki/vanilla/settings/backgroundposition]] |<<backgroundposition>> | |
+|[[Page background image position |$:/themes/tiddlywiki/vanilla/settings/backgroundimageposition]] |<<backgroundimageposition>> | |
 |[[Page background image repetition |$:/themes/tiddlywiki/vanilla/settings/backgroundimagerepeat]] |<<backgroundimagerepeat>> | |
 
 ! Sizes

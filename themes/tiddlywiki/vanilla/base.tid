@@ -18,7 +18,8 @@ tags: [[$:/tags/Stylesheet]]
 -o-background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`;
 background-repeat:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagerepeat}}`;
 background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`;`
-background-position:{{$:/themes/tiddlywiki/vanilla/settings/backgroundposition}};
+background-position:{{$:/themes/tiddlywiki/vanilla/settings/backgroundimageposition}};
+background-color: <<colour page-background>>
 </$list>
 </$set>
 \end
@@ -72,7 +73,6 @@ body.tc-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/fontsize}};
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics/lineheight}};
 	color: <<colour foreground>>;
-	background-color: <<colour page-background>>;
 	fill: <<colour foreground>>;
 	word-wrap: break-word;
 	<<custom-background-datauri>>
