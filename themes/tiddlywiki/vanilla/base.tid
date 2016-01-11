@@ -16,6 +16,7 @@ tags: [[$:/tags/Stylesheet]]
 -webkit-background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`;
 -moz-background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`;
 -o-background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`;
+background-repeat:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagerepeat}}`;
 background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`;`
 background-position:{{$:/themes/tiddlywiki/vanilla/settings/backgroundposition}};
 </$list>

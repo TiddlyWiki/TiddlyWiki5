@@ -31,10 +31,15 @@ caption: Theme Tweaks
 \end
 
 \define backgroundimagesize-dropdown()
-<$select tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize" default="scroll">
-<option value="auto">Auto</option>
-<option value="cover">Cover</option>
-<option value="contain">Contain</option>
+<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize" default="" tag="input" />
+\end
+
+\define backgroundimagerepeat()
+<$select tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimagerepeat" default="scroll">
+<option value="repeat">repeat</option>
+<option value="repeat-x">repeat-x</option>
+<option value="repeat-y">repeat-y</option>
+<option value="no-repeat">no-repeat</option>
 </$select>
 \end
 
@@ -57,6 +62,7 @@ You can tweak certain aspects of the ''Vanilla'' theme.
 |[[Page background image attachment |$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment]] |<<backgroundimageattachment-dropdown>> | |
 |[[Page background image size |$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize]] |<<backgroundimagesize-dropdown>> | |
 |[[Page background image position |$:/themes/tiddlywiki/vanilla/settings/backgroundposition]] |<<backgroundposition>> | |
+|[[Page background image repetition |$:/themes/tiddlywiki/vanilla/settings/backgroundimagerepeat]] |<<backgroundimagerepeat>> | |
 
 ! Sizes
 
