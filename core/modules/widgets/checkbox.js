@@ -16,8 +16,8 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 /*
 Inherit from the base widget class
 */
-var CheckboxWidget = function(parseTreeNode, options) {
-	this.initialise(parseTreeNode, options);
+var CheckboxWidget = function(parseTreeNode,options) {
+	this.initialise(parseTreeNode,options);
 };
 
 CheckboxWidget.prototype = new Widget();
@@ -25,16 +25,16 @@ CheckboxWidget.prototype = new Widget();
 /*
 Render this widget into the DOM
 */
-CheckboxWidget.prototype.render = function(parent, nextSibling) {
+CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
 	this.labelDomNode = this.document.createElement("label");
-	this.labelDomNode.setAttribute("class", this.checkboxClass);
+	this.labelDomNode.setAttribute("class",this.checkboxClass);
 	this.inputDomNode = this.document.createElement("input");
-	this.inputDomNode.setAttribute("type", "checkbox");
+	this.inputDomNode.setAttribute("type","checkbox");
 	if(this.getValue()) {
-		this.inputDomNode.setAttribute("checked", "true");
+		this.inputDomNode.setAttribute("checked","true");
 	}
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");
@@ -44,8 +44,8 @@ CheckboxWidget.prototype.render = function(parent, nextSibling) {
 		handlerObject: this,
 		handlerMethod: "handleChangeEvent"
 	}]);
-	parent.insertBefore(this.labelDomNode, nextSibling);
-	this.renderChildren(this.spanDomNode, null);
+	parent.insertBefore(this.labelDomNode,nextSibling);
+	this.renderChildren(this.spanDomNode,null);
 	this.domNodes.push(this.labelDomNode);
 };
 
@@ -147,8 +147,8 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxChecked = this.getAttribute("checked");
 	this.checkboxUnchecked = this.getAttribute("unchecked");
 	this.checkboxDefault = this.getAttribute("default");
-	this.checkboxClass = this.getAttribute("class", "");
-	this.checkboxInvertTag = this.getAttribute("invertTag", "");
+	this.checkboxClass = this.getAttribute("class","");
+	this.checkboxInvertTag = this.getAttribute("invertTag","");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
