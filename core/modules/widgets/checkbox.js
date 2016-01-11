@@ -6,20 +6,19 @@ module-type: widget
 Checkbox widget to toggle a tag, or set/reset the value of a field or index
 
 \*/
-(function() {
+(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
-
-/*
-Inherit from the base widget class
-*/
 var CheckboxWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
+/*
+Inherit from the base widget class
+*/
 CheckboxWidget.prototype = new Widget();
 
 /*
