@@ -1,9 +1,10 @@
 caption: 5.1.10
-created: 20151105122712982
-modified: 20151105122712982
+created: 20160107231609312
+modified: 20160107231609312
 tags: ReleaseNotes
 title: Release 5.1.10
 type: text/vnd.tiddlywiki
+released: 20160107231609312
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.9...v5.1.10]]//
 
@@ -22,17 +23,13 @@ This release includes several low-level performance optimisations that should im
 
 There is a new setting in the control panel to enable performance instrumentation, making it much easier to measure and improve performance issues.
 
-!! Résumé Builder Edition
+!! New Editions
 
-The new [[Résumé Builder Edition]] by @inmysocks is a custom edition to guide you through the process of using TiddlyWiki to create a good looking résumé (or curriculum vitæ).
+Three new editions of TiddlyWiki are included in this release. These can be used as starting points for creating your own wiki for several purposes:
 
-!! Blog Edition
-
-The new [[Blog Edition]] provides tools for using TiddlyWiki under Node.js to create a static HTML blog that can be published on GitHub pages (or similar).
-
-!! Text-Slicer Edition
-
-The new [[Text-Slicer Edition]] is a custom edition with tools to help advanced users slice longer texts up into individual tiddlers.
+* The [[Résumé Builder Edition]] by @inmysocks is a custom edition to guide you through the process of using TiddlyWiki to create a good looking résumé (or curriculum vitæ)
+* The [[Blog Edition]] provides tools for using TiddlyWiki under Node.js to create a static HTML blog that can be published on GitHub pages (or similar)
+* The [[Text-Slicer Edition]] is a custom edition with tools to help advanced users slice longer texts up into individual tiddlers.
 
 !! External Text Tiddlers
 
@@ -64,7 +61,7 @@ Revert
 
 * Added Swedish translation by @Superdos
 * Added Korean (Korean Republic) translation by @araname
-* Improved Chinese, Danish, Dutch and Russian translations
+* Improved Catalan, Chinese, Danish, Dutch, French, German, Italian, Russian and Spanish translations
 
 !! Usability Improvements
 
@@ -74,11 +71,12 @@ Revert
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/2cb6400773096b02b71c1851fb0fac5dfefbbd6f]] support for automatically linked system tiddler titles to include digits and underscore
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/2c9b1ae2579f8d2452c60217aa3e153a29d32d1f]] warning when trying to use plugins designed for TiddlyWiki Classic
 * Upgraded to version v8.8.0 of highlight.js for the [[Highlight Plugin]]
+* [[Removed|https://github.com/Jermolene/TiddlyWiki5/pull/1981]] the need to manually confirm deleting alerts
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2147]] optional tooltips to [[tabs Macro]]
 
 !! Hackability Improvements
 
 * Updated to KaTeX v0.5.1, with [[several new features|https://github.com/Khan/KaTeX/releases]]
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c4397792f5d396288048bcc3bb4ee8e95dbc2c5e]] added [[recent Operator]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e0aacc84d5f084ff7a53153c590fbff3d24f2e2c]] `publishFilter` to default save template
 * [[Allow|https://github.com/Jermolene/TiddlyWiki5/commit/7dddc925ae93725552b98bc348a07572895da96c]] ''delete'' button to be used in the tiddler view-mode toolbar
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/742161675421a942051abed01cb47c0394f4db6d]] a new [[hidden setting for keyboard shortcuts|Hidden Setting: Keyboard Shortcuts]]
@@ -95,6 +93,13 @@ Revert
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/33563d01baed4b4092fc834eb6a1df55e1671418]] option in [[control panel|$:/ControlPanel]] to enable the display of detailed performance instrumentation in the browser developer console
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bc0cbf907063ccd484da7d56c8e42cf5e90489b8]] a LazyLoading template for all non-system tiddlers
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/issues/1984]] handling of TiddlerLinks in Markdown tiddlers
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/2004]] FieldManglerWidget to create the target tiddler if it does not exist
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/2049]] KeyboardWidget to trigger ActionWidgets
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/2074]] SelectWidget to support multiple selections
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/1909]] new [[days Operator]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/231d0a3dc8385fcb2173436754f00f464d7b018e]] official plugin wrappers for the JavaScript libraries [[async.js|https://github.com/caolan/async]] and [[JSZip|https://stuk.github.io/jszip/]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2037]] new ActionListopsWidget
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/791f97983e8bbbbb209cf0e7068f858dfd2d38eb]] ''rows'' attribute to EditTextWidget
 
 !! Bug Fixes
 
@@ -120,19 +125,26 @@ Revert
 * [[@araname|https://github.com/araname]]
 * [[@BramChen|https://github.com/BramChen]]
 * [[@danielo515|https://github.com/danielo515]]
+* [[@Drakor|https://github.com/Drakor]]
 * [[@erwanm|https://github.com/erwanm]]
+* [[@felixhayashi|https://github.com/felixhayashi]]
 * [[@Evolena|https://github.com/Evolena]]
 * [[@hegart-dmishiv|https://github.com/hegart-dmishiv]]
 * [[@idoine|https://github.com/idoine]]
 * [[@inmysocks|https://github.com/inmysocks]]
+* [[@IreneKnapp|https://github.com/IreneKnapp]]
+* [[@gernert|https://github.com/gernert]]
 * [[@kixam|https://github.com/kixam]]
 * [[@Marxsal|https://github.com/Marxsal]]
 * [[@matabele|https://github.com/matabele]]
+* [[@mklauber|https://github.com/mklauber]]
 * [[@nameanyone|https://github.com/nameanyone]]
 * [[@pmario|https://github.com/pmario]]
 * [[@senevoldsen90|https://github.com/senevoldsen90]]
 * [[@Spangenhelm|https://github.com/Spangenhelm]]
+* [[@spelufo|https://github.com/spelufo]]
 * [[@SuperDOS|https://github.com/SuperDOS]]
 * [[@tgrosinger|https://github.com/tgrosinger]]
 * [[@tobibeer|https://github.com/tobibeer]]
+* [[@xcazin|https://github.com/xcazin]]
 * [[@zahlman|https://github.com/zahlman]]

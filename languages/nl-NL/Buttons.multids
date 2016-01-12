@@ -21,7 +21,7 @@ Edit/Hint: Wijzig deze tiddler
 Encryption/Caption: versleuteling
 Encryption/ClearPassword/Caption: verwijder wachtwoord
 Encryption/ClearPassword/Hint: Verwijder het wachtwoord en sla de wiki onversleuteld op
-Encryption/Hint: Vul in / verwijder een wachtwoord om deze wiki op te slaan
+Encryption/Hint: Vul in / verwijder wachtwoord om deze wiki op te slaan
 Encryption/SetPassword/Caption: vul wachtwoord in
 Encryption/SetPassword/Hint: Vul een wachtwoord in om deze wiki versleuteld op te slaan
 ExportPage/Caption: exporteer alle
@@ -30,6 +30,14 @@ ExportTiddler/Caption: exporteer tiddler
 ExportTiddler/Hint: Exporteer tiddler
 ExportTiddlers/Caption: exporteer tiddlers
 ExportTiddlers/Hint: Exporteer tiddlers
+Fold/Caption: klap tiddler in
+Fold/FoldBar/Caption: in- / uitklap balk
+Fold/FoldBar/Hint: Optionele in- / uitklapbalken
+Fold/Hint: Klap de tekst van deze tiddler in
+FoldAll/Caption: klap alle tiddlers in
+FoldAll/Hint: Klap de tekst van alle open tiddlers in
+FoldOthers/Caption: klap andere tiddlers in
+FoldOthers/Hint: Klap de tekst van alle andere open tiddlers in
 FullScreen/Caption: volledig scherm
 FullScreen/Hint: Start of verlaat 'volledig scherm'
 Help/Caption: hulp
@@ -74,3 +82,7 @@ TagManager/Caption: labelmanager
 TagManager/Hint: Open labelmanager
 Theme/Caption: thema
 Theme/Hint: Kies het thema
+Unfold/Caption: klap tiddler uit
+Unfold/Hint: Klap de tekst van deze tiddler uit
+UnfoldAll/Caption: klap alle tiddlers uit
+UnfoldAll/Hint: Klap de tekst van alle open tiddlers uit

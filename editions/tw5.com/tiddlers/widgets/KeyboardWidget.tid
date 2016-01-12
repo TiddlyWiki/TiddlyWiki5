@@ -1,13 +1,13 @@
 caption: keyboard
 created: 20140302192136805
-modified: 20150514091459257
+modified: 20151224141005939
 tags: Widgets
 title: KeyboardWidget
 type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The keyboard widget allows [[Messages]] to be generated in response to key presses.
+The keyboard widget allows ActionWidgets to be triggered by specific key combinations. There is also a shorthand for generating [[Messages]].
 
 ! Content and Attributes
 

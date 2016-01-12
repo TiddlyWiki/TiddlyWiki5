@@ -1,0 +1,11 @@
+created: 20160107225427489
+modified: 20160107225651558
+tags: Features
+title: Modals
+type: text/vnd.tiddlywiki
+
+Modals (or "wizards") fade the main TiddlyWiki window to display an isolated tiddler that must be explicitly dismissed by the user.
+
+Modals are displayed with the [[WidgetMessage: tm-modal]].
+
+<$button message="tm-modal" param="SampleWizard">Open demo modal</$button>

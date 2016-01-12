@@ -1,7 +1,9 @@
 caption: action-listops
 created: 20141025120850184
-modified: 20151108075247352
+list: efg hlm pqr
+modified: 20151228083329099
 myfield: 
+revision: 0
 tags: ActionWidgets Widgets
 title: ActionListopsWidget
 type: text/vnd.tiddlywiki
@@ -28,7 +30,7 @@ The ''action-listops'' widget is invisible. Any content within it is ignored.
 
 |!Attribute |!Description |
 |$tiddler |The title of the tiddler whose lists are to be modified (if not provided defaults to the [[current tiddler|Current Tiddler]] |
-|$list |The name of a field to be manipulated as a list (defaults to 'list') |
+|$field |The name of a field to be manipulated as a list (defaults to 'list') |
 |$index |Optional index of a property in a [[data tiddler|DataTiddlers]] index to be manipulated as a list |
 |$filter |An optional filter expression, the output of which will be saved to the field/index being manipulated |
 |$subfilter |An optional subfilter expression, which takes the list being manipulated as input, and saves the modified list back to the field/index being manipulated |
@@ -54,19 +56,19 @@ In this example we shall populate and then clear a list in an ordinary field (my
 
 <$macrocall $name='wikitext-example-without-html'
 src="""<$button>
-<$action-listops $list="myfield" $subfilter="efg hlm pqr"/>
+<$action-listops $field="myfield" $subfilter="efg hlm pqr"/>
 Populate 'myfield'
 </$button>
 <$button>
-<$action-listops $list="myfield" $subfilter="abc xyz"/>
+<$action-listops $field="myfield" $subfilter="abc xyz"/>
 Append More Items
 </$button>
 <$button>
-<$action-listops $list="myfield" $subfilter="-abc -hlm"/>
+<$action-listops $field="myfield" $subfilter="-abc -hlm"/>
 Remove Items
 </$button>
 <$button>
-<$action-listops $list="myfield" $filter="[[]]"/>
+<$action-listops $field="myfield" $filter="[[]]"/>
 Clear 'myfield'
 </$button>
 
@@ -79,11 +81,11 @@ In this example we shall append and remove items from a list in an ordinary fiel
 
 <$macrocall $name='wikitext-example-without-html'
 src="""<$button>
-<$action-listops $list="myfield" $subfilter="-efg ijk xyz [[this is a title]] +[sort[]]"/>
+<$action-listops $field="myfield" $subfilter="-efg ijk xyz [[this is a title]] +[sort[]]"/>
 Mangle List
 </$button>
 <$button>
-<$action-listops $list="myfield" $subfilter="-xyz -[[this is a title]] +[!sort[]]"/>
+<$action-listops $field="myfield" $subfilter="-xyz -[[this is a title]] +[!sort[]]"/>
 Unmangle List
 </$button>
 

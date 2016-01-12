@@ -96,9 +96,7 @@ No information provided
 </$set>
 \end
 
-<$button message="tm-modal" param="$:/core/ui/ControlPanel/Modals/AddPlugins" tooltip={{$:/language/ControlPanel/Plugins/Add/Hint}} class="tc-btn-big-green" style="background:blue;">
-{{$:/core/images/download-button}} <<lingo Add/Caption>>
-</$button>
+{{$:/core/ui/ControlPanel/Plugins/AddPlugins}}
 
 <<lingo Installed/Hint>>
 

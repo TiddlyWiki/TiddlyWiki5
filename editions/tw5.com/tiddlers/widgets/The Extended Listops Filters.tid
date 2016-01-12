@@ -13,9 +13,11 @@ title: The Extended Listops Filters
 
 ! Introduction
 
-A number of extended filters are necessary to manipulate lists. The first set of filters are designed to move items from the tail of the list and insert them at specified locations in the list. Items are often appended to the list before using these filters. In general, these filters accept a suffix specifying the number of items to move (defaults to 1.) 
+A number of extended filters are necessary to manipulate lists. 
 
-A second set of filters are designed to either add or remove from the list, a selected range of items from an array. These filters are best used with a reference to an array, stored in a field or data indexe elsewhere in the wiki (they may be used with a simple list of items, provided the items do not include white space.) In general, these filters accept a suffix specifying the number of items to move (defaults to All.)
+The first set of filters are designed to move items from the tail of the list and insert them at specified locations in the list. Items are often appended to the list before using these filters. In general, these filters accept a suffix specifying the number of items to move (default to 1.) 
+
+A second set of filters are designed to either add or remove from the list, a selected range of items from an array. These filters are best used with a reference to an array, stored in a field or data index elsewhere in the wiki (they may be used with a simple list of items, provided the items do not include white space.) In general, these filters accept a suffix specifying the number of items to move (default to All.)
 
 ! Examples
 

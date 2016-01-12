@@ -8,6 +8,8 @@ Body/Preview/Button/Show: toon voorbeeld
 Field/Remove/Caption: verwijder veld
 Field/Remove/Hint: Verwijder veld
 Fields/Add/Button: +
+Fields/Add/Dropdown/System: Systeemvelden
+Fields/Add/Dropdown/User: Gebruikersvelden
 Fields/Add/Name/Placeholder: veldnaam
 Fields/Add/Prompt: Voeg een nieuw veld toe:
 Fields/Add/Value/Placeholder: veldwaarde
