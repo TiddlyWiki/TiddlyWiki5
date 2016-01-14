@@ -353,6 +353,11 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 				this.wiki.deleteTiddler(title);
 				// Remove the original tiddler if we're renaming it
 				if(isRename) {
+					this.wiki.retargetReferences(draftOf, draftTitle);
+					$tw.hooks.invokeHook("th-renaming-tiddler", {
+						fromTitle: draftOf,
+						toTitle: draftTitle
+					});
 					this.wiki.deleteTiddler(draftOf);
 				}
 				if(!event.paramObject || event.paramObject.suppressNavigation !== "yes") {
@@ -611,7 +616,6 @@ NavigatorWidget.prototype.handleUnfoldAllTiddlersEvent = function(event) {
 		self.wiki.setText(prefix + title,"text",null,"show");
 	});
 };
-
 NavigatorWidget.prototype.handleRenameTiddlerEvent = function(event) {
 	var self = this,
 		paramObject = event.paramObject || {},
