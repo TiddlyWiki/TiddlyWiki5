@@ -1,0 +1,27 @@
+created: 20160115011315279
+cycled-tags: 1 Mar
+modified: 20160115014113926
+tags: [[Operator Examples]] [[cycle Operator]] _Tue
+title: cycle Operator (Examples)
+type: text/vnd.tiddlywiki
+
+;Cycle a Tag
+<$macrocall $name='wikitext-example-without-html'
+src="""<$button><$action-listops $tags="+[cycle[_Mon _Tue _Wed _Thu _Fri _Sat _Sun]]"/>Cycle Tag</$button>
+<$button><$action-listops $tags="+[!cycle[_Mon _Tue _Wed _Thu _Fri _Sat _Sun]]"/>Reverse Cycle Tag</$button>"""/>
+
+;Cycle Items from a Data Dictionary
+<$macrocall $name='wikitext-example-without-html'
+src="""<$button class="tc-btn-invisible"><$action-listops $field="cycled-tags" $subfilter="+[!cycle{Lists##dates}]"/>{{$:/core/images/chevron-left}}</$button> Dates 
+<$button class="tc-btn-invisible"><$action-listops $field="cycled-tags" $subfilter="+[cycle{Lists##dates}]"/>{{$:/core/images/chevron-right}}</$button>
+
+<$button class="tc-btn-invisible"><$action-listops $field="cycled-tags" $subfilter="+[!cycle{Lists##months}]"/>{{$:/core/images/chevron-left}}</$button> Months 
+<$button class="tc-btn-invisible"><$action-listops $field="cycled-tags" $subfilter="+[cycle{Lists##months}]"/>{{$:/core/images/chevron-right}}</$button>
+
+Status <$button class="tc-btn-invisible"><$action-listops $tiddler="Target" $index="cycled-tags" $subfilter="+[cycle{Lists##status}]"/>{{$:/core/images/chevron-right}}</$button>
+
+Context <$button class="tc-btn-invisible"><$action-listops $tiddler="Target" $index="cycled-tags" $subfilter="+[cycle{Lists##context}]"/>{{$:/core/images/chevron-right}}</$button>
+
+cycled-tags: {{!!cycled-tags}}
+
+{{Target}}"""/>
