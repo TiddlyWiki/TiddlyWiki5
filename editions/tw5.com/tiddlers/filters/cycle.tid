@@ -1,0 +1,14 @@
+caption: cycle
+created: 20160115004529776
+modified: 20160115004543421
+op-input: a list of items
+op-neg-output: item from operand before any that match any item in the current list
+op-output: item from operand after any that match any item in the current list
+op-parameter: an array of items to cycle through
+op-parameter-name: array
+op-purpose: cycle through an array of items
+tags: [[Filter Operators]] [[Order Operators]] [[Listops Operators]]
+title: cycle Operator
+type: text/vnd.tiddlywiki
+
+<<.operator-examples "cycle">>
