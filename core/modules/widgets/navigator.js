@@ -353,7 +353,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 				this.wiki.deleteTiddler(title);
 				// Remove the original tiddler if we're renaming it
 				if(isRename) {
-					this.wiki.retargetReferences(draftOf, draftTitle);
+					// Allow plugins to update references
 					$tw.hooks.invokeHook("th-renaming-tiddler", {
 						fromTitle: draftOf,
 						toTitle: draftTitle

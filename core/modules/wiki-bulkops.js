@@ -9,7 +9,7 @@ Bulk tiddler operations such as rename.
 (function(){
 
 /*jslint node: true, browser: true */
-/*global $tw: false */
+/*global $tw: true */
 "use strict";
 
 /*
@@ -41,6 +41,13 @@ exports.retargetReferences = function(fromTitle,toTitle) {
 		}
 	});
 }
+
+$tw.hooks.addHook("th-renaming-tiddler",function(params) {
+	$tw.wiki.retargetReferences(params.fromTitle, params.toTitle);
+	// Otherwise the next function in the chain gets params = null
+	return params;
+});
+
 /*
 Rename a tiddler, and relink any tags or lists that reference it.
 */
