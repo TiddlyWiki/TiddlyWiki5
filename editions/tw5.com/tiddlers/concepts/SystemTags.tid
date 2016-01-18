@@ -37,6 +37,7 @@ These are the available system tags
 * {{$:/tags/Stylesheet||$:/core/ui/TagTemplate}} to indicate that a tiddler should be applied as a CSS stylesheet
 * {{$:/tags/TiddlerInfo||$:/core/ui/TagTemplate}} for tiddler info panel tabs
 * {{$:/tags/TiddlerInfo/Advanced||$:/core/ui/TagTemplate}} for tabs under the advanced tiddler tab
+* {{$:/tags/ToolbarButtonStyle||$:/core/ui/TagTemplate}} for the style of the buttons
 * {{$:/tags/TopLeftBar||$:/core/ui/TagTemplate}} for the top left bar
 * {{$:/tags/TopRightBar||$:/core/ui/TagTemplate}} for the top right bar
 * {{$:/tags/ViewTemplate||$:/core/ui/TagTemplate}} for the view template
