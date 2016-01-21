@@ -2020,11 +2020,14 @@ $tw.hooks.addHook = function(hookName,definition) {
 
 /*
 Invoke the hook by key
+Additional arguments may be passed
 */
 $tw.hooks.invokeHook = function(hookName, value) {
 	if($tw.utils.hop($tw.hooks.names,hookName)) {
 		for (var i = 0; i < $tw.hooks.names[hookName].length; i++) {
-			value = $tw.hooks.names[hookName][i](value);
+			var args = Array.prototype.slice.apply(arguments,[2]);
+			args.unshift(value);
+			value = $tw.hooks.names[hookName][i].apply(null, args);
 		}
 	}
 	return value;

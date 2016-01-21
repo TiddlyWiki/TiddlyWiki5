@@ -20,3 +20,5 @@ The original tiddler object can be returned unmodified by the hook. If the hook 
 ```
 
 Hooks must not change the ''title'' field but can freely modify any other field of the tiddler.
+
+If the tiddler is being renamed, the field ''tiddler.renaming'' will be set to the old title.

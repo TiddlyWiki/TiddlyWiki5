@@ -347,7 +347,8 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 					"draft.title": undefined,
 					"draft.of": undefined
 				},this.wiki.getModificationFields());
-				newTiddler = $tw.hooks.invokeHook("th-saving-tiddler",newTiddler);
+				// th-saving-tiddler sets tiddler.renaming to the old title if renaming
+				newTiddler = $tw.hooks.invokeHook("th-saving-tiddler", newTiddler, isRename? draftOf : undefined);
 				this.wiki.addTiddler(newTiddler);
 				// Remove the draft tiddler
 				this.wiki.deleteTiddler(title);
