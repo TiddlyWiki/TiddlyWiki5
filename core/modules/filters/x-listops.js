@@ -186,4 +186,33 @@ Extended filter operators to manipulate the current list.
         }, []);
         return set;
     };
+    
+    /*
+	Returns the next item from the operand list after any matching item from the current list -- else the first item from the operand list
+	*/
+	exports.cycle = function(source, operator) {
+		var array = $tw.utils.parseStringArray(operator.operand, "true"),
+			results = prepare_results(source),
+			len = array.length,
+			found = 0,
+			p;
+		for(p = 0; p < len; p++) {
+			if(!found) {
+				var index = results.indexOf(array[p]);
+				if(index >= 0) {
+					if(operator.prefix) {
+						(p > 0) ? (results[index] = array[p - 1])
+						: (results[index] = array[len - 1]);
+						found = 1;
+					} else {
+						(p < (len - 1)) ? (results[index] = array[p + 1])
+						: (results[index] =	array[0]);
+						found = 1;
+					}
+				}
+			}
+		}
+		return(found) ? results : results.concat(array[0]);
+	};
+	
 })();
