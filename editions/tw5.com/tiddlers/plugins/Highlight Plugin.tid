@@ -1,6 +1,9 @@
+created: 20160107223417655
+list: 
+modified: 20160107223725805
+tags: [[Plugin Editions]]
 title: Highlight Plugin
-modified: 20140922074322741
-tags: Plugins
+type: text/vnd.tiddlywiki
 
 The Highlight plugin provides the ability to apply syntax colouring to text.
 

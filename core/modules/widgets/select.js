@@ -138,6 +138,7 @@ SelectWidget.prototype.execute = function() {
 	this.selectClass = this.getAttribute("class");
 	this.selectDefault = this.getAttribute("default");
 	this.selectMultiple = this.getAttribute("multiple", false);
+	this.selectSize = this.getAttribute("size");
 	// Make the child widgets
 	var selectNode = {
 		type: "element",
@@ -149,6 +150,9 @@ SelectWidget.prototype.execute = function() {
 	}
 	if(this.selectMultiple) {
 		$tw.utils.addAttributeToParseTreeNode(selectNode,"multiple","multiple");
+	}
+	if(this.selectSize) {
+		$tw.utils.addAttributeToParseTreeNode(selectNode,"size",this.selectSize);
 	}
 	this.makeChildWidgets([selectNode]);
 };

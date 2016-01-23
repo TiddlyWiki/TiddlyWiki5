@@ -52,6 +52,9 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 	if(this.editSize) {
 		domNode.setAttribute("size",this.editSize);
 	}
+	if(this.editRows) {
+		domNode.setAttribute("rows",this.editRows);
+	}
 	// Assign classes
 	if(this.editClass) {
 		domNode.className = this.editClass;
@@ -79,7 +82,7 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 	if(this.editFocus === "true") {
 		if(domNode.focus && domNode.select) {
 			domNode.focus();
-			domNode.select();			
+			domNode.select();
 		}
 	}
 };
@@ -148,6 +151,7 @@ EditTextWidget.prototype.execute = function() {
 	this.editClass = this.getAttribute("class");
 	this.editPlaceholder = this.getAttribute("placeholder");
 	this.editSize = this.getAttribute("size");
+	this.editRows = this.getAttribute("rows");
 	this.editAutoHeight = this.getAttribute("autoHeight","yes") === "yes";
 	this.editMinHeight = this.getAttribute("minHeight",DEFAULT_MIN_TEXT_AREA_HEIGHT);
 	this.editFocusPopup = this.getAttribute("focusPopup");
@@ -178,7 +182,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 EditTextWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// Completely rerender if any of our attributes have changed
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows) {
 		this.refreshSelf();
 		return true;
 	} else if(changedTiddlers[this.editTitle]) {

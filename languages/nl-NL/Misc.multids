@@ -38,5 +38,5 @@ TagManager/Count/Heading: Aantal
 TagManager/Icon/Heading: Pictogram (icon)
 TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Label
-Tiddler/DateFormat: DD MMM YYYY om hh12:mmam
+Tiddler/DateFormat: DD MMM YYYY om hh12:0mmam
 UnsavedChangesWarning: Er zijn niet-opgeslagen veranderingen in TiddlyWiki
