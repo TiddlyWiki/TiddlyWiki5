@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 The checkbox widget displays an HTML `<input type="checkbox">` element that is dynamically bound to either:
 
 * the presence or absence of a specified tag on a specified tiddler
-* the value of a specified field of a specified tiddler
+* the value of a specified field or index of a specified tiddler
 
 ! Content and Attributes
 
@@ -21,6 +21,7 @@ The content of the `<$checkbox>` widget is displayed within an HTML `<label>` el
 |tag |The name of the tag to which the checkbox should be bound |
 |invertTag |When set to ''yes'', flips the tag binding logic so that the absence of the tag causes the checkbox to be checked  |
 |field |The name of the field to which the checkbox should be bound |
+|index |The name of the index to which the checkbox should be bound |
 |checked |The value of the field corresponding to the checkbox being checked |
 |unchecked |The value of the field corresponding to the checkbox being unchecked |
 |default |The default value to use if the field is not defined |

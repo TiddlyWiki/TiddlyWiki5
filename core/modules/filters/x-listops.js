@@ -6,184 +6,229 @@ module-type: filteroperator
 Extended filter operators to manipulate the current list.
 
 \*/
-(function () {
+(function() {
 
-    /*jslint node: true, browser: true */
-    /*global $tw: false */
-    "use strict";
+/*jslint node: true, browser: true */
+/*global $tw: false */
+"use strict";
 
-    /*
-    Fetch titles from the current list
-    */
-    var prepare_results = function (source) {
-    var results = [];
-        source(function (tiddler, title) {
-            results.push(title);
-        });
-        return results;
-    };
+/*
+Fetch titles from the current list
+*/
+var prepare_results = function(source) {
+	var results = [];
+	source(function(tiddler, title) {
+		results.push(title);
+	});
+	return results;
+};
 
-    /*
-    Moves a number of items from the tail of the current list before the item named in the operand
-    */
-    exports.putbefore = function (source, operator) {
-        var results = prepare_results(source),
-            index = results.indexOf(operator.operand),
-            count = parseInt(operator.suffix) || 1;
-        return (index === -1) ?
-            results.slice(0, -1) :
-            results.slice(0, index).concat(results.slice(-count)).concat(results.slice(index, -count));
-    };
+/*
+Moves a number of items from the tail of the current list before the item named in the operand
+*/
+exports.putbefore = function(source, operator) {
+	var results = prepare_results(source),
+		index = results.indexOf(operator.operand),
+		count = parseInt(operator.suffix) || 1;
+	return(index !== -1) ? results.slice(0, index).concat(results.slice(-count))
+		.concat(results.slice(
+			index, -count)) : (operator.prefix) ? results.slice(0, -count) : results;
+};
 
-    /*
-    Moves a number of items from the tail of the current list after the item named in the operand
-    */
-    exports.putafter = function (source, operator) {
-        var results = prepare_results(source),
-            index = results.indexOf(operator.operand),
-            count = parseInt(operator.suffix) || 1;
-        return (index === -1) ?
-            results.slice(0, -1) :
-            results.slice(0, index + 1).concat(results.slice(-count)).concat(results.slice(index + 1, -count));
-    };
+/*
+Moves a number of items from the tail of the current list after the item named in the operand
+*/
+exports.putafter = function(source, operator) {
+	var results = prepare_results(source),
+		index = results.indexOf(operator.operand),
+		count = parseInt(operator.suffix) || 1;
+	return(index !== -1) ? results.slice(0, index + 1).concat(results.slice(-
+			count)).concat(results.slice(
+			index + 1, -count)) : (operator.prefix) ? results.slice(0, -count) :
+		results;
+};
 
-    /*
-    Replaces the item named in the operand with a number of items from the tail of the current list
-    */
-    exports.replace = function (source, operator) {
-        var results = prepare_results(source),
-            index = results.indexOf(operator.operand),
-            count = parseInt(operator.suffix) || 1;
-        return (index === -1) ?
-            results.slice(0, -count) :
-            results.slice(0, index).concat(results.slice(-count)).concat(results.slice(index + 1, -count));
-    };
+/*
+Replaces the item named in the operand with a number of items from the tail of the current list
+*/
+exports.replace = function(source, operator) {
+	var results = prepare_results(source),
+		index = results.indexOf(operator.operand),
+		count = parseInt(operator.suffix) || 1;
+	return(index !== -1) ? results.slice(0, index).concat(results.slice(-count))
+		.concat(results.slice(
+			index + 1, -count)) : (operator.prefix) ? results.slice(0, -count) :
+		results;
+};
 
-    /*
-    Moves a number of items from the tail of the current list to the head of the list
-    */
-    exports.putfirst = function (source, operator) {
-        var results = prepare_results(source),
-            count = parseInt(operator.suffix) || 1;
-        return results.slice(-count).concat(results.slice(0, -count));
-    };
+/*
+Moves a number of items from the tail of the current list to the head of the list
+*/
+exports.putfirst = function(source, operator) {
+	var results = prepare_results(source),
+		count = parseInt(operator.suffix) || 1;
+	return results.slice(-count).concat(results.slice(0, -count));
+};
 
-    /*
-    Moves a number of items from the head of the current list to the tail of the list
-    */
-    exports.putlast = function (source, operator) {
-        var results = prepare_results(source),
-            count = parseInt(operator.suffix) || 1;
-        return results.slice(count).concat(results.slice(0, count));
-    };
+/*
+Moves a number of items from the head of the current list to the tail of the list
+*/
+exports.putlast = function(source, operator) {
+	var results = prepare_results(source),
+		count = parseInt(operator.suffix) || 1;
+	return results.slice(count).concat(results.slice(0, count));
+};
 
-    /*
-    Moves the item named in the operand a number of places forward or backward in the list
-    */
-    exports.move = function (source, operator) {
-        var results = prepare_results(source),
-            index = results.indexOf(operator.operand),
-            count = parseInt(operator.suffix) || 1,
-            marker = results.splice(index, 1);
-        return results.slice(0, index + count).concat(marker).concat(results.slice(index + count));
-    };
+/*
+Moves the item named in the operand a number of places forward or backward in the list
+*/
+exports.move = function(source, operator) {
+	var results = prepare_results(source),
+		index = results.indexOf(operator.operand),
+		count = parseInt(operator.suffix) || 1,
+		marker = results.splice(index, 1);
+	return results.slice(0, index + count).concat(marker).concat(results.slice(
+		index + count));
+};
 
-    /*
-    Returns the items from the current list that are after the item named in the operand
-    */
-    exports.allafter = function (source, operator) {
-        var results = prepare_results(source),
-            index = results.indexOf(operator.operand);
-        return (index === -1 || index > (results.length - 2)) ? [] :
-            (operator.suffix) ? results.slice(index) :
-            results.slice(index + 1);
-    };
+/*
+Returns the items from the current list that are after the item named in the operand
+*/
+exports.allafter = function(source, operator) {
+	var results = prepare_results(source),
+		index = results.indexOf(operator.operand);
+	return(index === -1 || index > (results.length - 2)) ? [] :
+		(operator.suffix) ? results.slice(index) :
+		results.slice(index + 1);
+};
 
-    /*
-    Returns the items from the current list that are before the item named in the operand
-    */
-    exports.allbefore = function (source, operator) {
-        var results = prepare_results(source),
-            index = results.indexOf(operator.operand);
-        return (index <= 0) ? [] :
-            (operator.suffix) ? results.slice(0, index + 1) :
-            results.slice(0, index);
-    };
+/*
+Returns the items from the current list that are before the item named in the operand
+*/
+exports.allbefore = function(source, operator) {
+	var results = prepare_results(source),
+		index = results.indexOf(operator.operand);
+	return(index <= 0) ? [] :
+		(operator.suffix) ? results.slice(0, index + 1) :
+		results.slice(0, index);
+};
 
-    /*
-    Appends the items listed in the operand array to the tail of the current list
-    */
-    exports.append = function (source, operator) {
-        var append = $tw.utils.parseStringArray(operator.operand, "true"),
-            results = prepare_results(source),
-            count = parseInt(operator.suffix) || append.length;
-        return (append.length === 0) ? results :
-            (operator.prefix) ? results.concat(append.slice(-count)) :
-            results.concat(append.slice(0, count));
-    };
+/*
+Appends the items listed in the operand array to the tail of the current list
+*/
+exports.append = function(source, operator) {
+	var append = $tw.utils.parseStringArray(operator.operand, "true"),
+		results = prepare_results(source),
+		count = parseInt(operator.suffix) || append.length;
+	return(append.length === 0) ? results :
+		(operator.prefix) ? results.concat(append.slice(-count)) :
+		results.concat(append.slice(0, count));
+};
 
-    /*
-    Prepends the items listed in the operand array to the head of the current list
-    */
-    exports.prepend = function (source, operator) {
-        var prepend = $tw.utils.parseStringArray(operator.operand, "true"),
-            results = prepare_results(source),
-            count = parseInt(operator.suffix) || prepend.length;
-        return (prepend.length === 0) ? results :
-            (operator.prefix) ? prepend.slice(-count).concat(results) :
-            prepend.slice(0, count).concat(results);
-    };
+/*
+Prepends the items listed in the operand array to the head of the current list
+*/
+exports.prepend = function(source, operator) {
+	var prepend = $tw.utils.parseStringArray(operator.operand, "true"),
+		results = prepare_results(source),
+		count = parseInt(operator.suffix) || prepend.length;
+	return(prepend.length === 0) ? results :
+		(operator.prefix) ? prepend.slice(-count).concat(results) :
+		prepend.slice(0, count).concat(results);
+};
 
-    /*
-    Returns all items from the current list except the items listed in the operand array
-    */
-    exports.remove = function (source, operator) {
-        var array = $tw.utils.parseStringArray(operator.operand, "true"),
-            results = prepare_results(source),
-            count = parseInt(operator.suffix) || array.length,
-            p,
-            len,
-            index;
-        len = array.length - 1;
-        for (p = 0; p < count; ++p) {
-            if (operator.prefix) {
-                index = results.indexOf(array[len - p]);
-            } else {
-                index = results.indexOf(array[p]);
-            }
-            if (index !== -1) {
-                results.splice(index, 1);
-            }
-        }
-        return results;
-    };
+/*
+Returns all items from the current list except the items listed in the operand array
+*/
+exports.remove = function(source, operator) {
+	var array = $tw.utils.parseStringArray(operator.operand, "true"),
+		results = prepare_results(source),
+		count = parseInt(operator.suffix) || array.length,
+		len = array.length - 1,
+		p;
+	for(p = 0; p < count; ++p) {
+		var index = (operator.prefix) ? results.indexOf(array[len - p]) : results.indexOf(
+			array[p]);
+		if(index !== -1) {
+			results.splice(index, 1);
+		}
+	}
+	return results;
+};
 
-    /*
-    Returns all items from the current list sorted in the order of the items in the operand array
-    */
-    exports.sortby = function (source, operator) {
-        var results = prepare_results(source);
-        if (!results || results.length < 2) {
-            return results;
-        }
-        var lookup = $tw.utils.parseStringArray(operator.operand, "true");
-        results.sort(function (a, b) {
-            return lookup.indexOf(a) - lookup.indexOf(b);
-        });
-        return results;
-    };
+/*
+Returns only those items from the current list that are listed in the operand array
+*/
+exports.keep = function(source, operator) {
+	var array = $tw.utils.parseStringArray(operator.operand, "true"),
+		results = prepare_results(source),
+		len = array.length,
+		remain = [],
+		p;
+	for(p = 0; p < len; ++p) {
+		var index = results.indexOf(array[p]);
+		if(index >= 0) {
+			remain = remain.concat(results.splice(index, 1));
+		}
+	}
+	return(operator.prefix) ? results : remain;
+};
 
-    /*
-    Removes all duplicate items from the current list
-    */
-    exports.unique = function (source, operator) {
-        var results = prepare_results(source);
-        var set = results.reduce(function (a, b) {
-            if (a.indexOf(b) < 0) {
-                a.push(b);
-            }
-            return a;
-        }, []);
-        return set;
-    };
+/*
+Returns all items from the current list sorted in the order of the items in the operand array
+*/
+exports.sortby = function(source, operator) {
+	var results = prepare_results(source);
+	if(!results || results.length < 2) {
+		return results;
+	}
+	var lookup = $tw.utils.parseStringArray(operator.operand, "true");
+	results.sort(function(a, b) {
+		return lookup.indexOf(a) - lookup.indexOf(b);
+	});
+	return results;
+};
+
+/*
+Removes all duplicate items from the current list
+*/
+exports.unique = function(source, operator) {
+	var results = prepare_results(source);
+	var set = results.reduce(function(a, b) {
+		if(a.indexOf(b) < 0) {
+			a.push(b);
+		}
+		return a;
+	}, []);
+	return set;
+};
+
+/*
+Returns the next item from the operand list after any matching item from the current list -- else the first item from the operand list
+*/
+exports.cycle = function(source, operator) {
+	var array = $tw.utils.parseStringArray(operator.operand, "true"),
+		results = prepare_results(source),
+		len = array.length,
+		found = 0,
+		p;
+	for(p = 0; p < len; p++) {
+		if(!found) {
+			var index = results.indexOf(array[p]);
+			if(index >= 0) {
+				if(operator.prefix) {
+					(p > 0) ? (results[index] = array[p - 1]) : (results[index] = array[
+						len - 1]);
+					found = 1;
+				} else {
+					(p < (len - 1)) ? (results[index] = array[p + 1]) : (results[index] =
+						array[0]);
+					found = 1;
+				}
+			}
+		}
+	}
+	return(found) ? results : results.concat(array[0]);
+};
+
 })();
