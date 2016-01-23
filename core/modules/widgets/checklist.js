@@ -11,13 +11,13 @@ The Checklist widget toggles (or exchanges) the specified item in the specified 
 /*global $tw: false */
 "use strict";
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
+var ChecklistWidget = function(parseTreeNode, options) {
+	this.initialise(parseTreeNode, options);
+};
 
 /**
  * 	Inherit from the base widget class
  */
-var ChecklistWidget = function(parseTreeNode, options) {
-	this.initialise(parseTreeNode, options);
-};
 ChecklistWidget.prototype = new Widget();
 
 /**
@@ -48,45 +48,32 @@ ChecklistWidget.prototype.render = function(parent, nextSibling) {
 };
 
 /**
- * Fetch the tiddler to be manipulated
+ * Modules
  */
-ChecklistWidget.prototype.getTiddler = function() {
-	return(this.checklistIndex) ? this.wiki.getTiddlerData(this.checklistTitle, {}) :
-		this.wiki.getTiddler(this.checklistTitle);
-};
 
-/**
- * Extract the list to be manipulated as an array
- */
-ChecklistWidget.prototype.getArray = function(tiddler) {
+//  Extract the list to be manipulated as an array
+ChecklistWidget.prototype.getArray = function() {
 	var list;
-	if(tiddler) {
-		list = (this.checklistIndex) ? (tiddler[this.checklistIndex] || []) : (
-			tiddler.fields[this.checklistField] || []);
+	if(this.checklistIndex && this.checklistField === "tags") {
+		var data = this.wiki.getTiddlerData(this.checklistTitle, {});
+		list = (data && $tw.utils.hop(data, this.checklistIndex)) ? data[this.checklistIndex] : [];
+	} else if(this.checklistField) {
+		var tiddler = this.wiki.getTiddler(this.checklistTitle);
+		list = (tiddler) ? tiddler.fields[this.checklistField] : [];
 	}
-	return(tiddler) ? $tw.utils.parseStringArray(list).slice(0) : [];
+	return(list) ? $tw.utils.parseStringArray(list).slice(0) : [];
 };
-
-/**
- * Determine if the item is present in the list
- */
+// Determine if the item is present in the list
 ChecklistWidget.prototype.hasItem = function() {
-	var tiddler = this.getTiddler();
-	var array = this.getArray(tiddler);
+	var array = this.getArray();
 	return array.indexOf(this.checklistItem) !== -1;
 };
-
-/**
- * Determine the correct state of the checkbox
- */
+// Determine the correct state of the checkbox
 ChecklistWidget.prototype.getValue = function() {
 	var HasItem = this.hasItem();
 	return(this.checklistInvert === "yes") ? !HasItem : HasItem;
 };
-
-/**
- * Determine if the checkbox state matches the correct state
- */
+// Determine if the checkbox state matches the correct state
 ChecklistWidget.prototype.itemCheck = function() {
 	var hasItem = this.hasItem();
 	var checked = this.inputDomNode.checked;
@@ -94,18 +81,11 @@ ChecklistWidget.prototype.itemCheck = function() {
 			checked) :
 		(hasItem !== checked) : false;
 };
-
-/**
- * 	Invoke the action associated with this widget
- */
-ChecklistWidget.prototype.handleChangeEvent = function(event) {
-	var tiddler = this.getTiddler();
-	var array = this.getArray(tiddler);
+// Update the array
+ChecklistWidget.prototype.updateArray = function(array) {
 	var checked = this.inputDomNode.checked;
 	var pos,
-		altpos,
-		fallbackFields,
-		newFields;
+		altpos;
 	if(this.checklistItem && this.itemCheck()) {
 		pos = array.indexOf(this.checklistItem);
 		altpos = array.indexOf(this.checklistAlt);
@@ -127,23 +107,41 @@ ChecklistWidget.prototype.handleChangeEvent = function(event) {
 				array.push(this.checklistItem);
 			}
 		}
-		if(this.checklistIndex) {
-			tiddler[this.checklistIndex] = $tw.utils.stringifyList(array);
-			this.wiki.setTiddlerData(this.checklistTitle, tiddler, this.wiki.getModificationFields(),
-				this.wiki.getCreationFields());
-		} else if(this.checklistField) {
-			fallbackFields = {
-				text: ""
-			};
-			newFields = {
-				title: this.checklistTitle
-			};
-			newFields[this.checklistField] = $tw.utils.stringifyList(array);
-			this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),
-				fallbackFields, tiddler, newFields,
-				this.wiki.getModificationFields()));
-		}
 	}
+	return array;
+};
+
+/**
+ * 	Invoke the action associated with this widget
+ */
+ChecklistWidget.prototype.handleChangeEvent = function(event) {
+	var tiddler = this.wiki.getTiddler(this.checklistTitle);
+	var data = this.wiki.getTiddlerData(this.checklistTitle, {});
+	var array = this.getArray();
+	var fallbackFields = {
+		text: ""
+	};
+	var newFields = {
+		title: this.checklistTitle
+	};
+	var newarray = this.updateArray(array);
+	// Update the list in the field or index
+	if(this.checklistIndex && this.checklistField === "tags") {
+		data[this.checklistIndex] = $tw.utils.stringifyList(newarray);
+		if(tiddler) {
+			if(tiddler.fields.type === "application/x-tiddler-dictionary") {
+				newFields.text = $tw.utils.makeTiddlerDictionary(data);
+			}
+		} else {
+			newFields.text = $tw.utils.makeTiddlerDictionary(data);
+			newFields.type = "application/x-tiddler-dictionary";
+		}
+	} else if(this.checklistField) {
+		newFields[this.checklistField] = $tw.utils.stringifyList(newarray);
+	}
+	// Update the tiddler
+	this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),
+		fallbackFields, tiddler, newFields, this.wiki.getModificationFields()));
 };
 
 /**
