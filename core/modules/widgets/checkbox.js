@@ -38,7 +38,7 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");
 	this.labelDomNode.appendChild(this.spanDomNode);
-	$tw.utils.addEventListeners(this.inputDomNode, [{
+	$tw.utils.addEventListeners(this.inputDomNode,[{
 		name: "change",
 		handlerObject: this,
 		handlerMethod: "handleChangeEvent"
@@ -53,22 +53,20 @@ Determine if checkbox state matches the value/tag
 */
 CheckboxWidget.prototype.getValue = function() {
 	var tiddler = this.wiki.getTiddler(this.checkboxTitle),
-		value,
+		state,
 		HasTag;
 	if(tiddler) {
 		if(this.checkboxTag) {
 			HasTag = tiddler.hasTag(this.checkboxTag);
-			return(this.checkboxInvertTag) ? !HasTag : HasTag;
 		}
-		value = (this.checkboxField) ? tiddler.fields[this.checkboxField]
-		: (this.checkboxIndex) ? this.wiki.extractTiddlerDataItem(tiddler, this.checkboxIndex)
-		: this.checkboxDefault || "";
+		state = (this.checkboxField) ? tiddler.fields[this.checkboxField] : (this.checkboxIndex) ?
+			this.wiki.extractTiddlerDataItem(tiddler, this.checkboxIndex) : this.checkboxDefault ||
+			"";
 	} else {
-		value = this.checkboxDefault || "";
+		state = this.checkboxDefault || "";
 	}
-	return(value === this.checkboxChecked) ? true
-	: (value === this.checkboxUnchecked) ? false
-	: (this.checkboxInvertTag) ? true : false;
+	return(state === this.checkboxChecked) ? true : (state === this.checkboxUnchecked) ?
+		false : (this.checkboxInvertTag) ? !HasTag : HasTag;
 };
 
 /*
@@ -88,19 +86,16 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 		inverted = this.checkboxInvertTag === "yes",
 		checked = this.inputDomNode.checked,
 		value = checked ? this.checkboxChecked : this.checkboxUnchecked,
-		tagCheck = (this.checkboxTag && inverted) ? hastag === checked
-		: hastag !== checked;
+		tagCheck = (this.checkboxTag && inverted) ? hastag === checked : hastag !==
+		checked;
 	// Set the tag if specified
 	if(this.checkboxTag && (!tiddler || tagCheck)) {
 		newFields.tags = tiddler ? (tiddler.fields.tags || []).slice(0) : [];
 		var pos = newFields.tags.indexOf(this.checkboxTag);
 		if(pos !== -1) {
 			newFields.tags.splice(pos, 1);
-		}
-		if(inverted) {
-			if(!checked) {
-				newFields.tags.push(this.checkboxTag);
-			}
+		} else if(inverted && !checked) {
+			newFields.tags.push(this.checkboxTag);
 		} else if(checked) {
 			newFields.tags.push(this.checkboxTag);
 		}
@@ -113,8 +108,9 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 			newFields[this.checkboxField] = value;
 			hasChanged = true;
 		}
+	}
 	// Set the index if specified
-	} else if(this.checkboxIndex) {
+	if(this.checkboxIndex) {
 		data = this.wiki.getTiddlerData(this.checkboxTitle, {});
 		if(!tiddler || data[this.checkboxIndex] !== value) {
 			data[this.checkboxIndex] = value;
@@ -123,13 +119,18 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	}
 	// Update the tiddler if value has changed
 	if(hasChanged) {
-		if(this.checkboxField || this.checkboxTag) {
-			this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),
-				fallbackFields, tiddler, newFields, this.wiki.getModificationFields()));
-		} else if(this.checkboxIndex) {
-			this.wiki.setTiddlerData(this.checkboxTitle, data, this.wiki.getModificationFields(),
-				this.wiki.getCreationFields());
+		if(this.checkboxIndex && this.checkboxField !== "text") {
+			if(tiddler) {
+				if(tiddler.fields.type === "application/x-tiddler-dictionary") {
+					newFields.text = $tw.utils.makeTiddlerDictionary(data);
+				}
+			} else {
+				newFields.text = $tw.utils.makeTiddlerDictionary(data);
+				newFields.type = "application/x-tiddler-dictionary";
+			}
 		}
+		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),
+			fallbackFields, tiddler, newFields, this.wiki.getModificationFields()));
 	}
 };
 
@@ -137,7 +138,6 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 Compute the internal state of the widget
 */
 CheckboxWidget.prototype.execute = function() {
-	// Get the parameters from the attributes
 	this.checkboxTitle = this.getAttribute("tiddler", this.getVariable(
 		"currentTiddler"));
 	this.checkboxTag = this.getAttribute("tag");
@@ -146,9 +146,8 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxChecked = this.getAttribute("checked");
 	this.checkboxUnchecked = this.getAttribute("unchecked");
 	this.checkboxDefault = this.getAttribute("default");
-	this.checkboxClass = this.getAttribute("class","");
-	this.checkboxInvertTag = this.getAttribute("invertTag","");
-	// Make the child widgets
+	this.checkboxClass = this.getAttribute("class", "");
+	this.checkboxInvertTag = this.getAttribute("invertTag", "");
 	this.makeChildWidgets();
 };
 
