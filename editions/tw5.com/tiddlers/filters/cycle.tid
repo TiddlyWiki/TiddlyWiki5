@@ -1,0 +1,14 @@
+caption: cycle
+created: 20160115004529776
+modified: 20160115125641537
+op-input: a list of items
+op-neg-output: replace first matching item in the current list, with the item occurring before the first matching item in the reference list
+op-output: replace first matching item in the current list, with the item occurring after the first matching item in the reference list
+op-parameter: a reference list of items to cycle through
+op-parameter-name: reference list
+op-purpose: cycle through a list of items from a reference list
+tags: [[Filter Operators]] [[Order Operators]] [[Listops Operators]]
+title: cycle Operator
+type: text/vnd.tiddlywiki
+
+<<.operator-examples "cycle">>

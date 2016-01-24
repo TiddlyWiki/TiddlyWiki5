@@ -1,0 +1,48 @@
+created: 20160115172254916
+modified: 20160124030703087
+tags: [[Operator Examples]] [[cycle Operator]] _Fri
+title: cycle Operator (Examples)
+type: text/vnd.tiddlywiki
+
+;Cycle a tag from a list of items specified in the operator operand
+: In this case, the 'tags' field of the current tiddler is specified as the target by using the '$tags=' attribute, and the reference list is directly specified in the operand.
+:__Note__: A list specified in this way may not contain any item with spaces
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$button><$action-listops $tags="+[cycle[_Mon _Tue _Wed _Thu _Fri _Sat _Sun]]"/>Cycle Tag</$button>
+<$button><$action-listops $tags="+[!cycle[_Mon _Tue _Wed _Thu _Fri _Sat _Sun]]"/>Reverse Cycle Tag</$button>
+<$list filter="[list[!!tags]sort[]]"> <<tag>></$list>"""/>
+
+
+
+;Cycle items in an index from reference lists contained in a Data Dictionary
+: In this case the target is specified via the '$tiddler=' and '$index=' attributes, and the reference lists are specified using TextReferences within curly brackets (useful for lists containing items with spaces, and for generic lists.)
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$button class="tc-btn-invisible"><$action-listops $tiddler="Target" $index="cycled-tags" $subfilter="+[cycle{Lists##status}]"/>Status {{$:/core/images/chevron-right}}</$button>
+
+<$button class="tc-btn-invisible"><$action-listops $tiddler="Target" $index="cycled-tags" $subfilter="+[cycle{Lists##context}]"/>Context {{$:/core/images/chevron-right}}</$button>
+
+{{Target}}"""/>
+
+;Cycle items in an index from reference list contained in a variable
+: In this case the target is specified via the '$tiddler=' and '$index=' attributes, and the reference list is specified via a variable (useful for lists containing items with spaces.)
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$vars authors="[[Joe Bloggs]] [[Mark Spark]] [[Cedric Leo]] [[Oli Phant]]"><$button class="tc-btn-invisible"><$action-listops $tiddler="Target" $index="cycled-tags" $subfilter="+[cycle<authors>]"/>Author {{$:/core/images/chevron-right}}</$button></$vars>
+
+{{Target}}"""/>
+
+;Cycle items in a field from reference lists contained in a Data Dictionary
+: In this case a field is targeted using the '$tiddler=' and '$field=' attributes, and the reference list is specified with a TextReference within curly brackets. The label is configured to clear the target index of all items in the reference list (useful for lists containing items with spaces, and for generic lists.)
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$button class="tc-btn-invisible"><$action-listops $tiddler="Target" $field="cycled-tags" $subfilter="+[!cycle{Lists##dates}]"/>{{$:/core/images/chevron-left}}</$button>
+<$button class="tc-btn-invisible"><$action-listops $tiddler="Target" $field="cycled-tags" $subfilter="+[remove{Lists##dates}]"/>Dates</$button>
+<$button class="tc-btn-invisible"><$action-listops $tiddler="Target" $field="cycled-tags" $subfilter="+[cycle{Lists##dates}]"/>{{$:/core/images/chevron-right}}</$button>
+
+<$button class="tc-btn-invisible"><$action-listops $tiddler="Target" $field="cycled-tags" $subfilter="+[!cycle{Lists##months}]"/>{{$:/core/images/chevron-left}}</$button>
+<$button class="tc-btn-invisible"><$action-listops $tiddler="Target" $field="cycled-tags" $subfilter="+[remove{Lists##months}]"/>Months</$button>
+<$button class="tc-btn-invisible"><$action-listops $tiddler="Target" $field="cycled-tags" $subfilter="+[cycle{Lists##months}]"/>{{$:/core/images/chevron-right}}</$button>
+
+|Target!!cycled-tags |<$view tiddler="Target" field="cycled-tags"/>|"""/>

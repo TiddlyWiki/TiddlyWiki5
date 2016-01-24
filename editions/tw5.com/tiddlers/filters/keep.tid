@@ -1,0 +1,14 @@
+caption: keep
+created: 20160117114959196
+modified: 20160120113904367
+op-input: a list of items
+op-neg-output: keep only items from the current list that don't match items occurring in the reference list
+op-output: keep only items from the current list that match items occurring in the reference list
+op-parameter: a reference list of items
+op-parameter-name: reference list
+op-purpose: keep only those items in the list matching an item from the reference list (view the current item from a reference list)
+tags: [[Filter Operators]] [[Order Operators]] [[Listops Operators]]
+title: keep Operator
+type: text/vnd.tiddlywiki
+
+<<.operator-examples "keep">>
