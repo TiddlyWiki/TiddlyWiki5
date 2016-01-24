@@ -31,7 +31,7 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	this.labelDomNode = this.document.createElement("label");
-	this.labelDomNode.setAttribute("class", this.checkboxClass);
+	this.labelDomNode.setAttribute("class",this.checkboxClass);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","checkbox");
 	if(this.getValue()) {
@@ -62,7 +62,7 @@ CheckboxWidget.prototype.getValue = function() {
 			HasTag = tiddler.hasTag(this.checkboxTag);
 		}
 		state = (this.checkboxField) ? tiddler.fields[this.checkboxField]
-		: (this.checkboxIndex) ? this.wiki.extractTiddlerDataItem(tiddler, this.checkboxIndex)
+		: (this.checkboxIndex) ? this.wiki.extractTiddlerDataItem(tiddler,this.checkboxIndex)
 		: this.checkboxDefault || "";
 	} else {
 		state = this.checkboxDefault || "";
@@ -114,7 +114,7 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	}
 	// Set the index if specified
 	if(this.checkboxIndex) {
-		data = this.wiki.getTiddlerData(this.checkboxTitle, {});
+		data = this.wiki.getTiddlerData(this.checkboxTitle,{});
 		if(!tiddler || data[this.checkboxIndex] !== value) {
 			data[this.checkboxIndex] = value;
 			hasChanged = true;
@@ -141,7 +141,7 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 Compute the internal state of the widget
 */
 CheckboxWidget.prototype.execute = function() {
-	this.checkboxTitle = this.getAttribute("tiddler", this.getVariable(
+	this.checkboxTitle = this.getAttribute("tiddler",this.getVariable(
 		"currentTiddler"));
 	this.checkboxTag = this.getAttribute("tag");
 	this.checkboxField = this.getAttribute("field");

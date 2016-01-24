@@ -77,9 +77,8 @@ ChecklistWidget.prototype.getValue = function() {
 ChecklistWidget.prototype.itemCheck = function() {
 	var hasItem = this.hasItem();
 	var checked = this.inputDomNode.checked;
-	return(this.checklistItem) ? (this.checklistInvert === "yes") ? (hasItem ===
-			checked) :
-		(hasItem !== checked) : false;
+	return(this.checklistItem) ? (this.checklistInvert === "yes")
+	? (hasItem === checked) : (hasItem !== checked) : false;
 };
 // Update the array
 ChecklistWidget.prototype.updateArray = function(array) {
