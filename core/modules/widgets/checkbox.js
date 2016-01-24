@@ -3,7 +3,7 @@ title: $:/core/modules/widgets/checkbox.js
 type: application/javascript
 module-type: widget
 
-Checkbox widget
+Checkbox widget to toggle a tag, or set/reset the value of a field or index
 
 \*/
 (function(){
@@ -27,15 +27,11 @@ CheckboxWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 CheckboxWidget.prototype.render = function(parent,nextSibling) {
-	// Save the parent dom node
 	this.parentDomNode = parent;
-	// Compute our attributes
 	this.computeAttributes();
-	// Execute our logic
 	this.execute();
-	// Create our elements
 	this.labelDomNode = this.document.createElement("label");
-	this.labelDomNode.setAttribute("class",this.checkboxClass);
+	this.labelDomNode.setAttribute("class", this.checkboxClass);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","checkbox");
 	if(this.getValue()) {
@@ -44,88 +40,100 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");
 	this.labelDomNode.appendChild(this.spanDomNode);
-	// Add a click event handler
-	$tw.utils.addEventListeners(this.inputDomNode,[
-		{name: "change", handlerObject: this, handlerMethod: "handleChangeEvent"}
-	]);
-	// Insert the label into the DOM and render any children
+	$tw.utils.addEventListeners(this.inputDomNode, [{
+		name: "change",
+		handlerObject: this,
+		handlerMethod: "handleChangeEvent"
+	}]);
 	parent.insertBefore(this.labelDomNode,nextSibling);
 	this.renderChildren(this.spanDomNode,null);
 	this.domNodes.push(this.labelDomNode);
 };
 
+/*
+Determine if checkbox state matches the value/tag
+*/
 CheckboxWidget.prototype.getValue = function() {
-	var tiddler = this.wiki.getTiddler(this.checkboxTitle);
+	var tiddler = this.wiki.getTiddler(this.checkboxTitle),
+		state,
+		HasTag;
 	if(tiddler) {
 		if(this.checkboxTag) {
-			if(this.checkboxInvertTag) {
-				return !tiddler.hasTag(this.checkboxTag);
-			} else {
-				return tiddler.hasTag(this.checkboxTag);
-			}
+			HasTag = tiddler.hasTag(this.checkboxTag);
 		}
-		if(this.checkboxField) {
-			var value = tiddler.fields[this.checkboxField] || this.checkboxDefault || "";
-			if(value === this.checkboxChecked) {
-				return true;
-			}
-			if(value === this.checkboxUnchecked) {
-				return false;
-			}
-		}
+		state = (this.checkboxField) ? tiddler.fields[this.checkboxField]
+		: (this.checkboxIndex) ? this.wiki.extractTiddlerDataItem(tiddler, this.checkboxIndex)
+		: this.checkboxDefault || "";
 	} else {
-		if(this.checkboxTag) {
-			return false;
-		}
-		if(this.checkboxField) {
-			if(this.checkboxDefault === this.checkboxChecked) {
-				return true;
-			}
-			if(this.checkboxDefault === this.checkboxUnchecked) {
-				return false;
-			}
-		}
+		state = this.checkboxDefault || "";
 	}
-	return false;
+	return(state === this.checkboxChecked) ? true
+	: (state === this.checkboxUnchecked) ? false
+	: (this.checkboxInvertTag) ? !HasTag : HasTag;
 };
 
+/*
+Invoke the action associated with this widget
+*/
 CheckboxWidget.prototype.handleChangeEvent = function(event) {
-	var checked = this.inputDomNode.checked,
-		tiddler = this.wiki.getTiddler(this.checkboxTitle),
-		fallbackFields = {text: ""},
-		newFields = {title: this.checkboxTitle},
+	var tiddler = this.wiki.getTiddler(this.checkboxTitle),
+		fallbackFields = {
+			text: ""
+		},
+		newFields = {
+			title: this.checkboxTitle,
+		},
+		hastag = (tiddler && tiddler.hasTag(this.checkboxTag)),
 		hasChanged = false,
-		tagCheck = false,
-		hasTag = tiddler && tiddler.hasTag(this.checkboxTag);
-	if(this.checkboxTag && this.checkboxInvertTag === "yes") {
-		tagCheck = hasTag === checked;
-	} else {
-		tagCheck = hasTag !== checked;
-	}
+		data,
+		inverted = this.checkboxInvertTag === "yes",
+		checked = this.inputDomNode.checked,
+		value = checked ? this.checkboxChecked : this.checkboxUnchecked,
+		tagCheck = (this.checkboxTag && inverted) ? hastag === checked
+		: hastag !== checked;
 	// Set the tag if specified
 	if(this.checkboxTag && (!tiddler || tagCheck)) {
 		newFields.tags = tiddler ? (tiddler.fields.tags || []).slice(0) : [];
 		var pos = newFields.tags.indexOf(this.checkboxTag);
 		if(pos !== -1) {
-			newFields.tags.splice(pos,1);
-		}
-		if(this.checkboxInvertTag === "yes" && !checked) {
+			newFields.tags.splice(pos, 1);
+		} else if(inverted && !checked) {
 			newFields.tags.push(this.checkboxTag);
-		} else if(this.checkboxInvertTag !== "yes" && checked) {
+		} else if(checked) {
 			newFields.tags.push(this.checkboxTag);
 		}
 		hasChanged = true;
 	}
 	// Set the field if specified
 	if(this.checkboxField) {
-		var value = checked ? this.checkboxChecked : this.checkboxUnchecked;
-		if(!tiddler || tiddler.fields[this.checkboxField] !== value) {
+		data = (tiddler) ? tiddler.fields[this.checkboxField] : "";
+		if(!tiddler || data !== value) {
 			newFields[this.checkboxField] = value;
 			hasChanged = true;
 		}
 	}
+	// Set the index if specified
+	if(this.checkboxIndex) {
+		data = this.wiki.getTiddlerData(this.checkboxTitle, {});
+		if(!tiddler || data[this.checkboxIndex] !== value) {
+			data[this.checkboxIndex] = value;
+			hasChanged = true;
+		}
+	}
+	// Update the tiddler if value has changed
 	if(hasChanged) {
-		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),fallbackFields,tiddler,newFields,this.wiki.getModificationFields()));
+		if(this.checkboxIndex && this.checkboxField !== "text") {
+			if(tiddler) {
+				if(tiddler.fields.type === "application/x-tiddler-dictionary") {
+					newFields.text = $tw.utils.makeTiddlerDictionary(data);
+				}
+			} else {
+				newFields.text = $tw.utils.makeTiddlerDictionary(data);
+				newFields.type = "application/x-tiddler-dictionary";
+			}
+		}
+		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),
+			fallbackFields, tiddler, newFields, this.wiki.getModificationFields()));
 	}
 };
 
@@ -133,25 +141,28 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 Compute the internal state of the widget
 */
 CheckboxWidget.prototype.execute = function() {
-	// Get the parameters from the attributes
-	this.checkboxTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
+	this.checkboxTitle = this.getAttribute("tiddler", this.getVariable(
+		"currentTiddler"));
 	this.checkboxTag = this.getAttribute("tag");
 	this.checkboxField = this.getAttribute("field");
+	this.checkboxIndex = this.getAttribute("index");
 	this.checkboxChecked = this.getAttribute("checked");
 	this.checkboxUnchecked = this.getAttribute("unchecked");
 	this.checkboxDefault = this.getAttribute("default");
 	this.checkboxClass = this.getAttribute("class","");
 	this.checkboxInvertTag = this.getAttribute("invertTag","");
-	// Make the child widgets
 	this.makeChildWidgets();
 };
 
 /*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
+Selectively refreshes the widget if needed.
 */
 CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.invertTag || changedAttributes.field || changedAttributes.checked || changedAttributes.unchecked || changedAttributes["default"] || changedAttributes["class"]) {
+	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.invertTag ||
+		changedAttributes.field || changedAttributes.index || changedAttributes.checked ||
+		changedAttributes.unchecked || changedAttributes["default"] ||
+		changedAttributes["class"]) {
 		this.refreshSelf();
 		return true;
 	} else {
