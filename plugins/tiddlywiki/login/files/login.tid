@@ -1,0 +1,25 @@
+created: 20160115112840267
+modified: 20160118125350050
+revision: 0
+tags: 
+title: Login
+type: text/vnd.tiddlywiki
+
+<$reveal type="match" state="$:/status/UserName" text="">
+I haven't found your user. Please insert your name or nick to get your tiddles tagged with your name.
+
+<$edit-text tiddler="$:/temp/holder" tag="input" default={{$:/status/UserName}} placeholder=""></$edit-text>
+<$button set="$:/status/UserName" setTo={{$:/temp/holder}}>
+<$action-setfield $tiddler="$:/status/UserName" text={{$:/temp/holder}}/>
+<$action-setfield $tiddler="$:/status/IsLoggedIn" text="yes"/>
+login
+</$button>
+</$reveal>
+
+<$reveal type="nomatch" state="$:/status/UserName" text="">
+Hi, {{$:/status/UserName}} <$button set="$:/status/UserName" setTo="">
+<$action-setfield $tiddler="$:/status/UserName" text=""/>
+<$action-setfield $tiddler="$:/status/IsLoggedIn" text="no"/>
+logoff
+</$button>
+</$reveal>
