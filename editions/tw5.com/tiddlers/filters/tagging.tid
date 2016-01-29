@@ -8,7 +8,13 @@ op-purpose: find the tiddlers that have the input tags
 op-input: a [[selection|Title Selection]] of [[tags|Tagging]]
 op-parameter: none
 op-output: the titles of any tiddlers that carry the input tags
+op-suffix: optionally, `all`
 
 Each input tag is processed in turn. The list of tiddlers carrying that tag is generated, [[sorted|Order of Tagged Tiddlers]], and then [[dominantly appended|Dominant Append]] to the operator's overall output.
+
+;tagging
+:the output contains all titles of tiddlers that carry <<.em any>> of the input tags
+;tagging:all
+:the output is restricted to tiddlers that carry <<.em>> all of the input tags
 
 <<.operator-examples "tagging">>

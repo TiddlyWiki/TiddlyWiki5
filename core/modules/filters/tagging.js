@@ -16,11 +16,19 @@ Filter operator returning all tiddlers that are tagged with the selected tiddler
 Export our filter function
 */
 exports.tagging = function(source,operator,options) {
-	var results = [];
+	var count = 0, result, index = [];
 	source(function(tiddler,title) {
-		$tw.utils.pushTop(results,options.wiki.getTiddlersWithTag(title));
+		index[count++] = options.wiki.getTiddlersWithTag(title);
 	});
-	return results;
+	result = index[0] || [];
+	while(count-- > 1){
+		if("all" === operator.suffix){
+			result = $tw.utils.intersect(result,index[count]);
+		} else {
+			$tw.utils.pushTop(result,index[count]);
+		}
+	}
+	return result;
 };
 
 })();
