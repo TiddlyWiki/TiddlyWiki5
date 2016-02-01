@@ -12,6 +12,8 @@ Main text-slicing logic
 /*global $tw: false */
 "use strict";
 
+var DOMParser = require("$:/plugins/tiddlywiki/xmldom/dom-parser").DOMParser;
+
 var SLICER_OUTPUT_TITLE = "$:/TextSlicer";
 
 function Slicer(wiki,sourceTitle) {
@@ -104,12 +106,16 @@ Slicer.prototype.isBlank = function(s) {
 };
 
 Slicer.prototype.getSourceHtmlDocument = function(tiddler) {
-	this.iframe = document.createElement("iframe");
-	document.body.appendChild(this.iframe);
-	this.iframe.contentWindow.document.open();
-	this.iframe.contentWindow.document.write(tiddler.fields.text);
-	this.iframe.contentWindow.document.close();
-	return this.iframe.contentWindow.document;
+	if($tw.browser) {
+		this.iframe = document.createElement("iframe");
+		document.body.appendChild(this.iframe);
+		this.iframe.contentWindow.document.open();
+		this.iframe.contentWindow.document.write(tiddler.fields.text);
+		this.iframe.contentWindow.document.close();
+		return this.iframe.contentWindow.document;
+	} else {
+		return new DOMParser().parseFromString(tiddler.fields.text);
+	}
 };
 
 Slicer.prototype.getSourceWikiDocument = function(tiddler) {
