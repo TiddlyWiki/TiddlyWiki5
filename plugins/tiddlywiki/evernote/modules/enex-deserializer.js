@@ -43,6 +43,15 @@ exports["application/enex+xml"] = function(text,fields) {
 			result[attrNode.tagName] = attrNode.textContent;
 		});
 		results.push(result);
+		$tw.utils.each(noteNode.querySelectorAll("resources"),function(resourceNode) {
+			results.push({
+				title: resourceNode.querySelector("resource-attributes>file-name").textContent,
+				type: resourceNode.querySelector("mime").textContent,
+				width: resourceNode.querySelector("width").textContent,
+				height: resourceNode.querySelector("height").textContent,
+				text: resourceNode.querySelector("data").textContent
+			});
+		});
 	});
 	// Return the output tiddlers
 	return results;
