@@ -34,11 +34,15 @@ exports["application/enex+xml"] = function(text,fields) {
 	// Get all the "note" nodes
 	var noteNodes = doc.querySelectorAll("note");
 	$tw.utils.each(noteNodes,function(noteNode) {
-		results.push({
+		var result = {
 			title: noteNode.querySelector("title").textContent,
 			type: "text/html",
 			text: noteNode.querySelector("content").textContent
+		};
+		$tw.utils.each(noteNodes.querySelector("note-attributes").childNodes,function(attrNode) {
+			result[attrNode.tagName] = attrNode.textContent;
 		});
+		results.push(result);
 	});
 	// Return the output tiddlers
 	return results;
