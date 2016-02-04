@@ -4,7 +4,8 @@
 		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/browser-sniff",
-		"tiddlywiki/railroad"
+		"tiddlywiki/railroad",
+		"tiddlywiki/evernote"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
