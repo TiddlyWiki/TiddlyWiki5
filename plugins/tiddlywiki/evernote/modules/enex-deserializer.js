@@ -37,6 +37,7 @@ exports["application/enex+xml"] = function(text,fields) {
 		var result = {
 			title: noteNode.querySelector("title").textContent,
 			type: "text/html",
+			tags: Array.prototype.slice.call(noteNode.querySelectorAll("tag")).map(function(tag) { return tag.textContent; }).join(","),
 			text: noteNode.querySelector("content").textContent
 		};
 		$tw.utils.each(noteNodes.querySelector("note-attributes").childNodes,function(attrNode) {
