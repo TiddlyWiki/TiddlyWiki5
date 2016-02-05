@@ -1315,6 +1315,11 @@ html body.tc-body.tc-single-tiddler-window {
 	padding: 0px 10px 0px 10px;
 }
 
+.tc-drop-down .tc-dropdown-item-plain,
+.tc-block-dropdown .tc-dropdown-item-plain {
+	padding: 4px 14px 4px 7px;
+}
+
 .tc-drop-down .tc-dropdown-item,
 .tc-block-dropdown .tc-dropdown-item {
 	padding: 4px 14px 4px 7px;
