@@ -37,10 +37,13 @@ exports["application/enex+xml"] = function(text,fields) {
 		var result = {
 			title: noteNode.querySelector("title").textContent,
 			type: "text/html",
-			tags: Array.prototype.slice.call(noteNode.querySelectorAll("tag")).map(function(tag) { return tag.textContent; }).join(","),
+			tags: [],
 			text: noteNode.querySelector("content").textContent
 		};
-		$tw.utils.each(noteNode.querySelector("note-attributes").childNodes,function(attrNode) {
+		$tw.utils.each(noteNode.querySelectorAll("tag"),function(tagNode) {
+			result.tags.push(tagNode.textContent);
+		});
+		$tw.utils.each(noteNode.querySelectorAll("note-attributes"),function(attrNode) {
 			result[attrNode.tagName] = attrNode.textContent;
 		});
 		results.push(result);
