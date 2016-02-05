@@ -40,7 +40,7 @@ exports["application/enex+xml"] = function(text,fields) {
 			tags: Array.prototype.slice.call(noteNode.querySelectorAll("tag")).map(function(tag) { return tag.textContent; }).join(","),
 			text: noteNode.querySelector("content").textContent
 		};
-		$tw.utils.each(noteNodes.querySelector("note-attributes").childNodes,function(attrNode) {
+		$tw.utils.each(noteNode.querySelector("note-attributes").childNodes,function(attrNode) {
 			result[attrNode.tagName] = attrNode.textContent;
 		});
 		results.push(result);
