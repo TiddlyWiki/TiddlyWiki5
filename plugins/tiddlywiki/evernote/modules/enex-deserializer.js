@@ -34,10 +34,24 @@ exports["application/enex+xml"] = function(text,fields) {
 	// Get all the "note" nodes
 	var noteNodes = doc.querySelectorAll("note");
 	$tw.utils.each(noteNodes,function(noteNode) {
-		results.push({
+		var result = {
 			title: noteNode.querySelector("title").textContent,
 			type: "text/html",
+			tags: Array.prototype.slice.call(noteNode.querySelectorAll("tag")).map(function(tag) { return tag.textContent; }).join(","),
 			text: noteNode.querySelector("content").textContent
+		};
+		$tw.utils.each(noteNodes.querySelector("note-attributes").childNodes,function(attrNode) {
+			result[attrNode.tagName] = attrNode.textContent;
+		});
+		results.push(result);
+		$tw.utils.each(noteNode.querySelectorAll("resources"),function(resourceNode) {
+			results.push({
+				title: resourceNode.querySelector("resource-attributes>file-name").textContent,
+				type: resourceNode.querySelector("mime").textContent,
+				width: resourceNode.querySelector("width").textContent,
+				height: resourceNode.querySelector("height").textContent,
+				text: resourceNode.querySelector("data").textContent
+			});
 		});
 	});
 	// Return the output tiddlers
