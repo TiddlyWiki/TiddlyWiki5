@@ -35,10 +35,10 @@ exports["application/enex+xml"] = function(text,fields) {
 	var noteNodes = doc.querySelectorAll("note");
 	$tw.utils.each(noteNodes,function(noteNode) {
 		var result = {
-			title: noteNode.querySelector("title").textContent,
+			title: getTextContent(noteNode,"title"),
 			type: "text/html",
 			tags: [],
-			text: noteNode.querySelector("content").textContent
+			text: getTextContent(noteNode,"content")
 		};
 		$tw.utils.each(noteNode.querySelectorAll("tag"),function(tagNode) {
 			result.tags.push(tagNode.textContent);
@@ -49,16 +49,20 @@ exports["application/enex+xml"] = function(text,fields) {
 		results.push(result);
 		$tw.utils.each(noteNode.querySelectorAll("resources"),function(resourceNode) {
 			results.push({
-				title: resourceNode.querySelector("resource-attributes>file-name").textContent,
-				type: resourceNode.querySelector("mime").textContent,
-				width: resourceNode.querySelector("width").textContent,
-				height: resourceNode.querySelector("height").textContent,
-				text: resourceNode.querySelector("data").textContent
+				title: getTextContent(resourceNode,"resource-attributes>file-name"),
+				type: getTextContent(resourceNode,"mime"),
+				width: getTextContent(resourceNode,"width"),
+				height: getTextContent(resourceNode,"height"),
+				text: getTextContent(resourceNode,"data")
 			});
 		});
 	});
 	// Return the output tiddlers
 	return results;
 };
+
+function getTextContent(node,selector) {
+	return (node.querySelector(selector) || {}).textContent;
+}
 
 })();
