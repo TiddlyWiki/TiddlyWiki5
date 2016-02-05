@@ -3,34 +3,12 @@ tags: $:/tags/AdvancedSearch
 caption: {{$:/language/Search/Filter/Caption}}
 
 \define lingo-base() $:/language/Search/
-<$linkcatcher to="$:/temp/advancedsearch">
-
 <<lingo Filter/Hint>>
 
 <div class="tc-search tc-advanced-search">
 <$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/>
-<$button popup=<<qualify "$:/state/filterDropdown">> class="tc-btn-invisible">
-{{$:/core/images/down-arrow}}
-</$button>
-<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
-<$button class="tc-btn-invisible">
-<$action-setfield $tiddler="$:/temp/advancedsearch" $field="text" $value=""/>
-{{$:/core/images/close-button}}
-</$button>
-<$macrocall $name="exportButton" exportFilter={{$:/temp/advancedsearch}} lingoBase="$:/language/Buttons/ExportTiddlers/"/>
-</$reveal>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch/FilterButton]!has[draft.of]]"><$transclude/></$list>
 </div>
-
-<div class="tc-block-dropdown-wrapper">
-<$reveal state=<<qualify "$:/state/filterDropdown">> type="nomatch" text="" default="">
-<div class="tc-block-dropdown tc-edit-type-dropdown">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/Filter]]"><$link to={{!!filter}}><$transclude field="description"/></$link>
-</$list>
-</div>
-</$reveal>
-</div>
-
-</$linkcatcher>
 
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 <$set name="resultCount" value="""<$count filter={{$:/temp/advancedsearch}}/>""">
