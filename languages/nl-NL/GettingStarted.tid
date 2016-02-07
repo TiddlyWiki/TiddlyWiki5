@@ -1,15 +1,17 @@
 title: GettingStarted
 
-define lingo-base() $:/language/ControlPanel/Basics/
-Welkom bij TiddlyWiki en de TiddlyWiki gemeenschap
+\define lingo-base() $:/language/ControlPanel/Basics/
+Welkom bij ~TiddlyWiki en de ~TiddlyWiki gemeenschap
 
-Controleer eerst of je veranderingen op kan slaan voordat je belangrijke informatie aan TiddlyWiki toevoegt. Zie http://tiddlywiki.com/#GettingStarted voor details
+Controleer eerst of je veranderingen op kan slaan voordat je belangrijke informatie aan ~TiddlyWiki toevoegt. Zie http://tiddlywiki.com/#GettingStarted voor details
 
-!! Configureer deze TiddlyWiki
+!! Configureer deze ~TiddlyWiki
 
- HelloThere
-$:/Translators
-$:/plugins/tiddlywiki/translators/readme
+<div class="tc-control-panel">
 
+|<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+|<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+</div>
 
-Zie het bedieningspaneel voor meer opties.
+Zie het [[bedieningspaneel|$:/ControlPanel]] voor meer opties.
