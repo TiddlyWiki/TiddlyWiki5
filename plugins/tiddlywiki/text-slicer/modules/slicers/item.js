@@ -19,7 +19,7 @@ exports.processListItemNode = function(domNode,tagName) {
 			var title = this.makeUniqueTitle("list-item",text),
 				parentTitle = this.parentStack[this.parentStack.length - 1].title,
 				tags = [];
-			if(domNode.className.trim() !== "") {
+			if(domNode.className && domNode.className.trim() !== "") {
 				tags = tags.concat(domNode.className.split(" "));
 			}
 			this.addToList(parentTitle,title);

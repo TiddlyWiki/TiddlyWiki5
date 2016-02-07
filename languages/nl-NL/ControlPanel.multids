@@ -38,6 +38,11 @@ Palette/Editor/Reset/Caption: reset
 Palette/HideEditor/Caption: verberg editor
 Palette/Prompt: Huidig palet:
 Palette/ShowEditor/Caption: toon editor
+Parsing/Block/Caption: 'Block parse' regels
+Parsing/Caption: 'Parsing' (ontleding)
+Parsing/Hint: Hier kan je globaal individuele wiki 'parser' regels uitzetten. Wees voorzichtig daar het uitzetten van sommige 'parser' regels het juist functioneren van ~Tiddlywiki kan beletten (je kan het normale gedrag herstellen met [['safe mode'|http://tiddlywiki.com/#SafeMode]])
+Parsing/Inline/Caption: 'Inline parse' regels
+Parsing/Pragma/Caption: 'Pragma parse' regels
 Plugins/Add/Caption: Verkrijg meer plugins
 Plugins/Add/Hint: Installeer plugins van de officiële bibliotheek
 Plugins/Caption: Plugins
@@ -47,11 +52,14 @@ Plugins/Disabled/Status: (uitgeschakeld)
 Plugins/Empty/Hint: Niets
 Plugins/Enable/Caption: activeer
 Plugins/Enable/Hint: Activeer deze plugin bij verversen van deze pagina
+Plugins/Install: installeer
 Plugins/Installed/Hint: Geïnstalleerde plugins:
 Plugins/Language/Prompt: Talen
 Plugins/Languages/Caption: Talen
 Plugins/Languages/Hint: Taal plugins
+Plugins/OpenPluginLibrary: open plugin bibliotheek
 Plugins/Plugin/Prompt: Plugins
+Plugins/Reinstall: herinstalleer
 Plugins/Theme/Prompt: Thema's
 Plugins/Themes/Caption: Thema's
 Plugins/Themes/Hint: Thema plugins
@@ -72,6 +80,9 @@ Settings/AutoSave/Caption: Automatisch opslaan
 Settings/AutoSave/Disabled/Description: Sla veranderingen niet automatisch op
 Settings/AutoSave/Enabled/Description: Sla veranderingen automatisch op
 Settings/AutoSave/Hint: Sla veranderingen tijdens wijzigen automatisch op
+Settings/CamelCase/Caption: 'Camel Case' wiki links
+Settings/CamelCase/Description: Zet automatisch ~CamelCase linken aan
+Settings/CamelCase/Hint: Je kan globaal het automatisch linken van ~CamelCase woorden uitzetten. Dit vereist herladen van de wiki om effect te hebben.
 Settings/Caption: Instellingen
 Settings/DefaultSidebarTab/Caption: Standaard tab in zijpaneel
 Settings/DefaultSidebarTab/Hint: Geef aan welke tab in het zijpaneel standaard wordt getoond
@@ -92,6 +103,9 @@ Settings/NavigationHistory/Caption: Navigeer-geschiedenis
 Settings/NavigationHistory/Hint: Werk de browsergeschiedenis bij als er naar een tiddler genavigeerd wordt:
 Settings/NavigationHistory/No/Description: Werk de browsergeschiedenis niet bij
 Settings/NavigationHistory/Yes/Description: Werk de browsergeschiedenis bij 
+Settings/PerformanceInstrumentation/Caption: Prestatiemeting
+Settings/PerformanceInstrumentation/Description: Zet prestatiemeting aan
+Settings/PerformanceInstrumentation/Hint: Toont prestatiestatistieken in de 'browser console'. Dit vereist herladen van de wiki om effect te hebben
 Settings/TitleLinks/Caption: Titels van tiddlers
 Settings/TitleLinks/Hint: Toon (optioneel) tiddler titels als link 
 Settings/TitleLinks/No/Description: Toon tiddler titels niet als links
@@ -100,7 +114,12 @@ Settings/ToolbarButtons/Caption: Knoppen van knoppenbalk
 Settings/ToolbarButtons/Hint: Uiterlijk van standaard knop in knoppenbalk:
 Settings/ToolbarButtons/Icons/Description: Met pictogram (icon)
 Settings/ToolbarButtons/Text/Description: Met tekst
-StoryView/Caption: Story view
+Settings/ToolbarButtonStyle/Caption: Stijl van knoppen in knoppenbalk
+Settings/ToolbarButtonStyle/Hint: Kies de stijl voor knoppen in knoppenbalk:
+Settings/ToolbarButtonStyle/Styles/Borderless: Zonder rand
+Settings/ToolbarButtonStyle/Styles/Boxed: Vierkante rand
+Settings/ToolbarButtonStyle/Styles/Rounded: Ronde rand
+StoryView/Caption: 'Story' view
 StoryView/Prompt: Huidige view:
 Theme/Caption: Thema
 Theme/Prompt: Huidig thema:

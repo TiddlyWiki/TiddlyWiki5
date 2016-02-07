@@ -590,7 +590,7 @@ Crypto helper object for encrypted content. It maintains the password text in a 
 the password, and to encrypt/decrypt a block of text
 */
 $tw.utils.Crypto = function() {
-	var sjcl = $tw.node ? require("./sjcl.js") : window.sjcl,
+	var sjcl = $tw.node ? (global.sjcl || require("./sjcl.js")) : window.sjcl,
 		currentPassword = null,
 		callSjcl = function(method,inputText,password) {
 			password = password || currentPassword;
@@ -812,6 +812,7 @@ $tw.Tiddler = function(/* [fields,] fields */) {
 	}
 	// Freeze the tiddler against modification
 	Object.freeze(this.fields);
+	Object.freeze(this);
 };
 
 $tw.Tiddler.prototype.hasField = function(field) {
@@ -1399,10 +1400,6 @@ $tw.loadTiddlersBrowser = function() {
 	for(var t=0; t<containerIds.length; t++) {
 		$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById(containerIds[t])));
 	}
-	// Load any preloaded tiddlers
-	if($tw.preloadTiddlers) {
-		$tw.wiki.addTiddlers($tw.preloadTiddlers);
-	}
 };
 
 } else {
@@ -1808,7 +1805,7 @@ $tw.boot.startup = function(options) {
 			$tw.boot.wikiPath = process.cwd();
 		}
 		// Read package info
-		$tw.packageInfo = require("../package.json");
+		$tw.packageInfo = $tw.packageInfo || require("../package.json");
 		// Check node version number
 		if(!$tw.utils.checkVersions(process.version.substr(1),$tw.packageInfo.engines.node.substr(2))) {
 			$tw.utils.error("TiddlyWiki5 requires node.js version " + $tw.packageInfo.engines.node);
@@ -1839,6 +1836,7 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("audio/mp3","base64",".mp3");
 	$tw.utils.registerFileType("audio/mp4","base64",[".mp4",".m4a"]);
 	$tw.utils.registerFileType("text/x-markdown","utf8",[".md",".markdown"]);
+	$tw.utils.registerFileType("application/enex+xml","utf8",".enex");	
 	// Create the wiki store for the app
 	$tw.wiki = new $tw.Wiki();
 	// Install built in tiddler fields modules
@@ -1865,6 +1863,10 @@ $tw.boot.startup = function(options) {
 		$tw.loadTiddlersBrowser();
 	} else {
 		$tw.loadTiddlersNode();
+	}
+	// Load any preloaded tiddlers
+	if($tw.preloadTiddlers) {
+		$tw.wiki.addTiddlers($tw.preloadTiddlers);
 	}
 	// Unpack plugin tiddlers
 	$tw.wiki.readPluginInfo();

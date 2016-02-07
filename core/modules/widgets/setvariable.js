@@ -61,6 +61,8 @@ SetWidget.prototype.getValue = function() {
 		if(results.length === 0 && this.setEmptyValue !== undefined) {
 			value = this.setEmptyValue;
 		}
+	} else if(!value && this.setEmptyValue) {
+		value = this.setEmptyValue;
 	}
 	return value;
 };

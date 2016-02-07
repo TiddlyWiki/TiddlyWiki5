@@ -1,0 +1,127 @@
+caption: action-listops
+created: 20141025120850184
+list: efg hlm pqr
+modified: 20151228083329099
+myfield: 
+revision: 0
+tags: ActionWidgets Widgets
+title: ActionListopsWidget
+type: text/vnd.tiddlywiki
+
+\define .operator-rows(filter)
+<$list filter="$filter$"><tr>
+<td><$link to={{!!title}}>{{!!caption}}</$link></td>
+<td>{{!!op-purpose}} <$list filter="[all[current]tag[Common Operators]]">{{$:/core/images/done-button}}</$list></td>
+<td align="center"><$list filter="[all[current]tag[Negatable Operators]]">`!`</$list></td>
+</tr></$list>
+\end
+
+\define .group-heading(_)
+<tr class="doc-table-subheading"><th colspan="3" align="center">$_$</th></tr>
+\end
+
+! Introduction
+
+The ''action-listops'' widget is an [[action widget|ActionWidgets]] that manipulates user lists in any field or data index. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+
+! Content and Attributes
+
+The ''action-listops'' widget is invisible. Any content within it is ignored.
+
+|!Attribute |!Description |
+|$tiddler |The title of the tiddler whose lists are to be modified (if not provided defaults to the [[current tiddler|Current Tiddler]] |
+|$field |The name of a field to be manipulated as a list (defaults to 'list') |
+|$index |Optional index of a property in a [[data tiddler|DataTiddlers]] index to be manipulated as a list |
+|$filter |An optional filter expression, the output of which will be saved to the field/index being manipulated |
+|$subfilter |An optional subfilter expression, which takes the list being manipulated as input, and saves the modified list back to the field/index being manipulated |
+|$tags |An optional subfilter expression, which takes the 'tags' field of the target tiddler as input, and saves the modified list of tags back to the 'tags' field |
+
+! Extended Filter Operators
+
+A number of [[extended filter operators|The Extended Listops Filters]] are necessary for the manipulation of lists. These operators have been designed primarily for use in subfilter expressions whereby the modified current list is returned in place of the current list.
+
+<table>
+<<.group-heading "Listops Operators">>
+<tr>
+<th align="left">Operator</th>
+<th align="left">Purpose</th>
+<th></th>
+</tr>
+<<.operator-rows "[tag[Filter Operators]tag[Listops Operators]tag[Order Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
+</table>
+
+! Examples
+
+In this example we shall populate and then clear a list in an ordinary field (myfield) of this tiddler (the default.)
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$button>
+<$action-listops $field="myfield" $subfilter="efg hlm pqr"/>
+Populate 'myfield'
+</$button>
+<$button>
+<$action-listops $field="myfield" $subfilter="abc xyz"/>
+Append More Items
+</$button>
+<$button>
+<$action-listops $field="myfield" $subfilter="-abc -hlm"/>
+Remove Items
+</$button>
+<$button>
+<$action-listops $field="myfield" $filter="[[]]"/>
+Clear 'myfield'
+</$button>
+
+<$list filter="[list[!!myfield]]">
+
+</$list>"""/>
+
+---
+In this example we shall append and remove items from a list in an ordinary field (myfield) of this tiddler (the default) and sort the resultant list. We shall then remove some of the appended items and sort the resulting list in reverse order.
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$button>
+<$action-listops $field="myfield" $subfilter="-efg ijk xyz [[this is a title]] +[sort[]]"/>
+Mangle List
+</$button>
+<$button>
+<$action-listops $field="myfield" $subfilter="-xyz -[[this is a title]] +[!sort[]]"/>
+Unmangle List
+</$button>
+
+<$list filter="[list[!!myfield]]">
+
+</$list>"""/>
+
+---
+In this example we shall append a few tags to the 'tags' field of this tiddler (the default.) We shall then remove some of the appended tags. 
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$button>
+<$action-listops $tags="+[append{Days of the Week!!short}] $:/tag1 $:/tag2 $:/tag3"/>
+Populate 'tags'
+</$button>
+<$button>
+<$action-listops $tags="+[!remove:2{!!tags}]"/>
+Remove Last Two Tags
+</$button>
+<$button>
+<$action-listops $tags="+[!prefix[$:/]]"/>
+Remove System Tags
+</$button>
+<$button>
+<$action-listops $tags="-Mon -Tue"/>
+Remove Mon and Tue
+</$button>
+<$button>
+<$action-listops $tags="+[prefix[$:/]] ActionWidgets Widgets"/>
+Remove User Tags
+</$button>
+<$button>
+<$action-listops $tags="+[[]] ActionWidgets Widgets"/>
+Clear Tags
+</$button>
+
+<$list filter="[list[!!tags]]">
+
+</$list>"""/>

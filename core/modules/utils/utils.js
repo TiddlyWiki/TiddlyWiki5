@@ -35,9 +35,7 @@ exports.trim = function(str) {
 Return the number of keys in an object
 */
 exports.count = function(object) {
-	var s = 0;
-	$tw.utils.each(object,function() {s++;});
-	return s;
+	return Object.keys(object || {}).length;
 };
 
 /*
@@ -644,5 +642,16 @@ exports.tagToCssSelector = function(tagName) {
 	});
 };
 
+
+/*
+IE does not have sign function
+*/
+exports.sign = Math.sign || function(x) {
+	x = +x; // convert to a number
+	if (x === 0 || isNaN(x)) {
+		return x;
+	}
+	return x > 0 ? 1 : -1;
+};
 
 })();

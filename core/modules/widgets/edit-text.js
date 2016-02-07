@@ -52,6 +52,9 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 	if(this.editSize) {
 		domNode.setAttribute("size",this.editSize);
 	}
+	if(this.editRows) {
+		domNode.setAttribute("rows",this.editRows);
+	}
 	// Assign classes
 	if(this.editClass) {
 		domNode.className = this.editClass;
@@ -79,7 +82,7 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 	if(this.editFocus === "true") {
 		if(domNode.focus && domNode.select) {
 			domNode.focus();
-			domNode.select();			
+			domNode.select();
 		}
 	}
 };
@@ -148,6 +151,7 @@ EditTextWidget.prototype.execute = function() {
 	this.editClass = this.getAttribute("class");
 	this.editPlaceholder = this.getAttribute("placeholder");
 	this.editSize = this.getAttribute("size");
+	this.editRows = this.getAttribute("rows");
 	this.editAutoHeight = this.getAttribute("autoHeight","yes") === "yes";
 	this.editMinHeight = this.getAttribute("minHeight",DEFAULT_MIN_TEXT_AREA_HEIGHT);
 	this.editFocusPopup = this.getAttribute("focusPopup");
@@ -178,7 +182,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 EditTextWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// Completely rerender if any of our attributes have changed
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows) {
 		this.refreshSelf();
 		return true;
 	} else if(changedTiddlers[this.editTitle]) {
@@ -214,17 +218,30 @@ EditTextWidget.prototype.updateEditorDomNode = function(text) {
 };
 
 /*
+Get the first parent element that has scrollbars or use the body as fallback.
+*/
+EditTextWidget.prototype.getScrollContainer = function(el) {
+	while(el.parentNode) {	
+		el = el.parentNode;
+		if(el.scrollTop) {
+			return el;
+		}
+	}
+	return this.document.body;
+};
+
+/*
 Fix the height of textareas to fit their content
 */
 EditTextWidget.prototype.fixHeight = function() {
-	var self = this,
-		domNode = this.domNodes[0];
+	var domNode = this.domNodes[0];
 	if(this.editAutoHeight && domNode && !domNode.isTiddlyWikiFakeDom && this.editTag === "textarea") {
 		// Resize the textarea to fit its content, preserving scroll position
-		var scrollPosition = $tw.utils.getScrollPosition(),
-			scrollTop = scrollPosition.y;
-		// Measure the specified minimum height
-		domNode.style.height = self.editMinHeight;
+		// Get the scroll container and register the current scroll position
+		var container = this.getScrollContainer(domNode),
+			scrollTop = container.scrollTop;
+                // Measure the specified minimum height
+		domNode.style.height = this.editMinHeight;
 		var minHeight = domNode.offsetHeight;
 		// Set its height to auto so that it snaps to the correct height
 		domNode.style.height = "auto";
@@ -232,12 +249,11 @@ EditTextWidget.prototype.fixHeight = function() {
 		var newHeight = Math.max(domNode.scrollHeight + domNode.offsetHeight - domNode.clientHeight,minHeight);
 		// Only try to change the height if it has changed
 		if(newHeight !== domNode.offsetHeight) {
-			domNode.style.height =  newHeight + "px";
+			domNode.style.height = newHeight + "px";
 			// Make sure that the dimensions of the textarea are recalculated
 			$tw.utils.forceLayout(domNode);
-			// Check that the scroll position is still visible before trying to scroll back to it
-			scrollTop = Math.min(scrollTop,self.document.body.scrollHeight - window.innerHeight);
-			window.scrollTo(scrollPosition.x,scrollTop);
+			// Set the container to the position we registered at the beginning
+			container.scrollTop = scrollTop;
 		}
 	}
 };

@@ -5,6 +5,9 @@ Filter/Caption: 篩選
 Filter/Hint: 以[[篩選表達式|http://tiddlywiki.com/static/Filters.html]]搜尋
 Filter/Matches: //<small><<resultCount>> 個條目符合條件</small>//
 Matches: //<small><<resultCount>> 個條目符合條件</small>//
+Matches/All: 所有匹配：
+Matches/Title: 條目名稱匹配：
+Search: 搜尋
 Shadows/Caption: 預設
 Shadows/Hint: 尋找預設條目
 Shadows/Matches: //<small><<resultCount>> 個條目符合條件</small>//

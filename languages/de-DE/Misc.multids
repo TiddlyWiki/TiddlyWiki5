@@ -1,5 +1,6 @@
 title: $:/language/
 
+AboveStory/ClassicPlugin/Warning: Es scheint, Sie möchten ein Plugin verwenden, dass für [[TiddlyWiki Classic|http://tiddlywiki.com/#TiddlyWikiClassic]] entwickelt wurde. Diese Plugins können jedoch mit ~TiddlyWiki Version 5 nicht verwendet werden. ~TiddlyWiki Classic plugin erkannt:
 BinaryWarning/Prompt: Dieser Tiddler enthält binäre Daten.
 ClassicWarning/Hint: Dieser Tiddler wurde im TiddlyWiki Classic Format erstellt. Dieses Format ist nur teilweise kompatibel mit TiddlyWiki Version 5. Mehr Info finden Sie unter: http://tiddlywiki.com/static/Upgrading.html
 ClassicWarning/Upgrade/Caption: upgrade
@@ -18,14 +19,20 @@ Encryption/Password: Passwort
 Encryption/RepeatPassword: Passwort wiederholen
 Encryption/PasswordNoMatch: Passwörter stimmen nicht überein
 Encryption/SetPassword: Passwort setzen
+InternalJavaScriptError/Title: Interner JavaScript Fehler
+InternalJavaScriptError/Hint: Es tut uns leid, aber bitte starten Sie Ihr TiddlyWiki neu, indem sie die Seite im Browser neu laden.
 InvalidFieldName: Das Feld: "<$text text=<<fieldName>>/>" enthält illegale Zeichen. Felder müssen klein geschrieben werden. Erlaubte Sonderzeichen sind: Zahlen, Unterstrich (`_`), Minus (`-`) und Punkt (`.`).
+LazyLoadingWarning: <p>Lade externe Datei von ''<$text text={{!!_canonical_uri}}/>''</p><p>Wenn diese Meldung nicht automatisch gelöscht wird, dann verwenden Sie wahrscheinlich einen Browser der diese Funktion nicht unterstützt. Siehe http://tiddlywiki.com/#ExternalText</p>
 MissingTiddler/Hint: Fehlender Tiddler "<$text text=<<currentTiddler>>/>" - klicken Sie {{$:/core/images/edit-button}} um ihn zu erzeugen.
-OfficialPluginLibrary: Offizielles ~TiddlyWiki Plugin Verzeichnis
+OfficialPluginLibrary: Offizielles ~TiddlyWiki Plugin-Verzeichnis
+OfficialPluginLibrary/Hint: Offizielles ~TiddlyWiki Plugin-Verzeichnis auf tiddlywiki.com. Plugin, Themes und Sprach Dateien werden vom "core team" gewartet.
 PluginReloadWarning: Das Wiki muss gespeichert {{$:/core/ui/Buttons/save-wiki}} und neu gladen {{$:/core/ui/Buttons/refresh}} werden, damit die Plugins ausgeführt werden.
 RecentChanges/DateFormat: YYYY MMM DD
 SystemTiddler/Tooltip: Das ist ein System-Tiddler
 TagManager/Colour/Heading: Farbe
+TagManager/Count/Heading: Anzahl
 TagManager/Icon/Heading: Symbol
 TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
+Tiddler/DateFormat: DDth MMM YYYY um hh:mm
 UnsavedChangesWarning: TiddlyWiki wurde geändert, aber noch nicht gespeichert!

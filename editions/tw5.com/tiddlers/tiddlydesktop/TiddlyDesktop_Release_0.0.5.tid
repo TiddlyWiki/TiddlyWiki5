@@ -1,0 +1,26 @@
+caption: 0.0.5
+created: 20151026171331736
+modified: 20151026171331736
+tags: TiddlyDesktopReleaseNotes
+title: TiddlyDesktop Release 0.0.5
+type: text/vnd.tiddlywiki
+released: 20151026
+
+<a href="https://github.com/Jermolene/TiddlyDesktop/releases/tag/v0.0.5" class="tc-btn-big-green" target="_blank">
+{{$:/core/images/github}} Download from ~GitHub
+</a>
+
+[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyDesktop/compare/v0.0.4...v0.0.5]]
+
+This is an important bug fix release.
+
+Please report any problems or suggestions via GitHub issues, or post to the TiddlyWiki discussion group:
+
+http://groups.google.com/group/TiddlyWiki
+
+* Upgraded to the latest stable v12.0.3 of nw.js, fixing a number of bugs in the process, including one that prevented v0.0.4 from being used successfully under Windows
+** Bugs fixed: <a href="https://github.com/Jermolene/TiddlyDesktop/issues/66">#66</a>, <a href="https://github.com/Jermolene/TiddlyDesktop/issues/65">#65</a>, <a href="https://github.com/Jermolene/TiddlyDesktop/issues/61">#61</a>, <a href="https://github.com/Jermolene/TiddlyDesktop/issues/57">#57</a>, <a href="https://github.com/Jermolene/TiddlyDesktop/issues/53">#53</a>, <a href="https://github.com/Jermolene/TiddlyDesktop/issues/52">#52</a>
+* Added a warning about disrupting the backstage wiki
+* Switched to using "Settings" instead of "Control Panel", to reduce confusion with TiddlyWiki's control panel
+* Updated app icon
+* Cleaned up TiddlyWiki build products, fixing <a href="https://github.com/Jermolene/TiddlyDesktop/issues/67">#67</a>

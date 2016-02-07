@@ -12,6 +12,8 @@ Main text-slicing logic
 /*global $tw: false */
 "use strict";
 
+var DOMParser = require("$:/plugins/tiddlywiki/xmldom/dom-parser").DOMParser;
+
 var SLICER_OUTPUT_TITLE = "$:/TextSlicer";
 
 function Slicer(wiki,sourceTitle) {
@@ -104,12 +106,16 @@ Slicer.prototype.isBlank = function(s) {
 };
 
 Slicer.prototype.getSourceHtmlDocument = function(tiddler) {
-	this.iframe = document.createElement("iframe");
-	document.body.appendChild(this.iframe);
-	this.iframe.contentWindow.document.open();
-	this.iframe.contentWindow.document.write(tiddler.fields.text);
-	this.iframe.contentWindow.document.close();
-	return this.iframe.contentWindow.document;
+	if($tw.browser) {
+		this.iframe = document.createElement("iframe");
+		document.body.appendChild(this.iframe);
+		this.iframe.contentWindow.document.open();
+		this.iframe.contentWindow.document.write(tiddler.fields.text);
+		this.iframe.contentWindow.document.close();
+		return this.iframe.contentWindow.document;
+	} else {
+		return new DOMParser().parseFromString(tiddler.fields.text);
+	}
 };
 
 Slicer.prototype.getSourceWikiDocument = function(tiddler) {
@@ -193,16 +199,26 @@ Slicer.prototype.processNode = function(domNode) {
 
 // Slice a tiddler into individual tiddlers
 Slicer.prototype.sliceTiddler = function(title) {
-	this.sliceTitle = "Sliced up " + title;
+	var sourceTiddler = $tw.wiki.getTiddler(this.sourceTitle),
+		sliceTitle,sliceTiddler = {};
+	if(sourceTiddler) {
+		sliceTiddler = $tw.utils.extend({},sourceTiddler.fields);
+	}
+	if(sliceTiddler["doc-santovia-id"]) {
+		sliceTiddler.title = sliceTiddler["doc-santovia-id"];
+		delete sliceTiddler["doc-santovia-id"];
+	} else {
+		sliceTiddler.title = "Sliced up " + title;		
+	}
+	sliceTiddler.text =  "Document sliced at " + (new Date());
+	sliceTiddler.type = "text/vnd.tiddlywiki";
+	sliceTiddler.tags = [];
+	sliceTiddler.list = [];
+	sliceTiddler["toc-type"] = "document";
 	var domNode = this.getSourceDocument();
-	this.parentStack.push({type: "h0", title: this.addTiddler({
-		title: this.sliceTitle,
-		text: "Document sliced at " + (new Date()),
-		list: [],
-		"toc-type": "document"
-	})});
+	this.parentStack.push({type: "h0", title: this.addTiddler(sliceTiddler)});
 	this.currentTiddler = title;
-	this.containerStack.push(this.sliceTitle);
+	this.containerStack.push(sliceTiddler.title);
 	this.processNodeList(domNode.childNodes);
 	this.containerStack.pop();
 };

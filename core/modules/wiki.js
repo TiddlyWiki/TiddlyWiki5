@@ -193,11 +193,11 @@ exports.generateNewTitle = function(baseTitle,options) {
 };
 
 exports.isSystemTiddler = function(title) {
-	return title.indexOf("$:/") === 0;
+	return title && title.indexOf("$:/") === 0;
 };
 
 exports.isTemporaryTiddler = function(title) {
-	return title.indexOf("$:/temp/") === 0;
+	return title && title.indexOf("$:/temp/") === 0;
 };
 
 exports.isImageTiddler = function(title) {

@@ -8,6 +8,10 @@ $:/config/plugins/tiddlywiki/text-slicer/show-preview-document/$(tv-heading-stat
 $:/config/plugins/tiddlywiki/text-slicer/show-toolbar/$(currentTiddler)$
 \end
 
+\define config-show-metadata()
+$:/config/plugins/tiddlywiki/text-slicer/show-metadata/$(currentTiddler)$
+\end
+
 \define config-heading-status()
 $:/config/plugins/tiddlywiki/text-slicer/heading-status/$(currentTiddler)$
 \end

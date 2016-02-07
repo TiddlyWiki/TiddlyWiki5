@@ -252,3 +252,21 @@ William Jackson, @matabele 2015/09/26
 Karl Knechtel, @zahlman, 2015/10/03
 
 Tony Grosinger @tgrosinger 2015/10/03
+
+Antaeus Feldspar @afeldspar 2015/10/20
+
+Soeren Enevoldsen, @senevoldsen90, 2015/10/09
+
+Santiago Pelufo, @spelufo, 2015/12/18
+
+Matthew Lauber, @mklauber, 2015/11/13
+
+Matthew DeAbreu, @mdeabreu, 2016/01/05
+
+Cameron Fischer, @flibbles, 2016/01/08
+
+Jim, @ARRRRGH, 2016/01/11
+
+Koke Laast, @Koke24, 2016/01/27
+
+Thomas Elmiger, @telmiger, 2016/02/02

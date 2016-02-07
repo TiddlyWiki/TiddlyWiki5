@@ -38,6 +38,8 @@ FoldOthers/Caption: 收合其他条目
 FoldOthers/Hint: 收合其他已开启条目的内容
 FoldAll/Caption: 收合所有条目
 FoldAll/Hint: 收合所有已开启条目的内容
+Fold/FoldBar/Caption: 收合栏
+Fold/FoldBar/Hint: 可选的收合与展开条目的长条按钮
 UnfoldAll/Caption: 展开所有条目
 UnfoldAll/Hint: 展开所有已开启条目的内容
 FullScreen/Caption: 全屏幕

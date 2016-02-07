@@ -101,6 +101,9 @@ Settings/NavigationHistory/Caption: 둘러보기 역사
 Settings/NavigationHistory/Hint: 티들러로 둘러보기할 때 둘러보기 역사를 업데이트합니다:
 Settings/NavigationHistory/No/Description: 역사를 업데이트하지 않음
 Settings/NavigationHistory/Yes/Description: 역사를 업데이트
+Settings/PerformanceInstrumentation/Caption: 성능 계측
+Settings/PerformanceInstrumentation/Description: 성능 계측 활성화
+Settings/PerformanceInstrumentation/Hint: 브라우저 개발자 콘솔에서 성능 통계를 보여줍니다. 적용하려면 다시 불러와야 합니다
 Settings/TitleLinks/Caption: 티들러 제목
 Settings/TitleLinks/Hint: 티들러 제목을 링크로 선택적으로 보여줍니다
 Settings/TitleLinks/No/Description: 티들러 제목을 링크로 보여주지 않음
