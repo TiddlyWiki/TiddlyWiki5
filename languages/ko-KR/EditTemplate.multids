@@ -13,8 +13,8 @@ Fields/Add/Dropdown/User: 사용자 필드
 Fields/Add/Name/Placeholder: 필드 이름
 Fields/Add/Prompt: 새 필드 추가:
 Fields/Add/Value/Placeholder: 필드 값
-Shadow/OverriddenWarning: 이것은 수정된 섀도우 티들러입니다. 이 티들러를 삭제하여 기본 판으로 되돌릴 수 있습니다
-Shadow/Warning: 이것은 섀도우 티들러입니다. 어떤 바뀜도 기본 판을 덮어쓰게 됩니다
+Shadow/OverriddenWarning: 이것은 수정된 섀도우 티들러입니다. 이 티들러를 삭제하여 <<pluginLink>> 플러그인의 기본 판으로 되돌릴 수 있습니다
+Shadow/Warning: 이것은 섀도우 티들러입니다. 어떠한 바뀜도 <<pluginLink>> 플러그인에서의 기본 판을 덮어쓰게 됩니다
 Tags/Add/Button: 추가
 Tags/Add/Placeholder: 태그 이름
 Tags/Dropdown/Caption: 태그 목록

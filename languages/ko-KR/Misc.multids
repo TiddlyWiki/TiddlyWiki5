@@ -38,5 +38,5 @@ TagManager/Count/Heading: 횟수
 TagManager/Icon/Heading: 아이콘
 TagManager/Info/Heading: 정보
 TagManager/Tag/Heading: 태그
-Tiddler/DateFormat: YYYY년 MMM DD일 am hh12:mm
+Tiddler/DateFormat: YYYY년 MMM DD일 am hh12:0mm
 UnsavedChangesWarning: TiddlyWiki에 저장하지 않은 바뀜이 있습니다
