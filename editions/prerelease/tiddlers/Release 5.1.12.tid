@@ -9,7 +9,17 @@ type: text/vnd.tiddlywiki
 
 ! Major Improvements
 
-!! TBD
+!! Evernote Plugin Introduction
+
+The experimental Evernote plugin allows notes and images from `.enex` files to be imported into TiddlyWiki. Install it through the "Plugins" tab of control panel.
+
+!! Text-Slicer Plugin Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/176d2ccd76856b10aadd5e71af587574e7bcd447]] support for sticky notes within documents
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/c98ef97d236fb023c3b5099a5fc52c1e8da7eb4d]] support for slicing documents to Node.js
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/1335dff45013f83fb06a47453e6063b5c0e2c0b3]] document metadata display
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/46800d790a6521aafba24fc9cb9e0d0e8f1a48a2]] `list-children` filter operator
+* Fixed bugs
 
 ! Other Improvements
 
@@ -19,7 +29,7 @@ type: text/vnd.tiddlywiki
 
 !! Usability Improvements
 
-* TBD
+* [[Added|]] a bulk delete button to [[advanced search|$:/AdvancedSearch]] "Filter" tab
 
 !! Hackability Improvements
 
@@ -33,8 +43,9 @@ type: text/vnd.tiddlywiki
 
 * TBD
 
-!! Contributors
+! Contributors
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
+* [[@sukima|https://github.com/sukima]]
 * [[@telmiger|https://github.com/telmiger]]
