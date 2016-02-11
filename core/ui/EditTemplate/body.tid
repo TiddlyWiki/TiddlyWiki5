@@ -2,6 +2,10 @@ title: $:/core/ui/EditTemplate/body
 tags: $:/tags/EditTemplate
 
 \define lingo-base() $:/language/EditTemplate/Body/
+
+<$vars editorState=<<qualify "$:/state/showeditpreview/$(currentTiddler)$">>>
+<$set name="showPreview" filter="[title<editorState>get[text]]" emptyValue={{$:/config/Editor/Preview}}>
+
 <$list filter="[is[current]has[_canonical_uri]]">
 
 <div class="tc-message-box">
@@ -18,9 +22,9 @@ tags: $:/tags/EditTemplate
 
 <$list filter="[is[current]!has[_canonical_uri]]">
 
-<$reveal state="$:/state/showeditpreview" type="match" text="yes">
+<$reveal type="match" default=<<showPreview>> text="yes">
 
-<em class="tc-edit"><<lingo Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="no"><<lingo Preview/Button/Hide>></$button>
+<em class="tc-edit"><<lingo Hint>></em> <$button type="set" set=<<editorState>> setTo="no"><<lingo Preview/Button/Hide>></$button>
 
 <div class="tc-tiddler-preview">
 <div class="tc-tiddler-preview-preview">
@@ -40,11 +44,14 @@ tags: $:/tags/EditTemplate
 
 </$reveal>
 
-<$reveal state="$:/state/showeditpreview" type="nomatch" text="yes">
+<$reveal type="nomatch" default=<<showPreview>> text="yes">
 
-<em class="tc-edit"><<lingo Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="yes"><<lingo Preview/Button/Show>></$button>
+<em class="tc-edit"><<lingo Hint>></em> <$button type="set" set=<<editorState>> setTo="yes"><<lingo Preview/Button/Show>></$button>
 <$edit field="text" class="tc-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}/>
 
 </$reveal>
 
 </$list>
+
+</$set>
+</$vars>
