@@ -29,7 +29,7 @@ The experimental Evernote plugin allows notes and images from `.enex` files to b
 
 !! Usability Improvements
 
-* [[Added|]] a bulk delete button to [[advanced search|$:/AdvancedSearch]] "Filter" tab
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/adf45b346847a81d4ed26397466daa4514035bb9]] a bulk delete button to [[advanced search|$:/AdvancedSearch]] "Filter" tab
 
 !! Hackability Improvements
 
