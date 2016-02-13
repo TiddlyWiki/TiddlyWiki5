@@ -270,3 +270,5 @@ Jim, @ARRRRGH, 2016/01/11
 Koke Laast, @Koke24, 2016/01/27
 
 Thomas Elmiger, @telmiger, 2016/02/02
+
+Richard Rath @rcrath 2016/02/12
