@@ -1,0 +1,9 @@
+title: $:/core/ui/EditTemplate/body/preview/parse-tree
+tags: $:/tags/EditPreview
+caption: parse tree
+
+\define preview(mode,output)
+<$parse-tree mode="$mode$" output="$output$"/>
+\end
+
+{{||$:/core/ui/EditTemplate/body/preview/shared}}

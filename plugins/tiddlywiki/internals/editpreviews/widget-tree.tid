@@ -1,0 +1,9 @@
+title: $:/core/ui/EditTemplate/body/preview/widget-tree
+tags: $:/tags/EditPreview
+caption: widget tree
+
+\define preview(mode,output)
+<$widget-tree mode="$mode$" output="$output$"/>
+\end
+
+{{||$:/core/ui/EditTemplate/body/preview/shared}}

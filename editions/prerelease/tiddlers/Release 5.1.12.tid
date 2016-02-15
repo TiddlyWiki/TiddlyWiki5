@@ -13,6 +13,12 @@ type: text/vnd.tiddlywiki
 
 The experimental Evernote plugin allows notes and images from `.enex` files to be imported into TiddlyWiki. Install it through the "Plugins" tab of control panel.
 
+!! "Internals" Plugin Introduction
+
+The new `tiddlywiki/internals` plugin provides features to help understand the internal operation of TiddlyWiki, including:
+
+* New preview modes in the editor showing both the parse and widget trees of the current tiddler
+
 !! Text-Slicer Plugin Improvements
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/176d2ccd76856b10aadd5e71af587574e7bcd447]] support for sticky notes within documents
@@ -33,7 +39,7 @@ The experimental Evernote plugin allows notes and images from `.enex` files to b
 
 !! Hackability Improvements
 
-* TBD
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/<TODO>]] editor preview pane to allow plugins to add further types of preview (see the new `tiddlywiki/internals` plugin for an example)
 
 !! Bug Fixes
 
