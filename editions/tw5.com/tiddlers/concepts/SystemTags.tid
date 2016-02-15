@@ -1,5 +1,5 @@
 created: 20130822080600000
-modified: 20140906224046452
+modified: 20160215115150854
 tags: Concepts
 title: SystemTags
 type: text/vnd.tiddlywiki
@@ -20,6 +20,7 @@ These are the available system tags
 * {{$:/tags/ControlPanel/Info||$:/core/ui/TagTemplate}} for control panel info tabs
 * {{$:/tags/ControlPanel/Settings||$:/core/ui/TagTemplate}} for control panel settings tabs
 * {{$:/tags/ControlPanel/Toolbars||$:/core/ui/TagTemplate}} for control panel toolbar customisation tabs
+* {{$:/tags/EditPreview||$:/core/ui/TagTemplate}} for custom preview panes
 * {{$:/tags/EditTemplate||$:/core/ui/TagTemplate}} for the edit template
 * {{$:/tags/EditToolbar||$:/core/ui/TagTemplate}} for the edit mode tiddler toolbar
 * {{$:/tags/Exporter||$:/core/ui/TagTemplate}} for the exporters
