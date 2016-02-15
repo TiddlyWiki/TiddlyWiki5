@@ -25,7 +25,7 @@ exports.has = function(source,operator,options) {
 		});
 	} else {
 		source(function(tiddler,title) {
-			if(tiddler && $tw.utils.hop(tiddler.fields,operator.operand) && tiddler.fields[operator.operand] !== "") {
+			if(tiddler && $tw.utils.hop(tiddler.fields,operator.operand) && tiddler.fields[operator.operand] != "") {
 				results.push(title);
 			}
 		});
