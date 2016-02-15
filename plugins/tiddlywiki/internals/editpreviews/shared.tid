@@ -1,4 +1,4 @@
-title: $:/core/ui/EditTemplate/body/preview/shared
+title: $:/plugins/tiddlywiki/internals/EditTemplate/body/preview/shared
 
 \define body()
 

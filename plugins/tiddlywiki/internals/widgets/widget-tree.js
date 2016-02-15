@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/widget-tree.js
+title: $:/plugins/tiddlywiki/internals/widgets/widget-tree.js
 type: application/javascript
 module-type: widget
 
