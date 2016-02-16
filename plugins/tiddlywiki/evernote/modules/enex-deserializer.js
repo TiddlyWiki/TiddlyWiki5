@@ -38,11 +38,19 @@ exports["application/enex+xml"] = function(text,fields) {
 			title: getTextContent(noteNode,"title"),
 			type: "text/html",
 			tags: [],
-			text: getTextContent(noteNode,"content")
+			text: getTextContent(noteNode,"content"),
+			modified: getTextContent(noteNode,"created").replace("T","").replace("Z",""),
+			created:  getTextContent(noteNode,"created").replace("T","").replace("Z","")
+
 		};
 		$tw.utils.each(noteNode.querySelectorAll("tag"),function(tagNode) {
 			result.tags.push(tagNode.textContent);
 		});
+		// If there's an update date, set modifiy date accordingly 
+		$tw.utils.each(noteNode.querySelectorAll("updated"),function(modifiedNode) {
+			result["modified"] = modifiedNode.textContent.replace("T","").replace("Z","") + "000" ; 
+		});
+
 		$tw.utils.each(noteNode.querySelectorAll("note-attributes"),function(attrNode) {
 			result[attrNode.tagName] = attrNode.textContent;
 		});
