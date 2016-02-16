@@ -5,6 +5,8 @@ Body/Hint: 使用 WikiText 來新增格式、圖片及動態功能
 Body/Placeholder: 輸入此條目的內容
 Body/Preview/Button/Hide: 隱藏預覽
 Body/Preview/Button/Show: 顯示預覽
+Body/Preview/Type: 預覽類型：
+Body/Preview/Type/Output: 輸出
 Field/Remove/Caption: 刪除欄位
 Field/Remove/Hint: 刪除欄位
 Fields/Add/Button: 新增
