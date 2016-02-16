@@ -39,19 +39,19 @@ exports["application/enex+xml"] = function(text,fields) {
 			type: "text/html",
 			tags: [],
 			text: getTextContent(noteNode,"content"),
-			modified: getTextContent(noteNode,"created").replace("T","").replace("Z",""),
-			created:  getTextContent(noteNode,"created").replace("T","").replace("Z","")
+			modified: convertDate(getTextContent(noteNode,"created")),
+			created:  convertDate(getTextContent(noteNode,"created"))
 
 		};
 		$tw.utils.each(noteNode.querySelectorAll("tag"),function(tagNode) {
 			result.tags.push(tagNode.textContent);
 		});
-		// If there's an update date, set modifiy date accordingly 
-		$tw.utils.each(noteNode.querySelectorAll("updated"),function(modifiedNode) {
-			result["modified"] = modifiedNode.textContent.replace("T","").replace("Z","") + "000" ; 
-		});
-
-		$tw.utils.each(noteNode.querySelectorAll("note-attributes"),function(attrNode) {
+		// If there's an update date, set modifiy date accordingly
+		var update = getTextContent(noteNode,"updated");
+		if(update) {
+			result.modified = convertDate(update);
+		}
+		$tw.utils.each(noteNode.querySelectorAll("note-attributes>*"),function(attrNode) {
 			result[attrNode.tagName] = attrNode.textContent;
 		});
 		results.push(result);
@@ -71,6 +71,10 @@ exports["application/enex+xml"] = function(text,fields) {
 
 function getTextContent(node,selector) {
 	return (node.querySelector(selector) || {}).textContent;
+}
+
+function convertDate(isoDate) {
+	return (isoDate || "").replace("T","").replace("Z","") + "000"
 }
 
 })();
