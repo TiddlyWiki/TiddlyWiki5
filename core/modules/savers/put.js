@@ -24,14 +24,18 @@ var PutSaver = function(wiki) {
 
 PutSaver.prototype.save = function(text,method,callback) {
 	var req = new XMLHttpRequest();
+	// TODO: store/check ETags if supported by server, to protect against overwrites
+	// Prompt: Do you want to save over this? Y/N
+	// Merging would be ideal, and may be possible using future generic merge flow
 	req.addEventListener("load", function() {
 		if (this.status === 200 || this.status === 201) {
 			// success
+			callback(null);
 		}
 		else {
 			// fail
+			callback(this.responseText);
 		}
-		callback(this.responseText);
 	});
 	req.open("PUT", encodeURI(window.location.href));
 	req.setRequestHeader("Content-Type", "text/html;charset=UTF-8");
@@ -52,6 +56,10 @@ PutSaver.prototype.info = {
 Static method that returns true if this saver is capable of working
 */
 exports.canSave = function(wiki) {
+	// TODO This should probe for the DAV header
+	// http://www.webdav.org/specs/rfc2518.html#rfc.section.9.1
+	// but doing so would require canSave to resolve async. See
+	// https://github.com/Jermolene/TiddlyWiki5/issues/2276
 	return /^https?:/.test(location.protocol);
 };
 
