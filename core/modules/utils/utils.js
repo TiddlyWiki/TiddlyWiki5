@@ -383,7 +383,7 @@ exports.htmlEncode = function(s) {
 
 // Converts all HTML entities to their character equivalents
 exports.entityDecode = function(s) {
-	var converter = String.fromCodePoint || String.fromCharCode;
+	var converter = String.fromCodePoint || String.fromCharCode,
 		e = s.substr(1,s.length-2); // Strip the & and the ;
 	if(e.charAt(0) === "#") {
 		if(e.charAt(1) === "x" || e.charAt(1) === "X") {
