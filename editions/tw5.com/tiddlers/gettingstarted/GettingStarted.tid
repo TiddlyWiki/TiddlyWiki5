@@ -5,31 +5,31 @@ title: GettingStarted
 type: text/vnd.tiddlywiki
 
 \define default-platform()
-GettingStarted - $(browser-name)$
+NoToZaczynamy - $(browser-name)$
 \end
-Brief instructions for getting started on the different platforms and configurations that TiddlyWiki supports. See the [[A Gentle Guide to TiddlyWiki]] for a more leisurely introduction.
+Skrócona instrukcja rozpoczęcie pracy dla różnych platform i konfiguracji, obsługiwanych przez TiddlyWiki . Zobacz [[łagodny przewodnik po TiddlyWiki]] dla spokojnego zapoznania się z tematem.
 
 <$set name="browser-name" value={{$:/info/browser/name}}>
-<$macrocall $name="tabs" state="$:/state/tabs/platform" tabsList="[prefix[GettingStarted - ]]" default=<<default-platform>> class="tc-vertical"/>
+<$macrocall $name="tabs" state="$:/state/tabs/platform" tabsList="[prefix[NoToZaczynamy - ]]" default=<<default-platform>> class="tc-vertical"/>
 </$set>
 
-Troubleshooting:
+Rozwiązywanie problemów:
 
-* Don't attempt to use the browser ''File''/''Save'' menu option to save changes (it doesn't work)
+* Nie używaj w przeglądarce przycisku ''Plik''/''Zapisz'' by zachować zmiany (i tak nie zadziała)
 
-See also:
+Zobacz też:
 
-* [[Encryption]] explains how to use TiddlyWiki's built-in encryption to protect your content with a password
-* [[Saving on TiddlySpot]], a free service that lets you use TiddlyWiki online
-* Saving on TiddlyDesktop, a custom desktop application for working with TiddlyWiki
-* You can also download this full TiddlyWiki including all the documentation:
+* [[Szyfrowanie]] wyjaśnia jak urzywac wbudowanej w TiddlyWiki funkcji szyfrowania do ochrony zawartości hasłem.
+* [[Przechowywanie na TiddlySpot]], to darmowa usługa umozliwiająca ci korzystanie z TiddlyWiki w trybie online
+* TiddlyDesktop to aplikacja umożliwiająca prace z TiddlyWiki
+* Możesz zacząć od pobrania TiddlyWiki z pełną dokumentacją:
 
 <<<
 {{$:/snippets/download-wiki-button}}
 
-If the button doesn't work save this link:
+jesli przycisk nie działa to zapisz ten link:
 
 <a href="http://tiddlywiki.com/index.html" download="index.html">~http://tiddlywiki.com/index.html</a>
 
-Your browser may ask you to accept the download before it begins
+Przeglądarka może zapytac cię czy chcesz zachowac plik zanim zaczniesz go pobierać 
 <<<
