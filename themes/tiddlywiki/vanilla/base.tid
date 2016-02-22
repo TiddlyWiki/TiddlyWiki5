@@ -1543,8 +1543,6 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-sidebar-lists .tc-tab-buttons button {
-	display: inline;
-	width: auto;
 	background-color: <<colour sidebar-tab-background>>;
 	color: <<colour sidebar-tab-foreground>>;
 	border-left: 1px solid <<colour sidebar-tab-border>>;
