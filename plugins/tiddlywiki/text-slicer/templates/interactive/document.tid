@@ -1,19 +1,19 @@
 title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/document
 
 \define config-document-status()
-$:/config/plugins/tiddlywiki/text-slicer/show-preview-document/$(tv-heading-status-config-prefix)$/$(currentTiddler)$
+$:/state/plugins/tiddlywiki/text-slicer/show-preview-document/$(tv-heading-status-config-prefix)$/$(currentTiddler)$
 \end
 
 \define config-show-toolbar()
-$:/config/plugins/tiddlywiki/text-slicer/show-toolbar/$(currentTiddler)$
+$:/state/plugins/tiddlywiki/text-slicer/show-toolbar/$(currentTiddler)$
 \end
 
 \define config-show-metadata()
-$:/config/plugins/tiddlywiki/text-slicer/show-metadata/$(currentTiddler)$
+$:/state/plugins/tiddlywiki/text-slicer/show-metadata/$(currentTiddler)$
 \end
 
 \define config-heading-status()
-$:/config/plugins/tiddlywiki/text-slicer/heading-status/$(currentTiddler)$
+$:/state/plugins/tiddlywiki/text-slicer/heading-status/$(currentTiddler)$
 \end
 
 \define body()
