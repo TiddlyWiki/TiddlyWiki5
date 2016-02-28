@@ -41,11 +41,42 @@ tags: $:/tags/Stylesheet
 
 .tc-document-preview-column .tc-sliced-document {
 	margin-bottom: 3px;
-	border-bottom: 2px solid <<colour muted-foreground>>;
+}
+
+.tc-view-template-document-tiddler-wrapper {
+    border-top: 2px solid #D6A2A2;
+    margin-left: -42px;
+    margin-right: -42px;
+    margin-bottom: -42px;
+    padding-left: 42px;
+    padding-right: 42px;
+    background: #FFE3E3;
+    padding-bottom: 10px;
+}
+
+.tc-view-template-document-tiddler-heading a {
+	border: 1px solid #D6A2A2;
+	background: #fff;
+	border-radius: 16px;
+	padding: 4px;
+	margin: 4px;
+    white-space: nowrap;
+}
+
+.tc-view-template-document-tiddler-heading-icon {
+	width: 42px;
+	text-align: center;
+    margin-left: -42px;
+    margin-right: -42px;
+    position: absolute;
+    margin-top: -20px;
+}
+
+.tc-view-template-document-tiddler-heading-icon svg {
+	fill: <<colour background>>;	
 }
 
 .tc-view-template-document-tiddler-heading {
-	border-top: 2px solid <<colour muted-foreground>>;
 }
 
 .tc-view-template-document-tiddler {
