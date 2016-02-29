@@ -19,6 +19,12 @@ $:/state/plugins/tiddlywiki/text-slicer/heading-status/$(currentTiddler)$
 
 </div>
 
+<div class="tc-view-template-document-tiddler-subheading">
+
+<$view field="toc-type"/>
+
+</div>
+
 Parents: <$list filter="[all[current]listed[]!is[system]]" emptyMessage="None">
 <$link><$view field="title"/></$link>
 </$list>
