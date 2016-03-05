@@ -19,3 +19,5 @@ Click me!
 The following action widgets are provided:
 
 <<list-links "[tag[ActionWidgets]]">>
+
+Action widgets can be used with the `$:/tags/StartupAction` tag to create [[scripts that run when the wiki is loaded|Startup Actions]].
