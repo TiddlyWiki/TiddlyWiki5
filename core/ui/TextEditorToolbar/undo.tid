@@ -1,0 +1,10 @@
+title: $:/core/ui/TextEditorToolbar/undo
+tags: $:/tags/TextEditorToolbar
+
+&nbsp;&nbsp;<$button class="tc-btn-invisible">
+<$action-sendmessage
+	$message="tm-edit-text-command"
+	$param="undo"
+/>
+{{$:/core/images/format-undo}}
+</$button>

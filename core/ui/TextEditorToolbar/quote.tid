@@ -1,0 +1,12 @@
+title: $:/core/ui/TextEditorToolbar/quote
+tags: $:/tags/TextEditorToolbar
+
+&nbsp;&nbsp;<$button class="tc-btn-invisible">
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-lines"
+	prefix="<<<"
+	suffix="<<<"
+/>
+{{$:/core/images/format-quote}}
+</$button>

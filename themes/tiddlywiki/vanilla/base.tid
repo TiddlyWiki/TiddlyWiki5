@@ -961,6 +961,32 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 /*
+** Editor
+*/
+
+.tc-edit-text-iframe-toolbar button {
+	background-color: <<colour tiddler-controls-foreground>>;
+	fill: <<colour tiddler-controls-foreground-selected>>;
+    border-radius: 4px;
+    padding: 3px 3px;
+    margin: 2px 0;
+}
+
+.tc-edit-text-iframe-toolbar button svg {
+    width: 1.6em;
+    height: 1.2em;
+}
+
+.tc-edit-text-iframe-toolbar button:hover {
+	background-color: <<colour tiddler-controls-foreground-hover>>;
+}
+
+.tc-edit-text-iframe-toolbar button:active {
+	background-color: <<colour tiddler-controls-foreground-selected>>;
+	fill: <<colour background>>;
+}
+
+/*
 ** Adjustments for fluid-fixed mode
 */
 

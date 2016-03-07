@@ -1,0 +1,12 @@
+title: $:/core/ui/TextEditorToolbar/list-bullet
+tags: $:/tags/TextEditorToolbar
+
+<$button class="tc-btn-invisible">
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="prefix-lines"
+	character="*"
+	count="1"
+/>
+{{$:/core/images/format-list-bullet}}
+</$button>

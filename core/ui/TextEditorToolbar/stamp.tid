@@ -1,0 +1,47 @@
+title: $:/core/ui/TextEditorToolbar/stamp
+tags: $:/tags/TextEditorToolbar
+
+\define toolbar-button-stamp-inner()
+<$button tag="a">
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="replace-selection"
+	text={{$(snippetTitle)$}}
+	mode={{$(snippetTitle!!mode)$}}
+/>
+
+<$action-deletetiddler
+	$tiddler="""$(config-title)$/popup"""
+/>
+
+<$view tiddler=<<snippetTitle>> field="caption" mode="inline">
+
+<$view tiddler=<<snippetTitle>> field="title" mode="inline"/>
+
+</$view>
+
+</$button>
+\end
+\define toolbar-button-stamp()
+&nbsp;&nbsp;<$button popup="""$(config-title)$/popup""" class="tc-btn-invisible">
+{{$:/core/images/format-stamp}}
+</$button>
+
+<$reveal state="""$(config-title)$/popup""" type="popup" position="below" animate="yes">
+
+<div class="tc-drop-down tc-popup-keep">
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]]" variable="snippetTitle">
+
+<<toolbar-button-stamp-inner>>
+
+</$list>
+
+</div>
+
+</$reveal>
+\end
+<$set name="config-title" value=<<qualify "$:/state/edit-toolbar/stamp">>>
+<<toolbar-button-stamp>>
+</$set>

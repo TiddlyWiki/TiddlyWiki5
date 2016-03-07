@@ -1,0 +1,11 @@
+title: $:/core/ui/TextEditor/Snippets/AddYourOwn
+tags: $:/tags/TextEditor/Snippet
+caption: Add your own
+mode: plain
+
+Add your own stamp templates for rapidly re-using a snippet of text.
+
+# Create a tiddler. Usually it is best to use a system tiddler name so that the tiddler doesn't appear in the ordinary lists
+# Add the tag `$:/tags/TextEditor/Snippet`
+# Add a caption field containing a short name for the snippet
+# Add the snippet itself as the text of the tiddler

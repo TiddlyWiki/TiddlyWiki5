@@ -2,6 +2,9 @@ title: $:/core/ui/EditTemplate/body
 tags: $:/tags/EditTemplate
 
 \define lingo-base() $:/language/EditTemplate/Body/
+\define edit-toolbar()
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TextEditorToolbar]!has[draft.of]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
+\end
 <$list filter="[is[current]has[_canonical_uri]]">
 
 <div class="tc-message-box">
@@ -41,7 +44,9 @@ tags: $:/tags/EditTemplate
 </div>
 
 <div class="tc-tiddler-preview-edit">
-<$edit field="text" class="tc-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}/>
+<$edit field="text" class="tc-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}>
+<<edit-toolbar>>
+</$edit>
 
 </div>
 
@@ -52,7 +57,9 @@ tags: $:/tags/EditTemplate
 <$reveal state="$:/state/showeditpreview" type="nomatch" text="yes">
 
 <em class="tc-edit"><<lingo Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="yes"><<lingo Preview/Button/Show>></$button>
-<$edit field="text" class="tc-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}/>
+<$edit field="text" class="tc-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}>
+<<edit-toolbar>>
+</$edit>
 
 </$reveal>
 

@@ -1,0 +1,12 @@
+title: $:/core/ui/TextEditorToolbar/heading-5
+tags: $:/tags/TextEditorToolbar
+
+<$button class="tc-btn-invisible">
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="prefix-lines"
+	character="!"
+	count="5"
+/>
+{{$:/core/images/format-heading-5}}
+</$button>

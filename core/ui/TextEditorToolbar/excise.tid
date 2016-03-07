@@ -1,0 +1,52 @@
+title: $:/core/ui/TextEditorToolbar/excise
+tags: $:/tags/TextEditorToolbar
+
+\define toolbar-button-excise()
+&nbsp;&nbsp;<$button popup="""$(config-title)$/popup""" class="tc-btn-invisible">
+{{$:/core/images/format-excise}}
+</$button>
+
+<$reveal state="""$(config-title)$/popup""" type="popup" position="below" animate="yes">
+
+<div class="tc-drop-down tc-popup-keep">
+
+Excise selected text as a new tiddler
+
+Title: <$edit-text tag="input" tiddler="""$(config-title)$/new-title""" default="New Tiddler Title" focus="true"/>
+
+Excise as: <$select tiddler="""$(config-title)$/type""" default="transclude">
+<option value="link">link</option>
+<option value="transclude">transclusion</option>
+</$select>
+
+<$set name="new-title" value={{$(config-title)$/new-title}}>
+<$list filter="""[<new-title>is[tiddler]]""">
+<div class="tc-error">
+Warning: tiddler already exists
+</div>
+</$list>
+</$set>
+
+<$button>
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="excise"
+	title={{$(config-title)$/new-title}}
+	type={{$(config-title)$/type}}
+/>
+<$action-deletetiddler
+	$tiddler="""$(config-title)$/new-title"""
+/>
+<$action-deletetiddler
+	$tiddler="""$(config-title)$/popup"""
+/>
+Perform excision
+</$button>
+
+</div>
+
+</$reveal>
+\end
+<$set name="config-title" value=<<qualify "$:/state/edit-toolbar/excise">>>
+<<toolbar-button-excise>>
+</$set>

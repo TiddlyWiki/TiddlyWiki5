@@ -1,0 +1,12 @@
+title: $:/core/ui/TextEditorToolbar/italic
+tags: $:/tags/TextEditorToolbar
+
+<$button class="tc-btn-invisible">
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="//"
+	suffix="//"
+/>
+{{$:/core/images/format-italic}}
+</$button>

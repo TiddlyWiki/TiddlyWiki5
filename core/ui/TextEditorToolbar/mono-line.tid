@@ -1,0 +1,12 @@
+title: $:/core/ui/TextEditorToolbar/mono-line
+tags: $:/tags/TextEditorToolbar
+
+&nbsp;&nbsp;<$button class="tc-btn-invisible">
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="`"
+	suffix="`"
+/>
+{{$:/core/images/format-mono-line}}
+</$button>
