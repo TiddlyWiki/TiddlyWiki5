@@ -1,10 +1,6 @@
 title: TiddlyWiki Pre-release
 modified: 20150428204930183
 
-\define colour-picker(tiddler,colour)
-<$edit-text tiddler="""$tiddler$""" index="""$colour$""" type="color" tag="input"/>
-\end
-
 This is a pre-release build of TiddlyWiki. It is provided for testing purposes. ''Please don't try to use it for anything important'' -- you should use the latest official release from http://tiddlywiki.com.
 
 <$list filter="[tag[ReleaseNotes]!has[released]!sort[created]]">
