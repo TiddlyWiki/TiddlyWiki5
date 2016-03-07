@@ -9,11 +9,15 @@ type: text/vnd.tiddlywiki
 
 ! Major Improvements
 
-!! Evernote Plugin Introduction
+!! New Text Editor Toolbars
+
+[[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2315]] support for extensible formatting toolbars for the edit-text widget.
+
+!! New Evernote Plugin
 
 The experimental Evernote plugin allows notes and images from `.enex` files to be imported into TiddlyWiki. Install it through the "Plugins" tab of control panel.
 
-!! "Internals" Plugin Introduction
+!! New "Internals" Plugin
 
 The new `tiddlywiki/internals` plugin provides features to help understand the internal operation of TiddlyWiki, including:
 
