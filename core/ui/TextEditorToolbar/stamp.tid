@@ -24,7 +24,7 @@ tags: $:/tags/TextEditorToolbar
 </$button>
 \end
 \define toolbar-button-stamp()
-&nbsp;&nbsp;<$button popup="""$(config-title)$/popup""" class="tc-btn-invisible">
+<$button popup="""$(config-title)$/popup""" class="tc-btn-invisible">
 {{$:/core/images/format-stamp}}
 </$button>
 

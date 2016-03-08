@@ -1362,6 +1362,31 @@ html body.tc-body.tc-single-tiddler-window {
     padding: 0 7px 0 7px;
 }
 
+.tc-picture-chooser {
+	max-width: 380px;
+	white-space: normal;
+}
+
+.tc-picture-chooser a {
+	display: inline-block;
+	vertical-align: top;
+    text-align: center;
+	width: 4em;
+	height: 4em;
+	margin: 2px;
+	border: 1px solid <<colour muted-foreground>>;
+	padding: 2px;
+}
+
+.tc-picture-chooser a svg,
+.tc-picture-chooser a img {
+	display: inline-block;
+	width: auto;
+	height: auto;
+	max-width: 3.5em;
+	max-height: 3.5em;
+}
+
 /*
 ** Modals
 */

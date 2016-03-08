@@ -1,0 +1,43 @@
+title: $:/core/ui/TextEditorToolbar/picture
+tags: $:/tags/TextEditorToolbar
+
+\define toolbar-button-picture-inner()
+<$button tag="a">
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="replace-selection"
+	text="[img[$(pictureTitle)$]]"
+	mode={{$(pictureTitle!!mode)$}}
+/>
+
+<$action-deletetiddler
+	$tiddler="""$(config-title)$/popup"""
+/>
+
+<$transclude tiddler=<<pictureTitle>>/>
+
+</$button>
+\end
+\define toolbar-button-picture()
+&nbsp;&nbsp;<$button popup="""$(config-title)$/popup""" class="tc-btn-invisible">
+{{$:/core/images/format-picture}}
+</$button>
+
+<$reveal state="""$(config-title)$/popup""" type="popup" position="below" animate="yes">
+
+<div class="tc-drop-down tc-picture-chooser tc-popup-keep">
+
+<$list filter="[all[shadows+tiddlers]is[image]] -[type[application/pdf]] +[sort[title]]" variable="pictureTitle">
+
+<<toolbar-button-picture-inner>>
+
+</$list>
+
+</div>
+
+</$reveal>
+\end
+<$set name="config-title" value=<<qualify "$:/state/edit-toolbar/picture">>>
+<<toolbar-button-picture>>
+</$set>
