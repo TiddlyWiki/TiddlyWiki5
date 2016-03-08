@@ -224,7 +224,10 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 					break;
 				case "link":
 					replacement = "[[" + replacement+ "]]";
-					break;				
+					break;
+				case "macro":
+					replacement = "<<" + (event.paramObject.macro || "translink") + " \"\"\"" + replacement + "\"\"\">>";
+					break;
 			}
 			cutStart = selStart;
 			cutEnd = selEnd;

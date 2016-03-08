@@ -17,6 +17,7 @@ Title: <$edit-text tag="input" tiddler="""$(config-title)$/new-title""" default=
 Excise as: <$select tiddler="""$(config-title)$/type""" default="transclude">
 <option value="link">link</option>
 <option value="transclude">transclusion</option>
+<option value="macro">macro call</option>
 </$select>
 
 <$set name="new-title" value={{$(config-title)$/new-title}}>
@@ -27,12 +28,17 @@ Warning: tiddler already exists
 </$list>
 </$set>
 
+<$reveal state="""$(config-title)$/type""" type="match" text="macro">
+Macro name: <$edit-text tag="input" tiddler="""$(config-title)$/macro-title""" default="translink"/>
+</$reveal>
+
 <$button>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="excise"
 	title={{$(config-title)$/new-title}}
 	type={{$(config-title)$/type}}
+	macro={{$(config-title)$/macro-title}}
 />
 <$action-deletetiddler
 	$tiddler="""$(config-title)$/new-title"""
