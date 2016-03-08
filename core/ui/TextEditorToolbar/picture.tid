@@ -2,7 +2,7 @@ title: $:/core/ui/TextEditorToolbar/picture
 tags: $:/tags/TextEditorToolbar
 
 \define toolbar-button-picture-inner()
-<$button tag="a">
+<$button tag="a" tooltip="""$(pictureTitle)$""">
 
 <$action-sendmessage
 	$message="tm-edit-text-operation"
