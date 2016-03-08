@@ -1376,15 +1376,28 @@ html body.tc-body.tc-single-tiddler-window {
 	margin: 2px;
 	border: 1px solid <<colour muted-foreground>>;
 	padding: 2px;
+	position: relative;
+}
+
+.tc-picture-chooser a:hover {
+	background: <<colour background>>;
+	padding: 0px;
+	border: 3px solid <<colour primary>>;
 }
 
 .tc-picture-chooser a svg,
 .tc-picture-chooser a img {
-	display: inline-block;
-	width: auto;
-	height: auto;
-	max-width: 3.5em;
-	max-height: 3.5em;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    max-width: 3.5em;
+    max-height: 3.5em;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
 /*
