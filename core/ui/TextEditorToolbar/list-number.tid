@@ -1,7 +1,10 @@
 title: $:/core/ui/TextEditorToolbar/list-number
 tags: $:/tags/TextEditorToolbar
+icon: {{$:/core/images/format-list-number}}
+caption: {{$:/language/Buttons/ListNumber/Caption}}
+description: {{$:/language/Buttons/ListNumber/Hint}}
 
-<$button class="tc-btn-invisible">
+<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/ListNumber/Hint}} aria-label={{$:/language/Buttons/ListNumber/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="prefix-lines"

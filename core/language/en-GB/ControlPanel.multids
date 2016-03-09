@@ -130,6 +130,8 @@ Toolbars/EditToolbar/Hint: Choose which buttons are displayed for tiddlers in ed
 Toolbars/Hint: Select which toolbar buttons are displayed
 Toolbars/PageControls/Caption: Page Toolbar
 Toolbars/PageControls/Hint: Choose which buttons are displayed on the main page toolbar
+Toolbars/TextEditorToolbar/Caption: Text Editor Toolbar
+Toolbars/TextEditorToolbar/Hint: Choose which buttons are displayed in the text editor toolbar
 Toolbars/ViewToolbar/Caption: View Toolbar
 Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode
 Tools/Download/Full/Caption: Download full wiki

@@ -1,5 +1,8 @@
 title: $:/core/ui/TextEditorToolbar/picture
 tags: $:/tags/TextEditorToolbar
+icon: {{$:/core/images/format-picture}}
+caption: {{$:/language/Buttons/Picture/Caption}}
+description: {{$:/language/Buttons/Picture/Hint}}
 
 \define toolbar-button-picture-inner()
 <$button tag="a" tooltip="""$(pictureTitle)$""">
@@ -20,7 +23,7 @@ tags: $:/tags/TextEditorToolbar
 </$button>
 \end
 \define toolbar-button-picture()
-&nbsp;&nbsp;<$button popup="""$(config-title)$/popup""" class="tc-btn-invisible">
+<$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" tooltip={{$:/language/Buttons/Picture/Hint}} aria-label={{$:/language/Buttons/Picture/Caption}}>
 {{$:/core/images/format-picture}}
 </$button>
 
@@ -28,7 +31,7 @@ tags: $:/tags/TextEditorToolbar
 
 <div class="tc-drop-down tc-picture-chooser tc-popup-keep">
 
-<$list filter="[all[shadows+tiddlers]is[image]] -[type[application/pdf]] +[sort[title]]" variable="pictureTitle">
+<$list filter="[all[shadows+tiddlers]is[image]!has[draft.of]] -[type[application/pdf]] +[sort[title]]" variable="pictureTitle">
 
 <<toolbar-button-picture-inner>>
 

@@ -211,11 +211,20 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 			newSelEnd = selStart + replacement.length;
 			break;
 		case "excise":
+			var editTiddler = this.wiki.getTiddler(this.editTitle),
+				editTiddlerTitle = this.editTitle;
+			if(editTiddler && editTiddler.fields["draft.of"]) {
+				editTiddlerTitle = editTiddler.fields["draft.of"];
+			}
 			var excisionTitle = event.paramObject.title || "New Excision";
 			this.wiki.addTiddler(new $tw.Tiddler(
 				this.wiki.getCreationFields(),
 				this.wiki.getModificationFields(),
-				{title: excisionTitle, text: selection}
+				{
+					title: excisionTitle,
+					text: selection,
+					tags: event.paramObject.tagnew === "yes" ?  [editTiddlerTitle] : []
+				}
 			));
 			replacement = excisionTitle;
 			switch(event.paramObject.type || "transclude") {

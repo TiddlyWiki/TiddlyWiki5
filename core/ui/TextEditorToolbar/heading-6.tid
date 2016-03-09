@@ -1,7 +1,10 @@
 title: $:/core/ui/TextEditorToolbar/heading-6
 tags: $:/tags/TextEditorToolbar
+icon: {{$:/core/images/format-heading-5}}
+caption: {{$:/language/Buttons/Heading6/Caption}}
+description: {{$:/language/Buttons/Heading6/Hint}}
 
-<$button class="tc-btn-invisible">
+<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Heading6/Hint}} aria-label={{$:/language/Buttons/Heading6/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="prefix-lines"

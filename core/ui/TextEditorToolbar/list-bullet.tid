@@ -1,7 +1,10 @@
 title: $:/core/ui/TextEditorToolbar/list-bullet
 tags: $:/tags/TextEditorToolbar
+icon: {{$:/core/images/format-list-bullet}}
+caption: {{$:/language/Buttons/ListBullet/Caption}}
+description: {{$:/language/Buttons/ListBullet/Hint}}
 
-<$button class="tc-btn-invisible">
+<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/ListBullet/Hint}} aria-label={{$:/language/Buttons/ListBullet/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="prefix-lines"

@@ -1,7 +1,10 @@
 title: $:/core/ui/TextEditorToolbar/subscript
 tags: $:/tags/TextEditorToolbar
+icon: {{$:/core/images/format-subscript}}
+caption: {{$:/language/Buttons/Subscript/Caption}}
+description: {{$:/language/Buttons/Subscript/Hint}}
 
-<$button class="tc-btn-invisible">
+<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Subscript/Hint}} aria-label={{$:/language/Buttons/Subscript/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"

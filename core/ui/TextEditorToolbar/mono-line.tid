@@ -1,7 +1,10 @@
 title: $:/core/ui/TextEditorToolbar/mono-line
 tags: $:/tags/TextEditorToolbar
+icon: {{$:/core/images/format-mono-line}}
+caption: {{$:/language/Buttons/MonoLine/Caption}}
+description: {{$:/language/Buttons/MonoLine/Hint}}
 
-&nbsp;&nbsp;<$button class="tc-btn-invisible">
+<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/MonoLine/Hint}} aria-label={{$:/language/Buttons/MonoLine/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"

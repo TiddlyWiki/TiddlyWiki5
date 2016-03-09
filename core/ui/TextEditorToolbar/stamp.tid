@@ -1,5 +1,8 @@
 title: $:/core/ui/TextEditorToolbar/stamp
 tags: $:/tags/TextEditorToolbar
+icon: {{$:/core/images/format-stamp}}
+caption: {{$:/language/Buttons/Stamp/Caption}}
+description: {{$:/language/Buttons/Stamp/Hint}}
 
 \define toolbar-button-stamp-inner()
 <$button tag="a">
@@ -24,7 +27,7 @@ tags: $:/tags/TextEditorToolbar
 </$button>
 \end
 \define toolbar-button-stamp()
-<$button popup="""$(config-title)$/popup""" class="tc-btn-invisible">
+<$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" tooltip={{$:/language/Buttons/Stamp/Hint}} aria-label={{$:/language/Buttons/Stamp/Caption}}>
 {{$:/core/images/format-stamp}}
 </$button>
 
@@ -32,11 +35,30 @@ tags: $:/tags/TextEditorToolbar
 
 <div class="tc-drop-down tc-popup-keep">
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]]" variable="snippetTitle">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]]" variable="snippetTitle">
 
 <<toolbar-button-stamp-inner>>
 
 </$list>
+
+----
+
+<$button tag="a">
+
+<$action-sendmessage
+	$message="tm-new-tiddler"
+	tags="$:/tags/TextEditor/Snippet"
+	caption="Name as shown in menu"
+	text="Text of snippet"
+/>
+
+<em>
+
+<$text text="Add your own"/>
+
+</em>
+
+</$button>
 
 </div>
 

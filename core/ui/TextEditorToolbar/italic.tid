@@ -1,7 +1,10 @@
 title: $:/core/ui/TextEditorToolbar/italic
 tags: $:/tags/TextEditorToolbar
+icon: {{$:/core/images/format-italic}}
+caption: {{$:/language/Buttons/Italic/Caption}}
+description: {{$:/language/Buttons/Italic/Hint}}
 
-<$button class="tc-btn-invisible">
+<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Italic/Hint}} aria-label={{$:/language/Buttons/Italic/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"

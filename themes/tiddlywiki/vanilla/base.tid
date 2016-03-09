@@ -968,7 +968,7 @@ html body.tc-body.tc-single-tiddler-window {
 	background-color: <<colour tiddler-controls-foreground>>;
 	fill: <<colour tiddler-controls-foreground-selected>>;
     border-radius: 4px;
-    padding: 3px 3px;
+    padding: 3px;
     margin: 2px 0;
 }
 
@@ -978,12 +978,23 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-edit-text-iframe-toolbar button:hover {
-	background-color: <<colour tiddler-controls-foreground-hover>>;
+	background-color: <<colour primary>>;
+	fill: <<colour background>>;
 }
 
 .tc-edit-text-iframe-toolbar button:active {
 	background-color: <<colour tiddler-controls-foreground-selected>>;
 	fill: <<colour background>>;
+}
+
+.tc-edit-text-iframe-toolbar .tc-text-editor-toolbar-more {
+	white-space: normal;
+}
+
+.tc-drop-down.tc-text-editor-toolbar-more button {
+	display: inline-block;
+	padding: 3px;
+	width: auto;
 }
 
 /*

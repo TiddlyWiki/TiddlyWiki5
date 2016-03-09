@@ -1,7 +1,10 @@
 title: $:/core/ui/TextEditorToolbar/redo
 tags: $:/tags/TextEditorToolbar
+icon: {{$:/core/images/format-redo}}
+caption: {{$:/language/Buttons/Redo/Caption}}
+description: {{$:/language/Buttons/Redo/Hint}}
 
-<$button class="tc-btn-invisible">
+<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Redo/Hint}} aria-label={{$:/language/Buttons/Redo/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-command"
 	$param="redo"

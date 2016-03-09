@@ -1,7 +1,10 @@
 title: $:/core/ui/TextEditorToolbar/bold
 tags: $:/tags/TextEditorToolbar
+icon: {{$:/core/images/format-bold}}
+caption: {{$:/language/Buttons/Bold/Caption}}
+description: {{$:/language/Buttons/Bold/Hint}}
 
-<$button class="tc-btn-invisible">
+<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Bold/Hint}} aria-label={{$:/language/Buttons/Bold/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"

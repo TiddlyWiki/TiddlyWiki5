@@ -1,7 +1,10 @@
 title: $:/core/ui/TextEditorToolbar/quote
 tags: $:/tags/TextEditorToolbar
+icon: {{$:/core/images/format-quote}}
+caption: {{$:/language/Buttons/Quote/Caption}}
+description: {{$:/language/Buttons/Quote/Hint}}
 
-&nbsp;&nbsp;<$button class="tc-btn-invisible">
+<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Quote/Hint}} aria-label={{$:/language/Buttons/Quote/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-lines"

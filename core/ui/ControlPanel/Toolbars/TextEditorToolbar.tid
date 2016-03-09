@@ -1,0 +1,16 @@
+title: $:/core/ui/ControlPanel/Toolbars/TextEditorToolbar
+tags: $:/tags/ControlPanel/Toolbars
+caption: {{$:/language/ControlPanel/Toolbars/TextEditorToolbar/Caption}}
+
+\define lingo-base() $:/language/TiddlerInfo/
+\define config-title()
+$:/config/TextEditorToolbarButtons/Visibility/$(listItem)$
+\end
+
+{{$:/language/ControlPanel/Toolbars/TextEditorToolbar/Hint}}
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TextEditorToolbar]!has[draft.of]]" variable="listItem">
+
+<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"> <$transclude tiddler=<<listItem>> field="icon"/> <i class="tc-muted">-- <$transclude tiddler=<<listItem>> field="description"/></i></$checkbox>
+
+</$list>

@@ -1,7 +1,10 @@
 title: $:/core/ui/TextEditorToolbar/strikethrough
 tags: $:/tags/TextEditorToolbar
+icon: {{$:/core/images/format-strikethrough}}
+caption: {{$:/language/Buttons/Strikethrough/Caption}}
+description: {{$:/language/Buttons/Strikethrough/Hint}}
 
-<$button class="tc-btn-invisible">
+<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Strikethrough/Hint}} aria-label={{$:/language/Buttons/Strikethrough/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"

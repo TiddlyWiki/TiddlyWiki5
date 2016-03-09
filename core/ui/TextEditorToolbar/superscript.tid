@@ -1,7 +1,10 @@
 title: $:/core/ui/TextEditorToolbar/superscript
 tags: $:/tags/TextEditorToolbar
+icon: {{$:/core/images/format-superscript}}
+caption: {{$:/language/Buttons/Superscript/Caption}}
+description: {{$:/language/Buttons/Superscript/Hint}}
 
-<$button class="tc-btn-invisible">
+<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Superscript/Hint}} aria-label={{$:/language/Buttons/Superscript/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"

@@ -1,24 +1,21 @@
 title: $:/core/ui/TextEditorToolbar/excise
 tags: $:/tags/TextEditorToolbar
+icon: {{$:/core/images/format-excise}}
+caption: {{$:/language/Buttons/Excise/Caption}}
+description: {{$:/language/Buttons/Excise/Hint}}
 
 \define toolbar-button-excise()
-&nbsp;&nbsp;<$button popup="""$(config-title)$/popup""" class="tc-btn-invisible">
+<$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" tooltip={{$:/language/Buttons/Excise/Hint}} aria-label={{$:/language/Buttons/Excise/Caption}}>
 {{$:/core/images/format-excise}}
 </$button>
 
-<$reveal state="""$(config-title)$/popup""" type="popup" position="below" animate="yes">
+<$reveal state="""$(config-title)$/popup""" type="popup" position="below" animate="yes" tag="span">
 
 <div class="tc-drop-down tc-popup-keep">
 
-Excise selected text as a new tiddler
+''Excise selected text as a new tiddler''
 
-Title: <$edit-text tag="input" tiddler="""$(config-title)$/new-title""" default="New Tiddler Title" focus="true"/>
-
-Excise as: <$select tiddler="""$(config-title)$/type""" default="transclude">
-<option value="link">link</option>
-<option value="transclude">transclusion</option>
-<option value="macro">macro call</option>
-</$select>
+Title of new tiddler: <$edit-text tag="input" tiddler="""$(config-title)$/new-title""" default="New Tiddler Title" focus="true"/>
 
 <$set name="new-title" value={{$(config-title)$/new-title}}>
 <$list filter="""[<new-title>is[tiddler]]""">
@@ -27,6 +24,14 @@ Warning: tiddler already exists
 </div>
 </$list>
 </$set>
+
+<$checkbox tiddler="""$(config-title)$/tagnew""" field="text" checked="yes" unchecked="no" default="false"> Tag new tiddler with the title of this tiddler</$checkbox>
+
+Replace excised text with: <$select tiddler="""$(config-title)$/type""" default="transclude">
+<option value="link">link</option>
+<option value="transclude">transclusion</option>
+<option value="macro">macro call</option>
+</$select>
 
 <$reveal state="""$(config-title)$/type""" type="match" text="macro">
 Macro name: <$edit-text tag="input" tiddler="""$(config-title)$/macro-title""" default="translink"/>
@@ -39,6 +44,7 @@ Macro name: <$edit-text tag="input" tiddler="""$(config-title)$/macro-title""" d
 	title={{$(config-title)$/new-title}}
 	type={{$(config-title)$/type}}
 	macro={{$(config-title)$/macro-title}}
+	tagnew={{$(config-title)$/tagnew}}
 />
 <$action-deletetiddler
 	$tiddler="""$(config-title)$/new-title"""

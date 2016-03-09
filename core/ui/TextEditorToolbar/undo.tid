@@ -1,7 +1,10 @@
 title: $:/core/ui/TextEditorToolbar/undo
 tags: $:/tags/TextEditorToolbar
+icon: {{$:/core/images/format-undo}}
+caption: {{$:/language/Buttons/Undo/Caption}}
+description: {{$:/language/Buttons/Undo/Hint}}
 
-&nbsp;&nbsp;<$button class="tc-btn-invisible">
+<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Undo/Hint}} aria-label={{$:/language/Buttons/Undo/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-command"
 	$param="undo"
