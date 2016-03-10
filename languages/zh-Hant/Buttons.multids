@@ -88,3 +88,47 @@ TagManager/Caption: 標籤管理
 TagManager/Hint: 標籤管理
 Theme/Caption: 佈景主題
 Theme/Hint: 選擇佈景主題
+Bold/Caption: 粗體
+Bold/Hint: 套用粗體格式於所選文字
+Excise/Caption: 剪切
+Excise/Hint: 剪切所選文字到一個新條目
+Heading1/Caption: 標題 1
+Heading1/Hint: 套用標題級別 1 的格式於包含所選文字的列
+Heading2/Caption: 標題 2
+Heading2/Hint: 套用標題級別 2 的格式於包含所選文字的列
+Heading3/Caption: 標題 3
+Heading3/Hint: 套用標題級別 3 的格式於包含所選文字的列
+Heading4/Caption: 標題 4
+Heading4/Hint: 套用標題級別 4 的格式於包含所選文字的列
+Heading5/Caption: 標題 5
+Heading5/Hint: 套用標題級別 5 的格式於包含所選文字的列
+Heading6/Caption: 標題 6
+Heading6/Hint: 套用標題級別 6 的格式於包含所選文字的列
+Italic/Caption: 斜體
+Italic/Hint: 套用斜體格式於所選文字
+ListBullet/Caption: 符號清單
+ListBullet/Hint: 套用符號清單格式於包含所選文字的列
+ListNumber/Caption: 數字清單
+ListNumber/Hint: 套用數字清單格式於包含所選文字的列
+MonoBlock/Caption: 等寬區塊
+MonoBlock/Hint: 套用等寬區塊格式於包含所選文字的列
+MonoLine/Caption: 等寬
+MonoLine/Hint: 套用等寬字元格式於所選文字
+Picture/Caption: 圖片
+Picture/Hint: 插入圖片
+Quote/Caption: 引言
+Quote/Hint: 套用引言文字格式於包含所選文字的列
+Redo/Caption: 重做
+Redo/Hint: 重做上一次還原的操作
+Stamp/Caption: 印記
+Stamp/Hint: 插入一個預配置的文字片段
+Strikethrough/Caption: 刪除線
+Strikethrough/Hint: 套用刪除線格式於所選文字
+Subscript/Caption: 下標
+Subscript/Hint: 套用下標格式於所選文字
+Superscript/Caption: 上標
+Superscript/Hint: 套用上標格式於所選文字
+Underline/Caption: 底線
+Underline/Hint: 套用底線格式於所選文字
+Undo/Caption: 還原
+Undo/Hint: 還原上一次的操作
