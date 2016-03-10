@@ -83,7 +83,6 @@ h1, h2, h3, h4, h5, h6 {
 
 pre {
 	display: block;
-	padding: 14px;
 	margin-top: 1em;
 	margin-bottom: 1em;
 	word-break: normal;
@@ -92,7 +91,7 @@ pre {
 	white-space: pre-wrap;
 	background-color: <<colour pre-background>>;
 	border: 1px solid <<colour pre-border>>;
-	padding: 0 3px 2px;
+	padding: 0.5em;
 	border-radius: 3px;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
 }
@@ -101,7 +100,7 @@ code {
 	color: <<colour code-foreground>>;
 	background-color: <<colour code-background>>;
 	border: 1px solid <<colour code-border>>;
-    white-space: pre-wrap;
+	white-space: pre-wrap;
 	padding: 0 3px 2px;
 	border-radius: 3px;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
@@ -441,8 +440,8 @@ button svg.tc-image-button, button .tc-image-button img {
 	background: none;
 	border: none;
 	width: 100%;
-    width: calc(100% + 2px);
-    margin-left: -43px;
+	width: calc(100% + 2px);
+	margin-left: -43px;
 	text-align: center;
 	border-top: 2px solid <<colour tiddler-info-background>>;
 	margin-top: 4px;
@@ -471,8 +470,8 @@ button svg.tc-image-button, button .tc-image-button img {
 	width: 23px;
 	text-align: center;
 	margin-left: -35px;
-    top: 6px;
-    bottom: 6px;
+	top: 6px;
+	bottom: 6px;
 }
 
 .tc-fold-banner:hover {
@@ -483,13 +482,13 @@ button svg.tc-image-button, button .tc-image-button img {
 	
 	.tc-unfold-banner {
 		position: static;
-	    width: calc(100% + 59px);
-    }
+		width: calc(100% + 59px);
+	}
 
 	.tc-fold-banner {
 		width: 16px;
 		margin-left: -16px;
-	    font-size: 0.75em;
+		font-size: 0.75em;
 	}
 
 }
@@ -1333,7 +1332,7 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-search-results {
-    padding: 0 7px 0 7px;
+	padding: 0 7px 0 7px;
 }
 
 /*
@@ -1972,7 +1971,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 }
 
 .tc-thumbnail-image {
-    text-align: center;
+	text-align: center;
 	overflow: hidden;
 	border-radius: 3px;
 }
@@ -1981,9 +1980,9 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 .tc-thumbnail-image img {
 	filter: alpha(opacity=1);
 	opacity: 1;
-    min-width: 100%;
-    min-height: 100%;
-    max-width: 100%;
+	min-width: 100%;
+	min-height: 100%;
+	max-width: 100%;
 }
 
 .tc-thumbnail-wrapper:hover .tc-thumbnail-image svg,
