@@ -15,6 +15,11 @@ color:$(foregroundColor)$;
 <$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes"><div class="tc-drop-down"><$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 <hr>
 <$list filter="[all[current]tagging[]]" template="$:/core/ui/ListItemTemplate"/>
+<hr>
+<$button class="tc-btn-invisible">
+<$action-listops $tiddler="$:/StoryList" $field="list" $filter="[list[$:/StoryList!!list]]  [tag{!!title}]"/>
+Open All
+</$button>
 </div>
 </$reveal>
 </$set>
