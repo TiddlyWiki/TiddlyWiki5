@@ -894,7 +894,9 @@ button.tc-untagged-label {
 	color: <<colour very-muted-foreground>>;
 }
 
-.tc-tiddler-frame input.tc-edit-texteditor, .tc-tiddler-frame textarea.tc-edit-texteditor {
+.tc-tiddler-frame input.tc-edit-texteditor,
+.tc-tiddler-frame textarea.tc-edit-texteditor,
+.tc-tiddler-frame iframe.tc-edit-texteditor {
 	width: 100%;
 	padding: 3px 3px 3px 3px;
 	border: 1px solid <<colour tiddler-editor-border>>;
@@ -964,6 +966,10 @@ html body.tc-body.tc-single-tiddler-window {
 ** Editor
 */
 
+.tc-edit-text-iframe-toolbar {
+    margin-top: 8px;	
+}
+
 .tc-edit-text-iframe-toolbar button {
 	background-color: <<colour tiddler-controls-foreground>>;
 	fill: <<colour tiddler-controls-foreground-selected>>;
@@ -972,17 +978,16 @@ html body.tc-body.tc-single-tiddler-window {
     margin: 2px 0;
 }
 
+.tc-edit-text-iframe-toolbar button.tc-selected {
+	background-color: <<colour primary>>;
+}
+
 .tc-edit-text-iframe-toolbar button svg {
     width: 1.6em;
     height: 1.2em;
 }
 
 .tc-edit-text-iframe-toolbar button:hover {
-	background-color: <<colour primary>>;
-	fill: <<colour background>>;
-}
-
-.tc-edit-text-iframe-toolbar button:active {
 	background-color: <<colour tiddler-controls-foreground-selected>>;
 	fill: <<colour background>>;
 }
@@ -1130,14 +1135,16 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-tiddler-preview-preview {
 	float: right;
-	width: 48%;
+	width: 49%;
 	border: 1px solid <<colour tiddler-editor-border>>;
-	margin: 4px 3px 3px 3px;
+	margin: 11px 3px 3px 3px;
 	padding: 3px 3px 3px 3px;
 }
 
-.tc-tiddler-preview-edit {
-	width: 48%;
+.tc-tiddler-frame .tc-tiddler-preview input.tc-edit-texteditor,
+.tc-tiddler-frame .tc-tiddler-preview textarea.tc-edit-texteditor,
+.tc-tiddler-frame .tc-tiddler-preview iframe.tc-edit-texteditor {
+	width: 49%;
 }
 
 .tc-edit-fields {

@@ -116,6 +116,8 @@ MonoLine/Caption: monospaced
 MonoLine/Hint: Apply monospaced character formatting to selection
 Picture/Caption: picture
 Picture/Hint: Insert picture
+Preview/Caption: preview
+Preview/Hint: Show preview pane
 Quote/Caption: quote
 Quote/Hint: Apply quoted text formatting to lines containing selection
 Redo/Caption: redo

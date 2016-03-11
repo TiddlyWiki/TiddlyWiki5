@@ -61,7 +61,7 @@ EditTextIframeWidget.prototype.render = function(parent,nextSibling) {
 	iframeDoc.write("");
 	iframeDoc.close();
 	// Style the iframe
-	this.iframeNode.style.width = "100%";
+	this.iframeNode.className = this.dummyTextArea.className;
 	this.iframeNode.style.border = "none";
 	iframeDoc.body.style.margin = "0";
 	this.iframeNode.style.resize = "none";
@@ -85,6 +85,7 @@ EditTextIframeWidget.prototype.render = function(parent,nextSibling) {
 	});
 	this.iframeTextArea.style.cssText = styleText.join("");
 	this.iframeTextArea.style.display = "block";
+	this.iframeTextArea.style.width = "100%";
 	// Add event listeners for the textarea
 	$tw.utils.addEventListeners(this.iframeTextArea,[
 		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"}
@@ -460,7 +461,7 @@ EditTextIframeWidget.prototype.fixHeight = function() {
 		var newHeight = Math.max(this.iframeTextArea.scrollHeight + this.iframeTextArea.offsetHeight - this.iframeTextArea.clientHeight,minHeight);
 		// Only try to change the height if it has changed
 		if(newHeight !== this.iframeNode.offsetHeight) {
-			this.iframeNode.style.height = (newHeight + 8) + "px"; // +8 for the border on the textarea
+			this.iframeNode.style.height = (newHeight + 14) + "px"; // +8 for the border on the textarea
 			this.iframeTextArea.style.height = newHeight + "px";
 			// Set the container to the position we registered at the beginning
 			container.scrollTop = scrollTop;
