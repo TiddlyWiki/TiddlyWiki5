@@ -27,7 +27,7 @@ description: {{$:/language/Buttons/Stamp/Hint}}
 </$button>
 \end
 \define toolbar-button-stamp()
-<$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" tooltip={{$:/language/Buttons/Stamp/Hint}} aria-label={{$:/language/Buttons/Stamp/Caption}}>
+<$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" selectedClass="tc-selected" tooltip={{$:/language/Buttons/Stamp/Hint}} aria-label={{$:/language/Buttons/Stamp/Caption}}>
 {{$:/core/images/format-stamp}}
 </$button>
 

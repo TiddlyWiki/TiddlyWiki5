@@ -5,7 +5,7 @@ caption: {{$:/language/Buttons/Excise/Caption}}
 description: {{$:/language/Buttons/Excise/Hint}}
 
 \define toolbar-button-excise()
-<$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" tooltip={{$:/language/Buttons/Excise/Hint}} aria-label={{$:/language/Buttons/Excise/Caption}}>
+<$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" selectedClass="tc-selected" tooltip={{$:/language/Buttons/Excise/Hint}} aria-label={{$:/language/Buttons/Excise/Caption}}>
 {{$:/core/images/format-excise}}
 </$button>
 
