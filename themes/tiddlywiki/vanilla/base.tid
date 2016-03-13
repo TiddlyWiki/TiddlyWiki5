@@ -1310,7 +1310,7 @@ html body.tc-body.tc-single-tiddler-window {
 	padding: 4px 14px 4px 14px;
 }
 
-.tc-block-dropdown.tc-search-drop-down a {
+.tc-block-dropdown.tc-search-drop-down a:only-child {
 	display: block;
 	padding: 0px 10px 0px 10px;
 }
