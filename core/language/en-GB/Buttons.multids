@@ -90,6 +90,8 @@ Theme/Caption: theme
 Theme/Hint: Choose the display theme
 Bold/Caption: bold
 Bold/Hint: Apply bold formatting to selection
+EditorHeight/Caption: editor height
+EditorHeight/Hint: Choose the height of the text editor
 Excise/Caption: excise
 Excise/Hint: Excise the selected text into a new tiddler
 Heading1/Caption: heading 1

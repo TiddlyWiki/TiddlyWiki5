@@ -1,0 +1,34 @@
+title: $:/core/ui/TextEditorToolbar/editor-height
+tags: $:/tags/TextEditorToolbar
+icon: {{$:/core/images/format-fixed-height}}
+caption: {{$:/language/Buttons/EditorHeight/Caption}}
+description: {{$:/language/Buttons/EditorHeight/Hint}}
+condition: [all[current]!is[image]]
+
+\define toolbar-editor-height()
+<$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" selectedClass="tc-selected" tooltip={{$:/language/Buttons/EditorHeight/Hint}} aria-label={{$:/language/Buttons/EditorHeight/Caption}}>
+<$reveal tag="span" state="$:/config/TextEditor/EditorHeight/Mode" type="match" text="fixed">
+{{$:/core/images/format-fixed-height}}
+</$reveal>
+<$reveal tag="span" state="$:/config/TextEditor/EditorHeight/Mode" type="match" text="auto">
+{{$:/core/images/format-auto-height}}
+</$reveal>
+</$button>
+
+<$reveal state="""$(config-title)$/popup""" type="popup" position="below" animate="yes">
+
+<div class="tc-drop-down tc-popup-keep">
+
+''{{$:/language/Buttons/EditorHeight/Hint}}''
+
+<$radio tiddler="$:/config/TextEditor/EditorHeight/Mode" value="auto"> {{$:/core/images/format-auto-height}} Automatically adjust height to fit content</$radio>
+
+<$radio tiddler="$:/config/TextEditor/EditorHeight/Mode" value="fixed"> {{$:/core/images/format-fixed-height}} Fixed height: <$edit-text tag="input" tiddler="$:/config/TextEditor/EditorHeight/Height" default="100px"/></$radio>
+
+</div>
+
+</$reveal>
+\end
+<$set name="config-title" value=<<qualify "$:/state/edit-toolbar/editor-height">>>
+<<toolbar-editor-height>>
+</$set>

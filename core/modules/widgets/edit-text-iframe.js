@@ -14,6 +14,10 @@ Edit-text-iframe widget
 
 var DEFAULT_MIN_TEXT_AREA_HEIGHT = "100px"; // Minimum height of textareas in pixels
 
+// Configuration tiddlers
+var HEIGHT_MODE_TITLE = "$:/config/TextEditor/EditorHeight/Mode",
+	HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
+
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var EditTextIframeWidget = function(parseTreeNode,options) {
@@ -64,6 +68,7 @@ EditTextIframeWidget.prototype.render = function(parent,nextSibling) {
 	this.iframeNode.className = this.dummyTextArea.className;
 	this.iframeNode.style.border = "none";
 	iframeDoc.body.style.margin = "0";
+	iframeDoc.body.style.padding = "0";
 	this.iframeNode.style.resize = "none";
 	this.domNodes.push(this.iframeNode);
 	// Create the textarea
@@ -111,7 +116,6 @@ EditTextIframeWidget.prototype.render = function(parent,nextSibling) {
 		{type: "tm-edit-text-operation", handler: "handleEditTextOperationMessage"},
 		{type: "tm-edit-text-command", handler: "handleEditTextCommandMessage"}
 	]);
-
 };
 
 /*
@@ -381,7 +385,8 @@ EditTextIframeWidget.prototype.execute = function() {
 	this.editPlaceholder = this.getAttribute("placeholder");
 	this.editSize = this.getAttribute("size");
 	this.editRows = this.getAttribute("rows");
-	this.editAutoHeight = this.getAttribute("autoHeight","yes") === "yes";
+	this.editAutoHeight = this.wiki.getTiddlerText(HEIGHT_MODE_TITLE,"auto");
+	this.editAutoHeight = this.getAttribute("autoHeight",this.editAutoHeight === "auto" ? "yes" : "no") === "yes";
 	this.editMinHeight = this.getAttribute("minHeight",DEFAULT_MIN_TEXT_AREA_HEIGHT);
 	this.editFocus = this.getAttribute("focus");
 	// Make the child widgets
@@ -394,7 +399,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 EditTextIframeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// Completely rerender if any of our attributes have changed
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedTiddlers[HEIGHT_MODE_TITLE]) {
 		this.refreshSelf();
 		return true;
 	} else if(changedTiddlers[this.editTitle]) {
@@ -447,25 +452,32 @@ EditTextIframeWidget.prototype.getScrollContainer = function(el) {
 Fix the height of textareas to fit their content
 */
 EditTextIframeWidget.prototype.fixHeight = function() {
-	if(this.editAutoHeight && this.iframeNode && !this.iframeNode.isTiddlyWikiFakeDom) {
-		// Resize the textarea to fit its content, preserving scroll position
-		// Get the scroll container and register the current scroll position
-		var container = this.getScrollContainer(this.iframeNode),
-			scrollTop = container.scrollTop;
-                // Measure the specified minimum height
-		this.iframeTextArea.style.height = this.editMinHeight;
-		var minHeight = this.iframeTextArea.offsetHeight;
-		// Set its height to auto so that it snaps to the correct height
-		this.iframeTextArea.style.height = "auto";
-		// Calculate the revised height
-		var newHeight = Math.max(this.iframeTextArea.scrollHeight + this.iframeTextArea.offsetHeight - this.iframeTextArea.clientHeight,minHeight);
-		// Only try to change the height if it has changed
-		if(newHeight !== this.iframeNode.offsetHeight) {
-			this.iframeNode.style.height = (newHeight + 14) + "px"; // +8 for the border on the textarea
-			this.iframeTextArea.style.height = newHeight + "px";
-			// Set the container to the position we registered at the beginning
-			container.scrollTop = scrollTop;
+	if(this.editAutoHeight) {
+		if(this.iframeNode && !this.iframeNode.isTiddlyWikiFakeDom) {
+			// Resize the textarea to fit its content, preserving scroll position
+			// Get the scroll container and register the current scroll position
+			var container = this.getScrollContainer(this.iframeNode),
+				scrollTop = container.scrollTop;
+            // Measure the specified minimum height
+			this.iframeTextArea.style.height = this.editMinHeight;
+			var minHeight = this.iframeTextArea.offsetHeight;
+			// Set its height to auto so that it snaps to the correct height
+			this.iframeTextArea.style.height = "auto";
+			// Calculate the revised height
+			var newHeight = Math.max(this.iframeTextArea.scrollHeight + this.iframeTextArea.offsetHeight - this.iframeTextArea.clientHeight,minHeight);
+			// Only try to change the height if it has changed
+			if(newHeight !== this.iframeNode.offsetHeight) {
+				this.iframeNode.style.height = (newHeight + 14) + "px"; // +8 for the border on the textarea
+				this.iframeTextArea.style.height = newHeight + "px";
+				// Set the container to the position we registered at the beginning
+				container.scrollTop = scrollTop;
+			}
 		}
+	} else {
+		var fixedHeight = parseInt(this.wiki.getTiddlerText(HEIGHT_VALUE_TITLE,"400px"),10);
+		fixedHeight = Math.max(fixedHeight,20)
+		this.iframeTextArea.style.height = fixedHeight + "px";
+		this.iframeNode.style.height = (fixedHeight + 14) + "px";
 	}
 };
 
