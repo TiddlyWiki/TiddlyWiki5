@@ -321,7 +321,7 @@ a.tc-tiddlylink-external:hover {
 ** Buttons
 */
 
-button svg, button img {
+button svg, button img, label svg, label img {
 	vertical-align: middle;
 }
 
@@ -1147,6 +1147,10 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 49%;
 }
 
+.tc-tiddler-frame .tc-tiddler-preview canvas.tc-edit-bitmapeditor {
+	max-width: 49%;
+}
+
 .tc-edit-fields {
 	width: 100%;
 }
@@ -1380,25 +1384,37 @@ html body.tc-body.tc-single-tiddler-window {
     padding: 0 7px 0 7px;
 }
 
-.tc-picture-chooser {
+.tc-picture-chooser, .tc-colour-chooser {
 	max-width: 380px;
 	white-space: normal;
 }
 
-.tc-picture-chooser a {
+.tc-picture-chooser a,
+.tc-colour-chooser a {
 	display: inline-block;
 	vertical-align: top;
     text-align: center;
-	width: 4em;
-	height: 4em;
-	margin: 2px;
-	border: 1px solid <<colour muted-foreground>>;
-	padding: 2px;
 	position: relative;
 }
 
-.tc-picture-chooser a:hover {
-	background: <<colour background>>;
+.tc-picture-chooser a {
+	border: 1px solid <<colour muted-foreground>>;
+	padding: 2px;
+	margin: 2px;
+	width: 4em;
+	height: 4em;
+}
+
+.tc-colour-chooser a {
+	padding: 3px;
+	width: 2em;
+	height: 2em;
+    vertical-align: middle;
+}
+
+.tc-picture-chooser a:hover,
+.tc-colour-chooser a:hover {
+	background: <<colour primary>>;
 	padding: 0px;
 	border: 3px solid <<colour primary>>;
 }

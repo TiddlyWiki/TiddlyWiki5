@@ -90,6 +90,8 @@ Theme/Caption: theme
 Theme/Hint: Choose the display theme
 Bold/Caption: bold
 Bold/Hint: Apply bold formatting to selection
+Clear/Caption: clear
+Clear/Hint: Clear image to solid colour
 EditorHeight/Caption: editor height
 EditorHeight/Hint: Choose the height of the text editor
 Excise/Caption: excise
@@ -108,6 +110,8 @@ Heading6/Caption: heading 6
 Heading6/Hint: Apply heading level 6 formatting to lines containing selection
 Italic/Caption: italic
 Italic/Hint: Apply italic formatting to selection
+LineWidth/Caption: line width
+LineWidth/Hint: Set line width for painting
 ListBullet/Caption: bulleted list
 ListBullet/Hint: Apply bulleted list formatting to lines containing selection
 ListNumber/Caption: numbered list
@@ -116,6 +120,10 @@ MonoBlock/Caption: monospaced block
 MonoBlock/Hint: Apply monospaced block formatting to lines containing selection
 MonoLine/Caption: monospaced
 MonoLine/Hint: Apply monospaced character formatting to selection
+Opacity/Caption: opacity
+Opacity/Hint: Set painting opacity
+Paint/Caption: paint colour
+Paint/Hint: Set painting colour
 Picture/Caption: picture
 Picture/Hint: Insert picture
 Preview/Caption: preview
@@ -124,6 +132,8 @@ Quote/Caption: quote
 Quote/Hint: Apply quoted text formatting to lines containing selection
 Redo/Caption: redo
 Redo/Hint: Redo the last action to be undone
+Size/Caption: image size
+Size/Hint: Set image size
 Stamp/Caption: stamp
 Stamp/Hint: Insert a preconfigured snippet of text
 Strikethrough/Caption: strikethrough
