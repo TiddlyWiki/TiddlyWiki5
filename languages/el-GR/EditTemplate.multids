@@ -1,10 +1,7 @@
 title: $:/language/EditTemplate/
 
 Body/External/Hint: Αυτό είναι ένα εξωτερικό tiddler αποθηκευμένο εκτός του κύριου TiddlyWiki αρχείου. Μπορείτε να τροποποιήσετε τις ετικέτες και τα πεδία αλλά δεν μπορείτε να τροποποιήσετε άμεσα το ίδιο το περιεχόμενο του
-Body/Hint: Χρησιμοποιήστε [[wiki text|http://tiddlywiki.com/static/WikiText.html]] για να προσθέσετε μορφοποιήσεις, εικόνες, και δυναμικά χαρακτηριστικά
 Body/Placeholder: Πληκτρολογήστε το κείμενο για αυτό το tiddler
-Body/Preview/Button/Hide: απόκρυψη προεπισκόπισης
-Body/Preview/Button/Show: εμφάνιση προεπισκόπισης
 Fields/Add/Button: προσθήκη
 Fields/Add/Name/Placeholder: όνομα πεδίου
 Fields/Add/Prompt: Πρόσθεσε ένα νέο πεδίο:
