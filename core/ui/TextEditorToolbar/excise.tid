@@ -14,7 +14,7 @@ condition: [all[current]!is[image]]
 
 <div class="tc-drop-down tc-popup-keep">
 
-''Excise selected text as a new tiddler''
+''{{$:/language/Buttons/Excise/Hint}}''
 
 Title of new tiddler: <$edit-text tag="input" tiddler="""$(config-title)$/new-title""" default="New Tiddler Title" focus="true"/>
 
