@@ -3,6 +3,7 @@ tags: $:/tags/TextEditorToolbar
 icon: {{$:/core/images/down-arrow}}
 caption: {{$:/language/Buttons/More/Caption}}
 description: {{$:/language/Buttons/More/Hint}}
+condition: [all[current]]
 
 \define config-title()
 $:/config/TextEditorToolbarButtons/Visibility/$(listItem)$

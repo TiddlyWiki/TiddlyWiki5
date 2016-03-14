@@ -3,6 +3,7 @@ tags: $:/tags/TextEditorToolbar
 icon: {{$:/core/images/format-list-bullet}}
 caption: {{$:/language/Buttons/ListBullet/Caption}}
 description: {{$:/language/Buttons/ListBullet/Hint}}
+condition: [all[current]!is[image]]
 
 <$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/ListBullet/Hint}} aria-label={{$:/language/Buttons/ListBullet/Caption}}>
 <$action-sendmessage

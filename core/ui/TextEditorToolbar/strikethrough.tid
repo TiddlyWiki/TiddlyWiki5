@@ -3,6 +3,7 @@ tags: $:/tags/TextEditorToolbar
 icon: {{$:/core/images/format-strikethrough}}
 caption: {{$:/language/Buttons/Strikethrough/Caption}}
 description: {{$:/language/Buttons/Strikethrough/Hint}}
+condition: [all[current]!is[image]]
 
 <$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Strikethrough/Hint}} aria-label={{$:/language/Buttons/Strikethrough/Caption}}>
 <$action-sendmessage

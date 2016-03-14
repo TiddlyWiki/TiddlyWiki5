@@ -3,6 +3,7 @@ tags: $:/tags/TextEditorToolbar
 icon: {{$:/core/images/format-subscript}}
 caption: {{$:/language/Buttons/Subscript/Caption}}
 description: {{$:/language/Buttons/Subscript/Hint}}
+condition: [all[current]!is[image]]
 
 <$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Subscript/Hint}} aria-label={{$:/language/Buttons/Subscript/Caption}}>
 <$action-sendmessage

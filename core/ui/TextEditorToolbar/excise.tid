@@ -3,6 +3,7 @@ tags: $:/tags/TextEditorToolbar
 icon: {{$:/core/images/format-excise}}
 caption: {{$:/language/Buttons/Excise/Caption}}
 description: {{$:/language/Buttons/Excise/Hint}}
+condition: [all[current]!is[image]]
 
 \define toolbar-button-excise()
 <$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" selectedClass="tc-selected" tooltip={{$:/language/Buttons/Excise/Hint}} aria-label={{$:/language/Buttons/Excise/Caption}}>

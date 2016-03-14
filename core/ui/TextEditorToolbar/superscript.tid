@@ -3,6 +3,7 @@ tags: $:/tags/TextEditorToolbar
 icon: {{$:/core/images/format-superscript}}
 caption: {{$:/language/Buttons/Superscript/Caption}}
 description: {{$:/language/Buttons/Superscript/Hint}}
+condition: [all[current]!is[image]]
 
 <$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Superscript/Hint}} aria-label={{$:/language/Buttons/Superscript/Caption}}>
 <$action-sendmessage

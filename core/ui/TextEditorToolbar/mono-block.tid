@@ -3,6 +3,7 @@ tags: $:/tags/TextEditorToolbar
 icon: {{$:/core/images/format-mono-block}}
 caption: {{$:/language/Buttons/MonoBlock/Caption}}
 description: {{$:/language/Buttons/MonoBlock/Hint}}
+condition: [all[current]!is[image]]
 
 <$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/MonoBlock/Hint}} aria-label={{$:/language/Buttons/MonoBlock/Caption}}>
 <$action-sendmessage
