@@ -13,25 +13,18 @@ A sync adaptor module for synchronising with TiddlyWeb compatible servers
 "use strict";
 
 var CONFIG_HOST_TIDDLER = "$:/config/tiddlyweb/host",
+    CONFIG_RECIPE_TIDDLER = "$:/config/tiddlyweb/recipe",
 	DEFAULT_HOST_TIDDLER = "$protocol$//$host$/";
 
 function TiddlyWebAdaptor(options) {
 	this.wiki = options.wiki;
-	this.host = this.getHost();
-	this.recipe = undefined;
+	this.host = this.getHost().trim();
+	this.recipe = this.wiki.getTiddlerText(CONFIG_RECIPE_TIDDLER).trim();
 	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
 }
 
 TiddlyWebAdaptor.prototype.getHost = function() {
-	var text = this.wiki.getTiddlerText(CONFIG_HOST_TIDDLER,DEFAULT_HOST_TIDDLER),
-		substitutions = [
-			{name: "protocol", value: document.location.protocol},
-			{name: "host", value: document.location.host}
-		];
-	for(var t=0; t<substitutions.length; t++) {
-		var s = substitutions[t];
-		text = text.replace(new RegExp("\\$" + s.name + "\\$","mg"),s.value);
-	}
+	var text = this.wiki.getTiddlerText(CONFIG_HOST_TIDDLER,DEFAULT_HOST_TIDDLER);
 	return text;
 };
 
@@ -309,8 +302,8 @@ TiddlyWebAdaptor.prototype.parseEtag = function(etag) {
 	}
 };
 
-if($tw.browser && document.location.protocol.substr(0,4) === "http" ) {
-	exports.adaptorClass = TiddlyWebAdaptor;
+if($tw.browser ) { /* && document.location.protocol.substr(0,4) === "http" ) { */
+    exports.adaptorClass = TiddlyWebAdaptor;
 }
 
 })();

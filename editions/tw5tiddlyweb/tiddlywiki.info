@@ -1,5 +1,5 @@
 {
-	"description": "Base edition for TiddlySpace integration",
+	"description": "Base edition for TiddlyWeb integration",
 	"plugins": [
 		"tiddlywiki/tiddlyweb"
 	],
