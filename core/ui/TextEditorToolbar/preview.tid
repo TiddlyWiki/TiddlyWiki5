@@ -3,6 +3,7 @@ tags: $:/tags/TextEditorToolbar
 icon: {{$:/core/images/format-preview}}
 caption: {{$:/language/Buttons/Preview/Caption}}
 description: {{$:/language/Buttons/Preview/Hint}}
+condition: [all[current]]
 
 <$reveal state="$:/state/showeditpreview" type="match" text="yes" tag="span">
 <$button type="set" set="$:/state/showeditpreview" setTo="no" class="tc-btn-invisible tc-selected" tooltip={{$:/language/Buttons/Preview/Hint}} aria-label={{$:/language/Buttons/Preview/Caption}}>

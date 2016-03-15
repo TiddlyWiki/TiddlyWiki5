@@ -3,6 +3,7 @@ tags: $:/tags/TextEditorToolbar
 icon: {{$:/core/images/format-picture}}
 caption: {{$:/language/Buttons/Picture/Caption}}
 description: {{$:/language/Buttons/Picture/Hint}}
+condition: [all[current]!is[image]]
 
 \define toolbar-button-picture-inner()
 <$button tag="a" tooltip="""$(pictureTitle)$""">

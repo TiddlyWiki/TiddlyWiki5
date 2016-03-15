@@ -3,6 +3,7 @@ tags: $:/tags/TextEditorToolbar
 icon: {{$:/core/images/format-undo}}
 caption: {{$:/language/Buttons/Undo/Caption}}
 description: {{$:/language/Buttons/Undo/Hint}}
+condition: [all[current]!is[image]]
 
 <$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Undo/Hint}} aria-label={{$:/language/Buttons/Undo/Caption}}>
 <$action-sendmessage

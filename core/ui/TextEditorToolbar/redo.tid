@@ -3,6 +3,7 @@ tags: $:/tags/TextEditorToolbar
 icon: {{$:/core/images/format-redo}}
 caption: {{$:/language/Buttons/Redo/Caption}}
 description: {{$:/language/Buttons/Redo/Hint}}
+condition: [all[current]!is[image]]
 
 <$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Redo/Hint}} aria-label={{$:/language/Buttons/Redo/Caption}}>
 <$action-sendmessage

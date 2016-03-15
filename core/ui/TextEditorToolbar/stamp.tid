@@ -3,6 +3,7 @@ tags: $:/tags/TextEditorToolbar
 icon: {{$:/core/images/format-stamp}}
 caption: {{$:/language/Buttons/Stamp/Caption}}
 description: {{$:/language/Buttons/Stamp/Hint}}
+condition: [all[current]!is[image]]
 
 \define toolbar-button-stamp-inner()
 <$button tag="a">

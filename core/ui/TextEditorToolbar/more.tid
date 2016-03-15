@@ -3,9 +3,15 @@ tags: $:/tags/TextEditorToolbar
 icon: {{$:/core/images/down-arrow}}
 caption: {{$:/language/Buttons/More/Caption}}
 description: {{$:/language/Buttons/More/Hint}}
+condition: [all[current]]
 
 \define config-title()
 $:/config/TextEditorToolbarButtons/Visibility/$(listItem)$
+\end
+\define conditional-button()
+<$list filter={{$(listItem)$!!condition}}>
+<$transclude tiddler=<<listItem>> mode="inline"/> <$transclude tiddler=<<listItem>> field="description"/>
+</$list>
 \end
 <$button class="tc-btn-invisible" popup=<<qualify "$:/state/popup/text-editor-toolbar/more">> selectedClass="tc-selected" tooltip={{$:/language/Buttons/More/Hint}} aria-label={{$:/language/Buttons/More/Caption}}>
 {{$:/core/images/down-arrow}}
@@ -16,7 +22,7 @@ $:/config/TextEditorToolbarButtons/Visibility/$(listItem)$
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/TextEditorToolbar]!has[draft.of]] -[[$:/core/ui/TextEditorToolbar/more]]" variable="listItem">
 <$reveal type="match" state=<<config-title>> text="hide">
 <div>
-<$transclude tiddler=<<listItem>> mode="inline"/> <$transclude tiddler=<<listItem>> field="description"/>
+<<conditional-button>>
 </div>
 </$reveal>
 </$list>
