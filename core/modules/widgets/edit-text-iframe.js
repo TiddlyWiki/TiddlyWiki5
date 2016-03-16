@@ -138,7 +138,7 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 			// Cut just past the preceding line break, or the start of the text
 			cutStart = this.findPrecedingLineBreak(text,selStart);
 			// Cut to just past the following line break, or to the end of the text
-			cutEnd = this.findFollowLineBreak(text,selEnd);
+			cutEnd = this.findFollowingLineBreak(text,selEnd);
 			// Process each line
 			var lines = text.substring(cutStart,cutEnd).split(/\r?\n/mg);
 			$tw.utils.each(lines,function(line,index) {
@@ -169,8 +169,13 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 			});
 			// Stitch the replacement text together and set the selection
 			replacement = lines.join("\n");
-			newSelStart = cutStart;
-			newSelEnd = newSelStart + replacement.length;
+			if(lines.length === 1) {
+				newSelStart = cutStart + replacement.length;
+				newSelEnd = newSelStart;
+			} else {
+				newSelStart = cutStart;
+				newSelEnd = newSelStart + replacement.length;
+			}
 			break;
 		case "replace-all":
 			cutStart = 0;
@@ -219,7 +224,7 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 			// Cut just past the preceding line break, or the start of the text
 			cutStart = this.findPrecedingLineBreak(text,selStart);
 			// Cut to just past the following line break, or to the end of the text
-			cutEnd = this.findFollowLineBreak(text,selEnd);
+			cutEnd = this.findFollowingLineBreak(text,selEnd);
 			// Add the prefix and suffix
 			replacement = event.paramObject.prefix + "\n" +
 						text.substring(cutStart,cutEnd) + "\n" +
@@ -317,7 +322,7 @@ Helper to find the line break preceding a given position in a string
 Returns position immediately after that line break, or the start of the string
 */
 EditTextIframeWidget.prototype.findPrecedingLineBreak = function(text,pos) {
-	var result = text.lastIndexOf("\n",pos);
+	var result = text.lastIndexOf("\n",pos - 1);
 	if(result === -1) {
 		result = 0;
 	} else {
@@ -332,7 +337,7 @@ EditTextIframeWidget.prototype.findPrecedingLineBreak = function(text,pos) {
 /*
 Helper to find the line break following a given position in a string
 */
-EditTextIframeWidget.prototype.findFollowLineBreak = function(text,pos) {
+EditTextIframeWidget.prototype.findFollowingLineBreak = function(text,pos) {
 	// Cut to just past the following line break, or to the end of the text
 	var result = text.indexOf("\n",pos);
 	if(result === -1) {
