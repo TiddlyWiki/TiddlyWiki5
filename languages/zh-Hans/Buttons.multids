@@ -116,6 +116,8 @@ MonoLine/Caption: 等宽
 MonoLine/Hint: 套用等宽字符格式于所选文本
 Picture/Caption: 图片
 Picture/Hint: 插入图片
+Preview/Caption: 预览
+Preview/Hint: 显示预览窗格
 Quote/Caption: 引言
 Quote/Hint: 套用引言文本格式于包含所选文本的列
 Redo/Caption: 恢复
