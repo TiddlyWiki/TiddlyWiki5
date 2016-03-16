@@ -180,7 +180,26 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 			newSelEnd = replacement.length;
 			break;
 		case "wrap-selection":
-			if(text.substring(selStart,selStart + event.paramObject.prefix.length) === event.paramObject.prefix && text.substring(selEnd - event.paramObject.suffix.length,selEnd) === event.paramObject.suffix) {
+			if(selStart === selEnd) {
+				// No selection; check if we're within the prefix/suffix
+				if(text.substring(selStart - event.paramObject.prefix.length,selStart + event.paramObject.suffix.length) === event.paramObject.prefix + event.paramObject.suffix) {
+					// Remove the prefix and suffix unless they comprise the entire text
+					if(selStart > event.paramObject.prefix.length || (selEnd + event.paramObject.suffix.length) < text.length ) {
+						cutStart = selStart - event.paramObject.prefix.length;
+						cutEnd = selEnd + event.paramObject.suffix.length;
+						replacement = "";
+						newSelStart = cutStart;
+						newSelEnd = newSelStart;
+					}
+				} else {
+					// Wrap the cursor instead
+					cutStart = selStart;
+					cutEnd = selEnd;
+					replacement = event.paramObject.prefix + event.paramObject.suffix;
+					newSelStart = selStart + event.paramObject.prefix.length;
+					newSelEnd = newSelStart;
+				}
+			} else if(text.substring(selStart,selStart + event.paramObject.prefix.length) === event.paramObject.prefix && text.substring(selEnd - event.paramObject.suffix.length,selEnd) === event.paramObject.suffix) {
 				// Prefix and suffix are already present, so remove them
 				cutStart = selStart;
 				cutEnd = selEnd;
@@ -250,7 +269,13 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 			break;
 	}
 	// Perform the required changes to the text area and the underlying tiddler
-	if(replacement) {
+	if(replacement !== undefined) {
+		// Work around the problem that textInput can't be used directly to delete text without also replacing it with a non-zero length string
+		if(replacement === "") {
+			replacement = text.substring(0,cutStart) + text.substring(cutEnd)
+			cutStart = 0;
+			cutEnd = text.length;
+		}
 		var newText = text.substring(0,cutStart) + replacement + text.substring(cutEnd),
 			textEvent = this.document.createEvent("TextEvent");
 		if(textEvent.initTextEvent) {
@@ -263,10 +288,10 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 		}
 		this.iframeNode.focus();
 		this.iframeTextArea.setSelectionRange(newSelStart,newSelEnd);
-		this.iframeTextArea.focus();
-		this.fixHeight();
-		this.saveChanges(newText);
 	}
+	this.iframeTextArea.focus();
+	this.fixHeight();
+	this.saveChanges(newText);
 };
 
 /*
@@ -458,7 +483,7 @@ EditTextIframeWidget.prototype.fixHeight = function() {
 			// Get the scroll container and register the current scroll position
 			var container = this.getScrollContainer(this.iframeNode),
 				scrollTop = container.scrollTop;
-            // Measure the specified minimum height
+			// Measure the specified minimum height
 			this.iframeTextArea.style.height = this.editMinHeight;
 			var minHeight = this.iframeTextArea.offsetHeight;
 			// Set its height to auto so that it snaps to the correct height
