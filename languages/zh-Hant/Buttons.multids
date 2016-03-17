@@ -90,6 +90,8 @@ Theme/Caption: 佈景主題
 Theme/Hint: 選擇佈景主題
 Bold/Caption: 粗體
 Bold/Hint: 套用粗體格式於所選文字
+Clear/Caption: 清除
+Clear/Hint: 清除圖像為純色
 EditorHeight/Caption: 編輯器高度
 EditorHeight/Hint: 選擇文字編輯器的高度
 Excise/Caption: 剪切
@@ -108,6 +110,8 @@ Heading6/Caption: 標題 6
 Heading6/Hint: 套用標題級別 6 的格式於包含所選文字的列
 Italic/Caption: 斜體
 Italic/Hint: 套用斜體格式於所選文字
+LineWidth/Caption: 線寬
+LineWidth/Hint: 設定繪畫的線條寬度
 ListBullet/Caption: 符號清單
 ListBullet/Hint: 套用符號清單格式於包含所選文字的列
 ListNumber/Caption: 數字清單
@@ -116,6 +120,10 @@ MonoBlock/Caption: 等寬區塊
 MonoBlock/Hint: 套用等寬區塊格式於包含所選文字的列
 MonoLine/Caption: 等寬
 MonoLine/Hint: 套用等寬字元格式於所選文字
+Opacity/Caption: 不透明度
+Opacity/Hint: 設定繪畫的不透明度
+Paint/Caption: 繪畫顏色
+Paint/Hint: 設定繪畫的顏色
 Picture/Caption: 圖片
 Picture/Hint: 插入圖片
 Preview/Caption: 預覽
@@ -124,6 +132,8 @@ Quote/Caption: 引言
 Quote/Hint: 套用引言文字格式於包含所選文字的列
 Redo/Caption: 重做
 Redo/Hint: 重做上一次還原的操作
+Size/Caption: 圖像大小
+Size/Hint: 設定圖像的大小
 Stamp/Caption: 印記
 Stamp/Hint: 插入一個預配置的文字片段
 Strikethrough/Caption: 刪除線
