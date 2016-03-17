@@ -131,7 +131,7 @@ Toolbars/Hint: 選擇將顯示哪些工具列按鈕
 Toolbars/PageControls/Caption: 頁面工具列
 Toolbars/PageControls/Hint: 選擇將顯示哪些按鈕於主頁面的工具列
 Toolbars/TextEditorToolbar/Caption: 文字編輯器工具列
-Toolbars/TextEditorToolbar/Hint: 選擇將顯示哪些按鈕於文字編輯器工具列
+Toolbars/TextEditorToolbar/Hint: 選擇將顯示哪些按鈕於文字編輯器工具列。請注意，某些按鈕只會出現在編輯某一類型的條目時。
 Toolbars/ViewToolbar/Caption: 檢視工具列
 Toolbars/ViewToolbar/Hint: 選擇將顯示哪些按鈕於條目的檢視模式工具列
 Tools/Download/Full/Caption: 下載完整副本
