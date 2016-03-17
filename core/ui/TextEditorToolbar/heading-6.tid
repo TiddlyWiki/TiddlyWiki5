@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/heading-6
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-heading-5}}
+icon: {{$:/core/images/format-heading-6}}
 caption: {{$:/language/Buttons/Heading6/Caption}}
 description: {{$:/language/Buttons/Heading6/Hint}}
 condition: [all[current]!is[image]]
@@ -10,7 +10,7 @@ condition: [all[current]!is[image]]
 	$message="tm-edit-text-operation"
 	$param="prefix-lines"
 	character="!"
-	count="5"
+	count="6"
 />
 {{$:/core/images/format-heading-6}}
 </$button>

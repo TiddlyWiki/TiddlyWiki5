@@ -138,7 +138,7 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 			// Cut just past the preceding line break, or the start of the text
 			cutStart = this.findPrecedingLineBreak(text,selStart);
 			// Cut to just past the following line break, or to the end of the text
-			cutEnd = this.findFollowLineBreak(text,selEnd);
+			cutEnd = this.findFollowingLineBreak(text,selEnd);
 			// Process each line
 			var lines = text.substring(cutStart,cutEnd).split(/\r?\n/mg);
 			$tw.utils.each(lines,function(line,index) {
@@ -169,8 +169,13 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 			});
 			// Stitch the replacement text together and set the selection
 			replacement = lines.join("\n");
-			newSelStart = cutStart;
-			newSelEnd = newSelStart + replacement.length;
+			if(lines.length === 1) {
+				newSelStart = cutStart + replacement.length;
+				newSelEnd = newSelStart;
+			} else {
+				newSelStart = cutStart;
+				newSelEnd = newSelStart + replacement.length;
+			}
 			break;
 		case "replace-all":
 			cutStart = 0;
@@ -180,7 +185,26 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 			newSelEnd = replacement.length;
 			break;
 		case "wrap-selection":
-			if(text.substring(selStart,selStart + event.paramObject.prefix.length) === event.paramObject.prefix && text.substring(selEnd - event.paramObject.suffix.length,selEnd) === event.paramObject.suffix) {
+			if(selStart === selEnd) {
+				// No selection; check if we're within the prefix/suffix
+				if(text.substring(selStart - event.paramObject.prefix.length,selStart + event.paramObject.suffix.length) === event.paramObject.prefix + event.paramObject.suffix) {
+					// Remove the prefix and suffix unless they comprise the entire text
+					if(selStart > event.paramObject.prefix.length || (selEnd + event.paramObject.suffix.length) < text.length ) {
+						cutStart = selStart - event.paramObject.prefix.length;
+						cutEnd = selEnd + event.paramObject.suffix.length;
+						replacement = "";
+						newSelStart = cutStart;
+						newSelEnd = newSelStart;
+					}
+				} else {
+					// Wrap the cursor instead
+					cutStart = selStart;
+					cutEnd = selEnd;
+					replacement = event.paramObject.prefix + event.paramObject.suffix;
+					newSelStart = selStart + event.paramObject.prefix.length;
+					newSelEnd = newSelStart;
+				}
+			} else if(text.substring(selStart,selStart + event.paramObject.prefix.length) === event.paramObject.prefix && text.substring(selEnd - event.paramObject.suffix.length,selEnd) === event.paramObject.suffix) {
 				// Prefix and suffix are already present, so remove them
 				cutStart = selStart;
 				cutEnd = selEnd;
@@ -200,7 +224,7 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 			// Cut just past the preceding line break, or the start of the text
 			cutStart = this.findPrecedingLineBreak(text,selStart);
 			// Cut to just past the following line break, or to the end of the text
-			cutEnd = this.findFollowLineBreak(text,selEnd);
+			cutEnd = this.findFollowingLineBreak(text,selEnd);
 			// Add the prefix and suffix
 			replacement = event.paramObject.prefix + "\n" +
 						text.substring(cutStart,cutEnd) + "\n" +
@@ -250,7 +274,13 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 			break;
 	}
 	// Perform the required changes to the text area and the underlying tiddler
-	if(replacement) {
+	if(replacement !== undefined) {
+		// Work around the problem that textInput can't be used directly to delete text without also replacing it with a non-zero length string
+		if(replacement === "") {
+			replacement = text.substring(0,cutStart) + text.substring(cutEnd)
+			cutStart = 0;
+			cutEnd = text.length;
+		}
 		var newText = text.substring(0,cutStart) + replacement + text.substring(cutEnd),
 			textEvent = this.document.createEvent("TextEvent");
 		if(textEvent.initTextEvent) {
@@ -263,10 +293,10 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 		}
 		this.iframeNode.focus();
 		this.iframeTextArea.setSelectionRange(newSelStart,newSelEnd);
-		this.iframeTextArea.focus();
-		this.fixHeight();
-		this.saveChanges(newText);
 	}
+	this.iframeTextArea.focus();
+	this.fixHeight();
+	this.saveChanges(newText);
 };
 
 /*
@@ -292,7 +322,7 @@ Helper to find the line break preceding a given position in a string
 Returns position immediately after that line break, or the start of the string
 */
 EditTextIframeWidget.prototype.findPrecedingLineBreak = function(text,pos) {
-	var result = text.lastIndexOf("\n",pos);
+	var result = text.lastIndexOf("\n",pos - 1);
 	if(result === -1) {
 		result = 0;
 	} else {
@@ -307,7 +337,7 @@ EditTextIframeWidget.prototype.findPrecedingLineBreak = function(text,pos) {
 /*
 Helper to find the line break following a given position in a string
 */
-EditTextIframeWidget.prototype.findFollowLineBreak = function(text,pos) {
+EditTextIframeWidget.prototype.findFollowingLineBreak = function(text,pos) {
 	// Cut to just past the following line break, or to the end of the text
 	var result = text.indexOf("\n",pos);
 	if(result === -1) {
@@ -458,7 +488,7 @@ EditTextIframeWidget.prototype.fixHeight = function() {
 			// Get the scroll container and register the current scroll position
 			var container = this.getScrollContainer(this.iframeNode),
 				scrollTop = container.scrollTop;
-            // Measure the specified minimum height
+			// Measure the specified minimum height
 			this.iframeTextArea.style.height = this.editMinHeight;
 			var minHeight = this.iframeTextArea.offsetHeight;
 			// Set its height to auto so that it snaps to the correct height
