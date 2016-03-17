@@ -90,6 +90,8 @@ Theme/Caption: 布景主题
 Theme/Hint: 选择布景主题
 Bold/Caption: 粗体
 Bold/Hint: 套用粗体格式于所选文本
+EditorHeight/Caption: 编辑器高度
+EditorHeight/Hint: 选择文本编辑器的高度
 Excise/Caption: 剪切
 Excise/Hint: 剪切所选文本到一个新条目
 Heading1/Caption: 标题 1

@@ -90,6 +90,8 @@ Theme/Caption: 佈景主題
 Theme/Hint: 選擇佈景主題
 Bold/Caption: 粗體
 Bold/Hint: 套用粗體格式於所選文字
+EditorHeight/Caption: 編輯器高度
+EditorHeight/Hint: 選擇文字編輯器的高度
 Excise/Caption: 剪切
 Excise/Hint: 剪切所選文字到一個新條目
 Heading1/Caption: 標題 1
