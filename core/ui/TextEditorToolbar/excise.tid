@@ -5,6 +5,7 @@ caption: {{$:/language/Buttons/Excise/Caption}}
 description: {{$:/language/Buttons/Excise/Hint}}
 condition: [all[current]!is[image]]
 
+\define lingo-base() $:/language/Buttons/Excise/
 \define toolbar-button-excise()
 <$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" selectedClass="tc-selected" tooltip={{$:/language/Buttons/Excise/Hint}} aria-label={{$:/language/Buttons/Excise/Caption}}>
 {{$:/core/images/format-excise}}
@@ -16,26 +17,26 @@ condition: [all[current]!is[image]]
 
 ''{{$:/language/Buttons/Excise/Hint}}''
 
-Title of new tiddler: <$edit-text tag="input" tiddler="""$(config-title)$/new-title""" default="New Tiddler Title" focus="true"/>
+<<lingo Caption/NewTitle>> <$edit-text tag="input" tiddler="""$(config-title)$/new-title""" default="New Tiddler Title" focus="true"/>
 
 <$set name="new-title" value={{$(config-title)$/new-title}}>
 <$list filter="""[<new-title>is[tiddler]]""">
 <div class="tc-error">
-Warning: tiddler already exists
+<<lingo Caption/TiddlerExists>>
 </div>
 </$list>
 </$set>
 
-<$checkbox tiddler="""$(config-title)$/tagnew""" field="text" checked="yes" unchecked="no" default="false"> Tag new tiddler with the title of this tiddler</$checkbox>
+<$checkbox tiddler="""$(config-title)$/tagnew""" field="text" checked="yes" unchecked="no" default="false"> <<lingo Caption/Tag>></$checkbox>
 
-Replace excised text with: <$select tiddler="""$(config-title)$/type""" default="transclude">
-<option value="link">link</option>
-<option value="transclude">transclusion</option>
-<option value="macro">macro call</option>
+<<lingo Caption/Replace>> <$select tiddler="""$(config-title)$/type""" default="transclude">
+<option value="link"><<lingo Caption/Replace/Link>></option>
+<option value="transclude"><<lingo Caption/Replace/Transclusion>></option>
+<option value="macro"><<lingo Caption/Replace/Macro>></option>
 </$select>
 
 <$reveal state="""$(config-title)$/type""" type="match" text="macro">
-Macro name: <$edit-text tag="input" tiddler="""$(config-title)$/macro-title""" default="translink"/>
+<<lingo Caption/MacroName>> <$edit-text tag="input" tiddler="""$(config-title)$/macro-title""" default="translink"/>
 </$reveal>
 
 <$button>
@@ -53,7 +54,7 @@ Macro name: <$edit-text tag="input" tiddler="""$(config-title)$/macro-title""" d
 <$action-deletetiddler
 	$tiddler="""$(config-title)$/popup"""
 />
-Perform excision
+<<lingo Caption/Excise>>
 </$button>
 
 </div>

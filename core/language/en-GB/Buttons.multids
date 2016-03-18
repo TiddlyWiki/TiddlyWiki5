@@ -95,8 +95,19 @@ Bold/Hint: Apply bold formatting to selection
 Clear/Caption: clear
 Clear/Hint: Clear image to solid colour
 EditorHeight/Caption: editor height
+EditorHeight/Caption/Auto: Automatically adjust height to fit content
+EditorHeight/Caption/Fixed: Fixed height:
 EditorHeight/Hint: Choose the height of the text editor
 Excise/Caption: excise
+Excise/Caption/Excise: Perform excision
+Excise/Caption/MacroName: Macro name:
+Excise/Caption/NewTitle: Title of new tiddler:
+Excise/Caption/Replace: Replace excised text with:
+Excise/Caption/Replace/Macro: macro
+Excise/Caption/Replace/Link: link
+Excise/Caption/Replace/Transclusion: transclusion
+Excise/Caption/Tag: Tag new tiddler with the title of this tiddler
+Excise/Caption/TiddlerExists: Warning: tiddler already exists
 Excise/Hint: Excise the selected text into a new tiddler
 Heading1/Caption: heading 1
 Heading1/Hint: Apply heading level 1 formatting to lines containing selection
@@ -135,6 +146,9 @@ Quote/Hint: Apply quoted text formatting to lines containing selection
 Redo/Caption: redo
 Redo/Hint: Redo the last action to be undone
 Size/Caption: image size
+Size/Caption/Height: Height:
+Size/Caption/Resize: Resize image
+Size/Caption/Width: Width:
 Size/Hint: Set image size
 Stamp/Caption: stamp
 Stamp/Hint: Insert a preconfigured snippet of text

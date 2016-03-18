@@ -5,6 +5,7 @@ caption: {{$:/language/Buttons/Size/Caption}}
 description: {{$:/language/Buttons/Size/Hint}}
 condition: [all[current]is[image]]
 
+\define lingo-base() $:/language/Buttons/Size/
 \define toolbar-button-size-preset()
 <$set name="width" filter="$(sizePair)$ +[first[]]">
 
@@ -46,7 +47,7 @@ condition: [all[current]is[image]]
 
 ''{{$:/language/Buttons/Size/Hint}}''
 
-Width: <$edit-text tag="input" tiddler="""$(config-title)$/new-width""" default=<<tv-bitmap-editor-width>> focus="true" size="8"/> Height: <$edit-text tag="input" tiddler="""$(config-title)$/new-height""" default=<<tv-bitmap-editor-height>> size="8"/> <$button popup="""$(config-title)$/presets-popup""" class="tc-btn-invisible tc-popup-keep" style="width: auto; display: inline-block; background-colour: inherit;" selectedClass="tc-selected">
+<<lingo Caption/Width>> <$edit-text tag="input" tiddler="""$(config-title)$/new-width""" default=<<tv-bitmap-editor-width>> focus="true" size="8"/> <<lingo Caption/Height>> <$edit-text tag="input" tiddler="""$(config-title)$/new-height""" default=<<tv-bitmap-editor-height>> size="8"/> <$button popup="""$(config-title)$/presets-popup""" class="tc-btn-invisible tc-popup-keep" style="width: auto; display: inline-block; background-colour: inherit;" selectedClass="tc-selected">
 {{$:/core/images/down-arrow}}
 </$button>
 
@@ -80,7 +81,7 @@ Width: <$edit-text tag="input" tiddler="""$(config-title)$/new-width""" default=
 <$action-deletetiddler
 	$tiddler="""$(config-title)$/popup"""
 />
-Resize image
+<<lingo Caption/Resize>>
 </$button>
 
 </div>

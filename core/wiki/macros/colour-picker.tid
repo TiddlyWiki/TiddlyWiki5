@@ -23,7 +23,7 @@ $actions$
 \end
 
 \define colour-picker-recent(actions)
-Recent:
+{{$:/language/ColourPicker/Recent}}
 <$list filter="[list[$:/config/ColourPicker/Recent]]" variable="recentColour">
 <$macrocall $name="colour-picker-recent-inner" actions="""$actions$"""/>
 \end
