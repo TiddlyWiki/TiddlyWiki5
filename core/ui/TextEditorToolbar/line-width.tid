@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/line-width
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-line-width}}
+icon: {{$:/core/images/line-width}}
 caption: {{$:/language/Buttons/LineWidth/Caption}}
 description: {{$:/language/Buttons/LineWidth/Hint}}
 condition: [all[current]is[image]]
@@ -37,7 +37,7 @@ condition: [all[current]is[image]]
 \end
 \define toolbar-line-width()
 <$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" selectedClass="tc-selected" tooltip={{$:/language/Buttons/LineWidth/Hint}} aria-label={{$:/language/Buttons/LineWidth/Caption}}>
-<$text text=<<current-line-width>>/> {{$:/core/images/format-line-width}}
+<$text text=<<current-line-width>>/> {{$:/core/images/line-width}}
 </$button>
 
 <$reveal state="""$(config-title)$/popup""" type="popup" position="below" animate="yes">

@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/italic
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-italic}}
+icon: {{$:/core/images/italic}}
 caption: {{$:/language/Buttons/Italic/Caption}}
 description: {{$:/language/Buttons/Italic/Hint}}
 condition: [all[current]!is[image]]
@@ -12,5 +12,5 @@ condition: [all[current]!is[image]]
 	prefix="//"
 	suffix="//"
 />
-{{$:/core/images/format-italic}}
+{{$:/core/images/italic}}
 </$button>

@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/list-bullet
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-list-bullet}}
+icon: {{$:/core/images/list-bullet}}
 caption: {{$:/language/Buttons/ListBullet/Caption}}
 description: {{$:/language/Buttons/ListBullet/Hint}}
 condition: [all[current]!is[image]]
@@ -12,5 +12,5 @@ condition: [all[current]!is[image]]
 	character="*"
 	count="1"
 />
-{{$:/core/images/format-list-bullet}}
+{{$:/core/images/list-bullet}}
 </$button>

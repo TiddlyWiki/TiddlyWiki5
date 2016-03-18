@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/paint
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-paint}}
+icon: {{$:/core/images/paint}}
 caption: {{$:/language/Buttons/Paint/Caption}}
 description: {{$:/language/Buttons/Paint/Hint}}
 condition: [all[current]is[image]]
@@ -12,7 +12,7 @@ condition: [all[current]is[image]]
 
 <span style="fill: $(colour-picker-value)$;">
 
-<$transclude tiddler="$:/core/images/format-paint" mode="inline"/>
+<$transclude tiddler="$:/core/images/paint" mode="inline"/>
 
 </span>
 

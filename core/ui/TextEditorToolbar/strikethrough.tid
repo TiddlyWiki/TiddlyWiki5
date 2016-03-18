@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/strikethrough
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-strikethrough}}
+icon: {{$:/core/images/strikethrough}}
 caption: {{$:/language/Buttons/Strikethrough/Caption}}
 description: {{$:/language/Buttons/Strikethrough/Hint}}
 condition: [all[current]!is[image]]
@@ -12,5 +12,5 @@ condition: [all[current]!is[image]]
 	prefix="~~"
 	suffix="~~"
 />
-{{$:/core/images/format-strikethrough}}
+{{$:/core/images/strikethrough}}
 </$button>

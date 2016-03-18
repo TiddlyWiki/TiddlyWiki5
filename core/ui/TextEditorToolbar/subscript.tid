@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/subscript
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-subscript}}
+icon: {{$:/core/images/subscript}}
 caption: {{$:/language/Buttons/Subscript/Caption}}
 description: {{$:/language/Buttons/Subscript/Hint}}
 condition: [all[current]!is[image]]
@@ -12,5 +12,5 @@ condition: [all[current]!is[image]]
 	prefix=",,"
 	suffix=",,"
 />
-{{$:/core/images/format-subscript}}
+{{$:/core/images/subscript}}
 </$button>

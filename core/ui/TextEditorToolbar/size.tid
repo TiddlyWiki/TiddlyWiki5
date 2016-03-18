@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/size
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-size}}
+icon: {{$:/core/images/size}}
 caption: {{$:/language/Buttons/Size/Caption}}
 description: {{$:/language/Buttons/Size/Hint}}
 condition: [all[current]is[image]]
@@ -38,7 +38,7 @@ condition: [all[current]is[image]]
 
 \define toolbar-button-size()
 <$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" selectedClass="tc-selected" tooltip={{$:/language/Buttons/Size/Hint}} aria-label={{$:/language/Buttons/Size/Caption}}>
-{{$:/core/images/format-size}}
+{{$:/core/images/size}}
 </$button>
 
 <$reveal tag="span" state="""$(config-title)$/popup""" type="popup" position="below" animate="yes">

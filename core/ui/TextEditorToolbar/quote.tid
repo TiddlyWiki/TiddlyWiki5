@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/quote
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-quote}}
+icon: {{$:/core/images/quote}}
 caption: {{$:/language/Buttons/Quote/Caption}}
 description: {{$:/language/Buttons/Quote/Hint}}
 condition: [all[current]!is[image]]
@@ -12,5 +12,5 @@ condition: [all[current]!is[image]]
 	prefix="<<<"
 	suffix="<<<"
 />
-{{$:/core/images/format-quote}}
+{{$:/core/images/quote}}
 </$button>

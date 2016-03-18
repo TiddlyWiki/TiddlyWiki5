@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/picture
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-picture}}
+icon: {{$:/core/images/picture}}
 caption: {{$:/language/Buttons/Picture/Caption}}
 description: {{$:/language/Buttons/Picture/Hint}}
 condition: [all[current]!is[image]]
@@ -25,7 +25,7 @@ condition: [all[current]!is[image]]
 \end
 \define toolbar-button-picture()
 <$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" selectedClass="tc-selected" tooltip={{$:/language/Buttons/Picture/Hint}} aria-label={{$:/language/Buttons/Picture/Caption}}>
-{{$:/core/images/format-picture}}
+{{$:/core/images/picture}}
 </$button>
 
 <$reveal state="""$(config-title)$/popup""" type="popup" position="below" animate="yes">

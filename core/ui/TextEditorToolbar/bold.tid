@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/bold
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-bold}}
+icon: {{$:/core/images/bold}}
 caption: {{$:/language/Buttons/Bold/Caption}}
 description: {{$:/language/Buttons/Bold/Hint}}
 condition: [all[current]!is[image]]
@@ -12,5 +12,5 @@ condition: [all[current]!is[image]]
 	prefix="''"
 	suffix="''"
 />
-{{$:/core/images/format-bold}}
+{{$:/core/images/bold}}
 </$button>

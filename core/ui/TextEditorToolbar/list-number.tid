@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/list-number
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-list-number}}
+icon: {{$:/core/images/list-number}}
 caption: {{$:/language/Buttons/ListNumber/Caption}}
 description: {{$:/language/Buttons/ListNumber/Hint}}
 condition: [all[current]!is[image]]
@@ -12,5 +12,5 @@ condition: [all[current]!is[image]]
 	character="#"
 	count="1"
 />
-{{$:/core/images/format-list-number}}
+{{$:/core/images/list-number}}
 </$button>

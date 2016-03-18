@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/mono-line
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-mono-line}}
+icon: {{$:/core/images/mono-line}}
 caption: {{$:/language/Buttons/MonoLine/Caption}}
 description: {{$:/language/Buttons/MonoLine/Hint}}
 condition: [all[current]!is[image]]
@@ -12,5 +12,5 @@ condition: [all[current]!is[image]]
 	prefix="`"
 	suffix="`"
 />
-{{$:/core/images/format-mono-line}}
+{{$:/core/images/mono-line}}
 </$button>

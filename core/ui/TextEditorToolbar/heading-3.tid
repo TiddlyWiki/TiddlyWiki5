@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/heading-3
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-heading-3}}
+icon: {{$:/core/images/heading-3}}
 caption: {{$:/language/Buttons/Heading3/Caption}}
 description: {{$:/language/Buttons/Heading3/Hint}}
 condition: [all[current]!is[image]]
@@ -12,5 +12,5 @@ condition: [all[current]!is[image]]
 	character="!"
 	count="3"
 />
-{{$:/core/images/format-heading-3}}
+{{$:/core/images/heading-3}}
 </$button>

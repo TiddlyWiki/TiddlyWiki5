@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/undo
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-undo}}
+icon: {{$:/core/images/undo}}
 caption: {{$:/language/Buttons/Undo/Caption}}
 description: {{$:/language/Buttons/Undo/Hint}}
 condition: [all[current]!is[image]]
@@ -10,5 +10,5 @@ condition: [all[current]!is[image]]
 	$message="tm-edit-text-operation"
 	$param="undo"
 />
-{{$:/core/images/format-undo}}
+{{$:/core/images/undo}}
 </$button>

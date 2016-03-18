@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/underline
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-underline}}
+icon: {{$:/core/images/underline}}
 caption: {{$:/language/Buttons/Underline/Caption}}
 description: {{$:/language/Buttons/Underline/Hint}}
 condition: [all[current]!is[image]]
@@ -12,5 +12,5 @@ condition: [all[current]!is[image]]
 	prefix="__"
 	suffix="__"
 />
-{{$:/core/images/format-underline}}
+{{$:/core/images/underline}}
 </$button>

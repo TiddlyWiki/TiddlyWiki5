@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/redo
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-redo}}
+icon: {{$:/core/images/redo}}
 caption: {{$:/language/Buttons/Redo/Caption}}
 description: {{$:/language/Buttons/Redo/Hint}}
 condition: [all[current]!is[image]]
@@ -10,5 +10,5 @@ condition: [all[current]!is[image]]
 	$message="tm-edit-text-operation"
 	$param="redo"
 />
-{{$:/core/images/format-redo}}
+{{$:/core/images/redo}}
 </$button>

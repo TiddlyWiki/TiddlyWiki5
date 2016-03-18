@@ -1,6 +1,6 @@
 title: $:/core/ui/TextEditorToolbar/heading-1
 tags: $:/tags/TextEditorToolbar
-icon: {{$:/core/images/format-heading-1}}
+icon: {{$:/core/images/heading-1}}
 caption: {{$:/language/Buttons/Heading1/Caption}}
 description: {{$:/language/Buttons/Heading1/Hint}}
 condition: [all[current]!is[image]]
@@ -12,5 +12,5 @@ condition: [all[current]!is[image]]
 	character="!"
 	count="1"
 />
-{{$:/core/images/format-heading-1}}
+{{$:/core/images/heading-1}}
 </$button>
