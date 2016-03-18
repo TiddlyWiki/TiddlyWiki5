@@ -13,8 +13,8 @@ Edit-bitmap widget
 "use strict";
 
 // Default image sizes
-var DEFAULT_IMAGE_WIDTH = 300,
-	DEFAULT_IMAGE_HEIGHT = 185;
+var DEFAULT_IMAGE_WIDTH = 600,
+	DEFAULT_IMAGE_HEIGHT = 370;
 
 // Configuration tiddlers
 var LINE_WIDTH_TITLE = "$:/config/BitmapEditor/LineWidth",
