@@ -24,6 +24,11 @@ var LINE_WIDTH_TITLE = "$:/config/BitmapEditor/LineWidth",
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var EditBitmapWidget = function(parseTreeNode,options) {
+	// Initialise the editor operations if they've not been done already
+	if(!this.editorOperations) {
+		EditBitmapWidget.prototype.editorOperations = {};
+		$tw.modules.applyMethods("bitmapeditoroperation",this.editorOperations);
+	}
 	this.initialise(parseTreeNode,options);
 };
 
@@ -88,28 +93,10 @@ EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 Handle an edit bitmap operation message from the toolbar
 */
 EditBitmapWidget.prototype.handleEditBitmapOperationMessage = function(event) {
-	// Perform the action
-	switch(event.param) {
-		case "clear":
-			var ctx = this.canvasDomNode.getContext("2d");
-			ctx.fillStyle = event.paramObject.colour || "white";
-			ctx.fillRect(0,0,this.canvasDomNode.width,this.canvasDomNode.height);
-			// Save changes
-			this.strokeEnd();
-			break;
-		case "resize":
-			// Get the new width
-			var newWidth = parseInt(event.paramObject.width || this.canvasDomNode.width,10),
-				newHeight = parseInt(event.paramObject.height || this.canvasDomNode.height,10);
-			// Update if necessary
-			if(newWidth > 0 && newHeight > 0 && !(newWidth === this.currCanvas.width && newHeight === this.currCanvas.height)) {
-				this.changeCanvasSize(newWidth,newHeight);
-			}
-			// Update the input controls
-			this.refreshToolbar();
-			// Save the image into the tiddler
-			this.saveChanges();
-			break;
+	// Invoke the handler
+	var handler = this.editorOperations[event.param];
+	if(handler) {
+		handler.call(this,event);
 	}
 };
 

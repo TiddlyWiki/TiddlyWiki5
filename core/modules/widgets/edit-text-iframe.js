@@ -21,6 +21,11 @@ var HEIGHT_MODE_TITLE = "$:/config/TextEditor/EditorHeight/Mode",
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var EditTextIframeWidget = function(parseTreeNode,options) {
+	// Initialise the editor operations if they've not been done already
+	if(!this.editorOperations) {
+		EditTextIframeWidget.prototype.editorOperations = {};
+		$tw.modules.applyMethods("texteditoroperation",this.editorOperations);
+	}
 	this.initialise(parseTreeNode,options);
 };
 
@@ -67,9 +72,10 @@ EditTextIframeWidget.prototype.render = function(parent,nextSibling) {
 	// Style the iframe
 	this.iframeNode.className = this.dummyTextArea.className;
 	this.iframeNode.style.border = "none";
+	this.iframeNode.style.padding = "0";
+	this.iframeNode.style.resize = "none";
 	iframeDoc.body.style.margin = "0";
 	iframeDoc.body.style.padding = "0";
-	this.iframeNode.style.resize = "none";
 	this.domNodes.push(this.iframeNode);
 	// Create the textarea
 	this.iframeTextArea = iframeDoc.createElement("textarea");
@@ -122,188 +128,45 @@ EditTextIframeWidget.prototype.render = function(parent,nextSibling) {
 Handle an edit text operation message from the toolbar
 */
 EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) {
-	// Get the current text
-	var text = this.iframeTextArea.value,
-		selStart = this.iframeTextArea.selectionStart,
-		selEnd = this.iframeTextArea.selectionEnd,
-		selection = text.substring(selStart,selEnd),
-		cutStart,
-		cutEnd,
-		replacement,
-		newSelStart,
-		newSelEnd;
-	// Perform the required action
-	switch(event.param) {
-		case "prefix-lines":
-			// Cut just past the preceding line break, or the start of the text
-			cutStart = this.findPrecedingLineBreak(text,selStart);
-			// Cut to just past the following line break, or to the end of the text
-			cutEnd = this.findFollowingLineBreak(text,selEnd);
-			// Process each line
-			var lines = text.substring(cutStart,cutEnd).split(/\r?\n/mg);
-			$tw.utils.each(lines,function(line,index) {
-				// Compose the required prefix
-				var prefix = event.paramObject.character.repeat(event.paramObject.count);
-				// Check if we already have the required prefix
-				if(line.substring(0,prefix.length) === prefix) {
-					// If so, remove the prefix
-					line = line.substring(prefix.length);
-					// Remove any whitespace
-					while(line.charAt(0) === " ") {
-						line = line.substring(1);
-					}
-				} else {
-					// If we didn't have the prefix, remove any existing prefix characters
-					while(line.charAt(0) === event.paramObject.character) {
-						line = line.substring(1);
-					}
-					// Remove any whitespace
-					while(line.charAt(0) === " ") {
-						line = line.substring(1);
-					}
-					// Apply the prefix
-					line =  prefix + " " + line;
-				}
-				// Save the modified line
-				lines[index] = line;
-			});
-			// Stitch the replacement text together and set the selection
-			replacement = lines.join("\n");
-			if(lines.length === 1) {
-				newSelStart = cutStart + replacement.length;
-				newSelEnd = newSelStart;
-			} else {
-				newSelStart = cutStart;
-				newSelEnd = newSelStart + replacement.length;
-			}
-			break;
-		case "replace-all":
-			cutStart = 0;
-			cutEnd = text.length;
-			replacement = event.paramObject.text;
-			newSelStart = 0;
-			newSelEnd = replacement.length;
-			break;
-		case "wrap-selection":
-			if(selStart === selEnd) {
-				// No selection; check if we're within the prefix/suffix
-				if(text.substring(selStart - event.paramObject.prefix.length,selStart + event.paramObject.suffix.length) === event.paramObject.prefix + event.paramObject.suffix) {
-					// Remove the prefix and suffix unless they comprise the entire text
-					if(selStart > event.paramObject.prefix.length || (selEnd + event.paramObject.suffix.length) < text.length ) {
-						cutStart = selStart - event.paramObject.prefix.length;
-						cutEnd = selEnd + event.paramObject.suffix.length;
-						replacement = "";
-						newSelStart = cutStart;
-						newSelEnd = newSelStart;
-					}
-				} else {
-					// Wrap the cursor instead
-					cutStart = selStart;
-					cutEnd = selEnd;
-					replacement = event.paramObject.prefix + event.paramObject.suffix;
-					newSelStart = selStart + event.paramObject.prefix.length;
-					newSelEnd = newSelStart;
-				}
-			} else if(text.substring(selStart,selStart + event.paramObject.prefix.length) === event.paramObject.prefix && text.substring(selEnd - event.paramObject.suffix.length,selEnd) === event.paramObject.suffix) {
-				// Prefix and suffix are already present, so remove them
-				cutStart = selStart;
-				cutEnd = selEnd;
-				replacement = selection.substring(event.paramObject.prefix.length,selection.length - event.paramObject.suffix.length);
-				newSelStart = selStart;
-				newSelEnd = selStart + replacement.length;
-			} else {
-				// Add the prefix and suffix
-				cutStart = selStart;
-				cutEnd = selEnd;
-				replacement = event.paramObject.prefix + selection + event.paramObject.suffix;
-				newSelStart = selStart;
-				newSelEnd = selStart + replacement.length;
-			}
-			break;
-		case "wrap-lines":
-			// Cut just past the preceding line break, or the start of the text
-			cutStart = this.findPrecedingLineBreak(text,selStart);
-			// Cut to just past the following line break, or to the end of the text
-			cutEnd = this.findFollowingLineBreak(text,selEnd);
-			// Add the prefix and suffix
-			replacement = event.paramObject.prefix + "\n" +
-						text.substring(cutStart,cutEnd) + "\n" +
-						event.paramObject.suffix + "\n";
-			newSelStart = cutStart + event.paramObject.prefix.length + 1;
-			newSelEnd = newSelStart + (cutEnd - cutStart);
-			break;
-		case "replace-selection":
-			replacement = event.paramObject.text;
-			cutStart = selStart;
-			cutEnd = selEnd;
-			newSelStart = selStart;
-			newSelEnd = selStart + replacement.length;
-			break;
-		case "excise":
-			var editTiddler = this.wiki.getTiddler(this.editTitle),
-				editTiddlerTitle = this.editTitle;
-			if(editTiddler && editTiddler.fields["draft.of"]) {
-				editTiddlerTitle = editTiddler.fields["draft.of"];
-			}
-			var excisionTitle = event.paramObject.title || "New Excision";
-			this.wiki.addTiddler(new $tw.Tiddler(
-				this.wiki.getCreationFields(),
-				this.wiki.getModificationFields(),
-				{
-					title: excisionTitle,
-					text: selection,
-					tags: event.paramObject.tagnew === "yes" ?  [editTiddlerTitle] : []
-				}
-			));
-			replacement = excisionTitle;
-			switch(event.paramObject.type || "transclude") {
-				case "transclude":
-					replacement = "{{" + replacement+ "}}";
-					break;
-				case "link":
-					replacement = "[[" + replacement+ "]]";
-					break;
-				case "macro":
-					replacement = "<<" + (event.paramObject.macro || "translink") + " \"\"\"" + replacement + "\"\"\">>";
-					break;
-			}
-			cutStart = selStart;
-			cutEnd = selEnd;
-			newSelStart = selStart;
-			newSelEnd = selStart + replacement.length;
-			break;
-		case "undo":
-			this.iframeNode.focus();
-			this.iframeTextArea.focus();
-			this.document.execCommand("undo", false, null);
-			break;
-		case "redo":
-			this.iframeNode.focus();
-			this.iframeTextArea.focus();
-			this.document.execCommand("redo", false, null);
-			break;
+	// Prepare information about the operation
+	var operation = {
+		text: this.iframeTextArea.value,
+		selStart: this.iframeTextArea.selectionStart,
+		selEnd: this.iframeTextArea.selectionEnd,
+		cutStart: null,
+		cutEnd: null,
+		replacement: null,
+		newSelStart: null,
+		newSelEnd: null
+	};
+	operation.selection = operation.text.substring(operation.selStart,operation.selEnd);
+	// Invoke the handler
+	var handler = this.editorOperations[event.param];
+	if(handler) {
+		handler.call(this,event,operation);
 	}
 	// Perform the required changes to the text area and the underlying tiddler
-	if(replacement !== undefined) {
+	if(operation.replacement !== null) {
 		// Work around the problem that textInput can't be used directly to delete text without also replacing it with a non-zero length string
-		if(replacement === "") {
-			replacement = text.substring(0,cutStart) + text.substring(cutEnd)
-			cutStart = 0;
-			cutEnd = text.length;
+		if(operation.replacement === "") {
+			operation.replacement = operation.text.substring(0,operation.cutStart) + operation.text.substring(operation.cutEnd)
+			operation.cutStart = 0;
+			operation.cutEnd = operation.text.length;
 		}
-		var newText = text.substring(0,cutStart) + replacement + text.substring(cutEnd),
+		var newText = operation.text.substring(0,operation.cutStart) + operation.replacement + operation.text.substring(operation.cutEnd),
 			textEvent = this.document.createEvent("TextEvent");
 		if(textEvent.initTextEvent) {
-			textEvent.initTextEvent("textInput", true, true, null, replacement, 9, "en-US");
+			textEvent.initTextEvent("textInput", true, true, null, operation.replacement, 9, "en-US");
 			this.iframeTextArea.focus();
-			this.iframeTextArea.setSelectionRange(cutStart,cutEnd);
+			this.iframeTextArea.setSelectionRange(operation.cutStart,operation.cutEnd);
 			this.iframeTextArea.dispatchEvent(textEvent);
 		} else {
 			this.iframeTextArea.value = newText;
 		}
 		this.iframeNode.focus();
-		this.iframeTextArea.setSelectionRange(newSelStart,newSelEnd);
+		this.iframeTextArea.setSelectionRange(operation.newSelStart,operation.newSelEnd);
 	}
+	// Fix the tiddler height and save changes
 	this.iframeTextArea.focus();
 	this.fixHeight();
 	this.saveChanges(newText);
