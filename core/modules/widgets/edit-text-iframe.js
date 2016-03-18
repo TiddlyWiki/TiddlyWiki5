@@ -114,8 +114,7 @@ EditTextIframeWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Add widget message listeners
 	this.addEventListeners([
-		{type: "tm-edit-text-operation", handler: "handleEditTextOperationMessage"},
-		{type: "tm-edit-text-command", handler: "handleEditTextCommandMessage"}
+		{type: "tm-edit-text-operation", handler: "handleEditTextOperationMessage"}
 	]);
 };
 
@@ -273,6 +272,16 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 			newSelStart = selStart;
 			newSelEnd = selStart + replacement.length;
 			break;
+		case "undo":
+			this.iframeNode.focus();
+			this.iframeTextArea.focus();
+			this.document.execCommand("undo", false, null);
+			break;
+		case "redo":
+			this.iframeNode.focus();
+			this.iframeTextArea.focus();
+			this.document.execCommand("redo", false, null);
+			break;
 	}
 	// Perform the required changes to the text area and the underlying tiddler
 	if(replacement !== undefined) {
@@ -300,24 +309,6 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 	this.saveChanges(newText);
 };
 
-/*
-Handle an edit text command message from the toolbar
-*/
-EditTextIframeWidget.prototype.handleEditTextCommandMessage = function(event) {
-	var commandName = event.param;
-	switch(commandName) {
-		case "undo":
-			this.iframeNode.focus();
-			this.iframeTextArea.focus();
-			this.document.execCommand("undo", false, null);
-			break;
-		case "redo":
-			this.iframeNode.focus();
-			this.iframeTextArea.focus();
-			this.document.execCommand("redo", false, null);
-			break;
-	}
-};
 /*
 Helper to find the line break preceding a given position in a string
 Returns position immediately after that line break, or the start of the string

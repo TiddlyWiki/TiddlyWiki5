@@ -7,7 +7,7 @@ condition: [all[current]!is[image]]
 
 <$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Redo/Hint}} aria-label={{$:/language/Buttons/Redo/Caption}}>
 <$action-sendmessage
-	$message="tm-edit-text-command"
+	$message="tm-edit-text-operation"
 	$param="redo"
 />
 {{$:/core/images/format-redo}}
