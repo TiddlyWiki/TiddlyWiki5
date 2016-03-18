@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/editor-height
+title: $:/core/ui/EditorToolbar/editor-height
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/fixed-height}}
 caption: {{$:/language/Buttons/EditorHeight/Caption}}

@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/list-number
+title: $:/core/ui/EditorToolbar/list-number
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/list-number}}
 caption: {{$:/language/Buttons/ListNumber/Caption}}

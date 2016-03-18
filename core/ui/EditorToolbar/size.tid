@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/size
+title: $:/core/ui/EditorToolbar/size
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/size}}
 caption: {{$:/language/Buttons/Size/Caption}}

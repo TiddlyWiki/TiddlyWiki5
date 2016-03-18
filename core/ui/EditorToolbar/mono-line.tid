@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/mono-line
+title: $:/core/ui/EditorToolbar/mono-line
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/mono-line}}
 caption: {{$:/language/Buttons/MonoLine/Caption}}

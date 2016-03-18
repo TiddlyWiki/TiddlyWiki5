@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/list-bullet
+title: $:/core/ui/EditorToolbar/list-bullet
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/list-bullet}}
 caption: {{$:/language/Buttons/ListBullet/Caption}}

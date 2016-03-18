@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/heading-4
+title: $:/core/ui/EditorToolbar/heading-4
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/heading-4}}
 caption: {{$:/language/Buttons/Heading4/Caption}}

@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/strikethrough
+title: $:/core/ui/EditorToolbar/strikethrough
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/strikethrough}}
 caption: {{$:/language/Buttons/Strikethrough/Caption}}

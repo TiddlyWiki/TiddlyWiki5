@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/more
+title: $:/core/ui/EditorToolbar/more
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/down-arrow}}
 caption: {{$:/language/Buttons/More/Caption}}
@@ -19,7 +19,7 @@ $:/config/EditorToolbarButtons/Visibility/$(listItem)$
 
 <div class="tc-drop-down tc-text-editor-toolbar-more">
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/TextEditorToolbar]!has[draft.of]] -[[$:/core/ui/TextEditorToolbar/more]]" variable="listItem">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]] -[[$:/core/ui/TextEditorToolbar/more]]" variable="listItem">
 <$reveal type="match" state=<<config-title>> text="hide">
 <div>
 <<conditional-button>>

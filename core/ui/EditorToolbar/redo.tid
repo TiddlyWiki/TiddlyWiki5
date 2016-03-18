@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/redo
+title: $:/core/ui/EditorToolbar/redo
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/redo}}
 caption: {{$:/language/Buttons/Redo/Caption}}

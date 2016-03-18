@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/subscript
+title: $:/core/ui/EditorToolbar/subscript
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/subscript}}
 caption: {{$:/language/Buttons/Subscript/Caption}}

@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/bold
+title: $:/core/ui/EditorToolbar/bold
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/bold}}
 caption: {{$:/language/Buttons/Bold/Caption}}

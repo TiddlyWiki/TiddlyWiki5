@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/line-width
+title: $:/core/ui/EditorToolbar/line-width
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/line-width}}
 caption: {{$:/language/Buttons/LineWidth/Caption}}

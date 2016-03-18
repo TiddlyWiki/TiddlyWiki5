@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/stamp
+title: $:/core/ui/EditorToolbar/stamp
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/stamp}}
 caption: {{$:/language/Buttons/Stamp/Caption}}

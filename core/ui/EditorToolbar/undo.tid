@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/undo
+title: $:/core/ui/EditorToolbar/undo
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/undo}}
 caption: {{$:/language/Buttons/Undo/Caption}}

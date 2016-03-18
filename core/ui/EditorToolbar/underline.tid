@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/underline
+title: $:/core/ui/EditorToolbar/underline
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/underline}}
 caption: {{$:/language/Buttons/Underline/Caption}}

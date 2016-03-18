@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/excise
+title: $:/core/ui/EditorToolbar/excise
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/excise}}
 caption: {{$:/language/Buttons/Excise/Caption}}

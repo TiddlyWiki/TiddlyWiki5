@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/opacity
+title: $:/core/ui/EditorToolbar/opacity
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/opacity}}
 caption: {{$:/language/Buttons/Opacity/Caption}}

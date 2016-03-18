@@ -1,4 +1,4 @@
-title: $:/core/ui/TextEditorToolbar/clear
+title: $:/core/ui/EditorToolbar/clear
 tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/erase}}
 caption: {{$:/language/Buttons/Clear/Caption}}
