@@ -93,6 +93,7 @@ EditTextIframeWidget.prototype.render = function(parent,nextSibling) {
 	this.iframeTextArea.style.width = "100%";
 	// Add event listeners for the textarea
 	$tw.utils.addEventListeners(this.iframeTextArea,[
+		{name: "keydown", handlerObject: this, handlerMethod: "handleKeydownEvent"},
 		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"}
 	]);
 	// Put the text in the textarea, and insert it into the DOM
@@ -518,6 +519,34 @@ EditTextIframeWidget.prototype.handleInputEvent = function(event) {
 	this.saveChanges(this.iframeTextArea.value);
 	this.fixHeight();
 	return true;
+};
+
+/*
+Handle a dom "keydown" event, which we'll bubble up to our container for the keyboard widgets benefit
+*/
+EditTextIframeWidget.prototype.handleKeydownEvent = function(event) {
+	var newEvent = this.document.createEventObject ? this.document.createEventObject() : this.document.createEvent("Events");
+	if(newEvent.initEvent) {
+		newEvent.initEvent("keydown", true, true);
+	}
+	newEvent.keyCode = event.keyCode;
+	newEvent.which = event.which;
+	newEvent.metaKey = event.metaKey;
+	newEvent.ctrlKey = event.ctrlKey;
+	newEvent.altKey = event.altKey;
+	newEvent.shiftKey = event.shiftKey;
+	if(!this.parentDomNode.dispatchEvent(newEvent)) {
+		event.preventDefault();
+		event.stopPropagation();
+		return true;
+	}
+	return false;
+};
+
+/*
+Forward a dom "keydown" event from the iframe to the parent of the widget
+*/
+EditTextIframeWidget.prototype.forwardKeydownEvent = function(event) {
 };
 
 EditTextIframeWidget.prototype.saveChanges = function(text) {
