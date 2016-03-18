@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/superscript
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/superscript}}
 caption: {{$:/language/Buttons/Superscript/Caption}}
 description: {{$:/language/Buttons/Superscript/Hint}}

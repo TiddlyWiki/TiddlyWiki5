@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/stamp
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/stamp}}
 caption: {{$:/language/Buttons/Stamp/Caption}}
 description: {{$:/language/Buttons/Stamp/Hint}}

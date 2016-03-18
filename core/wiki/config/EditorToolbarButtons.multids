@@ -1,4 +1,4 @@
-title: $:/config/TextEditorToolbarButtons/Visibility/$:/
+title: $:/config/EditorToolbarButtons/Visibility/$:/
 
 core/ui/TextEditorToolbar/heading-4: hide
 core/ui/TextEditorToolbar/heading-5: hide

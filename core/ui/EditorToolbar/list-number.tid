@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/list-number
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/list-number}}
 caption: {{$:/language/Buttons/ListNumber/Caption}}
 description: {{$:/language/Buttons/ListNumber/Hint}}

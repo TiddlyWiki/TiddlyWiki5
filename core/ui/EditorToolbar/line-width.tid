@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/line-width
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/line-width}}
 caption: {{$:/language/Buttons/LineWidth/Caption}}
 description: {{$:/language/Buttons/LineWidth/Hint}}

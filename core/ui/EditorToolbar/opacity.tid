@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/opacity
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/opacity}}
 caption: {{$:/language/Buttons/Opacity/Caption}}
 description: {{$:/language/Buttons/Opacity/Hint}}

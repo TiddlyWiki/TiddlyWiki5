@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/mono-line
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/mono-line}}
 caption: {{$:/language/Buttons/MonoLine/Caption}}
 description: {{$:/language/Buttons/MonoLine/Hint}}

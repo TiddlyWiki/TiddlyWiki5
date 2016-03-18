@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/preview
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/preview}}
 caption: {{$:/language/Buttons/Preview/Caption}}
 description: {{$:/language/Buttons/Preview/Hint}}

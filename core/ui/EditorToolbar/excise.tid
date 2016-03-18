@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/excise
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/excise}}
 caption: {{$:/language/Buttons/Excise/Caption}}
 description: {{$:/language/Buttons/Excise/Hint}}

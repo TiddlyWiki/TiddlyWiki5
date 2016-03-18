@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/list-bullet
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/list-bullet}}
 caption: {{$:/language/Buttons/ListBullet/Caption}}
 description: {{$:/language/Buttons/ListBullet/Hint}}

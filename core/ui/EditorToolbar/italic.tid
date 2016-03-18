@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/italic
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/italic}}
 caption: {{$:/language/Buttons/Italic/Caption}}
 description: {{$:/language/Buttons/Italic/Hint}}

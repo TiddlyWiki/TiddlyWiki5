@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/subscript
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/subscript}}
 caption: {{$:/language/Buttons/Subscript/Caption}}
 description: {{$:/language/Buttons/Subscript/Hint}}

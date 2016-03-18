@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/bold
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/bold}}
 caption: {{$:/language/Buttons/Bold/Caption}}
 description: {{$:/language/Buttons/Bold/Hint}}

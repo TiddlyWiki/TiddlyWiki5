@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/undo
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/undo}}
 caption: {{$:/language/Buttons/Undo/Caption}}
 description: {{$:/language/Buttons/Undo/Hint}}

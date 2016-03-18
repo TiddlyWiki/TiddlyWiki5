@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/clear
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/erase}}
 caption: {{$:/language/Buttons/Clear/Caption}}
 description: {{$:/language/Buttons/Clear/Hint}}

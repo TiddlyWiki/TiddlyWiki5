@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/size
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/size}}
 caption: {{$:/language/Buttons/Size/Caption}}
 description: {{$:/language/Buttons/Size/Hint}}

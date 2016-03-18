@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/strikethrough
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/strikethrough}}
 caption: {{$:/language/Buttons/Strikethrough/Caption}}
 description: {{$:/language/Buttons/Strikethrough/Hint}}

@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/more
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/down-arrow}}
 caption: {{$:/language/Buttons/More/Caption}}
 description: {{$:/language/Buttons/More/Hint}}

@@ -1,5 +1,5 @@
 title: $:/core/ui/TextEditorToolbar/heading-1
-tags: $:/tags/TextEditorToolbar
+tags: $:/tags/EditorToolbar
 icon: {{$:/core/images/heading-1}}
 caption: {{$:/language/Buttons/Heading1/Caption}}
 description: {{$:/language/Buttons/Heading1/Hint}}

@@ -3,7 +3,7 @@ tags: $:/tags/EditTemplate
 
 \define lingo-base() $:/language/EditTemplate/Body/
 \define config-visibility-title()
-$:/config/TextEditorToolbarButtons/Visibility/$(listItem)$
+$:/config/EditorToolbarButtons/Visibility/$(listItem)$
 \end
 <$list filter="[is[current]has[_canonical_uri]]">
 
