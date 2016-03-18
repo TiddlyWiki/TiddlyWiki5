@@ -19,7 +19,7 @@ $:/config/EditorToolbarButtons/Visibility/$(listItem)$
 
 <div class="tc-drop-down tc-text-editor-toolbar-more">
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]] -[[$:/core/ui/TextEditorToolbar/more]]" variable="listItem">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]] -[[$:/core/ui/EditorToolbar/more]]" variable="listItem">
 <$reveal type="match" state=<<config-title>> text="hide">
 <div>
 <<conditional-button>>
