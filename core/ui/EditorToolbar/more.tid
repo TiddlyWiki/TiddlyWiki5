@@ -6,7 +6,7 @@ description: {{$:/language/Buttons/More/Hint}}
 condition: [all[current]]
 
 \define config-title()
-$:/config/TextEditorToolbarButtons/Visibility/$(listItem)$
+$:/config/EditorToolbarButtons/Visibility/$(listItem)$
 \end
 \define conditional-button()
 <$list filter={{$(listItem)$!!condition}}>
