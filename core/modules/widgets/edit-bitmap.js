@@ -306,7 +306,7 @@ EditBitmapWidget.prototype.saveChanges = function() {
 	var tiddler = this.wiki.getTiddler(this.editTitle);
 	if(tiddler) {
 		// data URIs look like "data:<type>;base64,<text>"
-		var dataURL = this.canvasDomNode.toDataURL(tiddler.fields.type,1.0),
+		var dataURL = this.canvasDomNode.toDataURL(tiddler.fields.type),
 			posColon = dataURL.indexOf(":"),
 			posSemiColon = dataURL.indexOf(";"),
 			posComma = dataURL.indexOf(","),
