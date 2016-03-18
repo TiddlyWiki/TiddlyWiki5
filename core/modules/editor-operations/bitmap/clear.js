@@ -14,6 +14,7 @@ Bitmap editor operation to clear the image
 
 exports["clear"] = function(event) {
 	var ctx = this.canvasDomNode.getContext("2d");
+	ctx.globalAlpha = 1;
 	ctx.fillStyle = event.paramObject.colour || "white";
 	ctx.fillRect(0,0,this.canvasDomNode.width,this.canvasDomNode.height);
 	// Save changes
