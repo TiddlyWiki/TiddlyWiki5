@@ -151,7 +151,10 @@ Size/Caption/Resize: 调整图像的大小
 Size/Caption/Width: 宽度：
 Size/Hint: 设置图像的大小
 Stamp/Caption: 印记
+Stamp/Caption/New: 添加您自己的
 Stamp/Hint: 插入一个预配置的文本片段
+Stamp/New/Title: 在选单中显示的標題
+Stamp/New/Text: 片段的文本。（记得在 `caption` 栏位中添加一个说明性的标题）。
 Strikethrough/Caption: 删除线
 Strikethrough/Hint: 套用删除线格式于所选文本
 Subscript/Caption: 下标
