@@ -41,6 +41,6 @@ title: $:/core/ui/SideBarLists
 
 </$set>
 
-<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/SideBar]!has[draft.of]]" default={{$:/config/DefaultSidebarTab}} state="$:/state/tab/sidebar" />
+<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/SideBar]!has[draft.of]]" default={{$:/config/DefaultSidebarTab}} state="$:/state/tab/sidebar" tabsEpilog="[all[shadows+tiddlers]tag[$:/tags/SideBarEpilog]!has[draft.of]]"/>
 
 </div>
