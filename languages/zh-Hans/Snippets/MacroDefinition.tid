@@ -3,6 +3,6 @@ tags: $:/tags/TextEditor/Snippet
 caption: 宏的定义
 mode: wikified
 
-\define macroName(param1:"default value",param2)
+\define macroName(param1:"默认值",param2)
 宏的内容
 \end
