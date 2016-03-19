@@ -62,6 +62,8 @@ NewJournal/Caption: 添加日志
 NewJournal/Hint: 创建一个新的日志条目
 NewJournalHere/Caption: 添加子日志
 NewJournalHere/Hint: 创建一个标签含此条目名称的新日志条目
+NewImage/Caption: 添加图像
+NewImage/Hint: 创建一个新的图像条目
 NewTiddler/Caption: 添加条目
 NewTiddler/Hint: 创建一个新的条目
 OpenWindow/Caption: 开启于新窗口
@@ -93,8 +95,19 @@ Bold/Hint: 套用粗体格式于所选文本
 Clear/Caption: 清除
 Clear/Hint: 清除图像为纯色
 EditorHeight/Caption: 编辑器高度
+EditorHeight/Caption/Auto: 自动调整高度以适合内容
+EditorHeight/Caption/Fixed: 固定高度︰
 EditorHeight/Hint: 选择文本编辑器的高度
 Excise/Caption: 剪切
+Excise/Caption/Excise: 执行剪切
+Excise/Caption/MacroName: 宏的名称︰
+Excise/Caption/NewTitle: 新条目的名称︰
+Excise/Caption/Replace: 替换剪切的文本为：
+Excise/Caption/Replace/Macro: 宏
+Excise/Caption/Replace/Link: 链接
+Excise/Caption/Replace/Transclusion: 嵌入
+Excise/Caption/Tag: 将新条目的标签设为此条目的名称
+Excise/Caption/TiddlerExists: 警示：条目已经存在
 Excise/Hint: 剪切所选文本到一个新条目
 Heading1/Caption: 标题 1
 Heading1/Hint: 套用标题级别 1 的格式于包含所选文本的列
@@ -133,6 +146,9 @@ Quote/Hint: 套用引言文本格式于包含所选文本的列
 Redo/Caption: 恢复
 Redo/Hint: 恢复上一次撤销的操作
 Size/Caption: 图像大小
+Size/Caption/Height: 高度︰
+Size/Caption/Resize: 调整图像的大小
+Size/Caption/Width: 宽度：
 Size/Hint: 设置图像的大小
 Stamp/Caption: 印记
 Stamp/Hint: 插入一个预配置的文本片段
