@@ -130,8 +130,8 @@ Toolbars/EditToolbar/Hint: 选择将显示哪些按钮于条目的编辑模式�
 Toolbars/Hint: 选择将显示哪些工具栏按钮
 Toolbars/PageControls/Caption: 页面工具栏
 Toolbars/PageControls/Hint: 选择将显示哪些按钮于主页面的工具栏
-Toolbars/TextEditorToolbar/Caption: 文本编辑器工具栏
-Toolbars/TextEditorToolbar/Hint: 选择将显示哪些按钮于文本编辑器工具栏。请注意，某些按钮只会出现在编辑某一类型的条目时。
+Toolbars/EditorToolbar/Caption: 编辑器工具栏
+Toolbars/EditorToolbar/Hint: 选择将显示哪些按钮于编辑器工具栏。请注意，某些按钮只会出现在编辑某一类型的条目时。
 Toolbars/ViewToolbar/Caption: 查看工具栏
 Toolbars/ViewToolbar/Hint: 选择将显示哪些按钮于条目的查看模式工具栏
 Tools/Download/Full/Caption: 下载完整副本
