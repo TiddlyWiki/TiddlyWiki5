@@ -5,6 +5,7 @@ caption: {{$:/language/Buttons/Stamp/Caption}}
 description: {{$:/language/Buttons/Stamp/Hint}}
 condition: [all[current]!is[image]]
 
+\define lingo-base() $:/language/Buttons/Stamp/
 \define toolbar-button-stamp-inner()
 <$button tag="a">
 
@@ -49,13 +50,13 @@ condition: [all[current]!is[image]]
 <$action-sendmessage
 	$message="tm-new-tiddler"
 	tags="$:/tags/TextEditor/Snippet"
-	caption="Name as shown in menu"
-	text="Text of snippet"
+	caption={{$:/language/Buttons/Stamp/New/Title}}
+	text={{$:/language/Buttons/Stamp/New/Text}}
 />
 
 <em>
 
-<$text text="Add your own"/>
+<$text text={{$:/language/Buttons/Stamp/Caption/New}}/>
 
 </em>
 
