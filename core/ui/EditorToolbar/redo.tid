@@ -1,14 +1,11 @@
 title: $:/core/ui/EditorToolbar/redo
 tags: $:/tags/EditorToolbar
-icon: {{$:/core/images/redo}}
+icon: $:/core/images/redo
 caption: {{$:/language/Buttons/Redo/Caption}}
 description: {{$:/language/Buttons/Redo/Hint}}
-condition: [all[current]!is[image]]
+condition: [<targetTiddler>!is[image]]
 
-<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Redo/Hint}} aria-label={{$:/language/Buttons/Redo/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="redo"
 />
-{{$:/core/images/redo}}
-</$button>

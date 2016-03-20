@@ -1,47 +1,9 @@
 title: $:/core/ui/EditorToolbar/picture
 tags: $:/tags/EditorToolbar
-icon: {{$:/core/images/picture}}
+icon: $:/core/images/picture
 caption: {{$:/language/Buttons/Picture/Caption}}
 description: {{$:/language/Buttons/Picture/Hint}}
-condition: [all[current]!is[image]]
+condition: [<targetTiddler>!is[image]]
+shortcuts: ((picture))
+dropdown: $:/core/ui/EditorToolbar/picture-dropdown
 
-\define toolbar-button-picture-inner()
-<$button tag="a" tooltip="""$(pictureTitle)$""">
-
-<$action-sendmessage
-	$message="tm-edit-text-operation"
-	$param="replace-selection"
-	text="[img[$(pictureTitle)$]]"
-	mode={{$(pictureTitle!!mode)$}}
-/>
-
-<$action-deletetiddler
-	$tiddler="""$(config-title)$/popup"""
-/>
-
-<$transclude tiddler=<<pictureTitle>>/>
-
-</$button>
-\end
-\define toolbar-button-picture()
-<$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" selectedClass="tc-selected" tooltip={{$:/language/Buttons/Picture/Hint}} aria-label={{$:/language/Buttons/Picture/Caption}}>
-{{$:/core/images/picture}}
-</$button>
-
-<$reveal state="""$(config-title)$/popup""" type="popup" position="below" animate="yes">
-
-<div class="tc-drop-down tc-picture-chooser tc-popup-keep">
-
-<$list filter="[all[shadows+tiddlers]is[image]!has[draft.of]] -[type[application/pdf]] +[sort[title]]" variable="pictureTitle">
-
-<<toolbar-button-picture-inner>>
-
-</$list>
-
-</div>
-
-</$reveal>
-\end
-<$set name="config-title" value=<<qualify "$:/state/edit-toolbar/picture">>>
-<<toolbar-button-picture>>
-</$set>

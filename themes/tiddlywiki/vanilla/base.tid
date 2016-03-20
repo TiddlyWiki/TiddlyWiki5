@@ -971,11 +971,18 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-edit-text-iframe-toolbar button {
+	vertical-align: middle;
 	background-color: <<colour tiddler-controls-foreground>>;
 	fill: <<colour tiddler-controls-foreground-selected>>;
     border-radius: 4px;
     padding: 3px;
     margin: 2px 0;
+}
+
+.tc-edit-text-iframe-toolbar button.tc-text-editor-toolbar-item-adjunct {
+    margin-left: -4px;
+    width: 1em;
+    border-radius: 8px;	
 }
 
 .tc-edit-text-iframe-toolbar button.tc-selected {
@@ -996,7 +1003,7 @@ html body.tc-body.tc-single-tiddler-window {
 	white-space: normal;
 }
 
-.tc-drop-down.tc-text-editor-toolbar-more button {
+.tc-edit-text-iframe-toolbar .tc-text-editor-toolbar-more button {
 	display: inline-block;
 	padding: 3px;
 	width: auto;
@@ -1385,8 +1392,8 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-picture-chooser, .tc-colour-chooser {
-	max-width: 380px;
 	white-space: normal;
+	max-width: 380px;
 }
 
 .tc-picture-chooser a,

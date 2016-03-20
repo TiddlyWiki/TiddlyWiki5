@@ -1,48 +1,14 @@
 title: $:/core/ui/EditorToolbar/paint
 tags: $:/tags/EditorToolbar
-icon: {{$:/core/images/paint}}
+icon: $:/core/images/paint
 caption: {{$:/language/Buttons/Paint/Caption}}
 description: {{$:/language/Buttons/Paint/Hint}}
-condition: [all[current]is[image]]
+condition: [<targetTiddler>is[image]]
+dropdown: $:/core/ui/EditorToolbar/paint-dropdown
 
 \define toolbar-paint()
-<$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" selectedClass="tc-selected" tooltip={{$:/language/Buttons/Paint/Hint}} aria-label={{$:/language/Buttons/Paint/Caption}}>
-
 <div style="display: inline-block; vertical-align: middle; background-color: $(colour-picker-value)$; width: 1em; height: 1em; border-radius: 50%;"/>
-
-<span style="fill: $(colour-picker-value)$;">
-
-<$transclude tiddler="$:/core/images/paint" mode="inline"/>
-
-</span>
-
-</$button>
-
-<$reveal state="""$(config-title)$/popup""" type="popup" position="below" animate="yes">
-
-<div class="tc-drop-down tc-colour-chooser tc-popup-keep">
-
-''{{$:/language/Buttons/Paint/Hint}}''
-
-<$macrocall $name="colour-picker" actions="""
-
-<$action-setfield
-	$tiddler="$:/config/BitmapEditor/Colour"
-	$value=<<colour-picker-value>>
-/>
-
-<$action-deletetiddler
-	$tiddler="$(config-title)$/popup"
-/>
-
-"""/>
-
-</div>
-
-</$reveal>
 \end
 <$set name="colour-picker-value" value={{$:/config/BitmapEditor/Colour}}>
-<$set name="config-title" value=<<qualify "$:/state/edit-toolbar/paint">>>
 <<toolbar-paint>>
-</$set>
 </$set>

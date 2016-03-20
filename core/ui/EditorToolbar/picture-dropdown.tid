@@ -1,0 +1,30 @@
+title: $:/core/ui/EditorToolbar/picture-dropdown
+
+\define toolbar-button-picture-inner()
+<$button tag="a" tooltip="""$(pictureTitle)$""">
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="replace-selection"
+	text="[img[$(pictureTitle)$]]"
+	mode={{$(pictureTitle!!mode)$}}
+/>
+
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+
+<$transclude tiddler=<<pictureTitle>>/>
+
+</$button>
+\end
+<div class="tc-picture-chooser">
+
+<$list filter="[all[shadows+tiddlers]is[image]!has[draft.of]] -[type[application/pdf]] +[sort[title]]" variable="pictureTitle">
+
+<<toolbar-button-picture-inner>>
+
+</$list>
+
+</div>
+

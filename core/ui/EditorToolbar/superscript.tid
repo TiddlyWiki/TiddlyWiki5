@@ -1,16 +1,14 @@
 title: $:/core/ui/EditorToolbar/superscript
 tags: $:/tags/EditorToolbar
-icon: {{$:/core/images/superscript}}
+icon: $:/core/images/superscript
 caption: {{$:/language/Buttons/Superscript/Caption}}
 description: {{$:/language/Buttons/Superscript/Hint}}
-condition: [all[current]!is[image]]
+condition: [<targetTiddler>!is[image]]
+shortcuts: ((superscript))
 
-<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Superscript/Hint}} aria-label={{$:/language/Buttons/Superscript/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
 	prefix="^^"
 	suffix="^^"
 />
-{{$:/core/images/superscript}}
-</$button>

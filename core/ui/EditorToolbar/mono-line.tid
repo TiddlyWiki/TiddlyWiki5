@@ -1,16 +1,14 @@
 title: $:/core/ui/EditorToolbar/mono-line
 tags: $:/tags/EditorToolbar
-icon: {{$:/core/images/mono-line}}
+icon: $:/core/images/mono-line
 caption: {{$:/language/Buttons/MonoLine/Caption}}
 description: {{$:/language/Buttons/MonoLine/Hint}}
-condition: [all[current]!is[image]]
+condition: [<targetTiddler>!is[image]]
+shortcuts: ((mono-line))
 
-<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/MonoLine/Hint}} aria-label={{$:/language/Buttons/MonoLine/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
 	prefix="`"
 	suffix="`"
 />
-{{$:/core/images/mono-line}}
-</$button>

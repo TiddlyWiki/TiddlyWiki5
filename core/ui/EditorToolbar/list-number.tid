@@ -1,16 +1,14 @@
 title: $:/core/ui/EditorToolbar/list-number
 tags: $:/tags/EditorToolbar
-icon: {{$:/core/images/list-number}}
+icon: $:/core/images/list-number
 caption: {{$:/language/Buttons/ListNumber/Caption}}
 description: {{$:/language/Buttons/ListNumber/Hint}}
-condition: [all[current]!is[image]]
+condition: [<targetTiddler>!is[image]]
+shortcuts: ((list-number))
 
-<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/ListNumber/Hint}} aria-label={{$:/language/Buttons/ListNumber/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="prefix-lines"
 	character="#"
 	count="1"
 />
-{{$:/core/images/list-number}}
-</$button>

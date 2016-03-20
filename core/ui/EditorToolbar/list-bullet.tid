@@ -1,16 +1,14 @@
 title: $:/core/ui/EditorToolbar/list-bullet
 tags: $:/tags/EditorToolbar
-icon: {{$:/core/images/list-bullet}}
+icon: $:/core/images/list-bullet
 caption: {{$:/language/Buttons/ListBullet/Caption}}
 description: {{$:/language/Buttons/ListBullet/Hint}}
-condition: [all[current]!is[image]]
+condition: [<targetTiddler>!is[image]]
+shortcuts: ((list-bullet))
 
-<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/ListBullet/Hint}} aria-label={{$:/language/Buttons/ListBullet/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="prefix-lines"
 	character="*"
 	count="1"
 />
-{{$:/core/images/list-bullet}}
-</$button>

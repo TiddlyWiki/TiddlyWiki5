@@ -1,16 +1,14 @@
 title: $:/core/ui/EditorToolbar/heading-5
 tags: $:/tags/EditorToolbar
-icon: {{$:/core/images/heading-5}}
+icon: $:/core/images/heading-5
 caption: {{$:/language/Buttons/Heading5/Caption}}
 description: {{$:/language/Buttons/Heading5/Hint}}
-condition: [all[current]!is[image]]
+condition: [<targetTiddler>!is[image]]
+shortcuts: ((heading-5))
 
-<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Heading5/Hint}} aria-label={{$:/language/Buttons/Heading5/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="prefix-lines"
 	character="!"
 	count="5"
 />
-{{$:/core/images/heading-5}}
-</$button>

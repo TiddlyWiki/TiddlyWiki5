@@ -1,66 +1,9 @@
 title: $:/core/ui/EditorToolbar/excise
 tags: $:/tags/EditorToolbar
-icon: {{$:/core/images/excise}}
+icon: $:/core/images/excise
 caption: {{$:/language/Buttons/Excise/Caption}}
 description: {{$:/language/Buttons/Excise/Hint}}
-condition: [all[current]!is[image]]
+condition: [<targetTiddler>!is[image]]
+shortcuts: ((excise))
+dropdown: $:/core/ui/EditorToolbar/excise-dropdown
 
-\define lingo-base() $:/language/Buttons/Excise/
-\define toolbar-button-excise()
-<$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" selectedClass="tc-selected" tooltip={{$:/language/Buttons/Excise/Hint}} aria-label={{$:/language/Buttons/Excise/Caption}}>
-{{$:/core/images/excise}}
-</$button>
-
-<$reveal state="""$(config-title)$/popup""" type="popup" position="below" animate="yes" tag="span">
-
-<div class="tc-drop-down tc-popup-keep">
-
-''{{$:/language/Buttons/Excise/Hint}}''
-
-<<lingo Caption/NewTitle>> <$edit-text tag="input" tiddler="""$(config-title)$/new-title""" default="New Tiddler Title" focus="true"/>
-
-<$set name="new-title" value={{$(config-title)$/new-title}}>
-<$list filter="""[<new-title>is[tiddler]]""">
-<div class="tc-error">
-<<lingo Caption/TiddlerExists>>
-</div>
-</$list>
-</$set>
-
-<$checkbox tiddler="""$(config-title)$/tagnew""" field="text" checked="yes" unchecked="no" default="false"> <<lingo Caption/Tag>></$checkbox>
-
-<<lingo Caption/Replace>> <$select tiddler="""$(config-title)$/type""" default="transclude">
-<option value="link"><<lingo Caption/Replace/Link>></option>
-<option value="transclude"><<lingo Caption/Replace/Transclusion>></option>
-<option value="macro"><<lingo Caption/Replace/Macro>></option>
-</$select>
-
-<$reveal state="""$(config-title)$/type""" type="match" text="macro">
-<<lingo Caption/MacroName>> <$edit-text tag="input" tiddler="""$(config-title)$/macro-title""" default="translink"/>
-</$reveal>
-
-<$button>
-<$action-sendmessage
-	$message="tm-edit-text-operation"
-	$param="excise"
-	title={{$(config-title)$/new-title}}
-	type={{$(config-title)$/type}}
-	macro={{$(config-title)$/macro-title}}
-	tagnew={{$(config-title)$/tagnew}}
-/>
-<$action-deletetiddler
-	$tiddler="""$(config-title)$/new-title"""
-/>
-<$action-deletetiddler
-	$tiddler="""$(config-title)$/popup"""
-/>
-<<lingo Caption/Excise>>
-</$button>
-
-</div>
-
-</$reveal>
-\end
-<$set name="config-title" value=<<qualify "$:/state/edit-toolbar/excise">>>
-<<toolbar-button-excise>>
-</$set>

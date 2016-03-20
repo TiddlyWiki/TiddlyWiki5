@@ -1,69 +1,9 @@
 title: $:/core/ui/EditorToolbar/opacity
 tags: $:/tags/EditorToolbar
-icon: {{$:/core/images/opacity}}
+icon: $:/core/images/opacity
 caption: {{$:/language/Buttons/Opacity/Caption}}
 description: {{$:/language/Buttons/Opacity/Hint}}
-condition: [all[current]is[image]]
+condition: [<targetTiddler>is[image]]
+dropdown: $:/core/ui/EditorToolbar/opacity-dropdown
 
-\define toolbar-opacity-inner()
-<$button tag="a" tooltip="""$(opacity)$""">
-
-<$action-setfield
-	$tiddler="$:/config/BitmapEditor/Opacity"
-	$value="$(opacity)$"
-/>
-
-<$action-deletetiddler
-	$tiddler="""$(config-title)$/popup"""
-/>
-
-<div style="display: inline-block; vertical-align: middle; background-color: $(current-paint-colour)$; opacity: $(opacity)$; width: 1em; height: 1em; border-radius: 50%;"/>
-
-<span style="margin-left: 8px;">
-
-<$text text="""$(opacity)$"""/>
-
-<$reveal state="$:/config/BitmapEditor/Opacity" type="match" text="""$(opacity)$""" tag="span">
-
-<$entity entity="&nbsp;"/>
-
-<$entity entity="&#x2713;"/>
-
-</$reveal>
-
-</span>
-
-</$button>
-\end
-\define toolbar-opacity()
-<$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" selectedClass="tc-selected" tooltip={{$:/language/Buttons/Opacity/Hint}} aria-label={{$:/language/Buttons/Opacity/Caption}}>
-<$text text=<<current-opacity>>/> {{$:/core/images/opacity}}
-</$button>
-
-<$reveal state="""$(config-title)$/popup""" type="popup" position="below" animate="yes">
-
-<div class="tc-drop-down tc-popup-keep">
-
-''{{$:/language/Buttons/Opacity/Hint}}''
-
-<$list filter={{$:/config/BitmapEditor/Opacities}} variable="opacity">
-
-<<toolbar-opacity-inner>>
-
-</$list>
-
-----
-
-//Current opacity: <$text text={{$:/config/BitmapEditor/Opacity}}/>//
-
-</div>
-
-</$reveal>
-\end
-<$set name="config-title" value=<<qualify "$:/state/edit-toolbar/opacity">>>
-<$set name="current-paint-colour" value={{$:/config/BitmapEditor/Colour}}>
-<$set name="current-opacity" value={{$:/config/BitmapEditor/Opacity}}>
-<<toolbar-opacity>>
-</$set>
-</$set>
-</$set>
+<$text text={{$:/config/BitmapEditor/Opacity}}/>

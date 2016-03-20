@@ -1,16 +1,14 @@
 title: $:/core/ui/EditorToolbar/bold
 tags: $:/tags/EditorToolbar
-icon: {{$:/core/images/bold}}
+icon: $:/core/images/bold
 caption: {{$:/language/Buttons/Bold/Caption}}
 description: {{$:/language/Buttons/Bold/Hint}}
-condition: [all[current]!is[image]]
+condition: [<targetTiddler>!is[image]]
+shortcuts: ((bold))
 
-<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Bold/Hint}} aria-label={{$:/language/Buttons/Bold/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
 	prefix="''"
 	suffix="''"
 />
-{{$:/core/images/bold}}
-</$button>

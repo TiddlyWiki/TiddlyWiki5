@@ -1,71 +1,8 @@
 title: $:/core/ui/EditorToolbar/stamp
 tags: $:/tags/EditorToolbar
-icon: {{$:/core/images/stamp}}
+icon: $:/core/images/stamp
 caption: {{$:/language/Buttons/Stamp/Caption}}
 description: {{$:/language/Buttons/Stamp/Hint}}
-condition: [all[current]!is[image]]
-
-\define lingo-base() $:/language/Buttons/Stamp/
-\define toolbar-button-stamp-inner()
-<$button tag="a">
-
-<$action-sendmessage
-	$message="tm-edit-text-operation"
-	$param="replace-selection"
-	text={{$(snippetTitle)$}}
-	mode={{$(snippetTitle!!mode)$}}
-/>
-
-<$action-deletetiddler
-	$tiddler="""$(config-title)$/popup"""
-/>
-
-<$view tiddler=<<snippetTitle>> field="caption" mode="inline">
-
-<$view tiddler=<<snippetTitle>> field="title" mode="inline"/>
-
-</$view>
-
-</$button>
-\end
-\define toolbar-button-stamp()
-<$button popup="""$(config-title)$/popup""" class="tc-popup-keep tc-btn-invisible" selectedClass="tc-selected" tooltip={{$:/language/Buttons/Stamp/Hint}} aria-label={{$:/language/Buttons/Stamp/Caption}}>
-{{$:/core/images/stamp}}
-</$button>
-
-<$reveal state="""$(config-title)$/popup""" type="popup" position="below" animate="yes">
-
-<div class="tc-drop-down tc-popup-keep">
-
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]]" variable="snippetTitle">
-
-<<toolbar-button-stamp-inner>>
-
-</$list>
-
-----
-
-<$button tag="a">
-
-<$action-sendmessage
-	$message="tm-new-tiddler"
-	tags="$:/tags/TextEditor/Snippet"
-	caption={{$:/language/Buttons/Stamp/New/Title}}
-	text={{$:/language/Buttons/Stamp/New/Text}}
-/>
-
-<em>
-
-<$text text={{$:/language/Buttons/Stamp/Caption/New}}/>
-
-</em>
-
-</$button>
-
-</div>
-
-</$reveal>
-\end
-<$set name="config-title" value=<<qualify "$:/state/edit-toolbar/stamp">>>
-<<toolbar-button-stamp>>
-</$set>
+condition: [<targetTiddler>!is[image]]
+shortcuts: ((stamp))
+dropdown: $:/core/ui/EditorToolbar/stamp-dropdown

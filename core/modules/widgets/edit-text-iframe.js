@@ -379,6 +379,38 @@ EditTextIframeWidget.prototype.handleInputEvent = function(event) {
 Handle a dom "keydown" event, which we'll bubble up to our container for the keyboard widgets benefit
 */
 EditTextIframeWidget.prototype.handleKeydownEvent = function(event) {
+	// Check for a keyboard shortcut
+	var shortcutElements = this.toolbarNode.querySelectorAll("[data-tw-keyboard-shortcut]");
+	for(var index=0; index<shortcutElements.length; index++) {
+		var el = shortcutElements[index],
+			shortcutData = el.getAttribute("data-tw-keyboard-shortcut"),
+			keyInfoArray = $tw.utils.parseKeyDescriptors(shortcutData,{
+				wiki: this.wiki
+			});
+		if($tw.utils.checkKeyDescriptors(event,keyInfoArray)) {
+			var clickEvent = this.document.createEvent("Events");
+		    clickEvent.initEvent("click",true,false);
+		    el.dispatchEvent(clickEvent);
+			event.preventDefault();
+			event.stopPropagation();
+			return true;			
+		}
+	}
+	// Propogate the event to the container
+	if(this.propogateKeydownEvent(event)) {
+		// Ignore the keydown if it was already handled
+		event.preventDefault();
+		event.stopPropagation();
+		return true;
+	}
+	// Otherwise, process the keydown normally
+	return false;
+};
+
+/*
+Propogate keydown events to our container for the keyboard widgets benefit
+*/
+EditTextIframeWidget.prototype.propogateKeydownEvent = function(event) {
 	var newEvent = this.document.createEventObject ? this.document.createEventObject() : this.document.createEvent("Events");
 	if(newEvent.initEvent) {
 		newEvent.initEvent("keydown", true, true);
@@ -389,12 +421,7 @@ EditTextIframeWidget.prototype.handleKeydownEvent = function(event) {
 	newEvent.ctrlKey = event.ctrlKey;
 	newEvent.altKey = event.altKey;
 	newEvent.shiftKey = event.shiftKey;
-	if(!this.parentDomNode.dispatchEvent(newEvent)) {
-		event.preventDefault();
-		event.stopPropagation();
-		return true;
-	}
-	return false;
+	return !this.parentDomNode.dispatchEvent(newEvent);
 };
 
 /*

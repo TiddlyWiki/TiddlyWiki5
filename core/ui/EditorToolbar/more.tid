@@ -1,31 +1,7 @@
 title: $:/core/ui/EditorToolbar/more
 tags: $:/tags/EditorToolbar
-icon: {{$:/core/images/down-arrow}}
+icon: $:/core/images/down-arrow
 caption: {{$:/language/Buttons/More/Caption}}
 description: {{$:/language/Buttons/More/Hint}}
-condition: [all[current]]
-
-\define config-title()
-$:/config/EditorToolbarButtons/Visibility/$(listItem)$
-\end
-\define conditional-button()
-<$list filter={{$(listItem)$!!condition}}>
-<$transclude tiddler=<<listItem>> mode="inline"/> <$transclude tiddler=<<listItem>> field="description"/>
-</$list>
-\end
-<$button class="tc-btn-invisible" popup=<<qualify "$:/state/popup/text-editor-toolbar/more">> selectedClass="tc-selected" tooltip={{$:/language/Buttons/More/Hint}} aria-label={{$:/language/Buttons/More/Caption}}>
-{{$:/core/images/down-arrow}}
-</$button><$reveal state=<<qualify "$:/state/popup/text-editor-toolbar/more">> type="popup" position="below" animate="yes">
-
-<div class="tc-drop-down tc-text-editor-toolbar-more">
-
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]] -[[$:/core/ui/EditorToolbar/more]]" variable="listItem">
-<$reveal type="match" state=<<config-title>> text="hide">
-<div>
-<<conditional-button>>
-</div>
-</$reveal>
-</$list>
-
-</div>
-</$reveal>
+condition: [<targetTiddler>]
+dropdown: $:/core/ui/EditorToolbar/more-dropdown

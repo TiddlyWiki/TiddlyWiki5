@@ -1,14 +1,11 @@
 title: $:/core/ui/EditorToolbar/undo
 tags: $:/tags/EditorToolbar
-icon: {{$:/core/images/undo}}
+icon: $:/core/images/undo
 caption: {{$:/language/Buttons/Undo/Caption}}
 description: {{$:/language/Buttons/Undo/Hint}}
-condition: [all[current]!is[image]]
+condition: [<targetTiddler>!is[image]]
 
-<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Undo/Hint}} aria-label={{$:/language/Buttons/Undo/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="undo"
 />
-{{$:/core/images/undo}}
-</$button>

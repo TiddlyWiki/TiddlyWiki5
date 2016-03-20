@@ -1,16 +1,14 @@
 title: $:/core/ui/EditorToolbar/strikethrough
 tags: $:/tags/EditorToolbar
-icon: {{$:/core/images/strikethrough}}
+icon: $:/core/images/strikethrough
 caption: {{$:/language/Buttons/Strikethrough/Caption}}
 description: {{$:/language/Buttons/Strikethrough/Hint}}
-condition: [all[current]!is[image]]
+condition: [<targetTiddler>!is[image]]
+shortcuts: ((strikethrough))
 
-<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Strikethrough/Hint}} aria-label={{$:/language/Buttons/Strikethrough/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
 	prefix="~~"
 	suffix="~~"
 />
-{{$:/core/images/strikethrough}}
-</$button>

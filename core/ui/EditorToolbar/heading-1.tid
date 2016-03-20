@@ -1,16 +1,14 @@
 title: $:/core/ui/EditorToolbar/heading-1
 tags: $:/tags/EditorToolbar
-icon: {{$:/core/images/heading-1}}
+icon: $:/core/images/heading-1
 caption: {{$:/language/Buttons/Heading1/Caption}}
 description: {{$:/language/Buttons/Heading1/Hint}}
-condition: [all[current]!is[image]]
+condition: [<targetTiddler>!is[image]]
+shortcuts: ((heading-1))
 
-<$button class="tc-btn-invisible" tooltip={{$:/language/Buttons/Heading1/Hint}} aria-label={{$:/language/Buttons/Heading1/Caption}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="prefix-lines"
 	character="!"
 	count="1"
 />
-{{$:/core/images/heading-1}}
-</$button>

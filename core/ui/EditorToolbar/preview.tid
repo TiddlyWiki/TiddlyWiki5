@@ -1,26 +1,14 @@
 title: $:/core/ui/EditorToolbar/preview
 tags: $:/tags/EditorToolbar
-icon: {{$:/core/images/preview}}
+icon: $:/core/images/preview
 caption: {{$:/language/Buttons/Preview/Caption}}
 description: {{$:/language/Buttons/Preview/Hint}}
-condition: [all[current]]
+condition: [<targetTiddler>]
+shortcuts: ((preview))
 
 <$reveal state="$:/state/showeditpreview" type="match" text="yes" tag="span">
-<$button type="set" set="$:/state/showeditpreview" setTo="no" class="tc-btn-invisible tc-selected" tooltip={{$:/language/Buttons/Preview/Hint}} aria-label={{$:/language/Buttons/Preview/Caption}}>
-{{$:/core/images/preview}}
-</$button>
-
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditPreview]!has[draft.of]butfirst[]limit[1]]" variable="listItem">
-<$select tiddler="$:/state/editpreviewtype" default="$:/core/ui/EditTemplate/body/preview/output" class="tc-popup-keep">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditPreview]!has[draft.of]]">
-<option value=<<currentTiddler>>>{{!!caption}}</option>
-</$list>
-</$select>
-</$list>
-
-</$reveal> <$reveal state="$:/state/showeditpreview" type="nomatch" text="yes" tag="span">
-<$button type="set" set="$:/state/showeditpreview" setTo="yes" class="tc-btn-invisible" tooltip={{$:/language/Buttons/Preview/Hint}} aria-label={{$:/language/Buttons/Preview/Caption}}>
-{{$:/core/images/preview}}
-</$button>
-
+<$action-setfield $tiddler="$:/state/showeditpreview" $value="no"/>
+</$reveal>
+<$reveal state="$:/state/showeditpreview" type="nomatch" text="yes" tag="span">
+<$action-setfield $tiddler="$:/state/showeditpreview" $value="yes"/>
 </$reveal>
