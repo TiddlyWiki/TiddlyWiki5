@@ -130,6 +130,8 @@ Toolbars/EditToolbar/Hint: Choix des boutons à afficher pour les tiddlers en co
 Toolbars/Hint: Choix des boutons à afficher dans les barres d'outils
 Toolbars/PageControls/Caption: Barre d'outils de la page
 Toolbars/PageControls/Hint: Choix des boutons à afficher sur la barre d'outils principale de la page
+Toolbars/EditorToolbar/Caption: Barre d'outils de l'Éditeur
+Toolbars/EditorToolbar/Hint: Choisir les boutons à afficher dans la barre d'outils de l'éditeur. À noter que la présence de certains boutons dépendra du type du tiddler édité
 Toolbars/ViewToolbar/Caption: Barre d'outils du mode visualisation
 Toolbars/ViewToolbar/Hint: Choix des boutons à afficher pour les tiddlers en mode visualisation
 Tools/Download/Full/Caption: Télécharger le wiki complet
