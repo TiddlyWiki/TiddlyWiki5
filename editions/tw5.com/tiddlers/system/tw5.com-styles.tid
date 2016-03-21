@@ -45,6 +45,7 @@ tags: $:/tags/Stylesheet
 	padding: 1em;
 	height: 400px;
 	position: relative;
+	overflow: auto;
 }
 
 .tc-improvement-banner {
