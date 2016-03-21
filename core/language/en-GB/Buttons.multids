@@ -141,6 +141,8 @@ Picture/Caption: picture
 Picture/Hint: Insert picture
 Preview/Caption: preview
 Preview/Hint: Show preview pane
+PreviewType/Caption: preview type
+PreviewType/Hint: Choose preview type
 Quote/Caption: quote
 Quote/Hint: Apply quoted text formatting to lines containing selection
 Redo/Caption: redo
