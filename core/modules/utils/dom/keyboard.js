@@ -74,8 +74,23 @@ exports.parseKeyDescriptor = function(keyDescriptor) {
 Parse a list of key descriptors into an array of keyInfo objects. The key descriptors can be passed as an array of strings or a space separated string
 */
 exports.parseKeyDescriptors = function(keyDescriptors,options) {
+	var result = [];
+	$tw.utils.each($tw.utils.resolveKeyDescriptors(keyDescriptors,options),function(keyDescriptor) {
+			result.push($tw.utils.parseKeyDescriptor(keyDescriptor));
+	});
+	return result;
+};
+
+/*
+Recursively resolve any named key descriptors within a list of key descriptors
+*/
+exports.resolveKeyDescriptors = function(keyDescriptors,options) {
 	options = options || {};
+	options.stack = options.stack || [];
 	var wiki = options.wiki || $tw.wiki;
+	if(keyDescriptors === "") {
+		return [];
+	}
 	if(!$tw.utils.isArray(keyDescriptors)) {
 		keyDescriptors = keyDescriptors.split(" ");
 	}
@@ -83,10 +98,13 @@ exports.parseKeyDescriptors = function(keyDescriptors,options) {
 	$tw.utils.each(keyDescriptors,function(keyDescriptor) {
 		// Look for a named shortcut
 		if(keyDescriptor.substr(0,2) === "((" && keyDescriptor.substr(-2,2) === "))") {
-			keyDescriptors = wiki.getTiddlerText("$:/config/KeyboardShortcuts/" + keyDescriptor.substring(2,keyDescriptor.length - 2));
-			result.push.apply(result,$tw.utils.parseKeyDescriptors(keyDescriptors));
+			if(options.stack.indexOf(keyDescriptor) === -1) {
+				options.stack.push(keyDescriptor);
+				keyDescriptors = wiki.getTiddlerText("$:/config/KeyboardShortcuts/" + keyDescriptor.substring(2,keyDescriptor.length - 2));
+				result.push.apply(result,$tw.utils.resolveKeyDescriptors(keyDescriptors,options));
+			}
 		} else {
-			result.push($tw.utils.parseKeyDescriptor(keyDescriptor));
+			result.push(keyDescriptor);
 		}
 	});
 	return result;

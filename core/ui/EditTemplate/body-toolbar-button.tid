@@ -6,10 +6,15 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
 </$list>
 \end
 
+\define toolbar-button-tooltip()
+{{!!description}}<$macrocall $name="displayshortcuts" $output="text/plain" shortcuts={{!!shortcuts}} prefix="` - [" separator="] [" suffix="]`"/>
+\end
+
 \define toolbar-button()
 <$list filter={{!!condition}} variable="list-condition">
+<$wikify name="tooltip-text" text=<<toolbar-button-tooltip>> mode="inline" output="text">
 <$list filter="[all[current]!has[dropdown]]" variable="no-dropdown">
-<$button class="tc-btn-invisible $(buttonClasses)$">
+<$button class="tc-btn-invisible $(buttonClasses)$" tooltip=<<tooltip-text>>>
 <span data-tw-keyboard-shortcut={{!!shortcuts}}/>
 <<toolbar-button-icon>>
 <$transclude tiddler=<<currentTiddler>> field="text"/>
@@ -17,7 +22,7 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
 </$list>
 <$list filter="[all[current]has[dropdown]]" variable="dropdown">
 <$set name="dropdown-state" value=<<qualify "$:/state/EditorToolbarDropdown">>>
-<$button popup=<<dropdown-state>> class="tc-popup-keep tc-btn-invisible $(buttonClasses)$" selectedClass="tc-selected">
+<$button popup=<<dropdown-state>> class="tc-popup-keep tc-btn-invisible $(buttonClasses)$" selectedClass="tc-selected" tooltip=<<tooltip-text>>>
 <span data-tw-keyboard-shortcut={{!!shortcuts}}/>
 <<toolbar-button-icon>>
 <$transclude tiddler=<<currentTiddler>> field="text"/>
@@ -29,6 +34,7 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
 </$reveal>
 </$set>
 </$list>
+</$wikify>
 </$list>
 \end
 
