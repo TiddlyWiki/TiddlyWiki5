@@ -9,6 +9,7 @@ shortcuts: ((mono-block))
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-lines"
-	prefix="```"
+	prefix="
+```"
 	suffix="```"
 />
