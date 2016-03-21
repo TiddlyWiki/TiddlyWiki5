@@ -3,7 +3,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/quote
 caption: {{$:/language/Buttons/Quote/Caption}}
 description: {{$:/language/Buttons/Quote/Hint}}
-condition: [<targetTiddler>!is[image]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
 shortcuts: ((quote))
 
 <$action-sendmessage

@@ -3,7 +3,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/subscript
 caption: {{$:/language/Buttons/Subscript/Caption}}
 description: {{$:/language/Buttons/Subscript/Hint}}
-condition: [<targetTiddler>!is[image]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
 shortcuts: ((subscript))
 
 <$action-sendmessage

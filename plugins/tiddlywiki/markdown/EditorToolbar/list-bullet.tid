@@ -1,9 +1,10 @@
-title: $:/core/ui/EditorToolbar/list-bullet
+title: $:/plugins/tiddlywiki/markdown/EditorToolbar/list-bullet
+list-after: $:/core/ui/EditorToolbar/list-bullet
 tags: $:/tags/EditorToolbar
 icon: $:/core/images/list-bullet
-caption: {{$:/language/Buttons/ListBullet/Caption}}
+caption: {{$:/language/Buttons/ListBullet/Caption}} (Markdown)
 description: {{$:/language/Buttons/ListBullet/Hint}}
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+condition: [<targetTiddler>type[text/x-markdown]]
 shortcuts: ((list-bullet))
 
 <$action-sendmessage

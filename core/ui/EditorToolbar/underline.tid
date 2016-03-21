@@ -3,7 +3,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/underline
 caption: {{$:/language/Buttons/Underline/Caption}}
 description: {{$:/language/Buttons/Underline/Hint}}
-condition: [<targetTiddler>!is[image]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
 shortcuts: ((underline))
 
 <$action-sendmessage

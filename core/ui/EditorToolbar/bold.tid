@@ -3,7 +3,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/bold
 caption: {{$:/language/Buttons/Bold/Caption}}
 description: {{$:/language/Buttons/Bold/Hint}}
-condition: [<targetTiddler>!is[image]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
 shortcuts: ((bold))
 
 <$action-sendmessage

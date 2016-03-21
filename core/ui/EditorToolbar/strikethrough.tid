@@ -3,7 +3,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/strikethrough
 caption: {{$:/language/Buttons/Strikethrough/Caption}}
 description: {{$:/language/Buttons/Strikethrough/Hint}}
-condition: [<targetTiddler>!is[image]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
 shortcuts: ((strikethrough))
 
 <$action-sendmessage
