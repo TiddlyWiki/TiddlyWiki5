@@ -51,7 +51,7 @@ exports.parseKeyDescriptor = function(keyDescriptor) {
 			info.shiftKey = true;
 		} else if(s === "alt") {
 			info.altKey = true;
-		} else if(s === "meta") {
+		} else if(s === "meta" || s === "cmd" || s === "win") {
 			info.metaKey = true;
 		}
 		// Replace named keys with their code
@@ -74,17 +74,6 @@ exports.parseKeyDescriptor = function(keyDescriptor) {
 Parse a list of key descriptors into an array of keyInfo objects. The key descriptors can be passed as an array of strings or a space separated string
 */
 exports.parseKeyDescriptors = function(keyDescriptors,options) {
-	var result = [];
-	$tw.utils.each($tw.utils.resolveKeyDescriptors(keyDescriptors,options),function(keyDescriptor) {
-			result.push($tw.utils.parseKeyDescriptor(keyDescriptor));
-	});
-	return result;
-};
-
-/*
-Recursively resolve any named key descriptors within a list of key descriptors
-*/
-exports.resolveKeyDescriptors = function(keyDescriptors,options) {
 	options = options || {};
 	options.stack = options.stack || [];
 	var wiki = options.wiki || $tw.wiki;
@@ -104,7 +93,7 @@ exports.resolveKeyDescriptors = function(keyDescriptors,options) {
 					lookupName = function(configName) {
 						var keyDescriptors = wiki.getTiddlerText("$:/config/" + configName + "/" + name);
 						if(keyDescriptors) {
-							result.push.apply(result,$tw.utils.resolveKeyDescriptors(keyDescriptors,options));
+							result.push.apply(result,$tw.utils.parseKeyDescriptors(keyDescriptors,options));
 						}
 					};
 				lookupName("shortcuts");
@@ -113,11 +102,24 @@ exports.resolveKeyDescriptors = function(keyDescriptors,options) {
 				lookupName($tw.platform.isLinux ? "shortcuts-linux" : "shortcuts-not-linux");
 			}
 		} else {
-			result.push(keyDescriptor);
+			result.push($tw.utils.parseKeyDescriptor(keyDescriptor));
 		}
 	});
 	return result;
 };
+
+exports.getPrintableShortcuts = function(keyInfoArray) {
+	var result = [],
+		metaKeyName = $tw.platform.isMac ? "cmd-" : "win-";
+	$tw.utils.each(keyInfoArray,function(keyInfo) {
+		result.push((keyInfo.ctrlKey ? "ctrl-" : "") + 
+			   (keyInfo.shiftKey ? "shift-" : "") + 
+			   (keyInfo.altKey ? "alt-" : "") + 
+			   (keyInfo.metaKey ? metaKeyName : "") + 
+			   (String.fromCharCode(keyInfo.keyCode)));
+	});
+	return result;
+}
 
 exports.checkKeyDescriptor = function(event,keyInfo) {
 	return event.keyCode === keyInfo.keyCode && 

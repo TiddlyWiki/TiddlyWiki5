@@ -29,9 +29,9 @@ exports.params = [
 Run the macro
 */
 exports.run = function(shortcuts,prefix,separator,suffix) {
-	var shortcutArray = $tw.utils.resolveKeyDescriptors(shortcuts,{
+	var shortcutArray = $tw.utils.getPrintableShortcuts($tw.utils.parseKeyDescriptors(shortcuts,{
 		wiki: this.wiki
-	});
+	}));
 	if(shortcutArray.length > 0) {
 		return prefix + shortcutArray.join(separator) + suffix;
 	} else {
