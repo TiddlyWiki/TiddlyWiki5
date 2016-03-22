@@ -141,6 +141,8 @@ Picture/Caption: 圖片
 Picture/Hint: 插入圖片
 Preview/Caption: 預覽
 Preview/Hint: 顯示預覽窗格
+PreviewType/Caption: 預覽類型
+PreviewType/Hint: 選擇預覽類型
 Quote/Caption: 引言
 Quote/Hint: 套用引言文字格式於包含所選文字的列
 Redo/Caption: 重做
