@@ -18,7 +18,7 @@ exports["excise"] = function(event,operation) {
 	if(editTiddler && editTiddler.fields["draft.of"]) {
 		editTiddlerTitle = editTiddler.fields["draft.of"];
 	}
-	var excisionTitle = event.paramObject.title || "New Excision";
+	var excisionTitle = event.paramObject.title || this.wiki.generateNewTitle("New Excision");
 	this.wiki.addTiddler(new $tw.Tiddler(
 		this.wiki.getCreationFields(),
 		this.wiki.getModificationFields(),

@@ -3,7 +3,7 @@ title: $:/core/ui/EditorToolbar/excise-dropdown
 \define lingo-base() $:/language/Buttons/Excise/
 ''<<lingo Hint>>''
 
-<<lingo Caption/NewTitle>> <$edit-text tag="input" tiddler="""$(config-title)$/new-title""" default="New Tiddler Title" focus="true"/>
+<<lingo Caption/NewTitle>> <$edit-text tag="input" tiddler="""$(config-title)$/new-title""" default="" focus="true"/>
 
 <$set name="new-title" value={{$(config-title)$/new-title}}>
 <$list filter="""[<new-title>is[tiddler]]""">
