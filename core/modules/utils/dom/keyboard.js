@@ -100,8 +100,17 @@ exports.resolveKeyDescriptors = function(keyDescriptors,options) {
 		if(keyDescriptor.substr(0,2) === "((" && keyDescriptor.substr(-2,2) === "))") {
 			if(options.stack.indexOf(keyDescriptor) === -1) {
 				options.stack.push(keyDescriptor);
-				keyDescriptors = wiki.getTiddlerText("$:/config/KeyboardShortcuts/" + keyDescriptor.substring(2,keyDescriptor.length - 2));
-				result.push.apply(result,$tw.utils.resolveKeyDescriptors(keyDescriptors,options));
+				var name = keyDescriptor.substring(2,keyDescriptor.length - 2),
+					lookupName = function(configName) {
+						var keyDescriptors = wiki.getTiddlerText("$:/config/" + configName + "/" + name);
+						if(keyDescriptors) {
+							result.push.apply(result,$tw.utils.resolveKeyDescriptors(keyDescriptors,options));
+						}
+					};
+				lookupName("shortcuts");
+				lookupName($tw.platform.isMac ? "shortcuts-mac" : "shortcuts-not-mac");
+				lookupName($tw.platform.isWindows ? "shortcuts-windows" : "shortcuts-not-windows");
+				lookupName($tw.platform.isLinux ? "shortcuts-linux" : "shortcuts-not-linux");
 			}
 		} else {
 			result.push(keyDescriptor);

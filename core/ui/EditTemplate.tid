@@ -5,8 +5,8 @@ tc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerCl
 \end
 <div class=<<frame-classes>>>
 <$set name="storyTiddler" value=<<currentTiddler>>>
-<$keyboard key={{$:/config/shortcuts/cancel-edit-tiddler}} message="tm-cancel-tiddler">
-<$keyboard key={{$:/config/shortcuts/save-tiddler}} message="tm-save-tiddler">
+<$keyboard key="((cancel-edit-tiddler))" message="tm-cancel-tiddler">
+<$keyboard key="((save-tiddler))" message="tm-save-tiddler">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/EditTemplate]!has[draft.of]]" variable="listItem">
 <$transclude tiddler=<<listItem>>/>
 </$list>
