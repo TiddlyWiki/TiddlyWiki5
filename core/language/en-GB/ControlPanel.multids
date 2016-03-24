@@ -27,6 +27,8 @@ EditorTypes/Hint: These tiddlers determine which editor is used to edit specific
 EditorTypes/Type/Caption: Type
 Info/Caption: Info
 Info/Hint: Information about this TiddlyWiki
+KeyboardShortcuts/Caption: Keyboard Shortcuts
+KeyboardShortcuts/Hint: Manage keyboard shortcut assignments
 LoadedModules/Caption: Loaded Modules
 LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
 Palette/Caption: Palette
