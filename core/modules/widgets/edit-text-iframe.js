@@ -384,10 +384,10 @@ EditTextIframeWidget.prototype.handleKeydownEvent = function(event) {
 	for(var index=0; index<shortcutElements.length; index++) {
 		var el = shortcutElements[index],
 			shortcutData = el.getAttribute("data-tw-keyboard-shortcut"),
-			keyInfoArray = $tw.utils.parseKeyDescriptors(shortcutData,{
+			keyInfoArray = $tw.keyboardManager.parseKeyDescriptors(shortcutData,{
 				wiki: this.wiki
 			});
-		if($tw.utils.checkKeyDescriptors(event,keyInfoArray)) {
+		if($tw.keyboardManager.checkKeyDescriptors(event,keyInfoArray)) {
 			var clickEvent = this.document.createEvent("Events");
 		    clickEvent.initEvent("click",true,false);
 		    el.dispatchEvent(clickEvent);

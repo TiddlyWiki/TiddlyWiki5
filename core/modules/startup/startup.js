@@ -74,6 +74,8 @@ exports.startup = function() {
 			"$:/themes/tiddlywiki/vanilla"
 		]
 	});
+	// Kick off the keyboard manager
+	$tw.keyboardManager = new $tw.KeyboardManager();
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
 	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
