@@ -89,7 +89,6 @@ pre {
 	word-break: normal;
 	word-wrap: break-word;
 	white-space: pre;
-	white-space: pre-wrap;
 	background-color: <<colour pre-background>>;
 	border: 1px solid <<colour pre-border>>;
 	padding: 0 3px 2px;
@@ -101,7 +100,7 @@ code {
 	color: <<colour code-foreground>>;
 	background-color: <<colour code-background>>;
 	border: 1px solid <<colour code-border>>;
-    white-space: pre-wrap;
+	white-space: pre;
 	padding: 0 3px 2px;
 	border-radius: 3px;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
