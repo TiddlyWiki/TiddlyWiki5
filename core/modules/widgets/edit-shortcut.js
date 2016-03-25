@@ -78,7 +78,6 @@ EditShortcutWidget.prototype.execute = function() {
 Update the value of the input node
 */
 EditShortcutWidget.prototype.updateInputNode = function() {
-console.log("updateInputNode")
 	if(this.shortcutField) {
 		var tiddler = this.wiki.getTiddler(this.shortcutTiddler);
 		if(tiddler && $tw.utils.hop(tiddler.fields,this.shortcutField)) {
