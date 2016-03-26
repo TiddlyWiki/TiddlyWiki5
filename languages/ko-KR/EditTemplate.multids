@@ -5,6 +5,8 @@ Body/Hint: 서식, 그림, 및 동적 기능을 추가하려면 [[위키 텍스�
 Body/Placeholder: 이 티들러에 대한 텍스트를 입력하세요
 Body/Preview/Button/Hide: 미리 보기 숨기기
 Body/Preview/Button/Show: 미리 보기 보이기
+Body/Preview/Type: 미리 보기 형식:
+Body/Preview/Type/Output: 출력
 Field/Remove/Caption: 필드 제거
 Field/Remove/Hint: 필드를 제거합니다
 Fields/Add/Button: 추가
