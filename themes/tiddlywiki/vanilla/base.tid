@@ -702,7 +702,7 @@ button.tc-untagged-label {
 <<if-no-sidebar "
 
 	.tc-story-river {
-		width: auto;
+        width: calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
 	}
 
 ">>
