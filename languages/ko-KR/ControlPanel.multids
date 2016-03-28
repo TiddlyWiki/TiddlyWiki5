@@ -56,6 +56,7 @@ Plugins/Install: 설치
 Plugins/Installed/Hint: 현재 설치된 플러그인:
 Plugins/Languages/Caption: 언어
 Plugins/Languages/Hint: 언어 팩 플러그인
+Plugins/NoInformation: 제공된 정보 없음
 Plugins/OpenPluginLibrary: 플러그인 라이브러리 열기
 Plugins/Plugins/Caption: 플러그인
 Plugins/Plugins/Hint: 플러그인
