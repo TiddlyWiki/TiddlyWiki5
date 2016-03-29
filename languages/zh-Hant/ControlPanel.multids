@@ -51,6 +51,7 @@ Plugins/Install: 安裝
 Plugins/Installed/Hint: 當前已安裝的插件：
 Plugins/Languages/Caption: 語言
 Plugins/Languages/Hint: 語言包插件
+Plugins/NoInformation: 未提供資訊
 Plugins/OpenPluginLibrary: 開啟插件程式庫
 Plugins/Plugins/Caption: 插件
 Plugins/Plugins/Hint: 插件
