@@ -27,6 +27,8 @@ EditorTypes/Hint: 這些條目決定使用哪個編輯器來編輯特定條目�
 EditorTypes/Type/Caption: 類型
 Info/Caption: 資訊
 Info/Hint: 有關此 TiddlyWiki 的資訊
+KeyboardShortcuts/Caption: 快捷鍵
+KeyboardShortcuts/Hint: 管理鍵盤快捷鍵分配
 LoadedModules/Caption: 已載入的模組
 LoadedModules/Hint: 這些是當前已載入的模組之源碼條目。斜體的模組則無源碼條目，通常是因為它們是在引導過程中設置。
 Palette/Caption: 調色盤
