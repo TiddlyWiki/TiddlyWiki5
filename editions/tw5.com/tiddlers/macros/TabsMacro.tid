@@ -23,6 +23,8 @@ By default the tabs are arranged horizontally above the content. To get vertical
 : Additional [[CSS|Cascading Style Sheets]] classes for the generated `div` elements. Multiple classes can be separated with spaces
 ;template
 : Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the content of the selected tab
+;tabsEpilog
+: An optional [[filter|Filters]] selecting tiddlers to be transcluded right after the tab buttons.
 
 Within the template, the title of the selected tab is available in the <<.var currentTab>> variable.
 

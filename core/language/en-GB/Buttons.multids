@@ -62,6 +62,8 @@ NewJournal/Caption: new journal
 NewJournal/Hint: Create a new journal tiddler
 NewJournalHere/Caption: new journal here
 NewJournalHere/Hint: Create a new journal tiddler tagged with this one
+NewSideBarTab/Caption: new sidebar tab
+NewSideBarTab/Hint: Create a new sidebar tab
 NewTiddler/Caption: new tiddler
 NewTiddler/Hint: Create a new tiddler
 OpenWindow/Caption: open in new window
