@@ -27,8 +27,19 @@ EditorTypes/Hint: These tiddlers determine which editor is used to edit specific
 EditorTypes/Type/Caption: Type
 Info/Caption: Info
 Info/Hint: Information about this TiddlyWiki
+KeyboardShortcuts/Add/Prompt: Type shortcut here
+KeyboardShortcuts/Add/Caption: add shortcut
 KeyboardShortcuts/Caption: Keyboard Shortcuts
 KeyboardShortcuts/Hint: Manage keyboard shortcut assignments
+KeyboardShortcuts/NoShortcuts/Caption: No keyboard shortcuts assigned
+KeyboardShortcuts/Remove/Hint: remove keyboard shortcut
+KeyboardShortcuts/Platform/All: All platforms
+KeyboardShortcuts/Platform/Mac: Macintosh platform only
+KeyboardShortcuts/Platform/NonMac: Non-Macintosh platforms only
+KeyboardShortcuts/Platform/Linux: Linux platform only
+KeyboardShortcuts/Platform/NonLinux: Non-Linux platforms only
+KeyboardShortcuts/Platform/Windows: Windows platform only
+KeyboardShortcuts/Platform/NonWindows: Non-Windows platforms only
 LoadedModules/Caption: Loaded Modules
 LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
 Palette/Caption: Palette

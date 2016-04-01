@@ -6,8 +6,8 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 
 \define new-shortcut(title)
 <div class="tc-dropdown-item-plain">
-<$edit-shortcut tiddler="$title$" placeholder="§Type shortcut here" style="width:auto;"/> <$button>
-§add shortcut
+<$edit-shortcut tiddler="$title$" placeholder={{$:/language/ControlPanel/KeyboardShortcuts/Add/Prompt}} style="width:auto;"/> <$button>
+<<lingo Add/Caption>>
 <$action-listops
 	$tiddler="$(shortcutTitle)$"
 	$field="text"
@@ -23,10 +23,8 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 \define shortcut-list-item(caption)
 <td>
 </td>
-<td>
-<$link to="$(shortcutTitle)$">
-$caption$
-</$link>
+<td style="text-align:right;font-size:0.7em;">
+<<lingo Platform/$caption$>>
 </td>
 <td>
 <div style="position:relative;">
@@ -40,11 +38,11 @@ $caption$
 <div class="tc-block-dropdown tc-edit-type-dropdown tc-popup-keep">
 <$list filter="[list[$(shortcutTitle)$!!text]sort[title]]" variable="shortcut" emptyMessage="""
 <div class="tc-dropdown-item-plain">
-§No keyboard shortcuts assigned
+//<<lingo NoShortcuts/Caption>>//
 </div>
 """>
 <div class="tc-dropdown-item-plain">
-<$button class="tc-btn-invisible" tooltip="§remove keyboard shortcut">
+<$button class="tc-btn-invisible" tooltip=<<lingo Remove/Hint>>>
 <$action-listops
 	$tiddler="$(shortcutTitle)$"
 	$field="text"
@@ -75,13 +73,13 @@ $caption$
 \end
 
 \define shortcut-editor()
-<<shortcut-list "§All platforms" "$:/config/shortcuts/">>
-<<shortcut-list "§Macintosh only" "$:/config/shortcuts-mac/">>
-<<shortcut-list "§Non-Macintosh platforms only" "$:/config/shortcuts-not-mac/">>
-<<shortcut-list "§Linux only" "$:/config/shortcuts-linux/">>
-<<shortcut-list "§Non-Linux platforms only" "$:/config/shortcuts-not-linux/">>
-<<shortcut-list "§Windows only" "$:/config/shortcuts-windows/">>
-<<shortcut-list "§Non-Windows platforms only" "$:/config/shortcuts-not-windows/">>
+<<shortcut-list "All" "$:/config/shortcuts/">>
+<<shortcut-list "Mac" "$:/config/shortcuts-mac/">>
+<<shortcut-list "NonMac" "$:/config/shortcuts-not-mac/">>
+<<shortcut-list "Linux" "$:/config/shortcuts-linux/">>
+<<shortcut-list "NonLinux" "$:/config/shortcuts-not-linux/">>
+<<shortcut-list "Windows" "$:/config/shortcuts-windows/">>
+<<shortcut-list "NonWindows" "$:/config/shortcuts-not-windows/">>
 \end
 
 \define shortcut-preview()
