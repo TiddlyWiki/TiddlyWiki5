@@ -92,7 +92,9 @@ Given a tiddler title and an array of existing filenames, generate a new legal f
 */
 FileSystemAdaptor.prototype.generateTiddlerFilename = function(title,extension,existingFilenames) {
 	// First remove any of the characters that are illegal in Windows filenames
-	var baseFilename = transliterate(title.replace(/<|>|\:|\"|\/|\\|\||\?|\*|\^|\s/g,"_"));
+	var sanitizedTitle = transliterate(title.replace(/<|>|\:|\"|\/|\\|\||\?|\*|\^|\s/g,"_"));
+	// Avoid conflicts with variable expansion in Unix shells for system tiddlers
+	var baseFilename = sanitizedTitle.replace(/^\$__/, "_system" + path.sep);
 	// Truncate the filename if it is too long
 	if(baseFilename.length > 200) {
 		baseFilename = baseFilename.substr(0,200);
@@ -120,6 +122,10 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 			};
 		if(err) {
 			return callback(err);
+		}
+		var error = $tw.utils.createDirectory(path.dirname(fileInfo.filepath));
+		if(error) {
+			return callback(error);
 		}
 		var typeInfo = $tw.config.contentTypeInfo[fileInfo.type];
 		if(fileInfo.hasMetaFile || typeInfo.encoding === "base64") {
