@@ -42,7 +42,7 @@ WikifyWidget.prototype.execute = function() {
 	this.wikifyText = this.getAttribute("text");
 	this.wikifyType = this.getAttribute("type");
 	this.wikifyMode = this.getAttribute("mode","block");
-	this.wikifyOutput = this.getAttribute("output","text/plain");
+	this.wikifyOutput = this.getAttribute("output","text");
 	// Create the parse tree
 	this.wikifyParser = this.wiki.parseText(this.wikifyType,this.wikifyText,{
 			parseAsInline: this.wikifyMode === "inline"

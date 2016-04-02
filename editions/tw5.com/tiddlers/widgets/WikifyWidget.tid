@@ -17,7 +17,7 @@ The content of the `<$wikify>` widget is the scope for the value assigned to the
 |text |The text to parse and render |
 |type |The ContentType of the text (defaults to `text/vnd.tiddlywiki`) |
 |mode |The parse mode: `block` (the default) or `inline` |
-|output |Keyword indicating the desired output type (see below) |
+|output |Keyword indicating the desired output type, defaulting to `text` (see below) |
 
 The available output types are:
 
