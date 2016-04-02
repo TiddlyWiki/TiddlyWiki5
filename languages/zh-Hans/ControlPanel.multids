@@ -27,8 +27,19 @@ EditorTypes/Hint: 这些条目决定使用哪个编辑器来编辑特定条目�
 EditorTypes/Type/Caption: 类型
 Info/Caption: 信息
 Info/Hint: 有关此 TiddlyWiki 的信息
+KeyboardShortcuts/Add/Prompt: 在此输入快捷键
+KeyboardShortcuts/Add/Caption: 添加快捷键
 KeyboardShortcuts/Caption: 快捷键
 KeyboardShortcuts/Hint: 管理键盘快捷键分配
+KeyboardShortcuts/NoShortcuts/Caption: 尚无指定快捷键
+KeyboardShortcuts/Remove/Hint: 删除快捷键
+KeyboardShortcuts/Platform/All: 所有平台
+KeyboardShortcuts/Platform/Mac: 仅 Macintosh 平台
+KeyboardShortcuts/Platform/NonMac: 仅非 Macintosh 平台
+KeyboardShortcuts/Platform/Linux: 仅 Linux 平台
+KeyboardShortcuts/Platform/NonLinux: 仅非 Linux 平台
+KeyboardShortcuts/Platform/Windows: 仅 Windows 平台
+KeyboardShortcuts/Platform/NonWindows: 仅非 Windows 平台
 LoadedModules/Caption: 已加载的模块
 LoadedModules/Hint: 这些是当前已加载的模块之源码条目。斜体的模块则无源码条目，通常是因为它们是在引导过程中设置。
 Palette/Caption: 调色板
