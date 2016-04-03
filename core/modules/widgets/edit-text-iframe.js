@@ -149,7 +149,7 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 	if(operation.replacement !== null) {
 		// Work around the problem that textInput can't be used directly to delete text without also replacing it with a non-zero length string
 		if(operation.replacement === "") {
-			operation.replacement = operation.text.substring(0,operation.cutStart) + operation.text.substring(operation.cutEnd)
+			operation.replacement = operation.text.substring(0,operation.cutStart) + operation.text.substring(operation.cutEnd);
 			operation.cutStart = 0;
 			operation.cutEnd = operation.text.length;
 		}
@@ -360,7 +360,7 @@ EditTextIframeWidget.prototype.fixHeight = function() {
 		}
 	} else {
 		var fixedHeight = parseInt(this.wiki.getTiddlerText(HEIGHT_VALUE_TITLE,"400px"),10);
-		fixedHeight = Math.max(fixedHeight,20)
+		fixedHeight = Math.max(fixedHeight,20);
 		this.iframeTextArea.style.height = fixedHeight + "px";
 		this.iframeNode.style.height = (fixedHeight + 14) + "px";
 	}
