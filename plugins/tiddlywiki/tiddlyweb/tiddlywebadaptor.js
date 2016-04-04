@@ -74,7 +74,7 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
         
 				var cookie = self.wiki.getTiddlerText(CONFIG_COOKIE_TIDDLER,DEFAULT_COOKIE_TIDDLER);
 				var cookieRegExp = new RegExp("(?:(?:^|.*;\\s*)"+cookie+"\\s*\\=\\s*([^;]*).*$)|^.*$");
-				var userName = document.cookie.replace(cookieRegExp, "$1");
+				var userName = document.cookie.replace(cookieRegExp,"$1");
 				if(userName) {
 					json.username = userName;
 					isLoggedIn = true;
