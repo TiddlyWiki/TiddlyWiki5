@@ -383,17 +383,18 @@ exports.htmlEncode = function(s) {
 
 // Converts all HTML entities to their character equivalents
 exports.entityDecode = function(s) {
-	var e = s.substr(1,s.length-2); // Strip the & and the ;
+	var converter = String.fromCodePoint || String.fromCharCode,
+		e = s.substr(1,s.length-2); // Strip the & and the ;
 	if(e.charAt(0) === "#") {
 		if(e.charAt(1) === "x" || e.charAt(1) === "X") {
-			return String.fromCharCode(parseInt(e.substr(2),16));	
+			return converter(parseInt(e.substr(2),16));	
 		} else {
-			return String.fromCharCode(parseInt(e.substr(1),10));
+			return converter(parseInt(e.substr(1),10));
 		}
 	} else {
 		var c = $tw.config.htmlEntities[e];
 		if(c) {
-			return String.fromCharCode(c);
+			return converter(c);
 		} else {
 			return s; // Couldn't convert it as an entity, just return it raw
 		}

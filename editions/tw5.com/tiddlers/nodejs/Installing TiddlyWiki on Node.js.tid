@@ -17,6 +17,10 @@ type: text/vnd.tiddlywiki
 ## `tiddlywiki mynewwiki --server` to start TiddlyWiki
 ## Visit http://127.0.0.1:8080/ in your browser
 ## Try editing and creating tiddlers
+# Optionally, make an offline copy:
+#* click the {{$:/core/images/save-button}} ''Save changes'' button in the sidebar, ''OR''
+#* `tiddlywiki --build index`
+
 
 The `-g` flag causes TiddlyWiki to be installed globally. Without it, TiddlyWiki will only be available in the directory where you installed it.
 

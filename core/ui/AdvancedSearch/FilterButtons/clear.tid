@@ -1,0 +1,9 @@
+title: $:/core/ui/AdvancedSearch/Filter/FilterButtons/clear
+tags: $:/tags/AdvancedSearch/FilterButton
+
+<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
+<$button class="tc-btn-invisible">
+<$action-setfield $tiddler="$:/temp/advancedsearch" $field="text" $value=""/>
+{{$:/core/images/close-button}}
+</$button>
+</$reveal>

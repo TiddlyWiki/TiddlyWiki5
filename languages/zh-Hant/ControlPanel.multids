@@ -40,6 +40,7 @@ Palette/Prompt: 當前的調色盤：
 Palette/ShowEditor/Caption: 顯示編輯器
 Plugins/Add/Hint: 從官方插件庫安裝插件
 Plugins/Add/Caption: 獲取更多插件
+Plugins/AlreadyInstalled: 此插件已經安裝版本 <$text text=<<installedVersion>>/>
 Plugins/Caption: 插件
 Plugins/Disable/Caption: 停用
 Plugins/Disable/Hint: 重新載入頁面時停用此插件
@@ -51,6 +52,8 @@ Plugins/Install: 安裝
 Plugins/Installed/Hint: 當前已安裝的插件：
 Plugins/Languages/Caption: 語言
 Plugins/Languages/Hint: 語言包插件
+Plugins/NoInformation: 未提供資訊
+Plugins/NotInstalled: 尚未安裝此插件
 Plugins/OpenPluginLibrary: 開啟插件程式庫
 Plugins/Plugins/Caption: 插件
 Plugins/Plugins/Hint: 插件

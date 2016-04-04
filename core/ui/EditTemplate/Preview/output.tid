@@ -1,0 +1,9 @@
+title: $:/core/ui/EditTemplate/body/preview/output
+tags: $:/tags/EditPreview
+caption: {{$:/language/EditTemplate/Body/Preview/Type/Output}}
+
+<$set name="tv-tiddler-preview" value="yes">
+
+<$transclude />
+
+</$set>

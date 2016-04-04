@@ -136,7 +136,7 @@ $tw.utils.error = function(err) {
 			heading = dm("h1",{text: errHeading}),
 			prompt = dm("div",{text: promptMsg, "class": "tc-error-prompt"}),
 			message = dm("div",{text: err}),
-			button = dm("button",{text: "close"}),
+			button = dm("button",{text: ( $tw.language == undefined ? "Close" : $tw.language.getString("Buttons/Close/Caption") )}),
 			form = dm("form",{children: [heading,prompt,message,button], "class": "tc-error-form"});
 		document.body.insertBefore(form,document.body.firstChild);
 		form.addEventListener("submit",function(event) {
@@ -812,6 +812,7 @@ $tw.Tiddler = function(/* [fields,] fields */) {
 	}
 	// Freeze the tiddler against modification
 	Object.freeze(this.fields);
+	Object.freeze(this);
 };
 
 $tw.Tiddler.prototype.hasField = function(field) {
@@ -1835,6 +1836,7 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("audio/mp3","base64",".mp3");
 	$tw.utils.registerFileType("audio/mp4","base64",[".mp4",".m4a"]);
 	$tw.utils.registerFileType("text/x-markdown","utf8",[".md",".markdown"]);
+	$tw.utils.registerFileType("application/enex+xml","utf8",".enex");	
 	// Create the wiki store for the app
 	$tw.wiki = new $tw.Wiki();
 	// Install built in tiddler fields modules

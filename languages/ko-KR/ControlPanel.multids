@@ -45,6 +45,7 @@ Parsing/Inline/Caption: 인라인 파서 규칙
 Parsing/Pragma/Caption: 플라그마 파서 규칙
 Plugins/Add/Caption: 더 많은 플러그인 얻기
 Plugins/Add/Hint: 공식 라이브러리에서 플러그인을 설치합니다
+Plugins/AlreadyInstalled: 이 플러그인은 이미 <$text text=<<installedVersion>>/> 버전으로 설치되어 있습니다
 Plugins/Caption: 플러그인
 Plugins/Disable/Caption: 비활성화
 Plugins/Disable/Hint: 페이지를 다시 불러올 때 이 플러그인을 비활성화합니다
@@ -56,6 +57,8 @@ Plugins/Install: 설치
 Plugins/Installed/Hint: 현재 설치된 플러그인:
 Plugins/Languages/Caption: 언어
 Plugins/Languages/Hint: 언어 팩 플러그인
+Plugins/NoInformation: 제공된 정보 없음
+Plugins/NotInstalled: 이 플러그인은 현재 설치되어 있지 않습니다
 Plugins/OpenPluginLibrary: 플러그인 라이브러리 열기
 Plugins/Plugins/Caption: 플러그인
 Plugins/Plugins/Hint: 플러그인

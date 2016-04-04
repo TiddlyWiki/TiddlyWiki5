@@ -1164,7 +1164,9 @@ exports.findDraft = function(targetTitle) {
 }
 
 /*
-Check whether the specified draft tiddler has been modified
+Check whether the specified draft tiddler has been modified.
+If the original tiddler doesn't exist, create  a vanilla tiddler variable,
+to check if additional fields have been added.
 */
 exports.isDraftModified = function(title) {
 	var tiddler = this.getTiddler(title);
@@ -1172,11 +1174,9 @@ exports.isDraftModified = function(title) {
 		return false;
 	}
 	var ignoredFields = ["created", "modified", "title", "draft.title", "draft.of"],
-		origTiddler = this.getTiddler(tiddler.fields["draft.of"]);
-	if(!origTiddler) {
-		return tiddler.fields.text !== "";
-	}
-	return tiddler.fields["draft.title"] !== tiddler.fields["draft.of"] || !tiddler.isEqual(origTiddler,ignoredFields);
+		origTiddler = this.getTiddler(tiddler.fields["draft.of"]) || new $tw.Tiddler({text:"", tags:[]}),
+		titleModified = tiddler.fields["draft.title"] !== tiddler.fields["draft.of"];
+	return titleModified || !tiddler.isEqual(origTiddler,ignoredFields);
 };
 
 /*

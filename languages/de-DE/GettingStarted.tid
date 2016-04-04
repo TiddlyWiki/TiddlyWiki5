@@ -1,6 +1,7 @@
 title: GettingStarted
 
-Willkommen bei TiddlyWiki, einem persönlichen nicht-linearen Web-Notizbuch.
+\define lingo-base() $:/language/ControlPanel/Basics/
+Willkommen bei ~TiddlyWiki, einem persönlichen nicht-linearen Web-Notizbuch.
 
 Vor dem Start, vergewissern Sie sich, dass Sie dieses Wiki auch wirklich speichern können. Weitere Informationen finden Sie für:
 
@@ -17,4 +18,15 @@ Erste Schritte:
 * Österreich: [[Weitere Informationen zu WikiText|http://tiddlywiki.com/languages/de-AT/index.html#WikiText]]
 * Deutschland: [[Weitere Informationen zu WikiText|http://tiddlywiki.com/languages/de-DE/index.html#WikiText]]
 
-Hinweis: Die österreichische und deutsche Version unterscheiden sich momentan nur in der Flagge, die bei der Standard Sprachauswahl angezeigt wird. In Zukunft können Beschriftungen der Benutzeroberfläche geringfügig von einander abweichen. zB: Jänner - Januar. 
+Hinweis: Die österreichische und deutsche Version unterscheiden sich momentan nur in der Flagge, die bei der Standard Sprachauswahl angezeigt wird. In Zukunft können Beschriftungen der Benutzeroberfläche geringfügig von einander abweichen. zB: Jänner - Januar.
+
+!! Einrichten dieser ~TiddlyWiki
+
+<div class="tc-control-panel">
+
+|<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+|<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+</div>
+
+See the [[control panel|$:/ControlPanel]] for more options.

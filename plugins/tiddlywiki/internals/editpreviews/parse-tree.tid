@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/internals/EditTemplate/body/preview/parse-tree
+tags: $:/tags/EditPreview
+list-after: $:/core/ui/EditTemplate/body/preview/output
+caption: parse tree
+
+\define preview(mode,output)
+<$parse-tree mode="$mode$" output="$output$"/>
+\end
+
+{{||$:/plugins/tiddlywiki/internals/EditTemplate/body/preview/shared}}

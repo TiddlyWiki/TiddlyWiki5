@@ -7,7 +7,9 @@
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/help",
 		"tiddlywiki/stacked-view",
-		"tiddlywiki/powered-by-tiddlywiki"
+		"tiddlywiki/powered-by-tiddlywiki",
+		"tiddlywiki/internals",
+		"tiddlywiki/highlight"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

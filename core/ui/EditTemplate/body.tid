@@ -20,15 +20,24 @@ tags: $:/tags/EditTemplate
 
 <$reveal state="$:/state/showeditpreview" type="match" text="yes">
 
-<em class="tc-edit"><<lingo Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="no"><<lingo Preview/Button/Hide>></$button>
+<em class="tc-edit"><<lingo Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="no"><<lingo Preview/Button/Hide>></$button> <$list filter="[all[shadows+tiddlers]tag[$:/tags/EditPreview]!has[draft.of]butfirst[]limit[1]]" variable="listItem">
+<em class="tc-edit"><<lingo Preview/Type>></em> <$select tiddler="$:/state/editpreviewtype" default="$:/core/ui/EditTemplate/body/preview/output">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditPreview]!has[draft.of]]">
+<option value=<<currentTiddler>>>{{!!caption}}</option>
+</$list>
+</$select>
+
+</$list>
 
 <div class="tc-tiddler-preview">
 <div class="tc-tiddler-preview-preview">
-<$set name="tv-tiddler-preview" value="yes">
 
-<$transclude />
+<$transclude tiddler={{$:/state/editpreviewtype}} mode="inline">
 
-</$set>
+<$transclude tiddler="$:/core/ui/EditTemplate/body/preview/output" mode="inline"/>
+
+</$transclude>
+
 </div>
 
 <div class="tc-tiddler-preview-edit">

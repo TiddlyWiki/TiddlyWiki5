@@ -45,6 +45,7 @@ Parsing/Inline/Caption: Inline Parse Rules
 Parsing/Pragma/Caption: Pragma Parse Rules
 Plugins/Add/Hint: Install plugins from the official library
 Plugins/Add/Caption: Get more plugins
+Plugins/AlreadyInstalled: This plugin is already installed at version <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: disable
 Plugins/Disable/Hint: Disable this plugin when reloading page
@@ -56,6 +57,8 @@ Plugins/Install: install
 Plugins/Installed/Hint: Currently installed plugins:
 Plugins/Languages/Caption: Languages
 Plugins/Languages/Hint: Language pack plugins
+Plugins/NoInformation: No information provided
+Plugins/NotInstalled: This plugin is not currently installed
 Plugins/OpenPluginLibrary: open plugin library
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins

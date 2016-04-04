@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/internals/EditTemplate/body/preview/widget-tree
+tags: $:/tags/EditPreview
+caption: widget tree
+list-after: $:/plugins/tiddlywiki/internals/EditTemplate/body/preview/parse-tree
+
+\define preview(mode,output)
+<$widget-tree mode="$mode$" output="$output$"/>
+\end
+
+{{||$:/plugins/tiddlywiki/internals/EditTemplate/body/preview/shared}}

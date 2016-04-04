@@ -702,7 +702,7 @@ button.tc-untagged-label {
 <<if-no-sidebar "
 
 	.tc-story-river {
-		width: auto;
+        width: calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
 	}
 
 ">>
@@ -1315,6 +1315,11 @@ html body.tc-body.tc-single-tiddler-window {
 	padding: 0px 10px 0px 10px;
 }
 
+.tc-drop-down .tc-dropdown-item-plain,
+.tc-block-dropdown .tc-dropdown-item-plain {
+	padding: 4px 14px 4px 7px;
+}
+
 .tc-drop-down .tc-dropdown-item,
 .tc-block-dropdown .tc-dropdown-item {
 	padding: 4px 14px 4px 7px;
@@ -1538,8 +1543,6 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-sidebar-lists .tc-tab-buttons button {
-	display: inline;
-	width: auto;
 	background-color: <<colour sidebar-tab-background>>;
 	color: <<colour sidebar-tab-foreground>>;
 	border-left: 1px solid <<colour sidebar-tab-border>>;

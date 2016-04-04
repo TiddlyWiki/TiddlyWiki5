@@ -31,6 +31,8 @@ ExportTiddler/Hint: 티들러를 내보냅니다
 ExportTiddlers/Caption: 여러 티들러 내보내기
 ExportTiddlers/Hint: 여러 티들러를 내보냅니다
 Fold/Caption: 티들러 접기
+Fold/FoldBar/Caption: 접기 막대
+Fold/FoldBar/Hint: 티들러를 선택적으로 접고 펼칠 수 있는 막대
 Fold/Hint: 이 티들러의 본문을 접습니다
 FoldAll/Caption: 모든 티들러 접기
 FoldAll/Hint: 모든 열린 티들러의 본문을 접습니다

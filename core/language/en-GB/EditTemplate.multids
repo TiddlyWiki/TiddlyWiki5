@@ -5,6 +5,8 @@ Body/Hint: Use [[wiki text|http://tiddlywiki.com/static/WikiText.html]] to add f
 Body/Placeholder: Type the text for this tiddler
 Body/Preview/Button/Hide: hide preview
 Body/Preview/Button/Show: show preview
+Body/Preview/Type: preview type:
+Body/Preview/Type/Output: output
 Field/Remove/Caption: remove field
 Field/Remove/Hint: Remove field
 Fields/Add/Button: add
@@ -19,6 +21,7 @@ Tags/Add/Button: add
 Tags/Add/Placeholder: tag name
 Tags/Dropdown/Caption: tag list
 Tags/Dropdown/Hint: Show tag list
+Title/BadCharacterWarning: Warning: avoid using any of the characters <<bad-chars>> in tiddler titles
 Type/Dropdown/Caption: content type list
 Type/Dropdown/Hint: Show content type list
 Type/Delete/Caption: delete content type

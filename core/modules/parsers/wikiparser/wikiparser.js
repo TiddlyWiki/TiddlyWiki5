@@ -16,6 +16,7 @@ Attributes are stored as hashmaps of the following objects:
 
 	{type: "string", value: <string>} - literal string
 	{type: "indirect", textReference: <textReference>} - indirect through a text reference
+	{type: "macro", macro: <TBD>} - indirect through a macro invocation
 
 \*/
 (function(){

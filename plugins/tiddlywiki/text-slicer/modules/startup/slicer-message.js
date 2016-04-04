@@ -21,7 +21,9 @@ exports.synchronous = true;
 // Install the root widget event handlers
 exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-slice-tiddler",function(event) {
-		var slicer = new $tw.Slicer($tw.wiki,event.param);
+		var slicer = new $tw.Slicer($tw.wiki,event.param,{
+			destTitle: event.paramObject.destTitle
+		});
 		slicer.sliceTiddler(event.param)
 		slicer.outputTiddlers();
 		slicer.destroy();

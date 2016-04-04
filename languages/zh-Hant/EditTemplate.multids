@@ -5,6 +5,8 @@ Body/Hint: 使用 WikiText 來新增格式、圖片及動態功能
 Body/Placeholder: 輸入此條目的內容
 Body/Preview/Button/Hide: 隱藏預覽
 Body/Preview/Button/Show: 顯示預覽
+Body/Preview/Type: 預覽類型：
+Body/Preview/Type/Output: 輸出
 Field/Remove/Caption: 刪除欄位
 Field/Remove/Hint: 刪除欄位
 Fields/Add/Button: 新增
@@ -19,6 +21,7 @@ Tags/Add/Button: 新增
 Tags/Add/Placeholder: 標籤名稱
 Tags/Dropdown/Caption: 標籤清單
 Tags/Dropdown/Hint: 顯示標籤清單
+Title/BadCharacterWarning: 請注意，避免在條目名稱中使用這些字元：<<bad-chars>>
 Type/Dropdown/Caption: 內容類型清單
 Type/Dropdown/Hint: 顯示內容類型清單
 Type/Delete/Caption: 刪除內容類型
