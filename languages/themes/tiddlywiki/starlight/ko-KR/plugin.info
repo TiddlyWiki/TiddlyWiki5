@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/themes/tiddlywiki/starlight/ko-KR",
+	"name": "ko-KR",
+	"plugin-type": "language",
+	"description": "Korean (Korea Republic) for Starlight",
+	"author": "Myeongjin",
+	"core-version": ">=5.1.13"
+}
