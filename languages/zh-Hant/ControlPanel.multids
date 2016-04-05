@@ -96,6 +96,9 @@ Settings/LinkToBehaviour/OpenAbove: 開啟於當前條目之上
 Settings/LinkToBehaviour/OpenBelow: 開啟於當前條目之下
 Settings/LinkToBehaviour/OpenAtTop: 開啟於故事河的頂端
 Settings/LinkToBehaviour/OpenAtBottom: 開啟於故事河的底部
+Settings/MissingLinks/Caption: 維基鏈接
+Settings/MissingLinks/Hint: 選擇是否要鏈接到尚未存在的條目
+Settings/MissingLinks/Description: 啟用鏈接到佚失條目
 Settings/NavigationAddressBar/Caption: 網址列導覽
 Settings/NavigationAddressBar/Hint: 在瀏覽器網址列導覽到條目時的行為：
 Settings/NavigationAddressBar/No/Description: 不更新網址列
