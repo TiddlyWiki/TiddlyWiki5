@@ -96,6 +96,9 @@ Settings/LinkToBehaviour/OpenAbove: 开启于当前条目之上
 Settings/LinkToBehaviour/OpenBelow: 开启于当前条目之下
 Settings/LinkToBehaviour/OpenAtTop: 开启于故事河的顶端
 Settings/LinkToBehaviour/OpenAtBottom: 开启于故事河的底部
+Settings/MissingLinks/Caption: 维基链接
+Settings/MissingLinks/Hint: 选择是否要链接到尚未存在的条目
+Settings/MissingLinks/Description: 启用链接到佚失条目
 Settings/NavigationAddressBar/Caption: 网址栏导览
 Settings/NavigationAddressBar/Hint: 在浏览器网址栏导览到条目时的行为：
 Settings/NavigationAddressBar/No/Description: 不更新网址栏
