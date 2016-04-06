@@ -95,6 +95,9 @@ Settings/LinkToBehaviour/OpenAtBottom: 이야기 강의 아래에 열기
 Settings/LinkToBehaviour/OpenAtTop: 이야기 강의 위에 열기
 Settings/LinkToBehaviour/OpenBelow: 현재 티들러 아래에 열기
 Settings/LinkToBehaviour/OutsideRiver/Hint: 이야기 강 //바깥//에서 둘러보기
+Settings/MissingLinks/Caption: 위키 링크
+Settings/MissingLinks/Description: 없는 티들러로의 링크 활성화
+Settings/MissingLinks/Hint: 아직 존재하지 않는 티들러로 링크할지 선택
 Settings/NavigationAddressBar/Caption: 둘러보기 주소 창
 Settings/NavigationAddressBar/Hint: 티들러를 둘러볼 때 브라우저 주소 창의 동작:
 Settings/NavigationAddressBar/No/Description: 주소 창을 업데이트하지 않음
