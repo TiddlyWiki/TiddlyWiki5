@@ -45,6 +45,7 @@ Parsing/Inline/Caption: 인라인 파서 규칙
 Parsing/Pragma/Caption: 플라그마 파서 규칙
 Plugins/Add/Caption: 더 많은 플러그인 얻기
 Plugins/Add/Hint: 공식 라이브러리에서 플러그인을 설치합니다
+Plugins/AlreadyInstalled: 이 플러그인은 이미 <$text text=<<installedVersion>>/> 버전으로 설치되어 있습니다
 Plugins/Caption: 플러그인
 Plugins/Disable/Caption: 비활성화
 Plugins/Disable/Hint: 페이지를 다시 불러올 때 이 플러그인을 비활성화합니다
@@ -56,6 +57,8 @@ Plugins/Install: 설치
 Plugins/Installed/Hint: 현재 설치된 플러그인:
 Plugins/Languages/Caption: 언어
 Plugins/Languages/Hint: 언어 팩 플러그인
+Plugins/NoInformation: 제공된 정보 없음
+Plugins/NotInstalled: 이 플러그인은 현재 설치되어 있지 않습니다
 Plugins/OpenPluginLibrary: 플러그인 라이브러리 열기
 Plugins/Plugins/Caption: 플러그인
 Plugins/Plugins/Hint: 플러그인
@@ -92,6 +95,9 @@ Settings/LinkToBehaviour/OpenAtBottom: 이야기 강의 아래에 열기
 Settings/LinkToBehaviour/OpenAtTop: 이야기 강의 위에 열기
 Settings/LinkToBehaviour/OpenBelow: 현재 티들러 아래에 열기
 Settings/LinkToBehaviour/OutsideRiver/Hint: 이야기 강 //바깥//에서 둘러보기
+Settings/MissingLinks/Caption: 위키 링크
+Settings/MissingLinks/Description: 없는 티들러로의 링크 활성화
+Settings/MissingLinks/Hint: 아직 존재하지 않는 티들러로 링크할지 선택
 Settings/NavigationAddressBar/Caption: 둘러보기 주소 창
 Settings/NavigationAddressBar/Hint: 티들러를 둘러볼 때 브라우저 주소 창의 동작:
 Settings/NavigationAddressBar/No/Description: 주소 창을 업데이트하지 않음

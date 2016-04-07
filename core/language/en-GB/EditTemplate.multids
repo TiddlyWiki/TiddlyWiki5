@@ -17,6 +17,7 @@ Tags/Add/Button: add
 Tags/Add/Placeholder: tag name
 Tags/Dropdown/Caption: tag list
 Tags/Dropdown/Hint: Show tag list
+Title/BadCharacterWarning: Warning: avoid using any of the characters <<bad-chars>> in tiddler titles
 Type/Dropdown/Caption: content type list
 Type/Dropdown/Hint: Show content type list
 Type/Delete/Caption: delete content type
