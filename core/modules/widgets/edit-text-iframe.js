@@ -146,7 +146,7 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 		handler.call(this,event,operation);
 	}
 	// Perform the required changes to the text area and the underlying tiddler
-	var newText = text;
+	var newText = operation.text;
 	if(operation.replacement !== null) {
 		// Work around the problem that textInput can't be used directly to delete text without also replacing it with a non-zero length string
 		if(operation.replacement === "") {
@@ -154,8 +154,8 @@ EditTextIframeWidget.prototype.handleEditTextOperationMessage = function(event) 
 			operation.cutStart = 0;
 			operation.cutEnd = operation.text.length;
 		}
-		newText = operation.text.substring(0,operation.cutStart) + operation.replacement + operation.text.substring(operation.cutEnd),
-			textEvent = this.document.createEvent("TextEvent");
+		newText = operation.text.substring(0,operation.cutStart) + operation.replacement + operation.text.substring(operation.cutEnd);
+		var textEvent = this.document.createEvent("TextEvent");
 		if(textEvent.initTextEvent) {
 			textEvent.initTextEvent("textInput", true, true, null, operation.replacement, 9, "en-US");
 			this.iframeTextArea.focus();
