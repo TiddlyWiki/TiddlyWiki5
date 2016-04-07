@@ -2,22 +2,23 @@ title: $:/themes/tiddlywiki/vanilla/themetweaks
 tags: $:/tags/ControlPanel/Appearance
 caption: Theme Tweaks
 
+\define replacement-text()
+[img[$(imageTitle)$]]
+\end
+
 \define backgroundimage-dropdown()
 <div class="tc-drop-down-wrapper">
 <$button popup=<<qualify "$:/state/popup/themetweaks/backgroundimage">> class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/down-arrow}}</$button>
 <$reveal state=<<qualify "$:/state/popup/themetweaks/backgroundimage">> type="popup" position="belowleft" text="" default="">
 <div class="tc-drop-down">
-<$linkcatcher to="$:/themes/tiddlywiki/vanilla/settings/backgroundimage">
-<$link to="">
-(none)
-</$link>
-<hr>
-<$list filter="[all[shadows+tiddlers]is[image]] -[type[application/pdf]] +[sort[title]]">
-<$link to={{!!title}}>
-<$transclude/> <$view field="title"/>
-</$link>
-</$list>
-</$linkcatcher>
+<$macrocall $name="image-picker" actions="""
+
+<$action-setfield
+	$tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimage"
+	$value=<<imageTitle>>
+/>
+
+"""/>
 </div>
 </$reveal>
 </div>

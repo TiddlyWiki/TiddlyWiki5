@@ -32,6 +32,8 @@ $actions$
 \end
 
 \define colour-picker(actions)
+<div class="tc-colour-chooser">
+
 <$macrocall $name="colour-picker-recent" actions="""$actions$"""/>
 
 ---
@@ -48,5 +50,6 @@ $actions$
 <$macrocall $name="colour-picker-inner" actions="""$actions$"""/>
 </$set>
 
+</div>
 
 \end

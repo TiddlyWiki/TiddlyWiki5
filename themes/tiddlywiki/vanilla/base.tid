@@ -1390,12 +1390,11 @@ html body.tc-body.tc-single-tiddler-window {
     padding: 0 7px 0 7px;
 }
 
-.tc-picture-chooser, .tc-colour-chooser {
+.tc-image-chooser, .tc-colour-chooser {
 	white-space: normal;
-	max-width: 380px;
 }
 
-.tc-picture-chooser a,
+.tc-image-chooser a,
 .tc-colour-chooser a {
 	display: inline-block;
 	vertical-align: top;
@@ -1403,7 +1402,7 @@ html body.tc-body.tc-single-tiddler-window {
 	position: relative;
 }
 
-.tc-picture-chooser a {
+.tc-image-chooser a {
 	border: 1px solid <<colour muted-foreground>>;
 	padding: 2px;
 	margin: 2px;
@@ -1418,15 +1417,15 @@ html body.tc-body.tc-single-tiddler-window {
     vertical-align: middle;
 }
 
-.tc-picture-chooser a:hover,
+.tc-image-chooser a:hover,
 .tc-colour-chooser a:hover {
 	background: <<colour primary>>;
 	padding: 0px;
 	border: 3px solid <<colour primary>>;
 }
 
-.tc-picture-chooser a svg,
-.tc-picture-chooser a img {
+.tc-image-chooser a svg,
+.tc-image-chooser a img {
     display: inline-block;
     width: auto;
     height: auto;

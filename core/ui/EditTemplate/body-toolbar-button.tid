@@ -28,7 +28,7 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
 <$transclude tiddler=<<currentTiddler>> field="text"/>
 </$button>
 <$reveal state=<<dropdown-state>> type="popup" position="below" animate="yes" tag="span">
-<div class="tc-drop-down tc-popup-keep">
+<div class="tc-drop-down tc-popup-keep" style="max-width: 75%;">
 <$transclude tiddler={{!!dropdown}} mode="block"/>
 </div>
 </$reveal>

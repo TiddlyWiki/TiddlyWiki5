@@ -2,8 +2,6 @@ title: $:/core/ui/EditorToolbar/paint-dropdown
 
 ''{{$:/language/Buttons/Paint/Hint}}''
 
-<div class="tc-colour-chooser">
-
 <$macrocall $name="colour-picker" actions="""
 
 <$action-setfield
@@ -16,5 +14,3 @@ title: $:/core/ui/EditorToolbar/paint-dropdown
 />
 
 """/>
-
-</div>
