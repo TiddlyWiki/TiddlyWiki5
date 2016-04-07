@@ -89,12 +89,7 @@ EditTextIframeWidget.prototype.render = function(parent,nextSibling) {
 		this.iframeTextArea.setAttribute("rows",this.editRows);
 	}
 	// Copy the styles from the dummy textarea
-	var textAreaStyles = window.getComputedStyle(this.dummyTextArea,null),
-		styleText = [];
-	$tw.utils.each(textAreaStyles,function(name,index) {
-		styleText.push(name + ": " + textAreaStyles[name] + ";");
-	});
-	this.iframeTextArea.style.cssText = styleText.join("");
+	$tw.utils.copyStyles(this.dummyTextArea,this.iframeTextArea);
 	this.iframeTextArea.style.display = "block";
 	this.iframeTextArea.style.width = "100%";
 	// Add event listeners for the textarea

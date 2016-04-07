@@ -164,5 +164,30 @@ exports.addEventListeners = function(domNode,events) {
 	});
 };
 
+/*
+Get the computed styles applied to an element as an array of strings of individual CSS properties
+*/
+exports.getComputedStyles = function(domNode) {
+	var textAreaStyles = window.getComputedStyle(domNode,null),
+		styleDefs = [];
+	$tw.utils.each(Object.keys(textAreaStyles),function(name) {
+		styleDefs.push(name + ": " + textAreaStyles[name] + ";");
+	});
+	return styleDefs;
+};
+
+/*
+Apply a set of styles passed as an array of strings of individual CSS properties
+*/
+exports.setStyles = function(domNode,styleDefs) {
+	domNode.style.cssText = styleDefs.join("");
+};
+
+/*
+Copy the computed styles from a source element to a destination element
+*/
+exports.copyStyles = function(srcDomNode,dstDomNode) {
+	$tw.utils.setStyles(dstDomNode,$tw.utils.getComputedStyles(srcDomNode));
+};
 
 })();
