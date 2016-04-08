@@ -1,0 +1,16 @@
+title: $:/language/plugins/tiddlywiki/text-slicer/
+
+CreateBySlicing/Hint: 기존 티들러를 썰어서 문서를 만듭니다
+ExcludeFilter: 필터 제외
+Help: 도움말
+None: 없음
+Orphans/Hint: [텍스트-슬라이서] 어떠한 문서의 부분이 아닌 티들러
+Parents: 부모
+Rename: 이름 바꾸기
+ShowDocument: 문서 보기
+ShowMetadata: 메타데이터 보기
+ShowToolbar: 툴바 보기
+SliceTiddler/Caption: 티들러 썰기
+SliceTiddler/Hint: 문단 제목 및 목록별로 이 티들러를 썹니다
+TiddlerExists/Hint: 경고: 티들러가 이미 존재합니다
+ViewDocument: 문서 보기

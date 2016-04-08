@@ -1,0 +1,8 @@
+title: $:/language/Help/slice
+description: 개별 티들러 안으로 계층으로 문서를 썹니다
+
+지정한 티들러를 썹니다
+
+```
+--slice <title>
+```

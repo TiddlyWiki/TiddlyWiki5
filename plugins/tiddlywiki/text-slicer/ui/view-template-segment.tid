@@ -25,7 +25,7 @@ $:/state/plugins/tiddlywiki/text-slicer/heading-status/$(currentTiddler)$
 
 </div>
 
-Parents: <$list filter="[all[current]listed[]!is[system]]" emptyMessage="None">
+{{$:/language/plugins/tiddlywiki/text-slicer/Parents}}: <$list filter="[all[current]listed[]!is[system]]" emptyMessage="{{$:/language/plugins/tiddlywiki/text-slicer/None}}">
 <$link><$view field="title"/></$link>
 </$list>
 

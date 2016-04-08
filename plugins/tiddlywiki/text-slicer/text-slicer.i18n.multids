@@ -1,0 +1,16 @@
+title: $:/language/plugins/tiddlywiki/text-slicer/
+
+CreateBySlicing/Hint: Create a document by slicing an existing tiddler
+ExcludeFilter: Exclude filter
+Help: Help
+None: None
+Orphans/Hint: [Text-slicer] Tiddlers that are not part of any document
+Parents: Parents
+Rename: rename
+ShowDocument: Show document
+ShowMetadata: Show metadata
+ShowToolbar: Show toolbar
+SliceTiddler/Caption: Slice tiddler
+SliceTiddler/Hint: Slice this tiddler by headings and lists
+TiddlerExists/Hint: Warning: tiddler already exists
+ViewDocument: View document

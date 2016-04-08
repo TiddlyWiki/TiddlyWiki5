@@ -16,11 +16,11 @@ cancel
 <$button>
 <$action-sendmessage $message="tm-rename-tiddler" from=<<currentTiddler>> to={{$(renameProxyTitle)$}}/>
 <$action-deletetiddler $tiddler=<<renameProxyTitle>>/>
-rename
+{{$:/language/plugins/tiddlywiki/text-slicer/Rename}}
 </$button>
 <$set name="proxy-title" value={{$(renameProxyTitle)$}}>
 <$list filter="""[<proxy-title>is[tiddler]]""">
-Warning: tiddler already exists
+{{$:/language/plugins/tiddlywiki/text-slicer/TiddlerExists/Hint}}
 </$list>
 </$set>
 </$reveal>

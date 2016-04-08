@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/text-slicer/ui/preview-column/multiple
 
-Show document: <$select tiddler="$:/plugins/tiddlywiki/text-slicer/config/currentDocument">
+{{$:/language/plugins/tiddlywiki/text-slicer/ShowDocument}}: <$select tiddler="$:/plugins/tiddlywiki/text-slicer/config/currentDocument">
 <$list filter="[toc-type[document]!has[draft.of]sort[title]]">
 <option value=<<currentTiddler>>><$view field="title"/></option>
 </$list>
