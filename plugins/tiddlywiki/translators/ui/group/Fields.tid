@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/translators/ui/group/Docs/Fields
-caption: Fields
+caption: {{$:/language/plugins/tiddlywiki/translators/Group/Fields/Caption}}
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
@@ -9,8 +9,8 @@ tags: $:/tags/TranslationGroup
 [all[current]removeprefix[$:/language/Docs/Fields/]]
 \end
 
-! Fields
+! {{$:/language/plugins/tiddlywiki/translators/Group/Fields/Caption}}
 
-Descriptions of commonly used fields.
+{{$:/language/plugins/tiddlywiki/translators/Group/Fields/Hint}}
 
 <<translatableStringEditor>>

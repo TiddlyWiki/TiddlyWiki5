@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/translators/ui/group/Miscellaneous
-caption: Miscellaneous
+caption: {{$:/language/plugins/tiddlywiki/translators/Group/Miscellaneous/Caption}}
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
@@ -28,8 +28,8 @@ tags: $:/tags/TranslationGroup
 [all[current]removeprefix[$:/language/]] [all[current]removeprefix[$:/config/]] [all[current]!prefix[$:/language/]!prefix[$:/config/]]
 \end
 
-! Miscellaneous
+! {{$:/language/plugins/tiddlywiki/translators/Group/Miscellaneous/Caption}}
 
-Miscellaneous translatable strings.
+{{$:/language/plugins/tiddlywiki/translators/Group/Miscellaneous/Hint}}
 
 <<translatableStringEditor>>

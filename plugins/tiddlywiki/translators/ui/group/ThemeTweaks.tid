@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/translators/ui/group/ThemeTweaks
-caption: Theme Tweaks
+caption: {{$:/language/plugins/tiddlywiki/translators/Group/ThemeTweaks/Caption}}
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
@@ -9,8 +9,8 @@ tags: $:/tags/TranslationGroup
 [all[current]removeprefix[$:/language/ThemeTweaks/]]
 \end
 
-! Theme Tweaks
+! {{$:/language/plugins/tiddlywiki/translators/Group/ThemeTweaks/Caption}}
 
-Strings used in the theme tweaks for Vanilla.
+{{$:/language/plugins/tiddlywiki/translators/Group/ThemeTweaks/Hint}}
 
 <<translatableStringEditor>>

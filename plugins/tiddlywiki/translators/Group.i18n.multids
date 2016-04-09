@@ -1,0 +1,38 @@
+title: $:/language/plugins/tiddlywiki/translators/Group/
+
+Buttons/Caption: Buttons
+Buttons/Hint: Toolbar buttons. The ''/Caption'' tiddlers specify the text to be displayed on the button and the ''/Hint'' tiddlers specify the tooltip text.
+ControlPanel/Caption: Control Panel
+ControlPanel/Hint: [[Control Panel|$:/ControlPanel]].
+Date/Caption: Date
+Date/Hint: Absolute and relative dates.
+EditTemplate/Caption: Edit Template
+EditTemplate/Hint: Strings used in the tiddler edit template.
+Fields/Caption: Fields
+Fields/Hint: Descriptions of commonly used fields.
+Filters/Caption: Filters
+Filters/Hint: Translatable titles of the preconfigured filters available in [[advanced search|$:/AdvancedSearch]].
+GettingStarted/Caption: Getting Started
+GettingStarted/Hint: The GettingStarted tiddler that is displayed when an empty ~TiddlyWiki starts.
+Help/Caption: Help
+Help/Hint: Help text for the ~TiddlyWiki commands available under Node.js.
+Import/Caption: Import
+Import/Hint: Import mechanism.
+Miscellaneous/Caption: Miscellaneous
+Miscellaneous/Hint: Miscellaneous translatable strings.
+ModuleTypes/Caption: Module Types
+ModuleTypes/Hint: Module types. This is technical information that is probably not required in most translations.
+PaletteColours/Caption: Palette Colours
+PaletteColours/Hint: Palette colours.
+Search/Caption: Search
+Search/Hint: Search-related translatable strings.
+Sidebar/Caption: Sidebar
+Sidebar/Hint: Sidebar-related translatable strings.
+Snippets/Caption: Snippets
+Snippets/Hint: Text snippets for use by the stamp text editor toolbar button.
+ThemeTweaks/Caption: Theme Tweaks
+ThemeTweaks/Hint: Strings used in the theme tweaks for Vanilla.
+TiddlerInfo/Caption: Tiddler Info
+TiddlerInfo/Hint: Tiddler info panel.
+Types/Caption: Types
+Types/Hint: Descriptions for each content type (as appears in the type dropdown in the tiddler editor).

@@ -1,0 +1,12 @@
+title: $:/language/plugins/tiddlywiki/translators/
+
+DeleteTranslation: Delete translation
+EditorTag/MultiLine: Multi-line editors
+EditorTag/SingleLine: Single-line editors
+Fields: Fields
+GroupTranslatableTiddlers: <$count filter=<<translatableTiddlerTitles>>/> translatable tiddlers in this group
+OriginalText: Original en-GB text
+Title: Title
+TranslatableStringEditorWrapper/All: Show all strings
+TranslatableStringEditorWrapper/Translated: Only show translated strings
+TranslatableStringEditorWrapper/NotTranslated: Only show strings that have not been translated

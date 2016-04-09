@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/translators/ui/group/Date
-caption: Date
+caption: {{$:/language/plugins/tiddlywiki/translators/Group/Date/Caption}}
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
@@ -11,8 +11,8 @@ tags: $:/tags/TranslationGroup
 [all[current]removeprefix[$:/language/Date/]] [all[current]removeprefix[$:/language/RelativeDate/]]
 \end
 
-! Date
+! {{$:/language/plugins/tiddlywiki/translators/Group/Date/Caption}}
 
-Absolute and relative dates.
+{{$:/language/plugins/tiddlywiki/translators/Group/Date/Hint}}
 
 <<translatableStringEditor>>

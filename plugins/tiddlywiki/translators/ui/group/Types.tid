@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/translators/ui/group/Docs/Types
-caption: Types
+caption: {{$:/language/plugins/tiddlywiki/translators/Group/Types/Caption}}
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
@@ -9,8 +9,8 @@ tags: $:/tags/TranslationGroup
 [all[current]removeprefix[$:/language/Docs/Types/]]
 \end
 
-! Types
+! {{$:/language/plugins/tiddlywiki/translators/Group/Types/Caption}}
 
-Descriptions for each content type (as appears in the type dropdown in the tiddler editor).
+{{$:/language/plugins/tiddlywiki/translators/Group/Types/Hint}}
 
 <<translatableStringEditor editorFields:"description group">>

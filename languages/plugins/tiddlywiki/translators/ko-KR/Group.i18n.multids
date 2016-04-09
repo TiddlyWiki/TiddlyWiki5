@@ -1,0 +1,38 @@
+title: $:/language/plugins/tiddlywiki/translators/Group/
+
+Buttons/Caption: 버튼
+Buttons/Hint: 도구 모음 버튼. ''/Caption'' 티들러는 버튼에 표시되는 텍스트를 지정하며 ''/Hint'' 티들러는 툴팁 텍스트를 지정합니다.
+ControlPanel/Caption: 제어판
+ControlPanel/Hint: [[제어판|$:/ControlPanel]].
+Date/Caption: 날짜
+Date/Hint: 절대 및 상대 날짜.
+EditTemplate/Caption: 편집 템플릿
+EditTemplate/Hint: 티들러 편집 템플릿에 사용되는 문자열.
+Fields/Caption: 필드
+Fields/Hint: 일반적으로 사용되는 필드의 설명.
+Filters/Caption: 필터
+Filters/Hint: [[고급 검색|$:/AdvancedSearch]]에 사용할 수 있는 미리 구성된 필터의 번역할 수 있는 제목.
+GettingStarted/Caption: 시작하기
+GettingStarted/Hint: 빈 티들리위키를 시작할 때 표시되는 GettingStarted 티들러.
+Help/Caption: 도움말
+Help/Hint: Node.js에서 사용할 수 있는 티들리위키 명령에 대한 도움말 텍스트.
+Import/Caption: 가져오기
+Import/Hint: 가져오기 메커니즘.
+Miscellaneous/Caption: 기타
+Miscellaneous/Hint: 기타 번역할 수 있는 문자열.
+ModuleTypes/Caption: 모듈 형식
+ModuleTypes/Hint: 모듈 형식. 아마도 대부분의 번역이 필요하지 않는 기술 정보입니다.
+PaletteColours/Caption: 팔레트 색
+PaletteColours/Hint: 팔레트 색.
+Search/Caption: 검색
+Search/Hint: 검색과 관련된 번역할 수 있는 문자열.
+Sidebar/Caption: 사이드바
+Sidebar/Hint: 사이드바와 관련된 번역할 수 있는 문자열.
+Snippets/Caption: 스니펫
+Snippets/Hint: 도장 텍스트 편집기 도구 모음 버튼에 사용하는 텍스트 스니펫.
+ThemeTweaks/Caption: 테마 개조
+ThemeTweaks/Hint: Vanilla를 위한 테마 개조에 사용되는 문자열.
+TiddlerInfo/Caption: 티들러 정보
+TiddlerInfo/Hint: 티들러 정보 패널.
+Types/Caption: 형식
+Types/Hint: (티들러 편집기에서 형식 드롭다운에 나타날) 각 내용 형식의 설명.

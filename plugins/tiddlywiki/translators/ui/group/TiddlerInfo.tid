@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/translators/ui/group/TiddlerInfo
-caption: Tiddler Info
+caption: {{$:/language/plugins/tiddlywiki/translators/Group/TiddlerInfo/Caption}}
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
@@ -9,8 +9,8 @@ tags: $:/tags/TranslationGroup
 [all[current]removeprefix[$:/language/TiddlerInfo/]]
 \end
 
-! Tiddler Info
+! {{$:/language/plugins/tiddlywiki/translators/Group/TiddlerInfo/Caption}}
 
-Tiddler info panel.
+{{$:/language/plugins/tiddlywiki/translators/Group/TiddlerInfo/Hint}}
 
 <<translatableStringEditor>>

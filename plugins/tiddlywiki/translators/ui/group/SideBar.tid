@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/translators/ui/group/SideBar
-caption: Sidebar
+caption: {{$:/language/plugins/tiddlywiki/translators/Group/Sidebar/Caption}}
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
@@ -9,8 +9,8 @@ tags: $:/tags/TranslationGroup
 [all[current]removeprefix[$:/language/SideBar/]]
 \end
 
-! Sidebar
+! {{$:/language/plugins/tiddlywiki/translators/Group/Sidebar/Caption}}
 
-Sidebar-related translatable strings.
+{{$:/language/plugins/tiddlywiki/translators/Group/Sidebar/Hint}}
 
 <<translatableStringEditor>>

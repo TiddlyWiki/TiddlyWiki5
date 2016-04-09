@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/translators/ui/group/EditTemplate
-caption: Edit Template
+caption: {{$:/language/plugins/tiddlywiki/translators/Group/EditTemplate/Caption}}
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
@@ -9,8 +9,8 @@ tags: $:/tags/TranslationGroup
 [all[current]removeprefix[$:/language/EditTemplate/]]
 \end
 
-! Edit Template
+! {{$:/language/plugins/tiddlywiki/translators/Group/EditTemplate/Caption}}
 
-Strings used in the tiddler edit template.
+{{$:/language/plugins/tiddlywiki/translators/Group/EditTemplate/Hint}}
 
 <<translatableStringEditor>>

@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/translators/ui/group/ControlPanel
-caption: Control Panel
+caption: {{$:/language/plugins/tiddlywiki/translators/Group/ControlPanel/Caption}}
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
@@ -9,8 +9,8 @@ tags: $:/tags/TranslationGroup
 [all[current]removeprefix[$:/language/ControlPanel/]]
 \end
 
-! Control Panel
+! {{$:/language/plugins/tiddlywiki/translators/Group/ControlPanel/Caption}}
 
-[[Control Panel|$:/ControlPanel]].
+{{$:/language/plugins/tiddlywiki/translators/Group/ControlPanel/Hint}}
 
 <<translatableStringEditor>>

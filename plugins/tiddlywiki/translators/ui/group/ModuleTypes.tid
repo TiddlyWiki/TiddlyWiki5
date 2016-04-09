@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/translators/ui/group/Docs/ModuleTypes
-caption: Module Types
+caption: {{$:/language/plugins/tiddlywiki/translators/Group/ModuleTypes/Caption}}
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
@@ -9,8 +9,8 @@ tags: $:/tags/TranslationGroup
 [all[current]removeprefix[$:/language/Docs/ModuleTypes/]]
 \end
 
-! Module Types
+! {{$:/language/plugins/tiddlywiki/translators/Group/ModuleTypes/Caption}}
 
-Module types. This is technical information that is probably not required in most translations.
+{{$:/language/plugins/tiddlywiki/translators/Group/ModuleTypes/Hint}}
 
 <<translatableStringEditor>>

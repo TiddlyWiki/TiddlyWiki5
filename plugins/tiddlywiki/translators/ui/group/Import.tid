@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/translators/ui/group/Import
-caption: Import
+caption: {{$:/language/plugins/tiddlywiki/translators/Group/Import/Caption}}
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
@@ -9,8 +9,8 @@ tags: $:/tags/TranslationGroup
 [all[current]removeprefix[$:/language/Import/]]
 \end
 
-! Import
+! {{$:/language/plugins/tiddlywiki/translators/Group/Import/Caption}}
 
-Import mechanism.
+{{$:/language/plugins/tiddlywiki/translators/Group/Import/Hint}}
 
 <<translatableStringEditor>>

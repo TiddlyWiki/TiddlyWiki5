@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/translators/ui/group/Search
-caption: Search
+caption: {{$:/language/plugins/tiddlywiki/translators/Group/Search/Caption}}
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
@@ -9,8 +9,8 @@ tags: $:/tags/TranslationGroup
 [all[current]removeprefix[$:/language/Search/]]
 \end
 
-! Search
+! {{$:/language/plugins/tiddlywiki/translators/Group/Search/Caption}}
 
-Search-related translatable strings.
+{{$:/language/plugins/tiddlywiki/translators/Group/Search/Hint}}
 
 <<translatableStringEditor>>

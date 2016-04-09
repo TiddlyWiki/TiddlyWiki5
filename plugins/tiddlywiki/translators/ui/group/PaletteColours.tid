@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/translators/ui/group/Docs/PaletteColours
-caption: Palette Colours
+caption: {{$:/language/plugins/tiddlywiki/translators/Group/PaletteColours/Caption}}
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
@@ -9,8 +9,8 @@ tags: $:/tags/TranslationGroup
 [all[current]removeprefix[$:/language/Docs/PaletteColours/]]
 \end
 
-! Palette Colours
+! {{$:/language/plugins/tiddlywiki/translators/Group/PaletteColours/Caption}}
 
-Palette colours.
+{{$:/language/plugins/tiddlywiki/translators/Group/PaletteColours/Hint}}
 
 <<translatableStringEditor>>

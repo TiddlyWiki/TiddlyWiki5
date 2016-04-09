@@ -19,7 +19,7 @@ tags: $:/tags/Macro
 <$reveal state=<<qualify "$:/state/popup/translationInfo/$tiddlerTitle$">> type="popup" position="belowleft" text="" default="">
 <div class="tc-drop-down">
 <p>
-Original en-GB text:
+{{$:/language/plugins/tiddlywiki/translators/OriginalText}}:
 </p>
 <$list filter="""$(editFieldsFilter)$""" variable="editorField">
 <p>
@@ -29,7 +29,7 @@ Original en-GB text:
 </$list>
 <p>
 <$button message="tm-delete-tiddler" param=<<currentTiddler>>>
-Delete translation
+{{$:/language/plugins/tiddlywiki/translators/DeleteTranslation}}
 </$button>
 </p>
 </div>
@@ -58,25 +58,25 @@ Delete translation
 \define translatableStringEditorOuter()
 <div class="tc-translators-string-table">
 
-//<$count filter=<<translatableTiddlerTitles>>/> translatable tiddlers in this group//
+//{{$:/language/plugins/tiddlywiki/translators/GroupTranslatableTiddlers}}//
 
-<$radio tiddler="$:/plugins/tiddlywiki/translators/editorTag" value="textarea"> Multi-line editors</$radio><br>
-<$radio tiddler="$:/plugins/tiddlywiki/translators/editorTag" value="input"> Single-line editors</$radio>
+<$radio tiddler="$:/plugins/tiddlywiki/translators/editorTag" value="textarea"> {{$:/language/plugins/tiddlywiki/translators/EditorTag/MultiLine}}</$radio><br>
+<$radio tiddler="$:/plugins/tiddlywiki/translators/editorTag" value="input"> {{$:/language/plugins/tiddlywiki/translators/EditorTag/SingleLine}}</$radio>
 
 <$select tiddler="$:/plugins/tiddlywiki/translators/editorView">
-<option value="translatableStringEditorWrapperAll">Show all strings</option>
-<option value="translatableStringEditorWrapperTranslated">Only show translated strings</option>
-<option value="translatableStringEditorWrapperNotTranslated">Only show strings that have not been translated</option>
+<option value="translatableStringEditorWrapperAll">{{$:/language/plugins/tiddlywiki/translators/TranslatableStringEditorWrapper/All}}</option>
+<option value="translatableStringEditorWrapperTranslated">{{$:/language/plugins/tiddlywiki/translators/TranslatableStringEditorWrapper/Translated}}</option>
+<option value="translatableStringEditorWrapperNotTranslated">{{$:/language/plugins/tiddlywiki/translators/TranslatableStringEditorWrapper/NotTranslated}}</option>
 </$select>
 
 <table>
 <tbody>
 <tr>
 <th>
-Title
+{{$:/language/plugins/tiddlywiki/translators/Title}}
 </th>
 <th>
-Fields: $(editFieldsFilter)$
+{{$:/language/plugins/tiddlywiki/translators/Fields}}: $(editFieldsFilter)$
 </th>
 <th>
 &nbsp;

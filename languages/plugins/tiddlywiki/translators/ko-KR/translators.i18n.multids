@@ -1,0 +1,12 @@
+title: $:/language/plugins/tiddlywiki/translators/
+
+DeleteTranslation: 번역 삭제
+EditorTag/MultiLine: 여러 줄 편집기
+EditorTag/SingleLine: 하나 줄 편집기
+Fields: 필드
+GroupTranslatableTiddlers: 이 그룹에 번역할 수 있는 문자열 <$count filter=<<translatableTiddlerTitles>>/>개
+OriginalText: 원래 en-GB 텍스트
+Title: 제목
+TranslatableStringEditorWrapper/All: 모든 문자열 보기
+TranslatableStringEditorWrapper/Translated: 번역된 문자열만 보기
+TranslatableStringEditorWrapper/NotTranslated: 번역되지 않은 문자열만 보기

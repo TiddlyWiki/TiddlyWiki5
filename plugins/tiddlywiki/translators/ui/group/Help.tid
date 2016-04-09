@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/translators/ui/group/Help
-caption: Help
+caption: {{$:/language/plugins/tiddlywiki/translators/Group/Help/Caption}}
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
@@ -9,8 +9,8 @@ tags: $:/tags/TranslationGroup
 [all[current]removeprefix[$:/language/Help/]]
 \end
 
-! Help
+! {{$:/language/plugins/tiddlywiki/translators/Group/Help/Caption}}
 
-Help text for the ~TiddlyWiki commands available under Node.js.
+{{$:/language/plugins/tiddlywiki/translators/Group/Help/Hint}}
 
 <<translatableStringEditor editorFields:"text description">>
