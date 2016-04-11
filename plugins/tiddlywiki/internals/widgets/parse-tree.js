@@ -1,5 +1,5 @@
 /*\
-title: $:/$:/plugins/tiddlywiki/internals/widgets/parse-tree.js
+title: $:/plugins/tiddlywiki/internals/widgets/parse-tree.js
 type: application/javascript
 module-type: widget
 
