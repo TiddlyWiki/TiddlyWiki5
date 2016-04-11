@@ -10,7 +10,6 @@
 		"tiddlywiki/powered-by-tiddlywiki",
 		"tiddlywiki/internals",
 		"tiddlywiki/highlight",
-		"tiddlywiki/codemirror",
 		"tiddlywiki/markdown"
 	],
 	"themes": [

@@ -32,6 +32,39 @@ exports.trim = function(str) {
 };
 
 /*
+Find the line break preceding a given position in a string
+Returns position immediately after that line break, or the start of the string
+*/
+exports.findPrecedingLineBreak = function(text,pos) {
+	var result = text.lastIndexOf("\n",pos - 1);
+	if(result === -1) {
+		result = 0;
+	} else {
+		result++;
+		if(text.charAt(result) === "\r") {
+			result++;
+		}
+	}
+	return result;
+};
+
+/*
+Find the line break following a given position in a string
+*/
+exports.findFollowingLineBreak = function(text,pos) {
+	// Cut to just past the following line break, or to the end of the text
+	var result = text.indexOf("\n",pos);
+	if(result === -1) {
+		result = text.length;
+	} else {
+		if(text.charAt(result) === "\r") {
+			result++;
+		}
+	}
+	return result;
+};
+
+/*
 Return the number of keys in an object
 */
 exports.count = function(object) {
