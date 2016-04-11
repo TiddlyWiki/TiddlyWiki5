@@ -9,9 +9,31 @@ type: text/vnd.tiddlywiki
 
 ! Major Improvements
 
-!! New Text Editor Toolbars
+!! New Editor Toolbars
 
-[[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2315]] support for extensible formatting toolbars for the edit-text widget.
+[[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2315]] support for extensible formatting toolbars for the editor widgets.
+
+* Formatting operations for WikiText, with support for Markdown:
+** Character formatting operations for bold, italic, strikethrough, underline, superscript, subscript, inline monospace
+** Line formatting operations for monospaced blocks, quoting, headings and both numbered and bulleted lists
+** Insert picture from a dropdown chooser
+** Stamp snippet of pre-programmed text
+** Excise selected text into a new tiddler
+** Optional automatic resizing to fit content
+* Full keyboard shortcut editor in control panel. Shortcuts are also shown in the toolbar button tooltips
+
+!! Improved Bitmap Editor
+
+The bitmap editor has been enhanced with a toolbar supporting:
+
+* Painting with selectable colour, width and opacity
+* Clearing the image
+* Resizing the image
+* Keeping track of recently chosen colours
+
+!! Improved CodeMirror Plugin
+
+The CodeMirror plugin has been updated to version 5.13.2, and integrated with the new editor toolbars. The default configuration has been updated to include syntax highlighting for HTML, ~JavaScript, CSS, XML, TiddlyWiki Classic and Markdown.
 
 !! New Evernote Plugin
 
@@ -39,11 +61,16 @@ The new `tiddlywiki/internals` plugin provides features to help understand the i
 
 !! Usability Improvements
 
+* Addition of “new image” button to the “Tools” tab of the sidebar
+* Introduction of new general purpose [[colour-picker Macro]]
+* Introduction of new general purpose [[image-picker macro]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/adf45b346847a81d4ed26397466daa4514035bb9]] a bulk delete button to [[advanced search|$:/AdvancedSearch]] "Filter" tab
 
 !! Hackability Improvements
 
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/<TODO>]] editor preview pane to allow plugins to add further types of preview (see the new `tiddlywiki/internals` plugin for an example)
+* [[Introduction|https://github.com/Jermolene/TiddlyWiki5/issues/2337]] of the new WikifyWidget
+* [[Introduction|]] of new EditShortcutWidget for direct entry of keyboard shortcut codes
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/7daebba46bad0e7ea3e4dfc1fc2e59e36414a683]] editor preview pane to allow plugins to add further types of preview (see the new `tiddlywiki/internals` plugin for an example)
 
 !! Bug Fixes
 
