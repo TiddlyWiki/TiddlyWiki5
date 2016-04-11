@@ -968,11 +968,11 @@ html body.tc-body.tc-single-tiddler-window {
 ** Editor
 */
 
-.tc-edit-text-iframe-toolbar {
+.tc-editor-toolbar {
     margin-top: 8px;	
 }
 
-.tc-edit-text-iframe-toolbar button {
+.tc-editor-toolbar button {
 	vertical-align: middle;
 	background-color: <<colour tiddler-controls-foreground>>;
 	fill: <<colour tiddler-controls-foreground-selected>>;
@@ -981,31 +981,31 @@ html body.tc-body.tc-single-tiddler-window {
     margin: 2px 0;
 }
 
-.tc-edit-text-iframe-toolbar button.tc-text-editor-toolbar-item-adjunct {
+.tc-editor-toolbar button.tc-text-editor-toolbar-item-adjunct {
     margin-left: -4px;
     width: 1em;
     border-radius: 8px;	
 }
 
-.tc-edit-text-iframe-toolbar button.tc-selected {
+.tc-editor-toolbar button.tc-selected {
 	background-color: <<colour primary>>;
 }
 
-.tc-edit-text-iframe-toolbar button svg {
+.tc-editor-toolbar button svg {
     width: 1.6em;
     height: 1.2em;
 }
 
-.tc-edit-text-iframe-toolbar button:hover {
+.tc-editor-toolbar button:hover {
 	background-color: <<colour tiddler-controls-foreground-selected>>;
 	fill: <<colour background>>;
 }
 
-.tc-edit-text-iframe-toolbar .tc-text-editor-toolbar-more {
+.tc-editor-toolbar .tc-text-editor-toolbar-more {
 	white-space: normal;
 }
 
-.tc-edit-text-iframe-toolbar .tc-text-editor-toolbar-more button {
+.tc-editor-toolbar .tc-text-editor-toolbar-more button {
 	display: inline-block;
 	padding: 3px;
 	width: auto;

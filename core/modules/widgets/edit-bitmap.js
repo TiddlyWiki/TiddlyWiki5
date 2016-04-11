@@ -50,7 +50,7 @@ EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create the wrapper for the toolbar and render its content
 	this.toolbarNode = this.document.createElement("div");
-	this.toolbarNode.className = "tc-edit-text-iframe-toolbar";
+	this.toolbarNode.className = "tc-editor-toolbar";
 	parent.insertBefore(this.toolbarNode,nextSibling);
 	this.domNodes.push(this.toolbarNode);
 	// Create the on-screen canvas

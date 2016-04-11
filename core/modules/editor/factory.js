@@ -50,7 +50,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		// Create the wrapper for the toolbar and render its content
 		if(this.editShowToolbar) {
 			this.toolbarNode = this.document.createElement("div");
-			this.toolbarNode.className = "tc-edit-text-iframe-toolbar";
+			this.toolbarNode.className = "tc-editor-toolbar";
 			parent.insertBefore(this.toolbarNode,nextSibling);
 			this.renderChildren(this.toolbarNode,null);
 			this.domNodes.push(this.toolbarNode);
