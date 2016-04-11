@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/editor-operations/text/excise.js
+title: $:/core/modules/editor/operations/text/excise.js
 type: application/javascript
 module-type: texteditoroperation
 

@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/editor-operations/bitmap/resize.js
+title: $:/core/modules/editor/operations/bitmap/resize.js
 type: application/javascript
 module-type: bitmapeditoroperation
 

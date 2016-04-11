@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/editor-operations/bitmap/clear.js
+title: $:/core/modules/editor/operations/bitmap/clear.js
 type: application/javascript
 module-type: bitmapeditoroperation
 

@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/editor-operations/text/wrap-lines.js
+title: $:/core/modules/editor/operations/text/wrap-lines.js
 type: application/javascript
 module-type: texteditoroperation
 
@@ -14,9 +14,9 @@ Text editor operation to wrap the selected lines with a prefix and suffix
 
 exports["wrap-lines"] = function(event,operation) {
 	// Cut just past the preceding line break, or the start of the text
-	operation.cutStart = this.findPrecedingLineBreak(operation.text,operation.selStart);
+	operation.cutStart = $tw.utils.findPrecedingLineBreak(operation.text,operation.selStart);
 	// Cut to just past the following line break, or to the end of the text
-	operation.cutEnd = this.findFollowingLineBreak(operation.text,operation.selEnd);
+	operation.cutEnd = $tw.utils.findFollowingLineBreak(operation.text,operation.selEnd);
 	// Add the prefix and suffix
 	operation.replacement = event.paramObject.prefix + "\n" +
 				operation.text.substring(operation.cutStart,operation.cutEnd) + "\n" +

@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/editor-operations/text/redo.js
+title: $:/core/modules/editor/operations/text/redo.js
 type: application/javascript
 module-type: texteditoroperation
 
@@ -13,9 +13,7 @@ Text editor operation to tell the browser to perform an redo
 "use strict";
 
 exports["redo"] = function(event,operation) {
-	this.iframeNode.focus();
-	this.iframeTextArea.focus();
-	this.document.execCommand("redo", false, null);
+	this.execCommand("redo");
 };
 
 })();

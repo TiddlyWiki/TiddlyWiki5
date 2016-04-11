@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/editor-operations/text/wrap-selection.js
+title: $:/core/modules/editor/operations/text/wrap-selection.js
 type: application/javascript
 module-type: texteditoroperation
 

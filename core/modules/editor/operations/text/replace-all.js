@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/editor-operations/text/replace-all.js
+title: $:/core/modules/editor/operations/text/replace-all.js
 type: application/javascript
 module-type: texteditoroperation
 

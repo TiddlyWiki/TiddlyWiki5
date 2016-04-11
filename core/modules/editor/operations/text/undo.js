@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/editor-operations/text/undo.js
+title: $:/core/modules/editor/operations/text/undo.js
 type: application/javascript
 module-type: texteditoroperation
 
@@ -13,9 +13,7 @@ Text editor operation to tell the browser to perform an undo
 "use strict";
 
 exports["undo"] = function(event,operation) {
-	this.iframeNode.focus();
-	this.iframeTextArea.focus();
-	this.document.execCommand("undo", false, null);
+	this.execCommand("undo");
 };
 
 })();
