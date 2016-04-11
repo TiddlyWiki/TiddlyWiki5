@@ -3,8 +3,14 @@ tags: $:/tags/EditPreview
 caption: widget tree
 list-after: $:/plugins/tiddlywiki/internals/EditTemplate/body/preview/parse-tree
 
-\define preview(mode,output)
-<$widget-tree mode="$mode$" output="$output$"/>
+\define preview(mode)
+<$wikify name="preview-text" text={{!!text}} type={{!!type}} mode="$mode$" output="widgettree">
+<pre>
+<code>
+<$text text=<<preview-text>>/>
+</code>
+</pre>
+</$wikify>
 \end
 
 {{||$:/plugins/tiddlywiki/internals/EditTemplate/body/preview/shared}}

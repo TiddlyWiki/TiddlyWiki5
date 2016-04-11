@@ -7,7 +7,7 @@ Mode: <$select tiddler="$(tv-mode-configuration)$" default="block">
 <option value="block">Block</option>
 </$select>
 
-<$macrocall $name="preview" mode={{$(tv-mode-configuration)$}} output={{$(tv-output-configuration)$}}/>
+<$macrocall $name="preview" mode={{$(tv-mode-configuration)$}}/>
 \end
 
 <div class="tc-internal-tree-preview-wrapper">
