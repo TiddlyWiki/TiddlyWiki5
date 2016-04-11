@@ -1,0 +1,6 @@
+title: $:/editions/fr-FR/snippets/download-empty-button
+
+<$button class="tc-btn-big-green">
+<$action-sendmessage $message="tm-download-file" $param="$:/editions/fr-FR/download-empty" filename="empty_fr.html"/>
+Télécharger un wiki vide {{$:/core/images/save-button}}
+</$button>
