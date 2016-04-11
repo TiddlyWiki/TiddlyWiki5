@@ -1,13 +1,15 @@
-caption: Bienvenue !
-created: 20130822170200000
-fr-title: Bienvenue !
+caption: ¡Hola!
+created: 20160411175031056
+es-title: ¡Hola!
 list: [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[History of TiddlyWiki]] [[What happened to the original TiddlyWiki?]]
-modified: 20150623075554730
+modified: 20160411175228198
 tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
 
-''N'avez-vous jamais eu la sensation que votre tête était trop petite pour contenir tout ce dont vous avez besoin de mémoriser&nbsp;?''
+''¿Nunca ha tenido la sensación de que su cabeza no era lo suficientemente grande como para retener todo lo que tenía que memorizar? 
+
+N'avez-vous jamais eu la sensation que votre tête était trop petite pour contenir tout ce dont vous avez besoin de mémoriser&nbsp;?''
 
 Bienvenue sur TiddlyWiki, un carnet de notes web [[non-linéaire|Philosophy of Tiddlers]] pour [[saisir|Creating and editing tiddlers]], [[organiser|Structuring TiddlyWiki]] et [[partager|Sharing your tiddlers with others]] des informations simples ou complexes.
 
