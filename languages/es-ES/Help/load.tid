@@ -13,4 +13,4 @@ Para cargar tiddlers de un archivo TiddlyWiki encriptado, debe primero especific
 tiddlywiki ./MyWiki --password pa55w0rd --load my_encrypted_wiki.html
 ```
 
-Tenga en cuenta que TTiddlyWiki no cargará una versión más antigua de una extensión que haya sido cargada anteriormente.
+Tenga en cuenta que TiddlyWiki no carga complementos o extensiones anteriores a los ya cargados. 

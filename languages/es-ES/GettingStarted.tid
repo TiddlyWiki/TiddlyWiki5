@@ -1,17 +1,13 @@
 title: GettingStarted
 
-\define lingo-base() $:/language/ControlPanel/Basics/
-Bienvenido a ~TiddlyWiki y a la comunidad ~TiddlyWiki.
+Bienvenido a TiddlyWiki y a su comunidad
 
-Antes de que usted empiece a guardar información en ~TiddlyWiki es importante que se asegure que puede guardar cambios de manera fiable. Visite http://tiddlywiki.com/#GettingStarted para más información (en idioma inglés)
+Antes de guardar información importante en TiddlyWiki, es necesario que se asegure de poder hacerlo de manera fiable
 
-!! Configurar este ~TiddlyWiki
+Visite http://tiddlywiki.com/#GettingStarted para más información (en inglés)
 
-<div class="tc-control-panel">
+!! Configure este TiddlyWiki
 
-|<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
-|<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
-|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
-</div>
+ [list[$:/StoryList]]
 
-Vea más opciones en el [[panel de control|$:/ControlPanel]].
+Vea más opciones en el Panel de control.
