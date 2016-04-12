@@ -1,12 +1,13 @@
 title: $:/language/Help/rendertiddler
-description: Genera un tiddler individual en uno de un determinado ContentType
+description: Genera un tiddler del ContentType que se especifique
 
-Genera un tiddler individual en uno de un determinado ContentType (por defecto `text/html`) y lo guarda en el nombre de archivo especificado:
+Genera un tiddler del ContentType que se especifique (por defecto `text/html`) y lo guarda con el nombre de archivo especificado
 
 ```
 --rendertiddler <title> <filename> [<type>]
 ```
 
-Por defecto, el nombre de archivo es relativo al subdirectorio `output` (de salida) en el directorio de edición. Puede usarse el comando `--output` para dirigir la salida a otro directorio diferente.
+Por defecto, el nombre de archivo es relativo al subdirectorio `output` en el directorio del wiki<br>
+Puede usarse el comando `--output` para dirigir la salida a cualquier otro directorio
 
-Directorios no existentes en la ruta al nombre de archivo son creados automáticamente.
+Los directorios no existentes en la ruta del nombre de archivo se crean automáticamente.

@@ -1,27 +1,51 @@
 title: $:/language/
 
+AboveStory/ClassicPlugin/Warning: Parece que quiere cargar un plugin diseñado para ~TiddlyWiki Classic. <br>
+Tenga en cuenta que [[estos plugins no funcionan en TiddlyWiki version 5.x.x|http://tiddlywiki.com/#TiddlyWikiClassic]]<br>
+Plugins de ~TiddlyWiki Classic detectados
 BinaryWarning/Prompt: Este tiddler contiene datos binarios
-ClassicWarning/Hint: Este tiddler está escrito en formato de texto de una versión de TiddlyWiki Classic, que no es totalmente compatible con la versión 5 de TiddlyWiki. Visite http://tiddlywiki.com/static/Upgrading.html para más detalles.
-ClassicWarning/Upgrade/Caption: actualizar
-CloseAll/Button: cerrar todo
-ConfirmCancelTiddler: ¿Desea descartar los cambios efectuados en el tiddler "<$text text=<<title>>/>"?
-ConfirmDeleteTiddler: ¿Desea borrar el tiddler "<$text text=<<title>>/>"?
-ConfirmEditShadowTiddler: Usted está punto de editar un tiddler oculto (ShadowTiddler). Cualquier cambio afectará el sistema predeterminado por defecto poniendo en riesgo futuras actualizaciones del sistema. ¿Está usted seguro que desea editar "<$text text=<<title>>/>"?
-ConfirmOverwriteTiddler: ¿Desea sobreescribir el tiddler "<$text text=<<title>>/>"?
+ClassicWarning/Hint: Este tiddler está escrito en formato de texto de una versión de TiddlyWiki Classic que no es totalmente compatible con la versión 5 de TiddlyWiki<br>
+Visite http://tiddlywiki.com/static/Upgrading.html para más información
+ClassicWarning/Upgrade/Caption: Actualizar
+CloseAll/Button: Cerrar todo
+ConfirmCancelTiddler: ¿Desea descartar los cambios efectuados en "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: ¿Desea borrar "<$text text=<<title>>/>"?
+ConfirmEditShadowTiddler: Está a punto de editar un tiddler oculto<br>
+Todo cambio en él afectará al sistema por defecto y pondrá en riesgo futuras actualizaciones del sistema<br>
+¿Está seguro de querer editar "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: ¿Desea sobreescribir "<$text text=<<title>>/>"?
 DefaultNewTiddlerTitle: Nuevo Tiddler
-DropMessage: Suéltelo aquí (o pulse ''ESC'' para cancelar)
-Encryption/ConfirmClearPassword: ¿Desea usted borrar la contraseña? Esto removerá el cifrado que se aplica cuando se guarda este wiki
-Encryption/PromptSetPassword: Especificar una nueva contraseña para este TiddlyWiki
+DropMessage: Suéltelo aquí o pulse ''ESC'' para cancelar
+Encryption/Cancel: Cancelar
+Encryption/ConfirmClearPassword: ¿Desea borrar la contraseña? <br>
+Revocará el cifrado que se aplica para guardar este wiki
+Encryption/Password: Contraseña
+Encryption/PasswordNoMatch: Las contraseñas no coinciden
+Encryption/PromptSetPassword: Especifique nueva contraseña para este TiddlyWiki
+Encryption/RepeatPassword: Repita la contraseña
+Encryption/SetPassword: Establecer contraseña
+Encryption/Username: Usuario
 Exporters/CsvFile: Archivo de tipo .CSV
 Exporters/JsonFile: Archivo de tipo .JSON
-Exporters/StaticRiver: Cadena de tiddlers como archivo estático .HTML
+Exporters/StaticRiver: Cadena de tiddlers como .HTML estático
 Exporters/TidFile: Tiddler individual como archivo ".tid" 
-InvalidFieldName: Caracteres ilegales en el campo "<$text text=<<fieldName>>/>". Los campos sólo pueden contener letras en minúscula, dígitos y los caracteres guión bajo (`_`), guión corto (`-`) y punto (`.`)
+InternalJavaScriptError/Hint: Tenemos un problema. Se recomienda que reinicie TiddlyWiki
+InternalJavaScriptError/Title: Error interno de JavaScript
+InvalidFieldName: Caracteres ilegales en el campo "<$text text=<<fieldName>>/>"<br>
+Los campos sólo pueden contener letras en minúscula, dígitos y los caracteres guión bajo (`_`), guión corto (`-`) y punto (`.`)
+LazyLoadingWarning: <p>Cargando texto externo desde ''<$text text={{!!_canonical_uri}}/>''</p><p>Si este mensaje no desaparece, puede que se deba a que está usando un navegador que con esta configuración no permite texto externo</br>
+Vea http://tiddlywiki.com/#ExternalText</p>
 MissingTiddler/Hint: El tiddler "<$text text=<<currentTiddler>>/>" no existe - haga clic en {{$:/core/images/edit-button}} para crearlo
+OfficialPluginLibrary: Librería de plugins oficiales de ~TiddlyWiki
+OfficialPluginLibrary/Hint: Librería de plugins oficiales de ~TiddlyWiki en tiddlywiki.com<br>
+Plugins, temas y paquetes de idioma que mantiene el equipo de TiddlyWiki
+PluginReloadWarning: Guarde {{$:/core/ui/Buttons/save-wiki}} y recargue {{$:/core/ui/Buttons/refresh}} para que los cambios surtan efecto.
 RecentChanges/DateFormat: DD MMM YYYY
 SystemTiddler/Tooltip: Este es un tiddler de sistema
 TagManager/Colour/Heading: Color
-TagManager/Icon/Heading: Ícono
+TagManager/Count/Heading: Número
+TagManager/Icon/Heading: Icono
 TagManager/Info/Heading: Información
 TagManager/Tag/Heading: Etiqueta
-UnsavedChangesWarning: Usted tiene cambios sin guardar en TiddlyWiki
+Tiddler/DateFormat: DDth MMM YYYY a las hh12:0mmam
+UnsavedChangesWarning: Tiene cambios sin guardar en TiddlyWiki

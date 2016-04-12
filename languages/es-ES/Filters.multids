@@ -1,13 +1,14 @@
 title: $:/language/Filters/
 
-AllTags: Todas las etiquetas, salvo las de sistema
-AllTiddlers: Todos los tiddlers, salvo los de sistema
-Drafts: Tiddlers en borrador
+AllTags: Todas las etiquetas, excepto las de sistema
+AllTiddlers: Todos los tiddlers, excepto los de sistema
+Drafts: Borradores
 Missing: Tiddlers ausentes
 Orphans: Tiddlers huérfanos
-OverriddenShadowTiddlers: Tiddlers ocultos redefinidos
-RecentSystemTiddlers: Tiddlers recientemente modificados, incluyendo los de sistema
+OverriddenShadowTiddlers: Tiddlers ocultos anulados
+RecentSystemTiddlers: Tiddlers recientemente modificados, inclusive los de sistema
 RecentTiddlers: Tiddlers recientemente modificados
 ShadowTiddlers: Tiddlers ocultos
 SystemTags: Etiquetas de sistema
 SystemTiddlers: Tiddlers de sistema
+TypedTiddlers: Tiddlers que no son WikiText
