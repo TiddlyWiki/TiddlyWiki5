@@ -9,7 +9,7 @@
         "tiddlywiki/vanilla"
     ],
     "includeWikis": [
-        "../fr-FR"
+        "../es-ES"
     ],
     "config": {
         "retain-original-tiddler-path": true,

@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/es-ES",
+	"name": "es-ES",
+	"plugin-type": "language",
+	"description": "España (Spain)",
+	"author": "Pau Deluca",
+	"core-version": ">=5.0.0"
+}
