@@ -1,7 +1,7 @@
 caption: EnMarcha
 created: 20131129090249275
 es-title: EnMarcha
-modified: 20160411222331966
+modified: 20160413084813278
 tags: [[Working with TiddlyWiki]]
 title: GettingStarted
 type: text/vnd.tiddlywiki
@@ -19,12 +19,12 @@ Solución de problemas:
 
 * No intentes guardar cambios con la opción ''Archivo''/''Guardar'' o ''Guardar como'' del navegador: __No funciona__
 
-Te interesa también:
+Te interesa ver también:
 
-* [[Encryption]] explica cómo usar la función incorporada de cifrado para proteger tus contenidos con contraseña. 
-* [[Saving on TiddlySpot]], servicio gratuito que te permite usar TiddlyWiki online
-* Guardar en TiddlyDesktop, aplicación para trabajar con TiddlyWIki en el escritorio
-* También puedes descargar este TIddlywiki entero, con toda su documentación: 
+* [[Cifrado|Encryption]] explica cómo usar la función incorporada de cifrado para proteger tus contenidos con contraseña. 
+* [[Guardar en TiddlySpot|Saving on TiddlySpot]], servicio gratuito que te permite usar TiddlyWiki online
+* Guardar en TiddlyDesktop, aplicación para trabajar con TiddlyWiki en el escritorio
+* También puedes descargar este TIddlywiki en su versión íntegra, con toda su documentación: 
 
 <<<
 {{$:/snippets/download-wiki-button}}

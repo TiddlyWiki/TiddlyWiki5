@@ -1,0 +1,37 @@
+created: 20131219100608529
+es-title: Instalar TiddlyWiki en Node.js
+modified: 20160413110019053
+tags: [[TiddlyWiki on Node.js]]
+title: Installing TiddlyWiki on Node.js
+type: text/vnd.tiddlywiki
+
+# Descarga e instala [[Node.js]] desde la página oficial: http://nodejs.org
+
+#Abre una terminal de línea de comandos y teclea:
+
+#> `npm install -g tiddlywiki`
+
+#> Si te da fallo, necesitas volver a ejecutar la orden como administrador:
+
+#> `sudo npm install -g tiddlywiki` (Mac/Linux)
+
+#>En Windows, 
+
+# Check TiddlyWiki is installed by typing:
+#> `tiddlywiki --version`
+# In response, you should see TiddlyWiki report its current version (eg "<<version>>"; you may also see other debugging information reported)
+# Try it out:
+## `tiddlywiki mynewwiki --init server` to create a folder for a new wiki that includes server-related components
+## `tiddlywiki mynewwiki --server` to start TiddlyWiki
+## Visit http://127.0.0.1:8080/ in your browser
+## Try editing and creating tiddlers
+# Optionally, make an offline copy:
+#* click the {{$:/core/images/save-button}} ''Save changes'' button in the sidebar, ''OR''
+#* `tiddlywiki --build index`
+
+
+The `-g` flag causes TiddlyWiki to be installed globally. Without it, TiddlyWiki will only be available in the directory where you installed it.
+
+If you are using Debian or Debian-based Linux and you are reciving a `node: command not found` error though node.js package is installed, you may need to create a symbolic link between `nodejs` and `node`. Consult your distro's manual and `whereis` to correctly create a link. See github [[issue 1434|http://github.com/Jermolene/TiddlyWiki5/issues/1434]]
+
+Example Debian v8.0: `sudo ln -s /usr/bin/nodejs /usr/bin/node`
