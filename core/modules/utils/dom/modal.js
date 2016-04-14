@@ -122,7 +122,7 @@ Modal.prototype.display = function(title,options) {
 				attributes: {
 					text: {
 						type: "string",
-						value: ( $tw.language == undefined ? "Close" : $tw.language.getString("Buttons/Close/Caption") )
+						value: $tw.language.getString("Buttons/Close/Caption")
 			}}}
 		]}],
 		parentWidget: $tw.rootWidget,
