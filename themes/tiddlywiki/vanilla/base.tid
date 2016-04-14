@@ -1144,18 +1144,18 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-tiddler-preview-preview {
 	float: right;
-	width: 49.75%;
+	width: 49%;
 	border: 1px solid <<colour tiddler-editor-border>>;
 	margin: 4px 3px 3px 3px;
 	padding: 3px 3px 3px 3px;
 }
 
 .tc-tiddler-frame .tc-tiddler-preview .tc-edit-texteditor {
-	width: 49.75%;
+	width: 49%;
 }
 
 .tc-tiddler-frame .tc-tiddler-preview canvas.tc-edit-bitmapeditor {
-	max-width: 49.75%;
+	max-width: 49%;
 }
 
 .tc-edit-fields {
