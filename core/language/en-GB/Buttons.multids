@@ -64,6 +64,8 @@ NewJournalHere/Caption: new journal here
 NewJournalHere/Hint: Create a new journal tiddler tagged with this one
 NewImage/Caption: new image
 NewImage/Hint: Create a new image tiddler
+NewMarkdown/Caption: new Markdown tiddler
+NewMarkdown/Hint: Create a new Markdown tiddler
 NewTiddler/Caption: new tiddler
 NewTiddler/Hint: Create a new tiddler
 OpenWindow/Caption: open in new window
