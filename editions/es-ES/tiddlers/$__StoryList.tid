@@ -1,6 +1,6 @@
-created: 20160415113056606
-list: Mechanisms Messages [[WidgetMessage: tm-save-wiki]] [[WidgetMessage: tm-save-tiddler]] [[WidgetMessage: tm-remove-tag]] [[WidgetMessage: tm-remove-field]] [[WidgetMessage: tm-permaview]] PermaLinks [[WidgetMessage: tm-permalink]] [[WidgetMessage: tm-perform-import]] [[WidgetMessage: tm-notify]] [[WidgetMessage: tm-new-tiddler]] [[WidgetMessage: tm-navigate]] [[WidgetMessage: tm-modal]] [[WidgetMessage: tm-logout]] [[WidgetMessage: tm-login]] [[WidgetMessage: tm-import-tiddlers]] [[WidgetMessage: tm-home]] [[WidgetMessage: tm-full-screen]] [[WidgetMessage: tm-edit-tiddler]] [[WidgetMessage: tm-download-file]] [[WidgetMessage: tm-delete-tiddler]] [[WidgetMessage: tm-close-tiddler]] [[WidgetMessage: tm-close-other-tiddlers]] [[WidgetMessage: tm-close-all-tiddlers]] [[WidgetMessage: tm-clear-password]] [[WidgetMessage: tm-cancel-tiddler]] HelloThere NotaInicial GettingStarted Community
-modified: 20160415113056606
+created: 20160415161320840
+list: $:/AdvancedSearch Messages [[WidgetMessage: tm-import-tiddlers]] [[tv-auto-open-on-import Variable]] [[WidgetMessage: tm-home]] [[WidgetMessage: tm-full-screen]] [[WidgetMessage: tm-edit-tiddler]] [[WidgetMessage: tm-download-file]] [[WidgetMessage: tm-delete-tiddler]] [[WidgetMessage: tm-close-tiddler]] [[WidgetMessage: tm-close-other-tiddlers]] [[WidgetMessage: tm-close-all-tiddlers]] [[WidgetMessage: tm-clear-password]] [[WidgetMessage: tm-cancel-tiddler]] [[WidgetMessage: tm-browser-refresh]] [[WidgetMessage: tm-auto-save-wiki]] [[WidgetMessage: tm-add-tag]] [[WidgetMessage: tm-add-field]]
+modified: 20160415161320840
 title: $:/StoryList
 type: text/vnd.tiddlywiki
 
