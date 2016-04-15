@@ -64,6 +64,8 @@ NewJournalHere/Caption: 新增子日誌
 NewJournalHere/Hint: 建立一個標籤含此條目名稱的新日誌條目
 NewImage/Caption: 新增圖像
 NewImage/Hint: 建立一個新的圖像條目
+NewMarkdown/Caption: 新增 Markdown 條目
+NewMarkdown/Hint: 建立一個新的 Markdown 條目
 NewTiddler/Caption: 新增條目
 NewTiddler/Hint: 建立一個新的條目
 OpenWindow/Caption: 開啟於新視窗
