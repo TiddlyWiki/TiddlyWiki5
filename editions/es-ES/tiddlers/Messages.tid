@@ -1,0 +1,13 @@
+caption: Mensajes
+created: 20140226083311937
+es-title: Mensajes
+modified: 20160415060419280
+tags: Concepts Reference
+title: Messages
+type: text/vnd.tiddlywiki
+
+Son mensajes generados por widgets en respuesta a acciones del usuario. Estos recorren la estructura en árbol del widget hasta que encuentran el subproceso ascendiente que se ocupa de ellos.
+
+El núcleo lleva implementados los siguientes mensajes:
+
+<<list-links "[tag[Messages]]">>

@@ -1,0 +1,14 @@
+caption: tm-auto-save-wiki
+created: 20140830112325641
+modified: 20160415063813458
+tags: Messages
+title: WidgetMessage: tm-auto-save-wiki
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-auto-save-wiki` realiza un guardado en segundo plano cuando sea necesario.
+
+El mensaje ''autosave wiki'' debiera generarse siempre que se producen cambios en el TiddlerStore. Por ejemplo, el NavigatorWidget genera el mensaje `auto-save-widget` como resultado de procesar [[WidgetMessage: tm-save-tiddler]], [[WidgetMessage: tm-delete-tiddler]] y [[WidgetMessage: tm-perform-import]]
+
+Este mensaje .
+
+The autosave wiki message is handled by the TiddlyWiki core SyncMechanism which invokes the current [[SaverModule|SaverModules]]. Not all SaverModules can handle autosaving.
