@@ -1,0 +1,12 @@
+title: $:/core/ui/ControlPanel/Settings/NewSideBarTab
+tags: $:/tags/ControlPanel/Settings
+caption: {{$:/language/ControlPanel/Settings/NewSideBarTab/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Settings/NewSideBarTab/
+<<lingo Hint>>
+
+<$checkbox tiddler="$:/config/SideBar/NewTabButton" field="visibility" checked="show" unchecked="hide" default="show">
+	<$link to="$:/config/SideBar/NewTabButton">
+		<<lingo Description>>
+	</$link>
+</$checkbox>
