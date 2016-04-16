@@ -1,12 +1,12 @@
 caption: tm-import-tiddlers
 created: 20140716084658099
 es-title: Mensaje: tm-import-tiddlers
-modified: 20160415161320853
+modified: 20160416051305474
 tags: Messages navigator-message
 title: WidgetMessage: tm-import-tiddlers
 type: text/vnd.tiddlywiki
 
-El mensaje `tm-import-tiddlers`agrega una lista de tiddlers en [[$:/Import]], señalando así que están pendientes de importación. También aplica cualquier módulo ''upgrader'' activo a cada tiddler según llega. Consulta UpgradeMechanism para mayor información.
+El mensaje `tm-import-tiddlers` añade una lista de tiddlers a [[$:/Import]], señalando así que están pendientes de importación. También aplica cualquier módulo ''upgrader'' activo a cada tiddler según llega. Consulta UpgradeMechanism para mayor información.
 
 |!Nombre |!Descripción |
 |param |texto JSON de la matriz de tiddlers para importar |

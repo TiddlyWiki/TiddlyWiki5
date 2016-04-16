@@ -1,6 +1,6 @@
-created: 20160415161320840
-list: $:/AdvancedSearch Messages [[WidgetMessage: tm-import-tiddlers]] [[tv-auto-open-on-import Variable]] [[WidgetMessage: tm-home]] [[WidgetMessage: tm-full-screen]] [[WidgetMessage: tm-edit-tiddler]] [[WidgetMessage: tm-download-file]] [[WidgetMessage: tm-delete-tiddler]] [[WidgetMessage: tm-close-tiddler]] [[WidgetMessage: tm-close-other-tiddlers]] [[WidgetMessage: tm-close-all-tiddlers]] [[WidgetMessage: tm-clear-password]] [[WidgetMessage: tm-cancel-tiddler]] [[WidgetMessage: tm-browser-refresh]] [[WidgetMessage: tm-auto-save-wiki]] [[WidgetMessage: tm-add-tag]] [[WidgetMessage: tm-add-field]]
-modified: 20160415161320840
+created: 20160416064002335
+list: HelloThere [[A Gentle Guide to TiddlyWiki]] Examples [[Some of the things you can do with TiddlyWiki]] [[Discover TiddlyWiki]]
+modified: 20160416064002335
 title: $:/StoryList
 type: text/vnd.tiddlywiki
 
