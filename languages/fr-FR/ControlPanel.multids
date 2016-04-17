@@ -40,6 +40,7 @@ Palette/Prompt: Palette en cours :
 Palette/ShowEditor/Caption: Afficher l'éditeur
 Plugins/Add/Hint: Installer des plugins à partir de la bibliothèque officielle
 Plugins/Add/Caption: Ajouter des plugins
+Plugins/AlreadyInstalled: Ce plugin est déjà installé dans la version <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: désactiver
 Plugins/Disable/Hint: Désactive ce plugin au prochain rechargement de la page
@@ -51,6 +52,8 @@ Plugins/Install: installe
 Plugins/Installed/Hint: Plugins installés :
 Plugins/Languages/Caption: Languages
 Plugins/Languages/Hint: Plugins de langue
+Plugins/NoInformation: Aucune information disponible
+Plugins/NotInstalled: Ce plugin n'est pas installé
 Plugins/OpenPluginLibrary: ouvre la bibliothèque de plugins
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins
