@@ -8,6 +8,8 @@ Text editor engine based on a simple input or textarea within an iframe. This is
 \*/
 (function(){
 
+var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height"
+
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";

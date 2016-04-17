@@ -12,6 +12,8 @@ Text editor engine based on a simple input or textarea tag
 /*global $tw: false */
 "use strict";
 
+var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
+
 function SimpleEngine(options) {
 	// Save our options
 	options = options || {};

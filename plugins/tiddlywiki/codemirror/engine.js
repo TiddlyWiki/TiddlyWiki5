@@ -12,7 +12,8 @@ Text editor engine based on a CodeMirror instance
 /*global $tw: false */
 "use strict";
 
-var CODEMIRROR_OPTIONS = "$:/config/CodeMirror";
+var CODEMIRROR_OPTIONS = "$:/config/CodeMirror",
+	HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height"
 
 // Install CodeMirror
 if($tw.browser && !window.CodeMirror) {

@@ -15,8 +15,7 @@ Factory for constructing text editor widgets with specified engines for the tool
 var DEFAULT_MIN_TEXT_AREA_HEIGHT = "100px"; // Minimum height of textareas in pixels
 
 // Configuration tiddlers
-var HEIGHT_MODE_TITLE = "$:/config/TextEditor/EditorHeight/Mode",
-	HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
+var HEIGHT_MODE_TITLE = "$:/config/TextEditor/EditorHeight/Mode";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
