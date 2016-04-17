@@ -143,6 +143,8 @@ Picture/Caption: image
 Picture/Hint: Insérer une image
 Preview/Caption: prévisualisation
 Preview/Hint: Affiche le panneau de prévisualisation
+PreviewType/Caption: type de prévisualisation
+PreviewType/Hint: Choisit le type de prévisualisation
 Quote/Caption: citation
 Quote/Hint: Formate les lignes de la sélection comme une citation
 Redo/Caption: rétablir
