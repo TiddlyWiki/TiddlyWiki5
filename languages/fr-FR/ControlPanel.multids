@@ -118,6 +118,9 @@ Settings/TitleLinks/Caption: Titres des tiddlers
 Settings/TitleLinks/Hint: Faut-il afficher les titres des tiddlers comme des liens ?
 Settings/TitleLinks/No/Description: Ne pas afficher les titres des tiddlers comme des liens
 Settings/TitleLinks/Yes/Description: Afficher les titres des tiddlers comme des liens
+Settings/MissingLinks/Caption: Liens wiki
+Settings/MissingLinks/Hint: Peut-on pointer vers des tiddlers qui n'existent pas encore ?
+Settings/MissingLinks/Description: Active les liens vers les tiddlers inexistants
 StoryView/Caption: Vue sur le déroulé
 StoryView/Prompt: Vue courante :
 Theme/Caption: Thème
