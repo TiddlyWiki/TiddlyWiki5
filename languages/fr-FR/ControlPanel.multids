@@ -27,6 +27,19 @@ EditorTypes/Hint: Ces tiddlers déterminent l'éditeur à utiliser pour éditer 
 EditorTypes/Type/Caption: Type
 Info/Caption: Info
 Info/Hint: Information sur ce TiddlyWiki
+KeyboardShortcuts/Add/Prompt: Entre le raccourci ici
+KeyboardShortcuts/Add/Caption: ajoute un raccourci
+KeyboardShortcuts/Caption: Raccourcis clavier
+KeyboardShortcuts/Hint: Gère la spécification des raccourcis clavier
+KeyboardShortcuts/NoShortcuts/Caption: Aucun raccourci clavier spécifié
+KeyboardShortcuts/Remove/Hint: supprime le raccourci clavier
+KeyboardShortcuts/Platform/All: Toutes plates-formes
+KeyboardShortcuts/Platform/Mac: Plate-forme Macintosh seulement
+KeyboardShortcuts/Platform/NonMac: Plates-formes non-Macintosh seulement
+KeyboardShortcuts/Platform/Linux: Plate-forme Linux seulement
+KeyboardShortcuts/Platform/NonLinux: Plate-formes non-Linux seulement
+KeyboardShortcuts/Platform/Windows: Plate-forme Windows seulement
+KeyboardShortcuts/Platform/NonWindows: Plates-formes non-Windows seulement
 LoadedModules/Caption: Modules chargés
 LoadedModules/Hint: Liste des modules chargés, avec leurs tiddlers sources. Les italiques indiquent que les tiddlers sources n'existent pas, le plus souvent parce que le module a été créé lors du processus d'amorçage.
 Palette/Caption: Palette
