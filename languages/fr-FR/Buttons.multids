@@ -64,6 +64,8 @@ NewJournalHere/Caption: nouveau journal, ici
 NewJournalHere/Hint: Crée un nouveau tiddler journal avec pour tag le tiddler courant
 NewImage/Caption: nouvelle image
 NewImage/Hint: Crée une nouveau tiddler image
+NewMarkdown/Caption: nouveau tiddler Markdown
+NewMarkdown/Hint: Crée un nouveau tiddler avec la syntaxe Markdown
 NewTiddler/Caption: nouveau tiddler
 NewTiddler/Hint: Créer un nouveau tiddler
 OpenWindow/Caption: ouvrir dans une nouvelle fenêtre
@@ -141,6 +143,8 @@ Picture/Caption: image
 Picture/Hint: Insérer une image
 Preview/Caption: prévisualisation
 Preview/Hint: Affiche le panneau de prévisualisation
+PreviewType/Caption: type de prévisualisation
+PreviewType/Hint: Choisit le type de prévisualisation
 Quote/Caption: citation
 Quote/Hint: Formate les lignes de la sélection comme une citation
 Redo/Caption: rétablir
