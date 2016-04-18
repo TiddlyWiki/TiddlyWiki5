@@ -1,10 +1,10 @@
 caption: Macros para documentación
 created: 20150110182600000
 es-title: Macros para documentación
-modified: 20160418103234096
+modified: 20160418132549236
 tags: [[Improving TiddlyWiki Documentation]]
 title: Documentation Macros
-type:   
+type: text/vnd.tiddlywiki
 
 Las siguientes son macros utilizadas en la documentación de ~TiddlyWiki. Sus nombres comienzan con un punto para mantenerlas fuera del alcance accidental de nombres con los que el usuario pueda intentar experimentar.
 
@@ -26,7 +26,7 @@ Las siguientes son macros utilizadas en la documentación de ~TiddlyWiki. Sus no
 
 !!Bloques
 |!Macro |!Se usa para |
-|.preamble |an introductory sentence that stands apart from the rest of the tiddler |
+|.preamble |enfatizar un preámbulo o un párrafo que sobresale del resto del texto |
 
 !!!Ejemplo: 
 
@@ -79,14 +79,14 @@ Las siguientes son macros utilizadas en la documentación de ~TiddlyWiki. Sus no
 |.toc-tab |invocar el nombre del índice de tw5.com |<<.toc-tab>> |
 |.example-tab |indicar un ejemplo de nombre de pestaña |<<.example-tab "Ejemplo">> |
 
-!!Parameters for .sidebar-tab
+!!!Parámetros de .sidebar-tab
 
 |Open |<<.sidebar-tab Open>> |
 |Recent |<<.sidebar-tab Recent>> |
 |Tools |<<.sidebar-tab Tools>> |
 |More |<<.sidebar-tab More>> |
 
-!!Parameters for .more-tab
+!!!Parámetros de .more-tab
 
 |All |<<.more-tab All>> |
 |Recent |<<.more-tab Recent>> |
@@ -98,7 +98,7 @@ Las siguientes son macros utilizadas en la documentación de ~TiddlyWiki. Sus no
 |System |<<.more-tab System>> |
 |Shadows |<<.more-tab Shadows>> |
 
-!!Parameters for .info-tab
+!!!Parámetros de .info-tab
 
 |Tools |<<.info-tab Tools>> |
 |References |<<.info-tab References>> |
@@ -108,7 +108,7 @@ Las siguientes son macros utilizadas en la documentación de ~TiddlyWiki. Sus no
 |Fields |<<.info-tab Fields>> |
 |Advanced |<<.info-tab Advanced>> |
 
-!!Parameters for .controlpanel-tab
+!!!Parámetros de .controlpanel-tab
 
 |Info |<<.controlpanel-tab Info>> |
 |Appearance |<<.controlpanel-tab Appearance>> |
@@ -116,21 +116,21 @@ Las siguientes son macros utilizadas en la documentación de ~TiddlyWiki. Sus no
 |Saving |<<.controlpanel-tab Saving>> |
 |Plugins |<<.controlpanel-tab Plugins>> |
 
-!!Parameters for .advancedsearch-tab
+!!!Parámetros de .advancedsearch-tab
 
 |Standard |<<.advancedsearch-tab Standard>> |
 |System |<<.advancedsearch-tab System>> |
 |Shadows |<<.advancedsearch-tab Shadows>> |
 |Filter |<<.advancedsearch-tab Filter>> |
 
-!Buttons
+!!Botones
 
-|!Macro |!Used for |!Example |
-|.button |a standard button name and icon |<<.button "new-tiddler">> |
+|!Macro |!Se usa para |!Ejemplo |
+|.button |insertar el nombre y el icono de un botón estándar |<<.button "new-tiddler">> |
 
-!!Parameters for .button
+!!!Parámetros de .button
 
-!!!Tiddler toolbar
+!!!!Barra de tiddler
 
 |clone |<<.button "clone">> |
 |close |<<.button "close">> |
@@ -143,14 +143,13 @@ Las siguientes son macros utilizadas en la documentación de ~TiddlyWiki. Sus no
 |new-journal-here |<<.button "new-journal-here">> |
 |permalink |<<.button "permalink">> |
 
-!!!Edit-mode toolbar
+!!!!Barra de edición
 
 |cancel |<<.button "cancel">> |
 |delete |<<.button "delete">> |
 |save |<<.button "save">> |
 
-!!!Page toolbar
-
+!!!!Barra de página
 |advanced-search |<<.button "advanced-search">> |
 |close-all |<<.button "close-all">> |
 |control-panel |<<.button "control-panel">> |
