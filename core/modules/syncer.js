@@ -96,9 +96,24 @@ Syncer.prototype.readTiddlerInfo = function() {
 		self.tiddlerInfo[title] = {
 			revision: tiddler.fields.revision,
 			adaptorInfo: self.syncadaptor && self.syncadaptor.getTiddlerInfo(tiddler),
-			changeCount: self.wiki.getChangeCount(title)
+			changeCount: self.wiki.getChangeCount(title),
+			hasBeenLazyLoaded: false
 		};
 	});
+};
+
+/*
+Create an tiddlerInfo structure if it doesn't already exist
+*/
+Syncer.prototype.createTiddlerInfo = function(title) {
+	if(!$tw.utils.hop(this.tiddlerInfo,title)) {
+		this.tiddlerInfo[title] = {
+			revision: null,
+			adaptorInfo: {},
+			changeCount: -1,
+			hasBeenLazyLoaded: false
+		};
+	}
 };
 
 /*
@@ -128,7 +143,8 @@ Syncer.prototype.storeTiddler = function(tiddlerFields) {
 	this.tiddlerInfo[tiddlerFields.title] = {
 		revision: tiddlerFields.revision,
 		adaptorInfo: this.syncadaptor.getTiddlerInfo(tiddler),
-		changeCount: this.wiki.getChangeCount(tiddlerFields.title)
+		changeCount: this.wiki.getChangeCount(tiddlerFields.title),
+		hasBeenLazyLoaded: true
 	};
 };
 
@@ -238,11 +254,17 @@ Syncer.prototype.syncToServer = function(changes) {
 Lazily load a skinny tiddler if we can
 */
 Syncer.prototype.handleLazyLoadEvent = function(title) {
-	// Queue up a sync task to load this tiddler
-	this.enqueueSyncTask({
-		type: "load",
-		title: title
-	});
+	// Don't lazy load the same tiddler twice
+	var info = this.tiddlerInfo[title];
+	if(!info || !info.hasBeenLazyLoaded) {
+		this.createTiddlerInfo(title);
+		this.tiddlerInfo[title].hasBeenLazyLoaded = true;
+		// Queue up a sync task to load this tiddler
+		this.enqueueSyncTask({
+			type: "load",
+			title: title
+		});		
+	}
 };
 
 /*
@@ -324,13 +346,7 @@ Syncer.prototype.enqueueSyncTask = function(task) {
 	task.queueTime = now;
 	task.lastModificationTime = now;
 	// Fill in some tiddlerInfo if the tiddler is one we haven't seen before
-	if(!$tw.utils.hop(this.tiddlerInfo,task.title)) {
-		this.tiddlerInfo[task.title] = {
-			revision: null,
-			adaptorInfo: {},
-			changeCount: -1
-		};
-	}
+	this.createTiddlerInfo(task.title);
 	// Bail if this is a save and the tiddler is already at the changeCount that the server has
 	if(task.type === "save" && this.wiki.getChangeCount(task.title) <= this.tiddlerInfo[task.title].changeCount) {
 		return;
