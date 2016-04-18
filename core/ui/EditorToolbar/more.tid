@@ -5,3 +5,4 @@ caption: {{$:/language/Buttons/More/Caption}}
 description: {{$:/language/Buttons/More/Hint}}
 condition: [<targetTiddler>]
 dropdown: $:/core/ui/EditorToolbar/more-dropdown
+text:
