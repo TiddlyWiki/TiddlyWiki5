@@ -1,6 +1,6 @@
 title: $:/language/Docs/ModuleTypes/
 
-animation: Animaciones que pueden usarse con el RevealWidget
+animation: Animaciones que pueden usarse con RevealWidget
 command: Comandos que pueden ejecutarse en Node.js
 config: Datos para insertar en `$tw.config`
 filteroperator: Operadores individuales de filtrado

@@ -6,10 +6,10 @@ Appearance/Caption: Aspecto
 Appearance/Hint: Personaliza la apariencia de TiddlyWiki
 Basics/AnimDuration/Prompt: Duración de la animación
 Basics/Caption: Básico
-Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;corchetes dobles&#93;&#93; para títulos con espacios. También puede mostrarlos ordenados <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">de más reciente a más antiguo</$button>
+Basics/DefaultTiddlers/BottomHint: Usa &#91;&#91;corchetes dobles&#93;&#93; para títulos con espacios. También puedes mostrarlos ordenados <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">de más reciente a más antiguo</$button>
 Basics/DefaultTiddlers/Prompt: Tiddlers por defecto
-Basics/DefaultTiddlers/TopHint: Escoja qué tiddlers se muestran al inicio
-Basics/Language/Prompt: ¡Hola! Idioma actual
+Basics/DefaultTiddlers/TopHint: Escoge qué tiddlers se muestran al inicio
+Basics/Language/Prompt: ¡Hola! Selecciona idioma actual
 Basics/NewJournal/Tags/Prompt: Etiqueta para las nuevas entradas de diario
 Basics/NewJournal/Title/Prompt: Formato de título para las nuevas entradas de diario
 Basics/OverriddenShadowTiddlers/Prompt: Número de tiddlers ocultos anulados
@@ -33,19 +33,19 @@ Palette/Caption: Paleta
 Palette/Editor/Clone/Caption: Clonar
 Palette/Editor/Clone/Prompt: Se recomienda clonar esta paleta antes de editarla. 
 Palette/Editor/Prompt: Editando
-Palette/Editor/Prompt/Modified: Si se ha perdido, no desespere.
-Palette/Editor/Reset/Caption: Restaure la paleta
+Palette/Editor/Prompt/Modified: Si te has perdido, no desesperes
+Palette/Editor/Reset/Caption: Restaura la paleta
 Palette/HideEditor/Caption: Cerrar el editor
 Palette/Prompt: Paleta actual
 Palette/ShowEditor/Caption: Abrir el editor
 Parsing/Block/Caption: Bloquear reglas sintácticas
 Parsing/Caption: Interpretación sintáctica
-Parsing/Hint: Aquí se pueden deshabilitar globalmente reglas de interpretación sintáctica del wiki. Tenga cuidado: deshabilitar ciertas reglas puede hacer que ~TiddlyWiki deje de funcionar correctamente.
-En tal caso, puede recuperar su normal funcionamiento en [[modo seguro|http://tiddlywiki.com/#SafeMode]].
+Parsing/Hint: Aquí se pueden deshabilitar globalmente reglas de interpretación sintáctica del wiki. Ten cuidado: deshabilitar ciertas reglas puede hacer que ~TiddlyWiki deje de funcionar correctamente.
+En tal caso, puedes recuperar su normal funcionamiento en [[modo seguro|http://tiddlywiki.com/#SafeMode]].
 Parsing/Inline/Caption: Reglas sintácticas de texto
 Parsing/Pragma/Caption: Reglas sintácticas del compilador
-Plugins/Add/Caption: Obtenga complementos y extensiones
-Plugins/Add/Hint: Instale plugins desde la librería oficial
+Plugins/Add/Caption: Obten complementos y extensiones
+Plugins/Add/Hint: Instala plugins desde la librería oficial
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: Desactivar
 Plugins/Disable/Hint: Desactiva el plugin al actualizar la página
@@ -85,12 +85,12 @@ Settings/AutoSave/Enabled/Description: Guardar cambios automáticamente
 Settings/AutoSave/Hint: Guarda automáticamente los cambios durante la edición
 Settings/CamelCase/Caption: Enlaces wiki mediante ~CamelCase
 Settings/CamelCase/Description: Activar enlaces automáticos mediante ~CamelCase
-Settings/CamelCase/Hint: Desactive globalmente la opción de enlace automático mediante CamelCase <br>
+Settings/CamelCase/Hint: Desactiva globalmente la opción de enlace automático mediante CamelCase <br>
 Requiere recargar la página para que surta efecto
 Settings/Caption: Configuración
 Settings/DefaultSidebarTab/Caption: Pestaña por defecto de la barra lateral
 Settings/DefaultSidebarTab/Hint: Indica qué pestaña de la barra lateral se muestra por defecto al inicio
-Settings/Hint: La configuración de estos ajustes le permite personalizar el comportamiento de TiddlyWiki.
+Settings/Hint: La configuración de estos ajustes te permite personalizar el comportamiento de TiddlyWiki.
 Settings/LinkToBehaviour/Caption: Comportamiento al abrir tiddlers...
 Settings/LinkToBehaviour/InsideRiver/Hint: ...dentro del StoryRiver
 Settings/LinkToBehaviour/OpenAbove: Abrirlo por encima del tiddler actual

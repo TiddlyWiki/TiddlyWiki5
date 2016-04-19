@@ -21,7 +21,7 @@ Los parámetros son
 * ''host'' - nombre opcional del servidor desde el que se sirve (por defecto, "127.0.0.1" o "localhost")
 * ''pathprefix'' - prefijo opcional para rutas
 
-Si el parámetro de contraseña es especificado entonces el buscador preguntará al usuario por el nombre de usuario y la contraseña. Notar que la contraseña es transmitida en modo texto por lo que esta implementación no es apropiada para uso general.
+Si se ha definido contraseña, el buscador preguntará al usuario por el nombre de usuario y la contraseña. Nótese que la contraseña se transmite en modo texto por lo que esta implementación no es apropiada para uso general.
 
 Por ejemplo:
 

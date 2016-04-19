@@ -3,7 +3,7 @@ title: $:/language/Filters/
 AllTags: Todas las etiquetas, excepto las de sistema
 AllTiddlers: Todos los tiddlers, excepto los de sistema
 Drafts: Borradores
-Missing: Tiddlers ausentes
+Missing: Tiddlers faltantes
 Orphans: Tiddlers huérfanos
 OverriddenShadowTiddlers: Tiddlers ocultos anulados
 RecentSystemTiddlers: Tiddlers recientemente modificados, inclusive los de sistema

@@ -1,7 +1,7 @@
 title: $:/language/Help/verbose
 description: Activa el modo de salida como texto indefinido
 
-Genera texto aleatorio, útil para identificar errores
+Genera texto aleatorio, útil para depurar errores
 
 ```
 --verbose

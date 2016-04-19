@@ -21,7 +21,7 @@ Edit/Hint: Permite editar este tiddler
 Encryption/Caption: Cifrado
 Encryption/ClearPassword/Caption: Borrar contraseña
 Encryption/ClearPassword/Hint: Borra la contraseña actual y guarda este wiki sin cifrar
-Encryption/Hint: Asigna o revoca la contraseña de cifrado para guardar este wiki
+Encryption/Hint: Asigna o revoca la contraseña de cifrado para este wiki
 Encryption/SetPassword/Caption: Asignar contraseña
 Encryption/SetPassword/Hint: Asigna contraseña de cifrado
 ExportPage/Caption: Exportar todos
@@ -31,9 +31,9 @@ ExportTiddler/Hint: Exporta este tiddler
 ExportTiddlers/Caption: Exportar tiddlers
 ExportTiddlers/Hint: Exporta el grupo de tiddlers
 Fold/Caption: Comprimir tiddler
-Fold/FoldBar/Caption: Barra en vista comprimida
+Fold/FoldBar/Caption: Barra de vista comprimida
 Fold/FoldBar/Hint: Barras opcionales para comprimir y desplegar tiddlers
-Fold/Hint: Comprime la vista del tiddler ocultando el cuerpo y mostrando sólo el título
+Fold/Hint: Comprime la vista del tiddler ocultando el cuerpo y sólo muestra el título
 FoldAll/Caption: Comprimir todos
 FoldAll/Hint: Comprime la vista de todos los tiddlers abiertos
 FoldOthers/Caption: Comprimir los demás
@@ -49,7 +49,7 @@ Home/Hint: Cierra todos los tiddlers abiertos y abre los que se muestran por def
 Import/Caption: Importar
 Import/Hint: Importa multitud de tipos de archivo, incluyendo textos, imágenes, TiddlyWiki y JSON
 Info/Caption: Información
-Info/Hint: Muestra información de este tiddler
+Info/Hint: Muestra información sobre este tiddler
 Language/Caption: Idioma
 Language/Hint: Selecciona idioma de la interfaz de usuario
 More/Caption: Más
@@ -80,10 +80,10 @@ ShowSideBar/Caption: Mostrar barra lateral
 ShowSideBar/Hint: Muestra la barra lateral
 StoryView/Caption: Vista
 StoryView/Hint: Selecciona el modo de visualización de los tiddlers
-TagManager/Caption: Gestor de etiquetas
+TagManager/Caption: Administrador de etiquetas
 TagManager/Hint: Abre el gestor de etiquetas
 Theme/Caption: Tema
-Theme/Hint: Selecciona el tema de visualización
+Theme/Hint: Selecciona el estilo visual del wiki
 Unfold/Caption: Desplegar tiddler
 Unfold/Hint: Despliega el cuerpo de este tiddler y muestra su contenido
 UnfoldAll/Caption: Desplegar todos
