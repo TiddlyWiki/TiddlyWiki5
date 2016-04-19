@@ -1,0 +1,15 @@
+caption: colour-picker
+created: 20160418155531395
+modified: 20160418155805435
+tags: Macros [[Core Macros]]
+title: image-picker Macro
+type: text/vnd.tiddlywiki
+
+The <<.def image-picker>> [[macro|Macros]] displays an interactive image picker, as can be seen in the core text editor.
+
+!! Parameters
+
+;actions
+: Wikitext for the action widgets that should be executed when the user selects an image. Within the text, the variable `imageTitle` contains the title of the tiddler containing the selected image.
+
+<<.macro-examples "image-picker">>

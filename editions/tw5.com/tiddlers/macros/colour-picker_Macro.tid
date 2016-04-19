@@ -1,0 +1,15 @@
+caption: colour-picker
+created: 20160418152741901
+modified: 20160418154330605
+tags: Macros [[Core Macros]]
+title: colour-picker Macro
+type: text/vnd.tiddlywiki
+
+The <<.def colour-picker>> [[macro|Macros]] displays an interactive colour picker, as can be seen in the core bitmap editor.
+
+!! Parameters
+
+;actions
+: Wikitext for the action widgets that should be executed when the user selects a colour. Within the text, the variable `colour-picker-value` contains the selected colour.
+
+<<.macro-examples "colour-picker">>
