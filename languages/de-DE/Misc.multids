@@ -34,5 +34,5 @@ TagManager/Count/Heading: Anzahl
 TagManager/Icon/Heading: Symbol
 TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
-Tiddler/DateFormat: DDth MMM YYYY um hh:mm
+Tiddler/DateFormat: DDth MMM YYYY um 0hh:0mm
 UnsavedChangesWarning: TiddlyWiki wurde geändert, aber noch nicht gespeichert!
