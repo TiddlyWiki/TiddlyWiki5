@@ -45,6 +45,7 @@ Parsing/Inline/Caption: Inline Regeln
 Parsing/Pragma/Caption: Pragma Regeln
 Plugins/Add/Hint: Suche und installiere neue Plugins
 Plugins/Add/Caption: Suche
+Plugins/AlreadyInstalled: Dieses Plugin ist bereits installiert. Version: <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: deaktivieren
 Plugins/Disable/Hint: Deaktivieren Sie dieses Plugin beim nächsten Laden der Seite.
@@ -56,6 +57,8 @@ Plugins/Install: installieren
 Plugins/Installed/Hint: Momentan installierte Plugins
 Plugins/Languages/Caption: Sprachen
 Plugins/Languages/Hint: Spracherweiterungen
+Plugins/NoInformation: Kein Information vorhanden
+Plugins/NotInstalled: Dieses Plugin ist momentan nicht installiert
 Plugins/OpenPluginLibrary: Öffne das Plugin-Verzeichnis
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Erweiterungen
@@ -118,6 +121,9 @@ Settings/TitleLinks/Caption: Tiddler Titel
 Settings/TitleLinks/Hint: Tiddler Titel als Links anzeigen:
 Settings/TitleLinks/No/Description: Tiddler Titel normal anzeigen.
 Settings/TitleLinks/Yes/Description: Tiddler Titel als Link anzeigen.
+Settings/MissingLinks/Caption: Wiki-Links
+Settings/MissingLinks/Hint: Aktiviere Links zu fehlenden Tiddlern. zB: FehlenderTiddler [[Einführung]]
+Settings/MissingLinks/Description: Aktiviere Links zu fehlenden Tiddlern.
 StoryView/Caption: Anzeige
 StoryView/Prompt: Ausgewählte Anzeige:
 Theme/Caption: Theme
