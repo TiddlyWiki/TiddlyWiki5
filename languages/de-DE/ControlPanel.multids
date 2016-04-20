@@ -68,16 +68,16 @@ Plugins/Themes/Hint: Theme Erweiterungen
 Saving/Caption: Speichern
 Saving/Heading: Speichern
 Saving/TiddlySpot/Advanced/Heading: Erweiterte Einstellungen
-Saving/TiddlySpot/BackupDir: "Backup" Verzeichnis
+Saving/TiddlySpot/BackupDir: Verzeichnis für das "Backup"
 Saving/TiddlySpot/Backups: "Backups"
 Saving/TiddlySpot/Description: Diese Einstellungen sind nur für http://tiddlyspot.com und kompatible Server aktiv!
-Saving/TiddlySpot/Filename: "Upload" Dateiname
+Saving/TiddlySpot/Filename: Dateiname für den "Upload"
 Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //Die standard Server-URL ist `http://<wikiname>.tiddlyspot.com/store.cgi` und kann im Feld 'Server-URL' verändert werden. zB: http://example.com/store.php//
+Saving/TiddlySpot/Hint: //Die Standard-Server-URL ist `http://<wikiname>.tiddlyspot.com/store.cgi` und kann im Feld 'Server-URL' verändert werden. zB: http://example.com/store.php//
 Saving/TiddlySpot/Password: Passwort
 Saving/TiddlySpot/ServerURL: Server-URL
-Saving/TiddlySpot/UploadDir: "Upload" Verzeichnis
-Saving/TiddlySpot/UserName: Wiki Name
+Saving/TiddlySpot/UploadDir: Verzeichnis für den "Upload"
+Saving/TiddlySpot/UserName: Name des Wikis
 Settings/AutoSave/Caption: Automatisch speichern
 Settings/AutoSave/Disabled/Description: Änderungen NICHT automatisch speichern
 Settings/AutoSave/Enabled/Description: Änderungen automatisch speichern
