@@ -43,7 +43,7 @@ FoldAll/Hint: Ausblenden der Textbereiche aller Tiddler
 UnfoldAll/Caption: Einblenden aller Textbereiche
 UnfoldAll/Hint: Einblenden der Textbereiche aller Tiddler
 FullScreen/Caption: Vollbild
-FullScreen/Hint: Aktivieren oder deaktivieren des Vollbild-Modus
+FullScreen/Hint: Aktivieren oder Deaktivieren des Vollbild-Modus
 Help/Caption: Hilfe
 Help/Hint: Hilfe anzeigen
 Import/Caption: Import
@@ -57,7 +57,7 @@ Language/Hint: Auswahldialog für die Systemsprache
 More/Caption: mehr
 More/Hint: Weitere Aktionen
 NewHere/Caption: Neu hier
-NewHere/Hint: Erstelle einen neuen Tiddler der mit diesem getaggt ist
+NewHere/Hint: Erstelle einen neuen Tiddler, der mit dem Namen dieses Tiddlers getaggt ist
 NewJournal/Caption: Neues Journal
 NewJournal/Hint: Erstelle einen neuen Journal-Tiddler
 NewJournalHere/Caption: Neues Journal hier
@@ -71,7 +71,7 @@ Palette/Hint: Wähle eine Farbpalette
 Permalink/Caption: Permalink
 Permalink/Hint: Die Adressleiste des Browsers enthält einen Link zu diesem Tiddler
 Permaview/Caption: Permaview
-Permaview/Hint: Die Adressleiste des Browsers enthält einen Link zu allen offenen Tiddlern in dieser [[Story]]
+Permaview/Hint: Die Adressleiste des Browsers enthält einen Link zu allen offenen Tiddlern in dieser Story
 Refresh/Caption: Aktualisieren
 Refresh/Hint: Die Seite wird neu in den Browser geladen
 Save/Caption: Fertig
@@ -79,7 +79,7 @@ Save/Hint: Änderungen für diesen Tiddler bestätigen
 SaveWiki/Caption: Speichern
 SaveWiki/Hint: Das Wiki speichern
 StoryView/Caption: Story-Modus
-StoryView/Hint: Auswahl des Anzeigemodus für die [[Story]]
+StoryView/Hint: Auswahl des Anzeigemodus für die Story
 HideSideBar/Caption: Sidebar ausblenden
 HideSideBar/Hint: Sidebar ausblenden
 ShowSideBar/Caption: Sidebar einblenden

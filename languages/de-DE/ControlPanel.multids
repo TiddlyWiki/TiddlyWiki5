@@ -3,15 +3,15 @@ title: $:/language/ControlPanel/
 Advanced/Caption: Erweitert
 Advanced/Hint: Interne Informationen über dieses ~TiddlyWiki.
 Appearance/Caption: Design
-Appearance/Hint: Möglichkeiten um das Aussehen Ihres ~TiddlyWiki's anzupassen.
+Appearance/Hint: Möglichkeiten um das Aussehen Ihres ~TiddlyWikis anzupassen.
 Basics/AnimDuration/Prompt: Dauer der Animation:
 Basics/Caption: Basis
 Basics/DefaultTiddlers/BottomHint: Verwenden Sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Leerzeichen oder wählen Sie <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Offene Tiddler beim Laden wiederherstellen.</$button>
 Basics/DefaultTiddlers/Prompt: Standard-Tiddler:
 Basics/DefaultTiddlers/TopHint: Tiddler, die beim Start geladen werden:
 Basics/Language/Prompt: Hallo! Aktuelle Sprache:
-Basics/NewJournal/Title/Prompt: Titel des neuen Journal-Tiddlers
-Basics/NewJournal/Tags/Prompt: Tags des neuen Journal-Tiddlers
+Basics/NewJournal/Title/Prompt: Titel des neuen Journal-Tiddlers:
+Basics/NewJournal/Tags/Prompt: Tags des neuen Journal-Tiddlers:
 Basics/OverriddenShadowTiddlers/Prompt: Anzahl überschriebener Schatten-Tiddler:
 Basics/ShadowTiddlers/Prompt: Anzahl Schatten-Tiddler:
 Basics/Subtitle/Prompt: Untertitel:
