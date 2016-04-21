@@ -1,7 +1,7 @@
 caption: Instrucciones
 created: 20150124182117000
 es-title: Instrucciones de filtro
-modified: 20160420183717232
+modified: 20160421054304561
 tags: [[Filter Syntax]]
 title: Filter Run
 type: text/vnd.tiddlywiki
@@ -9,11 +9,11 @@ type: text/vnd.tiddlywiki
 <$railroad text="""
 ( "[" { [[paso|"Filter Step"]] } "]"
   |
-  [:{/"nada, excepto [ ] o espacio"/}]
+  [:{/"nada excepto [ ] o espacio"/}]
   |
-  '"' [:{/'nada, excepto "'/}] '"'
+  '"' [:{/'nada excepto "'/}] '"'
   |
-  "'" [:{/"nada, excepto '"/}] "'"
+  "'" [:{/"nada excepto '"/}] "'"
 )
 """/>
 
