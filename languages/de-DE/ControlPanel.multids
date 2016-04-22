@@ -3,15 +3,15 @@ title: $:/language/ControlPanel/
 Advanced/Caption: Erweitert
 Advanced/Hint: Interne Informationen über dieses ~TiddlyWiki.
 Appearance/Caption: Design
-Appearance/Hint: Möglichkeiten um das Aussehen Ihres ~TiddlyWiki's anzupassen.
+Appearance/Hint: Möglichkeiten um das Aussehen Ihres ~TiddlyWikis anzupassen.
 Basics/AnimDuration/Prompt: Dauer der Animation:
 Basics/Caption: Basis
 Basics/DefaultTiddlers/BottomHint: Verwenden Sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Leerzeichen oder wählen Sie <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Offene Tiddler beim Laden wiederherstellen.</$button>
 Basics/DefaultTiddlers/Prompt: Standard-Tiddler:
 Basics/DefaultTiddlers/TopHint: Tiddler, die beim Start geladen werden:
 Basics/Language/Prompt: Hallo! Aktuelle Sprache:
-Basics/NewJournal/Title/Prompt: Titel des neuen Journal-Tiddlers
-Basics/NewJournal/Tags/Prompt: Tags des neuen Journal-Tiddlers
+Basics/NewJournal/Title/Prompt: Titel des neuen Journal-Tiddlers:
+Basics/NewJournal/Tags/Prompt: Tags des neuen Journal-Tiddlers:
 Basics/OverriddenShadowTiddlers/Prompt: Anzahl überschriebener Schatten-Tiddler:
 Basics/ShadowTiddlers/Prompt: Anzahl Schatten-Tiddler:
 Basics/Subtitle/Prompt: Untertitel:
@@ -45,6 +45,7 @@ Parsing/Inline/Caption: Inline Regeln
 Parsing/Pragma/Caption: Pragma Regeln
 Plugins/Add/Hint: Suche und installiere neue Plugins
 Plugins/Add/Caption: Suche
+Plugins/AlreadyInstalled: Dieses Plugin ist bereits installiert. Version: <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: deaktivieren
 Plugins/Disable/Hint: Deaktivieren Sie dieses Plugin beim nächsten Laden der Seite.
@@ -56,6 +57,8 @@ Plugins/Install: installieren
 Plugins/Installed/Hint: Momentan installierte Plugins
 Plugins/Languages/Caption: Sprachen
 Plugins/Languages/Hint: Spracherweiterungen
+Plugins/NoInformation: Kein Information vorhanden
+Plugins/NotInstalled: Dieses Plugin ist momentan nicht installiert
 Plugins/OpenPluginLibrary: Öffne das Plugin-Verzeichnis
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Erweiterungen
@@ -65,16 +68,16 @@ Plugins/Themes/Hint: Theme Erweiterungen
 Saving/Caption: Speichern
 Saving/Heading: Speichern
 Saving/TiddlySpot/Advanced/Heading: Erweiterte Einstellungen
-Saving/TiddlySpot/BackupDir: "Backup" Verzeichnis
+Saving/TiddlySpot/BackupDir: Verzeichnis für das "Backup"
 Saving/TiddlySpot/Backups: "Backups"
 Saving/TiddlySpot/Description: Diese Einstellungen sind nur für http://tiddlyspot.com und kompatible Server aktiv!
-Saving/TiddlySpot/Filename: "Upload" Dateiname
+Saving/TiddlySpot/Filename: Dateiname für den "Upload"
 Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //Die standard Server-URL ist `http://<wikiname>.tiddlyspot.com/store.cgi` und kann im Feld 'Server-URL' verändert werden. zB: http://example.com/store.php//
+Saving/TiddlySpot/Hint: //Die Standard-Server-URL ist `http://<wikiname>.tiddlyspot.com/store.cgi` und kann im Feld 'Server-URL' verändert werden. zB: http://example.com/store.php//
 Saving/TiddlySpot/Password: Passwort
 Saving/TiddlySpot/ServerURL: Server-URL
-Saving/TiddlySpot/UploadDir: "Upload" Verzeichnis
-Saving/TiddlySpot/UserName: Wiki Name
+Saving/TiddlySpot/UploadDir: Verzeichnis für den "Upload"
+Saving/TiddlySpot/UserName: Name des Wikis
 Settings/AutoSave/Caption: Automatisch speichern
 Settings/AutoSave/Disabled/Description: Änderungen NICHT automatisch speichern
 Settings/AutoSave/Enabled/Description: Änderungen automatisch speichern
@@ -118,6 +121,9 @@ Settings/TitleLinks/Caption: Tiddler Titel
 Settings/TitleLinks/Hint: Tiddler Titel als Links anzeigen:
 Settings/TitleLinks/No/Description: Tiddler Titel normal anzeigen.
 Settings/TitleLinks/Yes/Description: Tiddler Titel als Link anzeigen.
+Settings/MissingLinks/Caption: Wiki-Links
+Settings/MissingLinks/Hint: Aktiviere Links zu fehlenden Tiddlern. zB: FehlenderTiddler [[Einführung]]
+Settings/MissingLinks/Description: Aktiviere Links zu fehlenden Tiddlern.
 StoryView/Caption: Anzeige
 StoryView/Prompt: Ausgewählte Anzeige:
 Theme/Caption: Theme
