@@ -1,6 +1,3 @@
-// CodeMirror, copyright (c) by Marijn Haverbeke and others
-// Distributed under an MIT license: http://codemirror.net/LICENSE
-
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
     mod(require("../../lib/codemirror"));
@@ -81,7 +78,7 @@
     if (marks.length) {
       // Kludge to work around the IE bug from issue #1193, where text
       // input stops going to the textare whever this fires.
-      if (ie_lt8 && cm.state.focused) cm.focus();
+      if (ie_lt8 && cm.state.focused) cm.display.input.focus();
 
       var clear = function() {
         cm.operation(function() {
