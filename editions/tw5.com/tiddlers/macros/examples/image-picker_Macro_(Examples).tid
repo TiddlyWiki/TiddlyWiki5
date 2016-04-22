@@ -1,0 +1,7 @@
+created: 20160418155539132
+modified: 20160418155621890
+tags: [[changecount Macro]] [[Macro Examples]]
+title: image-picker Macro (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1" eg={{image-picker Macro (Example 1)}}/>

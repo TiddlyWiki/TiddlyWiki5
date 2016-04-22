@@ -320,7 +320,7 @@ a.tc-tiddlylink-external:hover {
 ** Buttons
 */
 
-button svg, button img {
+button svg, button img, label svg, label img {
 	vertical-align: middle;
 }
 
@@ -893,13 +893,18 @@ button.tc-untagged-label {
 	color: <<colour very-muted-foreground>>;
 }
 
-.tc-tiddler-frame input.tc-edit-texteditor, .tc-tiddler-frame textarea.tc-edit-texteditor {
+.tc-tiddler-frame .tc-edit-texteditor {
 	width: 100%;
+	margin: 4px 0 4px 0;
+}
+
+.tc-tiddler-frame input.tc-edit-texteditor,
+.tc-tiddler-frame textarea.tc-edit-texteditor,
+.tc-tiddler-frame iframe.tc-edit-texteditor {
 	padding: 3px 3px 3px 3px;
 	border: 1px solid <<colour tiddler-editor-border>>;
 	line-height: 1.3em;
 	-webkit-appearance: none;
-	margin: 4px 0 4px 0;
 }
 
 .tc-tiddler-frame .tc-binary-warning {
@@ -957,6 +962,53 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-single-tiddler-window embed,
 .tc-single-tiddler-window iframe {
 	max-width: 100%;
+}
+
+/*
+** Editor
+*/
+
+.tc-editor-toolbar {
+    margin-top: 8px;	
+}
+
+.tc-editor-toolbar button {
+	vertical-align: middle;
+	background-color: <<colour tiddler-controls-foreground>>;
+	fill: <<colour tiddler-controls-foreground-selected>>;
+    border-radius: 4px;
+    padding: 3px;
+    margin: 2px 0;
+}
+
+.tc-editor-toolbar button.tc-text-editor-toolbar-item-adjunct {
+    margin-left: -4px;
+    width: 1em;
+    border-radius: 8px;	
+}
+
+.tc-editor-toolbar button.tc-selected {
+	background-color: <<colour primary>>;
+}
+
+.tc-editor-toolbar button svg {
+    width: 1.6em;
+    height: 1.2em;
+}
+
+.tc-editor-toolbar button:hover {
+	background-color: <<colour tiddler-controls-foreground-selected>>;
+	fill: <<colour background>>;
+}
+
+.tc-editor-toolbar .tc-text-editor-toolbar-more {
+	white-space: normal;
+}
+
+.tc-editor-toolbar .tc-text-editor-toolbar-more button {
+	display: inline-block;
+	padding: 3px;
+	width: auto;
 }
 
 /*
@@ -1092,14 +1144,18 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-tiddler-preview-preview {
 	float: right;
-	width: 48%;
+	width: 49%;
 	border: 1px solid <<colour tiddler-editor-border>>;
 	margin: 4px 3px 3px 3px;
 	padding: 3px 3px 3px 3px;
 }
 
-.tc-tiddler-preview-edit {
-	width: 48%;
+.tc-tiddler-frame .tc-tiddler-preview .tc-edit-texteditor {
+	width: 49%;
+}
+
+.tc-tiddler-frame .tc-tiddler-preview canvas.tc-edit-bitmapeditor {
+	max-width: 49%;
 }
 
 .tc-edit-fields {
@@ -1333,6 +1389,55 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-search-results {
     padding: 0 7px 0 7px;
+}
+
+.tc-image-chooser, .tc-colour-chooser {
+	white-space: normal;
+}
+
+.tc-image-chooser a,
+.tc-colour-chooser a {
+	display: inline-block;
+	vertical-align: top;
+    text-align: center;
+	position: relative;
+}
+
+.tc-image-chooser a {
+	border: 1px solid <<colour muted-foreground>>;
+	padding: 2px;
+	margin: 2px;
+	width: 4em;
+	height: 4em;
+}
+
+.tc-colour-chooser a {
+	padding: 3px;
+	width: 2em;
+	height: 2em;
+    vertical-align: middle;
+}
+
+.tc-image-chooser a:hover,
+.tc-colour-chooser a:hover {
+	background: <<colour primary>>;
+	padding: 0px;
+	border: 3px solid <<colour primary>>;
+}
+
+.tc-image-chooser a svg,
+.tc-image-chooser a img {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    max-width: 3.5em;
+    max-height: 3.5em;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
 /*

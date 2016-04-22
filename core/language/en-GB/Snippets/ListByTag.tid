@@ -1,0 +1,6 @@
+title: $:/language/Snippets/ListByTag
+tags: $:/tags/TextEditor/Snippet
+caption: List of tiddlers by tag
+mode: wikified
+
+<<list-links "[tag[task]sort[title]]">>

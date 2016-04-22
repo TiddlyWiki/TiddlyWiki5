@@ -62,6 +62,10 @@ NewJournal/Caption: new journal
 NewJournal/Hint: Create a new journal tiddler
 NewJournalHere/Caption: new journal here
 NewJournalHere/Hint: Create a new journal tiddler tagged with this one
+NewImage/Caption: new image
+NewImage/Hint: Create a new image tiddler
+NewMarkdown/Caption: new Markdown tiddler
+NewMarkdown/Hint: Create a new Markdown tiddler
 NewTiddler/Caption: new tiddler
 NewTiddler/Hint: Create a new tiddler
 OpenWindow/Caption: open in new window
@@ -88,3 +92,81 @@ TagManager/Caption: tag manager
 TagManager/Hint: Open tag manager
 Theme/Caption: theme
 Theme/Hint: Choose the display theme
+Bold/Caption: bold
+Bold/Hint: Apply bold formatting to selection
+Clear/Caption: clear
+Clear/Hint: Clear image to solid colour
+EditorHeight/Caption: editor height
+EditorHeight/Caption/Auto: Automatically adjust height to fit content
+EditorHeight/Caption/Fixed: Fixed height:
+EditorHeight/Hint: Choose the height of the text editor
+Excise/Caption: excise
+Excise/Caption/Excise: Perform excision
+Excise/Caption/MacroName: Macro name:
+Excise/Caption/NewTitle: Title of new tiddler:
+Excise/Caption/Replace: Replace excised text with:
+Excise/Caption/Replace/Macro: macro
+Excise/Caption/Replace/Link: link
+Excise/Caption/Replace/Transclusion: transclusion
+Excise/Caption/Tag: Tag new tiddler with the title of this tiddler
+Excise/Caption/TiddlerExists: Warning: tiddler already exists
+Excise/Hint: Excise the selected text into a new tiddler
+Heading1/Caption: heading 1
+Heading1/Hint: Apply heading level 1 formatting to lines containing selection
+Heading2/Caption: heading 2
+Heading2/Hint: Apply heading level 2 formatting to lines containing selection
+Heading3/Caption: heading 3
+Heading3/Hint: Apply heading level 3 formatting to lines containing selection
+Heading4/Caption: heading 4
+Heading4/Hint: Apply heading level 4 formatting to lines containing selection
+Heading5/Caption: heading 5
+Heading5/Hint: Apply heading level 5 formatting to lines containing selection
+Heading6/Caption: heading 6
+Heading6/Hint: Apply heading level 6 formatting to lines containing selection
+Italic/Caption: italic
+Italic/Hint: Apply italic formatting to selection
+LineWidth/Caption: line width
+LineWidth/Hint: Set line width for painting
+ListBullet/Caption: bulleted list
+ListBullet/Hint: Apply bulleted list formatting to lines containing selection
+ListNumber/Caption: numbered list
+ListNumber/Hint: Apply numbered list formatting to lines containing selection
+MonoBlock/Caption: monospaced block
+MonoBlock/Hint: Apply monospaced block formatting to lines containing selection
+MonoLine/Caption: monospaced
+MonoLine/Hint: Apply monospaced character formatting to selection
+Opacity/Caption: opacity
+Opacity/Hint: Set painting opacity
+Paint/Caption: paint colour
+Paint/Hint: Set painting colour
+Picture/Caption: picture
+Picture/Hint: Insert picture
+Preview/Caption: preview
+Preview/Hint: Show preview pane
+PreviewType/Caption: preview type
+PreviewType/Hint: Choose preview type
+Quote/Caption: quote
+Quote/Hint: Apply quoted text formatting to lines containing selection
+Redo/Caption: redo
+Redo/Hint: Redo the last action to be undone
+Size/Caption: image size
+Size/Caption/Height: Height:
+Size/Caption/Resize: Resize image
+Size/Caption/Width: Width:
+Size/Hint: Set image size
+Stamp/Caption: stamp
+Stamp/Caption/New: Add your own
+Stamp/Hint: Insert a preconfigured snippet of text
+Stamp/New/Title: Name as shown in menu
+Stamp/New/Text: Text of snippet. (Remember to add a descriptive title in the caption field).
+Strikethrough/Caption: strikethrough
+Strikethrough/Hint: Apply strikethrough formatting to selection
+Subscript/Caption: subscript
+Subscript/Hint: Apply subscript formatting to selection
+Superscript/Caption: superscript
+Superscript/Hint: Apply superscript formatting to selection
+Underline/Caption: underline
+Underline/Hint: Apply underline formatting to selection
+Undo/Caption: undo
+Undo/Hint: Undo the last action
+

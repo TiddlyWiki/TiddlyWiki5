@@ -1,0 +1,14 @@
+title: $:/core/ui/EditorToolbar/mono-line
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/mono-line
+caption: {{$:/language/Buttons/MonoLine/Caption}}
+description: {{$:/language/Buttons/MonoLine/Hint}}
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+shortcuts: ((mono-line))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="`"
+	suffix="`"
+/>

@@ -62,6 +62,10 @@ NewJournal/Caption: nouveau journal
 NewJournal/Hint: Crée un nouveau tiddler journal
 NewJournalHere/Caption: nouveau journal, ici
 NewJournalHere/Hint: Crée un nouveau tiddler journal avec pour tag le tiddler courant
+NewImage/Caption: nouvelle image
+NewImage/Hint: Crée une nouveau tiddler image
+NewMarkdown/Caption: nouveau tiddler Markdown
+NewMarkdown/Hint: Crée un nouveau tiddler avec la syntaxe Markdown
 NewTiddler/Caption: nouveau tiddler
 NewTiddler/Hint: Créer un nouveau tiddler
 OpenWindow/Caption: ouvrir dans une nouvelle fenêtre
@@ -88,3 +92,80 @@ TagManager/Caption: gestionnaire de tags
 TagManager/Hint:  Gestionnaire de tags
 Theme/Caption: thème
 Theme/Hint: Choix du thème pour l'affichage
+Bold/Caption: gras
+Bold/Hint: Mettre la sélection en gras
+Clear/Caption: effacer
+Clear/Hint: Remplace l'image par une couleur pleine
+EditorHeight/Caption: hauteur de l'éditeur
+EditorHeight/Caption/Auto: Ajuste automatiquement la hauteur en fonction du contenu
+EditorHeight/Caption/Fixed: Hauteur fixe :
+EditorHeight/Hint: Choisir la hauteur de l'éditeur de texte
+Excise/Caption: exciser
+Excise/Caption/Excise: Effectue une excision
+Excise/Caption/MacroName: Nom de la macro :
+Excise/Caption/NewTitle: Titre du nouveau tiddler :
+Excise/Caption/Replace: Remplacer le texte excisé par :
+Excise/Caption/Replace/Macro: macro
+Excise/Caption/Replace/Link: lien
+Excise/Caption/Replace/Transclusion: transclusion
+Excise/Caption/Tag: Utiliser le titre de ce tiddler comme tag du nouveau tiddler
+Excise/Caption/TiddlerExists: Attention : le tiddler existe déjà
+Excise/Hint: Exciser le texte sélectionner vers un nouveau tiddler
+Heading1/Caption: en-tête 1
+Heading1/Hint: Appliquer le formatage des en-têtes de niveau 1 aux lignes de la sélection
+Heading2/Caption: en-tête 2
+Heading2/Hint: Appliquer le formatage des en-têtes de niveau 2 aux lignes de la sélection
+Heading3/Caption: en-tête 3
+Heading3/Hint: Appliquer le formatage des en-têtes de niveau 3 aux lignes de la sélection
+Heading4/Caption: en-tête 4
+Heading4/Hint: Appliquer le formatage des en-têtes de niveau 4 aux lignes de la sélection
+Heading5/Caption: en-tête 5
+Heading5/Hint: Appliquer le formatage des en-têtes de niveau 5 aux lignes de la sélection
+Heading6/Caption: en-tête 6
+Heading6/Hint: Appliquer le formatage des en-têtes de niveau 6 aux lignes de la sélection
+Italic/Caption: italiques
+Italic/Hint: Mettre la sélection en italiques
+LineWidth/Caption: épaisseur du trait
+LineWidth/Hint: Choisir une épaisseur de trait pour le remplissage
+ListBullet/Caption: liste à puces
+ListBullet/Hint: Formater les lignes de la sélection comme une liste à puces
+ListNumber/Caption: liste numérotée
+ListNumber/Hint: Formater les lignes de la sélection comme une liste numérotée
+MonoBlock/Caption: bloc de chasse constante
+MonoBlock/Hint: Formater les lignes de la sélection en bloc de chasse constante
+MonoLine/Caption: chasse constante
+MonoLine/Hint: Formater la sélection avec une police de caractères à chasse constante
+Opacity/Caption: opacité
+Opacity/Hint: Choisit l'opacité du remplissage
+Paint/Caption: couleur de remplissage
+Paint/Hint: Choisit la couleur de remplissage
+Picture/Caption: image
+Picture/Hint: Insérer une image
+Preview/Caption: prévisualisation
+Preview/Hint: Affiche le panneau de prévisualisation
+PreviewType/Caption: type de prévisualisation
+PreviewType/Hint: Choisit le type de prévisualisation
+Quote/Caption: citation
+Quote/Hint: Formate les lignes de la sélection comme une citation
+Redo/Caption: rétablir
+Redo/Hint: Rétablit la dernière action annulée
+Size/Caption: taille de l'image
+Size/Caption/Height: Hauteur :
+Size/Caption/Resize: Retailler l'image
+Size/Caption/Width: Largeur :
+Size/Hint: Choisit la taille de l'image
+Stamp/Caption: tampon
+Stamp/Caption/New: Ajoutez le vôtre
+Stamp/Hint: Insère un fragment de texte prédéterminé
+Stamp/New/Title: Nom tel qu'il apparaît dans le menu
+Stamp/New/Text: Texte du fragment. (N'oubliez pas d'ajouter une légende dans le champ //caption//.)
+Strikethrough/Caption: barré
+Strikethrough/Hint: Barre le texte sélectionné
+Subscript/Caption: indice
+Subscript/Hint: Met en indice le texte sélectionné
+Superscript/Caption: exposant
+Superscript/Hint: Met en exposant le texte sélectionné
+Underline/Caption: souligné
+Underline/Hint: Souligne le texte sélectionné
+Undo/Caption: annuler
+Undo/Hint: Annule la dernière action

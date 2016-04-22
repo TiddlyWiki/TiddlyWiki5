@@ -61,6 +61,20 @@ exports.toggleClass = function(el,className,status) {
 };
 
 /*
+Get the first parent element that has scrollbars or use the body as fallback.
+*/
+exports.getScrollContainer = function(el) {
+	var doc = el.ownerDocument;
+	while(el.parentNode) {	
+		el = el.parentNode;
+		if(el.scrollTop) {
+			return el;
+		}
+	}
+	return doc.body;
+};
+
+/*
 Get the scroll position of the viewport
 Returns:
 	{
@@ -74,6 +88,31 @@ exports.getScrollPosition = function() {
 	} else {
 		return {x: document.documentElement.scrollLeft, y: document.documentElement.scrollTop};
 	}
+};
+
+/*
+Adjust the height of a textarea to fit its content, preserving scroll position, and return the height
+*/
+exports.resizeTextAreaToFit = function(domNode,minHeight) {
+	// Get the scroll container and register the current scroll position
+	var container = $tw.utils.getScrollContainer(domNode),
+		scrollTop = container.scrollTop;
+    // Measure the specified minimum height
+	domNode.style.height = minHeight;
+	var measuredHeight = domNode.offsetHeight;
+	// Set its height to auto so that it snaps to the correct height
+	domNode.style.height = "auto";
+	// Calculate the revised height
+	var newHeight = Math.max(domNode.scrollHeight + domNode.offsetHeight - domNode.clientHeight,measuredHeight);
+	// Only try to change the height if it has changed
+	if(newHeight !== domNode.offsetHeight) {
+		domNode.style.height = newHeight + "px";
+		// Make sure that the dimensions of the textarea are recalculated
+		$tw.utils.forceLayout(domNode);
+		// Set the container to the position we registered at the beginning
+		container.scrollTop = scrollTop;
+	}
+	return newHeight;
 };
 
 /*
@@ -164,5 +203,30 @@ exports.addEventListeners = function(domNode,events) {
 	});
 };
 
+/*
+Get the computed styles applied to an element as an array of strings of individual CSS properties
+*/
+exports.getComputedStyles = function(domNode) {
+	var textAreaStyles = window.getComputedStyle(domNode,null),
+		styleDefs = [];
+	$tw.utils.each(Object.keys(textAreaStyles),function(name) {
+		styleDefs.push(name + ": " + textAreaStyles[name] + ";");
+	});
+	return styleDefs;
+};
+
+/*
+Apply a set of styles passed as an array of strings of individual CSS properties
+*/
+exports.setStyles = function(domNode,styleDefs) {
+	domNode.style.cssText = styleDefs.join("");
+};
+
+/*
+Copy the computed styles from a source element to a destination element
+*/
+exports.copyStyles = function(srcDomNode,dstDomNode) {
+	$tw.utils.setStyles(dstDomNode,$tw.utils.getComputedStyles(srcDomNode));
+};
 
 })();
