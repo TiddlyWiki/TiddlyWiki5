@@ -1,14 +1,14 @@
-caption: Tiddlers: edición
+caption: Edición de tiddlers
 created: 20140904140300000
 es-title: Crear y editar tiddlers
-modified: 20160412163933804
+modified: 20160422153052849
 tags: [[Working with TiddlyWiki]]
 title: Creating and editing tiddlers
 type: text/vnd.tiddlywiki
 
 ! Crear un tiddler
 
-Un tiddler se crea con un simple clic, bien en el botón ''Nuevo'' {{$:/core/images/new-button}} de la  barra lateral, o en el enlace a un tiddler faltante. Los tiddlers faltantes se muestran en [[cursiva azul]]
+Un tiddler se crea con un simple clic, bien en el botón <<.button new-tiddler>> de la  barra lateral, o en el enlace a un tiddler vacío, que se distinguen por estar en [[cursiva azul]]
 
 Mira también:
 
@@ -16,13 +16,13 @@ Mira también:
 
 ! Editar un tiddler
 
-Haz clic en el botón ''Editar'' {{$:/core/images/edit-button}}, situado arriba a la derecha del tiddler que quieras editar. 
+Haz clic en el botón <<.button edit>>, situado arriba a la derecha del tiddler que quieres editar. 
 
 !! Borrador
 
 Cuando creas un tiddler nuevo o editas uno ya existente, el tiddler se muestra en modo borrador o de edición y muestra un panel de control que permite modificarlo de varias formas, compuesto de las siguientes partes (de arriba hacia abajo):
 
-*''Campo de título'' - SIrve para cambiar el título de un tiddler (por defecto "Nuevo Tiddler")
+''Campo de título'' - SIrve para cambiar el título de un tiddler (por defecto "Nuevo Tiddler")
 
 *''Selector de etiquetas'' - SIrve para añadir o quitar etiquetas. A medida que escribas en el cuadro, una lista desplegable te mostrará cualquier etiqueta ya existente que coincida con lo escrito. Puedes seleccionar una etiqueta de la lista o escribir una completamente nueva y pulsar el botón ''añadir'' para incorporarla al tiddler. Cada etiqueta se muestra como una //píldora// coloreada. Si haces clic en la ''x'' de una píldora, quitarás la etiqueta del tiddler y si no hay más tiddlers con esa etiqueta, la borrarás también de la lista.
 
@@ -37,12 +37,12 @@ Cuando creas un tiddler nuevo o editas uno ya existente, el tiddler se muestra e
 
 Cuando termines con la edición, pulsa uno de los botones que tienes arriba a la derecha del tiddler:
 
-*El botón ''OK'' {{$:/core/images/done-button}} guarda los cambios realizados en el tiddler y sale del editor. 
+*El botón <<.button save>> guarda los cambios realizados en el tiddler y sale del editor. 
 
 **Si tienes el wiki configurado para que [[guarde automáticamente|AutoSave]] los cambios, no necesitas hacer nada más: tus cambios quedan guardados de forma permanente al salir del editor. Si no tienes el Autosave configurado, los cambios se guardan sólo temporalmente en el navegador y se perderán en cuanto cierres la página. ~TiddlyWIki te avisa en tal caso de que tienes cambios pendientes de guardar mostrándote un botón rojo a la derecha, en la barra lateral. 
 
-**Ese es el botón  ''guardar'' {{$:/core/images/save-button}}. Para conservar tus cambios permanentemente, haz clic en él. ~TiddlyWiki guardará los cambios y el botón cambiará su color, indicando que ya no hay peligro.
+**Ese es el botón  <<.button save-wiki>> . Para conservar tus cambios permanentemente, haz clic en él. ~TiddlyWiki guardará los cambios y el botón cambiará su color, indicando que ya no hay peligro.
 
-*El botón ''Cancelar'' {{$:/core/images/cancel-button}} interrumpe la edición, descarta todos los cambios (previa confirmación) y sale del editor.
+*El botón <<.button cancel>>  interrumpe la edición, descarta todos los cambios (previa confirmación) y sale del editor.
 
-*El botón ''Borrar'' {{$:/core/images/delete-button}} elimina por completo el tiddler. Para hacerlo pide confirmación, pero ten en cuenta que una vez confirmado, el borrado de un tiddler es irrecuperable.
+*El botón <<.button delete>> elimina por completo el tiddler. Para hacerlo pide confirmación, pero ten en cuenta que una vez confirmado, el borrado de un tiddler es irrecuperable.

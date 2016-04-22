@@ -5,7 +5,7 @@ command: Comandos que pueden ejecutarse en Node.js
 config: Datos para insertar en `$tw.config`
 filteroperator: Operadores individuales de filtrado
 global: Datos globales para insertar en `$tw`
-isfilteroperator: Operandos para el operador de filtro ''is''
+isfilteroperator: Operandos para el operador ''is''
 macro: Definiciones macro de JavaScript.
 parser: Reglas sintácticas para diversos tipos de contenido.
 saver: Guarda archivos desde el navegador con diferentes métodos.
