@@ -1,6 +1,6 @@
 caption: 5.1.12
 created: 20160205184203773
-modified: 20160418160807002
+modified: 20160422162019362
 tags: ReleaseNotes
 title: Release 5.1.12
 type: text/vnd.tiddlywiki
@@ -31,23 +31,19 @@ The bitmap editor has been enhanced with a toolbar supporting:
 * Resizing the image
 * Keeping track of recently chosen colours
 
-!! Improved CodeMirror Plugin
+!! Improved Plugins
 
-The CodeMirror plugin has been updated to version 5.13.2, and integrated with the new editor toolbars. The default configuration has been updated to include syntax highlighting for HTML, ~JavaScript, CSS, XML, TiddlyWiki Classic and Markdown.
+Several of the official plugins available in the plugin library have been updated for this release. [[Upgrading]] will automatically update any installed plugins.
 
-!! Improved Markdown Plugin
+* The CodeMirror plugin has been updated to version 5.13.2, and integrated with the new editor toolbars. The default configuration has been updated to include syntax highlighting for HTML, ~JavaScript, CSS, XML, TiddlyWiki Classic and Markdown.
+* The Markdown plugin includes formatting toolbar buttons and a new "new markdown tiddler" button in the Tools tab of the sidebar.
+* The experimental Evernote plugin allows notes and images from `.enex` files to be imported into TiddlyWiki. Install it through the "Plugins" tab of control panel.
+* The new Internals plugin provides features to help understand the internal operation of TiddlyWiki, including new preview modes in the editor showing both the parse and widget trees of the current tiddler
+* Improved language translations:
+** Korean
+** Chinese (Simplified) and Chinese (Traditional)
+** German
 
-The Markdown plugin includes formatting toolbar buttons and a new "new markdown tiddler" button in the Tools tab of the sidebar.
-
-!! New Evernote Plugin
-
-The experimental Evernote plugin allows notes and images from `.enex` files to be imported into TiddlyWiki. Install it through the "Plugins" tab of control panel.
-
-!! New "Internals" Plugin
-
-The new `tiddlywiki/internals` plugin provides features to help understand the internal operation of TiddlyWiki, including:
-
-* New preview modes in the editor showing both the parse and widget trees of the current tiddler
 
 !! Text-Slicer Plugin Improvements
 
@@ -59,26 +55,31 @@ The new `tiddlywiki/internals` plugin provides features to help understand the i
 
 ! Other Improvements
 
-!! Translation Improvements
-
-* TBD
 
 !! Usability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/7908e10488cc4280dd8e4f405bcb09f2fb6d3524]] a setting for disabling linking to missing tiddlers
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/de3adf905aff80e547dc630890f0d18bd87da880]] a setting for forcing word wrapping in monospaced code blocks
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/issues/2351]] a warning when creating tiddler titles containing troublesome characters
 * Addition of “new image” button to the “Tools” tab of the sidebar
 * Introduction of new general purpose [[colour-picker Macro]]
-* Introduction of new general purpose [[image-picker macro]]
+* Introduction of new general purpose [[image-picker Macro]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/adf45b346847a81d4ed26397466daa4514035bb9]] a bulk delete button to [[advanced search|$:/AdvancedSearch]] "Filter" tab
 
 !! Hackability Improvements
 
 * [[Introduction|https://github.com/Jermolene/TiddlyWiki5/issues/2337]] of the new WikifyWidget
-* [[Introduction|]] of new EditShortcutWidget for direct entry of keyboard shortcut codes
+* Introduction of new EditShortcutWidget for direct entry of keyboard shortcut codes
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/7daebba46bad0e7ea3e4dfc1fc2e59e36414a683]] editor preview pane to allow plugins to add further types of preview (see the new `tiddlywiki/internals` plugin for an example)
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f8565443d7617f4d18b90ba7ce3f55b9764eccb2]] a simple HTTP PUT saver for use with WebDav or REST servers
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/37823f64e96809df16884c605b062f8da2453635]] build targets to the server edition
 
 !! Bug Fixes
 
-* TBD
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/2284]] problem with [[has Operator]]
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/4a03dcab2031a31eb60f99b6d15a70ff0449182c]] problem with double byte entities in the EntityWidget
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/276074b6cfde9d916f9428b2185f795915e190ae]] problem with ScrollableWidget in static renderings
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/1e0d019610acd960b8c70c0b85b7bb1a25096a8f]] problem with repeatedly lazy loading of tiddlers without a text field
 
 !! Node.js Improvements
 
@@ -88,5 +89,19 @@ The new `tiddlywiki/internals` plugin provides features to help understand the i
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
+* [[@araname|https://github.com/araname]]
+* [[@BramChen|https://github.com/BramChen]]
+* [[@edrex|https://github.com/edrex]]
+* [[@felixhayashi|https://github.com/felixhayashi]]
+* [[@FND|https://github.com/FND]]
+* [[@kixam|https://github.com/kixam]]
+* [[@Marxsal|https://github.com/Marxsal]]
+* [[@mklauber|https://github.com/mklauber]]
+* [[@nome|https://github.com/nome]]
+* [[@PauDeLuca|https://github.com/PauDeLuca]]
+* [[@pmario|https://github.com/pmario]]
+* [[@rcrath|https://github.com/rcrath]]
 * [[@sukima|https://github.com/sukima]]
 * [[@telmiger|https://github.com/telmiger]]
+* [[@twMat|https://github.com/twMat]]
+* [[@webninjasi|https://github.com/webninjasi]]
