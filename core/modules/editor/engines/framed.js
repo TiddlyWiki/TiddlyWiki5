@@ -8,11 +8,11 @@ Text editor engine based on a simple input or textarea within an iframe. This is
 \*/
 (function(){
 
-var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height"
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
+
+var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
 
 function FramedEngine(options) {
 	// Save our options
@@ -130,7 +130,7 @@ FramedEngine.prototype.focus  = function() {
 		this.domNode.focus();
 		this.domNode.select();
 	}
-}
+};
 
 /*
 Handle a dom "input" event which occurs when the text has changed

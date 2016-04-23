@@ -103,7 +103,7 @@ SimpleEngine.prototype.focus  = function() {
 		this.domNode.focus();
 		this.domNode.select();
 	}
-}
+};
 
 /*
 Handle a dom "input" event which occurs when the text has changed
