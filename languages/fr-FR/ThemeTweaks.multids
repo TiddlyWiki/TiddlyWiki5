@@ -1,0 +1,41 @@
+title: $:/language/ThemeTweaks/
+
+ThemeTweaks: Réglages Thème
+ThemeTweaks/Hint: Vous pouvez ajuster certains aspects du thème ''Vanilla''.
+Options: Options
+Options/SidebarLayout: Sidebar layout
+Options/SidebarLayout/Fixed-Fluid: Fixed story, fluid sidebar
+Options/SidebarLayout/Fluid-Fixed: Fluid story, fixed sidebar
+Options/StickyTitles: Titres stickés
+Options/StickyTitles/Hint: "Stick" les titres de tiddler en haut de la fenêtre du navigateur. Attention<<:>> Ne fonctionne pas du tout avec Chrome, et peut causer quelques problèmes de mise en page dans Firefox
+Options/CodeWrapping: Wrap long lines in code blocks
+Settings: Réglages
+Settings/FontFamily: Famille de polices
+Settings/CodeFontFamily: Code des familles de police
+Settings/BackgroundImage: Image de fond de page
+Settings/BackgroundImageAttachment: Fixation de l'image de fond de page
+Settings/BackgroundImageAttachment/Scroll: Défile avec les tiddlers
+Settings/BackgroundImageAttachment/Fixed: Fixée à la fenêtre
+Settings/BackgroundImageSize: Taille de l'image de fond de page
+Settings/BackgroundImageSize/Auto: Auto
+Settings/BackgroundImageSize/Cover: Élargie
+Settings/BackgroundImageSize/Contain: Contenue
+Metrics: Tailles
+Metrics/FontSize: Taille police
+Metrics/LineHeight: Hauteur ligne
+Metrics/BodyFontSize: Taille police dans un tiddler
+Metrics/BodyLineHeight: Hauteur de ligne dans un tiddler
+Metrics/StoryLeft: Position gauche du déroulé
+Metrics/StoryLeft/Hint: marge de gauche du déroulé principal<br>(zone des tiddlers) au bord gauche de la page
+Metrics/StoryTop: Position haute du déroulé
+Metrics/StoryTop/Hint: marge supérieure du déroulé pincipal<br>au bord supérieur de la page
+Metrics/StoryRight: Droite du déroulé
+Metrics/StoryRight/Hint: marge de gauche du menu latéral<br>au bord gauche de la page
+Metrics/StoryWidth: Largeur du déroulé
+Metrics/StoryWidth/Hint: the overall width of the story river
+Metrics/TiddlerWidth: Largeur des Tiddlers
+Metrics/TiddlerWidth/Hint: dans le déroulé
+Metrics/SidebarBreakpoint: Décroché Menu latéral
+Metrics/SidebarBreakpoint/Hint: la largeur minimum de la page à partir de laquelle, déroulé principal et menu latéral apparaissent côte à côte
+Metrics/SidebarWidth: Sidebar width
+Metrics/SidebarWidth/Hint: the width of the sidebar in fluid-fixed layout
