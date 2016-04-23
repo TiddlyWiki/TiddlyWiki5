@@ -35,9 +35,10 @@ The bitmap editor has been enhanced with a toolbar supporting:
 
 Several of the official plugins available in the plugin library have been updated for this release. [[Upgrading]] will automatically update any installed plugins.
 
+* The KaTeX plugin has been updated to [[version v0.60.0|https://github.com/Khan/KaTeX/releases/tag/v0.6.0]]
 * The CodeMirror plugin has been updated to version 5.13.2, and integrated with the new editor toolbars. The default configuration has been updated to include syntax highlighting for HTML, ~JavaScript, CSS, XML, TiddlyWiki Classic and Markdown.
 * The Markdown plugin includes formatting toolbar buttons and a new "new markdown tiddler" button in the Tools tab of the sidebar.
-* The experimental Evernote plugin allows notes and images from `.enex` files to be imported into TiddlyWiki. Install it through the "Plugins" tab of control panel.
+* The experimental Evernote plugin allows notes and images from `.enex` files to be imported into TiddlyWiki.
 * The new Internals plugin provides features to help understand the internal operation of TiddlyWiki, including new preview modes in the editor showing both the parse and widget trees of the current tiddler
 * Improved language translations:
 ** Korean
