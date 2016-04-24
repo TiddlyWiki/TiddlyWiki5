@@ -23,8 +23,8 @@ Exporters/CsvFile: CSV tiddlers bestand
 Exporters/JsonFile: JSON tiddlers bestand
 Exporters/StaticRiver: Serie tiddlers als statisch HTML bestand
 Exporters/TidFile: Enkele tiddler ".tid" bestand
-InternalJavaScriptError/Hint: Er is een probleem. Herstart TiddlyWiki door je browser te verversen
-InternalJavaScriptError/Title: Interne JavaScript Error
+InternalJavaScriptError/Hint: Oh, dette er pinligt. Det anbefales at du genstarter TiddlyWiki ved at opfriske din browser
+InternalJavaScriptError/Title: Intern JavaScript fejl
 InvalidFieldName: Illegale lettertekens in veldnaam "<$text text=<<fieldName>>/>". Velden kunnen alleen kleine letters, cijfers en de lettertekens liggend streepje (`_`), koppelteken (`-`) en punt (`.`)
 LazyLoadingWarning: <p>Er wordt externe tekst geladen van ''<$text text={{!!_canonical_uri}}/>''</p><p>Als deze mededeling niet verdwijnt ondersteunt de gebruikte browser in deze configuratie mogelijk geen externe tekst. Zie http://tiddlywiki.com/#ExternalText</p>
 MissingTiddler/Hint: Ontbrekende tiddler "<$text text=<<currentTiddler>>/>" - klik {{$:/core/images/edit-button}} om hem aan te maken
@@ -32,6 +32,22 @@ OfficialPluginLibrary: Officiële ~TiddlyWiki plugin-bibliotheek
 OfficialPluginLibrary/Hint: De officiële ~TiddlyWiki pluginbibliotheek op tiddlywiki.com. Plugins, thema's en taalpaketten worden door het core team onderhouden.
 PluginReloadWarning: Sla op {{$:/core/ui/Buttons/save-wiki}} en ververs {{$:/core/ui/Buttons/refresh}} om wijzigingen aan plugins door te voeren
 RecentChanges/DateFormat: DD MMM YYYY
+Snippets/ListByTag: <<list-links "[tag[task]sort[title]]">>
+
+Snippets/MacroDefinition: \define macroName(param1:"default value",param2)
+Makroens tekst
+\end
+
+Snippets/Table4x3: |! |!Alpha |!Beta |!Gamma |!Delta |
+|!En | | | | |
+|!To | | | | |
+|!Tre | | | | |
+
+Snippets/TableOfContents: <div class="tc-table-of-contents">
+
+<<toc-selective-expandable 'TableOfContents'>>
+
+</div>
 SystemTiddler/Tooltip: Dit is een systeem tiddler
 TagManager/Colour/Heading: Kleur
 TagManager/Count/Heading: Aantal

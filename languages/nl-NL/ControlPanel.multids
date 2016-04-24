@@ -27,6 +27,19 @@ EditorTypes/Hint: Deze tiddlers bepalen welke editor wordt gebruikt voor specifi
 EditorTypes/Type/Caption: Type
 Info/Caption: Info
 Info/Hint: Informatie over deze TiddlyWiki
+KeyboardShortcuts/Add/Caption: Tilføj genvej
+KeyboardShortcuts/Add/Prompt: Skriv genvej her
+KeyboardShortcuts/Caption: Tastatur genveje
+KeyboardShortcuts/Hint: Administrér tastatur genvejs tilknytninger
+KeyboardShortcuts/NoShortcuts/Caption: Ingen tastatur genveje tilknyttet
+KeyboardShortcuts/Platform/All: Alle platforme
+KeyboardShortcuts/Platform/Linux: Linux platform udelukkende
+KeyboardShortcuts/Platform/Mac: Macintosh platform udelukkende
+KeyboardShortcuts/Platform/NonLinux: Ikke-Linux platforme udelukkende
+KeyboardShortcuts/Platform/NonMac: Ikke-Macintosh platforme udelukkende
+KeyboardShortcuts/Platform/NonWindows: Ikke-Windows platforme udelukkende
+KeyboardShortcuts/Platform/Windows: Windows platform udelukkende
+KeyboardShortcuts/Remove/Hint: fjern tastatur genvej
 LoadedModules/Caption: Geladen modules
 LoadedModules/Hint: Dit zijn de nu geladen tiddler modules gekoppeld aan hun brontiddlers. Alle cursieve modules hebben geen brontiddler, gewoonlijk omdat ze tijdens het bootproces gemaakt werden.
 Palette/Caption: Palet
@@ -45,6 +58,7 @@ Parsing/Inline/Caption: 'Inline parse' regels
 Parsing/Pragma/Caption: 'Pragma parse' regels
 Plugins/Add/Caption: Verkrijg meer plugins
 Plugins/Add/Hint: Installeer plugins van de officiële bibliotheek
+Plugins/AlreadyInstalled: Dette plugin er allerede installeret i version <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: schakel uit
 Plugins/Disable/Hint: Schakel deze plugin uit na verversen van deze pagina
@@ -52,14 +66,16 @@ Plugins/Disabled/Status: (uitgeschakeld)
 Plugins/Empty/Hint: Niets
 Plugins/Enable/Caption: activeer
 Plugins/Enable/Hint: Activeer deze plugin bij verversen van deze pagina
-Plugins/Install: installeer
+Plugins/Install: installér
 Plugins/Installed/Hint: Geïnstalleerde plugins:
 Plugins/Language/Prompt: Talen
 Plugins/Languages/Caption: Talen
 Plugins/Languages/Hint: Taal plugins
-Plugins/OpenPluginLibrary: open plugin bibliotheek
+Plugins/NoInformation: Ingen information leveret
+Plugins/NotInstalled: Dette plugin er ikke aktuelt installeret
+Plugins/OpenPluginLibrary: Åbn plugin bibliotek
 Plugins/Plugin/Prompt: Plugins
-Plugins/Reinstall: herinstalleer
+Plugins/Reinstall: geninstallér
 Plugins/Theme/Prompt: Thema's
 Plugins/Themes/Caption: Thema's
 Plugins/Themes/Hint: Thema plugins
@@ -94,6 +110,8 @@ Settings/LinkToBehaviour/OpenAtBottom: Open onderaan de 'story river'
 Settings/LinkToBehaviour/OpenAtTop: Open bovenaan de 'story river'
 Settings/LinkToBehaviour/OpenBelow: Open beneden de huidige tiddler
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigatie //van buiten// de 'story river'
+Settings/MissingLinks/Description: Tillad links til manglende tiddlere
+Settings/MissingLinks/Hint: Vælg om der skal linkes til tiddlere som ikke eksisterer endnu
 Settings/NavigationAddressBar/Caption: Navigatie adresbalk
 Settings/NavigationAddressBar/Hint: Gedrag van het browseradres bij navigeren naar een tiddler:
 Settings/NavigationAddressBar/No/Description: Verander het browseradres niet
@@ -103,9 +121,9 @@ Settings/NavigationHistory/Caption: Navigeer-geschiedenis
 Settings/NavigationHistory/Hint: Werk de browsergeschiedenis bij als er naar een tiddler genavigeerd wordt:
 Settings/NavigationHistory/No/Description: Werk de browsergeschiedenis niet bij
 Settings/NavigationHistory/Yes/Description: Werk de browsergeschiedenis bij 
-Settings/PerformanceInstrumentation/Caption: Prestatiemeting
-Settings/PerformanceInstrumentation/Description: Zet prestatiemeting aan
-Settings/PerformanceInstrumentation/Hint: Toont prestatiestatistieken in de 'browser console'. Dit vereist herladen van de wiki om effect te hebben
+Settings/PerformanceInstrumentation/Caption: Ydelses instrumentering
+Settings/PerformanceInstrumentation/Description: Tillad ydelses instrumentering
+Settings/PerformanceInstrumentation/Hint: Viser ydelses statistikker i browserens udvikler konsol. Kræver genindlæsning for at få effekt
 Settings/TitleLinks/Caption: Titels van tiddlers
 Settings/TitleLinks/Hint: Toon (optioneel) tiddler titels als link 
 Settings/TitleLinks/No/Description: Toon tiddler titels niet als links
@@ -126,6 +144,8 @@ Theme/Prompt: Huidig thema:
 TiddlerFields/Caption: Tiddler velden
 TiddlerFields/Hint: Dit is de complete reeks tiddlervelden in gebruik bij deze wiki (inclusief systeemtiddlers maar exclusief schaduwtiddlers).
 Toolbars/Caption: Knoppenbalken
+Toolbars/EditorToolbar/Caption: Editor værktøjslinie
+Toolbars/EditorToolbar/Hint: Vælg hvilke knapper der vises i editorens værktøjslinie. Bemærk at nogen knapper kun vises, når der redigeres tiddlere af en bestemt type
 Toolbars/EditToolbar/Caption: Knoppenbalk bij wijzigen
 Toolbars/EditToolbar/Hint: Kies welke knoppen getoond worden voor tiddlers in wijzigmode
 Toolbars/Hint: Kies welke knoppen getoond worden
