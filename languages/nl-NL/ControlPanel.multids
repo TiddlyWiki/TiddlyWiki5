@@ -27,6 +27,19 @@ EditorTypes/Hint: Deze tiddlers bepalen welke editor wordt gebruikt voor specifi
 EditorTypes/Type/Caption: Type
 Info/Caption: Info
 Info/Hint: Informatie over deze TiddlyWiki
+KeyboardShortcuts/Add/Caption: voeg sneltoets toe
+KeyboardShortcuts/Add/Prompt: Type hier de sneltoets
+KeyboardShortcuts/Caption: Sneltoetsen
+KeyboardShortcuts/Hint: Beheer sneltoetstoewijzing
+KeyboardShortcuts/NoShortcuts/Caption: Geen sneltoetsen toegekend
+KeyboardShortcuts/Platform/All: Alle platformen
+KeyboardShortcuts/Platform/Linux: Alleen voor Linux
+KeyboardShortcuts/Platform/Mac: Alleen voor Macintosh
+KeyboardShortcuts/Platform/NonLinux: Alleen voor niet-Linux
+KeyboardShortcuts/Platform/NonMac: Alleen voor niet-Macintosh
+KeyboardShortcuts/Platform/NonWindows: Alleen voor niet-Windows
+KeyboardShortcuts/Platform/Windows: Alleen voor Windows
+KeyboardShortcuts/Remove/Hint: verwijder sneltoets
 LoadedModules/Caption: Geladen modules
 LoadedModules/Hint: Dit zijn de nu geladen tiddler modules gekoppeld aan hun brontiddlers. Alle cursieve modules hebben geen brontiddler, gewoonlijk omdat ze tijdens het bootproces gemaakt werden.
 Palette/Caption: Palet
@@ -45,6 +58,7 @@ Parsing/Inline/Caption: 'Inline parse' regels
 Parsing/Pragma/Caption: 'Pragma parse' regels
 Plugins/Add/Caption: Verkrijg meer plugins
 Plugins/Add/Hint: Installeer plugins van de officiële bibliotheek
+Plugins/AlreadyInstalled: Deze plugin is al geïnstalleerd met versie <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: schakel uit
 Plugins/Disable/Hint: Schakel deze plugin uit na verversen van deze pagina
@@ -57,6 +71,8 @@ Plugins/Installed/Hint: Geïnstalleerde plugins:
 Plugins/Language/Prompt: Talen
 Plugins/Languages/Caption: Talen
 Plugins/Languages/Hint: Taal plugins
+Plugins/NoInformation: Geen informatie beschikbaar
+Plugins/NotInstalled: Deze plugin is nu niet geïnstalleerd
 Plugins/OpenPluginLibrary: open plugin bibliotheek
 Plugins/Plugin/Prompt: Plugins
 Plugins/Reinstall: herinstalleer
@@ -94,6 +110,8 @@ Settings/LinkToBehaviour/OpenAtBottom: Open onderaan de 'story river'
 Settings/LinkToBehaviour/OpenAtTop: Open bovenaan de 'story river'
 Settings/LinkToBehaviour/OpenBelow: Open beneden de huidige tiddler
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigatie //van buiten// de 'story river'
+Settings/MissingLinks/Description: Sta links naar ontbrekende tiddlers toe
+Settings/MissingLinks/Hint: Kies om te linken naar nog niet bestaande tiddlers
 Settings/NavigationAddressBar/Caption: Navigatie adresbalk
 Settings/NavigationAddressBar/Hint: Gedrag van het browseradres bij navigeren naar een tiddler:
 Settings/NavigationAddressBar/No/Description: Verander het browseradres niet
@@ -126,6 +144,7 @@ Theme/Prompt: Huidig thema:
 TiddlerFields/Caption: Tiddler velden
 TiddlerFields/Hint: Dit is de complete reeks tiddlervelden in gebruik bij deze wiki (inclusief systeemtiddlers maar exclusief schaduwtiddlers).
 Toolbars/Caption: Knoppenbalken
+Toolbars/EditorToolbar/Hint: Kies welke knoppen in de editor knoppenbalk getoond worden. Sommige knoppen worden alleen getoond bij een bepaald tiddler type
 Toolbars/EditToolbar/Caption: Knoppenbalk bij wijzigen
 Toolbars/EditToolbar/Hint: Kies welke knoppen getoond worden voor tiddlers in wijzigmode
 Toolbars/Hint: Kies welke knoppen getoond worden
