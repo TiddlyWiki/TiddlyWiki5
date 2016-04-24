@@ -194,14 +194,24 @@ FramedEngine.prototype.executeTextOperation = function(operation) {
 Execute a command
 */
 FramedEngine.prototype.execCommand = function(command) {
+	var isFirefox = !!document.mozFullScreenEnabled,
+		msg = "Warning: the '" + command + "' button does not work in Firefox without installing the CodeMirror plugin.\n\n(Standard operating system keyboard shortcuts will work correctly)";
 	this.iframeNode.focus();
 	this.domNode.focus();
 	switch(command) {
 		case "undo":
-			this.iframeDoc.execCommand("undo", false, null);
+			if(isFirefox) {
+				alert(msg);
+			} else {
+				this.iframeDoc.execCommand("undo", false, null);
+			}
 			break;
 		case "redo":
-			this.iframeDoc.execCommand("redo", false, null);
+			if(isFirefox) {
+				alert(msg);
+			} else {
+				this.iframeDoc.execCommand("redo", false, null);
+			}
 			break;
 	}
 };
