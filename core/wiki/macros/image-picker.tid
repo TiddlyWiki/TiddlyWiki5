@@ -11,10 +11,10 @@ $actions$
 </$button>
 \end
 
-\define image-picker(actions)
+\define image-picker(actions,subfilter:"")
 <div class="tc-image-chooser">
 
-<$list filter="[all[shadows+tiddlers]is[image]!has[draft.of]] -[type[application/pdf]] +[sort[title]]" variable="imageTitle">
+<$list filter="[all[shadows+tiddlers]is[image]$subfilter$!has[draft.of]] -[type[application/pdf]] +[sort[title]]" variable="imageTitle">
 
 <$macrocall $name="image-picker-inner" actions="""$actions$"""/>
 
