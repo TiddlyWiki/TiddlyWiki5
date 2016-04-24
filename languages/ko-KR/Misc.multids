@@ -5,6 +5,7 @@ BinaryWarning/Prompt: 이 티들러는 바이너리 데이터를 포함합니다
 ClassicWarning/Hint: 이 티들러는 TiddlyWiki 클래식 위키 텍스트 형식으로 쓰여져 있으며, TiddlyWiki 버전 5와 완전히 호환되지 않습니다. 자세한 사항은 http://tiddlywiki.com/static/Upgrading.html 을 참조하세요.
 ClassicWarning/Upgrade/Caption: 업그레이드
 CloseAll/Button: 모두 닫기
+ColourPicker/Recent: 최근:
 ConfirmCancelTiddler: "<$text text=<<title>>/>" 티들러의 바뀜을 버리겠습니까?
 ConfirmDeleteTiddler: "<$text text=<<title>>/>" 티들러를 삭제하겠습니까?
 ConfirmEditShadowTiddler: 섀도우티들러를 편집하려고 합니다. 어떠한 바뀜도 향후 업그레이드가 하찮지 않게 하는 기본 시스템을 덮어씁니다. "<$text text=<<title>>/>" 티들러를 편집하겠습니까?

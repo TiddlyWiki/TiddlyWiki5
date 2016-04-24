@@ -27,6 +27,19 @@ EditorTypes/Hint: 이 티들러는 특정 티들러 형식을 편집하는 데 �
 EditorTypes/Type/Caption: 형식
 Info/Caption: 정보
 Info/Hint: 이 TiddlyWiki에 대한 정보
+KeyboardShortcuts/Add/Caption: 단축키 추가
+KeyboardShortcuts/Add/Prompt: 여기에 단축키를 입력하세요
+KeyboardShortcuts/Caption: 키보드 단축키
+KeyboardShortcuts/Hint: 키보드 단축키 할당 관리
+KeyboardShortcuts/NoShortcuts/Caption: 할당된 키보드 단축키가 없음
+KeyboardShortcuts/Platform/All: 모든 플랫폼
+KeyboardShortcuts/Platform/Linux: Linux 플랫폼 전용
+KeyboardShortcuts/Platform/Mac: 매킨토시 플랫폼 전용
+KeyboardShortcuts/Platform/NonLinux: Linux가 아닌 플랫폼 전용
+KeyboardShortcuts/Platform/NonMac: 매킨토시가 아닌 플랫폼 전용
+KeyboardShortcuts/Platform/NonWindows: Windows가 아닌 플랫폼 전용
+KeyboardShortcuts/Platform/Windows: Windows 플랫폼 전용
+KeyboardShortcuts/Remove/Hint: 키보드 단축키 제거
 LoadedModules/Caption: 불러온 모듈
 LoadedModules/Hint: 현재 불러온 티들러 모듈의 원본 티들러로 연결된 현재 불러온 티들러 모듈입니다. 어떠한 기울린 모듈은 통상적으로 부팅 과정 중에 설치되었기 때문에 원본 티들러가 부족합니다.
 Palette/Caption: 팔레트
@@ -130,6 +143,8 @@ Theme/Prompt: 현재 테마:
 TiddlerFields/Caption: 티들러 필드
 TiddlerFields/Hint: 이 위키에 사용하고 있는 티들러필드의 전체 집합입니다. (시스템 티들러는 포함하지만 섀도우 티들러는 제외)
 Toolbars/Caption: 툴바
+Toolbars/EditorToolbar/Caption: 편집기 도구 모음
+Toolbars/EditorToolbar/Hint: 편집기 도구 모음에 보여줄 버튼을 선택하세요. 어떤 버튼은 특정 형식의 티들러를 편집할 때에만 나타남을 참고하세요
 Toolbars/EditToolbar/Caption: 편집 툴바
 Toolbars/EditToolbar/Hint: 편집 모드에서 티들러에 보여줄 버튼을 선택합니다
 Toolbars/Hint: 보여줄 툴바 버튼을 선택합니다
