@@ -63,7 +63,7 @@ Plugins/Enable/Caption: activer
 Plugins/Enable/Hint: Active ce plugin au prochain rechargement de la page
 Plugins/Install: installe
 Plugins/Installed/Hint: Plugins installés :
-Plugins/Languages/Caption: Languages
+Plugins/Languages/Caption: Langues
 Plugins/Languages/Hint: Plugins de langue
 Plugins/NoInformation: Aucune information disponible
 Plugins/NotInstalled: Ce plugin n'est pas installé
