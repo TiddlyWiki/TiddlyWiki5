@@ -64,10 +64,7 @@ function FramedEngine(options) {
 		this.domNode.setAttribute("rows",this.widget.editRows);
 	}
 	// Copy the styles from the dummy textarea
-	$tw.utils.copyStyles(this.dummyTextArea,this.domNode);
-	this.domNode.style.display = "block";
-	this.domNode.style.width = "100%";
-	this.domNode.style.margin = "0";
+	this.copyStyles();
 	// Set the text
 	if(this.widget.editTag === "textarea") {
 		this.domNode.appendChild(this.iframeDoc.createTextNode(this.value));
@@ -82,6 +79,16 @@ function FramedEngine(options) {
 	// Insert the element into the DOM
 	this.iframeDoc.body.appendChild(this.domNode);
 }
+
+/*
+Copy styles from the dummy text area to the textarea in the iframe
+*/
+FramedEngine.prototype.copyStyles = function() {
+	$tw.utils.copyStyles(this.dummyTextArea,this.domNode);
+	this.domNode.style.display = "block";
+	this.domNode.style.width = "100%";
+	this.domNode.style.margin = "0";
+};
 
 /*
 Set the text of the engine if it doesn't currently have focus
@@ -107,6 +114,9 @@ FramedEngine.prototype.getText = function() {
 Fix the height of textarea to fit content
 */
 FramedEngine.prototype.fixHeight = function() {
+	// Make sure styles are updated
+	this.copyStyles();
+	// Adjust height
 	if(this.widget.editTag === "textarea") {
 		if(this.widget.editAutoHeight) {
 			if(this.domNode && !this.domNode.isTiddlyWikiFakeDom) {
