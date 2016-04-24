@@ -27,6 +27,19 @@ EditorTypes/Hint: Disse tiddlere bestemmer hvilken editor der bruges til at redi
 EditorTypes/Type/Caption: Type
 Info/Caption: Info
 Info/Hint: Information om denne TiddlyWiki
+KeyboardShortcuts/Add/Caption: Tilføj genvej
+KeyboardShortcuts/Add/Prompt: Skriv genvej her
+KeyboardShortcuts/Caption: Tastatur genveje
+KeyboardShortcuts/Hint: Administrér tastatur genvejs tilknytninger
+KeyboardShortcuts/NoShortcuts/Caption: Ingen tastatur genveje tilknyttet
+KeyboardShortcuts/Platform/All: Alle platforme
+KeyboardShortcuts/Platform/Linux: Linux platform udelukkende
+KeyboardShortcuts/Platform/Mac: Macintosh platform udelukkende
+KeyboardShortcuts/Platform/NonLinux: Ikke-Linux platforme udelukkende
+KeyboardShortcuts/Platform/NonMac: Ikke-Macintosh platforme udelukkende
+KeyboardShortcuts/Platform/NonWindows: Ikke-Windows platforme udelukkende
+KeyboardShortcuts/Platform/Windows: Windows platform udelukkende
+KeyboardShortcuts/Remove/Hint: fjern tastatur genvej
 LoadedModules/Caption: Indlæste moduler
 LoadedModules/Hint: Dette er de aktuelt indlæste tiddlermoduler der linkes til deres kildetiddlere. Alle moduler med kursiv mangler en kildetiddler, typisk fordi de blev sat op under bootprocessen.
 Palette/Caption: Palette
@@ -44,6 +57,7 @@ Parsing/Inline/Caption: Inline Parse regler
 Parsing/Pragma/Caption: Pragma Parse regler
 Plugins/Add/Caption: Få flere udvidelser
 Plugins/Add/Hint: Installér udvidelser fra det officielle bibliotek
+Plugins/AlreadyInstalled: Dette plugin er allerede installeret i version <$text text=<<installedVersion>>/>
 Plugins/Caption: Udvidelser
 Plugins/Disable/Caption: slå fra
 Plugins/Disable/Hint: Slå denne udvidelse fra, når siden genindlæses
@@ -51,13 +65,18 @@ Plugins/Disabled/Status: (slået fra)
 Plugins/Empty/Hint: Ingen
 Plugins/Enable/Caption: Slå til
 Plugins/Enable/Hint: Slå denne udvidelse til, når siden genindlæses
+Plugins/Install: installér
 Plugins/Installed/Hint: Aktuelt installerede udvidelser:
 Plugins/Language/Prompt: Sprog
 Plugins/Languages/Caption: Sprog
 Plugins/Languages/Hint: Sprogpakkeudvidelser
+Plugins/NoInformation: Ingen information leveret
+Plugins/NotInstalled: Dette plugin er ikke aktuelt installeret
+Plugins/OpenPluginLibrary: Åbn plugin bibliotek
 Plugins/Plugin/Prompt: Udvidelser 
 Plugins/Plugins/Caption: Udvidelser
 Plugins/Plugins/Hint: Udvidelser
+Plugins/Reinstall: geninstallér
 Plugins/Theme/Prompt: Temaer
 Plugins/Themes/Caption: Temaer
 Plugins/Themes/Hint: Tema udvidelser
@@ -91,6 +110,8 @@ Settings/LinkToBehaviour/OpenAtBottom: Åbn i bunden af story river
 Settings/LinkToBehaviour/OpenAtTop: Åbn i toppen af story river
 Settings/LinkToBehaviour/OpenBelow: Åbn nedenunder den aktuelle tiddler
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation fra //udenfor// the story river
+Settings/MissingLinks/Description: Tillad links til manglende tiddlere
+Settings/MissingLinks/Hint: Vælg om der skal linkes til tiddlere som ikke eksisterer endnu
 Settings/NavigationAddressBar/Caption: Navigationsadressefelt
 Settings/NavigationAddressBar/Hint: Opførsel i browserens adresssefelt ved navigering til en tiddler:
 Settings/NavigationAddressBar/No/Description: Opdatér ikke adressefeltet
@@ -100,6 +121,9 @@ Settings/NavigationHistory/Caption: Navigationshistorie
 Settings/NavigationHistory/Hint: Opdatér browserhistorikken, når der navigeres til en tiddler:
 Settings/NavigationHistory/No/Description: Opdatér ikke historie
 Settings/NavigationHistory/Yes/Description: Opdatér historik
+Settings/PerformanceInstrumentation/Caption: Ydelses instrumentering
+Settings/PerformanceInstrumentation/Description: Tillad ydelses instrumentering
+Settings/PerformanceInstrumentation/Hint: Viser ydelses statistikker i browserens udvikler konsol. Kræver genindlæsning for at få effekt
 Settings/TitleLinks/Caption: Tiddler titler
 Settings/TitleLinks/Hint: Valgfri visning af tiddler tiddler som links
 Settings/TitleLinks/No/Description: Vis ikke tiddler titler som links
@@ -120,6 +144,8 @@ Theme/Prompt: Aktuelt tema
 TiddlerFields/Caption: Tiddler felter
 TiddlerFields/Hint: Dette er alle de TiddlerFelter der er i brug i denne wiki (inklusive systemtiddlere men eksklusive skyggetiddlere).
 Toolbars/Caption: Værktøjslinier
+Toolbars/EditorToolbar/Caption: Editor værktøjslinie
+Toolbars/EditorToolbar/Hint: Vælg hvilke knapper der vises i editorens værktøjslinie. Bemærk at nogen knapper kun vises, når der redigeres tiddlere af en bestemt type
 Toolbars/EditToolbar/Caption: Redigeringsværktøjslinie
 Toolbars/EditToolbar/Hint: Vælg hvilke knapper der vises i tiddlere i redigeringstilstand
 Toolbars/Hint: Vælg hvilke værktøjslinieknapper der vises
