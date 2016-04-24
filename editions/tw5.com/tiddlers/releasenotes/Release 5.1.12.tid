@@ -1,6 +1,6 @@
 caption: 5.1.12
 created: 20160205184203773
-modified: 20160422162019362
+modified: 20160424014044082
 tags: ReleaseNotes
 title: Release 5.1.12
 type: text/vnd.tiddlywiki
@@ -44,7 +44,7 @@ Several of the official plugins available in the plugin library have been update
 ** Korean
 ** Chinese (Simplified) and Chinese (Traditional)
 ** German
-
+** French
 
 !! Text-Slicer Plugin Improvements
 
@@ -106,3 +106,4 @@ Several of the official plugins available in the plugin library have been update
 * [[@telmiger|https://github.com/telmiger]]
 * [[@twMat|https://github.com/twMat]]
 * [[@webninjasi|https://github.com/webninjasi]]
+* [[@xcazin|https://github.com/xcazin]]
