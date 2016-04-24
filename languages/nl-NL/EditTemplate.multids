@@ -16,7 +16,6 @@ Tags/Add/Button: +
 Tags/Add/Placeholder: labelnaam
 Tags/Dropdown/Caption: labellijst
 Tags/Dropdown/Hint: Toon labellijst
-Title/BadCharacterWarning: Advarsel: undgå alle at bruge nogen af disse bogstaver <<bad-chars>> i tiddler titler
 Type/Delete/Caption: verwijder inhoudstype
 Type/Delete/Hint: Verwijder inhoudstype
 Type/Dropdown/Caption: lijst van inhoudstypes
