@@ -8,4 +8,4 @@ type: text/vnd.tiddlywiki
 
 This next example shows how the <<.param subfilter>> parameter limits the list of images (here to those with the "Language" prefix):
 
-<$macrocall $name=".example" n="2" eg="{{image-picker Macro (Example 2)}}/>
+<$macrocall $name=".example" n="2" eg={{image-picker Macro (Example 2)}}/>
