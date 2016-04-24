@@ -13,7 +13,7 @@ list-number: ctrl-N
 mono-block: ctrl-shift-M
 mono-line: ctrl-M
 picture: ctrl-shift-I
-preview: ctrl-P
+preview: alt-P
 quote: ctrl-Q
 save-tiddler: ctrl+enter
 stamp: ctrl-S
