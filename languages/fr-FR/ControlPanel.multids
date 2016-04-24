@@ -141,7 +141,7 @@ StoryView/Caption: Vue sur le déroulé
 StoryView/Prompt: Vue courante :
 Theme/Caption: Thème
 Theme/Prompt: Thème courant :
-TiddlerFields/Caption: Champs du tiddler
+TiddlerFields/Caption: Champs des tiddlers
 TiddlerFields/Hint: Il s'agit de la totalité des [[champs|TiddlerFields]] utilisés dans ce wiki (y compris les tiddlers système, mais non compris les tiddlers //shadow//).
 Toolbars/Caption: Barres d'outils
 Toolbars/EditToolbar/Caption: Barre d'outils du mode édition
