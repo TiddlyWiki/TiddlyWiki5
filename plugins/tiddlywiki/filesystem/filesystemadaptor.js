@@ -88,11 +88,41 @@ Transliterate string from cyrillic russian to latin
 };
 
 /*
+Given a list of filters, apply every one in turn to source, and return the first result of the first filter with non-empty result.
+*/
+FileSystemAdaptor.prototype.findFirstFilter = function(filters,source) {
+	var numFilters = filters.length;
+	for(var i=0; i<numFilters; i++) {
+		var result = this.wiki.filterTiddlers(filters[i],null,source);
+		if(result.length > 0) {
+			return result[0];
+		}
+	}
+};
+
+
+/*
 Given a tiddler title and an array of existing filenames, generate a new legal filename for the title, case insensitively avoiding the array of existing filenames
 */
 FileSystemAdaptor.prototype.generateTiddlerFilename = function(title,extension,existingFilenames) {
-	// First remove any of the characters that are illegal in Windows filenames
-	var baseFilename = transliterate(title.replace(/<|>|\:|\"|\/|\\|\||\?|\*|\^|\s/g,"_"));
+	var baseFilename;
+	// Check whether the user has configured a tiddler -> pathname mapping
+	var pathNameFilters = this.wiki.getTiddlerText("$:/config/FileSystemPaths");
+	if(pathNameFilters) {
+		var source = this.wiki.makeTiddlerIterator([title]);
+		var result = this.findFirstFilter(pathNameFilters.split("\n"),source);
+		if(result) {
+			// interpret "/" as path separator
+			baseFilename = result.replace(/\//g,path.sep);
+		}
+	}
+	if(!baseFilename) {
+		// no mapping configured, or it did not match this tiddler
+		// in this case, we fall back to legacy behaviour
+		baseFilename = title.replace(/\//g,"_");
+	}
+	// Remove any of the characters that are illegal in Windows filenames
+	var baseFilename = transliterate(baseFilename.replace(/<|>|\:|\"|\\|\||\?|\*|\^|\s/g,"_"));
 	// Truncate the filename if it is too long
 	if(baseFilename.length > 200) {
 		baseFilename = baseFilename.substr(0,200);
@@ -120,6 +150,10 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 			};
 		if(err) {
 			return callback(err);
+		}
+		var error = $tw.utils.createDirectory(path.dirname(fileInfo.filepath));
+		if(error) {
+			return callback(error);
 		}
 		var typeInfo = $tw.config.contentTypeInfo[fileInfo.type];
 		if(fileInfo.hasMetaFile || typeInfo.encoding === "base64") {
@@ -181,10 +215,10 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 					if(err) {
 						return callback(err);
 					}
-					callback(null);
+					$tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),callback);
 				});
 			} else {
-				callback(null);
+				$tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),callback);
 			}
 		});
 	} else {
