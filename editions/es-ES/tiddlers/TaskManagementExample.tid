@@ -1,0 +1,27 @@
+caption: Administración de tareas
+created: 20130825213300000
+es-title: Ejemplo de administración de tareas
+modified: 20160416115204535
+tags: Learning
+title: TaskManagementExample
+type: text/vnd.tiddlywiki
+
+TiddlyWiki5 sirve también como sencillo sistema de administración de tareas, sin necesidad de mayores complicaciones. La idea consiste en etiquetar las tareas como `task`, de modo que una vez hechas se etiqueten también como `done`. Así resulta bastante sencillo generar listas de tareas. 
+
+Aquí tienes un ejemplo:
+
+! Tareas pendientes
+
+<$list filter="[!has[draft.of]tag[task]!tag[done]sort[created]]">
+
+<$checkbox tag="done"> <$link to={{!!title}}><$view field="caption"/></$link></$checkbox>
+
+</$list>
+
+! Tareas completadas
+
+<$list filter="[!has[draft.of]tag[task]tag[done]sort[created]]">
+
+<$checkbox tag="done"> ~~<$link to={{!!title}}><$view field="caption"/></$link>~~</$checkbox>
+
+</$list>

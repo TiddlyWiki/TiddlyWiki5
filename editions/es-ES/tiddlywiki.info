@@ -1,0 +1,31 @@
+{
+	"description": "Spanish (Spain) edition",
+	"plugins": [
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite",
+		"tiddlywiki/nighttime",
+		"tiddlywiki/starlight",
+		"tiddlywiki/centralised",
+		"tiddlywiki/readonly"
+	],
+	"languages": [
+		"es-ES"
+	],
+    "includeWikis": [
+        {"path": "../tw5.com", "read-only": true}
+    ],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+		"empty": [
+			"--rendertiddler","$:/editions/es-ES/download-empty","empty.html","text/plain",
+			"--rendertiddler","$:/editions/es-ES/download-empty","empty.hta","text/plain"],
+		"static": [
+			"--rendertiddler","$:/core/templates/static.template.html","static.html","text/plain",
+			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
+			"--rendertiddlers","[!is[system]]","$:/core/templates/static.tiddler.html","static","text/plain",
+			"--rendertiddler","$:/core/templates/static.template.css","static/static.css","text/plain"]
+	}
+}

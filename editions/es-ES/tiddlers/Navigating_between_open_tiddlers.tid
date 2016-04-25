@@ -1,0 +1,21 @@
+caption: Desplazamiento entre tiddlers abiertos
+created: 20140908092600000
+es-title: Cómo moverse entre tiddlers abiertos
+modified: 20160422052224873
+tags: [[Working with TiddlyWiki]]
+title: Navigating between open tiddlers
+type: text/vnd.tiddlywiki
+
+En la vista por defecto <<.word classic>>, los tiddlers abiertos se muestran en una columna vertical llamada StoryRiver. Hay varias maneras de moverse por ella, saltando adelante y atrás entre los diferentes tiddlers abiertos.
+
+* La más sencilla es por medio de la pestaña <<.sidebar-tab Open>> de la barra lateral.
+
+** La pestaña <<.sidebar-tab Open>> contiene la lista de tiddlers abiertos. Pinchando en cualquiera de ellos se salta a ese tiddler y haciéndolo en la <<.word x>> junto al título, se cierra. Hay también un práctico botón <<.word "cerrar todo">> abajo del todo de la lista.
+
+* Otra manera es desplazándose por la página, usando bien la rueda del ratón o la barra de desplazamiento de la derecha.
+
+** Cuando la barra lateral y la StoryView se extienden más allá de la pantalla visible, habrá <<.em dos>> barras. La de más a la derecha controla la ~StoryRiver. La otra, la barra lateral. 
+
+* Otra forma posible, usada por muchos principiantes, consiste en <<.def "cerrar tiddlers de uno en uno">> hasta llegar al que están buscando. 
+
+** Al cerrar un tiddler del principio o del medio de la lista hará que los tiddlers de más abajo se deslicen <<.word "río arriba">>, poniendo a la vista el tiddler inmediatamente debajo del que se acaba de cerrar. 

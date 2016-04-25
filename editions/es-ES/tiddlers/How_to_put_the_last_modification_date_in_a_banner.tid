@@ -1,0 +1,34 @@
+caption: Banner de fecha de última modificación
+created: 20141020111002211
+es-title: Cómo mostrar en un banner la fecha de última modificación del wiki
+modified: 20160421093614488
+tags: Learning
+title: How to put the last modification date in a banner
+type: text/vnd.tiddlywiki
+
+Así es como se muestra la fecha de última modificación del wiki en un banner, en una esquina de la ventana:
+
+# [[Instala el plugin|Installing a plugin from the plugin library]] <<.def "Corner ribbon">> en ~TiddlyWiki.
+
+# Guarda y recarga el wiki
+
+# Crea un tiddler llamado [[$:/_MyRibbon]], con la etiqueta [[$:/tags/PageControls]] y el siguiente contenido:
+<div>
+
+```
+<div class="github-fork-ribbon-wrapper right">
+<div class="github-fork-ribbon" style="background-color:#DF4848;">
+<$list filter="[!is[system]!has[draft.of]!sort[modified]limit[1]]">
+<$link>
+<$view field="modified" format="date" template="DD mmm YYYY at 0hh:0mm"/>
+</$link>
+</$list>
+</div>
+</div>
+```
+</div>
+# Puedes cambiar el valor de `background-color` según tus preferencias
+
+# También puedes cambiar la posición de `right` a `right-bottom`
+
+## Para poner el banner a la izquierda, la etiqueta de [[MyRibbon|$:/_MyRibbon]] debe ser [[$:/tags/PageTemplate]] en lugar de [[$:/tags/PageControls]] y la posición `left`

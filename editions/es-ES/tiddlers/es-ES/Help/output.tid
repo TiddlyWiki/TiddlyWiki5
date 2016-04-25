@@ -1,0 +1,12 @@
+title: $:/language/Help/output
+description: Establece el directorio de salida para los comandos siguientes
+
+Establece el directorio de salida para los comandos que le siguen <br>
+El directorio por defecto es el subdirectorio `output`, en el directorio del wiki
+
+```
+--output <pathname>
+```
+
+Si la ruta especificada es relativa, se interpreta como relativa al directorio actual de trabajo<br>
+Por ejemplo: `--output .` establece como directorio de salida el actual directorio de trabajo
