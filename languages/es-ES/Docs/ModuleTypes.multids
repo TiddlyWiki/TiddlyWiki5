@@ -19,4 +19,4 @@ utils: Añade métodos a `$tw.utils`
 utils-node: Añade métodos específicos de Node.js a `$tw.utils`
 widget: Encapsula la representación y recarga de ''DOM''
 wikimethod: Añade métodos a `$tw.Wiki`
-wikirule: Reglas individuales para el intérprete principal de WikiText
+wikirule: Reglas individuales del intérprete principal de WikiText

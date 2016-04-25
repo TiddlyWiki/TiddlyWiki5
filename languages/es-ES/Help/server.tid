@@ -14,14 +14,14 @@ Los parámetros son
 
 * ''port'' - número de puerto desde el que sirve (por defecto, "8080")
 * ''roottiddler'' - tiddler que se sirve desde la raíz (por defecto, "$:/core/save/all")
-* ''rendertype'' - el tipo de contenido hacia donde el tiddler raíz debería ser generado (por defecto "text/plain")
-* ''servetype'' - el tipo de contenido con el que tiddler raíz debería ser servido (por defecto "text/html")
-* ''username'' - el nombre de usuario por defecto que firma la edición
+* ''rendertype'' - tipo de contenido con el que se genera el tiddler raíz (por defecto "text/plain")
+* ''servetype'' - tipo de contenido con el que se sirve el tiddler raíz (por defecto "text/html")
+* ''username'' - nombre de usuario por defecto que firma la edición
 * ''password'' - contraseña opcional para autenticación básica
 * ''host'' - nombre opcional del servidor desde el que se sirve (por defecto, "127.0.0.1" o "localhost")
 * ''pathprefix'' - prefijo opcional para rutas
 
-Si se ha definido contraseña, el buscador preguntará al usuario por el nombre de usuario y la contraseña. Nótese que la contraseña se transmite en modo texto por lo que esta implementación no es apropiada para uso general.
+Si se ha definido contraseña, el navegador pedirá que se introduzca nombre y contraseña. <br>Nótese que la contraseña se transmite en modo texto por lo que esta implementación no es apropiada para uso general.
 
 Por ejemplo:
 

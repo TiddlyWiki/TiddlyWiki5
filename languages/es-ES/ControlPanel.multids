@@ -27,6 +27,19 @@ EditorTypes/Hint: Editores usados para ciertos tipos específicos de tiddler
 EditorTypes/Type/Caption: Tipo
 Info/Caption: Información
 Info/Hint: Información acerca de este TiddlyWiki
+KeyboardShortcuts/Add/Caption: Añadir atajo
+KeyboardShortcuts/Add/Prompt: Escribe el atajo
+KeyboardShortcuts/Caption: Atajos de teclado
+KeyboardShortcuts/Hint: Administra la asignación de atajos de teclado
+KeyboardShortcuts/NoShortcuts/Caption: No hay atajo asignado
+KeyboardShortcuts/Platform/All: Cualquier plataforma
+KeyboardShortcuts/Platform/Linux: Sólo Linux
+KeyboardShortcuts/Platform/Mac: Sólo Macintosh
+KeyboardShortcuts/Platform/NonLinux: Todas menos Linux
+KeyboardShortcuts/Platform/NonMac: Todas menos Macintosh
+KeyboardShortcuts/Platform/NonWindows: Todas menos Windows
+KeyboardShortcuts/Platform/Windows: Sólo windows
+KeyboardShortcuts/Remove/Hint: Eliminar atajo
 LoadedModules/Caption: Módulos cargados
 LoadedModules/Hint: Modulos cargados en este momento, enlazados con sus tiddlers de origen. Los módulos en itálica carecen de origen, debido normalmente a que se configuraron durante el inicio. 
 Palette/Caption: Paleta

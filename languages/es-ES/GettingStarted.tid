@@ -1,12 +1,18 @@
 title: GettingStarted
 
-Bienvenido a TiddlyWiki y a su comunidad
+Bienvenido a TiddlyWiki y a su comunidad de usuarios
 
-Antes de guardar información importante en TiddlyWiki, es necesario que te asegures de poder hacerlo de manera fiable
+Antes de guardar información importante en TiddlyWiki, es preciso que te asegures de poder hacerlo de manera fiable
 
-Visitaa http://tiddlywiki.com/#GettingStarted para más información (en inglés)
+Visita http://tiddlywiki.com/#GettingStarted para más información (en inglés)
 
 !! Configura este TiddlyWiki
+| | |
+| | |
+| | HelloThere
+[[$:/Translators]]
+[[$:/plugins/tiddlywiki/translators/readme]]
+ |
 
  [list[$:/StoryList]]
 
