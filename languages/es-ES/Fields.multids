@@ -1,35 +1,36 @@
 title: $:/language/Docs/Fields/
 
-_canonical_uri: El hipervínculo (URL) completo de un tiddler de imagen externo
-bag: El nombre de la bolsa de la que procede un tiddler
-caption: El texto que se muestra en una pestaña o botón
-color: El valor de color CSS asociado a un tiddler
-component: El nombre del componente responsable de un [[tiddler de alerta|AlertMechanism]]
-created: La fecha en que un tiddler fue creado
-creator: El nombre de la persona que creó un tiddler
-current-tiddler: Usado para almacenar el tiddler superior en una [[lista de historia|HistoryMechanism]]
-dependents: En una extensión, lista los títulos de las extensiones dependientes
-description: El texto descriptivo de una extensión, o un diálogo modal
-draft.of: En tiddlers en borrador, contiene el título del tiddler en que este borrador se encuentra basado
-draft.title: En tiddler en borrador, contiene el nuevo título propuesto para el tiddler
-footer: El texto al pie de página de un asistente de configuración
-hack-to-give-us-something-to-compare-against: Un campo de almacenamiento temporal usado en [[$:/core/templates/static.content]]
-icon: El título del tiddler que contiene el ícono asociado a un tiddler
-library: Si tiene "si" asignado, indica que un tiddler debería ser guardado como una colección de JavaScript
-list: Una lista ordenada de títulos de tiddlers asociados a un tiddler
-list-after: Si se encuentra asignado, el título del tiddler después de que este tiddler sea añadido a la lista ordenada de títulos de tiddler
-list-before: Si se encuentra asignado, el título de un tiddler antes de que este tiddler sea añadido a la lista ordenada de títulos de tiddler, o al comienzo de la lista si es que este campo se encuentra presente aunque vacío
-modified: La fecha y hora en que un tiddler fue modificado por última vez
-modifier: El título de tiddler asociado con la persona que modificó el tiddler por última vez
-name: El nombre legible associado con un tiddler extensión
-plugin-priority: Un valor numérico indicando la prioridad de un tiddler extensión
-plugin-type: El tipo de extensión en un tiddler extensión
-released: Fecha de publicación de una versión de TiddlyWiki
-revision: La revisión del tiddler retenido en el servidor
-source: El hipervínculo (URL) de origen asociado a un tiddler
-subtitle: El texto del subtítulo de un asistente de configuración
-tags: Una lista de etiquetas asociadas a un tiddler
-text: El texto principal de un tiddler
-title: El nombre único de un tiddler
-type: El tipo de contenido en un tiddler
-version: Información de la versión de una extensión
+_canonical_uri: Dirección (URI) completa -absoluta o relativa- de un tiddler externo de imagen
+bag: Nombre de la bolsa de la que procede un tiddler
+caption: Texto que se muestra en una pestaña o botón, con independencia del título del tiddler que lo define
+color: Valor CSS del color de fondo asociado a un tiddler
+component: Nombre del componente responsable de un [[tiddler de alerta|AlertMechanism]]
+created: Fecha de creación del tiddler
+creator: Nombre del autor del tiddler
+current-tiddler: Usado para incluir el tiddler superior en una [[historia|HistoryMechanism]]
+dependents: En un complemento o extensión, lista de sus dependencias
+description: Descripción de un complemento, extensión, o diálogo modal
+draft.of: Título del tiddler del que el actual es borrador
+draft.title: Nuevo título propuesto para el presente borrador
+footer: Texto al pie que figurará en un asistente
+hack-to-give-us-something-to-compare-against: Campo de almacenamiento temporal usado en [[$:/core/templates/static.content]]
+icon: Nombre del tiddler que contiene el icono que se quiere asociar al presente tiddler
+library: Si su valor es "Sí", indica que el tiddler debe guardarse como librería de JavaScript
+list: Lista ordenada de tiddlers asociados al presente tiddler
+list-after: Título del tiddler tras el que el presente será añadido a una lista de tiddlers.
+list-before: Título del tiddler antes del que el presente será añadido a una lista<br>
+Si el campo existe pero está vacío, el tiddler se añadirá al principio de la lista
+modified: Fecha y hora de última modificación
+modifier: Nombre del tiddler asociado con quien modificó por última vez el presente tiddler
+name: Nombre asociado con un complemento o extensión
+plugin-priority: Valor numérico que indica la prioridad de un complemento o extensión
+plugin-type: Tipo de complemento o extensión
+released: Fecha de la edición de TiddlyWiki
+revision: Revisión del tiddler existente en el servidor
+source: Dirección de la fuente asociada a un tiddler
+subtitle: Subtítulo que figurará en un asistente
+tags: Lista de etiquetas asignadas al tiddler
+text: Texto principal de un tiddler
+title: Nombre único de un tiddler
+type: Tipo de contenido en un tiddler
+version: Versión de un complemento o extensión

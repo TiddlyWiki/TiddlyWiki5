@@ -2,7 +2,7 @@
 	"title": "$:/languages/es-ES",
 	"name": "es-ES",
 	"plugin-type": "language",
-	"description": "España (Spain)",
-	"author": "Pau Deluca",
+	"description": "Castellano. (Spain)",
+	"author": "Pau DeLuca",
 	"core-version": ">=5.0.0"
 }
