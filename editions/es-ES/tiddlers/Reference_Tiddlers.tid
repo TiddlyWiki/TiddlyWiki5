@@ -1,0 +1,35 @@
+caption: Estilo: Material de referencia
+created: 20141226192500000
+es-title: Guía de estilo para la redacción de material de referencia
+modified: 20160418141821319
+tags: [[Improving TiddlyWiki Documentation]]
+title: Reference Tiddlers
+type: text/vnd.tiddlywiki
+
+Los <<.def "tiddlers de referencia">> ofrecen información al lector --presumiblemente de nivel intermedio o experto-- de manera comprensible e interreferenciada. 
+
+Se estructura en varias subcategorías:
+
+;Conceptos
+
+* Definidos, juntos forman un glosario
+
+;Manual de usuario
+
+* Presenta aspectos técnicos de las características de ~WikiText
+
+* Se subdivide en: mensajes, operadores, variables, widgets... etc
+
+;Manual de desarrollador
+
+* Presenta aspectos técnicos de la arquitectura interna de ~TiddlyWiki
+
+El material de referencia se redacta en estilo formal que evita referirse al lector y enfoca su atención en el comportamiento de ~TiddlyWiki. Predomina el uso de la voz pasiva y las expresiones impersonales:
+
+Reference material is written in a terse, formal style that avoids referring to the reader, and instead focuses on how ~TiddlyWiki itself behaves. The passive voice is often suitable:
+
+* <<.word "se especifica la plantilla como tiddler">> mejor que <<.word "especifica la plantilla como tiddler">>
+* <<.word "el widget puede servir para varios fines">> mejor que <<.word "puedes usar el widget para varios fines">>
+* Pero <<.word "este widget tiene varios usos posibles">> es aún mejor, ya que es más conciso y menos retorcido.
+
+Al redactar en inglés, se evita el uso de formas verbales contraídas, pero aquellas que terminan en <<.word "n't">>, como (<<.word "aren't">>, <<.word "doesn't">>, <<.word "hasn't">>, <<.word "isn't">>... etc, son aceptables, ya que así es menos probable que en su lectura se pase por alto el <<.word not>> de las formas no contraídas.

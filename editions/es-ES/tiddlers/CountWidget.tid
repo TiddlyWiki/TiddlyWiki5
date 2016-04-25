@@ -1,0 +1,18 @@
+caption: Widgets: Count
+created: 20131024141900000
+es-title: CountWidget
+modified: 20160420050708574
+tags: Widgets
+title: CountWidget
+type: text/vnd.tiddlywiki
+
+!! Introducción
+
+~CountWidget muestra el número de tiddlers que coinciden con determinada [[expresión de filtro|Filters]].
+
+!! Contenido y atributos
+
+El contenido del widget `<$count>` se ignora.
+
+|!Atributo |!Descripción |
+|filter |Expresión de filtro para contar |

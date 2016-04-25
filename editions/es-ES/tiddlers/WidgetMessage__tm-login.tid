@@ -1,0 +1,11 @@
+caption: tm-login
+created: 20140811112445887
+es-title: Mensajes: tm-login
+modified: 20160415160229935
+tags: Messages
+title: WidgetMessage: tm-login
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-login` pide al usuario que introduzca un nombre de usuario y contraseña e intenta iniciar sesión en el servidor. El tiddler [[$:/status/IsLoggedIn]] informa del actual estado de inicio de sesión con los valores "yes" o "no" y [[$:/status/UserName]] indica el nombre de usuario actual.
+
+Este mensaje lo procesa SyncMechanism en el núcleo de ~TiddlyWiki invocando el [[SyncAdaptorModule|SyncAdaptorModules]] actual, (generalmente, el plugin  ''tiddlywiki/tiddlywebadaptor'').
