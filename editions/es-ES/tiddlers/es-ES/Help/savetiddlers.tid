@@ -1,5 +1,5 @@
 title: $:/language/Help/savetiddlers
-description: Guarda un grupo de tiddlers en formato plano en un directorio
+description: Guarda un grupo de tiddlers de formato plano en un directorio
 
 Guarda un grupo de tiddlers en formato binario o como texto plano en el directorio especificado.
 

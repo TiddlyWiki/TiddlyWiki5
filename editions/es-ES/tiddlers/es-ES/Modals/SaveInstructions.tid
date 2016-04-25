@@ -4,7 +4,7 @@ subtitle: Save your work
 footer: <$button message="tm-close-tiddler">Close</$button>
 help: http://tiddlywiki.com/static/SavingChanges.html
 
-Los cambios realizados a este wiki necesitan ser guardados como un archivo ~TiddlyWiki HTML.
+Los cambios realizados a este wiki necesitan ser guardados como archivo ~TiddlyWiki HTML.
 
 !!! Navegadores de ordenador
 

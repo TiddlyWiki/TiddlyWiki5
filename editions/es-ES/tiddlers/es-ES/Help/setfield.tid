@@ -1,7 +1,7 @@
 title: $:/language/Help/setfield
 description: Prepara tiddlers externos para su uso
 
-//Nótese que este comando es experimental y puede cambiar o ser reemplazado antes de ser finalizado//
+//Téngase en cuenta que este comando es experimental y puede cambiar o ser reemplazado//
 
 Configura el campo especificado de un grupo de tiddlers como resultado de una plantilla con la variable `currentTiddler`
 

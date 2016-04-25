@@ -7,7 +7,7 @@ Carga tiddlers de archivos de tipo TiddlyWiki 2.x.x.(`.html`), `.tiddler`, `.tid
 --load <filepath>
 ```
 
-Para cargar tiddlers de un archivo TiddlyWiki encriptado, primero debes especificar la contraseña con el comando PasswordCommand. Por ejemplo:
+Para cargar tiddlers de un TiddlyWiki encriptado, primero debes especificar la contraseña con el comando PasswordCommand. Por ejemplo:
 
 ```
 tiddlywiki ./MyWiki --password pa55w0rd --load my_encrypted_wiki.html
