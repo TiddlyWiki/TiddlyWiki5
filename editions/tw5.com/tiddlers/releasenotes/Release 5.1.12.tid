@@ -86,7 +86,7 @@ Several of the official plugins available in the plugin library have been update
 
 !! Node.js Improvements
 
-* TBD
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2379]] ability to [[customise the paths used for tiddler saving|Customising Tiddler File Naming]]
 
 ! Contributors
 
@@ -94,6 +94,7 @@ Several of the official plugins available in the plugin library have been update
 
 * [[@araname|https://github.com/araname]]
 * [[@BramChen|https://github.com/BramChen]]
+* [[@Drakor|https://github.com/Drakor]]
 * [[@edrex|https://github.com/edrex]]
 * [[@felixhayashi|https://github.com/felixhayashi]]
 * [[@FND|https://github.com/FND]]
