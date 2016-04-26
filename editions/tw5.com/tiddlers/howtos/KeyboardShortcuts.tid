@@ -1,13 +1,13 @@
 created: 20140526204527418
-modified: 20150514091409984
+modified: 20160418152500162
 tags: Features [[Working with TiddlyWiki]]
 title: KeyboardShortcuts
 type: text/vnd.tiddlywiki
 
-Keyboard shortcut support is currently very limited but will be improved in later releases.
+Keyboard shortcuts are available for common editing operations:
 
-! Editing Shortcuts
+* Confirming changes to the draft tiddler containing the keyboard focus (defaults to <kbd>ctrl-Enter</kbd>
+* Abandoning changes to the draft tiddler containing the keyboard focus (defaults to <kbd>escape</kbd>)
+* Formatting operations from the tiddler editing toolbar (see the tooltips)
 
-|Key |Shortcut description |
-|<kbd>ctrl-enter</kbd> |Confirm changes to the draft tiddler containing the keyboard focus |
-|<kbd>escape</kbd> |Abandon changes to the draft tiddler containing the keyboard focus |
+The current shortcuts can be inspected and customised in the "Keyboard Shortcuts" tab of [[control panel|$:/ControlPanel]].

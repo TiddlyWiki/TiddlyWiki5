@@ -74,7 +74,7 @@ For example:
 
 !! Content of `tiddlers` folder
 
-All the TiddlerFiles in the `tiddlers` folder are read into the wiki at startup. Sub-folders are scanned recursively for TiddlerFiles.
+All the TiddlerFiles in the `tiddlers` folder are read into the wiki at startup. Sub-folders are scanned recursively for TiddlerFiles. Newly created tiddlers are stored in TiddlerFiles directly beneath the `tiddlers` folder, unless [[configured otherwise|Customising Tiddler File Naming]].
 
 Sub-folders within the `tiddlers` folder can also be given a `tiddlywiki.files` JSON file that overrides the default processing for that folder. The file format is illustrated with this example:
 

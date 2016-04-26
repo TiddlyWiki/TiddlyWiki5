@@ -1,0 +1,14 @@
+title: $:/core/ui/EditorToolbar/bold
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/bold
+caption: {{$:/language/Buttons/Bold/Caption}}
+description: {{$:/language/Buttons/Bold/Hint}}
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+shortcuts: ((bold))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="''"
+	suffix="''"
+/>

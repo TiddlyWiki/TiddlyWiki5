@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 Here's how to display the last modification date of a wiki in a banner in the corner of the window:
 
-# Copy the plugin [[$:/plugins/tiddlywiki/github-fork-ribbon]] to your TiddlyWiki
+# [[Install the plugin|Installing a plugin from the plugin library]] <<.def "Corner ribbon">> in your ~TiddlyWiki
 # Save and reload your wiki
 # Create a new tiddler called [[$:/_MyRibbon]] tagged [[$:/tags/PageControls]] and containing:<div>
 

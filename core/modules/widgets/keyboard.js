@@ -41,7 +41,7 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	domNode.className = classes.join(" ");
 	// Add a keyboard event handler
 	domNode.addEventListener("keydown",function (event) {
-		if($tw.utils.checkKeyDescriptor(event,self.keyInfo)) {
+		if($tw.keyboardManager.checkKeyDescriptors(event,self.keyInfoArray)) {
 			self.invokeActions(this,event);
 			self.dispatchMessage(event);
 			event.preventDefault();
@@ -68,7 +68,7 @@ KeyboardWidget.prototype.execute = function() {
 	this.message = this.getAttribute("message");
 	this.param = this.getAttribute("param");
 	this.key = this.getAttribute("key");
-	this.keyInfo = $tw.utils.parseKeyDescriptor(this.key);
+	this.keyInfoArray = $tw.keyboardManager.parseKeyDescriptors(this.key);
 	this["class"] = this.getAttribute("class");
 	// Make child widgets
 	this.makeChildWidgets();

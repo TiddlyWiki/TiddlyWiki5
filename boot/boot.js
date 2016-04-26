@@ -136,7 +136,7 @@ $tw.utils.error = function(err) {
 			heading = dm("h1",{text: errHeading}),
 			prompt = dm("div",{text: promptMsg, "class": "tc-error-prompt"}),
 			message = dm("div",{text: err}),
-			button = dm("button",{text: ( $tw.language == undefined ? "Close" : $tw.language.getString("Buttons/Close/Caption") )}),
+			button = dm("button",{text: ( $tw.language == undefined ? "close" : $tw.language.getString("Buttons/Close/Caption") )}),
 			form = dm("form",{children: [heading,prompt,message,button], "class": "tc-error-form"});
 		document.body.insertBefore(form,document.body.firstChild);
 		form.addEventListener("submit",function(event) {
@@ -712,7 +712,24 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 				moduleInfo.exports = moduleInfo.definition;
 			}
 		} catch(e) {
-			$tw.utils.error("Error executing boot module " + name + ":\n" + e.stack);
+			if (e instanceof SyntaxError) {
+				var line = e.lineNumber || e.line; // Firefox || Safari
+				if (typeof(line) != "undefined" && line !== null) {
+					$tw.utils.error("Syntax error in boot module " + name + ":" + line + ":\n" + e.stack);
+				} else if(!$tw.browser) {
+					// this is the only way to get node.js to display the line at which the syntax error appeared,
+					// and $tw.utils.error would exit anyway
+					// cf. https://bugs.chromium.org/p/v8/issues/detail?id=2589
+					throw e;
+				} else {
+					// Opera: line number is included in e.message
+					// Chrome/IE: there's currently no way to get the line number
+					$tw.utils.error("Syntax error in boot module " + name + ": " + e.message + "\n" + e.stack);
+				}
+			} else {
+				// line number should be included in e.stack for runtime errors
+				$tw.utils.error("Error executing boot module " + name + ": " + JSON.stringify(e) + "\n\n" + e.stack);
+			}
 		}
 	}
 	// Return the exports of the module

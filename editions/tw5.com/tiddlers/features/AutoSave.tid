@@ -8,4 +8,4 @@ If there is a SaverModule available that supports it, TiddlyWiki will automatica
 
 You should see a yellow notification at the top right of the window to confirm that an automatic save has taken place.
 
-Automatic saving can be enabled or disabled through the ''Saving'' tab of the [[control panel|$:/ControlPanel]]. Behind the scenes, it is controlled through the configuration tiddler [[$:/config/AutoSave]], which must have the value ''yes'' to enable automatic saving.
+Automatic saving can be enabled or disabled through the ''Settings'' tab of the [[control panel|$:/ControlPanel]]. Behind the scenes, it is controlled through the configuration tiddler [[$:/config/AutoSave]], which must have the value ''yes'' to enable automatic saving.

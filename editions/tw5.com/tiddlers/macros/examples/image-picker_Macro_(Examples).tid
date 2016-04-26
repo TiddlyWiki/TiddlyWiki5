@@ -1,0 +1,11 @@
+created: 20160418155539132
+modified: 20160418155621890
+tags: [[image-picker Macro]] [[Macro Examples]]
+title: image-picker Macro (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1" eg={{image-picker Macro (Example 1)}}/>
+
+This next example shows how the <<.param subfilter>> parameter limits the list of images (here to those with the "Language" prefix):
+
+<$macrocall $name=".example" n="2" eg={{image-picker Macro (Example 2)}}/>

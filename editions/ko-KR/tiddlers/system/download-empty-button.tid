@@ -1,0 +1,6 @@
+title: $:/editions/ko-KR/snippets/download-empty-button
+
+<$button class="tc-btn-big-green">
+<$action-sendmessage $message="tm-download-file" $param="$:/editions/ko-KR/download-empty" filename="empty_ko.html"/>
+빈 위키 다운로드 {{$:/core/images/save-button}}
+</$button>

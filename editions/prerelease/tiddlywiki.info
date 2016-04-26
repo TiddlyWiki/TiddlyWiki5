@@ -9,7 +9,8 @@
 		"tiddlywiki/stacked-view",
 		"tiddlywiki/powered-by-tiddlywiki",
 		"tiddlywiki/internals",
-		"tiddlywiki/highlight"
+		"tiddlywiki/highlight",
+		"tiddlywiki/markdown"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

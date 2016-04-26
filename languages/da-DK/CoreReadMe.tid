@@ -1,3 +1,2 @@
-title: $:/core/da-DK/readme
+title: $:/core/readme
 
-Dette plugin indeholder TiddlyWiki's kerne komponenter, besgtående af: * JavaScript code moduler* Ikoner* Templates som er nødvendige for at oprette TiddlyWiki's brugerflade * British English (en-GB) oversættelser af de lokaliserbare strenge som bruges af kernen

@@ -1,0 +1,11 @@
+title: $:/core/ui/EditorToolbar/undo
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/undo
+caption: {{$:/language/Buttons/Undo/Caption}}
+description: {{$:/language/Buttons/Undo/Hint}}
+condition: [<targetTiddler>!is[image]]
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="undo"
+/>

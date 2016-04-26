@@ -1,0 +1,26 @@
+title: $:/core/macros/image-picker
+tags: $:/tags/Macro
+
+\define image-picker-inner(actions)
+<$button tag="a" tooltip="""$(imageTitle)$""">
+
+$actions$
+
+<$transclude tiddler=<<imageTitle>>/>
+
+</$button>
+\end
+
+\define image-picker(actions,subfilter:"")
+<div class="tc-image-chooser">
+
+<$list filter="[all[shadows+tiddlers]is[image]$subfilter$!has[draft.of]] -[type[application/pdf]] +[sort[title]]" variable="imageTitle">
+
+<$macrocall $name="image-picker-inner" actions="""$actions$"""/>
+
+</$list>
+
+</div>
+
+\end
+

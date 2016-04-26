@@ -23,12 +23,30 @@ Exporters/CsvFile: CSV tiddler fil
 Exporters/JsonFile: JSON tiddler fil
 Exporters/StaticRiver: Statiske HTML tiddlere
 Exporters/TidFile: Enkelt tiddler ".tid" fil
+InternalJavaScriptError/Hint: Oh, dette er pinligt. Det anbefales at du genstarter TiddlyWiki ved at opfriske din browser
+InternalJavaScriptError/Title: Intern JavaScript fejl
 InvalidFieldName: Illegale tegn i felt navn "<$text text=<<fieldName>>/>". Felter kan kun indeholde små bogstaver, tal og tegnene undersstreg (`_`), bindestreg (`-`) og punktum (`.`)
 LazyLoadingWarning: <p>indlæser ekstern tekst fra ''<$text text={{!!_canonical_uri}}/>''</p><p>Hvis denne besked ikke forsvinder, bruger du måske en browser, som ikke understøtter ekstern tekst i denne konfiguration. Se http://tiddlywiki.com/#ExternalText</p>
 MissingTiddler/Hint: Manglende tiddler "<$text text=<<currentTiddler>>/>" - klik {{$:/core/images/edit-button}} for at oprette den.
 OfficialPluginLibrary: Officielt ~TiddlyWiki udvidelsesbibliotek
 PluginReloadWarning: Venligst gem {{$:/core/ui/Buttons/save-wiki}} og genindlæs {{$:/core/ui/Buttons/refresh}} for at tillade udvidelser at træde i kraft
 RecentChanges/DateFormat: DD. MMM YYYY
+Snippets/ListByTag: <<list-links "[tag[task]sort[title]]">>
+
+Snippets/MacroDefinition: \define macroName(param1:"default value",param2)
+Makroens tekst
+\end
+
+Snippets/Table4x3: |! |!Alpha |!Beta |!Gamma |!Delta |
+|!En | | | | |
+|!To | | | | |
+|!Tre | | | | |
+
+Snippets/TableOfContents: <div class="tc-table-of-contents">
+
+<<toc-selective-expandable 'TableOfContents'>>
+
+</div>
 SystemTiddler/Tooltip: Dette er en systemtiddler
 TagManager/Colour/Heading: Farve
 TagManager/Count/Heading: Tæl

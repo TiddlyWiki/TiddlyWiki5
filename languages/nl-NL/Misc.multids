@@ -32,6 +32,22 @@ OfficialPluginLibrary: Officiële ~TiddlyWiki plugin-bibliotheek
 OfficialPluginLibrary/Hint: De officiële ~TiddlyWiki pluginbibliotheek op tiddlywiki.com. Plugins, thema's en taalpaketten worden door het core team onderhouden.
 PluginReloadWarning: Sla op {{$:/core/ui/Buttons/save-wiki}} en ververs {{$:/core/ui/Buttons/refresh}} om wijzigingen aan plugins door te voeren
 RecentChanges/DateFormat: DD MMM YYYY
+Snippets/ListByTag: <<list-links "[tag[task]sort[title]]">>
+
+Snippets/MacroDefinition: \define macroName(param1:"default value",param2)
+Tekst van de macro
+\end
+
+Snippets/Table4x3: |! |!Alpha |!Beta |!Gamma |!Delta |
+|!Een | | | | |
+|!Twee | | | | |
+|!Drie | | | | |
+
+Snippets/TableOfContents: <div class="tc-table-of-contents">
+
+<<toc-selective-expandable 'TableOfContents'>>
+
+</div>
 SystemTiddler/Tooltip: Dit is een systeem tiddler
 TagManager/Colour/Heading: Kleur
 TagManager/Count/Heading: Aantal

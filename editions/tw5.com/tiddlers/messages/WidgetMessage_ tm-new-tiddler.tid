@@ -20,10 +20,19 @@ The title for the draft tiddler is chosen according to these rules:
 
 The new tiddler message is usually generated with the ButtonWidget or ActionSendMessageWidget and is handled by the NavigatorWidget.
 
-! Example
+! Examples
 
 To make a button that creates new tiddlers tagged "task", create a tiddler called "TaskTemplate" with that tag, and then make your button like this:
 
 ```
 <$button message="tm-new-tiddler" param="TaskTemplate">New Task</$button>
+```
+
+To create a new tiddler with given attributes rather than from a template:
+
+```
+<$button>
+<$action-sendmessage $message="tm-new-tiddler" title="This is newly created tiddler" tags="OneTag [[Another Tag]]" text=<<now "Today is DDth, MMM YYYY">>/>
+New Tiddler
+</$button>
 ```

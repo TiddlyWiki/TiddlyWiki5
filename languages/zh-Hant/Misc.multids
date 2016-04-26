@@ -5,6 +5,7 @@ BinaryWarning/Prompt: 此條目包含二進位資料
 ClassicWarning/Hint: 此條目以經典版 TiddlyWiki 標記格式撰寫，不完全相容新版 TiddlyWiki 的格式，詳細資訊請參閱：http://tiddlywiki.com/static/Upgrading。
 ClassicWarning/Upgrade/Caption: 升級
 CloseAll/Button: 全部關閉
+ColourPicker/Recent: 最近︰
 ConfirmCancelTiddler: 您確定要放棄對條目 "<$text text=<<title>>/>" 的更改？
 ConfirmDeleteTiddler: 您確定要刪除條目 "<$text text=<<title>>/>"？
 ConfirmOverwriteTiddler: 您確定要覆寫條目 "<$text text=<<title>>/>"？

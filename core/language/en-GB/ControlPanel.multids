@@ -27,6 +27,19 @@ EditorTypes/Hint: These tiddlers determine which editor is used to edit specific
 EditorTypes/Type/Caption: Type
 Info/Caption: Info
 Info/Hint: Information about this TiddlyWiki
+KeyboardShortcuts/Add/Prompt: Type shortcut here
+KeyboardShortcuts/Add/Caption: add shortcut
+KeyboardShortcuts/Caption: Keyboard Shortcuts
+KeyboardShortcuts/Hint: Manage keyboard shortcut assignments
+KeyboardShortcuts/NoShortcuts/Caption: No keyboard shortcuts assigned
+KeyboardShortcuts/Remove/Hint: remove keyboard shortcut
+KeyboardShortcuts/Platform/All: All platforms
+KeyboardShortcuts/Platform/Mac: Macintosh platform only
+KeyboardShortcuts/Platform/NonMac: Non-Macintosh platforms only
+KeyboardShortcuts/Platform/Linux: Linux platform only
+KeyboardShortcuts/Platform/NonLinux: Non-Linux platforms only
+KeyboardShortcuts/Platform/Windows: Windows platform only
+KeyboardShortcuts/Platform/NonWindows: Non-Windows platforms only
 LoadedModules/Caption: Loaded Modules
 LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
 Palette/Caption: Palette
@@ -121,6 +134,9 @@ Settings/TitleLinks/Caption: Tiddler Titles
 Settings/TitleLinks/Hint: Optionally display tiddler titles as links
 Settings/TitleLinks/No/Description: Do not display tiddler titles as links
 Settings/TitleLinks/Yes/Description: Display tiddler titles as links
+Settings/MissingLinks/Caption: Wiki Links
+Settings/MissingLinks/Hint: Choose whether to link to tiddlers that do not exist yet
+Settings/MissingLinks/Description: Enable links to missing tiddlers
 StoryView/Caption: Story View
 StoryView/Prompt: Current view:
 Theme/Caption: Theme
@@ -133,6 +149,8 @@ Toolbars/EditToolbar/Hint: Choose which buttons are displayed for tiddlers in ed
 Toolbars/Hint: Select which toolbar buttons are displayed
 Toolbars/PageControls/Caption: Page Toolbar
 Toolbars/PageControls/Hint: Choose which buttons are displayed on the main page toolbar
+Toolbars/EditorToolbar/Caption: Editor Toolbar
+Toolbars/EditorToolbar/Hint: Choose which buttons are displayed in the editor toolbar. Note that some buttons will only appear when editing tiddlers of a certain type
 Toolbars/ViewToolbar/Caption: View Toolbar
 Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode
 Tools/Download/Full/Caption: Download full wiki
