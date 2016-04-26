@@ -72,7 +72,7 @@ exports.parse = function() {
 	// Cycle through the items in the list
 	while(true) {
 		// Match the list marker
-		var reMatch = /([\*#;:>]+)/mg;
+		var reMatch = /((?:[\*#;:>](?:\([AaIi]?\d*\))?)+)/mg;
 		reMatch.lastIndex = this.parser.pos;
 		var match = reMatch.exec(this.parser.source);
 		if(!match || match.index !== this.parser.pos) {
@@ -83,30 +83,63 @@ exports.parse = function() {
 		if(listStack.length > 0 && listStack[0].tag !== listInfo.listTag) {
 			break;
 		}
+		// Check wether the top level has modifiers
+		if(listStack.length > 0 && match[0].length > 1 && match[0].charAt(1)==='(') {
+			break;
+		}
 		// Move past the list marker
 		this.parser.pos = match.index + match[0].length;
+		var markers = 0;
 		// Walk through the list markers for the current row
 		for(var t=0; t<match[0].length; t++) {
 			listInfo = listTypes[match[0].charAt(t)];
+			// Locate # modifiers
+			var attributes = null;
+			if(match[0].charAt(t)==='#' && (t+1) < match[0].length &&
+					match[0].charAt(t+1)==='(') {
+				attributes = {};
+				t += 2; // Bypass # and ( characters
+				if(/[AaIi]/.test(match[0].charAt(t))) {
+					attributes['type'] = {"type":"string", "value":match[0].charAt(t)};
+					t++;
+				}
+				var start = 0;
+				while(t < match[0].length && /\d/.test(match[0].charAt(t))) {
+					start = 10*start + parseInt(match[0].charAt(t));
+					t++;
+				}
+				if(start!=0) {
+					attributes['start'] = {"type":"string", "value":start};
+				}
+			}
 			// Remove any stacked up element if we can't re-use it because the list type doesn't match
-			if(listStack.length > t && listStack[t].tag !== listInfo.listTag) {
-				listStack.splice(t,listStack.length - t);
+			if(listStack.length > markers && listStack[markers].tag !== listInfo.listTag) {
+				listStack.splice(markers,listStack.length - markers);
 			}
 			// Construct the list element or reuse the previous one at this level
-			if(listStack.length <= t) {
-				var listElement = {type: "element", tag: listInfo.listTag, children: [
+			if(listStack.length <= markers) {
+				var listElement;
+				if(attributes) {
+					listElement = {type: "element", tag: listInfo.listTag, 
+					  attributes: attributes, children: [
 					{type: "element", tag: listInfo.itemTag, children: []}
 				]};
+				} else {
+					listElement = {type: "element", tag: listInfo.listTag, children: [
+						{type: "element", tag: listInfo.itemTag, children: []}
+					]};
+				}
 				// Link this list element into the last child item of the parent list item
-				if(t) {
-					var prevListItem = listStack[t-1].children[listStack[t-1].children.length-1];
+				if(markers) {
+					var prevListItem = listStack[markers-1].children[listStack[markers-1].children.length-1];
 					prevListItem.children.push(listElement);
 				}
 				// Save this element in the stack
-				listStack[t] = listElement;
+				listStack[markers] = listElement;
 			} else if(t === (match[0].length - 1)) {
-				listStack[t].children.push({type: "element", tag: listInfo.itemTag, children: []});
+				listStack[markers].children.push({type: "element", tag: listInfo.itemTag, children: []});
 			}
+			markers += 1;
 		}
 		if(listStack.length > match[0].length) {
 			listStack.splice(match[0].length,listStack.length - match[0].length);
