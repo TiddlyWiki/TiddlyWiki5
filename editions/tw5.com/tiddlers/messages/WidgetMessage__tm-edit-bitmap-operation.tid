@@ -57,8 +57,8 @@ An example can be seen in [[$:/core/ui/EditorToolbar/size-dropdown]]:
 <$action-sendmessage
 	$message="tm-edit-bitmap-operation"
 	$param="resize"
-	width={{$(config-title)$/new-width}}
-	height={{$(config-title)$/new-height}}
+	width={{$config-title$/new-width}}
+	height={{$config-title$/new-height}}
 />
 ...
 Resize
