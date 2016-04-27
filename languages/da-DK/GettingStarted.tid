@@ -1,14 +1,17 @@
 title: GettingStarted
 
-Velkommen til TiddlyWiki og TiddlyWiki fællesskabet
+\define lingo-base() $:/language/ControlPanel/Basics/
+Velkommen til ~TiddlyWiki og ~TiddlyWiki fællesskabet
 
-Før du begynder at lagre vigtige informationer i TiddlyWiki er det vigtigt, at du sikrer dig, at du på pålidelig måde kan gemme ændringer. Se http://tiddlywiki.com/#GettingStarted for detaljer
+Før du begynder at lagre vigtige informationer i ~TiddlyWiki er det vigtigt, at du sikrer dig, at du på pålidelig måde kan gemme ændringer. Se http://tiddlywiki.com/#GettingStarted for detaljer
 
-!! Opsæt denne TiddlyWiki
+!! Opsæt denne ~TiddlyWiki
 
- HelloThere
-[[$:/Translators]]
-[[$:/plugins/tiddlywiki/translators/readme]]
+<div class="tc-control-panel">
 
+|<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+|<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+</div>
 
-Se kontrol panel for flere muligheder.
+Se [[kontrol panel|$:/ControlPanel]] for flere muligheder.

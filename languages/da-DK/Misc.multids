@@ -31,22 +31,6 @@ MissingTiddler/Hint: Manglende tiddler "<$text text=<<currentTiddler>>/>" - klik
 OfficialPluginLibrary: Officielt ~TiddlyWiki udvidelsesbibliotek
 PluginReloadWarning: Venligst gem {{$:/core/ui/Buttons/save-wiki}} og genindlæs {{$:/core/ui/Buttons/refresh}} for at tillade udvidelser at træde i kraft
 RecentChanges/DateFormat: DD. MMM YYYY
-Snippets/ListByTag: <<list-links "[tag[task]sort[title]]">>
-
-Snippets/MacroDefinition: \define macroName(param1:"default value",param2)
-Makroens tekst
-\end
-
-Snippets/Table4x3: |! |!Alpha |!Beta |!Gamma |!Delta |
-|!En | | | | |
-|!To | | | | |
-|!Tre | | | | |
-
-Snippets/TableOfContents: <div class="tc-table-of-contents">
-
-<<toc-selective-expandable 'TableOfContents'>>
-
-</div>
 SystemTiddler/Tooltip: Dette er en systemtiddler
 TagManager/Colour/Heading: Farve
 TagManager/Count/Heading: Tæl
