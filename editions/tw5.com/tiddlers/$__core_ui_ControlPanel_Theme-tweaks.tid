@@ -1,0 +1,8 @@
+caption: Theme tweaks
+created: 20160427095356216
+modified: 20160427095554536
+tags: $:/tags/ControlPanel
+title: $:/core/ui/ControlPanel/Theme-tweaks
+type: text/vnd.tiddlywiki
+
+{{$:/themes/tiddlywiki/vanilla/themetweaks}}
