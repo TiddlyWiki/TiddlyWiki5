@@ -1,13 +1,14 @@
 {
     "description": "Configuration en mode serveur de l'édition fr-FR",
-    "plugins": [
-        "tiddlywiki/tiddlyweb",
-        "tiddlywiki/filesystem",
-        "tiddlywiki/highlight"
-    ],
-    "themes": [
-        "tiddlywiki/vanilla"
-    ],
+	"plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem",
+		"tiddlywiki/highlight"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
     "includeWikis": [
         "../fr-FR"
     ],
