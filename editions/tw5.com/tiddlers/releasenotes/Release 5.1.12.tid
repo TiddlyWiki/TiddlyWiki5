@@ -76,6 +76,7 @@ Several of the official plugins available in the plugin library have been update
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/7daebba46bad0e7ea3e4dfc1fc2e59e36414a683]] editor preview pane to allow plugins to add further types of preview (see the new `tiddlywiki/internals` plugin for an example)
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f8565443d7617f4d18b90ba7ce3f55b9764eccb2]] a simple HTTP PUT saver for use with WebDav or REST servers
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/37823f64e96809df16884c605b062f8da2453635]] build targets to the server edition
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/2364]] [[days Operator]] to better cope with operations on today and yesterday
 
 !! Bug Fixes
 
