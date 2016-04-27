@@ -3,7 +3,7 @@ title: days Operator
 type: text/vnd.tiddlywiki
 caption: days
 op-input: a [[selection of titles|Title Selection]]
-op-neg-output: those input tiddlers in which field <<.place F>> is more than <<.place D>> days in the { future | past }, where <<.place D>> is { positive | negative }
+op-neg-output: those input tiddlers in which field <<.place F>> is at least <<.place D>> days in the { future | past }, where <<.place D>> is { positive | negative }
 op-output: those input tiddlers in which field <<.place F>> is <<.place D>> days in the { future | past } or any time { before | after } that, including { past | future }, where <<.place D>> is { positive | negative }
 op-parameter: a number of days, defaulting to 0
 op-parameter-name: D
