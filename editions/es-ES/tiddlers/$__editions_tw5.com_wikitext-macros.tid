@@ -1,5 +1,5 @@
 created: 20150117184156000
-modified: 20160415153519566
+modified: 20160428152133143
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/wikitext-macros
 type: text/vnd.tiddlywiki
@@ -30,7 +30,7 @@ $$$
 $src$
 ```
 
-... y tiene este aspecto:
+Este es su aspecto:
 
 $src$
 </div>
