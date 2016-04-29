@@ -982,7 +982,7 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-editor-toolbar button.tc-text-editor-toolbar-item-adjunct {
-    margin-left: -4px;
+	margin-left: -3px;
 	width: 1em;
 	border-radius: 8px;	
 }
@@ -1013,6 +1013,10 @@ html body.tc-body.tc-single-tiddler-window {
 	display: inline-block;
 	padding: 3px;
 	width: auto;
+}
+
+.tc-editor-toolbar .tc-search-results {
+	padding: 0;
 }
 
 /*
@@ -1297,6 +1301,14 @@ html body.tc-body.tc-single-tiddler-window {
 	text-align: left;
 	color: <<colour foreground>>;
 	line-height: 1.4;
+}
+
+.tc-drop-down .tc-tab-set .tc-tab-buttons button {
+	display: inline-block;
+    width: auto;
+    margin-bottom: 0px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .tc-drop-down .tc-prompt {
