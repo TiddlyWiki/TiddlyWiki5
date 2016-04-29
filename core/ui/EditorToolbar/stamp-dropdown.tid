@@ -7,7 +7,6 @@ title: $:/core/ui/EditorToolbar/stamp-dropdown
 	$message="tm-edit-text-operation"
 	$param="replace-selection"
 	text={{$(snippetTitle)$}}
-	mode={{$(snippetTitle!!mode)$}}
 />
 
 <$action-deletetiddler
