@@ -127,12 +127,12 @@ Settings/TitleLinks/Caption: 티들러 제목
 Settings/TitleLinks/Hint: 티들러 제목을 링크로 선택적으로 보여줍니다
 Settings/TitleLinks/No/Description: 티들러 제목을 링크로 보여주지 않음
 Settings/TitleLinks/Yes/Description: 티들러 제목을 링크로 보여주기
-Settings/ToolbarButtons/Caption: 툴바 버튼
-Settings/ToolbarButtons/Hint: 기본 툴바 버튼 외관:
+Settings/ToolbarButtons/Caption: 도구 모음 버튼
+Settings/ToolbarButtons/Hint: 기본 도구 모음 버튼 외관:
 Settings/ToolbarButtons/Icons/Description: 아이콘을 포함
 Settings/ToolbarButtons/Text/Description: 텍스트를 포함
-Settings/ToolbarButtonStyle/Caption: 툴바 버튼 스타일
-Settings/ToolbarButtonStyle/Hint: 툴바 버튼에 대한 스타일을 선택합니다:
+Settings/ToolbarButtonStyle/Caption: 도구 모음 버튼 스타일
+Settings/ToolbarButtonStyle/Hint: 도구 모음 버튼에 대한 스타일을 선택합니다:
 Settings/ToolbarButtonStyle/Styles/Borderless: 테두리 없음
 Settings/ToolbarButtonStyle/Styles/Boxed: 상자형
 Settings/ToolbarButtonStyle/Styles/Rounded: 둥근형
@@ -142,14 +142,14 @@ Theme/Caption: 테마
 Theme/Prompt: 현재 테마:
 TiddlerFields/Caption: 티들러 필드
 TiddlerFields/Hint: 이 위키에 사용하고 있는 티들러필드의 전체 집합입니다. (시스템 티들러는 포함하지만 섀도우 티들러는 제외)
-Toolbars/Caption: 툴바
+Toolbars/Caption: 도구 모음
 Toolbars/EditorToolbar/Caption: 편집기 도구 모음
 Toolbars/EditorToolbar/Hint: 편집기 도구 모음에 보여줄 버튼을 선택하세요. 어떤 버튼은 특정 형식의 티들러를 편집할 때에만 나타남을 참고하세요
-Toolbars/EditToolbar/Caption: 편집 툴바
-Toolbars/EditToolbar/Hint: 편집 모드에서 티들러에 보여줄 버튼을 선택합니다
-Toolbars/Hint: 보여줄 툴바 버튼을 선택합니다
-Toolbars/PageControls/Caption: 페이지 툴바
-Toolbars/PageControls/Hint: 주요 페이지 툴바에 보여줄 버튼을 선택합니다
-Toolbars/ViewToolbar/Caption: 보기 툴바
-Toolbars/ViewToolbar/Hint: 보기 모드에서 티들러에 보여줄 버튼을 선택합니다
+Toolbars/EditToolbar/Caption: 편집 도구 모음
+Toolbars/EditToolbar/Hint: 편집 모드에서 티들러에 보여줄 버튼을 선택하세요
+Toolbars/Hint: 보여줄 도구 모음 버튼을 선택합니다
+Toolbars/PageControls/Caption: 페이지 도구 모음
+Toolbars/PageControls/Hint: 주요 페이지 도구 모음에 보여줄 버튼을 선택하세요
+Toolbars/ViewToolbar/Caption: 보기 도구 모음
+Toolbars/ViewToolbar/Hint: 보기 모드에서 티들러에 보여줄 버튼을 선택하세요
 Tools/Download/Full/Caption: 전체 위키 다운로드
