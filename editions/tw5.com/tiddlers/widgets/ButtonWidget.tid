@@ -1,6 +1,6 @@
 caption: button
 created: 20131024141900000
-modified: 20150619111219516
+modified: 20160429175044822
 tags: Widgets
 title: ButtonWidget
 type: text/vnd.tiddlywiki
@@ -9,6 +9,7 @@ type: text/vnd.tiddlywiki
 
 The button widget displays an HTML `<button>` element that can perform a combination of optional actions when clicked:
 
+* Executing any ActionWidgets passed in the `actions` attribute
 * Executing any ActionWidgets that are immediate children of the button widget
 * Execute any integrated actions:
 ** Navigate to a specified tiddler
@@ -23,6 +24,7 @@ The integrated actions are provided as a shortcut for invoking common actions. T
 The content of the `<$button>` widget is displayed within the button.
 
 |!Attribute |!Description |
+|actions |A string containing ActionWidgets to be triggered when the key combination is detected |
 |to |The title of the tiddler to navigate to |
 |message |The name of the [[widget message|Messages]] to send when the button is clicked |
 |param |The optional parameter to the message |
