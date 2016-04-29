@@ -70,7 +70,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		// Fix height
 		this.engine.fixHeight();
 		// Focus if required
-		if(this.editFocus === "true") {
+		if(this.editFocus === "true" || this.editFocus === "yes") {
 			this.engine.focus();
 		}
 		// Add widget message listeners
