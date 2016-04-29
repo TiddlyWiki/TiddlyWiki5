@@ -987,6 +987,10 @@ html body.tc-body.tc-single-tiddler-window {
 	border-radius: 8px;	
 }
 
+.tc-editor-toolbar button.tc-text-editor-toolbar-item-start-group {
+	margin-left: 6px;
+}
+
 .tc-editor-toolbar button.tc-selected {
 	background-color: <<colour primary>>;
 }
