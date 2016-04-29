@@ -1,7 +1,6 @@
 title: $:/language/Snippets/Table4x3
 tags: $:/tags/TextEditor/Snippet
 caption: Tableau avec 4 colonnes par trois lignes
-mode: wikified
 
 |! |!Alpha |!Beta |!Gamma |!Delta |
 |!Un | | | | |

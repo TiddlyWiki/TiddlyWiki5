@@ -1,7 +1,6 @@
 title: $:/language/Snippets/TableOfContents
 tags: $:/tags/TextEditor/Snippet
 caption: Table des matières
-mode: wikified
 
 <div class="tc-table-of-contents">
 

@@ -1,6 +1,5 @@
 title: $:/language/Snippets/TableOfContents
 tags: $:/tags/TextEditor/Snippet
-mode: wikified
 caption: Inhoudsopgave
 
 <div class="tc-table-of-contents">

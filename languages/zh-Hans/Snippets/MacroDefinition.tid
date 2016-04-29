@@ -1,7 +1,6 @@
 title: $:/language/Snippets/MacroDefinition
 tags: $:/tags/TextEditor/Snippet
 caption: 宏的定义
-mode: wikified
 
 \define macroName(param1:"默认值",param2)
 宏的内容

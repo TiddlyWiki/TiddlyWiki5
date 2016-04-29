@@ -1,7 +1,6 @@
 title: $:/language/Snippets/MacroDefinition
 tags: $:/tags/TextEditor/Snippet
 caption: 巨集的定義
-mode: wikified
 
 \define macroName(param1:"預設值",param2)
 巨集的內容
