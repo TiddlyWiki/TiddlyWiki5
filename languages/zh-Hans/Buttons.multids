@@ -127,6 +127,8 @@ Italic/Caption: 斜体
 Italic/Hint: 套用斜体格式于所选文本
 LineWidth/Caption: 线宽
 LineWidth/Hint: 设置绘画的线条宽度
+Link/Caption: 链接
+Link/Hint: 创建维基文字链接
 ListBullet/Caption: 符号清单
 ListBullet/Hint: 套用符号清单格式于包含所选文本的列
 ListNumber/Caption: 数字清单
