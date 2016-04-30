@@ -27,6 +27,7 @@ exports.startup = function() {
 	// Minimal browser detection
 	if($tw.browser) {
 		$tw.browser.isIE = (/msie|trident/i.test(navigator.userAgent));
+		$tw.browser.isFirefox = !!document.mozFullScreenEnabled;
 	}
 	// Platform detection
 	$tw.platform = {};

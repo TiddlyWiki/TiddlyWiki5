@@ -87,6 +87,8 @@ Language/Caption: 언어
 Language/Hint: 사용자 인터페이스 언어를 선택합니다
 LineWidth/Caption: 선 너비
 LineWidth/Hint: 페인트의 선 너비를 설정합니다
+Link/Caption: 링크
+Link/Hint: 위키텍스트 링크를 만듭니다
 ListBullet/Caption: 글머리 기호 목록
 ListBullet/Hint: 선택을 포함하는 줄에 글머리 기호 목록 서식을 적용합니다
 ListNumber/Caption: 번호가 매겨진 목록
