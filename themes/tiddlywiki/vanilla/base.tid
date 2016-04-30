@@ -988,7 +988,7 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-editor-toolbar button.tc-text-editor-toolbar-item-start-group {
-	margin-left: 6px;
+	margin-left: 7px;
 }
 
 .tc-editor-toolbar button.tc-selected {
