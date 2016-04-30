@@ -1,10 +1,12 @@
 created: 20131219100608529
-modified: 20150325173825615
+modified: 20160430162310620
 tags: [[TiddlyWiki on Node.js]]
 title: Installing TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
 
-# Install [[Node.js]] from http://nodejs.org
+# Install [[Node.js]]
+#* either from your favourite package manager: typically  `apt-get install nodejs` on Debian/Ubuntu Linux or Termux for Android, or `brew install node` on a Mac
+#* or directly from http://nodejs.org
 # Open a command line terminal and type:
 #> `npm install -g tiddlywiki`
 #> If it fails with an error you may need to re-run the command as an administrator:
