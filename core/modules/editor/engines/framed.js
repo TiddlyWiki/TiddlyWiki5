@@ -8,7 +8,7 @@ Text editor engine based on a simple input or textarea within an iframe. This is
 \*/
 (function(){
 
-/*jslint node: true, browser: true */
+/*jslint node: true,browser: true */
 /*global $tw: false */
 "use strict";
 
@@ -73,8 +73,8 @@ function FramedEngine(options) {
 	}
 	// Add event listeners
 	$tw.utils.addEventListeners(this.domNode,[
-		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"},
-		{name: "keydown", handlerObject: this.widget, handlerMethod: "handleKeydownEvent"}
+		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
+		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"}
 	]);
 	// Insert the element into the DOM
 	this.iframeDoc.body.appendChild(this.domNode);
@@ -176,20 +176,16 @@ FramedEngine.prototype.executeTextOperation = function(operation) {
 	// Perform the required changes to the text area and the underlying tiddler
 	var newText = operation.text;
 	if(operation.replacement !== null) {
-		// Work around the problem that textInput can't be used directly to delete text without also replacing it with a non-zero length string
-		if(operation.replacement === "") {
-			operation.replacement = operation.text.substring(0,operation.cutStart) + operation.text.substring(operation.cutEnd);
-			operation.cutStart = 0;
-			operation.cutEnd = operation.text.length;
-		}
 		newText = operation.text.substring(0,operation.cutStart) + operation.replacement + operation.text.substring(operation.cutEnd);
-		// Attempt to use a TextEvent to modify the value of the control
-		var textEvent = this.domNode.ownerDocument.createEvent("TextEvent");
-		if(textEvent.initTextEvent) {
-			textEvent.initTextEvent("textInput", true, true, null, operation.replacement, 9, "en-US");
+		// Attempt to use a execCommand to modify the value of the control
+		if(this.iframeDoc.queryCommandSupported("insertText") && this.iframeDoc.queryCommandSupported("delete") && !$tw.browser.isFirefox) {
 			this.domNode.focus();
 			this.domNode.setSelectionRange(operation.cutStart,operation.cutEnd);
-			this.domNode.dispatchEvent(textEvent);
+			if(operation.replacement === "") {
+				this.iframeDoc.execCommand("delete",false,"");
+			} else {
+				this.iframeDoc.execCommand("insertText",false,operation.replacement);
+			}
 		} else {
 			this.domNode.value = newText;
 		}
@@ -204,23 +200,22 @@ FramedEngine.prototype.executeTextOperation = function(operation) {
 Execute a command
 */
 FramedEngine.prototype.execCommand = function(command) {
-	var isFirefox = !!document.mozFullScreenEnabled,
-		msg = "Warning: the '" + command + "' button does not work in Firefox without installing the CodeMirror plugin.\n\n(Standard operating system keyboard shortcuts will work correctly)";
+	var msg = "Warning: the '" + command + "' button does not work in Firefox without installing the CodeMirror plugin.\n\n(Standard operating system keyboard shortcuts will work correctly)";
 	this.iframeNode.focus();
 	this.domNode.focus();
 	switch(command) {
 		case "undo":
-			if(isFirefox) {
+			if($tw.browser.isFirefox) {
 				alert(msg);
 			} else {
-				this.iframeDoc.execCommand("undo", false, null);
+				this.iframeDoc.execCommand("undo",false,null);
 			}
 			break;
 		case "redo":
-			if(isFirefox) {
+			if($tw.browser.isFirefox) {
 				alert(msg);
 			} else {
-				this.iframeDoc.execCommand("redo", false, null);
+				this.iframeDoc.execCommand("redo",false,null);
 			}
 			break;
 	}
