@@ -2,7 +2,7 @@ title: $:/language/
 
 AboveStory/ClassicPlugin/Warning: ~TiddlyWiki 클래식용으로 설계된 플러그인을 불러오려고 하는 것 같아 보입니다. [[이러한 플러그인은 TiddlyWiki 버전 5.x.x에 동작하지 않음|http://tiddlywiki.com/#TiddlyWikiClassic]]을 참고하세요. ~TiddlyWiki 클래식 플러그인이 감지되었습니다:
 BinaryWarning/Prompt: 이 티들러는 바이너리 데이터를 포함합니다
-ClassicWarning/Hint: 이 티들러는 TiddlyWiki 클래식 위키 텍스트 형식으로 쓰여져 있으며, TiddlyWiki 버전 5와 완전히 호환되지 않습니다. 자세한 사항은 http://tiddlywiki.com/static/Upgrading.html 을 참조하세요.
+ClassicWarning/Hint: 이 티들러는 TiddlyWiki 클래식 위키 텍스트 형식으로 쓰여져 있으며, TiddlyWiki 버전 5와 완전히 호환되지 않습니다. 자세한 사항은 http://tiddlywiki.com/static/Upgrading.html 을 보세요.
 ClassicWarning/Upgrade/Caption: 업그레이드
 CloseAll/Button: 모두 닫기
 ColourPicker/Recent: 최근:
