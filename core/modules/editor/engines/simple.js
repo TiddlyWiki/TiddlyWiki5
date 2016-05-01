@@ -137,12 +137,6 @@ SimpleEngine.prototype.createTextOperation = function() {
 };
 
 /*
-Execute a command
-*/
-SimpleEngine.prototype.execCommand = function() {
-};
-
-/*
 Execute a text operation
 */
 SimpleEngine.prototype.executeTextOperation = function(operation) {
