@@ -149,8 +149,6 @@ PreviewType/Caption: 预览类型
 PreviewType/Hint: 选择预览类型
 Quote/Caption: 引言
 Quote/Hint: 套用引言文本格式于包含所选文本的列
-Redo/Caption: 恢复
-Redo/Hint: 恢复上一次撤销的操作
 Size/Caption: 图像大小
 Size/Caption/Height: 高度︰
 Size/Caption/Resize: 调整图像的大小
@@ -169,5 +167,3 @@ Superscript/Caption: 上标
 Superscript/Hint: 套用上标格式于所选文本
 Underline/Caption: 下划线
 Underline/Hint: 套用下划线格式于所选文本
-Undo/Caption: 撤消
-Undo/Hint: 撤消上一次的操作

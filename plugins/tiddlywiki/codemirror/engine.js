@@ -152,21 +152,6 @@ CodeMirrorEngine.prototype.executeTextOperation = function(operation) {
 	return newText;
 };
 
-/*
-Execute a command
-*/
-CodeMirrorEngine.prototype.execCommand = function(command) {
-	this.cm.focus();
-	switch(command) {
-		case "undo":
-			this.cm.execCommand("undo", false, null);
-			break;
-		case "redo":
-			this.cm.execCommand("redo", false, null);
-			break;
-	}
-};
-
 exports.CodeMirrorEngine = CodeMirrorEngine;
 
 })();

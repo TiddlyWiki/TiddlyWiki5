@@ -27,6 +27,13 @@ function SimpleEngine(options) {
 		tag = "input";
 	}
 	this.domNode = this.widget.document.createElement(tag);
+	// Set the text
+	if(this.widget.editTag === "textarea") {
+		this.domNode.appendChild(this.widget.document.createTextNode(this.value));
+	} else {
+		this.domNode.value = this.value;
+	}
+	// Set the attributes
 	if(this.widget.editType) {
 		this.domNode.setAttribute("type",this.widget.editType);
 	}
@@ -41,12 +48,6 @@ function SimpleEngine(options) {
 	}
 	if(this.widget.editClass) {
 		this.domNode.className = this.widget.editClass;
-	}
-	// Set the text
-	if(this.widget.editTag === "textarea") {
-		this.domNode.appendChild(this.widget.document.createTextNode(this.value));
-	} else {
-		this.domNode.value = this.value;
 	}
 	// Add an input event handler
 	$tw.utils.addEventListeners(this.domNode,[
@@ -134,12 +135,6 @@ Create a blank structure representing a text operation
 */
 SimpleEngine.prototype.createTextOperation = function() {
 	return null;
-};
-
-/*
-Execute a command
-*/
-SimpleEngine.prototype.execCommand = function() {
 };
 
 /*

@@ -149,8 +149,6 @@ PreviewType/Caption: preview type
 PreviewType/Hint: Choose preview type
 Quote/Caption: quote
 Quote/Hint: Apply quoted text formatting to lines containing selection
-Redo/Caption: redo
-Redo/Hint: Redo the last action to be undone
 Size/Caption: image size
 Size/Caption/Height: Height:
 Size/Caption/Resize: Resize image
@@ -169,6 +167,4 @@ Superscript/Caption: superscript
 Superscript/Hint: Apply superscript formatting to selection
 Underline/Caption: underline
 Underline/Hint: Apply underline formatting to selection
-Undo/Caption: undo
-Undo/Hint: Undo the last action
 

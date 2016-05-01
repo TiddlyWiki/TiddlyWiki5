@@ -63,7 +63,7 @@ Several of the official plugins available in the plugin library have been update
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/7908e10488cc4280dd8e4f405bcb09f2fb6d3524]] a setting for disabling linking to missing tiddlers
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/de3adf905aff80e547dc630890f0d18bd87da880]] a setting for forcing word wrapping in monospaced code blocks
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/issues/2351]] a warning when creating tiddler titles containing troublesome characters
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/issues/2351]] a warning when creating or editing tiddler titles containing troublesome characters
 * Addition of “new image” button to the “Tools” tab of the sidebar
 * Introduction of new general purpose [[colour-picker Macro]]
 * Introduction of new general purpose [[image-picker Macro]]

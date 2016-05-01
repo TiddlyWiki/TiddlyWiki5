@@ -292,13 +292,6 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		return !this.parentDomNode.dispatchEvent(newEvent);
 	};
 
-	/*
-	Execute the specified command on the current engine
-	*/
-	EditTextWidget.prototype.execCommand = function(command /*, <args> */) {
-		this.engine.execCommand.apply(this.engine,Array.prototype.slice.call(arguments,0));
-	};
-
 	return EditTextWidget;
 
 }

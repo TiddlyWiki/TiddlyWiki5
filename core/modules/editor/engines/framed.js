@@ -51,6 +51,13 @@ function FramedEngine(options) {
 		tag = "input";
 	}
 	this.domNode = this.iframeDoc.createElement(tag);
+	// Set the text
+	if(this.widget.editTag === "textarea") {
+		this.domNode.appendChild(this.iframeDoc.createTextNode(this.value));
+	} else {
+		this.domNode.value = this.value;
+	}
+	// Set the attributes
 	if(this.widget.editType) {
 		this.domNode.setAttribute("type",this.widget.editType);
 	}
@@ -65,12 +72,6 @@ function FramedEngine(options) {
 	}
 	// Copy the styles from the dummy textarea
 	this.copyStyles();
-	// Set the text
-	if(this.widget.editTag === "textarea") {
-		this.domNode.appendChild(this.iframeDoc.createTextNode(this.value));
-	} else {
-		this.domNode.value = this.value;
-	}
 	// Add event listeners
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
@@ -194,31 +195,6 @@ FramedEngine.prototype.executeTextOperation = function(operation) {
 	}
 	this.domNode.focus();
 	return newText;
-};
-
-/*
-Execute a command
-*/
-FramedEngine.prototype.execCommand = function(command) {
-	var msg = "Warning: the '" + command + "' button does not work in Firefox without installing the CodeMirror plugin.\n\n(Standard operating system keyboard shortcuts will work correctly)";
-	this.iframeNode.focus();
-	this.domNode.focus();
-	switch(command) {
-		case "undo":
-			if($tw.browser.isFirefox) {
-				alert(msg);
-			} else {
-				this.iframeDoc.execCommand("undo",false,null);
-			}
-			break;
-		case "redo":
-			if($tw.browser.isFirefox) {
-				alert(msg);
-			} else {
-				this.iframeDoc.execCommand("redo",false,null);
-			}
-			break;
-	}
 };
 
 exports.FramedEngine = FramedEngine;

@@ -19,26 +19,6 @@ Excises the currently selected text into a new tiddler and replaces it with a li
 </div>
 \end
 
-\define undoDescription()
-<div>
-
-Undoes the last action in the editor. Has no additional parameters.
-
-<<.tip "This directly uses the underlying `execCommand` browser method provided by a document in design mode.">>
-
-</div>
-\end
-
-\define redoDescription()
-<div>
-
-Redoes the last action to be undone in the editor. Has no additional parameters.
-
-<<.tip "This directly uses the underlying `execCommand` browser method provided by a document in design mode.">>
-
-</div>
-\end
-
 \define replaceAllDescription()
 <div>
 
@@ -116,8 +96,6 @@ At this point the following text operations have been implemented:
 
 |!Name |!Description |
 |<<.def "excise">>|<<exciseDescription>> |
-|<<.def "undo">>|<<undoDescription>> |
-|<<.def "redo">>|<<redoDescription>> |
 |<<.def "replace-all">>|<<replaceAllDescription>> |
 |<<.def "replace-selection">>|<<replaceSelectionDescription>> |
 |<<.def "prefix-lines">>|<<prefixLinesDescription>> |
