@@ -1,7 +1,7 @@
 title: $:/core/ui/EditTemplate/title
 tags: $:/tags/EditTemplate
 
-<$vars pattern="""[\|\[\]{}"']""" bad-chars="""`| [ ] { } " '`""">
+<$vars pattern="""[\|\[\]{}]""" bad-chars="""`| [ ] { }`""">
 
 <$list filter="[is[current]regexp:draft.title<pattern>]" variable="listItem">
 
