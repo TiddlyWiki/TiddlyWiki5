@@ -131,9 +131,6 @@ PreviewType/Caption: type voorbeeldweergave
 PreviewType/Hint: Kies type voorbeeldweergave
 Quote/Caption: 'blockquote'
 Quote/Hint: Maak van selectie een 'blockqoute'
-Redo/Caption: opnieuw
-Redo/Hint: Doe opnieuw wat ongedaan gemaakt is
-
 Refresh/Caption: ververs
 Refresh/Hint: Ververs deze wiki
 Save/Caption: opslaan
@@ -166,8 +163,6 @@ Theme/Caption: thema
 Theme/Hint: Kies het thema
 Underline/Caption: onderstreept
 Underline/Hint: Onderstreep het geselecteerde
-Undo/Caption: maak ongedaan
-Undo/Hint: Maak laatste actie ongedaan
 Unfold/Caption: klap tiddler uit
 Unfold/Hint: Klap de tekst van deze tiddler uit
 UnfoldAll/Caption: klap alle tiddlers uit

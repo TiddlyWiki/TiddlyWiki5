@@ -196,31 +196,6 @@ FramedEngine.prototype.executeTextOperation = function(operation) {
 	return newText;
 };
 
-/*
-Execute a command
-*/
-FramedEngine.prototype.execCommand = function(command) {
-	var msg = "Warning: the '" + command + "' button does not work in Firefox without installing the CodeMirror plugin.\n\n(Standard operating system keyboard shortcuts will work correctly)";
-	this.iframeNode.focus();
-	this.domNode.focus();
-	switch(command) {
-		case "undo":
-			if($tw.browser.isFirefox) {
-				alert(msg);
-			} else {
-				this.iframeDoc.execCommand("undo",false,null);
-			}
-			break;
-		case "redo":
-			if($tw.browser.isFirefox) {
-				alert(msg);
-			} else {
-				this.iframeDoc.execCommand("redo",false,null);
-			}
-			break;
-	}
-};
-
 exports.FramedEngine = FramedEngine;
 
 })();
