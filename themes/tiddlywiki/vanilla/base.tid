@@ -1468,6 +1468,7 @@ html body.tc-body.tc-single-tiddler-window {
 	right: 0;
 	bottom: 0;
 	left: 0;
+	z-index: 900;
 }
 
 .tc-modal-backdrop {
