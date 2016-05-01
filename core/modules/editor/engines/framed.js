@@ -51,6 +51,13 @@ function FramedEngine(options) {
 		tag = "input";
 	}
 	this.domNode = this.iframeDoc.createElement(tag);
+	// Set the text
+	if(this.widget.editTag === "textarea") {
+		this.domNode.appendChild(this.iframeDoc.createTextNode(this.value));
+	} else {
+		this.domNode.value = this.value;
+	}
+	// Set the attributes
 	if(this.widget.editType) {
 		this.domNode.setAttribute("type",this.widget.editType);
 	}
@@ -65,12 +72,6 @@ function FramedEngine(options) {
 	}
 	// Copy the styles from the dummy textarea
 	this.copyStyles();
-	// Set the text
-	if(this.widget.editTag === "textarea") {
-		this.domNode.appendChild(this.iframeDoc.createTextNode(this.value));
-	} else {
-		this.domNode.value = this.value;
-	}
 	// Add event listeners
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
