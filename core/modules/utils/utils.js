@@ -17,7 +17,18 @@ Display a warning, in colour if we're on a terminal
 */
 exports.warning = function(text) {
 	console.log($tw.node ? "\x1b[1;33m" + text + "\x1b[0m" : text);
-}
+};
+
+/*
+Repeats a string
+*/
+exports.repeat = function(str,count) {
+	var result = "";
+	for(var t=0;t<count;t++) {
+		result += str;
+	}
+	return result;
+};
 
 /*
 Trim whitespace from the start and end of a string

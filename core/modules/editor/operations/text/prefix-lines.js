@@ -21,7 +21,7 @@ exports["prefix-lines"] = function(event,operation) {
 	var lines = operation.text.substring(operation.cutStart,operation.cutEnd).split(/\r?\n/mg);
 	$tw.utils.each(lines,function(line,index) {
 		// Compose the required prefix
-		var prefix = event.paramObject.character.repeat(event.paramObject.count);
+		var prefix = $tw.utils.repeat(event.paramObject.character,event.paramObject.count);
 		// Check if we already have the required prefix
 		if(line.substring(0,prefix.length) === prefix) {
 			// If so, remove the prefix
