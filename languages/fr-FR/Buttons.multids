@@ -127,6 +127,8 @@ Italic/Caption: italiques
 Italic/Hint: Met la sélection en italiques
 LineWidth/Caption: épaisseur du trait
 LineWidth/Hint: Choisit une épaisseur de trait pour le remplissage
+Link/Caption: lien
+Link/Hint: Crée un lien wikitext
 ListBullet/Caption: liste à puces
 ListBullet/Hint: Formate les lignes de la sélection comme une liste à puces
 ListNumber/Caption: liste numérotée
