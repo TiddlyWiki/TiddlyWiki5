@@ -117,4 +117,4 @@ The title of the associated information tiddler must be formed as follows:
 
 Thus, plugins can provide language-specific versions of each information tiddler.
 
-Note that information tiddlers should not reference other tiddlers within the plugin. This is because plugins containing themes or languages are dynamically switched in and out as they are selected, and so their information tiddlers  may not be available for viewing. The control panel uses the 'subtiddler' attribute of the TranscludeWidget to access these tiddlers, which works independently of the plugin switching mechanism.
+Note that information tiddlers should not reference other tiddlers within the plugin. This is because plugins containing themes or languages are dynamically switched in and out as they are selected, and so their information tiddlers may not be available for viewing. The control panel uses the 'subtiddler' attribute of the TranscludeWidget to access these tiddlers, which works independently of the plugin switching mechanism.
