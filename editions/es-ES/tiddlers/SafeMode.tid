@@ -1,7 +1,7 @@
 caption: Modo Seguro
 created: 20140419082845576
 es-title: TiddlyWiki en modo de recuperación
-modified: 20160503062114365
+modified: 20160503162352208
 tags: Features
 title: SafeMode
 type: text/vnd.tiddlywiki
@@ -22,7 +22,7 @@ Activar modo seguro produce los siguientes cambios en el funcionamiento de ~Tidd
 
 * Todos los plugins se desactivan temporalmente.
 
-* Todos aquellos tiddlers que <<.word puentean>> tiddlers ocultos reciben el prefijo `SAFE: `, lo que restaura los originales
+* Todos aquellos tiddlers que <<.word puentean>> tiddlers ocultos reciben el prefijo `SAFE:`, lo que restaura los originales
 
 * Algunas opciones de configuración se ignoran y usan los valores por defecto.
 
