@@ -123,6 +123,10 @@ FileSystemAdaptor.prototype.generateTiddlerFilename = function(title,extension,e
 	if(baseFilename.length > 200) {
 		baseFilename = baseFilename.substr(0,200);
 	}
+	// Prevent redundent file extensions
+	if($tw.utils.strEndsWith(baseFilename,extension)) {
+		extension = "";
+	}
 	// Start with the base filename plus the extension
 	var filename = baseFilename + extension,
 		count = 1;
