@@ -1,18 +1,11 @@
-caption: Inicio
-created: 20160425195603860
-es-title: Antes que nada...
-modified: 20160425200402950
 title: GettingStarted
-type: text/vnd.tiddlywiki
 
 \define lingo-base() $:/language/ControlPanel/Basics/
-Bienvenido a TiddlyWiki y a su comunidad de usuarios
+Bienvenido a ~TiddlyWiki y a la comunidad ~TiddlyWiki.
 
-Antes de guardar información importante en TiddlyWiki, es preciso que te asegures de poder hacerlo de manera fiable
+Antes de que usted empiece a guardar información en ~TiddlyWiki es importante que se asegure que puede guardar cambios de manera fiable. Visite http://tiddlywiki.com/#GettingStarted para más información (en idioma inglés)
 
-Visita http://tiddlywiki.com/#GettingStarted para más información (en inglés)
-
-!! Configura este ~TiddlyWiki
+!! Configurar este ~TiddlyWiki
 
 <div class="tc-control-panel">
 
@@ -21,4 +14,4 @@ Visita http://tiddlywiki.com/#GettingStarted para más información (en inglés)
 |<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
 </div>
 
-Consulta más opciones en el [[panel de control|$:/ControlPanel]]
+Vea más opciones en el [[panel de control|$:/ControlPanel]].
