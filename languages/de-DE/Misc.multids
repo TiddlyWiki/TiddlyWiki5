@@ -5,6 +5,7 @@ BinaryWarning/Prompt: Dieser Tiddler enthält binäre Daten.
 ClassicWarning/Hint: Dieser Tiddler wurde im TiddlyWiki Classic Format erstellt. Dieses Format ist nur teilweise kompatibel mit TiddlyWiki Version 5. Mehr Info finden Sie unter: http://tiddlywiki.com/static/Upgrading.html
 ClassicWarning/Upgrade/Caption: upgrade
 CloseAll/Button: alle schließen
+ColourPicker/Recent: Kürzlich:
 ConfirmCancelTiddler: Wollen Sie die Änderungen im Tiddler: "<$text text=<<title>>/>" verwerfen?
 ConfirmDeleteTiddler: Wollen Sie den Tiddler: "<$text text=<<title>>/>" löschen?
 ConfirmOverwriteTiddler: Tiddler: "<$text text=<<title>>/>" existiert! OK überschreibt den tiddler!
@@ -24,6 +25,7 @@ InternalJavaScriptError/Hint: Es tut uns leid, aber bitte starten Sie Ihr Tiddly
 InvalidFieldName: Das Feld: "<$text text=<<fieldName>>/>" enthält illegale Zeichen. Felder müssen klein geschrieben werden. Erlaubte Sonderzeichen sind: Zahlen, Unterstrich (`_`), Minus (`-`) und Punkt (`.`).
 LazyLoadingWarning: <p>Lade externe Datei von ''<$text text={{!!_canonical_uri}}/>''</p><p>Wenn diese Meldung nicht automatisch gelöscht wird, dann verwenden Sie wahrscheinlich einen Browser der diese Funktion nicht unterstützt. Siehe http://tiddlywiki.com/#ExternalText</p>
 MissingTiddler/Hint: Fehlender Tiddler "<$text text=<<currentTiddler>>/>" - klicken Sie {{$:/core/images/edit-button}} um ihn zu erzeugen.
+No: Nein
 OfficialPluginLibrary: Offizielles ~TiddlyWiki Plugin-Verzeichnis
 OfficialPluginLibrary/Hint: Offizielles ~TiddlyWiki Plugin-Verzeichnis auf tiddlywiki.com. Plugin, Themes und Sprach Dateien werden vom "core team" gewartet.
 PluginReloadWarning: Das Wiki muss gespeichert {{$:/core/ui/Buttons/save-wiki}} und neu gladen {{$:/core/ui/Buttons/refresh}} werden, damit die Plugins ausgeführt werden.
@@ -36,3 +38,4 @@ TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
 Tiddler/DateFormat: DDth MMM YYYY um 0hh:0mm
 UnsavedChangesWarning: TiddlyWiki wurde geändert, aber noch nicht gespeichert!
+Yes: Ja
