@@ -50,4 +50,8 @@ TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
 Tiddler/DateFormat: DDth MMM YYYY um 0hh:0mm
 UnsavedChangesWarning: TiddlyWiki wurde geändert, aber noch nicht gespeichert!
+<<<<<<< 8d35178bc45fdf150f6f165650febca4be98180c
 Yes: Ja
+=======
+Yes: Ja
+>>>>>>> new german text elements
