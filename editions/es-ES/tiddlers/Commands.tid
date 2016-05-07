@@ -1,0 +1,11 @@
+caption: Comandos Node.js
+created: 20150117174359000
+es-title: Comandos en Node.js
+modified: 20160507043151318
+tags: Concepts Reference
+title: Commands
+type: text/vnd.tiddlywiki
+
+Un <<.def comando>> es una de las siguientes palabras, escritas con el prefijo `--`, usada como opción en la línea de comandos para indicar a [[TiddlyWiki en Node.js|TiddlyWiki on Node.js]] qué acción se desea.
+
+<<list-links "[tag[Commands]]">>
