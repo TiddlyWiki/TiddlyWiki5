@@ -27,6 +27,19 @@ EditorTypes/Hint: Diese Tiddler definieren, welcher Editor für bestimmte Tiddle
 EditorTypes/Type/Caption: MIME-Type
 Info/Caption: Info
 Info/Hint: Informationen über dieses TiddlyWiki
+KeyboardShortcuts/Add/Prompt: Tastenkürzel hier eingeben
+KeyboardShortcuts/Add/Caption: Tastenkürzel erstellen
+KeyboardShortcuts/Caption: Tastenkürzel
+KeyboardShortcuts/Hint: Tastenkürzel Zuweisungen bearbeiten
+KeyboardShortcuts/NoShortcuts/Caption: Keine Tastenkürzel Zusweisungen vorhanden
+KeyboardShortcuts/Remove/Hint: Löschen eines Tastenkürzels
+KeyboardShortcuts/Platform/All: Alle Plattformen
+KeyboardShortcuts/Platform/Mac: Nur Macintosh
+KeyboardShortcuts/Platform/NonMac: Alle Plattformen, außer Macintosh
+KeyboardShortcuts/Platform/Linux: Nur Linux
+KeyboardShortcuts/Platform/NonLinux: Alle Plattformen, außer Linux
+KeyboardShortcuts/Platform/Windows: Nur Windows
+KeyboardShortcuts/Platform/NonWindows: Alle Plattformen, außer Windows
 LoadedModules/Caption: Geladene Module
 LoadedModules/Hint: Hier werden die geladenen Module und ihre Quelltext-Komponenten angezeigt. Kursiv hervorgehobene Tiddler haben keinen Quelltext. Sie werden während des Boot-Prozesses (Aufrufen des Tiddlywikis) erstellt.
 Palette/Caption: Palette
@@ -136,6 +149,8 @@ Toolbars/EditToolbar/Hint: Auswählen, welche Buttons im "Edit Modus" angezeigt 
 Toolbars/Hint: Auswählen, welche "Toolbar Button" angezeigt werden
 Toolbars/PageControls/Caption: Page Toolbar
 Toolbars/PageControls/Hint: Auswählen, welche Buttons im Hauptmenü angezeigt werden:
+Toolbars/EditorToolbar/Caption: Editor Toolbar
+Toolbars/EditorToolbar/Hint: Auswählen, welche Editorbuttons angezeigt werden sollen. Manche Buttons sind vom Tiddler-Typ abhängig und werden eventuell ausgeblendet.
 Toolbars/ViewToolbar/Caption: View Toolbar
 Toolbars/ViewToolbar/Hint: Auswählen, welche Buttons im "View Modus" angezeigt werden:
 Tools/Download/Full/Caption: Herunterladen des ''gesamten Wikis''

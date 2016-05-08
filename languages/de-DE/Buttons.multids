@@ -62,6 +62,10 @@ NewJournal/Caption: Neues Journal
 NewJournal/Hint: Erstelle einen neuen Journal-Tiddler
 NewJournalHere/Caption: Neues Journal hier
 NewJournalHere/Hint: Erstelle ein neues Journal der mit diesem getaggt ist
+NewImage/Caption: Neues Bild
+NewImage/Hint: Erstelle ein neues Bild
+NewMarkdown/Caption: Neuer Markdown Tiddler
+NewMarkdown/Hint: Erstelle einen neuen "Markdown" Tiddler
 NewTiddler/Caption: Neuer Tiddler
 NewTiddler/Hint: Erstelle einen neuen Tiddler
 OpenWindow/Caption: Öffne in neuem Fenster
@@ -88,3 +92,79 @@ TagManager/Caption: Tag-Manager
 TagManager/Hint: Öffne den Tag-Manager
 Theme/Caption: Theme
 Theme/Hint: Theme auswählen
+Bold/Caption: Fett
+Bold/Hint: Ausgewählten Text fett darstellen
+Clear/Caption: Löschen
+Clear/Hint: Bild mit Hintergrund Farbe löschen
+EditorHeight/Caption: Editor Höhe
+EditorHeight/Caption/Auto: Editor Höhe an Inhalt anpassen
+EditorHeight/Caption/Fixed: Fixe Höhe:
+EditorHeight/Hint: Wählen Sie die Höhe des Editors
+Excise/Caption: Verschieben
+Excise/Caption/Excise: Text verschieben
+Excise/Caption/MacroName: Makro Name:
+Excise/Caption/NewTitle: Titel des neuen Tiddlers:
+Excise/Caption/Replace: Ersetze den verschobenen Text mit:
+Excise/Caption/Replace/Macro: Makro
+Excise/Caption/Replace/Link: Link
+Excise/Caption/Replace/Transclusion: Transklusion
+Excise/Caption/Tag: Tagge den neuen Tiddler mit dem Titel des aktuellen Tiddlers
+Excise/Caption/TiddlerExists: Warnung: Tiddler existiert bereits!
+Excise/Hint: Verschiebe den ausgewählten Text in einen neuen Tiddler
+Heading1/Caption: Überschrift 1
+Heading1/Hint: Überschrift 1 auf die Zeilen anwenden, die eine Auswahl enthalten
+Heading2/Caption: Überschrift 2
+Heading2/Hint: Überschrift 2 auf die Zeilen anwenden, die eine Auswahl enthalten
+Heading3/Caption: Überschrift 3
+Heading3/Hint: Überschrift 3 auf die Zeilen anwenden, die eine Auswahl enthalten
+Heading4/Caption: Überschrift 4
+Heading4/Hint: Überschrift 4 auf die Zeilen anwenden, die eine Auswahl enthalten
+Heading5/Caption: Überschrift 5
+Heading5/Hint: Überschrift 5 auf die Zeilen anwenden, die eine Auswahl enthalten
+Heading6/Caption: Überschrift 6
+Heading6/Hint: Überschrift 6 auf die Zeilen anwenden, die eine Auswahl enthalten
+Italic/Caption: Kursiv
+Italic/Hint: Kursiv auf den selektierten Text anwenden
+LineWidth/Caption: Zeilen Länge
+LineWidth/Hint: Wählen Sie die Zeilenlänge
+Link/Caption: Link
+Link/Hint: Erstellt einen Wiki-Link
+ListBullet/Caption: Punkteliste
+ListBullet/Hint: Zeilen, die eine Markierung enthalten, werden als Punkteliste formatiert
+ListNumber/Caption: Aufzählungsliste
+ListNumber/Hint: Zeilen, die eine Markierung enthalten, werden als Auzählungsliste formatiert
+MonoBlock/Caption: Dicktengleicher Textblock
+MonoBlock/Hint: Alle Zeilen die eine Markierung enthalten, werden als Textblock mit einer dicktengleichen Schrift formatiert
+MonoLine/Caption: Dicktengleich
+MonoLine/Hint: Alle markierten Zeichen werden mit einer dicktengleichen Schrift formatiert
+Opacity/Caption: Transparenz
+Opacity/Hint: Wählen sie die Transparenz
+Paint/Caption: Malfarbe
+Paint/Hint: Wählen Sie die Malfarbe
+Picture/Caption: Bild
+Picture/Hint: Bild einfügen
+Preview/Caption: Vorschau
+Preview/Hint: Vorschau einblenden
+PreviewType/Caption: Vorschau Typ
+PreviewType/Hint: Wählen Sie den Vorschau Typ
+Quote/Caption: Zitat
+Quote/Hint: Alle Zeilen, die eine Markierung enthalten werden als Referenz/Zitat formatiert
+Size/Caption: Bildgröße
+Size/Caption/Height: Höhe:
+Size/Caption/Resize: Bildgröße ändern
+Size/Caption/Width: Weite:
+Size/Hint: Bildweite ändern
+Stamp/Caption: Stempel
+Stamp/Caption/New: Eigenen Stempel erstellen
+Stamp/Hint: Textschnipsel hier einfügen
+Stamp/New/Title: Name, der im Menü angezeigt werden soll
+Stamp/New/Text: Text des Schnipsels. (Nicher vergessen eine aussagekräftigen Titel zu verwenden)
+Strikethrough/Caption: Durchgestrichen
+Strikethrough/Hint: Ausgewählten Text durchgestrichen darstgellen
+Subscript/Caption: Tiefsgestellt
+Subscript/Hint: Ausgewählten Text tiefgestellt darstellen
+Superscript/Caption: Hochgestellt
+Superscript/Hint: Ausgewählten Text hochgestellt darstellen
+Underline/Caption: Unterstreichen
+Underline/Hint: Ausgewählten Text unterstrichen darstellen
+
