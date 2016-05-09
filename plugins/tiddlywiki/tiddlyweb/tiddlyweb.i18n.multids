@@ -1,0 +1,10 @@
+title: $:/language/plugins/tiddlywiki/tiddlyweb/
+
+HostConfiguration: Host configuration
+HostConfiguration/Hint: for example, `$protocol$//$host$/folder`, where `$protocol$` is replaced by the protocol (typically `http` or `https`), and `$host$` by the host name
+LoggedInAs: Logged in as {{$:/status/UserName}}
+Login: Login
+LoginTo: Log in to ~TiddlyWeb
+Logout: Logout
+Refresh: <$button message="tm-server-refresh">Refresh</$button> to fetch changes from the server immediately
+Server: Server

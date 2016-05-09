@@ -1,0 +1,10 @@
+title: $:/language/plugins/tiddlywiki/tiddlyweb/
+
+HostConfiguration: 호스트 환경 설정
+HostConfiguration/Hint: 예를 들어, `$protocol$//$host$/folder`, `$protocol$`은 프로토콜 (전형적으로 `http` 또는 `https`)로 바뀌고, `$host$`는 호스트 이름으로 바뀝니다
+LoggedInAs: {{$:/status/UserName}} 사용자로 로그인됨
+Login: 로그인
+LoginTo: 티들리웹에 로그인
+Logout: 로그아웃
+Refresh: 즉시 서버에서의 바뀜을 얻으려면 <$button message="tm-server-refresh">새로 고침</$button>하세요
+Server: 서버

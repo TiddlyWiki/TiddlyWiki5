@@ -1,20 +1,20 @@
 title: $:/plugins/tiddlywiki/tiddlyweb/ServerControlPanel
-caption: Server
+caption: {{$:/language/plugins/tiddlywiki/tiddlyweb/Server}}
 tags: $:/tags/ControlPanel
 
 <$reveal state="$:/status/IsLoggedIn" type="nomatch" text="yes">
-Log in to ~TiddlyWeb: <$button message="tm-login">Login</$button>
+{{$:/language/plugins/tiddlywiki/tiddlyweb/LoginTo}}: <$button message="tm-login">{{$:/language/plugins/tiddlywiki/tiddlyweb/Login}}</$button>
 </$reveal>
 <$reveal state="$:/status/IsLoggedIn" type="match" text="yes">
-Logged in as {{$:/status/UserName}} <$button message="tm-logout">Logout</$button>
+{{$:/language/plugins/tiddlywiki/tiddlyweb/LoggedInAs}} <$button message="tm-logout">{{$:/language/plugins/tiddlywiki/tiddlyweb/Logout}}</$button>
 </$reveal>
 
 ----
 
-Host configuration: <$edit-text tiddler="$:/config/tiddlyweb/host" tag="input" default=""/>
+{{$:/language/plugins/tiddlywiki/tiddlyweb/HostConfiguration}}: <$edit-text tiddler="$:/config/tiddlyweb/host" tag="input" default=""/>
 
-<blockquote>//for example, `$protocol$//$host$/folder`, where `$protocol$` is replaced by the protocol (typically `http` or `https`), and `$host$` by the host name//</blockquote>
+<blockquote>//{{$:/language/plugins/tiddlywiki/tiddlyweb/HostConfiguration/Hint}}//</blockquote>
 
 ----
 
-<$button message="tm-server-refresh">Refresh</$button> to fetch changes from the server immediately
+{{$:/language/plugins/tiddlywiki/tiddlyweb/Refresh}}
