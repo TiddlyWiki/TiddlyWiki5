@@ -1,0 +1,4 @@
+title: $:/language/plugins/tiddlywiki/stacked-view/
+
+FanHeight: Set the [[fan separation|$:/config/StackedStoryViewFanHeight]]
+StackedView: Stacked View

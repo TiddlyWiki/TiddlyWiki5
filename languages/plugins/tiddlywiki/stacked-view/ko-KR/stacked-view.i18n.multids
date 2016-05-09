@@ -1,0 +1,4 @@
+title: $:/language/plugins/tiddlywiki/stacked-view/
+
+FanHeight: [[팬 간격|$:/config/StackedStoryViewFanHeight]] 설정
+StackedView: 쌓은 보기

@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/plugins/tiddlywiki/stacked-view/ko-KR",
+	"name": "ko-KR",
+	"plugin-type": "language",
+	"description": "Korean (Korea Republic) for Stacked card storyview",
+	"author": "Myeongjin",
+	"core-version": ">=5.1.13"
+}

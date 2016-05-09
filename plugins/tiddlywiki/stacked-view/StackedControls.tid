@@ -1,8 +1,8 @@
 title: $:/plugins/tiddlywiki/stacked-view/StackedControls
-caption: Stacked View
+caption: {{$:/language/plugins/tiddlywiki/stacked-view/StackedView}}
 tags: $:/tags/SideBar
 
-Set the [[fan separation|$:/config/StackedStoryViewFanHeight]]:
+{{$:/language/plugins/tiddlywiki/stacked-view/FanHeight}}:
 
 * <$button set="$:/config/StackedStoryViewFanHeight" setTo="-10">-10</$button>
 * <$button set="$:/config/StackedStoryViewFanHeight" setTo="0">0</$button>
