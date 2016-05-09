@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/internals/EditTemplate/body/preview/parse-tree
 tags: $:/tags/EditPreview
 list-after: $:/core/ui/EditTemplate/body/preview/output
-caption: parse tree
+caption: {{$:/language/plugins/tiddlywiki/internals/ParseTree}}
 
 \define preview(mode)
 <$wikify name="preview-text" text={{!!text}} type={{!!type}} mode="$mode$" output="parsetree">

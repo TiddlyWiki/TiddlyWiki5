@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/plugins/tiddlywiki/internals/ko-KR",
+	"name": "ko-KR",
+	"plugin-type": "language",
+	"description": "Korean (Korea Republic) for Tools for exploring the internals of TiddlyWiki",
+	"author": "Myeongjin",
+	"core-version": ">=5.1.13"
+}

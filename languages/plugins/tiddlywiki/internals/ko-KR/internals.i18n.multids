@@ -1,0 +1,8 @@
+title: $:/language/plugins/tiddlywiki/internals/
+
+Mode: 모드
+Mode/Block: 블럭
+Mode/Inline: 인라인
+ParseTree: 구문 분석 트리
+RawHTML: 원본 HTML
+WidgetTree: 위젯 트리

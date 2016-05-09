@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/internals/EditTemplate/body/preview/widget-tree
 tags: $:/tags/EditPreview
-caption: widget tree
+caption: {{$:/language/plugins/tiddlywiki/internals/WidgetTree}}
 list-after: $:/plugins/tiddlywiki/internals/EditTemplate/body/preview/parse-tree
 
 \define preview(mode)
