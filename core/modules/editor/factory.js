@@ -16,6 +16,7 @@ var DEFAULT_MIN_TEXT_AREA_HEIGHT = "100px"; // Minimum height of textareas in pi
 
 // Configuration tiddlers
 var HEIGHT_MODE_TITLE = "$:/config/TextEditor/EditorHeight/Mode";
+var ENABLE_TOOLBAR_TITLE = "$:/config/TextEditor/EnableToolbar";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
@@ -196,7 +197,8 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		// Make the child widgets
 		this.makeChildWidgets();
 		// Determine whether to show the toolbar
-		this.editShowToolbar = !!(this.children && this.children.length > 0);
+		this.editShowToolbar = this.wiki.getTiddlerText(ENABLE_TOOLBAR_TITLE,"yes");
+		this.editShowToolbar = (this.editShowToolbar === "yes") && !!(this.children && this.children.length > 0);
 	};
 
 	/*
@@ -205,7 +207,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedTiddlers[HEIGHT_MODE_TITLE]) {
+		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
 			this.refreshSelf();
 			return true;
 		} else if(changedTiddlers[this.editTitle]) {
@@ -213,7 +215,11 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			this.updateEditor(editInfo.value,editInfo.type);
 		}
 		this.engine.fixHeight();
-		return this.refreshChildren(changedTiddlers);
+		if(this.editShowToolbar) {
+			return this.refreshChildren(changedTiddlers);			
+		} else {
+			return false;
+		}
 	};
 
 	/*

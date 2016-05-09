@@ -99,6 +99,9 @@ Settings/CamelCase/Caption: Camel Case Wiki Links
 Settings/CamelCase/Hint: You can globally disable automatic linking of ~CamelCase phrases. Requires reload to take effect
 Settings/CamelCase/Description: Enable automatic ~CamelCase linking
 Settings/Caption: Settings
+Settings/EditorToolbar/Caption: Editor Toolbar
+Settings/EditorToolbar/Hint: Enable or disable the editor toolbar:
+Settings/EditorToolbar/Description: Show editor toolbar
 Settings/Hint: These settings let you customise the behaviour of TiddlyWiki.
 Settings/NavigationAddressBar/Caption: Navigation Address Bar
 Settings/NavigationAddressBar/Hint: Behaviour of the browser address bar when navigating to a tiddler:
