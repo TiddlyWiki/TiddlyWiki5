@@ -12,10 +12,12 @@ title: $:/plugins/tiddlywiki/translators/templates/Misc.multids
 -[all[tiddlers]prefix[$:/language/Import/]]
 -[all[tiddlers]prefix[$:/language/Modals/]]
 -[all[tiddlers]prefix[$:/language/Notifications/]]
+-[all[tiddlers]prefix[$:/language/plugins/]]
 -[all[tiddlers]prefix[$:/language/RelativeDate/]]
 -[all[tiddlers]prefix[$:/language/Search/]]
 -[all[tiddlers]prefix[$:/language/SideBar/]]
 -[all[tiddlers]prefix[$:/language/Snippets/]]
+-[all[tiddlers]prefix[$:/language/themes/]]
 -[all[tiddlers]prefix[$:/language/ThemeTweaks/]]
 -[all[tiddlers]prefix[$:/language/TiddlerInfo/]]
 +[sort[title]]||$:/plugins/tiddlywiki/translators/templates/filtered-multids}}
