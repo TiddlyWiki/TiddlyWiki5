@@ -1,0 +1,12 @@
+title: $:/language/plugins/tiddlywiki/upgrade/
+
+Done: <p>다른 이들이 데이터에 접근할 수 있는 것으로부터 보호하려면 이 브라우저 창을 닫으세요.</p><p>도움말 및 지원에 대해서는, [[티들리위키 토론 포럼|http://groups.google.com/group/TiddlyWiki]]을 방문하세요.</p>
+DragHere: <p>여기에 업그레이드하려는 티들리위키 파일을 드래그하거나</p><p>파일을 선택하려면 클릭하세요</p>
+Hint: <p>당신의 데이터는 브라우저에 남지 않을 것입니다. 이 업그레이더를 오프라인으로 사용하려면 <a href="#" download="upgrade.html" rel="noopener noreferrer">다운로드</a>하세요</p><p>링크를 클릭하는 것이 작동하지 않으면, 링크를 오른쪽 클릭하여 같은 방법으로 저장하세요.</p><p>브라우저가 다운로드를 시작하기 전에 다운로드를 허용할지를 물어볼 수도 있습니다.</p>
+Save: 업그레이드된 티들리위키 파일 저장
+Upgrade: 업그레이드
+UpgradeCompleted: <p>업그레이드를 완료했습니다. 업그레이드된 티들리위키 파일을 저장하려면 아래 버튼을 클릭하세요</p><p>이전 티들리위키 파일의 안전한 복사본을 유지하고 있는지 확인하세요.</p>
+UpgradeWizard: 티들리위키 업그레이드 마법사
+Version: 버전 <<version>>
+WillBeEncrypted: 파일이 기존 비밀번호로 암호화될 것입니다.
+WillBeIncluded: 다음 티들러는 업그레이드에 포함될 것입니다

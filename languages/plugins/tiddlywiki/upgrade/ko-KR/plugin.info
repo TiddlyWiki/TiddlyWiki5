@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/plugins/tiddlywiki/upgrade/ko-KR",
+	"name": "ko-KR",
+	"plugin-type": "language",
+	"description": "Korean (Korea Republic) for Upgrade system for TiddlyWiki versions",
+	"author": "Myeongjin",
+	"core-version": ">=5.1.13"
+}
