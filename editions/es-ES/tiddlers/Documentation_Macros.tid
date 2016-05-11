@@ -1,7 +1,7 @@
 caption: Macros para documentación
 created: 20150110182600000
 es-title: Macros para documentación
-modified: 20160427093752928
+modified: 20160511154246355
 tags: [[Improving TiddlyWiki Documentation]]
 title: Documentation Macros
 type: text/vnd.tiddlywiki
@@ -115,7 +115,6 @@ Las siguientes son macros utilizadas en la documentación de ~TiddlyWiki. Sus no
 |Settings |<<.controlpanel-tab Settings>> |
 |Saving |<<.controlpanel-tab Saving>> |
 |Plugins |<<.controlpanel-tab Plugins>> |
-|Theme-tweaks|<<.controlpanel-tab Theme-tweaks>>|
 
 !!!Parámetros de .advancedsearch-tab
 

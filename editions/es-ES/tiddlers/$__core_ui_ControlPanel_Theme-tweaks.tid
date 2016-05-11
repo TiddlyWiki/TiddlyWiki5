@@ -1,8 +1,0 @@
-caption: Ajustes del tema
-created: 20160427085903119
-modified: 20160427093501241
-tags: $:/tags/ControlPanel
-title: $:/core/ui/ControlPanel/Theme-tweaks
-type: text/vnd.tiddlywiki
-
-{{$:/themes/tiddlywiki/vanilla/themetweaks}}
