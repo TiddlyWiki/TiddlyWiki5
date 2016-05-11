@@ -1,0 +1,11 @@
+caption: Acerca de ~TiddlyWiki
+created: 20140912145139340
+es-title: Acerca de TiddlyWiki
+modified: 20160511151921526
+tags: TableOfContents
+title: About
+type: text/vnd.tiddlywiki
+
+Información sobre quiénes y cómo hacemos ~TiddlyWiki:
+
+<<list-links "[tag[About]]">>

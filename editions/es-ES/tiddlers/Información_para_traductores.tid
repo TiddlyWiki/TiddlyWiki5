@@ -1,6 +1,6 @@
 created: 20141115212945847
 list-after: RoadMap
-modified: 20160411173928986
+modified: 20160511152131764
 tags: $:/tags/SideBar About
 title: Información para traductores
 type: text/vnd.tiddlywiki
@@ -9,7 +9,8 @@ Para contribuir con esta traducción de la documentación de //tiddlywiki.com//,
 Evite los tiddlers etiquetados como "en proceso", porque como la etiqueta indica, ya hay gente trabajando en ellos. A continuación:
 
 *Si trabaja en Node.js con un //clon de Git// de la edición `es_ES`, puede traducir a partir de su clon, respetando únicamente el par de indicaciones que se dan más abajo y proponer un //pull request// en ~GitHub, ayudándose, si hiciera falta, de la [[documentación|Improving TiddlyWiki Documentation]].
-*Si no, traduzca directamente, bien en línea, bien en una copia de la página (**incluir link**). Cuando termine:
+*Si no, traduzca directamente, bien en línea, bien en una copia de la página http://tw5es-es.tiddlyspot.com. 
+*Cuando termine:
 **exporte su trabajo a [[un fichero JSON|Exporter un sous-ensemble de tiddlers]]
 **envíe el archivo a paulus-arroba-alamier-punto-com para que pueda efectuar el correspondiente //pull request// en ~GitHub, o bien
 **cuelgue el archivo en algún lugar accesible (en Dropbox, por ejemplo) y publique el enlace en el [[grupo de TiddlyWiki|https://groups.google.com/forum/#!forum/tiddlywiki]]
