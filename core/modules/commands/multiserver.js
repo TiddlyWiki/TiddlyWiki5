@@ -21,7 +21,7 @@ if($tw.node) {
 }
 
 exports.info = {
-	name: "testing",
+	name: "multiserver",
 	synchronous: true
 };
 
@@ -96,8 +96,8 @@ function ComplexServer(servers) {
 	this.servers = servers || {};
 }
 
-ComplexServer.prototype.addServer = function(prefix, server) {
-    this.servers[prefix] = server;
+ComplexServer.prototype.addServer = function(server) {
+    this.servers[server.get('pathprefix')] = server;
 }
 
 ComplexServer.prototype.listen = function(port,host) {
@@ -108,15 +108,18 @@ ComplexServer.prototype.listen = function(port,host) {
 	    var server = undefined,
 	        pathname = url.parse(request.url).pathname;
 	    for (var k in self.servers) {
-	        console.log(k);
-	        if (pathname.substr(0,k.length + 2) === '/' + k + '/') {
+	        if (pathname.substr(0,k.length + 1) ===  k + '/') {
 	            server = self.servers[k];
             }
 	    }
 		if(!server) {
-		    console.log("pathname" + pathname);
-		    console.log("Failed");
 			response.writeHead(404);
+			response.write("<html><body>Wiki " + pathname + " does not exist. <br />");
+			response.write("Known wikis are. <br />");
+			for (var k in self.servers){
+			    response.write("<a href='" + k + "/'>" + k + "/</a><br />");
+			}
+			response.write("</body></html>");
 			response.end();
 			return;
 		}
@@ -306,19 +309,9 @@ var make_server = function(wiki) {
 
 var Command = function(params,commander,callback) {
 	this.params = params;
-	this.commander = commander;
-	this.callback = callback;
 	// Set up server
-	this.server1 = make_server(this.commander.wiki)
-	this.server2 = make_server(this.commander.wiki)
-	this.complex = new ComplexServer({'wiki': this.server1})
-	this.complex.addServer('wiki2', this.server2)
-};
-
-Command.prototype.execute = function() {
-	if(!$tw.boot.wikiTiddlersPath) {
-		$tw.utils.warning("Warning: Wiki folder '" + $tw.boot.wikiPath + "' does not exist or is missing a tiddlywiki.info file");
-	}
+	this.complex = new ComplexServer()	
+	
 	var port = this.params[0] || "8080",
 		rootTiddler = this.params[1] || "$:/core/save/all",
 		renderType = this.params[2] || "text/plain",
@@ -326,23 +319,35 @@ Command.prototype.execute = function() {
 		username = this.params[4],
 		password = this.params[5],
 		host = this.params[6] || "127.0.0.1",
-		pathprefix = this.params[7];
-	this.server1.set({
-		rootTiddler: rootTiddler,
-		renderType: renderType,
-		serveType: serveType,
-		username: username,
-		password: password,
-		pathprefix: "/wiki"
-	});
-	this.server2.set({
-		rootTiddler: rootTiddler,
-		renderType: renderType,
-		serveType: serveType,
-		username: username,
-		password: password,
-		pathprefix: "/wiki2"
-	});
+		files = require(this.params[7]);
+	
+	console.log(files);
+	for(var k in files){
+	    var $tw = require("tiddlywiki/boot/boot").TiddlyWiki();
+        $tw.boot.argv = ['nodejs', '--load', files[k]];
+        $tw.boot.boot();
+	    var server = make_server($tw.wiki);
+
+	    server.set({
+		    rootTiddler: rootTiddler,
+		    renderType: renderType,
+		    serveType: serveType,
+		    username: username,
+		    password: password,
+		    pathprefix: "/" + k
+	    });
+	    this.complex.addServer(server);
+	}
+};
+
+Command.prototype.execute = function() {
+	if(!$tw.boot.wikiTiddlersPath) {
+		$tw.utils.warning("Warning: Wiki folder '" + $tw.boot.wikiPath + "' does not exist or is missing a tiddlywiki.info file");
+	}
+
+	var port = this.params[0] || "8080",
+		host = this.params[6] || "127.0.0.1";
+
 	this.complex.listen(port,host);
 	console.log("Serving on " + host + ":" + port);
 	console.log("(press ctrl-C to exit)");
@@ -354,5 +359,7 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
+
+
 
 })();
