@@ -479,7 +479,7 @@ button svg.tc-image-button, button .tc-image-button img {
 }
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
-	
+
 	.tc-unfold-banner {
 		position: static;
 		width: calc(100% + 59px);
@@ -969,7 +969,7 @@ html body.tc-body.tc-single-tiddler-window {
 */
 
 .tc-editor-toolbar {
-	margin-top: 8px;	
+	margin-top: 8px;
 }
 
 .tc-editor-toolbar button {
@@ -978,17 +978,17 @@ html body.tc-body.tc-single-tiddler-window {
 	fill: <<colour tiddler-controls-foreground-selected>>;
 	border-radius: 4px;
 	padding: 3px;
-	margin: 2px 0;
+	margin: 2px 0 2px 4px;
 }
 
 .tc-editor-toolbar button.tc-text-editor-toolbar-item-adjunct {
-	margin-left: -3px;
+	margin-left: 1px;
 	width: 1em;
-	border-radius: 8px;	
+	border-radius: 8px;
 }
 
 .tc-editor-toolbar button.tc-text-editor-toolbar-item-start-group {
-	margin-left: 7px;
+	margin-left: 11px;
 }
 
 .tc-editor-toolbar button.tc-selected {
@@ -1312,7 +1312,7 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-drop-down .tc-prompt {
-	padding: 0 14px;	
+	padding: 0 14px;
 }
 
 .tc-drop-down .tc-chooser {
