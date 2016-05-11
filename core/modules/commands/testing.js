@@ -102,23 +102,40 @@ ComplexServer.prototype.addServer = function(prefix, server) {
 
 ComplexServer.prototype.listen = function(port,host) {
 	var self = this;
-	console.log(Object.keys(self));
 	http.createServer(function(request,response) {
+	    
+	    // Determine which server this is based on the prefix
+	    var server = undefined,
+	        pathname = url.parse(request.url).pathname;
+	    for (var k in self.servers) {
+	        console.log(k);
+	        if (pathname.substr(0,k.length + 2) === '/' + k + '/') {
+	            server = self.servers[k];
+            }
+	    }
+		if(!server) {
+		    console.log("pathname" + pathname);
+		    console.log("Failed");
+			response.writeHead(404);
+			response.end();
+			return;
+		}
 	    
 	
 		// Compose the state object
 		var state = {};
-		state.wiki = self.servers['/wiki'].wiki;
-		state.server = self.servers['/wiki'];
 		state.urlInfo = url.parse(request.url);
+		state.wiki = server.wiki;
+		state.server = server;
+		
 		// Find the route that matches this path
-		var route = self.servers['/wiki'].findMatchingRoute(request,state);
+		var route = server.findMatchingRoute(request,state);
 		// Check for the username and password if we've got one
-		var username = self.servers['/wiki'].get("username"),
-			password = self.servers['/wiki'].get("password");
+		var username = server.get("username"),
+			password = server.get("password");
 		if(username && password) {
 			// Check they match
-			if(self.servers[0].checkCredentials(request,username,password) !== "ALLOWED") {
+			if(server.checkCredentials(request,username,password) !== "ALLOWED") {
 				var servername = state.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5";
 				response.writeHead(401,"Authentication required",{
 					"WWW-Authenticate": 'Basic realm="Please provide your username and password to login to ' + servername + '"'
@@ -292,9 +309,10 @@ var Command = function(params,commander,callback) {
 	this.commander = commander;
 	this.callback = callback;
 	// Set up server
-	this.server = make_server(this.commander.wiki)
-	this.complex = new ComplexServer({'/wiki': this.server})
-	this.complex.addServer('/wiki', this.server)
+	this.server1 = make_server(this.commander.wiki)
+	this.server2 = make_server(this.commander.wiki)
+	this.complex = new ComplexServer({'wiki': this.server1})
+	this.complex.addServer('wiki2', this.server2)
 };
 
 Command.prototype.execute = function() {
@@ -309,13 +327,21 @@ Command.prototype.execute = function() {
 		password = this.params[5],
 		host = this.params[6] || "127.0.0.1",
 		pathprefix = this.params[7];
-	this.server.set({
+	this.server1.set({
 		rootTiddler: rootTiddler,
 		renderType: renderType,
 		serveType: serveType,
 		username: username,
 		password: password,
 		pathprefix: "/wiki"
+	});
+	this.server2.set({
+		rootTiddler: rootTiddler,
+		renderType: renderType,
+		serveType: serveType,
+		username: username,
+		password: password,
+		pathprefix: "/wiki2"
 	});
 	this.complex.listen(port,host);
 	console.log("Serving on " + host + ":" + port);
