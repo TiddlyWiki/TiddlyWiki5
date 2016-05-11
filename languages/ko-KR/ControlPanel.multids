@@ -100,6 +100,9 @@ Settings/CamelCase/Hint: ~CamelCase 어구를 자동으로 링크하는 것을 �
 Settings/Caption: 설정
 Settings/DefaultSidebarTab/Caption: 기본 사이드바 탭
 Settings/DefaultSidebarTab/Hint: 기본적으로 보여지는 사이드바 탭을 지정합니다
+Settings/EditorToolbar/Caption: 편집기 도구 모음
+Settings/EditorToolbar/Description: 편집기 도구 모음 보이기
+Settings/EditorToolbar/Hint: 편집기 도구 모음을 활성화하거나 비활성화합니다:
 Settings/Hint: 이 설정은 TiddlyWiki의 동작을 사용자 지정할 수 있습니다.
 Settings/LinkToBehaviour/Caption: 티들러 열기 동작
 Settings/LinkToBehaviour/InsideRiver/Hint: 이야기 강 //안//에서 둘러보기
