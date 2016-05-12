@@ -1,0 +1,20 @@
+caption: Diagramas sintácticos
+created: 20150105133800000
+es-title: Diagramas sintácticos
+modified: 20160420150832016
+title: Railroad Diagrams
+type: text/vnd.tiddlywiki
+
+Los <<.def "diagramas sintácticos">> o <<.word "de ferrocarril">> son una forma visual de explicar las reglas sintácticas de un lenguaje de programación. Para entenderlos, hay que leerlos como si fueran planos de metro. 
+
+Cada diagrama empieza a la izquierda y acaba a la derecha, así que simplemente sigue las líneas de principio a fin. Todas las líneas intermedias son igualmente válidas. A veces unas líneas saltan por encima de un elemento opcional, o vuelven sobre sí mismas, para indicar que ese elemento puede repetirse.
+
+<$railroad text="""
+inicio [:opcional] {reiterado +","} fin
+"""/>
+
+En este ejemplo, se incluye una coma entre cada iteración del elemento `reiterado`. El camino señalado con una coma va de derecha a izquierda y sólo puede se puede seguir pasando una primera vez por el elemento `reiterado`.
+
+Los caracteres en caja redonda son literales, es decir, que se refieren a sí mismos. Un nombre en caja rectangular, por el contrario, se refiere a otro diagrama sintáctico.
+
+Los diagramas sintácticos de la documentación de ~TiddlyWiki se generan con el plugin [[Railroad|Railroad Plugin]].

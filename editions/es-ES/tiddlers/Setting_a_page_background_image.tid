@@ -1,0 +1,29 @@
+caption: Fondos de página
+created: 20150417155912612
+es-title: Definir fondo de página
+modified: 20160427065343774
+tags: [[Customise TiddlyWiki]]
+title: Setting a page background image
+type: text/vnd.tiddlywiki
+
+# Importa la imagen como un tiddler. Consulta [[Images in WikiText]]
+
+#* También pueden usarse [[imágenes externas|ExternalImages]]
+
+# Abre el [[Panel de control|ControlPanel]] y la pestaña <<.em "Theme Tweaks">> en <<.controlpanel-tab "Appearance">>
+
+# Selecciona la imagen en el desplegable <<.word "Page background image">>
+
+# Establece <<.word "Page background image attachment">> como <<.word "Fixed to window">> para mantener la imagen fija y que el contenido se desplace sobre ella o como <<.word "Scroll with tiddlers">> para que se muevan simultáneamente.
+
+#* [[iPhone/iPad no soporta|http://stackoverflow.com/a/20444219]] el ajuste como imagen fija, por razones de rendimiento
+
+# Ajusta el tamaño de la imagen con <<.word "Page background image size">>:
+
+#* <<.word Auto>> hace que la imagen, si es necesario, forme mosaico para cubrir el fondo de la página 
+
+#* <<.word Cover>> ajusta la imagen de forma que cubra por completo el fondo de la página, lo que puede provocar que zonas de la imagen queden fuera de la vista.
+
+#* <<.word Contain>> hace que la imagen cambie su tamaño para ajustarse a los bordes de la página, lo que puede producir deformaciones en la imagen según sean sus dimensiones (p.ej, una imagen cuadrada se estirará horizontalmente de forma desproporcionada a su altura para encajar en una pantalla rectangular panorámica)
+
+De forma complementaria, puede ser necesario cambiar la <<.controlpanel-tab Palette>> de colores para mantener el nivel de legibilidad de la barra lateral. 

@@ -1,0 +1,11 @@
+caption: tm-browser-refresh
+created: 20140819110529062
+es-title: Mensaje: tm-browser-refresh
+modified: 20160415091241622
+tags: Messages
+title: WidgetMessage: tm-browser-refresh
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-browser-refresh` recarga la página, causando el reinicio de todos los plugins. No necesita ninguna propiedad del objeto `event`. 
+
+Este mensaje se genera con el ButtonWidget y se procesa en el núcleo.

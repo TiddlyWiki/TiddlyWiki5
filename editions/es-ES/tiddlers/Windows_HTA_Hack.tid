@@ -1,0 +1,16 @@
+created: 20131212223146250
+es-title: Ejecutar como aplicación HTA
+modified: 20160413103922670
+tags: [[Saving on InternetExplorer]]
+title: Windows HTA Hack
+type: text/vnd.tiddlywiki
+
+En Windows es posible convertir TiddlyWiki en aplicación local cambiando la extensión `.html` por `.hta` (HTML-Application).
+
+Con este cambio se permite que el módulo ''fsosaver'' use el ~FileSystemObject de ~ActiveX para guardar los cambios.
+
+Hay que tener presente que con este enfoque el archivo TiddlyWiki se guarda codificado en formato UTF-16, que tiene la desventaja de hacerlo el doble de grande que con la codificación habitual en UTF-8. SIn embargo, abrir el archivo y guardarlo por otro medio lo vuelve a codificar como UTF-8.
+
+En la Wikipedia encontrarás más detalles sobre las aplicaciones HTML o HTA: 
+
+http://en.wikipedia.org/wiki/HTML_Application

@@ -1,0 +1,9 @@
+caption: Escalable
+created: 20130822173400000
+es-title: Escalabilidad
+modified: 20160429055303277
+tags: Features
+title: Scalability
+type: text/vnd.tiddlywiki
+
+Puedes sentirte tentado de pensar que la arquitectura de [[página única|SinglePageApplication]] de ~TiddlyWiki lo hace inadecuado para grandes cantidades de datos. La verdad es que los usuarios de ~TiddlyWiki suelen trabajar sin problemas con archivos de 20 ó 30 Mb... y se han hecho experimentos satisfactorios con archivos de varios Gb. 

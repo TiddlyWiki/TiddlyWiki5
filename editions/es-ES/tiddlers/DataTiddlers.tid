@@ -1,0 +1,34 @@
+caption: Tiddlers de datos
+created: 20130829164700000
+es-title: Tiddlers de datos
+modified: 20160511055335042
+tags: Concepts
+title: DataTiddlers
+type: text/vnd.tiddlywiki
+
+Un <<.def "tiddler de datos">> o <<.def DataTiddler>> es una base de datos en miniatura, contenida en un tiddler.
+
+Existen dos formatos estándar:
+
+* [[Diccionarios|DictionaryTiddlers]]
+* [[Tiddlers JSON|JSONTiddlers]]
+
+Se pueden definir otros formatos para obtener bloques de datos que se comporten como tiddlers de datos. 
+
+Para buscar un valor por su nombre, usa una [[Referencia textual|TextReference]]. Por ejemplo, si un [[diccionario|DictionaryTiddlers]] llamado `DiasdelMes` contiene:
+
+```
+oct:31
+nov:30
+dec:31
+```
+
+... entonces, `{{MonthDays##nov}}` devolverá el valor `30`.
+
+Lo mismo sucede si `DiasdelMes` es un [[tiddler JSON|JSONTiddlers]] con el siguiente contenido:
+
+```
+{"oct":31,"nov":30,"dec":31}
+```
+
+<<.tip "Nota: Sólo es posible recuperar datos por este medio de las propiedades inmediatas del objeto raíz de un tiddler JSON">>

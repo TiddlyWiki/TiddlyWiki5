@@ -1,0 +1,51 @@
+caption: Hojas de estilos
+created: 20140305091244145
+es-title: Uso de hojas de estilos
+modified: 20160428095328970
+tags: [[Customise TiddlyWiki]]
+title: Using Stylesheets
+type: text/vnd.tiddlywiki
+
+El primer paso para cambiar la apariencia de ~TiddlyWiki es elegir y aplicar uno de los temas disponibles o modificar la [[paleta de colores|ColourPalettes]].
+
+Además, pueden definirse [[hojas de estilos CSS|http://www.w3schools.com/css]] mediante la etiqueta <<.tag ~$:/Stylesheet>>. Intenta crear una hoja de estilos con el siguiente contenido para cambiar el actual color de fondo a rojo:
+
+```
+html body.tc-body {
+	background: red;
+}
+```
+
+! Puentear estilos del tema
+
+Las hojas personales de estilos se aplican independientemente de los estilos definidos por el tema. Por ello, a menudo es necesario que las reglas CSS de tu hoja de estilos sean más específicas que las del tema que quieres puentear. Por ejemplo, `html body.tc-body` es más específco que `body.tc-body`.
+
+! Tipo <<.word "estilos">>
+
+Normalmente es mejor definir como <<-field type>> el valor <<.place text/css>>. Así te aseguras de que ~TiddlyWiki entienda el contenido como hoja de estilos en texto plano y no aplique reglas de WikiText en su interpretación.
+
+Si necesitas usar macros y transclusiones en tu hoja de estilos, tendrás que usar el <<.field type>> por defecto `text/vnd.tiddlywiki`, permitiendo así el proceso de WikiText. Ahí va un ejemplo:
+
+```
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html
+
+body.tc-body pre {
+	<<box-shadow "inset 0 1px 0 #fff">>
+}
+```
+La directiva `\rules` al inicio restringe la aplicación de reglas WikiText a exclusivamente macros y transclusiones, lo que impide que accidentalmente se active cualquier otro proceso indeseado.
+
+Un tiddler de estilos se procesa de tal manera que primero se procesa como WikiText y, entonces, el resultado se aplica como CSS. Por lo tanto, se ignora todo tag HTML usado en los estilos. Así, por ejemplo, aquellos elementos HTML generados por RevealWidget no afectarán en absoluto al resultado. Por ese motivo pueden //envolverse// las reglas CSS en tags `<pre>` para mostrarlos como bloques de código, sin que afecten al proceso.
+
+```
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html
+
+<pre>body.tc-body pre {
+	<<box-shadow "inset 0 1px 0 #fff">>
+}
+</pre>
+```
+
+! Stylesheet Macros
+
+El núcleo de ~TiddlyWiki proporciona una serie de [[macros globales|Stylesheet Macros]], útiles para la construcción de hojas de estilos. 
