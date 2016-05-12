@@ -10,6 +10,7 @@ ConfirmCancelTiddler: "<$text text=<<title>>/>" 티들러의 바뀜을 버리겠
 ConfirmDeleteTiddler: "<$text text=<<title>>/>" 티들러를 삭제하겠습니까?
 ConfirmEditShadowTiddler: 섀도우티들러를 편집하려고 합니다. 어떠한 바뀜도 향후 업그레이드가 하찮지 않게 하는 기본 시스템을 덮어씁니다. "<$text text=<<title>>/>" 티들러를 편집하겠습니까?
 ConfirmOverwriteTiddler: "<$text text=<<title>>/>" 티들러를 덮어쓰겠습니까?
+Count: 횟수
 DefaultNewTiddlerTitle: 새 티들러
 DropMessage: 여기에 놓기 (또는 취소하려면 'Escape' 키 사용)
 Encryption/Cancel: 취소
@@ -34,6 +35,10 @@ OfficialPluginLibrary: 공식 ~TiddlyWiki 플러그인 라이브러리
 OfficialPluginLibrary/Hint: tiddlywiki.com에서의 공식 ~TiddlyWiki 플러그인 라이브러리입니다. 플러그인, 테마 및 언어 팩은 코어 팀이 유지 관리하고 있습니다.
 PluginReloadWarning: 플러그인의 바뀜을 적용할 수 있도록 하려면 저장 {{$:/core/ui/Buttons/save-wiki}}하고 나서 다시 불러오세요 {{$:/core/ui/Buttons/refresh}}
 RecentChanges/DateFormat: YYYY년 MMM DD일
+RecursiveTransclusion: 끼워넣기 위젯에서 재귀 끼워넣기 오류
+Syncer/ErrorRetrievingSkinny: 날씬한 티들러 목록을 얻는 중 오류
+Syncer/LoginToTiddlySpace: TiddlySpace에 로그인
+Syncer/XMLHttpRequestError: XMLHttpRequest 오류 코드
 SystemTiddler/Tooltip: 이것은 시스템 티들러입니다
 TagManager/Colour/Heading: 색
 TagManager/Count/Heading: 횟수

@@ -8,6 +8,7 @@ ConfirmCancelTiddler: Отменить изменения заметки "<$text
 ConfirmDeleteTiddler: Удалить заметку "<$text text=<<title>>/>"?
 ConfirmEditShadowTiddler: Вы собираетесь редактировать встроенную заметку. Любое изменение переопределит стандартное значение и может привести к проблемам при обновлении TiddlyWiki. Вы действительно хотите редактировать "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: Заменить заметку "<$text text=<<title>>/>"?
+Count: номер
 DefaultNewTiddlerTitle: Новая заметка
 DropMessage: Перетащите сюда (или нажмите escape для отмены)
 Encryption/Cancel: Отмена

@@ -9,6 +9,7 @@ ConfirmCancelTiddler: Ønsker du at fortryde ændringer til denne tiddler "<$tex
 ConfirmDeleteTiddler: Ønsker du at slette denne tiddler "<$text text=<<title>>/>"?
 ConfirmEditShadowTiddler: Du skal til at redigere en skyggetiddler. Enhver ændring vil overskrive standardsystemet og gøre fremtidige opgraderinger mere besværlige. Er du sikker på, du ønsker at redigere "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: Ønsker du at overskrive tiddleren "<$text text=<<title>>/>"?
+Count: tæl
 DefaultNewTiddlerTitle: Ny tiddler
 DropMessage: Slip her (eller klik escape for at fortryde)
 Encryption/Cancel: Fortryd

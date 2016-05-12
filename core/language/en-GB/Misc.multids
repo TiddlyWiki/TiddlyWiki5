@@ -10,6 +10,7 @@ ConfirmCancelTiddler: Do you wish to discard changes to the tiddler "<$text text
 ConfirmDeleteTiddler: Do you wish to delete the tiddler "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: Do you wish to overwrite the tiddler "<$text text=<<title>>/>"?
 ConfirmEditShadowTiddler: You are about to edit a ShadowTiddler. Any changes will override the default system making future upgrades non-trivial. Are you sure you want to edit "<$text text=<<title>>/>"?
+Count: count
 DefaultNewTiddlerTitle: New Tiddler
 DropMessage: Drop here (or use the 'Escape' key to cancel)
 Encryption/Cancel: Cancel
@@ -30,6 +31,10 @@ OfficialPluginLibrary: Official ~TiddlyWiki Plugin Library
 OfficialPluginLibrary/Hint: The official ~TiddlyWiki plugin library at tiddlywiki.com. Plugins, themes and language packs are maintained by the core team.
 PluginReloadWarning: Please save {{$:/core/ui/Buttons/save-wiki}} and reload {{$:/core/ui/Buttons/refresh}} to allow changes to plugins to take effect
 RecentChanges/DateFormat: DDth MMM YYYY
+RecursiveTransclusion: Recursive transclusion error in transclude widget
+Syncer/ErrorRetrievingSkinny: Error retrieving skinny tiddler list
+Syncer/LoginToTiddlySpace: Login to TiddlySpace
+Syncer/XMLHttpRequestError: XMLHttpRequest error code
 SystemTiddler/Tooltip: This is a system tiddler
 TagManager/Colour/Heading: Colour
 TagManager/Count/Heading: Count
