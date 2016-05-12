@@ -36,6 +36,9 @@ OfficialPluginLibrary/Hint: tiddlywiki.com에서의 공식 ~TiddlyWiki 플러그
 PluginReloadWarning: 플러그인의 바뀜을 적용할 수 있도록 하려면 저장 {{$:/core/ui/Buttons/save-wiki}}하고 나서 다시 불러오세요 {{$:/core/ui/Buttons/refresh}}
 RecentChanges/DateFormat: YYYY년 MMM DD일
 RecursiveTransclusion: 끼워넣기 위젯에서 재귀 끼워넣기 오류
+Syncer/ErrorRetrievingSkinny: 날씬한 티들러 목록을 얻는 중 오류
+Syncer/LoginToTiddlySpace: TiddlySpace에 로그인
+Syncer/XMLHttpRequestError: XMLHttpRequest 오류 코드
 SystemTiddler/Tooltip: 이것은 시스템 티들러입니다
 TagManager/Colour/Heading: 색
 TagManager/Count/Heading: 횟수

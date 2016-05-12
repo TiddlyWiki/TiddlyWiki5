@@ -32,6 +32,9 @@ OfficialPluginLibrary/Hint: The official ~TiddlyWiki plugin library at tiddlywik
 PluginReloadWarning: Please save {{$:/core/ui/Buttons/save-wiki}} and reload {{$:/core/ui/Buttons/refresh}} to allow changes to plugins to take effect
 RecentChanges/DateFormat: DDth MMM YYYY
 RecursiveTransclusion: Recursive transclusion error in transclude widget
+Syncer/ErrorRetrievingSkinny: Error retrieving skinny tiddler list
+Syncer/LoginToTiddlySpace: Login to TiddlySpace
+Syncer/XMLHttpRequestError: XMLHttpRequest error code
 SystemTiddler/Tooltip: This is a system tiddler
 TagManager/Colour/Heading: Colour
 TagManager/Count/Heading: Count
