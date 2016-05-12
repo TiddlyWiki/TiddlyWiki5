@@ -15,6 +15,7 @@ ConfirmEditShadowTiddler: Estás a punto de editar un tiddler oculto<br>
 Todo cambio en él afectará al sistema por defecto y pondrá en riesgo futuras actualizaciones del sistema<br>
 ¿Estás seguro de querer editar "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: ¿Deseas sobreescribir "<$text text=<<title>>/>"?
+Count: Número
 DefaultNewTiddlerTitle: Nuevo Tiddler
 DropMessage: Suéltalo aquí o pulsa ''ESC'' para cancelar
 Encryption/Cancel: Cancelar

@@ -9,6 +9,7 @@ ConfirmCancelTiddler: Wil je gemaakte wijzigingen aan de tiddler "<$text text=<<
 ConfirmDeleteTiddler: Wil je de tiddler "<$text text=<<title>>/>" verwijderen?
 ConfirmEditShadowTiddler: Je staat op het punt een schaduwtiddler te wijzigen. Toekomstige automatische veranderingen (upgrades) zijn dan niet mogelijk. Wil je "<$text text=<<title>>/>" wijzigen?
 ConfirmOverwriteTiddler: Wil je de tiddler "<$text text=<<title>>/>" overschrijven?
+Count: aantal
 DefaultNewTiddlerTitle: Nieuwe tiddler
 DropMessage: 'Drop' hier (of klik escape om te annuleren)
 Encryption/Cancel: Annuleer

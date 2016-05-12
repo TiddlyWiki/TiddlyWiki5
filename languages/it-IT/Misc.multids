@@ -8,6 +8,7 @@ ConfirmCancelTiddler: Vuoi annullare le modifiche al frammento "<$text text=<<ti
 ConfirmDeleteTiddler: Vuoi cancellare il frammento "<$text text=<<title>>/>"?
 ConfirmEditShadowTiddler: Stai per editare un frammento nascosto. Ogni modifica dei default di sistema render&agrave; i futuri aggiornamenti non semplici. Sei sicuro di voler editare "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: Vuoi sovrascrivere il frammento "<$text text=<<title>>/>"?
+Count: Conteggio
 DefaultNewTiddlerTitle: Nuovo frammento
 DropMessage: Rilascia qui (o usa il tasto 'Escape' per cancellare)
 Encryption/Cancel: Cancella
