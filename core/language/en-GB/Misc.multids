@@ -30,6 +30,7 @@ OfficialPluginLibrary: Official ~TiddlyWiki Plugin Library
 OfficialPluginLibrary/Hint: The official ~TiddlyWiki plugin library at tiddlywiki.com. Plugins, themes and language packs are maintained by the core team.
 PluginReloadWarning: Please save {{$:/core/ui/Buttons/save-wiki}} and reload {{$:/core/ui/Buttons/refresh}} to allow changes to plugins to take effect
 RecentChanges/DateFormat: DDth MMM YYYY
+RecursiveTransclusion: Recursive transclusion error in transclude widget
 SystemTiddler/Tooltip: This is a system tiddler
 TagManager/Colour/Heading: Colour
 TagManager/Count/Heading: Count
