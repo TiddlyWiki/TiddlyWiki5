@@ -32,6 +32,10 @@ OfficialPluginLibrary/Hint: 此為在 tiddlywiki.com 的 ~TiddlyWiki 官方插�
 PluginReloadWarning: 請儲存 {{$:/core/ui/Buttons/save-wiki}} 並刷新頁面 {{$:/core/ui/Buttons/refresh}} 允許更改插件才能生效
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 SystemTiddler/Tooltip: 此為系統條目
+RecursiveTransclusion: transclude 小工具中的遞迴嵌入錯誤
+Syncer/ErrorRetrievingSkinny: 簡要條目清單擷取錯誤
+Syncer/LoginToTiddlySpace: 登入 TiddlySpace
+Syncer/XMLHttpRequestError: XMLHttpRequest 錯誤代碼
 TagManager/Colour/Heading: 顏色
 TagManager/Count/Heading: 計數
 TagManager/Icon/Heading: 圖示
