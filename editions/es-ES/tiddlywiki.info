@@ -5,9 +5,10 @@
 	"themes": [
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite",
-		"tiddlywiki/nighttime",
 		"tiddlywiki/starlight",
+		"tiddlywiki/seamless",
 		"tiddlywiki/centralised",
+		"tiddlywiki/tight",
 		"tiddlywiki/readonly"
 	],
 	"languages": [
@@ -22,6 +23,8 @@
 		"empty": [
 			"--rendertiddler","$:/editions/es-ES/download-empty","empty.html","text/plain",
 			"--rendertiddler","$:/editions/es-ES/download-empty","empty.hta","text/plain"],
+		"favicon": [
+			"--savetiddler","$:/favicon.ico","favicon.ico"],
 		"static": [
 			"--rendertiddler","$:/core/templates/static.template.html","static.html","text/plain",
 			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
