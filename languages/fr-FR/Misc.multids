@@ -9,6 +9,7 @@ ConfirmCancelTiddler: Souhaitez-vous annuler les modifications apportées au tid
 ConfirmDeleteTiddler: Souhaitez-vous supprimer le tiddler « <$text text=<<title>>/> » ?
 ConfirmOverwriteTiddler: Souhaitez-vous supplanter le tiddler « <$text text=<<title>>/> » ?
 ConfirmEditShadowTiddler: Vous êtes sur le point d'éditer un ShadowTiddler. Toute modification supplantera la version par défaut du système, rendant les prochaines mises à jour non-triviales. Êtes-vous sûr(e) de vouloir éditer "<$text text=<<title>>/>"?
+Count: total 
 DefaultNewTiddlerTitle: Nouveau tiddler
 DropMessage: Lâcher ici (ou appuyer sur « escape » pour annuler)
 Encryption/Cancel: Annuler
@@ -29,6 +30,10 @@ OfficialPluginLibrary: Bibliothèque officielle des plugins ~TiddlyWiki
 OfficialPluginLibrary/Hint: La bibliothèque officielle des plugins ~TiddlyWiki sur tiddlywiki.com. Plugins, thèmes et packs pour les différentes langues sont maintenus par l'équipe responsable du noyau.
 PluginReloadWarning: Merci d'enregistrer {{$:/core/ui/Buttons/save-wiki}} et de recharger {{$:/core/ui/Buttons/refresh}} pour que les changements apportés aux plugins prennent effet
 RecentChanges/DateFormat: DD MMM YYYY
+RecursiveTransclusion: Erreur dans le widget //transclude// : transclusion récursive
+Syncer/ErrorRetrievingSkinny: Erreur pendant la récupération de la liste des tiddlers (dégrossis)
+Syncer/LoginToTiddlySpace: Identification sur TiddlySpace
+Syncer/XMLHttpRequestError: Code d'erreur XMLHttpRequest
 SystemTiddler/Tooltip: Ceci est un tiddler système
 TagManager/Colour/Heading: Couleur
 TagManager/Icon/Heading: Icône
