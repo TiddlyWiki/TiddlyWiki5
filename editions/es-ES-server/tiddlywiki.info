@@ -6,7 +6,8 @@
         "tiddlywiki/highlight"
     ],
     "themes": [
-        "tiddlywiki/vanilla"
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
     ],
     "includeWikis": [
         "../es-ES"
