@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/commands/server.js
+title: $:/core/modules/commands/unixserver.js
 type: application/javascript
 module-type: command
 
@@ -21,7 +21,7 @@ if($tw.node) {
 }
 
 exports.info = {
-	name: "multiserver",
+	name: "unixserver",
 	synchronous: true
 };
 
@@ -50,7 +50,7 @@ SimpleServer.prototype.addRoute = function(route) {
 };
 
 SimpleServer.prototype.findMatchingRoute = function(request,state) {
-	var pathprefix = this.get("pathprefix") || "";
+	var pathprefix = "";
 	for(var t=0; t<this.routes.length; t++) {
 		var potentialRoute = this.routes[t],
 			pathRegExp = potentialRoute.path,
@@ -91,54 +91,22 @@ SimpleServer.prototype.checkCredentials = function(request,incomingUsername,inco
 	}
 };
 
-
-function ComplexServer(servers) {
-	this.servers = servers || {};
-}
-
-ComplexServer.prototype.addServer = function(server) {
-    this.servers[server.get('pathprefix')] = server;
-}
-
-ComplexServer.prototype.listen = function(port,host) {
+SimpleServer.prototype.listen = function(unixSocket) {
 	var self = this;
-	http.createServer(function(request,response) {
-	    
-	    // Determine which server this is based on the prefix
-	    var server = undefined,
-	        pathname = url.parse(request.url).pathname;
-	    for (var k in self.servers) {
-	        if (pathname.substr(0,k.length + 1) ===  k + '/') {
-	            server = self.servers[k];
-            }
-	    }
-		if(!server) {
-			response.writeHead(404);
-			response.write("<html><body>Wiki " + pathname + " does not exist. <br />");
-			response.write("Known wikis are. <br />");
-			for (var k in self.servers){
-			    response.write("<a href='" + k + "/'>" + k + "/</a><br />");
-			}
-			response.write("</body></html>");
-			response.end();
-			return;
-		}
-	    
-	
+	this.server = http.createServer(function(request,response) {
 		// Compose the state object
 		var state = {};
+		state.wiki = self.wiki;
+		state.server = self;
 		state.urlInfo = url.parse(request.url);
-		state.wiki = server.wiki;
-		state.server = server;
-		
 		// Find the route that matches this path
-		var route = server.findMatchingRoute(request,state);
+		var route = self.findMatchingRoute(request,state);
 		// Check for the username and password if we've got one
-		var username = server.get("username"),
-			password = server.get("password");
+		var username = self.get("username"),
+			password = self.get("password");
 		if(username && password) {
 			// Check they match
-			if(server.checkCredentials(request,username,password) !== "ALLOWED") {
+			if(self.checkCredentials(request,username,password) !== "ALLOWED") {
 				var servername = state.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5";
 				response.writeHead(401,"Authentication required",{
 					"WWW-Authenticate": 'Basic realm="Please provide your username and password to login to ' + servername + '"'
@@ -150,6 +118,7 @@ ComplexServer.prototype.listen = function(port,host) {
 		// Return a 404 if we didn't find a route
 		if(!route) {
 			response.writeHead(404);
+			response.write("Didn't find route for: " + state.urlInfo.pathname);
 			response.end();
 			return;
 		}
@@ -173,18 +142,25 @@ ComplexServer.prototype.listen = function(port,host) {
 				});
 				break;
 		}
-	}).listen(port,host);
+	});
+	
+	this.server.listen(unixSocket);
 };
 
-var make_server = function(wiki) {
-    var server = new SimpleServer({
-		wiki: wiki
+var Command = function(params,commander,callback) {
+	this.params = params;
+	this.commander = commander;
+	this.callback = callback;
+	// Set up server
+	this.server = new SimpleServer({
+		wiki: this.commander.wiki
 	});
 	// Add route handlers
-	server.addRoute({
+	this.server.addRoute({
 		method: "PUT",
 		path: /^\/recipes\/default\/tiddlers\/(.+)$/,
 		handler: function(request,response,state) {
+	        console.log(state.data);
 			var title = decodeURIComponent(state.params[0]),
 				fields = JSON.parse(state.data);
 			// Pull up any subfields in the `fields` object
@@ -207,7 +183,7 @@ var make_server = function(wiki) {
 			response.end();
 		}
 	});
-	server.addRoute({
+	this.server.addRoute({
 		method: "DELETE",
 		path: /^\/bags\/default\/tiddlers\/(.+)$/,
 		handler: function(request,response,state) {
@@ -219,7 +195,7 @@ var make_server = function(wiki) {
 			response.end();
 		}
 	});
-	server.addRoute({
+	this.server.addRoute({
 		method: "GET",
 		path: /^\/$/,
 		handler: function(request,response,state) {
@@ -228,7 +204,7 @@ var make_server = function(wiki) {
 			response.end(text,"utf8");
 		}
 	});
-	server.addRoute({
+	this.server.addRoute({
 		method: "GET",
 		path: /^\/status$/,
 		handler: function(request,response,state) {
@@ -243,7 +219,7 @@ var make_server = function(wiki) {
 			response.end(text,"utf8");
 		}
 	});
-	server.addRoute({
+	this.server.addRoute({
 		method: "GET",
 		path: /^\/favicon.ico$/,
 		handler: function(request,response,state) {
@@ -252,7 +228,7 @@ var make_server = function(wiki) {
 			response.end(buffer,"base64");
 		}
 	});
-	server.addRoute({
+	this.server.addRoute({
 		method: "GET",
 		path: /^\/recipes\/default\/tiddlers.json$/,
 		handler: function(request,response,state) {
@@ -273,7 +249,7 @@ var make_server = function(wiki) {
 			response.end(text,"utf8");
 		}
 	});
-	server.addRoute({
+	this.server.addRoute({
 		method: "GET",
 		path: /^\/recipes\/default\/tiddlers\/(.+)$/,
 		handler: function(request,response,state) {
@@ -303,53 +279,32 @@ var make_server = function(wiki) {
 			}
 		}
 	});
-
-    return server;
-};
-
-var Command = function(params,commander,callback) {
-	this.params = params;
-	// Set up server
-	this.complex = new ComplexServer()	
-	
-	var port = this.params[0] || "8080",
-		rootTiddler = this.params[1] || "$:/core/save/all",
-		renderType = this.params[2] || "text/plain",
-		serveType = this.params[3] || "text/html",
-		username = this.params[4],
-		password = this.params[5],
-		host = this.params[6] || "127.0.0.1",
-		files = require(this.params[7]);
-	
-	console.log(files);
-	for(var k in files){
-	    var $tw = require("tiddlywiki/boot/boot").TiddlyWiki();
-        $tw.boot.argv = ['nodejs', '--load', files[k]];
-        $tw.boot.boot();
-	    var server = make_server($tw.wiki);
-
-	    server.set({
-		    rootTiddler: rootTiddler,
-		    renderType: renderType,
-		    serveType: serveType,
-		    username: username,
-		    password: password,
-		    pathprefix: "/" + k
-	    });
-	    this.complex.addServer(server);
-	}
 };
 
 Command.prototype.execute = function() {
 	if(!$tw.boot.wikiTiddlersPath) {
 		$tw.utils.warning("Warning: Wiki folder '" + $tw.boot.wikiPath + "' does not exist or is missing a tiddlywiki.info file");
 	}
-
-	var port = this.params[0] || "8080",
-		host = this.params[6] || "127.0.0.1";
-
-	this.complex.listen(port,host);
-	console.log("Serving on " + host + ":" + port);
+	var unixSocket = this.params[0] || "./sockets/server",
+		rootTiddler = this.params[1] || "$:/core/save/all",
+		renderType = this.params[2] || "text/plain",
+		serveType = this.params[3] || "text/html",
+		username = this.params[4],
+		password = this.params[5];
+	this.server.set({
+		rootTiddler: rootTiddler,
+		renderType: renderType,
+		serveType: serveType,
+		username: username,
+		password: password
+	});
+	if (fs.existsSync(unixSocket)) {
+	    fs.unlinkSync(unixSocket);
+	    console.log("Deleting old socket file...");
+	}
+	this.server.listen(unixSocket);
+	$tw.unixServer = this.server;
+	console.log("Serving on " + unixSocket);
 	console.log("(press ctrl-C to exit)");
 	// Warn if required plugins are missing
 	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
@@ -359,7 +314,5 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-
-
 
 })();
