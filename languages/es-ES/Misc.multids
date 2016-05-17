@@ -43,22 +43,6 @@ OfficialPluginLibrary/Hint: Librería de plugins oficiales de ~TiddlyWiki en tid
 Plugins, temas y paquetes de idioma que mantiene el equipo de TiddlyWiki
 PluginReloadWarning: Guarda {{$:/core/ui/Buttons/save-wiki}} y recarga {{$:/core/ui/Buttons/refresh}} para que los cambios surtan efecto.
 RecentChanges/DateFormat: DD MMM YYYY
-Snippets/ListByTag: <<list-links "[tag[task]sort[title]]">>
-
-Snippets/MacroDefinition: \define macroName(param1:"default value",param2)
-Texto de la macro
-\end
-
-Snippets/Table4x3: |! |!Alfa |!Beta |!Gamma |!Delta |
-|!Uno | | | | |
-|!Dos | | | | |
-|!Tres | | | | |
-
-Snippets/TableOfContents: <div class="tc-table-of-contents">
-
-<<toc-selective-expandable 'TableOfContents'>>
-
-</div>
 SystemTiddler/Tooltip: Este es un tiddler de sistema
 TagManager/Colour/Heading: Color
 TagManager/Count/Heading: Número
