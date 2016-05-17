@@ -21,6 +21,16 @@ Encryption/PromptSetPassword: 이 TiddlyWiki에 대한 새 비밀번호를 설�
 Encryption/RepeatPassword: 비밀번호 다시 입력
 Encryption/SetPassword: 비밀번호 설정
 Encryption/Username: 사용자 이름
+Error/Caption: 오류
+Error/Filter: 필터 오류
+Error/FilterSyntax: 필터 표현식에서 구문 오류
+Error/IsFilterOperator: 필터 오류: 'is' 필터 연산자에 대한 알 수 없는 피연산자
+Error/LoadingPluginLibrary: 플러그인 라이브러리를 불러오는 중 오류
+Error/RecursiveTransclusion: 끼워넣기 위젯에서 재귀 끼워넣기 오류
+Error/RetrievingSkinny: 날씬한 티들러 목록을 얻는 중 오류
+Error/SavingToTWEdit: TW편집으로 저장하는 데 오류
+Error/WhileSaving: 저장하는 동안 오류
+Error/XMLHttpRequest: XMLHttpRequest 오류 코드
 Exporters/CsvFile: CSV 파일
 Exporters/JsonFile: JSON 파일
 Exporters/StaticRiver: 정적 HTML
@@ -29,16 +39,13 @@ InternalJavaScriptError/Hint: 아이 창피해. 브라우저를 새로 고쳐 Ti
 InternalJavaScriptError/Title: 내부 자바스크립트 오류
 InvalidFieldName: "<$text text=<<fieldName>>/>" 필드 이름에 잘못된 문자가 있습니다. 필드는 소문자, 숫자 및 밑줄 문자 (`_`), 하이픈 (`-`) 및 마침표 (`.`)만을 포함할 수 있습니다.
 LazyLoadingWarning: <p>''<$text text={{!!_canonical_uri}}/>''에서 바깥 텍스트를 불러오는 중입니다</p><p>이 메시지가 사라지지 않으면 이 구성에서 바깥 텍스트를 지원하지 않는 브라우저를 사용하고 있을 수 있습니다. [[http://tiddlywiki.com/#ExternalText]]를 보세요</p>
+LoginToTiddlySpace: TiddlySpace에 로그인
 MissingTiddler/Hint: "<$text text=<<currentTiddler>>/>" 티들러가 없습니다 - 만드려면 {{$:/core/images/edit-button}}을 클릭하세요
 No: 아니오
 OfficialPluginLibrary: 공식 ~TiddlyWiki 플러그인 라이브러리
 OfficialPluginLibrary/Hint: tiddlywiki.com에서의 공식 ~TiddlyWiki 플러그인 라이브러리입니다. 플러그인, 테마 및 언어 팩은 코어 팀이 유지 관리하고 있습니다.
 PluginReloadWarning: 플러그인의 바뀜을 적용할 수 있도록 하려면 저장 {{$:/core/ui/Buttons/save-wiki}}하고 나서 다시 불러오세요 {{$:/core/ui/Buttons/refresh}}
 RecentChanges/DateFormat: YYYY년 MMM DD일
-RecursiveTransclusion: 끼워넣기 위젯에서 재귀 끼워넣기 오류
-Syncer/ErrorRetrievingSkinny: 날씬한 티들러 목록을 얻는 중 오류
-Syncer/LoginToTiddlySpace: TiddlySpace에 로그인
-Syncer/XMLHttpRequestError: XMLHttpRequest 오류 코드
 SystemTiddler/Tooltip: 이것은 시스템 티들러입니다
 TagManager/Colour/Heading: 색
 TagManager/Count/Heading: 횟수

@@ -121,7 +121,7 @@ exports.parseFilter = function(filterString) {
 			operandRegExp.lastIndex = p;
 			match = operandRegExp.exec(filterString);
 			if(!match || match.index !== p) {
-				throw "Syntax error in filter expression";
+				throw $tw.language.getString("Error/FilterSyntax");
 			}
 			var operation = {
 				prefix: "",
@@ -171,7 +171,7 @@ exports.compileFilter = function(filterString) {
 		filterParseTree = this.parseFilter(filterString);
 	} catch(e) {
 		return function(source,widget) {
-			return ["Filter error: " + e];
+			return [$tw.language.getString("Error/Filter") + ": " + e];
 		};
 	}
 	// Get the hashmap of filter operator functions

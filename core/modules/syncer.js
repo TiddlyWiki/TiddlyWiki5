@@ -196,7 +196,7 @@ Syncer.prototype.syncFromServer = function() {
 			},self.pollTimerInterval);
 			// Check for errors
 			if(err) {
-				self.logger.alert($tw.language.getString("Syncer/ErrorRetrievingSkinny") + ":",err);
+				self.logger.alert($tw.language.getString("Error/RetrievingSkinny") + ":",err);
 				return;
 			}
 			// Process each incoming tiddler
@@ -275,7 +275,7 @@ Syncer.prototype.handleLoginEvent = function() {
 	this.getStatus(function(err,isLoggedIn,username) {
 		if(!isLoggedIn) {
 			$tw.passwordPrompt.createPrompt({
-				serviceName: $tw.language.getString("Syncer/LoginToTiddlySpace"),
+				serviceName: $tw.language.getString("LoginToTiddlySpace"),
 				callback: function(data) {
 					self.login(data.username,data.password,function(err,isLoggedIn) {
 						self.syncFromServer();

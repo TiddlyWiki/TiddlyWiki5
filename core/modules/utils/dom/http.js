@@ -45,7 +45,7 @@ exports.httpRequest = function(options) {
 				return;
 			}
 		// Something went wrong
-		options.callback($tw.language.getString("Syncer/XMLHttpRequestError") + ": " + this.status);
+		options.callback($tw.language.getString("Error/XMLHttpRequest") + ": " + this.status);
 		}
 	};
 	// Make the request
