@@ -1,5 +1,5 @@
 {
-    "description": "Configuration en mode serveur de l'édition fr-FR",
+	"description": "Configuration en mode serveur de l'édition fr-FR",
 	"plugins": [
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",
@@ -9,11 +9,11 @@
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
 	],
-    "includeWikis": [
-        "../fr-FR"
-    ],
-    "config": {
-        "retain-original-tiddler-path": true,
-        "default-tiddler-location": "../fr-FR/tiddlers"
-    }
+	"includeWikis": [
+		"../fr-FR"
+	],
+	"config": {
+		"retain-original-tiddler-path": true,
+		"default-tiddler-location": "../fr-FR/tiddlers"
+	}
 }
