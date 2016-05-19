@@ -268,6 +268,14 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	}
 	// Delete the original tiddler
 	if(originalTitle) {
+		//console.log("username ->");
+		var username = this.wiki.getTiddler("$:/status/UserName").fields.text;
+		//console.log("username: "+username);
+		$tw.hooks.invokeHook("th-deleting-tiddler", {
+			title:originalTitle,
+			wiki:this.wiki,
+			user:username||"Joe Doe"
+		});
 		this.wiki.deleteTiddler(originalTitle);
 		this.removeTitleFromStory(storyList,originalTitle);
 	}
