@@ -1,0 +1,15 @@
+created: 20130825213500000
+modified: 20160412173931392
+tags: Concepts
+title: Tiddlers
+type: text/vnd.tiddlywiki
+
+Los Tiddlers son las unidades fundamentales de información en TiddlyWiki.
+
+Funcionan mejor cuanto más pequeños son, de modo que puedan entretejerse más fácilmente de las más diferentes formas posibles.
+
+Otros sistemas tienen conceptos análogos con nombres genéricos como "items", "entradas", "entidades", "nodos" o "records". TiddlyWiki es de la opinión de que es preferible ser vagamente preciso a ser vagamente genérico; de ahí que nos guste «Tiddler», que en origen es una palabra coloquial inglesa, usada para referirse a un pez pequeño. 
+
+Internamente, los tiddlers se componen de una lista de valores únicos llamados campos. El único campo obligatorio es `título`, pero los tiddlers útiles tienen también un campo `texto` y todos o algunos de los campos estándar que se muestran en TiddlerFields.
+
+En TiddlyWiki, los tiddlers están por todas partes. Sirven para guardarlo todo, desde módulos en código de JavaScript, a ajustes y configuraciones asociadas a la interfaz de usuario.

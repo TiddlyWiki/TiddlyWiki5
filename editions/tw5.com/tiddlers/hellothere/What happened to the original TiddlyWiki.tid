@@ -3,7 +3,7 @@ tags: HelloThere
 created: 201409040851
 modified: 201409040851
 
-<a class="tc-float-right tc-bordered-image" href="http://classic.tiddlywiki.com/" target="_blank">[img width="200" [TiddlyWiki Classic.png]]</a>
+<a class="tc-float-right tc-bordered-image" href="http://classic.tiddlywiki.com/" target="_blank" rel="noopener noreferrer">[img width="200" [TiddlyWiki Classic.png]]</a>
 
 The original [[Classic|TiddlyWikiClassic]] version of TiddlyWiki is still available at:
 

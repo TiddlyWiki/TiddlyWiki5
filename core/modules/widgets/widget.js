@@ -504,6 +504,23 @@ Widget.prototype.invokeActions = function(triggeringWidget,event) {
 	return handled;
 };
 
+/*
+Invoke the action widgets defined in a string
+*/
+Widget.prototype.invokeActionString = function(actions,triggeringWidget,event) {
+	actions = actions || "";
+	var parser = this.wiki.parseText("text/vnd.tiddlywiki",actions,{
+			parentWidget: this,
+			document: this.document
+		}),
+		widgetNode = this.wiki.makeWidget(parser,{
+			parentWidget: this,
+			document: this.document
+		});
+	var container = this.document.createElement("div");
+	widgetNode.render(container,null);
+	return widgetNode.invokeActions(this,event);
+};
 
 Widget.prototype.allowActionPropagation = function() {
 	return true;

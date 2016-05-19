@@ -1,0 +1,25 @@
+caption: Formatos personalizados de exportación
+created: 20141124173526227
+es-title: Crear formato personalizado de exportación
+modified: 20160426140251183
+tags: [[Customise TiddlyWiki]]
+title: Creating a custom export format
+type: text/vnd.tiddlywiki
+
+Para crear un formato personalizado de exportación de tiddlers en texto plano, sigue los siguientes pasos:
+
+# Crea un tiddler con los siguientes campos y valores:
+
+#* <<.field Tags>>: <<.tag ~$:/tags/Exporter>>
+#* <<.field description>>: descripción del formato
+#* <<.field extension>>: extensión de archivo por defecto, incluyendo el punto; por ejemplo, `.tmx`
+# Escribe el siguiente contenido:
+
+```
+\define renderContent()
+{{{ $(exportFilter)$ ||$:/core/templates/plain-text-tiddler}}}
+\end
+<<renderContent>>
+```
+
+La variable `exportFilter` contiene un filtro que define qué tiddlers se exportarán. 

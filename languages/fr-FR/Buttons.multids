@@ -127,6 +127,8 @@ Italic/Caption: italiques
 Italic/Hint: Met la sélection en italiques
 LineWidth/Caption: épaisseur du trait
 LineWidth/Hint: Choisit une épaisseur de trait pour le remplissage
+Link/Caption: lien
+Link/Hint: Crée un lien wikitext
 ListBullet/Caption: liste à puces
 ListBullet/Hint: Formate les lignes de la sélection comme une liste à puces
 ListNumber/Caption: liste numérotée
@@ -147,8 +149,6 @@ PreviewType/Caption: type de prévisualisation
 PreviewType/Hint: Choisit le type de prévisualisation
 Quote/Caption: citation
 Quote/Hint: Formate les lignes de la sélection comme une citation
-Redo/Caption: rétablir
-Redo/Hint: Rétablit la dernière action annulée
 Size/Caption: taille de l'image
 Size/Caption/Height: Hauteur :
 Size/Caption/Resize: Retailler l'image
@@ -167,5 +167,3 @@ Superscript/Caption: exposant
 Superscript/Hint: Met en exposant le texte sélectionné
 Underline/Caption: souligner
 Underline/Hint: Souligne le texte sélectionné
-Undo/Caption: annuler
-Undo/Hint: Annule la dernière action

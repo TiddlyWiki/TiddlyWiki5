@@ -5,6 +5,7 @@ custom-icon: yes
 caption: {{$:/language/Buttons/Preview/Caption}}
 description: {{$:/language/Buttons/Preview/Hint}}
 condition: [<targetTiddler>]
+button-classes: tc-text-editor-toolbar-item-start-group
 shortcuts: ((preview))
 
 <$reveal state="$:/state/showeditpreview" type="match" text="yes" tag="span">

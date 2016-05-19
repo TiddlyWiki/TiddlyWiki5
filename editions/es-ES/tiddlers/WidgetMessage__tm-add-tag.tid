@@ -1,0 +1,15 @@
+caption: tm-add-tag
+created: 20140908185153663
+es-title: Mensaje: tm-add-tag
+modified: 20160415060517606
+tags: Messages
+title: WidgetMessage: tm-add-tag
+type: text/vnd.tiddlywiki
+
+EL mensaje `tm-add-tag` añade la etiqueta que se especifique.
+
+|!Name |!Description |
+|param |Nombre de la etiqueta |
+
+Este mensaje lo genera normalmente ButtonWidget y lo procesa FieldManglerWidget.
+

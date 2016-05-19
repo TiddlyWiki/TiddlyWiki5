@@ -784,6 +784,7 @@ Options include:
 	_canonical_uri: optional string of the canonical URI of this content
 */
 exports.parseText = function(type,text,options) {
+	text = text || "";
 	options = options || {};
 	// Select a parser
 	var Parser = $tw.Wiki.parsers[type];

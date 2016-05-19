@@ -1,7 +1,6 @@
 title: $:/language/Snippets/MacroDefinition
 tags: $:/tags/TextEditor/Snippet
 caption: 매크로 정의
-mode: wikified
 
 \define macroName(param1:"기본 값",param2)
 매크로의 텍스트

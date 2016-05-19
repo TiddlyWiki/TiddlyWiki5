@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/ThemeTweaks
+caption: Theme Tweaks
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[tiddlers+shadows]prefix[$:/language/ThemeTweaks/]sort[title]]
+\end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/ThemeTweaks/]]
+\end
+
+! Theme Tweaks
+
+Strings used in the theme tweaks for Vanilla.
+
+<<translatableStringEditor>>

@@ -2,7 +2,8 @@
 	"description": "Server configuration of the German (Österreich) edition",
 	"plugins": [
 		"tiddlywiki/tiddlyweb",
-		"tiddlywiki/filesystem"
+		"tiddlywiki/filesystem",
+		"tiddlywiki/highlight"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

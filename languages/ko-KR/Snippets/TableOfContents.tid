@@ -1,7 +1,6 @@
 title: $:/language/Snippets/TableOfContents
 tags: $:/tags/TextEditor/Snippet
 caption: 목차
-mode: wikified
 
 <div class="tc-table-of-contents">
 

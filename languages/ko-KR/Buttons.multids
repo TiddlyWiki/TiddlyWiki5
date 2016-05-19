@@ -87,6 +87,8 @@ Language/Caption: 언어
 Language/Hint: 사용자 인터페이스 언어를 선택합니다
 LineWidth/Caption: 선 너비
 LineWidth/Hint: 페인트의 선 너비를 설정합니다
+Link/Caption: 링크
+Link/Hint: 위키텍스트 링크를 만듭니다
 ListBullet/Caption: 글머리 기호 목록
 ListBullet/Hint: 선택을 포함하는 줄에 글머리 기호 목록 서식을 적용합니다
 ListNumber/Caption: 번호가 매겨진 목록
@@ -129,8 +131,6 @@ PreviewType/Caption: 미리 보기 형식
 PreviewType/Hint: 미리 보기 형식을 선택합니다
 Quote/Caption: 인용
 Quote/Hint: 선택을 포함하는 줄에 인용 문구 서식을 적용합니다
-Redo/Caption: 다시 실행
-Redo/Hint: 실행 취소한 마지막 작업을 다시 실행합니다
 Refresh/Caption: 새로 고침
 Refresh/Hint: 위키의 전체 새로 고침을 수행합니다
 Save/Caption: 확인
@@ -163,8 +163,6 @@ Theme/Caption: 테마
 Theme/Hint: 보일 테마를 선택합니다
 Underline/Caption: 밑줄
 Underline/Hint: 선택에 밑줄 서식을 적용합니다
-Undo/Caption: 실행 취소
-Undo/Hint: 마지막 작업을 실행 취소합니다
 Unfold/Caption: 티들러 펼치기
 Unfold/Hint: 이 티들러의 본문을 펼칩니다
 UnfoldAll/Caption: 모든 티들러 펼치기

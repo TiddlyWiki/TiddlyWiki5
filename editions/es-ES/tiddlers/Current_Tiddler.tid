@@ -1,0 +1,20 @@
+caption: Current Tiddler
+created: 20130825144900000
+es-title: Current Tiddler
+modified: 20160507044348759
+tags: Concepts
+title: Current Tiddler
+type: text/vnd.tiddlywiki
+
+La variable <<.def "current tiddler">> proporciona el contexto en el que se interpretan diversos aspectos de WikiText.
+
+Por ejemplo, `{{!!title}}` indica el valor del campo <<.field title>> de cualquier tiddler actual, sea este cual sea. Esta técnica puede usarse para crear [[plantillas|TemplateTiddlers]] de uso general.
+
+El título del tiddler actual siempre se puede invocar con la variable <<.vlink currentTiddler>>.
+
+Las dos formas principales en que se puede cambiar el tiddler actual son:
+
+* El widget <<.wlink TiddlerWidget>>
+* El widget <<.wlink ListWidget>> (cuando su atributo <<.attr variable>> no ha sido puenteado)
+
+Por lo tanto, decir <<.word "el tiddler actual">> <<.em "no siempre">> equivale a decir [[tiddler que se está viendo o editando|storyTiddler Variable]].

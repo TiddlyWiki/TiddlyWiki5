@@ -128,8 +128,6 @@ PreviewType/Caption: Tipo de vista previa
 PreviewType/Hint: Selecciona el tipo de vista previa
 Quote/Caption: Bloque de cita
 Quote/Hint: Aplica formato de bloque de cita a la selección
-Redo/Caption: Rehacer
-Redo/Hint: Rehace la última acción deshecha
 Refresh/Caption: Recargar
 Refresh/Hint: Actualiza completamente este wiki
 Save/Caption: Ok
@@ -162,8 +160,6 @@ Theme/Caption: Tema
 Theme/Hint: Selecciona un estilo visual para el wiki
 Underline/Caption: Subrayado
 Underline/Hint: Aplica formato de subrayado a la selección
-Undo/Caption: Deshacer
-Undo/Hint: Deshace la última acción
 Unfold/Caption: Desplegar tiddler
 Unfold/Hint: Despliega el cuerpo de este tiddler y muestra su contenido
 UnfoldAll/Caption: Desplegar todos

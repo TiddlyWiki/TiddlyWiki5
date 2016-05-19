@@ -124,8 +124,6 @@ PreviewType/Caption: forhåndsvisnings type
 PreviewType/Hint: Vælg forhåndsvisnings type
 Quote/Caption: Citat
 Quote/Hint: Føj citat tekst formatering til linier indeholdende udvalgte
-Redo/Caption: gentag
-Redo/Hint: Gentag sidste handling der skal omgøres
 Refresh/Caption: genopfrisk
 Refresh/Hint: Udfør en fuld genopfriskning af wiki'en
 Save/Caption: gem
@@ -156,8 +154,6 @@ Theme/Caption: tema
 Theme/Hint: Vælg visningstema
 Underline/Caption: understregning
 Underline/Hint: Føj understregnings formatering til udvalgte
-Undo/Caption: fortryd
-Undo/Hint: Fortryd sidste handling
 Unfold/Caption: udfold tiddler
 Unfold/Hint: Udfold denne tiddlers krop
 UnfoldAll/Caption: udfold alle tiddlere

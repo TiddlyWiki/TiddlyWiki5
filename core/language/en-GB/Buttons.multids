@@ -127,6 +127,8 @@ Italic/Caption: italic
 Italic/Hint: Apply italic formatting to selection
 LineWidth/Caption: line width
 LineWidth/Hint: Set line width for painting
+Link/Caption: link
+Link/Hint: Create wikitext link
 ListBullet/Caption: bulleted list
 ListBullet/Hint: Apply bulleted list formatting to lines containing selection
 ListNumber/Caption: numbered list
@@ -147,8 +149,6 @@ PreviewType/Caption: preview type
 PreviewType/Hint: Choose preview type
 Quote/Caption: quote
 Quote/Hint: Apply quoted text formatting to lines containing selection
-Redo/Caption: redo
-Redo/Hint: Redo the last action to be undone
 Size/Caption: image size
 Size/Caption/Height: Height:
 Size/Caption/Resize: Resize image
@@ -167,6 +167,3 @@ Superscript/Caption: superscript
 Superscript/Hint: Apply superscript formatting to selection
 Underline/Caption: underline
 Underline/Hint: Apply underline formatting to selection
-Undo/Caption: undo
-Undo/Hint: Undo the last action
-

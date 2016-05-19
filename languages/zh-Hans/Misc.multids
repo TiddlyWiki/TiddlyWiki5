@@ -10,6 +10,7 @@ ConfirmCancelTiddler: 您确定要放弃对条目 "<$text text=<<title>>/>" 的�
 ConfirmDeleteTiddler: 您确定要删除条目 "<$text text=<<title>>/>"？
 ConfirmOverwriteTiddler: 您确定要覆写条目 "<$text text=<<title>>/>"？
 ConfirmEditShadowTiddler: 您即将要编辑默认条目，任何更改将会覆盖默认的系统，使未来的升级不寻常。您确定要编辑 "<$text text=<<title>>/>"?
+Count: 计数
 DefaultNewTiddlerTitle: 新条目
 DropMessage: 拖放到此处 （或按 ESC 键取消）
 Encryption/Cancel: 取消
@@ -20,11 +21,23 @@ Encryption/PromptSetPassword: 为此 TiddlyWiki 设置一个新密码
 Encryption/RepeatPassword: 重复输入密码
 Encryption/PasswordNoMatch: 密码不匹配
 Encryption/SetPassword: 设定密码
+Error/Caption: 错误
+Error/Filter: 筛选器错误
+Error/FilterSyntax: 筛选器运算式中的语法错误
+Error/IsFilterOperator: 筛选器错误︰'is' 筛选器运算符的未知操作数
+Error/LoadingPluginLibrary: 加载插件程式库时，发生错误
+Error/RecursiveTransclusion: 于 transclude 小部件中的递回嵌入错误
+Error/RetrievingSkinny: 简要条目清单撷取错误
+Error/SavingToTWEdit: 保存到 TWEdit 时，发生错误
+Error/WhileSaving: 保存时，发生错误
+Error/XMLHttpRequest: XMLHttpRequest 错误代码
 InternalJavaScriptError/Title: 内部的 JavaScript 错误
 InternalJavaScriptError/Hint: 喔，真是令人尴尬。建议刷新您的浏览器，重新启动 TiddlyWiki
 InvalidFieldName: 栏位名称 "<$text text=<<fieldName>>/>" 包含无效字符，栏位名称只能包含小写字母、数字、底线 (`_`)、 连字号 (`-`) 和小数点 (`.`)
 LazyLoadingWarning: <p>正在从 ''<$text text={{!!_canonical_uri}}/>'' 加载外部条目 ...</p><p>如果此信息未消失，可能您使用的浏览器不支援此配置的外部条目。请参阅 http://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: 登录 TiddlySpace
 MissingTiddler/Hint: 佚失条目 "<$text text=<<currentTiddler>>/>" - 点击 {{$:/core/images/edit-button}} 可创建此条目
+No: 否
 OfficialPluginLibrary: ~TiddlyWiki 官方插件程式库
 OfficialPluginLibrary/Hint: 此为在 tiddlywiki.com 的 ~TiddlyWiki 官方插件程式库。由核心团队维护的插件、主题和语言包。
 PluginReloadWarning: 请保存 {{$:/core/ui/Buttons/save-wiki}} 并刷新页面 {{$:/core/ui/Buttons/refresh}} 允许更改插件才能生效
@@ -37,3 +50,4 @@ TagManager/Info/Heading: 信息
 TagManager/Tag/Heading: 标签
 Tiddler/DateFormat: YYYY年0MM月0DD日 0hh:0mm
 UnsavedChangesWarning: 在此 TiddlyWiki 您有尚未保存的变更
+Yes: 是

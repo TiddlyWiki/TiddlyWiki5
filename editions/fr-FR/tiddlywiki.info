@@ -5,23 +5,26 @@
 	"themes": [
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite",
-		"tiddlywiki/nighttime",
 		"tiddlywiki/starlight",
+		"tiddlywiki/seamless",
 		"tiddlywiki/centralised",
+		"tiddlywiki/tight",
 		"tiddlywiki/readonly"
 	],
 	"languages": [
 		"fr-FR"
 	],
-    "includeWikis": [
-        {"path": "../tw5.com", "read-only": true}
-    ],
+	"includeWikis": [
+		{"path": "../tw5.com", "read-only": true}
+	],
 	"build": {
 		"index": [
 			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
 		"empty": [
 			"--rendertiddler","$:/editions/fr-FR/download-empty","empty.html","text/plain",
 			"--rendertiddler","$:/editions/fr-FR/download-empty","empty.hta","text/plain"],
+		"favicon": [
+			"--savetiddler","$:/favicon.ico","favicon.ico"],
 		"static": [
 			"--rendertiddler","$:/core/templates/static.template.html","static.html","text/plain",
 			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",

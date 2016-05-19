@@ -17,28 +17,23 @@ exports["prefix-lines"] = function(event,operation) {
 	operation.cutStart = $tw.utils.findPrecedingLineBreak(operation.text,operation.selStart);
 	// Cut to just past the following line break, or to the end of the text
 	operation.cutEnd = $tw.utils.findFollowingLineBreak(operation.text,operation.selEnd);
+	// Compose the required prefix
+	var prefix = $tw.utils.repeat(event.paramObject.character,event.paramObject.count);
 	// Process each line
 	var lines = operation.text.substring(operation.cutStart,operation.cutEnd).split(/\r?\n/mg);
 	$tw.utils.each(lines,function(line,index) {
-		// Compose the required prefix
-		var prefix = event.paramObject.character.repeat(event.paramObject.count);
-		// Check if we already have the required prefix
-		if(line.substring(0,prefix.length) === prefix) {
-			// If so, remove the prefix
-			line = line.substring(prefix.length);
-			// Remove any whitespace
-			while(line.charAt(0) === " ") {
-				line = line.substring(1);
-			}
-		} else {
-			// If we didn't have the prefix, remove any existing prefix characters
-			while(line.charAt(0) === event.paramObject.character) {
-				line = line.substring(1);
-			}
-			// Remove any whitespace
-			while(line.charAt(0) === " ") {
-				line = line.substring(1);
-			}
+		// Remove and count any existing prefix characters
+		var count = 0;
+		while(line.charAt(0) === event.paramObject.character) {
+			line = line.substring(1);
+			count++;
+		}
+		// Remove any whitespace
+		while(line.charAt(0) === " ") {
+			line = line.substring(1);
+		}
+		// We're done if we removed the exact required prefix, otherwise add it
+		if(count !== event.paramObject.count) {
 			// Apply the prefix
 			line =  prefix + " " + line;
 		}
