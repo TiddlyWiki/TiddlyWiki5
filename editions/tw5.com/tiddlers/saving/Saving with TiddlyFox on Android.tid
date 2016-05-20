@@ -1,5 +1,5 @@
 created: 20140103134551508
-modified: 20140912140933724
+modified: 20160520090532058
 tags: Saving
 title: Saving with TiddlyFox on Android
 type: text/vnd.tiddlywiki
@@ -18,7 +18,7 @@ type: text/vnd.tiddlywiki
 # When the file has downloaded, click on it within the notification tray or the download manager application
 # Choose to open the file in Firefox (rather than the default Android viewer)
 # Click ''OK'' in response to the prompt from TiddlyFox that asks whether to enable saving for this file
-# Try creating a new tiddler using the ''plus'' {{$:/core/images/new-button}} button in the sidebar. Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''tick'' button
-# Save your changes by clicking the {{$:/core/images/save-button}} ''Save changes'' button in the sidebar
+# Try creating a new tiddler using the ''new tiddler'' {{$:/core/images/new-button}} button in the sidebar. Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''ok'' button
+# Save your changes by clicking the {{$:/core/images/save-button}} ''save changes'' button in the sidebar
 #* Look for the yellow notification ''Saved wiki'' at the top right of the window
 # Refresh the browser window to verify that your changes have been saved correctly
