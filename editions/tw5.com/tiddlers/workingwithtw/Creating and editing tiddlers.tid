@@ -1,5 +1,5 @@
 created: 20140904140300000
-modified: 20141010093319359
+modified: 20160520090113978
 tags: [[Working with TiddlyWiki]]
 title: Creating and editing tiddlers
 type: text/vnd.tiddlywiki
@@ -30,6 +30,6 @@ When you create a new tiddler or edit an existing one, the tiddler will go into 
 
 When you have finished editing, click a button at the top right of the tiddler:
 
-*The ''save'' button ({{$:/core/images/done-button}}) stores your changes to this one tiddler and leaves draft mode. If your wiki is configured to [[AutoSave]], your changes will be permanently saved. Otherwise they will only be stored temporarily in your web browser, and you will lose them if you close your ~TiddlyWiki page without first clicking the master ''save changes'' button {{$:/core/images/save-button}} in the sidebar.
+*The ''ok'' button ({{$:/core/images/done-button}}) stores your changes to this one tiddler and leaves draft mode. If your wiki is configured to [[AutoSave]], your changes will be permanently saved. Otherwise they will only be stored temporarily in your web browser, and you will lose them if you close your ~TiddlyWiki page without first clicking the master ''save changes'' button {{$:/core/images/save-button}} in the sidebar.
 *The ''cancel'' button ({{$:/core/images/cancel-button}}) discards your changes (after asking you to confirm) and leaves draft mode.
 *The ''delete'' button ({{$:/core/images/delete-button}}) deletes the entire tiddler (after asking you to confirm).
