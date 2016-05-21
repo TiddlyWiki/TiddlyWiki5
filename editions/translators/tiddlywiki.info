@@ -41,6 +41,7 @@
 			"--rendertiddler","$:/plugins/tiddlywiki/translators/templates/CoreReadMe.tid","language/CoreReadMe.tid","text/plain",
 			"--rendertiddler","$:/plugins/tiddlywiki/translators/templates/Dates.multids","language/Dates.multids","text/plain",
 			"--rendertiddler","$:/plugins/tiddlywiki/translators/templates/EditTemplate.multids","language/EditTemplate.multids","text/plain",
+			"--rendertiddler","$:/plugins/tiddlywiki/translators/templates/Exporters.multids","language/Exporters.multids","text/plain",
 			"--rendertiddler","$:/plugins/tiddlywiki/translators/templates/Fields.multids","language/Fields.multids","text/plain",
 			"--rendertiddler","$:/plugins/tiddlywiki/translators/templates/Filters.multids","language/Filters.multids","text/plain",
 			"--rendertiddler","$:/plugins/tiddlywiki/translators/templates/GettingStarted.tid","language/GettingStarted.tid","text/plain",

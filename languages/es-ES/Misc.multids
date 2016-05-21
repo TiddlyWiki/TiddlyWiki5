@@ -27,10 +27,6 @@ Encryption/PromptSetPassword: Especifica nueva contraseña para este TiddlyWiki
 Encryption/RepeatPassword: Repite la contraseña
 Encryption/SetPassword: Establecer contraseña
 Encryption/Username: Usuario
-Exporters/CsvFile: Archivo de tipo .CSV
-Exporters/JsonFile: Archivo de tipo .JSON
-Exporters/StaticRiver: Cadena de tiddlers como .HTML estático
-Exporters/TidFile: Tiddler individual como archivo ".tid" 
 InternalJavaScriptError/Hint: Tenemos un problema. Se recomienda que reinicies TiddlyWiki
 InternalJavaScriptError/Title: Error interno de JavaScript
 InvalidFieldName: Caracteres ilegales en el campo "<$text text=<<fieldName>>/>"<br>

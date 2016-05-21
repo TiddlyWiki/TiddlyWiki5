@@ -20,10 +20,6 @@ Encryption/PromptSetPassword: Angiv et nyt kodeord for denne ~TiddlyWiki
 Encryption/RepeatPassword: Gentag kodeord
 Encryption/SetPassword: Angiv kodeord
 Encryption/Username: Brugernavn
-Exporters/CsvFile: CSV tiddler fil
-Exporters/JsonFile: JSON tiddler fil
-Exporters/StaticRiver: Statiske HTML tiddlere
-Exporters/TidFile: Enkelt tiddler ".tid" fil
 InternalJavaScriptError/Hint: Oh, dette er pinligt. Det anbefales at du genstarter TiddlyWiki ved at opfriske din browser
 InternalJavaScriptError/Title: Intern JavaScript fejl
 InvalidFieldName: Illegale tegn i felt navn "<$text text=<<fieldName>>/>". Felter kan kun indeholde små bogstaver, tal og tegnene undersstreg (`_`), bindestreg (`-`) og punktum (`.`)
