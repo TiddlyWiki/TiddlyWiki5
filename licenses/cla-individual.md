@@ -282,3 +282,5 @@ Cengizhan Kurt, @webninjasi, 2016/03/03
 Knut Franke, @nome, 2016/03/20
 
 Pau Deluca, @PauDeLuca, 2016/04/11
+
+Brent Maxwell, @brentmaxwell, 2016/05/20
