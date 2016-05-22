@@ -86,11 +86,11 @@ TranscludeWidget.prototype.execute = function() {
 	var existingTiddler = this.wiki.getTiddler(this.transcludeTitle);
 	// Check if we're dealing with a classic tiddler
 	if(existingTiddler && existingTiddler.hasField("type") && existingTiddler.fields.type !== "text/x-tiddlywiki") {
-		this.makeChildWidgets([{type: "text", text: "Tiddler not of type 'text/x-tiddlywiki'"}]);
+		this.makeChildWidgets([{type: "text", text: "{{$:/language/plugins/tiddlywiki/tw2parser/TiddlerNotOfType}}"}]);
 		return;
 	}
 	if(existingTiddler && !existingTiddler.hasField("type")) {
-		this.makeChildWidgets([{type: "text", text: "Tiddler not of type 'text/x-tiddlywiki'"}]);
+		this.makeChildWidgets([{type: "text", text: "{{$:/language/plugins/tiddlywiki/tw2parser/TiddlerNotOfType}}"}]);
 		return;
 	}		
 	// Set context variables for recursion detection
