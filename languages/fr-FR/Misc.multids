@@ -20,8 +20,15 @@ Encryption/Password: Mot de passe
 Encryption/RepeatPassword: Répéter le mot de passe
 Encryption/PasswordNoMatch: Les mots de passe ne correspondent pas
 Encryption/SetPassword: Définir ce mot de passe 
+Error/Caption: Erreur
+Error/Filter: Erreur de filtre
+Error/FilterSyntax: Erreur de syntaxe dans l'expression du filtre
+Error/IsFilterOperator: Erreu de filtre : Opérande inconnu pour l'opérateur de filtre 'is'
+Error/LoadingPluginLibrary: Erreur lors du chargement de la bibliothèque de plugins
 Error/RecursiveTransclusion: Erreur dans le widget //transclude// : transclusion récursive
 Error/RetrievingSkinny: Erreur pendant la récupération de la liste des tiddlers (dégrossis)
+Error/SavingToTWEdit: Erreur lors de l'enregistrement vers TWEdit
+Error/WhileSaving: Erreur lors de l'enregistrement
 Error/XMLHttpRequest: Code d'erreur XMLHttpRequest
 InternalJavaScriptError/Title: Erreur interne JavaScript
 InternalJavaScriptError/Hint: C'est assez embarrassant. Il est recommandé de rafraîchir l'affichage de votre navigateur
