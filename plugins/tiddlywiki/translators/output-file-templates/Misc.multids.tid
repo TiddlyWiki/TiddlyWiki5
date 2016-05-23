@@ -6,6 +6,7 @@ title: $:/plugins/tiddlywiki/translators/templates/Misc.multids
 -[all[tiddlers]prefix[$:/language/Date/]]
 -[all[tiddlers]prefix[$:/language/Docs/]]
 -[all[tiddlers]prefix[$:/language/EditTemplate/]]
+-[all[tiddlers]prefix[$:/language/Exporters/]]
 -[all[tiddlers]prefix[$:/language/Filters/]]
 -[all[tiddlers]prefix[$:/language/Help/]]
 -[all[tiddlers]prefix[$:/language/Import/]]
