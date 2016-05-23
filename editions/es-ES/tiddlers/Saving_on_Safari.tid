@@ -1,18 +1,18 @@
 caption: Guardar en Safari
 created: 20140811171304926
 es-title: Guardar en Safari
-modified: 20160422201431785
+modified: 20160603131745607
 tags: Saving
 title: Saving on Safari
 type: text/vnd.tiddlywiki
 
-Este método para guardar cambios es un poco rudimentario porque requiere intervención manual para cada acción de guardado. 
+Este método para guardar cambios es un poco rudimentario porque requiere intervención manual para cada acción de guardado.
 
 # Descarga un TiddlyWiki en blanco pulsando este botón
 
 #> {{$:/editions/es-ES/snippets/download-empty-button}}
 
-#>Si el botón no funciona, guarda este enlace:  http://tiddlywiki.com/empty.html
+#>Si el botón no funciona, guarda este enlace: http://tiddlywiki.com/languages/es-ES/empty.html
 
 #> Seguramente el navegador te pida que confirmes la descarga
 
@@ -22,9 +22,9 @@ Este método para guardar cambios es un poco rudimentario porque requiere interv
 
 #Abre el archivo en el navegador
 
-# Crea un nuevo tiddler usando el botón ''Nuevo'' {{$:/core/images/new-button}} de la barra lateral. Escribe algo en él y haz clic en el botón ''OK'' {{$:/core/images/done-button}}
+# Crea un nuevo tiddler usando el botón ''Nuevo tiddler'' {{$:/core/images/new-button}} de la barra lateral. Escribe algo en él y haz clic en el botón ''OK'' {{$:/core/images/done-button}}
 
-# Guarda los cambios con el botón ''Guardar'' {{$:/core/images/save-button}} de la barra lateral
+# Guarda los cambios con el botón ''Guardar cambios'' {{$:/core/images/save-button}} de la barra lateral
 
 # Se mostrará una ventana emergente ''Descargar cambios'', con un enlace con el nombre //Clic-derecho para guardar cambios//
 # Haz clic con el botón derecho y selecciona ''Descargar destino como...'' (u opción parecida) en el menú desplegable

@@ -1,6 +1,6 @@
 created: 20131219100608529
 es-title: Instalar TiddlyWiki en Node.js
-modified: 20160413141625299
+modified: 20160603132303620
 tags: [[TiddlyWiki on Node.js]]
 title: Installing TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
@@ -35,7 +35,7 @@ type: text/vnd.tiddlywiki
 
 # # Como opción, puedes hacer una copia offline del wiki:
 
-#* Con TiddlyWiki abierto en el navegador, haz click en el botón ''Guardar'' {{$:/core/images/save-button}} de la barra lateral
+#* Con TiddlyWiki abierto en el navegador, haz click en el botón ''Guardar cambios'' {{$:/core/images/save-button}} de la barra lateral
 
 #* Con TiddlyWiki apagado y desde el mismo directorio desde donde lo iniciaste, teclea el siguiente comando en la consola:
 
