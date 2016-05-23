@@ -58,7 +58,7 @@ Parsing/Inline/Caption: 'Inline parse' regels
 Parsing/Pragma/Caption: 'Pragma parse' regels
 Plugins/Add/Caption: Verkrijg meer plugins
 Plugins/Add/Hint: Installeer plugins van de officiële bibliotheek
-Plugins/AlreadyInstalled: Deze plugin is al geïnstalleerd met versie <$text text=<<installedVersion>>/>
+Plugins/AlreadyInstalled/Hint: Deze plugin is al geïnstalleerd met versie <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: schakel uit
 Plugins/Disable/Hint: Schakel deze plugin uit na verversen van deze pagina
@@ -66,16 +66,16 @@ Plugins/Disabled/Status: (uitgeschakeld)
 Plugins/Empty/Hint: Niets
 Plugins/Enable/Caption: activeer
 Plugins/Enable/Hint: Activeer deze plugin bij verversen van deze pagina
-Plugins/Install: installeer
+Plugins/Install/Caption: installeer
 Plugins/Installed/Hint: Geïnstalleerde plugins:
 Plugins/Language/Prompt: Talen
 Plugins/Languages/Caption: Talen
 Plugins/Languages/Hint: Taal plugins
-Plugins/NoInformation: Geen informatie beschikbaar
-Plugins/NotInstalled: Deze plugin is nu niet geïnstalleerd
+Plugins/NoInformation/Hint: Geen informatie beschikbaar
+Plugins/NotInstalled/Hint: Deze plugin is nu niet geïnstalleerd
 Plugins/OpenPluginLibrary: open plugin bibliotheek
 Plugins/Plugin/Prompt: Plugins
-Plugins/Reinstall: herinstalleer
+Plugins/Reinstall/Caption: herinstalleer
 Plugins/Theme/Prompt: Thema's
 Plugins/Themes/Caption: Thema's
 Plugins/Themes/Hint: Thema plugins

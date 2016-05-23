@@ -58,7 +58,7 @@ Parsing/Inline/Caption: Inline Regeln
 Parsing/Pragma/Caption: Pragma Regeln
 Plugins/Add/Hint: Suche und installiere neue Plugins
 Plugins/Add/Caption: Suche
-Plugins/AlreadyInstalled: Dieses Plugin ist bereits installiert. Version: <$text text=<<installedVersion>>/>
+Plugins/AlreadyInstalled/Hint: Dieses Plugin ist bereits installiert. Version: <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: deaktivieren
 Plugins/Disable/Hint: Deaktivieren Sie dieses Plugin beim nächsten Laden der Seite.
@@ -66,17 +66,17 @@ Plugins/Disabled/Status: (deaktiviert)
 Plugins/Empty/Hint: keine
 Plugins/Enable/Caption: aktivieren
 Plugins/Enable/Hint: Aktivieren Sie dieses Plugin beim nächsten Laden der Seite.
-Plugins/Install: installieren
+Plugins/Install/Caption: installieren
 Plugins/Installed/Hint: Momentan installierte Plugins
 Plugins/Languages/Caption: Sprachen
 Plugins/Languages/Hint: Spracherweiterungen
 Plugins/NoInfoFound/Hint: Kein ''"<$text text=<<currentTab>>/>"'' gefunden
-Plugins/NoInformation: Kein Information vorhanden
-Plugins/NotInstalled: Dieses Plugin ist momentan nicht installiert
+Plugins/NoInformation/Hint: Kein Information vorhanden
+Plugins/NotInstalled/Hint: Dieses Plugin ist momentan nicht installiert
 Plugins/OpenPluginLibrary: Öffne das Plugin-Verzeichnis
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Erweiterungen
-Plugins/Reinstall: erneut installieren
+Plugins/Reinstall/Caption: erneut installieren
 Plugins/Themes/Caption: Themes
 Plugins/Themes/Hint: Theme Erweiterungen
 Saving/Caption: Speichern
