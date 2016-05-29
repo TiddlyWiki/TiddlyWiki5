@@ -13,6 +13,12 @@ color:$(foregroundColor)$;
 <$transclude tiddler={{!!icon}}/> <$view field="title" format="text" />
 </$button>
 <$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes"><div class="tc-drop-down"><$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+<$button class="tc-btn-invisible">
+<$list filter="[tag{!!title}]">
+<$action-navigate $to=<<currentTiddler>> />
+</$list>
+Open All
+</$button>
 <hr>
 <$list filter="[all[current]tagging[]]" template="$:/core/ui/ListItemTemplate"/>
 </div>
