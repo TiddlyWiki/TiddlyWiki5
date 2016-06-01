@@ -90,6 +90,7 @@ ShowSideBar/Caption: show sidebar
 ShowSideBar/Hint: Show sidebar
 TagManager/Caption: tag manager
 TagManager/Hint: Open tag manager
+TagManager/OpenAll: Open All
 Theme/Caption: theme
 Theme/Hint: Choose the display theme
 Bold/Caption: bold

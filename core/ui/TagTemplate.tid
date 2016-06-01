@@ -1,5 +1,6 @@
 title: $:/core/ui/TagTemplate
 
+\define lingo-base() $:/language/Buttons/
 \define tag-styles()
 background-color:$(backgroundColor)$;
 fill:$(foregroundColor)$;
@@ -16,7 +17,7 @@ color:$(foregroundColor)$;
 <$list filter="[tag{!!title}]">
 <$action-navigate $to=<<currentTiddler>> />
 </$list>
-Open All
+<<lingo TagManager/OpenAll>>
 </$button>
 <hr>
 <$list filter="[all[current]tagging[]]" template="$:/core/ui/ListItemTemplate"/>
