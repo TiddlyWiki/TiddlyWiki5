@@ -1,7 +1,7 @@
 caption: Edición completa
 created: 20150310103210459
 es-title: Edición completa
-modified: 20160504051337977
+modified: 20160605040305652
 tags: Editions
 title: Full Edition
 type: text/vnd.tiddlywiki
@@ -10,4 +10,4 @@ La edición completa de ~Tiddlywiki consta de todos los idiomas, temas y plugins
 
 La edición completa puede descargarse de:
 
-<a href="editions/full/index.html" target="_blank">editions/full/index.html</a>
+http://tiddlywiki.com/editions/full/

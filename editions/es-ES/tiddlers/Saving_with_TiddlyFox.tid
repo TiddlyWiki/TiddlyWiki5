@@ -1,7 +1,7 @@
 caption: Guardar en Firefox
 created: 20131221085742684
 es-title: Guardar con TiddlyFox
-modified: 20160422201605657
+modified: 20160603145935964
 tags: Saving
 title: Saving with TiddlyFox
 type: text/vnd.tiddlywiki
@@ -14,7 +14,7 @@ Si usas ''Firefox para Android'', las instrucciones que necesitas son [[estas|Sa
 
 # Descarga e instala la última versión disponible de TiddlyFox
 
-#* https://addons.mozilla.org/en-US/firefox/addon/tiddlyfox/
+#* https://addons.mozilla.org/es/firefox/addon/tiddlyfox/
 
 # Reinicia Firefox
 
@@ -25,6 +25,7 @@ Si usas ''Firefox para Android'', las instrucciones que necesitas son [[estas|Sa
 # Localiza el archivo que acabas de descargar
 
 #* Puedes cambiarle el nombre, pero mantén la extensión `.html` o `.htm`
+
 # Abre el archivo en Firefox
 
 # Dale a ''OK'' cuando TiddlyFox te pregunte si quieres activar la función de guardado para el archivo
