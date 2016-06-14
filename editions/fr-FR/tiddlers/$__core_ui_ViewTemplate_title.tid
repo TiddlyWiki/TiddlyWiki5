@@ -18,7 +18,7 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 <$set name="tv-wikilinks" value={{$:/config/Tiddlers/TitleLinks}}>
 <$link>
 <$set name="foregroundColor" value={{!!color}}>
-<span style=<<title-styles>>>
+<span class="tc-tiddler-title-icon" style=<<title-styles>>>
 <$transclude tiddler={{!!icon}}/>
 </span>
 </$set>
@@ -38,7 +38,7 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 </$set>
 </div>
 
-<$reveal type="nomatch" text="" default="" state=<<tiddlerInfoState>> class="tc-tiddler-info tc-popup" animate="yes" retain="yes">
+<$reveal type="nomatch" text="" default="" state=<<tiddlerInfoState>> class="tc-tiddler-info tc-popup-handle" animate="yes" retain="yes">
 
 <$transclude tiddler="$:/core/ui/TiddlerInfo"/>
 
