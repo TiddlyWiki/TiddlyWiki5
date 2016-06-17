@@ -3,7 +3,7 @@ subtitle: {{$:/core/images/download-button}} {{$:/language/ControlPanel/Plugins/
 
 \define install-plugin-button()
 <$button>
-<$action-sendmessage $message="tm-load-plugin-from-library" url={{!!url}} title={{$(assetInfo)$!!original-title}}/>
+<$action-sendmessage $message="tm-load-plugin-from-library" url={{$(connectionTiddler)$!!url}} title={{$(assetInfo)$!!original-title}}/>
 <$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion" emptyMessage="""{{$:/language/ControlPanel/Plugins/Install}}""">
 {{$:/language/ControlPanel/Plugins/Reinstall}}
 </$list>
@@ -68,18 +68,20 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 \end
 
 \define display-server-assets(type)
-{{$:/language/Search/Search}}: <$edit-text tiddler="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" default="" type="search" tag="input"/>
-<$reveal state="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" type="nomatch" text="">
+<$vars search="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""">
+{{$:/language/Search/Search}}: <$edit-text tiddler=<<search>> default="" type="search" tag="input"/>
+<$reveal state=<<search>> type="nomatch" text="">
 <$button class="tc-btn-invisible">
-<$action-setfield $tiddler="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" $field="text" $value=""/>
+<$action-setfield $tiddler=<<search>> $field="text" $value=""/>
 {{$:/core/images/close-button}}
 </$button>
 </$reveal>
 <div class="tc-plugin-library-listing">
-<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]search{$:/temp/RemoteAssetSearch/$(currentTiddler)$}sort[description]]" variable="assetInfo">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{$(connectionTiddler)$!!url}original-plugin-type[$type$]search{$:/temp/RemoteAssetSearch/$(currentTiddler)$}sort[description]]" variable="assetInfo">
 <<display-plugin-info "$type$">>
 </$list>
 </div>
+</$vars>
 \end
 
 \define display-server-connection()
