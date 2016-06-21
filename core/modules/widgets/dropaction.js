@@ -32,7 +32,7 @@ DropActionWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	// Create element
-	var domNode = this.document.createElement("div");
+	var domNode = this.document.createElement("span");
 	domNode.className = "tc-dropzone";
 	// Add event handlers
 	$tw.utils.addEventListeners(domNode,[
@@ -117,9 +117,12 @@ DropActionWidget.prototype.handleDropEvent  = function(event) {
 	// Try to import the various data types we understand
 	var tiddler = this.importData(event.dataTransfer);
 	
+	var currentTiddler = this.getVariable("currentTiddler");
 	this.setVariable("currentTiddler",tiddler.title);
 
     this.invokeActions(this,event);
+    
+    this.setVariable("currentTiddler",currentTiddler);
 	
 	
 	// Tell the browser that we handled the drop
