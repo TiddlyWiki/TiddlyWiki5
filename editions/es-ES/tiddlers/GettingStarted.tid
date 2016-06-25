@@ -1,9 +1,9 @@
 caption: En Marcha
 created: 20131129090249275
 es-title: Puesta en marcha
-modified: 20160424041925031
+modified: 20160603132644119
 tags: [[Working with TiddlyWiki]]
-title: GettingStarted1
+title: GettingStarted
 type: text/vnd.tiddlywiki
 
 \define default-platform()
@@ -21,17 +21,17 @@ Solución de problemas:
 
 Te interesa ver también:
 
-* [[Cifrado|Encryption]] explica cómo usar la función incorporada de cifrado para proteger tus contenidos con contraseña. 
+* [[Cifrado|Encryption]] explica cómo usar la función incorporada de cifrado para proteger tus contenidos con contraseña.
 * [[Guardar en TiddlySpot|Saving on TiddlySpot]], servicio gratuito que te permite usar TiddlyWiki online
 * Guardar en TiddlyDesktop, aplicación para trabajar con TiddlyWiki en el escritorio
-* También puedes descargar este TIddlywiki en su versión íntegra, con toda su documentación: 
+* También puedes descargar este TIddlywiki en su versión íntegra, con toda su documentación:
 
 <<<
 {{$:/snippets/download-wiki-button}}
 
-Si el botón no funciona, guarda el siguiente enlace: 
+Si el botón no funciona, guarda el siguiente enlace:
 
-<a href="http://tiddlywiki.com/index.html" download="index.html">~http://tiddlywiki.com/index.html</a>
+<a href="http://tiddlywiki.com/languages/es-ES/index.html" download="index.html">~http://tiddlywiki.com/languages/es-ES/index.html</a>
 
-El navegador puede pedirte que confirmes la acción antes de comenzar la descarga 
+El navegador puede pedirte que confirmes la acción antes de comenzar la descarga
 <<<

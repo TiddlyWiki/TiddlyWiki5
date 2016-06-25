@@ -19,6 +19,7 @@ The standard fields are:
 |`tags` |TagsField |<<lingo tags>> |
 |`type` |TypeField |<<lingo type>> |
 |`list` |ListField |<<lingo list>> |
+|`caption` |CaptionField |<<lingo caption>> |
 
 Other fields used by the core are:
 

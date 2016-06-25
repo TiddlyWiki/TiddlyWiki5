@@ -18,10 +18,6 @@ Encryption/PromptSetPassword: Indiqueu una nova contrasenya per aquest TiddlyWik
 Encryption/RepeatPassword: Repetiu la contrasenya
 Encryption/SetPassword: Indiqueu la contrasenya
 Encryption/Username: Usuari
-Exporters/CsvFile: Fitxer CSV
-Exporters/JsonFile: Fitxer JSON
-Exporters/StaticRiver: HTML estàtic
-Exporters/TidFile: Fitxer ".tid"
 InvalidFieldName: Hi ha caràcters il·legals al nom del camp "<$text text=<<fieldName>>/>". Els camps només poden utilitzar minúscules, digits i els caràcters subratllat (`_`), guió (`-`) i punt (`.`)
 MissingTiddler/Hint: Falta el tiddler "<$text text=<<currentTiddler>>/>" - cliqueu {{$:/core/images/edit-button}} per generar-ho
 OfficialPluginLibrary: Biblioteca de connectors de ~TiddlyWiki Oficial

@@ -1,13 +1,13 @@
 caption: Guardar en iPad/iPhone
 created: 20131129101027725
 es-title: Guardar en iPad/iPhone
-modified: 20160422201310783
+modified: 20160605183216156
 tags: Saving
 title: Saving on iPad/iPhone
 type: text/vnd.tiddlywiki
 
 La aplicación para iPad e iPhone ''TWEdit'' permite editar y guardar cambios en TiddlyWiki5, incluso cuando se trabaja offline, sin conexión de red.
-[[Descárgala aquí|https://itunes.apple.com/gb/app/twedit/id409607956?mt=8]].
+[[Descárgala aquí|https://itunes.apple.com/es/app/twedit/id409607956?mt=8]].
 
 Instrucciones de uso:
 
@@ -17,17 +17,17 @@ Instrucciones de uso:
 
 #* Aparecerá un cuadro de texto en el que puedes indicar una URL
 
-# Escribe la URL `http://tiddlywiki.com/empty.html`
+# Escribe la URL `http://tiddlywiki.com/languages/es-ES/empty.html`
 
-# Cuando se cargue el TiddlyWiki5 vacío, toca el icono ''Guardar'' (el segundo icono por la derecha, en la barra superior)
+# Cuando se cargue el TiddlyWiki vacío, toca el icono ''Guardar'' (el segundo icono por la derecha, en la barra superior)
 
 #* Aparecerá un cuadro de alerta en el que debes indicar un nombre para el archivo local.
 
-#* Escribe el nombre que quieras usar para tu documento (siempre con la extensión `.html`
+#* Escribe el nombre que quieras usar para tu documento (siempre con la extensión `.html`)
 
-# Edita TiddlyWiki como siempre
+# Comprueba que funciona con el botón ''Nuevo tiddler'' {{$:/core/images/new-button}} de la barra lateral. Escribe algo en el tiddler y haz click en el botón ''OK'' {{$:/core/images/done-button}}
 
-# Para guardar los cambios, pulsa el botón ''Guardar'' de la barra de herramientas.
+# Guarda ahora los cambios haciendo click en el botón ''Guardar cambios'' {{$:/core/images/save-button}} de la barra lateral.
 
 #* Aparecerá un mensaje de confirmación arriba a la derecha
 

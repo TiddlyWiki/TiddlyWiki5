@@ -20,7 +20,7 @@ El módulo incorporado de guardado en TiddlySpot también puede usarse para guar
 
 # Mediante FTP o web, sube el archivo <<.def store.php>>al servidor. Asegúrate de que el nombre de archivo es correcto
 
-#* Si el archivo ha subido correctamente, lo verás en el navegador. 
+#* Si el archivo ha subido correctamente, lo verás en el navegador.
 
 # En ~TiddlyWiki, ve a la pestaña <<.controlpanel-tab Saving>> del [[Panel de control|$:/ControlPanel]] e introduce la siguiente información:
 

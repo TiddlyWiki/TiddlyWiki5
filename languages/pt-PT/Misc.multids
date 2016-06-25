@@ -12,10 +12,6 @@ DefaultNewTiddlerTitle: Novo Tiddler
 DropMessage: Largue aqui (ou carregue no escape para cancelar)
 Encryption/ConfirmClearPassword: Pretende remover a palavra-passe? Esta acção removerá a encriptação aplicada quando guardar esta wiki
 Encryption/PromptSetPassword: Definir nova palavra passe para esta TiddlyWiki
-Exporters/CsvFile: Ficheiros CSV dos tiddlers
-Exporters/JsonFile: Ficheiros JSON dos tiddlers
-Exporters/StaticRiver: Sequência de tiddlers como ficheiro estático HTML
-Exporters/TidFile: Tiddler individual em ficheiro ".tid"
 InvalidFieldName: Caracteres ilegais no nome do ficheiro "<$text text=<<fieldName>>/>". Os campos apenas podem conter letras minúsculas, dígitos e os caracteres  subtraço (`_`), hífen (`-`) e ponto final (`.`)
 MissingTiddler/Hint: Tiddler "<$text text=<<currentTiddler>>/>" em falta - clique {{$:/core/images/edit-button}} para criar
 RecentChanges/DateFormat: DD MMM AAAA

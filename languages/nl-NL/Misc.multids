@@ -20,10 +20,6 @@ Encryption/PromptSetPassword: Vul een nieuw wachtwoord in voor deze TiddlyWiki
 Encryption/RepeatPassword: Herhaal wachtwoord
 Encryption/SetPassword: Vul wachtwoord in
 Encryption/Username: Gebruikersnaam
-Exporters/CsvFile: CSV tiddlers bestand
-Exporters/JsonFile: JSON tiddlers bestand
-Exporters/StaticRiver: Serie tiddlers als statisch HTML bestand
-Exporters/TidFile: Enkele tiddler ".tid" bestand
 InternalJavaScriptError/Hint: Er is een probleem. Herstart TiddlyWiki door je browser te verversen
 InternalJavaScriptError/Title: Interne JavaScript Error
 InvalidFieldName: Illegale lettertekens in veldnaam "<$text text=<<fieldName>>/>". Velden kunnen alleen kleine letters, cijfers en de lettertekens liggend streepje (`_`), koppelteken (`-`) en punt (`.`)
