@@ -1,5 +1,5 @@
 created: 20140811112304772
-modified: 20140811120248738
+modified: 20160701140248738
 tags: Messages
 title: WidgetMessage: tm-notify
 type: text/vnd.tiddlywiki
@@ -9,5 +9,6 @@ The notify message briefly displays a specified tiddler as a small alert in the 
 
 |!Name |!Description |
 |param |Title of the tiddler to be displayed |
+|paramObject |Hashmap of variables to be provided to the notification |
 
 The notify message is handled by the TiddlyWiki core.
