@@ -26,7 +26,7 @@ The first RenderTiddlersCommand generates the HTML representations of individual
 
 It is also possible to produce a single HTML file that contains static representations of tiddlers, and uses standard HTML anchor links to jump between them.
 
-For example: [ext[[alltiddlers.html]]
+For example: [ext[alltiddlers.html]]
 
 The example is built by the following commands:
 

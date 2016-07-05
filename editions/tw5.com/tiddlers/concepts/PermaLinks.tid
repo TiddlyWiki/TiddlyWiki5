@@ -32,7 +32,7 @@ If the target tiddler isn't present in the story list then it is automatically i
 
 It is also possible to specify a story filter without specifying a target tiddler for navigation:
 
-<a href="http://tiddlywiki.com/#:[tags[task]]" rel="noreferrer">~http://tiddlywiki.com/#:[tags[task]]</a>
+<a href="http://tiddlywiki.com/#:[tags[task]]" rel="noopener noreferrer">~http://tiddlywiki.com/#:[tags[task]]</a>
 
 ! About URL encoding
 
