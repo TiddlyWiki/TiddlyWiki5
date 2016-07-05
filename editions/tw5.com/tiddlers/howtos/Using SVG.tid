@@ -1,7 +1,7 @@
 created: 20131028132700000
-modified: 20150505063640327
+modified: 20160618085859219
 tags: Features
-title: UsingSVG
+title: Using SVG
 type: text/vnd.tiddlywiki
 
 TiddlyWiki5 allows you to use SVG to display vector graphics in two ways:
@@ -18,7 +18,7 @@ You can embed an SVG image tiddler using the ordinary transclusion syntax:
 {{Motovun Jack.jpg}}
 ```
 
-You can also use TypedBlockWikiText to embed an inline SVG tiddler.
+You can also use [[Typed Blocks in WikiText]] to embed an inline SVG tiddler.
 
 The implications of the image being rendered within an `<img>` element are that it is sandboxed; it can't use CSS styles from the parent document, for example. Neither can the image use WikiText features like transclusion.
 

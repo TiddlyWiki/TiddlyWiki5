@@ -1,5 +1,5 @@
 created: 20131221085742684
-modified: 20160520090455242
+modified: 20160601160211867
 tags: Saving
 title: Saving with TiddlyFox
 type: text/vnd.tiddlywiki
@@ -9,7 +9,7 @@ If you're using [[Firefox for Android]], see the instructions for [[Saving with 
 # Ensure you have the latest version of [[Firefox]]
 #* http://getfirefox.com
 # Install the latest release of the TiddlyFox extension from:
-#* https://addons.mozilla.org/en-US/firefox/addon/tiddlyfox/
+#* https://addons.mozilla.org/en-GB/firefox/addon/tiddlyfox/
 # Restart [[Firefox]]
 # [[Download]] an empty TiddlyWiki by clicking this button:
 #> {{$:/editions/tw5.com/snippets/download-empty-button}}

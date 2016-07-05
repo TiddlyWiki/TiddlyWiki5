@@ -1,13 +1,13 @@
 created: 20160107222504269
-modified: 20160107222727164
+modified: 20160617105002662
 tags: Plugins
 title: Uninstalling a plugin
 type: text/vnd.tiddlywiki
 
 # Create a backup of your current TiddlyWiki HTML file ([[just in case|The First Rule of Using TiddlyWiki]])
-# Open the [[$:/ControlPanel]] and go to the ''Plugins'' tab
+# Open the [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}} and go to the ''Plugins'' tab
 # Click on the plugin you want to delete to open its tiddler
-# Click the edit icon and then delete the tiddler
-# Save your TiddlyWiki
-# ''Refresh the window so that TiddlyWiki completely removes the plugin''
+# Click the {{$:/core/images/down-arrow}} ''more'' button and {{$:/core/images/delete-button}} ''delete'' the tiddler
+# Save your TiddlyWiki ({{$:/core/images/save-button}})
+# ''Refresh the window so that TiddlyWiki completely removes the plugin'' ({{$:/core/images/refresh-button}})
 # The plugin should now be deleted
