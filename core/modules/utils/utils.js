@@ -699,4 +699,20 @@ exports.sign = Math.sign || function(x) {
 	return x > 0 ? 1 : -1;
 };
 
+/*
+IE does not have an endsWith function
+*/
+exports.strEndsWith = function(str,ending,position) {
+	if(str.endsWith) {
+		return str.endsWith(ending,position);
+	} else {
+		if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > str.length) {
+			position = str.length;
+		}
+		position -= str.length;
+		var lastIndex = str.indexOf(ending, position);
+		return lastIndex !== -1 && lastIndex === position;
+	}
+};
+
 })();

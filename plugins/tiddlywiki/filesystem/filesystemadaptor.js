@@ -37,9 +37,6 @@ $tw.config.typeInfo = {
 	"text/vnd.tiddlywiki": {
 		fileType: "application/x-tiddler",
 		extension: ".tid"
-	},
-	"image/jpeg" : {
-		hasMetaFile: true
 	}
 };
 
@@ -53,11 +50,10 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 		title = tiddler.fields.title,
 		fileInfo = $tw.boot.files[title];
 	// Get information about how to save tiddlers of this type
-	var type = tiddler.fields.type || "text/vnd.tiddlywiki",
-		typeInfo = $tw.config.typeInfo[type];
-	if(!typeInfo) {
-		typeInfo = $tw.config.typeInfo["text/vnd.tiddlywiki"];
-	}
+	var type = tiddler.fields.type || "text/vnd.tiddlywiki";
+	var typeInfo = $tw.config.typeInfo[type] ||
+		$tw.config.contentTypeInfo[type] ||
+		$tw.config.typeInfo["text/vnd.tiddlywiki"];
 	var extension = typeInfo.extension || "";
 	if(!fileInfo) {
 		// If not, we'll need to generate it
@@ -131,6 +127,10 @@ FileSystemAdaptor.prototype.generateTiddlerFilename = function(title,extension,e
 	// Truncate the filename if it is too long
 	if(baseFilename.length > 200) {
 		baseFilename = baseFilename.substr(0,200);
+	}
+	// Prevent redundent file extensions
+	if($tw.utils.strEndsWith(baseFilename,extension)) {
+		extension = "";
 	}
 	// Start with the base filename plus the extension
 	var filename = baseFilename + extension,
