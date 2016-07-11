@@ -1,4 +1,4 @@
-modified: 20160112175004000
+modified: 20160305222940000
 created: 20160111034749658
 tags: documenting Concepts
 title: Using ES2016 for Writing Plugins
@@ -154,7 +154,10 @@ class ClockWidget extends Widget {
     this.logger.log('Rendering clock DOM nodes');
     this.computeAttributes()
     this.parentDomNode = parent;
-    this.domNode = $tw.utils.domMaker('div', {class: 'tc-clock-widget'});
+    this.domNode = $tw.utils.domMaker('div', {
+      document: this.document,
+      class: 'tc-clock-widget'
+    });
     parent.insertBefore(this.domNode, nextSibling);
     this.tick();
   }
