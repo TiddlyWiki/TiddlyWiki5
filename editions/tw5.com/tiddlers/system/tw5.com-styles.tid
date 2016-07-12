@@ -7,10 +7,10 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-link-info-item {
-    border: 1px solid #dde7f1;
+    border: 1px solid #ebefcd;
     padding: 5px 10px;
     margin-bottom: 10px;
-    background: #f3f8fd;
+    background: #fcfdf3;
     font-size: 0.8em;
     line-height: 1.2;
 }
