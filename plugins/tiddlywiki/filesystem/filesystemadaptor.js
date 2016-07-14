@@ -40,10 +40,6 @@ $tw.config.typeInfo = {
 	}
 };
 
-$tw.config.typeTemplates = {
-	"application/x-tiddler": "$:/core/templates/tid-tiddler"
-};
-
 FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 	// See if we've already got information about this file
 	var self = this,
@@ -178,8 +174,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 			});
 		} else {
 			// Save the tiddler as a self contained templated file
-			template = $tw.config.typeTemplates[fileInfo.type];
-			content = self.wiki.renderTiddler("text/plain",template,{variables: {currentTiddler: tiddler.fields.title}});
+			content = self.wiki.renderTiddler("text/plain","$:/core/templates/tid-tiddler",{variables: {currentTiddler: tiddler.fields.title}});
 			fs.writeFile(fileInfo.filepath,content,{encoding: "utf8"},function (err) {
 				if(err) {
 					return callback(err);
