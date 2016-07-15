@@ -107,7 +107,7 @@ SimpleServer.prototype.listen = function(port,host) {
 		if(username && password) {
 			// Check they match
 			if(self.checkCredentials(request,username,password) !== "ALLOWED") {
-				var servername = state.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5";
+				var servername = $tw.utils.stringify(state.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
 				response.writeHead(401,"Authentication required",{
 					"WWW-Authenticate": 'Basic realm="Please provide your username and password to login to ' + servername + '"'
 				});
