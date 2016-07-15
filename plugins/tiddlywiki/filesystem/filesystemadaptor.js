@@ -175,7 +175,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 		} else {
 			// Save the tiddler as a self contained templated file
 			content = self.wiki.renderTiddler("text/plain","$:/core/templates/tid-tiddler",{variables: {currentTiddler: tiddler.fields.title}});
-			fs.writeFile(fileInfo.filepath,content,{encoding: "utf8"},function (err) {
+			fs.writeFile(fileInfo.filepath + ".tid",content,{encoding: "utf8"},function (err) {
 				if(err) {
 					return callback(err);
 				}
