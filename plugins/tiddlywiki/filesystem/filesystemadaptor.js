@@ -97,6 +97,13 @@ FileSystemAdaptor.prototype.findFirstFilter = function(filters,source) {
 	}
 };
 
+/*
+Add file extension to a file path if it doesn't already exist.
+*/
+FileSystemAdaptor.addFileExtention = function(file,extension) {
+	return $tw.utils.strEndsWith(file,extension) ? file : file + extension;
+};
+
 
 /*
 Given a tiddler title and an array of existing filenames, generate a new legal filename for the title, case insensitively avoiding the array of existing filenames
@@ -124,12 +131,8 @@ FileSystemAdaptor.prototype.generateTiddlerFilename = function(title,extension,e
 	if(baseFilename.length > 200) {
 		baseFilename = baseFilename.substr(0,200);
 	}
-	// Prevent redundent file extensions
-	if($tw.utils.strEndsWith(baseFilename,extension)) {
-		extension = "";
-	}
 	// Start with the base filename plus the extension
-	var filename = baseFilename + extension,
+	var filename = FileSystemAdaptor.addFileExtention(baseFilename,extension),
 		count = 1;
 	// Add a discriminator if we're clashing with an existing filename while
 	// handling case-insensitive filesystems (NTFS, FAT/FAT32, etc.)
@@ -145,7 +148,7 @@ Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 	var self = this;
 	this.getTiddlerFileInfo(tiddler,function(err,fileInfo) {
-		var template, content, encoding,
+		var template, content, encoding, filepath,
 			_finish = function() {
 				callback(null, {}, 0);
 			};
@@ -159,12 +162,14 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 		var typeInfo = $tw.config.contentTypeInfo[fileInfo.type];
 		if(fileInfo.hasMetaFile || typeInfo.encoding === "base64") {
 			// Save the tiddler as a separate body and meta file
-			fs.writeFile(fileInfo.filepath,tiddler.fields.text,{encoding: typeInfo.encoding},function(err) {
+			filepath = fileInfo.filepath;
+			fs.writeFile(filepath,tiddler.fields.text,{encoding: typeInfo.encoding},function(err) {
 				if(err) {
 					return callback(err);
 				}
 				content = self.wiki.renderTiddler("text/plain","$:/core/templates/tiddler-metadata",{variables: {currentTiddler: tiddler.fields.title}});
-				fs.writeFile(fileInfo.filepath + ".meta",content,{encoding: "utf8"},function (err) {
+				filepath = FileSystemAdaptor.addFileExtention(fileInfo.filepath,".meta");
+				fs.writeFile(filepath,content,{encoding: "utf8"},function (err) {
 					if(err) {
 						return callback(err);
 					}
@@ -175,7 +180,8 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 		} else {
 			// Save the tiddler as a self contained templated file
 			content = self.wiki.renderTiddler("text/plain","$:/core/templates/tid-tiddler",{variables: {currentTiddler: tiddler.fields.title}});
-			fs.writeFile(fileInfo.filepath + ".tid",content,{encoding: "utf8"},function (err) {
+			filepath = FileSystemAdaptor.addFileExtention(fileInfo.filepath,".tid");
+			fs.writeFile(filepath,content,{encoding: "utf8"},function (err) {
 				if(err) {
 					return callback(err);
 				}
@@ -211,7 +217,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 			self.logger.log("Deleted file",fileInfo.filepath);
 			// Delete the metafile if present
 			if(fileInfo.hasMetaFile) {
-				fs.unlink(fileInfo.filepath + ".meta",function(err) {
+				fs.unlink(FileSystemAdaptor.addFileExtention(fileInfo.filepath,".meta"),function(err) {
 					if(err) {
 						return callback(err);
 					}
