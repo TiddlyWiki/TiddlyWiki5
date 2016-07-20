@@ -100,7 +100,7 @@ FileSystemAdaptor.prototype.findFirstFilter = function(filters,source) {
 /*
 Add file extension to a file path if it doesn't already exist.
 */
-FileSystemAdaptor.addFileExtention = function(file,extension) {
+FileSystemAdaptor.addFileExtension = function(file,extension) {
 	return $tw.utils.strEndsWith(file,extension) ? file : file + extension;
 };
 
@@ -132,7 +132,7 @@ FileSystemAdaptor.prototype.generateTiddlerFilename = function(title,extension,e
 		baseFilename = baseFilename.substr(0,200);
 	}
 	// Start with the base filename plus the extension
-	var filename = FileSystemAdaptor.addFileExtention(baseFilename,extension),
+	var filename = FileSystemAdaptor.addFileExtension(baseFilename,extension),
 		count = 1;
 	// Add a discriminator if we're clashing with an existing filename while
 	// handling case-insensitive filesystems (NTFS, FAT/FAT32, etc.)
@@ -168,24 +168,24 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 					return callback(err);
 				}
 				content = self.wiki.renderTiddler("text/plain","$:/core/templates/tiddler-metadata",{variables: {currentTiddler: tiddler.fields.title}});
-				filepath = FileSystemAdaptor.addFileExtention(fileInfo.filepath,".meta");
+				filepath = FileSystemAdaptor.addFileExtension(fileInfo.filepath,".meta");
 				fs.writeFile(filepath,content,{encoding: "utf8"},function (err) {
 					if(err) {
 						return callback(err);
 					}
-					self.logger.log("Saved file",fileInfo.filepath);
+					self.logger.log("Saved file",filepath);
 					_finish();
 				});
 			});
 		} else {
 			// Save the tiddler as a self contained templated file
 			content = self.wiki.renderTiddler("text/plain","$:/core/templates/tid-tiddler",{variables: {currentTiddler: tiddler.fields.title}});
-			filepath = FileSystemAdaptor.addFileExtention(fileInfo.filepath,".tid");
+			filepath = FileSystemAdaptor.addFileExtension(fileInfo.filepath,".tid");
 			fs.writeFile(filepath,content,{encoding: "utf8"},function (err) {
 				if(err) {
 					return callback(err);
 				}
-				self.logger.log("Saved file",fileInfo.filepath);
+				self.logger.log("Saved file",filepath);
 				_finish();
 			});
 		}
@@ -217,7 +217,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 			self.logger.log("Deleted file",fileInfo.filepath);
 			// Delete the metafile if present
 			if(fileInfo.hasMetaFile) {
-				fs.unlink(FileSystemAdaptor.addFileExtention(fileInfo.filepath,".meta"),function(err) {
+				fs.unlink(FileSystemAdaptor.addFileExtension(fileInfo.filepath,".meta"),function(err) {
 					if(err) {
 						return callback(err);
 					}
