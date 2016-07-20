@@ -726,7 +726,7 @@ button.tc-untagged-label {
 	.tc-story-river .tc-tiddler-frame {
 		margin: 0;
 		border: none;
-		padding: 28px;
+		padding: 0;
 	}
 }
 
