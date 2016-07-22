@@ -913,12 +913,13 @@ $tw.Wiki = function(options) {
 
 	// Get a tiddler from the store
 	this.getTiddler = function(title) {
-		var t = tiddlers[title];
-		if(t instanceof $tw.Tiddler) {
-			return t;
-		} else if(title !== undefined && Object.prototype.hasOwnProperty.call(shadowTiddlers,title)) {
-			return shadowTiddlers[title].tiddler;
-		} else {
+		if(title) {
+			var t = tiddlers[title];
+			if(t instanceof $tw.Tiddler) {
+				return t;
+			} else if(title !== undefined && Object.prototype.hasOwnProperty.call(shadowTiddlers,title)) {
+				return shadowTiddlers[title].tiddler;
+			}
 			return undefined;
 		}
 	};
