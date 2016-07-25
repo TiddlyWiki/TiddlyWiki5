@@ -20,6 +20,9 @@ This is a minor bug fix release.
 
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/2504]] problem with extraneous `.tid` extension added to tiddler filenames
 
+!! Other Improvements
+
+* Updated Portuguese (Portugal) translation
 
 ! Contributors
 
