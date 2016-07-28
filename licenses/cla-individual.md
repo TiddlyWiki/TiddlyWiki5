@@ -286,3 +286,5 @@ Pau Deluca, @PauDeLuca, 2016/04/11
 Brent Maxwell, @brentmaxwell, 2016/05/20
 
 Thomas Herlea, @maxthomax, 2016/06/09
+
+Segey Shishkin, @serj_aleks, 2016/07/28
