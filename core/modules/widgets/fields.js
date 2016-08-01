@@ -75,9 +75,12 @@ FieldsWidget.prototype.execute = function() {
 						value = reMatch[1];
 					}
 				}
+				// TW shows a warning, if field names contain special chars. So fieldName doesn't need special handling
+				// "value" needs special handling for $ due to how string.repace() treats $$ (it inserts only 1 $-sign)
+				// so we need to take care of 2 or more $-signs in the tiddler field value!
 				row = row.replace("$name$",fieldName);
-				row = row.replace("$value$",value);
-				row = row.replace("$encoded_value$",$tw.utils.htmlEncode(value));
+				row = row.replace("$value$",value.replace(/\$/g, "$$$$"));
+				row = row.replace("$encoded_value$", $tw.utils.htmlEncode(value.replace(/\$/g, "$$$$")));
 				text.push(row);
 			}
 		}
@@ -94,7 +97,7 @@ FieldsWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return false;	
+		return false;
 	}
 };
 
