@@ -236,3 +236,53 @@ Lolo le 13 @lolole13 2015/06/04
 Steven McDonald, @StevenMcD 2015/05/21
 
 Richard Smith, @richardwsmith 2015/05/22
+
+Marco Rimoldi, @marcor, 2015/06/26
+
+Slobodan Vujnovic, @slovuj, 2015/06/30
+
+Anthon Nilsson, @superdos, 2015/08/06
+
+Myeongjin, @araname, 2015/08/08
+
+Hegart Dmishiv, @hegart-dmishiv, 2015/09/15
+
+William Jackson, @matabele 2015/09/26
+
+Karl Knechtel, @zahlman, 2015/10/03
+
+Tony Grosinger @tgrosinger 2015/10/03
+
+Antaeus Feldspar @afeldspar 2015/10/20
+
+Soeren Enevoldsen, @senevoldsen90, 2015/10/09
+
+Santiago Pelufo, @spelufo, 2015/12/18
+
+Matthew Lauber, @mklauber, 2015/11/13
+
+Matthew DeAbreu, @mdeabreu, 2016/01/05
+
+Cameron Fischer, @flibbles, 2016/01/08
+
+Jim, @ARRRRGH, 2016/01/11
+
+Koke Laast, @Koke24, 2016/01/27
+
+Thomas Elmiger, @telmiger, 2016/02/02
+
+Richard Rath @rcrath 2016/02/12
+
+Eric Drechsel @edrex 2016/02/15
+
+@FND 2016/02/27
+
+Cengizhan Kurt, @webninjasi, 2016/03/03
+
+Knut Franke, @nome, 2016/03/20
+
+Pau Deluca, @PauDeLuca, 2016/04/11
+
+Brent Maxwell, @brentmaxwell, 2016/05/20
+
+Thomas Herlea, @maxthomax, 2016/06/09

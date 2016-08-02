@@ -5,8 +5,8 @@ Advanced/Hint: Informació interna sobre aquest TiddlyWiki
 Appearance/Caption: Aparença
 Appearance/Hint: Formes de personalitzar l'aparença del vostre TiddlyWiki.
 Basics/AnimDuration/Prompt: Duració de l'animació:
-Basics/Caption: Basic
-Basics/DefaultTiddlers/BottomHint: Useu &#91;&#91;corxets dobles&#93;&#93; per als títol amb espais. O podeu triar <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">mantenir l'ordre de l'story</$button>
+Basics/Caption: Bàsic
+Basics/DefaultTiddlers/BottomHint: Useu &#91;&#91;corxets dobles&#93;&#93; per als títols amb espais. O podeu triar <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">mantenir l'ordre de la cronologia</$button>
 Basics/DefaultTiddlers/Prompt: Tiddlers per omissió:
 Basics/DefaultTiddlers/TopHint: Trieu quins tiddlers s'han de mostrar a l'inici:
 Basics/Language/Prompt: Hola! Idioma actual:
@@ -21,17 +21,17 @@ Basics/Tiddlers/Prompt: Número de tiddlers:
 Basics/Title/Prompt: Títol d'aquest ~TiddlyWiki:
 Basics/Username/Prompt: Nom d'usuari per a signar les edicions:
 Basics/Version/Prompt: ~TiddlyWiki versió:
-EditorTypes/Caption: Editor Tipus
+EditorTypes/Caption: Tipus de l'editor
 EditorTypes/Editor/Caption: Editor
 EditorTypes/Hint: Aquests tiddlers determinen quin editor s'utilitza per a editar cada tipus de tiddler.
 EditorTypes/Type/Caption: Tipus
 Info/Caption: Informació
 Info/Hint: Informació sobre aquest TiddlyWiki
 LoadedModules/Caption: Mòduls carregats
-LoadedModules/Hint: Aquests són els mòduls tiddlers enllaçats a als seys tiddlers font. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
+LoadedModules/Hint: Aquests són els mòduls tiddlers enllaçats a als seus tiddlers font. Els mòduls indicats en cursiva no disposen de tiddler font, amb freqüència per que s'han configurat a l'arrencada.
 Palette/Caption: Paleta
 Palette/Editor/Clone/Caption: clona paquets de connectors
-Palette/Editor/Clone/Prompt: Es recomana que cloneu aquesta paeta ombra abans d'editar-la
+Palette/Editor/Clone/Prompt: Es recomana que cloneu aquesta paleta ombra abans d'editar-la
 Palette/Editor/Prompt: S'està editant
 Palette/Editor/Prompt/Modified: Aquesta paleta ombra ha estat modificada
 Palette/Editor/Reset/Caption: reinicia
@@ -54,7 +54,7 @@ Plugins/Plugins/Caption: Connectors
 Plugins/Plugins/Hint: Connectors
 Plugins/Themes/Caption: Temes
 Plugins/Themes/Hint: Connectors del tema
-Saving/Caption: S'està desant
+Saving/Caption: Desa
 Saving/Heading: S'està desant
 Saving/TiddlySpot/Advanced/Heading: Paràmetres avançats
 Saving/TiddlySpot/BackupDir: Carpeta de les còpies de seguretat
@@ -87,12 +87,12 @@ Settings/ToolbarButtons/Caption: Botons de la barra d'eines
 Settings/ToolbarButtons/Hint: Aparença del botó de la barra d'eines per omissió:
 Settings/ToolbarButtons/Icons/Description: Inclou la icona
 Settings/ToolbarButtons/Text/Description: Inclou el text
-StoryView/Caption: Vista del Story
+StoryView/Caption: Vista de la cronologia
 StoryView/Prompt: Vista actual:
 Theme/Caption: Tema
 Theme/Prompt: Tema actual:
 TiddlerFields/Caption: Camps del tiddler
-TiddlerFields/Hint: Auqest és el conjunt complet de CampsDelsTiddlers utilkitzats en aquest wiki (inclòs els tiddlers del sistema però sense incloure els tiddlers ombra).
+TiddlerFields/Hint: Aquest és el conjunt complet de CampsDelsTiddlers utilitzats en aquest wiki (inclòs els tiddlers del sistema però sense incloure els tiddlers ombra).
 Toolbars/Caption: Barres d'eines
 Toolbars/EditToolbar/Caption: Edita la barra d'eines
 Toolbars/EditToolbar/Hint: Trieu quins botons es mostren als tiddlers en mode edició

@@ -28,9 +28,9 @@ Performance.prototype.report = function(name,fn) {
 			self.measures = {};
 			var startTime = $tw.utils.timer(),
 				result = fn.apply(this,arguments);
-			self.logger.log(name + ": " + $tw.utils.timer(startTime) + "ms");
+			self.logger.log(name + ": " + $tw.utils.timer(startTime).toFixed(2) + "ms");
 			for(var m in self.measures) {
-				self.logger.log("+" + m + ": " + self.measures[m] + "ms");
+				self.logger.log("+" + m + ": " + self.measures[m].toFixed(2) + "ms");
 			}
 			return result;
 		};

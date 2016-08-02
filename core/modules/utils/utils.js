@@ -17,7 +17,18 @@ Display a warning, in colour if we're on a terminal
 */
 exports.warning = function(text) {
 	console.log($tw.node ? "\x1b[1;33m" + text + "\x1b[0m" : text);
-}
+};
+
+/*
+Repeats a string
+*/
+exports.repeat = function(str,count) {
+	var result = "";
+	for(var t=0;t<count;t++) {
+		result += str;
+	}
+	return result;
+};
 
 /*
 Trim whitespace from the start and end of a string
@@ -32,12 +43,43 @@ exports.trim = function(str) {
 };
 
 /*
+Find the line break preceding a given position in a string
+Returns position immediately after that line break, or the start of the string
+*/
+exports.findPrecedingLineBreak = function(text,pos) {
+	var result = text.lastIndexOf("\n",pos - 1);
+	if(result === -1) {
+		result = 0;
+	} else {
+		result++;
+		if(text.charAt(result) === "\r") {
+			result++;
+		}
+	}
+	return result;
+};
+
+/*
+Find the line break following a given position in a string
+*/
+exports.findFollowingLineBreak = function(text,pos) {
+	// Cut to just past the following line break, or to the end of the text
+	var result = text.indexOf("\n",pos);
+	if(result === -1) {
+		result = text.length;
+	} else {
+		if(text.charAt(result) === "\r") {
+			result++;
+		}
+	}
+	return result;
+};
+
+/*
 Return the number of keys in an object
 */
 exports.count = function(object) {
-	var s = 0;
-	$tw.utils.each(object,function() {s++;});
-	return s;
+	return Object.keys(object || {}).length;
 };
 
 /*
@@ -169,6 +211,17 @@ exports.extendDeepCopy = function(object,extendedProperties) {
 		}
 	}
 	return result;
+};
+
+exports.deepFreeze = function deepFreeze(object) {
+	var property, key;
+	Object.freeze(object);
+	for(key in object) {
+		property = object[key];
+		if($tw.utils.hop(object,key) && (typeof property === "object") && !Object.isFrozen(property)) {
+			deepFreeze(property);
+		}
+	}
 };
 
 exports.slowInSlowOut = function(t) {
@@ -374,17 +427,18 @@ exports.htmlEncode = function(s) {
 
 // Converts all HTML entities to their character equivalents
 exports.entityDecode = function(s) {
-	var e = s.substr(1,s.length-2); // Strip the & and the ;
+	var converter = String.fromCodePoint || String.fromCharCode,
+		e = s.substr(1,s.length-2); // Strip the & and the ;
 	if(e.charAt(0) === "#") {
 		if(e.charAt(1) === "x" || e.charAt(1) === "X") {
-			return String.fromCharCode(parseInt(e.substr(2),16));	
+			return converter(parseInt(e.substr(2),16));	
 		} else {
-			return String.fromCharCode(parseInt(e.substr(1),10));
+			return converter(parseInt(e.substr(1),10));
 		}
 	} else {
 		var c = $tw.config.htmlEntities[e];
 		if(c) {
-			return String.fromCharCode(c);
+			return converter(c);
 		} else {
 			return s; // Couldn't convert it as an entity, just return it raw
 		}
@@ -441,7 +495,7 @@ exports.escapeRegExp = function(s) {
 
 // Checks whether a link target is external, i.e. not a tiddler title
 exports.isLinkExternal = function(to) {
-	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]`|'"\\^~]+(?:\/|\b)/i;
+	var externalRegExp = /^(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]`|"\\^]+(?:\/|\b)/i;
 	return externalRegExp.test(to);
 };
 
@@ -620,6 +674,45 @@ exports.makeDataUri = function(text,type) {
 	parts.push(",");
 	parts.push(isBase64 ? text : encodeURIComponent(text));
 	return parts.join("");
+};
+
+/*
+Useful for finding out the fully escaped CSS selector equivalent to a given tag. For example:
+
+$tw.utils.tagToCssSelector("$:/tags/Stylesheet") --> tc-tagged-\%24\%3A\%2Ftags\%2FStylesheet
+*/
+exports.tagToCssSelector = function(tagName) {
+	return "tc-tagged-" + encodeURIComponent(tagName).replace(/[!"#$%&'()*+,\-./:;<=>?@[\\\]^`{\|}~,]/mg,function(c) {
+		return "\\" + c;
+	});
+};
+
+
+/*
+IE does not have sign function
+*/
+exports.sign = Math.sign || function(x) {
+	x = +x; // convert to a number
+	if (x === 0 || isNaN(x)) {
+		return x;
+	}
+	return x > 0 ? 1 : -1;
+};
+
+/*
+IE does not have an endsWith function
+*/
+exports.strEndsWith = function(str,ending,position) {
+	if(str.endsWith) {
+		return str.endsWith(ending,position);
+	} else {
+		if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > str.length) {
+			position = str.length;
+		}
+		position -= str.length;
+		var lastIndex = str.indexOf(ending, position);
+		return lastIndex !== -1 && lastIndex === position;
+	}
 };
 
 })();

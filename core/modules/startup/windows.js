@@ -30,7 +30,8 @@ exports.startup = function() {
 			paramObject = event.paramObject || {},
 			template = paramObject.template || "$:/core/templates/single.tiddler.window",
 			width = paramObject.width || "700",
-			height = paramObject.height || "600";
+			height = paramObject.height || "600",
+			variables = $tw.utils.extend({},paramObject,{currentTiddler: title});
 		// Open the window
 		var srcWindow = window.open("","external-" + title,"scrollbars,width=" + width + ",height=" + height),
 			srcDocument = srcWindow.document;
@@ -48,7 +49,7 @@ exports.startup = function() {
 			$tw.wiki.removeEventListener("change",refreshHandler);
 		},false);
 		// Set up the styles
-		var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet",{document: $tw.fakeDocument}),
+		var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet",{document: $tw.fakeDocument, variables: variables}),
 			styleContainer = $tw.fakeDocument.createElement("style");
 		styleWidgetNode.render(styleContainer,null);
 		var styleElement = srcDocument.createElement("style");
@@ -56,7 +57,7 @@ exports.startup = function() {
 		srcDocument.head.insertBefore(styleElement,srcDocument.head.firstChild);
 		// Render the text of the tiddler
 		var parser = $tw.wiki.parseTiddler(template),
-			widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument, parentWidget: $tw.rootWidget, variables: {currentTiddler: title}});
+			widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument, parentWidget: $tw.rootWidget, variables: variables});
 		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
 		// Function to handle refreshes
 		refreshHandler = function(changes) {

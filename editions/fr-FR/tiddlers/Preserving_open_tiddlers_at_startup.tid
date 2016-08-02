@@ -1,0 +1,16 @@
+created: 20140101192052333
+fr-title: Préserver les tiddlers ouverts au redémarrage
+modified: 20150614152501460
+tags: [[Customise TiddlyWiki]]
+title: Preserving open tiddlers at startup
+type: text/vnd.tiddlywiki
+
+Ordinairement, le lancement de TiddlyWiki affiche les tiddlers spécifiés par le filtre du tiddler [[$:/DefaultTiddlers]].
+
+Quelquefois il est utile de réouvrir les mêmes tiddlers ouverts au moment de la sauvegarde du fichier. Pour cela, régler [[$:/DefaultTiddlers]] à ce filtre<<:>>
+
+```
+[list[$:/StoryList]]
+```
+
+Ce filtre renvoie les filtres spécifiés dans le tiddler [[$:/StoryList]], le tiddler système que TiddlyWiki utilise pour mémoriser la suite de tiddlers du déroulé actuel.

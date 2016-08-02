@@ -1,0 +1,52 @@
+title: $:/plugins/tiddlywiki/text-slicer/ui/view-template-segment
+tags: $:/tags/ViewTemplate
+
+\define config-heading-status()
+$:/state/plugins/tiddlywiki/text-slicer/heading-status/$(currentTiddler)$
+\end
+
+<$reveal type="nomatch" state=<<folded-state>> text="hide" retain="yes" animate="yes">
+
+<$reveal type="nomatch" state="!!toc-type" text="">
+
+<div class="tc-view-template-document-tiddler-wrapper">
+
+<div class="tc-view-template-document-tiddler-heading">
+
+<div class="tc-view-template-document-tiddler-heading-icon">
+
+{{$:/core/images/file}}
+
+</div>
+
+<div class="tc-view-template-document-tiddler-subheading">
+
+<$view field="toc-type"/>
+
+</div>
+
+Parents: <$list filter="[all[current]listed[]!is[system]]" emptyMessage="None">
+<$link><$view field="title"/></$link>
+</$list>
+
+</div>
+
+<div class="tc-view-template-document-tiddler">
+
+<$vars
+	tv-default-heading-state="close"
+	tv-heading-status-config-prefix="view-template"
+	tv-heading-status-config-title=<<config-heading-status>>
+>
+
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler"/>
+
+</$vars>
+
+</div>
+
+</div>
+
+</$reveal>
+
+</$reveal>

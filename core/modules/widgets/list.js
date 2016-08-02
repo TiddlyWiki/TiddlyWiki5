@@ -156,7 +156,7 @@ Handle any changes to the history list
 */
 ListWidget.prototype.handleHistoryChanges = function() {
 	// Get the history data
-	var newHistory = this.wiki.getTiddlerData(this.historyTitle,[]);
+	var newHistory = this.wiki.getTiddlerDataCached(this.historyTitle,[]);
 	// Ignore any entries of the history that match the previous history
 	var entry = 0;
 	while(entry < newHistory.length && entry < this.history.length && newHistory[entry].title === this.history[entry].title) {

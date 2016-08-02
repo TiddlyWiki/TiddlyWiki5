@@ -14,4 +14,4 @@ description: 準備用於外部條目
 * ''filter'' - 受影響的辨識條目的篩選條件
 * ''fieldname'' - 要修改的欄位（預設為 "text"）
 * ''templatetitle'' - 該條目 wikify 到指定欄位。若為空白或丟失，則刪除指定的欄位
-* ''type'' - 要呈現的文本類型（預設為 "text/plain"; "text/html" 可以用於包含 HTML 標記)）
+* ''rendertype'' - 要呈現的文本類型（預設為 "text/plain"; "text/html" 可以用於包含 HTML 標記)）

@@ -9,7 +9,7 @@ $(currentTiddler)$/$(currentTab)$
 <$transclude tiddler=<<localised-info-tiddler-title>> mode="block">
 <$transclude tiddler=<<currentTiddler>> subtiddler=<<localised-info-tiddler-title>> mode="block">
 <$transclude tiddler=<<currentTiddler>> subtiddler=<<info-tiddler-title>> mode="block">
-No ''"<$text text=<<currentTab>>/>"'' found
+{{$:/language/ControlPanel/Plugin/NoInfoFound/Hint}}
 </$transclude>
 </$transclude>
 </$transclude>

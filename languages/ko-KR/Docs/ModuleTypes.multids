@@ -1,0 +1,22 @@
+title: $:/language/Docs/ModuleTypes/
+
+animation: RevealWidget으로 사용될 애니메이션.
+command: Node.js에 따라 실행될 수 있는 명령.
+config: `$tw.config` 안에 넣을 데이터.
+filteroperator: 개별 필터 연산자 메서드.
+global: `$tw` 안에 넣을 전역 데이터.
+isfilteroperator: ''is'' 필터 연산자에 대한 피연산자.
+macro: 자바스크립트 매크로 정의.
+parser: 다른 내용 형식을 위한 파서.
+saver: 브라우저에서 차이 메서드로 파일을 저장하기 위한 서버 핸들.
+startup: 시동 기능.
+storyview: 이야기 보기는 애니메이션 및 목록 위젯의 동작을 사용자 정의할 수 있습니다.
+tiddlerdeserializer: 티들러 안의 다른 내용 형식을 변환합니다.
+tiddlerfield: 개별 티들러 필드의 동작을 정의합니다.
+tiddlermethod: `$tw.Tiddler` 프로토타입에 메서드를 추가합니다.
+upgrader: 업그레이드/가져오기를 하는 동안 티들러에 업그레이드 처리를 적용합니다.
+utils: `$tw.utils`에 메서드를 추가합니다.
+utils-node: `$tw.utils`에 Node.js 특정 메서드를 추가합니다.
+widget: DOM 렌더링과 동작을 한 묶음으로 하는 위젯.
+wikimethod: `$tw.Wiki`에 메서드를 추가합니다.
+wikirule: 주요 위키텍스트를 파서하기 위한 개별 파서 규칙.

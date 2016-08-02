@@ -20,7 +20,7 @@ Els paràmetres són:
 * ''host'' - nom de host opcional que donarà el servei (per omissió "127.0.0.1" és a dir "localhost")
 * ''prefixdelaruta'' - prefix opcional de les rutes
 
-Si s'indica el paràmetre de la contrasenya el navegador demanrà un usuari i una contrasenya. La contrasenya es trasmet tal qual així que no és una bona solució d'ús general.
+Si s'indica el paràmetre de la contrasenya el navegador demanarà un usuari i una contrasenya. La contrasenya es trasmet tal qual així que no és una bona solució d'ús general.
 
 Per exemple:
 

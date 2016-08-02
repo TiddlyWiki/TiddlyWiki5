@@ -195,16 +195,23 @@ Widget.prototype.hasVariable = function(name,value) {
 Construct a qualifying string based on a hash of concatenating the values of a given variable in the parent chain
 */
 Widget.prototype.getStateQualifier = function(name) {
+	this.qualifiers = this.qualifiers || Object.create(null);
 	name = name || "transclusion";
-	var output = [],
-		node = this;
-	while(node && node.parentWidget) {
-		if($tw.utils.hop(node.parentWidget.variables,name)) {
-			output.push(node.getVariable(name));
+	if(this.qualifiers[name]) {
+		return this.qualifiers[name];
+	} else {
+		var output = [],
+			node = this;
+		while(node && node.parentWidget) {
+			if($tw.utils.hop(node.parentWidget.variables,name)) {
+				output.push(node.getVariable(name));
+			}
+			node = node.parentWidget;
 		}
-		node = node.parentWidget;
+		var value = $tw.utils.hashString(output.join(""));
+		this.qualifiers[name] = value;
+		return value;
 	}
-	return $tw.utils.hashString(output.join(""));
 };
 
 /*
@@ -497,6 +504,23 @@ Widget.prototype.invokeActions = function(triggeringWidget,event) {
 	return handled;
 };
 
+/*
+Invoke the action widgets defined in a string
+*/
+Widget.prototype.invokeActionString = function(actions,triggeringWidget,event) {
+	actions = actions || "";
+	var parser = this.wiki.parseText("text/vnd.tiddlywiki",actions,{
+			parentWidget: this,
+			document: this.document
+		}),
+		widgetNode = this.wiki.makeWidget(parser,{
+			parentWidget: this,
+			document: this.document
+		});
+	var container = this.document.createElement("div");
+	widgetNode.render(container,null);
+	return widgetNode.invokeActions(this,event);
+};
 
 Widget.prototype.allowActionPropagation = function() {
 	return true;

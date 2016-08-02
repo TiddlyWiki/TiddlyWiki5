@@ -1,8 +1,9 @@
-title: EditTextWidget
-created: 201310241419
-modified: 20150220162131000
-tags: Widgets
 caption: edit-text
+created: 20131024141900000
+modified: 20151224143914772
+tags: Widgets
+title: EditTextWidget
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
@@ -22,12 +23,13 @@ The content of the `<$edit-text>` widget is ignored.
 |class |A CSS class to be assigned to the generated HTML editing element |
 |placeholder |Placeholder text to be displayed when the edit field is empty |
 |focusPopup |Title of a state tiddler for a popup that is displayed when the editing element has focus  |
-|focus |Set to "true" to automatically focus the editor after creation  |
+|focus |Set to "yes" or "true" to automatically focus the editor after creation  |
 |tag |Overrides the generated HTML editing element tag. Use `textarea` for a multi-line editor |
 |type |Overrides the generated HTML editing element `type` attribute |
 |size |The size of the input field (in characters) |
 |autoHeight |Either "yes" or "no" to specify whether to automatically resize `textarea` editors to fit their content (defaults to "yes") |
 |minHeight |Minimum height for automatically resized `textarea` editors, specified in CSS length units such as "px", "em" or "%" |
+|rows|Sets the rows attribute of a generated textarea |
 
 ! Notes
 

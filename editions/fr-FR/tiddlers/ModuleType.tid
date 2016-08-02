@@ -1,0 +1,19 @@
+caption: Module, Type
+created: 20131129162847412
+modified: 20150622110153803
+tags: Concepts
+title: ModuleType
+type: text/vnd.tiddlywiki
+
+\define describe() {{$:/language/Docs/ModuleTypes/$(type)$}}
+
+Le champ `module-type` d'un [[module JavaScript|Modules]] est une chaine identifiant le type de module. Ci-après la liste des types de module utilisés dans ce wiki<<:>>
+
+<dl>
+<$list filter="[moduletypes[]]">
+<dt>{{!!title}}</dt>
+<$set name=type value=<<currentTiddler>>>
+<dd><<describe>></dd>
+</$set>
+</$list>
+</dl>

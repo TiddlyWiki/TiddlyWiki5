@@ -1,13 +1,11 @@
 title: $:/core/ui/ControlPanel/Modals/AddPlugins
 subtitle: {{$:/core/images/download-button}} {{$:/language/ControlPanel/Plugins/Add/Caption}}
 
-\define lingo-base() $:/language/ControlPanel/Plugins/
-
 \define install-plugin-button()
 <$button>
 <$action-sendmessage $message="tm-load-plugin-from-library" url={{!!url}} title={{$(assetInfo)$!!original-title}}/>
-<$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion" emptyMessage="""install""">
-reinstall
+<$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion" emptyMessage="""{{$:/language/ControlPanel/Plugins/Install/Caption}}""">
+{{$:/language/ControlPanel/Plugins/Reinstall/Caption}}
 </$list>
 </$button>
 \end
@@ -48,9 +46,9 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 <$reveal type="match" text="yes" state=<<popup-state>>>
 <div class="tc-plugin-info-dropdown">
 <div class="tc-plugin-info-dropdown-message">
-<$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion" emptyMessage="""This plugin is not currently installed""">
+<$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion" emptyMessage="""{{$:/language/ControlPanel/Plugins/NotInstalled/Hint}}""">
 <em>
-This plugin is already installed at version <$text text=<<installedVersion>>/>
+{{$:/language/ControlPanel/Plugins/AlreadyInstalled/Hint}}
 </em>
 </$list>
 </div>
@@ -65,12 +63,12 @@ This plugin is already installed at version <$text text=<<installedVersion>>/>
 \define load-plugin-library-button()
 <$button class="tc-btn-big-green">
 <$action-sendmessage $message="tm-load-plugin-library" url={{!!url}} infoTitlePrefix="$:/temp/RemoteAssetInfo/"/>
-{{$:/core/images/chevron-right}} open plugin library
+{{$:/core/images/chevron-right}} {{$:/language/ControlPanel/Plugins/OpenPluginLibrary}}
 </$button>
 \end
 
 \define display-server-assets(type)
-Search: <$edit-text tiddler="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" default="" type="search" tag="input"/>
+{{$:/language/Search/Search}}: <$edit-text tiddler="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" default="" type="search" tag="input"/>
 <$reveal state="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" type="nomatch" text="">
 <$button class="tc-btn-invisible">
 <$action-setfield $tiddler="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" $field="text" $value=""/>

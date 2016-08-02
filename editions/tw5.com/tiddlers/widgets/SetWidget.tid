@@ -51,7 +51,7 @@ This form of the set variable widget chooses one of two specified values accordi
 This form of the set variable widget evaluates the filter and assigns the result to the variable as a space-separated list (using double square brackets for titles containing spaces).
 
 ```
-<$set name="myVariable" filter="[tag[Introduction]]">
+<$set name="myVariable" filter="[tag[HelloThere]]">
 <$text text=<<myVariable>>/>
 </$set>
 ```

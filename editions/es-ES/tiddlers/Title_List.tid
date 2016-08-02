@@ -1,0 +1,17 @@
+caption: Listas
+created: 20150117152418000
+es-title: Listas
+modified: 20160415042010368
+tags: Concepts
+title: Title List
+type: text/vnd.tiddlywiki
+
+Una <<.def "lista">> es una línea de texto que presenta el título de uno o más tiddlers como una cadena de títulos separados por espacios.
+
+Si un título <<.em "contiene">> espacios, se enuncia con corchetes dobles:
+
+`EnMarcha [[Descubre TiddlyWiki]] Actualizaciones`
+
+La función de creación de listas se usa en varios lugares, incluyendo PermaLinks y el campo [[lista|ListField]]
+
+Son, de hecho, la forma más simple de [[filtro|Filters]] y una de las maneras que hay de presentar una [[selección de títulos|Title Selection]].

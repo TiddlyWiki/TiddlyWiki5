@@ -1,0 +1,20 @@
+caption: Widgets
+created: 20140908130500000
+modified: 20150622112829584
+tags: Concepts Reference
+title: Widgets
+type: text/vnd.tiddlywiki
+
+L'affichage de ~TiddlyWiki est piloté par un ensemble de <<.def widgets>> sous-jacents. Ceux-ci sont organisés dans une structure arborescente<<:>> chaque widget a un widget parent et zéro ou plusieurs widgets enfants.
+
+~TiddlyWiki génère cet <<.def "arbre widget">> par l'analyse WikiText des tiddlers. Chaque composant de la syntaxe WikiText, y compris le cas trivial du texte ordinaire, génère le widget correspondant. L'arborescence widget est une représentation intermédiaire, rendue, par la suite, dans l'affichage réel final.
+
+Les Widgets sont similaires aux éléments HTML d'un document. En fait, les balises HTML dans Wikitext génèrent des <<.def "éléments widgets">> dédiés. 
+
+Chaque classe de widget contribue a une aptitude spécifique de la fonctionnalité globale, comme l'aptitude à <<.wlink2 "afficher une image" ImageWidget>>, <<.wlink2 "un bouton" ButtonWidget>>, pour <<.wlink2 "appeler une macro" MacroCallWidget>>, <<.wlink2 "transclure un texte externe" TranscludeWidget>>, ou pour [[marquer une partie du texte comme titre|HTML in WikiText]].
+
+Les widget plus spécialisés utilisent une [[syntaxe de widget|Widgets in WikiText]] polyvalente comme seule représentation WikiText possible.
+
+Les classes de widget suivantes sont intégrées au noyau<<:>>
+
+<<list-links "[tag[Widgets]]">>

@@ -1,0 +1,9 @@
+created: 20150902123139133
+modified: 20150902123255662
+tags: Editions
+title: Blog Edition
+type: text/vnd.tiddlywiki
+
+The ''Blog'' edition of TiddlyWiki contains tools to help publish static HTML blogs written in TiddlyWiki. It is currently designed for use under Node.js.
+
+While documentation is being prepared, see https://github.com/Jermolene-blog/blog for an example of use.

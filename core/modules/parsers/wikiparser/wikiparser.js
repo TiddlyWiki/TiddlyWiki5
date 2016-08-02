@@ -16,6 +16,7 @@ Attributes are stored as hashmaps of the following objects:
 
 	{type: "string", value: <string>} - literal string
 	{type: "indirect", textReference: <textReference>} - indirect through a text reference
+	{type: "macro", macro: <TBD>} - indirect through a macro invocation
 
 \*/
 (function(){
@@ -26,15 +27,24 @@ Attributes are stored as hashmaps of the following objects:
 
 var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
+	var self = this;
+	// Check for an externally linked tiddler
+	if($tw.browser && (text || "") === "" && options._canonical_uri) {
+		this.loadRemoteTiddler(options._canonical_uri);
+		text = $tw.language.getRawString("LazyLoadingWarning");
+	}
 	// Initialise the classes if we don't have them already
 	if(!this.pragmaRuleClasses) {
 		WikiParser.prototype.pragmaRuleClasses = $tw.modules.createClassesFromModules("wikirule","pragma",$tw.WikiRuleBase);
+		this.setupRules(WikiParser.prototype.pragmaRuleClasses,"$:/config/WikiParserRules/Pragmas/");
 	}
 	if(!this.blockRuleClasses) {
 		WikiParser.prototype.blockRuleClasses = $tw.modules.createClassesFromModules("wikirule","block",$tw.WikiRuleBase);
+		this.setupRules(WikiParser.prototype.blockRuleClasses,"$:/config/WikiParserRules/Block/");
 	}
 	if(!this.inlineRuleClasses) {
 		WikiParser.prototype.inlineRuleClasses = $tw.modules.createClassesFromModules("wikirule","inline",$tw.WikiRuleBase);
+		this.setupRules(WikiParser.prototype.inlineRuleClasses,"$:/config/WikiParserRules/Inline/");
 	}
 	// Save the parse text
 	this.type = type || "text/vnd.tiddlywiki";
@@ -48,14 +58,49 @@ var WikiParser = function(type,text,options) {
 	this.blockRules = this.instantiateRules(this.blockRuleClasses,"block",0);
 	this.inlineRules = this.instantiateRules(this.inlineRuleClasses,"inline",0);
 	// Parse any pragmas
-	this.tree = this.parsePragmas();
+	this.tree = [];
+	var topBranch = this.parsePragmas();
 	// Parse the text into inline runs or blocks
 	if(options.parseAsInline) {
-		this.tree.push.apply(this.tree,this.parseInlineRun());
+		topBranch.push.apply(topBranch,this.parseInlineRun());
 	} else {
-		this.tree.push.apply(this.tree,this.parseBlocks());
+		topBranch.push.apply(topBranch,this.parseBlocks());
 	}
 	// Return the parse tree
+};
+
+/*
+*/
+WikiParser.prototype.loadRemoteTiddler = function(url) {
+	var self = this;
+	$tw.utils.httpRequest({
+		url: url,
+		type: "GET",
+		callback: function(err,data) {
+			if(!err) {
+				var tiddlers = self.wiki.deserializeTiddlers(".tid",data,self.wiki.getCreationFields());
+				$tw.utils.each(tiddlers,function(tiddler) {
+					tiddler["_canonical_uri"] = url;
+				});
+				if(tiddlers) {
+					self.wiki.addTiddlers(tiddlers);
+				}
+			}
+		}
+	});
+};
+
+/*
+*/
+WikiParser.prototype.setupRules = function(proto,configPrefix) {
+	var self = this;
+	if(!$tw.safemode) {
+		$tw.utils.each(proto,function(object,name) {
+			if(self.wiki.getTiddlerText(configPrefix + name,"enable") !== "enable") {
+				delete proto[name];
+			}
+		});
+	}
 };
 
 /*
@@ -122,7 +167,7 @@ WikiParser.prototype.findNextMatch = function(rules,startPos) {
 Parse any pragmas at the beginning of a block of parse text
 */
 WikiParser.prototype.parsePragmas = function() {
-	var tree = [];
+	var currentTreeBranch = this.tree;
 	while(true) {
 		// Skip whitespace
 		this.skipWhitespace();
@@ -137,9 +182,15 @@ WikiParser.prototype.parsePragmas = function() {
 			break;
 		}
 		// Process the pragma rule
-		tree.push.apply(tree,nextMatch.rule.parse());
+		var subTree = nextMatch.rule.parse();
+		if(subTree.length > 0) {
+			// Quick hack; we only cope with a single parse tree node being returned, which is true at the moment
+			currentTreeBranch.push.apply(currentTreeBranch,subTree);
+			subTree[0].children = [];
+			currentTreeBranch = subTree[0].children;
+		}
 	}
-	return tree;
+	return currentTreeBranch;
 };
 
 /*

@@ -1,5 +1,5 @@
 created: 20131129101027725
-modified: 20140912141016452
+modified: 20160602024857740
 tags: Saving
 title: Saving on iPad/iPhone
 type: text/vnd.tiddlywiki
@@ -12,11 +12,11 @@ Instructions for use:
 # Touch the title in the centre of the toolbar in order
 #* A text box should appear allowing you to enter a URL
 # Enter the URL `http://tiddlywiki.com/empty.html`
-# When the empty TiddlyWiki5 has loaded, touch the ''save'' icon (it's the second icon from the right on the top toolbar)
+# When the empty TiddlyWiki has loaded, touch the ''save'' icon (it's the second icon from the right on the top toolbar)
 #* An alert box should appear allowing you to enter a local filename
 # Enter the filename you wish to use for the document (ending with `.html`)
-# Edit your TiddlyWiki as normal
-# To save changes, click the ''save'' button in the sidebar
-#* A confirmation message should appear at the upper right
+# Try creating a new tiddler using the ''new tiddler'' {{$:/core/images/new-button}} button in the sidebar. Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''ok'' button
+# Save your changes by clicking the {{$:/core/images/save-button}} ''save changes'' button in the sidebar
+#* A confirmation message should appear at the top right of the window
 
 //Note that TWEdit is published independently of TiddlyWiki//

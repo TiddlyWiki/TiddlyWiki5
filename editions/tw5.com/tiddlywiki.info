@@ -4,15 +4,16 @@
 		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/browser-sniff",
-		"tiddlywiki/railroad"
+		"tiddlywiki/railroad",
+		"tiddlywiki/evernote"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite",
-		"tiddlywiki/nighttime",
 		"tiddlywiki/starlight",
 		"tiddlywiki/seamless",
 		"tiddlywiki/centralised",
+		"tiddlywiki/tight",
 		"tiddlywiki/readonly"
 	],
 	"languages": [
@@ -20,9 +21,14 @@
 	"build": {
 		"index": [
 			"--savetiddlers","[tag[external-image]]","images",
+			"--rendertiddlers","[tag[external-text]]","$:/core/templates/tid-tiddler","text","text/plain",".tid",
 			"--setfield","[tag[external-image]]","_canonical_uri","$:/core/templates/canonical-uri-external-image","text/plain",
-			"--setfield","[tag[external-image]]","text","","text/plain",
+			"--setfield","[tag[external-text]]","_canonical_uri","$:/core/templates/canonical-uri-external-text","text/plain",
+			"--setfield","[tag[external-image]] [tag[external-text]]","text","","text/plain",
 			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+		"empty": [
+			"--rendertiddler","$:/editions/tw5.com/download-empty","empty.html","text/plain",
+			"--rendertiddler","$:/editions/tw5.com/download-empty","empty.hta","text/plain"],
 		"encrypted": [
 			"--password", "password",
 			"--rendertiddler", "$:/core/save/all", "encrypted.html", "text/plain",
@@ -37,9 +43,6 @@
 			"--rendertiddler","$:/core/copyright.txt","licenses/copyright.md","text/plain"],
 		"tw2": [
 			"--rendertiddler","TiddlyWiki2ReadMe","tw2/readme.md","text/html"],
-		"empty": [
-			"--rendertiddler","$:/editions/tw5.com/download-empty","empty.html","text/plain",
-			"--rendertiddler","$:/editions/tw5.com/download-empty","empty.hta","text/plain"],
 		"static": [
 			"--rendertiddler","$:/core/templates/static.template.html","static.html","text/plain",
 			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",

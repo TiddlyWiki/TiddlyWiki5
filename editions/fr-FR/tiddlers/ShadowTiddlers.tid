@@ -1,0 +1,14 @@
+created: 20150622123550638
+fr-title: Tiddlers shadow
+modified: 20150624092044177
+tags: Concepts
+title: ShadowTiddlers
+type: text/vnd.tiddlywiki
+
+Les tiddlers shadow sont des tiddlers chargés à partir d'un [[Plugins]]. Contrairement aux tiddlers ordinaires, ils n'apparaissent pas dans de multiple listes.
+
+Les tiddlers shadow peuvent être remplacés par un tiddler ordinaire de même nom. Si ce tiddler est supprimé, le tiddler shadow est alors automatiquement restauré.
+
+Les tiddlers shadow actuels sont<<:>>
+
+<$list filter="[all[shadows]sort[title]]"/>

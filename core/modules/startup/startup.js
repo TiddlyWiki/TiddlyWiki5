@@ -18,18 +18,43 @@ exports.after = ["load-modules"];
 exports.synchronous = true;
 
 // Set to `true` to enable performance instrumentation
-var PERFORMANCE_INSTRUMENTATION = false;
+var PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE = "$:/config/Performance/Instrumentation";
 
 var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
 	var modules,n,m,f;
+	// Minimal browser detection
 	if($tw.browser) {
 		$tw.browser.isIE = (/msie|trident/i.test(navigator.userAgent));
+		$tw.browser.isFirefox = !!document.mozFullScreenEnabled;
 	}
+	// Platform detection
+	$tw.platform = {};
+	if($tw.browser) {
+		$tw.platform.isMac = /Mac/.test(navigator.platform);
+		$tw.platform.isWindows = /win/i.test(navigator.platform);
+		$tw.platform.isLinux = /Linux/i.test(navigator.appVersion);
+	} else {
+		switch(require("os").platform()) {
+			case "darwin":
+				$tw.platform.isMac = true;
+				break;
+			case "win32":
+				$tw.platform.isWindows = true;
+				break;
+			case "freebsd":
+				$tw.platform.isLinux = true;
+				break;
+			case "linux":
+				$tw.platform.isLinux = true;
+				break;
+		}
+	}
+	// Initialise version
 	$tw.version = $tw.utils.extractVersionInfo();
 	// Set up the performance framework
-	$tw.perf = new $tw.Performance(PERFORMANCE_INSTRUMENTATION);
+	$tw.perf = new $tw.Performance($tw.wiki.getTiddlerText(PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE,"no") === "yes");
 	// Kick off the language manager and switcher
 	$tw.language = new $tw.Language();
 	$tw.languageSwitcher = new $tw.PluginSwitcher({
@@ -50,6 +75,8 @@ exports.startup = function() {
 			"$:/themes/tiddlywiki/vanilla"
 		]
 	});
+	// Kick off the keyboard manager
+	$tw.keyboardManager = new $tw.KeyboardManager();
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
 	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers

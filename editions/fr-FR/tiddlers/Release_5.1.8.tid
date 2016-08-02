@@ -1,0 +1,106 @@
+caption: 5.1.8
+created: 20150417163307227
+fr-title: Version 5.1.8
+modified: 20150621141419790
+released: 2015041716307227
+tags: ReleaseNotes
+title: Release 5.1.8
+type: text/vnd.tiddlywiki
+
+//[[Rendez-vous sur GitHub pour l'historique détaillé des évolutions de cette version|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.7...v5.1.8]]//
+
+Cette version intègre plusieurs améliorations à la documentation de TiddlyWiki. Tous mes remerciements à tous ceux qui y ont contribué, et spécialement à notre prodigieux nouveau contributeur Astrid Elocson.
+
+!! Améliorations linguistiques
+
+* Amélioration des traductions Française, Danoise, Chinoise et Japonaise
+* [[Ajout|https://github.com/Jermolene/TiddlyWiki5/commit/cb8caf6a01aeeac480bf28661888961657b0dbd8]] de la traduction Tchèque
+* [[Ajout|https://github.com/Jermolene/TiddlyWiki5/commit/d6918d737f5d1b663346ad9a35421a5ae0ffb9a7]]  de la traduction [[Interlingua|http://en.wikipedia.org/wiki/Interlingua]]
+* [[Ajout|https://github.com/Jermolene/TiddlyWiki5/commit/6721a5eb1b77935226ccc8559008af3a0a05d0cb]]  de la traduction Portugaise
+* [[Ajout|https://github.com/Jermolene/TiddlyWiki5/commit/b845751d3c549366adb2f6e5c58b0114fa95ba30]] de la traduction Indou et Punjabe
+* [[Ajout|https://github.com/Jermolene/TiddlyWiki5/commit/49a9a2c44ca3a71fff3062709f06940aaca4a574]]  de la traduction Slovaque
+* [[Ajout|https://github.com/Jermolene/TiddlyWiki5/commit/5d947ed582fb9d68c01d82a334ab75498a8724ef]] de la traduction Espagnole
+* [[Ajout|https://github.com/Jermolene/TiddlyWiki5/commit/2c367c5476da70ce9c2b37838febcdf437b9aca4]] localisation de l'invite de cryptage
+
+!! Améliorations ergonomiques
+
+* [[Ajoute|https://github.com/Jermolene/TiddlyWiki5/commit/987bfcfd5b49b992e5fd45f3428497f6f55cae53]] une d'interface utilisateur pour [[régler l'image d'arrière plan|Setting a page background image]]
+* [[Corrige|https://github.com/Jermolene/TiddlyWiki5/commit/3df341621d30b205775288e324cef137c48e9f6e]] un problème avec un défilement inutile au démarrage
+* [[Actualise|https://github.com/Jermolene/TiddlyWiki5/commit/ae001a19e5b3e43cf5388fd4e8d99788085649fe]] le [[Plugin KaTeX|KaTeX Plugin]] vers le [[KaTeX v0.2.0|https://github.com/Khan/KaTeX/releases/tag/v0.2.0]], pour un meilleur support des symboles
+* [[Ajoute|https://github.com/Jermolene/TiddlyWiki5/commit/70e419824fab107aab58f87780dbb5a1de70c248]] l'affichage d'un panneau d'aide flottant au [[Plugin Help|$:/plugins/tiddlywiki/help]]
+* [[Ajoute|https://github.com/Jermolene/TiddlyWiki5/commit/8643278a452d1a300cec8d3425c1b18699a17dca]] le support d'une bibliothèque de plugins en ligne
+* [[Ajoute|https://github.com/Jermolene/TiddlyWiki5/commit/ea6e60e66983ee1184f09c5796ef6c8bceae703a]] la sélection automatique de la zone de recherche au démarrage
+* [[Intègre|https://github.com/Jermolene/TiddlyWiki5/commit/4f3cb8b9aebfc4f65f40c96ef99730887d746b41]] le [[Plugin Railroad|Railroad Plugin]] par Astrid Elocson (le voir en action dans la nouvelle documentation de la [[Syntaxe des filtres|Filter Syntax]])
+* [[Migre|https://github.com/Jermolene/TiddlyWiki5/commit/230066eeae9ace8336612e02c78f8cdaa3f717e4]] la fonctionnalité "Titres Stickés", par un réglage optionnel, des thèmes "Vanilla"/"Snow White". Ainsi les titres des tiddlers collent au haut de la fenêtre pendant le défilement pour les navigateurs qui l'acceptent `position: sticky` (comme Safari et Firefox)
+* [[Ajoute|https://github.com/Jermolene/TiddlyWiki5/commit/8cb7090c40489c81e8c5dfb8cbbdee2c60998c3e]] des icones à [[RechercheAvancée|$:/AdvancedSearch]], [[PanneauDeContrôle|$:/ControlPanel]] et [[GestionDesÉtiquettes|$:/TagManager]]
+* [[Change|https://github.com/Jermolene/TiddlyWiki5/commit/21b6ce71ffc617f61d4da0065a3ee695be535e2a]] le libellé du bouton du tiddler "save" pour "confirm"
+* [[Ajoute|https://github.com/Jermolene/TiddlyWiki5/issues/1103]] la liaison automatique à des tiddlers système tels que $:/ControlPanel
+* [[Améliore|https://github.com/Jermolene/TiddlyWiki5/commit/9c7936413a8c50817044eb409661a575f7f97563]] le déroulé des listes de titres correspondant à l'étiquette
+* [[Ajoute|https://github.com/Jermolene/TiddlyWiki5/commit/aae56f20af35e7be6f3839a8c727e3f43174efe9]] une bannière avertissant l'utilisateur quand la modification de plugins demande la réactualisation de la page
+* [[Ajoute|https://github.com/Jermolene/TiddlyWiki5/commit/0bd2ec50e1514ef247182816f9f9e421f52f67bb]] une première passe à la vue du déroulé "empilé"
+* [[Change|https://github.com/Jermolene/TiddlyWiki5/commit/421ac16389cf07e8c00611ef5a858da0b89f7584]] les entêtes et pieds de page modaux afin d'être analysés par défaut dans le mode enligne (en évitant les balises `<p>` inutiles)
+
+!! Améliorations Technologiques
+
+* [[Ajoute|https://github.com/Jermolene/TiddlyWiki5/commit/d340277cb219ffebd212fbf409e8ea804121d105]] la [[Macro ResolvePath|resolvepath Macro]]
+* [[Ajoute|https://github.com/Jermolene/TiddlyWiki5/commit/718ce3e4aa04f7af5e9310f90d3415c0d82bee6f]] l'attribut ''class'' au CheckboxWidget
+* [[Ajoute|https://github.com/Jermolene/TiddlyWiki5/commit/bb10e2b02900ece4701c44c3a7e7c03304e813b7]] le support d'affichage de message spécial si le déroulé principal est vide
+* [[Améliore|https://github.com/Jermolene/TiddlyWiki5/commit/6e0c7d90221771ae384d620984f08a2090c500dc]] le rendu des polices sous Mac OS X
+* [[Ajoute|https://github.com/Jermolene/TiddlyWiki5/commit/a2493f80a973b24ad3d3affda945c437b98c2d2e]] le support d'inclusion des fichiers ZIP
+* [[Ajoute|https://github.com/Jermolene/TiddlyWiki5/commit/1808b1597e5a61379e4e5381d6d78bb73fa3a523]] le support d'éléments personnalisés par le RevealWidget
+* [[Ajoute|https://github.com/Jermolene/TiddlyWiki5/commit/bd6472c1d10bc86eaf1b317c35b86f84086ee3c8]] l'attribut ''style'' au RevealWidget
+* [[Corrige|https://github.com/Jermolene/TiddlyWiki5/commit/0b4ed3c72de16148ffe62abf1c5c06f2d2ce47f1]] l'utilisation de palette de couleurs dans les entrées de texte
+* Plusieurs nouveaux [[icones au noyau|ImageGallery Example]]: <span style="fill:#aaa;"><span title="$:/core/images/github">{{$:/core/images/github}}</span> <span title="$:/core/images/help">{{$:/core/images/help}}</span> <span title="$:/core/images/mail">{{$:/core/images/mail}}</span> <span title="$:/core/images/tip">{{$:/core/images/tip}}</span> <span title="$:/core/images/warning">{{$:/core/images/warning}}</span> <span title="$:/core/images/twitter">{{$:/core/images/twitter}}</span> <span title="$:/core/images/video">{{$:/core/images/video}}</span> <span title="$:/core/images/up-arrow">{{$:/core/images/up-arrow}}</span> <span title="$:/core/images/left-arrow">{{$:/core/images/left-arrow}}</span></span>
+
+!! Corrections de Bogues
+
+* [[Corrige|https://github.com/Jermolene/TiddlyWiki5/pull/1520]] les opérateurs [[sameday|sameday Operator]] et [[eachday|eachday Operator]] pour accepter les chaines de date TW5
+* [[Corrige|https://github.com/Jermolene/TiddlyWiki5/pull/1249]] les tests de compatibilité des numéros de version pour lesplugins
+* [[Corrige|https://github.com/Jermolene/TiddlyWiki5/commit/1adfe20508116da0ee4b5c9e72ea9742f24b60c9]] un problème avec l'annulation répétée d'une ébauche
+* [[Améliore|https://github.com/Jermolene/TiddlyWiki5/commit/050b643948e24d1d93a83766a23a0d693616d01e]] la mise au bacasable des éléments `<iframe>` générés
+* [[Corrige|https://github.com/Jermolene/TiddlyWiki5/commit/b166632bbb76a7a033cd8fc3af14e5dadddfc631]] un problème avec le mode arrière plan sur Firefox
+* [[Corrige|https://github.com/Jermolene/TiddlyWiki5/commit/1b87d9134bd0b45be671eebfdcac1d7acadcecf4]] un problème de glissé accidentel d'un tiddler dans sa fenêtre originale
+* [[Corrige|https://github.com/Jermolene/TiddlyWiki5/commit/c9ab873ba393753647f2b0b3b3aa1a8bcf6b1c28]] un problème avec le glissé de certains plugins avec Safari
+* [[Corrige en partie|https://github.com/Jermolene/TiddlyWiki5/commit/2f8837a44508687223c4d78e718cf82a9b35c97b]] un problème avec les icones SVG coupées d'1 pixel sur la droite et en bas
+* [[Corrige|https://github.com/Jermolene/TiddlyWiki5/commit/f3ed9bf7e4936dd9bbe3e237673828bbe89326f9]] un problème avec les doubles cotes dans la valeur d'un nouveau champ
+
+!! Modification de Node.js
+
+//Ces modifications affectent seulement les utilisateurs de TiddlyWiki sous Node.js//
+
+* [[Corrige|https://github.com/Jermolene/TiddlyWiki5/commit/cc85368fd48f1e5878018a4e00b6c17d436e67a9]] le [[Plugin Highlight|Highlight Plugin]] pour fonctionner pendant la génération de fichiers statiques sous Node.js
+* [[Corrige|https://github.com/Jermolene/TiddlyWiki5/commit/c296f14210545374124df5d4ae9ffb402ed73561]] un problème avec l'insensibilité à la casse sous certains systèmes (par exemple, Windows)
+* [[Ajoute|https://github.com/Jermolene/TiddlyWiki5/pull/1354]] un metada mobile aux gabarits de pages statiques
+* [[Ajoute|https://github.com/Jermolene/TiddlyWiki5/pull/1352]] un paramètre "noclean"  au RenderTiddlersCommand
+* [[Ajoute|https://github.com/Jermolene/TiddlyWiki5/commit/b768dc332b2d5d7ac1f731953cafb5fd1b30dad9]] les opérateurs [[editions|editions Operator]] et [[editiondescription|editiondescription Operator]] pour énumérer les éditions disponibles
+
+!! Contributeurs
+
+[[@Jermolene|https://github.com/Jermolene]] tient à remercier tous les contributeurs de cette version qui ont généreusement donné de leur temps pour aider à l'amélioration de TiddlyWiki:
+
+* [[@aelocson|https://github.com/aelocson]]
+* [[@andreasabeck|https://github.com/andreasabeck]]
+* [[@alexhough|https://github.com/alexhough]]
+* [[@Arlen22|https://github.com/Arlen22]]
+* [[@BramChen|https://github.com/BramChen]]
+* [[@danielo515|https://github.com/danielo515]]
+* [[@dpdannemiller|https://github.com/dpdannemiller]]
+* [[@Drakor|https://github.com/Drakor]]
+* [[@evgeniy-gryaznov|https://github.com/evgeniy-gryaznov]]
+* [[@felixhayashi|https://github.com/felixhayashi]]
+* [[@gernert|https://github.com/gernert]]
+* [[@Infurnoape|https://github.com/Infurnoape]]
+* [[@Jc-L|https://github.com/Jc-L]]
+* [[@le-pako|https://github.com/le-pako]]
+* [[@Mathobal|https://github.com/Mathobal]]
+* [[@ng110|https://github.com/ng110]]
+* [[@pmario|https://github.com/pmario]]
+* [[@reflectionist|https://github.com/reflectionist]]
+* [[@roma0104|https://github.com/roma0104]]
+* [[@simonbaird|https://github.com/simonbaird]]
+* [[@Spangenhelm|https://github.com/Spangenhelm]]
+* [[@sukima|https://github.com/sukima]]
+* [[@tobibeer|https://github.com/tobibeer]]
+* [[@twMat|https://github.com/twMat]]
+* [[@welford|https://github.com/welford]]
+* [[@xcazin|https://github.com/xcazin]]

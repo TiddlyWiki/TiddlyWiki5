@@ -1,0 +1,14 @@
+caption: list
+created: 20130830092500000
+fr-title: Champ liste
+modified: 20150614082620572
+tags: Fields
+title: ListField
+type: text/vnd.tiddlywiki
+
+[[Champ de tiddler|TiddlerFields]], `list`  peut aider à structurer son contenu. Sa valeur est une [[liste de titres|Title List]], et peut être maniée de différentes façons<<:>>
+
+* Le champ `list` d'un tiddler utilisé comme étiquette détermine l'ordre des tiddlers portant ce tag - voir [[ Étiqueter |Tagging]] pour plus de détails
+* Le [[filtre|Filters]] `list` sélectionne les entrées d'une liste
+* Le [[filtre|Filters]] `listed` sélectionne les tiddlers listant le(s) tiddler(s) sélectionné(s)
+* Le NavigatorWidget manipule un tiddler $:/StoryList contenant un champ `list` des tiddlers affichés dans la colonne principale ''Récents''

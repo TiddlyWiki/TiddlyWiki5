@@ -1,10 +1,7 @@
 title: $:/language/EditTemplate/
 
 Body/External/Hint: यह मुख्य टिड्लीविकि फ़ाइल के बाहर संग्रहीत एक बाहरी tiddler है। आप टैग और क्षेत्रों को संपादित कर सकते हैं लेकिन सीधे ही सामग्री edit नहीं कर सकते
-Body/Hint: उपयोग [[wiki text|http://tiddlywiki.com/static/WikiText.html]] स्वरूपण, चित्र, और गतिशील सुविधाओं को जोड़ने के लिए
 Body/Placeholder: इस tiddler के लिए text टाइप करें
-Body/Preview/Button/Hide:  प्रीव्यू छुपाना
-Body/Preview/Button/Show: प्रीव्यू दिखाएँ 
 Field/Remove/Caption: क्षेत्र को हटाने
 Field/Remove/Hint: क्षेत्र निकालें
 Fields/Add/Button: जोड़ना

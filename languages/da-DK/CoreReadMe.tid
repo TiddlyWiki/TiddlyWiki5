@@ -1,8 +1,2 @@
-title: $:/core/da-DK/readme
+title: $:/core/readme
 
-Dette plugin indeholder TiddlyWiki's stam komponenter, bestående af:
-
-* JavaScript kodemoduler
-* Ikoner
-* Skabeloner som er nødvendige for at oprette T~iddlyWikis brugerflade
-* British English (en-GB) oversættelse af de lokalisérbar strenge som  benyttes af stam-TW

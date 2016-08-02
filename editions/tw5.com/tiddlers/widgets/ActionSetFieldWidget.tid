@@ -1,6 +1,6 @@
 caption: action-setfield
 created: 20141025120850184
-modified: 20150220162114000
+modified: 20150806171403798
 tags: Widgets ActionWidgets
 title: ActionSetFieldWidget
 type: text/vnd.tiddlywiki
@@ -17,7 +17,8 @@ The ''action-setfield'' widget is invisible. Any content within it is ignored.
 |$tiddler |The title of the tiddler whose fields are to be modified (if not provided defaults to the [[current tiddler|Current Tiddler]] |
 |$field |Optional name of a field to be assigned the $value attribute |
 |$index |Optional index of a property in a [[data tiddler|DataTiddlers]] to be assigned the $value attribute|
-|$value |The value to be assigned to the field or index identified by the $field or $index attribute. If neither is specified then the value is assigned to the text field |
+|$value |The value to be assigned to the field or index identified by the $field or $index attribute. If neither is specified then the value is assigned to the text field. If no value is specified, $field or $index will be deleted.|
+|$timestamp |Specifies whether the timestamp(s) of the target tiddler will be updated (''modified'' and ''modifier'', plus ''created'' and ''creator'' for newly created tiddlers). Can be "yes" (the default) or "no" |
 |//{any attributes not starting with $}// |Each attribute name specifies a field to be modified with the attribute value providing the value to assign to the field  |
 
 ! Examples

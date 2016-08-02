@@ -1,0 +1,8 @@
+title: $:/language/Help/editions
+description: 티들리위키의 사용할 수 있는 에디션을 나열합니다
+
+사용할 수 있는 에디션의 이름과 설명을 나열합니다. `--init` 명령으로 지정한 에디션의 새 위키를 만들 수 있습니다.
+
+```
+--editions
+```

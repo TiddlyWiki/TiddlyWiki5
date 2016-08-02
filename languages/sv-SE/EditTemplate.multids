@@ -1,0 +1,24 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: This is an external tiddler stored outside of the main TiddlyWiki file. You can edit the tags and fields but cannot directly edit the content itself
+Body/Placeholder: Type the text for this tiddler
+Field/Remove/Caption: ta bort fält
+Field/Remove/Hint: Ta bort fält
+Fields/Add/Button: lägg till
+Fields/Add/Name/Placeholder: fältnamn
+Fields/Add/Prompt: Lägg till ett nytt fält:
+Fields/Add/Value/Placeholder: fältvärde
+Fields/Add/Dropdown/System: Systemfält
+Fields/Add/Dropdown/User: Användarfält
+Shadow/Warning: Detta är en skugg-tiddler. Alla ändringar kommer överskrida ursprungsversionen
+Shadow/OverriddenWarning: Detta är en modifierad skugg-tiddler. Du kan återgå till ursprungsversionen genom att ta bort denna tiddler
+Tags/Add/Button: lägg till
+Tags/Add/Placeholder: taggnamn
+Tags/Dropdown/Caption: tagglista
+Tags/Dropdown/Hint: Visa tagglista
+Type/Dropdown/Caption: innehållstyplista
+Type/Dropdown/Hint: Visa lista över innehållstyp
+Type/Delete/Caption: ta bort innehållstyp
+Type/Delete/Hint: Ta bort innehållstyp
+Type/Placeholder: innehållstyp
+Type/Prompt: Type:

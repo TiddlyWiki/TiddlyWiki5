@@ -1,0 +1,17 @@
+caption: Objective Options
+tags: Options
+title: $:/options/Objective Options
+
+\define thisSelectObjective()
+<$radio tiddler='$:/settings/$(ThisResume)$/Objective'  value={{!!name}}/>
+\end
+Select objective to use:
+
+<$vars ThisResume={{$:/settings/Global!!selected_resume}}>
+<table>
+<tr><th>Select</th><th>Objective Name</th><th>Objective</th></tr>
+<$list filter='[prefix[$:/data/Objective/]]'>
+<tr><td><<thisSelectObjective>></td><td><$view field='name'/></td><td><$view field='text'/></td></tr>
+</$list>
+</table>
+</$vars>

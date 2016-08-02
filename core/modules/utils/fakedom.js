@@ -26,6 +26,12 @@ var TW_TextNode = function(text) {
 	this.textContent = text;
 };
 
+Object.defineProperty(TW_TextNode.prototype, "nodeType", {
+	get: function() {
+		return 3;
+	}
+});
+
 Object.defineProperty(TW_TextNode.prototype, "formattedTextContent", {
 	get: function() {
 		return this.textContent.replace(/(\r?\n)/g,"");
@@ -41,6 +47,19 @@ var TW_Element = function(tag,namespace) {
 	this.children = [];
 	this.style = {};
 	this.namespaceURI = namespace || "http://www.w3.org/1999/xhtml";
+};
+
+Object.defineProperty(TW_Element.prototype, "nodeType", {
+	get: function() {
+		return 1;
+	}
+});
+
+TW_Element.prototype.getAttribute = function(name) {
+	if(this.isRaw) {
+		throw "Cannot getAttribute on a raw TW_Element";
+	}
+	return this.attributes[name];
 };
 
 TW_Element.prototype.setAttribute = function(name,value) {
@@ -93,6 +112,12 @@ TW_Element.prototype.hasChildNodes = function() {
 	return !!this.children.length;
 };
 
+Object.defineProperty(TW_Element.prototype, "childNodes", {
+	get: function() {
+		return this.children;
+	}
+});
+
 Object.defineProperty(TW_Element.prototype, "firstChild", {
 	get: function() {
 		return this.children[0];
@@ -102,6 +127,12 @@ Object.defineProperty(TW_Element.prototype, "firstChild", {
 TW_Element.prototype.addEventListener = function(type,listener,useCapture) {
 	// Do nothing
 };
+
+Object.defineProperty(TW_Element.prototype, "tagName", {
+	get: function() {
+		return this.tag || "";
+	}
+});
 
 Object.defineProperty(TW_Element.prototype, "className", {
 	get: function() {

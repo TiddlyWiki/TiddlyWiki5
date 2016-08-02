@@ -1,0 +1,146 @@
+title: $:/plugins/tiddlywiki/text-slicer/styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tc-document-preview-column {
+	position: fixed;
+	overflow-y: auto;
+	overflow-x: visible;
+	-webkit-overflow-scrolling: touch;
+    background-color: <<colour page-background>>;
+	right: auto;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
+	font-size: 0.9em;
+}
+
+.tc-sliced-document-title {
+	font-size: 1.7em;
+}
+
+.tc-slice-note {
+    color: #800;
+    padding: 4px 4px 4px 4px;
+    border: 1px solid #feed77;
+    background: #feed77;
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#dede80),color-stop(7%,#feed77),color-stop(92%,#feed77),color-stop(100%,#dede80));
+    background: -webkit-linear-gradient(72deg,rgba(255, 255, 255, 0.5) 8%,rgba(255, 255, 255, 0.1) 80%), -webkit-linear-gradient(top,#dede80 0,#feed77 7%,#feed77 92%,#dede80 100%);
+    background: -moz-linear-gradient(72deg,rgba(255, 255, 255, 0.5) 8%,rgba(255, 255, 255, 0.1) 80%), -moz-linear-gradient(top,#dede80 0,#feed77 7%,#feed77 92%,#dede80 100%);
+    background: -o-linear-gradient(72deg,rgba(255, 255, 255, 0.5) 8%,rgba(255, 255, 255, 0.1) 80%), -o-linear-gradient(top,#dede80 0,#feed77 7%,#feed77 92%,#dede80 100%);
+    background: -ms-linear-gradient(72deg,rgba(255, 255, 255, 0.5) 8%,rgba(255, 255, 255, 0.1) 80%), -ms-linear-gradient(top,#dede80 0,#feed77 7%,#feed77 92%,#dede80 100%);
+    background: linear-gradient(72deg,rgba(255, 255, 255, 0.5) 8%,rgba(255, 255, 255, 0.1) 80%), linear-gradient(top,#dede80 0,#feed77 7%,#feed77 92%,#dede80 100%);
+	<<box-shadow "1px 1px 6px rgba(0,0,0,0.4)">>
+}
+
+.tc-document-preview-column .tc-sliced-document-header {
+	margin-left: 24px;
+}
+
+.tc-document-preview-column .tc-sliced-document {
+	margin-bottom: 3px;
+}
+
+.tc-view-template-document-tiddler-wrapper,
+.tc-edit-template-document-tiddler-wrapper {
+    border-top: 2px solid #D6A2A2;
+    margin-left: -42px;
+    margin-right: -42px;
+    margin-bottom: -42px;
+    padding-left: 42px;
+    padding-right: 42px;
+    background: #FFE3E3;
+    padding-bottom: 10px;
+}
+
+.tc-edit-template-document-tiddler-wrapper {
+	background: #A3A3D7;
+}
+
+div.tc-view-template-document-tiddler-heading a,
+div.tc-edit-template-document-tiddler-heading a {
+	border: 1px solid #D6A2A2;
+	background: #fff;
+	border-radius: 16px;
+    padding: 0px 4px 0px 4px;
+    margin: 2px 4px 2px 4px;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+div.tc-view-template-document-tiddler-heading a:hover,
+div.tc-edit-template-document-tiddler-heading a:hover {
+	border: 1px solid <<colour background>>;
+	text-decoration: none;
+	color: <<colour background>>;
+	background: <<colour foreground>>;
+}
+
+.tc-view-template-document-tiddler-heading-icon,
+.tc-edit-template-document-tiddler-heading-icon {
+	width: 42px;
+	text-align: center;
+    margin-left: -42px;
+    margin-right: -42px;
+    position: absolute;
+}
+
+.tc-view-template-document-tiddler-subheading,
+.tc-edit-template-document-tiddler-subheading {
+	font-size: 0.7em;
+	font-weight: bold;
+	color: <<colour muted-foreground>>;
+}
+
+.tc-view-template-document-tiddler-heading-icon svg,
+.tc-edit-template-document-tiddler-heading-icon svg {
+	fill: <<colour background>>;	
+}
+
+.tc-view-template-document-tiddler {
+	font-size: 0.9em;
+}
+
+.tc-document-tiddler {
+	font-family: Georgia, Times, 'Times New Roman', serif;
+}
+
+.tc-text-slicer-rename input {
+	display: block;
+	width: 100%;
+}
+
+.tc-document-tiddler-link {
+	cursor: pointer;
+}
+
+.tc-document-tiddler-link:hover {
+    background: <<color background>>;
+}
+
+.tc-document-tiddler-toolbar {
+	position: absolute;
+	width: 24px;
+	text-align: center;
+}
+
+.tc-document-preview-column .tc-sliced-document-body {
+	margin-left: 24px;
+}
+
+.tc-document-preview-column .tc-document-tiddler-toolbar {
+	margin-left: -24px;
+}
+
+.tc-table-of-contents .tc-slice-toolbar button {
+	color: inherit;
+	background-color: inherit;
+}
+
+.tc-tiddler-frame .tc-document-tiddler-toolbar {
+    left: 0;
+    width: 42px;
+}
+

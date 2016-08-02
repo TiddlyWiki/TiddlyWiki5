@@ -45,6 +45,7 @@ LinkCatcherWidget.prototype.execute = function() {
 	this.catchMessage = this.getAttribute("message");
 	this.catchSet = this.getAttribute("set");
 	this.catchSetTo = this.getAttribute("setTo");
+	this.catchActions = this.getAttribute("actions");
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
@@ -79,6 +80,9 @@ LinkCatcherWidget.prototype.handleNavigateEvent = function(event) {
 	if(this.catchSet) {
 		var tiddler = this.wiki.getTiddler(this.catchSet);
 		this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: this.catchSet, text: this.catchSetTo}));
+	}
+	if(this.catchActions) {
+		this.invokeActionString(this.catchActions,this);
 	}
 	return false;
 };

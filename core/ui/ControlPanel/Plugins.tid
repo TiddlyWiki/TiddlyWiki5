@@ -86,7 +86,7 @@ $:/config/Plugins/Disabled/$(currentTiddler)$
 <$macrocall $name="tabs" state=<<tabs-state-macro>> tabsList={{!!list}} default="readme" template="$:/core/ui/PluginInfo"/>
 </$reveal>
 <$reveal type="match" text="" state="!!list">
-No information provided
+<<lingo NoInformation/Hint>>
 </$reveal>
 </div>
 </div>
@@ -96,9 +96,7 @@ No information provided
 </$set>
 \end
 
-<$button message="tm-modal" param="$:/core/ui/ControlPanel/Modals/AddPlugins" tooltip={{$:/language/ControlPanel/Plugins/Add/Hint}} class="tc-btn-big-green" style="background:blue;">
-{{$:/core/images/download-button}} <<lingo Add/Caption>>
-</$button>
+{{$:/core/ui/ControlPanel/Plugins/AddPlugins}}
 
 <<lingo Installed/Hint>>
 

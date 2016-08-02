@@ -13,16 +13,22 @@ Edit-bitmap widget
 "use strict";
 
 // Default image sizes
-var DEFAULT_IMAGE_WIDTH = 300,
-	DEFAULT_IMAGE_HEIGHT = 185;
+var DEFAULT_IMAGE_WIDTH = 600,
+	DEFAULT_IMAGE_HEIGHT = 370;
 
 // Configuration tiddlers
 var LINE_WIDTH_TITLE = "$:/config/BitmapEditor/LineWidth",
-	LINE_COLOUR_TITLE = "$:/config/BitmapEditor/Colour";
+	LINE_COLOUR_TITLE = "$:/config/BitmapEditor/Colour",
+	LINE_OPACITY_TITLE = "$:/config/BitmapEditor/Opacity";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var EditBitmapWidget = function(parseTreeNode,options) {
+	// Initialise the editor operations if they've not been done already
+	if(!this.editorOperations) {
+		EditBitmapWidget.prototype.editorOperations = {};
+		$tw.modules.applyMethods("bitmapeditoroperation",this.editorOperations);
+	}
 	this.initialise(parseTreeNode,options);
 };
 
@@ -42,7 +48,12 @@ EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	// Execute our logic
 	this.execute();
-	// Create our element
+	// Create the wrapper for the toolbar and render its content
+	this.toolbarNode = this.document.createElement("div");
+	this.toolbarNode.className = "tc-editor-toolbar";
+	parent.insertBefore(this.toolbarNode,nextSibling);
+	this.domNodes.push(this.toolbarNode);
+	// Create the on-screen canvas
 	this.canvasDomNode = $tw.utils.domMaker("canvas",{
 		document: this.document,
 		"class":"tc-edit-bitmapeditor",
@@ -60,28 +71,32 @@ EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 			name: "mouseup", handlerObject: this, handlerMethod: "handleMouseUpEvent"
 		}]
 	});
-	this.widthDomNode = $tw.utils.domMaker("input",{
-		document: this.document,
-		"class":"tc-edit-bitmapeditor-width",
-		eventListeners: [{
-			name: "change", handlerObject: this, handlerMethod: "handleWidthChangeEvent"
-		}]
-	});
-	this.heightDomNode = $tw.utils.domMaker("input",{
-		document: this.document,
-		"class":"tc-edit-bitmapeditor-height",
-		eventListeners: [{
-			name: "change", handlerObject: this, handlerMethod: "handleHeightChangeEvent"
-		}]
-	});
-	// Insert the elements into the DOM
+	// Set the width and height variables
+	this.setVariable("tv-bitmap-editor-width",this.canvasDomNode.width + "px");
+	this.setVariable("tv-bitmap-editor-height",this.canvasDomNode.height + "px");
+	// Render toolbar child widgets
+	this.renderChildren(this.toolbarNode,null);
+	// // Insert the elements into the DOM
 	parent.insertBefore(this.canvasDomNode,nextSibling);
-	parent.insertBefore(this.widthDomNode,nextSibling);
-	parent.insertBefore(this.heightDomNode,nextSibling);
-	this.domNodes.push(this.canvasDomNode,this.widthDomNode,this.heightDomNode);
+	this.domNodes.push(this.canvasDomNode);
 	// Load the image into the canvas
 	if($tw.browser) {
 		this.loadCanvas();
+	}
+	// Add widget message listeners
+	this.addEventListeners([
+		{type: "tm-edit-bitmap-operation", handler: "handleEditBitmapOperationMessage"}
+	]);
+};
+
+/*
+Handle an edit bitmap operation message from the toolbar
+*/
+EditBitmapWidget.prototype.handleEditBitmapOperationMessage = function(event) {
+	// Invoke the handler
+	var handler = this.editorOperations[event.param];
+	if(handler) {
+		handler.call(this,event);
 	}
 };
 
@@ -91,13 +106,28 @@ Compute the internal state of the widget
 EditBitmapWidget.prototype.execute = function() {
 	// Get our parameters
 	this.editTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
+	// Make the child widgets
+	this.makeChildWidgets();
 };
 
 /*
-Note that the bitmap editor intentionally doesn't try to refresh itself because it would be confusing to have the image changing spontaneously while editting it
+Just refresh the toolbar
 */
 EditBitmapWidget.prototype.refresh = function(changedTiddlers) {
-	return false;
+	return this.refreshChildren(changedTiddlers);
+};
+
+/*
+Set the bitmap size variables and refresh the toolbar
+*/
+EditBitmapWidget.prototype.refreshToolbar = function() {
+	// Set the width and height variables
+	this.setVariable("tv-bitmap-editor-width",this.canvasDomNode.width + "px");
+	this.setVariable("tv-bitmap-editor-height",this.canvasDomNode.height + "px");
+	// Refresh each of our child widgets
+	$tw.utils.each(this.children,function(childWidget) {
+		childWidget.refreshSelf();
+	});
 };
 
 EditBitmapWidget.prototype.loadCanvas = function() {
@@ -112,7 +142,7 @@ EditBitmapWidget.prototype.loadCanvas = function() {
 		self.currCanvas = self.document.createElement("canvas");
 		self.initCanvas(self.currCanvas,currImage.width,currImage.height,currImage);
 		// Set the width and height input boxes
-		self.updateSize();
+		self.refreshToolbar();
 	};
 	currImage.onerror = function() {
 		// Set the on-screen canvas size and clear it
@@ -121,7 +151,7 @@ EditBitmapWidget.prototype.loadCanvas = function() {
 		self.currCanvas = self.document.createElement("canvas");
 		self.initCanvas(self.currCanvas,DEFAULT_IMAGE_WIDTH,DEFAULT_IMAGE_HEIGHT);
 		// Set the width and height input boxes
-		self.updateSize();
+		self.refreshToolbar();
 	};
 	// Get the current bitmap into an image object
 	currImage.src = "data:" + tiddler.fields.type + ";base64," + tiddler.fields.text;
@@ -137,14 +167,6 @@ EditBitmapWidget.prototype.initCanvas = function(canvas,width,height,image) {
 		ctx.fillStyle = "#fff";
 		ctx.fillRect(0,0,canvas.width,canvas.height);
 	}
-};
-
-/*
-** Update the input boxes with the actual size of the canvas
-*/
-EditBitmapWidget.prototype.updateSize = function() {
-	this.widthDomNode.value = this.currCanvas.width;
-	this.heightDomNode.value = this.currCanvas.height;
 };
 
 /*
@@ -165,28 +187,6 @@ EditBitmapWidget.prototype.changeCanvasSize = function(newWidth,newHeight) {
 	// Paint the onscreen canvas with the offscreen canvas
 	ctx = this.canvasDomNode.getContext("2d");
 	ctx.drawImage(this.currCanvas,0,0);
-};
-
-EditBitmapWidget.prototype.handleWidthChangeEvent = function(event) {
-	// Get the new width
-	var newWidth = parseInt(this.widthDomNode.value,10);
-	// Update if necessary
-	if(newWidth > 0 && newWidth !== this.currCanvas.width) {
-		this.changeCanvasSize(newWidth,this.currCanvas.height);
-	}
-	// Update the input controls
-	this.updateSize();
-};
-
-EditBitmapWidget.prototype.handleHeightChangeEvent = function(event) {
-	// Get the new width
-	var newHeight = parseInt(this.heightDomNode.value,10);
-	// Update if necessary
-	if(newHeight > 0 && newHeight !== this.currCanvas.height) {
-		this.changeCanvasSize(this.currCanvas.width,newHeight);
-	}
-	// Update the input controls
-	this.updateSize();
 };
 
 EditBitmapWidget.prototype.handleTouchStartEvent = function(event) {
@@ -264,8 +264,9 @@ EditBitmapWidget.prototype.strokeMove = function(x,y) {
 	// Redraw the previous image
 	ctx.drawImage(this.currCanvas,0,0);
 	// Render the stroke
+	ctx.globalAlpha = parseFloat(this.wiki.getTiddlerText(LINE_OPACITY_TITLE,"1.0"));
 	ctx.strokeStyle = this.wiki.getTiddlerText(LINE_COLOUR_TITLE,"#ff0");
-	ctx.lineWidth = parseInt(this.wiki.getTiddlerText(LINE_WIDTH_TITLE,"3"),10);
+	ctx.lineWidth = parseFloat(this.wiki.getTiddlerText(LINE_WIDTH_TITLE,"3"));
 	ctx.lineCap = "round";
 	ctx.lineJoin = "round";
 	ctx.beginPath();
@@ -292,14 +293,14 @@ EditBitmapWidget.prototype.saveChanges = function() {
 	var tiddler = this.wiki.getTiddler(this.editTitle);
 	if(tiddler) {
 		// data URIs look like "data:<type>;base64,<text>"
-		var dataURL = this.canvasDomNode.toDataURL(tiddler.fields.type,1.0),
+		var dataURL = this.canvasDomNode.toDataURL(tiddler.fields.type),
 			posColon = dataURL.indexOf(":"),
 			posSemiColon = dataURL.indexOf(";"),
 			posComma = dataURL.indexOf(","),
 			type = dataURL.substring(posColon+1,posSemiColon),
 			text = dataURL.substring(posComma+1);
 		var update = {type: type, text: text};
-		this.wiki.addTiddler(new $tw.Tiddler(tiddler,update));
+		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getModificationFields(),tiddler,update,this.wiki.getCreationFields()));
 	}
 };
 

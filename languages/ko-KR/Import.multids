@@ -1,0 +1,15 @@
+title: $:/language/Import/
+
+Imported/Hint:  다음 티들러를 가져왔습니다:
+Listing/Cancel/Caption: 취소
+Listing/Hint: 이 티들러는 가져올 준비가 되었습니다:
+Listing/Import/Caption: 가져오기
+Listing/Select/Caption: 선택
+Listing/Status/Caption: 상태
+Listing/Title/Caption: 제목
+Upgrader/Plugins/Suppressed/Incompatible: 호환되지 않거나 오래된 플러그인을 차단했습니다
+Upgrader/Plugins/Suppressed/Version: (가져온 <<incoming>> 플러그인이 존재하는 <<existing>> 플러그인보다 오래되었기 때문에) 플러그인을 차단했습니다
+Upgrader/Plugins/Upgraded: 플러그인을 <<incoming>>에서 <<upgraded>>(으)로 업그레이드했습니다
+Upgrader/State/Suppressed: 임시 상태 티들러를 차단했습니다
+Upgrader/System/Suppressed: 시스템 티들러를 차단했습니다
+Upgrader/ThemeTweaks/Created: <$text text=<<from>>/>에서 테마 트윅을 마이그레이션했습니다

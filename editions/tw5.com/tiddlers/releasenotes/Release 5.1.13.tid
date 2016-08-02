@@ -1,0 +1,32 @@
+caption: 5.1.13
+created: 20160713124714652
+modified: 20160725084810809
+released: 20160725084810809
+tags: ReleaseNotes
+title: Release 5.1.13
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.12...v5.1.13]]//
+
+This is a minor bug fix release.
+
+!! Bug Fixes
+
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/e49d310ea943916089b5381b00df20b1f9a9e52e]] (and [[refixed|https://github.com/Jermolene/TiddlyWiki5/commit/782553eb62ccfea31ad249911c3230e2137a07dd]]) [[problematic|https://github.com/Jermolene/TiddlyWiki5/issues/2501]] stricter external link matching rules introduced in 5.1.12
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/e282ff1d92d6d3abaf9fd50c9deff464ac028ad7]] [[problem|https://github.com/Jermolene/TiddlyWiki5/issues/2507]] with tiddlers titled "undefined"
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/487d6642e34e5eb685ad83a11c8514dbc6fc4d89]] rendering [[problem|https://github.com/Jermolene/TiddlyWiki5/issues/2500]] with [[KaTeX Plugin]]
+* [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/8f6178acfce1f4f49d1a7d234c25dcbf0256aa10]] unneeded border in print stylesheet
+
+!! Node.js Bug Fixes
+
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/2504]] problem with extraneous `.tid` extension added to tiddler filenames
+
+!! Other Improvements
+
+* Updated Portuguese (Portugal) translation
+
+! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* [[@sukima|https://github.com/sukima]]

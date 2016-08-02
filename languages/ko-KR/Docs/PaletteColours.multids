@@ -1,0 +1,105 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: 경보 배경
+alert-border: 경보 테두리
+alert-highlight: 경보 강조
+alert-muted-foreground: 경보 조용한 전경
+background: 일반 배경
+blockquote-bar: 인용문 막대
+button-background: 기본 버튼 배경
+button-border: 기본 버튼 테두리
+button-foreground: 기본 버튼 전경
+code-background: 코드 배경
+code-border: 코드 테두리
+code-foreground: 코드 전경
+dirty-indicator: 저장하지 않은 바뀜 지시자
+download-background: 다운로드 버튼 배경
+download-foreground: 다운로드 버튼 전경
+dragger-background: 드래거 배경
+dragger-foreground: 드래거 전경
+dropdown-background: 드롭다운 배경
+dropdown-border: 드롭다운 테두리
+dropdown-tab-background: 드롭다운 탭 배경
+dropdown-tab-background-selected: 선택한 탭에 대한 드롭다운 탭 배경
+dropzone-background: 드롭존 배경
+external-link-background: 바깥 링크 배경
+external-link-background-hover: 바깥 링크 배경 가리킬 때
+external-link-background-visited: 바깥 링크 배경 방문했을 때
+external-link-foreground: 바깥 링크 전경
+external-link-foreground-hover: 바깥 링크 전경 가리킬 때
+external-link-foreground-visited: 바깥 링크 전경 방문했을 때
+foreground: 일반 전경
+message-background: 메시지 상자 배경
+message-border: 메시지 상자 테두리
+message-foreground: 메시지 상자 전경
+modal-backdrop: 모달 배경막
+modal-background: 모달 배경
+modal-border: 모달 테두리
+modal-footer-background: 모달 바닥글 배경
+modal-footer-border: 모달 바닥글 테두리
+modal-header-border: 모달 머릿글 테두리
+muted-foreground: 일반 조용한 전경
+notification-background: 알림 배경
+notification-border: 알림 테두리
+page-background: 페이지 배경
+pre-background: 미리 서식 있는 코드 배경
+pre-border: 미리 서식 있는 코드 테두리
+primary: 일반 첫째
+sidebar-button-foreground: 사이드바 버튼 전경
+sidebar-controls-foreground: 사이드바 제어 전경
+sidebar-controls-foreground-hover: 사이드바 제어 전경 가리킬 때
+sidebar-foreground: 사이드바 전경
+sidebar-foreground-shadow: 사이드바 전경 그림자
+sidebar-muted-foreground: 사이드바 조용한 전경
+sidebar-muted-foreground-hover: 사이드바 조용한 전경 가리킬 때
+sidebar-tab-background: 사이드바 탭 배경
+sidebar-tab-background-selected: 선택한 탭에 대한 사이드바 탭 배경
+sidebar-tab-border: 사이드바 탭 테두리
+sidebar-tab-border-selected: 선택한 탭에 대한 사이드바 탭 테두리
+sidebar-tab-divider: 사이드바 탭 분할선
+sidebar-tab-foreground: 사이드바 탭 전경
+sidebar-tab-foreground-selected: 선택한 탭에 대한 사이드바 탭 전경
+sidebar-tiddler-link-foreground: 사이드바 티들러 링크 전경
+sidebar-tiddler-link-foreground-hover: 사이드바 티들러 링크 전경 가리킬 때
+site-title-foreground: 사이트 제목 전경
+static-alert-foreground: 정적 경보 전경
+tab-background: 탭 배경
+tab-background-selected: 선택한 탭에 대한 탭 배경
+tab-border: 탭 테두리
+tab-border-selected: 선택한 탭에 대한 탭 테두리
+tab-divider: 탭 분할선
+tab-foreground: 탭 전경
+tab-foreground-selected: 선택한 탭에 대한 탭 전경
+table-border: 표 테두리
+table-footer-background: 표 바닥글 배경
+table-header-background: 표 머릿글 배경
+tag-background: 태그 배경
+tag-foreground: 태그 전경
+tiddler-background: 티들러 배경
+tiddler-border: 티들러 테두리
+tiddler-controls-foreground: 티들러 제어 전경
+tiddler-controls-foreground-hover: 티들러 제어 전경 가리킬 때
+tiddler-controls-foreground-selected: 선택한 제어의 티들러 제어 전경
+tiddler-editor-background: 티들러 편집기 배경
+tiddler-editor-border: 티들러 편집기 테두리
+tiddler-editor-border-image: 티들러 편집기 테두리 그림
+tiddler-editor-fields-even: 짝수 필드의 티들러 편집기 배경
+tiddler-editor-fields-odd: 홀수 필드의 티들러 편집기 배경
+tiddler-info-background: 티들러 정보 패널 배경
+tiddler-info-border: 티들러 정보 패널 테두리
+tiddler-info-tab-background: 티들러 정보 패널 탭 배경
+tiddler-link-background: 티들러 링크 배경
+tiddler-link-foreground: 티들러 링크 전경
+tiddler-subtitle-foreground: 티들러 부제목 전경
+tiddler-title-foreground: 티들러 제목 전경
+toolbar-cancel-button: 도구 모음 '취소' 버튼 전경
+toolbar-close-button: 도구 모음 '닫기' 버튼 전경
+toolbar-delete-button: 도구 모음 '삭제' 버튼 전경
+toolbar-done-button: 도구 모음 '완료' 버튼 전경
+toolbar-edit-button: 도구 모음 '편집' 버튼 전경
+toolbar-info-button: 도구 모음 '정보' 버튼 전경
+toolbar-new-button: 도구 모음 '새 티들러' 버튼 전경
+toolbar-options-button: 도구 모음 '옵션' 버튼 전경
+toolbar-save-button: 도구 모음 '저장' 버튼 전경
+untagged-background: 태그되지 않음 배경
+very-muted-foreground: 매우 조용한 전경

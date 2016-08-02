@@ -1,0 +1,169 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: 고급 검색
+AdvancedSearch/Hint: 고급 검색
+Bold/Caption: 굵게
+Bold/Hint: 선택에 굵게 서식을 적용합니다
+Cancel/Caption: 취소
+Cancel/Hint: 이 티들러로의 바뀜을 버립니다
+Clear/Caption: 지우기
+Clear/Hint: 단색으로 그림을 지웁니다
+Clone/Caption: 복제
+Clone/Hint: 이 티들러를 복제합니다
+Close/Caption: 닫기
+Close/Hint: 이 티들러를 닫습니다
+CloseAll/Caption: 모두 닫기
+CloseAll/Hint: 모든 티들러를 닫습니다
+CloseOthers/Caption: 다른 티들러 닫기
+CloseOthers/Hint: 다른 티들러를 닫습니다
+ControlPanel/Caption: 제어판
+ControlPanel/Hint: 제어판을 엽니다
+Delete/Caption: 삭제
+Delete/Hint: 이 티들러를 삭제합니다
+Edit/Caption: 편집
+Edit/Hint: 이 티들러를 편집합니다
+EditorHeight/Caption: 편집기 높이
+EditorHeight/Caption/Auto: 내용에 맞게 자동으로 높이를 조절합니다
+EditorHeight/Caption/Fixed: 고정된 높이:
+EditorHeight/Hint: 텍스트 편집기의 높이를 선택합니다
+Encryption/Caption: 암호화
+Encryption/ClearPassword/Caption: 비밀번호 지우기
+Encryption/ClearPassword/Hint: 비밀번호를 지우고 암호화 없이 이 위키를 저장합니다
+Encryption/Hint: 이 위키를 저장하기 위한 비밀번호를 설정하거나 지웁니다
+Encryption/SetPassword/Caption: 비밀번호 설정
+Encryption/SetPassword/Hint: 암호화로 이 위키를 저장하기 위해 비밀번호를 설정합니다
+Excise/Caption: 거두기
+Excise/Caption/Excise: 거두기 수행
+Excise/Caption/MacroName: 매크로 이름:
+Excise/Caption/NewTitle: 새 티들러의 제목:
+Excise/Caption/Replace: 다음으로 거둔 텍스트 바꾸기:
+Excise/Caption/Replace/Link: 링크
+Excise/Caption/Replace/Macro: 매크로
+Excise/Caption/Replace/Transclusion: 끼워넣기
+Excise/Caption/Tag: 이 티들러의 제목으로 된 새 티들러를 태그
+Excise/Caption/TiddlerExists: 경고: 티들러가 이미 존재합니다
+Excise/Hint: 새 티들러 안으로 선택한 텍스트를 거둡니다
+ExportPage/Caption: 모두 내보내기
+ExportPage/Hint: 모든 티들러를 내보냅니다
+ExportTiddler/Caption: 티들러 내보내기
+ExportTiddler/Hint: 티들러를 내보냅니다
+ExportTiddlers/Caption: 여러 티들러 내보내기
+ExportTiddlers/Hint: 여러 티들러를 내보냅니다
+Fold/Caption: 티들러 접기
+Fold/FoldBar/Caption: 접기 막대
+Fold/FoldBar/Hint: 티들러를 선택적으로 접고 펼칠 수 있는 막대
+Fold/Hint: 이 티들러의 본문을 접습니다
+FoldAll/Caption: 모든 티들러 접기
+FoldAll/Hint: 모든 열린 티들러의 본문을 접습니다
+FoldOthers/Caption: 다른 티들러 접기
+FoldOthers/Hint: 다른 열린 티들러의 본문을 접습니다
+FullScreen/Caption: 전체 화면
+FullScreen/Hint: 전체 화면 모드에 들어가거나 떠납니다
+Heading1/Caption: 1단계 문단 제목
+Heading1/Hint: 선택을 포함하는 줄에 1단계 문단 제목 서식을 적용합니다
+Heading2/Caption: 2단계 문단 제목
+Heading2/Hint: 선택을 포함하는 줄에 2단계 문단 제목 서식을 적용합니다
+Heading3/Caption: 3단계 문단 제목
+Heading3/Hint: 선택을 포함하는 줄에 3단계 문단 제목 서식을 적용합니다
+Heading4/Caption: 4단계 문단 제목
+Heading4/Hint: 선택을 포함하는 줄에 4단계 문단 제목 서식을 적용합니다
+Heading5/Caption: 5단계 문단 제목
+Heading5/Hint: 선택을 포함하는 줄에 5단계 문단 제목 서식을 적용합니다
+Heading6/Caption: 6단계 문단 제목
+Heading6/Hint: 선택을 포함하는 줄에 6단계 문단 제목 서식을 적용합니다
+Help/Caption: 도움말
+Help/Hint: 도움말 패널을 보여줍니다
+HideSideBar/Caption: 사이드바 숨기기
+HideSideBar/Hint: 사이드바를 숨깁니다
+Home/Caption: 홈
+Home/Hint: 기본 티들러를 엽니다
+Import/Caption: 가져오기
+Import/Hint: 텍스트, 그림, 티들리위키 또는 JSON을 포함한 여러 파일의 형식을 가져옵니다
+Info/Caption: 정보
+Info/Hint: 이 티들러에 대한 정보를 보여줍니다
+Italic/Caption: 기울임꼴
+Italic/Hint: 선택에 기울임꼴 서식을 적용합니다
+Language/Caption: 언어
+Language/Hint: 사용자 인터페이스 언어를 선택합니다
+LineWidth/Caption: 선 너비
+LineWidth/Hint: 페인트의 선 너비를 설정합니다
+Link/Caption: 링크
+Link/Hint: 위키텍스트 링크를 만듭니다
+ListBullet/Caption: 글머리 기호 목록
+ListBullet/Hint: 선택을 포함하는 줄에 글머리 기호 목록 서식을 적용합니다
+ListNumber/Caption: 번호가 매겨진 목록
+ListNumber/Hint: 선택을 포함하는 줄에 번호가 매겨진 목록 서식을 적용합니다
+MonoBlock/Caption: 고정폭 블럭
+MonoBlock/Hint: 선택을 포함하는 줄에 고정폭 블럭 서식을 적용합니다
+MonoLine/Caption: 고정폭
+MonoLine/Hint: 선택에 고정폭 글자 서식을 적용합니다
+More/Caption: 더 보기
+More/Hint: 더 많은 동작을 봅니다
+NewHere/Caption: 여기에 새 티들러
+NewHere/Hint: 이 티들러로 태그된 새로운 것을 만듭니다
+NewImage/Caption: 새 그림
+NewImage/Hint: 새 그림 티들러를 만듭니다
+NewJournal/Caption: 새 일지
+NewJournal/Hint: 새 일지 티들러를 만듭니다
+NewJournalHere/Caption: 여기에 새 일지
+NewJournalHere/Hint: 이 일지 티들러로 태그된 새로운 것을 만듭니다
+NewMarkdown/Caption: 새 마크다운 티들러
+NewMarkdown/Hint: 새 마크다운 티들러를 만듭니다
+NewTiddler/Caption: 새 티들러
+NewTiddler/Hint: 새 티들러를 만듭니다
+Opacity/Caption: 불투명도
+Opacity/Hint: 페인트 불투명도를 설정합니다
+OpenWindow/Caption: 새 창에서 열기
+OpenWindow/Hint: 새 창에서 티들러를 엽니다
+Paint/Caption: 페인트 색
+Paint/Hint: 페인트 색을 설정합니다
+Palette/Caption: 팔레트
+Palette/Hint: 컬러 팔레트를 선택합니다
+Permalink/Caption: 고유링크
+Permalink/Hint: 브라우저 주소 창에 이 티들러로의 직접 링크로 설정합니다
+Permaview/Caption: 고유보기
+Permaview/Hint: 이 이야기에서 브라우저 주소 창에 모든 티들러로의 직접 링크로 설정합니다
+Picture/Caption: 사진
+Picture/Hint: 사진을 넣습니다
+Preview/Caption: 미리 보기
+Preview/Hint: 미리 보기 창을 보여줍니다
+PreviewType/Caption: 미리 보기 형식
+PreviewType/Hint: 미리 보기 형식을 선택합니다
+Quote/Caption: 인용
+Quote/Hint: 선택을 포함하는 줄에 인용 문구 서식을 적용합니다
+Refresh/Caption: 새로 고침
+Refresh/Hint: 위키의 전체 새로 고침을 수행합니다
+Save/Caption: 확인
+Save/Hint: 이 티들러로의 바뀜을 확인합니다
+SaveWiki/Caption: 바뀜 저장
+SaveWiki/Hint: 바뀜을 저장합니다
+ShowSideBar/Caption: 사이드바 보이기
+ShowSideBar/Hint: 사이드바를 보여줍니다
+Size/Caption: 그림 크기
+Size/Caption/Height: 높이:
+Size/Caption/Resize: 그림 크기 조절
+Size/Caption/Width: 너비:
+Size/Hint: 그림 크기를 조절합니다
+Stamp/Caption: 도장
+Stamp/Caption/New: 스니펫 추가
+Stamp/Hint: 미리 구성된 텍스트 스니펫을 넣습니다
+Stamp/New/Text: 스니펫 텍스트. (캡션 필드에 설명 제목을 추가하는 것을 기억하세요).
+Stamp/New/Title: 메뉴에 보여지는 이름
+StoryView/Caption: 이야기보기
+StoryView/Hint: 이야기 보기를 선택합니다
+Strikethrough/Caption: 취소선
+Strikethrough/Hint: 선택에 취소선 서식을 적용합니다
+Subscript/Caption: 아래 첨자
+Subscript/Hint: 선택에 아래 첨자 서식을 적용합니다
+Superscript/Caption: 위 첨자
+Superscript/Hint: 선택에 위 첨자 서식을 적용합니다
+TagManager/Caption: 태그 관리자
+TagManager/Hint: 태그 관리자를 엽니다
+Theme/Caption: 테마
+Theme/Hint: 표시할 테마를 선택합니다
+Underline/Caption: 밑줄
+Underline/Hint: 선택에 밑줄 서식을 적용합니다
+Unfold/Caption: 티들러 펼치기
+Unfold/Hint: 이 티들러의 본문을 펼칩니다
+UnfoldAll/Caption: 모든 티들러 펼치기
+UnfoldAll/Hint: 모든 열린 티들러의 본문을 펼칩니다

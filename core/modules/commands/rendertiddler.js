@@ -32,9 +32,15 @@ Command.prototype.execute = function() {
 		path = require("path"),
 		title = this.params[0],
 		filename = path.resolve(this.commander.outputPath,this.params[1]),
-		type = this.params[2] || "text/html";
+		type = this.params[2] || "text/html",
+		template = this.params[3],
+		variables = {};
 	$tw.utils.createFileDirectories(filename);
-	fs.writeFile(filename,this.commander.wiki.renderTiddler(type,title),"utf8",function(err) {
+	if(template) {
+		variables.currentTiddler = title;
+		title = template;
+	}
+	fs.writeFile(filename,this.commander.wiki.renderTiddler(type,title,{variables: variables}),"utf8",function(err) {
 		self.callback(err);
 	});
 	return null;

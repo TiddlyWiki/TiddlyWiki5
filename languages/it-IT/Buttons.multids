@@ -1,0 +1,78 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: Ricerca avanzata
+AdvancedSearch/Hint: Ricerca avanzata
+Cancel/Caption: Annulla
+Cancel/Hint: Annulla i cambiamenti a questo frammento
+Clone/Caption: Clona
+Clone/Hint: Clona questo frammento
+Close/Caption: Chiudi
+Close/Hint: Chiudi questo frammento
+CloseAll/Caption: Chiudi tutti
+CloseAll/Hint: Chiudi tutti i frammenti
+CloseOthers/Caption: Chiudi altri
+CloseOthers/Hint: Chiudi gli altri frammenti
+ControlPanel/Caption: Pannello di controllo
+ControlPanel/Hint: Apri il pannello di controllo
+Delete/Caption: Elimina
+Delete/Hint: Elimina questo frammento
+Edit/Caption: Modifica
+Edit/Hint: Modifica questo frammento
+Encryption/Caption: Cifratura
+Encryption/ClearPassword/Caption: Rimuovi password
+Encryption/ClearPassword/Hint: Rimuovi la password e salva questo wiki senza cifrarlo
+Encryption/Hint: Imposta o rimuovi la password per salvare questo wiki
+Encryption/SetPassword/Caption: Imposta password
+Encryption/SetPassword/Hint: Imposta una password per salvare questo wiki con cifratura
+ExportPage/Caption: Esporta tutti
+ExportPage/Hint: Esporta tutti i frammenti
+ExportTiddler/Caption: Esporta frammento
+ExportTiddler/Hint: Esporta questo frammento
+ExportTiddlers/Caption: Esporta i frammenti
+ExportTiddlers/Hint: Esporta i frammenti
+FullScreen/Caption: Schermo intero
+FullScreen/Hint: Entra o esci dalla modalit&agrave; a schermo intero
+Help/Caption: Aiuto
+Help/Hint: Mostra il pannello di aiuto
+HideSideBar/Caption: Nascondi la barra laterale
+HideSideBar/Hint: Nascondi la barra laterale
+Home/Caption: Home
+Home/Hint: Apri i frammenti predefiniti
+Import/Caption: Importa
+Import/Hint: Importa file
+Info/Caption: Info
+Info/Hint: Mostra informazioni su questo frammento
+Language/Caption: Lingua
+Language/Hint: Scegli la lingua dell'interfaccia
+More/Caption: Altro
+More/Hint: Altre azioni
+NewHere/Caption: Nuovo qui
+NewHere/Hint: Crea un nuovo frammento etichettato con questo
+NewJournal/Caption: Diario
+NewJournal/Hint: Crea un nuovo frammento diario
+NewJournalHere/Caption: Nuovo diario qui
+NewJournalHere/Hint: Crea un nuovo frammento diario etichettato con questo
+NewTiddler/Caption: Nuovo frammento
+NewTiddler/Hint: Crea un nuovo frammento
+OpenWindow/Caption: Apri in una nuova finestra
+OpenWindow/Hint: Apri il frammento in una nuova finestra
+Palette/Caption: Tavolozza
+Palette/Hint: Scegli la tavolozza dei colori
+Permalink/Caption: Permalink
+Permalink/Hint: Link diretto a questo frammento
+Permaview/Caption: Permaview
+Permaview/Hint: Link diretto a tutti i frammenti in questa storia
+Refresh/Caption: Ricarica
+Refresh/Hint: Ricarica completamente il wiki
+Save/Caption: ok
+Save/Hint: Conferma i cambiamenti a questo frammento
+SaveWiki/Caption: Salva le modifiche
+SaveWiki/Hint: Salva le modifiche
+ShowSideBar/Caption: Mostra barra laterale
+ShowSideBar/Hint: Mostra barra laterale
+StoryView/Caption: Storyview
+StoryView/Hint: Scegli la visualizzazione "storia"
+TagManager/Caption: Gestore delle etichette
+TagManager/Hint: Apri il gestore delle etichette
+Theme/Caption: Tema
+Theme/Hint: Scegli il tema grafico

@@ -30,6 +30,18 @@ ExportTiddler/Caption: 導出此條目
 ExportTiddler/Hint: 導出此條目
 ExportTiddlers/Caption: 導出條目
 ExportTiddlers/Hint: 導出條目
+Fold/Caption: 收合條目
+Fold/Hint: 收合此條目的內容
+Fold/FoldBar/Caption: 收合條
+Fold/FoldBar/Hint: 可選的收合與展開條目的長條按鈕
+Unfold/Caption: 展開條目
+Unfold/Hint: 展開此條目的內容
+FoldOthers/Caption: 收合其他條目
+FoldOthers/Hint: 收合其他已開啟條目的內容
+FoldAll/Caption: 收合所有條目
+FoldAll/Hint: 收合所有已開啟條目的內容
+UnfoldAll/Caption: 展開所有條目
+UnfoldAll/Hint: 展開所有已開啟條目的內容
 FullScreen/Caption: 全螢幕
 FullScreen/Hint: 進入或離開全螢幕模式
 Help/Caption: 說明
@@ -37,7 +49,7 @@ Help/Hint: 顯示說明中心
 Home/Caption: 首頁
 Home/Hint: 開啟首頁條目
 Import/Caption: 導入
-Import/Hint: 導入檔案
+Import/Hint: 導入許多類型的檔案包括文字、圖像、TiddlyWiki 或 JSON
 Info/Caption: 資訊
 Info/Hint: 顯示此條目的資訊
 Language/Caption: 語言
@@ -50,6 +62,10 @@ NewJournal/Caption: 新增日誌
 NewJournal/Hint: 建立一個新的日誌條目
 NewJournalHere/Caption: 新增子日誌
 NewJournalHere/Hint: 建立一個標籤含此條目名稱的新日誌條目
+NewImage/Caption: 新增圖像
+NewImage/Hint: 建立一個新的圖像條目
+NewMarkdown/Caption: 新增 Markdown 條目
+NewMarkdown/Hint: 建立一個新的 Markdown 條目
 NewTiddler/Caption: 新增條目
 NewTiddler/Hint: 建立一個新的條目
 OpenWindow/Caption: 開啟於新視窗
@@ -76,3 +92,78 @@ TagManager/Caption: 標籤管理
 TagManager/Hint: 標籤管理
 Theme/Caption: 佈景主題
 Theme/Hint: 選擇佈景主題
+Bold/Caption: 粗體
+Bold/Hint: 套用粗體格式於所選文字
+Clear/Caption: 清除
+Clear/Hint: 清除圖像為純色
+EditorHeight/Caption: 編輯器高度
+EditorHeight/Caption/Auto: 自動調整高度以適合內容
+EditorHeight/Caption/Fixed: 固定高度︰
+EditorHeight/Hint: 選擇文字編輯器的高度
+Excise/Caption: 剪切
+Excise/Caption/Excise: 執行剪切
+Excise/Caption/MacroName: 巨集名稱︰
+Excise/Caption/NewTitle: 新條目的名稱︰
+Excise/Caption/Replace: 替換剪切的文本為：
+Excise/Caption/Replace/Macro: 巨集
+Excise/Caption/Replace/Link: 鏈接
+Excise/Caption/Replace/Transclusion: 嵌入
+Excise/Caption/Tag: 將新條目的標籤設為此條目的名稱
+Excise/Caption/TiddlerExists: 警示：條目已經存在
+Excise/Hint: 剪切所選文字到一個新條目
+Heading1/Caption: 標題 1
+Heading1/Hint: 套用標題級別 1 的格式於包含所選文字的列
+Heading2/Caption: 標題 2
+Heading2/Hint: 套用標題級別 2 的格式於包含所選文字的列
+Heading3/Caption: 標題 3
+Heading3/Hint: 套用標題級別 3 的格式於包含所選文字的列
+Heading4/Caption: 標題 4
+Heading4/Hint: 套用標題級別 4 的格式於包含所選文字的列
+Heading5/Caption: 標題 5
+Heading5/Hint: 套用標題級別 5 的格式於包含所選文字的列
+Heading6/Caption: 標題 6
+Heading6/Hint: 套用標題級別 6 的格式於包含所選文字的列
+Italic/Caption: 斜體
+Italic/Hint: 套用斜體格式於所選文字
+LineWidth/Caption: 線寬
+LineWidth/Hint: 設定繪畫的線條寬度
+Link/Caption: 鏈接
+Link/Hint: 建立維基文字鏈接
+ListBullet/Caption: 符號清單
+ListBullet/Hint: 套用符號清單格式於包含所選文字的列
+ListNumber/Caption: 數字清單
+ListNumber/Hint: 套用數字清單格式於包含所選文字的列
+MonoBlock/Caption: 等寬區塊
+MonoBlock/Hint: 套用等寬區塊格式於包含所選文字的列
+MonoLine/Caption: 等寬
+MonoLine/Hint: 套用等寬字元格式於所選文字
+Opacity/Caption: 不透明度
+Opacity/Hint: 設定繪畫的不透明度
+Paint/Caption: 繪畫顏色
+Paint/Hint: 設定繪畫的顏色
+Picture/Caption: 圖片
+Picture/Hint: 插入圖片
+Preview/Caption: 預覽
+Preview/Hint: 顯示預覽窗格
+PreviewType/Caption: 預覽類型
+PreviewType/Hint: 選擇預覽類型
+Quote/Caption: 引言
+Quote/Hint: 套用引言文字格式於包含所選文字的列
+Size/Caption: 圖像大小
+Size/Caption/Height: 高度︰
+Size/Caption/Resize: 調整圖像的大小
+Size/Caption/Width: 寬度：
+Size/Hint: 設定圖像的大小
+Stamp/Caption: 印記
+Stamp/Caption/New: 新增您自己的
+Stamp/Hint: 插入一個預配置的文字片段
+Stamp/New/Title: 在選單中顯示的標題
+Stamp/New/Text: 片段的文字。（記得在 `caption` 欄位中新增一個說明性的標題）。
+Strikethrough/Caption: 刪除線
+Strikethrough/Hint: 套用刪除線格式於所選文字
+Subscript/Caption: 下標
+Subscript/Hint: 套用下標格式於所選文字
+Superscript/Caption: 上標
+Superscript/Hint: 套用上標格式於所選文字
+Underline/Caption: 底線
+Underline/Hint: 套用底線格式於所選文字

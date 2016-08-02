@@ -15,6 +15,8 @@
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/railroad",
 		"tiddlywiki/stacked-view",
+		"tiddlywiki/text-slicer",
+		"tiddlywiki/xmldom",
 		"tiddlywiki/powered-by-tiddlywiki"
 	],
 	"languages": [
@@ -32,16 +34,19 @@
 		"ia-IA",
 		"it-IT",
 		"ja-JP",
+		"ko-KR",
 		"nl-NL",
 		"pa-IN",
 		"pt-PT",
 		"ru-RU",
 		"sk-SK",
+		"sv-SE",
 		"zh-Hans",
 		"zh-Hant"
 	],
 	"themes": [
 		"tiddlywiki/centralised",
+		"tiddlywiki/tight",
 		"tiddlywiki/readonly",
 		"tiddlywiki/seamless",
 		"tiddlywiki/snowwhite",

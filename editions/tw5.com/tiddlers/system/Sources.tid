@@ -13,7 +13,7 @@ https://github.com/Jermolene/TiddlyWiki5/blob/master/editions/tw5.com/tiddlers/$
 \end
 \define outerMakeGitHubLink()
 <$set name="githubLink" value={{$:/config/OriginalTiddlerPaths##$(currentTiddler)$}}>
-<a href=<<makeGitHubLink>> class="tc-tiddlylink-external" target="_blank"><$text text=<<makeGitHubLink>>/></a>
+<a href=<<makeGitHubLink>> class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text=<<makeGitHubLink>>/></a>
 </$set>
 \end
 <$list filter="[all[current]!is[system]!is[shadow]]">

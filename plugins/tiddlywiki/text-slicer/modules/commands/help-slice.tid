@@ -1,0 +1,8 @@
+title: $:/language/Help/slice
+description: Slice a hierarchical document into individual tiddlers
+
+Slices the specified tiddler
+
+```
+--slice <title>
+```

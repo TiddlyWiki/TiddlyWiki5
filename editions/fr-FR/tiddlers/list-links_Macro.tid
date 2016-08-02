@@ -1,0 +1,24 @@
+caption: list-links
+created: 20140917083515996
+fr-title: Macro list-links
+modified: 20150619211731171
+tags: Macros [[Core Macros]]
+title: list-links Macro
+type: text/vnd.tiddlywiki
+
+La macro [[macro|Macros]] <<.def list-links>> renvoie une liste formatée de liens vers une [[sélection de tiddlers|Title Selection]].
+
+Si un tiddler a un champ <<.field caption>>, il est affiché au lieu du titre du tiddler.
+
+!! Paramètres
+
+;filter
+: Un [[filtre|Filters]] indiquant quels tiddlers inclure
+;type
+: un élément HTML à utiliser pour une liste globale, par défaut `ul`
+;subtype
+: un élément HTML à utiliser chaque élément d'une liste, par défaut `li`
+;class
+: Une classe [[CSS|Cascading Style Sheets]] pour une liste globale
+
+<<.macro-examples "list-links">>

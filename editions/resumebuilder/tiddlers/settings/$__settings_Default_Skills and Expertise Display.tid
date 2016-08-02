@@ -1,0 +1,5 @@
+order: 4
+show: true
+template: $:/template/SkillsAndExpertiseTemplate
+title: $:/settings/Default/Skills and Expertise Display
+

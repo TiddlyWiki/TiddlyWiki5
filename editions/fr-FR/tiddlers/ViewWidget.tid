@@ -1,0 +1,47 @@
+caption: view
+created: 20131024141900000
+fr-title: Widget view
+modified: 20150620075635746
+tags: Widgets
+title: ViewWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+Le widget view affiche le contenu du champ d'un tiddler dans un format spécifié.
+
+! Contenu et Attributs
+
+Le contenu du widget `<$view>` est affiché si le champ ou une propriété est vide ou manquante.
+
+|!Attribut |!Description |
+|tiddler |Le titre du tiddler (par défaut du [[tiddler courant|Current Tiddler]]) |
+|field |Le nom du champ à afficher (par défaut "texte") |
+|index |Le nom de l'index à afficher |
+|format |Le format d'affichage du champ (voir ci-dessous) |
+|template |Une chaine de gabarit optionnelle utilisée avec certains formats comme les dates |
+|subtiddler |Le titre d'un SubTiddler optionnel quand le tiddler cible est un [[plugin|Plugins]] (voir ci-dessous) |
+
+!! Formats
+
+Les formats suivants peuvent être spécifiés dans l'attribut `format` <<:>>
+
+|!Format |!Description |
+|''text'' |text brut |
+|''htmlwikified'' |Le champ est wikifié et la résultante HTML retourné comme du texte brut |
+|''htmlencoded'' |Le champ est affiché jusqu'à l'encodage HTML |
+|''date'' |Le champ est interprété comme une date UTC date et affiché selon le [[format de date|DateFormat]] spécifié dans l'attribut `template` |
+|''relativedate'' |Le champ est interprété comme une date UTC date et affiché comme un intervalle au moment présent |
+|''stripcomments'' |Le champ est considéré comme du code source JavaScript et toutes les lignes commençant par `\\#` sont écartées |
+|''jsencoded'' |Le champ est affiché comme une chaine encodée en JavaScript |
+
+! Accès au SubTiddler
+
+Le widget view permet l'accès aux tiddlers individuels stockés dans un [[plugin|Plugins]].
+
+L'exemple suivant montre la version originale du tiddler [[$:/DefaultTiddlers]] même s'il a été remplacé<<:>>
+
+<<wikitext-example-without-html '
+<$view tiddler="$:/core" subtiddler="$:/DefaultTiddlers"/>
+
+'>>

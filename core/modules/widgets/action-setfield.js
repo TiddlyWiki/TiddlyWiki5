@@ -39,6 +39,7 @@ SetFieldWidget.prototype.execute = function() {
 	this.actionField = this.getAttribute("$field");
 	this.actionIndex = this.getAttribute("$index");
 	this.actionValue = this.getAttribute("$value");
+	this.actionTimestamp = this.getAttribute("$timestamp","yes") === "yes";
 };
 
 /*
@@ -57,13 +58,15 @@ SetFieldWidget.prototype.refresh = function(changedTiddlers) {
 Invoke the action associated with this widget
 */
 SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
-	var self = this;
-	if(typeof this.actionValue === "string") {
-		this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue);		
+	var self = this,
+		options = {};
+	options.suppressTimestamp = !this.actionTimestamp;
+	if((typeof this.actionField == "string") || (typeof this.actionIndex == "string")  || (typeof this.actionValue == "string")) {
+		this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue,options);
 	}
 	$tw.utils.each(this.attributes,function(attribute,name) {
 		if(name.charAt(0) !== "$") {
-			self.wiki.setText(self.actionTiddler,name,undefined,attribute);
+			self.wiki.setText(self.actionTiddler,name,undefined,attribute,options);
 		}
 	});
 	return true; // Action was invoked

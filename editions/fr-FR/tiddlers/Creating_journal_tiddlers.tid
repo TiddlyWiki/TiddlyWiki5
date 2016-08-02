@@ -1,0 +1,38 @@
+created: 20141010093214683
+fr-title: Créer des tiddlers journaux
+modified: 20150620061841984
+tags: [[Working with TiddlyWiki]]
+title: Creating journal tiddlers
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+Les tiddlers journaux sont des tiddlers dont le titre est composé d'une date et/ou d'une heure. Ils sont très utiles à l'enregistrement d'informations horodatées.
+
+Vous pouvez ajouter des tags à votre tiddler journal pour le relier à d'autres tiddlers ce qui aidera à établir des relations entre les éléments d'information.
+
+Par exemple, vous pourriez utiliser un tiddler journal appelé ''10 Octobre 2014'' pour enregistrer les idées et les informations capturées en ce jour particulier. Les tags ''Shopping'' et ''Londres'' mentionnant ce qui concerne le shopping à Londres.
+
+! Création d'un tiddler journal
+
+La façon la plus simple de créer un tiddler journal est un clic sur le bouton ''nouveau journal'' dans l'onglet ''Outils'' du menu latéral. Si vous utilisez souvent le bouton, cliquez sur la case à cocher proche ce qui le placera juste au dessus de la zone de recherche.
+
+Le bouton ''nouveau journal'' génère un journal correspondant à un tiddler vierge avec un tag ''Journal'' et un titre mentionnant la date du jour. Si un tiddler journal avec cette date existe déjà, il sera ouvert pour modification.
+
+! Création d'un tiddler journal tagué
+
+Une suite d'actions courante sera la création (ou la réouverture) d'un tiddler journal du jour tagué avec le titre d'un autre tiddler. Cela pourra être effectué par le bouton ''nouveau journal ici'' de la barre d'outil du tiddler autre. Vous trouverez ce bouton dans l'onglet ''Outils'' du panneau d'information du tiddler.
+
+Par exemple, lors de la révision d'un tiddler appelé '' Oxford Street '', vous pourriez vous rendre compte de sa pertinence pour la préparation de votre tournée des magasins. Cliquer sur le bouton ''nouveau journal, ici'' dans le tiddler ''Oxford Street'' pour générer une entrée du journal étiquetée du tag ''Oxford Street''.
+
+! Personnalisation des tiddlers journaux
+
+Pour régler la façon dont les nouvelles entrées des journaux sont créés, rendez-vous à l'onglet  ''Fondamentaux'' sous ''Info'' dans le [[panneau de contrôle|$:/ControlPanel]]:
+
+* ''Gabarit pour les titres des tiddlers journaux'' spécifie la façon dont ces tiddlers seront nommés, par une [[chaine de format date|DateFormat]]. Le réglage par défaut sur `DDth MMM YYYY` permet aux nouvelles entrées d'avoir des titres de la forme &quot;10 Octobre 2014&quot; 
+
+* ''Tags pour les nouveaux tiddlers journaux'' [[spécifie|Title List]] les tags que contiendront automatiquement les nouveaux journaux. Par exemple: `Journal [[Vacances d'été]]`
+
+Astuce: si vous souhaitez créer un tiddler journal différent à chaque fois que vous cliquerez sur '' nouveau journal '' (et ce plusieurs fois dans la même journée), vous pourriez inclure l'heure dans le format du titre, par exemple de cette façon `AAAA-0MM-0DD au 0hhh0mm'0ss''`.
+
+Une autre astuce utile est d'inclure `$(currentTiddler)$` quelque part dans le format du titre. Ainsi, si vous cliquez sur ''nouveau journal ici'' dans plusieurs tiddlers différents, les titres de chacun de ces tiddlers feront partie du nom des entrées de journal qui en résultera.

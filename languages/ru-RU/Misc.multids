@@ -6,17 +6,27 @@ ClassicWarning/Upgrade/Caption: обновление
 CloseAll/Button: закрыть все
 ConfirmCancelTiddler: Отменить изменения заметки "<$text text=<<title>>/>"?
 ConfirmDeleteTiddler: Удалить заметку "<$text text=<<title>>/>"?
-ConfirmOverwriteTiddler: Заменить заметку "<$text text=<<title>>/>"?
 ConfirmEditShadowTiddler: Вы собираетесь редактировать встроенную заметку. Любое изменение переопределит стандартное значение и может привести к проблемам при обновлении TiddlyWiki. Вы действительно хотите редактировать "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: Заменить заметку "<$text text=<<title>>/>"?
+Count: номер
 DefaultNewTiddlerTitle: Новая заметка
 DropMessage: Перетащите сюда (или нажмите escape для отмены)
+Encryption/Cancel: Отмена
 Encryption/ConfirmClearPassword: Вы действительно хотите сбросить пароль? Это действие отменит шифрование при следующем сохранении
+Encryption/Password: Пароль
+Encryption/PasswordNoMatch: Пароли не совпадают
 Encryption/PromptSetPassword: Установить новый пароль для TiddlyWiki
+Encryption/RepeatPassword: Повторите пароль
+Encryption/SetPassword: Введите пароль
+Encryption/Username: Имя пользователя
 InvalidFieldName: Недопустимые символы в названии поля "<$text text=<<fieldName>>/>". Поля могут содержать только латинские буквы нижнего регистра, цифры и символы: подчеркивание (`_`), дефис (`-`) и точку (`.`)
 MissingTiddler/Hint: Заметка "<$text text=<<currentTiddler>>/>" отсутствует - нажмите {{$:/core/images/edit-button}} чтобы её создать
+OfficialPluginLibrary: Официальная Библиотека Плагинов ~TiddlyWiki
+PluginReloadWarning: Пожалуйста, сохраните {{$:/core/ui/Buttons/save-wiki}} и перезапустите {{$:/core/ui/Buttons/refresh}} вики, чтобы изменения в плагинах возымели эффект.
 RecentChanges/DateFormat: DD MMM YYYY
 SystemTiddler/Tooltip: Это системная заметка
 TagManager/Colour/Heading: Цвет
+TagManager/Count/Heading: Номер
 TagManager/Icon/Heading: Значок
 TagManager/Info/Heading: Детали
 TagManager/Tag/Heading: Метка

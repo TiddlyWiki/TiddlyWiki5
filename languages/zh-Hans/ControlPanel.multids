@@ -27,6 +27,19 @@ EditorTypes/Hint: 这些条目决定使用哪个编辑器来编辑特定条目�
 EditorTypes/Type/Caption: 类型
 Info/Caption: 信息
 Info/Hint: 有关此 TiddlyWiki 的信息
+KeyboardShortcuts/Add/Prompt: 在此输入快捷键
+KeyboardShortcuts/Add/Caption: 添加快捷键
+KeyboardShortcuts/Caption: 快捷键
+KeyboardShortcuts/Hint: 管理键盘快捷键分配
+KeyboardShortcuts/NoShortcuts/Caption: 尚无指定快捷键
+KeyboardShortcuts/Remove/Hint: 删除快捷键
+KeyboardShortcuts/Platform/All: 所有平台
+KeyboardShortcuts/Platform/Mac: 仅 Macintosh 平台
+KeyboardShortcuts/Platform/NonMac: 仅非 Macintosh 平台
+KeyboardShortcuts/Platform/Linux: 仅 Linux 平台
+KeyboardShortcuts/Platform/NonLinux: 仅非 Linux 平台
+KeyboardShortcuts/Platform/Windows: 仅 Windows 平台
+KeyboardShortcuts/Platform/NonWindows: 仅非 Windows 平台
 LoadedModules/Caption: 已加载的模块
 LoadedModules/Hint: 这些是当前已加载的模块之源码条目。斜体的模块则无源码条目，通常是因为它们是在引导过程中设置。
 Palette/Caption: 调色板
@@ -40,6 +53,7 @@ Palette/Prompt: 当前的调色板：
 Palette/ShowEditor/Caption: 显示编辑器
 Plugins/Add/Hint: 从官方插件库安装插件
 Plugins/Add/Caption: 获取更多插件
+Plugins/AlreadyInstalled/Hint: 此插件已经安装版本 <$text text=<<installedVersion>>/>
 Plugins/Caption: 插件
 Plugins/Disable/Caption: 禁用
 Plugins/Disable/Hint: 重新加载页面时禁用此插件
@@ -47,13 +61,24 @@ Plugins/Disabled/Status: (已禁用)
 Plugins/Empty/Hint: 无
 Plugins/Enable/Caption: 启用
 Plugins/Enable/Hint: 重新加载页面时启用此插件
+Plugins/Install/Caption: 安装
 Plugins/Installed/Hint: 当前已安装的插件：
 Plugins/Languages/Caption: 语言
 Plugins/Languages/Hint: 语言包插件
+Plugins/NoInfoFound/Hint: 无 ''"<$text text=<<currentTab>>/>"''
+Plugins/NoInformation/Hint: 未提供信息
+Plugins/NotInstalled/Hint: 尚未安装此插件
+Plugins/OpenPluginLibrary: 开启插件程式库
 Plugins/Plugins/Caption: 插件
 Plugins/Plugins/Hint: 插件
+Plugins/Reinstall/Caption: 重新安装
 Plugins/Themes/Caption: 布景主题
 Plugins/Themes/Hint: 布景主题插件
+Parsing/Caption: 解析
+Parsing/Hint: 在此您可以全域禁用个别的维基语法解析规则。请小心，禁用某些解析规则，会妨碍 ~TiddlyWiki 正常运作 (您可以用[[安全模式|http://tiddlywiki.com/#SafeMode]]恢复正常操作)
+Parsing/Block/Caption: 区块解析规则
+Parsing/Inline/Caption: 内联解析规则
+Parsing/Pragma/Caption: 编译指示解析规则
 Saving/Caption: 保存
 Saving/Heading: 保存
 Saving/TiddlySpot/Advanced/Heading: 高级设置
@@ -71,7 +96,13 @@ Settings/AutoSave/Caption: 自动保存
 Settings/AutoSave/Disabled/Description: 不要自动保存变更
 Settings/AutoSave/Enabled/Description: 自动保存变更
 Settings/AutoSave/Hint: 在编辑过程中自动保存变更
+Settings/CamelCase/Caption: 驼峰式维基链接
+Settings/CamelCase/Hint: 您可以全域禁用驼峰式短语自动链接。须保存后重新加载，方才生效。
+Settings/CamelCase/Description: 启用自动驼峰式链接
 Settings/Caption: 设置
+Settings/EditorToolbar/Caption: 编辑器工具栏
+Settings/EditorToolbar/Hint: 启用或禁用编辑器工具栏︰
+Settings/EditorToolbar/Description: 显示编辑器工具栏
 Settings/DefaultSidebarTab/Caption: 默认侧边栏页签
 Settings/DefaultSidebarTab/Hint: 指定默认显示的侧边栏页签
 Settings/Hint: 这些高级设置让您定制 TiddlyWiki 的行为。
@@ -82,6 +113,9 @@ Settings/LinkToBehaviour/OpenAbove: 开启于当前条目之上
 Settings/LinkToBehaviour/OpenBelow: 开启于当前条目之下
 Settings/LinkToBehaviour/OpenAtTop: 开启于故事河的顶端
 Settings/LinkToBehaviour/OpenAtBottom: 开启于故事河的底部
+Settings/MissingLinks/Caption: 维基链接
+Settings/MissingLinks/Hint: 选择是否要链接到尚未存在的条目
+Settings/MissingLinks/Description: 启用链接到佚失条目
 Settings/NavigationAddressBar/Caption: 网址栏导览
 Settings/NavigationAddressBar/Hint: 在浏览器网址栏导览到条目时的行为：
 Settings/NavigationAddressBar/No/Description: 不更新网址栏
@@ -91,6 +125,14 @@ Settings/NavigationHistory/Caption: 历史记录导览
 Settings/NavigationHistory/Hint: 当导览到条目时，更新浏览器历史记录：
 Settings/NavigationHistory/No/Description: 不更新历史记录
 Settings/NavigationHistory/Yes/Description: 更新历史记录
+Settings/PerformanceInstrumentation/Caption: 性能检测
+Settings/PerformanceInstrumentation/Hint: 在浏览器的开发人员控制台，显示性能统计数据。需要重新加载才能生效。
+Settings/PerformanceInstrumentation/Description: 启用性能检测
+Settings/ToolbarButtonStyle/Caption: 工具栏按钮样式
+Settings/ToolbarButtonStyle/Hint: 选择工具栏按钮的样式:
+Settings/ToolbarButtonStyle/Styles/Borderless: 无边框
+Settings/ToolbarButtonStyle/Styles/Boxed: 方框
+Settings/ToolbarButtonStyle/Styles/Rounded: 圆形
 Settings/ToolbarButtons/Caption: 工具栏按钮
 Settings/ToolbarButtons/Hint: 默认的工具栏按钮外观：
 Settings/ToolbarButtons/Icons/Description: 包含图标
@@ -111,6 +153,8 @@ Toolbars/EditToolbar/Hint: 选择将显示哪些按钮于条目的编辑模式�
 Toolbars/Hint: 选择将显示哪些工具栏按钮
 Toolbars/PageControls/Caption: 页面工具栏
 Toolbars/PageControls/Hint: 选择将显示哪些按钮于主页面的工具栏
+Toolbars/EditorToolbar/Caption: 编辑器工具栏
+Toolbars/EditorToolbar/Hint: 选择将显示哪些按钮于编辑器工具栏。请注意，某些按钮只会出现在编辑某一类型的条目时。
 Toolbars/ViewToolbar/Caption: 查看工具栏
 Toolbars/ViewToolbar/Hint: 选择将显示哪些按钮于条目的查看模式工具栏
 Tools/Download/Full/Caption: 下载完整副本

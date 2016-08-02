@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/async/readme
+
+This plugin packages [[async.js|https://github.com/caolan/async]] for use by other plugins. It does not provide any end-user visible features.

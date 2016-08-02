@@ -1,0 +1,6 @@
+title: $:/data/ResumeList
+type: application/json
+
+{
+    "Default": "true"
+}

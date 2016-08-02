@@ -1,0 +1,6 @@
+section: Skills and Expertise
+tags: [[Section Display]]
+template: $:/template/SkillsAndExpertiseTemplate
+title: $:/display/Skills and Expertise Display
+
+<$transclude tiddler=GenericSectionDisplayTemplate mode=block/>

@@ -118,7 +118,7 @@ function openStartupTiddlers(options) {
 	}
 	// Process the story filter to get the story list
 	var storyList = $tw.wiki.filterTiddlers(storyFilter);
-	//invoke any hooks that might change the default story list
+	// Invoke any hooks that want to change the default story list
 	storyList = $tw.hooks.invokeHook("th-opening-default-tiddlers-list",storyList);
 	// If the target tiddler isn't included then splice it in at the top
 	if(target && storyList.indexOf(target) === -1) {

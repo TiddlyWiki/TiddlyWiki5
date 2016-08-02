@@ -2,8 +2,9 @@ title: $:/core/ui/SideBarLists
 
 <div class="tc-sidebar-lists">
 
+<$set name="searchTiddler" value="$:/temp/search">
 <div class="tc-search">
-<$edit-text tiddler="$:/temp/search" type="search" tag="input" focus="true"/>
+<$edit-text tiddler="$:/temp/search" type="search" tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> class="tc-popup-handle"/>
 <$reveal state="$:/temp/search" type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
@@ -15,6 +16,11 @@ title: $:/core/ui/SideBarLists
 <$action-setfield $tiddler="$:/temp/search" text="" />
 {{$:/core/images/close-button}}
 </$button>
+<$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
+<$set name="resultCount" value="""<$count filter="[!is[system]search{$(searchTiddler)$}]"/>""">
+{{$:/core/images/down-arrow}} {{$:/language/Search/Matches}}
+</$set>
+</$button>
 </$reveal>
 <$reveal state="$:/temp/search" type="match" text="">
 <$button to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
@@ -23,18 +29,18 @@ title: $:/core/ui/SideBarLists
 </$reveal>
 </div>
 
-<$reveal state="$:/temp/search" type="nomatch" text="">
+<$reveal tag="div" class="tc-block-dropdown-wrapper" state="$:/temp/search" type="nomatch" text="">
 
-<$set name="searchTiddler" value="$:/temp/search">
+<$reveal tag="div" class="tc-block-dropdown tc-search-drop-down tc-popup-handle" state=<<qualify "$:/state/popup/search-dropdown">> type="nomatch" text="" default="">
+
 {{$:/core/ui/SearchResults}}
+
+</$reveal>
+
+</$reveal>
+
 </$set>
 
-</$reveal>
-
-<$reveal state="$:/temp/search" type="match" text="">
-
 <$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/SideBar]!has[draft.of]]" default={{$:/config/DefaultSidebarTab}} state="$:/state/tab/sidebar" />
-
-</$reveal>
 
 </div>

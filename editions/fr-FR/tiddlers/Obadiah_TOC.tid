@@ -1,0 +1,12 @@
+created: 20131207085406905
+fr-title: Un sommaire pour Obadiah
+modified: 20150614045703807
+tags: Examples
+title: Obadiah TOC
+type: text/vnd.tiddlywiki
+url: http://giffmex.org/experiments/obadiah.html
+
+Une introduction à la bible d'Obadiah par Dave Gifford utilisant la macro sommaire et différents réglages personnalisés de ~TiddlyWiki<<:>> un bouton ''nouveau, ici'', modifié [[ajout d'un viewtemplate personnalisé|http://giffmex.org/experiments/obadiah.html#%24%3A%2F_aa%2FViewTemplate%2FNoteList]] pour intégrer des notes ou des images dans tout tiddler, et un tiddler transcluant tout contenu, adapté pour faciliter l'impression ([[ce tiddler|http://giffmex.org/experiments/obadiah.html#An%20introduction%20to%20Obadiah]]).
+
+{{!!url}}
+

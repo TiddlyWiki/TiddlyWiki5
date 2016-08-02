@@ -1,7 +1,8 @@
 created: 20141228094500000
-modified: 20141228094500000
-tags: Concepts
+modified: 20150917193731240
+tags: Tagging
 title: TagTiddlers
+type: text/vnd.tiddlywiki
 
 A tag tiddler is any tiddler that is in use as a tag.
 

@@ -7,15 +7,18 @@
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/help",
 		"tiddlywiki/stacked-view",
-		"tiddlywiki/powered-by-tiddlywiki"
+		"tiddlywiki/powered-by-tiddlywiki",
+		"tiddlywiki/internals",
+		"tiddlywiki/highlight",
+		"tiddlywiki/markdown"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite",
-		"tiddlywiki/nighttime",
 		"tiddlywiki/starlight",
 		"tiddlywiki/seamless",
 		"tiddlywiki/centralised",
+		"tiddlywiki/tight",
 		"tiddlywiki/readonly"
 	],
 	"languages": [

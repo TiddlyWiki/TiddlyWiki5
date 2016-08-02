@@ -1,0 +1,13 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/static/image
+
+<$reveal state="!!_canonical_uri" type="match" text="">
+
+`<img src="data:`<$view format="text" field="type"/>`;base64,`<$view format="text" field="text"/>`" class="`{{||$:/plugins/tiddlywiki/text-slicer/templates/static/helpers/classes}}`">`
+
+</$reveal>
+
+<$reveal state="!!_canonical_uri" type="nomatch" text="">
+
+`<img src="`<$text text=<<tv-external-image-path>>/><$view field="title" format="doubleurlencoded"/>`" class="`{{||$:/plugins/tiddlywiki/text-slicer/templates/static/helpers/classes}}`">`
+
+</$reveal>

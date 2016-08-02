@@ -1,0 +1,40 @@
+caption: Objective
+created: 20150720165104821
+modified: 20150720165123543
+tags: Section
+title: $:/input/ObjectiveInput1
+
+\define thisAddObjectiveButton()
+<$button>Add Objective<$action-setfield $tiddler='$:/temp/Objective' title='$:/data/Objective/$(ObjectiveName)$'/><$action-setfield $tiddler='$:/temp/Objective' name='' text=''/></$button>
+\end
+
+\define thisSelectObjective()
+<$radio tiddler='$:/settings/$(ThisResume)$/Objective'  value={{!!name}}/>
+\end
+
+Your objective should very briefly describe the sort of job you are looking for and be phrased in a way that flatters the company you are applying to. Something like 'To gain professional experience with a leader in the field of underwater basket weaving.' 
+<br>
+<br>
+You can enter multiple possible objectives and then select the one you want to use on the current resume.
+You can add a new objective or select one that you have already entered (if you have previously entered any).
+<br>
+<br>
+Name:
+<$edit-text tiddler='$:/temp/Objective' field=name class='tc-edit-texteditor' placeholder='Short Name'/>
+
+Objective:
+<$edit-text tiddler='$:/temp/Objective' class='tc-edit-texteditor' placeholder='Objective'/>
+
+<$vars ThisResume={{$:/settings/Global!!selected_resume}} ObjectiveName={{$:/temp/Objective!!name}}>
+<<thisAddObjectiveButton>>
+
+<br>
+Select objective to use:
+
+<table>
+<tr><th>Select</th><th>Objective Name</th><th>Objective</th></tr>
+<$list filter='[prefix[$:/data/Objective/]]'>
+<tr><td><<thisSelectObjective>></td><td><$view field='name'/></td><td><$view field='text'/></td></tr>
+</$list>
+</table>
+</$vars>

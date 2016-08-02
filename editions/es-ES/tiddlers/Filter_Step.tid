@@ -1,0 +1,23 @@
+caption: Pasos
+created: 20150124182127000
+es-title: Pasos de filtro
+modified: 20160421053348528
+tags: [[Filter Syntax]]
+title: Filter Step
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+[:"!"]
+[: [[operador|"Filter Operators"]] [:":" sufijo] ]
+[[parametro|"Filter Parameter"]]
+"""/>
+
+Un <<.def paso>> representa una operación única que se realiza dentro de un [[filtro|Filter Syntax]].
+
+En términos de programación, se parece a la llamada de una función en la que el input es un parámetro implícito. El output de un paso es una [[selección|Title Selection]] que contribuye a una [[instrucción|Filter Run]] y, por lo tanto, a la [[expresión|Filter Expression]] que lo contiene en su totalidad.
+
+El <<.def operador>> de un paso se obtiene de una lista predefinida de [[palabras clave|Filter Operators]], que puede extenderse mediante plugins. Todo operador no reconocido se trata como sufijo de <<.olink field>>. Si se omite el operador, se lo considera por defecto como `title`.
+
+Un <<.def sufijo>> es texto adicional --generalmente el nombre de un [[campo|TiddlerFields]]-- que complementa el significado de ciertos operadores.
+
+Muchos pasos requieren un valor explícito de <<.def parámetro>>, llamado también <<.def operando>>, que concreta lo que tiene que hacer.

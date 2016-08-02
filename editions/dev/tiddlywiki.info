@@ -9,22 +9,36 @@
 	"themes": [
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite",
-		"tiddlywiki/nighttime",
 		"tiddlywiki/starlight",
 		"tiddlywiki/seamless",
 		"tiddlywiki/centralised",
+		"tiddlywiki/tight",
 		"tiddlywiki/readonly"
 	],
 	"languages": [
-		"en-US",
-		"en-GB",
+		"ca-ES",
+		"cs-CZ",
+		"da-DK",
 		"de-AT",
 		"de-DE",
+		"el-GR",
+		"en-GB",
+		"en-US",
+		"es-ES",
 		"fr-FR",
-		"zh-Hans",
-		"zh-Hant",
+		"hi-IN",
+		"ia-IA",
 		"it-IT",
-		"ja-JP"
+		"ja-JP",
+		"ko-KR",
+		"nl-NL",
+		"pa-IN",
+		"pt-PT",
+		"ru-RU",
+		"sk-SK",
+		"sv-SE",
+		"zh-Hans",
+		"zh-Hant"
 	],
 	"build": {
 		"index": [

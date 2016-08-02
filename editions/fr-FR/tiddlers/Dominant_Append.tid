@@ -1,0 +1,13 @@
+caption: Ajout prépondérant
+created: 20150123220223000
+fr-title: Ajout prépondérant
+modified: 20150622102941461
+tags: Concepts
+title: Dominant Append
+type: text/vnd.tiddlywiki
+
+Les [[filtres|Filters]] manipulent des [[sélections de titres|Title Selection]] où aucun titre n'apparait plus d'une fois. En outre, ils ont souvent besoin d'ajouter tel ensemble à un autre.
+
+Cet ajout s'effectue d'une façon telle que, si un titre vient à être dupliqué, la copie antérieure de ce titre est éliminé. Les titres ajoutés sont ''prépondérants''.
+
+Par exemple, si une sélection contient `Andrew Becky Clara Daniel` et que `Andrew Barney Clara Daisy` lui est ajouté, le résultat sera `Becky Daniel Andrew Barney Clara Daisy`.

@@ -16,13 +16,16 @@ Filter operator returning all the tags of the selected tiddlers
 Export our filter function
 */
 exports.tags = function(source,operator,options) {
-	var results = [];
+	var tags = {};
 	source(function(tiddler,title) {
+		var t, length;
 		if(tiddler && tiddler.fields.tags) {
-			$tw.utils.pushTop(results,tiddler.fields.tags);
+			for(t=0, length=tiddler.fields.tags.length; t<length; t++) {
+				tags[tiddler.fields.tags[t]] = true;
+			}
 		}
 	});
-	return results;
+	return Object.keys(tags);
 };
 
 })();

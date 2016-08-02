@@ -1,0 +1,50 @@
+caption: Utilisation basique
+created: 20141129201509859
+fr-title: Transclusion — utilisation basique
+modified: 20160517071012115
+tags: [[Transclusion in WikiText]]
+title: Transclusion Basic Usage
+type: text/vnd.tiddlywiki
+
+! Transclusion Simple
+
+Pour inclure le contenu d'un [[TiddlerA]] dans un [[TiddlerB]], modifier le précédent pour y inclure le texte suivant<<:>> 
+
+```
+
+Voici le contenu de TiddlerA: {{TiddlerA}}
+```
+
+Le résultat permet au contenu du champ ''text'' (c.à.d le contenu principal) du [[TiddlerA]] de s'afficher dans le [[TiddlerB]]. 
+
+! Utilisation
+
+La notation ``{{TiddlerA}}`` est une abréviation de ``{{TiddlerA!!text}}``, puisque le champ de transclusion par défaut est ''text'', mais tout autre [[champ|TiddlerFields]] peut être spécifié. Par exemple, vous pouvez visualiser la dernière fois que le TiddlerA fut modifié par<<:>>
+
+```
+
+TiddlerA a été modifié le {{TiddlerA!!modified}}
+```
+
+En omettant le titre du tiddler, la notation de transclusion peut aussi être utilisé pour afficher le contenu d'un champ du tiddler en cours, par exemple<<:>>
+
+```
+
+Le tiddler en cours a été modifié le {{!!modified}}
+```
+
+! Erreurs Récursives
+
+Notez que l'utilisation de ``{{!!text}}`` ou ``{{}}`` engendre le message d'erreur (//Erreur dans le widget transclude : transclusion récursive//), car il n'y a aucun sens à inclure le contenu du tiddler courant dans le contenu du tiddler courant (c.à.d, en lui-même). Chaque fois que vous rencontrez ce message d'erreur, cela voudra dire que vous essayez d'inclure quelque chose en lui-même, directement ou indirectement (par exemple si le tiddler A transclut le tiddler B qui transclut le tiddler C qui, à son tour, transclut le tiddler A).
+
+! En savoir plus
+
+Dans TiddlyWiki, les transclusions ne sont pas limitées à l'inclusion de contenu brut comme ci-dessus. Pour en apprendre plus au sujet de modes d'utilisation plus poussées, voir [[Transclusion par Gabarits|Transclusion with Templates]].
+
+Voir aussi<<:>>
+
+* [[Transclusion]]
+* [[Transclusion par Gabarits|Transclusion with Templates]]
+* [[Transclusion grâce à WikiText|Transclusion in WikiText]]
+* [[Référence de texte|TextReference]]
+* [[Champs de Tiddler|TiddlerFields]].

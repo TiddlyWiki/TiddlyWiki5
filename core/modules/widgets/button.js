@@ -86,6 +86,9 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 			self.setTiddler();
 			handled = true;
 		}
+		if(self.actions) {
+			self.invokeActionString(self.actions,self,event);
+		}
 		if(handled) {
 			event.preventDefault();
 			event.stopPropagation();
@@ -153,6 +156,7 @@ Compute the internal state of the widget
 */
 ButtonWidget.prototype.execute = function() {
 	// Get attributes
+	this.actions = this.getAttribute("actions");
 	this.to = this.getAttribute("to");
 	this.message = this.getAttribute("message");
 	this.param = this.getAttribute("param");

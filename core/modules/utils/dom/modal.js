@@ -102,6 +102,7 @@ Modal.prototype.display = function(title,options) {
 		var link = document.createElement("a");
 		link.setAttribute("href",tiddler.fields.help);
 		link.setAttribute("target","_blank");
+		link.setAttribute("rel","noopener noreferrer");
 		link.appendChild(document.createTextNode("Help"));
 		modalFooterHelp.appendChild(link);
 		modalFooterHelp.style.float = "left";
@@ -122,7 +123,7 @@ Modal.prototype.display = function(title,options) {
 				attributes: {
 					text: {
 						type: "string",
-						value: "Close"
+						value: $tw.language.getString("Buttons/Close/Caption")
 			}}}
 		]}],
 		parentWidget: $tw.rootWidget,

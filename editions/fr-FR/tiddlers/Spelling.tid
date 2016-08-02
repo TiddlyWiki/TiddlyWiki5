@@ -1,0 +1,19 @@
+created: 20150110182900000
+fr-title: Orthographe
+modified: 20150621215034075
+tags: [[Improving TiddlyWiki Documentation]]
+title: Spelling
+type: text/vnd.tiddlywiki
+
+Du fait des origines britanniques de ~TiddlyWiki, sa documentation anglaise emploie [[l'orthographe britannique de préférence à l'orthographe US|http://en.wikipedia.org/wiki/American_and_British_English_spelling_differences]].
+
+Les mots comme <<.word customise>> sont orthographiés <<.word -ise>> et pas <<.word -ize>>.
+
+Les acronymes techniques standard sont écrits en majuscules, sans points<<:>> <<.word HTML>>, et pas <<.word html>> ou <<.word H.T.M.L.>>
+
+Éviter les abréviations arbitraires de mots ou de phrases. Mais les abréviations suivantes sont acceptables<<:>>
+
+|!Abbréviation |!Signification |!Notes |
+|e.g. |par exemple |avec un point après chaque lettre |
+|i.e. |c'est à dire |avec un point après chaque lettre  |
+|etc |ainsi de suite |sans point |

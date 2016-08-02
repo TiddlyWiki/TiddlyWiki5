@@ -1,22 +1,23 @@
 title: $:/language/EditTemplate/
 
-Body/External/Hint: Diese ist ein externer Tiddler, der nicht im TW file gespeichert ist. Sie können die "Tags" und "Feld" Texte ändern, jedoch nicht den Inhalt des Tiddlers!
-Body/Hint: Verwenden Sie zum Formatieren [[WikiText|http://tiddlywiki.com/static/WikiText.html]].
+Body/External/Hint: Dies ist ein externer Tiddler, der nicht im TW file gespeichert ist. Sie können die "Tags" und "Feld" Texte ändern, jedoch nicht den Inhalt des Tiddlers!
 Body/Placeholder: Geben Sie den Text für diesen Tiddler ein.
-Body/Preview/Button/Hide: Vorschau aus
-Body/Preview/Button/Show: Vorschau
+Body/Preview/Type/Output: Anzeige
 Field/Remove/Caption: Lösche Feld
 Field/Remove/Hint: Lösche Feld
 Fields/Add/Button: ok
 Fields/Add/Name/Placeholder: Feld Name
 Fields/Add/Prompt: Feld einfügen:
 Fields/Add/Value/Placeholder: Feld Text / Wert
-Shadow/Warning: Dies ist ein Schatten-Tiddler. Jede Änderung überschreibt die Standardversion.
-Shadow/OverriddenWarning: Dies ist ein veränderter Tiddler. Um zur Standardversion zurückzukehren, löschen Sie diesen Tiddler.
+Fields/Add/Dropdown/System: System Felder
+Fields/Add/Dropdown/User: Anwender Felder
+Shadow/Warning: Dies ist ein Schatten-Tiddler. Jede Änderung, die Sie machen, überschreibt die Standardversion des Plugins: <<pluginLink>>
+Shadow/OverriddenWarning: Dies ist ein veränderter Tiddler. Um zur Standardversion zurückzukehren, löschen Sie diesen Tiddler. Plugin: <<pluginLink>>
 Tags/Add/Button: ok
 Tags/Add/Placeholder: neuer Tag
 Tags/Dropdown/Caption: Tag Liste
 Tags/Dropdown/Hint: Tag Liste anzeigen
+Title/BadCharacterWarning: Warnung: Folgende Zeichen im Titel können zu Problemen führen: <<bad-chars>>
 Type/Dropdown/Caption: Tiddler Typ Liste
 Type/Dropdown/Hint: Anzeigen der Tiddler Typ Liste
 Type/Delete/Caption: Lösche Inhalts Typ

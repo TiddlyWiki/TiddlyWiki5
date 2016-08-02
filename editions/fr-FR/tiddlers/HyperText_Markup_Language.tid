@@ -1,0 +1,13 @@
+caption: HTML
+created: 20150228132723000
+fr-title: HTML, Langage Marquage HyperTexte
+modified: 20150623073548320
+tags: Definitions
+title: HyperText Markup Language
+type: text/vnd.tiddlywiki
+
+<<.dlink-ex HTML "http://en.wikipedia.org/wiki/HTML">> is a standard plain-text format used for defining the content of a web page.
+
+It consists of a tree of elements expressed using a system of special <<.def tags>> enclosed in angle brackets.
+
+Almost the whole of HTML can be used unchanged in the WikiText of a tiddler.

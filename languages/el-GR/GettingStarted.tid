@@ -1,6 +1,7 @@
 title: GettingStarted
 
-Καλώς ήρθατε στο TiddlyWiki, το μη-γραμμικό προσωπικό σημειωματάριο του ιστού.
+\define lingo-base() $:/language/ControlPanel/Basics/
+Καλώς ήρθατε στο ~TiddlyWiki, το μη-γραμμικό προσωπικό σημειωματάριο του ιστού.
 
 Για να ξεκινήσετε, πρώτα επαληθεύστε ότι μπορείτε να αποθηκεύσετε τις αλλαγές σας με επιτυχία - δείτε στο http://tiddlywiki.com/ για περισσότερες οδηγίες.
 
@@ -11,3 +12,14 @@ title: GettingStarted
 ** Να σταματήσετε την εμφάνιση αυτού του μηνύματος τροποποιώντας την επιλογή προκαθορισμένα tiddlers κάτω από την καρτέλα ''Βασικά'' 
 * Αποθηκεύσετε τις αλλαγές χρησιμοποιώντας το κουμπί της 'αποθήκευσης' στην πλευρική γραμμή εργαλείων
 * Να μάθετε περισσότερα σχετικά με την γλώσσα [[WikiText|http://tiddlywiki.com/static/WikiText.html]]
+
+!! Ρυθμίστε αυτή την ~TiddlyWiki
+
+<div class="tc-control-panel">
+
+|<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+|<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+</div>
+
+See the [[control panel|$:/ControlPanel]] for more options.

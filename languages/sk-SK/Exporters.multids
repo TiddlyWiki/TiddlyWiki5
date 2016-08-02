@@ -1,0 +1,6 @@
+title: $:/language/Exporters/
+
+CsvFile: Tiddlery v CSV formáte
+JsonFile: Tiddlery v JSON formáte
+StaticRiver: Sada tiddlerov ako statický HTML súbor
+TidFile: Jeden tiddler ako ".tid" súbor

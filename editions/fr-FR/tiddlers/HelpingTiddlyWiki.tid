@@ -1,0 +1,34 @@
+created: 20130825160500000
+fr-title: AiderTiddlyWiki
+modified: 20160606102438250
+tags: Community
+title: HelpingTiddlyWiki
+type: text/vnd.tiddlywiki
+
+Si vous appréciez l'utilité de TiddlyWiki, il y a plusieurs façons d'aider à l'améliorer et à assurer son avenir.
+
+! Former et Promouvoir
+
+Les Projets OpenSource comme << tw >> prospèrent grâce aux réactions et à l'engagement des utilisateurs. Plus ~TiddlyWiki deviendra d'autant plus utile à tous que nous serons de plus en plus nombreux à l'utiliser. Aussi, Si vous appréciez l'utilité de ~TiddlyWiki, faites le savoir. Le meilleur moyen de garantir son avenir est de devenir des centaines de fois plus populaire qu'auparavant.
+
+* [img[https://img.shields.io/twitter/url/http/tiddlywiki.com.svg?style=social]]
+* Tweeter sur ~TiddlyWiki: [[I love TiddlyWiki because...|https://twitter.com/intent/tweet?text=I+love+TiddlyWiki+because...&source=tiddlywiki5]]
+* [img[https://img.shields.io/github/stars/jermolene/tiddlywiki5.svg?style=social&label=Star]]
+* [[Etoiler le référentiel TiddlyWiki5 sur GitHub|https://github.com/Jermolene/TiddlyWiki5]]
+* [[Afficher la bannière TiddlyWiki|http://tiddlywiki.com/poster]]
+
+[img width=232 [Tiddler Poster.png]]
+
+! Aider à améliorer le code et la documentation
+
+Vous pouvez contribuer à ~TiddlyWiki de plusieurs façons<<dp>>
+
+* Rédiger des didacticiels
+* Contribuer à la documentation sur tiddlywiki.com
+* Réaliser des vidéocaptures d'écran
+* Relever les liens, trucs et astuces pertinents au sein d'un wiki
+
+Le code et la documentation principal de ~TiddlyWiki se trouvent sur GitHub, où sont accueillies les différentes [[contributions|Contributing]]:
+
+* https://github.com/Jermolene/TiddlyWiki5
+

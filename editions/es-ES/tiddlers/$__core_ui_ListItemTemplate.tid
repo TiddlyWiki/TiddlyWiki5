@@ -1,0 +1,12 @@
+created: 20141117221740337
+modified: 20160515100528031
+title: $:/core/ui/ListItemTemplate
+type: text/vnd.tiddlywiki
+
+<div class="tc-menu-list-item">
+<$link to={{!!title}}>
+<$view field="es-title">
+<$view field="title"/>
+</$view>
+</$link>
+</div>

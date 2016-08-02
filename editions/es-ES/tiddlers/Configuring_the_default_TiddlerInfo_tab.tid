@@ -1,0 +1,21 @@
+caption: Pestaña por defecto de ~InfoPanel
+created: 20140828080837703
+es-title: Configuración de la pestaña por defecto del InfoPanel
+modified: 20160426133136283
+tags: [[Customise TiddlyWiki]]
+title: Configuring the default TiddlerInfo tab
+type: text/vnd.tiddlywiki
+
+El tiddler de configuración [[$:/config/TiddlerInfo/Default]] contiene el título del tiddler de la pestaña abierta por defecto en el InfoPanel. 
+
+Su valor por defecto es <<.tid ~$:/core/ui/TiddlerInfo/Tools>>, que corresponde a la pestaña <<.info-tab Tools>>. 
+
+Todos los valores posibles para seleccionar la pestaña abierta por defecto son:
+
+<ul>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TiddlerInfo]!has[draft.of]]">
+<li>
+<$view field="title"/>
+</li>
+</$list>
+</ul>

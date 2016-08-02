@@ -51,12 +51,14 @@ describe("Filter tests", function() {
 		title: "TiddlerOne",
 		text: "The quick brown fox in $:/TiddlerTwo",
 		tags: ["one"],
+		authors: "Joe Bloggs",
 		modifier: "JoeBloggs",
 		modified: "201304152222"});
 	wiki.addTiddler({
 		title: "$:/TiddlerTwo",
 		text: "The rain in Spain\nfalls mainly on the plain and [[a fourth tiddler]]",
 		tags: ["two"],
+		authors: "[[John Doe]]",
 		modifier: "JohnDoe",
 		modified: "201304152211"});
 	wiki.addTiddler({
@@ -217,6 +219,8 @@ describe("Filter tests", function() {
 
 	it("should handle the each operator", function() {
 		expect(wiki.filterTiddlers("[each[modifier]sort[title]]").join(",")).toBe("$:/TiddlerTwo,TiddlerOne");
+		expect(wiki.filterTiddlers("[each:list-item[tags]sort[title]]").join(",")).toBe("one,two");
+		expect(wiki.filterTiddlers("[each:list-item[authors]sort[title]]").join(",")).toBe("Bloggs,Joe,John Doe");
 	});
 
 	it("should handle the eachday operator", function() {

@@ -1,0 +1,197 @@
+created: 20150719200725211
+modified: 20150720164139669
+tags: Tools
+title: New Section Creation Tool
+
+\define thisMakeDisplayTiddler()
+<$action-setfield $tiddler="""$:/display/$(ThisSection)$""" text="""<$transclude tiddler=GenericSectionDisplayTemplate mode=block/>""" tags="""[[Section Display]]""" section="""$(ThisSection)$"""/>
+\end
+
+\define thisInputTiddlerText()
+$(TiddlerPreamble)$$(TiddlerPreamble2)$$(TiddlerPreamble3)$
+
+$(ThisAddItemButtonMacro)$
+
+$(UserInputTiddlerText)$
+\end
+
+\define thisMakeInputTiddler()
+<$action-setfield $tiddler="""$:/input/$(ThisSection)$/$(TemplateName)$""" text=<<thisInputTiddlerText>> tags=Section caption="""$(ThisSection)$"""/>
+\end
+
+\define thisOptionsTiddlerText()
+$(TiddlerPreamble)$$(TiddlerPreamble2)$$(TiddlerPreamble3)$
+
+$(UserOptionsTiddlerText)$
+\end
+
+\define thisMakeOptionsTiddler()
+<$action-setfield $tiddler="""$:/options/$(ThisSection)$/$(TemplateName)$""" text=<<thisOptionsTiddlerText>> caption="""$(ThisSection)$ Options"""/>
+\end
+
+\define thisTemplateTiddlerText()
+$(TiddlerPreamble)$$(TiddlerPreamble2)$$(TiddlerPreamble3)$
+
+$(UserTemplateTiddlerText)$
+\end
+
+\define thisMakeTemplateTiddler()
+<$action-setfield $tiddler="""$:/template/$(ThisSection)$/$(TemplateName)$""" text=<<thisTemplateTiddlerText>> input_tiddler="""$:/input/$(ThisSection)$/$(TemplateName)$""" options_tiddler="""$:/options/$(ThisSection)$/$(TemplateName)$""" section_name="""$(ThisSection)$""" template_name="""$(TemplateName)$""" tags=DisplayTemplate/>
+\end
+
+''Once you have created your new section you have to go to [[Résumé Options]] and select a template and set the section as visible before it will appear in the résumé.''
+
+This is a tool to aid in the creation of custom résumé sections. Fill out each section and then click on the 'Create Section' button below. Click on the ^^(?)^^ next to each tiddler name to get more information and a basic example. If you copy all of the examples given they will work together.
+
+Automatically defined helper macros and values (with the exception of `<<thisAddResumeSectionItem>>` these macros are defined for all of the tiddlers created using this tool.):
+
+*`<<thisAddResumeSectionItem>>` - This macro places a button that will automatically create the data tiddler using the supplied inputs. It is only available in the input tiddler.
+*`<<ItemListFilter>>` - This is the list of the names for all items in the current section.
+*`<<SortedItemFilterList>>` - This is the sorted list data tiddlers for the visible items in the current section.
+*`<<DataTiddler>>` - The data tiddler for the current item, use this for storing data in the input tiddler and for getting data to display for the template tiddler. This macro only works inside a list using the `<<ItemListFilter>>`
+*`<<ItemSettingsTiddler>>` - This is where settings should be stored in the options tiddler. This should hold the visibility and order sections for each item. This macro only works inside a list using the `<<ItemListFilter>>`
+*`<<SectionName>>` - This is the name of the current section.
+*`<<SectionSettingsTiddler>>` - This is the name of the tiddler containing the settings for the current section. It holds the visibility and order settings, but they are automatically created by the [[Layout Options]] tiddler. You shouldn't need to use this unless you are doing something special.
+
+Section Name^^(<$button class='tc-btn-invisible' popup='$:/state/popup/SectionNameHelp'>?</$button><$reveal type='popup' state='$:/state/popup/SectionNameHelp'><div class='tc-drop-down'>This should be a short descriptive section name, like 'Résumé Title' or 'Lands Conquered'</div></$reveal>)^^:
+<$edit-text tiddler='$:/temp/NewSection' field='section_name' class='tc-edit-texteditor' placeholder='Section Name'/>
+
+Input Tiddler^^(<$reveal type='nomatch' state='$:/state/popup/InputTiddlerHelp' text=show><$button class='tc-btn-invisible' set='$:/state/popup/InputTiddlerHelp' setTo='show'>?</$button></$reveal><$reveal type='match' state='$:/state/popup/InputTiddlerHelp' text=show><$button class='tc-btn-invisible' set='$:/state/popup/InputTiddlerHelp' setTo='hide'>?</$button></$reveal>)^^:
+
+<$reveal type='match' state='$:/state/popup/InputTiddlerHelp' text=show>
+<div style="word-wrap: true;">
+<hr>
+This is the tiddler used to take input. This should have a way to input data for each field you want for your section items (like start date, end date, employer, ...) This must have a field called 'name' to work with the creation tool.
+
+A very simple example is:<br>
+
+<pre>
+
+```
+Item Name: <$edit-text tiddler='$:/temp/$(ThisSection)$/NewItem' field=name class='tc-edit-texteditor' placeholder='Item Name'/>
+
+<<thisAddResumeSectionItem>>
+
+<$list filter=<<ItemListFilter>>/>
+```
+</pre>
+
+</div>
+</$reveal>
+
+<$edit-text tiddler='$:/temp/NewSection/InputTiddler' class='tc-edit-texteditor' placeholder='Input Tiddler Text'/>
+
+Options Tiddler^^(<$reveal type='nomatch' state='$:/state/popup/OptionsTiddlerHelp' text=show><$button class='tc-btn-invisible' set='$:/state/popup/OptionsTiddlerHelp' setTo='show'>?</$button></$reveal><$reveal type='match' state='$:/state/popup/OptionsTiddlerHelp' text=show><$button class='tc-btn-invisible' set='$:/state/popup/OptionsTiddlerHelp' setTo='hide'>?</$button></$reveal>)^^:
+
+<$reveal type='match' state='$:/state/popup/OptionsTiddlerHelp' text=show>
+<div style="word-wrap: true;">
+<hr>
+This is the tiddler listing the options, it should have at least two options:
+<br>
+''Visibility'' - a field called `show` given a value of true or false. Checkboxes work well for this. Example: `<$checkbox tiddler=<<ItemSettingsTiddler>> field=show checked=true unchecked=false/>`.<br>
+''Order'' - a field called `order` that contains a numeric value used to sort the items in the section. Example: `<$edit-text tiddler=<<ItemSettingsTiddler>> field=order size=2/>`.<br>
+
+
+A very simple example is:<br>
+
+<pre>
+
+```
+<table>
+<tr>
+<th>
+Visible?
+</th>
+<th>
+Item Name
+</th>
+<th>
+Order
+</th>
+</tr>
+<$list filter=<<ItemListFilter>>>
+<tr>
+<td>
+<$checkbox tiddler=<<ItemSettingsTiddler>> field=show checked=true unchecked=false/>
+</td>
+<td>
+<$view tiddler=<<DataTiddler>> field='name'/>
+</td>
+<td>
+<$edit-text tiddler=<<ItemSettingsTiddler>> field=order size=2/>
+</td>
+</tr>
+</$list>
+</table>
+```
+</pre>
+<hr>
+</div>
+</$reveal>
+
+<$edit-text tiddler='$:/temp/NewSection/OptionsTiddler' class='tc-edit-texteditor' placeholder='Options Tiddler Text'/>
+
+Template Tiddler^^(<$reveal type='nomatch' state='$:/state/popup/TemplateTiddlerHelp' text=show><$button class='tc-btn-invisible' set='$:/state/popup/TemplateTiddlerHelp' setTo='show'>?</$button></$reveal><$reveal type='match' state='$:/state/popup/TemplateTiddlerHelp' text=show><$button class='tc-btn-invisible' set='$:/state/popup/TemplateTiddlerHelp' setTo='hide'>?</$button></$reveal>)^^:
+
+<$reveal type='match' state='$:/state/popup/TemplateTiddlerHelp' text=show>
+<div style="word-wrap: true;">
+<hr>
+
+A template tiddler is used to display the section in the final résumé. Each template must have a unique name. It should be descriptive (like Basic Objective Template).
+
+A very example template tiddler is:
+
+<pre>
+
+```
+<h2><$view field='section_name'/></h2>
+
+<$list filter=<<SortedItemListFilter>>>
+*<$view field='name'/><br>
+</$list>
+```
+</pre>
+<hr>
+</div>
+</$reveal>
+
+Template Name:
+<$edit-text tiddler='$:/temp/NewSection/TemplateTiddler' field=template_name class='tc-edit-texteditor' placeholder='Template Name'/>
+
+Template:
+<$edit-text tiddler='$:/temp/NewSection/TemplateTiddler' class='tc-edit-texteditor' placeholder='Template Tiddler Text'/>
+
+<$vars TiddlerPreamble="""\define SectionsSettingsTiddler() $:/settings/$(ThisResume)$/$(ThisSection)$
+
+\define ItemListFilter() [prefix[$:/data/$(ThisSection)$/]removeprefix[$:/data/$(ThisSection)$/]]
+
+\define SortedItemListFilter() [prefix[$:/data/$(ThisSection)$/]removeprefix[$:/data]addprefix[$:/settings/$(ThisResume)$]sort[order]!show[false]removeprefix[$:/settings/$(ThisResume)$]addprefix[$:/data]]
+
+\define SectionName() $(ThisSection)$
+
+\define ItemSettingsTiddler() $:/settings/$(ThisResume)$/$(ThisSection)$/$(current"""
+
+TiddlerPreamble2="""Tiddler)$
+
+\define DataTiddler() $:/data/$(ThisSection)$/$(current"""
+
+TiddlerPreamble3="""Tiddler)$
+
+""" ThisAddItemButtonMacro='\define thisAddResumeSectionItemInside(ItemName)
+<$action-setfield $tiddler="""$:/temp/$(ThisSection)$/NewItem""" title="""$:/data/$(ThisSection)$/$ItemName$"""/>
+\end
+
+\define thisAddResumeSectionItem()
+<$button>Add Item
+<$macrocall $name=thisAddResumeSectionItemInside ItemName={{$:/temp/$(ThisSection)$/NewItem!!name}}>
+</$button>
+\end
+
+' ThisSection={{$:/temp/NewSection!!section_name}} ThisResume={{$:/settings/Global!!selected_resume}} UserInputTiddlerText={{$:/temp/NewSection/InputTiddler}} UserOptionsTiddlerText={{$:/temp/NewSection/OptionsTiddler}} UserTemplateTiddlerText={{$:/temp/NewSection/TemplateTiddler}} TemplateName={{$:/temp/NewSection/TemplateTiddler!!template_name}}>
+<$button>Create Section
+<$macrocall $name=thisMakeDisplayTiddler/>
+<$macrocall $name=thisMakeInputTiddler/>
+<$macrocall $name=thisMakeOptionsTiddler/>
+<$macrocall $name=thisMakeTemplateTiddler/>
+</$button>
+</$vars>

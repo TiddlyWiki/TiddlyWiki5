@@ -7,7 +7,7 @@ caption: radio
 
 ! Introduction
 
-The radio widget displays an HTML `<input type="radio">`  that reflects whether a given tiddler field has a specified value. Selecting the radio button sets to the tiddler field to the value.
+The radio widget displays an HTML `<input type="radio">` that reflects whether a given tiddler field has a specified value. Selecting the radio button sets to the tiddler field to the value.
 
 ! Content and Attributes
 

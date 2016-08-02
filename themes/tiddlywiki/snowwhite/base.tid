@@ -60,10 +60,6 @@ canvas.tc-edit-bitmapeditor  {
 	<<box-shadow "2px 2px 10px rgba(0, 0, 0, 0.5)">>
 }
 
-.tc-modal-displayed {
-	<<filter "blur(4px)">>
-}
-
 .tc-modal {
 	border-radius: 6px;
 	<<box-shadow "0 3px 7px rgba(0,0,0,0.3)">>
@@ -86,16 +82,18 @@ canvas.tc-edit-bitmapeditor  {
 	text-shadow: 0 1px 0 rgba(255,255,255, 0.8);
 }
 
-.tc-sidebar-lists .tc-tab-divider {
-	<<background-linear-gradient "left, rgb(216,216,216) 0%, rgb(236,236,236) 250px">>
+.tc-sidebar-lists .tc-tab-set .tc-tab-divider {
+	border-top: none;
+	height: 1px;
+	<<background-linear-gradient "left, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.0) 100%">>
 }
 
 .tc-more-sidebar .tc-tab-buttons button {
-	<<background-linear-gradient "left, rgb(236,236,236) 0%, rgb(224,224,224) 100%">>
+	<<background-linear-gradient "left, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.1) 100%">>
 }
 
 .tc-more-sidebar .tc-tab-buttons button.tc-tab-selected {
-	<<background-linear-gradient "left, rgb(236,236,236) 0%, rgb(248,248,248) 100%">>
+	<<background-linear-gradient "left, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0.05) 100%">>
 }
 
 .tc-message-box img {

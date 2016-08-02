@@ -1,0 +1,8 @@
+title: $:/languages/sv-SE/icon
+type: image/svg+xml
+
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 16 10">
+<rect width="16" height="10" fill="#006aa7"/>
+<rect width="2" height="10" x="5" fill="#fecc00"/>
+<rect width="16" height="2" y="4" fill="#fecc00"/>
+</svg>
