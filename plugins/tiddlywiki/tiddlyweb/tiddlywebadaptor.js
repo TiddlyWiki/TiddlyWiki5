@@ -35,7 +35,7 @@ TiddlyWebAdaptor.prototype.getHost = function() {
 		];
 	for(var t=0; t<substitutions.length; t++) {
 		var s = substitutions[t];
-		text = text.replace(new RegExp("\\$" + s.name + "\\$","mg"),s.value);
+		text = $tw.utils.replaceString(text,new RegExp("\\$" + s.name + "\\$","mg"),s.value);
 	}
 	return text;
 };

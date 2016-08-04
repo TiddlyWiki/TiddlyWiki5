@@ -20,6 +20,15 @@ exports.warning = function(text) {
 };
 
 /*
+Repeatedly replaces a substring within a string. Like String.prototype.replace, but without any of the default special handling of $ sequences in the replace string
+*/
+exports.replaceString = function(text,search,replace) {
+	return text.replace(search,function() {
+		return replace;
+	});
+};
+
+/*
 Repeats a string
 */
 exports.repeat = function(str,count) {

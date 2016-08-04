@@ -75,9 +75,9 @@ FieldsWidget.prototype.execute = function() {
 						value = reMatch[1];
 					}
 				}
-				row = row.replace("$name$",fieldName);
-				row = row.replace("$value$",value);
-				row = row.replace("$encoded_value$",$tw.utils.htmlEncode(value));
+				row = $tw.utils.replaceString(row,"$name$",fieldName);
+				row = $tw.utils.replaceString(row,"$value$",value);
+				row = $tw.utils.replaceString(row,"$encoded_value$",$tw.utils.htmlEncode(value));
 				text.push(row);
 			}
 		}
