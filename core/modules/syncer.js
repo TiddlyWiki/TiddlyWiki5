@@ -404,7 +404,7 @@ Process the task queue, performing the next task if appropriate
 Syncer.prototype.processTaskQueue = function() {
 	var self = this;
 	// Only process a task if the sync adaptor is fully initialised and we're not already performing a task. If we are already performing a task then we'll dispatch the next one when it completes
-	if(this.syncadaptor.isReady() && this.numTasksInProgress() === 0) {
+	if((!this.syncadaptor.isReady || this.syncadaptor.isReady()) && this.numTasksInProgress() === 0) {
 		// Choose the next task to perform
 		var task = this.chooseNextTask();
 		// Perform the task if we had one
