@@ -69,11 +69,11 @@ html:-webkit-full-screen {
 body.tc-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/fontsize}};
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics/lineheight}};
+	word-wrap: break-word;
+	<<custom-background-datauri>>
 	color: <<colour foreground>>;
 	background-color: <<colour page-background>>;
 	fill: <<colour foreground>>;
-	word-wrap: break-word;
-	<<custom-background-datauri>>
 }
 
 h1, h2, h3, h4, h5, h6 {
