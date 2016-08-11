@@ -290,3 +290,5 @@ Thomas Herlea, @maxthomax, 2016/06/09
 Przemek Wesołek, @jest, 2016/08/05
 
 Doron Tzur, @DoronTzur 2016/08/16
+
+Hans Christian Haase, @hchaase, 2016/08/11
