@@ -158,6 +158,24 @@ Extended filter operators to manipulate the current list.
         return results;
     };
 
+	/*
+	Returns only those items from the current list that are listed in the operand array
+	*/
+	exports.keep = function(source, operator) {
+		var array = $tw.utils.parseStringArray(operator.operand, "true"),
+			results = prepare_results(source),
+			len = array.length,
+			remain = [],
+			p;
+		for(p = 0; p < len; ++p) {
+			var index = results.indexOf(array[p]);
+			if(index >= 0) {
+				remain = remain.concat(results.splice(index, 1));
+			}
+		}
+		return(operator.prefix) ? results : remain;
+	};
+
     /*
     Returns all items from the current list sorted in the order of the items in the operand array
     */
@@ -186,4 +204,33 @@ Extended filter operators to manipulate the current list.
         }, []);
         return set;
     };
+
+	/*
+	Returns the next item from the operand list after any matching item from the current list -- else the first item from the operand list
+	*/
+	exports.cycle = function(source, operator) {
+		var array = $tw.utils.parseStringArray(operator.operand, "true"),
+			results = prepare_results(source),
+			len = array.length,
+			found = 0,
+			p;
+		for(p = 0; p < len; p++) {
+			if(!found) {
+				var index = results.indexOf(array[p]);
+				if(index >= 0) {
+					if(operator.prefix) {
+						(p > 0) ? (results[index] = array[p - 1]) : (results[index] = array[
+							len - 1]);
+						found = 1;
+					} else {
+						(p < (len - 1)) ? (results[index] = array[p + 1]) : (results[index] =
+							array[0]);
+						found = 1;
+					}
+				}
+			}
+		}
+		return(found) ? results : results.concat(array[0]);
+	};
+	
 })();
