@@ -8,7 +8,7 @@ title: keep Operator (Examples)
 <<.using-days-of-week>>
 
 ;Keep only those items from a list that occur in the reference list
-<<.operator-example 1 "[list[Days of the Week]] +[keep[Mon Tuesday Wed Thursday Fri ]]">>
+<<.operator-example 1 "[list[Days of the Week]] +[keep[Mon Tuesday Wed Thursday Fri]]">>
 
 ;Keep only those items from a list that don't occur in the reference list
 <<.operator-example 2 "[list[Days of the Week]] +[!keep[Monday Friday Saturday]]">>
