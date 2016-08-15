@@ -63,7 +63,18 @@ exports.startup = function() {
 		controllerTitle: "$:/language",
 		defaultPlugins: [
 			"$:/languages/en-US"
-		]
+		],
+		onSwitch: function(plugins) {
+			if($tw.browser) {
+				console.log("switching language",plugins)
+				var pluginTiddler = $tw.wiki.getTiddler(plugins[0]);
+				if(pluginTiddler) {
+					document.documentElement.setAttribute("dir",pluginTiddler.getFieldString("text-direction") || "auto");
+				} else {
+					document.documentElement.removeAttribute("dir");
+				}
+			}
+		}
 	});
 	// Kick off the theme manager
 	$tw.themeManager = new $tw.PluginSwitcher({

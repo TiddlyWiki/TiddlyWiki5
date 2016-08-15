@@ -690,6 +690,11 @@ button.tc-untagged-label {
 		padding: 71px 0 28px 42px;
 	}
 
+	html[dir="rtl"] .tc-sidebar-scrollable {
+		left: auto;
+		right: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
+	}
+
 	.tc-story-river {
 		position: relative;
 		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};

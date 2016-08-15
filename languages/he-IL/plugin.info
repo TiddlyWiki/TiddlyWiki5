@@ -4,5 +4,6 @@
 	"plugin-type": "language",
 	"description": "Hebrew (Israel)",
 	"author": "DoronTzur",
-	"core-version": ">=5.0.0"
+	"core-version": ">=5.0.0",
+	"text-direction": "rtl"
 }
