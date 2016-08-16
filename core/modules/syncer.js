@@ -135,7 +135,7 @@ Syncer.prototype.updateDirtyStatus = function() {
 /*
 Save an incoming tiddler in the store, and updates the associated tiddlerInfo
 */
-Syncer.prototype.storeTiddler = function(tiddlerFields) {
+Syncer.prototype.storeTiddler = function(tiddlerFields,hasBeenLazyLoaded) {
 	// Save the tiddler
 	var tiddler = new $tw.Tiddler(this.wiki.getTiddler(tiddlerFields.title),tiddlerFields);
 	this.wiki.addTiddler(tiddler);
@@ -144,7 +144,7 @@ Syncer.prototype.storeTiddler = function(tiddlerFields) {
 		revision: tiddlerFields.revision,
 		adaptorInfo: this.syncadaptor.getTiddlerInfo(tiddler),
 		changeCount: this.wiki.getChangeCount(tiddlerFields.title),
-		hasBeenLazyLoaded: true
+		hasBeenLazyLoaded: hasBeenLazyLoaded !== undefined ? hasBeenLazyLoaded : true
 	};
 };
 
@@ -218,7 +218,7 @@ Syncer.prototype.syncFromServer = function() {
 						});
 					} else {
 						// Load the skinny version of the tiddler
-						self.storeTiddler(tiddlerFields);
+						self.storeTiddler(tiddlerFields,false);
 					}
 				}
 			}
@@ -499,7 +499,7 @@ Syncer.prototype.dispatchTask = function(task,callback) {
 			}
 			// Store the tiddler
 			if(tiddlerFields) {
-				self.storeTiddler(tiddlerFields);
+				self.storeTiddler(tiddlerFields,true);
 			}
 			// Invoke the callback
 			callback(null);
