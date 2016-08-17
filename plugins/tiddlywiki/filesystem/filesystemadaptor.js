@@ -130,8 +130,7 @@ FileSystemAdaptor.prototype.generateTiddlerFilename = function(title,extension,e
 	// Remove any of the characters that are illegal in Windows filenames
 	var baseFilename = transliterate(baseFilename.replace(/<|>|\:|\"|\\|\||\?|\*|\^|\s/g,"_"));
 	// if pathNameMapped, interpret "/" as path separator
-	if (pathNameMapped)
-	{
+	if (pathNameMapped) {
 		baseFilename = baseFilename.replace(/\//g,path.sep);
 	}
 	// Truncate the filename if it is too long
