@@ -112,21 +112,28 @@ FileSystemAdaptor.prototype.generateTiddlerFilename = function(title,extension,e
 	var baseFilename;
 	// Check whether the user has configured a tiddler -> pathname mapping
 	var pathNameFilters = this.wiki.getTiddlerText("$:/config/FileSystemPaths");
+	var pathNameMapped = false;
 	if(pathNameFilters) {
 		var source = this.wiki.makeTiddlerIterator([title]);
 		var result = this.findFirstFilter(pathNameFilters.split("\n"),source);
 		if(result) {
-			// interpret "/" as path separator
-			baseFilename = result.replace(/\//g,path.sep);
+			baseFilename = result;
+			pathNameMapped = true;
 		}
 	}
 	if(!baseFilename) {
 		// no mapping configured, or it did not match this tiddler
 		// in this case, we fall back to legacy behaviour
 		baseFilename = title.replace(/\//g,"_");
+		pathNameMapped = false;
 	}
 	// Remove any of the characters that are illegal in Windows filenames
 	var baseFilename = transliterate(baseFilename.replace(/<|>|\:|\"|\\|\||\?|\*|\^|\s/g,"_"));
+	// if pathNameMapped, interpret "/" as path separator
+	if (pathNameMapped)
+	{
+		baseFilename = baseFilename.replace(/\//g,path.sep);
+	}
 	// Truncate the filename if it is too long
 	if(baseFilename.length > 200) {
 		baseFilename = baseFilename.substr(0,200);
