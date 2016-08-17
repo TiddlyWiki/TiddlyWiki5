@@ -3,7 +3,7 @@ modified: 20160817110916813
 tags: Features [[Formatting text in TiddlyWiki]]
 title: Editor toolbar
 
-!! What is the editor toolbar
+!! How it Work
 
 The editor toolbar is a toolbar, to help you format text easily. It appear above the text input field in a tiddler when in edit mode. It have a similar appearance to desktop text editors like Microsoft Word or Libre Office Write. 
 
