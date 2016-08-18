@@ -24,8 +24,8 @@ CodeBlockWidget.prototype.postRender = function() {
 	var domNode = this.domNodes[0],
 		language = this.language,
 		tiddler = this.wiki.getTiddler(TYPE_MAPPINGS_BASE + language);
-	if(tiddler && tiddler.fields.text) {
-		language = tiddler.fields.text;
+	if(tiddler) {
+		language = tiddler.fields.text || "";
 	}
 	if($tw.browser && this.document !== $tw.fakeDocument && language) {
 		domNode.className = language.toLowerCase();
