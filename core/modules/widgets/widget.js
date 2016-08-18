@@ -125,7 +125,7 @@ Widget.prototype.substituteVariableParameters = function(text,formalParams,actua
 			// If we've still not got a value, use the default, if any
 			paramValue = paramValue || paramInfo["default"] || "";
 			// Replace any instances of this parameter
-			text = text.replace(new RegExp("\\$" + $tw.utils.escapeRegExp(paramInfo.name) + "\\$","mg"),paramValue);
+			text = $tw.utils.replaceString(text,new RegExp("\\$" + $tw.utils.escapeRegExp(paramInfo.name) + "\\$","mg"),paramValue);
 		}
 	}
 	return text;

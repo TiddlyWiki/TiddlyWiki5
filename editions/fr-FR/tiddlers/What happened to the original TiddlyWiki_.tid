@@ -1,11 +1,11 @@
-fr-title: Qu'est-il arrivé au TiddlyWiki d'origine ?
 created: 20140904085100000
-modified: 20141115224500991
+fr-title: Qu'est-il arrivé au TiddlyWiki d'origine ?
+modified: 20160603043618380
 tags: HelloThere
 title: What happened to the original TiddlyWiki?
 type: text/vnd.tiddlywiki
 
-<a class="tc-float-right tc-bordered-image" href="http://classic.tiddlywiki.com/" target="_blank">[img width="200" [TiddlyWiki Classic.png]]</a>
+<a class="tc-float-right tc-bordered-image" href="http://classic.tiddlywiki.com/" target="_blank" rel="noopener noreferrer">[img width="200" [TiddlyWiki Classic.png]]</a>
 
 La version [[originale|TiddlyWikiClassic]] de TiddlyWiki est toujours disponible à l'adresse :
 

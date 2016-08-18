@@ -5,7 +5,7 @@ title: Installing TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
 
 # Install [[Node.js]]
-#* either from your favourite package manager: typically  `apt-get install nodejs` on Debian/Ubuntu Linux or Termux for Android, or `brew install node` on a Mac
+#* either from your favourite package manager: typically `apt-get install nodejs` on Debian/Ubuntu Linux or Termux for Android, or `brew install node` on a Mac
 #* or directly from http://nodejs.org
 # Open a command line terminal and type:
 #> `npm install -g tiddlywiki`

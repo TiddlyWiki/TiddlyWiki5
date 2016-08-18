@@ -37,7 +37,7 @@ title: $:/core/ui/EditorToolbar/excise-dropdown
 	tagnew={{$config-title$/tagnew}}
 />
 <$action-deletetiddler
-	$tiddler=<<qualify "$:/state/Excise/NewTitle">>
+	$tiddler="$config-title$/new-title"
 />
 <$action-deletetiddler
 	$tiddler=<<dropdown-state>>

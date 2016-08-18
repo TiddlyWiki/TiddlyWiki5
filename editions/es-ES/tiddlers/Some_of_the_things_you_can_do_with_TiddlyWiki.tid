@@ -1,7 +1,7 @@
 caption: Cosas que puedes hacer
 created: 20140904090300000
 es-title: Varias de las muchas cosas que puedes hacer con TiddlyWiki
-modified: 20160416114846170
+modified: 20160605050204409
 tags: HelloThere
 title: Some of the things you can do with TiddlyWiki
 type: text/vnd.tiddlywiki
@@ -32,4 +32,4 @@ type: text/vnd.tiddlywiki
 
 * Preparar toda una base de conocimientos, local u online con un archivo ~TiddlyWiki que enlace a otros. Aquí hay un [[ejemplo en castellano|http://recursos.giffmex.org]]
 
-* Preparar una presentación visual de datos, usando tiddlers como fuente de datos. Un buen ejemplo lo tienes [[en esta página| http://tiddlywiki.com/plugins/tiddlywiki/d3/index.html]]
+* Preparar una presentación visual de datos, usando tiddlers como fuente de datos. Un buen ejemplo lo tienes [[en esta página| http://tiddlywiki.com/plugins/tiddlywiki/d3/]]

@@ -1,7 +1,7 @@
 caption: Guardar con módulo HTML5
 created: 20131129092604900
 es-title: Guardar con el módulo alternativo de guardado
-modified: 20160422201518852
+modified: 20160603131518256
 tags: Saving
 title: Saving with the HTML5 fallback saver
 type: text/vnd.tiddlywiki
@@ -12,7 +12,7 @@ Este método para guardar cambios es un poco rudimentario porque requiere interv
 
 #> {{$:/editions/es-ES/snippets/download-empty-button}}
 
-#>Si el botón no funciona, guarda este enlace:  http://tiddlywiki.com/empty.html
+#>Si el botón no funciona, guarda este enlace: http://tiddlywiki.com/languages/es-ES/empty.html
 
 #> Seguramente el navegador te pida que confirmes la descarga
 
@@ -22,9 +22,9 @@ Este método para guardar cambios es un poco rudimentario porque requiere interv
 
 #Abre el archivo en el navegador
 
-# Crea un nuevo tiddler usando el botón ''Nuevo'' {{$:/core/images/new-button}} de la barra lateral. Escribe algo en él y haz clic en el botón ''OK'' {{$:/core/images/done-button}}
+# Crea un nuevo tiddler usando el botón ''Nuevo tiddler'' {{$:/core/images/new-button}} de la barra lateral. Escribe algo en él y haz clic en el botón ''OK'' {{$:/core/images/done-button}}
 
-# Guarda los cambios con el botón ''Guardar'' {{$:/core/images/save-button}} de la barra lateral
+# Guarda los cambios con el botón ''Guardar cambios'' {{$:/core/images/save-button}} de la barra lateral
 
 # El navegador descargará una copia del wiki que incluye tus cambios.
 

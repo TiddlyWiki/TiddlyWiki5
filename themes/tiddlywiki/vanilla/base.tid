@@ -69,11 +69,11 @@ html:-webkit-full-screen {
 body.tc-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/fontsize}};
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics/lineheight}};
+	word-wrap: break-word;
+	<<custom-background-datauri>>
 	color: <<colour foreground>>;
 	background-color: <<colour page-background>>;
 	fill: <<colour foreground>>;
-	word-wrap: break-word;
-	<<custom-background-datauri>>
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -690,6 +690,11 @@ button.tc-untagged-label {
 		padding: 71px 0 28px 42px;
 	}
 
+	html[dir="rtl"] .tc-sidebar-scrollable {
+		left: auto;
+		right: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
+	}
+
 	.tc-story-river {
 		position: relative;
 		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
@@ -726,7 +731,7 @@ button.tc-untagged-label {
 	.tc-story-river .tc-tiddler-frame {
 		margin: 0;
 		border: none;
-		padding: 28px;
+		padding: 0;
 	}
 }
 

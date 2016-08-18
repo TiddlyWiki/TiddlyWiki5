@@ -20,6 +20,15 @@ exports.warning = function(text) {
 };
 
 /*
+Repeatedly replaces a substring within a string. Like String.prototype.replace, but without any of the default special handling of $ sequences in the replace string
+*/
+exports.replaceString = function(text,search,replace) {
+	return text.replace(search,function() {
+		return replace;
+	});
+};
+
+/*
 Repeats a string
 */
 exports.repeat = function(str,count) {
@@ -495,7 +504,7 @@ exports.escapeRegExp = function(s) {
 
 // Checks whether a link target is external, i.e. not a tiddler title
 exports.isLinkExternal = function(to) {
-	var externalRegExp = /^(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]`|'"\\^~]+(?:\/|\b)$/i;
+	var externalRegExp = /^(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]`|"\\^]+(?:\/|\b)/i;
 	return externalRegExp.test(to);
 };
 
@@ -697,6 +706,22 @@ exports.sign = Math.sign || function(x) {
 		return x;
 	}
 	return x > 0 ? 1 : -1;
+};
+
+/*
+IE does not have an endsWith function
+*/
+exports.strEndsWith = function(str,ending,position) {
+	if(str.endsWith) {
+		return str.endsWith(ending,position);
+	} else {
+		if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > str.length) {
+			position = str.length;
+		}
+		position -= str.length;
+		var lastIndex = str.indexOf(ending, position);
+		return lastIndex !== -1 && lastIndex === position;
+	}
 };
 
 })();
