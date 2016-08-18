@@ -1261,15 +1261,15 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/tids","tiddlerdeserializer",{
 			for(var t=0; t<lines.length; t++) {
 				var line = lines[t];
 				if(line.charAt(0) !== "#") {
-					var colonPos= line.indexOf(": ");
+					var colonPos= line.indexOf(":");
 					if(colonPos !== -1) {
 						var tiddler = $tw.utils.extend(Object.create(null),fields);
-						tiddler.title = (tiddler.title || "") + line.substr(0,colonPos);
+						tiddler.title = (tiddler.title || "") + line.substr(0,colonPos).trim();
 						if(titles.indexOf(tiddler.title) !== -1) {
 							console.log("Warning: .multids file contains multiple definitions for " + tiddler.title);
 						}
 						titles.push(tiddler.title);
-						tiddler.text = line.substr(colonPos + 2);
+						tiddler.text = line.substr(colonPos + 2).trim();
 						tiddlers.push(tiddler);
 					}
 				}
