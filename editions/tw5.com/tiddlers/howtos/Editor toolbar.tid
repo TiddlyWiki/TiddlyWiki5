@@ -11,7 +11,7 @@ The editor toolbar is a toolbar, to help you format text easily. It appear above
 !! What the Editor toolbar do
 When you press the button for a function, it will insert the WikiText in the text field. As an example, if you press the bold button it will insert `'' ''`. 
 
-If you ''highlight ''a piece of text the markup code will automatically go around the highlighted text.
+If you ''highlight'' a piece of text the markup code will automatically go around the highlighted text.
 
 if you are in another mode, like MarkDown, the toolbar will change to that syntax and insert appropriate code. However It will not change already typed text or markup.
 
