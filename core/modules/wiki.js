@@ -1214,12 +1214,4 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 };
 
 })();
- t++) {
-		var upgrader = this.upgraderModules[t],
-			upgraderMessages = upgrader.upgrade(this,titles,tiddlers);
-		$tw.utils.extend(messages,upgraderMessages);
-	}
-	return messages;
-};
 
-})();
