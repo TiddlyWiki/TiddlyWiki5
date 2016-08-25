@@ -276,6 +276,7 @@ Syncer.prototype.handleLoginEvent = function() {
 		if(!isLoggedIn) {
 			$tw.passwordPrompt.createPrompt({
 				serviceName: $tw.language.getString("LoginToTiddlySpace"),
+				canCancel: true,
 				callback: function(data) {
 					self.login(data.username,data.password,function(err,isLoggedIn) {
 						self.syncFromServer();
