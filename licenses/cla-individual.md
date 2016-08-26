@@ -292,3 +292,5 @@ Przemek Wesołek, @jest, 2016/08/05
 Doron Tzur, @DoronTzur 2016/08/16
 
 Hans Christian Haase, @hchaase, 2016/08/11
+
+steve schneider, @stevesunypoly, 2016/08/26
