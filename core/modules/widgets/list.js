@@ -43,7 +43,7 @@ ListWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 	// Construct the storyview
 	var StoryView = this.storyViews[this.storyViewName];
-	if(!StoryView) {
+	if(this.storyViewName && !StoryView) {
 		StoryView = this.storyViews["classic"];
 	}
 	if(StoryView && !this.document.isTiddlyWikiFakeDom) {
