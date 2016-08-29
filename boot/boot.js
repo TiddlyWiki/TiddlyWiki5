@@ -514,6 +514,9 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	if(options.canCancel) {
 		children.push(dm("button",{
 			text: $tw.language.getString("Encryption/Cancel"),
+			attributes: {
+				type: "button"
+			},
 			eventListeners: [{
 					name: "click",
 					handlerFunction: function(event) {
