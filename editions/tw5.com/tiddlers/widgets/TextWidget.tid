@@ -14,3 +14,4 @@ The content of the `<$text>` widget is not used.
 
 |!Attribute |!Description |
 |text |The text to display |
+|length | Number of characters to show. |
