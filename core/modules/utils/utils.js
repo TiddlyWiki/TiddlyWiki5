@@ -718,7 +718,7 @@ exports.strEndsWith = function(str,ending,position) {
 		if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > str.length) {
 			position = str.length;
 		}
-		position -= str.length;
+		position -= ending.length;
 		var lastIndex = str.indexOf(ending, position);
 		return lastIndex !== -1 && lastIndex === position;
 	}
