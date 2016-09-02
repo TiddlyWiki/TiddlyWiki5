@@ -31,7 +31,7 @@ TextNodeWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	var text = this.getAttribute("text",this.parseTreeNode.text || "");
-	var length = this.getAttribute("length");
+	var length = parseInt(this.getAttribute("length",0),10) || 0;
 	text = text.replace(/\r/mg,"");
 	text = text.slice(0,length);
 	var textNode = this.document.createTextNode(text);
