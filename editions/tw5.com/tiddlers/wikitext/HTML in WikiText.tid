@@ -1,9 +1,9 @@
+caption: HTML
 created: 20131205160816081
-modified: 20141018181414011
+modified: 20160622112259272
 tags: WikiText
 title: HTML in WikiText
 type: text/vnd.tiddlywiki
-caption: HTML
 
 HTML tags and comments can be used directly in WikiText. For example:
 
@@ -23,13 +23,15 @@ The content of an HTML element will be parsed in inline mode unless the opening 
 Attributes in HTML tags can be specified as a literal, a transclusion or a macro invocation. For example, here the value of the `href` attribute will be set to the value of the tiddler MyLinkDestination:
 
 ```
-<a href={{MyLinkDestination}}>link</a>
+<a href={{MyLinkDestination}} rel="noopener noreferrer">link</a>
 ```
+
+Note that the link should have the `rel` attribute set to `noopener noreferrer` to maintain privacy of the URLs of private TiddlyWiki's (eg on Dropbox). See https://mathiasbynens.github.io/rel-noopener/ for more information.
 
 Here an attribute is specified as a macro invocation:
 
 ```
-<a href=<<MyMacro "Brian">>>link</a>
+<a href=<<MyMacro "Brian">> rel="noopener noreferrer">link</a>
 ```
 
 Literal attribute values can include line breaks. For example:

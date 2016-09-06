@@ -1118,29 +1118,24 @@ exports.readFile = function(file,callback) {
 	var reader = new FileReader();
 	// Onload
 	reader.onload = function(event) {
-		// Deserialise the file contents
 		var text = event.target.result,
 			tiddlerFields = {title: file.name || "Untitled", type: type};
-		// Are we binary?
 		if(isBinary) {
-			// The base64 section starts after the first comma in the data URI
 			var commaPos = text.indexOf(",");
 			if(commaPos !== -1) {
-				tiddlerFields.text = text.substr(commaPos+1);
-				callback([tiddlerFields]);
+				text = text.substr(commaPos + 1);
 			}
+		}
+		// Check whether this is an encrypted TiddlyWiki file
+		var encryptedJson = $tw.utils.extractEncryptedStoreArea(text);
+		if(encryptedJson) {
+			// If so, attempt to decrypt it with the current password
+			$tw.utils.decryptStoreAreaInteractive(encryptedJson,function(tiddlers) {
+				callback(tiddlers);
+			});
 		} else {
-			// Check whether this is an encrypted TiddlyWiki file
-			var encryptedJson = $tw.utils.extractEncryptedStoreArea(text);
-			if(encryptedJson) {
-				// If so, attempt to decrypt it with the current password
-				$tw.utils.decryptStoreAreaInteractive(encryptedJson,function(tiddlers) {
-					callback(tiddlers);
-				});
-			} else {
-				// Otherwise, just try to deserialise any tiddlers in the file
-				callback(self.deserializeTiddlers(type,text,tiddlerFields));
-			}
+			// Otherwise, just try to deserialise any tiddlers in the file
+			callback(self.deserializeTiddlers(type,text,tiddlerFields));
 		}
 	};
 	// Kick off the read
@@ -1219,3 +1214,4 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 };
 
 })();
+

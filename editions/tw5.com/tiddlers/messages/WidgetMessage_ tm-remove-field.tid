@@ -10,4 +10,4 @@ The `tm-remove-field` message is handled by the FieldManglerWidget. It removes t
 |!Name |!Description |
 |param |Name of field to remove |
 
-The remove field  message is usually generated with the ButtonWidget, and is handled by the FieldManglerWidget.
+The remove field message is usually generated with the ButtonWidget, and is handled by the FieldManglerWidget.

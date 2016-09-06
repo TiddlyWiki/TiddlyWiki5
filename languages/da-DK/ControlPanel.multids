@@ -57,7 +57,7 @@ Parsing/Inline/Caption: Inline Parse regler
 Parsing/Pragma/Caption: Pragma Parse regler
 Plugins/Add/Caption: Få flere udvidelser
 Plugins/Add/Hint: Installér udvidelser fra det officielle bibliotek
-Plugins/AlreadyInstalled: Dette plugin er allerede installeret i version <$text text=<<installedVersion>>/>
+Plugins/AlreadyInstalled/Hint: Dette plugin er allerede installeret i version <$text text=<<installedVersion>>/>
 Plugins/Caption: Udvidelser
 Plugins/Disable/Caption: slå fra
 Plugins/Disable/Hint: Slå denne udvidelse fra, når siden genindlæses
@@ -65,18 +65,18 @@ Plugins/Disabled/Status: (slået fra)
 Plugins/Empty/Hint: Ingen
 Plugins/Enable/Caption: Slå til
 Plugins/Enable/Hint: Slå denne udvidelse til, når siden genindlæses
-Plugins/Install: installér
+Plugins/Install/Caption: installér
 Plugins/Installed/Hint: Aktuelt installerede udvidelser:
 Plugins/Language/Prompt: Sprog
 Plugins/Languages/Caption: Sprog
 Plugins/Languages/Hint: Sprogpakkeudvidelser
-Plugins/NoInformation: Ingen information leveret
-Plugins/NotInstalled: Dette plugin er ikke aktuelt installeret
+Plugins/NoInformation/Hint: Ingen information leveret
+Plugins/NotInstalled/Hint: Dette plugin er ikke aktuelt installeret
 Plugins/OpenPluginLibrary: Åbn plugin bibliotek
 Plugins/Plugin/Prompt: Udvidelser 
 Plugins/Plugins/Caption: Udvidelser
 Plugins/Plugins/Hint: Udvidelser
-Plugins/Reinstall: geninstallér
+Plugins/Reinstall/Caption: geninstallér
 Plugins/Theme/Prompt: Temaer
 Plugins/Themes/Caption: Temaer
 Plugins/Themes/Hint: Tema udvidelser

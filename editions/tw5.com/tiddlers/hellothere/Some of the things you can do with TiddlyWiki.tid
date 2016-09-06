@@ -1,5 +1,5 @@
 created: 20140904090300000
-modified: 20150414072129239
+modified: 20160602051709631
 tags: HelloThere
 title: Some of the things you can do with TiddlyWiki
 type: text/vnd.tiddlywiki
@@ -17,4 +17,4 @@ type: text/vnd.tiddlywiki
 * Use familiar web user interface elements such as lightboxes - see SampleWizard
 * Create a slideshow presentation
 * Set up an entire local or online knowledgebase, with a central ~TiddlyWiki file linking to other ~TiddlyWiki files (http://recursos.giffmex.org is a Spanish online example of this)
-* Set up a data visualisation using tiddlers as data (see the visualisations at http://tiddlywiki.com/plugins/tiddlywiki/d3/index.html)
+* Set up a data visualisation using tiddlers as data (see the visualisations at http://tiddlywiki.com/plugins/tiddlywiki/d3/)

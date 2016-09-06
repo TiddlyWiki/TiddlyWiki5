@@ -53,7 +53,7 @@ Palette/Prompt: Palette en cours :
 Palette/ShowEditor/Caption: Afficher l'éditeur
 Plugins/Add/Hint: Installer des plugins à partir de la bibliothèque officielle
 Plugins/Add/Caption: Ajouter des plugins
-Plugins/AlreadyInstalled: Ce plugin est déjà installé dans la version <$text text=<<installedVersion>>/>
+Plugins/AlreadyInstalled/Hint: Ce plugin est déjà installé dans la version <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: désactiver
 Plugins/Disable/Hint: Désactive ce plugin au prochain rechargement de la page
@@ -61,16 +61,16 @@ Plugins/Disabled/Status: (désactivé)
 Plugins/Empty/Hint: Aucun
 Plugins/Enable/Caption: activer
 Plugins/Enable/Hint: Active ce plugin au prochain rechargement de la page
-Plugins/Install: installe
+Plugins/Install/Caption: installe
 Plugins/Installed/Hint: Plugins installés :
 Plugins/Languages/Caption: Langues
 Plugins/Languages/Hint: Plugins de langue
-Plugins/NoInformation: Aucune information disponible
-Plugins/NotInstalled: Ce plugin n'est pas installé
+Plugins/NoInformation/Hint: Aucune information disponible
+Plugins/NotInstalled/Hint: Ce plugin n'est pas installé
 Plugins/OpenPluginLibrary: ouvre la bibliothèque de plugins
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins
-Plugins/Reinstall: réinstalle
+Plugins/Reinstall/Caption: réinstalle
 Plugins/Themes/Caption: Thèmes
 Plugins/Themes/Hint: Plugins de thème
 Parsing/Caption: Parsing

@@ -1,5 +1,5 @@
 created: 20140216102454178
-modified: 20150221154036000
+modified: 20160617101212889
 tags: Concepts
 title: ColourPalettes
 type: text/vnd.tiddlywiki
@@ -12,7 +12,7 @@ table-border: #ccc
 ...
 ```
 
-Several palettes form part of the core. The system tiddler [[$:/palette]] always contains the title of the currently selected palette tiddler.
+Several palettes form part of the core. The system tiddler [[$:/palette]] always contains the title of the currently selected palette tiddler. You can change a palette using the {{$:/core/images/palette}} ''palette'' button, found on the "Tools" tab in the sidebar.
 
 To retrieve the value of a named colour from the current palette, e.g. for use in a stylesheet tiddler, use the <<.mlink colour>> macro:
 

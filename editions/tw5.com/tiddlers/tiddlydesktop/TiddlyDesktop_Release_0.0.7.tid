@@ -6,7 +6,7 @@ tags: TiddlyDesktopReleaseNotes
 title: TiddlyDesktop Release 0.0.7
 type: text/vnd.tiddlywiki
 
-<a href="https://github.com/Jermolene/TiddlyDesktop/releases/tag/v0.0.7" class="tc-btn-big-green" target="_blank">
+<a href="https://github.com/Jermolene/TiddlyDesktop/releases/tag/v0.0.7" class="tc-btn-big-green" target="_blank" rel="noopener noreferrer">
 {{$:/core/images/github}} Download from ~GitHub
 </a>
 

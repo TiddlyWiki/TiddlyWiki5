@@ -1,37 +1,18 @@
 title: $:/_tw5.com-styles
 tags: $:/tags/Stylesheet
 
-@media (min-width: 600px) {
-
-	.tc-link-info {
-		display: -webkit-flex;
-		display: -ms-flexbox;
-		display: flex;
-
-		-webkit-flex-wrap: wrap;
-		-ms-flex-wrap: wrap;
-		flex-wrap: wrap;
-	}
-
-	.tc-link-info-item {
-		max-width: 24em;
-		margin-right: 10px;
-	}
-
-}
-
 .tc-double-spaced-list li {
-	padding-bottom:.5em;padding-top:.5em;
+	padding-bottom: .5em;
+	padding-top: .5em;
 }
 
 .tc-link-info-item {
-	display: inline-block;
-	border: none;
-	padding: 5px 10px;
-	margin-bottom: 10px;
-	background: #ddeeff;
-	font-size: 0.8em;
-	line-height: 1.2;
+    border: 1px solid #ebefcd;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    background: #fcfdf3;
+    font-size: 0.8em;
+    line-height: 1.2;
 }
 
 .tc-link-info-item h1 {
