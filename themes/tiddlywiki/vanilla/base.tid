@@ -869,8 +869,17 @@ button.tc-untagged-label {
 
 .tc-tiddler-controls button svg, .tc-tiddler-controls button img,
 .tc-search button svg, .tc-search a svg {
-	height: 0.75em;
 	fill: <<colour tiddler-controls-foreground>>;
+}
+
+.tc-tiddler-controls button svg, .tc-tiddler-controls button img {
+	height: 0.75em;
+}
+
+.tc-search button svg, .tc-search a svg {
+    height: 1.2em;
+    width: 1.2em;
+    margin: 0 0.25em;
 }
 
 .tc-tiddler-controls button.tc-selected svg,
