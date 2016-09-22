@@ -1168,7 +1168,7 @@ html body.tc-body.tc-single-tiddler-window {
 	float: right;
 	width: 49%;
 	border: 1px solid <<colour tiddler-editor-border>>;
-	margin: 4px 3px 3px 3px;
+	margin: 4px 0 3px 3px;
 	padding: 3px 3px 3px 3px;
 }
 
