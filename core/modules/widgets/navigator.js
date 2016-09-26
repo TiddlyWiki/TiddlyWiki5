@@ -73,7 +73,7 @@ NavigatorWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return this.refreshChildren(changedTiddlers);		
+		return this.refreshChildren(changedTiddlers);
 	}
 };
 
@@ -419,7 +419,7 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Get the story details
 	var storyList = this.getStoryList(),
-		templateTiddler, additionalFields, title, draftTitle, existingTiddler;
+		templateTiddler, additionalFields, title, draftTitle, existingTiddler, isConfirmed = true;
 	// Get the template tiddler (if any)
 	if(typeof event.param === "string") {
 		// Get the template tiddler
@@ -439,54 +439,67 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	}
 	// Generate a title if we don't have one
 	title = title || this.wiki.generateNewTitle($tw.language.getString("DefaultNewTiddlerTitle"));
-	// Find any existing draft for this tiddler
-	draftTitle = this.wiki.findDraft(title);
-	// Pull in any existing tiddler
-	if(draftTitle) {
-		existingTiddler = this.wiki.getTiddler(draftTitle);
-	} else {
-		draftTitle = this.generateDraftTitle(title);
-		existingTiddler = this.wiki.getTiddler(title);
+
+	// Ask for confirmation if tiddler with the same title already exists
+	if(this.wiki.tiddlerExists(title)) {
+		isConfirmed = confirm($tw.language.getString(
+			"ConfirmOverwriteTiddler",
+			{variables:
+				{title: draftTitle}
+			}
+		));
 	}
-	// Merge the tags
-	var mergedTags = [];
-	if(existingTiddler && existingTiddler.fields.tags) {
-		$tw.utils.pushTop(mergedTags,existingTiddler.fields.tags)
+
+	if(isConfirmed) {
+		// Find any existing draft for this tiddler
+		draftTitle = this.wiki.findDraft(title);
+		// Pull in any existing tiddler
+		if(draftTitle) {
+			existingTiddler = this.wiki.getTiddler(draftTitle);
+		} else {
+			draftTitle = this.generateDraftTitle(title);
+			existingTiddler = this.wiki.getTiddler(title);
+		}
+		// Merge the tags
+		var mergedTags = [];
+		if(existingTiddler && existingTiddler.fields.tags) {
+			$tw.utils.pushTop(mergedTags,existingTiddler.fields.tags)
+		}
+		if(additionalFields && additionalFields.tags) {
+			// Merge tags
+			mergedTags = $tw.utils.pushTop(mergedTags,$tw.utils.parseStringArray(additionalFields.tags));
+		}
+		if(templateTiddler && templateTiddler.fields.tags) {
+			// Merge tags
+			mergedTags = $tw.utils.pushTop(mergedTags,templateTiddler.fields.tags);
+		}
+		// Save the draft tiddler
+		var draftTiddler = new $tw.Tiddler({
+				text: "",
+				"draft.title": title
+			},
+			templateTiddler,
+			existingTiddler,
+			additionalFields,
+			this.wiki.getCreationFields(),
+			{
+				title: draftTitle,
+				"draft.of": title,
+				tags: mergedTags
+			},this.wiki.getModificationFields());
+		this.wiki.addTiddler(draftTiddler);
+		// Update the story to insert the new draft at the top and remove any existing tiddler
+		if(storyList.indexOf(draftTitle) === -1) {
+			var slot = storyList.indexOf(event.navigateFromTitle);
+			storyList.splice(slot + 1,0,draftTitle);
+		}
+		if(storyList.indexOf(title) !== -1) {
+			storyList.splice(storyList.indexOf(title),1);
+		}
+		this.saveStoryList(storyList);
+		// Add a new record to the top of the history stack
+		this.addToHistory(draftTitle);
 	}
-	if(additionalFields && additionalFields.tags) {
-		// Merge tags
-		mergedTags = $tw.utils.pushTop(mergedTags,$tw.utils.parseStringArray(additionalFields.tags));
-	}
-	if(templateTiddler && templateTiddler.fields.tags) {
-		// Merge tags
-		mergedTags = $tw.utils.pushTop(mergedTags,templateTiddler.fields.tags);
-	}
-	// Save the draft tiddler
-	var draftTiddler = new $tw.Tiddler({
-			text: "",
-			"draft.title": title
-		},
-		templateTiddler,
-		existingTiddler,
-		additionalFields,
-		this.wiki.getCreationFields(),
-		{
-			title: draftTitle,
-			"draft.of": title,
-			tags: mergedTags
-		},this.wiki.getModificationFields());
-	this.wiki.addTiddler(draftTiddler);
-	// Update the story to insert the new draft at the top and remove any existing tiddler
-	if(storyList.indexOf(draftTitle) === -1) {
-		var slot = storyList.indexOf(event.navigateFromTitle);
-		storyList.splice(slot + 1,0,draftTitle);
-	}
-	if(storyList.indexOf(title) !== -1) {
-		storyList.splice(storyList.indexOf(title),1);		
-	}
-	this.saveStoryList(storyList);
-	// Add a new record to the top of the history stack
-	this.addToHistory(draftTitle);
 	return false;
 };
 
@@ -496,7 +509,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	// Get the tiddlers
 	var tiddlers = [];
 	try {
-		tiddlers = JSON.parse(event.param);	
+		tiddlers = JSON.parse(event.param);
 	} catch(e) {
 	}
 	// Get the current $:/Import tiddler
@@ -544,12 +557,12 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 		history.push(IMPORT_TITLE);
 		// Save the updated story and history
 		this.saveStoryList(storyList);
-		this.addToHistory(history);		
+		this.addToHistory(history);
 	}
 	return false;
 };
 
-// 
+//
 NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	var self = this,
 		importTiddler = this.wiki.getTiddler(event.param),
