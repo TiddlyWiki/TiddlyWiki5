@@ -445,7 +445,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		isConfirmed = confirm($tw.language.getString(
 			"ConfirmOverwriteTiddler",
 			{variables:
-				{title: draftTitle}
+				{title: title}
 			}
 		));
 	}
