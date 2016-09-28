@@ -27,15 +27,11 @@ CodeBlockWidget.prototype.postRender = function() {
 	if(tiddler) {
 		language = tiddler.fields.text || "";
 	}
-	if($tw.browser && this.document !== $tw.fakeDocument && language) {
-		domNode.className = language.toLowerCase();
-		hljs.highlightBlock(domNode);
-	} else if(!$tw.browser && language && language.indexOf("/") === -1 ){
+	if(language) {
 		try {
 			domNode.className = language.toLowerCase() + " hljs";
-			domNode.children[0].innerHTML = hljs.fixMarkup(hljs.highlight(language, this.getAttribute("code")).value);
-		}
-		catch(err) {
+			hljs.highlightBlock(domNode);
+		} catch(err) {
 			// Can't easily tell if a language is registered or not in the packed version of hightlight.js,
 			// so we silently fail and the codeblock remains unchanged
 		}
