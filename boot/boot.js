@@ -251,15 +251,20 @@ $tw.utils.parseDate = function(value) {
 
 // Stringify an array of tiddler titles into a list string
 $tw.utils.stringifyList = function(value) {
-	var result = [];
-	for(var t=0; t<value.length; t++) {
-		if(value[t].indexOf(" ") !== -1) {
-			result.push("[[" + value[t] + "]]");
-		} else {
-			result.push(value[t]);
+	if($tw.utils.isArray(value)) {
+		var result = [];
+		for(var t=0; t<value.length; t++) {
+			var entry = value[t] || "";
+			if(entry.indexOf(" ") !== -1) {
+				result.push("[[" + entry + "]]");
+			} else {
+				result.push(entry);
+			}
 		}
+		return result.join(" ");
+	} else {
+		return value || "";
 	}
-	return result.join(" ");
 };
 
 // Parse a string array from a bracketted list. For example "OneTiddler [[Another Tiddler]] LastOne"
