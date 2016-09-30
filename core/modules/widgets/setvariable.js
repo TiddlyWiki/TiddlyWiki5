@@ -40,6 +40,7 @@ SetWidget.prototype.execute = function() {
 	// Get our parameters
 	this.setName = this.getAttribute("name","currentTiddler");
 	this.setFilter = this.getAttribute("filter");
+	this.plain = this.getAttribute("plain") !== undefined;
 	this.setValue = this.getAttribute("value");
 	this.setEmptyValue = this.getAttribute("emptyValue");
 	// Set context variable
@@ -56,7 +57,11 @@ SetWidget.prototype.getValue = function() {
 	if(this.setFilter) {
 		var results = this.wiki.filterTiddlers(this.setFilter,this);
 		if(!this.setValue) {
-			value = $tw.utils.stringifyList(results);
+			if(this.plain) {
+				value = results.join(" ");
+			} else {
+				value = $tw.utils.stringifyList(results);
+			}
 		}
 		if(results.length === 0 && this.setEmptyValue !== undefined) {
 			value = this.setEmptyValue;
