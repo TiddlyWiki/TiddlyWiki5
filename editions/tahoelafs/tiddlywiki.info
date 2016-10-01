@@ -9,6 +9,7 @@
 	],
 	"build": {
 		"index": [
-			"--rendertiddler","$:/core/save/all","tahoelafs.html","text/plain"]
+			"--rendertiddler","$:/core/save/all","tahoelafs.html","text/plain"
+		]
 	}
 }

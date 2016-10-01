@@ -35,7 +35,8 @@
 	],
 	"build": {
 		"index": [
-			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"
+		],
 		"output-files": [
 			"--rendertiddler","$:/plugins/tiddlywiki/translators/templates/Buttons.multids","language/Buttons.multids","text/plain",
 			"--rendertiddler","$:/plugins/tiddlywiki/translators/templates/ControlPanel.multids","language/ControlPanel.multids","text/plain",
@@ -61,6 +62,7 @@
 			"--rendertiddlers","[prefix[$:/language/Docs/Types/]removeprefix[$:/language/Docs/Types/]]","$:/plugins/tiddlywiki/translators/templates/type-tid","language/Types","text/plain",".tid",
 			"--rendertiddlers","[prefix[$:/language/Help/]removeprefix[$:/language/Help/]]","$:/plugins/tiddlywiki/translators/templates/help-tid","language/Help","text/plain",".tid",
 			"--rendertiddlers","[prefix[$:/language/Modals/]removeprefix[$:/language/Modals/]]","$:/plugins/tiddlywiki/translators/templates/modal-tid","language/Modals","text/plain",".tid",
-			"--rendertiddlers","[prefix[$:/language/Snippets/]removeprefix[$:/language/Snippets/]]","$:/plugins/tiddlywiki/translators/templates/snippet-tid","language/Snippets","text/plain",".tid"]
+			"--rendertiddlers","[prefix[$:/language/Snippets/]removeprefix[$:/language/Snippets/]]","$:/plugins/tiddlywiki/translators/templates/snippet-tid","language/Snippets","text/plain",".tid"
+		]
 	}
 }
