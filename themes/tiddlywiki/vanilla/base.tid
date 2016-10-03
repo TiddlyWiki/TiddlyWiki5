@@ -2186,7 +2186,3 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	background: #f00;
 	color: #fff;
 }
-
-.tc-keyboard {
-	display: inline;
-}
