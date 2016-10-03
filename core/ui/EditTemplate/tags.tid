@@ -1,6 +1,10 @@
 title: $:/core/ui/EditTemplate/tags
 tags: $:/tags/EditTemplate
 
+\define add-tag-actions()
+<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/NewTagName}}/>
+<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
+\end
 \define lingo-base() $:/language/EditTemplate/
 \define tag-styles()
 background-color:$(backgroundColor)$;
@@ -26,8 +30,13 @@ color:$(foregroundColor)$;
 
 <div class="tc-edit-add-tag">
 <span class="tc-add-tag-name">
+<$fieldmangler>
+<$keyboard key="ENTER" actions=<<add-tag-actions>>>
 <$edit-text tiddler="$:/temp/NewTagName" tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle"/>
-</span> <$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button> <span class="tc-add-tag-button">
+</$keyboard>
+</$fieldmangler>
+</span>
+<$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button> <span class="tc-add-tag-button">
 <$button message="tm-add-tag" param={{$:/temp/NewTagName}} set="$:/temp/NewTagName" setTo="" class="">
 <<lingo Tags/Add/Button>>
 </$button>
