@@ -21,7 +21,7 @@ exports.init = function(parser) {
 	this.matchRegExp = new RegExp(
 		"~?\\$:\\/(?:" +
 			$tw.config.textPrimitives.anyLetter +
-			"|[\\\\/._-])+",
+			"|[\/._-])+",
 		"mg"
 	);
 };
