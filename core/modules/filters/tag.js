@@ -19,7 +19,7 @@ exports.tag = function(source,operator,options) {
 	var results = [];
 	if(operator.prefix === "!") {
 		source(function(tiddler,title) {
-			if(tiddler && !tiddler.hasTag(operator.operand)) {
+			if(!tiddler || tiddler && !tiddler.hasTag(operator.operand)) {
 				results.push(title);
 			}
 		});
