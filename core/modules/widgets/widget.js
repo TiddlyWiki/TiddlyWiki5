@@ -493,8 +493,11 @@ Widget.prototype.invokeActions = function(triggeringWidget,event) {
 	for(var t=0; t<this.children.length; t++) {
 		var child = this.children[t];
 		// Invoke the child if it is an action widget
-		if(child.invokeAction && child.invokeAction(triggeringWidget,event)) {
-			handled = true;
+		if(child.invokeAction) {
+			child.refreshSelf();
+			if(child.invokeAction(triggeringWidget,event)) {
+				handled = true;
+			}
 		}
 		// Propagate through through the child if it permits it
 		if(child.allowActionPropagation() && child.invokeActions(triggeringWidget,event)) {
