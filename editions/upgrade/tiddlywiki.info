@@ -10,6 +10,7 @@
 	"build": {
 		"upgrade": [
 			"--makelibrary",
-			"--rendertiddler","$:/core/save/all","upgrade.html","text/plain"]
+			"--rendertiddler","$:/core/save/all","upgrade.html","text/plain"
+		]
 	}
 }

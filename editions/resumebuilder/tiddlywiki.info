@@ -16,8 +16,10 @@
 	],
 	"build": {
 		"index": [
-			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"
+		],
 		"favicon": [
-			"--savetiddler","$:/favicon.ico","favicon.ico"]
+			"--savetiddler","$:/favicon.ico","favicon.ico"
+		]
 	}
 }

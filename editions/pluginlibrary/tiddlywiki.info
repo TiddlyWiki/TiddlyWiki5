@@ -12,6 +12,7 @@
 			"--makelibrary","$:/UpgradeLibrary",
    			"--savelibrarytiddlers","$:/UpgradeLibrary","[prefix[$:/]] -[[$:/plugins/tiddlywiki/upgrade]] -[[$:/plugins/tiddlywiki/translators]] -[[$:/plugins/tiddlywiki/pluginlibrary]] -[[$:/plugins/tiddlywiki/jasmine]]","recipes/library/tiddlers/","$:/UpgradeLibrary/List",
    			"--savetiddler","$:/UpgradeLibrary/List","recipes/library/tiddlers.json",
-			"--rendertiddler","$:/plugins/tiddlywiki/pluginlibrary/library.template.html","index.html","text/plain"]
+			"--rendertiddler","$:/plugins/tiddlywiki/pluginlibrary/library.template.html","index.html","text/plain"
+		]
 	}
 }
