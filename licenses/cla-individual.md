@@ -275,6 +275,8 @@ Richard Rath @rcrath 2016/02/12
 
 Eric Drechsel @edrex 2016/02/15
 
+Tomasz Pijanowski @zakrec 2016/02/21
+
 @FND 2016/02/27
 
 Cengizhan Kurt, @webninjasi, 2016/03/03
