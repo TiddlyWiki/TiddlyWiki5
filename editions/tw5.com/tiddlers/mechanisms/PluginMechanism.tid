@@ -87,7 +87,7 @@ Plugins can also be included manually by copying them into the `plugins` subfold
 
 The wiki object keeps track of all of the currently loaded plugins. If a request for a tiddler isn't in the store then the wiki looks through the cascade of plugins to find the requested tiddler. It is a similar idea to the way that shadow tiddlers are implemented in classic TiddlyWiki.
 
-In the browser, any constituent tiddlers that are JavaScript modules (ie shadow tiddlers of content type `application/javascript` and possessing the field `module-type`) are executed during startup processing.
+In the browser, any constituent tiddlers that are JavaScript modules (ie shadow tiddlers of content type `application/javascript` and possessing the field `plugin-type`) are executed during startup processing.
 
 !! Disabling Plugins
 
