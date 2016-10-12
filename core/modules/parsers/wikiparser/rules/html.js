@@ -103,7 +103,6 @@ exports.parseTag = function(source,pos,options) {
 	pos = token.end;
 	// Check that the tag is terminated by a space, / or >
 	if(!$tw.utils.parseWhiteSpace(source,pos) && !(source.charAt(pos) === "/") && !(source.charAt(pos) === ">") ) {
-console.log("Aborting illegal element tag")
 		return null;
 	}
 	// Process attributes
