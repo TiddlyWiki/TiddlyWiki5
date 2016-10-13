@@ -72,8 +72,16 @@ exports["application/x-tiddler-html-div"] = function(text,fields) {
 };
 
 exports["application/json"] = function(text,fields) {
-	var incoming = JSON.parse(text),
+	var incoming,
 		results = [];
+	try {
+		incoming = JSON.parse(text);
+	} catch(e) {
+		incoming = [{
+			title: "JSON error: " + e,
+			text: ""
+		}]
+	}
 	if($tw.utils.isArray(incoming)) {
 		for(var t=0; t<incoming.length; t++) {
 			var incomingFields = incoming[t],
