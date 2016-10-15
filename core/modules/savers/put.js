@@ -27,7 +27,7 @@ var PutSaver = function(wiki) {
 	req.open("OPTIONS",encodeURI(document.location.protocol + "//" + document.location.hostname + ":" + document.location.port + document.location.pathname));
 	req.onload = function() {
 		// Check DAV header http://www.webdav.org/specs/rfc2518.html#rfc.section.9.1
-		self.serverAcceptsPuts = (this.status === 200 && !!this.getResponseHeader('dav'));
+		self.serverAcceptsPuts = (this.status === 200 && !!this.getResponseHeader("dav"));
 	};
 	req.send();
 };
@@ -37,19 +37,25 @@ PutSaver.prototype.save = function(text,method,callback) {
 		return false;
 	}
 	var req = new XMLHttpRequest();
-	// TODO: store/check ETags if supported by server, to protect against overwrites
+	// TODO: in case of edit conflict
 	// Prompt: Do you want to save over this? Y/N
 	// Merging would be ideal, and may be possible using future generic merge flow
 	req.onload = function() {
 		if (this.status === 200 || this.status === 201) {
+			this.etag = this.getResponseHeader("ETag");
 			callback(null); // success
 		}
+		else if (this.status === 412) { // edit conflict
+			callback("File changed on server");
 		else {
 			callback(this.responseText); // fail
 		}
 	};
 	req.open("PUT", encodeURI(window.location.href));
 	req.setRequestHeader("Content-Type", "text/html;charset=UTF-8");
+	if (this.etag) {
+		req.setRequestHeader("If-Match", this.etag);
+	}
 	req.send(text);
 	return true;
 };
