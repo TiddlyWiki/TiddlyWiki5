@@ -1592,10 +1592,12 @@ $tw.loadTiddlersFromSpecification = function(filepath) {
 			// Process directory specifier
 			var dirPath = path.resolve(filepath,dirSpec.path),
 				files = fs.readdirSync(dirPath),
-				fileRegExp = new RegExp(dirSpec.filesRegExp || "^.*$");
+				fileRegExp = new RegExp(dirSpec.filesRegExp || "^.*$"),
+				metaRegExp = /^.*\.meta$/;
 			for(var t=0; t<files.length; t++) {
-				if(files[t] !== "tiddlywiki.files" && fileRegExp.test(files[t])) {
-					processFile(dirPath + path.sep + files[t],dirSpec.isTiddlerFile,dirSpec.fields);
+				var filename = files[t];
+				if(filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename)) {
+					processFile(dirPath + path.sep + filename,dirSpec.isTiddlerFile,dirSpec.fields);
 				}
 			}
 		}
