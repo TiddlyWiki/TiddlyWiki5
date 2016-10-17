@@ -19,9 +19,9 @@ exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
 	this.matchRegExp = new RegExp(
-		"~?\\$:\\/(?:" +
-			$tw.config.textPrimitives.anyLetter +
-			"|[\/._-])+",
+		"~?\\$:\\/[" +
+		$tw.config.textPrimitives.anyLetter.substr(1,$tw.config.textPrimitives.anyLetter.length - 2) +
+		"\/._-]+",
 		"mg"
 	);
 };
