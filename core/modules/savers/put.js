@@ -21,18 +21,20 @@ Select the appropriate saver module and set it up
 var PutSaver = function(wiki) {
 	this.wiki = wiki;
 	var self = this;
+	var uri = encodeURI(document.location.protocol + "//" + document.location.hostname + ":" + document.location.port + document.location.pathname);
 	// Async server probe. Until probe finishes, save will fail fast
 	// See also https://github.com/Jermolene/TiddlyWiki5/issues/2276
-	var req = new XMLHttpRequest();
-	req.open("OPTIONS",encodeURI(document.location.protocol + "//" + document.location.hostname + ":" + document.location.port + document.location.pathname));
-	req.onload = function() {
+	httpRequest("OPTIONS", uri, function() {
 		// Check DAV header http://www.webdav.org/specs/rfc2518.html#rfc.section.9.1
 		self.serverAcceptsPuts = (this.status === 200 && !!this.getResponseHeader("dav"));
-	};
-	req.send();
+	});
+	// Retrieve ETag if available
+	httpRequest("HEAD", uri, function() {
+		self.etag = this.getResponseHeader("ETag");
+	});
 };
 
-PutSaver.prototype.save = function(text,method,callback) {
+PutSaver.prototype.save = function(text, method, callback) {
 	if (!this.serverAcceptsPuts) {
 		return false;
 	}
@@ -82,5 +84,12 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new PutSaver(wiki);
 };
+
+function httpRequest(method, uri, onLoad) {
+	var req = new XMLHttpRequest();
+	req.open(method, uri);
+	req.onload = onLoad;
+	req.send();
+}
 
 })();
