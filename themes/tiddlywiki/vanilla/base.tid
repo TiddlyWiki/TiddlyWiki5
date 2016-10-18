@@ -30,6 +30,15 @@ $hiddenSidebarText$
 </$reveal>
 \end
 
+\define if-editor-height-fixed(then,else)
+<$reveal state="$:/config/TextEditor/EditorHeight/Mode" type="match" text="fixed">
+$then$
+</$reveal>
+<$reveal state="$:/config/TextEditor/EditorHeight/Mode" type="match" text="auto">
+$else$
+</$reveal>
+\end
+
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
 /*
@@ -1171,6 +1180,15 @@ html body.tc-body.tc-single-tiddler-window {
 	margin: 4px 0 3px 3px;
 	padding: 3px 3px 3px 3px;
 }
+
+<<if-editor-height-fixed then:"""
+
+.tc-tiddler-preview-preview {
+	overflow-y: scroll;
+	height: {{$:/config/TextEditor/EditorHeight/Height}};
+}
+
+""">>
 
 .tc-tiddler-frame .tc-tiddler-preview .tc-edit-texteditor {
 	width: 49%;
