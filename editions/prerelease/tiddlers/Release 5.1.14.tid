@@ -38,7 +38,7 @@ type: text/vnd.tiddlywiki
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/87fa7f972cae859c466dea8a531d50f060e7d910]] modals and notifications so that global macros are available
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/b35544bf4946596e60f7b0c7f0a55fa490ac2a24]] the SetWidget to allow a single result to be selected from a filtered result list
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/2f590a365e5b6bfecc1170fdbeaaf398795a2feb]] new `$:/info/url/*` [[information tiddlers|InfoMechanism]] providing document location information
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b4b77d1681023d4ccc0e157df1ce67d0d388cd5a]] several new filter operators for string encoding/encoding:
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b4b77d1681023d4ccc0e157df1ce67d0d388cd5a]] several new filter operators for string encoding/decoding:
 ** [[decodehtml Operator]]
 ** [[decodeuri Operator]]
 ** [[decodeuricomponent Operator]]
