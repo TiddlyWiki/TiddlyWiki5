@@ -1495,7 +1495,7 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 			var files = fs.readdirSync(filepath);
 			// Look for a tiddlywiki.files file
 			if(files.indexOf("tiddlywiki.files") !== -1) {
-				Array.prototype.push.apply(tiddlers,$tw.loadTiddlersFromSpecification(filepath));
+				Array.prototype.push.apply(tiddlers,$tw.loadTiddlersFromSpecification(filepath,excludeRegExp));
 			} else {
 				// If not, read all the files in the directory
 				$tw.utils.each(files,function(file) {
@@ -1515,7 +1515,7 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 Load all the tiddlers defined by a `tiddlywiki.files` specification file
 filepath: pathname of the directory containing the specification file
 */
-$tw.loadTiddlersFromSpecification = function(filepath) {
+$tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 	var tiddlers = [];
 	// Read the specification
 	var filesInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
