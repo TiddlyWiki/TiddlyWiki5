@@ -911,13 +911,26 @@ exports.makeTranscludeWidget = function(title,options) {
 			type: "element",
 			tag: "div",
 			children: [{
-				type: "transclude",
-				attributes: {
-					tiddler: {
-						name: "tiddler",
-						type: "string",
-						value: title}},
-				isBlock: !options.parseAsInline}]}
+                type: "importvariables",
+                attributes: {
+                    filter: {
+                        name: "filter",
+                        type: "string",
+                        value: "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]"
+                    }
+                },
+                tag: "$importvariables",
+                isBlock: false,
+                children: [{
+					type: "transclude",
+					attributes: {
+						tiddler: {
+							name: "tiddler",
+							type: "string",
+							value: title}},
+					isBlock: !options.parseAsInline}
+	                ]
+            }]}
 	]};
 	if(options.field) {
 		parseTree.tree[0].children[0].attributes.field = {type: "string", value: options.field};
