@@ -1707,7 +1707,7 @@ html body.tc-body.tc-single-tiddler-window {
 	border-top: 1px solid <<colour sidebar-tab-divider>>;
 }
 
-.tc-more-sidebar .tc-tab-buttons button {
+.tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
 	display: block;
 	width: 100%;
 	background-color: <<colour sidebar-tab-background>>;
@@ -1718,7 +1718,7 @@ html body.tc-body.tc-single-tiddler-window {
 	margin-bottom: inherit;
 }
 
-.tc-more-sidebar .tc-tab-buttons button.tc-tab-selected {
+.tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button.tc-tab-selected {
 	background-color: <<colour sidebar-tab-background-selected>>;
 	border: none;
 }
