@@ -1930,6 +1930,7 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("text/x-markdown","utf8",[".md",".markdown"]);
 	$tw.utils.registerFileType("application/enex+xml","utf8",".enex");
 	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","base64",".xlsx");
+	$tw.utils.registerFileType("application/x-bibtex","utf8",".bib");
 	// Create the wiki store for the app
 	$tw.wiki = new $tw.Wiki();
 	// Install built in tiddler fields modules

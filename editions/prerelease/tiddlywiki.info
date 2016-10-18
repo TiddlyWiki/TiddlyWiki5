@@ -11,7 +11,8 @@
 		"tiddlywiki/internals",
 		"tiddlywiki/highlight",
 		"tiddlywiki/markdown",
-		"tiddlywiki/qrcode"
+		"tiddlywiki/qrcode",
+		"tiddlywiki/bibtex"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
