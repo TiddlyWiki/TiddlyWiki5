@@ -1528,13 +1528,60 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 };
 
 /*
+Attempt to execute a module and return the result. Expects the export to be a function.
+filepath: pathname of the file to load (without the .js extension)
+throws:
+	TypeError: when the module does not export a function
+	Error(code:MODULE_NOT_FOUND): when the module can not be found
+*/
+$tw.loadDataFromModule = function(filepath) {
+	var fn = require(filepath);
+	if (typeof fn !== "function") {
+		throw new TypeError(filepath + " does not export a function");
+	}
+	return fn.call($tw,$tw);
+};
+
+/*
+Attempt to parse a JSON file
+filepath: pathname of the file to load
+throws:
+	SyntaxError: when the file is not JSON compliant
+	Error(code:ENOENT): when the file can not be found
+*/
+$tw.loadDataFromFile = function(filepath) {
+	return JSON.parse(fs.readFileSync(filepath,"utf8"));
+};
+
+/*
+Attempt to execute a module or (if the [filepath].js is not found) parse the file as JSON and return the result.
+filepath: pathname of the file to load (without the .js extension)
+throws:
+	TypeError: when the module can be found and does not export a function
+	SyntaxError: when the module can not be found and the JSON file has errors
+	Error(code:ENOENT): when the module can not be found and the JSON file can not be found
+*/
+$tw.loadDataFromModuleOrFile = function(filepath) {
+	var result;
+	try {
+		result = $tw.loadDataFromModule(filepath + ".js");
+	} catch(err) {
+		if(err.code !== "MODULE_NOT_FOUND") {
+			throw err;
+		}
+		result = $tw.loadDataFromFile(filepath);
+	}
+	return result;
+};
+
+/*
 Load all the tiddlers defined by a `tiddlywiki.files` specification file
 filepath: pathname of the directory containing the specification file
 */
 $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 	var tiddlers = [];
 	// Read the specification
-	var filesInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
+	var filesInfo = $tw.loadDataFromModuleOrFile(filepath + path.sep + "tiddlywiki.files");
 	// Helper to process a file
 	var processFile = function(filename,isTiddlerFile,fields) {
 		var extInfo = $tw.config.fileExtensionInfo[path.extname(filename)],
@@ -1631,7 +1678,7 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 	excludeRegExp = excludeRegExp || $tw.boot.excludeRegExp;
 	if(fs.existsSync(filepath) && fs.statSync(filepath).isDirectory()) {
 		// Read the plugin information
-		var pluginInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "plugin.info","utf8"));
+		var pluginInfo = $tw.loadDataFromModuleOrFile(filepath + path.sep + "plugin.info");
 		// Read the plugin files
 		var pluginFiles = $tw.loadTiddlersFromPath(filepath,excludeRegExp);
 		// Save the plugin tiddlers into the plugin info
@@ -1744,11 +1791,14 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		wikiInfoPath = path.resolve(wikiPath,$tw.config.wikiInfo),
 		wikiInfo,
 		pluginFields;
-	// Bail if we don't have a wiki info file
-	if(fs.existsSync(wikiInfoPath)) {
-		wikiInfo = JSON.parse(fs.readFileSync(wikiInfoPath,"utf8"));
-	} else {
-		return null;
+	try {
+		wikiInfo = $tw.loadDataFromModuleOrFile(wikiInfoPath);
+	} catch(err) {
+		// Bail if we don't have a wiki info file
+		if(err.code === 'ENOENT') {
+			return null;
+		}
+		throw err;
 	}
 	// Load any parent wikis
 	if(wikiInfo.includeWikis) {
