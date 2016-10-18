@@ -6,9 +6,7 @@
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/qrcode/qrcode.js",
 				"module-type": "library"
-			},
-			"prefix": "",
-			"suffix": ""
+			}
 		},{
 			"file": "LICENSE",
 			"fields": {

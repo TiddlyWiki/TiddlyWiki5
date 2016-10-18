@@ -10,4 +10,4 @@ The QR code plugin adds the following features to TiddlyWiki:
 ** Rendered, formatted content
 ** URL of tiddler
 
-The QR code plugin is based on the [[library qrcode.js by Zeno Zeng|https://github.com/zenozeng/node-yaqrcode]].
+The QR code plugin is based on the library [[qrcode.js by Zeno Zeng|https://github.com/zenozeng/node-yaqrcode]].
