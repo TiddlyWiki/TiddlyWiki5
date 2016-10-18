@@ -1,0 +1,20 @@
+{
+	"tiddlers": [
+		{
+			"file": "qrcode.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/qrcode/qrcode.js",
+				"module-type": "library"
+			},
+			"prefix": "",
+			"suffix": ""
+		},{
+			"file": "LICENSE",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/qrcode/license"
+			}
+		}
+	]
+}
