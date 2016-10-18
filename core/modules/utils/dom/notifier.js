@@ -41,7 +41,11 @@ Notifier.prototype.display = function(title,options) {
 	// Create the variables
 	var variables = $tw.utils.extend({currentTiddler: title},options.variables);
 	// Render the body of the notification
-	var widgetNode = this.wiki.makeTranscludeWidget(title,{parentWidget: $tw.rootWidget, document: document, variables: variables});
+	var widgetNode = this.wiki.makeTranscludeWidget(title,{
+		parentWidget: $tw.rootWidget,
+		document: document,
+		variables: variables,
+		importPageMacros: true});
 	widgetNode.render(notification,null);
 	refreshHandler = function(changes) {
 		widgetNode.refresh(changes,notification,null);

@@ -81,14 +81,16 @@ Modal.prototype.display = function(title,options) {
 		}}}],
 		parentWidget: $tw.rootWidget,
 		document: document,
-		variables: variables
+		variables: variables,
+		importPageMacros: true
 	});
 	headerWidgetNode.render(headerTitle,null);
 	// Render the body of the message
 	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		parentWidget: $tw.rootWidget,
 		document: document,
-		variables: variables
+		variables: variables,
+		importPageMacros: true
 	});
 	bodyWidgetNode.render(modalBody,null);
 	// Setup the link if present
@@ -128,7 +130,8 @@ Modal.prototype.display = function(title,options) {
 		]}],
 		parentWidget: $tw.rootWidget,
 		document: document,
-		variables: variables
+		variables: variables,
+		importPageMacros: true
 	});
 	footerWidgetNode.render(modalFooterButtons,null);
 	// Set up the refresh handler
