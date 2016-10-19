@@ -3,5 +3,5 @@
 	"description": "BibTeX importer",
 	"author": "Henrik Muehe and Mikola Lysenko, adapted by Jeremy Ruston",
 	"plugin-type": "plugin",
-	"list": "readme usage examples license"
+	"list": "readme license"
 }
