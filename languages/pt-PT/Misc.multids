@@ -39,12 +39,13 @@ No: Não
 OfficialPluginLibrary: Biblioteca de Extensões Official ~TiddlyWiki
 OfficialPluginLibrary/Hint: A Biblioteca de Extensões Official ~TiddlyWiki em tiddlywiki.com. Extensões temas e pacotes de idiomas são mantidos pela equipa principal.
 PluginReloadWarning: Por favor grave  {{$:/core/ui/Buttons/save-wiki}} e recarregue {{$:/core/ui/Buttons/refresh}} para que as alterações às extensões tomem efeito
-RecentChanges/DateFormat: DD MMM AAAA
+RecentChanges/DateFormat: DD MMM YYYY
 SystemTiddler/Tooltip: Este é um tiddler de sistema
 TagManager/Colour/Heading: Cor
 TagManager/Count/Heading: Contagem
 TagManager/Icon/Heading: Ícone
 TagManager/Info/Heading: Informação
 TagManager/Tag/Heading: Etiqueta
+Tiddler/DateFormat: DD MMM YYYY às hh:0mm
 UnsavedChangesWarning: Têm alterações não guardadas na TiddlyWiki
 Yes: Sim
