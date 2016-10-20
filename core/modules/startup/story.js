@@ -55,7 +55,7 @@ exports.startup = function() {
 		});
 		// Listen for the tm-print message
 		$tw.rootWidget.addEventListener("tm-print",function(event) {
-			window.print();
+			(event.event.view || window).print();
 		});
 		// Listen for the tm-home message
 		$tw.rootWidget.addEventListener("tm-home",function(event) {
