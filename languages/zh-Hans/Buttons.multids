@@ -76,6 +76,8 @@ Permalink/Caption: 引用链接
 Permalink/Hint: 设置浏览器网址栏为直接链接到此条目
 Permaview/Caption: 永久链接
 Permaview/Hint: 设置浏览器网址栏为直接链接到当前所有已开启条目
+Print/Caption: 打印页面
+Print/Hint: 打印当前页面
 Refresh/Caption: 刷新
 Refresh/Hint: 执行维基的完全刷新
 Save/Caption: 确定
