@@ -8,6 +8,8 @@ caption: Generic
 
 ! Enter the details
 
+You can also use this form to encode URLs.
+
 <$edit-text tiddler="$:/config/plugins/tiddlywiki/qrcode/generic" default="" class="tc-edit-texteditor"/>
 
 ! Here is your QR code

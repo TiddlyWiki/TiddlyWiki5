@@ -22,3 +22,23 @@ The error correction level is a [[QR code feature|http://www.qrcode.com/en/about
 <<<
 QR Code has error correction capability to restore data if the code is dirty or damaged. ... Level Q or H may be selected for factory environment where QR Code get dirty, whereas Level L may be selected for clean environment with the large amount of data. Typically, Level M (15%) is most frequently selected.
 <<<
+
+!! Examples
+
+Making a QR code for a simple string of text:
+
+```
+<<makeqr "Hello there!">>
+```
+
+Making a QR code for the URL field of the current tiddler:
+
+```
+<$macrocall $name="makeqr" text={{!!url}}/>
+```
+
+Making a QR code for the URL of the current wiki:
+
+```
+<$macrocall $name="makeqr" text={{$:/info/url/full}}/>
+```
