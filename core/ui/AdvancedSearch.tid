@@ -2,6 +2,21 @@ title: $:/AdvancedSearch
 icon: $:/core/images/advanced-search-button
 color: #bbb
 
+\define searchTiddler() $:/temp/advancedsearch
+\define results(type)
+<$vars resultCount="""<$count filter="[$(searchScope)$search$(field)${$(searchTiddler)$}]"/>""">
+
+<div class="tc-search-results">
+
+<<lingo $type$/Matches>>
+
+{{$:/core/ui/SearchResults}}
+
+</div>
+</$vars>
+\end
 <div class="tc-advanced-search">
+<$set name="field" filter="[{$:/temp/advancedsearch}minlength{$:/config/Search/MinLength}removeprefix{$:/temp/advancedsearch}]" emptyValue="title">
 <<tabs "[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch]!has[draft.of]]" "$:/core/ui/AdvancedSearch/System">>
+</$set>
 </div>

@@ -21,24 +21,10 @@ caption: {{$:/language/Search/Shadows/Caption}}
 
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 
-<$list filter="[{$:/temp/advancedsearch}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$vars searchScope="all[shadows]">
 
-<$set name="resultCount" value="""<$count filter="[all[shadows]search{$:/temp/advancedsearch}] -[[$:/temp/advancedsearch]]"/>""">
+<<results Shadows>>
 
-<div class="tc-search-results">
-
-<<lingo Shadows/Matches>>
-
-<$list filter="[all[shadows]search{$:/temp/advancedsearch}sort[title]limit[250]] -[[$:/temp/advancedsearch]]" template="$:/core/ui/ListItemTemplate"/>
-
-</div>
-
-</$set>
-
-</$list>
-
-</$reveal>
-
-<$reveal state="$:/temp/advancedsearch" type="match" text="">
+</$vars>
 
 </$reveal>

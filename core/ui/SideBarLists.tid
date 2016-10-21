@@ -1,5 +1,10 @@
 title: $:/core/ui/SideBarLists
 
+\define label()
+<$vars resultCount="""<$count filter="[!is[system]search:$(search-field)${$:/temp/search}]"/>""">
+{{$:/language/Search/Matches}}
+</$vars>
+\end
 <div class="tc-sidebar-lists">
 
 <$set name="searchTiddler" value="$:/temp/search">
@@ -18,11 +23,9 @@ title: $:/core/ui/SideBarLists
 </$button>
 <$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
 {{$:/core/images/down-arrow}}
-<$list filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
-<$set name="resultCount" value="""<$count filter="[!is[system]search{$(searchTiddler)$}]"/>""">
-{{$:/language/Search/Matches}}
+<$set name="search-field" filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}removeprefix{$:/temp/search}]" emptyValue="title">
+<<label>>
 </$set>
-</$list>
 </$button>
 </$reveal>
 <$reveal state="$:/temp/search" type="match" text="">
@@ -36,17 +39,15 @@ title: $:/core/ui/SideBarLists
 
 <$reveal tag="div" class="tc-block-dropdown tc-search-drop-down tc-popup-handle" state=<<qualify "$:/state/popup/search-dropdown">> type="nomatch" text="" default="">
 
-<$list filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$vars searchScope="!is[system]">
 
 {{$:/core/ui/SearchResults}}
 
-</$list>
+</$vars>
 
 </$reveal>
 
 </$reveal>
-
-</$set>
 
 <$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/SideBar]!has[draft.of]]" default={{$:/config/DefaultSidebarTab}} state="$:/state/tab/sidebar" />
 
