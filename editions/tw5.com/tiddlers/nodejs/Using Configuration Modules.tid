@@ -1,0 +1,15 @@
+modified: 20161019011900000
+created: 20161019011900000
+title: Using Configuration Modules
+tags: TiddlyWikiFolders PluginMechanism
+type: text/vnd.tiddlywiki
+
+Some of the configurations can be written in JavaScript instead of JSON. In cases when you want more control over the generation of the configuration payload. Because JSON is static it can be helpful to have a dynamic evaluation at execution time. For example mayby in the [[tiddlywiki.files Files]] you want a special name for the imported tiddlers. Unlike the `directories` example where the title is the filename we can dynamically build the files.
+
+```
+var fs = require('fs');
+module.exports = function($tw) {
+  var directoryList = fs.readDirSync('path/to/files');
+  var files = 
+};
+```

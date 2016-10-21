@@ -15,6 +15,8 @@ The format of the file is an object with two optional properties:
 
 Note that significant enhancements to `tiddlywiki.files` processing were introduced in [[Release 5.1.14]].
 
+<<.from-version "5.1.14">> Alternatively, you can use a module called `tiddlywiki.files.js` which will be executed to provide the above JavaScript object. See [[Using Configuration Modules]] for more information.
+
 !! Field overrides
 
 Both the ''tiddlers'' and ''directories'' sections of `tiddlywiki.files` files include the ability to override or customise the values of fields with a `fields` object.
