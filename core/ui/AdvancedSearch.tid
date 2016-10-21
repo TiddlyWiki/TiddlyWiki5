@@ -4,7 +4,7 @@ color: #bbb
 
 \define searchTiddler() $:/temp/advancedsearch
 \define results(type)
-<$vars resultCount="""<$count filter="[$(searchScope)$search$(field)${$(searchTiddler)$}]"/>""">
+<$vars resultCount="""<$count filter="[$(searchScope)$search:$(field)${$(searchTiddler)$}]"/>""">
 
 <div class="tc-search-results">
 
