@@ -1,11 +1,12 @@
 title: $:/language/Help/build
 description: Ejecuta automáticamente los comandos configurados
 
-Compila los objetivos especificados para el wiki actual. Si no se especifica ningún objetivo de compilado, todos los objetivos disponibles serán compilados
+Compila los targets que se especifican.<br>
+Si no se especifica ninguno, se incluirán todos los disponibles
 
 ```
 --build <target> [<target> ...]
 ```
 
-Los objetivos de compilado están definidos en el archivo `tiddlywiki.info` de un folder wiki.
+Los targets se definen en el archivo `tiddlywiki.info`
 

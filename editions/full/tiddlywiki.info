@@ -16,6 +16,7 @@
 		"tiddlywiki/railroad",
 		"tiddlywiki/stacked-view",
 		"tiddlywiki/text-slicer",
+		"tiddlywiki/xmldom",
 		"tiddlywiki/powered-by-tiddlywiki"
 	],
 	"languages": [
@@ -29,6 +30,7 @@
 		"en-US",
 		"es-ES",
 		"fr-FR",
+		"he-IL",
 		"hi-IN",
 		"ia-IA",
 		"it-IT",

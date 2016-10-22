@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/qrcode/ViewToolbarButton/Rendered
+tags: $:/tags/ViewToolbarButton/QRcode
+caption: Rendered content of this tiddler
+subtitle: QR code of rendered tiddler content
+
+\define image()
+<img src=<<makeqr text:"""$(content)$""" size:"350">>/>
+\end
+
+<$wikify name="content" text={{!!text}} type="text" mode="block" output="formattedtext">
+<<image>>
+</$wikify>

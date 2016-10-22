@@ -27,6 +27,19 @@ EditorTypes/Hint: Ces tiddlers déterminent l'éditeur à utiliser pour éditer 
 EditorTypes/Type/Caption: Type
 Info/Caption: Info
 Info/Hint: Information sur ce TiddlyWiki
+KeyboardShortcuts/Add/Prompt: Entre le raccourci ici
+KeyboardShortcuts/Add/Caption: ajoute un raccourci
+KeyboardShortcuts/Caption: Raccourcis clavier
+KeyboardShortcuts/Hint: Gère la spécification des raccourcis clavier
+KeyboardShortcuts/NoShortcuts/Caption: Aucun raccourci clavier spécifié
+KeyboardShortcuts/Remove/Hint: supprime le raccourci clavier
+KeyboardShortcuts/Platform/All: Toutes plates-formes
+KeyboardShortcuts/Platform/Mac: Plate-forme Macintosh seulement
+KeyboardShortcuts/Platform/NonMac: Plates-formes non-Macintosh seulement
+KeyboardShortcuts/Platform/Linux: Plate-forme Linux seulement
+KeyboardShortcuts/Platform/NonLinux: Plate-formes non-Linux seulement
+KeyboardShortcuts/Platform/Windows: Plate-forme Windows seulement
+KeyboardShortcuts/Platform/NonWindows: Plates-formes non-Windows seulement
 LoadedModules/Caption: Modules chargés
 LoadedModules/Hint: Liste des modules chargés, avec leurs tiddlers sources. Les italiques indiquent que les tiddlers sources n'existent pas, le plus souvent parce que le module a été créé lors du processus d'amorçage.
 Palette/Caption: Palette
@@ -40,6 +53,7 @@ Palette/Prompt: Palette en cours :
 Palette/ShowEditor/Caption: Afficher l'éditeur
 Plugins/Add/Hint: Installer des plugins à partir de la bibliothèque officielle
 Plugins/Add/Caption: Ajouter des plugins
+Plugins/AlreadyInstalled/Hint: Ce plugin est déjà installé dans la version <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: désactiver
 Plugins/Disable/Hint: Désactive ce plugin au prochain rechargement de la page
@@ -47,13 +61,23 @@ Plugins/Disabled/Status: (désactivé)
 Plugins/Empty/Hint: Aucun
 Plugins/Enable/Caption: activer
 Plugins/Enable/Hint: Active ce plugin au prochain rechargement de la page
+Plugins/Install/Caption: installe
 Plugins/Installed/Hint: Plugins installés :
-Plugins/Languages/Caption: Languages
+Plugins/Languages/Caption: Langues
 Plugins/Languages/Hint: Plugins de langue
+Plugins/NoInformation/Hint: Aucune information disponible
+Plugins/NotInstalled/Hint: Ce plugin n'est pas installé
+Plugins/OpenPluginLibrary: ouvre la bibliothèque de plugins
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins
+Plugins/Reinstall/Caption: réinstalle
 Plugins/Themes/Caption: Thèmes
 Plugins/Themes/Hint: Plugins de thème
+Parsing/Caption: Parsing
+Parsing/Hint: Ici, vous pouvez désactiver globalement des règles individuelles de parsing du wiki. Soyez prudent, car désactiver certaines règles peuvent empêcher ~TiddlyWiki de fonctionner correctement (vous pouvez revenir au parsing par défaut avec le [[safe mode|http://tiddlywiki.com/#SafeMode]] )
+Parsing/Block/Caption: Block Parse Rules
+Parsing/Inline/Caption: Inline Parse Rules
+Parsing/Pragma/Caption: Pragma Parse Rules
 Saving/Caption: Sauvegarde
 Saving/Heading: Sauvegarde
 Saving/TiddlySpot/Advanced/Heading: Paramètres avancés
@@ -71,6 +95,9 @@ Settings/AutoSave/Caption: Sauvegarde automatique
 Settings/AutoSave/Disabled/Description: Pas de sauvegarde automatique des modifications
 Settings/AutoSave/Enabled/Description: Sauvegarde automatique des modifications
 Settings/AutoSave/Hint: Sauvegarde automatique des modifications pendant l'édition
+Settings/CamelCase/Caption: Liens Wiki //Camel Case//
+Settings/CamelCase/Hint: Vous pouvez désactiver globalement les liens créés à partir des expressions de la forme ~CamelCase. Pour que ce paramètres prenne effet, il est nécessaire de recharger le wiki
+Settings/CamelCase/Description: Active les liens automatiques sur les expressions de la forme ~CamelCase
 Settings/Caption: Paramétrage
 Settings/Hint: Ce paramétrage vous permet de personnaliser le comportement de TiddlyWiki.
 Settings/NavigationAddressBar/Caption: Barre d'adresse pendant la navigation
@@ -82,6 +109,14 @@ Settings/NavigationHistory/Caption: Historique de navigation
 Settings/NavigationHistory/Hint: Mise à jour de l'historique de navigation du navigateur lorsqu'on pointe vers un tiddler :
 Settings/NavigationHistory/No/Description: Ne pas mettre à jour l'historique
 Settings/NavigationHistory/Yes/Description: Mettre à jour l'historique
+Settings/PerformanceInstrumentation/Caption: Instrumentation de la Performance
+Settings/PerformanceInstrumentation/Hint: Affiche des statistiques de performance dans la console de développement du navigateur. Nécessite de recharger la page pour prendre effet.
+Settings/PerformanceInstrumentation/Description: Active l'instrumentation de la performance
+Settings/ToolbarButtonStyle/Caption: Style des boutons de la barre d'outils
+Settings/ToolbarButtonStyle/Hint: Choix du style des boutons de la barre d'outils :
+Settings/ToolbarButtonStyle/Styles/Borderless: Sans bordure
+Settings/ToolbarButtonStyle/Styles/Boxed: Avec une bordure
+Settings/ToolbarButtonStyle/Styles/Rounded: Arrondis
 Settings/ToolbarButtons/Caption: Boutons de la barre d'outils
 Settings/ToolbarButtons/Hint: Apparence par défaut des boutons sur la barre d'outils :
 Settings/ToolbarButtons/Icons/Description: Afficher l'icône
@@ -99,11 +134,14 @@ Settings/TitleLinks/Caption: Titres des tiddlers
 Settings/TitleLinks/Hint: Faut-il afficher les titres des tiddlers comme des liens ?
 Settings/TitleLinks/No/Description: Ne pas afficher les titres des tiddlers comme des liens
 Settings/TitleLinks/Yes/Description: Afficher les titres des tiddlers comme des liens
+Settings/MissingLinks/Caption: Liens wiki
+Settings/MissingLinks/Hint: Peut-on pointer vers des tiddlers qui n'existent pas encore ?
+Settings/MissingLinks/Description: Active les liens vers les tiddlers inexistants
 StoryView/Caption: Vue sur le déroulé
 StoryView/Prompt: Vue courante :
 Theme/Caption: Thème
 Theme/Prompt: Thème courant :
-TiddlerFields/Caption: Champs du tiddler
+TiddlerFields/Caption: Champs des tiddlers
 TiddlerFields/Hint: Il s'agit de la totalité des [[champs|TiddlerFields]] utilisés dans ce wiki (y compris les tiddlers système, mais non compris les tiddlers //shadow//).
 Toolbars/Caption: Barres d'outils
 Toolbars/EditToolbar/Caption: Barre d'outils du mode édition
@@ -111,6 +149,8 @@ Toolbars/EditToolbar/Hint: Choix des boutons à afficher pour les tiddlers en co
 Toolbars/Hint: Choix des boutons à afficher dans les barres d'outils
 Toolbars/PageControls/Caption: Barre d'outils de la page
 Toolbars/PageControls/Hint: Choix des boutons à afficher sur la barre d'outils principale de la page
+Toolbars/EditorToolbar/Caption: Barre d'outils de l'Éditeur
+Toolbars/EditorToolbar/Hint: Choisir les boutons à afficher dans la barre d'outils de l'éditeur. À noter que la présence de certains boutons dépendra du type du tiddler édité
 Toolbars/ViewToolbar/Caption: Barre d'outils du mode visualisation
 Toolbars/ViewToolbar/Hint: Choix des boutons à afficher pour les tiddlers en mode visualisation
 Tools/Download/Full/Caption: Télécharger le wiki complet

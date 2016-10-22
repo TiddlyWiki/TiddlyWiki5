@@ -31,12 +31,7 @@ Trigger a popup open or closed. Parameters are in a hashmap:
 */
 Popup.prototype.triggerPopup = function(options) {
 	// Check if this popup is already active
-	var index = -1;
-	for(var t=0; t<this.popups.length; t++) {
-		if(this.popups[t].title === options.title) {
-			index = t;
-		}
-	}
+	var index = this.findPopup(options.title);
 	// Compute the new state
 	var state = index === -1;
 	if(options.force !== undefined) {
@@ -48,6 +43,16 @@ Popup.prototype.triggerPopup = function(options) {
 	} else {
 		this.cancel(index);
 	}
+};
+
+Popup.prototype.findPopup = function(title) {
+	var index = -1;
+	for(var t=0; t<this.popups.length; t++) {
+		if(this.popups[t].title === title) {
+			index = t;
+		}
+	}
+	return index;
 };
 
 Popup.prototype.handleEvent = function(event) {
@@ -107,12 +112,14 @@ Popup.prototype.show = function(options) {
 	var info = this.popupInfo(options.domNode);
 	// Cancel any higher level popups
 	this.cancel(info.popupLevel);
-	// Store the popup details
-	this.popups.push({
-		title: options.title,
-		wiki: options.wiki,
-		domNode: options.domNode
-	});
+	// Store the popup details if not already there
+	if(this.findPopup(options.title) === -1) {
+		this.popups.push({
+			title: options.title,
+			wiki: options.wiki,
+			domNode: options.domNode
+		});
+	}
 	// Set the state tiddler
 	options.wiki.setTextReference(options.title,
 			"(" + options.domNode.offsetLeft + "," + options.domNode.offsetTop + "," + 

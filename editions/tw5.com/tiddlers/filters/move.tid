@@ -1,0 +1,14 @@
+caption: move
+created: 20151022123413501
+modified: 20151108082424017
+op-input: a list of items
+op-output: re-ordered list of items
+op-parameter: the list item to be used as a marker
+op-parameter-name: marker
+op-purpose: move marker N places in the list
+op-suffix: an integer N, defaulting to 1
+tags: [[Filter Operators]] [[Order Operators]] [[Listops Operators]]
+title: move Operator
+type: text/vnd.tiddlywiki
+
+<<.operator-examples "move">>

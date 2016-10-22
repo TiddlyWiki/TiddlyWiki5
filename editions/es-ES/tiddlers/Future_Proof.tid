@@ -1,0 +1,11 @@
+caption: Perdurable
+created: 20131213101024997
+es-title: A prueba de futuro
+modified: 20160503161914814
+tags: Features
+title: Future Proof
+type: text/vnd.tiddlywiki
+
+~TiddlyWiki se ha diseñado teniendo en mente las necesidades de perdurabilidad del usuario. 
+
+Puesto que es OpenSource y no necesita infrastructura alguna, podemos asegurar que lo único que necesitarás para acceder a un archivo de ~TiddlyWiki, incluso en un futuro lejano, es un navegador HTML normal y corriente. Si estás hoy al inicio de tu carrera, puedes estar seguro de que podrás seguir usándolo cuando te jubiles. 

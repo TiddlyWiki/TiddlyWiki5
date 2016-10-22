@@ -7,7 +7,7 @@ filteroperator: Individuele methodes voor een filter operator.
 global: Globale data die aan `$tw.config` moet worden toegevoegd.
 isfilteroperator: Operands voor de ''is'' filter operator.
 macro: JavaScript macro definities.
-parser: Parsers voor verschillende inhoudstypes.
+parser: 'Parsers' voor verschillende inhoudstypes.
 saver: 'Savers' gebruiken verschillende methodes voor het opslaan van bestanden vanuit de browser.
 startup: Startup functies.
 storyview: Story views passen de animatie en het gedrag van 'list' widgets aan.
@@ -17,6 +17,6 @@ tiddlermethod: Voegt methodes aan het `$tw.Tiddler` prototype toe.
 upgrader: Past upgradeverwerking toe op tiddlers gedurende een upgrade / import.
 utils: Voegt methodes aan `$tw.utils` toe.
 utils-node: Voegt Node.js-specifieke methodes aan `$tw.utils` toe.
-widget: Widgets omvatten DOM rendering (tonen) en verversing.
+widget: 'Widgets' omvatten DOM 'rendering' en verversing.
 wikimethod: Voegt methodes aan `$tw.Wiki` toe.
-wikirule: Individuele parser regels voor the hoofd WikiText parser.
+wikirule: Individuele 'parser' regels voor de hoofd-WikiText-parser.

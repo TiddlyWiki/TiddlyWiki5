@@ -16,6 +16,10 @@ title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/paragraph" mode="block"/>
 </$reveal>
 
+<$reveal type="match" state="!!toc-type" text="note">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/note" mode="block"/>
+</$reveal>
+
 <$reveal type="match" state="!!toc-type" text="list">
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/list" mode="block"/>
 </$reveal>

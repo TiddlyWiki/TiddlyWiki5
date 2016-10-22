@@ -16,7 +16,7 @@ var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.info = {
 	name: "slice",
-	synchronous: true
+	synchronous: false
 };
 
 var Command = function(params,commander,callback) {
@@ -31,11 +31,15 @@ Command.prototype.execute = function() {
 	}
 	var self = this,
 		wiki = this.commander.wiki,
-		tiddlerTitle = this.params[0],
-		slicer = new $tw.Slicer(wiki,tiddlerTitle);
-	slicer.sliceTiddler(tiddlerTitle)
+		sourceTitle = this.params[0],
+		destTitle = this.params[1],
+		slicer = new $tw.Slicer(wiki,sourceTitle,{
+			destTitle: destTitle
+		});
+	slicer.sliceTiddler()
 	slicer.outputTiddlers();
 	slicer.destroy();
+	$tw.utils.nextTick(this.callback);
 	return null;
 };
 

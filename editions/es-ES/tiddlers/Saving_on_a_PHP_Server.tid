@@ -1,0 +1,39 @@
+caption: Guardar en servidor php
+created: 20140111091844267
+es-title: Guardar en un servidor php
+modified: 20160422200511304
+tags: Saving
+title: Saving on a PHP Server
+type: text/vnd.tiddlywiki
+
+El módulo incorporado de guardado en TiddlySpot también puede usarse para guardar cambios en un sencillo script de PHP que puede ejecutarse en la mayoría de proveedores.
+
+<<.warning "Estas son instrucciones preliminares que aún necesitan verificación">>
+
+# Descarga una copia de <<.def store.php>> de [[aquí|https://code.google.com/p/bidix/source/browse/trunk/TiddlyHome/_th/lib/store.php]]
+
+# Edita tu copia de <<.def store.php>> para incluir tu nombre de usuario y contraseña. Busca la línea `$USERS = array( 'UserName1'=>'Password1'...etc` y sustituye <<.em Username1>> y <<.em Password1>> por los tuyos, respectivamente
+
+#* Asegúrate de dejar intactos el código y su puntuación.
+
+# Guarda los cambios
+
+# Mediante FTP o web, sube el archivo <<.def store.php>>al servidor. Asegúrate de que el nombre de archivo es correcto
+
+#* Si el archivo ha subido correctamente, lo verás en el navegador.
+
+# En ~TiddlyWiki, ve a la pestaña <<.controlpanel-tab Saving>> del [[Panel de control|$:/ControlPanel]] e introduce la siguiente información:
+
+#* Tu nombre de usuario como nombre de wiki
+
+#* Tu contraseña
+
+#* La URL del archivo ''store.php'', <<.em " La URL del archivo ''store.php'', no la del wiki">>
+
+La pestaña <<.controlpanel-tab Saving>> del panel de control incluye las siguientes opciones de configuración:
+
+|!Nombre |!Descripción |
+|Dirección (URL) del servidor |URL completa del archivo <<.def store.php>> en el servidor |
+|Nombre de archivo |Nombre de archivo usado para guardar el ~TiddlyWiki (por defecto <<.def index.html>> |
+|Directorio de almacenamiento |Ruta relativa al archivo <<.def store.php>> del directorio usado para guardar el wiki |
+|Directorio de copias de seguridad |Ruta relativa al archivo <<.def store.php>> del directorio donde se guarda la copia de seguridad del wiki.  |

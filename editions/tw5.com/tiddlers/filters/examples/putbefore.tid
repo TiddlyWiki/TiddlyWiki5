@@ -1,0 +1,11 @@
+created: 20151022142602628
+modified: 20151108051906935
+tags: [[Operator Examples]] [[putbefore Operator]]
+title: putbefore Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[list[Days of the Week]] +[putbefore[Wednesday]]">>
+<<.operator-example 2 "[list[Days of the Week]] +[putbefore:2[Tuesday]]">>
+<<.operator-example 3 "[list[Days of the Week]] [[Yesterday]] [[Today]] [[Tomorrow]] +[putbefore:3[Tuesday]]">>

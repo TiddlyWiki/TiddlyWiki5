@@ -39,13 +39,16 @@ exports.parse = function() {
 	// Look for the end marker
 	reEnd.lastIndex = this.parser.pos;
 	var match = reEnd.exec(this.parser.source),
-		text;
+		text,
+		displayMode;
 	// Process the text
 	if(match) {
 		text = this.parser.source.substring(this.parser.pos,match.index);
+		displayMode = text.indexOf('\n') != -1;
 		this.parser.pos = match.index + match[0].length;
 	} else {
 		text = this.parser.source.substr(this.parser.pos);
+		displayMode = false;
 		this.parser.pos = this.parser.sourceLength;
 	}
 	return [{
@@ -54,7 +57,12 @@ exports.parse = function() {
 			text: {
 				type: "text",
 				value: text
-			}}
+			},
+			displayMode: {
+				type: "text",
+				value: displayMode ? "true" : "false"
+			}
+		}
 	}];
 };
 

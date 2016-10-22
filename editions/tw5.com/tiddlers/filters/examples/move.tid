@@ -1,0 +1,10 @@
+created: 20151022123633433
+modified: 20151108051643871
+tags: [[Operator Examples]] [[move Operator]]
+title: move Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[list[Days of the Week]] +[move[Wednesday]]">>
+<<.operator-example 2 "[list[Days of the Week]] +[move:-2[Wednesday]]">>

@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The ''action-sendmessage'' widget is an [[action widget|ActionWidgets]] that sends a [[message|WidgetMessages]] back up the widget tree. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+The ''action-sendmessage'' widget is an [[action widget|ActionWidgets]] that sends a [[message|Messages]] back up the widget tree. ActionWidgets are used within triggering widgets such as the ButtonWidget.
 
 ! Content and Attributes
 

@@ -1,4 +1,18 @@
 title: $:/core/ui/EditTemplate/title
 tags: $:/tags/EditTemplate
 
+<$vars pattern="""[\|\[\]{}]""" bad-chars="""`| [ ] { }`""">
+
+<$list filter="[is[current]regexp:draft.title<pattern>]" variable="listItem">
+
+<div class="tc-message-box">
+
+{{$:/language/EditTemplate/Title/BadCharacterWarning}}
+
+</div>
+
+</$list>
+
+</$vars>
+
 <$edit-text field="draft.title" class="tc-titlebar tc-edit-texteditor" focus="true"/>

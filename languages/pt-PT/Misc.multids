@@ -4,24 +4,47 @@ BinaryWarning/Prompt: Este tiddler contém informação binária
 ClassicWarning/Hint: Este tiddler está escrito no formato de texto wiki da TiddlyWiki Clássica, que não é totalmente compatível com a TiddlyWiki versão 5. Veja http://tiddlywiki.com/static/Upgrading.html para mais detalhes.
 ClassicWarning/Upgrade/Caption: actualizar
 CloseAll/Button: fechar todos
+ColourPicker/Recent: Recente:
 ConfirmCancelTiddler: Pretende descartar as alterações feitas no tiddler "<$text text=<<title>>/>"?
 ConfirmDeleteTiddler: Pretende apagar o tiddler "<$text text=<<title>>/>"?
 ConfirmEditShadowTiddler: Está prestes a editar um Tiddler-Sombra. Quaisquer alterações sobrepor-se-ão aos valores pré definidos de sistema, tornando futuras actualizações mais complexas. Tem a certeza que pretende editar "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: Pretende substituir o tiddler "<$text text=<<title>>/>"?
+Count: contagem
 DefaultNewTiddlerTitle: Novo Tiddler
 DropMessage: Largue aqui (ou carregue no escape para cancelar)
+Encryption/Cancel: Cancelar
 Encryption/ConfirmClearPassword: Pretende remover a palavra-passe? Esta acção removerá a encriptação aplicada quando guardar esta wiki
+Encryption/Password: Palavra Passe
 Encryption/PromptSetPassword: Definir nova palavra passe para esta TiddlyWiki
-Exporters/CsvFile: Ficheiros CSV dos tiddlers
-Exporters/JsonFile: Ficheiros JSON dos tiddlers
-Exporters/StaticRiver: Sequência de tiddlers como ficheiro estático HTML
-Exporters/TidFile: Tiddler individual em ficheiro ".tid"
+Encryption/RepeatPassword: Repetir palavra passe
+Encryption/SetPassword: Definir palavra passe
+Encryption/Username: Nome de utilizador
+Error/Caption: Erro
+Error/Filter: Erro de filtro
+Error/FilterSyntax: Erro de sintaxe na expressão do filtro
+Error/IsFilterOperator: Erro de Filtro: Operando desconhecido para o operador de filtro 'is'
+Error/LoadingPluginLibrary: Erro ao carregar a biblioteca de extensões
+Error/RecursiveTransclusion: Erro de transclusão recursiva na widget de transclusão
+Error/RetrievingSkinny: Erro ao obter a lista simples de tiddlers
+Error/SavingToTWEdit: Erro ao gravar em TWEdit
+Error/WhileSaving: Erro ao gravar
+Error/XMLHttpRequest: Código de erro XMLHttpRequest
+InternalJavaScriptError/Hint: Bem, isto é embaraçoso. Recomenda-se que reinicie a sua TiddlyWiki recarregando o seu navegador
+InternalJavaScriptError/Title: Erro interno JavaScript
 InvalidFieldName: Caracteres ilegais no nome do ficheiro "<$text text=<<fieldName>>/>". Os campos apenas podem conter letras minúsculas, dígitos e os caracteres  subtraço (`_`), hífen (`-`) e ponto final (`.`)
+LazyLoadingWarning: <p>A carregar texto externo de ''<$text text={{!!_canonical_uri}}/>''</p><p>Se esta mensagem não desaparecer pode estar a utilizar um navegador que não suporta texto remoto nesta configuração. Veja http://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: Entrar em TiddlySpace
 MissingTiddler/Hint: Tiddler "<$text text=<<currentTiddler>>/>" em falta - clique {{$:/core/images/edit-button}} para criar
+No: Não
+OfficialPluginLibrary: Biblioteca de Extensões Official ~TiddlyWiki
+OfficialPluginLibrary/Hint: A Biblioteca de Extensões Official ~TiddlyWiki em tiddlywiki.com. Extensões temas e pacotes de idiomas são mantidos pela equipa principal.
+PluginReloadWarning: Por favor grave  {{$:/core/ui/Buttons/save-wiki}} e recarregue {{$:/core/ui/Buttons/refresh}} para que as alterações às extensões tomem efeito
 RecentChanges/DateFormat: DD MMM AAAA
 SystemTiddler/Tooltip: Este é um tiddler de sistema
 TagManager/Colour/Heading: Cor
+TagManager/Count/Heading: Contagem
 TagManager/Icon/Heading: Ícone
 TagManager/Info/Heading: Informação
 TagManager/Tag/Heading: Etiqueta
 UnsavedChangesWarning: Têm alterações não guardadas na TiddlyWiki
+Yes: Sim

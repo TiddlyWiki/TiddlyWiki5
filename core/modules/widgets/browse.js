@@ -42,8 +42,13 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 	if(this.tooltip) {
 		domNode.setAttribute("title",this.tooltip);
 	}
+	// Nw.js supports "nwsaveas" to force a "save as" dialogue that allows a new or existing file to be selected
 	if(this.nwsaveas) {
 		domNode.setAttribute("nwsaveas",this.nwsaveas);
+	}
+	// Nw.js supports "webkitdirectory" to allow a directory to be selected
+	if(this.webkitdirectory) {
+		domNode.setAttribute("webkitdirectory",this.webkitdirectory);
 	}
 	// Add a click event handler
 	domNode.addEventListener("change",function (event) {
@@ -71,6 +76,7 @@ BrowseWidget.prototype.execute = function() {
 	this.param = this.getAttribute("param");
 	this.tooltip = this.getAttribute("tooltip");
 	this.nwsaveas = this.getAttribute("nwsaveas");
+	this.webkitdirectory = this.getAttribute("webkitdirectory");
 };
 
 /*

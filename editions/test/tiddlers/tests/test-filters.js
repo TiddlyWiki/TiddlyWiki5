@@ -227,8 +227,8 @@ describe("Filter tests", function() {
 
 	it("should handle the each operator", function() {
 		expect(wiki.filterTiddlers("[each[modifier]sort[title]]").join(",")).toBe("$:/TiddlerTwo,TiddlerOne");
-		expect(wiki.filterTiddlers("[each:list[tags]sort[title]]").join(",")).toBe("one,two");
-		expect(wiki.filterTiddlers("[each:list[authors]sort[title]]").join(",")).toBe("Bloggs,Joe,John Doe");
+		expect(wiki.filterTiddlers("[each:list-item[tags]sort[title]]").join(",")).toBe("one,two");
+		expect(wiki.filterTiddlers("[each:list-item[authors]sort[title]]").join(",")).toBe("Bloggs,Joe,John Doe");
 	});
 
 	it("should handle the eachday operator", function() {

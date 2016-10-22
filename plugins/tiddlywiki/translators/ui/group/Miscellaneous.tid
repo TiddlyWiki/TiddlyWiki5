@@ -15,6 +15,8 @@ tags: $:/tags/TranslationGroup
 -[all[tiddlers+shadows]prefix[$:/language/RelativeDate/]]
 -[all[tiddlers+shadows]prefix[$:/language/Search/]]
 -[all[tiddlers+shadows]prefix[$:/language/SideBar/]]
+-[all[tiddlers+shadows]prefix[$:/language/Snippets/]]
+-[all[tiddlers+shadows]prefix[$:/language/ThemeTweaks/]]
 -[all[tiddlers+shadows]prefix[$:/language/TiddlerInfo/]]
 [all[tiddlers+shadows]prefix[$:/config/NewJournal/]]
 [[$:/SiteTitle]]
