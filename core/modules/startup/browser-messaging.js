@@ -29,12 +29,12 @@ function loadIFrame(url,callback) {
 		callback(null,iframeInfo);
 	} else {
 		// Create the iframe and save it in the list
-		var iframe = document.createElement("iframe"),
-			iframeInfo = {
-				url: url,
-				status: "loading",
-				domNode: iframe
-			};
+		var iframe = document.createElement("iframe");
+		iframeInfo = {
+			url: url,
+			status: "loading",
+			domNode: iframe
+		};
 		$tw.browserMessaging.iframeInfoMap[url] = iframeInfo;
 		saveIFrameInfoTiddler(iframeInfo);
 		// Add the iframe to the DOM and hide it
@@ -56,6 +56,18 @@ function loadIFrame(url,callback) {
 			callback(ex);
 		}
 	}
+}
+
+/*
+Unload library iframe for given url
+*/
+function unloadIFrame(url){
+	$tw.utils.each(document.getElementsByTagName('iframe'), function(iframe) {
+		if(iframe.getAttribute("library") === "true" &&
+		  iframe.getAttribute("src") === url) {
+			iframe.parentNode.removeChild(iframe);
+		}
+	});
 }
 
 function saveIFrameInfoTiddler(iframeInfo) {
@@ -100,16 +112,11 @@ exports.startup = function() {
 			url = paramObject.url;
 		$tw.browserMessaging.iframeInfoMap[url] = undefined;
 		if(url) {
-			$tw.utils.each(document.getElementsByTagName('iframe'), function(iframe) {
-				if(iframe.getAttribute("library") === "true" &&
-				  iframe.getAttribute("src") === url) {
-					iframe.parentNode.removeChild(iframe);
-				}
-			});
+			unloadIFrame(url);
 			$tw.utils.each(
 				$tw.wiki.filterTiddlers("[[$:/temp/ServerConnection/" + url + "]] [prefix[$:/temp/RemoteAssetInfo/" + url + "/]]"),
 				function(title) {
-					$tw.wiki.deleteTiddler(title)
+					$tw.wiki.deleteTiddler(title);
 				}
 			);
 		}
