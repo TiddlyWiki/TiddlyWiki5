@@ -135,6 +135,10 @@ FieldManglerWidget.prototype.handleAddTagEvent = function(event) {
 			$tw.utils.pushTop(modification.tags,tag);
 			this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));			
 		}
+	} else if(typeof event.param === "string" && event.param.trim() !== "" && this.mangleTitle.trim() !== "") {
+		var tag = [];
+		tag.push(event.param.trim());
+		this.wiki.addTiddler({title: this.mangleTitle, tags: tag});		
 	}
 	return true;
 };

@@ -51,8 +51,18 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 Handle a change event
 */
 SelectWidget.prototype.handleChangeEvent = function(event) {
-	var value = this.getSelectDomNode().value;
+	// Get the new value and assign it to the tiddler
+	if(this.selectMultiple == false) {
+		var value = this.getSelectDomNode().value;
+	} else {
+		var value = this.getSelectValues()
+				value = $tw.utils.stringifyList(value);
+	}
 	this.wiki.setText(this.selectTitle,this.selectField,this.selectIndex,value);
+	// Trigger actions
+	if(this.selectActions) {
+		this.invokeActionString(this.selectActions,this,event);
+	}
 };
 
 /*
@@ -81,9 +91,21 @@ SelectWidget.prototype.setSelectValue = function() {
 		}
 	}
 	// Assign it to the select element if it's different than the current value
-	var domNode = this.getSelectDomNode();
-	if(domNode.value !== value) {
-		domNode.value = value;
+	if (this.selectMultiple) {
+		value = value === undefined ? "" : value;
+		var select = this.getSelectDomNode();
+		var values = Array.isArray(value) ? value : $tw.utils.parseStringArray(value);
+		for(var i=0; i < select.children.length; i++){
+			if(values.indexOf(select.children[i].value) != -1) {
+				select.children[i].selected = true;
+			}
+		}
+		
+	} else {
+		var domNode = this.getSelectDomNode();
+		if(domNode.value !== value) {
+			domNode.value = value;
+		}
 	}
 };
 
@@ -94,16 +116,35 @@ SelectWidget.prototype.getSelectDomNode = function() {
 	return this.children[0].domNodes[0];
 };
 
+// Return an array of the selected opion values
+// select is an HTML select element
+SelectWidget.prototype.getSelectValues = function() {
+	var select, result, options, opt;
+	select = this.getSelectDomNode();
+	result = [];
+	options = select && select.options;
+	for (var i=0; i<options.length; i++) {
+		opt = options[i];
+		if (opt.selected) {
+			result.push(opt.value || opt.text);
+		}
+	}
+	return result;
+}
+
 /*
 Compute the internal state of the widget
 */
 SelectWidget.prototype.execute = function() {
 	// Get our parameters
+	this.selectActions = this.getAttribute("actions");
 	this.selectTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.selectField = this.getAttribute("field","text");
 	this.selectIndex = this.getAttribute("index");
 	this.selectClass = this.getAttribute("class");
 	this.selectDefault = this.getAttribute("default");
+	this.selectMultiple = this.getAttribute("multiple", false);
+	this.selectSize = this.getAttribute("size");
 	// Make the child widgets
 	var selectNode = {
 		type: "element",
@@ -112,6 +153,12 @@ SelectWidget.prototype.execute = function() {
 	};
 	if(this.selectClass) {
 		$tw.utils.addAttributeToParseTreeNode(selectNode,"class",this.selectClass);
+	}
+	if(this.selectMultiple) {
+		$tw.utils.addAttributeToParseTreeNode(selectNode,"multiple","multiple");
+	}
+	if(this.selectSize) {
+		$tw.utils.addAttributeToParseTreeNode(selectNode,"size",this.selectSize);
 	}
 	this.makeChildWidgets([selectNode]);
 };

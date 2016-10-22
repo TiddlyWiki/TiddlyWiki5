@@ -51,6 +51,14 @@ background-image: -ms-linear-gradient($gradient$);
 ``
 \end
 
+\define column-count(columns)
+``
+-moz-column-count: $columns$;
+-webkit-column-count: $columns$;
+column-count: $columns$;
+``
+\end
+
 \define datauri(title)
 <$macrocall $name="makedatauri" type={{$title$!!type}} text={{$title$}}/>
 \end

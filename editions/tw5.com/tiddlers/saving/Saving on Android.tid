@@ -1,9 +1,22 @@
 created: 20130825161400000
-modified: 20140912141110606
+modified: 20160601162226948
 tags: Saving
 title: Saving on Android
 type: text/vnd.tiddlywiki
 
-The AndTidWiki app for Android devices makes it possible to edit and save changes to TiddlyWiki5, including working offline without a network connection. [[Download it here|https://play.google.com/store/apps/details?id=de.mgsimon.android.andtidwiki]].
+The AndTidWiki app for Android devices makes it possible to edit and save changes to TiddlyWiki5, including working offline without a network connection. [[Download it here|https://play.google.com/store/apps/details?id=de.mgsimon.android.andtidwiki&hl=en]].
+
+Instructions for use:
+
+# [[Download]] an empty TiddlyWiki on another web browser
+# Move the file you just downloaded to the directory `/sdcard/andtidwiki`
+#* You may rename it, but be sure to keep the `.html` or `.htm` extension
+# Open AndTidWiki
+#* Don't use ''Menu''/''new ~TiddlyWiki'' menu option (it only supports the older TiddlyWikiClassic)
+# Open the file by touching its filename
+# Try creating a new tiddler using the ''new tiddler'' {{$:/core/images/new-button}} button in the sidebar. Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''ok'' button
+#* The wiki will be saved, and a confirmation message should appear at the top right of the window
+
+''Note:'' You can save your changes by clicking the {{$:/core/images/save-button}} ''save changes'' button in the sidebar even if you have not clicked the {{$:/core/images/done-button}} ''ok'' button to complete editing a tiddler
 
 //Note that AndTidWiki is published independently of TiddlyWiki//

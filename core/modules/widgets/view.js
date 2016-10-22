@@ -55,6 +55,9 @@ ViewWidget.prototype.execute = function() {
 		case "htmlwikified":
 			this.text = this.getValueAsHtmlWikified();
 			break;
+		case "plainwikified":
+			this.text = this.getValueAsPlainWikified();
+			break;
 		case "htmlencodedplainwikified":
 			this.text = this.getValueAsHtmlEncodedPlainWikified();
 			break;
@@ -133,6 +136,10 @@ ViewWidget.prototype.getValueAsText = function() {
 
 ViewWidget.prototype.getValueAsHtmlWikified = function() {
 	return this.wiki.renderText("text/html","text/vnd.tiddlywiki",this.getValueAsText(),{parentWidget: this});
+};
+
+ViewWidget.prototype.getValueAsPlainWikified = function() {
+	return this.wiki.renderText("text/plain","text/vnd.tiddlywiki",this.getValueAsText(),{parentWidget: this});
 };
 
 ViewWidget.prototype.getValueAsHtmlEncodedPlainWikified = function() {

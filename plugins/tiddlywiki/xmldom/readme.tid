@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/xmldom/readme
+
+This plugin packages [[xmldom|https://github.com/jindw/xmldom]] for use by other plugins. It does not provide any end-user visible features.

@@ -8,6 +8,7 @@ ConfirmCancelTiddler: Vuoi annullare le modifiche al frammento "<$text text=<<ti
 ConfirmDeleteTiddler: Vuoi cancellare il frammento "<$text text=<<title>>/>"?
 ConfirmEditShadowTiddler: Stai per editare un frammento nascosto. Ogni modifica dei default di sistema render&agrave; i futuri aggiornamenti non semplici. Sei sicuro di voler editare "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: Vuoi sovrascrivere il frammento "<$text text=<<title>>/>"?
+Count: Conteggio
 DefaultNewTiddlerTitle: Nuovo frammento
 DropMessage: Rilascia qui (o usa il tasto 'Escape' per cancellare)
 Encryption/Cancel: Cancella
@@ -18,10 +19,6 @@ Encryption/PromptSetPassword: Imposta una nuova pasword per questo ~TiddlyWiki
 Encryption/RepeatPassword: Ripeti password
 Encryption/SetPassword: Imposta password
 Encryption/Username: NomeUtente
-Exporters/CsvFile: file CSV
-Exporters/JsonFile: file JSON
-Exporters/StaticRiver: HTML statico
-Exporters/TidFile: ".tid" file
 InvalidFieldName: Caratteri non consentiti nel campo nome "<$text text=<<fieldName>>/>". I campi nome possono solo contenere lettere minuscole, numeri ed i caratteri sottolineato (`_`), meno (`-`) e punto (`.`)
 MissingTiddler/Hint: Frammento mancante "<$text text=<<currentTiddler>>/>" - clicca {{$:/core/images/edit-button}} per crearlo
 OfficialPluginLibrary: Libreria ufficiale plugin ~TiddlyWiki

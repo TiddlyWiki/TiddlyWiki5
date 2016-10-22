@@ -32,13 +32,17 @@ Command.prototype.execute = function() {
 		path = require("path"),
 		title = this.params[0],
 		filename = path.resolve(this.commander.outputPath,this.params[1]),
-		tiddler = this.commander.wiki.getTiddler(title),
-		type = tiddler.fields.type || "text/vnd.tiddlywiki",
-		contentTypeInfo = $tw.config.contentTypeInfo[type] || {encoding: "utf8"};
-	$tw.utils.createFileDirectories(filename);
-	fs.writeFile(filename,tiddler.fields.text,contentTypeInfo.encoding,function(err) {
-		self.callback(err);
-	});
+		tiddler = this.commander.wiki.getTiddler(title);
+	if(tiddler) {
+		var type = tiddler.fields.type || "text/vnd.tiddlywiki",
+			contentTypeInfo = $tw.config.contentTypeInfo[type] || {encoding: "utf8"};
+		$tw.utils.createFileDirectories(filename);
+		fs.writeFile(filename,tiddler.fields.text,contentTypeInfo.encoding,function(err) {
+			self.callback(err);
+		});
+	} else {
+		return "Missing tiddler: " + title;
+	}
 	return null;
 };
 

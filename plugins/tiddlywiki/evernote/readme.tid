@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/evernote/readme
+
+This plugin contains tool to assist migration of content from Evernote ENEX files.
+
+!! Instructions
+
+# Download or save your ENEX file from Evernote
+# Rename the file to have an `.enex` extension
+# Drag the file into the TiddlyWiki browser window
+## Alternatively, click the "Import" button in the "Tools" sidebar tab
+# Review and accept the converted tiddlers

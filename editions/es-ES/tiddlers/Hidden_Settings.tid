@@ -1,0 +1,13 @@
+caption: Ajustes ocultos
+created: 20150619162223882
+es-title: Ajustes ocultos
+modified: 20160426151522460
+tags: [[Customise TiddlyWiki]]
+title: Hidden Settings
+type: text/vnd.tiddlywiki
+
+Los ajustes de configuración de TiddlyWiki se exponen en el <<.button control-panel>>, pero algunos más avanzados no tienen interfaz propiamente dicha, por lo que, si es necesario, se editan directamente en los tiddlers de configuración.
+
+Arrastra los siguientes enlaces a tu wiki para cambiar estos ajustes. 
+
+<<list-links "[tag[Hidden Settings]]">>

@@ -9,6 +9,7 @@ ConfirmCancelTiddler: Souhaitez-vous annuler les modifications apportées au tid
 ConfirmDeleteTiddler: Souhaitez-vous supprimer le tiddler « <$text text=<<title>>/> » ?
 ConfirmOverwriteTiddler: Souhaitez-vous supplanter le tiddler « <$text text=<<title>>/> » ?
 ConfirmEditShadowTiddler: Vous êtes sur le point d'éditer un ShadowTiddler. Toute modification supplantera la version par défaut du système, rendant les prochaines mises à jour non-triviales. Êtes-vous sûr(e) de vouloir éditer "<$text text=<<title>>/>"?
+Count: total 
 DefaultNewTiddlerTitle: Nouveau tiddler
 DropMessage: Lâcher ici (ou appuyer sur « escape » pour annuler)
 Encryption/Cancel: Annuler
@@ -19,11 +20,23 @@ Encryption/Password: Mot de passe
 Encryption/RepeatPassword: Répéter le mot de passe
 Encryption/PasswordNoMatch: Les mots de passe ne correspondent pas
 Encryption/SetPassword: Définir ce mot de passe 
+Error/Caption: Erreur
+Error/Filter: Erreur de filtre
+Error/FilterSyntax: Erreur de syntaxe dans l'expression du filtre
+Error/IsFilterOperator: Erreu de filtre : Opérande inconnu pour l'opérateur de filtre 'is'
+Error/LoadingPluginLibrary: Erreur lors du chargement de la bibliothèque de plugins
+Error/RecursiveTransclusion: Erreur dans le widget //transclude// : transclusion récursive
+Error/RetrievingSkinny: Erreur pendant la récupération de la liste des tiddlers (dégrossis)
+Error/SavingToTWEdit: Erreur lors de l'enregistrement vers TWEdit
+Error/WhileSaving: Erreur lors de l'enregistrement
+Error/XMLHttpRequest: Code d'erreur XMLHttpRequest
 InternalJavaScriptError/Title: Erreur interne JavaScript
 InternalJavaScriptError/Hint: C'est assez embarrassant. Il est recommandé de rafraîchir l'affichage de votre navigateur
 InvalidFieldName: Caractères illicites dans le nom du champ « <$text text=<<fieldName>>/> ». Les champs ne peuvent contenir que des lettres minuscules non accentuées et les caractères souligné (`_`), tiret (`-`) et point (`.`)
 LazyLoadingWarning: <p>Chargement d'un texte externe ''<$text text={{!!_canonical_uri}}/>''</p><p>Si ce message ne disparaît pas, il se peut que vous utilisiez un navigateur qui n'accepte pas les textes externes dans cette configuration. Voir http://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: Identification sur TiddlySpace
 MissingTiddler/Hint: Le tiddler « <$text text=<<currentTiddler>>/> » est manquant - cliquez sur {{$:/core/images/edit-button}} pour le créer
+No: Non
 OfficialPluginLibrary: Bibliothèque officielle des plugins ~TiddlyWiki
 OfficialPluginLibrary/Hint: La bibliothèque officielle des plugins ~TiddlyWiki sur tiddlywiki.com. Plugins, thèmes et packs pour les différentes langues sont maintenus par l'équipe responsable du noyau.
 PluginReloadWarning: Merci d'enregistrer {{$:/core/ui/Buttons/save-wiki}} et de recharger {{$:/core/ui/Buttons/refresh}} pour que les changements apportés aux plugins prennent effet
@@ -35,3 +48,4 @@ TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
 Tiddler/DateFormat: DD MMM YYYY à hhhmm
 UnsavedChangesWarning: Vos dernières modifications n'ont pas été sauvegardées dans votre TiddlyWiki
+Yes: Oui

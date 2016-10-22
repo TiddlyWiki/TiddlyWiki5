@@ -27,6 +27,19 @@ EditorTypes/Hint: Deze tiddlers bepalen welke editor wordt gebruikt voor specifi
 EditorTypes/Type/Caption: Type
 Info/Caption: Info
 Info/Hint: Informatie over deze TiddlyWiki
+KeyboardShortcuts/Add/Caption: voeg sneltoets toe
+KeyboardShortcuts/Add/Prompt: Type hier de sneltoets
+KeyboardShortcuts/Caption: Sneltoetsen
+KeyboardShortcuts/Hint: Beheer sneltoetstoewijzing
+KeyboardShortcuts/NoShortcuts/Caption: Geen sneltoetsen toegekend
+KeyboardShortcuts/Platform/All: Alle platformen
+KeyboardShortcuts/Platform/Linux: Alleen voor Linux
+KeyboardShortcuts/Platform/Mac: Alleen voor Macintosh
+KeyboardShortcuts/Platform/NonLinux: Alleen voor niet-Linux
+KeyboardShortcuts/Platform/NonMac: Alleen voor niet-Macintosh
+KeyboardShortcuts/Platform/NonWindows: Alleen voor niet-Windows
+KeyboardShortcuts/Platform/Windows: Alleen voor Windows
+KeyboardShortcuts/Remove/Hint: verwijder sneltoets
 LoadedModules/Caption: Geladen modules
 LoadedModules/Hint: Dit zijn de nu geladen tiddler modules gekoppeld aan hun brontiddlers. Alle cursieve modules hebben geen brontiddler, gewoonlijk omdat ze tijdens het bootproces gemaakt werden.
 Palette/Caption: Palet
@@ -38,8 +51,14 @@ Palette/Editor/Reset/Caption: reset
 Palette/HideEditor/Caption: verberg editor
 Palette/Prompt: Huidig palet:
 Palette/ShowEditor/Caption: toon editor
+Parsing/Block/Caption: 'Block parse' regels
+Parsing/Caption: 'Parsing' (ontleding)
+Parsing/Hint: Hier kan je globaal individuele wiki 'parser' regels uitzetten. Wees voorzichtig daar het uitzetten van sommige 'parser' regels het juist functioneren van ~Tiddlywiki kan beletten (je kan het normale gedrag herstellen met [['safe mode'|http://tiddlywiki.com/#SafeMode]])
+Parsing/Inline/Caption: 'Inline parse' regels
+Parsing/Pragma/Caption: 'Pragma parse' regels
 Plugins/Add/Caption: Verkrijg meer plugins
 Plugins/Add/Hint: Installeer plugins van de officiële bibliotheek
+Plugins/AlreadyInstalled/Hint: Deze plugin is al geïnstalleerd met versie <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: schakel uit
 Plugins/Disable/Hint: Schakel deze plugin uit na verversen van deze pagina
@@ -47,11 +66,16 @@ Plugins/Disabled/Status: (uitgeschakeld)
 Plugins/Empty/Hint: Niets
 Plugins/Enable/Caption: activeer
 Plugins/Enable/Hint: Activeer deze plugin bij verversen van deze pagina
+Plugins/Install/Caption: installeer
 Plugins/Installed/Hint: Geïnstalleerde plugins:
 Plugins/Language/Prompt: Talen
 Plugins/Languages/Caption: Talen
 Plugins/Languages/Hint: Taal plugins
+Plugins/NoInformation/Hint: Geen informatie beschikbaar
+Plugins/NotInstalled/Hint: Deze plugin is nu niet geïnstalleerd
+Plugins/OpenPluginLibrary: open plugin bibliotheek
 Plugins/Plugin/Prompt: Plugins
+Plugins/Reinstall/Caption: herinstalleer
 Plugins/Theme/Prompt: Thema's
 Plugins/Themes/Caption: Thema's
 Plugins/Themes/Hint: Thema plugins
@@ -72,6 +96,9 @@ Settings/AutoSave/Caption: Automatisch opslaan
 Settings/AutoSave/Disabled/Description: Sla veranderingen niet automatisch op
 Settings/AutoSave/Enabled/Description: Sla veranderingen automatisch op
 Settings/AutoSave/Hint: Sla veranderingen tijdens wijzigen automatisch op
+Settings/CamelCase/Caption: 'Camel Case' wiki links
+Settings/CamelCase/Description: Zet automatisch ~CamelCase linken aan
+Settings/CamelCase/Hint: Je kan globaal het automatisch linken van ~CamelCase woorden uitzetten. Dit vereist herladen van de wiki om effect te hebben.
 Settings/Caption: Instellingen
 Settings/DefaultSidebarTab/Caption: Standaard tab in zijpaneel
 Settings/DefaultSidebarTab/Hint: Geef aan welke tab in het zijpaneel standaard wordt getoond
@@ -83,6 +110,8 @@ Settings/LinkToBehaviour/OpenAtBottom: Open onderaan de 'story river'
 Settings/LinkToBehaviour/OpenAtTop: Open bovenaan de 'story river'
 Settings/LinkToBehaviour/OpenBelow: Open beneden de huidige tiddler
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigatie //van buiten// de 'story river'
+Settings/MissingLinks/Description: Sta links naar ontbrekende tiddlers toe
+Settings/MissingLinks/Hint: Kies om te linken naar nog niet bestaande tiddlers
 Settings/NavigationAddressBar/Caption: Navigatie adresbalk
 Settings/NavigationAddressBar/Hint: Gedrag van het browseradres bij navigeren naar een tiddler:
 Settings/NavigationAddressBar/No/Description: Verander het browseradres niet
@@ -92,6 +121,9 @@ Settings/NavigationHistory/Caption: Navigeer-geschiedenis
 Settings/NavigationHistory/Hint: Werk de browsergeschiedenis bij als er naar een tiddler genavigeerd wordt:
 Settings/NavigationHistory/No/Description: Werk de browsergeschiedenis niet bij
 Settings/NavigationHistory/Yes/Description: Werk de browsergeschiedenis bij 
+Settings/PerformanceInstrumentation/Caption: Prestatiemeting
+Settings/PerformanceInstrumentation/Description: Zet prestatiemeting aan
+Settings/PerformanceInstrumentation/Hint: Toont prestatiestatistieken in de 'browser console'. Dit vereist herladen van de wiki om effect te hebben
 Settings/TitleLinks/Caption: Titels van tiddlers
 Settings/TitleLinks/Hint: Toon (optioneel) tiddler titels als link 
 Settings/TitleLinks/No/Description: Toon tiddler titels niet als links
@@ -100,13 +132,19 @@ Settings/ToolbarButtons/Caption: Knoppen van knoppenbalk
 Settings/ToolbarButtons/Hint: Uiterlijk van standaard knop in knoppenbalk:
 Settings/ToolbarButtons/Icons/Description: Met pictogram (icon)
 Settings/ToolbarButtons/Text/Description: Met tekst
-StoryView/Caption: Story view
+Settings/ToolbarButtonStyle/Caption: Stijl van knoppen in knoppenbalk
+Settings/ToolbarButtonStyle/Hint: Kies de stijl voor knoppen in knoppenbalk:
+Settings/ToolbarButtonStyle/Styles/Borderless: Zonder rand
+Settings/ToolbarButtonStyle/Styles/Boxed: Vierkante rand
+Settings/ToolbarButtonStyle/Styles/Rounded: Ronde rand
+StoryView/Caption: 'Story' view
 StoryView/Prompt: Huidige view:
 Theme/Caption: Thema
 Theme/Prompt: Huidig thema:
 TiddlerFields/Caption: Tiddler velden
 TiddlerFields/Hint: Dit is de complete reeks tiddlervelden in gebruik bij deze wiki (inclusief systeemtiddlers maar exclusief schaduwtiddlers).
 Toolbars/Caption: Knoppenbalken
+Toolbars/EditorToolbar/Hint: Kies welke knoppen in de editor knoppenbalk getoond worden. Sommige knoppen worden alleen getoond bij een bepaald tiddler type
 Toolbars/EditToolbar/Caption: Knoppenbalk bij wijzigen
 Toolbars/EditToolbar/Hint: Kies welke knoppen getoond worden voor tiddlers in wijzigmode
 Toolbars/Hint: Kies welke knoppen getoond worden

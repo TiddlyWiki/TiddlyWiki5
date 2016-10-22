@@ -6,7 +6,7 @@ title: TiddlyDesktop Release 0.0.4
 type: text/vnd.tiddlywiki
 released: 20150111
 
-<a href="https://github.com/Jermolene/TiddlyDesktop/releases/tag/v0.0.4" class="tc-btn-big-green" target="_blank">
+<a href="https://github.com/Jermolene/TiddlyDesktop/releases/tag/v0.0.4" class="tc-btn-big-green" target="_blank" rel="noopener noreferrer">
 {{$:/core/images/github}} Download from ~GitHub
 </a>
 

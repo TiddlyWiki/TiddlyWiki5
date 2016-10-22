@@ -53,6 +53,10 @@ exports.startup = function() {
 		$tw.rootWidget.addEventListener("tm-browser-refresh",function(event) {
 			window.location.reload(true);
 		});
+		// Listen for the tm-print message
+		$tw.rootWidget.addEventListener("tm-print",function(event) {
+			(event.event.view || window).print();
+		});
 		// Listen for the tm-home message
 		$tw.rootWidget.addEventListener("tm-home",function(event) {
 			window.location.hash = "";

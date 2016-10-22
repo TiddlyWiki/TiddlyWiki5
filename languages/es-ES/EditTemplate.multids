@@ -1,25 +1,28 @@
 title: $:/language/EditTemplate/
 
-Body/External/Hint: Este es un tiddler externo guardado fuera del archivo TiddlyWiki principal. Se puede editar las etiquetas y campos pero no se puede editar directamente el contenido
-Body/Hint: Usar [[texto wiki (instrucciones en inglés)|http://tiddlywiki.com/static/WikiText.html]] para añadir formato, imágenes y efectos dinámicos.
-Body/Placeholder: Escribir el texto de este tiddler
-Body/Preview/Button/Hide: ocultar vista previa
-Body/Preview/Button/Show: mostrar vista previa
-Field/Remove/Caption: eliminar campo
-Field/Remove/Hint: Eliminar campo
-Fields/Add/Button: añadir
-Fields/Add/Name/Placeholder: nombre del campo
-Fields/Add/Prompt: Añadir un nuevo campo:
-Fields/Add/Value/Placeholder: valor del campo
-Shadow/OverriddenWarning: Este es un tiddler oculto modificado. Puede restituirlo a su versión por defecto borrando este tiddler
-Shadow/Warning: Este es un tiddler oculto. Cualquier cambio que haga reemplazará la versión por defecto
-Tags/Add/Button: añadir
-Tags/Add/Placeholder: nombre de etiqueta
-Tags/Dropdown/Caption: lista de etiquetas
-Tags/Dropdown/Hint: Mostrar lista de etiquetas
-Type/Delete/Caption: borrar tipo de contenido
-Type/Delete/Hint: Borrar tipo de contenido
-Type/Dropdown/Caption: lista de tipos de contenido
-Type/Dropdown/Hint: Mostrar lista de tipos de contenido
-Type/Placeholder: tipo de contenido
+Body/External/Hint: Este es un tiddler externo, es decir, guardado fuera del archivo TiddlyWiki principal <br>
+Puedes editar sus etiquetas y campos, pero no se puede editar directamente el contenido
+Body/Placeholder: Escribe el texto aquí
+Body/Preview/Type/Output: Output
+Field/Remove/Caption: Eliminar campo
+Field/Remove/Hint: Elimina el campo y su valor
+Fields/Add/Button: Añadir campo
+Fields/Add/Dropdown/System: Campos de sistema
+Fields/Add/Dropdown/User: Campos de usuario
+Fields/Add/Name/Placeholder: Nombre
+Fields/Add/Prompt: Añadir
+Fields/Add/Value/Placeholder: Valor
+Shadow/OverriddenWarning: Este es un tiddler oculto modificado<br>
+Puedes restituirlo a su versión original eliminando este tiddler
+Shadow/Warning: Este es un tiddler oculto<br>
+Cualquier cambio que hagas reemplazará la versión original
+Tags/Add/Button: Añadir
+Tags/Add/Placeholder: Nombre
+Tags/Dropdown/Caption: Etiquetas
+Tags/Dropdown/Hint: Muestra la lista de etiquetas existentes
+Type/Delete/Caption: Borrar
+Type/Delete/Hint: Borra el tipo de contenido
+Type/Dropdown/Caption: Tipos de contenido
+Type/Dropdown/Hint: Muestra la lista de tipos disponibles
+Type/Placeholder: Nuevo tipo
 Type/Prompt: Tipo:

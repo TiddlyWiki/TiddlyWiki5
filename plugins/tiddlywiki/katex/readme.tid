@@ -4,6 +4,6 @@ This is a TiddlyWiki plugin for mathematical typesetting based on [[KaTeX from K
 
 It is completely self-contained, and doesn't need an Internet connection in order to work. It works both in the browser and under Node.js.
 
-It is currently based on KaTeX version 0.4.3. See https://github.com/Khan/KaTeX/releases for details of releases.
+It is currently based on KaTeX version 0.6.0. See https://github.com/Khan/KaTeX/releases for details of releases.
 
 [[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/katex]]

@@ -39,7 +39,7 @@ TWEditSaver.prototype.save = function(text,method,callback) {
 	// Error handler
 	var errorHandler = function(event) {
 		// Error
-		callback("Error saving to TWEdit: " + event.target.error.code);
+		callback($tw.language.getString("Error/SavingToTWEdit") + ": " + event.target.error.code);
 	};
 	// Get the file system
 	window.requestFileSystem(LocalFileSystem.PERSISTENT,0,function(fileSystem) {

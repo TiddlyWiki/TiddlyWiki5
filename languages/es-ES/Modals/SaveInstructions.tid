@@ -4,19 +4,19 @@ subtitle: Save your work
 footer: <$button message="tm-close-tiddler">Close</$button>
 help: http://tiddlywiki.com/static/SavingChanges.html
 
-Sus cambios efectuados a este wiki necesitan ser guardados como un archivo ~TiddlyWiki HTML.
+Los cambios realizados a este wiki necesitan ser guardados como archivo ~TiddlyWiki HTML.
 
 !!! Navegadores de ordenador
 
-# Seleccione ''Guardar como'' en el menú ''Archivo''
-# Eliga nombre de archivo y directorio
-#* Algunos navegadores piden también que especifique el formato de archivo como ''Página web, sólo HTML'' o similar
-# Cierre esta pestaña
+# Selecciona ''Guardar como'' en el menú ''Archivo''
+# Elige nombre de archivo y directorio
+#* Algunos navegadores también piden que especifiques el formato como ''Página web, sólo HTML'' o similar
+# Cierra esta pestaña
 
 !!! Navegadores en teléfonos o tabletas
 
-# Añada la página a sus favoritos
-#* Si tiene iCloud o Google Sync los favoritos se sincronizarán automáticamente con su ordenador, desde donde puede abrirlos o guardarlos como se explica más arriba
-# Cierre esta pestaña
+# Añade la página a tus favoritos
+#* Si tienes iCloud o Google Sync los favoritos se sincronizarán automáticamente con tu ordenador, desde donde puedes abrirlos o guardarlos como se explica más arriba
+# Cierra esta pestaña
 
-//Si en Mobile Safari vuelve a abrir los favoritos, volverá a ver este mensaje. Si quiere contiuar y usar el archivo, simplemente cierre haciendo clic en el boton de cerrar indicado abajo.//
+//Si en Mobile Safari vuelves a abrir los favoritos, volverás a ver este mensaje. Si quieres continuar y usar el archivo, simplemente cierra haciendo clic en el boton de cerrar indicado abajo.//

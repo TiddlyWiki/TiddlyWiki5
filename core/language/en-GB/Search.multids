@@ -8,6 +8,7 @@ Matches: //<small><<resultCount>> matches</small>//
 Matches/All: All matches:
 Matches/Title: Title matches:
 Search: Search
+Search/TooShort: Search text too short
 Shadows/Caption: Shadows
 Shadows/Hint: Search for shadow tiddlers
 Shadows/Matches: //<small><<resultCount>> matches</small>//

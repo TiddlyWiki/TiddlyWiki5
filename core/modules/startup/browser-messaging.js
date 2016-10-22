@@ -79,7 +79,7 @@ exports.startup = function() {
 		if(url) {
 			loadIFrame(url,function(err,iframeInfo) {
 				if(err) {
-					alert("Error loading plugin library: " + url);
+					alert($tw.language.getString("Error/LoadingPluginLibrary") + ": " + url);
 				} else {
 					iframeInfo.domNode.contentWindow.postMessage({
 						verb: "GET",
@@ -121,7 +121,7 @@ exports.startup = function() {
 		if(url && title) {
 			loadIFrame(url,function(err,iframeInfo) {
 				if(err) {
-					alert("Error loading plugin library: " + url);
+					alert($tw.language.getString("Error/LoadingPluginLibrary") + ": " + url);
 				} else {
 					iframeInfo.domNode.contentWindow.postMessage({
 						verb: "GET",

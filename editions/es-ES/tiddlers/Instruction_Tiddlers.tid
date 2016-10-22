@@ -1,0 +1,58 @@
+caption: Estilo: Material didáctico
+created: 20150110101500000
+es-title: Guía de estilo para la redacción de material didáctico
+modified: 20160418141755791
+tags: [[Improving TiddlyWiki Documentation]]
+title: Instruction Tiddlers
+type: text/vnd.tiddlywiki
+
+Las <<.def "instruciones de uso">> hablan directamente al lector --presumiblemente principiante o intermedio-- y lo guían a través de determinado proceso. 
+
+Estos pueden subcategorizarse como:
+
+;BIenvenida
+* ¿Qué es ~TiddlyWiki y qué me importa?
+
+* Demostraciones de características clave y sus beneficios para el usuario
+
+* Preguntas de uso frecuente
+
+* Ejemplos reales de uso de ~TiddlyWiki
+
+* Información sobre el proyecto en sí
+
+;Tutorial
+
+* Presentación ordenada de material para novatos
+
+* Cada tiddler presenta un tema o un concepto nuevo
+
+* Su contenido principal contiene muy pocos enlaces
+
+* Una sección de información complementaria <<.word "para saber más....">> puede ofrecer enlaces relacionados al final del artículo
+
+;Ejercicio
+
+* Acompaña al tutorial
+
+* Da la solución a pedido del usuario
+
+;Guía paso-a-paso (How-to)
+
+* Lista de pasos numerados para realizar pequeñas tareas específicas
+
+* Concisa, con enlace a tiddlers de referencia cuando sea necesario y apropiado
+
+* Suele abrirlo un preámbulo para aclarar la naturaleza y objetivos de la tarea
+
+;Ejemplo
+
+* Acompaña a [[tiddlers de referencia|Reference Tiddlers]]
+
+* Puede contener explicaciones y comentarios similares
+
+* Para que la información de referencia sea lo más aséptica posible, debe mantenerse separado de esta.
+
+Las instrucciones de uso hablan al lector directamente y <<.word "de tú">> y pueden ser razonablemente informales en su tono, pero debe evitarse el uso de coloquialismos, regionalismos, referencias culturales y humorísticas, ya que pueden desconcertar o incluso ofender a lectores internacionales. 
+
+Al hablar de características y procedimientos, hay que intentar no frustrar al lector abusando de expresiones como <<.word conveniente>> o <<.word fácil>>. 

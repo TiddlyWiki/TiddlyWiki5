@@ -1,5 +1,5 @@
 created: 20140721121924384
-modified: 20140911085048371
+modified: 20160610085048371
 tags: Community
 title: Forums
 type: text/vnd.tiddlywiki
@@ -21,3 +21,7 @@ The ~TiddlyWiki discussion groups are mailing lists for talking about ~TiddlyWik
 * Get involved in the [[development on GitHub|https://github.com/Jermolene/TiddlyWiki5]]
 
 New releases of TiddlyWiki, TiddlyDesktop and TiddlyFox are announced via the discussion groups and [[Twitter|https://twitter.com/TiddlyWiki]] (you can also subscribe to an Atom/RSS feed of [[TiddlyWiki releases from GitHub|https://github.com/jermolene/tiddlywiki5/releases.atom]])
+
+! Documentation
+
+There is also a discussion group specifically for discussing TiddlyWiki documentation improvement initiatives: http://groups.google.com/group/tiddlywikidocs

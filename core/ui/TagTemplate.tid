@@ -7,18 +7,18 @@ color:$(foregroundColor)$;
 \end
 
 \define tag-body-inner(colour,fallbackTarget,colourA,colourB)
-<$set name="foregroundColor" value=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">>>
-<$set name="backgroundColor" value="""$colour$""">
+<$vars foregroundColor=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">> backgroundColor="""$colour$""">
 <$button popup=<<qualify "$:/state/popup/tag">> class="tc-btn-invisible tc-tag-label" style=<<tag-styles>>>
 <$transclude tiddler={{!!icon}}/> <$view field="title" format="text" />
 </$button>
-<$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes"><div class="tc-drop-down"><$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+<$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes" class="tc-drop-down"><$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TagDropdown]!has[draft.of]]" variable="listItem"> 
+<$transclude tiddler=<<listItem>>/> 
+</$list> 
 <hr>
 <$list filter="[all[current]tagging[]]" template="$:/core/ui/ListItemTemplate"/>
-</div>
 </$reveal>
-</$set>
-</$set>
+</$vars>
 \end
 
 \define tag-body(colour,palette)

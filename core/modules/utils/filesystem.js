@@ -160,4 +160,25 @@ exports.isDirectoryEmpty = function(dirPath) {
 	return empty;
 };
 
+/*
+Recursively delete a tree of empty directories
+*/
+exports.deleteEmptyDirs = function(dirpath,callback) {
+	var self = this;
+	fs.readdir(dirpath,function(err,files) {
+		if(err) {
+			return callback(err);
+		}
+		if(files.length > 0) {
+			return callback(null);
+		}
+		fs.rmdir(dirpath,function(err) {
+			if(err) {
+				return callback(err);
+			}
+			self.deleteEmptyDirs(path.dirname(dirpath),callback);
+		});
+	});
+};
+
 })();

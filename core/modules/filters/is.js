@@ -32,7 +32,7 @@ exports.is = function(source,operator,options) {
 	if(isFilterOperator) {
 		return isFilterOperator(source,operator.prefix,options);
 	} else {
-		return ["Filter Error: Unknown operand for the 'is' filter operator"];
+		return [$tw.language.getString("Error/IsFilterOperator")];
 	}
 };
 

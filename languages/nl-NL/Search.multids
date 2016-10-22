@@ -5,6 +5,9 @@ Filter/Caption: Filter
 Filter/Hint: Zoek via een [[filter expressie|http://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small><<resultCount>> resultaten</small>//
 Matches: //<small><<resultCount>> resultaten</small>//
+Matches/All: Alle resultaten:
+Matches/Title: Titel resultaten:
+Search: Zoek
 Shadows/Caption: Schaduwen
 Shadows/Hint: Zoek schaduwtiddlers
 Shadows/Matches: //<small><<resultCount>> resultaten</small>//
