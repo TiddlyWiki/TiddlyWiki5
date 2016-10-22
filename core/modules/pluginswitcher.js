@@ -18,12 +18,14 @@ wiki: wiki store to be used
 pluginType: type of plugin to be switched
 controllerTitle: title of tiddler used to control switching of this resource
 defaultPlugins: array of default plugins to be used if nominated plugin isn't found
+onSwitch: callback when plugin is switched (single parameter is array of plugin titles)
 */
 function PluginSwitcher(options) {
 	this.wiki = options.wiki;
 	this.pluginType = options.pluginType;
 	this.controllerTitle = options.controllerTitle;
 	this.defaultPlugins = options.defaultPlugins || [];
+	this.onSwitch = options.onSwitch;
 	// Switch to the current plugin
 	this.switchPlugins();
 	// Listen for changes to the selected plugin
@@ -64,6 +66,10 @@ PluginSwitcher.prototype.switchPlugins = function() {
 	var registeredTiddlers = $tw.wiki.registerPluginTiddlers(this.pluginType,plugins);
 	// Unpack the current theme tiddlers
 	$tw.wiki.unpackPluginTiddlers();
+	// Call the switch handler
+	if(this.onSwitch) {
+		this.onSwitch(plugins);
+	}
 };
 
 exports.PluginSwitcher = PluginSwitcher;

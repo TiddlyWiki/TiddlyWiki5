@@ -1,0 +1,14 @@
+title: $:/core/ui/EditorToolbar/list-number
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/list-number
+caption: {{$:/language/Buttons/ListNumber/Caption}}
+description: {{$:/language/Buttons/ListNumber/Hint}}
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+shortcuts: ((list-number))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="prefix-lines"
+	character="#"
+	count="1"
+/>

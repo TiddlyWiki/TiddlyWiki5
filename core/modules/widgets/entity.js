@@ -29,7 +29,8 @@ Render this widget into the DOM
 EntityWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.execute();
-	var textNode = this.document.createTextNode($tw.utils.entityDecode(this.parseTreeNode.entity));
+	var entityString = this.getAttribute("entity",this.parseTreeNode.entity || ""),
+		textNode = this.document.createTextNode($tw.utils.entityDecode(entityString));
 	parent.insertBefore(textNode,nextSibling);
 	this.domNodes.push(textNode);
 };
@@ -44,7 +45,13 @@ EntityWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 EntityWidget.prototype.refresh = function(changedTiddlers) {
-	return false;
+	var changedAttributes = this.computeAttributes();
+	if(changedAttributes.entity) {
+		this.refreshSelf();
+		return true;
+	} else {
+		return false;	
+	}
 };
 
 exports.entity = EntityWidget;

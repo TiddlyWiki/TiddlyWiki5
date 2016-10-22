@@ -1,0 +1,14 @@
+title: $:/core/ui/EditorToolbar/strikethrough
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/strikethrough
+caption: {{$:/language/Buttons/Strikethrough/Caption}}
+description: {{$:/language/Buttons/Strikethrough/Hint}}
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+shortcuts: ((strikethrough))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="~~"
+	suffix="~~"
+/>

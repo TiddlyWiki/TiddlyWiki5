@@ -1,0 +1,21 @@
+title: $:/core/ui/EditorToolbar/clear-dropdown
+
+''{{$:/language/Buttons/Clear/Hint}}''
+
+<div class="tc-colour-chooser">
+
+<$macrocall $name="colour-picker" actions="""
+
+<$action-sendmessage
+	$message="tm-edit-bitmap-operation"
+	$param="clear"
+	colour=<<colour-picker-value>>
+/>
+
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+
+"""/>
+
+</div>

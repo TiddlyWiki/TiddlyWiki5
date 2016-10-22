@@ -1,5 +1,5 @@
 created: 20130825213500000
-modified: 20150421010050619
+modified: 20160610082610879
 tags: Saving
 title: Saving on TiddlySpot
 type: text/vnd.tiddlywiki
@@ -10,8 +10,8 @@ You can upload an existing TiddlyWiki5 document from your local disc to TiddlySp
 
 # Sign up for a new wiki at http://tiddlyspot.com/, and remember the wiki name and password
 # Open your locally stored TiddlyWiki document in your browser
-# Fill in the TiddlySpot wikiname and password in the control panel
-# Click the "Save Changes" button. You should get a confirmation notification at the top right saying ''Saved wiki''. Saving can take several seconds if you're on a slow connection or working with a large wiki.
+# Fill in the TiddlySpot wikiname and password in ''Saving'' tab of the ''control panel'' {{$:/core/images/options-button}}
+# Click the {{$:/core/images/save-button}} ''save changes'' button. You should get a confirmation notification at the top right saying ''Saved wiki''. Saving can take several seconds if you're on a slow connection or working with a large wiki.
 # Navigate to your TiddlySpot URL at http://{wikiname}.tiddlyspot.com/
 
 Note that your password is sent unencrypted when using TiddlySpot. From http://faq.tiddlyspot.com/:

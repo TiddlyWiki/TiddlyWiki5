@@ -6,18 +6,13 @@ title: $:/core/ui/DefaultSearchResultList
 type: text/vnd.tiddlywiki
 
 \define searchResultList()
-<$set name="resultCount" value="""<$count filter="[!is[system]search{$(searchTiddler)$}]"/>""">
-
-{{$:/language/Search/Matches}}
-
-</$set>
-
-//<small>Correspondances parmi les titres :</small>//
+//<small>{{$:/language/Search/Matches/Title}}</small>//
 
 <$list filter="[!is[system]search:title{$(searchTiddler)$}sort[caption]limit[250]] [!is[system]search:fr-title{$(searchTiddler)$}sort[title]limit[250]][!is[system]search:en-title{$(searchTiddler)$}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
 
-//<small>Toutes les correspondances :</small>//
+//<small>{{$:/language/Search/Matches/All}}</small>//
 
 <$list filter="[!is[system]search{$(searchTiddler)$}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+
 \end
 <<searchResultList>>

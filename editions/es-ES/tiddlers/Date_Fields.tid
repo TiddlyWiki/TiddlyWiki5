@@ -1,0 +1,30 @@
+caption: Campos de fecha
+created: 20150117190213631
+es-title: Campos de fecha
+modified: 20160511055256823
+tags: Concepts
+title: Date Fields
+type: text/vnd.tiddlywiki
+
+Algunos [[campos|TiddlerFields]] de tiddler se usan para guardar fechas y horas.
+
+Los dos campos estándar son <<.field created>> y <<.field modified>>.
+
+El valor de estos campos es una cadena de 17 caracteres:
+
+* 4 dígitos para el año
+* 2 dígitos para el mes
+* 2 dígitos para el día
+* 2 dígitos para la hora
+* 2 dígitos para el minuto
+* 2 dígitos para el segundo
+* 3 dígitos para el milisegundo
+
+Para evitar cualquier problema derivado de posibles diferencias horarias, ~TiddlyWiki siempre usa horas [[UTC|https://es.wikipedia.org/wiki/Tiempo_universal_coordinado]].
+
+Como ejemplo, el campo <<.field created>> de este tiddler tiene el valor <<.value """<$view field="created"/>""">>.
+
+Las fechas pueden [[formatearse|DateFormat]] convenientemente para mostrarlas en pantalla:
+
+<$macrocall $name="wikitext-example-without-html"
+src="""<$view field="created" format="date" template="DDD DD de MMM de YYYY"/>""">

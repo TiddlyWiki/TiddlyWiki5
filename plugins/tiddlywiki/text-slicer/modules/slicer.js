@@ -12,11 +12,16 @@ Main text-slicing logic
 /*global $tw: false */
 "use strict";
 
+var DOMParser = require("$:/plugins/tiddlywiki/xmldom/dom-parser").DOMParser;
+
 var SLICER_OUTPUT_TITLE = "$:/TextSlicer";
 
-function Slicer(wiki,sourceTitle) {
+function Slicer(wiki,sourceTitle,options) {
+	options = options || {};
 	this.wiki = wiki;
 	this.sourceTitle = sourceTitle;
+	this.sourceTiddler = wiki.getTiddler(this.sourceTitle);
+	this.destTitle = options.destTitle || this.sourceTiddler.fields["doc-split-to"] || ("Sliced up " + this.sourceTitle);
 	this.iframe = null; // Reference to iframe used for HTML parsing
 	this.stopWordList = "the and a of on i".split(" ");
 	this.tiddlers = {};
@@ -104,27 +109,33 @@ Slicer.prototype.isBlank = function(s) {
 };
 
 Slicer.prototype.getSourceHtmlDocument = function(tiddler) {
-	this.iframe = document.createElement("iframe");
-	document.body.appendChild(this.iframe);
-	this.iframe.contentWindow.document.open();
-	this.iframe.contentWindow.document.write(tiddler.fields.text);
-	this.iframe.contentWindow.document.close();
-	return this.iframe.contentWindow.document;
+	if($tw.browser) {
+		this.iframe = document.createElement("iframe");
+		document.body.appendChild(this.iframe);
+		this.iframe.contentWindow.document.open();
+		this.iframe.contentWindow.document.write(tiddler.fields.text);
+		this.iframe.contentWindow.document.close();
+		return this.iframe.contentWindow.document;
+	} else {
+		return new DOMParser().parseFromString(tiddler.fields.text);
+	}
 };
 
 Slicer.prototype.getSourceWikiDocument = function(tiddler) {
-	var widgetNode = this.wiki.makeTranscludeWidget(this.sourceTitle,{document: $tw.fakeDocument, parseAsInline: false}),
+	var widgetNode = this.wiki.makeTranscludeWidget(this.sourceTitle,{
+			document: $tw.fakeDocument,
+			parseAsInline: false,
+			importPageMacros: true}),
 		container = $tw.fakeDocument.createElement("div");
 	widgetNode.render(container,null);
 	return container;
 };
 
 Slicer.prototype.getSourceDocument = function() {
-	var tiddler = $tw.wiki.getTiddler(this.sourceTitle);
-	if(tiddler.fields.type === "text/html") {
-		return this.getSourceHtmlDocument(tiddler);
+	if(this.sourceTiddler.fields.type === "text/html") {
+		return this.getSourceHtmlDocument(this.sourceTiddler);
 	} else {
-		return this.getSourceWikiDocument(tiddler);
+		return this.getSourceWikiDocument(this.sourceTiddler);
 	}
 };
 
@@ -192,17 +203,21 @@ Slicer.prototype.processNode = function(domNode) {
 };
 
 // Slice a tiddler into individual tiddlers
-Slicer.prototype.sliceTiddler = function(title) {
-	this.sliceTitle = "Sliced up " + title;
+Slicer.prototype.sliceTiddler = function() {
+	var sliceTitle,sliceTiddler = {};
+	if(this.sourceTiddler) {
+		sliceTiddler = $tw.utils.extend({},this.sourceTiddler.fields);
+	}
+	sliceTiddler.title = this.destTitle;
+	sliceTiddler.text =  "Document sliced at " + (new Date());
+	sliceTiddler.type = "text/vnd.tiddlywiki";
+	sliceTiddler.tags = [];
+	sliceTiddler.list = [];
+	sliceTiddler["toc-type"] = "document";
 	var domNode = this.getSourceDocument();
-	this.parentStack.push({type: "h0", title: this.addTiddler({
-		title: this.sliceTitle,
-		text: "Document sliced at " + (new Date()),
-		list: [],
-		"toc-type": "document"
-	})});
-	this.currentTiddler = title;
-	this.containerStack.push(this.sliceTitle);
+	this.parentStack.push({type: "h0", title: this.addTiddler(sliceTiddler)});
+	this.currentTiddler = sliceTiddler.title;
+	this.containerStack.push(sliceTiddler.title);
 	this.processNodeList(domNode.childNodes);
 	this.containerStack.pop();
 };

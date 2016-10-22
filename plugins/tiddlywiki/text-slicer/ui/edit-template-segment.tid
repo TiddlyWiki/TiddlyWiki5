@@ -1,0 +1,35 @@
+title: $:/plugins/tiddlywiki/text-slicer/ui/edit-template-segment
+tags: $:/tags/EditTemplate
+
+\define edit-field(name,tag:"input")
+$name$:
+
+<$edit-text field="""$name$""" tag="$tag$" class="tc-edit-texteditor"/>
+\end
+
+<$reveal type="nomatch" state="!!toc-type" text="">
+
+<div class="tc-edit-template-document-tiddler-wrapper">
+
+<div class="tc-edit-template-document-tiddler-heading">
+
+<div class="tc-edit-template-document-tiddler-heading-icon">
+
+{{$:/core/images/file}}
+
+</div>
+
+<div class="tc-edit-template-document-tiddler-subheading">
+
+<$view field="toc-type"/>
+
+</div>
+
+<<edit-field "list" tag:"textarea">>
+
+</div>
+
+</div>
+
+</$reveal>
+

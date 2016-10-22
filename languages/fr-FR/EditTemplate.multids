@@ -1,10 +1,7 @@
 title: $:/language/EditTemplate/
 
 Body/External/Hint: Ceci est un tiddler externe, conservé en dehors du fichier TiddlyWiki principal. Vous pouvez éditer les tags et les champs mais pas directement le contenu lui-même
-Body/Hint: Utilisez [[WikiText|http://tiddlywiki.com/static/WikiText.html]] pour formater ou ajouter des images et des fonctions dynamiques
 Body/Placeholder: Entrez le texte ici
-Body/Preview/Button/Hide: Cacher la prévisualisation
-Body/Preview/Button/Show: Afficher la prévisualisation
 Field/Remove/Caption: supprimer le champ
 Field/Remove/Hint: Supprime le champ
 Fields/Add/Button: ajouter
@@ -19,6 +16,7 @@ Tags/Add/Button: ajouter
 Tags/Add/Placeholder: nom du tag
 Tags/Dropdown/Caption: liste des tags
 Tags/Dropdown/Hint: Montre la liste des tags
+Title/BadCharacterWarning: Attention : il est préférable d'éviter l'usage des caractères <<bad-chars>> dans les titres de tiddlers
 Type/Dropdown/Caption: liste des types de contenu
 Type/Dropdown/Hint: Montre la liste des types de contenu
 Type/Delete/Caption: supprimer le type de contenu

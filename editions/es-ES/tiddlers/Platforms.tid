@@ -1,0 +1,11 @@
+caption: Plataformas
+created: 20150412185300152
+es-title: Plataformas
+modified: 20160506042722156
+tags: TableOfContents
+title: Platforms
+type: text/vnd.tiddlywiki
+
+TiddlyWiki puede usarse en varias plataformas:
+
+<<list-links "[tag[Platforms]]">>

@@ -178,6 +178,15 @@ Tiddlers representing images have the following fields:
 * ''title'': an automatically generated unique title
 * ''type'': appropriate content type for the image (eg "image/jpeg")
 
+!!! Notes
+
+Notes are available during editing but hidden for static renderings. The slicing mechanism does not generate notes; they can only be subsequently added manually. Tiddlers representing notes have the following fields:
+
+* ''toc-type'': the text "note"
+* ''title'': an automatically generated unique title
+* ''text'': the text of the note
+* ''tags'': any CSS classes found in the HTML are converted into tags
+
 ! Document Metadata, Tags and Classes
 
 [TBD]

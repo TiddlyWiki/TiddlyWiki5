@@ -262,3 +262,39 @@ Santiago Pelufo, @spelufo, 2015/12/18
 Matthew Lauber, @mklauber, 2015/11/13
 
 Matthew DeAbreu, @mdeabreu, 2016/01/05
+
+Cameron Fischer, @flibbles, 2016/01/08
+
+Jim, @ARRRRGH, 2016/01/11
+
+Koke Laast, @Koke24, 2016/01/27
+
+Thomas Elmiger, @telmiger, 2016/02/02
+
+Richard Rath @rcrath 2016/02/12
+
+Eric Drechsel @edrex 2016/02/15
+
+Tomasz Pijanowski @zakrec 2016/02/21
+
+@FND 2016/02/27
+
+Cengizhan Kurt, @webninjasi, 2016/03/03
+
+Knut Franke, @nome, 2016/03/20
+
+Pau Deluca, @PauDeLuca, 2016/04/11
+
+Brent Maxwell, @brentmaxwell, 2016/05/20
+
+Thomas Herlea, @maxthomax, 2016/06/09
+
+Segey Shishkin, @serj_aleks, 2016/07/28
+
+Przemek Wesołek, @jest, 2016/08/05
+
+Doron Tzur, @DoronTzur 2016/08/16
+
+Hans Christian Haase, @hchaase, 2016/08/11
+
+steve schneider, @stevesunypoly, 2016/08/26

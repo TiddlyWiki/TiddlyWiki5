@@ -61,7 +61,7 @@ exports.parse = function() {
 		reEnd = /(\r?\n\\end[^\S\n\r]*(?:$|\r?\n))/mg;
 	} else {
 		// Otherwise, the end of the definition is marked by the end of the line
-		reEnd = /(\r?\n)/mg;
+		reEnd = /($|\r?\n)/mg;
 		// Move past any whitespace
 		this.parser.pos = $tw.utils.skipWhiteSpace(this.parser.source,this.parser.pos);
 	}

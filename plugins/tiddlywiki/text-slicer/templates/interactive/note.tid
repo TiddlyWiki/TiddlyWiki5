@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/note
+
+\define body()
+<div class="tc-slice-note">
+
+<$link tag="div" class="tc-document-tiddler-link tc-document-tiddler">
+
+<$list filter="""[all[current]] $(tv-exclude-filter)$ +[limit[1]]""" variable="item">
+
+<$transclude/>
+
+</$list>
+
+</$link>
+
+</div>
+\end
+
+<<body>>

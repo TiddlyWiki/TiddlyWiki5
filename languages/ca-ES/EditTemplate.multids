@@ -1,10 +1,7 @@
 title: $:/language/EditTemplate/
 
 Body/External/Hint: Aquest és un tiddler extern desat fora del fitxer del TiddlyWiki principal. Podeu editar les etiquetes i camps però no podeu editar directament el seu contingut
-Body/Hint: Useu el [[text wiki|http://tiddlywiki.com/static/WikiText.html]] per afegir format, imagtes, i característiques dinàmiques
 Body/Placeholder: Escribiu el text per aquest tiddler
-Body/Preview/Button/Hide: amaga la previsualització
-Body/Preview/Button/Show: mostra la previsualització
 Field/Remove/Caption: suprimeix el camp
 Field/Remove/Hint: Suprimeix el camp
 Fields/Add/Button: afegeix

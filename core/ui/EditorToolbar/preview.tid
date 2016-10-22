@@ -1,0 +1,18 @@
+title: $:/core/ui/EditorToolbar/preview
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/preview-open
+custom-icon: yes
+caption: {{$:/language/Buttons/Preview/Caption}}
+description: {{$:/language/Buttons/Preview/Hint}}
+condition: [<targetTiddler>]
+button-classes: tc-text-editor-toolbar-item-start-group
+shortcuts: ((preview))
+
+<$reveal state="$:/state/showeditpreview" type="match" text="yes" tag="span">
+{{$:/core/images/preview-open}}
+<$action-setfield $tiddler="$:/state/showeditpreview" $value="no"/>
+</$reveal>
+<$reveal state="$:/state/showeditpreview" type="nomatch" text="yes" tag="span">
+{{$:/core/images/preview-closed}}
+<$action-setfield $tiddler="$:/state/showeditpreview" $value="yes"/>
+</$reveal>

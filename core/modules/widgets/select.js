@@ -51,6 +51,7 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 Handle a change event
 */
 SelectWidget.prototype.handleChangeEvent = function(event) {
+	// Get the new value and assign it to the tiddler
 	if(this.selectMultiple == false) {
 		var value = this.getSelectDomNode().value;
 	} else {
@@ -58,6 +59,10 @@ SelectWidget.prototype.handleChangeEvent = function(event) {
 				value = $tw.utils.stringifyList(value);
 	}
 	this.wiki.setText(this.selectTitle,this.selectField,this.selectIndex,value);
+	// Trigger actions
+	if(this.selectActions) {
+		this.invokeActionString(this.selectActions,this,event);
+	}
 };
 
 /*
@@ -132,6 +137,7 @@ Compute the internal state of the widget
 */
 SelectWidget.prototype.execute = function() {
 	// Get our parameters
+	this.selectActions = this.getAttribute("actions");
 	this.selectTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.selectField = this.getAttribute("field","text");
 	this.selectIndex = this.getAttribute("index");

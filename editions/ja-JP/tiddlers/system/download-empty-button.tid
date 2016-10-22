@@ -1,0 +1,6 @@
+title: $:/editions/ja-JP/snippets/download-empty-button
+
+<$button class="tc-btn-big-green">
+<$action-sendmessage $message="tm-download-file" $param="$:/editions/ja-JP/download-empty" filename="empty_ja.html"/>
+空のウィキをダウンロードする {{$:/core/images/save-button}}
+</$button>

@@ -31,7 +31,7 @@ tags: $:/tags/Macro
 \end
 
 \define toc-linked-expandable-body(tag,sort:"",itemClassFilter)
-<$set name="toc-state" value=<<qualify "$:/state/toc/$tag$-$(currentTiddler)$">>>
+<$set name="toc-state" value=<<qualify """$:/state/toc/$tag$-$(currentTiddler)$""">>>
 <$set name="toc-item-class" filter="""$itemClassFilter$""" value="toc-item-selected" emptyValue="toc-item">
 <li class=<<toc-item-class>>>
 <$link>
@@ -56,7 +56,7 @@ tags: $:/tags/Macro
 \end
 
 \define toc-unlinked-expandable-body(tag,sort:"",itemClassFilter)
-<$set name="toc-state" value=<<qualify "$:/state/toc/$tag$-$(currentTiddler)$">>>
+<$set name="toc-state" value=<<qualify """$:/state/toc/$tag$-$(currentTiddler)$""">>>
 <$set name="toc-item-class" filter="""$itemClassFilter$""" value="toc-item-selected" emptyValue="toc-item">
 <li class=<<toc-item-class>>>
 <$reveal type="nomatch" state=<<toc-state>> text="open">
@@ -79,18 +79,24 @@ tags: $:/tags/Macro
 </$set>
 \end
 
+\define toc-expandable-empty-message()
+<<toc-linked-expandable-body tag:"""$(tag)$""" sort:"""$(sort)$""" itemClassFilter:"""$(itemClassFilter)$""">>
+\end
+
 \define toc-expandable(tag,sort:"",itemClassFilter)
+<$vars tag="""$tag$""" sort="""$sort$""" itemClassFilter="""$itemClassFilter$""">
 <ol class="tc-toc toc-expandable">
 <$list filter="[all[shadows+tiddlers]tag[$tag$]!has[draft.of]$sort$]">
-<$list filter="[all[current]toc-link[no]]" emptyMessage="<<toc-linked-expandable-body tag:'$tag$' sort:'$sort$' itemClassFilter:'$itemClassFilter$'>>">
+<$list filter="[all[current]toc-link[no]]" emptyMessage=<<toc-expandable-empty-message>>>
 <<toc-unlinked-expandable-body tag:"""$tag$""" sort:"""$sort$""" itemClassFilter:"""itemClassFilter""">>
 </$list>
 </$list>
 </ol>
+</$vars>
 \end
 
 \define toc-linked-selective-expandable-body(tag,sort:"",itemClassFilter)
-<$set name="toc-state" value=<<qualify "$:/state/toc/$tag$-$(currentTiddler)$">>>
+<$set name="toc-state" value=<<qualify """$:/state/toc/$tag$-$(currentTiddler)$""">>>
 <$set name="toc-item-class" filter="""$itemClassFilter$""" value="toc-item-selected" emptyValue="toc-item">
 <li class=<<toc-item-class>>>
 <$link>
@@ -117,7 +123,7 @@ tags: $:/tags/Macro
 \end
 
 \define toc-unlinked-selective-expandable-body(tag,sort:"",itemClassFilter)
-<$set name="toc-state" value=<<qualify "$:/state/toc/$tag$-$(currentTiddler)$">>>
+<$set name="toc-state" value=<<qualify """$:/state/toc/$tag$-$(currentTiddler)$""">>>
 <$set name="toc-item-class" filter="""$itemClassFilter$""" value="toc-item-selected" emptyValue="toc-item">
 <li class=<<toc-item-class>>>
 <$list filter="[all[current]tagging[]limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button> <$view field='caption'><$view field='title'/></$view>">
@@ -142,14 +148,20 @@ tags: $:/tags/Macro
 </$set>
 \end
 
+\define toc-selective-expandable-empty-message()
+<<toc-linked-selective-expandable-body tag:"""$(tag)$""" sort:"""$(sort)$""" itemClassFilter:"""$(itemClassFilter)$""">>
+\end
+
 \define toc-selective-expandable(tag,sort:"",itemClassFilter)
+<$vars tag="""$tag$""" sort="""$sort$""" itemClassFilter="""$itemClassFilter$""">
 <ol class="tc-toc toc-selective-expandable">
 <$list filter="[all[shadows+tiddlers]tag[$tag$]!has[draft.of]$sort$]">
-<$list filter="[all[current]toc-link[no]]" variable="ignore" emptyMessage="<<toc-linked-selective-expandable-body tag:'$tag$' sort:'$sort$' itemClassFilter:'$itemClassFilter$'>>">
+<$list filter="[all[current]toc-link[no]]" variable="ignore" emptyMessage=<<toc-selective-expandable-empty-message>>>
 <<toc-unlinked-selective-expandable-body tag:"""$tag$""" sort:"""$sort$""" itemClassFilter:"""$itemClassFilter$""">>
 </$list>
 </$list>
 </ol>
+</$vars>
 \end
 
 \define toc-tabbed-selected-item-filter(selectedTiddler)

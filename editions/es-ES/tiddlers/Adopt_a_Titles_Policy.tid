@@ -1,0 +1,15 @@
+caption: Políticas de estilo
+created: 20130825103300000
+es-title: Define políticas de estilo
+modified: 20160418091257866
+tags: Learning
+title: Adopt a Titles Policy
+type: text/vnd.tiddlywiki
+
+Mantener la coherencia entre títulos de tiddler puede volverse más y más difícil a medida la estructura de tu TiddlyWiki se vuelve más y más compleja. Por ejemplo: ¿Hay que referirse a términos en plural o en singular? ¿En ~CamelCase o separando palabras? ¿Con mayúscula sólo al principio o Con Mayúscula En Cada Palabra? ¿Traducimos los términos en inglés o los incorporamos a nuestra terminología?
+
+Redactar formalmente una política de estilos puede ser de gran ayuda para reducir toda posible confusión. Por ejemplo, la [[Guía de estilo|Documentation Style Guide]] de este TiddlyWiki.
+
+!! Tiddlers de sistema
+
+Una convención que te resultará útil es la de usar el prefijo `$:/_`para todo nuevo tiddler de sistema que crees, porque así te aseguras de que aparezca al principio de las listas, por ejemplo, la lista de tiddlers de sistema de la barra lateral en la pestaña Más/Sistema.

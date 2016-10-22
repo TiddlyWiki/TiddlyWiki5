@@ -1,10 +1,10 @@
 title: $:/language/Help/help
 description: Muestra texto de ayuda para comandos de TiddlyWiki
 
-Muestra texto de ayuda para un comando:
+Muestra ayuda para un comando:
 
 ```
 --help [<command>]
 ```
 
-Si el nombre del comando es omitido entonces una lista de comandos es mostrada.
+Si se omite el comando, se muestra una lista de comandos disponibles

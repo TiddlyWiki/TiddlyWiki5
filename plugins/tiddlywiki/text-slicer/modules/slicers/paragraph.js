@@ -19,7 +19,7 @@ exports.processParagraphNode = function(domNode,tagName) {
 			var parentTitle = this.parentStack[this.parentStack.length - 1].title,
 				tags = [],
 				title = this.makeUniqueTitle("paragraph",text);
-			if(domNode.className.trim() !== "") {
+			if(domNode.className && domNode.className && domNode.className.trim() !== "") {
 				tags = tags.concat(domNode.className.split(" "));
 			}
 			this.addToList(parentTitle,this.addTiddler({
