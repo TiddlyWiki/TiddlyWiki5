@@ -96,9 +96,24 @@ Syncer.prototype.readTiddlerInfo = function() {
 		self.tiddlerInfo[title] = {
 			revision: tiddler.fields.revision,
 			adaptorInfo: self.syncadaptor && self.syncadaptor.getTiddlerInfo(tiddler),
-			changeCount: self.wiki.getChangeCount(title)
+			changeCount: self.wiki.getChangeCount(title),
+			hasBeenLazyLoaded: false
 		};
 	});
+};
+
+/*
+Create an tiddlerInfo structure if it doesn't already exist
+*/
+Syncer.prototype.createTiddlerInfo = function(title) {
+	if(!$tw.utils.hop(this.tiddlerInfo,title)) {
+		this.tiddlerInfo[title] = {
+			revision: null,
+			adaptorInfo: {},
+			changeCount: -1,
+			hasBeenLazyLoaded: false
+		};
+	}
 };
 
 /*
@@ -120,7 +135,7 @@ Syncer.prototype.updateDirtyStatus = function() {
 /*
 Save an incoming tiddler in the store, and updates the associated tiddlerInfo
 */
-Syncer.prototype.storeTiddler = function(tiddlerFields) {
+Syncer.prototype.storeTiddler = function(tiddlerFields,hasBeenLazyLoaded) {
 	// Save the tiddler
 	var tiddler = new $tw.Tiddler(this.wiki.getTiddler(tiddlerFields.title),tiddlerFields);
 	this.wiki.addTiddler(tiddler);
@@ -128,7 +143,8 @@ Syncer.prototype.storeTiddler = function(tiddlerFields) {
 	this.tiddlerInfo[tiddlerFields.title] = {
 		revision: tiddlerFields.revision,
 		adaptorInfo: this.syncadaptor.getTiddlerInfo(tiddler),
-		changeCount: this.wiki.getChangeCount(tiddlerFields.title)
+		changeCount: this.wiki.getChangeCount(tiddlerFields.title),
+		hasBeenLazyLoaded: hasBeenLazyLoaded !== undefined ? hasBeenLazyLoaded : true
 	};
 };
 
@@ -180,7 +196,7 @@ Syncer.prototype.syncFromServer = function() {
 			},self.pollTimerInterval);
 			// Check for errors
 			if(err) {
-				self.logger.alert("Error retrieving skinny tiddler list:",err);
+				self.logger.alert($tw.language.getString("Error/RetrievingSkinny") + ":",err);
 				return;
 			}
 			// Process each incoming tiddler
@@ -202,7 +218,7 @@ Syncer.prototype.syncFromServer = function() {
 						});
 					} else {
 						// Load the skinny version of the tiddler
-						self.storeTiddler(tiddlerFields);
+						self.storeTiddler(tiddlerFields,false);
 					}
 				}
 			}
@@ -238,11 +254,17 @@ Syncer.prototype.syncToServer = function(changes) {
 Lazily load a skinny tiddler if we can
 */
 Syncer.prototype.handleLazyLoadEvent = function(title) {
-	// Queue up a sync task to load this tiddler
-	this.enqueueSyncTask({
-		type: "load",
-		title: title
-	});
+	// Don't lazy load the same tiddler twice
+	var info = this.tiddlerInfo[title];
+	if(!info || !info.hasBeenLazyLoaded) {
+		this.createTiddlerInfo(title);
+		this.tiddlerInfo[title].hasBeenLazyLoaded = true;
+		// Queue up a sync task to load this tiddler
+		this.enqueueSyncTask({
+			type: "load",
+			title: title
+		});		
+	}
 };
 
 /*
@@ -253,7 +275,7 @@ Syncer.prototype.handleLoginEvent = function() {
 	this.getStatus(function(err,isLoggedIn,username) {
 		if(!isLoggedIn) {
 			$tw.passwordPrompt.createPrompt({
-				serviceName: "Login to TiddlySpace",
+				serviceName: $tw.language.getString("LoginToTiddlySpace"),
 				callback: function(data) {
 					self.login(data.username,data.password,function(err,isLoggedIn) {
 						self.syncFromServer();
@@ -324,13 +346,7 @@ Syncer.prototype.enqueueSyncTask = function(task) {
 	task.queueTime = now;
 	task.lastModificationTime = now;
 	// Fill in some tiddlerInfo if the tiddler is one we haven't seen before
-	if(!$tw.utils.hop(this.tiddlerInfo,task.title)) {
-		this.tiddlerInfo[task.title] = {
-			revision: null,
-			adaptorInfo: {},
-			changeCount: -1
-		};
-	}
+	this.createTiddlerInfo(task.title);
 	// Bail if this is a save and the tiddler is already at the changeCount that the server has
 	if(task.type === "save" && this.wiki.getChangeCount(task.title) <= this.tiddlerInfo[task.title].changeCount) {
 		return;
@@ -387,8 +403,8 @@ Process the task queue, performing the next task if appropriate
 */
 Syncer.prototype.processTaskQueue = function() {
 	var self = this;
-	// Only process a task if we're not already performing a task. If we are already performing a task then we'll dispatch the next one when it completes
-	if(this.numTasksInProgress() === 0) {
+	// Only process a task if the sync adaptor is fully initialised and we're not already performing a task. If we are already performing a task then we'll dispatch the next one when it completes
+	if((!this.syncadaptor.isReady || this.syncadaptor.isReady()) && this.numTasksInProgress() === 0) {
 		// Choose the next task to perform
 		var task = this.chooseNextTask();
 		// Perform the task if we had one
@@ -483,7 +499,7 @@ Syncer.prototype.dispatchTask = function(task,callback) {
 			}
 			// Store the tiddler
 			if(tiddlerFields) {
-				self.storeTiddler(tiddlerFields);
+				self.storeTiddler(tiddlerFields,true);
 			}
 			// Invoke the callback
 			callback(null);

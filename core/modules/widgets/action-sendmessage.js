@@ -78,7 +78,8 @@ SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 		param: param,
 		paramObject: paramObject,
 		tiddlerTitle: this.getVariable("currentTiddler"),
-		navigateFromTitle: this.getVariable("storyTiddler")
+		navigateFromTitle: this.getVariable("storyTiddler"),
+		event: event
 	});
 	return true; // Action was invoked
 };

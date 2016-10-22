@@ -1,0 +1,25 @@
+created: 20161015121708376
+modified: 20161015121709477
+tags: PluginMechanism
+title: Plugin Information Tiddlers
+type: text/vnd.tiddlywiki
+
+! Information Tiddlers for Plugins
+
+Plugin authors are encouraged to provide special information and documentation tiddlers that TiddlyWiki can include as plugin information tabs in the [[control panel|$:/ControlPanel]].
+
+Plugins should provide an icon contained in a tiddler with the title formed of `<plugin-name>/icon` (for example, [[$:/core/icon]]).
+
+Plugins expose the names of the individual information tabs that they wish to display in the `list` field of the plugin tiddler. By convention, some or all of the following should be provided:
+
+* ''readme'': basic information about the plugin
+* ''license'': the license under which the plugin is published
+
+The title of the associated information tiddler must be formed as follows:
+
+# `$:/<plugin-name>/<current-language>/<tab-name>` (for example, ''$:/core/en-GB/readme'')
+# `$:/<plugin-name>/<tab-name>` (for example, ''$:/core/readme'')
+
+Thus, plugins can provide language-specific versions of each information tiddler.
+
+Note that information tiddlers should not reference other tiddlers within the plugin. This is because plugins containing themes or languages are dynamically switched in and out as they are selected, and so their information tiddlers may not be available for viewing. The control panel uses the 'subtiddler' attribute of the TranscludeWidget to access these tiddlers, which works independently of the plugin switching mechanism.

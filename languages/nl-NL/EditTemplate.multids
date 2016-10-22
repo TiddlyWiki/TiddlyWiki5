@@ -1,10 +1,7 @@
 title: $:/language/EditTemplate/
 
 Body/External/Hint: Dit is een externe tiddler die niet in de TiddlyWiki opgeslagen is. Je kan labels en velden wijzigen maar de tekst zelf niet.
-Body/Hint: Gebruik [[wiki text|http://tiddlywiki.com/static/WikiText.html]] om het formaat aan te passen en plaatjes e.d. toe te voegen
 Body/Placeholder: Typ de tekst voor deze tiddler
-Body/Preview/Button/Hide: verberg voorbeeld
-Body/Preview/Button/Show: toon voorbeeld
 Field/Remove/Caption: verwijder veld
 Field/Remove/Hint: Verwijder veld
 Fields/Add/Button: +

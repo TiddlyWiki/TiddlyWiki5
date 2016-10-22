@@ -1,0 +1,29 @@
+caption: Librería oficial de plugins
+created: 20160107222352710
+es-title: Cómo instalar plugins desde la librería oficial
+modified: 20160504155725022
+tags: Plugins
+title: Installing a plugin from the plugin library
+type: text/vnd.tiddlywiki
+
+# Sólo [[por si acaso|The First Rule of Using TiddlyWiki]], haz copia de seguridad de tu archivo HTML de ~TiddlyWiki
+
+# Abre ~TiddlyWiki en el navegador
+
+# Abre la pestaña <<.controlpanel-tab Plugins>> del [[Panel de control|$:/ControlPanel]]
+
+# Pincha en el botón <<.word "Obtén complementos y extensiones">> para abrir la librería oficial
+
+# Cuando se haya cargado la librería:
+
+## Selecciona la pestaña adecuada al tipo de plugin que buscas
+
+## Desplázate o usa el cuadro para encontrar lo que buscas
+
+# Pincha el botón <<.word "instalar>>
+
+# Guarda los cambios con el botón <<.button save-wiki>>
+
+# Recarga la página
+
+# El plugin está instalado y listo para su uso

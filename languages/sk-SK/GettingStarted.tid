@@ -1,16 +1,17 @@
 title: GettingStarted
 
-Vitajte v TiddlyWiki a v TiddlyWiki komunite
+\define lingo-base() $:/language/ControlPanel/Basics/
+Vitajte v ~TiddlyWiki a v ~TiddlyWiki komunite
 
-Skôr ako začnete TiddlyWiki  plniť dôležitými informáciami, uistite sa, že jeho obsah dokážete uložiť. Viď podrobnosti na  http://tiddlywiki.com/#GettingStarted
+Skôr ako začnete ~TiddlyWiki  plniť dôležitými informáciami, uistite sa, že jeho obsah dokážete uložiť. Viď podrobnosti na  http://tiddlywiki.com/#GettingStarted
 
-!! Nakonfigurujte si tento TiddlyWiki
+!! Nakonfigurujte si tento ~TiddlyWiki
 
-| | |
-| | |
-| | HelloThere
-[[$:/Translators]]
-[[$:/plugins/tiddlywiki/translators/readme]]
- |
+<div class="tc-control-panel">
 
-Pre viac možností vyskúšajte control panel.
+|<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+|<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+</div>
+
+Pre viac možností vyskúšajte [[control panel|$:/ControlPanel]].

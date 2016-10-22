@@ -1,9 +1,9 @@
+caption: Linking
 created: 20131205155230596
-modified: 20130706185813974
+modified: 20160607095245257
 tags: WikiText
 title: Linking in WikiText
 type: text/vnd.tiddlywiki
-caption: Linking
 
 A key capability of WikiText is the ability to make links to other tiddlers or to external websites.
 
@@ -20,6 +20,8 @@ To link to a tiddler and specify the text of the link:
 ```
 [[Displayed Link Title|Tiddler Title]]
 ```
+
+You can also create a link from the editor toolbar. Click ''link'' ({{$:/core/images/link}}), and search and select a tiddler.
 
 ! ~CamelCase Links
 
@@ -42,7 +44,7 @@ http://tiddlywiki.com/
 [[Mail me|mailto:me@where.net]]
 ```
 
-For this syntax to work, the URL has to be recognisable as a URL.  Otherwise, it is treated as a tiddler title.  As a result, in case you want to link to a resource locatable using a relative path, use the extended syntax:
+For this syntax to work, the URL has to be recognisable as a URL. Otherwise, it is treated as a tiddler title. As a result, in case you want to link to a resource locatable using a relative path, use the extended syntax:
 
 ```
 [ext[Open file|index.html]]

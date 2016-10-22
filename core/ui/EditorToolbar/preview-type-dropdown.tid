@@ -1,0 +1,33 @@
+title: $:/core/ui/EditorToolbar/preview-type-dropdown
+
+\define preview-type-button()
+<$button tag="a">
+
+<$action-setfield $tiddler="$:/state/editpreviewtype" $value="$(previewType)$"/>
+
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+
+<$transclude tiddler=<<previewType>> field="caption" mode="inline">
+
+<$view tiddler=<<previewType>> field="title" mode="inline"/>
+
+</$transclude> 
+
+<$reveal tag="span" state="$:/state/editpreviewtype" type="match" text=<<previewType>> default="$:/core/ui/EditTemplate/body/preview/output">
+
+<$entity entity="&nbsp;"/>
+
+<$entity entity="&#x2713;"/>
+
+</$reveal>
+
+</$button>
+\end
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditPreview]!has[draft.of]]" variable="previewType">
+
+<<preview-type-button>>
+
+</$list>

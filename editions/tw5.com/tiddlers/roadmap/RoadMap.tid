@@ -1,22 +1,17 @@
 created: 20130823203800000
-modified: 20140916132209824
+modified: 20160418123722695
 tags: About
 title: RoadMap
 type: text/vnd.tiddlywiki
 
-Even though TiddlyWiki is now out of beta, there are still many improvements planned for the coming months:
+There are still some areas of TiddlyWiki that have not been fully developed beyond the experimental stage:
 
-* Fixing hangovers from TiddlyWikiClassic
-* ~TiddlyWiki file format (to avoid illegal attribute names)
-* Aliases (alternative titles for tiddlers)
-* Search and replace
-* Tiddler renaming
-* Rich link tooltips, incorporating a preview
-* More keyboard shortcuts
-* Keyboard snippet expansion in the text editor
-* List editor with drag and drop
-* Selective/weighted searching by title, body and fields
-* Maths notation
+* Multiple users with the client-server configuration
+* Smartphone user experience
+* New tiddler manager, including bulk operations like search and replace
+* Federation that can run in the browser or under Node.js
+* Improved editions
+* Improved support for third party plugin libraries
 
 Also see the issues list on GitHub: https://github.com/Jermolene/TiddlyWiki5
 

@@ -67,7 +67,7 @@ DeleteFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 				removeFields[name] = undefined;
 			}
 		});
-		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getModificationFields(),tiddler,removeFields,this.wiki.getCreationFields()));
+		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,removeFields,this.wiki.getModificationFields()));
 	}
 	return true; // Action was invoked
 };

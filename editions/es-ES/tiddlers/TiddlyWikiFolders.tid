@@ -1,0 +1,138 @@
+caption: WikiFolders
+created: 20130825214200000
+es-title: WikiFolders
+modified: 20160506092009086
+tags: [[TiddlyWiki on Node.js]]
+title: TiddlyWikiFolders
+type: text/vnd.tiddlywiki
+
+[[Node.js|TiddlyWiki on Node.js]] soporta, además de wikis de archivo único, wikis estructurados en carpetas que llamamos <<.def ~WikiFolders>>. Dichas carpetas contienen, lógicamente, tiddlers y las distinguimos según el tipo de tiddlers que contengan.
+
+! ~WikiFolders y archivos
+
+Los ~WikiFolders contienen los siguientes archivos y carpetas:
+
+* <<.tid tiddlywiki.info>> - Archivo .JSON que contiene metadatos necesarios para construir el wiki
+
+* <<.place \tiddlers>> - Carpeta que contiene los tiddlers que forman parte del contenido del wiki
+
+* <<.place \plugins>> - Carpeta que contiene los diferentes [[plugins folders|PluginMechanism]] que se incluyen en el wiki
+
+Sólo el archivo <<.em tiddlywiki.info>> es obligatoriamente necesario. Todas las demás carpetas son opcionales. 
+
+!! Contenido del archivo <<.em tiddlywiki.info>>
+
+Este archivo contiene un objeto JSON que consta de los siguientes campos:
+
+* <<.field plugins>> - nombres de los plugins que se incluyen en el wiki
+
+* <<.field themes>> - nombres de los temas que se incluyen en el wiki
+
+* <<.field languages>> - nombres de los idiomas que se incluyen en el wiki
+
+* <<.field includeWikis>> - referencias a carpetas externas que se incluyen en el wiki
+
+* <<.field build>> - hashmap de targets de compilación, definidos como símbolos de comandos. (ver BuildCommand para más información)
+
+* <<.field config>> - hashmap opcional de opciones de configuración
+
+!!! <<.def includeWikis>>
+
+Los valores de <<.field includeWikis>> pueden ser bien una cadena con la ruta relativa al wiki, o un objeto con los siguientes campos:
+
+* <<.field path>> - ruta relativa al ~WikiFolder
+
+* <<.field read-only>> - con el valor <<.em true>>, previene la modificación de los tiddlers del wiki que se incluye. Toda modificación que se haga en estos se guardará en el directorio definido como  <<.em default-tiddler-location>>, que se describe más abajo
+
+!!! <<.def build>>
+
+Los tiddlers objeto de este comando cuyo origen no se defina en el archivo <<.em tiddlywiki.info>> se combinarán con los del wiki actual.
+
+!!! <<.def config>>
+
+Las opciones de configuración incluyen:
+
+* <<.em default-tiddler-location>> - ruta relativa a la localización por defecto de la carpeta en que se almacenan los tiddlers nuevos. 
+
+* <<.em retain-original-tiddler-path>> - si se define como <<.em true>>, el servidor generará el tiddler <<.tid ~$:/config/OriginalTiddlerPaths>>, que contiene la ruta original de cada tiddler contenido en el wiki. 
+
+!!! Ejemplo:
+
+```
+{
+	"plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem"
+	],
+	"includeWikis": [
+		"../tw5.com"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+		"favicon": [
+			"--savetiddler","$:/favicon.ico","favicon.ico",
+			"--savetiddler","$:/green_favicon.ico","static/favicon.ico"]
+	},
+	"config": {
+		"retain-original-tiddler-path": true	
+	}
+}
+```
+
+!! Contenido de la carpeta <<.em tiddlers>> 
+
+Toddos los archivos <<.em .tid>> de la carpeta <<.em tiddlers>> se leen cuando se genera el wiki. Las subcarpetas se escanean recursivamente en busca de cualquier otro archivo <<.em .tid>> durante el proceso.
+
+Los tiddlers nuevos se guardan en la raíz de la carpeta <<.em tiddlers>>, salvo que se [[configure|Customizing Tiddler File Naming]] de otro modo.
+
+Las subcarpetas de <<.em tiddlers>> también pueden contener un archivo JSON que puentee el proceso por defecto para esa carpeta. En este ejemplo se ilustra el formato de este tipo de archivos:
+
+```
+{
+	"tiddlers": [
+		{
+			"file": "d3.min.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/d3/d3.js",
+				"module-type": "library"
+			},
+			"prefix": "var d3;if($tw.browser){\n",
+			"suffix": "}\nexports.d3 = d3;\n"
+		},
+		{
+			"file": "cloud/d3.layout.cloud.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/d3/d3.layout.cloud.js",
+				"module-type": "library"
+			}
+		},
+		{
+			"file": "local/mytiddler.tid",
+			"isTiddlerFile": true,
+			"fields": {
+				"title": "A different title"
+			}
+		}
+	],
+	"directories": [
+		"../../mytiddlers/store"
+	]
+}
+```
+Un elemento JSON es un objeto con la propiedad <<.em tiddlers>>, que a su vez contiene una matriz de información sobre cada tiddler que se carga en el wiki. Esta información es:
+
+
+* Ruta, absoluta o relativa, al archivo que se incluye, bien como 
+
+** `file`: nombre del archivo que contiene el tiddler
+
+** `isTiddlerFile`: si su valor es `true`, se extraen los tiddlers de su contenido. En caso contrario, se asigna el contenido en bruto del archivo al campo <<.field text>>, sin interpretación alguna. 
+
+* `fields`: objet que contiene campos que puentean los proporcionados por el archivo
+
+* `prefix` & `suffix`: (opcional) especifica cadenas usadas como prefijo o sufijo del del contenido de un tiddler
+
+La propiedad <<.em directories>> permite definir una lista de directorios de los que se cargarán recursivamente los tiddlers

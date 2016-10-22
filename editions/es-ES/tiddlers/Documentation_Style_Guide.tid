@@ -1,0 +1,26 @@
+caption: Guía de estilo
+created: 20140904164608166
+es-title: Guía de estilo para documentación
+modified: 20160418141921258
+tags: [[Improving TiddlyWiki Documentation]]
+title: Documentation Style Guide
+type: text/vnd.tiddlywiki
+
+La documentación de ~TiddlyWiki intenta seguir un estilo editorial consistente. Consta de dos áreas, cada una de ellas con su propio tono y dirigida a un público específico, así evitamos saturar de información al lector principiante mientras aún podemos ofrecer acceso rápido a la información que el lector experto necesita.
+
+* [[Material didáctico |Instruction Tiddlers]]
+* [[Material de referencia|Reference Tiddlers]]
+
+Temas adicionales:
+
+* [[Estilo de los títulos|Tiddler Title Policy]]
+
+* [[Estructura de tiddlers|Tiddler Structure]]
+
+* [[Ortografía|Spelling]]
+
+* [[Tipografía|Typography]]
+
+* [[Macros para documentación|Documentation Macros]]
+
+* [[Estilo de redacción técnica|Technical Prose Style]]

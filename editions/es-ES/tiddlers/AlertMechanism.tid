@@ -1,0 +1,20 @@
+caption: Alertas
+created: 20140213224306412
+es-title: Mecanismo de alertas
+modified: 20160428151401815
+tags: Mechanisms Features
+title: AlertMechanism
+type: text/vnd.tiddlywiki
+
+Las alertas se muestran como cajas amarillas superpuestas a la ventana principal de ~TiddlyWiki. Cada una corresponde a un tiddler con la etiqueta <<.tag ~$:/tags/Alert]]. Pinchando el icono de la papelera en una alerta borra el tiddler correspondiente.
+
+Aquí va una demostración: <$fieldmangler tiddler="SampleAlert"><$set name="currentTiddler" value="SampleAlert"><$button message="tm-add-tag" param="$:/tags/Alert">Alerta</$button></$set></$fieldmangler>.
+
+Los tiddlers de alerta contienen los siguientes campos:
+
+|!Campo |!Descripción |
+|title |Por defecto, con el prefijo `$:/temp/alerts/` |
+|text |Texto de la alerta |
+|modified |Fecha y hora de la alerta (para ordenarlos en pantalla) |
+|component |Componente asociado a la alerta |
+|tags |Deben incluir [[$:/tags/Alert]] |

@@ -2,7 +2,7 @@ title: $:/plugins/tiddlywiki/text-slicer/ui/tiddler/toolbar/title
 tags: $:/tags/TextSlicerToolbar
 
 \define renameProxyTitle()
-$:/config/plugins/tiddlywiki/text-slicer/rename-$(currentTiddler)$
+$:/state/plugins/tiddlywiki/text-slicer/rename-$(currentTiddler)$
 \end
 
 \define body()

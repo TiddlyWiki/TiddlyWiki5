@@ -18,7 +18,7 @@ exports.processHeadingNode = function(domNode,tagName) {
 		var title = this.makeUniqueTitle("heading",text),
 			parentTitle = this.popParentStackUntil(tagName),
 			tags = [];
-		if(domNode.className.trim() !== "") {
+		if(domNode.className && domNode.className.trim() !== "") {
 			tags = tags.concat(domNode.className.split(" "));
 		}
 		this.addToList(parentTitle,title);
