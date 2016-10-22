@@ -32,4 +32,4 @@ The <<.vlink currentTiddler>> variable is not affected by the <<.var tabs>> macr
 
 !! Preserving Tab Contents
 
-<<.from-version "5.1.14">> To preserve tab contents, e.g. iframes or embedded content, set the field ''retain-tab'' to `yes` at a tab tiddler. This will prevent reloading the content when switching tabs.
+<<.from-version "5.1.14">> To preserve active tab contents like embedded video or music, set the field ''retain-tab'' to `yes` at a tab tiddler. This will prevent reloading the content when switching tabs.
