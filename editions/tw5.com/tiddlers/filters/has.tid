@@ -7,7 +7,7 @@ op-output: ''without suffix'' or with ''suffix `value`''<br>&raquo; those input 
 op-parameter: the name of a [[field|TiddlerFields]]
 op-parameter-name: F
 op-purpose: filter the input by field existence
-op-suffix: optionally, the name of a [[field|TiddlerFields]]
+op-suffix: <<.from-version "5.1.14">> optionally, the name of a [[field|TiddlerFields]]
 op-suffix-name: F
 tags: [[Filter Operators]] [[Common Operators]] [[Field Operators]] [[Negatable Operators]]
 title: has Operator
