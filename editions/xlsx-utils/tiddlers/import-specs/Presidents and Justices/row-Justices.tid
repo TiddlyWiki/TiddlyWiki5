@@ -1,0 +1,8 @@
+created: 20161009181413651
+import-spec-role: row
+list: [[$:/_importspec/Presidents and Justices/Justices/Main/title]] [[$:/_importspec/Presidents and Justices/Justices/Main/modified]] [[$:/_importspec/Presidents and Justices/Justices/Main/role]] [[$:/_importspec/Presidents and Justices/Justices/Main/tags]] [[$:/_importspec/Presidents and Justices/Justices/Main/trivia]]
+modified: 20161023172129146
+tags: 
+title: $:/_importspec/Presidents and Justices/Justices/Main
+type: text/vnd.tiddlywiki
+
