@@ -28,8 +28,8 @@ tags: [[$:/tags/Stylesheet]]
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
 .tc-import-spec-selector {
-	border: 1px solid <<quick-colour-editor-border>>;
-	background-color: <<quick-colour-editor-background>>;
+	border: 1px solid <<quick-colour-selector-border>>;
+	background-color: <<quick-colour-selector-background>>;
 	padding: 0.25em;
 }
 
