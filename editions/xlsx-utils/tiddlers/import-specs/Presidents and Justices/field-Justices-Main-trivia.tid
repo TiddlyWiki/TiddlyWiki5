@@ -1,0 +1,10 @@
+created: 20161021165829079
+import-field-column: Trivial Facts
+import-field-name: trivia
+import-field-source: column
+import-field-type: string
+import-spec-role: field
+modified: 20161023172129150
+title: $:/_importspec/Presidents and Justices/Justices/Main/trivia
+type: text/vnd.tiddlywiki
+

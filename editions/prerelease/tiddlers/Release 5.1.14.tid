@@ -9,6 +9,7 @@ type: text/vnd.tiddlywiki
 
 !! New Plugins
 
+* Added [[XLSX Utilities Edition|XLSX Utilities plugin]] for importing Excel-compatible spreadsheets
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/22c1b04ee79a5ccc25cbc33cc91bf5daac1df831]] QR code generator plugin
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/7f11c151f06cd039d1887a6940075237ccb4b7a9]] BibTeX importer plugin
 

@@ -1,0 +1,20 @@
+title: $:/plugins/tiddlywiki/xlsx-utils/docs/row
+
+!!! Row Import Specifications
+
+Each row import specification describes how one tiddler should be extracted from each row of the current sheet.
+
+Note that using multiple row import specifications within a sheet enables multiple tiddlers to be created from each row of the sheet.
+
+Rows contain a list of field import specifications that describe how each field of the tiddler should be created.
+
+!!! Field Import Specifications
+
+Field import specifications describe the value given to a particular field of a tiddler.
+
+They follow a rich syntax for describing how each field of the tiddler is created. For example:
+
+* Set field `title` to string from column `Organization`
+* Set field `role` to string constant `organization`
+* Append to list field `list` the string from column `Country` prefixed with `Map:`
+
