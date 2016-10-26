@@ -305,8 +305,6 @@ Compute the internal state of the widget
 ListItemWidget.prototype.execute = function() {
 	// Set the current list item title
 	this.setVariable(this.parseTreeNode.variableName,this.parseTreeNode.itemTitle);
-	// Make sure the item title is used by widget.getStateQualifier()
-	this.setVariable("transclusion","{" + this.parseTreeNode.itemTitle + "}");
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
