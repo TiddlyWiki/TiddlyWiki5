@@ -1,6 +1,8 @@
 {
 	"description": "Full edition, containing all languages, themes and plugins",
 	"plugins": [
+		"tiddlywiki/bibtex",
+		"tiddlywiki/blog",
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/cecily",
 		"tiddlywiki/classictools",
@@ -10,14 +12,18 @@
 		"tiddlywiki/googleanalytics",
 		"tiddlywiki/help",
 		"tiddlywiki/highlight",
+		"tiddlywiki/internals",
+		"tiddlywiki/jszip",
 		"tiddlywiki/katex",
 		"tiddlywiki/markdown",
 		"tiddlywiki/nodewebkitsaver",
+		"tiddlywiki/powered-by-tiddlywiki",
+		"tiddlywiki/qrcode",
 		"tiddlywiki/railroad",
 		"tiddlywiki/stacked-view",
 		"tiddlywiki/text-slicer",
-		"tiddlywiki/xmldom",
-		"tiddlywiki/powered-by-tiddlywiki"
+		"tiddlywiki/xlsx-utils",
+		"tiddlywiki/xmldom"
 	],
 	"languages": [
 		"ca-ES",

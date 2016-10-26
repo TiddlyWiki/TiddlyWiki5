@@ -1,0 +1,8 @@
+created: 20161021164655367
+import-spec-role: row
+list: [[$:/_importspec/Presidents and Justices/States/Main/title]] [[$:/_importspec/Presidents and Justices/States/Main/text]] [[$:/_importspec/Presidents and Justices/States/Main/role]] [[$:/_importspec/Presidents and Justices/States/Main/tags]]
+modified: 20161023172043705
+tags: 
+title: $:/_importspec/Presidents and Justices/States/Main
+type: text/vnd.tiddlywiki
+

@@ -3,8 +3,9 @@ tags: $:/tags/Macro
 
 \define tabs(tabsList,default,state:"$:/state/tab",class,template)
 <div class="tc-tab-set $class$">
+<$set name="state" value=<<qualify "$state$">>>
 <div class="tc-tab-buttons $class$">
-<$list filter="$tabsList$" variable="currentTab"><$set name="save-currentTiddler" value=<<currentTiddler>>><$tiddler tiddler=<<currentTab>>><$button set=<<qualify "$state$">> setTo=<<currentTab>> default="$default$" selectedClass="tc-tab-selected" tooltip={{!!tooltip}}>
+<$list filter="$tabsList$" variable="currentTab"><$set name="save-currentTiddler" value=<<currentTiddler>>><$tiddler tiddler=<<currentTab>>><$button set=<<state>> setTo=<<currentTab>> default="$default$" selectedClass="tc-tab-selected" tooltip={{!!tooltip}}>
 <$tiddler tiddler=<<save-currentTiddler>>>
 <$set name="tv-wikilinks" value="no">
 <$transclude tiddler=<<currentTab>> field="caption">
@@ -16,7 +17,7 @@ tags: $:/tags/Macro
 <div class="tc-tab-content $class$">
 <$list filter="$tabsList$" variable="currentTab">
 
-<$reveal type="match" state=<<qualify "$state$">> text=<<currentTab>> default="$default$">
+<$reveal type="match" state=<<state>> text=<<currentTab>> default="$default$">
 
 <$transclude tiddler="$template$" mode="block">
 
@@ -28,5 +29,6 @@ tags: $:/tags/Macro
 
 </$list>
 </div>
+</$set>
 </div>
 \end
