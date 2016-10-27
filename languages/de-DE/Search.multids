@@ -8,6 +8,7 @@ Matches: //<small><<resultCount>> Treffer</small>//
 Matches/All: Alle Treffer:
 Matches/Title: Titel Treffer:
 Search: Suchen
+Search/TooShort: Suchtext ist zu kurz
 Shadows/Caption: Schatten
 Shadows/Hint: Suche in Schatten-Tiddlern.
 Shadows/Matches: //<small><<resultCount>> Treffer</small>//

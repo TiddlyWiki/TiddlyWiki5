@@ -76,6 +76,8 @@ Permalink/Caption: Permalink
 Permalink/Hint: Die Adressleiste des Browsers enthält einen Link zu diesem Tiddler
 Permaview/Caption: Permaview
 Permaview/Hint: Die Adressleiste des Browsers enthält einen Link zu allen offenen Tiddlern in dieser Story
+Print/Caption: Seite drucken
+Print/Hint: Aktuelle Seite drucken
 Refresh/Caption: Aktualisieren
 Refresh/Hint: Die Seite wird neu in den Browser geladen
 Save/Caption: Fertig
@@ -167,4 +169,3 @@ Superscript/Caption: Hochgestellt
 Superscript/Hint: Ausgewählten Text hochgestellt darstellen
 Underline/Caption: Unterstreichen
 Underline/Hint: Ausgewählten Text unterstrichen darstellen
-
