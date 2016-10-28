@@ -1,0 +1,10 @@
+created: 20161021165241843
+import-field-column: Description
+import-field-name: text
+import-field-source: column
+import-field-type: string
+import-spec-role: field
+modified: 20161023172126055
+title: $:/_importspec/Presidents and Justices/Justices/Main/modified
+type: text/vnd.tiddlywiki
+

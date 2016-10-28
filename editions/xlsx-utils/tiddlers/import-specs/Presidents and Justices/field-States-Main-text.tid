@@ -1,0 +1,9 @@
+created: 20161023172033792
+import-field-column: Description
+import-field-name: text
+import-field-source: column
+import-spec-role: field
+modified: 20161023172033792
+title: $:/_importspec/Presidents and Justices/States/Main/text
+type: text/vnd.tiddlywiki
+

@@ -1,0 +1,28 @@
+created: 20161015113519246
+modified: 20161015113833256
+tags: PluginMechanism
+title: PluginFolders
+type: text/vnd.tiddlywiki
+
+On the server, plugins can be stored as ordinary JSON tiddlers but it is often more convenient to store them as separate tiddler files within folders. Plugin folders must contain a `plugin.info` file that contains the metadata for the plugin. It can also optionally identify files external to the plugin folder that should be loaded as tiddlers.
+
+The `plugin.info` file should contain the following JSON structure:
+
+The JSON structure for plugin tiddlers is as follows:
+
+```
+{
+	"title": "$:/plugins/publisher/name",
+	"description": "An exemplary plugin for demonstration purposes",
+	"author": "JeremyRuston",
+	"version": "1.2.3-alpha3",
+	"core-version": ">=5.0.0",
+	"source": "http://tiddlywiki.com/MyPlugin",
+	"plugin-type": "plugin",
+	"list": "readme license history"
+}
+```
+
+By convention, the titles of the individual tiddlers are prefixed with the title of the containing plugin, but they are not restricted to do so.
+
+Note that if the `version` field is omitted from a `plugin.info` file when the plugin folder is packed then it is automatically filled in by the core to the current core version number. This is to ensure that all the core plugins carry the correct version number. Generally plugin authors will want to ensure that they do explicitly specify a version number.

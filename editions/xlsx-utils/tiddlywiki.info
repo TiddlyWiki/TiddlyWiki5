@@ -1,0 +1,17 @@
+{
+	"description": "Demo of the XLSX utilities plugin",
+	"plugins": [
+		"tiddlywiki/jszip",
+		"tiddlywiki/xlsx-utils"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"includeWikis": [
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"]
+	}
+}

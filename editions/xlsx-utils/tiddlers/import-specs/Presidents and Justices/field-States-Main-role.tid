@@ -1,0 +1,9 @@
+created: 20161021164652535
+import-field-name: role
+import-field-source: constant
+import-field-value: state
+import-spec-role: field
+modified: 20161023172038126
+title: $:/_importspec/Presidents and Justices/States/Main/role
+type: text/vnd.tiddlywiki
+

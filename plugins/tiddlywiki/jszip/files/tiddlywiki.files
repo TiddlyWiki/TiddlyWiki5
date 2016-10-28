@@ -12,7 +12,7 @@
 		},{
 			"file": "LICENSE.markdown",
 			"fields": {
-				"type": "text/markdown",
+				"type": "text/plain",
 				"title": "$:/plugins/tiddlywiki/jszip/license"
 			}
 		}

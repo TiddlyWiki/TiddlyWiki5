@@ -328,7 +328,7 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 				var result = 
 					isNaN(x) && !isNaN(y) ? (isDescending ? -1 : 1) :
 					!isNaN(x) && isNaN(y) ? (isDescending ? 1 : -1) :
-					                        (isDescending ? y - x :  x - y);
+											(isDescending ? y - x :  x - y);
 				return result;
 			};
 		if(sortField !== "title") {
@@ -904,31 +904,54 @@ options: as for wiki.makeWidget() plus:
 options.field: optional field to transclude (defaults to "text")
 options.mode: transclusion mode "inline" or "block"
 options.children: optional array of children for the transclude widget
+options.importVariables: optional importvariables filter string for macros to be included
+options.importPageMacros: optional boolean; if true, equivalent to passing "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]" to options.importVariables
 */
 exports.makeTranscludeWidget = function(title,options) {
 	options = options || {};
-	var parseTree = {tree: [{
+	var parseTreeDiv = {tree: [{
 			type: "element",
 			tag: "div",
-			children: [{
-				type: "transclude",
-				attributes: {
-					tiddler: {
-						name: "tiddler",
-						type: "string",
-						value: title}},
-				isBlock: !options.parseAsInline}]}
-	]};
+			children: []}]},
+		parseTreeImportVariables = {
+			type: "importvariables",
+			attributes: {
+				filter: {
+					name: "filter",
+					type: "string"
+				}
+			},
+			isBlock: false,
+			children: []},
+		parseTreeTransclude = {
+			type: "transclude",
+			attributes: {
+				tiddler: {
+					name: "tiddler",
+					type: "string",
+					value: title}},
+			isBlock: !options.parseAsInline};
+	if(options.importVariables || options.importPageMacros) {
+		if(options.importVariables) {
+			parseTreeImportVariables.attributes.filter.value = options.importVariables;
+		} else if(options.importPageMacros) {
+			parseTreeImportVariables.attributes.filter.value = "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]";
+		}
+		parseTreeDiv.tree[0].children.push(parseTreeImportVariables);
+		parseTreeImportVariables.children.push(parseTreeTransclude);
+	} else {
+		parseTreeDiv.tree[0].children.push(parseTreeTransclude);
+	}
 	if(options.field) {
-		parseTree.tree[0].children[0].attributes.field = {type: "string", value: options.field};
+		parseTreeTransclude.attributes.field = {type: "string", value: options.field};
 	}
 	if(options.mode) {
-		parseTree.tree[0].children[0].attributes.mode = {type: "string", value: options.mode};
+		parseTreeTransclude.attributes.mode = {type: "string", value: options.mode};
 	}
 	if(options.children) {
-		parseTree.tree[0].children[0].children = options.children;
+		parseTreeTransclude.children = options.children;
 	}
-	return $tw.wiki.makeWidget(parseTree,options);
+	return $tw.wiki.makeWidget(parseTreeDiv,options);
 };
 
 /*

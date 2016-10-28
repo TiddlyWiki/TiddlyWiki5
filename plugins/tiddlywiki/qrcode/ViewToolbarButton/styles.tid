@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/qrcode/styles
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+.tc-drop-down .tc-qrcode-drop-down img {
+	width: 100%;
+	height: 100%;
+}

@@ -5,11 +5,13 @@ tags:
 title: GettingStarted - WebDAV
 type: text/vnd.tiddlywiki
 
-TiddlyWiki will use [[WebDAV|https://en.wikipedia.org/wiki/WebDAV]] to save changes if the server supports it. The main difficulty with this method is setting up a server.
+If hosted on a [[WebDAV|https://en.wikipedia.org/wiki/WebDAV]]-enabled server, TiddlyWiki will automatically save changes via HTTP.
 
 !! Servers
 
-[[dav-server|https://github.com/edrex/dav-server]] is a quick way to serve up a folder of HTML ~TiddlyWikis. 
+Many [[NAS|https://en.wikipedia.org/wiki/NAS]] or [[Subversion|https://en.wikipedia.org/wiki/Apache_Subversion]] servers support WebDAV out of the box. Setting up your own server might take some effort though:
+
+[[dav-server|https://github.com/edrex/dav-server]] is a quick way to serve up a folder of HTML ~TiddlyWikis.
 
 [[webdav server|https://play.google.com/store/apps/details?id=com.theolivetree.webdavserver&hl=en]] for Android lets you put wikis in your pocket. You can share with other devices on the local network too.
 
@@ -17,6 +19,6 @@ TiddlyWiki will use [[WebDAV|https://en.wikipedia.org/wiki/WebDAV]] to save chan
 
 ~WebDAV support was added Feb 16 2016. If you created your wiki before that, you'll need to [[Upgrade|Upgrading]] to enable ~WebDAV.
 
-!! Free Hosting 
+!! Free Hosting
 
 None of the ~WebDAV hosting services tested (~~box.com~~, ~~swissdisk.com~~) support accessing HTML files via a webbrowser, so they won't work with ~TiddlyWiki. Maybe someday soon there will be a free ~WebDAV hosting service for ~TiddlyWikis.

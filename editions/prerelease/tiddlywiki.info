@@ -10,7 +10,9 @@
 		"tiddlywiki/powered-by-tiddlywiki",
 		"tiddlywiki/internals",
 		"tiddlywiki/highlight",
-		"tiddlywiki/markdown"
+		"tiddlywiki/markdown",
+		"tiddlywiki/qrcode",
+		"tiddlywiki/bibtex"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
