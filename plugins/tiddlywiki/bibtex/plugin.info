@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/bibtex",
+	"description": "BibTeX importer",
+	"author": "Henrik Muehe and Mikola Lysenko, adapted by Jeremy Ruston",
+	"plugin-type": "plugin",
+	"list": "readme license"
+}

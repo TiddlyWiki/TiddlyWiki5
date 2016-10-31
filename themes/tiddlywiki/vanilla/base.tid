@@ -30,6 +30,15 @@ $hiddenSidebarText$
 </$reveal>
 \end
 
+\define if-editor-height-fixed(then,else)
+<$reveal state="$:/config/TextEditor/EditorHeight/Mode" type="match" text="fixed">
+$then$
+</$reveal>
+<$reveal state="$:/config/TextEditor/EditorHeight/Mode" type="match" text="auto">
+$else$
+</$reveal>
+\end
+
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
 /*
@@ -869,8 +878,17 @@ button.tc-untagged-label {
 
 .tc-tiddler-controls button svg, .tc-tiddler-controls button img,
 .tc-search button svg, .tc-search a svg {
-	height: 0.75em;
 	fill: <<colour tiddler-controls-foreground>>;
+}
+
+.tc-tiddler-controls button svg, .tc-tiddler-controls button img {
+	height: 0.75em;
+}
+
+.tc-search button svg, .tc-search a svg {
+    height: 1.2em;
+    width: 1.2em;
+    margin: 0 0.25em;
 }
 
 .tc-tiddler-controls button.tc-selected svg,
@@ -1159,9 +1177,18 @@ html body.tc-body.tc-single-tiddler-window {
 	float: right;
 	width: 49%;
 	border: 1px solid <<colour tiddler-editor-border>>;
-	margin: 4px 3px 3px 3px;
+	margin: 4px 0 3px 3px;
 	padding: 3px 3px 3px 3px;
 }
+
+<<if-editor-height-fixed then:"""
+
+.tc-tiddler-preview-preview {
+	overflow-y: scroll;
+	height: {{$:/config/TextEditor/EditorHeight/Height}};
+}
+
+""">>
 
 .tc-tiddler-frame .tc-tiddler-preview .tc-edit-texteditor {
 	width: 49%;
@@ -1680,7 +1707,7 @@ html body.tc-body.tc-single-tiddler-window {
 	border-top: 1px solid <<colour sidebar-tab-divider>>;
 }
 
-.tc-more-sidebar .tc-tab-buttons button {
+.tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
 	display: block;
 	width: 100%;
 	background-color: <<colour sidebar-tab-background>>;
@@ -1691,7 +1718,7 @@ html body.tc-body.tc-single-tiddler-window {
 	margin-bottom: inherit;
 }
 
-.tc-more-sidebar .tc-tab-buttons button.tc-tab-selected {
+.tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button.tc-tab-selected {
 	background-color: <<colour sidebar-tab-background-selected>>;
 	border: none;
 }

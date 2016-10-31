@@ -71,6 +71,9 @@ list-before: $:/core/ui/ViewTemplate/body
 </$set>
 <!-->
 </table>
+<$list filter="[all[current]has[from-version]]" variable="listItem">
+<$macrocall $name=".from-version" version={{!!from-version}}/>
+</$list>
 </$list>
 </$set>
 </$set>

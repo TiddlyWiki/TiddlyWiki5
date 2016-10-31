@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/xlsx-utils/docs/sheet
+
+!!! Sheet Import Specifications
+
+Each sheet import specification describes how a named sheet within a workbook should be converted into individual tiddlers.
+
+Sheets contain a list of row import specifications that describe how individual rows of the sheet should be handled.
+
+Each sheet has the name of the sheet that it handles.
+
+Note that the first row of each sheet is interpreted as the title of each column.

@@ -40,6 +40,7 @@ SetWidget.prototype.execute = function() {
 	// Get our parameters
 	this.setName = this.getAttribute("name","currentTiddler");
 	this.setFilter = this.getAttribute("filter");
+	this.setSelect = this.getAttribute("select");
 	this.setValue = this.getAttribute("value");
 	this.setEmptyValue = this.getAttribute("emptyValue");
 	// Set context variable
@@ -56,7 +57,15 @@ SetWidget.prototype.getValue = function() {
 	if(this.setFilter) {
 		var results = this.wiki.filterTiddlers(this.setFilter,this);
 		if(!this.setValue) {
-			value = $tw.utils.stringifyList(results);
+			var select;
+			if(this.setSelect) {
+				select = parseInt(this.setSelect,10);
+			}
+			if(select !== undefined) {
+				value = results[select] || "";
+			} else {
+				value = $tw.utils.stringifyList(results);			
+			}
 		}
 		if(results.length === 0 && this.setEmptyValue !== undefined) {
 			value = this.setEmptyValue;
@@ -72,7 +81,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 SetWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.name || changedAttributes.filter || changedAttributes.value || changedAttributes.emptyValue ||
+	if(changedAttributes.name || changedAttributes.filter || changedAttributes.select ||changedAttributes.value || changedAttributes.emptyValue ||
 	   (this.setFilter && this.getValue() != this.variables[this.setName].value)) {
 		this.refreshSelf();
 		return true;
