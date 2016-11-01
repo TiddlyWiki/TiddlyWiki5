@@ -1,23 +1,24 @@
 title: $:/language/Help/server
 description: Fournit une interface serveur HTTP à TiddlyWiki
 
-Le serveur embarqué dans TiddlyWiki5 est très simple. Bien qu'il soit compatible avec TiddlyWeb, il n'a pas la robustesse requise pour une utilisation intensive sur l'Internet.
+Le serveur embarqué dans TiddlyWiki5 est très simple. Bien qu'il soit compatible avec TiddlyWeb, il n'a pas la robustesse requise pour une utilisation sur l'Internet.
 
 À la racine de l'url, il sert le tiddler spécifié avec le rendu indiqué. Au-delà, il sert des tiddlers encodés en JSON, et reconnaît les principales opérations HTTP pour `GET`, `PUT` et `DELETE`.
 
 ```
---server <port> <tiddlerracine> <typedurendu> <typeduservice> <nomdutilisateur> <motdepasse> <machine>
+--server <port> <tiddler-racine> <type-du-rendu> <type-du-service> <nom-d-utilisateur> <mot-de-passe> <machine> <prefixe-des-chemins>
 ```
 
 Les arguments sont :
 
 * ''port'' - numéro de port sur lequel servir le contenu (défaut : "8080")
-* ''tiddlerracine'' - le titre du tiddler à afficher à la racine de l'URL (défaut : "$:/core/save/all") 
-* ''typedurendu'' - le type avec lequel le contenu du tiddler racine doit être rendu (`text/plain` par défaut)
-* ''typeduservice'' - le type avec lequel le contenu du tiddler racine doit être servi (`text/html` par défaut)
-* ''nomdutilisateur'' - le nom d'utilisateur qui servira par défaut à signer les modifications
-* ''motdepasse'' - mot de passe optionnel permettant une authentification basique
+* ''tiddler-racine'' - le titre du tiddler à afficher à la racine de l'URL (défaut : "$:/core/save/all") 
+* ''type-du-rendu'' - le type avec lequel le contenu du tiddler racine doit être rendu (`text/plain` par défaut)
+* ''type-du-service'' - le type avec lequel le contenu du tiddler racine doit être servi (`text/html` par défaut)
+* ''nom-d-utilisateur'' - le nom d'utilisateur qui servira par défaut à signer les modifications
+* ''mot-de-passe'' - mot de passe optionnel permettant une authentification basique
 * ''machine'' - nom de machine optionnel d'où le contenu doit être servi ("127.0.0.1" par défaut, autrement dit "localhost")
+* ''prefixe-des-chemins'' - préfixe optionnel pour les chemins
 
 Si le mot de passe est spécifié en argument, le navigateur demandera à l'utilisateur d'entrer le nom d'utilisateur et le mot de passe. On notera que le mot de passe est transmis en clair, et que cette implémentation ne convient donc pas pour un usage général.
 
@@ -27,10 +28,10 @@ Par exemple :
 --server 8080 $:/core/save/all text/plain text/html MonNomUtilisateur m0tdepa55e
 ```
 
-Le nom d'utilisateur et le mot de passe peuvent être spécifiés en tant que chaînes vides si vous avez besoin d'indiquer le nom de machine ou le préfixe de chemin sans pour autant demander un mot de passe :
+Le nom d'utilisateur et le mot de passe peuvent être spécifiés sous forme de chaînes vides si vous avez besoin d'indiquer le nom de machine ou le préfixe des chemins sans pour autant demander un mot de passe :
 
 ```
 --server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
 ```
 
-Si vous souhaitez faire fonctionner plusieurs serveurs TiddlyWiki en même temps sur la même machine, vous devrez leur assigner à chacun un port différent.
+Si vous voulez faire tourner plusieurs serveurs TiddlyWiki en même temps sur la même machine, vous devrez leur assigner chacun un port différent.
