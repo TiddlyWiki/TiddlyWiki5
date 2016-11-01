@@ -9,6 +9,6 @@ Enregistre un groupe de tiddlers vers le chemin spécifié, sous leur forme brut
 
 Par défaut, le répertoire de sortie est calculé relativement au sous-répertoire `output` du répertoire de l'édition. La commande `--output` peut servir à diriger la sortie vers un répertoire différent.
 
-Les fichiers présents dans le répertoire de sortie sont supprimés avant d'enregistrer les fichiers des tiddlers spécifiés par le filtre. Pour empêcher cette suppression, ajouter le drapeau ''noclean''.
+Les fichiers présents dans le répertoire de sortie sont supprimés avant que soient enregistrés les fichiers des tiddlers spécifiés par le filtre. Pour empêcher cette suppression, ajouter le drapeau ''noclean''.
 
 Les éventuels répertoires manquants dans le chemin spécifié sont créés automatiquement.
