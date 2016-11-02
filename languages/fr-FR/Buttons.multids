@@ -76,6 +76,8 @@ Permalink/Caption: permalink
 Permalink/Hint: Remplace l'URL dans la barre d'adresse du navigateur par un lien direct vers ce tiddler
 Permaview/Caption: permaview
 Permaview/Hint: Remplace l'URL dans la barre d'adresse du navigateur par un lien direct vers l'ensemble des tiddlers présents dans le déroulé
+Print/Caption: imprimer la page
+Print/Hint: Imprime la page courante
 Refresh/Caption: rafraîchir
 Refresh/Hint: Rafraîchit la totalité du wiki
 Save/Caption: ok
