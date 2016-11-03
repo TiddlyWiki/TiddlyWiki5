@@ -13,6 +13,18 @@ type: text/vnd.tiddlywiki
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/22c1b04ee79a5ccc25cbc33cc91bf5daac1df831]] QR code generator plugin
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/7f11c151f06cd039d1887a6940075237ccb4b7a9]] BibTeX importer plugin
 
+!! New "Heavier" Theme
+
+A new theme called "Heavier" thickens TiddlyWiki's default lightweight fonts:
+
+<$button>
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/heavier"/>
+Try out the "Heavier" theme
+</$button> <$button>
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/snowwhite"/>
+Revert
+</$button>
+
 !! Performance Improvements
 
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/989cee50594a76a0f30d1d2124ce9e5e5808c6cf]] search mechanism to require the search string to be a minimum length
