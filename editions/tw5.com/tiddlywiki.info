@@ -14,6 +14,7 @@
 		"tiddlywiki/seamless",
 		"tiddlywiki/centralised",
 		"tiddlywiki/tight",
+		"tiddlywiki/heavier",
 		"tiddlywiki/readonly"
 	],
 	"languages": [
