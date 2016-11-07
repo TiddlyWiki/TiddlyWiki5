@@ -4,7 +4,7 @@ description: Enregistre un ensemble de tiddlers sélectionnés par un filtre, av
 Enregistre un ensemble de tiddlers (sélectionnés par un filtre) dans le répertoire indiqué et avec l'extension indiquée — par défaut `.html`. Le choix du rendu est fonction du type de contenu (ContentType) spécifié — par défaut `text/html` :
 
 ```
---rendertiddlers <filtre> <modèle> <chemindurépertoire> [<type>] [<extension>]
+--rendertiddlers <filtre> <modèle> <chemindurépertoire> [<type>] [<extension>] ["noclean"]
 ```
 
 Par exemple :
@@ -13,4 +13,6 @@ Par exemple :
 --rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
 ```
 
-Tous les fichiers du répertoire cible sont supprimés. Le répertoire cible est créé récursivement s'il n'existe pas.
+Par défaut, le nom de fichier est résolu relativement au sous-répertoire `output` du répertoire de l'édition. La commande `--output` peut servir à rediriger la sortie vers un répertoire différent.
+
+Tous les fichiers du répertoire cible sont supprimés, sauf si le drapeau ''noclean'' est spécifié. Le répertoire cible est créé récursivement s'il n'existe pas.

@@ -61,6 +61,7 @@ sidebar-tab-foreground-selected: Premier plan pour les onglets sélectionnés de
 sidebar-tab-foreground: Premier plan pour les onglets de la barre latérale
 sidebar-tiddler-link-foreground-hover: Premier plan au passage de la souris sur le lien d'un tiddler de la barre latérale
 sidebar-tiddler-link-foreground: Premier plan du lien d'un tiddler de la barre latérale
+site-title-foreground: Premier plan pour le titre du wiki (SiteTitle)
 static-alert-foreground: Premier plan pour les alertes statiques
 tab-background-selected: Fond pour les onglets sélectionnés
 tab-background: Fond pour les onglets
