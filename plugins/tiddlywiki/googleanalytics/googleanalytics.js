@@ -39,7 +39,9 @@ exports.startup = function() {
 	if (GA_DOMAIN == "" || GA_DOMAIN == undefined) GA_DOMAIN = "auto";
 	console.log("tiddlywiki analytics working with "+GA_ACCOUNT+" - "+GA_DOMAIN);
    ga('create', GA_ACCOUNT,GA_DOMAIN);
+   console.log("analytics created");
    ga('send', 'pageview');
+   console.log('analytics sent');
 	})();
 };
 
