@@ -48,7 +48,8 @@ PutSaver.prototype.save = function(text, method, callback) {
 			callback(null); // success
 		}
 		else if (this.status === 412) { // edit conflict
-			callback("File changed on server");
+			var message = $tw.language.getString("Error/EditConflict");
+			callback(message);
 		else {
 			callback(this.responseText); // fail
 		}
