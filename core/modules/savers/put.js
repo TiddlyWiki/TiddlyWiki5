@@ -21,7 +21,7 @@ Select the appropriate saver module and set it up
 var PutSaver = function(wiki) {
 	this.wiki = wiki;
 	var self = this;
-	var uri = encodeURI(document.location.protocol + "//" + document.location.hostname + ":" + document.location.port + document.location.pathname);
+	var uri = encodeURI(document.location.toString().split("#")[0]);
 	// Async server probe. Until probe finishes, save will fail fast
 	// See also https://github.com/Jermolene/TiddlyWiki5/issues/2276
 	httpRequest("OPTIONS", uri, function() {
