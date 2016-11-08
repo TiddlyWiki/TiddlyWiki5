@@ -24,42 +24,55 @@ var PutSaver = function(wiki) {
 	var uri = encodeURI(document.location.toString().split("#")[0]);
 	// Async server probe. Until probe finishes, save will fail fast
 	// See also https://github.com/Jermolene/TiddlyWiki5/issues/2276
-	httpRequest("OPTIONS", uri, function() {
-		// Check DAV header http://www.webdav.org/specs/rfc2518.html#rfc.section.9.1
-		self.serverAcceptsPuts = (this.status === 200 && !!this.getResponseHeader("dav"));
+	$tw.utils.httpRequest({
+		url: uri,
+		type: "OPTIONS",
+		callback: function(err, data, xhr) {
+			// Check DAV header http://www.webdav.org/specs/rfc2518.html#rfc.section.9.1
+			self.serverAcceptsPuts = xhr.status === 200 && !!xhr.getResponseHeader("dav");
+		}
 	});
 	// Retrieve ETag if available
-	httpRequest("HEAD", uri, function() {
-		self.etag = this.getResponseHeader("ETag");
+	$tw.utils.httpRequest({
+		url: uri,
+		type: "HEAD",
+		callback: function(err, data, xhr) {
+			self.etag = xhr.getResponseHeader("ETag");
+		}
 	});
 };
 
+// TODO: in case of edit conflict
+// Prompt: Do you want to save over this? Y/N
+// Merging would be ideal, and may be possible using future generic merge flow
 PutSaver.prototype.save = function(text, method, callback) {
 	if (!this.serverAcceptsPuts) {
 		return false;
 	}
-	var req = new XMLHttpRequest();
-	// TODO: in case of edit conflict
-	// Prompt: Do you want to save over this? Y/N
-	// Merging would be ideal, and may be possible using future generic merge flow
-	req.onload = function() {
-		if (this.status === 200 || this.status === 201) {
-			this.etag = this.getResponseHeader("ETag");
-			callback(null); // success
-		}
-		else if (this.status === 412) { // edit conflict
-			var message = $tw.language.getString("Error/EditConflict");
-			callback(message);
-		else {
-			callback(this.responseText); // fail
-		}
-	};
-	req.open("PUT", encodeURI(window.location.href));
-	req.setRequestHeader("Content-Type", "text/html;charset=UTF-8");
+	var self = this;
+	var headers = { "Content-Type": "text/html;charset=UTF-8" };
 	if (this.etag) {
-		req.setRequestHeader("If-Match", this.etag);
+		headers["If-Match"] = this.etag;
 	}
-	req.send(text);
+	$tw.utils.httpRequest({
+		url: encodeURI(window.location.href),
+		type: "PUT",
+		headers: headers,
+		data: text,
+		callback: function(err, data, xhr) {
+			if (xhr.status === 200 || xhr.status === 201) {
+				self.etag = xhr.getResponseHeader("ETag");
+				callback(null); // success
+			}
+			else if (xhr.status === 412) { // edit conflict
+				var message = $tw.language.getString("Error/EditConflict");
+				callback(message);
+			}
+			else {
+				callback(xhr.responseText); // fail
+			}
+		}
+	});
 	return true;
 };
 
@@ -85,12 +98,5 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new PutSaver(wiki);
 };
-
-function httpRequest(method, uri, onLoad) {
-	var req = new XMLHttpRequest();
-	req.open(method, uri);
-	req.onload = onLoad;
-	req.send();
-}
 
 })();
