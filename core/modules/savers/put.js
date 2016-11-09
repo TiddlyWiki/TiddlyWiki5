@@ -21,7 +21,7 @@ Select the appropriate saver module and set it up
 var PutSaver = function(wiki) {
 	this.wiki = wiki;
 	var self = this;
-	var uri = encodeURI(document.location.toString().split("#")[0]);
+	var uri = this.uri();
 	// Async server probe. Until probe finishes, save will fail fast
 	// See also https://github.com/Jermolene/TiddlyWiki5/issues/2276
 	$tw.utils.httpRequest({
@@ -42,6 +42,10 @@ var PutSaver = function(wiki) {
 	});
 };
 
+PutSaver.prototype.uri = function() {
+	return encodeURI(document.location.toString().split("#")[0]);
+};
+
 // TODO: in case of edit conflict
 // Prompt: Do you want to save over this? Y/N
 // Merging would be ideal, and may be possible using future generic merge flow
@@ -55,7 +59,7 @@ PutSaver.prototype.save = function(text, method, callback) {
 		headers["If-Match"] = this.etag;
 	}
 	$tw.utils.httpRequest({
-		url: encodeURI(window.location.href),
+		url: this.uri(),
 		type: "PUT",
 		headers: headers,
 		data: text,
