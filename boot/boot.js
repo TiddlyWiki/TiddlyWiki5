@@ -1547,6 +1547,9 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 						case "basename":
 							value = path.basename(filename,path.extname(filename));
 							break;
+						case "basename-uri-decoded":
+							value = decodeURIComponent(path.basename(filename,path.extname(filename)));
+							break;
 						case "extname":
 							value = path.extname(filename);
 							break;
@@ -1931,6 +1934,7 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("application/enex+xml","utf8",".enex");
 	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","base64",".xlsx");
 	$tw.utils.registerFileType("application/x-bibtex","utf8",".bib");
+	$tw.utils.registerFileType("application/epub+zip","base64",".epub");
 	// Create the wiki store for the app
 	$tw.wiki = new $tw.Wiki();
 	// Install built in tiddler fields modules

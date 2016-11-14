@@ -130,6 +130,8 @@ suffixed
 <$reveal state="""$(field)$!!import-field-source""" type="match" text="constant" default="column" tag="span">
 <$edit-text tiddler=<<field>> field="import-field-value" tag="input" placeholder="constant" default=""/>
 </$reveal>
+<$checkbox tiddler=<<field>> field="import-field-skip-tiddler-if-blank" checked="yes" unchecked="no" default="no">
+Skip this tiddler when field blank
 <br/>
 Title:
 <$tiddler tiddler=<<field>>>
@@ -192,9 +194,16 @@ Title:
 </$tiddler>
 </li>
 <li>
+Row type:
+<$select tiddler=<<row>> field="import-row-type" default="by-field">
+<option value="by-field">By field</option>
+<option value="by-column">By column</option>
+</$select>
+</li>
+<li>
 <$button class="tc-btn-invisible">
 <$action-createtiddler $basetitle="$:/_ExcelImporter/ImportSpecifiers/Field" $savetitle="$:/temp/newtiddler" import-spec-role="field" import-field-name="fieldname" import-field-type="string" import-field-source="column" import-field-column="Column Name" />
-<$action-listops $tiddler=<<row>> $subfilter="[{$:/temp/newtiddler}]"/>
+<$action-listops $tiddler=<<row>> $subfilter="[{$:/temp/newtiddler}] +[putfirst[]]"/>
 {{$:/core/images/new-button}} Add new field
 </$button>
 </li>
@@ -242,7 +251,7 @@ Import sheet name:
 <li>
 <$button class="tc-btn-invisible">
 <$action-createtiddler $basetitle="$:/_ExcelImporter/ImportSpecifiers/Row" $savetitle="$:/temp/newtiddler" import-spec-role="row"/>
-<$action-listops $tiddler=<<sheet>> $subfilter="[{$:/temp/newtiddler}]"/>
+<$action-listops $tiddler=<<sheet>> $subfilter="[{$:/temp/newtiddler}] +[putfirst[]]"/>
 <$action-setfield $tiddler={{{ [{$:/temp/newtiddler}addprefix[$:/state/edit/]] }}} $value="yes"/>
 <$action-setfield $tiddler={{{ [{$:/temp/newtiddler}addprefix[$:/state/expand/]] }}} $value="yes"/>
 {{$:/core/images/new-button}} Add new row
@@ -292,7 +301,7 @@ Caption:
 <li>
 <$button class="tc-btn-invisible">
 <$action-createtiddler $basetitle="$:/_ExcelImporter/ImportSpecifiers/Sheet" $savetitle="$:/temp/newtiddler" import-spec-role="sheet" import-sheet-name="Sheet name"/>
-<$action-listops $tiddler=<<workbook>> $subfilter="[{$:/temp/newtiddler}]"/>
+<$action-listops $tiddler=<<workbook>> $subfilter="[{$:/temp/newtiddler}] +[putfirst[]]"/>
 <$action-setfield $tiddler={{{ [{$:/temp/newtiddler}addprefix[$:/state/edit/]] }}} $value="yes"/>
 <$action-setfield $tiddler={{{ [{$:/temp/newtiddler}addprefix[$:/state/expand/]] }}} $value="yes"/>
 {{$:/core/images/new-button}} Add new sheet
