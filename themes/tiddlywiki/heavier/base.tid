@@ -25,11 +25,11 @@ html body .tc-site-title,
 html body .tc-titlebar,
 html body .tc-subtitle,
 html body .tc-tiddler-missing .tc-title,
-html body .tc-tab-buttons button {
+html body .tc-tab-buttons button,
+html body .tc-tiddler-frame .tc-tiddler-body {
 	font-weight: 500;
 }
 
-html body .tc-view-field-name,
-html body .tc-tiddler-frame .tc-tiddler-body {
+html body .tc-view-field-name {
 	font-weight: 400;
 }
