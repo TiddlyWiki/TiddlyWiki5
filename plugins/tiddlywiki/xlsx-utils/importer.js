@@ -104,6 +104,10 @@ XLSXImporter.prototype.processRowByColumn = function() {
 			self.tiddlerFields[name] = cell.w;		
 		}
 	});
+	// Skip the tiddler entirely if it doesn't have a title
+	if(!this.tiddlerFields.title) {
+		this.skipTiddler = true;
+	}
 };
 
 XLSXImporter.prototype.processRowByField = function() {
@@ -139,12 +143,6 @@ XLSXImporter.prototype.processField = function(fieldImportSpecTitle) {
 				value = fieldImportSpec.fields["import-field-value"]
 				break;
 		}
-		if(fieldImportSpec.fields["import-field-prefix"]) {
-			value = fieldImportSpec.fields["import-field-prefix"] + value;
-		}
-		if(fieldImportSpec.fields["import-field-suffix"]) {
-			value = value + fieldImportSpec.fields["import-field-suffix"];
-		}
 		if((value || "").trim() === "") {
 			if((fieldImportSpec.fields["import-field-skip-tiddler-if-blank"] || "").trim().toLowerCase() === "yes") {
 				this.skipTiddler = true;
@@ -152,6 +150,12 @@ XLSXImporter.prototype.processField = function(fieldImportSpecTitle) {
 			if(fieldImportSpec.fields["import-field-replace-blank"]) {
 				value = fieldImportSpec.fields["import-field-replace-blank"];
 			}
+		}
+		if(fieldImportSpec.fields["import-field-prefix"]) {
+			value = fieldImportSpec.fields["import-field-prefix"] + value;
+		}
+		if(fieldImportSpec.fields["import-field-suffix"]) {
+			value = value + fieldImportSpec.fields["import-field-suffix"];
 		}
 		switch(fieldImportSpec.fields["import-field-list-op"] || "none") {
 			case "none":
