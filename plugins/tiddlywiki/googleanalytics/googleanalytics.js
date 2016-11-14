@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/googleanalytics/googleanalytics.js
 type: application/javascript
 module-type: startup
 
-Runs Google Analytics with the account number in the tiddler `$:/GoogleAnalyticsAccount` and the domain name in `$:/GoogleAnalyticsDomain`
+Runs new "i s o g r a m" Google Analytics with the account number in the tiddler `$:/GoogleAnalyticsAccount` and the domain name in `$:/GoogleAnalyticsDomain`
 
 \*/
 (function(){
@@ -20,29 +20,19 @@ exports.synchronous = true;
 var GA_ACCOUNT,GA_DOMAIN;
 
 exports.startup = function() {
-	(function() {
-		(function(i,s,o,g,r,a,m){
-		console.log("analytics launched");
-		i['GoogleAnalyticsObject']=r;
-		i[r]=i[r]||function(){
-   		(i[r].q=i[r].q||[]).push(arguments)
-			},
-			i[r].l=1*new Date();
-		a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];
-		a.async=1;
-		a.src=g;
-		m.parentNode.insertBefore(a,m)
-   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga')
+	// getting parameters
 	GA_ACCOUNT = $tw.wiki.getTiddlerText("$:/GoogleAnalyticsAccount"),
 		GA_DOMAIN = $tw.wiki.getTiddlerText("$:/GoogleAnalyticsDomain");
 	if (GA_DOMAIN == "" || GA_DOMAIN == undefined) GA_DOMAIN = "auto";
-	console.log("tiddlywiki analytics working with "+GA_ACCOUNT+" - "+GA_DOMAIN);
-   ga('create', GA_ACCOUNT,GA_DOMAIN);
-   console.log("analytics created");
-   ga('send', 'pageview');
-   console.log('analytics sent');
-	})();
+	console.log("tiddlywiki analytics working with account : "+GA_ACCOUNT+" and domain : "+GA_DOMAIN);
+	// using ga "isogram" function
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-109815-12', 'auto');
+  ga('send', 'pageview');
 };
 
 })();
