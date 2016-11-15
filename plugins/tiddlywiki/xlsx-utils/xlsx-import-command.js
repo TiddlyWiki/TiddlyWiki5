@@ -36,7 +36,7 @@ Command.prototype.execute = function() {
 			filename: filename,
 			importSpec: importSpec
 		});
-	$tw.wiki.addTiddlers(importer.importTiddlers());
+	$tw.wiki.addTiddlers(importer.getResults());
 	return null;
 };
 

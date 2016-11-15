@@ -130,6 +130,8 @@ suffixed
 <$reveal state="""$(field)$!!import-field-source""" type="match" text="constant" default="column" tag="span">
 <$edit-text tiddler=<<field>> field="import-field-value" tag="input" placeholder="constant" default=""/>
 </$reveal>
+<$checkbox tiddler=<<field>> field="import-field-skip-tiddler-if-blank" checked="yes" unchecked="no" default="no">
+Skip this tiddler when field blank
 <br/>
 Title:
 <$tiddler tiddler=<<field>>>
@@ -190,6 +192,13 @@ Title:
 <$tiddler tiddler=<<row>>>
 <<rename-current-tiddler>>
 </$tiddler>
+</li>
+<li>
+Row type:
+<$select tiddler=<<row>> field="import-row-type" default="by-field">
+<option value="by-field">By field</option>
+<option value="by-column">By column</option>
+</$select>
 </li>
 <li>
 <$button class="tc-btn-invisible">
