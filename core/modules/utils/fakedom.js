@@ -13,7 +13,8 @@ A barebones implementation of DOM interfaces needed by the rendering mechanism.
 "use strict";
 
 // Sequence number used to enable us to track objects for testing
-var sequenceNumber = null;
+var sequenceNumber = null,
+	elements = {};
 
 var bumpSequenceNumber = function(object) {
 	if(sequenceNumber !== null) {
@@ -67,6 +68,9 @@ TW_Element.prototype.setAttribute = function(name,value) {
 		throw "Cannot setAttribute on a raw TW_Element";
 	}
 	this.attributes[name] = value;
+	if(name === "id" && !elements[value]) {
+		elements[value] = this;
+	}
 };
 
 TW_Element.prototype.setAttributeNS = function(namespace,name,value) {
@@ -78,6 +82,9 @@ TW_Element.prototype.removeAttribute = function(name) {
 		throw "Cannot removeAttribute on a raw TW_Element";
 	}
 	if($tw.utils.hop(this.attributes,name)) {
+		if(name === "id") {
+			delete elements[this.attributes.id];
+		}
 		delete this.attributes[name];
 	}
 };
@@ -262,6 +269,9 @@ var document = {
 	},
 	createTextNode: function(text) {
 		return new TW_TextNode(text);
+	},
+	getElementById: function(id){
+		return elements[id];
 	},
 	compatMode: "CSS1Compat", // For KaTeX to know that we're not a browser in quirks mode
 	isTiddlyWikiFakeDom: true
