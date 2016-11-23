@@ -338,6 +338,7 @@ button svg, button img, label svg, label img {
 	margin: 0;
 	background: none;
 	border: none;
+    cursor: pointer;
 }
 
 .tc-btn-boxed {
