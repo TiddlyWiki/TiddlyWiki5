@@ -1,0 +1,7 @@
+title: $:/Manager
+icon: $:/core/images/list
+color: #bbb
+
+<div class="tc-manager">
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/Manager]!has[draft.of]]" "$:/TagManager">>
+</div>

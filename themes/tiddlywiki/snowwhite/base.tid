@@ -50,7 +50,7 @@ canvas.tc-edit-bitmapeditor  {
 	<<box-shadow "2px 2px 5px rgba(0, 0, 0, 0.5)">>
 }
 
-.tc-drop-down {
+.tc-drop-down, .tc-drop-down-simple {
 	border-radius: 4px;
 	<<box-shadow "2px 2px 10px rgba(0, 0, 0, 0.5)">>
 }

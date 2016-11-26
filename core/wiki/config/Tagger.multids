@@ -1,0 +1,9 @@
+title: $:/config/Tagger/
+
+Filter: 
+Order: forward
+Sort: title
+System: system
+Tag: 
+Untagged: no
+View: wikified
