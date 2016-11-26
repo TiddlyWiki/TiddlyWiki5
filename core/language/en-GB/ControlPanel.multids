@@ -103,6 +103,10 @@ Settings/Caption: Settings
 Settings/EditorToolbar/Caption: Editor Toolbar
 Settings/EditorToolbar/Hint: Enable or disable the editor toolbar:
 Settings/EditorToolbar/Description: Show editor toolbar
+Settings/InfoPanelMode/Caption: Tiddler Info Panel Mode
+Settings/InfoPanelMode/Hint: Control when the tiddler info panel closes:
+Settings/InfoPanelMode/Popup/Description: Tiddler info panel closes automatically
+Settings/InfoPanelMode/Sticky/Description: Tiddler info panel stays open until explicitly closed
 Settings/Hint: These settings let you customise the behaviour of TiddlyWiki.
 Settings/NavigationAddressBar/Caption: Navigation Address Bar
 Settings/NavigationAddressBar/Hint: Behaviour of the browser address bar when navigating to a tiddler:
