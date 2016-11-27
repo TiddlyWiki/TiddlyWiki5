@@ -127,6 +127,10 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	if(hasChanged) {
 		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),fallbackFields,tiddler,newFields,this.wiki.getModificationFields()));
 	}
+	// Trigger actions
+	if(this.checkboxActions) {
+		this.invokeActionString(this.checkboxActions,this,event);
+	}
 };
 
 /*
@@ -134,6 +138,7 @@ Compute the internal state of the widget
 */
 CheckboxWidget.prototype.execute = function() {
 	// Get the parameters from the attributes
+	this.checkboxActions = this.getAttribute("actions");
 	this.checkboxTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.checkboxTag = this.getAttribute("tag");
 	this.checkboxField = this.getAttribute("field");
