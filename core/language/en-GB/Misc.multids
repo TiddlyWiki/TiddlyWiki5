@@ -43,8 +43,6 @@ OfficialPluginLibrary/Hint: The official ~TiddlyWiki plugin library at tiddlywik
 PluginReloadWarning: Please save {{$:/core/ui/Buttons/save-wiki}} and reload {{$:/core/ui/Buttons/refresh}} to allow changes to plugins to take effect
 RecentChanges/DateFormat: DDth MMM YYYY
 SystemTiddler/Tooltip: This is a system tiddler
-Tagger/Caption: Tagger
-TagManager/Caption: Tags
 TagManager/Colour/Heading: Colour
 TagManager/Count/Heading: Count
 TagManager/Icon/Heading: Icon
