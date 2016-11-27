@@ -4,8 +4,8 @@ color: #bbb
 
 \define tag-checkbox-actions()
 <$action-listops
-	$tiddler="$:/config/Tagger/RecentTags"
-	$subfilter="[<tag>] [list[$:/config/Tagger/RecentTags]] +[limit[12]]"
+	$tiddler="$:/config/Manager/RecentTags"
+	$subfilter="[<tag>] [list[$:/config/Manager/RecentTags]] +[limit[12]]"
 />
 \end
 
@@ -21,51 +21,57 @@ color: #bbb
 <div class="tc-manager-wrapper">
 <div class="tc-manager-controls">
 <div class="tc-manager-control">
-Search: <$edit-text tiddler="$:/config/Tagger/Filter" tag="input" default="" placeholder="Search"/>
+Show: <$select tiddler="$:/config/Manager/Show" default="tiddlers">
+<option value="tiddlers">tiddlers</option>
+<option value="tags">tags</option>
+</$select>
 </div>
 <div class="tc-manager-control">
-Filter by tag: <$select tiddler="$:/config/Tagger/Tag" default="">
+Search: <$edit-text tiddler="$:/config/Manager/Filter" tag="input" default="" placeholder="Search"/>
+</div>
+<div class="tc-manager-control">
+Filter by tag: <$select tiddler="$:/config/Manager/Tag" default="">
 <option value="">(none)</option>
-<$list filter="[!is{$:/config/Tagger/System}tags[]!is[system]sort[title]]" variable="tag">
+<$list filter="[!is{$:/config/Manager/System}tags[]!is[system]sort[title]]" variable="tag">
 <option value=<<tag>>><$text text=<<tag>>/></option>
 </$list>
 </$select>
 </div>
 <div class="tc-manager-control">
-Sort by: <$select tiddler="$:/config/Tagger/Sort" default="title">
+Sort by: <$select tiddler="$:/config/Manager/Sort" default="title">
 <optgroup label="Common">
 <$list filter="title modified modifier created creator created" variable="field">
 <option value=<<field>>><$text text=<<field>>/></option>
 </$list>
 </optgroup>
 <optgroup label="All">
-<$list filter="[!is{$:/config/Tagger/System}fields[]sort[title]] -title -modified -modifier -created -creator -created" variable="field">
+<$list filter="[all{$:/config/Manager/Show}!is{$:/config/Manager/System}fields[]sort[title]] -title -modified -modifier -created -creator -created" variable="field">
 <option value=<<field>>><$text text=<<field>>/></option>
 </$list>
 </optgroup>
 </$select>
-<$checkbox tiddler="$:/config/Tagger/Order" field="text" checked="reverse" unchecked="forward" default="forward">
+<$checkbox tiddler="$:/config/Manager/Order" field="text" checked="reverse" unchecked="forward" default="forward">
 Reverse order
 </$checkbox>
 </div>
 <div class="tc-manager-control">
-<$checkbox tiddler="$:/config/Tagger/Untagged" field="text" checked="yes" unchecked="no" default="no">
+<$checkbox tiddler="$:/config/Manager/Untagged" field="text" checked="yes" unchecked="no" default="no">
 Only show untagged tiddlers
 </$checkbox>
 </div>
 <div class="tc-manager-control">
-<$checkbox tiddler="$:/config/Tagger/System" field="text" checked="missing" unchecked="system" default="system">
+<$checkbox tiddler="$:/config/Manager/System" field="text" checked="" unchecked="system" default="system">
 Show system tiddlers
 </$checkbox>
 </div>
 <div class="tc-manager-control">
-<$checkbox tiddler="$:/config/Tagger/View" field="text" checked="plain" unchecked="wikified" default="wikified">
+<$checkbox tiddler="$:/config/Manager/View" field="text" checked="plain" unchecked="wikified" default="wikified">
 Show raw text
 </$checkbox>
 </div>
 </div>
 <div class="tc-manager-list">
-<$list filter="[!is{$:/config/Tagger/System}search{$:/config/Tagger/Filter}tag:strict{$:/config/Tagger/Tag}untagged:no{$:/config/Tagger/Untagged}sort{$:/config/Tagger/Sort}order{$:/config/Tagger/Order}]">
+<$list filter="[all{$:/config/Manager/Show}!is{$:/config/Manager/System}search{$:/config/Manager/Filter}tag:strict{$:/config/Manager/Tag}untagged:no{$:/config/Manager/Untagged}sort{$:/config/Manager/Sort}order{$:/config/Manager/Order}]">
 <$vars transclusion=<<currentTiddler>>>
 <div style="tc-manager-list-item">
 <$button popup=<<qualify "$:/state/manager/popup">> class="tc-btn-invisible tc-manager-list-item-heading">
@@ -74,10 +80,10 @@ Show raw text
 <$reveal state=<<qualify "$:/state/manager/popup">> type="nomatch" text="" default="" tag="div" class="tc-manager-list-item-content tc-popup-handle">
 <div class="tc-manager-list-item-content-tiddler">
 <div class="tc-manager-list-item-content-tiddler-item">
-<$reveal state="$:/config/Tagger/View" type="nomatch" text="plain">
+<$reveal state="$:/config/Manager/View" type="nomatch" text="plain">
 <$transclude mode="block"/>
 </$reveal>
-<$reveal state="$:/config/Tagger/View" type="match" text="plain">
+<$reveal state="$:/config/Manager/View" type="match" text="plain">
 <pre>
 <code>
 <$view/>
@@ -93,7 +99,7 @@ Show raw text
 </div>
 <div class="tc-manager-list-item-content-sidebar">
 <div class="tc-manager-list-item-content-sidebar-item">
-<$list filter="[is[current]tags[]] [list[$:/config/Tagger/RecentTags]] +[sort[title]] " variable="tag">
+<$list filter="[is[current]tags[]] [list[$:/config/Manager/RecentTags]] +[sort[title]] " variable="tag">
 <div>
 <$checkbox tiddler=<<currentTiddler>> tag=<<tag>> actions=<<tag-checkbox-actions>>>
 <$macrocall $name="tag-pill" tag=<<tag>>/>

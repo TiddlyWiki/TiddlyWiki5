@@ -1,5 +1,6 @@
-title: $:/config/Tagger/
+title: $:/config/Manager/
 
+Show: tiddlers
 Filter: 
 Order: forward
 Sort: title
