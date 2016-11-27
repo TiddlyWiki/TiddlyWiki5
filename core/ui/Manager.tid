@@ -19,108 +19,108 @@ color: #bbb
 \end
 
 <div class="tc-manager-wrapper">
-<div class="tc-manager-controls">
-<div class="tc-manager-control">
-Show: <$select tiddler="$:/config/Manager/Show" default="tiddlers">
-<option value="tiddlers">tiddlers</option>
-<option value="tags">tags</option>
-</$select>
-</div>
-<div class="tc-manager-control">
-Search: <$edit-text tiddler="$:/config/Manager/Filter" tag="input" default="" placeholder="Search"/>
-</div>
-<div class="tc-manager-control">
-Filter by tag: <$select tiddler="$:/config/Manager/Tag" default="">
-<option value="">(none)</option>
-<$list filter="[!is{$:/config/Manager/System}tags[]!is[system]sort[title]]" variable="tag">
-<option value=<<tag>>><$text text=<<tag>>/></option>
-</$list>
-</$select>
-</div>
-<div class="tc-manager-control">
-Sort by: <$select tiddler="$:/config/Manager/Sort" default="title">
-<optgroup label="Common">
-<$list filter="title modified modifier created creator created" variable="field">
-<option value=<<field>>><$text text=<<field>>/></option>
-</$list>
-</optgroup>
-<optgroup label="All">
-<$list filter="[all{$:/config/Manager/Show}!is{$:/config/Manager/System}fields[]sort[title]] -title -modified -modifier -created -creator -created" variable="field">
-<option value=<<field>>><$text text=<<field>>/></option>
-</$list>
-</optgroup>
-</$select>
-<$checkbox tiddler="$:/config/Manager/Order" field="text" checked="reverse" unchecked="forward" default="forward">
-Reverse order
-</$checkbox>
-</div>
-<div class="tc-manager-control">
-<$checkbox tiddler="$:/config/Manager/Untagged" field="text" checked="yes" unchecked="no" default="no">
-Only show untagged tiddlers
-</$checkbox>
-</div>
-<div class="tc-manager-control">
-<$checkbox tiddler="$:/config/Manager/System" field="text" checked="" unchecked="system" default="system">
-Show system tiddlers
-</$checkbox>
-</div>
-<div class="tc-manager-control">
-<$checkbox tiddler="$:/config/Manager/View" field="text" checked="plain" unchecked="wikified" default="wikified">
-Show raw text
-</$checkbox>
-</div>
-</div>
-<div class="tc-manager-list">
-<$list filter="[all{$:/config/Manager/Show}!is{$:/config/Manager/System}search{$:/config/Manager/Filter}tag:strict{$:/config/Manager/Tag}untagged:no{$:/config/Manager/Untagged}sort{$:/config/Manager/Sort}order{$:/config/Manager/Order}]">
-<$vars transclusion=<<currentTiddler>>>
-<div style="tc-manager-list-item">
-<$button popup=<<qualify "$:/state/manager/popup">> class="tc-btn-invisible tc-manager-list-item-heading" selectedClass="tc-manager-list-item-heading-selected">
-<$text text=<<currentTiddler>>/>
-</$button>
-<$reveal state=<<qualify "$:/state/manager/popup">> type="nomatch" text="" default="" tag="div" class="tc-manager-list-item-content tc-popup-handle">
-<div class="tc-manager-list-item-content-tiddler">
-<$reveal state="$:/config/Manager/View" type="nomatch" text="plain" tag="div" class="tc-manager-list-item-content-tiddler-item">
-<div class="tc-manager-list-item-content-item-heading">
-Wikified text
-</div>
-<div class="tc-manager-list-item-content-item-body">
-<$transclude mode="block"/>
-</div>
-</$reveal>
-<$reveal state="$:/config/Manager/View" type="match" text="plain" tag="div" class="tc-manager-list-item-content-tiddler-item">
-<div class="tc-manager-list-item-content-item-heading">
-Raw text
-</div>
-<div class="tc-manager-list-item-content-item-body">
-<pre><code><$view/></code></pre>
-</div>
-</$reveal>
-<div class="tc-manager-list-item-content-tiddler-item">
-<div class="tc-manager-list-item-content-item-heading">
-Fields
-</div>
-<table class="tc-manager-list-item-content-item-body tc-manager-list-item-content-item-body-table">
-<tbody>
-<$list filter="[all[current]fields[]sort[title]] -text" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
-</tbody>
-</table>
-</div>
-</div>
-<div class="tc-manager-list-item-content-sidebar">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/Manager/ItemSidebar]!has[draft.of]]" variable="listItem">
-<div class="tc-manager-list-item-content-sidebar-item">
-<div class="tc-manager-list-item-content-item-heading">
-<$transclude tiddler=<<listItem>> field="caption"/>
-</div>
-<div class="tc-manager-list-item-content-item-body">
-<$transclude tiddler=<<listItem>>/>
-</div>
-</div>
-</$list>
-</div>
-</$reveal>
-</div>
-</$vars>
-</$list>
-</div>
+	<div class="tc-manager-controls">
+		<div class="tc-manager-control">
+			Show: <$select tiddler="$:/config/Manager/Show" default="tiddlers">
+				<option value="tiddlers">tiddlers</option>
+				<option value="tags">tags</option>
+			</$select>
+		</div>
+		<div class="tc-manager-control">
+			Search: <$edit-text tiddler="$:/config/Manager/Filter" tag="input" default="" placeholder="Search"/>
+		</div>
+		<div class="tc-manager-control">
+			Filter by tag: <$select tiddler="$:/config/Manager/Tag" default="">
+				<option value="">(none)</option>
+				<$list filter="[!is{$:/config/Manager/System}tags[]!is[system]sort[title]]" variable="tag">
+					<option value=<<tag>>><$text text=<<tag>>/></option>
+				</$list>
+			</$select>
+		</div>
+		<div class="tc-manager-control">
+			Sort by: <$select tiddler="$:/config/Manager/Sort" default="title">
+				<optgroup label="Common">
+					<$list filter="title modified modifier created creator created" variable="field">
+						<option value=<<field>>><$text text=<<field>>/></option>
+					</$list>
+				</optgroup>
+				<optgroup label="All">
+					<$list filter="[all{$:/config/Manager/Show}!is{$:/config/Manager/System}fields[]sort[title]] -title -modified -modifier -created -creator -created" variable="field">
+						<option value=<<field>>><$text text=<<field>>/></option>
+					</$list>
+				</optgroup>
+			</$select>
+			<$checkbox tiddler="$:/config/Manager/Order" field="text" checked="reverse" unchecked="forward" default="forward">
+				Reverse order
+			</$checkbox>
+		</div>
+		<div class="tc-manager-control">
+			<$checkbox tiddler="$:/config/Manager/Untagged" field="text" checked="yes" unchecked="no" default="no">
+				Only show untagged tiddlers
+			</$checkbox>
+		</div>
+		<div class="tc-manager-control">
+			<$checkbox tiddler="$:/config/Manager/System" field="text" checked="" unchecked="system" default="system">
+				Show system tiddlers
+			</$checkbox>
+		</div>
+		<div class="tc-manager-control">
+			<$checkbox tiddler="$:/config/Manager/View" field="text" checked="plain" unchecked="wikified" default="wikified">
+				Show raw text
+			</$checkbox>
+		</div>
+	</div>
+	<div class="tc-manager-list">
+		<$list filter="[all{$:/config/Manager/Show}!is{$:/config/Manager/System}search{$:/config/Manager/Filter}tag:strict{$:/config/Manager/Tag}untagged:no{$:/config/Manager/Untagged}sort{$:/config/Manager/Sort}order{$:/config/Manager/Order}]">
+			<$vars transclusion=<<currentTiddler>>>
+				<div style="tc-manager-list-item">
+					<$button popup=<<qualify "$:/state/manager/popup">> class="tc-btn-invisible tc-manager-list-item-heading" selectedClass="tc-manager-list-item-heading-selected">
+						<$text text=<<currentTiddler>>/>
+					</$button>
+					<$reveal state=<<qualify "$:/state/manager/popup">> type="nomatch" text="" default="" tag="div" class="tc-manager-list-item-content tc-popup-handle">
+						<div class="tc-manager-list-item-content-tiddler">
+							<$reveal state="$:/config/Manager/View" type="nomatch" text="plain" tag="div" class="tc-manager-list-item-content-tiddler-item">
+								<div class="tc-manager-list-item-content-item-heading">
+									Wikified text
+								</div>
+								<div class="tc-manager-list-item-content-item-body">
+									<$transclude mode="block"/>
+								</div>
+							</$reveal>
+							<$reveal state="$:/config/Manager/View" type="match" text="plain" tag="div" class="tc-manager-list-item-content-tiddler-item">
+								<div class="tc-manager-list-item-content-item-heading">
+									Raw text
+								</div>
+								<div class="tc-manager-list-item-content-item-body">
+									<pre><code><$view/></code></pre>
+								</div>
+							</$reveal>
+							<div class="tc-manager-list-item-content-tiddler-item">
+								<div class="tc-manager-list-item-content-item-heading">
+									Fields
+								</div>
+								<table class="tc-manager-list-item-content-item-body tc-manager-list-item-content-item-body-table">
+									<tbody>
+										<$list filter="[all[current]fields[]sort[title]] -text" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="tc-manager-list-item-content-sidebar">
+							<$list filter="[all[shadows+tiddlers]tag[$:/tags/Manager/ItemSidebar]!has[draft.of]]" variable="listItem">
+								<div class="tc-manager-list-item-content-sidebar-item">
+									<div class="tc-manager-list-item-content-item-heading">
+										<$transclude tiddler=<<listItem>> field="caption"/>
+									</div>
+									<div class="tc-manager-list-item-content-item-body">
+										<$transclude tiddler=<<listItem>>/>
+									</div>
+								</div>
+							</$list>
+						</div>
+					</$reveal>
+				</div>
+			</$vars>
+		</$list>
+	</div>
 </div>
