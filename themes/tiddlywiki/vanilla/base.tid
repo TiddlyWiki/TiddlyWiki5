@@ -1768,6 +1768,10 @@ html body.tc-body.tc-single-tiddler-window {
 	padding: 3px;
 }
 
+.tc-manager-list-item-heading-selected {
+	font-weight: bold;
+}
+
 .tc-manager-list-item-heading:hover {
 	background: <<colour primary>>;
 	color: <<colour background>>;
@@ -1785,9 +1789,21 @@ html body.tc-body.tc-single-tiddler-window {
     white-space: nowrap;
 }
 
-.tc-manager-list-item-content-sidebar-item {
-    border-top: 0.5em solid <<colour muted-foreground>>;
-    padding: 0 0.5em 0 0.5em;
+.tc-manager-list-item-content-item-heading {
+    background: <<colour muted-foreground>>;
+	text-transform: uppercase;
+	font-size: 0.6em;
+	font-weight: bold;	
+}
+
+.tc-manager-list-item-content-item-body {
+	padding: 0 0.5em 0 0.5em;
+}
+
+.tc-manager-list-item-content-item-body > pre {
+	margin: 0.5em 0 0.5em 0;
+	border: none;
+	background: inherit;
 }
 
 .tc-manager-list-item-content-tiddler {
@@ -1797,14 +1813,14 @@ html body.tc-body.tc-single-tiddler-window {
     border-bottom: 0.5em solid <<colour muted-foreground>>;
 }
 
-.tc-manager-list-item-content-tiddler-item {
-    border-top: 0.5em solid <<colour muted-foreground>>;
-    padding: 0.5em;	
-}
-
-.tc-manager-list-item-content-tiddler-item.tc-manager-list-item-content-tiddler-item-table {
+.tc-manager-list-item-content-item-body.tc-manager-list-item-content-item-body-table {
+	border: none;
 	padding: 0;
 	margin: 0;
+}
+
+.tc-manager-list-item-content-item-body.tc-manager-list-item-content-item-body-table td {
+	border: none;
 }
 
 /*

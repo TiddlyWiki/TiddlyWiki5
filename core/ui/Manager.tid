@@ -74,48 +74,49 @@ Show raw text
 <$list filter="[all{$:/config/Manager/Show}!is{$:/config/Manager/System}search{$:/config/Manager/Filter}tag:strict{$:/config/Manager/Tag}untagged:no{$:/config/Manager/Untagged}sort{$:/config/Manager/Sort}order{$:/config/Manager/Order}]">
 <$vars transclusion=<<currentTiddler>>>
 <div style="tc-manager-list-item">
-<$button popup=<<qualify "$:/state/manager/popup">> class="tc-btn-invisible tc-manager-list-item-heading">
+<$button popup=<<qualify "$:/state/manager/popup">> class="tc-btn-invisible tc-manager-list-item-heading" selectedClass="tc-manager-list-item-heading-selected">
 <$text text=<<currentTiddler>>/>
 </$button>
 <$reveal state=<<qualify "$:/state/manager/popup">> type="nomatch" text="" default="" tag="div" class="tc-manager-list-item-content tc-popup-handle">
 <div class="tc-manager-list-item-content-tiddler">
-<div class="tc-manager-list-item-content-tiddler-item">
-<$reveal state="$:/config/Manager/View" type="nomatch" text="plain">
-<$transclude mode="block"/>
-</$reveal>
-<$reveal state="$:/config/Manager/View" type="match" text="plain">
-<pre>
-<code>
-<$view/>
-</code>
-</pre>
-</$reveal>
+<$reveal state="$:/config/Manager/View" type="nomatch" text="plain" tag="div" class="tc-manager-list-item-content-tiddler-item">
+<div class="tc-manager-list-item-content-item-heading">
+Wikified text
 </div>
-<table class="tc-manager-list-item-content-tiddler-item tc-manager-list-item-content-tiddler-item-table">
+<div class="tc-manager-list-item-content-item-body">
+<$transclude mode="block"/>
+</div>
+</$reveal>
+<$reveal state="$:/config/Manager/View" type="match" text="plain" tag="div" class="tc-manager-list-item-content-tiddler-item">
+<div class="tc-manager-list-item-content-item-heading">
+Raw text
+</div>
+<div class="tc-manager-list-item-content-item-body">
+<pre><code><$view/></code></pre>
+</div>
+</$reveal>
+<div class="tc-manager-list-item-content-tiddler-item">
+<div class="tc-manager-list-item-content-item-heading">
+Fields
+</div>
+<table class="tc-manager-list-item-content-item-body tc-manager-list-item-content-item-body-table">
 <tbody>
 <$list filter="[all[current]fields[]sort[title]] -text" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
 </tbody>
 </table>
 </div>
+</div>
 <div class="tc-manager-list-item-content-sidebar">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Manager/ItemSidebar]!has[draft.of]]" variable="listItem">
 <div class="tc-manager-list-item-content-sidebar-item">
-<$list filter="[is[current]tags[]] [list[$:/config/Manager/RecentTags]] +[sort[title]] " variable="tag">
-<div>
-<$checkbox tiddler=<<currentTiddler>> tag=<<tag>> actions=<<tag-checkbox-actions>>>
-<$macrocall $name="tag-pill" tag=<<tag>>/>
-</$checkbox>
+<div class="tc-manager-list-item-content-item-heading">
+<$transclude tiddler=<<listItem>> field="caption"/>
+</div>
+<div class="tc-manager-list-item-content-item-body">
+<$transclude tiddler=<<listItem>>/>
+</div>
 </div>
 </$list>
-<$macrocall $name="tag-picker" actions=<<tag-picker-actions>>/>
-</div>
-<div class="tc-manager-list-item-content-sidebar-item">
-<p>
-<$button to=<<currentTiddler>>>{{$:/core/images/link}} open</$button>
-</p>
-<p>
-<$button message="tm-edit-tiddler" param=<<currentTiddler>>>{{$:/core/images/edit-button}} edit</$button>
-</p>
-</div>
 </div>
 </$reveal>
 </div>
