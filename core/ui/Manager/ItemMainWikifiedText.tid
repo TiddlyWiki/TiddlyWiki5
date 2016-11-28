@@ -1,5 +1,0 @@
-title: $:/Manager/ItemMain/WikifiedText
-tags: $:/tags/Manager/ItemMain
-caption: Wikified text
-
-<$transclude mode="block"/>

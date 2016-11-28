@@ -202,42 +202,32 @@ DropZoneWidget.prototype.importDataTypes = [
 ];
 
 DropZoneWidget.prototype.handlePasteEvent  = function(event) {
-	var self = this,
-		createTiddlerFromString = function(text,type) {
-			var tiddlerFields = {
-				title: self.wiki.generateNewTitle("Untitled"),
-				text: text,
-				type: type
-			};
-			if($tw.log.IMPORT) {
-				console.log("Importing string '" + text + "', type: '" + type + "'");
-			}
-			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify([tiddlerFields])});
-		};
 	// Let the browser handle it if we're in a textarea or input box
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) == -1) {
-		var items = event.clipboardData.items;
+		var self = this,
+			items = event.clipboardData.items;
 		// Enumerate the clipboard items
-		if(items) {
-			for(var t = 0; t<items.length; t++) {
-				var item = items[t];
-				if(item.kind === "file") {
-					// Import any files
-					this.wiki.readFile(item.getAsFile(),function(tiddlerFieldsArray) {
-						self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
-					});
-				} else if(item.kind === "string") {
-					// Create tiddlers from string items
-					item.getAsString(function(str) {
-						createTiddlerFromString(str,item.type);
-					});
-				}
-			}
-		} else {
-			// Enumerate the clipboard types
-			var type = event.clipboardData.types[0];
-			if(type) {
-				createTiddlerFromString(event.clipboardData.getData(type),type);
+		for(var t = 0; t<items.length; t++) {
+			var item = items[t];
+			if(item.kind === "file") {
+				// Import any files
+				this.wiki.readFile(item.getAsFile(),function(tiddlerFieldsArray) {
+					self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
+				});
+			} else if(item.kind === "string") {
+				// Create tiddlers from string items
+				var type = item.type;
+				item.getAsString(function(str) {
+					var tiddlerFields = {
+						title: self.wiki.generateNewTitle("Untitled"),
+						text: str,
+						type: type
+					};
+					if($tw.log.IMPORT) {
+						console.log("Importing string '" + str + "', type: '" + type + "'");
+					}
+					self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify([tiddlerFields])});
+				});
 			}
 		}
 		// Tell the browser that we've handled the paste

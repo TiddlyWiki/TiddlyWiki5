@@ -1287,14 +1287,6 @@ html body.tc-body.tc-single-tiddler-window {
 	position: relative;
 }
 
-.tc-drop-down-simple {
-	min-width: 380px;
-	border: 1px solid <<colour dropdown-border>>;
-	background-color: <<colour dropdown-background>>;
-	padding: 7px;
-	margin: 4px 0 0 0;
-}
-
 .tc-drop-down {
 	min-width: 380px;
 	border: 1px solid <<colour dropdown-border>>;
@@ -1730,103 +1722,6 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button.tc-tab-selected {
 	background-color: <<colour sidebar-tab-background-selected>>;
-	border: none;
-}
-
-/*
-** Manager
-*/
-
-.tc-manager-wrapper {
-	
-}
-
-.tc-manager-controls {
-	
-}
-
-.tc-manager-control {
-	margin: 0.5em 0;
-}
-
-.tc-manager-list {
-	width: 100%;
-	border-top: 1px solid <<colour muted-foreground>>;
-	border-left: 1px solid <<colour muted-foreground>>;
-	border-right: 1px solid <<colour muted-foreground>>;
-}
-
-.tc-manager-list-item {
-
-}
-
-.tc-manager-list-item-heading {
-    display: block;
-    width: 100%;
-    text-align: left;	
-	border-bottom: 1px solid <<colour muted-foreground>>;
-	padding: 3px;
-}
-
-.tc-manager-list-item-heading-selected {
-	font-weight: bold;
-	color: <<colour background>>;
-	fill: <<colour background>>;
-	background-color: <<colour foreground>>;
-}
-
-.tc-manager-list-item-heading:hover {
-	background: <<colour primary>>;
-	color: <<colour background>>;
-}
-
-.tc-manager-list-item-content {
-	display: flex;
-}
-
-.tc-manager-list-item-content-sidebar {
-    flex: 1 0;
-    background: <<colour tiddler-editor-background>>;
-    border-right: 0.5em solid <<colour muted-foreground>>;
-    border-bottom: 0.5em solid <<colour muted-foreground>>;
-    white-space: nowrap;
-}
-
-.tc-manager-list-item-content-item-heading {
-	display: block;
-	width: 100%;
-	text-align: left;
-    background: <<colour muted-foreground>>;
-	text-transform: uppercase;
-	font-size: 0.6em;
-	font-weight: bold;
-    padding: 0.5em 0 0.5em 0;
-}
-
-.tc-manager-list-item-content-item-body {
-	padding: 0 0.5em 0 0.5em;
-}
-
-.tc-manager-list-item-content-item-body > pre {
-	margin: 0.5em 0 0.5em 0;
-	border: none;
-	background: inherit;
-}
-
-.tc-manager-list-item-content-tiddler {
-    flex: 3 1;
-    border-left: 0.5em solid <<colour muted-foreground>>;
-    border-right: 0.5em solid <<colour muted-foreground>>;
-    border-bottom: 0.5em solid <<colour muted-foreground>>;
-}
-
-.tc-manager-list-item-content-item-body > table {
-	border: none;
-	padding: 0;
-	margin: 0;
-}
-
-.tc-manager-list-item-content-item-body > table td {
 	border: none;
 }
 
