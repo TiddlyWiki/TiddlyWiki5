@@ -13,6 +13,23 @@ Filter operators for manipulating the current selection list
 "use strict";
 
 /*
+Order a list
+*/
+exports.order = function(source,operator,options) {
+	var results = [];
+	if(operator.operand.toLowerCase() === "reverse") {
+		source(function(tiddler,title) {
+			results.unshift(title);
+		});
+	} else {
+		source(function(tiddler,title) {
+			results.push(title);
+		});		
+	}
+	return results;
+};
+
+/*
 Reverse list
 */
 exports.reverse = function(source,operator,options) {
