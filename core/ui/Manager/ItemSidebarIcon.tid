@@ -1,0 +1,9 @@
+title: $:/Manager/ItemSidebar/Icon
+tags: $:/tags/Manager/ItemSidebar
+caption: Icon
+
+<p>
+<$macrocall $name="image-picker-dropdown" image-tiddler={{!!icon}} fallback="(none)" actions="""
+<$action-setfield $field="icon" $value=<<imageTitle>>/>
+"""/>
+</p>

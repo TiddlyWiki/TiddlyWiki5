@@ -1,0 +1,16 @@
+title: $:/Manager/ItemSidebar/Tags
+tags: $:/tags/Manager/ItemSidebar
+caption: Tags
+
+<p>
+<$list filter="[is[current]tags[]] [list[$:/config/Manager/RecentTags]] +[sort[title]] " variable="tag">
+<div>
+<$checkbox tiddler=<<currentTiddler>> tag=<<tag>> actions=<<tag-checkbox-actions>>>
+<$macrocall $name="tag-pill" tag=<<tag>>/>
+</$checkbox>
+</div>
+</$list>
+</p>
+<p>
+<$macrocall $name="tag-picker" actions=<<tag-picker-actions>>/>
+</p>

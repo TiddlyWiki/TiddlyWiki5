@@ -16,16 +16,22 @@ Filter operator returning all the selected tiddlers that are untagged
 Export our filter function
 */
 exports.untagged = function(source,operator,options) {
-	var results = [];
+	var results = [],
+		isTagged = (operator.operand || operator.suffix || "").toLowerCase() === "no" ? 
+			function(tiddler) {
+				return false;
+			} : function(tiddler) {
+				return tiddler && $tw.utils.isArray(tiddler.fields.tags) && tiddler.fields.tags.length > 0;
+			};
 	if(operator.prefix === "!") {
 		source(function(tiddler,title) {
-			if(tiddler && $tw.utils.isArray(tiddler.fields.tags) && tiddler.fields.tags.length > 0) {
+			if(isTagged(tiddler)) {
 				$tw.utils.pushTop(results,title);
 			}
 		});
 	} else {
 		source(function(tiddler,title) {
-			if(!tiddler || !tiddler.hasField("tags") || ($tw.utils.isArray(tiddler.fields.tags) && tiddler.fields.tags.length === 0)) {
+			if(!isTagged(tiddler)) {
 				$tw.utils.pushTop(results,title);
 			}
 		});

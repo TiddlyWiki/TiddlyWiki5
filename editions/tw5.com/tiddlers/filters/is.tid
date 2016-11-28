@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20150220161001000
+modified: 20161127142329969
 tags: [[Filter Operators]] [[Common Operators]] [[Negatable Operators]]
 title: is Operator
 type: text/vnd.tiddlywiki
@@ -23,7 +23,7 @@ The parameter <<.place C>> is one of the following fundamental categories:
 |^`tag` |is in use as a tag |
 |^`tiddler` |exists as a non-shadow tiddler |
 
-If <<.place C>> is anything else, the output is an error message.
+If <<.place C>> is anything else an error message is returned. <<.from-version "5.1.14"> if <<.place C>> is blank, the output is passed through unchanged (in earlier versions an error message was returned).
 
 `!is[tiddler]` is a synonym for `is[missing]`, and vice versa.
 
