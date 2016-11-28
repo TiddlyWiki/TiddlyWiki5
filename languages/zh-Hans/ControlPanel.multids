@@ -100,11 +100,15 @@ Settings/CamelCase/Caption: 驼峰式维基链接
 Settings/CamelCase/Hint: 您可以全域禁用驼峰式短语自动链接。须保存后重新加载，方才生效。
 Settings/CamelCase/Description: 启用自动驼峰式链接
 Settings/Caption: 设置
+Settings/DefaultSidebarTab/Caption: 默认侧边栏页签
+Settings/DefaultSidebarTab/Hint: 指定默认显示的侧边栏页签
 Settings/EditorToolbar/Caption: 编辑器工具栏
 Settings/EditorToolbar/Hint: 启用或禁用编辑器工具栏︰
 Settings/EditorToolbar/Description: 显示编辑器工具栏
-Settings/DefaultSidebarTab/Caption: 默认侧边栏页签
-Settings/DefaultSidebarTab/Hint: 指定默认显示的侧边栏页签
+Settings/InfoPanelMode/Caption: 条目信息面板模式
+Settings/InfoPanelMode/Hint: 控制条目信息面板何时关闭︰
+Settings/InfoPanelMode/Popup/Description: 条目信息面板自动关闭
+Settings/InfoPanelMode/Sticky/Description: 条目信息面板保持打开状态，直到明确关闭
 Settings/Hint: 这些高级设置让您定制 TiddlyWiki 的行为。
 Settings/LinkToBehaviour/Caption: 条目开启行为
 Settings/LinkToBehaviour/InsideRiver/Hint: 从故事河//中//导航
