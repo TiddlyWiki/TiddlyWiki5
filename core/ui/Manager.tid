@@ -20,7 +20,7 @@ color: #bbb
 
 \define list-item-content-item()
 <div class="tc-manager-list-item-content-item">
-	<$vars state-title=<<qualify "$:/state/popup/manager/item/$(listItem)$">>>
+	<$vars state-title="""$:/state/popup/manager/item/$(listItem)$""">
 		<$reveal state=<<state-title>> type="match" text="show" default="show" tag="div">
 			<$button set=<<state-title>> setTo="hide" class="tc-btn-invisible tc-manager-list-item-content-item-heading">
 				{{$:/core/images/down-arrow}} <$transclude tiddler=<<listItem>> field="caption"/>
@@ -81,12 +81,7 @@ color: #bbb
 		</div>
 		<div class="tc-manager-control">
 			<$checkbox tiddler="$:/config/Manager/System" field="text" checked="" unchecked="system" default="system">
-				Show system tiddlers
-			</$checkbox>
-		</div>
-		<div class="tc-manager-control">
-			<$checkbox tiddler="$:/config/Manager/View" field="text" checked="plain" unchecked="wikified" default="wikified">
-				Show raw text
+				Include system tiddlers
 			</$checkbox>
 		</div>
 	</div>

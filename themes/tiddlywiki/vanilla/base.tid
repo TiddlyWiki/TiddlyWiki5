@@ -1770,6 +1770,9 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-manager-list-item-heading-selected {
 	font-weight: bold;
+	color: <<colour background>>;
+	fill: <<colour background>>;
+	background-color: <<colour foreground>>;
 }
 
 .tc-manager-list-item-heading:hover {
