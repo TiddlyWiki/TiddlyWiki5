@@ -10,6 +10,6 @@ The <<.def tag-picker>> [[macro|Macros]] generates a combination of a text box a
 !! Parameters
 
 ;actions
-: Action widgets to be triggered when the pill is clicked
+: Action widgets to be triggered when the pill is clicked. Within the text, the variable ''tag'' contains the title of the selected tag.
 
 <<.macro-examples "tag-picker">>
