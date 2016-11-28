@@ -65,12 +65,7 @@ CheckboxWidget.prototype.getValue = function() {
 			}
 		}
 		if(this.checkboxField) {
-			var value;
-			if($tw.utils.hop(tiddler.fields,this.checkboxField)) {
-				value = tiddler.fields[this.checkboxField] || "";
-			} else {
-				value = this.checkboxDefault || "";
-			}
+			var value = tiddler.fields[this.checkboxField] || this.checkboxDefault || "";
 			if(value === this.checkboxChecked) {
 				return true;
 			}

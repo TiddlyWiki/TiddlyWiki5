@@ -3,31 +3,24 @@ tags: $:/tags/Macro
 
 \define image-picker-inner(actions)
 <$button tag="a" tooltip="""$(imageTitle)$""">
+
 $actions$
+
 <$transclude tiddler=<<imageTitle>>/>
+
 </$button>
 \end
 
 \define image-picker(actions,subfilter:"")
 <div class="tc-image-chooser">
+
 <$list filter="[all[shadows+tiddlers]is[image]$subfilter$!has[draft.of]] -[type[application/pdf]] +[sort[title]]" variable="imageTitle">
+
 <$macrocall $name="image-picker-inner" actions="""$actions$"""/>
+
 </$list>
+
 </div>
+
 \end
 
-\define image-picker-dropdown(image-tiddler,fallback,actions)
-<div class="tc-image-chooser-wrapper">
-<$button popup=<<qualify "$:/state/popup/image-picker">> class="tc-btn-invisible">
-<$transclude tiddler="""$image-tiddler$""">
-$fallback$
-</$transclude>
-</$button>
-<div class="tc-block-dropdown-wrapper">
-<$reveal state=<<qualify "$:/state/popup/image-picker">> type="nomatch" text="" default="">
-<div class="tc-block-dropdown">
-<$macrocall $name="image-picker" actions="""$actions$"""/>
-</div>
-</$reveal>
-</div>
-\end

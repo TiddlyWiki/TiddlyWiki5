@@ -28,20 +28,11 @@ Export our filter function
 exports.is = function(source,operator,options) {
 	// Dispatch to the correct isfilteroperator
 	var isFilterOperators = getIsFilterOperators();
-	if(operator.operand) {
-		var isFilterOperator = isFilterOperators[operator.operand];
-		if(isFilterOperator) {
-			return isFilterOperator(source,operator.prefix,options);
-		} else {
-			return [$tw.language.getString("Error/IsFilterOperator")];
-		}
+	var isFilterOperator = isFilterOperators[operator.operand];
+	if(isFilterOperator) {
+		return isFilterOperator(source,operator.prefix,options);
 	} else {
-		// Return all tiddlers if the operand is missing
-		var results = [];
-		source(function(tiddler,title) {
-			results.push(title);
-		});
-		return results;
+		return [$tw.language.getString("Error/IsFilterOperator")];
 	}
 };
 
