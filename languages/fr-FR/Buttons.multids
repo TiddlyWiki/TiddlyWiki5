@@ -92,6 +92,12 @@ ShowSideBar/Caption: afficher la barre latérale
 ShowSideBar/Hint: Affiche la barre latérale
 TagManager/Caption: gestionnaire de tags
 TagManager/Hint:  Ouvre le gestionnaire de tags
+Timestamp/Caption: horodatage
+Timestamp/Hint: Décide si les modifications mettent à jour l'horodatage
+Timestamp/On/Caption: l'horodatage est activé
+Timestamp/On/Hint: Met à jour l'horodatage quand les tiddlers sont modifiés
+Timestamp/Off/Caption: l'horodatage est désactivé
+Timestamp/Off/Hint: Ne met pas à jour l'horodatage quand les tiddlers sont modifiés
 Theme/Caption: thème
 Theme/Hint: Choix du thème pour l'affichage
 Bold/Caption: gras
