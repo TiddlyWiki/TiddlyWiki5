@@ -71,6 +71,9 @@ WikifyWidget.prototype.getResult = function() {
 		case "text":
 			result = this.wikifyContainer.textContent;
 			break;
+		case "formattedtext":
+			result = this.wikifyContainer.formattedTextContent;
+			break;
 		case "html":
 			result = this.wikifyContainer.innerHTML;
 			break;

@@ -275,6 +275,8 @@ Richard Rath @rcrath 2016/02/12
 
 Eric Drechsel @edrex 2016/02/15
 
+Tomasz Pijanowski @zakrec 2016/02/21
+
 @FND 2016/02/27
 
 Cengizhan Kurt, @webninjasi, 2016/03/03
@@ -282,3 +284,17 @@ Cengizhan Kurt, @webninjasi, 2016/03/03
 Knut Franke, @nome, 2016/03/20
 
 Pau Deluca, @PauDeLuca, 2016/04/11
+
+Brent Maxwell, @brentmaxwell, 2016/05/20
+
+Thomas Herlea, @maxthomax, 2016/06/09
+
+Segey Shishkin, @serj_aleks, 2016/07/28
+
+Przemek Wesołek, @jest, 2016/08/05
+
+Doron Tzur, @DoronTzur 2016/08/16
+
+Hans Christian Haase, @hchaase, 2016/08/11
+
+steve schneider, @stevesunypoly, 2016/08/26

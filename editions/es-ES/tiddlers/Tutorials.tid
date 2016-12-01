@@ -1,0 +1,29 @@
+caption: Tutoriales
+created: 20140908125300000
+es-title: Tutoriales
+modified: 20160605054416164
+tags: Community
+title: Tutorials
+type: text/vnd.tiddlywiki
+
+Páginas con tutoriales y consejos relacionados con ~TiddlyWiki.
+
+Envía más tutoriales que encuentres para ampliar esta lista via [[GitHub|https://github.com/Jermolene/TiddlyWiki5]] o [[Twitter|https://twitter.com/tiddlywiki]], o publícalas en el [[grupo|https://groups.google.com/forum/?hl=es#!forum/tiddlywiki]]
+
+<div class="tc-link-info">
+
+<$list filter="[tag[Tutorials]!sort[modified]]">
+
+<div class="tc-link-info-item">
+
+! <$link><$view field="title"/></$link>
+
+<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+
+<$transclude/>
+
+</div>
+
+</$list>
+
+</div>

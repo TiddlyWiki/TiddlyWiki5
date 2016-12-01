@@ -1,0 +1,24 @@
+caption: Añadir pestaña de contenidos
+created: 20160424150551727
+es-title: Añadir una tabla de contenidos a la barra lateral
+modified: 20160426102736986
+tags: [[Customise TiddlyWiki]]
+title: Adding a Table of Contents to the Sidebar
+type: text/vnd.tiddlywiki
+
+Es posible añadir una [[tabla de contenidos|Table-of-Contents Macros]] a la barra lateral, siguiendo estos pasos:
+
+# Crea un tiddler llamado [[TableOfContents]]
+# Etiquétalo como <<.tag ~$:/tags/SideBar>>
+# En el cuerpo del tiddler, escribe el siguiente texto: <div><pre><code><$text text="""
+<div class="tc-table-of-contents">
+
+<<toc-selective-expandable 'TableOfContents'>>
+
+</div>"""/></code></pre></div>
+
+# Añade el campo <<.field caption>> con el texto <<.def Contenidos>> o la referencia adecuada a un tiddler o variable. p. ej, en el caso de la tabla de contenidos de este wiki,  <<.field caption>> toma su valor del contenido de <<.tid "~$:/language/SideBar/Contents/Caption">>.
+
+# Añade el campo <<.field ''list-after''>> con el valor <<.word ~$:/core/ui/SideBar/Open>> para que la pestaña de de contenidos se muestre inmediatamente después de la de <<.sidebar-tab Open>>
+
+Añade entradas a la tabla de contenidos creando tiddlers con la etiqueta <<.em ~TableOfContents>>. Una forma sencilla de hacerlo es con el botón <<.button new-here>> del desplegable <<.button more-tiddler-actions>>. De igual modo, a partir de estas, se pueden crear subentradas etiquetadas con el nombre de la entrada del nivel superior. 

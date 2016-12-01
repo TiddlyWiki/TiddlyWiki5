@@ -78,7 +78,7 @@ HideSideBar/Hint: 사이드바를 숨깁니다
 Home/Caption: 홈
 Home/Hint: 기본 티들러를 엽니다
 Import/Caption: 가져오기
-Import/Hint: 텍스트, 그림, TiddlyWiki 또는 JSON을 포함한 여러 파일의 형식을 가져옵니다
+Import/Hint: 텍스트, 그림, 티들리위키 또는 JSON을 포함한 여러 파일의 형식을 가져옵니다
 Info/Caption: 정보
 Info/Hint: 이 티들러에 대한 정보를 보여줍니다
 Italic/Caption: 기울임꼴
@@ -160,7 +160,7 @@ Superscript/Hint: 선택에 위 첨자 서식을 적용합니다
 TagManager/Caption: 태그 관리자
 TagManager/Hint: 태그 관리자를 엽니다
 Theme/Caption: 테마
-Theme/Hint: 보일 테마를 선택합니다
+Theme/Hint: 표시할 테마를 선택합니다
 Underline/Caption: 밑줄
 Underline/Hint: 선택에 밑줄 서식을 적용합니다
 Unfold/Caption: 티들러 펼치기

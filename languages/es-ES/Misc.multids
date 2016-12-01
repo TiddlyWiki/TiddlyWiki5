@@ -15,6 +15,7 @@ ConfirmEditShadowTiddler: Estás a punto de editar un tiddler oculto<br>
 Todo cambio en él afectará al sistema por defecto y pondrá en riesgo futuras actualizaciones del sistema<br>
 ¿Estás seguro de querer editar "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: ¿Deseas sobreescribir "<$text text=<<title>>/>"?
+Count: Número
 DefaultNewTiddlerTitle: Nuevo Tiddler
 DropMessage: Suéltalo aquí o pulsa ''ESC'' para cancelar
 Encryption/Cancel: Cancelar
@@ -26,10 +27,6 @@ Encryption/PromptSetPassword: Especifica nueva contraseña para este TiddlyWiki
 Encryption/RepeatPassword: Repite la contraseña
 Encryption/SetPassword: Establecer contraseña
 Encryption/Username: Usuario
-Exporters/CsvFile: Archivo de tipo .CSV
-Exporters/JsonFile: Archivo de tipo .JSON
-Exporters/StaticRiver: Cadena de tiddlers como .HTML estático
-Exporters/TidFile: Tiddler individual como archivo ".tid" 
 InternalJavaScriptError/Hint: Tenemos un problema. Se recomienda que reinicies TiddlyWiki
 InternalJavaScriptError/Title: Error interno de JavaScript
 InvalidFieldName: Caracteres ilegales en el campo "<$text text=<<fieldName>>/>"<br>
@@ -42,22 +39,6 @@ OfficialPluginLibrary/Hint: Librería de plugins oficiales de ~TiddlyWiki en tid
 Plugins, temas y paquetes de idioma que mantiene el equipo de TiddlyWiki
 PluginReloadWarning: Guarda {{$:/core/ui/Buttons/save-wiki}} y recarga {{$:/core/ui/Buttons/refresh}} para que los cambios surtan efecto.
 RecentChanges/DateFormat: DD MMM YYYY
-Snippets/ListByTag: <<list-links "[tag[task]sort[title]]">>
-
-Snippets/MacroDefinition: \define macroName(param1:"default value",param2)
-Texto de la macro
-\end
-
-Snippets/Table4x3: |! |!Alfa |!Beta |!Gamma |!Delta |
-|!Uno | | | | |
-|!Dos | | | | |
-|!Tres | | | | |
-
-Snippets/TableOfContents: <div class="tc-table-of-contents">
-
-<<toc-selective-expandable 'TableOfContents'>>
-
-</div>
 SystemTiddler/Tooltip: Este es un tiddler de sistema
 TagManager/Colour/Heading: Color
 TagManager/Count/Heading: Número

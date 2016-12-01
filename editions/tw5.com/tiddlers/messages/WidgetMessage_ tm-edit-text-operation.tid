@@ -50,7 +50,7 @@ Prefixes the currently selected line//(s)// with the provided character. If a li
 |character |Prefix character|
 |count |Number of characters that make up the prefix|
 
-''Example'' Setting //character="<<.value "!">>"// and  //count="<<.value "3">>"// would insert the prefix "<<.value "!!!" >>", which will resolve to a subheading when parsed as WikiText.
+''Example'' Setting //character="<<.value "!">>"// and //count="<<.value "3">>"// would insert the prefix "<<.value "!!!" >>", which will resolve to a subheading when parsed as WikiText.
 
 </div>
 \end

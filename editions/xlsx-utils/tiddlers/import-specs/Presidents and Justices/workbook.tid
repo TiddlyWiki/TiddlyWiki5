@@ -1,0 +1,9 @@
+caption: Presidents and Justices demo
+created: 20161021163735946
+import-spec-role: workbook
+list: [[$:/_importspec/Presidents and Justices/States]] [[$:/_importspec/Presidents and Justices/Presidents]] [[$:/_importspec/Presidents and Justices/Justices]]
+modified: 20161021164938592
+tags: 
+title: $:/_importspec/Presidents and Justices/
+type: text/vnd.tiddlywiki
+

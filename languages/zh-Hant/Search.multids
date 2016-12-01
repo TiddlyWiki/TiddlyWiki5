@@ -8,6 +8,7 @@ Matches: //<small><<resultCount>> 個條目符合條件</small>//
 Matches/All: 所有匹配：
 Matches/Title: 條目名稱匹配：
 Search: 搜尋
+Search/TooShort: 搜尋文字太短
 Shadows/Caption: 預設
 Shadows/Hint: 尋找預設條目
 Shadows/Matches: //<small><<resultCount>> 個條目符合條件</small>//

@@ -1,9 +1,10 @@
 caption: 5.1.12
-created: 20160205184203773
-modified: 20160502014044082
+created: 20160713104714652
+modified: 20160713104714652
 tags: ReleaseNotes
 title: Release 5.1.12
 type: text/vnd.tiddlywiki
+released: 20160713104714652
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.11...v5.1.12]]//
 
@@ -78,6 +79,8 @@ Several of the official plugins available in the plugin library have been update
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/37823f64e96809df16884c605b062f8da2453635]] build targets to the server edition
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/2364]] [[days Operator]] to better cope with operations on today and yesterday
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/3c20f2396e7c794b6e28c3e369e09230352402d0]] ActionWidgets mechanism to allow them to be used with the LinkCatcherWidget and SelectWidget
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/19e699d3302da842c4a6596f7b9ecc4dcaf8fbc2]] `mobile-web-app-capable` meta tag for Android Chrome
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3d5885f5a5ef8a395ba15285e68c19a8db115e6b]] new `plainwikified` format for the ViewWidget
 
 !! Bug Fixes
 
@@ -87,10 +90,12 @@ Several of the official plugins available in the plugin library have been update
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/4a03dcab2031a31eb60f99b6d15a70ff0449182c]] problem with double byte entities in the EntityWidget
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/276074b6cfde9d916f9428b2185f795915e190ae]] problem with ScrollableWidget in static renderings
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/1e0d019610acd960b8c70c0b85b7bb1a25096a8f]] problem with repeatedly lazy loading of tiddlers without a text field
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/b326ba5b2c9e622f5fe99b00ab368bb484c1d4e5]] problem with titles containing URLs being interpreted as external links
 
 !! Node.js Improvements
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2379]] ability to [[customise the paths used for tiddler saving|Customising Tiddler File Naming]]
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/bf74d13df544e323066cde9a019cbf1855d3db04]] problem saving non-JPG binary files
 
 ! Contributors
 
@@ -98,6 +103,7 @@ Several of the official plugins available in the plugin library have been update
 
 * [[@araname|https://github.com/araname]]
 * [[@BramChen|https://github.com/BramChen]]
+* [[@brentmaxwell|https://github.com/brentmaxwell]]
 * [[@Drakor|https://github.com/Drakor]]
 * [[@edrex|https://github.com/edrex]]
 * [[@Evolena|https://github.com/Evolena]]
@@ -106,12 +112,14 @@ Several of the official plugins available in the plugin library have been update
 * [[@Infurnoape|https://github.com/Infurnoape]]
 * [[@kixam|https://github.com/kixam]]
 * [[@Marxsal|https://github.com/Marxsal]]
+* [[@maxthomax|https://github.com/maxthomax]]
 * [[@mklauber|https://github.com/mklauber]]
 * [[@nameanyone|https://github.com/nameanyone]]
 * [[@nome|https://github.com/nome]]
 * [[@PauDeLuca|https://github.com/PauDeLuca]]
 * [[@pmario|https://github.com/pmario]]
 * [[@rcrath|https://github.com/rcrath]]
+* [[@r1chard5mith|https://github.com/r1chard5mith]]
 * [[@sukima|https://github.com/sukima]]
 * [[@telmiger|https://github.com/telmiger]]
 * [[@twMat|https://github.com/twMat]]

@@ -1,0 +1,21 @@
+caption: tag-pill
+created: 20161128190930538
+modified: 20161128191220364
+tags: Macros [[Core Macros]]
+title: tag-pill Macro
+type: text/vnd.tiddlywiki
+
+The <<.def tag-pill>> [[macro|Macros]] generates a static tag pill showing a specified tag, but without the dropdown action provided by the [[tag Macro]].
+
+!! Parameters
+
+;tag
+: The title of the tag
+;element-tag
+: The element name to be used for the pill (defaults to "span")
+;element-attributes
+: Additional attributes for the pill element
+;actions
+: Action widgets to be triggered when the pill is clicked. Within the text, the macro parameter ''tag'' contains the title of the selected tag.
+
+<<.macro-examples "tag-pill">>

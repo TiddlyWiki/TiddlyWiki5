@@ -1,16 +1,21 @@
 title: $:/language/Docs/ModuleTypes/
 
+allfilteroperator: A sub-operator for the ''all'' filter operator.
 animation: Animations that may be used with the RevealWidget.
+bitmapeditoroperation: A bitmap editor toolbar operation.
 command: Commands that can be executed under Node.js.
 config: Data to be inserted into `$tw.config`.
 filteroperator: Individual filter operator methods.
 global: Global data to be inserted into `$tw`.
+info: Publishes system information via the [[$:/temp/info-plugin]] pseudo-plugin.
 isfilteroperator: Operands for the ''is'' filter operator.
+library: Generic module type for general purpose JavaScript modules.
 macro: JavaScript macro definitions.
 parser: Parsers for different content types.
 saver: Savers handle different methods for saving files from the browser.
 startup: Startup functions.
 storyview: Story views customise the animation and behaviour of list widgets.
+texteditoroperation: A text editor toolbar operation.
 tiddlerdeserializer: Converts different content types into tiddlers.
 tiddlerfield: Defines the behaviour of an individual tiddler field.
 tiddlermethod: Adds methods to the `$tw.Tiddler` prototype.

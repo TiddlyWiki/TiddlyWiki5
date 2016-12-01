@@ -1,0 +1,29 @@
+caption: Búsquedas
+created: 20140210160125905
+es-title: Búsquedas en TiddlyWiki
+modified: 20160422095858816
+tags: Features [[Working with TiddlyWiki]]
+title: Searching in TiddlyWiki
+type: text/vnd.tiddlywiki
+
+La función de búsqueda en ~TiddlyWiki es rápida y flexible
+
+!! Búsqueda estándar
+
+El cuadro de búsqueda de la barra lateral devuelve una lista de tiddlers coincidentes con el texto que se escriba en él. 
+
+<<.tip "
+Las pestañas de la barra lateral quedan ocultas bajo los resultados de la búsqueda hasta que se pulse en cualquier lugar para ocultarlos o se pinche la ''x'' para resetearlo. 
+">>
+
+!! Búsqueda avanzada
+
+Si se pincha en el botón con forma de lupa que hay a la derecha del cuadro de búsqueda, se abre la [[búsqueda avanzada|$:/AdvancedSearch]], que contiene cuatro pestañas. 
+
+* <<.advancedsearch-tab Standard>> es una instancia más del cuadro de búsqueda estándar de la barra lateral
+
+* <<.advancedsearch-tab System>> restringe el ámbito de búsqueda a los [[tiddlers de sistema|SystemTiddlers]]
+
+* <<.advancedsearch-tab Shadows>> restringe el ámbito de búsqueda a los [[tiddlers ocultos|ShadowTiddlers]]
+
+* <<.advancedsearch-tab Filter>> no es en sí un cuadro de búsqueda, sino una manera rápida de obtener una lista de tiddlers que cumplen todas las condiciones de una expresión de [[filtros|Filters]]. Por ejemplo: <<.word "Todas las etitquetas, excepto las de sistema">>

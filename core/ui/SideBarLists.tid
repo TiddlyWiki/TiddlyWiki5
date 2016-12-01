@@ -17,9 +17,12 @@ title: $:/core/ui/SideBarLists
 {{$:/core/images/close-button}}
 </$button>
 <$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
+{{$:/core/images/down-arrow}}
+<$list filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
 <$set name="resultCount" value="""<$count filter="[!is[system]search{$(searchTiddler)$}]"/>""">
-{{$:/core/images/down-arrow}} {{$:/language/Search/Matches}}
+{{$:/language/Search/Matches}}
 </$set>
+</$list>
 </$button>
 </$reveal>
 <$reveal state="$:/temp/search" type="match" text="">
@@ -33,7 +36,11 @@ title: $:/core/ui/SideBarLists
 
 <$reveal tag="div" class="tc-block-dropdown tc-search-drop-down tc-popup-handle" state=<<qualify "$:/state/popup/search-dropdown">> type="nomatch" text="" default="">
 
+<$list filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+
 {{$:/core/ui/SearchResults}}
+
+</$list>
 
 </$reveal>
 

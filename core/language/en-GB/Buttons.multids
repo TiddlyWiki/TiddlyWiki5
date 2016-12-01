@@ -54,6 +54,8 @@ Home/Caption: home
 Home/Hint: Open the default tiddlers
 Language/Caption: language
 Language/Hint: Choose the user interface language
+Manager/Caption: tiddler manager
+Manager/Hint: Open tiddler manager
 More/Caption: more
 More/Hint: More actions
 NewHere/Caption: new here
@@ -76,6 +78,8 @@ Permalink/Caption: permalink
 Permalink/Hint: Set browser address bar to a direct link to this tiddler
 Permaview/Caption: permaview
 Permaview/Hint: Set browser address bar to a direct link to all the tiddlers in this story
+Print/Caption: print page
+Print/Hint: Print the current page
 Refresh/Caption: refresh
 Refresh/Hint: Perform a full refresh of the wiki
 Save/Caption: ok
@@ -90,6 +94,12 @@ ShowSideBar/Caption: show sidebar
 ShowSideBar/Hint: Show sidebar
 TagManager/Caption: tag manager
 TagManager/Hint: Open tag manager
+Timestamp/Caption: timestamps
+Timestamp/Hint: Choose whether modifications update timestamps
+Timestamp/On/Caption: timestamps are on
+Timestamp/On/Hint: Update timestamps when tiddlers are modified
+Timestamp/Off/Caption: timestamps are off
+Timestamp/Off/Hint: Don't update timestamps when tiddlers are modified
 Theme/Caption: theme
 Theme/Hint: Choose the display theme
 Bold/Caption: bold

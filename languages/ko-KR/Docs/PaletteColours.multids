@@ -1,9 +1,9 @@
 title: $:/language/Docs/PaletteColours/
 
-alert-background: 알럿 배경
-alert-border: 알럿 테두리
-alert-highlight: 알럿 강조
-alert-muted-foreground: 알럿 조용한 전경
+alert-background: 경보 배경
+alert-border: 경보 테두리
+alert-highlight: 경보 강조
+alert-muted-foreground: 경보 조용한 전경
 background: 일반 배경
 blockquote-bar: 인용문 막대
 button-background: 기본 버튼 배경
@@ -62,7 +62,7 @@ sidebar-tab-foreground-selected: 선택한 탭에 대한 사이드바 탭 전경
 sidebar-tiddler-link-foreground: 사이드바 티들러 링크 전경
 sidebar-tiddler-link-foreground-hover: 사이드바 티들러 링크 전경 가리킬 때
 site-title-foreground: 사이트 제목 전경
-static-alert-foreground: 정적 알럿 전경
+static-alert-foreground: 정적 경보 전경
 tab-background: 탭 배경
 tab-background-selected: 선택한 탭에 대한 탭 배경
 tab-border: 탭 테두리

@@ -1,0 +1,24 @@
+caption: Galería de imágenes
+created: 20140809113603449
+es-title: Ejemplo de galería de imágenes / hoja de contactos
+modified: 20160418044736941
+tags: Learning
+title: ImageGallery Example
+type: text/vnd.tiddlywiki
+
+Este es un ejemplo de uso de ListWidget y TranscludeWidget para mostrar una cuadrilla de las imágenes del sistema (es decir, de tiddlers con la etiqueta [[$:/tags/Image]]).
+
+<style>
+.my-gallery svg {
+width: 4em;
+height: 4em;
+margin: 1em;
+}
+</style>
+<div class="my-gallery">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/Image]]">
+<span title=<<currentTiddler>>>
+<$transclude/>
+</span>
+</$list>
+</div>

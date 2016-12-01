@@ -67,7 +67,7 @@ UploadSaver.prototype.save = function(text,method,callback) {
 	try {
 		http.send(data);
 	} catch(ex) {
-		return callback("Error:" + ex);
+		return callback($tw.language.getString("Error/Caption") + ":" + ex);
 	}
 	$tw.notifier.display("$:/language/Notifications/Save/Starting");
 	return true;

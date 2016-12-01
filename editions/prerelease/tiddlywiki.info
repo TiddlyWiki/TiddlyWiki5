@@ -10,16 +10,18 @@
 		"tiddlywiki/powered-by-tiddlywiki",
 		"tiddlywiki/internals",
 		"tiddlywiki/highlight",
-		"tiddlywiki/markdown"
+		"tiddlywiki/markdown",
+		"tiddlywiki/qrcode",
+		"tiddlywiki/bibtex"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite",
-		"tiddlywiki/nighttime",
 		"tiddlywiki/starlight",
 		"tiddlywiki/seamless",
-		"tiddlywiki/tight",
 		"tiddlywiki/centralised",
+		"tiddlywiki/heavier",
+		"tiddlywiki/tight",
 		"tiddlywiki/readonly"
 	],
 	"languages": [

@@ -30,6 +30,15 @@ $hiddenSidebarText$
 </$reveal>
 \end
 
+\define if-editor-height-fixed(then,else)
+<$reveal state="$:/config/TextEditor/EditorHeight/Mode" type="match" text="fixed">
+$then$
+</$reveal>
+<$reveal state="$:/config/TextEditor/EditorHeight/Mode" type="match" text="auto">
+$else$
+</$reveal>
+\end
+
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
 /*
@@ -69,11 +78,11 @@ html:-webkit-full-screen {
 body.tc-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/fontsize}};
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics/lineheight}};
+	word-wrap: break-word;
+	<<custom-background-datauri>>
 	color: <<colour foreground>>;
 	background-color: <<colour page-background>>;
 	fill: <<colour foreground>>;
-	word-wrap: break-word;
-	<<custom-background-datauri>>
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -329,6 +338,7 @@ button svg, button img, label svg, label img {
 	margin: 0;
 	background: none;
 	border: none;
+    cursor: pointer;
 }
 
 .tc-btn-boxed {
@@ -479,7 +489,7 @@ button svg.tc-image-button, button .tc-image-button img {
 }
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
-	
+
 	.tc-unfold-banner {
 		position: static;
 		width: calc(100% + 59px);
@@ -521,7 +531,7 @@ button.tc-tag-label, span.tc-tag-label {
 	display: inline-block;
 	padding: 0.16em 0.7em;
 	font-size: 0.9em;
-	font-weight: 300;
+	font-weight: 400;
 	line-height: 1.2em;
 	color: <<colour tag-foreground>>;
 	white-space: nowrap;
@@ -547,6 +557,7 @@ button.tc-untagged-label {
 	height: 1em;
 	width: 1em;
 	fill: <<colour tag-foreground>>;
+	vertical-align: text-bottom;
 }
 
 .tc-tag-manager-table .tc-tag-label {
@@ -690,6 +701,11 @@ button.tc-untagged-label {
 		padding: 71px 0 28px 42px;
 	}
 
+	html[dir="rtl"] .tc-sidebar-scrollable {
+		left: auto;
+		right: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
+	}
+
 	.tc-story-river {
 		position: relative;
 		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
@@ -726,7 +742,7 @@ button.tc-untagged-label {
 	.tc-story-river .tc-tiddler-frame {
 		margin: 0;
 		border: none;
-		padding: 28px;
+		padding: 0;
 	}
 }
 
@@ -864,8 +880,17 @@ button.tc-untagged-label {
 
 .tc-tiddler-controls button svg, .tc-tiddler-controls button img,
 .tc-search button svg, .tc-search a svg {
-	height: 0.75em;
 	fill: <<colour tiddler-controls-foreground>>;
+}
+
+.tc-tiddler-controls button svg, .tc-tiddler-controls button img {
+	height: 0.75em;
+}
+
+.tc-search button svg, .tc-search a svg {
+    height: 1.2em;
+    width: 1.2em;
+    margin: 0 0.25em;
 }
 
 .tc-tiddler-controls button.tc-selected svg,
@@ -969,7 +994,7 @@ html body.tc-body.tc-single-tiddler-window {
 */
 
 .tc-editor-toolbar {
-	margin-top: 8px;	
+	margin-top: 8px;
 }
 
 .tc-editor-toolbar button {
@@ -978,17 +1003,17 @@ html body.tc-body.tc-single-tiddler-window {
 	fill: <<colour tiddler-controls-foreground-selected>>;
 	border-radius: 4px;
 	padding: 3px;
-	margin: 2px 0;
+	margin: 2px 0 2px 4px;
 }
 
 .tc-editor-toolbar button.tc-text-editor-toolbar-item-adjunct {
-	margin-left: -3px;
+	margin-left: 1px;
 	width: 1em;
-	border-radius: 8px;	
+	border-radius: 8px;
 }
 
 .tc-editor-toolbar button.tc-text-editor-toolbar-item-start-group {
-	margin-left: 7px;
+	margin-left: 11px;
 }
 
 .tc-editor-toolbar button.tc-selected {
@@ -1154,9 +1179,18 @@ html body.tc-body.tc-single-tiddler-window {
 	float: right;
 	width: 49%;
 	border: 1px solid <<colour tiddler-editor-border>>;
-	margin: 4px 3px 3px 3px;
+	margin: 4px 0 3px 3px;
 	padding: 3px 3px 3px 3px;
 }
+
+<<if-editor-height-fixed then:"""
+
+.tc-tiddler-preview-preview {
+	overflow-y: scroll;
+	height: {{$:/config/TextEditor/EditorHeight/Height}};
+}
+
+""">>
 
 .tc-tiddler-frame .tc-tiddler-preview .tc-edit-texteditor {
 	width: 49%;
@@ -1312,7 +1346,7 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-drop-down .tc-prompt {
-	padding: 0 14px;	
+	padding: 0 14px;
 }
 
 .tc-drop-down .tc-chooser {
@@ -1675,7 +1709,7 @@ html body.tc-body.tc-single-tiddler-window {
 	border-top: 1px solid <<colour sidebar-tab-divider>>;
 }
 
-.tc-more-sidebar .tc-tab-buttons button {
+.tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
 	display: block;
 	width: 100%;
 	background-color: <<colour sidebar-tab-background>>;
@@ -1686,9 +1720,116 @@ html body.tc-body.tc-single-tiddler-window {
 	margin-bottom: inherit;
 }
 
-.tc-more-sidebar .tc-tab-buttons button.tc-tab-selected {
+.tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button.tc-tab-selected {
 	background-color: <<colour sidebar-tab-background-selected>>;
 	border: none;
+}
+
+/*
+** Manager
+*/
+
+.tc-manager-wrapper {
+	
+}
+
+.tc-manager-controls {
+	
+}
+
+.tc-manager-control {
+	margin: 0.5em 0;
+}
+
+.tc-manager-list {
+	width: 100%;
+	border-top: 1px solid <<colour muted-foreground>>;
+	border-left: 1px solid <<colour muted-foreground>>;
+	border-right: 1px solid <<colour muted-foreground>>;
+}
+
+.tc-manager-list-item {
+
+}
+
+.tc-manager-list-item-heading {
+    display: block;
+    width: 100%;
+    text-align: left;	
+	border-bottom: 1px solid <<colour muted-foreground>>;
+	padding: 3px;
+}
+
+.tc-manager-list-item-heading-selected {
+	font-weight: bold;
+	color: <<colour background>>;
+	fill: <<colour background>>;
+	background-color: <<colour foreground>>;
+}
+
+.tc-manager-list-item-heading:hover {
+	background: <<colour primary>>;
+	color: <<colour background>>;
+}
+
+.tc-manager-list-item-content {
+	display: flex;
+}
+
+.tc-manager-list-item-content-sidebar {
+    flex: 1 0;
+    background: <<colour tiddler-editor-background>>;
+    border-right: 0.5em solid <<colour muted-foreground>>;
+    border-bottom: 0.5em solid <<colour muted-foreground>>;
+    white-space: nowrap;
+}
+
+.tc-manager-list-item-content-item-heading {
+	display: block;
+	width: 100%;
+	text-align: left;
+    background: <<colour muted-foreground>>;
+	text-transform: uppercase;
+	font-size: 0.6em;
+	font-weight: bold;
+    padding: 0.5em 0 0.5em 0;
+}
+
+.tc-manager-list-item-content-item-body {
+	padding: 0 0.5em 0 0.5em;
+}
+
+.tc-manager-list-item-content-item-body > pre {
+	margin: 0.5em 0 0.5em 0;
+	border: none;
+	background: inherit;
+}
+
+.tc-manager-list-item-content-tiddler {
+    flex: 3 1;
+    border-left: 0.5em solid <<colour muted-foreground>>;
+    border-right: 0.5em solid <<colour muted-foreground>>;
+    border-bottom: 0.5em solid <<colour muted-foreground>>;
+}
+
+.tc-manager-list-item-content-item-body > table {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.tc-manager-list-item-content-item-body > table td {
+	border: none;
+}
+
+.tc-manager-icon-editor > button {
+	width: 100%;
+}
+
+.tc-manager-icon-editor > button > svg,
+.tc-manager-icon-editor > button > button {
+	width: 100%;
+	height: auto;
 }
 
 /*

@@ -1,0 +1,20 @@
+caption: Estilo: Redacción técnica
+created: 20150110182900000
+es-title: Estilo de redacción técnica
+modified: 20160419090557219
+tags: [[Improving TiddlyWiki Documentation]]
+title: Technical Prose Style
+type: text/vnd.tiddlywiki
+
+Al redactar [[material didáctico|Instruction Tiddlers]], empieza por planificar la información que quieres presentar como un itinerario: debe ser una progresión sencilla, lógica y directa de ideas, sin retrocesos ni saltos. Aplica este enfoque incluso en frases sueltas, de modo que el discurso vaya de la causa al efecto y de lo viejo conocido a lo nuevo desconocido.
+
+Usa frases cortas y sencillas. Una frase en estilo técnico y claro raramente contiene más de una idea, por eso se evita el uso de paréntesis. De igual manera, haz que la estructura de los párrafos sea sencilla. Una presentación lisa y llana suele ser más fácil de comprender que una una exposición jerarquizada de conceptos.
+
+A menudo se puede simplificar una frase sin necesidad de cambiar su significado, tanto como para ajustar su vocabulario o estructura gramatical. <<.word "Se realiza la ejecución de la macro">> sólo significa <<.word "Macro en ejecución">>. <<.word "Tus expectativas podrían ser...">> es lo mismo que <<.word "puedes esperar que...">>.
+
+Usa preferentemente la voz activa: <<.word "Fulano crea un tiddler">> es mejor que <<.word "un tiddler es creado por Fulano">> o <<.word "se crea un tiddler por Fulano">>. 
+El uso de oraciones pasivas o impersonales puede ser útil cuando se quiere que el lector se centre en una acción o en su resultado: <<.word "se crea un tiddler">>, pero en general es más claro partir de una causa y explicar su efecto y decir algo del estilo de <<.word "esta acción crea un tiddler">>, de la forma más natural y sencilla posible.
+
+En la documentación generalmente se presentan conceptos paralelos, bien por su parecido, bien por su diferencia. Al lector puede serle más fácil comprenderlo si se usan las mismas frases o la misma estructura de exposición, pero debe de hacerse de manera equilibrada para que no resulte monótono.
+
+Son preferibles las instrucciones claras y precisas a una larga e intrincada explicación. Si algo tiene nombre, úsalo. Si no lo tiene, ponlo en un tiddler.

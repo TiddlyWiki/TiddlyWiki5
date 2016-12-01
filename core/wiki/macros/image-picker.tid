@@ -1,26 +1,35 @@
 title: $:/core/macros/image-picker
 tags: $:/tags/Macro
 
-\define image-picker-inner(actions)
+\define image-picker-thumbnail(actions)
 <$button tag="a" tooltip="""$(imageTitle)$""">
-
 $actions$
-
 <$transclude tiddler=<<imageTitle>>/>
-
 </$button>
 \end
 
-\define image-picker(actions,subfilter:"")
-<div class="tc-image-chooser">
-
-<$list filter="[all[shadows+tiddlers]is[image]$subfilter$!has[draft.of]] -[type[application/pdf]] +[sort[title]]" variable="imageTitle">
-
-<$macrocall $name="image-picker-inner" actions="""$actions$"""/>
-
+\define image-picker-list(filter,actions)
+<$list filter="""$filter$""" variable="imageTitle">
+<$macrocall $name="image-picker-thumbnail" actions="""$actions$"""/>
 </$list>
-
-</div>
-
 \end
 
+\define image-picker(actions,filter:"[all[shadows+tiddlers]is[image]] -[type[application/pdf]] +[!has[draft.of]sort[title]]")
+<div class="tc-image-chooser">
+<$vars state-system=<<qualify "$:/state/image-picker/system">>>
+<$checkbox tiddler=<<state-system>> field="text" checked="show" unchecked="hide" default="hide">
+{{$:/language/SystemTiddlers/Include/Prompt}}
+</$checkbox>
+<$reveal state=<<state-system>> type="match" text="hide" default="hide" tag="div">
+<$macrocall $name="image-picker-list" filter="""$filter$ +[!is[system]]""" actions="""$actions$"""/>
+</$reveal>
+<$reveal state=<<state-system>> type="nomatch" text="hide" default="hide" tag="div">
+<$macrocall $name="image-picker-list" filter="""$filter$""" actions="""$actions$"""/>
+</$reveal>
+</$vars>
+</div>
+\end
+
+\define image-picker-include-tagged-images(actions)
+<$macrocall $name="image-picker" filter="[all[shadows+tiddlers]is[image]] [all[shadows+tiddlers]tag[$:/tags/Image]] -[type[application/pdf]] +[!has[draft.of]sort[title]]" actions="""$actions$"""/>
+\end

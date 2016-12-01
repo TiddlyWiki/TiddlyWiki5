@@ -20,6 +20,15 @@ exports.warning = function(text) {
 };
 
 /*
+Repeatedly replaces a substring within a string. Like String.prototype.replace, but without any of the default special handling of $ sequences in the replace string
+*/
+exports.replaceString = function(text,search,replace) {
+	return text.replace(search,function() {
+		return replace;
+	});
+};
+
+/*
 Repeats a string
 */
 exports.repeat = function(str,count) {
@@ -349,7 +358,8 @@ exports.getWeek = function(date) {
 		d = 7; // JavaScript Sun=0, ISO Sun=7
 	}
 	dt.setTime(dt.getTime() + (4 - d) * 86400000);// shift day to Thurs of same week to calculate weekNo
-	var n = Math.floor((dt.getTime()-new Date(dt.getFullYear(),0,1) + 3600000) / 86400000);
+	var x = new Date(dt.getFullYear(),0,1);
+	var n = Math.floor((dt.getTime() - x.getTime()) / 86400000);
 	return Math.floor(n / 7) + 1;
 };
 
@@ -495,7 +505,7 @@ exports.escapeRegExp = function(s) {
 
 // Checks whether a link target is external, i.e. not a tiddler title
 exports.isLinkExternal = function(to) {
-	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]`|'"\\^~]+(?:\/|\b)/i;
+	var externalRegExp = /^(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]`|"\\^]+(?:\/|\b)/i;
 	return externalRegExp.test(to);
 };
 
@@ -697,6 +707,22 @@ exports.sign = Math.sign || function(x) {
 		return x;
 	}
 	return x > 0 ? 1 : -1;
+};
+
+/*
+IE does not have an endsWith function
+*/
+exports.strEndsWith = function(str,ending,position) {
+	if(str.endsWith) {
+		return str.endsWith(ending,position);
+	} else {
+		if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > str.length) {
+			position = str.length;
+		}
+		position -= ending.length;
+		var lastIndex = str.indexOf(ending, position);
+		return lastIndex !== -1 && lastIndex === position;
+	}
 };
 
 })();

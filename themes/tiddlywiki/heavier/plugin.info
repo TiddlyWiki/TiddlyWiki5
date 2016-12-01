@@ -1,0 +1,9 @@
+{
+	"title": "$:/themes/tiddlywiki/heavier",
+	"name": "Heavier",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "Heavier font theme",
+	"dependents": ["$:/themes/tiddlywiki/snowwhite"]
+}

@@ -1,0 +1,14 @@
+caption: tm-remove-tag
+created: 20140908185153663
+es-title: Mensaje: tm-remove-tag
+modified: 20160415102953003
+tags: Messages
+title: WidgetMessage: tm-remove-tag
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-remove-tag` elimina la etiqueta especificada.
+
+|!Name |!Description |
+|param |Nombre de etiqueta para borrar |
+
+Este mensaje normalmente se genera con ButtonWidget y lo procesa FieldManglerWidget.

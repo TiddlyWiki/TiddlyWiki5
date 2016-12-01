@@ -4,7 +4,7 @@ subtitle: 작업 저장
 footer: <$button message="tm-close-tiddler">{{$:/language/Buttons/Close/Caption}}</$button>
 help: http://tiddlywiki.com/static/SavingChanges.html
 
-이 위키의 바뀜을 ~TiddlyWiki HTML 파일로 저장해야 합니다.
+이 위키의 바뀜을 티들리위키 HTML 파일로 저장해야 합니다.
 
 !!! 데스크톱 브라우저
 
