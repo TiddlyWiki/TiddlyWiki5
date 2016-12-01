@@ -61,6 +61,7 @@ OfficialPluginLibrary/Hint: La bibliothèque officielle des plugins ~TiddlyWiki 
 PluginReloadWarning: Merci d'enregistrer {{$:/core/ui/Buttons/save-wiki}} et de recharger {{$:/core/ui/Buttons/refresh}} pour que les changements apportés aux plugins prennent effet
 RecentChanges/DateFormat: DD MMM YYYY
 SystemTiddler/Tooltip: Ceci est un tiddler système
+SystemTiddlers/Include/Prompt: Inclut les tiddlers système
 TagManager/Colour/Heading: Couleur
 TagManager/Count/Heading: Total
 TagManager/Icon/Heading: Icône
