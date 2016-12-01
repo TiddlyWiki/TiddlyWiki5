@@ -122,7 +122,10 @@ Slicer.prototype.getSourceHtmlDocument = function(tiddler) {
 };
 
 Slicer.prototype.getSourceWikiDocument = function(tiddler) {
-	var widgetNode = this.wiki.makeTranscludeWidget(this.sourceTitle,{document: $tw.fakeDocument, parseAsInline: false}),
+	var widgetNode = this.wiki.makeTranscludeWidget(this.sourceTitle,{
+			document: $tw.fakeDocument,
+			parseAsInline: false,
+			importPageMacros: true}),
 		container = $tw.fakeDocument.createElement("div");
 	widgetNode.render(container,null);
 	return container;

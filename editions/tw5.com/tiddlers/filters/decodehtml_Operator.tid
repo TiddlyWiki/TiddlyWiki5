@@ -1,0 +1,22 @@
+caption: decodehtml
+created: 20161017152925704
+modified: 20161017152951209
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input with HTML decoding applied
+op-parameter: 
+op-parameter-name: 
+op-purpose: apply HTML decoding to a string
+tags: [[Filter Operators]] [[String Operators]]
+title: decodehtml Operator
+type: text/vnd.tiddlywiki
+from-version: 5.1.14
+
+"HTML decoding" means replacing HTML entities that represent special characters with that character:
+
+* `&amp;` replaced with `&`
+* `&nbsp;` replaced with ` ` (non breaking space)
+* `&lt;` replaced with `<`
+* `&gt;` replaced with `>`
+* `&quot;` replaced with `"`
+
+<<.operator-examples "decodehtml">>

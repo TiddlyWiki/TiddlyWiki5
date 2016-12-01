@@ -85,10 +85,14 @@ function FramedEngine(options) {
 Copy styles from the dummy text area to the textarea in the iframe
 */
 FramedEngine.prototype.copyStyles = function() {
+	// Copy all styles
 	$tw.utils.copyStyles(this.dummyTextArea,this.domNode);
+	// Override the ones that should not be set the same as the dummy textarea
 	this.domNode.style.display = "block";
 	this.domNode.style.width = "100%";
 	this.domNode.style.margin = "0";
+	// In Chrome setting -webkit-text-fill-color overrides the placeholder text colour
+	this.domNode.style["-webkit-text-fill-color"] = "currentcolor";
 };
 
 /*

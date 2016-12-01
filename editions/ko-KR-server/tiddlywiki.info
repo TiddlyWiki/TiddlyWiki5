@@ -9,11 +9,11 @@
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
 	],
-    "includeWikis": [
-        "../ko-KR"
-    ],
-    "config": {
-        "retain-original-tiddler-path": true,
-        "default-tiddler-location": "../ko-KR/tiddlers"
-    }
+	"includeWikis": [
+		"../ko-KR"
+	],
+	"config": {
+		"retain-original-tiddler-path": true,
+		"default-tiddler-location": "../ko-KR/tiddlers"
+	}
 }

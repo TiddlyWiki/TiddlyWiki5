@@ -208,10 +208,12 @@ Get the computed styles applied to an element as an array of strings of individu
 */
 exports.getComputedStyles = function(domNode) {
 	var textAreaStyles = window.getComputedStyle(domNode,null),
-		styleDefs = [];
-	$tw.utils.each(Object.keys(textAreaStyles),function(name) {
-		styleDefs.push(name + ": " + textAreaStyles[name] + ";");
-	});
+		styleDefs = [],
+		name;
+	for(var t=0; t<textAreaStyles.length; t++) {
+		name = textAreaStyles[t];
+		styleDefs.push(name + ": " + textAreaStyles.getPropertyValue(name) + ";");
+	}
 	return styleDefs;
 };
 

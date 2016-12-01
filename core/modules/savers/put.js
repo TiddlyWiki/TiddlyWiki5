@@ -24,7 +24,7 @@ var PutSaver = function(wiki) {
 	// Async server probe. Until probe finishes, save will fail fast
 	// See also https://github.com/Jermolene/TiddlyWiki5/issues/2276
 	var req = new XMLHttpRequest();
-	req.open("OPTIONS", encodeURI(window.location.href));
+	req.open("OPTIONS",encodeURI(document.location.protocol + "//" + document.location.hostname + ":" + document.location.port + document.location.pathname));
 	req.onload = function() {
 		// Check DAV header http://www.webdav.org/specs/rfc2518.html#rfc.section.9.1
 		self.serverAcceptsPuts = (this.status === 200 && !!this.getResponseHeader('dav'));

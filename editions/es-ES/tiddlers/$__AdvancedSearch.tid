@@ -1,0 +1,12 @@
+caption: Búsqueda avanzada
+color: #bbb
+created: 20160503162505558
+es-title: Búsqueda avanzada
+icon: $:/core/images/advanced-search-button
+modified: 20160503162506925
+title: $:/AdvancedSearch
+type: text/vnd.tiddlywiki
+
+<div class="tc-advanced-search">
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch]!has[draft.of]]" "$:/core/ui/AdvancedSearch/System">>
+</div>

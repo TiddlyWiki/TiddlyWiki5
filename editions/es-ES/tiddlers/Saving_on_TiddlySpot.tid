@@ -1,0 +1,53 @@
+caption: Guardar en ~TiddlySpot
+created: 20130825213500000
+es-title: Guardar en TiddlySpot
+modified: 20160423054950812
+tags: Saving
+title: Saving on TiddlySpot
+type: text/vnd.tiddlywiki
+
+{{TiddlySpot}}
+
+Puedes subir un documento de ~TiddlyWiki5 a TiddlySpot siguiendo estos pasos:
+
+# Regístrate en http://tiddlyspot.com/ para poder crear un wiki y recuerda el nombre y la contraseña elegidos
+
+# Abre tu copia local de ~TiddlyWiki en el navegador
+
+# En la pestaña <<.controlpanel-tab Saving>> del [[panel de control|$:/ControlPanel]], rellena los campos de nombre y contraseña en TiddlySpot
+
+# Haz clic en el botón <<.button save-wiki>>. Una notificación en la esquina superior derecha de la pantalla te confirmará el guardado. Guardar puede llevar algún tiempo, dependiendo de la velocidad de conexión y del tamaño del wiki.
+
+# Navega hasta tu wiki en ~TiddlySpot: http://tuwiki.tiddlyspot.com/
+
+Ten en cuenta que la contraseña se envía sin encriptar. Más información en http://faq.tiddlyspot.com/:
+
+<<<
+''¿Es seguro ~TiddlySpot?''
+
+No. ~TiddlySpot no usa SSL/https. Tu contraseña se envía sin encriptar al guardar y al identificarte en un sitio privado. Esto significa que tu sitio en ~TiddlySpot es vulnerable al //sniffing// de paquetes y que tu contraseña puede ser vista por terceras partes malintencionadas. Los datos de tu sitio en ~TiddlySpot también se envían sin encriptar cuando accedes a tu sitio, aunque sea privado. Por este motivo te recomendamos que no incluyas en ~TiddlySpot información sensible como detalles bancarios y que no uses contraseñas que ya tengas en uso en otros sitios seguros.
+<<<
+
+!! Problemas al guardar en ~TiddlySpot
+
+Si usas Firefox, es más que probable que tropieces con este error al intentar guardar tu wiki en ~TiddlySpot:
+
+<<<
+Error while saving:
+
+Error:NS_ERROR_DOM_BAD_URI: Access to restricted URI denied
+<<<
+
+La operación de guardado falla por restricciones de seguridad de Firefox y está fuera de nuestro alcance. Hasta que se resuelva, nuestro consejo es que para guardar en ~TiddlySpot uses otro navegador, por ejemplo, Chromium:
+
+*# Abre tu wiki local con Chromium y repite los pasos 1 a 5 descritos más arriba
+
+*# Una vez hayas comprobado en Chromium que ~TiddlySpot ha alojado tu wiki correctamente, podrás  acceder, editar y [[guardar con Firefox|Saving with TiddlyFox]] en la copia online.
+
+* Después de subir tu archivo local por primera vez, podrás editar tu wiki y guardar cambios online con [[cualquier navegador moderno|BrowserCompatibility]] de tu preferencia.
+
+** No olvides introducir los datos de tu sitio de ~TiddlySpot en <<.controlpanel-tab Saving>> cada nuevo navegador con el que quieras guardar cambios online
+
+<<.tip "Ver también [[Actualizaciones|Upgrading]]">>
+
+<<.warning "Si lo que quieres es trabajar en local, subiendo luego los cambios a ~TiddlySpot, tendrás que volver a usar Chromium para evitar el error de Firefox.">>

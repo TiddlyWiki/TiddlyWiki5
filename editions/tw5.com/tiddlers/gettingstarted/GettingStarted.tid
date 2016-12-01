@@ -1,5 +1,5 @@
 created: 20131129090249275
-modified: 20150417155848443
+modified: 20160622111349475
 tags: [[Working with TiddlyWiki]]
 title: GettingStarted
 type: text/vnd.tiddlywiki
@@ -29,7 +29,7 @@ See also:
 
 If the button doesn't work save this link:
 
-<a href="http://tiddlywiki.com/index.html" download="index.html">~http://tiddlywiki.com/index.html</a>
+<a href="http://tiddlywiki.com/index.html" download="index.html" rel="noopener noreferrer">~http://tiddlywiki.com/index.html</a>
 
 Your browser may ask you to accept the download before it begins
 <<<

@@ -1,0 +1,14 @@
+caption: stringify
+created: 20161017153038029
+modified: 20161017153114691
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input with ~JavaScript string encodings applied
+op-parameter: 
+op-parameter-name: 
+op-purpose: apply ~JavaScript string encoding to a string
+tags: [[Filter Operators]] [[String Operators]]
+title: stringify Operator
+type: text/vnd.tiddlywiki
+from-version: 5.1.14
+
+<<.operator-examples "stringify">>

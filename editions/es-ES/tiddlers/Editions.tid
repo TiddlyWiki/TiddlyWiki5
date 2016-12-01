@@ -1,0 +1,18 @@
+caption: Ediciones
+created: 20140908125500000
+es-title: Ediciones de TiddlyWiki
+list: [[Empty Edition]]
+modified: 20160503165705134
+tags: TableOfContents
+title: Editions
+type: text/vnd.tiddlywiki
+
+TiddlyWiki se distribuye en distintas ediciones, especialmente concebidas para servir a un propósito determinado.
+
+Una edición consta de los componentes del núcleo de ~TiddlyWiki, así como plugins, documentación y ejemplos de contenido para que puedas ponerte en marcha lo antes posible.
+
+Los componentes de las diferentes ediciones pueden combinarse y modificarse de modo que construyas la mejor solución para tu aplicación particular.
+
+<<list-links "[tag[Editions]]">>
+
+<<.tip "Conviene no confundir las ediciones en que se presenta ~TiddlyWiki con las [[plataformas|Platforms]] en las que funciona, como [[HTML único|Saving]], o aplicación de [[Node.js|TiddlyWiki on Node.js]]">>

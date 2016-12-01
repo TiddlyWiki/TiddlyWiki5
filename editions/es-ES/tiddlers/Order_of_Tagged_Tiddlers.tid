@@ -1,0 +1,19 @@
+caption: Orden de listas
+created: 20160426093524576
+es-title: Orden de los tiddlers etiquetados
+modified: 20160426094124972
+tags: Tagging
+title: Order of Tagged Tiddlers
+type: text/vnd.tiddlywiki
+
+Cuando ~TiddlyWiki genera una lista de los tiddlers que comparten una etiqueta en particular (p. ej, en la lista que aparece al pinchar en una etiqueta), los ordena conforme a las siguientes reglas:
+
+# Primero, los [[declarados|Title List]] en el campo <<.field list>> del [[TagTiddler|TagTiddlers]] y en el orden que este indica
+
+# Luego, los no-declarados que tengan el campo <<.field list-before>>, que van inmediatamente <<.em antes>> del título que respectivamente indiquen. 
+
+#* Si el campo existe pero tiene valor en blanco, el tiddler se coloca al principio de la lista. En caso de que sean varios los tiddlers etiquetados no declarados que tienen el campo <<.field list-before>> en blanco, se colocarán por orden alfabético ascendente al principio de la lista, ignorando mayúsculas y minúsculas.
+
+# A continuación, los no-declarados que tengan el campo <<.field list-after>>, que van inmediatamente <<.em después>> del título que respectivamente indiquen. 
+
+# Finalmente, cerrando la lista, por orden alfabético ascendente, ignorando mayúsculas y minúsculas, todos los demás tiddlers que queden.

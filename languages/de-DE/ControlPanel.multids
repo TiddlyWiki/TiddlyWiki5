@@ -27,6 +27,19 @@ EditorTypes/Hint: Diese Tiddler definieren, welcher Editor für bestimmte Tiddle
 EditorTypes/Type/Caption: MIME-Type
 Info/Caption: Info
 Info/Hint: Informationen über dieses TiddlyWiki
+KeyboardShortcuts/Add/Prompt: Tastenkürzel hier eingeben
+KeyboardShortcuts/Add/Caption: Tastenkürzel erstellen
+KeyboardShortcuts/Caption: Tastenkürzel
+KeyboardShortcuts/Hint: Tastenkürzel Zuweisungen bearbeiten
+KeyboardShortcuts/NoShortcuts/Caption: Keine Tastenkürzel Zusweisungen vorhanden
+KeyboardShortcuts/Remove/Hint: Löschen eines Tastenkürzels
+KeyboardShortcuts/Platform/All: Alle Plattformen
+KeyboardShortcuts/Platform/Mac: Nur Macintosh
+KeyboardShortcuts/Platform/NonMac: Alle Plattformen, außer Macintosh
+KeyboardShortcuts/Platform/Linux: Nur Linux
+KeyboardShortcuts/Platform/NonLinux: Alle Plattformen, außer Linux
+KeyboardShortcuts/Platform/Windows: Nur Windows
+KeyboardShortcuts/Platform/NonWindows: Alle Plattformen, außer Windows
 LoadedModules/Caption: Geladene Module
 LoadedModules/Hint: Hier werden die geladenen Module und ihre Quelltext-Komponenten angezeigt. Kursiv hervorgehobene Tiddler haben keinen Quelltext. Sie werden während des Boot-Prozesses (Aufrufen des Tiddlywikis) erstellt.
 Palette/Caption: Palette
@@ -43,9 +56,9 @@ Parsing/Hint: Hier können Sie die globalen Parser-Einstellungen ändern. ACHTUN
 Parsing/Block/Caption: Block Regeln
 Parsing/Inline/Caption: Inline Regeln
 Parsing/Pragma/Caption: Pragma Regeln
-Plugins/Add/Hint: Suche und installiere neue Plugins
 Plugins/Add/Caption: Suche
-Plugins/AlreadyInstalled: Dieses Plugin ist bereits installiert. Version: <$text text=<<installedVersion>>/>
+Plugins/Add/Hint: Suche und installiere neue Plugins
+Plugins/AlreadyInstalled/Hint: Dieses Plugin ist bereits installiert. Version: <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: deaktivieren
 Plugins/Disable/Hint: Deaktivieren Sie dieses Plugin beim nächsten Laden der Seite.
@@ -53,16 +66,17 @@ Plugins/Disabled/Status: (deaktiviert)
 Plugins/Empty/Hint: keine
 Plugins/Enable/Caption: aktivieren
 Plugins/Enable/Hint: Aktivieren Sie dieses Plugin beim nächsten Laden der Seite.
-Plugins/Install: installieren
+Plugins/Install/Caption: installieren
 Plugins/Installed/Hint: Momentan installierte Plugins
 Plugins/Languages/Caption: Sprachen
 Plugins/Languages/Hint: Spracherweiterungen
-Plugins/NoInformation: Kein Information vorhanden
-Plugins/NotInstalled: Dieses Plugin ist momentan nicht installiert
+Plugins/NoInfoFound/Hint: Kein ''"<$text text=<<currentTab>>/>"'' gefunden
+Plugins/NoInformation/Hint: Keine Information vorhanden
+Plugins/NotInstalled/Hint: Dieses Plugin ist momentan nicht installiert
 Plugins/OpenPluginLibrary: Öffne das Plugin-Verzeichnis
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Erweiterungen
-Plugins/Reinstall: erneut installieren
+Plugins/Reinstall/Caption: erneut installieren
 Plugins/Themes/Caption: Themes
 Plugins/Themes/Hint: Theme Erweiterungen
 Saving/Caption: Speichern
@@ -86,6 +100,13 @@ Settings/CamelCase/Caption: Camel Case Wiki Links
 Settings/CamelCase/Hint: Hier können Sie die automatische Umwandlung von "~CamelCase Links" einstellen. ''Wichtig:'' Die Seite muss neu geladen werden, damit die Einstellungen wirksam werden.
 Settings/CamelCase/Description: Automatische ~CamelCase Umwandlung aktivieren
 Settings/Caption: Einstellungen
+Settings/EditorToolbar/Caption: Editor Toolbar
+Settings/EditorToolbar/Hint: Aktivieren oder deaktivieren der Editor Toolbar
+Settings/EditorToolbar/Description: Editor Toolbar anzeigen
+Settings/InfoPanelMode/Caption: Tiddler Info Panel Modus
+Settings/InfoPanelMode/Hint: Einstellung, wann das Info Panel geschlossen wird:
+Settings/InfoPanelMode/Popup/Description: Tiddler Info-Panel schließt automatisch
+Settings/InfoPanelMode/Sticky/Description: TiddlerTiddler Info-Panel bleibt offen, bis es geschlossen wird
 Settings/Hint: Diese erweiterten Einstellungen ermöglichen Ihnen, das Verhalten von TiddlyWiki zu ändern.
 Settings/NavigationAddressBar/Caption: Navigation Adresszeile
 Settings/NavigationAddressBar/Hint: Verhalten der Adresszeile des Browsers, wenn ein Tiddler geöffnet wird:
@@ -136,6 +157,8 @@ Toolbars/EditToolbar/Hint: Auswählen, welche Buttons im "Edit Modus" angezeigt 
 Toolbars/Hint: Auswählen, welche "Toolbar Button" angezeigt werden
 Toolbars/PageControls/Caption: Page Toolbar
 Toolbars/PageControls/Hint: Auswählen, welche Buttons im Hauptmenü angezeigt werden:
+Toolbars/EditorToolbar/Caption: Editor Toolbar
+Toolbars/EditorToolbar/Hint: Auswählen, welche Editorbuttons angezeigt werden sollen. Manche Buttons sind vom Tiddler-Typ abhängig und werden eventuell ausgeblendet.
 Toolbars/ViewToolbar/Caption: View Toolbar
 Toolbars/ViewToolbar/Hint: Auswählen, welche Buttons im "View Modus" angezeigt werden:
 Tools/Download/Full/Caption: Herunterladen des ''gesamten Wikis''

@@ -1,0 +1,15 @@
+caption: tag-picker
+created: 20161128191316701
+modified: 20161128191435641
+tags: Macros [[Core Macros]]
+title: tag-picker Macro
+type: text/vnd.tiddlywiki
+
+The <<.def tag-picker>> [[macro|Macros]] generates a combination of a text box and a button that allows a tag to be selected and added.
+
+!! Parameters
+
+;actions
+: Action widgets to be triggered when the pill is clicked. Within the text, the variable ''tag'' contains the title of the selected tag.
+
+<<.macro-examples "tag-picker">>

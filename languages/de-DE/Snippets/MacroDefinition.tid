@@ -1,0 +1,8 @@
+title: $:/language/Snippets/MacroDefinition
+tags: $:/tags/TextEditor/Snippet
+caption: Makro Definition
+
+\define makroName(param1:"standard parameter", param2)
+Text des Makros. Zugriff auf den $param1$.
+$param2$
+\end

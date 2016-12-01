@@ -7,7 +7,7 @@ Options/SidebarLayout: 사이드바 레이아웃
 Options/SidebarLayout/Fixed-Fluid: 고정된 이야기, 흐르는 사이드바
 Options/SidebarLayout/Fluid-Fixed: 흐르는 이야기, 고정된 사이드바
 Options/StickyTitles: 제목 고정
-Options/StickyTitles/Hint: 티들러 제목을 브라우저 창의 위에 "stick"으로 일으킵니다. 주의: Chrome으로는 전혀 작동되지 않으며, Firefox에서 일부 레이아웃 문제를 일으킵니다
+Options/StickyTitles/Hint: 티들러 제목을 브라우저 창의 위에 "고정"합니다. 주의: Chrome으로는 전혀 작동되지 않으며, Firefox에서 일부 레이아웃 문제를 일으킵니다
 Options/CodeWrapping: 코드 블럭에서 긴 줄을 줄바꿈
 Settings: 설정
 Settings/FontFamily: 글꼴 집합

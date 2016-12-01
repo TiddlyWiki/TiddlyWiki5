@@ -52,13 +52,13 @@ Palette/HideEditor/Caption: hide editor
 Palette/Prompt: Current palette:
 Palette/ShowEditor/Caption: show editor
 Parsing/Caption: Parsing
-Parsing/Hint: Here you can globally disable individual wiki parser rules. Take care as disabling some parser rules can prevent ~TiddlyWiki functioning correctly (you can restore normal operation with [[safe mode|http://tiddlywiki.com/#SafeMode]] )
+Parsing/Hint: Here you can globally disable/enable wiki parser rules. For changes to take effect, save and reload your wiki. Disabling certain parser rules can prevent <$text text="TiddlyWiki"/> from functioning correctly. Use [[safe mode|http://tiddlywiki.com/#SafeMode]] to restore normal operation.
 Parsing/Block/Caption: Block Parse Rules
 Parsing/Inline/Caption: Inline Parse Rules
 Parsing/Pragma/Caption: Pragma Parse Rules
-Plugins/Add/Hint: Install plugins from the official library
 Plugins/Add/Caption: Get more plugins
-Plugins/AlreadyInstalled: This plugin is already installed at version <$text text=<<installedVersion>>/>
+Plugins/Add/Hint: Install plugins from the official library
+Plugins/AlreadyInstalled/Hint: This plugin is already installed at version <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: disable
 Plugins/Disable/Hint: Disable this plugin when reloading page
@@ -66,16 +66,17 @@ Plugins/Disabled/Status: (disabled)
 Plugins/Empty/Hint: None
 Plugins/Enable/Caption: enable
 Plugins/Enable/Hint: Enable this plugin when reloading page
-Plugins/Install: install
+Plugins/Install/Caption: install
 Plugins/Installed/Hint: Currently installed plugins:
 Plugins/Languages/Caption: Languages
 Plugins/Languages/Hint: Language pack plugins
-Plugins/NoInformation: No information provided
-Plugins/NotInstalled: This plugin is not currently installed
+Plugins/NoInfoFound/Hint: No ''"<$text text=<<currentTab>>/>"'' found
+Plugins/NoInformation/Hint: No information provided
+Plugins/NotInstalled/Hint: This plugin is not currently installed
 Plugins/OpenPluginLibrary: open plugin library
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins
-Plugins/Reinstall: reinstall
+Plugins/Reinstall/Caption: reinstall
 Plugins/Themes/Caption: Themes
 Plugins/Themes/Hint: Theme plugins
 Saving/Caption: Saving
@@ -99,6 +100,13 @@ Settings/CamelCase/Caption: Camel Case Wiki Links
 Settings/CamelCase/Hint: You can globally disable automatic linking of ~CamelCase phrases. Requires reload to take effect
 Settings/CamelCase/Description: Enable automatic ~CamelCase linking
 Settings/Caption: Settings
+Settings/EditorToolbar/Caption: Editor Toolbar
+Settings/EditorToolbar/Hint: Enable or disable the editor toolbar:
+Settings/EditorToolbar/Description: Show editor toolbar
+Settings/InfoPanelMode/Caption: Tiddler Info Panel Mode
+Settings/InfoPanelMode/Hint: Control when the tiddler info panel closes:
+Settings/InfoPanelMode/Popup/Description: Tiddler info panel closes automatically
+Settings/InfoPanelMode/Sticky/Description: Tiddler info panel stays open until explicitly closed
 Settings/Hint: These settings let you customise the behaviour of TiddlyWiki.
 Settings/NavigationAddressBar/Caption: Navigation Address Bar
 Settings/NavigationAddressBar/Hint: Behaviour of the browser address bar when navigating to a tiddler:

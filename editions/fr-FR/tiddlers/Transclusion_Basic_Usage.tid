@@ -1,7 +1,7 @@
 caption: Utilisation basique
 created: 20141129201509859
 fr-title: Transclusion — utilisation basique
-modified: 20150624093230889
+modified: 20160517071012115
 tags: [[Transclusion in WikiText]]
 title: Transclusion Basic Usage
 type: text/vnd.tiddlywiki
@@ -35,7 +35,7 @@ Le tiddler en cours a été modifié le {{!!modified}}
 
 ! Erreurs Récursives
 
-Notez que l'utilisation de ``{{!!text}}`` ou ``{{}}`` engendre le message d'erreur (//Recursive transclusion error in transclude widget//), car il n'y a aucun sens à inclure le contenu du tiddler courant dans le contenu du tiddler courant (c.à.d, en lui-même). Chaque fois que vous rencontrez ce message d'erreur, cela voudra dire que vous essayez d'inclure quelque chose en lui-même, directement ou indirectement (par exemple si le tiddler A transclut le tiddler B qui transclut le tiddler C qui, à son tour, transclut le tiddler A).
+Notez que l'utilisation de ``{{!!text}}`` ou ``{{}}`` engendre le message d'erreur (//Erreur dans le widget transclude : transclusion récursive//), car il n'y a aucun sens à inclure le contenu du tiddler courant dans le contenu du tiddler courant (c.à.d, en lui-même). Chaque fois que vous rencontrez ce message d'erreur, cela voudra dire que vous essayez d'inclure quelque chose en lui-même, directement ou indirectement (par exemple si le tiddler A transclut le tiddler B qui transclut le tiddler C qui, à son tour, transclut le tiddler A).
 
 ! En savoir plus
 
