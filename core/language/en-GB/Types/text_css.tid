@@ -2,3 +2,4 @@ title: $:/language/Docs/Types/text/css
 description: Static stylesheet
 name: text/css
 group: Developer
+group-sort: 2

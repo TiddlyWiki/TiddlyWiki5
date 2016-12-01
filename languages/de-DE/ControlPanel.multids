@@ -56,8 +56,8 @@ Parsing/Hint: Hier können Sie die globalen Parser-Einstellungen ändern. ACHTUN
 Parsing/Block/Caption: Block Regeln
 Parsing/Inline/Caption: Inline Regeln
 Parsing/Pragma/Caption: Pragma Regeln
-Plugins/Add/Hint: Suche und installiere neue Plugins
 Plugins/Add/Caption: Suche
+Plugins/Add/Hint: Suche und installiere neue Plugins
 Plugins/AlreadyInstalled/Hint: Dieses Plugin ist bereits installiert. Version: <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: deaktivieren
