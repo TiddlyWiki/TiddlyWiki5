@@ -94,10 +94,10 @@ TagManager/Caption: gestionnaire de tags
 TagManager/Hint:  Ouvre le gestionnaire de tags
 Timestamp/Caption: horodatage
 Timestamp/Hint: Décide si les modifications mettent à jour l'horodatage
-Timestamp/On/Caption: l'horodatage est activé
-Timestamp/On/Hint: Met à jour l'horodatage quand les tiddlers sont modifiés
-Timestamp/Off/Caption: l'horodatage est désactivé
-Timestamp/Off/Hint: Ne met pas à jour l'horodatage quand les tiddlers sont modifiés
+Timestamp/On/Caption: horodatage activé
+Timestamp/On/Hint: L'horodatage est mis à jour quand les tiddlers sont modifiés
+Timestamp/Off/Caption: horodatage désactivé
+Timestamp/Off/Hint: L'horodatage n'est pas mis à jour quand les tiddlers sont modifiés
 Theme/Caption: thème
 Theme/Hint: Choix du thème pour l'affichage
 Bold/Caption: gras
