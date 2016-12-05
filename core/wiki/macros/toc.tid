@@ -102,7 +102,7 @@ tags: $:/tags/Macro
   <$set name="toc-item-class" filter="""$itemClassFilter$""" emptyValue="toc-item" value="toc-item-selected" >
     <li class=<<toc-item-class>>>
       <$link>
-          <$list filter="[all[current]tagging[]limit[1]] $exclude$" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button>">
+          <$list filter="[all[current]tagging[]limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button>">
           <$reveal type="nomatch" state=<<toc-state>> text="open">
             <$button set=<<toc-state>> setTo="open" class="tc-btn-invisible">
               {{$:/core/images/right-arrow}}
@@ -128,7 +128,7 @@ tags: $:/tags/Macro
 <$set name="toc-state" value=<<qualify """$:/state/toc/$tag$-$(currentTiddler)$""">>>
   <$set name="toc-item-class" filter="""$itemClassFilter$""" emptyValue="toc-item" value="toc-item-selected">
     <li class=<<toc-item-class>>>
-      <$list filter="[all[current]tagging[]limit[1]] $exclude$" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button> <$view field='caption'><$view field='title'/></$view>">
+      <$list filter="[all[current]tagging[]limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button> <$view field='caption'><$view field='title'/></$view>">
         <$reveal type="nomatch" state=<<toc-state>> text="open">
           <$button set=<<toc-state>> setTo="open" class="tc-btn-invisible">
             {{$:/core/images/right-arrow}}
