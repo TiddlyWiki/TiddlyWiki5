@@ -90,7 +90,7 @@ tags: $:/tags/Macro
   <ol class="tc-toc toc-expandable">
     <$list filter="""[all[shadows+tiddlers]tag[$tag$]!has[draft.of]$sort$] $exclude$""">
       <$list filter="[all[current]toc-link[no]]" emptyMessage=<<toc-expandable-empty-message>> >
-        <$macrocall $name="toc-unlinked-expandable-bodyX" tag="""$tag$""" sort="""$sort$""" itemClassFilter="""itemClassFilter""" exclude=<<excluded>> path=<<path>> />
+        <$macrocall $name="toc-unlinked-expandable-body" tag="""$tag$""" sort="""$sort$""" itemClassFilter="""itemClassFilter""" exclude=<<excluded>> path=<<path>> />
       </$list>
     </$list>
   </ol>
