@@ -1,7 +1,7 @@
 created: 20161209172820513
 modified: 20161209174234840
 tags: Learning
-title: One weird trick to change the sort order of sub-branches in a TOC macro
+title: How to change the sort order of sub-branches in a TOC macro
 type: text/vnd.tiddlywiki
 
 Imagine that you are using a [[Table of Contents|Table-of-Contents Macros]] macro similar to this:
