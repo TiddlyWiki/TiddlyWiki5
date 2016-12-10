@@ -8,10 +8,11 @@ Matches: //<small><<resultCount>> resultados</small>//
 Matches/All: Todas as correspondências:
 Matches/Title: Correspondências em títulos:
 Search: Pesquisar
+Search/TooShort: Texto da procura demasiado pequeno
 Shadows/Caption: Sombras
 Shadows/Hint: Procurar tiddlers-sombra
 Shadows/Matches: //<small><<resultCount>> resultados</small>//
-Standard/Caption: Standard
+Standard/Caption: Padrão
 Standard/Hint: Procurar tiddlers normais
 Standard/Matches: //<small><<resultCount>> resultados</small>//
 System/Caption: Sistema
