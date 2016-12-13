@@ -109,7 +109,7 @@ Settings/EditorToolbar/Caption: Barra de Ferramentas do Editor
 Settings/EditorToolbar/Description: Mostrar barra de ferramentas do editor
 Settings/EditorToolbar/Hint: Activar ou desactivar a barra de ferramentas do editor
 Settings/Hint: Estas definições permitem personalizar o comportamento da TiddlyWiki.
-Settings/InfoPanelMode/Caption: Modo painel  de informação da tiddler
+Settings/InfoPanelMode/Caption: Modo painel de informação da tiddler
 Settings/InfoPanelMode/Hint: Controle quando o painel de informação da tiddler fecha:
 Settings/InfoPanelMode/Popup/Description: Painel de informação da tiddler fecha automaticamente
 Settings/InfoPanelMode/Sticky/Description: Painel de informação da tiddler fica aberto até ser fechado
