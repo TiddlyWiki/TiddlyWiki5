@@ -30,24 +30,21 @@ Command.prototype.execute = function() {
 	if(this.params.length < 1) {
 		return "Missing filename";
 	}
-	var ext = path.extname(self.params[0]);
-	fs.readFile(this.params[0],$tw.utils.getTypeEncoding(ext),function(err,data) {
-		if (err) {
-			self.callback(err);
-		} else {
-			var fields = {title: self.params[0]},
-				type = path.extname(self.params[0]);
-			var tiddlers = self.commander.wiki.deserializeTiddlers(type,data,fields);
-			if(!tiddlers) {
-				self.callback("No tiddlers found in file \"" + self.params[0] + "\"");
-			} else {
-				for(var t=0; t<tiddlers.length; t++) {
-					self.commander.wiki.importTiddler(new $tw.Tiddler(tiddlers[t]));
-				}
-				self.callback(null);	
-			}
-		}
+	var ext = path.extname(self.params[0]),
+		stat = fs.statSync(self.params[0]),
+		tiddlers = $tw.loadTiddlersFromPath(self.params[0]),
+		count = 0;
+	$tw.utils.each(tiddlers,function(tiddlerInfo) {
+		$tw.utils.each(tiddlerInfo.tiddlers,function(tiddler) {
+			self.commander.wiki.importTiddler(new $tw.Tiddler(tiddler));
+			count++;
+		});
 	});
+	if(!count) {
+		self.callback("No tiddlers found in file \"" + self.params[0] + "\"");
+	} else {
+		self.callback(null);
+	}
 	return null;
 };
 
