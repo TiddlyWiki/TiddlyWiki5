@@ -1996,6 +1996,12 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	color: <<colour message-foreground>>;
 }
 
+.tc-message-box svg {
+	width: 1em;
+	height: 1em;
+    vertical-align: text-bottom;
+}
+
 /*
 ** Pictures
 */
