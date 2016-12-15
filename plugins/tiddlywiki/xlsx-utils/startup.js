@@ -13,7 +13,7 @@ Initialisation
 "use strict";
 
 // Export name and synchronous status
-exports.name = "startup";
+exports.name = "xlsx-startup";
 exports.after = ["load-modules"];
 exports.synchronous = true;
 
