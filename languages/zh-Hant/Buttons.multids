@@ -54,6 +54,8 @@ Info/Caption: 資訊
 Info/Hint: 顯示此條目的資訊
 Language/Caption: 語言
 Language/Hint: 選擇使用者介面語言
+Manager/Caption: 條目管理器
+Manager/Hint: 開啟條目管理器
 More/Caption: 更多
 More/Hint: 更多動作
 NewHere/Caption: 新增子條目

@@ -1560,6 +1560,9 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 						case "filename":
 							value = path.basename(filename);
 							break;
+						case "filename-uri-decoded":
+							value = decodeURIComponent(path.basename(filename));
+							break;
 						case "basename":
 							value = path.basename(filename,path.extname(filename));
 							break;

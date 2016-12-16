@@ -1,13 +1,15 @@
 title: $:/core/ui/EditTemplate/title
 tags: $:/tags/EditTemplate
 
+<$edit-text field="draft.title" class="tc-titlebar tc-edit-texteditor" focus="true"/>
+
 <$vars pattern="""[\|\[\]{}]""" bad-chars="""`| [ ] { }`""">
 
 <$list filter="[is[current]regexp:draft.title<pattern>]" variable="listItem">
 
 <div class="tc-message-box">
 
-{{$:/language/EditTemplate/Title/BadCharacterWarning}}
+{{$:/core/images/warning}} {{$:/language/EditTemplate/Title/BadCharacterWarning}}
 
 </div>
 
@@ -15,4 +17,28 @@ tags: $:/tags/EditTemplate
 
 </$vars>
 
-<$edit-text field="draft.title" class="tc-titlebar tc-edit-texteditor" focus="true"/>
+<$reveal state="!!draft.title" type="nomatch" text={{!!draft.of}} tag="div">
+
+<$list filter="[{!!draft.title}!is[missing]]" variable="listItem">
+
+<div class="tc-message-box">
+
+{{$:/core/images/warning}} {{$:/language/EditTemplate/Title/Exists/Prompt}}
+
+</div>
+
+</$list>
+
+<$list filter="[{!!draft.of}!is[missing]]" variable="listItem">
+
+<$vars fromTitle={{!!draft.of}} toTitle={{!!draft.title}}>
+
+<$checkbox tiddler="$:/config/RelinkOnRename" field="text" checked="yes" unchecked="no" default="no"> {{$:/language/EditTemplate/Title/Relink/Prompt}}</$checkbox>
+
+</$vars>
+
+</$list>
+
+</$reveal>
+
+

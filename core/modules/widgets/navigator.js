@@ -349,6 +349,12 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 				},this.wiki.getModificationFields());
 				newTiddler = $tw.hooks.invokeHook("th-saving-tiddler",newTiddler);
 				this.wiki.addTiddler(newTiddler);
+				// If enabled, relink references to renamed tiddler
+				var shouldRelink = this.getAttribute("relinkOnRename","no").toLowerCase().trim() === "yes";
+				if(isRename && shouldRelink && this.wiki.tiddlerExists(draftOf)) {
+console.log("Relinking '" + draftOf + "' to '" + draftTitle + "'");
+					this.wiki.relinkTiddler(draftOf,draftTitle);
+				}
 				// Remove the draft tiddler
 				this.wiki.deleteTiddler(title);
 				// Remove the original tiddler if we're renaming it
