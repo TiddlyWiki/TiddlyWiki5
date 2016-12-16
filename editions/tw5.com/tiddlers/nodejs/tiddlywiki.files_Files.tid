@@ -23,6 +23,7 @@ Each field can be specified as either a ''string'' or ''array'' value to be assi
 
 * ''source'' - (optional) a string specifying the source value for the field. If not specified, the existing value is used
 ** //filename// the filename of the file containing the tiddler
+** //filename-uri-decoded// the filename of the file containing the tiddler, with [[URI decoding|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent]] applied
 ** //basename// the filename of the file containing the tiddler without any extension
 ** //basename-uri-decoded// the filename of the file containing the tiddler without any extension, with [[URI decoding|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent]] applied
 ** //extname// the extension of the filename of the file containing the tiddler
