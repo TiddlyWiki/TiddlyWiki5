@@ -91,8 +91,9 @@ SimpleServer.prototype.checkCredentials = function(request,incomingUsername,inco
 	}
 };
 
-SimpleServer.prototype.requestHandler = function(self,request,response) {
+SimpleServer.prototype.requestHandler = function(request,response) {
 	// Compose the state object
+	var self = this;
 	var state = {};
 	state.wiki = self.wiki;
 	state.server = self;
@@ -142,7 +143,7 @@ SimpleServer.prototype.requestHandler = function(self,request,response) {
 };
 	
 SimpleServer.prototype.listen = function(port,host) {
-	http.createServer(this.requestHandler.bind(null,this)).listen(port,host);
+	http.createServer(this.requestHandler.bind(this)).listen(port,host);
 };
 
 var Command = function(params,commander,callback) {
