@@ -2,5 +2,5 @@ title: $:/plugins/tiddlywiki/googleanalytics/readme
 
 This plugin enables you to use Google Analytics to track access to your online TiddlyWiki document.
 
-[[Current plugin source|https://framagit.org/sycom/TiddlyWiki5/tree/plugin-googleanalytics]]
-[[Original source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/googleanalytics]]
+* [[Current plugin source|https://framagit.org/sycom/TiddlyWiki5/tree/plugin-googleanalytics]]
+* [[Original source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/googleanalytics]]
