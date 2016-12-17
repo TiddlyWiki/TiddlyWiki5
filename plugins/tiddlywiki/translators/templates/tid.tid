@@ -3,6 +3,6 @@ title: $:/plugins/tiddlywiki/translators/templates/tid
 \define generateTid(title)
 title: $title$
 
-<$list filter="""[[$title$]is[tiddler]]"""><$transclude tiddler="""$title$"""/></$list>
+<$list filter="""[[$title$]is[tiddler]]"""><$text text={{$title$}}/></$list>
 \end
 <$macrocall $name="generateTid" title=<<currentTiddler>>/>

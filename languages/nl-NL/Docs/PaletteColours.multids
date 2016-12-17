@@ -12,15 +12,15 @@ code-foreground: Voorgrond code
 dirty-indicator: Indicator voor niet-opgeslagen wijzigingen
 download-background: Achtergrond downloadknop
 download-foreground: Voorgrond downloadknop
-dragger-background: Achtergrond "dragger"
-dragger-foreground: Voorgrond "dragger"
+dragger-background: Achtergrond 'dragger'
+dragger-foreground: Voorgrond 'dragger'
 dropdown-background: Achtergrond dropdown
 dropdown-border: Rand dropdown
 dropdown-tab-background: Achtergrond dropdown tab
 dropdown-tab-background-selected: Achtergrond dropdown tab voor geselecteerde tabs
-dropzone-background: Achtergrond "dropzone"
+dropzone-background: Achtergrond 'dropzone'
 external-link-background: Achtergrond externe link
-external-link-background-hover: Achtergrond mouseover externe link 
+external-link-background-hover: Achtergrond 'mouseover' externe link 
 external-link-background-visited: Achtergrond bezochte externe link
 external-link-foreground: Voorgrond externe link
 external-link-foreground-hover: Voorgrond mouseover externe link 
@@ -48,7 +48,7 @@ sidebar-controls-foreground-hover: Voorgrond mouseover knoppen zijpaneel
 sidebar-foreground: Voorgrond zijpaneel
 sidebar-foreground-shadow: Voorgrond schaduw zijpaneel
 sidebar-muted-foreground: Voorgrond gedimd zijpaneel
-sidebar-muted-foreground-hover: Voorgrond gedimd mouseover zijpaneel
+sidebar-muted-foreground-hover: Voorgrond gedimd 'mouseover' zijpaneel
 sidebar-tab-background: Achtergrond tab zijpaneel
 sidebar-tab-background-selected: Achtergrond tab zijpaneel voor geselecteerde tabs
 sidebar-tab-border: Rand tab zijpaneel
@@ -57,7 +57,8 @@ sidebar-tab-divider: Zijpaneel tabscheider
 sidebar-tab-foreground: Voorgrond tab zijpaneel
 sidebar-tab-foreground-selected: Voorgrond tab zijpaneel voor geselecteerde tabs
 sidebar-tiddler-link-foreground: Voorgrond tiddler link zijpaneel
-sidebar-tiddler-link-foreground-hover: Voorgrond mouseover tiddler link zijpaneel
+sidebar-tiddler-link-foreground-hover: Voorgrond 'mouseover' tiddler link zijpaneel
+site-title-foreground: Voorgrond van de wikititel
 static-alert-foreground: Voorgrond statische alarmmelding
 tab-background: Achtergrond tab
 tab-background-selected: Achtergrond tab voor geselecteerde tabs

@@ -8,6 +8,7 @@ ConfirmCancelTiddler: Vill du ångra ändringar för denna tiddler "<$text text=
 ConfirmDeleteTiddler: Vill du ta bort denna tiddler "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: Vill du skriva över denna tiddler "<$text text=<<title>>/>"?
 ConfirmEditShadowTiddler: You are about to edit a ShadowTiddler. Any changes will override the default system making future upgrades non-trivial. Are you sure you want to edit "<$text text=<<title>>/>"?
+Count: antal
 DefaultNewTiddlerTitle: Ny Tiddler
 DropMessage: Drop here (or use the 'Escape' key to cancel)
 Encryption/Cancel: Avbryt

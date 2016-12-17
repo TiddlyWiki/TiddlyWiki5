@@ -1,7 +1,7 @@
 title: GettingStarted
 
 \define lingo-base() $:/language/ControlPanel/Basics/
-欢迎使用 TiddlyWiki 及参与 ~TiddlyWiki 社群
+欢迎使用 ~TiddlyWiki 及参与 ~TiddlyWiki 社群
 
 开始将重要资讯存放于 ~TiddlyWiki 之前，确认您可以可靠地保存变更是很重要的。详细资讯请参阅 http://tiddlywiki.com/#GettingStarted
 
@@ -11,7 +11,7 @@ title: GettingStarted
 
 |<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
 |<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
-|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
 </div>
 
 请参阅[[控制台|$:/ControlPanel]]查看更多选项。

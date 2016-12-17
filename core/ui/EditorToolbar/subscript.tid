@@ -1,0 +1,14 @@
+title: $:/core/ui/EditorToolbar/subscript
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/subscript
+caption: {{$:/language/Buttons/Subscript/Caption}}
+description: {{$:/language/Buttons/Subscript/Hint}}
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+shortcuts: ((subscript))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix=",,"
+	suffix=",,"
+/>

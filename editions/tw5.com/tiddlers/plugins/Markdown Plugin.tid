@@ -1,6 +1,9 @@
+created: 20160107223401584
+list: 
+modified: 20160107223725801
+tags: [[Plugin Editions]]
 title: Markdown Plugin
-modified: 20140922074322741
-tags: Plugins
+type: text/vnd.tiddlywiki
 
 The Markdown plugin enables you to use tiddlers that are written in standard Markdown markup.
 

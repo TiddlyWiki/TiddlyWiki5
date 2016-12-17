@@ -1,0 +1,14 @@
+title: $:/core/ui/EditorToolbar/underline
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/underline
+caption: {{$:/language/Buttons/Underline/Caption}}
+description: {{$:/language/Buttons/Underline/Hint}}
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+shortcuts: ((underline))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="__"
+	suffix="__"
+/>

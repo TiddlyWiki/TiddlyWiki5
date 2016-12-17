@@ -1,0 +1,95 @@
+created: 20161015114118243
+modified: 20161015170604353
+tags: TiddlyWikiFolders
+title: tiddlywiki.files Files
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+A `tiddlywiki.files` JSON file in a sub-folder within [[a TiddlyWiki folder|TiddlyWikiFolders]] overrides the usual logic for recursively scanning the folder for tiddler files. Instead, the `tiddlywiki.files` file specifies instructions for loading tiddlers from specific files and folders.
+
+The format of the file is an object with two optional properties:
+
+* ''tiddlers'' - an array of objects describing external files with the ability to override or modify any of the fields read from the file
+* ''directories'' - an array of objects describing external directories, a filter determining which files within those directories should be processed, and the ability to override or modify any of the fields read from the file
+
+Note that significant enhancements to `tiddlywiki.files` processing were introduced in [[Release 5.1.14]].
+
+!! Field overrides
+
+Both the ''tiddlers'' and ''directories'' sections of `tiddlywiki.files` files include the ability to override or customise the values of fields with a `fields` object.
+
+Each field can be specified as either a ''string'' or ''array'' value to be assigned directly to the field, or <<.from-version "5.1.14">> an ''object'' describing how to generate the value for the field. The object contains the following properties:
+
+* ''source'' - (optional) a string specifying the source value for the field. If not specified, the existing value is used
+** //filename// the filename of the file containing the tiddler
+** //filename-uri-decoded// the filename of the file containing the tiddler, with [[URI decoding|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent]] applied
+** //basename// the filename of the file containing the tiddler without any extension
+** //basename-uri-decoded// the filename of the file containing the tiddler without any extension, with [[URI decoding|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent]] applied
+** //extname// the extension of the filename of the file containing the tiddler
+** //created// the creation date/time of the file containing the tiddler
+** //modified// the modification date/time of the file containing the tiddler
+* ''prefix'' - (optional) a string to be prepended to the value of the field
+* ''suffix'' - (optional) a string to be appended to the value of the field
+
+! Tiddlers section
+
+The file specifications in the `tiddlers` array support the following properties:
+
+* ''file'': (required) the absolute or relative path to the file containing the tiddler data (relative paths are interpreted relative to the path of the `tiddlywiki.files` file)
+* ''isTiddlerFile'': (optional) if `true`, the file will be treated as a [[tiddler file|TiddlerFiles]] and deserialised to extract the tiddlers. Otherwise, the raw content of the file is assigned to the `text` field without any parsing
+* ''fields'': (optional) an object containing values that override or customise the fields provided in the tiddler file (see above)
+* ''prefix'' & ''suffix'': (optional) strings to be prefixed and suffixed to the tiddler `text` field
+*> Note that providing a ''prefix'' here is equivalent to setting the `text` field of the ''fields'' object to `{"prefix":"<prefixvalue>"}`.
+
+! Directories section
+
+Directory specifications in the `directories` array may take the following forms:
+
+* a ''string'' literal, specifying the absolute or relative path to the directory containing the tiddler files (relative paths are interpreted relative to the path of the `tiddlywiki.files` file). The directory is recursively searched for tiddler files
+* <<.from-version "5.1.14">> an ''object'' with the following properties:
+** ''path'' - (required) the absolute or relative path to the directory containing the tiddler files (relative paths are interpreted relative to the path of the `tiddlywiki.files` file). Note that the directory is not recursively searched; sub-directories are ignored
+** ''filesRegExp'' - (optional) a [[regular expression|https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions]] that matches the filenames of the files that should be processed within the directory
+** ''isTiddlerFile'' - (required) if `true`, the file will be treated as a [[tiddler file|TiddlerFiles]] and deserialised to extract the tiddlers. Otherwise, the raw content of the file is assigned to the `text` field without any parsing
+** ''fields'' - (required) an object containing values that override or customise the fields provided in the tiddler file (see above)
+
+Fields can be overridden for particular files by creating a file with the same name plus the suffix `.meta` -- see TiddlerFiles.
+
+! Examples
+
+These example `tiddlywiki.files` must be placed in their own sub-directory of the [[wiki folder|TiddlyWikiFolders]].
+
+There are also several examples of `tiddlywiki.files` files in the main [[TiddlyWiki 5 GitHub repository|https://github.com/Jermolene/TiddlyWiki5]]. 
+
+!! Importing a folder of PDFs
+
+This example retrieves all the files with the extension `.pdf` from a folder specified by a relative path. Each tiddler is set up for LazyLoading with the following fields:
+
+* ''title'' - set to the URI decoded base filename of the PDF file. [[URI decoding|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent]] allows characters like "/" to be included in titles by URI encoding them as "%2F"
+* ''created'' - set to the creation date/time of the PDF file
+* ''modified'' - set to the modification date/time of the PDF file
+* ''type'' - set to `application/pdf`
+* ''tags'' - set to `$:/tags/AttachedFile`
+* ''text'' - set to an empty string
+* ''_canonical_uri'' - set to the string "pdfs/" concatenated with the filename
+
+```
+{
+    "directories": [
+        {
+            "path": "../../../input/pdfs",
+            "filesRegExp": "^.*\\.pdf$",
+            "isTiddlerFile": false,
+            "fields": {
+                "title": {"source": "basename-uri-decoded"},
+                "created": {"source": "created"},
+                "modified": {"source": "modified"},
+                "type": "application/pdf",
+                "tags": ["$:/tags/AttachedFile"],
+                "text": "",
+                "_canonical_uri": {"source": "filename", "prefix": "pdfs/"}
+            }
+        }
+    ]
+}
+```

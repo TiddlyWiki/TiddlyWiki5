@@ -1,5 +1,6 @@
 title: $:/language/
 
+AboveStory/ClassicPlugin/Warning: Het lijkt erop dat je probeert een ~TiddlyWiki Classic plugin te laden. [[Deze plugins werken niet met ~TiddlyWiki version 5.x.x|http://tiddlywiki.com/#TiddlyWikiClassic]]. Gedetecteerde ~TiddlyWiki Classic plugins:
 BinaryWarning/Prompt: Deze tiddler bevat binaire data
 ClassicWarning/Hint: Deze tiddler is in TiddlyWiki Classic wiki tekstformaat geschreven dat niet geheel compatibel is met TiddlyWiki versie 5. Zie http://tiddlywiki.com/static/Upgrading.html voor meer details.
 ClassicWarning/Upgrade/Caption: upgrade
@@ -8,6 +9,7 @@ ConfirmCancelTiddler: Wil je gemaakte wijzigingen aan de tiddler "<$text text=<<
 ConfirmDeleteTiddler: Wil je de tiddler "<$text text=<<title>>/>" verwijderen?
 ConfirmEditShadowTiddler: Je staat op het punt een schaduwtiddler te wijzigen. Toekomstige automatische veranderingen (upgrades) zijn dan niet mogelijk. Wil je "<$text text=<<title>>/>" wijzigen?
 ConfirmOverwriteTiddler: Wil je de tiddler "<$text text=<<title>>/>" overschrijven?
+Count: aantal
 DefaultNewTiddlerTitle: Nieuwe tiddler
 DropMessage: 'Drop' hier (of klik escape om te annuleren)
 Encryption/Cancel: Annuleer
@@ -18,18 +20,20 @@ Encryption/PromptSetPassword: Vul een nieuw wachtwoord in voor deze TiddlyWiki
 Encryption/RepeatPassword: Herhaal wachtwoord
 Encryption/SetPassword: Vul wachtwoord in
 Encryption/Username: Gebruikersnaam
-Exporters/CsvFile: CSV tiddlers bestand
-Exporters/JsonFile: JSON tiddlers bestand
-Exporters/StaticRiver: Serie tiddlers als statisch HTML bestand
-Exporters/TidFile: Enkele tiddler ".tid" bestand
+InternalJavaScriptError/Hint: Er is een probleem. Herstart TiddlyWiki door je browser te verversen
+InternalJavaScriptError/Title: Interne JavaScript Error
 InvalidFieldName: Illegale lettertekens in veldnaam "<$text text=<<fieldName>>/>". Velden kunnen alleen kleine letters, cijfers en de lettertekens liggend streepje (`_`), koppelteken (`-`) en punt (`.`)
+LazyLoadingWarning: <p>Er wordt externe tekst geladen van ''<$text text={{!!_canonical_uri}}/>''</p><p>Als deze mededeling niet verdwijnt ondersteunt de gebruikte browser in deze configuratie mogelijk geen externe tekst. Zie http://tiddlywiki.com/#ExternalText</p>
 MissingTiddler/Hint: Ontbrekende tiddler "<$text text=<<currentTiddler>>/>" - klik {{$:/core/images/edit-button}} om hem aan te maken
 OfficialPluginLibrary: Officiële ~TiddlyWiki plugin-bibliotheek
+OfficialPluginLibrary/Hint: De officiële ~TiddlyWiki pluginbibliotheek op tiddlywiki.com. Plugins, thema's en taalpaketten worden door het core team onderhouden.
 PluginReloadWarning: Sla op {{$:/core/ui/Buttons/save-wiki}} en ververs {{$:/core/ui/Buttons/refresh}} om wijzigingen aan plugins door te voeren
 RecentChanges/DateFormat: DD MMM YYYY
 SystemTiddler/Tooltip: Dit is een systeem tiddler
 TagManager/Colour/Heading: Kleur
+TagManager/Count/Heading: Aantal
 TagManager/Icon/Heading: Pictogram (icon)
 TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Label
+Tiddler/DateFormat: DD MMM YYYY om hh12:0mmam
 UnsavedChangesWarning: Er zijn niet-opgeslagen veranderingen in TiddlyWiki

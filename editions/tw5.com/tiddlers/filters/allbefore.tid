@@ -1,0 +1,14 @@
+caption: allbefore
+created: 20151017145131857
+modified: 20151108051507578
+op-input: a list of items
+op-output: all items before the marker
+op-parameter: the list item to be used as a marker
+op-parameter-name: marker
+op-purpose: discard all items except those before the marker
+op-suffix: specifying a suffix ('include') will include the marker in the output
+tags: [[Filter Operators]] [[Order Operators]] [[Listops Operators]]
+title: allbefore Operator
+type: text/vnd.tiddlywiki
+
+<<.operator-examples "allbefore">>

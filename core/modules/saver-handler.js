@@ -151,7 +151,7 @@ SaverHandler.prototype.saveWiki = function(options) {
 		text = this.wiki.renderTiddler(downloadType,template,options),
 		callback = function(err) {
 			if(err) {
-				alert("Error while saving:\n\n" + err);
+				alert($tw.language.getString("Error/WhileSaving") + ":\n\n" + err);
 			} else {
 				// Clear the task queue if we're saving (rather than downloading)
 				if(method !== "download") {

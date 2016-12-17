@@ -1,0 +1,19 @@
+caption: "Simple Zork-like Game", de Jed Carty
+created: 20141118143636664
+es-title: "Simple Zork-like Game", de Jed Carty
+modified: 20160417101152125
+tags: Examples
+title: Simple Zork-like Game by Jed Carty
+type: text/vnd.tiddlywiki
+url: http://zorklike.tiddlyspot.com
+
+Juego sencillo, construido en TiddlyWiki, presentado en 
+A simple game built with TiddlyWiki, presentado en [[este post|https://groups.google.com/d/topic/tiddlywiki/4aRpZht1vOs/discussion]].
+
+{{!!url}}
+
+<<<
+Quise ver si era posible hacer algún tipo de juego usando sólo el núcleo de TiddlyWiki, sin plugins ni JavaScript. Hice una versión muy esquemática de juego de ficción al estilo de Zork. Es lo más sencillo que se puede hacer y que se pueda llamar juego, pero puede que le añada cosas más adelante. Lo hice en la versión 5.1.5 prerelease, porque el widget action-setfield ahorra mucho tiempo de definir macros.
+
+Una de las finalidades es no usar nada más que lo que contiene el núcleo de ~TiddlyWiki, tal cual: sin usar JavaScript ni plugin alguno.
+<<<

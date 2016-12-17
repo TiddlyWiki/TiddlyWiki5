@@ -2,7 +2,7 @@ title: Releasing a new version of TiddlyWiki
 
 # Move the latest release note from the prerelease edition into the tw5.com edition
 # Adjust the release date and the ''released'' field of the latest release tiddler (eg, [[Release 5.1.3]])
-# Ensure [[Releases]] has the new version as the default tab
+# Ensure [[TiddlyWiki Releases]] has the new version as the default tab
 # Adjust the modified time of HelloThere
 # Make sure ''Jermolene/TiddlyWiki5'' is fully committed
 # Edit `package.json` to the new version number
