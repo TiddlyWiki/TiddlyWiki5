@@ -1,6 +1,6 @@
 caption: radio
 created: 20131212195353929
-modified: 20161217112252896
+modified: 20161217112444671
 tags: Widgets
 title: RadioWidget
 type: text/vnd.tiddlywiki
@@ -16,7 +16,7 @@ The content of the `<$radio>` widget is displayed within an HTML `<label>` eleme
 |!Attribute |!Description |
 |tiddler |Title of the tiddler to manipulate (defaults to the [[current tiddler|Current Tiddler]]) |
 |field |The field of the //tiddler// bound to the radio button|
-|index|<<.from-version "5.1.14">> The index of the //tiddler// being [[DataTiddler|DataTiddlers]] bound to the radio button<<.tip takes precedence over //field//>>|
+|index|<<.from-version "5.1.14">> The index of the //tiddler// being [[DataTiddler|DataTiddlers]] bound to the radio button<<.tip "takes precedence over //field//">>|
 |value |The value for the //field// or //index// of the //tiddler//|
 |class |CSS classes to be assigned to the label around the radio button |
 
