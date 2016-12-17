@@ -52,7 +52,7 @@ Palette/HideEditor/Caption: hide editor
 Palette/Prompt: Current palette:
 Palette/ShowEditor/Caption: show editor
 Parsing/Caption: Parsing
-Parsing/Hint: Here you can globally disable individual wiki parser rules. Take care as disabling some parser rules can prevent ~TiddlyWiki functioning correctly (you can restore normal operation with [[safe mode|http://tiddlywiki.com/#SafeMode]] )
+Parsing/Hint: Here you can globally disable/enable wiki parser rules. For changes to take effect, save and reload your wiki. Disabling certain parser rules can prevent <$text text="TiddlyWiki"/> from functioning correctly. Use [[safe mode|http://tiddlywiki.com/#SafeMode]] to restore normal operation.
 Parsing/Block/Caption: Block Parse Rules
 Parsing/Inline/Caption: Inline Parse Rules
 Parsing/Pragma/Caption: Pragma Parse Rules
@@ -103,6 +103,10 @@ Settings/Caption: Settings
 Settings/EditorToolbar/Caption: Editor Toolbar
 Settings/EditorToolbar/Hint: Enable or disable the editor toolbar:
 Settings/EditorToolbar/Description: Show editor toolbar
+Settings/InfoPanelMode/Caption: Tiddler Info Panel Mode
+Settings/InfoPanelMode/Hint: Control when the tiddler info panel closes:
+Settings/InfoPanelMode/Popup/Description: Tiddler info panel closes automatically
+Settings/InfoPanelMode/Sticky/Description: Tiddler info panel stays open until explicitly closed
 Settings/Hint: These settings let you customise the behaviour of TiddlyWiki.
 Settings/NavigationAddressBar/Caption: Navigation Address Bar
 Settings/NavigationAddressBar/Hint: Behaviour of the browser address bar when navigating to a tiddler:

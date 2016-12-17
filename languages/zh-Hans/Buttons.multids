@@ -54,6 +54,8 @@ Info/Caption: 信息
 Info/Hint: 显示此条目的信息
 Language/Caption: 语言
 Language/Hint: 选择用户介面语言
+Manager/Caption: 条目管理器
+Manager/Hint: 开启条目管理器
 More/Caption: 更多
 More/Hint: 更多动作
 NewHere/Caption: 添加子条目
@@ -76,6 +78,8 @@ Permalink/Caption: 引用链接
 Permalink/Hint: 设置浏览器网址栏为直接链接到此条目
 Permaview/Caption: 永久链接
 Permaview/Hint: 设置浏览器网址栏为直接链接到当前所有已开启条目
+Print/Caption: 打印页面
+Print/Hint: 打印当前页面
 Refresh/Caption: 刷新
 Refresh/Hint: 执行维基的完全刷新
 Save/Caption: 确定
@@ -90,6 +94,12 @@ ShowSideBar/Caption: 显示侧边栏
 ShowSideBar/Hint: 显示侧边栏
 TagManager/Caption: 标签管理
 TagManager/Hint: 标签管理
+Timestamp/Caption: 时间戳记
+Timestamp/Hint: 选择修改是否更新时间戳记
+Timestamp/On/Caption: 时间戳记开启
+Timestamp/On/Hint: 条目被修改时，更新时间戳记
+Timestamp/Off/Caption: 时间戳记关闭
+Timestamp/Off/Hint: 条目被修改时，不更新时间戳记
 Theme/Caption: 布景主题
 Theme/Hint: 选择布景主题
 Bold/Caption: 粗体

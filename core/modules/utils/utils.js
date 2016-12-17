@@ -358,7 +358,8 @@ exports.getWeek = function(date) {
 		d = 7; // JavaScript Sun=0, ISO Sun=7
 	}
 	dt.setTime(dt.getTime() + (4 - d) * 86400000);// shift day to Thurs of same week to calculate weekNo
-	var n = Math.floor((dt.getTime()-new Date(dt.getFullYear(),0,1) + 3600000) / 86400000);
+	var x = new Date(dt.getFullYear(),0,1);
+	var n = Math.floor((dt.getTime() - x.getTime()) / 86400000);
 	return Math.floor(n / 7) + 1;
 };
 
@@ -718,7 +719,7 @@ exports.strEndsWith = function(str,ending,position) {
 		if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > str.length) {
 			position = str.length;
 		}
-		position -= str.length;
+		position -= ending.length;
 		var lastIndex = str.indexOf(ending, position);
 		return lastIndex !== -1 && lastIndex === position;
 	}

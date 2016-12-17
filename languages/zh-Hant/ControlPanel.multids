@@ -75,7 +75,7 @@ Plugins/Reinstall/Caption: 重新安裝
 Plugins/Themes/Caption: 佈景主題
 Plugins/Themes/Hint: 佈景主題插件
 Parsing/Caption: 解析
-Parsing/Hint: 在此您可以全域停用個別的維基語法解析規則。請小心，停用某些解析規則，會妨礙 ~TiddlyWiki 正常運作 (您可以用[[安全模式|http://tiddlywiki.com/#SafeMode]]恢復正常操作)
+Parsing/Hint: 在此您可以全域停用或啟用維基解析規則。要使更改生效，請儲存並重新載入您的維基。停用某些解析規則，會妨礙 <$text text="TiddlyWiki"/>  正常運作。可使用[[安全模式|http://tiddlywiki.com/#SafeMode]]恢復正常操作。
 Parsing/Block/Caption: 區塊解析規則
 Parsing/Inline/Caption: 行內解析規則
 Parsing/Pragma/Caption: 編譯指示解析規則
@@ -100,11 +100,15 @@ Settings/CamelCase/Caption: 駝峰式維基鏈接
 Settings/CamelCase/Hint: 您可以全域停用駝峰式短語自動鏈接。須儲存後重新載入，方才生效。
 Settings/CamelCase/Description: 啟用自動駝峰式鏈接
 Settings/Caption: 設定
+Settings/DefaultSidebarTab/Caption: 預設側邊欄頁籤
+Settings/DefaultSidebarTab/Hint: 指定預設顯示的側邊欄頁籤
 Settings/EditorToolbar/Caption: 編輯器工具列
 Settings/EditorToolbar/Hint: 啟用或停用編輯器工具列︰
 Settings/EditorToolbar/Description: 顯示編輯器工具列
-Settings/DefaultSidebarTab/Caption: 預設側邊欄頁籤
-Settings/DefaultSidebarTab/Hint: 指定預設顯示的側邊欄頁籤
+Settings/InfoPanelMode/Caption: 條目資訊面板模式
+Settings/InfoPanelMode/Hint: 控制條目資訊面板何時關閉︰
+Settings/InfoPanelMode/Popup/Description: 條目資訊面板自動關閉
+Settings/InfoPanelMode/Sticky/Description: 條目資訊面板保持開啟狀態，直到明確關閉
 Settings/Hint: 這些進階設定讓您自訂 TiddlyWiki 的行為。
 Settings/LinkToBehaviour/Caption: 條目開啟行為
 Settings/LinkToBehaviour/InsideRiver/Hint: 從故事河//中//導航

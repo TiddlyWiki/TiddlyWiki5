@@ -73,7 +73,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 <div class="tc-dropdown-item">
 <<lingo Fields/Add/Dropdown/User>>
 </div>
-<$list filter="[!is[shadow]!is[system]fields[]sort[]] -created -creator -draft.of -draft.title -modified -modifier -tags -text -title -type"  variable="currentField">
+<$list filter="[!is[shadow]!is[system]fields[]search:title{$:/temp/newfieldname}sort[]] -created -creator -draft.of -draft.title -modified -modifier -tags -text -title -type"  variable="currentField">
 <$link to=<<currentField>>>
 <<currentField>>
 </$link>
@@ -81,7 +81,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 <div class="tc-dropdown-item">
 <<lingo Fields/Add/Dropdown/System>>
 </div>
-<$list filter="[fields[]sort[]] -[!is[shadow]!is[system]fields[]]" variable="currentField">
+<$list filter="[fields[]search:title{$:/temp/newfieldname}sort[]] -[!is[shadow]!is[system]fields[]]" variable="currentField">
 <$link to=<<currentField>>>
 <<currentField>>
 </$link>
@@ -97,4 +97,3 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 </span>
 </div>
 </$fieldmangler>
-

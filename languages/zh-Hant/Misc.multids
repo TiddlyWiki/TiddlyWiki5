@@ -36,6 +36,23 @@ InternalJavaScriptError/Hint: 喔，真是令人尷尬。建議刷新您的瀏�
 InvalidFieldName: 欄位名稱 "<$text text=<<fieldName>>/>" 包含無效字元，欄位名稱只能包含小寫字母、數字、底線 (`_`)、 連接號 (`-`) 和小數點 (`.`)
 LazyLoadingWarning: <p>正在從 ''<$text text={{!!_canonical_uri}}/>'' 載入外部條目 ...</p><p>如果此訊息未消失，可能您使用的瀏覽器不支援此配置的外部條目。請參閱 http://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: 登入 TiddlySpace
+Manager/Controls/FilterByTag/None: (無)
+Manager/Controls/FilterByTag/Prompt: 依標籤篩選︰
+Manager/Controls/Order/Prompt: 反向順序
+Manager/Controls/Search/Placeholder: 搜尋
+Manager/Controls/Search/Prompt: 搜尋︰
+Manager/Controls/Show/Option/Tags: 標籤
+Manager/Controls/Show/Option/Tiddlers: 條目
+Manager/Controls/Show/Prompt: 顯示︰
+Manager/Controls/Sort/Prompt: 排序︰
+Manager/Item/Colour: 顏色
+Manager/Item/Fields: 欄位
+Manager/Item/Icon/None: (無)
+Manager/Item/Icon: 圖示
+Manager/Item/RawText: 原始文字
+Manager/Item/Tags: 標籤
+Manager/Item/Tools: 工具
+Manager/Item/WikifiedText: Wikified 文字
 MissingTiddler/Hint: 佚失條目 "<$text text=<<currentTiddler>>/>" - 點擊 {{$:/core/images/edit-button}} 可建立此條目
 No: 否
 OfficialPluginLibrary: ~TiddlyWiki 官方插件程式庫
@@ -43,6 +60,7 @@ OfficialPluginLibrary/Hint: 此為在 tiddlywiki.com 的 ~TiddlyWiki 官方插�
 PluginReloadWarning: 請儲存 {{$:/core/ui/Buttons/save-wiki}} 並刷新頁面 {{$:/core/ui/Buttons/refresh}} 允許更改插件才能生效
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 SystemTiddler/Tooltip: 此為系統條目
+SystemTiddlers/Include/Prompt: 包括系統條目
 TagManager/Colour/Heading: 顏色
 TagManager/Count/Heading: 計數
 TagManager/Icon/Heading: 圖示

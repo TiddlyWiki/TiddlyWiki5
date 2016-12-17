@@ -1,0 +1,14 @@
+title: $:/plugins/tiddlywiki/qrcode/ViewToolbarButton/URL
+tags: $:/tags/ViewToolbarButton/QRcode
+caption: URL of this tiddler
+subtitle: QR code of URL of this tiddler
+
+\define image()
+<img src=<<makeqr text:"""$(url)$#$(hash)$""" size:"350">>/>
+\end
+
+<$set name="url" value={{$:/info/url/full}}>
+<$set name="hash" filter="[<currentTiddler>encodeuricomponent[]]" select="0">
+<<image>>
+</$set>
+</$set>

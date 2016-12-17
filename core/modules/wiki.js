@@ -24,7 +24,8 @@ Adds the following properties to the wiki object:
 
 var widget = require("$:/core/modules/widgets/widget.js");
 
-var USER_NAME_TITLE = "$:/status/UserName";
+var USER_NAME_TITLE = "$:/status/UserName",
+	TIMESTAMP_DISABLE_TITLE = "$:/config/TimestampDisable";
 
 /*
 Get the value of a text reference. Text references can have any of these forms:
@@ -231,27 +232,35 @@ exports.importTiddler = function(tiddler) {
 Return a hashmap of the fields that should be set when a tiddler is created
 */
 exports.getCreationFields = function() {
-	var fields = {
-			created: new Date()
-		},
-		creator = this.getTiddlerText(USER_NAME_TITLE);
-	if(creator) {
-		fields.creator = creator;
+	if(this.getTiddlerText(TIMESTAMP_DISABLE_TITLE,"").toLowerCase() !== "yes") {
+		var fields = {
+				created: new Date()
+			},
+			creator = this.getTiddlerText(USER_NAME_TITLE);
+		if(creator) {
+			fields.creator = creator;
+		}
+		return fields;
+	} else {
+		return {};
 	}
-	return fields;
 };
 
 /*
 Return a hashmap of the fields that should be set when a tiddler is modified
 */
 exports.getModificationFields = function() {
-	var fields = Object.create(null),
-		modifier = this.getTiddlerText(USER_NAME_TITLE);
-	fields.modified = new Date();
-	if(modifier) {
-		fields.modifier = modifier;
+	if(this.getTiddlerText(TIMESTAMP_DISABLE_TITLE,"").toLowerCase() !== "yes") {
+		var fields = Object.create(null),
+			modifier = this.getTiddlerText(USER_NAME_TITLE);
+		fields.modified = new Date();
+		if(modifier) {
+			fields.modifier = modifier;
+		}
+		return fields;
+	} else {
+		return {};
 	}
-	return fields;
 };
 
 /*
@@ -328,7 +337,7 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 				var result = 
 					isNaN(x) && !isNaN(y) ? (isDescending ? -1 : 1) :
 					!isNaN(x) && isNaN(y) ? (isDescending ? 1 : -1) :
-					                        (isDescending ? y - x :  x - y);
+											(isDescending ? y - x :  x - y);
 				return result;
 			};
 		if(sortField !== "title") {
@@ -904,31 +913,54 @@ options: as for wiki.makeWidget() plus:
 options.field: optional field to transclude (defaults to "text")
 options.mode: transclusion mode "inline" or "block"
 options.children: optional array of children for the transclude widget
+options.importVariables: optional importvariables filter string for macros to be included
+options.importPageMacros: optional boolean; if true, equivalent to passing "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]" to options.importVariables
 */
 exports.makeTranscludeWidget = function(title,options) {
 	options = options || {};
-	var parseTree = {tree: [{
+	var parseTreeDiv = {tree: [{
 			type: "element",
 			tag: "div",
-			children: [{
-				type: "transclude",
-				attributes: {
-					tiddler: {
-						name: "tiddler",
-						type: "string",
-						value: title}},
-				isBlock: !options.parseAsInline}]}
-	]};
+			children: []}]},
+		parseTreeImportVariables = {
+			type: "importvariables",
+			attributes: {
+				filter: {
+					name: "filter",
+					type: "string"
+				}
+			},
+			isBlock: false,
+			children: []},
+		parseTreeTransclude = {
+			type: "transclude",
+			attributes: {
+				tiddler: {
+					name: "tiddler",
+					type: "string",
+					value: title}},
+			isBlock: !options.parseAsInline};
+	if(options.importVariables || options.importPageMacros) {
+		if(options.importVariables) {
+			parseTreeImportVariables.attributes.filter.value = options.importVariables;
+		} else if(options.importPageMacros) {
+			parseTreeImportVariables.attributes.filter.value = "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]";
+		}
+		parseTreeDiv.tree[0].children.push(parseTreeImportVariables);
+		parseTreeImportVariables.children.push(parseTreeTransclude);
+	} else {
+		parseTreeDiv.tree[0].children.push(parseTreeTransclude);
+	}
 	if(options.field) {
-		parseTree.tree[0].children[0].attributes.field = {type: "string", value: options.field};
+		parseTreeTransclude.attributes.field = {type: "string", value: options.field};
 	}
 	if(options.mode) {
-		parseTree.tree[0].children[0].attributes.mode = {type: "string", value: options.mode};
+		parseTreeTransclude.attributes.mode = {type: "string", value: options.mode};
 	}
 	if(options.children) {
-		parseTree.tree[0].children[0].children = options.children;
+		parseTreeTransclude.children = options.children;
 	}
-	return $tw.wiki.makeWidget(parseTree,options);
+	return $tw.wiki.makeWidget(parseTreeDiv,options);
 };
 
 /*

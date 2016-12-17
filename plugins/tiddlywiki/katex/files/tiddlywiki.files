@@ -1,126 +1,17 @@
 {
+	"directories": [
+		{
+			"path": "./fonts/",
+			"filesRegExp": "^.*\\.woff$",
+			"isTiddlerFile": false,
+			"fields": {
+				"title": {"source": "filename", "prefix": "$:/plugins/tiddlywiki/katex/fonts/"},
+				"type": "application/font-woff"
+			}
+		}
+	],
 	"tiddlers": [
 		{
-			"file": "fonts/KaTeX_AMS-Regular.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_AMS-Regular.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_Caligraphic-Bold.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Caligraphic-Bold.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_Caligraphic-Regular.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Caligraphic-Regular.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_Fraktur-Bold.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Fraktur-Bold.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_Fraktur-Regular.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Fraktur-Regular.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_Main-Bold.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Main-Bold.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_Main-Italic.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Main-Italic.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_Main-Regular.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Main-Regular.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_Math-BoldItalic.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Math-BoldItalic.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_Math-Italic.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Math-Italic.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_Math-Regular.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Math-Regular.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_SansSerif-Bold.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_SansSerif-Bold.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_SansSerif-Italic.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_SansSerif-Italic.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_SansSerif-Regular.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_SansSerif-Regular.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_Script-Regular.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Script-Regular.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_Size1-Regular.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Size1-Regular.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_Size2-Regular.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Size2-Regular.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_Size3-Regular.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Size3-Regular.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_Size4-Regular.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Size4-Regular.woff"
-			}
-		},{
-			"file": "fonts/KaTeX_Typewriter-Regular.woff",
-			"fields": {
-				"type": "application/font-woff",
-				"title": "$:/plugins/tiddlywiki/katex/fonts/KaTeX_Typewriter-Regular.woff"
-			}
-		},{
 			"file": "katex.without-font-face.min.css",
 			"fields": {
 				"type": "text/plain",

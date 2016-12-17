@@ -1,9 +1,9 @@
+caption: radio
 created: 20131212195353929
-modified: 20150220161302000
+modified: 20161217112444671
 tags: Widgets
 title: RadioWidget
 type: text/vnd.tiddlywiki
-caption: radio
 
 ! Introduction
 
@@ -15,22 +15,26 @@ The content of the `<$radio>` widget is displayed within an HTML `<label>` eleme
 
 |!Attribute |!Description |
 |tiddler |Title of the tiddler to manipulate (defaults to the [[current tiddler|Current Tiddler]]) |
-|field |The name of the field to which the radio button will be bound |
-|value |The value for the tiddler field |
+|field |The field of the //tiddler// bound to the radio button|
+|index|<<.from-version "5.1.14">> The index of the //tiddler// being [[DataTiddler|DataTiddlers]] bound to the radio button<<.tip "takes precedence over //field//">>|
+|value |The value for the //field// or //index// of the //tiddler//|
 |class |CSS classes to be assigned to the label around the radio button |
 
-! Example
+!! Field Mode
 
 This example uses the radio widget to change the `modifier` field of this tiddler:
 
-```
-<$radio field="modifier" value="JoeBloggs"> Joe Bloggs</$radio>
+<<wikitext-example-without-html """<$radio field="modifier" value="JoeBloggs"> Joe Bloggs</$radio>
+<$radio field="modifier" value="JaneBloggs"> Jane Bloggs</$radio>""">>
 
-<$radio field="modifier" value="JaneBloggs"> Jane Bloggs</$radio>
-```
 
-It renders as:
+!! Index Mode
 
-<$radio field="modifier" value="JoeBloggs"> Joe Bloggs</$radio>
+Using the radio widget in index mode requires the //index// attribute to specify the name of the index of a [[DataTiddler|DataTiddlers]] to which the specified //value// is assigned.
 
-<$radio field="modifier" value="JaneBloggs"> Jane Bloggs</$radio>
+This example sets the `Tree Frog` index in the tiddler AnimalColours:
+
+<$macrocall $name="wikitext-example-without-html" src="""<$tiddler tiddler="AnimalColours">
+<$radio index="Tree Frog" value="green"> green</$radio>
+<$radio index="Tree Frog" value="brown"> brown</$radio>
+</$tiddler>"""/>
