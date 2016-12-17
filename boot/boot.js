@@ -643,9 +643,25 @@ $tw.utils.Crypto = function() {
 Execute the module named 'moduleName'. The name can optionally be relative to the module named 'moduleRoot'
 */
 $tw.modules.execute = function(moduleName,moduleRoot) {
-	var name = moduleName[0] === "." ? $tw.utils.resolvePath(moduleName,moduleRoot) : moduleName,
-		moduleInfo = $tw.modules.titles[name] || $tw.modules.titles[name + ".js"] || $tw.modules.titles[moduleName] || $tw.modules.titles[moduleName + ".js"] ,
-		tiddler = $tw.wiki.getTiddler(name) || $tw.wiki.getTiddler(name + ".js") || $tw.wiki.getTiddler(moduleName) || $tw.wiki.getTiddler(moduleName + ".js") ,
+	var name = moduleName;
+	if(moduleName.charAt(0) === ".") {
+		name = $tw.utils.resolvePath(moduleName,moduleRoot)
+	}
+	if(!$tw.modules.titles[name]) {
+		if($tw.modules.titles[name + ".js"]) {
+			name = name + ".js";
+		} else if($tw.modules.titles[name + "/index.js"]) {
+			name = name + "/index.js";
+		} else if($tw.modules.titles[moduleName]) {
+			name = moduleName;
+		} else if($tw.modules.titles[moduleName + ".js"]) {
+			name = moduleName + ".js";
+		} else if($tw.modules.titles[moduleName + "/index.js"]) {
+			name = moduleName + "/index.js";
+		}
+	}
+	var moduleInfo = $tw.modules.titles[name],
+		tiddler = $tw.wiki.getTiddler(name),
 		_exports = {},
 		sandbox = {
 			module: {exports: _exports},
@@ -1543,6 +1559,9 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 					switch(fieldInfo.source) {
 						case "filename":
 							value = path.basename(filename);
+							break;
+						case "filename-uri-decoded":
+							value = decodeURIComponent(path.basename(filename));
 							break;
 						case "basename":
 							value = path.basename(filename,path.extname(filename));
