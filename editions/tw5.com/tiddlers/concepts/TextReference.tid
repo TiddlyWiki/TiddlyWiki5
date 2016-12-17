@@ -4,7 +4,9 @@ tags: Concepts
 title: TextReference
 type: text/vnd.tiddlywiki
 
-A TextReference is a general purpose way to identify a fragment of text from a tiddler. In different situations, text references can be used to retrieve values, or to specify a value that should be modified.
+A TextReference is a general purpose way to describe a fragment of text as either a field of a tiddler, or an index within a [[data tiddler|DataTiddlers]].
+
+In different situations, text references can be used to retrieve values, or to specify a value that should be modified.
 
 A TextReference consists of several parts:
 
@@ -28,5 +30,5 @@ Text references can be used in several places:
 * As the operand of a shortcut transclusion (eg, `{{MyTiddler!!title}}`)
 * As the `state` attribute of the RevealWidget and the LinkCatcherWidget
 
-<$macrocall $name=".tip" _="""Note the different between a text reference such as `foo!!bar` and a transclusion of a text reference such as `{{foo!!bar}}`"""/>
+<$macrocall $name=".tip" _="""Note the distinction between a text reference such as `foo!!bar` and a transclusion of a text reference such as `{{foo!!bar}}`"""/>
 
