@@ -84,8 +84,9 @@ Extended filter operators to manipulate the current list.
         var results = prepare_results(source),
             index = results.indexOf(operator.operand),
             count = parseInt(operator.suffix) || 1,
-            marker = results.splice(index, 1);
-        return results.slice(0, index + count).concat(marker).concat(results.slice(index + count));
+            marker = results.splice(index, 1),
+            offset =  (index + count) > 0 ? index + count : 0;
+        return results.slice(0, offset).concat(marker).concat(results.slice(offset));
     };
 
     /*

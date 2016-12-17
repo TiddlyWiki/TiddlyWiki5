@@ -54,6 +54,8 @@ Home/Caption: Home
 Home/Hint: Öffnen der Standard-Tiddler
 Language/Caption: Sprache
 Language/Hint: Auswahldialog für die Systemsprache
+Manager/Caption: Tiddler Manager
+Manager/Hint: Öffne den Tiddler Manager
 More/Caption: mehr
 More/Hint: Weitere Aktionen
 NewHere/Caption: Neu hier
@@ -76,6 +78,8 @@ Permalink/Caption: Permalink
 Permalink/Hint: Die Adressleiste des Browsers enthält einen Link zu diesem Tiddler
 Permaview/Caption: Permaview
 Permaview/Hint: Die Adressleiste des Browsers enthält einen Link zu allen offenen Tiddlern in dieser Story
+Print/Caption: Seite drucken
+Print/Hint: Aktuelle Seite drucken
 Refresh/Caption: Aktualisieren
 Refresh/Hint: Die Seite wird neu in den Browser geladen
 Save/Caption: Fertig
@@ -90,6 +94,12 @@ ShowSideBar/Caption: Sidebar einblenden
 ShowSideBar/Hint: Sidebar einblenden
 TagManager/Caption: Tag-Manager
 TagManager/Hint: Öffne den Tag-Manager
+Timestamp/Caption: Zeitstempel
+Timestamp/Hint: Einstellung, ob Änderungen den Zeitstempel beeinflussen
+Timestamp/On/Caption: Zeitstempel EIN
+Timestamp/On/Hint: Zeitstempel aktualisieren, wenn ein Tiddler verändert wird
+Timestamp/Off/Caption: Zeitstempel AUS
+Timestamp/Off/Hint: Zeitstempel bleibt unverändert, wenn ein Tiddler geändert wird
 Theme/Caption: Theme
 Theme/Hint: Theme auswählen
 Bold/Caption: Fett
@@ -167,4 +177,3 @@ Superscript/Caption: Hochgestellt
 Superscript/Hint: Ausgewählten Text hochgestellt darstellen
 Underline/Caption: Unterstreichen
 Underline/Hint: Ausgewählten Text unterstrichen darstellen
-

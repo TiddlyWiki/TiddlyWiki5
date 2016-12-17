@@ -1,6 +1,30 @@
 title: $:/core/macros/tag
 tags: $:/tags/Macro
 
+\define tag-pill-styles()
+background-color:$(backgroundColor)$;
+fill:$(foregroundColor)$;
+color:$(foregroundColor)$;
+\end
+
+\define tag-pill-inner(tag,icon,colour,fallbackTarget,colourA,colourB,element-tag,element-attributes,actions)
+<$vars foregroundColor=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">> backgroundColor="""$colour$""">
+<$element-tag$ $element-attributes$ class="tc-tag-label tc-btn-invisible" style=<<tag-pill-styles>>>
+$actions$<$transclude tiddler="""$icon$"""/> <$view tiddler="""$tag$""" field="title" format="text" />
+</$element-tag$>
+</$vars>
+\end
+
+\define tag-pill-body(tag,icon,colour,palette,element-tag,element-attributes,actions)
+<$macrocall $name="tag-pill-inner" tag="""$tag$""" icon="""$icon$""" colour="""$colour$""" fallbackTarget={{$palette$##tag-background}} colourA={{$palette$##foreground}} colourB={{$palette$##background}} element-tag="""$element-tag$""" element-attributes="""$element-attributes$""" actions="""$actions$"""/>
+\end
+
+\define tag-pill(tag,element-tag:"span",element-attributes:"",actions:"")
+<span class="tc-tag-list-item">
+<$macrocall $name="tag-pill-body" tag="""$tag$""" icon={{$tag$!!icon}} colour={{$tag$!!color}} palette={{$:/palette}} element-tag="""$element-tag$""" element-attributes="""$element-attributes$""" actions="""$actions$"""/>
+</span>
+\end
+
 \define tag(tag)
 {{$tag$||$:/core/ui/TagTemplate}}
 \end

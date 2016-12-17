@@ -24,7 +24,8 @@ Adds the following properties to the wiki object:
 
 var widget = require("$:/core/modules/widgets/widget.js");
 
-var USER_NAME_TITLE = "$:/status/UserName";
+var USER_NAME_TITLE = "$:/status/UserName",
+	TIMESTAMP_DISABLE_TITLE = "$:/config/TimestampDisable";
 
 /*
 Get the value of a text reference. Text references can have any of these forms:
@@ -231,27 +232,35 @@ exports.importTiddler = function(tiddler) {
 Return a hashmap of the fields that should be set when a tiddler is created
 */
 exports.getCreationFields = function() {
-	var fields = {
-			created: new Date()
-		},
-		creator = this.getTiddlerText(USER_NAME_TITLE);
-	if(creator) {
-		fields.creator = creator;
+	if(this.getTiddlerText(TIMESTAMP_DISABLE_TITLE,"").toLowerCase() !== "yes") {
+		var fields = {
+				created: new Date()
+			},
+			creator = this.getTiddlerText(USER_NAME_TITLE);
+		if(creator) {
+			fields.creator = creator;
+		}
+		return fields;
+	} else {
+		return {};
 	}
-	return fields;
 };
 
 /*
 Return a hashmap of the fields that should be set when a tiddler is modified
 */
 exports.getModificationFields = function() {
-	var fields = Object.create(null),
-		modifier = this.getTiddlerText(USER_NAME_TITLE);
-	fields.modified = new Date();
-	if(modifier) {
-		fields.modifier = modifier;
+	if(this.getTiddlerText(TIMESTAMP_DISABLE_TITLE,"").toLowerCase() !== "yes") {
+		var fields = Object.create(null),
+			modifier = this.getTiddlerText(USER_NAME_TITLE);
+		fields.modified = new Date();
+		if(modifier) {
+			fields.modifier = modifier;
+		}
+		return fields;
+	} else {
+		return {};
 	}
-	return fields;
 };
 
 /*
