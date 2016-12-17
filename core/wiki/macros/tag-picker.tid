@@ -1,6 +1,11 @@
 title: $:/core/macros/tag-picker
 tags: $:/tags/Macro
 
+\define add-tag-actions()
+<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/NewTagName}}/>
+<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
+\end
+
 \define tag-button()
 <$button class="tc-btn-invisible" tag="a">
 $(actions)$
@@ -13,7 +18,9 @@ $(actions)$
 <$set name="actions" value="""$actions$""">
 <div class="tc-edit-add-tag">
 <span class="tc-add-tag-name">
+<$keyboard key="ENTER" actions=<<add-tag-actions>>>
 <$edit-text tiddler="$:/temp/NewTagName" tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle"/>
+</$keyboard>
 </span> <$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button> <span class="tc-add-tag-button">
 <$set name="tag" value={{$:/temp/NewTagName}}>
 <$button set="$:/temp/NewTagName" setTo="" class="">
