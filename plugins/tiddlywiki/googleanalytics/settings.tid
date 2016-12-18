@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/googleanalytics/settings
+
+You have only two value to set, only first is mandatory :
+
+# ''[[Google Analytics Account|$:/GoogleAnalyticsAccount]]'', usually a `UA-XXXXXX-XX` code where X are digits (yours is best ;-). ''This one is mandatory'', plugin will not work without it...<br/><$edit-text tiddler="$:/GoogleAnalyticsAccount" default="" tag="input"/>
+
+# ''[[Google Analytics Domain|$:/GoogleAnalyticsDomain]]''. Usually the website URL where your tiddlywiki is published. will fallback to `auto` if not set.<br/><$edit-text tiddler="$:/GoogleAnalyticsDomain" default="" tag="input"/>
