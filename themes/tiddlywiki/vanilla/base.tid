@@ -1159,10 +1159,6 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 50%;
 }
 
-.tc-edit-add-tag .tc-keyboard {
-	display:inline;
-}
-
 .tc-edit-tags .tc-tag-label {
 	display: inline-block;
 }
