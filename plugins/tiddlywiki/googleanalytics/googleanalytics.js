@@ -1,4 +1,4 @@
-/*\
+﻿/*\
 title: $:/plugins/tiddlywiki/googleanalytics/googleanalytics.js
 type: application/javascript
 module-type: startup
