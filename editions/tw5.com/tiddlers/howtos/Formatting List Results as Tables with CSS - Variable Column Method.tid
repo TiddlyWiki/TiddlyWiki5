@@ -1,5 +1,5 @@
 created: 20161209172820513
-modified: 20161220161615666
+modified: 20161220162845058
 tags: Learning
 title: Formatting List Results as Tables with CSS - Variable Column Method
 type: text/vnd.tiddlywiki
@@ -32,7 +32,7 @@ For other table-making techniques see also:
 <style>
 .dynamic-table {
   max-width:700px; /* could transclude tiddler width instead */
-  -ms-box-orient: vertical; /* this should probably not be here */
+  -ms-box-orient: vertical; /* might be unnecessary */
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -64,7 +64,7 @@ For other table-making techniques see also:
 <style>
 .dynamic-table {
   max-width:700px; /* could transclude tiddler width instead */
-  -ms-box-orient: vertical; /* this should probably not be here */
+  -ms-box-orient: vertical;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
