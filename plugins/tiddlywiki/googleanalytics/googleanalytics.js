@@ -1,9 +1,9 @@
-﻿/*\
+/*\
 title: $:/plugins/tiddlywiki/googleanalytics/googleanalytics.js
 type: application/javascript
 module-type: startup
 
-Runs new "i s o g r a m" Google Analytics with the account number in the tiddler `$:/GoogleAnalyticsAccount` and the domain name in `$:/GoogleAnalyticsDomain`
+Runs Google Analytics with the account number in the tiddler `$:/GoogleAnalyticsAccount` and the domain name in `$:/GoogleAnalyticsDomain`
 
 \*/
 (function(){
@@ -17,11 +17,9 @@ exports.name = "google-analytics";
 exports.platforms = ["browser"];
 exports.synchronous = true;
 
-var GA_ACCOUNT,GA_DOMAIN;
-
 exports.startup = function() {
 	// getting parameters
-	GA_ACCOUNT = $tw.wiki.getTiddlerText("$:/GoogleAnalyticsAccount").replace(/\n/g,""),
+	var GA_ACCOUNT = $tw.wiki.getTiddlerText("$:/GoogleAnalyticsAccount").replace(/\n/g,""),
 		GA_DOMAIN = $tw.wiki.getTiddlerText("$:/GoogleAnalyticsDomain").replace(/\n/g,"");
 	if (GA_DOMAIN == "" || GA_DOMAIN == undefined) GA_DOMAIN = "auto";
 
@@ -31,8 +29,7 @@ exports.startup = function() {
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-console.log("tiddlywiki analytics working with account :"+GA_ACCOUNT+", and domain :"+GA_DOMAIN+".");
-  ga('create', GA_ACCOUNT, 'auto');
+  ga('create', GA_ACCOUNT, GA_DOMAIN);
   ga('send', 'pageview');
 };
 
