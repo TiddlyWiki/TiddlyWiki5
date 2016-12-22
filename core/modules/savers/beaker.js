@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/savers/dat.js
+title: $:/core/modules/savers/beaker.js
 type: application/javascript
 module-type: saver
 
-Saves wiki using the Dat protocol (https://datproject.org/)
+Saves files using the Beaker browser's (https://beakerbrowser.com) Dat protocol (https://datproject.org/)
 
 \*/
 (function(){
@@ -13,18 +13,17 @@ Saves wiki using the Dat protocol (https://datproject.org/)
 "use strict";
 
 /*
-Select the appropriate saver module and set it up
+Set up the saver
 */
-var DatSaver = function(wiki) {
+var BeakerSaver = function(wiki) {
 	this.wiki = wiki;
 };
 
-DatSaver.prototype.save = function(text,method,callback) {
-console.log("Saving Dat")
+BeakerSaver.prototype.save = function(text,method,callback) {
 	dat.writeFile(document.location.protocol + "//" + document.location.hostname + ":" + document.location.port + document.location.pathname,text,"utf8").then(function(value) {
 		callback(null);
 	},function(reason) {
-		callback("Dat Saver Error: " + reason);
+		callback("Beaker Saver Error: " + reason);
 	});
 	return true;
 };
@@ -32,8 +31,8 @@ console.log("Saving Dat")
 /*
 Information about this saver
 */
-DatSaver.prototype.info = {
-	name: "dat",
+BeakerSaver.prototype.info = {
+	name: "beaker",
 	priority: 3000,
 	capabilities: ["save", "autosave"]
 };
@@ -49,7 +48,7 @@ exports.canSave = function(wiki) {
 Create an instance of this saver
 */
 exports.create = function(wiki) {
-	return new DatSaver(wiki);
+	return new BeakerSaver(wiki);
 };
 
 })();
