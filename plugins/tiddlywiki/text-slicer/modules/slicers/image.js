@@ -21,8 +21,8 @@ exports.processImageNode = function(domNode,tagName) {
 				text = parts[1],
 				contentTypeInfo = $tw.config.contentTypeInfo[type],
 				containerTitle = this.getTopContainer(),
-				containerTiddler = this.tiddlers[containerTitle],
-				title = this.makeUniqueTitle("image",containerTitle) + contentTypeInfo.extension,
+				containerTiddler = this.getTiddler(containerTitle),
+				title = this.makeUniqueTitle("image " + containerTitle) + contentTypeInfo.extension,
 				tiddler = {
 					title: title,
 					type: parts[0],
@@ -47,7 +47,7 @@ exports.processImageNode = function(domNode,tagName) {
 				case "item":
 					// Create a new older sibling item to contain the image
 					var parentTitle = this.parentStack[this.parentStack.length - 1].title,
-						itemTitle = this.makeUniqueTitle("image-item-wrapper",containerTitle),
+						itemTitle = this.makeUniqueTitle("image-item-wrapper " + containerTitle),
 						itemTiddler = {
 							title: itemTitle,
 							"toc-type": "item",

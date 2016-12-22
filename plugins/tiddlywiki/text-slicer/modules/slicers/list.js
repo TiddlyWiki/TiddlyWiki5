@@ -14,7 +14,7 @@ Handle slicing list nodes
 
 exports.processListNode = function(domNode,tagName) {
 	if(domNode.nodeType === 1 && (tagName === "ul" || tagName === "ol")) {
-		var title = this.makeUniqueTitle("list-" + tagName),
+		var title = this.makeUniqueTitle("list " + tagName),
 			parentTitle = this.parentStack[this.parentStack.length - 1].title,
 			tags = [];
 		if(domNode.className && domNode.className.trim() !== "") {
