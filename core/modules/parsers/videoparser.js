@@ -30,6 +30,7 @@ var VideoParser = function(type,text,options) {
 };
 
 exports["video/mp4"] = VideoParser;
+exports["video/quicktime"] = VideoParser;
 
 })();
 
