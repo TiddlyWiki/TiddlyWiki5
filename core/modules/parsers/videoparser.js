@@ -12,7 +12,7 @@ The video parser parses a video tiddler into an embeddable HTML element
 /*global $tw: false */
 "use strict";
 
-var AudioParser = function(type,text,options) {
+var VideoParser = function(type,text,options) {
 	var element = {
 			type: "element",
 			tag: "video",
@@ -29,7 +29,8 @@ var AudioParser = function(type,text,options) {
 	this.tree = [element];
 };
 
-exports["video/mp4"] = AudioParser;
+exports["video/mp4"] = VideoParser;
+exports["video/quicktime"] = VideoParser;
 
 })();
 

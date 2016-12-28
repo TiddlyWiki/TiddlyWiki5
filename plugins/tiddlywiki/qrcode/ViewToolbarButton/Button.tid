@@ -1,5 +1,6 @@
 title: $:/plugins/tiddlywiki/qrcode/ViewToolbarButton
 tags: $:/tags/ViewToolbar
+list-before: $:/core/ui/Buttons/close
 caption: {{$:/plugins/tiddlywiki/qrcode/icon}}
 short-caption: QR code
 description: Generate QR code for this tiddler

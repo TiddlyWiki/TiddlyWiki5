@@ -92,6 +92,8 @@ ListBullet/Caption: Lista com marcadores
 ListBullet/Hint: Aplicar formatação de lista com marcadores às linhas contendo selecção
 ListNumber/Caption: lista numerada
 ListNumber/Hint: Aplicar formatação de lista numerada às linhas contendo selecção
+Manager/Caption: Gestor de tiddlers
+Manager/Hint: Abrir gestor de tiddlers
 MonoBlock/Caption: bloco mono-espaçado
 MonoBlock/Hint: Aplicar formatação de bloco mono-espaçado às linhas contendo selecção
 MonoLine/Caption: mono-espaçado
@@ -128,6 +130,8 @@ Preview/Caption: pré-visualizar
 Preview/Hint: Mostrar o painel de pré-visualização
 PreviewType/Caption: tipo de pré-visualização
 PreviewType/Hint: Escolher o tipo de pré-visualização
+Print/Caption: imprimir página
+Print/Hint: Imprimir página atual
 Quote/Caption: citação
 Quote/Hint: Aplicar formatação de citação às linhas contendo selecção
 Refresh/Caption: actualizar
@@ -160,6 +164,12 @@ TagManager/Caption: gestor de etiquetas
 TagManager/Hint: Abrir o gestor de etiquetas
 Theme/Caption: tema
 Theme/Hint: Escolher o tema de exibição
+Timestamp/Caption: marcações de data/hora
+Timestamp/Hint: Escolha se as modificações atualizam as marcações de data/hora
+Timestamp/Off/Caption: Marcações de data/hora estão desligadas
+Timestamp/Off/Hint: Não atualizar as marcações de data/hora quando as tiddlers são modificadas
+Timestamp/On/Caption: Marcações de data/hora estão ligadas
+Timestamp/On/Hint: Atualizar as marcações de data/hora quando as tiddlers são modificadas
 Underline/Caption: sublinhar
 Underline/Hint: Aplicar formatação sublinhada à selecção
 Unfold/Caption: desdobrar tiddler

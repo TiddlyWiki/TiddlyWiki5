@@ -56,7 +56,7 @@ Parsing/Caption: Análise
 Parsing/Hint: Aqui pode desactivar globalmente regras individuais do analisador de wiki. Tenha em atenção que desactivar certas regras de análise pode impedir a ~TiddlyWiki de funcionar correctamente (pode repor o funcionamento normal com o [[modo de segurança|http://tiddlywiki.com/#SafeMode]] )
 Parsing/Inline/Caption: Regras de Análise em Linha
 Parsing/Pragma/Caption: Regras de Análise Pragma
-Plugins/Add/Caption: Obter mais extensões 
+Plugins/Add/Caption: Obter mais extensões
 Plugins/Add/Hint: Instalar extensões da biblioteca de extensões oficial
 Plugins/AlreadyInstalled/Hint: Esta extensão já se encontra instalada com a versão<$text text=<<installedVersion>>/>
 Plugins/Caption: Extensões
@@ -109,6 +109,10 @@ Settings/EditorToolbar/Caption: Barra de Ferramentas do Editor
 Settings/EditorToolbar/Description: Mostrar barra de ferramentas do editor
 Settings/EditorToolbar/Hint: Activar ou desactivar a barra de ferramentas do editor
 Settings/Hint: Estas definições permitem personalizar o comportamento da TiddlyWiki.
+Settings/InfoPanelMode/Caption: Modo painel de informação da tiddler
+Settings/InfoPanelMode/Hint: Controle quando o painel de informação da tiddler fecha:
+Settings/InfoPanelMode/Popup/Description: Painel de informação da tiddler fecha automaticamente
+Settings/InfoPanelMode/Sticky/Description: Painel de informação da tiddler fica aberto até ser fechado
 Settings/LinkToBehaviour/Caption: Comportamento de Abertura de Tiddlers
 Settings/LinkToBehaviour/InsideRiver/Hint: Navegação do //interior// do rol de tiddlers
 Settings/LinkToBehaviour/OpenAbove: Abrir acima do tiddler actual
@@ -128,8 +132,8 @@ Settings/NavigationHistory/Caption: Histórico de Navegação
 Settings/NavigationHistory/Hint: Actualizar o histórico do navegador quando navegar para um tiddler
 Settings/NavigationHistory/No/Description: Não actualizar o histórico
 Settings/NavigationHistory/Yes/Description: Actualizar o histórico
-Settings/PerformanceInstrumentation/Caption: Instrumentação de Performance 
-Settings/PerformanceInstrumentation/Description: Activar instrumentação de performance 
+Settings/PerformanceInstrumentation/Caption: Instrumentação de Performance
+Settings/PerformanceInstrumentation/Description: Activar instrumentação de performance
 Settings/PerformanceInstrumentation/Hint: Exibe estatísticas de performance na consola de desenvolvimento do navegador. Requer recarregamento para que tome efeito
 Settings/TitleLinks/Caption: Títulos dos Tiddlers
 Settings/TitleLinks/Hint: Exibir opcionalmente títulos dos tiddlers como ligações
