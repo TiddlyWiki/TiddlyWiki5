@@ -143,7 +143,8 @@ XLSXImporter.prototype.processField = function(fieldImportSpecTitle) {
 				value = fieldImportSpec.fields["import-field-value"]
 				break;
 		}
-		if((value || "").trim() === "") {
+		value = (value || "").trim();
+		if(value === "") {
 			if((fieldImportSpec.fields["import-field-skip-tiddler-if-blank"] || "").trim().toLowerCase() === "yes") {
 				this.skipTiddler = true;
 			}

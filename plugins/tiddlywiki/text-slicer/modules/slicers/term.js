@@ -16,7 +16,7 @@ exports.processTermNode = function(domNode,tagName) {
 	var text = $tw.utils.htmlEncode(domNode.textContent);
 	if(domNode.nodeType === 1 && tagName === "dt") {
 		// if(!this.isBlank(text)) {
-			var title = this.makeUniqueTitle("term",text),
+			var title = this.makeUniqueTitle("term " + text),
 				parentTitle = this.parentStack[this.parentStack.length - 1].title,
 				tags = [];
 			if(domNode.className && domNode.className.trim() !== "") {

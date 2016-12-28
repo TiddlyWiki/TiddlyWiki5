@@ -91,57 +91,59 @@ SimpleServer.prototype.checkCredentials = function(request,incomingUsername,inco
 	}
 };
 
-SimpleServer.prototype.listen = function(port,host) {
+SimpleServer.prototype.requestHandler = function(request,response) {
+	// Compose the state object
 	var self = this;
-	http.createServer(function(request,response) {
-		// Compose the state object
-		var state = {};
-		state.wiki = self.wiki;
-		state.server = self;
-		state.urlInfo = url.parse(request.url);
-		// Find the route that matches this path
-		var route = self.findMatchingRoute(request,state);
-		// Check for the username and password if we've got one
-		var username = self.get("username"),
-			password = self.get("password");
-		if(username && password) {
-			// Check they match
-			if(self.checkCredentials(request,username,password) !== "ALLOWED") {
-				var servername = state.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5";
-				response.writeHead(401,"Authentication required",{
-					"WWW-Authenticate": 'Basic realm="Please provide your username and password to login to ' + servername + '"'
-				});
-				response.end();
-				return;
-			}
-		}
-		// Return a 404 if we didn't find a route
-		if(!route) {
-			response.writeHead(404);
+	var state = {};
+	state.wiki = self.wiki;
+	state.server = self;
+	state.urlInfo = url.parse(request.url);
+	// Find the route that matches this path
+	var route = self.findMatchingRoute(request,state);
+	// Check for the username and password if we've got one
+	var username = self.get("username"),
+		password = self.get("password");
+	if(username && password) {
+		// Check they match
+		if(self.checkCredentials(request,username,password) !== "ALLOWED") {
+			var servername = state.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5";
+			response.writeHead(401,"Authentication required",{
+				"WWW-Authenticate": 'Basic realm="Please provide your username and password to login to ' + servername + '"'
+			});
 			response.end();
 			return;
 		}
-		// Set the encoding for the incoming request
-		// TODO: Presumably this would need tweaking if we supported PUTting binary tiddlers
-		request.setEncoding("utf8");
-		// Dispatch the appropriate method
-		switch(request.method) {
-			case "GET": // Intentional fall-through
-			case "DELETE":
+	}
+	// Return a 404 if we didn't find a route
+	if(!route) {
+		response.writeHead(404);
+		response.end();
+		return;
+	}
+	// Set the encoding for the incoming request
+	// TODO: Presumably this would need tweaking if we supported PUTting binary tiddlers
+	request.setEncoding("utf8");
+	// Dispatch the appropriate method
+	switch(request.method) {
+		case "GET": // Intentional fall-through
+		case "DELETE":
+			route.handler(request,response,state);
+			break;
+		case "PUT":
+			var data = "";
+			request.on("data",function(chunk) {
+				data += chunk.toString();
+			});
+			request.on("end",function() {
+				state.data = data;
 				route.handler(request,response,state);
-				break;
-			case "PUT":
-				var data = "";
-				request.on("data",function(chunk) {
-					data += chunk.toString();
-				});
-				request.on("end",function() {
-					state.data = data;
-					route.handler(request,response,state);
-				});
-				break;
-		}
-	}).listen(port,host);
+			});
+			break;
+	}
+};
+	
+SimpleServer.prototype.listen = function(port,host) {
+	http.createServer(this.requestHandler.bind(this)).listen(port,host);
 };
 
 var Command = function(params,commander,callback) {

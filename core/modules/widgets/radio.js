@@ -3,22 +3,7 @@ title: $:/core/modules/widgets/radio.js
 type: application/javascript
 module-type: widget
 
-Radio widget
-
-Will set a field to the selected value:
-
-```
-	<$radio field="myfield" value="check 1">one</$radio>
-	<$radio field="myfield" value="check 2">two</$radio>
-	<$radio field="myfield" value="check 3">three</$radio>
-```
-
-|Parameter |Description |h
-|tiddler |Name of the tiddler in which the field should be set. Defaults to current tiddler |
-|field |The name of the field to be set |
-|value |The value to set |
-|class |Optional class name(s) |
-
+Set a field or index at a given tiddler via radio buttons
 
 \*/
 (function(){
@@ -70,12 +55,20 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 };
 
 RadioWidget.prototype.getValue = function() {
-	var tiddler = this.wiki.getTiddler(this.radioTitle);
-	return tiddler && tiddler.getFieldString(this.radioField);
+	var value,
+		tiddler = this.wiki.getTiddler(this.radioTitle);
+	if (this.radioIndex) {
+		value = this.wiki.extractTiddlerDataItem(this.radioTitle,this.radioIndex);
+	} else {
+		value = tiddler && tiddler.getFieldString(this.radioField);
+	}
+	return value;
 };
 
 RadioWidget.prototype.setValue = function() {
-	if(this.radioField) {
+	if(this.radioIndex) {
+		this.wiki.setText(this.radioTitle,"",this.radioIndex,this.radioValue);
+	} else {
 		var tiddler = this.wiki.getTiddler(this.radioTitle),
 			addition = {};
 		addition[this.radioField] = this.radioValue;
@@ -96,6 +89,7 @@ RadioWidget.prototype.execute = function() {
 	// Get the parameters from the attributes
 	this.radioTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.radioField = this.getAttribute("field","text");
+	this.radioIndex = this.getAttribute("index");
 	this.radioValue = this.getAttribute("value");
 	this.radioClass = this.getAttribute("class","");
 	if(this.radioClass !== "") {
@@ -111,7 +105,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RadioWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.value || changedAttributes["class"]) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.value || changedAttributes["class"]) {
 		this.refreshSelf();
 		return true;
 	} else {
