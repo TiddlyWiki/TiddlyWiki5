@@ -41,11 +41,62 @@ tags: $:/tags/Stylesheet
 
 .tc-document-preview-column .tc-sliced-document {
 	margin-bottom: 3px;
-	border-bottom: 2px solid <<colour muted-foreground>>;
 }
 
-.tc-view-template-document-tiddler-heading {
-	border-top: 2px solid <<colour muted-foreground>>;
+.tc-view-template-document-tiddler-wrapper,
+.tc-edit-template-document-tiddler-wrapper {
+    border-top: 2px solid #D6A2A2;
+    margin-left: -42px;
+    margin-right: -42px;
+    margin-bottom: -42px;
+    padding-left: 42px;
+    padding-right: 42px;
+    background: #FFE3E3;
+    padding-bottom: 10px;
+}
+
+.tc-edit-template-document-tiddler-wrapper {
+	background: #A3A3D7;
+}
+
+div.tc-view-template-document-tiddler-heading a,
+div.tc-edit-template-document-tiddler-heading a {
+	border: 1px solid #D6A2A2;
+	background: #fff;
+	border-radius: 16px;
+    padding: 0px 4px 0px 4px;
+    margin: 2px 4px 2px 4px;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+div.tc-view-template-document-tiddler-heading a:hover,
+div.tc-edit-template-document-tiddler-heading a:hover {
+	border: 1px solid <<colour background>>;
+	text-decoration: none;
+	color: <<colour background>>;
+	background: <<colour foreground>>;
+}
+
+.tc-view-template-document-tiddler-heading-icon,
+.tc-edit-template-document-tiddler-heading-icon {
+	width: 42px;
+	text-align: center;
+    margin-left: -42px;
+    margin-right: -42px;
+    position: absolute;
+}
+
+.tc-view-template-document-tiddler-subheading,
+.tc-edit-template-document-tiddler-subheading {
+	font-size: 0.7em;
+	font-weight: bold;
+	color: <<colour muted-foreground>>;
+}
+
+.tc-view-template-document-tiddler-heading-icon svg,
+.tc-edit-template-document-tiddler-heading-icon svg {
+	fill: <<colour background>>;	
 }
 
 .tc-view-template-document-tiddler {

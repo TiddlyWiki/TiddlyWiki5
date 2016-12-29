@@ -86,6 +86,9 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 			self.setTiddler();
 			handled = true;
 		}
+		if(self.actions) {
+			self.invokeActionString(self.actions,self,event);
+		}
 		if(handled) {
 			event.preventDefault();
 			event.stopPropagation();
@@ -128,12 +131,13 @@ ButtonWidget.prototype.navigateTo = function(event) {
 		navigateFromNode: this,
 		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 		},
-		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1)
+		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1),
+		event: event
 	});
 };
 
 ButtonWidget.prototype.dispatchMessage = function(event) {
-	this.dispatchEvent({type: this.message, param: this.param, tiddlerTitle: this.getVariable("currentTiddler")});
+	this.dispatchEvent({type: this.message, param: this.param, tiddlerTitle: this.getVariable("currentTiddler"), event: event});
 };
 
 ButtonWidget.prototype.triggerPopup = function(event) {
@@ -153,6 +157,7 @@ Compute the internal state of the widget
 */
 ButtonWidget.prototype.execute = function() {
 	// Get attributes
+	this.actions = this.getAttribute("actions");
 	this.to = this.getAttribute("to");
 	this.message = this.getAttribute("message");
 	this.param = this.getAttribute("param");

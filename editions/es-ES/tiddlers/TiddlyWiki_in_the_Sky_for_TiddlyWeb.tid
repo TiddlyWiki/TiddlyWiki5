@@ -1,0 +1,27 @@
+caption: TiddlyWiki in the Sky
+created: 20131129100250644
+es-title: TiddlyWiki in the Sky para TiddlyWeb
+modified: 20160506043944286
+tags: [[Hosting your TiddlyWiki on the web]] Platforms
+title: TiddlyWiki in the Sky for TiddlyWeb
+type: text/vnd.tiddlywiki
+
+TiddlyWiki in the Sky para TiddlyWeb permite sincronizar contenidos entre ~TiddlyWiki en el navegador y el servidor de TiddlyWeb (o TiddlySpace). Sus características incluyen:
+
+* Carga diferida
+
+* Sincronización de dos vías entre navegador y servidor
+
+** La sincronización del servidor se realiza por <<.word polling>> (cada 60 segundos)
+
+* <<.word Throttling>>, para que los tiddlers que cambian rápidamente no saturen el servidor
+
+Para probar ~TiddlyWiki in the Sky para TiddlyWeb:
+
+# Crea, si es necesario, una cuenta en http://tiddlyspace.com/
+
+# Crea un nuevo espacio
+
+# Incluye el espacio `tw5tiddlyweb`
+
+# Visita `http://<mi_espacio>.tiddlyspace.com/tw5`

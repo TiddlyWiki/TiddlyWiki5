@@ -4,10 +4,11 @@ subtitle: Download changes
 footer: <$button message="tm-close-tiddler">Close</$button>
 help: http://tiddlywiki.com/static/DownloadingChanges.html
 
-Su navegador de internet solamente soporta guardado en forma manual.
+Tu navegador sólo permite guardar manualmente
 
-Para guardar su wiki modificado, haga clic con el botón derecho en enlace abajo indicado y seleccione "Descargar archivo" o "guardar archivo" y seleccione el folder y el nombre de archivo.
+Para guardar el wiki, haz clic con el botón derecho en el enlace de más abajo y selecciona "Descargar archivo" o "Guardar enlace como..." y selecciona a continuación la carpeta y el nombre que quieres darle
 
-//Usted puede acelerar ligeramente estas acciones haciendo clic en el enlace conjuntamente con la tecla "Control" (Windows) o con la tecla "option" (Mac OS X). No se le preguntará por el directorio o nombre de archivo, pero su navegador le asignará automáticamente un nombre probablemente irreconocible -- usted necesitará cambiar el nombre del archivo e incluir la extensión de archivo `.html` para poder usarlo.//
+//Puedes acelerar ligeramente estas acciones haciendo clic en el enlace conjuntamente con la tecla "Control" (Windows) o con la tecla "Option" (Mac OS X)<br>
+No se te pedirán carpeta ni nombre, sino que se asignará automáticamente un nombre probablemente irreconocible -- necesitarás cambiar el nombre y darle extensión `.html` para usarlo//
 
-En el caso de teléfonos celulares que no permiten bajar archivos usted puede en este caso marcar el enlace como favorito, y luego sincronizar su lista de favoritos con su ordenador desde el cual se puede bajar o guardar el wiki en forma normal.
+En el caso de teléfonos móviles que no permiten la descarga de archivos, puedes marcar el enlace como favorito y luego sincronizar favoritos con tu ordenador y descargarlo normalmente desde ahí

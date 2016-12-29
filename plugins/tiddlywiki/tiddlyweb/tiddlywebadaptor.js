@@ -19,8 +19,13 @@ function TiddlyWebAdaptor(options) {
 	this.wiki = options.wiki;
 	this.host = this.getHost();
 	this.recipe = undefined;
+	this.hasStatus = false;
 	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
 }
+
+TiddlyWebAdaptor.prototype.isReady = function() {
+	return this.hasStatus;
+};
 
 TiddlyWebAdaptor.prototype.getHost = function() {
 	var text = this.wiki.getTiddlerText(CONFIG_HOST_TIDDLER,DEFAULT_HOST_TIDDLER),
@@ -30,7 +35,7 @@ TiddlyWebAdaptor.prototype.getHost = function() {
 		];
 	for(var t=0; t<substitutions.length; t++) {
 		var s = substitutions[t];
-		text = text.replace(new RegExp("\\$" + s.name + "\\$","mg"),s.value);
+		text = $tw.utils.replaceString(text,new RegExp("\\$" + s.name + "\\$","mg"),s.value);
 	}
 	return text;
 };
@@ -51,6 +56,7 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 	$tw.utils.httpRequest({
 		url: this.host + "status",
 		callback: function(err,data) {
+			self.hasStatus = true;
 			if(err) {
 				return callback(err);
 			}

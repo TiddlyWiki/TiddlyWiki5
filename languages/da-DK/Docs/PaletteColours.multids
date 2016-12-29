@@ -61,6 +61,7 @@ sidebar-tab-foreground: Sidepanelets fane forgrund
 sidebar-tab-foreground-selected: Sidepanelets fane forgrund for valgte faner
 sidebar-tiddler-link-foreground: Sidepanelets tiddler link forgrund
 sidebar-tiddler-link-foreground-hover: Sidepanelets tiddler link forgrund når der peges
+site-title-foreground: Side titel forgrund
 static-alert-foreground: Statisk advarsel forgrund
 tab-background: Fanebaggrund
 tab-background-selected: Fanebaggrund for valgte faner

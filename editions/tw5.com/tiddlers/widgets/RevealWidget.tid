@@ -1,6 +1,7 @@
 caption: reveal
 created: 20131024141900000
-modified: 20151223222838652
+jeremy: tiddlywiki
+modified: 20161216153618769
 tags: Widgets
 title: RevealWidget
 type: text/vnd.tiddlywiki
@@ -78,4 +79,12 @@ Here is a simple example of a popup built with the RevealWidget:
 And this is some text
 
 </div>
+</$reveal>'>>
+
+!! How to use text references with field content
+
+Here is a simple example how to use text references with field content to control the  RevealWidget. If the field ``jeremy`` is populated with text ``tiddlywiki``, a message will be displayed.
+
+<<wikitext-example-without-html '<$reveal type="match" state="!!jeremy" text="tiddlywiki">
+~TiddlyWiki!
 </$reveal>'>>

@@ -27,6 +27,7 @@ exports.days = function(source,operator,options) {
 		};
 
 	if(operator.prefix === "!") {
+		targetTimeStamp = targetTimeStamp - 1000*60*60*24*dayIntervalSign;
 		source(function(tiddler,title) {
 			if(tiddler && tiddler.fields[fieldName]) {
 				if(!isWithinDays($tw.utils.parseDate(tiddler.fields[fieldName]))) {

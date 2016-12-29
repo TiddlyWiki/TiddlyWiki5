@@ -1,0 +1,14 @@
+created: 20160511152639376
+modified: 20160511152744722
+title: $:/Acknowledgements
+type: text/vnd.tiddlywiki
+
+TiddlyWiki incorpora código de los siguientes proyectos OpenSource:
+
+* [[The Stanford Javascript Crypto Library|http://bitwiseshiftleft.github.io/sjcl/]]
+* [[The Jasmine JavaScript Test Framework|http://pivotal.github.io/jasmine/]]
+* [[Normalize.css by Nicolas Gallagher|http://necolas.github.io/normalize.css/]]
+
+...y materiales de estos otros proyectos:
+
+* Banderas del mundo [[Wikipedia|http://commons.wikimedia.org/wiki/Category:SVG_flags_by_country]]

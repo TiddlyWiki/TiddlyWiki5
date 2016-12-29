@@ -1,0 +1,9 @@
+created: 20161021165211404
+import-field-column: Justice
+import-field-name: title
+import-field-source: column
+import-spec-role: field
+modified: 20161023172125012
+title: $:/_importspec/Presidents and Justices/Justices/Main/title
+type: text/vnd.tiddlywiki
+

@@ -27,6 +27,19 @@ EditorTypes/Hint: These tiddlers determine which editor is used to edit specific
 EditorTypes/Type/Caption: Type
 Info/Caption: Info
 Info/Hint: Information about this TiddlyWiki
+KeyboardShortcuts/Add/Prompt: Type shortcut here
+KeyboardShortcuts/Add/Caption: add shortcut
+KeyboardShortcuts/Caption: Keyboard Shortcuts
+KeyboardShortcuts/Hint: Manage keyboard shortcut assignments
+KeyboardShortcuts/NoShortcuts/Caption: No keyboard shortcuts assigned
+KeyboardShortcuts/Remove/Hint: remove keyboard shortcut
+KeyboardShortcuts/Platform/All: All platforms
+KeyboardShortcuts/Platform/Mac: Macintosh platform only
+KeyboardShortcuts/Platform/NonMac: Non-Macintosh platforms only
+KeyboardShortcuts/Platform/Linux: Linux platform only
+KeyboardShortcuts/Platform/NonLinux: Non-Linux platforms only
+KeyboardShortcuts/Platform/Windows: Windows platform only
+KeyboardShortcuts/Platform/NonWindows: Non-Windows platforms only
 LoadedModules/Caption: Loaded Modules
 LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
 Palette/Caption: Palette
@@ -39,12 +52,13 @@ Palette/HideEditor/Caption: hide editor
 Palette/Prompt: Current palette:
 Palette/ShowEditor/Caption: show editor
 Parsing/Caption: Parsing
-Parsing/Hint: Here you can globally disable individual wiki parser rules. Take care as disabling some parser rules can prevent ~TiddlyWiki functioning correctly (you can restore normal operation with [[safe mode|http://tiddlywiki.com/#SafeMode]] )
+Parsing/Hint: Here you can globally disable/enable wiki parser rules. For changes to take effect, save and reload your wiki. Disabling certain parser rules can prevent <$text text="TiddlyWiki"/> from functioning correctly. Use [[safe mode|http://tiddlywiki.com/#SafeMode]] to restore normal operation.
 Parsing/Block/Caption: Block Parse Rules
 Parsing/Inline/Caption: Inline Parse Rules
 Parsing/Pragma/Caption: Pragma Parse Rules
-Plugins/Add/Hint: Install plugins from the official library
 Plugins/Add/Caption: Get more plugins
+Plugins/Add/Hint: Install plugins from the official library
+Plugins/AlreadyInstalled/Hint: This plugin is already installed at version <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: disable
 Plugins/Disable/Hint: Disable this plugin when reloading page
@@ -52,14 +66,17 @@ Plugins/Disabled/Status: (disabled)
 Plugins/Empty/Hint: None
 Plugins/Enable/Caption: enable
 Plugins/Enable/Hint: Enable this plugin when reloading page
-Plugins/Install: install
+Plugins/Install/Caption: install
 Plugins/Installed/Hint: Currently installed plugins:
 Plugins/Languages/Caption: Languages
 Plugins/Languages/Hint: Language pack plugins
+Plugins/NoInfoFound/Hint: No ''"<$text text=<<currentTab>>/>"'' found
+Plugins/NoInformation/Hint: No information provided
+Plugins/NotInstalled/Hint: This plugin is not currently installed
 Plugins/OpenPluginLibrary: open plugin library
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins
-Plugins/Reinstall: reinstall
+Plugins/Reinstall/Caption: reinstall
 Plugins/Themes/Caption: Themes
 Plugins/Themes/Hint: Theme plugins
 Saving/Caption: Saving
@@ -83,6 +100,13 @@ Settings/CamelCase/Caption: Camel Case Wiki Links
 Settings/CamelCase/Hint: You can globally disable automatic linking of ~CamelCase phrases. Requires reload to take effect
 Settings/CamelCase/Description: Enable automatic ~CamelCase linking
 Settings/Caption: Settings
+Settings/EditorToolbar/Caption: Editor Toolbar
+Settings/EditorToolbar/Hint: Enable or disable the editor toolbar:
+Settings/EditorToolbar/Description: Show editor toolbar
+Settings/InfoPanelMode/Caption: Tiddler Info Panel Mode
+Settings/InfoPanelMode/Hint: Control when the tiddler info panel closes:
+Settings/InfoPanelMode/Popup/Description: Tiddler info panel closes automatically
+Settings/InfoPanelMode/Sticky/Description: Tiddler info panel stays open until explicitly closed
 Settings/Hint: These settings let you customise the behaviour of TiddlyWiki.
 Settings/NavigationAddressBar/Caption: Navigation Address Bar
 Settings/NavigationAddressBar/Hint: Behaviour of the browser address bar when navigating to a tiddler:
@@ -118,6 +142,9 @@ Settings/TitleLinks/Caption: Tiddler Titles
 Settings/TitleLinks/Hint: Optionally display tiddler titles as links
 Settings/TitleLinks/No/Description: Do not display tiddler titles as links
 Settings/TitleLinks/Yes/Description: Display tiddler titles as links
+Settings/MissingLinks/Caption: Wiki Links
+Settings/MissingLinks/Hint: Choose whether to link to tiddlers that do not exist yet
+Settings/MissingLinks/Description: Enable links to missing tiddlers
 StoryView/Caption: Story View
 StoryView/Prompt: Current view:
 Theme/Caption: Theme
@@ -130,6 +157,8 @@ Toolbars/EditToolbar/Hint: Choose which buttons are displayed for tiddlers in ed
 Toolbars/Hint: Select which toolbar buttons are displayed
 Toolbars/PageControls/Caption: Page Toolbar
 Toolbars/PageControls/Hint: Choose which buttons are displayed on the main page toolbar
+Toolbars/EditorToolbar/Caption: Editor Toolbar
+Toolbars/EditorToolbar/Hint: Choose which buttons are displayed in the editor toolbar. Note that some buttons will only appear when editing tiddlers of a certain type
 Toolbars/ViewToolbar/Caption: View Toolbar
 Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode
 Tools/Download/Full/Caption: Download full wiki

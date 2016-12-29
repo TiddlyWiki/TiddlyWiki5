@@ -1,0 +1,63 @@
+caption: Formatos en ~TiddlyWiki
+created: 20140908131500000
+es-title: Dar formato al texto en TiddlyWiki
+modified: 20160424052545413
+tags: [[Working with TiddlyWiki]]
+title: Formatting text in TiddlyWiki
+type: text/vnd.tiddlywiki
+
+Para controlar cómo se muestra el texto de un tiddler, puedes usar un formateo especial que llamamos WikiText. 
+
+! Formato simple
+
+En su forma más simple, WikiText te permite usar funciones habituales en el proceso de textos como negrita, cursiva, listas y tablas. Por ejemplo:
+
+At its simplest, WikiText lets you use familiar word-processing features like bold, italic, lists and tables. For example:
+
+```
+Jovencillo ''emponzoñado'' de ~~whisky~~ ¡Qué //figurota// `exhibe`!
+
+```
+
+… se muestra como:
+
+Jovencillo ''emponzoñado'' de ~~whisky~~ ¡Qué //figurota// `exhibe`!
+
+! Working with Tiddlers
+
+Se puede enlazar a otros tiddlers en WikiText usando corchetes dobles o aprovechando la función de enlace automático de las palabras en CamelCase:
+
+```
+Este es un enlace al tiddler HelloThere y, este otro, a [[Historia de TiddlyWiki|History of TiddlyWiki]]
+```
+
+… se muestra como:
+
+Este es un enlace al tiddler HelloThere y, este otro, a [[Historia de TiddlyWiki|History of TiddlyWiki]]
+
+! Macros
+
+Las macros permiten empaquetar fragmentos de WikiText de difícil ejecución o que se repiten con frecuencia, para así poder usarlos con facilidad y consistentemente.
+
+Por ejemplo, esta es la definición de una macro que inserta un icono y da formato especial a  a un texto usado como advertencia, por ejemplo, en un manual:
+
+`\define .warning(_) 
+<div class="doc-icon-block">
+<div class="doc-block-icon">{{$:/core/images/warning}}</div>
+ $_$</div>`
+
+El código que la define hace referencia, en este caso, a <<.em clases>> definidas en la [[hoja de estilos|Cascading Style Sheets]] del documento.
+
+Para llamar una macro en WikiText, la escribimos entre dobles comillas angulares simples y con el texto al que queremos aplicarla entre comillas rectas: `<<.warning "texto">>`
+
+El resultado tiene este aspecto:
+
+<<.warning "Este es un texto que, de no ser por la macro `.warning`, tendríamos que formatear a mano cada vez que quisiéramos insertar un texto de advertencia, lo que por un lado tiene su complejidad y, por otro, lleva tiempo y está sujeto a errores. De este modo nos aseguramos rápidamente, sin posibilidad de error y sin distracciones, de que todas las advertencias que escribimos tienen el mismo aspecto">>
+
+! ~WikiText avanzado
+
+Las funciones avanzadas de WikiText te permiten generar listas automáticamente entre otras funciones interactivas como  menús desplegables. De hecho, la interfaz entera de ~TiddlyWiki está escrita en ~WikiText, de modo que casi todo cuanto ves puede es adaptable para su uso en otros wikis.
+
+Algunas de estas funciones avanzadas requieren el uso de código complejo. Por ese motivo TIddlyWiki incorpora varias macros que simplifican algunas tareas en la interfaz de usuario, como la creación de pestañas, tablas de contenido y listas.
+
+<<.tip "[[Aquí|WikiText]] tienes instrucciones más extensas y detalladas sobre el uso de ~WikiText">>

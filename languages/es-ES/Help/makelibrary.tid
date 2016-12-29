@@ -1,14 +1,16 @@
 title: $:/language/Help/makelibrary
-description: Construye la colección de extensiones requerida para proceso de actualización
+description: Compila la librería de plugins necesaria para actualizar TiddlyWiki
 
-Construye el tiddler `$:/UpgradeLibrary` (colección de actualización) para el proceso de actualización.
+
+Construye el tiddler `$:/UpgradeLibrary`: librería de actualización
  
-La colección de actualización está formateada como un tiddler de extensión ordinario con el tipo de extensión `library`. Este contiene una copia de cada una de las extensiones, temas y paquetes de idioma disponibles en el repositorio de TiddlyWiki5.
+La librería de actualización tiene formato de plugin ordinario, de tipo `library`<br>
+Contiene copia de cada uno de los plugins, temas y paquetes de idioma disponibles en el repositorio de TiddlyWiki5
 
-Este comando está previsto para uso interno; sólo es relevante para usuarios que estén compilando un procedimiento personalizado de actualización. 
+Este comando es, en principio, para uso interno del equipo de TiddlyWiki y sólo es de interés para aquellos usuarios que deseen compilar actualizaciones personalizadas
 
 ```
 --makelibrary <title>
 ```
 
-El argumento del título por defecto es `$:/UpgradeLibrary`.
+El título por defecto del tiddler resultante es `$:/UpgradeLibrary`.

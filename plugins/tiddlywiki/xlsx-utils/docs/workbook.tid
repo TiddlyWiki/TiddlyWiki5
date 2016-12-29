@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/xlsx-utils/docs/workbook
+
+!!! Workbook Import Specifications
+
+Each workbook import specification describes how spreadsheets of a particular format should be converted into individual tiddlers.
+
+Create a new workbook for each type of spreadsheet that you will be working with.
+
+Workbooks contain a list of sheet import specifications that describe how individual sheets of the workbook should be handled.
+
+Each workbook has a caption that you can use to describe its purpose.

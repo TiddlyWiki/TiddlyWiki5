@@ -1,0 +1,30 @@
+caption: CLA - Cómo firmar
+created: 20150630205653005
+es-title: Cómo firmar el Acuerdo de licencia
+modified: 20160413172711483
+tags: 
+title: Signing the Contributor License Agreement
+type: text/vnd.tiddlywiki
+
+Crea un //pull request// en GitHub para añadir tu nombre a `cla-individual.md` o `cla-entity.md`, según corresponda si eres persona física o fiscal, con la fecha en formato YYYY/MM/DD.
+
+''paso a paso''
+
+# Según seas persona física o fiscal, ve a  
+#*[[licenses/CLA-individual|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-individual.md]] o a
+
+#*[[licenses/CLA-entity|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-entity.md]] 
+
+#Haz clic en el botón ''Edit'' arriba a la derecha (al hacerlo se creará un fork del repositorio para que puedas editar el archivo)
+
+# Añade tu nombre al final del documento
+
+#* P. Ej.: `Jeremy Ruston, @Jermolene, 2011/11/22`
+
+# Bajo el cuadro de edición del documento, debieras ver otro más pequeño, con el título ''Propose file change''
+
+# Escribe un título que explique de qué cambio se trata (p. ej.: "signing the CLA")
+
+# Haz clic en el botón verde que dice ''Propose file change''
+
+# En la página siguiente, haz clic en el botón verde que dice ''Create pull request''

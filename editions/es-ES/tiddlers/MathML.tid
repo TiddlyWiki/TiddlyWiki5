@@ -1,0 +1,21 @@
+caption: MathML
+created: 20130901213100000
+es-title: MathML
+modified: 20160429052548236
+tags: Definitions Features
+title: MathML
+type: text/vnd.tiddlywiki
+
+<<.def ~MathML>> es un lenguaje de marcas para notación matemática que puede usarse en HTML.
+
+Si tu navegador lo soporta, los elementos de ~MathML pueden usarse en WikiText como HTML.
+
+Este es un ejemplo de matriz ~MathML sacado de [[ W3C|http://www.w3.org/Math/XSL/csmall2.xml]]:
+
+```
+<math><mrow><mo>[</mo><mtable><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr></mtable><mo>]</mo></mrow></math>
+```
+
+Y se ve así:
+
+<math><mrow><mo>[</mo><mtable><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr></mtable><mo>]</mo></mrow></math>

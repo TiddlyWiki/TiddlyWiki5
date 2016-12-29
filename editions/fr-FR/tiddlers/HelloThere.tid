@@ -2,7 +2,7 @@ caption: Bienvenue !
 created: 20130822170200000
 fr-title: Bienvenue !
 list: [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[History of TiddlyWiki]] [[What happened to the original TiddlyWiki?]]
-modified: 20150623075554730
+modified: 20160603043549286
 tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
@@ -20,13 +20,16 @@ Utilisez-le pour gérer votre [[liste de tâches|TaskManagementExample]], faire 
 Contrairement aux services en ligne classiques, TiddlyWiki vous permet de choisir où conserver vos informations , et garantit que, dans les décennies à venir, vous pourrez toujours utiliser les notes que vous prenez aujourd'hui.
 
 <div style="font-size:0.7em;text-align:center;margin-top:3em;margin-bottom:3em;">
-<a href="http://groups.google.com/group/TiddlyWiki" class="tc-btn-big-green" style="background-color:#FF8C19;" target="_blank">
+<a href="http://groups.google.com/group/TiddlyWiki" class="tc-btn-big-green" style="background-color:#FF8C19;" target="_blank" rel="noopener noreferrer">
 {{$:/core/images/mail}} ~TiddlyWiki Mailing List
 </a>
-<a href="https://twitter.com/TiddlyWiki" class="tc-btn-big-green" style="background-color:#5E9FCA;" target="_blank">
+<a href="http://www.youtube.com/c/JeremyRuston" class="tc-btn-big-green" style="background-color:#e52d27;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/video}} ~TiddlyWiki sur ~YouTube
+</a>
+<a href="https://twitter.com/TiddlyWiki" class="tc-btn-big-green" style="background-color:#5E9FCA;" target="_blank" rel="noopener noreferrer">
 {{$:/core/images/twitter}} @~TiddlyWiki sur Twitter
 </a>
-<a href="https://github.com/Jermolene/TiddlyWiki5" class="tc-btn-big-green" style="background-color:#444;" target="_blank">
+<a href="https://github.com/Jermolene/TiddlyWiki5" class="tc-btn-big-green" style="background-color:#444;" target="_blank" rel="noopener noreferrer">
 {{$:/core/images/github}} ~TiddlyWiki sur ~GitHub
 </a>
 </div>

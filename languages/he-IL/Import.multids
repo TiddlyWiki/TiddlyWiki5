@@ -1,0 +1,15 @@
+title: $:/language/Import/
+
+Imported/Hint: הטידלרים הבאים ייובאו:
+Listing/Cancel/Caption: בטל
+Listing/Hint: טידלרים אלה מוכנים לייבוא:
+Listing/Import/Caption: יבא
+Listing/Select/Caption: בחר
+Listing/Status/Caption: סטטוס
+Listing/Title/Caption: כותרת
+Upgrader/Plugins/Suppressed/Incompatible: פלאגין חסום, לא תואם או פג-תוקף
+Upgrader/Plugins/Suppressed/Version: פלאגין חסום (בגלל <<incoming>>   ישן יותר מאשר  <<existing>>)
+Upgrader/Plugins/Upgraded: עודכן פלאגין מ <<incoming>> ל <<upgraded>>
+Upgrader/State/Suppressed: טידלר במצב זמני נחסם
+Upgrader/System/Suppressed: טידלר מערכת חסום
+Upgrader/ThemeTweaks/Created: יובא שינוי תימה <$text text=<<from>>/>

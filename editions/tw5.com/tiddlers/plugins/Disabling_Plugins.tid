@@ -1,0 +1,15 @@
+created: 20161015121727194
+modified: 20161015121728291
+tags: PluginMechanism
+title: Disabling Plugins
+type: text/vnd.tiddlywiki
+
+!! Disabling Plugins
+
+Plugins can be disabled by creating a tiddler titled `$:/config/Plugins/Disabled/` concatenated with the plugin title, and setting its text to `yes`.
+
+For example, to disable the plugin `$:/plugins/tiddlywiki/highlight`, the title would be:
+
+```
+$:/config/Plugins/Disabled/$:/plugins/tiddlywiki/highlight
+```

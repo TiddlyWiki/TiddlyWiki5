@@ -30,6 +30,15 @@ $hiddenSidebarText$
 </$reveal>
 \end
 
+\define if-editor-height-fixed(then,else)
+<$reveal state="$:/config/TextEditor/EditorHeight/Mode" type="match" text="fixed">
+$then$
+</$reveal>
+<$reveal state="$:/config/TextEditor/EditorHeight/Mode" type="match" text="auto">
+$else$
+</$reveal>
+\end
+
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
 /*
@@ -69,11 +78,11 @@ html:-webkit-full-screen {
 body.tc-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/fontsize}};
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics/lineheight}};
+	word-wrap: break-word;
+	<<custom-background-datauri>>
 	color: <<colour foreground>>;
 	background-color: <<colour page-background>>;
 	fill: <<colour foreground>>;
-	word-wrap: break-word;
-	<<custom-background-datauri>>
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -88,8 +97,7 @@ pre {
 	margin-bottom: 1em;
 	word-break: normal;
 	word-wrap: break-word;
-	white-space: pre;
-	white-space: pre-wrap;
+	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
 	background-color: <<colour pre-background>>;
 	border: 1px solid <<colour pre-border>>;
 	padding: 0 3px 2px;
@@ -101,7 +109,7 @@ code {
 	color: <<colour code-foreground>>;
 	background-color: <<colour code-background>>;
 	border: 1px solid <<colour code-border>>;
-    white-space: pre-wrap;
+	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
 	padding: 0 3px 2px;
 	border-radius: 3px;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
@@ -321,7 +329,7 @@ a.tc-tiddlylink-external:hover {
 ** Buttons
 */
 
-button svg, button img {
+button svg, button img, label svg, label img {
 	vertical-align: middle;
 }
 
@@ -330,6 +338,7 @@ button svg, button img {
 	margin: 0;
 	background: none;
 	border: none;
+    cursor: pointer;
 }
 
 .tc-btn-boxed {
@@ -441,8 +450,8 @@ button svg.tc-image-button, button .tc-image-button img {
 	background: none;
 	border: none;
 	width: 100%;
-    width: calc(100% + 2px);
-    margin-left: -43px;
+	width: calc(100% + 2px);
+	margin-left: -43px;
 	text-align: center;
 	border-top: 2px solid <<colour tiddler-info-background>>;
 	margin-top: 4px;
@@ -471,8 +480,8 @@ button svg.tc-image-button, button .tc-image-button img {
 	width: 23px;
 	text-align: center;
 	margin-left: -35px;
-    top: 6px;
-    bottom: 6px;
+	top: 6px;
+	bottom: 6px;
 }
 
 .tc-fold-banner:hover {
@@ -480,16 +489,16 @@ button svg.tc-image-button, button .tc-image-button img {
 }
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
-	
+
 	.tc-unfold-banner {
 		position: static;
-	    width: calc(100% + 59px);
-    }
+		width: calc(100% + 59px);
+	}
 
 	.tc-fold-banner {
 		width: 16px;
 		margin-left: -16px;
-	    font-size: 0.75em;
+		font-size: 0.75em;
 	}
 
 }
@@ -522,7 +531,7 @@ button.tc-tag-label, span.tc-tag-label {
 	display: inline-block;
 	padding: 0.16em 0.7em;
 	font-size: 0.9em;
-	font-weight: 300;
+	font-weight: 400;
 	line-height: 1.2em;
 	color: <<colour tag-foreground>>;
 	white-space: nowrap;
@@ -548,6 +557,7 @@ button.tc-untagged-label {
 	height: 1em;
 	width: 1em;
 	fill: <<colour tag-foreground>>;
+	vertical-align: text-bottom;
 }
 
 .tc-tag-manager-table .tc-tag-label {
@@ -691,6 +701,11 @@ button.tc-untagged-label {
 		padding: 71px 0 28px 42px;
 	}
 
+	html[dir="rtl"] .tc-sidebar-scrollable {
+		left: auto;
+		right: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
+	}
+
 	.tc-story-river {
 		position: relative;
 		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
@@ -702,7 +717,7 @@ button.tc-untagged-label {
 <<if-no-sidebar "
 
 	.tc-story-river {
-		width: auto;
+		width: calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
 	}
 
 ">>
@@ -727,7 +742,7 @@ button.tc-untagged-label {
 	.tc-story-river .tc-tiddler-frame {
 		margin: 0;
 		border: none;
-		padding: 28px;
+		padding: 0;
 	}
 }
 
@@ -865,8 +880,17 @@ button.tc-untagged-label {
 
 .tc-tiddler-controls button svg, .tc-tiddler-controls button img,
 .tc-search button svg, .tc-search a svg {
-	height: 0.75em;
 	fill: <<colour tiddler-controls-foreground>>;
+}
+
+.tc-tiddler-controls button svg, .tc-tiddler-controls button img {
+	height: 0.75em;
+}
+
+.tc-search button svg, .tc-search a svg {
+    height: 1.2em;
+    width: 1.2em;
+    margin: 0 0.25em;
 }
 
 .tc-tiddler-controls button.tc-selected svg,
@@ -894,13 +918,18 @@ button.tc-untagged-label {
 	color: <<colour very-muted-foreground>>;
 }
 
-.tc-tiddler-frame input.tc-edit-texteditor, .tc-tiddler-frame textarea.tc-edit-texteditor {
+.tc-tiddler-frame .tc-edit-texteditor {
 	width: 100%;
+	margin: 4px 0 4px 0;
+}
+
+.tc-tiddler-frame input.tc-edit-texteditor,
+.tc-tiddler-frame textarea.tc-edit-texteditor,
+.tc-tiddler-frame iframe.tc-edit-texteditor {
 	padding: 3px 3px 3px 3px;
 	border: 1px solid <<colour tiddler-editor-border>>;
 	line-height: 1.3em;
 	-webkit-appearance: none;
-	margin: 4px 0 4px 0;
 }
 
 .tc-tiddler-frame .tc-binary-warning {
@@ -958,6 +987,61 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-single-tiddler-window embed,
 .tc-single-tiddler-window iframe {
 	max-width: 100%;
+}
+
+/*
+** Editor
+*/
+
+.tc-editor-toolbar {
+	margin-top: 8px;
+}
+
+.tc-editor-toolbar button {
+	vertical-align: middle;
+	background-color: <<colour tiddler-controls-foreground>>;
+	fill: <<colour tiddler-controls-foreground-selected>>;
+	border-radius: 4px;
+	padding: 3px;
+	margin: 2px 0 2px 4px;
+}
+
+.tc-editor-toolbar button.tc-text-editor-toolbar-item-adjunct {
+	margin-left: 1px;
+	width: 1em;
+	border-radius: 8px;
+}
+
+.tc-editor-toolbar button.tc-text-editor-toolbar-item-start-group {
+	margin-left: 11px;
+}
+
+.tc-editor-toolbar button.tc-selected {
+	background-color: <<colour primary>>;
+}
+
+.tc-editor-toolbar button svg {
+	width: 1.6em;
+	height: 1.2em;
+}
+
+.tc-editor-toolbar button:hover {
+	background-color: <<colour tiddler-controls-foreground-selected>>;
+	fill: <<colour background>>;
+}
+
+.tc-editor-toolbar .tc-text-editor-toolbar-more {
+	white-space: normal;
+}
+
+.tc-editor-toolbar .tc-text-editor-toolbar-more button {
+	display: inline-block;
+	padding: 3px;
+	width: auto;
+}
+
+.tc-editor-toolbar .tc-search-results {
+	padding: 0;
 }
 
 /*
@@ -1075,6 +1159,10 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 50%;
 }
 
+.tc-edit-add-tag .tc-keyboard {
+	display:inline;
+}
+
 .tc-edit-tags .tc-tag-label {
 	display: inline-block;
 }
@@ -1093,14 +1181,27 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-tiddler-preview-preview {
 	float: right;
-	width: 48%;
+	width: 49%;
 	border: 1px solid <<colour tiddler-editor-border>>;
-	margin: 4px 3px 3px 3px;
+	margin: 4px 0 3px 3px;
 	padding: 3px 3px 3px 3px;
 }
 
-.tc-tiddler-preview-edit {
-	width: 48%;
+<<if-editor-height-fixed then:"""
+
+.tc-tiddler-preview-preview {
+	overflow-y: scroll;
+	height: {{$:/config/TextEditor/EditorHeight/Height}};
+}
+
+""">>
+
+.tc-tiddler-frame .tc-tiddler-preview .tc-edit-texteditor {
+	width: 49%;
+}
+
+.tc-tiddler-frame .tc-tiddler-preview canvas.tc-edit-bitmapeditor {
+	max-width: 49%;
 }
 
 .tc-edit-fields {
@@ -1240,8 +1341,16 @@ html body.tc-body.tc-single-tiddler-window {
 	line-height: 1.4;
 }
 
+.tc-drop-down .tc-tab-set .tc-tab-buttons button {
+	display: inline-block;
+    width: auto;
+    margin-bottom: 0px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
 .tc-drop-down .tc-prompt {
-	padding: 0 14px;	
+	padding: 0 14px;
 }
 
 .tc-drop-down .tc-chooser {
@@ -1315,6 +1424,11 @@ html body.tc-body.tc-single-tiddler-window {
 	padding: 0px 10px 0px 10px;
 }
 
+.tc-drop-down .tc-dropdown-item-plain,
+.tc-block-dropdown .tc-dropdown-item-plain {
+	padding: 4px 14px 4px 7px;
+}
+
 .tc-drop-down .tc-dropdown-item,
 .tc-block-dropdown .tc-dropdown-item {
 	padding: 4px 14px 4px 7px;
@@ -1328,7 +1442,56 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-search-results {
-    padding: 0 7px 0 7px;
+	padding: 0 7px 0 7px;
+}
+
+.tc-image-chooser, .tc-colour-chooser {
+	white-space: normal;
+}
+
+.tc-image-chooser a,
+.tc-colour-chooser a {
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	position: relative;
+}
+
+.tc-image-chooser a {
+	border: 1px solid <<colour muted-foreground>>;
+	padding: 2px;
+	margin: 2px;
+	width: 4em;
+	height: 4em;
+}
+
+.tc-colour-chooser a {
+	padding: 3px;
+	width: 2em;
+	height: 2em;
+	vertical-align: middle;
+}
+
+.tc-image-chooser a:hover,
+.tc-colour-chooser a:hover {
+	background: <<colour primary>>;
+	padding: 0px;
+	border: 3px solid <<colour primary>>;
+}
+
+.tc-image-chooser a svg,
+.tc-image-chooser a img {
+	display: inline-block;
+	width: auto;
+	height: auto;
+	max-width: 3.5em;
+	max-height: 3.5em;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
 }
 
 /*
@@ -1343,6 +1506,7 @@ html body.tc-body.tc-single-tiddler-window {
 	right: 0;
 	bottom: 0;
 	left: 0;
+	z-index: 900;
 }
 
 .tc-modal-backdrop {
@@ -1538,8 +1702,6 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-sidebar-lists .tc-tab-buttons button {
-	display: inline;
-	width: auto;
 	background-color: <<colour sidebar-tab-background>>;
 	color: <<colour sidebar-tab-foreground>>;
 	border-left: 1px solid <<colour sidebar-tab-border>>;
@@ -1551,7 +1713,7 @@ html body.tc-body.tc-single-tiddler-window {
 	border-top: 1px solid <<colour sidebar-tab-divider>>;
 }
 
-.tc-more-sidebar .tc-tab-buttons button {
+.tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
 	display: block;
 	width: 100%;
 	background-color: <<colour sidebar-tab-background>>;
@@ -1562,9 +1724,116 @@ html body.tc-body.tc-single-tiddler-window {
 	margin-bottom: inherit;
 }
 
-.tc-more-sidebar .tc-tab-buttons button.tc-tab-selected {
+.tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button.tc-tab-selected {
 	background-color: <<colour sidebar-tab-background-selected>>;
 	border: none;
+}
+
+/*
+** Manager
+*/
+
+.tc-manager-wrapper {
+	
+}
+
+.tc-manager-controls {
+	
+}
+
+.tc-manager-control {
+	margin: 0.5em 0;
+}
+
+.tc-manager-list {
+	width: 100%;
+	border-top: 1px solid <<colour muted-foreground>>;
+	border-left: 1px solid <<colour muted-foreground>>;
+	border-right: 1px solid <<colour muted-foreground>>;
+}
+
+.tc-manager-list-item {
+
+}
+
+.tc-manager-list-item-heading {
+    display: block;
+    width: 100%;
+    text-align: left;	
+	border-bottom: 1px solid <<colour muted-foreground>>;
+	padding: 3px;
+}
+
+.tc-manager-list-item-heading-selected {
+	font-weight: bold;
+	color: <<colour background>>;
+	fill: <<colour background>>;
+	background-color: <<colour foreground>>;
+}
+
+.tc-manager-list-item-heading:hover {
+	background: <<colour primary>>;
+	color: <<colour background>>;
+}
+
+.tc-manager-list-item-content {
+	display: flex;
+}
+
+.tc-manager-list-item-content-sidebar {
+    flex: 1 0;
+    background: <<colour tiddler-editor-background>>;
+    border-right: 0.5em solid <<colour muted-foreground>>;
+    border-bottom: 0.5em solid <<colour muted-foreground>>;
+    white-space: nowrap;
+}
+
+.tc-manager-list-item-content-item-heading {
+	display: block;
+	width: 100%;
+	text-align: left;
+    background: <<colour muted-foreground>>;
+	text-transform: uppercase;
+	font-size: 0.6em;
+	font-weight: bold;
+    padding: 0.5em 0 0.5em 0;
+}
+
+.tc-manager-list-item-content-item-body {
+	padding: 0 0.5em 0 0.5em;
+}
+
+.tc-manager-list-item-content-item-body > pre {
+	margin: 0.5em 0 0.5em 0;
+	border: none;
+	background: inherit;
+}
+
+.tc-manager-list-item-content-tiddler {
+    flex: 3 1;
+    border-left: 0.5em solid <<colour muted-foreground>>;
+    border-right: 0.5em solid <<colour muted-foreground>>;
+    border-bottom: 0.5em solid <<colour muted-foreground>>;
+}
+
+.tc-manager-list-item-content-item-body > table {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.tc-manager-list-item-content-item-body > table td {
+	border: none;
+}
+
+.tc-manager-icon-editor > button {
+	width: 100%;
+}
+
+.tc-manager-icon-editor > button > svg,
+.tc-manager-icon-editor > button > button {
+	width: 100%;
+	height: auto;
 }
 
 /*
@@ -1729,6 +1998,12 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	font-size: 12px;
 	line-height: 18px;
 	color: <<colour message-foreground>>;
+}
+
+.tc-message-box svg {
+	width: 1em;
+	height: 1em;
+    vertical-align: text-bottom;
 }
 
 /*
@@ -1969,7 +2244,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 }
 
 .tc-thumbnail-image {
-    text-align: center;
+	text-align: center;
 	overflow: hidden;
 	border-radius: 3px;
 }
@@ -1978,9 +2253,9 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 .tc-thumbnail-image img {
 	filter: alpha(opacity=1);
 	opacity: 1;
-    min-width: 100%;
-    min-height: 100%;
-    max-width: 100%;
+	min-width: 100%;
+	min-height: 100%;
+	max-width: 100%;
 }
 
 .tc-thumbnail-wrapper:hover .tc-thumbnail-image svg,

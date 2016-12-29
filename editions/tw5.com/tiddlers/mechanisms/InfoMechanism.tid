@@ -1,8 +1,12 @@
 created: 20140720164948099
-modified: 20140720165248031
+modified: 20161017122011379
 tags: Mechanisms
 title: InfoMechanism
 type: text/vnd.tiddlywiki
+
+\define example(name)
+<$transclude tiddler="""$:/info/url/$name$""" mode="inline"/>
+\end
 
 System tiddlers in the namespace `$:/info/` are used to expose information about the system (including the current browser) so that WikiText applications can adapt themselves to available features.
 
@@ -11,4 +15,11 @@ System tiddlers in the namespace `$:/info/` are used to expose information about
 |!Title |!Description |
 |[[$:/info/browser]] |Running in the browser? ("yes" or "no") |
 |[[$:/info/node]] |Running under [[Node.js]]? ("yes" or "no") |
-
+|[[$:/info/url/full]] |<<.from-version "5.1.14">> Full URL of wiki (eg, ''<<example full>>'') |
+|[[$:/info/url/host]] |<<.from-version "5.1.14">> Host portion of URL of wiki (eg, ''<<example host>>'') |
+|[[$:/info/url/hostname]] |<<.from-version "5.1.14">> Hostname portion of URL of wiki (eg, ''<<example hostname>>'') |
+|[[$:/info/url/origin]] |<<.from-version "5.1.14">> Origin portion of URL of wiki (eg, ''<<example origin>>'') |
+|[[$:/info/url/pathname]] |<<.from-version "5.1.14">> Pathname portion of URL of wiki (eg, ''<<example pathname>>'') |
+|[[$:/info/url/port]] |<<.from-version "5.1.14">> Port portion of URL of wiki (eg, ''<<example port>>'') |
+|[[$:/info/url/protocol]] |<<.from-version "5.1.14">> Protocol portion of URL of wiki (eg, ''<<example protocol>>'') |
+|[[$:/info/url/search]] |<<.from-version "5.1.14">> Search portion of URL of wiki (eg, ''<<example search>>'') |

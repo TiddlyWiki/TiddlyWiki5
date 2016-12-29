@@ -17,19 +17,30 @@ Export our filter function
 */
 exports.tag = function(source,operator,options) {
 	var results = [];
-	if(operator.prefix === "!") {
+	if((operator.suffix || "").toLowerCase() === "strict" && !operator.operand) {
+		// New semantics:
+		// Always return copy of input if operator.operand is missing
 		source(function(tiddler,title) {
-			if(tiddler && !tiddler.hasTag(operator.operand)) {
-				results.push(title);
-			}
+			results.push(title);
 		});
 	} else {
-		source(function(tiddler,title) {
-			if(tiddler && tiddler.hasTag(operator.operand)) {
-				results.push(title);
-			}
-		});
-		results = options.wiki.sortByList(results,operator.operand);
+		// Old semantics:
+		if(operator.prefix === "!") {
+			// Returns a copy of the input if operator.operand is missing
+			source(function(tiddler,title) {
+				if(tiddler && !tiddler.hasTag(operator.operand)) {
+					results.push(title);
+				}
+			});
+		} else {
+			// Returns empty results if operator.operand is missing
+			source(function(tiddler,title) {
+				if(tiddler && tiddler.hasTag(operator.operand)) {
+					results.push(title);
+				}
+			});
+			results = options.wiki.sortByList(results,operator.operand);
+		}		
 	}
 	return results;
 };
