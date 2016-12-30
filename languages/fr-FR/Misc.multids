@@ -36,6 +36,23 @@ InternalJavaScriptError/Hint: C'est assez embarrassant. Il est recommandé de ra
 InvalidFieldName: Caractères illicites dans le nom du champ « <$text text=<<fieldName>>/> ». Les champs ne peuvent contenir que des lettres minuscules non accentuées et les caractères souligné (`_`), tiret (`-`) et point (`.`)
 LazyLoadingWarning: <p>Chargement d'un texte externe ''<$text text={{!!_canonical_uri}}/>''</p><p>Si ce message ne disparaît pas, il se peut que vous utilisiez un navigateur qui n'accepte pas les textes externes dans cette configuration. Voir http://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Identification sur TiddlySpace
+Manager/Controls/FilterByTag/None: (aucun)
+Manager/Controls/FilterByTag/Prompt: Filtrer par tag :
+Manager/Controls/Order/Prompt: Ordre inverse
+Manager/Controls/Search/Placeholder: Recherche
+Manager/Controls/Search/Prompt: Rechercher :
+Manager/Controls/Show/Option/Tags: tags
+Manager/Controls/Show/Option/Tiddlers: tiddlers
+Manager/Controls/Show/Prompt: Afficher :
+Manager/Controls/Sort/Prompt: Trier par :
+Manager/Item/Colour: Couleur
+Manager/Item/Fields: Champs
+Manager/Item/Icon/None: (aucune)
+Manager/Item/Icon: Icône
+Manager/Item/RawText: Texte brut
+Manager/Item/Tags: Tags
+Manager/Item/Tools: Outils
+Manager/Item/WikifiedText: Texte wikifié
 MissingTiddler/Hint: Le tiddler « <$text text=<<currentTiddler>>/> » est manquant
 - cliquez sur {{$:/core/images/edit-button}} pour le créer
 No: Non
@@ -44,6 +61,7 @@ OfficialPluginLibrary/Hint: La bibliothèque officielle des plugins ~TiddlyWiki 
 PluginReloadWarning: Merci d'enregistrer {{$:/core/ui/Buttons/save-wiki}} et de recharger {{$:/core/ui/Buttons/refresh}} pour que les changements apportés aux plugins prennent effet
 RecentChanges/DateFormat: DD MMM YYYY
 SystemTiddler/Tooltip: Ceci est un tiddler système
+SystemTiddlers/Include/Prompt: Inclure les tiddlers système
 TagManager/Colour/Heading: Couleur
 TagManager/Count/Heading: Total
 TagManager/Icon/Heading: Icône
