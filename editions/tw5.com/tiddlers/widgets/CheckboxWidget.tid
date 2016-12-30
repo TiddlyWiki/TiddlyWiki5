@@ -52,9 +52,13 @@ The example below creates a checkbox that is checked if the index by the name of
 
 <$macrocall $name="wikitext-example-without-html" src="""<$checkbox tiddler="ExampleData" index=<<currentTiddler>> checked="selected" unchecked="" default=""> Selected?</$checkbox>"""/>
 
-!! Actions parameter
+!! `actions` Attribute
 
-The `actions` parameter here  uses both  the [[Action Set Field Widget|ActionSetFieldWidget]] and [[Action Send Message Widget|ActionSendMessageWidget]] to demonstrate two actions. The [[Set Widget|SetWidget]] uses a filter value to set the value of variable `tag`. The [[Action Send Message Widget|ActionSendMessageWidget]] joins all  the tags into one large tag. The [[Action Set Field Widget|ActionSetFieldWidget]] appends the tags as individual tags.  In this example, the [[Field Mangler Widget|FieldManglerWidget]] is required for the [[Action Send Message Widget|ActionSendMessageWidget]]  but  not for [[Action Set Field Widget|ActionSetFieldWidget]]. Be aware that the action occurs whether you check or uncheck. Surrounding the `actions` attribute string with triple quotes may be necessary.
+This example of using the `actions` attribute shows both the [[Action Set Field Widget|ActionSetFieldWidget]] and [[Action Send Message Widget|ActionSendMessageWidget]] to demonstrate two actions.
+
+The [[Set Widget|SetWidget]] uses a filter value to set the value of variable `tag`. The [[Action Send Message Widget|ActionSendMessageWidget]] joins all  the tags into one large tag. The [[Action Set Field Widget|ActionSetFieldWidget]] appends the tags as individual tags.  In this example, the [[Field Mangler Widget|FieldManglerWidget]] is required for the [[Action Send Message Widget|ActionSendMessageWidget]] but not for [[Action Set Field Widget|ActionSetFieldWidget]]. Be aware that the action occurs whether you check or uncheck.
+
+It is often necessary to use triple quotes with the `actions` attribute. Alternatively, the attribute can be assigned directly from a variable with `actions=<<my-actions>>`.
 
 <$macrocall $name='wikitext-example-without-html' src='<$fieldmangler>
 <$set filter="[[Features]] [[Encryption]] +[tags[]]" name="tag">
