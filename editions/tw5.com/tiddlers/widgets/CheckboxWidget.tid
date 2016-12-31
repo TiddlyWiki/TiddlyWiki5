@@ -1,6 +1,6 @@
 caption: checkbox
 created: 20131024141900000
-modified: 20161126081845399
+modified: 20161221202816730
 tags: Widgets
 title: CheckboxWidget
 type: text/vnd.tiddlywiki
@@ -51,3 +51,20 @@ To use the checkbox widget in index mode set the ''index'' attribute to the inde
 The example below creates a checkbox that is checked if the index by the name of this tiddler in the tiddler ExampleData is equal to ''selected'' and unchecked if the index is an empty string. If the index is undefined then it defaults to an empty string, meaning the checkbox will be unchecked if the index is missing.
 
 <$macrocall $name="wikitext-example-without-html" src="""<$checkbox tiddler="ExampleData" index=<<currentTiddler>> checked="selected" unchecked="" default=""> Selected?</$checkbox>"""/>
+
+!! `actions` Attribute
+
+This example of using the `actions` attribute shows both the [[Action Set Field Widget|ActionSetFieldWidget]] and [[Action Send Message Widget|ActionSendMessageWidget]] to demonstrate two actions.
+
+The [[Set Widget|SetWidget]] uses a filter value to set the value of variable `tag`. The [[Action Send Message Widget|ActionSendMessageWidget]] joins all  the tags into one large tag. The [[Action Set Field Widget|ActionSetFieldWidget]] appends the tags as individual tags.  In this example, the [[Field Mangler Widget|FieldManglerWidget]] is required for the [[Action Send Message Widget|ActionSendMessageWidget]] but not for [[Action Set Field Widget|ActionSetFieldWidget]]. Be aware that the action occurs whether you check or uncheck.
+
+It is often necessary to use triple quotes with the `actions` attribute. Alternatively, the attribute can be assigned directly from a variable with `actions=<<my-actions>>`.
+
+<$macrocall $name='wikitext-example-without-html' src='<$fieldmangler>
+<$set filter="[[Features]] [[Encryption]] +[tags[]]" name="tag">
+<$checkbox actions="""<$action-setfield  $field="tags" $value=<<tag>> /><$action-sendmessage $message="tm-add-tag" $param=<<tag>> />""" field="checked" checked="YES" unchecked="NO" >
+    Add tags from tiddlers [[Features]] and [[Encryption]]
+</$checkbox>
+</$set>
+</$fieldmangler>' />
+

@@ -103,6 +103,10 @@ Settings/Caption: Paramétrage
 Settings/EditorToolbar/Caption: Barre d'outils de l'éditeur
 Settings/EditorToolbar/Hint: Active ou désactive la barre d'outils de l'éditeur :
 Settings/EditorToolbar/Description: Affiche la barre d'outils de l'éditeur
+Settings/InfoPanelMode/Caption: Mode Panneau d'Informations du Tiddler
+Settings/InfoPanelMode/Hint: Contrôle à quel moment le panneau d'informations du tiddler se ferme :
+Settings/InfoPanelMode/Popup/Description: Le panneau d'informations se ferme automatiquement
+Settings/InfoPanelMode/Sticky/Description: Le panneau d'informations du tiddler reste ouvert jusqu'à ce qu'il soit fermé explicitement
 Settings/Hint: Ce paramétrage vous permet de personnaliser le comportement de TiddlyWiki.
 Settings/NavigationAddressBar/Caption: Barre d'adresse pendant la navigation
 Settings/NavigationAddressBar/Hint: Comportement de la barre d'adresse du navigateur lorsqu'on pointe vers un tiddler :
