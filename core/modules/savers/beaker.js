@@ -20,10 +20,18 @@ var BeakerSaver = function(wiki) {
 };
 
 BeakerSaver.prototype.save = function(text,method,callback) {
-	dat.writeFile(document.location.protocol + "//" + document.location.hostname + ":" + document.location.port + document.location.pathname,text,"utf8").then(function(value) {
-		callback(null);
+	var url = (location.toString()).split("#")[0];
+	dat.stat(url).then(function(value) {
+		if(value.type === "directory") {
+			url = url + "/index.html";
+		}
+		dat.writeFile(url,text,"utf8").then(function(value) {
+			callback(null);
+		},function(reason) {
+			callback("Beaker Saver Write Error: " + reason);
+		});		
 	},function(reason) {
-		callback("Beaker Saver Error: " + reason);
+		callback("Beaker Saver Stat Error: " + reason);
 	});
 	return true;
 };

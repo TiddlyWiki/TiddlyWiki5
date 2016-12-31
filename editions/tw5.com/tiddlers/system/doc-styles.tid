@@ -164,9 +164,10 @@ tr.doc-table-subheading {
 
 .doc-from-version {
     display: inline-block;
-	border: 2px solid <<colour alert-border>>;
     border-radius: 1em;
-	background: <<colour alert-background>>;
+	background: <<colour tiddler-controls-foreground>>;
+	color: <<colour background>>;
+	fill: <<colour background>>;
     padding: 0 0.4em;
     font-size: 0.7em;
     text-transform: uppercase;
