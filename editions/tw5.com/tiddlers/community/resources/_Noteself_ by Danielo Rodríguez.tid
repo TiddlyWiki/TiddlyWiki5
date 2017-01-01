@@ -1,5 +1,5 @@
 created: 20141122093837330
-modified: 20161231234157548
+modified: 20170101184848607
 tags: Resources
 title: "Noteself" by Danielo Rodríguez
 type: text/vnd.tiddlywiki
@@ -26,4 +26,3 @@ Wow, it's almost perfect, but what about:
 We took the best of it, it's powerful customization system, and mixed it with one of the best
 embedded databases available, [[PouchDb|http://www.pouchdb.com]], for bringing the synchronization capabilities you need.
 <<<
-
