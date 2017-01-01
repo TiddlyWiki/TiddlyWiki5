@@ -300,3 +300,5 @@ Hans Christian Haase, @hchaase, 2016/08/11
 steve schneider, @stevesunypoly, 2016/08/26
 
 Nuno Mota, @nmota, 2016/12/16
+
+Saul Beniquez, @beniquezsd, 2017/01/01
