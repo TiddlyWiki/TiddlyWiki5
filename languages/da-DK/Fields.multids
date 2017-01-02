@@ -18,7 +18,7 @@ icon: Titlen på den tiddler som indeholder et ikon, der er knyttet til en tiddl
 library: Hvis sat til  "ja" indikeres at en tiddler bør gemmes som et  JavaScript library
 list: En ordnet liste af tiddlertitler som er knyttet til en tiddler
 list-after: Hvis sat, titlen på den tiddler efter hvilken denne tiddler skal indsættes i den ordnede liste over tiddler titler.
-list-before: Hvis sat, titlen på en tiddler, før hvilken denne tiddler skal indsættes i  den ordnede liste over tiddler titler, eller i starten af listen, hvis dette felt er tilstede men tomt. 
+list-before: Hvis sat, titlen på en tiddler, før hvilken denne tiddler skal indsættes i  den ordnede liste over tiddler titler, eller i starten af listen, hvis dette felt er tilstede men tomt.
 modified: Dato og klokkeslæt, hvor en tiddler sidst blev ændret
 modifier: Den tiddlertitel som har samme navn som den forfatter der sidst ændrede tiddleren
 name: Det menneskeligt læsbare navn, som knyttes til en udvidelsestiddler

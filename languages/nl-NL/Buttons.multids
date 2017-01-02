@@ -24,8 +24,6 @@ Edit/Caption: wijzig
 Edit/Hint: Wijzig deze tiddler
 EditorHeight/Caption: hoogte van de editor
 EditorHeight/Caption/Auto: Pas automatisch hoogte aan zodat inhoud past
-
-
 EditorHeight/Caption/Fixed: Vaste hoogte:
 EditorHeight/Hint: Kies de hoogte van de teksteditor
 Encryption/Caption: versleuteling
@@ -100,7 +98,6 @@ More/Hint: Meer mogelijkheden
 NewHere/Caption: nieuw hier
 NewHere/Hint: Maak een nieuwe tiddler gelabeld met deze tiddler
 NewImage/Caption: nieuwe afbeelding
-
 NewImage/Hint: Maak een nieuwe afbeelding
 NewJournal/Caption: nieuw journaal
 NewJournal/Hint: Maak een nieuwe journaaltiddler
@@ -115,7 +112,6 @@ Opacity/Hint: Stel de ondoorzichtigheid in
 OpenWindow/Caption: open in een nieuw venster
 OpenWindow/Hint: Open tiddler in nieuw venster
 Paint/Caption: kleur om te tekenen
-
 Paint/Hint: Kies kleur om te tekenen
 Palette/Caption: palet
 Palette/Hint: Kies het kleurpalet
@@ -129,6 +125,8 @@ Preview/Caption: voorbeeldweergave
 Preview/Hint: Toon voorbeeldweergavepaneel
 PreviewType/Caption: type voorbeeldweergave
 PreviewType/Hint: Kies type voorbeeldweergave
+Print/Caption: druk pagina af
+Print/Hint: Druk the actuele pagina af
 Quote/Caption: 'blockquote'
 Quote/Hint: Maak van selectie een 'blockqoute'
 Refresh/Caption: ververs
@@ -161,6 +159,12 @@ TagManager/Caption: labelmanager
 TagManager/Hint: Open labelmanager
 Theme/Caption: thema
 Theme/Hint: Kies het thema
+Timestamp/Caption: tijdstempels
+Timestamp/Hint: Kies of veranderingen de tijdstempels bijwerken
+Timestamp/Off/Caption: tijdstempels zijn uit
+Timestamp/Off/Hint: Werk tijdstempels niet bij als tiddlers veranderd zijn
+Timestamp/On/Caption: tijdstempels zijn aan
+Timestamp/On/Hint: Werk tijdstempels bij als tiddlers veranderd zijn
 Underline/Caption: onderstreept
 Underline/Hint: Onderstreep het geselecteerde
 Unfold/Caption: klap tiddler uit
