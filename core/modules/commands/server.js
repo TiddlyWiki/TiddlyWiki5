@@ -293,13 +293,13 @@ Command.prototype.execute = function() {
 		username = null,
 		password = null;
 
-		var credentials = $tw.wiki.getTiddler(credentialTiddler);
-		if(credentials == null) {
-			credentials = new $tw.Tiddler({title: credentialTiddler, text: ''});
-			$tw.wiki.addTiddler(credentials);
-		}
-		username = credentials.fields["username"] || null;
-		password = credentials.fields["password"] || null;
+	var credentials = $tw.wiki.getTiddler(credentialTiddler);
+	if(credentials == null) {
+		credentials = new $tw.Tiddler({title: credentialTiddler, text: ''});
+		$tw.wiki.addTiddler(credentials);
+	}
+	username = credentials.fields["username"] || null;
+	password = credentials.fields["password"] || null;
 
 	this.server.set({
 		rootTiddler: rootTiddler,
