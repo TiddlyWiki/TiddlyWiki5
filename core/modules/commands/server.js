@@ -294,8 +294,7 @@ Command.prototype.execute = function() {
 		password = null;
 
 		var credentials = $tw.wiki.getTiddler(credentialTiddler);
-		if (credentials == null)
-		{
+		if(credentials == null) {
 			credentials = new $tw.Tiddler({title: credentialTiddler, text: ''});
 			$tw.wiki.addTiddler(credentials);
 		}
