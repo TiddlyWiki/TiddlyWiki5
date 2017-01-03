@@ -1,7 +1,7 @@
 TiddlyWiki created by Jeremy Ruston, (jeremy [at] jermolene [dot] com)
 
 Copyright © Jeremy Ruston 2004-2007
-Copyright © UnaMesa Association 2007-2016
+Copyright © UnaMesa Association 2007-2017
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
