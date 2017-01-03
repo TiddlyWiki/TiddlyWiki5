@@ -8,7 +8,7 @@ Fields/Add/Button: +
 Fields/Add/Dropdown/System: Systeemvelden
 Fields/Add/Dropdown/User: Gebruikersvelden
 Fields/Add/Name/Placeholder: veldnaam
-Fields/Add/Prompt: Voeg een nieuw veld toe:
+Fields/Add/Prompt: Voeg nieuw veld toe:
 Fields/Add/Value/Placeholder: veldwaarde
 Shadow/OverriddenWarning: Dit is een aangepaste schaduwtiddler. Door deze tiddler te verwijderen wordt de standaard schaduwtiddler weer actief
 Shadow/Warning: Dit is een schaduwtiddler. Elke verandering overschrijft de standaardversie
@@ -16,6 +16,9 @@ Tags/Add/Button: +
 Tags/Add/Placeholder: labelnaam
 Tags/Dropdown/Caption: labellijst
 Tags/Dropdown/Hint: Toon labellijst
+Title/BadCharacterWarning: Waarschuwing: vermijd elk karakter van <<bad-chars>> in tiddler titels 
+Title/Exists/Prompt: Doeltiddler bestaat al
+Title/Relink/Prompt: Werk ''<$text text=<<fromTitle>>/>'' naar ''<$text text=<<toTitle>>/>'' bij in de //label// en //lijst// velden van andere tiddlers
 Type/Delete/Caption: verwijder inhoudstype
 Type/Delete/Hint: Verwijder inhoudstype
 Type/Dropdown/Caption: lijst van inhoudstypes

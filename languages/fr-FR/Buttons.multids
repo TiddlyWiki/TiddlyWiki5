@@ -76,6 +76,8 @@ Permalink/Caption: permalink
 Permalink/Hint: Remplace l'URL dans la barre d'adresse du navigateur par un lien direct vers ce tiddler
 Permaview/Caption: permaview
 Permaview/Hint: Remplace l'URL dans la barre d'adresse du navigateur par un lien direct vers l'ensemble des tiddlers présents dans le déroulé
+Print/Caption: imprimer la page
+Print/Hint: Imprime la page courante
 Refresh/Caption: rafraîchir
 Refresh/Hint: Rafraîchit la totalité du wiki
 Save/Caption: ok
@@ -90,6 +92,12 @@ ShowSideBar/Caption: afficher la barre latérale
 ShowSideBar/Hint: Affiche la barre latérale
 TagManager/Caption: gestionnaire de tags
 TagManager/Hint:  Ouvre le gestionnaire de tags
+Timestamp/Caption: horodatage
+Timestamp/Hint: Décide si les modifications mettent à jour l'horodatage
+Timestamp/On/Caption: horodatage activé
+Timestamp/On/Hint: L'horodatage est mis à jour quand les tiddlers sont modifiés
+Timestamp/Off/Caption: horodatage désactivé
+Timestamp/Off/Hint: L'horodatage n'est pas mis à jour quand les tiddlers sont modifiés
 Theme/Caption: thème
 Theme/Hint: Choix du thème pour l'affichage
 Bold/Caption: gras

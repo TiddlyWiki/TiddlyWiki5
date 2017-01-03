@@ -122,6 +122,8 @@ Preview/Caption: forhåndsvisning
 Preview/Hint: Vis forhåndsvisnings panel
 PreviewType/Caption: forhåndsvisnings type
 PreviewType/Hint: Vælg forhåndsvisnings type
+Print/Caption: print side
+Print/Hint: Print den aktuelle side
 Quote/Caption: Citat
 Quote/Hint: Føj citat tekst formatering til linier indeholdende udvalgte
 Refresh/Caption: genopfrisk
@@ -152,6 +154,11 @@ TagManager/Caption: tagadministrator
 TagManager/Hint: Åbn tagadministrator
 Theme/Caption: tema
 Theme/Hint: Vælg visningstema
+Timestamp/Hint: Vælg om modifikationer opdaterer tidsstempler
+Timestamp/Off/Caption: tidsstempler er slået fra
+Timestamp/Off/Hint: Opdaterer ikke tiddstempler når tiddlere modificeres
+Timestamp/On/Caption: tidsstempker er slået til
+Timestamp/On/Hint: Opdater tidsstempler når tiddlere modificeres
 Underline/Caption: understregning
 Underline/Hint: Føj understregnings formatering til udvalgte
 Unfold/Caption: udfold tiddler
