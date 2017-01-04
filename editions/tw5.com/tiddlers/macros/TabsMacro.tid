@@ -26,6 +26,12 @@ By default the tabs are arranged horizontally above the content. To get vertical
 
 Within the template, the title of the selected tab is available in the <<.var currentTab>> variable.
 
-The <<.vlink currentTiddler>> variable is not affected by the <<.var tabs>> macro.
+The <<.vlink currentTiddler>> variable is not affected by the <<.var tabs>> macro. This can put you in trouble if the list of tabs includes tiddlers that depend on the value of the <<.vlink currentTiddler>>, for example tiddlers listing children based on its own name. To overcome this problem you can use a [[TemplateTiddler|TemplateTiddlers]] like the following:
+
+```
+<$tiddler tiddler=<<currentTab>>>
+<$transclude mode="block" />
+</$tiddler>
+``` 
 
 <<.macro-examples "tabs">>
