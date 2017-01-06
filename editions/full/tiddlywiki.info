@@ -54,6 +54,8 @@
 	"themes": [
 		"tiddlywiki/centralised",
 		"tiddlywiki/tight",
+		"tiddlywiki/heavier",
+		"tiddlywiki/tight-heavier",
 		"tiddlywiki/readonly",
 		"tiddlywiki/seamless",
 		"tiddlywiki/snowwhite",
