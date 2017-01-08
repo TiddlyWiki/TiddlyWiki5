@@ -283,23 +283,15 @@ Command.prototype.execute = function() {
 	if(!$tw.boot.wikiTiddlersPath) {
 		$tw.utils.warning("Warning: Wiki folder '" + $tw.boot.wikiPath + "' does not exist or is missing a tiddlywiki.info file");
 	}
-	var port = this.params[0] || "8080",
-		rootTiddler = this.params[1] || "$:/core/save/all",
-		renderType = this.params[2] || "text/plain",
-		serveType = this.params[3] || "text/html",
-		credentialTiddler = this.params[4] || "$:/config/credentials",
-		host = this.params[5] || "127.0.0.1",
-		pathprefix = this.params[6],
-		username = null,
-		password = null;
+	var port = this.params[0] || $tw.boot.wikiInfo.server.port,
+		rootTiddler = this.params[1] || $tw.boot.wikiInfo.server.roottiddler,
+		renderType = this.params[2] || $tw.boot.wikiInfo.server.rendertype,
+		serveType = this.params[3] || $tw.boot.wikiInfo.server.servetype,
+		username = this.params[4] || $tw.boot.wikiInfo.server.username,
+		password = this.params[5] || $tw.boot.wikiInfo.server.password,
+		host = this.params[6] || $tw.boot.wikiInfo.server.host,
+		pathprefix = this.params[7] || $tw.boot.wikiInfo.server.pathprefix;
 
-	var credentials = $tw.wiki.getTiddler(credentialTiddler);
-	if(credentials == null) {
-		credentials = new $tw.Tiddler({title: credentialTiddler, text: ''});
-		$tw.wiki.addTiddler(credentials);
-	}
-	username = credentials.fields["username"] || null;
-	password = credentials.fields["password"] || null;
 
 	this.server.set({
 		rootTiddler: rootTiddler,
