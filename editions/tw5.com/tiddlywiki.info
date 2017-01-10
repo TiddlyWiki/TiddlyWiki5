@@ -15,6 +15,7 @@
 		"tiddlywiki/centralised",
 		"tiddlywiki/tight",
 		"tiddlywiki/heavier",
+		"tiddlywiki/tight-heavier",
 		"tiddlywiki/readonly"
 	],
 	"languages": [

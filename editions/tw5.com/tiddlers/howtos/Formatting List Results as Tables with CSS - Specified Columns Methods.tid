@@ -1,0 +1,57 @@
+created: 20161209172820513
+modified: 20161220161653258
+tags: Learning
+title: Formatting List Results as Tables with CSS - Specified Columns Methods
+type: text/vnd.tiddlywiki
+
+Sometimes you want the results of a ``<$list>`` widget to be formatted in the form of multiple columns, instead of just one straight listing. This method uses ~CSS to set up listing as  columns and assumes that you know how many columns you want.  The method here is to create a style that reflects the number of columns you want your table to be in, and then apply that style to the resulting list output.
+
+For other table-making techniques see also:
+
+* [[Formatting List Results as Tables with CSS - Variable Column Method]]
+* [[Formatting List Results as Tables (no CSS)]]
+
+
+!!! 1) Create a tiddler for the columns tagged with `$:/tags/Stylesheet`, containing:
+
+```
+/* FOUR COLUMN MODE */
+.fourcolumns {
+   display:block;
+   -moz-column-count:4;
+   -moz-column-gap:1em;
+   -webkit-column-count: 4;
+   -webkit-column-gap:1em;
+}
+```
+
+Note the various places you need to indicate the number of columns
+
+!!! 2) Then format your output like this:
+
+```
+@@.fourcolumns
+<$list filter="[tag[Filter Operators]]" variable="foo"><br>
+<<foo>>
+</$list>
+@@
+```
+
+!! Example showing partial list of filter operators
+
+<style>
+.fourcolumns {
+   display:block;
+   -moz-column-count:4;
+   -moz-column-gap:1em;
+   -webkit-column-count: 4;
+   -webkit-column-gap:1em;
+}
+</style>
+
+
+@@.fourcolumns
+<$list filter="[tag[Filter Operators]limit[24]]" variable="foo"><br>
+<<foo>>
+</$list>
+@@
