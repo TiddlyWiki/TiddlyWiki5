@@ -2,10 +2,13 @@ title: $:/language/Docs/PaletteColours/
 
 alert-background: Achtergrond alarm
 alert-border: Rand alarm
-alert-highlight: Geaccentueerd alarm 
+alert-highlight: Geaccentueerd alarm
 alert-muted-foreground: Gedimde voorgrond alarm
 background: Algemene achtergrond
 blockquote-bar: Citaatbalk
+button-background: Standaard knopachtergrond
+button-border: Standaard knoprand
+button-foreground: Standaard knop voorgrond
 code-background: Achtergrond code
 code-border: Rand code
 code-foreground: Voorgrond code
@@ -20,10 +23,10 @@ dropdown-tab-background: Achtergrond dropdown tab
 dropdown-tab-background-selected: Achtergrond dropdown tab voor geselecteerde tabs
 dropzone-background: Achtergrond 'dropzone'
 external-link-background: Achtergrond externe link
-external-link-background-hover: Achtergrond 'mouseover' externe link 
+external-link-background-hover: Achtergrond 'mouseover' externe link
 external-link-background-visited: Achtergrond bezochte externe link
 external-link-foreground: Voorgrond externe link
-external-link-foreground-hover: Voorgrond mouseover externe link 
+external-link-foreground-hover: Voorgrond mouseover externe link
 external-link-foreground-visited: Voorgrond bezochte externe link
 foreground: Voorgrond algemeen
 message-background: Achtergrond berichtenpaneel

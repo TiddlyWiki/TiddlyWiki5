@@ -8,6 +8,7 @@ Matches: //<small><<resultCount>> træffere</small>//
 Matches/All: Alle træffere:
 Matches/Title: Titel træffere:
 Search: Søg
+Search/TooShort: Søge tekst for kort
 Shadows/Caption: Skygger
 Shadows/Hint: Søg i skyggetiddlere
 Shadows/Matches: //<small><<resultCount>> træffere</small>//
