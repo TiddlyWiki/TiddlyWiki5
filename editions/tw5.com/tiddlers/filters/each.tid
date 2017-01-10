@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20150203184257000
+modified: 20170103175939836
 tags: [[Filter Operators]] [[Group Operators]]
 title: each Operator
 type: text/vnd.tiddlywiki
@@ -14,10 +14,10 @@ op-output: a selection containing the first input title encountered for each dis
 Each input title is processed in turn. The value of field <<.place F>> in the corresponding tiddler is examined.
 
 ;each
-:As long as the field's value has not been encountered before, the title is appended to the output.
+:As long as the value of the field is unique (i.e. has not been encountered before), the title is appended to the output.
 ;each:list-item
 :The value is treated as a [[title list|Title List]]. Each title in the list considered in turn. If it has not been encountered before, it is appended to the output.
 
-If a tiddler doesn't contain field <<.place F>>, it is treated as if the field's value was empty.
+If a tiddler does not contain field <<.place F>>, it is treated as if the value of the field were empty.
 
 <<.operator-examples "each">>

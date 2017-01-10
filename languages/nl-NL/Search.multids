@@ -8,6 +8,7 @@ Matches: //<small><<resultCount>> resultaten</small>//
 Matches/All: Alle resultaten:
 Matches/Title: Titel resultaten:
 Search: Zoek
+Search/TooShort: Zoektekst te kort
 Shadows/Caption: Schaduwen
 Shadows/Hint: Zoek schaduwtiddlers
 Shadows/Matches: //<small><<resultCount>> resultaten</small>//
