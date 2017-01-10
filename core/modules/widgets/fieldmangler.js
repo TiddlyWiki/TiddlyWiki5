@@ -43,8 +43,6 @@ FieldManglerWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 FieldManglerWidget.prototype.execute = function() {
-	// Get our parameters
-	this.mangleTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
@@ -63,7 +61,8 @@ FieldManglerWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 FieldManglerWidget.prototype.handleRemoveFieldEvent = function(event) {
-	var tiddler = this.wiki.getTiddler(this.mangleTitle),
+	var mangleTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler")),
+		tiddler = this.wiki.getTiddler(mangleTitle),
 		deletion = {};
 	deletion[event.param] = undefined;
 	this.wiki.addTiddler(new $tw.Tiddler(tiddler,deletion));
@@ -71,7 +70,8 @@ FieldManglerWidget.prototype.handleRemoveFieldEvent = function(event) {
 };
 
 FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
-	var tiddler = this.wiki.getTiddler(this.mangleTitle),
+	var mangleTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler")),
+		tiddler = this.wiki.getTiddler(mangleTitle),
 		addition = this.wiki.getModificationFields(),
 		hadInvalidFieldName = false,
 		addField = function(name,value) {
@@ -109,7 +109,8 @@ FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
 };
 
 FieldManglerWidget.prototype.handleRemoveTagEvent = function(event) {
-	var tiddler = this.wiki.getTiddler(this.mangleTitle);
+	var mangleTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler")),
+		tiddler = this.wiki.getTiddler(mangleTitle);
 	if(tiddler && tiddler.fields.tags) {
 		var p = tiddler.fields.tags.indexOf(event.param);
 		if(p !== -1) {
@@ -126,7 +127,8 @@ FieldManglerWidget.prototype.handleRemoveTagEvent = function(event) {
 };
 
 FieldManglerWidget.prototype.handleAddTagEvent = function(event) {
-	var tiddler = this.wiki.getTiddler(this.mangleTitle);
+	var mangleTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler")),
+		tiddler = this.wiki.getTiddler(mangleTitle);
 	if(tiddler && typeof event.param === "string") {
 		var tag = event.param.trim();
 		if(tag !== "") {
