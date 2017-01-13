@@ -18,8 +18,8 @@ The content of the `<$radio>` widget is displayed within an HTML `<label>` eleme
 |field |The field of the //tiddler// bound to the radio button|
 |index|<<.from-version "5.1.14">> The index of the //tiddler// being [[DataTiddler|DataTiddlers]] bound to the radio button<<.tip "takes precedence over //field//">>|
 |value |The value for the //field// or //index// of the //tiddler//|
-|class |CSS classes to be assigned to the label around the radio button |
-|selectedClass |<<.from-version "5.1.14">> a CSS class assigned to the wrapper when the radio button is selected<br>» `tc-radio-selected` is always applied when selected |
+|class |The CSS classes assigned to the label around the radio button<$macrocall $name=".tip" _="""<<.from-version "5.1.14">> `tc-radio` is always applied by default"""/>|
+|selectedClass |<<.from-version "5.1.14">> a CSS class assigned to the wrapper when the radio button is selected<<.tip "`tc-radio-selected` is always applied when selected">>|
 
 !! Field Mode
 

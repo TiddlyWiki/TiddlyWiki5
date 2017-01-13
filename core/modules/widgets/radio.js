@@ -37,7 +37,7 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	// Create our elements
 	this.labelDomNode = this.document.createElement("label");
 	this.labelDomNode.setAttribute("class",
-   		this.radioClass + (isChecked ? " tc-radio-selected " + this.selectedClass : "")
+   		"tc-radio " + this.radioClass + (isChecked ? " tc-radio-selected " + this.selectedClass : "")
   	);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","radio");
