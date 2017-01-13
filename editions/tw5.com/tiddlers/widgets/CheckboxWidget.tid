@@ -1,6 +1,6 @@
 caption: checkbox
 created: 20131024141900000
-modified: 20161221202816730
+modified: 20170113072104413
 tags: Widgets
 title: CheckboxWidget
 type: text/vnd.tiddlywiki
@@ -25,7 +25,7 @@ The content of the `<$checkbox>` widget is displayed within an HTML `<label>` el
 |checked |The value of the field corresponding to the checkbox being checked |
 |unchecked |The value of the field corresponding to the checkbox being unchecked |
 |default |The default value to use if the field is not defined |
-|class |The class that will be assigned to the label element |
+|class |The class that will be assigned to the label element <$macrocall $name=".tip" _="""<<.from-version "5.1.14">> By default, always set to `tc-checkbox`, as well as `tc-checkbox-checked` when checked"""/>|
 |actions |<<.from-version "5.1.14">> A string containing ActionWidgets to be triggered when the checkbox is clicked |
 
 !! Tag Mode

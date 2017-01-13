@@ -33,13 +33,15 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	// Execute our logic
 	this.execute();
+	var isChecked = this.getValue();
 	// Create our elements
 	this.labelDomNode = this.document.createElement("label");
-	this.labelDomNode.setAttribute("class",this.checkboxClass);
+	this.labelDomNode.setAttribute("class","tc-checkbox " + this.checkboxClass);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","checkbox");
-	if(this.getValue()) {
+	if(isChecked) {
 		this.inputDomNode.setAttribute("checked","true");
+		$tw.utils.addClass(this.labelDomNode,"tc-checkbox-checked");
 	}
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");
@@ -188,7 +190,13 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 	} else {
 		var refreshed = false;
 		if(changedTiddlers[this.checkboxTitle]) {
-			this.inputDomNode.checked = this.getValue();
+			var isChecked = this.getValue();
+			this.inputDomNode.checked = isChecked;
+			if(isChecked) {
+				$tw.utils.addClass(this.labelDomNode,"tc-checkbox-checked");
+			} else {
+				$tw.utils.removeClass(this.labelDomNode,"tc-checkbox-checked");
+			}
 			refreshed = true;
 		}
 		return this.refreshChildren(changedTiddlers) || refreshed;
