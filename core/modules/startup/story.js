@@ -53,6 +53,14 @@ exports.startup = function() {
 		$tw.rootWidget.addEventListener("tm-browser-refresh",function(event) {
 			window.location.reload(true);
 		});
+		// Listen for tm-open-external-window message
+		$tw.rootWidget.addEventListener("tm-open-external-window",function(event) {
+			var paramObject = event.paramObject || {},
+				strUrl = event.param || "http://tiddlywiki.com/#WidgetMessage%3A%20tm-open-external-window",
+				strWindowName = paramObject.windowName,
+				strWindowFeatures = paramObject.windowFeatures;
+			window.open(strUrl, strWindowName, strWindowFeatures);
+		});
 		// Listen for the tm-print message
 		$tw.rootWidget.addEventListener("tm-print",function(event) {
 			(event.event.view || window).print();
@@ -66,7 +74,7 @@ exports.startup = function() {
 			storyList = $tw.hooks.invokeHook("th-opening-default-tiddlers-list",storyList);
 			$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
 			if(storyList[0]) {
-				$tw.wiki.addToHistory(storyList[0]);				
+				$tw.wiki.addToHistory(storyList[0]);
 			}
 		});
 		// Listen for the tm-permalink message
