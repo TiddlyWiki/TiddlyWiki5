@@ -1,17 +1,24 @@
 caption: tabs
 created: 20131228162203521
-modified: 20150221211706000
+modified: 20170122122551972
 tags: Macros [[Core Macros]]
 title: tabs Macro
 type: text/vnd.tiddlywiki
 
 The <<.def tabs>> [[macro|Macros]] presents a [[selection of tiddlers|Title Selection]] as a set of tabs that the user can switch between.
 
-The tabs display the <<.field caption>> field of a tiddler if it has one, or the tiddler's title otherwise. If specified, the tabs display the <<.field tooltip>> field of a tiddler as the respective button tooltip.
+!! Tiddler Fields
 
-By default the tabs are arranged horizontally above the content. To get vertical tabs, set the <<.param class>> parameter to <<.value tc-vertical>>.
+Certain properties of the tab buttons can be controlled by setting certain fields for the tiddlers being rendered as tabs:
+
+|!Field |!Description |!Fallback |
+|<<.field caption>>|the button label|the tiddler title|
+|<<.field tooltip>>|the button tooltup|n.a.|
+|<<.field tab-class>>|<<.from-version "5.1.14">> the button class|n.a.|
 
 !! Parameters
+
+By default the tabs are arranged horizontally above the content. To get vertical tabs, set the <<.param class>> parameter to <<.value tc-vertical>>.
 
 ;tabsList
 : A [[filter|Filters]] selecting which tiddlers to include
