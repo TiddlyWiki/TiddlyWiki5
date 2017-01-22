@@ -13,8 +13,9 @@ tags: $:/tags/Macro
 </$set></$tiddler></$button></$tiddler></$set></$list>
 </div>
 <div class="tc-tab-divider $class$"/>
-<div class="tc-tab-content $class$">
 <$list filter="$tabsList$" variable="currentTab">
+<$set name="class" filter="[<currentTab>get[tab-class]addprefix[tc-tab-content $class$ ]]" select="0" emptyValue="tc-tab-content $class$">
+<div class=<<class>>>
 
 <$reveal type="match" state=<<qualify "$state$">> text=<<currentTab>> default="$default$">
 
@@ -25,8 +26,8 @@ tags: $:/tags/Macro
 </$transclude>
 
 </$reveal>
-
-</$list>
 </div>
+</$set>
+</$list>
 </div>
 \end

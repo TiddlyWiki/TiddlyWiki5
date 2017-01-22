@@ -1,6 +1,9 @@
 created: 20150221211544000
-title: SampleTabOne
-tags: sampletab
+modified: 20170122171127661
 order: 1
+tab-class: tab-class-test
+tags: sampletab
+title: SampleTabOne
+type: text/vnd.tiddlywiki
 
 This is the first of our sample tabs.

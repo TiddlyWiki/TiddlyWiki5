@@ -1,6 +1,6 @@
 caption: tabs
 created: 20131228162203521
-modified: 20170122122551972
+modified: 20170122171605674
 tags: Macros [[Core Macros]]
 title: tabs Macro
 type: text/vnd.tiddlywiki
@@ -14,7 +14,7 @@ Certain properties of the tab buttons can be controlled by setting certain field
 |!Field |!Description |!Fallback |
 |<<.field caption>>|the button label|the tiddler title|
 |<<.field tooltip>>|the button tooltup|n.a.|
-|<<.field tab-class>>|<<.from-version "5.1.14">> the button class|n.a.|
+|<<.field "tab-class">>|<<.from-version "5.1.14">> a css class assigned to the button as well as the tab content|n.a.|
 
 !! Parameters
 
@@ -39,6 +39,6 @@ The <<.vlink currentTiddler>> variable is not affected by the <<.var tabs>> macr
 <$tiddler tiddler=<<currentTab>>>
 <$transclude mode="block" />
 </$tiddler>
-``` 
+```
 
 <<.macro-examples "tabs">>
