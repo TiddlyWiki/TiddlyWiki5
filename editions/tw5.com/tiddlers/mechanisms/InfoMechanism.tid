@@ -1,5 +1,5 @@
 created: 20140720164948099
-modified: 20161017122011379
+modified: 20170123183502000
 tags: Mechanisms
 title: InfoMechanism
 type: text/vnd.tiddlywiki
@@ -23,3 +23,18 @@ System tiddlers in the namespace `$:/info/` are used to expose information about
 |[[$:/info/url/port]] |<<.from-version "5.1.14">> Port portion of URL of wiki (eg, ''<<example port>>'') |
 |[[$:/info/url/protocol]] |<<.from-version "5.1.14">> Protocol portion of URL of wiki (eg, ''<<example protocol>>'') |
 |[[$:/info/url/search]] |<<.from-version "5.1.14">> Search portion of URL of wiki (eg, ''<<example search>>'') |
+
+Here's a list of all info tiddlers and their values:
+
+<table>
+<tr>
+<th>Tiddler</th>
+<th>Value</th>
+</tr>
+<$list filter="[all[system+shadows]prefix[$:/info/]]">
+<tr>
+<td><<currentTiddler>></td>
+<td><code>{{!!text}}</code></td>
+</tr>
+</$list>
+</table>
