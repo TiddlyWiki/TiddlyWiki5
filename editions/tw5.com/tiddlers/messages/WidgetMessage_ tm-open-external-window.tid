@@ -21,8 +21,10 @@ The `tm-open-external-window` message opens an external link eg: "http://tiddlyw
 
 The `tm-open-external-window` message is usually generated with the ButtonWidget or ActionSendMessageWidget and is handled by the core itself.
 
-```
-<$button>
+''Examples''
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
 <$action-sendmessage $message="tm-open-external-window" $param="http://tiddlywiki.com" windowName="_tiddlywiki" windowFeatures="height=500, width=900"/>
 Open ~TiddlyWiki - Action
 </$button>
@@ -34,5 +36,4 @@ Open Mozilla Help - Action
 
 <$button message="tm-open-external-window" param="http://tiddlywiki.com" >
 Open ~TiddlyWiki - Button
-</$button>
-```
+</$button>'/>

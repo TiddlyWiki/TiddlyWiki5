@@ -28,6 +28,9 @@ var DEFAULT_TIDDLERS_TITLE = "$:/DefaultTiddlers";
 var CONFIG_UPDATE_ADDRESS_BAR = "$:/config/Navigation/UpdateAddressBar"; // Can be "no", "permalink", "permaview"
 var CONFIG_UPDATE_HISTORY = "$:/config/Navigation/UpdateHistory"; // Can be "yes" or "no"
 
+// Links to help, if there is no param
+var HELP_OPEN_EXTERNAL_WINDOW = "http://tiddlywiki.com/#WidgetMessage%3A%20tm-open-external-window";
+
 exports.startup = function() {
 	// Open startup tiddlers
 	openStartupTiddlers();
@@ -56,7 +59,7 @@ exports.startup = function() {
 		// Listen for tm-open-external-window message
 		$tw.rootWidget.addEventListener("tm-open-external-window",function(event) {
 			var paramObject = event.paramObject || {},
-				strUrl = event.param || "http://tiddlywiki.com/#WidgetMessage%3A%20tm-open-external-window",
+				strUrl = event.param || HELP_OPEN_EXTERNAL_WINDOW,
 				strWindowName = paramObject.windowName,
 				strWindowFeatures = paramObject.windowFeatures;
 			window.open(strUrl, strWindowName, strWindowFeatures);
