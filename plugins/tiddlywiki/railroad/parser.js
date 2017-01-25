@@ -24,7 +24,7 @@ x y z			sequence
 [[x|"tiddler"]]	link
 {{"tiddler"}}	transclusion
 
-"x" can also be written 'x' or """x"""
+"x" can also be written 'x', '''x''', or """x"""
 
 pragmas:
 	\arrow yes|no
