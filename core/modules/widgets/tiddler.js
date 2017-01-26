@@ -92,7 +92,7 @@ TiddlerWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return this.refreshChildren(changedTiddlers);		
+		return this.refreshChildren(changedTiddlers);
 	}
 };
 
