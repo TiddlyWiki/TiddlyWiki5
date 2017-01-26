@@ -1,5 +1,5 @@
 created: 20170126152626248
-modified: 20170126163347143
+modified: 20170126210850589
 tags: data-tags-styles [[How to apply custom styles]] $:/tags/Stylesheet
 title: Custom data-styles
 type: text/vnd.tiddlywiki
@@ -8,11 +8,11 @@ type: text/vnd.tiddlywiki
   border: 1px solid blue;
 }
 
-[data-tags*="data-tags-test"] {
+[data-tags*="example-test"] {
   border: 2px solid pink;
 }
 
-[data-tags*="data-tags-hardlinebreaks"] .tc-tiddler-body {
+[data-tags*="example-hardlinebreaks"] .tc-tiddler-body {
   word-break: normal;
   word-wrap: break-word;
   white-space: pre-wrap;

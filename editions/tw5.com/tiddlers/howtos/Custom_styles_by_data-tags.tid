@@ -1,6 +1,6 @@
 created: 20170124132500000
-modified: 20170126174910043
-tags: data-tags-test [[How to apply custom styles]]
+modified: 20170126211729961
+tags: example-test [[How to apply custom styles]]
 title: Custom styles by data-tags
 type: text/vnd.tiddlywiki
 
@@ -10,25 +10,27 @@ type: text/vnd.tiddlywiki
 
 The ~TiddlyWiki core adds several `attributes` to the rendered content. With those attributes it's possible to apply custom styles to the tiddler content. 
 
-For example this tiddler is tagged: "How to apply custom styles" and "data-tags-test" so the attribute looks like this: 
+For example this tiddler is tagged: <<tag "How to apply custom styles">> and <<tag "example-test">> so the attribute looks like this: 
 
 ```
-data-tags="[[How to apply custom styles]] data-tags-test"
+data-tags="[[How to apply custom styles]] example-test"
 ```
+
+''Important:'' Tiddler tags are ''not'' sorted, so the order in the rendered output may be different!
 
 !! Examples
 
 The following CSS is defined in [[Custom data-styles]] and creates a pink border for exactly this tiddler.
 
 ```
-[data-tags*="data-tags-test"] {
+[data-tags*="example-test"] {
   border: 2px solid pink;
 }
 ```
 
 !!! Styling Stylesheets
 
-So to display tiddlers tagged: `data-tags-styles` in a decent way we can use the following code. 
+So to display tiddlers tagged: `data-tags-styles` in a decent way we can use the following code. (I could have used: `$:/tags/Stylesheet`, but that would affect all stylesheets in this wiki, which is not intended. amt ;)
 
 ''Important:'' Don't forget the `.tc.tiddler.body`, otherwise the whole tiddler, including the title will be changed! see: [[Custom data-styles]]
 
