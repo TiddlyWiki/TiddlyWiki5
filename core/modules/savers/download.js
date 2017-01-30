@@ -55,9 +55,18 @@ Information about this saver
 */
 DownloadSaver.prototype.info = {
 	name: "download",
-	priority: 100,
-	capabilities: ["save", "download"]
+	priority: 100
 };
+
+Object.defineProperty(DownloadSaver.prototype.info, "capabilities", {
+	get: function() {
+		var capabilities = ["save", "download"];
+		if(($tw.wiki.getTextReference("$:/config/DownloadSaver/AutoSave") || "").toLowerCase() === "yes") {
+			capabilities.push("autosave");
+		}
+		return capabilities;
+	}
+});
 
 /*
 Static method that returns true if this saver is capable of working

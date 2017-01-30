@@ -23,7 +23,7 @@ InvalidFieldName: Caratteri non consentiti nel campo nome "<$text text=<<fieldNa
 MissingTiddler/Hint: Frammento mancante "<$text text=<<currentTiddler>>/>" - clicca {{$:/core/images/edit-button}} per crearlo
 OfficialPluginLibrary: Libreria ufficiale plugin ~TiddlyWiki
 PluginReloadWarning: Salva {{$:/core/ui/Buttons/save-wiki}} e ricarica {{$:/core/ui/Buttons/refresh}} per consentire alle modifiche ai plugin di avere effetto
-RecentChanges/DateFormat: GG MM AAAA
+RecentChanges/DateFormat: DD MM YYYY
 SystemTiddler/Tooltip: Questo &egrave; un frammento di sistema
 TagManager/Colour/Heading: Colore
 TagManager/Count/Heading: Conteggio
