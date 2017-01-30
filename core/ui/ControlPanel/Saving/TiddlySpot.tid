@@ -1,0 +1,36 @@
+title: $:/core/ui/ControlPanel/Saving/TiddlySpot
+tags: $:/tags/ControlPanel/Saving
+caption: {{$:/language/ControlPanel/Saving/TiddlySpot/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Saving/TiddlySpot/
+
+\define backupURL()
+http://$(userName)$.tiddlyspot.com/backup/
+\end
+\define backupLink()
+<$reveal type="nomatch" state="$:/UploadName" text="">
+<$set name="userName" value={{$:/UploadName}}>
+<$reveal type="match" state="$:/UploadURL" text="">
+<<backupURL>>
+</$reveal>
+<$reveal type="nomatch" state="$:/UploadURL" text="">
+<$macrocall $name=resolvePath source={{$:/UploadBackupDir}} root={{$:/UploadURL}}>>
+</$reveal>
+</$set>
+</$reveal>
+\end
+
+<<lingo Description>>
+
+|<<lingo UserName>> |<$edit-text tiddler="$:/UploadName" default="" tag="input"/> |
+|<<lingo Password>> |<$password name="upload"/> |
+|<<lingo Backups>> |<<backupLink>> |
+
+''<<lingo Advanced/Heading>>''
+
+|<<lingo ServerURL>>  |<$edit-text tiddler="$:/UploadURL" default="" tag="input"/> |
+|<<lingo Filename>> |<$edit-text tiddler="$:/UploadFilename" default="index.html" tag="input"/> |
+|<<lingo UploadDir>> |<$edit-text tiddler="$:/UploadDir" default="." tag="input"/> |
+|<<lingo BackupDir>> |<$edit-text tiddler="$:/UploadBackupDir" default="." tag="input"/> |
+
+<<lingo TiddlySpot/Hint>>
