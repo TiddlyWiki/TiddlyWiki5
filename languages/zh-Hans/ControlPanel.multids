@@ -80,10 +80,17 @@ Parsing/Block/Caption: 区块解析规则
 Parsing/Inline/Caption: 内联解析规则
 Parsing/Pragma/Caption: 编译指示解析规则
 Saving/Caption: 保存
-Saving/Heading: 保存
+Saving/DownloadSaver/AutoSave/Description: 允许下载保存模块的自动保存
+Saving/DownloadSaver/AutoSave/Hint: 启用下载保存模块的自动保存
+Saving/DownloadSaver/Caption: 下载保存模块
+Saving/DownloadSaver/Hint: 这些设置适用于兼容 HTML5 的下载保存模块
+Saving/General/Caption: 通用
+Saving/General/Hint: 这些设置适用于所有已载入的保存模块
+Saving/Hint: 用于通过保存模块将整个 TiddlyWiki 保存为单个文件的设置
 Saving/TiddlySpot/Advanced/Heading: 高级设置
 Saving/TiddlySpot/BackupDir: 备份文件夹
 Saving/TiddlySpot/Backups: 备份
+Saving/TiddlySpot/Caption: ~TiddlySpot 保存模块
 Saving/TiddlySpot/Description: 这些设置只适用于保存到 http://tiddlyspot.com 或兼容的远程服务器时。
 Saving/TiddlySpot/Filename: 上传文件名
 Saving/TiddlySpot/Heading: ~TiddlySpot
@@ -95,7 +102,7 @@ Saving/TiddlySpot/UserName: 用户
 Settings/AutoSave/Caption: 自动保存
 Settings/AutoSave/Disabled/Description: 不要自动保存变更
 Settings/AutoSave/Enabled/Description: 自动保存变更
-Settings/AutoSave/Hint: 在编辑过程中自动保存变更
+Settings/AutoSave/Hint: 当使用支持的保存模块时，在编辑期间尝试自动保存变更
 Settings/CamelCase/Caption: 驼峰式维基链接
 Settings/CamelCase/Hint: 您可以全域禁用驼峰式短语自动链接。须保存后重新加载，方才生效。
 Settings/CamelCase/Description: 启用自动驼峰式链接
