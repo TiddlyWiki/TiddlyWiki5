@@ -80,10 +80,17 @@ Parsing/Block/Caption: 區塊解析規則
 Parsing/Inline/Caption: 行內解析規則
 Parsing/Pragma/Caption: 編譯指示解析規則
 Saving/Caption: 儲存
-Saving/Heading: 儲存
+Saving/DownloadSaver/AutoSave/Description: 允許下載儲存模組的自動儲存
+Saving/DownloadSaver/AutoSave/Hint: 啟用下載儲存模組的自動儲存
+Saving/DownloadSaver/Caption: 下載儲存模組
+Saving/DownloadSaver/Hint: 這些設定適用於相容 HTML5 的下載儲存模組
+Saving/General/Caption: 通用
+Saving/General/Hint: 這些設定適用於所有已載入的儲存模組
+Saving/Hint: 用於通過儲存模組將整個 TiddlyWiki 保存為單個檔案的設定
 Saving/TiddlySpot/Advanced/Heading: 進階設定
 Saving/TiddlySpot/BackupDir: 備份資料夾
 Saving/TiddlySpot/Backups: 備份
+Saving/TiddlySpot/Caption: ~TiddlySpot 儲存模組
 Saving/TiddlySpot/Description: 這些設定只適用於儲存到 http://tiddlyspot.com 或相容的遠端伺服器時。
 Saving/TiddlySpot/Filename: 上傳檔名
 Saving/TiddlySpot/Heading: ~TiddlySpot
@@ -95,7 +102,7 @@ Saving/TiddlySpot/UserName: 帳號
 Settings/AutoSave/Caption: 自動儲存
 Settings/AutoSave/Disabled/Description: 不要自動儲存變更
 Settings/AutoSave/Enabled/Description: 自動儲存變更
-Settings/AutoSave/Hint: 在編輯過程中自動儲存變更
+Settings/AutoSave/Hint: 當使用支援的儲存模組時，在編輯期間嘗試自動儲存變更
 Settings/CamelCase/Caption: 駝峰式維基鏈接
 Settings/CamelCase/Hint: 您可以全域停用駝峰式短語自動鏈接。須儲存後重新載入，方才生效。
 Settings/CamelCase/Description: 啟用自動駝峰式鏈接
