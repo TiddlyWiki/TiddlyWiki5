@@ -1,0 +1,27 @@
+created: 20170204200200000
+modified: 20170204200200000
+tags: [[Customize TiddlyWiki]] Learning 
+title: Modifying the Sidebar
+type: text/vnd.tiddlywiki
+
+The [[Sidebar|$:/core/ui/PageTemplate/sidebar]] consists of several sections that are really [[transcluded|Transclusion]] tiddlers. You can easily add, remove and reorder the sections.
+
+! Adding a Sidebar Section
+
+# Create a tiddler with the desired content
+# Give it the tag ''~$:/tags/SideBarSection''
+
+! Removing a Sidebar Section
+
+# Access the sections tiddler. If you don't know the title of the relevant tiddler, you can create a temporary tiddler with the text `<<tag $:/tags/SideBarSection>>`. From the resulting tag dropdown, select the section tiddler.
+# In edit mode for the section tiddler, remove the tag `$:/tags/SideBarSection` and save
+
+! Reordering Sidebar Sections
+
+# Open [[$:/tags/SideBarSection]]
+# Reorder the titles in `list` field and  save
+
+! See also
+
+*[[How to Add a New Tab to the Sidebar]]
+*[[Adding a Table of Contents to the Sidebar]]
