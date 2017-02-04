@@ -87,7 +87,7 @@ function saveTiddlerFile(tiddler) {
 	for(var field in tiddler.fields) {
 		fields[field] = tiddler.getFieldString(field);
 	}
-	var text = JSON.stringify(fields,null,$tw.config.preferences.jsonSpaces),
+	var text = JSON.stringify([fields],null,$tw.config.preferences.jsonSpaces),
 		link = document.createElement("a");
 	link.setAttribute("target","_blank");
 	link.setAttribute("rel","noopener noreferrer");
