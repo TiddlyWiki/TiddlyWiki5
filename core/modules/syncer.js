@@ -41,7 +41,6 @@ function Syncer(options) {
 	this.throttleInterval = options.throttleInterval || this.throttleInterval;
 	this.fallbackInterval = options.fallbackInterval || this.fallbackInterval;
 	this.pollTimerInterval = options.pollTimerInterval || this.pollTimerInterval;
-	this.logging = $tw.utils.hop(options,"logging") ? options.logging : true;
 	// Make a logger
 	this.logger = new $tw.utils.Logger("syncer" + ($tw.browser ? "-browser" : "") + ($tw.node ? "-server" : "")  + (this.syncadaptor.name ? ("-" + this.syncadaptor.name) : ""));
 	// Compile the dirty tiddler filter
