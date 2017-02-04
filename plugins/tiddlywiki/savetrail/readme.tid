@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/savetrail/readme
+
+This plugin causes TiddlyWiki to continuously save the contents of each tiddler that is changed as a JSON file. Configured correctly, the browser will download the files silently in the background, and they can be used as a backup in case of accidental data loss.
+
+''CAUTION'': Using this plugin will generate a //lot// of files in your downloads folder! Some points to watch:
+
+* This plugin is pretty much unusable unless your browser is set up to download files automatically, without prompting for the location
+* Automatic file downloading doesn't work in all browsers - in particular, Safari and Internet Explorer do not currently support the [[necessary HTML5 feature|http://caniuse.com/download]]
+* Be aware of the privacy implications of leaving a plaintext trail of all of your edits. You should only enable this plugin on computers that your trust and with content that is not sensitive
+* The plugin uses the tiddler title plus a timestamp to generate a filename for the downloaded file, but some browsers don't respect
+
+Other points to note:
+
+* By default, after a tiddler has been modified the plugin waits until at least one second has elapsed since the last modification before it attempts to save the tiddler. This reduces the number of times that rapidly changing tiddlers are saved
+* This plugin can be used with both the single file HTML configuration and under Node.js because it is independent of the usual saving and syncing processes
