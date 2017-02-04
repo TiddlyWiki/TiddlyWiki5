@@ -4,7 +4,7 @@ tags: Community
 title: Improving TiddlyWiki Documentation
 type: text/vnd.tiddlywiki
 
-Anyone can submit improvements to the TiddlyWiki documentation that appears on http://tiddlywiki.com.
+Anyone can submit improvements to the TiddlyWiki documentation that appears on http://tiddlywiki.com. For submitting improvements on //code tiddlers//, see note here below.
 
 # Read and observe the [[Documentation Style Guide]]
 # Create an account on https://github.com if you don't already have one
@@ -29,3 +29,7 @@ Mario Pietsch has created these short video tutorials:
 <iframe width="560" height="315" src="http://www.youtube.com/embed/6ElUruH92tc" frameborder="0" allowfullscreen></iframe>
 
 <iframe width="560" height="315" src="http://www.youtube.com/embed/axFCk9KsMFc" frameborder="0" allowfullscreen></iframe>
+
+!Submitting improvements for "code tiddlers"
+
+Pull requests for improved core code is also very welcome. This requires running [[Node.js|TiddlyWiki on Node.js]] to first be able to test things.
