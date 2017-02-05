@@ -9,7 +9,7 @@ The [[Sidebar|$:/core/ui/PageTemplate/sidebar]] consists of several sections tha
 ! Adding a Sidebar Section
 
 # Create a tiddler with the desired content
-# Give it the tag ''~$:/tags/SideBarSection''
+# Tag it with ''~$:/tags/SideBarSection''
 
 ! Removing a Sidebar Section
 
@@ -19,9 +19,9 @@ The [[Sidebar|$:/core/ui/PageTemplate/sidebar]] consists of several sections tha
 ! Reordering Sidebar Sections
 
 # Open [[$:/tags/SideBarSection]]
-# Reorder the titles in `list` field and  save
+# Reorder the titles in `list` field and save
 
 ! See also
 
-*[[How to Add a New Tab to the Sidebar]]
-*[[Adding a Table of Contents to the Sidebar]]
+*[[How to add a new tab to the sidebar]]
+*[[Adding a table of contents to the sidebar]]
