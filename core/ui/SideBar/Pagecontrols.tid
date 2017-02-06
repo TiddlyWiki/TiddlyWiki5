@@ -1,0 +1,17 @@
+created: 20170204162238422
+modified: 20170206014024996
+tags: $:/tags/SideBarSection
+title: $:/core/ui/SideBar/pagecontrols
+type: text/vnd.tiddlywiki
+
+\define config-title()
+$:/config/PageControlButtons/Visibility/$(listItem)$
+\end
+<div class="tc-page-controls">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">
+<$reveal type="nomatch" state=<<config-title>> text="hide">
+<$transclude tiddler=<<listItem>> mode="inline"/>
+</$reveal>
+</$list>
+</div>
+
