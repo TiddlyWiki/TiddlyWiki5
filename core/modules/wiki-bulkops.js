@@ -16,7 +16,6 @@ Bulk tiddler operations such as rename.
 Rename a tiddler, and relink any tags or lists that reference it.
 */
 function renameTiddler(fromTitle,toTitle,options) {
-	var self = this;
 	fromTitle = (fromTitle || "").trim();
 	toTitle = (toTitle || "").trim();
 	options = options || {};
@@ -26,7 +25,7 @@ function renameTiddler(fromTitle,toTitle,options) {
 		this.addTiddler(new $tw.Tiddler(tiddler,{title: toTitle},this.getModificationFields()));
 		this.deleteTiddler(fromTitle);
 		// Rename any tags or lists that reference it
-		relinkTiddler(fromTitle,toTitle,options)
+		this.relinkTiddler(fromTitle,toTitle,options)
 	}
 }
 
