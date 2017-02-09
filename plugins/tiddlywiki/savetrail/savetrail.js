@@ -19,18 +19,54 @@ exports.after = ["startup"];
 exports.synchronous = true;
 
 // Favicon tiddler
-var SAVE_FILTER_TIDDLER_TITLE = "$:/config/SaveTrailPlugin/save-filter",
-	ENABLE_TIDDLER_TITLE = "$:/config/SaveTrailPlugin/enable",
-	ENABLE_DRAFTS_TIDDLER_TITLE = "$:/config/SaveTrailPlugin/enable-drafts";
+var ENABLE_TIDDLER_TITLE = "$:/config/SaveTrailPlugin/enable",
+	ENABLE_DRAFTS_TIDDLER_TITLE = "$:/config/SaveTrailPlugin/enable-drafts",
+	SYNC_DRAFTS_FILTER_TIDDLER_TITLE = "$:/config/SaveTrailPlugin/sync-drafts-filter";
 
 exports.startup = function() {
 	$tw.savetrail = $tw.savetrail || {};
+	// Create a syncer to handle autosaving
 	$tw.savetrail.syncadaptor = new SaveTrailSyncAdaptor();
 	$tw.savetrail.syncer = new $tw.Syncer({
 		wiki: $tw.wiki,
 		syncadaptor: $tw.savetrail.syncadaptor,
-		titleSyncFilter: SAVE_FILTER_TIDDLER_TITLE,
+		titleSyncFilter: SYNC_DRAFTS_FILTER_TIDDLER_TITLE,
 		logging: false
+	});
+	// Add hooks for trapping user actions
+	$tw.hooks.addHook("th-saving-tiddler",function(tiddler) {
+		var oldTiddler = $tw.wiki.getTiddler(tiddler.fields.title);
+		if(oldTiddler) {
+			saveTiddlerFile(oldTiddler,{reason: "overwritten"});			
+		}
+		saveTiddlerFile(tiddler,{reason: "saved"});
+		return tiddler;
+	});
+	$tw.hooks.addHook("th-renaming-tiddler",function(newTiddler,oldTiddler) {
+		if(oldTiddler) {
+			saveTiddlerFile(oldTiddler,{reason: "deleted"});			
+		}
+		saveTiddlerFile(newTiddler,{reason: "renamed"});
+		return newTiddler;
+	});
+	$tw.hooks.addHook("th-relinking-tiddler",function(newTiddler,oldTiddler) {
+		if(oldTiddler) {
+			saveTiddlerFile(oldTiddler,{reason: "overwritten"});			
+		}
+		saveTiddlerFile(newTiddler,{reason: "relinked"});
+		return newTiddler;
+	});
+	$tw.hooks.addHook("th-importing-tiddler",function(tiddler) {
+		var oldTiddler = $tw.wiki.getTiddler(tiddler.fields.title);
+		if(oldTiddler) {
+			saveTiddlerFile(oldTiddler,{reason: "overwritten"});			
+		}
+		saveTiddlerFile(tiddler,{reason: "imported"});
+		return tiddler;
+	});
+	$tw.hooks.addHook("th-deleting-tiddler",function(tiddler) {
+		saveTiddlerFile(tiddler,{reason: "deleted"});
+		return tiddler;
 	});
 };
 
@@ -53,10 +89,10 @@ SaveTrailSyncAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
 SaveTrailSyncAdaptor.prototype.saveTiddler = function(tiddler,callback) {
-	if($tw.wiki.getTiddlerText(ENABLE_TIDDLER_TITLE).toLowerCase() === "yes") {
+	if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
 		var isDraft = $tw.utils.hop(tiddler.fields,"draft.of");
-		if(!isDraft || $tw.wiki.getTiddlerText(ENABLE_DRAFTS_TIDDLER_TITLE).toLowerCase() === "yes") {
-			saveTiddlerFile(tiddler);
+		if(!isDraft || $tw.wiki.checkTiddlerText(ENABLE_DRAFTS_TIDDLER_TITLE,"yes")) {
+			saveTiddlerFile(tiddler,{reason: "modified"});
 		}
 	}
 	callback(null);
@@ -64,8 +100,6 @@ SaveTrailSyncAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 
 /*
 Load a tiddler and invoke the callback with (err,tiddlerFields)
-
-We don't need to implement loading for the file system adaptor, because all the tiddler files will have been loaded during the boot process.
 */
 SaveTrailSyncAdaptor.prototype.loadTiddler = function(title,callback) {
 	callback(null,null);
@@ -78,11 +112,13 @@ SaveTrailSyncAdaptor.prototype.deleteTiddler = function(title,callback,options) 
 	callback(null);
 };
 
-function saveTiddlerFile(tiddler) {
-	var illegalFilenameCharacters = /<|>|\:|\"|\/|\\|\||\?|\*|\^|\s/g,
+function saveTiddlerFile(tiddler,options) {
+	options = options || {};
+	var reason = options.reason || "changed",
+		illegalFilenameCharacters = /<|>|\:|\"|\/|\\|\||\?|\*|\^|\s/g,
 		fixedTitle = tiddler.fields.title.replace(illegalFilenameCharacters,"_"),
 		formattedDate = $tw.utils.stringifyDate(new Date()),
-		filename =  fixedTitle + "." + formattedDate + ".json",
+		filename =  fixedTitle + "." + formattedDate + "." + reason + ".json",
 		fields = new Object();
 	for(var field in tiddler.fields) {
 		fields[field] = tiddler.getFieldString(field);

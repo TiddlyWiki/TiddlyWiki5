@@ -1,3 +1,0 @@
-title: $:/config/SaveTrailPlugin/save-filter
-
-[is[tiddler]] -[[$:/HistoryList]] -[[$:/StoryList]] -[prefix[$:/config/]] -[prefix[$:/temp/]] -[prefix[$:/state/]] -[prefix[$:/status/]]
