@@ -1,18 +1,19 @@
-created: 20150908150314994
-modified: 20170209145506427
+created: 20170209145207186
+modified: 20170209145633522
 tags: HookMechanism
-title: Hook: th-saving-tiddler
+title: Hook: th-renaming-tiddler
 type: text/vnd.tiddlywiki
 
-This hook allows plugins to inspect or modify tiddlers before they are saved via the ''confirm'' toolbar button; the hook is not invoked for tiddlers that are saved through other means, such as state tiddlers created by the ActionSetFieldWidget.
+This hook allows plugins to inspect tiddlers before they are modified by the `tm-rename-tiddler` message.
 
 Hook function parameters:
 
-* ''tiddler'': tiddler object about to be saved
+* ''newTiddler'': tiddler object incorporating the rename
+* ''oldTiddler'': optional existing tiddler object that will be overwritten
 
 Return value:
 
-* tiddler object to be saved
+* newTiddler: tiddler object to be used for the renaming operation.
 
 The original tiddler object can be returned unmodified by the hook. If the hook needs to modify the tiddler then it should return a new tiddler object, for example:
 

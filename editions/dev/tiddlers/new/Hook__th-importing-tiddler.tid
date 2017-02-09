@@ -1,18 +1,18 @@
-created: 20150908150314994
-modified: 20170209145506427
+created: 20170209130829546
+modified: 20170209145518777
 tags: HookMechanism
-title: Hook: th-saving-tiddler
+title: Hook: th-importing-tiddler
 type: text/vnd.tiddlywiki
 
-This hook allows plugins to inspect or modify tiddlers before they are saved via the ''confirm'' toolbar button; the hook is not invoked for tiddlers that are saved through other means, such as state tiddlers created by the ActionSetFieldWidget.
+This hook allows plugins to inspect or modify tiddlers before they are imported via the import mechanism.
 
 Hook function parameters:
 
-* ''tiddler'': tiddler object about to be saved
+* ''tiddler'': tiddler object about to be imported
 
 Return value:
 
-* tiddler object to be saved
+* tiddler object to be imported
 
 The original tiddler object can be returned unmodified by the hook. If the hook needs to modify the tiddler then it should return a new tiddler object, for example:
 
