@@ -1947,6 +1947,7 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 .tc-plugin-info-chunk h2 {
 	font-size: 0.8em;
 	margin: 2px 0 2px 0;
+	color: green;
 }
 
 .tc-plugin-info-chunk div {
