@@ -1,11 +1,12 @@
 title: $:/plugins/tiddlywiki/savetrail/readme
 
-This plugin causes TiddlyWiki to continuously download (as a JSON file) the contents of each tiddler that is changed through any means:
+This plugin causes TiddlyWiki to continuously download (as a JSON file) the contents of any tiddler that is manually changed by any of several means:
 
 * Confirming an edit
 * Deleting tiddlers
 * Imports
 * Renames/relinks
+* Optionally, typing in draft tiddlers can trigger a download
 
 Where appropriate, separate 'before' and 'after' files are downloaded. Configured correctly, the browser will download the files silently in the background, and they can be used as a backup in case of accidental data loss.
 
@@ -18,5 +19,5 @@ Where appropriate, separate 'before' and 'after' files are downloaded. Configure
 
 Other points to note:
 
-* By default, after a tiddler has been modified the plugin waits until at least one second has elapsed since the last modification before it attempts to save the tiddler. This reduces the number of times that rapidly changing tiddlers are saved
+* By default, after a draft tiddler has been modified the plugin waits until at least one second has elapsed since the last typing before it attempts to download the tiddler. This reduces the number of times that rapidly changing tiddlers are saved
 * This plugin can be used with both the single file HTML configuration and under Node.js because it is independent of the usual saving and syncing processes
