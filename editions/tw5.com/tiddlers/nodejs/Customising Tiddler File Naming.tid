@@ -14,7 +14,7 @@ In both cases, the characters `<>:"\|?*^ ` are replaced by `_` in order to guara
 
 ```
 [is[system]removeprefix[$:/]addprefix[_system/]]
-[tag[task][addprefix[mytasks/]]
+[tag[task]addprefix[mytasks/]]
 [!has[draft.of]]
 ```
 
