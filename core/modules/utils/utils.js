@@ -241,6 +241,13 @@ exports.formatDateString = function(date,template) {
 	var result = "",
 		t = template,
 		matches = [
+			[/^RANDOM\((\d*)\)/, function(match) {
+				var r = Math.random().toString(36).substr(2);
+				if(match[1]) {
+					r = r.substr(0,Math.min(16,match[1]));
+				}
+				return r;
+			}],
 			[/^0hh12/, function() {
 				return $tw.utils.pad($tw.utils.getHours12(date));
 			}],
@@ -327,7 +334,7 @@ exports.formatDateString = function(date,template) {
 		$tw.utils.each(matches, function(m) {
 			var match = m[0].exec(t);
 			if(match) {
-				matchString = m[1].call();
+				matchString = m[1].call(this,match);
 				t = t.substr(match[0].length);
 				return false;
 			}
