@@ -119,7 +119,6 @@ FileSystemAdaptor.prototype.generateTiddlerBaseFilepath = function(title) {
 	if(pathNameFilters) {
 		var source = this.wiki.makeTiddlerIterator([title]);
 		baseFilename = this.findFirstFilter(pathNameFilters.split("\n"),source);
-console.log("baseFilename",baseFilename)
 		if(baseFilename) {
 			// Interpret "/" and "\" as path separator
 			baseFilename = baseFilename.replace(/\/|\\/g,path.sep);
