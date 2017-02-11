@@ -1,7 +1,7 @@
 created: 20161209172820513
-modified: 20170101212038930
+modified: 20170204191306382
 tags: [[Customise TiddlyWiki]] Learning
-title: How to turn off Camel Case Linking
+title: How to turn off camel case linking
 type: text/vnd.tiddlywiki
 
 CamelCase is used in most Wikis, but it can interfere with text presentation in some situations.

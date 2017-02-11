@@ -13,6 +13,18 @@ The syncer tracks changes to the store. If a syncadaptor is used then individual
 "use strict";
 
 /*
+Defaults
+*/
+Syncer.prototype.titleIsLoggedIn = "$:/status/IsLoggedIn";
+Syncer.prototype.titleUserName = "$:/status/UserName";
+Syncer.prototype.titleSyncFilter = "$:/config/SyncFilter";
+Syncer.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
+Syncer.prototype.taskTimerInterval = 1 * 1000; // Interval for sync timer
+Syncer.prototype.throttleInterval = 1 * 1000; // Defer saving tiddlers if they've changed in the last 1s...
+Syncer.prototype.fallbackInterval = 10 * 1000; // Unless the task is older than 10s
+Syncer.prototype.pollTimerInterval = 60 * 1000; // Interval for polling for changes from the adaptor
+
+/*
 Instantiate the syncer with the following options:
 syncadaptor: reference to syncadaptor to be used
 wiki: wiki to be synced
@@ -21,8 +33,16 @@ function Syncer(options) {
 	var self = this;
 	this.wiki = options.wiki;
 	this.syncadaptor = options.syncadaptor;
+	this.titleIsLoggedIn = options.titleIsLoggedIn || this.titleIsLoggedIn;
+	this.titleUserName = options.titleUserName || this.titleUserName;
+	this.titleSyncFilter = options.titleSyncFilter || this.titleSyncFilter;
+	this.titleSavedNotification = options.titleSavedNotification || this.titleSavedNotification;
+	this.taskTimerInterval = options.taskTimerInterval || this.taskTimerInterval;
+	this.throttleInterval = options.throttleInterval || this.throttleInterval;
+	this.fallbackInterval = options.fallbackInterval || this.fallbackInterval;
+	this.pollTimerInterval = options.pollTimerInterval || this.pollTimerInterval;
 	// Make a logger
-	this.logger = new $tw.utils.Logger("syncer" + ($tw.browser ? "-browser" : "") + ($tw.node ? "-server" : ""));
+	this.logger = new $tw.utils.Logger("syncer" + ($tw.browser ? "-browser" : "") + ($tw.node ? "-server" : "")  + (this.syncadaptor.name ? ("-" + this.syncadaptor.name) : ""));
 	// Compile the dirty tiddler filter
 	this.filterFn = this.wiki.compileFilter(this.wiki.getTiddlerText(this.titleSyncFilter));
 	// Record information for known tiddlers
@@ -68,19 +88,6 @@ function Syncer(options) {
 		self.syncFromServer();
 	});
 }
-
-/*
-Constants
-*/
-Syncer.prototype.titleIsLoggedIn = "$:/status/IsLoggedIn";
-Syncer.prototype.titleUserName = "$:/status/UserName";
-Syncer.prototype.titleSyncFilter = "$:/config/SyncFilter";
-Syncer.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
-Syncer.prototype.taskTimerInterval = 1 * 1000; // Interval for sync timer
-Syncer.prototype.throttleInterval = 1 * 1000; // Defer saving tiddlers if they've changed in the last 1s...
-Syncer.prototype.fallbackInterval = 10 * 1000; // Unless the task is older than 10s
-Syncer.prototype.pollTimerInterval = 60 * 1000; // Interval for polling for changes from the adaptor
-
 
 /*
 Read (or re-read) the latest tiddler info from the store

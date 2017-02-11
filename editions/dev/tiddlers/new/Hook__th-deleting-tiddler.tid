@@ -1,0 +1,17 @@
+created: 20170209115611070
+modified: 20170209145906743
+tags: HookMechanism
+title: Hook: th-deleting-tiddler
+type: text/vnd.tiddlywiki
+
+This hook allows plugins to inspect tiddlers before they are deleted via the ''delete'' toolbar button. When the delete button is used from the edit toolbar there are actually two invocations of the `th-deleting-tiddler` hook function: one for the original tiddler and one for the draft.
+
+Note that this hook is not invoked for tiddlers deleted by other means such as the ActionDeleteTiddlerWidget.
+
+Hook function parameters:
+
+* ''tiddler'': tiddler object about to be deleted
+
+Return value:
+
+* unmodified tiddler to be deleted

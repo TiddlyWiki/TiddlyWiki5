@@ -245,6 +245,7 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 		tiddler = this.wiki.getTiddler(title),
 		storyList = this.getStoryList(),
 		originalTitle = tiddler ? tiddler.fields["draft.of"] : "",
+		originalTiddler = originalTitle ? this.wiki.getTiddler(originalTitle) : undefined,
 		confirmationTitle;
 	if(!tiddler) {
 		return false;
@@ -268,10 +269,14 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	}
 	// Delete the original tiddler
 	if(originalTitle) {
+		if(originalTiddler) {
+			$tw.hooks.invokeHook("th-deleting-tiddler",originalTiddler);
+		}
 		this.wiki.deleteTiddler(originalTitle);
 		this.removeTitleFromStory(storyList,originalTitle);
 	}
-	// Delete this tiddler
+	// Invoke the hook function and delete this tiddler
+	$tw.hooks.invokeHook("th-deleting-tiddler",tiddler);
 	this.wiki.deleteTiddler(title);
 	// Remove the closed tiddler from the story
 	this.removeTitleFromStory(storyList,title);
@@ -568,7 +573,9 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	$tw.utils.each(importData.tiddlers,function(tiddlerFields) {
 		var title = tiddlerFields.title;
 		if(title && importTiddler && importTiddler.fields["selection-" + title] !== "unchecked") {
-			self.wiki.addTiddler(new $tw.Tiddler(tiddlerFields));
+			var tiddler = new $tw.Tiddler(tiddlerFields);
+			tiddler = $tw.hooks.invokeHook("th-importing-tiddler",tiddler);
+			self.wiki.addTiddler(tiddler);
 			importReport.push("# [[" + tiddlerFields.title + "]]");
 		}
 	});
