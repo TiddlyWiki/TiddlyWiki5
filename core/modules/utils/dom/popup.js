@@ -92,7 +92,7 @@ Popup.prototype.popupInfo = function(domNode) {
 	// Then count the number of ancestor popups
 	node = domNode;
 	while(node) {
-		if($tw.utils.hasClass(node,"tc-popup")) {
+		if($tw.utils.hasClass(node,"tc-popup")||$tw.utils.hasClass(node,"tc-popup-keep")) {
 			popupCount++;
 		}
 		node = node.parentNode;
