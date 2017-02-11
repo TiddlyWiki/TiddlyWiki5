@@ -24,6 +24,8 @@ function FileSystemAdaptor(options) {
 	$tw.utils.createDirectory($tw.boot.wikiTiddlersPath);
 }
 
+FileSystemAdaptor.prototype.name = "filesystem";
+
 FileSystemAdaptor.prototype.isReady = function() {
 	// The file system adaptor is always ready
 	return true;

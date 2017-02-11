@@ -80,10 +80,17 @@ Plugins/Reinstall/Caption: réinstalle
 Plugins/Themes/Caption: Thèmes
 Plugins/Themes/Hint: Plugins de thème
 Saving/Caption: Sauvegarde
-Saving/Heading: Sauvegarde
+Saving/DownloadSaver/AutoSave/Description: Permet l'enregistrement automatique pour l'enregistreur de téléchargement
+Saving/DownloadSaver/AutoSave/Hint: Active l'auto-enregistrement pour l'enregistreur de téléchargement
+Saving/DownloadSaver/Caption: Enregistreur de téléchargement
+Saving/DownloadSaver/Hint: Ces paramètres s'appliquent à l'enregistreur de téléchargement compatible HTML5
+Saving/General/Caption: Général
+Saving/General/Hint: Ces paramètres s'appliquent à tous les enregistreurs chargés
+Saving/Hint: Paramètres pour enregistrer le ~TiddlyWiki complet dans un seul fichier, via un module enregistreur
 Saving/TiddlySpot/Advanced/Heading: Paramètres avancés
 Saving/TiddlySpot/BackupDir: Dossier des //sauvegardes//
 Saving/TiddlySpot/Backups: Sauvegardes
+Saving/TiddlySpot/Caption: Enregistreur ~TiddlySpot
 Saving/TiddlySpot/Description: Ces paramètres ne servent que lors de la sauvegarde vers http://tiddlyspot.com ou vers un serveur distant compatible
 Saving/TiddlySpot/Filename: Nom du fichier enregistré
 Saving/TiddlySpot/Heading: ~TiddlySpot
@@ -95,7 +102,7 @@ Saving/TiddlySpot/UserName: Nom utilisé pour ce Wiki
 Settings/AutoSave/Caption: Sauvegarde automatique
 Settings/AutoSave/Disabled/Description: Pas de sauvegarde automatique des modifications
 Settings/AutoSave/Enabled/Description: Sauvegarde automatique des modifications
-Settings/AutoSave/Hint: Sauvegarde automatique des modifications pendant l'édition
+Settings/AutoSave/Hint: Tentative de sauvegarde automatique des modifications pendant l'édition quand un enregistreur compatible est utilisé
 Settings/CamelCase/Caption: Liens Wiki //Camel Case//
 Settings/CamelCase/Hint: Vous pouvez désactiver globalement les liens créés à partir des expressions de type ~CamelCase. Pour que ce paramètre prenne effet, il est nécessaire de recharger le wiki
 Settings/CamelCase/Description: Active les liens automatiques sur les expressions de la forme ~CamelCase

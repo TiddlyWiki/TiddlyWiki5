@@ -12,7 +12,8 @@
 		"tiddlywiki/highlight",
 		"tiddlywiki/markdown",
 		"tiddlywiki/qrcode",
-		"tiddlywiki/bibtex"
+		"tiddlywiki/bibtex",
+		"tiddlywiki/savetrail"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
