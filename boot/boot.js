@@ -1475,7 +1475,7 @@ $tw.loadTiddlersFromFile = function(filepath,fields) {
 		metadata;
 	if(ext !== ".json" && tiddlers.length === 1) {
 		metadata = $tw.loadMetadataForFile(filepath);
-		tiddlers = [$tw.utils.extend({},metadata,tiddlers[0])];
+		tiddlers = [$tw.utils.extend({},tiddlers[0],metadata)];
 	}
 	return {filepath: filepath, type: type, tiddlers: tiddlers, hasMetaFile: !!metadata};
 };
