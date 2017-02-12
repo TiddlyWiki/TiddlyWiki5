@@ -61,7 +61,7 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 		var contentTypeInfo = $tw.config.contentTypeInfo[tiddlerType] || {};
 		// Get the file type by looking up the extension
 		var extension = contentTypeInfo.extension || ".tid";
-		fileInfo.type = $tw.config.fileExtensionInfo[extension].type;
+		fileInfo.type = ($tw.config.fileExtensionInfo[extension] || {type: "application/x-tiddler"}).type;
 		// Use a .meta file unless we're saving a .tid file.
 		// (We would need more complex logic if we supported other template rendered tiddlers besides .tid)
 		fileInfo.hasMetaFile = (fileInfo.type !== "application/x-tiddler");
