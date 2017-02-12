@@ -67,7 +67,7 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 		fileInfo.hasMetaFile = (fileInfo.type !== "application/x-tiddler");
 		// Generate the base filepath and ensure the directories exist
 		var baseFilepath = path.resolve($tw.boot.wikiTiddlersPath,this.generateTiddlerBaseFilepath(title));
-		$tw.utils.createDirectory(baseFilepath);
+		$tw.utils.createFileDirectories(baseFilepath);
 		// Start by getting a list of the existing files in the directory
 		fs.readdir(path.dirname(baseFilepath),function(err,files) {
 			if(err) {
