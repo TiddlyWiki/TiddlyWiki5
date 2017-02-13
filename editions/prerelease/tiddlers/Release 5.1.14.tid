@@ -1,25 +1,30 @@
 caption: 5.1.14
-created: 20161229110400515
-modified: 20161229110400515
+created: 20170210073604992
+modified: 20170210073604992
 tags: ReleaseNotes
 title: Release 5.1.14
 type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.13...v5.1.14]]//
 
-!! New Plugins
+!! New and Improved Plugins
 
+* Added SaveTrailPlugin that continuously downloads edited tiddlers in the background, providing a  trail of backups
 * Added XLSX Utilities plugin for importing Excel-compatible spreadsheets. See the [[XLSX Utilities Edition]] for details
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/22c1b04ee79a5ccc25cbc33cc91bf5daac1df831]] [[QR code generator|$:/plugins/tiddlywiki/qrcode]] plugin
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/7f11c151f06cd039d1887a6940075237ccb4b7a9]] [[BibTeX importer plugin|$:/plugins/tiddlywiki/bibtex]]
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/c16f96626e2ff9d849563eeba7d8ef5cf8e4ed4b]] Google Analytics plugin to the latest version
 
 !! New "Heavier" Theme
 
-A new theme called "Heavier" thickens TiddlyWiki's default lightweight fonts:
+A new theme called "Heavier" thickens TiddlyWiki's default lightweight fonts. A variant "Tight-Heavier" combines the "Heavier" theme with the existing "Tight" theme:
 
 <$button>
 <$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/heavier"/>
 Try out the "Heavier" theme
+</$button> <$button>
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/tight-heavier"/>
+Try out the "Tight-Heavier" theme
 </$button> <$button>
 <$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/snowwhite"/>
 Revert
@@ -63,6 +68,7 @@ The tiddler manager will be extended in the future to increase flexibility and t
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b3273bcbda6bcb9f3a0670b79ea598c3674c5012]] "sticky" mode for tiddler info panel. See "Settings" in [[control panel|$:/ControlPanel]]
 * [[Increased|https://github.com/Jermolene/TiddlyWiki5/commit/5bf238fc8698a6b750dd0f577ab745a4db714a17]] boldness of tag pill text
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ee66d1a1afb939c0cba8c2257b8300921831c716]] documentation marker to indicate the version in which a new feature was released
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b1a5afbf158fab9e224978c81a10aca15d30d91a]] an entry to the advanced search filter drop down for exporting the current story (minus advanced search)
 
 !! Hackability Improvements
 
@@ -90,6 +96,7 @@ The tiddler manager will be extended in the future to increase flexibility and t
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3bceb98119c6f1fbbed76c977c601a930b0bcac9]] support for the ''actions'' attribute to the CheckboxWidget
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/2104]] CheckboxWidget to support data tiddlers via the `index` attribute
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b1a5afbf158fab9e224978c81a10aca15d30d91a]] new entry to the advanced search filtered export menu for exporting the current story river
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1b339e17bc0c67ff7eb3e8f7f299588ecf8848ee]] `tag` attribute to the KeyboardWidget
 
 !! Bug Fixes
 
@@ -117,16 +124,19 @@ The tiddler manager will be extended in the future to increase flexibility and t
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/1b41b4468495bbe66f99345ee94a67346176deb7]] support for bulk loading tiddler files via [[tiddlywiki.files Files]] within TiddlyWikiFolders
 * [[Refactored|https://github.com/Jermolene/TiddlyWiki5/pull/2627]] server mechanism to make it simpler to integrate TiddlyWiki into [[ExpressJS|http://expressjs.com/]] apps
 * [[Refactored|https://github.com/Jermolene/TiddlyWiki5/pull/2626]] the TiddlyFox saver module to make it easier to use it with other saving mechanisms
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/2397f0aa6f7af305807b61ccb1d435c2e6a789ab]] several new UI hooks, and [[improved|https://github.com/Jermolene/TiddlyWiki5/commit/6b2ab9072111cb87508f83a385b0885fb196cbcf]] the hook mechanism
 
 ! Contributors
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
+* [[@beniquezsd|https://github.com/beniquezsd]]
 * [[@BramChen|https://github.com/BramChen]]
 * [[@danielo515|https://github.com/danielo515]]
 * [[@DoronTzur|https://github.com/DoronTzur]]
 * [[@FND|https://github.com/FND]]
 * [[@hchaase|https://github.com/hchaase]]
+* [[@ibnishak|https://github.com/ibnishak]]
 * [[@jest|https://github.com/jest]]
 * [[@nameanyone|https://github.com/nameanyone]]
 * [[@Marxsal|https://github.com/Marxsal]]
@@ -137,5 +147,7 @@ The tiddler manager will be extended in the future to increase flexibility and t
 * [[@stevesunypoly|https://github.com/stevesunypoly]]
 * [[@sukima|https://github.com/sukima]]
 * [[@tobibeer|https://github.com/tobibeer]]
+* [[@twMat|https://github.com/twMat]]
 * [[@xcazin|https://github.com/xcazin]]
 * [[@zakrec|https://github.com/zakrec]]
+ 

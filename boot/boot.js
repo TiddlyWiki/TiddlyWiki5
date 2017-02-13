@@ -1475,7 +1475,7 @@ $tw.loadTiddlersFromFile = function(filepath,fields) {
 		metadata;
 	if(ext !== ".json" && tiddlers.length === 1) {
 		metadata = $tw.loadMetadataForFile(filepath);
-		tiddlers = [$tw.utils.extend({},metadata,tiddlers[0])];
+		tiddlers = [$tw.utils.extend({},tiddlers[0],metadata)];
 	}
 	return {filepath: filepath, type: type, tiddlers: tiddlers, hasMetaFile: !!metadata};
 };
@@ -1949,6 +1949,7 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("video/mp4","base64",".mp4");
 	$tw.utils.registerFileType("audio/mp3","base64",".mp3");
 	$tw.utils.registerFileType("audio/mp4","base64",[".mp4",".m4a"]);
+	$tw.utils.registerFileType("text/markdown","utf8",[".md",".markdown"],{deserializerType:"text/x-markdown"});
 	$tw.utils.registerFileType("text/x-markdown","utf8",[".md",".markdown"]);
 	$tw.utils.registerFileType("application/enex+xml","utf8",".enex");
 	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","base64",".xlsx");
@@ -2140,13 +2141,14 @@ $tw.hooks.addHook = function(hookName,definition) {
 /*
 Invoke the hook by key
 */
-$tw.hooks.invokeHook = function(hookName, value) {
+$tw.hooks.invokeHook = function(hookName /*, value,... */) {
+	var args = Array.prototype.slice.call(arguments,1);
 	if($tw.utils.hop($tw.hooks.names,hookName)) {
 		for (var i = 0; i < $tw.hooks.names[hookName].length; i++) {
-			value = $tw.hooks.names[hookName][i](value);
+			args[0] = $tw.hooks.names[hookName][i].apply(null,args);
 		}
 	}
-	return value;
+	return args[0];
 };
 
 /////////////////////////// Main boot function to decrypt tiddlers and then startup
