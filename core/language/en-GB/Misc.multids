@@ -22,6 +22,7 @@ Encryption/RepeatPassword: Repeat password
 Encryption/PasswordNoMatch: Passwords do not match
 Encryption/SetPassword: Set password
 Error/Caption: Error
+Error/EditConflict: File changed on server
 Error/Filter: Filter error
 Error/FilterSyntax: Syntax error in filter expression
 Error/IsFilterOperator: Filter Error: Unknown operand for the 'is' filter operator
