@@ -29,7 +29,9 @@ var PutSaver = function(wiki) {
 		type: "OPTIONS",
 		callback: function(err, data, xhr) {
 			// Check DAV header http://www.webdav.org/specs/rfc2518.html#rfc.section.9.1
-			self.serverAcceptsPuts = xhr.status === 200 && !!xhr.getResponseHeader("dav");
+			if(!err) {
+				self.serverAcceptsPuts = xhr.status === 200 && !!xhr.getResponseHeader("dav");
+			}
 		}
 	});
 	// Retrieve ETag if available
@@ -37,7 +39,9 @@ var PutSaver = function(wiki) {
 		url: uri,
 		type: "HEAD",
 		callback: function(err, data, xhr) {
-			self.etag = xhr.getResponseHeader("ETag");
+			if(!err) {
+				self.etag = xhr.getResponseHeader("ETag");
+			}
 		}
 	});
 };
@@ -50,12 +54,12 @@ PutSaver.prototype.uri = function() {
 // Prompt: Do you want to save over this? Y/N
 // Merging would be ideal, and may be possible using future generic merge flow
 PutSaver.prototype.save = function(text, method, callback) {
-	if (!this.serverAcceptsPuts) {
+	if(!this.serverAcceptsPuts) {
 		return false;
 	}
 	var self = this;
 	var headers = { "Content-Type": "text/html;charset=UTF-8" };
-	if (this.etag) {
+	if(this.etag) {
 		headers["If-Match"] = this.etag;
 	}
 	$tw.utils.httpRequest({
@@ -64,15 +68,15 @@ PutSaver.prototype.save = function(text, method, callback) {
 		headers: headers,
 		data: text,
 		callback: function(err, data, xhr) {
-			if (xhr.status === 200 || xhr.status === 201) {
+			if(err) {
+				callback(err);
+			} if(xhr.status === 200 || xhr.status === 201) {
 				self.etag = xhr.getResponseHeader("ETag");
 				callback(null); // success
-			}
-			else if (xhr.status === 412) { // edit conflict
+			} else if(xhr.status === 412) { // edit conflict
 				var message = $tw.language.getString("Error/EditConflict");
 				callback(message);
-			}
-			else {
+			} else {
 				callback(xhr.responseText); // fail
 			}
 		}
