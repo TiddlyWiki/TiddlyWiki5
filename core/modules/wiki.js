@@ -1107,6 +1107,22 @@ exports.getTiddlerText = function(title,defaultText) {
 };
 
 /*
+Check whether the text of a tiddler matches a given value. By default, the comparison is case insensitive, and any spaces at either end of the tiddler text is trimmed
+*/
+exports.checkTiddlerText = function(title,targetText,options) {
+	options = options || {};
+	var text = this.getTiddlerText(title,"");
+	if(!options.noTrim) {
+		text = text.trim();
+	}
+	if(!options.caseSensitive) {
+		text = text.toLowerCase();
+		targetText = targetText.toLowerCase();
+	}
+	return text === targetText;
+}
+
+/*
 Read an array of browser File objects, invoking callback(tiddlerFieldsArray) once they're all read
 */
 exports.readFiles = function(files,callback) {

@@ -19,8 +19,8 @@ exports.synchronous = true;
 
 exports.startup = function() {
 	// getting parameters
-	var GA_ACCOUNT = $tw.wiki.getTiddlerText("$:/GoogleAnalyticsAccount").replace(/\n/g,""),
-		GA_DOMAIN = $tw.wiki.getTiddlerText("$:/GoogleAnalyticsDomain").replace(/\n/g,"");
+	var GA_ACCOUNT = $tw.wiki.getTiddlerText("$:/GoogleAnalyticsAccount","").replace(/\n/g,""),
+		GA_DOMAIN = $tw.wiki.getTiddlerText("$:/GoogleAnalyticsDomain","").replace(/\n/g,"");
 	if (GA_DOMAIN == "" || GA_DOMAIN == undefined) GA_DOMAIN = "auto";
 
 	// using ga "isogram" function

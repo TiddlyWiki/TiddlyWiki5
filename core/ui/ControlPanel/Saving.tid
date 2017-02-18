@@ -2,35 +2,8 @@ title: $:/core/ui/ControlPanel/Saving
 tags: $:/tags/ControlPanel
 caption: {{$:/language/ControlPanel/Saving/Caption}}
 
-\define lingo-base() $:/language/ControlPanel/Saving/
-\define backupURL()
-http://$(userName)$.tiddlyspot.com/backup/
-\end
-\define backupLink()
-<$reveal type="nomatch" state="$:/UploadName" text="">
-<$set name="userName" value={{$:/UploadName}}>
-<$reveal type="match" state="$:/UploadURL" text="">
-<<backupURL>>
-</$reveal>
-<$reveal type="nomatch" state="$:/UploadURL" text="">
-<$macrocall $name=resolvePath source={{$:/UploadBackupDir}} root={{$:/UploadURL}}>>
-</$reveal>
-</$set>
-</$reveal>
-\end
-! <<lingo TiddlySpot/Heading>>
+{{$:/language/ControlPanel/Saving/Hint}}
 
-<<lingo TiddlySpot/Description>>
-
-|<<lingo TiddlySpot/UserName>> |<$edit-text tiddler="$:/UploadName" default="" tag="input"/> |
-|<<lingo TiddlySpot/Password>> |<$password name="upload"/> |
-|<<lingo TiddlySpot/Backups>> |<<backupLink>> |
-
-''<<lingo TiddlySpot/Advanced/Heading>>''
-
-|<<lingo TiddlySpot/ServerURL>>  |<$edit-text tiddler="$:/UploadURL" default="" tag="input"/> |
-|<<lingo TiddlySpot/Filename>> |<$edit-text tiddler="$:/UploadFilename" default="index.html" tag="input"/> |
-|<<lingo TiddlySpot/UploadDir>> |<$edit-text tiddler="$:/UploadDir" default="." tag="input"/> |
-|<<lingo TiddlySpot/BackupDir>> |<$edit-text tiddler="$:/UploadBackupDir" default="." tag="input"/> |
-
-<<lingo TiddlySpot/Hint>>
+<div class="tc-control-panel">
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Saving]!has[draft.of]]" "$:/core/ui/ControlPanel/Saving/General">>
+</div>

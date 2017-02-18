@@ -1,7 +1,7 @@
 created: 20160424150551727
-modified: 20160608122742084
+modified: 20170204191234906
 tags: [[Customise TiddlyWiki]]
-title: Adding a Table of Contents to the Sidebar
+title: Adding a table of contents to the sidebar
 type: text/vnd.tiddlywiki
 
 A customisable [[table of contents|Table-of-Contents Macros]] can be added to the sidebar with the following steps:

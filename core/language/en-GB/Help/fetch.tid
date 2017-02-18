@@ -1,0 +1,28 @@
+title: $:/language/Help/fetch
+description: Fetch tiddlers from wiki by URL
+
+Fetch one or more files over HTTP/HTTPS, and import the tiddlers matching a filter, optionally transforming the incoming titles.
+
+```
+--fetch file <url> <import-filter> <transform-filter>
+--fetch files <url-filter> <import-filter> <transform-filter>
+```
+
+With the "file" variant only a single file is fetched and the first parameter is the URL of the file to read.
+
+With the "files" variant, multiple files are fetched and the first parameter is a filter yielding a list of URLs of the files to read. For example, given a set of tiddlers tagged "remote-server" that have a field "url" the filter `[tag[remote-server]get[url]]` will retrieve all the available URLs.
+
+The `<import-filter>` parameter specifies a filter determining which tiddlers are imported. It defaults to `[all[tiddlers]]` if not provided.
+
+The `<transform-filter>` parameter specifies an optional filter that transforms the titles of the imported tiddlers. For example, `[addprefix[$:/myimports/]]` would add the prefix `$:/myimports/` to each title.
+
+Preceding the `--fetch` command with `--verbose` will output progress information during the import.
+
+Note that TiddlyWiki will not fetch an older version of an already loaded plugin.
+
+The following example retrieves all the non-system tiddlers from http://tiddlywiki.com and saves them to a JSON file:
+
+```
+tiddlywiki --verbose --fetch file "http://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
+```
+

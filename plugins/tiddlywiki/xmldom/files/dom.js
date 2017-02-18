@@ -109,6 +109,12 @@ NodeList.prototype = {
 	 */
 	item: function(index) {
 		return this[index] || null;
+	},
+	toString:function(isHTML,nodeFilter){
+		for(var buf = [], i = 0;i<this.length;i++){
+			serializeToString(this[i],buf,isHTML,nodeFilter);
+		}
+		return buf.join('');
 	}
 };
 function LiveNodeList(node,refresh){
@@ -164,6 +170,7 @@ function _addNamedNode(el,list,newAttr,oldAttr){
 	}
 }
 function _removeNamedNode(el,list,attr){
+	//console.log('remove attr:'+attr)
 	var i = _findNodeIndex(list,attr);
 	if(i>=0){
 		var lastIndex = list.length-1
@@ -179,7 +186,7 @@ function _removeNamedNode(el,list,attr){
 			}
 		}
 	}else{
-		throw DOMException(NOT_FOUND_ERR,new Error())
+		throw DOMException(NOT_FOUND_ERR,new Error(el.tagName+'@'+attr))
 	}
 }
 NamedNodeMap.prototype = {
@@ -189,9 +196,11 @@ NamedNodeMap.prototype = {
 //		if(key.indexOf(':')>0 || key == 'xmlns'){
 //			return null;
 //		}
+		//console.log()
 		var i = this.length;
 		while(i--){
 			var attr = this[i];
+			//console.log(attr.nodeName,key)
 			if(attr.nodeName == key){
 				return attr;
 			}
@@ -373,7 +382,7 @@ Node.prototype = {
     				}
     			}
     		}
-    		el = el.nodeType == 2?el.ownerDocument : el.parentNode;
+    		el = el.nodeType == ATTRIBUTE_NODE?el.ownerDocument : el.parentNode;
     	}
     	return null;
     },
@@ -388,7 +397,7 @@ Node.prototype = {
     				return map[prefix] ;
     			}
     		}
-    		el = el.nodeType == 2?el.ownerDocument : el.parentNode;
+    		el = el.nodeType == ATTRIBUTE_NODE?el.ownerDocument : el.parentNode;
     	}
     	return null;
     },
@@ -573,7 +582,7 @@ Document.prototype = {
 			}
 			return newChild;
 		}
-		if(this.documentElement == null && newChild.nodeType == 1){
+		if(this.documentElement == null && newChild.nodeType == ELEMENT_NODE){
 			this.documentElement = newChild;
 		}
 		
@@ -593,7 +602,7 @@ Document.prototype = {
 	getElementById :	function(id){
 		var rtv = null;
 		_visitNode(this.documentElement,function(node){
-			if(node.nodeType == 1){
+			if(node.nodeType == ELEMENT_NODE){
 				if(node.getAttribute('id') == id){
 					rtv = node;
 					return true;
@@ -742,6 +751,7 @@ Element.prototype = {
 		return this.attributes.setNamedItemNS(newAttr);
 	},
 	removeAttributeNode : function(oldAttr){
+		//console.log(this == oldAttr.ownerElement)
 		return this.attributes.removeNamedItem(oldAttr.nodeName);
 	},
 	//get real attribute name,and remove it by removeAttributeNode
@@ -786,6 +796,7 @@ Element.prototype = {
 				}
 			});
 			return ls;
+			
 		});
 	}
 };
@@ -817,10 +828,7 @@ CharacterData.prototype = {
 	
 	},
 	appendChild:function(newChild){
-		//if(!(newChild instanceof CharacterData)){
-			throw new Error(ExceptionMessage[3])
-		//}
-		return Node.prototype.appendChild.apply(this,arguments)
+		throw new Error(ExceptionMessage[HIERARCHY_REQUEST_ERR])
 	},
 	deleteData: function(offset, count) {
 		this.replaceData(offset,count,"");
@@ -902,39 +910,132 @@ function ProcessingInstruction() {
 ProcessingInstruction.prototype.nodeType = PROCESSING_INSTRUCTION_NODE;
 _extends(ProcessingInstruction,Node);
 function XMLSerializer(){}
-XMLSerializer.prototype.serializeToString = function(node,attributeSorter){
-	return node.toString(attributeSorter);
+XMLSerializer.prototype.serializeToString = function(node,isHtml,nodeFilter){
+	return nodeSerializeToString.call(node,isHtml,nodeFilter);
 }
-Node.prototype.toString =function(attributeSorter){
+Node.prototype.toString = nodeSerializeToString;
+function nodeSerializeToString(isHtml,nodeFilter){
 	var buf = [];
-	serializeToString(this,buf,attributeSorter);
+	var refNode = this.nodeType == 9 && this.documentElement || this;
+	var prefix = refNode.prefix;
+	var uri = refNode.namespaceURI;
+	
+	if(uri && prefix == null){
+		//console.log(prefix)
+		var prefix = refNode.lookupPrefix(uri);
+		if(prefix == null){
+			//isHTML = true;
+			var visibleNamespaces=[
+			{namespace:uri,prefix:null}
+			//{namespace:uri,prefix:''}
+			]
+		}
+	}
+	serializeToString(this,buf,isHtml,nodeFilter,visibleNamespaces);
+	//console.log('###',this.nodeType,uri,prefix,buf.join(''))
 	return buf.join('');
 }
-function serializeToString(node,buf,attributeSorter,isHTML){
+function needNamespaceDefine(node,isHTML, visibleNamespaces) {
+	var prefix = node.prefix||'';
+	var uri = node.namespaceURI;
+	if (!prefix && !uri){
+		return false;
+	}
+	if (prefix === "xml" && uri === "http://www.w3.org/XML/1998/namespace" 
+		|| uri == 'http://www.w3.org/2000/xmlns/'){
+		return false;
+	}
+	
+	var i = visibleNamespaces.length 
+	//console.log('@@@@',node.tagName,prefix,uri,visibleNamespaces)
+	while (i--) {
+		var ns = visibleNamespaces[i];
+		// get namespace prefix
+		//console.log(node.nodeType,node.tagName,ns.prefix,prefix)
+		if (ns.prefix == prefix){
+			return ns.namespace != uri;
+		}
+	}
+	//console.log(isHTML,uri,prefix=='')
+	//if(isHTML && prefix ==null && uri == 'http://www.w3.org/1999/xhtml'){
+	//	return false;
+	//}
+	//node.flag = '11111'
+	//console.error(3,true,node.flag,node.prefix,node.namespaceURI)
+	return true;
+}
+function serializeToString(node,buf,isHTML,nodeFilter,visibleNamespaces){
+	if(nodeFilter){
+		node = nodeFilter(node);
+		if(node){
+			if(typeof node == 'string'){
+				buf.push(node);
+				return;
+			}
+		}else{
+			return;
+		}
+		//buf.sort.apply(attrs, attributeSorter);
+	}
 	switch(node.nodeType){
 	case ELEMENT_NODE:
+		if (!visibleNamespaces) visibleNamespaces = [];
+		var startVisibleNamespaces = visibleNamespaces.length;
 		var attrs = node.attributes;
 		var len = attrs.length;
 		var child = node.firstChild;
 		var nodeName = node.tagName;
+		
 		isHTML =  (htmlns === node.namespaceURI) ||isHTML 
 		buf.push('<',nodeName);
-		if(attributeSorter){
-			buf.sort.apply(attrs, attributeSorter);
+		
+		
+		
+		for(var i=0;i<len;i++){
+			// add namespaces for attributes
+			var attr = attrs.item(i);
+			if (attr.prefix == 'xmlns') {
+				visibleNamespaces.push({ prefix: attr.localName, namespace: attr.value });
+			}else if(attr.nodeName == 'xmlns'){
+				visibleNamespaces.push({ prefix: '', namespace: attr.value });
+			}
 		}
 		for(var i=0;i<len;i++){
-			serializeToString(attrs.item(i),buf,attributeSorter,isHTML);
+			var attr = attrs.item(i);
+			if (needNamespaceDefine(attr,isHTML, visibleNamespaces)) {
+				var prefix = attr.prefix||'';
+				var uri = attr.namespaceURI;
+				var ns = prefix ? ' xmlns:' + prefix : " xmlns";
+				buf.push(ns, '="' , uri , '"');
+				visibleNamespaces.push({ prefix: prefix, namespace:uri });
+			}
+			serializeToString(attr,buf,isHTML,nodeFilter,visibleNamespaces);
 		}
-		if(child || isHTML && !/^(?:meta|link|img|br|hr|input|button)$/i.test(nodeName)){
+		// add namespace for current node		
+		if (needNamespaceDefine(node,isHTML, visibleNamespaces)) {
+			var prefix = node.prefix||'';
+			var uri = node.namespaceURI;
+			var ns = prefix ? ' xmlns:' + prefix : " xmlns";
+			buf.push(ns, '="' , uri , '"');
+			visibleNamespaces.push({ prefix: prefix, namespace:uri });
+		}
+		
+		if(child || isHTML && !/^(?:meta|link|img|br|hr|input)$/i.test(nodeName)){
 			buf.push('>');
 			//if is cdata child node
 			if(isHTML && /^script$/i.test(nodeName)){
-				if(child){
-					buf.push(child.data);
-				}
-			}else{
 				while(child){
-					serializeToString(child,buf,attributeSorter,isHTML);
+					if(child.data){
+						buf.push(child.data);
+					}else{
+						serializeToString(child,buf,isHTML,nodeFilter,visibleNamespaces);
+					}
+					child = child.nextSibling;
+				}
+			}else
+			{
+				while(child){
+					serializeToString(child,buf,isHTML,nodeFilter,visibleNamespaces);
 					child = child.nextSibling;
 				}
 			}
@@ -942,12 +1043,14 @@ function serializeToString(node,buf,attributeSorter,isHTML){
 		}else{
 			buf.push('/>');
 		}
+		// remove added visible namespaces
+		//visibleNamespaces.length = startVisibleNamespaces;
 		return;
 	case DOCUMENT_NODE:
 	case DOCUMENT_FRAGMENT_NODE:
 		var child = node.firstChild;
 		while(child){
-			serializeToString(child,buf,attributeSorter,isHTML);
+			serializeToString(child,buf,isHTML,nodeFilter,visibleNamespaces);
 			child = child.nextSibling;
 		}
 		return;
@@ -1092,8 +1195,8 @@ try{
 			},
 			set:function(data){
 				switch(this.nodeType){
-				case 1:
-				case 11:
+				case ELEMENT_NODE:
+				case DOCUMENT_FRAGMENT_NODE:
 					while(this.firstChild){
 						this.removeChild(this.firstChild);
 					}
@@ -1104,7 +1207,7 @@ try{
 				default:
 					//TODO:
 					this.data = data;
-					this.value = value;
+					this.value = data;
 					this.nodeValue = data;
 				}
 			}
@@ -1112,8 +1215,8 @@ try{
 		
 		function getTextContent(node){
 			switch(node.nodeType){
-			case 1:
-			case 11:
+			case ELEMENT_NODE:
+			case DOCUMENT_FRAGMENT_NODE:
 				var buf = [];
 				node = node.firstChild;
 				while(node){
@@ -1135,7 +1238,7 @@ try{
 }catch(e){//ie8
 }
 
-if(typeof require == 'function'){
+//if(typeof require == 'function'){
 	exports.DOMImplementation = DOMImplementation;
 	exports.XMLSerializer = XMLSerializer;
-}
+//}

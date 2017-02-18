@@ -22,6 +22,7 @@ Encryption/RepeatPassword: 重复输入密码
 Encryption/PasswordNoMatch: 密码不匹配
 Encryption/SetPassword: 设定密码
 Error/Caption: 错误
+Error/EditConflict: 服务器上的文件已更改
 Error/Filter: 筛选器错误
 Error/FilterSyntax: 筛选器运算式中的语法错误
 Error/IsFilterOperator: 筛选器错误︰'is' 筛选器运算符的未知操作数
