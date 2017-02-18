@@ -35,37 +35,47 @@ exports.startup = function() {
 	});
 	// Add hooks for trapping user actions
 	$tw.hooks.addHook("th-saving-tiddler",function(tiddler) {
-		var oldTiddler = $tw.wiki.getTiddler(tiddler.fields.title);
-		if(oldTiddler) {
-			saveTiddlerFile(oldTiddler,{reason: "overwritten"});			
+		if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
+			var oldTiddler = $tw.wiki.getTiddler(tiddler.fields.title);
+			if(oldTiddler) {
+				saveTiddlerFile(oldTiddler,{reason: "overwritten"});			
+			}
+			saveTiddlerFile(tiddler,{reason: "saved"});
 		}
-		saveTiddlerFile(tiddler,{reason: "saved"});
 		return tiddler;
 	});
 	$tw.hooks.addHook("th-renaming-tiddler",function(newTiddler,oldTiddler) {
-		if(oldTiddler) {
-			saveTiddlerFile(oldTiddler,{reason: "deleted"});			
+		if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
+			if(oldTiddler) {
+				saveTiddlerFile(oldTiddler,{reason: "deleted"});			
+			}
+			saveTiddlerFile(newTiddler,{reason: "renamed"});
 		}
-		saveTiddlerFile(newTiddler,{reason: "renamed"});
 		return newTiddler;
 	});
 	$tw.hooks.addHook("th-relinking-tiddler",function(newTiddler,oldTiddler) {
-		if(oldTiddler) {
-			saveTiddlerFile(oldTiddler,{reason: "overwritten"});			
+		if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
+			if(oldTiddler) {
+				saveTiddlerFile(oldTiddler,{reason: "overwritten"});			
+			}
+			saveTiddlerFile(newTiddler,{reason: "relinked"});
 		}
-		saveTiddlerFile(newTiddler,{reason: "relinked"});
 		return newTiddler;
 	});
 	$tw.hooks.addHook("th-importing-tiddler",function(tiddler) {
-		var oldTiddler = $tw.wiki.getTiddler(tiddler.fields.title);
-		if(oldTiddler) {
-			saveTiddlerFile(oldTiddler,{reason: "overwritten"});			
+		if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
+			var oldTiddler = $tw.wiki.getTiddler(tiddler.fields.title);
+			if(oldTiddler) {
+				saveTiddlerFile(oldTiddler,{reason: "overwritten"});			
+			}
+			saveTiddlerFile(tiddler,{reason: "imported"});
 		}
-		saveTiddlerFile(tiddler,{reason: "imported"});
 		return tiddler;
 	});
 	$tw.hooks.addHook("th-deleting-tiddler",function(tiddler) {
-		saveTiddlerFile(tiddler,{reason: "deleted"});
+		if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
+			saveTiddlerFile(tiddler,{reason: "deleted"});
+		}
 		return tiddler;
 	});
 };

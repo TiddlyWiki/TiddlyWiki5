@@ -34,11 +34,16 @@ Command.prototype.execute = function() {
 		filename = path.resolve(this.commander.outputPath,this.params[1]),
 		type = this.params[2] || "text/html",
 		template = this.params[3],
+		name = this.params[4],
+		value = this.params[5],
 		variables = {};
 	$tw.utils.createFileDirectories(filename);
 	if(template) {
 		variables.currentTiddler = title;
 		title = template;
+	}
+	if(name && value) {
+		variables[name] = value;
 	}
 	fs.writeFile(filename,this.commander.wiki.renderTiddler(type,title,{variables: variables}),"utf8",function(err) {
 		self.callback(err);
