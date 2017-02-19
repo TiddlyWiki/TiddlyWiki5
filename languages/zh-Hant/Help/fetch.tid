@@ -1,0 +1,28 @@
+title: $:/language/Help/fetch
+description: 通過網址從維基擷取條目
+
+通過 HTTP/HTTPS 擷取一個或多個檔案，並導入符合篩選器的條目，可選的轉換傳入的名稱。
+
+```
+--fetch file <url> <import-filter> <transform-filter>
+--fetch files <url-filter> <import-filter> <transform-filter>
+```
+
+使用 "file" 選項為僅擷取單個檔案，且第一個參數為要讀取檔案的網址。
+
+使用 "files" 選項為擷取多個檔案，且第一個參數是一個產生要讀取檔案的網址清單的篩選器。例如，給定標籤為 "remote-server" 的一組具有欄位 "url" 的條目，篩選器 `[tag[remote-server]get[url]]` 將取回所有可用的網址。
+
+`<import-filter>` 參數指定一個篩選器，用於確定要導入哪些條目。如果未提供，則預設為 `[all[tiddlers]]`。
+
+`<transform-filter>` 參數指定一個可選的篩選器，用於轉換導入條目的名稱。例如，`[addprefix[$:/myimports/]]` 會將前綴 `$:/myimports/` 加至每個名稱。
+
+於 `--fetch` 之前使用 `--verbose` 命令，將在導入期間輸出進度資訊。
+
+請注意，TiddlyWiki 不會擷取一個已經載入插件的舊版本。
+
+以下範例從 http://tiddlywiki.com 取回所有非系統條目，並將其儲存到一個 JSON 檔案：
+
+```
+tiddlywiki --verbose --fetch file "http://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
+```
+
