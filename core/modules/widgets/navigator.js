@@ -174,6 +174,7 @@ NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
 Handle a tm-navigate event
 */
 NavigatorWidget.prototype.handleNavigateEvent = function(event) {
+	event = $tw.hooks.invokeHook("th-navigating",event);
 	if(event.navigateTo) {
 		this.addToStory(event.navigateTo,event.navigateFromTitle);
 		if(!event.navigateSuppressNavigation) {
