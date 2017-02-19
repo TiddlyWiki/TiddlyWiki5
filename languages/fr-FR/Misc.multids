@@ -22,6 +22,7 @@ Encryption/RepeatPassword: Répéter le mot de passe
 Encryption/PasswordNoMatch: Les mots de passe ne correspondent pas
 Encryption/SetPassword: Définir ce mot de passe 
 Error/Caption: Erreur
+Error/EditConflict: Le fichier a changé sur le serveur
 Error/Filter: Erreur de filtre
 Error/FilterSyntax: Erreur de syntaxe dans l'expression du filtre
 Error/IsFilterOperator: Erreur de filtre : Opérande inconnu pour l'opérateur de filtre 'is'
