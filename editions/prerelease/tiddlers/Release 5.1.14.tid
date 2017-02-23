@@ -51,6 +51,7 @@ The tiddler manager will be extended in the future to increase flexibility and t
 
 !! Usability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2072]] "close plugin library" button
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2592]] support for adding tags using the <kbd>enter</kbd> key
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/2590]] handling of <kbd>ctrl-Enter</kbd> to add partially completed tags and fields
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e8bb897e263feea1a671ce035af68d0c6bc246b5]] support for relinking references to renamed tiddlers
@@ -72,6 +73,8 @@ The tiddler manager will be extended in the future to increase flexibility and t
 
 !! Hackability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/issues/2767]] new [[enlist Operator]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2066]] "field" suffix for [[has Operator]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a20da9f5303fdd52a54d61b231450c2aa35d3804]] a saver for the peer-to-peer Beaker browser; see [[TiddlyWiki on Beaker Browser]] for details
 * [[Refactored|https://github.com/Jermolene/TiddlyWiki5/commit/f07e0f981a1cded691227146e0281f7c4f06d55c]] the tag templates and macros to make them more reusable
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/87fa7f972cae859c466dea8a531d50f060e7d910]] modals and notifications so that global macros are available
@@ -97,9 +100,17 @@ The tiddler manager will be extended in the future to increase flexibility and t
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/2104]] CheckboxWidget to support data tiddlers via the `index` attribute
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b1a5afbf158fab9e224978c81a10aca15d30d91a]] new entry to the advanced search filtered export menu for exporting the current story river
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1b339e17bc0c67ff7eb3e8f7f299588ecf8848ee]] `tag` attribute to the KeyboardWidget
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2614]] overwrite protection to the ~WebDAV saver
+
+!! Node.js Improvements
+
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commits/master/plugins/tiddlywiki/filesystem/filesystemadaptor.js]] multiple issues the creation of new tiddler files by the filesystem adaptor
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0d0ece63777a22422ab2ddae7dee996b28f62c5e]] new FetchCommand for retrieving tiddlers over http/https
+* [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/commit/6f93ce6ea790427fe1e6e11a062d64f14449bfa3]] RenderTiddlerCommand to add support for an additional variable
 
 !! Bug Fixes
 
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/b1ecf81b0c0727db2245cfeba78cc46a33c3a814]] Node.js support for the HighlightPlugin
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/2650]] problem with recursion errors in the [[Table-of-Contents Macros]]
 * [[Prevented|https://github.com/Jermolene/TiddlyWiki5/commit/f97c1226aac9f3a5b563fc8d95bfeff91b8ab810]] email addresses from being mis-recognised as HTML tags
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/2572]] issue with `$tw.utils.strEndsWith()`
@@ -115,6 +126,7 @@ The tiddler manager will be extended in the future to increase flexibility and t
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/cf28eeb2a120fe3f263235c35fe5603013f88049]] issue with empty strings and the CheckboxWidget
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/b759d82f4ce2bf44da0bcce0c08550870f3216f8]] problem with calculation of week numbers
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/2312]] problem with [[move Operator]] not wrapping correctly
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/f0ff1f993e94d6928f0aa249b7f6f5e5624ebb69]] problem preventing customisation of textarea background colours
 
 !! Developer Bug Fixes and Improvements
 
@@ -124,7 +136,7 @@ The tiddler manager will be extended in the future to increase flexibility and t
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/1b41b4468495bbe66f99345ee94a67346176deb7]] support for bulk loading tiddler files via [[tiddlywiki.files Files]] within TiddlyWikiFolders
 * [[Refactored|https://github.com/Jermolene/TiddlyWiki5/pull/2627]] server mechanism to make it simpler to integrate TiddlyWiki into [[ExpressJS|http://expressjs.com/]] apps
 * [[Refactored|https://github.com/Jermolene/TiddlyWiki5/pull/2626]] the TiddlyFox saver module to make it easier to use it with other saving mechanisms
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/2397f0aa6f7af305807b61ccb1d435c2e6a789ab]] several new UI hooks, and [[improved|https://github.com/Jermolene/TiddlyWiki5/commit/6b2ab9072111cb87508f83a385b0885fb196cbcf]] the hook mechanism
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/2397f0aa6f7af305807b61ccb1d435c2e6a789ab]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/daf703b67fae0dd029eeaa4317b721fa8c284648]]) several new UI hooks, and [[improved|https://github.com/Jermolene/TiddlyWiki5/commit/6b2ab9072111cb87508f83a385b0885fb196cbcf]] the hook mechanism; see <a href="./dev/index.html#:[search:title[hook]]" target="_blank">developer docs</a>
 
 ! Contributors
 
