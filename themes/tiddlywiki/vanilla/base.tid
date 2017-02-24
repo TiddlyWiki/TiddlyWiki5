@@ -788,6 +788,7 @@ button.tc-untagged-label {
 }
 
 .tc-view-field-value {
+	word-break: break-all;
 }
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
