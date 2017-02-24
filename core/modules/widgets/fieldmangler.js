@@ -45,6 +45,14 @@ Compute the internal state of the widget
 FieldManglerWidget.prototype.execute = function() {
 	// Get our parameters
 	this.mangleTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
+	this.createText  = this.getAttribute("create",false); 
+	// Process create param
+	if(this.createText) { 
+	  var createTiddler = $tw.wiki.deserializeTiddlers("application/x-tiddler",this.createText);
+	  createTiddler[0]['title'] = this.mangleTitle;
+	  if(!this.wiki.tiddlerExists(this.mangleTitle))
+		this.wiki.addTiddler(createTiddler[0]);
+	}
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
