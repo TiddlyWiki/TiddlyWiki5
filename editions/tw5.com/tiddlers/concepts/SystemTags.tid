@@ -32,7 +32,7 @@ These are the available system tags
 * {{$:/tags/PageTemplate||$:/core/ui/TagTemplate}} for the main page elements
 * {{$:/tags/Palette||$:/core/ui/TagTemplate}} for colour palettes
 * {{$:/tags/PluginLibrary||$:/core/ui/TagTemplate}} for the plugin library
-* {{$:/tags/RawMarkup||$:/core/ui/TagTemplate}} for raw markup to be included in the generated HTML file
+* {{$:/tags/RawMarkup||$:/core/ui/TagTemplate}} for raw markup to be included in the generated HTML file. To activate the tag, TiddlyWiki needs to be reloaded.
 * {{$:/tags/SearchResults||$:/core/ui/TagTemplate}} for customised search results
 * {{$:/tags/SideBar||$:/core/ui/TagTemplate}} for sidebar tabs
 * {{$:/tags/Stylesheet||$:/core/ui/TagTemplate}} to indicate that a tiddler should be applied as a CSS stylesheet

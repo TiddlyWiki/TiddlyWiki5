@@ -928,6 +928,7 @@ button.tc-untagged-label {
 .tc-tiddler-frame iframe.tc-edit-texteditor {
 	padding: 3px 3px 3px 3px;
 	border: 1px solid <<colour tiddler-editor-border>>;
+	background-color: <<colour tiddler-editor-background>>;
 	line-height: 1.3em;
 	-webkit-appearance: none;
 }
@@ -939,10 +940,6 @@ button.tc-untagged-label {
 	padding: 3em 3em 6em 3em;
 	background: <<colour alert-background>>;
 	border: 1px solid <<colour alert-border>>;
-}
-
-.tc-tiddler-frame input.tc-edit-texteditor {
-	background-color: <<colour tiddler-editor-background>>;
 }
 
 canvas.tc-edit-bitmapeditor  {

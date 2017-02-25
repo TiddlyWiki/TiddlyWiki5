@@ -28,12 +28,16 @@ CodeBlockWidget.prototype.postRender = function() {
 		language = tiddler.fields.text || "";
 	}
 	if(language) {
-		try {
-			domNode.className = language.toLowerCase() + " hljs";
-			hljs.highlightBlock(domNode);
-		} catch(err) {
-			// Can't easily tell if a language is registered or not in the packed version of hightlight.js,
-			// so we silently fail and the codeblock remains unchanged
+		domNode.className = language.toLowerCase() + " hljs";
+		if($tw.browser && !domNode.isTiddlyWikiFakeDom) {
+			hljs.highlightBlock(domNode);			
+		} else {
+			var text = domNode.textContent;
+			domNode.children[0].innerHTML = hljs.fixMarkup(hljs.highlight(language,text).value);
+			// If we're using the fakedom then specially save the original raw text
+			if(domNode.isTiddlyWikiFakeDom) {
+				domNode.children[0].textInnerHTML = text;
+			}
 		}
 	}	
 };

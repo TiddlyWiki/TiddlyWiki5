@@ -21,36 +21,66 @@ Select the appropriate saver module and set it up
 var PutSaver = function(wiki) {
 	this.wiki = wiki;
 	var self = this;
+	var uri = this.uri();
 	// Async server probe. Until probe finishes, save will fail fast
 	// See also https://github.com/Jermolene/TiddlyWiki5/issues/2276
-	var req = new XMLHttpRequest();
-	req.open("OPTIONS",encodeURI(document.location.protocol + "//" + document.location.hostname + ":" + document.location.port + document.location.pathname));
-	req.onload = function() {
-		// Check DAV header http://www.webdav.org/specs/rfc2518.html#rfc.section.9.1
-		self.serverAcceptsPuts = (this.status === 200 && !!this.getResponseHeader('dav'));
-	};
-	req.send();
+	$tw.utils.httpRequest({
+		url: uri,
+		type: "OPTIONS",
+		callback: function(err, data, xhr) {
+			// Check DAV header http://www.webdav.org/specs/rfc2518.html#rfc.section.9.1
+			if(!err) {
+				self.serverAcceptsPuts = xhr.status === 200 && !!xhr.getResponseHeader("dav");
+			}
+		}
+	});
+	// Retrieve ETag if available
+	$tw.utils.httpRequest({
+		url: uri,
+		type: "HEAD",
+		callback: function(err, data, xhr) {
+			if(!err) {
+				self.etag = xhr.getResponseHeader("ETag");
+			}
+		}
+	});
 };
 
-PutSaver.prototype.save = function(text,method,callback) {
-	if (!this.serverAcceptsPuts) {
+PutSaver.prototype.uri = function() {
+	return encodeURI(document.location.toString().split("#")[0]);
+};
+
+// TODO: in case of edit conflict
+// Prompt: Do you want to save over this? Y/N
+// Merging would be ideal, and may be possible using future generic merge flow
+PutSaver.prototype.save = function(text, method, callback) {
+	if(!this.serverAcceptsPuts) {
 		return false;
 	}
-	var req = new XMLHttpRequest();
-	// TODO: store/check ETags if supported by server, to protect against overwrites
-	// Prompt: Do you want to save over this? Y/N
-	// Merging would be ideal, and may be possible using future generic merge flow
-	req.onload = function() {
-		if (this.status === 200 || this.status === 201) {
-			callback(null); // success
+	var self = this;
+	var headers = { "Content-Type": "text/html;charset=UTF-8" };
+	if(this.etag) {
+		headers["If-Match"] = this.etag;
+	}
+	$tw.utils.httpRequest({
+		url: this.uri(),
+		type: "PUT",
+		headers: headers,
+		data: text,
+		callback: function(err, data, xhr) {
+			if(err) {
+				callback(err);
+			} if(xhr.status === 200 || xhr.status === 201) {
+				self.etag = xhr.getResponseHeader("ETag");
+				callback(null); // success
+			} else if(xhr.status === 412) { // edit conflict
+				var message = $tw.language.getString("Error/EditConflict");
+				callback(message);
+			} else {
+				callback(xhr.responseText); // fail
+			}
 		}
-		else {
-			callback(this.responseText); // fail
-		}
-	};
-	req.open("PUT", encodeURI(window.location.href));
-	req.setRequestHeader("Content-Type", "text/html;charset=UTF-8");
-	req.send(text);
+	});
 	return true;
 };
 
