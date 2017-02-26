@@ -5,6 +5,22 @@ caption: {{$:/language/SideBar/Open/Caption}}
 \define lingo-base() $:/language/CloseAll/
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
 
+<$button class="tc-btn-invisible">
+<$list variable="previous" filter="[list[$:/StoryList]] +[before<currentTiddler>] [title[]] +[first[]]">
+<$list filter="[title[]] [title<previous>] +[nth[2]]" variable="">
+<$action-listops $tiddler="$:/StoryList" $filter="[list[$:/StoryList]] [title<currentTiddler>]" $subfilter="+[putbefore<previous>]" />
+</$list>
+&uarr;
+</$list>
+</$button>
+<$button class="tc-btn-invisible">
+<$list variable="next" filter="[list[$:/StoryList]] +[after<currentTiddler>] [title[]] +[first[]]">
+<$list filter="[title[]] [title<next>] +[nth[2]]" variable="">
+<$action-listops $tiddler="$:/StoryList" $filter="[list[$:/StoryList]] [title<currentTiddler>]" $subfilter="+[putafter<next>]" />
+</$list>
+&darr;
+</$list>
+</$button>
 <$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>
 
 </$list>
