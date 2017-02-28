@@ -206,13 +206,29 @@ Object.defineProperty(TW_Element.prototype, "innerHTML", {
 	set: function(value) {
 		this.isRaw = true;
 		this.rawHTML = value;
+		this.rawTextContent = null;
+	}
+});
+
+Object.defineProperty(TW_Element.prototype, "textInnerHTML", {
+	set: function(value) {
+		if(this.isRaw) {
+			this.rawTextContent = value;
+		} else {
+			throw "Cannot set textInnerHTML of a non-raw TW_Element";
+		}
 	}
 });
 
 Object.defineProperty(TW_Element.prototype, "textContent", {
 	get: function() {
 		if(this.isRaw) {
-			throw "Cannot get textContent on a raw TW_Element";
+			if(this.rawTextContent === null) {
+				console.log(booboo)
+				throw "Cannot get textContent on a raw TW_Element";				
+			} else {
+				return this.rawTextContent;
+			}
 		} else {
 			var b = [];
 			$tw.utils.each(this.children,function(node) {

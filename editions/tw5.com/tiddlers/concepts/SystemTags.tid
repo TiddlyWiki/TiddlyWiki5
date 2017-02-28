@@ -12,6 +12,7 @@ These are the available system tags
 
 * {{$:/tags/AboveStory||$:/core/ui/TagTemplate}} for elements to be placed at the top of the story river
 * {{$:/tags/AdvancedSearch||$:/core/ui/TagTemplate}} for search elements
+* {{$:/tags/AdvancedSearch/FilterButton||$:/core/ui/TagTemplate}} for filter buttons
 * {{$:/tags/Alert||$:/core/ui/TagTemplate}} for alerts
 * {{$:/tags/BelowStory||$:/core/ui/TagTemplate}} for elements to be placed at the bottom of the story river
 * {{$:/tags/ControlPanel||$:/core/ui/TagTemplate}} for control panel tabs
@@ -20,6 +21,7 @@ These are the available system tags
 * {{$:/tags/ControlPanel/Info||$:/core/ui/TagTemplate}} for control panel info tabs
 * {{$:/tags/ControlPanel/Settings||$:/core/ui/TagTemplate}} for control panel settings tabs
 * {{$:/tags/ControlPanel/Toolbars||$:/core/ui/TagTemplate}} for control panel toolbar customisation tabs
+* {{$:/tags/EditorToolbar||$:/core/ui/TagTemplate}} for the editor toolbar buttons
 * {{$:/tags/EditPreview||$:/core/ui/TagTemplate}} for custom preview panes
 * {{$:/tags/EditTemplate||$:/core/ui/TagTemplate}} for the edit template
 * {{$:/tags/EditToolbar||$:/core/ui/TagTemplate}} for the edit mode tiddler toolbar
@@ -36,6 +38,7 @@ These are the available system tags
 * {{$:/tags/SearchResults||$:/core/ui/TagTemplate}} for customised search results
 * {{$:/tags/SideBar||$:/core/ui/TagTemplate}} for sidebar tabs
 * {{$:/tags/Stylesheet||$:/core/ui/TagTemplate}} to indicate that a tiddler should be applied as a CSS stylesheet
+* {{$:/tags/Texteditor/Snippet||$:/core/ui/TagTemplate}} for text snippets
 * {{$:/tags/TiddlerInfo||$:/core/ui/TagTemplate}} for tiddler info panel tabs
 * {{$:/tags/TiddlerInfo/Advanced||$:/core/ui/TagTemplate}} for tabs under the advanced tiddler tab
 * {{$:/tags/ToolbarButtonStyle||$:/core/ui/TagTemplate}} for the style of the buttons

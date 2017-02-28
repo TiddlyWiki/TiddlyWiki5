@@ -108,4 +108,17 @@ exports.isEqual = function(tiddler,excludeFields) {
 	return differences.length === 0;
 };
 
+exports.getFieldDay = function(field) {
+	if(this.cache && this.cache.day && $tw.utils.hop(this.cache.day,field) ) {
+		return this.cache.day[field];
+	}
+	var day = "";
+	if(this.fields[field]) {
+		day = (new Date($tw.utils.parseDate(this.fields[field]))).setHours(0,0,0,0);
+	}
+	this.cache.day = this.cache.day || {};
+	this.cache.day[field] = day;
+	return day;
+};
+
 })();

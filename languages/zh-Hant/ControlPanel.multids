@@ -69,6 +69,7 @@ Plugins/NoInfoFound/Hint: 無 ''"<$text text=<<currentTab>>/>"''
 Plugins/NoInformation/Hint: 未提供資訊
 Plugins/NotInstalled/Hint: 尚未安裝此插件
 Plugins/OpenPluginLibrary: 開啟插件程式庫
+Plugins/ClosePluginLibrary: 關閉插件程式庫
 Plugins/Plugins/Caption: 插件
 Plugins/Plugins/Hint: 插件
 Plugins/Reinstall/Caption: 重新安裝
