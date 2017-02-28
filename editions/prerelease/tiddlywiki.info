@@ -13,7 +13,8 @@
 		"tiddlywiki/markdown",
 		"tiddlywiki/qrcode",
 		"tiddlywiki/bibtex",
-		"tiddlywiki/savetrail"
+		"tiddlywiki/savetrail",
+		"tiddlywiki/twitter"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
