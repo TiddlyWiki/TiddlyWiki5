@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/twitter/usage
+
+The `<$twitter>` widget can be used to embed several different entities:
+
+<$macrocall $name="tabs" state=<<qualify "$:/state/twitter/usage">> tabsList="[all[tiddlers+shadows]tag[$:/tags/TwitterUsage]]" default="$:/plugins/tiddlywiki/twitter/usage/tweet" class="tc-vertical"/>

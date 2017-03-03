@@ -641,10 +641,10 @@ exports.getTiddlerDataCached = function(titleOrTiddler,defaultData) {
 	if(tiddler) {
 		return this.getCacheForTiddler(tiddler.fields.title,"data",function() {
 			// Return the frozen value
-			var value = self.getTiddlerData(tiddler.fields.title,defaultData);
+			var value = self.getTiddlerData(tiddler.fields.title,undefined);
 			$tw.utils.deepFreeze(value);
 			return value;
-		});
+		}) || defaultData;
 	} else {
 		return defaultData;
 	}
@@ -680,7 +680,7 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 Extract an indexed field from within a data tiddler
 */
 exports.extractTiddlerDataItem = function(titleOrTiddler,index,defaultText) {
-	var data = this.getTiddlerData(titleOrTiddler,Object.create(null)),
+	var data = this.getTiddlerDataCached(titleOrTiddler,Object.create(null)),
 		text;
 	if(data && $tw.utils.hop(data,index)) {
 		text = data[index];
