@@ -26,7 +26,7 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 |class |An optional CSS class name to be assigned to the HTML element<br/>&raquo; Set to `tc-popup-keep` to make a popup "sticky", so it won't close when you click inside of it|
 |style |An optional CSS style attribute to be assigned to the HTML element |
 |position |The position used for the popup when the type is ''popup''. Can be ''left'', ''above'', ''aboveright'', ''right'', ''belowleft'' or ''below'' |
-|default |Default value to use when the state tiddler is missing |
+|default |Default value used as a fallback value to compare with if the state tiddler is not found or if the state="..." param is not defined |
 |animate |Set to "yes" to animate opening and closure (defaults to "no") |
 |retain |Set to "yes" to force the content to be retained even when hidden (defaults to "no")|
 
@@ -88,3 +88,23 @@ Here is a simple example how to use text references with field content to contro
 <<wikitext-example-without-html '<$reveal type="match" state="!!jeremy" text="tiddlywiki">
 ~TiddlyWiki!
 </$reveal>'>>
+
+
+!! How to compare values stored in variables
+
+By using the ``default`` parameter instead of ``state``, variables can be compared as seen in these two examples:
+
+
+```
+<$set name="variable" value="somevalue"><$reveal text=<<variable>> type="match" default="somevalue">
+this is revealed text
+</$reveal> </$set>
+```
+
+or
+
+```
+<$set name="variable" value="anothervalue"><$set name="anothervariable" value="anothervalue"><$reveal text=<<variable>> type="match" default=<<anothervariable>>>
+more revealed text
+</$reveal>'>></$set></$set>
+```
