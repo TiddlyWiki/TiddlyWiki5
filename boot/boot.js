@@ -135,7 +135,7 @@ $tw.utils.error = function(err) {
 		var dm = $tw.utils.domMaker,
 			heading = dm("h1",{text: errHeading}),
 			prompt = dm("div",{text: promptMsg, "class": "tc-error-prompt"}),
-			message = dm("div",{text: err}),
+			message = dm("div",{text: err, "class":"tc-error-message"}),
 			button = dm("button",{text: ( $tw.language == undefined ? "close" : $tw.language.getString("Buttons/Close/Caption") )}),
 			form = dm("form",{children: [heading,prompt,message,button], "class": "tc-error-form"});
 		document.body.insertBefore(form,document.body.firstChild);
