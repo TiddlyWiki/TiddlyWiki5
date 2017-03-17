@@ -14,31 +14,9 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 <span class="tc-btn-text"><$text text={{$:/language/Buttons/More/Caption}}/></span>
 </$list>
 </$button><$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="below" animate="yes">
-
 <div class="tc-drop-down">
-
-<$set name="tv-config-toolbar-icons" value="yes">
-
-<$set name="tv-config-toolbar-text" value="yes">
-
-<$set name="tv-config-toolbar-class" value="tc-btn-invisible">
-
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]] -[[$:/core/ui/Buttons/more-page-actions]]" variable="listItem">
-
-<$reveal type="match" state=<<config-title>> text="hide">
-
-<$transclude tiddler=<<listItem>> mode="inline"/>
-
-</$reveal>
-
+<$reveal type="match" state=<<config-title>> text="hide"><$macrocall $name="toolbar-button" button=<<listItem>> icon="yes" text="yes"/></$reveal>
 </$list>
-
-</$set>
-
-</$set>
-
-</$set>
-
 </div>
-
 </$reveal>
