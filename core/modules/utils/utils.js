@@ -224,11 +224,13 @@ exports.extendDeepCopy = function(object,extendedProperties) {
 
 exports.deepFreeze = function deepFreeze(object) {
 	var property, key;
-	Object.freeze(object);
-	for(key in object) {
-		property = object[key];
-		if($tw.utils.hop(object,key) && (typeof property === "object") && !Object.isFrozen(property)) {
-			deepFreeze(property);
+	if(object) {
+		Object.freeze(object);
+		for(key in object) {
+			property = object[key];
+			if($tw.utils.hop(object,key) && (typeof property === "object") && !Object.isFrozen(property)) {
+				deepFreeze(property);
+			}
 		}
 	}
 };
