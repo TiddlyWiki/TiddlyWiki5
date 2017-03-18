@@ -1,7 +1,7 @@
 created: 20170204162255225
 modified: 20170206014024949
 tags: $:/tags/SideBarSection
-title: $:/core/ui/SideBar/Search
+title: $:/core/ui/SideBar/search
 type: text/vnd.tiddlywiki
 
 <div class="tc-sidebar-lists">
