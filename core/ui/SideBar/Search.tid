@@ -1,7 +1,7 @@
 created: 20170204162255225
 modified: 20170206014024949
 tags: $:/tags/SideBarSection
-title: $:/core/ui/SideBar/search
+title: $:/core/ui/SideBar/Search
 type: text/vnd.tiddlywiki
 
 <div class="tc-sidebar-lists">
@@ -21,12 +21,9 @@ type: text/vnd.tiddlywiki
 {{$:/core/images/close-button}}
 </$button>
 <$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
-{{$:/core/images/down-arrow}}
-<$list filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
 <$set name="resultCount" value="""<$count filter="[!is[system]search{$(searchTiddler)$}]"/>""">
-{{$:/language/Search/Matches}}
+{{$:/core/images/down-arrow}} {{$:/language/Search/Matches}}
 </$set>
-</$list>
 </$button>
 </$reveal>
 <$reveal state="$:/temp/search" type="match" text="">
@@ -40,11 +37,7 @@ type: text/vnd.tiddlywiki
 
 <$reveal tag="div" class="tc-block-dropdown tc-search-drop-down tc-popup-handle" state=<<qualify "$:/state/popup/search-dropdown">> type="nomatch" text="" default="">
 
-<$list filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
-
 {{$:/core/ui/SearchResults}}
-
-</$list>
 
 </$reveal>
 
