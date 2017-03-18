@@ -57,7 +57,7 @@ exports.parse = function() {
 		};
 	}
 	if(template) {
-		transcludeNode.attributes.tiddler = {type: "string", value: template};
+		transcludeNode.attributes.tiddler = {type: "string", value: $tw.wiki.getTemplate(template)};
 		if(textRef) {
 			return [tiddlerNode];
 		} else {
