@@ -312,6 +312,19 @@ a.tc-tiddlylink-external:hover {
 	content: "<<lingo DropMessage>>";
 }
 
+.tc-droppable .tc-droppable-placeholder {
+	display: none;
+}
+
+.tc-droppable.tc-dragover .tc-droppable-placeholder {
+	display: block;
+	border: 2px dashed <<colour dropzone-background>>;
+}
+
+.tc-draggable {
+	cursor: move;
+}
+
 /*
 ** Plugin reload warning
 */

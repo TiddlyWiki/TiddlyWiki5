@@ -1,6 +1,24 @@
 title: $:/core/ui/TagTemplate
 
+\define drop-actions()
+<!-- Save the current ordering of the tiddlers with this tag -->
+<$set name="order" filter="[<tag>tagging[]]">
+<!-- Remove any list-after or list-before fields from the tiddlers with this tag -->
+<$list filter="[<tag>tagging[]]">
+<$action-deletefield $field="list-before"/>
+<$action-deletefield $field="list-after"/>
+</$list>
+<!-- Assign the list field of the tag with the current ordering -->
+<$action-setfield $tiddler=<<tag>> $field="list" $value=<<order>>/>
+<!-- Add the newly inserted item to the list -->
+<$action-listops $tiddler=<<tag>> $field="list" $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
+<!-- Make sure the newly added item has the right tag -->
+<$action-listops $tiddler=<<actionTiddler>> $field="tags" $subfilter="+[<tag>]"/>
+</$set>
+\end
+
 <span class="tc-tag-list-item">
+<$draggable tag="span" filter="[all[current]tagging[]]">
 <$set name="transclusion" value=<<currentTiddler>>>
 <$macrocall $name="tag-pill-body" tag=<<currentTiddler>> icon={{!!icon}} colour={{!!color}} palette={{$:/palette}} element-tag="""$button""" element-attributes="""popup=<<qualify "$:/state/popup/tag">>"""/>
 <$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes" class="tc-drop-down">
@@ -9,7 +27,23 @@ title: $:/core/ui/TagTemplate
 <$transclude tiddler=<<listItem>>/> 
 </$list>
 <hr>
-<$list filter="[all[current]tagging[]]" template="$:/core/ui/ListItemTemplate"/>
+<$set name="tag" value=<<currentTiddler>>>
+<$list filter="[all[current]tagging[]]">
+<div class="tc-menu-list-item" style="position: relative;">
+<$droppable actions=<<drop-actions>>>
+<div class="tc-droppable-placeholder">
+&nbsp;
+</div>
+<div>
+<$link to={{!!title}}>
+<$view field="title"/>
+</$link>
+</div>
+</$droppable>
+</div>
+</$list>
+</$set>
 </$reveal>
 </$set>
+</$draggable>
 </span>

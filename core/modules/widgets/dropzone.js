@@ -104,6 +104,7 @@ DropZoneWidget.prototype.handleDragLeaveEvent  = function(event) {
 };
 
 DropZoneWidget.prototype.handleDropEvent  = function(event) {
+	var self = this;
 	this.leaveDrag(event);
 	// Check for being over a TEXTAREA or INPUT
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) !== -1) {
@@ -123,84 +124,15 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	});
 	// Try to import the various data types we understand
 	if(numFiles === 0) {
-		this.importData(dataTransfer);
+		$tw.utils.importDataTransfer(dataTransfer,this.wiki.generateNewTitle("Untitled"),function(fieldsArray) {
+			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(fieldsArray)});
+		});
 	}
 	// Tell the browser that we handled the drop
 	event.preventDefault();
 	// Stop the drop ripple up to any parent handlers
 	event.stopPropagation();
 };
-
-DropZoneWidget.prototype.importData = function(dataTransfer) {
-	// Try each provided data type in turn
-	for(var t=0; t<this.importDataTypes.length; t++) {
-		if(!$tw.browser.isIE || this.importDataTypes[t].IECompatible) {
-			// Get the data
-			var dataType = this.importDataTypes[t];
-				var data = dataTransfer.getData(dataType.type);
-			// Import the tiddlers in the data
-			if(data !== "" && data !== null) {
-				if($tw.log.IMPORT) {
-					console.log("Importing data type '" + dataType.type + "', data: '" + data + "'")
-				}
-				var tiddlerFields = dataType.convertToFields(data);
-				if(!tiddlerFields.title) {
-					tiddlerFields.title = this.wiki.generateNewTitle("Untitled");
-				}
-				this.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify([tiddlerFields])});
-				return;
-			}
-		}
-	}
-};
-
-DropZoneWidget.prototype.importDataTypes = [
-	{type: "text/vnd.tiddler", IECompatible: false, convertToFields: function(data) {
-		return JSON.parse(data);
-	}},
-	{type: "URL", IECompatible: true, convertToFields: function(data) {
-		// Check for tiddler data URI
-		var match = decodeURIComponent(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
-		if(match) {
-			return JSON.parse(match[1]);
-		} else {
-			return { // As URL string
-				text: data
-			};
-		}
-	}},
-	{type: "text/x-moz-url", IECompatible: false, convertToFields: function(data) {
-		// Check for tiddler data URI
-		var match = decodeURIComponent(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
-		if(match) {
-			return JSON.parse(match[1]);
-		} else {
-			return { // As URL string
-				text: data
-			};
-		}
-	}},
-	{type: "text/html", IECompatible: false, convertToFields: function(data) {
-		return {
-			text: data
-		};
-	}},
-	{type: "text/plain", IECompatible: false, convertToFields: function(data) {
-		return {
-			text: data
-		};
-	}},
-	{type: "Text", IECompatible: true, convertToFields: function(data) {
-		return {
-			text: data
-		};
-	}},
-	{type: "text/uri-list", IECompatible: false, convertToFields: function(data) {
-		return {
-			text: data
-		};
-	}}
-];
 
 DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 	// Let the browser handle it if we're in a textarea or input box
