@@ -69,7 +69,7 @@ DraggableWidget.prototype.handleDragStartEvent = function(event) {
 	if(this.draggableFilter) {
 		titles.push.apply(titles,this.wiki.filterTiddlers(this.draggableFilter,this));
 	}
-	var titleString = titles.join("\n");
+	var titleString = $tw.utils.stringifyList(titles);
 	if(titles.length > 0 && event.target === this.domNodes[0]) {
 		$tw.dragInProgress = this.domNodes[0];
 		// Set the dragging class on the element being dragged
