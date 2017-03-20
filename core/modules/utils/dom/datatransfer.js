@@ -42,9 +42,7 @@ var importDataTypes = [
 		if(match) {
 			return parseJSONTiddlers(match[1],fallbackTitle);
 		} else {
-			return { // As URL string
-				text: data
-			};
+			return [{text: data}]; // As URL string
 		}
 	}},
 	{type: "text/x-moz-url", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
@@ -53,30 +51,20 @@ var importDataTypes = [
 		if(match) {
 			return parseJSONTiddlers(match[1],fallbackTitle);
 		} else {
-			return { // As URL string
-				text: data
-			};
+			return [{text: data}]; // As URL string
 		}
 	}},
 	{type: "text/html", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
-		return {
-			text: data
-		};
+		return [{text: data}];
 	}},
 	{type: "text/plain", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
-		return {
-			text: data
-		};
+		return [{text: data}];
 	}},
 	{type: "Text", IECompatible: true, toTiddlerFieldsArray: function(data,fallbackTitle) {
-		return {
-			text: data
-		};
+		return [{text: data}];
 	}},
 	{type: "text/uri-list", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
-		return {
-			text: data
-		};
+		return [{text: data}];
 	}}
 ];
 
