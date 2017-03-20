@@ -20,5 +20,11 @@ caption: {{$:/language/SideBar/Open/Caption}}
 </$droppable>
 </div>
 </$list>
-
+<$tiddler tiddler="">
+<$droppable actions=<<drop-actions>>>
+<div class="tc-droppable-placeholder">
+&nbsp;
+</div>
 <$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini"><<lingo Button>></$button>
+</$droppable>
+</$tiddler>

@@ -21,7 +21,7 @@ exports.insertbefore = function(source,operator,options) {
 		results.push(title);
 	});
 	var target = options.widget && options.widget.getVariable(operator.suffix || "currentTiddler");
-	if(target && target !== operator.operand) {
+	if(target !== operator.operand) {
 		// Remove the entry from the list if it is present
 		var pos = results.indexOf(operator.operand);
 		if(pos !== -1) {
