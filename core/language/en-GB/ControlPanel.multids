@@ -161,12 +161,12 @@ TiddlerFields/Caption: Tiddler Fields
 TiddlerFields/Hint: This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
 Toolbars/Caption: Toolbars
 Toolbars/EditToolbar/Caption: Edit Toolbar
-Toolbars/EditToolbar/Hint: Choose which buttons are displayed for tiddlers in edit mode
+Toolbars/EditToolbar/Hint: Choose which buttons are displayed for tiddlers in edit mode. Drag and drop to change the ordering
 Toolbars/Hint: Select which toolbar buttons are displayed
 Toolbars/PageControls/Caption: Page Toolbar
-Toolbars/PageControls/Hint: Choose which buttons are displayed on the main page toolbar
+Toolbars/PageControls/Hint: Choose which buttons are displayed on the main page toolbar. Drag and drop to change the ordering
 Toolbars/EditorToolbar/Caption: Editor Toolbar
-Toolbars/EditorToolbar/Hint: Choose which buttons are displayed in the editor toolbar. Note that some buttons will only appear when editing tiddlers of a certain type
+Toolbars/EditorToolbar/Hint: Choose which buttons are displayed in the editor toolbar. Note that some buttons will only appear when editing tiddlers of a certain type. Drag and drop to change the ordering
 Toolbars/ViewToolbar/Caption: View Toolbar
-Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode
+Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode. Drag and drop to change the ordering
 Tools/Download/Full/Caption: Download full wiki

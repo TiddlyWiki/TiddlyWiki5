@@ -143,6 +143,11 @@ svg.tc-image-button {
 	padding: 0px 1px 1px 0px;
 }
 
+.tc-icon-wrapper > svg {
+	width: 1em;
+	height: 1em;
+}
+
 kbd {
 	display: inline-block;
 	padding: 3px 5px;
@@ -312,11 +317,11 @@ a.tc-tiddlylink-external:hover {
 	content: "<<lingo DropMessage>>";
 }
 
-.tc-droppable .tc-droppable-placeholder {
+.tc-droppable > .tc-droppable-placeholder {
 	display: none;
 }
 
-.tc-droppable.tc-dragover .tc-droppable-placeholder {
+.tc-droppable.tc-dragover > .tc-droppable-placeholder {
 	display: block;
 	border: 2px dashed <<colour dropzone-background>>;
 }
