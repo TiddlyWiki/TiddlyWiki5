@@ -1,0 +1,20 @@
+{
+	"tiddlers": [
+		{
+			"file": "asciidoctor-all.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/asciidoc/files/asciidoctor-all.js",
+				"module-type": "library"
+			}
+		},
+		{
+			"file": "asciidoctor.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/asciidoc/files/asciidoctor.css",
+				"tags": "[[$:/tags/Stylesheet]]"
+			}
+		}
+	]
+}
