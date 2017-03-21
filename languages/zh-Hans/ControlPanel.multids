@@ -161,12 +161,12 @@ TiddlerFields/Caption: 条目栏位
 TiddlerFields/Hint: 这是本维基使用中的所有条目栏位（含系统条目的栏位，但默认条目的栏位除外）。
 Toolbars/Caption: 工具栏
 Toolbars/EditToolbar/Caption: 编辑工具栏
-Toolbars/EditToolbar/Hint: 选择将显示哪些按钮于条目的编辑模式工具栏
+Toolbars/EditToolbar/Hint: 选择将显示哪些按钮于条目的编辑模式工具栏。拖放可改变顺序。
 Toolbars/Hint: 选择将显示哪些工具栏按钮
 Toolbars/PageControls/Caption: 页面工具栏
-Toolbars/PageControls/Hint: 选择将显示哪些按钮于主页面的工具栏
+Toolbars/PageControls/Hint: 选择将显示哪些按钮于主页面的工具栏。拖放可改变顺序。
 Toolbars/EditorToolbar/Caption: 编辑器工具栏
-Toolbars/EditorToolbar/Hint: 选择将显示哪些按钮于编辑器工具栏。请注意，某些按钮只会出现在编辑某一类型的条目时。
+Toolbars/EditorToolbar/Hint: 选择将显示哪些按钮于编辑器工具栏。请注意，某些按钮只会出现在编辑某一类型的条目时。拖放可改变顺序。
 Toolbars/ViewToolbar/Caption: 查看工具栏
-Toolbars/ViewToolbar/Hint: 选择将显示哪些按钮于条目的查看模式工具栏
+Toolbars/ViewToolbar/Hint: 选择将显示哪些按钮于条目的查看模式工具栏。拖放可改变顺序。
 Tools/Download/Full/Caption: 下载完整副本
