@@ -2,6 +2,6 @@ title: $:/plugins/tiddlywiki/mobiledragdrop/rawmarkup
 tags: $:/tags/RawMarkupWikified
 
 `<script>
-var iosDragDropShim = { enableEnterLeave: true, unholdToDrag: 300 };`
+var iosDragDropShim = { enableEnterLeave: true, holdToDrag: 300 };`
 {{$:/plugins/tiddlywiki/mobiledragdrop/ios-drag-drop.js}}
 `</script>`
