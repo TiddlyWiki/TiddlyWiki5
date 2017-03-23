@@ -64,7 +64,8 @@ exports.makeDraggable = function(options) {
 					if(dragImageType === "pill") {
 						dataTransfer.setDragImage(dragImage.firstChild,-16,-16);
 					} else {
-						dataTransfer.setDragImage(domNode,(event.clientX-r.left),(event.clientY-r.top));
+						var r = domNode.getBoundingClientRect();
+						dataTransfer.setDragImage(domNode,event.clientX-r.left,event.clientY-r.top);
 					}
 				}
 				// Set up the data transfer
