@@ -16,12 +16,14 @@ Browser data transfer utilities, used with the clipboard and drag and drop
 Options:
 
 domNode: dom node to make draggable
+dragImageType: "pill" or "dom"
 dragTiddlerFn: optional function to retrieve the title of tiddler to drag
 dragFilterFn: optional function to retreive the filter defining a list of tiddlers to drag
 widget: widget to use as the contect for the filter
 */
 exports.makeDraggable = function(options) {
-	var dragImage,
+	var dragImageType = options.dragImageType || "dom",
+		dragImage,
 		domNode = options.domNode;
 	// Make the dom node draggable
 	domNode.setAttribute("draggable","true");
@@ -59,10 +61,16 @@ exports.makeDraggable = function(options) {
 				// Set up the image
 				dataTransfer.effectAllowed = "copy";
 				if(dataTransfer.setDragImage) {
-					dataTransfer.setDragImage(dragImage.firstChild,-16,-16);
+					if(dragImageType === "pill") {
+						dataTransfer.setDragImage(dragImage.firstChild,-16,-16);
+					} else {
+						dataTransfer.setDragImage(domNode,(event.clientX-r.left),(event.clientY-r.top));
+					}
 				}
 				// Set up the data transfer
-				dataTransfer.clearData();
+				if(dataTransfer.clearData) {
+					dataTransfer.clearData();					
+				}
 				var jsonData = [];
 				if(titles.length > 1) {
 					titles.forEach(function(title) {
