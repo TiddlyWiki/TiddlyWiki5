@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/mobiledragdrop",
+	"description": "Mobile drag and drop shim",
+	"author": "Tim Ruffles, adapted by Jeremy Ruston ",
+	"core-version": ">=5.0.0",
+	"list": "readme license"
+}
