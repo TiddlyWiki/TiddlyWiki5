@@ -65,7 +65,7 @@ tags: $:/tags/Macro
 <!-- Add the newly inserted item to the list -->
 <$action-listops $tiddler=<<tag>> $field="list" $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
 <!-- Make sure the newly added item has the right tag -->
-<$action-listops $tiddler=<<actionTiddler>> $field="tags" $subfilter="+[<tag>]"/>
+<$action-listops $tiddler=<<actionTiddler>> $tags="[<tag>]"/>
 </$set>
 \end
 
