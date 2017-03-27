@@ -90,8 +90,6 @@ exports.makeDraggable = function(options) {
 				dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURIComponent(jsonData));
 				dataTransfer.setData("Text",titleString);
 				event.stopPropagation();
-			} else {
-				event.preventDefault();
 			}
 			return false;
 		}},
@@ -141,7 +139,7 @@ var importDataTypes = [
 		if(match) {
 			return parseJSONTiddlers(match[1],fallbackTitle);
 		} else {
-			return [{text: data}]; // As URL string
+			return [{title: fallbackTitle, text: data}]; // As URL string
 		}
 	}},
 	{type: "text/x-moz-url", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
@@ -150,20 +148,20 @@ var importDataTypes = [
 		if(match) {
 			return parseJSONTiddlers(match[1],fallbackTitle);
 		} else {
-			return [{text: data}]; // As URL string
+			return [{title: fallbackTitle, text: data}]; // As URL string
 		}
 	}},
 	{type: "text/html", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
-		return [{text: data}];
+		return [{title: fallbackTitle, text: data}];
 	}},
 	{type: "text/plain", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
-		return [{text: data}];
+		return [{title: fallbackTitle, text: data}];
 	}},
 	{type: "Text", IECompatible: true, toTiddlerFieldsArray: function(data,fallbackTitle) {
-		return [{text: data}];
+		return [{title: fallbackTitle, text: data}];
 	}},
 	{type: "text/uri-list", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
-		return [{text: data}];
+		return [{title: fallbackTitle, text: data}];
 	}}
 ];
 

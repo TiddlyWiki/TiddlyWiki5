@@ -77,6 +77,7 @@ DroppableWidget.prototype.handleDragEnterEvent  = function(event) {
 	event.preventDefault();
 	// Tell the browser not to ripple the drag up to any parent drop handlers
 	event.stopPropagation();
+	return false;
 };
 
 DroppableWidget.prototype.handleDragOverEvent  = function(event) {
@@ -87,10 +88,12 @@ DroppableWidget.prototype.handleDragOverEvent  = function(event) {
 	// Tell the browser that we're still interested in the drop
 	event.preventDefault();
 	event.dataTransfer.dropEffect = "copy"; // Explicitly show this is a copy
+	return false;
 };
 
 DroppableWidget.prototype.handleDragLeaveEvent  = function(event) {
 	this.leaveDrag(event);
+	return false;
 };
 
 DroppableWidget.prototype.handleDropEvent  = function(event) {
@@ -106,15 +109,14 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 	// Try to import the various data types we understand
 	$tw.utils.importDataTransfer(dataTransfer,null,function(fieldsArray) {
 		fieldsArray.forEach(function(fields) {
-			if(fields.title) {
-				self.performActions(fields.title,event);
-			}
+			self.performActions(fields.title || fields.text,event);
 		});
 	});
 	// Tell the browser that we handled the drop
 	event.preventDefault();
 	// Stop the drop ripple up to any parent handlers
 	event.stopPropagation();
+	return false;
 };
 
 DroppableWidget.prototype.performActions = function(title,event) {
