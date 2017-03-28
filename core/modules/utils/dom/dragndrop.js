@@ -25,8 +25,10 @@ exports.makeDraggable = function(options) {
 	var dragImageType = options.dragImageType || "dom",
 		dragImage,
 		domNode = options.domNode;
-	// Make the dom node draggable
-	domNode.setAttribute("draggable","true");
+	// Make the dom node draggable (not necessary for anchor tags)
+	if((domNode.tagName || "").toLowerCase() !== "a") {
+		domNode.setAttribute("draggable","true");		
+	}
 	// Add event handlers
 	$tw.utils.addEventListeners(domNode,[
 		{name: "dragstart", handlerFunction: function(event) {
