@@ -33,9 +33,15 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
-	// Create element
-	var domNode = this.document.createElement("div");
-	domNode.className = "tc-droppable";
+	var tag = this.parseTreeNode.isBlock ? "div" : "span";
+	if(this.droppableTag && $tw.config.htmlUnsafeElements.indexOf(this.droppableTag) === -1) {
+		tag = this.droppableTag;
+	}
+	// Create element and assign classes
+	var domNode = this.document.createElement(tag),
+		classes = (this["class"] || "").split(" ");
+	classes.push("tc-droppable");
+	domNode.className = classes.join(" ");
 	// Add event handlers
 	$tw.utils.addEventListeners(domNode,[
 		{name: "dragenter", handlerObject: this, handlerMethod: "handleDragEnterEvent"},
@@ -87,7 +93,8 @@ DroppableWidget.prototype.handleDragOverEvent  = function(event) {
 	}
 	// Tell the browser that we're still interested in the drop
 	event.preventDefault();
-	event.dataTransfer.dropEffect = "copy"; // Explicitly show this is a copy
+	// Set the drop effect
+	event.dataTransfer.dropEffect = this.droppableEffect;
 	return false;
 };
 
@@ -120,8 +127,8 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 };
 
 DroppableWidget.prototype.performActions = function(title,event) {
-	if(this.dropzoneActions) {
-		this.invokeActionString(this.dropzoneActions,this,event,{actionTiddler: title});
+	if(this.droppableActions) {
+		this.invokeActionString(this.draggableActions,this,event,{actionTiddler: title});
 	}
 };
 
@@ -129,7 +136,10 @@ DroppableWidget.prototype.performActions = function(title,event) {
 Compute the internal state of the widget
 */
 DroppableWidget.prototype.execute = function() {
-	this.dropzoneActions = this.getAttribute("actions");
+	this.droppableActions = this.getAttribute("actions");
+	this.droppableEffect = this.getAttribute("effect","copy");
+	this.droppableTag = this.getAttribute("tag");
+	this.droppableClass = this.getAttribute("class");
 	// Make child widgets
 	this.makeChildWidgets();
 };
@@ -138,6 +148,11 @@ DroppableWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 DroppableWidget.prototype.refresh = function(changedTiddlers) {
+	var changedAttributes = this.computeAttributes();
+	if(changedAttributes["class"] || changedAttributes.tag) {
+		this.refreshSelf();
+		return true;
+	}
 	return this.refreshChildren(changedTiddlers);
 };
 

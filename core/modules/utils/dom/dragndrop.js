@@ -25,8 +25,10 @@ exports.makeDraggable = function(options) {
 	var dragImageType = options.dragImageType || "dom",
 		dragImage,
 		domNode = options.domNode;
-	// Make the dom node draggable
-	domNode.setAttribute("draggable","true");
+	// Make the dom node draggable (not necessary for anchor tags)
+	if((domNode.tagName || "").toLowerCase() !== "a") {
+		domNode.setAttribute("draggable","true");		
+	}
 	// Add event handlers
 	$tw.utils.addEventListeners(domNode,[
 		{name: "dragstart", handlerFunction: function(event) {
@@ -59,7 +61,7 @@ exports.makeDraggable = function(options) {
 				// Set the data transfer properties
 				var dataTransfer = event.dataTransfer;
 				// Set up the image
-				dataTransfer.effectAllowed = "copy";
+				dataTransfer.effectAllowed = "all";
 				if(dataTransfer.setDragImage) {
 					if(dragImageType === "pill") {
 						dataTransfer.setDragImage(dragImage.firstChild,-16,-16);
