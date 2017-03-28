@@ -61,7 +61,7 @@ exports.makeDraggable = function(options) {
 				// Set the data transfer properties
 				var dataTransfer = event.dataTransfer;
 				// Set up the image
-				dataTransfer.effectAllowed = "copy";
+				dataTransfer.effectAllowed = "all";
 				if(dataTransfer.setDragImage) {
 					if(dragImageType === "pill") {
 						dataTransfer.setDragImage(dragImage.firstChild,-16,-16);
