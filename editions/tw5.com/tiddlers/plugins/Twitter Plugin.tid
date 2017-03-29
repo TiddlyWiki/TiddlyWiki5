@@ -1,7 +1,7 @@
 created: 20170227223209558
-modified: 20170227223706297
+modified: 20170328173919702
 tags: OfficialPlugins
-title: TwitterPlugin
+title: Twitter Plugin
 type: text/vnd.tiddlywiki
 
 This plugin adds a `<$twitter>` widget that can embed a variety of entities from twitter.com:

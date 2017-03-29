@@ -1,7 +1,7 @@
 created: 20170210074840860
-modified: 20170210075100387
+modified: 20170328173912704
 tags: OfficialPlugins
-title: SaveTrailPlugin
+title: SaveTrail Plugin
 type: text/vnd.tiddlywiki
 
 This plugin causes TiddlyWiki to continuously download (as a JSON file) the contents of any tiddler that is manually changed by any of several means:
