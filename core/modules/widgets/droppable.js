@@ -128,7 +128,7 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 
 DroppableWidget.prototype.performActions = function(title,event) {
 	if(this.droppableActions) {
-		this.invokeActionString(this.draggableActions,this,event,{actionTiddler: title});
+		this.invokeActionString(this.droppableActions,this,event,{actionTiddler: title});
 	}
 };
 
