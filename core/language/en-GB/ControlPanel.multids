@@ -11,6 +11,7 @@ Basics/DefaultTiddlers/Prompt: Default tiddlers:
 Basics/DefaultTiddlers/TopHint: Choose which tiddlers are displayed at startup:
 Basics/Language/Prompt: Hello! Current language:
 Basics/NewJournal/Title/Prompt: Title of new journal tiddlers
+Basics/NewJournal/Text/Prompt: Text for new journal tiddlers
 Basics/NewJournal/Tags/Prompt: Tags for new journal tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Number of overridden shadow tiddlers:
 Basics/ShadowTiddlers/Prompt: Number of shadow tiddlers:

@@ -312,3 +312,5 @@ Stefano De Dionigi, @dedioste, 2017/01/19
 Matias Goldman, @twMat, 2017/01/22
 
 Andrew Webb, @tejjyid, 2017/03/06
+
+Richard Decal, @crypdick, 2017/04/04
