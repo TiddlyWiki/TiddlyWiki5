@@ -10,8 +10,9 @@ Basics/DefaultTiddlers/BottomHint: 標題含空白時請使用 &#91;&#91;雙中�
 Basics/DefaultTiddlers/Prompt: 首頁：
 Basics/DefaultTiddlers/TopHint: 預設開啟的條目：
 Basics/Language/Prompt: 您好！當前的語言：
-Basics/NewJournal/Title/Prompt: 新日誌條目的名稱
 Basics/NewJournal/Tags/Prompt: 新日誌條目的標籤
+Basics/NewJournal/Text/Prompt: 新日誌條目的內容
+Basics/NewJournal/Title/Prompt: 新日誌條目的名稱
 Basics/OverriddenShadowTiddlers/Prompt: 被覆寫的預設條目數量：
 Basics/ShadowTiddlers/Prompt: 預設條目數量：
 Basics/Subtitle/Prompt: 副標題：
