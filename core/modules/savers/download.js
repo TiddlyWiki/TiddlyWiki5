@@ -26,6 +26,7 @@ DownloadSaver.prototype.save = function(text,method,callback,options) {
 		var p = document.location.pathname.lastIndexOf("/");
 		if(p !== -1) {
 			filename = document.location.pathname.substr(p+1);
+			filename = filename.replace(/%20/g, " ");
 		}
 	}
 	if(!filename) {
