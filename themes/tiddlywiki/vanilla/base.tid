@@ -119,6 +119,48 @@ blockquote {
 	border-left: 5px solid <<colour blockquote-bar>>;
 	margin-left: 25px;
 	padding-left: 10px;
+	quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote.tc-big-quote {
+	font-family: Georgia, serif;
+	position: relative;
+	background: <<colour pre-background>>;
+	border-left: none;
+	margin-left: 50px;
+	margin-right: 50px;
+	padding: 10px;
+    border-radius: 8px;
+}
+
+blockquote.tc-big-quote cite:before {
+	content: "\2014 \2009";
+}
+
+blockquote.tc-big-quote:before {
+	font-family: Georgia, serif;
+	color: <<colour blockquote-bar>>;
+	content: open-quote;
+	font-size: 8em;
+	line-height: 0.1em;
+	margin-right: 0.25em;
+	vertical-align: -0.4em;
+	position: absolute;
+    left: -50px;
+    top: 42px;
+}
+
+blockquote.tc-big-quote:after {
+	font-family: Georgia, serif;
+	color: <<colour blockquote-bar>>;
+	content: close-quote;
+	font-size: 8em;
+	line-height: 0.1em;
+	margin-right: 0.25em;
+	vertical-align: -0.4em;
+	position: absolute;
+    right: -80px;
+    bottom: -20px;
 }
 
 dl dt {
