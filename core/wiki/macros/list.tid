@@ -69,31 +69,31 @@ tags: $:/tags/Macro
 </$set>
 \end
 
-\define list-tagged-draggable(tag,itemTemplate)
+\define list-tagged-draggable(tag,itemTemplate,elementTag:"div")
 <$set name="tag" value="""$tag$""">
 <$list filter="[<tag>tagging[]]">
-<div class="tc-menu-list-item">
+<$elementTag$ class="tc-menu-list-item">
 <$droppable actions=<<list-tagged-draggable-drop-actions>>>
-<div class="tc-droppable-placeholder">
+<$elementTag$ class="tc-droppable-placeholder">
 &nbsp;
-</div>
-<div>
+</$elementTag$>
+<$elementTag$>
 <$transclude tiddler="""$itemTemplate$""">
 <$link to={{!!title}}>
 <$view field="title"/>
 </$link>
 </$transclude>
-</div>
+</$elementTag$>
 </$droppable>
-</div>
+</$elementTag$>
 </$list>
 <$tiddler tiddler="">
 <$droppable actions=<<list-tagged-draggable-drop-actions>>>
-<div class="tc-droppable-placeholder">
+<$elementTag$ class="tc-droppable-placeholder">
 &nbsp;
-</div>
-<div style="height:0.5em;">
-</div>
+</$elementTag$>
+<$elementTag$ style="height:0.5em;">
+</$elementTag$>
 </$droppable>
 </$tiddler>
 </$set>
