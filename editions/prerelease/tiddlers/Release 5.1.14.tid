@@ -14,6 +14,17 @@ type: text/vnd.tiddlywiki
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/22c1b04ee79a5ccc25cbc33cc91bf5daac1df831]] [[QR code generator|$:/plugins/tiddlywiki/qrcode]] plugin
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/7f11c151f06cd039d1887a6940075237ccb4b7a9]] [[BibTeX importer plugin|$:/plugins/tiddlywiki/bibtex]]
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/c16f96626e2ff9d849563eeba7d8ef5cf8e4ed4b]] Google Analytics plugin to the latest version
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e30330d4be0e0b9b04ea807a034c8d9fa3d13fea]] [[Twitter Plugin]] for embedding tweets etc
+
+!! Improved Support Drag and Drop
+
+There are several improvements to [[Drag and Drop]]:
+
+* Ability to rearrange the "Open" sidebar panel and the tag dropdown (and new tiddlers can be opened by dragging them to the list)
+* Ability to reorder entries in tag dropdowns
+* Dragging a tag pill is now equivalent to dragging all of the tagged tiddlers together
+* Entries in the control panel "Appearance"/"Toolbars" tab can be reordered by drag and drop
+* The image shown while dragging now reflects the dragged item, instead of being a generic drag pill
 
 !! New "Heavier" Theme
 
@@ -51,6 +62,8 @@ The tiddler manager will be extended in the future to increase flexibility and t
 
 !! Usability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3197f9a639761e1e56b2f5b18b5f7cf5c3d992da]] a select all/none checkbox to the header of the import panel
+* [[Changed|https://github.com/Jermolene/TiddlyWiki5/issues/2814]] display of system tiddlers to raw text unless there are multiple slashes in the title
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2072]] "close plugin library" button
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2592]] support for adding tags using the <kbd>enter</kbd> key
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/2590]] handling of <kbd>ctrl-Enter</kbd> to add partially completed tags and fields
@@ -101,6 +114,9 @@ The tiddler manager will be extended in the future to increase flexibility and t
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b1a5afbf158fab9e224978c81a10aca15d30d91a]] new entry to the advanced search filtered export menu for exporting the current story river
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1b339e17bc0c67ff7eb3e8f7f299588ecf8848ee]] `tag` attribute to the KeyboardWidget
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2614]] overwrite protection to the ~WebDAV saver
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/202ffd9c51d71b469eff968ae63b56a985a3c6bf]] new "big block quote" style for [[Block Quotes in WikiText]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c25a44756b1a4a08a29fbe02a908ef57a6a193bf]] customisable template text for new journal tiddlers, accessible the control panel
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/779e62a30fc5e61cee893eabc0f268e7fb959639]] support for `.json` tiddler files containing a single tiddler object, instead of an array of tiddlers
 
 !! Node.js Improvements
 
