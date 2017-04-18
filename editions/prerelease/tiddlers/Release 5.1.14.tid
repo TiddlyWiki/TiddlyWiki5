@@ -63,7 +63,6 @@ The tiddler manager will be extended in the future to increase flexibility and t
 !! Usability Improvements
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3197f9a639761e1e56b2f5b18b5f7cf5c3d992da]] a select all/none checkbox to the header of the import panel
-* [[Changed|https://github.com/Jermolene/TiddlyWiki5/issues/2814]] display of system tiddlers to raw text unless there are multiple slashes in the title
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2072]] "close plugin library" button
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2592]] support for adding tags using the <kbd>enter</kbd> key
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/2590]] handling of <kbd>ctrl-Enter</kbd> to add partially completed tags and fields
