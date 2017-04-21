@@ -119,9 +119,12 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	// Remove highlighting
 	$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
 	// Import any files in the drop
-	var numFiles = this.wiki.readFiles(dataTransfer.files,function(tiddlerFieldsArray) {
-		self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
-	});
+	var numFiles = 0;
+	if(dataTransfer.files) {
+		numFiles = this.wiki.readFiles(dataTransfer.files,function(tiddlerFieldsArray) {
+			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
+		});
+	}
 	// Try to import the various data types we understand
 	if(numFiles === 0) {
 		$tw.utils.importDataTransfer(dataTransfer,this.wiki.generateNewTitle("Untitled"),function(fieldsArray) {
