@@ -5,6 +5,8 @@ function _exposeIosHtml5DragDropShim(config) {
 
   var coordinateSystemForElementFromPoint;
 
+  var DRAG_OVER_EMIT_FREQ = 50;
+
   function main() {
     config = config || {};
     if (!config.hasOwnProperty("simulateAnchorClick")) config.simulateAnchorClick = true;
@@ -45,6 +47,8 @@ function _exposeIosHtml5DragDropShim(config) {
     this.customDragImageX = null;
     this.customDragImageY = null;
     this.el = el || event.target;
+    this.dragOverTimer = null;
+    this.lastMoveEvent = null;
 
     log("dragstart");
 
@@ -95,6 +99,7 @@ function _exposeIosHtml5DragDropShim(config) {
       this.translateDragImage(x, y);
 
       this.synthesizeEnterLeave(event);
+      this.synthesizeOver(event);
     },
     // We use translate instead of top/left because of sub-pixel rendering and for the hope of better performance
     // http://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
@@ -119,8 +124,17 @@ function _exposeIosHtml5DragDropShim(config) {
           this.dispatchEnter(event);
         }
       }
-      if (this.lastEnter) {
-        this.dispatchOver(event);
+    },
+    synthesizeOver: function(event) {
+      this.lastMoveEvent = event;
+      if(this.lastEnter && !this.dragOverTimer) {
+        this.dragOverTimer = setInterval(this.dispatchOver.bind(this), DRAG_OVER_EMIT_FREQ);
+      }
+    },
+    clearDragOverTimer: function() {
+      if(this.dragOverTimer) {
+        clearInterval(this.dragOverTimer);
+        this.dragOverTimer = null;
       }
     },
     dragend: function(event) {
@@ -144,6 +158,7 @@ function _exposeIosHtml5DragDropShim(config) {
       var dragendEvt = doc.createEvent("Event");
       dragendEvt.initEvent("dragend", true, true);
       this.el.dispatchEvent(dragendEvt);
+      this.clearDragOverTimer();
     },
     dispatchDrop: function(target, event) {
       var dropEvt = doc.createEvent("Event");
@@ -194,7 +209,7 @@ function _exposeIosHtml5DragDropShim(config) {
 
       this.lastEnter.dispatchEvent(enterEvt);
     },
-    dispatchOver: function(event) {
+    dispatchOver: function() {
 
       var overEvt = doc.createEvent("Event");
       overEvt.initEvent("dragover", true, true);
@@ -205,7 +220,7 @@ function _exposeIosHtml5DragDropShim(config) {
         }.bind(this)
       };
 
-      var touch = event.changedTouches[0];
+      var touch = this.lastMoveEvent.changedTouches[0];
       overEvt.pageX = touch.pageX;
       overEvt.pageY = touch.pageY;
       overEvt.clientX = touch.clientX;
@@ -232,6 +247,7 @@ function _exposeIosHtml5DragDropShim(config) {
 
       this.lastEnter.dispatchEvent(leaveEvt);
       this.lastEnter = null;
+      this.clearDragOverTimer();
     },
     dispatchDragStart: function() {
       var evt = doc.createEvent("Event");
@@ -326,7 +342,7 @@ function _exposeIosHtml5DragDropShim(config) {
     var el = evt.target;
     do {
       if (elementIsDraggable(el)) {
-        handleTouchStartOnAnchor(el);
+        handleTouchStartOnAnchor(evt, el);
 
         evt.preventDefault();
         new DragDrop(evt,el);
@@ -350,7 +366,7 @@ function _exposeIosHtml5DragDropShim(config) {
     return el.tagName.toLowerCase() == "a";
   }
 
-  function handleTouchStartOnAnchor(el){
+  function handleTouchStartOnAnchor(evt, el){
     // If draggable isn't explicitly set for anchors, then simulate a click event.
     // Otherwise plain old vanilla links will stop working.
     // https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Touch_events#Handling_clicks
