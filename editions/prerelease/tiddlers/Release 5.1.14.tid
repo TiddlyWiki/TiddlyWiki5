@@ -15,6 +15,7 @@ type: text/vnd.tiddlywiki
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/7f11c151f06cd039d1887a6940075237ccb4b7a9]] [[BibTeX importer plugin|$:/plugins/tiddlywiki/bibtex]]
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/c16f96626e2ff9d849563eeba7d8ef5cf8e4ed4b]] Google Analytics plugin to the latest version
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e30330d4be0e0b9b04ea807a034c8d9fa3d13fea]] [[Twitter Plugin]] for embedding tweets etc
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/c0f7f18f0a268087e51813bfbba1b796478d0bb1]] [[KaTeX Plugin]] to [[v0.7.1 of KaTeX|https://github.com/Khan/KaTeX/releases]]
 
 !! Improved Support Drag and Drop
 
