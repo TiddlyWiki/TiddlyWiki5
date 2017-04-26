@@ -12,8 +12,8 @@ type: text/vnd.tiddlywiki
 
 * Added [[SaveTrail Plugin]] that continuously downloads edited tiddlers in the background, providing a  trail of backups
 * Added XLSX Utilities plugin for importing Excel-compatible spreadsheets. See the [[XLSX Utilities Edition]] for details
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/22c1b04ee79a5ccc25cbc33cc91bf5daac1df831]] [[QR code generator|$:/plugins/tiddlywiki/qrcode]] plugin
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/7f11c151f06cd039d1887a6940075237ccb4b7a9]] [[BibTeX importer plugin|$:/plugins/tiddlywiki/bibtex]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/22c1b04ee79a5ccc25cbc33cc91bf5daac1df831]] QR code generator plugin
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/7f11c151f06cd039d1887a6940075237ccb4b7a9]] ~BibTeX importer plugin
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/c16f96626e2ff9d849563eeba7d8ef5cf8e4ed4b]] Google Analytics plugin to the latest version
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e30330d4be0e0b9b04ea807a034c8d9fa3d13fea]] [[Twitter Plugin]] for embedding tweets etc
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/c0f7f18f0a268087e51813bfbba1b796478d0bb1]] [[KaTeX Plugin]] to [[v0.7.1 of KaTeX|https://github.com/Khan/KaTeX/releases]]
