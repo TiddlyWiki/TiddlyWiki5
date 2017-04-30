@@ -69,7 +69,6 @@ Plugins/Installed/Hint: הפלאגינים המותקנים כעת:
 Plugins/Languages/Caption: שפות
 Plugins/Languages/Hint: פלאגינים של חבילות שפה
 Plugins/NoInfoFound/Hint:  ''"<$text text=<<currentTab>>/>"'' לא נמצא
-Plugins/NoInformation/Hint: מידע לא סופק
 Plugins/NotInstalled/Hint: פלאגין זה לא מותקן כעת
 Plugins/OpenPluginLibrary: פתח את ספריית הפלאגין
 Plugins/Plugins/Caption: פלאגינים

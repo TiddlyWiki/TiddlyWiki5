@@ -71,7 +71,6 @@ Plugins/Installed/Hint: Plugins installés :
 Plugins/Languages/Caption: Langues
 Plugins/Languages/Hint: Plugins de langue
 Plugins/NoInfoFound/Hint: ''"<$text text=<<currentTab>>/>"'' non trouvé
-Plugins/NoInformation/Hint: Aucune information disponible
 Plugins/NotInstalled/Hint: Ce plugin n'est pas installé
 Plugins/OpenPluginLibrary: ouvre la bibliothèque de plugins
 Plugins/Plugins/Caption: Plugins

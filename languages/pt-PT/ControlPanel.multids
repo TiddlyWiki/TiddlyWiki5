@@ -72,7 +72,6 @@ Plugins/Language/Prompt: Linguagens
 Plugins/Languages/Caption: Linguagens
 Plugins/Languages/Hint: Extensões de pacotes de idiomas
 Plugins/NoInfoFound/Hint: ''"<$text text=<<currentTab>>/>"'' não encontrado
-Plugins/NoInformation/Hint: Nenhuma informação fornecida
 Plugins/NotInstalled/Hint: Esta extensão não está actualmente instalada
 Plugins/OpenPluginLibrary: abrir biblioteca de extensões
 Plugins/Plugin/Prompt: Extensões

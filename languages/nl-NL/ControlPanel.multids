@@ -73,7 +73,6 @@ Plugins/Language/Prompt: Talen
 Plugins/Languages/Caption: Talen
 Plugins/Languages/Hint: Taal plugins
 Plugins/NoInfoFound/Hint: ''"<$text text=<<currentTab>>/>"'' niet gevonden
-Plugins/NoInformation/Hint: Geen informatie beschikbaar
 Plugins/NotInstalled/Hint: Deze plugin is nu niet geïnstalleerd
 Plugins/OpenPluginLibrary: open pluginbibliotheek
 Plugins/Plugin/Prompt: Plugins

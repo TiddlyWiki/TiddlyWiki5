@@ -67,7 +67,6 @@ Plugins/Installed/Hint: 当前已安装的插件：
 Plugins/Languages/Caption: 语言
 Plugins/Languages/Hint: 语言包插件
 Plugins/NoInfoFound/Hint: 无 ''"<$text text=<<currentTab>>/>"''
-Plugins/NoInformation/Hint: 未提供信息
 Plugins/NotInstalled/Hint: 尚未安装此插件
 Plugins/OpenPluginLibrary: 开启插件程式库
 Plugins/ClosePluginLibrary: 关闭插件程式库
