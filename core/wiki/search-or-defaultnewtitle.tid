@@ -1,0 +1,3 @@
+title: $:/snippets/DefaultNewDynamicTiddlerTitle
+
+<$list filter="[title[$:/temp/search]has[text]]" emptyMessage={{$:/language/DefaultNewTiddlerTitle}}><$transclude tiddler="$:/temp/search" mode="inline"/></$list>

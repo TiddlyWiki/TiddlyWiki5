@@ -440,7 +440,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		// Get the template tiddler
 		templateTiddler = this.wiki.getTiddler(event.param);
 		// Generate a new title
-		title = this.wiki.generateNewTitle(event.param || $tw.language.getString("DefaultNewTiddlerTitle"));
+		title = this.wiki.generateNewTitle(event.param || $tw.language.wiki.renderTiddler("text/plain","$:/snippets/DefaultNewDynamicTiddlerTitle"));
 	}
 	// Get the specified additional fields
 	if(typeof event.paramObject === "object") {
@@ -453,7 +453,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		title = additionalFields.title;
 	}
 	// Generate a title if we don't have one
-	title = title || this.wiki.generateNewTitle($tw.language.getString("DefaultNewTiddlerTitle"));
+	title = title || this.wiki.generateNewTitle($tw.language.wiki.renderTiddler("text/plain","$:/snippets/DefaultNewDynamicTiddlerTitle"));
 	// Find any existing draft for this tiddler
 	draftTitle = this.wiki.findDraft(title);
 	// Pull in any existing tiddler
