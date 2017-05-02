@@ -1,0 +1,19 @@
+created: 20151123142245755
+modified: 20151124061649944
+tags: [[Operator Examples]] [[filter Operator]]
+title: filter Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<$vars link-test="[backlinks[]]" var-test="[backlinks[]tag<item>]">
+
+; test filters
+: link-test: <code><<link-test>></code>
+: var-test: <code><$text text=<<var-test>>/></code>
+
+<<.operator-example 1 "[tag[HelloThere]backlinks[]]" "before we begin, run this for verification:<br>→ fetches all tiddlers that link to any tiddler tagged HelloThere">>
+<<.operator-example 2 "[tag[HelloThere]filter<link-test>]" "same as above, all tiddlers that link to any tiddler tagged HelloThere">>
+<<.operator-example 3 "[tag[HelloThere]filter:$<link-test>]" "returns all tiddlers tagged HelloThere that have incoming links">>
+<<.operator-example 4 "[tag[HelloThere]filter:$all<link-test>]" "returns all tiddlers tagged HelloThere, should at least one of them have a backlink">>
+<<.operator-example 5 "[tag[WikiText]filter:item<var-test>]" "returns tiddlers that link to any tiddler tagged WikiText and also have the tiddler as a tag">>
+<<.operator-example 6 "[tag[WikiText]filter:item $<var-test>]" "returns tiddlers tagged WikiText to which any tiddlers link that also have this tiddler as a tag">>
+<<.operator-example 7 "[tag[WikiText]filter:item $all<var-test>]" "returns all tiddlers linked WikiText, should a single one of them have tiddlers linking to it that also have it as a tag">>
