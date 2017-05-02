@@ -24,6 +24,12 @@ editions
 </li>
 
 <li>
+<a class="tc-tiddlylink tc-tiddlylink-resolves" href="http://tiddlywiki.com/static/FetchCommand.html">
+fetch
+</a>
+</li>
+
+<li>
 <a class="tc-tiddlylink tc-tiddlylink-resolves" href="http://tiddlywiki.com/static/HelpCommand.html">
 help
 </a>

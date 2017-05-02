@@ -6,9 +6,17 @@ Ausgabe eines individuellen Tiddlers, in einem spezifizierten Format (standard: 
 Optional kann ein Template tiddler angegeben werden. Die "currentTiddler" Variable wird auf den Tiddler gesetzt, der zu rendern ist.
 
 ```
---rendertiddler <title> <filename> [<type>] [<template>]
+--rendertiddler <title> <filename> [<type>] [<template>] [<name>] [<value>]
 ```
 
 Standardmäßig ist das `output` Verzeichnis ein Unterverzeichnis im `edition` Verzeichnis. Der `--output` Befehl kann verwendet werden, um ein anderes Verzeichnis auszuwählen.
 
 Nicht vorhandene Verzeichnisse werden automatisch erstellt.
+
+''Beispiel:''
+
+Der folgende Befehl speichert alle tiddler mit dem `tag: done` in eine `JSON` Datei mit dem Namen: `output.json`. Das Template `$:/core/templates/exporters/JsonFile` wird auf die zu speichernden Daten angewandt.
+
+```
+--rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[tag[done]]"
+```

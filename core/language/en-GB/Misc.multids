@@ -22,6 +22,7 @@ Encryption/RepeatPassword: Repeat password
 Encryption/PasswordNoMatch: Passwords do not match
 Encryption/SetPassword: Set password
 Error/Caption: Error
+Error/EditConflict: File changed on server
 Error/Filter: Filter error
 Error/FilterSyntax: Syntax error in filter expression
 Error/IsFilterOperator: Filter Error: Unknown operand for the 'is' filter operator
@@ -36,6 +37,23 @@ InternalJavaScriptError/Hint: Well, this is embarrassing. It is recommended that
 InvalidFieldName: Illegal characters in field name "<$text text=<<fieldName>>/>". Fields can only contain lowercase letters, digits and the characters underscore (`_`), hyphen (`-`) and period (`.`)
 LazyLoadingWarning: <p>Loading external text from ''<$text text={{!!_canonical_uri}}/>''</p><p>If this message doesn't disappear you may be using a browser that doesn't support external text in this configuration. See http://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Login to TiddlySpace
+Manager/Controls/FilterByTag/None: (none)
+Manager/Controls/FilterByTag/Prompt: Filter by tag:
+Manager/Controls/Order/Prompt: Reverse order
+Manager/Controls/Search/Placeholder: Search
+Manager/Controls/Search/Prompt: Search:
+Manager/Controls/Show/Option/Tags: tags
+Manager/Controls/Show/Option/Tiddlers: tiddlers
+Manager/Controls/Show/Prompt: Show:
+Manager/Controls/Sort/Prompt: Sort by:
+Manager/Item/Colour: Colour
+Manager/Item/Fields: Fields
+Manager/Item/Icon/None: (none)
+Manager/Item/Icon: Icon
+Manager/Item/RawText: Raw text
+Manager/Item/Tags: Tags
+Manager/Item/Tools: Tools
+Manager/Item/WikifiedText: Wikified text
 MissingTiddler/Hint: Missing tiddler "<$text text=<<currentTiddler>>/>" - click {{$:/core/images/edit-button}} to create
 No: No
 OfficialPluginLibrary: Official ~TiddlyWiki Plugin Library
@@ -43,6 +61,7 @@ OfficialPluginLibrary/Hint: The official ~TiddlyWiki plugin library at tiddlywik
 PluginReloadWarning: Please save {{$:/core/ui/Buttons/save-wiki}} and reload {{$:/core/ui/Buttons/refresh}} to allow changes to plugins to take effect
 RecentChanges/DateFormat: DDth MMM YYYY
 SystemTiddler/Tooltip: This is a system tiddler
+SystemTiddlers/Include/Prompt: Include system tiddlers
 TagManager/Colour/Heading: Colour
 TagManager/Count/Heading: Count
 TagManager/Icon/Heading: Icon

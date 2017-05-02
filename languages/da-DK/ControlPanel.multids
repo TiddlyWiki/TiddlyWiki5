@@ -70,10 +70,10 @@ Plugins/Installed/Hint: Aktuelt installerede udvidelser:
 Plugins/Language/Prompt: Sprog
 Plugins/Languages/Caption: Sprog
 Plugins/Languages/Hint: Sprogpakkeudvidelser
-Plugins/NoInformation/Hint: Ingen information leveret
+Plugins/NoInfoFound/Hint: Ingen ''"<$text text=<<currentTab>>/>"'' fundet
 Plugins/NotInstalled/Hint: Dette plugin er ikke aktuelt installeret
 Plugins/OpenPluginLibrary: Åbn plugin bibliotek
-Plugins/Plugin/Prompt: Udvidelser 
+Plugins/Plugin/Prompt: Udvidelser
 Plugins/Plugins/Caption: Udvidelser
 Plugins/Plugins/Hint: Udvidelser
 Plugins/Reinstall/Caption: geninstallér
@@ -84,7 +84,7 @@ Saving/Caption: Gemning
 Saving/Heading: Gemning
 Saving/TiddlySpot/Advanced/Heading: Avancerede indstillinger
 Saving/TiddlySpot/BackupDir: Backupmappe
-Saving/TiddlySpot/Backups: Backups 
+Saving/TiddlySpot/Backups: Backups
 Saving/TiddlySpot/Description: Disse indstillinger bruges kun, når der gemmes til http://tiddlyspot.com eller en kompatibel server
 Saving/TiddlySpot/Filename: Upload filnavn
 Saving/TiddlySpot/Heading: ~TiddlySpot
@@ -103,6 +103,9 @@ Settings/Caption: Indstillinger
 Settings/DefaultSidebarTab/Caption: Standard Sidepanelsfane
 Settings/DefaultSidebarTab/Hint: Specificér hvilken sidepanelsfane der vises som standard
 Settings/Hint: Disse indstillinger lader dig tilpasse din  TiddlyWikis opførsel.
+Settings/InfoPanelMode/Hint: Kontrol når info panelet lukkes:
+Settings/InfoPanelMode/Popup/Description: Tiddler info panel lukkes automatisk
+Settings/InfoPanelMode/Sticky/Description: Tiddler info panel forbliver åbent indtil det udtrykkeligt lukkes
 Settings/LinkToBehaviour/Caption: Tiddler åbnings adfærd
 Settings/LinkToBehaviour/InsideRiver/Hint: Navigation fra //indefra// the story river
 Settings/LinkToBehaviour/OpenAbove: Åben ovenover den aktuelle tiddler

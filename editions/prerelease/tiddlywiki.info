@@ -12,7 +12,10 @@
 		"tiddlywiki/highlight",
 		"tiddlywiki/markdown",
 		"tiddlywiki/qrcode",
-		"tiddlywiki/bibtex"
+		"tiddlywiki/bibtex",
+		"tiddlywiki/savetrail",
+		"tiddlywiki/twitter",
+		"tiddlywiki/mobiledragdrop"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
@@ -20,7 +23,9 @@
 		"tiddlywiki/starlight",
 		"tiddlywiki/seamless",
 		"tiddlywiki/centralised",
+		"tiddlywiki/heavier",
 		"tiddlywiki/tight",
+		"tiddlywiki/tight-heavier",
 		"tiddlywiki/readonly"
 	],
 	"languages": [

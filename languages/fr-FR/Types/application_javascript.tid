@@ -2,3 +2,4 @@ title: $:/language/Docs/Types/application/javascript
 description: Code JavaScript
 name: application/javascript
 group: Développeur
+group-sort: 2

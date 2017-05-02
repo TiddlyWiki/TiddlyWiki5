@@ -22,6 +22,7 @@ Encryption/RepeatPassword: Passwort wiederholen
 Encryption/PasswordNoMatch: Passwörter stimmen nicht überein
 Encryption/SetPassword: Passwort setzen
 Error/Caption: Fehler
+Error/EditConflict: Datei auf Server verändert
 Error/Filter: Filter Fehler
 Error/FilterSyntax: Syntax Fehler im Filter-Ausdruck
 Error/IsFilterOperator: Filter Fehler: Unbekannter Operand für den 'is' Filter Operator
@@ -36,6 +37,23 @@ InternalJavaScriptError/Hint: Es tut uns leid, aber bitte starten Sie Ihr Tiddly
 InvalidFieldName: Das Feld: "<$text text=<<fieldName>>/>" enthält illegale Zeichen. Felder müssen klein geschrieben werden. Erlaubte Sonderzeichen sind: Zahlen, Unterstrich (`_`), Minus (`-`) und Punkt (`.`).
 LazyLoadingWarning: <p>Lade externe Datei von ''<$text text={{!!_canonical_uri}}/>''</p><p>Wenn diese Meldung nicht automatisch gelöscht wird, dann verwenden Sie wahrscheinlich einen Browser der diese Funktion nicht unterstützt. Siehe http://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Login bei TiddlySpace
+Manager/Controls/FilterByTag/None: (kein)
+Manager/Controls/FilterByTag/Prompt: Filtern nach tag:
+Manager/Controls/Order/Prompt: Invertiert
+Manager/Controls/Search/Placeholder: Suche
+Manager/Controls/Search/Prompt: Suche:
+Manager/Controls/Show/Option/Tags: Tags
+Manager/Controls/Show/Option/Tiddlers: Tiddler
+Manager/Controls/Show/Prompt: Anzeigen:
+Manager/Controls/Sort/Prompt: Sortieren nach:
+Manager/Item/Colour: Farbe
+Manager/Item/Fields: Feld
+Manager/Item/Icon/None: (kein)
+Manager/Item/Icon: Icon
+Manager/Item/RawText: Text
+Manager/Item/Tags: Tags
+Manager/Item/Tools: Tools
+Manager/Item/WikifiedText: Wikified Text
 MissingTiddler/Hint: Fehlender Tiddler "<$text text=<<currentTiddler>>/>" - klicken Sie {{$:/core/images/edit-button}} um ihn zu erzeugen.
 No: Nein
 OfficialPluginLibrary: Offizielles ~TiddlyWiki Plugin-Verzeichnis
@@ -43,6 +61,7 @@ OfficialPluginLibrary/Hint: Offizielles ~TiddlyWiki Plugin-Verzeichnis auf tiddl
 PluginReloadWarning: Das Wiki muss gespeichert {{$:/core/ui/Buttons/save-wiki}} und neu gladen {{$:/core/ui/Buttons/refresh}} werden, damit die Plugins ausgeführt werden.
 RecentChanges/DateFormat: YYYY MMM DD
 SystemTiddler/Tooltip: Das ist ein System-Tiddler
+SystemTiddlers/Include/Prompt: System-Tiddler einschließen
 TagManager/Colour/Heading: Farbe
 TagManager/Count/Heading: Anzahl
 TagManager/Icon/Heading: Symbol

@@ -24,7 +24,8 @@ Adds the following properties to the wiki object:
 
 var widget = require("$:/core/modules/widgets/widget.js");
 
-var USER_NAME_TITLE = "$:/status/UserName";
+var USER_NAME_TITLE = "$:/status/UserName",
+	TIMESTAMP_DISABLE_TITLE = "$:/config/TimestampDisable";
 
 /*
 Get the value of a text reference. Text references can have any of these forms:
@@ -231,27 +232,35 @@ exports.importTiddler = function(tiddler) {
 Return a hashmap of the fields that should be set when a tiddler is created
 */
 exports.getCreationFields = function() {
-	var fields = {
-			created: new Date()
-		},
-		creator = this.getTiddlerText(USER_NAME_TITLE);
-	if(creator) {
-		fields.creator = creator;
+	if(this.getTiddlerText(TIMESTAMP_DISABLE_TITLE,"").toLowerCase() !== "yes") {
+		var fields = {
+				created: new Date()
+			},
+			creator = this.getTiddlerText(USER_NAME_TITLE);
+		if(creator) {
+			fields.creator = creator;
+		}
+		return fields;
+	} else {
+		return {};
 	}
-	return fields;
 };
 
 /*
 Return a hashmap of the fields that should be set when a tiddler is modified
 */
 exports.getModificationFields = function() {
-	var fields = Object.create(null),
-		modifier = this.getTiddlerText(USER_NAME_TITLE);
-	fields.modified = new Date();
-	if(modifier) {
-		fields.modifier = modifier;
+	if(this.getTiddlerText(TIMESTAMP_DISABLE_TITLE,"").toLowerCase() !== "yes") {
+		var fields = Object.create(null),
+			modifier = this.getTiddlerText(USER_NAME_TITLE);
+		fields.modified = new Date();
+		if(modifier) {
+			fields.modifier = modifier;
+		}
+		return fields;
+	} else {
+		return {};
 	}
-	return fields;
 };
 
 /*
@@ -632,10 +641,10 @@ exports.getTiddlerDataCached = function(titleOrTiddler,defaultData) {
 	if(tiddler) {
 		return this.getCacheForTiddler(tiddler.fields.title,"data",function() {
 			// Return the frozen value
-			var value = self.getTiddlerData(tiddler.fields.title,defaultData);
+			var value = self.getTiddlerData(tiddler.fields.title,undefined);
 			$tw.utils.deepFreeze(value);
 			return value;
-		});
+		}) || defaultData;
 	} else {
 		return defaultData;
 	}
@@ -671,7 +680,7 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 Extract an indexed field from within a data tiddler
 */
 exports.extractTiddlerDataItem = function(titleOrTiddler,index,defaultText) {
-	var data = this.getTiddlerData(titleOrTiddler,Object.create(null)),
+	var data = this.getTiddlerDataCached(titleOrTiddler,Object.create(null)),
 		text;
 	if(data && $tw.utils.hop(data,index)) {
 		text = data[index];
@@ -1096,6 +1105,22 @@ exports.getTiddlerText = function(title,defaultText) {
 		return null;
 	}
 };
+
+/*
+Check whether the text of a tiddler matches a given value. By default, the comparison is case insensitive, and any spaces at either end of the tiddler text is trimmed
+*/
+exports.checkTiddlerText = function(title,targetText,options) {
+	options = options || {};
+	var text = this.getTiddlerText(title,"");
+	if(!options.noTrim) {
+		text = text.trim();
+	}
+	if(!options.caseSensitive) {
+		text = text.toLowerCase();
+		targetText = targetText.toLowerCase();
+	}
+	return text === targetText;
+}
 
 /*
 Read an array of browser File objects, invoking callback(tiddlerFieldsArray) once they're all read

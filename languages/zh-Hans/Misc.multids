@@ -22,6 +22,7 @@ Encryption/RepeatPassword: 重复输入密码
 Encryption/PasswordNoMatch: 密码不匹配
 Encryption/SetPassword: 设定密码
 Error/Caption: 错误
+Error/EditConflict: 服务器上的文件已更改
 Error/Filter: 筛选器错误
 Error/FilterSyntax: 筛选器运算式中的语法错误
 Error/IsFilterOperator: 筛选器错误︰'is' 筛选器运算符的未知操作数
@@ -36,6 +37,23 @@ InternalJavaScriptError/Hint: 喔，真是令人尴尬。建议刷新您的浏�
 InvalidFieldName: 栏位名称 "<$text text=<<fieldName>>/>" 包含无效字符，栏位名称只能包含小写字母、数字、底线 (`_`)、 连字号 (`-`) 和小数点 (`.`)
 LazyLoadingWarning: <p>正在从 ''<$text text={{!!_canonical_uri}}/>'' 加载外部条目 ...</p><p>如果此信息未消失，可能您使用的浏览器不支援此配置的外部条目。请参阅 http://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: 登录 TiddlySpace
+Manager/Controls/FilterByTag/None: (无)
+Manager/Controls/FilterByTag/Prompt: 依标签筛选︰
+Manager/Controls/Order/Prompt: 反向顺序
+Manager/Controls/Search/Placeholder: 搜寻
+Manager/Controls/Search/Prompt: 搜寻︰
+Manager/Controls/Show/Option/Tags: 标签
+Manager/Controls/Show/Option/Tiddlers: 条目
+Manager/Controls/Show/Prompt: 显示︰
+Manager/Controls/Sort/Prompt: 排序︰
+Manager/Item/Colour: 颜色
+Manager/Item/Fields: 栏位
+Manager/Item/Icon/None: (无)
+Manager/Item/Icon: 图标
+Manager/Item/RawText: 原始文字
+Manager/Item/Tags: 标签
+Manager/Item/Tools: 工具
+Manager/Item/WikifiedText: Wikified 文字
 MissingTiddler/Hint: 佚失条目 "<$text text=<<currentTiddler>>/>" - 点击 {{$:/core/images/edit-button}} 可创建此条目
 No: 否
 OfficialPluginLibrary: ~TiddlyWiki 官方插件程式库
@@ -43,6 +61,7 @@ OfficialPluginLibrary/Hint: 此为在 tiddlywiki.com 的 ~TiddlyWiki 官方插�
 PluginReloadWarning: 请保存 {{$:/core/ui/Buttons/save-wiki}} 并刷新页面 {{$:/core/ui/Buttons/refresh}} 允许更改插件才能生效
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 SystemTiddler/Tooltip: 此为系统条目
+SystemTiddlers/Include/Prompt: 包括系统条目
 TagManager/Colour/Heading: 颜色
 TagManager/Count/Heading: 计数
 TagManager/Icon/Heading: 图标

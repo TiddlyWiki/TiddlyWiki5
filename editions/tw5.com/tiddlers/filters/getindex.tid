@@ -3,7 +3,7 @@ modified: 20150203140000000
 tags: [[Filter Operators]] [[Field Operators]]
 title: getindex Operator
 caption: getindex
-purpose: select all values of a data property in the input titles
+op-purpose: select all values of a data property in the input titles
 
 <$macrocall $name=".operator-def"
 input="a [[selection of titles|Title Selection]]"

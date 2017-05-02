@@ -1,5 +1,5 @@
 created: 20141010093214683
-modified: 20160610081833756
+modified: 20161218024621209
 tags: [[Working with TiddlyWiki]]
 title: Creating journal tiddlers
 type: text/vnd.tiddlywiki
@@ -34,3 +34,7 @@ To configure how new journal entries are created, visit the ''Basics'' tab under
 Hint: if you want to create a separate journal tiddler whenever you click ''new journal'' (even if you do this several times in the same day), you can include the clock time in the title format. Specify something like `YYYY-0MM-0DD at 0hhh0mm'0ss''` as the date format.
 
 Another useful trick is to include `$(currentTiddler)$` somewhere in the title format. This means that if you click ''new journal here'' on several different tiddlers, the title of each of those tiddlers will form part of the name of the resulting journal entries.
+
+! Making a custom new journal button
+
+Visit the [[Making a custom journal button]] tiddler for instructions on how to make your own custom New Journal button

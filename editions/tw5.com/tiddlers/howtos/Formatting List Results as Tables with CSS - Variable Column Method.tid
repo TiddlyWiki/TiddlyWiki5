@@ -1,0 +1,84 @@
+created: 20161209172820513
+modified: 20161220162845058
+tags: Learning
+title: Formatting List Results as Tables with CSS - Variable Column Method
+type: text/vnd.tiddlywiki
+
+Sometimes you want the results of a ``<$list>`` widget to be formatted in the form of multiple columns, instead of just one straight listing. This method uses CSS to set up listing as  columns. It is responsive, that is,  re-positioning to display fewer columns if the window is too small.
+
+You don't directly specify a fixed number of columns but instead specify the max-width for the list (which could be a transclusion of the tiddler width) and the width for each item. It lists from left to right, then wraps to a new row.
+
+For other table-making techniques see also:
+
+* [[Formatting List Results as Tables with CSS - Specified Columns Methods]]
+* [[Formatting List Results as Tables (no CSS)]]
+
+
+!! Example listing using 50 existing ~TiddlyWiki tags
+
+```
+<div class="dynamic-table">
+  <$list filter="[has[tags]tags[]sort[title]first[50]]">
+    <span class="item">
+      <$transclude tiddler="$:/core/ui/TagTemplate"/>
+    </span>
+  </$list>
+</div>
+```
+
+!! Example stylesheet to use with listing
+
+```
+<style>
+.dynamic-table {
+  max-width:700px; /* could transclude tiddler width instead */
+  -ms-box-orient: vertical; /* might be unnecessary */
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: inline-flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.item {
+  max-width:160px; min-width:160px;
+  flex: 0 0 2em; /* -grow, -shrink, -basis */
+}
+</style>
+```
+
+!! Results
+
+<div class="dynamic-table">
+  <$list filter="[has[tags]tags[]sort[title]first[50]]">
+    <span class="item">
+      <$transclude tiddler="$:/core/ui/TagTemplate"/>
+    </span>
+  </$list>
+</div>
+
+<style>
+.dynamic-table {
+  max-width:700px; /* could transclude tiddler width instead */
+  -ms-box-orient: vertical;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: inline-flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.item {
+  max-width:160px; min-width:160px;
+  flex: 0 0 2em; /* -grow, -shrink, -basis */
+}
+</style>
+

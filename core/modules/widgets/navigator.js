@@ -174,6 +174,7 @@ NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
 Handle a tm-navigate event
 */
 NavigatorWidget.prototype.handleNavigateEvent = function(event) {
+	event = $tw.hooks.invokeHook("th-navigating",event);
 	if(event.navigateTo) {
 		this.addToStory(event.navigateTo,event.navigateFromTitle);
 		if(!event.navigateSuppressNavigation) {
@@ -245,6 +246,7 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 		tiddler = this.wiki.getTiddler(title),
 		storyList = this.getStoryList(),
 		originalTitle = tiddler ? tiddler.fields["draft.of"] : "",
+		originalTiddler = originalTitle ? this.wiki.getTiddler(originalTitle) : undefined,
 		confirmationTitle;
 	if(!tiddler) {
 		return false;
@@ -268,10 +270,14 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	}
 	// Delete the original tiddler
 	if(originalTitle) {
+		if(originalTiddler) {
+			$tw.hooks.invokeHook("th-deleting-tiddler",originalTiddler);
+		}
 		this.wiki.deleteTiddler(originalTitle);
 		this.removeTitleFromStory(storyList,originalTitle);
 	}
-	// Delete this tiddler
+	// Invoke the hook function and delete this tiddler
+	$tw.hooks.invokeHook("th-deleting-tiddler",tiddler);
 	this.wiki.deleteTiddler(title);
 	// Remove the closed tiddler from the story
 	this.removeTitleFromStory(storyList,title);
@@ -349,6 +355,12 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 				},this.wiki.getModificationFields());
 				newTiddler = $tw.hooks.invokeHook("th-saving-tiddler",newTiddler);
 				this.wiki.addTiddler(newTiddler);
+				// If enabled, relink references to renamed tiddler
+				var shouldRelink = this.getAttribute("relinkOnRename","no").toLowerCase().trim() === "yes";
+				if(isRename && shouldRelink && this.wiki.tiddlerExists(draftOf)) {
+console.log("Relinking '" + draftOf + "' to '" + draftTitle + "'");
+					this.wiki.relinkTiddler(draftOf,draftTitle);
+				}
 				// Remove the draft tiddler
 				this.wiki.deleteTiddler(title);
 				// Remove the original tiddler if we're renaming it
@@ -562,7 +574,9 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	$tw.utils.each(importData.tiddlers,function(tiddlerFields) {
 		var title = tiddlerFields.title;
 		if(title && importTiddler && importTiddler.fields["selection-" + title] !== "unchecked") {
-			self.wiki.addTiddler(new $tw.Tiddler(tiddlerFields));
+			var tiddler = new $tw.Tiddler(tiddlerFields);
+			tiddler = $tw.hooks.invokeHook("th-importing-tiddler",tiddler);
+			self.wiki.addTiddler(tiddler);
 			importReport.push("# [[" + tiddlerFields.title + "]]");
 		}
 	});

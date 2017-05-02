@@ -33,8 +33,6 @@ DownloadSaver.prototype.save = function(text,method,callback,options) {
 	}
 	// Set up the link
 	var link = document.createElement("a");
-	link.setAttribute("target","_blank");
-	link.setAttribute("rel","noopener noreferrer");
 	if(Blob !== undefined) {
 		var blob = new Blob([text], {type: "text/html"});
 		link.setAttribute("href", URL.createObjectURL(blob));
@@ -55,9 +53,18 @@ Information about this saver
 */
 DownloadSaver.prototype.info = {
 	name: "download",
-	priority: 100,
-	capabilities: ["save", "download"]
+	priority: 100
 };
+
+Object.defineProperty(DownloadSaver.prototype.info, "capabilities", {
+	get: function() {
+		var capabilities = ["save", "download"];
+		if(($tw.wiki.getTextReference("$:/config/DownloadSaver/AutoSave") || "").toLowerCase() === "yes") {
+			capabilities.push("autosave");
+		}
+		return capabilities;
+	}
+});
 
 /*
 Static method that returns true if this saver is capable of working

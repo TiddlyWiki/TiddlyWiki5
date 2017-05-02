@@ -1,0 +1,13 @@
+title: $:/plugins/tiddlywiki/twitter/macros
+tags: $:/tags/Macro
+
+\define twitter-usage(text)
+For example:
+
+<$codeblock code="""$text$"""/>
+
+Renders as:
+
+$text$
+\end
+

@@ -163,9 +163,23 @@ tr.doc-table-subheading {
 }
 
 .doc-from-version {
-	display: inline-block;
-	border: 2px solid <<colour alert-border>>;
-	border-radius: 0.5em;
-	background: <<colour alert-background>>;
+    display: inline-block;
+    border-radius: 1em;
+	background: <<colour tiddler-controls-foreground>>;
+	color: <<colour background>>;
+	fill: <<colour background>>;
     padding: 0 0.4em;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 1.5;
+    vertical-align: text-bottom;
 }
+
+.doc-from-version svg {
+	width: 1em;
+	height: 1em;
+    vertical-align: text-bottom;
+}
+
+

@@ -14,6 +14,8 @@
 		"tiddlywiki/seamless",
 		"tiddlywiki/centralised",
 		"tiddlywiki/tight",
+		"tiddlywiki/heavier",
+		"tiddlywiki/tight-heavier",
 		"tiddlywiki/readonly"
 	],
 	"languages": [
@@ -40,7 +42,7 @@
 			"--rendertiddler","ReadMe","readme.md","text/html",
 			"--rendertiddler","ReadMeBinFolder","bin/readme.md","text/html",
 			"--rendertiddler","ContributingTemplate","contributing.md","text/html",
-			"--rendertiddler","$:/core/copyright.txt","license.md","text/plain"],
+			"--rendertiddler","$:/core/copyright.txt","license","text/plain"],
 		"tw2": [
 			"--rendertiddler","TiddlyWiki2ReadMe","tw2/readme.md","text/html"],
 		"static": [

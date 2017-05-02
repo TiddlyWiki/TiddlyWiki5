@@ -13,7 +13,7 @@ CloseAll/Hint: Ferme tous les tiddlers
 CloseOthers/Caption: fermer les autres tiddlers
 CloseOthers/Hint: Ferme les autres tiddlers
 ControlPanel/Caption: panneau de contrôle
-ControlPanel/Hint: Ouvrir le panneau de contrôle
+ControlPanel/Hint: Ouvre le panneau de contrôle
 Delete/Caption: supprimer
 Delete/Hint: Supprime ce tiddler
 Edit/Caption: éditer
@@ -21,9 +21,9 @@ Edit/Hint: Édite ce tiddler
 Encryption/Caption: chiffrement
 Encryption/Hint: Affecte ou résilie le mot de passe pour la sauvegarde de ce wiki
 Encryption/ClearPassword/Caption: résilier le mot de passe
-Encryption/ClearPassword/Hint: Résilie le mot de passe et sauvegarder ce wiki sans chiffrement
+Encryption/ClearPassword/Hint: Résilie le mot de passe et sauvegarde ce wiki sans chiffrement
 Encryption/SetPassword/Caption: affecter un mot de passe
-Encryption/SetPassword/Hint: Affecte un mot de passe pour sauvegarder une version chiffrée de ce wiki
+Encryption/SetPassword/Hint: Affecte un mot de passe pour sauvegarde une version chiffrée de ce wiki
 ExportPage/Caption: exporter tout
 ExportPage/Hint: Exporte tous les tiddlers
 ExportTiddler/Caption: exporter ce tiddler
@@ -32,8 +32,8 @@ ExportTiddlers/Caption: exporter ces tiddlers
 ExportTiddlers/Hint: Exporte ces tiddlers
 Fold/Caption: replier le tiddler
 Fold/Hint: Replie le corps du tiddler
-Fold/FoldBar/Caption: fold-bar
-Fold/FoldBar/Hint: Barres optionnelles pour replier et déplier les tiddlers
+Fold/FoldBar/Caption: Barre de repli
+Fold/FoldBar/Hint: Barre optionnelle pour replier et déplier les tiddlers
 Unfold/Caption: déplier le tiddler
 Unfold/Hint: Déplie le corps de ce tiddler
 FoldOthers/Caption: replier les autres tiddlers
@@ -45,23 +45,23 @@ UnfoldAll/Hint: Déplie le corps de tous les tiddlers ouverts
 FullScreen/Caption: plein-écran
 FullScreen/Hint: Entre ou sort du mode plein-écran
 Help/Caption: aide
-Help/Hint: Afficher le panneau d'aide
+Help/Hint: Affiche le panneau d'aide
 Import/Caption: importer
-Import/Hint: Importe des fichiers
+Import/Hint: Importe des fichiers de nombreux types, notamment texte, image, TiddlyWiki ou JSON
 Info/Caption: informations
-Info/Hint: Affiche les informations sur ce tiddler
+Info/Hint: Affiche des informations sur ce tiddler
 Home/Caption: accueil
 Home/Hint: Ouvre les tiddlers par défaut
 Language/Caption: langue
 Language/Hint: Choix de la langue pour l'interface utilisateur
 More/Caption: plus
-More/Hint: Autres actions
-NewHere/Caption: nouveau, ici
-NewHere/Hint: Crée un nouveau tiddler avec pour tag le tiddler courant
+More/Hint: Actions supplémentaires
+NewHere/Caption: nouveau, à partir d'ici
+NewHere/Hint: Crée un nouveau tiddler avec pour tag le titre du tiddler courant
 NewJournal/Caption: nouveau journal
 NewJournal/Hint: Crée un nouveau tiddler journal
-NewJournalHere/Caption: nouveau journal, ici
-NewJournalHere/Hint: Crée un nouveau tiddler journal avec pour tag le tiddler courant
+NewJournalHere/Caption: nouveau journal, à partir d'ici
+NewJournalHere/Hint: Crée un nouveau tiddler journal avec pour tag le titre du tiddler courant
 NewImage/Caption: nouvelle image
 NewImage/Hint: Crée une nouveau tiddler image
 NewMarkdown/Caption: nouveau tiddler Markdown
@@ -76,20 +76,28 @@ Permalink/Caption: permalink
 Permalink/Hint: Remplace l'URL dans la barre d'adresse du navigateur par un lien direct vers ce tiddler
 Permaview/Caption: permaview
 Permaview/Hint: Remplace l'URL dans la barre d'adresse du navigateur par un lien direct vers l'ensemble des tiddlers présents dans le déroulé
+Print/Caption: imprimer la page
+Print/Hint: Imprime la page courante
 Refresh/Caption: rafraîchir
 Refresh/Hint: Rafraîchit la totalité du wiki
-Save/Caption: enregistrer
+Save/Caption: ok
 Save/Hint: Confirme les changements apportés à ce tiddler
 SaveWiki/Caption: enregistrer les modifications
 SaveWiki/Hint: Enregistre les modifications
-StoryView/Caption: vue sur le déroulé
+StoryView/Caption: visualisation du déroulé
 StoryView/Hint: Choisit le mode de visualisation du déroulé
 HideSideBar/Caption: cacher la barre latérale
 HideSideBar/Hint: Cache la barre latérale
 ShowSideBar/Caption: afficher la barre latérale
 ShowSideBar/Hint: Affiche la barre latérale
 TagManager/Caption: gestionnaire de tags
-TagManager/Hint:  Gestionnaire de tags
+TagManager/Hint:  Ouvre le gestionnaire de tags
+Timestamp/Caption: horodatage
+Timestamp/Hint: Décide si les modifications mettent à jour l'horodatage
+Timestamp/On/Caption: horodatage activé
+Timestamp/On/Hint: L'horodatage est mis à jour quand les tiddlers sont modifiés
+Timestamp/Off/Caption: horodatage désactivé
+Timestamp/Off/Hint: L'horodatage n'est pas mis à jour quand les tiddlers sont modifiés
 Theme/Caption: thème
 Theme/Hint: Choix du thème pour l'affichage
 Bold/Caption: gras
@@ -108,9 +116,9 @@ Excise/Caption/Replace: Remplacer le texte excisé par :
 Excise/Caption/Replace/Macro: macro
 Excise/Caption/Replace/Link: lien
 Excise/Caption/Replace/Transclusion: transclusion
-Excise/Caption/Tag: Utiliser le titre de ce tiddler comme tag du nouveau tiddler
+Excise/Caption/Tag: Utilise le titre de ce tiddler comme tag du nouveau tiddler
 Excise/Caption/TiddlerExists: Attention : le tiddler existe déjà
-Excise/Hint: Excise le texte sélectionner vers un nouveau tiddler
+Excise/Hint: Excise le texte sélectionné vers un nouveau tiddler
 Heading1/Caption: en-tête 1
 Heading1/Hint: Applique le formatage des en-têtes de niveau 1 aux lignes de la sélection
 Heading2/Caption: en-tête 2
@@ -151,12 +159,12 @@ Quote/Caption: citation
 Quote/Hint: Formate les lignes de la sélection comme une citation
 Size/Caption: taille de l'image
 Size/Caption/Height: Hauteur :
-Size/Caption/Resize: Retailler l'image
+Size/Caption/Resize: Redimensionner l'image
 Size/Caption/Width: Largeur :
-Size/Hint: Choisit la taille de l'image
+Size/Hint: Indique une taille pour l'image
 Stamp/Caption: tampon
 Stamp/Caption/New: Ajoutez le vôtre
-Stamp/Hint: Insère un fragment de texte prédéterminé
+Stamp/Hint: Insère un fragment de texte préconfiguré
 Stamp/New/Title: Nom tel qu'il apparaît dans le menu
 Stamp/New/Text: Texte du fragment. (N'oubliez pas d'ajouter une légende dans le champ //caption//.)
 Strikethrough/Caption: barré
@@ -165,5 +173,5 @@ Subscript/Caption: indice
 Subscript/Hint: Met en indice le texte sélectionné
 Superscript/Caption: exposant
 Superscript/Hint: Met en exposant le texte sélectionné
-Underline/Caption: souligner
+Underline/Caption: souligné
 Underline/Hint: Souligne le texte sélectionné

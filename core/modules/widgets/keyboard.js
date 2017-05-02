@@ -33,8 +33,12 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
+	var tag = this.parseTreeNode.isBlock ? "div" : "span";
+	if(this.tag && $tw.config.htmlUnsafeElements.indexOf(this.tag) === -1) {
+		tag = this.tag;
+	}
 	// Create element
-	var domNode = this.document.createElement("div");
+	var domNode = this.document.createElement(tag);
 	// Assign classes
 	var classes = (this["class"] || "").split(" ");
 	classes.push("tc-keyboard");
@@ -72,6 +76,7 @@ KeyboardWidget.prototype.execute = function() {
 	this.message = this.getAttribute("message");
 	this.param = this.getAttribute("param");
 	this.key = this.getAttribute("key");
+	this.tag = this.getAttribute("tag");
 	this.keyInfoArray = $tw.keyboardManager.parseKeyDescriptors(this.key);
 	this["class"] = this.getAttribute("class");
 	// Make child widgets
@@ -83,7 +88,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 KeyboardWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.message || changedAttributes.param || changedAttributes.key || changedAttributes["class"]) {
+	if(changedAttributes.message || changedAttributes.param || changedAttributes.key || changedAttributes["class"] || changedAttributes.tag) {
 		this.refreshSelf();
 		return true;
 	}

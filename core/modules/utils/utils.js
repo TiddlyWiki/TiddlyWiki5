@@ -224,11 +224,13 @@ exports.extendDeepCopy = function(object,extendedProperties) {
 
 exports.deepFreeze = function deepFreeze(object) {
 	var property, key;
-	Object.freeze(object);
-	for(key in object) {
-		property = object[key];
-		if($tw.utils.hop(object,key) && (typeof property === "object") && !Object.isFrozen(property)) {
-			deepFreeze(property);
+	if(object) {
+		Object.freeze(object);
+		for(key in object) {
+			property = object[key];
+			if($tw.utils.hop(object,key) && (typeof property === "object") && !Object.isFrozen(property)) {
+				deepFreeze(property);
+			}
 		}
 	}
 };
@@ -358,7 +360,8 @@ exports.getWeek = function(date) {
 		d = 7; // JavaScript Sun=0, ISO Sun=7
 	}
 	dt.setTime(dt.getTime() + (4 - d) * 86400000);// shift day to Thurs of same week to calculate weekNo
-	var n = Math.floor((dt.getTime()-new Date(dt.getFullYear(),0,1) + 3600000) / 86400000);
+	var x = new Date(dt.getFullYear(),0,1);
+	var n = Math.floor((dt.getTime() - x.getTime()) / 86400000);
 	return Math.floor(n / 7) + 1;
 };
 
@@ -696,7 +699,6 @@ exports.tagToCssSelector = function(tagName) {
 	});
 };
 
-
 /*
 IE does not have sign function
 */
@@ -722,6 +724,84 @@ exports.strEndsWith = function(str,ending,position) {
 		var lastIndex = str.indexOf(ending, position);
 		return lastIndex !== -1 && lastIndex === position;
 	}
+};
+
+/*
+Transliterate string from eg. Cyrillic Russian to Latin
+*/
+var transliterationPairs = {
+	"Ё":"YO",
+	"Й":"I",
+	"Ц":"TS",
+	"У":"U",
+	"К":"K",
+	"Е":"E",
+	"Н":"N",
+	"Г":"G",
+	"Ш":"SH",
+	"Щ":"SCH",
+	"З":"Z",
+	"Х":"H",
+	"Ъ":"'",
+	"ё":"yo",
+	"й":"i",
+	"ц":"ts",
+	"у":"u",
+	"к":"k",
+	"е":"e",
+	"н":"n",
+	"г":"g",
+	"ш":"sh",
+	"щ":"sch",
+	"з":"z",
+	"х":"h",
+	"ъ":"'",
+	"Ф":"F",
+	"Ы":"I",
+	"В":"V",
+	"А":"a",
+	"П":"P",
+	"Р":"R",
+	"О":"O",
+	"Л":"L",
+	"Д":"D",
+	"Ж":"ZH",
+	"Э":"E",
+	"ф":"f",
+	"ы":"i",
+	"в":"v",
+	"а":"a",
+	"п":"p",
+	"р":"r",
+	"о":"o",
+	"л":"l",
+	"д":"d",
+	"ж":"zh",
+	"э":"e",
+	"Я":"Ya",
+	"Ч":"CH",
+	"С":"S",
+	"М":"M",
+	"И":"I",
+	"Т":"T",
+	"Ь":"'",
+	"Б":"B",
+	"Ю":"YU",
+	"я":"ya",
+	"ч":"ch",
+	"с":"s",
+	"м":"m",
+	"и":"i",
+	"т":"t",
+	"ь":"'",
+	"б":"b",
+	"ю":"yu"
+};
+
+exports.transliterate = function(str) {
+	return str.split("").map(function(char) {
+		return transliterationPairs[char] || char;
+	}).join("");
 };
 
 })();

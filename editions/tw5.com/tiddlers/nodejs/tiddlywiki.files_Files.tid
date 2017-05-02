@@ -23,7 +23,9 @@ Each field can be specified as either a ''string'' or ''array'' value to be assi
 
 * ''source'' - (optional) a string specifying the source value for the field. If not specified, the existing value is used
 ** //filename// the filename of the file containing the tiddler
+** //filename-uri-decoded// the filename of the file containing the tiddler, with [[URI decoding|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent]] applied
 ** //basename// the filename of the file containing the tiddler without any extension
+** //basename-uri-decoded// the filename of the file containing the tiddler without any extension, with [[URI decoding|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent]] applied
 ** //extname// the extension of the filename of the file containing the tiddler
 ** //created// the creation date/time of the file containing the tiddler
 ** //modified// the modification date/time of the file containing the tiddler
@@ -61,13 +63,14 @@ There are also several examples of `tiddlywiki.files` files in the main [[Tiddly
 
 !! Importing a folder of PDFs
 
-This example retrieves all the files with the extension `.pdf` from a folder specified by a relative path. Each tiddler is given the following fields:
+This example retrieves all the files with the extension `.pdf` from a folder specified by a relative path. Each tiddler is set up for LazyLoading with the following fields:
 
-* ''title'' - set to the filename of the PDF file
+* ''title'' - set to the URI decoded base filename of the PDF file. [[URI decoding|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent]] allows characters like "/" to be included in titles by URI encoding them as "%2F"
 * ''created'' - set to the creation date/time of the PDF file
 * ''modified'' - set to the modification date/time of the PDF file
 * ''type'' - set to `application/pdf`
 * ''tags'' - set to `$:/tags/AttachedFile`
+* ''text'' - set to an empty string
 * ''_canonical_uri'' - set to the string "pdfs/" concatenated with the filename
 
 ```
@@ -78,16 +81,15 @@ This example retrieves all the files with the extension `.pdf` from a folder spe
             "filesRegExp": "^.*\\.pdf$",
             "isTiddlerFile": false,
             "fields": {
-                "title": {"source": "filename"},
+                "title": {"source": "basename-uri-decoded"},
                 "created": {"source": "created"},
                 "modified": {"source": "modified"},
                 "type": "application/pdf",
                 "tags": ["$:/tags/AttachedFile"],
+                "text": "",
                 "_canonical_uri": {"source": "filename", "prefix": "pdfs/"}
             }
         }
     ]
 }
 ```
-
-The approach of re-using the filename of the PDF as the 

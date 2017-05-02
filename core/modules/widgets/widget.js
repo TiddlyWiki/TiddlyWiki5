@@ -512,7 +512,7 @@ Widget.prototype.invokeActions = function(triggeringWidget,event) {
 /*
 Invoke the action widgets defined in a string
 */
-Widget.prototype.invokeActionString = function(actions,triggeringWidget,event) {
+Widget.prototype.invokeActionString = function(actions,triggeringWidget,event,variables) {
 	actions = actions || "";
 	var parser = this.wiki.parseText("text/vnd.tiddlywiki",actions,{
 			parentWidget: this,
@@ -520,7 +520,8 @@ Widget.prototype.invokeActionString = function(actions,triggeringWidget,event) {
 		}),
 		widgetNode = this.wiki.makeWidget(parser,{
 			parentWidget: this,
-			document: this.document
+			document: this.document,
+			variables: variables
 		});
 	var container = this.document.createElement("div");
 	widgetNode.render(container,null);

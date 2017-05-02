@@ -1,6 +1,6 @@
 caption: checkbox
 created: 20131024141900000
-modified: 20150626091305445
+modified: 20161221202816730
 tags: Widgets
 title: CheckboxWidget
 type: text/vnd.tiddlywiki
@@ -18,13 +18,15 @@ The content of the `<$checkbox>` widget is displayed within an HTML `<label>` el
 
 |!Attribute |!Description |
 |tiddler |Title of the tiddler to manipulate (defaults to the [[current tiddler|Current Tiddler]]) |
-|tag |The name of the tag to which the checkbox should be bound |
+|tag |The name of the tag to which the checkbox is bound |
 |invertTag |When set to ''yes'', flips the tag binding logic so that the absence of the tag causes the checkbox to be checked  |
-|field |The name of the field to which the checkbox should be bound |
+|field |The name of the field to which the checkbox is bound |
+|index|<<.from-version "5.1.14">> The index of the //tiddler//, a [[DataTiddler|DataTiddlers]], to which the checkbox is bound<<.tip "be sure to set the //tiddler// correctly">>|
 |checked |The value of the field corresponding to the checkbox being checked |
 |unchecked |The value of the field corresponding to the checkbox being unchecked |
 |default |The default value to use if the field is not defined |
 |class |The class that will be assigned to the label element |
+|actions |<<.from-version "5.1.14">> A string containing ActionWidgets to be triggered when the checkbox is clicked |
 
 !! Tag Mode
 
@@ -32,9 +34,7 @@ Using the checkbox widget in tag mode requires the ''tag'' attribute to specify 
 
 This example creates a checkbox that flips the ''done'' tag on the current tiddler:
 
-```
-<$checkbox tag="done">Is it done?</$checkbox>
-```
+<<wikitext-example-without-html """<$checkbox tag="done"> Is it done?</$checkbox>""">>
 
 !! Field Mode
 
@@ -42,6 +42,29 @@ Using the checkbox widget in field mode requires the ''field'' attribute to spec
 
 This example creates a checkbox that is checked if the field ''status'' is equal to ''open'' and unchecked if the field is equal to ''closed''. If the field is undefined then it defaults to ''closed'', meaning that the checkbox will be unchecked if the ''status'' field is missing.
 
-```
-<$checkbox field="status" checked="open" unchecked="closed" default="closed">Is it open?</$checkbox>
-```
+<<wikitext-example-without-html """<$checkbox field="status" checked="open" unchecked="closed" default="closed"> Is it open?</$checkbox><br>''status:'' {{!!status}}""">>
+
+!! Index Mode
+
+To use the checkbox widget in index mode set the ''index'' attribute to the index of a [[DataTiddler|DataTiddlers]]. The ''checked'' and ''unchecked'' attributes specify the values to be assigned to the index and correspond to its checked and unchecked states respectively. The ''default'' attribute is used as a fallback value if the index is undefined.
+
+The example below creates a checkbox that is checked if the index by the name of this tiddler in the tiddler ExampleData is equal to ''selected'' and unchecked if the index is an empty string. If the index is undefined then it defaults to an empty string, meaning the checkbox will be unchecked if the index is missing.
+
+<$macrocall $name="wikitext-example-without-html" src="""<$checkbox tiddler="ExampleData" index=<<currentTiddler>> checked="selected" unchecked="" default=""> Selected?</$checkbox>"""/>
+
+!! `actions` Attribute
+
+This example of using the `actions` attribute shows both the [[Action Set Field Widget|ActionSetFieldWidget]] and [[Action Send Message Widget|ActionSendMessageWidget]] to demonstrate two actions.
+
+The [[Set Widget|SetWidget]] uses a filter value to set the value of variable `tag`. The [[Action Send Message Widget|ActionSendMessageWidget]] joins all  the tags into one large tag. The [[Action Set Field Widget|ActionSetFieldWidget]] appends the tags as individual tags.  In this example, the [[Field Mangler Widget|FieldManglerWidget]] is required for the [[Action Send Message Widget|ActionSendMessageWidget]] but not for [[Action Set Field Widget|ActionSetFieldWidget]]. Be aware that the action occurs whether you check or uncheck.
+
+It is often necessary to use triple quotes with the `actions` attribute. Alternatively, the attribute can be assigned directly from a variable with `actions=<<my-actions>>`.
+
+<$macrocall $name='wikitext-example-without-html' src='<$fieldmangler>
+<$set filter="[[Features]] [[Encryption]] +[tags[]]" name="tag">
+<$checkbox actions="""<$action-setfield  $field="tags" $value=<<tag>> /><$action-sendmessage $message="tm-add-tag" $param=<<tag>> />""" field="checked" checked="YES" unchecked="NO" >
+    Add tags from tiddlers [[Features]] and [[Encryption]]
+</$checkbox>
+</$set>
+</$fieldmangler>' />
+

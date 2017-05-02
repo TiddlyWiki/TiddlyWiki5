@@ -119,6 +119,48 @@ blockquote {
 	border-left: 5px solid <<colour blockquote-bar>>;
 	margin-left: 25px;
 	padding-left: 10px;
+	quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote.tc-big-quote {
+	font-family: Georgia, serif;
+	position: relative;
+	background: <<colour pre-background>>;
+	border-left: none;
+	margin-left: 50px;
+	margin-right: 50px;
+	padding: 10px;
+    border-radius: 8px;
+}
+
+blockquote.tc-big-quote cite:before {
+	content: "\2014 \2009";
+}
+
+blockquote.tc-big-quote:before {
+	font-family: Georgia, serif;
+	color: <<colour blockquote-bar>>;
+	content: open-quote;
+	font-size: 8em;
+	line-height: 0.1em;
+	margin-right: 0.25em;
+	vertical-align: -0.4em;
+	position: absolute;
+    left: -50px;
+    top: 42px;
+}
+
+blockquote.tc-big-quote:after {
+	font-family: Georgia, serif;
+	color: <<colour blockquote-bar>>;
+	content: close-quote;
+	font-size: 8em;
+	line-height: 0.1em;
+	margin-right: 0.25em;
+	vertical-align: -0.4em;
+	position: absolute;
+    right: -80px;
+    bottom: -20px;
 }
 
 dl dt {
@@ -141,6 +183,11 @@ input:not([type]) {
 
 svg.tc-image-button {
 	padding: 0px 1px 1px 0px;
+}
+
+.tc-icon-wrapper > svg {
+	width: 1em;
+	height: 1em;
 }
 
 kbd {
@@ -276,6 +323,8 @@ a.tc-tiddlylink-external:hover {
 
 .tc-tiddler-dragger-inner {
 	position: absolute;
+	top: -1000px;
+	left: -1000px;
 	display: inline-block;
 	padding: 8px 20px;
 	font-size: 16.9px;
@@ -310,6 +359,19 @@ a.tc-tiddlylink-external:hover {
 	content: "<<lingo DropMessage>>";
 }
 
+.tc-droppable > .tc-droppable-placeholder {
+	display: none;
+}
+
+.tc-droppable.tc-dragover > .tc-droppable-placeholder {
+	display: block;
+	border: 2px dashed <<colour dropzone-background>>;
+}
+
+.tc-draggable {
+	cursor: move;
+}
+
 /*
 ** Plugin reload warning
 */
@@ -338,6 +400,7 @@ button svg, button img, label svg, label img {
 	margin: 0;
 	background: none;
 	border: none;
+    cursor: pointer;
 }
 
 .tc-btn-boxed {
@@ -530,7 +593,7 @@ button.tc-tag-label, span.tc-tag-label {
 	display: inline-block;
 	padding: 0.16em 0.7em;
 	font-size: 0.9em;
-	font-weight: 300;
+	font-weight: 400;
 	line-height: 1.2em;
 	color: <<colour tag-foreground>>;
 	white-space: nowrap;
@@ -556,6 +619,7 @@ button.tc-untagged-label {
 	height: 1em;
 	width: 1em;
 	fill: <<colour tag-foreground>>;
+	vertical-align: text-bottom;
 }
 
 .tc-tag-manager-table .tc-tag-label {
@@ -926,6 +990,7 @@ button.tc-untagged-label {
 .tc-tiddler-frame iframe.tc-edit-texteditor {
 	padding: 3px 3px 3px 3px;
 	border: 1px solid <<colour tiddler-editor-border>>;
+	background-color: <<colour tiddler-editor-background>>;
 	line-height: 1.3em;
 	-webkit-appearance: none;
 }
@@ -937,10 +1002,6 @@ button.tc-untagged-label {
 	padding: 3em 3em 6em 3em;
 	background: <<colour alert-background>>;
 	border: 1px solid <<colour alert-border>>;
-}
-
-.tc-tiddler-frame input.tc-edit-texteditor {
-	background-color: <<colour tiddler-editor-background>>;
 }
 
 canvas.tc-edit-bitmapeditor  {
@@ -1155,6 +1216,10 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-edit-add-tag .tc-add-tag-name input {
 	width: 50%;
+}
+
+.tc-edit-add-tag .tc-keyboard {
+	display:inline;
 }
 
 .tc-edit-tags .tc-tag-label {
@@ -1724,6 +1789,113 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 /*
+** Manager
+*/
+
+.tc-manager-wrapper {
+	
+}
+
+.tc-manager-controls {
+	
+}
+
+.tc-manager-control {
+	margin: 0.5em 0;
+}
+
+.tc-manager-list {
+	width: 100%;
+	border-top: 1px solid <<colour muted-foreground>>;
+	border-left: 1px solid <<colour muted-foreground>>;
+	border-right: 1px solid <<colour muted-foreground>>;
+}
+
+.tc-manager-list-item {
+
+}
+
+.tc-manager-list-item-heading {
+    display: block;
+    width: 100%;
+    text-align: left;	
+	border-bottom: 1px solid <<colour muted-foreground>>;
+	padding: 3px;
+}
+
+.tc-manager-list-item-heading-selected {
+	font-weight: bold;
+	color: <<colour background>>;
+	fill: <<colour background>>;
+	background-color: <<colour foreground>>;
+}
+
+.tc-manager-list-item-heading:hover {
+	background: <<colour primary>>;
+	color: <<colour background>>;
+}
+
+.tc-manager-list-item-content {
+	display: flex;
+}
+
+.tc-manager-list-item-content-sidebar {
+    flex: 1 0;
+    background: <<colour tiddler-editor-background>>;
+    border-right: 0.5em solid <<colour muted-foreground>>;
+    border-bottom: 0.5em solid <<colour muted-foreground>>;
+    white-space: nowrap;
+}
+
+.tc-manager-list-item-content-item-heading {
+	display: block;
+	width: 100%;
+	text-align: left;
+    background: <<colour muted-foreground>>;
+	text-transform: uppercase;
+	font-size: 0.6em;
+	font-weight: bold;
+    padding: 0.5em 0 0.5em 0;
+}
+
+.tc-manager-list-item-content-item-body {
+	padding: 0 0.5em 0 0.5em;
+}
+
+.tc-manager-list-item-content-item-body > pre {
+	margin: 0.5em 0 0.5em 0;
+	border: none;
+	background: inherit;
+}
+
+.tc-manager-list-item-content-tiddler {
+    flex: 3 1;
+    border-left: 0.5em solid <<colour muted-foreground>>;
+    border-right: 0.5em solid <<colour muted-foreground>>;
+    border-bottom: 0.5em solid <<colour muted-foreground>>;
+}
+
+.tc-manager-list-item-content-item-body > table {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.tc-manager-list-item-content-item-body > table td {
+	border: none;
+}
+
+.tc-manager-icon-editor > button {
+	width: 100%;
+}
+
+.tc-manager-icon-editor > button > svg,
+.tc-manager-icon-editor > button > button {
+	width: 100%;
+	height: auto;
+}
+
+/*
 ** Alerts
 */
 
@@ -1885,6 +2057,12 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	font-size: 12px;
 	line-height: 18px;
 	color: <<colour message-foreground>>;
+}
+
+.tc-message-box svg {
+	width: 1em;
+	height: 1em;
+    vertical-align: text-bottom;
 }
 
 /*

@@ -71,7 +71,6 @@ Plugins/Installed/Hint: 현재 설치된 플러그인:
 Plugins/Languages/Caption: 언어
 Plugins/Languages/Hint: 언어 팩 플러그인
 Plugins/NoInfoFound/Hint: ''"<$text text=<<currentTab>>/>"'' 찾을 수 없음
-Plugins/NoInformation/Hint: 제공된 정보 없음
 Plugins/NotInstalled/Hint: 이 플러그인은 현재 설치되어 있지 않습니다
 Plugins/OpenPluginLibrary: 플러그인 라이브러리 열기
 Plugins/Plugins/Caption: 플러그인

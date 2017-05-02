@@ -15,7 +15,7 @@ Handle slicing heading nodes
 exports.processHeadingNode = function(domNode,tagName) {
 	if(domNode.nodeType === 1 && (tagName === "h1" || tagName === "h2" || tagName === "h3" || tagName === "h4")) {
 		var text = $tw.utils.htmlEncode(domNode.textContent);
-		var title = this.makeUniqueTitle("heading",text),
+		var title = this.makeUniqueTitle("heading " + text),
 			parentTitle = this.popParentStackUntil(tagName),
 			tags = [];
 		if(domNode.className && domNode.className.trim() !== "") {

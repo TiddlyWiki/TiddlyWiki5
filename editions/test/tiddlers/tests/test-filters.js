@@ -71,11 +71,13 @@ describe("Filter tests", function() {
 		title: "a fourth tiddler",
 		text: "The quality of mercy is not drained by [[Tiddler Three]]",
 		tags: [],
+		empty: "not",
 		modifier: "JohnDoe"});
 	wiki.addTiddler({
 		title: "one",
 		text: "This is the text of tiddler [[one]]",
 		list: "[[Tiddler Three]] [[TiddlerOne]]",
+		empty: "",
 		modifier: "JohnDoe"});
 
 	// Our tests
@@ -190,6 +192,12 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[has[modified]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne");
 		expect(wiki.filterTiddlers("[!has[modified]sort[title]]").join(",")).toBe("a fourth tiddler,one");
 	});
+
+	it("should handle the has:field operator", function() {
+		expect(wiki.filterTiddlers("[has:field[empty]sort[title]]").join(",")).toBe("a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[!has:field[empty]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne");
+	});
+
 
 	it("should handle the limit operator", function() {
 		expect(wiki.filterTiddlers("[!is[system]sort[title]limit[2]]").join(",")).toBe("a fourth tiddler,one");

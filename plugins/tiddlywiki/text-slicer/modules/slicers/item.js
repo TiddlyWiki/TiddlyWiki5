@@ -16,7 +16,7 @@ exports.processListItemNode = function(domNode,tagName) {
 	var text = $tw.utils.htmlEncode(domNode.textContent);
 	if(domNode.nodeType === 1 && tagName === "li") {
 		// if(!this.isBlank(text)) {
-			var title = this.makeUniqueTitle("list-item",text),
+			var title = this.makeUniqueTitle("list-item " + text),
 				parentTitle = this.parentStack[this.parentStack.length - 1].title,
 				tags = [];
 			if(domNode.className && domNode.className.trim() !== "") {

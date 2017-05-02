@@ -11,6 +11,7 @@ Basics/DefaultTiddlers/Prompt: Standard-Tiddler:
 Basics/DefaultTiddlers/TopHint: Tiddler, die beim Start geladen werden:
 Basics/Language/Prompt: Hallo! Aktuelle Sprache:
 Basics/NewJournal/Title/Prompt: Titel des neuen Journal-Tiddlers:
+Basics/NewJournal/Text/Prompt: Text des neuen Journal-Tiddlers:
 Basics/NewJournal/Tags/Prompt: Tags des neuen Journal-Tiddlers:
 Basics/OverriddenShadowTiddlers/Prompt: Anzahl überschriebener Schatten-Tiddler:
 Basics/ShadowTiddlers/Prompt: Anzahl Schatten-Tiddler:
@@ -56,8 +57,8 @@ Parsing/Hint: Hier können Sie die globalen Parser-Einstellungen ändern. ACHTUN
 Parsing/Block/Caption: Block Regeln
 Parsing/Inline/Caption: Inline Regeln
 Parsing/Pragma/Caption: Pragma Regeln
-Plugins/Add/Hint: Suche und installiere neue Plugins
 Plugins/Add/Caption: Suche
+Plugins/Add/Hint: Suche und installiere neue Plugins
 Plugins/AlreadyInstalled/Hint: Dieses Plugin ist bereits installiert. Version: <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: deaktivieren
@@ -71,19 +72,26 @@ Plugins/Installed/Hint: Momentan installierte Plugins
 Plugins/Languages/Caption: Sprachen
 Plugins/Languages/Hint: Spracherweiterungen
 Plugins/NoInfoFound/Hint: Kein ''"<$text text=<<currentTab>>/>"'' gefunden
-Plugins/NoInformation/Hint: Kein Information vorhanden
 Plugins/NotInstalled/Hint: Dieses Plugin ist momentan nicht installiert
 Plugins/OpenPluginLibrary: Öffne das Plugin-Verzeichnis
+Plugins/ClosePluginLibrary: Schließe das Plugin-Verzeichnis
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Erweiterungen
 Plugins/Reinstall/Caption: erneut installieren
 Plugins/Themes/Caption: Themes
 Plugins/Themes/Hint: Theme Erweiterungen
 Saving/Caption: Speichern
-Saving/Heading: Speichern
+Saving/DownloadSaver/AutoSave/Description: Erlaube automatisches Speichern für den "Download Saver"
+Saving/DownloadSaver/AutoSave/Hint: Erlaube automatisches Speichern für den "Download Saver"
+Saving/DownloadSaver/Caption: Download Saver
+Saving/DownloadSaver/Hint: Diese Einstellungen gelten für den HTML5-compatiblen "Download Saver"
+Saving/General/Caption: Allgemein
+Saving/General/Hint: Diese Einstellungen gelten für alle Speichermechanismen
+Saving/Hint: Einstellungen zu den TiddlyWiki Speichermechanismen
 Saving/TiddlySpot/Advanced/Heading: Erweiterte Einstellungen
 Saving/TiddlySpot/BackupDir: Verzeichnis für das "Backup"
 Saving/TiddlySpot/Backups: "Backups"
+Saving/TiddlySpot/Caption: Speichern auf ~TiddlySpot
 Saving/TiddlySpot/Description: Diese Einstellungen sind nur für http://tiddlyspot.com und kompatible Server aktiv!
 Saving/TiddlySpot/Filename: Dateiname für den "Upload"
 Saving/TiddlySpot/Heading: ~TiddlySpot
@@ -103,6 +111,10 @@ Settings/Caption: Einstellungen
 Settings/EditorToolbar/Caption: Editor Toolbar
 Settings/EditorToolbar/Hint: Aktivieren oder deaktivieren der Editor Toolbar
 Settings/EditorToolbar/Description: Editor Toolbar anzeigen
+Settings/InfoPanelMode/Caption: Tiddler Info Panel Modus
+Settings/InfoPanelMode/Hint: Einstellung, wann das Info Panel geschlossen wird:
+Settings/InfoPanelMode/Popup/Description: Tiddler Info-Panel schließt automatisch
+Settings/InfoPanelMode/Sticky/Description: TiddlerTiddler Info-Panel bleibt offen, bis es geschlossen wird
 Settings/Hint: Diese erweiterten Einstellungen ermöglichen Ihnen, das Verhalten von TiddlyWiki zu ändern.
 Settings/NavigationAddressBar/Caption: Navigation Adresszeile
 Settings/NavigationAddressBar/Hint: Verhalten der Adresszeile des Browsers, wenn ein Tiddler geöffnet wird:
@@ -149,12 +161,12 @@ TiddlerFields/Caption: Tiddler Felder
 TiddlerFields/Hint: Hier finden Sie alle [[Felder|TiddlerFields]], die in diesem Wiki verwendet werden. Inklusive der Felder aus System-, exklusive Schatten-Tiddler. 
 Toolbars/Caption: Toolbar
 Toolbars/EditToolbar/Caption: Edit Toolbar
-Toolbars/EditToolbar/Hint: Auswählen, welche Buttons im "Edit Modus" angezeigt werden:
+Toolbars/EditToolbar/Hint: Auswählen, welche Buttons im "Edit Modus" angezeigt werden. Verwenden Sie "Drag and Drop", um die Reihenfolge zu ändern
 Toolbars/Hint: Auswählen, welche "Toolbar Button" angezeigt werden
 Toolbars/PageControls/Caption: Page Toolbar
-Toolbars/PageControls/Hint: Auswählen, welche Buttons im Hauptmenü angezeigt werden:
+Toolbars/PageControls/Hint: Auswählen, welche Buttons im Hauptmenü angezeigt werden. Verwenden Sie "Drag and Drop", um die Reihenfolge zu ändern
 Toolbars/EditorToolbar/Caption: Editor Toolbar
 Toolbars/EditorToolbar/Hint: Auswählen, welche Editorbuttons angezeigt werden sollen. Manche Buttons sind vom Tiddler-Typ abhängig und werden eventuell ausgeblendet.
 Toolbars/ViewToolbar/Caption: View Toolbar
-Toolbars/ViewToolbar/Hint: Auswählen, welche Buttons im "View Modus" angezeigt werden:
+Toolbars/ViewToolbar/Hint: Auswählen, welche Buttons im "View Modus" angezeigt werden. Verwenden Sie "Drag and Drop", um die Reihenfolge zu ändern
 Tools/Download/Full/Caption: Herunterladen des ''gesamten Wikis''

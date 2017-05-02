@@ -60,6 +60,7 @@ Plugins/Add/Caption: Verkrijg meer plugins
 Plugins/Add/Hint: Installeer plugins van de officiële bibliotheek
 Plugins/AlreadyInstalled/Hint: Deze plugin is al geïnstalleerd met versie <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
+Plugins/ClosePluginLibrary: schakel pluginbibliotheek uit
 Plugins/Disable/Caption: schakel uit
 Plugins/Disable/Hint: Schakel deze plugin uit na verversen van deze pagina
 Plugins/Disabled/Status: (uitgeschakeld)
@@ -71,16 +72,23 @@ Plugins/Installed/Hint: Geïnstalleerde plugins:
 Plugins/Language/Prompt: Talen
 Plugins/Languages/Caption: Talen
 Plugins/Languages/Hint: Taal plugins
-Plugins/NoInformation/Hint: Geen informatie beschikbaar
+Plugins/NoInfoFound/Hint: ''"<$text text=<<currentTab>>/>"'' niet gevonden
 Plugins/NotInstalled/Hint: Deze plugin is nu niet geïnstalleerd
-Plugins/OpenPluginLibrary: open plugin bibliotheek
+Plugins/OpenPluginLibrary: open pluginbibliotheek
 Plugins/Plugin/Prompt: Plugins
 Plugins/Reinstall/Caption: herinstalleer
 Plugins/Theme/Prompt: Thema's
 Plugins/Themes/Caption: Thema's
 Plugins/Themes/Hint: Thema plugins
 Saving/Caption: Opslaan
+Saving/DownloadSaver/AutoSave/Description: Sta automatisch opslaan toe voor de opslagmodule
+Saving/DownloadSaver/AutoSave/Hint: Sla automatisch op voor de opslagmodule
+Saving/DownloadSaver/Caption: Opslagmodule
+Saving/DownloadSaver/Hint: Deze instellingen gelden voor de HTML5 compatibele opslagmodule
+Saving/General/Caption: Algemeen
+Saving/General/Hint: Deze instellingen gelden voor alle geladen opslagmodules
 Saving/Heading: Opslaan
+Saving/Hint: Instellingen voor opslaan van de gehele TiddlyWiki als één bestand via een opslagmodule
 Saving/TiddlySpot/Advanced/Heading: Geavanceerde instellingen
 Saving/TiddlySpot/BackupDir: Backup folder
 Saving/TiddlySpot/Backups: Backups
@@ -102,7 +110,14 @@ Settings/CamelCase/Hint: Je kan globaal het automatisch linken van ~CamelCase wo
 Settings/Caption: Instellingen
 Settings/DefaultSidebarTab/Caption: Standaard tab in zijpaneel
 Settings/DefaultSidebarTab/Hint: Geef aan welke tab in het zijpaneel standaard wordt getoond
+Settings/EditorToolbar/Caption: Editor knoppenbalk
+Settings/EditorToolbar/Description: Toon editor knoppenbalk
+Settings/EditorToolbar/Hint: Zet editor knoppenbalk aan of uit:
 Settings/Hint: Met deze instellingen kun je het gedrag van TiddlyWiki veranderen.
+Settings/InfoPanelMode/Caption: Tiddler infopaneel modus
+Settings/InfoPanelMode/Hint: Controleer wanneer het tiddler infopaneel sluit:
+Settings/InfoPanelMode/Popup/Description: Tiddler informatiepaneel sluit automatisch
+Settings/InfoPanelMode/Sticky/Description: Tiddler informatiepaneel blijft open staan tot expliciet sluiten
 Settings/LinkToBehaviour/Caption: Waar een tiddler opent
 Settings/LinkToBehaviour/InsideRiver/Hint: Navigatie //vanuit// de 'story river'
 Settings/LinkToBehaviour/OpenAbove: Open boven de huidige tiddler
@@ -110,6 +125,7 @@ Settings/LinkToBehaviour/OpenAtBottom: Open onderaan de 'story river'
 Settings/LinkToBehaviour/OpenAtTop: Open bovenaan de 'story river'
 Settings/LinkToBehaviour/OpenBelow: Open beneden de huidige tiddler
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigatie //van buiten// de 'story river'
+Settings/MissingLinks/Caption: Wiki links
 Settings/MissingLinks/Description: Sta links naar ontbrekende tiddlers toe
 Settings/MissingLinks/Hint: Kies om te linken naar nog niet bestaande tiddlers
 Settings/NavigationAddressBar/Caption: Navigatie adresbalk
@@ -120,12 +136,12 @@ Settings/NavigationAddressBar/Permaview/Description: Voeg alle open tiddlers toe
 Settings/NavigationHistory/Caption: Navigeer-geschiedenis
 Settings/NavigationHistory/Hint: Werk de browsergeschiedenis bij als er naar een tiddler genavigeerd wordt:
 Settings/NavigationHistory/No/Description: Werk de browsergeschiedenis niet bij
-Settings/NavigationHistory/Yes/Description: Werk de browsergeschiedenis bij 
+Settings/NavigationHistory/Yes/Description: Werk de browsergeschiedenis bij
 Settings/PerformanceInstrumentation/Caption: Prestatiemeting
 Settings/PerformanceInstrumentation/Description: Zet prestatiemeting aan
 Settings/PerformanceInstrumentation/Hint: Toont prestatiestatistieken in de 'browser console'. Dit vereist herladen van de wiki om effect te hebben
 Settings/TitleLinks/Caption: Titels van tiddlers
-Settings/TitleLinks/Hint: Toon (optioneel) tiddler titels als link 
+Settings/TitleLinks/Hint: Toon (optioneel) tiddler titels als links
 Settings/TitleLinks/No/Description: Toon tiddler titels niet als links
 Settings/TitleLinks/Yes/Description: Toon tiddler titels als links
 Settings/ToolbarButtons/Caption: Knoppen van knoppenbalk
@@ -144,12 +160,13 @@ Theme/Prompt: Huidig thema:
 TiddlerFields/Caption: Tiddler velden
 TiddlerFields/Hint: Dit is de complete reeks tiddlervelden in gebruik bij deze wiki (inclusief systeemtiddlers maar exclusief schaduwtiddlers).
 Toolbars/Caption: Knoppenbalken
-Toolbars/EditorToolbar/Hint: Kies welke knoppen in de editor knoppenbalk getoond worden. Sommige knoppen worden alleen getoond bij een bepaald tiddler type
+Toolbars/EditorToolbar/Caption: Editor knoppenbalk
+Toolbars/EditorToolbar/Hint: Kies welke knoppen in de editor knoppenbalk getoond worden. Sommige knoppen worden alleen getoond bij een bepaald type tiddler
 Toolbars/EditToolbar/Caption: Knoppenbalk bij wijzigen
 Toolbars/EditToolbar/Hint: Kies welke knoppen getoond worden voor tiddlers in wijzigmode
 Toolbars/Hint: Kies welke knoppen getoond worden
 Toolbars/PageControls/Caption: Pagina-knoppenbalk
-Toolbars/PageControls/Hint: Kies welke knoppen getoond worden op de knoppenbalk van de pagina-knoppenbalk
+Toolbars/PageControls/Hint: Kies welke knoppen getoond worden op de pagina-knoppenbalk
 Toolbars/ViewToolbar/Caption: Knoppenbalk bij weergave
 Toolbars/ViewToolbar/Hint: Kies welke knoppen zichtbaar zijn bij weergave
 Tools/Download/Full/Caption: Download complete wiki (inclusief documentatie)

@@ -21,6 +21,7 @@ caption: {{$:/language/ControlPanel/Basics/Caption}}
 |<$link to="$:/config/AnimationDuration"><<lingo AnimDuration/Prompt>></$link> |<$edit-text tiddler="$:/config/AnimationDuration" default="" tag="input"/> |
 |<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit tag="textarea" tiddler="$:/DefaultTiddlers" class="tc-edit-texteditor"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
 |<$link to="$:/config/NewJournal/Title"><<lingo NewJournal/Title/Prompt>></$link> |<$edit-text tiddler="$:/config/NewJournal/Title" default="" tag="input"/> |
+|<$link to="$:/config/NewJournal/Text"><<lingo NewJournal/Text/Prompt>></$link> |<$edit tiddler="$:/config/NewJournal/Text" tag="textarea" class="tc-edit-texteditor" default=""/> |
 |<$link to="$:/config/NewJournal/Tags"><<lingo NewJournal/Tags/Prompt>></$link> |<$edit-text tiddler="$:/config/NewJournal/Tags" default="" tag="input"/> |
 |<<lingo Language/Prompt>> |{{$:/snippets/minilanguageswitcher}} |
 |<<lingo Tiddlers/Prompt>> |<<show-filter-count "[!is[system]sort[title]]">> |

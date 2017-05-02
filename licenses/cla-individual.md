@@ -298,3 +298,19 @@ Doron Tzur, @DoronTzur 2016/08/16
 Hans Christian Haase, @hchaase, 2016/08/11
 
 steve schneider, @stevesunypoly, 2016/08/26
+
+Nuno Mota, @nmota, 2016/12/16
+
+Sylvain Comte, @sycom, 2016/12/20
+
+Saul D Beniquez, @beniquezsd 2017/01/01
+
+Rizwan Ishak, @ibnishak, 2017/01/10
+
+Stefano De Dionigi, @dedioste, 2017/01/19
+
+Matias Goldman, @twMat, 2017/01/22
+
+Andrew Webb, @tejjyid, 2017/03/06
+
+Richard Decal, @crypdick, 2017/04/04

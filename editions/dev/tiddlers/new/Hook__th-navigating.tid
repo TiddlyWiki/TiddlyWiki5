@@ -1,0 +1,19 @@
+created: 20170219130829546
+modified: 20170219145518777
+tags: HookMechanism
+title: Hook: th-navigating
+type: text/vnd.tiddlywiki
+
+This hook allows plugins to monitor and modify navigation events.
+
+Hook function parameters:
+
+* ''event'': object describing the navigation event:
+** ''event.navigateTo'': title of target tiddler
+** ''event.navigateFromTitle'': title of tiddler containing the
+** ''event.navigateSuppressNavigation'': boolean; when true the target tiddler opens without the usual scrolling
+** ''event.navigateFromClientRect'': rectange in client coordinates of the DOM node triggering the navigation
+
+Return value:
+
+* possibly modified event object

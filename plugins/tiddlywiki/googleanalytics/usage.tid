@@ -1,16 +1,24 @@
 title: $:/plugins/tiddlywiki/googleanalytics/usage
 
-These instructions assume you are using TiddlySpot to publish your wiki.
+!! Create a Google Analytics account
+
+If you don't already have an account:
 
 # Go to the Google Analytics website: http://www.google.com/analytics/
 # Click the ''Access Google Analytics'' button and follow instructions to set up your account
-# Enter the name of your TiddlySpot domain, for example "mysite.tiddlyspot.com" 
-# You will be given your own Tracking ID for this domain
-# Go to http://tiddlywiki.com -- open the More/System tab and drag the links to these three tiddlers across to a local copy of your site:
-#* [[$:/GoogleAnalyticsDomain]]
-#* [[$:/GoogleAnalyticsAccount]]
-#* [[$:/plugins/tiddlywiki/googleanalytics]]
-# Edit the first two of these tiddlers to reflect your Domain and Tracking ID
-# Upload the new version to TiddlySpot or other web host
-# Return to your Google Analytics page to check that your site is being tracked
+# Enter the URL where the wiki is hosted
+# Note the Tracking ID for this domain of the form `UA-XXXXXX-XX`
 
+!! Install the plugin on your local copy of the TiddlyWiki
+
+# ''Backup your TiddlyWiki''. Just in case
+# Install the plugin via the plugin manager in control panel
+# Save the TiddlyWiki andrefresh the page to load the plugin
+# Go to [[$:/ControlPanel]] > Plugins tab and unfold the Google Analytics Plugin
+# Go to the //settings// tab and edit the parameters
+# Save the TiddlyWiki
+
+!! Upload the new version of your TiddlyWiki
+
+# Upload the saved TiddlyWiki to TiddlySpot, GitHub, GitLab or other web host
+# Return to your Google Analytics page to check that your site is being tracked

@@ -50,32 +50,35 @@ DropZoneWidget.prototype.render = function(parent,nextSibling) {
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	// Stack of outstanding enter/leave events
+	this.currentlyEntered = [];
 };
 
-DropZoneWidget.prototype.enterDrag = function() {
-	// Check for this window being the source of the drag
-	if($tw.dragInProgress) {
-		return false;
+DropZoneWidget.prototype.enterDrag = function(event) {
+	if(this.currentlyEntered.indexOf(event.target) === -1) {
+		this.currentlyEntered.push(event.target);
 	}
-	// We count enter/leave events
-	this.dragEnterCount = (this.dragEnterCount || 0) + 1;
 	// If we're entering for the first time we need to apply highlighting
-	if(this.dragEnterCount === 1) {
-		$tw.utils.addClass(this.domNodes[0],"tc-dragover");
-	}
+	$tw.utils.addClass(this.domNodes[0],"tc-dragover");
 };
 
-DropZoneWidget.prototype.leaveDrag = function() {
-	// Reduce the enter count
-	this.dragEnterCount = (this.dragEnterCount || 0) - 1;
+DropZoneWidget.prototype.leaveDrag = function(event) {
+	var pos = this.currentlyEntered.indexOf(event.target);
+	if(pos !== -1) {
+		this.currentlyEntered.splice(pos,1);
+	}
 	// Remove highlighting if we're leaving externally
-	if(this.dragEnterCount <= 0) {
+	if(this.currentlyEntered.length === 0) {
 		$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
 	}
 };
 
 DropZoneWidget.prototype.handleDragEnterEvent  = function(event) {
-	this.enterDrag();
+	// Check for this window being the source of the drag
+	if($tw.dragInProgress) {
+		return false;
+	}
+	this.enterDrag(event);
 	// Tell the browser that we're ready to handle the drop
 	event.preventDefault();
 	// Tell the browser not to ripple the drag up to any parent drop handlers
@@ -97,11 +100,12 @@ DropZoneWidget.prototype.handleDragOverEvent  = function(event) {
 };
 
 DropZoneWidget.prototype.handleDragLeaveEvent  = function(event) {
-	this.leaveDrag();
+	this.leaveDrag(event);
 };
 
 DropZoneWidget.prototype.handleDropEvent  = function(event) {
-	this.leaveDrag();
+	var self = this;
+	this.leaveDrag(event);
 	// Check for being over a TEXTAREA or INPUT
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) !== -1) {
 		return false;
@@ -112,94 +116,26 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	}
 	var self = this,
 		dataTransfer = event.dataTransfer;
-	// Reset the enter count
-	this.dragEnterCount = 0;
 	// Remove highlighting
 	$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
 	// Import any files in the drop
-	var numFiles = this.wiki.readFiles(dataTransfer.files,function(tiddlerFieldsArray) {
-		self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
-	});
+	var numFiles = 0;
+	if(dataTransfer.files) {
+		numFiles = this.wiki.readFiles(dataTransfer.files,function(tiddlerFieldsArray) {
+			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
+		});
+	}
 	// Try to import the various data types we understand
 	if(numFiles === 0) {
-		this.importData(dataTransfer);
+		$tw.utils.importDataTransfer(dataTransfer,this.wiki.generateNewTitle("Untitled"),function(fieldsArray) {
+			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(fieldsArray)});
+		});
 	}
 	// Tell the browser that we handled the drop
 	event.preventDefault();
 	// Stop the drop ripple up to any parent handlers
 	event.stopPropagation();
 };
-
-DropZoneWidget.prototype.importData = function(dataTransfer) {
-	// Try each provided data type in turn
-	for(var t=0; t<this.importDataTypes.length; t++) {
-		if(!$tw.browser.isIE || this.importDataTypes[t].IECompatible) {
-			// Get the data
-			var dataType = this.importDataTypes[t];
-				var data = dataTransfer.getData(dataType.type);
-			// Import the tiddlers in the data
-			if(data !== "" && data !== null) {
-				if($tw.log.IMPORT) {
-					console.log("Importing data type '" + dataType.type + "', data: '" + data + "'")
-				}
-				var tiddlerFields = dataType.convertToFields(data);
-				if(!tiddlerFields.title) {
-					tiddlerFields.title = this.wiki.generateNewTitle("Untitled");
-				}
-				this.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify([tiddlerFields])});
-				return;
-			}
-		}
-	}
-};
-
-DropZoneWidget.prototype.importDataTypes = [
-	{type: "text/vnd.tiddler", IECompatible: false, convertToFields: function(data) {
-		return JSON.parse(data);
-	}},
-	{type: "URL", IECompatible: true, convertToFields: function(data) {
-		// Check for tiddler data URI
-		var match = decodeURIComponent(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
-		if(match) {
-			return JSON.parse(match[1]);
-		} else {
-			return { // As URL string
-				text: data
-			};
-		}
-	}},
-	{type: "text/x-moz-url", IECompatible: false, convertToFields: function(data) {
-		// Check for tiddler data URI
-		var match = decodeURIComponent(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
-		if(match) {
-			return JSON.parse(match[1]);
-		} else {
-			return { // As URL string
-				text: data
-			};
-		}
-	}},
-	{type: "text/html", IECompatible: false, convertToFields: function(data) {
-		return {
-			text: data
-		};
-	}},
-	{type: "text/plain", IECompatible: false, convertToFields: function(data) {
-		return {
-			text: data
-		};
-	}},
-	{type: "Text", IECompatible: true, convertToFields: function(data) {
-		return {
-			text: data
-		};
-	}},
-	{type: "text/uri-list", IECompatible: false, convertToFields: function(data) {
-		return {
-			text: data
-		};
-	}}
-];
 
 DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 	// Let the browser handle it if we're in a textarea or input box
