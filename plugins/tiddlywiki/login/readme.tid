@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/login/readme
+
+This plugin uses a cookie in the browser to store the username. When the cookie is present, the username is loaded from there, so automatically every time you add or change any tiddle your changes are signed with your username.
+
+[[Login]] is an example of how to show login information and how to log out.
