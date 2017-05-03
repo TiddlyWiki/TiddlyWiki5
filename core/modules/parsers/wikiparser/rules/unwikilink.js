@@ -11,7 +11,7 @@ AnotherLink
 ~SuppressedLink
 ```
 
-It prevents the tilde in `~SuppressedLink` to be shown, if wikilinks are globally switched off. Needed for compatibility reasons.
+It also prevents the tilde in `~SuppressedLink` to be shown, if wikilinks are globally switched off. Needed for compatibility reasons.
 
 \*/
 (function(){
