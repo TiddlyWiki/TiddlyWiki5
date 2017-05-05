@@ -68,7 +68,11 @@ EditWidget.prototype.getEditorType = function() {
 	if(this.editField === "text") {
 		var tiddler = this.wiki.getTiddler(this.editTitle);
 		if(tiddler) {
-			type = tiddler.fields.type;
+			if (tiddler.fields["preferred-editor"]) {
+				return tiddler.fields["preferred-editor"];
+			} else {
+				type = tiddler.fields.type;
+			}
 		}
 	}
 	type = type || "text/vnd.tiddlywiki";
