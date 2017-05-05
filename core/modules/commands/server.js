@@ -17,7 +17,8 @@ if($tw.node) {
 		fs = require("fs"),
 		url = require("url"),
 		path = require("path"),
-		http = require("http");
+		zlib = require("zlib"),
+		http = require("http");	
 }
 
 exports.info = {
@@ -197,9 +198,12 @@ var Command = function(params,commander,callback) {
 		method: "GET",
 		path: /^\/$/,
 		handler: function(request,response,state) {
-			response.writeHead(200, {"Content-Type": state.server.get("serveType")});
+			response.writeHead(200, {'content-encoding': 'gzip',"Content-Type": state.server.get("serveType")});
 			var text = state.wiki.renderTiddler(state.server.get("renderType"),state.server.get("rootTiddler"));
-			response.end(text,"utf8");
+			//response.end(text,"utf8");
+			zlib.gzip(text,function(_,result){
+                                response.end(result,"utf8");
+                        });
 		}
 	});
 	this.server.addRoute({
