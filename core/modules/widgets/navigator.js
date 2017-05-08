@@ -526,6 +526,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	// Process each tiddler
 	importData.tiddlers = importData.tiddlers || {};
 	$tw.utils.each(tiddlers,function(tiddlerFields) {
+		tiddlerFields.title = $tw.utils.trim(tiddlerFields.title);
 		var title = tiddlerFields.title;
 		if(title) {
 			incomingTiddlers.push(title);
