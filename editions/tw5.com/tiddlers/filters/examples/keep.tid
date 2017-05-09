@@ -1,0 +1,32 @@
+context: home work shopping errands
+created: 20160117112509803
+modified: 20160814073039238
+status: maybe todo active done
+tags: [[Operator Examples]] [[keep Operator]] slide
+title: keep Operator (Examples)
+
+<<.using-days-of-week>>
+
+;Keep only those items from a list that occur in the reference list
+<<.operator-example 1 "[list[Days of the Week]] +[keep[Mon Tuesday Wed Thursday Fri]]">>
+
+;Keep only those items from a list that don't occur in the reference list
+<<.operator-example 2 "[list[Days of the Week]] +[!keep[Monday Friday Saturday]]">>
+
+;Cycle a tag from a reference list, with button label indicating current item
+<$macrocall $name='wikitext-example-without-html'
+src="""<ul><$list filter="[tag[Features]]">
+<li>
+<$link><<currentTiddler>>  </$link><$button class="tc-btn-invisible" tooltip="cycle context">
+<$action-listops $tags="+[cycle{keep Operator (Examples)!!context}]"/>
+@<$list filter="[is[current]tags[]] +[keep{keep Operator (Examples)!!context}]" variable="item">
+<<item>>
+</$list>
+</$button>
+<$button class="tc-btn-invisible" tooltip="cycle status">
+<$action-listops $tags="+[cycle{keep Operator (Examples)!!status}]"/>
+#<$list filter="[is[current]tags[]] +[keep{keep Operator (Examples)!!status}]" variable="item">
+<<item>>
+</$list>
+</$button></li>
+</$list></ul>"""/>
