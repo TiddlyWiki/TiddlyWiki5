@@ -40,6 +40,18 @@ $title$$(currentTiddler)$
 </$button>
 </$reveal>
 \end
+\define toggleRenameButton(state)
+<$reveal state="$state$" type="match" text="closed" default="closed">
+<$button set="$state$" setTo="open" class="tc-btn-invisible tc-btn-dropdown" selectedClass="tc-selected">
+{{$:/core/images/edit-button}}
+</$button>
+</$reveal>
+<$reveal state="$state$" type="match" text="open" default="closed">
+<$button set="$state$" setTo="closed" class="tc-btn-invisible tc-btn-dropdown" selectedClass="tc-selected">
+{{$:/core/images/edit-button}}
+</$button>
+</$reveal>
+\end
 <table class="tc-tag-manager-table">
 <tbody>
 <tr>
@@ -48,6 +60,7 @@ $title$$(currentTiddler)$
 <th><<lingo Count/Heading>></th>
 <th><<lingo Icon/Heading>></th>
 <th><<lingo Info/Heading>></th>
+<th>Rename</th>
 </tr>
 <$list filter="[tags[]!is[system]sort[title]]">
 <tr>
@@ -60,10 +73,13 @@ $title$$(currentTiddler)$
 <td>
 <$macrocall $name="toggleButton" state=<<qualifyTitle "$:/state/tag-manager/">> /> 
 </td>
+<td>
+<$macrocall $name="toggleRenameButton" state=<<qualifyTitle "$:/state/tag-manager/rename">> /> 
+</td>
 </tr>
 <tr>
 <td></td>
-<td colspan="4">
+<td colspan="5">
 <$reveal state=<<qualifyTitle "$:/state/tag-manager/">> type="match" text="open" default="">
 <table>
 <tbody>
@@ -71,6 +87,19 @@ $title$$(currentTiddler)$
 <tr><td><<lingo Icon/Heading>></td><td><$edit-text field="icon" tag="input" size="45"/></td></tr>
 </tbody>
 </table>
+</$reveal>
+</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="5">
+<$reveal state=<<qualifyTitle "$:/state/tag-manager/rename">> type="match" text="open" default="">
+<b>Rename Tag</b>
+<$edit-text focus="true" tiddler="$:/temp/renameTag" type="text" tag="input" default="" />
+<$button>Apply
+<$action-sendmessage $message="tm-rename-tag" old={{!!title}} new={{$:/temp/renameTag}} />
+<$action-setfield $tiddler="$:/temp/renameTag" text="" />
+</$button>
 </$reveal>
 </td>
 </tr>
@@ -83,6 +112,7 @@ $title$$(currentTiddler)$
 <td>
 <small class="tc-menu-list-count"><$count filter="[untagged[]!is[system]] -[tags[]]"/></small>
 </td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
