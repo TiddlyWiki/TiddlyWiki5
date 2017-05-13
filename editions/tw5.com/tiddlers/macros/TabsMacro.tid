@@ -32,6 +32,6 @@ The <<.vlink currentTiddler>> variable is not affected by the <<.var tabs>> macr
 <$tiddler tiddler=<<currentTab>>>
 <$transclude mode="block" />
 </$tiddler>
-``` 
+```
 
 <<.macro-examples "tabs">>
