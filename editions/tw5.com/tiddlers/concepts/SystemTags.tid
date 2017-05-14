@@ -19,6 +19,7 @@ These are the available system tags
 * {{$:/tags/ControlPanel/Advanced||$:/core/ui/TagTemplate}} for control panel advanced tabs
 * {{$:/tags/ControlPanel/Appearance||$:/core/ui/TagTemplate}} for control panel appearance tabs
 * {{$:/tags/ControlPanel/Info||$:/core/ui/TagTemplate}} for control panel info tabs
+* {{$:/tags/ControlPanel/Saving||$:/core/ui/TagTemplate}} for saving modules
 * {{$:/tags/ControlPanel/Settings||$:/core/ui/TagTemplate}} for control panel settings tabs
 * {{$:/tags/ControlPanel/Toolbars||$:/core/ui/TagTemplate}} for control panel toolbar customisation tabs
 * {{$:/tags/EditorToolbar||$:/core/ui/TagTemplate}} for the editor toolbar buttons
@@ -29,13 +30,19 @@ These are the available system tags
 * {{$:/tags/Filter||$:/core/ui/TagTemplate}} for filters in advanced seach sample filter dropdown
 * {{$:/tags/Image||$:/core/ui/TagTemplate}} for (core) images
 * {{$:/tags/Macro||$:/core/ui/TagTemplate}} for global macros
+* {{$:/tags/Manager/ItemMain||$:/core/ui/TagTemplate}} for the tiddler manager
+* {{$:/tags/Manager/ItemSidebar||$:/core/ui/TagTemplate}} for the tiddler manager
 * {{$:/tags/MoreSideBar||$:/core/ui/TagTemplate}} for tabs in the "more" sidebar
+* {{$:/tags/MoreSideBar/Plugins||$:/core/ui/TagTemplate}} for plugin info in the "more" sidebar
 * {{$:/tags/PageControls||$:/core/ui/TagTemplate}} for the page control tools in the sidebar
 * {{$:/tags/PageTemplate||$:/core/ui/TagTemplate}} for the main page elements
 * {{$:/tags/Palette||$:/core/ui/TagTemplate}} for colour palettes
 * {{$:/tags/PluginLibrary||$:/core/ui/TagTemplate}} for the plugin library
 * {{$:/tags/RawMarkup||$:/core/ui/TagTemplate}} for raw markup to be included in the generated HTML file. To activate the tag, TiddlyWiki needs to be reloaded.
+* {{$:/tags/RawMarkupWikified||$:/core/ui/TagTemplate}} for wikified markup to be included in the generated HTML file. To activate the tag, TiddlyWiki needs to be reloaded.
+* {{$:/tags/RemoteAssetInfo||$:/core/ui/TagTemplate}} for the plugin library
 * {{$:/tags/SearchResults||$:/core/ui/TagTemplate}} for customised search results
+* {{$:/tags/ServerConnection||$:/core/ui/TagTemplate}} for the plugin library
 * {{$:/tags/SideBar||$:/core/ui/TagTemplate}} for sidebar tabs
 * {{$:/tags/Stylesheet||$:/core/ui/TagTemplate}} to indicate that a tiddler should be applied as a CSS stylesheet
 * {{$:/tags/Texteditor/Snippet||$:/core/ui/TagTemplate}} for text snippets
