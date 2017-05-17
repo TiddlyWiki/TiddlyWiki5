@@ -19,7 +19,7 @@ These are the available system tags
 |<<tag "$:/tags/ControlPanel/Advanced>> |for control panel advanced tabs |
 |<<tag "$:/tags/ControlPanel/Appearance>> |for control panel appearance tabs |
 |<<tag "$:/tags/ControlPanel/Info>> |for control panel info tabs |
-|<<tag "$:/tags/ControlPanel/Saving>> |for TiddlySpot saving configurations |
+|<<tag "$:/tags/ControlPanel/Saving>> |for saving configurations |
 |<<tag "$:/tags/ControlPanel/Settings>> |for control panel settings tabs |
 |<<tag "$:/tags/ControlPanel/Toolbars>> |for control panel toolbar customisation tabs |
 |<<tag "$:/tags/EditorToolbar>> |for the editor toolbar buttons |
