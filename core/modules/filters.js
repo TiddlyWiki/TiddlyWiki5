@@ -30,7 +30,8 @@ function parseFilterOperation(operators,filterString,p) {
 		operator = {};
 		// Check for an operator prefix
 		if(filterString.charAt(p) === "!") {
-			operator.prefix = filterString.charAt(p++);
+			operator.prefix = filterString.charAt(p++); // remove?
+			operator.negate = true;
 		}
 		// Get the operator name
 		nextBracketPos = filterString.substring(p).search(/[\[\{<\/]/);
@@ -159,6 +160,20 @@ exports.filterTiddlers = function(filterString,widget,source) {
 	var fn = this.compileFilter(filterString);
 	return fn.call(this,source,widget);
 };
+
+/*
+Evaluates a condition and adds an item to the result-set of a filter operation depending on negation
+	title: tiddler title
+	results: the results array
+	operator: the filter operator
+	condition: the condition depending on which to add to the results (boolean)
+Returns boolean, whether or not to add an item
+*/
+exports.addResult = function(title,results,operator,condition) {
+	if(condition && !operator.negate || !condition && operator.negate) {
+		results.push(title);
+	}
+}
 
 /*
 Compile a filter into a function with the signature fn(source,widget) where:
