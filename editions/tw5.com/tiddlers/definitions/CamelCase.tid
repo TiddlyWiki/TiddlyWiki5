@@ -4,3 +4,5 @@ tags: Definitions
 title: CamelCase
 
 CamelCase is formed by taking a phrase, capitalising the initial letter of each word, and smashing the words together to form a portmanteau word. Most wikis use CamelCase to signal phrases that should automatically become links.
+
+The automatic conversion to a link can be disabled [[here|$:/core/ui/ControlPanel/Settings/CamelCase]].
