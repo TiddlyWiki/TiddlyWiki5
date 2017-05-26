@@ -29,5 +29,32 @@
   "license": "BSD",
   "engines": {
     "node": ">=0.8.2"
+  },
+  "scripts": {
+    "start": "node tiddlywiki.js ./editions/tw5.com-server --server 8080 ",
+    "test":  "node tiddlywiki.js ./editions/test --build index && echo !!!!!!!!!!! In the browser, open: ./editions/test/output/test.html",
+    "serve": "node tiddlywiki.js --npmserve",
+    "build": "node tiddlywiki.js --npmbuild"
+  },
+  "config" : {
+    "//":"--- default serve configuraton ---",
+    "serve_edition": "./editions/tw5.com-server",
+    "serve_command": "--server",
+    "serve_port" : "8080",
+    "serve_roottiddler": "$:/core/save/all",
+    "serve_rendertype": "text/plain",
+    "serve_servetype": "text/html",
+    "serve_username" : "",
+    "serve_userpw": "",
+    "serve_host": "",
+    "serve_pathprefix": "",
+    "//":"--- default build configuration ---",
+    "build_edition": "./editions/tw5.com",
+    "build_output_command": "--output",
+    "build_output_dir": "output",
+    "build_command": "--build",
+    "build_element": "",
+    "//":"--- more info for debugging ---",
+    "verbose": "--verbose"
   }
 }
