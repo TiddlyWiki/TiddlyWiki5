@@ -2,7 +2,7 @@ title: $:/language/Import/
 
 Imported/Hint: The following tiddlers were imported:
 Listing/Cancel/Caption: Cancel
-Listing/Hint: These tiddlers are ready to import:
+Listing/Hint: These tiddlers are ready to import (remember to __save and refresh__ after import) :
 Listing/Import/Caption: Import
 Listing/Select/Caption: Select
 Listing/Status/Caption: Status
