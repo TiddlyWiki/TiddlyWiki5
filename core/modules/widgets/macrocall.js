@@ -42,6 +42,9 @@ MacroCallWidget.prototype.execute = function() {
 	this.renderOutput = this.getAttribute("$output","text/html");
 	// Merge together the parameters specified in the parse tree with the specified attributes
 	var params = this.parseTreeNode.params ? this.parseTreeNode.params.slice(0) : [];
+	// set paramString variable
+	this.setVariable("paramString",this.parseTreeNode.paramString);
+
 	$tw.utils.each(this.attributes,function(attribute,name) {
 		if(name.charAt(0) !== "$") {
 			params.push({name: name, value: attribute});			

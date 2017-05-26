@@ -52,7 +52,8 @@ exports.parse = function() {
 	return [{
 		type: "macrocall",
 		name: macroName,
-		params: params
+		params: params,
+		paramString: paramString
 	}];
 };
 
