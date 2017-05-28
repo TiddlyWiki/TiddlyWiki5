@@ -1,33 +1,55 @@
-title: $:/core/ui/EditorToolbar/preview-type-dropdown
+\define replacement-text()
+[img[$(imageTitle)$]]
+\end
 
-\define preview-type-button()
-<$button tag="a">
+\define external-image()
+<$set name="imageTitle" value={{$(pictureTiddler)$}}>
+<$button class="tc-btn-invisible" style="width: auto; display: inline-block; background-colour: inherit;">
+<$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text=<<replacement-text>>
+/>
+{{$:/core/images/chevron-right}}
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
 
-<$action-setfield $tiddler="$:/state/editpreviewtype" $value="$(previewType)$"/>
+<$action-deletetiddler
+	$tiddler=<<pictureTiddler>>
+/>
+</$button>
+</$set>
+\end
+
+\define body(config-title)
+''<<lingo Hint>>''
+
+<$vars pictureTiddler="""$config-title$/search""" imageTitle={{$(pictureTiddler)$}} >
+
+<$edit-text tiddler=<<pictureTiddler>> type="search" tag="input" focus="true" placeholder={{$:/language/Buttons/Picture/Hint}} default=""/>
+<$reveal tag="span" state=<<pictureTiddler>> type="nomatch" text="">
+<<external-image>>
+<$button class="tc-btn-invisible" style="width: auto; display: inline-block; background-colour: inherit;">
+<$action-setfield $tiddler=<<pictureTiddler>> text="" />
+{{$:/core/images/close-button}}
+</$button>
+</$reveal>
+
+</$vars>
+
+\end
+
+''{{$:/language/Buttons/Picture/Hint}}''
+
+<$macrocall $name="body" config-title=<<qualify "$:/state/Picture/">>/>
+<$macrocall $name="image-picker" actions="""
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="replace-selection"
+	text=<<replacement-text>>
+/>
 
 <$action-deletetiddler
 	$tiddler=<<dropdown-state>>
 />
 
-<$transclude tiddler=<<previewType>> field="caption" mode="inline">
-
-<$view tiddler=<<previewType>> field="title" mode="inline"/>
-
-</$transclude> 
-
-<$reveal tag="span" state="$:/state/editpreviewtype" type="match" text=<<previewType>> default="$:/core/ui/EditTemplate/body/preview/output">
-
-<$entity entity="&nbsp;"/>
-
-<$entity entity="&#x2713;"/>
-
-</$reveal>
-
-</$button>
-\end
-
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditPreview]!has[draft.of]]" variable="previewType">
-
-<<preview-type-button>>
-
-</$list>
+"""/>
