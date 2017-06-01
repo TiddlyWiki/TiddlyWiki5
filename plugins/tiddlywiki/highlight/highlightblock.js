@@ -27,7 +27,7 @@ CodeBlockWidget.prototype.postRender = function() {
 	if(tiddler) {
 		language = tiddler.fields.text || "";
 	}
-	if(language) {
+	if(language && hljs.listLanguages().indexOf(language) !== -1) {
 		domNode.className = language.toLowerCase() + " hljs";
 		if($tw.browser && !domNode.isTiddlyWikiFakeDom) {
 			hljs.highlightBlock(domNode);			
