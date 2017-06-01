@@ -31,6 +31,7 @@ function PluginSwitcher(options) {
 	// Listen for changes to the selected plugin
 	var self = this;
 	this.wiki.addEventListener("change",function(changes) {
+		//console.log('there was a change pluginswitcher');
 		if($tw.utils.hop(changes,self.controllerTitle)) {
 			self.switchPlugins();
 		}

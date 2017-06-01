@@ -916,7 +916,7 @@ $tw.Wiki = function(options) {
 			var title = tiddler.fields.title;
 			if(title) {
 // Uncomment the following line for detailed logs of all tiddler writes
-// console.log("Adding",title,tiddler)
+ // 			console.log("Adding",title,tiddler)
 				tiddlers[title] = tiddler;
 				this.clearCache(title);
 				this.clearGlobalCache();
@@ -1043,6 +1043,7 @@ $tw.Wiki = function(options) {
 	this.readPluginInfo = function() {
 		for(var title in tiddlers) {
 			var tiddler = tiddlers[title];
+			//console.log('parsing ' + title);
 			if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type")) {
 				pluginInfo[tiddler.fields.title] = JSON.parse(tiddler.fields.text);
 			}
@@ -2006,6 +2007,8 @@ $tw.boot.startup = function(options) {
 	if($tw.crypto) {
 		$tw.crypto.updateCryptoStateTiddler();
 	}
+
+
 	// Gather up any startup modules
 	$tw.boot.remainingStartupModules = []; // Array of startup modules
 	$tw.modules.forEachModuleOfType("startup",function(title,module) {
@@ -2019,6 +2022,9 @@ $tw.boot.startup = function(options) {
 	// Repeatedly execute the next eligible task
 	$tw.boot.executeNextStartupTask();
 };
+
+
+
 
 /*
 Add another unload task
@@ -2060,6 +2066,7 @@ $tw.boot.executeNextStartupTask = function() {
 			$tw.boot.log(s.join(" "));
 			// Execute task
 			if(!$tw.utils.hop(task,"synchronous") || task.synchronous) {
+				// console.log("the Task name:" + task.name + "the task: " + task);
 				task.startup();
 				if(task.name) {
 					$tw.boot.executedStartupModules[task.name] = true;
@@ -2158,6 +2165,31 @@ $tw.hooks.invokeHook = function(hookName /*, value,... */) {
 /////////////////////////// Main boot function to decrypt tiddlers and then startup
 
 $tw.boot.boot = function() {
+	
+	// log start time
+	var start = new Date().getTime();
+    var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+    d.setUTCSeconds(start);
+	console.log('booting tw at ' + d)
+
+
+	// In order to keep track of my server address
+	if (!$tw.browser) {
+		var theAddress = $tw.boot.argv[8];
+		if (theAddress == undefined) {
+			theAddress = "127.0.0.1"
+		}
+		var thePort = $tw.boot.argv[2];
+		fs.writeFile('/Users/Matt/Documents/TiddlyMusic Stuff/LocalScript Server/CurrentTiddlyWikiServer.txt', theAddress + ':' + thePort, (err) => {
+	  		if (err) throw err;
+	  		console.log('Wrote Server to CurrentTiddlyWikiServer.txt');
+		});
+		fs.appendFile('/Users/Matt/Documents/Logs/MyDebugLog.log', 'Serving on: ' + $tw.boot.argv[8] + ':' + $tw.boot.argv[2], (err) => {
+	  		if (err) throw err;
+	  		 console.log('Wrote Server to debug log');
+		});
+	}
+
 	// Initialise crypto object
 	$tw.crypto = new $tw.utils.Crypto();
 	// Initialise password prompter

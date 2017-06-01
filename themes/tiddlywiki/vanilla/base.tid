@@ -1391,8 +1391,8 @@ html body.tc-body.tc-single-tiddler-window {
 	vertical-align: baseline;
 }
 
+\* REMOVED: display: block;  *\
 .tc-drop-down a, .tc-drop-down button {
-	display: block;
 	padding: 0 14px 0 14px;
 	width: 100%;
 	text-align: left;

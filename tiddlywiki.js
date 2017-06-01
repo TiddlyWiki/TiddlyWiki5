@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env /usr/local/bin/node
 
 /*
 This is invoked as a shell script by NPM when the `tiddlywiki` command is typed
