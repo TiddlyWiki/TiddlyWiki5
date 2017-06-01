@@ -3,10 +3,28 @@ tags: $:/tags/SideBar
 caption: {{$:/language/SideBar/Open/Caption}}
 
 \define lingo-base() $:/language/CloseAll/
+
+\define drop-actions()
+<$action-listops $tiddler="$:/StoryList" $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
+\end
+
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
-
+<div style="position: relative;">
+<$droppable actions=<<drop-actions>>>
+<div class="tc-droppable-placeholder">
+&nbsp;
+</div>
+<div>
 <$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>
-
+</div>
+</$droppable>
+</div>
 </$list>
-
+<$tiddler tiddler="">
+<$droppable actions=<<drop-actions>>>
+<div class="tc-droppable-placeholder">
+&nbsp;
+</div>
 <$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini"><<lingo Button>></$button>
+</$droppable>
+</$tiddler>

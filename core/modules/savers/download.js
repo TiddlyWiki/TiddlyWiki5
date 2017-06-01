@@ -33,8 +33,6 @@ DownloadSaver.prototype.save = function(text,method,callback,options) {
 	}
 	// Set up the link
 	var link = document.createElement("a");
-	link.setAttribute("target","_blank");
-	link.setAttribute("rel","noopener noreferrer");
 	if(Blob !== undefined) {
 		var blob = new Blob([text], {type: "text/html"});
 		link.setAttribute("href", URL.createObjectURL(blob));

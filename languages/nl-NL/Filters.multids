@@ -9,5 +9,7 @@ OverriddenShadowTiddlers: Overschreven schaduwtiddlers
 RecentSystemTiddlers: Onlangs gewijzigde tiddlers inclusief systeemtiddlers
 RecentTiddlers: Onlangs gewijzigde tiddlers
 ShadowTiddlers: Schaduwtiddlers
+StoryList: Tiddlers in de 'story river' behalve <$text text="$:/AdvancedSearch"/>
 SystemTags: Systeemlabels
 SystemTiddlers: Systeemtiddlers
+TypedTiddlers: Niet-wikitekst tiddlers

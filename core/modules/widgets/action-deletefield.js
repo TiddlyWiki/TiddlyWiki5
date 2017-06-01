@@ -57,17 +57,24 @@ Invoke the action associated with this widget
 DeleteFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var self = this,
 		tiddler = this.wiki.getTiddler(self.actionTiddler),
-		removeFields = {};
+		removeFields = {},
+		hasChanged = false;
 	if(this.actionField) {
 		removeFields[this.actionField] = undefined;
+		if(this.actionField in tiddler.fields) {
+			hasChanged = true;
+		}
 	}
 	if(tiddler) {
 		$tw.utils.each(this.attributes,function(attribute,name) {
 			if(name.charAt(0) !== "$" && name !== "title") {
 				removeFields[name] = undefined;
+				hasChanged = true;
 			}
 		});
-		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,removeFields,this.wiki.getModificationFields()));
+		if(hasChanged) {
+			this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,removeFields,this.wiki.getModificationFields()));			
+		}
 	}
 	return true; // Action was invoked
 };

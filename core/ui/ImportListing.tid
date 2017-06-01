@@ -1,20 +1,32 @@
 title: $:/core/ui/ImportListing
 
 \define lingo-base() $:/language/Import/
+
 \define messageField()
 message-$(payloadTiddler)$
 \end
+
 \define selectionField()
 selection-$(payloadTiddler)$
 \end
+
 \define previewPopupState()
 $(currentTiddler)$!!popup-$(payloadTiddler)$
 \end
+
+\define select-all-actions()
+<$list filter="[all[current]plugintiddlers[]sort[title]]" variable="payloadTiddler">
+<$action-setfield $field={{{ [<payloadTiddler>addprefix[selection-]] }}} $value={{$:/state/import/select-all}}/>
+</$list>
+\end
+
 <table>
 <tbody>
 <tr>
 <th>
+<$checkbox tiddler="$:/state/import/select-all" field="text" checked="checked" unchecked="unchecked" default="checked" actions=<<select-all-actions>>>
 <<lingo Listing/Select/Caption>>
+</$checkbox>
 </th>
 <th>
 <<lingo Listing/Title/Caption>>

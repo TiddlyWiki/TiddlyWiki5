@@ -18,6 +18,8 @@ Tags/Add/Placeholder: neuer Tag
 Tags/Dropdown/Caption: Tag Liste
 Tags/Dropdown/Hint: Tag Liste anzeigen
 Title/BadCharacterWarning: Warnung: Folgende Zeichen im Titel können zu Problemen führen: <<bad-chars>>
+Title/Exists/Prompt: Tiddler Name existiert bereits
+Title/Relink/Prompt: Ändere ''<$text text=<<fromTitle>>/>'' -> ''<$text text=<<toTitle>>/>'' in //tags// und //list// Feld aller anderen Tiddler
 Type/Dropdown/Caption: Tiddler Typ Liste
 Type/Dropdown/Hint: Anzeigen der Tiddler Typ Liste
 Type/Delete/Caption: Lösche Inhalts Typ

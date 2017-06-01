@@ -1,8 +1,9 @@
-title: LinkWidget
-created: 201310241419
-modified: 20150228144334000
-tags: Widgets
 caption: link
+created: 20131024141900000
+modified: 20170328172846359
+tags: Widgets
+title: LinkWidget
+type: text/vnd.tiddlywiki
 
 The `link` widget generates links to tiddlers. (Use the HTML `<a>` element to generate external links).
 
@@ -16,7 +17,7 @@ The `link` widget generates links to tiddlers. (Use the HTML `<a>` element to ge
 |draggable |"yes" to enable the link to be draggable (defaults to "yes") |
 |tag |Optional tag to override the default "a" element |
 
-The content of the link widget is rendered within the `<a>` tag.
+The content of the link widget is rendered within the `<a>` tag. The draggable functionality is equivalent to using the DraggableWidget with the ''tiddler'' attribute set to the link target.
 
 The default value of the tooltip attribute is supplied by the <<.vlink tv-wikilink-tooltip>> variable.
 

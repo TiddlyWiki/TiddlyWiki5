@@ -60,6 +60,7 @@ Plugins/Add/Caption: Verkrijg meer plugins
 Plugins/Add/Hint: Installeer plugins van de officiële bibliotheek
 Plugins/AlreadyInstalled/Hint: Deze plugin is al geïnstalleerd met versie <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
+Plugins/ClosePluginLibrary: schakel pluginbibliotheek uit
 Plugins/Disable/Caption: schakel uit
 Plugins/Disable/Hint: Schakel deze plugin uit na verversen van deze pagina
 Plugins/Disabled/Status: (uitgeschakeld)
@@ -72,16 +73,22 @@ Plugins/Language/Prompt: Talen
 Plugins/Languages/Caption: Talen
 Plugins/Languages/Hint: Taal plugins
 Plugins/NoInfoFound/Hint: ''"<$text text=<<currentTab>>/>"'' niet gevonden
-Plugins/NoInformation/Hint: Geen informatie beschikbaar
 Plugins/NotInstalled/Hint: Deze plugin is nu niet geïnstalleerd
-Plugins/OpenPluginLibrary: open plugin bibliotheek
+Plugins/OpenPluginLibrary: open pluginbibliotheek
 Plugins/Plugin/Prompt: Plugins
 Plugins/Reinstall/Caption: herinstalleer
 Plugins/Theme/Prompt: Thema's
 Plugins/Themes/Caption: Thema's
 Plugins/Themes/Hint: Thema plugins
 Saving/Caption: Opslaan
+Saving/DownloadSaver/AutoSave/Description: Sta automatisch opslaan toe voor de opslagmodule
+Saving/DownloadSaver/AutoSave/Hint: Sla automatisch op voor de opslagmodule
+Saving/DownloadSaver/Caption: Opslagmodule
+Saving/DownloadSaver/Hint: Deze instellingen gelden voor de HTML5 compatibele opslagmodule
+Saving/General/Caption: Algemeen
+Saving/General/Hint: Deze instellingen gelden voor alle geladen opslagmodules
 Saving/Heading: Opslaan
+Saving/Hint: Instellingen voor opslaan van de gehele TiddlyWiki als één bestand via een opslagmodule
 Saving/TiddlySpot/Advanced/Heading: Geavanceerde instellingen
 Saving/TiddlySpot/BackupDir: Backup folder
 Saving/TiddlySpot/Backups: Backups

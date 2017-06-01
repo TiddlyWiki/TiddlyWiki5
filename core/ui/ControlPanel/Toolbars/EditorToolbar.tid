@@ -4,18 +4,8 @@ caption: {{$:/language/ControlPanel/Toolbars/EditorToolbar/Caption}}
 
 \define lingo-base() $:/language/TiddlerInfo/
 
-\define config-title()
-$:/config/EditorToolbarButtons/Visibility/$(listItem)$
-\end
-
-\define toolbar-button()
-<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"> <$transclude tiddler={{$(listItem)$!!icon}}/> <$transclude tiddler=<<listItem>> field="caption"/> -- <i class="tc-muted"><$transclude tiddler=<<listItem>> field="description"/></i></$checkbox>
-\end
+\define config-base() $:/config/EditorToolbarButtons/Visibility/
 
 {{$:/language/ControlPanel/Toolbars/EditorToolbar/Hint}}
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]]" variable="listItem">
-
-<<toolbar-button>>
-
-</$list>
+<$macrocall $name="list-tagged-draggable" tag="$:/tags/EditorToolbar" itemTemplate="$:/core/ui/ControlPanel/Toolbars/EditorItemTemplate"/>

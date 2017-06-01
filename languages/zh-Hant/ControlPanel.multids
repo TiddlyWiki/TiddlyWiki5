@@ -10,8 +10,9 @@ Basics/DefaultTiddlers/BottomHint: 標題含空白時請使用 &#91;&#91;雙中�
 Basics/DefaultTiddlers/Prompt: 首頁：
 Basics/DefaultTiddlers/TopHint: 預設開啟的條目：
 Basics/Language/Prompt: 您好！當前的語言：
-Basics/NewJournal/Title/Prompt: 新日誌條目的名稱
 Basics/NewJournal/Tags/Prompt: 新日誌條目的標籤
+Basics/NewJournal/Text/Prompt: 新日誌條目的內容
+Basics/NewJournal/Title/Prompt: 新日誌條目的名稱
 Basics/OverriddenShadowTiddlers/Prompt: 被覆寫的預設條目數量：
 Basics/ShadowTiddlers/Prompt: 預設條目數量：
 Basics/Subtitle/Prompt: 副標題：
@@ -161,12 +162,12 @@ TiddlerFields/Caption: 條目欄位
 TiddlerFields/Hint: 這是本維基使用中的所有條目欄位（含系統條目的欄位，但預設條目的欄位除外）。
 Toolbars/Caption: 工具列
 Toolbars/EditToolbar/Caption: 編輯工具列
-Toolbars/EditToolbar/Hint: 選擇將顯示哪些按鈕於條目的編輯模式工具列
+Toolbars/EditToolbar/Hint: 選擇將顯示哪些按鈕於條目的編輯模式工具列。拖放可改變順序。
 Toolbars/Hint: 選擇將顯示哪些工具列按鈕
 Toolbars/PageControls/Caption: 頁面工具列
-Toolbars/PageControls/Hint: 選擇將顯示哪些按鈕於主頁面的工具列
+Toolbars/PageControls/Hint: 選擇將顯示哪些按鈕於主頁面的工具列。拖放可改變順序。
 Toolbars/EditorToolbar/Caption: 編輯器工具列
-Toolbars/EditorToolbar/Hint: 選擇將顯示哪些按鈕於編輯器工具列。請注意，某些按鈕只會出現在編輯某一類型的條目時。
+Toolbars/EditorToolbar/Hint: 選擇將顯示哪些按鈕於編輯器工具列。請注意，某些按鈕只會出現在編輯某一類型的條目時。拖放可改變順序。
 Toolbars/ViewToolbar/Caption: 檢視工具列
-Toolbars/ViewToolbar/Hint: 選擇將顯示哪些按鈕於條目的檢視模式工具列
+Toolbars/ViewToolbar/Hint: 選擇將顯示哪些按鈕於條目的檢視模式工具列。拖放可改變順序。
 Tools/Download/Full/Caption: 下載完整副本

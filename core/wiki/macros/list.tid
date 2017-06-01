@@ -14,3 +14,87 @@ tags: $:/tags/Macro
 </$list>
 </$type$>
 \end
+
+\define list-links-draggable-drop-actions()
+<$action-listops $tiddler=<<targetTiddler>> $field=<<targetField>> $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
+\end
+
+\define list-links-draggable(tiddler,field:"list",type:"ul",subtype:"li",class:"",itemTemplate)
+<$vars targetTiddler="""$tiddler$""" targetField="""$field$""">
+<$type$ class="$class$">
+<$list filter="[list[$tiddler$!!$field$]]">
+<$droppable actions=<<list-links-draggable-drop-actions>> tag="""$subtype$""">
+<div class="tc-droppable-placeholder">
+&nbsp;
+</div>
+<div>
+<$link to={{!!title}}>
+<$transclude tiddler="""$itemTemplate$""">
+<$transclude field="caption">
+<$view field="title"/>
+</$transclude>
+</$transclude>
+</$link>
+</div>
+</$droppable>
+</$list>
+<$tiddler tiddler="">
+<$droppable actions=<<list-links-draggable-drop-actions>> tag="""$subtype$""">
+<div class="tc-droppable-placeholder">
+&nbsp;
+</div>
+<div>
+&nbsp;
+</div>
+</$droppable>
+</$tiddler>
+</$type$>
+</$vars>
+\end
+
+\define list-tagged-draggable-drop-actions()
+<!-- Save the current ordering of the tiddlers with this tag -->
+<$set name="order" filter="[<tag>tagging[]]">
+<!-- Remove any list-after or list-before fields from the tiddlers with this tag -->
+<$list filter="[<tag>tagging[]]">
+<$action-deletefield $field="list-before"/>
+<$action-deletefield $field="list-after"/>
+</$list>
+<!-- Assign the list field of the tag with the current ordering -->
+<$action-setfield $tiddler=<<tag>> $field="list" $value=<<order>>/>
+<!-- Add the newly inserted item to the list -->
+<$action-listops $tiddler=<<tag>> $field="list" $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
+<!-- Make sure the newly added item has the right tag -->
+<$action-listops $tiddler=<<actionTiddler>> $tags="[<tag>]"/>
+</$set>
+\end
+
+\define list-tagged-draggable(tag,itemTemplate,elementTag:"div")
+<$set name="tag" value="""$tag$""">
+<$list filter="[<tag>tagging[]]">
+<$elementTag$ class="tc-menu-list-item">
+<$droppable actions=<<list-tagged-draggable-drop-actions>>>
+<$elementTag$ class="tc-droppable-placeholder">
+&nbsp;
+</$elementTag$>
+<$elementTag$>
+<$transclude tiddler="""$itemTemplate$""">
+<$link to={{!!title}}>
+<$view field="title"/>
+</$link>
+</$transclude>
+</$elementTag$>
+</$droppable>
+</$elementTag$>
+</$list>
+<$tiddler tiddler="">
+<$droppable actions=<<list-tagged-draggable-drop-actions>>>
+<$elementTag$ class="tc-droppable-placeholder">
+&nbsp;
+</$elementTag$>
+<$elementTag$ style="height:0.5em;">
+</$elementTag$>
+</$droppable>
+</$tiddler>
+</$set>
+\end
