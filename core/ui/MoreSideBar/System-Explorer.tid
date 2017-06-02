@@ -4,7 +4,7 @@ caption: {{$:/language/SideBar/System-Explorer/Caption}}
 
 \define cleanChunk()
 <$list filter="[[$(chunk)$]] +[removesuffix[/]]" variable="cleanChunk">
-<<cleanChunk>>
+<$text text=<<cleanChunk>>/>
 </$list>
 \end
 
