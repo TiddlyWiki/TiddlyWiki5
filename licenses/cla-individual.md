@@ -314,3 +314,5 @@ Matias Goldman, @twMat, 2017/01/22
 Andrew Webb, @tejjyid, 2017/03/06
 
 Richard Decal, @crypdick, 2017/04/04
+
+Adrian Morosanu, @morosanuae, 2017/06/02
