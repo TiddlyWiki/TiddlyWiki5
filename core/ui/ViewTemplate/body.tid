@@ -13,7 +13,7 @@ tags: $:/tags/ViewTemplate
 
 </$list>
 
-<$list filter="[all[current]is[system]] -[all[current]tag[$:/tags/Image]] -[all[current]regexp<re>] +[!has[plugin-type]!field:hide-body[yes]]">
+<$list filter="[all[current]is[system]!type[text/vnd.tiddlywiki]] -[all[current]tag[$:/tags/Image]] -[all[current]regexp<re>] +[!has[plugin-type]!field:hide-body[yes]]">
 
 <$codeblock code={{!!text}} language={{!!type}}/>
 
