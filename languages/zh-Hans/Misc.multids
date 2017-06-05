@@ -54,7 +54,7 @@ Manager/Item/RawText: 原始文字
 Manager/Item/Tags: 标签
 Manager/Item/Tools: 工具
 Manager/Item/WikifiedText: Wikified 文字
-MissingTiddler/Hint: 佚失条目 "<$text text=<<currentTiddler>>/>" - 点击 {{$:/core/images/edit-button}} 可创建此条目
+MissingTiddler/Hint: 佚失条目 "<$text text=<<currentTiddler>>/>" - 点击 {{||$:/core/ui/Buttons/edit}} 可创建此条目
 No: 否
 OfficialPluginLibrary: ~TiddlyWiki 官方插件程式库
 OfficialPluginLibrary/Hint: 此为在 tiddlywiki.com 的 ~TiddlyWiki 官方插件程式库。由核心团队维护的插件、主题和语言包。

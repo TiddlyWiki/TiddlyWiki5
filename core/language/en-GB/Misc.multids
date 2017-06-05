@@ -54,7 +54,7 @@ Manager/Item/RawText: Raw text
 Manager/Item/Tags: Tags
 Manager/Item/Tools: Tools
 Manager/Item/WikifiedText: Wikified text
-MissingTiddler/Hint: Missing tiddler "<$text text=<<currentTiddler>>/>" - click {{$:/core/images/edit-button}} to create
+MissingTiddler/Hint: Missing tiddler "<$text text=<<currentTiddler>>/>" -- click {{||$:/core/ui/Buttons/edit}} to create
 No: No
 OfficialPluginLibrary: Official ~TiddlyWiki Plugin Library
 OfficialPluginLibrary/Hint: The official ~TiddlyWiki plugin library at tiddlywiki.com. Plugins, themes and language packs are maintained by the core team.
