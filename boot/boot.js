@@ -1862,13 +1862,8 @@ $tw.loadTiddlersNode = function() {
 /*
 Startup TiddlyWiki
 */
-$tw.boot.startup = function(options, callback) {
-	if(typeof options === 'function'){
-		callback = options;
-		options = {};
-	} else {
-		options = options || {};
-	}
+$tw.boot.startup = function(options) {
+	options = options || {};
 	// Get the URL hash and check for safe mode
 	$tw.locationHash = "#";
 	if($tw.browser && !$tw.node) {
@@ -2022,7 +2017,7 @@ $tw.boot.startup = function(options, callback) {
 	$tw.boot.executedStartupModules = Object.create(null);
 	$tw.boot.disabledStartupModules = $tw.boot.disabledStartupModules || [];
 	// Repeatedly execute the next eligible task
-	$tw.boot.executeNextStartupTask(callback);
+	$tw.boot.executeNextStartupTask(options.callback);
 };
 
 /*
