@@ -26,6 +26,9 @@ exports.params = [
 Run the macro
 */
 exports.run = function(format) {
+if(format == "UTC") {
+	return $tw.utils.stringifyDate(new Date());
+} else 
 	return $tw.utils.formatDateString(new Date(),format || "0hh:0mm, DDth MMM YYYY");
 };
 
