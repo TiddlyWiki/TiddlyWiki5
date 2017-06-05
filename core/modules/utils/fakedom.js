@@ -224,8 +224,7 @@ Object.defineProperty(TW_Element.prototype, "textContent", {
 	get: function() {
 		if(this.isRaw) {
 			if(this.rawTextContent === null) {
-				console.log(booboo)
-				throw "Cannot get textContent on a raw TW_Element";				
+				return "";
 			} else {
 				return this.rawTextContent;
 			}
@@ -245,7 +244,7 @@ Object.defineProperty(TW_Element.prototype, "textContent", {
 Object.defineProperty(TW_Element.prototype, "formattedTextContent", {
 	get: function() {
 		if(this.isRaw) {
-			throw "Cannot get formattedTextContent on a raw TW_Element";
+			return "";
 		} else {
 			var b = [],
 				isBlock = $tw.config.htmlBlockElements.indexOf(this.tag) !== -1;
