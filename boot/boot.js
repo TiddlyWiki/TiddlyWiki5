@@ -2168,7 +2168,7 @@ $tw.boot.boot = function(callback) {
 	// Preload any encrypted tiddlers
 	$tw.boot.decryptEncryptedTiddlers(function() {
 		// Startup
-		$tw.boot.startup(callback);
+		$tw.boot.startup({callback:callback});
 	});
 };
 
