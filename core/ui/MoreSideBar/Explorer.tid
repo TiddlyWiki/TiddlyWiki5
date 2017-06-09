@@ -1,6 +1,6 @@
-title: $:/core/ui/MoreSideBar/System-Explorer
+title: $:/core/ui/MoreSideBar/Explorer
 tags: $:/tags/MoreSideBar
-caption: {{$:/language/SideBar/System-Explorer/Caption}}
+caption: {{$:/language/SideBar/Explorer/Caption}}
 
 \define cleanChunk()
 <$list filter="[[$(chunk)$]] +[removesuffix[/]]" variable="cleanChunk">
@@ -30,15 +30,12 @@ emptyMessage="""<$text text="$prefix$$(chunk)$"/>""">
 <$button set="""$:/state/tree/$prefix$$(chunk)$""" setTo="hide" class="tc-btn-invisible">{{$:/core/images/down-arrow}}</$button>
 </$reveal>
 </$list>
-
 <<cleanChunk>>
-
 <$list filter="""[all[shadows+tiddlers]prefix[$prefix$$(chunk)$]] -[[$prefix$$(chunk)$]] +[limit[1]]""">(<$count filter="""[all[shadows+tiddlers]prefix[$prefix$$(chunk)$]] -[[$prefix$$(chunk)$]]"""/>)
 <$reveal type="match" state="""$:/state/tree/$prefix$$(chunk)$""" text="show">
 <$macrocall $name="tree" prefix="""$prefix$$(chunk)$"""/>
 </$reveal>
 </$list>
-
 </li>
 </$reveal>
 \end
@@ -48,7 +45,6 @@ emptyMessage="""<$text text="$prefix$$(chunk)$"/>""">
 <$list filter="[all[shadows+tiddlers]removeprefix[$prefix$]splitbefore[/]sort[title]] +[!suffix[/]]" variable="chunk">
 <<leafnode """$prefix$""">>
 </$list>
-
 <$list filter="[all[shadows+tiddlers]removeprefix[$prefix$]splitbefore[/]sort[title]] +[suffix[/]]" variable="chunk">
 <<branchnode """$prefix$""">>
 </$list>
