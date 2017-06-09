@@ -2072,7 +2072,9 @@ $tw.boot.executeNextStartupTask = function(callback) {
 		}
 		taskIndex++;
 	}
-	if(typeof callback === 'function') callback();
+	if(typeof callback === 'function') {
+		callback();
+	}
 	return false;
 };
 
@@ -2168,7 +2170,7 @@ $tw.boot.boot = function(callback) {
 	// Preload any encrypted tiddlers
 	$tw.boot.decryptEncryptedTiddlers(function() {
 		// Startup
-		$tw.boot.startup({callback:callback});
+		$tw.boot.startup({callback: callback});
 	});
 };
 
