@@ -1,7 +1,8 @@
 created: 20150203140000000
-modified: 20150203140000000
+modified: 20170608150301791
 tags: [[getindex Operator]] [[Operator Examples]]
 title: getindex Operator (Examples)
+type: text/vnd.tiddlywiki
 
 <<.operator-example 1 "[[$:/palettes/Vanilla]getindex[background]]" "returns the value at index ''background'' of the [[DataTiddler|DataTiddlers]] [[$:/palettes/Vanilla]]">>
-<<.operator-example 2 "[tag[$:/tags/Palette]getindex[background]]" "returns all background colors defined in any of the ColourPalettes">>
+<<.operator-example 2 "[all[shadows+tiddlers]tag[$:/tags/Palette]getindex[background]]" "returns all background colors defined in any of the ColourPalettes">>
