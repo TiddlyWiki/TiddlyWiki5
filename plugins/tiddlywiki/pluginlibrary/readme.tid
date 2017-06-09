@@ -1,4 +1,5 @@
 title: $:/plugins/tiddlywiki/pluginlibrary/readme
+type: text/vnd.tiddlywiki
 
 This plugin is used behind the scenes by TiddlyWiki to build the plugin library.
 

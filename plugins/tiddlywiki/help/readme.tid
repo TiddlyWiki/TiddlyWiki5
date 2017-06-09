@@ -1,4 +1,5 @@
 title: $:/plugins/tiddlywiki/help/readme
+type: text/vnd.tiddlywiki
 
 This plugin provides an overlay help panel at the bottom right of the window.
 

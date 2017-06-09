@@ -1,4 +1,5 @@
 title: $:/plugins/tiddlywiki/codemirror/readme
+type: text/vnd.tiddlywiki
 
 This plugin provides an enhanced text editor component based on [[CodeMirror|http://codemirror.net]]. It provides several advantages over the default browser text editor:
 

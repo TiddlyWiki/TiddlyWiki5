@@ -1,4 +1,5 @@
 title: $:/plugins/tiddlywiki/qrcode/usage
+type: text/vnd.tiddlywiki
 
 ! `makeqr` Macro
 

@@ -1,4 +1,5 @@
 title: $:/plugins/tiddlywiki/internals/readme
+type: text/vnd.tiddlywiki
 
 This plugin adds features to help explore the internals of TiddlyWiki:
 

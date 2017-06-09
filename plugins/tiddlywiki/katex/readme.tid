@@ -1,4 +1,5 @@
 title: $:/plugins/tiddlywiki/katex/readme
+type: text/vnd.tiddlywiki
 
 This is a TiddlyWiki plugin for mathematical typesetting based on [[KaTeX from Khan Academy|http://khan.github.io/KaTeX/]].
 

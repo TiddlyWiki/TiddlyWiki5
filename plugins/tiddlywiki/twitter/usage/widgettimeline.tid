@@ -1,4 +1,5 @@
 title: $:/plugins/tiddlywiki/twitter/usage/widgettimeline
+type: text/vnd.tiddlywiki
 tags: $:/tags/TwitterUsage
 caption: Widget Timeline
 

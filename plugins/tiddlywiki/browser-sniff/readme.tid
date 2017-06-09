@@ -1,4 +1,5 @@
 title: $:/plugins/tiddlywiki/browser-sniff/readme
+type: text/vnd.tiddlywiki
 
 This plugin adds a number of `$:/info/` tiddlers containing information about the current browser.
 
