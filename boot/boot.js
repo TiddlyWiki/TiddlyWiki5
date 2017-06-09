@@ -2017,7 +2017,7 @@ $tw.boot.startup = function(options) {
 	$tw.boot.executedStartupModules = Object.create(null);
 	$tw.boot.disabledStartupModules = $tw.boot.disabledStartupModules || [];
 	// Repeatedly execute the next eligible task
-	$tw.boot.executeNextStartupTask();
+	$tw.boot.executeNextStartupTask(options.callback);
 };
 
 /*
@@ -2032,14 +2032,14 @@ $tw.addUnloadTask = function(task) {
 /*
 Execute the remaining eligible startup tasks
 */
-$tw.boot.executeNextStartupTask = function() {
+$tw.boot.executeNextStartupTask = function(callback) {
 	// Find the next eligible task
 	var taskIndex = 0, task,
 		asyncTaskCallback = function() {
 			if(task.name) {
 				$tw.boot.executedStartupModules[task.name] = true;
 			}
-			return $tw.boot.executeNextStartupTask();
+			return $tw.boot.executeNextStartupTask(callback);
 		};
 	while(taskIndex < $tw.boot.remainingStartupModules.length) {
 		task = $tw.boot.remainingStartupModules[taskIndex];
@@ -2064,7 +2064,7 @@ $tw.boot.executeNextStartupTask = function() {
 				if(task.name) {
 					$tw.boot.executedStartupModules[task.name] = true;
 				}
-				return $tw.boot.executeNextStartupTask();
+				return $tw.boot.executeNextStartupTask(callback);
 			} else {
 				task.startup(asyncTaskCallback);
 				return true;
@@ -2072,6 +2072,7 @@ $tw.boot.executeNextStartupTask = function() {
 		}
 		taskIndex++;
 	}
+	if(typeof callback === 'function') callback();
 	return false;
 };
 
@@ -2157,7 +2158,7 @@ $tw.hooks.invokeHook = function(hookName /*, value,... */) {
 
 /////////////////////////// Main boot function to decrypt tiddlers and then startup
 
-$tw.boot.boot = function() {
+$tw.boot.boot = function(callback) {
 	// Initialise crypto object
 	$tw.crypto = new $tw.utils.Crypto();
 	// Initialise password prompter
@@ -2167,7 +2168,7 @@ $tw.boot.boot = function() {
 	// Preload any encrypted tiddlers
 	$tw.boot.decryptEncryptedTiddlers(function() {
 		// Startup
-		$tw.boot.startup();
+		$tw.boot.startup({callback:callback});
 	});
 };
 
