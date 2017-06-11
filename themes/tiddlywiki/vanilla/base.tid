@@ -2382,3 +2382,39 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	background: #f00;
 	color: #fff;
 }
+
+/*
+** Tree
+*/
+
+div.tc-tree {
+    	padding-left: 14px;
+}
+
+.tc-tree ol {
+    	list-style-type: none;
+    	padding-left: 0;
+    	margin-top: 0;
+}
+
+.tc-tree ol ol {
+    	padding-left: 1em;    
+}
+
+.tc-tree button { 
+    	color: #acacac;
+}
+
+.tc-tree svg {
+     	fill: #acacac;
+}
+
+.tc-tree span svg {
+    	width: 1em;
+    	height: 1em;
+    	vertical-align: middle;
+}
+
+.tc-tree li span {
+    	color: lightgray;
+}
