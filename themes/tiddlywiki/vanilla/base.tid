@@ -2387,7 +2387,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 ** Tree
 */
 
-div.tc-tree {
+.tc-tree div {
     	padding-left: 14px;
 }
 
