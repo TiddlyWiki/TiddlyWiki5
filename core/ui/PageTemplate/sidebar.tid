@@ -19,7 +19,9 @@ tags: $:/tags/PageTemplate
 
 </div>
 
+<div class="tc-page-controls">
 {{||$:/core/ui/PageTemplate/pagecontrols}}
+</div>
 
 <$transclude tiddler="$:/core/ui/SideBarLists" mode="inline"/>
 

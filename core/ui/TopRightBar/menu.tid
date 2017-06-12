@@ -1,18 +1,10 @@
 title: $:/core/ui/TopBar/menu
 tags: $:/tags/TopRightBar
 
-\define config-title()
-$:/config/PageControlButtons/Visibility/$(listItem)$
-\end
-
 <$reveal state="$:/state/sidebar" type="nomatch" text="no">
 <$button set="$:/state/sidebar" setTo="no" tooltip={{$:/language/Buttons/HideSideBar/Hint}} aria-label={{$:/language/Buttons/HideSideBar/Caption}} class="tc-btn-invisible">{{$:/core/images/chevron-right}}</$button>
 </$reveal>
 <$reveal state="$:/state/sidebar" type="match" text="no">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">
-<$reveal type="nomatch" state=<<config-title>> text="hide">
-<$transclude tiddler=<<listItem>> mode="inline"/>
-</$reveal>
-</$list>
+{{$:/core/ui/PageTemplate/pagecontrols}}
 <$button set="$:/state/sidebar" setTo="yes" tooltip={{$:/language/Buttons/ShowSideBar/Hint}} aria-label={{$:/language/Buttons/ShowSideBar/Caption}} class="tc-btn-invisible">{{$:/core/images/chevron-left}}</$button>
 </$reveal>
