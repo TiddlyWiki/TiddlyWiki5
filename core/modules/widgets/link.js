@@ -135,7 +135,11 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 		navigateFromNode: this,
 		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 		},
-		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1)
+		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1),
+		metaKey: event.metaKey,
+		ctrlKey: event.ctrlKey,
+		altKey: event.altKey,
+		shiftKey: event.shiftKey
 	});
 	if(this.domNodes[0].hasAttribute("href")) {
 		event.preventDefault();
