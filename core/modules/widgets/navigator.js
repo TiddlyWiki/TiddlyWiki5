@@ -209,6 +209,10 @@ NavigatorWidget.prototype.handleCloseOtherTiddlersEvent = function(event) {
 
 // Place a tiddler in edit mode
 NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
+	var editTiddler = $tw.hooks.invokeHook("th-editing-tiddler",event);
+	if(!editTiddler) {
+		return false;
+	}
 	var self = this;
 	function isUnmodifiedShadow(title) {
 		return self.wiki.isShadowTiddler(title) && !self.wiki.tiddlerExists(title);
@@ -497,7 +501,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		storyList.splice(slot + 1,0,draftTitle);
 	}
 	if(storyList.indexOf(title) !== -1) {
-		storyList.splice(storyList.indexOf(title),1);		
+		storyList.splice(storyList.indexOf(title),1);
 	}
 	this.saveStoryList(storyList);
 	// Add a new record to the top of the history stack
@@ -510,7 +514,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	// Get the tiddlers
 	var tiddlers = [];
 	try {
-		tiddlers = JSON.parse(event.param);	
+		tiddlers = JSON.parse(event.param);
 	} catch(e) {
 	}
 	// Get the current $:/Import tiddler
@@ -563,7 +567,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	return false;
 };
 
-// 
+//
 NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	var self = this,
 		importTiddler = this.wiki.getTiddler(event.param),
