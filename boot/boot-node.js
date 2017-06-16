@@ -144,9 +144,9 @@ function bootNode($tw) {
 						var fileRegExp = new RegExp(dirInfo.filesRegExp || "^.*$"), metaRegExp = /^.*\.meta$/;
 						return rxjs.Observable.from(files.filter(function (filename) {
 							return filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename);
-						})).concatMap(function (filename) {
+						})).mergeMap(function (filename) {
 							return processFile(dirPath + path.sep + filename, dirInfo.isTiddlerFile, dirInfo.fields);
-						});
+						}, maxConcurrent);
 					});
 				}
 			}));
@@ -217,13 +217,24 @@ function bootNode($tw) {
 	*/
 	function loadPluginFolder(filepath, excludeRegExp) {
 		excludeRegExp = excludeRegExp || $tw.boot.excludeRegExp;
+		//return an observable chain starting with stat'ing the folder
 		return obs_stat()(filepath).switchMap(function (_a) {
 			var err = _a[0], stat = _a[1];
-			if (err || !stat.isDirectory())
-				return rxjs.Observable.throw(err || { message: "Directory required" });
+			//skip down to the catch handler if we can't load this path, but tell the handler
+			//to just return null instead of rethrowing the error.
+			if (err || !stat.isDirectory()) {
+				if (err)
+					err.forward = false;
+				else
+					err = { message: "Directory required", forward: false };
+				return rxjs.Observable.throw(err);
+			}
+			//read the plugin info file
 			return obs_readFile()(filepath + path.sep + "plugin.info", "utf8");
 		}).switchMap(function (_a) {
 			var err = _a[0], data = _a[1];
+			if (err)
+				throw err;
 			var pluginInfo = JSON.parse(data);
 			return loadTiddlersFromPath(filepath, excludeRegExp)
 				.reduce(function (n, e) { n.push(e); return n; }, [])
@@ -261,16 +272,21 @@ function bootNode($tw) {
 			}
 			return pluginInfo;
 		}).catch(function (err) {
-			return rxjs.Observable.of(null);
+			if (err.forward === false)
+				return rxjs.Observable.of(null);
+			else
+				return rxjs.Observable.throw(err);
 		});
 	}
 	;
 	/**
 	name: Name of the plugin to find
 	paths: array of file paths to search for it
-	Returns the path of the plugin folder
+	Returns the path of the plugin folder or null
 	*/
 	function findLibraryItem(name, paths) {
+		//emits the first path that exists and is a directory
+		//otherwise emits null
 		return rxjs.Observable.from(paths).concatMap(function (itemPath) {
 			var pluginPath = path.resolve(itemPath, "./" + name);
 			return obs_stat(pluginPath)(pluginPath);
@@ -324,12 +340,12 @@ function bootNode($tw) {
 	function loadPlugins(plugins, libraryPath, envVar) {
 		if (plugins) {
 			var pluginPaths = getLibraryItemSearchPaths(libraryPath, envVar);
-			return rxjs.Observable.from(plugins).concatMap(function (plugin) {
+			return rxjs.Observable.from(plugins).mergeMap(function (plugin) {
 				return loadPlugin(plugin, pluginPaths);
-			});
+			}, maxConcurrent);
 		}
 		else {
-			return rxjs.Observable.of();
+			return rxjs.Observable.empty();
 		}
 	}
 	;
@@ -349,12 +365,14 @@ function bootNode($tw) {
 	 */
 	function loadWikiTiddlers(wikiPath, options) {
 		options = options || {};
-		var parentPaths = options.parentPaths || [], wikiInfoPath = path.resolve(wikiPath, $tw.config.wikiInfo), wikiInfo, pluginFields;
+		var parentPaths = options.parentPaths || [], wikiInfoPath = path.resolve(wikiPath, $tw.config.wikiInfo), 
+		//wikiInfo,
+		pluginFields;
 		// Bail if we don't have a wiki info file
 		return obs_readFile()(wikiInfoPath, "utf8").concatMap(function (_a) {
 			var err = _a[0], wikiInfoFile = _a[1];
 			if (err)
-				return rxjs.Observable.throw(err);
+				return rxjs.Observable.empty();
 			var wikiInfo = JSON.parse(wikiInfoFile);
 			// Load any parent wikis
 			if (wikiInfo.includeWikis) {
@@ -414,30 +432,36 @@ function bootNode($tw) {
 				path.resolve(wikiPath, $tw.config.wikiPluginsSubDir),
 				path.resolve(wikiPath, $tw.config.wikiThemesSubDir),
 				path.resolve(wikiPath, $tw.config.wikiLanguagesSubDir)
-			]).concatMap(function (pluginPath) {
+			]).mergeMap(function (pluginPath) {
 				return obs_readdir(pluginPath)(pluginPath);
-			}).concatMap(function (_a) {
+			}).mergeMap(function (_a) {
 				var err = _a[0], pluginFolders = _a[1], pluginPath = _a[2];
 				if (err)
 					return rxjs.Observable.empty();
 				else
 					return rxjs.Observable.from(pluginFolders.map(function (a) { return [a, pluginPath]; }));
-			}).concatMap(function (_a) {
+			}).mergeMap(function (_a) {
 				var pluginFolder = _a[0], pluginPath = _a[1];
 				return loadPluginFolder(path.resolve(pluginPath, "./" + pluginFolder));
 			}).map(function (pluginFields) {
 				$tw.wiki.addTiddler(pluginFields);
 			}).count().mapTo(wikiInfo);
-		});
+		}).defaultIfEmpty(null); //emit null if we don't emit anything else
 	}
 	;
 	function loadTiddlersNode() {
 		// Load the boot tiddlers
-		return rxjs.Observable.concat(loadTiddlersFromPath($tw.boot.bootPath).do(function (tiddlerFile) {
+		return rxjs.Observable.merge(
+		//load the boot tiddlers
+		loadTiddlersFromPath($tw.boot.bootPath).do(function (tiddlerFile) {
 			$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
-		}).ignoreElements(), loadPluginFolder($tw.boot.corePath).do(function (coreTiddlers) {
+		}).ignoreElements(), 
+		//load the core plugin
+		loadPluginFolder($tw.boot.corePath).do(function (coreTiddlers) {
 			$tw.wiki.addTiddler(coreTiddlers);
-		}).ignoreElements(), ($tw.boot.wikiPath ? loadWikiTiddlers($tw.boot.wikiPath).do(function (wikiInfo) {
+		}).ignoreElements(), 
+		//load the data folder, if we have one
+		($tw.boot.wikiPath ? loadWikiTiddlers($tw.boot.wikiPath).do(function (wikiInfo) {
 			$tw.boot.wikiInfo = wikiInfo;
 		}) : rxjs.Observable.empty())).ignoreElements();
 	}
