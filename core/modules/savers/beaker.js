@@ -27,7 +27,7 @@ BeakerSaver.prototype.save = function(text,method,callback) {
 
 	dat.stat(path).then(function(value) {
 		if(value.isDirectory) {
-			path = "/index.html";
+			path = path + "/index.html";
 		}
 		dat.writeFile(path,text,"utf8").then(function(value) {
 			callback(null);
