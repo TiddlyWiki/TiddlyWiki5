@@ -1,5 +1,4 @@
 title: $:/plugins/tiddlywiki/xlsx-utils/readme
-type: text/vnd.tiddlywiki
 
 This plugin provides a flexible way to import tiddlers from Excel files. It is based on the library [[js-xlsx|https://github.com/SheetJS/js-xlsx]].
 

@@ -1,5 +1,4 @@
 title: $:/plugins/tiddlywiki/twitter/usage
-type: text/vnd.tiddlywiki
 
 The `<$twitter>` widget can be used to embed several different entities:
 

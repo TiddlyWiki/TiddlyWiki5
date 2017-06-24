@@ -1,5 +1,4 @@
 title: $:/plugins/tiddlywiki/bibtex/readme
-type: text/vnd.tiddlywiki
 
 The BibTeX plugin provides a deserializer that can convert bibliographic entries in `.bib` files into individual tiddlers.
 
