@@ -20,16 +20,14 @@ var BeakerSaver = function(wiki) {
 	this.wiki = wiki;
 };
 
-var dat = new DatArchive('' + window.location);
-
 BeakerSaver.prototype.save = function(text,method,callback) {
-	var path = (location.pathname.toString()).split("#")[0];
-
-	dat.stat(path).then(function(value) {
-		if(value.isDirectory) {
-			path = path + "/index.html";
+	var dat = new DatArchive("" + window.location),
+		pathname = ("" + window.location.pathname).split("#")[0];
+	dat.stat(pathname).then(function(value) {
+		if(value.isDirectory()) {
+			pathname = pathname + "/index.html";
 		}
-		dat.writeFile(path,text,"utf8").then(function(value) {
+		dat.writeFile(pathname,text,"utf8").then(function(value) {
 			callback(null);
 		},function(reason) {
 			callback("Beaker Saver Write Error: " + reason);
