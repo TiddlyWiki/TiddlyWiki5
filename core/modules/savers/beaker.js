@@ -4,6 +4,7 @@ type: application/javascript
 module-type: saver
 
 Saves files using the Beaker browser's (https://beakerbrowser.com) Dat protocol (https://datproject.org/)
+Compatible with beaker >= V0.7.2
 
 \*/
 (function(){
@@ -19,17 +20,20 @@ var BeakerSaver = function(wiki) {
 	this.wiki = wiki;
 };
 
+var dat = new DatArchive('' + window.location);
+
 BeakerSaver.prototype.save = function(text,method,callback) {
-	var url = (location.toString()).split("#")[0];
-	dat.stat(url).then(function(value) {
-		if(value.type === "directory") {
-			url = url + "/index.html";
+	var path = (location.pathname.toString()).split("#")[0];
+
+	dat.stat(path).then(function(value) {
+		if(value.isDirectory) {
+			path = path + "/index.html";
 		}
-		dat.writeFile(url,text,"utf8").then(function(value) {
+		dat.writeFile(path,text,"utf8").then(function(value) {
 			callback(null);
 		},function(reason) {
 			callback("Beaker Saver Write Error: " + reason);
-		});		
+		});
 	},function(reason) {
 		callback("Beaker Saver Stat Error: " + reason);
 	});
@@ -49,7 +53,7 @@ BeakerSaver.prototype.info = {
 Static method that returns true if this saver is capable of working
 */
 exports.canSave = function(wiki) {
-	return !!window.dat;
+	return !!window.DatArchive;
 };
 
 /*
