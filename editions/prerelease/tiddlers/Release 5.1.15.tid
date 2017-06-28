@@ -23,7 +23,7 @@ New and improved translations:
 
 !! Usability Improvements
 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1e9d214f67906e63758f8665091bc0ef6651f10d]] new "Explorer" tab to "More" sidebar
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1e9d214f67906e63758f8665091bc0ef6651f10d]] new "Explorer" tab to "More" sidebar and underlying [[tree Macro]]
 
 !! Hackability Improvements
 
