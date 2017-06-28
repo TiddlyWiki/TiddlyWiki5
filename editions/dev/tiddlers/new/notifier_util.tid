@@ -1,0 +1,30 @@
+tags: dev
+title: Notifier utility
+type: text/vnd.tiddlywiki
+
+!! Overview
+
+The notifier module is part of tiddlywiki's utils suite. It displays the text contained on one as notification. 
+Notifications are an easy and visual mechanism to notify the user about key information. 
+Notifications appear on the right top border of the screen, and are automatically dismissed.
+One usage example is the `saved wiki` notification you see each time the save button is clicked.
+The notification module makes easier to display such notifcations, making all the heavy lifting of the notifcation creation
+,appending it to the `DOM`, animation and `DOM` removal
+
+!! Parameters
+
+The notifier module only has one method (`display(title,options)`) that accepts two parameters
+
+* title: The title of an existing tiddler. 
+** If the tiddler does not exist, then no notification will take place
+** The content of this tiddler will be transcluded into the notification body
+* Options: An object conaining a `variables` property that will be used on the tiddler transclusion
+
+!! Usage
+
+A notifier instance is availably directly on the global `$tw` object. You can access it directly on any part of your code that 
+may need to notify something to the user
+
+```js
+$tw.notifier.display("$:/language/Notifications/Save/Starting");
+```
