@@ -23,8 +23,12 @@
     "tiddlywiki5",
     "wiki"
   ],
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+    "rxjs": "^5.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.31"
+  },
   "bundleDependencies": [],
   "license": "BSD",
   "engines": {
