@@ -24,6 +24,7 @@ MsDownloadSaver.prototype.save = function(text,method,callback) {
 		p = document.location.pathname.lastIndexOf("/");
 	if(p !== -1) {
 		filename = document.location.pathname.substr(p+1);
+		filename = filename.replace(/%20/g, " ");
 	}
 	// Set up the link
 	var blob = new Blob([text], {type: "text/html"});
