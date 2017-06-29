@@ -993,6 +993,7 @@ button.tc-untagged-label {
 	background-color: <<colour tiddler-editor-background>>;
 	line-height: 1.3em;
 	-webkit-appearance: none;
+	font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
 }
 
 .tc-tiddler-frame .tc-binary-warning {
