@@ -60,8 +60,8 @@ NavigatorWidget.prototype.execute = function() {
 	// Get our parameters
 	this.storyTitle = this.getAttribute("story");
 	this.historyTitle = this.getAttribute("history");
-	this.setVariable("tv-storylist",this.storyTitle);
-	this.setVariable("tv-historylist",this.historyTitle);
+	this.setVariable("tv-story-list",this.storyTitle);
+	this.setVariable("tv-history-list",this.historyTitle);
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
