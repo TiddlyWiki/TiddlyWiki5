@@ -12,6 +12,7 @@ Options/CodeWrapping: Wrap long lines in code blocks
 Settings: Settings
 Settings/FontFamily: Font family
 Settings/CodeFontFamily: Code font family
+Settings/EditorFontFamily: Editor font family
 Settings/BackgroundImage: Page background image
 Settings/BackgroundImageAttachment: Page background image attachment
 Settings/BackgroundImageAttachment/Scroll: Scroll with tiddlers

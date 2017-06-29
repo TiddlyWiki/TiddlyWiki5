@@ -17,15 +17,18 @@ type: text/vnd.tiddlywiki
 
 !! Translation Improvements
 
-* 
+New and improved translations:
+
+* Chinese
 
 !! Usability Improvements
 
-* 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1e9d214f67906e63758f8665091bc0ef6651f10d]] new "Explorer" tab to "More" sidebar and underlying [[tree Macro]]
 
 !! Hackability Improvements
 
-* 
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/ef9efbc3995248d72148423bee10a1374c842926]] support for saving in [[Beaker Browser]]
+
 
 !! Node.js Improvements
 
@@ -33,15 +36,22 @@ type: text/vnd.tiddlywiki
 
 !! Bug Fixes
 
-* 
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/683285d44943db2d993bd574ed2d2f8a07dfc816]] plugin display so that "contents" tab is shown even if no other tabs are provided
 
 !! Developer Bug Fixes and Improvements
 
-* 
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/0bc325025a61c265dafe7ce8750ea8deed2be51b]] `$tw.boot.boot()` to add a callback parameter
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/d89010752a8b169a4917bde9a9028ddd871e743d]] navigation handling to pass original event data
 
 ! Contributors
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
-* [[@anon|https://github.com/anon]]
+* [[@Arlen22|https://github.com/Arlen22]]
+* [[@BramChen|https://github.com/BramChen]]
+* [[@Marxsal|https://github.com/Marxsal]]
+* [[@morosanuae|https://github.com/morosanuae]]
+* [[@pmario|https://github.com/pmario]]
+* [[@rubaboo|https://github.com/rubaboo]]
+* [[@saqimtiaz|https://github.com/saqimtiaz]]
  

@@ -1,5 +1,4 @@
 title: $:/plugins/tiddlywiki/github-fork-ribbon/readme
-type: text/vnd.tiddlywiki
 
 This plugin provides a diagonal ribbon across the corner of the window. It resembles the design used by ~GitHub for their "Fork me on ~GitHub" ribbons.
 

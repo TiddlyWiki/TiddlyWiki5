@@ -1,5 +1,4 @@
 title: $:/plugins/tiddlywiki/markdown/readme
-type: text/vnd.tiddlywiki
 
 This is a TiddlyWiki plugin for parsing Markdown text, based on the [[markdown-js|https://github.com/evilstreak/markdown-js]] project from Dominic Baggott. 
 

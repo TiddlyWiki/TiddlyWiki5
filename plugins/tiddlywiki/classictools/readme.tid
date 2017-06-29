@@ -1,5 +1,4 @@
 title: $:/plugins/tiddlywiki/classictools/readme
-type: text/vnd.tiddlywiki
 
 This plugin provides facilities for working with TiddlyWiki Classic. It is used in the build process for TiddlyWiki Classic.
 

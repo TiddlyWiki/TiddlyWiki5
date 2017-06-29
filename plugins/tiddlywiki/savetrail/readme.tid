@@ -1,5 +1,4 @@
 title: $:/plugins/tiddlywiki/savetrail/readme
-type: text/vnd.tiddlywiki
 
 This plugin causes TiddlyWiki to continuously download (as a JSON file) the contents of any tiddler that is manually changed by any of several means:
 

@@ -1,5 +1,4 @@
 title: $:/plugins/tiddlywiki/upgrade/readme
-type: text/vnd.tiddlywiki
 
 This plugin contains the user interface components used to build the special [[upgrade edition|http://tiddlywiki.com/upgrade.html]].
 

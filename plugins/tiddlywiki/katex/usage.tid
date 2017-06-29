@@ -1,5 +1,4 @@
 title: $:/plugins/tiddlywiki/katex/usage
-type: text/vnd.tiddlywiki
 
 The usual way to include ~LaTeX is to use `$$`. For example:
 

@@ -1,5 +1,4 @@
 title: $:/plugins/tiddlywiki/qrcode/readme
-type: text/vnd.tiddlywiki
 
 The QR code plugin provides a macro that enables any text to be rendered as a [[QR code|https://en.wikipedia.org/wiki/QR_code]]. QR codes are a type of 2-dimensional bar code that encodes arbitrary data: text, numbers, links. QR code readers are available or built-in for smartphones, making them a convenient means to transfer information between devices
 

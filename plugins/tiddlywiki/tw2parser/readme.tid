@@ -1,5 +1,4 @@
 title: $:/plugins/tiddlywiki/tw2parser/readme
-type: text/vnd.tiddlywiki
 
 This experimental plugin provides support for parsing and rendering tiddlers written in TiddlyWiki Classic format (`text/x-tiddlywiki`).
 
