@@ -317,4 +317,6 @@ Richard Decal, @crypdick, 2017/04/04
 
 Adrian Morosanu, @morosanuae, 2017/06/02
 
+Rob Hoelz, @hoelzro, 2017/05/08
+
 Saq Imtiaz, @saqimtiaz, 2017/06/14
