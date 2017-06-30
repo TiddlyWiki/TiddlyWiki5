@@ -12,6 +12,7 @@ Options/CodeWrapping: 在代碼區塊中折行
 Settings: 設定
 Settings/FontFamily: 字型
 Settings/CodeFontFamily: 代碼字型
+Settings/EditorFontFamily: 編輯器字型
 Settings/BackgroundImage: 頁面背景圖像
 Settings/BackgroundImageAttachment: 頁面背景圖像附屬
 Settings/BackgroundImageAttachment/Scroll: 隨條目捲動
