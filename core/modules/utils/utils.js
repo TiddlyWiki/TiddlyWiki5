@@ -267,6 +267,9 @@ exports.formatDateString = function(date,template) {
 			[/^0ss/, function() {
 				return $tw.utils.pad(date.getSeconds());
 			}],
+			[/^0XXX/, function() {
+				return $tw.utils.pad(date.getMilliseconds());
+			}],
 			[/^0DD/, function() {
 				return $tw.utils.pad(date.getDate());
 			}],
@@ -308,6 +311,9 @@ exports.formatDateString = function(date,template) {
 			[/^ss/, function() {
 				return date.getSeconds();
 			}],
+			[/^XXX/, function() {
+				return date.getMilliseconds();
+			}],
 			[/^[AP]M/, function() {
 				return $tw.utils.getAmPm(date).toUpperCase();
 			}],
@@ -324,6 +330,16 @@ exports.formatDateString = function(date,template) {
 				return $tw.utils.pad(date.getFullYear() - 2000);
 			}]
 		];
+	// If the user wants everything in UTC, shift the datestamp
+	// Optimize for format string that essentially means 
+	// 'return raw UTC (tiddlywiki style) date string.'
+	if(t.indexOf("[UTC]") == 0 ) {
+		if(t == "[UTC]YYYY0MM0DD0hh0mm0ssXXX") 
+			return $tw.utils.stringifyDate(new Date());
+		var offset = date.getTimezoneOffset() ; // in minutes
+		date = new Date(date.getTime()+offset*60*1000) ;
+		t = t.substr(5) ;
+	} 
 	while(t.length){
 		var matchString = "";
 		$tw.utils.each(matches, function(m) {
