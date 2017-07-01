@@ -25,7 +25,8 @@ DownloadSaver.prototype.save = function(text,method,callback,options) {
 	if(!filename) {
 		var p = document.location.pathname.lastIndexOf("/");
 		if(p !== -1) {
-			filename = document.location.pathname.substr(p+1);
+			// We decode the pathname because document.location is URL encoded by the browser
+			filename = decodeURIComponent(document.location.pathname.substr(p+1));
 		}
 	}
 	if(!filename) {
