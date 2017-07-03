@@ -1,0 +1,40 @@
+title: $:/plugins/tiddlywiki/aws/lambda
+
+! Template
+
+The template [[$:/plugins/tiddlywiki/aws/lambdas/main]] transcludes everything required to render a TiddlyWiki as an AWS Lambda function.
+
+The Lambda is build with this command:
+
+```
+tiddlywiki editions/aws --rendertiddler $:/plugins/tiddlywiki/aws/lambdas/main index.js text/plain
+```
+
+Or:
+
+```
+tiddlywiki editions/aws --build lambda
+```
+
+! Execution
+
+The Lambda boot code looks for an array of tiddlers to load in `event.tiddlers`, and an array of commands to execute in `event.commands`. For example:
+
+```
+{
+	"commands": [
+		"--aws","s3-rendertiddler","HelloThere","eu-west-2","my-bucket-name","rendered.html"
+	],
+	"tiddlers": [
+		{
+			"title": "HelloThere",
+			"text": "Hello from {{Platform}}."
+		},
+		{
+			"title": "Platform",
+			"text": "TiddlyWiki"
+		}
+	]
+}
+
+```
