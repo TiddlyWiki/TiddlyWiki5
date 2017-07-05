@@ -92,7 +92,10 @@ Command.prototype.fetchFiles = function(options) {
 	return null;
 };
 
-Command.prototype.fetchFile = function(url,options,callback) {
+Command.prototype.fetchFile = function(url,options,callback,redirectCount) {
+	if(redirectCount > 10) {
+		return callback("Error too many redirects retrieving " + url);
+	}
 	var self = this,
 		lib = url.substr(0,8) === "https://" ? require("https") : require("http");
 	lib.get(url).on("response",function(response) {
@@ -109,7 +112,11 @@ Command.prototype.fetchFile = function(url,options,callback) {
 		        self.processBody(Buffer.concat(data),type,options,url);
 		        callback(null);
 	        } else {
-	        	callback("Error " + response.statusCode + " retrieving " + url)
+	        	if(response.statusCode === 302 || response.statusCode === 303 || response.statusCode === 307) {
+	        		return self.fetchFile(response.headers.location,options,callback,redirectCount + 1);
+	        	} else {
+		        	return callback("Error " + response.statusCode + " retrieving " + url)	        		
+	        	}
 	        }
 	   	});
 	   	response.on("error",function(e) {
