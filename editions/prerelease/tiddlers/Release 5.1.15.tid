@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 !! New and Improved Plugins
 
-* 
+* New [[Amazon Web Services Plugin]] with primitives for running TiddlyWiki in the cloud
 
 !! Performance Improvements
 
@@ -29,11 +29,11 @@ New and improved translations:
 !! Hackability Improvements
 
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/ef9efbc3995248d72148423bee10a1374c842926]] support for saving in [[Beaker Browser]]
-
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/4db950cc450ef1ea87ce8f480fe882f2b108cdb4]] date formatting to support milliseconds and UTC dates
 
 !! Node.js Improvements
 
-* 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c179dc93cbd8947f92a8007d28c497b70efc4204]] new "raw" options to the FetchCommand
 
 !! Bug Fixes
 
