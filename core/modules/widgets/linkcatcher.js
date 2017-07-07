@@ -82,7 +82,7 @@ LinkCatcherWidget.prototype.handleNavigateEvent = function(event) {
 		this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: this.catchSet, text: this.catchSetTo}));
 	}
 	if(this.catchActions) {
-		this.invokeActionString(this.catchActions,this);
+		this.invokeActionString(this.catchActions,this,event,{navigateTo: event.navigateTo});
 	}
 	return false;
 };
