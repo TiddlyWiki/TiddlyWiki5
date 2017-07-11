@@ -935,7 +935,9 @@ button.tc-untagged-label {
 	font-size: 1em;
 }
 
-.tc-tiddler-controls > span > button {
+.tc-tiddler-controls > span > button,
+.tc-tiddler-controls > span > span > button,
+.tc-tiddler-controls > span > span > span > button {
 	vertical-align: baseline;
 	margin-left:5px;
 }
