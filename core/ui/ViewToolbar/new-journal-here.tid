@@ -3,6 +3,7 @@ tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/new-journal-button}} {{$:/language/Buttons/NewJournalHere/Caption}}
 description: {{$:/language/Buttons/NewJournalHere/Hint}}
 
+\whitespace trim
 \define journalButtonTags()
 [[$(currentTiddlerTag)$]] $(journalTags)$
 \end
@@ -13,7 +14,9 @@ description: {{$:/language/Buttons/NewJournalHere/Hint}}
 {{$:/core/images/new-journal-button}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>prefix[yes]]">
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/NewJournalHere/Caption}}/></span>
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/NewJournalHere/Caption}}/>
+</span>
 </$list>
 </$button>
 \end
@@ -21,4 +24,6 @@ description: {{$:/language/Buttons/NewJournalHere/Hint}}
 <$set name="journalTags" value={{$:/config/NewJournal/Tags}}>
 <$set name="currentTiddlerTag" value=<<currentTiddler>>>
 <<journalButton>>
-</$set></$set></$set>
+</$set>
+</$set>
+</$set>
