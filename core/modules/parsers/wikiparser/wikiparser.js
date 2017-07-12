@@ -50,6 +50,8 @@ var WikiParser = function(type,text,options) {
 	this.type = type || "text/vnd.tiddlywiki";
 	this.source = text || "";
 	this.sourceLength = this.source.length;
+	// Flag for ignoring whitespace
+	this.configTrimWhiteSpace = false;
 	// Set current parse position
 	this.pos = 0;
 	// Instantiate the pragma parse rules
@@ -285,7 +287,7 @@ WikiParser.prototype.parseInlineRunUnterminated = function(options) {
 	while(this.pos < this.sourceLength && nextMatch) {
 		// Process the text preceding the run rule
 		if(nextMatch.matchIndex > this.pos) {
-			tree.push({type: "text", text: this.source.substring(this.pos,nextMatch.matchIndex)});
+			this.pushTextWidget(tree,this.source.substring(this.pos,nextMatch.matchIndex));
 			this.pos = nextMatch.matchIndex;
 		}
 		// Process the run rule
@@ -295,7 +297,7 @@ WikiParser.prototype.parseInlineRunUnterminated = function(options) {
 	}
 	// Process the remaining text
 	if(this.pos < this.sourceLength) {
-		tree.push({type: "text", text: this.source.substr(this.pos)});
+		this.pushTextWidget(tree,this.source.substr(this.pos));
 	}
 	this.pos = this.sourceLength;
 	return tree;
@@ -315,7 +317,7 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 		if(terminatorMatch) {
 			if(!inlineRuleMatch || inlineRuleMatch.matchIndex >= terminatorMatch.index) {
 				if(terminatorMatch.index > this.pos) {
-					tree.push({type: "text", text: this.source.substring(this.pos,terminatorMatch.index)});
+					this.pushTextWidget(tree,this.source.substring(this.pos,terminatorMatch.index));
 				}
 				this.pos = terminatorMatch.index;
 				if(options.eatTerminator) {
@@ -328,7 +330,7 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 		if(inlineRuleMatch) {
 			// Preceding text
 			if(inlineRuleMatch.matchIndex > this.pos) {
-				tree.push({type: "text", text: this.source.substring(this.pos,inlineRuleMatch.matchIndex)});
+				this.pushTextWidget(tree,this.source.substring(this.pos,inlineRuleMatch.matchIndex));
 				this.pos = inlineRuleMatch.matchIndex;
 			}
 			// Process the inline rule
@@ -342,10 +344,22 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 	}
 	// Process the remaining text
 	if(this.pos < this.sourceLength) {
-		tree.push({type: "text", text: this.source.substr(this.pos)});
+		this.pushTextWidget(tree,this.source.substr(this.pos));
 	}
 	this.pos = this.sourceLength;
 	return tree;
+};
+
+/*
+Push a text widget onto an array, respecting the configTrimWhiteSpace setting
+*/
+WikiParser.prototype.pushTextWidget = function(array,text) {
+	if(this.configTrimWhiteSpace) {
+		text = $tw.utils.trim(text);
+	}
+	if(text) {
+		array.push({type: "text", text: text});		
+	}
 };
 
 /*
