@@ -5,6 +5,7 @@ Load tiddlers from 2.x.x TiddlyWiki files (`.html`), `.tiddler`, `.tid`, `.json`
 
 ```
 --load <filepath>
+--load <dirpath>
 ```
 
 To load tiddlers from an encrypted TiddlyWiki file you should first specify the password with the PasswordCommand. For example:
