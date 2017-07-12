@@ -1220,10 +1220,14 @@ $tw.Wiki.prototype.processSafeMode = function() {
 /*
 Extracts tiddlers from a typed block of text, specifying default field values
 */
-$tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
+$tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields,options) {
 	srcFields = srcFields || Object.create(null);
-	var deserializer = $tw.Wiki.tiddlerDeserializerModules[type],
+	options = options || {};
+	var deserializer = $tw.Wiki.tiddlerDeserializerModules[options.deserializer],
 		fields = Object.create(null);
+	if(!deserializer) {
+		deserializer = $tw.Wiki.tiddlerDeserializerModules[type];
+	}
 	if(!deserializer && $tw.utils.getFileExtensionInfo(type)) {
 		// If we didn't find the serializer, try converting it from an extension to a content type
 		type = $tw.utils.getFileExtensionInfo(type).type;
