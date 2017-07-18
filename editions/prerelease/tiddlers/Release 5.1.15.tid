@@ -28,12 +28,17 @@ New and improved translations:
 
 !! Hackability Improvements
 
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/5dd3d97760083f7c6ba9a6cd6186525edb3fb836]] the SetWidget with ''tiddler'', ''field'' and ''index'' attributes
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d966583854d7c7f4a7df25c0e2a8d6b9e217a12c]] new ''whitespace'' [[Pragma]] allowing whitespace to be selectively ignored within wikitext
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/ef9efbc3995248d72148423bee10a1374c842926]] support for saving in [[Beaker Browser]]
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/4db950cc450ef1ea87ce8f480fe882f2b108cdb4]] date formatting to support milliseconds and UTC dates
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/dc295b2536cdf411893e15b6dc0d62107f50a08d]] LinkCatcherWidget to make the target tiddler available within the action string
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/596dfa1d5058e030a318e4a0f23d078500c3d154]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/a4d919f45caae393f99018e0d797980b3667867f]]) the DropzoneWidget and BrowseWidget to allow the deserializer to be manually specified
 
 !! Node.js Improvements
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c179dc93cbd8947f92a8007d28c497b70efc4204]] new "raw" options to the FetchCommand
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e951047461c3c2c273484a759ce5fc2c388fb684]] new ImportCommand
 
 !! Bug Fixes
 
@@ -41,6 +46,7 @@ New and improved translations:
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/2850]] problem with importin JSON tiddlers with leading or trailing spaces in the title
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/683285d44943db2d993bd574ed2d2f8a07dfc816]] plugin display so that "contents" tab is shown even if no other tabs are provided
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/2842]] problem with `allbefore:include` filter operator
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/e471bd54d42226d3b6d070b8561f8883f44df68a]] Update Stanford JavaScript Library to version 1.0.7
 
 !! Developer Bug Fixes and Improvements
 
