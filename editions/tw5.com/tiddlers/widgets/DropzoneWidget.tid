@@ -14,7 +14,7 @@ It sends a [[WidgetMessage: tm-import-tiddlers]] carrying a JSON representation 
 ! Content and Attributes
 
 |!Attribute |!Description |
-|deserializer |Optional name of deserializer to be used (by default the deserializer is derived from the file extension) |
+|deserializer |<<.from-version "5.1.15">> Optional name of deserializer to be used (by default the deserializer is derived from the file extension) |
 
 The list of available deserializers can be inspected by executing `Object.keys($tw.Wiki.tiddlerDeserializerModules).sort().join("\n")` in the browser JavaScript console.
 

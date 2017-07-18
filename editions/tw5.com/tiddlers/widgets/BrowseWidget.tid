@@ -15,7 +15,7 @@ The content of the `<$browse>` widget is ignored.
 
 |!Attribute |!Description |
 |multiple |Set to "multiple" to select multiple file upload |
-|deserializer |Optional name of deserializer to be used (by default the deserializer is derived from the file extension or type) |
+|deserializer |<<.from-version "5.1.15">> Optional name of deserializer to be used (by default the deserializer is derived from the file extension or type) |
 |tooltip |Optional tooltip text |
 |message |Optional override of widget message to be generated. The parameter for the message will be the JavaScript object `event.target.files` |
 
