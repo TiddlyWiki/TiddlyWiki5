@@ -5,6 +5,7 @@ description: 从文件中加载条目
 
 ```
 --load <filepath>
+--load <dirpath>
 ```
 
 从已加密的 TiddlyWiki 文件中加载条目，须使用 PasswordCommand 指定密码，例如：
