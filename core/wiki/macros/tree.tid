@@ -17,10 +17,10 @@ emptyMessage="""<$text text="$prefix$$(chunk)$"/>""">
 <li>      
 <$list filter="""[all[shadows+tiddlers]prefix[$prefix$$(chunk)$]] -[[$prefix$$(chunk)$]] +[limit[1]]""">
 <$reveal type="nomatch" state="""$:/state/tree/$prefix$$(chunk)$""" text="show">
-<$button set="""$:/state/tree/$prefix$$(chunk)$""" setTo="show" class="tc-btn-invisible">{{$:/core/images/folder}} """$(chunk)$"""</$button>
+<$button set="""$:/state/tree/$prefix$$(chunk)$""" setTo="show" class="tc-btn-invisible">{{$:/core/images/folder}} <$text text="""$(chunk)$"""/></$button>
 </$reveal>
 <$reveal type="match" state="""$:/state/tree/$prefix$$(chunk)$""" text="show">
-<$button set="""$:/state/tree/$prefix$$(chunk)$""" setTo="hide" class="tc-btn-invisible">{{$:/core/images/folder}} """$(chunk)$"""</$button>
+<$button set="""$:/state/tree/$prefix$$(chunk)$""" setTo="hide" class="tc-btn-invisible">{{$:/core/images/folder}} <$text text="""$(chunk)$"""/></$button>
 </$reveal>
 </$list>
 <$list filter="""[all[shadows+tiddlers]prefix[$prefix$$(chunk)$]] -[[$prefix$$(chunk)$]] +[limit[1]]"""><span>(<$count filter="""[all[shadows+tiddlers]prefix[$prefix$$(chunk)$]] -[[$prefix$$(chunk)$]]"""/>)</span>
