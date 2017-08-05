@@ -29,3 +29,6 @@ caption: {{$:/language/ControlPanel/Basics/Caption}}
 |<<lingo SystemTiddlers/Prompt>> |<<show-filter-count "[is[system]sort[title]]">> |
 |<<lingo ShadowTiddlers/Prompt>> |<<show-filter-count "[all[shadows]sort[title]]">> |
 |<<lingo OverriddenShadowTiddlers/Prompt>> |<<show-filter-count "[is[tiddler]is[shadow]sort[title]]">> |
+<table><tbody>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Basics]!has[draft.of]]"><$transclude/></$list>
+</tbody></table>
