@@ -9,6 +9,20 @@ Perform operation on Amazon Web Services
 --aws <sub-command> [<parameter> ...]
 ```
 
+! "s3-load" subcommand
+
+Load tiddlers from files in an S3 bucket.
+
+```
+--aws s3-load <region> <bucket> <filename>...
+```
+
+* ''region'': AWS region
+* ''bucket'': name of the bucket containing the files
+* ''filename'': one or more filenames of the files to load
+
+The content in the files is deserialized according to the content type reported by S3.
+
 ! "s3-savetiddler" subcommand
 
 Save a raw tiddler to a file in an S3 bucket.
@@ -18,6 +32,7 @@ Save a raw tiddler to a file in an S3 bucket.
 ```
 
 * ''title'': title of the tiddler to save
+* ''region'': AWS region
 * ''bucket'': name of the bucket to save the saved file
 * ''filename'': filename of the saved file
 * ''zipfilename'': optional; the file will be packed into a ZIP file with the specified name
@@ -31,9 +46,27 @@ Save the results of rendering a tiddler to a file in an S3 bucket.
 ```
 
 * ''title'': title of the tiddler to render
+* ''region'': AWS region
 * ''bucket'': name of the bucket to save the rendered file
 * ''filename'': filename of the rendered file
 * ''type'': optional render type (defaults to "text/html")
 * ''template'': optional template (defaults to directly rendering the tiddler without using a template)
 * ''zipfilename'': optional; the file will be packed into a ZIP file with the specified name
+* ''savetype'': optional; the MIME type for the saved file (defaults to ''type'' or "text/html")
+
+! "s3-rendertiddlers" subcommand
+
+Save the results of rendering tiddlers identified by a filter to files in an S3 bucket.
+
+```
+--aws s3-rendertiddler <filter> <template> <region> <bucket> <prefix> <type> <extension> <savetype>
+```
+
+* ''filter'': filter identifying tiddlers to render
+* ''template'': template for rendering each tiddler
+* ''region'': AWS region
+* ''bucket'': name of the bucket to save the rendered file
+* ''prefix'': prefix for rendered file names
+* ''type'': optional render type (defaults to "text/html")
+* ''extension'': optional file extension (defaults to ".html")
 * ''savetype'': optional; the MIME type for the saved file (defaults to ''type'' or "text/html")
