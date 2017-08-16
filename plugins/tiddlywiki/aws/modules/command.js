@@ -55,9 +55,9 @@ Command.prototype.subCommands["s3-load"] = function() {
 	}
 	async.eachLimit(
 		filepaths,
-		4,
+		20,
 		function(filepath,callback) {
-			awsUtils.getTextFile(region,bucket,filepath,function(err,data) {
+			awsUtils.getFile(region,bucket,filepath,function(err,data) {
 				if(err) {
 					return callback(err);
 				}
@@ -112,7 +112,7 @@ Command.prototype.subCommands["s3-rendertiddler"] = function() {
 	}
 	// Save the file
 	async.series([
-		awsUtils.putTextFile.bind(null,region,bucket,filename,text,saveType)
+		awsUtils.putFile.bind(null,region,bucket,filename,text,saveType)
 	],
 	function(err,results){
 		self.callback(err,results);
@@ -138,14 +138,14 @@ Command.prototype.subCommands["s3-rendertiddlers"] = function() {
 	}
 	async.eachLimit(
 		tiddlers,
-		2,
+		20,
 		function(title,callback) {
 			var parser = wiki.parseTiddler(template),
 				widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}}),
 				container = $tw.fakeDocument.createElement("div");
 			widgetNode.render(container,null);
 			var text = type === "text/html" ? container.innerHTML : container.textContent;
-			awsUtils.putTextFile(region,bucket,prefix + encodeURIComponent(title) + extension,text,saveType,callback);
+			awsUtils.putFile(region,bucket,prefix + encodeURIComponent(title) + extension,text,saveType,callback);
 		},
 		function(err,results) {
 			self.callback(err,results);
@@ -182,11 +182,40 @@ Command.prototype.subCommands["s3-savetiddler"] = function() {
 	}
 	// Save the file
 	async.series([
-		awsUtils.putTextFile.bind(null,region,bucket,filename,text,type)
+		awsUtils.putFile.bind(null,region,bucket,filename,text,type)
 	],
 	function(err,results){
 		self.callback(err,results);
 	});
+	return null;
+};
+
+// Save a tiddler to an S3 bucket
+Command.prototype.subCommands["s3-savetiddlers"] = function() {
+	var self = this,
+		wiki = this.commander.wiki,
+		filter = this.params[1],
+		region = this.params[2],
+		bucket = this.params[3],
+		prefix = this.params[4],
+		tiddlers = wiki.filterTiddlers(filter);
+	// Check parameters
+	if(!filter || !region || !bucket || !prefix) {
+		throw "Missing parameters";
+	}
+	async.eachLimit(
+		tiddlers,
+		20,
+		function(title,callback) {
+			var tiddler = wiki.getTiddler(title),
+				text = tiddler.fields.text || "",
+				type = tiddler.fields.type || "text/vnd.tiddlywiki";
+			awsUtils.putFile(region,bucket,prefix + encodeURIComponent(title),text,type,callback);
+		},
+		function(err,results) {
+			self.callback(err,results);
+		}
+	);
 	return null;
 };
 

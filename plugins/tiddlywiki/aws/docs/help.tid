@@ -37,6 +37,19 @@ Save a raw tiddler to a file in an S3 bucket.
 * ''filename'': filename of the saved file
 * ''zipfilename'': optional; the file will be packed into a ZIP file with the specified name
 
+! "s3-savetiddlers" subcommand
+
+Save raw tiddlers matching a filter to an S3 bucket.
+
+```
+--aws s3-savetiddlers <filter> <region> <bucket> <prefix>
+```
+
+* ''filter'': filter identifying tiddlers to render
+* ''region'': AWS region
+* ''bucket'': name of the bucket to save the files
+* ''prefix'': prefix for rendered file names
+
 ! "s3-rendertiddler" subcommand
 
 Save the results of rendering a tiddler to a file in an S3 bucket.
