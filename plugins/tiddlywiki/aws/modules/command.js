@@ -163,6 +163,7 @@ Command.prototype.subCommands["s3-savetiddler"] = function() {
 		bucket = this.params[3],
 		filename = this.params[4],
 		zipfilename = this.params[5],
+		saveType = this.params[6],
 		tiddler = wiki.getTiddler(title),
 		text = tiddler.fields.text,
 		type = tiddler.fields.type,
@@ -182,7 +183,7 @@ Command.prototype.subCommands["s3-savetiddler"] = function() {
 	}
 	// Save the file
 	async.series([
-		awsUtils.putFile.bind(null,region,bucket,filename,text,type)
+		awsUtils.putFile.bind(null,region,bucket,filename,text,saveType || type)
 	],
 	function(err,results){
 		self.callback(err,results);
@@ -198,6 +199,7 @@ Command.prototype.subCommands["s3-savetiddlers"] = function() {
 		region = this.params[2],
 		bucket = this.params[3],
 		prefix = this.params[4],
+		saveType = this.params[5],
 		tiddlers = wiki.filterTiddlers(filter);
 	// Check parameters
 	if(!filter || !region || !bucket || !prefix) {
@@ -210,7 +212,7 @@ Command.prototype.subCommands["s3-savetiddlers"] = function() {
 			var tiddler = wiki.getTiddler(title),
 				text = tiddler.fields.text || "",
 				type = tiddler.fields.type || "text/vnd.tiddlywiki";
-			awsUtils.putFile(region,bucket,prefix + encodeURIComponent(title),text,type,callback);
+			awsUtils.putFile(region,bucket,prefix + encodeURIComponent(title),text,saveType || type,callback);
 		},
 		function(err,results) {
 			self.callback(err,results);

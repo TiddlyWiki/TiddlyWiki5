@@ -28,7 +28,7 @@ The content in the files is deserialized according to the content type reported 
 Save a raw tiddler to a file in an S3 bucket.
 
 ```
---aws s3-savetiddler <title> <region> <bucket> <filename> <zipfilename>
+--aws s3-savetiddler <title> <region> <bucket> <filename> <zipfilename> <savetype>
 ```
 
 * ''title'': title of the tiddler to save
@@ -36,19 +36,21 @@ Save a raw tiddler to a file in an S3 bucket.
 * ''bucket'': name of the bucket to save the saved file
 * ''filename'': filename of the saved file
 * ''zipfilename'': optional; the file will be packed into a ZIP file with the specified name
+* ''savetype'': optional; the MIME type for the saved file (defaults to ''type'' or "text/html")
 
 ! "s3-savetiddlers" subcommand
 
 Save raw tiddlers matching a filter to an S3 bucket.
 
 ```
---aws s3-savetiddlers <filter> <region> <bucket> <prefix>
+--aws s3-savetiddlers <filter> <region> <bucket> <prefix> <savetype>
 ```
 
 * ''filter'': filter identifying tiddlers to render
 * ''region'': AWS region
 * ''bucket'': name of the bucket to save the files
 * ''prefix'': prefix for rendered file names
+* ''savetype'': optional; the MIME type for the saved file (defaults to ''type'' or "text/html")
 
 ! "s3-rendertiddler" subcommand
 
