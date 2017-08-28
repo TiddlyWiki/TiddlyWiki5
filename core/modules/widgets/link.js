@@ -80,14 +80,26 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	}
 	domNode.setAttribute("class",classes.join(" "));
 	// Set an href
-	var wikiLinkTemplateMacro = this.getVariable("tv-wikilink-template"),
-		wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.trim() : "#$uri_encoded$",
+	var wikilinkTransformFilter = this.getVariable("tv-filter-export-link"),
+		wikiLinkText;
+	if(wikilinkTransformFilter) {
+		// Use the filter to construct the href
+		wikiLinkText = this.wiki.filterTiddlers(wikilinkTransformFilter,this,function(iterator) {
+			iterator(self.wiki.getTiddler(self.to),self.to)
+		})[0];
+	} else {
+		// Expand the tv-wikilink-template variable to construct the href
+		var wikiLinkTemplateMacro = this.getVariable("tv-wikilink-template"),
+			wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.trim() : "#$uri_encoded$";
 		wikiLinkText = $tw.utils.replaceString(wikiLinkTemplate,"$uri_encoded$",encodeURIComponent(this.to));
-	wikiLinkText = $tw.utils.replaceString(wikiLinkText,"$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
+		wikiLinkText = $tw.utils.replaceString(wikiLinkText,"$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
+	}
+	// Override with the value of tv-get-export-link if defined
 	wikiLinkText = this.getVariable("tv-get-export-link",{params: [{name: "to",value: this.to}],defaultValue: wikiLinkText});
 	if(tag === "a") {
 		domNode.setAttribute("href",wikiLinkText);
 	}
+	// Set the tabindex
 	if(this.tabIndex) {
 		domNode.setAttribute("tabindex",this.tabIndex);
 	}
