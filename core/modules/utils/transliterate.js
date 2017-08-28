@@ -912,7 +912,8 @@ var transliterationPairs = {
 
 exports.transliterate = function(str) {
 	return str.replace(/[^A-Za-z0-9\[\] ]/g,function(ch) {
-		return transliterationPairs[ch] || ch})};
+		return transliterationPairs[ch] || ch
+	});
 };
 
 })();
