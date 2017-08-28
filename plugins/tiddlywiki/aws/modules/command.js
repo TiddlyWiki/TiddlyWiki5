@@ -127,13 +127,12 @@ Command.prototype.subCommands["s3-rendertiddlers"] = function() {
 		template = this.params[2],
 		region = this.params[3],
 		bucket = this.params[4],
-		prefix = this.params[5],
+		filenameFilter = this.params[5],
 		type = this.params[6] || "text/html",
-		extension = this.params[7] || ".html",
-		saveType = this.params[8] || type,
+		saveType = this.params[7] || type,
 		tiddlers = wiki.filterTiddlers(filter);
 	// Check parameters
-	if(!filter || !template || !region || !bucket || !prefix) {
+	if(!filter || !template || !region || !bucket || !filenameFilter) {
 		throw "Missing parameters";
 	}
 	async.eachLimit(
@@ -144,8 +143,11 @@ Command.prototype.subCommands["s3-rendertiddlers"] = function() {
 				widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}}),
 				container = $tw.fakeDocument.createElement("div");
 			widgetNode.render(container,null);
-			var text = type === "text/html" ? container.innerHTML : container.textContent;
-			awsUtils.putFile(region,bucket,prefix + encodeURIComponent(title) + extension,text,saveType,callback);
+			var text = type === "text/html" ? container.innerHTML : container.textContent,
+				filename = wiki.filterTiddlers(filenameFilter,$tw.rootWidget,function(iterator) {
+					iterator(wiki.getTiddler(title),title)
+				})[0];
+			awsUtils.putFile(region,bucket,filename,text,saveType,callback);
 		},
 		function(err,results) {
 			self.callback(err,results);
@@ -198,11 +200,11 @@ Command.prototype.subCommands["s3-savetiddlers"] = function() {
 		filter = this.params[1],
 		region = this.params[2],
 		bucket = this.params[3],
-		prefix = this.params[4],
+		filenameFilter = this.params[4],
 		saveType = this.params[5],
 		tiddlers = wiki.filterTiddlers(filter);
 	// Check parameters
-	if(!filter || !region || !bucket || !prefix) {
+	if(!filter || !region || !bucket || !filenameFilter) {
 		throw "Missing parameters";
 	}
 	async.eachLimit(
@@ -211,8 +213,11 @@ Command.prototype.subCommands["s3-savetiddlers"] = function() {
 		function(title,callback) {
 			var tiddler = wiki.getTiddler(title),
 				text = tiddler.fields.text || "",
-				type = tiddler.fields.type || "text/vnd.tiddlywiki";
-			awsUtils.putFile(region,bucket,prefix + encodeURIComponent(title),text,saveType || type,callback);
+				type = tiddler.fields.type || "text/vnd.tiddlywiki",
+				filename = wiki.filterTiddlers(filenameFilter,$tw.rootWidget,function(iterator) {
+					iterator(wiki.getTiddler(title),title)
+				})[0];
+			awsUtils.putFile(region,bucket,filename,text,saveType || type,callback);
 		},
 		function(err,results) {
 			self.callback(err,results);

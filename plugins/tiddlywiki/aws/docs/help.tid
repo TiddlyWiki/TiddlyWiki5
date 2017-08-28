@@ -43,13 +43,13 @@ Save a raw tiddler to a file in an S3 bucket.
 Save raw tiddlers matching a filter to an S3 bucket.
 
 ```
---aws s3-savetiddlers <filter> <region> <bucket> <prefix> <savetype>
+--aws s3-savetiddlers <filter> <region> <bucket> <filenamefilter> <savetype>
 ```
 
 * ''filter'': filter identifying tiddlers to render
 * ''region'': AWS region
 * ''bucket'': name of the bucket to save the files
-* ''prefix'': prefix for rendered file names
+* ''filenamefilter'': filter for converting tiddler titles to filepaths (eg `[encodeuricomponent[]addprefix[files/]addsuffix[.html]]`)
 * ''savetype'': optional; the MIME type for the saved file (defaults to ''type'' or "text/html")
 
 ! "s3-rendertiddler" subcommand
@@ -74,14 +74,13 @@ Save the results of rendering a tiddler to a file in an S3 bucket.
 Save the results of rendering tiddlers identified by a filter to files in an S3 bucket.
 
 ```
---aws s3-rendertiddler <filter> <template> <region> <bucket> <prefix> <type> <extension> <savetype>
+--aws s3-rendertiddlers <filter> <template> <region> <bucket> <filenamefilter> <type> <savetype>
 ```
 
 * ''filter'': filter identifying tiddlers to render
 * ''template'': template for rendering each tiddler
 * ''region'': AWS region
 * ''bucket'': name of the bucket to save the rendered file
-* ''prefix'': prefix for rendered file names
+* ''filenamefilter'': filter for converting tiddler titles to filepaths (eg `[encodeuricomponent[]addprefix[files/]addsuffix[.html]]`)
 * ''type'': optional render type (defaults to "text/html")
-* ''extension'': optional file extension (defaults to ".html")
 * ''savetype'': optional; the MIME type for the saved file (defaults to ''type'' or "text/html")
