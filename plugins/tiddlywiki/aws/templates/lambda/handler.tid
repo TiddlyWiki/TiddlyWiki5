@@ -8,6 +8,10 @@ TiddlyWiki for AWS
 exports.handler = function(event,context,callback) {
 	// Initialise the boot prefix
 	global.$tw = _bootprefix();
+	// Initialise the returned results
+	$tw["lambda-result"] = {
+		"files-written": []
+	};
 	// Some default package info
 	$tw.packageInfo = lambdaPackageInfo;
 	// Load any tiddlers from the package
@@ -21,6 +25,6 @@ exports.handler = function(event,context,callback) {
 	// Boot the TW5 app
 	_boot($tw);
 	$tw.boot.boot(function() {
-		callback(null,"TiddlyWiki execution successful");
+		callback(null,$tw["lambda-result"]);
 	});
 }
