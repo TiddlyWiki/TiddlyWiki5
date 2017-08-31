@@ -16,8 +16,7 @@ Filter operator for comparing text for equality
 Export our filter function
 */
 exports.equals = function(source,operator,options) {
-	var results = [],
-		fieldname = (operator.suffix || operator.operator || "title").toLowerCase();
+	var results = [] ;
 	if(operator.prefix === "!") {
 		if(operator.regexp) {
 			source(function(tiddler,title) {
