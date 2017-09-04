@@ -17,8 +17,10 @@ var ALERT_TAG = "$:/tags/Alert";
 /*
 Make a new logger
 */
-function Logger(componentName) {
+function Logger(componentName,options) {
+	options = options || {};
 	this.componentName = componentName || "";
+	this.colour = options.colour || "white";
 }
 
 /*
@@ -26,7 +28,7 @@ Log a message
 */
 Logger.prototype.log = function(/* args */) {
 	if(console !== undefined && console.log !== undefined) {
-		return Function.apply.call(console.log, console, [this.componentName + ":"].concat(Array.prototype.slice.call(arguments,0)));
+		return Function.apply.call(console.log, console, [$tw.utils.terminalColour(this.colour),this.componentName + ":"].concat(Array.prototype.slice.call(arguments,0)).concat($tw.utils.terminalColour()));
 	}
 };
 

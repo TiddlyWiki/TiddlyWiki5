@@ -19,7 +19,7 @@ var fs = $tw.node ? require("fs") : null,
 function FileSystemAdaptor(options) {
 	var self = this;
 	this.wiki = options.wiki;
-	this.logger = new $tw.utils.Logger("FileSystem");
+	this.logger = new $tw.utils.Logger("filesystem",{colour: "blue"});
 	// Create the <wiki>/tiddlers folder if it doesn't exist
 	$tw.utils.createDirectory($tw.boot.wikiTiddlersPath);
 }
