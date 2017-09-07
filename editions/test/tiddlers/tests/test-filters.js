@@ -82,6 +82,11 @@ describe("Filter tests", function() {
 
 	// Our tests
 
+	it("should handle the lookup operator", function() {
+		expect(wiki.filterTiddlers("Six Seventh 8 +[lookup[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,,Tidd");
+		expect(wiki.filterTiddlers("Six Seventh 8 +[lookup:8[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,Tidd,Tidd");
+	});
+
 	it("should retrieve shadow tiddlers", function() {
 		expect(wiki.getTiddlerText("Tiddler8")).toBe("Tidd");
 	});
