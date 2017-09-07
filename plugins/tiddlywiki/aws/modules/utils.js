@@ -62,7 +62,12 @@ function putFile(region,bucketName,title,text,type,callback) {
 			Body: new Buffer(text,encoding),
 			ContentType: type || "text/plain"
 		};
-	s3bucket.upload(params,callback);
+	s3bucket.upload(params,function(err,data) {
+		if(err) {
+			return callback(err + " (writing " + title + " to " + bucketName + ", type " + type + ")");
+		}
+		callback(null,data);
+	});
 }
 
 exports.putFile = putFile;
