@@ -26,3 +26,5 @@ The JSON structure for plugin tiddlers is as follows:
 By convention, the titles of the individual tiddlers are prefixed with the title of the containing plugin, but they are not restricted to do so.
 
 Note that if the `version` field is omitted from a `plugin.info` file when the plugin folder is packed then it is automatically filled in by the core to the current core version number. This is to ensure that all the core plugins carry the correct version number. Generally plugin authors will want to ensure that they do explicitly specify a version number.
+
+<<.from-version "5.1.14">> Alternatively, you can use a module called `plugin.info.js` which will be executed to provide the above JavaScript object. See [[Using Configuration Modules]] for more information.

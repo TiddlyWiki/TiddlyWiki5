@@ -13,6 +13,8 @@ type: text/vnd.tiddlywiki
 * ''build'' - a hashmap of named build targets, each defined by an array of command tokens (see BuildCommand)
 * ''config'' - an optional hashmap of configuration options (see below)
 
+<<.from-version "5.1.14">> Alternatively, you can use a module called `tiddlywiki.info.js` which will be executed to provide the above JavaScript object. See [[Using Configuration Modules]] for more information.
+
 !!! ''includeWikis''
 
 The entries in the ''includeWikis'' array can be either a string specifying the relative path to the wiki, or an object with the following fields:
