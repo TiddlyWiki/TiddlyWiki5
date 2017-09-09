@@ -1,0 +1,5 @@
+title: $:/core/ui/MoreSideBar/Explorer
+tags: $:/tags/MoreSideBar
+caption: {{$:/language/SideBar/Explorer/Caption}}
+
+<<tree "$:/">>

@@ -27,7 +27,11 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 
 <$reveal type="match" state=<<config-title>> text="hide">
 
+<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
+
 <$transclude tiddler=<<listItem>> mode="inline"/>
+
+</$set>
 
 </$reveal>
 

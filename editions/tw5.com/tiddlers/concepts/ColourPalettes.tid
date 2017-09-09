@@ -26,5 +26,6 @@ Palette tiddlers should have the following fields:
 |title |Typically starting with `$:/` |
 |type |`application/x-tiddler-dictionary` |
 |tags |`$:/tags/Palette` |
+|name |Displayed in the palette browser |
 |description |Displayed in the palette browser |
 |text |`name: value` colour definitions |

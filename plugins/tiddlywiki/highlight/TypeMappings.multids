@@ -1,6 +1,5 @@
 title: $:/config/HighlightPlugin/TypeMappings/
 
-text/plain:
 application/javascript: javascript
 application/json: json
 text/css: css

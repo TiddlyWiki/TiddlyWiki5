@@ -71,7 +71,6 @@ Plugins/Language/Prompt: Sprog
 Plugins/Languages/Caption: Sprog
 Plugins/Languages/Hint: Sprogpakkeudvidelser
 Plugins/NoInfoFound/Hint: Ingen ''"<$text text=<<currentTab>>/>"'' fundet
-Plugins/NoInformation/Hint: Ingen information leveret
 Plugins/NotInstalled/Hint: Dette plugin er ikke aktuelt installeret
 Plugins/OpenPluginLibrary: Åbn plugin bibliotek
 Plugins/Plugin/Prompt: Udvidelser

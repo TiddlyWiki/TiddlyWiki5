@@ -53,6 +53,7 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 
 |<$link to="$:/themes/tiddlywiki/vanilla/settings/fontfamily"><<lingo Settings/FontFamily>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/fontfamily" default="" tag="input"/> | |
 |<$link to="$:/themes/tiddlywiki/vanilla/settings/codefontfamily"><<lingo Settings/CodeFontFamily>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/codefontfamily" default="" tag="input"/> | |
+|<$link to="$:/themes/tiddlywiki/vanilla/settings/editorfontfamily"><<lingo Settings/EditorFontFamily>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/editorfontfamily" default="" tag="input"/> | |
 |<$link to="$:/themes/tiddlywiki/vanilla/settings/backgroundimage"><<lingo Settings/BackgroundImage>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimage" default="" tag="input"/> |<<backgroundimage-dropdown>> |
 |<$link to="$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment"><<lingo Settings/BackgroundImageAttachment>></$link> |<<backgroundimageattachment-dropdown>> | |
 |<$link to="$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize"><<lingo Settings/BackgroundImageSize>></$link> |<<backgroundimagesize-dropdown>> | |

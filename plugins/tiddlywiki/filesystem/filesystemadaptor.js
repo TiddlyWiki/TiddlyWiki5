@@ -19,7 +19,7 @@ var fs = $tw.node ? require("fs") : null,
 function FileSystemAdaptor(options) {
 	var self = this;
 	this.wiki = options.wiki;
-	this.logger = new $tw.utils.Logger("FileSystem");
+	this.logger = new $tw.utils.Logger("filesystem",{colour: "blue"});
 	// Create the <wiki>/tiddlers folder if it doesn't exist
 	$tw.utils.createDirectory($tw.boot.wikiTiddlersPath);
 }
@@ -64,7 +64,10 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 		fileInfo.type = ($tw.config.fileExtensionInfo[extension] || {type: "application/x-tiddler"}).type;
 		// Use a .meta file unless we're saving a .tid file.
 		// (We would need more complex logic if we supported other template rendered tiddlers besides .tid)
-		fileInfo.hasMetaFile = (fileInfo.type !== "application/x-tiddler");
+		fileInfo.hasMetaFile = (fileInfo.type !== "application/x-tiddler") && (fileInfo.type !== "application/json");
+		if(!fileInfo.hasMetaFile) {
+			extension = ".tid";
+		}
 		// Generate the base filepath and ensure the directories exist
 		var baseFilepath = path.resolve($tw.boot.wikiTiddlersPath,this.generateTiddlerBaseFilepath(title));
 		$tw.utils.createFileDirectories(baseFilepath);

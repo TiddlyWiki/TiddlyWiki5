@@ -1,12 +1,13 @@
-title: BrowseWidget
-created: 201310241419
-modified: 20141202155353547
-tags: Widgets
 caption: browse
+created: 20131024141900000
+modified: 20170718142410367
+tags: Widgets
+title: BrowseWidget
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The browse widget displays an HTML file browser button that allows the user to choose one or more files to import. It sends a [[WidgetMessage: tm-import-tiddlers]] carrying a JSON representation of the tiddlers imported from the files up through its parents. This message usually trapped by the NavigatorWidget which adds the tiddlers to the store and updates the story to display them.
+The browse widget displays an HTML file browser button that allows the user to choose one or more files to import. It sends a [[WidgetMessage: tm-import-tiddlers]] carrying a JSON representation of the tiddlers imported from the files up through its parents. This message is usually handled by the NavigatorWidget which adds the tiddlers to the store and updates the story to display them.
 
 ! Content and Attributes
 
@@ -14,6 +15,7 @@ The content of the `<$browse>` widget is ignored.
 
 |!Attribute |!Description |
 |multiple |Set to "multiple" to select multiple file upload |
+|deserializer |<<.from-version "5.1.15">> Optional name of deserializer to be used (by default the deserializer is derived from the file extension or type) |
 |tooltip |Optional tooltip text |
 |message |Optional override of widget message to be generated. The parameter for the message will be the JavaScript object `event.target.files` |
 

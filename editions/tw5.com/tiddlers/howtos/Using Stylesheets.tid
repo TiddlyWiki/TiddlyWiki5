@@ -18,6 +18,24 @@ html body.tc-body {
 
 Custom stylesheets are applied independently from theme stylesheets. Therefore, it is often necessary for the css rules in your custom stylesheet to be more specific than those of the theme you want to override. For example, `html body.tc-body` is more specific than `body.tc-body`.
 
+!!! Ordering of stylesheets
+
+Ordering of stylesheets is controlled in the main stylesheet $:/core/ui/PageStylesheet by the following list filter:
+
+```
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]]"/>
+```
+
+With help of a list-after field in a custom stylesheet, the order of the stylesheets can be rearranged to ease overwriting theme styles.
+
+<<<
+To check the order of all stylesheets in use, enter the following filter in the filter tab of Advanced search:
+
+```
+[all[shadows+tiddlers]tag[$:/tags/Stylesheet]]
+```
+<<<
+
 ! Stylesheet Types
 
 Usually it is best to use the type `text/css` for stylesheets. This treats them as plain stylesheets, and ensures that TiddlyWiki doesn't apply any wiki processing to them.

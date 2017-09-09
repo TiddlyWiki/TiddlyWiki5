@@ -300,8 +300,8 @@ Command.prototype.execute = function() {
 		pathprefix: pathprefix
 	});
 	this.server.listen(port,host);
-	console.log("Serving on " + host + ":" + port);
-	console.log("(press ctrl-C to exit)");
+	$tw.utils.log("Serving on " + host + ":" + port,"brown/orange");
+	$tw.utils.log("(press ctrl-C to exit)","red");
 	// Warn if required plugins are missing
 	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
 		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");

@@ -21,6 +21,7 @@ Encryption/RepeatPassword: Herhaal wachtwoord
 Encryption/SetPassword: Vul wachtwoord in
 Encryption/Username: Gebruikersnaam
 Error/Caption: Fout
+Error/EditConflict: Bestand gewijzigd op server
 Error/Filter: Filterfout
 Error/FilterSyntax: Syntaxfout in filter expressie
 Error/IsFilterOperator: Filterfout: Onbekende operand voor het 'is' filter
@@ -51,9 +52,9 @@ Manager/Item/RawText: Ruwe tekst
 Manager/Item/Tags: Labels
 Manager/Item/Tools: Gereedschappen
 Manager/Item/WikifiedText: 'Wikified' tekst
-MissingTiddler/Hint: Ontbrekende tiddler "<$text text=<<currentTiddler>>/>" - klik {{$:/core/images/edit-button}} om hem aan te maken
+MissingTiddler/Hint: Ontbrekende tiddler "<$text text=<<currentTiddler>>/>" - klik {{||$:/core/ui/Buttons/edit}} om hem aan te maken
 No: Nee
-OfficialPluginLibrary: Officiële ~TiddlyWiki plugin-bibliotheek
+OfficialPluginLibrary: Officiële ~TiddlyWiki pluginbibliotheek
 OfficialPluginLibrary/Hint: De officiële ~TiddlyWiki pluginbibliotheek op tiddlywiki.com. Plugins, thema's en taalpaketten worden door het core team onderhouden.
 PluginReloadWarning: Sla op {{$:/core/ui/Buttons/save-wiki}} en ververs {{$:/core/ui/Buttons/refresh}} om wijzigingen aan plugins door te voeren
 RecentChanges/DateFormat: DD MMM YYYY
@@ -66,3 +67,4 @@ TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Label
 Tiddler/DateFormat: DD MMM YYYY om hh12:0mmam
 UnsavedChangesWarning: Er zijn niet-opgeslagen veranderingen in TiddlyWiki
+Yes: Ja

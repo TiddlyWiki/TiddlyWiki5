@@ -42,7 +42,7 @@ function Syncer(options) {
 	this.fallbackInterval = options.fallbackInterval || this.fallbackInterval;
 	this.pollTimerInterval = options.pollTimerInterval || this.pollTimerInterval;
 	// Make a logger
-	this.logger = new $tw.utils.Logger("syncer" + ($tw.browser ? "-browser" : "") + ($tw.node ? "-server" : "")  + (this.syncadaptor.name ? ("-" + this.syncadaptor.name) : ""));
+	this.logger = new $tw.utils.Logger("syncer" + ($tw.browser ? "-browser" : "") + ($tw.node ? "-server" : "")  + (this.syncadaptor.name ? ("-" + this.syncadaptor.name) : ""),{colour: "cyan"});
 	// Compile the dirty tiddler filter
 	this.filterFn = this.wiki.compileFilter(this.wiki.getTiddlerText(this.titleSyncFilter));
 	// Record information for known tiddlers

@@ -25,7 +25,8 @@ DownloadSaver.prototype.save = function(text,method,callback,options) {
 	if(!filename) {
 		var p = document.location.pathname.lastIndexOf("/");
 		if(p !== -1) {
-			filename = document.location.pathname.substr(p+1);
+			// We decode the pathname because document.location is URL encoded by the browser
+			filename = decodeURIComponent(document.location.pathname.substr(p+1));
 		}
 	}
 	if(!filename) {
@@ -33,8 +34,6 @@ DownloadSaver.prototype.save = function(text,method,callback,options) {
 	}
 	// Set up the link
 	var link = document.createElement("a");
-	link.setAttribute("target","_blank");
-	link.setAttribute("rel","noopener noreferrer");
 	if(Blob !== undefined) {
 		var blob = new Blob([text], {type: "text/html"});
 		link.setAttribute("href", URL.createObjectURL(blob));

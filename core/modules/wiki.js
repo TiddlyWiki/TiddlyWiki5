@@ -641,10 +641,10 @@ exports.getTiddlerDataCached = function(titleOrTiddler,defaultData) {
 	if(tiddler) {
 		return this.getCacheForTiddler(tiddler.fields.title,"data",function() {
 			// Return the frozen value
-			var value = self.getTiddlerData(tiddler.fields.title,defaultData);
+			var value = self.getTiddlerData(tiddler.fields.title,undefined);
 			$tw.utils.deepFreeze(value);
 			return value;
-		});
+		}) || defaultData;
 	} else {
 		return defaultData;
 	}
@@ -680,7 +680,7 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 Extract an indexed field from within a data tiddler
 */
 exports.extractTiddlerDataItem = function(titleOrTiddler,index,defaultText) {
-	var data = this.getTiddlerData(titleOrTiddler,Object.create(null)),
+	var data = this.getTiddlerDataCached(titleOrTiddler,Object.create(null)),
 		text;
 	if(data && $tw.utils.hop(data,index)) {
 		text = data[index];
@@ -1125,16 +1125,24 @@ exports.checkTiddlerText = function(title,targetText,options) {
 /*
 Read an array of browser File objects, invoking callback(tiddlerFieldsArray) once they're all read
 */
-exports.readFiles = function(files,callback) {
+exports.readFiles = function(files,options) {
+	var callback;
+	if(typeof options === "function") {
+		callback = options;
+		options = {};
+	} else {
+		callback = options.callback;
+	}
 	var result = [],
-		outstanding = files.length;
-	for(var f=0; f<files.length; f++) {
-		this.readFile(files[f],function(tiddlerFieldsArray) {
+		outstanding = files.length,
+		readFileCallback = function(tiddlerFieldsArray) {
 			result.push.apply(result,tiddlerFieldsArray);
 			if(--outstanding === 0) {
 				callback(result);
 			}
-		});
+		};
+	for(var f=0; f<files.length; f++) {
+		this.readFile(files[f],Object.assign({},options,{callback: readFileCallback}));
 	}
 	return files.length;
 };
@@ -1142,7 +1150,14 @@ exports.readFiles = function(files,callback) {
 /*
 Read a browser File object, invoking callback(tiddlerFieldsArray) with an array of tiddler fields objects
 */
-exports.readFile = function(file,callback) {
+exports.readFile = function(file,options) {
+	var callback;
+	if(typeof options === "function") {
+		callback = options;
+		options = {};
+	} else {
+		callback = options.callback;
+	}
 	// Get the type, falling back to the filename extension
 	var self = this,
 		type = file.type;
@@ -1183,7 +1198,7 @@ exports.readFile = function(file,callback) {
 			});
 		} else {
 			// Otherwise, just try to deserialise any tiddlers in the file
-			callback(self.deserializeTiddlers(type,text,tiddlerFields));
+			callback(self.deserializeTiddlers(type,text,tiddlerFields,{deserializer: options.deserializer}));
 		}
 	};
 	// Kick off the read

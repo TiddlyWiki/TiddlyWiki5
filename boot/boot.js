@@ -271,14 +271,15 @@ $tw.utils.stringifyList = function(value) {
 $tw.utils.parseStringArray = function(value) {
 	if(typeof value === "string") {
 		var memberRegExp = /(?:^|[^\S\xA0])(?:\[\[(.*?)\]\])(?=[^\S\xA0]|$)|([\S\xA0]+)/mg,
-			results = [],
+			results = [], names = {},
 			match;
 		do {
 			match = memberRegExp.exec(value);
 			if(match) {
 				var item = match[1] || match[2];
-				if(item !== undefined && results.indexOf(item) === -1) {
+				if(item !== undefined && !$tw.utils.hop(names,item)) {
 					results.push(item);
+					names[item] = true;
 				}
 			}
 		} while(match);
@@ -826,6 +827,7 @@ taking precedence to the right
 */
 $tw.Tiddler = function(/* [fields,] fields */) {
 	this.fields = Object.create(null);
+	this.cache = Object.create(null);
 	for(var c=0; c<arguments.length; c++) {
 		var arg = arguments[c],
 			src = (arg instanceof $tw.Tiddler) ? arg.fields : arg;
@@ -1218,10 +1220,14 @@ $tw.Wiki.prototype.processSafeMode = function() {
 /*
 Extracts tiddlers from a typed block of text, specifying default field values
 */
-$tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
+$tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields,options) {
 	srcFields = srcFields || Object.create(null);
-	var deserializer = $tw.Wiki.tiddlerDeserializerModules[type],
+	options = options || {};
+	var deserializer = $tw.Wiki.tiddlerDeserializerModules[options.deserializer],
 		fields = Object.create(null);
+	if(!deserializer) {
+		deserializer = $tw.Wiki.tiddlerDeserializerModules[type];
+	}
 	if(!deserializer && $tw.utils.getFileExtensionInfo(type)) {
 		// If we didn't find the serializer, try converting it from an extension to a content type
 		type = $tw.utils.getFileExtensionInfo(type).type;
@@ -1318,8 +1324,8 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/html","tiddlerdeserializer",{
 });
 $tw.modules.define("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
 	"application/json": function(text,fields) {
-		var tiddlers = JSON.parse(text);
-		return tiddlers;
+		var data = JSON.parse(text);
+		return $tw.utils.isArray(data) ? data : [data];
 	}
 });
 
@@ -1952,7 +1958,9 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("text/markdown","utf8",[".md",".markdown"],{deserializerType:"text/x-markdown"});
 	$tw.utils.registerFileType("text/x-markdown","utf8",[".md",".markdown"]);
 	$tw.utils.registerFileType("application/enex+xml","utf8",".enex");
+	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.wordprocessingml.document","base64",".docx");
 	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","base64",".xlsx");
+	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.presentationml.presentation","base64",".pptx");
 	$tw.utils.registerFileType("application/x-bibtex","utf8",".bib");
 	$tw.utils.registerFileType("application/epub+zip","base64",".epub");
 	// Create the wiki store for the app
@@ -2013,7 +2021,7 @@ $tw.boot.startup = function(options) {
 	$tw.boot.executedStartupModules = Object.create(null);
 	$tw.boot.disabledStartupModules = $tw.boot.disabledStartupModules || [];
 	// Repeatedly execute the next eligible task
-	$tw.boot.executeNextStartupTask();
+	$tw.boot.executeNextStartupTask(options.callback);
 };
 
 /*
@@ -2028,14 +2036,14 @@ $tw.addUnloadTask = function(task) {
 /*
 Execute the remaining eligible startup tasks
 */
-$tw.boot.executeNextStartupTask = function() {
+$tw.boot.executeNextStartupTask = function(callback) {
 	// Find the next eligible task
 	var taskIndex = 0, task,
 		asyncTaskCallback = function() {
 			if(task.name) {
 				$tw.boot.executedStartupModules[task.name] = true;
 			}
-			return $tw.boot.executeNextStartupTask();
+			return $tw.boot.executeNextStartupTask(callback);
 		};
 	while(taskIndex < $tw.boot.remainingStartupModules.length) {
 		task = $tw.boot.remainingStartupModules[taskIndex];
@@ -2060,13 +2068,16 @@ $tw.boot.executeNextStartupTask = function() {
 				if(task.name) {
 					$tw.boot.executedStartupModules[task.name] = true;
 				}
-				return $tw.boot.executeNextStartupTask();
+				return $tw.boot.executeNextStartupTask(callback);
 			} else {
 				task.startup(asyncTaskCallback);
 				return true;
 			}
 		}
 		taskIndex++;
+	}
+	if(typeof callback === 'function') {
+		callback();
 	}
 	return false;
 };
@@ -2153,7 +2164,7 @@ $tw.hooks.invokeHook = function(hookName /*, value,... */) {
 
 /////////////////////////// Main boot function to decrypt tiddlers and then startup
 
-$tw.boot.boot = function() {
+$tw.boot.boot = function(callback) {
 	// Initialise crypto object
 	$tw.crypto = new $tw.utils.Crypto();
 	// Initialise password prompter
@@ -2163,7 +2174,7 @@ $tw.boot.boot = function() {
 	// Preload any encrypted tiddlers
 	$tw.boot.decryptEncryptedTiddlers(function() {
 		// Startup
-		$tw.boot.startup();
+		$tw.boot.startup({callback: callback});
 	});
 };
 
