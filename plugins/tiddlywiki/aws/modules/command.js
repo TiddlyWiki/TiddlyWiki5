@@ -132,7 +132,7 @@ Command.prototype.subCommands["s3-rendertiddlers"] = function() {
 		saveTypeFilter = this.params[7] || "[[" + type + "]]",
 		tiddlers = wiki.filterTiddlers(filter);
 	// Check parameters
-	if(!filter || !template || !region || !bucket || !filenameFilter) {
+	if(!filter || !region || !bucket || !filenameFilter) {
 		throw "Missing parameters";
 	}
 	async.eachLimit(
@@ -210,12 +210,16 @@ Command.prototype.subCommands["s3-savetiddlers"] = function() {
 		tiddlers,
 		20,
 		function(title,callback) {
-			var tiddler = wiki.getTiddler(title),
-				text = tiddler.fields.text || "",
-				type = tiddler.fields.type || "text/vnd.tiddlywiki",
-				filename = wiki.filterTiddlers(filenameFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0],
-				saveType = wiki.filterTiddlers(saveTypeFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0];
-			awsUtils.putFile(region,bucket,filename,text,saveType || type,callback);
+			var tiddler = wiki.getTiddler(title);
+			if(tiddler) {
+				var text = tiddler.fields.text || "",
+					type = tiddler.fields.type || "text/vnd.tiddlywiki",
+					filename = wiki.filterTiddlers(filenameFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0],
+					saveType = wiki.filterTiddlers(saveTypeFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0];
+				awsUtils.putFile(region,bucket,filename,text,saveType || type,callback);				
+			} else {
+				process.nextTick(callback,null);
+			}
 		},
 		function(err,results) {
 			self.callback(err,results);
