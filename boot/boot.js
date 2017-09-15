@@ -1638,9 +1638,14 @@ Load the tiddlers from a plugin folder, and package them up into a proper JSON p
 */
 $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 	excludeRegExp = excludeRegExp || $tw.boot.excludeRegExp;
+	var infoPath = filepath + path.sep + "plugin.info";
 	if(fs.existsSync(filepath) && fs.statSync(filepath).isDirectory()) {
 		// Read the plugin information
-		var pluginInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "plugin.info","utf8"));
+		if(!fs.existsSync(infoPath) || !fs.statSync(infoPath).isFile()) {
+			console.log("Warning: missing plugin.info file in " + filepath);
+			return null;
+		}
+		var pluginInfo = JSON.parse(fs.readFileSync(infoPath,"utf8"));
 		// Read the plugin files
 		var pluginFiles = $tw.loadTiddlersFromPath(filepath,excludeRegExp);
 		// Save the plugin tiddlers into the plugin info

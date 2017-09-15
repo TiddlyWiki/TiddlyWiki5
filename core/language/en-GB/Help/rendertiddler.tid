@@ -1,6 +1,8 @@
 title: $:/language/Help/rendertiddler
 description: Render an individual tiddler as a specified ContentType
 
+(Note: The `--rendertiddler` command is deprecated in favour of the new, more flexible `--render` command)
+
 Render an individual tiddler as a specified ContentType, defaulting to `text/html` and save it to the specified filename.
 
 Optionally the title of a template tiddler can be specified, in which case the template tiddler is rendered with the "currentTiddler" variable set to the tiddler that is being rendered (the first parameter value).
