@@ -21,7 +21,7 @@ type: text/vnd.tiddlywiki
 ## Try editing and creating tiddlers
 # Optionally, make an offline copy:
 #* click the {{$:/core/images/save-button}} ''save changes'' button in the sidebar, ''OR''
-#* `tiddlywiki --build index`
+#* `tiddlywiki mynewwiki --build index`
 
 
 The `-g` flag causes TiddlyWiki to be installed globally. Without it, TiddlyWiki will only be available in the directory where you installed it.
