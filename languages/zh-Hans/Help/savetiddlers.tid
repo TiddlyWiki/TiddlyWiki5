@@ -1,6 +1,8 @@
 title: $:/language/Help/savetiddlers
 description: 将一群条目的原始内容保存到一个文件夹
 
+(请注意：`--savetiddlers` 命令已被弃用，而支持新的、更灵活的 `--save` 命令)
+
 保存一群条目的原始文字或二进制格式到指定的文件夹。
 
 ```
