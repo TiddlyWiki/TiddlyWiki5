@@ -1,6 +1,6 @@
 title: $:/language/EditTemplate/
 
-Body/External/Hint: 這是儲存於主要的 TiddlyWiki 檔之外的外部條目。你可以編輯其標籤和欄位，但不能直接編輯內容本身
+Body/External/Hint: 此條目顯示儲存於主要的 TiddlyWiki 檔之外的內容。你可以編輯其標籤和欄位，但不能直接編輯內容本身
 Body/Placeholder: 輸入此條目的內容
 Body/Preview/Type/Output: 輸出
 Field/Remove/Caption: 刪除欄位
