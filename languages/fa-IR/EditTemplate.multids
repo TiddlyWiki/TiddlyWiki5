@@ -1,0 +1,29 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: این یک تیدلر خارجی است که در خارج فایل اصلی تیدلی‌ویکی ذخیره شده‌است. شما می‌توانید برچسب‌ها و فضاهای خالی را ویرایش کنید اما نمی‌توانید مستقیمن محتوا را عوض کنید
+Body/Placeholder: متن این تیدلر را تایپ کن
+Body/Preview/Type/Output: خروجی
+Field/Remove/Caption: حذف فضاهای خالی
+Field/Remove/Hint: حذف فضای خالی
+Fields/Add/Button: اضافه کردن
+Fields/Add/Dropdown/System: فضای خالی سیستمی
+Fields/Add/Dropdown/User: فضای خالی کاربر
+Fields/Add/Name/Placeholder: فضای خالی نام
+Fields/Add/Prompt: فضای خالی اضافه کن:
+Fields/Add/Value/Placeholder: ارزش فضای خالی
+Shadow/OverriddenWarning: این یک تیدلر سایه‌ای ویرایش‌شده است. شما می‌توانید به ویرایش پیشفرض افزونه<<pluginLink>>، از طریق حذف این تیدلر برگردید 
+Shadow/Warning: 
+این یک تیدلر سایه‌است. هر تغییر که انجام دهید به ویرایش  پیشفرض افزونه <<pluginLink>> برمی‌گردد
+Tags/Add/Button: اضافه کن
+Tags/Add/Placeholder: نام برچسب
+Tags/Dropdown/Caption: لیست برچسب
+Tags/Dropdown/Hint: نمایش لیست برچسب
+Title/BadCharacterWarning: اخطار: از استفاده از هر گونه از کاراکترهای <<bad-chars>> در عنوان تیدلرها خودداری کنید
+Title/Exists/Prompt: تیدلر مورد نظر از قبل وجود دارد
+Title/Relink/Prompt: برروز رسانی کنه ''<$text text=<<fromTitle>>/>'' به ''<$text text=<<toTitle>>/>'' در //برچسب// و //لیست// فضای خالی سایر تیدلرها
+Type/Delete/Caption: پاک کردن نوع محتوا
+Type/Delete/Hint: پاک کردن نوع محتوا
+Type/Dropdown/Caption: لیست انواع محتوا
+Type/Dropdown/Hint: نمایش لیست انواع محتوا
+Type/Placeholder: نوع محتوا
+Type/Prompt: نوع:

@@ -1,6 +1,8 @@
 title: $:/language/Help/savetiddler
 description: 将条目的原始内容保存到一个文件
 
+(请注意：`--savetiddler` 命令已被弃用，而支持新的、更灵活的 `--save` 命令)
+
 保存个别条目的原始文本或二进制格式到指定的文件名。
 
 ```

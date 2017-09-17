@@ -1,0 +1,87 @@
+title: $:/language/
+
+Date/DaySuffix/1: 
+Date/DaySuffix/10: 
+Date/DaySuffix/11: 
+Date/DaySuffix/12: 
+Date/DaySuffix/13: 
+Date/DaySuffix/14: 
+Date/DaySuffix/15: 
+Date/DaySuffix/16: 
+Date/DaySuffix/17: 
+Date/DaySuffix/18: 
+Date/DaySuffix/19: 
+Date/DaySuffix/2: 
+Date/DaySuffix/20: 
+Date/DaySuffix/21: 
+Date/DaySuffix/22: 
+Date/DaySuffix/23: 
+Date/DaySuffix/24: 
+Date/DaySuffix/25: 
+Date/DaySuffix/26: 
+Date/DaySuffix/27: 
+Date/DaySuffix/28: 
+Date/DaySuffix/29: 
+Date/DaySuffix/3: 
+Date/DaySuffix/30: 
+Date/DaySuffix/31: 
+Date/DaySuffix/4: 
+Date/DaySuffix/5: 
+Date/DaySuffix/6: 
+Date/DaySuffix/7: 
+Date/DaySuffix/8: 
+Date/DaySuffix/9: 
+Date/Long/Day/0: یکشنبه
+Date/Long/Day/1: دوشنبه
+Date/Long/Day/2: سه شنبه
+Date/Long/Day/3: چهارشنبه
+Date/Long/Day/4: پنجشنبه
+Date/Long/Day/5: جمعه
+Date/Long/Day/6: شنبه
+Date/Long/Month/1: January
+Date/Long/Month/10: October
+Date/Long/Month/11: Novembe
+Date/Long/Month/12: December
+Date/Long/Month/2: February
+Date/Long/Month/3: March
+Date/Long/Month/4: April
+Date/Long/Month/5: May
+Date/Long/Month/6: June
+Date/Long/Month/7: July
+Date/Long/Month/8: August
+Date/Long/Month/9: September
+Date/Period/am: صبح
+Date/Period/pm: بعد از ظهر
+Date/Short/Day/0: یکش
+Date/Short/Day/1: دوش
+Date/Short/Day/2: سش
+Date/Short/Day/3: چرش
+Date/Short/Day/4: پنجش
+Date/Short/Day/5: جمعه
+Date/Short/Day/6: شنب
+Date/Short/Month/1: Jan
+Date/Short/Month/10: Oct
+Date/Short/Month/11: Nov
+Date/Short/Month/12: Dec
+Date/Short/Month/2: Feb
+Date/Short/Month/3: Mar
+Date/Short/Month/4: Apr
+Date/Short/Month/5: May
+Date/Short/Month/6: Jun
+Date/Short/Month/7: Jul
+Date/Short/Month/8: Aug
+Date/Short/Month/9: Sep
+RelativeDate/Future/Days: <<period>> روز از الان
+RelativeDate/Future/Hours: <<period>> ساعت از الان
+RelativeDate/Future/Minutes: <<period>> دقیقه از الان
+RelativeDate/Future/Months: <<period>> ماه از الان
+RelativeDate/Future/Second: ۱ ثانیه از الان
+RelativeDate/Future/Seconds: <<period>> ثانیه از الان
+RelativeDate/Future/Years: <<period>> سال از الان
+RelativeDate/Past/Days: <<period>> روز قبل
+RelativeDate/Past/Hours: <<period>> ساعت قبل
+RelativeDate/Past/Minutes: <<period>> دقیقه قبل
+RelativeDate/Past/Months: <<period>> ماه قبل
+RelativeDate/Past/Second: 1 ثانیه قبل
+RelativeDate/Past/Seconds: <<period>>  ثانیه قبل
+RelativeDate/Past/Years: <<period>> سال قبل

@@ -1,5 +1,7 @@
 title: $:/language/Help/rendertiddler
-description: 呈现个别条目为指定的内容类型 
+description: 呈现个别条目为指定的内容类型
+
+(请注意：`--rendertiddler` 命令已被弃用，而支持新的、更灵活的 `--render` 命令)
 
 呈现个别条目为指定的[[内容类型|ContentType]]，默认为 `text/html` 且保存为指定的文件名。
 

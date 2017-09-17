@@ -1,6 +1,6 @@
 title: $:/language/EditTemplate/
 
-Body/External/Hint: Ceci est un tiddler externe, conservé en dehors du fichier TiddlyWiki principal. Vous pouvez éditer les tags et les champs mais pas directement le contenu lui-même
+Body/External/Hint: Ce tiddler affiche du contenu situé en dehors du fichier TiddlyWiki principal. Vous pouvez éditer les tags et les champs mais pas directement le contenu lui-même
 Body/Placeholder: Entrez le texte ici
 Body/Preview/Type/Output: sortie
 Field/Remove/Caption: supprimer le champ
