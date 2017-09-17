@@ -4,5 +4,6 @@
 	"plugin-type": "language",
 	"description": "Persian (Iran)",
 	"author": "amirography",
-	"core-version": ">=5.0.0"
+	"core-version": ">=5.0.0",
+	"text-direction": "rtl"
 }
