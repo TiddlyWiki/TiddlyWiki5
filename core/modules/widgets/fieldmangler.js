@@ -109,28 +109,28 @@ FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
 };
 
 FieldManglerWidget.prototype.handleRemoveTagEvent = function(event) {
-	var tiddler = this.wiki.getTiddler(this.mangleTitle);
+	var tiddler = this.wiki.getTiddler(this.mangleTitle),
+		modification = this.wiki.getModificationFields();
 	if(tiddler && tiddler.fields.tags) {
 		var p = tiddler.fields.tags.indexOf(event.param);
 		if(p !== -1) {
-			var modification = this.wiki.getModificationFields();
 			modification.tags = (tiddler.fields.tags || []).slice(0);
 			modification.tags.splice(p,1);
 			if(modification.tags.length === 0) {
 				modification.tags = undefined;
 			}
-		this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));
+			this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));
 		}
 	}
 	return true;
 };
 
 FieldManglerWidget.prototype.handleAddTagEvent = function(event) {
-	var tiddler = this.wiki.getTiddler(this.mangleTitle);
+	var tiddler = this.wiki.getTiddler(this.mangleTitle),
+		modification = this.wiki.getModificationFields();
 	if(tiddler && typeof event.param === "string") {
 		var tag = event.param.trim();
 		if(tag !== "") {
-			var modification = this.wiki.getModificationFields();
 			modification.tags = (tiddler.fields.tags || []).slice(0);
 			$tw.utils.pushTop(modification.tags,tag);
 			this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));			
@@ -138,7 +138,7 @@ FieldManglerWidget.prototype.handleAddTagEvent = function(event) {
 	} else if(typeof event.param === "string" && event.param.trim() !== "" && this.mangleTitle.trim() !== "") {
 		var tag = [];
 		tag.push(event.param.trim());
-		this.wiki.addTiddler({title: this.mangleTitle, tags: tag});		
+		this.wiki.addTiddler(new $tw.Tiddler({title: this.mangleTitle, tags: tag},modification));
 	}
 	return true;
 };
