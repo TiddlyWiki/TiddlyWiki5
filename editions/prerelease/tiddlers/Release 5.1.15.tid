@@ -19,7 +19,10 @@ type: text/vnd.tiddlywiki
 
 New and improved translations:
 
-* Chinese
+* New Persian translation
+* Updated Chinese translations
+
+Another improvement that benefits users of translations is the addition of about 800 new //transliteration pairs//. These are substitutions that are performed when converting a tiddler title into a filename, such as the two characters "oe" for the single character "œ". See [[the commit|https://github.com/Jermolene/TiddlyWiki5/commit/5cdf86b3072604f8c556c84f266767be5b8e75c3]] for more details. The result is that automatically generated filenames are much more readable.
 
 !! Usability Improvements
 
@@ -28,22 +31,29 @@ New and improved translations:
 
 !! Hackability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/aa417fe899d0983ad8a3fe1fdfe9cac42364b2b6]] new [[lookup Operator]] to simplify use of lookup tables
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/5dd3d97760083f7c6ba9a6cd6186525edb3fb836]] the SetWidget with ''tiddler'', ''field'' and ''index'' attributes
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d966583854d7c7f4a7df25c0e2a8d6b9e217a12c]] new ''whitespace'' [[Pragma]] allowing whitespace to be selectively ignored within wikitext
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/ef9efbc3995248d72148423bee10a1374c842926]] support for saving in [[Beaker Browser]]
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/4db950cc450ef1ea87ce8f480fe882f2b108cdb4]] date formatting to support milliseconds and UTC dates
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/4db950cc450ef1ea87ce8f480fe882f2b108cdb4]] [[date formatting|DateFormat]] to support milliseconds and UTC dates
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/dc295b2536cdf411893e15b6dc0d62107f50a08d]] LinkCatcherWidget to make the target tiddler available within the action string
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/596dfa1d5058e030a318e4a0f23d078500c3d154]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/a4d919f45caae393f99018e0d797980b3667867f]]) the DropzoneWidget and BrowseWidget to allow the deserializer to be manually specified
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/523280362b529ee73229001a1bcd79272f483908]] new `tc-btn-*` classes to toolbar buttons allowing easier custom styling
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8293a77c6e6870960956dcf1501c687d2f88ea3c]] new ''mode'' attribute to the ViewWidget, allowing control over the parsing mode for wikified output formats
 
 !! Node.js Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/35a7a66b019f2ea0532ba65cd5475f5cfe46a860]] SaveCommand and RenderCommand, intended as more flexible replacements for RenderTiddlerCommand, RenderTiddlersCommand, SaveTiddlerCommand and SaveTiddlersCommand
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/51b1ead5c9aa5a754e7fdc0bfbf241dd98db5f7c]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/1b7d9d65f42e77fdceb11b0b0b9ab9a63f6762e9]]) more colour to command line output
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c179dc93cbd8947f92a8007d28c497b70efc4204]] new "raw" options to the FetchCommand
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e951047461c3c2c273484a759ce5fc2c388fb684]] new ImportCommand
 
 !! Bug Fixes
 
+* [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/c069d48a2a690b333c0733328f3574ae8a76e435]] extraneous URI encoding of filename with PUT saver
+* [[Restored|https://github.com/Jermolene/TiddlyWiki5/pull/2940]] ability to use sub-filter with image-picker macro
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/ccac0258af9b6d8c93d41b1f170e20dbf2efe3f3]] problem with the download saver and filenames containing spaces, accents or other characters that need URL encoding
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/2850]] problem with importin JSON tiddlers with leading or trailing spaces in the title
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/2850]] problem with importing JSON tiddlers with leading or trailing spaces in the title
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/683285d44943db2d993bd574ed2d2f8a07dfc816]] plugin display so that "contents" tab is shown even if no other tabs are provided
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/2842]] problem with `allbefore:include` filter operator
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/e471bd54d42226d3b6d070b8561f8883f44df68a]] Update Stanford JavaScript Library to version 1.0.7
@@ -57,6 +67,7 @@ New and improved translations:
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
+* [[@0mp|https://github.com/0mp]]
 * [[@Arlen22|https://github.com/Arlen22]]
 * [[@BramChen|https://github.com/BramChen]]
 * [[@cjhunt|https://github.com/cjhunt]]
@@ -68,5 +79,7 @@ New and improved translations:
 * [[@pmario|https://github.com/pmario]]
 * [[@rubaboo|https://github.com/rubaboo]]
 * [[@saqimtiaz|https://github.com/saqimtiaz]]
+* [[@telmiger|https://github.com/telmiger]]
+* [[@twMat|https://github.com/twMat]]
 * [[@xcazin|https://github.com/xcazin]]
  
