@@ -12,7 +12,7 @@ tags: [[Filter Operators]]
 title: lookup Operator
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.1.14">>
+<<.from-version "5.1.15">>
 
 The action of this operator is as follows:
 
