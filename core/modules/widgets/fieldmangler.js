@@ -133,12 +133,12 @@ FieldManglerWidget.prototype.handleAddTagEvent = function(event) {
 			var modification = this.wiki.getModificationFields();
 			modification.tags = (tiddler.fields.tags || []).slice(0);
 			$tw.utils.pushTop(modification.tags,tag);
-			this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));			
+			this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));
 		}
 	} else if(typeof event.param === "string" && event.param.trim() !== "" && this.mangleTitle.trim() !== "") {
 		var tag = [];
 		tag.push(event.param.trim());
-		this.wiki.addTiddler({title: this.mangleTitle, tags: tag});		
+		this.wiki.addTiddler({title: this.mangleTitle, tags: tag});
 	}
 	return true;
 };
