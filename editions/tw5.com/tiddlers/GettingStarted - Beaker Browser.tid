@@ -1,6 +1,6 @@
 caption: Beaker
 created: 20161229121316912
-modified: 20170624213303906
+modified: 20170920171216378
 title: GettingStarted - Beaker Browser
 type: text/vnd.tiddlywiki
 
@@ -10,9 +10,20 @@ type: text/vnd.tiddlywiki
 
 # Download and install the Beaker Browser from https://beakerbrowser.com/
 # Run Beaker, and if necessary open a tab to beaker:start
-# Click the cloud icon in the left column
-# Click the green “New” button
+# Click the "New site" button at the top left of the page
 # Enter the details of your site
-# Click the link “select them manually” and upload your TiddlyWiki index.html file
+# Click the link “Add files” and upload your TiddlyWiki index.html file
 # View the site by clicking on the link to index.html; it should open in a new tab
 # Try out creating tiddlers, and saving changes
+
+At this point, the wiki is entirely private, and other users cannot see the content even if they have the URL. To share the wiki with other users:
+
+# Publish your changes
+## Visit the "Library" page in Beaker Browser via the system menu
+## Select your site in the list
+## Look for a box mentioning "n unpublished changes". If not present, skip to the next step
+## Click the "Review changes" button
+## Click the "Publish" button
+# Share the dat: URL
+## Copy the URL of your site from the address bar and share it with other users
+## Other users should be able to access your site but they won't be able to make changes unless they fork their own copy
