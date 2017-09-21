@@ -26,15 +26,21 @@ function getIsFilterOperators() {
 Export our filter function
 */
 exports.is = function(source,operator,options) {
-	// Dispatch to the correct isfilteroperator
+	// Get our isfilteroperators
 	var isFilterOperators = getIsFilterOperators();
-	if(operator.operand) {
-		var isFilterOperator = isFilterOperators[operator.operand];
-		if(isFilterOperator) {
-			return isFilterOperator(source,operator.prefix,options);
-		} else {
-			return [$tw.language.getString("Error/IsFilterOperator")];
+// Cycle through the isfilteroperators accumulating their results
+	var results = [];
+  if(operator.operand) {
+		var subops = operator.operand.split("+");
+		for (var t=0; t<subops.length; t++) {
+			var subop = isFilterOperators[subops[t]];
+			if(subop) {
+				$tw.utils.pushTop(results,subop(source,operator.prefix,options));
+			} else {
+				return [$tw.language.getString("Error/IsFilterOperator")];
+			}
 		}
+		return results;
 	} else {
 		// Return all tiddlers if the operand is missing
 		var results = [];
