@@ -28,9 +28,9 @@ Export our filter function
 exports.is = function(source,operator,options) {
 	// Get our isfilteroperators
 	var isFilterOperators = getIsFilterOperators();
-    // Cycle through the isfilteroperators accumulating their results
+	// Cycle through the isfilteroperators accumulating their results
 	var results = [];
-    if(operator.operand) {
+	if(operator.operand) {
 		var subops = operator.operand.split("+");
 		for (var t=0; t<subops.length; t++) {
 			var subop = isFilterOperators[subops[t]];
