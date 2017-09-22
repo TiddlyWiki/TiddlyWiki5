@@ -20,7 +20,7 @@ exports.log = function(text,colour) {
 };
 
 exports.terminalColour = function(colour) {
-	if($tw.node && process.stdout.isTTY) {
+	if(!$tw.browser && $tw.node && process.stdout.isTTY) {
 		if(colour) {
 			var code = exports.terminalColourLookup[colour];
 			if(code) {
