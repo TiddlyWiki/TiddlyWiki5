@@ -1,0 +1,40 @@
+created: 20170924213312793
+modified: 20170924233417820
+tags: [[String Operators]] [[Operator Examples]] [[regexps Operator]]
+title: regexps Operator (Examples)
+type: text/vnd.tiddlywiki
+
+!! Find the major categories of configuration tiddlers
+
+Note that we do this by looking for the text between the ``$:/conf/`` prefix and the first subsequent forward slash (``/``):
+
+<<.operator-example 1 "[all[system+shadows]regexps[\$:/config/(.+?)/]unique[]]" "The major categories of configuration tiddlers">>
+
+----
+!! Find the first 5 url references from the [[Release 5.1.14]] notes page.
+
+Note that we use the `(?g)` global modifier and that we need to assign our regular expression using the [[Vars Widget|VarsWidget]]. Because this expression is global, grouping is not possible and we use a separate ``removeprefix`` filter to trim the end of each result :
+
+<$macrocall
+$name="wikitext-example-without-html"
+src="""<$vars ex1="(?g)http.+?\]\]" brackets="]]">
+<<list-links "[[Release 5.1.14]regexps:text<ex1>removesuffix<brackets>limit[5]]">>
+</$vars>
+"""/>
+
+----
+
+!! Using regular expression grouping to split input into multiple text
+
+In this example the first 3 tiddlers tagged as "Resources" are split into their topic and authors. The result is a list of 6 items. Once again, we need to place our regular expression inside a variable in order to get around filter limitations (caused by the internal double quotes) :
+
+<$macrocall
+$name="wikitext-example-without-html"
+src="""<$vars ex2='"(.+)" by (.*)$'>
+<<list-links '[tag[Resources]limit[3]regexps<ex2>]'>>
+</$vars>"""/>
+
+
+
+
+
