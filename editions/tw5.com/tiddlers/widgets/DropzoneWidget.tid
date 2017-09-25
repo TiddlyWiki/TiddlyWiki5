@@ -1,6 +1,6 @@
 caption: dropzone
 created: 20131024141900000
-modified: 20170328173334805
+modified: 20170712153850528
 tags: Widgets
 title: DropzoneWidget
 type: text/vnd.tiddlywiki
@@ -13,7 +13,12 @@ It sends a [[WidgetMessage: tm-import-tiddlers]] carrying a JSON representation 
 
 ! Content and Attributes
 
-The dropzone widget has no attributes, and displays any contained content within the dropzone.
+|!Attribute |!Description |
+|deserializer |<<.from-version "5.1.15">> Optional name of deserializer to be used (by default the deserializer is derived from the file extension) |
+
+The list of available deserializers can be inspected by executing `Object.keys($tw.Wiki.tiddlerDeserializerModules).sort().join("\n")` in the browser JavaScript console.
+
+The dropzone widget displays any contained content within the dropzone.
 
 ! Display
 

@@ -1,5 +1,4 @@
 title: $:/core/templates/static.content
-type: text/vnd.tiddlywiki
 hack-to-give-us-something-to-compare-against: yes
 
 \define tv-wikilink-template() http://tiddlywiki.com/static/$uri_doubleencoded$.html

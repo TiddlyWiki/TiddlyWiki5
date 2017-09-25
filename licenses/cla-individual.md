@@ -141,7 +141,7 @@ Bram Chen, @BramChen, 2014/02/20
 
 Xavier Cazin, @xcazin, 2014/02/21
 
-Rustem Akbulatov, @nameanyone, 2014/03/04
+Rustem Akbulatov, @rubaboo, 2014/03/04
 
 Harald Albrecht, @TheDiveO, 2014/03/12
 
@@ -314,3 +314,9 @@ Matias Goldman, @twMat, 2017/01/22
 Andrew Webb, @tejjyid, 2017/03/06
 
 Richard Decal, @crypdick, 2017/04/04
+
+Adrian Morosanu, @morosanuae, 2017/06/02
+
+Rob Hoelz, @hoelzro, 2017/05/08
+
+Saq Imtiaz, @saqimtiaz, 2017/06/14

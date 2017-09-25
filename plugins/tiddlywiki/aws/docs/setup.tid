@@ -1,0 +1,51 @@
+title: $:/plugins/tiddlywiki/aws/setup
+
+! Introduction
+
+!! About Amazon Web Services
+
+Amazon Web Services is a collection of online APIs to services that allow cloud-based applications to be built. It is a commercial service that charges usage fees, but there is a free tier that is sufficient for most personal use.
+
+An ordinary Amazon account can be used to sign into the AWS console at https://aws.amazon.com/console/. Here you can see a menu of the available services and use interactive dashboards to inspect and configure resources.
+
+! Getting Started
+
+!! Setup Amazon Credentials
+
+The main root account has super-user privileges across all the resources owned by the account. The Identity and Access Management (IAM) service allows subsidiary user accounts to be created for specific tasks. Here we create a new user account for running TiddlyWiki code:
+
+# Visit the AWS console at https://aws.amazon.com/console/
+# Choose ''IAM'' from the ''Services'' dropdown menu
+# Choose ''Users'' from the left hand menu
+# Click the ''Create New Users'' button
+# Enter ''tiddlywiki'' as the first user name
+# Check the box labelled //Generate an access key for each user//
+# Click the ''Create'' button
+# Click the ''Download Credentials'' button to download a file called "credentials.csv"
+#* The file contains three values:
+#*# ''User Name'': Username for
+#*# ''Password'': 
+#*# ''Direct Signin Link'': 
+# Create a text file with the following content:
+#> <div><pre><code>[default]
+aws_access_key_id = &lt;your access key>
+aws_secret_access_key = &lt;your secret access key>
+</code></pre></div>
+# Save the file as `~/.aws/credentials` (Mac/Linux) or `?` (Windows)
+
+!! Download or Clone TiddlyWiki Repository
+
+Even if you have already installed TiddlyWiki, you should create a new installation for working with the AWS plugin.
+
+Visit the TiddlyWiki5 repository at https://github.com/Jermolene/TiddlyWiki5. You can either download or clone a copy:
+
+* Download to get up and running quickly
+* Clone to make it easier to upgrade in the future
+
+!! Install `aws-sdk`
+
+Open a command terminal, switch to the directory where TiddlyWiki is installed and run the following command:
+
+```
+npm install aws-sdk
+```

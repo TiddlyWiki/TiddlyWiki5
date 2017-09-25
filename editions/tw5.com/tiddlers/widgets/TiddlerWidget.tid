@@ -1,5 +1,5 @@
 created: 20130824154300000
-modified: 20150220162134000
+modified: 20170901101236822
 tags: Widgets
 title: TiddlerWidget
 type: text/vnd.tiddlywiki
@@ -13,7 +13,6 @@ The TiddlerWidget is used to set a value for the [[current tiddler|Current Tiddl
 
 |!Attribute |!Description |
 |tiddler |The title of the tiddler to become the new [[current tiddler|Current Tiddler]] |
-|class |CSS classes to be added to the generated elements |
 
 ! CSS Class Variables
 

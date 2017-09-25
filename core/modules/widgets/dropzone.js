@@ -104,7 +104,10 @@ DropZoneWidget.prototype.handleDragLeaveEvent  = function(event) {
 };
 
 DropZoneWidget.prototype.handleDropEvent  = function(event) {
-	var self = this;
+	var self = this,
+		readFileCallback = function(tiddlerFieldsArray) {
+			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
+		};
 	this.leaveDrag(event);
 	// Check for being over a TEXTAREA or INPUT
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) !== -1) {
@@ -121,15 +124,14 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	// Import any files in the drop
 	var numFiles = 0;
 	if(dataTransfer.files) {
-		numFiles = this.wiki.readFiles(dataTransfer.files,function(tiddlerFieldsArray) {
-			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
+		numFiles = this.wiki.readFiles(dataTransfer.files,{
+			callback: readFileCallback,
+			deserializer: this.dropzoneDeserializer
 		});
 	}
 	// Try to import the various data types we understand
 	if(numFiles === 0) {
-		$tw.utils.importDataTransfer(dataTransfer,this.wiki.generateNewTitle("Untitled"),function(fieldsArray) {
-			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(fieldsArray)});
-		});
+		$tw.utils.importDataTransfer(dataTransfer,this.wiki.generateNewTitle("Untitled"),readFileCallback);
 	}
 	// Tell the browser that we handled the drop
 	event.preventDefault();
@@ -138,6 +140,10 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 };
 
 DropZoneWidget.prototype.handlePasteEvent  = function(event) {
+	var self = this,
+		readFileCallback = function(tiddlerFieldsArray) {
+			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
+		};
 	// Let the browser handle it if we're in a textarea or input box
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) == -1) {
 		var self = this,
@@ -147,8 +153,9 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 			var item = items[t];
 			if(item.kind === "file") {
 				// Import any files
-				this.wiki.readFile(item.getAsFile(),function(tiddlerFieldsArray) {
-					self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
+				this.wiki.readFile(item.getAsFile(),{
+					callback: readFileCallback,
+					deserializer: this.dropzoneDeserializer
 				});
 			} else if(item.kind === "string") {
 				// Create tiddlers from string items
@@ -176,6 +183,7 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 Compute the internal state of the widget
 */
 DropZoneWidget.prototype.execute = function() {
+	this.dropzoneDeserializer = this.getAttribute("deserializer");
 	// Make child widgets
 	this.makeChildWidgets();
 };

@@ -13,7 +13,7 @@ DropMessage: Ρίχτε εδώ (ή πατήστε το πλήκτρο Esc για
 Encryption/ConfirmClearPassword: Θέλετε να καθαρίσετε το συνθηματικό; Αυτό θα έχει ως συνέπεια να μην κρυπτογραφητε το wiki όταν κάνετε αποθήκευση
 Encryption/PromptSetPassword: Ορίστε το νέο συνθηματικό για αυτό το TiddlyWiki
 InvalidFieldName: Μη έγκυροι χαρακτήρες στο όνομα πεδίου "<$text text=<<fieldName>>/>". Τα ονόματα πεδίων μπορούν να περιέχουν μόνο πεζούς χαρακτήρες, ψηφία και τους χαρακτήρες κάτω παύλα (`_`), μείον (`-`) και τελεία (`.`)
-MissingTiddler/Hint: Ανύπαρκτο tiddler "<$text text=<<currentTiddler>>/>" - κάντε κλικ {{$:/core/images/edit-button}} για να δημιουργηθεί
+MissingTiddler/Hint: Ανύπαρκτο tiddler "<$text text=<<currentTiddler>>/>" - κάντε κλικ {{||$:/core/ui/Buttons/edit}} για να δημιουργηθεί
 RecentChanges/DateFormat: DDth MMM YYYY
 SystemTiddler/Tooltip: Αυτό είναι ένα tiddler συστήματος
 TagManager/Colour/Heading: Χρώμα

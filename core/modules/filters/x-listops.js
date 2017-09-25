@@ -106,7 +106,7 @@ Extended filter operators to manipulate the current list.
     exports.allbefore = function (source, operator) {
         var results = prepare_results(source),
             index = results.indexOf(operator.operand);
-        return (index <= 0) ? [] :
+        return (index < 0) ? [] :
             (operator.suffix) ? results.slice(0, index + 1) :
             results.slice(0, index);
     };

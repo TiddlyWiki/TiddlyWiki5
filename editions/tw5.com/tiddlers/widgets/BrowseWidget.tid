@@ -1,6 +1,6 @@
 caption: browse
 created: 20131024141900000
-modified: 20170328173406681
+modified: 20170718142410367
 tags: Widgets
 title: BrowseWidget
 type: text/vnd.tiddlywiki
@@ -15,6 +15,7 @@ The content of the `<$browse>` widget is ignored.
 
 |!Attribute |!Description |
 |multiple |Set to "multiple" to select multiple file upload |
+|deserializer |<<.from-version "5.1.15">> Optional name of deserializer to be used (by default the deserializer is derived from the file extension or type) |
 |tooltip |Optional tooltip text |
 |message |Optional override of widget message to be generated. The parameter for the message will be the JavaScript object `event.target.files` |
 

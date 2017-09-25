@@ -47,7 +47,7 @@ var PutSaver = function(wiki) {
 };
 
 PutSaver.prototype.uri = function() {
-	return encodeURI(document.location.toString().split("#")[0]);
+	return document.location.toString().split("#")[0];
 };
 
 // TODO: in case of edit conflict

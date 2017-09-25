@@ -19,4 +19,3 @@ Set "Stacked" story view
 <$action-setfield $tiddler="$:/view" text="classic"/>
 Revert
 </$button>
-* [[Hierarchical system tiddler browser|$:/core/ui/MoreSideBar/Explore]]

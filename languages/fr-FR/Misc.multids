@@ -35,7 +35,7 @@ Error/XMLHttpRequest: Code d'erreur XMLHttpRequest
 InternalJavaScriptError/Title: Erreur interne JavaScript
 InternalJavaScriptError/Hint: C'est assez embarrassant. Il est recommandé de rafraîchir l'affichage de votre navigateur
 InvalidFieldName: Caractères illicites dans le nom du champ « <$text text=<<fieldName>>/> ». Les champs ne peuvent contenir que des lettres minuscules non accentuées et les caractères souligné (`_`), tiret (`-`) et point (`.`)
-LazyLoadingWarning: <p>Chargement d'un texte externe ''<$text text={{!!_canonical_uri}}/>''</p><p>Si ce message ne disparaît pas, il se peut que vous utilisiez un navigateur qui n'accepte pas les textes externes dans cette configuration. Voir http://tiddlywiki.com/#ExternalText</p>
+LazyLoadingWarning: <p>Tentative de chargement d'un contenu externe ''<$text text={{!!_canonical_uri}}/>''</p><p>Si ce message ne disparaît pas, il est possible que vous deviez ajuster le type de contenu du tiddler en fonction du type de votre contenu externe, ou vous utilisez peut-être un navigateur qui n'accepte pas les contenus externes dans cette configuration. Voir http://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Identification sur TiddlySpace
 Manager/Controls/FilterByTag/None: (aucun)
 Manager/Controls/FilterByTag/Prompt: Filtrer par tag :
@@ -55,7 +55,7 @@ Manager/Item/Tags: Tags
 Manager/Item/Tools: Outils
 Manager/Item/WikifiedText: Texte wikifié
 MissingTiddler/Hint: Le tiddler « <$text text=<<currentTiddler>>/> » est manquant
-- cliquez sur {{$:/core/images/edit-button}} pour le créer
+- cliquez sur {{||$:/core/ui/Buttons/edit}} pour le créer
 No: Non
 OfficialPluginLibrary: Bibliothèque officielle des plugins ~TiddlyWiki
 OfficialPluginLibrary/Hint: La bibliothèque officielle des plugins ~TiddlyWiki sur tiddlywiki.com. Plugins, thèmes et packs pour les différentes langues sont maintenus par l'équipe responsable du noyau.

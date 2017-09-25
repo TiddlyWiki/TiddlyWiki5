@@ -12,7 +12,7 @@ DropMessage: ドロップしてください。（止めるには、キャンセ�
 Encryption/ConfirmClearPassword: パスワードを削除すると暗号化も解除されますが、本当にパスワードを削除しますか？
 Encryption/PromptSetPassword: パスワードを入力してください。
 InvalidFieldName: フィールド名に不正な文字が使われています "<$text text=<<fieldName>>/>". フィールド名に使用できるのは英小文字かアンダースコア(`_`)、ハイフン(`-`)、ピリオド(`.`)のみです。
-MissingTiddler/Hint: 未作成の tiddler "<$text text=<<currentTiddler>>/>" - クリック {{$:/core/images/edit-button}} して作成
+MissingTiddler/Hint: 未作成の tiddler "<$text text=<<currentTiddler>>/>" - クリック {{||$:/core/ui/Buttons/edit}} して作成
 RecentChanges/DateFormat: YYYY-MM-DD
 SystemTiddler/Tooltip: これはシステム tiddler です
 TagManager/Colour/Heading: 色

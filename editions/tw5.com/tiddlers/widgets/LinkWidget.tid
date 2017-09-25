@@ -1,6 +1,6 @@
 caption: link
 created: 20131024141900000
-modified: 20170328172846359
+modified: 20170907141926550
 tags: Widgets
 title: LinkWidget
 type: text/vnd.tiddlywiki
@@ -60,9 +60,20 @@ This causes the tooltip to be the ''tooltip'' field of the target tiddler. If th
 * `tc-tiddlylink-missing` - applied to tiddler links where the target tiddler doesn't exist
 * `tc-tiddlylink-resolves` - applied to tiddler links when the target tiddler does exist
 
+! `href` generation
+
+The following process is used to generate the `href` attribute of the generated HTML `<a>` element:
+
+# If <<.vlink tv-get-export-link>> is defined it is invoked to convert the target tiddler title to the `href` value
+#* In practice, only a [[JavaScript macro|Macros]] can be used
+# <<.from-version "5.1.15">> If <<.vlink tv-filter-export-link>> is defined it is interpreted as a filter that converts the target tiddler title to the `href` value
+# If <<.vlink tv-wikilink-template>> is defined it is treated as a specialised macro body that can perform limited conversion of the target tiddler title to the `href` value
+# Otherwise, the target tiddler title is URI encoded to create the `href`
+
 ! Configuration variables
 
 * <<.vlink tv-wikilinks>>
+* <<.vlink tv-filter-export-link>>
 * <<.vlink tv-wikilink-template>>
 * <<.vlink tv-wikilink-tooltip>>
 * <<.vlink tv-get-export-link>>

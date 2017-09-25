@@ -55,8 +55,11 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 		if(self.message) {
 			self.dispatchEvent({type: self.message, param: self.param, files: event.target.files});
 		} else {
-			self.wiki.readFiles(event.target.files,function(tiddlerFieldsArray) {
-				self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
+			self.wiki.readFiles(event.target.files,{
+				callback: function(tiddlerFieldsArray) {
+					self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
+				},
+				deserializer: self.deserializer
 			});
 		}
 		return false;
@@ -72,6 +75,7 @@ Compute the internal state of the widget
 */
 BrowseWidget.prototype.execute = function() {
 	this.browseMultiple = this.getAttribute("multiple");
+	this.deserializer = this.getAttribute("deserializer");
 	this.message = this.getAttribute("message");
 	this.param = this.getAttribute("param");
 	this.tooltip = this.getAttribute("tooltip");

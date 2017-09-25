@@ -13,10 +13,42 @@ Various static utility functions.
 "use strict";
 
 /*
+Display a message, in colour if we're on a terminal
+*/
+exports.log = function(text,colour) {
+	console.log($tw.node ? exports.terminalColour(colour) + text + exports.terminalColour() : text);
+};
+
+exports.terminalColour = function(colour) {
+	if(!$tw.browser && $tw.node && process.stdout.isTTY) {
+		if(colour) {
+			var code = exports.terminalColourLookup[colour];
+			if(code) {
+				return "\x1b[" + code + "m";
+			}
+		} else {
+			return "\x1b[0m"; // Cancel colour
+		}
+	}
+	return "";
+};
+
+exports.terminalColourLookup = {
+	"black": "0;30",
+	"red": "0;31",
+	"green": "0;32",
+	"brown/orange": "0;33",
+	"blue": "0;34",
+	"purple": "0;35",
+	"cyan": "0;36",
+	"light gray": "0;37"
+};
+
+/*
 Display a warning, in colour if we're on a terminal
 */
 exports.warning = function(text) {
-	console.log($tw.node ? "\x1b[1;33m" + text + "\x1b[0m" : text);
+	exports.log(text,"brown/orange");
 };
 
 /*
@@ -267,6 +299,9 @@ exports.formatDateString = function(date,template) {
 			[/^0ss/, function() {
 				return $tw.utils.pad(date.getSeconds());
 			}],
+			[/^0XXX/, function() {
+				return $tw.utils.pad(date.getMilliseconds());
+			}],
 			[/^0DD/, function() {
 				return $tw.utils.pad(date.getDate());
 			}],
@@ -308,6 +343,9 @@ exports.formatDateString = function(date,template) {
 			[/^ss/, function() {
 				return date.getSeconds();
 			}],
+			[/^XXX/, function() {
+				return date.getMilliseconds();
+			}],
 			[/^[AP]M/, function() {
 				return $tw.utils.getAmPm(date).toUpperCase();
 			}],
@@ -324,6 +362,16 @@ exports.formatDateString = function(date,template) {
 				return $tw.utils.pad(date.getFullYear() - 2000);
 			}]
 		];
+	// If the user wants everything in UTC, shift the datestamp
+	// Optimize for format string that essentially means 
+	// 'return raw UTC (tiddlywiki style) date string.'
+	if(t.indexOf("[UTC]") == 0 ) {
+		if(t == "[UTC]YYYY0MM0DD0hh0mm0ssXXX") 
+			return $tw.utils.stringifyDate(new Date());
+		var offset = date.getTimezoneOffset() ; // in minutes
+		date = new Date(date.getTime()+offset*60*1000) ;
+		t = t.substr(5) ;
+	} 
 	while(t.length){
 		var matchString = "";
 		$tw.utils.each(matches, function(m) {
@@ -724,84 +772,6 @@ exports.strEndsWith = function(str,ending,position) {
 		var lastIndex = str.indexOf(ending, position);
 		return lastIndex !== -1 && lastIndex === position;
 	}
-};
-
-/*
-Transliterate string from eg. Cyrillic Russian to Latin
-*/
-var transliterationPairs = {
-	"Ё":"YO",
-	"Й":"I",
-	"Ц":"TS",
-	"У":"U",
-	"К":"K",
-	"Е":"E",
-	"Н":"N",
-	"Г":"G",
-	"Ш":"SH",
-	"Щ":"SCH",
-	"З":"Z",
-	"Х":"H",
-	"Ъ":"'",
-	"ё":"yo",
-	"й":"i",
-	"ц":"ts",
-	"у":"u",
-	"к":"k",
-	"е":"e",
-	"н":"n",
-	"г":"g",
-	"ш":"sh",
-	"щ":"sch",
-	"з":"z",
-	"х":"h",
-	"ъ":"'",
-	"Ф":"F",
-	"Ы":"I",
-	"В":"V",
-	"А":"a",
-	"П":"P",
-	"Р":"R",
-	"О":"O",
-	"Л":"L",
-	"Д":"D",
-	"Ж":"ZH",
-	"Э":"E",
-	"ф":"f",
-	"ы":"i",
-	"в":"v",
-	"а":"a",
-	"п":"p",
-	"р":"r",
-	"о":"o",
-	"л":"l",
-	"д":"d",
-	"ж":"zh",
-	"э":"e",
-	"Я":"Ya",
-	"Ч":"CH",
-	"С":"S",
-	"М":"M",
-	"И":"I",
-	"Т":"T",
-	"Ь":"'",
-	"Б":"B",
-	"Ю":"YU",
-	"я":"ya",
-	"ч":"ch",
-	"с":"s",
-	"м":"m",
-	"и":"i",
-	"т":"t",
-	"ь":"'",
-	"б":"b",
-	"ю":"yu"
-};
-
-exports.transliterate = function(str) {
-	return str.split("").map(function(char) {
-		return transliterationPairs[char] || char;
-	}).join("");
 };
 
 })();

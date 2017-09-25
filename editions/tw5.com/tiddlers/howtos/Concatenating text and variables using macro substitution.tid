@@ -43,7 +43,7 @@ Instead, you could use the [[MacroCallWidget]] widget, like this:
 
 In this case, we passed the value of a variable directly to our macro. This is often a general way to go about this task. If you wanted to create more links based on other variables you could re-use the macro for each situation.
 
-If, as in this case, the only variable you are using is `currentVariable` then you could write a simple macro, like this:
+If, as in this case, the only variable you are using is `currentTiddler` then you could write a simple macro, like this:
 
 ```
 \define linkup() [[Additional Info|$(currentTiddler)$-Contact]]
