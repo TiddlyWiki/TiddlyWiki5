@@ -8,8 +8,6 @@ caption: {{$:/language/ControlPanel/Toolbars/PageControls/Caption}}
 
 {{$:/language/ControlPanel/Toolbars/PageControls/Hint}}
 
-
-
 <$set name="tv-config-toolbar-icons" value="yes">
 
 <$set name="tv-config-toolbar-text" value="yes">
