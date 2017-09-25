@@ -5,6 +5,8 @@ tags: $:/tags/TopRightBar
 <$button set="$:/state/sidebar" setTo="no" tooltip={{$:/language/Buttons/HideSideBar/Hint}} aria-label={{$:/language/Buttons/HideSideBar/Caption}} class="tc-btn-invisible">{{$:/core/images/chevron-right}}</$button>
 </$reveal>
 <$reveal state="$:/state/sidebar" type="match" text="no">
+<$reveal state="$:/state/sidebar/extracontrols" type="match" text="yes">
 {{$:/core/ui/PageTemplate/pagecontrols}}
+</$reveal>
 <$button set="$:/state/sidebar" setTo="yes" tooltip={{$:/language/Buttons/ShowSideBar/Hint}} aria-label={{$:/language/Buttons/ShowSideBar/Caption}} class="tc-btn-invisible">{{$:/core/images/chevron-left}}</$button>
 </$reveal>

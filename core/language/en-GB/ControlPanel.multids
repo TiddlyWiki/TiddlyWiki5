@@ -165,6 +165,7 @@ Toolbars/EditToolbar/Hint: Choose which buttons are displayed for tiddlers in ed
 Toolbars/Hint: Select which toolbar buttons are displayed
 Toolbars/PageControls/Caption: Page Toolbar
 Toolbars/PageControls/Hint: Choose which buttons are displayed on the main page toolbar. Drag and drop to change the ordering
+Toolbars/PageControls/ExtraControls: Should these controls also show when the sidebar is closed?
 Toolbars/EditorToolbar/Caption: Editor Toolbar
 Toolbars/EditorToolbar/Hint: Choose which buttons are displayed in the editor toolbar. Note that some buttons will only appear when editing tiddlers of a certain type. Drag and drop to change the ordering
 Toolbars/ViewToolbar/Caption: View Toolbar
