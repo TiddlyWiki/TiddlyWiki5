@@ -1,12 +1,14 @@
 title: $:/language/Filters/
 
-AllTiddlers: Όλα, εκτός των tiddler συστήματος
-RecentTiddlers: Πρόσφατα τροποποιημένα tiddlers
 AllTags: Όλες οι ετικέτες, εκτός των ετικετών συστήματος
-Missing: tiddlers που λείπουν
+AllTiddlers: Όλα, εκτός των tiddler συστήματος
 Drafts: Πρόχειρα tiddlers
+Missing: tiddlers που λείπουν
 Orphans: Ορφανά tiddlers
-SystemTiddlers: tiddlers συστήματος
-ShadowTiddlers: σκιώδη tiddlers
 OverriddenShadowTiddlers: Σκιώδη  tiddlers που έχουν παρακαμφθεί
+RecentTiddlers: Πρόσφατα τροποποιημένα tiddlers
+ShadowTiddlers: σκιώδη tiddlers
+StoryList: Tiddlers στην ιστορική ροή,  εξαιρώντας τα <$text text="$:/AdvancedSearch"/>
 SystemTags: Ετικέτες συστήματος
+SystemTiddlers: tiddlers συστήματος
+TypedTiddlers: tiddlers χωρίς Wiki-γραφή

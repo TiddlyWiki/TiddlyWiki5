@@ -1,4 +1,5 @@
 title: $:/language/Help/default
+description: 
 
 \define commandTitle()
 $:/language/Help/$(command)$

@@ -1,9 +1,14 @@
 title: $:/language/Search/
 
+DefaultResults/Caption: Λίστα
 Filter/Caption: Φίλτρο
 Filter/Hint: Αναζήτηση μέσω μιας [[έκφρασης φιλτραρίσματος|http://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small><$count filter={{$:/temp/advancedsearch}}/> βρέθηκαν</small>//
 Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> βρέθηκαν</small>//
+Matches/All: Όλα τα αποτελέσματα:
+Matches/Title: Ταίριασμα σε Τίτλο:
+Search: Αναζήτηση
+Search/TooShort: Το κείμενο αναζήτησης είναι πολύ μικρό
 Shadows/Caption: Σκιώδη
 Shadows/Hint: Αναζήτηση για σκιώδη tiddlers
 Shadows/Matches: //<small><$count filter="[all[shadows]search{$:/temp/advancedsearch}]"/> βρέθηκαν</small>//
