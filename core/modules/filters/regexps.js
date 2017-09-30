@@ -66,7 +66,7 @@ exports.regexps = function(source,operator,options) {
 				ret = text.match(regexp) ;
 				if(ret !==null) {
 					if(global) {
-						results = ret  ;
+						results.push.apply(results,ret)  ; //DEBUG
 					} else {
 						// if there are  sub groups return sub groups START
 						if(ret.length > 1)  {     // return sub groups
