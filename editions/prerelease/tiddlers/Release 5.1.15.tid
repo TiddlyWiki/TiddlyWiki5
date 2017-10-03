@@ -20,7 +20,7 @@ type: text/vnd.tiddlywiki
 New and improved translations:
 
 * New Persian translation
-* Updated Chinese translations
+* Updated Chinese and Greek translations
 
 Another improvement that benefits users of translations is the addition of about 800 new //transliteration pairs//. These are substitutions that are performed when converting a tiddler title into a filename, such as the two characters "oe" for the single character "œ". See [[the commit|https://github.com/Jermolene/TiddlyWiki5/commit/5cdf86b3072604f8c556c84f266767be5b8e75c3]] for more details. The result is that automatically generated filenames are much more readable.
 
