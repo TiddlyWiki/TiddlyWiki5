@@ -46,9 +46,12 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 	if(this.nwsaveas) {
 		domNode.setAttribute("nwsaveas",this.nwsaveas);
 	}
-	// Nw.js supports "webkitdirectory" to allow a directory to be selected
+	// Nw.js supports "webkitdirectory" and "nwdirectory" to allow a directory to be selected
 	if(this.webkitdirectory) {
 		domNode.setAttribute("webkitdirectory",this.webkitdirectory);
+	}
+	if(this.nwdirectory) {
+		domNode.setAttribute("nwdirectory",this.nwdirectory);
 	}
 	// Add a click event handler
 	domNode.addEventListener("change",function (event) {
@@ -81,6 +84,7 @@ BrowseWidget.prototype.execute = function() {
 	this.tooltip = this.getAttribute("tooltip");
 	this.nwsaveas = this.getAttribute("nwsaveas");
 	this.webkitdirectory = this.getAttribute("webkitdirectory");
+	this.nwdirectory = this.getAttribute("nwdirectory");
 };
 
 /*
