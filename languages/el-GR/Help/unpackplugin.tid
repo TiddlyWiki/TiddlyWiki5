@@ -4,5 +4,5 @@ description: Εξάγει τα ωφέλιμα tiddler από ένα πρόσθε
 Εξάγει τα ωφέλιμα tiddlers από ένα πρόσθετο, δημιουργώντας τα ως κοινότυπα tiddlers:
 
 ```
---unpackplugin <title>
+--unpackplugin <τίτλος>
 ```

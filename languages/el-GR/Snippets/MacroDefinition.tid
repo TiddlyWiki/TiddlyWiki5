@@ -3,5 +3,5 @@ tags: $:/tags/TextEditor/Snippet
 caption: Ορισμός μακροεντολής
 
 \define macroName(param1:"default value",param2)
-Text of the macro
+Κείμενο μακροεντολής
 \end

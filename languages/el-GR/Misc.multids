@@ -1,7 +1,6 @@
 title: $:/language/
 
-AboveStory/ClassicPlugin/Warning: Φαίνεται πως προσπαθείτε να φορτώσετε ένα πρόσθετο που έχει σχεδιαστεί για την έκδοση  ~TiddlyWiki Classic. Παρακαλώ σημειώστε ότι [[αυτά τα πρόσθετα δεν λειτουργούν με την έκδοση 5.x.x του TiddlyWiki|http://tiddlywiki.com/#TiddlyWikiClassic]]. 
-Εντοπίστηκε πρόσθετο για την έκδοση ~TiddlyWiki Classic:
+AboveStory/ClassicPlugin/Warning: Φαίνεται πως προσπαθείτε να φορτώσετε ένα πρόσθετο που έχει σχεδιαστεί για την έκδοση  ~TiddlyWiki Classic. Παρακαλώ σημειώστε ότι [[αυτά τα πρόσθετα δεν λειτουργούν με την έκδοση 5.x.x του TiddlyWiki|http://tiddlywiki.com/#TiddlyWikiClassic]]. Εντοπίστηκε πρόσθετο για την έκδοση ~TiddlyWiki Classic:
 BinaryWarning/Prompt: Αυτό το tiddler περιέχει δυαδικά δεδομένα
 ClassicWarning/Hint: Αυτό το tiddler έχει γραφτεί με την TiddlyWiki κλασική μορφή κειμένου, που δεν είναι πλήρως συμβατή με αυτήν του TiddlyWiki 5ης έκδοσης. Δείτε στο  http://tiddlywiki.com/static/Upgrading.html για περισσότερες λεπτομέρειες.
 ClassicWarning/Upgrade/Caption: αναβάθμιση
@@ -58,7 +57,6 @@ MissingTiddler/Hint: Ανύπαρκτο tiddler "<$text text=<<currentTiddler>>/
 No: Όχι
 OfficialPluginLibrary: Επίσημη ~TiddlyWiki βιβλιοθήκη πρόσθετων
 OfficialPluginLibrary/Hint: The official ~TiddlyWiki plugin library at tiddlywiki.com. Plugins, themes and language packs are maintained by the core team.
-Η επίσημη  ~TiddlyWiki βιβλιοθήκη πρόσθετων στο  tiddlywiki.com. Πρόσθετα, θέματα και γλωσσικά πακέτα συντηρούνται από την βασική ομάδα.
 PluginReloadWarning: Παρακαλώ αποθηκεύστε {{$:/core/ui/Buttons/save-wiki}} και ξαναφορτώστε {{$:/core/ui/Buttons/refresh}} προκειμένου να ενεργοποιηθούν οι αλλαγές στα πρόσθετα
 RecentChanges/DateFormat: DDth MMM YYYY
 SystemTiddler/Tooltip: Αυτό είναι ένα tiddler συστήματος
@@ -71,3 +69,4 @@ TagManager/Tag/Heading: Ετικέτα
 Tiddler/DateFormat: DDth MMM YYYY στις hh12:0mmam
 UnsavedChangesWarning: Έχετε μη αποθηκευμένες αλλαγές στο TiddlyWiki
 Yes: Ναι
+Εντοπίστηκε πρόσθετο για την έκδοση ~TiddlyWiki Classic: 
