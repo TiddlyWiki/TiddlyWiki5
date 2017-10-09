@@ -17,7 +17,7 @@ title: $:/core/ui/PageStylesheet
 `}`
 
 </$set>
-<$set name="tv-palette" value="$:/palettes/Vanilla">
+<$set name="tv-palette" value={{$:/palette-print}}>
 
 `@media print {`
 
