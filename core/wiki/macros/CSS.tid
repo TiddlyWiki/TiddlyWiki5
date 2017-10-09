@@ -1,12 +1,18 @@
 title: $:/core/macros/CSS
 tags: $:/tags/Macro
 
-\define colour(name)
-<$transclude tiddler={{$:/palette}} index="$name$"><$transclude tiddler="$:/palettes/Vanilla" index="$name$"/></$transclude>
+\define colour(name,fallback:"none")
+<$transclude tiddler=<<tv-palette>> index="$name$">
+<$transclude tiddler=<<tv-palette>> index="$fallback$">
+<$transclude tiddler="$:/palettes/Vanilla" index="$name$">
+<$transclude tiddler="$:/palettes/Vanilla" index="$fallback$"/>
+</$transclude>
+</$transclude>
+</$transclude>
 \end
 
-\define color(name)
-<<colour $name$>>
+\define color(name, fallback:"none")
+<<colour $name$ $fallback$>>
 \end
 
 \define box-shadow(shadow)
