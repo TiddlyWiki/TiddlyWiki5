@@ -1914,7 +1914,7 @@ $tw.boot.startup = function(options) {
 		// For writable tiddler files, a hashmap of title to {filepath:,type:,hasMetaFile:}
 		$tw.boot.files = Object.create(null);
 		// System paths and filenames
-		$tw.boot.bootPath = path.dirname(module.filename);
+		$tw.boot.bootPath = options.bootPath || path.dirname(module.filename);
 		$tw.boot.corePath = path.resolve($tw.boot.bootPath,"../core");
 		// If there's no arguments then default to `--help`
 		if($tw.boot.argv.length === 0) {
