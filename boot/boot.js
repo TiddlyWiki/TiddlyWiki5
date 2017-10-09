@@ -1982,8 +1982,7 @@ $tw.boot.startup = function(options) {
 	}
 	// Load tiddlers
 	if($tw.boot.tasks.readBrowserTiddlers) {
-		$tw.loadTiddlersBrowser();
-		finishStartup();
+		Promise.resolve($tw.loadTiddlersBrowser()).then(finishStartup);
 	} else {
 		Promise.resolve($tw.loadTiddlersNode()).then(finishStartup);
 	}
