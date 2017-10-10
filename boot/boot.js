@@ -1595,7 +1595,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 				}
 			});
 		});
-		tiddlers.push({tiddlers: fileTiddlers});
+		tiddlers.push({filepath: pathname, hasMetaFile: !!metadata && !isTiddlerFile, tiddlers: fileTiddlers});
 	};
 	// Process the listed tiddlers
 	$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
