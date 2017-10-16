@@ -1,6 +1,6 @@
 caption: tabs
 created: 20131228162203521
-modified: 20150221211706000
+modified: 20161022095910026
 tags: Macros [[Core Macros]]
 title: tabs Macro
 type: text/vnd.tiddlywiki
@@ -35,3 +35,7 @@ The <<.vlink currentTiddler>> variable is not affected by the <<.var tabs>> macr
 ```
 
 <<.macro-examples "tabs">>
+
+!! Preserving Tab Contents
+
+<<.from-version "5.1.14">> To preserve active tab contents like embedded video or music, set the field ''retain-tab'' to `yes` at a tab tiddler. This will prevent reloading the content when switching tabs.

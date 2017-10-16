@@ -16,7 +16,8 @@ tags: $:/tags/Macro
 <div class="tc-tab-content $class$">
 <$list filter="$tabsList$" variable="currentTab">
 
-<$reveal type="match" state=<<qualify "$state$">> text=<<currentTab>> default="$default$">
+<$set name="retain" filter="[<currentTab>get[retain-tab]]">
+<$reveal type="match" state=<<qualify "$state$">> text=<<currentTab>> default="$default$" retain=<<retain>>>
 
 <$transclude tiddler="$template$" mode="block">
 
@@ -25,6 +26,7 @@ tags: $:/tags/Macro
 </$transclude>
 
 </$reveal>
+</$set>
 
 </$list>
 </div>
