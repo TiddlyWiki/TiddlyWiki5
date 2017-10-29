@@ -543,7 +543,24 @@ exports.stringify = function(s) {
 		.replace(/'/g, "\\'")              // single quote character
 		.replace(/\r/g, '\\r')             // carriage return
 		.replace(/\n/g, '\\n')             // line feed
-		.replace(/[\x80-\uFFFF]/g, exports.escape); // non-ASCII characters
+		.replace(/[\x00-\x1f\x80-\uFFFF]/g, exports.escape); // non-ASCII characters
+};
+
+// Turns a string into a legal JSON string
+// Derived from peg.js, thanks to David Majda
+exports.jsonStringify = function(s) {
+	// See http://www.json.org/
+	return (s || "")
+		.replace(/\\/g, '\\\\')            // backslash
+		.replace(/"/g, '\\"')              // double quote character
+		.replace(/\r/g, '\\r')             // carriage return
+		.replace(/\n/g, '\\n')             // line feed
+		.replace(/\x08/g, '\\b')           // backspace
+		.replace(/\x0c/g, '\\f')           // formfeed
+		.replace(/\t/g, '\\t')             // tab
+		.replace(/[\x00-\x1f\x80-\uFFFF]/g,function(s) {
+			return '\\u' + $tw.utils.pad(s.charCodeAt(0).toString(16).toUpperCase(),4);
+		}); // non-ASCII characters
 };
 
 /*

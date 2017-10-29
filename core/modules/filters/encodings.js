@@ -72,6 +72,14 @@ exports.stringify = function(source,operator,options) {
 	return results;
 };
 
+exports.jsonstringify = function(source,operator,options) {
+	var results = [];
+	source(function(tiddler,title) {
+		results.push($tw.utils.jsonStringify(title));
+	});
+	return results;
+};
+
 exports.escaperegexp = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
