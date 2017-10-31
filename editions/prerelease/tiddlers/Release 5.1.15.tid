@@ -10,10 +10,7 @@ type: text/vnd.tiddlywiki
 !! New and Improved Plugins
 
 * New [[Amazon Web Services Plugin]] with primitives for running TiddlyWiki in the cloud
-
-!! Performance Improvements
-
-* 
+* New [[External Attachments Plugin]] that allows automatic creation of [[ExternalImages]] for TiddlyDesktop
 
 !! Translation Improvements
 
@@ -40,6 +37,7 @@ Another improvement that benefits users of translations is the addition of about
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/596dfa1d5058e030a318e4a0f23d078500c3d154]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/a4d919f45caae393f99018e0d797980b3667867f]]) the DropzoneWidget and BrowseWidget to allow the deserializer to be manually specified
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/523280362b529ee73229001a1bcd79272f483908]] new `tc-btn-*` classes to toolbar buttons allowing easier custom styling
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8293a77c6e6870960956dcf1501c687d2f88ea3c]] new ''mode'' attribute to the ViewWidget, allowing control over the parsing mode for wikified output formats
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d7a6816307f4fd47df29cb8e0343ea39c079a2b0]] new [[jsonstringify Operator]]
 
 !! Node.js Improvements
 
@@ -62,6 +60,7 @@ Another improvement that benefits users of translations is the addition of about
 
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/0bc325025a61c265dafe7ce8750ea8deed2be51b]] `$tw.boot.boot()` to add a callback parameter
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/d89010752a8b169a4917bde9a9028ddd871e743d]] navigation handling to pass original event data
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/518f57f4bbc747c3675260eb3ffde1dc7468c805]] new `th-importing-files` hook
 
 ! Contributors
 
