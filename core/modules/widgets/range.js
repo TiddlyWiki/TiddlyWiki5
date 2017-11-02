@@ -3,7 +3,7 @@ title: $:/core/modules/widgets/range.js
 type: application/javascript
 module-type: widget
 
-Checkbox widget
+Range widget
 
 \*/
 (function(){
