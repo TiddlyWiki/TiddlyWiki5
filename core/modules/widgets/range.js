@@ -38,16 +38,16 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 	this.inputDomNode.setAttribute("type","range");
 	this.inputDomNode.setAttribute("class",this.elementClass);
 	if(this.minValue){
-	    this.inputDomNode.setAttribute("min", this.minValue);
+		this.inputDomNode.setAttribute("min", this.minValue);
 	}
 	if(this.maxValue){
-	    this.inputDomNode.setAttribute("max", this.maxValue);
+		this.inputDomNode.setAttribute("max", this.maxValue);
 	}
 	if(this.increment){
-	    this.inputDomNode.setAttribute("step", this.increment);
+		this.inputDomNode.setAttribute("step", this.increment);
 	}
 	this.inputDomNode.value = this.getValue();
-	
+
 
 	// Add a click event handler
 	$tw.utils.addEventListeners(this.inputDomNode,[
@@ -60,19 +60,19 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 
 RangeWidget.prototype.getValue = function() {
 	var tiddler = this.wiki.getTiddler(this.tiddlerTitle),
-	    value   = this.defaultValue;
-    if(tiddler) {
-	    if($tw.utils.hop(tiddler.fields,this.tiddlerField)) {
-		    value = tiddler.fields[this.tiddlerField] || "";
-	    } else {
-		    value = this.defaultValue || "";
-	    }
-    }
+		value   = this.defaultValue;
+	if(tiddler) {
+		if($tw.utils.hop(tiddler.fields,this.tiddlerField)) {
+			value = tiddler.fields[this.tiddlerField] || "";
+		} else {
+			value = this.defaultValue || "";
+		}
+	}
 	return value;
 };
 
 RangeWidget.prototype.handleChangeEvent = function(event) {
-    this.wiki.setText(this.tiddlerTitle ,this.tiddlerField, null,this.inputDomNode.value);
+	this.wiki.setText(this.tiddlerTitle ,this.tiddlerField, null,this.inputDomNode.value);
 };
 
 /*
