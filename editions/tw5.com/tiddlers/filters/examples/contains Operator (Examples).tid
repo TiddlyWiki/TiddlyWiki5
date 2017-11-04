@@ -1,0 +1,8 @@
+title: contains Operator (Examples)
+tags: [[contains Operator]] [[Operator Examples]]
+
+Note: The first example can be done using the [[listed operator|listed Operator]], the second example shows one way this operater differs from listed.
+The large conceptual difference between this operator and listed is that listed tests all tiddlers against an input list of contents, this tests an input list of tiddlers against a given list of contents.
+
+<<.operator-example 1 "[contains[readme]]" "Tiddlers that have readme listed in their list field">>
+<<.operator-example 2 "[contains[readme usage]]" "Tiddlers that have both readme and usage listed in their list field">>

@@ -1,0 +1,8 @@
+title: match Operator (Examples)
+tags: [[match Operator]] [[Operator Examples]]
+
+Note: The first example can be done using the [[field operator|field Operator]], the second example shows one way this operater differs from field.
+The large conceptual difference between this operator and field is that for field you have to have the exact field contents, for this operator you just need to have list but the order of the items on the list isn't important.
+
+<<.operator-example 1 "[match[readme]]" "Tiddlers that have a list field that only lists readme">>
+<<.operator-example 2 "[match[readme usage]]" "Tiddlers that have both readme and usage listed in their list field, and nothing else">>

@@ -1,0 +1,7 @@
+title: overlap Operator (Examples)
+tags: [[overlap Operator]] [[Operator Examples]]
+
+Note: The first example is very similar to the [[tag operator|tag Operator]]. The differences are that it isn't limited to just the tag field and that you can check multiple operands at the same time.
+
+<<.operator-example 1 "[overlap[usage]]" "Tiddlers that have usage listed in their list field">>
+<<.operator-example 2 "[overlap[usage docs]]" "Tiddlers that have either readme or usage or both listed in their list field">>

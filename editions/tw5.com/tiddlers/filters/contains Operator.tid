@@ -1,0 +1,13 @@
+title: contains Operator
+caption: contains
+op-input: a [[selection of titles|Title Selection]]
+op-neg-output: Tiddlers that do not have all of the items from the operand listed in field <<.place F>>
+op-output: Tiddlers that have all of the items from the operand list in field <<.place F>> (there may be other items lised in <<.place F>> in addition to those on the operand list)
+op-parameter: A list of values to check for in field <<.place F>>
+op-parameter-name: S
+op-purpose: To test if every elemenst in the operand list is also listed in a list field.
+op-suffix: The name of a field. Defaults to `list`
+op-suffix-name: F
+tags: [[Field Operators]] [[Filter Operators]] [[Negatable Operators]]
+
+<<.operator-examples "contains">>

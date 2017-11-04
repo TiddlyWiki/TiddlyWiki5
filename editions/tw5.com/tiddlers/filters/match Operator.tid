@@ -1,0 +1,13 @@
+title: match Operator
+caption: match
+op-input: a [[selection of titles|Title Selection]]
+op-neg-output: Tiddlers that do not have exactly the same items from the operand listed in field <<.place F>>
+op-output: Tiddlers that have exactly the same item from the operand list in field <<.place F>> (and no more)
+op-parameter: A list of values to check for in field <<.place F>>
+op-parameter-name: S
+op-purpose: To test if the same a list field and the input list are the same.
+op-suffix: The name of a field. Defaults to `list`
+op-suffix-name: F
+tags: [[Field Operators]] [[Filter Operators]] [[Negatable Operators]]
+
+<<.operator-examples "match">>
