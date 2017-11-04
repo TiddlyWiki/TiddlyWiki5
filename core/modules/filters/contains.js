@@ -47,6 +47,7 @@ Export our filter function
 */
 exports.contains = function(source,operator,options) {
 	var results = [];
+  let invert = operator.prefix === "!";
   // Default to using the list field
   var field = operator.suffix || 'list';
   source (function(tiddler,title) {
@@ -64,9 +65,9 @@ exports.contains = function(source,operator,options) {
       // general for set equality!
       // Test if the difference is empty, if so the sets are equal
       let pass = [...operandSet].filter(x => !intersection.has(x)).length === 0;
-      if (!pass && operator.prefix === "!") {
+      if (!pass && invert) {
         results.push(title);
-      } else if (pass) {
+      } else if (pass && !invert) {
         results.push(title);
       }
     }

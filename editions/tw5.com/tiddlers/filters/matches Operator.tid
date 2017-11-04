@@ -10,4 +10,6 @@ op-suffix: The name of a field. Defaults to `list`
 op-suffix-name: F
 tags: [[Field Operators]] [[Filter Operators]] [[Negatable Operators]]
 
+The matches operator with an empty list as an operand it will return tiddlers that have the field but it is empty.
+
 <<.operator-examples "matches">>

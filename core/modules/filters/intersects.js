@@ -19,6 +19,7 @@ Export our filter function
 exports.intersects = function(source,operator,options) {
 	var results = [];
   var pass = false;
+  var invert = operator.prefix === "!";
   // Default to using the list field
   var field = operator.suffix || 'list';
   source (function(tiddler,title) {
@@ -32,11 +33,11 @@ exports.intersects = function(source,operator,options) {
       let intersection = [...inputSet].filter(x => operandSet.has(x));
       // Test if the intersection is empty
       let pass = intersection.length !== 0;
-      if (!pass && operator.prefix === "!") {
+      if (!pass && invert) {
         // For a negated operator add the title if the intersection is empty
         // no intersects
         results.push(title);
-      } else if (pass) {
+      } else if (pass && !invert) {
         // For a normal operator add if the intersection isn't empty
         // There is some overlap.
         results.push(title);
