@@ -1527,7 +1527,7 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 				});
 			}
 		} else if(stat.isFile()) {
-			tiddlers.push($tw.loadTiddlersFromFile(filepath));
+			tiddlers.push($tw.loadTiddlersFromFile(filepath,{title: filepath}));
 		}
 	}
 	return tiddlers;
