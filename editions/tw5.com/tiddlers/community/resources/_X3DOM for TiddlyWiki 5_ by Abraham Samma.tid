@@ -1,0 +1,11 @@
+created: 20171107175718679
+creator: Ste Willson
+modified: 20171107180105356
+tags: Resources
+title: "X3DOM for TiddlyWiki 5" by Abraham Samma
+type: text/vnd.tiddlywiki
+url: http://x3dom.tiddlyspot.com/
+
+An experiment to embed interactive 3D graphics within TiddlyWiki by [[Abraham Samma|http://zemox.tiddlyspot.com]]. It is based [[X3DOM|https://www.x3dom.org]], an open source JavaScript library.
+
+{{!!url}}
