@@ -48,6 +48,7 @@ Another improvement that benefits users of translations is the addition of about
 
 !! Bug Fixes
 
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/2821]] problem with "new journal" button clearing the text field
 * [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/c069d48a2a690b333c0733328f3574ae8a76e435]] extraneous URI encoding of filename with PUT saver
 * [[Restored|https://github.com/Jermolene/TiddlyWiki5/pull/2940]] ability to use sub-filter with image-picker macro
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/ccac0258af9b6d8c93d41b1f170e20dbf2efe3f3]] problem with the download saver and filenames containing spaces, accents or other characters that need URL encoding
