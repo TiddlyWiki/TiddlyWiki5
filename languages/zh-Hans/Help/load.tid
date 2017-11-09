@@ -1,7 +1,7 @@
 title: $:/language/Help/load
 description: 从文件中加载条目
 
-从 2.x.x TiddlyWiki (`.html`), `.tiddler`, `.tid`, `.json` 或其他文件加载条目
+从 TiddlyWiki (`.html`), `.tiddler`, `.tid`, `.json` 或其他本机文件加载条目
 
 ```
 --load <filepath>
