@@ -17,7 +17,7 @@ Transliterate string to ASCII
 
 (Some pairs taken from http://semplicewebsites.com/removing-accents-javascript)
 */
-var transliterationPairs = {
+exports.transliterationPairs = {
 	"Á":"A",
 	"Ă":"A",
 	"Ắ":"A",
@@ -912,7 +912,7 @@ var transliterationPairs = {
 
 exports.transliterate = function(str) {
 	return str.replace(/[^A-Za-z0-9\[\] ]/g,function(ch) {
-		return transliterationPairs[ch] || ch
+		return exports.transliterationPairs[ch] || ch
 	});
 };
 
