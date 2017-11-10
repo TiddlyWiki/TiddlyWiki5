@@ -1,0 +1,16 @@
+created: 20171109172705241
+modified: 20171109172934929
+tags: Resources plugins
+title: TiddlyDrive Add-on for Google Drive by Joshua Stubbs
+type: text/vnd.tiddlywiki
+url: https://chrome.google.com/webstore/detail/tiddly-drive/oaphhjhbbabdjnpjpiliepphpmnioolo
+
+An add-on for Google Drive that allows TiddlyWiki files stored there to be opened and saved directly
+
+{{!!url}}
+
+<<<
+I made an app that lets one edit TiddlyWiki files saved in your Google drive and then saving them back automagically. The page is here https://chrome.google.com/webstore/detail/tiddly-drive/oaphhjhbbabdjnpjpiliepphpmnioolo but I think you need to add it from the Google Drive web interface.
+
+I even added an optional ability to save with ctrl + s hotkeys.
+<<< [[Joshua's launch post|https://groups.google.com/d/topic/tiddlywiki/7pNJizR57e8/discussion]]
