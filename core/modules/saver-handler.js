@@ -149,7 +149,11 @@ SaverHandler.prototype.saveWiki = function(options) {
 		template = options.template || "$:/core/save/all",
 		downloadType = options.downloadType || "text/plain",
 		text = this.wiki.renderTiddler(downloadType,template,options),
-		callback = function(err) {
+		// callback(err, saverInfo), err = null ... no error
+		// SaverInfo is an Object, that contains info definde by the saver. eg: tiddlyfox.js
+		// as a return value after a successfull write action.
+		callback = function(err,saverInfo) {
+			saverInfo = saverInfo || {};
 			if(err) {
 				alert($tw.language.getString("Error/WhileSaving") + ":\n\n" + err);
 			} else {
@@ -160,7 +164,7 @@ SaverHandler.prototype.saveWiki = function(options) {
 				}
 				$tw.notifier.display(self.titleSavedNotification);
 				if(options.callback) {
-					options.callback();
+					options.callback(saverInfo);
 				}
 			}
 		};
@@ -171,7 +175,7 @@ SaverHandler.prototype.saveWiki = function(options) {
 	// Call the highest priority saver that supports this method
 	for(var t=this.savers.length-1; t>=0; t--) {
 		var saver = this.savers[t];
-		if(saver.info.capabilities.indexOf(method) !== -1 && saver.save(text,method,callback,{variables: {filename: variables.filename}})) {
+		if(saver.info.capabilities.indexOf(method) !== -1 && saver.save(text,method,callback,options)) {
 			this.logger.log("Saving wiki with method",method,"through saver",saver.info.name);
 			return true;
 		}
