@@ -1,7 +1,7 @@
 title: $:/language/Help/save
 description: 将个别原始条目保存到文件
 
-以其原始文本或二进位格式，保存到指定的文件。
+将筛选器标识的个别条目，以原始文本或二进位格式，保存到指定的文件。
 
 ```
 --save <tiddler-filter> <filename-filter>
