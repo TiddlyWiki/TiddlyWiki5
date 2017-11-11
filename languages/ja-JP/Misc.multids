@@ -1,7 +1,7 @@
 title: $:/language/
 
 BinaryWarning/Prompt: このtiddlerにはバイナリデータが含まれています。
-ClassicWarning/Hint: この tiddler はクラシックスタイルのTiddlyWikiフォーマットで書かれています。このフォーマットはTiddlyWiki5との完全な互換性はありません。詳しくは http://tiddlywiki.com/static/Upgrading.html を参照してください。
+ClassicWarning/Hint: この tiddler はクラシックスタイルのTiddlyWikiフォーマットで書かれています。このフォーマットはTiddlyWiki5との完全な互換性はありません。詳しくは https://tiddlywiki.com/static/Upgrading.html を参照してください。
 ClassicWarning/Upgrade/Caption: アップグレード
 CloseAll/Button: すべて閉じる
 ConfirmCancelTiddler: 本当にこのtiddler "<$text text=<<title>>/>" の編集内容を取り消しますか？

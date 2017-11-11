@@ -10,5 +10,5 @@ L'édition <<gf "basique">> de ~TiddlyWiki est une distribution minimale, sans p
 L'édition //basique// peut être récupérée à l'adresse<<dp>>
 
 > {{$:/editions/fr-FR/snippets/download-empty-button}}
-> Si le bouton ne fonctionne pas, enregistrez ce lien<<dp>> http://tiddlywiki.com/languages/fr-FR/empty.html
+> Si le bouton ne fonctionne pas, enregistrez ce lien<<dp>> https://tiddlywiki.com/languages/fr-FR/empty.html
 > Votre navigateur vous demandera peut-être d'accepter explicitement l'enregistrement avant qu'il démarre

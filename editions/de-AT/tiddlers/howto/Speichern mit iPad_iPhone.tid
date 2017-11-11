@@ -14,7 +14,7 @@ Verwendung von TWEdit:
 # Öffnen Sie TWEdit.
 # Tippen Sie den Titel in der Mitte des "Toolbars".
 #* Eine Text Box sollte sich öffnen, in der Sie die URL eingeben können.
-# Verwenden Sie die URL `http://tiddlywiki.com/languages/de-AT/empty.html` oder `http://tiddlywiki.com/languages/de-DE/empty.html`
+# Verwenden Sie die URL `https://tiddlywiki.com/languages/de-AT/empty.html` oder `https://tiddlywiki.com/languages/de-DE/empty.html`
 # Wenn die leere Version geladen wurde, dann tippen Sie "save" (Das zweite "icon" oben rechts)
 #* Ein Hinweis Dialog sollte erscheinen, wo Sie den lokalen Namen eingeben können.
 # Geben Sie den neuen Dateinamen ein. Die Endung `.html` nicht vergessen!

@@ -1,8 +1,8 @@
 title: $:/language/
 
-AboveStory/ClassicPlugin/Warning: Φαίνεται πως προσπαθείτε να φορτώσετε ένα πρόσθετο που έχει σχεδιαστεί για την έκδοση  ~TiddlyWiki Classic. Παρακαλώ σημειώστε ότι [[αυτά τα πρόσθετα δεν λειτουργούν με την έκδοση 5.x.x του TiddlyWiki|http://tiddlywiki.com/#TiddlyWikiClassic]]. Εντοπίστηκε πρόσθετο για την έκδοση ~TiddlyWiki Classic:
+AboveStory/ClassicPlugin/Warning: Φαίνεται πως προσπαθείτε να φορτώσετε ένα πρόσθετο που έχει σχεδιαστεί για την έκδοση  ~TiddlyWiki Classic. Παρακαλώ σημειώστε ότι [[αυτά τα πρόσθετα δεν λειτουργούν με την έκδοση 5.x.x του TiddlyWiki|https://tiddlywiki.com/#TiddlyWikiClassic]]. Εντοπίστηκε πρόσθετο για την έκδοση ~TiddlyWiki Classic:
 BinaryWarning/Prompt: Αυτό το tiddler περιέχει δυαδικά δεδομένα
-ClassicWarning/Hint: Αυτό το tiddler έχει γραφτεί με την TiddlyWiki κλασική μορφή κειμένου, που δεν είναι πλήρως συμβατή με αυτήν του TiddlyWiki 5ης έκδοσης. Δείτε στο  http://tiddlywiki.com/static/Upgrading.html για περισσότερες λεπτομέρειες.
+ClassicWarning/Hint: Αυτό το tiddler έχει γραφτεί με την TiddlyWiki κλασική μορφή κειμένου, που δεν είναι πλήρως συμβατή με αυτήν του TiddlyWiki 5ης έκδοσης. Δείτε στο  https://tiddlywiki.com/static/Upgrading.html για περισσότερες λεπτομέρειες.
 ClassicWarning/Upgrade/Caption: αναβάθμιση
 CloseAll/Button: κλείστα όλα
 ColourPicker/Recent: Πρόσφατα:
@@ -35,7 +35,7 @@ Error/XMLHttpRequest: XMLHttpRequest κωδικός σφάλματος
 InternalJavaScriptError/Hint: Λοιπόν, αυτό είναι αδιέξοδο. Συνιστάτε να επανεκκινήσετε το TiddlyWiki κάνοντας ανανέωση στον φυλλομετρητή σας
 InternalJavaScriptError/Title: Εσωτερικό σφάλμα σε JavaScript
 InvalidFieldName: Μη έγκυροι χαρακτήρες στο όνομα πεδίου "<$text text=<<fieldName>>/>". Τα ονόματα πεδίων μπορούν να περιέχουν μόνο πεζούς χαρακτήρες, ψηφία και τους χαρακτήρες κάτω παύλα (`_`), μείον (`-`) και τελεία (`.`)
-LazyLoadingWarning: <p>Γίνεται φόρτωση εξωτερικού κειμένου από ''<$text text={{!!_canonical_uri}}/>''</p><p>Αν αυτό το μήνυμα δεν εξαφανιστεί ίσως το πρόγραμμα περιήγησης που χρησιμοποιείται να μην υποστηρίζει εξωτερικό κείμενο στις τρέχουσες του ρυθμίσεις. Δείτε σχετικά στο  http://tiddlywiki.com/#ExternalText</p>
+LazyLoadingWarning: <p>Γίνεται φόρτωση εξωτερικού κειμένου από ''<$text text={{!!_canonical_uri}}/>''</p><p>Αν αυτό το μήνυμα δεν εξαφανιστεί ίσως το πρόγραμμα περιήγησης που χρησιμοποιείται να μην υποστηρίζει εξωτερικό κείμενο στις τρέχουσες του ρυθμίσεις. Δείτε σχετικά στο  https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Είσοδος χρήστη στο TiddlySpace
 Manager/Controls/FilterByTag/None: (κανένα)
 Manager/Controls/FilterByTag/Prompt: Φιλτράρισμα με ετικέτα:

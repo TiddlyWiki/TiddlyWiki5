@@ -2,10 +2,10 @@ modified: 20141122200310516
 tags: TableOfContents
 title: HelloThere
 
-Welcome to the developer documentation for TiddlyWiki (http://tiddlywiki.com/). It is currently a work in progress as material from two different sources is adapted and merged in addition to original content being added:
+Welcome to the developer documentation for TiddlyWiki (https://tiddlywiki.com/). It is currently a work in progress as material from two different sources is adapted and merged in addition to original content being added:
 
 * An assignment by Christian Jurke and Christian Heigele, two students working on their Master's degree in Information Technology at the Gießen University of Applied Sciences (Technische Hochschule Mittelhessen). Their work can be seen in the [[Introduction]] and the tiddlers that link from it.
-* The original developer documentation from http://tiddlywiki.com:
+* The original developer documentation from https://tiddlywiki.com:
 ** [[TiddlyWiki for Developers]]
 ** [[TiddlyWiki Coding Style Guidelines]]
 ** [[TiddlyWiki Architecture]]

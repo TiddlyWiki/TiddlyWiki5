@@ -53,7 +53,7 @@ Palette/HideEditor/Caption: Editor ausblenden
 Palette/Prompt: Ausgewählte Farbpalette:
 Palette/ShowEditor/Caption: Editor zeigen
 Parsing/Caption: Parser
-Parsing/Hint: Hier können Sie die globalen Parser-Einstellungen ändern. ACHTUNG: Manche Einstellungen können dazu führen, dass ~TiddlyWiki nicht mehr richtig funktioniert. Sollte das der Fall sein, dann können Sie die Änderungen im [["safe mode"|http://tiddlywiki.com/#SafeMode]] rückgängig machen.
+Parsing/Hint: Hier können Sie die globalen Parser-Einstellungen ändern. ACHTUNG: Manche Einstellungen können dazu führen, dass ~TiddlyWiki nicht mehr richtig funktioniert. Sollte das der Fall sein, dann können Sie die Änderungen im [["safe mode"|https://tiddlywiki.com/#SafeMode]] rückgängig machen.
 Parsing/Block/Caption: Block Regeln
 Parsing/Inline/Caption: Inline Regeln
 Parsing/Pragma/Caption: Pragma Regeln

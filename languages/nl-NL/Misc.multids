@@ -1,8 +1,8 @@
 title: $:/language/
 
-AboveStory/ClassicPlugin/Warning: Het lijkt erop dat je probeert een ~TiddlyWiki Classic plugin te laden. [[Deze plugins werken niet met ~TiddlyWiki version 5.x.x|http://tiddlywiki.com/#TiddlyWikiClassic]]. Gedetecteerde ~TiddlyWiki Classic plugins:
+AboveStory/ClassicPlugin/Warning: Het lijkt erop dat je probeert een ~TiddlyWiki Classic plugin te laden. [[Deze plugins werken niet met ~TiddlyWiki version 5.x.x|https://tiddlywiki.com/#TiddlyWikiClassic]]. Gedetecteerde ~TiddlyWiki Classic plugins:
 BinaryWarning/Prompt: Deze tiddler bevat binaire data
-ClassicWarning/Hint: Deze tiddler is in TiddlyWiki Classic wiki tekstformaat geschreven dat niet geheel compatibel is met TiddlyWiki versie 5. Zie http://tiddlywiki.com/static/Upgrading.html voor meer details.
+ClassicWarning/Hint: Deze tiddler is in TiddlyWiki Classic wiki tekstformaat geschreven dat niet geheel compatibel is met TiddlyWiki versie 5. Zie https://tiddlywiki.com/static/Upgrading.html voor meer details.
 ClassicWarning/Upgrade/Caption: upgrade
 CloseAll/Button: sluit alle
 ConfirmCancelTiddler: Wil je gemaakte wijzigingen aan de tiddler "<$text text=<<title>>/>" annuleren?
@@ -34,7 +34,7 @@ Error/XMLHttpRequest: XMLHttpRequest foutcode
 InternalJavaScriptError/Hint: Er is een probleem. Herstart TiddlyWiki door je browser te verversen
 InternalJavaScriptError/Title: Interne JavaScript fout
 InvalidFieldName: Illegale lettertekens in veldnaam "<$text text=<<fieldName>>/>". Velden kunnen alleen kleine letters, cijfers en de lettertekens liggend streepje (`_`), koppelteken (`-`) en punt (`.`)
-LazyLoadingWarning: <p>Er wordt externe tekst geladen van ''<$text text={{!!_canonical_uri}}/>''</p><p>Als deze mededeling niet verdwijnt ondersteunt de gebruikte browser in deze configuratie mogelijk geen externe tekst. Zie http://tiddlywiki.com/#ExternalText</p>
+LazyLoadingWarning: <p>Er wordt externe tekst geladen van ''<$text text={{!!_canonical_uri}}/>''</p><p>Als deze mededeling niet verdwijnt ondersteunt de gebruikte browser in deze configuratie mogelijk geen externe tekst. Zie https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Login bij TiddlySpace
 Manager/Controls/FilterByTag/None: (geen)
 Manager/Controls/FilterByTag/Prompt: Filter d.m.v. label:

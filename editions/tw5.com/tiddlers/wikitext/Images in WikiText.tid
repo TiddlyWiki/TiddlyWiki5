@@ -11,7 +11,7 @@ Images can be included in WikiText with the following syntax:
 
 ```
 [img[Motovun Jack.jpg]]
-[img[http://tiddlywiki.com/favicon.ico]]
+[img[https://tiddlywiki.com/favicon.ico]]
 ```
 
 You can also insert images from the editor toolbar. Click ''picture'' ({{$:/core/images/picture}}) and select a picture file.

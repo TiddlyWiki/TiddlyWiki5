@@ -53,7 +53,7 @@ Palette/HideEditor/Caption: hide editor
 Palette/Prompt: Current palette:
 Palette/ShowEditor/Caption: show editor
 Parsing/Caption: Parsing
-Parsing/Hint: Here you can globally disable/enable wiki parser rules. For changes to take effect, save and reload your wiki. Disabling certain parser rules can prevent <$text text="TiddlyWiki"/> from functioning correctly. Use [[safe mode|http://tiddlywiki.com/#SafeMode]] to restore normal operation.
+Parsing/Hint: Here you can globally disable/enable wiki parser rules. For changes to take effect, save and reload your wiki. Disabling certain parser rules can prevent <$text text="TiddlyWiki"/> from functioning correctly. Use [[safe mode|https://tiddlywiki.com/#SafeMode]] to restore normal operation.
 Parsing/Block/Caption: Block Parse Rules
 Parsing/Inline/Caption: Inline Parse Rules
 Parsing/Pragma/Caption: Pragma Parse Rules

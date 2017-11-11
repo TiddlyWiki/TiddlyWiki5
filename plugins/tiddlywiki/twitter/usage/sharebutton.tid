@@ -16,5 +16,5 @@ caption: Share Button
 |''related'' |Any comma-separated list of valid Twitter screen names |none |A list of Twitter screen names to be suggested for following after a Tweet or Tweet action is posted |
 |''via'' |Any valid Twitter screen name |none |A Twitter user mentioned in the default Tweet text as via @user where appropriate |
 
-<<twitter-usage """<$twitter type="shareButton" url="http://tiddlywiki.com/" text="Mind blown!"/>
+<<twitter-usage """<$twitter type="shareButton" url="https://tiddlywiki.com/" text="Mind blown!"/>
 """>>

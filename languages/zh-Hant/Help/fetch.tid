@@ -24,14 +24,14 @@ description: 通過網址從維基擷取條目
 
 請注意，TiddlyWiki 不會擷取一個已經載入插件的舊版本。
 
-以下範例從 http://tiddlywiki.com 取回所有非系統條目，並將其儲存到一個 JSON 檔案：
+以下範例從 https://tiddlywiki.com 取回所有非系統條目，並將其儲存到一個 JSON 檔案：
 
 ```
-tiddlywiki --verbose --fetch file "http://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
+tiddlywiki --verbose --fetch file "https://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
 ```
 
-以下範例從 http://tiddlywiki.com 取回 "favicon" 檔案，並將其儲存在名為 "output.ico" 的檔案中。請注意，在 "--fetch" 命令中引用的中間條目 "Icon Tiddler"，因為它被用作轉換篩選器來替換預設的名稱，而 "--savetiddler" 命令沒有引號，因為它是直接用作標題。
+以下範例從 https://tiddlywiki.com 取回 "favicon" 檔案，並將其儲存在名為 "output.ico" 的檔案中。請注意，在 "--fetch" 命令中引用的中間條目 "Icon Tiddler"，因為它被用作轉換篩選器來替換預設的名稱，而 "--savetiddler" 命令沒有引號，因為它是直接用作標題。
 
 ```
-tiddlywiki --verbose --fetch raw-file "http://tiddlywiki.com/favicon.ico" "[[Icon Tiddler]]" --savetiddler "Icon Tiddler" output.ico
+tiddlywiki --verbose --fetch raw-file "https://tiddlywiki.com/favicon.ico" "[[Icon Tiddler]]" --savetiddler "Icon Tiddler" output.ico
 ```

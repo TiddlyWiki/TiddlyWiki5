@@ -2,7 +2,7 @@ title: $:/language/Modals/Download
 type: text/vnd.tiddlywiki
 subtitle: Download changes
 footer: <$button message="tm-close-tiddler">Close</$button>
-help: http://tiddlywiki.com/static/DownloadingChanges.html
+help: https://tiddlywiki.com/static/DownloadingChanges.html
 
 Tu navegador sólo permite guardar manualmente
 

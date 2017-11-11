@@ -2,7 +2,7 @@ title: $:/language/Search/
 
 DefaultResults/Caption: لیست
 Filter/Caption: فیلتر
-Filter/Hint: سرچ از طریق [[filter expression|http://tiddlywiki.com/static/Filters.html]]
+Filter/Hint: سرچ از طریق [[filter expression|https://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small><<resultCount>>همخوانی دارد  </small>//
 Matches: //<small><<resultCount>> همخوانی دارد</small>//
 Matches/All: همه همخوانی کند با:

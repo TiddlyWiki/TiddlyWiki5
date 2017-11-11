@@ -53,7 +53,7 @@ Palette/Prompt: Huidig palet:
 Palette/ShowEditor/Caption: toon editor
 Parsing/Block/Caption: 'Block parse' regels
 Parsing/Caption: 'Parsing' (ontleding)
-Parsing/Hint: Hier kan je globaal individuele wiki 'parser' regels uitzetten. Wees voorzichtig daar het uitzetten van sommige 'parser' regels het juist functioneren van ~Tiddlywiki kan beletten (je kan het normale gedrag herstellen met [['safe mode'|http://tiddlywiki.com/#SafeMode]])
+Parsing/Hint: Hier kan je globaal individuele wiki 'parser' regels uitzetten. Wees voorzichtig daar het uitzetten van sommige 'parser' regels het juist functioneren van ~Tiddlywiki kan beletten (je kan het normale gedrag herstellen met [['safe mode'|https://tiddlywiki.com/#SafeMode]])
 Parsing/Inline/Caption: 'Inline parse' regels
 Parsing/Pragma/Caption: 'Pragma parse' regels
 Plugins/Add/Caption: Verkrijg meer plugins

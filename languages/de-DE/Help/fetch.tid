@@ -21,8 +21,8 @@ Wird `--verbose` vor dem `--fetch` Befehl benutzt, dann werden erweiterte Diagno
 
 Hinweis: ~TiddlyWiki wird ''keine'' veralteten plugins importieren.
 
-Das folgende Beispiel wird alle "nicht-system" Tiddler von http://tiddlywiki.com holen und in ein `JSON` file speichern.
+Das folgende Beispiel wird alle "nicht-system" Tiddler von https://tiddlywiki.com holen und in ein `JSON` file speichern.
 
 ```
-tiddlywiki --verbose --fetch file "http://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
+tiddlywiki --verbose --fetch file "https://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
 ```

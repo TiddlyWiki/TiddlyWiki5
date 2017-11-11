@@ -4,7 +4,7 @@ tags: Mechanisms
 title: SavingMechanism
 type: text/vnd.tiddlywiki
 
-The SavingMechanism is the mechanism by which TiddlyWiki generates a new HTML file and stores it. It is different from the sync mechanism, which is concerned with synchronising changes to individual tiddlers back to a server (see http://tiddlywiki.com/dev/#SyncAdaptorModules for more details).
+The SavingMechanism is the mechanism by which TiddlyWiki generates a new HTML file and stores it. It is different from the sync mechanism, which is concerned with synchronising changes to individual tiddlers back to a server (see https://tiddlywiki.com/dev/#SyncAdaptorModules for more details).
 
 The following steps are involved:
 
@@ -16,4 +16,4 @@ The following steps are involved:
 #* The template includes a reference to `$(publishFilter)$` that allows the filter to be customised via a global variable
 # The [[tm-save-wiki|WidgetMessage: tm-save-wiki]] handler renders the template to generate the HTML file
 # The message handler chooses the highest priority "saver" module that can handle saving the file
-#* See http://tiddlywiki.com/dev/#Saver for more details
+#* See https://tiddlywiki.com/dev/#Saver for more details

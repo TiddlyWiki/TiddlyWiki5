@@ -2,7 +2,7 @@ title: $:/language/Search/
 
 DefaultResults/Caption: Λίστα
 Filter/Caption: Φίλτρο
-Filter/Hint: Αναζήτηση μέσω μιας [[έκφρασης φιλτραρίσματος|http://tiddlywiki.com/static/Filters.html]]
+Filter/Hint: Αναζήτηση μέσω μιας [[έκφρασης φιλτραρίσματος|https://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small><<resultCount>> αποτελέσματα</small>//
 Matches: //<small><<resultCount>> αποτελέσματα</small>//
 Matches/All: Όλα τα αποτελέσματα:

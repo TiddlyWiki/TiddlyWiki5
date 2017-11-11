@@ -1,8 +1,8 @@
 title: $:/language/
 
-AboveStory/ClassicPlugin/Warning: It looks like you are trying to load a plugin designed for ~TiddlyWiki Classic. Please note that [[these plugins do not work with TiddlyWiki version 5.x.x|http://tiddlywiki.com/#TiddlyWikiClassic]]. ~TiddlyWiki Classic plugins detected:
+AboveStory/ClassicPlugin/Warning: It looks like you are trying to load a plugin designed for ~TiddlyWiki Classic. Please note that [[these plugins do not work with TiddlyWiki version 5.x.x|https://tiddlywiki.com/#TiddlyWikiClassic]]. ~TiddlyWiki Classic plugins detected:
 BinaryWarning/Prompt: This tiddler contains binary data
-ClassicWarning/Hint: This tiddler is written in TiddlyWiki Classic wiki text format, which is not fully compatible with TiddlyWiki version 5. See http://tiddlywiki.com/static/Upgrading.html for more details.
+ClassicWarning/Hint: This tiddler is written in TiddlyWiki Classic wiki text format, which is not fully compatible with TiddlyWiki version 5. See https://tiddlywiki.com/static/Upgrading.html for more details.
 ClassicWarning/Upgrade/Caption: upgrade
 CloseAll/Button: close all
 ColourPicker/Recent: Recent:
@@ -35,7 +35,7 @@ Error/XMLHttpRequest: XMLHttpRequest error code
 InternalJavaScriptError/Title: Internal JavaScript Error
 InternalJavaScriptError/Hint: Well, this is embarrassing. It is recommended that you restart TiddlyWiki by refreshing your browser
 InvalidFieldName: Illegal characters in field name "<$text text=<<fieldName>>/>". Fields can only contain lowercase letters, digits and the characters underscore (`_`), hyphen (`-`) and period (`.`)
-LazyLoadingWarning: <p>Trying to load external content from ''<$text text={{!!_canonical_uri}}/>''</p><p>If this message doesn't disappear, either the tiddler content type doesn't match the type of the external content, or you may be using a browser that doesn't support external content for wikis loaded as standalone files. See http://tiddlywiki.com/#ExternalText</p>
+LazyLoadingWarning: <p>Trying to load external content from ''<$text text={{!!_canonical_uri}}/>''</p><p>If this message doesn't disappear, either the tiddler content type doesn't match the type of the external content, or you may be using a browser that doesn't support external content for wikis loaded as standalone files. See https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Login to TiddlySpace
 Manager/Controls/FilterByTag/None: (none)
 Manager/Controls/FilterByTag/Prompt: Filter by tag:

@@ -76,7 +76,7 @@ Plugins/Reinstall/Caption: 重新安装
 Plugins/Themes/Caption: 布景主题
 Plugins/Themes/Hint: 布景主题插件
 Parsing/Caption: 解析
-Parsing/Hint: 在此您可以全域禁用或启用维基解析规则。要使更改生效，请保存并重新加载您的维基。禁用某些解析规则，会妨碍 <$text text="TiddlyWiki"/> 正常运作。可使用[[安全模式|http://tiddlywiki.com/#SafeMode]]恢复正常操作。
+Parsing/Hint: 在此您可以全域禁用或启用维基解析规则。要使更改生效，请保存并重新加载您的维基。禁用某些解析规则，会妨碍 <$text text="TiddlyWiki"/> 正常运作。可使用[[安全模式|https://tiddlywiki.com/#SafeMode]]恢复正常操作。
 Parsing/Block/Caption: 区块解析规则
 Parsing/Inline/Caption: 内联解析规则
 Parsing/Pragma/Caption: 编译指示解析规则

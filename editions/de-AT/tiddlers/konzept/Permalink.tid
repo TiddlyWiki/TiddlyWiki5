@@ -6,11 +6,11 @@ type: text/vnd.tiddlywiki
 
 Die einfachste Form eines Permalinks ist ein Link auf einen einzelnen Tiddler. Dazu wird die URL mit `#` erweitert.
 
-* http://tiddlywiki.com/languages/de-DE/#Willkommen!
+* https://tiddlywiki.com/languages/de-DE/#Willkommen!
 
 Der Titel kann Leerzeichen enthalten:
 
-* [[http://tiddlywiki.com/languages/de-DE/#Was kann TiddlyWiki]]
+* [[https://tiddlywiki.com/languages/de-DE/#Was kann TiddlyWiki]]
 
 Hinweis: Doppelte eckige Klammern sind hier nicht erforderlich. Wenn vorhanden, werden sie entfernt.
 

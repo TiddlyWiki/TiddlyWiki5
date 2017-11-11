@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 # Redémarrez Internet Explorer. IE vous demandera si vous voulez activer l'extension TiddlyIE.
 #> Il se peut aussi que vous ayez à activer le //Microsoft Scripting Runtime//
 # [[Téléchargez|Download]] un <<tw>> vide en enregistrant ce lien<<dp>>
-#> http://tiddlywiki.com/languages/fr-FR/empty.html
+#> https://tiddlywiki.com/languages/fr-FR/empty.html
 # Localisez le fichier que vous venez de télécharger
 #* Vous pouvez le renommer, mais assurez-vous de conserver l'extension `.html` ou `.htm`
 # Ouvrez le fichier dans Internet Explorer

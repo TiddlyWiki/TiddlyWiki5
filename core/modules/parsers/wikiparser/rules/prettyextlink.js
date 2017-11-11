@@ -6,8 +6,8 @@ module-type: wikirule
 Wiki text inline rule for external links. For example:
 
 ```
-[ext[http://tiddlywiki.com/fractalveg.jpg]]
-[ext[Tooltip|http://tiddlywiki.com/fractalveg.jpg]]
+[ext[https://tiddlywiki.com/fractalveg.jpg]]
+[ext[Tooltip|https://tiddlywiki.com/fractalveg.jpg]]
 ```
 
 \*/

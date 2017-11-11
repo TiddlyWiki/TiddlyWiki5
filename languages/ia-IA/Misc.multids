@@ -1,7 +1,7 @@
 title: $:/language/
 
 BinaryWarning/Prompt: Iste nota contine datos binari
-ClassicWarning/Hint: Iste nota es scribite in le formato textual wiki TiddlyWiki Classic, que non es plenmente compatibile con TiddlyWiki version 5. Vide http://tiddlywiki.com/static/Upgrading.html pro plus de detalios. 
+ClassicWarning/Hint: Iste nota es scribite in le formato textual wiki TiddlyWiki Classic, que non es plenmente compatibile con TiddlyWiki version 5. Vide https://tiddlywiki.com/static/Upgrading.html pro plus de detalios. 
 ClassicWarning/Upgrade/Caption: modernisa
 CloseAll/Button: claude omnes
 ConfirmCancelTiddler: Desira tu annullar cambios al nota "<$text text=<<title>>/>"?

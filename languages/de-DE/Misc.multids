@@ -1,8 +1,8 @@
 title: $:/language/
 
-AboveStory/ClassicPlugin/Warning: Es scheint, Sie möchten ein Plugin verwenden, dass für [[TiddlyWiki Classic|http://tiddlywiki.com/#TiddlyWikiClassic]] entwickelt wurde. Diese Plugins können jedoch mit ~TiddlyWiki Version 5 nicht verwendet werden. ~TiddlyWiki Classic plugin erkannt:
+AboveStory/ClassicPlugin/Warning: Es scheint, Sie möchten ein Plugin verwenden, dass für [[TiddlyWiki Classic|https://tiddlywiki.com/#TiddlyWikiClassic]] entwickelt wurde. Diese Plugins können jedoch mit ~TiddlyWiki Version 5 nicht verwendet werden. ~TiddlyWiki Classic plugin erkannt:
 BinaryWarning/Prompt: Dieser Tiddler enthält binäre Daten.
-ClassicWarning/Hint: Dieser Tiddler wurde im TiddlyWiki Classic Format erstellt. Dieses Format ist nur teilweise kompatibel mit TiddlyWiki Version 5. Mehr Info finden Sie unter: http://tiddlywiki.com/static/Upgrading.html
+ClassicWarning/Hint: Dieser Tiddler wurde im TiddlyWiki Classic Format erstellt. Dieses Format ist nur teilweise kompatibel mit TiddlyWiki Version 5. Mehr Info finden Sie unter: https://tiddlywiki.com/static/Upgrading.html
 ClassicWarning/Upgrade/Caption: upgrade
 CloseAll/Button: alle schließen
 ColourPicker/Recent: Kürzlich:
@@ -35,7 +35,7 @@ Error/XMLHttpRequest: XMLHttpRequest Fehler-Code
 InternalJavaScriptError/Title: Interner JavaScript Fehler
 InternalJavaScriptError/Hint: Es tut uns leid, aber bitte starten Sie Ihr TiddlyWiki neu, indem sie die Seite im Browser neu laden.
 InvalidFieldName: Das Feld: "<$text text=<<fieldName>>/>" enthält illegale Zeichen. Felder müssen klein geschrieben werden. Erlaubte Sonderzeichen sind: Zahlen, Unterstrich (`_`), Minus (`-`) und Punkt (`.`).
-LazyLoadingWarning: <p>Lade externe Datei von ''<$text text={{!!_canonical_uri}}/>''</p><p>Wenn diese Meldung nicht automatisch gelöscht wird, dann verwenden Sie wahrscheinlich einen Browser der diese Funktion nicht unterstützt. Siehe http://tiddlywiki.com/#ExternalText</p>
+LazyLoadingWarning: <p>Lade externe Datei von ''<$text text={{!!_canonical_uri}}/>''</p><p>Wenn diese Meldung nicht automatisch gelöscht wird, dann verwenden Sie wahrscheinlich einen Browser der diese Funktion nicht unterstützt. Siehe https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Login bei TiddlySpace
 Manager/Controls/FilterByTag/None: (kein)
 Manager/Controls/FilterByTag/Prompt: Filtern nach tag:

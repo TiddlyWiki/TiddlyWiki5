@@ -20,9 +20,9 @@ On obtient des informations concernant la progression de l'importation en faisan
 
 Il faut noter que TiddlyWiki ne téléchargera pas une version plus ancienne d'un plugin déjà chargé.
 
-L'exemple ci-dessous récupère tous les tiddlers non-système de http://tiddlywiki.com et les enregistre dans un fichier JSON :
+L'exemple ci-dessous récupère tous les tiddlers non-système de https://tiddlywiki.com et les enregistre dans un fichier JSON :
 
 ```
-tiddlywiki --verbose --fetch file "http://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
+tiddlywiki --verbose --fetch file "https://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
 ```
 

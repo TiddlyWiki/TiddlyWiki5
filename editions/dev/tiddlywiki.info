@@ -1,5 +1,5 @@
 {
-	"description": "Developer documentation from http://tiddlywiki.com/dev/",
+	"description": "Developer documentation from https://tiddlywiki.com/dev/",
 	"plugins": [
 		"tiddlywiki/highlight",
 		"tiddlywiki/googleanalytics",

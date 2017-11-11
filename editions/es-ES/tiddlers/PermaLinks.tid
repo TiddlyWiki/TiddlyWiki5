@@ -12,11 +12,11 @@ Un <<.def permalink>> permite enlaces directos a tiddlers individuales de un ~Ti
 
 La forma más simple de un permalink es un enlace sencillo adjunto a la dirección de base con `#`:
 
-http://tiddlywiki.com/#HelloThere
+https://tiddlywiki.com/#HelloThere
 
 El título del tiddler puede contener espacios si es necesario:
 
-[[http://tiddlywiki.com/#Using TiddlyWiki on Node.js]]
+[[https://tiddlywiki.com/#Using TiddlyWiki on Node.js]]
 
 No es necesario encerrar el título en corchetes dobles, aunque si lo haces, no pasa nada, porque se elmininan.
 
@@ -24,17 +24,17 @@ No es necesario encerrar el título en corchetes dobles, aunque si lo haces, no 
 
 El permalink también puede definir la secuencia de tiddlers que se abre junto al tiddler principal, como hace un [[filtro|Filters]]:
 
-[[http://tiddlywiki.com/#TiddlerFields:Tiddlers TiddlerTags TiddlerFields ContentType]]
+[[https://tiddlywiki.com/#TiddlerFields:Tiddlers TiddlerTags TiddlerFields ContentType]]
 
 Si el tiddler principal no está presente entre los tiddlers de la StoryRiver, se inserta automáticamente al principio, lo que significa que estos dos ejemplos apuntan al tiddler <<.tid Tiddlers>> en la secuencia <<.tid "Tiddlers, Tags, ~TiddlerFields">>:
 
-[[http://tiddlywiki.com/#Tiddlers:Tags TiddlerFields]]
+[[https://tiddlywiki.com/#Tiddlers:Tags TiddlerFields]]
 
-[[http://tiddlywiki.com/#Tiddlers:Tiddlers Tags TiddlerFields]]
+[[https://tiddlywiki.com/#Tiddlers:Tiddlers Tags TiddlerFields]]
 
 También es posible definir un filtro sin especificar un tiddler en concreto:
 
-<a href="http://tiddlywiki.com/#:[tags[task]]">~http://tiddlywiki.com/#:[tags[task]]</a>
+<a href="https://tiddlywiki.com/#:[tags[task]]">~https://tiddlywiki.com/#:[tags[task]]</a>
 
 ! Codificación de URL's
 

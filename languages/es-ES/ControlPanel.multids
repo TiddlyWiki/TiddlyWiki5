@@ -54,7 +54,7 @@ Palette/ShowEditor/Caption: Abrir el editor
 Parsing/Block/Caption: Bloquear reglas sintácticas
 Parsing/Caption: Interpretación sintáctica
 Parsing/Hint: Aquí se pueden deshabilitar globalmente reglas de interpretación sintáctica del wiki. Ten cuidado: deshabilitar ciertas reglas puede hacer que ~TiddlyWiki deje de funcionar correctamente.
-En tal caso, puedes recuperar su normal funcionamiento en [[modo seguro|http://tiddlywiki.com/#SafeMode]].
+En tal caso, puedes recuperar su normal funcionamiento en [[modo seguro|https://tiddlywiki.com/#SafeMode]].
 Parsing/Inline/Caption: Reglas sintácticas de texto
 Parsing/Pragma/Caption: Reglas sintácticas del compilador
 Plugins/Add/Caption: Obten complementos y extensiones

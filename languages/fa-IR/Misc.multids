@@ -1,8 +1,8 @@
 title: $:/language/
 
-AboveStory/ClassicPlugin/Warning: به نظر می‌آید که قصد استفاده از افزونه‌ای را داری که برای ~TiddlyWiki Classic طراحی شده‌است. لطفن توجه کن که [[این افزونه‌ها با تیدلی‌ویکی ویرایش 5.x.x|http://tiddlywiki.com/#TiddlyWikiClassic کار نمی‌کند]]. افزونه‌های ~TiddlyWiki Classic شناسایی شده:
+AboveStory/ClassicPlugin/Warning: به نظر می‌آید که قصد استفاده از افزونه‌ای را داری که برای ~TiddlyWiki Classic طراحی شده‌است. لطفن توجه کن که [[این افزونه‌ها با تیدلی‌ویکی ویرایش 5.x.x|https://tiddlywiki.com/#TiddlyWikiClassic کار نمی‌کند]]. افزونه‌های ~TiddlyWiki Classic شناسایی شده:
 BinaryWarning/Prompt: این تیدلر شامل اطلاعات بایناری است
-ClassicWarning/Hint: این تیدلر با فرمت تیدلی‌ویکی کلاسیک نوشته شده است, که با تیدلی‌ویکی ویرایش ۵ هماهنگ نیست. برای اطلاعات بیشتر  http://tiddlywiki.com/static/Upgrading.html را ببین.
+ClassicWarning/Hint: این تیدلر با فرمت تیدلی‌ویکی کلاسیک نوشته شده است, که با تیدلی‌ویکی ویرایش ۵ هماهنگ نیست. برای اطلاعات بیشتر  https://tiddlywiki.com/static/Upgrading.html را ببین.
 ClassicWarning/Upgrade/Caption: بروزرسانی
 CloseAll/Button: همه را ببند
 ColourPicker/Recent: تازه‌ها:
@@ -35,7 +35,7 @@ Error/XMLHttpRequest: XMLHttpRequest error code
 InternalJavaScriptError/Hint: اوه این خجالت آوره. پیشنهاد می‌کنیم که با ریفرش کردن مرورگرتون تیدلی‌ویکی رو دوباره باز کنین
 InternalJavaScriptError/Title: خطای  JavaScript داخلی
 InvalidFieldName: Illegal characters in field name "<$text text=<<fieldName>>/>". Fields can only contain lowercase letters, digits and the characters underscore (`_`), hyphen (`-`) and period (`.`)
-LazyLoadingWarning: <p>Loading external text from ''<$text text={{!!_canonical_uri}}/>''</p><p>If this message doesn't disappear you may be using a browser that doesn't support external text in this configuration. See http://tiddlywiki.com/#ExternalText</p>
+LazyLoadingWarning: <p>Loading external text from ''<$text text={{!!_canonical_uri}}/>''</p><p>If this message doesn't disappear you may be using a browser that doesn't support external text in this configuration. See https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Login to TiddlySpace
 Manager/Controls/FilterByTag/None: (هیچ)
 Manager/Controls/FilterByTag/Prompt: فیتلر با استفاده از برچسب‌ها:

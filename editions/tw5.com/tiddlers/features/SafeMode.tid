@@ -12,7 +12,7 @@ Safe mode provides a way to disabling most customisations in TiddlyWiki. This is
 
 Safe mode is enabled in the browser by starting TiddlyWiki with the URL hash set to the string `#:safe`. For example:
 
-http://tiddlywiki.com/#:safe
+https://tiddlywiki.com/#:safe
 
 ! How Safe Mode Works
 

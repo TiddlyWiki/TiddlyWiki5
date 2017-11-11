@@ -41,6 +41,6 @@ Macros are available to the tiddler that defines them, plus any tiddlers that it
 
 To make a macro available to all tiddlers, define it in a tiddler that has the tag <<.tag $:/tags/Macro>>.
 
-It is also possible to write a macro as a [[JavaScript module|http://tiddlywiki.com/dev/index.html#JavaScript%20Macros]]. ~JavaScript macros are available to all tiddlers, and offer the maximum flexibility.
+It is also possible to write a macro as a [[JavaScript module|https://tiddlywiki.com/dev/index.html#JavaScript%20Macros]]. ~JavaScript macros are available to all tiddlers, and offer the maximum flexibility.
 
 A tiddler can manually import macro definitions from a [[selection|Title Selection]] of other tiddlers by using the <<.wlink ImportVariablesWidget>> widget.
