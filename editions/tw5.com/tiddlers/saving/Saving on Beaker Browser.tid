@@ -1,7 +1,11 @@
-caption: Beaker
+caption: Beaker Browser
 created: 20161229121316912
-modified: 20170920171216378
-title: GettingStarted - Beaker Browser
+delivery: App
+description: Powerful new browser for Mac, Windows and Linux
+method: save
+modified: 20171113110603084
+tags: Saving Windows Linux Mac
+title: Saving on Beaker Browser
 type: text/vnd.tiddlywiki
 
 <<.from-version "5.1.14">> TiddlyWiki incorporates a saver module that allows it to save changes directly with the [[Beaker Browser]], an experimental peer-to-peer browser.

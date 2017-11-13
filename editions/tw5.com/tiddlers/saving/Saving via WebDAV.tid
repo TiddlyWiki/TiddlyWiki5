@@ -1,8 +1,11 @@
 caption: WebDAV
 created: 20160216191710789
-modified: 20160216204613016
-tags: 
-title: GettingStarted - WebDAV
+delivery: Protocol
+description: Standard web protocol 
+method: save
+modified: 20171113131940278
+tags: Saving Android Chrome Firefox InternetExplorer iOS Linux Mac Opera PHP Safari Windows
+title: Saving via WebDAV
 type: text/vnd.tiddlywiki
 
 If hosted on a [[WebDAV|https://en.wikipedia.org/wiki/WebDAV]]-enabled server, TiddlyWiki will automatically save changes via HTTP.

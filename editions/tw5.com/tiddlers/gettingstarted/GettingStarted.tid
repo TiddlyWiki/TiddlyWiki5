@@ -1,17 +1,14 @@
 created: 20131129090249275
-modified: 20160622111349475
+modified: 20171113130751278
 tags: [[Working with TiddlyWiki]]
 title: GettingStarted
 type: text/vnd.tiddlywiki
 
-\define default-platform()
-GettingStarted - $(browser-name)$
-\end
 Brief instructions for getting started on the different platforms and configurations that TiddlyWiki supports. See the [[A Gentle Guide to TiddlyWiki]] for a more leisurely introduction.
 
-<$set name="browser-name" value={{$:/info/browser/name}}>
-<$macrocall $name="tabs" state="$:/state/tabs/platform" tabsList="[prefix[GettingStarted - ]]" default=<<default-platform>> class="tc-vertical"/>
-</$set>
+The first step is to choose a method for saving changes. There's a wide variety of methods available, with different features and limitations. Click on the badge for a method to see more information about it. You can also click on one of the platform filters to restrict the listing to methods that work with that platform.
+
+{{Saving}}
 
 Troubleshooting:
 
@@ -20,8 +17,6 @@ Troubleshooting:
 See also:
 
 * [[Encryption]] explains how to use TiddlyWiki's built-in encryption to protect your content with a password
-* [[Saving on TiddlySpot]], a free service that lets you use TiddlyWiki online
-* Saving on TiddlyDesktop, a custom desktop application for working with TiddlyWiki
 * You can also download this full TiddlyWiki including all the documentation:
 
 <<<

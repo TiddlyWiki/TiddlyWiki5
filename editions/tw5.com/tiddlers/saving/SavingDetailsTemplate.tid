@@ -1,0 +1,25 @@
+title: $:/SavingDetailsTemplate
+
+<h1><$link to=<<currentTab>>><$view tiddler=<<currentTab>> field="title"/></$link></h1>
+<div class="tc-saving-details-wrapper">
+<div class="tc-saving-details-method">
+Method: <$view tiddler=<<currentTab>> field="method"/>
+</div>
+<div class="tc-saving-details-delivery">
+Delivery: <$view tiddler=<<currentTab>> field="delivery"/>
+</div>
+<div class="tc-saving-details-platforms">
+Platforms:
+<$set name="platforms" tiddler=<<currentTab>> field="platforms">
+<$list filter="[enlist<platforms>sort[]]" variable="platform">
+<span class="tc-saving-details-platform">
+<$text text=<<platform>>/>
+</span>
+</$list>
+</$set>
+</div>
+</div>
+
+<$tiddler tiddler=<<currentTab>>>
+<$transclude tiddler=<<currentTab>> field="text" mode="block"/>
+</$tiddler>

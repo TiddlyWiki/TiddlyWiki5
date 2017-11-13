@@ -1,6 +1,10 @@
+caption: PHP
 created: 20140111091844267
-modified: 20161219200127042
-tags: Saving
+delivery: DIY
+description: DIY script you can install on your own server
+method: save
+modified: 20171113105946993
+tags: Saving PHP
 title: Saving on a PHP Server
 type: text/vnd.tiddlywiki
 

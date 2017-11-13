@@ -1,6 +1,10 @@
+caption: Node.js
 created: 20131219100608529
-modified: 20170608135250979
-tags: [[TiddlyWiki on Node.js]]
+delivery: DIY
+description: Flexible hosting on your own machine or in the cloud
+method: sync
+modified: 20171113105844352
+tags: Saving [[TiddlyWiki on Node.js]] Windows Mac Linux
 title: Installing TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
 
