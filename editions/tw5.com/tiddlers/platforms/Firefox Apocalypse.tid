@@ -1,5 +1,5 @@
 created: 20171109170823847
-modified: 20171110100253897
+modified: 20171113161750857
 tags: Platforms
 title: Firefox Apocalypse
 type: text/vnd.tiddlywiki
@@ -42,4 +42,4 @@ Those two characteristics present similar security challenges to TiddlyWiki as t
 
 ! The Future
 
-Innovation on new browser-based user interfaces and capabilities has now shifted from browser extensions to a new generation of frameworks that simplify creation of a custom browser based on an off-the-shelf open source HTML rendering engine. TiddlyDesktop uses [[nwjs|https://nwjs.io]], but [[Electron|https://electron.atom.io/]] is now very popular too.
+Innovation on new browser-based user interfaces and capabilities has now shifted from browser extensions to a new generation of frameworks that simplify creation of a custom browser based on an off-the-shelf open source HTML rendering engine. TiddlyDesktop uses [[nwjs|https://nwjs.io]], while [[Beaker Browser]] uses an alternative called [[Electron|https://electron.atom.io/]].

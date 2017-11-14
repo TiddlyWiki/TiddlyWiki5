@@ -32,5 +32,6 @@ PLATFORMS:
 <$macrocall $name="filter-button" caption=<<currentTiddler>> filter=<<filter-maker>>/>
 </$list>
 </div>
+<br/>
 <$macrocall $name="tabs" tabsList={{$:/SavingDetailsFilter}} template="$:/SavingDetailsTemplate" buttonTemplate="$:/SavingThumbnailsTemplate"/>
 </div>

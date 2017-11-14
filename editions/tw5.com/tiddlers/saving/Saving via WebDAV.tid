@@ -1,9 +1,9 @@
 caption: WebDAV
 created: 20160216191710789
 delivery: Protocol
-description: Standard web protocol 
+description: Standard web protocol available on products such as Sharepoint
 method: save
-modified: 20171113131940278
+modified: 20171113160440615
 tags: Saving Android Chrome Firefox InternetExplorer iOS Linux Mac Opera PHP Safari Windows
 title: Saving via WebDAV
 type: text/vnd.tiddlywiki
