@@ -3,7 +3,7 @@ created: 20140111091844267
 delivery: DIY
 description: DIY script you can install on your own server
 method: save
-modified: 20171114212220389
+modified: 20171115171431733
 tags: Saving PHP
 title: Saving on a PHP Server
 type: text/vnd.tiddlywiki
@@ -44,4 +44,4 @@ php_value post_max_size 6M
 
 !!! Note about possible error message
 
-If you get an error message regarding `preg_split()`, you may need to change references  to `preg_split` in ''store.php'' to function `explode` .
+If you get an error message regarding `split()`, you may need to change references  to `split` in ''store.php'' to function `explode` .
