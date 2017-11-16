@@ -6,12 +6,15 @@ Abrufen eines oder mehrerer Dateien über HTTP/HTTPS. Importieren der tiddler, d
 ```
 --fetch file <url> <import-filter> <transform-filter>
 --fetch files <url-filter> <import-filter> <transform-filter>
+--fetch raw-file <url> <transform-filter>
+--fetch raw-files <url-filter> <transform-filter>
 ```
 
-Wird der `file` parameter verwendet, wird nur eine einzelne Datei geholt. Der erste Parameter ist die URL von der die Datei geladen werden soll.
+Wird der `file` parameter verwendet, wird nur eine einzelne Datei geholt. Der erste Parameter ist die URL von der die Datei ''importiert'' werden soll.
 
 Wird der `files` parameter verwendet, werden mehrere Dateien geholt. In diesem Fall ist der erste Parameter ein Filter, der eine Liste von URLs ergibt, von denen die Dateien gelesen werden sollen. Zum Beispiel: Mehrere Tiddler sind getagged mit: `remote-server` und enthalten ein Feld: `url`. ... Der Filter `[tag[remote-server]get[url]]` wird alle verfügbaren URLs ansprechen.
 
+Werden die `raw-file` oder `raw-files` varianten verwendet, wird der Klartext der Datei importiert. Es wird nicht versucht die Import-logik anzuwenden.
 
 Der `<import-filter>` Parameter, spezifiziert jene Tiddler, die importiert werden sollen. Standard ist: `[all[tiddlers]]`, wenn nichts angegeben wird.
 
@@ -26,3 +29,16 @@ Das folgende Beispiel wird alle "nicht-system" Tiddler von https://tiddlywiki.co
 ```
 tiddlywiki --verbose --fetch file "https://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
 ```
+
+Das folgende Beispiel holt die "favicon" Datei von tiddlywiki.com und speichert sie als "output.ico".
+
+```
+tiddlywiki --verbose --fetch raw-file "https://tiddlywiki.com/favicon.ico" "[[Icon Tiddler]]" --savetiddler "Icon Tiddler" output.ico
+```
+
+''Wichtig!''
+
+Es wird darauf hingewiesen, dass der parameter `"[[Icon Tiddler]]"` für den `--fetch` Befehl zusätzliche Klammern enthält. Er wird hier als Tranformations-Filter verwendet!
+
+Der zweite `"Icon Tiddler"` parameter für `--savetiddler` enthält keine eckigen Klammern. Er wird als Dateiname verwendet
+
