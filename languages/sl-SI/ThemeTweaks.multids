@@ -1,0 +1,41 @@
+title: $:/language/ThemeTweaks/
+
+Metrics: Velikost
+Metrics/BodyFontSize: Velikost pisave za vsebino tiddlerja
+Metrics/BodyLineHeight: Višina vrstice za vsebino tiddlerja
+Metrics/FontSize: Velikost pisave
+Metrics/LineHeight: Višina vrstice
+Metrics/SidebarBreakpoint: Prelom stranske vrstice
+Metrics/SidebarBreakpoint/Hint: najmanjša širina strani, pri kateri bosta zgodba<br>(reka tiddlerjev) in stranska vrstica prikazani vzporedno
+Metrics/SidebarWidth: Širina stranske vrstice
+Metrics/SidebarWidth/Hint: širina stranske vrstice pri variabilno/fiksni postavitvi
+Metrics/StoryLeft: Zgodba položaj levo
+Metrics/StoryLeft/Hint: kako daleč je levi rob zgodbe<br>(območje tiddlerja) od levega roba strani
+Metrics/StoryRight: Zgodba položaj desno
+Metrics/StoryRight/Hint: kako daleč je levi rob stranske vrstice od levega roba strani
+Metrics/StoryTop: Zgodba položaj zgoraj
+Metrics/StoryTop/Hint: kako daleč je zgornji rob zgodbe<br>(reka tiddlerjev) od vrha strani
+Metrics/StoryWidth: Širina zgodbe
+Metrics/StoryWidth/Hint: celotna širina zgodbe (reke tiddlerjev)
+Metrics/TiddlerWidth: Širina tiddlerja 
+Metrics/TiddlerWidth/Hint: v zgodbi (reki tiddlerjev)
+Options: Možnosti
+Options/CodeWrapping: Prelomi dolge vrstice v blokih kode
+Options/SidebarLayout: Postavitev stranske vrstice
+Options/SidebarLayout/Fixed-Fluid: Fiksna zgodba, variabilna stranska vrstica
+Options/SidebarLayout/Fluid-Fixed: Variabilna zgodba, fiksna stranska vrstica
+Options/StickyTitles: Lepljivi naslovi
+Options/StickyTitles/Hint: Naslovi tiddlerja, naj se »držijo« na vrhu okna brskalnika. Opozorilo: sploh ne deluje s Chromom in povzroča težave s postavitvijo v Firefoxu
+Settings: Nastavitve
+Settings/BackgroundImage: slika ozadja strani
+Settings/BackgroundImageAttachment: Priponka slike za ozadje strani
+Settings/BackgroundImageAttachment/Fixed: Fiksen položaj v oknu
+Settings/BackgroundImageAttachment/Scroll: Pomika se z vsebino
+Settings/BackgroundImageSize: Velikost slike ozadja strani
+Settings/BackgroundImageSize/Auto: Samodejno
+Settings/BackgroundImageSize/Contain: Prilagodi
+Settings/BackgroundImageSize/Cover: Prekrij
+Settings/CodeFontFamily: Družina pisav kode
+Settings/FontFamily: Družina pisav
+ThemeTweaks: Prilagoditev teme
+ThemeTweaks/Hint: Prilagodite lahko nekatere elemente standardne ''Vanilla'' teme.
