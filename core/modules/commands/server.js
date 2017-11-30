@@ -143,7 +143,7 @@ SimpleServer.prototype.requestHandler = function(request,response) {
 };
 	
 SimpleServer.prototype.listen = function(port,host) {
-	http.createServer(this.requestHandler.bind(this)).listen(port,host);
+	return http.createServer(this.requestHandler.bind(this)).listen(port,host);
 };
 
 var Command = function(params,commander,callback) {
