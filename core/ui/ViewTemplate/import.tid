@@ -1,6 +1,11 @@
 title: $:/core/ui/ViewTemplate/import
 tags: $:/tags/ViewTemplate
 
+\define cmd()
+<$button><$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-sendmessage $message="tm-close-tiddler"/><<lingo Listing/Cancel/Caption>></$button>
+<$button message="tm-perform-import" param=<<currentTiddler>>><<lingo Listing/Import/Caption>></$button>
+\end
+
 \define lingo-base() $:/language/Import/
 
 <$list filter="[all[current]field:plugin-type[import]]">
@@ -9,13 +14,11 @@ tags: $:/tags/ViewTemplate
 
 <<lingo Listing/Hint>>
 
-<$button><$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-sendmessage $message="tm-close-tiddler"/><<lingo Listing/Cancel/Caption>></$button>
-<$button message="tm-perform-import" param=<<currentTiddler>>><<lingo Listing/Import/Caption>></$button>
+<<cmd>>
 
 {{||$:/core/ui/ImportListing}}
 
-<$button><$action-deletetiddler $tiddler=<<currentTiddler>>/><$action-sendmessage $message="tm-close-tiddler"/><<lingo Listing/Cancel/Caption>></$button>
-<$button message="tm-perform-import" param=<<currentTiddler>>><<lingo Listing/Import/Caption>></$button>
+<<cmd>>
 
 </div>
 
