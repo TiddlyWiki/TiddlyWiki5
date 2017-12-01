@@ -142,7 +142,7 @@ Link/Hint: Erstellt einen Wiki-Link
 ListBullet/Caption: Punkteliste
 ListBullet/Hint: die ausgewählten Zeilen werden als Punkteliste formatiert
 ListNumber/Caption: Aufzählungsliste
-ListNumber/Hint: die ausgewählten Zeilen werden als Auzählungsliste formatiert
+ListNumber/Hint: die ausgewählten Zeilen werden als Aufzählungsliste formatiert
 MonoBlock/Caption: Dicktengleicher Textblock
 MonoBlock/Hint: die ausgewählten Zeilen werden als Textblock mit einer dicktengleichen Schrift formatiert
 MonoLine/Caption: Dicktengleich
