@@ -30,13 +30,13 @@ ExportTiddler/Caption: Exportieren
 ExportTiddler/Hint: Diesen Tiddler exportieren
 ExportTiddlers/Caption: Mehrere exportieren
 ExportTiddlers/Hint: Mehrere Tiddler exportieren
-Fold/Caption: Ausblenden Textbereich
+Fold/Caption: Textbereich ausblenden
 Fold/Hint: Der Tiddler Textbereich wird ausgeblendet
 Fold/FoldBar/Caption: Textbereich ein/aus
 Fold/FoldBar/Hint: Optionelle Buttons im Tiddler, um den Textbereich ein- bzw. auszublenden
-Unfold/Caption: Einblenden Textbereich
+Unfold/Caption: Textbereich einblenden
 Unfold/Hint: Der Tiddler Textbereich wird eingeblendet
-FoldOthers/Caption: Ausblenden andere Textbereiche
+FoldOthers/Caption: Andere Textbereiche ausblenden
 FoldOthers/Hint: Die Textbereiche aller anderen Tiddler werden ausgeblendet
 FoldAll/Caption: Ausblenden aller Textbereiche
 FoldAll/Hint: Ausblenden der Textbereiche aller Tiddler
@@ -63,7 +63,7 @@ NewHere/Hint: Erstelle einen neuen Tiddler, der mit dem Namen dieses Tiddlers ge
 NewJournal/Caption: Neues Journal
 NewJournal/Hint: Erstelle einen neuen Journal-Tiddler
 NewJournalHere/Caption: Neues Journal hier
-NewJournalHere/Hint: Erstelle ein neues Journal der mit diesem getaggt ist
+NewJournalHere/Hint: Erstelle ein neues Journal das mit diesem Tiddler getaggt ist
 NewImage/Caption: Neues Bild
 NewImage/Hint: Erstelle ein neues Bild
 NewMarkdown/Caption: Neuer Markdown Tiddler
@@ -100,8 +100,8 @@ Timestamp/On/Caption: Zeitstempel EIN
 Timestamp/On/Hint: Zeitstempel aktualisieren, wenn ein Tiddler verändert wird
 Timestamp/Off/Caption: Zeitstempel AUS
 Timestamp/Off/Hint: Zeitstempel bleibt unverändert, wenn ein Tiddler geändert wird
-Theme/Caption: Theme
-Theme/Hint: Theme auswählen
+Theme/Caption: Thema
+Theme/Hint: Thema auswählen
 Bold/Caption: Fett
 Bold/Hint: Ausgewählten Text fett darstellen
 Clear/Caption: Löschen
@@ -119,34 +119,34 @@ Excise/Caption/Replace/Macro: Makro
 Excise/Caption/Replace/Link: Link
 Excise/Caption/Replace/Transclusion: Transklusion
 Excise/Caption/Tag: Tagge den neuen Tiddler mit dem Titel des aktuellen Tiddlers
-Excise/Caption/TiddlerExists: Warnung: Tiddler existiert bereits!
+Excise/Caption/TiddlerExists: Warnung: Dieser Tiddler existiert bereits!
 Excise/Hint: Verschiebe den ausgewählten Text in einen neuen Tiddler
 Heading1/Caption: Überschrift 1
-Heading1/Hint: Überschrift 1 auf die Zeilen anwenden, die eine Auswahl enthalten
+Heading1/Hint: Überschrift 1 auf den ausgewählten Bereich anwenden
 Heading2/Caption: Überschrift 2
-Heading2/Hint: Überschrift 2 auf die Zeilen anwenden, die eine Auswahl enthalten
+Heading2/Hint: Überschrift 2 auf den ausgewählten Bereich anwenden
 Heading3/Caption: Überschrift 3
-Heading3/Hint: Überschrift 3 auf die Zeilen anwenden, die eine Auswahl enthalten
+Heading3/Hint: Überschrift 3 auf den ausgewählten Bereich anwenden
 Heading4/Caption: Überschrift 4
-Heading4/Hint: Überschrift 4 auf die Zeilen anwenden, die eine Auswahl enthalten
+Heading4/Hint: Überschrift 4 auf den ausgewählten Bereich anwenden
 Heading5/Caption: Überschrift 5
-Heading5/Hint: Überschrift 5 auf die Zeilen anwenden, die eine Auswahl enthalten
+Heading5/Hint: Überschrift 5 auf den ausgewählten Bereich anwenden
 Heading6/Caption: Überschrift 6
-Heading6/Hint: Überschrift 6 auf die Zeilen anwenden, die eine Auswahl enthalten
+Heading6/Hint: Überschrift 6 auf den ausgewählten Bereich anwenden
 Italic/Caption: Kursiv
-Italic/Hint: Kursiv auf den selektierten Text anwenden
+Italic/Hint: Kursiv auf den ausgewählten Text anwenden
 LineWidth/Caption: Zeilen Länge
 LineWidth/Hint: Wählen Sie die Zeilenlänge
 Link/Caption: Link
 Link/Hint: Erstellt einen Wiki-Link
 ListBullet/Caption: Punkteliste
-ListBullet/Hint: Zeilen, die eine Markierung enthalten, werden als Punkteliste formatiert
+ListBullet/Hint: die ausgewählten Zeilen werden als Punkteliste formatiert
 ListNumber/Caption: Aufzählungsliste
-ListNumber/Hint: Zeilen, die eine Markierung enthalten, werden als Auzählungsliste formatiert
+ListNumber/Hint: die ausgewählten Zeilen werden als Auzählungsliste formatiert
 MonoBlock/Caption: Dicktengleicher Textblock
-MonoBlock/Hint: Alle Zeilen die eine Markierung enthalten, werden als Textblock mit einer dicktengleichen Schrift formatiert
+MonoBlock/Hint: die ausgewählten Zeilen werden als Textblock mit einer dicktengleichen Schrift formatiert
 MonoLine/Caption: Dicktengleich
-MonoLine/Hint: Alle markierten Zeichen werden mit einer dicktengleichen Schrift formatiert
+MonoLine/Hint: die ausgewählten Zeilen werden mit einer dicktengleichen Schrift formatiert
 Opacity/Caption: Transparenz
 Opacity/Hint: Wählen sie die Transparenz
 Paint/Caption: Malfarbe
@@ -158,7 +158,7 @@ Preview/Hint: Vorschau einblenden
 PreviewType/Caption: Vorschau Typ
 PreviewType/Hint: Wählen Sie den Vorschau Typ
 Quote/Caption: Zitat
-Quote/Hint: Alle Zeilen, die eine Markierung enthalten werden als Referenz/Zitat formatiert
+Quote/Hint: die ausgewählten Zeilen werden als Referenz/Zitat formatiert
 Size/Caption: Bildgröße
 Size/Caption/Height: Höhe:
 Size/Caption/Resize: Bildgröße ändern
@@ -168,9 +168,9 @@ Stamp/Caption: Stempel
 Stamp/Caption/New: Eigenen Stempel erstellen
 Stamp/Hint: Textschnipsel hier einfügen
 Stamp/New/Title: Name, der im Menü angezeigt werden soll
-Stamp/New/Text: Text des Schnipsels. (Nicher vergessen eine aussagekräftigen Titel zu verwenden)
+Stamp/New/Text: Text des Schnipsels. (Nicht vergessen eine aussagekräftigen Titel zu verwenden)
 Strikethrough/Caption: Durchgestrichen
-Strikethrough/Hint: Ausgewählten Text durchgestrichen darstgellen
+Strikethrough/Hint: Ausgewählten Text durchgestrichen darstellen
 Subscript/Caption: Tiefsgestellt
 Subscript/Hint: Ausgewählten Text tiefgestellt darstellen
 Superscript/Caption: Hochgestellt
