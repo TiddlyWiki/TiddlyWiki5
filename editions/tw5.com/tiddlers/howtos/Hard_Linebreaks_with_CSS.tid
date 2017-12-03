@@ -4,7 +4,7 @@ tags: [[Hard Linebreaks in WikiText]]
 title: Hard Linebreaks with CSS
 type: text/vnd.tiddlywiki
 
-Since TiddlyWiki Version 5.1.4, it's possible to apply customs styles with `data-` attributes. see: [[How to apply custom styles]]
+Since TiddlyWiki Version 5.1.16, it's possible to apply customs styles with `data-` attributes. see: [[How to apply custom styles]]
 
 The [[Custom data-styles]] stylesheet tiddler contains the following definition:
 

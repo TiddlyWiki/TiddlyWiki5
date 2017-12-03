@@ -6,7 +6,7 @@ tags: $:/deprecated [[How to apply custom styles]]
 title: Custom styles by tag
 type: text/vnd.tiddlywiki
 
-<<.deprecated-since "5.1.15 <- click" "Custom styles by data-tags">>. Also see: [[How to apply custom styles]]
+<<.deprecated-since "5.1.16 <- click" "Custom styles by data-tags">>. Also see: [[How to apply custom styles]]
 
 ----
 

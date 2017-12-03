@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 ! data-tags
 
-<<.from-version "5.1.14">>
+<<.from-version "5.1.16">>
 
 The ~TiddlyWiki core adds several `attributes` to the rendered content. With those attributes it's possible to apply custom styles to the tiddler content. 
 
