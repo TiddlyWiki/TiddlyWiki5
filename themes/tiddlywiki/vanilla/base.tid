@@ -2187,10 +2187,6 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	line-height: 1.5;
 }
 
-.tc-table-of-contents li li li a {
-	font-weight: bold;
-}
-
 .tc-table-of-contents li li li li {
 	font-size: 0.95em;
 	font-weight: 200;
