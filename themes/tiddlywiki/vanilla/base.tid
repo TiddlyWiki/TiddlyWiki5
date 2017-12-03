@@ -6,10 +6,10 @@ tags: [[$:/tags/Stylesheet]]
 <$list filter="[<background>is[image]]">
 `background: url(`
 <$list filter="[<background>!has[_canonical_uri]]">
-<$macrocall $name="datauri" title={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}}/>
+`"`<$macrocall $name="datauri" title={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}}/>`"`
 </$list>
 <$list filter="[<background>has[_canonical_uri]]">
-<$view tiddler={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}} field="_canonical_uri"/>
+`"`<$view tiddler={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}} field="_canonical_uri"/>`"`
 </$list>
 `) center center;`
 `background-attachment: `{{$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment}}`;
@@ -119,6 +119,48 @@ blockquote {
 	border-left: 5px solid <<colour blockquote-bar>>;
 	margin-left: 25px;
 	padding-left: 10px;
+	quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote.tc-big-quote {
+	font-family: Georgia, serif;
+	position: relative;
+	background: <<colour pre-background>>;
+	border-left: none;
+	margin-left: 50px;
+	margin-right: 50px;
+	padding: 10px;
+    border-radius: 8px;
+}
+
+blockquote.tc-big-quote cite:before {
+	content: "\2014 \2009";
+}
+
+blockquote.tc-big-quote:before {
+	font-family: Georgia, serif;
+	color: <<colour blockquote-bar>>;
+	content: open-quote;
+	font-size: 8em;
+	line-height: 0.1em;
+	margin-right: 0.25em;
+	vertical-align: -0.4em;
+	position: absolute;
+    left: -50px;
+    top: 42px;
+}
+
+blockquote.tc-big-quote:after {
+	font-family: Georgia, serif;
+	color: <<colour blockquote-bar>>;
+	content: close-quote;
+	font-size: 8em;
+	line-height: 0.1em;
+	margin-right: 0.25em;
+	vertical-align: -0.4em;
+	position: absolute;
+    right: -80px;
+    bottom: -20px;
 }
 
 dl dt {
@@ -141,6 +183,11 @@ input:not([type]) {
 
 svg.tc-image-button {
 	padding: 0px 1px 1px 0px;
+}
+
+.tc-icon-wrapper > svg {
+	width: 1em;
+	height: 1em;
 }
 
 kbd {
@@ -276,6 +323,8 @@ a.tc-tiddlylink-external:hover {
 
 .tc-tiddler-dragger-inner {
 	position: absolute;
+	top: -1000px;
+	left: -1000px;
 	display: inline-block;
 	padding: 8px 20px;
 	font-size: 16.9px;
@@ -308,6 +357,19 @@ a.tc-tiddlylink-external:hover {
 	background: <<colour dropzone-background>>;
 	text-align: center;
 	content: "<<lingo DropMessage>>";
+}
+
+.tc-droppable > .tc-droppable-placeholder {
+	display: none;
+}
+
+.tc-droppable.tc-dragover > .tc-droppable-placeholder {
+	display: block;
+	border: 2px dashed <<colour dropzone-background>>;
+}
+
+.tc-draggable {
+	cursor: move;
 }
 
 /*
@@ -883,7 +945,9 @@ button.tc-untagged-label {
 	font-size: 1em;
 }
 
-.tc-tiddler-controls > span > button {
+.tc-tiddler-controls > span > button,
+.tc-tiddler-controls > span > span > button,
+.tc-tiddler-controls > span > span > span > button {
 	vertical-align: baseline;
 	margin-left:5px;
 }
@@ -938,8 +1002,10 @@ button.tc-untagged-label {
 .tc-tiddler-frame iframe.tc-edit-texteditor {
 	padding: 3px 3px 3px 3px;
 	border: 1px solid <<colour tiddler-editor-border>>;
+	background-color: <<colour tiddler-editor-background>>;
 	line-height: 1.3em;
 	-webkit-appearance: none;
+	font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
 }
 
 .tc-tiddler-frame .tc-binary-warning {
@@ -949,10 +1015,6 @@ button.tc-untagged-label {
 	padding: 3em 3em 6em 3em;
 	background: <<colour alert-background>>;
 	border: 1px solid <<colour alert-border>>;
-}
-
-.tc-tiddler-frame input.tc-edit-texteditor {
-	background-color: <<colour tiddler-editor-background>>;
 }
 
 canvas.tc-edit-bitmapeditor  {
@@ -1656,6 +1718,8 @@ html body.tc-body.tc-single-tiddler-window {
 	border-right: 1px solid <<colour tab-border>>;
 	border-top-left-radius: 2px;
 	border-top-right-radius: 2px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
 }
 
 .tc-tab-buttons.tc-vertical button {
@@ -1670,6 +1734,8 @@ html body.tc-body.tc-single-tiddler-window {
 	border-right: none;
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
 }
 
 .tc-tab-buttons.tc-vertical button.tc-tab-selected {
@@ -2332,4 +2398,40 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 .tc-error {
 	background: #f00;
 	color: #fff;
+}
+
+/*
+** Tree macro
+*/
+
+.tc-tree div {
+    	padding-left: 14px;
+}
+
+.tc-tree ol {
+    	list-style-type: none;
+    	padding-left: 0;
+    	margin-top: 0;
+}
+
+.tc-tree ol ol {
+    	padding-left: 1em;    
+}
+
+.tc-tree button { 
+    	color: #acacac;
+}
+
+.tc-tree svg {
+     	fill: #acacac;
+}
+
+.tc-tree span svg {
+    	width: 1em;
+    	height: 1em;
+    	vertical-align: baseline;
+}
+
+.tc-tree li span {
+    	color: lightgray;
 }
