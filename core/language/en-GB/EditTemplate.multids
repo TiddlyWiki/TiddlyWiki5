@@ -5,6 +5,8 @@ Body/Placeholder: Type the text for this tiddler
 Body/Preview/Type/Output: output
 Field/Remove/Caption: remove field
 Field/Remove/Hint: Remove field
+Field/Dropdown/Caption: field list
+Field/Dropdown/Hint: Show field list
 Fields/Add/Button: add
 Fields/Add/Name/Placeholder: field name
 Fields/Add/Prompt: Add a new field:
