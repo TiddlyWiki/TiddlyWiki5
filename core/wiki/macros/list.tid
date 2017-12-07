@@ -28,27 +28,25 @@ tags: $:/tags/Macro
 &nbsp;
 </div>
 <div>
-<$link to={{!!title}}>
 <$transclude tiddler="""$itemTemplate$""">
+<$link to={{!!title}}>
 <$transclude field="caption">
 <$view field="title"/>
 </$transclude>
-</$transclude>
 </$link>
+</$transclude>
 </div>
 </$droppable>
 </$list>
+</$type$>
 <$tiddler tiddler="">
-<$droppable actions=<<list-links-draggable-drop-actions>> tag="""$subtype$""">
+<$droppable actions=<<list-links-draggable-drop-actions>> tag="div">
 <div class="tc-droppable-placeholder">
 &nbsp;
 </div>
-<div>
-&nbsp;
-</div>
+<div style="height:0.5em;"/>
 </$droppable>
 </$tiddler>
-</$type$>
 </$vars>
 \end
 
