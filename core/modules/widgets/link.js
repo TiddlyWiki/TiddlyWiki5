@@ -67,18 +67,22 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	if(this.linkClasses) {
 		classes.push(this.linkClasses);
 	}
-	classes.push("tc-tiddlylink");
-	if(this.isShadow) {
-		classes.push("tc-tiddlylink-shadow");
-	}
-	if(this.isMissing && !this.isShadow) {
-		classes.push("tc-tiddlylink-missing");
-	} else {
-		if(!this.isMissing) {
-			classes.push("tc-tiddlylink-resolves");
+	if(!this.enforceClass) {
+		classes.push("tc-tiddlylink");
+		if(this.isShadow) {
+			classes.push("tc-tiddlylink-shadow");
+		}
+		if(this.isMissing && !this.isShadow) {
+			classes.push("tc-tiddlylink-missing");
+		} else {
+			if(!this.isMissing) {
+				classes.push("tc-tiddlylink-resolves");
+			}
 		}
 	}
-	domNode.setAttribute("class",classes.join(" "));
+	if(classes.length) {
+		domNode.setAttribute("class",classes.join(" "));
+	}
 	// Set an href
 	var wikilinkTransformFilter = this.getVariable("tv-filter-export-link"),
 		wikiLinkText;
@@ -169,6 +173,10 @@ LinkWidget.prototype.execute = function() {
 	this.tooltip = this.getAttribute("tooltip");
 	this["aria-label"] = this.getAttribute("aria-label");
 	this.linkClasses = this.getAttribute("class");
+	this.enforceClass = this.linkClasses ? this.linkClasses.substr(0,1) === "!" : undefined;
+	if(this.enforceClass) {
+		this.linkClasses = this.linkClasses.substr(1);
+	}
 	this.tabIndex = this.getAttribute("tabindex");
 	this.draggable = this.getAttribute("draggable","yes");
 	this.linkTag = this.getAttribute("tag","a");
