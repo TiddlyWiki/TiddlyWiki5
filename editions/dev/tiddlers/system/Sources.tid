@@ -1,0 +1,23 @@
+title: $:/editions/tw5.com/TiddlerInfo/Sources
+tags: $:/tags/TiddlerInfo
+caption: Sources
+
+\define github-link-base()
+https://github.com/Jermolene/TiddlyWiki5/blob/master/editions/dev/tiddlers/$(title)$
+\end
+
+\define make-github-link()
+<$set name="title" value={{$:/config/OriginalTiddlerPaths##$(currentTiddler)$}}>
+<$set name="title" filter="[<title>encodeuricomponent[]]" select="0">
+<a href=<<github-link-base>> class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text=<<github-link-base>>/></a>
+</$set>
+</$set>
+\end
+
+<$list filter="[all[current]!is[system]!is[shadow]]">
+
+Help us to improve the documentation by sending a ~GitHub pull request for this tiddler:
+
+* <<make-github-link>>
+
+</$list>
