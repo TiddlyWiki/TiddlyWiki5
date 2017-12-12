@@ -40,6 +40,13 @@ $title$$(currentTiddler)$
 </$button>
 </$reveal>
 \end
+
+Looking for <$button class="tc-btn-invisible tc-tiddlylink">
+<$action-setfield $tiddler="$:/state/tab-1749438307" text="$:/core/ui/ControlPanel/Info"/>
+<$action-setfield $tiddler="$:/state/tab--2112689675" text="$:/core/ui/ControlPanel/Advanced"/>
+<$action-setfield $tiddler="$:/state/tab--959111941" text="$:/tags/ControlPanel/Advanced/SystemTags"/>
+<$action-navigate $to="$:/ControlPanel"/><$text text="SystemTags"/></$button> instead?
+
 <table class="tc-tag-manager-table">
 <tbody>
 <tr>
