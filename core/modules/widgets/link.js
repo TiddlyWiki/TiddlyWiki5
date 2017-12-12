@@ -77,7 +77,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			}
 		}
 		classes.push(this.linkClasses);
-	} else if(this.overrideClasses !== "") 
+	} else if(this.overrideClasses !== "") {
 		classes.push(this.overrideClasses)
 	}
 	if(classes.length > 0) {
