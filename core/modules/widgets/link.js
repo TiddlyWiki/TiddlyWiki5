@@ -76,7 +76,9 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 				classes.push("tc-tiddlylink-resolves");
 			}
 		}
-		classes.push(this.linkClasses);
+		if(this.linkClasses) {
+			classes.push(this.linkClasses);			
+		}
 	} else if(this.overrideClasses !== "") {
 		classes.push(this.overrideClasses)
 	}
