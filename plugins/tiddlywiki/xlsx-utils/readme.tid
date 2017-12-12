@@ -6,7 +6,7 @@ The plugin uses //import specifications// to determine how incoming spreadsheets
 
 Each sheet is expected to consist of a single header row followed by multiple content rows, each consisting of an independent record. The plugin automatically detects the extent of each sheet by looking for the bottom right cell that contains a value. This can lead to unexpected results if a cell is accidentally created with an invisible, blank value.
 
-Import specifications describe how tiddlers are created from a particular row of a sheet; multiple tiddlers can be generated from a single row.
+Import specifications describe how tiddlers are created from a particular row of a sheet; multiple tiddlers can be generated from a single row. (Conversely, if different rows yield tiddlers with the same title then they will overwrite one another).
 
 Each field of each tiddler can be assigned a constant value, or a value taken from a named column of the sheet, optionally with a prefix and/or suffix added. There is special support for handling list fields (like the tags field), with the ability to append new items to the list.
 
