@@ -64,10 +64,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	var domNode = this.document.createElement(tag);
 	// Assign classes
 	var classes = [];
-	if(this.linkClasses) {
-		classes.push(this.linkClasses);
-	}
-	if(!this.enforceClass) {
+	if(this.enforceClasses === undefined) {
 		classes.push("tc-tiddlylink");
 		if(this.isShadow) {
 			classes.push("tc-tiddlylink-shadow");
@@ -79,8 +76,12 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 				classes.push("tc-tiddlylink-resolves");
 			}
 		}
+		classes.push(this.linkClasses);
 	}
-	if(classes.length) {
+	else if (this.enforceClasses !== "") {
+		classes.push(this.enforceClasses);
+	}
+	if(classes.length > 0) {
 		domNode.setAttribute("class",classes.join(" "));
 	}
 	// Set an href
@@ -173,10 +174,7 @@ LinkWidget.prototype.execute = function() {
 	this.tooltip = this.getAttribute("tooltip");
 	this["aria-label"] = this.getAttribute("aria-label");
 	this.linkClasses = this.getAttribute("class");
-	this.enforceClass = this.linkClasses ? this.linkClasses.substr(0,1) === "!" : undefined;
-	if(this.enforceClass) {
-		this.linkClasses = this.linkClasses.substr(1);
-	}
+	this.enforceClasses = this.getAttribute("setClass");;
 	this.tabIndex = this.getAttribute("tabindex");
 	this.draggable = this.getAttribute("draggable","yes");
 	this.linkTag = this.getAttribute("tag","a");

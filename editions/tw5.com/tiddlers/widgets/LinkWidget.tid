@@ -1,6 +1,6 @@
 caption: link
 created: 20131024141900000
-modified: 20171211073439080
+modified: 20171212063130159
 tags: Widgets
 title: LinkWidget
 type: text/vnd.tiddlywiki
@@ -16,7 +16,8 @@ The `link` widget generates links to tiddlers. (Use the HTML `<a>` element to ge
 |tabindex |Optional numeric [[tabindex|https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex]] |
 |draggable |"yes" to enable the link to be draggable (defaults to "yes") |
 |tag |Optional tag to override the default "a" element |
-|class|Optional css classes in addition to the defualt classes (see below)<br>» Using prefix `!` overrules the default classes|
+|class|Optional css classes __in addition to__ the default classes (see below)|
+|setClass|Optional css classes __instead of__ the default classes <<.from-version "5.1.16">>|
 
 The content of the link widget is rendered within the `<a>` tag. The draggable functionality is equivalent to using the DraggableWidget with the ''tiddler'' attribute set to the link target.
 
@@ -63,11 +64,11 @@ The link widget automatically determines and applies the following classes to li
 * `tc-tiddlylink-missing` - applied to tiddler links where the target tiddler doesn't exist
 * `tc-tiddlylink-resolves` - applied to tiddler links when the target tiddler does exist
 
-Use the `class` attribute to specify additional classes, or use the prefix `!` to only apply those classes, e.g. when used in a LinkCatcherWidget:
+Use the `class` attribute to specify additional css classes, or `setClass` to apply only that but not the above defaults, e.g. when used in a LinkCatcherWidget:
 
 <<wikitext-example-without-html """*<$link class="example">Here</$link> the `example` class is added.
-*<$link class="!example">Here</$link> only the `example` class applies.
-*<$link class="!">Here</$link> no class is set.""">>
+*<$link setClass="example">Here</$link> only the `example` class applies.
+*<$link setClass="">Here</$link> no class is set.""">>
 
 ! `href` generation
 
