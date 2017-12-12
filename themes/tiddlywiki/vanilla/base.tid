@@ -683,6 +683,10 @@ button.tc-untagged-label {
 	width: 60%;
 }
 
+.tc-advanced-search .tc-tag-list-item {
+	display:block;
+}
+
 .tc-search a svg {
 	width: 1.2em;
 	height: 1.2em;

@@ -11,10 +11,21 @@ caption: {{$:/language/Search/Filter/Caption}}
 </div>
 
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
+
 <$set name="resultCount" value="""<$count filter={{$:/temp/advancedsearch}}/>""">
+
 <div class="tc-search-results">
+
 <<lingo Filter/Matches>>
-<$list filter={{$:/temp/advancedsearch}} template="$:/core/ui/ListItemTemplate"/>
-</div>
+
+<$set name="itemTemplate" filter="[all[shadows+tiddlers]prefix[$:/core/Filters/]field:filter{$:/temp/advancedsearch}get[template]]"  emptyValue="$:/core/ui/ListItemTemplate">
+
+<$list filter={{$:/temp/advancedsearch}} template=<<itemTemplate>>/>
+
 </$set>
+
+</div>
+
+</$set>
+
 </$reveal>

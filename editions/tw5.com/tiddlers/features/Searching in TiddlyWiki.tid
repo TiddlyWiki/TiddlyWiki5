@@ -1,5 +1,5 @@
 created: 20140210160125905
-modified: 20160607163012344
+modified: 20171212220423913
 tags: Features [[Working with TiddlyWiki]]
 title: Searching in TiddlyWiki
 type: text/vnd.tiddlywiki
@@ -20,3 +20,40 @@ Clicking on the magnifying glass icon {{$:/core/images/advanced-search-button}} 
 * The ''system'' tab allows you to limit your search to system tiddlers
 * The ''shadows'' tab allows you to limit your search to shadow tiddlers
 * The ''filter'' tab is not a search box, per se, but a way to obtain a list of all tiddlers that meet the specific criteria described by that [[filter|Filters]], for example, "All tags except system tags"
+
+! Advanced filters
+
+The [[filters|Filters]] selectable under $:/AdvancedSearch are those tagged: {{$:/tags/Filter||$:/core/ui/TagTemplate}}
+
+To define custom filters, create a tiddler as well tagged $:/tags/Filter specifying the following fields:
+
+; title
+: a suitable title, e.g. $:/_my/Filters/SpecialExportFilter
+
+; description
+: (mandatory) a custom field displayed in the popup
+
+; filter
+: (mandatory) a custom field specifying the filter used to determine relevant tiddlers
+
+; template
+: (optional) a custom field defining a template used for rendering the filter results, e.g. $:/core/ui/TagTemplate<br>&raquo; default: $:/core/ui/ListItemTemplate
+
+Below a list of all currently defined filter options tagged $:/tags/Filter and their details:
+
+<table>
+<tr>
+<th>Tiddler</th>
+<th>Description</th>
+<th>Filter</th>
+<th>Template</th>
+</tr>
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/Filter]sort[title]]">
+<tr>
+<td><$set name="title" filter='[all[current]removeprefix[$:/core/Filters/]]' emptyValue=<<currentTiddler>>><$link to=<<currentTiddler>>><$text text=<<title>>/></$link></$set></td>
+<td>{{!!description}}</td>
+<td><code><$text text={{!!filter}}/></code></td>
+<td><$set name="tpl" filter="[all[current]get[template]]" emptyValue="$:/core/ui/ListItemTemplate"><$set name="title" filter='[<tpl>removeprefix[$:/core/ui/]]' emptyValue=<<tpl>>><$link to=<<tpl>>><$text text=<<title>>/></$link></$set></$set></td>
+</tr>
+</$list>
+</table>
