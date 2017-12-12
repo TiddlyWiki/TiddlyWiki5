@@ -64,7 +64,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	var domNode = this.document.createElement(tag);
 	// Assign classes
 	var classes = [];
-	if(this.enforceClasses === undefined) {
+	if(this.overrideClasses === undefined) 
 		classes.push("tc-tiddlylink");
 		if(this.isShadow) {
 			classes.push("tc-tiddlylink-shadow");
@@ -77,9 +77,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			}
 		}
 		classes.push(this.linkClasses);
-	}
-	else if (this.enforceClasses !== "") {
-		classes.push(this.enforceClasses);
+	} else if(this.overrideClasses !== "") 
+		classes.push(this.overrideClasses)
 	}
 	if(classes.length > 0) {
 		domNode.setAttribute("class",classes.join(" "));
@@ -174,7 +173,7 @@ LinkWidget.prototype.execute = function() {
 	this.tooltip = this.getAttribute("tooltip");
 	this["aria-label"] = this.getAttribute("aria-label");
 	this.linkClasses = this.getAttribute("class");
-	this.enforceClasses = this.getAttribute("setClass");;
+	this.overrideClasses = this.getAttribute("overrideClass");
 	this.tabIndex = this.getAttribute("tabindex");
 	this.draggable = this.getAttribute("draggable","yes");
 	this.linkTag = this.getAttribute("tag","a");
