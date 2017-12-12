@@ -1806,9 +1806,13 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 	// Save the original tiddler file locations if requested
 	var config = wikiInfo.config || {};
 	if(config["retain-original-tiddler-path"]) {
-		var output = {};
+		var output = {}, relativePath;
 		for(var title in $tw.boot.files) {
-			output[title] = path.relative(resolvedWikiPath,$tw.boot.files[title].filepath);
+			relativePath = path.relative(resolvedWikiPath,$tw.boot.files[title].filepath);
+			output[title] =
+				path.sep === path.posix.sep ?
+				relativePath :
+				relativePath.split(path.sep).join(path.posix.sep);
 		}
 		$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
 	}
