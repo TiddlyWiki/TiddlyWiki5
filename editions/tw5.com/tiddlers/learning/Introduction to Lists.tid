@@ -1,63 +1,53 @@
+created: 20171212175130471
+modified: 20171212175139631
 tags: Learning
 title: Introduction to Lists
 type: text/vnd.tiddlywiki
 
-Lists play a central role in TiddlyWiki and there are several aspects of lists worth understanding. The following is a brief run-through of some of the more common techniques associated with lists.
+Making lists of items plays a central role in working with TiddlyWiki. The following is a brief run-through of some of the more common techniques.
 
-Note that lists in ~TiddlyWiki often don’t have the typical one-item-per-row appearance but is instead a wider concept to present data.
+~TiddlyWiki [[uses|The Extended Listops Filters]] lists [[internally|ListField]] for many purposes so the word can have several meanings. Here we are concerned with displaying sequences of items, but not necessarily presented as a conventional bullet list.
 
-!Typed lists
-!!~WikiText
-WikiText lists are manually typed lists, including some “special character” to specify what sort of list it is and how it should be displayed. Examples include bullet lists created with asterisks (*) and numbered lists (#). Behind the scenes, ~WikiText lists are based on the simple `<ul>` and `<li>` html-elements. For more, see [[Lists in WikiText]]. A typical typed list in WikiText might look something like:
+! Manually Typed Lists
 
-```
-* Greatest Movies of All Time
+!! ~WikiText
+
+WikiText lists are manually typed lists that use a special character to specify what sort of list it is and how it should be displayed.
+
+Examples include bullet lists created with asterisks (*) and numbered lists (#). Behind the scenes, ~WikiText lists are based on the standard `<ul>` and `<li>` HTML elements. For more information see [[Lists in WikiText]].
+
+An example of a typed list in WikiText:
+
+<<wikitext-example-without-html """* Greatest Movies of All Time
 ** Casa Blanca
-** Pride and Prejudice and Zombies
-```
+** Pride and Prejudice and Zombies""">>
 
-and render as:
+! Generated Lists
 
-<<<
-* Greatest Movies of All Time
-** Casa Blanca
-** Pride and Prejudice and Zombies
-<<<
+Lists can be automatically generated with the ListWidget using [[filters|Filters]] in which [[filter operators|Filter Operators]] 
+specify criteria for selecting which tiddlers are desired as output. Shortcut macros are provided for some common types of list.
 
-!Generated lists
-Generated lists center around [[filters|Filters]] in which [[filter operators|Filter Operators]] 
-specify which tiddlers and what aspects of these that are desired as output, for example the tiddlers titles or their texts, etc.
+!! ~ListWidget
 
-!!~ListWidget
 The ListWidget is the most powerful tool for creating lists. It allows the filtered output to be manipulated and styled into forms that may not seem to resemble lists at all, for example tables or complex texts. For more details, see [[ListWidget]].
 
 An example to show all tiddlers tagged with "HelloThere" might look like:
 
-```
-<$list filter="[tag[HelloThere]]"><$view field="title"/><br/></$list>
-```
+<<wikitext-example-without-html """<$list filter="[tag[HelloThere]]"><$view field="title"/><br/></$list>""">>
 
-and render like:
+<<.tip """Even tiddlers themselves are made with the ~ListWidget. The [[ViewTemplate|$:/core/ui/ViewTemplate]] makes use of the ListWidget to fetch all specified templates that are used to show a tiddlers title, tags, text and more.""">>
 
-<<<
-<$list filter="[tag[HelloThere]]"><$view field="title"/><br/></$list>
-<<<
+!! Filtered transclusion
 
-''Side note'': Even tiddlers themselves are made with the ~ListWidget. The [[ViewTemplate|$:/core/ui/ViewTemplate]] makes use of the ListWidget to fetch all specified templates that are used to show a tiddlers title, tags, text and more.
+The syntax for filtered transclusion `{{{...}}}` takes a filter as input and outputs a linked list of matching titles. You can also apply a [[template|Transclusion with Templates]], for example:
 
-!!Filtered transclusion
-The short form for filtered transclusion `{{{...}}}` takes a filter as input and outputs a linked-list of matching titles. You can also apply a [[template|Transclusion with Templates]], for example `{{{ [tag[HelloThere]] || $:/core/ui/TagTemplate }}}` renders like:
+<<wikitext-example-without-html """{{{ [tag[HelloThere]] || $:/core/ui/TagTemplate }}}""">>
 
-<<<
-{{{ [tag[HelloThere]] || $:/core/ui/TagTemplate }}}
-<<<
+!! list-links Macro
 
-!!list-links Macro
 The [[list-links|list-links Macro]] macro gives a preformatted list, typically a bullet list, in a more simplified way than by using the ListWidget. Behind the scenes it really is the ListWidget applying a default template to each list item.
 
-`<<list-links "[tag[HelloThere]]">>` gives:
-
-<<list-links "[tag[HelloThere]]">>
+<$macrocall $name="wikitext-example-without-html" src="""<<list-links "[tag[HelloThere]]">>"""/>
 
 !Other “list related” features
 
