@@ -64,7 +64,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	var domNode = this.document.createElement(tag);
 	// Assign classes
 	var classes = [];
-	if(this.overrideClasses === undefined) 
+	if(this.overrideClasses === undefined) {
 		classes.push("tc-tiddlylink");
 		if(this.isShadow) {
 			classes.push("tc-tiddlylink-shadow");
