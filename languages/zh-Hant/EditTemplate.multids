@@ -5,6 +5,8 @@ Body/Placeholder: 輸入此條目的內容
 Body/Preview/Type/Output: 輸出
 Field/Remove/Caption: 刪除欄位
 Field/Remove/Hint: 刪除欄位
+Field/Dropdown/Caption: 欄位列表
+Field/Dropdown/Hint: 顯示欄位列表
 Fields/Add/Button: 新增
 Fields/Add/Dropdown/System: 系統欄位
 Fields/Add/Dropdown/User: 使用者欄位
