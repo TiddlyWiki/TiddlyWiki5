@@ -1,6 +1,11 @@
 title: $:/language/Help/savetiddlers
 description: Speichert eine Gruppe von Tiddler in ein Verzeichnis
 
+''WICHTIG:''
+
+* Der `--savetiddlers` Befehl wird ab V5.1.15 durch `--save` ersetzt. 
+* `--savetiddlers` wird auslaufen und sollte daher nicht mehr verwendet werden!
+
 Speichert eine Gruppe von Tiddler im Text- oder Binärformat in ein angegebenes Verzeichnis.
 
 ```
