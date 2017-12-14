@@ -34,13 +34,22 @@ Command.prototype.execute = function() {
 		wiki = this.commander.wiki,
 		sourceTitle = this.params[0],
 		destTitle = this.params[1],
+		slicerRules = this.params[2],
+		outputMode = this.params[3],
 		slicer = new textSlicer.Slicer({
 			sourceTiddlerTitle: sourceTitle,
 			baseTiddlerTitle: destTitle,
-			wiki: wiki
+			slicerRules: slicerRules,
+			outputMode: outputMode,
+			wiki: wiki,
+			callback: function(err,tiddlers) {
+				if(err) {
+					return self.callback(err);
+				}
+				wiki.addTiddlers(tiddlers);
+				self.callback();	
+			}
 		});
-	wiki.addTiddlers(slicer.getTiddlers());
-	$tw.utils.nextTick(this.callback);
 	return null;
 };
 

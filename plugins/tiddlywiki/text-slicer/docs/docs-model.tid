@@ -1,61 +1,6 @@
-title: $:/plugins/tiddlywiki/text-slicer/docs
-
-! Introduction
-
-This plugin contains tools to help work with documents that are structured as a hierarchical outline of tiddlers.  The structural relationships within the document are expressed as lists: for example, headings have a list specifying the content to be shown under the heading.
-
-TiddlyWiki is built on the philosophy that text is easier to re-use and work with if it is sliced up into separate chunks that can be independently manipulated, and then woven back together to make up stories and narratives for publication.
-
-The components within the text slicer plugin include:
-
-* ''the slicer'', a tool that slices up an existing monolithic document according to the headings, lists and paragraphs. It is available as a toolbar button for the browser, or as a command for use under Node.js
-* ''document preview column'', a new sidebar on the left that shows the full text of any documents in the wiki and allows individual tiddlers to be opened with a click
-* ''exporters'' for exporting the individual documents as HTML files (and for previewing them)
-
-! Slicing Monolithic Documents
-
-The tool can slice any tiddler that can be rendered as HTML, including both WikiText and HTML itself.
-
-Documents created with Microsoft Word will need to be first converted to HTML. The library [[mammoth.js|https://github.com/mwilliamson/mammoth.js]] is recommended for this purpose.
-
-!! Browser
-
-In the browser, you can slice a monolithic document tiddler using the slicer toolbar button.
-
-!! Node.js
-
-The `--slice` command allows a tiddler to be sliced under Node.js:
-
-```
-tiddlywiki mywiki --slice SourceDocument --build index
-```
-
-! Working with the Document Preview Column
-
-The document preview column appears at the left side of the screen. The content of headings can be collapsed and expanded to help navigation. Clicking on a tiddler opens the corresponding tiddler in the main story river.
-
-Clicking ''Show toolbar'' causes each tiddler be preceded by a toolbar showing the underlying title. It can be edited directly to rename the tiddler. References to the tiddler in the ''tags'' and ''list'' are automatically updated to reflect the change, but note that links to the tiddler will not be automatically changed.
-
-The following theme tweaks should be applied to enable the preview column:
-
-* Set [[story left position|$:/themes/tiddlywiki/vanilla/metrics/storyleft]] to ''400px'' (or more)
-* It is recommended to also set the [[sidebar layout|$:/themes/tiddlywiki/vanilla/options/sidebarlayout]] to ''fluid-fixed''.
-
-! Exporting Documents
-
-Documents can be saved under Node.js, or previewed in the browser.
-
-!! Exporting Documents in the Browser
-
-To preview a document, locate it in the preview column and click the button labelled "View document". The document will open in plain text in a new window. The window will be automatically updated as you work on the document.
-
-!! Exporting Documents under Node.js
-
-[TBD]
-
-! Sliced Document Format
-
-!! Introduction
+title: $:/plugins/tiddlywiki/text-slicer/docs/model
+tags: $:/plugins/tiddlywiki/text-slicer/docs
+caption: Document Model
 
 Individual tiddlers are created for each heading, paragraph and list item. They are linked together into a hierarchical outline using lists.
 
@@ -186,9 +131,3 @@ Notes are available during editing but hidden for static renderings. The slicing
 * ''title'': an automatically generated unique title
 * ''text'': the text of the note
 * ''tags'': any CSS classes found in the HTML are converted into tags
-
-! Document Metadata, Tags and Classes
-
-[TBD]
-
-
