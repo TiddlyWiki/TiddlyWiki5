@@ -1,0 +1,27 @@
+title: $:/language/Help/fetch
+description: 'Fetch' tiddlers van wiki via URL
+
+'Fetch' één of meer bestanden over HTTP/HTTPS en importeer de tiddlers die aan een filter voldoen (en optioneel aanpassen van de titles).
+
+```
+--fetch file <url> <import-filter> <transform-filter>
+--fetch files <url-filter> <import-filter> <transform-filter>
+```
+
+Met de "file" variant wordt alleen een enkel bestand 'gefetched' en de eerste parameter is de URL van het te lezen bestand.
+
+Met de "files" variant worden meerdere bestanden 'gefetched' en de eerste parameter is een filter dat een lijst oplevert van URL's van te lezen bestanden. B.v., als een reeks tiddlers gelabeld met "remote-server" een veld "url" hebben, zal het filter `[tag[remote-server]get[url]]` alle beschikbare URL's ophalen.
+
+De `<import-filter>` parameter specificeert een filter dat bepaalt welke tiddlers worden geïmporteerd. Zonder filter wordt het standaard `[all[tiddlers]]` gebruikt.
+
+De `<transform-filter>` parameter specificeert een optioneel filter dat de titels van de geïmporteerde tiddlers aanpast. B.v. `[addprefix[$:/myimports/]]` voegt `$:/myimports/` toe aan het begin van elke titel.
+
+Als het `--fetch` commando voorafgegaan wordt door `--verbose`, wordt voortgangsinformatie gedurende het importeren gegeven.
+
+Merk op dat TiddlyWiki geen oudere versie van een reeds geladen plugin zal 'fetchen'.
+
+Het volgende voorbeeld haalt alle non-system tiddlers op van https://tiddlywiki.com en slaat die op als een JSON bestand:
+
+```
+tiddlywiki --verbose --fetch file "https://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
+```

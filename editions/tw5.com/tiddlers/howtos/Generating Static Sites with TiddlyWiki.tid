@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 TiddlyWiki5 can be used to generate static HTML representations of a TiddlyWiki that doesn't need JavaScript.
 
-There is much flexibility in how the static HTML is generated. The following scenarios are all illustrated on http://tiddlywiki.com.
+There is much flexibility in how the static HTML is generated. The following scenarios are all illustrated on https://tiddlywiki.com.
 
 ! Wiki Snapshots and Tiddler Snapshots
 

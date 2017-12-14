@@ -14,7 +14,7 @@ type: text/vnd.tiddlywiki
 # Installez aussi cette extension qui vous permettra de sauvegarder le fichier <<tw>> localement<<dp>>
 #* https://addons.mozilla.org/fr/android/addon/save-link-menus/
 # [[Téléchargez|Download]] un fichier <<tw>> vide en enregistrant ce lien<<dp>>
-#* http://tiddlywiki.com/languages/fr-FR/empty.html
+#* https://tiddlywiki.com/languages/fr-FR/empty.html
 #> (pour enregistrer le lien, assurez-vous d'avoir installé l'extension "save-link-menus", appuyez quelques secondes sur le lien, puis choisissez "Save link")
 # Une fois le fichier téléchargé, cliquez dessus depuis la zone de notification ou l'application de gestion des téléchargements
 # Choisissez d'ouvrir le fichier avec Firefox (et non l'application par défaut proposée par Android)

@@ -1,7 +1,7 @@
 title: $:/language/
 
 BinaryWarning/Prompt: このtiddlerにはバイナリデータが含まれています。
-ClassicWarning/Hint: この tiddler はクラシックスタイルのTiddlyWikiフォーマットで書かれています。このフォーマットはTiddlyWiki5との完全な互換性はありません。詳しくは http://tiddlywiki.com/static/Upgrading.html を参照してください。
+ClassicWarning/Hint: この tiddler はクラシックスタイルのTiddlyWikiフォーマットで書かれています。このフォーマットはTiddlyWiki5との完全な互換性はありません。詳しくは https://tiddlywiki.com/static/Upgrading.html を参照してください。
 ClassicWarning/Upgrade/Caption: アップグレード
 CloseAll/Button: すべて閉じる
 ConfirmCancelTiddler: 本当にこのtiddler "<$text text=<<title>>/>" の編集内容を取り消しますか？
@@ -12,7 +12,7 @@ DropMessage: ドロップしてください。（止めるには、キャンセ�
 Encryption/ConfirmClearPassword: パスワードを削除すると暗号化も解除されますが、本当にパスワードを削除しますか？
 Encryption/PromptSetPassword: パスワードを入力してください。
 InvalidFieldName: フィールド名に不正な文字が使われています "<$text text=<<fieldName>>/>". フィールド名に使用できるのは英小文字かアンダースコア(`_`)、ハイフン(`-`)、ピリオド(`.`)のみです。
-MissingTiddler/Hint: 未作成の tiddler "<$text text=<<currentTiddler>>/>" - クリック {{$:/core/images/edit-button}} して作成
+MissingTiddler/Hint: 未作成の tiddler "<$text text=<<currentTiddler>>/>" - クリック {{||$:/core/ui/Buttons/edit}} して作成
 RecentChanges/DateFormat: YYYY-MM-DD
 SystemTiddler/Tooltip: これはシステム tiddler です
 TagManager/Colour/Heading: 色

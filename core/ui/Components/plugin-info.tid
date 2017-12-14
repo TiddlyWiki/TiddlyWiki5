@@ -78,14 +78,9 @@ $:/config/Plugins/Disabled/$(currentTiddler)$
 </$reveal>
 </div>
 </$list>
-<$reveal type="nomatch" text="" state="!!list">
 <$set name="tabsList" filter="[<currentTiddler>list[]] contents">
-<$macrocall $name="tabs" state=<<tabs-state-macro>> tabsList=<<tabsList>> default="readme" template="$:/core/ui/PluginInfo"/>
+<$macrocall $name="tabs" state=<<tabs-state-macro>> tabsList=<<tabsList>> default={{{ [enlist<tabsList>] }}} template="$:/core/ui/PluginInfo"/>
 </$set>
-</$reveal>
-<$reveal type="match" text="" state="!!list">
-<<lingo NoInformation/Hint>>
-</$reveal>
 </div>
 </div>
 </$reveal>

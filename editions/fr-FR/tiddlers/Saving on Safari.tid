@@ -9,7 +9,7 @@ Cette manière d'enregistrer les modifications est assez pénible, car elle requ
 
 # [[Téléchargez|Download]] un TiddlyWiki en cliquant sur ce bouton<<dp>>
 #> {{$:/editions/fr-FR/snippets/download-empty-button}}
-#> Si le bouton ne fonctionne pas, enregistrez ce lien<<dp>> http://tiddlywiki.com/languages/fr-FR/empty.html
+#> Si le bouton ne fonctionne pas, enregistrez ce lien<<dp>> https://tiddlywiki.com/languages/fr-FR/empty.html
 #> Votre navigateur vous demandera peut-être d'accepter explicitement l'enregistrement avant qu'il démarre
 # Localisez le fichier que vous venez de télécharger
 #* Vous pouvez le renommer, mais assurez-vous de conserver l'extension `.html` ou `.htm`

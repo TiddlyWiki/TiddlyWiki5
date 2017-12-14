@@ -1,6 +1,8 @@
 title: $:/language/Help/rendertiddlers
 description: 呈现符合筛选条件的条目为指定的内容类型
 
+(请注意：`--rendertiddlers` 命令已被弃用，而支持新的、更灵活的 `--render` 命令)
+
 呈现符合筛选条的条目为指定的[[内容类型|ContentType]] (默认为 `text/html`) 与扩展名 (默认为 `.html`).
 
 ```

@@ -40,6 +40,24 @@ exports.getFieldString = function(field) {
 };
 
 /*
+Get all the fields as a hashmap of strings. Options:
+	exclude: an array of field names to exclude
+*/
+exports.getFieldStrings = function(options) {
+	options = options || {};
+	var exclude = options.exclude || [];
+	var fields = {};
+	for(var field in this.fields) {
+		if($tw.utils.hop(this.fields,field)) {
+			if(exclude.indexOf(field) === -1) {
+				fields[field] = this.getFieldString(field);
+			}
+		}
+	}
+	return fields;
+};
+
+/*
 Get all the fields as a name:value block. Options:
 	exclude: an array of field names to exclude
 */
@@ -106,6 +124,19 @@ exports.isEqual = function(tiddler,excludeFields) {
 	}
 	// Return whether there were any differences
 	return differences.length === 0;
+};
+
+exports.getFieldDay = function(field) {
+	if(this.cache && this.cache.day && $tw.utils.hop(this.cache.day,field) ) {
+		return this.cache.day[field];
+	}
+	var day = "";
+	if(this.fields[field]) {
+		day = (new Date($tw.utils.parseDate(this.fields[field]))).setHours(0,0,0,0);
+	}
+	this.cache.day = this.cache.day || {};
+	this.cache.day[field] = day;
+	return day;
 };
 
 })();

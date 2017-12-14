@@ -16,7 +16,7 @@ Se puede insertar y dar formato a imágenes con WikiText. La sintaxis para ello 
 
 |!Acción |!Sintaxis |!Código de ejemplo |!Resultado |
 |Insertar imagen<br> (origen interno) |`[img[Título del tiddler con la imagen]]` |`[img[Motovun Jack.jpg]]` |[img[Motovun Jack.jpg]] |
-|Insertar imagen<br> (origen externo) |`[img[URL de la imagen]]` |`[img[http://tiddlywiki.com/favicon.ico]]` |[img[http://tiddlywiki.com/favicon.ico]] |
+|Insertar imagen<br> (origen externo) |`[img[URL de la imagen]]` |`[img[https://tiddlywiki.com/favicon.ico]]` |[img[https://tiddlywiki.com/favicon.ico]] |
 |Insertar imagen<br> con descripción emergente |`[img[descripción|origen]]` |`[img[Descripción emergente|Motovun Jack.jpg ]]`<br><br>^^(Pasa el ratón por encima de la imagen para ver la descripción emergente)^^ |[img[Esta es una descripción emergente|Motovun Jack.jpg]] |
 |Insertar imagen <br>con atributos |`[img atributo[descripción|origen]]` |`[img width=100 [Motovun Jack.jpg]]` |[img width=100 [Motovun Jack.jpg]] |
 

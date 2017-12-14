@@ -1,7 +1,7 @@
 title: $:/language/
 
 BinaryWarning/Prompt: Aquest tiddler conté dades binàries
-ClassicWarning/Hint: Aquest tiddler està escrit en format de text de TiddlyWiki, que no es totalment compatible amb la versió 5 de TiddlyWiki. Veieu els detalls a http://tiddlywiki.com/static/Upgrading.html . 
+ClassicWarning/Hint: Aquest tiddler està escrit en format de text de TiddlyWiki, que no es totalment compatible amb la versió 5 de TiddlyWiki. Veieu els detalls a https://tiddlywiki.com/static/Upgrading.html . 
 ClassicWarning/Upgrade/Caption: actualitza
 CloseAll/Button: tanca-ho tot
 ConfirmCancelTiddler: Voleu descartar els canvis del tiddler "<$text text=<<title>>/>"?
@@ -19,7 +19,7 @@ Encryption/RepeatPassword: Repetiu la contrasenya
 Encryption/SetPassword: Indiqueu la contrasenya
 Encryption/Username: Usuari
 InvalidFieldName: Hi ha caràcters il·legals al nom del camp "<$text text=<<fieldName>>/>". Els camps només poden utilitzar minúscules, digits i els caràcters subratllat (`_`), guió (`-`) i punt (`.`)
-MissingTiddler/Hint: Falta el tiddler "<$text text=<<currentTiddler>>/>" - cliqueu {{$:/core/images/edit-button}} per generar-ho
+MissingTiddler/Hint: Falta el tiddler "<$text text=<<currentTiddler>>/>" - cliqueu {{||$:/core/ui/Buttons/edit}} per generar-ho
 OfficialPluginLibrary: Biblioteca de connectors de ~TiddlyWiki Oficial
 PluginReloadWarning: Deseu si us plau {{$:/core/ui/Buttons/save-wiki}} i torneu a carregar {{$:/core/ui/Buttons/refresh}} per tal que els canvis als connectors es puguin activar
 RecentChanges/DateFormat: DD MMM YYYY

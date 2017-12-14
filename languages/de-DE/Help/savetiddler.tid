@@ -1,6 +1,11 @@
 title: $:/language/Help/savetiddler
 description: Speichert einen Tiddler als File.
 
+''WICHTIG:''
+
+* Der `--savetiddler` Befehl wird ab V5.1.15 durch `--save` ersetzt. 
+* `--savetiddler` wird auslaufen und sollte daher nicht mehr verwendet werden!
+
 Speichert einen individuellen Tiddler im Text- oder Binärformat mit dem angegebenen Dateinamen.
 
 ```

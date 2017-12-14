@@ -17,7 +17,9 @@ tc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerCl
 <$keyboard key="((cancel-edit-tiddler))" message="tm-cancel-tiddler">
 <$keyboard key="((save-tiddler))" actions=<<actions>>>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/EditTemplate]!has[draft.of]]" variable="listItem">
+<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
 <$transclude tiddler=<<listItem>>/>
+</$set>
 </$list>
 </$keyboard>
 </$keyboard>

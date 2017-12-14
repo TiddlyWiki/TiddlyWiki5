@@ -2,7 +2,7 @@ title: $:/language/Search/
 
 DefaultResults/Caption: Lista
 Filter/Caption: Filtro
-Filter/Hint: Procurar através de [[expressão de filtros|http://tiddlywiki.com/static/Filters.html]]
+Filter/Hint: Procurar através de [[expressão de filtros|https://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small><<resultCount>> resultados</small>//
 Matches: //<small><<resultCount>> resultados</small>//
 Matches/All: Todas as correspondências:

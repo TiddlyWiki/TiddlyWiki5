@@ -1,6 +1,10 @@
+caption: PHP
 created: 20140111091844267
-modified: 20161219200127042
-tags: Saving
+delivery: DIY
+description: DIY script you can install on your own server
+method: save
+modified: 20171115171431733
+tags: Saving PHP
 title: Saving on a PHP Server
 type: text/vnd.tiddlywiki
 
@@ -37,3 +41,7 @@ As your TW file increases in size, you may need to modify  your `.htaccess` or `
 php_value upload_max_filesize 4M
 php_value post_max_size 6M
 ```
+
+!!! Note about possible error message
+
+If you get an error message regarding `split()`, you may need to change references  to `split` in ''store.php'' to function `explode` .

@@ -2,7 +2,7 @@ title: $:/language/Search/
 
 DefaultResults/Caption: 列表
 Filter/Caption: 篩選
-Filter/Hint: 以[[篩選表達式|http://tiddlywiki.com/static/Filters.html]]搜尋
+Filter/Hint: 以[[篩選表達式|https://tiddlywiki.com/static/Filters.html]]搜尋
 Filter/Matches: //<small><<resultCount>> 個條目符合條件</small>//
 Matches: //<small><<resultCount>> 個條目符合條件</small>//
 Matches/All: 所有匹配：

@@ -3,7 +3,6 @@
 	"description": "Google Analytics: website statistics",
 	"author": "JeremyRuston",
 	"contributor": "Sylvain Comte",
-	"version":"5.1.14",
 	"core-version": ">=5.0.0",
 	"list": "readme settings usage"
 }

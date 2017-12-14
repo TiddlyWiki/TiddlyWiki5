@@ -10,6 +10,12 @@ Running TiddlyWiki on [[Node.js]] brings several important benefits over and abo
 * Individual tiddlers are stored in separate files, which you can organise as you wish
 * The ability to build multiple wikis that blend different combinations of shared and unique content
 
+There are a few file system limitations you should be aware of that are related to how TiddlyWiki was designed:
+
+* The best, most general way to interact with a running wiki is via the HTTP or JavaScript API, rather than manipulating the file store directly
+* Any modification to the contents of the wiki folder (e.g. images) might thus sometimes require that your restart the node.js server
+* TiddlyWiki might support manipulating the file store directly in the future
+
 For more information see:
 
 * [[Installing TiddlyWiki on Node.js]]

@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 The edit text widget provides a user interface in the browser for editing text tiddler fields. The editing element is dynamically bound to the underlying tiddler value: changes to the tiddler are instantly reflected, and any edits are instantly propogated.
 
-By default, the edit text widget generates a `<textarea>` as the HTML editing element when the `text` field is edited, and a `<input type="text">` element otherwise. This behaviour can be overridden with the `tag` and `type` attributes.
+By default, applying the EditTextWidget to the `text` field of a tiddler will generates an HTML `<textarea>` element, i.e. a multi-line editor. Applying the EditTextWidget to any other field generates an HTML `<input type="text">` element, a single-line editor. This behaviour can be overridden with the `tag` and `type` attributes.
 
 ! Content and Attributes
 
@@ -24,7 +24,7 @@ The content of the `<$edit-text>` widget is ignored.
 |placeholder |Placeholder text to be displayed when the edit field is empty |
 |focusPopup |Title of a state tiddler for a popup that is displayed when the editing element has focus  |
 |focus |Set to "yes" or "true" to automatically focus the editor after creation  |
-|tag |Overrides the generated HTML editing element tag. Use `textarea` for a multi-line editor |
+|tag |Overrides the generated HTML editing element tag. For a multi-line editor use `tag=textarea`. For a single-line editor use `tag=input` |
 |type |Overrides the generated HTML editing element `type` attribute |
 |size |The size of the input field (in characters) |
 |autoHeight |Either "yes" or "no" to specify whether to automatically resize `textarea` editors to fit their content (defaults to "yes") |

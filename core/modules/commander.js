@@ -30,6 +30,24 @@ var Commander = function(commandTokens,callback,wiki,streams) {
 };
 
 /*
+Log a string if verbose flag is set
+*/
+Commander.prototype.log = function(str) {
+	if(this.verbose) {
+		this.streams.output.write(str + "\n");
+	}
+};
+
+/*
+Write a string if verbose flag is set
+*/
+Commander.prototype.write = function(str) {
+	if(this.verbose) {
+		this.streams.output.write(str);
+	}
+};
+
+/*
 Add a string of tokens to the command queue
 */
 Commander.prototype.addCommandTokens = function(commandTokens) {

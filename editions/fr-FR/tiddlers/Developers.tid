@@ -7,6 +7,6 @@ type: text/vnd.tiddlywiki
 
 Les développeurs disposent de plusieurs ressources pour discuter et contribuer au développement de TiddlyWiki.
 
-* [[tiddlywiki.com/dev|http://tiddlywiki.com/dev]] la documentation officielle de développement 
+* [[tiddlywiki.com/dev|https://tiddlywiki.com/dev]] la documentation officielle de développement 
 * [[TiddlyWikiDev group|http://groups.google.com/group/TiddlyWikiDev]] pour les discussions au sujet du développement de TiddlyWiki
 * https://github.com/Jermolene/TiddlyWiki5 pour le code source et l'activité de développement

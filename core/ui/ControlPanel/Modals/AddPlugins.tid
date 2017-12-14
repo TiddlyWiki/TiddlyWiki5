@@ -90,6 +90,16 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 </$list>
 \end
 
+\define close-library-button()
+<$reveal type='nomatch' state='$:/temp/ServerConnection/$(PluginLibraryURL)$' text=''>
+<$button class='tc-btn-big-green'>
+<$action-sendmessage $message="tm-unload-plugin-library" url={{!!url}}/>
+{{$:/core/images/chevron-left}} {{$:/language/ControlPanel/Plugins/ClosePluginLibrary}}
+<$action-deletetiddler $filter="[prefix[$:/temp/ServerConnection/$(PluginLibraryURL)$]][prefix[$:/temp/RemoteAssetInfo/$(PluginLibraryURL)$]]"/>
+</$button>
+</$reveal>
+\end
+
 \define plugin-library-listing()
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/PluginLibrary]]">
 <div class="tc-plugin-library">
@@ -99,6 +109,10 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 //<$view field="url"/>//
 
 <$transclude/>
+
+<$set name=PluginLibraryURL value={{!!url}}>
+<<close-library-button>>
+</$set>
 
 <<display-server-connection>>
 </div>

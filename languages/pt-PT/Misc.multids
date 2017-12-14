@@ -1,8 +1,8 @@
 title: $:/language/
 
-AboveStory/ClassicPlugin/Warning: Parece que você está a tentar instalar uma extensão desenvolvida para a ~TiddlyWiki Classic. Por favor repare que [[estas extensões não funcionam com a TiddlyWiki versão 5.x.x|http://tiddlywiki.com/#TiddlyWikiClassic]]. Extensões ~TiddlyWiki Classic detectadas:
+AboveStory/ClassicPlugin/Warning: Parece que você está a tentar instalar uma extensão desenvolvida para a ~TiddlyWiki Classic. Por favor repare que [[estas extensões não funcionam com a TiddlyWiki versão 5.x.x|https://tiddlywiki.com/#TiddlyWikiClassic]]. Extensões ~TiddlyWiki Classic detectadas:
 BinaryWarning/Prompt: Este tiddler contém informação binária
-ClassicWarning/Hint: Este tiddler está escrito no formato de texto wiki da TiddlyWiki Clássica, que não é totalmente compatível com a TiddlyWiki versão 5. Veja http://tiddlywiki.com/static/Upgrading.html para mais detalhes.
+ClassicWarning/Hint: Este tiddler está escrito no formato de texto wiki da TiddlyWiki Clássica, que não é totalmente compatível com a TiddlyWiki versão 5. Veja https://tiddlywiki.com/static/Upgrading.html para mais detalhes.
 ClassicWarning/Upgrade/Caption: actualizar
 CloseAll/Button: fechar todos
 ColourPicker/Recent: Recente:
@@ -34,7 +34,7 @@ Error/XMLHttpRequest: Código de erro XMLHttpRequest
 InternalJavaScriptError/Hint: Bem, isto é embaraçoso. Recomenda-se que reinicie a sua TiddlyWiki recarregando o seu navegador
 InternalJavaScriptError/Title: Erro interno JavaScript
 InvalidFieldName: Caracteres ilegais no nome do ficheiro "<$text text=<<fieldName>>/>". Os campos apenas podem conter letras minúsculas, dígitos e os caracteres  subtraço (`_`), hífen (`-`) e ponto final (`.`)
-LazyLoadingWarning: <p>A carregar texto externo de ''<$text text={{!!_canonical_uri}}/>''</p><p>Se esta mensagem não desaparecer pode estar a utilizar um navegador que não suporta texto remoto nesta configuração. Veja http://tiddlywiki.com/#ExternalText</p>
+LazyLoadingWarning: <p>A carregar texto externo de ''<$text text={{!!_canonical_uri}}/>''</p><p>Se esta mensagem não desaparecer pode estar a utilizar um navegador que não suporta texto remoto nesta configuração. Veja https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Entrar em TiddlySpace
 Manager/Controls/FilterByTag/Prompt: Filtrar por etiqueta:
 Manager/Controls/Order/Prompt: Ordem inversa
@@ -50,7 +50,7 @@ Manager/Item/RawText: Código-fonte
 Manager/Item/Tags: Etiquetas
 Manager/Item/Tools: Ferramentas
 Manager/Item/WikifiedText: Texto formatado
-MissingTiddler/Hint: Tiddler "<$text text=<<currentTiddler>>/>" em falta - clique {{$:/core/images/edit-button}} para criar
+MissingTiddler/Hint: Tiddler "<$text text=<<currentTiddler>>/>" em falta - clique {{||$:/core/ui/Buttons/edit}} para criar
 No: Não
 OfficialPluginLibrary: Biblioteca de Extensões Official ~TiddlyWiki
 OfficialPluginLibrary/Hint: A Biblioteca de Extensões Official ~TiddlyWiki em tiddlywiki.com. Extensões temas e pacotes de idiomas são mantidos pela equipa principal.

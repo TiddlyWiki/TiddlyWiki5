@@ -1,5 +1,5 @@
 created: 20140908163900000
-modified: 20160610074043190
+modified: 20170328142732658
 tags: Learning
 title: Sharing your tiddlers with others
 type: text/vnd.tiddlywiki
@@ -11,6 +11,6 @@ There are a number of ways that people can share tiddlers:
 **A link to the URL of the file itself
 **A permalink ({{$:/core/images/permalink-button}}) to a specific tiddler (see [[PermaLinks]])
 **A permaview ({{$:/core/images/permaview-button}}) link of all the currently open tiddlers (see [[PermaView]])
-*You can grab tiddlers from ~TiddlyWikis that others have published online by clicking on a link to the tiddler within their file, and then dragging and dropping the link into your own file. An import tiddler will appear, and you can click to import the tiddler or tiddlers to your file. (see [[ImportTiddlers]])
+*You can grab tiddlers from ~TiddlyWikis that others have published online by clicking on a link to the tiddler within their file, and then dragging and dropping the link into your own file. An import tiddler will appear, and you can click to import the tiddler or tiddlers to your file (see [[Importing Tiddlers]])
 * You can [[share a Dropbox link to your TiddlyWiki|Sharing a TiddlyWiki on Dropbox]]
 * You can [[export tiddlers|How to export tiddlers]] ({{$:/core/images/export-button}}) in a variety of formats including text, static HTML, comma separated values (ie spreadsheet compatible)

@@ -1,5 +1,6 @@
 title: $:/language/Import/
 
+Imported/Hint: Τα ακόλουθα tiddler έχουν εισαχθεί:
 Listing/Cancel/Caption: Άκυρο
 Listing/Hint: Αυτά τα tiddlers είναι έτοιμα για εισαγωγή:
 Listing/Import/Caption: Εισαγωγή
@@ -11,4 +12,4 @@ Upgrader/Plugins/Suppressed/Version: Μπλοκαρισμένο πρόσθετο
 Upgrader/Plugins/Upgraded: Αναβαθμισμένο πρόσθετο από <<incoming>> σε <<upgraded>>
 Upgrader/State/Suppressed: Μπλοκαρισμένο προσωρινά tiddler κατάστασης
 Upgrader/System/Suppressed: Μπλοκαρισμένο tiddler συστήματος
-Upgrader/ThemeTweaks/Created: Μετα-εγκατεστημένη παραλλαγή θέματος από <$text text=<<from>>/>
+Upgrader/ThemeTweaks/Created: Απόδημη μικρή αλλαγή θέματος από <$text text=<<from>>/>

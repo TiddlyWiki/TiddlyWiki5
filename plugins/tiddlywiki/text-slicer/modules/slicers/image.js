@@ -15,20 +15,23 @@ Handle slicing img nodes
 exports.processImageNode = function(domNode,tagName) {
 	if(domNode.nodeType === 1 && tagName === "img") {
 		var src = domNode.getAttribute("src");
-		if(src && src.substr(0,5) === "data:") {
-			var parts = src.toString().substr(5).split(";base64,"),
-				type = parts[0],
-				text = parts[1],
-				contentTypeInfo = $tw.config.contentTypeInfo[type],
-				containerTitle = this.getTopContainer(),
+		if(src) {
+			var containerTitle = this.getTopContainer(),
 				containerTiddler = this.getTiddler(containerTitle),
-				title = this.makeUniqueTitle("image " + containerTitle) + contentTypeInfo.extension,
-				tiddler = {
-					title: title,
-					type: parts[0],
-					text: parts[1],
+				title, tiddler = {
 					"toc-type": "image"
 				};
+			if(src.substr(0,5) === "data:") {
+				var parts = src.toString().substr(5).split(";base64,");
+				tiddler.type = parts[0];
+				tiddler.text = parts[1];
+				var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.type] || {extension: ""};
+				title = this.makeUniqueTitle("image " + containerTitle) + contentTypeInfo.extension;
+				tiddler.title = title;
+				this.addTiddler(tiddler);
+			} else {
+				title = $tw.utils.resolvePath(src,this.baseTiddlerTitle);
+			}
 			switch(containerTiddler["toc-type"]) {
 				case "document":
 					// Make the image be the next child of the document
@@ -58,10 +61,9 @@ exports.processImageNode = function(domNode,tagName) {
 					this.insertBeforeListItem(parentTitle,itemTitle,containerTitle);
 					break;
 			}
-			this.addTiddler(tiddler);
 			// this.appendToCurrentContainer("[img[" + title + "]]");
+			return true;
 		}
-		return true;
 	} 
 	return false;
 };

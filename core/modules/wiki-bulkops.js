@@ -16,17 +16,18 @@ Bulk tiddler operations such as rename.
 Rename a tiddler, and relink any tags or lists that reference it.
 */
 function renameTiddler(fromTitle,toTitle,options) {
-	var self = this;
 	fromTitle = (fromTitle || "").trim();
 	toTitle = (toTitle || "").trim();
 	options = options || {};
 	if(fromTitle && toTitle && fromTitle !== toTitle) {
 		// Rename the tiddler itself
-		var tiddler = this.getTiddler(fromTitle);
-		this.addTiddler(new $tw.Tiddler(tiddler,{title: toTitle},this.getModificationFields()));
+		var oldTiddler = this.getTiddler(fromTitle),
+			newTiddler = new $tw.Tiddler(oldTiddler,{title: toTitle},this.getModificationFields());
+		newTiddler = $tw.hooks.invokeHook("th-renaming-tiddler",newTiddler,oldTiddler);
+		this.addTiddler(newTiddler);
 		this.deleteTiddler(fromTitle);
 		// Rename any tags or lists that reference it
-		relinkTiddler(fromTitle,toTitle,options)
+		this.relinkTiddler(fromTitle,toTitle,options)
 	}
 }
 
@@ -67,7 +68,9 @@ console.log("Renaming list item '" + list[index] + "' to '" + toTitle + "' of ti
 					});
 				}
 				if(isModified) {
-					self.addTiddler(new $tw.Tiddler(tiddler,{tags: tags, list: list},self.getModificationFields()));
+					var newTiddler = new $tw.Tiddler(tiddler,{tags: tags, list: list},self.getModificationFields())
+					newTiddler = $tw.hooks.invokeHook("th-relinking-tiddler",newTiddler,tiddler);
+					self.addTiddler(newTiddler);
 				}
 			}
 		});

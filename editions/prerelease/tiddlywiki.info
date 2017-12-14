@@ -12,7 +12,10 @@
 		"tiddlywiki/highlight",
 		"tiddlywiki/markdown",
 		"tiddlywiki/qrcode",
-		"tiddlywiki/bibtex"
+		"tiddlywiki/bibtex",
+		"tiddlywiki/savetrail",
+		"tiddlywiki/twitter",
+		"tiddlywiki/external-attachments"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

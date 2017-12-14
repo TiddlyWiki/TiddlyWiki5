@@ -80,9 +80,13 @@ ActionListopsWidget.prototype.invokeAction = function(triggeringWidget,
 			.filterTiddlers(subfilter, this)));
 	}
 	if(this.filtertags) {
-		var tagfilter = "[list[" + this.target + "!!tags]] " + this.filtertags;
-		this.wiki.setText(this.target, "tags", undefined, $tw.utils.stringifyList(
-			this.wiki.filterTiddlers(tagfilter, this)));
+		var tiddler = this.wiki.getTiddler(this.target),
+			oldtags = tiddler ? (tiddler.fields.tags || []).slice(0) : [],
+			tagfilter = "[list[" + this.target + "!!tags]] " + this.filtertags,
+			newtags = this.wiki.filterTiddlers(tagfilter,this);
+		if($tw.utils.stringifyList(oldtags.sort()) !== $tw.utils.stringifyList(newtags.sort())) {
+			this.wiki.setText(this.target,"tags",undefined,$tw.utils.stringifyList(newtags));			
+		}
 	}
 	return true; // Action was invoked
 };

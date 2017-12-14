@@ -12,7 +12,7 @@ isfilteroperator: Operands voor de ''is'' filter operator.
 library: Algemeen module type voor algemene JavaScript modules.
 macro: JavaScript macro definities.
 parser: 'Parsers' voor verschillende inhoudstypes.
-saver: 'Savers' gebruiken verschillende methodes voor het opslaan van bestanden vanuit de browser.
+saver: 'Savers' (opslagmodules) gebruiken verschillende methodes voor het opslaan van bestanden vanuit de browser.
 startup: Startup functies.
 storyview: 'Story views' passen de animatie en het gedrag van 'list' widgets aan.
 texteditoroperation: Een teksteditor knoppenbalkbewerking.

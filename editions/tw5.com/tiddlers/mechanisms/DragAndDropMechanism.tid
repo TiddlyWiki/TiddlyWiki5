@@ -1,0 +1,25 @@
+created: 20170328161210552
+modified: 20170406085836682
+tags: [[Importing Tiddlers]] [[Drag and Drop]] Mechanisms
+title: DragAndDropMechanism
+type: text/vnd.tiddlywiki
+
+This tiddler discusses the internal mechanisms that are used to implement drag and drop features in ~TiddlyWiki. See [[Drag and Drop]] for a general description of the features.
+
+<<.warning """
+~TiddlyWiki uses the [[standard HTML 5 drag and drop APIs|https://www.w3.org/TR/2010/WD-html5-20101019/dnd.html]]. However, this is an area that is rightly notorious for cross-browser compatibility problems. Therefore, some features that you might expect to work won't necessarily work in all browsers. In particular, 
+""">>
+
+The following widgets are concerned with drag and drop features:
+
+* The DraggableWidget creates a draggable element that represents one or more tiddlers for dragging
+** The ButtonWidget and LinkWidget incorporate the functionality of the DraggableWidget
+* The DroppableWidget creates an area into which tiddlers can be dragged to trigger customisable actions
+* The DropzoneWidget handles importing external tiddlers from files or by drag and drop from another browser window
+
+The general sequence of a drag and drop operation is as follows:
+
+# The user clicks down and drags the pointer on a draggable element such as the DraggableWidget, ButtonWidget or LinkWidget
+# The draggable element moves with the mouse pointer until the click is released
+# Moving the pointer over droppable elements such as the DroppableWidget displays a highlight indicating that the item can be dropped
+# The configured actions are performed if the drag ends on a droppable element

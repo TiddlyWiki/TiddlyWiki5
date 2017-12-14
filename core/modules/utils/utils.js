@@ -13,10 +13,42 @@ Various static utility functions.
 "use strict";
 
 /*
+Display a message, in colour if we're on a terminal
+*/
+exports.log = function(text,colour) {
+	console.log($tw.node ? exports.terminalColour(colour) + text + exports.terminalColour() : text);
+};
+
+exports.terminalColour = function(colour) {
+	if(!$tw.browser && $tw.node && process.stdout.isTTY) {
+		if(colour) {
+			var code = exports.terminalColourLookup[colour];
+			if(code) {
+				return "\x1b[" + code + "m";
+			}
+		} else {
+			return "\x1b[0m"; // Cancel colour
+		}
+	}
+	return "";
+};
+
+exports.terminalColourLookup = {
+	"black": "0;30",
+	"red": "0;31",
+	"green": "0;32",
+	"brown/orange": "0;33",
+	"blue": "0;34",
+	"purple": "0;35",
+	"cyan": "0;36",
+	"light gray": "0;37"
+};
+
+/*
 Display a warning, in colour if we're on a terminal
 */
 exports.warning = function(text) {
-	console.log($tw.node ? "\x1b[1;33m" + text + "\x1b[0m" : text);
+	exports.log(text,"brown/orange");
 };
 
 /*
@@ -224,11 +256,13 @@ exports.extendDeepCopy = function(object,extendedProperties) {
 
 exports.deepFreeze = function deepFreeze(object) {
 	var property, key;
-	Object.freeze(object);
-	for(key in object) {
-		property = object[key];
-		if($tw.utils.hop(object,key) && (typeof property === "object") && !Object.isFrozen(property)) {
-			deepFreeze(property);
+	if(object) {
+		Object.freeze(object);
+		for(key in object) {
+			property = object[key];
+			if($tw.utils.hop(object,key) && (typeof property === "object") && !Object.isFrozen(property)) {
+				deepFreeze(property);
+			}
 		}
 	}
 };
@@ -264,6 +298,9 @@ exports.formatDateString = function(date,template) {
 			}],
 			[/^0ss/, function() {
 				return $tw.utils.pad(date.getSeconds());
+			}],
+			[/^0XXX/, function() {
+				return $tw.utils.pad(date.getMilliseconds());
 			}],
 			[/^0DD/, function() {
 				return $tw.utils.pad(date.getDate());
@@ -306,6 +343,9 @@ exports.formatDateString = function(date,template) {
 			[/^ss/, function() {
 				return date.getSeconds();
 			}],
+			[/^XXX/, function() {
+				return date.getMilliseconds();
+			}],
 			[/^[AP]M/, function() {
 				return $tw.utils.getAmPm(date).toUpperCase();
 			}],
@@ -322,6 +362,16 @@ exports.formatDateString = function(date,template) {
 				return $tw.utils.pad(date.getFullYear() - 2000);
 			}]
 		];
+	// If the user wants everything in UTC, shift the datestamp
+	// Optimize for format string that essentially means 
+	// 'return raw UTC (tiddlywiki style) date string.'
+	if(t.indexOf("[UTC]") == 0 ) {
+		if(t == "[UTC]YYYY0MM0DD0hh0mm0ssXXX") 
+			return $tw.utils.stringifyDate(new Date());
+		var offset = date.getTimezoneOffset() ; // in minutes
+		date = new Date(date.getTime()+offset*60*1000) ;
+		t = t.substr(5) ;
+	} 
 	while(t.length){
 		var matchString = "";
 		$tw.utils.each(matches, function(m) {
@@ -493,7 +543,24 @@ exports.stringify = function(s) {
 		.replace(/'/g, "\\'")              // single quote character
 		.replace(/\r/g, '\\r')             // carriage return
 		.replace(/\n/g, '\\n')             // line feed
-		.replace(/[\x80-\uFFFF]/g, exports.escape); // non-ASCII characters
+		.replace(/[\x00-\x1f\x80-\uFFFF]/g, exports.escape); // non-ASCII characters
+};
+
+// Turns a string into a legal JSON string
+// Derived from peg.js, thanks to David Majda
+exports.jsonStringify = function(s) {
+	// See http://www.json.org/
+	return (s || "")
+		.replace(/\\/g, '\\\\')            // backslash
+		.replace(/"/g, '\\"')              // double quote character
+		.replace(/\r/g, '\\r')             // carriage return
+		.replace(/\n/g, '\\n')             // line feed
+		.replace(/\x08/g, '\\b')           // backspace
+		.replace(/\x0c/g, '\\f')           // formfeed
+		.replace(/\t/g, '\\t')             // tab
+		.replace(/[\x00-\x1f\x80-\uFFFF]/g,function(s) {
+			return '\\u' + $tw.utils.pad(s.charCodeAt(0).toString(16).toUpperCase(),4);
+		}); // non-ASCII characters
 };
 
 /*
@@ -696,7 +763,6 @@ exports.tagToCssSelector = function(tagName) {
 		return "\\" + c;
 	});
 };
-
 
 /*
 IE does not have sign function

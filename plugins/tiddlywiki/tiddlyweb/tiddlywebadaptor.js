@@ -23,6 +23,8 @@ function TiddlyWebAdaptor(options) {
 	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
 }
 
+TiddlyWebAdaptor.prototype.name = "tiddlyweb";
+
 TiddlyWebAdaptor.prototype.isReady = function() {
 	return this.hasStatus;
 };

@@ -15,7 +15,7 @@ This next chapter will focus on the parts of the core plug-in that provide the U
 
 <<<
 {{rendering.svg}}
-<<< The rendering pipeline [http://tiddlywiki.com/talkytalky, 17.07.2014]
+<<< The rendering pipeline [https://tiddlywiki.com/talkytalky, 17.07.2014]
 
 <$list filter="[!has[draft.of]has[chapter.of]chapter.of[UI and Rendering Pipeline]tag[doc]sort[sub.num]]">
 

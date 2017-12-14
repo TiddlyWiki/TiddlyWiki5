@@ -1,0 +1,22 @@
+title: $:/language/Modals/SaveInstructions
+type: text/vnd.tiddlywiki
+subtitle: Save your work
+footer: <$button message="tm-close-tiddler">Close</$button>
+help: http://tiddlywiki.com/static/SavingChanges.html
+
+Vaše spremembe v tem wikiju je treba shraniti kot datoteko HTML TiddlyWiki.
+
+!!! Namizni brskalniki
+
+# V meniju »Datoteka« izberite »Shrani kot«
+# Izberite ime datoteke in lokacijo
+#* Nekateri brskalniki zahtevajo, da izrecno določite obliko shranjevanja datoteke kot »spletna stran, samo HTML« ali podobno
+# Zaprite ta zavihek
+
+!!! Brskalniki na pametnih telefonih
+
+# Stran dodajte med zaznamke
+#* Če imate nastavljeno možnost iCloud ali Google Sync, se zaznamek samodejno sinhronizira z namizjem, kjer ga lahko odprete in ga shranite, kot je navedeno zgoraj
+# Zaprite ta zavihek
+
+//Če zaznamek znova odprete v aplikaciji Mobile Safari, se to sporočilo znova prikaže. Če želite nadaljevati in uporabiti datoteko, kliknite gumb »Zapri« spodaj//

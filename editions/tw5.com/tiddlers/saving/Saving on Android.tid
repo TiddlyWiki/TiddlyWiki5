@@ -1,6 +1,10 @@
+caption: ~AndTidWiki
 created: 20130825161400000
-modified: 20160601162226948
-tags: Saving
+delivery: App
+description: Android app for saving changes locally to device storage
+method: save
+modified: 20171113105950965
+tags: Saving Android
 title: Saving on Android
 type: text/vnd.tiddlywiki
 
