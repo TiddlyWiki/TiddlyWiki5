@@ -63,6 +63,16 @@ describe("WikiText parser tests", function() {
 			[ { type : 'element', tag : 'p', children : [ { type : 'element', tag : 'div', isBlock : false, attributes : { attribute : { type : 'string', name: 'attribute', value : 'value', start: 4, end: 22 } }, children : [ { type : 'text', text : 'some text' } ], start: 0, end: 23 } ] } ]
 
 		);
+		expect(parse("<div attribute='''value'''>some text</div>")).toEqual(
+
+			[ { type : 'element', tag : 'p', children : [ { type : 'element', tag : 'div', isBlock : false, attributes : { attribute : { type : 'string', name: 'attribute', value : 'value', start: 4, end: 26 } }, children : [ { type : 'text', text : 'some text' } ], start: 0, end: 27 } ] } ]
+
+		);
+		expect(parse("<div attribute=\"\"\"value\"\"\">some text</div>")).toEqual(
+
+			[ { type : 'element', tag : 'p', children : [ { type : 'element', tag : 'div', isBlock : false, attributes : { attribute : { type : 'string', name: 'attribute', value : 'value', start: 4, end: 26 } }, children : [ { type : 'text', text : 'some text' } ], start: 0, end: 27 } ] } ]
+
+		);
 		expect(parse("<div attribute={{TiddlerTitle}}>some text</div>")).toEqual(
 
 			[ { type : 'element', tag : 'p', children : [ { type : 'element', tag : 'div', isBlock : false, attributes : { attribute : { type : 'indirect', name: 'attribute', textReference : 'TiddlerTitle', start : 4, end : 31 } }, children : [ { type : 'text', text : 'some text' } ], start : 0, end : 32 } ] } ]
@@ -71,6 +81,16 @@ describe("WikiText parser tests", function() {
 		expect(parse("<$reveal state='$:/temp/search' type='nomatch' text=''>")).toEqual(
 
 			[ { type : 'element', tag : 'p', children : [ { type : 'reveal', tag: '$reveal', start : 0, attributes : { state : { start : 8, name : 'state', type : 'string', value : '$:/temp/search', end : 31 }, type : { start : 31, name : 'type', type : 'string', value : 'nomatch', end : 46 }, text : { start : 46, name : 'text', type : 'string', value : '', end : 54 } }, end : 55, isBlock : false, children : [  ] } ] } ]
+
+		);
+		expect(parse("<$reveal state='$:/temp/search' type='nomatch' text=''''''>")).toEqual(
+
+			[ { type : 'element', tag : 'p', children : [ { type : 'reveal', tag: '$reveal', start : 0, attributes : { state : { start : 8, name : 'state', type : 'string', value : '$:/temp/search', end : 31 }, type : { start : 31, name : 'type', type : 'string', value : 'nomatch', end : 46 }, text : { start : 46, name : 'text', type : 'string', value : '', end : 58 } }, end : 59, isBlock : false, children : [  ] } ] } ]
+
+		);
+		expect(parse("<$reveal state='$:/temp/search' type='nomatch' text=\"\"\"\"\"\">")).toEqual(
+
+			[ { type : 'element', tag : 'p', children : [ { type : 'reveal', tag: '$reveal', start : 0, attributes : { state : { start : 8, name : 'state', type : 'string', value : '$:/temp/search', end : 31 }, type : { start : 31, name : 'type', type : 'string', value : 'nomatch', end : 46 }, text : { start : 46, name : 'text', type : 'string', value : '', end : 58 } }, end : 59, isBlock : false, children : [  ] } ] } ]
 
 		);
 		expect(parse("<div attribute={{TiddlerTitle!!field}}>some text</div>")).toEqual(
