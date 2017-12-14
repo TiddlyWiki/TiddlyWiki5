@@ -1,5 +1,5 @@
 created: 20150221211317000
-modified: 20150221211719000
+modified: 20171214070409412
 tags: [[tabs Macro]] [[Macro Examples]]
 title: tabs Macro (Examples)
 type: text/vnd.tiddlywiki
@@ -12,3 +12,9 @@ eg="""<<tabs "[tag[sampletab]]" "SampleTabTwo" "$:/state/tab2" "tc-vertical">>""
 
 <$macrocall $name=".example" n="3"
 eg="""<<tabs "[tag[sampletab]nsort[order]]" "SampleTabThree" "$:/state/tab3" "tc-vertical">>"""/>
+
+<$macrocall $name=".example" n="4"
+eg="""<<tabs "SampleTabOne SampleTabTwo SampleTabThree SampleTabFour" "SampleTabOne" "$:/state/tab1">>"""/>
+
+<$macrocall $name=".example" n="5"
+eg="""<<tabs "SampleTabOne SampleTabTwo SampleTabThree SampleTabFour" "SampleTabOne" "$:/state/tab5">>"""/>

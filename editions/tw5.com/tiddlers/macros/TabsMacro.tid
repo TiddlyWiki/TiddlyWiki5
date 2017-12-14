@@ -1,6 +1,6 @@
 caption: tabs
 created: 20131228162203521
-modified: 20171113135543552
+modified: 20171214071137376
 tags: Macros [[Core Macros]]
 title: tabs Macro
 type: text/vnd.tiddlywiki
@@ -18,7 +18,7 @@ By default the tabs are arranged horizontally above the content. To get vertical
 ;default
 : The title of the tiddler whose tab is to be selected by default
 ;state
-: The prefix for the title of a [[state tiddler|StateMechanism]] for noting the currently selected tab, defaulting to `$:/state/tab`. It is recommended that this be a [[system tiddler|SystemTiddlers]]
+: The title of a [[state tiddler|StateMechanism]] persisting the currently selected tab. It is recommended that this be a [[system tiddler|SystemTiddlers]] path like `$:/state/tab/my-tabs`. If not specified, defaults to the value of <$link to="qualify Macro">`<<qualify "$:/state/tab">>`</$link>.
 ;class
 : Additional [[CSS|Cascading Style Sheets]] classes for the generated `div` elements. Multiple classes can be separated with spaces
 ;template
@@ -26,14 +26,20 @@ By default the tabs are arranged horizontally above the content. To get vertical
 ;buttonTemplate
 : Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the content of the button for the selected tab
 
-Within the template, the title of the selected tab is available in the <<.var currentTab>> variable.
+!! Current Tab
 
-The <<.vlink currentTiddler>> variable is not affected by the <<.var tabs>> macro. This can put you in trouble if the list of tabs includes tiddlers that depend on the value of the <<.vlink currentTiddler>>, for example tiddlers listing children based on its own name. To overcome this problem you can use a [[TemplateTiddler|TemplateTiddlers]] like the following:
+Within the template, the title of the selected tab is available in the <<.var currentTab>> [[variable|Variables]].
+
+The <<.vlink currentTiddler>> variable is not affected by the <<.var tabs>> macro. Should the contents of one or all tabs depend on the value of the <<.vlink currentTiddler>> use the TiddlerWidget within a [[TemplateTiddler|TemplateTiddlers]] as follows to ensure the right context:
 
 ```
 <$tiddler tiddler=<<currentTab>>>
 <$transclude mode="block" />
 </$tiddler>
 ```
+
+!! State
+
+If the same tabset is displayed in various places and unless the [[qualify Macro]] or another mechanism is used to define separate states, clicking a tab in one instance will <<.em "update all">> instances of the tabset at the same time. To see the difference, compare the first and fourth and then the fourth and fifth example below.
 
 <<.macro-examples "tabs">>
