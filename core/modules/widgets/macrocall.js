@@ -48,7 +48,9 @@ MacroCallWidget.prototype.execute = function() {
 		}
 	});
 	// Get the macro value
-	var text = this.getVariable(this.parseTreeNode.name || this.getAttribute("$name"),{params: params}),
+	var macroName = this.parseTreeNode.name || this.getAttribute("$name"),
+		variableInfo = this.getVariableInfo(macroName,{params: params}),
+		text = variableInfo.text,
 		parseTreeNodes;
 	// Are we rendering to HTML?
 	if(this.renderOutput === "text/html") {
@@ -56,6 +58,21 @@ MacroCallWidget.prototype.execute = function() {
 		var parser = this.wiki.parseText(this.parseType,text,
 							{parseAsInline: !this.parseTreeNode.isBlock});
 		parseTreeNodes = parser ? parser.tree : [];
+		// Wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
+		var attributes = {};
+		$tw.utils.each(variableInfo.params,function(param) {
+			var name = "__" + param.name + "__";
+			attributes[name] = {
+				name: name,
+				type: "string",
+				value: param.value
+			};
+		});
+		parseTreeNodes = [{
+			type: "vars",
+			attributes: attributes,
+			children: parseTreeNodes
+		}];
 	} else {
 		// Otherwise, we'll render the text
 		var plainText = this.wiki.renderText("text/plain",this.parseType,text,{parentWidget: this});
