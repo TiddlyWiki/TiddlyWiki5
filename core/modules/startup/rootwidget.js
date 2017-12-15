@@ -30,6 +30,10 @@ exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-notify",function(event) {
 		$tw.notifier.display(event.param,{variables: event.paramObject});
 	});
+	// Install the copy-to-clipboard  mechanism
+	$tw.rootWidget.addEventListener("tm-copy-to-clipboard",function(event) {
+		$tw.utils.copyToClipboard(event.param);
+	});
 	// Install the scroller
 	$tw.pageScroller = new $tw.utils.PageScroller();
 	$tw.rootWidget.addEventListener("tm-scroll",function(event) {
