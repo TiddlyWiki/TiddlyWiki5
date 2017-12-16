@@ -83,52 +83,73 @@ options: see below
 Options include
 params: array of {name:, value:} for each parameter
 defaultValue: default value if the variable is not defined
+
+Returns an object with the following fields:
+
+params: array of {name:,value:} of parameters passed to wikitext variables
+text: text of variable, with parameters properly substituted
 */
-Widget.prototype.getVariable = function(name,options) {
+Widget.prototype.getVariableInfo = function(name,options) {
 	options = options || {};
 	var actualParams = options.params || [],
 		parentWidget = this.parentWidget;
 	// Check for the variable defined in the parent widget (or an ancestor in the prototype chain)
 	if(parentWidget && name in parentWidget.variables) {
 		var variable = parentWidget.variables[name],
-			value = variable.value;
+			value = variable.value,
+			params = this.resolveVariableParameters(variable.params,actualParams);
 		// Substitute any parameters specified in the definition
-		value = this.substituteVariableParameters(value,variable.params,actualParams);
+		$tw.utils.each(params,function(param) {
+			value = $tw.utils.replaceString(value,new RegExp("\\$" + $tw.utils.escapeRegExp(param.name) + "\\$","mg"),param.value);
+		});
 		value = this.substituteVariableReferences(value);
-		return value;
+		return {
+			text: value,
+			params: params
+		};
 	}
 	// If the variable doesn't exist in the parent widget then look for a macro module
-	return this.evaluateMacroModule(name,actualParams,options.defaultValue);
+	return {
+		text: this.evaluateMacroModule(name,actualParams,options.defaultValue)
+	};
 };
 
-Widget.prototype.substituteVariableParameters = function(text,formalParams,actualParams) {
-	if(formalParams) {
-		var nextAnonParameter = 0, // Next candidate anonymous parameter in macro call
-			paramInfo, paramValue;
-		// Step through each of the parameters in the macro definition
-		for(var p=0; p<formalParams.length; p++) {
-			// Check if we've got a macro call parameter with the same name
-			paramInfo = formalParams[p];
-			paramValue = undefined;
-			for(var m=0; m<actualParams.length; m++) {
-				if(actualParams[m].name === paramInfo.name) {
-					paramValue = actualParams[m].value;
-				}
+/*
+Simplified version of getVariableInfo() that just returns the text
+*/
+Widget.prototype.getVariable = function(name,options) {
+	return this.getVariableInfo(name,options).text;
+};
+
+Widget.prototype.resolveVariableParameters = function(formalParams,actualParams) {
+	formalParams = formalParams || [];
+	actualParams = actualParams || [];
+	var nextAnonParameter = 0, // Next candidate anonymous parameter in macro call
+		paramInfo, paramValue,
+		results = [];
+	// Step through each of the parameters in the macro definition
+	for(var p=0; p<formalParams.length; p++) {
+		// Check if we've got a macro call parameter with the same name
+		paramInfo = formalParams[p];
+		paramValue = undefined;
+		for(var m=0; m<actualParams.length; m++) {
+			if(actualParams[m].name === paramInfo.name) {
+				paramValue = actualParams[m].value;
 			}
-			// If not, use the next available anonymous macro call parameter
-			while(nextAnonParameter < actualParams.length && actualParams[nextAnonParameter].name) {
-				nextAnonParameter++;
-			}
-			if(paramValue === undefined && nextAnonParameter < actualParams.length) {
-				paramValue = actualParams[nextAnonParameter++].value;
-			}
-			// If we've still not got a value, use the default, if any
-			paramValue = paramValue || paramInfo["default"] || "";
-			// Replace any instances of this parameter
-			text = $tw.utils.replaceString(text,new RegExp("\\$" + $tw.utils.escapeRegExp(paramInfo.name) + "\\$","mg"),paramValue);
 		}
+		// If not, use the next available anonymous macro call parameter
+		while(nextAnonParameter < actualParams.length && actualParams[nextAnonParameter].name) {
+			nextAnonParameter++;
+		}
+		if(paramValue === undefined && nextAnonParameter < actualParams.length) {
+			paramValue = actualParams[nextAnonParameter++].value;
+		}
+		// If we've still not got a value, use the default, if any
+		paramValue = paramValue || paramInfo["default"] || "";
+		// Store the parameter name and value
+		results.push({name: paramInfo.name, value: paramValue});
 	}
-	return text;
+	return results;
 };
 
 Widget.prototype.substituteVariableReferences = function(text) {
