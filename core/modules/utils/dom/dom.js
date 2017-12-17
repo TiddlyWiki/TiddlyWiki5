@@ -240,6 +240,7 @@ exports.copyToClipboard = function(text,options) {
 	textArea.style.position = "fixed";
 	textArea.style.top = 0;
 	textArea.style.left = 0;
+	textArea.style.fontSize = "12pt";
 	textArea.style.width = "2em";
 	textArea.style.height = "2em";
 	textArea.style.padding = 0;
@@ -250,6 +251,7 @@ exports.copyToClipboard = function(text,options) {
 	textArea.value = text;
 	document.body.appendChild(textArea);
 	textArea.select();
+	textArea.setSelectionRange(0,text.length);
 	var succeeded = false;
 	try {
 		succeeded = document.execCommand("copy");
