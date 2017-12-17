@@ -14,6 +14,8 @@ CloseOthers/Caption: 关闭其他
 CloseOthers/Hint: 关闭其他条目
 ControlPanel/Caption: 控制台
 ControlPanel/Hint: 开启控制台
+CopyToClipboard/Caption: 复制到剪贴板
+CopyToClipboard/Hint: 将此文本复制到剪贴板
 Delete/Caption: 删除
 Delete/Hint: 删除此条目
 Edit/Caption: 编辑
