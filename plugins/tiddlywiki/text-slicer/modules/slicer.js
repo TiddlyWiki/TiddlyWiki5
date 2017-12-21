@@ -304,7 +304,7 @@ Slicer.prototype.onImage = function(node) {
 		// 	role: this.role
 		// });
 	}
-	this.addTextToCurrentChunk("[img[" + url + "]]");
+	this.addTextToCurrentChunk("[img[" + $tw.utils.resolvePath(url,this.baseTiddlerTitle) + "]]");
 };
 
 Slicer.prototype.onCloseTag = function(name) {
