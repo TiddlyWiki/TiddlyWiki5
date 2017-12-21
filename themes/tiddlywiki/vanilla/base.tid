@@ -1746,6 +1746,7 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-tab-content.tc-vertical  {
+    word-break: break-word;
 	display: inline-block;
 	vertical-align: top;
 	padding-top: 0;
