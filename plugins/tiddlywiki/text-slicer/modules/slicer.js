@@ -375,7 +375,8 @@ Slicer.prototype.assignTitlesToChunks = function() {
 	// Create a title for each tiddler
 	var titles = {};
 	this.chunks.forEach(function(chunk) {
-		var title = self.makeUniqueTitle(titles,chunk["toc-type"] + "-" + chunk.title)
+		var base = chunk["toc-type"] === "document" ? "" : chunk["toc-type"] + "-" + chunk.title,
+			title = self.makeUniqueTitle(titles,base);
 		titles[title] = true;
 		chunk.title = title;
 	});
