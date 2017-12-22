@@ -320,3 +320,5 @@ Adrian Morosanu, @morosanuae, 2017/06/02
 Rob Hoelz, @hoelzro, 2017/05/08
 
 Saq Imtiaz, @saqimtiaz, 2017/06/14
+
+Simon Huber, @BurningTreeC, 2017/12/22
