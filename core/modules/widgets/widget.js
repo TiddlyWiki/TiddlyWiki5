@@ -238,26 +238,45 @@ Widget.prototype.getStateQualifier = function(name) {
 /*
 Compute the current values of the attributes of the widget. Returns a hashmap of the names of the attributes that have changed
 */
+var AttributeTypes = null;
+
 Widget.prototype.computeAttributes = function() {
 	var changedAttributes = {},
 		self = this,
 		value;
-	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
-		if(attribute.type === "filtered") {
-			value = self.wiki.filterTiddlers(attribute.filter,self)[0] || "";
-		} else if(attribute.type === "indirect") {
-			value = self.wiki.getTextReference(attribute.textReference,"",self.getVariable("currentTiddler"));
-		} else if(attribute.type === "macro") {
-			value = self.getVariable(attribute.value.name,{params: attribute.value.params});
-		} else { // String attribute
-			value = attribute.value;
+	if (!this.attributeGizmos) {
+		if (!AttributeTypes) {
+			AttributeTypes = {};
+			$tw.modules.applyMethods("attributevalue", AttributeTypes);
 		}
-		// Check whether the attribute has changed
-		if(self.attributes[name] !== value) {
-			self.attributes[name] = value;
+		// First-time attribute preparation
+		this.attributeGizmos = {};
+		$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
+			// Try to instantiate an attribute type.
+			var AttributeType = AttributeTypes[attribute.type];
+			if (AttributeType) {
+				self.attributeGizmos[name] = new AttributeType(self, attribute);
+				self.attributes[name] = self.attributeGizmos[name].value;
+				changedAttributes[name] = true;
+				return true;
+			}
+			// Unknown attribute types are treated as strings.
+			// String attributes don't change after the first computeAttributes().
+			self.attributes[name] = attribute.value;
 			changedAttributes[name] = true;
-		}
-	});
+			return true;
+		});
+	}
+	else {
+		$tw.utils.each(this.attributeGizmos,function(gizmo,name) {
+			// Full recompute (no selectivity is available)
+			value = gizmo.compute();
+			if(self.attributes[name] !== value) {
+				self.attributes[name] = value;
+				changedAttributes[name] = true;
+			}
+		});
+	}
 	return changedAttributes;
 };
 

@@ -1,0 +1,8 @@
+created: 20171225042213912
+description: An attribute value acquired via text reference.
+modified: 20171225042325491
+module-type: attributevalue
+revision: 0
+tags: 
+title: $:/core/modules/widgets/attributes/indirect.js
+type: application/javascript

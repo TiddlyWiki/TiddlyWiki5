@@ -1,0 +1,8 @@
+created: 20171224215126050
+description: Tag attribute rule for filtered values, eg. {{{[all[shadows]]}}}.
+modified: 20171224215155435
+module-type: attributerule
+revision: 0
+tags: 
+title: $:/core/modules/parsers/wikiparser/attributes/filtered.js
+type: application/javascript
