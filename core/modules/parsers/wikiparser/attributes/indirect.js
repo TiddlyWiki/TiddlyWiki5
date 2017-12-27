@@ -1,3 +1,11 @@
+/*\
+title: $:/core/modules/parsers/wikiparser/attributes/indirect.js
+type: application/javascript
+module-type: attributerule
+
+Tag attribute parser rule for transcluded values, eg. {{Layout!!height}}.
+
+\*/
 (function(){
 
 /*jslint node: true, browser: true */

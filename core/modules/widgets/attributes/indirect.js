@@ -1,3 +1,11 @@
+/*\
+title: $:/core/modules/widgets/attributes/indirect.js
+type: application/javascript
+module-type: attributevalue
+
+An attribute value acquired via filter expression.
+
+\*/
 (function(){
 
 /*jslint node: true, browser: true */

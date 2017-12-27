@@ -1,8 +1,0 @@
-created: 20171224214929513
-description: Tag attribute rule for transcluded values, eg. {{Layout!!height}}.
-modified: 20171224215110965
-module-type: attributerule
-revision: 0
-tags: 
-title: $:/core/modules/parsers/wikiparser/attributes/indirect.js
-type: application/javascript

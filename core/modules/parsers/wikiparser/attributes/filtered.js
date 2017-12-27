@@ -1,3 +1,11 @@
+/*\
+title: $:/core/modules/parsers/wikiparser/attributes/filtered.js
+type: application/javascript
+module-type: attributerule
+
+Tag attribute parser rule for filtered values, eg. {{{[all[shadows]]}}}.
+
+\*/
 (function(){
 
 /*jslint node: true, browser: true */

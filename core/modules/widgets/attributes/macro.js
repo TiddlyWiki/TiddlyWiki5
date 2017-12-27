@@ -1,3 +1,11 @@
+/*\
+title: $:/core/modules/widgets/attributes/macro.js
+type: application/javascript
+module-type: attributevalue
+
+An attribute value acquired via macro expansion.
+
+\*/
 (function(){
 
 /*jslint node: true, browser: true */

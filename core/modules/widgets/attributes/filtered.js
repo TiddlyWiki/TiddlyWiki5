@@ -1,9 +1,16 @@
+/*\
+title: $:/core/modules/widgets/attributes/filtered.js
+type: application/javascript
+module-type: attributevalue
+
+An attribute value acquired via filter expression.
+
+\*/
 (function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
-
 
 var FilteredAttribute = function(widget, node) {
 	this.widget = widget;

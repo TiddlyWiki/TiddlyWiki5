@@ -1,3 +1,11 @@
+/*\
+title: $:/core/modules/parsers/wikiparser/attributes/macro.js
+type: application/javascript
+module-type: attributerule
+
+Tag attribute parser rule for macros and variables, eg. <<currentTiddler>>.
+
+\*/
 (function(){
 
 /*jslint node: true, browser: true */
