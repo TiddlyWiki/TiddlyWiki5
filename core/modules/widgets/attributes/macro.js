@@ -27,7 +27,9 @@ Inherit from the base ??? class
 //FormulaAttribute.prototype = new Widget();
 
 MacroAttribute.prototype.compute = function() {
-	return this.widget.getVariable(this.macro.name, {params: this.macro.params});
+	var val = this.widget.getVariable(this.macro.name, {params: this.macro.params});
+	if (val == null) val = "";
+	return val;
 };
 
 MacroAttribute.prototype.recompute = function(changedTiddlers) {
