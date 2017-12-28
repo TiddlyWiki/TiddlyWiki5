@@ -252,24 +252,29 @@ Widget.prototype.computeAttributes = function() {
 		// First-time attribute preparation
 		this.attributeGizmos = {};
 		$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
-			// Try to instantiate an attribute type.
+			// Does the attribute type have a known module?
 			var AttributeType = AttributeTypes[attribute.type];
 			if (AttributeType) {
+				// Instantiate an attribute object.
 				self.attributeGizmos[name] = new AttributeType(self, attribute);
-				self.attributes[name] = self.attributeGizmos[name].value;
-				changedAttributes[name] = true;
-				return true;
+				value = self.attributeGizmos[name].value;
 			}
-			// Unknown attribute types are treated as strings.
-			// String attributes don't change after the first computeAttributes().
-			self.attributes[name] = attribute.value;
-			changedAttributes[name] = true;
+			else {
+				// Unknown attribute types are treated as strings.
+				// String attributes don't change after the first computeAttributes().
+				value = attribute.value;
+			}
+			// Is the value changed?
+			if (self.attributes[name] !== value) {
+				self.attributes[name] = value;
+				changedAttributes[name] = true;
+			}
 			return true;
 		});
 	}
 	else {
+		// Fully recompute all dynamic attributes (no selectivity is available)
 		$tw.utils.each(this.attributeGizmos,function(gizmo,name) {
-			// Full recompute (no selectivity is available)
 			value = gizmo.compute();
 			if(self.attributes[name] !== value) {
 				self.attributes[name] = value;
