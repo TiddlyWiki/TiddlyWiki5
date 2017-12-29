@@ -286,6 +286,25 @@ Widget.prototype.computeAttributes = function() {
 };
 
 /*
+Selectively re-compute previously computed attributes. Returns a hashmap of the names of the attributes that have changed
+*/
+Widget.prototype.refreshAttributes = function(changedTiddlers) {
+	if (!this.attributeGizmos) return computeAttributes();
+	var changedAttributes = {},
+		self = this,
+		value;
+	// Fully recompute all dynamic attributes (no selectivity is available)
+	$tw.utils.each(this.attributeGizmos,function(gizmo,name) {
+		value = gizmo.refresh(changedTiddlers);
+		if(self.attributes[name] !== value) {
+			self.attributes[name] = value;
+			changedAttributes[name] = true;
+		}
+	});
+	return changedAttributes;
+};
+
+/*
 Check for the presence of an attribute
 */
 Widget.prototype.hasAttribute = function(name) {

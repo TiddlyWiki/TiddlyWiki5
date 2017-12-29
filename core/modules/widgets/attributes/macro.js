@@ -32,7 +32,7 @@ MacroAttribute.prototype.compute = function() {
 	return val;
 };
 
-MacroAttribute.prototype.recompute = function(changedTiddlers) {
+MacroAttribute.prototype.refresh = function(changedTiddlers) {
 	this.value = this.compute();
 	return this.value;
 };
