@@ -12,9 +12,6 @@ An attribute value acquired via macro expansion.
 /*global $tw: false */
 "use strict";
 
-var Formulas = require("$:/plugins/ebalster/formula/compile.js");
-var Operands = require("$:/plugins/ebalster/formula/operands.js");
-
 var MacroAttribute = function(widget, node) {
 	this.widget = widget;
 	this.macro = node.value;
