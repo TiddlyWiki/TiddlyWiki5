@@ -248,14 +248,13 @@ exports.parseAttribute = function(source,pos) {
 			return node;
 		}
 		// Load attribute rules if needed
-		if (!AttributeRules)
-		{
+		if (!AttributeRules) {
 			AttributeRules = {};
-			$tw.modules.applyMethods("attributerule", AttributeRules);
+			$tw.modules.applyMethods("attributerule",AttributeRules);
 		}
 		// Look for an attribute rule
 		var match = null;
-		$tw.utils.each(AttributeRules, function(rule) {
+		$tw.utils.each(AttributeRules,function(rule) {
 			match = rule(source,pos,node);
 			return !match;
 		});
@@ -271,7 +270,6 @@ exports.parseAttribute = function(source,pos) {
 			node.type = "string";
 			node.value = "true";
 		}
-		//*/
 	} else {
 		node.type = "string";
 		node.value = "true";

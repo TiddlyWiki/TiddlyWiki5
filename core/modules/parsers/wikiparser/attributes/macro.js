@@ -12,11 +12,10 @@ Tag attribute parser rule for macros and variables, eg. <<currentTiddler>>.
 /*global $tw: false */
 "use strict";
 
-exports.macro = function(source, pos, node) {
+exports.macro = function(source,pos,node) {
 	// Is it a macro invocation?
 	var macroInvocation = $tw.utils.parseMacroInvocation(source,pos);
 	if (!macroInvocation) return null;
-
 	node.type = "macro";
 	node.value = macroInvocation;
 	node.end = macroInvocation.end;

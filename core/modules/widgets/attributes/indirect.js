@@ -12,7 +12,7 @@ An attribute value acquired via filter expression.
 /*global $tw: false */
 "use strict";
 
-var IndirectAttribute = function(widget, node) {
+var IndirectAttribute = function(widget,node) {
 	this.widget = widget;
 	this.textReference = $tw.utils.parseTextReference(node.textReference);
 	if (!this.textReference.title) this.currentTiddler = this.widget.getVariable("currentTiddler");
@@ -22,7 +22,7 @@ var IndirectAttribute = function(widget, node) {
 /*
 Inherit from the base ??? class
 */
-//FormulaAttribute.prototype = new Attribute();
+//FormulaAttribute.prototype = new AttributeGizmo();
 
 IndirectAttribute.prototype.compute = function() {
 	var tr = this.textReference,

@@ -12,7 +12,7 @@ An attribute value acquired via filter expression.
 /*global $tw: false */
 "use strict";
 
-var FilteredAttribute = function(widget, node) {
+var FilteredAttribute = function(widget,node) {
 	this.widget = widget;
 	this.filter = node.filter;
 	this.compiledFilter = this.widget.wiki.compileFilter(this.filter);
@@ -22,14 +22,12 @@ var FilteredAttribute = function(widget, node) {
 /*
 Inherit from the base ??? class
 */
-//FormulaAttribute.prototype = new Attribute();
+//FormulaAttribute.prototype = new AttributeGizmo();
 
 FilteredAttribute.prototype.compute = function() {
-	this.results = this.compiledFilter.call(this.widget.wiki, undefined, this.widget);
-
+	this.results = this.compiledFilter.call(this.widget.wiki,undefined,this.widget);
 	// TODO why only one result?  Can we return a list??
 	return this.results[0] || "";
-	//return $tw.wiki.filterTiddlers(this.filter,this.widget)[0] || "";
 };
 
 FilteredAttribute.prototype.refresh = function(changedTiddlers) {

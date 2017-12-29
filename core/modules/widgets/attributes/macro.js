@@ -12,7 +12,7 @@ An attribute value acquired via macro expansion.
 /*global $tw: false */
 "use strict";
 
-var MacroAttribute = function(widget, node) {
+var MacroAttribute = function(widget,node) {
 	this.widget = widget;
 	this.macro = node.value;
 	this.value = this.compute();
@@ -21,12 +21,12 @@ var MacroAttribute = function(widget, node) {
 /*
 Inherit from the base ??? class
 */
-//FormulaAttribute.prototype = new Widget();
+//FormulaAttribute.prototype = new AttributeGizmo();
 
 MacroAttribute.prototype.compute = function() {
-	var val = this.widget.getVariable(this.macro.name, {params: this.macro.params});
-	if (val == null) val = "";
-	return val;
+	var value = this.widget.getVariable(this.macro.name,{params: this.macro.params});
+	if (value == null) value = "";
+	return value;
 };
 
 MacroAttribute.prototype.refresh = function(changedTiddlers) {

@@ -247,7 +247,7 @@ Widget.prototype.computeAttributes = function() {
 	if (!this.attributeGizmos) {
 		if (!AttributeTypes) {
 			AttributeTypes = {};
-			$tw.modules.applyMethods("attributevalue", AttributeTypes);
+			$tw.modules.applyMethods("attributevalue",AttributeTypes);
 		}
 		// First-time attribute preparation
 		this.attributeGizmos = {};
@@ -256,7 +256,7 @@ Widget.prototype.computeAttributes = function() {
 			var AttributeType = AttributeTypes[attribute.type];
 			if (AttributeType) {
 				// Instantiate an attribute object.
-				self.attributeGizmos[name] = new AttributeType(self, attribute);
+				self.attributeGizmos[name] = new AttributeType(self,attribute);
 				value = self.attributeGizmos[name].value;
 			}
 			else {
