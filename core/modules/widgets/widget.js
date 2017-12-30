@@ -48,6 +48,10 @@ Widget.prototype.initialise = function(parseTreeNode,options) {
 	if(!this.widgetClasses) {
 		Widget.prototype.widgetClasses = $tw.modules.applyMethods("widget");
 	}
+	// Hashmap of the attribute classes
+	if(!this.attributeClasses) {
+		Widget.prototype.attributeClasses = $tw.modules.applyMethods("attributevalue");
+	}
 };
 
 /*
@@ -238,25 +242,19 @@ Widget.prototype.getStateQualifier = function(name) {
 /*
 Compute the current values of the attributes of the widget. Returns a hashmap of the names of the attributes that have changed
 */
-var AttributeTypes = null;
-
 Widget.prototype.computeAttributes = function() {
 	var changedAttributes = {},
 		self = this,
 		value;
 	if (!this.attributeGizmos) {
-		if (!AttributeTypes) {
-			AttributeTypes = {};
-			$tw.modules.applyMethods("attributevalue",AttributeTypes);
-		}
 		// First-time attribute preparation
 		this.attributeGizmos = {};
 		$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
 			// Does the attribute type have a known module?
-			var AttributeType = AttributeTypes[attribute.type];
-			if (AttributeType) {
+			var AttributeClass = self.attributeClasses[attribute.type];
+			if (AttributeClass) {
 				// Instantiate an attribute object.
-				self.attributeGizmos[name] = new AttributeType(self,attribute);
+				self.attributeGizmos[name] = new AttributeClass(self,attribute);
 				value = self.attributeGizmos[name].value;
 			}
 			else {
