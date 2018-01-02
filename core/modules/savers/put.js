@@ -58,12 +58,13 @@ PutSaver.prototype.save = function(text, method, callback) {
 		return false;
 	}
 	var self = this;
+	var uri = this.uri();
 	var headers = { "Content-Type": "text/html;charset=UTF-8" };
 	if(this.etag) {
 		headers["If-Match"] = this.etag;
 	}
 	$tw.utils.httpRequest({
-		url: this.uri(),
+		url: uri,
 		type: "PUT",
 		headers: headers,
 		data: text,
@@ -71,8 +72,27 @@ PutSaver.prototype.save = function(text, method, callback) {
 			if(err) {
 				callback(err);
 			} if(xhr.status === 200 || xhr.status === 201) {
-				self.etag = xhr.getResponseHeader("ETag");
-				callback(null); // success
+				var determineETag = function(xhr, errback) {
+					var etag = xhr.getResponseHeader("ETag");
+					if(etag) {
+						self.etag = etag;
+						callback(null); // success
+					} else {
+						errback();
+					}
+				};
+
+				determineETag(xhr, function() {
+					$tw.utils.httpRequest({
+						url: uri,
+						type: "HEAD",
+						callback: function(err, data, xhr) {
+							determineETag(xhr, function() {
+								callback("failed to retrieve ETag"); // should never occur?
+							});
+						}
+					});
+				});
 			} else if(xhr.status === 412) { // edit conflict
 				var message = $tw.language.getString("Error/EditConflict");
 				callback(message);
