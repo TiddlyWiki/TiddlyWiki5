@@ -23,6 +23,7 @@
 		"tiddlywiki/stacked-view",
 		"tiddlywiki/text-slicer",
 		"tiddlywiki/xlsx-utils",
+		"tiddlywiki/sax",
 		"tiddlywiki/xmldom"
 	],
 	"languages": [
