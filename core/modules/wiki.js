@@ -680,15 +680,12 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 Extract an indexed field from within a data tiddler
 */
 exports.extractTiddlerDataItem = function(titleOrTiddler,index,defaultText) {
-	var data = this.getTiddlerDataCached(titleOrTiddler,Object.create(null)),
-		text;
-	if(data && $tw.utils.hop(data,index)) {
-		text = data[index];
-	}
+	var data = this.getTiddlerDataCached(titleOrTiddler,Object.create(null));
+	var text = $tw.utils.objGet(data,index);
 	if(typeof text === "string" || typeof text === "number") {
 		return text.toString();
 	} else {
-		return defaultText;
+		return defaultText || JSON.stringify(text, null, 2);
 	}
 };
 

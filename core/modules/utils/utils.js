@@ -791,4 +791,16 @@ exports.strEndsWith = function(str,ending,position) {
 	}
 };
 
+/*
+Allows grabbing nested properties in an object safely (without ReferenceError)
+*/
+exports.objGet = function(obj,selector) {
+  if(obj == null) { return null; }
+  if(!selector || selector.length === 0) { return obj; }
+  if("string" === typeof selector) {
+    selector = selector.split(".");
+  }
+  return exports.objGet(obj[selector.shift()], selector);
+};
+
 })();

@@ -28,6 +28,6 @@ The same is true if `MonthDays` is a [[JSONTiddler|JSONTiddlers]] with the follo
 {"oct":31,"nov":30,"dec":31}
 ```
 
-Note: //It is currently only possible to retrieve data from the immediate properties of the root object of a JSONTiddler.//
+Note: For JSONTiddler nested properties you can use //dot notation//. For arrays you can also use their numbered index. For exxample: `{{MonthDays##nov.full}}`.
 
 The widgets ActionSetFieldWidget and ActionListopsWidget can manipulate named properties of data tiddlers by indicating the name of the property in the $index attribute. To create or modify a named property with ActionSetFieldWidget, provide a $value attribute. To delete a named property with ActionSetFieldWidget, omit the $value attribute. ActionListopsWidget assigns the named property the list constructed through its $filter and $subfilter attributes.
