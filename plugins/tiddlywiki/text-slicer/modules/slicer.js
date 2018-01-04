@@ -31,6 +31,7 @@ function Slicer(options) {
 	this.wiki = options.wiki;
 	this.role = options.role || "sliced-html";
 	this.outputMode = options.outputMode || "html";
+	this.escapeWikiText = options.escapeWikiText || false;
 	this.callbackFn = options.callback;
 	// Get the slicer rules
 	var nameSlicerRules = null;
@@ -337,7 +338,18 @@ Slicer.prototype.onCloseTag = function(name) {
 };
 
 Slicer.prototype.onText = function(text) {
-	this.addTextToCurrentChunk($tw.utils.htmlEncode(text));
+	var self = this;
+	text = $tw.utils.htmlEncode(text);
+	// Optionally escape common character sequences that might be parsed as wikitext
+	if(this.escapeWikiText) {
+		$tw.utils.each(["[[","{{","__","''","//",",,","^^","~~","`","--","\"\"","@@"],function(str) {
+			var replace = str.split("").map(function(c) {
+				return "&#" + c.charCodeAt(0) + ";";
+			}).join("");
+			text = text.replace(new RegExp($tw.utils.escapeRegExp(str),"mg"),replace);
+		});
+	}
+	this.addTextToCurrentChunk(text);
 	this.addTextToCurrentChunk(text,"title");
 };
 
