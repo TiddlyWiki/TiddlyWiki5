@@ -1,0 +1,43 @@
+title: $:/plugins/tiddlywiki/text-slicer/slicer-rules/html-linear.json
+name: html-linear
+caption: Linear (HTML)
+description: One tiddler per paragraph in a single linear thread (HTML)
+type: application/json
+tags: $:/tags/text-slicer/slicer-rules
+
+[
+	{
+		"selector": "address,blockquote,center,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,hr,iframe,isindex,noframes,noscript,ol,p,pre,table,ul",
+		"actions": {
+			"startNewChunk": {
+				"toc-type": "paragraph"
+			}
+		}
+	},
+	{
+		"selector": "code,em,i,dd,li,strike,strong,b,sub,sup,u",
+		"actions": {
+		}
+	},
+	{
+		"selector": "img",
+		"actions": {
+			"isImage": true
+		}
+	},
+	{
+		"selector": "head > title",
+		"actions": {
+			"dontRenderTag": true,
+			"startNewChunk": {
+				"toc-type": "title"
+			}
+		}
+	},
+	{
+		"selector": "*",
+		"actions": {
+			"dontRenderTag": true
+		}
+	}
+]
