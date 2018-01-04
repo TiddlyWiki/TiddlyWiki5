@@ -66,8 +66,9 @@ function Slicer(options) {
 	this.parentStack.push({chunk: 0, actions: this.getMatchingSlicerRuleActions("(document)")});
 	// Set up the parser
 	var sax = require("$:/plugins/tiddlywiki/sax/sax.js");
-	this.sax = sax.parser(true,{
-		xmlns: true
+	this.sax = sax.parser(false,{
+		xmlns: true,
+		lowercase: true
 	});
 	this.sax.onerror = this.onError.bind(this);
 	this.sax.onopennamespace = this.onOpenNamespace.bind(this);
