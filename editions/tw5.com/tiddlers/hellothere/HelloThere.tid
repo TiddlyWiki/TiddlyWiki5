@@ -11,7 +11,7 @@ Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook f
 
 Use it to keep your [[to-do list|TaskManagementExample]], to plan an [[essay or novel|"TiddlyWiki for Scholars" by Alberto Molina]], or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.
 
-<div style="font-size:0.7em;text-align:center;margin-top:2em;margin-bottom:2em;">
+<div style="font-size:0.7em;text-align:center;max-width:800px;margin:3em auto;">
 <<list-thumbnails filter:"[tag[HelloThumbnail]]" width:"168" height:"95">>
 </div>
 
