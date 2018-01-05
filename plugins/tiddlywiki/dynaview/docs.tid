@@ -1,0 +1,53 @@
+title: $:/plugins/tiddlywiki/dynaview/docs
+
+! Documentation
+
+The components of this plugin include:
+
+* A background task that:
+** performs specified actions when elements are scrolled into view
+** updates certain base classes on the `document.body` according to the current zoom level
+* Pre-configured CSS classes to simplify using those base classes
+* Usage examples
+
+! Scroll Features
+
+The background task detects when elements with the class `tc-dynaview-set-tiddler-when-visible` scroll into view. The first time that they do, the background task assigns the value in the attribute `data-dynaview-set-value` to the tiddler whose title is in the attribute `data-dynaview-set-tiddler`. This assignment can be tied to a reveal widget to cause content to be displayed when it becomes visible. If the class `tc-dynaview-expand-viewport` is set then the viewport is expanded so that the processing occurs when elements move near the viewport.
+
+! Zoom Features
+
+!! Document Body Zoom Classes
+
+The background task sets the following classes on `document.body` according to the current zoom level.
+
+|!Class |!Description |
+|`tc-dynaview-zoom-factor-1` |Set when the zoom level is less than 2.00 |
+|`tc-dynaview-zoom-factor-2` |Set when the zoom level is greater than 2.00 and less than 3.00 |
+|`tc-dynaview-zoom-factor-3` |Set when the zoom level is greater than 3.00 and less than 4.00 |
+|`tc-dynaview-zoom-factor-4` |Set when the zoom level is greater than 4.00 |
+|`tc-dynaview-zoom-factor-1-and-above` |Set when the zoom level is greater than or equal to 1.00 |
+|`tc-dynaview-zoom-factor-1a-and-above` |Set when the zoom level is greater than or equal to 1.14 |
+|`tc-dynaview-zoom-factor-1b-and-above` |Set when the zoom level is greater than or equal to 1.33 |
+|`tc-dynaview-zoom-factor-1c-and-above` |Set when the zoom level is greater than or equal to 1.60 |
+|`tc-dynaview-zoom-factor-2-and-above` |Set when the zoom level is greater than or equal to 2.00 |
+|`tc-dynaview-zoom-factor-2a-and-above` |Set when the zoom level is greater than or equal to 2.66 |
+|`tc-dynaview-zoom-factor-3-and-above` |Set when the zoom level is greater than or equal to 3.00 |
+|`tc-dynaview-zoom-factor-4-and-above` |Set when the zoom level is greater than or equal to 4.00 |
+
+!! Pre-configured Classes
+
+These classes can be used on any element to control its visibility at different zoom levels.
+
+|!Class |!Description |
+|`tc-dynaview-zoom-visible-1-and-above` |Visible when the zoom level is 1.00 or more |
+|`tc-dynaview-zoom-visible-1a-and-above` |Visible when the zoom level is 1.14 or more |
+|`tc-dynaview-zoom-visible-1b-and-above` |Visible when the zoom level is 1.33 or more |
+|`tc-dynaview-zoom-visible-1c-and-above` |Visible when the zoom level is 1.60 or more |
+|`tc-dynaview-zoom-visible-2-and-above` |Visible when the zoom level is 2.00 or more |
+|`tc-dynaview-zoom-visible-2a-and-above` |Visible when the zoom level is 2.66 or more |
+|`tc-dynaview-zoom-visible-3-and-above` |Visible when the zoom level is 3.00 or more |
+|`tc-dynaview-zoom-visible-4-and-above` |Visible when the zoom level is 4.00 or more |
+|`tc-dynaview-zoom-visible-1` |Visible when the zoom level is less than 2.00 |
+|`tc-dynaview-zoom-visible-2` |Visible when the zoom level is greater than or equal to 2.00 and less than 3.00 |
+|`tc-dynaview-zoom-visible-3` |Visible when the zoom level is greater than or equal to 3.00 and less than 4.00 |
+|`tc-dynaview-zoom-visible-4` |Visible when the zoom level is greater than or equal to 4.00 |
