@@ -1,12 +1,12 @@
 created: 20171109170823847
 modified: 20171113161750857
 tags: Platforms
-title: Firefox Apocalypse
+title: TiddlyFox Apocalypse
 type: text/vnd.tiddlywiki
 
 ! Summary
 
-On 14th November 2017 Mozilla will [[release Firefox 57|https://blog.mozilla.org/blog/2017/09/26/firefox-quantum-beta-developer-edition/]], a major new version with many improvements and security enhancements. However, in amongst those improvements are ''some fundamental changes to Firefox's security model with the unfortunate effect of making it impossible for ~TiddlyFox to function''.
+On 14th November 2017 Mozilla [[released Firefox 57|https://blog.mozilla.org/blog/2017/09/26/firefox-quantum-beta-developer-edition/]], a major new version with many improvements and security enhancements. However, in amongst those improvements are ''some fundamental changes to Firefox's security model with the unfortunate effect of making it impossible for ~TiddlyFox to function''.
 
 TiddlyFox will remain available for people who [[continue to use older versions of Firefox|https://groups.google.com/d/topic/tiddlywiki/OJQ0yRq4zog/discussion]], but anyone upgrading to the new version will need to choose a new way to handle saving changes with TiddlyWiki.
 
