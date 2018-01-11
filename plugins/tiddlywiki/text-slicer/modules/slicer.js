@@ -361,6 +361,11 @@ Slicer.prototype.onEnd = function() {
 
 Slicer.prototype.addTextToCurrentChunk = function(str,field) {
 	field = field || "text";
+	if(this.currentChunk === null && str.trim() !== "") {
+		this.startNewChunk({
+			"toc-type": "paragraph"
+		});
+	}
 	if(this.currentChunk !== null) {
 		this.chunks[this.currentChunk][field] += str;
 	}
