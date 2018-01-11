@@ -56,7 +56,7 @@ function Slicer(options) {
 	this.chunks.push({
 		"toc-type": "document",
 		title: "", // makeUniqueTitle will later initialise it to baseTiddlerTitle
-		text: "<div class='tc-table-of-contents'><<toc-selective-expandable '" + this.baseTiddlerTitle + "document'>></div>",
+		text: "<div class='tc-table-of-contents'><<toc-selective-expandable \"\"\"" + this.baseTiddlerTitle + "document\"\"\">></div>",
 		list: [],
 		tags: [],
 		role: this.role,
