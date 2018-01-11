@@ -1,6 +1,6 @@
 caption: 5.1.16
 created: 20171114142602640
-modified: 20171114142602640
+modified: 20180111112906648
 tags: ReleaseNotes
 title: Release 5.1.16
 type: text/vnd.tiddlywiki
@@ -9,21 +9,29 @@ type: text/vnd.tiddlywiki
 
 !! New and Improved Plugins
 
-* 
+* New [[Dynaview Plugin]] makes it possible to build user interfaces that dynamically respond to changes in scrolling or zooming
+* Improved [[Text-Slicer Plugin|Text-Slicer Edition]] with customisable JSON rules
 
 !! Translation Improvements
 
 New and improved translations:
 
-* 
+* New Slovenian translation
+* Improved German translation
+* Traditional and Simplified Chinese
+** These translations now also reset the minimum search length to one character
 
 !! Usability Improvements
 
-* 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d2ff164c07788818ded9826c9e3811599272e69c]] [[WidgetMessage: tm-copy-to-clipboard]] and [[also|https://github.com/Jermolene/TiddlyWiki5/commit/1b6a06a4d79ad5c58593a7844e306c25848979ea]] [[copy-to-clipboard Macro]] for copying text directly to the clipboard
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3040]] a hint to the field list dropdown
 
 !! Hackability Improvements
 
-* 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b4c7c59d5d1bc5282fcfed58abbf087b9f65b86c]] new 'emptyMessage' parameter to [[list-links Macro]] and [[list-tagged-draggable Macro]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/de4eb5ca89132db136c8f5fb3103f289f25fe98a]] new `th-page-refreshed` hook
+* [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/pull/3063]] macro evaluation by making parameters available as variables - see "Parameters as Variables" in [[Macro Definitions in WikiText]]
+* [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/pull/3052]] LinkWidget to allow better customisation of CSS classes
 
 !! Node.js Improvements
 
@@ -31,29 +39,29 @@ New and improved translations:
 
 !! Bug Fixes
 
-* 
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/7e71fcfab80bed9aed4389eea386fb2036cc4a85]] problem with the content area of vertical tabs sometimes overflowing their right hand margin
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3079]] problem with double quotes within the new journal template
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3070]] problem with dragging inside a textarea
+
 
 !! Developer Bug Fixes and Improvements
 
-* 
+* Several optimisations to the tiddler store:
+** [[Avoiding slow Object.keys calls|https://github.com/Jermolene/TiddlyWiki5/commit/254e1ca7f7a5fe9d2deef72692ada2b7637f34ce]] - saving 50% of some operations
+** [[Optimising the tag filter|https://github.com/Jermolene/TiddlyWiki5/commit/e4b10d42f9480c0505862a93f0b97d1c4270ed65]] - saving 50% on some tag operations
+** [[Minor improvements to tiddler deletion|https://github.com/Jermolene/TiddlyWiki5/commit/358d4165260311446f2b433591762dd667250975]]
 
 ! Contributors
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
-* [[@0mp|https://github.com/0mp]]
-* [[@Arlen22|https://github.com/Arlen22]]
+* [[@anavarre|https://github.com/anavarre]]
 * [[@BramChen|https://github.com/BramChen]]
-* [[@cjhunt|https://github.com/cjhunt]]
-* [[@danielo515|https://github.com/danielo515]]
-* [[@hoelzro|https://github.com/hoelzro]]
+* [[@BurningTreeC|https://github.com/BurningTreeC]]
+* [[@furicle|https://github.com/furicle]]
+* [[@ibnishak|https://github.com/ibnishak]]
 * [[@Marxsal|https://github.com/Marxsal]]
-* [[@maxthomax|https://github.com/maxthomax]]
-* [[@morosanuae|https://github.com/morosanuae]]
 * [[@pmario|https://github.com/pmario]]
-* [[@rubaboo|https://github.com/rubaboo]]
-* [[@saqimtiaz|https://github.com/saqimtiaz]]
-* [[@telmiger|https://github.com/telmiger]]
+* [[@tobibeer|https://github.com/tobibeer]]
 * [[@twMat|https://github.com/twMat]]
-* [[@xcazin|https://github.com/xcazin]]
  
