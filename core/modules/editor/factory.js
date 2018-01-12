@@ -198,7 +198,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.makeChildWidgets();
 		// Determine whether to show the toolbar
 		this.editShowToolbar = this.wiki.getTiddlerText(ENABLE_TOOLBAR_TITLE,"yes");
-		this.editShowToolbar = (this.editShowToolbar === "yes") && !!(this.children && this.children.length > 0);
+		this.editShowToolbar = (this.editShowToolbar === "yes") && !!(this.children && this.children.length > 0) && (!this.document.isTiddlyWikiFakeDom);
 	};
 
 	/*
