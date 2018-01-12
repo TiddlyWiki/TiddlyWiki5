@@ -155,6 +155,10 @@ Settings/MissingLinks/Hint: Choose whether to link to tiddlers that do not exist
 Settings/MissingLinks/Description: Enable links to missing tiddlers
 StoryView/Caption: Story View
 StoryView/Prompt: Current view:
+Stylesheets/Caption: Stylesheets
+Stylesheets/Expand/Caption: Expand All
+Stylesheets/Hint: This is the rendered CSS of the current stylesheet tiddlers tagged with <<tag "$:/tags/Stylesheet">>
+Stylesheets/Restore/Caption: Restore
 Theme/Caption: Theme
 Theme/Prompt: Current theme:
 TiddlerFields/Caption: Tiddler Fields
