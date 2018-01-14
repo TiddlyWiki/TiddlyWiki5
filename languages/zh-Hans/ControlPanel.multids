@@ -155,6 +155,10 @@ Settings/TitleLinks/No/Description: 不显示条目标题为链接
 Settings/TitleLinks/Yes/Description: 显示条目标题为链接
 StoryView/Caption: 查看模式
 StoryView/Prompt: 当前的查看模式：
+Stylesheets/Caption: 样式表
+Stylesheets/Expand/Caption: 全部展开
+Stylesheets/Hint: 这是当前标签为 <<tag "$:/tags/Stylesheet">> 的样式表条目呈现的 CSS
+Stylesheets/Restore/Caption: 复原
 Theme/Caption: 布景主题
 Theme/Prompt: 当前的布景主题：
 TiddlerFields/Caption: 条目栏位
