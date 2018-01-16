@@ -18,6 +18,8 @@ CloseOthers/Caption: sluit andere
 CloseOthers/Hint: Sluit alle andere tiddlers
 ControlPanel/Caption: bedieningspaneel
 ControlPanel/Hint: Open bedieningspaneel
+CopyToClipboard/Caption: kopieer naar klembord
+CopyToClipboard/Hint: Kopieer deze tekst naar het klembord
 Delete/Caption: verwijder
 Delete/Hint: Verwijder deze tiddler
 Edit/Caption: wijzig

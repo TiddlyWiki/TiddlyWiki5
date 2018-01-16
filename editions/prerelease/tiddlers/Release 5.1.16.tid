@@ -17,6 +17,7 @@ type: text/vnd.tiddlywiki
 New and improved translations:
 
 * New Slovenian translation
+* Improved Dutch translation
 * Improved German translation
 * Traditional and Simplified Chinese
 ** These translations now also reset the minimum search length to one character
@@ -59,6 +60,7 @@ New and improved translations:
 * [[@BramChen|https://github.com/BramChen]]
 * [[@BurningTreeC|https://github.com/BurningTreeC]]
 * [[@furicle|https://github.com/furicle]]
+* [[@gernert|https://github.com/gernert]]
 * [[@ibnishak|https://github.com/ibnishak]]
 * [[@Marxsal|https://github.com/Marxsal]]
 * [[@pmario|https://github.com/pmario]]

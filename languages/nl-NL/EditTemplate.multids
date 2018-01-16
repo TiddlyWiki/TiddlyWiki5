@@ -2,6 +2,8 @@ title: $:/language/EditTemplate/
 
 Body/External/Hint: Dit is een externe tiddler die niet in de TiddlyWiki opgeslagen is. Je kan labels en velden wijzigen maar de tekst zelf niet.
 Body/Placeholder: Typ de tekst voor deze tiddler
+Field/Dropdown/Caption: veldenlijst
+Field/Dropdown/Hint: Toon veldenlijst
 Field/Remove/Caption: verwijder veld
 Field/Remove/Hint: Verwijder veld
 Fields/Add/Button: +
@@ -16,7 +18,7 @@ Tags/Add/Button: +
 Tags/Add/Placeholder: labelnaam
 Tags/Dropdown/Caption: labellijst
 Tags/Dropdown/Hint: Toon labellijst
-Title/BadCharacterWarning: Waarschuwing: vermijd elk karakter van <<bad-chars>> in tiddler titels 
+Title/BadCharacterWarning: Waarschuwing: vermijd elk karakter van <<bad-chars>> in tiddler titels
 Title/Exists/Prompt: Doeltiddler bestaat al
 Title/Relink/Prompt: Werk ''<$text text=<<fromTitle>>/>'' naar ''<$text text=<<toTitle>>/>'' bij in de //label// en //lijst// velden van andere tiddlers
 Type/Delete/Caption: verwijder inhoudstype
