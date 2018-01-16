@@ -16,8 +16,8 @@ KaTeX supports all major browsers, including Chrome, Safari, Firefox, Opera, Edg
 You can [download KaTeX](https://github.com/khan/katex/releases) and host it on your server or include the `katex.min.js` and `katex.min.css` files on your page directly from a CDN:
 
 ```html
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css" integrity="sha384-exe4Ak6B0EoJI0ogGxjJ8rn+RN3ftPnEQrGwX59KTCl5ybGzvHGKjhPKk/KC3abb" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.js" integrity="sha384-OMvkZ24ANLwviZR2lVq8ujbE/bUO8IR1FdBrKLQBI14Gq5Xp/lksIccGkmKL8m+h" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-beta/katex.min.css" integrity="sha384-L/SNYu0HM7XECWBeshTGLluQO9uVI1tvkCtunuoUbCHHoTH76cDyXty69Bb9I0qZ" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-beta/katex.min.js" integrity="sha384-ad+n9lzhJjYgO67lARKETJH6WuQVDDlRfj81AJJSswMyMkXTD49wBj5EP004WOY6" crossorigin="anonymous"></script>
 ```
 
 #### In-browser rendering
@@ -85,6 +85,21 @@ to LaTeX with a 10pt font; for example, the rectangle `\rule{1cm}{1em}` has
 the same aspect ratio in KaTeX as in LaTeX.  However, because most browsers
 default to a larger font size, this typically means that a 1cm kern in KaTeX
 will appear larger than 1cm in browser units.
+
+### Common Issues
+- Many Markdown preprocessors, such as the one that Jekyll and GitHub Pages use,
+  have a "smart quotes" feature.  This changes `'` to `’` which is an issue for
+  math containing primes, e.g. `f'`.  This can be worked around by defining a
+  single character macro which changes them back, e.g. `{"’", "'"}`.
+- KaTeX follows LaTeX's rendering of `aligned` and `matrix` environments unlike
+  MathJax.  When displaying fractions one above another in these vertical
+  layouts there may not be enough space between rows for people who are used to
+  MathJax's rendering.  The distance between rows can be adjusted by using
+  `\\[0.1em]` instead of the standard line separator distance.
+- KaTeX does not support the `align` environment because LaTeX doesn't support
+  `align` in math mode.  The `aligned` environment offers the same functionality
+  but in math mode, so use that instead or define a macro that maps `align` to
+  `aligned`.
 
 ## Libraries
 
