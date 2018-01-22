@@ -86,8 +86,9 @@ PageScroller.prototype.scrollIntoView = function(element) {
 			} else {
 				newPos = currentPos;
 			}
-			// If we are scrolling within 50 pixels of the top/left then snap to zero
-			if(newPos < 50) {
+			// If we are scrolling within 50 pixels - or a user-configure value - of the top/left then snap to zero
+		        var tiddlerScrollOffset = parseInt($tw.wiki.getTiddlerText("$:/config/Tiddlerscrolloffset","50"),10);
+			if(newPos < tiddlerScrollOffset) {
 				newPos = 0;
 			}
 			return newPos;
