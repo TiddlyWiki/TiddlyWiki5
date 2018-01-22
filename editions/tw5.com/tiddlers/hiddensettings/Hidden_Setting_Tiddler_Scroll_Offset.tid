@@ -1,0 +1,11 @@
+created: 201801221550761
+modified: 201801221550761
+tags: [[Hidden Settings]]
+title: Hidden Setting: Tiddler Scroll-Offset
+type: text/vnd.tiddlywiki
+
+This setting defines the minimum distance in pixel a scroll-target must have to trigger a scroll event
+The default is 50
+
+It can be configured in a tiddler titled:
+$:/config/Tiddlerscrolloffset
