@@ -99,7 +99,7 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 		scrollTop = container.scrollTop;
     // Measure the specified minimum height
 	domNode.style.height = minHeight;
-	var measuredHeight = domNode.offsetHeight;
+	var measuredHeight = domNode.offsetHeight || parseInt(minHeight,10);
 	// Set its height to auto so that it snaps to the correct height
 	domNode.style.height = "auto";
 	// Calculate the revised height
