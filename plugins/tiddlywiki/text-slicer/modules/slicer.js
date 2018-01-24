@@ -340,8 +340,12 @@ Slicer.prototype.onCloseTag = function(name) {
 
 Slicer.prototype.onText = function(text) {
 	var self = this;
-	text = $tw.utils.htmlEncode(text);
+	// Discard the text if we're inside an element with actions.discard set true
+	if(this.elementStack.some(function(e) {return e.actions.discard;})) {
+		return;
+	}
 	// Optionally escape common character sequences that might be parsed as wikitext
+	text = $tw.utils.htmlEncode(text);
 	if(this.escapeWikiText) {
 		$tw.utils.each(["[[","{{","__","''","//",",,","^^","~~","`","--","\"\"","@@"],function(str) {
 			var replace = str.split("").map(function(c) {

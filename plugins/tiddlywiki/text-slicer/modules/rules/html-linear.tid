@@ -7,7 +7,22 @@ tags: $:/tags/text-slicer/slicer-rules
 
 [
 	{
-		"selector": "address,blockquote,center,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,hr,iframe,isindex,noframes,noscript,ol,p,pre,table,ul",
+		"selector": "li > p",
+		"actions": {
+			"dontRenderTag": true
+		}
+	},
+	{
+		"selector": "p",
+		"actions": {
+			"startNewChunk": {
+				"toc-type": "paragraph"
+			},
+			"dontRenderTag": true
+		}
+	},
+	{
+		"selector": "address,blockquote,center,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,hr,iframe,isindex,noframes,noscript,ol,pre,table,ul",
 		"actions": {
 			"startNewChunk": {
 				"toc-type": "paragraph"
@@ -26,18 +41,10 @@ tags: $:/tags/text-slicer/slicer-rules
 		}
 	},
 	{
-		"selector": "head > title",
-		"actions": {
-			"dontRenderTag": true,
-			"startNewChunk": {
-				"toc-type": "title"
-			}
-		}
-	},
-	{
 		"selector": "*",
 		"actions": {
-			"dontRenderTag": true
+			"dontRenderTag": true,
+			"discard": true
 		}
 	}
 ]
