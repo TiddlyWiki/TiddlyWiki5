@@ -41,10 +41,16 @@ tags: $:/tags/text-slicer/slicer-rules
 		}
 	},
 	{
-		"selector": "*",
+		"selector": "head",
 		"actions": {
 			"dontRenderTag": true,
 			"discard": true
+		}
+	},
+	{
+		"selector": "*",
+		"actions": {
+			"dontRenderTag": true
 		}
 	}
 ]
