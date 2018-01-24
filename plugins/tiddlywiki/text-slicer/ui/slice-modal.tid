@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/text/slicer/ui/slice-modal
+title: $:/plugins/tiddlywiki/text-slicer/ui/slice-modal
 footer: <$button message="tm-close-tiddler">Cancel</$button> <$button><$action-sendmessage $message="tm-close-tiddler"/><$action-sendmessage $message="tm-slice-tiddler" $param=<<currentTiddler>> slicerRules={{$:/config/plugins/text-slicer/slice-rule}} outputMode={{$:/config/plugins/text-slicer/output-mode}} destTitle={{$:/config/plugins/text-slicer/base-title}}/>Slice</$button>
 subtitle: Slicing "<$text text=<<currentTiddler>>/>" into chunks
 
