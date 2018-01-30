@@ -22,6 +22,12 @@ tags: $:/tags/text-slicer/slicer-rules
 		}
 	},
 	{
+		"selector": "a",
+		"actions": {
+			"isAnchor": true
+		}
+	},
+	{
 		"selector": "address,blockquote,center,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,hr,iframe,isindex,noframes,noscript,ol,pre,table,ul",
 		"actions": {
 			"startNewChunk": {
@@ -30,7 +36,7 @@ tags: $:/tags/text-slicer/slicer-rules
 		}
 	},
 	{
-		"selector": "code,em,i,dd,li,strike,strong,b,sub,sup,u",
+		"selector": "br,caption,code,col,colgroup,em,i,dd,li,strike,strong,b,sub,sup,u,tbody,td,tfoot,th,thead,tr",
 		"actions": {
 		}
 	},
