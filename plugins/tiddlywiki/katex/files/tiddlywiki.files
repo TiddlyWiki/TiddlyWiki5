@@ -25,7 +25,7 @@
 				"module-type": "library"
 			},
 			"prefix": "(function(document) {\n",
-			"suffix": "\n})($tw.node ? $tw.fakeDocument : window.document)\n"
+			"suffix": "\n})(!$tw.browser ? $tw.fakeDocument : window.document)\n"
 		}
 	]
 }
