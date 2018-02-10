@@ -1,0 +1,14 @@
+{
+	"tiddlers": [
+		{
+			"file": "diff_match_patch.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/core/modules/utils/diff-match-patch/diff_match_patch.js",
+				"module-type": "library"
+			},
+			"prefix": "(function(){",
+			"suffix": "})();exports['diff_match_patch'] = this['diff_match_patch'];exports['DIFF_DELETE'] = this['DIFF_DELETE'];exports['DIFF_INSERT'] = this['DIFF_INSERT'];exports['DIFF_EQUAL'] = this['DIFF_EQUAL'];"
+		}
+	]
+}

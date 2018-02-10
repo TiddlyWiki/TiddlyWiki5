@@ -59,7 +59,7 @@ $(currentTiddler)$!!popup-$(payloadTiddler)$
 <tr>
 <td colspan="3">
 <$reveal type="match" text="yes" state=<<previewPopupState>>>
-<$transclude subtiddler=<<payloadTiddler>> mode="block"/>
+<$macrocall $name="compareTiddlers" sourceTiddlerTitle=<<payloadTiddler>> destTiddlerTitle=<<currentTiddler>> destSubTiddlerTitle=<<payloadTiddler>>/>
 </$reveal>
 </td>
 </tr>
