@@ -38,7 +38,9 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	// Create the diff
-	var diffs = (new dmp.diff_match_patch()).diff_main(this.getAttribute("source"),this.getAttribute("dest"));
+	var dmpObject = new dmp.diff_match_patch();
+	//dmpObject.Match_Threshold = 0.5
+	var diffs = dmpObject.diff_main(this.getAttribute("source"),this.getAttribute("dest"));
 	// Create the elements
 	var domContainer = this.document.createElement("div"), 
 		domDiff = this.createDiffDom(diffs);
