@@ -19,11 +19,11 @@ Export our filter function
 exports.each = function(source,operator,options) {
 	var results =[] ,
 		value,values = {},
-		field = operator.operand || "title";
+		field = operator.operand || "";
 	if(operator.suffix !== "list-item") {
 		source(function(tiddler,title) {
-			if(tiddler) {
-				value = (field === "title") ? title : tiddler.getFieldString(field);
+			if(tiddler || field === "") {
+				value = (field === "") ? title : tiddler.getFieldString(field);
 				if(!$tw.utils.hop(values,value)) {
 					values[value] = true;
 					results.push(title);
