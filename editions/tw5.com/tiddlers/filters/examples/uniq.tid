@@ -1,0 +1,10 @@
+created: 20180215120400000
+created: 20180215120400000
+tags: [[each Operator]] [[Operator Examples]]
+title: each Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[uniq[color]]">>
+<<.operator-example 2 "[sort[title]uniq[type]]" "the alphabetically first tiddler of each type">>
+<<.operator-example 3 "[[non existing]] [[GettingStarted]] +[uniq[]]" "compare this to the same example for 'each' below">>
+<<.operator-example 4 "[[non existing]] [[GettingStarted]] +[each[]]" "compare this to the same example for 'uniq' above">>
