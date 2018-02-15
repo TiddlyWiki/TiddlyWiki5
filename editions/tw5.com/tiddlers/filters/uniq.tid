@@ -18,6 +18,6 @@ Each input title is processed in turn. The value of field <<.place F>> in the co
 
 If a tiddler does not contain field <<.place F>>, it is treated as if the value of the field were empty.
 
-''uniq'' is similar to [[each Operator]], but while ''each'' will drop non-existing tiddlers, ''uniq'' won't.
+<<.op uniq>> is similar to the [[each Operator]], but while <<.op each>> will drop non-existing tiddlers, when comparing the title field, <<.op uniq>> won't.
 
 <<.operator-examples "uniq">>
