@@ -22,7 +22,7 @@ exports.each = function(source,operator,options) {
 		field = operator.operand || "title";
 	if(operator.suffix !== "list-item") {
 		source(function(tiddler,title) {
-			if(tiddler) {
+			if(tiddler || field === "title") {
 				value = (field === "title") ? title : tiddler.getFieldString(field);
 				if(!$tw.utils.hop(values,value)) {
 					values[value] = true;
