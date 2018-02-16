@@ -25,7 +25,7 @@ var isWaitingForAnimationFrame = false,
 if($tw.wiki.tiddlerExists("$:/config/dynaview")) {
 	var configTiddler = $tw.wiki.getTiddler("$:/config/dynaview");
 	exportViewportDimensions = configTiddler.fields["viewport-dimensions"] === "yes";
-	viewportTiddler = configTiddler.fields["viewport-tiddler"] || "$:/viewport";
+	viewportTiddler = configTiddler.fields["viewport-tiddler"] || "$:/state/viewport";
 }
 
 exports.startup = function() {
