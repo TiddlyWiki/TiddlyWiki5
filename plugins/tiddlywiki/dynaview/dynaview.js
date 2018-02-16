@@ -107,8 +107,8 @@ function checkVisibility() {
 function saveViewportDimensions() {
 	var viewportWidth = window.innerWidth || document.documentElement.clientWidth,
 	    viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-	$tw.wiki.setText("$:/viewport","viewport-width",undefined,viewportWidth, { suppressTimestamp: true });
-	$tw.wiki.setText("$:/viewport","viewport-height",undefined,viewportHeight, { suppressTimestamp: true });
+	$tw.wiki.setText(viewportTiddler,"viewport-width",undefined,viewportWidth, { suppressTimestamp: true });
+	$tw.wiki.setText(viewportTiddler,"viewport-height",undefined,viewportHeight, { suppressTimestamp: true });
 }
 
 })();
