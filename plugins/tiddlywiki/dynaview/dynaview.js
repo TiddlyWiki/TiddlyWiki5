@@ -18,7 +18,15 @@ exports.platforms = ["browser"];
 exports.after = ["render"];
 exports.synchronous = true;
 
-var isWaitingForAnimationFrame = false;
+var isWaitingForAnimationFrame = false,
+    exportViewportDimensions = false,
+    viewportTiddler;
+
+if($tw.wiki.tiddlerExists("$:/config/dynaview")) {
+	var configTiddler = $tw.wiki.getTiddler("$:/config/dynaview");
+	exportViewportDimensions = configTiddler.fields["viewport-dimensions"] === "yes";
+	viewportTiddler = configTiddler.fields["viewport-tiddler"] || "$:/viewport";
+}
 
 exports.startup = function() {
 	window.addEventListener("load",onScrollOrResize,false);
@@ -34,6 +42,11 @@ function onScrollOrResize(event) {
 		window.requestAnimationFrame(function() {
 			setZoomClasses();
 			checkVisibility();
+			if(exportViewportDimensions) {
+				saveViewportDimensions();
+			} else if($tw.wiki.tiddlerExists(viewportTiddler)) {
+				$tw.wiki.deleteTiddler(viewportTiddler);
+			}
 			isWaitingForAnimationFrame = false;
 		});
 	}
@@ -43,7 +56,7 @@ function onScrollOrResize(event) {
 function setZoomClasses() {
 	var zoomFactor = document.body.scrollWidth / window.innerWidth,
 		classList = document.body.classList;
-	classList.add("tc-dynaview")
+	classList.add("tc-dynaview");
 	classList.toggle("tc-dynaview-zoom-factor-1",zoomFactor <= 2);
 	classList.toggle("tc-dynaview-zoom-factor-1-and-above",zoomFactor >= 1);
 	classList.toggle("tc-dynaview-zoom-factor-1a-and-above",zoomFactor >= 1.14);
@@ -89,6 +102,13 @@ function checkVisibility() {
 			}
 		}
 	});
+}
+
+function saveViewportDimensions() {
+	var viewportWidth = window.innerWidth || document.documentElement.clientWidth,
+	    viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+	$tw.wiki.setText("$:/viewport","viewport-width",undefined,viewportWidth, { suppressTimestamp: true });
+	$tw.wiki.setText("$:/viewport","viewport-height",undefined,viewportHeight, { suppressTimestamp: true });
 }
 
 })();
