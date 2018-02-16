@@ -5,4 +5,4 @@ title: $:/plugins/tiddlywiki/dynaview/config
 <$checkbox tiddler="$:/config/dynaview" field="viewport-dimensions" checked="yes" unchecked="">&nbsp;&nbsp;enable dynamic saving of the viewport dimensions</$checkbox>
 - //by default the values get stored in $:/viewport //
 
-specify an alternate tiddler&nbsp;&nbsp;<$edit-text tiddler="$:/config/dynaview" field="viewport-tiddler" size="30"/>
+specify an alternative tiddler&nbsp;&nbsp;<$edit-text tiddler="$:/config/dynaview" field="viewport-tiddler" size="30"/>
