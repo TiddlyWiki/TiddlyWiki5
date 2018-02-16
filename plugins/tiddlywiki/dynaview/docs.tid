@@ -7,6 +7,7 @@ The components of this plugin include:
 * A background task that:
 ** performs specified actions when elements are scrolled into view
 ** updates certain base classes on the `document.body` according to the current zoom level
+** if enabled - stores the viewport dimensions in a dedicated tiddler
 * Pre-configured CSS classes to simplify using those base classes
 * Usage examples
 
