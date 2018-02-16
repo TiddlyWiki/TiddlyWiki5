@@ -7,8 +7,8 @@
 				"title": "$:/core/modules/utils/diff-match-patch/diff_match_patch.js",
 				"module-type": "library"
 			},
-			"prefix": "var context={};(function(){",
-			"suffix": "}).call(context);exports['diff_match_patch'] = context['diff_match_patch'];exports['DIFF_DELETE'] = context['DIFF_DELETE'];exports['DIFF_INSERT'] = context['DIFF_INSERT'];exports['DIFF_EQUAL'] = context['DIFF_EQUAL'];"
+			"prefix": "(function(){",
+			"suffix": "}).call(exports);"
 		}
 	]
 }
