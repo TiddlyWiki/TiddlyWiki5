@@ -11,12 +11,14 @@ type: text/vnd.tiddlywiki
 
 * New [[Dynaview Plugin]] makes it possible to build user interfaces that dynamically respond to changes in scrolling or zooming
 * Improved [[Text-Slicer Plugin|Text-Slicer Edition]] with customisable JSON rules
+* Updated [[KaTeX Plugin]] to latest v0.9.0-beta
 
 !! Translation Improvements
 
 New and improved translations:
 
 * New Slovenian translation
+* New Português (Brasil) translation
 * Improved Dutch translation
 * Improved German translation
 * Traditional and Simplified Chinese
@@ -24,15 +26,19 @@ New and improved translations:
 
 !! Usability Improvements
 
+* [[Simplified|https://github.com/Jermolene/TiddlyWiki5/commit/1c8170463c80a18c0753783aa0b32a0ff2f9028c]] the page scrolling behaviour: navigating to a tiddler now scrolls the top of the tiddler to the top of the viewport
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d2ff164c07788818ded9826c9e3811599272e69c]] [[WidgetMessage: tm-copy-to-clipboard]] and [[also|https://github.com/Jermolene/TiddlyWiki5/commit/1b6a06a4d79ad5c58593a7844e306c25848979ea]] [[copy-to-clipboard Macro]] for copying text directly to the clipboard
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3040]] a hint to the field list dropdown
 
 !! Hackability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/460a07ca03a501009530a57352d6bec0e3cf49cd]] new 'Stylesheets' tab to control panel
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b4c7c59d5d1bc5282fcfed58abbf087b9f65b86c]] new 'emptyMessage' parameter to [[list-links Macro]] and [[list-tagged-draggable Macro]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/de4eb5ca89132db136c8f5fb3103f289f25fe98a]] new `th-page-refreshed` hook
 * [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/pull/3063]] macro evaluation by making parameters available as variables - see "Parameters as Variables" in [[Macro Definitions in WikiText]]
 * [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/pull/3052]] LinkWidget to allow better customisation of CSS classes
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3124]] new "value" suffix for the [[each Operator]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b4c7c59d5d1bc5282fcfed58abbf087b9f65b86c]] 'emptyMessage' parameter to list-links and list-tagged-draggable macros
 
 !! Node.js Improvements
 
@@ -43,7 +49,9 @@ New and improved translations:
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/7e71fcfab80bed9aed4389eea386fb2036cc4a85]] problem with the content area of vertical tabs sometimes overflowing their right hand margin
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3079]] problem with double quotes within the new journal template
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3070]] problem with dragging inside a textarea
-
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3099]] usage of "default" attribute of SelectWidget when "index" attribute is used
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3093]] problem with crash when dragging over TiddlyWiki on some browsers
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3079]] issue with new journal button
 
 !! Developer Bug Fixes and Improvements
 
