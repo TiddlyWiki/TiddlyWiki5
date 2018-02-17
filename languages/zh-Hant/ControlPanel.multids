@@ -156,6 +156,10 @@ Settings/TitleLinks/No/Description: 不顯示條目標題為鏈接
 Settings/TitleLinks/Yes/Description: 顯示條目標題為鏈接
 StoryView/Caption: 檢視模式
 StoryView/Prompt: 當前的檢視模式：
+Stylesheets/Caption: 樣式表
+Stylesheets/Expand/Caption: 全部展開
+Stylesheets/Hint: 這是當前標籤為 <<tag "$:/tags/Stylesheet">> 的樣式表條目呈現的 CSS
+Stylesheets/Restore/Caption: 復原
 Theme/Caption: 佈景主題
 Theme/Prompt: 當前的佈景主題：
 TiddlerFields/Caption: 條目欄位
