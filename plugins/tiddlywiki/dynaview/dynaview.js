@@ -18,15 +18,7 @@ exports.platforms = ["browser"];
 exports.after = ["render"];
 exports.synchronous = true;
 
-var isWaitingForAnimationFrame = false,
-    exportViewportDimensions = false,
-    viewportTiddler;
-
-if($tw.wiki.tiddlerExists("$:/config/dynaview")) {
-	var configTiddler = $tw.wiki.getTiddler("$:/config/dynaview");
-	exportViewportDimensions = configTiddler.fields["viewport-dimensions"] === "yes";
-	viewportTiddler = configTiddler.fields["viewport-tiddler"] || "$:/state/viewport";
-}
+var isWaitingForAnimationFrame = false;
 
 exports.startup = function() {
 	window.addEventListener("load",onScrollOrResize,false);
@@ -34,6 +26,9 @@ exports.startup = function() {
 	window.addEventListener("resize",onScrollOrResize,false);
 	$tw.hooks.addHook("th-page-refreshed",function() {
 		checkVisibility();
+    if($tw.wiki.getTiddlerText("$:/config/ViewportDimensions") === "yes") {
+      saveViewportDimensions();
+    }
 	});
 };
 
@@ -42,10 +37,8 @@ function onScrollOrResize(event) {
 		window.requestAnimationFrame(function() {
 			setZoomClasses();
 			checkVisibility();
-			if(exportViewportDimensions) {
+			if($tw.wiki.getTiddlerText("$:/config/ViewportDimensions") === "yes") {
 				saveViewportDimensions();
-			} else if($tw.wiki.tiddlerExists(viewportTiddler)) {
-				$tw.wiki.deleteTiddler(viewportTiddler);
 			}
 			isWaitingForAnimationFrame = false;
 		});
@@ -107,8 +100,8 @@ function checkVisibility() {
 function saveViewportDimensions() {
 	var viewportWidth = window.innerWidth || document.documentElement.clientWidth,
 	    viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-	$tw.wiki.setText(viewportTiddler,"viewport-width",undefined,viewportWidth, { suppressTimestamp: true });
-	$tw.wiki.setText(viewportTiddler,"viewport-height",undefined,viewportHeight, { suppressTimestamp: true });
+	$tw.wiki.setText("$:/state/viewport/width",undefined,undefined,viewportWidth.toString(),undefined);
+	$tw.wiki.setText("$:/state/viewport/height",undefined,undefined,viewportHeight.toString(),undefined);
 }
 
 })();
