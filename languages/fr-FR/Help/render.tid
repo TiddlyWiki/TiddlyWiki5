@@ -8,11 +8,11 @@ Optionellement, on peut spécifier le titre d'un tiddler modèle (template). Dan
 On peut spécifier le nom et la valeur d'une variable supplémentaire.
 
 ```
---render <filtre-sur-les-tiddlers> [<filtre-sur-les-noms-de-fichier>] [<type-de-rendu>] [<modèle>] [<nom>] [<valeur>]
+--render <filtre-sur-les-tiddlers> [<filtre-des-noms-de-fichier>] [<type-de-rendu>] [<modèle>] [<nom>] [<valeur>]
 ```
 
 * ''filtre-sur-les-tiddlers'': Un filtre qui indentifie les tiddlers dont le contenu doit être exécuté
-* ''filtre-sur-les-noms-de-fichier'': filtre optionnel pour transformer les titres de tiddlers en chemin de fichiers. À défaut, le filtre utilisé est `[is[tiddler]addsuffix[.html]]`, qui utilise le titre inchangé du tiddler comme nom de fichier
+* ''filtre-des-noms-de-fichier'': filtre optionnel pour transformer les titres de tiddlers en chemin de fichiers. À défaut, le filtre utilisé est `[is[tiddler]addsuffix[.html]]`, qui utilise le titre inchangé du tiddler comme nom de fichier
 * ''modèle'': Modèle optionnel via lequel chaque tiddler doit être rendu
 * ''type-de-rendu'': Type de rendu optionnel : la valeur `text/html` (par défaut) retourne le text HTML complet et `text/plain` se contente de retourner le contenu sous forme texte (autrement dit ignore les balises HTML et autres caractères non imprimables)
 * ''nom'': Nom de la variable optionnelle
