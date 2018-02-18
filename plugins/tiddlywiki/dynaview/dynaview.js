@@ -100,8 +100,12 @@ function checkVisibility() {
 function saveViewportDimensions() {
 	var viewportWidth = window.innerWidth || document.documentElement.clientWidth,
 	    viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-	$tw.wiki.setText("$:/state/viewport/width",undefined,undefined,viewportWidth.toString(),undefined);
-	$tw.wiki.setText("$:/state/viewport/height",undefined,undefined,viewportHeight.toString(),undefined);
+	if($tw.wiki.getTiddlerText("$:/state/viewport/width") !== viewportWidth.toString()) {
+		$tw.wiki.setText("$:/state/viewport/width",undefined,undefined,viewportWidth.toString(),undefined);
+	}
+	if($tw.wiki.getTiddlerText("$:/state/viewport/height") !== viewportHeight.toString()) {
+		$tw.wiki.setText("$:/state/viewport/height",undefined,undefined,viewportHeight.toString(),undefined);
+	}
 }
 
 })();
