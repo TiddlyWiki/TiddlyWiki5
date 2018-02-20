@@ -44,12 +44,25 @@ exports.makeDraggable = function(options) {
 			}
 			var titleString = $tw.utils.stringifyList(titles);
 			// Check if ctrl key is pressed - if true, transclude tiddler instead of linking
-			if(event.ctrlKey) {
+			if(event.ctrlKey && !event.shiftKey) {
 				// If it's a system tiddler
 				if(/^\$:\/.*/.test(titleString)) {
 					titleString = '{{' + titleString + '}}';
 				} else {
 					titleString = titleString.replace(/\[/g, '{').replace(/]/g, '}');
+				}
+			}
+			// Shift key alters the title-string by user-defined prefix and suffix
+			if (event.shiftKey && !event.ctrlKey) {
+                    		var dragShiftTiddler = $tw.wiki.getTiddler("$:/config/DragLinkShift");
+                		if(dragShiftTiddler.fields["text"] === "yes" && dragShiftTiddler.fields["prefix"] !== undefined && dragShiftTiddler.fields["suffix"] !== undefined) {
+                        		var titleStringPrefix = dragShiftTiddler.fields["prefix"];
+                        		var titleStringSuffix = dragShiftTiddler.fields["suffix"];
+                        		if(/^\$:\/.*/.test(titleString)) {
+                                		titleString = titleStringPrefix + titleString + titleStringSuffix;
+                        		} else {
+                                		titleString = titleStringPrefix + titleString.replace(/\[/g, '{').replace(/]/g, '}') + titleStringSuffix;
+                        		}
 				}
 			}
 			// Check that we've something to drag
