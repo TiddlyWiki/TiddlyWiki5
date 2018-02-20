@@ -61,7 +61,7 @@ exports.makeDraggable = function(options) {
                         		if(/^\$:\/.*/.test(titleString)) {
                                 		titleString = titleStringPrefix + titleString + titleStringSuffix;
                         		} else {
-                                		titleString = titleStringPrefix + titleString.replace(/\[/g, '{').replace(/]/g, '}') + titleStringSuffix;
+                                		titleString = titleStringPrefix + titleString.replace(/\[/g, '').replace(/]/g, '') + titleStringSuffix;
                         		}
 				}
 			}
