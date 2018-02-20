@@ -43,6 +43,15 @@ exports.makeDraggable = function(options) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
 			var titleString = $tw.utils.stringifyList(titles);
+			// Check if ctrl key is pressed - if true, transclude tiddler instead of linking
+			if(event.ctrlKey) {
+				// If it's a system tiddler
+				if(/^\$:\/.*/.test(titleString)) {
+					titleString = '{{' + titleString + '}}';
+				} else {
+					titleString = titleString.replace(/\[/g, '{').replace(/]/g, '}');
+				}
+			}
 			// Check that we've something to drag
 			if(titles.length > 0 && event.target === domNode) {
 				// Mark the drag in progress
