@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 
 * New [[Dynaview Plugin]] makes it possible to build user interfaces that dynamically respond to changes in scrolling or zooming
 * Improved [[Text-Slicer Plugin|Text-Slicer Edition]] with customisable JSON rules
-* Updated [[KaTeX Plugin]] to latest v0.9.0-beta
+* Updated [[KaTeX Plugin]] to latest v0.9.0
 
 !! Translation Improvements
 
