@@ -1,0 +1,15 @@
+tags: Features
+title: Drag and Drop Modifier Keys
+type: text/vnd.tiddlywiki
+
+The result of dragging links into input fields or textareas can be modified holding one of these ''modifier keys'':
+
+* Ctrl
+* Shift
+
+Holding the `Ctrl` key while dragging a link results in a ''transclusion'' of the dragged title, like `{{dragged-tiddler-title}}`
+Holding the `Shift` key takes a user-defined prefix and suffix and adds them to the dragged title
+
+The prefix and suffix for the `Shift` modifier can be defined in the tiddler [[$:/config/DragLinkShift]]
+To do so, add a field called "prefix" to define the prefix, and a field "suffix" for your suffix
+Both fields must be existent but can be empty
