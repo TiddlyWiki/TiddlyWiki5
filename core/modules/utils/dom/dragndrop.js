@@ -55,7 +55,7 @@ exports.makeDraggable = function(options) {
 			// Shift key alters the title-string by user-defined prefix and suffix
 			if (event.shiftKey && !event.ctrlKey) {
                     		var dragShiftTiddler = $tw.wiki.getTiddler("$:/config/DragLinkShift");
-                		if(dragShiftTiddler.fields["text"] === "yes" && dragShiftTiddler.fields["prefix"] !== undefined && dragShiftTiddler.fields["suffix"] !== undefined) {
+                		if(dragShiftTiddler.fields["prefix"] !== undefined && dragShiftTiddler.fields["suffix"] !== undefined) {
                         		var titleStringPrefix = dragShiftTiddler.fields["prefix"];
                         		var titleStringSuffix = dragShiftTiddler.fields["suffix"];
                         		if(/^\$:\/.*/.test(titleString)) {
