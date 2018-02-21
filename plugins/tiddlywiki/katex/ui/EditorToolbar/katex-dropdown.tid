@@ -22,7 +22,7 @@ title: $:/plugins/tiddlywiki/katex/ui/EditorToolbar/katex-dropdown
 </$button>
 \end
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/katex]!has[draft.of]sort[caption]]" variable="snippetTitle">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/KaTeX/Snippet]!has[draft.of]sort[caption]]" variable="snippetTitle">
 
 <<toolbar-button-stamp-inner>>
 
@@ -34,7 +34,7 @@ title: $:/plugins/tiddlywiki/katex/ui/EditorToolbar/katex-dropdown
 
 <$action-sendmessage
 	$message="tm-new-tiddler"
-	tags="$:/tags/katex"
+	tags="$:/tags/KaTeX/Snippet"
 	text="""$$snippet$$"""
 />
 
