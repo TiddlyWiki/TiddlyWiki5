@@ -329,7 +329,7 @@ Sort an array of tiddler titles by a specified field
 	isDescending: true if the sort should be descending
 	isCaseSensitive: true if the sort should consider upper and lower case letters to be different
 */
-exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric) {
+exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric, isAlphaNumeric = false) {
 	var self = this;
 	titles.sort(function(a,b) {
 		var x,y,
@@ -358,9 +358,17 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 		y = Number(b);
 		if(isNumeric && (!isNaN(x) || !isNaN(y))) {
 			return compareNumbers(x,y);
+		} else if(isAlphaNumeric) {
+			if (isCaseSensitive) {
+				return isDescending ? b.localeCompare(a, undefined, {numeric: true, sensitivity: 'variant'}) : a.localeCompare(b, undefined, {numeric: true, sensitivity: 'variant'});
+			}
+			else{
+				return isDescending ? b.localeCompare(a, undefined, {numeric: true, sensitivity: 'base'}) : a.localeCompare(b, undefined, {numeric: true, sensitivity: 'base'});
+
+			}
 		} else if($tw.utils.isDate(a) && $tw.utils.isDate(b)) {
 			return isDescending ? b - a : a - b;
-		} else {
+		}else {
 			a = String(a);
 			b = String(b);
 			if(!isCaseSensitive) {
