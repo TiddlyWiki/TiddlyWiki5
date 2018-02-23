@@ -1,8 +1,0 @@
-created: 20180222073529142
-modified: 20180222074410162
-tags: [[ sortancs Operator ]] [[Operator Examples]]
-title: sortancs Operator (Examples)
-type: text/vnd.tiddlywiki
-
-<<.operator-example 1 "[[Apple 9]] [[Apple 10]] [[apple 9]] [[apple 10]] [[balloon]] +[sortancs[]]">>
-<<.operator-example 2 "[[Apple 9]] [[Apple 10]] [[apple 9]] [[apple 10]] [[balloon]] +[!sortancs[]]">>
