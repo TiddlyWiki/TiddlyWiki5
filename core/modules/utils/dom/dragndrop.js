@@ -48,9 +48,11 @@ exports.makeDraggable = function(options) {
 				// If it's a system tiddler
 				if(/^\$:\/.*/.test(titleString)) {
 					titleString = '{{' + titleString + '}}';
-				} else {
+				} else if (/^\[\[.*/.test(titleString)) {
 					titleString = titleString.replace(/\[/g, '{').replace(/]/g, '}');
-				}
+				} else {
+                                        titleString = '{{' + titleString + '}}';
+                                }
 			}
 			// Shift key alters the title-string by user-defined prefix and suffix
 			if (event.shiftKey && !event.ctrlKey) {
