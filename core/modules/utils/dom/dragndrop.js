@@ -43,6 +43,41 @@ exports.makeDraggable = function(options) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
 			var titleString = $tw.utils.stringifyList(titles);
+			// Check if ctrl key is pressed - if true, transclude tiddler instead of linking
+			if(event.ctrlKey && !event.shiftKey) {
+				// If it's a system tiddler
+				if(/^\$:\/.*/.test(titleString)) {
+					titleString = '{{' + titleString + '}}';
+				} else if (/^\[\[.*/.test(titleString)) {
+					titleString = titleString.replace(/\[/g, '{').replace(/]/g, '}');
+				} else {
+                                        titleString = '{{' + titleString + '}}';
+                                }
+			}
+			// Shift key alters the title-string by user-defined prefix and suffix
+			if (event.shiftKey && !event.ctrlKey) {
+			  var dragShiftTiddler = $tw.wiki.getTiddler("$:/config/DragLinkShift");
+			  if(dragShiftTiddler.fields["prefix"] !== undefined && dragShiftTiddler.fields["suffix"] !== undefined) {
+			    var titleStringPrefix = dragShiftTiddler.fields["prefix"];
+			    var titleStringSuffix = dragShiftTiddler.fields["suffix"];
+			    if(/^\$:\/.*/.test(titleString)) {
+			      titleString = titleStringPrefix + titleString + titleStringSuffix;
+			    } else {
+			      titleString = titleStringPrefix + titleString.replace(/\[/g, '').replace(/]/g, '') + titleStringSuffix;
+			    }
+				}
+			}
+			var isUrl = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(titleString); // see https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url
+			// Check for CamelCase only if CamelCase linking is enabled
+			var isCamelCaseEnabled = $tw.wiki.getTiddlerText("$:/config/WikiParserRules/Inline/wikilink") === "enable";
+			var isCamelCase = false;
+			// If the string starts lowercase or isn't valid CamelCase - skip
+      if(isCamelCaseEnabled && !/^\[\[.*/.test(titleString) && /^[A-Z].*/.test(titleString) && /([a-z]*)([A-Z]*?)([A-Z][a-z]+)/.test(titleString)) {
+        isCamelCase = (titleString.length - titleString.replace(/[A-Z]/g, '').length) > 1 ? true : false;
+      }
+			if (!event.shiftKey && !event.ctrlKey && !/^\[\[.*/.test(titleString) && !/^\$:\/.*/.test(titleString) && !isCamelCase && !isUrl) {
+        titleString = '[[' + titleString + ']]';
+      }
 			// Check that we've something to drag
 			if(titles.length > 0 && event.target === domNode) {
 				// Mark the drag in progress
