@@ -42,7 +42,7 @@ exports.makeDraggable = function(options) {
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
-			var titleString = $tw.utils.stringifyList(titles);
+			var titleString = dragModifiers(event, $tw.utils.stringifyList(titles));
 			// Check that we've something to drag
 			if(titles.length > 0 && event.target === domNode) {
 				// Mark the drag in progress
@@ -179,6 +179,71 @@ function parseJSONTiddlers(json,fallbackTitle) {
 		fields.title = fields.title || fallbackTitle;
 	});
 	return data;
+};
+
+function getTitleStringModified(dragAction,titleString) {
+	var hasBrackets = /^\[\[.*/.test(titleString);
+	switch(dragAction) {
+		case "plain":
+			titleString = hasBrackets ? titleString.replace(/\[/g, '').replace(/\]/g, '') : titleString ;
+			break;
+		case "transclude":
+			titleString = hasBrackets ? titleString.replace(/\[/g, '{').replace(/]/g, '}') : '{{' + titleString + '}}' ;
+			break;
+		case "user":
+			if ($tw.wiki.tiddlerExists("$:/config/DragDefaults")) {
+				var dragSettings = $tw.wiki.getTiddler("$:/config/DragDefaults");
+				var userPrefix = dragSettings.fields["prefix"] || '';
+				var userSuffix = dragSettings.fields["suffix"] || '';
+				titleString = hasBrackets ? userPrefix + titleString.replace(/\[/g, '').replace(/]/g, '') + userSuffix : userPrefix + titleString + userSuffix ;
+			}
+			break;
+		default:
+		titleString = !hasBrackets ? '[[' + titleString + ']]' : titleString ;
+	}
+	return titleString;
+};
+
+function dragModifiers(event,titleString) {
+	var drag = [ "default", "plain", "transclude", "user" ];
+	var userDefault;
+	if ($tw.wiki.tiddlerExists("$:/config/DragDefaults")) {
+		userDefault = $tw.wiki.getTiddlerText("$:/config/DragDefaults") || "default";
+	}
+	var dragModifier = event.ctrlKey && !event.shiftKey ? "control" : !event.ctrlKey && event.shiftKey ? "shift" : event.ctrlKey && event.shiftKey ? "control-shift" : "default" ;
+
+	if(userDefault !== undefined) {
+		switch (userDefault) {
+			case "plain":
+				drag[0] = "plain";
+				drag[1] = "default";
+				break;
+			case "transclude":
+				drag[0] = "transclude";
+				drag[2] = "default";
+				break;
+			case "user":
+				drag[0] = "user";
+				drag[3] = "default";
+				break;
+			default:
+				break;
+		}
+	}
+	switch(dragModifier) {
+		case "control":
+			titleString = getTitleStringModified(drag[1],titleString);
+			break;
+		case "shift":
+			titleString = getTitleStringModified(drag[2],titleString);
+			break;
+		case "control-shift":
+			titleString = getTitleStringModified(drag[3],titleString);
+			break;
+		default:
+			titleString = getTitleStringModified(drag[0],titleString);
+		}
+		return titleString
 };
 
 })();
