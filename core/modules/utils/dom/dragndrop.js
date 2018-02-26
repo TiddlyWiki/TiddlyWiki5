@@ -42,7 +42,8 @@ exports.makeDraggable = function(options) {
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
-			var titleString = dragModifiers(event, $tw.utils.stringifyList(titles));
+			var titleString = event.target.tagName === "SPAN" ? $tw.utils.stringifyList(titles) : 
+								dragModifiers(event, $tw.utils.stringifyList(titles));
 			// Check that we've something to drag
 			if(titles.length > 0 && event.target === domNode) {
 				// Mark the drag in progress
