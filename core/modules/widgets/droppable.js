@@ -110,13 +110,14 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) !== -1) {
 		return false;
 	}
+	var plainTitleString = $tw.wiki.filterTiddlers($tw.dragInProgress.plainTitles);
 	var dataTransfer = event.dataTransfer;
 	// Remove highlighting
 	$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
 	// Try to import the various data types we understand
 	$tw.utils.importDataTransfer(dataTransfer,null,function(fieldsArray) {
-		fieldsArray.forEach(function(fields) {
-			self.performActions(fields.title || fields.text,event);
+		fieldsArray.forEach(function(fields,index) {
+			self.performActions(plainTitleString[index] || fields.title || fields.text,event);
 		});
 	});
 	// Tell the browser that we handled the drop

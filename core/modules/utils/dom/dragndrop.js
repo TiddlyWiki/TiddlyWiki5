@@ -27,7 +27,7 @@ exports.makeDraggable = function(options) {
 		domNode = options.domNode;
 	// Make the dom node draggable (not necessary for anchor tags)
 	if((domNode.tagName || "").toLowerCase() !== "a") {
-		domNode.setAttribute("draggable","true");		
+		domNode.setAttribute("draggable","true");
 	}
 	// Add event handlers
 	$tw.utils.addEventListeners(domNode,[
@@ -42,6 +42,7 @@ exports.makeDraggable = function(options) {
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
+			domNode.plainTitles = $tw.utils.stringifyList(titles);
 			var titleString = dragModifiers(event, titles);
 			// Check that we've something to drag
 			if(titles.length > 0 && event.target === domNode) {
@@ -75,7 +76,7 @@ exports.makeDraggable = function(options) {
 				}
 				// Set up the data transfer
 				if(dataTransfer.clearData) {
-					dataTransfer.clearData();					
+					dataTransfer.clearData();
 				}
 				var jsonData = [];
 				if(titles.length > 1) {
@@ -210,26 +211,7 @@ function dragModifiers(event,titleString) {
 	if (dragSettings !== undefined && dragSettings.fields["keys"] !== undefined) {
 		drag = dragSettings.fields["keys"].split(' ');
 	}
-		//userDefault = $tw.wiki.tiddlerExists("$:/config/DragDefaults") ? $tw.wiki.getTiddlerText("$:/config/DragDefaults") : "default" ,
 
-/*	if(userDefault !== undefined) {
-		switch (userDefault) {
-			case "plain":
-				drag[0] = "plain";
-				drag[1] = "default";
-				break;
-			case "transclude":
-				drag[0] = "transclude";
-				drag[2] = "default";
-				break;
-			case "user":
-				drag[0] = "user";
-				drag[3] = "default";
-				break;
-			default:
-				break;
-		}
-	}*/
 	switch(dragModifier) {
 		case "control":
 			titleString.forEach(function(item,index) { titleString[index] = getTitleStringModified(drag[1],item,dragSettings); });
@@ -243,7 +225,7 @@ function dragModifiers(event,titleString) {
 		default:
 			titleString.forEach(function(item,index) { titleString[index] = getTitleStringModified(drag[0],item,dragSettings); });
 		}
-		return titleString.join(" ");
+		return titleString.join("");
 };
 
 })();
