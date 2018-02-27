@@ -182,7 +182,7 @@ function parseJSONTiddlers(json,fallbackTitle) {
 	return data;
 };
 
-function getTitleStringModified(dragAction,titleString) {
+function getTitleStringModified(dragAction,titleString,dragSettings) {
 	var hasBrackets = /^\[\[.*/.test(titleString);
 	switch(dragAction) {
 		case "plain":
@@ -192,25 +192,28 @@ function getTitleStringModified(dragAction,titleString) {
 			titleString = hasBrackets ? titleString.replace(/\[/g, '{').replace(/\]/g, '}') : '{{' + titleString + '}}' ;
 			break;
 		case "user":
-			if ($tw.wiki.tiddlerExists("$:/config/DragDefaults")) {
-				var dragSettings = $tw.wiki.getTiddler("$:/config/DragDefaults"),
-					userPrefix = dragSettings.fields["prefix"] || '',
+			if (dragSettings !== undefined) {
+					var userPrefix = dragSettings.fields["prefix"] || '',
 					userSuffix = dragSettings.fields["suffix"] || '';
 				titleString = hasBrackets ? userPrefix + titleString.replace(/\[/g, '').replace(/\]/g, '') + userSuffix : userPrefix + titleString + userSuffix ;
 			}
 			break;
 		default:
-		titleString = !hasBrackets ? '[[' + titleString + ']]' : titleString ;
+			titleString = !hasBrackets ? '[[' + titleString + ']]' : titleString ;
 	}
 	return titleString;
 };
 
 function dragModifiers(event,titleString) {
-	var drag = [ "default", "plain", "transclude", "user" ] ,
-		userDefault = $tw.wiki.tiddlerExists("$:/config/DragDefaults") ? $tw.wiki.getTiddlerText("$:/config/DragDefaults") : "default" ,
-		dragModifier = event.ctrlKey && !event.shiftKey ? "control" : !event.ctrlKey && event.shiftKey ? "shift" : event.ctrlKey && event.shiftKey ? "control-shift" : "default" ;
+	var dragSettings = $tw.wiki.getTiddler("$:/config/DragDefaults") ,
+		dragModifier = event.ctrlKey && !event.shiftKey ? "control" : !event.ctrlKey && event.shiftKey ? "shift" : event.ctrlKey && event.shiftKey ? "control-shift" : "default" ,
+		drag = [ "default", "plain", "transclude", "user" ] ;
+	if (dragSettings !== undefined && dragSettings.fields["keys"] !== undefined) {
+		drag = dragSettings.fields["keys"].split(' ');
+	}
+		//userDefault = $tw.wiki.tiddlerExists("$:/config/DragDefaults") ? $tw.wiki.getTiddlerText("$:/config/DragDefaults") : "default" ,
 
-	if(userDefault !== undefined) {
+/*	if(userDefault !== undefined) {
 		switch (userDefault) {
 			case "plain":
 				drag[0] = "plain";
@@ -227,19 +230,19 @@ function dragModifiers(event,titleString) {
 			default:
 				break;
 		}
-	}
+	}*/
 	switch(dragModifier) {
 		case "control":
-			titleString = getTitleStringModified(drag[1],titleString);
+			titleString = getTitleStringModified(drag[1],titleString,dragSettings);
 			break;
 		case "shift":
-			titleString = getTitleStringModified(drag[2],titleString);
+			titleString = getTitleStringModified(drag[2],titleString,dragSettings);
 			break;
 		case "control-shift":
-			titleString = getTitleStringModified(drag[3],titleString);
+			titleString = getTitleStringModified(drag[3],titleString,dragSettings);
 			break;
 		default:
-			titleString = getTitleStringModified(drag[0],titleString);
+			titleString = getTitleStringModified(drag[0],titleString,dragSettings);
 		}
 		return titleString
 };
