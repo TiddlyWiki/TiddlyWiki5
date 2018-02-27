@@ -189,14 +189,14 @@ function getTitleStringModified(dragAction,titleString) {
 			titleString = hasBrackets ? titleString.replace(/\[/g, '').replace(/\]/g, '') : titleString ;
 			break;
 		case "transclude":
-			titleString = hasBrackets ? titleString.replace(/\[/g, '{').replace(/]/g, '}') : '{{' + titleString + '}}' ;
+			titleString = hasBrackets ? titleString.replace(/\[/g, '{').replace(/\]/g, '}') : '{{' + titleString + '}}' ;
 			break;
 		case "user":
 			if ($tw.wiki.tiddlerExists("$:/config/DragDefaults")) {
-				var dragSettings = $tw.wiki.getTiddler("$:/config/DragDefaults");
-				var userPrefix = dragSettings.fields["prefix"] || '';
-				var userSuffix = dragSettings.fields["suffix"] || '';
-				titleString = hasBrackets ? userPrefix + titleString.replace(/\[/g, '').replace(/]/g, '') + userSuffix : userPrefix + titleString + userSuffix ;
+				var dragSettings = $tw.wiki.getTiddler("$:/config/DragDefaults"),
+					userPrefix = dragSettings.fields["prefix"] || '',
+					userSuffix = dragSettings.fields["suffix"] || '';
+				titleString = hasBrackets ? userPrefix + titleString.replace(/\[/g, '').replace(/\]/g, '') + userSuffix : userPrefix + titleString + userSuffix ;
 			}
 			break;
 		default:
@@ -206,12 +206,9 @@ function getTitleStringModified(dragAction,titleString) {
 };
 
 function dragModifiers(event,titleString) {
-	var drag = [ "default", "plain", "transclude", "user" ];
-	var userDefault;
-	if ($tw.wiki.tiddlerExists("$:/config/DragDefaults")) {
-		userDefault = $tw.wiki.getTiddlerText("$:/config/DragDefaults") || "default";
-	}
-	var dragModifier = event.ctrlKey && !event.shiftKey ? "control" : !event.ctrlKey && event.shiftKey ? "shift" : event.ctrlKey && event.shiftKey ? "control-shift" : "default" ;
+	var drag = [ "default", "plain", "transclude", "user" ] ,
+		userDefault = $tw.wiki.tiddlerExists("$:/config/DragDefaults") ? $tw.wiki.getTiddlerText("$:/config/DragDefaults") : "default" ,
+		dragModifier = event.ctrlKey && !event.shiftKey ? "control" : !event.ctrlKey && event.shiftKey ? "shift" : event.ctrlKey && event.shiftKey ? "control-shift" : "default" ;
 
 	if(userDefault !== undefined) {
 		switch (userDefault) {
