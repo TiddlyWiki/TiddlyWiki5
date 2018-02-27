@@ -42,8 +42,7 @@ exports.makeDraggable = function(options) {
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
-			var titleString = event.target.tagName === "SPAN" ? $tw.utils.stringifyList(titles) : 
-								dragModifiers(event, $tw.utils.stringifyList(titles));
+			var titleString = dragModifiers(event, titles);
 			// Check that we've something to drag
 			if(titles.length > 0 && event.target === domNode) {
 				// Mark the drag in progress
@@ -233,18 +232,18 @@ function dragModifiers(event,titleString) {
 	}*/
 	switch(dragModifier) {
 		case "control":
-			titleString = getTitleStringModified(drag[1],titleString,dragSettings);
+			titleString.forEach(function(item,index) { titleString[index] = getTitleStringModified(drag[1],item,dragSettings); });
 			break;
 		case "shift":
-			titleString = getTitleStringModified(drag[2],titleString,dragSettings);
+			titleString.forEach(function(item,index) { titleString[index] = getTitleStringModified(drag[2],item,dragSettings); });
 			break;
 		case "control-shift":
-			titleString = getTitleStringModified(drag[3],titleString,dragSettings);
+			titleString.forEach(function(item,index) { titleString[index] = getTitleStringModified(drag[3],item,dragSettings); });
 			break;
 		default:
-			titleString = getTitleStringModified(drag[0],titleString,dragSettings);
+			titleString.forEach(function(item,index) { titleString[index] = getTitleStringModified(drag[0],item,dragSettings); });
 		}
-		return titleString
+		return titleString.join(" ");
 };
 
 })();
