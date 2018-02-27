@@ -110,7 +110,10 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) !== -1) {
 		return false;
 	}
-	var plainTitleString = $tw.wiki.filterTiddlers($tw.dragInProgress.plainTitles);
+	var plainTitleString;
+	if($tw.dragInProgress !== null && $tw.dragInProgress.plainTitles !== undefined) {
+		plainTitleString = $tw.wiki.filterTiddlers($tw.dragInProgress.plainTitles);
+	}
 	var dataTransfer = event.dataTransfer;
 	// Remove highlighting
 	$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
