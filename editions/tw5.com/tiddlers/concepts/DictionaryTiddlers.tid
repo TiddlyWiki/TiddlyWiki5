@@ -3,7 +3,7 @@ modified: 20141228094500000
 tags: Concepts
 title: DictionaryTiddlers
 
-A dictionary tiddler is a [[data tiddler|DataTiddlers]] containing a simple list of name/value pairs.
+A dictionary tiddler is a [[data tiddler|DataTiddlers]] containing a simple list of name:value pairs.
 
 Its [[ContentType]] is `application/x-tiddler-dictionary`.
 
