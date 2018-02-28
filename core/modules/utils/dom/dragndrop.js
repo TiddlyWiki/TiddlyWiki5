@@ -42,8 +42,8 @@ exports.makeDraggable = function(options) {
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
-			domNode.plainTitles = $tw.utils.stringifyList(titles);
-			var titleString = dragModifiers(event, titles);
+			var plainTitles = $tw.utils.stringifyList(titles),
+				titleString = dragModifiers(event, titles);
 			// Check that we've something to drag
 			if(titles.length > 0 && event.target === domNode) {
 				// Mark the drag in progress
@@ -80,12 +80,14 @@ exports.makeDraggable = function(options) {
 				}
 				var jsonData = [];
 				if(titles.length > 1) {
-					titles.forEach(function(title) {
+					titles.forEach(function(title,index) {
+						var plainJsonTitle = $tw.utils.stringify({"plaintitle" : $tw.wiki.filterTiddlers(plainTitles)[index] });
 						jsonData.push(options.widget.wiki.getTiddlerAsJson(title));
+						jsonData.push(plainJsonTitle);
 					});
 					jsonData = "[" + jsonData.join(",") + "]";
 				} else {
-					jsonData = options.widget.wiki.getTiddlerAsJson(titles[0]);
+					jsonData = options.widget.wiki.getTiddlerAsJson(titles[0]).replace(/\}$/,',\"plaintitle\":\"' + plainTitles + '\"}');
 				}
 				// IE doesn't like these content types
 				if(!$tw.browser.isIE) {
@@ -168,6 +170,9 @@ var importDataTypes = [
 	}},
 	{type: "text/uri-list", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
 		return [{title: fallbackTitle, text: data}];
+	}},
+	{type: "text/help", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
+		return [{title: fallbackTitle, text: data}];
 	}}
 ];
 
@@ -225,7 +230,7 @@ function dragModifiers(event,titleString) {
 		default:
 			titleString.forEach(function(item,index) { titleString[index] = getTitleStringModified(drag[0],item,dragSettings); });
 		}
-		return titleString.join("");
+		return titleString.join('');
 };
 
 })();
