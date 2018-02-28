@@ -106,6 +106,19 @@ DropZoneWidget.prototype.handleDragLeaveEvent  = function(event) {
 DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	var self = this,
 		readFileCallback = function(tiddlerFieldsArray) {
+			var hasPlainTitle = tiddlerFieldsArray[1] !== undefined ? Object.keys(tiddlerFieldsArray[1])[0] === "plainDragInProgressTitle" : false;
+			var newTiddlerFieldsArray = tiddlerFieldsArray;
+			if(hasPlainTitle) {
+				for(var i=0; i<tiddlerFieldsArray.length; i+=2) {
+					newTiddlerFieldsArray[i].title = tiddlerFieldsArray[i+1].plainDragInProgressTitle;
+				}
+				for(i=0; i<tiddlerFieldsArray.length; i++) {
+					if(tiddlerFieldsArray[i].plainDragInProgressTitle) {
+						newTiddlerFieldsArray.splice(i,1);
+					}
+				}
+				tiddlerFieldsArray = newTiddlerFieldsArray;
+			}
 			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
 		};
 	this.leaveDrag(event);

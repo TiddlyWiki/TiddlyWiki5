@@ -116,13 +116,11 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 	// Try to import the various data types we understand
 	$tw.utils.importDataTransfer(dataTransfer,null,function(fieldsArray) {
 		// Checks for the plain title string
-		var hasPlainTitle = fieldsArray[1] !== undefined ? Object.keys(fieldsArray[1])[0] === "plainTitle" : Object.keys(fieldsArray[0])[1] === "plainTitle";
+		var hasPlainTitle = fieldsArray[1] !== undefined ? Object.keys(fieldsArray[1])[0] === "plainDragInProgressTitle" : false;
 		fieldsArray.forEach(function(fields,index) {
-			if(hasPlainTitle && fieldsArray[1] !== undefined && index % 2 !== 0) {
-				self.performActions(fields.plainTitle || fields.text,event);
-			} else if (hasPlainTitle && fieldsArray[1] === undefined) {
-				self.performActions(fields.plainTitle || fields.text,event);
-			} else if (!hasPlainTitle) {
+			if(hasPlainTitle && fields.plainDragInProgressTitle !== undefined) {
+				self.performActions(fields.plainDragInProgressTitle,event);
+			} else if (!hasPlainTitle && fields.plainDragInProgressTitle === undefined) {
 				self.performActions(fields.title || fields.text,event);
 			}
 		});
