@@ -1126,9 +1126,9 @@ $tw.Wiki = function(options) {
 			if("plugin-priority" in a.fields && "plugin-priority" in b.fields) {
 				return a.fields["plugin-priority"] - b.fields["plugin-priority"];
 			} else if("plugin-priority" in a.fields) {
-				return +1;
-			} else if("plugin-priority" in b.fields) {
 				return -1;
+			} else if("plugin-priority" in b.fields) {
+				return +1;
 			} else if(a.fields.title < b.fields.title) {
 				return -1;
 			} else if(a.fields.title === b.fields.title) {
