@@ -87,7 +87,7 @@ exports.makeDraggable = function(options) {
 					});
 					jsonData = "[" + jsonData.join(",") + "]";
 				} else {
-					jsonData = options.widget.wiki.getTiddlerAsJson(titles[0]).replace(/\}$/,',\"plaindragtransfertitle\":\"' + plainTitles + '\"}');
+					jsonData = options.widget.wiki.getTiddlerAsJson(titles[0]).replace(/\}$/,',\"plaindragtransfertitle\":\"' + $tw.wiki.filterTiddlers(plainTitles) + '\"}');
 				}
 				// IE doesn't like these content types
 				if(!$tw.browser.isIE) {
