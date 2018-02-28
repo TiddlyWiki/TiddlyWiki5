@@ -115,8 +115,16 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 	$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
 	// Try to import the various data types we understand
 	$tw.utils.importDataTransfer(dataTransfer,null,function(fieldsArray) {
-		fieldsArray.forEach(function(fields) {
-			self.performActions(fields.plaindragtransfertitle !== undefined ? fields.plaindragtransfertitle : fields.title || fields.text,event);
+		// Checks for the plain title string
+		var hasPlainTitle = fieldsArray[1] !== undefined ? Object.keys(fieldsArray[1])[0] === "plainTitle" : Object.keys(fieldsArray[0])[1] === "plainTitle";
+		fieldsArray.forEach(function(fields,index) {
+			if(hasPlainTitle && fieldsArray[1] !== undefined && index % 2 !== 0) {
+				self.performActions(fields.plainTitle || fields.text,event);
+			} else if (hasPlainTitle && fieldsArray[1] === undefined) {
+				self.performActions(fields.plainTitle || fields.text,event);
+			} else if (!hasPlainTitle) {
+				self.performActions(fields.title || fields.text,event);
+			}
 		});
 	});
 	// Tell the browser that we handled the drop

@@ -81,13 +81,15 @@ exports.makeDraggable = function(options) {
 				var jsonData = [];
 				if(titles.length > 1) {
 					titles.forEach(function(title,index) {
-						var plainJsonTitle = $tw.utils.stringify({"plaindragtransfertitle" : $tw.wiki.filterTiddlers(plainTitles)[index] });
+						var plainTiddlerTitles = $tw.wiki.filterTiddlers(plainTitles);
+						var plainJsonTitle = JSON.stringify({ "plainTitle" : plainTiddlerTitles[index] });
 						jsonData.push(options.widget.wiki.getTiddlerAsJson(title));
 						jsonData.push(plainJsonTitle);
 					});
 					jsonData = "[" + jsonData.join(",") + "]";
 				} else {
-					jsonData = options.widget.wiki.getTiddlerAsJson(titles[0]).replace(/\}$/,',\"plaindragtransfertitle\":\"' + $tw.wiki.filterTiddlers(plainTitles) + '\"}');
+					jsonData = options.widget.wiki.getTiddlerAsJson(titles[0]);
+					jsonData = jsonData.replace(/\}$/,',\"plainTitle\":\"' + $tw.wiki.filterTiddlers(plainTitles) + '\"}');
 				}
 				// IE doesn't like these content types
 				if(!$tw.browser.isIE) {
