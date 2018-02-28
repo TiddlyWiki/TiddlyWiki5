@@ -107,8 +107,8 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	var self = this,
 		readFileCallback = function(tiddlerFieldsArray) {
 			var hasPlainTitle = tiddlerFieldsArray[1] !== undefined ? Object.keys(tiddlerFieldsArray[1])[0] === "plainDragInProgressTitle" : false;
-			var newTiddlerFieldsArray = tiddlerFieldsArray;
 			if(hasPlainTitle) {
+				var newTiddlerFieldsArray = tiddlerFieldsArray;
 				for(var i=0; i<tiddlerFieldsArray.length; i+=2) {
 					newTiddlerFieldsArray[i].title = tiddlerFieldsArray[i+1].plainDragInProgressTitle;
 				}
