@@ -81,13 +81,13 @@ exports.makeDraggable = function(options) {
 				var jsonData = [];
 				if(titles.length > 1) {
 					titles.forEach(function(title,index) {
-						var plainJsonTitle = $tw.utils.stringify({"plaintitle" : $tw.wiki.filterTiddlers(plainTitles)[index] });
+						var plainJsonTitle = $tw.utils.stringify({"plaindragtransfertitle" : $tw.wiki.filterTiddlers(plainTitles)[index] });
 						jsonData.push(options.widget.wiki.getTiddlerAsJson(title));
 						jsonData.push(plainJsonTitle);
 					});
 					jsonData = "[" + jsonData.join(",") + "]";
 				} else {
-					jsonData = options.widget.wiki.getTiddlerAsJson(titles[0]).replace(/\}$/,',\"plaintitle\":\"' + plainTitles + '\"}');
+					jsonData = options.widget.wiki.getTiddlerAsJson(titles[0]).replace(/\}$/,',\"plaindragtransfertitle\":\"' + plainTitles + '\"}');
 				}
 				// IE doesn't like these content types
 				if(!$tw.browser.isIE) {
@@ -169,9 +169,6 @@ var importDataTypes = [
 		return [{title: fallbackTitle, text: data}];
 	}},
 	{type: "text/uri-list", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
-		return [{title: fallbackTitle, text: data}];
-	}},
-	{type: "text/help", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
 		return [{title: fallbackTitle, text: data}];
 	}}
 ];

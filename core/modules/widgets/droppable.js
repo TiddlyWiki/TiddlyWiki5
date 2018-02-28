@@ -116,7 +116,7 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 	// Try to import the various data types we understand
 	$tw.utils.importDataTransfer(dataTransfer,null,function(fieldsArray) {
 		fieldsArray.forEach(function(fields) {
-			self.performActions(fields.plaintitle !== undefined ? fields.plaintitle : fields.title || fields.text,event);
+			self.performActions(fields.plaindragtransfertitle !== undefined ? fields.plaindragtransfertitle : fields.title || fields.text,event);
 		});
 	});
 	// Tell the browser that we handled the drop
