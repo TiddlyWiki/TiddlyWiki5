@@ -26,6 +26,9 @@ exports.startup = function() {
 	window.addEventListener("resize",onScrollOrResize,false);
 	$tw.hooks.addHook("th-page-refreshed",function() {
 		checkVisibility();
+    if($tw.wiki.getTiddlerText("$:/config/ViewportDimensions") === "yes") {
+      saveViewportDimensions();
+    }
 	});
 };
 
@@ -34,6 +37,9 @@ function onScrollOrResize(event) {
 		window.requestAnimationFrame(function() {
 			setZoomClasses();
 			checkVisibility();
+			if($tw.wiki.getTiddlerText("$:/config/ViewportDimensions") === "yes") {
+				saveViewportDimensions();
+			}
 			isWaitingForAnimationFrame = false;
 		});
 	}
@@ -43,7 +49,7 @@ function onScrollOrResize(event) {
 function setZoomClasses() {
 	var zoomFactor = document.body.scrollWidth / window.innerWidth,
 		classList = document.body.classList;
-	classList.add("tc-dynaview")
+	classList.add("tc-dynaview");
 	classList.toggle("tc-dynaview-zoom-factor-1",zoomFactor <= 2);
 	classList.toggle("tc-dynaview-zoom-factor-1-and-above",zoomFactor >= 1);
 	classList.toggle("tc-dynaview-zoom-factor-1a-and-above",zoomFactor >= 1.14);
@@ -89,6 +95,17 @@ function checkVisibility() {
 			}
 		}
 	});
+}
+
+function saveViewportDimensions() {
+	var viewportWidth = window.innerWidth || document.documentElement.clientWidth,
+	    viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+	if($tw.wiki.getTiddlerText("$:/state/viewport/width") !== viewportWidth.toString()) {
+		$tw.wiki.setText("$:/state/viewport/width",undefined,undefined,viewportWidth.toString(),undefined);
+	}
+	if($tw.wiki.getTiddlerText("$:/state/viewport/height") !== viewportHeight.toString()) {
+		$tw.wiki.setText("$:/state/viewport/height",undefined,undefined,viewportHeight.toString(),undefined);
+	}
 }
 
 })();
