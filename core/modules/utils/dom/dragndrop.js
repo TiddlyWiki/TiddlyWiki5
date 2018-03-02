@@ -203,6 +203,9 @@ function getTitleStringModified(dragAction,titleString,dragSettings) {
 				titleString = hasBrackets ? userPrefix + titleString.replace(/\[/g, '').replace(/\]/g, '') + userSuffix : userPrefix + titleString + userSuffix ;
 			}
 			break;
+		case "link":
+			titleString = !hasBrackets ? '[[' + titleString + ']]' : titleString ;
+			break;
 		default:
 			titleString = !hasBrackets ? '[[' + titleString + ']]' : titleString ;
 	}
@@ -212,7 +215,7 @@ function getTitleStringModified(dragAction,titleString,dragSettings) {
 function dragModifiers(event,titleString) {
 	var dragSettings = $tw.wiki.getTiddler("$:/config/DragDefaults") ,
 		dragModifier = event.ctrlKey && !event.shiftKey ? "control" : !event.ctrlKey && event.shiftKey ? "shift" : event.ctrlKey && event.shiftKey ? "control-shift" : "default" ,
-		drag = [ "default", "plain", "transclude", "user" ] ;
+		drag = [ "link", "plain", "transclude", "user" ] ;
 	if (dragSettings !== undefined && dragSettings.fields["keys"] !== undefined) {
 		drag = dragSettings.fields["keys"].split(' ');
 	}

@@ -17,6 +17,8 @@ Tiddler manipulation via drag and drop is supported by the core user interface i
 
 All tiddler links are draggable by default. They can be dragged within a browser window for manipulating tiddlers, or dragged to a different browser window to initiate an [[import operation|Importing Tiddlers]]
 
+<<.from-version "5.1.16">> The behaviour of dragging links into input fields or textareas can be modified while dragging by using the [[keyboard modifier keys|Drag and Drop Modifier Keys]] Ctrl and Shift
+
 Tag pills are also draggable, and are equivalent to simultaneously dragging all of the individual tiddlers carrying the tag.
 
 Some common scenarios for drag and drop tiddler manipulation are available as reusable macros:
