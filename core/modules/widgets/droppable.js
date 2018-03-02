@@ -118,6 +118,8 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 		// Checks for the plain title string
 		var hasPlainTitle = fieldsArray[1] !== undefined ? Object.keys(fieldsArray[1])[0] === "\p\l\a\i\n" : false;
 		// Use the plain titles for actions if they exist
+		console.log(hasPlainTitle);
+		console.log(fieldsArray);
 		fieldsArray.forEach(function(fields,index) {
 			if(hasPlainTitle && fields["\p\l\a\i\n"] !== undefined) {
 				self.performActions(fields["\p\l\a\i\n"],event);

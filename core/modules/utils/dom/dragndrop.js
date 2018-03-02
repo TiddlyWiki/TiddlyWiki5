@@ -79,15 +79,16 @@ exports.makeDraggable = function(options) {
 					dataTransfer.clearData();
 				}
 				var jsonData = [],
-					plainTiddlerTitles = $tw.wiki.filterTiddlers(plainTitles),
-					plainJsonTitle = JSON.stringify({ "\p\l\a\i\n" : plainTiddlerTitles[0] });
+					plainTiddlerTitles = $tw.wiki.filterTiddlers(plainTitles);
 				// Add corresponding plain titles to array after each data entry
 				if(titles.length > 1) {
 					titles.forEach(function(title,index) {
+						var plainJsonTitle = JSON.stringify({ "\p\l\a\i\n" : plainTiddlerTitles[index] });
 						jsonData.push(options.widget.wiki.getTiddlerAsJson(title));
 						jsonData.push(plainJsonTitle);
 					});
 				} else {
+					var plainJsonTitle = JSON.stringify({ "\p\l\a\i\n" : plainTiddlerTitles[0] });
 					jsonData[0] = options.widget.wiki.getTiddlerAsJson(titles[0]);
 					jsonData.push(plainJsonTitle);
 				}

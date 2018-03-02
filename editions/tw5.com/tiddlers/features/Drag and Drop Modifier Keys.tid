@@ -34,4 +34,4 @@ Configuration:
 
 Example: `transclusion user link plain`  (normal ctrl shift ctrl+shift)
 
-...dragging links without modifiers would result in `{{sampletitle}}`, dragging with `Shift` results in `[[sampletitle]]`
+...dragging links without modifiers results in `{{sampletitle}}`, dragging with `Shift` results in `[[sampletitle]]`
