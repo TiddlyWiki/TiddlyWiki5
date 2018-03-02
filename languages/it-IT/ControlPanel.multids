@@ -12,6 +12,7 @@ Basics/DefaultTiddlers/TopHint: Scegli quali frammenti vuoi visualizzare all'avv
 Basics/Language/Prompt: Ciao! Scegli la lingua:
 Basics/NewJournal/Tags/Prompt: Etichette per i nuovi frammenti diario
 Basics/NewJournal/Title/Prompt: Titolo dei nuovi frammenti diario
+Basics/NewTiddler/Title/Prompt: Titolo dei nuovi frammenti
 Basics/OverriddenShadowTiddlers/Prompt: Numero di frammenti nascosti annullati:
 Basics/ShadowTiddlers/Prompt: Numero di frammenti nascosti:
 Basics/Subtitle/Prompt: Sottotitolo:
