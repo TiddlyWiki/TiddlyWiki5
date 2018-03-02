@@ -106,14 +106,16 @@ DropZoneWidget.prototype.handleDragLeaveEvent  = function(event) {
 DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	var self = this,
 		readFileCallback = function(tiddlerFieldsArray) {
-			var hasPlainTitle = tiddlerFieldsArray[1] !== undefined ? Object.keys(tiddlerFieldsArray[1])[0] === "plainDragInProgressTitle" : false;
+			var hasPlainTitle = tiddlerFieldsArray[1] !== undefined ? 
+				Object.keys(tiddlerFieldsArray[1])[0] === "\p\l\a\i\n" : false;
+			// Remove the plain title indexes from the array
 			if(hasPlainTitle) {
 				var newTiddlerFieldsArray = tiddlerFieldsArray;
 				for(var i=0; i<tiddlerFieldsArray.length; i+=2) {
-					newTiddlerFieldsArray[i].title = tiddlerFieldsArray[i+1].plainDragInProgressTitle;
+					newTiddlerFieldsArray[i].title = tiddlerFieldsArray[i+1]["\p\l\a\i\n"];
 				}
 				for(i=0; i<tiddlerFieldsArray.length; i++) {
-					if(tiddlerFieldsArray[i].plainDragInProgressTitle) {
+					if(tiddlerFieldsArray[i]["\p\l\a\i\n"]) {
 						newTiddlerFieldsArray.splice(i,1);
 					}
 				}

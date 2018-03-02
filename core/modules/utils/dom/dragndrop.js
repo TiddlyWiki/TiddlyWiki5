@@ -78,22 +78,20 @@ exports.makeDraggable = function(options) {
 				if(dataTransfer.clearData) {
 					dataTransfer.clearData();
 				}
-				var jsonData = [];
+				var jsonData = [],
+					plainTiddlerTitles = $tw.wiki.filterTiddlers(plainTitles),
+					plainJsonTitle = JSON.stringify({ "\p\l\a\i\n" : plainTiddlerTitles[0] });
+				// Add corresponding plain titles to array after each data entry
 				if(titles.length > 1) {
 					titles.forEach(function(title,index) {
-						var plainTiddlerTitles = $tw.wiki.filterTiddlers(plainTitles);
-						var plainJsonTitle = JSON.stringify({ "plainDragInProgressTitle" : plainTiddlerTitles[index] });
 						jsonData.push(options.widget.wiki.getTiddlerAsJson(title));
 						jsonData.push(plainJsonTitle);
 					});
-					jsonData = "[" + jsonData.join(",") + "]";
 				} else {
-					var plainTiddlerTitles = $tw.wiki.filterTiddlers(plainTitles);
-					var plainJsonTitle = JSON.stringify({ "plainDragInProgressTitle" : plainTiddlerTitles[0] });
 					jsonData[0] = options.widget.wiki.getTiddlerAsJson(titles[0]);
 					jsonData.push(plainJsonTitle);
-					jsonData = "[" + jsonData.join(",") + "]";
 				}
+				jsonData = "[" + jsonData.join(",") + "]";
 				// IE doesn't like these content types
 				if(!$tw.browser.isIE) {
 					dataTransfer.setData("text/vnd.tiddler",jsonData);
