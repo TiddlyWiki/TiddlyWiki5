@@ -70,7 +70,7 @@ $tw.utils.each = function(object,callback) {
 				if(next === false) {
 					break;
 				}
-		    }
+			}
 		} else {
 			var keys = Object.keys(object);
 			for (f=0, length=keys.length; f<length; f++) {
@@ -1458,7 +1458,7 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/dom","tiddlerdeserializer",{
 	}
 });
 
-$tw.loadTiddlersBrowser = function() {
+$tw.loadTiddlersBrowser = function(callback) {
 	// In the browser, we load tiddlers from certain elements
 	var containerIds = [
 		"libraryModules",
@@ -1472,6 +1472,7 @@ $tw.loadTiddlersBrowser = function() {
 	for(var t=0; t<containerIds.length; t++) {
 		$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById(containerIds[t])));
 	}
+	callback();
 };
 
 } else {
@@ -1878,7 +1879,7 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 	return wikiInfo;
 };
 
-$tw.loadTiddlersNode = function() {
+$tw.loadTiddlersNode = function(callback) {
 	// Load the boot tiddlers
 	$tw.utils.each($tw.loadTiddlersFromPath($tw.boot.bootPath),function(tiddlerFile) {
 		$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
@@ -1889,6 +1890,7 @@ $tw.loadTiddlersNode = function() {
 	if($tw.boot.wikiPath) {
 		$tw.boot.wikiInfo = $tw.loadWikiTiddlers($tw.boot.wikiPath);
 	}
+	callback();
 };
 
 // End of if($tw.node)
@@ -2020,10 +2022,11 @@ $tw.boot.startup = function(options) {
 	}
 	// Load tiddlers
 	if($tw.boot.tasks.readBrowserTiddlers) {
-		$tw.loadTiddlersBrowser();
+		$tw.loadTiddlersBrowser(finishStartup);
 	} else {
-		$tw.loadTiddlersNode();
+		$tw.loadTiddlersNode(finishStartup);
 	}
+function finishStartup(){
 	// Load any preloaded tiddlers
 	if($tw.preloadTiddlers) {
 		$tw.wiki.addTiddlers($tw.preloadTiddlers);
@@ -2056,6 +2059,8 @@ $tw.boot.startup = function(options) {
 	$tw.boot.disabledStartupModules = $tw.boot.disabledStartupModules || [];
 	// Repeatedly execute the next eligible task
 	$tw.boot.executeNextStartupTask(options.callback);
+}
+
 };
 
 /*
