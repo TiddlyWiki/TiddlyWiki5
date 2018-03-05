@@ -218,7 +218,7 @@ function dragModifiers(event,titleString) {
 		dragModifier = event.ctrlKey && !event.shiftKey ? "control" : !event.ctrlKey && event.shiftKey ? "shift" : event.ctrlKey && event.shiftKey ? "control-shift" : "default" ,
 		drag = [ "link", "plain", "transclude", "user" ] ;
 	if (dragSettings !== undefined) {
-		drag[0] = dragSettings.fields["normal"] !== undefined ? dragSettings.fields.normal : "link" ;
+		drag[0] = dragSettings.fields["normal"] !== undefined ? dragSettings.fields["normal"] : "link" ;
 		drag[1] = dragSettings.fields["control-key"] !== undefined ? dragSettings.fields["control-key"] : "plain" ;
 		drag[2] = dragSettings.fields["shift-key"] !== undefined ? dragSettings.fields["control-key"] : "transclude" ;
 		drag[3] = dragSettings.fields["control-shift"] !== undefined ? dragSettings.fields["control-shift"] : "user" ;
