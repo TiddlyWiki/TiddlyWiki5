@@ -22,16 +22,12 @@ Configuration:
 
 <br>
 
->The modifier keys can be assigned in a different order than the default by adding a field "keys" to the configuration tiddler $:/config/DragDefaults
+>The modifier keys can be assigned in a different order than the default by configuring them in $:/config/DragDefaults
 
->That field should hold the strings "link" "plain" "transclusion" and "user", respecting following method:
+>For each modifier there's a reserved field that can hold the "action" assigned to the key
 
-* the first string is for dragging without modifiers
-* the second is Ctrl
-* the third is Shift
-* the fourth is Ctrl+Shift
-
-
-Example: `transclusion user link plain`  (normal ctrl shift ctrl+shift)
-
-...dragging links without modifiers results in `{{sampletitle}}`, dragging with `Shift` results in `[[sampletitle]]`
+|!Modifier |!Field name |!Values |h
+|No modifier |normal |`link` `plain` `transclude` or `user` |
+|Control |control-key |`link` `plain` `transclude` or `user` |
+|Shift |shift-key |`link` `plain` `transclude` or `user` |
+|Control +  Shift |control-shift |`link` `plain` `transclude` or `user` |
