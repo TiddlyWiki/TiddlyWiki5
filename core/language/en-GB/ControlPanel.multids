@@ -139,6 +139,8 @@ Settings/ToolbarButtons/Icons/Description: Include icon
 Settings/ToolbarButtons/Text/Description: Include text
 Settings/DefaultSidebarTab/Caption: Default Sidebar Tab
 Settings/DefaultSidebarTab/Hint: Specify which sidebar tab is displayed by default
+Settings/DefaultMoreSidebarTab/Caption: Default More Sidebar Tab
+Settings/DefaultMoreSidebarTab/Hint: Specify which More sidebar tab is displayed by default
 Settings/LinkToBehaviour/Caption: Tiddler Opening Behaviour
 Settings/LinkToBehaviour/InsideRiver/Hint: Navigation from //within// the story river
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation from //outside// the story river
