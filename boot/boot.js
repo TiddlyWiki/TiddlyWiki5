@@ -2020,10 +2020,11 @@ $tw.boot.startup = function(options) {
 	}
 	// Load tiddlers
 	if($tw.boot.tasks.readBrowserTiddlers) {
-		$tw.loadTiddlersBrowser();
+		Promise.resolve($tw.loadTiddlersBrowser()).then(finishStartup);
 	} else {
-		$tw.loadTiddlersNode();
+		Promise.resolve($tw.loadTiddlersNode()).then(finishStartup);
 	}
+	function finishStartup(){
 	// Load any preloaded tiddlers
 	if($tw.preloadTiddlers) {
 		$tw.wiki.addTiddlers($tw.preloadTiddlers);
@@ -2056,6 +2057,7 @@ $tw.boot.startup = function(options) {
 	$tw.boot.disabledStartupModules = $tw.boot.disabledStartupModules || [];
 	// Repeatedly execute the next eligible task
 	$tw.boot.executeNextStartupTask(options.callback);
+	}
 };
 
 /*
