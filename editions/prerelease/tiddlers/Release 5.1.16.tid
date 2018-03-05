@@ -20,15 +20,21 @@ New and improved translations:
 * New Slovenian translation
 * New Português (Brasil) translation
 * Improved Dutch translation
+* Improved French translation
 * Improved German translation
-* Traditional and Simplified Chinese
+* Improved Traditional and Simplified Chinese translations
 ** These translations now also reset the minimum search length to one character
 
 !! Usability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3134]] new [[sortan Operator]] for sorting alphanumeric values such as "Apple 6", "Apple 7", "Apple 8", "Apple 9", "Apple 10", "Apple 20", "Apple 30", "Apple 100"
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/da0ffce2d66f16ad14587fbe58b8d7a5c8d36657]] default fonts for readability as advised by [[GitHub|http://markdotto.com/2018/02/07/github-system-fonts/]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3131]] an editor toolbar button for stamping fragments of formulae for the [[KaTeX Plugin]] 
 * [[Simplified|https://github.com/Jermolene/TiddlyWiki5/commit/1c8170463c80a18c0753783aa0b32a0ff2f9028c]] the page scrolling behaviour: navigating to a tiddler now scrolls the top of the tiddler to the top of the viewport
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d2ff164c07788818ded9826c9e3811599272e69c]] [[WidgetMessage: tm-copy-to-clipboard]] and [[also|https://github.com/Jermolene/TiddlyWiki5/commit/1b6a06a4d79ad5c58593a7844e306c25848979ea]] [[copy-to-clipboard Macro]] for copying text directly to the clipboard
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3040]] a hint to the field list dropdown
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3135]] a control panel setting for the default tab in the More sidebar
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3149]] a control panel setting for the titles of new tiddlers
 
 !! Hackability Improvements
 
@@ -55,6 +61,7 @@ New and improved translations:
 
 !! Developer Bug Fixes and Improvements
 
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3113]] problems with plugin ordering
 * Several optimisations to the tiddler store:
 ** [[Avoiding slow Object.keys calls|https://github.com/Jermolene/TiddlyWiki5/commit/254e1ca7f7a5fe9d2deef72692ada2b7637f34ce]] - saving 50% of some operations
 ** [[Optimising the tag filter|https://github.com/Jermolene/TiddlyWiki5/commit/e4b10d42f9480c0505862a93f0b97d1c4270ed65]] - saving 50% on some tag operations
@@ -64,6 +71,7 @@ New and improved translations:
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
+* [[@alexhough|https://github.com/alexhough]]
 * [[@anavarre|https://github.com/anavarre]]
 * [[@BramChen|https://github.com/BramChen]]
 * [[@BurningTreeC|https://github.com/BurningTreeC]]
@@ -72,6 +80,9 @@ New and improved translations:
 * [[@ibnishak|https://github.com/ibnishak]]
 * [[@Marxsal|https://github.com/Marxsal]]
 * [[@pmario|https://github.com/pmario]]
+* [[@Skeeve|https://github.com/Skeeve]]
+* [[@TheDiveO|https://github.com/TheDiveO]]
 * [[@tobibeer|https://github.com/tobibeer]]
 * [[@twMat|https://github.com/twMat]]
+* [[@xcazin|https://github.com/xcazin]]
  
