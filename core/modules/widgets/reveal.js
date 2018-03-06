@@ -127,13 +127,34 @@ RevealWidget.prototype.readState = function() {
 			this.readMatchState(state);
 			this.isOpen = !this.isOpen;
 			break;
+		case "lt":
+			this.readMatchStateltgt(state);
+			break;
+		case "gt":
+			this.readMatchStateltgt(state);
+			this.isOpen = !this.isOpen;
+			break;
+		case "lteq":
+			this.readMatchStatelteq(state);
+			break;
+		case "gteq":
+			this.readMatchStategteq(state);
+			break;
 	}
 };
 
 RevealWidget.prototype.readMatchState = function(state) {
 	this.isOpen = state === this.text;
 };
-
+RevealWidget.prototype.readMatchStateltgt = function(state) {
+	this.isOpen = (parseInt(state, 10) < parseInt(this.text, 10))?true:false;
+};
+RevealWidget.prototype.readMatchStatelteq = function(state) {
+	this.isOpen = (parseInt(state, 10) <= parseInt(this.text, 10))?true:false;
+};
+RevealWidget.prototype.readMatchStategteq = function(state) {
+	this.isOpen = (parseInt(state, 10) >= parseInt(this.text, 10))?true:false;
+};
 RevealWidget.prototype.readPopupState = function(state) {
 	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/,
 		match = popupLocationRegExp.exec(state);
