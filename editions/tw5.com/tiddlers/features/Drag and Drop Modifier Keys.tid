@@ -28,6 +28,6 @@ Configuration:
 
 |!Modifier |!Field name |!Values |h
 |No modifier |normal |`link` `plain` `transclude` or `user` |
-|Control |control-key |`link` `plain` `transclude` or `user` |
-|Shift |shift-key |`link` `plain` `transclude` or `user` |
-|Control +  Shift |control-shift |`link` `plain` `transclude` or `user` |
+|Control |ctrl |`link` `plain` `transclude` or `user` |
+|Shift |shift |`link` `plain` `transclude` or `user` |
+|Control +  Shift |ctrl-shift |`link` `plain` `transclude` or `user` |
