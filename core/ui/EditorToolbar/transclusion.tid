@@ -1,10 +1,10 @@
 caption: {{$:/language/Buttons/Transclusion/Caption}}
 condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
 description: {{$:/language/Buttons/Transclusion/Hint}}
-icon: $:/core/images/transclusion
+icon: $:/core/images/transcludify
 list-before: $:/core/ui/EditorToolbar/mono-block
 shortcuts: ((transclusion))
-title: $:/core/ui/EditorToolbar/transclusion
+title: $:/core/ui/EditorToolbar/transcludify
 
 <$action-sendmessage
 	$message="tm-edit-text-operation"
