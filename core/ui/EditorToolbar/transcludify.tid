@@ -5,6 +5,7 @@ icon: $:/core/images/transcludify
 list-before: $:/core/ui/EditorToolbar/mono-block
 shortcuts: ((transcludify))
 title: $:/core/ui/EditorToolbar/transcludify
+tags: $:/tags/EditorToolbar
 
 <$action-sendmessage
 	$message="tm-edit-text-operation"
