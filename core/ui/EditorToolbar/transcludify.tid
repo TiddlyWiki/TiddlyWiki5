@@ -4,6 +4,7 @@ description: {{$:/language/Buttons/Transcludify/Hint}}
 icon: $:/core/images/transcludify
 list-before: $:/core/ui/EditorToolbar/mono-block
 shortcuts: ((transcludify))
+tags: $:/tags/EditorToolbar
 title: $:/core/ui/EditorToolbar/transcludify
 
 <$action-sendmessage
