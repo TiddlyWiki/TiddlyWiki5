@@ -1076,6 +1076,19 @@ html body.tc-body.tc-single-tiddler-window {
 	margin: 2px 0 2px 4px;
 }
 
+.tc-editor-toolbar .tc-image-transclusion code, .tc-editor-toolbar .tc-image-wikilink code {
+	color: <<colour tiddler-controls-foreground-selected>>;
+	background-color: transparent;
+	border: none;
+	font-size: 0.9em;
+	font-weight: 600;
+	padding: 0;
+}
+
+.tc-editor-toolbar button:hover code {
+	color: <<colour background>>;
+}
+
 .tc-editor-toolbar button.tc-text-editor-toolbar-item-adjunct {
 	margin-left: 1px;
 	width: 1em;
