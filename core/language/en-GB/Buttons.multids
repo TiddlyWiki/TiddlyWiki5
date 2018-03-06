@@ -141,6 +141,8 @@ LineWidth/Caption: line width
 LineWidth/Hint: Set line width for painting
 Link/Caption: link
 Link/Hint: Create wikitext link
+Linkify/Caption: wikilink
+Linkify/Hint: Wrap selection in square brackets
 ListBullet/Caption: bulleted list
 ListBullet/Hint: Apply bulleted list formatting to lines containing selection
 ListNumber/Caption: numbered list
@@ -177,5 +179,7 @@ Subscript/Caption: subscript
 Subscript/Hint: Apply subscript formatting to selection
 Superscript/Caption: superscript
 Superscript/Hint: Apply superscript formatting to selection
+Transclusion/Caption: transclusion
+Transclusion/Hint: Wrap selection in curly brackets
 Underline/Caption: underline
 Underline/Hint: Apply underline formatting to selection
