@@ -1,9 +1,9 @@
-caption: {{$:/language/Buttons/Transclusion/Caption}}
+caption: {{$:/language/Buttons/Transcludify/Caption}}
 condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
-description: {{$:/language/Buttons/Transclusion/Hint}}
+description: {{$:/language/Buttons/Transcludify/Hint}}
 icon: $:/core/images/transcludify
 list-before: $:/core/ui/EditorToolbar/mono-block
-shortcuts: ((transclusion))
+shortcuts: ((transcludify))
 title: $:/core/ui/EditorToolbar/transcludify
 
 <$action-sendmessage
