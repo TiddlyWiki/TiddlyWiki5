@@ -4,6 +4,7 @@ description: {{$:/language/Buttons/Linkify/Hint}}
 icon: $:/core/images/linkify
 list-before: $:/core/ui/EditorToolbar/mono-block
 shortcuts: ((linkify))
+tags: $:/tags/EditorToolbar
 title: $:/core/ui/EditorToolbar/linkify
 
 <$action-sendmessage
