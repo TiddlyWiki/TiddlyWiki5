@@ -175,5 +175,9 @@ Subscript/Caption: Tiefsgestellt
 Subscript/Hint: Ausgewählten Text tiefgestellt darstellen
 Superscript/Caption: Hochgestellt
 Superscript/Hint: Ausgewählten Text hochgestellt darstellen
+Transclusion/Caption: Transklusion
+Transclusion/Hint: Transklusion auf den selektierten Text anwenden
 Underline/Caption: Unterstreichen
 Underline/Hint: Ausgewählten Text unterstrichen darstellen
+WikiLink/Caption: Wikilink
+WikiLink/Hint: Den selektierten Text in eckige Klammern wickeln
