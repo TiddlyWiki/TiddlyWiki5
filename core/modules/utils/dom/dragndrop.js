@@ -81,6 +81,7 @@ exports.makeDraggable = function(options) {
 				var jsonData = [],
 					plainTiddlerTitles = $tw.wiki.filterTiddlers(plainTitles);
 				// Add corresponding plain titles to array after each data entry
+				// I'd like to have this handled better
 				if(titles.length > 1) {
 					titles.forEach(function(title,index) {
 						var plainJsonTitle = JSON.stringify({ "\p\l\a\i\n" : plainTiddlerTitles[index] });
@@ -189,43 +190,42 @@ function parseJSONTiddlers(json,fallbackTitle) {
 };
 
 function getTitleStringModified(dragAction,titleString,dragSettings) {
-	var hasBrackets = /^\[\[.*/.test(titleString);
 	switch(dragAction) {
 		case "plain":
-			titleString = hasBrackets ? titleString.replace(/\[/g, '').replace(/\]/g, '') : titleString ;
+			titleString = titleString ;
 			break;
 		case "transclude":
-			titleString = hasBrackets ? titleString.replace(/\[/g, '{').replace(/\]/g, '}') : '{{' + titleString + '}}' ;
+			titleString = '{{' + titleString + '}}' ;
 			break;
 		case "user":
 			if (dragSettings !== undefined) {
 					var userPrefix = dragSettings.fields["prefix"] || '',
 					userSuffix = dragSettings.fields["suffix"] || '';
-				titleString = hasBrackets ? userPrefix + titleString.replace(/\[/g, '').replace(/\]/g, '') + userSuffix : userPrefix + titleString + userSuffix ;
+				titleString = userPrefix + titleString + userSuffix ;
 			}
 			break;
 		case "link":
-			titleString = !hasBrackets ? '[[' + titleString + ']]' : titleString ;
+			titleString = '[[' + titleString + ']]' ;
 			break;
 		default:
-			titleString = !hasBrackets ? '[[' + titleString + ']]' : titleString ;
+			titleString = '[[' + titleString + ']]' ;
 	}
 	return titleString;
 };
 
 function dragModifiers(event,titleString) {
 	var dragSettings = $tw.wiki.getTiddler("$:/config/DragDefaults") ,
-		dragModifier = event.ctrlKey && !event.shiftKey ? "control" : !event.ctrlKey && event.shiftKey ? "shift" : event.ctrlKey && event.shiftKey ? "control-shift" : "default" ,
+		dragModifier = event.ctrlKey && !event.shiftKey ? "ctrl" : !event.ctrlKey && event.shiftKey ? "shift" : event.ctrlKey && event.shiftKey ? "ctrl-shift" : "link" ,
 		drag = [ "link", "plain", "transclude", "user" ] ;
 	if (dragSettings !== undefined) {
-		drag[0] = dragSettings.fields["normal"] !== undefined ? dragSettings.fields["normal"] : "link" ;
-		drag[1] = dragSettings.fields["control-key"] !== undefined ? dragSettings.fields["control-key"] : "plain" ;
-		drag[2] = dragSettings.fields["shift-key"] !== undefined ? dragSettings.fields["control-key"] : "transclude" ;
-		drag[3] = dragSettings.fields["control-shift"] !== undefined ? dragSettings.fields["control-shift"] : "user" ;
+		drag[0] = dragSettings.fields["normal"] !== undefined ? dragSettings.fields.normal : "link" ;
+		drag[1] = dragSettings.fields["ctrl"] !== undefined ? dragSettings.fields["ctrl"] : "plain" ;
+		drag[2] = dragSettings.fields["shift"] !== undefined ? dragSettings.fields["shift"] : "transclude" ;
+		drag[3] = dragSettings.fields["ctrl-shift"] !== undefined ? dragSettings.fields["ctrl-shift"] : "user" ;
 	}
 
 	switch(dragModifier) {
-		case "control":
+		case "ctrl":
 			titleString.forEach(function(item,index) { titleString[index] = getTitleStringModified(drag[1],item,dragSettings); });
 			break;
 		case "shift":
