@@ -27,6 +27,7 @@ New and improved translations:
 
 !! Usability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3155]] new editor toolbar buttons for wrapping the selection with double square and curly brackets
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3134]] new [[sortan Operator]] for sorting alphanumeric values such as "Apple 6", "Apple 7", "Apple 8", "Apple 9", "Apple 10", "Apple 20", "Apple 30", "Apple 100"
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/da0ffce2d66f16ad14587fbe58b8d7a5c8d36657]] default fonts for readability as advised by [[GitHub|http://markdotto.com/2018/02/07/github-system-fonts/]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3131]] an editor toolbar button for stamping fragments of formulae for the [[KaTeX Plugin]] 
@@ -52,6 +53,7 @@ New and improved translations:
 
 !! Bug Fixes
 
+* [[Removed|https://github.com/Jermolene/TiddlyWiki5/pull/3043]] superfluous list item at the end of list-links-draggable macro
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/7e71fcfab80bed9aed4389eea386fb2036cc4a85]] problem with the content area of vertical tabs sometimes overflowing their right hand margin
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3079]] problem with double quotes within the new journal template
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3070]] problem with dragging inside a textarea
