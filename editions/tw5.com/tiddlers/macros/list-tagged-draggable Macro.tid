@@ -11,6 +11,8 @@ The <<.def list-tagged-draggable>> [[macro|Macros]] renders the tiddlers with a 
 
 ;tag
 : The title of the tag
+;subFilter
+: An optional subfilter to filter out unwanted items (eg `!tag[done]`)
 ;itemTemplate
 : Optional title of a tiddler to use as the template for rendering list items
 ;emptyMessage
