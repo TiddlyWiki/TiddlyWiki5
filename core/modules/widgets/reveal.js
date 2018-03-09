@@ -128,32 +128,34 @@ RevealWidget.prototype.readState = function() {
 			this.isOpen = !this.isOpen;
 			break;
 		case "lt":
-			this.readMatchStateltgt(state);
+			this.readMatchStatelt(state);
 			break;
 		case "gt":
-			this.readMatchStateltgt(state);
-			this.isOpen = !this.isOpen;
+			this.readMatchStategt(state);
 			break;
 		case "lteq":
-			this.readMatchStatelteq(state);
+			this.readMatchStategt(state);
+			this.isOpen = !this.isOpen;
 			break;
 		case "gteq":
-			this.readMatchStategteq(state);
+			this.readMatchStatelt(state);
+			this.isOpen = !this.isOpen;
 			break;
 	}
 };
 
+RevealWidget.prototype.compareStateText = function(state) {
+	var result = state.localeCompare(this.text, undefined, {numeric: true, sensitivity: 'case'});
+	return result;
+};
 RevealWidget.prototype.readMatchState = function(state) {
-	this.isOpen = state === this.text;
+	this.isOpen = (this.compareStateText(state) == 0) ? true : false;
 };
-RevealWidget.prototype.readMatchStateltgt = function(state) {
-	this.isOpen = (parseInt(state, 10) < parseInt(this.text, 10)) ? true : false;
+RevealWidget.prototype.readMatchStatelt = function(state) {
+	this.isOpen = (this.compareStateText(state) < 0) ? true : false;
 };
-RevealWidget.prototype.readMatchStatelteq = function(state) {
-	this.isOpen = (parseInt(state, 10) <= parseInt(this.text, 10)) ? true : false;
-};
-RevealWidget.prototype.readMatchStategteq = function(state) {
-	this.isOpen = (parseInt(state, 10) >= parseInt(this.text, 10)) ? true : false;
+RevealWidget.prototype.readMatchStategt = function(state) {
+	this.isOpen = (this.compareStateText(state) > 0) ? true : false;
 };
 RevealWidget.prototype.readPopupState = function(state) {
 	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/,
