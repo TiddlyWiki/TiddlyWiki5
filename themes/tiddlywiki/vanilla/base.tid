@@ -470,6 +470,16 @@ html body.tc-body .tc-btn-rounded:hover svg {
 	margin: 0;
 }
 
+/* used for documentation "fake" buttons */
+.tc-btn-standard {
+	line-height: 1.8;
+	color: #667;
+	background-color: #e0e0e0;
+	border: 1px solid #888;
+	padding: 2px 1px 2px 1px;
+	margin: 1px 4px 1px 4px;
+}
+
 .tc-btn-big-green {
 	display: inline-block;
 	padding: 8px;
