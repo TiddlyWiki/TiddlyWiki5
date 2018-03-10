@@ -1,5 +1,5 @@
 created: 20180309232911422
-modified: 20180310191739508
+modified: 20180310201216266
 tags: Learning
 title: How to hide the author's and other fields with CSS
 type: text/vnd.tiddlywiki
@@ -11,10 +11,8 @@ Sometimes you might want to save some screen space by hiding away the author's n
 * In the text field of the tiddler put:
 
 ```
-a[href="#Username"].tc-tiddlylink {display:none;}
+.tc-subtitle .tc-tiddlylink {display:none;}
 ```
-
-* Note that you need to change `Username` to the name of the author you want to hide. Keep the `#` in front.
 
 * Save the tiddler. The author's name field should no longer appear.
 
