@@ -163,6 +163,8 @@ PreviewType/Caption: preview type
 PreviewType/Hint: Choose preview type
 Quote/Caption: quote
 Quote/Hint: Apply quoted text formatting to lines containing selection
+RotateLeft/Caption: rotate left
+RotateLeft/Hint: Rotate image left by 90 degrees
 Size/Caption: image size
 Size/Caption/Height: Height:
 Size/Caption/Resize: Resize image
