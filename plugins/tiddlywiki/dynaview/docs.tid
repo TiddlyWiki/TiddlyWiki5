@@ -13,7 +13,13 @@ The components of this plugin include:
 
 ! Scroll Features
 
+!! Set tiddler field when visible
+
 The background task detects when elements with the class `tc-dynaview-set-tiddler-when-visible` scroll into view. The first time that they do, the background task assigns the value in the attribute `data-dynaview-set-value` to the tiddler whose title is in the attribute `data-dynaview-set-tiddler`. This assignment can be tied to a reveal widget to cause content to be displayed when it becomes visible. If the class `tc-dynaview-expand-viewport` is set then the viewport is expanded so that the processing occurs when elements move near the viewport.
+
+!! Update address bar when scrolling
+
+The background task detects the tiddler at the top of the viewport and sets the address bar location hash to the title of that tiddler.
 
 ! Viewport Size Features
 

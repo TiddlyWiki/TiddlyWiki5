@@ -29,6 +29,7 @@ exports.startup = function() {
 	window.addEventListener("resize",onResize,false);
 	$tw.hooks.addHook("th-page-refreshed",function() {
 		optisizeFonts();
+		checkTopmost();
 		checkVisibility();
 		saveViewportDimensions();
 	});
@@ -61,6 +62,7 @@ function worker() {
 		saveViewportDimensions();
 	}
 	setZoomClasses();
+	checkTopmost();
 	checkVisibility();
 	isWaitingForAnimationFrame = 0;
 }
@@ -163,6 +165,30 @@ function checkVisibility() {
 			}
 		}
 	});
+}
+
+function checkTopmost() {
+	if($tw.wiki.getTiddlerText("$:/config/DynaView/UpdateAddressBar") === "yes") {
+		var elements = document.querySelectorAll(".tc-tiddler-frame[data-tiddler-title]"),
+			topmostElement = null,
+			topmostElementTop = 1 * 1000 * 1000;
+		$tw.utils.each(elements,function(element) {
+			// Check if the element is visible
+			var elementRect = element.getBoundingClientRect();
+			if((elementRect.top < topmostElementTop) && (elementRect.bottom > 0)) {
+				topmostElement = element;
+				topmostElementTop = elementRect.top;
+			}
+		});
+		if(topmostElement) {
+			var title = topmostElement.getAttribute("data-tiddler-title"),
+				hash = "#" + encodeURIComponent(title) + ":" + encodeURIComponent("[list[$:/StoryList]]");
+			if(title && $tw.locationHash !== hash) {
+				$tw.locationHash = hash;
+				window.location.hash = hash;			
+			}
+		}
+	}
 }
 
 function saveViewportDimensions() {
