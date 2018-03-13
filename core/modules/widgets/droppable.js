@@ -131,7 +131,7 @@ DroppableWidget.prototype.performActions = function(title,event) {
 		var modifierKey = event.ctrlKey && ! event.shiftKey ? "ctrl" : event.shiftKey && !event.ctrlKey ? "shift" : 
 				event.ctrlKey && event.shiftKey ? "ctrl-shift" : "normal" ;
 		this.invokeActionString(this.droppableActions,this,event,{actionTiddler: title, modifier: modifierKey});
-	
+	}
 };
 
 /*
