@@ -128,7 +128,9 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 
 DroppableWidget.prototype.performActions = function(title,event) {
 	if(this.droppableActions) {
-		this.invokeActionString(this.droppableActions,this,event,{actionTiddler: title});
+		var modifierKey = event.ctrlKey && ! event.shiftKey ? "ctrl" : event.shiftKey && !event.ctrlKey ? "shift" : 
+				event.ctrlKey && event.shiftKey ? "ctrl-shift" : "normal" ;
+		this.invokeActionString(this.droppableActions,this,event,{actionTiddler: title, modifier: modifierKey});
 	}
 };
 

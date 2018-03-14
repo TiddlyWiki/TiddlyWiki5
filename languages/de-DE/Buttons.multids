@@ -139,6 +139,8 @@ LineWidth/Caption: Zeilen Länge
 LineWidth/Hint: Wählen Sie die Zeilenlänge
 Link/Caption: Link
 Link/Hint: Erstellt einen Wiki-Link
+Linkify/Caption: Wikilink
+Linkify/Hint: Den selektierten Text in eckige Klammern wickeln
 ListBullet/Caption: Punkteliste
 ListBullet/Hint: Zeilen, die eine Markierung enthalten, werden als Punkteliste formatiert
 ListNumber/Caption: Aufzählungsliste
@@ -175,5 +177,7 @@ Subscript/Caption: Tiefsgestellt
 Subscript/Hint: Ausgewählten Text tiefgestellt darstellen
 Superscript/Caption: Hochgestellt
 Superscript/Hint: Ausgewählten Text hochgestellt darstellen
+Transcludify/Caption: Transklusion
+Transcludify/Hint: Transklusion auf den selektierten Text anwenden
 Underline/Caption: Unterstreichen
 Underline/Hint: Ausgewählten Text unterstrichen darstellen

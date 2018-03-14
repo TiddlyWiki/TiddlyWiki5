@@ -59,6 +59,13 @@ tags: [[$:/tags/Stylesheet]]
 
 @font-face {
 	font-family: KaTeX_Main;
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Main-BoldItalic.woff'>>) format('woff');
+	font-weight: 700;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: KaTeX_Main;
 	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Main-Italic.woff'>>) format('woff');
 	font-weight: 400;
 	font-style: italic;
@@ -74,6 +81,20 @@ tags: [[$:/tags/Stylesheet]]
 @font-face {
 	font-family: KaTeX_Math;
 	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Math-Italic.woff'>>) format('woff');
+	font-weight: 400;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: KaTeX_SansSerif;
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_SansSerif-Bold.woff'>>) format('woff');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: KaTeX_SansSerif;
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_SansSerif-Italic.woff'>>) format('woff');
 	font-weight: 400;
 	font-style: italic;
 }
@@ -126,3 +147,4 @@ tags: [[$:/tags/Stylesheet]]
 	font-weight: 400;
 	font-style: normal;
 }
+

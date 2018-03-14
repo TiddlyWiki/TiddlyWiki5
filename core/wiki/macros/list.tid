@@ -28,27 +28,25 @@ tags: $:/tags/Macro
 &nbsp;
 </div>
 <div>
-<$link to={{!!title}}>
 <$transclude tiddler="""$itemTemplate$""">
+<$link to={{!!title}}>
 <$transclude field="caption">
 <$view field="title"/>
 </$transclude>
-</$transclude>
 </$link>
+</$transclude>
 </div>
 </$droppable>
 </$list>
+</$type$>
 <$tiddler tiddler="">
-<$droppable actions=<<list-links-draggable-drop-actions>> tag="""$subtype$""">
+<$droppable actions=<<list-links-draggable-drop-actions>> tag="div">
 <div class="tc-droppable-placeholder">
 &nbsp;
 </div>
-<div>
-&nbsp;
-</div>
+<div style="height:0.5em;"/>
 </$droppable>
 </$tiddler>
-</$type$>
 </$vars>
 \end
 
@@ -69,9 +67,9 @@ tags: $:/tags/Macro
 </$set>
 \end
 
-\define list-tagged-draggable(tag,emptyMessage,itemTemplate,elementTag:"div")
+\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div")
 <$set name="tag" value="""$tag$""">
-<$list filter="[<tag>tagging[]]" emptyMessage=<<__emptyMessage__>>>
+<$list filter="[<tag>tagging[]$subFilter$]" emptyMessage=<<__emptyMessage__>>>
 <$elementTag$ class="tc-menu-list-item">
 <$droppable actions=<<list-tagged-draggable-drop-actions>>>
 <$elementTag$ class="tc-droppable-placeholder">
