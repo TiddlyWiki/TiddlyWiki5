@@ -1,0 +1,14 @@
+tags: Variables [[Core Variables]]
+title: modifier Variable
+type: text/vnd.tiddlywiki
+
+Within the ''action'' string of the DroppableWidget, the <<.def modifier>> [[variable|Variables]] contains the modifier key(s) held during the drag-process.
+The possible keys are ''ctrl'', ''shift'' or both ''ctrl'' and ''shift''
+
+The variable contains a string that identifies the keys:
+
+|Modifier Key |Variable Content |h
+|ctrl |ctrl |
+|shift |shift |
+|ctrl+shift |ctrl-shift |
+|no modifier (normal drag) |normal |
