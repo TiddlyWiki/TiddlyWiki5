@@ -36,9 +36,12 @@ New and improved translations:
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3040]] a hint to the field list dropdown
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3135]] a control panel setting for the default tab in the More sidebar
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3149]] a control panel setting for the titles of new tiddlers
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c0569849d22f99623423d349c0d96ecae11ffbe8]] "rotate left" button to bitmap editor toolbar
 
 !! Hackability Improvements
 
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/3167]] DroppableWidget to pass modifier keys in a variable
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/7cb54f32c6ee2d98f3f13ddda39f92281d419afd]] a new [[TaskManagementExample (Draggable)]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/460a07ca03a501009530a57352d6bec0e3cf49cd]] new 'Stylesheets' tab to control panel
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b4c7c59d5d1bc5282fcfed58abbf087b9f65b86c]] new 'emptyMessage' parameter to [[list-links Macro]] and [[list-tagged-draggable Macro]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/de4eb5ca89132db136c8f5fb3103f289f25fe98a]] new `th-page-refreshed` hook
