@@ -9,4 +9,4 @@ This plugin provides an enhanced text editor component based on [[CodeMirror|htt
 
 [[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/codemirror]]
 
-Based on ~CodeMirror version 5.13.2
+Based on ~CodeMirror version 5.35.1
