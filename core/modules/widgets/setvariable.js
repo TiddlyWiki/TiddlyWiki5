@@ -76,7 +76,7 @@ SetWidget.prototype.getValue = function() {
 		}
 	} else if(this.setFilter) {
 		var results = this.wiki.filterTiddlers(this.setFilter,this);
-		if(!this.setValue) {
+		if(this.setValue == null) {
 			var select;
 			if(this.setSelect) {
 				select = parseInt(this.setSelect,10);
