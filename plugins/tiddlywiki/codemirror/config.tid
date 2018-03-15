@@ -17,8 +17,6 @@ type: application/json
       "$:/plugins/tiddlywiki/codemirror/mode/meta.js",
       "$:/plugins/tiddlywiki/codemirror/mode/tiddlywiki/tiddlywiki.js",
       "$:/plugins/tiddlywiki/codemirror/mode/xml/xml.js",
-      "$:/plugins/tiddlywiki/codemirror/keymap/vim.js",
-      "$:/plugins/tiddlywiki/codemirror/keymap/emacs.js"
   ],
   "configuration": {
       "matchBrackets": true,
