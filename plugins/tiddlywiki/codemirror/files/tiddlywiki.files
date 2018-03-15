@@ -126,27 +126,6 @@
 				"title": "$:/plugins/tiddlywiki/codemirror/mode/xml/xml.js",
 				"module-type": "library"
 			}
-		},{
-			"file": "keymap/vim.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/keymap/vim.js",
-				"module-type": "library"
-			}
-		},{
-			"file": "keymap/sublime.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/keymap/sublime.js",
-				"module-type": "library"
-			}
-		},{
-			"file": "keymap/emacs.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/keymap/emacs.js",
-				"module-type": "library"
-			}
 		}
 	]
 }
