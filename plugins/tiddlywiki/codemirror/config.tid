@@ -9,8 +9,6 @@ type: application/json
       "$:/plugins/tiddlywiki/codemirror/addon/mode/multiplex.js",
       "$:/plugins/tiddlywiki/codemirror/addon/search/search.js",
       "$:/plugins/tiddlywiki/codemirror/addon/search/jump-to-line.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/hint/show-hint.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js",
       "$:/plugins/tiddlywiki/codemirror/mode/css/css.js",
       "$:/plugins/tiddlywiki/codemirror/mode/htmlembedded/htmlembedded.js",
       "$:/plugins/tiddlywiki/codemirror/mode/htmlmixed/htmlmixed.js",
@@ -24,9 +22,6 @@ type: application/json
   ],
   "configuration": {
       "matchBrackets": true,
-      "showCursorWhenSelecting": true,
-      "extraKeys": {
-        "Ctrl-Space": "autocomplete"
-    }
+      "showCursorWhenSelecting": true
   }
 }
