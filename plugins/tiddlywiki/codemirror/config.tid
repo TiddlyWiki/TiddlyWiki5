@@ -16,7 +16,7 @@ type: application/json
       "$:/plugins/tiddlywiki/codemirror/mode/markdown/markdown.js",
       "$:/plugins/tiddlywiki/codemirror/mode/meta.js",
       "$:/plugins/tiddlywiki/codemirror/mode/tiddlywiki/tiddlywiki.js",
-      "$:/plugins/tiddlywiki/codemirror/mode/xml/xml.js",
+      "$:/plugins/tiddlywiki/codemirror/mode/xml/xml.js"
   ],
   "configuration": {
       "matchBrackets": true,
