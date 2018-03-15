@@ -36,27 +36,6 @@
 				"module-type": "library"
 			}
 		},{
-			"file": "addon/hint/anyword-hint.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js",
-				"module-type": "library"
-			}
-		},{
-			"file": "addon/hint/show-hint.css",
-			"fields": {
-				"type": "text/css",
-				"title": "$:/plugins/tiddlywiki/codemirror/hint/show-hint.css",
-				"tags": "[[$:/tags/Stylesheet]]"
-			}
-		},{
-			"file": "addon/hint/show-hint.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/addon/hint/show-hint.js",
-				"module-type": "library"
-			}
-		},{
 			"file": "addon/mode/multiplex.js",
 			"fields": {
 				"type": "application/javascript",
