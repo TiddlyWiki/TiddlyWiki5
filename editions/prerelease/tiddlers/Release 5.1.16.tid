@@ -25,6 +25,10 @@ New and improved translations:
 * Improved Traditional and Simplified Chinese translations
 ** These translations now also reset the minimum search length to one character
 
+!! Privacy Improvements
+
+Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia.org/wiki/General_Data_Protection_Regulation]], we've [[removed all third party cookies from tiddlywiki.com|https://github.com/Jermolene/TiddlyWiki5/pull/3106]].
+
 !! Usability Improvements
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3155]] new editor toolbar buttons for wrapping the selection with double square and curly brackets
@@ -63,6 +67,7 @@ New and improved translations:
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3099]] usage of "default" attribute of SelectWidget when "index" attribute is used
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3093]] problem with crash when dragging over TiddlyWiki on some browsers
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3079]] issue with new journal button
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3164]] problem with ''filter'' and ''value'' attributes of SetWidget
 
 !! Developer Bug Fixes and Improvements
 
