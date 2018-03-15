@@ -3,4 +3,15 @@ tags: $:/tags/EditPreview
 caption: differences from current
 list-after: $:/core/ui/EditTemplate/body/preview/output
 
-<$macrocall $name="compareTiddlers" sourceTiddlerTitle={{!!draft.of}} destTiddlerTitle=<<currentTiddler>>/>
+<$list filter="[<currentTiddler>!is[image]]" emptyMessage="""
+<$set name="tv-tiddler-preview" value="yes">
+
+<$transclude />
+
+</$set>
+""">
+
+<$macrocall $name="compareTiddlerText" sourceTiddlerTitle={{!!draft.of}} destTiddlerTitle=<<currentTiddler>>/>
+
+</$list>
+
