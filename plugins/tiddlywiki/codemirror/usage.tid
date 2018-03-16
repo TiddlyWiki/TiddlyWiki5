@@ -8,7 +8,7 @@ The current editor type mappings are shown in [[$:/ControlPanel]] under the "Adv
 
 ! ~CodeMirror Configuration
 
-You can configure the ~CodeMirror plugin by creating a tiddler called [[$:/config/CodeMirror]] containing a JSON configuration object. The configuration tiddler must have its type field set to `application/json` to take effect.
+You can configure the ~CodeMirror plugin by editing [[$:/config/CodeMirror]]
 
 See http://codemirror.net/ for details of available configuration options.
 
@@ -32,54 +32,10 @@ For example:
 }
 ```
 
-!! Basic working configuration
+!! Add syntax highlighting
 
-# Create a tiddler called `$:/config/CodeMirror`
+Install a ''CodeMirror Highlighting AddOn'' from the Plugin Library for the desired language and follow the instructions in its Readme
 
-# The type of the tiddler has to be set to `application/json`
-
-# The text of the tiddler is the following: 
-
-```
-{
-  "require": [
-      "$:/plugins/tiddlywiki/codemirror/mode/javascript/javascript.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js"
-  ],
-  "configuration": {
-      "matchBrackets":true,
-      "showCursorWhenSelecting": true
-  }
-}
-
-```
-
-# You should see line numbers when editing a tiddler
-# When editing a tiddler, no matter what the type of the tiddler is set to, you should see matching brackets being highlighted whenever the cursor is next to one of them
-# If you edit a tiddler with the type `application/javascript` or `application/json` you should see the code being syntax highlighted
-
-!! Add HTML syntax highlighting
-
-# Create a tiddler `$:/plugins/tiddlywiki/codemirror/mode/xml/xml.js`
-## Add a field `module-type` and set it to ''library''
-## Set the field `type` to ''application/javascript''
-## Set the text field of the tiddler with the javascript code from this link : [[https://raw.githubusercontent.com/codemirror/CodeMirror/master/mode/xml/xml.js]]
-# Set the text field of the tiddler `$:/config/CodeMirror` to:
-
-```
-{
-  "require": [
-      "$:/plugins/tiddlywiki/codemirror/mode/javascript/javascript.js",
-      "$:/plugins/tiddlywiki/codemirror/mode/xml/xml.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js"
-  ],
-  "configuration": {
-      "showCursorWhenSelecting": true,
-      "matchBrackets":true
-  }
-}
-```
-# Edit a tiddler with the type `text/html` and write some html code. You should see your code being coloured
 
 !! Add a non-existing language mode
 
