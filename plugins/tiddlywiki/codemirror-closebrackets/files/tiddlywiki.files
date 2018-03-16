@@ -1,0 +1,12 @@
+{
+	"tiddlers": [
+		{
+			"file": "addon/edit/closebrackets.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js",
+				"module-type": "library"
+			}
+		}
+	]
+}

@@ -1,0 +1,23 @@
+title: $:/plugins/tiddlywiki/codemirror-closebrackets/readme
+
+This plugin adds the ability to automatically insert the closing brackets when you type an opening bracket. It needs the latest [[CodeMirror plugin|$:/plugins/tiddlywiki/codemirror]] to be installed
+
+>To enable the Close Brackets ~AddOn, copy the following line and ''append'' it at the bottom of the ''require'' section in $:/config/CodeMirror<br>
+
+>Then make sure that all entries except the last one within the ''require'' section end with a 'semicolon'<br>
+
+<$macrocall $name="copy-to-clipboard-above-right" src='		"$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js"'/>
+
+```json
+		"$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js"
+```
+
+>Then ''append'' the following line to the ''configuration'' section in $:/config/CodeMirror<br>
+
+<$macrocall $name="copy-to-clipboard-above-right" src='		"autoCloseBrackets": true'/>
+
+```json
+		"autoCloseBrackets": true
+```
+
+>''Save'' and ''Reload'' your wiki to have the changes take effect

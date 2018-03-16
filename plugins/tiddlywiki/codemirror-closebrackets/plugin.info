@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/codemirror-closebrackets",
+	"description": "CodeMirror AddOn: Close Brackets",
+	"author": "JeremyRuston",
+	"list": "readme"
+}
