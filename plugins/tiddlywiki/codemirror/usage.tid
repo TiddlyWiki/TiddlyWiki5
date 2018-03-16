@@ -8,6 +8,15 @@ To disable the line numbers on the left, append the following line at the end of
       "lineNumbers": false
 ```
 
+! Setting a different Theme
+
+There are many ~CodeMirror Themes available [[here|https://github.com/codemirror/CodeMirror/tree/master/theme]]
+
+* Copy your theme into a Tiddler tagged with <<tag-pill "$:/tags/Stylesheet">>
+* Remove the comments at the top if there are some
+* Append the following line to the ''configuration'' section in $:/config/CodeMirror :
+** "theme": "your-theme-name-here"
+* Make sure that all entries except the last one within the configuration section end with a 'semicolon'
 
 ! Setting ~CodeMirror Content Types
 
