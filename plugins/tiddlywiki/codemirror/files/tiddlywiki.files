@@ -22,45 +22,10 @@
 				"tags": "[[$:/tags/Stylesheet]]"
 			}
 		},{
-			"file": "addon/dialog/dialog.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.js",
-				"module-type": "library"
-			}
-		},{
-			"file": "addon/edit/matchbrackets.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js",
-				"module-type": "library"
-			}
-		},{
 			"file": "addon/mode/multiplex.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/mode/multiplex.js",
-				"module-type": "library"
-			}
-		},{
-			"file": "addon/search/jump-to-line.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/addon/search/jump-to-line.js",
-				"module-type": "library"
-			}
-		},{
-			"file": "addon/search/search.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/addon/search/search.js",
-				"module-type": "library"
-			}
-		},{
-			"file": "addon/search/searchcursor.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js",
 				"module-type": "library"
 			}
 		},{
