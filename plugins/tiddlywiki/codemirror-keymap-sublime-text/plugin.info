@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/codemirror-keymap-sublime-text",
+	"description": "CodeMirror AddOn: Sublime Text Keymap",
+	"author": "JeremyRuston",
+	"list": "readme"
+}

@@ -1,30 +1,9 @@
 {
 	"tiddlers": [
 		{
-			"file": "addon/dialog/dialog.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.js",
-				"module-type": "library"
-			}
-		},{
-			"file": "addon/dialog/dialog.css",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.css",
-				"tags": "[[$:/tags/Stylesheet]]"
-			}
-		},{
-			"file": "addon/search/searchcursor.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js",
-				"module-type": "library"
-			}
-		},{
 			"file": "addon/search/search.js",
 			"fields": {
-				"type": "text/css",
+				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/search/search.js",
 				"module-type": "library"
 			}

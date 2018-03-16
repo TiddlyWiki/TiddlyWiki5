@@ -1,53 +1,76 @@
+title: $:/plugins/tiddlywiki/codemirror-keymap-sublime-text/readme
+
+This plugin adds a ''Keymap'' with the most important ''Sublime Text'' keyboard shortcuts
+
+>To enable this ~AddOn, copy the following line and ''append'' it at the bottom of the ''require'' section in $:/config/CodeMirror<br>
+
+>Then make sure that all entries except the last one within the ''require'' section end with a 'semicolon'<br>
+
+<$macrocall $name="copy-to-clipboard-above-right" src='		"$:/plugins/tiddlywiki/codemirror/keymap/sublime.js"'/>
+
+```json
+		"$:/plugins/tiddlywiki/codemirror/keymap/sublime.js"
+```
+
+>Then ''append'' the following line to the ''configuration'' section in $:/config/CodeMirror<br>
+
+<$macrocall $name="copy-to-clipboard-above-right" src='		"keyMap": "sublime"'/>
+
+```json
+		"keyMap": "sublime"
+```
+
+>''Save'' and ''Reload'' your wiki to have the changes take effect
 
 
 |Shortcut |Function |h
 |Shift-Tab |indentLess |
 |Shift-Ctrl-K |deleteLine |
 |Alt-Q |wrapLines |
-"Ctrl-T": "transposeChars",
-"Alt-Left": "goSubwordLeft",
-"Alt-Right": "goSubwordRight",
-"Ctrl-Up": "scrollLineUp",
-"Ctrl-Down": "scrollLineDown",
-"Ctrl-L": "selectLine",
-"Shift-Ctrl-L": "splitSelectionByLine",
-"Esc": "singleSelectionTop",
-"Ctrl-Enter": "insertLineAfter",
-"Shift-Ctrl-Enter": "insertLineBefore",
-"Ctrl-D": "selectNextOccurrence",
-"Shift-Ctrl-Space": "selectScope",
-"Shift-Ctrl-M": "selectBetweenBrackets",
-"Ctrl-M": "goToBracket",
-"Shift-Ctrl-Up": "swapLineUp",
-"Shift-Ctrl-Down": "swapLineDown",
-"Ctrl-/": "toggleCommentIndented",
-"Ctrl-J": "joinLines",
-"Shift-Ctrl-D": "duplicateLine",
-"F9": "sortLines",
-"Ctrl-F9": "sortLinesInsensitive",
-"F2": "nextBookmark",
-"Shift-F2": "prevBookmark",
-"Ctrl-F2": "toggleBookmark",
-"Shift-Ctrl-F2": "clearBookmarks",
-"Alt-F2": "selectBookmarks",
-"Backspace": "smartBackspace",
-"Ctrl-K Ctrl-K": "delLineRight",
-"Ctrl-K Ctrl-U": "upcaseAtCursor",
-"Ctrl-K Ctrl-L": "downcaseAtCursor",
-"Ctrl-K Ctrl-Space": "setSublimeMark",
-"Ctrl-K Ctrl-A": "selectToSublimeMark",
-"Ctrl-K Ctrl-W": "deleteToSublimeMark",
-"Ctrl-K Ctrl-X": "swapWithSublimeMark",
-"Ctrl-K Ctrl-Y": "sublimeYank",
-"Ctrl-K Ctrl-C": "showInCenter",
-"Ctrl-K Ctrl-G": "clearBookmarks",
-"Ctrl-K Ctrl-Backspace": "delLineLeft",
-"Ctrl-K Ctrl-0": "unfoldAll",
-"Ctrl-K Ctrl-J": "unfoldAll",
-"Ctrl-Alt-Up": "addCursorToPrevLine",
-"Ctrl-Alt-Down": "addCursorToNextLine",
-"Ctrl-F3": "findUnder",
-"Shift-Ctrl-F3": "findUnderPrevious",
-"Shift-Ctrl-[": "fold",
-"Shift-Ctrl-]": "unfold",
-"Ctrl-H": "replace",
+|Ctrl-T |transposeChars |
+|Alt-Left |goSubwordLeft |
+|Alt-Right |goSubwordRight |
+|Ctrl-Up |scrollLineUp |
+|Ctrl-Down |scrollLineDown |
+|Ctrl-L |selectLine |
+|Shift-Ctrl-L |splitSelectionByLine |
+|Esc |singleSelectionTop |
+|Ctrl-Enter |insertLineAfter |
+|Shift-Ctrl-Enter |insertLineBefore |
+|Ctrl-D |selectNextOccurrence |
+|Shift-Ctrl-Space |selectScope |
+|Shift-Ctrl-M |selectBetweenBrackets |
+|Ctrl-M |goToBracket |
+|Shift-Ctrl-Up |swapLineUp |
+|Shift-Ctrl-Down |swapLineDown |
+|Ctrl-/ |toggleCommentIndented |
+|Ctrl-J |joinLines |
+|Shift-Ctrl-D |duplicateLine |
+|F9 |sortLines |
+|Ctrl-F9 |sortLinesInsensitive |
+|F2 |nextBookmark |
+|Shift-F2 |prevBookmark |
+|Ctrl-F2 |toggleBookmark |
+|Shift-Ctrl-F2 |clearBookmarks |
+|Alt-F2 |selectBookmarks |
+|Backspace |smartBackspace |
+|Ctrl-K Ctrl-K |delLineRight |
+|Ctrl-K Ctrl-U |upcaseAtCursor |
+|Ctrl-K Ctrl-L |downcaseAtCursor |
+|Ctrl-K Ctrl-Space |setSublimeMark |
+|Ctrl-K Ctrl-A |selectToSublimeMark |
+|Ctrl-K Ctrl-W |deleteToSublimeMark |
+|Ctrl-K Ctrl-X |swapWithSublimeMark |
+|Ctrl-K Ctrl-Y |sublimeYank |
+|Ctrl-K Ctrl-C |showInCenter |
+|Ctrl-K Ctrl-G |clearBookmarks |
+|Ctrl-K Ctrl-Backspace |delLineLeft |
+|Ctrl-K Ctrl-0 |unfoldAll |
+|Ctrl-K Ctrl-J |unfoldAll |
+|Ctrl-Alt-Up |addCursorToPrevLine |
+|Ctrl-Alt-Down |addCursorToNextLine |
+|Ctrl-F3 |findUnder |
+|Shift-Ctrl-F3 |findUnderPrevious |
+|Shift-Ctrl-[ |fold |
+|Shift-Ctrl-] |unfold |
+|Ctrl-H |replace |

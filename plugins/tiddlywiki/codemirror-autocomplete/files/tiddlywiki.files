@@ -38,7 +38,7 @@
 		},{
 			"file": "addon/hint/show-hint.css",
 			"fields": {
-				"type": "application/javascript",
+				"type": "text/css",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/hint/show-hint.css",
 				"tags": "[[$:/tags/Stylesheet]]"
 			}

@@ -20,14 +20,10 @@ It adds these Keyboard Shortcuts to ~CodeMirror:
 
 >''Save'' and ''Reload'' your wiki to have the changes take effect
 
-<$macrocall $name="copy-to-clipboard-above-right" src='		"$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/search/search.js",
+<$macrocall $name="copy-to-clipboard-above-right" src='		"$:/plugins/tiddlywiki/codemirror/addon/search/search.js",
 		"$:/plugins/tiddlywiki/codemirror/addon/search/jump-to-line.js"'/>
 
 ```json
-		"$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js",
 		"$:/plugins/tiddlywiki/codemirror/addon/search/search.js",
 		"$:/plugins/tiddlywiki/codemirror/addon/search/jump-to-line.js"
 ```

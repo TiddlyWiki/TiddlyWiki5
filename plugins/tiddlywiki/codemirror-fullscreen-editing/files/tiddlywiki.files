@@ -10,7 +10,7 @@
 		},{
 			"file": "addon/fullscreen/fullscreen.css",
 			"fields": {
-				"type": "application/javascript",
+				"type": "text/css",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/fullscreen/fullscreen.css",
 				"tags": "[[$:/tags/Stylesheet]]"
 			}
