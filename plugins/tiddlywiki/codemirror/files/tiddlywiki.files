@@ -15,13 +15,6 @@
 				"tags": "[[$:/tags/Stylesheet]]"
 			}
 		},{
-			"file": "addon/dialog/dialog.css",
-			"fields": {
-				"type": "text/css",
-				"title": "$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.css",
-				"tags": "[[$:/tags/Stylesheet]]"
-			}
-		},{
 			"file": "addon/mode/multiplex.js",
 			"fields": {
 				"type": "application/javascript",
