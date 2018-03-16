@@ -1,5 +1,14 @@
 title: $:/plugins/tiddlywiki/codemirror/usage
 
+! Disabling Line Numbers
+
+To disable the line numbers on the left, append the following line at the end of the ''configuration'' section in $:/config/CodeMirror:
+
+```json
+      "lineNumbers": false
+```
+
+
 ! Setting ~CodeMirror Content Types
 
 You can determine which tiddler content types are edited by the ~CodeMirror widget by creating or modifying special tiddlers whose prefix is comprised of the string `$:/config/EditorTypeMappings/` concatenated with the content type. The text of that tiddler gives the editor type to be used (eg, ''text'', ''bitmap'', ''codemirror'').
