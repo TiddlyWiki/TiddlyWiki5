@@ -36,13 +36,6 @@
 				"module-type": "library"
 			}
 		},{
-			"file": "addon/mode/multiplex.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/addon/mode/multiplex.js",
-				"module-type": "library"
-			}
-		},{
 			"file": "addon/search/searchcursor.js",
 			"fields": {
 				"type": "application/javascript",

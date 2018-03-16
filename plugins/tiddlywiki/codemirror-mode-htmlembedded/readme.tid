@@ -16,9 +16,11 @@ This plugin adds Highlighting Embedded-HTML tiddlers (application/x-aspx, applic
 
 >Then make sure that all entries except the last one within the ''require'' section end with a 'semicolon'<br>
 
-<$macrocall $name="copy-to-clipboard-above-right" src='		"$:/plugins/tiddlywiki/codemirror/mode/htmlembedded/htmlembedded.js"'/>
+<$macrocall $name="copy-to-clipboard-above-right" src='		"$:/plugins/tiddlywiki/codemirror/addon/mode/multiplex.js",
+		"$:/plugins/tiddlywiki/codemirror/mode/htmlembedded/htmlembedded.js"'/>
 
 ```json
+		"$:/plugins/tiddlywiki/codemirror/addon/mode/multiplex.js",
 		"$:/plugins/tiddlywiki/codemirror/mode/htmlembedded/htmlembedded.js"
 ```
 
