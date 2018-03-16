@@ -38,9 +38,20 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	// Create the diff
-	var dmpObject = new dmp.diff_match_patch();
-	//dmpObject.Match_Threshold = 0.5
-	var diffs = dmpObject.diff_main(this.getAttribute("source"),this.getAttribute("dest"));
+	var dmpObject = new dmp.diff_match_patch(),
+		diffs = dmpObject.diff_main(this.getAttribute("source"),this.getAttribute("dest"));
+	// Apply required cleanup
+	switch(this.getAttribute("cleanup","semantic")) {
+		case "none":
+			// No cleanup
+			break;
+		case "efficiency":
+			dmpObject.diff_cleanupEfficiency(diffs);
+			break;
+		default: // case "semantic"
+			dmpObject.diff_cleanupSemantic(diffs);
+			break;
+	}
 	// Create the elements
 	var domContainer = this.document.createElement("div"), 
 		domDiff = this.createDiffDom(diffs);
@@ -119,7 +130,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DiffTextWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.source || changedAttributes.dest) {
+	if(changedAttributes.source || changedAttributes.dest || changedAttributes.cleanup) {
 		this.refreshSelf();
 		return true;
 	} else {
