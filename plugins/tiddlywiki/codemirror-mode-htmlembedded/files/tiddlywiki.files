@@ -1,0 +1,12 @@
+{
+	"tiddlers": [
+{
+			"file": "mode/htmlembedded/htmlembedded.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/mode/htmlembedded/htmlembedded.js",
+				"module-type": "library"
+			}
+		}
+	]
+}

@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/codemirror-mode-css/readme
+
+This plugin adds Highlighting for CSS tiddlers (text/css) to the [[CodeMirror|http://codemirror.net]] text editor. It needs the latest [[CodeMirror plugin|$:/plugins/tiddlywiki/codemirror]] to be installed
+
+>To enable the CSS Highlighting ~AddOn, copy the following line and ''append'' it at the bottom of the ''require'' section in $:/config/CodeMirror<br>
+
+>Then make sure that all entries except the last one within the ''require'' section end with a 'semicolon'<br>
+
+<$macrocall $name="copy-to-clipboard-above-right" src='		"$:/plugins/tiddlywiki/codemirror/mode/css/css.js"'/>
+
+```json
+		"$:/plugins/tiddlywiki/codemirror/mode/css/css.js"
+```
+
+>''Save'' and ''Reload'' your wiki to have the changes take effect

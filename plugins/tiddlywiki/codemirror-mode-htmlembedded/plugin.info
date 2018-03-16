@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/codemirror-mode-htmlembedded",
+	"description": "CodeMirror AddOn: Embedded-HTML Highlighting",
+	"author": "JeremyRuston",
+	"list": "readme"
+}
