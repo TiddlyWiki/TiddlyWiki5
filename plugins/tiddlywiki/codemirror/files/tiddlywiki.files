@@ -15,6 +15,13 @@
 				"tags": "[[$:/tags/Stylesheet]]"
 			}
 		},{
+			"file": "addon/edit/matchbrackets.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js",
+				"module-type": "library"
+			}
+		},{
 			"file": "addon/mode/multiplex.js",
 			"fields": {
 				"type": "application/javascript",
