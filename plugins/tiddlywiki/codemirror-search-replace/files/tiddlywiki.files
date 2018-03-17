@@ -14,6 +14,13 @@
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/search/jump-to-line.js",
 				"module-type": "library"
 			}
+		},{
+			"file": "addon/search/searchcursor.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js",
+				"module-type": "library"
+			}
 		}
 	]
 }

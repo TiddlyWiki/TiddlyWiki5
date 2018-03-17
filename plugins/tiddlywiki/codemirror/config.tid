@@ -5,8 +5,7 @@ type: application/json
   "require": [
   		"$:/plugins/tiddlywiki/codemirror/mode/meta.js",
   		"$:/plugins/tiddlywiki/codemirror/addon/display/dialog.js",
-  		"$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js",
-  		"$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js"
+  		"$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js"
   ],
   "configuration": {
       "showCursorWhenSelecting": true,
