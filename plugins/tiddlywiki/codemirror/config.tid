@@ -7,6 +7,7 @@ type: application/json
   ],
   "configuration": {
       "showCursorWhenSelecting": true,
-      "inputStyle": "textarea"
+      "inputStyle": "textarea",
+      "lineNumbers": false
   }
 }
