@@ -6,6 +6,7 @@ type: application/json
   
   ],
   "configuration": {
-      "showCursorWhenSelecting": true
+      "showCursorWhenSelecting": true,
+      "inputStyle": "textarea"
   }
 }
