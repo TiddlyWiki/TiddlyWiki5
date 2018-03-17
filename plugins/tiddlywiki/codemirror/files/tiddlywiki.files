@@ -14,13 +14,6 @@
 				"title": "$:/plugins/tiddlywiki/codemirror/lib/codemirror.css",
 				"tags": "[[$:/tags/Stylesheet]]"
 			}
-		},{
-			"file": "mode/meta.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/mode/meta.js",
-				"module-type": "library"
-			}
 		}
 	]
 }

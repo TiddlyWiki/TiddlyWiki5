@@ -28,6 +28,13 @@
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js",
 				"module-type": "library"
 			}
+		},{
+			"file": "mode/meta.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/mode/meta.js",
+				"module-type": "library"
+			}
 		}
 	]
 }
