@@ -3,13 +3,9 @@ type: application/json
 
 {
   "require": [
-      "$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js",
       "$:/plugins/tiddlywiki/codemirror/mode/meta.js"
   ],
   "configuration": {
-      "matchBrackets": true,
       "showCursorWhenSelecting": true
   }
 }

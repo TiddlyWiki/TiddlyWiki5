@@ -1,5 +1,9 @@
 title: $:/plugins/tiddlywiki/codemirror-search-replace/readme
 
+<$list filter="[[$:/config/CodeMirror]get[text]!regexp[\$:\/plugins\/tiddlywiki\/codemirror\/addon\/dialog\/dialog.js]]">
+''Please install the ~CodeMirror Base ~AddOn first''
+</$list>
+
 This plugin enhances the [[CodeMirror|http://codemirror.net]] text editor with Search and Replace functionality. It needs the latest [[CodeMirror plugin|$:/plugins/tiddlywiki/codemirror]] to be installed
 
 It adds these Keyboard Shortcuts to ~CodeMirror:

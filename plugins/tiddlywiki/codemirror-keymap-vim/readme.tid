@@ -1,5 +1,9 @@
 title: $:/plugins/tiddlywiki/codemirror-keymap-vim/readme
 
+<$list filter="[[$:/config/CodeMirror]get[text]!regexp[\$:\/plugins\/tiddlywiki\/codemirror\/addon\/dialog\/dialog.js]]">
+''Please install the ~CodeMirror Base ~AddOn first''
+</$list>
+
 This plugin adds a ''Keymap'' with some of the most important ''Vim'' keyboard shortcuts
 
 >To enable this ~AddOn, copy the following line and ''append'' it at the bottom of the ''require'' section in $:/config/CodeMirror<br>
