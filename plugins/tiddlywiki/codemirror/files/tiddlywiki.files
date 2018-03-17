@@ -29,13 +29,6 @@
 				"module-type": "library"
 			}
 		},{
-			"file": "addon/edit/matchbrackets.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js",
-				"module-type": "library"
-			}
-		},{
 			"file": "mode/meta.js",
 			"fields": {
 				"type": "application/javascript",
