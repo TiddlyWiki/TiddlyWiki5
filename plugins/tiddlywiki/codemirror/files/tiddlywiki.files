@@ -13,7 +13,8 @@
 				"type": "text/css",
 				"title": "$:/plugins/tiddlywiki/codemirror/lib/codemirror.css",
 				"tags": "[[$:/tags/Stylesheet]]"
-			},{
+			}
+		},{
 			"file": "addon/dialog/dialog.css",
 			"fields": {
 				"type": "text/css",
