@@ -4,7 +4,7 @@ type: application/json
 {
   "require": [
   		"$:/plugins/tiddlywiki/codemirror/mode/meta.js",
-  		"$:/plugins/tiddlywiki/codemirror/addon/display/dialog.js",
+  		"$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.js",
   		"$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js"
   ],
   "configuration": {
