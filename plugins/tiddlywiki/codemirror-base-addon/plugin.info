@@ -1,6 +1,0 @@
-{
-	"title": "$:/plugins/tiddlywiki/codemirror-base-addon",
-	"description": "CodeMirror AddOn: Base Functionality for other AddOns",
-	"author": "JeremyRuston",
-	"list": "readme"
-}

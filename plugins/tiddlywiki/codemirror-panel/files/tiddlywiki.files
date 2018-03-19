@@ -1,0 +1,12 @@
+{
+	"tiddlers": [
+		{
+			"file": "addon/display/panel.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/display/panel.js",
+				"module-type": "library"
+			}
+		}
+	]
+}

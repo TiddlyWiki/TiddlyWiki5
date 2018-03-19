@@ -3,7 +3,8 @@ type: application/json
 
 {
   "require": [
-  
+  		"$:/plugins/tiddlywiki/codemirror/mode/meta.js",
+  		"$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.js"
   ],
   "configuration": {
       "showCursorWhenSelecting": true,

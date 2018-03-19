@@ -6,9 +6,11 @@ This plugin adds the ability to automatically insert the closing brackets when y
 
 >Then make sure that all entries except the last one within the ''require'' section end with a 'semicolon'<br>
 
-<$macrocall $name="copy-to-clipboard-above-right" src='		"$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js"'/>
+<$macrocall $name="copy-to-clipboard-above-right" src='		"$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js",
+  		"$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js"'/>
 
 ```json
+  		"$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js",
 		"$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js"
 ```
 

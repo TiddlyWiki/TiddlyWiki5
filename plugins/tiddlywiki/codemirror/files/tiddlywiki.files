@@ -14,6 +14,27 @@
 				"title": "$:/plugins/tiddlywiki/codemirror/lib/codemirror.css",
 				"tags": "[[$:/tags/Stylesheet]]"
 			}
+		},{
+			"file": "addon/dialog/dialog.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.css",
+				"tags": "[[$:/tags/Stylesheet]]"
+			}
+		},{
+			"file": "addon/dialog/dialog.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.js",
+				"module-type": "library"
+			}
+		},{
+			"file": "mode/meta.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/mode/meta.js",
+				"module-type": "library"
+			}
 		}
 	]
 }

@@ -1,17 +1,13 @@
 title: $:/plugins/tiddlywiki/codemirror-search-replace/readme
 
-<$list filter="[[$:/config/CodeMirror]get[text]!regexp[\$:\/plugins\/tiddlywiki\/codemirror\/addon\/dialog\/dialog.js]]">
-''Please install the ~CodeMirror Base ~AddOn first''
-</$list>
-
 This plugin enhances the [[CodeMirror|http://codemirror.net]] text editor with Search and Replace functionality. It needs the latest [[CodeMirror plugin|$:/plugins/tiddlywiki/codemirror]] to be installed
 
 It adds these Keyboard Shortcuts to ~CodeMirror:
 
 |Shortcut |Function |h
 |Ctrl-F / Cmd-F |Start searching |
-|Ctrl-G / Cmd-G |Find next |
-|Shift-Ctrl-G / Shift-Cmd-G |Find previous |
+|Ctrl-G / Cmd-G / Shift-F3 |Find next |
+|Shift-Ctrl-G / Shift-Cmd-G / F3 |Find previous |
 |Shift-Ctrl-F / Cmd-Option-F |Replace |
 |Shift-Ctrl-R / Shift-Cmd-Option-F |Replace all |
 |Alt-F |Persistent search (dialog doesn't autoclose, enter to find next, Shift-Enter to find previous) |
@@ -25,9 +21,11 @@ It adds these Keyboard Shortcuts to ~CodeMirror:
 >''Save'' and ''Reload'' your wiki to have the changes take effect
 
 <$macrocall $name="copy-to-clipboard-above-right" src='		"$:/plugins/tiddlywiki/codemirror/addon/search/search.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/search/jump-to-line.js"'/>
+		"$:/plugins/tiddlywiki/codemirror/addon/search/jump-to-line.js",
+		"$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js"'/>
 
 ```json
 		"$:/plugins/tiddlywiki/codemirror/addon/search/search.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/search/jump-to-line.js"
+		"$:/plugins/tiddlywiki/codemirror/addon/search/jump-to-line.js",
+		"$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js"
 ```
