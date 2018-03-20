@@ -1,29 +1,5 @@
 title: $:/plugins/tiddlywiki/codemirror-closetag/readme
 
-<$list filter="[[$:/config/CodeMirror]get[text]!regexp[\$:\/plugins\/tiddlywiki\/codemirror\/mode\/htmlmixed\/htmlmixed\.js]]">
-''Please install the HTML Highlighting Plugin first and set it up in $:/config/CodeMirror''<br>
-</$list>
-
 This plugin adds the ability to ''automatically close Tags''. It needs the latest [[CodeMirror plugin|$:/plugins/tiddlywiki/codemirror]] to be installed
 
->To enable the Auto-Close Tags ~AddOn, copy the following lines and ''append'' them at the bottom of the ''require'' section in $:/config/CodeMirror<br>
 
->Then make sure that all entries except the last one within the ''require'' section end with a 'semicolon'<br>
-
-<$macrocall $name="copy-to-clipboard-above-right" src='		"$:/plugins/tiddlywiki/codemirror/addon/fold/xml-fold.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js"'/>
-
-```json
-		"$:/plugins/tiddlywiki/codemirror/addon/fold/xml-fold.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js"
-```
-
->Then ''append'' the following line to the ''configuration'' section in $:/config/CodeMirror<br>
-
-<$macrocall $name="copy-to-clipboard-above-right" src='		"autoCloseTags": true'/>
-
-```json
-		"autoCloseTags": true
-```
-
->''Save'' and ''Reload'' your wiki to have the changes take effect

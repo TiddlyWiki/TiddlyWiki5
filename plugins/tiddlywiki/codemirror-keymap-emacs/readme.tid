@@ -2,22 +2,4 @@ title: $:/plugins/tiddlywiki/codemirror-keymap-emacs/readme
 
 This plugin adds a ''Keymap'' with some of the most important ''Emacs'' keyboard shortcuts
 
->To enable this ~AddOn, copy the following line and ''append'' it at the bottom of the ''require'' section in $:/config/CodeMirror<br>
-
->Then make sure that all entries except the last one within the ''require'' section end with a 'semicolon'<br>
-
-<$macrocall $name="copy-to-clipboard-above-right" src='		"$:/plugins/tiddlywiki/codemirror/keymap/emacs.js"'/>
-
-```json
-		"$:/plugins/tiddlywiki/codemirror/keymap/emacs.js"
-```
-
->Then ''append'' the following line to the ''configuration'' section in $:/config/CodeMirror<br>
-
-<$macrocall $name="copy-to-clipboard-above-right" src='		"keyMap": "emacs"'/>
-
-```json
-		"keyMap": "emacs"
-```
-
->''Save'' and ''Reload'' your wiki to have the changes take effect
+For more information about available ''keyboard shortcuts'' see the [ext[CodeMirror emacs demo|https://codemirror.net/demo/emacs.html]]

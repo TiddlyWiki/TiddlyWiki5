@@ -2,30 +2,5 @@ title: $:/plugins/tiddlywiki/codemirror-fullscreen/readme
 
 This plugin adds a ''Fullscreen editing Mode'' to the [[CodeMirror|http://codemirror.net]] text editor. It needs the latest [[CodeMirror plugin|$:/plugins/tiddlywiki/codemirror]] to be installed
 
-Pressing ''F11'' with the focus within the editor-textarea will make the editor fullscreen, pressing ''F11'' again leaves fullscreen-mode
+Pressing ''F11'' with the focus within the editor-textarea will make the editor go fullscreen, pressing ''F11'' again leaves fullscreen-mode
 
->To enable the Fullscreen ~AddOn, copy the following line and ''append'' it at the bottom of the ''require'' section in $:/config/CodeMirror<br>
-
->Then make sure that all entries except the last one within the ''require'' section end with a 'semicolon'<br>
-
-<$macrocall $name="copy-to-clipboard-above-right" src='		"$:/plugins/tiddlywiki/codemirror/addon/fullscreen/fullscreen.js"'/>
-
-```json
-		"$:/plugins/tiddlywiki/codemirror/addon/fullscreen/fullscreen.js"
-```
-
->Then ''append'' the following lines to the ''configuration'' section in $:/config/CodeMirror<br>
-
->If the ''"extraKeys"'' entry already exists, ''append'' only ''the content'' of the following extraKeys entry to the existing extraKeys content
-
-<$macrocall $name="copy-to-clipboard-above-right" src='		"extraKeys": {
-			"F11": "togglefullscreen"
-		}'/>
-
-```json
-		"extraKeys": {
-			"F11": "togglefullscreen"
-		}
-```
-
->''Save'' and ''Reload'' your wiki to have the changes take effect

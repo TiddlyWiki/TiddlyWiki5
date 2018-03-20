@@ -13,19 +13,3 @@ It adds these Keyboard Shortcuts to ~CodeMirror:
 |Alt-F |Persistent search (dialog doesn't autoclose, enter to find next, Shift-Enter to find previous) |
 |Alt-G |Jump to line |
 
-
->To enable the Search&Replace ~AddOn, copy the following lines and ''append'' them at the bottom of the ''require'' section in $:/config/CodeMirror<br>
-
->Then make sure that all entries except the last one within the ''require'' section end with a 'semicolon'<br>
-
->''Save'' and ''Reload'' your wiki to have the changes take effect
-
-<$macrocall $name="copy-to-clipboard-above-right" src='		"$:/plugins/tiddlywiki/codemirror/addon/search/search.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/search/jump-to-line.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js"'/>
-
-```json
-		"$:/plugins/tiddlywiki/codemirror/addon/search/search.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/search/jump-to-line.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js"
-```

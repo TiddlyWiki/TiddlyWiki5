@@ -2,26 +2,6 @@ title: $:/plugins/tiddlywiki/codemirror-keymap-sublime-text/readme
 
 This plugin adds a ''Keymap'' with the most important ''Sublime Text'' keyboard shortcuts
 
->To enable this ~AddOn, copy the following line and ''append'' it at the bottom of the ''require'' section in $:/config/CodeMirror<br>
-
->Then make sure that all entries except the last one within the ''require'' section end with a 'semicolon'<br>
-
-<$macrocall $name="copy-to-clipboard-above-right" src='		"$:/plugins/tiddlywiki/codemirror/keymap/sublime.js"'/>
-
-```json
-		"$:/plugins/tiddlywiki/codemirror/keymap/sublime.js"
-```
-
->Then ''append'' the following line to the ''configuration'' section in $:/config/CodeMirror<br>
-
-<$macrocall $name="copy-to-clipboard-above-right" src='		"keyMap": "sublime"'/>
-
-```json
-		"keyMap": "sublime"
-```
-
->''Save'' and ''Reload'' your wiki to have the changes take effect
-
 
 |Shortcut |Function |h
 |Shift-Tab |indentLess |

@@ -4,40 +4,5 @@ This plugin enhances the [[CodeMirror|http://codemirror.net]] text editor with A
 
 It adds Autocompletion for ''html'', ''javascript'' and ''xml'' and also for ''already present words'' within a text-editor instance
 
->To enable the Autocompletion ~AddOn, copy the following lines and ''append'' them at the bottom of the ''require'' section in $:/config/CodeMirror<br>
+The ''Keyboard Shortcut'' for autocompletion is `Ctrl+Space`
 
->Then make sure that all entries except the last one within the ''require'' section end with a 'semicolon'
-
-<$macrocall $name="copy-to-clipboard-above-right" src='		"$:/plugins/tiddlywiki/codemirror/addon/hint/show-hint.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/hint/css-hint.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/hint/xml-hint.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/hint/html-hint.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/hint/javascript-hint.js"'/>
-
-```json
-		"$:/plugins/tiddlywiki/codemirror/addon/hint/show-hint.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/hint/css-hint.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/hint/xml-hint.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/hint/html-hint.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/hint/javascript-hint.js"
-```
-
->Then copy the following lines and ''append'' them at the bottom of the ''configuration'' section in $:/config/CodeMirror<br>
-
->Make sure that all entries except the last one within the ''require'' section end with a 'semicolon'
-
-<$macrocall $name="copy-to-clipboard-above-right" src='		"extraKeys": {
-			"Ctrl-Space": "autocomplete"
-		}'/>
-
-```json
-		"extraKeys": {
-			"Ctrl-Space": "autocomplete"
-		}
-```
-
->You can change "Ctrl-Space" and use your own shortcut for autocompletion<br>
-
-> ''Save'' and ''Reload'' your wiki to have the changes take effect
