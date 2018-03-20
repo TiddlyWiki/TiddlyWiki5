@@ -12,7 +12,7 @@
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/mode/tiddlywiki/tiddlywiki.js",
-				"module-type": "library"
+				"module-type": "codemirror"
 			}
 		}
 	]

@@ -12,6 +12,7 @@ ConfirmOverwriteTiddler: Do you wish to overwrite the tiddler "<$text text=<<tit
 ConfirmEditShadowTiddler: You are about to edit a ShadowTiddler. Any changes will override the default system making future upgrades non-trivial. Are you sure you want to edit "<$text text=<<title>>/>"?
 Count: count
 DefaultNewTiddlerTitle: New Tiddler
+Diffs/CountMessage: <<diff-count>> differences
 DropMessage: Drop here (or use the 'Escape' key to cancel)
 Encryption/Cancel: Cancel
 Encryption/ConfirmClearPassword: Do you wish to clear the password? This will remove the encryption applied when saving this wiki

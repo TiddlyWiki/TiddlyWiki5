@@ -1,0 +1,10 @@
+title: $:/core/macros/diff
+tags: $:/tags/Macro
+
+\define compareTiddlerText(sourceTiddlerTitle,sourceSubTiddlerTitle,destTiddlerTitle,destSubTiddlerTitle)
+<$set name="source" tiddler=<<__sourceTiddlerTitle__>> subtiddler=<<__sourceSubTiddlerTitle__>>>
+<$set name="dest" tiddler=<<__destTiddlerTitle__>> subtiddler=<<__destSubTiddlerTitle__>>>
+<$diff-text source=<<source>> dest=<<dest>>/>
+</$set>
+</$set>
+\end

@@ -13,14 +13,33 @@ Text editor engine based on a CodeMirror instance
 "use strict";
 
 var CODEMIRROR_OPTIONS = "$:/config/CodeMirror",
-	HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height"
+	HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height",
+	CONFIG_FILTER = "[all[shadows+tiddlers]prefix[$:/config/codemirror/]]"
+
+/*
+Apply a callback to each module of a particular type
+	moduleType: type of modules to enumerate
+	callback: function called as callback(title,moduleExports) for each module
+*/
+$tw.modules.forEachModuleOfType = function(moduleType,callback) {
+	var modules = $tw.modules.types[moduleType];
+	$tw.utils.each(modules,function(element,title) {
+		callback(title,$tw.modules.execute(title));
+	});
+};
 
 // Install CodeMirror
 if($tw.browser && !window.CodeMirror) {
+
+	var modules = $tw.modules.types["codemirror"];
+
+	// TODO remove this
+	//console.log("cm-modules: ", Object.getOwnPropertyNames(modules) );
+
+	var req = Object.getOwnPropertyNames(modules);
+
 	window.CodeMirror = require("$:/plugins/tiddlywiki/codemirror/lib/codemirror.js");
 	// Install required CodeMirror plugins
-	var configOptions = $tw.wiki.getTiddlerData(CODEMIRROR_OPTIONS,{}),
-		req = configOptions.require;
 	if(req) {
 		if($tw.utils.isArray(req)) {
 			for(var index=0; index<req.length; index++) {
@@ -31,6 +50,55 @@ if($tw.browser && !window.CodeMirror) {
 		}
 	}
 }
+
+function getCmConfig() {
+	var type,
+		test,
+		value,
+		element,
+		extend,
+		tiddler,
+		config = {},
+		configTiddlers = $tw.wiki.filterTiddlers(CONFIG_FILTER);
+
+	if ($tw.utils.isArray(configTiddlers)) {
+		for (var i=0; i<configTiddlers.length; i++) {
+			tiddler = $tw.wiki.getTiddler(configTiddlers[i]);
+
+			// TODO check error-handling with BROKEN user input !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			if (tiddler) {
+				// TODO make it readable
+				element = configTiddlers[i].replace(/\$:\/config\/codemirror\//ig,"");
+
+				type = (tiddler.fields.type) ? tiddler.fields.type.trim().toLocaleLowerCase() : "string";
+				switch (type) {
+					case "bool":
+						test = tiddler.fields.text.trim().toLowerCase();
+						value = (test === "true") ? true : false;
+						config[element] = value;
+					break;
+					case "string":
+						value = tiddler.fields.text.trim();
+						config[element] = value;
+					break;
+					case "json":
+						value = JSON.parse(tiddler.fields.text.trim());
+
+						extend = (tiddler.fields.extend) ? tiddler.fields.extend : element;
+
+						if (config[extend]) {
+							$tw.utils.extend(config[extend], value);
+						} else {
+							config[extend] = value;
+						}
+					break;
+				} // switch
+			} // if (tiddler)
+		} // for configTiddlers
+	} // if isArray()
+	return config;
+}
+
 
 function CodeMirrorEngine(options) {
 	// Save our options
@@ -48,14 +116,13 @@ function CodeMirrorEngine(options) {
 	this.domNode.style.display = "inline-block";
 	this.parentNode.insertBefore(this.domNode,this.nextSibling);
 	this.widget.domNodes.push(this.domNode);
+
+	// Set all cm-plugin defaults
 	// Get the configuration options for the CodeMirror object
-	var config = $tw.wiki.getTiddlerData(CODEMIRROR_OPTIONS,{}).configuration || {};
-	if(!("lineWrapping" in config)) {
-		config.lineWrapping = true;
-	}
-	if(!("lineNumbers" in config)) {
-		config.lineNumbers = true;
-	}
+	var config = getCmConfig();
+
+	console.log("config: ", config)
+
 	config.mode = options.type;
 	config.value = options.value;
 	// Create the CodeMirror instance

@@ -1,0 +1,4 @@
+title: $:/config/codemirror/showCursorWhenSelecting
+type: bool
+
+true

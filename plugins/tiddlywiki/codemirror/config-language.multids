@@ -1,0 +1,11 @@
+title: $:/language/codemirror/
+
+homeUrl: http://codemirror.net
+addOnUrl: http://codemirror.net/doc/manual.html#addons
+configUrl: http://codemirror.net/doc/manual.html#config
+lineNumbers/hint: Enable line numbers
+lineNumbers/info: Whether to show line numbers to the left of the editor.
+lineWrapping/hint: Enable line wrapping
+lineWrapping/info: Whether CodeMirror should scroll or wrap for long lines. Defaults to `false` (scroll).
+showCursorWhenSelecting/hint: Show cursor, when selecting
+showCursorWhenSelecting/info: Whether the cursor should be drawn when a selection is active.
