@@ -52,15 +52,50 @@ if($tw.browser && !window.CodeMirror) {
 }
 
 function getCmConfig() {
-	var config = {},
+	var type,
+		test,
+		value,
+		element,
+		extend,
+		tiddler,
+		config = {},
 		configTiddlers = $tw.wiki.filterTiddlers(CONFIG_FILTER);
 
 	if ($tw.utils.isArray(configTiddlers)) {
 		for (var i=0; i<configTiddlers.length; i++) {
-			// TODO make it readable
-			config[configTiddlers[i].replace(/\$:\/config\/codemirror\//ig,"")] = $tw.wiki.getTiddlerText(configTiddlers[i]);
-		}
-	}
+			tiddler = $tw.wiki.getTiddler(configTiddlers[i]);
+
+			// TODO check error-handling with BROKEN user input !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			if (tiddler) {
+				// TODO make it readable
+				element = configTiddlers[i].replace(/\$:\/config\/codemirror\//ig,"");
+
+				type = (tiddler.fields.type) ? tiddler.fields.type.trim().toLocaleLowerCase() : "string";
+				switch (type) {
+					case "bool":
+						test = tiddler.fields.text.trim().toLowerCase();
+						value = (test === "true") ? true : false;
+						config[element] = value;
+					break;
+					case "string":
+						value = tiddler.fields.text.trim();
+						config[element] = value;
+					break;
+					case "json":
+						value = JSON.parse(tiddler.fields.text.trim());
+
+						extend = (tiddler.fields.extend) ? tiddler.fields.extend : element;
+
+						if (config[extend]) {
+							$tw.utils.extend(config[extend], value);
+						} else {
+							config[extend] = value;
+						}
+					break;
+				} // switch
+			} // if (tiddler)
+		} // for configTiddlers
+	} // if isArray()
 	return config;
 }
 
