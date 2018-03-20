@@ -1,4 +1,4 @@
 title: $:/config/codemirror/keyMap
 type: string
 
-vim
+default
