@@ -5,7 +5,7 @@
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/mode/css/css.js",
-				"module-type": "library"
+				"module-type": "codemirror"
 			}
 		}
 	]

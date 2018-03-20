@@ -15,12 +15,30 @@ Text editor engine based on a CodeMirror instance
 var CODEMIRROR_OPTIONS = "$:/config/CodeMirror",
 	HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height"
 
+/*
+Apply a callback to each module of a particular type
+	moduleType: type of modules to enumerate
+	callback: function called as callback(title,moduleExports) for each module
+*/
+$tw.modules.forEachModuleOfType = function(moduleType,callback) {
+	var modules = $tw.modules.types[moduleType];
+	$tw.utils.each(modules,function(element,title) {
+		callback(title,$tw.modules.execute(title));
+	});
+};
+
 // Install CodeMirror
 if($tw.browser && !window.CodeMirror) {
+
+	var modules = $tw.modules.types["codemirror"];
+
+	// TODO remove this
+	console.log("cm-modules: ", Object.getOwnPropertyNames(modules) );
+
+	var req = Object.getOwnPropertyNames(modules);
+
 	window.CodeMirror = require("$:/plugins/tiddlywiki/codemirror/lib/codemirror.js");
 	// Install required CodeMirror plugins
-	var configOptions = $tw.wiki.getTiddlerData(CODEMIRROR_OPTIONS,{}),
-		req = configOptions.require;
 	if(req) {
 		if($tw.utils.isArray(req)) {
 			for(var index=0; index<req.length; index++) {
