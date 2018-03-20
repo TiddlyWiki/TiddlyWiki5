@@ -13,7 +13,8 @@ Text editor engine based on a CodeMirror instance
 "use strict";
 
 var CODEMIRROR_OPTIONS = "$:/config/CodeMirror",
-	HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height"
+	HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height",
+	CONFIG_FILTER = "[all[shadows+tiddlers]prefix[$:/config/codemirror/]]"
 
 /*
 Apply a callback to each module of a particular type
@@ -33,7 +34,7 @@ if($tw.browser && !window.CodeMirror) {
 	var modules = $tw.modules.types["codemirror"];
 
 	// TODO remove this
-	console.log("cm-modules: ", Object.getOwnPropertyNames(modules) );
+	//console.log("cm-modules: ", Object.getOwnPropertyNames(modules) );
 
 	var req = Object.getOwnPropertyNames(modules);
 
@@ -49,6 +50,20 @@ if($tw.browser && !window.CodeMirror) {
 		}
 	}
 }
+
+function getCmConfig() {
+	var config = {},
+		configTiddlers = $tw.wiki.filterTiddlers(CONFIG_FILTER);
+
+	if ($tw.utils.isArray(configTiddlers)) {
+		for (var i=0; i<configTiddlers.length; i++) {
+			// TODO make it readable
+			config[configTiddlers[i].replace(/\$:\/config\/codemirror\//ig,"")] = $tw.wiki.getTiddlerText(configTiddlers[i]);
+		}
+	}
+	return config;
+}
+
 
 function CodeMirrorEngine(options) {
 	// Save our options
@@ -66,14 +81,13 @@ function CodeMirrorEngine(options) {
 	this.domNode.style.display = "inline-block";
 	this.parentNode.insertBefore(this.domNode,this.nextSibling);
 	this.widget.domNodes.push(this.domNode);
+
+	// Set all cm-plugin defaults
 	// Get the configuration options for the CodeMirror object
-	var config = $tw.wiki.getTiddlerData(CODEMIRROR_OPTIONS,{}).configuration || {};
-	if(!("lineWrapping" in config)) {
-		config.lineWrapping = true;
-	}
-	if(!("lineNumbers" in config)) {
-		config.lineNumbers = true;
-	}
+	var config = getCmConfig();
+
+	console.log("config: ", config)
+
 	config.mode = options.type;
 	config.value = options.value;
 	// Create the CodeMirror instance
