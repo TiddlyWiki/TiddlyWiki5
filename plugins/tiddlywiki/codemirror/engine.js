@@ -16,18 +16,6 @@ var CODEMIRROR_OPTIONS = "$:/config/CodeMirror",
 	HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height",
 	CONFIG_FILTER = "[all[shadows+tiddlers]prefix[$:/config/codemirror/]]"
 
-/*
-Apply a callback to each module of a particular type
-	moduleType: type of modules to enumerate
-	callback: function called as callback(title,moduleExports) for each module
-*/
-$tw.modules.forEachModuleOfType = function(moduleType,callback) {
-	var modules = $tw.modules.types[moduleType];
-	$tw.utils.each(modules,function(element,title) {
-		callback(title,$tw.modules.execute(title));
-	});
-};
-
 // Install CodeMirror
 if($tw.browser && !window.CodeMirror) {
 
