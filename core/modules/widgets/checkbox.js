@@ -156,7 +156,7 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	if(this.checkboxActions) {
 		this.invokeActionString(this.checkboxActions,this,event);
 	}
-	if (this.checkboxUncheckActions && !checked) {
+	if(this.checkboxUncheckActions && !checked) {
 		this.invokeActionString(this.checkboxUncheckActions,this,event);
 	}
 };
