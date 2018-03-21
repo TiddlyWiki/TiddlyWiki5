@@ -32,7 +32,7 @@
 			"file": "mode/tw-meta.js",
 			"fields": {
 				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/mode/meta.js",
+				"title": "$:/plugins/tiddlywiki/codemirror/mode/tw-meta.js",
 				"module-type": "codemirror"
 			}
 		}
