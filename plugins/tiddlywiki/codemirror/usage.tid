@@ -2,7 +2,7 @@ title: $:/plugins/tiddlywiki/codemirror/usage
 
 ! Configuration
 
-Configuration for the ~CodeMirror text-editor can be done from within the [[CodeMirror Settings Tab|]] in the ~ControlPanel
+Configuration for the ~CodeMirror text-editor can be done from within the CodeMirror Settings Tab in the [[ControlPanel|$:/ControlPanel]] (Settings - ~CodeMirror)
 
 
 !!Setting a different Theme
