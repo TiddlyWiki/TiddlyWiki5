@@ -6,4 +6,7 @@ caption: {{$:/language/codemirror/editorFont/hint}}
 
 <$link to="$:/config/codemirror-settings/editorFont"><<lingo info>></$link>
 
-|<$edit-text tiddler="$:/config/codemirror-settings/editorFont" default="" tag="input" placeholder=" CodeMirror Editor Font-Family"/> |
+<$select tiddler="$:/config/codemirror/editorFont">
+<option value="monospace">monospace</option>
+<option value="sans-serif">sans-serif</option>
+</$select>
