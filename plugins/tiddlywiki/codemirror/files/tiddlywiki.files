@@ -29,7 +29,7 @@
 				"module-type": "codemirror"
 			}
 		},{
-			"file": "mode/meta.js",
+			"file": "mode/tw-meta.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/mode/meta.js",
