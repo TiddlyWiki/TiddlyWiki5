@@ -3,6 +3,7 @@ title: $:/language/codemirror/
 homeUrl: http://codemirror.net
 addOnUrl: http://codemirror.net/doc/manual.html#addons
 configUrl: http://codemirror.net/doc/manual.html#config
+controlPanel/hint: These settings let you customise the behaviour of [[CodeMirror|$:/plugins/tiddlywiki/codemirror]].
 editorFont/hint: Editor font family
 editorFont/info: Set the font family for the ~CodeMirror text-editor
 lineNumbers/hint: Enable line numbers
