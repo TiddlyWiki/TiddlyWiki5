@@ -2,5 +2,21 @@ title: $:/plugins/tiddlywiki/codemirror/usage
 
 ! Configuration
 
+The configuration for the ~CodeMirror text-editor can be done from within the [[Settings Tab|]] in the ~ControlPanel
+
+* show cursor when selecting
+* line wrap
 * Line numbers
-* Theme
+
+
+!!Setting a different Theme
+
+~CodeMirror themes are available in the [ext[official GitHub repository|https://github.com/codemirror/CodeMirror/tree/master/theme]]
+
+To add a theme to your wiki, follow these four steps:
+
+* choose one of the CSS files at [ext[the themes catalogue|https://github.com/codemirror/CodeMirror/tree/master/theme]] and copy its content to a new tiddler
+* tag the tiddler with <<tag-pill "$:/tags/Stylesheet">>
+* add a field "module-type" with the value "codemirror-theme". add a field "name" with the exact ''name'' of the theme as value
+* save the tiddler and go to the Settings tab in $:/ControlPanel - look for the "theme" dropdown to select your newly added theme
+
