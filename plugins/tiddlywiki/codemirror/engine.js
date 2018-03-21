@@ -113,6 +113,7 @@ function CodeMirrorEngine(options) {
 
   if (options.type == "text/vnd.tiddlywiki" || options.type == "text/x-tiddlywiki") {
     config.mode = "text/html";
+    config.smartIndent = false;
   } else {
     config.mode = options.type;
   }
@@ -142,6 +143,7 @@ CodeMirrorEngine.prototype.setText = function(text,type) {
   var self = this;
   if (type == "text/vnd.tiddlywiki" || type == "text/x-tiddlywiki") {
     self.cm.setOption("mode","text/html");
+    self.cm.setOption("smartIndent",false);
   } else {
     self.cm.setOption("mode",type);
   }
