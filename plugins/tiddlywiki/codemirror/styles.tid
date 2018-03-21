@@ -8,6 +8,7 @@ tags: [[$:/tags/Stylesheet]]
 	border: 1px solid #ddd;
 	line-height: 1.5;
 	font-family: "Monaco", monospace;
+	font-family: {{$:/config/codemirror-settings/editorFont}};
 }
 
 .CodeMirror-scroll {
