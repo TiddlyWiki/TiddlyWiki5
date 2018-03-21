@@ -1,5 +1,5 @@
 title: $:/core/ui/ControlPanel/Settings/codemirror/showCursorWhenSelecting
-tags: $:/tags/ControlPanel/Settings
+tags: $:/tags/ControlPanel/Settings/CodeMirror
 caption: {{$:/language/codemirror/showCursorWhenSelecting/hint}}
 
 \define lingo-base() $:/language/codemirror/showCursorWhenSelecting/

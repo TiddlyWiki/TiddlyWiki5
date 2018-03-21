@@ -1,5 +1,5 @@
 title: $:/core/ui/ControlPanel/Settings/codemirror/lineWrapping
-tags: $:/tags/ControlPanel/Settings
+tags: $:/tags/ControlPanel/Settings/CodeMirror
 caption: {{$:/language/codemirror/lineWrapping/hint}}
 
 \define lingo-base() $:/language/codemirror/lineWrapping/

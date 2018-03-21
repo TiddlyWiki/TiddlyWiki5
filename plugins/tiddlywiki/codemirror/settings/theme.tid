@@ -1,5 +1,5 @@
 title: $:/core/ui/ControlPanel/Settings/codemirror/theme
-tags: $:/tags/ControlPanel/Settings
+tags: $:/tags/ControlPanel/Settings/CodeMirror
 caption: {{$:/language/codemirror/theme/hint}}
 
 \define lingo-base() $:/language/codemirror/

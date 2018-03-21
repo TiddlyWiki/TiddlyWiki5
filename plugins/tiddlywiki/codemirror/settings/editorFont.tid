@@ -1,5 +1,5 @@
 title: $:/core/ui/ControlPanel/Settings/codemirror/editorFont
-tags: $:/tags/ControlPanel/Settings
+tags: $:/tags/ControlPanel/Settings/CodeMirror
 caption: {{$:/language/codemirror/editorFont/hint}}
 
 \define lingo-base() $:/language/codemirror/
