@@ -2,11 +2,7 @@ title: $:/plugins/tiddlywiki/codemirror/usage
 
 ! Configuration
 
-The configuration for the ~CodeMirror text-editor can be done from within the [[Settings Tab|]] in the ~ControlPanel
-
-* show cursor when selecting
-* line wrap
-* Line numbers
+Configuration for the ~CodeMirror text-editor can be done from within the [[CodeMirror Settings Tab|]] in the ~ControlPanel
 
 
 !!Setting a different Theme
@@ -20,3 +16,33 @@ To add a theme to your wiki, follow these four steps:
 * add a field "module-type" with the value "codemirror-theme". add a field "name" with the exact ''name'' of the theme as value
 * save the tiddler and go to the Settings tab in $:/ControlPanel - look for the "theme" dropdown to select your newly added theme
 
+
+!!Line Numbers
+
+To show or hide the Line Numbers at the left, go to ~ControlPanel - Settings - ~CodeMirror and look for the "Line Numbers" checkbox
+
+
+!!Line Wrapping
+
+Controls if long lines get visually wrapped to a new line if they're too long to fit the editor width or if the editor should scroll horizontally
+
+To change the line-wrapping behaviour, go to  ~ControlPanel - Settings - ~CodeMirror and look for the "Line Wrapping" checkbox
+
+
+!!Show Cursor when selecting
+
+Defines whether the Mouse cursor should be visually shown or hidden when making a text-selection
+
+To change the show-cursor-when-selecting behaviour, go to  ~ControlPanel - Settings - ~CodeMirror and look for the "Show cursor when selecting" checkbox
+
+
+!!~CodeMirror Font Family
+
+The Font-Family used within the ~CodeMirror text-editor defaults to "monospace" which will choose your configured monospace system-font
+
+That setting can be overridden entering one or more Font-Families in the "Font Family" input field at ~ControlPanel - Settings - ~CodeMirror
+
+* The entries must be separated by semicolons ','
+* Font-Family Names that contain spaces must be quoted like "My Font"
+* If a list of Font-Families is specified, the last Font-Family found on the user-system gets used, non-existing fonts get ignored
+* If none of the specified Font-Families is available, ~CodeMirror uses the default "monospace"
