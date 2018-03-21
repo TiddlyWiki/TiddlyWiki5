@@ -110,13 +110,7 @@ function CodeMirrorEngine(options) {
 	var config = getCmConfig();
 
 	console.log("config: ", config)
-
-  if (options.type == "text/vnd.tiddlywiki" || options.type == "text/x-tiddlywiki") {
-    config.mode = "text/html";
-    config.smartIndent = false;
-  } else {
-    config.mode = options.type;
-  }
+  config.mode = options.type;
 	config.value = options.value;
 	// Create the CodeMirror instance
 	this.cm = window.CodeMirror(function(cmDomNode) {
@@ -141,12 +135,7 @@ Set the text of the engine if it doesn't currently have focus
 */
 CodeMirrorEngine.prototype.setText = function(text,type) {
   var self = this;
-  if (type == "text/vnd.tiddlywiki" || type == "text/x-tiddlywiki") {
-    self.cm.setOption("mode","text/html");
-    self.cm.setOption("smartIndent",false);
-  } else {
-    self.cm.setOption("mode",type);
-  }
+  self.cm.setOption("mode",type);
 	if(!this.cm.hasFocus()) {
 		this.cm.setValue(text);
 	}
