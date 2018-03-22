@@ -70,8 +70,8 @@ function getCmConfig() {
 						config[element] = value;
 					break;
 					case "integer":
-					  value = parseInt(tiddler.fields.text.trim());
-					  config.element = value;
+					  value = parseInt(tiddler.fields.text.trim(), 10);
+					  config[element] = value;
 					break;
 					case "json":
 						value = JSON.parse(tiddler.fields.text.trim());
