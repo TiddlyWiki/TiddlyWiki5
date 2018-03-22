@@ -1,6 +1,6 @@
 title: HelloThere
 
-This is a demo of TiddlyWiki5 incorporating a plugin for the [[CodeMirror|http://codemirror.net/]] text editor for the web.
+This is a demo of [[TiddlyWiki5|https://tiddlywiki.com]] incorporating a plugin for the [[CodeMirror|http://codemirror.net/]] text editor for the web.
 
 The ~CodeMirror plugin can be extended with ~AddOns for more functionality:
 
