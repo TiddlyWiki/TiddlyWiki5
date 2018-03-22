@@ -9,6 +9,9 @@ Configuration for the ~CodeMirror text-editor can be done from within the CodeMi
 
 ~CodeMirror themes are available in the [ext[official GitHub repository|https://github.com/codemirror/CodeMirror/tree/master/theme]]
 
+More themes can be found at https://github.com/FarhadG/code-mirror-themes/tree/master/themes and previewed [ext[here|http://farhadg.github.io/code-mirror-themes/]]
+
+
 To add a theme to your wiki, follow these four steps:
 
 * choose one of the CSS files at [ext[the themes catalogue|https://github.com/codemirror/CodeMirror/tree/master/theme]] and copy its content to a new tiddler
