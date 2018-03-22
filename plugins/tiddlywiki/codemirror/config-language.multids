@@ -12,5 +12,7 @@ lineWrapping/hint: Enable line wrapping
 lineWrapping/info: Whether CodeMirror should scroll or wrap for long lines. Defaults to `false` (scroll).
 showCursorWhenSelecting/hint: Show cursor, when selecting
 showCursorWhenSelecting/info: Whether the cursor should be drawn when a selection is active.
+styleActiveLine/hint: Highlight active line
+styleActiveLine/info: Whether or not to highlight the active text-editor line
 theme/hint: Select a theme
 theme/info: Choose between ~CodeMirror themes
