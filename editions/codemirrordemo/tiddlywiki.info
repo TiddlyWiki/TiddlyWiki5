@@ -12,8 +12,6 @@
 		"tiddlywiki/codemirror-mode-css",
 		"tiddlywiki/codemirror-mode-x-tiddlywiki",
 		"tiddlywiki/codemirror-mode-markdown",
-		"tiddlywiki/codemirror-keymap-vim",
-		"tiddlywiki/codemirror-keymap-emacs",
 		"tiddlywiki/codemirror-keymap-sublime-text"
 	],
 	"themes": [
