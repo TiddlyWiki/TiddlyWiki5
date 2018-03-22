@@ -13,6 +13,11 @@ The reveal widget hides or shows its content depending upon the value of a [[sta
 * type=''match'': the content is displayed if the state tiddler matches a specified value
 * type=''nomatch'': the content is displayed if the state tiddler doesn't match a specified value
 * type=''popup'': the content is displayed as a popup as described in the PopupMechanism
+* type=''lt'': the content is displayed if the state tiddler has an integer with a value ''less than'' a specified value
+* type=''gt'': the content is displayed if the state tiddler has an integer with a value ''greater than'' a specified value
+* type=''lteq'': the content is displayed if the state tiddler has an integer with a value ''less than or equal to'' a specified value
+* type=''gteq'': the content is displayed if the state tiddler has an integer with a value ''greater than or equal to'' a specified value
+
 
 ! Content and Attributes
 

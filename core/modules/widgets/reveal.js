@@ -127,13 +127,36 @@ RevealWidget.prototype.readState = function() {
 			this.readMatchState(state);
 			this.isOpen = !this.isOpen;
 			break;
+		case "lt":
+			this.readMatchStatelt(state);
+			break;
+		case "gt":
+			this.readMatchStategt(state);
+			break;
+		case "lteq":
+			this.readMatchStategt(state);
+			this.isOpen = !this.isOpen;
+			break;
+		case "gteq":
+			this.readMatchStatelt(state);
+			this.isOpen = !this.isOpen;
+			break;
 	}
 };
 
-RevealWidget.prototype.readMatchState = function(state) {
-	this.isOpen = state === this.text;
+RevealWidget.prototype.compareStateText = function(state) {
+	var result = state.localeCompare(this.text, undefined, {numeric: true, sensitivity: 'case'});
+	return result;
 };
-
+RevealWidget.prototype.readMatchState = function(state) {
+	this.isOpen = (this.compareStateText(state) == 0) ? true : false;
+};
+RevealWidget.prototype.readMatchStatelt = function(state) {
+	this.isOpen = (this.compareStateText(state) < 0) ? true : false;
+};
+RevealWidget.prototype.readMatchStategt = function(state) {
+	this.isOpen = (this.compareStateText(state) > 0) ? true : false;
+};
 RevealWidget.prototype.readPopupState = function(state) {
 	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/,
 		match = popupLocationRegExp.exec(state);
