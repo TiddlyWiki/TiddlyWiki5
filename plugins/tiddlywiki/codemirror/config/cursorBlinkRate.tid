@@ -1,4 +1,4 @@
 title: $:/config/codemirror/cursorBlinkRate
-type: bool
+type: string
 
 530
