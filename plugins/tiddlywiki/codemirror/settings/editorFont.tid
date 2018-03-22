@@ -2,11 +2,6 @@ title: $:/core/ui/ControlPanel/Settings/codemirror/editorFont
 tags: $:/tags/ControlPanel/Settings/CodeMirror
 caption: {{$:/language/codemirror/editorFont/hint}}
 
-\define lingo-base() $:/language/codemirror/
+\define lingo-base() $:/language/ThemeTweaks/
 
-<$link to="$:/config/codemirror-settings/editorFont"><<lingo hint>></$link>
-
-<$select tiddler="$:/config/codemirror-settings/editorFont" default="monospace">
-<option value="monospace">monospace</option>
-<option value="sans-serif">sans-serif</option>
-</$select> 
+|<$link to="$:/themes/tiddlywiki/vanilla/settings/codefontfamily"><<lingo Settings/CodeFontFamily>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/codefontfamily" default="" tag="input"/> | |
