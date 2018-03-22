@@ -3,9 +3,11 @@ tags: $:/tags/ControlPanel/SettingsTab
 caption: CodeMirror
 list-after: $:/core/ui/ControlPanel/Settings/TiddlyWiki
 
-\define lingo-base() $:/language/codemirror/controlPanel
+\define lingo-base() $:/language/codemirror/controlPanel/
 
-<<lingo Hint>>
+<<lingo hint>>
+
+<$link to="$:/plugins/tiddlywiki/codemirror/usage"><<lingo usage>></$link>
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Settings/CodeMirror]]">
 
