@@ -14,7 +14,7 @@ More themes can be found at https://github.com/FarhadG/code-mirror-themes/tree/m
 
 To add a theme to your wiki, follow these four steps:
 
-* choose one of the CSS files at [ext[the themes catalogue|https://github.com/codemirror/CodeMirror/tree/master/theme]] and copy its content to a new tiddler
+* choose one of the CSS files and copy its content to a new tiddler
 * remove all comments from the top and tag the tiddler with <<tag-pill "$:/tags/Stylesheet">>
 * add a field "module-type" with the value "codemirror-theme". add a field "name" with the exact ''name'' of the theme as value
 * save the tiddler and go to the Settings tab in $:/ControlPanel - look for the "theme" dropdown to select your newly added theme
