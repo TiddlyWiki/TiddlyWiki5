@@ -1,4 +1,4 @@
-title: $:/config/codemirror/keyMap
-type: string
+title: $:/plugins/tiddlywiki/codemirror/keymaps/sublime
+module-type: codemirror-keymap
 
 sublime
