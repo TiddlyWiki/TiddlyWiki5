@@ -101,7 +101,7 @@ title: $:/plugins/tiddlywiki/codemirror/keyboard
 |Alt-D |delWordAfter |
 |Alt-Backspace |delWordBefore |
 |Ctrl-K |killLine |
-|Ctrl-T |transposeChars |
+|Alt-T |transposeChars |
 |Ctrl-O |openLine |
 
 

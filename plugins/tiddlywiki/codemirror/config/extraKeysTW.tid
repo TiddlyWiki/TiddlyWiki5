@@ -7,6 +7,8 @@ type: json
 	"Esc": "",
 	"Ctrl-S": "",
 	"Ctrl-U": "",
+	"Ctrl-T": "",
+	"Alt-T": "transposeChars",
 	"Alt-U": "undoSelection",
 	"Shift-Alt-U": "redoSelection",
 	"Cmd-U": ""
