@@ -67,7 +67,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
 		var handled = false;
-		if(self.invokeActions(this,event)) {
+		if(self.invokeActions(self,event)) {
 			handled = true;
 		}
 		if(self.to) {
