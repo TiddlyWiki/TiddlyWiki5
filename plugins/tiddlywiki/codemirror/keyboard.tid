@@ -21,7 +21,7 @@ title: $:/plugins/tiddlywiki/codemirror/keyboard
 |Shift-Tab |indentAuto |
 |Enter |newlineAndIndent |
 |Insert |toggleOverwrite |
-|Esc |singleSelection |
+|Ctrl-Esc |singleSelection |
 
 
 !!!Shortcuts on Windows and Linux
@@ -42,7 +42,6 @@ title: $:/plugins/tiddlywiki/codemirror/keyboard
 |Alt-Right |goLineEnd |
 |Ctrl-Backspace |delGroupBefore |
 |Ctrl-Delete |delGroupAfter |
-|Ctrl-S |save |
 |Ctrl-F |find |
 |Ctrl-G |findNext |
 |Shift-Ctrl-G |findPrev |
@@ -50,9 +49,9 @@ title: $:/plugins/tiddlywiki/codemirror/keyboard
 |Shift-Ctrl-R |replaceAll |
 |Ctrl-[ |indentLess |
 |Ctrl-] |indentMore |
-|Ctrl-U |undoSelection |
+|Alt-U |undoSelection |
 |Shift-Ctrl-U |redoSelection |
-|Alt-U |redoSelection |
+|Shift-Alt-U |redoSelection |
 
 
 !!!Shortcuts on ~MacOs
@@ -74,7 +73,6 @@ title: $:/plugins/tiddlywiki/codemirror/keyboard
 |Alt-Backspace |delGroupBefore |
 |Ctrl-Alt-Backspace |delGroupAfter |
 |Alt-Delete |delGroupAfter |
-|Cmd-S |save |
 |Cmd-F |find |
 |Cmd-G |findNext |
 |Shift-Cmd-G |findPrev |
@@ -84,8 +82,8 @@ title: $:/plugins/tiddlywiki/codemirror/keyboard
 |Cmd-] |indentMore |
 |Cmd-Backspace |delWrappedLineLeft |
 |Cmd-Delete |delWrappedLineRight |
-|Cmd-U |undoSelection |
-|Shift-Cmd-U |redoSelection |
+|Alt-U |undoSelection |
+|Shift-Alt-U |redoSelection |
 |Ctrl-Up |goDocStart |
 |Ctrl-Down |goDocEnd |
 |Ctrl-F |goCharRight |

@@ -1,0 +1,13 @@
+title: $:/config/codemirror/extraKeysTW
+extend: extraKeys
+type: json
+
+{
+	"Ctrl-Esc": "singleSelection",
+	"Esc": "",
+	"Ctrl-S": "",
+	"Ctrl-U": "",
+	"Alt-U": "undoSelection",
+	"Shift-Alt-U": "redoSelection",
+	"Cmd-U": ""
+}

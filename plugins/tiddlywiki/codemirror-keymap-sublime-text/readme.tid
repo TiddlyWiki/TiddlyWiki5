@@ -2,25 +2,27 @@ title: $:/plugins/tiddlywiki/codemirror-keymap-sublime-text/readme
 
 This plugin adds a ''Keymap'' with the most important ''Sublime Text'' keyboard shortcuts
 
+Shortcuts that interfere with ~TiddlyWiki shortcuts differ from the original sublime shortcuts to preserve functionality
+
 
 |Shortcut |Function |h
 |Shift-Tab |indentLess |
 |Shift-Ctrl-K |deleteLine |
 |Alt-Q |wrapLines |
-|Ctrl-T |transposeChars |
+|Alt-T |transposeChars |
 |Alt-Left |goSubwordLeft |
 |Alt-Right |goSubwordRight |
 |Ctrl-Up |scrollLineUp |
 |Ctrl-Down |scrollLineDown |
-|Ctrl-L |selectLine |
-|Shift-Ctrl-L |splitSelectionByLine |
-|Esc |singleSelectionTop |
-|Ctrl-Enter |insertLineAfter |
+|Alt-L |selectLine |
+|Shift-Alt-L |splitSelectionByLine |
+|Ctrl-Esc |singleSelectionTop |
+|Shift-Enter |insertLineAfter |
 |Shift-Ctrl-Enter |insertLineBefore |
 |Ctrl-D |selectNextOccurrence |
 |Shift-Ctrl-Space |selectScope |
 |Shift-Ctrl-M |selectBetweenBrackets |
-|Ctrl-M |goToBracket |
+|Alt-M |goToBracket |
 |Shift-Ctrl-Up |swapLineUp |
 |Shift-Ctrl-Down |swapLineDown |
 |Ctrl-/ |toggleCommentIndented |
@@ -35,11 +37,11 @@ This plugin adds a ''Keymap'' with the most important ''Sublime Text'' keyboard 
 |Alt-F2 |selectBookmarks |
 |Backspace |smartBackspace |
 |Ctrl-K Ctrl-K |delLineRight |
-|Ctrl-K Ctrl-U |upcaseAtCursor |
-|Ctrl-K Ctrl-L |downcaseAtCursor |
+|Ctrl-K Alt-U |upcaseAtCursor |
+|Ctrl-K Alt-L |downcaseAtCursor |
 |Ctrl-K Ctrl-Space |setSublimeMark |
 |Ctrl-K Ctrl-A |selectToSublimeMark |
-|Ctrl-K Ctrl-W |deleteToSublimeMark |
+|Ctrl-K Alt-D |deleteToSublimeMark |
 |Ctrl-K Ctrl-X |swapWithSublimeMark |
 |Ctrl-K Ctrl-Y |sublimeYank |
 |Ctrl-K Ctrl-C |showInCenter |
