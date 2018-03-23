@@ -27,9 +27,9 @@ Extended filter operators to manipulate the current list.
     Return the number the str represents
     Return default if it's not a number
     */
-    function getInt( str, default ) {
+    function getInt( str, deflt ) {
     	var i= parseInt( str );
-    	return isNaN(i) ? default : i;
+    	return isNaN(i) ? deflt : i;
     }
 
     /*
