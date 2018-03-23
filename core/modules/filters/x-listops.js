@@ -24,12 +24,21 @@ Extended filter operators to manipulate the current list.
     };
 
     /*
+    Return the number the str represents
+    Return default if it's not a number
+    */
+    function getInt( str, default ) {
+    	var i= parseInt( str );
+    	return isNaN(i) ? default : i;
+    }
+
+    /*
     Moves a number of items from the tail of the current list before the item named in the operand
     */
     exports.putbefore = function (source, operator) {
         var results = prepare_results(source),
             index = results.indexOf(operator.operand),
-            count = parseInt(operator.suffix) || 1;
+            count = getInt(operator.suffix, 1);
         return (index === -1) ?
             results.slice(0, -1) :
             results.slice(0, index).concat(results.slice(-count)).concat(results.slice(index, -count));
@@ -41,7 +50,7 @@ Extended filter operators to manipulate the current list.
     exports.putafter = function (source, operator) {
         var results = prepare_results(source),
             index = results.indexOf(operator.operand),
-            count = parseInt(operator.suffix) || 1;
+            count = getInt(operator.suffix, 1);
         return (index === -1) ?
             results.slice(0, -1) :
             results.slice(0, index + 1).concat(results.slice(-count)).concat(results.slice(index + 1, -count));
@@ -53,7 +62,7 @@ Extended filter operators to manipulate the current list.
     exports.replace = function (source, operator) {
         var results = prepare_results(source),
             index = results.indexOf(operator.operand),
-            count = parseInt(operator.suffix) || 1;
+            count = getInt(operator.suffix, 1);
         return (index === -1) ?
             results.slice(0, -count) :
             results.slice(0, index).concat(results.slice(-count)).concat(results.slice(index + 1, -count));
@@ -64,7 +73,7 @@ Extended filter operators to manipulate the current list.
     */
     exports.putfirst = function (source, operator) {
         var results = prepare_results(source),
-            count = parseInt(operator.suffix) || 1;
+            count = getInt(operator.suffix, 1);
         return results.slice(-count).concat(results.slice(0, -count));
     };
 
@@ -73,7 +82,7 @@ Extended filter operators to manipulate the current list.
     */
     exports.putlast = function (source, operator) {
         var results = prepare_results(source),
-            count = parseInt(operator.suffix) || 1;
+            count = getInt(operator.suffix, 1);
         return results.slice(count).concat(results.slice(0, count));
     };
 
@@ -83,7 +92,7 @@ Extended filter operators to manipulate the current list.
     exports.move = function (source, operator) {
         var results = prepare_results(source),
             index = results.indexOf(operator.operand),
-            count = parseInt(operator.suffix) || 1,
+            count = getInt(operator.suffix, 1),
             marker = results.splice(index, 1),
             offset =  (index + count) > 0 ? index + count : 0;
         return results.slice(0, offset).concat(marker).concat(results.slice(offset));
@@ -129,7 +138,7 @@ Extended filter operators to manipulate the current list.
     exports.prepend = function (source, operator) {
         var prepend = $tw.utils.parseStringArray(operator.operand, "true"),
             results = prepare_results(source),
-            count = parseInt(operator.suffix) || prepend.length;
+            count = getInt(operator.suffix, prepend.length);
         return (prepend.length === 0) ? results :
             (operator.prefix) ? prepend.slice(-count).concat(results) :
             prepend.slice(0, count).concat(results);
