@@ -52,6 +52,15 @@ exports.warning = function(text) {
 };
 
 /*
+Return the integer represented by the str (string).
+Return the dflt (default) parameter if str is not a base-10 number.
+*/
+exports.getInt = function(str,deflt) {
+	var i = parseInt(str,10);
+	return isNaN(i) ? deflt : i;
+}
+
+/*
 Repeatedly replaces a substring within a string. Like String.prototype.replace, but without any of the default special handling of $ sequences in the replace string
 */
 exports.replaceString = function(text,search,replace) {
@@ -363,15 +372,15 @@ exports.formatDateString = function(date,template) {
 			}]
 		];
 	// If the user wants everything in UTC, shift the datestamp
-	// Optimize for format string that essentially means 
+	// Optimize for format string that essentially means
 	// 'return raw UTC (tiddlywiki style) date string.'
 	if(t.indexOf("[UTC]") == 0 ) {
-		if(t == "[UTC]YYYY0MM0DD0hh0mm0ssXXX") 
+		if(t == "[UTC]YYYY0MM0DD0hh0mm0ssXXX")
 			return $tw.utils.stringifyDate(new Date());
 		var offset = date.getTimezoneOffset() ; // in minutes
 		date = new Date(date.getTime()+offset*60*1000) ;
 		t = t.substr(5) ;
-	} 
+	}
 	while(t.length){
 		var matchString = "";
 		$tw.utils.each(matches, function(m) {
@@ -491,7 +500,7 @@ exports.entityDecode = function(s) {
 		e = s.substr(1,s.length-2); // Strip the & and the ;
 	if(e.charAt(0) === "#") {
 		if(e.charAt(1) === "x" || e.charAt(1) === "X") {
-			return converter(parseInt(e.substr(2),16));	
+			return converter(parseInt(e.substr(2),16));
 		} else {
 			return converter(parseInt(e.substr(1),10));
 		}
@@ -724,7 +733,7 @@ High resolution microsecond timer for profiling
 exports.timer = function(base) {
 	var m;
 	if($tw.node) {
-		var r = process.hrtime();		
+		var r = process.hrtime();
 		m =  r[0] * 1e3 + (r[1] / 1e6);
 	} else if(window.performance) {
 		m = performance.now();

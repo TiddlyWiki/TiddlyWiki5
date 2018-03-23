@@ -13,15 +13,6 @@ Filter operators for manipulating the current selection list
 "use strict";
 
 /*
-Return the number the str represents
-Return 1 if it's not a number
-*/
-function getInt( str ) {
-	var i= parseInt( str );
-	return isNaN(i) ? 1 : i;
-}
-
-/*
 Order a list
 */
 exports.order = function(source,operator,options) {
@@ -53,7 +44,7 @@ exports.reverse = function(source,operator,options) {
 First entry/entries in list
 */
 exports.first = function(source,operator,options) {
-	var count = getInt(operator.operand),
+	var count = $tw.utils.getInt(operator.operand,1),
 		results = [];
 	source(function(tiddler,title) {
 		results.push(title);
@@ -65,7 +56,7 @@ exports.first = function(source,operator,options) {
 Last entry/entries in list
 */
 exports.last = function(source,operator,options) {
-	var count = getInt(operator.operand),
+	var count = $tw.utils.getInt(operator.operand,1),
 		results = [];
 	source(function(tiddler,title) {
 		results.push(title);
@@ -77,7 +68,7 @@ exports.last = function(source,operator,options) {
 All but the first entry/entries of the list
 */
 exports.rest = function(source,operator,options) {
-	var count = getInt(operator.operand),
+	var count = $tw.utils.getInt(operator.operand,1),
 		results = [];
 	source(function(tiddler,title) {
 		results.push(title);
@@ -91,7 +82,7 @@ exports.bf = exports.rest;
 All but the last entry/entries of the list
 */
 exports.butlast = function(source,operator,options) {
-	var count = getInt(operator.operand),
+	var count = $tw.utils.getInt(operator.operand,1),
 		results = [];
 	source(function(tiddler,title) {
 		results.push(title);
@@ -104,7 +95,7 @@ exports.bl = exports.butlast;
 The nth member of the list
 */
 exports.nth = function(source,operator,options) {
-	var count = getInt(operator.operand),
+	var count = $tw.utils.getInt(operator.operand,1),
 		results = [];
 	source(function(tiddler,title) {
 		results.push(title);
