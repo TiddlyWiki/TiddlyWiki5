@@ -1,0 +1,23 @@
+created: 20180323092308399
+modified: 20180323092547312
+tags: Features
+title: StartupActions
+type: text/vnd.tiddlywiki
+
+During startup, TiddlyWiki executes any ActionWidgets found in tiddlers with the following system tags:
+
+* <<tag "$:/tags/StartupAction">> (executed on all platforms)
+* <<tag "$:/tags/StartupAction/Browser">> (only executed when running in the browser)
+* <<tag "$:/tags/StartupAction/Node">> (only executed when running under Node.js)
+
+For example, the following action widgets when placed in a tiddler tagged <<tag "$:/tags/StartupAction/Browser">> will cause the sidebar to be hidden by default when the screen width is less than 1000 pixels:
+
+```
+<$reveal type="lt" state="$:/info/browser/screen/width" text="3000">
+<$action-setfield $tiddler="$:/state/sidebar" $value="no"/>
+</$reveal>
+
+<$reveal type="gteq" state="$:/info/browser/screen/width" text="3000">
+<$action-setfield $tiddler="$:/state/sidebar" $value="yes"/>
+</$reveal>
+```

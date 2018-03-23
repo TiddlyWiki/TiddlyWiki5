@@ -87,18 +87,29 @@ exports.startup = function() {
 	});
 	// Kick off the keyboard manager
 	$tw.keyboardManager = new $tw.KeyboardManager();
+	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
+	$tw.rootWidget = new widget.widget({
+		type: "widget",
+		children: []
+	},{
+		wiki: $tw.wiki,
+		document: $tw.browser ? document : $tw.fakeDocument
+	});
+	// Execute any startup actions
+	var executeStartupTiddlers = function(tag) {
+		$tw.utils.each($tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[" + tag + "]!has[draft.of]]"),function(title) {
+			$tw.rootWidget.invokeActionString($tw.wiki.getTiddlerText(title),$tw.rootWidget);
+		});
+	};
+	executeStartupTiddlers("$:/tags/StartupAction");
+	if($tw.browser) {
+		executeStartupTiddlers("$:/tags/StartupAction/Browser");		
+	}
+	if($tw.node) {
+		executeStartupTiddlers("$:/tags/StartupAction/Node");		
+	}
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
-	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
-	if($tw.browser) {
-		$tw.rootWidget = new widget.widget({
-			type: "widget",
-			children: []
-		},{
-			wiki: $tw.wiki,
-			document: document
-		});
-	}
 	// Find a working syncadaptor
 	$tw.syncadaptor = undefined;
 	$tw.modules.forEachModuleOfType("syncadaptor",function(title,module) {
