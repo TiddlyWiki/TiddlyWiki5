@@ -25,7 +25,7 @@ Extended filter operators to manipulate the current list.
 
     /*
     Return the number the str represents
-    Return 1 if it's not a number
+    Return default if it's not a number
     */
     function getInt( str, default ) {
     	var i= parseInt( str );
