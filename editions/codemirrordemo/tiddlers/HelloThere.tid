@@ -29,7 +29,7 @@ Some commands and functions to try:
 See the [[Sublime Text Keymap Readme|$:/plugins/tiddlywiki/codemirror-keymap-sublime-text/readme]] for more keyboard shortcuts to try
 
 
-To add the base plugin to your own TiddlyWiki5, just drag this link to the browser window:
+To add the base plugin to your own ~TiddlyWiki5, just drag this link to the browser window:
 
 [[$:/plugins/tiddlywiki/codemirror]]
 
