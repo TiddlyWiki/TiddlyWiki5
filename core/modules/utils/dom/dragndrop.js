@@ -43,6 +43,10 @@ exports.makeDraggable = function(options) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
 			var titleString = $tw.utils.stringifyList(titles);
+			var dragStartAction = options.draggableAction;
+			if (dragStartAction !== undefined && dragStartAction !== null) {
+				options.widget.invokeActionString(dragStartAction,options.widget,event,{actionTiddler: titleString});
+			}
 			// Check that we've something to drag
 			if(titles.length > 0 && event.target === domNode) {
 				// Mark the drag in progress
