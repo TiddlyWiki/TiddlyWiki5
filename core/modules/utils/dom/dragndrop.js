@@ -43,7 +43,7 @@ exports.makeDraggable = function(options) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
 			var titleString = $tw.utils.stringifyList(titles);
-			var dragStartAction = options.draggableAction;
+			var dragStartAction = options.dragActions;
 			if (dragStartAction !== undefined && dragStartAction !== null) {
 				options.widget.invokeActionString(dragStartAction,options.widget,event,{actionTiddler: titleString});
 			}
