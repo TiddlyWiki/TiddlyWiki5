@@ -11,7 +11,7 @@ At the root, it serves a rendering of a specified tiddler. Away from the root, i
 
 The parameters are:
 
-* ''port'' - port number to serve from (defaults to "8080")
+* ''port'' - port number on which to listen; non-numeric values are interpreted as a system environment variable from which the port number is extracted (defaults to "8080")
 * ''roottiddler'' - the tiddler to serve at the root (defaults to "$:/core/save/all")
 * ''rendertype'' - the content type to which the root tiddler should be rendered (defaults to "text/plain")
 * ''servetype'' - the content type with which the root tiddler should be served (defaults to "text/html")
@@ -34,4 +34,8 @@ The username and password can be specified as empty strings if you need to set t
 --server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
 ```
 
-To run multiple TiddlyWiki servers at the same time you'll need to put each one on a different port.
+To run multiple TiddlyWiki servers at the same time you'll need to put each one on a different port. It can be useful to use an environment variable to set the port. This examples listens on the port number specified in the environment variable "PORT":
+
+```
+--server PORT
+```

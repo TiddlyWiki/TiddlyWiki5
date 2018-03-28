@@ -291,6 +291,9 @@ Command.prototype.execute = function() {
 		password = this.params[5],
 		host = this.params[6] || "127.0.0.1",
 		pathprefix = this.params[7];
+	if(parseInt(port,10).toString() !== port) {
+		port = process.env[port] || 8080;
+	}
 	this.server.set({
 		rootTiddler: rootTiddler,
 		renderType: renderType,
