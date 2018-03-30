@@ -113,7 +113,6 @@ function CodeMirrorEngine(options) {
 	// Get the configuration options for the CodeMirror object
 	var config = getCmConfig();
 
-	console.log("config: ", config)
   config.mode = options.type;
 	config.value = options.value;
 	// Create the CodeMirror instance
@@ -121,6 +120,13 @@ function CodeMirrorEngine(options) {
 		// Note that this is a synchronous callback that is called before the constructor returns
 		self.domNode.appendChild(cmDomNode);
 	},config);
+
+  var toolbar = this.parentNode.children[0];
+
+  toolbar.addEventListener("click", function(){
+    self.domNode.focus();
+  });
+
 	// Set up a change event handler
 	this.cm.on("change",function() {
 		self.widget.saveChanges(self.getText());
@@ -132,6 +138,7 @@ function CodeMirrorEngine(options) {
 	this.cm.on("keydown",function(cm,event) {
 		return self.widget.handleKeydownEvent.call(self.widget,event);
 	});
+
 }
 
 /*
