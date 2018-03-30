@@ -121,12 +121,6 @@ function CodeMirrorEngine(options) {
       self.domNode.appendChild(cmDomNode);
   },config);
 
-    var toolbar = this.parentNode.children[0];
-
-    toolbar.addEventListener("click", function(){
-    	self.domNode.focus();
-    });
-
     // Set up a change event handler
     this.cm.on("change",function() {
     	self.widget.saveChanges(self.getText());
