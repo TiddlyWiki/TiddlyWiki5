@@ -41,6 +41,7 @@ Microsoft's [[Internet Information Server|https://en.wikipedia.org/wiki/Internet
 # Create a subdirectory called "tiddlers" (i.e. `C:\MyStuff\wiki\tiddlers`)
 # Within it, create a file called `C:\MyStuff\wiki\tiddlers\config-tiddlyweb-host.tid` with the content:
 #> <<example-file "Example config-tiddlyweb-host for IIS">>
+#* (See [[the documentation|https://docs.microsoft.com/en-us/iis/extensions/httpplatformhandler/httpplatformhandler-configuration-reference]] for details of the configuration fields for ~HttpPlatformHandler
 
 ! 4. Setup the application in IIS
 
