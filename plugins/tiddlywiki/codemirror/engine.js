@@ -8,35 +8,35 @@ Text editor engine based on a CodeMirror instance
 \*/
 (function(){
 
-	/*jslint node: true, browser: true */
-	/*global $tw: false */
-	"use strict";
+/*jslint node: true, browser: true */
+/*global $tw: false */
+"use strict";
 
-	var CODEMIRROR_OPTIONS = "$:/config/CodeMirror",
-	HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height",
-	CONFIG_FILTER = "[all[shadows+tiddlers]prefix[$:/config/codemirror/]]"
+var CODEMIRROR_OPTIONS = "$:/config/CodeMirror",
+HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height",
+CONFIG_FILTER = "[all[shadows+tiddlers]prefix[$:/config/codemirror/]]"
 	
-	// Install CodeMirror
-	if($tw.browser && !window.CodeMirror) {
+// Install CodeMirror
+if($tw.browser && !window.CodeMirror) {
 
-		var modules = $tw.modules.types["codemirror"];
-		var req = Object.getOwnPropertyNames(modules);
+	var modules = $tw.modules.types["codemirror"];
+	var req = Object.getOwnPropertyNames(modules);
 
-		window.CodeMirror = require("$:/plugins/tiddlywiki/codemirror/lib/codemirror.js");
-		// Install required CodeMirror plugins
-		if(req) {
-			if($tw.utils.isArray(req)) {
-				for(var index=0; index<req.length; index++) {
-					require(req[index]);
-				}
-			} else {
-				require(req);
+	window.CodeMirror = require("$:/plugins/tiddlywiki/codemirror/lib/codemirror.js");
+	// Install required CodeMirror plugins
+	if(req) {
+		if($tw.utils.isArray(req)) {
+			for(var index=0; index<req.length; index++) {
+				require(req[index]);
 			}
+		} else {
+			require(req);
 		}
 	}
+}
 
-	function getCmConfig() {
-		var type,
+function getCmConfig() {
+	var type,
 		test,
 		value,
 		element,
@@ -45,72 +45,69 @@ Text editor engine based on a CodeMirror instance
 		config = {},
 		configTiddlers = $tw.wiki.filterTiddlers(CONFIG_FILTER);
 
-		if ($tw.utils.isArray(configTiddlers)) {
-			for (var i=0; i<configTiddlers.length; i++) {
-				tiddler = $tw.wiki.getTiddler(configTiddlers[i]);
-
+	if ($tw.utils.isArray(configTiddlers)) {
+		for (var i=0; i<configTiddlers.length; i++) {
+			tiddler = $tw.wiki.getTiddler(configTiddlers[i]);
 				if (tiddler) {
-					element = configTiddlers[i].replace(/\$:\/config\/codemirror\//ig,"");
-
+				element = configTiddlers[i].replace(/\$:\/config\/codemirror\//ig,"");
 					type = (tiddler.fields.type) ? tiddler.fields.type.trim().toLocaleLowerCase() : "string";
-					switch (type) {
-						case "bool":
-						test = tiddler.fields.text.trim().toLowerCase();
-						value = (test === "true") ? true : false;
-						config[element] = value;
-						break;
-						case "string":
-						value = tiddler.fields.text.trim();
-						config[element] = value;
-						break;
-						case "integer":
-						value = parseInt(tiddler.fields.text.trim(), 10);
-						config[element] = value;
-						break;
-						case "json":
-						value = JSON.parse(tiddler.fields.text.trim());
-
+				switch (type) {
+					case "bool":
+					test = tiddler.fields.text.trim().toLowerCase();
+					value = (test === "true") ? true : false;
+					config[element] = value;
+					break;
+					case "string":
+					value = tiddler.fields.text.trim();
+					config[element] = value;
+					break;
+					case "integer":
+					value = parseInt(tiddler.fields.text.trim(), 10);
+					config[element] = value;
+					break;
+					case "json":
+					value = JSON.parse(tiddler.fields.text.trim());
 						extend = (tiddler.fields.extend) ? tiddler.fields.extend : element;
 
-						if (config[extend]) {
-							$tw.utils.extend(config[extend], value);
-						} else {
-							config[extend] = value;
-						}
-						break;
+					if (config[extend]) {
+						$tw.utils.extend(config[extend], value);
+					} else {
+						config[extend] = value;
 					}
+					break;
 				}
 			}
 		}
-		return config;
 	}
+	return config;
+}
 
-	function CodeMirrorEngine(options) {
+function CodeMirrorEngine(options) {
 
-		// Save our options
-		var self = this;
-		options = options || {};
-		this.widget = options.widget;
-		this.value = options.value;
-		this.parentNode = options.parentNode;
-		this.nextSibling = options.nextSibling;
-		// Create the wrapper DIV
-		this.domNode = this.widget.document.createElement("div");
-		if(this.widget.editClass) {
-			this.domNode.className = this.widget.editClass;
-		}
-		this.domNode.style.display = "inline-block";
-		this.parentNode.insertBefore(this.domNode,this.nextSibling);
-		this.widget.domNodes.push(this.domNode);
-		
-		// Set all cm-plugin defaults
-		// Get the configuration options for the CodeMirror object
-		var config = getCmConfig();
+	// Save our options
+	var self = this;
+	options = options || {};
+	this.widget = options.widget;
+	this.value = options.value;
+	this.parentNode = options.parentNode;
+	this.nextSibling = options.nextSibling;
+	// Create the wrapper DIV
+	this.domNode = this.widget.document.createElement("div");
+	if(this.widget.editClass) {
+		this.domNode.className = this.widget.editClass;
+	}
+	this.domNode.style.display = "inline-block";
+	this.parentNode.insertBefore(this.domNode,this.nextSibling);
+	this.widget.domNodes.push(this.domNode);
+	
+	// Set all cm-plugin defaults
+	// Get the configuration options for the CodeMirror object
+	var config = getCmConfig();
 
-		config.mode = options.type;
-		config.value = options.value;
-		// Create the CodeMirror instance
-		this.cm = window.CodeMirror(function(cmDomNode) {
+	config.mode = options.type;
+	config.value = options.value;
+	// Create the CodeMirror instance
+	this.cm = window.CodeMirror(function(cmDomNode) {
 		// Note that this is a synchronous callback that is called before the constructor returns
 		self.domNode.appendChild(cmDomNode);
 	},config);
