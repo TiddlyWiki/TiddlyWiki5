@@ -6,6 +6,11 @@ tags: $:/tags/Macro
 <$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
 \end
 
+\define add-tag-actions()
+<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/NewTagName}}/>
+<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
+\end
+
 \define tag-button()
 <$button class="tc-btn-invisible" tag="a">
 $(actions)$
@@ -34,13 +39,15 @@ $actions$
 <div class="tc-block-dropdown-wrapper">
 <$reveal state=<<qualify "$:/state/popup/tags-auto-complete">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown">
+<$list filter="[{$:/temp/NewTagName}minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 <$list filter="[tags[]!is[system]search:title{$:/temp/NewTagName}sort[]]" variable="tag">
 <<tag-button>>
-</$list>
+</$list></$list>
 <hr>
+<$list filter="[{$:/temp/NewTagName}minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 <$list filter="[tags[]is[system]search:title{$:/temp/NewTagName}sort[]]" variable="tag">
 <<tag-button>>
-</$list>
+</$list></$list>
 </div>
 </$reveal>
 </div>
