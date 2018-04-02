@@ -156,6 +156,9 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	if(this.checkboxActions) {
 		this.invokeActionString(this.checkboxActions,this,event);
 	}
+	if(this.checkboxUncheckActions && !checked) {
+		this.invokeActionString(this.checkboxUncheckActions,this,event);
+	}
 };
 
 /*
@@ -164,6 +167,7 @@ Compute the internal state of the widget
 CheckboxWidget.prototype.execute = function() {
 	// Get the parameters from the attributes
 	this.checkboxActions = this.getAttribute("actions");
+	this.checkboxUncheckActions = this.getAttribute("uncheckactions");
 	this.checkboxTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.checkboxTag = this.getAttribute("tag");
 	this.checkboxField = this.getAttribute("field");
