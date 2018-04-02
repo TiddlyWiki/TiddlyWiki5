@@ -9,7 +9,7 @@ description: {{$:/language/Buttons/NewJournalHere/Hint}}
 \end
 \define journalButton()
 <$button tooltip={{$:/language/Buttons/NewJournalHere/Hint}} aria-label={{$:/language/Buttons/NewJournalHere/Caption}} class=<<tv-config-toolbar-class>>>
-<$action-sendmessage $message="tm-new-tiddler" title=<<now "$(journalTitleTemplate)$">> tags=<<journalButtonTags>>/>
+<$action-sendmessage $message="tm-new-tiddler" title=<<now """$(journalTitleTemplate)$ """>> tags=<<journalButtonTags>>/>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/new-journal-button}}
 </$list>
