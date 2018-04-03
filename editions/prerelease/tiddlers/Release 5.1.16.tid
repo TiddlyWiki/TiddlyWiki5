@@ -32,6 +32,7 @@ Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia
 !! Usability Improvements
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3112]] new DiffTextWidget, and integrated it into the import listing and as a preview pane
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/9e03264ebe141a5dc4d37dcb62f3bbf2f740d983]] selectable previews to the import listing
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3155]] new editor toolbar buttons for wrapping the selection with double square and curly brackets
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3134]] new [[sortan Operator]] for sorting alphanumeric values such as "Apple 6", "Apple 7", "Apple 8", "Apple 9", "Apple 10", "Apple 20", "Apple 30", "Apple 100"
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/da0ffce2d66f16ad14587fbe58b8d7a5c8d36657]] default fonts for readability as advised by [[GitHub|http://markdotto.com/2018/02/07/github-system-fonts/]]
@@ -43,6 +44,7 @@ Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3149]] a control panel setting for the titles of new tiddlers
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c0569849d22f99623423d349c0d96ecae11ffbe8]] "rotate left" button to bitmap editor toolbar
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/3180]] criteria under which certain editor toolbar buttons are displayed
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3190]] support for a minimum length for the new tag field before the dropdown is shown
 
 !! Hackability Improvements
 
@@ -60,6 +62,8 @@ Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3124]] new "value" suffix for the [[each Operator]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b4c7c59d5d1bc5282fcfed58abbf087b9f65b86c]] 'emptyMessage' parameter to list-links and list-tagged-draggable macros
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0d354fe57f7424c1751a5c0cf5fbf1203803f3c8]] new ''subtiddler'' attribute to the SetWidget
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/47cdf5513391742c3410bb80b36107ab17b0476d]] new [[subtiddlerfields Operator]] for extracting the fields from tiddlers within plugins
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3182]] ability to trigger actions on unchecking the CheckboxWidget
 
 !! Node.js Improvements
 
@@ -75,6 +79,7 @@ Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3093]] problem with crash when dragging over TiddlyWiki on some browsers
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3079]] issue with new journal button
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3164]] problem with ''filter'' and ''value'' attributes of SetWidget
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3190]] problem with numeric operands in the [[The Extended Listops Filters]]
 
 !! Developer Bug Fixes and Improvements
 
