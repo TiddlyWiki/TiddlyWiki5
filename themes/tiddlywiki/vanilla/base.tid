@@ -2410,6 +2410,20 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	color: <<colour diff-invisible-foreground>>;
 }
 
+.tc-diff-tiddlers th {
+	text-align: right;
+	background: <<colour background>>;
+	font-weight: normal;
+	font-style: italic;
+}
+
+.tc-diff-tiddlers pre {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
 /*
 ** Errors
 */

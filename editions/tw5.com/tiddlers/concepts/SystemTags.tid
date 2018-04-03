@@ -29,6 +29,7 @@ These are the available system tags
 |<<tag "$:/tags/Exporter">> |for the exporters |
 |<<tag "$:/tags/Filter">> |for filters in advanced seach sample filter dropdown |
 |<<tag "$:/tags/Image">> |for (core) images |
+|<<tag "$:/tags/ImportPreview">> |for preview types for the import listing |
 |<<tag "$:/tags/Manager/ItemMain">> |for the tiddler manager. $:/Manager |
 |<<tag "$:/tags/Manager/ItemSidebar">> |for the tiddler manager |
 |<<tag "$:/tags/Macro">> |for global macros |
