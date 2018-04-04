@@ -26,7 +26,7 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 |!Attribute |!Description |
 |state |A TextReference containing the state |
 |tag |Overrides the default HTML element tag (`<div>` in block mode or `<span>` in inline mode) |
-|type |The type of matching performed: ''match'', ''nomatch'' or ''popup'' |
+|type |The type of matching performed: ''match'', ''nomatch'', ''popup'', ''lt'', ''gt'', ''lteq'' or ''gteq'' |
 |text |The text to match when the type is ''match'' and ''nomatch'' |
 |class |An optional CSS class name to be assigned to the HTML element<br/>&raquo; Set to `tc-popup-keep` to make a popup "sticky", so it won't close when you click inside of it|
 |style |An optional CSS style attribute to be assigned to the HTML element |
