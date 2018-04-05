@@ -11,7 +11,7 @@ tags: $:/tags/Macro
 
 \define toc-body(tag,sort:"",itemClassFilter,exclude,path)
 <ol class="tc-toc">
-  <$list filter="""[all[shadows+tiddlers]tag[$tag$]!has[draft.of]$sort$] $exclude$""">
+  <$list filter="""[all[shadows+tiddlers]tag[$tag$]!has[draft.of]$sort$] -[[$tag$]] $exclude$""">
     <$vars item=<<currentTiddler>> path="""$path$/$tag$""" excluded="""$exclude$ -[[$tag$]]""">
       <$set name="toc-item-class" filter="""$itemClassFilter$""" emptyValue="toc-item" value="toc-item-selected">
         <li class=<<toc-item-class>>>
@@ -88,7 +88,7 @@ tags: $:/tags/Macro
 \define toc-expandable(tag,sort:"",itemClassFilter:" ",exclude,path)
 <$vars tag="""$tag$""" sort="""$sort$""" itemClassFilter="""$itemClassFilter$""" excluded="""$exclude$ -[[$tag$]]""" path="""$path$/$tag$""">
   <ol class="tc-toc toc-expandable">
-    <$list filter="""[all[shadows+tiddlers]tag[$tag$]!has[draft.of]$sort$] $exclude$""">
+    <$list filter="""[all[shadows+tiddlers]tag[$tag$]!has[draft.of]$sort$] -[[$tag$]] $exclude$""">
       <$list filter="[all[current]toc-link[no]]" emptyMessage=<<toc-expandable-empty-message>> >
         <$macrocall $name="toc-unlinked-expandable-body" tag="""$tag$""" sort="""$sort$""" itemClassFilter="""itemClassFilter""" exclude=<<excluded>> path=<<path>> />
       </$list>
@@ -157,7 +157,7 @@ tags: $:/tags/Macro
 \define toc-selective-expandable(tag,sort:"",itemClassFilter,exclude,path)
 <$vars tag="""$tag$""" sort="""$sort$""" itemClassFilter="""$itemClassFilter$""" excluded="""$exclude$ -[[$tag$]]""" path="""$path$/$tag$""">
   <ol class="tc-toc toc-selective-expandable">
-    <$list filter="""[all[shadows+tiddlers]tag[$tag$]!has[draft.of]$sort$] $exclude$""">
+    <$list filter="""[all[shadows+tiddlers]tag[$tag$]!has[draft.of]$sort$] -[[$tag$]] $exclude$""">
       <$list filter="[all[current]toc-link[no]]" variable="ignore" emptyMessage=<<toc-selective-expandable-empty-message>> >
         <$macrocall $name=toc-unlinked-selective-expandable-body tag="""$tag$""" sort="""$sort$""" itemClassFilter="""$itemClassFilter$""" exclude=<<excluded>> path=<<path>> >
       </$list>
