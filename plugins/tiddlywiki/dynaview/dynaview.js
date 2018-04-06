@@ -137,6 +137,10 @@ function setZoomClasses() {
 function checkVisibility() {
 	var elements = document.querySelectorAll(".tc-dynaview-set-tiddler-when-visible");
 	$tw.utils.each(elements,function(element) {
+		// Bail if we've already triggered this element
+		if(element.getAttribute("data-dynaview-has-triggered") === "true") {
+			return;
+		}
 		// Check if the element is visible
 		var elementRect = element.getBoundingClientRect(),
 			viewportWidth = window.innerWidth || document.documentElement.clientWidth,
@@ -163,6 +167,7 @@ function checkVisibility() {
 			if(tiddler && $tw.wiki.getTiddlerText(tiddler) !== value) {
 				$tw.wiki.addTiddler(new $tw.Tiddler({title: tiddler, text: value}));
 			}
+			element.setAttribute("data-dynaview-has-triggered",true);
 		}
 	});
 }
