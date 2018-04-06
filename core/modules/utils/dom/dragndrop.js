@@ -39,8 +39,7 @@ exports.makeDraggable = function(options) {
 			var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
 				dragFilter = options.dragFilterFn && options.dragFilterFn(),
 				titles = dragTiddler ? [dragTiddler] : [],
-			    	dragStartActions = options.dragStartActions,
-			    	dragEndActions = options.dragEndActions;
+			    	dragStartActions = options.dragStartActions;
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
@@ -108,8 +107,8 @@ exports.makeDraggable = function(options) {
 			if(event.target === domNode) {
 				$tw.dragInProgress = null;
 				// Invoke drag-end actions if given
-				if(dragEndActions !== undefined && dragEndActions !== null) {
-					options.widget.invokeActionString(dragEndActions,options.widget,event,{actionTiddler: titleString});
+				if(options.dragEndActions !== undefined && options.dragEndActions !== null) {
+					options.widget.invokeActionString(options.dragEndActions,options.widget,event,{actionTiddler: titleString});
 				}
 				// Remove the dragging class on the element being dragged
 				$tw.utils.removeClass(event.target,"tc-dragging");
