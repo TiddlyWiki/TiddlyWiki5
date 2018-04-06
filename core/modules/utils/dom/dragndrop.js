@@ -105,10 +105,19 @@ exports.makeDraggable = function(options) {
 		}},
 		{name: "dragend", handlerFunction: function(event) {
 			if(event.target === domNode) {
+				// Collect the tiddlers being dragged
+				var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
+					dragFilter = options.dragFilterFn && options.dragFilterFn(),
+					titles = dragTiddler ? [dragTiddler] : [],
+			    		dragEndActions = options.dragEndActions;
+				if(dragFilter) {
+					titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
+				}
+				var titleString = $tw.utils.stringifyList(titles);
 				$tw.dragInProgress = null;
 				// Invoke drag-end actions if given
-				if(options.dragEndActions !== undefined && options.dragEndActions !== null) {
-					options.widget.invokeActionString(options.dragEndActions,options.widget,event,{actionTiddler: titleString});
+				if(dragEndActions !== undefined && dragEndActions !== null) {
+					options.widget.invokeActionString(dragEndActions,options.widget,event,{actionTiddler: titleString});
 				}
 				// Remove the dragging class on the element being dragged
 				$tw.utils.removeClass(event.target,"tc-dragging");
