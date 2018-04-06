@@ -53,7 +53,7 @@ exports.makeDraggable = function(options) {
 				$tw.utils.addClass(event.target,"tc-dragging");
 				// Invoke drag-start actions if given
 				if(dragStartActions !== undefined && dragStartActions !== null) {
-					self.invokeActionString(dragStartActions,this,event,{actionTiddler: titleString});
+					options.widget.invokeActionString(dragStartActions,options.widget,event,{actionTiddler: titleString});
 				}
 				// Create the drag image elements
 				dragImage = options.widget.document.createElement("div");
@@ -109,7 +109,7 @@ exports.makeDraggable = function(options) {
 				$tw.dragInProgress = null;
 				// Invoke drag-end actions if given
 				if(dragEndActions !== undefined && dragEndActions !== null) {
-					self.invokeActionString(dragEndActions,this,event,{actionTiddler: titleString});
+					options.widget.invokeActionString(dragEndActions,options.widget,event,{actionTiddler: titleString});
 				}
 				// Remove the dragging class on the element being dragged
 				$tw.utils.removeClass(event.target,"tc-dragging");
