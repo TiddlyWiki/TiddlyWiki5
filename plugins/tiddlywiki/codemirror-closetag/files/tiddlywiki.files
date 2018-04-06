@@ -1,0 +1,19 @@
+{
+	"tiddlers": [
+		{
+			"file": "addon/fold/xml-fold.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/fold/xml-fold.js",
+				"module-type": "codemirror"
+			}
+		},{
+			"file": "addon/edit/closetag.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js",
+				"module-type": "codemirror"
+			}
+		}
+	]
+}

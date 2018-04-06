@@ -1,0 +1,4 @@
+title: $:/plugins/tiddlywiki/codemirror-mode-xml/readme
+
+This plugin is a requirement for other Syntax-highlighting plugins and adds Highlighting for XML tiddlers (application/xml) to the [[CodeMirror|http://codemirror.net]] text editor. It needs the latest [[CodeMirror plugin|$:/plugins/tiddlywiki/codemirror]] to be installed
+

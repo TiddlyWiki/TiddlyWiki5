@@ -13,14 +13,17 @@ Text editor engine based on a CodeMirror instance
 "use strict";
 
 var CODEMIRROR_OPTIONS = "$:/config/CodeMirror",
-	HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height"
-
+HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height",
+CONFIG_FILTER = "[all[shadows+tiddlers]prefix[$:/config/codemirror/]]"
+	
 // Install CodeMirror
 if($tw.browser && !window.CodeMirror) {
+
+	var modules = $tw.modules.types["codemirror"];
+	var req = Object.getOwnPropertyNames(modules);
+
 	window.CodeMirror = require("$:/plugins/tiddlywiki/codemirror/lib/codemirror.js");
 	// Install required CodeMirror plugins
-	var configOptions = $tw.wiki.getTiddlerData(CODEMIRROR_OPTIONS,{}),
-		req = configOptions.require;
 	if(req) {
 		if($tw.utils.isArray(req)) {
 			for(var index=0; index<req.length; index++) {
@@ -32,7 +35,55 @@ if($tw.browser && !window.CodeMirror) {
 	}
 }
 
+function getCmConfig() {
+	var type,
+		test,
+		value,
+		element,
+		extend,
+		tiddler,
+		config = {},
+		configTiddlers = $tw.wiki.filterTiddlers(CONFIG_FILTER);
+
+	if ($tw.utils.isArray(configTiddlers)) {
+		for (var i=0; i<configTiddlers.length; i++) {
+			tiddler = $tw.wiki.getTiddler(configTiddlers[i]);
+				if (tiddler) {
+				element = configTiddlers[i].replace(/\$:\/config\/codemirror\//ig,"");
+					type = (tiddler.fields.type) ? tiddler.fields.type.trim().toLocaleLowerCase() : "string";
+				switch (type) {
+					case "bool":
+					test = tiddler.fields.text.trim().toLowerCase();
+					value = (test === "true") ? true : false;
+					config[element] = value;
+					break;
+					case "string":
+					value = tiddler.fields.text.trim();
+					config[element] = value;
+					break;
+					case "integer":
+					value = parseInt(tiddler.fields.text.trim(), 10);
+					config[element] = value;
+					break;
+					case "json":
+					value = JSON.parse(tiddler.fields.text.trim());
+						extend = (tiddler.fields.extend) ? tiddler.fields.extend : element;
+
+					if (config[extend]) {
+						$tw.utils.extend(config[extend], value);
+					} else {
+						config[extend] = value;
+					}
+					break;
+				}
+			}
+		}
+	}
+	return config;
+}
+
 function CodeMirrorEngine(options) {
+
 	// Save our options
 	var self = this;
 	options = options || {};
@@ -48,14 +99,11 @@ function CodeMirrorEngine(options) {
 	this.domNode.style.display = "inline-block";
 	this.parentNode.insertBefore(this.domNode,this.nextSibling);
 	this.widget.domNodes.push(this.domNode);
+	
+	// Set all cm-plugin defaults
 	// Get the configuration options for the CodeMirror object
-	var config = $tw.wiki.getTiddlerData(CODEMIRROR_OPTIONS,{}).configuration || {};
-	if(!("lineWrapping" in config)) {
-		config.lineWrapping = true;
-	}
-	if(!("lineNumbers" in config)) {
-		config.lineNumbers = true;
-	}
+	var config = getCmConfig();
+
 	config.mode = options.type;
 	config.value = options.value;
 	// Create the CodeMirror instance
@@ -63,6 +111,7 @@ function CodeMirrorEngine(options) {
 		// Note that this is a synchronous callback that is called before the constructor returns
 		self.domNode.appendChild(cmDomNode);
 	},config);
+
 	// Set up a change event handler
 	this.cm.on("change",function() {
 		self.widget.saveChanges(self.getText());
@@ -80,7 +129,8 @@ function CodeMirrorEngine(options) {
 Set the text of the engine if it doesn't currently have focus
 */
 CodeMirrorEngine.prototype.setText = function(text,type) {
-	this.cm.setOption("mode",type);
+	var self = this;
+	self.cm.setOption("mode",type);
 	if(!this.cm.hasFocus()) {
 		this.cm.setValue(text);
 	}
@@ -121,7 +171,7 @@ CodeMirrorEngine.prototype.createTextOperation = function() {
 	var selections = this.cm.listSelections();
 	if(selections.length > 0) {
 		var anchorPos = this.cm.indexFromPos(selections[0].anchor),
-			headPos = this.cm.indexFromPos(selections[0].head);
+		headPos = this.cm.indexFromPos(selections[0].head);
 	}
 	var operation = {
 		text: this.cm.getValue(),
