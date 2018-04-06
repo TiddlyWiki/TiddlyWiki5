@@ -38,7 +38,9 @@ exports.makeDraggable = function(options) {
 			// Collect the tiddlers being dragged
 			var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
 				dragFilter = options.dragFilterFn && options.dragFilterFn(),
-				titles = dragTiddler ? [dragTiddler] : [];
+				titles = dragTiddler ? [dragTiddler] : [],
+			    	dragStartActions = options.dragStartActions,
+			    	dragEndActions = options.dragEndActions;
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
@@ -49,6 +51,10 @@ exports.makeDraggable = function(options) {
 				$tw.dragInProgress = domNode;
 				// Set the dragging class on the element being dragged
 				$tw.utils.addClass(event.target,"tc-dragging");
+				// Invoke drag-start actions if given
+				if(dragStartActions !== undefined && dragStartActions !== null) {
+					self.invokeActionString(dragStartActions,this,event,{actionTiddler: titleString});
+				}
 				// Create the drag image elements
 				dragImage = options.widget.document.createElement("div");
 				dragImage.className = "tc-tiddler-dragger";
@@ -101,6 +107,10 @@ exports.makeDraggable = function(options) {
 		{name: "dragend", handlerFunction: function(event) {
 			if(event.target === domNode) {
 				$tw.dragInProgress = null;
+				// Invoke drag-end actions if given
+				if(dragEndActions !== undefined && dragEndActions !== null) {
+					self.invokeActionString(dragEndActions,this,event,{actionTiddler: titleString});
+				}
 				// Remove the dragging class on the element being dragged
 				$tw.utils.removeClass(event.target,"tc-dragging");
 				// Delete the drag image element
