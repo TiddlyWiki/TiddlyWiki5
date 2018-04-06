@@ -52,6 +52,8 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 		domNode: domNode,
 		dragTiddlerFn: function() {return self.getAttribute("tiddler");},
 		dragFilterFn: function() {return self.getAttribute("filter");},
+		dragStartActions: self.dragStartActions,
+		dragEndActions: self.dragEndActions,
 		widget: this
 	});
 	// Insert the link into the DOM and render any children
@@ -67,6 +69,8 @@ DraggableWidget.prototype.execute = function() {
 	// Pick up our attributes
 	this.draggableTag = this.getAttribute("tag","div");
 	this.draggableClasses = this.getAttribute("class");
+	this.dragStartActions = this.getAttribute("startactions");
+	this.dragEndActions = this.getAttribute("endactions");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
