@@ -27,7 +27,7 @@ exports.makeDraggable = function(options) {
 		domNode = options.domNode;
 	// Make the dom node draggable (not necessary for anchor tags)
 	if((domNode.tagName || "").toLowerCase() !== "a") {
-		domNode.setAttribute("draggable","true");		
+		domNode.setAttribute("draggable","true");
 	}
 	// Add event handlers
 	$tw.utils.addEventListeners(domNode,[
@@ -42,7 +42,8 @@ exports.makeDraggable = function(options) {
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
-			var titleString = $tw.utils.stringifyList(titles);
+			var plainTitles = $tw.utils.stringifyList(titles),
+				titleString = dragModifiers(event, titles);
 			// Check that we've something to drag
 			if(titles.length > 0 && event.target === domNode) {
 				// Mark the drag in progress
@@ -75,17 +76,24 @@ exports.makeDraggable = function(options) {
 				}
 				// Set up the data transfer
 				if(dataTransfer.clearData) {
-					dataTransfer.clearData();					
+					dataTransfer.clearData();
 				}
-				var jsonData = [];
+				var jsonData = [],
+					plainTiddlerTitles = $tw.wiki.filterTiddlers(plainTitles);
+				// Add corresponding plain titles to array after each data entry
+				// I'd like to have this handled better
 				if(titles.length > 1) {
-					titles.forEach(function(title) {
+					titles.forEach(function(title,index) {
+						var plainJsonTitle = JSON.stringify({ "\p\l\a\i\n" : plainTiddlerTitles[index] });
 						jsonData.push(options.widget.wiki.getTiddlerAsJson(title));
+						jsonData.push(plainJsonTitle);
 					});
-					jsonData = "[" + jsonData.join(",") + "]";
 				} else {
-					jsonData = options.widget.wiki.getTiddlerAsJson(titles[0]);
+					var plainJsonTitle = JSON.stringify({ "\p\l\a\i\n" : plainTiddlerTitles[0] });
+					jsonData[0] = options.widget.wiki.getTiddlerAsJson(titles[0]);
+					jsonData.push(plainJsonTitle);
 				}
+				jsonData = "[" + jsonData.join(",") + "]";
 				// IE doesn't like these content types
 				if(!$tw.browser.isIE) {
 					dataTransfer.setData("text/vnd.tiddler",jsonData);
@@ -179,6 +187,57 @@ function parseJSONTiddlers(json,fallbackTitle) {
 		fields.title = fields.title || fallbackTitle;
 	});
 	return data;
+};
+
+function getTitleStringModified(dragAction,titleString,dragSettings) {
+	switch(dragAction) {
+		case "plain":
+			titleString = titleString ;
+			break;
+		case "transclude":
+			titleString = '{{' + titleString + '}}' ;
+			break;
+		case "user":
+			if (dragSettings !== undefined) {
+					var userPrefix = dragSettings.fields["prefix"] || '',
+					userSuffix = dragSettings.fields["suffix"] || '';
+				titleString = userPrefix + titleString + userSuffix ;
+			}
+			break;
+		case "link":
+			titleString = '[[' + titleString + ']]' ;
+			break;
+		default:
+			titleString = '[[' + titleString + ']]' ;
+	}
+	return titleString;
+};
+
+function dragModifiers(event,titleString) {
+	var dragSettings = $tw.wiki.getTiddler("$:/config/DragDefaults") ,
+		dragModifier = event.ctrlKey && !event.shiftKey ? "ctrl" : !event.ctrlKey && event.shiftKey ? "shift" : event.ctrlKey && event.shiftKey ? "ctrl-shift" : "link" ,
+		drag = [ "link", "plain", "transclude", "user" ] ;
+	if (dragSettings !== undefined) {
+		drag[0] = dragSettings.fields["normal"] !== undefined ? dragSettings.fields.normal : "link" ;
+		drag[1] = dragSettings.fields["ctrl"] !== undefined ? dragSettings.fields["ctrl"] : "plain" ;
+		drag[2] = dragSettings.fields["shift"] !== undefined ? dragSettings.fields["shift"] : "transclude" ;
+		drag[3] = dragSettings.fields["ctrl-shift"] !== undefined ? dragSettings.fields["ctrl-shift"] : "user" ;
+	}
+
+	switch(dragModifier) {
+		case "ctrl":
+			titleString.forEach(function(item,index) { titleString[index] = getTitleStringModified(drag[1],item,dragSettings); });
+			break;
+		case "shift":
+			titleString.forEach(function(item,index) { titleString[index] = getTitleStringModified(drag[2],item,dragSettings); });
+			break;
+		case "control-shift":
+			titleString.forEach(function(item,index) { titleString[index] = getTitleStringModified(drag[3],item,dragSettings); });
+			break;
+		default:
+			titleString.forEach(function(item,index) { titleString[index] = getTitleStringModified(drag[0],item,dragSettings); });
+		}
+		return titleString.join('');
 };
 
 })();

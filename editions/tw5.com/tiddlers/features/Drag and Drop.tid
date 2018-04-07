@@ -12,10 +12,13 @@ type: text/vnd.tiddlywiki
 Tiddler manipulation via drag and drop is supported by the core user interface in the following contexts:
 
 * Entries in the "Open" tab of the sidebar can be reordered by drag and drop; new tiddlers can be opened by dragging their titles into the list
-* Entries within a tag pill dropdown can be reordered by drag and drop; new tiddlers can be assigned the tag by dragging their titles into the list
+* Entries within a tag pill dropdown can be reordered by drag and drop
+* A tag can be assigned to tiddlers by dragging their titles into the dropdown list of a tag pill
 * Entries in the [[control panel|$:/ControlPanel]] "Appearance"/"Toolbars" tab can be reordered by drag and drop. (Less usefully, new entries can be added to the toolbars by dragging their titles into the list)
 
 All tiddler links are draggable by default. They can be dragged within a browser window for manipulating tiddlers, or dragged to a different browser window to initiate an [[import operation|Importing Tiddlers]]
+
+<<.from-version "5.1.16">> The behaviour of dragging links into input fields or textareas can be modified while dragging by using the [[keyboard modifier keys|Drag and Drop Modifier Keys]] Ctrl and Shift
 
 Tag pills are also draggable, and are equivalent to simultaneously dragging all of the individual tiddlers carrying the tag.
 

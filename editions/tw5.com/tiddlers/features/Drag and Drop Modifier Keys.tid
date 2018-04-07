@@ -1,0 +1,33 @@
+tags: Features
+title: Drag and Drop Modifier Keys
+type: text/vnd.tiddlywiki
+
+The result of dragging links into input fields or textareas can be modified holding one of these ''modifier keys'':
+
+* Ctrl
+* Shift
+
+The default behaviour for each modifier is this:
+
+* No modifier: the dragged title gets surrounded by `[[]]` and results in a ''link''
+* Ctrl: the dragged title results in the ''plain'' title without modifications
+* Shift: the dragged title gets surrounded by `{{}}` and results in a ''transclusion''
+* Ctrl+Shift: the dragged title gets surrounded by a user-defined prefix and suffix
+
+Configuration:
+
+>The tiddler $:/config/DragDefaults can be used to define a prefix and suffix that get added to the title being dragged
+
+>To do so, simply add a field "prefix" and a field "suffix" and define them in the input fields beneath
+
+<br>
+
+>The modifier keys can be assigned in a different order than the default by configuring them in $:/config/DragDefaults
+
+>For each modifier there's a reserved field that can hold the "action" assigned to the key
+
+|!Modifier |!Field name |!Values |h
+|No modifier |normal |`link` `plain` `transclude` or `user` |
+|Control |ctrl |`link` `plain` `transclude` or `user` |
+|Shift |shift |`link` `plain` `transclude` or `user` |
+|Control +  Shift |ctrl-shift |`link` `plain` `transclude` or `user` |
