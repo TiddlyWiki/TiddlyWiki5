@@ -11,7 +11,7 @@ Le serveur embarqué dans TiddlyWiki5 est très simple. Bien qu'il soit compatib
 
 Les arguments sont :
 
-* ''port'' - numéro de port sur lequel servir le contenu (défaut : "8080")
+* ''port'' - numéro de port sur lequel servir le contenu ; une valeur non-numérique sera interprétée comme un nom de variable d'environnement du système dont la valeur est le numéro de port (défaut : "8080")
 * ''tiddler-racine'' - le titre du tiddler à afficher à la racine de l'URL (défaut : "$:/core/save/all") 
 * ''type-du-rendu'' - le type avec lequel le contenu du tiddler racine doit être rendu (`text/plain` par défaut)
 * ''type-du-service'' - le type avec lequel le contenu du tiddler racine doit être servi (`text/html` par défaut)
@@ -34,4 +34,8 @@ Le nom d'utilisateur et le mot de passe peuvent être spécifiés sous forme de 
 --server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
 ```
 
-Si vous voulez faire tourner plusieurs serveurs TiddlyWiki en même temps sur la même machine, vous devrez leur assigner chacun un port différent.
+Si vous voulez faire tourner plusieurs serveurs TiddlyWiki en même temps sur la même machine, vous devrez leur assigner chacun un port différent. Il peut être utile d'utiliser une variable d'environnement pour passer le numéro de port au process Node.js. L'exemple suivant utilise une variable d'environnement appelée "MY_PORT_NUMBER" :
+
+```
+--server MY_PORT_NUMBER $:/core/save/all text/plain text/html MonNomUtilisateur m0tdepa55e
+```
