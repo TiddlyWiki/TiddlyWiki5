@@ -137,6 +137,8 @@ LineWidth/Caption: épaisseur du trait
 LineWidth/Hint: Choisit une épaisseur de trait pour le remplissage
 Link/Caption: lien
 Link/Hint: Crée un lien wikitext
+Linkify/Caption: wikilien
+Linkify/Hint: Encadre la sélection avec des crochets droits
 ListBullet/Caption: liste à puces
 ListBullet/Hint: Formate les lignes de la sélection comme une liste à puces
 ListNumber/Caption: liste numérotée
@@ -157,6 +159,8 @@ PreviewType/Caption: type de prévisualisation
 PreviewType/Hint: Choisit le type de prévisualisation
 Quote/Caption: citation
 Quote/Hint: Formate les lignes de la sélection comme une citation
+RotateLeft/Caption: pivoter vers la gauche
+RotateLeft/Hint: Fait pivoter l'image vers la gauche de 90 degrés
 Size/Caption: taille de l'image
 Size/Caption/Height: Hauteur :
 Size/Caption/Resize: Redimensionner l'image
@@ -173,5 +177,7 @@ Subscript/Caption: indice
 Subscript/Hint: Met en indice le texte sélectionné
 Superscript/Caption: exposant
 Superscript/Hint: Met en exposant le texte sélectionné
+Transcludify/Caption: transclusion
+Transcludify/Hint: Encadre la sélection avec des accolades
 Underline/Caption: souligné
 Underline/Hint: Souligne le texte sélectionné
