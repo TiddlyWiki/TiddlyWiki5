@@ -12,6 +12,7 @@ ConfirmOverwriteTiddler: Souhaitez-vous supplanter le tiddler « <$text text=<<t
 ConfirmEditShadowTiddler: Vous êtes sur le point d'éditer un ShadowTiddler. Toute modification supplantera la version par défaut du système, rendant les prochaines mises à jour non-triviales. Êtes-vous sûr(e) de vouloir éditer "<$text text=<<title>>/>"?
 Count: total 
 DefaultNewTiddlerTitle: Nouveau tiddler
+Diffs/CountMessage: <<diff-count>> différences
 DropMessage: Déposer ici (ou appuyer sur « escape » pour annuler)
 Encryption/Cancel: Annuler
 Encryption/ConfirmClearPassword: Souhaitez-vous supprimer ce mot de passe ? Si oui, ce wiki ne sera plus chiffré lors de la sauvegarde

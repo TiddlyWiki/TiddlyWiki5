@@ -13,6 +13,7 @@ Basics/Language/Prompt: Bonjour ! Langue active :
 Basics/NewJournal/Title/Prompt: Modèle pour les titres des tiddlers journaux
 Basics/NewJournal/Text/Prompt: Texte pour les nouveaux tiddlers journaux
 Basics/NewJournal/Tags/Prompt: Tags pour les nouveaux tiddlers journaux
+Basics/NewTiddler/Title/Prompt: Modèle pour les titres des nouveaux tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Nombre de tiddlers //shadow// modifiés
 Basics/ShadowTiddlers/Prompt: Nombre de tiddlers //shadow//
 Basics/Subtitle/Prompt: Sous-titre
@@ -138,6 +139,8 @@ Settings/ToolbarButtons/Icons/Description: Afficher l'icône
 Settings/ToolbarButtons/Text/Description: Afficher le texte
 Settings/DefaultSidebarTab/Caption: Onglet par défaut sur la barre latérale
 Settings/DefaultSidebarTab/Hint: Indique l'onglet de la barre latérale qui sera affiché par défaut
+Settings/DefaultMoreSidebarTab/Caption: Onglet par défaut sous le Plus de la barre latérale
+Settings/DefaultMoreSidebarTab/Hint: Indique quel onglet sera affiché par défaut sous le Plus de la barre latérale
 Settings/LinkToBehaviour/Caption: Comportement à l'ouverture du tiddler
 Settings/LinkToBehaviour/InsideRiver/Hint: Navigation depuis un emplacement //interne// au déroulé
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation depuis un emplacement //externe// au déroulé
