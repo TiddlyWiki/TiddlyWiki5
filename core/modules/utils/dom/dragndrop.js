@@ -39,7 +39,7 @@ exports.makeDraggable = function(options) {
 			var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
 				dragFilter = options.dragFilterFn && options.dragFilterFn(),
 				titles = dragTiddler ? [dragTiddler] : [],
-			    	dragStartActions = options.dragStartActions;
+			    	startActions = options.startActions;
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
@@ -51,8 +51,8 @@ exports.makeDraggable = function(options) {
 				// Set the dragging class on the element being dragged
 				$tw.utils.addClass(event.target,"tc-dragging");
 				// Invoke drag-start actions if given
-				if(dragStartActions !== undefined) {
-					options.widget.invokeActionString(dragStartActions,options.widget,event,{actionTiddler: titleString});
+				if(startActions !== undefined) {
+					options.widget.invokeActionString(startActions,options.widget,event,{actionTiddler: titleString});
 				}
 				// Create the drag image elements
 				dragImage = options.widget.document.createElement("div");
@@ -109,15 +109,15 @@ exports.makeDraggable = function(options) {
 				var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
 					dragFilter = options.dragFilterFn && options.dragFilterFn(),
 					titles = dragTiddler ? [dragTiddler] : [],
-			    		dragEndActions = options.dragEndActions;
+			    		endActions = options.endActions;
 				if(dragFilter) {
 					titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 				}
 				var titleString = $tw.utils.stringifyList(titles);
 				$tw.dragInProgress = null;
 				// Invoke drag-end actions if given
-				if(dragEndActions !== undefined) {
-					options.widget.invokeActionString(dragEndActions,options.widget,event,{actionTiddler: titleString});
+				if(endActions !== undefined) {
+					options.widget.invokeActionString(endActions,options.widget,event,{actionTiddler: titleString});
 				}
 				// Remove the dragging class on the element being dragged
 				$tw.utils.removeClass(event.target,"tc-dragging");
