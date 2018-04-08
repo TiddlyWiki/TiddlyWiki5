@@ -139,9 +139,9 @@ Settings/ToolbarButtons/Hint: Standard Toolbar Button Erscheinungsbild:
 Settings/ToolbarButtons/Icons/Description: Icon anzeigen
 Settings/ToolbarButtons/Text/Description: Text anzeigen
 Settings/DefaultSidebarTab/Caption: Standard Sidebar Tab
-Settings/DefaultSidebarTab/Hint: Definition, welcher Sidebar Tab standardmäßig aktiv ist.
-Settings/DefaultMoreSidebarTab/Caption: Standard "Mehr" Sidebar Tab
-Settings/DefaultMoreSidebarTab/Hint: Definition, welcher "Mehr" Sidebar Tab standardmäßig aktiv ist.
+Settings/DefaultSidebarTab/Hint: Definition, welcher "Sidebar Tab" standardmäßig aktiv ist.
+Settings/DefaultMoreSidebarTab/Caption: Standard "Mehr Sidebar Tab"
+Settings/DefaultMoreSidebarTab/Hint: Definition, welcher "Mehr Sidebar Tab" standardmäßig aktiv ist.
 Settings/LinkToBehaviour/Caption: Tiddler Öffnen
 Settings/LinkToBehaviour/InsideRiver/Hint: Navigation bei Klicks //innerhalb// der Story
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation bei Klicks //außerhalb// der Story
