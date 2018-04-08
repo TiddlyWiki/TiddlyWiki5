@@ -70,7 +70,7 @@ PutSaver.prototype.save = function(text, method, callback) {
 		callback: function(err, data, xhr) {
 			if(err) {
 				callback(err);
-			} if(xhr.status === 200 || xhr.status === 201) {
+			} else if(xhr.status === 200 || xhr.status === 201) {
 				self.etag = xhr.getResponseHeader("ETag");
 				callback(null); // success
 			} else if(xhr.status === 412) { // edit conflict
