@@ -98,14 +98,9 @@ Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia
 * [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/pull/3063]] macro evaluation by making parameters available as variables - see "Parameters as Variables" in [[Macro Definitions in WikiText]]
 * [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/pull/3052]] LinkWidget to allow better customisation of CSS classes
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3124]] new "value" suffix for the [[each Operator]]
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b4c7c59d5d1bc5282fcfed58abbf087b9f65b86c]] 'emptyMessage' parameter to list-links and list-tagged-draggable macros
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0d354fe57f7424c1751a5c0cf5fbf1203803f3c8]] new ''subtiddler'' attribute to the SetWidget
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/47cdf5513391742c3410bb80b36107ab17b0476d]] new [[subtiddlerfields Operator]] for extracting the fields from tiddlers within plugins
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3182]] ability to trigger actions on unchecking the CheckboxWidget
-
-!! Node.js Improvements
-
-* 
 
 !! Bug Fixes
 
