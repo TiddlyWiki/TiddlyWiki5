@@ -13,7 +13,7 @@ Basics/Language/Prompt: Hallo! Aktuelle Sprache:
 Basics/NewJournal/Title/Prompt: Titel des neuen Journal-Tiddlers:
 Basics/NewJournal/Text/Prompt: Text des neuen Journal-Tiddlers:
 Basics/NewJournal/Tags/Prompt: Tags des neuen Journal-Tiddlers:
-Basics/NewTiddler/Title/Prompt: Titel für neue Tiddler:
+Basics/NewTiddler/Title/Prompt: Titel des neuen Tiddlers:
 Basics/OverriddenShadowTiddlers/Prompt: Anzahl überschriebener Schatten-Tiddler:
 Basics/ShadowTiddlers/Prompt: Anzahl Schatten-Tiddler:
 Basics/Subtitle/Prompt: Untertitel:
@@ -140,8 +140,8 @@ Settings/ToolbarButtons/Icons/Description: Icon anzeigen
 Settings/ToolbarButtons/Text/Description: Text anzeigen
 Settings/DefaultSidebarTab/Caption: Standard Sidebar Tab
 Settings/DefaultSidebarTab/Hint: Definition, welcher Sidebar Tab standardmäßig aktiv ist.
-Settings/DefaultMoreSidebarTab/Caption: Standard More Sidebar Tab
-Settings/DefaultMoreSidebarTab/Hint: Definition, welcher More Sidebar Tab standardmäßig aktiv ist.
+Settings/DefaultMoreSidebarTab/Caption: Standard "Mehr" Sidebar Tab
+Settings/DefaultMoreSidebarTab/Hint: Definition, welcher "Mehr" Sidebar Tab standardmäßig aktiv ist.
 Settings/LinkToBehaviour/Caption: Tiddler Öffnen
 Settings/LinkToBehaviour/InsideRiver/Hint: Navigation bei Klicks //innerhalb// der Story
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation bei Klicks //außerhalb// der Story
@@ -158,6 +158,10 @@ Settings/MissingLinks/Hint: Aktiviere Links zu fehlenden Tiddlern. zB: Fehlender
 Settings/MissingLinks/Description: Aktiviere Links zu fehlenden Tiddlern.
 StoryView/Caption: Anzeige
 StoryView/Prompt: Ausgewählte Anzeige:
+Stylesheets/Caption: Stylesheets
+Stylesheets/Expand/Caption: Alle erweitern
+Stylesheets/Hint: Hier wird der "erweiterte" CSS Code dargestellt. Die Reihenfolge, kann in der "Tag-Liste" <<tag "$:/tags/Stylesheet">> mit "Drag & Drop" angepasst werden!
+Stylesheets/Restore/Caption: Alle zurücksetzen
 Theme/Caption: Theme
 Theme/Prompt: Ausgewähltes Theme:
 TiddlerFields/Caption: Tiddler Felder
