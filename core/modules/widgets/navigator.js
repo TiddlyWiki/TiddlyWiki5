@@ -394,6 +394,7 @@ console.log("Relinking '" + draftOf + "' to '" + draftTitle + "'");
 
 // Take a tiddler out of edit mode without saving the changes
 NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
+	event = $tw.hooks.invokeHook("th-cancelling-tiddler", event);
 	// Flip the specified tiddler from draft back to the original
 	var draftTitle = event.param || event.tiddlerTitle,
 		draftTiddler = this.wiki.getTiddler(draftTitle),
@@ -438,6 +439,7 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 //
 // If a draft of the target tiddler already exists then it is reused
 NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
+	event = $tw.hooks.invokeHook("th-new-tiddler", event);
 	// Get the story details
 	var storyList = this.getStoryList(),
 		templateTiddler, additionalFields, title, draftTitle, existingTiddler;
@@ -643,6 +645,7 @@ NavigatorWidget.prototype.handleUnfoldAllTiddlersEvent = function(event) {
 };
 
 NavigatorWidget.prototype.handleRenameTiddlerEvent = function(event) {
+	event = $tw.hooks.invokeHook("th-renaming-tiddler", event);
 	var paramObject = event.paramObject || {},
 		from = paramObject.from || event.tiddlerTitle,
 		to = paramObject.to;
