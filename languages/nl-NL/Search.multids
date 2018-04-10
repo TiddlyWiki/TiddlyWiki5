@@ -13,7 +13,7 @@ Shadows/Caption: Schaduwen
 Shadows/Hint: Zoek schaduwtiddlers
 Shadows/Matches: //<small><<resultCount>> resultaten</small>//
 Standard/Caption: Standaard
-Standard/Hint: Zoek standaard tiddlers
+Standard/Hint: Zoek (in) standaard tiddlers
 Standard/Matches: //<small><<resultCount>> resultaten</small>//
 System/Caption: Systeem
 System/Hint: Zoek systeemtiddlers
