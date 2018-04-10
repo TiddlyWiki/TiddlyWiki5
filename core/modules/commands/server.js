@@ -143,7 +143,7 @@ SimpleServer.prototype.requestHandler = function(request,response) {
 };
 	
 SimpleServer.prototype.listen = function(port,host) {
-	http.createServer(this.requestHandler.bind(this)).listen(port,host);
+	return http.createServer(this.requestHandler.bind(this)).listen(port,host);
 };
 
 var Command = function(params,commander,callback) {
@@ -302,13 +302,14 @@ Command.prototype.execute = function() {
 		password: password,
 		pathprefix: pathprefix
 	});
-	this.server.listen(port,host);
+	var nodeServer = this.server.listen(port,host);
 	$tw.utils.log("Serving on " + host + ":" + port,"brown/orange");
 	$tw.utils.log("(press ctrl-C to exit)","red");
 	// Warn if required plugins are missing
 	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
 		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
 	}
+	$tw.hooks.invokeHook('th-server-command-post-start', this.server, nodeServer);
 	return null;
 };
 
