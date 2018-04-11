@@ -4,7 +4,7 @@ tags: example-test [[How to apply custom styles]]
 title: Custom styles by data-tags
 type: text/vnd.tiddlywiki
 
-! data-tags
+! Attribute: data-tags
 
 <<.from-version "5.1.16">>
 
