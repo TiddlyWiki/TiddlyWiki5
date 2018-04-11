@@ -138,7 +138,7 @@ function checkVisibility() {
 	var elements = document.querySelectorAll(".tc-dynaview-set-tiddler-when-visible");
 	$tw.utils.each(elements,function(element) {
 		// Bail if we've already triggered this element
-		if(element.getAttribute("data-dynaview-has-triggered") === "true") {
+		if(element.getAttribute("data-dynaview-has-triggered") === "true" && element.getAttribute("data-dynaview-unset-tiddler") === undefined) {
 			return;
 		}
 		// Check if the element is visible
@@ -168,6 +168,13 @@ function checkVisibility() {
 				$tw.wiki.addTiddler(new $tw.Tiddler({title: tiddler, text: value}));
 			}
 			element.setAttribute("data-dynaview-has-triggered",true);
+		} else if (element.getAttribute("data-dynaview-unset-tiddler") !== undefined) {
+			var tiddler = element.getAttribute("data-dynaview-unset-tiddler"),
+				value = element.getAttribute("data-dynaview-unset-value") || "";
+			if(tiddler && $tw.wiki.getTiddlerText(tiddler) !== value) {
+				$tw.wiki.addTiddler(new $tw.Tiddler({title: tiddler, text: value}));
+			}
+			element.setAttribute("data-dynaview-has-triggered",false);
 		}
 	});
 }
