@@ -27,12 +27,14 @@ $index$
 \end
 
 <$reveal state="$:/state/dynaview-example/reveal-scroll/unset" type="nomatch" text="yes">
+
 !!!Same example, showing elements when they scroll into view and hiding elements when they scroll out of view:<br>
 <$button set="$:/state/dynaview-example/reveal-scroll/unset" setTo="yes">Change Example</$button>
 </$reveal>
 <$reveal state="$:/state/dynaview-example/reveal-scroll/unset" type="match" text="yes">
+
 !!!Same example, but only showing elements when they scroll into view:<br>
-<$button set="$:/state/dynaview-example/reveal-scroll/unset" setTo="yes">Change Example</$button>
+<$button set="$:/state/dynaview-example/reveal-scroll/unset" setTo="no">Change Example</$button>
 </$reveal>
 
 Visible: <$list filter="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16">
