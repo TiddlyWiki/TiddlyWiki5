@@ -138,7 +138,37 @@ function checkVisibility() {
 	var elements = document.querySelectorAll(".tc-dynaview-set-tiddler-when-visible");
 	$tw.utils.each(elements,function(element) {
 		// Bail if we've already triggered this element
-		if(element.getAttribute("data-dynaview-has-triggered") === "true" && element.getAttribute("data-dynaview-unset-tiddler") === undefined) {
+		if(element.getAttribute("data-dynaview-has-triggered") === "true") {
+			if(element.getAttribute("data-dynaview-unset-tiddler") !== undefined) {
+				// Check if the element is visible
+				var elementRect = element.getBoundingClientRect(),
+					viewportWidth = window.innerWidth || document.documentElement.clientWidth,
+					viewportHeight = window.innerHeight || document.documentElement.clientHeight,
+					viewportRect = {
+						left: 0,
+						right: viewportWidth,
+						top: 0,
+						bottom: viewportHeight
+					};
+				if(element.classList.contains("tc-dynaview-expand-viewport")) {
+					viewportRect.left -= viewportWidth;
+					viewportRect.right += viewportWidth;
+					viewportRect.top -= viewportHeight;
+					viewportRect.bottom += viewportHeight;
+				}
+				if(elementRect.left > viewportRect.right || 
+					elementRect.right < viewportRect.left || 
+					elementRect.top > viewportRect.bottom ||
+					elementRect.bottom < viewportRect.top) {
+					// Set the tiddler value
+					var tiddler = element.getAttribute("data-dynaview-unset-tiddler"),
+						value = element.getAttribute("data-dynaview-unset-value") || "";
+					if(tiddler && $tw.wiki.getTiddlerText(tiddler) !== value) {
+						$tw.wiki.addTiddler(new $tw.Tiddler({title: tiddler, text: value}));
+					}
+					element.setAttribute("data-dynaview-has-triggered",false);
+				}
+			}
 			return;
 		}
 		// Check if the element is visible
@@ -168,13 +198,6 @@ function checkVisibility() {
 				$tw.wiki.addTiddler(new $tw.Tiddler({title: tiddler, text: value}));
 			}
 			element.setAttribute("data-dynaview-has-triggered",true);
-		} else if (element.getAttribute("data-dynaview-unset-tiddler") !== undefined) {
-			var tiddler = element.getAttribute("data-dynaview-unset-tiddler"),
-				value = element.getAttribute("data-dynaview-unset-value") || "";
-			if(tiddler && $tw.wiki.getTiddlerText(tiddler) !== value) {
-				$tw.wiki.addTiddler(new $tw.Tiddler({title: tiddler, text: value}));
-			}
-			element.setAttribute("data-dynaview-has-triggered",false);
 		}
 	});
 }
