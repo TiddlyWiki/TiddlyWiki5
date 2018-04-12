@@ -139,7 +139,7 @@ function checkVisibility() {
 	$tw.utils.each(elements,function(element) {
 		// Bail if we've already triggered this element
 		if(element.getAttribute("data-dynaview-has-triggered") === "true") {
-			if(element.getAttribute("data-dynaview-unset-tiddler") !== undefined) {
+			if(element.getAttribute("data-dynaview-unset-tiddler") !== undefined && element.getAttribute("data-dynaview-unset-value") !== undefined) {
 				// Check if the element is visible
 				var elementRect = element.getBoundingClientRect(),
 					viewportWidth = window.innerWidth || document.documentElement.clientWidth,
