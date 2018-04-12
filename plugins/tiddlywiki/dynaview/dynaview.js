@@ -166,7 +166,7 @@ function checkVisibility() {
 					if(tiddler && $tw.wiki.getTiddlerText(tiddler) !== value) {
 						$tw.wiki.addTiddler(new $tw.Tiddler({title: tiddler, text: value}));
 					}
-					element.setAttribute("data-dynaview-has-triggered",false);
+					element.setAttribute("data-dynaview-has-triggered","false");
 				}
 			}
 			return;
@@ -197,7 +197,7 @@ function checkVisibility() {
 			if(tiddler && $tw.wiki.getTiddlerText(tiddler) !== value) {
 				$tw.wiki.addTiddler(new $tw.Tiddler({title: tiddler, text: value}));
 			}
-			element.setAttribute("data-dynaview-has-triggered",true);
+			element.setAttribute("data-dynaview-has-triggered","true");
 		}
 	});
 }
