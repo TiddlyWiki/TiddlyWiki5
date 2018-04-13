@@ -26,16 +26,9 @@ function getIsFilterOperators() {
 Export our filter function
 */
 exports.is = function(source,operator,options) {
-	// Dispatch to the correct isfilteroperator
-	var isFilterOperators = getIsFilterOperators();
-	if(operator.operand) {
-		var isFilterOperator = isFilterOperators[operator.operand];
-		if(isFilterOperator) {
-			return isFilterOperator(source,operator.prefix,options);
-		} else {
-			return [$tw.language.getString("Error/IsFilterOperator")];
-		}
-	} else {
+
+
+	if( !operator.operand) {
 		// Return all tiddlers if the operand is missing
 		var results = [];
 		source(function(tiddler,title) {
@@ -43,6 +36,31 @@ exports.is = function(source,operator,options) {
 		});
 		return results;
 	}
+
+	// Get our isfilteroperators
+	var isFilterOperators = getIsFilterOperators(),
+	    subops = operator.operand.split("+"),
+		filteredResults = {},
+		results = [];
+	for (var t=0; t<subops.length; t++) {
+		var subop = isFilterOperators[subops[t]];
+		if(subop) {
+			filteredResults[subops[t]] = subop(source,operator.prefix,options);
+		} else {
+			return [$tw.language.getString("Error/IsFilterOperator")];
+		}
+		
+	}
+	
+    source(function(tiddler,title) {
+        for (var t=0; t<subops.length; t++) {
+            if (filteredResults[subops[t]].indexOf(title) != -1){
+                results.push(title);
+                break;
+            }
+        }
+    });
+	return results;
 };
 
 })();
