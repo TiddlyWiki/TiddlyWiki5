@@ -79,7 +79,6 @@ TapWidget.prototype.render = function(parent,nextSibling) {
 	}
 
 	var tapElementIndex;
-	var isPoppedUp = this.tapPopup && this.isPoppedUp();
 
 	for(i=0; i < domNodeList.length; i++) {
 		tapElementIndex = i;
@@ -100,36 +99,17 @@ TapWidget.prototype.render = function(parent,nextSibling) {
 
 		hammer.on('usertap', function(e) {
 
-			if (self.tapPopup) {
-				self.triggerPopup(e);
-			}
-
 			if(self.tapActions) {
 				self.invokeActionString(self.tapActions,self,e);
 			}
 
-			if (self.tapPopup === undefined && self.parentWidget !== undefined && self.domNodes[0] !== undefined && self.domNodes[0].parentNode !== undefined) {
+			if (self.parentWidget !== undefined && self.domNodes[0] !== undefined && self.domNodes[0].parentNode !== undefined) {
 				self.parentWidget.refreshSelf();
 			}
 			return true; // Action was invoked
 		});
 	}
 };
-
-TapWidget.prototype.isPoppedUp = function() {
-	var tiddler = this.wiki.getTiddler(this.tapPopup);
-	var result = tiddler && tiddler.fields.text ? $tw.popup.readPopupState(tiddler.fields.text) : false;
-	return result;
-};
-
-TapWidget.prototype.triggerPopup = function(event) {
-	$tw.popup.triggerPopup({
-		domNode: this.domNodes[0],
-		title: this.tapPopup,
-		wiki: this.wiki
-	});
-};
-
 
 /*
 Compute the internal state of the widget
@@ -138,12 +118,11 @@ TapWidget.prototype.execute = function() {
 	this.tapTargets = this.getAttribute("targets");
 	this.tapCount = parseInt(this.getAttribute("taps","1"));
 	this.tapPointers = parseInt(this.getAttribute("pointers","1"));
-	this.tapThreshold = parseInt(this.getAttribute("threshold","2"));
-	this.tapPosThreshold = parseInt(this.getAttribute("posthreshold","10"));
+	this.tapThreshold = parseInt(this.getAttribute("threshold","100"));
+	this.tapPosThreshold = parseInt(this.getAttribute("posthreshold","200"));
 	this.tapTime = parseInt(this.getAttribute("time","250"));
 	this.tapInterval = parseInt(this.getAttribute("interval","300"));
 	this.tapActions = this.getAttribute("actions","");
-	this.tapPopup = this.getAttribute("popup");
 	this.makeChildWidgets();
 };
 
