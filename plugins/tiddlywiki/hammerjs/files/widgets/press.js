@@ -1,9 +1,9 @@
 /*\
-title: $:/plugins/tiddlywiki/hammerjs/widgets/press
+title: $:/plugins/tiddlywiki/hammerjs/widgets/press.js
 type: application/javascript
 module-type: widget
 
-enable actions triggered on press
+actions triggered on press gestures
 
 \*/
 (function (global) {

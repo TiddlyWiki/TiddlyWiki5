@@ -29,6 +29,14 @@
 		    "title": "$:/plugins/tiddlywiki/hammerjs/widgets/press.js",
 		    "module-type": "widget"
       }
+    },{
+		  "file": "widgets/tap.js",
+		  "fields": {
+		    "type": "application/javascript",
+		    "title": "$:/plugins/tiddlywiki/hammerjs/widgets/tap.js",
+		    "module-type": "widget"
+      }
     }
+
 	]
 }
