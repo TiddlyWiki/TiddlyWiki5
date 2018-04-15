@@ -15,6 +15,13 @@
 				"type": "text/plain",
 				"title": "$:/plugins/tiddlywiki/hammerjs/license"
 			}
-		}
+		},{
+		  "file": "widgets/swipe.js",
+		  "fields": {
+		    "type": "application/javascript",
+		    "title": "$:/plugins/tiddlywiki/hammerjs/widgets/swipe.js",
+		    "module-type": "widget"
+      }
+    }
 	]
 }
