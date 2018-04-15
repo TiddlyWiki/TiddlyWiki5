@@ -165,5 +165,4 @@ SwipeWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.swipe = SwipeWidget;
-
-})(this);
+})();
