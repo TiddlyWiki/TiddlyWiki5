@@ -48,9 +48,9 @@ SwipeWidget.prototype.render = function(parent,nextSibling) {
 	}
 
 	// Return if no target elements specified
-  	if(this.swipeTargets === undefined || this.swipeTargets === "") {
-  		return false;
-  	}
+	if(this.swipeTargets === undefined || this.swipeTargets === "") {
+		return false;
+	}
 	
 	// Get the Elements with the specified class
 	var swipeElementClass;
@@ -73,14 +73,18 @@ SwipeWidget.prototype.render = function(parent,nextSibling) {
 			var swipeElements = parentDomNode.getElementsByClassName(swipeElementClass[i]);
 			for (var k=0; k < swipeElements.length; k++) {
 				domNodeList[i + k] = swipeElements[k];
+				self.domNodes.push(swipeElements[k]);
 			}
 		}
 	} else {
 		domNodeList = parentDomNode.getElementsByClassName(swipeElementClass);
+		self.domNodes.push(domNodeList);
 	}
 
 	// Create the swipe direction used by Hammer
 	var swipeDirection = 'swipe' + this.swipeDirection;
+	// Handle a popup state tiddler
+	var isPoppedUp = this.swipePopup && this.isPoppedUp();
 
 	// Create a new Hammer instance for each found dom node
 	var swipeElementIndex;
@@ -104,16 +108,34 @@ SwipeWidget.prototype.render = function(parent,nextSibling) {
 			e.preventDefault && e.preventDefault();
 			e.stopPropagation && e.stopPropagation();
 
+			if (self.swipePopup) {
+				self.triggerPopup(e);
+			}
+
 			if(self.swipeActions) {
 				self.invokeActionString(self.swipeActions,self,e);
 			}
 
-			if(self.parentWidget !== undefined) {
+			if(self.swipePopup === undefined && self.parentWidget !== undefined && self.domNodes[0] !== undefined && self.domNodes[0].parentNode !== undefined) {
 				self.parentWidget.refreshSelf();
 			}
 			return true; // Action was invoked
 		});
 	}
+};
+
+SwipeWidget.prototype.isPoppedUp = function() {
+	var tiddler = this.wiki.getTiddler(this.swipePopup);
+	var result = tiddler && tiddler.fields.text ? $tw.popup.readPopupState(tiddler.fields.text) : false;
+	return result;
+};
+
+SwipeWidget.prototype.triggerPopup = function(event) {
+	$tw.popup.triggerPopup({
+		domNode: this.domNodes[0],
+		title: this.swipePopup,
+		wiki: this.wiki
+	});
 };
 
 /*
@@ -126,6 +148,7 @@ SwipeWidget.prototype.execute = function() {
 	this.swipeDirection = this.getAttribute("direction","");
 	this.swipePointers = parseInt(this.getAttribute("pointers","1"));
 	this.swipeThreshold = parseInt(this.getAttribute("threshold","0"));
+	this.swipePopup = this.getAttribute("popup");
 	this.makeChildWidgets();
 };
 
