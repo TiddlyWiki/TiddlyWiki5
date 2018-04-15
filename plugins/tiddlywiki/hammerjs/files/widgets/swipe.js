@@ -144,7 +144,7 @@ Compute the internal state of the widget
 SwipeWidget.prototype.execute = function() {
 	this.swipeTargets = this.getAttribute("targets");
 	this.swipeActions = this.getAttribute("actions","");
-	this.swipeVelocity = parseFloat(this.getAttribute("velocity")) || 1.0;
+	this.swipeVelocity = parseFloat(this.getAttribute("velocity", "0.1"));
 	this.swipeDirection = this.getAttribute("direction","");
 	this.swipePointers = parseInt(this.getAttribute("pointers","1"));
 	this.swipeThreshold = parseInt(this.getAttribute("threshold","0"));
