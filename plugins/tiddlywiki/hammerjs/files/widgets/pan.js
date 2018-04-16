@@ -1,9 +1,9 @@
 /*\
-title: $:/plugins/BTC/tiddly-touch/widgets/pan.js
+title: $:/plugins/tiddlywiki/hammerjs/widgets/pan.js
 type: application/javascript
 module-type: widget
 
-enable actions triggered on panning
+actions triggered on pan gestures + event coordinates
 
 \*/
 (function (global) {
