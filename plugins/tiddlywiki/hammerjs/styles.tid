@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/hammerjs/styles
+tags: $:/tags/Stylesheet
+
+<$list filter="[[$:/state/dragging]!is[missing]]">
+
+iframe {
+	pointer-events: none;
+}
+
+</$list>

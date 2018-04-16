@@ -36,6 +36,13 @@
 		    "title": "$:/plugins/tiddlywiki/hammerjs/widgets/tap.js",
 		    "module-type": "widget"
       }
+    },{
+		  "file": "widgets/pan.js",
+		  "fields": {
+		    "type": "application/javascript",
+		    "title": "$:/plugins/tiddlywiki/hammerjs/widgets/pan.js",
+		    "module-type": "widget"
+      }
     }
 
 	]
