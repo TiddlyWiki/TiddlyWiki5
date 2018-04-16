@@ -37,9 +37,17 @@ PinchWidget.prototype.render = function(parent,nextSibling) {
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
-	this.renderChildren(parent,nextSibling);
 
-	if(this.pinchTargets === undefined) {
+	if(self === this && parent !== undefined && nextSibling !== undefined) {
+		self.renderChildren(parent,nextSibling);
+	} else if (self === this) {
+		self.refresh();
+		parentDomNode = parent;
+	} else {
+		return false;
+	}
+
+	if(this.pinchTargets === undefined || this.pinchTargets === "") {
 		return false;
 	}
 
@@ -48,12 +56,12 @@ PinchWidget.prototype.render = function(parent,nextSibling) {
 
 	if(this.pinchTargets.indexOf(' ') !== -1) {
 		pinchMultipleClasses = true;
-		pinchElementClass = this.pinchTargets.split(' ');
+		pinchElementClass = self.pinchTargets.split(' ');
 	} else {
-		pinchElementClass = this.pinchTargets;
+		pinchElementClass = self.pinchTargets;
 	}
 
-	if(pinchElementClass === undefined || pinchElementClass === "") {
+	if(pinchElementClass === undefined || pinchElementClass === "" || parentDomNode === undefined) {
 		return false;
 	}
 
@@ -159,7 +167,7 @@ PinchWidget.prototype.setField = function(tiddler,field,value) {
 Compute the internal state of the widget
 */
 PinchWidget.prototype.execute = function() {
-	this.pinchTargets = this.getAttribute("targets");
+	this.pinchTargets = this.getAttribute("targets","");
 	this.userToFixed = parseInt(this.getAttribute("decimals","0"));
 	this.pinchThreshold = parseInt(this.getAttribute("threshold","0"));
 	this.pinchStateTiddler = this.getAttribute("statetiddler","$:/state/pinch");
