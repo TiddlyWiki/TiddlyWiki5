@@ -194,8 +194,8 @@ PanWidget.prototype.render = function(parent,nextSibling) {
 				} else {
 					self.setField(self.panStateTiddler,'delta-x-' + elementIndex,e.deltaX.toFixed(self.userToFixed));
 					self.setField(self.panStateTiddler,'delta-y-' + elementIndex,e.deltaY.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'center-x-' + elementIndex,e.center.x.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'center-y-' + elementIndex,e.center.y.toFixed(self.userToFixed));
+					self.setField(self.panStateTiddler,'relative-x-' + elementIndex,e.center.x.toFixed(self.userToFixed));
+					self.setField(self.panStateTiddler,'relative-y-' + elementIndex,e.center.y.toFixed(self.userToFixed));
 					self.setField(self.panStateTiddler,'absolute-x-' + elementIndex,elementAbsoluteLeft);
 					self.setField(self.panStateTiddler,'absolute-y-' + elementIndex,elementAbsoluteTop);
 				}
