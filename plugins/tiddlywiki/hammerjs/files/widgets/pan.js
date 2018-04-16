@@ -45,39 +45,39 @@ PanWidget.prototype.render = function(parent,nextSibling) {
 		parentDomNode = parent;
 	} else {
 		if(self.parentWidget !== undefined) {
-		self.parentWidget.refreshSelf();
+			self.parentWidget.refreshSelf();
 		}
 	}
 
-	if(this.elementClasses === undefined) {
+	if(this.panTargets === undefined) {
 		return false;
 	}
 
-	var elementClass;
-	var multipleClasses = null;
+	var panElementClass;
+	var panMultipleClasses = null;
 
-	if(this.elementClasses.indexOf(' ') !== -1) {
-		multipleClasses = true;
-		elementClass = self.elementClasses.split(' ');
+	if(this.panTargets.indexOf(' ') !== -1) {
+		panMultipleClasses = true;
+		panElementClass = self.panTargets.split(' ');
 	} else {
-		elementClass = self.elementClasses;
+		panElementClass = self.panTargets;
 	}
 
-	if(elementClass === undefined || elementClass === null || elementClass === "" || parentDomNode === undefined || parentDomNode === undefined) {
+	if(panElementClass === undefined || panElementClass === "" || parentDomNode === undefined) {
 		return false;
 	}
 
 	var domNodeList = [];
 
-	if (multipleClasses === true) {
+	if (panMultipleClasses === true) {
 		for (var i=0; i < elementClass.length; i++) {
-			var classElements = parentDomNode.getElementsByClassName(elementClass[i]);
-			for (var k=0; k < classElements.length; k++) {
-				domNodeList[i + k] = classElements[k];
+			var panElements = parentDomNode.getElementsByClassName(panElementClass[i]);
+			for (var k=0; k < panElements.length; k++) {
+				domNodeList[i + k] = panElements[k];
 			}
 		}
 	} else {
-		domNodeList = parentDomNode.getElementsByClassName(elementClass);
+		domNodeList = parentDomNode.getElementsByClassName(panElementClass);
 	}
 
 	var elementIndex;
@@ -247,7 +247,7 @@ PanWidget.prototype.setField = function(tiddler,field,value) {
 Compute the internal state of the widget
 */
 PanWidget.prototype.execute = function() {
-	this.elementClasses = this.getAttribute("targets", "");
+	this.panTargets = this.getAttribute("targets", "");
 	this.panStateTiddler = this.getAttribute("state","$:/state/pan");
 	this.panPointers = parseInt(this.getAttribute("pointers","1"));
 	this.panThreshold = parseInt(this.getAttribute("threshold","0"));
