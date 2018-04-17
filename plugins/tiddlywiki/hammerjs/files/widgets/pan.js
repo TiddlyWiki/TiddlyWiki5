@@ -115,13 +115,19 @@ PanWidget.prototype.render = function(parent,nextSibling) {
 		var singleElement = null;
 		var pointerType = null;
 		var domNodeRect = null;
+		var parentDomNodeRect = null;
 		var elementAbsoluteTop = null;
 		var elementAbsoluteLeft = null;
-		var fieldStartNames = [ 'starting-x', 'starting-y', 'element-top', 'element-left', 'element-bottom', 'element-right', 'element-width', 'element-height', 'pointer-type' ];
+		var fieldStartNames = [ 'starting-x', 'starting-y', 'element-top', 'element-left', 'element-bottom', 'element-right', 'element-width', 'element-height', 'pointer-type', 'parent-x', 'parent-y' ];
 
 		hammer.on('touchmove panstart panmove', function(e) {
 			// Set a "dragging" state tiddler - gets deleted when panning ends
 			$tw.wiki.setText("$:/state/dragging","text",undefined,"yes",null);
+
+			// Get the coordinates of the parent Dom Node
+			if (parentDomNodeRect === null && parentDomNode !== undefined && parentDomNode.parentElement !== undefined) {
+				parentDomNodeRect = parentDomNode.parentElement.getBoundingClientRect();
+			}
 
 			// Get the current coordinates of the element
 			if (domNodeRect === null) {
@@ -150,6 +156,8 @@ PanWidget.prototype.render = function(parent,nextSibling) {
 				panStartValues[6] = domNodeRect.width.toFixed(self.userToFixed);
 				panStartValues[7] = domNodeRect.height.toFixed(self.userToFixed);
 				panStartValues[8] = e.pointerType;
+				panStartValues[9] = parentDomNodeRect.left.toFixed(self.userToFixed) || "undefined";
+				panStartValues[10] = parentDomNodeRect.top.toFixed(self.userToFixed) || "undefined";
 
 				for(var t = 0; t<panStartValues.length; t++){
 					if(domNodeList.length === 1) {
@@ -218,6 +226,7 @@ PanWidget.prototype.render = function(parent,nextSibling) {
 			singleElement = null;
 			pointerType = null;
 			domNodeRect = null;
+			parentDomNodeRect = null;
 			panStartValues = [];
 
 			if(self.panEndActions) {
