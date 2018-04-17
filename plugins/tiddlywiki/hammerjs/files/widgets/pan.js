@@ -121,6 +121,10 @@ PanWidget.prototype.render = function(parent,nextSibling) {
 		var fieldStartNames = [ 'starting-x', 'starting-y', 'element-top', 'element-left', 'element-bottom', 'element-right', 'element-width', 'element-height', 'pointer-type', 'parent-x', 'parent-y' ];
 
 		hammer.on('touchmove panstart panmove', function(e) {
+			// Prevent default behaviour
+			e.preventDefault && e.preventDefault();
+			e.stopPropagation && e.stopPropagation();
+			
 			// Set a "dragging" state tiddler - gets deleted when panning ends
 			$tw.wiki.setText("$:/state/dragging","text",undefined,"yes",null);
 
