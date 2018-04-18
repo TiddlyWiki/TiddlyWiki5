@@ -38,15 +38,20 @@ PressWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	
-	if(self === this && parent !== undefined && nextSibling !== undefined ) {
+	if (self === this && parent !== undefined && nextSibling !== undefined && nextSibling !== null && this.children !== undefined) {
 		self.renderChildren(parent,nextSibling);
-	} else if(self === this) {
+	} else if (self === this && parent !== undefined && nextSibling !== undefined && nextSibling !== null) {
 		self.refresh();
 		parentDomNode = parent;
 	} else {
-		return false;
+		if(self.parentWidget !== undefined) {
+			self.parentWidget.refreshSelf();
+			parentDomNode = parent;
+		} else {
+			return false;
+		}
 	}
-	
+
 	if(this.pressTargets === undefined || this.pressTargets === "") {
 		return false;
 	}

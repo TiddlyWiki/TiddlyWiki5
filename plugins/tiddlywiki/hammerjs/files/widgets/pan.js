@@ -38,7 +38,7 @@ PanWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 
-	if (self === this && parent !== undefined && nextSibling !== undefined && this.children !== undefined) {
+	if (self === this && parent !== undefined && nextSibling !== undefined && nextSibling !== null && this.children !== undefined) {
 		self.renderChildren(parent,nextSibling);
 	} else if (self === this && parent !== undefined && nextSibling !== undefined && nextSibling !== null) {
 		self.refresh();
