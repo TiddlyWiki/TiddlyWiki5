@@ -15,6 +15,41 @@
 				"type": "text/plain",
 				"title": "$:/plugins/tiddlywiki/hammerjs/license"
 			}
-		}
+		},{
+		  "file": "widgets/swipe.js",
+		  "fields": {
+		    "type": "application/javascript",
+		    "title": "$:/plugins/tiddlywiki/hammerjs/widgets/swipe.js",
+		    "module-type": "widget"
+      }
+    },{
+		  "file": "widgets/press.js",
+		  "fields": {
+		    "type": "application/javascript",
+		    "title": "$:/plugins/tiddlywiki/hammerjs/widgets/press.js",
+		    "module-type": "widget"
+      }
+    },{
+		  "file": "widgets/tap.js",
+		  "fields": {
+		    "type": "application/javascript",
+		    "title": "$:/plugins/tiddlywiki/hammerjs/widgets/tap.js",
+		    "module-type": "widget"
+      }
+    },{
+		  "file": "widgets/pan.js",
+		  "fields": {
+		    "type": "application/javascript",
+		    "title": "$:/plugins/tiddlywiki/hammerjs/widgets/pan.js",
+		    "module-type": "widget"
+      }
+    },{
+		  "file": "widgets/pinch.js",
+		  "fields": {
+		    "type": "application/javascript",
+		    "title": "$:/plugins/tiddlywiki/hammerjs/widgets/pinch.js",
+		    "module-type": "widget"
+      }
+    }
 	]
 }
