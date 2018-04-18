@@ -3,5 +3,5 @@
 	"description": "HammerJS library by Jorik Tangelder (Eight Media)",
 	"author": "JeremyRuston",
 	"core-version": ">=5.0.0",
-	"list": "readme usage license"
+	"list": "readme license"
 }
