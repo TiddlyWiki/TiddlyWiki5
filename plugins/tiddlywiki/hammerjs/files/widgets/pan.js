@@ -33,23 +33,26 @@ Render this widget into the DOM
 PanWidget.prototype.render = function(parent,nextSibling) {
 	var self = this;
 	var parentDomNode = parent;
-  
+
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
-	
-	if (self === this && parent !== undefined && nextSibling !== undefined ) {
+
+	if (self === this && parent !== undefined && nextSibling !== undefined && this.children !== undefined) {
 		self.renderChildren(parent,nextSibling);
-	} else if (self === this) {
+	} else if (self === this && parent !== undefined && nextSibling !== undefined && nextSibling !== null) {
 		self.refresh();
 		parentDomNode = parent;
 	} else {
 		if(self.parentWidget !== undefined) {
 			self.parentWidget.refreshSelf();
+			parentDomNode = parent;
+		} else {
+			return false;
 		}
 	}
 
-	if(this.panTargets === undefined) {
+	if(this.panTargets === undefined || this.panTargets === "") {
 		return false;
 	}
 
@@ -275,9 +278,10 @@ PanWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 PanWidget.prototype.refresh = function(changedTiddlers) {
+	var self = this;
 	var changedAttributes = this.computeAttributes();
 	if(Object.keys(changedAttributes).length) {
-		this.refreshSelf();
+		self.refreshSelf();
 		return true;
 	}
 	return this.refreshChildren(changedTiddlers);
