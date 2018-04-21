@@ -38,108 +38,80 @@ SwipeWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 
-	if (self === this && parent !== undefined && nextSibling !== undefined && nextSibling !== null && this.children !== undefined) {
-		self.renderChildren(parent,nextSibling);
-	} else if (self === this && parent !== undefined && nextSibling !== undefined && nextSibling !== null) {
-		self.refresh();
-		parentDomNode = parent;
-	} else {
-		if(self.parentWidget !== undefined) {
+	var swipeDomNode = this.document.createElement(this.swipeTag);
+	swipeDomNode.setAttribute("class",this.swipeClass);
+	parent.insertBefore(swipeDomNode,nextSibling);
+	this.domNodes.push(swipeDomNode);
+	this.renderChildren(swipeDomNode,null);
+
+	var hammer = new Hammer.Manager(swipeDomNode);
+
+	hammer.add(new Hammer.Swipe({
+		event: 'swipe',
+		pointers: self.swipePointers,
+		threshold: self.swipeThreshold,
+		velocity: self.swipeVelocity,
+		direction: Hammer.DIRECTION_ALL
+	}));
+
+	// Tell Hammer it should listen for the swipe event
+	hammer.get('swipe');
+
+	hammer.on("swiperight", function(e) {
+		e.preventDefault && e.preventDefault();
+		e.stopPropagation && e.stopPropagation();
+
+		if(self.swipeRightActions !== "") {
+			self.invokeActionString(self.swipeRightActions,self,e);
+		}
+
+		if(self.parentWidget !== undefined && self.domNodes[0] !== undefined && self.domNodes[0].parentNode !== undefined) {
 			self.parentWidget.refreshSelf();
-			parentDomNode = parent;
-		} else {
-			return false;
 		}
-	}
 
-	// Return if no target elements specified
-	if(this.swipeTargets === undefined || this.swipeTargets === "") {
-		return false;
-	}
-	
-	// Get the Elements with the specified class
-	var swipeElementClass;
-	var swipeMultipleClasses = null;
-	if(this.swipeTargets.indexOf(' ') !== -1) {
-		swipeMultipleClasses = true;
-		swipeElementClass = self.swipeTargets.split(' ');
-	} else {
-		swipeElementClass = self.swipeTargets;
-	}
+		return true; // Action was invoked
+	})
+	.on("swipeleft", function(e) {
+		e.preventDefault && e.preventDefault();
+		e.stopPropagation && e.stopPropagation();
 
-	if(swipeElementClass === undefined || swipeElementClass === "" || parentDomNode === undefined) {
-		return false;
-	}
-	
-	// If more than one element with the target class is found, store them in an array and cycle through that
-	var domNodeList = [];
-	if (swipeMultipleClasses === true) {
-		for (var i=0; i < swipeElementClass.length; i++) {
-			var swipeElements = parentDomNode.getElementsByClassName(swipeElementClass[i]);
-			for (var k=0; k < swipeElements.length; k++) {
-				domNodeList[i + k] = swipeElements[k];
-				self.domNodes.push(swipeElements[k]);
-			}
+		if(self.swipeLeftActions !== "") {
+			self.invokeActionString(self.swipeLeftActions,self,e);
 		}
-	} else {
-		domNodeList = parentDomNode.getElementsByClassName(swipeElementClass);
-		self.domNodes.push(domNodeList);
-	}
 
-	// Create the swipe direction used by Hammer
-	var swipeDirection = 'swipe' + this.swipeDirection;
-	// Handle a popup state tiddler
-	var isPoppedUp = this.swipePopup && this.isPoppedUp();
+		if(self.parentWidget !== undefined && self.domNodes[0] !== undefined && self.domNodes[0].parentNode !== undefined) {
+			self.parentWidget.refreshSelf();
+		}
 
-	// Create a new Hammer instance for each found dom node
-	var swipeElementIndex;
-	for(i=0; i < domNodeList.length; i++) {
-		swipeElementIndex = i;
+		return true; // Action was invoked
+	})
+	.on("swipeup", function(e) {
+		e.preventDefault && e.preventDefault();
+		e.stopPropagation && e.stopPropagation();
 
-		var hammer = new Hammer.Manager(domNodeList[i]);
+		if(self.swipeUpActions !== "") {
+			self.invokeActionString(self.swipeUpActions,self,e);
+		}
 
-		hammer.add(new Hammer.Swipe({
-			event: 'swipe',
-			pointers: self.swipePointers,
-			threshold: self.swipeThreshold,
-			velocity: self.swipeVelocity,
-			direction: Hammer.DIRECTION_ALL
-		}));
+		if(self.parentWidget !== undefined && self.domNodes[0] !== undefined && self.domNodes[0].parentNode !== undefined) {
+			self.parentWidget.refreshSelf();
+		}
 
-		// Tell Hammer it should listen for the swipe event
-		hammer.get('swipe');
+		return true; // Action was invoked
+	})
+	.on("swipedown", function(e) {
+		e.preventDefault && e.preventDefault();
+		e.stopPropagation && e.stopPropagation();
 
-		hammer.on(swipeDirection, function(e) {
-			e.preventDefault && e.preventDefault();
-			e.stopPropagation && e.stopPropagation();
+		if(self.swipeDownActions !== "") {
+			self.invokeActionString(self.swipeDownActions,self,e);
+		}
 
-			if (self.swipePopup) {
-				self.triggerPopup(e);
-			}
+		if(self.parentWidget !== undefined && self.domNodes[0] !== undefined && self.domNodes[0].parentNode !== undefined) {
+			self.parentWidget.refreshSelf();
+		}
 
-			if(self.swipeActions) {
-				self.invokeActionString(self.swipeActions,self,e);
-			}
-
-			if(self.swipePopup === undefined && self.parentWidget !== undefined && self.domNodes[0] !== undefined && self.domNodes[0].parentNode !== undefined) {
-				self.parentWidget.refreshSelf();
-			}
-			return true; // Action was invoked
-		});
-	}
-};
-
-SwipeWidget.prototype.isPoppedUp = function() {
-	var tiddler = this.wiki.getTiddler(this.swipePopup);
-	var result = tiddler && tiddler.fields.text ? $tw.popup.readPopupState(tiddler.fields.text) : false;
-	return result;
-};
-
-SwipeWidget.prototype.triggerPopup = function(event) {
-	$tw.popup.triggerPopup({
-		domNode: this.domNodes[0],
-		title: this.swipePopup,
-		wiki: this.wiki
+		return true; // Action was invoked
 	});
 };
 
@@ -147,13 +119,15 @@ SwipeWidget.prototype.triggerPopup = function(event) {
 Compute the internal state of the widget
 */
 SwipeWidget.prototype.execute = function() {
-	this.swipeTargets = this.getAttribute("targets");
-	this.swipeActions = this.getAttribute("actions","");
+	this.swipeClass = this.getAttribute("class", "tc-swipe-element");
+	this.swipeTag = this.getAttribute("tag", "div");
+	this.swipeLeftActions = this.getAttribute("leftactions","");
+	this.swipeUpActions = this.getAttribute("upactions","");
+	this.swipeRightActions = this.getAttribute("rightactions","");
+	this.swipeDownActions = this.getAttribute("downactions","");
 	this.swipeVelocity = parseFloat(this.getAttribute("velocity", "0.1"));
-	this.swipeDirection = this.getAttribute("direction","");
 	this.swipePointers = parseInt(this.getAttribute("pointers","1"));
 	this.swipeThreshold = parseInt(this.getAttribute("threshold","0"));
-	this.swipePopup = this.getAttribute("popup");
 	this.makeChildWidgets();
 };
 

@@ -38,89 +38,45 @@ TapWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	
-	if (self === this && parent !== undefined && nextSibling !== undefined && nextSibling !== null && this.children !== undefined) {
-		self.renderChildren(parent,nextSibling);
-	} else if (self === this && parent !== undefined && nextSibling !== undefined && nextSibling !== null) {
-		self.refresh();
-		parentDomNode = parent;
-	} else {
-		if(self.parentWidget !== undefined) {
+	var tapDomNode = this.document.createElement(this.tapTag);
+	tapDomNode.setAttribute("class",this.tapClass);
+	parent.insertBefore(tapDomNode,nextSibling);
+	this.domNodes.push(tapDomNode);
+	this.renderChildren(tapDomNode,null);
+
+	var hammer = new Hammer.Manager(tapDomNode);
+
+	hammer.add(new Hammer.Tap({
+		event: 'usertap',
+		pointers: self.tapPointers,
+		taps: self.tapCount,
+		interval: self.tapInterval,
+		time: self.tapTime,
+		threshold: self.tapThreshold,
+		posThreshold: self.tapPosThreshold
+	}));
+
+	hammer.get('usertap');
+
+	hammer.on('usertap', function(e) {
+
+		if(self.tapActions) {
+			self.invokeActionString(self.tapActions,self,e);
+		}
+
+		if (self.parentWidget !== undefined && self.domNodes[0] !== undefined && self.domNodes[0].parentNode !== undefined) {
 			self.parentWidget.refreshSelf();
-			parentDomNode = parent;
-		} else {
-			return false;
 		}
-	}
-
-	if(this.tapTargets === undefined || this.tapTargets === "") {
-		return false;
-	}
-
-	var tapElementClass;
-	var tapMultipleClasses = null;
-	if(this.tapTargets.indexOf(' ') !== -1) {
-		tapMultipleClasses = true;
-		tapElementClass = self.tapTargets.split(' ');
-	} else {
-		tapElementClass = self.tapTargets;
-	}
-
-	if(tapElementClass === undefined || tapElementClass === "" || parentDomNode === undefined) {
-		return false;
-	}
-
-	var domNodeList = [];
-	if (tapMultipleClasses === true) {
-		for (var i=0; i < tapElementClass.length; i++) {
-			var tapElements = parentDomNode.getElementsByClassName(tapElementClass[i]);
-			for (var k=0; k < tapElements.length; k++) {
-				domNodeList[i + k] = tapElements[k];
-				self.domNodes.push(tapElements[k]);
-			}
-		}
-	} else {
-		domNodeList = parentDomNode.getElementsByClassName(tapElementClass);
-		self.domNodes.push(domNodeList);
-	}
-
-	var tapElementIndex;
-
-	for(i=0; i < domNodeList.length; i++) {
-		tapElementIndex = i;
-
-		var hammer = new Hammer.Manager(domNodeList[i]);
-
-		hammer.add(new Hammer.Tap({
-			event: 'usertap',
-			pointers: self.tapPointers,
-			taps: self.tapCount,
-			interval: self.tapInterval,
-			time: self.tapTime,
-			threshold: self.tapThreshold,
-			posThreshold: self.tapPosThreshold
-		}));
-
-		hammer.get('usertap');
-
-		hammer.on('usertap', function(e) {
-
-			if(self.tapActions) {
-				self.invokeActionString(self.tapActions,self,e);
-			}
-
-			if (self.parentWidget !== undefined && self.domNodes[0] !== undefined && self.domNodes[0].parentNode !== undefined) {
-				self.parentWidget.refreshSelf();
-			}
-			return true; // Action was invoked
-		});
-	}
+		return true; // Action was invoked
+	});
 };
 
 /*
 Compute the internal state of the widget
 */
 TapWidget.prototype.execute = function() {
-	this.tapTargets = this.getAttribute("targets");
+	this.tapClass = this.getAttribute("class", "tc-tap-element");
+	this.tapTag = this.getAttribute("tag", "div");
 	this.tapCount = parseInt(this.getAttribute("taps","1"));
 	this.tapPointers = parseInt(this.getAttribute("pointers","1"));
 	this.tapThreshold = parseInt(this.getAttribute("threshold","100"));

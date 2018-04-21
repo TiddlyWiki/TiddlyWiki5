@@ -38,218 +38,144 @@ PanWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 
-	if (self === this && parent !== undefined && nextSibling !== undefined && nextSibling !== null && this.children !== undefined) {
-		self.renderChildren(parent,nextSibling);
-	} else if (self === this && parent !== undefined && nextSibling !== undefined && nextSibling !== null) {
-		self.refresh();
-		parentDomNode = parent;
-	} else {
-		if(self.parentWidget !== undefined) {
-			self.parentWidget.refreshSelf();
-			parentDomNode = parent;
-		} else {
-			return false;
-		}
-	}
+	var panDomNode = this.document.createElement(this.panTag);
+	panDomNode.setAttribute("class",this.panClass);
+	parent.insertBefore(panDomNode,nextSibling);
+	this.domNodes.push(panDomNode);
+	this.renderChildren(panDomNode,null);
 
-	if(this.panTargets === undefined || this.panTargets === "") {
-		return false;
-	}
-
-	var panElementClass;
-	var panMultipleClasses = null;
-
-	if(this.panTargets.indexOf(' ') !== -1) {
-		panMultipleClasses = true;
-		panElementClass = self.panTargets.split(' ');
-	} else {
-		panElementClass = self.panTargets;
-	}
-
-	if(panElementClass === undefined || panElementClass === "" || parentDomNode === undefined) {
-		return false;
-	}
-
-	var domNodeList = [];
-
-	if (panMultipleClasses === true) {
-		for (var i=0; i < elementClass.length; i++) {
-			var panElements = parentDomNode.getElementsByClassName(panElementClass[i]);
-			for (var k=0; k < panElements.length; k++) {
-				domNodeList[i + k] = panElements[k];
-			}
-		}
-	} else {
-		domNodeList = parentDomNode.getElementsByClassName(panElementClass);
-	}
-
-	var elementIndex;
 	var panStartValues = [];
 
-	for(i=0; i < domNodeList.length; i++) {
+	var hammer = new Hammer.Manager(panDomNode);
 
-		elementIndex = i;
+	hammer.add(new Hammer.Pan({
+		event: 'pan',
+		pointers: self.panPointers,
+		threshold: self.panThreshold,
+		direction: Hammer.DIRECTION_ALL
+	}));
 
-		var currentElement = domNodeList[i];
+	hammer.get('pan');
 
-		var hammer = new Hammer.Manager(domNodeList[i]);
-
-		hammer.add(new Hammer.Pan({
-			event: 'pan',
-			pointers: self.panPointers,
-			threshold: self.panThreshold,
-			direction: Hammer.DIRECTION_ALL
-		}));
-
-		hammer.get('pan');
-
-		var scrollLeft = null,
-			scrollTop = null;
+	var scrollLeft = null,
+		scrollTop = null;
 	
-		var startX = null;
-		var startY = null;
-		var elementTop = null;
-		var elementLeft = null;
-		var elementBottom = null;
-		var elementRight = null;
-		var elementWidth = null;
-		var elementHeight = null;
-		var startActions = null;
-		var singleElement = null;
-		var pointerType = null;
-		var domNodeRect = null;
-		var parentDomNodeRect = null;
-		var elementAbsoluteTop = null;
-		var elementAbsoluteLeft = null;
-		var fieldStartNames = [ 'starting-x', 'starting-y', 'element-top', 'element-left', 'element-bottom', 'element-right', 'element-width', 'element-height', 'pointer-type', 'parent-x', 'parent-y' ];
+	var startX = null;
+	var startY = null;
+	var elementTop = null;
+	var elementLeft = null;
+	var elementBottom = null;
+	var elementRight = null;
+	var elementWidth = null;
+	var elementHeight = null;
+	var startActions = null;
+	var singleElement = null;
+	var pointerType = null;
+	var domNodeRect = null;
+	var parentDomNodeRect = null;
+	var elementAbsoluteTop = null;
+	var elementAbsoluteLeft = null;
+	var fieldStartNames = [ 'starting-x', 'starting-y', 'element-top', 'element-left', 'element-bottom', 'element-right', 'element-width', 'element-height', 'pointer-type', 'parent-x', 'parent-y' ];
 
-		hammer.on('touchmove panstart panmove', function(e) {
-			// Prevent default behaviour
-			e.preventDefault && e.preventDefault();
-			e.stopPropagation && e.stopPropagation();
+	hammer.on('touchmove panstart panmove', function(e) {
+		// Prevent default behaviour
+		e.preventDefault && e.preventDefault();
+		e.stopPropagation && e.stopPropagation();
 			
-			// Set a "dragging" state tiddler - gets deleted when panning ends
-			$tw.wiki.setText("$:/state/dragging","text",undefined,"yes",null);
+		// Set a "dragging" state tiddler - gets deleted when panning ends
+		$tw.wiki.setText("$:/state/dragging","text",undefined,"yes",null);
 
-			// Get the coordinates of the parent Dom Node
-			if (parentDomNodeRect === null && parentDomNode !== undefined && parentDomNode.parentElement !== undefined) {
-				parentDomNodeRect = parentDomNode.parentElement.getBoundingClientRect();
+		// Get the coordinates of the parent Dom Node
+		if (parentDomNodeRect === null && parentDomNode !== undefined && parentDomNode.offsetParent !== undefined) {
+			parentDomNodeRect = parentDomNode.offsetParent.getBoundingClientRect();
+		}
+
+		// Get the current coordinates of the element
+		if (domNodeRect === null) {
+			domNodeRect = panDomNode.getBoundingClientRect();
+		}
+
+		if (self.panStartActions && startActions !== "done") {
+			self.invokeActionString(self.panStartActions,self,e);
+			startActions = "done";
+		}
+
+		// Absolute coordinates of the pointer
+		scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+		scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+		elementAbsoluteLeft = (e.center.x + scrollLeft).toFixed(self.userToFixed);
+		elementAbsoluteTop = (e.center.y + scrollTop).toFixed(self.userToFixed);
+
+		// Set values at pan-start only
+		if (panStartValues.length === 0) {
+			panStartValues[0] = e.center.x.toFixed(self.userToFixed);
+			panStartValues[1] = e.center.y.toFixed(self.userToFixed);
+			panStartValues[2] = domNodeRect.top.toFixed(self.userToFixed);
+			panStartValues[3] = domNodeRect.left.toFixed(self.userToFixed);
+			panStartValues[4] = domNodeRect.bottom.toFixed(self.userToFixed);
+			panStartValues[5] = domNodeRect.right.toFixed(self.userToFixed);
+			panStartValues[6] = domNodeRect.width.toFixed(self.userToFixed);
+			panStartValues[7] = domNodeRect.height.toFixed(self.userToFixed);
+			panStartValues[8] = e.pointerType;
+			panStartValues[9] = parentDomNodeRect.left.toFixed(self.userToFixed) || "undefined";
+			panStartValues[10] = parentDomNodeRect.top.toFixed(self.userToFixed) || "undefined";
+
+			for(var t = 0; t<panStartValues.length; t++){
+				self.setField(self.panStateTiddler,fieldStartNames[t],panStartValues[t]);
 			}
-
-			// Get the current coordinates of the element
-			if (domNodeRect === null) {
-				domNodeRect = currentElement.getBoundingClientRect();
-			}
-
-			if (self.panStartActions && startActions !== "done") {
-				self.invokeActionString(self.panStartActions,self,e);
-				startActions = "done";
-			}
-
-			// Absolute coordinates of the pointer
-			scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-			scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-			elementAbsoluteLeft = (e.center.x + scrollLeft).toFixed(self.userToFixed);
-			elementAbsoluteTop = (e.center.y + scrollTop).toFixed(self.userToFixed);
-
-			// Set values at pan-start only
-			if (panStartValues.length === 0) {
-				panStartValues[0] = e.center.x.toFixed(self.userToFixed);
-				panStartValues[1] = e.center.y.toFixed(self.userToFixed);
-				panStartValues[2] = domNodeRect.top.toFixed(self.userToFixed);
-				panStartValues[3] = domNodeRect.left.toFixed(self.userToFixed);
-				panStartValues[4] = domNodeRect.bottom.toFixed(self.userToFixed);
-				panStartValues[5] = domNodeRect.right.toFixed(self.userToFixed);
-				panStartValues[6] = domNodeRect.width.toFixed(self.userToFixed);
-				panStartValues[7] = domNodeRect.height.toFixed(self.userToFixed);
-				panStartValues[8] = e.pointerType;
-				panStartValues[9] = parentDomNodeRect.left.toFixed(self.userToFixed) || "undefined";
-				panStartValues[10] = parentDomNodeRect.top.toFixed(self.userToFixed) || "undefined";
-
-				for(var t = 0; t<panStartValues.length; t++){
-					if(domNodeList.length === 1) {
-						singleElement = true;
-						self.setField(self.panStateTiddler,fieldStartNames[t],panStartValues[t]);
-					} else {
-						var fieldName = fieldStartNames[t] + "-" + elementIndex;
-						self.setField(self.panStateTiddler,fieldName,panStartValues[t]); 
-					}
-				}
 				
-				if(singleElement === true) {
-					self.setField(self.panStateTiddler,'delta-x',e.deltaX.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'delta-y',e.deltaY.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'relative-x',e.center.x.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'relative-y',e.center.y.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'absolute-x',elementAbsoluteLeft);
-					self.setField(self.panStateTiddler,'absolute-y',elementAbsoluteTop);
-				} else {
-					self.setField(self.panStateTiddler,'delta-x-' + elementIndex,e.deltaX.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'delta-y-' + elementIndex,e.deltaY.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'relative-x-' + elementIndex,e.center.x.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'relative-y-' + elementIndex,e.center.y.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'absolute-x-' + elementIndex,elementAbsoluteLeft);
-					self.setField(self.panStateTiddler,'absolute-y-' + elementIndex,elementAbsoluteTop);
-				}
-			}
+			self.setField(self.panStateTiddler,'delta-x',e.deltaX.toFixed(self.userToFixed));
+			self.setField(self.panStateTiddler,'delta-y',e.deltaY.toFixed(self.userToFixed));
+			self.setField(self.panStateTiddler,'relative-x',e.center.x.toFixed(self.userToFixed));
+			self.setField(self.panStateTiddler,'relative-y',e.center.y.toFixed(self.userToFixed));
+			self.setField(self.panStateTiddler,'absolute-x',elementAbsoluteLeft);
+			self.setField(self.panStateTiddler,'absolute-y',elementAbsoluteTop);
 
-			function panWidgetTimeoutFunction(timestamp) {
-				// Invoke actions that should be repeated every cycle if specified
-				if(self.panRepeatActions) {
-					self.invokeActionString(self.panRepeatActions,self,e);
-				}
+		}
 
-				if(singleElement === true) {
-					self.setField(self.panStateTiddler,'delta-x',e.deltaX.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'delta-y',e.deltaY.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'relative-x',e.center.x.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'relative-y',e.center.y.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'absolute-x',elementAbsoluteLeft);
-					self.setField(self.panStateTiddler,'absolute-y',elementAbsoluteTop);
-				} else {
-					self.setField(self.panStateTiddler,'delta-x-' + elementIndex,e.deltaX.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'delta-y-' + elementIndex,e.deltaY.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'relative-x-' + elementIndex,e.center.x.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'relative-y-' + elementIndex,e.center.y.toFixed(self.userToFixed));
-					self.setField(self.panStateTiddler,'absolute-x-' + elementIndex,elementAbsoluteLeft);
-					self.setField(self.panStateTiddler,'absolute-y-' + elementIndex,elementAbsoluteTop);
-				}
-			};
-			window.requestAnimationFrame(panWidgetTimeoutFunction);
-		})
+		function panWidgetTimeoutFunction(timestamp) {
 
-		.on('panend pancancel touchend mouseup', function(e) {
-			startX = null;
-			startY = null;
-			scrollLeft = null;
-			scrollTop = null;
-			elementTop = null;
-			elementLeft = null;
-			elementBottom = null;
-			elementRight = null;
-			elementWidth = null;
-			elementHeight = null;
-			startActions = null;
-			singleElement = null;
-			pointerType = null;
-			domNodeRect = null;
-			parentDomNodeRect = null;
-			panStartValues = [];
+			self.setField(self.panStateTiddler,'delta-x',e.deltaX.toFixed(self.userToFixed));
+			self.setField(self.panStateTiddler,'delta-y',e.deltaY.toFixed(self.userToFixed));
+			self.setField(self.panStateTiddler,'relative-x',e.center.x.toFixed(self.userToFixed));
+			self.setField(self.panStateTiddler,'relative-y',e.center.y.toFixed(self.userToFixed));
+			self.setField(self.panStateTiddler,'absolute-x',elementAbsoluteLeft);
+			self.setField(self.panStateTiddler,'absolute-y',elementAbsoluteTop);
+		};
+		window.requestAnimationFrame(panWidgetTimeoutFunction);
+	})
 
-			if(self.panEndActions) {
-				self.invokeActionString(self.panEndActions,self,e);
-			}
+	.on('panend pancancel touchend mouseup', function(e) {
+		startX = null;
+		startY = null;
+		scrollLeft = null;
+		scrollTop = null;
+		elementTop = null;
+		elementLeft = null;
+		elementBottom = null;
+		elementRight = null;
+		elementWidth = null;
+		elementHeight = null;
+		startActions = null;
+		singleElement = null;
+		pointerType = null;
+		domNodeRect = null;
+		parentDomNodeRect = null;
+		panStartValues = [];
 
-			// Delete the "dragging" state tiddler
-			$tw.wiki.deleteTiddler("$:/state/dragging");		
+		if(self.panEndActions) {
+			self.invokeActionString(self.panEndActions,self,e);
+		}
+
+		// Delete the "dragging" state tiddler
+		$tw.wiki.deleteTiddler("$:/state/dragging");		
 			
-			if (self.parentWidget !== undefined) {
-				self.parentWidget.refreshSelf();
-			}
+		//if (self.parentWidget !== undefined) {
+		//	self.parentWidget.refreshSelf();
+		//}
 	  		
-	  		return true;
-	  	});
-	}
+  		return true;
+  	});
 };
   
 /*
@@ -263,13 +189,13 @@ PanWidget.prototype.setField = function(tiddler,field,value) {
 Compute the internal state of the widget
 */
 PanWidget.prototype.execute = function() {
-	this.panTargets = this.getAttribute("targets", "");
+	this.panClass = this.getAttribute("class", "tc-pan-element");
+	this.panTag = this.getAttribute("tag", "div");
 	this.panStateTiddler = this.getAttribute("state","$:/state/pan");
 	this.panPointers = parseInt(this.getAttribute("pointers","1"));
 	this.panThreshold = parseInt(this.getAttribute("threshold","0"));
 	this.userToFixed = parseInt(this.getAttribute("decimals","0"));
 	this.panStartActions = this.getAttribute("startactions","");
-	this.panRepeatActions = this.getAttribute("repeatactions","");
 	this.panEndActions = this.getAttribute("endactions","");
 	this.makeChildWidgets();
 };

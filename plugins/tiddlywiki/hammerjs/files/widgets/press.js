@@ -37,64 +37,17 @@ PressWidget.prototype.render = function(parent,nextSibling) {
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
-	
-	if (self === this && parent !== undefined && nextSibling !== undefined && nextSibling !== null && this.children !== undefined) {
-		self.renderChildren(parent,nextSibling);
-	} else if (self === this && parent !== undefined && nextSibling !== undefined && nextSibling !== null) {
-		self.refresh();
-		parentDomNode = parent;
-	} else {
-		if(self.parentWidget !== undefined) {
-			self.parentWidget.refreshSelf();
-			parentDomNode = parent;
-		} else {
-			return false;
-		}
-	}
 
-	if(this.pressTargets === undefined || this.pressTargets === "") {
-		return false;
-	}
+	var pressDomNode = this.document.createElement(this.pressTag);
+	pressDomNode.setAttribute("class",this.pressClass);
+	parent.insertBefore(pressDomNode,nextSibling);
+	this.domNodes.push(pressDomNode);
+	this.renderChildren(pressDomNode,null);
 
-	var pressElementClass;
-	var pressMultipleClasses = null;
-	if(this.pressTargets.indexOf(' ') !== -1) {
-		pressMultipleClasses = true;
-		pressElementClass = self.pressTargets.split(' ');
-	} else {
-		pressElementClass = self.pressTargets;
-	}
-	
-	if(pressElementClass === undefined || pressElementClass === "" || parentDomNode === undefined) {
-		return false; 
-	}
-
-	var domNodeList = [];
-	if (pressMultipleClasses === true) {
-		for (var i=0; i < pressElementClass.length;i++) {
-			var pressElements = parentDomNode.getElementsByClassName(pressElementClass[i]);
-			for (var k=0; k < pressElements.length; k++) {
-				domNodeList[i + k] = pressElements[k];
-				self.domNodes.push(pressElements[k]);
-			}
-		}
-	} else {
-		domNodeList = parentDomNode.getElementsByClassName(pressElementClass);
-		self.domNodes.push(domNodeList);
-	}
-
-	var isPoppedUp = this.pressPopup && this.isPoppedUp(),
-		pressElementIndex;
-	
-	for(i=0; i < domNodeList.length; i++) {
-
-	pressElementIndex = i;
-
-	var currentElement = domNodeList[i];
-	var hammer = new Hammer.Manager(domNodeList[i]);
+	var hammer = new Hammer.Manager(pressDomNode);
 
 	// Event Listener to cancel browser popup menu on long press
-	currentElement.addEventListener('contextmenu', function(e) {
+	pressDomNode.addEventListener('contextmenu', function(e) {
 		e.preventDefault && e.preventDefault();
 		e.stopPropagation && e.stopPropagation();
 		e.cancelBubble = true;
@@ -112,39 +65,22 @@ PressWidget.prototype.render = function(parent,nextSibling) {
 	hammer.get('press');
 	
 	hammer.on('press', function(e) {
-		if (self.pressPopup) {
-			self.triggerPopup(e);
-		}
+
 		if(self.pressStartActions) {
 			self.invokeActionString(self.pressStartActions,self,e);
 		}
 		return true;
 	})
-		.on('pressup', function(e) {
+	.on('pressup', function(e) {
 
-			if(self.pressEndActions) {
-				self.invokeActionString(self.pressEndActions,self,e);
-			}
+		if(self.pressEndActions) {
+			self.invokeActionString(self.pressEndActions,self,e);
+		}
 
-			if (self.pressPopup === undefined && self.parentWidget !== undefined && self.domNodes[0] !== undefined && self.domNodes[0].parentNode !== undefined) {
-				self.parentWidget.refreshSelf();
-			}
-			return true;
-		});
-	}
-};
-
-PressWidget.prototype.isPoppedUp = function() {
-	var tiddler = this.wiki.getTiddler(this.pressPopup);
-	var result = tiddler && tiddler.fields.text ? $tw.popup.readPopupState(tiddler.fields.text) : false;
-	return result;
-};
-
-PressWidget.prototype.triggerPopup = function(event) {
-	$tw.popup.triggerPopup({
-		domNode: this.domNodes[0],
-		title: this.pressPopup,
-		wiki: this.wiki
+		if (self.parentWidget !== undefined && self.domNodes[0] !== undefined && self.domNodes[0].parentNode !== undefined) {
+			self.parentWidget.refreshSelf();
+		}
+		return true;
 	});
 };
 
@@ -152,7 +88,8 @@ PressWidget.prototype.triggerPopup = function(event) {
 Compute the internal state of the widget
 */
 PressWidget.prototype.execute = function() {
-	this.pressTargets = this.getAttribute("targets");
+	this.pressClass = this.getAttribute("class", "tc-press-element");
+	this.pressTag = this.getAttribute("tag", "div");
 	this.pressPointers = parseInt(this.getAttribute("pointers","1"));
 	this.pressTime = parseInt(this.getAttribute("time","0"));
 	this.pressThreshold = parseInt(this.getAttribute("threshold","1000"));
