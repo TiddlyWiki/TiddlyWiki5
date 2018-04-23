@@ -104,6 +104,7 @@ Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/47cdf5513391742c3410bb80b36107ab17b0476d]] new [[subtiddlerfields Operator]] for extracting the fields from tiddlers within plugins
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3182]] ability to trigger actions on unchecking the CheckboxWidget
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2182]] support for a checked class to the RadioWidget
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/2982]] the [[is Operator]] to allow multiple types to be specified
 
 !! Bug Fixes
 
@@ -127,6 +128,9 @@ Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia
 ** [[Optimising the tag filter|https://github.com/Jermolene/TiddlyWiki5/commit/e4b10d42f9480c0505862a93f0b97d1c4270ed65]] - saving 50% on some tag operations
 ** [[Minor improvements to tiddler deletion|https://github.com/Jermolene/TiddlyWiki5/commit/358d4165260311446f2b433591762dd667250975]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2990]] support for custom boot paths
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3206]] new navigation hooks: `th-cancelling-tiddler`, `th-new-tiddler` and `th-renaming-tiddler`
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3024]] new hook when the HTTP server starts `th-server-command-post-start`
+
 
 ! Contributors
 
@@ -140,6 +144,7 @@ Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia
 * [[@furicle|https://github.com/furicle]]
 * [[@gernert|https://github.com/gernert]]
 * [[@ibnishak|https://github.com/ibnishak]]
+* [[@inmysock|https://github.com/inmysock]]
 * [[@Marxsal|https://github.com/Marxsal]]
 * [[@metebalci|https://github.com/metebalci]]
 * [[@mklauber|https://github.com/mklauber]]
