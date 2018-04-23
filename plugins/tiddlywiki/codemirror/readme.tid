@@ -15,4 +15,4 @@ Additional features can be installed with ~CodeMirror ~AddOns from the plugin li
 
 [[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/codemirror]]
 
-Based on ~CodeMirror version 5.36.0
+Based on ~CodeMirror version 5.37.0
