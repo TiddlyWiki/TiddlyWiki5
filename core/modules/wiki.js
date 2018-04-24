@@ -569,6 +569,8 @@ exports.sortByList = function(array,listTitle) {
 					afterTitle = tiddler.fields["list-after"];
 				if(beforeTitle === "") {
 					newPos = 0;
+				} else if(afterTitle === "") {
+					newPos = titles.length;
 				} else if(beforeTitle) {
 					newPos = titles.indexOf(beforeTitle);
 				} else if(afterTitle) {
