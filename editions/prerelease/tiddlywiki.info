@@ -14,7 +14,8 @@
 		"tiddlywiki/bibtex",
 		"tiddlywiki/savetrail",
 		"tiddlywiki/external-attachments",
-		"tiddlywiki/dynaview"
+		"tiddlywiki/dynaview",
+		"tiddlywiki/codemirror"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
