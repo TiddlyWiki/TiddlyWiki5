@@ -1,7 +1,8 @@
 created: 20150117152612000
-modified: 20150226162159000
-title: $:/editions/tw5.com/doc-styles
+modified: 201804111739
 tags: $:/tags/Stylesheet
+title: $:/editions/tw5.com/doc-styles
+type: text/vnd.tiddlywiki
 
 .doc-def {
 	font-style: normal;
@@ -176,10 +177,23 @@ tr.doc-table-subheading {
     vertical-align: text-bottom;
 }
 
+.doc-deprecated-version {
+    display: inline-block;
+    border-radius: 1em;
+	background: red;
+	color: <<colour background>>;
+	fill: <<colour background>>;
+    padding: 0 0.4em;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 1.5;
+    vertical-align: text-bottom;
+}
+
+.doc-deprecated-version svg,
 .doc-from-version svg {
 	width: 1em;
 	height: 1em;
     vertical-align: text-bottom;
 }
-
-
