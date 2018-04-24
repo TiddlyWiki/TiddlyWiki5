@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 
 The ~CodeMirror plugin has undergone a substantial rewrite, with many new improvements:
 
-* Upgrade to ~CodeMirror version v5.36.0
+* Upgrade to ~CodeMirror version v5.37.0
 * Now modularised into:
 ** Base plugin
 *** Basic lightweight configuration, approximately 240KB
@@ -84,6 +84,7 @@ Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3190]] support for a minimum length for the new tag field before the dropdown is shown
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/02529a51d0be47477e62cd52dd5e4989a4993663]] consistency and reusability of the palette, language and theme switchers
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ea763d0eaba7edf928ae247563deb95278504e9f]] support for retaining tab content in the [[tabs Macro]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2703]] support for adding links via the <kbd>enter</kbd> key
 
 !! Hackability Improvements
 
@@ -105,6 +106,8 @@ Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3182]] ability to trigger actions on unchecking the CheckboxWidget
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2182]] support for a checked class to the RadioWidget
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/2982]] the [[is Operator]] to allow multiple types to be specified
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3209]] data attributes to ViewTemplate (see [[Custom data-styles]])
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2988]] new RangeWidget
 
 !! Bug Fixes
 
@@ -118,6 +121,8 @@ Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3164]] problem with ''filter'' and ''value'' attributes of SetWidget
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3190]] problem with numeric operands in the [[The Extended Listops Filters]]
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/df1f7e9798b5f6c3d2c3fd82e438cbc9713ade04]] problem with "put" saver and 412 return codes
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3048]] problem with variable references in field values in the edit template
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/3219]] behaviour of list-after field so that the tiddler is placed at the end of the list if the list-after field is present but empty 
 
 !! Developer Bug Fixes and Improvements
 
@@ -141,6 +146,7 @@ Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia
 * [[@BramChen|https://github.com/BramChen]]
 * [[@BurningTreeC|https://github.com/BurningTreeC]]
 * [[@diego898|https://github.com/diego898]]
+* [[@flibbles|https://github.com/flibbles]]
 * [[@furicle|https://github.com/furicle]]
 * [[@gernert|https://github.com/gernert]]
 * [[@ibnishak|https://github.com/ibnishak]]
