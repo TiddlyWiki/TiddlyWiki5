@@ -13,30 +13,22 @@ The ~CodeMirror plugin has undergone a substantial rewrite, with many new improv
 
 * Upgrade to ~CodeMirror version v5.37.0
 * Now modularised into:
-** Base plugin
-*** Basic lightweight configuration, approximately 240KB
-** Add-on plugins
+** Base plugin: basic lightweight configuration, approximately 240KB
+** Add-on plugins:
 *** Search and Replace
 *** Auto-completion
 *** Fullscreen editing
 *** Auto-close brackets
 *** Auto-close tags
-*** SublimeText keymap
+*** ~SublimeText keymap
 *** Emacs keymap
 *** Vim keymap
-*** Highlighting modes:
-**** Javascript
-**** Xml
-**** Html (htmlmixed)
-**** Html (htmlembedded)
-**** Css
-**** Markdown
-**** X-Tiddlywiki
+*** Highlighting modes: Javascript, Xml, Html (htmlmixed), Html (htmlembedded), Css, Markdown, X-Tiddlywiki
 * Automatic configuration (the configuration tiddler is not needed anymore)
-*** ~CodeMirror (engine.js) builds the configuration using information within the installed c~CodeMirror plugins
+*** ~CodeMirror (engine.js) builds the configuration using information within the installed ~CodeMirror plugins
 * New control panel configuration tab:
 ** Line numbers
-** Theme
+** Theme:
 *** Editor font family (same as native TiddlyWiki)
 *** Cursor settings
 *** Line wrapping
