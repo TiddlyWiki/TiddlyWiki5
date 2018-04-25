@@ -193,6 +193,7 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 Called by refresh() to dynamically show or hide the content
 */
 RevealWidget.prototype.updateState = function() {
+	var self = this;
 	// Read the current state
 	this.readState();
 	// Construct the child nodes if needed
@@ -213,7 +214,10 @@ RevealWidget.prototype.updateState = function() {
         $tw.anim.perform(this.openAnimation,domNode);
 	} else {
 		$tw.anim.perform(this.closeAnimation,domNode,{callback: function() {
-			domNode.setAttribute("hidden","true");
+			self.readState()
+			if(!self.isOpen) {
+				domNode.setAttribute("hidden","true");
+			}
         }});
 	}
 };
