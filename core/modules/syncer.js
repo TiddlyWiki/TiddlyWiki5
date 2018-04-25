@@ -211,6 +211,13 @@ Syncer.prototype.syncFromServer = function() {
 		}
 		
 		this.syncadaptor.getSkinnyTiddlers(function(err,tiddlers) {
+			//get an array of the titles being updated
+			var titles = tiddlers.map(e => e.title);
+			//get the titles in the tiddlerInfo hashmap that are not on the server
+			var removes = Object.keys(self.tiddlerInfo).filter(e => titles.indexOf(e) === -1);
+			//assume a server delete and handle it locally
+			removes.forEach(title => self.handleServerDelete(title));
+			
 			// Trigger the next sync
 			self.pollTimerId = setTimeout(function() {
 				self.pollTimerId = null;
