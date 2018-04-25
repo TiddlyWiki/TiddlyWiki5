@@ -13,7 +13,8 @@ A sync adaptor module for synchronising with TiddlyWeb compatible servers
 "use strict";
 
 var CONFIG_HOST_TIDDLER = "$:/config/tiddlyweb/host",
-	DEFAULT_HOST_TIDDLER = "$protocol$//$host$/";
+	DEFAULT_HOST_TIDDLER = "$protocol$//$host$/",
+    	WikiExport = require('$:/core/modules/wiki.js');
 
 function TiddlyWebAdaptor(options) {
 	this.wiki = options.wiki;
@@ -21,8 +22,14 @@ function TiddlyWebAdaptor(options) {
 	this.recipe = undefined;
 	this.hasStatus = false;
 	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
+	this.eventListeners = this.eventListeners || {};
 }
-
+	
+// Add event listener methods from wiki for use here
+TiddlyWebAdaptor.prototype.addEventListener = WikiExport.addEventListener;
+TiddlyWebAdaptor.prototype.removeEventListener = WikiExport.removeEventListener;
+TiddlyWebAdaptor.prototype.dispatchEvent = WikiExport.dispatchEvent;
+	
 TiddlyWebAdaptor.prototype.name = "tiddlyweb";
 
 TiddlyWebAdaptor.prototype.isReady = function() {
