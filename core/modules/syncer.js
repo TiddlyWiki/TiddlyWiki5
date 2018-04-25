@@ -33,6 +33,13 @@ function Syncer(options) {
 	var self = this;
 	this.wiki = options.wiki;
 	this.syncadaptor = options.syncadaptor;
+	this.syncadaptor && this.syncadaptor.addEventListener && this.syncadaptor.addEventListener('server-update', function(type, tiddlerFields){
+		if(type === "update" || type === "create") { 
+			self.handleServerUpdate(tiddlerFields);
+		} else if (type === "delete") {
+			self.handleServerDelete(tiddlerFields.title);
+		}
+	});
 	this.disableUI = !!options.disableUI;
 	this.titleIsLoggedIn = options.titleIsLoggedIn || this.titleIsLoggedIn;
 	this.titleUserName = options.titleUserName || this.titleUserName;
@@ -202,6 +209,7 @@ Syncer.prototype.syncFromServer = function() {
 			clearTimeout(this.pollTimerId);
 			this.pollTimerId = null;
 		}
+		
 		this.syncadaptor.getSkinnyTiddlers(function(err,tiddlers) {
 			// Trigger the next sync
 			self.pollTimerId = setTimeout(function() {
@@ -216,25 +224,7 @@ Syncer.prototype.syncFromServer = function() {
 			// Process each incoming tiddler
 			for(var t=0; t<tiddlers.length; t++) {
 				// Get the incoming tiddler fields, and the existing tiddler
-				var tiddlerFields = tiddlers[t],
-					incomingRevision = tiddlerFields.revision + "",
-					tiddler = self.wiki.getTiddler(tiddlerFields.title),
-					tiddlerInfo = self.tiddlerInfo[tiddlerFields.title],
-					currRevision = tiddlerInfo ? tiddlerInfo.revision : null;
-				// Ignore the incoming tiddler if it's the same as the revision we've already got
-				if(currRevision !== incomingRevision) {
-					// Do a full load if we've already got a fat version of the tiddler
-					if(tiddler && tiddler.fields.text !== undefined) {
-						// Do a full load of this tiddler
-						self.enqueueSyncTask({
-							type: "load",
-							title: tiddlerFields.title
-						});
-					} else {
-						// Load the skinny version of the tiddler
-						self.storeTiddler(tiddlerFields,false);
-					}
-				}
+				self.handleServerUpdate(tiddlers[t]);
 			}
 		});
 	}
@@ -279,6 +269,38 @@ Syncer.prototype.handleLazyLoadEvent = function(title) {
 			title: title
 		});		
 	}
+};
+
+/* 
+Handle server update event
+*/
+Syncer.prototype.handleServerUpdate = function(tiddlerFields){
+	var incomingRevision = tiddlerFields.revision + "",
+		tiddler = this.wiki.getTiddler(tiddlerFields.title),
+		tiddlerInfo = this.tiddlerInfo[tiddlerFields.title],
+		currRevision = tiddlerInfo ? tiddlerInfo.revision : null;
+	// Ignore the incoming tiddler if it's the same as the revision we've already got
+	if(currRevision !== incomingRevision) {
+		// Do a full load if we've already got a fat version of the tiddler
+		if(tiddler && tiddler.fields.text !== undefined) {
+			// Do a full load of this tiddler
+			this.enqueueSyncTask({
+				type: "load",
+				title: tiddlerFields.title
+			});
+		} else {
+			// Load the skinny version of the tiddler
+			this.storeTiddler(tiddlerFields,false);
+		}
+	}
+}
+
+Syncer.prototype.handleServerDelete = function(title){
+	if(this.tiddlerInfo[tiddlerFields.title]){
+		delete this.tiddlerInfo[tiddlerFields.title];
+		this.wiki.deleteTiddler(title);
+	}
+	
 };
 
 /*
