@@ -214,6 +214,7 @@ RevealWidget.prototype.updateState = function() {
         $tw.anim.perform(this.openAnimation,domNode);
 	} else {
 		$tw.anim.perform(this.closeAnimation,domNode,{callback: function() {
+			//make sure that the state hasn't changed during the close animation
 			self.readState()
 			if(!self.isOpen) {
 				domNode.setAttribute("hidden","true");
