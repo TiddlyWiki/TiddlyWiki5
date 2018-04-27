@@ -42,24 +42,32 @@ exports.is = function(source,operator,options) {
 	    subops = operator.operand.split("+"),
 		filteredResults = {},
 		results = [];
-	for (var t=0; t<subops.length; t++) {
-		var subop = isFilterOperators[subops[t]];
-		if(subop) {
-			filteredResults[subops[t]] = subop(source,operator.prefix,options);
-		} else {
-			return [$tw.language.getString("Error/IsFilterOperator")];
-		}
-		
-	}
 	
-    source(function(tiddler,title) {
-        for (var t=0; t<subops.length; t++) {
-            if (filteredResults[subops[t]].indexOf(title) != -1){
-                results.push(title);
-                break;
-            }
-        }
-    });
+	if(subops.length === 1) {
+		var isFilterOperator = isFilterOperators[operator.operand];	
+		if(isFilterOperator) {	
+			return isFilterOperator(source,operator.prefix,options);	
+		} else {	
+			return [$tw.language.getString("Error/IsFilterOperator")];	
+		}
+	} else { 
+		for (var t=0; t<subops.length; t++) {
+			var subop = isFilterOperators[subops[t]];
+			if(subop) {
+				filteredResults[subops[t]] = subop(source,operator.prefix,options);
+			} else {
+				return [$tw.language.getString("Error/IsFilterOperator")];
+			}
+		}
+		source(function(tiddler,title) {
+			for (var t=0; t<subops.length; t++) {
+				if (filteredResults[subops[t]].indexOf(title) != -1){
+				results.push(title);
+				break;
+				}
+			}
+		});
+	}
 	return results;
 };
 
