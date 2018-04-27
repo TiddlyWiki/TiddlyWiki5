@@ -59,12 +59,14 @@ exports.is = function(source,operator,options) {
 				return [$tw.language.getString("Error/IsFilterOperator")];
 			}
 		}
-		for (var t=0; t<subops.length; t++) {
-			if (filteredResults[subops[t]].indexOf(title) != -1){
+		source(function(tiddler,title) {
+			for (var t=0; t<subops.length; t++) {
+				if (filteredResults[subops[t]].indexOf(title) != -1){
 				results.push(title);
 				break;
+				}
 			}
-		}
+		});
 	}
 	return results;
 };
