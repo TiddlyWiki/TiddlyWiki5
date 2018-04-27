@@ -41,6 +41,6 @@ Les macros peuvent être utilisées dans le tiddler où elles sont définies, ai
 
 Pour étendre l'utilisation d'une macro à tous les tiddlers, définissez-la dans un tiddler étiqueté <<.tag $:/tags/Macro>>.
 
-Il est aussi possible de développer une macro dans un [[module JavaScript|http://tiddlywiki.com/dev/index.html#JavaScript%20Macros]]. Les macros ~JavaScript sont disponibles dans tous les tiddlers, et offrent un maximum de flexibilité.
+Il est aussi possible de développer une macro dans un [[module JavaScript|https://tiddlywiki.com/dev/index.html#JavaScript%20Macros]]. Les macros ~JavaScript sont disponibles dans tous les tiddlers, et offrent un maximum de flexibilité.
 
 On peut importer dans un tiddler les définitions de macros d'une [[sélection|Title Selection]] d'autres tiddlers en utilisant le widget <<.wlink ImportVariablesWidget>>.

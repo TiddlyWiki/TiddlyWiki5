@@ -19,8 +19,7 @@ title: Releasing a new version of TiddlyWiki
 # Run `../build.jermolene.github.io/bld.sh` to build the content files
 # Verify that the files in the `jermolene.github.io` directory are correct
 # Run `../build.jermolene.github.io/github-push.sh` to push the new files to GitHub
-# Run `../build.jermolene.github.io/tiddlyspace-upload.sh <username> <password>` to upload the release to TiddlySpace
-# Tweet the release with the text "TiddlyWiki v5.x.x released to http://tiddlywiki.com #newtiddlywikirelease"
+# Tweet the release with the text "TiddlyWiki v5.x.x released to https://tiddlywiki.com #newtiddlywikirelease"
 
 # Preparation for the next release:
 ## Adjust version number in [[$:/config/OfficialPluginLibrary]]

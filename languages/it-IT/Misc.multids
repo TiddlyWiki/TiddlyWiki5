@@ -1,7 +1,7 @@
 title: $:/language/
 
 BinaryWarning/Prompt: Questo frammento contiene dati binari
-ClassicWarning/Hint: Questo frammento &egrave; scritto nel formato testo wiki di TiddlyWiki Classic e non &egrave; pienamente compatibile con TiddlyWiki versione 5. Vedi http://tiddlywiki.com/static/Upgrading.html per maggiori dettagli a riguardo
+ClassicWarning/Hint: Questo frammento &egrave; scritto nel formato testo wiki di TiddlyWiki Classic e non &egrave; pienamente compatibile con TiddlyWiki versione 5. Vedi https://tiddlywiki.com/static/Upgrading.html per maggiori dettagli a riguardo
 ClassicWarning/Upgrade/Caption: Aggiorna
 CloseAll/Button: Chiudi tutto
 ConfirmCancelTiddler: Vuoi annullare le modifiche al frammento "<$text text=<<title>>/>"?

@@ -1,0 +1,8 @@
+title: $:/language/Help/unpackplugin
+description: Εξάγει τα ωφέλιμα tiddler από ένα πρόσθετο
+
+Εξάγει τα ωφέλιμα tiddlers από ένα πρόσθετο, δημιουργώντας τα ως κοινότυπα tiddlers:
+
+```
+--unpackplugin <τίτλος>
+```

@@ -329,7 +329,7 @@ Sort an array of tiddler titles by a specified field
 	isDescending: true if the sort should be descending
 	isCaseSensitive: true if the sort should consider upper and lower case letters to be different
 */
-exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric) {
+exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric,isAlphaNumeric) {
 	var self = this;
 	titles.sort(function(a,b) {
 		var x,y,
@@ -358,6 +358,8 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 		y = Number(b);
 		if(isNumeric && (!isNaN(x) || !isNaN(y))) {
 			return compareNumbers(x,y);
+		} else if(isAlphaNumeric) {
+			return isDescending ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
 		} else if($tw.utils.isDate(a) && $tw.utils.isDate(b)) {
 			return isDescending ? b - a : a - b;
 		} else {
@@ -1177,6 +1179,22 @@ exports.readFile = function(file,options) {
 	if($tw.log.IMPORT) {
 		console.log("Importing file '" + file.name + "', type: '" + type + "', isBinary: " + isBinary);
 	}
+	// Give the hook a chance to process the drag
+	if($tw.hooks.invokeHook("th-importing-file",{
+		file: file,
+		type: type,
+		isBinary: isBinary,
+		callback: callback
+	}) !== true) {
+		this.readFileContent(file,type,isBinary,options.deserializer,callback);
+	}
+};
+
+/*
+Lower level utility to read the content of a browser File object, invoking callback(tiddlerFieldsArray) with an array of tiddler fields objects
+*/
+exports.readFileContent = function(file,type,isBinary,deserializer,callback) {
+	var self = this;
 	// Create the FileReader
 	var reader = new FileReader();
 	// Onload
@@ -1198,7 +1216,7 @@ exports.readFile = function(file,options) {
 			});
 		} else {
 			// Otherwise, just try to deserialise any tiddlers in the file
-			callback(self.deserializeTiddlers(type,text,tiddlerFields,{deserializer: options.deserializer}));
+			callback(self.deserializeTiddlers(type,text,tiddlerFields,{deserializer: deserializer}));
 		}
 	};
 	// Kick off the read

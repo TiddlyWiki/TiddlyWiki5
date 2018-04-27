@@ -1,0 +1,56 @@
+created: 20171212175130471
+modified: 20171212175139631
+tags: Learning
+title: Introduction to Lists
+type: text/vnd.tiddlywiki
+
+Making lists of items plays a central role in working with TiddlyWiki. The following is a brief run-through of some of the more common techniques.
+
+~TiddlyWiki [[uses|The Extended Listops Filters]] lists [[internally|ListField]] for many purposes so the word can have several meanings. Here we are concerned with displaying sequences of items, but not necessarily presented as a conventional bullet list.
+
+! Manually Typed Lists
+
+!! ~WikiText
+
+WikiText lists are manually typed lists that use a special character to specify what sort of list it is and how it should be displayed.
+
+Examples include bullet lists created with asterisks (*) and numbered lists (#). Behind the scenes, ~WikiText lists are based on the standard `<ul>` and `<li>` HTML elements. For more information see [[Lists in WikiText]].
+
+An example of a typed list in WikiText:
+
+<<wikitext-example-without-html """* Greatest Movies of All Time
+** Casa Blanca
+** Pride and Prejudice and Zombies""">>
+
+! Generated Lists
+
+Lists can be automatically generated with the ListWidget using [[filters|Filters]] in which [[filter operators|Filter Operators]] 
+specify criteria for selecting which tiddlers are desired as output. Shortcut macros are provided for some common types of list.
+
+!! ~ListWidget
+
+The ListWidget is the most powerful tool for creating lists. It allows the filtered output to be manipulated and styled into forms that may not seem to resemble lists at all, for example tables or complex texts. For more details, see [[ListWidget]].
+
+An example to show all tiddlers tagged with "HelloThere" might look like:
+
+<<wikitext-example-without-html """<$list filter="[tag[HelloThere]]"><$view field="title"/><br/></$list>""">>
+
+<<.tip """Even tiddlers themselves are made with the ~ListWidget. The [[ViewTemplate|$:/core/ui/ViewTemplate]] makes use of the ListWidget to fetch all specified templates that are used to show a tiddlers title, tags, text and more.""">>
+
+!! Filtered transclusion
+
+The syntax for filtered transclusion `{{{...}}}` takes a filter as input and outputs a linked list of matching titles. You can also apply a [[template|Transclusion with Templates]], for example:
+
+<<wikitext-example-without-html """{{{ [tag[HelloThere]] || $:/core/ui/TagTemplate }}}""">>
+
+!! list-links Macro
+
+The [[list-links|list-links Macro]] macro gives a preformatted list, typically a bullet list, in a more simplified way than by using the ListWidget. Behind the scenes it really is the ListWidget applying a default template to each list item.
+
+<$macrocall $name="wikitext-example-without-html" src="""<<list-links "[tag[HelloThere]]">>"""/>
+
+!Other “list related” features
+
+[[list|ListField]], [[list-before|Order of Tagged Tiddlers]] and [[list-after|Order of Tagged Tiddlers]] are all field names to control the position of tiddlers in a list. [[Fields|TiddlerFields]] are a way to add additional bits of structured information to a tiddler such as date, quantity, category, etc.
+
+[[list|list Operator]] and [[listed|listed Operator]] are //filter operators// to, respectively, select and find titles in lists.

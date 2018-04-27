@@ -902,9 +902,23 @@ $tw.Wiki = function(options) {
 	options = options || {};
 	var self = this,
 		tiddlers = Object.create(null), // Hashmap of tiddlers
+		tiddlerTitles = null, // Array of tiddler titles
+		getTiddlerTitles = function() {
+			if(!tiddlerTitles) {
+				tiddlerTitles = Object.keys(tiddlers);
+			}
+			return tiddlerTitles;
+		},
 		pluginTiddlers = [], // Array of tiddlers containing registered plugins, ordered by priority
 		pluginInfo = Object.create(null), // Hashmap of parsed plugin content
-		shadowTiddlers = options.shadowTiddlers || Object.create(null); // Hashmap by title of {source:, tiddler:}
+		shadowTiddlers = options.shadowTiddlers || Object.create(null), // Hashmap by title of {source:, tiddler:}
+		shadowTiddlerTitles = null,
+		getShadowTiddlerTitles = function() {
+			if(!shadowTiddlerTitles) {
+				shadowTiddlerTitles = Object.keys(shadowTiddlers);
+			}
+			return shadowTiddlerTitles;
+		};
 
 	// Add a tiddler to the store
 	this.addTiddler = function(tiddler) {
@@ -918,6 +932,9 @@ $tw.Wiki = function(options) {
 // Uncomment the following line for detailed logs of all tiddler writes
 // console.log("Adding",title,tiddler)
 				tiddlers[title] = tiddler;
+				if(tiddlerTitles && tiddlerTitles.indexOf(title) === -1) {
+					tiddlerTitles.push(title);
+				}
 				this.clearCache(title);
 				this.clearGlobalCache();
 				this.enqueueTiddlerEvent(title);
@@ -931,6 +948,12 @@ $tw.Wiki = function(options) {
 // console.log("Deleting",title)
 		if($tw.utils.hop(tiddlers,title)) {
 			delete tiddlers[title];
+			if(tiddlerTitles) {
+				var index = tiddlerTitles.indexOf(title);
+				if(index !== -1) {
+					tiddlerTitles.splice(index,1);
+				}				
+			}
 			this.clearCache(title);
 			this.clearGlobalCache();
 			this.enqueueTiddlerEvent(title,true);
@@ -943,7 +966,7 @@ $tw.Wiki = function(options) {
 			var t = tiddlers[title];
 			if(t instanceof $tw.Tiddler) {
 				return t;
-			} else if(title !== undefined && Object.prototype.hasOwnProperty.call(shadowTiddlers,title)) {
+			} else if(title !== undefined && shadowTiddlers[title]) {
 				return shadowTiddlers[title].tiddler;
 			}
 			return undefined;
@@ -952,12 +975,12 @@ $tw.Wiki = function(options) {
 
 	// Get an array of all tiddler titles
 	this.allTitles = function() {
-		return Object.keys(tiddlers);
+		return getTiddlerTitles().slice(0);
 	};
 
 	// Iterate through all tiddler titles
 	this.each = function(callback) {
-		var titles = Object.keys(tiddlers),
+		var titles = getTiddlerTitles(),
 			index,titlesLength,title;
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
@@ -967,12 +990,12 @@ $tw.Wiki = function(options) {
 
 	// Get an array of all shadow tiddler titles
 	this.allShadowTitles = function() {
-		return Object.keys(shadowTiddlers);
+		return getShadowTiddlerTitles().slice(0);
 	};
 
 	// Iterate through all shadow tiddler titles
 	this.eachShadow = function(callback) {
-		var titles = Object.keys(shadowTiddlers),
+		var titles = getShadowTiddlerTitles(),
 			index,titlesLength,title;
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
@@ -983,16 +1006,16 @@ $tw.Wiki = function(options) {
 
 	// Iterate through all tiddlers and then the shadows
 	this.eachTiddlerPlusShadows = function(callback) {
-		var titles = Object.keys(tiddlers),
-			index,titlesLength,title;
+		var index,titlesLength,title,
+			titles = getTiddlerTitles();
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
 			callback(tiddlers[title],title);
 		}
-		titles = Object.keys(shadowTiddlers);
+		titles = getShadowTiddlerTitles();
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
-			if(!Object.prototype.hasOwnProperty.call(tiddlers,title)) {
+			if(!tiddlers[title]) {
 				var shadowInfo = shadowTiddlers[title];
 				callback(shadowInfo.tiddler,title);
 			}
@@ -1001,21 +1024,21 @@ $tw.Wiki = function(options) {
 
 	// Iterate through all the shadows and then the tiddlers
 	this.eachShadowPlusTiddlers = function(callback) {
-		var titles = Object.keys(shadowTiddlers),
-			index,titlesLength,title;
+		var index,titlesLength,title,
+			titles = getShadowTiddlerTitles();
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
-			if(Object.prototype.hasOwnProperty.call(tiddlers,title)) {
+			if(tiddlers[title]) {
 				callback(tiddlers[title],title);
 			} else {
 				var shadowInfo = shadowTiddlers[title];
 				callback(shadowInfo.tiddler,title);
 			}
 		}
-		titles = Object.keys(tiddlers);
+		titles = getTiddlerTitles();
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
-			if(!Object.prototype.hasOwnProperty.call(shadowTiddlers,title)) {
+			if(!shadowTiddlers[title]) {
 				callback(tiddlers[title],title);
 			}
 		}
@@ -1130,6 +1153,7 @@ $tw.Wiki = function(options) {
 				});
 			}
 		});
+		shadowTiddlerTitles = null;
 		this.clearCache(null);
 		this.clearGlobalCache();
 	};
@@ -1202,7 +1226,7 @@ $tw.Wiki.prototype.processSafeMode = function() {
 	// Assemble a report tiddler
 	var titleReportTiddler = "TiddlyWiki Safe Mode",
 		report = [];
-	report.push("TiddlyWiki has been started in [[safe mode|http://tiddlywiki.com/static/SafeMode.html]]. All plugins are temporarily disabled. Most customisations have been disabled by renaming the following tiddlers:")
+	report.push("TiddlyWiki has been started in [[safe mode|https://tiddlywiki.com/static/SafeMode.html]]. All plugins are temporarily disabled. Most customisations have been disabled by renaming the following tiddlers:")
 	// Delete the overrides
 	overrides.forEach(function(title) {
 		var tiddler = self.getTiddler(title),
@@ -1527,7 +1551,7 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 				});
 			}
 		} else if(stat.isFile()) {
-			tiddlers.push($tw.loadTiddlersFromFile(filepath));
+			tiddlers.push($tw.loadTiddlersFromFile(filepath,{title: filepath}));
 		}
 	}
 	return tiddlers;
@@ -1806,9 +1830,13 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 	// Save the original tiddler file locations if requested
 	var config = wikiInfo.config || {};
 	if(config["retain-original-tiddler-path"]) {
-		var output = {};
+		var output = {}, relativePath;
 		for(var title in $tw.boot.files) {
-			output[title] = path.relative(resolvedWikiPath,$tw.boot.files[title].filepath);
+			relativePath = path.relative(resolvedWikiPath,$tw.boot.files[title].filepath);
+			output[title] =
+				path.sep === path.posix.sep ?
+				relativePath :
+				relativePath.split(path.sep).join(path.posix.sep);
 		}
 		$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
 	}
@@ -1956,6 +1984,7 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",{flags:["image"]});
 	$tw.utils.registerFileType("image/x-icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("application/font-woff","base64",".woff");
+	$tw.utils.registerFileType("application/x-font-ttf","base64",".woff");
 	$tw.utils.registerFileType("audio/ogg","base64",".ogg");
 	$tw.utils.registerFileType("video/mp4","base64",".mp4");
 	$tw.utils.registerFileType("audio/mp3","base64",".mp3");

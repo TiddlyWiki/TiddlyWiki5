@@ -1,0 +1,15 @@
+caption: {{$:/language/Buttons/Linkify/Caption}}
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+description: {{$:/language/Buttons/Linkify/Hint}}
+icon: $:/core/images/linkify
+list-before: $:/core/ui/EditorToolbar/mono-block
+shortcuts: ((linkify))
+title: $:/core/ui/EditorToolbar/linkify
+tags: $:/tags/EditorToolbar
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="[["
+	suffix="]]"
+/>

@@ -1,0 +1,28 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: To je zunanji tiddler, shranjen zunaj glavne datoteke TiddlyWiki. Urejate lahko oznake in polja, vendar ne morete neposredno urediti vsebine.
+Body/Placeholder: Vnesite besedilo za ta tiddler
+Body/Preview/Type/Output: prikaz
+Field/Remove/Caption: odstrani polje
+Field/Remove/Hint: Odstranite polje
+Fields/Add/Button: dodaj
+Fields/Add/Dropdown/System: Sistemska polja
+Fields/Add/Dropdown/User: Uporabniška polja
+Fields/Add/Name/Placeholder: ime polja
+Fields/Add/Prompt: Dodaj novo polje:
+Fields/Add/Value/Placeholder: vrednost/besedilo polja
+Shadow/OverriddenWarning: To je spremenjen senčni tiddler. Lahko se vrnete na privzeto različico v vtičniku <<pluginLink>> tako, da izbrišete ta tiddler.
+Shadow/Warning: To je senčni tiddler. Vse spremembe, ki jih naredite, bodo razveljavile privzeto različico iz vtičnika <<pluginLink>>.
+Tags/Add/Button: dodaj
+Tags/Add/Placeholder: ime oznake
+Tags/Dropdown/Caption: seznam oznak
+Tags/Dropdown/Hint: Pokaži seznam oznak
+Title/BadCharacterWarning: Opozorilo: izogibajte se uporabi znakov <<bad-chars>> v naslovih tiddler
+Title/Exists/Prompt: Ciljni tiddler že obstaja
+Title/Relink/Prompt: Spremeni iz ''<$text text=<<fromTitle>>/>'' v ''<$text text=<<toTitle>>/>'' v //oznakah// in //seznamskih// poljih ostalih tiddlerjev
+Type/Delete/Caption: izbriši vrsto vsebine
+Type/Delete/Hint: Izbrišite vrsto vsebine
+Type/Dropdown/Caption: seznam vrst vsebine
+Type/Dropdown/Hint: Pokaži seznam vrst vsebine
+Type/Placeholder: vrsta vsebine
+Type/Prompt: Vrsta:

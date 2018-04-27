@@ -1,7 +1,7 @@
 title: $:/language/
 
 BinaryWarning/Prompt: Denna tiddler innehåller binär data
-ClassicWarning/Hint: Denna tiddler är skriven i TiddlyWiki klassisk wiki-textformat, vilket inte är fullständigt kompatibelt med TiddlyWiki version 5. Läs http://tiddlywiki.com/static/Upgrading.html för mer info. 
+ClassicWarning/Hint: Denna tiddler är skriven i TiddlyWiki klassisk wiki-textformat, vilket inte är fullständigt kompatibelt med TiddlyWiki version 5. Läs https://tiddlywiki.com/static/Upgrading.html för mer info. 
 ClassicWarning/Upgrade/Caption: uppgradera
 CloseAll/Button: stäng alla
 ConfirmCancelTiddler: Vill du ångra ändringar för denna tiddler "<$text text=<<title>>/>"?

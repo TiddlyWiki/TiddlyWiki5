@@ -6,6 +6,8 @@ tags: $:/tags/Macro
 \define wikitext-example(src)
 <div class="doc-example">
 
+<$macrocall $name="copy-to-clipboard-above-right" src=<<__src__>>/>
+
 ```
 $src$
 ```
@@ -24,6 +26,8 @@ $$$
 
 \define wikitext-example-without-html(src)
 <div class="doc-example">
+
+<$macrocall $name="copy-to-clipboard-above-right" src=<<__src__>>/>
 
 ```
 $src$

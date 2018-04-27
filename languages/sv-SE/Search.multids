@@ -2,7 +2,7 @@ title: $:/language/Search/
 
 DefaultResults/Caption: Lista
 Filter/Caption: Filter
-Filter/Hint: Sök via [[filter expression|http://tiddlywiki.com/static/Filters.html]]
+Filter/Hint: Sök via [[filter expression|https://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small><<resultCount>> träffar</small>//
 Matches: //<small><<resultCount>> träffar</small>//
 Shadows/Caption: Skuggor

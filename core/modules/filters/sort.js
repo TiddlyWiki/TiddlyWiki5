@@ -27,6 +27,12 @@ exports.nsort = function(source,operator,options) {
 	return results;
 };
 
+exports.sortan = function(source, operator, options) {
+	var results = prepare_results(source);
+	options.wiki.sortTiddlers(results, operator.operand || "title", operator.prefix === "!",false,false,true);
+	return results;
+};
+
 exports.sortcs = function(source,operator,options) {
 	var results = prepare_results(source);
 	options.wiki.sortTiddlers(results,operator.operand || "title",operator.prefix === "!",true,false);

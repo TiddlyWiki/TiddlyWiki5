@@ -4,7 +4,7 @@ modified: 20141217193442167
 title: Launch of TiddlyWiki
 type: text/vnd.tiddlywiki
 
-En septembre 2004, j'ai donc publié une [[version préliminaire de TiddlyWiki|http://classic.tiddlywiki.com/firstversion.html]]. Il s'agissait de la plus petite  application possible démontrant le concept : un simple fichier HTML de 48KB qui s'auto-engendrait.
+En septembre 2004, j'ai donc publié une [[version préliminaire de TiddlyWiki|https://classic.tiddlywiki.com/firstversion.html]]. Il s'agissait de la plus petite  application possible démontrant le concept : un simple fichier HTML de 48KB qui s'auto-engendrait.
 
 L'inconvénient d'avoir écrit de cette manière la première version de <<tw>>, c'est que ça la rendait complètement impraticable pour l'édition — quand vous cliquiez sur <<gf "enregistrer les modifications">>, elle faisait apparaître une fenêtre montrant les données qui auraient été enregistrées s'il avait été possible d'écrire sur le système de fichiers depuis une page HTML.
 

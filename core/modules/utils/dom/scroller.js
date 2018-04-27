@@ -54,51 +54,35 @@ PageScroller.prototype.handleEvent = function(event) {
 Handle a scroll event hitting the page document
 */
 PageScroller.prototype.scrollIntoView = function(element) {
-	var duration = $tw.utils.getAnimationDuration();
+	var self = this,
+		duration = $tw.utils.getAnimationDuration();
 	// Now get ready to scroll the body
 	this.cancelScroll();
 	this.startTime = Date.now();
-	var scrollPosition = $tw.utils.getScrollPosition();
 	// Get the client bounds of the element and adjust by the scroll position
-	var clientBounds = element.getBoundingClientRect(),
-		bounds = {
-			left: clientBounds.left + scrollPosition.x,
-			top: clientBounds.top + scrollPosition.y,
-			width: clientBounds.width,
-			height: clientBounds.height
-		};
-	// We'll consider the horizontal and vertical scroll directions separately via this function
-	// targetPos/targetSize - position and size of the target element
-	// currentPos/currentSize - position and size of the current scroll viewport
-	// returns: new position of the scroll viewport
-	var getEndPos = function(targetPos,targetSize,currentPos,currentSize) {
-			var newPos = currentPos;
-			// If the target is above/left of the current view, then scroll to it's top/left
-			if(targetPos <= currentPos) {
-				newPos = targetPos;
-			// If the target is smaller than the window and the scroll position is too far up, then scroll till the target is at the bottom of the window
-			} else if(targetSize < currentSize && currentPos < (targetPos + targetSize - currentSize)) {
-				newPos = targetPos + targetSize - currentSize;
-			// If the target is big, then just scroll to the top
-			} else if(currentPos < targetPos) {
-				newPos = targetPos;
-			// Otherwise, stay where we are
-			} else {
-				newPos = currentPos;
-			}
+	var getBounds = function() {
+			var clientBounds = element.getBoundingClientRect(),
+				scrollPosition = $tw.utils.getScrollPosition();
+			return {
+				left: clientBounds.left + scrollPosition.x,
+				top: clientBounds.top + scrollPosition.y,
+				width: clientBounds.width,
+				height: clientBounds.height
+			};
+		},
+		// We'll consider the horizontal and vertical scroll directions separately via this function
+		// targetPos/targetSize - position and size of the target element
+		// currentPos/currentSize - position and size of the current scroll viewport
+		// returns: new position of the scroll viewport
+		getEndPos = function(targetPos,targetSize,currentPos,currentSize) {
+			var newPos = targetPos;
 			// If we are scrolling within 50 pixels of the top/left then snap to zero
 			if(newPos < 50) {
 				newPos = 0;
 			}
 			return newPos;
 		},
-		endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,window.innerWidth),
-		endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,window.innerHeight);
-	// Only scroll if the position has changed
-	if(endX !== scrollPosition.x || endY !== scrollPosition.y) {
-		var self = this,
-			drawFrame;
-		drawFrame = function () {
+		drawFrame = function drawFrame() {
 			var t;
 			if(duration <= 0) {
 				t = 1;
@@ -110,13 +94,16 @@ PageScroller.prototype.scrollIntoView = function(element) {
 				t = 1;
 			}
 			t = $tw.utils.slowInSlowOut(t);
+			var scrollPosition = $tw.utils.getScrollPosition(),
+				bounds = getBounds(),
+				endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,window.innerWidth),
+				endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,window.innerHeight);
 			window.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y) * t);
 			if(t < 1) {
 				self.idRequestFrame = self.requestAnimationFrame.call(window,drawFrame);
 			}
 		};
-		drawFrame();
-	}
+	drawFrame();
 };
 
 exports.PageScroller = PageScroller;

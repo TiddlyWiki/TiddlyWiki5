@@ -3,7 +3,7 @@ title: $:/language/Search/
 Advanced/Matches: //<small><<resultCount>> corrispondenze</small>//
 DefaultResults/Caption: Lista
 Filter/Caption: Filtro
-Filter/Hint: Cerca attraverso un [[filtro|http://tiddlywiki.com/static/Filters.html]]
+Filter/Hint: Cerca attraverso un [[filtro|https://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small><<resultCount>> corrispondenze</small>//
 Matches: //<small><<resultCount>> corrispondenze</small>//
 Shadows/Caption: Nascosti

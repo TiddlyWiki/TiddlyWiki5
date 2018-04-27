@@ -54,9 +54,9 @@ Palette/Prompt: پالت حال حاضر:
 Palette/ShowEditor/Caption: نمایش ویرایش‌گر
 Parsing/Block/Caption: قواعد تجزیه‌ی بلوک‌ها
 Parsing/Caption: تجزیه کردن
-Parsing/Hint: Here you can globally disable/enable wiki parser rules. For changes to take effect, save and reload your wiki. Disabling certain parser rules can prevent <$text text="TiddlyWiki"/> from functioning correctly. Use [[safe mode|http://tiddlywiki.com/#SafeMode]] to restore normal operation.
+Parsing/Hint: Here you can globally disable/enable wiki parser rules. For changes to take effect, save and reload your wiki. Disabling certain parser rules can prevent <$text text="TiddlyWiki"/> from functioning correctly. Use [[safe mode|https://tiddlywiki.com/#SafeMode]] to restore normal operation.
 اینجا می‌تونی قواعد تجزیه‌ی ویکی رو به صورت کلی عوض کنی. برای این که تغییرات تاثیرگذار باشن، ذخیره کن و ویکیت رو دوباره بارگذاری کن. غیر فعال کردن بعضی قواعد تجزیه می‌تونه مانع عملکرد درست <$text text="TiddlyWiki"/> بشه.  
-از [[safe mode|http://tiddlywiki.com/#SafeMode]] استفاده کن تا عملکرد‌ها عادی بشه.
+از [[safe mode|https://tiddlywiki.com/#SafeMode]] استفاده کن تا عملکرد‌ها عادی بشه.
 Parsing/Inline/Caption: قواعد تجزیه‌ی درون‌خطی
 Parsing/Pragma/Caption: قواعد تجزیه پراگما
 Plugins/Add/Caption: دریافت افزونه‌های بیشتر

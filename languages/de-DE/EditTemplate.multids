@@ -1,6 +1,6 @@
 title: $:/language/EditTemplate/
 
-Body/External/Hint: Dies ist ein externer Tiddler, der nicht im TW file gespeichert ist. Sie können die "Tags" und "Feld" Texte ändern, jedoch nicht den Inhalt des Tiddlers!
+Body/External/Hint: Dieser Tiddler zeigt den Inhalt einer Datei, die nicht im TW file gespeichert ist. Sie können die "Tags" und "Feld" Texte ändern, jedoch nicht den Inhalt des Tiddlers!
 Body/Placeholder: Geben Sie den Text für diesen Tiddler ein.
 Body/Preview/Type/Output: Anzeige
 Field/Remove/Caption: Lösche Feld

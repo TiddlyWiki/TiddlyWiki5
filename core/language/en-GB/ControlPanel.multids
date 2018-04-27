@@ -13,6 +13,7 @@ Basics/Language/Prompt: Hello! Current language:
 Basics/NewJournal/Title/Prompt: Title of new journal tiddlers
 Basics/NewJournal/Text/Prompt: Text for new journal tiddlers
 Basics/NewJournal/Tags/Prompt: Tags for new journal tiddlers
+Basics/NewTiddler/Title/Prompt: Title of new tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Number of overridden shadow tiddlers:
 Basics/ShadowTiddlers/Prompt: Number of shadow tiddlers:
 Basics/Subtitle/Prompt: Subtitle:
@@ -53,7 +54,7 @@ Palette/HideEditor/Caption: hide editor
 Palette/Prompt: Current palette:
 Palette/ShowEditor/Caption: show editor
 Parsing/Caption: Parsing
-Parsing/Hint: Here you can globally disable/enable wiki parser rules. For changes to take effect, save and reload your wiki. Disabling certain parser rules can prevent <$text text="TiddlyWiki"/> from functioning correctly. Use [[safe mode|http://tiddlywiki.com/#SafeMode]] to restore normal operation.
+Parsing/Hint: Here you can globally disable/enable wiki parser rules. For changes to take effect, save and reload your wiki. Disabling certain parser rules can prevent <$text text="TiddlyWiki"/> from functioning correctly. Use [[safe mode|https://tiddlywiki.com/#SafeMode]] to restore normal operation.
 Parsing/Block/Caption: Block Parse Rules
 Parsing/Inline/Caption: Inline Parse Rules
 Parsing/Pragma/Caption: Pragma Parse Rules
@@ -139,6 +140,8 @@ Settings/ToolbarButtons/Icons/Description: Include icon
 Settings/ToolbarButtons/Text/Description: Include text
 Settings/DefaultSidebarTab/Caption: Default Sidebar Tab
 Settings/DefaultSidebarTab/Hint: Specify which sidebar tab is displayed by default
+Settings/DefaultMoreSidebarTab/Caption: Default More Sidebar Tab
+Settings/DefaultMoreSidebarTab/Hint: Specify which More sidebar tab is displayed by default
 Settings/LinkToBehaviour/Caption: Tiddler Opening Behaviour
 Settings/LinkToBehaviour/InsideRiver/Hint: Navigation from //within// the story river
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation from //outside// the story river
@@ -155,6 +158,10 @@ Settings/MissingLinks/Hint: Choose whether to link to tiddlers that do not exist
 Settings/MissingLinks/Description: Enable links to missing tiddlers
 StoryView/Caption: Story View
 StoryView/Prompt: Current view:
+Stylesheets/Caption: Stylesheets
+Stylesheets/Expand/Caption: Expand All
+Stylesheets/Hint: This is the rendered CSS of the current stylesheet tiddlers tagged with <<tag "$:/tags/Stylesheet">>
+Stylesheets/Restore/Caption: Restore
 Theme/Caption: Theme
 Theme/Prompt: Current theme:
 TiddlerFields/Caption: Tiddler Fields

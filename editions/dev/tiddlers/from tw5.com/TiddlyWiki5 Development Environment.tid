@@ -7,7 +7,7 @@ title: TiddlyWiki5 Development Environment
 
 ! Setting up npm
 
-[[Installing TiddlyWiki5|http://tiddlywiki.com/#Installing%20TiddlyWiki%20on%20Node.js]] with NPM downloads a snapshot release of TiddlyWiki5. To use a development copy of the TiddlyWiki5 repository instead of the copy installed by [[NPM]], use this command within the root of the TiddlyWiki5 repo:
+[[Installing TiddlyWiki5|https://tiddlywiki.com/#Installing%20TiddlyWiki%20on%20Node.js]] with NPM downloads a snapshot release of TiddlyWiki5. To use a development copy of the TiddlyWiki5 repository instead of the copy installed by [[NPM]], use this command within the root of the TiddlyWiki5 repo:
 
 ```bash
 npm link

@@ -35,6 +35,7 @@ Settings/BackgroundImageSize: Pagina achtergrond afbeeldingsmaat
 Settings/BackgroundImageSize/Contain: 'Contain'
 Settings/BackgroundImageSize/Cover: 'Cover'
 Settings/CodeFontFamily: Lettertype voor code
+Settings/EditorFontFamily: Lettertype voor editor
 Settings/FontFamily: Lettertype
 ThemeTweaks: Thema 'tweaks'
 ThemeTweaks/Hint: Je kan bepaalde aspecten van het ''Vanilla'' thema 'tweaken'

@@ -14,6 +14,8 @@ CloseOthers/Caption: close others
 CloseOthers/Hint: Close other tiddlers
 ControlPanel/Caption: control panel
 ControlPanel/Hint: Open control panel
+CopyToClipboard/Caption: copy to clipboard
+CopyToClipboard/Hint: Copy this text to the clipboard
 Delete/Caption: delete
 Delete/Hint: Delete this tiddler
 Edit/Caption: edit
@@ -139,6 +141,8 @@ LineWidth/Caption: line width
 LineWidth/Hint: Set line width for painting
 Link/Caption: link
 Link/Hint: Create wikitext link
+Linkify/Caption: wikilink
+Linkify/Hint: Wrap selection in square brackets
 ListBullet/Caption: bulleted list
 ListBullet/Hint: Apply bulleted list formatting to lines containing selection
 ListNumber/Caption: numbered list
@@ -159,6 +163,8 @@ PreviewType/Caption: preview type
 PreviewType/Hint: Choose preview type
 Quote/Caption: quote
 Quote/Hint: Apply quoted text formatting to lines containing selection
+RotateLeft/Caption: rotate left
+RotateLeft/Hint: Rotate image left by 90 degrees
 Size/Caption: image size
 Size/Caption/Height: Height:
 Size/Caption/Resize: Resize image
@@ -175,5 +181,7 @@ Subscript/Caption: subscript
 Subscript/Hint: Apply subscript formatting to selection
 Superscript/Caption: superscript
 Superscript/Hint: Apply superscript formatting to selection
+Transcludify/Caption: transclusion
+Transcludify/Hint: Wrap selection in curly brackets
 Underline/Caption: underline
 Underline/Hint: Apply underline formatting to selection

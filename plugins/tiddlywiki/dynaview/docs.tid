@@ -1,0 +1,86 @@
+title: $:/plugins/tiddlywiki/dynaview/docs
+
+! Documentation
+
+The components of this plugin include:
+
+* A background task that:
+** performs specified actions when elements are scrolled into view
+** updates certain base classes on the `document.body` according to the current zoom level
+** if enabled in the DynaView config panel - dynamically stores the viewport dimensions in $:/state/viewport/width and $:/state/viewport/height
+* Pre-configured CSS classes to simplify using those base classes
+* Usage examples
+
+! Scroll Features
+
+!! Set tiddler field when visible
+
+The background task detects when elements with the class `tc-dynaview-set-tiddler-when-visible` scroll into view. The first time that they do, the background task assigns the value in the attribute `data-dynaview-set-value` to the tiddler whose title is in the attribute `data-dynaview-set-tiddler`. This assignment can be tied to a reveal widget to cause content to be displayed when it becomes visible. If the class `tc-dynaview-expand-viewport` is set then the viewport is expanded so that the processing occurs when elements move near the viewport.
+
+!! Update address bar when scrolling
+
+The background task detects the tiddler at the top of the viewport and sets the address bar location hash to the title of that tiddler.
+
+! Viewport Size Features
+
+!! Viewport Size Tracking
+
+The background task can optionally dynamically update a pair of state tiddlers with the dimensions of the browser viewport.
+
+* Set the configuration tiddler $:/config/DynaView/ViewportDimensions to the text "yes" to enable this feature
+* The viewport dimensions can be found in $:/state/DynaView/ViewportDimensions/Width and $:/state/DynaView/ViewportDimensions/Height
+
+!! Font "Optisizer"
+
+The background task can optionally dynamically optimise the font size of a passage of text to match a desired line length.
+
+* Set the configuration tiddler $:/config/DynaView/Optisizer to the text "yes" to enable this feature
+* Optionally, update the configuration tiddler $:/config/DynaView/Optisizer/Text with the "maquette" -- a character string matchng the desired length (this string should not include spaces).
+* Assign the following CSS classes to appropriate elements on the page:
+** `.tc-dynaview-optisizer-site` for an HTML element whose `offsetWidth` property gives the desired output width
+** `.tc-dynaview-optisizer-maquette` for an HTML element that will contain the maquette
+* The computed optimum font size can be found in the tiddler $:/state/DynaView/Optisizer/FontSize
+
+The tiddler $:/plugins/tiddlywiki/dynaview/optisizer-maquette contains an example configuration that can be used to adjust the size of tiddler body text. To use it:
+
+* Set $:/config/DynaView/Optisizer to the text "yes"
+* Set $:/themes/tiddlywiki/vanilla/metrics/bodyfontsize to `{{$:/state/DynaView/Optisizer/FontSize}}`
+* Set $:/themes/tiddlywiki/vanilla/metrics/bodylineheight to `1.5` to ensure that the line height matches the font size
+
+! Zoom Features
+
+!! Document Body Zoom Classes
+
+The background task sets the following classes on `document.body` according to the current zoom level.
+
+|!Class |!Description |
+|`tc-dynaview-zoom-factor-1` |Set when the zoom level is less than 2.00 |
+|`tc-dynaview-zoom-factor-2` |Set when the zoom level is greater than 2.00 and less than 3.00 |
+|`tc-dynaview-zoom-factor-3` |Set when the zoom level is greater than 3.00 and less than 4.00 |
+|`tc-dynaview-zoom-factor-4` |Set when the zoom level is greater than 4.00 |
+|`tc-dynaview-zoom-factor-1-and-above` |Set when the zoom level is greater than or equal to 1.00 |
+|`tc-dynaview-zoom-factor-1a-and-above` |Set when the zoom level is greater than or equal to 1.14 |
+|`tc-dynaview-zoom-factor-1b-and-above` |Set when the zoom level is greater than or equal to 1.33 |
+|`tc-dynaview-zoom-factor-1c-and-above` |Set when the zoom level is greater than or equal to 1.60 |
+|`tc-dynaview-zoom-factor-2-and-above` |Set when the zoom level is greater than or equal to 2.00 |
+|`tc-dynaview-zoom-factor-2a-and-above` |Set when the zoom level is greater than or equal to 2.66 |
+|`tc-dynaview-zoom-factor-3-and-above` |Set when the zoom level is greater than or equal to 3.00 |
+|`tc-dynaview-zoom-factor-4-and-above` |Set when the zoom level is greater than or equal to 4.00 |
+
+!! Pre-configured Classes
+
+These classes can be used on any element to control its visibility at different zoom levels.
+
+|!Class |!Description |
+|`tc-dynaview-zoom-visible-1-and-above` |Visible when the zoom level is 1.00 or more |
+|`tc-dynaview-zoom-visible-1a-and-above` |Visible when the zoom level is 1.14 or more |
+|`tc-dynaview-zoom-visible-1b-and-above` |Visible when the zoom level is 1.33 or more |
+|`tc-dynaview-zoom-visible-1c-and-above` |Visible when the zoom level is 1.60 or more |
+|`tc-dynaview-zoom-visible-2-and-above` |Visible when the zoom level is 2.00 or more |
+|`tc-dynaview-zoom-visible-2a-and-above` |Visible when the zoom level is 2.66 or more |
+|`tc-dynaview-zoom-visible-3-and-above` |Visible when the zoom level is 3.00 or more |
+|`tc-dynaview-zoom-visible-4-and-above` |Visible when the zoom level is 4.00 or more |
+|`tc-dynaview-zoom-visible-1` |Visible when the zoom level is less than 2.00 |
+|`tc-dynaview-zoom-visible-2` |Visible when the zoom level is greater than or equal to 2.00 and less than 3.00 |
+|`tc-dynaview-zoom-visible-3` |Visible when the zoom level is greater than or equal to 3.00 and less than 4.00 |
+|`tc-dynaview-zoom-visible-4` |Visible when the zoom level is greater than or equal to 4.00 |

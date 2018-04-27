@@ -1,0 +1,21 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: Napredno
+Advanced/PluginInfo/Empty/Hint: noben
+Advanced/PluginInfo/Heading: Podrobnosti vtičnika
+Advanced/PluginInfo/Hint: Ta vtičnik vsebuje naslednje senčne tiddlerje:
+Advanced/ShadowInfo/Heading: Stanje sence
+Advanced/ShadowInfo/NotShadow/Hint: Tiddler  <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> ni senčni tiddler
+Advanced/ShadowInfo/OverriddenShadow/Hint: Prvotni senčni tiddler je bil prepisan s tem tiddlerjem. Če izbrišete ta tiddler, bo prvotni senčni tiddler ponovno aktiven.
+Advanced/ShadowInfo/Shadow/Hint: Tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> je senčni tiddler
+Advanced/ShadowInfo/Shadow/Source: Definiran je v vtičniku <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Fields/Caption: Polja
+List/Caption: Seznam
+List/Empty: Ta tiddler nima seznama
+Listed/Caption: Našteto
+Listed/Empty: Ta tiddler ni na seznamu drugih tiddlerjev.
+References/Caption: Reference
+References/Empty: Noben tiddler ni povezan s tem
+Tagging/Caption: Označevanje
+Tagging/Empty: Noben tiddler ni označen s tem
+Tools/Caption: Orodja

@@ -1,8 +1,8 @@
 title: $:/language/
 
-AboveStory/ClassicPlugin/Warning: 您貌似要加载为 ~TiddlyWiki 经典版设计的插件。请注意，[[这些插件无法运行于 TiddlyWiki 5.x.x 版|http://tiddlywiki.com/#TiddlyWikiClassic]]。检测到 ~TiddlyWiki 经典版插件：
+AboveStory/ClassicPlugin/Warning: 您貌似要加载为 ~TiddlyWiki 经典版设计的插件。请注意，[[这些插件无法运行于 TiddlyWiki 5.x.x 版|https://tiddlywiki.com/#TiddlyWikiClassic]]。检测到 ~TiddlyWiki 经典版插件：
 BinaryWarning/Prompt: 此条目包含二进制数据
-ClassicWarning/Hint: 此条目以经典版 TiddlyWiki 标记格式撰写，不完全兼容新版 TiddlyWiki 的格式，详细信息请参阅：http://tiddlywiki.com/static/Upgrading。
+ClassicWarning/Hint: 此条目以经典版 TiddlyWiki 标记格式撰写，不完全兼容新版 TiddlyWiki 的格式，详细信息请参阅：https://tiddlywiki.com/static/Upgrading。
 ClassicWarning/Upgrade/Caption: 升级
 CloseAll/Button: 全部关闭
 ColourPicker/Recent: 最近︰
@@ -12,6 +12,7 @@ ConfirmOverwriteTiddler: 您确定要覆写条目 "<$text text=<<title>>/>"？
 ConfirmEditShadowTiddler: 您即将要编辑默认条目，任何更改将会覆盖默认的系统，使未来的升级不寻常。您确定要编辑 "<$text text=<<title>>/>"?
 Count: 计数
 DefaultNewTiddlerTitle: 新条目
+Diffs/CountMessage: <<diff-count>> 个差异
 DropMessage: 拖放到此处 （或按 ESC 键取消）
 Encryption/Cancel: 取消
 Encryption/ConfirmClearPassword: 您要清除密码吗？当保存此维基时，这将删除已套用的加密
@@ -35,7 +36,7 @@ Error/XMLHttpRequest: XMLHttpRequest 错误代码
 InternalJavaScriptError/Title: 内部的 JavaScript 错误
 InternalJavaScriptError/Hint: 喔，真是令人尴尬。建议刷新您的浏览器，重新启动 TiddlyWiki
 InvalidFieldName: 栏位名称 "<$text text=<<fieldName>>/>" 包含无效字符，栏位名称只能包含小写字母、数字、底线 (`_`)、 连字号 (`-`) 和小数点 (`.`)
-LazyLoadingWarning: <p>正在从 ''<$text text={{!!_canonical_uri}}/>'' 加载外部条目 ...</p><p>如果此信息未消失，可能您使用的浏览器不支援此配置的外部条目。请参阅 http://tiddlywiki.com/#ExternalText</p>
+LazyLoadingWarning: <p>正在从 ''<$text text={{!!_canonical_uri}}/>'' 加载外部内容 ...</p><p>如果此信息未消失，可能是条目内容类型与外部内容的类型不匹配，或是您可能正在使用的浏览器，不支援单文件式维基的外部内容。请参阅 https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: 登录 TiddlySpace
 Manager/Controls/FilterByTag/None: (无)
 Manager/Controls/FilterByTag/Prompt: 依标签筛选︰

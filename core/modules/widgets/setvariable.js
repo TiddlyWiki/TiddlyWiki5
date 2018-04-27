@@ -42,6 +42,7 @@ SetWidget.prototype.execute = function() {
 	this.setFilter = this.getAttribute("filter");
 	this.setSelect = this.getAttribute("select");
 	this.setTiddler = this.getAttribute("tiddler");
+	this.setSubTiddler = this.getAttribute("subtiddler");
 	this.setField = this.getAttribute("field");
 	this.setIndex = this.getAttribute("index");
 	this.setValue = this.getAttribute("value");
@@ -58,7 +59,12 @@ Get the value to be assigned
 SetWidget.prototype.getValue = function() {
 	var value = this.setValue;
 	if(this.setTiddler) {
-		var tiddler = this.wiki.getTiddler(this.setTiddler);
+		var tiddler;
+		if(this.setSubTiddler) {
+			tiddler = this.wiki.getSubTiddler(this.setTiddler,this.setSubTiddler);
+		} else {
+			tiddler = this.wiki.getTiddler(this.setTiddler);			
+		}
 		if(!tiddler) {
 			value = this.setEmptyValue;
 		} else if(this.setField) {
@@ -70,7 +76,7 @@ SetWidget.prototype.getValue = function() {
 		}
 	} else if(this.setFilter) {
 		var results = this.wiki.filterTiddlers(this.setFilter,this);
-		if(!this.setValue) {
+		if(this.setValue == null) {
 			var select;
 			if(this.setSelect) {
 				select = parseInt(this.setSelect,10);

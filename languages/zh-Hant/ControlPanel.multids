@@ -13,6 +13,7 @@ Basics/Language/Prompt: 您好！當前的語言：
 Basics/NewJournal/Tags/Prompt: 新日誌條目的標籤
 Basics/NewJournal/Text/Prompt: 新日誌條目的內容
 Basics/NewJournal/Title/Prompt: 新日誌條目的名稱
+Basics/NewTiddler/Title/Prompt: 新條目的名稱
 Basics/OverriddenShadowTiddlers/Prompt: 被覆寫的預設條目數量：
 Basics/ShadowTiddlers/Prompt: 預設條目數量：
 Basics/Subtitle/Prompt: 副標題：
@@ -77,7 +78,7 @@ Plugins/Reinstall/Caption: 重新安裝
 Plugins/Themes/Caption: 佈景主題
 Plugins/Themes/Hint: 佈景主題插件
 Parsing/Caption: 解析
-Parsing/Hint: 在此您可以全域停用或啟用維基解析規則。要使更改生效，請儲存並重新載入您的維基。停用某些解析規則，會妨礙 <$text text="TiddlyWiki"/>  正常運作。可使用[[安全模式|http://tiddlywiki.com/#SafeMode]]恢復正常操作。
+Parsing/Hint: 在此您可以全域停用或啟用維基解析規則。要使更改生效，請儲存並重新載入您的維基。停用某些解析規則，會妨礙 <$text text="TiddlyWiki"/>  正常運作。可使用[[安全模式|https://tiddlywiki.com/#SafeMode]]恢復正常操作。
 Parsing/Block/Caption: 區塊解析規則
 Parsing/Inline/Caption: 行內解析規則
 Parsing/Pragma/Caption: 編譯指示解析規則
@@ -111,6 +112,8 @@ Settings/CamelCase/Description: 啟用自動駝峰式鏈接
 Settings/Caption: 設定
 Settings/DefaultSidebarTab/Caption: 預設側邊欄頁籤
 Settings/DefaultSidebarTab/Hint: 指定預設顯示的側邊欄頁籤
+Settings/DefaultMoreSidebarTab/Caption: 更多側邊欄的預設頁籤
+Settings/DefaultMoreSidebarTab/Hint: 指定預設顯示的更多側欄頁籤
 Settings/EditorToolbar/Caption: 編輯器工具列
 Settings/EditorToolbar/Hint: 啟用或停用編輯器工具列︰
 Settings/EditorToolbar/Description: 顯示編輯器工具列
@@ -156,6 +159,10 @@ Settings/TitleLinks/No/Description: 不顯示條目標題為鏈接
 Settings/TitleLinks/Yes/Description: 顯示條目標題為鏈接
 StoryView/Caption: 檢視模式
 StoryView/Prompt: 當前的檢視模式：
+Stylesheets/Caption: 樣式表
+Stylesheets/Expand/Caption: 全部展開
+Stylesheets/Hint: 這是當前標籤為 <<tag "$:/tags/Stylesheet">> 的樣式表條目呈現的 CSS
+Stylesheets/Restore/Caption: 復原
 Theme/Caption: 佈景主題
 Theme/Prompt: 當前的佈景主題：
 TiddlerFields/Caption: 條目欄位

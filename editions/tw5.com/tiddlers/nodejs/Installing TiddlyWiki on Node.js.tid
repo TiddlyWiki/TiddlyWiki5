@@ -1,11 +1,15 @@
+caption: Node.js
 created: 20131219100608529
-modified: 20170608135250979
-tags: [[TiddlyWiki on Node.js]]
+delivery: DIY
+description: Flexible hosting on your own machine or in the cloud
+method: sync
+modified: 20171115174105090
+tags: Saving [[TiddlyWiki on Node.js]] Windows Mac Linux
 title: Installing TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
 
 # Install [[Node.js]]
-#* either from your favourite package manager: typically `apt-get install nodejs` on Debian/Ubuntu Linux or Termux for Android, or `brew install node` on a Mac
+#* either from your favourite package manager: typically `apt-get install nodejs` on Debian/Ubuntu Linux or [[Termux for Android|Serving TW5 from Android]], or `brew install node` on a Mac
 #* or directly from http://nodejs.org
 # Open a command line terminal and type:
 #> `npm install -g tiddlywiki`
@@ -22,7 +26,6 @@ type: text/vnd.tiddlywiki
 # Optionally, make an offline copy:
 #* click the {{$:/core/images/save-button}} ''save changes'' button in the sidebar, ''OR''
 #* `tiddlywiki mynewwiki --build index`
-
 
 The `-g` flag causes TiddlyWiki to be installed globally. Without it, TiddlyWiki will only be available in the directory where you installed it.
 

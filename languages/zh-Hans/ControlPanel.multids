@@ -13,6 +13,7 @@ Basics/Language/Prompt: 您好！当前的语言：
 Basics/NewJournal/Tags/Prompt: 新日志条目的标签
 Basics/NewJournal/Text/Prompt: 新日志条目的内容
 Basics/NewJournal/Title/Prompt: 新日志条目的名称
+Basics/NewTiddler/Title/Prompt: 新条目的名称
 Basics/OverriddenShadowTiddlers/Prompt: 被覆写的默认条目数量：
 Basics/ShadowTiddlers/Prompt: 默认条目数量：
 Basics/Subtitle/Prompt: 副标题：
@@ -67,6 +68,7 @@ Plugins/Installed/Hint: 当前已安装的插件：
 Plugins/Languages/Caption: 语言
 Plugins/Languages/Hint: 语言包插件
 Plugins/NoInfoFound/Hint: 无 ''"<$text text=<<currentTab>>/>"''
+Plugins/NoInformation/Hint: 未提供信息
 Plugins/NotInstalled/Hint: 尚未安装此插件
 Plugins/OpenPluginLibrary: 开启插件程式库
 Plugins/ClosePluginLibrary: 关闭插件程式库
@@ -76,7 +78,7 @@ Plugins/Reinstall/Caption: 重新安装
 Plugins/Themes/Caption: 布景主题
 Plugins/Themes/Hint: 布景主题插件
 Parsing/Caption: 解析
-Parsing/Hint: 在此您可以全域禁用或启用维基解析规则。要使更改生效，请保存并重新加载您的维基。禁用某些解析规则，会妨碍 <$text text="TiddlyWiki"/> 正常运作。可使用[[安全模式|http://tiddlywiki.com/#SafeMode]]恢复正常操作。
+Parsing/Hint: 在此您可以全域禁用或启用维基解析规则。要使更改生效，请保存并重新加载您的维基。禁用某些解析规则，会妨碍 <$text text="TiddlyWiki"/> 正常运作。可使用[[安全模式|https://tiddlywiki.com/#SafeMode]]恢复正常操作。
 Parsing/Block/Caption: 区块解析规则
 Parsing/Inline/Caption: 内联解析规则
 Parsing/Pragma/Caption: 编译指示解析规则
@@ -110,6 +112,8 @@ Settings/CamelCase/Description: 启用自动驼峰式链接
 Settings/Caption: 设置
 Settings/DefaultSidebarTab/Caption: 默认侧边栏页签
 Settings/DefaultSidebarTab/Hint: 指定默认显示的侧边栏页签
+Settings/DefaultMoreSidebarTab/Caption: 更多侧边栏的默认页签
+Settings/DefaultMoreSidebarTab/Hint: 指定默认显示的更多侧栏页签
 Settings/EditorToolbar/Caption: 编辑器工具栏
 Settings/EditorToolbar/Hint: 启用或禁用编辑器工具栏︰
 Settings/EditorToolbar/Description: 显示编辑器工具栏
@@ -155,6 +159,10 @@ Settings/TitleLinks/No/Description: 不显示条目标题为链接
 Settings/TitleLinks/Yes/Description: 显示条目标题为链接
 StoryView/Caption: 查看模式
 StoryView/Prompt: 当前的查看模式：
+Stylesheets/Caption: 样式表
+Stylesheets/Expand/Caption: 全部展开
+Stylesheets/Hint: 这是当前标签为 <<tag "$:/tags/Stylesheet">> 的样式表条目呈现的 CSS
+Stylesheets/Restore/Caption: 复原
 Theme/Caption: 布景主题
 Theme/Prompt: 当前的布景主题：
 TiddlerFields/Caption: 条目栏位

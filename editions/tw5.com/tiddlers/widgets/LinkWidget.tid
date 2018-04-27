@@ -1,6 +1,6 @@
 caption: link
 created: 20131024141900000
-modified: 20170907141926550
+modified: 20171212063130159
 tags: Widgets
 title: LinkWidget
 type: text/vnd.tiddlywiki
@@ -11,11 +11,13 @@ The `link` widget generates links to tiddlers. (Use the HTML `<a>` element to ge
 
 |!Attribute |!Description |
 |to |The title of the target tiddler for the link (defaults to the [[current tiddler|Current Tiddler]]) |
-|aria-label |Optional [[Accessibility]] label |
+|aria-label |Optional accessibility label |
 |tooltip |Optional tooltip WikiText |
 |tabindex |Optional numeric [[tabindex|https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex]] |
 |draggable |"yes" to enable the link to be draggable (defaults to "yes") |
 |tag |Optional tag to override the default "a" element |
+|class|Optional CSS classes //in addition to// the default classes (see below)|
+|overrideClass|<<.from-version "5.1.16">> Optional CSS classes //instead of// the default classes |
 
 The content of the link widget is rendered within the `<a>` tag. The draggable functionality is equivalent to using the DraggableWidget with the ''tiddler'' attribute set to the link target.
 
@@ -54,11 +56,19 @@ This causes the tooltip to be the ''tooltip'' field of the target tiddler. If th
 
 ! CSS Classes
 
+The link widget automatically determines and applies the following classes to links:
+
 * `tc-tiddlylink` - applied to all links
 * `tc-tiddlylink-external` - applied to external, non-tiddler links
 * `tc-tiddlylink-internal` - applied to tiddler links
 * `tc-tiddlylink-missing` - applied to tiddler links where the target tiddler doesn't exist
 * `tc-tiddlylink-resolves` - applied to tiddler links when the target tiddler does exist
+
+Use the `class` attribute to specify additional css classes, or `overrideClass` to apply only that but not the above defaults, e.g. when used in a LinkCatcherWidget:
+
+<<wikitext-example-without-html """*<$link class="example">Here</$link> the `example` class is added.
+*<$link overrideClass="example">Here</$link> only the `example` class applies.
+*<$link overrideClass="">Here</$link> no class is set.""">>
 
 ! `href` generation
 

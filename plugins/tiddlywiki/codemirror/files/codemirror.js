@@ -3901,6 +3901,7 @@
   }
 
   function onDragStart(cm, e) {
+    e.preventDefault();
     if (ie && (!cm.state.draggingText || +new Date - lastDrop < 100)) { e_stop(e); return; }
     if (signalDOMEvent(cm, e) || eventInWidget(cm.display, e)) return;
 

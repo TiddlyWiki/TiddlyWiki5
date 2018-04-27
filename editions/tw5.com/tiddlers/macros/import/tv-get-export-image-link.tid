@@ -3,4 +3,4 @@ modified: 20150228123921000
 title: $:/editions/tw5.com/macro-examples/tv-get-export-image-link
 type: text/vnd.tiddlywiki
 
-\define tv-get-export-image-link(src) http://www.tiddlywiki.com/$src$
+\define tv-get-export-image-link(src) https://www.tiddlywiki.com/$src$

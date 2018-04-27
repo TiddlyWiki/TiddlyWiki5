@@ -3,7 +3,7 @@ tags: $:/tags/TiddlerInfo
 caption: Sources
 
 \define static-link-base()
-http://tiddlywiki.com/static/$(title)$.html
+https://tiddlywiki.com/static/$(title)$.html
 \end
 
 \define make-static-link()

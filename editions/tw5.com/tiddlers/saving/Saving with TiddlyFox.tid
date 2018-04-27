@@ -1,13 +1,16 @@
+caption: ~TiddlyFox
 created: 20131221085742684
-modified: 20170602031719918
-tags: Saving
+delivery: Browser Extension
+description: Browser extension for older versions of Firefox
+method: save
+modified: 20171118230504315
+tags: Saving Firefox
 title: Saving with TiddlyFox
 type: text/vnd.tiddlywiki
 
 If you're using [[Firefox for Android]], see the instructions for [[Saving with TiddlyFox on Android]].
 
-# Ensure you have the latest version of [[Firefox]]
-#* http://getfirefox.com
+# Ensure you have a version of Firefox before version 57. ~TiddlyFox will not work with Firefox 57 and on.  For Firefox 57 and on, consider using the following instead: <<list-links filter:"[tag[Firefox]delivery[Browser Extension]] -[[Saving with TiddlyFox]]">>
 # Install the latest release of the TiddlyFox extension from:
 #* https://addons.mozilla.org/en-GB/firefox/addon/tiddlyfox/
 # Restart [[Firefox]]

@@ -1,0 +1,14 @@
+title: $:/language/Help/makelibrary
+description: Constrói a extensão de biblioteca necessária para o processo de atualização
+
+Constrói o tiddler `$:/UpgradeLibrary` para o processo de atualização.
+
+A biblioteca de atualização é formatada como uma extensão normal com o tipo de extensão definido como `library`. Contém uma cópia de cada uma das extensões, temas e pacotes de línguas disponíveis dentro do repositório da TiddlyWiki5.
+
+Este comando é para uso interno; é apenas importante para usuário que criem um processo de atualização personalizado.
+
+```
+--makelibrary <title>
+```
+
+Por omissão o argumento será `$:/UpgradeLibrary`.

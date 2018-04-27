@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/external-attachments/settings
+
+When used on platforms that provide the necessary support (such as ~TiddlyDesktop), you can optionally import binary files as external tiddlers that reference the original file via the ''_canonical_uri'' field.
+
+By default, a relative path is used to reference the file. Optionally, you can specify that an absolute path is used instead. You can do this separately for "descendent" attachments -- files that are contained within the directory containing the wiki -- vs. "non-descendent" attachments.
+
+<$checkbox tiddler="$:/config/ExternalAttachments/Enable" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/Enable">Enable importing binary files as external attachments</$link> </$checkbox>
+
+<$checkbox tiddler="$:/config/ExternalAttachments/UseAbsoluteForDescendents" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/UseAbsoluteForDescendents">Use absolute paths for descendent attachments</$link> </$checkbox>
+
+<$checkbox tiddler="$:/config/ExternalAttachments/UseAbsoluteForNonDescendents" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/UseAbsoluteForNonDescendents">Use absolute paths for non-descendent attachments</$link> </$checkbox>

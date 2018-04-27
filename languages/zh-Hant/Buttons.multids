@@ -14,6 +14,8 @@ CloseOthers/Caption: 關閉其他
 CloseOthers/Hint: 關閉其他條目
 ControlPanel/Caption: 控制台
 ControlPanel/Hint: 開啟控制台
+CopyToClipboard/Caption: 複製到剪貼簿
+CopyToClipboard/Hint: 將此文字複製到剪貼簿
 Delete/Caption: 刪除
 Delete/Hint: 刪除此條目
 Edit/Caption: 編輯
@@ -139,6 +141,8 @@ LineWidth/Caption: 線寬
 LineWidth/Hint: 設定繪畫的線條寬度
 Link/Caption: 鏈接
 Link/Hint: 建立維基文字鏈接
+Linkify/Caption: 維基鏈接
+Linkify/Hint: 套用維基鏈接於所選文字
 ListBullet/Caption: 符號清單
 ListBullet/Hint: 套用符號清單格式於包含所選文字的列
 ListNumber/Caption: 數字清單
@@ -159,6 +163,8 @@ PreviewType/Caption: 預覽類型
 PreviewType/Hint: 選擇預覽類型
 Quote/Caption: 引言
 Quote/Hint: 套用引言文字格式於包含所選文字的列
+RotateLeft/Caption: 向左旋轉
+RotateLeft/Hint: 圖像向左旋轉 90 度
 Size/Caption: 圖像大小
 Size/Caption/Height: 高度︰
 Size/Caption/Resize: 調整圖像的大小
@@ -175,5 +181,7 @@ Subscript/Caption: 下標
 Subscript/Hint: 套用下標格式於所選文字
 Superscript/Caption: 上標
 Superscript/Hint: 套用上標格式於所選文字
+Transcludify/Caption: 嵌入
+Transcludify/Hint: 套用嵌入於所選文字
 Underline/Caption: 底線
 Underline/Hint: 套用底線格式於所選文字

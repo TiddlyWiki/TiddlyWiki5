@@ -1,0 +1,179 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: napredno iskanje
+AdvancedSearch/Hint: Napredno iskanje
+Bold/Caption: krepko
+Bold/Hint: Označite izbrano besedilo kot krepko
+Cancel/Caption: prekliči
+Cancel/Hint: Zavrzite spremembe tega tiddlerja
+Clear/Caption: počisti
+Clear/Hint: Počistite sliko v polno barvo
+Clone/Caption: kloniraj
+Clone/Hint: Klonirajte ta tiddler
+Close/Caption: zapri
+Close/Hint: Zaprite ta tiddler
+CloseAll/Caption: zapri vse
+CloseAll/Hint: Zaprite vse tiddlerje
+CloseOthers/Caption: zapri ostale
+CloseOthers/Hint: Zaprite ostale tiddlerje
+ControlPanel/Caption: nadzorna plošča
+ControlPanel/Hint: Odprite nadzorno ploščo
+Delete/Caption: izbriši
+Delete/Hint: Izbrišite ta tiddler
+Edit/Caption: uredi
+Edit/Hint: Uredite ta tiddler
+EditorHeight/Caption: višina urejevalnika
+EditorHeight/Caption/Auto: Samodejno prilagodi višino, da ustreza vsebini
+EditorHeight/Caption/Fixed: Stalna višina:
+EditorHeight/Hint: Izberite višino urejevalnika besedil
+Encryption/Caption: šifriranje
+Encryption/ClearPassword/Caption: izbriši geslo
+Encryption/ClearPassword/Hint: Izbrišite geslo in shranite ta wiki brez šifriranja
+Encryption/Hint: Nastavite ali izbrišite geslo za shranjevanje tega wikija
+Encryption/SetPassword/Caption: nastavi geslo
+Encryption/SetPassword/Hint: Nastavite geslo za shranjevanje tega wikija s šifriranjem
+Excise/Caption: izreži
+Excise/Caption/Excise: Izvedite izrezek
+Excise/Caption/MacroName: Ime makra:
+Excise/Caption/NewTitle: Naslov novega tiddlerja:
+Excise/Caption/Replace: Zamenjajte izrezano besedilo z:
+Excise/Caption/Replace/Link: povezava
+Excise/Caption/Replace/Macro: makro
+Excise/Caption/Replace/Transclusion: transkluzija
+Excise/Caption/Tag: Označite nov tiddler z naslovom tega tiddlerja
+Excise/Caption/TiddlerExists: Pozor: tiddler že obstaja
+Excise/Hint: Izbrano besedilo izrežite v nov tiddler
+ExportPage/Caption: izvozi vse
+ExportPage/Hint: Izvozite vse tiddlerje
+ExportTiddler/Caption: izvozi tiddler
+ExportTiddler/Hint: Izvozite tiddler
+ExportTiddlers/Caption: izvozi tiddlerje
+ExportTiddlers/Hint: Izvozite tiddlerje
+Fold/Caption: strni tiddler
+Fold/FoldBar/Caption: strni/razširi besedilo
+Fold/FoldBar/Hint: Izbirni gumbi za strnitev in razširitev tiddlerjev
+Fold/Hint: Strnite besedilo tega tiddlerja
+FoldAll/Caption: strni vse tiddlerje
+FoldAll/Hint: Strnite besedilo vseh odprtih tiddlerjev
+FoldOthers/Caption: strni besedilo ostalih tiddlerjev
+FoldOthers/Hint: Strnite besedilo ostalih odprtih tiddlerjev
+FullScreen/Caption: celozaslonsko
+FullScreen/Hint: Vklopite ali izkolpite celozaslonski način
+Heading1/Caption: Naslov 1
+Heading1/Hint: Na izbranih vrsticah uporabite oblikovanje naslova ravni 1
+Heading2/Caption: Naslov 2
+Heading2/Hint: Na izbranih vrsticah uporabite oblikovanje naslova ravni 2
+Heading3/Caption: Naslov 3
+Heading3/Hint: Na izbranih vrsticah uporabite oblikovanje naslova ravni 3
+Heading4/Caption: Naslov 4
+Heading4/Hint: Na izbranih vrsticah uporabite oblikovanje naslova ravni 4
+Heading5/Caption: Naslov 5
+Heading5/Hint: Na izbranih vrsticah uporabite oblikovanje naslova ravni 5
+Heading6/Caption: Naslov 6
+Heading6/Hint: Na izbranih vrsticah uporabite oblikovanje naslova ravni 6
+Help/Caption: pomoč
+Help/Hint: Prikaži pomoč
+HideSideBar/Caption: skrij stransko orodno vrstico
+HideSideBar/Hint: Skrijte stransko orodno vrstico
+Home/Caption: domov
+Home/Hint: Odprite privzete tiddlerje
+Import/Caption: uvoz
+Import/Hint: Uvozite več vrst datotek, vključno z besedilom, sliko, TiddlyWiki ali JSON
+Info/Caption: info
+Info/Hint: Pokaži informacije za ta tiddler
+Italic/Caption: ležeče
+Italic/Hint: Označite izbrano besedilo kot ležeče
+Language/Caption: jezik
+Language/Hint: Izberite jezik uporabniškega vmesnika
+LineWidth/Caption: širina črte
+LineWidth/Hint: Nastavite širino črte za slikanje
+Link/Caption: povezava
+Link/Hint: Ustvarite povezavo wiki
+ListBullet/Caption: označen seznam
+ListBullet/Hint: Na izbranih vrsticah uporabite oblikovanje označenega seznama
+ListNumber/Caption: oštevilčen seznam
+ListNumber/Hint: Na izbranih vrsticah uporabite oblikovanje oštevilčenega seznama
+Manager/Caption: upravljalnik tiddlerjev
+Manager/Hint: Odprite upravljalnik tiddlerjev
+MonoBlock/Caption: blok besedila stalne širine
+MonoBlock/Hint: Na izbranih vrsticah uporabite oblikovanje blok besedila stalne širine
+MonoLine/Caption: pisava stalne širine
+MonoLine/Hint: Izbor oblikujte s pisavo stalne širine
+More/Caption: več
+More/Hint: Več dejanj
+NewHere/Caption: nov tukaj
+NewHere/Hint: Ustvarite nov tiddler, ki je označen z imenom tega tiddlerja
+NewImage/Caption: nova slika
+NewImage/Hint: Ustvarite novo sliko
+NewJournal/Caption: nov dnevnik
+NewJournal/Hint: Ustvarite nov dnevnik
+NewJournalHere/Caption: nov dnevnik tukaj
+NewJournalHere/Hint: Ustvarite nov dnevnik, ki je označen z imenom tega tiddlerja
+NewMarkdown/Caption: nov Markdown tiddler
+NewMarkdown/Hint: Ustvarite nov Markdown tiddler
+NewTiddler/Caption: nov tiddler
+NewTiddler/Hint: Ustvarite nov tiddler
+Opacity/Caption: prosojnost
+Opacity/Hint: Nastavite prosojnost slikanja
+OpenWindow/Caption: odpri v novem oknu
+OpenWindow/Hint: Odpri tiddler v novem oknu
+Paint/Caption: barva
+Paint/Hint: Nastavite barvo slikanja
+Palette/Caption: paleta
+Palette/Hint: Izberite barvno paleto
+Permalink/Caption: permalink
+Permalink/Hint: Naslovno vrstico brskalnika nastavite na neposredno povezavo do tega tiddlerja
+Permaview/Caption: permaview
+Permaview/Hint: Naslovno vrstico brskalnika nastavite na neposredno povezavo do vseh tiddlerjev v tej zgodbi
+Picture/Caption: slika
+Picture/Hint: Vstavite sliko
+Preview/Caption: predogled
+Preview/Hint: Pokažite podokno za predogled
+PreviewType/Caption: vrsta predogleda
+PreviewType/Hint: Izberite vrsto predogleda
+Print/Caption: natisni stran
+Print/Hint: Natisnite trenutno stran
+Quote/Caption: citat
+Quote/Hint: Na izbranih vrsticah uporabite oblikovanje citata
+Refresh/Caption: osveži
+Refresh/Hint: Popolnoma osvežite wiki
+Save/Caption: v redu
+Save/Hint: Potrdite spremembe tega tiddlerja
+SaveWiki/Caption: shrani spremembe
+SaveWiki/Hint: Shranite spremembe
+ShowSideBar/Caption: pokaži stransko vrstico
+ShowSideBar/Hint: Pokažite stransko vrstico
+Size/Caption: velikost slike
+Size/Caption/Height: Višina:
+Size/Caption/Resize: Spremeni velikost slike
+Size/Caption/Width: Širina:
+Size/Hint: Nastavite velikost slike
+Stamp/Caption: žig
+Stamp/Caption/New: Dodajte svoje
+Stamp/Hint: Vstavite vnaprej konfiguriran izrezek besedila
+Stamp/New/Text: Besedilo izrezka. (Ne pozabite dodati opisnega naslova v polju napisa).
+Stamp/New/Title: Ime, kot je prikazano v meniju
+StoryView/Caption: pogled zgodbe
+StoryView/Hint: Izberite upodobitev zgodbe
+Strikethrough/Caption: prečrtano
+Strikethrough/Hint: Prečrtajte izbrano besedilo
+Subscript/Caption: podpisano
+Subscript/Hint: Izbrano besedilo oblikujte podpisano
+Superscript/Caption: nadpisano
+Superscript/Hint: Izbrano besedilo oblikujte nadpisano
+TagManager/Caption: upravitelj oznak
+TagManager/Hint: Odprite upravitelja oznak
+Theme/Caption: tema
+Theme/Hint: Izberite temo
+Timestamp/Caption: časovni žigi
+Timestamp/Hint: Izberite, ali spremembe posodobijo časovne žige
+Timestamp/Off/Caption: časovni žigi so izključeni
+Timestamp/Off/Hint: Ne posodobi časovnih žigov, ko so tiddlerji spremenjeni
+Timestamp/On/Caption: časovni žigi so vključeni
+Timestamp/On/Hint: Posodobite časovne žige, ko so tiddlerji spremenjeni
+Underline/Caption: podčrtano
+Underline/Hint: Podčrtajte izbrano besedilo
+Unfold/Caption: razširi tiddler
+Unfold/Hint: Razširi besedilo tega tiddlerja
+UnfoldAll/Caption: razširi vse tiddlerje
+UnfoldAll/Hint: Razširi besedilo vseh odprtih tiddlerjev

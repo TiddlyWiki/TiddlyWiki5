@@ -1,9 +1,9 @@
 title: $:/language/Help/render
 description: Renders individual tiddlers to files
 
-Render individual tiddlers and save the results to the specified files.
+Render individual tiddlers identified by a filter and save the results to the specified files.
 
-Optionally the title of a template tiddler can be specified, in which case the template tiddler is rendered with the "currentTiddler" variable set to the title of the tiddler that is being rendered.
+Optionally, the title of a template tiddler can be specified. In this case, instead of directly rendering each tiddler, the template tiddler is rendered with the "currentTiddler" variable set to the title of the tiddler that is being rendered.
 
 A name and value for an additional variable may optionally also be specified.
 

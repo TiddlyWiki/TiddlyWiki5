@@ -32,6 +32,9 @@ exports.makeDraggable = function(options) {
 	// Add event handlers
 	$tw.utils.addEventListeners(domNode,[
 		{name: "dragstart", handlerFunction: function(event) {
+			if(event.dataTransfer === undefined) {
+				return false;
+			}
 			// Collect the tiddlers being dragged
 			var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
 				dragFilter = options.dragFilterFn && options.dragFilterFn(),

@@ -1,0 +1,22 @@
+created: 20171010115148355
+modified: 20171010115148355
+tags: HookMechanism
+title: Hook: th-importing-file
+type: text/vnd.tiddlywiki
+
+This hook allows plugins to inspect or modify the details of files imported via drag and drop or the "import" button. It is invoked as each [[File object|https://developer.mozilla.org/en-US/docs/Web/API/File]] provided by the browser in response to an import or drag and drop is being read. The hook function can choose to ignore the file, in which case TiddlyWiki's default processing proceeds to read and import the content of the file. Alternatively, the hook function can process the file to extract the tiddlers itself, and then pass them back to TiddlyWiki to be handled by the rest of the import process.
+
+Use this hook if you want to control how tiddlers are extracted from files during an import. See [[Hook: th-importing-tiddler]] if you want to process each imported tiddler after they have been extracted from the files.
+
+Hook function parameters:
+
+* ''info'': an object with properties containing information relating to the current file:
+** ''file'': reference to the browser's [[File object|https://developer.mozilla.org/en-US/docs/Web/API/File]]
+** ''type'': the MIME type of the file. If not provided by the browser then TiddlyWiki attempts to infer the type from the file extension
+** ''isBinary'': flag for whether the file contains binary data (which requires that the file type be recognised by TiddlyWiki)
+** ''callback'': callback function to be called with an array of tiddler field objects extracted from the file object
+
+Return value:
+
+* ''true'' indicates that the hook handled the file, and passed any extracted tiddlers to the callback
+* ''false'' indicates that the hook didn't process the file

@@ -1,7 +1,7 @@
 title: $:/language/Help/import
 description: Import tiddlers from a file
 
-Import tiddlers from 2.x.x TiddlyWiki files (`.html`), `.tiddler`, `.tid`, `.json` or other files. The deserializer must be explicitly specified, unlike the load command which infers the deserializer from the file extension.
+Import tiddlers from TiddlyWiki (`.html`), `.tiddler`, `.tid`, `.json` or other local files. The deserializer must be explicitly specified, unlike the `load` command which infers the deserializer from the file extension.
 
 ```
 --import <filepath> <deserializer> [<title>] [<encoding>]

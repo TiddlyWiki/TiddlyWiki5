@@ -6,10 +6,10 @@ tags: [[$:/tags/Stylesheet]]
 <$list filter="[<background>is[image]]">
 `background: url(`
 <$list filter="[<background>!has[_canonical_uri]]">
-<$macrocall $name="datauri" title={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}}/>
+`"`<$macrocall $name="datauri" title={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}}/>`"`
 </$list>
 <$list filter="[<background>has[_canonical_uri]]">
-<$view tiddler={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}} field="_canonical_uri"/>
+`"`<$view tiddler={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}} field="_canonical_uri"/>`"`
 </$list>
 `) center center;`
 `background-attachment: `{{$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment}}`;
@@ -84,6 +84,14 @@ body.tc-body {
 	background-color: <<colour page-background>>;
 	fill: <<colour foreground>>;
 }
+
+<<if-background-attachment """
+
+body.tc-body {
+        background-color: transparent;
+}
+
+""">>
 
 h1, h2, h3, h4, h5, h6 {
 	line-height: 1.2;
@@ -1746,6 +1754,7 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-tab-content.tc-vertical  {
+    word-break: break-word;
 	display: inline-block;
 	vertical-align: top;
 	padding-top: 0;
@@ -2187,10 +2196,6 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	line-height: 1.5;
 }
 
-.tc-table-of-contents li li li a {
-	font-weight: bold;
-}
-
 .tc-table-of-contents li li li li {
 	font-size: 0.95em;
 	font-weight: 200;
@@ -2379,6 +2384,30 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 .tc-thumbnail-wrapper:hover .tc-thumbnail-caption {
 	filter: alpha(opacity=1);
 	opacity: 1;
+}
+
+/*
+** Diffs
+*/
+
+.tc-diff-equal {
+	background-color: <<colour diff-equal-background>>;
+	color: <<colour diff-equal-foreground>>;
+}
+
+.tc-diff-insert {
+	background-color: <<colour diff-insert-background>>;
+	color: <<colour diff-insert-foreground>>;
+}
+
+.tc-diff-delete {
+	background-color: <<colour diff-delete-background>>;
+	color: <<colour diff-delete-foreground>>;
+}
+
+.tc-diff-invisible {
+	background-color: <<colour diff-invisible-background>>;
+	color: <<colour diff-invisible-foreground>>;
 }
 
 /*

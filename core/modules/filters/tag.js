@@ -25,17 +25,18 @@ exports.tag = function(source,operator,options) {
 		});
 	} else {
 		// Old semantics:
+		var tiddlers = options.wiki.getTiddlersWithTag(operator.operand);
 		if(operator.prefix === "!") {
 			// Returns a copy of the input if operator.operand is missing
 			source(function(tiddler,title) {
-				if(tiddler && !tiddler.hasTag(operator.operand)) {
+				if(tiddlers.indexOf(title) === -1) {
 					results.push(title);
 				}
 			});
 		} else {
 			// Returns empty results if operator.operand is missing
 			source(function(tiddler,title) {
-				if(tiddler && tiddler.hasTag(operator.operand)) {
+				if(tiddlers.indexOf(title) !== -1) {
 					results.push(title);
 				}
 			});

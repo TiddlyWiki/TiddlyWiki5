@@ -2,7 +2,7 @@ title: $:/language/Search/
 
 DefaultResults/Caption: רשימה
 Filter/Caption: פילטר
-Filter/Hint: חפש דרך [[filter expression|http://tiddlywiki.com/static/Filters.html]]
+Filter/Hint: חפש דרך [[filter expression|https://tiddlywiki.com/static/Filters.html]]
 Matches/All: כל ההתאמות:
 Matches/Title: התאמות שם:
 Search: חפש

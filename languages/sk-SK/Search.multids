@@ -2,7 +2,7 @@ title: $:/language/Search/
 
 DefaultResults/Caption: Zoznam
 Filter/Caption: Filter
-Filter/Hint: Hľadaj cez [[filter expression|http://tiddlywiki.com/static/Filters.html]]
+Filter/Hint: Hľadaj cez [[filter expression|https://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small><<resultCount>> nájdené</small>//
 Matches: //<small><<resultCount>> nájdené</small>//
 Shadows/Caption: Tieňové

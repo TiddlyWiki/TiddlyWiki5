@@ -1,6 +1,6 @@
 caption: tabs
 created: 20131228162203521
-modified: 20150221211706000
+modified: 20171113135543552
 tags: Macros [[Core Macros]]
 title: tabs Macro
 type: text/vnd.tiddlywiki
@@ -23,6 +23,8 @@ By default the tabs are arranged horizontally above the content. To get vertical
 : Additional [[CSS|Cascading Style Sheets]] classes for the generated `div` elements. Multiple classes can be separated with spaces
 ;template
 : Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the content of the selected tab
+;buttonTemplate
+: Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the content of the button for the selected tab
 
 Within the template, the title of the selected tab is available in the <<.var currentTab>> variable.
 

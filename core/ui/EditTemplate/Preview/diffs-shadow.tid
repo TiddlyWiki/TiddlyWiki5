@@ -1,0 +1,11 @@
+title: $:/core/ui/EditTemplate/body/preview/diffs-shadow
+tags: $:/tags/EditPreview
+caption: differences from shadow (if any)
+list-after: $:/core/ui/EditTemplate/body/preview/output
+
+<$list filter="[<currentTiddler>!is[image]]" emptyMessage={{$:/core/ui/EditTemplate/body/preview/output}}>
+
+<$macrocall $name="compareTiddlerText" sourceTiddlerTitle={{{ [{!!draft.of}shadowsource[]] }}} sourceSubTiddlerTitle={{!!draft.of}} destTiddlerTitle=<<currentTiddler>>/>
+
+</$list>
+

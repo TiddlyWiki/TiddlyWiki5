@@ -1,7 +1,7 @@
 title: $:/language/Help/import
 description: 从文件导入条目
 
-从 2.x.x TiddlyWiki 文件 (`.html`)、`.tiddler`、`.tid`、`.json` 或其他文件导入条目。必须明确指定解串器，而不像 load 命令，从文件扩展名推断解串器。
+从 TiddlyWiki 文件 (`.html`)、`.tiddler`、`.tid`、`.json` 或其他本机文件导入条目。必须明确指定解串器，而不像 load 命令，从文件扩展名推断解串器。
 
 ```
 --import <filepath> <deserializer> [<title>] [<encoding>]

@@ -37,12 +37,12 @@ tags: $:/tags/Macro
     <li class=<<toc-item-class>>>
     <$link>
       <$reveal type="nomatch" state=<<toc-state>> text="open">
-        <$button set=<<toc-state>> setTo="open" class="tc-btn-invisible">
+        <$button set=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
           {{$:/core/images/right-arrow}}
         </$button>
       </$reveal>
       <$reveal type="match" state=<<toc-state>> text="open">
-        <$button set=<<toc-state>> setTo="close" class="tc-btn-invisible">
+        <$button set=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
           {{$:/core/images/down-arrow}}
         </$button>
       </$reveal>
@@ -62,13 +62,13 @@ tags: $:/tags/Macro
   <$set name="toc-item-class" filter="""$itemClassFilter$""" emptyValue="toc-item" value="toc-item-selected">
     <li class=<<toc-item-class>>>
       <$reveal type="nomatch" state=<<toc-state>> text="open">
-        <$button set=<<toc-state>> setTo="open" class="tc-btn-invisible">
+        <$button set=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
           {{$:/core/images/right-arrow}}
           <<toc-caption>>
         </$button>
       </$reveal>
       <$reveal type="match" state=<<toc-state>> text="open">
-        <$button set=<<toc-state>> setTo="close" class="tc-btn-invisible">
+        <$button set=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
           {{$:/core/images/down-arrow}}
           <<toc-caption>>
         </$button>
@@ -104,12 +104,12 @@ tags: $:/tags/Macro
       <$link>
           <$list filter="[all[current]tagging[]limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button>">
           <$reveal type="nomatch" state=<<toc-state>> text="open">
-            <$button set=<<toc-state>> setTo="open" class="tc-btn-invisible">
+            <$button set=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
               {{$:/core/images/right-arrow}}
             </$button>
           </$reveal>
           <$reveal type="match" state=<<toc-state>> text="open">
-            <$button set=<<toc-state>> setTo="close" class="tc-btn-invisible">
+            <$button set=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
               {{$:/core/images/down-arrow}}
             </$button>
           </$reveal>
@@ -130,13 +130,13 @@ tags: $:/tags/Macro
     <li class=<<toc-item-class>>>
       <$list filter="[all[current]tagging[]limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button> <$view field='caption'><$view field='title'/></$view>">
         <$reveal type="nomatch" state=<<toc-state>> text="open">
-          <$button set=<<toc-state>> setTo="open" class="tc-btn-invisible">
+          <$button set=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
             {{$:/core/images/right-arrow}}
             <<toc-caption>>
           </$button>
         </$reveal>
         <$reveal type="match" state=<<toc-state>> text="open">
-          <$button set=<<toc-state>> setTo="close" class="tc-btn-invisible">
+          <$button set=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
             {{$:/core/images/down-arrow}}
             <<toc-caption>>
           </$button>

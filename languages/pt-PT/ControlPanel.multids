@@ -53,7 +53,7 @@ Palette/Prompt: Paleta actual:
 Palette/ShowEditor/Caption: mostrar editor
 Parsing/Block/Caption: Regras de análise de blocos
 Parsing/Caption: Análise
-Parsing/Hint: Aqui pode desactivar globalmente regras individuais do analisador de wiki. Tenha em atenção que desactivar certas regras de análise pode impedir a ~TiddlyWiki de funcionar correctamente (pode repor o funcionamento normal com o [[modo de segurança|http://tiddlywiki.com/#SafeMode]] )
+Parsing/Hint: Aqui pode desactivar globalmente regras individuais do analisador de wiki. Tenha em atenção que desactivar certas regras de análise pode impedir a ~TiddlyWiki de funcionar correctamente (pode repor o funcionamento normal com o [[modo de segurança|https://tiddlywiki.com/#SafeMode]] )
 Parsing/Inline/Caption: Regras de Análise em Linha
 Parsing/Pragma/Caption: Regras de Análise Pragma
 Plugins/Add/Caption: Obter mais extensões

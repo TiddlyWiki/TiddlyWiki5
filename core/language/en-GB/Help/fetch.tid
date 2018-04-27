@@ -24,15 +24,15 @@ Preceding the `--fetch` command with `--verbose` will output progress informatio
 
 Note that TiddlyWiki will not fetch an older version of an already loaded plugin.
 
-The following example retrieves all the non-system tiddlers from http://tiddlywiki.com and saves them to a JSON file:
+The following example retrieves all the non-system tiddlers from https://tiddlywiki.com and saves them to a JSON file:
 
 ```
-tiddlywiki --verbose --fetch file "http://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
+tiddlywiki --verbose --fetch file "https://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
 ```
 
 The following example retrieves the "favicon" file from tiddlywiki.com and saves it in a file called "output.ico". Note that the intermediate tiddler "Icon Tiddler" is quoted in the "--fetch" command because it is being used as a transformation filter to replace the default title, while there are no quotes for the "--savetiddler" command because it is being used directly as a title.
 
 ```
-tiddlywiki --verbose --fetch raw-file "http://tiddlywiki.com/favicon.ico" "[[Icon Tiddler]]" --savetiddler "Icon Tiddler" output.ico
+tiddlywiki --verbose --fetch raw-file "https://tiddlywiki.com/favicon.ico" "[[Icon Tiddler]]" --savetiddler "Icon Tiddler" output.ico
 ```
 

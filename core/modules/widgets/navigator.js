@@ -458,6 +458,13 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	if(additionalFields && additionalFields.title) {
 		title = additionalFields.title;
 	}
+	// Make a copy of the additional fields excluding any blank ones
+	var filteredAdditionalFields = $tw.utils.extend({},additionalFields);
+	Object.keys(filteredAdditionalFields).forEach(function(fieldName) {
+		if(filteredAdditionalFields[fieldName] === "") {
+			delete filteredAdditionalFields[fieldName];
+		}
+	});
 	// Generate a title if we don't have one
 	title = title || this.wiki.generateNewTitle($tw.language.getString("DefaultNewTiddlerTitle"));
 	// Find any existing draft for this tiddler
@@ -488,8 +495,9 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 			"draft.title": title
 		},
 		templateTiddler,
-		existingTiddler,
 		additionalFields,
+		existingTiddler,
+		filteredAdditionalFields,
 		this.wiki.getCreationFields(),
 		{
 			title: draftTitle,
