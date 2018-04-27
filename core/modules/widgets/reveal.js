@@ -219,7 +219,7 @@ RevealWidget.prototype.updateState = function() {
 			if(!self.isOpen) {
 				domNode.setAttribute("hidden","true");
 			}
-        }});
+        	}});
 	}
 };
 
