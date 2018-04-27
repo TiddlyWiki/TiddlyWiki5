@@ -121,17 +121,28 @@ RevealWidget.prototype.readState = function() {
 			this.readPopupState(state);
 			break;
 		case "match":
-			this.readMatchState(state);
+			this.isOpen = !!(this.compareStateText(state) == 0);
 			break;
 		case "nomatch":
-			this.readMatchState(state);
-			this.isOpen = !this.isOpen;
+			this.isOpen = !(this.compareStateText(state) == 0);
+			break;
+		case "lt":
+			this.isOpen = !!(this.compareStateText(state) < 0);
+			break;
+		case "gt":
+			this.isOpen = !!(this.compareStateText(state) > 0);
+			break;
+		case "lteq":
+			this.isOpen = !(this.compareStateText(state) > 0);
+			break;
+		case "gteq":
+			this.isOpen = !(this.compareStateText(state) < 0);
 			break;
 	}
 };
 
-RevealWidget.prototype.readMatchState = function(state) {
-	this.isOpen = state === this.text;
+RevealWidget.prototype.compareStateText = function(state) {
+	return state.localeCompare(this.text,undefined,{numeric: true,sensitivity: "case"});
 };
 
 RevealWidget.prototype.readPopupState = function(state) {

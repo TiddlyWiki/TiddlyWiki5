@@ -1,0 +1,13 @@
+caption: subtiddlerfields
+created: 20180403164138703
+modified: 20180403164644231
+op-input: a [[selection|Title Selection]] of tiddler titles
+op-output: all field names present in the selected tiddlers within the plugin named <<.place P>>
+op-parameter: the title of a plugin
+op-parameter-name: P
+op-purpose: select all fields present in the selected tiddlers within a plugin
+tags: [[Filter Operators]] [[Special Operators]]
+title: subtiddlerfields Operator
+type: text/vnd.tiddlywiki
+
+<<.operator-examples "subtiddlerfields">>

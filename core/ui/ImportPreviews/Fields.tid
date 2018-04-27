@@ -1,0 +1,7 @@
+title: $:/core/ui/ImportPreviews/Fields
+tags: $:/tags/ImportPreview
+caption: {{$:/language/Import/Listing/Preview/Fields}}
+
+<$tiddler tiddler=<<payloadTiddler>>>
+<$transclude tiddler="$:/core/ui/TiddlerFields"/>
+</$tiddler>

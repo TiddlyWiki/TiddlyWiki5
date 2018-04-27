@@ -13,6 +13,11 @@ The reveal widget hides or shows its content depending upon the value of a [[sta
 * type=''match'': the content is displayed if the state tiddler matches a specified value
 * type=''nomatch'': the content is displayed if the state tiddler doesn't match a specified value
 * type=''popup'': the content is displayed as a popup as described in the PopupMechanism
+* type=''lt'': the content is displayed if the state tiddler contains an integer with a value ''less than'' a specified value
+* type=''gt'': the content is displayed if the state tiddler contains an integer with a value ''greater than'' a specified value
+* type=''lteq'': the content is displayed if the state tiddler contains an integer with a value ''less than or equal to'' a specified value
+* type=''gteq'': the content is displayed if the state tiddler contains an integer with a value ''greater than or equal to'' a specified value
+
 
 ! Content and Attributes
 
@@ -21,7 +26,7 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 |!Attribute |!Description |
 |state |A TextReference containing the state |
 |tag |Overrides the default HTML element tag (`<div>` in block mode or `<span>` in inline mode) |
-|type |The type of matching performed: ''match'', ''nomatch'' or ''popup'' |
+|type |The type of matching performed: ''match'', ''nomatch'', ''popup'', ''lt'', ''gt'', ''lteq'' or ''gteq'' |
 |text |The text to match when the type is ''match'' and ''nomatch'' |
 |class |An optional CSS class name to be assigned to the HTML element<br/>&raquo; Set to `tc-popup-keep` to make a popup "sticky", so it won't close when you click inside of it|
 |style |An optional CSS style attribute to be assigned to the HTML element |

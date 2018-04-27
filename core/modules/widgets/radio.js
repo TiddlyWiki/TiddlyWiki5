@@ -33,12 +33,15 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	// Execute our logic
 	this.execute();
+	var isChecked = this.getValue() === this.radioValue;
 	// Create our elements
 	this.labelDomNode = this.document.createElement("label");
-	this.labelDomNode.setAttribute("class",this.radioClass);
+	this.labelDomNode.setAttribute("class",
+   		"tc-radio " + this.radioClass + (isChecked ? " tc-radio-selected" : "")
+  	);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","radio");
-	if(this.getValue() == this.radioValue) {
+	if(isChecked) {
 		this.inputDomNode.setAttribute("checked","true");
 	}
 	this.labelDomNode.appendChild(this.inputDomNode);
@@ -92,10 +95,6 @@ RadioWidget.prototype.execute = function() {
 	this.radioIndex = this.getAttribute("index");
 	this.radioValue = this.getAttribute("value");
 	this.radioClass = this.getAttribute("class","");
-	if(this.radioClass !== "") {
-		this.radioClass += " ";
-	}
-	this.radioClass += "tc-radio";
 	// Make the child widgets
 	this.makeChildWidgets();
 };

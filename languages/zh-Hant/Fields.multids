@@ -17,8 +17,8 @@ hack-to-give-us-something-to-compare-against: 於 [[$:/core/templates/static.con
 icon: 條目的標題含有與條目關聯的圖示
 library: 若設為 “yes”，表示條目應該被儲存為一個 JavaScript 程式庫
 list: 條目的列表，指定一些條目的標題清單
-list-before: 當前條目名稱將被新增到條目排序清單中的設定條目名稱之前，或若此欄位存在但是空的，則在清單的起始位置
-list-after: 當前條目名稱將被新增到條目排序清單中的設定條目名稱之後
+list-before: 當前條目名稱將被新增到條目排序清單中的設定條目名稱之前，或若此欄位存在但是空的，則被新增於清單的前端
+list-after: 當前條目名稱將被新增到條目排序清單中的設定條目名稱之後，或若此欄位存在但是空的，則被新增於清單的尾端
 modified: 條目的最近修改日期與時間
 modifier: 條目的最近修改者
 name: 具可讀性的套件條目的名稱

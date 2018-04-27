@@ -12,6 +12,7 @@ ConfirmOverwriteTiddler: Tiddler: "<$text text=<<title>>/>" existiert! OK übers
 ConfirmEditShadowTiddler: Sie sind dabei, einen Schatten-Tiddler zu verändern. Zukünftige, automatische Anpassungen werden dadurch unterdrückt. Sie können Ihre Änderungen rückgängig machen, indem Sie diesen Tiddler wieder löschen. Wollen Sie den Tiddler: "<$text text=<<title>>/>" ändern?
 Count: Anzahl
 DefaultNewTiddlerTitle: Neuer Tiddler
+Diffs/CountMessage: <<diff-count>> Unterschied(e)
 DropMessage: Hierher ziehen (oder Escape um abzubrechen)
 Encryption/Cancel: Abbrechen
 Encryption/ConfirmClearPassword: Wollen Sie das Passwort löschen? Damit wird die Verschlüsselung beim nächsten Speichervorgang abgeschalten!

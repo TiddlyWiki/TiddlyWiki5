@@ -18,8 +18,8 @@ exports.getInfoTiddlerFields = function() {
 	// Basics
 	infoTiddlerFields.push({title: "$:/info/browser", text: mapBoolean(!!$tw.browser)});
 	infoTiddlerFields.push({title: "$:/info/node", text: mapBoolean(!!$tw.node)});
-	// Document location
 	if($tw.browser) {
+		// Document location
 		var setLocationProperty = function(name,value) {
 				infoTiddlerFields.push({title: "$:/info/url/" + name, text: value});			
 			},
@@ -32,6 +32,9 @@ exports.getInfoTiddlerFields = function() {
 		setLocationProperty("pathname", location.pathname);
 		setLocationProperty("search", location.search);
 		setLocationProperty("origin", location.origin);
+		// Screen size
+		infoTiddlerFields.push({title: "$:/info/browser/screen/width", text: window.screen.width.toString()});
+		infoTiddlerFields.push({title: "$:/info/browser/screen/height", text: window.screen.height.toString()});
 	}
 	return infoTiddlerFields;
 };

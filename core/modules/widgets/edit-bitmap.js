@@ -194,8 +194,8 @@ EditBitmapWidget.prototype.changeCanvasSize = function(newWidth,newHeight) {
 */
 EditBitmapWidget.prototype.rotateCanvasLeft = function() {
 	// Get the current size of the image
-	var origWidth = this.canvasDomNode.width,
-		origHeight = this.canvasDomNode.height;
+	var origWidth = this.currCanvas.width,
+		origHeight = this.currCanvas.height;
 	// Create and size a new canvas
 	var newCanvas = this.document.createElement("canvas"),
 		newWidth = origHeight,
@@ -203,9 +203,11 @@ EditBitmapWidget.prototype.rotateCanvasLeft = function() {
 	this.initCanvas(newCanvas,newWidth,newHeight);
 	// Copy the old image
 	var ctx = newCanvas.getContext("2d");
+	ctx.save();
 	ctx.translate(newWidth / 2,newHeight / 2);
 	ctx.rotate(-Math.PI / 2);
 	ctx.drawImage(this.currCanvas,-origWidth / 2,-origHeight / 2);
+	ctx.restore();
 	// Set the new canvas as the current one
 	this.currCanvas = newCanvas;
 	// Set the size of the onscreen canvas

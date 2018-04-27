@@ -11,6 +11,7 @@ ConfirmEditShadowTiddler: Je staat op het punt een schaduwtiddler te wijzigen. T
 ConfirmOverwriteTiddler: Wil je de tiddler "<$text text=<<title>>/>" overschrijven?
 Count: aantal
 DefaultNewTiddlerTitle: Nieuwe tiddler
+Diffs/CountMessage: <<diff-count>> verschillen
 DropMessage: 'Drop' hier (of klik escape om te annuleren)
 Encryption/Cancel: Annuleer
 Encryption/ConfirmClearPassword: Wil je het wachtwoord verwijderen? Dan wordt de wiki onversleuteld opgeslagen.

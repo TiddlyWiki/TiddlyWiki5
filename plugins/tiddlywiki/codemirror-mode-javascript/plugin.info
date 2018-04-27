@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/codemirror-mode-javascript",
+	"description": "CodeMirror Mode: Javascript Highlighting",
+	"author": "JeremyRuston",
+	"list": "readme"
+}

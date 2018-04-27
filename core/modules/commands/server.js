@@ -143,7 +143,7 @@ SimpleServer.prototype.requestHandler = function(request,response) {
 };
 	
 SimpleServer.prototype.listen = function(port,host) {
-	http.createServer(this.requestHandler.bind(this)).listen(port,host);
+	return http.createServer(this.requestHandler.bind(this)).listen(port,host);
 };
 
 var Command = function(params,commander,callback) {
@@ -291,6 +291,9 @@ Command.prototype.execute = function() {
 		password = this.params[5],
 		host = this.params[6] || "127.0.0.1",
 		pathprefix = this.params[7];
+	if(parseInt(port,10).toString() !== port) {
+		port = process.env[port] || 8080;
+	}
 	this.server.set({
 		rootTiddler: rootTiddler,
 		renderType: renderType,
@@ -299,13 +302,14 @@ Command.prototype.execute = function() {
 		password: password,
 		pathprefix: pathprefix
 	});
-	this.server.listen(port,host);
+	var nodeServer = this.server.listen(port,host);
 	$tw.utils.log("Serving on " + host + ":" + port,"brown/orange");
 	$tw.utils.log("(press ctrl-C to exit)","red");
 	// Warn if required plugins are missing
 	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
 		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
 	}
+	$tw.hooks.invokeHook('th-server-command-post-start', this.server, nodeServer);
 	return null;
 };
 
