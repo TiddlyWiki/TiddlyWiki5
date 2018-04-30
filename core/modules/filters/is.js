@@ -27,40 +27,44 @@ Export our filter function
 */
 exports.is = function(source,operator,options) {
 
+	var isFilterOperators = getIsFilterOperators(),
+		subops = operator.operand.split("+");
 
-	if( !operator.operand) {
-		// Return all tiddlers if the operand is missing
+	//Make sure all the operands are defined.
+	for (var t = 0; t < subops.length; t++){
+		if( !isFilterOperators[subops[t]] ) {
+			return [$tw.language.getString("Error/IsFilterOperator")];
+		}
+	}
+
+
+	if(subops.length === 0) { 	// Return all tiddlers if the operand is missing
 		var results = [];
 		source(function(tiddler,title) {
 			results.push(title);
 		});
 		return results;
-	}
+	} else if(subops.length === 1) {	// Shortcut the Single Operator
+		var subop = isFilterOperators[subops[0]];
+		return subop(source,operator.prefix,options);
 
-	// Get our isfilteroperators
-	var isFilterOperators = getIsFilterOperators(),
-	    subops = operator.operand.split("+"),
-		filteredResults = {},
-		results = [];
-	for (var t=0; t<subops.length; t++) {
-		var subop = isFilterOperators[subops[t]];
-		if(subop) {
-			filteredResults[subops[t]] = subop(source,operator.prefix,options);
-		} else {
-			return [$tw.language.getString("Error/IsFilterOperator")];
+	} else {	// Handle multiple operators
+		var filtered_results = new Set(),
+			results = [];
+		for(var t=0; t < subops.length; t++){
+			var subop = isFilterOperators[subops[t]];
+			subop(source,operator.prefix,options).forEach(function(element) { filtered_results.add(element)});
 		}
-		
+
+		// Sort the output by the input (There may be a better way to do this)
+		source(function(tiddler,title) {
+			if(filtered_results.has(title)) {
+				results.push(title);
+			}
+		});
+
+		return results;
 	}
-	
-    source(function(tiddler,title) {
-        for (var t=0; t<subops.length; t++) {
-            if (filteredResults[subops[t]].indexOf(title) != -1){
-                results.push(title);
-                break;
-            }
-        }
-    });
-	return results;
 };
 
 })();
