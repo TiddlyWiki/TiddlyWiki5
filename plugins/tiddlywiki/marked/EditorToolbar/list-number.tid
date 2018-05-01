@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/markdown/EditorToolbar/list-number
+title: $:/plugins/tiddlywiki/marked/EditorToolbar/list-number
 list-after: $:/core/ui/EditorToolbar/list-number
 tags: $:/tags/EditorToolbar
 icon: $:/core/images/list-number

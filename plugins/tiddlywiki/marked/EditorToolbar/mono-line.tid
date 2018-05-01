@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/markdown/EditorToolbar/mono-line
+title: $:/plugins/tiddlywiki/marked/EditorToolbar/mono-line
 list-after: $:/core/ui/EditorToolbar/mono-line
 tags: $:/tags/EditorToolbar
 icon: $:/core/images/mono-line

@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/markdown/wrapper.js
+title: $:/plugins/tiddlywiki/marked/wrapper.js
 type: application/javascript
 module-type: parser
 
