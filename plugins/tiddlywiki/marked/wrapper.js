@@ -17,13 +17,8 @@ var marked = require("$:/plugins/tiddlywiki/marked/marked.js");
 
 function transformNodes(nodes) {
 	var results = [];
-	for(var index=0; index<nodes.length; index++) {
-		var node = [nodes[index]];
-		node.links = nodes.links;
-		var widget = {type: "raw", html: marked.parser(node)};
-		results.push(widget);
-	}
-	return results;
+	var widget = {type: "raw", html: marked.parser(nodes)};
+	return [widget];
 }
 
 var MarkdownParser = function(type,text,options) {
