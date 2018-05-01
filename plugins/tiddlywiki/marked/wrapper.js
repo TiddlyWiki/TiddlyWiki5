@@ -12,7 +12,7 @@ Wraps up the marked parser for use in TiddlyWiki5
 /*global $tw: false */
 "use strict";
 
-var marked = require("$:/plugins/tiddlywiki/markdown/marked.js");
+var marked = require("$:/plugins/tiddlywiki/marked/marked.js");
 
 
 function transformNodes(nodes) {
