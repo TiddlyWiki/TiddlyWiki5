@@ -10,6 +10,8 @@ type: text/vnd.tiddlywiki
 !! Bug Fixes
 
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/3245]] incorrect plugin library location
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3226]] animation timing problem with reveal widget that sometimes caused the sidebar not to hide when requested
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3244]] problem with saving with non-Dat URI schemes
 
 ! Contributors
 
