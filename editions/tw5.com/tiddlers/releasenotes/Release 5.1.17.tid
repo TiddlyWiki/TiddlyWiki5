@@ -9,14 +9,15 @@ type: text/vnd.tiddlywiki
 
 !! Bug Fixes
 
+* [[Restored|https://github.com/Jermolene/TiddlyWiki5/commit/b2173d11ea550ba4a5f2fd89b1388b392e37dd51]] default of the preview pane being hidden
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/3245]] incorrect plugin library location
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3226]] animation timing problem with reveal widget that sometimes caused the sidebar not to hide when requested
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3226]] animation timing problem with reveal widget that sometimes caused the sidebar not to show when requested
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3244]] problem with saving with non-Dat URI schemes
 
 ! Contributors
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
-* [[@example|https://github.com/example]]
-
- 
+* [[@BurningTreeC|https://github.com/BurningTreeC]]
+* [[@icarito|https://github.com/icarito]]
+* [[@twMat|https://github.com/twMat]]
