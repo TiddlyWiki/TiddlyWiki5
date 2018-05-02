@@ -1,0 +1,12 @@
+{
+	"tiddlers": [
+		{
+			"file": "marked.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/marked/marked.js",
+				"module-type": "library"
+			}
+		}
+	]
+}
