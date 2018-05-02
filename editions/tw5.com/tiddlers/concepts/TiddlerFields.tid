@@ -24,6 +24,7 @@ The standard fields are:
 Other fields used by the core are:
 
 |!Field Name |!Reference |!Description |
+|`class` |ClassField |<<lingo class>> |
 |`color` |ColorField |<<lingo color>> |
 |`description` |DescriptionField |<<lingo description>> |
 |`draft.of` |DraftOfField |<<lingo draft.of>> |
