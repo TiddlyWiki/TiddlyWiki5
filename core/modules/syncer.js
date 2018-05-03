@@ -271,13 +271,16 @@ Syncer.prototype.handleLazyLoadEvent = function(title) {
 	// Don't lazy load the same tiddler twice
 	var info = this.tiddlerInfo[title];
 	if(!info || !info.hasBeenLazyLoaded) {
-		this.createTiddlerInfo(title);
-		this.tiddlerInfo[title].hasBeenLazyLoaded = true;
-		// Queue up a sync task to load this tiddler
-		this.enqueueSyncTask({
-			type: "load",
-			title: title
-		});		
+		// Don't lazy load if the tiddler isn't included in the sync filter
+		if(this.filterFn.call(this.wiki).indexOf(title) !== -1) {
+			this.createTiddlerInfo(title);
+			this.tiddlerInfo[title].hasBeenLazyLoaded = true;
+			// Queue up a sync task to load this tiddler
+			this.enqueueSyncTask({
+				type: "load",
+				title: title
+			});
+		}
 	}
 };
 
