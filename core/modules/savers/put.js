@@ -19,12 +19,14 @@ to the current URL, such as a WebDAV server.
 Retrieve ETag if available
 */
 var RetrieveETag = function(self) {
+	var headers = { "Accept": "*/*;charset=UTF-8" };
 	$tw.utils.httpRequest({
 		url: self.uri(),
 		type: "HEAD",
+		headers: headers,
 		callback: function(err, data, xhr) {
 			if(!err) {
-				self.etag = xhr.getResponseHeader("ETag");
+				self.etag = xhr.getResponseHeader("ETag").replace(/^W\//,"");
 			}
 		}
 	});
