@@ -1294,7 +1294,7 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/js","tiddlerdeserializer",{
 	"application/javascript": deserializeHeaderComment
 });
 $tw.modules.define("$:/boot/tiddlerdeserializer/css","tiddlerdeserializer",{
-	"application/css": deserializeHeaderComment
+	"text/css": deserializeHeaderComment
 });
 $tw.modules.define("$:/boot/tiddlerdeserializer/tid","tiddlerdeserializer",{
 	"application/x-tiddler": function(text,fields) {
