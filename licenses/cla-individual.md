@@ -323,3 +323,6 @@ Diego Mesa, @diego898, 2018/01/11
 Mete Balci, @metebalci, 2018/03/19
 
 Sebastian Silva, @icarito, 2018/04/03
+
+Luca Dorigo, @ldorigo, 2018/05/05
+
