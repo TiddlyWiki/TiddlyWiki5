@@ -25,8 +25,9 @@ var RetrieveETag = function(self) {
 		type: "HEAD",
 		headers: headers,
 		callback: function(err, data, xhr) {
-			if(!err) {
-				self.etag = xhr.getResponseHeader("ETag").replace(/^W\//,"");
+			var etag = xhr.getResponseHeader("ETag");
+			if(!err && etag) {
+				self.etag = etag.replace(/^W\//,"");
 			}
 		}
 	});
