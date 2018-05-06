@@ -229,7 +229,7 @@ Widget.prototype.getStateQualifier = function(name) {
 			}
 			node = node.parentWidget;
 		}
-		var value = $tw.utils.hashString(output.join(" ")).toString().replace(/^-/g, "0");
+		var value = $tw.utils.hashString(output.join("")).toString().replace(/^-/g, "0");
 		this.qualifiers[name] = value;
 		return value;
 	}
