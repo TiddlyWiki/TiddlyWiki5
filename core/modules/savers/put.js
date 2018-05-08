@@ -25,10 +25,10 @@ var RetrieveETag = function(self) {
 		type: "HEAD",
 		headers: headers,
 		callback: function(err, data, xhr) {
+			if(err) return;
 			var etag = xhr.getResponseHeader("ETag");
-			if(!err && etag) {
-				self.etag = etag.replace(/^W\//,"");
-			}
+			if(!etag) return;
+			self.etag = etag.replace(/^W\//,"");
 		}
 	});
 };
