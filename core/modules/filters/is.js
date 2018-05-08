@@ -53,12 +53,12 @@ exports.is = function(source,operator,options) {
 			results = [];
 		for(var t=0; t < num_of_subops; t++){
 			var operator = isFilterOperators[subops[t]];
-			operator(source,operator.prefix,options).forEach(function(element) { filtered_results[element] = True});
+			operator(source,operator.prefix,options).forEach(function(element) { filtered_results[element] = "present"});
 		}
 
 		// Sort the output by the input (There may be a better way to do this)
 		source(function(tiddler,title) {
-			if(filtered_results[title] === True) {
+			if(filtered_results[title] === "present") {
 				results.push(title);
 			}
 		});
