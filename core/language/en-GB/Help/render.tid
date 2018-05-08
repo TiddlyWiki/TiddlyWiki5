@@ -1,6 +1,14 @@
 title: $:/language/Help/render
 description: Renders individual tiddlers to files
 
+\define list-core-templates()
+<$button class="tc-btn-invisible" style="text-decoration:underline">
+Check here a list of available templates
+<$action-setfield $tiddler="$:/temp/advancedsearch" text="[all[shadows]prefix[$:/core/templates/]]"/>
+<$action-setfield $tiddler="$:/state/tab--1498284803" text="$:/core/ui/AdvancedSearch/Filter"/>
+<$action-navigate $to="$:/AdvancedSearch"/>
+</$button>
+\end
 Render individual tiddlers identified by a filter and save the results to the specified files.
 
 Optionally, the title of a template tiddler can be specified. In this case, instead of directly rendering each tiddler, the template tiddler is rendered with the "currentTiddler" variable set to the title of the tiddler that is being rendered.
@@ -13,7 +21,7 @@ A name and value for an additional variable may optionally also be specified.
 
 * ''tiddler-filter'': A filter identifying the tiddler(s) to be rendered
 * ''filename-filter'': Optional filter transforming tiddler titles into pathnames. If omitted, defaults to `[is[tiddler]addsuffix[.html]]`, which uses the unchanged tiddler title as the filename
-* ''template'': Optional template through which each tiddler is rendered
+* ''template'': Optional template through which each tiddler is rendered. <<list-core-templates>>
 * ''render-type'': Optional render type: `text/html` (the default) returns the full HTML text and `text/plain` just returns the text content (ie it ignores HTML tags and other unprintable material)
 * ''name'': Name of optional variable
 * ''value'': Value of optional variable
