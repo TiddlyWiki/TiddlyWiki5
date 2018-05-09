@@ -178,8 +178,6 @@ Syncer.prototype.getStatus = function(callback) {
 			self.wiki.addTiddler({title: self.titleIsLoggedIn,text: isLoggedIn ? "yes" : "no"});
 			if(isLoggedIn) {
 				self.wiki.addTiddler({title: self.titleUserName,text: username || ""});
-			} else {
-				self.wiki.deleteTiddler(self.titleUserName);
 			}
 			// Invoke the callback
 			if(callback) {
