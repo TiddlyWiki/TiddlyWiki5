@@ -10,7 +10,8 @@ description: {{$:/language/Buttons/NewJournalHere/Hint}}
 \define journalButton()
 <$button tooltip={{$:/language/Buttons/NewJournalHere/Hint}} aria-label={{$:/language/Buttons/NewJournalHere/Caption}} class=<<tv-config-toolbar-class>>>
 <$wikify name="journalTitle" text="""<$macrocall $name="now" format=<<journalTitleTemplate>>/>""">
-<$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<journalButtonTags>>/>
+<$action-createtiddler $basetitle=<<journalTitle>> $savetitle="$:/temp/new-journal-tiddler" tags=<<journalButtonTags>>/>
+<$action-navigate $to={{$:/temp/new-journal-tiddler}} $scroll="yes"/>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/new-journal-button}}
 </$list>
