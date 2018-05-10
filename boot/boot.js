@@ -2208,7 +2208,6 @@ $tw.boot.boot = function(callback) {
 	// Initialise password prompter
 	if($tw.browser && !$tw.node) {
 		$tw.passwordPrompt = new $tw.utils.PasswordPrompt();
-		error
 	}
 	// Preload any encrypted tiddlers
 	$tw.boot.decryptEncryptedTiddlers(function() {
