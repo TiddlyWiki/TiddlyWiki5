@@ -10,7 +10,8 @@ description: {{$:/language/Buttons/NewJournalHere/Hint}}
 \define journalButton()
 <$button tooltip={{$:/language/Buttons/NewJournalHere/Hint}} aria-label={{$:/language/Buttons/NewJournalHere/Caption}} class=<<tv-config-toolbar-class>>>
 <$wikify name="journalTitle" text="""<$macrocall $name="now" format=<<journalTitleTemplate>>/>""">
-<$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<journalButtonTags>>/>
+<$action-createtiddler $basetitle=<<journalTitle>> $savetitle="$:/temp/new-journal-tiddler" tags=<<journalButtonTags>>/>
+<$action-sendmessage $message="tm-edit-tiddler" $param={{$:/temp/new-journal-tiddler}}/>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/new-journal-button}}
 </$list>
@@ -22,10 +23,6 @@ description: {{$:/language/Buttons/NewJournalHere/Hint}}
 </$wikify>
 </$button>
 \end
-<$set name="journalTitleTemplate" value={{$:/config/NewJournal/Title}}>
-<$set name="journalTags" value={{$:/config/NewJournal/Tags}}>
-<$set name="currentTiddlerTag" value=<<currentTiddler>>>
+<$vars journalTitleTemplate={{$:/config/NewJournal/Title}} journalTags={{$:/config/NewJournal/Tags}} currentTiddlerTag=<<currentTiddler>>>
 <<journalButton>>
-</$set>
-</$set>
-</$set>
+</$vars>
