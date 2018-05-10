@@ -6,7 +6,12 @@ description: {{$:/language/Buttons/NewJournal/Hint}}
 \define journalButton()
 <$button tooltip={{$:/language/Buttons/NewJournal/Hint}} aria-label={{$:/language/Buttons/NewJournal/Caption}} class=<<tv-config-toolbar-class>>>
 <$wikify name="journalTitle" text="""<$macrocall $name="now" format=<<journalTitleTemplate>>/>""">
+<$reveal type="nomatch" state=<<journalTitle>> text="">
+<$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<journalTags>> text={{{ [<journalTitle>get[]] }}}/>
+</$reveal>
+<$reveal type="match" state=<<journalTitle>> text="">
 <$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<journalTags>> text=<<journalText>>/>
+</$reveal>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/new-journal-button}}
 </$list>
