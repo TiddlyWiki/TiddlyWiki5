@@ -20,6 +20,7 @@ description: {{$:/language/Buttons/NewJournalHere/Hint}}
 <$text text={{$:/language/Buttons/NewJournalHere/Caption}}/>
 </span>
 </$list>
+</$vars>
 </$button>
 \end
 <$set name="journalTitleTemplate" value={{$:/config/NewJournal/Title}}>
