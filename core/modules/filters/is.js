@@ -26,43 +26,21 @@ function getIsFilterOperators() {
 Export our filter function
 */
 exports.is = function(source,operator,options) {
-
-	var isFilterOperators = getIsFilterOperators(),
-		subops = operator.operand.split("+"),
-		num_of_subops = subops.length;
-
-	//Make sure all the operands are defined.
-	for (var t = 0; t < num_of_subops; t++){
-		if( !isFilterOperators[subops[t]] ) {
+	// Dispatch to the correct isfilteroperator
+	var isFilterOperators = getIsFilterOperators();
+	if(operator.operand) {
+		var isFilterOperator = isFilterOperators[operator.operand];
+		if(isFilterOperator) {
+			return isFilterOperator(source,operator.prefix,options);
+		} else {
 			return [$tw.language.getString("Error/IsFilterOperator")];
 		}
-	}
-
-	if(num_of_subops === 0) { 	// Return all tiddlers if the operand is missing
+	} else {
+		// Return all tiddlers if the operand is missing
 		var results = [];
 		source(function(tiddler,title) {
 			results.push(title);
 		});
-		return results;
-	} else if(num_of_subops === 1) {	// Shortcut the Single Operator
-		var operator = isFilterOperators[subops[0]];
-		return operator(source,operator.prefix,options);
-
-	} else {	// Handle multiple operators
-		var filtered_results = {},
-			results = [];
-		for(var t=0; t < num_of_subops; t++){
-			var operator = isFilterOperators[subops[t]];
-			operator(source,operator.prefix,options).forEach(function(element) { filtered_results[element] = "present"});
-		}
-
-		// Sort the output by the input (There may be a better way to do this)
-		source(function(tiddler,title) {
-			if(filtered_results[title] === "present") {
-				results.push(title);
-			}
-		});
-
 		return results;
 	}
 };

@@ -11,11 +11,7 @@ op-parameter-name: C
 op-output: those input tiddlers that belong to category <<.place C>>
 op-neg-output: those input tiddlers that do <<.em not>> belong to category <<.place C>>
 
-The parameter <<.place C>> specifies zero or more fundamental categories using the following syntax:
-
-<$railroad text="""
-[{: ("current" | "missing" |: "orphan" | "shadow" | "system" | "tag" | "tiddler" | "image") +"+" }]
-"""/>
+The parameter <<.place C>> is one of the following fundamental categories:
 
 |!Category |!Matches any tiddler that... |
 |^`current` |is the [[current tiddler|Current Tiddler]] |
