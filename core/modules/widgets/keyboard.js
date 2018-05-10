@@ -38,29 +38,47 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 		tag = this.tag;
 	}
 	// Create element
-	var domNode = this.document.createElement(tag);
-	// Assign classes
-	var classes = (this["class"] || "").split(" ");
-	classes.push("tc-keyboard");
-	domNode.className = classes.join(" ");
+	var domNode,
+	    classes;
+	if(this.global !== "yes") {
+		domNode = this.document.createElement(tag);
+		// Assign classes
+		classes = (this["class"] || "").split(" ");
+		classes.push("tc-keyboard");
+		domNode.className = classes.join(" ");
+	} else {
+		domNode = document.body;
+	}
 	// Add a keyboard event handler
+	var actionInvoked = null,
+	    messageInvoked = null;
 	domNode.addEventListener("keydown",function (event) {
 		if($tw.keyboardManager.checkKeyDescriptors(event,self.keyInfoArray)) {
 			self.invokeActions(self,event);
-			if(self.actions) {
+			if(self.actions && actionInvoked === null) {
 				self.invokeActionString(self.actions,self,event);
+				actionInvoked = "done";
 			}
-			self.dispatchMessage(event);
+			if(self.message && messageInvoked === null) {
+				self.dispatchMessage(event);
+				messageInvoked = "done";
+			}
 			event.preventDefault();
 			event.stopPropagation();
+			actionInvoked = null;
+			messageInvoked = null;
 			return true;
 		}
 		return false;
 	},false);
-	// Insert element
-	parent.insertBefore(domNode,nextSibling);
+	if(this.global !== "yes") {
+		// Insert element
+		parent.insertBefore(domNode,nextSibling);
+	}
 	this.renderChildren(domNode,null);
-	this.domNodes.push(domNode);
+	if(this.global !== "yes") {
+		this.domNodes.push(domNode);
+	}
 };
 
 KeyboardWidget.prototype.dispatchMessage = function(event) {
@@ -78,6 +96,7 @@ KeyboardWidget.prototype.execute = function() {
 	this.key = this.getAttribute("key");
 	this.tag = this.getAttribute("tag");
 	this.keyInfoArray = $tw.keyboardManager.parseKeyDescriptors(this.key);
+	this.global = this.getAttribute("global","no");
 	this["class"] = this.getAttribute("class");
 	// Make child widgets
 	this.makeChildWidgets();
