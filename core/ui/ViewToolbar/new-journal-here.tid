@@ -9,7 +9,9 @@ description: {{$:/language/Buttons/NewJournalHere/Hint}}
 \end
 \define journalButton()
 <$button tooltip={{$:/language/Buttons/NewJournalHere/Hint}} aria-label={{$:/language/Buttons/NewJournalHere/Caption}} class=<<tv-config-toolbar-class>>>
-<$action-sendmessage $message="tm-new-tiddler" title=<<now """$(journalTitleTemplate)$ """>> tags=<<journalButtonTags>>/>
+<$vars newJournalTitle=<<now """$(journalTitleTemplate)$ """>>>
+<$action-createtiddler $basetitle=<<newJournalTitle>> $savetitle="$:/temp/new-journal-tiddler" tags=tags=<<journalButtonTags>>/>
+<$action-navigate $to={{$:/temp/new-journal-tiddler}} $scroll="yes"/>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/new-journal-button}}
 </$list>
