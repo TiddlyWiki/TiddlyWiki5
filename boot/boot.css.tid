@@ -20,7 +20,7 @@ Error message and password prompt
 	width: 50%;
 	margin-left: 25%;
 	margin-top: 4em;
-	padding: 0 2em 2em 2em;
+	padding: 0 2em 1em 2em;
 }
 
 .tc-error-form h1 {
@@ -30,14 +30,13 @@ Error message and password prompt
 .tc-error-prompt {
 	text-align: center;
 	color: #000;
-	margin-bottom: 1em;
 }
 
 .tc-error-message {
 	overflow: auto;
 	max-height: 40em;
 	padding-right: 1em;
-	margin-bottom: 1em;
+	margin: 1em 0;
 	white-space: pre-line;
 }
 
