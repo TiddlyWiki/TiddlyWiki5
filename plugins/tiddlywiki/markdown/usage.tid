@@ -1,4 +1,7 @@
+created: 20180512054948119
+modified: 20180512063423047
 title: $:/plugins/tiddlywiki/markdown/usage
+type: text/vnd.tiddlywiki
 
 ! Markdown Dialects
 
@@ -27,4 +30,27 @@ Markdown image syntax can be used to reference images by tiddler title or an ext
 ![alt text](/path/to/img.jpg "Title")
 
 ![alt text](Motovun Jack.jpg "Title")
+```
+
+! Code blocks
+
+Code blocks work and can use Tiddlywiki's highlighting mechanism.
+
+There is a [[bug|https://github.com/evilstreak/markdown-js/issues/292]] that makes code blocks containing empty lines fail to render correctly.
+
+<pre>&#96;&#96;&#96;python
+print ("Hello World!")
+&#96;&#96;&#96;
+</pre>
+
+Please not Syntax Highlighting is limited to the set of "brushes" provided by the default [[Highlight.js plugin|$:/plugins/tiddlywiki/highlight]].
+
+! Raw HTML
+
+As per the Markdown specification, it's possible to include arbitrary HTML content within a Markdown tiddly.
+
+```xml
+<iframe width='100%'
+        height='400px'
+        src='http://wikipedia.org/'></iframe>
 ```
