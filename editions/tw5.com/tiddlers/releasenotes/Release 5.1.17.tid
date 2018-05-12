@@ -15,10 +15,6 @@ After encountering significant problems we've reluctantly decided to [[remove su
 
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/7468ad7acf1ca2280ad89ee014484928e160f54b]] appearance of ~TiddlyWiki's "red screen of embarrassment"
 
-!! Hackability Improvements
-
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/523060e8233310dffef068f0016f915d743d0f39]] new "print tiddler" button to the tiddler view toolbar
-
 !! Bug Fixes
 
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/e6466b2c320cdab46a74aa343b6c56c5783e3f94]] problem with extraneous space in new journal titles
