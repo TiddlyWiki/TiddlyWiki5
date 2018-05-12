@@ -309,7 +309,7 @@ Command.prototype.execute = function() {
 	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
 		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
 	}
-	$tw.hooks.invokeHook('th-server-command-post-start', this.server, nodeServer);
+	$tw.hooks.invokeHook('th-server-command-post-start', this.server, nodeServer, "tiddlywiki");
 	return null;
 };
 
