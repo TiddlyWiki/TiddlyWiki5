@@ -18,6 +18,7 @@ The `link` widget generates links to tiddlers. (Use the HTML `<a>` element to ge
 |tag |Optional tag to override the default "a" element |
 |class|Optional CSS classes //in addition to// the default classes (see below)|
 |overrideClass|<<.from-version "5.1.16">> Optional CSS classes //instead of// the default classes |
+|showLinks|<<.from-version "5.1.18">> Set to "yes" to override "show links to missing tiddlers" and this link will always be rendered as a link |
 
 The content of the link widget is rendered within the `<a>` tag. The draggable functionality is equivalent to using the DraggableWidget with the ''tiddler'' attribute set to the link target.
 
