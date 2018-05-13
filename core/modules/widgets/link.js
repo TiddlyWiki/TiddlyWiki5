@@ -125,6 +125,9 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	if(this["aria-label"]) {
 		domNode.setAttribute("aria-label",this["aria-label"]);
 	}
+	if(this.accessKey) {
+		domNode.setAttribute("accesskey",this.accessKey);
+	}
 	// Add a click event handler
 	$tw.utils.addEventListeners(domNode,[
 		{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"},
@@ -183,6 +186,7 @@ LinkWidget.prototype.execute = function() {
 	this.isMissing = !this.wiki.tiddlerExists(this.to);
 	this.isShadow = this.wiki.isShadowTiddler(this.to);
 	this.hideMissingLinks = ($tw.wiki.getTiddlerText(MISSING_LINK_CONFIG_TITLE,"yes") === "no");
+	this.accessKey = this.getAttribute("accessKey");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
