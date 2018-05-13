@@ -11,12 +11,12 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 \end
 
 \define new-field()
-<$vars name={{{ [[$(newFieldTempTiddler)$]get[]] }}}>
+<$vars name={{{ [[$(newFieldTempTiddler)$]get[text]] }}}>
 <$reveal type="nomatch" text="" default=<<name>>>
 <$button>
 <$action-sendmessage $message="tm-add-field"
 $name=<<name>>
-$value={{{ [[$(newFieldValueTempTiddler)$]get[]] }}}/>
+$value={{{ [[$(newFieldValueTempTiddler)$]get[text]] }}}/>
 <$action-deletetiddler $tiddler="$(newFieldTempTiddler)$"/>
 <$action-deletetiddler $tiddler="$(newFieldValueTempTiddler)$"/>
 <<lingo Fields/Add/Button>>
@@ -56,7 +56,7 @@ $value={{{ [[$(newFieldValueTempTiddler)$]get[]] }}}/>
 
 <$wikify name="newFieldTempTiddler" text="""<<qualify "$:/temp/newfieldname">>""">
 <$wikify name="newFieldValueTempTiddler" text="""<<qualify "$:/temp/newfieldvalue">>""">
-<$vars newFieldTitle={{{ [<newFieldTempTiddler>get[]] }}} newFieldValue={{{ [<newFieldValueTempTiddler>get[]] }}}>
+<$vars newFieldTitle={{{ [<newFieldTempTiddler>get[text]] }}} newFieldValue={{{ [<newFieldValueTempTiddler>get[text]] }}}>
 <$fieldmangler>
 <div class="tc-edit-field-add">
 <em class="tc-edit">
