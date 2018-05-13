@@ -39,7 +39,7 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 		useWikiLinks = wikiLinksMacro ? (wikiLinksMacro.trim() !== "no") : true,
 		missingLinksEnabled = !(this.hideMissingLinks && this.isMissing && !this.isShadow);
 	// Render the link if required
-	if(useWikiLinks && missingLinksEnabled) {
+	if(useWikiLinks && missingLinksEnabled || this.showLinks) {
 		this.renderLink(parent,nextSibling);
 	} else {
 		// Just insert the link text
@@ -183,6 +183,7 @@ LinkWidget.prototype.execute = function() {
 	this.isMissing = !this.wiki.tiddlerExists(this.to);
 	this.isShadow = this.wiki.isShadowTiddler(this.to);
 	this.hideMissingLinks = ($tw.wiki.getTiddlerText(MISSING_LINK_CONFIG_TITLE,"yes") === "no");
+	this.showLinks = ((this.getAttribute("showLinks") === "yes");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
