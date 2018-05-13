@@ -13,7 +13,6 @@ Wraps up the markdown-js parser for use in TiddlyWiki5
 "use strict";
 
 
-const brushes = ["apache", "bash", "coffeescript", "cpp", "cs", "css", "diff", "http", "ini", "java", "javascript", "json", "makefile", "markdown", "nginx", "objectivec", "perl", "php", "python", "ruby", "sql", "xml"]
 var markdown = require("$:/plugins/tiddlywiki/markdown/markdown.js");
 
 var CONFIG_DIALECT_TIDDLER = "$:/config/markdown/dialect",
@@ -40,32 +39,12 @@ function transformNode(node) {
 		widget.children = transformNodes(node.slice(p++));
 		// Respect code sections
 		if(widget.tag === "code") {
-                        console.log(node);
-                        if (node[1].indexOf("\n") > 0) {
-                                // Multi line
-                                // Beware of empty lines! :-(
-                                // Let's keep track of an eventual fix at:
-                                // https://github.com/evilstreak/markdown-js/issues/292
-                                var lines = node[1].split("\n");
-                                var language = lines[0];
-                                if (brushes.indexOf(language) > 0) {
-                                    var code = lines.slice(1).join("\n");
-                                }
-                                else {
-                                    var code = lines.join("\n");
-                                    language = "";
-                                }
-                                widget.type = "codeblock";
-                                widget.attributes = {
-                                                code: {type: "string", value: code},
-                                                language: {type: "string", value: language}
-                                }
-                                delete widget.children;
-                                delete widget.tag;
-                        }
-                        else {
-                                widget.children = [{type: "text", text: node[1]}];
-                        }
+			widget.children = [{type: "codeblock",
+				attributes: {
+					code: {type: "string", value: node[1]}
+				}
+			}];
+			delete widget.tag;
 		}
 		// Massage images into the image widget
 		if(widget.tag === "img") {
