@@ -14,7 +14,7 @@ tags: $:/tags/EditTemplate
 <div class="tc-dropdown-item">
 <$text text={{!!group}}/>
 </div>
-<$list filter="[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]group{!!group}] +[sort[description]]"><$link to={{!!name}} showLinks="yes"><$view field="description"/> (<$view field="name"/>)</$link>
+<$list filter="[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]group{!!group}] +[sort[description]]"><$link to={{!!name}} enforceLinks="yes"><$view field="description"/> (<$view field="name"/>)</$link>
 </$list>
 </$list>
 </$linkcatcher>
