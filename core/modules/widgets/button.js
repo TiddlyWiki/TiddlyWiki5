@@ -64,6 +64,9 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this["aria-label"]) {
 		domNode.setAttribute("aria-label",this["aria-label"]);
 	}
+	if(this.accessKey) {
+		domNode.setAttribute("accesskey",this.accessKey);
+	}
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
 		var handled = false;
@@ -183,6 +186,7 @@ ButtonWidget.prototype.execute = function() {
 	this.buttonTag = this.getAttribute("tag");
 	this.dragTiddler = this.getAttribute("dragTiddler");
 	this.dragFilter = this.getAttribute("dragFilter");
+	this.accessKey = this.getAttribute("accessKey");
 	// Make child widgets
 	this.makeChildWidgets();
 };
