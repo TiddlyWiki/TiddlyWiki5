@@ -20,10 +20,9 @@ exports.synchronous = true;
 
 exports.startup = function() {
 	if($tw.browser) {
-		$tw.utils.each($tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[keyboardShortcut]!has[draft.of]]"),function(title) {
+		$tw.utils.each($tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/KeyboardShortcut]!has[draft.of]]"),function(title) {
 			var self = this;
-			var key = $tw.wiki.getTiddlerText(title),
-			keyInfoArray = $tw.keyboardManager.parseKeyDescriptors(key);
+			var key = $tw.wiki.getTiddlerText(title);
 			$tw.wiki.addEventListener("change",function(changes) {
 				if($tw.utils.hop(changes,title)) {
 					key = $tw.wiki.getTiddlerText(title);
@@ -32,9 +31,7 @@ exports.startup = function() {
 
 			document.addEventListener("keydown",function(event) {
 				if($tw.keyboardManager.checkKeyDescriptors(event,$tw.keyboardManager.parseKeyDescriptors(key))) {
-						$tw.rootWidget.invokeActionString($tw.wiki.getTiddlerText(title + '/action'));
-						event.preventDefault();
-						event.stopPropagation();
+						$tw.rootWidget.invokeActionString($tw.wiki.getTiddlerText(title + '/action',$tw.rootWidget));
 						return true;
 				}
 				return false;
