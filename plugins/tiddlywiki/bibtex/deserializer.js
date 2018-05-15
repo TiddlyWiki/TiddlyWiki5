@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/excel-utils/deserializer.js
+title: $:/plugins/tiddlywiki/bibtex/deserializer.js
 type: application/javascript
 module-type: tiddlerdeserializer
 
