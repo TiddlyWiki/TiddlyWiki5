@@ -33,15 +33,7 @@ function Syncer(options) {
 	var self = this;
 	this.wiki = options.wiki;
 	this.syncadaptor = options.syncadaptor;
-	if (this.syncadaptor && this.syncadaptor.addEventListener) {
-		this.syncadaptor.addEventListener('server-update', function(type, tiddlerFields){
-			if(type === "update" || type === "create") { 
-				self.handleServerUpdate(tiddlerFields);
-			} else if (type === "delete") {
-				self.handleServerDelete(tiddlerFields.title);
-			}
-		});
-	}
+	if(this.syncadaptor.setSyncer) this.syncadaptor.setSyncer(this);
 	this.disableUI = !!options.disableUI;
 	this.titleIsLoggedIn = options.titleIsLoggedIn || this.titleIsLoggedIn;
 	this.titleUserName = options.titleUserName || this.titleUserName;

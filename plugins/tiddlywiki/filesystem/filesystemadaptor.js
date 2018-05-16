@@ -14,8 +14,7 @@ A sync adaptor module for synchronising with the local filesystem via node.js AP
 
 // Get a reference to the file system
 var fs = $tw.node ? require("fs") : null,
-	path = $tw.node ? require("path") : null,
-    	WikiExport = require('$:/core/modules/wiki.js');
+	path = $tw.node ? require("path") : null;
 
 function FileSystemAdaptor(options) {
 	var self = this;
@@ -23,19 +22,16 @@ function FileSystemAdaptor(options) {
 	this.logger = new $tw.utils.Logger("filesystem",{colour: "blue"});
 	// Create the <wiki>/tiddlers folder if it doesn't exist
 	$tw.utils.createDirectory($tw.boot.wikiTiddlersPath);
-	this.eventListeners = this.eventListeners || {};
 }
 
-// Add event listener methods from wiki for use here
-FileSystemAdaptor.prototype.addEventListener = WikiExport.addEventListener;
-FileSystemAdaptor.prototype.removeEventListener = WikiExport.removeEventListener;
-FileSystemAdaptor.prototype.dispatchEvent = WikiExport.dispatchEvent;
-	
 FileSystemAdaptor.prototype.name = "filesystem";
 
 FileSystemAdaptor.prototype.isReady = function() {
 	// The file system adaptor is always ready
 	return true;
+};
+FileSystemAdaptor.prototype.setSyncer = function(syncer) {
+	this.syncer = syncer;
 };
 
 FileSystemAdaptor.prototype.getTiddlerInfo = function(tiddler) {

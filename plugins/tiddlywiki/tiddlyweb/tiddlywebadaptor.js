@@ -22,19 +22,17 @@ function TiddlyWebAdaptor(options) {
 	this.recipe = undefined;
 	this.hasStatus = false;
 	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
-	this.eventListeners = this.eventListeners || {};
 }
-	
-// Add event listener methods from wiki for use here
-TiddlyWebAdaptor.prototype.addEventListener = WikiExport.addEventListener;
-TiddlyWebAdaptor.prototype.removeEventListener = WikiExport.removeEventListener;
-TiddlyWebAdaptor.prototype.dispatchEvent = WikiExport.dispatchEvent;
-	
+
 TiddlyWebAdaptor.prototype.name = "tiddlyweb";
 
 TiddlyWebAdaptor.prototype.isReady = function() {
 	return this.hasStatus;
 };
+
+TiddlyWebAdaptor.prototype.setSyncer = function(syncer) {
+	this.syncer = syncer;
+}
 
 TiddlyWebAdaptor.prototype.getHost = function() {
 	var text = this.wiki.getTiddlerText(CONFIG_HOST_TIDDLER,DEFAULT_HOST_TIDDLER),
