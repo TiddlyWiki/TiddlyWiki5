@@ -22,16 +22,16 @@ exports.startup = function() {
 	if($tw.browser) {
 		$tw.utils.each($tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/KeyboardShortcut]!has[draft.of]]"),function(title) {
 			var self = this;
-			var key = $tw.wiki.getTiddlerText(title);
+			var key = $tw.wiki.getTiddler(title).fields["key"];
 			$tw.wiki.addEventListener("change",function(changes) {
 				if($tw.utils.hop(changes,title)) {
-					key = $tw.wiki.getTiddlerText(title);
+					key = $tw.wiki.getTiddler(title).fields["key"];
 				}
 			});
 
 			document.addEventListener("keydown",function(event) {
-				if($tw.keyboardManager.checkKeyDescriptors(event,$tw.keyboardManager.parseKeyDescriptors(key))) {
-						$tw.rootWidget.invokeActionString($tw.wiki.getTiddlerText(title + '/action',$tw.rootWidget));
+				if(key !== undefined && $tw.keyboardManager.checkKeyDescriptors(event,$tw.keyboardManager.parseKeyDescriptors(key))) {
+						$tw.rootWidget.invokeActionString($tw.wiki.getTiddlerText(title,$tw.rootWidget));
 						return true;
 				}
 				return false;
