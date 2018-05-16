@@ -17,7 +17,8 @@ if($tw.node) {
 		fs = require("fs"),
 		url = require("url"),
 		path = require("path"),
-		http = require("http");
+		http = require("http"),
+		events = require('events');
 }
 
 exports.info = {
@@ -144,6 +145,7 @@ SimpleServer.prototype.requestHandler = function(request,response) {
 	
 SimpleServer.prototype.listen = function(port,host) {
 	return http.createServer(this.requestHandler.bind(this)).listen(port,host);
+
 };
 
 var Command = function(params,commander,callback) {
@@ -303,13 +305,18 @@ Command.prototype.execute = function() {
 		pathprefix: pathprefix
 	});
 	var nodeServer = this.server.listen(port,host);
+	var wss = new $tw.WebSocketServer({ server: nodeServer });
+	var eventer = new events.EventEmitter();
 	$tw.utils.log("Serving on " + host + ":" + port,"brown/orange");
 	$tw.utils.log("(press ctrl-C to exit)","red");
 	// Warn if required plugins are missing
 	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
 		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
 	}
-	$tw.hooks.invokeHook('th-server-command-post-start', this.server, nodeServer);
+	$tw.hooks.invokeHook('th-server-command-post-start', this.server, eventer, "tiddlywiki");
+	wss.addListener('connection', function (client, request) {
+		eventer.emit('ws-client-connect', client, request);
+	})
 	return null;
 };
 
