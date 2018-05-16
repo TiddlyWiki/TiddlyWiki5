@@ -15,7 +15,7 @@ Keyboard shortcut handling
 // Export name and synchronous status
 exports.name = "global-keyboard";
 exports.platforms = ["browser"];
-exports.after = ["startup"];
+exports.after = ["story"];
 exports.synchronous = true;
 
 exports.startup = function() {
@@ -31,8 +31,8 @@ exports.startup = function() {
 
 			document.addEventListener("keydown",function(event) {
 				if(key !== undefined && $tw.keyboardManager.checkKeyDescriptors(event,$tw.keyboardManager.parseKeyDescriptors(key))) {
-						$tw.rootWidget.invokeActionString($tw.wiki.getTiddlerText(title,$tw.rootWidget));
-						return true;
+					$tw.rootWidget.invokeActionString($tw.wiki.getTiddlerText(title),$tw.rootWidget);
+					return true;
 				}
 				return false;
 			},false);
