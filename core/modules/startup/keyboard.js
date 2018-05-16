@@ -52,7 +52,7 @@ exports.startup = function() {
 				hasChanged = null;
 			$tw.utils.each($tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/KeyboardShortcut]!has[draft.of]]"),function(title) {
 				newList.push(title);
-				if($tw.utils.hop(changes,title)) {
+				if($tw.utils.hop(changes,title) || shortcutTiddlers.indexOf(title) === -1) {
 					hasChanged = true;
 				}
 			});
