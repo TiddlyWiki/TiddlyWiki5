@@ -313,10 +313,19 @@ Command.prototype.execute = function() {
 	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
 		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
 	}
+	//call the server post-start hook with the SimpleServer and EventEmitter
 	$tw.hooks.invokeHook('th-server-command-post-start', this.server, eventer, "tiddlywiki");
+	//forward new connections on to the event emitter
+	var self = this;
 	wss.addListener('connection', function (client, request) {
-		eventer.emit('ws-client-connect', client, request);
+		var parts = require('url').parse(request.url);
+		var prefix = self.server.get('pathPrefix');
+		//only handle clients that request a path at or under the path prefix
+		if (prefix && parts.pathname.indexOf(prefix) !== 0) client.close(404);
+		else eventer.emit('ws-client-connect', client, request);
 	})
+	//assign the event emitter to the $tw global
+	$tw.wss = eventer;
 	return null;
 };
 

@@ -59,14 +59,7 @@ exports.startup = function () {
 				}
 			}
 		});
-
-		if ($tw.wss) {
-			console.log('Something else already assigned $tw.wss, but we will override it since we made it this far.');
-		}
-
-		$tw.wss = eventer;
 	}
-
 }
 
 
