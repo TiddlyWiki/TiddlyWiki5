@@ -20,16 +20,57 @@ exports.synchronous = true;
 
 exports.startup = function() {
 	if($tw.browser) {
+		var shortcutTiddlers = $tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/KeyboardShortcut]!has[draft.of]]"),
+			shortcutKeysList = [],
+			shortcutActionList = [],
+			shortcutParsedList = [];
+		for (var i = 0; i < shortcutTiddlers.length; i++) {
+			var title = shortcutTiddlers[i];
+			var tiddlerFields = $tw.wiki.getTiddler(title).fields;
+			shortcutKeysList[i] = tiddlerFields["key"] !== undefined ? tiddlerFields["key"] : undefined;
+			shortcutActionList[i] = tiddlerFields["text"];
+			shortcutParsedList[i] = $tw.keyboardManager.parseKeyDescriptors(shortcutKeysList[i]);
+		}
+
 		document.addEventListener("keydown",function(event) {
-			$tw.utils.each($tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/KeyboardShortcut]!has[draft.of]]"),function(title) {
-				var key = $tw.wiki.getTiddler(title) !== undefined ? $tw.wiki.getTiddler(title).fields["key"] : undefined;
-				if(key !== undefined && $tw.keyboardManager.checkKeyDescriptors(event,$tw.keyboardManager.parseKeyDescriptors(key))) {
-					$tw.rootWidget.invokeActionString($tw.wiki.getTiddlerText(title),$tw.rootWidget);
-					return true;
+			var key, action;
+			for (i = 0; i < shortcutTiddlers.length; i++) {
+				if ($tw.keyboardManager.checkKeyDescriptors(event,shortcutParsedList[i])) {
+					key = shortcutKeysList[i];
+					action = shortcutActionList[i];
 				}
-			});
+			}
+			if(key !== undefined) {
+				$tw.rootWidget.invokeActionString(action,$tw.rootWidget);
+				return true;
+			}
 			return false;
 		},false);
+
+		$tw.wiki.addEventListener("change",function(changes) {
+			var newList = [],
+				hasChanged = null;
+			$tw.utils.each($tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/KeyboardShortcut]!has[draft.of]]"),function(title) {
+				newList.push(title);
+				if($tw.utils.hop(changes,title)) {
+					hasChanged = true;
+				}
+			});
+
+			if(hasChanged) {
+				shortcutTiddlers = newList;
+				shortcutKeysList = [];
+				shortcutActionList = [];
+				shortcutParsedList = [];
+				for (i = 0; i < shortcutTiddlers.length; i++) {
+					var title = shortcutTiddlers[i];
+					var tiddlerFields = $tw.wiki.getTiddler(title).fields;
+					shortcutKeysList[i] = tiddlerFields["key"] !== undefined ? tiddlerFields["key"] : undefined;
+					shortcutActionList[i] = tiddlerFields["text"];
+					shortcutParsedList[i] = $tw.keyboardManager.parseKeyDescriptors(shortcutKeysList[i]);
+				}
+			}
+		});
 	}
 };
 
