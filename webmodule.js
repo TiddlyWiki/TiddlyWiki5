@@ -68,6 +68,6 @@ exports.loadTiddlyWiki = function loadTiddlyWiki(mount, folder, callback) {
 		$tw.hooks.invokeHook('th-server-command-post-start', server, events, "webmodule");
 
 		//return the server and event emitter
-		callback(null, server, events);
+		callback(null, server, events, $tw);
 	}
 };
