@@ -15,7 +15,7 @@ Keyboard shortcut handling
 // Export name and synchronous status
 exports.name = "global-keyboard";
 exports.platforms = ["browser"];
-exports.after = ["story"];
+exports.after = ["startup"];
 exports.synchronous = true;
 
 exports.startup = function() {
