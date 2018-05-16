@@ -57,7 +57,7 @@ exports.startup = function() {
 				}
 			});
 
-			if(hasChanged) {
+			if(hasChanged || newList !== shortcutTiddlers) {
 				shortcutTiddlers = newList;
 				shortcutKeysList = [];
 				shortcutActionList = [];
