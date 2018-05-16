@@ -13,8 +13,22 @@ The event emitter is included for future use. Open an issue at Arlen22/TiddlySer
 exports.loadTiddlyWiki = function loadTiddlyWiki(mount, folder, callback) {
 
 	console.time('twboot-' + folder);
-	// const dynreq = "tiddlywiki";
-	loadDataFolder(mount, folder, complete);
+	const $tw = require("./boot/boot.js").TiddlyWiki();
+	//we only need the folder because the server command is setup later
+	$tw.boot.argv = [folder];
+	//tiddlyweb host must end with a slash
+	$tw.preloadTiddler({
+		"text": "$protocol$//$host$" + mount + (mount[mount.length - 1] === '/') ? "" : "/",
+		"title": "$:/config/tiddlyweb/host"
+	});
+
+	try {
+		$tw.boot.boot(function() {
+			complete(null, $tw);
+		});
+	} catch (err) {
+		complete(err);
+	}
 
 	function complete(err, $tw) {
 		console.timeEnd('twboot-' + folder);
@@ -50,34 +64,10 @@ exports.loadTiddlyWiki = function loadTiddlyWiki(mount, folder, callback) {
 		});
 
 		var events = new EventEmitter();
+		//invoke the hook for the data folder
 		$tw.hooks.invokeHook('th-server-command-post-start', server, events, "webmodule");
 
 		//return the server and event emitter
 		callback(null, server, events);
 	}
 };
-
-function loadDataFolder(mount, folder, callback) {
-
-	const $tw = require("./boot/boot.js").TiddlyWiki();
-	//we only need the folder because everything else is manual
-	$tw.boot.argv = [folder];
-	//tiddlyweb host must end with a slash
-	$tw.preloadTiddler({
-		"text": "$protocol$//$host$" + mount + (mount[mount.length - 1] === '/') ? "" : "/",
-		"title": "$:/config/tiddlyweb/host"
-	});
-	/**
-	 * Specify the boot folder of the tiddlywiki instance to load. This is the actual path to the tiddlers that will be loaded 
-	 * into wiki as tiddlers. Therefore this is the path that will be served to the browser. It will not actually run on the server
-	 * since we load the server files from here. We only need to make sure that we use boot.js from the same version as included in 
-	 * the bundle. 
-	**/
-	try {
-		$tw.boot.boot(() => {
-			callback(null, $tw);
-		});
-	} catch (err) {
-		callback(err);
-	}
-}
