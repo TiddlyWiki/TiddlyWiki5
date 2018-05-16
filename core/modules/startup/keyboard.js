@@ -20,36 +20,16 @@ exports.synchronous = true;
 
 exports.startup = function() {
 	if($tw.browser) {
-		var shortcutTiddlers = $tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/KeyboardShortcut]!has[draft.of]]");
-		
-		function addKeyboardListener(title) {
-			document.addEventListener("keydown",function(event) {
+		document.addEventListener("keydown",function(event) {
+			$tw.utils.each($tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/KeyboardShortcut]!has[draft.of]]"),function(title) {
 				var key = $tw.wiki.getTiddler(title) !== undefined ? $tw.wiki.getTiddler(title).fields["key"] : undefined;
-				$tw.wiki.addEventListener("change",function(changes) {
-					if($tw.utils.hop(changes,title)) {
-						key = $tw.wiki.getTiddler(title) !== undefined ? $tw.wiki.getTiddler(title).fields["key"] : undefined;
-					}
-				});
-
 				if(key !== undefined && $tw.keyboardManager.checkKeyDescriptors(event,$tw.keyboardManager.parseKeyDescriptors(key))) {
 					$tw.rootWidget.invokeActionString($tw.wiki.getTiddlerText(title),$tw.rootWidget);
 					return true;
 				}
-				return false;
-			},false);
-		};
-
-		$tw.utils.each(shortcutTiddlers,function(title) {
-			addKeyboardListener(title);
-		});
-
-		$tw.wiki.addEventListener("change",function(changes) {
-			$tw.utils.each($tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/KeyboardShortcut]!has[draft.of]]"),function(title) {
-				if(shortcutTiddlers.indexOf(title) === -1) {
-					addKeyboardListener(title);
-				}
 			});
-		});
+			return false;
+		},false);
 	}
 };
 
