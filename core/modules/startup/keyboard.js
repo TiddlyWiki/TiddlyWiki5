@@ -31,7 +31,7 @@ exports.startup = function() {
 
 			document.addEventListener("keydown",function(event) {
 				if(key !== undefined && $tw.keyboardManager.checkKeyDescriptors(event,$tw.keyboardManager.parseKeyDescriptors(key))) {
-					$tw.rootWidget.invokeActionString('<$navigator story="$:/StoryList" history="$:/HistoryList">' + $tw.wiki.getTiddlerText(title) + '</$navigator>',$tw.rootWidget);
+					$tw.rootWidget.invokeActionString($tw.wiki.getTiddlerText(title),$tw.rootWidget);
 					return true;
 				}
 				return false;
