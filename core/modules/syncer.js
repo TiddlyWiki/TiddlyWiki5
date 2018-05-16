@@ -163,6 +163,20 @@ Syncer.prototype.storeTiddler = function(tiddlerFields,hasBeenLazyLoaded) {
 	};
 };
 
+Syncer.prototype.deleteTiddler = function(title){
+	//get the tiddler by title
+	var tiddler = this.wiki.getTiddler(title);
+	//make sure this tiddler is a synced tiddler
+	var filteredDeletion = this.filterFn.call(this.wiki,function(callback) {
+		callback(tiddler,title);
+	});
+	//if it is, then we delete it
+	for(var i = 0; i < filteredDeletion.length; i++){
+		this.wiki.deleteTiddler(filteredDeletion[i]);
+		delete this.tiddlerInfo[filteredDeletion[i]];
+	}
+}
+
 Syncer.prototype.getStatus = function(callback) {
 	var self = this;
 	// Check if the adaptor supports getStatus()
@@ -295,14 +309,6 @@ Syncer.prototype.handleServerUpdate = function(tiddlerFields){
 		}
 	}
 }
-
-Syncer.prototype.handleServerDelete = function(title){
-	if(this.tiddlerInfo[title]){
-		delete this.tiddlerInfo[title];
-		this.wiki.deleteTiddler(title);
-	}
-	
-};
 
 /*
 Dispay a password prompt and allow the user to login
