@@ -65,7 +65,7 @@ exports.startup = function() {
 				}
 			}
 			if(!hasChanged) {
-				var shortcutConfigTiddlers = $tw.wiki.filterTiddlers("[all[shadows+tiddlers]prefix[$:/config/shortcuts/]]");
+				var shortcutConfigTiddlers = $tw.wiki.filterTiddlers("[all[shadows+tiddlers]prefix[$:/config/shortcuts]]");
 				for(i = 0; i < shortcutConfigTiddlers.length; i++) {
 					if($tw.utils.hop(changes,shortcutConfigTiddlers[i])) {
 						hasChanged = true;
