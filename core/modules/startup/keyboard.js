@@ -52,10 +52,10 @@ exports.startup = function() {
 			var hasChanged = false;
 			for (i = 0; i < shortcutTiddlers.length; i++) {
 				if($tw.utils.hop(changes,shortcutTiddlers[i])) {
-                                       	hasChanged = true;
-                                       	break;
-                                }
-                        }
+					hasChanged = true;
+					break;
+				}
+			}
 			if(!hasChanged) {
 				for (i = 0; i < newList.length; i++) {
 					if($tw.utils.hop(changes,newList[i])) {
