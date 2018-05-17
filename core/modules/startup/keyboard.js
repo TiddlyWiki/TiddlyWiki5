@@ -29,13 +29,13 @@ exports.startup = function() {
 			var tiddlerFields = $tw.wiki.getTiddler(title).fields;
 			shortcutKeysList[i] = tiddlerFields["key"] !== undefined ? tiddlerFields["key"] : undefined;
 			shortcutActionList[i] = tiddlerFields["text"];
-			shortcutParsedList[i] = $tw.keyboardManager.parseKeyDescriptors(shortcutKeysList[i]);
+			shortcutParsedList[i] = shortcutKeysList !== undefined ? $tw.keyboardManager.parseKeyDescriptors(shortcutKeysList[i]) : undefined;
 		}
 
 		document.addEventListener("keydown",function(event) {
 			var key, action;
 			for (i = 0; i < shortcutTiddlers.length; i++) {
-				if ($tw.keyboardManager.checkKeyDescriptors(event,shortcutParsedList[i])) {
+				if (shortcutParsedList[i] !== undefined && $tw.keyboardManager.checkKeyDescriptors(event,shortcutParsedList[i])) {
 					key = shortcutParsedList[i];
 					action = shortcutActionList[i];
 				}
