@@ -48,16 +48,15 @@ exports.startup = function() {
 		},false);
 
 		$tw.wiki.addEventListener("change",function(changes) {
-			var newList = [],
-				hasChanged = null;
-			$tw.utils.each($tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/KeyboardShortcut]!has[draft.of]]"),function(title) {
-				newList.push(title);
-				if($tw.utils.hop(changes,title) || shortcutTiddlers.indexOf(title) === -1) {
+			var newList = $tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/KeyboardShortcut]!has[draft.of]]");
+			var hasChanged = null;
+			for (i = 0; i < newList.length; i++) {
+				if($tw.utils.hop(changes,newList[i])) {
 					hasChanged = true;
+					break;
 				}
-			});
-
-			if(hasChanged || newList !== shortcutTiddlers) {
+			}
+			if(hasChanged) {
 				shortcutTiddlers = newList;
 				shortcutKeysList = [];
 				shortcutActionList = [];
