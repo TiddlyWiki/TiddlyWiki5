@@ -1,0 +1,7 @@
+key: ((navigate-bottom))
+tags: $:/tags/KeyboardShortcut
+title: $:/core/ui/KeyboardShortcuts/navigate-bottom
+
+<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}}>
+<$action-navigate $to={{{ [list[$:/StoryList]reverse[]nth[1]] }}} $scroll="yes"/>
+</$navigator>
