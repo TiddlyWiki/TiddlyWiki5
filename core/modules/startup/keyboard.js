@@ -56,6 +56,13 @@ exports.startup = function() {
 					break;
 				}
 			}
+			for (i= 0; i < shortcutTiddlers.length; i++) {
+				if($tw.utils.hop(changes,shortcutTiddlers[i])) {
+                                        hasChanged = true;
+                                        break;
+                                }
+                        }
+
 			if(hasChanged) {
 				shortcutTiddlers = newList;
 				shortcutKeysList = [];
