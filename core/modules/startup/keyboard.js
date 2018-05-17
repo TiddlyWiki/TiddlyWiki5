@@ -49,19 +49,21 @@ exports.startup = function() {
 
 		$tw.wiki.addEventListener("change",function(changes) {
 			var newList = $tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/KeyboardShortcut]!has[draft.of]]");
-			var hasChanged = null;
+			var hasChanged = false;
 			for (i = 0; i < newList.length; i++) {
 				if($tw.utils.hop(changes,newList[i])) {
 					hasChanged = true;
 					break;
 				}
 			}
-			for (i= 0; i < shortcutTiddlers.length; i++) {
-				if($tw.utils.hop(changes,shortcutTiddlers[i])) {
-                                        hasChanged = true;
-                                        break;
-                                }
-                        }
+			if(!hasChanged) {
+				for (i = 0; i < shortcutTiddlers.length; i++) {
+					if($tw.utils.hop(changes,shortcutTiddlers[i])) {
+                                        	hasChanged = true;
+                                        	break;
+                                	}
+                        	}
+			}
 
 			if(hasChanged) {
 				shortcutTiddlers = newList;
