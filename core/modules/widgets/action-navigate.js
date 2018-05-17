@@ -56,7 +56,7 @@ Invoke the action associated with this widget
 */
 NavigateWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var bounds = triggeringWidget && triggeringWidget.getBoundingClientRect && triggeringWidget.getBoundingClientRect(),
-		suppressNavigation = event.metaKey || event.ctrlKey || (event.button === 1);
+		suppressNavigation = event !== undefined ? event.metaKey || event.ctrlKey || (event.button === 1) : false;
 	if(this.actionScroll === "yes") {
 		suppressNavigation = false;
 	} else if(this.actionScroll === "no") {
