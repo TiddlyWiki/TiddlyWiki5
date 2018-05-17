@@ -322,7 +322,7 @@ Command.prototype.execute = function() {
 		var prefix = self.server.get('pathPrefix');
 		//only handle clients that request a path at or under the path prefix
 		if (prefix && parts.pathname.indexOf(prefix) !== 0) client.close(404);
-		else eventer.emit('ws-client-connect', client, request);
+		else eventer.emit('ws-client-connect', client, request, parts.pathname.slice(prefix.length));
 	})
 	//assign the event emitter to the $tw global
 	$tw.wss = eventer;
