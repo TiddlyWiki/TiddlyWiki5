@@ -32,8 +32,8 @@ exports.startup = function () {
 	function serverStartHook(server, eventer, type) {
 		var wssClients = [];
 
-		eventer.on('ws-client-connect', function (client, request) {
-			logger.log('client connected');
+		eventer.on('ws-client-connect', function (client, request, subpath) {
+			logger.log('client connected', subpath);
 			wssClients.push(client);
 			client.on('message', function (data) {
 				logger.log('client message', data.length);
