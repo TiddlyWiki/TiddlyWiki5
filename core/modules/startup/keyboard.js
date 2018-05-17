@@ -36,7 +36,7 @@ exports.startup = function() {
 			var key, action;
 			for (i = 0; i < shortcutTiddlers.length; i++) {
 				if ($tw.keyboardManager.checkKeyDescriptors(event,shortcutParsedList[i])) {
-					key = shortcutKeysList[i];
+					key = shortcutParsedList[i];
 					action = shortcutActionList[i];
 				}
 			}
@@ -64,7 +64,15 @@ exports.startup = function() {
 					}
 				}
 			}
-
+			if(!hasChanged) {
+				var shortcutConfigTiddlers = $tw.wiki.filterTiddlers("[all[shadows+tiddlers]prefix[$:/config/shortcuts/]]");
+				for(i = 0; i < shortcutConfigTiddlers.length; i++) {
+					if($tw.utils.hop(changes,shortcutConfigTiddlers[i])) {
+						hasChanged = true;
+						break;
+					}
+				}
+			}
 			if(hasChanged) {
 				shortcutTiddlers = newList;
 				shortcutKeysList = [];
@@ -83,3 +91,4 @@ exports.startup = function() {
 };
 
 })();
+
