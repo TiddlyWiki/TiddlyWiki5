@@ -1,7 +1,0 @@
-key: ((navigate-top))
-tags: $:/tags/KeyboardShortcut
-title: $:/core/ui/KeyboardShortcuts/navigate-top
-
-<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}}>
-<$action-navigate $to={{{ [list[$:/StoryList]nth[1]] }}} $scroll="yes"/>
-</$navigator>

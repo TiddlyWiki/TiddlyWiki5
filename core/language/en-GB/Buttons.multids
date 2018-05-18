@@ -60,10 +60,6 @@ Manager/Caption: tiddler manager
 Manager/Hint: Open tiddler manager
 More/Caption: more
 More/Hint: More actions
-NavigateTop/Caption: top
-NavigateTop/Hint: Navigate to the first Tiddler in the Story River
-NavigateBottom/Caption: bottom
-NavigateBottom/Hint: Navigate to the last Tiddler in the Story River
 NewHere/Caption: new here
 NewHere/Hint: Create a new tiddler tagged with this one
 NewJournal/Caption: new journal
