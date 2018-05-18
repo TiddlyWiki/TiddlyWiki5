@@ -12,7 +12,7 @@ title: $:/core/ui/KeyboardShortcuts/new-journal
 </$reveal>
 </$wikify>
 \end
-<$navigator story="$:/StoryList" history="$:/HistoryList openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}}>
+<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}}>
 <$set name="journalTitleTemplate" value={{$:/config/NewJournal/Title}}>
 <$set name="journalTags" value={{$:/config/NewJournal/Tags}}>
 <$set name="journalText" value={{$:/config/NewJournal/Text}}>
