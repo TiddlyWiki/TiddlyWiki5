@@ -22,6 +22,7 @@ type: text/vnd.tiddlywiki
 !!! How to add global keyboard shortcuts
 
 * Create a tiddler with the prefix `$:/config/ShortcutInfo/` and a descriptive suffix as title. That suffix will be used to access the keyboard shortcut
+* You can put a description in the text field that will be shown in the ~ControlPanel
 ** EXAMPLE: `$:/config/ShortcutInfo/new-custom-tiddler`
 * Create another tiddler and put the suffix you chose for the ~ShortcutInfo tiddler into a field named ''key'' - surrounded by `((` and `))`
 ** EXAMPLE: `key : ((new-custom-tiddler))`

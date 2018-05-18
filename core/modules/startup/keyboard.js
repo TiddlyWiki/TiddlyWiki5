@@ -32,7 +32,7 @@ exports.startup = function() {
 					tiddlerFields = $tw.wiki.getTiddler(title).fields;
 				shortcutKeysList[i] = tiddlerFields["key"] !== undefined ? tiddlerFields["key"] : undefined;
 				shortcutActionList[i] = tiddlerFields["text"];
-				shortcutParsedList[i] = shortcutKeysList !== undefined ? $tw.keyboardManager.parseKeyDescriptors(shortcutKeysList[i]) : undefined;
+				shortcutParsedList[i] = shortcutKeysList[i] !== undefined ? $tw.keyboardManager.parseKeyDescriptors(shortcutKeysList[i]) : undefined;
 			}
 		};
 
