@@ -1,0 +1,15 @@
+title: WebDAV sync adaptor plugin
+created: 201311152153
+modified: 201805170313
+
+! Features
+
+* Loads skinny tiddlers from entire shared directory at startup/login
+* Subsequently syncs changes back to the server
+* Polls for changes from the server
+
+! Issues
+
+* ''[[$:/DefaultTiddlers]]'' doesn't work because thanks to lazy loading it is only loaded after it is needed
+* Should probably disable PUT saver
+* Ignores ''if-match'' header, so doesn't detect clashes on save
