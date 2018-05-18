@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 * Abandoning changes to the draft tiddler containing the keyboard focus (defaults to <kbd>escape</kbd>)
 * Formatting operations from the tiddler editing toolbar (see the tooltips)
 * <<.from-version 5.1.14>> Adding Tags in the Editor (hitting <kbd>Enter</kbd>)
-* <<.from-version 5.1.18>> Creating a new Tiddler (defaults to <kbd>alt-N</kbd>) or a new Journal (defaults to <kbd>alt-J</kbd>)
+* <<.from-version 5.1.18>> Creating a new Tiddler (defaults to <kbd>alt-N</kbd>) or a new Journal (defaults to <kbd>alt-J</kbd>) and other custom actions
 
 <br>
 
@@ -27,7 +27,7 @@ type: text/vnd.tiddlywiki
 ** EXAMPLE: `$:/config/ShortcutInfo/new-custom-tiddler`
 * Create another tiddler and put the suffix you chose for the ~ShortcutInfo tiddler into a field named ''key'' - surrounded by `((` and `))`
 ** EXAMPLE: `key : ((new-custom-tiddler))`
-* The text field of this Tiddler can hold the actions you want to be triggered when the key-combination (we define that later) gets detected
+* The text field of this Tiddler can hold the actions you want to be triggered when the key-combination (we define that in the last step) gets detected
 * Add the tag {{$:/tags/KeyboardShortcut||$:/core/ui/TagTemplate}}
-* The key combination to trigger the newly defined actions can now be set in the ~KeyboardShortcuts Tab of the$:/ControlPanel
+* The key combination to trigger the newly defined actions can now be set in the ~KeyboardShortcuts Tab of the $:/ControlPanel
 
