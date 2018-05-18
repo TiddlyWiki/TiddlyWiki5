@@ -28,5 +28,6 @@ type: text/vnd.tiddlywiki
 * Create another tiddler and put the suffix you chose for the ~ShortcutInfo tiddler into a field named ''key'' - surrounded by `((` and `))`
 ** EXAMPLE: `key : ((new-custom-tiddler))`
 * The text field of this Tiddler can hold the actions you want to be triggered when the key-combination (we define that later) gets detected
+* Add the tag {{$:/tags/KeyboardShortcut||$:/core/ui/TagTemplate}}
 * The key combination to trigger the newly defined actions can now be set in the ~KeyboardShortcuts Tab of the$:/ControlPanel
 
