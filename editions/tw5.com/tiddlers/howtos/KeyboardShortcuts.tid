@@ -14,9 +14,7 @@ type: text/vnd.tiddlywiki
 
 <br>
 
-<<.tip>>
-
-:The current shortcuts can be inspected and customised in the "Keyboard Shortcuts" tab of the [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}}.
+<<.tip """The current shortcuts can be inspected and customised in the "Keyboard Shortcuts" tab of the [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}}""">>
 
 <br>
 
