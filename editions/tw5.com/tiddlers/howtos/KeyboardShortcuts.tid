@@ -4,15 +4,29 @@ tags: Features [[Working with TiddlyWiki]]
 title: KeyboardShortcuts
 type: text/vnd.tiddlywiki
 
-Keyboard shortcuts are available for common editing operations:
+!!! Keyboard shortcuts are available for common editing operations in the Text Editor and for actions like "New Tiddler":
 
 * Confirming changes to the draft tiddler containing the keyboard focus (defaults to <kbd>ctrl-Enter</kbd>
 * Abandoning changes to the draft tiddler containing the keyboard focus (defaults to <kbd>escape</kbd>)
 * Formatting operations from the tiddler editing toolbar (see the tooltips)
+* <<.from-version 5.1.14>> Adding Tags in the Editor (hitting <kbd>Enter</kbd>)
+* <<.from-version 5.1.18>> Creating a new Tiddler (defaults to <kbd>alt-N</kbd>) or a new Journal (defaults to <kbd>alt-J</kbd>)
 
-The current shortcuts can be inspected and customised in the "Keyboard Shortcuts" tab of [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}}.
+<br>
 
-!! Special Keys
+<<.tip>>
 
-; adding tags in the editor
-: <<.from-version 5.1.14>>: if you hit <kbd>Enter</kbd> in the new tag input, the tag will be added
+:The current shortcuts can be inspected and customised in the "Keyboard Shortcuts" tab of the [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}}.
+
+<br>
+
+
+!!! How to add global keyboard shortcuts
+
+* Create a tiddler with the prefix `$:/config/ShortcutInfo/` and a descriptive suffix as title. That suffix will be used to access the keyboard shortcut
+** EXAMPLE: `$:/config/ShortcutInfo/new-custom-tiddler`
+* Create another tiddler and put the suffix you chose for the ~ShortcutInfo tiddler into a field named ''key'' - surrounded by `((` and `))`
+** EXAMPLE: `key : ((new-custom-tiddler))`
+* The text field of this Tiddler can hold the actions you want to be triggered when the key-combination (we define that later) gets detected
+* The key combination to trigger the newly defined actions can now be set in the ~KeyboardShortcuts Tab of the$:/ControlPanel
+
