@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/webdav/ServerControlPanel
+caption: Server
+tags: $:/tags/ControlPanel
+
+Host configuration: <$edit-text tiddler="$:/config/webdav/host" tag="input" default=""/>
+
+<blockquote>//for example, `$protocol$//$host$/folder`, where `$protocol$` is replaced by the protocol (typically `http` or `https`), and `$host$` by the host name//</blockquote>
+
+----
+
+<$button message="tm-server-refresh">Refresh</$button> to fetch changes from the server immediately

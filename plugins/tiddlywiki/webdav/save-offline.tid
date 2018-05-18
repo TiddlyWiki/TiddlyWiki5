@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/webdav/save/offline
+
+\define saveTiddlerFilter()
+[is[tiddler]] -[[$:/boot/boot.css]] -[[$:/HistoryList]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[[$:/plugins/tiddlywiki/webdav]] +[sort[title]] $(publishFilter)$
+\end
+{{$:/core/templates/tiddlywiki5.html}}

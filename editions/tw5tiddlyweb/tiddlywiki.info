@@ -1,7 +1,8 @@
 {
 	"description": "Base edition for TiddlySpace integration",
 	"plugins": [
-		"tiddlywiki/tiddlyweb"
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/webdav",
+	"description": "WebDAV sync adaptor",
+	"author": "Sebastian Silva",
+	"core-version": ">=5.0.0",
+	"list": "readme"
+}

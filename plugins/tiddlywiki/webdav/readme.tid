@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/webdav/readme
+
+This plugin runs in the browser to synchronise tiddler changes to and from a WebDAV-compatible server. It is inert when run under Node.js. Disabling this plugin via the browser can not be undone via the browser since this plugin provides the mechanism to synchronize settings with the server.
+
+[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/webdav]]
