@@ -2,20 +2,9 @@ key: ((new-journal))
 tags: $:/tags/KeyboardShortcut
 title: $:/core/ui/KeyboardShortcuts/new-journal
 
-\define journalButton()
-<$wikify name="journalTitle" text="""<$macrocall $name="now" format=<<journalTitleTemplate>>/>""">
-<$reveal type="nomatch" state=<<journalTitle>> text="">
-<$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<journalTags>> text={{{ [<journalTitle>get[]] }}}/>
-</$reveal>
-<$reveal type="match" state=<<journalTitle>> text="">
-<$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<journalTags>> text=<<journalText>>/>
-</$reveal>
-</$wikify>
+\define journalAction()
+{{$:/core/ui/Actions/new-journal}}
 \end
 <$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}}>
-<$set name="journalTitleTemplate" value={{$:/config/NewJournal/Title}}>
-<$set name="journalTags" value={{$:/config/NewJournal/Tags}}>
-<$set name="journalText" value={{$:/config/NewJournal/Text}}>
-<<journalButton>>
-</$set></$set></$set>
+<<journalAction>>
 </$navigator>
