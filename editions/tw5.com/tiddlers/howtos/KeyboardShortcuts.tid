@@ -30,3 +30,36 @@ type: text/vnd.tiddlywiki
 * Add the tag {{$:/tags/KeyboardShortcut||$:/core/ui/TagTemplate}}
 * The key combination to trigger the newly defined actions can now be set in the ~KeyboardShortcuts Tab of the $:/ControlPanel
 
+<br>
+
+<<.tip """To be able to trigger actions that need the `navigator widget` for message-handling, the actions need to be wrapped inside a ''navigator widget instance'' like so:""">>
+
+<br>
+
+```<$navigator story="$:/StoryList" history="$:/HistoryList">
+Actions are put here
+</$navigator>
+```
+
+<br>
+
+The actions handled by the navigator widget are mainly actions that interact with the Story-List:
+
+* Some actions triggered by the ''action-sendmessage widget''
+** tm-navigate
+** tm-new-tiddler
+** tm-edit-tiddler
+** tm-close-tiddler
+** tm-cancel-tiddler
+** tm-save-tiddler
+** tm-close-all-tiddlers
+** tm-close-other-tiddlers
+** tm-import-tiddlers
+** tm-perform-import
+** tm-fold-tiddler
+** tm-fold-other-tiddlers
+** tm-fold-all-tiddlers
+** tm-unfold-all-tiddlers
+** tm-rename-tiddler
+* The ''action-navigate'' widget
+
