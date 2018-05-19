@@ -36,9 +36,12 @@ type: text/vnd.tiddlywiki
 
 <br>
 
-```<$navigator story="$:/StoryList" history="$:/HistoryList">
+```
+
+<$navigator story="$:/StoryList" history="$:/HistoryList">
 Actions are put here
 </$navigator>
+
 ```
 
 <br>
