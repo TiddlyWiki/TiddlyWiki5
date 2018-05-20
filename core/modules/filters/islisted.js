@@ -17,19 +17,19 @@ Export our filter function
 */
 exports.islisted = function(source,operator,options) {
 	var field = operator.suffix || "list",
-    results = [],
-    listedList = [];
+		results = [],
+		listedList = [];
 	source(function(tiddler,title) {
-    $tw.utils.pushTop(listedList,options.wiki.findListingsOfTiddler(title,field));
-    if (operator.operand && operator.prefix === "!") {
-        if(listedList.indexOf(operator.operand) === -1) {
-                results.push(title);
-            }
-        } else {
-        	if(listedList.indexOf(operator.operand) !== -1) {
-            	results.push(title);
-            }
-        }
+		$tw.utils.pushTop(listedList,options.wiki.findListingsOfTiddler(title,field));
+		if (operator.operand && operator.prefix === "!") {
+			if(listedList.indexOf(operator.operand) === -1) {
+				results.push(title);
+			}
+		} else {
+			if(listedList.indexOf(operator.operand) !== -1) {
+				results.push(title);
+			}
+		}
 	});
 	return results;
 };
