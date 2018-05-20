@@ -72,7 +72,7 @@ exports.startup = function() {
 				hasChanged = changedTiddlers(newList);
 			}
 			if(!hasChanged) {
-				var shortcutConfigTiddlers = $tw.wiki.filterTiddlers("[all[shadows+tiddlers]prefix[$:/config/shortcuts]]");
+				var shortcutConfigTiddlers = $tw.wiki.filterTiddlers("[all[shadows+tiddlers]prefix[$:/config/shortcuts]!has[draft.of]]");
 				hasChanged = changedTiddlers(shortcutConfigTiddlers);
 			}
 			if(hasChanged) {
