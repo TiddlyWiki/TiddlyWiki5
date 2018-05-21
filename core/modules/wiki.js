@@ -588,7 +588,7 @@ exports.sortByList = function(array,listTitle) {
 					if(newPos === -1) {
 						newPos = currPos;
 					}
-					if(newPos !== currPos) {
+					if(currPos >= 0 && newPos !== currPos) {
 						titles.splice(currPos,1);
 						if(newPos >= currPos) {
 							newPos--;
