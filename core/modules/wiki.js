@@ -559,10 +559,10 @@ exports.sortByList = function(array,listTitle) {
 		}
 		// Finally obey the list-before and list-after fields of each tiddler in turn
 		var sortedTitles = titles.slice(0),
-			replacedTitles = {},
+			replacedTitles = Object.create(null),
 			self = this;
 		function replaceItem(title) {
-			if(!replacedTitles[title]) {
+			if(!$tw.utils.hop(replacedTitles, title)) {
 				replacedTitles[title] = true;
 				var newPos = -1,
 					tiddler = self.getTiddler(title);

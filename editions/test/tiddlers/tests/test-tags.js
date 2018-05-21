@@ -130,6 +130,15 @@ describe("Tag tests", function() {
 
 		expect(wiki.filterTiddlers("[tag[sortTag]]").join(',')).toBe("A,B,C");
 	});
+
+	it("should handle javascript-specific titles", function() {
+		var wiki = new $tw.Wiki();
+
+		wiki.addTiddler({ title: "A", text: "", tags: "sortTag"});
+		wiki.addTiddler({ title: "__proto__", text: "", tags: "sortTag", "list-before": ""});
+
+		expect(wiki.filterTiddlers("[tag[sortTag]]").join(',')).toBe("__proto__,A");
 });
+	});
 
 })();
