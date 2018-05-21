@@ -79,6 +79,7 @@ function FramedEngine(options) {
 	this.copyStyles();
 	// Add event listeners
 	$tw.utils.addEventListeners(this.domNode,[
+		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"},
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
 		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"}
@@ -167,6 +168,19 @@ Handle a dom "input" event which occurs when the text has changed
 FramedEngine.prototype.handleInputEvent = function(event) {
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
+	return true;
+};
+
+/*
+Handle a dom "focus" event
+*/
+FramedEngine.prototype.handleFocusEvent = function(event) {
+	var numPopups = $tw.popup.popups.length;
+	if(numPopups !== 0) {
+		for(var i=0; i < numPopups; i++) {
+			$tw.popup.cancel(i);
+		}
+	}
 	return true;
 };
 
