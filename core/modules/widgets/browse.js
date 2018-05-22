@@ -53,6 +53,11 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 	if(this.nwdirectory) {
 		domNode.setAttribute("nwdirectory",this.nwdirectory);
 	}
+	if(this.tabIndex) {
+		domNode.setAttribute("tabindex",this.tabIndex);
+	} else {
+		domNode.setAttribute("tabindex","1");
+	}
 	// Add a click event handler
 	domNode.addEventListener("change",function (event) {
 		if(self.message) {
@@ -85,6 +90,7 @@ BrowseWidget.prototype.execute = function() {
 	this.nwsaveas = this.getAttribute("nwsaveas");
 	this.webkitdirectory = this.getAttribute("webkitdirectory");
 	this.nwdirectory = this.getAttribute("nwdirectory");
+	this.tabIndex = this.getAttribute("tabindex");
 };
 
 /*

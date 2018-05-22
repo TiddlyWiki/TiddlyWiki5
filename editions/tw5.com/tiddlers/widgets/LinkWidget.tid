@@ -18,6 +18,7 @@ The `link` widget generates links to tiddlers. (Use the HTML `<a>` element to ge
 |tag |Optional tag to override the default "a" element |
 |class|Optional CSS classes //in addition to// the default classes (see below)|
 |overrideClass|<<.from-version "5.1.16">> Optional CSS classes //instead of// the default classes |
+|tabindex |<<.from-version "5.1.18">> An optional attribute to assign a [ext[tabindex|https://www.w3schools.com/tags/att_global_tabindex.asp]] to the HTML element, default is "-1" which ignores the element for <kbd>TAB</kbd> navigation |
 
 The content of the link widget is rendered within the `<a>` tag. The draggable functionality is equivalent to using the DraggableWidget with the ''tiddler'' attribute set to the link target.
 

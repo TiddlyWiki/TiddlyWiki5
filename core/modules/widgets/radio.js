@@ -44,6 +44,11 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	if(isChecked) {
 		this.inputDomNode.setAttribute("checked","true");
 	}
+	if(this.radioTabIndex) {
+		this.inputDomNode.setAttribute("tabindex",this.radioTabIndex);
+	} else {
+		this.inputDomNode.setAttribute("tabindex","1");
+	}
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");
 	this.labelDomNode.appendChild(this.spanDomNode);
@@ -95,6 +100,7 @@ RadioWidget.prototype.execute = function() {
 	this.radioIndex = this.getAttribute("index");
 	this.radioValue = this.getAttribute("value");
 	this.radioClass = this.getAttribute("class","");
+	this.radioTabIndex = this.getAttribute("tabindex");
 	// Make the child widgets
 	this.makeChildWidgets();
 };

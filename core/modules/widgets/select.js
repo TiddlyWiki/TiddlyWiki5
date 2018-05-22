@@ -107,6 +107,11 @@ SelectWidget.prototype.setSelectValue = function() {
 			domNode.value = value;
 		}
 	}
+	if(this.selectTabIndex) {
+		domNode.setAttribute("tabindex", this.selectTabIndex);
+	} else {
+		domNode.setAttribute("tabindex", "1");
+	}
 };
 
 /*
@@ -145,6 +150,7 @@ SelectWidget.prototype.execute = function() {
 	this.selectDefault = this.getAttribute("default");
 	this.selectMultiple = this.getAttribute("multiple", false);
 	this.selectSize = this.getAttribute("size");
+	this.selectTabIndex = this.getAttribute("tabindex");
 	// Make the child widgets
 	var selectNode = {
 		type: "element",

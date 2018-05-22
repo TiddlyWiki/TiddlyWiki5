@@ -49,6 +49,11 @@ function SimpleEngine(options) {
 	if(this.widget.editClass) {
 		this.domNode.className = this.widget.editClass;
 	}
+	if(this.widget.editTabIndex) {
+		this.domNode.setAttribute("tabindex",this.widget.editTabIndex);
+	} else {
+		this.domNode.setAttribute("tabindex","0");
+	}
 	// Add an input event handler
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},
@@ -119,6 +124,12 @@ SimpleEngine.prototype.handleInputEvent = function(event) {
 Handle a dom "focus" event
 */
 SimpleEngine.prototype.handleFocusEvent = function(event) {
+	var numPopups = $tw.popup.popups.length;
+	if(numPopups !== 0) {
+		for(var i=0; i < numPopups; i++) {
+			$tw.popup.cancel(i);
+		}
+	}
 	if(this.widget.editFocusPopup) {
 		$tw.popup.triggerPopup({
 			domNode: this.domNode,

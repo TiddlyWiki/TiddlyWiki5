@@ -111,7 +111,16 @@ function CodeMirrorEngine(options) {
 		// Note that this is a synchronous callback that is called before the constructor returns
 		self.domNode.appendChild(cmDomNode);
 	},config);
-
+	
+	// Focus listener for cancelling Popups
+	this.cm.on("focus",function() {
+		var numPopups = $tw.popup.popups.length;
+		if(numPopups !== 0) {
+			for(var i=0; i < numPopups; i++) {
+				$tw.popup.cancel(i);
+			}
+		}
+	});
 	// Set up a change event handler
 	this.cm.on("change",function() {
 		self.widget.saveChanges(self.getText());
