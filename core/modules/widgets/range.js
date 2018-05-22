@@ -46,6 +46,11 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 	if(this.increment){
 		this.inputDomNode.setAttribute("step", this.increment);
 	}
+	if(this.tabIndex) {
+		this.inputDomNode.setAttribute("tabindex", this.tabIndex);
+	} else {
+		this.inputDomNode.setAttribute("tabindex","-1");
+	}
 	this.inputDomNode.value = this.getValue();
 
 
@@ -87,6 +92,7 @@ RangeWidget.prototype.execute = function() {
 	this.increment = this.getAttribute("increment");
 	this.defaultValue = this.getAttribute("default");
 	this.elementClass = this.getAttribute("class","");
+	this.tabIndex = this.getAttribute("tabindex");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
