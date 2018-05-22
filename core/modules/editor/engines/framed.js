@@ -70,6 +70,9 @@ function FramedEngine(options) {
 	if(this.widget.editRows) {
 		this.domNode.setAttribute("rows",this.widget.editRows);
 	}
+	if(this.widget.getVariable("storyTiddler") !== undefined) {
+		this.iframeNode.setAttribute("tabindex", "1");
+	}
 	// Copy the styles from the dummy textarea
 	this.copyStyles();
 	// Add event listeners
