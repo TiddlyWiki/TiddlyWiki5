@@ -109,7 +109,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	if(this.tabIndex) {
 		domNode.setAttribute("tabindex",this.tabIndex);
 	} else {
-		domNode.setAttribute("tabindex","-1");
+		domNode.setAttribute("tabindex","1");
 	}
 	// Set the tooltip
 	// HACK: Performance issues with re-parsing the tooltip prevent us defaulting the tooltip to "<$transclude field='tooltip'><$transclude field='title'/></$transclude>"

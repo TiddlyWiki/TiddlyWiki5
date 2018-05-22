@@ -44,7 +44,7 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	if(this.checkboxTabIndex) {
 		this.inputDomNode.setAttribute("tabindex",this.checkboxTabIndex);
 	} else {
-		this.inputDomNode.setAttribute("tabindex","-1");
+		this.inputDomNode.setAttribute("tabindex","1");
 	}
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");

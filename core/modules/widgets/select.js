@@ -110,7 +110,7 @@ SelectWidget.prototype.setSelectValue = function() {
 	if(this.selectTabIndex) {
 		domNode.setAttribute("tabindex", this.selectTabIndex);
 	} else {
-		domNode.setAttribute("tabindex", "-1");
+		domNode.setAttribute("tabindex", "1");
 	}
 };
 

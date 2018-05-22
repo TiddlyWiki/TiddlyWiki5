@@ -49,7 +49,7 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 	if(this.tabIndex) {
 		this.inputDomNode.setAttribute("tabindex", this.tabIndex);
 	} else {
-		this.inputDomNode.setAttribute("tabindex","-1");
+		this.inputDomNode.setAttribute("tabindex","1");
 	}
 	this.inputDomNode.value = this.getValue();
 

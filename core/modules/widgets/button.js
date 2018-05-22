@@ -67,7 +67,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this.tabIndex) {
 		domNode.setAttribute("tabindex",this.tabIndex);
 	} else {
-		domNode.setAttribute("tabindex","-1");
+		domNode.setAttribute("tabindex","1");
 	}
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {

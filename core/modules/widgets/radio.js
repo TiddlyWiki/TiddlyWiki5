@@ -47,7 +47,7 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	if(this.radioTabIndex) {
 		this.inputDomNode.setAttribute("tabindex",this.radioTabIndex);
 	} else {
-		this.inputDomNode.setAttribute("tabindex","-1");
+		this.inputDomNode.setAttribute("tabindex","1");
 	}
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");
