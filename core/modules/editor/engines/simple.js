@@ -49,6 +49,9 @@ function SimpleEngine(options) {
 	if(this.widget.editClass) {
 		this.domNode.className = this.widget.editClass;
 	}
+	if(this.widget.getVariable("storyTiddler") !== undefined) {
+		this.domNode.setAttribute("tabindex", "1");
+	}
 	// Add an input event handler
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},
@@ -119,6 +122,14 @@ SimpleEngine.prototype.handleInputEvent = function(event) {
 Handle a dom "focus" event
 */
 SimpleEngine.prototype.handleFocusEvent = function(event) {
+	if(this.widget.editCancelPopups) {
+		var numPopups = $tw.popup.popups.length;
+		if(numPopups !== 0) {
+			for(var i=0; i < numPopups; i++) {
+				$tw.popup.cancel(i);
+			}
+		}
+	}
 	if(this.widget.editFocusPopup) {
 		$tw.popup.triggerPopup({
 			domNode: this.domNode,

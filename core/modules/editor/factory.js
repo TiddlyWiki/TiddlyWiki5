@@ -194,6 +194,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		// Get the rest of our parameters
 		this.editTag = this.getAttribute("tag",tag);
 		this.editType = this.getAttribute("type",type);
+		this.editCancelPopups = this.getAttribute("cancelPopups") === "yes";
 		// Make the child widgets
 		this.makeChildWidgets();
 		// Determine whether to show the toolbar
