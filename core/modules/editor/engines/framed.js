@@ -71,9 +71,9 @@ function FramedEngine(options) {
 		this.domNode.setAttribute("rows",this.widget.editRows);
 	}
 	if(this.widget.editTabIndex) {
-		this.domNode.setAttribute("tabindex",this.widget.editTabIndex);
+		this.iframeNode.setAttribute("tabindex",this.widget.editTabIndex);
 	} else {
-		this.domNode.setAttribute("tabindex","0");
+		this.iframeNode.setAttribute("tabindex","0");
 	}
 	// Copy the styles from the dummy textarea
 	this.copyStyles();
