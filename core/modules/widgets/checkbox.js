@@ -41,6 +41,11 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	if(this.getValue()) {
 		this.inputDomNode.setAttribute("checked","true");
 	}
+	if(this.checkboxTabIndex) {
+		this.inputDomNode.setAttribute("tabindex",this.checkboxTabIndex);
+	} else {
+		this.inputDomNode.setAttribute("tabindex","-1");
+	}
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");
 	this.labelDomNode.appendChild(this.spanDomNode);
@@ -177,6 +182,7 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxDefault = this.getAttribute("default");
 	this.checkboxClass = this.getAttribute("class","");
 	this.checkboxInvertTag = this.getAttribute("invertTag","");
+	this.checkboxTabIndex = this.getAttribute("tabindex");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
