@@ -194,6 +194,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		// Get the rest of our parameters
 		this.editTag = this.getAttribute("tag",tag);
 		this.editType = this.getAttribute("type",type);
+		this.editTabIndex = this.getAttribute("tabIndex");
 		this.editCancelPopups = this.getAttribute("cancelPopups") === "yes";
 		// Make the child widgets
 		this.makeChildWidgets();
@@ -217,7 +218,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		}
 		this.engine.fixHeight();
 		if(this.editShowToolbar) {
-			return this.refreshChildren(changedTiddlers);			
+			return this.refreshChildren(changedTiddlers);
 		} else {
 			return false;
 		}
@@ -267,7 +268,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 				    el.dispatchEvent(clickEvent);
 					event.preventDefault();
 					event.stopPropagation();
-					return true;			
+					return true;
 				}
 			}
 		}

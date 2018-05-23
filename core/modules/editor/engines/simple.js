@@ -49,8 +49,8 @@ function SimpleEngine(options) {
 	if(this.widget.editClass) {
 		this.domNode.className = this.widget.editClass;
 	}
-	if(this.widget.getVariable("storyTiddler") !== undefined) {
-		this.domNode.setAttribute("tabindex", "1");
+	if(this.widget.editTabIndex) {
+		this.domNode.setAttribute("tabindex",this.widget.editTabIndex);
 	}
 	// Add an input event handler
 	$tw.utils.addEventListeners(this.domNode,[

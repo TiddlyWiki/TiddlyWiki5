@@ -46,6 +46,7 @@ EditWidget.prototype.execute = function() {
 	this.editIndex = this.getAttribute("index");
 	this.editClass = this.getAttribute("class");
 	this.editPlaceholder = this.getAttribute("placeholder");
+	this.editTabIndex = this.getAttribute("tabIndex");
 	this.editCancelPopups = this.getAttribute("cancelPopups", "no");
 	// Choose the appropriate edit widget
 	this.editorType = this.getEditorType();
@@ -58,6 +59,7 @@ EditWidget.prototype.execute = function() {
 			index: {type: "string", value: this.editIndex},
 			"class": {type: "string", value: this.editClass},
 			"placeholder": {type: "string", value: this.editPlaceholder},
+			"tabIndex": {type: "string", value: this.editTabIndex},
 			"cancelPopups": {type: "string", value: this.editCancelPopups}
 		},
 		children: this.parseTreeNode.children
@@ -96,7 +98,7 @@ EditWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return this.refreshChildren(changedTiddlers);		
+		return this.refreshChildren(changedTiddlers);
 	}
 };
 

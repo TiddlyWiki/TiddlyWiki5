@@ -107,8 +107,8 @@ function CodeMirrorEngine(options) {
 	config.mode = options.type;
 	config.value = options.value;
 
-	if(this.widget.getVariable("storyTiddler") !== undefined) {
-		config["tabindex"] = "1";
+	if(this.widget.editTabIndex) {
+		config["tabindex"] = this.widget.editTabIndex;
 	}
 	// Create the CodeMirror instance
 	this.cm = window.CodeMirror(function(cmDomNode) {
