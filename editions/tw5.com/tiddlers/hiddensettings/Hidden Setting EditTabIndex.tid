@@ -1,0 +1,12 @@
+created: 20180523222018761
+modified: 20180523222018761
+tags: [[Hidden Settings]]
+title: Hidden Setting: Editor Tab-Index
+type: text/vnd.tiddlywiki
+
+When using <kbd>TAB</kbd> for page-navigation, setting a [[tabindex|]] higher than `0` on `<input>` and `textarea` tags allows jumping directly from one input to the next (backwards with <kbd>Shift-TAB</kbd>).
+
+The value stored in $:/config/EditTabIndex is used by the title, tag, text, type and fields inputs in their respective ~EditTemplate Tiddler.
+
+Setting this value to "0" restores the default Browser behaviour
+
