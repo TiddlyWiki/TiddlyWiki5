@@ -15,7 +15,7 @@ Text editor engine based on a CodeMirror instance
 var CODEMIRROR_OPTIONS = "$:/config/CodeMirror",
 HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height",
 CONFIG_FILTER = "[all[shadows+tiddlers]prefix[$:/config/codemirror/]]"
-	
+
 // Install CodeMirror
 if($tw.browser && !window.CodeMirror) {
 
@@ -99,19 +99,35 @@ function CodeMirrorEngine(options) {
 	this.domNode.style.display = "inline-block";
 	this.parentNode.insertBefore(this.domNode,this.nextSibling);
 	this.widget.domNodes.push(this.domNode);
-	
+
 	// Set all cm-plugin defaults
 	// Get the configuration options for the CodeMirror object
 	var config = getCmConfig();
 
 	config.mode = options.type;
 	config.value = options.value;
+
+	if(this.widget.getVariable("storyTiddler") !== undefined) {
+		config["tabindex"] = "1";
+	}
 	// Create the CodeMirror instance
 	this.cm = window.CodeMirror(function(cmDomNode) {
 		// Note that this is a synchronous callback that is called before the constructor returns
 		self.domNode.appendChild(cmDomNode);
 	},config);
 
+	// Focus listener for cancelling Popups
+	this.cm.on("focus",function() {
+		if(self.widget.editCancelPopups) {
+			var numPopups = $tw.popup.popups.length;
+			if(numPopups !== 0) {
+				for(var i=0; i < numPopups; i++) {
+					$tw.popup.cancel(i);
+				}
+			}
+		}
+		return true;
+	});
 	// Set up a change event handler
 	this.cm.on("change",function() {
 		self.widget.saveChanges(self.getText());
