@@ -63,6 +63,5 @@ The actions handled by the navigator widget are mainly actions that interact wit
 ** tm-fold-other-tiddlers
 ** tm-fold-all-tiddlers
 ** tm-unfold-all-tiddlers
-** tm-rename-tiddler
 * The ''action-navigate'' widget
 
