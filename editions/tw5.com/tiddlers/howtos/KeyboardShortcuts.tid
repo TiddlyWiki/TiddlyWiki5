@@ -34,19 +34,15 @@ type: text/vnd.tiddlywiki
 
 <<.tip """To be able to trigger actions that need the `navigator widget` for message-handling, the actions need to be wrapped inside a ''navigator widget instance'':""">>
 
-<br>
 
 ```
-
 <$navigator story="$:/StoryList" history="$:/HistoryList">
 Actions
 </$navigator>
 
 ```
 
-<br>
-
-The actions handled by the navigator widget are mainly actions that interact with the Story-List:
+!!!The actions handled by the navigator widget are mainly actions that interact with the Story-List:
 
 * Some actions triggered by the <<.wlink "ActionSendMessageWidget">> widget
 ** <<.clink `tm-navigate` "WidgetMessage: tm-navigate">>
