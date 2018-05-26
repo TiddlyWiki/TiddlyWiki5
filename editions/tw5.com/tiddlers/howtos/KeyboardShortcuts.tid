@@ -32,14 +32,14 @@ type: text/vnd.tiddlywiki
 
 <br>
 
-<<.tip """To be able to trigger actions that need the `navigator widget` for message-handling, the actions need to be wrapped inside a ''navigator widget instance'' like so:""">>
+<<.tip """To be able to trigger actions that need the `navigator widget` for message-handling, the actions need to be wrapped inside a ''navigator widget instance'':""">>
 
 <br>
 
 ```
 
 <$navigator story="$:/StoryList" history="$:/HistoryList">
-Actions are put here
+Actions
 </$navigator>
 
 ```
