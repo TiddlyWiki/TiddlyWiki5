@@ -48,20 +48,19 @@ Actions are put here
 
 The actions handled by the navigator widget are mainly actions that interact with the Story-List:
 
-* Some actions triggered by the ''action-sendmessage widget''
-** tm-navigate
-** tm-new-tiddler
-** tm-edit-tiddler
-** tm-close-tiddler
-** tm-cancel-tiddler
-** tm-save-tiddler
-** tm-close-all-tiddlers
-** tm-close-other-tiddlers
-** tm-import-tiddlers
-** tm-perform-import
-** tm-fold-tiddler
-** tm-fold-other-tiddlers
-** tm-fold-all-tiddlers
-** tm-unfold-all-tiddlers
-* The ''action-navigate'' widget
-
+* Some actions triggered by the <<.wlink "ActionSendMessageWidget">> widget
+** <<.clink `tm-navigate` "WidgetMessage: tm-navigate">>
+** <<.clink `tm-new-tiddler` "WidgetMessage: tm-new-tiddler">>
+** <<.clink `tm-edit-tiddler` "WidgetMessage: tm-edit-tiddler">>
+** <<.clink `tm-close-tiddler` "WidgetMessage: tm-close-tiddler">>
+** <<.clink `tm-cancel-tiddler` "WidgetMessage: tm-cancel-tiddler">>
+** <<.clink `tm-save-tiddler` "WidgetMessage: tm-save-tiddler">>
+** <<.clink `tm-close-all-tiddlers` "WidgetMessage: tm-close-all-tiddlers">>
+** <<.clink `tm-close-other-tiddlers` "WidgetMessage: tm-close-other-tiddlers">>
+** <<.clink `tm-import-tiddlers` "WidgetMessage: tm-import-tiddlers">>
+** <<.clink `tm-perform-import` "WidgetMessage: tm-perform-import">>
+** <<.clink `tm-fold-tiddler` "WidgetMessage: tm-fold-tiddler">>
+** <<.clink `tm-fold-other-tiddlers` "WidgetMessage: tm-fold-other-tiddlers">>
+** <<.clink `tm-fold-all-tiddlers` "WidgetMessage: tm-fold-all-tiddlers">>
+** <<.clink `tm-unfold-all-tiddlers` "WidgetMessage: tm-unfold-all-tiddlers">>
+* The <<.wlink "ActionNavigateWidget">> widget
