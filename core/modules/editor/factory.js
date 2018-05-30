@@ -216,7 +216,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		}
 		this.engine.fixHeight();
 		if(this.editShowToolbar) {
-			return this.refreshChildren(changedTiddlers);			
+			return this.refreshChildren(changedTiddlers);
 		} else {
 			return false;
 		}
@@ -266,7 +266,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 				    el.dispatchEvent(clickEvent);
 					event.preventDefault();
 					event.stopPropagation();
-					return true;			
+					return true;
 				}
 			}
 		}
@@ -285,17 +285,19 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	Propogate keydown events to our container for the keyboard widgets benefit
 	*/
 	EditTextWidget.prototype.propogateKeydownEvent = function(event) {
-		var newEvent = this.document.createEventObject ? this.document.createEventObject() : this.document.createEvent("Events");
-		if(newEvent.initEvent) {
-			newEvent.initEvent("keydown", true, true);
+		if(!window.CodeMirror) {
+			var newEvent = this.document.createEventObject ? this.document.createEventObject() : this.document.createEvent("Events");
+			if(newEvent.initEvent) {
+				newEvent.initEvent("keydown", true, true);
+			}
+			newEvent.keyCode = event.keyCode;
+			newEvent.which = event.which;
+			newEvent.metaKey = event.metaKey;
+			newEvent.ctrlKey = event.ctrlKey;
+			newEvent.altKey = event.altKey;
+			newEvent.shiftKey = event.shiftKey;
+			return !this.parentDomNode.dispatchEvent(newEvent);
 		}
-		newEvent.keyCode = event.keyCode;
-		newEvent.which = event.which;
-		newEvent.metaKey = event.metaKey;
-		newEvent.ctrlKey = event.ctrlKey;
-		newEvent.altKey = event.altKey;
-		newEvent.shiftKey = event.shiftKey;
-		return !this.parentDomNode.dispatchEvent(newEvent);
 	};
 
 	return EditTextWidget;
