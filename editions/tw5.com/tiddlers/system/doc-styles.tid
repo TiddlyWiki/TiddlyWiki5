@@ -159,17 +159,17 @@ tr.doc-table-subheading {
 
 .doc-icon-block.doc-icon-tip {
 	background-color: #f0f4f0;
-	border-left: 6px solid #879687;
+	border-left: .4em solid #879687;
 }
 
 .doc-icon-block.doc-icon-warning {
 	background-color: #f4f0f0;
-	border-left: 6px solid #968787;
+	border-left: .4em solid #968787;
 }
 
 .doc-icon-block.doc-icon-note {
 	background-color: #FFFBDB;
-	border-left: 6px solid #EDE06D;
+	border-left: .4em solid #EDE06D;
 }
 
 .doc-icon-block svg {
