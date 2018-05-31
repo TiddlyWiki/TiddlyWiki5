@@ -285,7 +285,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	Propogate keydown events to our container for the keyboard widgets benefit
 	*/
 	EditTextWidget.prototype.propogateKeydownEvent = function(event) {
-		if(this.domNodes[2] && this.domNodes[2].tagName.toLowerCase() === "iframe") {
+		if(this.engine.constructor.name === "FramedEngine") {
 			var newEvent = this.document.createEventObject ? this.document.createEventObject() : this.document.createEvent("Events");
 			if(newEvent.initEvent) {
 				newEvent.initEvent("keydown", true, true);
