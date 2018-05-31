@@ -184,7 +184,7 @@ tr.doc-table-subheading {
 	fill: #f4f0f0;
 }
 
-td .doc-icon-block .tc-image-warning, td .doc-icon-block .tc-image-tip, td .doc-icon-block .tc-image-note, td.doc-icon-block svg {
+td .doc-icon-block .tc-image-warning, td .doc-icon-block .tc-image-tip, td .doc-icon-block .tc-image-note, td .doc-icon-block svg {
 	height: inherit;
 }
 
