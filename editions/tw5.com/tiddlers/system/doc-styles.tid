@@ -172,6 +172,10 @@ tr.doc-table-subheading {
 	border-left: 6px solid #EDE06D;
 }
 
+.doc-icon-block svg {
+	fill: #FFFBDB;
+}
+
 .doc-icon-block .tc-image-tip {
 	fill: #f0f4f0;
 }
