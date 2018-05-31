@@ -151,10 +151,6 @@ tr.doc-table-subheading {
 	position: relative;
 }
 
-td .tc-doc-warning, td .tc-doc-tip, td .tc-doc-note {
-margin: .5em .5em .5em .5em;
-}
-
 .doc-block-icon {
 	position: absolute;
 	left: -3em;
@@ -162,76 +158,75 @@ margin: .5em .5em .5em .5em;
 }
 
 .doc-icon-block.doc-icon-tip {
-background-color: #f0f4f0;
-border-left: 6px solid #879687;
+	background-color: #f0f4f0;
+	border-left: 6px solid #879687;
 }
 
 .doc-icon-block.doc-icon-warning {
-background-color: #f4f0f0;
-border-left: 6px solid #968787;
+	background-color: #f4f0f0;
+	border-left: 6px solid #968787;
 }
 
 .doc-icon-block.doc-icon-note {
-background-color: #FFFBDB;
-border-left: 6px solid #EDE06D;
+	background-color: #FFFBDB;
+	border-left: 6px solid #EDE06D;
 }
 
 .doc-icon-block .tc-image-tip {
-fill: #f0f4f0;
+	fill: #f0f4f0;
 }
 
 .doc-icon-block .tc-image-warning {
-fill: #f4f0f0;
+	fill: #f4f0f0;
 }
 
 td .doc-icon-block .tc-image-warning, td .doc-icon-block .tc-image-tip, td .doc-icon-block .tc-image-note {
-height: inherit;
+	height: inherit;
 }
 
-.doc-icon-block svg {
-fill: #FFFBDB;
+td .tc-doc-warning, td .tc-doc-tip, td .tc-doc-note {
+	margin: .5em .5em .5em 1em;
 }
 
-.tc-doc-tip {
-display: inline-block;
-background-color: #879687;
-border-radius: 2px;
-border: 1px solid #4C964F;
+.tc-doc-tip, .tc-doc-warning, .tc-doc-note {
+	display: inline-block;
+	border-radius: 2px;
 }
 
 .tc-doc-tip button.tc-tiddlylink, .tc-doc-tip a.tc-tiddlylink {
-color: #217F21;
+	color: #217F21;
 }
 
 .tc-doc-warning button.tc-tiddlylink, .tc-doc-warning a.tc-tiddlylink {
-color: #7F1E1E;
+	color: #7F1E1E;
 }
 
 .tc-doc-note button.tc-tiddlylink, .tc-doc-note a.tc-tiddlylink {
-color: #8C811E;
+	color: #8C811E;
+}
+
+.tc-doc-tip {
+	background-color: #879687;
+	border: 1px solid #4C964F;
 }
 
 .tc-doc-warning {
-display: inline-block;
-background-color: #968787;
-border-radius: 2px;
-border: 1px solid #968787;
+	background-color: #968787;
+	border: 1px solid #968787;
 }
 
 .tc-doc-note {
-display: inline-block;
-background-color: #EDE06D;
-border-radius: 2px;
-border: 1px solid #EDE06D;
+	background-color: #EDE06D;
+	border: 1px solid #EDE06D;
 }
 
 .doc-icon-block {
-padding: 1em 1em 1em 1em;
+	padding: 1em 1em 1em 1em;
 }
 
 .doc-block-icon {
     position: absolute;
-    left: -2.6em;
+    left: -2.7em;
     top: .5em;
 }
 
