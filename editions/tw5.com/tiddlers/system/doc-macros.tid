@@ -63,8 +63,9 @@ type: text/vnd.tiddlywiki
 
 \define .button(_) <span class="doc-button">{{$:/core/ui/Buttons/$_$!!caption}}</span>
 
-\define .tip(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/tip}}</div> $_$</div>
-\define .warning(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/warning}}</div> $_$</div>
+\define .tip(_) <div class="tc-doc-tip"><div class="doc-icon-block doc-icon-tip"><div class="doc-block-icon"> {{$:/core/images/tip}}</div> $_$</div></div>
+\define .warning(_) <div class="tc-doc-warning"><div class="doc-icon-block doc-icon-warning"><div class="doc-block-icon"> {{$:/core/images/warning}}</div> $_$</div></div>
+\define .note(_) <div class="tc-doc-note"><div class="doc-icon-block doc-icon-note"><div class="doc-block-icon"> {{$:/core/icon}}</div> $_$</div></div>
 
 \define .state-prefix() $:/state/editions/tw5.com/
 
