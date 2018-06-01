@@ -15,6 +15,37 @@ The list widget displays a sequence of tiddlers that match a [[tiddler filter|Fi
 
 The tiddlers are displayed by transcluding each in turn through a template. There are several ways to specify the template and for controlling the behaviour of the list.
 
+! Content and Attributes
+
+The content of the `<$list>` widget is an optional template to use for rendering each tiddler in the list. Alternatively, the template can be specified as a tiddler title in the ``template`` attribute. As a fallback, the default template just displays the tiddler title.
+
+|!Attribute |!Description |
+|filter |The [[tiddler filter|Filters]] to display |
+|template |The title of a template tiddler for transcluding each tiddler in the list. When no template is specified, the body of the ListWidget serves as the item template. With no body, a simple link to the tiddler is returned. |
+|editTemplate |An alternative template to use for [[DraftTiddlers|DraftMechanism]] in edit mode |
+|variable |The name for a [[variable|Variables]] in which the title of each listed tiddler is stored. Defaults to ''currentTiddler'' |
+|emptyMessage |Message to be displayed when the list is empty |
+|storyview |Optional name of module responsible for animating/processing the list |
+|history |The title of the tiddler containing the navigation history |
+
+!! Edit mode
+
+The `<$list>` widget can optionally render draft tiddlers through a different template to handle editing, see DraftMechanism.
+
+!! `storyview` attribute
+
+The `storyview` attribute specifies the name of an optional module that can animate changes to the list (including navigation). The core ships with the following storyview modules:
+
+* `classic`: renders the list as an ordered sequence of tiddlers
+* `zoomin`: just renders the current tiddler from the list, with a zoom animation for navigating between tiddlers
+* `pop`: shrinks items in and out of place
+
+In order for the storyviews to animate correctly each entry in the list should be a single block mode DOM element.
+
+!! History and navigation
+
+The optional `history` attribute specifies the name of a tiddler that is used to track the current tiddler for navigation purposes. When the history tiddler changes the list view responds by telling the listview to handle navigating to the new tiddler. See HistoryMechanism for details.
+
 ! Examples
 
 ''plain list''
@@ -65,33 +96,3 @@ Displays as:
 
 See GroupedLists for how to generate nested and grouped lists using the ListWidget.
 
-! Content and Attributes
-
-The content of the `<$list>` widget is an optional template to use for rendering each tiddler in the list. Alternatively, the template can be specified as a tiddler title in the ``template`` attribute. As a fallback, the default template just displays the tiddler title.
-
-|!Attribute |!Description |
-|filter |The [[tiddler filter|Filters]] to display |
-|template |The title of a template tiddler for transcluding each tiddler in the list. When no template is specified, the body of the ListWidget serves as the item template. With no body, a simple link to the tiddler is returned. |
-|editTemplate |An alternative template to use for [[DraftTiddlers|DraftMechanism]] in edit mode |
-|variable |The name for a [[variable|Variables]] in which the title of each listed tiddler is stored. Defaults to ''currentTiddler'' |
-|emptyMessage |Message to be displayed when the list is empty |
-|storyview |Optional name of module responsible for animating/processing the list |
-|history |The title of the tiddler containing the navigation history |
-
-!! Edit mode
-
-The `<$list>` widget can optionally render draft tiddlers through a different template to handle editing, see DraftMechanism.
-
-!! `storyview` attribute
-
-The `storyview` attribute specifies the name of an optional module that can animate changes to the list (including navigation). The core ships with the following storyview modules:
-
-* `classic`: renders the list as an ordered sequence of tiddlers
-* `zoomin`: just renders the current tiddler from the list, with a zoom animation for navigating between tiddlers
-* `pop`: shrinks items in and out of place
-
-In order for the storyviews to animate correctly each entry in the list should be a single block mode DOM element.
-
-!! History and navigation
-
-The optional `history` attribute specifies the name of a tiddler that is used to track the current tiddler for navigation purposes. When the history tiddler changes the list view responds by telling the listview to handle navigating to the new tiddler. See HistoryMechanism for details.
