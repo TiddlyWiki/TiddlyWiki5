@@ -15,6 +15,10 @@ Learn more and see it in action at https://tiddlywiki.com/
 
 Developer documentation is in progress at https://tiddlywiki.com/dev/
 
+<p style="color: rgb(200,50,0); padding-left: 2em">
+''!'' New: want to chat with the community? Join us at https://gitter.im/TiddlyWiki/public
+</p>
+
 ! Installing TiddlyWiki on Node.js
 
 {{Installing TiddlyWiki on Node.js}}
