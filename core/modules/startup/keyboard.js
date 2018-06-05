@@ -20,23 +20,27 @@ exports.synchronous = true;
 
 exports.startup = function() {
 	if($tw.browser) {
+		// Helper function to get a list of all shortcut tiddlers
+		function getShortcutTiddlerList() {
+			return $tw.wiki.getTiddlersWithTag("$:/tags/KeyboardShortcut");
+		}
 		// Get existing shortcut-tiddlers
-		var shortcutTiddlers = $tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/KeyboardShortcut]!has[draft.of]]"),
-			shortcutKeysList = [],
-			shortcutActionList = [],
-			shortcutParsedList = [];
+		var shortcutTiddlers = getShortcutTiddlerList(),
+			shortcutKeysList = [], // Holds the shortcut-key descriptors
+			shortcutActionList = [], // Holds the corresponding action strings
+			shortcutParsedList = []; // Holds the parsed key descriptors
 
 		function updateShortcutLists(tiddlerList) {
 			shortcutTiddlers = tiddlerList;
 			for(var i=0; i < tiddlerList.length; i++) {
 				var title = tiddlerList[i],
 					tiddlerFields = $tw.wiki.getTiddler(title).fields;
-				shortcutKeysList[i] = tiddlerFields["key"] !== undefined ? tiddlerFields["key"] : undefined;
-				shortcutActionList[i] = tiddlerFields["text"];
+				shortcutKeysList[i] = tiddlerFields.key !== undefined ? tiddlerFields.key : undefined;
+				shortcutActionList[i] = tiddlerFields.text;
 				shortcutParsedList[i] = shortcutKeysList[i] !== undefined ? $tw.keyboardManager.parseKeyDescriptors(shortcutKeysList[i]) : undefined;
 			}
 		};
-		
+
 		// Cache shortcuts and corresponding actions at startup
 		updateShortcutLists(shortcutTiddlers);
 
@@ -58,11 +62,11 @@ exports.startup = function() {
 
 		// Listener for changing shortcuts "on-the-fly"
 		$tw.wiki.addEventListener("change",function(changes) {
-			var newList = $tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/KeyboardShortcut]!has[draft.of]]");
+			var newList = getShortcutTiddlerList();
 			var hasChanged = false;
-			
+
 			// Returns true if a passed array contains a Tiddler that has changed
-			function changedTiddlers(tiddlerList) {
+			function hasAnyTiddlerChanged(tiddlerList) {
 				for(var i=0; i < tiddlerList.length; i++) {
 					if($tw.utils.hop(changes,tiddlerList[i])) {
 						return true;
@@ -70,21 +74,27 @@ exports.startup = function() {
 				}
 				return false;
 			};
-			
+
 			// First inspect the existing shortcut-tiddlers
-			hasChanged = changedTiddlers(shortcutTiddlers);
-			
+			hasChanged = hasAnyTiddlerChanged(shortcutTiddlers);
+
 			// Check if there are new shortcut-actions
 			if(!hasChanged) {
-				hasChanged = changedTiddlers(newList);
+				hasChanged = hasAnyTiddlerChanged(newList);
 			}
-			
+
 			// Check if key-combinations have changed
 			if(!hasChanged) {
-				var shortcutConfigTiddlers = $tw.wiki.filterTiddlers("[all[shadows+tiddlers]prefix[$:/config/shortcuts]!has[draft.of]]");
-				hasChanged = changedTiddlers(shortcutConfigTiddlers);
+				var shortcutConfigTiddlers = [];
+					var pattern = /^\$:\/config\/shortcuts\/.*$/;
+					Object.keys(changes).forEach(function(configTiddler) {
+						if(pattern.test(configTiddler)) {
+							shortcutConfigTiddlers.push(configTiddler);
+						}
+					});
+				hasChanged = hasAnyTiddlerChanged(shortcutConfigTiddlers);
 			}
-			
+
 			// Re-cache shortcuts if something changed
 			if(hasChanged) {
 				updateShortcutLists(newList);
