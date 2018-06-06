@@ -85,8 +85,8 @@ exports.startup = function() {
 
 			// Check if key-combinations have changed
 			if(!hasChanged) {
-				var shortcutConfigTiddlers = [];
-				var pattern = /^\$:\/config\/shortcuts\/.*$/;
+				var shortcutConfigTiddlers = [],
+					pattern = /^\$:\/config\/shortcuts\/.*$/;
 				Object.keys(changes).forEach(function(configTiddler) {
 					if(pattern.test(configTiddler)) {
 						shortcutConfigTiddlers.push(configTiddler);
