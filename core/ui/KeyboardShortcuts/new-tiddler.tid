@@ -3,5 +3,5 @@ tags: $:/tags/KeyboardShortcut
 title: $:/core/ui/KeyboardShortcuts/new-tiddler
 
 <$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}}>
-<$action-sendmessage $message="tm-new-tiddler"/>
+{{$:/core/ui/Actions/new-tiddler}}
 </$navigator>

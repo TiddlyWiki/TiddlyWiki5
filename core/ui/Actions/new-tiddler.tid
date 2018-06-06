@@ -1,0 +1,4 @@
+title: $:/core/ui/Actions/new-tiddler
+tags: $:/tags/PageActions
+
+<$action-sendmessage $message="tm-new-tiddler"/>
