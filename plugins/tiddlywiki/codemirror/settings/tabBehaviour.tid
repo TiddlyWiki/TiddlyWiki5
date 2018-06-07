@@ -1,0 +1,8 @@
+title: $:/core/ui/ControlPanel/Settings/codemirror/tabBehaviour
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: {{$:/language/codemirror/tabBehaviour/hint}}
+
+\define lingo-base() $:/language/codemirror/tabBehaviour/
+<<lingo hint>>
+
+<$checkbox tiddler="$:/config/codemirror/extraKeysTW" index="Tab" checked="false" unchecked="true" default="true"> <$link to="$:/config/codemirror/extraKeysTW"><<lingo info>></$link> </$checkbox>
