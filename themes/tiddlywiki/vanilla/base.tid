@@ -1055,6 +1055,19 @@ canvas.tc-edit-bitmapeditor  {
 	clear: both;
 }
 
+.tc-tiddler-body:before, .tc-tiddler-body:after {
+	content: "";
+	display: table;
+}
+ 
+.tc-tiddler-body:after {
+	clear: both;
+}
+ 
+.tc-tiddler-body {
+	zoom: 1;
+}
+
 .tc-tiddler-frame .tc-tiddler-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics/bodylineheight}};
