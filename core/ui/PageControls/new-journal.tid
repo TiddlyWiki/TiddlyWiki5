@@ -3,9 +3,12 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/new-journal-button}} {{$:/language/Buttons/NewJournal/Caption}}
 description: {{$:/language/Buttons/NewJournal/Hint}}
 
-\define journalButton()
-<$button tooltip={{$:/language/Buttons/NewJournal/Hint}} aria-label={{$:/language/Buttons/NewJournal/Caption}} class=<<tv-config-toolbar-class>>>
+\define journalActions()
 {{$:/core/ui/Actions/new-journal}}
+\end
+
+\define journalButton()
+<$button tooltip={{$:/language/Buttons/NewJournal/Hint}} aria-label={{$:/language/Buttons/NewJournal/Caption}} class=<<tv-config-toolbar-class>> actions=<<journalActions>>>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/new-journal-button}}
 </$list>

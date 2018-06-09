@@ -785,6 +785,14 @@ exports.initParsers = function(moduleType) {
 			}
 		}
 	});
+	// Use the generic binary parser for any binary types not registered so far
+	if($tw.Wiki.parsers["application/octet-stream"]) {
+		Object.keys($tw.config.contentTypeInfo).forEach(function(type) {
+			if(!$tw.utils.hop($tw.Wiki.parsers,type) && $tw.config.contentTypeInfo[type].encoding === "base64") {
+				$tw.Wiki.parsers[type] = $tw.Wiki.parsers["application/octet-stream"];
+			}
+		});		
+	}
 };
 
 /*
@@ -847,7 +855,7 @@ exports.parseTextReference = function(title,field,index,options) {
 	}
 	if(field === "text" || (!field && !index)) {
 		if(tiddler && tiddler.fields) {
-			return this.parseText(tiddler.fields.type || "text/vnd.tiddlywiki",tiddler.fields.text,options);			
+			return this.parseText(tiddler.fields.type,tiddler.fields.text,options);			
 		} else {
 			return null;
 		}

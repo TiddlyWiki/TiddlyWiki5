@@ -32,7 +32,7 @@ The content of the `<$button>` widget is displayed within the button.
 |setTo |The new value to assign to the TextReference identified in the `set` attribute |
 |selectedClass |An optional additional CSS class to be assigned if the popup is triggered or the tiddler specified in `set` already has the value specified in `setTo`  |
 |default |Default value if `set` tiddler is missing for testing against `setTo` to determine `selectedClass` |
-|popup |Title of a state tiddler for a popup that is toggled when the button is clicked |
+|popup |Title of a state tiddler for a popup that is toggled when the button is clicked. See PopupMechanism for details |
 |aria-label |Optional [[Accessibility]] label |
 |tooltip |Optional tooltip |
 |class |An optional CSS class name to be assigned to the HTML element|

@@ -2,4 +2,4 @@ title: $:/core/ui/ImportPreviews/Text
 tags: $:/tags/ImportPreview
 caption: {{$:/language/Import/Listing/Preview/Text}}
 
-<$transclude tiddler=<<payloadTiddler>> mode="block"/>
+<$transclude tiddler=<<currentTiddler>> subtiddler=<<payloadTiddler>> mode="block"/>

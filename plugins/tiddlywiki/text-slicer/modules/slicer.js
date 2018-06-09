@@ -311,17 +311,31 @@ Slicer.prototype.onOpenTag = function(node) {
 
 Slicer.prototype.onOpenAnchor = function(node) {
 	if(node.attributes.href) {
-		var parts = node.attributes.href.value.split("#"),
-			base = parts[0],
-			hash = parts[1] || "",
-			title = $tw.utils.resolvePath(base,this.baseTiddlerTitle) + "-anchor-" + hash;
-		this.addTextToCurrentChunk("<$link to=\"" + title + "\">");
+		var value = node.attributes.href.value;
+		if(value.indexOf("https://") === 0 || value.indexOf("http://") === 0) {
+			// External link
+			this.addTextToCurrentChunk("<a href=\"" + value + "\"  target=\"_blank\" rel=\"noopener noreferrer\">");
+		} else {
+			// Internal link
+			var parts = value.split("#"),
+				base = parts[0],
+				hash = parts[1] || "",
+				title = $tw.utils.resolvePath(base,this.baseTiddlerTitle) + "-anchor-" + hash;
+			this.addTextToCurrentChunk("<$link to=\"" + title + "\">");			
+		}
 	}
 };
 
 Slicer.prototype.onCloseAnchor = function(elementInfo) {
 	if(elementInfo.node.attributes.href) {
-		this.addTextToCurrentChunk("</$link>");
+		var value = elementInfo.node.attributes.href.value;
+		if(value.indexOf("https://") === 0 || value.indexOf("http://") === 0) {
+			// External link
+			this.addTextToCurrentChunk("</a>");
+		} else {
+			// Internal link
+			this.addTextToCurrentChunk("</$link>");
+		}
 	}
 };
 
