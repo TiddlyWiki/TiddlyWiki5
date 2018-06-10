@@ -11,13 +11,13 @@ tags: $:/tags/ViewToolbar
 \end
 \define page-break-button()
 <$reveal state="""$:/state/print-page-break/$(storyTiddler)$""" type="nomatch" text="yes">
-<$button class=<<get-classes "tc-page-break-button">> tooltip=<<lingo PageBreak/Yes/Hint>>>
+<$button class=<<get-classes "tc-page-break-button">> tooltip=<<lingo "PageBreak/Yes/Hint">>>
 <<set-page-break>>
 {{$:/core/images/pagebreak-button}}
 </$button>
 </$reveal>
 <$reveal state="""$:/state/print-page-break/$(storyTiddler)$""" type="match" text="yes">
-<$button class=<<get-classes "tc-page-break-button tc-selected">> tooltip=<<lingo PageBreak/No/Hint>>>
+<$button class=<<get-classes "tc-page-break-button tc-selected">> tooltip=<<lingo "PageBreak/No/Hint">>>
 <<unset-page-break>>
 {{$:/core/images/pagebreak-button}}
 </$button>
