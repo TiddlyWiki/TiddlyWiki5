@@ -1,7 +1,7 @@
 title: $:/core/ui/PrintTemplate
 
 \define containerClasses()
-tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$ tc-print-tiddler-single-tiddler-view
+tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$ tc-print-tiddler-list-view
 \end
 \define get-classes(class)
 $(tv-config-toolbar-class)$ $class$
@@ -62,7 +62,7 @@ $(tv-config-toolbar-class)$ $class$
 
 </div>
 
-<div class="tc-story-river">
+<div class="tc-story-river tc-print-story-river">
 
 <$list filter="[list<storyList>]" template="$:/core/ui/ViewTemplate" editTemplate="$:/core/ui/EditTemplate"/>
 
