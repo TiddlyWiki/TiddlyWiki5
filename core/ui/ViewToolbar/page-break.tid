@@ -1,7 +1,6 @@
 title: $:/core/ui/Buttons/print-page-break
 tags: $:/tags/ViewToolbar
 
-\define lingo-base() $:/language/Buttons/PrintWindow/
 \define get-classes(class) $(tv-config-toolbar-class)$ $class$
 \define set-page-break()
 <$action-setfield $tiddler="""$:/state/print-page-break/$(storyTiddler)$""" text="yes"/>
@@ -11,13 +10,13 @@ tags: $:/tags/ViewToolbar
 \end
 \define page-break-button()
 <$reveal state="""$:/state/print-page-break/$(storyTiddler)$""" type="nomatch" text="yes">
-<$button class=<<get-classes "tc-page-break-button">> tooltip=<<lingo "PageBreak/Yes/Hint">>>
+<$button class=<<get-classes "tc-page-break-button">> tooltip={{$:/language/Buttons/PrintWindow/PageBreak/Yes/Hint}} aria-label={{$:/language/Buttons/PrintWindow/PageBreak/Yes/Hint}}>
 <<set-page-break>>
 {{$:/core/images/pagebreak-button}}
 </$button>
 </$reveal>
 <$reveal state="""$:/state/print-page-break/$(storyTiddler)$""" type="match" text="yes">
-<$button class=<<get-classes "tc-page-break-button tc-selected">> tooltip=<<lingo "PageBreak/No/Hint">>>
+<$button class=<<get-classes "tc-page-break-button tc-selected">> tooltip={{$:/language/Buttons/PrintWindow/PageBreak/No/Hint}} aria-label={{$:/language/Buttons/PrintWindow/PageBreak/No/Hint}}>>>
 <<unset-page-break>>
 {{$:/core/images/pagebreak-button}}
 </$button>
