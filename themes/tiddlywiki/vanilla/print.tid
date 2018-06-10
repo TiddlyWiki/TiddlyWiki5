@@ -2,112 +2,74 @@ title: $:/themes/tiddlywiki/vanilla/print
 tags: $:/tags/Stylesheet
 
 \define set-page-break-tiddlers()
-
 @media print {
 	[data-tiddler-title='$(currentTiddler)$'].tc-tiddler-frame {
 		page-break-before: always;
 	}
 }
-
 \end
 \define reveal-print-states()
-
 <$reveal state="$(printState)$!!show-titles" type="nomatch" text="yes">
-
 .tc-single-tiddler-window .tc-tiddler-frame .tc-tiddler-title-icon, .tc-single-tiddler-window .tc-tiddler-frame .tc-title {
 	display: none;
 }
-
 @media print {
 
 .tc-single-tiddler-window .tc-tiddler-frame .tc-tiddler-title {
-display: none;
+	display: none;
 }
-
 }
-
 </$reveal>
-
 <$reveal state="$(printState)$!!show-subtitles" type="nomatch" text="yes">
-
 .tc-single-tiddler-window .tc-tiddler-frame .tc-subtitle {
 	display: none;
 }
-
 @media print {
-
 .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-subtitle {
 	display: none;
 }
-
 }
-
 </$reveal>
-
 <$reveal state="$(printState)$!!show-tags" type="nomatch" text="yes">
-
-.tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tags-wrapper {
-display: none;
-}
-
-@media print {
-
 .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tags-wrapper {
 	display: none;
 }
-
+@media print {
+.tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tags-wrapper {
+	display: none;
 }
-
+}
 </$reveal>
-
 <$reveal state="$(printState)$!!show-titles" type="match" text="yes">
-
 .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tiddler-title-icon, .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-title {
 	display: inline;
 }
-
 @media print {
-
 .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tiddler-title-icon, .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-title {
 	display: inline;
 }
-
 }
-
 </$reveal>
-
 <$reveal state="$(printState)$!!show-subtitles" type="match" text="yes">
-
 .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-subtitle {
 	display: inline;
 }
-
 @media print {
-
 .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-subtitle {
 	display: inline;
 }
-
 }
-
 </$reveal>
-
 <$reveal state="$(printState)$!!show-tags" type="match" text="yes">
-
 .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tags-wrapper {
 	display: inline;
 }
-
 @media print {
-
 .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tags-wrapper {
 	display: inline-block;
 }
-
 }
-
 </$reveal>
-
 \end
 
 .tc-print-tiddler-window-overlay p {
@@ -116,32 +78,26 @@ display: none;
 	-webkit-margin-before: 0em;
 	-webkit-margin-after: 0em;
 }
-
 .tc-print-tiddler-window-overlay button {
 	padding: .2em .5em 0em .5em;
 	font-size: 1.2em;
 	outline: none;
 }
-
 .tc-print-tiddler-window-overlay button.tc-print-tiddler-print-button {
 	padding-bottom: 0.1em;
 }
-
 .tc-print-tiddler-list-view .tc-story-river {
 	padding: 0;
 	width: calc(100vw - 2.05em);
 }
-
 .tc-print-tiddler-list-view .tc-tiddler-frame {
 	box-shadow: none;
 	border: none;
 	width: calc(100vw - 2.05em);
 }
-
 .tc-print-tiddler-list-view .tc-print-tiddler-button {
 	display: none;
 }
-
 .tc-print-sort-drop-down {
 	text-align: left;
 	-webkit-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
@@ -152,44 +108,33 @@ display: none;
 	border-radius: 4px;
 	background-color: white;
 }
-
 .tc-page-container:not(.tc-print-tiddler-list-view) .tc-page-break-button {
 	display: none;
 }
-
 .tc-print-tiddler-list-view .tc-tiddler-title .tc-tiddler-controls > span > button > svg , .tc-print-tiddler-list-view .tc-tiddler-title .tc-tiddler-controls .tc-page-break-button svg {
 	fill: <<colour tiddler-background>>;
 }
-
 .tc-print-tiddler-list-view .tc-tiddler-title:hover .tc-tiddler-controls > span > button > svg , .tc-print-tiddler-list-view .tc-tiddler-title:hover .tc-tiddler-controls .tc-page-break-button svg {
 	fill: <<colour muted-foreground>>;
 }
-
 .tc-print-tiddler-list-view .tc-tiddler-title:hover .tc-tiddler-controls > span > button:hover > svg , .tc-print-tiddler-list-view .tc-tiddler-title:hover .tc-tiddler-controls .tc-page-break-button:hover svg {
 	fill: <<colour foreground>>;
 }
-
 .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tiddler-body table {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics/bodylineheight}};
 }
 
 <$vars printState="$:/state/print-river">
-
 <<reveal-print-states>>
-
 </$vars>
 
 @media print {
-
 .tc-print-tiddler-window-overlay {
 	display: none;
 }
-
 }
 
 <$list filter="[all[tiddlers]removeprefix[$:/state/print-page-break/]]">
-
 <<set-page-break-tiddlers>>
-
 </$list>
