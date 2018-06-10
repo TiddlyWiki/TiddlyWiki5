@@ -169,6 +169,11 @@ display: none;
 	fill: <<colour foreground>>;
 }
 
+.tc-print-tiddler-list-view .tc-tiddler-frame .tc-tiddler-body table {
+	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
+	line-height: {{$:/themes/tiddlywiki/vanilla/metrics/bodylineheight}};
+}
+
 <$vars printState="$:/state/print-river">
 
 <<reveal-print-states>>
