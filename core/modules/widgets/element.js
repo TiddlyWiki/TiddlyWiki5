@@ -35,6 +35,14 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
 		tag = "safe-" + tag;
 	}
+	// Adjust headings by the current base level
+	var headingLevel = ["h1","h2","h3","h4","h5","h6"].indexOf(tag);
+	if(headingLevel !== -1) {
+		var baseLevel = parseInt(this.getVariable("tv-adjust-heading-level","0"),10) || 0;
+		headingLevel = Math.min(Math.max(headingLevel + 1 + baseLevel,1),6);
+		tag = "h" + headingLevel;
+	}
+	// Create the DOM node
 	var domNode = this.document.createElementNS(this.namespace,tag);
 	this.assignAttributes(domNode,{excludeEventAttributes: true});
 	parent.insertBefore(domNode,nextSibling);
