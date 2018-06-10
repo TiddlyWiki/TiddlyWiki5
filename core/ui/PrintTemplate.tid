@@ -1,0 +1,75 @@
+title: $:/core/ui/PrintTemplate
+
+\define containerClasses()
+tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$ tc-print-tiddler-single-tiddler-view
+\end
+\define get-classes(class)
+$(tv-config-toolbar-class)$ $class$
+\end
+
+\define set-printlist-break-page()
+<$action-setfield $tiddler="""$:/state/print-page-break/$(currentTiddler)$""" text="yes"/>
+\end
+
+<$vars tv-config-toolbar-icons={{$:/config/Toolbar/Icons}} tv-config-toolbar-text={{$:/config/Toolbar/Text}} tv-config-toolbar-class={{$:/config/Toolbar/ButtonClass}} storyList="$:/PrintList" historyList="$:/PrintHistory">
+
+<div class=<<containerClasses>>>
+
+<$navigator story=<<storyList>> history=<<historyList>>>
+
+<div class="tc-plugin-reload-warning tc-print-tiddler-window-overlay">
+
+<$list filter="[list<storyList>count[]!regexp[^0$]!regexp[^1$]]">
+
+<$button popup="$:/state/popup/print-tiddler/sort" class=<<get-classes "tc-print-tiddler-sort-button">>>{{$:/core/images/sort-button}}sort</$button>
+
+<$reveal state="$:/state/popup/print-tiddler/sort" type="popup" position="below" class="tc-sort-drop-down tc-popup-keep tc-print-tiddler-sort-dropdown">
+
+{{$:/core/ui/SideBar/Open}}
+
+</$reveal>
+
+</$list>
+
+<$reveal state="$:/templates/print/tiddler!!show-title" type="nomatch" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-title-button">> set="$:/templates/print/tiddler!!show-title" setTo="yes">show titles</$button>
+</$reveal>
+<$reveal state="$:/templates/print/tiddler!!show-title" type="match" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-title-button">> set="$:/templates/print/tiddler!!show-title" setTo="no">hide titles</$button>
+</$reveal>
+
+<$reveal state="$:/templates/print/tiddler!!show-subtitle" type="nomatch" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-subtitle-button" set="$:/templates/print/tiddler!!show-subtitle" setTo="yes">show subtitles</$button>
+</$reveal>
+<$reveal state="$:/templates/print/tiddler!!show-subtitle" type="match" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-subtitle-button">> set="$:/templates/print/tiddler!!show-subtitle" setTo="no">hide subtitles</$button>
+</$reveal>
+
+<$reveal state="$:/templates/print/tiddler!!show-tags" type="nomatch" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-tags-button">> set="$:/templates/print/tiddler!!show-tags" setTo="yes">show tags</$button>
+</$reveal>
+<$reveal state="$:/templates/print/tiddler!!show-tags" type="match" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-tags-button">> set="$:/templates/print/tiddler!!show-tags" setTo="no">hide tags</$button>
+</$reveal>
+
+<$button class=<<get-classes "tc-print-tiddler-break-page-all-button">> tooltip="print all on a new page">
+<$list filter="[list[$:/PrintList]]">
+<<set-printlist-break-page>>
+</$list>
+{{$:/core/images/pagebreak-button}}</$button>
+
+<$button class=<<get-classes "tc-print-tiddler-print-button" message="tm-print" tooltip="print">{{$:/core/images/print-button}}</$button>
+
+</div>
+
+<div class="tc-story-river">
+
+<$list filter="[list<storyList>]" template="$:/core/ui/ViewTemplate" editTemplate="$:/core/ui/EditTemplate"/>
+
+</div>
+
+</$navigator>
+
+</div>
+
+</$vars>
