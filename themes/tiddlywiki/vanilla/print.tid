@@ -165,6 +165,10 @@ display: none;
 	fill: <<colour muted-foreground>>;
 }
 
+.tc-print-tiddler-list-view .tc-tiddler-title:hover .tc-tiddler-controls > span > button:hover > svg , .tc-print-tiddler-list-view .tc-tiddler-title:hover .tc-tiddler-controls .tc-page-break-button:hover svg {
+	fill: <<colour foreground>>;
+}
+
 <$vars printState="$:/state/print-river">
 
 <<reveal-print-states>>
