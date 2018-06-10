@@ -63,13 +63,13 @@ display: none;
 <$reveal state="$(printState)$!!show-titles" type="match" text="yes">
 
 .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tiddler-title-icon, .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-title {
-	display: inline-block;
+	display: inline;
 }
 
 @media print {
 
 .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tiddler-title-icon, .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-title {
-	display: inline-block;
+	display: inline;
 }
 
 }
@@ -79,13 +79,13 @@ display: none;
 <$reveal state="$(printState)$!!show-subtitles" type="match" text="yes">
 
 .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-subtitle {
-	display: inline-block;
+	display: inline;
 }
 
 @media print {
 
 .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-subtitle {
-	display: inline-block;
+	display: inline;
 }
 
 }
