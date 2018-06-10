@@ -14,7 +14,7 @@ $(tv-config-toolbar-class)$ $class$
 <$action-setfield $tiddler="""$:/state/print-page-break/$(currentTiddler)$""" text="yes"/>
 \end
 
-<$vars tv-config-toolbar-icons={{$:/config/Toolbar/Icons}} tv-config-toolbar-text={{$:/config/Toolbar/Text}} tv-config-toolbar-class={{$:/config/Toolbar/ButtonClass}} storyList="$:/PrintList" historyList="$:/PrintHistory">
+<$vars tv-config-toolbar-icons={{$:/config/Toolbar/Icons}} tv-config-toolbar-text={{$:/config/Toolbar/Text}} tv-config-toolbar-class={{$:/config/Toolbar/ButtonClass}} themeTitle={{$:/view}} languageTitle={{$:/language!!name}} storyList="$:/PrintList" historyList="$:/PrintHistory">
 
 <div class=<<containerClasses>>>
 
