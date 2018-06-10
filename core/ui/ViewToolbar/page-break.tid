@@ -1,0 +1,26 @@
+title: $:/core/ui/Buttons/print-page-break
+tags: $:/tags/ViewToolbar
+
+\define lingo-base() $:/language/PrintWindow/
+\define get-classes(class) $(tv-config-toolbar-class)$ $class$
+\define set-page-break()
+<$action-setfield $tiddler="""$:/state/print-page-break/$(storyTiddler)$""" text="yes"/>
+\end
+\define unset-page-break()
+<$action-deletetiddler $tiddler="""$:/state/print-page-break/$(storyTiddler)$"""/>
+\end
+\define page-break-button()
+<$reveal state="""$:/state/print-page-break/$(storyTiddler)$""" type="nomatch" text="yes">
+<$button class=<<get-classes "tc-page-break-button">> tooltip=<<lingo PageBreak/Yes/Hint>>>
+<<set-page-break>>
+{{$:/core/images/pagebreak-button}}
+</$button>
+</$reveal>
+<$reveal state="""$:/state/print-page-break/$(storyTiddler)$""" type="match" text="yes">
+<$button class=<<get-classes "tc-page-break-button tc-selected">> tooltip=<<lingo PageBreak/No/Hint>>>
+<<unset-page-break>>
+{{$:/core/images/pagebreak-button}}
+</$button>
+</$reveal>
+\end
+<<page-break-button>>
