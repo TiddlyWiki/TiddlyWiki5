@@ -3,7 +3,7 @@ title: $:/core/ui/PrintTemplate
 \define containerClasses()
 tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$ tc-print-tiddler-list-view
 \end
-\define lingo-base() $:/language/Buttons/PrintWindow/ToolBar/
+\define lingo-base() $:/language/Buttons/PrintWindow/Toolbar/
 \define print-states(field)
 $:/state/print-river!!$field$
 \end
