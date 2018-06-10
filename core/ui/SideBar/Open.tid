@@ -5,10 +5,10 @@ caption: {{$:/language/SideBar/Open/Caption}}
 \define lingo-base() $:/language/CloseAll/
 
 \define drop-actions()
-<$action-listops $tiddler="$:/StoryList" $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
+<$action-listops $tiddler="""$(storyList)$""" $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
 \end
 
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
+<$list filter="[list<storyList>]" history=<<historyList>> storyview="pop">
 <div style="position: relative;">
 <$droppable actions=<<drop-actions>>>
 <div class="tc-droppable-placeholder">
