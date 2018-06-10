@@ -1,7 +1,6 @@
 title: $:/themes/tiddlywiki/vanilla/print
 tags: $:/tags/Stylesheet
 
-\define print-states(field) $:/state/print-river!!$field$
 \define set-page-break-tiddlers()
 
 @media print {
@@ -9,6 +8,105 @@ tags: $:/tags/Stylesheet
 		page-break-before: always;
 	}
 }
+
+\end
+\define reveal-print-states()
+
+<$reveal state="$(printState)$!!show-titles" type="nomatch" text="yes">
+
+.tc-single-tiddler-window .tc-tiddler-frame .tc-tiddler-title-icon, .tc-single-tiddler-window .tc-tiddler-frame .tc-title {
+	display: none;
+}
+
+@media print {
+
+.tc-single-tiddler-window .tc-tiddler-frame .tc-tiddler-title {
+display: none;
+}
+
+}
+
+</$reveal>
+
+<$reveal state="$(printState)$!!show-subtitles" type="nomatch" text="yes">
+
+.tc-single-tiddler-window .tc-tiddler-frame .tc-subtitle {
+	display: none;
+}
+
+@media print {
+
+.tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-subtitle {
+	display: none;
+}
+
+}
+
+</$reveal>
+
+<$reveal state="$(printState)$!!show-tags" type="nomatch" text="yes">
+
+.tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tags-wrapper {
+display: none;
+}
+
+@media print {
+
+.tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tags-wrapper {
+	display: none;
+}
+
+}
+
+</$reveal>
+
+<$reveal state="$(printState)$!!show-titles" type="match" text="yes">
+
+.tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tiddler-title-icon, .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-title {
+	display: inline-block;
+}
+
+@media print {
+
+.tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tiddler-title-icon, .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-title {
+	display: inline-block;
+}
+
+}
+
+</$reveal>
+
+<$reveal state="$(printState)$!!show-subtitles" type="match" text="yes">
+
+.tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-subtitle {
+	display: inline-block;
+}
+
+@media print {
+
+.tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-subtitle {
+	display: inline-block;
+}
+
+}
+
+</$reveal>
+
+<$reveal state="$(printState)$!!show-tags" type="match" text="yes">
+
+.tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tags-wrapper {
+	display: inline;
+}
+
+@media print {
+
+.tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tags-wrapper {
+	display: inline-block;
+}
+
+}
+
+</$reveal>
 
 \end
 
@@ -59,90 +157,11 @@ tags: $:/tags/Stylesheet
 	display: none;
 }
 
-<$reveal state=<<print-states "show-titles">> type="nomatch" text="yes">
+<$vars printState="$:/state/print-river">
 
-.tc-print-tiddler-list-view .tc-tiddler-frame .tc-tiddler-title-icon, .tc-print-tiddler-list-view .tc-tiddler-frame .tc-title {
-	display: none;
-}
+<<reveal-print-states>>
 
-@media print {
-
-.tc-print-tiddler-list-view .tc-tiddler-frame .tc-tiddler-title {
-display: none;
-}
-
-}
-
-</$reveal>
-
-<$reveal state=<<print-states "show-subtitles">> type="nomatch" text="yes">
-
-.tc-print-tiddler-list-view .tc-tiddler-frame .tc-subtitle {
-	display: none;
-}
-
-@media print {
-
-.tc-print-tiddler-list-view .tc-tiddler-frame .tc-subtitle {
-	display: none;
-}
-
-}
-
-</$reveal>
-
-<$reveal state=<<print-states "show-tags">> type="nomatch" text="yes">
-
-.tc-print-tiddler-list-view .tc-tiddler-frame  .tc-tags-wrapper {
-display: none;
-}
-
-@media print {
-
-.tc-print-tiddler-list-view .tc-tiddler-frame  .tc-tags-wrapper {
-	display: none;
-}
-
-}
-
-</$reveal>
-
-<$reveal state=<<print-states "show-titles">> type="match" text="yes">
-
-@media print {
-
-.tc-print-tiddler-list-view .tc-tiddler-frame .tc-tiddler-title {
-	display: inline-block;
-}
-
-}
-
-</$reveal>
-
-<$reveal state=<<print-states "show-subtitles">> type="match" text="yes">
-
-@media print {
-
-.tc-print-tiddler-list-view .tc-tiddler-frame .tc-subtitle {
-	display: inline-block;
-}
-
-}
-
-</$reveal>
-
-<$reveal state=<<print-states "show-tags">> type="match" text="yes">
-
-@media print {
-
-.tc-print-tiddler-list-view .tc-tiddler-frame .tc-tags-wrapper {
-	display: inline-block;
-}
-
-}
-
-</$reveal>
-
+</$vars>
 
 @media print {
 
