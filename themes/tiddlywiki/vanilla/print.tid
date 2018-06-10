@@ -100,11 +100,8 @@ tags: $:/tags/Stylesheet
 }
 .tc-print-sort-drop-down {
 	text-align: left;
-	-webkit-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-	-moz-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 	padding: 1em 2em 1em 1em;
-	opacity: 1;
 	border-radius: 4px;
 	background-color: white;
 }
