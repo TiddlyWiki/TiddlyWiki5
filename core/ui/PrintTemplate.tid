@@ -39,7 +39,7 @@ $(tv-config-toolbar-class)$ $class$
 </$reveal>
 
 <$reveal state="$:/templates/print/tiddler!!show-subtitle" type="nomatch" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-subtitle-button" set="$:/templates/print/tiddler!!show-subtitle" setTo="yes">show subtitles</$button>
+<$button class=<<get-classes "tc-print-tiddler-subtitle-button">> set="$:/templates/print/tiddler!!show-subtitle" setTo="yes">show subtitles</$button>
 </$reveal>
 <$reveal state="$:/templates/print/tiddler!!show-subtitle" type="match" text="yes">
 <$button class=<<get-classes "tc-print-tiddler-subtitle-button">> set="$:/templates/print/tiddler!!show-subtitle" setTo="no">hide subtitles</$button>
@@ -58,7 +58,7 @@ $(tv-config-toolbar-class)$ $class$
 </$list>
 {{$:/core/images/pagebreak-button}}</$button>
 
-<$button class=<<get-classes "tc-print-tiddler-print-button" message="tm-print" tooltip="print">{{$:/core/images/print-button}}</$button>
+<$button class=<<get-classes "tc-print-tiddler-print-button">> message="tm-print" tooltip="print">{{$:/core/images/print-button}}</$button>
 
 </div>
 
