@@ -1,7 +1,7 @@
 title: $:/core/ui/Buttons/print-page-break
 tags: $:/tags/ViewToolbar
 
-\define lingo-base() $:/language/PrintWindow/
+\define lingo-base() $:/language/Buttons/PrintWindow/
 \define get-classes(class) $(tv-config-toolbar-class)$ $class$
 \define set-page-break()
 <$action-setfield $tiddler="""$:/state/print-page-break/$(storyTiddler)$""" text="yes"/>
