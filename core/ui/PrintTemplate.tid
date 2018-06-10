@@ -1,5 +1,3 @@
-title: $:/core/ui/PrintTemplate
-
 \define containerClasses()
 tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$ tc-print-tiddler-list-view
 \end
@@ -12,6 +10,27 @@ $(tv-config-toolbar-class)$ $class$
 \end
 \define set-printlist-break-page()
 <$action-setfield $tiddler="""$:/state/print-page-break/$(currentTiddler)$""" text="yes"/>
+\end
+\define unset-printlist-break-page()
+<$action-deletetiddler $tiddler="""$:/state/print-page-break/$(currentTiddler)$"""/>
+\end
+\define page-break-toolbar-button()
+<$list filter="[[$(pageBreakCount)$]!regexp[^$(printCount)$$]]">
+<$button class=<<get-classes "tc-print-tiddler-break-page-all-button">> tooltip={{$:/language/Buttons/PrintWindow/Toolbar/PageBreaks/All/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/PageBreaks/All/Hint}}>
+<$list filter="[list[$(storyList)$]]">
+<<set-printlist-break-page>>
+</$list>
+{{$:/core/images/pagebreak-button}}
+</$button>
+</$list>
+<$list filter="[[$(pageBreakCount)$]regexp[^$(printCount)$$]]">
+<$button class=<<get-classes "tc-print-tiddler-break-page-all-button tc-selected">> tooltip={{$:/language/Buttons/PrintWindow/Toolbar/PageBreaks/All/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/PageBreaks/All/Hint}}>
+<$list filter="[list[$(storyList)$]]">
+<<unset-printlist-break-page>>
+</$list>
+{{$:/core/images/pagebreak-button}}
+</$button>
+</$list>
 \end
 
 <$vars tv-config-toolbar-icons={{$:/config/Toolbar/Icons}} tv-config-toolbar-text={{$:/config/Toolbar/Text}} tv-config-toolbar-class={{$:/config/Toolbar/ButtonClass}} themeTitle={{$:/view}} languageTitle={{$:/language!!name}} storyList="$:/PrintList" historyList="$:/PrintHistory">
@@ -55,12 +74,11 @@ $(tv-config-toolbar-class)$ $class$
 <$button class=<<get-classes "tc-print-tiddler-tags-button">> set=<<print-states "show-tags">> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Hide/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Hide/Hint}}><<lingo Tags/Hide/Hint>></$button>
 </$reveal>
 
-<$button class=<<get-classes "tc-print-tiddler-break-page-all-button">> tooltip={{$:/language/Buttons/PrintWindow/Toolbar/PageBreaks/All/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/PageBreaks/All/Hint}}>
-<$list filter="[list<storyList>]">
-<<set-printlist-break-page>>
+<$list filter="[list<storyList>count[]]" variable="printCount">
+<$list filter="[list<storyList>lookup[$:/state/print-page-break/]regexp[^yes$]count[]]" variable="pageBreakCount">
+<<page-break-toolbar-button>>
 </$list>
-{{$:/core/images/pagebreak-button}}
-</$button>
+</$list>
 
 <$button class=<<get-classes "tc-print-tiddler-print-button">> message="tm-print" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Print}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Print}}>{{$:/core/images/print-button}}</$button>
 
