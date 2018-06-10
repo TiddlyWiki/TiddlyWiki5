@@ -1,0 +1,25 @@
+title: $:/core/ui/Buttons/print-window
+tags: $:/tags/ViewToolbar
+caption: {{$:/core/images/print-button}} {{$:/language/Buttons/PrintWindow/Caption}}
+description: {{$:/language/Buttons/PrintWindow/Hint}}
+
+\define print-tiddler-button-classes()
+$(tv-config-toolbar-class)$ tc-print-tiddler-button
+\end
+\define print-listops-actions()
+<$action-listops $tiddler="$:/PrintList" $subfilter="""[[$(storyTiddler)$]]"""/>
+\end
+\whitespace trim
+<$button tooltip={{$:/language/Buttons/PrintWindow/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Caption}} class=<<print-tiddler-button-classes>>>
+<<print-listops-actions>>
+<$action-sendmessage $message="tm-open-window" $param="$:/core/ui/PrintTemplate"/>
+<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/print-button}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
+<span class="tc-btn-text">
+<$text text=" "/>
+<$text text={{$:/language/Buttons/PrintWindow/Caption}}/>
+</span>
+</$list>
+</$button>
