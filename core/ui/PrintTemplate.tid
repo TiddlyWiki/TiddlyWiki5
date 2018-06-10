@@ -1,3 +1,5 @@
+title: $:/core/ui/PrintTemplate
+
 \define containerClasses()
 tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$ tc-print-tiddler-list-view
 \end
