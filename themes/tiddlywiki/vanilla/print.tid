@@ -157,6 +157,14 @@ display: none;
 	display: none;
 }
 
+.tc-print-tiddler-list-view .tc-tiddler-title .tc-tiddler-controls > span > button > svg , .tc-print-tiddler-list-view .tc-tiddler-title .tc-tiddler-controls .tc-page-break-button svg {
+	fill: <<colour tiddler-background>>;
+}
+
+.tc-print-tiddler-list-view .tc-tiddler-title:hover .tc-tiddler-controls > span > button > svg , .tc-print-tiddler-list-view .tc-tiddler-title:hover .tc-tiddler-controls .tc-page-break-button svg {
+	fill: <<colour muted-foreground>>;
+}
+
 <$vars printState="$:/state/print-river">
 
 <<reveal-print-states>>
