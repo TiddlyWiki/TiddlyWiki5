@@ -16,7 +16,7 @@ tags: $:/tags/ViewToolbar
 </$button>
 </$reveal>
 <$reveal state="""$:/state/print-page-break/$(storyTiddler)$""" type="match" text="yes">
-<$button class=<<get-classes "tc-page-break-button tc-selected">> tooltip={{$:/language/Buttons/PrintWindow/PageBreak/No/Hint}} aria-label={{$:/language/Buttons/PrintWindow/PageBreak/No/Hint}}>>>
+<$button class=<<get-classes "tc-page-break-button tc-selected">> tooltip={{$:/language/Buttons/PrintWindow/PageBreak/No/Hint}} aria-label={{$:/language/Buttons/PrintWindow/PageBreak/No/Hint}}>
 <<unset-page-break>>
 {{$:/core/images/pagebreak-button}}
 </$button>
