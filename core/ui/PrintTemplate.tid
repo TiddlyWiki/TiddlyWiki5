@@ -3,6 +3,7 @@ title: $:/core/ui/PrintTemplate
 \define containerClasses()
 tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$ tc-print-tiddler-list-view
 \end
+\define lingo-base() $:/language/PrintWindow/ToolBar/
 \define get-classes(class)
 $(tv-config-toolbar-class)$ $class$
 \end
@@ -31,34 +32,34 @@ $(tv-config-toolbar-class)$ $class$
 </$list>
 
 <$reveal state="$:/templates/print/tiddler!!show-title" type="nomatch" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-title-button">> set="$:/templates/print/tiddler!!show-title" setTo="yes">show titles</$button>
+<$button class=<<get-classes "tc-print-tiddler-title-button">> set="$:/templates/print/tiddler!!show-title" setTo="yes" tooltip=<<lingo Titles/Show/Hint>>><<lingo Titles/Show/Hint>></$button>
 </$reveal>
 <$reveal state="$:/templates/print/tiddler!!show-title" type="match" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-title-button">> set="$:/templates/print/tiddler!!show-title" setTo="no">hide titles</$button>
+<$button class=<<get-classes "tc-print-tiddler-title-button">> set="$:/templates/print/tiddler!!show-title" setTo="no" tooltip=<<lingo Titles/Hide/Hint>>><<lingo Titles/Hide/Hint>></$button>
 </$reveal>
 
 <$reveal state="$:/templates/print/tiddler!!show-subtitle" type="nomatch" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-subtitle-button">> set="$:/templates/print/tiddler!!show-subtitle" setTo="yes">show subtitles</$button>
+<$button class=<<get-classes "tc-print-tiddler-subtitle-button">> set="$:/templates/print/tiddler!!show-subtitle" setTo="yes" tooltip=<<lingo Subtitles/Show/Hint>>><<lingo Subtitles/Show/Hint>></$button>
 </$reveal>
 <$reveal state="$:/templates/print/tiddler!!show-subtitle" type="match" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-subtitle-button">> set="$:/templates/print/tiddler!!show-subtitle" setTo="no">hide subtitles</$button>
+<$button class=<<get-classes "tc-print-tiddler-subtitle-button">> set="$:/templates/print/tiddler!!show-subtitle" setTo="no" tooltip=<<lingo Subtitles/Hide/Hint>>><<lingo Subtitles/Hide/Hint>></$button>
 </$reveal>
 
 <$reveal state="$:/templates/print/tiddler!!show-tags" type="nomatch" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-tags-button">> set="$:/templates/print/tiddler!!show-tags" setTo="yes">show tags</$button>
+<$button class=<<get-classes "tc-print-tiddler-tags-button">> set="$:/templates/print/tiddler!!show-tags" setTo="yes" tooltip=<<lingo Tags/Show/Hint>>><<lingo Tags/Show/Hint>></$button>
 </$reveal>
 <$reveal state="$:/templates/print/tiddler!!show-tags" type="match" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-tags-button">> set="$:/templates/print/tiddler!!show-tags" setTo="no">hide tags</$button>
+<$button class=<<get-classes "tc-print-tiddler-tags-button">> set="$:/templates/print/tiddler!!show-tags" setTo="no" tooltip=<<lingo Tags/Hide/Hint>>><<lingo Tags/Hide/Hint>></$button>
 </$reveal>
 
-<$button class=<<get-classes "tc-print-tiddler-break-page-all-button">> tooltip="print all on a new page">
+<$button class=<<get-classes "tc-print-tiddler-break-page-all-button">> tooltip=<<lingo PageBreaks/All/Hint>>>
 <$list filter="[list[$:/PrintList]]">
 <<set-printlist-break-page>>
 </$list>
 {{$:/core/images/pagebreak-button}}
 </$button>
 
-<$button class=<<get-classes "tc-print-tiddler-print-button">> message="tm-print" tooltip="print">{{$:/core/images/print-button}}</$button>
+<$button class=<<get-classes "tc-print-tiddler-print-button">> message="tm-print" tooltip=<<lingo Print>>>{{$:/core/images/print-button}}</$button>
 
 </div>
 
