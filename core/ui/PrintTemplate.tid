@@ -24,7 +24,7 @@ $(tv-config-toolbar-class)$ $class$
 
 <$list filter="[list<storyList>count[]!regexp[^0$]!regexp[^1$]]">
 
-<$button popup="$:/state/popup/print-tiddler/sort-river" class=<<get-classes "tc-print-tiddler-sort-button">>>{{$:/core/images/sort-button}}sort</$button>
+<$button popup="$:/state/popup/print-tiddler/sort-river" class=<<get-classes "tc-print-tiddler-sort-button">> tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Sort}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Sort}}>{{$:/core/images/sort-button}}</$button>
 
 <$reveal state="$:/state/popup/print-tiddler/sort-river" type="popup" position="below" class="tc-print-sort-drop-down tc-popup-keep">
 
@@ -35,34 +35,34 @@ $(tv-config-toolbar-class)$ $class$
 </$list>
 
 <$reveal state=<<print-states "show-titles">> type="nomatch" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-title-button">> set=<<print-states "show-titles">> setTo="yes" tooltip=<<lingo Titles/Show/Hint>>><<lingo Titles/Show/Hint>></$button>
+<$button class=<<get-classes "tc-print-tiddler-title-button">> set=<<print-states "show-titles">> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Titles/Show/Hint}} aria-labeltooltip={{$:/language/Buttons/PrintWindow/Toolbar/Titles/Show/Hint}}><<lingo Titles/Show/Hint>></$button>
 </$reveal>
 <$reveal state=<<print-states "show-titles">> type="match" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-title-button">> set=<<print-states "show-titles">> setTo="no" tooltip=<<lingo Titles/Hide/Hint>>><<lingo Titles/Hide/Hint>></$button>
+<$button class=<<get-classes "tc-print-tiddler-title-button">> set=<<print-states "show-titles">> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Titles/Hide/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Titles/Hide/Hint}}><<lingo Titles/Hide/Hint>></$button>
 </$reveal>
 
 <$reveal state=<<print-states "show-subtitles">> type="nomatch" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-subtitle-button">> set=<<print-states "show-subtitles">> setTo="yes" tooltip=<<lingo Subtitles/Show/Hint>>><<lingo Subtitles/Show/Hint>></$button>
+<$button class=<<get-classes "tc-print-tiddler-subtitle-button">> set=<<print-states "show-subtitles">> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Show/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Show/Hint}}><<lingo Subtitles/Show/Hint>></$button>
 </$reveal>
 <$reveal state=<<print-states "show-subtitles">> type="match" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-subtitle-button">> set=<<print-states "show-subtitles">> setTo="no" tooltip=<<lingo Subtitles/Hide/Hint>>><<lingo Subtitles/Hide/Hint>></$button>
+<$button class=<<get-classes "tc-print-tiddler-subtitle-button">> set=<<print-states "show-subtitles">> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Hide/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Hide/Hint}}><<lingo Subtitles/Hide/Hint>></$button>
 </$reveal>
 
 <$reveal state=<<print-states "show-tags">> type="nomatch" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-tags-button">> set=<<print-states "show-tags">> setTo="yes" tooltip=<<lingo Tags/Show/Hint>>><<lingo Tags/Show/Hint>></$button>
+<$button class=<<get-classes "tc-print-tiddler-tags-button">> set=<<print-states "show-tags">> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Show/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Show/Hint}}><<lingo Tags/Show/Hint>></$button>
 </$reveal>
 <$reveal state=<<print-states "show-tags">> type="match" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-tags-button">> set=<<print-states "show-tags">> setTo="no" tooltip=<<lingo Tags/Hide/Hint>>><<lingo Tags/Hide/Hint>></$button>
+<$button class=<<get-classes "tc-print-tiddler-tags-button">> set=<<print-states "show-tags">> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Hide/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Hide/Hint}}><<lingo Tags/Hide/Hint>></$button>
 </$reveal>
 
-<$button class=<<get-classes "tc-print-tiddler-break-page-all-button">> tooltip=<<lingo PageBreaks/All/Hint>>>
+<$button class=<<get-classes "tc-print-tiddler-break-page-all-button">> tooltip={{$:/language/Buttons/PrintWindow/Toolbar/PageBreaks/All/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/PageBreaks/All/Hint}}>
 <$list filter="[list<storyList>]">
 <<set-printlist-break-page>>
 </$list>
 {{$:/core/images/pagebreak-button}}
 </$button>
 
-<$button class=<<get-classes "tc-print-tiddler-print-button">> message="tm-print" tooltip=<<lingo Print>>>{{$:/core/images/print-button}}</$button>
+<$button class=<<get-classes "tc-print-tiddler-print-button">> message="tm-print" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Print}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Print}}>{{$:/core/images/print-button}}</$button>
 
 </div>
 
