@@ -9,10 +9,21 @@ $(tv-config-toolbar-class)$ tc-print-tiddler-button
 \define print-listops-actions()
 <$action-listops $tiddler="$:/PrintList" $subfilter="""[[$(storyTiddler)$]]"""/>
 \end
+\define get-document-title()
+$(siteTitle)$_$(timeStamp)$
+\end
+\define open-window-actions()
+<$vars timeStamp=<<now """$(timeStampFormat)$""">>>
+<$vars documentTitle=<<get-document-title>>>
+<$action-sendmessage $message="tm-open-window" $param="$:/core/ui/PrintTemplate" documentTitle=<<documentTitle>>/>
+</$vars>
+</$vars>
+\end
 \whitespace trim
 <$button tooltip={{$:/language/Buttons/PrintWindow/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Caption}} class=<<print-tiddler-button-classes>>>
+<$vars siteTitle={{$:/SiteTitle}} timeStampFormat={{$:/config/NewJournal/Title}}>
 <<print-listops-actions>>
-<$action-sendmessage $message="tm-open-window" $param="$:/core/ui/PrintTemplate"/>
+<<open-window-actions>>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/print-button}}
 </$list>
@@ -22,4 +33,5 @@ $(tv-config-toolbar-class)$ tc-print-tiddler-button
 <$text text={{$:/language/Buttons/PrintWindow/Caption}}/>
 </span>
 </$list>
+</$vars>
 </$button>
