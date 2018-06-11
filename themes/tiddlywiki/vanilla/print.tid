@@ -127,7 +127,7 @@ tags: $:/tags/Stylesheet
 </$vars>
 
 @media print {
-.tc-print-tiddler-window-overlay {
+.tc-print-tiddler-window-overlay, .tc-print-sort-drop-down {
 	display: none;
 }
 }
