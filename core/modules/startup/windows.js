@@ -43,7 +43,7 @@ exports.startup = function() {
 		// Initialise the document
 		srcDocument.write("<html><head></head><body class='tc-body tc-single-tiddler-window'></body></html>");
 		srcDocument.close();
-		srcDocument.title = title;
+		srcDocument.title = paramObject.documentTitle || title;
 		srcWindow.addEventListener("beforeunload",function(event) {
 			delete windows[title];
 			$tw.wiki.removeEventListener("change",refreshHandler);
