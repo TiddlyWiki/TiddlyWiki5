@@ -1,0 +1,9 @@
+title: $:/core/ui/Buttons/print-tags
+tags: $:/tags/PrintToolbar/Tools
+
+<$reveal state=<<print-states "show-tags">> type="nomatch" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-tags-button tc-chooser-item">> set=<<print-states "show-tags">> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Show/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Show/Hint}}><<lingo Tags/Show/Hint>></$button>
+</$reveal>
+<$reveal state=<<print-states "show-tags">> type="match" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-subtitle-button tc-chooser-item tc-chosen">> set=<<print-states "show-tags">> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Hide/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Hide/Hint}}><<lingo Tags/Show/Hint>></$button>
+</$reveal>

@@ -1,0 +1,13 @@
+title: $:/core/ui/PrintTemplate/Menu
+
+\define get-classes(class)
+$(tv-config-toolbar-class)$ $class$
+\end
+
+<div class="tc-plugin-reload-warning tc-print-tiddler-window-overlay">
+
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/PrintToolbar]!has[draft.of]]" variable="listItem">
+<$transclude tiddler=<<listItem>>/>
+</$list>
+
+</div>

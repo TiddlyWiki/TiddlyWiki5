@@ -89,12 +89,17 @@ PrintWindow/PageBreak/Yes/Hint: insert a page-break before this tiddler
 PrintWindow/Toolbar/PageBreaks/All/Hint: print all tiddlers on a new page
 PrintWindow/Toolbar/Print: print
 PrintWindow/Toolbar/Sort: sort
-PrintWindow/Toolbar/Subtitles/Hide/Hint: hide subtitles
-PrintWindow/Toolbar/Subtitles/Show/Hint: show subtitles
-PrintWindow/Toolbar/Tags/Hide/Hint: hide tags
-PrintWindow/Toolbar/Tags/Show/Hint: show tags
-PrintWindow/Toolbar/Titles/Hide/Hint: hide titles
-PrintWindow/Toolbar/Titles/Show/Hint: show titles
+PrintWindow/Toolbar/Bodies/Center/Hint: print tiddler content centered
+PrintWindow/Toolbar/Subtitles/Hide/Hint: don't print subtitles
+PrintWindow/Toolbar/Subtitles/Show/Hint: print all subtitles
+PrintWindow/Toolbar/Subtitles/Center/Hint: print all subtitles centered
+PrintWindow/Toolbar/Tags/Hide/Hint: don't print tags
+PrintWindow/Toolbar/Tags/Show/Hint: print all tags
+PrintWindow/Toolbar/Tags/Center/Hint: print all tags centered
+PrintWindow/Toolbar/Titles/Hide/Hint: don't print titles
+PrintWindow/Toolbar/Titles/Show/Hint: print all titles
+PrintWindow/Toolbar/Titles/Captions/Hint: print captions instead of titles
+PrintWindow/Toolbar/Titles/Center/Hint: print titles centered
 Refresh/Caption: refresh
 Refresh/Hint: Perform a full refresh of the wiki
 Save/Caption: ok

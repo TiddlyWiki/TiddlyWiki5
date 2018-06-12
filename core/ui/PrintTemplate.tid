@@ -1,99 +1,12 @@
 title: $:/core/ui/PrintTemplate
 
-\define containerClasses()
-tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$ tc-print-tiddler-list-view
-\end
 \define lingo-base() $:/language/Buttons/PrintWindow/Toolbar/
 \define print-states(field)
 $:/state/print-river!!$field$
 \end
-\define get-classes(class)
-$(tv-config-toolbar-class)$ $class$
-\end
-\define set-printlist-break-page()
-<$action-setfield $tiddler="""$:/state/print-page-break/$(currentTiddler)$""" text="yes"/>
-\end
-\define unset-printlist-break-page()
-<$action-deletetiddler $tiddler="""$:/state/print-page-break/$(currentTiddler)$"""/>
-\end
-\define page-break-toolbar-button()
-<$list filter="[[$(pageBreakCount)$]!regexp[^$(printCount)$$]]">
-<$button class=<<get-classes "tc-print-tiddler-break-page-all-button">> tooltip={{$:/language/Buttons/PrintWindow/Toolbar/PageBreaks/All/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/PageBreaks/All/Hint}}>
-<$list filter="[list[$(storyList)$]]">
-<<set-printlist-break-page>>
-</$list>
-{{$:/core/images/pagebreak-button}}
-</$button>
-</$list>
-<$list filter="[[$(pageBreakCount)$]regexp[^$(printCount)$$]]">
-<$button class=<<get-classes "tc-print-tiddler-break-page-all-button tc-selected">> tooltip={{$:/language/Buttons/PrintWindow/Toolbar/PageBreaks/All/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/PageBreaks/All/Hint}}>
-<$list filter="[list[$(storyList)$]]">
-<<unset-printlist-break-page>>
-</$list>
-{{$:/core/images/pagebreak-button}}
-</$button>
-</$list>
-\end
 
-<$vars tv-config-toolbar-icons={{$:/config/Toolbar/Icons}} tv-config-toolbar-text={{$:/config/Toolbar/Text}} tv-config-toolbar-class={{$:/config/Toolbar/ButtonClass}} themeTitle={{$:/view}} languageTitle={{$:/language!!name}} storyList="$:/PrintList" historyList="$:/PrintHistory">
+<$vars storyList="$:/PrintList" historyList="$:/PrintHistory" tiddlerTemplate="$:/core/ui/ViewTemplate" tiddlerEditTemplate="$:/core/ui/EditTemplate" toolbar="$:/core/ui/PrintTemplate/Menu" templateClasses="tc-print-tiddler-list-view" storyClasses="tc-print-story-river" tv-config-toolbar-icons={{$:/config/Toolbar/Icons}} tv-config-toolbar-text={{$:/config/Toolbar/Text}} tv-config-toolbar-class={{$:/config/Toolbar/ButtonClass}} themeTitle={{$:/view}} languageTitle={{$:/language!!name}}>
 
-<div class=<<containerClasses>>>
-
-<$navigator story=<<storyList>> history=<<historyList>>>
-
-<div class="tc-plugin-reload-warning tc-print-tiddler-window-overlay">
-
-<$list filter="[list<storyList>count[]!regexp[^0$]!regexp[^1$]]">
-
-<$button popup="$:/state/popup/print-tiddler/sort-river" class=<<get-classes "tc-print-tiddler-sort-button">> tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Sort}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Sort}}>{{$:/core/images/sort-button}}</$button>
-
-<$reveal state="$:/state/popup/print-tiddler/sort-river" type="popup" position="below" class="tc-print-sort-drop-down tc-popup-keep">
-
-{{$:/core/ui/SideBar/Open}}
-
-</$reveal>
-
-</$list>
-
-<$reveal state=<<print-states "show-titles">> type="nomatch" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-title-button">> set=<<print-states "show-titles">> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Titles/Show/Hint}} aria-labeltooltip={{$:/language/Buttons/PrintWindow/Toolbar/Titles/Show/Hint}}><<lingo Titles/Show/Hint>></$button>
-</$reveal>
-<$reveal state=<<print-states "show-titles">> type="match" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-title-button">> set=<<print-states "show-titles">> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Titles/Hide/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Titles/Hide/Hint}}><<lingo Titles/Hide/Hint>></$button>
-</$reveal>
-
-<$reveal state=<<print-states "show-subtitles">> type="nomatch" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-subtitle-button">> set=<<print-states "show-subtitles">> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Show/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Show/Hint}}><<lingo Subtitles/Show/Hint>></$button>
-</$reveal>
-<$reveal state=<<print-states "show-subtitles">> type="match" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-subtitle-button">> set=<<print-states "show-subtitles">> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Hide/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Hide/Hint}}><<lingo Subtitles/Hide/Hint>></$button>
-</$reveal>
-
-<$reveal state=<<print-states "show-tags">> type="nomatch" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-tags-button">> set=<<print-states "show-tags">> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Show/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Show/Hint}}><<lingo Tags/Show/Hint>></$button>
-</$reveal>
-<$reveal state=<<print-states "show-tags">> type="match" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-tags-button">> set=<<print-states "show-tags">> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Hide/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Hide/Hint}}><<lingo Tags/Hide/Hint>></$button>
-</$reveal>
-
-<$list filter="[list<storyList>count[]]" variable="printCount">
-<$list filter="[list<storyList>lookup[$:/state/print-page-break/]regexp[^yes$]count[]]" variable="pageBreakCount">
-<<page-break-toolbar-button>>
-</$list>
-</$list>
-
-<$button class=<<get-classes "tc-print-tiddler-print-button">> message="tm-print" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Print}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Print}}>{{$:/core/images/print-button}}</$button>
-
-</div>
-
-<div class="tc-story-river tc-print-story-river">
-
-<$list filter="[list<storyList>]" template="$:/core/ui/ViewTemplate" editTemplate="$:/core/ui/EditTemplate"/>
-
-</div>
-
-</$navigator>
-
-</div>
+{{$:/core/ui/Templates/new-window-river}}
 
 </$vars>

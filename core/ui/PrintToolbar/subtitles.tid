@@ -1,0 +1,9 @@
+title: $:/core/ui/Buttons/print-subtitles
+tags: $:/tags/PrintToolbar/Tools
+
+<$reveal state=<<print-states "show-subtitles">> type="nomatch" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-subtitle-button tc-chooser-item">> set=<<print-states "show-subtitles">> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Show/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Show/Hint}}><<lingo Subtitles/Show/Hint>></$button>
+</$reveal>
+<$reveal state=<<print-states "show-subtitles">> type="match" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-subtitle-button tc-chooser-item tc-chosen">> set=<<print-states "show-subtitles">> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Hide/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Hide/Hint}}><<lingo Subtitles/Show/Hint>></$button>
+</$reveal>

@@ -1,0 +1,35 @@
+title: $:/core/ui/Buttons/page-break
+tags: $:/tags/PrintToolbar/Tools
+
+\define lingo-base() $:/language/Buttons/PrintWindow/Toolbar/PageBreaks/
+\define set-printlist-break-page()
+<$action-setfield $tiddler="""$:/state/print-page-break/$(currentTiddler)$""" text="yes"/>
+\end
+\define unset-printlist-break-page()
+<$action-deletetiddler $tiddler="""$:/state/print-page-break/$(currentTiddler)$"""/>
+\end
+\define page-break-toolbar-button()
+<$list filter="[[$(pageBreakCount)$]!regexp[^$(printCount)$$]]">
+<$button class=<<get-classes "tc-print-tiddler-break-page-all-button tc-chooser-item">> tooltip={{$:/language/Buttons/PrintWindow/Toolbar/PageBreaks/All/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/PageBreaks/All/Hint}}>
+<$list filter="[list[$(storyList)$]]">
+<<set-printlist-break-page>>
+</$list>
+<<lingo "All/Hint">>
+</$button>
+</$list>
+<$list filter="[[$(pageBreakCount)$]regexp[^$(printCount)$$]]">
+<$button class=<<get-classes "tc-print-tiddler-break-page-all-button tc-chooser-item tc-chosen">> tooltip={{$:/language/Buttons/PrintWindow/Toolbar/PageBreaks/All/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/PageBreaks/All/Hint}}>
+<$list filter="[list[$(storyList)$]]">
+<<unset-printlist-break-page>>
+</$list>
+<<lingo "All/Hint">>
+</$button>
+</$list>
+\end
+
+<$list filter="[list<storyList>count[]]" variable="printCount">
+<$list filter="[list<storyList>lookup[$:/state/print-page-break/]regexp[^yes$]count[]]" variable="pageBreakCount">
+<<page-break-toolbar-button>>
+</$list>
+</$list>
+

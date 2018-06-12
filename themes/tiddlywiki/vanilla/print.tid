@@ -71,6 +71,58 @@ tags: $:/tags/Stylesheet
 }
 </$reveal>
 \end
+\define set-tiddler-controls-visibility()
+[data-tiddler-title="$(currentTiddler)$"]:hover .tc-tiddler-title {
+	display: inline;
+}
+[data-tiddler-title="$(currentTiddler)$"]:hover .tc-tiddler-controls {
+	display: inline;
+}
+\end
+\define set-captions-as-titles()
+@media print {
+.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-titlebar .tc-tiddler-title-icon::after {
+content: "$(tiddlerCaption)$";
+}
+.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-titlebar .tc-title {
+display: none;
+}
+}
+.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-titlebar .tc-tiddler-title-icon::after {
+content: "$(tiddlerCaption)$";
+}
+.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-titlebar .tc-title {
+display: none;
+}
+\end
+\define set-titles-centered()
+.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame:not(:hover) .tc-titlebar {
+position: relative;
+width: 100%;
+text-align: center;
+}
+\end
+\define set-subtitles-centered()
+.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-subtitle {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	text-align: center;
+}
+\end
+\define set-tags-centered()
+.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-tags-wrapper {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	text-align: center;
+}
+\end
+\define set-bodies-centered()
+.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-tiddler-body {
+	text-align: center;
+}
+\end
 
 .tc-print-tiddler-window-overlay p {
 	display: inline-block;
@@ -94,8 +146,12 @@ tags: $:/tags/Stylesheet
 	box-shadow: none;
 	border: none;
 	width: calc(100vw - 2.05em);
+	margin-bottom: 0;
 }
-.tc-print-tiddler-list-view .tc-print-tiddler-button {
+.tc-print-tiddler-list-view .tc-tiddler-frame:first-child {
+	margin-top: 1.5em;
+}
+.tc-print-tiddler-list-view .tc-tiddler-controls .tc-print-tiddler-button {
 	display: none;
 }
 .tc-print-sort-drop-down {
@@ -108,14 +164,8 @@ tags: $:/tags/Stylesheet
 .tc-page-container:not(.tc-print-tiddler-list-view) .tc-page-break-button {
 	display: none;
 }
-.tc-print-tiddler-list-view .tc-tiddler-title .tc-tiddler-controls > span > button > svg , .tc-print-tiddler-list-view .tc-tiddler-title .tc-tiddler-controls .tc-page-break-button svg {
-	fill: <<colour tiddler-background>>;
-}
-.tc-print-tiddler-list-view .tc-tiddler-title:hover .tc-tiddler-controls > span > button > svg , .tc-print-tiddler-list-view .tc-tiddler-title:hover .tc-tiddler-controls .tc-page-break-button svg {
-	fill: <<colour muted-foreground>>;
-}
-.tc-print-tiddler-list-view .tc-tiddler-title:hover .tc-tiddler-controls > span > button:hover > svg , .tc-print-tiddler-list-view .tc-tiddler-title:hover .tc-tiddler-controls .tc-page-break-button:hover svg {
-	fill: <<colour foreground>>;
+.tc-print-tiddler-list-view .tc-tiddler-title .tc-tiddler-controls {
+	display: none;
 }
 .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tiddler-body table {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
@@ -135,3 +185,54 @@ tags: $:/tags/Stylesheet
 <$list filter="[all[tiddlers]removeprefix[$:/state/print-page-break/]]">
 <<set-page-break-tiddlers>>
 </$list>
+
+<$list filter="[list[$:/PrintList]]">
+<<set-tiddler-controls-visibility>>
+</$list>
+
+.tc-print-tiddler-list-view .tc-tiddler-frame {
+	cursor: initial;
+}
+
+<$reveal state="$:/state/print-river!!center-titles" type="match" text="yes">
+
+<$list filter="[list[$:/PrintList]]">
+<<set-titles-centered>>
+</$list>
+
+</$reveal>
+
+<$reveal state="$:/state/print-river!!center-subtitles" type="match" text="yes">
+
+<$list filter="[list[$:/PrintList]]">
+<<set-subtitles-centered>>
+</$list>
+
+</$reveal>
+
+<$reveal state="$:/state/print-river!!center-tags" type="match" text="yes">
+
+<$list filter="[list[$:/PrintList]]">
+<<set-tags-centered>>
+</$list>
+
+</$reveal>
+
+<$reveal state="$:/state/print-river!!center-bodies" type="match" text="yes">
+
+<$list filter="[list[$:/PrintList]]">
+<<set-bodies-centered>>
+</$list>
+
+</$reveal>
+
+<$reveal state="$:/state/print-river!!print-captions" type="match" text="yes">
+
+<$list filter="[list[$:/PrintList]]">
+<$list filter="[<currentTiddler>get[caption]]" variable="tiddlerCaption">
+<<set-captions-as-titles>>
+</$list>
+</$list>
+
+</$reveal>
+

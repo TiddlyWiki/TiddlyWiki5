@@ -1,0 +1,26 @@
+title: $:/core/ui/Templates/new-window-river
+
+\define containerClasses()
+tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$ $(templateClasses)$
+\end
+\define story-river-classes()
+tc-story-river $(storyClasses)$
+\define get-classes(class)
+$(tv-config-toolbar-class)$ $class$
+\end
+
+<div class=<<containerClasses>>>
+
+<$navigator story=<<storyList>> history=<<historyList>>>
+
+<$transclude tiddler=<<toolbar>> mode="block"/>
+
+<div class=<<story-river-classes>>>
+
+<$list filter="[list<storyList>]" template=<<tiddlerTemplate>> editTemplate=<<tiddlerEditTemplate>>/>
+
+</div>
+
+</$navigator>
+
+</div>

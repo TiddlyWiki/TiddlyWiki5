@@ -1,0 +1,9 @@
+title: $:/core/ui/Buttons/center-titles
+tags: $:/tags/PrintToolbar/Tools
+
+<$reveal state=<<print-states "center-titles">> type="nomatch" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-title-button tc-chooser-item">> set=<<print-states "center-titles">> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Titles/Center/Hint}} aria-labeltooltip={{$:/language/Buttons/PrintWindow/Toolbar/Titles/center/Hint}}><<lingo Titles/Center/Hint>></$button>
+</$reveal>
+<$reveal state=<<print-states "center-titles">> type="match" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-center-title-button tc-chooser-item tc-chosen">> set=<<print-states "center-titles">> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Titles/Center/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Titles/Hide/Hint}}><<lingo Titles/Center/Hint>></$button>
+</$reveal>

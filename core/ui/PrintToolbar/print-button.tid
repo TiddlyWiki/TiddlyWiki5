@@ -1,0 +1,4 @@
+title: $:/core/ui/PrintToolbar/Buttons/print
+tags: $:/tags/PrintToolbar
+
+<$button class=<<get-classes "tc-print-tiddler-print-button">> message="tm-print" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Print}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Print}}>{{$:/core/images/print-button}}</$button>
