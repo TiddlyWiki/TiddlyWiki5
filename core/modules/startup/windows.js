@@ -33,7 +33,7 @@ exports.startup = function() {
 			height = paramObject.height || "600",
 			variables = $tw.utils.extend({},paramObject,{currentTiddler: title});
 		// Open the window
-		var srcWindow = window.open("","external-" + title,"scrollbars,width=" + width + ",height=" + height),
+		var srcWindow = window.open("","external-" + paramObject.windowTitle || title,"scrollbars,width=" + width + ",height=" + height),
 			srcDocument = srcWindow.document;
 		windows[title] = srcWindow;
 		// Check for reopening the same window
