@@ -2,7 +2,7 @@ title: $:/core/ui/Buttons/center-tags
 tags: $:/tags/PrintToolbar/Tools
 
 <$reveal state=<<print-states "center-tags">> type="nomatch" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-title-button tc-chooser-item">> set=<<print-states "center-tags">> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Center/Hint}} aria-labeltooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/center/Hint}}><<lingo Tags/Center/Hint>></$button>
+<$button class=<<get-classes "tc-print-tiddler-title-button tc-chooser-item">> set=<<print-states "center-tags">> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Center/Hint}} aria-labeltooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/center/Hint}}><$action-setfield $tiddler="$:/state/print-river" show-tags="yes"/><<lingo Tags/Center/Hint>></$button>
 </$reveal>
 <$reveal state=<<print-states "center-tags">> type="match" text="yes">
 <$button class=<<get-classes "tc-print-tiddler-center-title-button tc-chooser-item tc-chosen">> set=<<print-states "center-tags">> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Center/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Hide/Hint}}><<lingo Tags/Center/Hint>></$button>
