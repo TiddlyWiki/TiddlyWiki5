@@ -9,13 +9,11 @@ $(tv-config-toolbar-class)$ tc-print-tiddler-button
 \define print-listops-actions()
 <$action-listops $tiddler="$:/PrintList" $subfilter="""[[$(storyTiddler)$]]"""/>
 \end
-\define get-document-title()
-$(siteTitle)$_$(timeStamp)$
-\end
+\define get-document-title() $(siteTitle)$_$(timeStamp)$
 \define open-window-actions()
 <$vars timeStamp=<<now """$(timeStampFormat)$""">>>
-<$vars documentTitle=<<get-document-title>>>
-<$action-sendmessage $message="tm-open-window" $param="$:/core/ui/PrintTemplate" documentTitle=<<documentTitle>>/>
+<$vars documentTitle=<<get-document-title>> windowTitle=<<get-window-title>>>
+<$action-sendmessage $message="tm-open-window" $param="$:/core/ui/PrintTemplate" documentTitle=<<documentTitle>> windowTitle="TiddlyWiki5 - PrintRiver"/>
 </$vars>
 </$vars>
 \end
