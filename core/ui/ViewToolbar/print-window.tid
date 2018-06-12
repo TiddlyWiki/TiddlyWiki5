@@ -12,7 +12,7 @@ $(tv-config-toolbar-class)$ tc-print-tiddler-button
 \define get-document-title() $(siteTitle)$_$(timeStamp)$
 \define open-window-actions()
 <$vars timeStamp=<<now """$(timeStampFormat)$""">>>
-<$vars documentTitle=<<get-document-title>> windowTitle=<<get-window-title>>>
+<$vars documentTitle=<<get-document-title>>>
 <$action-sendmessage $message="tm-open-window" $param="$:/core/ui/PrintTemplate" documentTitle=<<documentTitle>> windowTitle="TiddlyWiki5 - PrintRiver"/>
 </$vars>
 </$vars>
