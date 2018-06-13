@@ -82,6 +82,24 @@ Permaview/Caption: permaview
 Permaview/Hint: Set browser address bar to a direct link to all the tiddlers in this story
 Print/Caption: print page
 Print/Hint: Print the current page
+PrintWindow/Caption: print in new window
+PrintWindow/Hint: Print tiddler in new window
+PrintWindow/PageBreak/No/Hint: no page-break before this tiddler
+PrintWindow/PageBreak/Yes/Hint: insert a page-break before this tiddler
+PrintWindow/Toolbar/PageBreaks/All/Hint: print all tiddlers on a new page
+PrintWindow/Toolbar/Print: print
+PrintWindow/Toolbar/Sort: sort
+PrintWindow/Toolbar/Bodies/Center/Hint: print tiddler content centered
+PrintWindow/Toolbar/Subtitles/Hide/Hint: don't print subtitles
+PrintWindow/Toolbar/Subtitles/Show/Hint: print all subtitles
+PrintWindow/Toolbar/Subtitles/Center/Hint: print all subtitles centered
+PrintWindow/Toolbar/Tags/Hide/Hint: don't print tags
+PrintWindow/Toolbar/Tags/Show/Hint: print all tags
+PrintWindow/Toolbar/Tags/Center/Hint: print all tags centered
+PrintWindow/Toolbar/Titles/Hide/Hint: don't print titles
+PrintWindow/Toolbar/Titles/Show/Hint: print all titles
+PrintWindow/Toolbar/Titles/Captions/Hint: print captions instead of titles
+PrintWindow/Toolbar/Titles/Center/Hint: print titles centered
 Refresh/Caption: refresh
 Refresh/Hint: Perform a full refresh of the wiki
 Save/Caption: ok

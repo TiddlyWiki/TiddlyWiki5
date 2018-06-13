@@ -13,7 +13,7 @@ tags: $:/tags/PageTemplate
 
 </section>
 
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/core/ui/ViewTemplate" editTemplate="$:/core/ui/EditTemplate" storyview={{$:/view}} emptyMessage={{$:/config/EmptyStoryMessage}}/>
+<$list filter="[list<storyList>]" history=<<historyList>> template="$:/core/ui/ViewTemplate" editTemplate="$:/core/ui/EditTemplate" storyview={{$:/view}} emptyMessage={{$:/config/EmptyStoryMessage}}/>
 
 <section class="story-frontdrop">
 

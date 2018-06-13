@@ -33,7 +33,7 @@ exports.startup = function() {
 			height = paramObject.height || "600",
 			variables = $tw.utils.extend({},paramObject,{currentTiddler: title});
 		// Open the window
-		var srcWindow = window.open("","external-" + title,"scrollbars,width=" + width + ",height=" + height),
+		var srcWindow = window.open("","external-" + paramObject.windowTitle || title,"scrollbars,width=" + width + ",height=" + height),
 			srcDocument = srcWindow.document;
 		windows[title] = srcWindow;
 		// Check for reopening the same window
@@ -43,7 +43,7 @@ exports.startup = function() {
 		// Initialise the document
 		srcDocument.write("<html><head></head><body class='tc-body tc-single-tiddler-window'></body></html>");
 		srcDocument.close();
-		srcDocument.title = title;
+		srcDocument.title = paramObject.documentTitle || title;
 		srcWindow.addEventListener("beforeunload",function(event) {
 			delete windows[title];
 			$tw.wiki.removeEventListener("change",refreshHandler);

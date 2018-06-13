@@ -1,0 +1,23 @@
+title: $:/core/ui/PrintToolbar/Buttons/print-tools
+tags: $:/tags/PrintToolbar $:/tags/ViewToolbar
+list-before: $:/core/ui/PrintToolbar/Buttons/print
+
+\define get-classes(class)
+$(tv-config-toolbar-class)$ $class$
+\end
+\define deleteState()
+<$list filter="[[$(storyTiddler)$]!regexp[^$]]">
+<$action-deletetiddler $tiddler="""$(printState)$"""/>
+</$list>
+\end
+
+<$vars popupTiddler={{{ [<storyTiddler>regexp[^$]addprefix[$:/state/popup/print-tiddler-toolbar/tools]] [<storyTiddler>!regexp[^$]addprefix[$:/state/popup/tiddler-print/]] }}}>
+<$button class=<<get-classes "tc-print-tiddler-tools-button">> popup=<<popupTiddler>> tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tools/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Tools/Hint}}>{{$:/core/images/theme-button}}</$button>
+<$reveal state=<<popupTiddler>> type="popup" position={{{ [<storyTiddler>regexp[^$]addprefix[below]] [<storyTiddler>!regexp[^$]addprefix[belowleft]removesuffix<storyTiddler>] }}} class="tc-popup-keep tc-drop-down tc-print-tiddler-tools-dropdown" animate="yes">
+<div class="tc-chooser">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/PrintToolbar/Tools]!has[draft.of]]" variable="listItem">
+<$transclude tiddler=<<listItem>>/>
+</$list>
+</div>
+</$reveal>
+</$vars>

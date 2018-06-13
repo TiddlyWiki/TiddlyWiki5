@@ -1,0 +1,9 @@
+title: $:/core/ui/PrintToolbar/Buttons/sort-dropdown
+tags: $:/tags/PrintToolbar
+
+<$list filter="[list<storyList>count[]!regexp[^0$]!regexp[^1$]]">
+<$button popup="$:/state/popup/print-tiddler/sort-river" class=<<get-classes "tc-print-tiddler-sort-button">> tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Sort}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Sort}}>{{$:/core/images/sort-button}}</$button>
+<$reveal state="$:/state/popup/print-tiddler/sort-river" type="popup" position="below" class="tc-print-sort-drop-down tc-popup-handle tc-popup-keep">
+{{$:/core/ui/SideBar/Open}}
+</$reveal>
+</$list>

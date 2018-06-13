@@ -1,0 +1,11 @@
+title: $:/core/ui/Buttons/print-tags
+tags: $:/tags/PrintToolbar/Tools
+
+<$vars toolbarState=<<print-states "show-tags">> tiddlerState=<<single-print-states "show-tags">>>
+<$vars printState={{{ [<storyTiddler>regexp[^$]addprefix<toolbarState>] [<storyTiddler>!regexp[^$]addprefix<tiddlerState>] }}}>
+<$reveal state=<<printState>> type="nomatch" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-tags-button tc-chooser-item">> set=<<printState>> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Show/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Show/Hint}}><<lingo Tags/Show/Hint>></$button>
+</$reveal>
+<$reveal state=<<printState>> type="match" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-subtitle-button tc-chooser-item tc-chosen">> set=<<printState>> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Hide/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Hide/Hint}}><<lingo Tags/Show/Hint>></$button>
+</$reveal>
