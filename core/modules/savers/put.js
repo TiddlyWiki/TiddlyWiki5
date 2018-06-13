@@ -18,16 +18,22 @@ to the current URL, such as a WebDAV server.
 /*
 Retrieve ETag if available
 */
-var RetrieveETag = function(self) {
-	var headers = { "Accept": "*/*;charset=UTF-8" };
+var retrieveETag = function(self) {
+	var headers = {
+		Accept: "*/*;charset=UTF-8"
+	};
 	$tw.utils.httpRequest({
 		url: self.uri(),
 		type: "HEAD",
 		headers: headers,
-		callback: function(err, data, xhr) {
-			if(err) return;
+		callback: function(err,data,xhr) {
+			if(err) {
+				return;
+			}
 			var etag = xhr.getResponseHeader("ETag");
-			if(!etag) return;
+			if(!etag) {
+				return;
+			}
 			self.etag = etag.replace(/^W\//,"");
 		}
 	});
@@ -46,14 +52,14 @@ var PutSaver = function(wiki) {
 	$tw.utils.httpRequest({
 		url: uri,
 		type: "OPTIONS",
-		callback: function(err, data, xhr) {
+		callback: function(err,data,xhr) {
 			// Check DAV header http://www.webdav.org/specs/rfc2518.html#rfc.section.9.1
 			if(!err) {
 				self.serverAcceptsPuts = xhr.status === 200 && !!xhr.getResponseHeader("dav");
 			}
 		}
 	});
-	RetrieveETag(this);
+	retrieveETag(this);
 };
 
 PutSaver.prototype.uri = function() {
@@ -63,12 +69,14 @@ PutSaver.prototype.uri = function() {
 // TODO: in case of edit conflict
 // Prompt: Do you want to save over this? Y/N
 // Merging would be ideal, and may be possible using future generic merge flow
-PutSaver.prototype.save = function(text, method, callback) {
+PutSaver.prototype.save = function(text,method,callback) {
 	if(!this.serverAcceptsPuts) {
 		return false;
 	}
 	var self = this;
-	var headers = { "Content-Type": "text/html;charset=UTF-8" };
+	var headers = {
+		"Content-Type": "text/html;charset=UTF-8"
+	};
 	if(this.etag) {
 		headers["If-Match"] = this.etag;
 	}
@@ -77,10 +85,10 @@ PutSaver.prototype.save = function(text, method, callback) {
 		type: "PUT",
 		headers: headers,
 		data: text,
-		callback: function(err, data, xhr) {
+		callback: function(err,data,xhr) {
 			if(err) {
 				// response is textual: "XMLHttpRequest error code: 412"
-				const status = Number(err.substring(err.indexOf(':') + 2, err.length))
+				var status = Number(err.substring(err.indexOf(':') + 2, err.length))
 				if(status === 412) { // edit conflict
 					var message = $tw.language.getString("Error/EditConflict");
 					callback(message);
@@ -89,8 +97,8 @@ PutSaver.prototype.save = function(text, method, callback) {
 				}
 			} else {
 				self.etag = xhr.getResponseHeader("ETag");
-				if (self.etag == null) {
-					RetrieveETag(self);
+				if(self.etag == null) {
+					retrieveETag(self);
 				}
 				callback(null); // success
 			}
@@ -105,7 +113,7 @@ Information about this saver
 PutSaver.prototype.info = {
 	name: "put",
 	priority: 2000,
-	capabilities: ["save", "autosave"]
+	capabilities: ["save","autosave"]
 };
 
 /*
