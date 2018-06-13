@@ -712,7 +712,7 @@ exports.base64Decode = function(string64) {
 		// TODO
 		throw "$tw.utils.base64Decode() doesn't work in the browser";
 	} else {
-		return (new Buffer(string64,"base64")).toString();
+		return Buffer.from(string64,"base64").toString();
 	}
 };
 
