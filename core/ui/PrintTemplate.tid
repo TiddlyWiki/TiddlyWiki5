@@ -4,6 +4,9 @@ title: $:/core/ui/PrintTemplate
 \define print-states(field)
 $:/state/print-river!!$field$
 \end
+\define single-print-states(suffix)
+$:/state/print-river/single/$suffix$/
+\end
 
 <$vars storyList="$:/PrintList" historyList="$:/PrintHistory" tiddlerTemplate="$:/core/ui/ViewTemplate" tiddlerEditTemplate="$:/core/ui/EditTemplate" toolbar="$:/core/ui/PrintTemplate/Menu" templateClasses="tc-print-tiddler-list-view" storyClasses="tc-print-story-river" tv-config-toolbar-icons={{$:/config/Toolbar/Icons}} tv-config-toolbar-text={{$:/config/Toolbar/Text}} tv-config-toolbar-class={{$:/config/Toolbar/ButtonClass}} themeTitle={{$:/view}} languageTitle={{$:/language!!name}}>
 

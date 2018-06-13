@@ -1,9 +1,14 @@
 title: $:/core/ui/Buttons/center-tags
 tags: $:/tags/PrintToolbar/Tools
 
-<$reveal state=<<print-states "center-tags">> type="nomatch" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-title-button tc-chooser-item">> set=<<print-states "center-tags">> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Center/Hint}} aria-labeltooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/center/Hint}}><$action-setfield $tiddler="$:/state/print-river" show-tags="yes"/><<lingo Tags/Center/Hint>></$button>
+<$vars toolbarState=<<print-states "center-tags">> tiddlerState=<<single-print-states "center-tags">>>
+<$vars printState={{{ [<storyTiddler>regexp[^$]addprefix<toolbarState>] [<storyTiddler>!regexp[^$]addprefix<tiddlerState>] }}}>
+<$reveal state=<<printState>> type="nomatch" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-title-button tc-chooser-item">> set=<<printState>> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Center/Hint}} aria-labeltooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/center/Hint}}><$action-setfield $tiddler="$:/state/print-river" show-tags="yes"/><<lingo Tags/Center/Hint>></$button>
 </$reveal>
-<$reveal state=<<print-states "center-tags">> type="match" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-center-title-button tc-chooser-item tc-chosen">> set=<<print-states "center-tags">> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Center/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Hide/Hint}}><<lingo Tags/Center/Hint>></$button>
+<$reveal state=<<printState>> type="match" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-center-title-button tc-chooser-item tc-chosen">> set=<<printState>> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Center/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Tags/Hide/Hint}} actions="""<<deleteState>>""">
+<<lingo Tags/Center/Hint>></$button>
 </$reveal>
+</$vars>
+</$vars>

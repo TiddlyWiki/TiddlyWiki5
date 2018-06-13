@@ -1,9 +1,14 @@
 title: $:/core/ui/Buttons/center-subtitles
 tags: $:/tags/PrintToolbar/Tools
 
-<$reveal state=<<print-states "center-subtitles">> type="nomatch" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-title-button tc-chooser-item">> set=<<print-states "center-subtitles">> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Center/Hint}} aria-labeltooltip={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/center/Hint}}><$action-setfield $tiddler="$:/state/print-river" show-subtitles="yes"/><<lingo Subtitles/Center/Hint>></$button>
+<$vars toolbarState=<<print-states "center-subtitles">> tiddlerState=<<single-print-states "center-subtitle">>>
+<$vars printState={{{ [<storyTiddler>regexp[^$]addprefix<toolbarState>] [<storyTiddler>!regexp[^$]addprefix<tiddlerState>] }}}>
+<$reveal state=<<printState>> type="nomatch" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-title-button tc-chooser-item">> set=<<printState>> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Center/Hint}} aria-labeltooltip={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/center/Hint}}><$action-setfield $tiddler="$:/state/print-river" show-subtitles="yes"/><<lingo Subtitles/Center/Hint>></$button>
 </$reveal>
-<$reveal state=<<print-states "center-subtitles">> type="match" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-center-title-button tc-chooser-item tc-chosen">> set=<<print-states "center-subtitles">> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Center/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Hide/Hint}}><<lingo Subtitles/Center/Hint>></$button>
+<$reveal state=<<printState>> type="match" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-center-title-button tc-chooser-item tc-chosen">> set=<<printState>> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Center/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Subtitles/Hide/Hint}} actions="""<<deleteState>>""">
+<<lingo Subtitles/Center/Hint>></$button>
 </$reveal>
+</$vars>
+</$vars>

@@ -1,9 +1,14 @@
 title: $:/core/ui/Buttons/center-bodies
 tags: $:/tags/PrintToolbar/Tools
 
-<$reveal state=<<print-states "center-bodies">> type="nomatch" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-body-button tc-chooser-item">> set=<<print-states "center-bodies">> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Bodies/Center/Hint}} aria-labeltooltip={{$:/language/Buttons/PrintWindow/Toolbar/Bodies/center/Hint}}><<lingo Bodies/Center/Hint>></$button>
+<$vars toolbarState=<<print-states "center-bodies">> tiddlerState=<<single-print-states "center-body">>>
+<$vars printState={{{ [<storyTiddler>regexp[^$]addprefix<toolbarState>] [<storyTiddler>!regexp[^$]addprefix<tiddlerState>] }}}>
+<$reveal state=<<printState>> type="nomatch" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-body-button tc-chooser-item">> set=<<printState>> setTo="yes" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Bodies/Center/Hint}} aria-labeltooltip={{$:/language/Buttons/PrintWindow/Toolbar/Bodies/center/Hint}}><<lingo Bodies/Center/Hint>></$button>
 </$reveal>
-<$reveal state=<<print-states "center-bodies">> type="match" text="yes">
-<$button class=<<get-classes "tc-print-tiddler-center-body-button tc-chooser-item tc-chosen">> set=<<print-states "center-bodies">> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Bodies/Center/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Bodies/Hide/Hint}}><<lingo Bodies/Center/Hint>></$button>
+<$reveal state=<<printState>> type="match" text="yes">
+<$button class=<<get-classes "tc-print-tiddler-center-body-button tc-chooser-item tc-chosen">> set=<<printState>> setTo="no" tooltip={{$:/language/Buttons/PrintWindow/Toolbar/Bodies/Center/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Toolbar/Bodies/Hide/Hint}} actions="""<<deleteState>>""">
+<<lingo Bodies/Center/Hint>></$button>
 </$reveal>
+</$vars>
+</$vars>

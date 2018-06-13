@@ -1,6 +1,62 @@
 title: $:/themes/tiddlywiki/vanilla/print
 tags: $:/tags/Stylesheet
 
+\define set-tiddler-controls-visibility()
+[data-tiddler-title="$(currentTiddler)$"]:hover .tc-tiddler-title {
+	display: inline;
+}
+[data-tiddler-title="$(currentTiddler)$"]:hover .tc-tiddler-controls {
+	display: inline;
+}
+\end
+\define set-captions-as-titles()
+@media print {
+.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-titlebar .tc-tiddler-title-icon::after {
+content: "$(tiddlerCaption)$";
+}
+.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-titlebar .tc-title {
+display: none;
+}
+}
+.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-titlebar .tc-tiddler-title-icon::after {
+content: "$(tiddlerCaption)$";
+}
+.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-titlebar .tc-title {
+display: none;
+}
+\end
+\define set-titles-centered()
+.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-titlebar {
+width: 100%;
+text-align: center;
+}
+@media print {
+[data-tiddler-title="$(currentTiddler)$"] .tc-tiddler-title .tc-tiddler-controls {
+display: none;
+}
+}
+\end
+\define set-subtitles-centered()
+.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-subtitle {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	text-align: center;
+}
+\end
+\define set-tags-centered()
+.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-tags-wrapper {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	text-align: center;
+}
+\end
+\define set-bodies-centered()
+.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-tiddler-body {
+	text-align: center;
+}
+\end
 \define set-page-break-tiddlers()
 @media print {
 	[data-tiddler-title='$(currentTiddler)$'].tc-tiddler-frame {
@@ -8,7 +64,64 @@ tags: $:/tags/Stylesheet
 	}
 }
 \end
+\define show-title()
+.tc-single-tiddler-window [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-tiddler-title-icon, .tc-single-tiddler-window .tc-tiddler-frame .tc-title {
+	display: inline;
+}
+@media print {
+.tc-single-tiddler-window .tc-tiddler-frame .tc-tiddler-title {
+	display: inline;
+}
+}
+\end
+\define show-subtitle()
+.tc-single-tiddler-window [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-subtitle {
+	display: inline-block;
+}
+@media print {
+.tc-single-tiddler-window .tc-tiddler-frame .tc-subtitle {
+	display: inline-block;
+}
+}
+\end
+\define show-tags()
+.tc-single-tiddler-window [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-tags-wrapper {
+	display: inline-block;
+}
+@media print {
+.tc-single-tiddler-window .tc-tiddler-frame .tc-tags-wrapper {
+	display: inline-block;
+}
+}
+\end
 \define reveal-print-states()
+<$reveal state="$:/state/print-river!!center-titles" type="match" text="yes">
+<$list filter="[list[$:/PrintList]]">
+<<set-titles-centered>>
+</$list>
+</$reveal>
+<$reveal state="$:/state/print-river!!center-subtitles" type="match" text="yes">
+<$list filter="[list[$:/PrintList]]">
+<<set-subtitles-centered>>
+</$list>
+</$reveal>
+<$reveal state="$:/state/print-river!!center-tags" type="match" text="yes">
+<$list filter="[list[$:/PrintList]]">
+<<set-tags-centered>>
+</$list>
+</$reveal>
+<$reveal state="$:/state/print-river!!center-bodies" type="match" text="yes">
+<$list filter="[list[$:/PrintList]]">
+<<set-bodies-centered>>
+</$list>
+</$reveal>
+<$reveal state="$:/state/print-river!!print-captions" type="match" text="yes">
+<$list filter="[list[$:/PrintList]]">
+<$list filter="[<currentTiddler>get[caption]]" variable="tiddlerCaption">
+<<set-captions-as-titles>>
+</$list>
+</$list>
+</$reveal>
 <$reveal state="$(printState)$!!show-titles" type="nomatch" text="yes">
 .tc-single-tiddler-window .tc-tiddler-frame .tc-tiddler-title-icon, .tc-single-tiddler-window .tc-tiddler-frame .tc-title {
 	display: none;
@@ -52,17 +165,17 @@ tags: $:/tags/Stylesheet
 </$reveal>
 <$reveal state="$(printState)$!!show-subtitles" type="match" text="yes">
 .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-subtitle {
-	display: inline;
+	display: inline-block;
 }
 @media print {
 .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-subtitle {
-	display: inline;
+	display: inline-block;
 }
 }
 </$reveal>
 <$reveal state="$(printState)$!!show-tags" type="match" text="yes">
 .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tags-wrapper {
-	display: inline;
+	display: inline-block;
 }
 @media print {
 .tc-single-tiddler-window .tc-print-tiddler-list-view .tc-tiddler-frame .tc-tags-wrapper {
@@ -70,58 +183,6 @@ tags: $:/tags/Stylesheet
 }
 }
 </$reveal>
-\end
-\define set-tiddler-controls-visibility()
-[data-tiddler-title="$(currentTiddler)$"]:hover .tc-tiddler-title {
-	display: inline;
-}
-[data-tiddler-title="$(currentTiddler)$"]:hover .tc-tiddler-controls {
-	display: inline;
-}
-\end
-\define set-captions-as-titles()
-@media print {
-.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-titlebar .tc-tiddler-title-icon::after {
-content: "$(tiddlerCaption)$";
-}
-.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-titlebar .tc-title {
-display: none;
-}
-}
-.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-titlebar .tc-tiddler-title-icon::after {
-content: "$(tiddlerCaption)$";
-}
-.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-titlebar .tc-title {
-display: none;
-}
-\end
-\define set-titles-centered()
-.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame:not(:hover) .tc-titlebar {
-position: relative;
-width: 100%;
-text-align: center;
-}
-\end
-\define set-subtitles-centered()
-.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-subtitle {
-	display: inline-block;
-	position: relative;
-	width: 100%;
-	text-align: center;
-}
-\end
-\define set-tags-centered()
-.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-tags-wrapper {
-	display: inline-block;
-	position: relative;
-	width: 100%;
-	text-align: center;
-}
-\end
-\define set-bodies-centered()
-.tc-print-tiddler-list-view [data-tiddler-title="$(currentTiddler)$"].tc-tiddler-frame .tc-tiddler-body {
-	text-align: center;
-}
 \end
 
 .tc-print-tiddler-window-overlay p {
@@ -161,7 +222,7 @@ text-align: center;
 	border-radius: 4px;
 	background-color: white;
 }
-.tc-page-container:not(.tc-print-tiddler-list-view) .tc-page-break-button {
+.tc-page-container:not(.tc-print-tiddler-list-view) .tc-page-break-button, .tc-page-container:not(.tc-print-tiddler-list-view) .tc-print-tiddler-tools-button, .tc-page-container:not(.tc-print-tiddler-list-view) .tc-print-tiddler-tools-dropdown {
 	display: none;
 }
 .tc-print-tiddler-list-view .tc-tiddler-title .tc-tiddler-controls {
@@ -186,6 +247,44 @@ text-align: center;
 <<set-page-break-tiddlers>>
 </$list>
 
+<$list filter="[all[tiddlers]removeprefix[$:/state/print-river/single/show-title/]]">
+<<show-title>>
+</$list>
+
+<$list filter="[all[tiddlers]removeprefix[$:/state/print-river/single/show-subtitle/]]">
+<<show-subtitle>>
+</$list>
+
+<$list filter="[all[tiddlers]removeprefix[$:/state/print-river/single/show-tags/]]">
+<<show-tags>>
+</$list>
+
+<$list filter="[all[tiddlers]removeprefix[$:/state/print-river/single/center-title/]]">
+<<set-titles-centered>>
+</$list>
+
+<$list filter="[all[tiddlers]removeprefix[$:/state/print-river/single/center-subtitle/]]">
+<<set-subtitles-centered>>
+</$list>
+
+<$list filter="[all[tiddlers]removeprefix[$:/state/print-river/single/center-tags/]]">
+<<set-tags-centered>>
+</$list>
+
+<$list filter="[all[tiddlers]removeprefix[$:/state/print-river/single/center-body/]]">
+<<set-bodies-centered>>
+</$list>
+
+<$list filter="[all[tiddlers]removeprefix[$:/state/print-river/single/page-break/]]">
+<<set-page-break-tiddlers>>
+</$list>
+
+<$list filter="[all[tiddlers]removeprefix[$:/state/print-river/single/print-caption/]]">
+<$list filter="[<currentTiddler>get[caption]]" variable="tiddlerCaption">
+<<set-captions-as-titles>>
+</$list>
+</$list>
+
 <$list filter="[list[$:/PrintList]]">
 <<set-tiddler-controls-visibility>>
 </$list>
@@ -193,46 +292,4 @@ text-align: center;
 .tc-print-tiddler-list-view .tc-tiddler-frame {
 	cursor: initial;
 }
-
-<$reveal state="$:/state/print-river!!center-titles" type="match" text="yes">
-
-<$list filter="[list[$:/PrintList]]">
-<<set-titles-centered>>
-</$list>
-
-</$reveal>
-
-<$reveal state="$:/state/print-river!!center-subtitles" type="match" text="yes">
-
-<$list filter="[list[$:/PrintList]]">
-<<set-subtitles-centered>>
-</$list>
-
-</$reveal>
-
-<$reveal state="$:/state/print-river!!center-tags" type="match" text="yes">
-
-<$list filter="[list[$:/PrintList]]">
-<<set-tags-centered>>
-</$list>
-
-</$reveal>
-
-<$reveal state="$:/state/print-river!!center-bodies" type="match" text="yes">
-
-<$list filter="[list[$:/PrintList]]">
-<<set-bodies-centered>>
-</$list>
-
-</$reveal>
-
-<$reveal state="$:/state/print-river!!print-captions" type="match" text="yes">
-
-<$list filter="[list[$:/PrintList]]">
-<$list filter="[<currentTiddler>get[caption]]" variable="tiddlerCaption">
-<<set-captions-as-titles>>
-</$list>
-</$list>
-
-</$reveal>
 
