@@ -48,7 +48,7 @@ SetWidget.prototype.execute = function() {
 	this.setValue = this.getAttribute("value");
 	this.setEmptyValue = this.getAttribute("emptyValue");
 	// Set context variable
-	this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params);
+	this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,!!this.parseTreeNode.isMacroDefinition);
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
