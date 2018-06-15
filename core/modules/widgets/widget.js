@@ -104,7 +104,6 @@ Widget.prototype.getVariableInfo = function(name,options) {
 			value = $tw.utils.replaceString(value,new RegExp("\\$" + $tw.utils.escapeRegExp(param.name) + "\\$","mg"),param.value);
 		});
 		// Only substitute variable references if this variable was defined with the \define pragma
-if(value.slice(0,4) ==="{{$(") {debugger;}
 		if(variable.isMacroDefinition) {
 			value = this.substituteVariableReferences(value);			
 		}
