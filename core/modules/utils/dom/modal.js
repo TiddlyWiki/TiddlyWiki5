@@ -26,8 +26,9 @@ Display a modal dialogue
 Options include:
 	downloadLink: Text of a big download link to include
 */
-Modal.prototype.display = function(title,options) {
+Modal.prototype.display = function(title,options,currentdocument) {
 	options = options || {};
+	currentdocument = currentdocument || document;
 	var self = this,
 		refreshHandler,
 		duration = $tw.utils.getAnimationDuration(),
@@ -39,16 +40,16 @@ Modal.prototype.display = function(title,options) {
 	// Create the variables
 	var variables = $tw.utils.extend({currentTiddler: title},options.variables);
 	// Create the wrapper divs
-	var wrapper = document.createElement("div"),
-		modalBackdrop = document.createElement("div"),
-		modalWrapper = document.createElement("div"),
-		modalHeader = document.createElement("div"),
-		headerTitle = document.createElement("h3"),
-		modalBody = document.createElement("div"),
-		modalLink = document.createElement("a"),
-		modalFooter = document.createElement("div"),
-		modalFooterHelp = document.createElement("span"),
-		modalFooterButtons = document.createElement("span");
+	var wrapper = currentdocument.createElement("div"),
+		modalBackdrop = currentdocument.createElement("div"),
+		modalWrapper = currentdocument.createElement("div"),
+		modalHeader = currentdocument.createElement("div"),
+		headerTitle = currentdocument.createElement("h3"),
+		modalBody = currentdocument.createElement("div"),
+		modalLink = currentdocument.createElement("a"),
+		modalFooter = currentdocument.createElement("div"),
+		modalFooterHelp = currentdocument.createElement("span"),
+		modalFooterButtons = currentdocument.createElement("span");
 	// Up the modal count and adjust the body class
 	this.modalCount++;
 	this.adjustPageClass();
@@ -80,7 +81,7 @@ Modal.prototype.display = function(title,options) {
 					value: title
 		}}}],
 		parentWidget: $tw.rootWidget,
-		document: document,
+		document: currentdocument,
 		variables: variables,
 		importPageMacros: true
 	});
@@ -88,7 +89,7 @@ Modal.prototype.display = function(title,options) {
 	// Render the body of the message
 	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		parentWidget: $tw.rootWidget,
-		document: document,
+		document: currentdocument,
 		variables: variables,
 		importPageMacros: true
 	});
@@ -96,16 +97,16 @@ Modal.prototype.display = function(title,options) {
 	// Setup the link if present
 	if(options.downloadLink) {
 		modalLink.href = options.downloadLink;
-		modalLink.appendChild(document.createTextNode("Right-click to save changes"));
+		modalLink.appendChild(currentdocument.createTextNode("Right-click to save changes"));
 		modalBody.appendChild(modalLink);
 	}
 	// Render the footer of the message
 	if(tiddler && tiddler.fields && tiddler.fields.help) {
-		var link = document.createElement("a");
+		var link = currentdocument.createElement("a");
 		link.setAttribute("href",tiddler.fields.help);
 		link.setAttribute("target","_blank");
 		link.setAttribute("rel","noopener noreferrer");
-		link.appendChild(document.createTextNode("Help"));
+		link.appendChild(currentdocument.createTextNode("Help"));
 		modalFooterHelp.appendChild(link);
 		modalFooterHelp.style.float = "left";
 	}
@@ -129,7 +130,7 @@ Modal.prototype.display = function(title,options) {
 			}}}
 		]}],
 		parentWidget: $tw.rootWidget,
-		document: document,
+		document: currentdocument,
 		variables: variables,
 		importPageMacros: true
 	});
@@ -161,7 +162,7 @@ Modal.prototype.display = function(title,options) {
 		window.setTimeout(function() {
 			if(wrapper.parentNode) {
 				// Remove the modal message from the DOM
-				document.body.removeChild(wrapper);
+				currentdocument.body.removeChild(wrapper);
 			}
 		},duration);
 		// Don't let anyone else handle the tm-close-tiddler message
@@ -179,7 +180,7 @@ Modal.prototype.display = function(title,options) {
 		{transform: "translateY(" + (-window.innerHeight) + "px)"}
 	]);
 	// Put the message into the document
-	document.body.appendChild(wrapper);
+	currentdocument.body.appendChild(wrapper);
 	// Set up animation for the styles
 	$tw.utils.setStyle(modalBackdrop,[
 		{transition: "opacity " + duration + "ms ease-out"}
