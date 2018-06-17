@@ -58,6 +58,21 @@ exports.startup = function() {
 		var styleElement = srcDocument.createElement("style");
 		styleElement.innerHTML = styleContainer.textContent;
 		srcDocument.head.insertBefore(styleElement,srcDocument.head.firstChild);
+		// Keydown Listener for keyboard shortcuts
+		srcDocument.addEventListener("keydown",function(event) {
+			var key, action;
+			for(var i=0; i < $tw.keyboardManager.shortcutTiddlers.length; i++) {
+				if($tw.keyboardManager.shortcutParsedList[i] !== undefined && $tw.keyboardManager.checkKeyDescriptors(event,$tw.keyboardManager.shortcutParsedList[i])) {
+					key = $tw.keyboardManager.shortcutParsedList[i];
+					action = $tw.keyboardManager.shortcutActionList[i];
+				}
+			}
+			if(key !== undefined) {
+				$tw.rootWidget.invokeActionString(action,$tw.rootWidget);
+				return true;
+			}
+			return false;
+		},false);
 		// Render the text of the tiddler
 		var parser = $tw.wiki.parseTiddler(template),
 			widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument, parentWidget: $tw.rootWidget, variables: variables});
