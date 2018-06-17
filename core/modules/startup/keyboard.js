@@ -25,32 +25,32 @@ exports.startup = function() {
 			return $tw.wiki.getTiddlersWithTag("$:/tags/KeyboardShortcut");
 		}
 		// Get existing shortcut-tiddlers
-		var shortcutTiddlers = getShortcutTiddlerList(),
-			shortcutKeysList = [], // Holds the shortcut-key descriptors
-			shortcutActionList = [], // Holds the corresponding action strings
-			shortcutParsedList = []; // Holds the parsed key descriptors
+		$tw.keyboardManager.shortcutTiddlers = getShortcutTiddlerList(),
+		$tw.keyboardManager.shortcutKeysList = [], // Holds the shortcut-key descriptors
+		$tw.keyboardManager.shortcutActionList = [], // Holds the corresponding action strings
+		$tw.keyboardManager.shortcutParsedList = []; // Holds the parsed key descriptors
 
 		function updateShortcutLists(tiddlerList) {
-			shortcutTiddlers = tiddlerList;
+			$tw.keyboardManager.shortcutTiddlers = tiddlerList;
 			for(var i=0; i < tiddlerList.length; i++) {
 				var title = tiddlerList[i],
 					tiddlerFields = $tw.wiki.getTiddler(title).fields;
-				shortcutKeysList[i] = tiddlerFields.key !== undefined ? tiddlerFields.key : undefined;
-				shortcutActionList[i] = tiddlerFields.text;
-				shortcutParsedList[i] = shortcutKeysList[i] !== undefined ? $tw.keyboardManager.parseKeyDescriptors(shortcutKeysList[i]) : undefined;
+				$tw.keyboardManager.shortcutKeysList[i] = tiddlerFields.key !== undefined ? tiddlerFields.key : undefined;
+				$tw.keyboardManager.shortcutActionList[i] = tiddlerFields.text;
+				$tw.keyboardManager.shortcutParsedList[i] = $tw.keyboardManager.shortcutKeysList[i] !== undefined ? $tw.keyboardManager.parseKeyDescriptors($tw.keyboardManager.shortcutKeysList[i]) : undefined;
 			}
 		};
 
 		// Cache shortcuts and corresponding actions at startup
-		updateShortcutLists(shortcutTiddlers);
+		updateShortcutLists($tw.keyboardManager.shortcutTiddlers);
 
 		// Keydown Listener for shortcuts
 		document.addEventListener("keydown",function(event) {
 			var key, action;
-			for(var i=0; i < shortcutTiddlers.length; i++) {
-				if(shortcutParsedList[i] !== undefined && $tw.keyboardManager.checkKeyDescriptors(event,shortcutParsedList[i])) {
-					key = shortcutParsedList[i];
-					action = shortcutActionList[i];
+			for(var i=0; i < $tw.keyboardManager.shortcutTiddlers.length; i++) {
+				if($tw.keyboardManager.shortcutParsedList[i] !== undefined && $tw.keyboardManager.checkKeyDescriptors(event,$tw.keyboardManager.shortcutParsedList[i])) {
+					key = $tw.keyboardManager.shortcutParsedList[i];
+					action = $tw.keyboardManager.shortcutActionList[i];
 				}
 			}
 			if(key !== undefined) {
@@ -76,7 +76,7 @@ exports.startup = function() {
 			};
 
 			// First inspect the existing shortcut-tiddlers
-			hasChanged = hasAnyTiddlerChanged(shortcutTiddlers);
+			hasChanged = hasAnyTiddlerChanged($tw.keyboardManager.shortcutTiddlers);
 
 			// Check if there are new shortcut-actions
 			if(!hasChanged) {
@@ -104,4 +104,3 @@ exports.startup = function() {
 };
 
 })();
-
