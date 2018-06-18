@@ -26,9 +26,9 @@ Display a modal dialogue
 Options include:
 	downloadLink: Text of a big download link to include
 */
-Modal.prototype.display = function(title,options,currentdocument) {
+Modal.prototype.display = function(title,options,currentDocument) {
 	options = options || {};
-	currentdocument = currentdocument || document;
+	currentDocument = currentDocument || document;
 	var self = this,
 		refreshHandler,
 		duration = $tw.utils.getAnimationDuration(),
@@ -40,16 +40,16 @@ Modal.prototype.display = function(title,options,currentdocument) {
 	// Create the variables
 	var variables = $tw.utils.extend({currentTiddler: title},options.variables);
 	// Create the wrapper divs
-	var wrapper = currentdocument.createElement("div"),
-		modalBackdrop = currentdocument.createElement("div"),
-		modalWrapper = currentdocument.createElement("div"),
-		modalHeader = currentdocument.createElement("div"),
-		headerTitle = currentdocument.createElement("h3"),
-		modalBody = currentdocument.createElement("div"),
-		modalLink = currentdocument.createElement("a"),
-		modalFooter = currentdocument.createElement("div"),
-		modalFooterHelp = currentdocument.createElement("span"),
-		modalFooterButtons = currentdocument.createElement("span");
+	var wrapper = currentDocument.createElement("div"),
+		modalBackdrop = currentDocument.createElement("div"),
+		modalWrapper = currentDocument.createElement("div"),
+		modalHeader = currentDocument.createElement("div"),
+		headerTitle = currentDocument.createElement("h3"),
+		modalBody = currentDocument.createElement("div"),
+		modalLink = currentDocument.createElement("a"),
+		modalFooter = currentDocument.createElement("div"),
+		modalFooterHelp = currentDocument.createElement("span"),
+		modalFooterButtons = currentDocument.createElement("span");
 	// Up the modal count and adjust the body class
 	this.modalCount++;
 	this.adjustPageClass();
@@ -81,7 +81,7 @@ Modal.prototype.display = function(title,options,currentdocument) {
 					value: title
 		}}}],
 		parentWidget: $tw.rootWidget,
-		document: currentdocument,
+		document: currentDocument,
 		variables: variables,
 		importPageMacros: true
 	});
@@ -89,7 +89,7 @@ Modal.prototype.display = function(title,options,currentdocument) {
 	// Render the body of the message
 	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		parentWidget: $tw.rootWidget,
-		document: currentdocument,
+		document: currentDocument,
 		variables: variables,
 		importPageMacros: true
 	});
@@ -97,16 +97,16 @@ Modal.prototype.display = function(title,options,currentdocument) {
 	// Setup the link if present
 	if(options.downloadLink) {
 		modalLink.href = options.downloadLink;
-		modalLink.appendChild(currentdocument.createTextNode("Right-click to save changes"));
+		modalLink.appendChild(currentDocument.createTextNode("Right-click to save changes"));
 		modalBody.appendChild(modalLink);
 	}
 	// Render the footer of the message
 	if(tiddler && tiddler.fields && tiddler.fields.help) {
-		var link = currentdocument.createElement("a");
+		var link = currentDocument.createElement("a");
 		link.setAttribute("href",tiddler.fields.help);
 		link.setAttribute("target","_blank");
 		link.setAttribute("rel","noopener noreferrer");
-		link.appendChild(currentdocument.createTextNode("Help"));
+		link.appendChild(currentDocument.createTextNode("Help"));
 		modalFooterHelp.appendChild(link);
 		modalFooterHelp.style.float = "left";
 	}
@@ -130,7 +130,7 @@ Modal.prototype.display = function(title,options,currentdocument) {
 			}}}
 		]}],
 		parentWidget: $tw.rootWidget,
-		document: currentdocument,
+		document: currentDocument,
 		variables: variables,
 		importPageMacros: true
 	});
@@ -162,7 +162,7 @@ Modal.prototype.display = function(title,options,currentdocument) {
 		window.setTimeout(function() {
 			if(wrapper.parentNode) {
 				// Remove the modal message from the DOM
-				currentdocument.body.removeChild(wrapper);
+				currentDocument.body.removeChild(wrapper);
 			}
 		},duration);
 		// Don't let anyone else handle the tm-close-tiddler message
@@ -180,7 +180,7 @@ Modal.prototype.display = function(title,options,currentdocument) {
 		{transform: "translateY(" + (-window.innerHeight) + "px)"}
 	]);
 	// Put the message into the document
-	currentdocument.body.appendChild(wrapper);
+	currentDocument.body.appendChild(wrapper);
 	// Set up animation for the styles
 	$tw.utils.setStyle(modalBackdrop,[
 		{transition: "opacity " + duration + "ms ease-out"}
