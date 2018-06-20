@@ -58,7 +58,7 @@ SimpleServer.prototype.findMatchingRoute = function(request,state) {
 			match;
 		if(pathprefix) {
 			if(pathname.substr(0,pathprefix.length) === pathprefix) {
-				pathname = pathname.substr(pathprefix.length);
+				pathname = pathname.substr(pathprefix.length) || "/";
 				match = potentialRoute.path.exec(pathname);
 			} else {
 				match = false;
