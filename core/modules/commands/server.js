@@ -98,6 +98,11 @@ SimpleServer.prototype.requestHandler = function(request,response) {
 	state.wiki = self.wiki;
 	state.server = self;
 	state.urlInfo = url.parse(request.url);
+	// Optionally output debug info
+	if(self.get("debugLevel") !== "none") {
+		console.log("Request path:",JSON.stringify(state.urlInfo));
+		console.log("Request headers:",JSON.stringify(request.headers));
+	}
 	// Find the route that matches this path
 	var route = self.findMatchingRoute(request,state);
 	// Check for the username and password if we've got one
@@ -290,7 +295,8 @@ Command.prototype.execute = function() {
 		username = this.params[4],
 		password = this.params[5],
 		host = this.params[6] || "127.0.0.1",
-		pathprefix = this.params[7];
+		pathprefix = this.params[7],
+		debugLevel = this.params[8] || "none";
 	if(parseInt(port,10).toString() !== port) {
 		port = process.env[port] || 8080;
 	}
@@ -300,7 +306,8 @@ Command.prototype.execute = function() {
 		serveType: serveType,
 		username: username,
 		password: password,
-		pathprefix: pathprefix
+		pathprefix: pathprefix,
+		debugLevel: debugLevel
 	});
 	var nodeServer = this.server.listen(port,host);
 	$tw.utils.log("Serving on " + host + ":" + port,"brown/orange");
