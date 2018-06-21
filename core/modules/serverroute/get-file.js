@@ -28,7 +28,7 @@ exports.handler = function(request,response,state) {
 			if(err.code === "ENOENT") {
 				status = 404;
 				content = "File '" + filename + "' not found";
-			} if(err.code === "EACCES") {
+			} else if(err.code === "EACCES") {
 				status = 403;
 				content = "You do not have permission to access the file '" + filename + "'";
 			} else {
