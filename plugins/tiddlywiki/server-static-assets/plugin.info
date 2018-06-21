@@ -1,7 +1,0 @@
-{
-	"title": "$:/plugins/tiddlywiki/server-static-assets",
-	"description": "Static Server Assets",
-	"author": "Sukima",
-	"core-version": ">=5.0.0",
-	"list": "readme"
-}
