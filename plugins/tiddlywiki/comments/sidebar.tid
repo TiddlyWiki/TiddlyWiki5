@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/comments/sidebar
+tags: $:/tags/SideBar
+caption: Comments
+
+<div class="tc-timeline">
+<$list filter="[all[tiddlers+shadows]has[comment-target]has[modified]!sort[modified]eachday[modified]]">
+<div class="tc-menu-list-item">
+<$view field="modified" format="date" template="DDth MMM YYYY"/>
+<$list filter="[all[tiddlers+shadows]has[comment-target]sameday:modified{!!modified}!sort[modified]]">
+<div class="tc-menu-list-subitem">
+<$link>Comment by '<$view field="modifier">(anonymous)</$view>' on <$text text={{!!comment-target}}/></$link>
+</div>
+</$list>
+</div>
+</$list>
+</div>
