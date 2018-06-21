@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/commands/server.js
+title: $:/core/modules/commands/listen.js
 type: application/javascript
 module-type: command
 
-Deprecated legacy command for serving tiddlers
+Listen for HTTP requests and serve tiddlers
 
 \*/
 (function(){
@@ -15,8 +15,9 @@ Deprecated legacy command for serving tiddlers
 var Server = require("$:/core/modules/server.js").Server;
 
 exports.info = {
-	name: "server",
-	synchronous: true
+	name: "listen",
+	synchronous: true,
+	namedParameters: [] // Use named parameters, but none of them are mandatory
 };
 
 var Command = function(params,commander,callback) {
@@ -24,26 +25,24 @@ var Command = function(params,commander,callback) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
+	this.knownParameters = ["port","host","rootTiddler","renderType","serveType","username","password","pathprefix","debugLevel"];
 };
 
 Command.prototype.execute = function() {
+	var self = this;
 	if(!$tw.boot.wikiTiddlersPath) {
 		$tw.utils.warning("Warning: Wiki folder '" + $tw.boot.wikiPath + "' does not exist or is missing a tiddlywiki.info file");
 	}
 	// Set up server
+	var variables = Object.create(null);
+	$tw.utils.each(this.knownParameters,function(name) {
+		if($tw.utils.hop(self.params,name)) {
+			variables[name] = self.params[name];
+		}
+	});
 	this.server = new Server({
 		wiki: this.commander.wiki,
-		variables: {
-			port: this.params[0],
-			host: this.params[6],
-			rootTiddler: this.params[1],
-			renderType: this.params[2],
-			serveType: this.params[3],
-			username: this.params[4],
-			password: this.params[5],
-			pathprefix: this.params[7],
-			debugLevel: this.params[8]
-		}
+		variables: variables
 	});
 	var nodeServer = this.server.listen();
 	$tw.hooks.invokeHook("th-server-command-post-start",this.server,nodeServer);

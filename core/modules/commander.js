@@ -94,6 +94,13 @@ Commander.prototype.executeNextCommand = function() {
 				if(this.verbose) {
 					this.streams.output.write("Executing command: " + commandName + " " + params.join(" ") + "\n");
 				}
+				// Parse named parameters if required
+				if(command.info.namedParameters) {
+					params = this.extractNamedParameters(params,command.info.namedParameters);
+					if(typeof params === "string") {
+						return this.callback(params);
+					}
+				}
 				if(command.info.synchronous) {
 					// Synchronous command
 					c = new command.Command(params,this);
@@ -119,6 +126,31 @@ Commander.prototype.executeNextCommand = function() {
 				}
 			}
 		}
+	}
+};
+
+/*
+Given an array of parameter strings `params` in name:value format, and an array of mandatory parameter names in `mandatoryParameters`, returns a hashmap of values or a string if error
+*/
+Commander.prototype.extractNamedParameters = function(params,mandatoryParameters) {
+	var errors = [],
+		paramsByName = Object.create(null);
+	$tw.utils.each(params,function(param) {
+		var index = param.indexOf(":");
+		if(index < 1) {
+			errors.push("malformed named parameter: '" + param + "'");
+		}
+		paramsByName[param.slice(0,index)] = param.slice(index+1);
+	});
+	$tw.utils.each(mandatoryParameters,function(mandatoryParameter) {
+		if(!$tw.utils.hop(paramsByName,mandatoryParameter)) {
+			errors.push("missing mandatory parameter: '" + mandatoryParameter + "'");
+		}
+	});
+	if(errors.length > 0) {
+		return errors.join(" and\n");
+	} else {
+		return paramsByName;		
 	}
 };
 
