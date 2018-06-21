@@ -7,11 +7,12 @@ Options/SidebarLayout: 側邊欄佈局
 Options/SidebarLayout/Fixed-Fluid: 固定故事，浮動側邊欄
 Options/SidebarLayout/Fluid-Fixed: 浮動故事，固定側邊欄
 Options/StickyTitles: 置頂標題
-Options/StickyTitles/Hint: 導致條目名稱"黏著"於瀏覽器視窗的頂部。<br>注意︰此功能無法運作於 Chrome，且於 Firefox 中會導致一些佈局問題
+Options/StickyTitles/Hint: 使條目名稱"黏著"於瀏覽器視窗的頂端
 Options/CodeWrapping: 在代碼區塊中折行
 Settings: 設定
 Settings/FontFamily: 字型
 Settings/CodeFontFamily: 代碼字型
+Settings/EditorFontFamily: 編輯器字型
 Settings/BackgroundImage: 頁面背景圖像
 Settings/BackgroundImageAttachment: 頁面背景圖像附屬
 Settings/BackgroundImageAttachment/Scroll: 隨條目捲動

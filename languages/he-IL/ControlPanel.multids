@@ -1,0 +1,150 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: מתקדם
+Advanced/Hint: מידע פנימי על הטידליויקי הזה
+Appearance/Caption: תצוגה
+Appearance/Hint: דרכים להתאים את התוגה של הטידלי ויקי שלך
+Basics/AnimDuration/Prompt: זמן אנימציה:
+Basics/Caption: יסודות
+Basics/DefaultTiddlers/Prompt: טידלרי ברירת מחדל:
+Basics/DefaultTiddlers/TopHint: בחר איזה טידלרים יוצגו בהתחלה:
+Basics/Language/Prompt: השפה הנוכחית:
+Basics/NewJournal/Tags/Prompt: תגים לטידלרי יומן חדשים
+Basics/NewJournal/Title/Prompt: כותרת לטידלרי יומן חדשים:
+Basics/OverriddenShadowTiddlers/Prompt: מספר טידלרי צל שנעקפו:
+Basics/ShadowTiddlers/Prompt: מספר טידלרי צל:
+Basics/Subtitle/Prompt: תת כותרת:
+Basics/SystemTiddlers/Prompt: מספר טידלרי מערכת:
+Basics/Tags/Prompt: מספר תגיות:
+Basics/Tiddlers/Prompt: מספר טידלרים:
+Basics/Title/Prompt: הכותרת של הטידליויקי הזה:
+Basics/Username/Prompt: שם משתמש לחתימה על עריכות:
+Basics/Version/Prompt: גרסת טידליויקי:
+EditorTypes/Caption: סוגי עורכים:
+EditorTypes/Editor/Caption: עורך
+EditorTypes/Hint: הטידלרים האלה קובעים איזה עורך ישמש לכל סוג תוכן
+EditorTypes/Type/Caption: סוג
+Info/Caption: מידע
+Info/Hint: מידע על הטידליויקי הזה
+KeyboardShortcuts/Add/Caption: הוסף קיצור דרך
+KeyboardShortcuts/Add/Prompt: כתוב את קיצור הדרך כאן:
+KeyboardShortcuts/Caption: קיצורי דרך ללוח המקשים
+KeyboardShortcuts/Hint: קיצורי לוח מקשים
+KeyboardShortcuts/NoShortcuts/Caption: אין קיצורי לוח מקשים
+KeyboardShortcuts/Platform/All: כל הפלטפורמות
+KeyboardShortcuts/Platform/Linux: רק פלטפורמת לינוקס
+KeyboardShortcuts/Platform/Mac: רק פלטפורמת מקינטוש
+KeyboardShortcuts/Platform/NonLinux: רק פלטפורמת לא לינוקס
+KeyboardShortcuts/Platform/NonMac: רק פלטפורמות לא לינוקס
+KeyboardShortcuts/Platform/NonWindows: רק פלטפורמות לא חלונות
+KeyboardShortcuts/Platform/Windows: רק פלטפורמת חלונות
+KeyboardShortcuts/Remove/Hint: הסר מקש קיצור
+LoadedModules/Caption: מודולים טעונים
+LoadedModules/Hint: אלה הם הטידלרים הטעונים כעת, קשורים לטידלרי המקור שלהם. מודןלים בכתב נטוי הם ללא טידלר מקור, בדרך כלל משום שהם נקבעו בעת תהליך הטעינה.
+Palette/Caption: לוח צבעים
+Palette/Editor/Clone/Caption: שכפל
+Palette/Editor/Clone/Prompt: מומלץ שתשכפל את הפלטה הזו לפני שתערוך אותה
+Palette/Editor/Prompt: עריכה
+Palette/Editor/Prompt/Modified: פלטת צל זו שונתה
+Palette/Editor/Reset/Caption: אתחל
+Palette/HideEditor/Caption: הסתר עורך
+Palette/Prompt: פלטה נוכחית:
+Palette/ShowEditor/Caption: הראה עורך
+Parsing/Block/Caption: כללי פריסה של הבלוק
+Parsing/Caption: פריסה
+Parsing/Inline/Caption: כללי פריסה מובנים
+Parsing/Pragma/Caption: כללי פריסה פרגמה
+Plugins/Add/Caption: השג עוד פלאגינים
+Plugins/Add/Hint: התקן פלאגינים מהספרייה הרשמית
+Plugins/AlreadyInstalled/Hint: הפלאגין הזה כבר מותקן בגירסה <$text text=<<installedVersion>>/>
+Plugins/Caption: פלאגינים
+Plugins/Disable/Caption: הפסק
+Plugins/Disable/Hint: הפסק פלאגין זה בטעינת עמוד
+Plugins/Disabled/Status: (משותק)
+Plugins/Empty/Hint: אין
+Plugins/Enable/Caption: אפשר
+Plugins/Enable/Hint: אפשר פלאגין זה כשטוענים עמוד מחדש
+Plugins/Install/Caption: התקן
+Plugins/Installed/Hint: הפלאגינים המותקנים כעת:
+Plugins/Languages/Caption: שפות
+Plugins/Languages/Hint: פלאגינים של חבילות שפה
+Plugins/NoInfoFound/Hint:  ''"<$text text=<<currentTab>>/>"'' לא נמצא
+Plugins/NotInstalled/Hint: פלאגין זה לא מותקן כעת
+Plugins/OpenPluginLibrary: פתח את ספריית הפלאגין
+Plugins/Plugins/Caption: פלאגינים
+Plugins/Plugins/Hint: פלאגינים
+Plugins/Reinstall/Caption: התקן מחדש
+Plugins/Themes/Caption: תימות 
+Plugins/Themes/Hint: פלאגינים של תימות
+Saving/Caption: שמיה
+Saving/Heading: שמירה
+Saving/TiddlySpot/Advanced/Heading: קביעות מתקדמות
+Saving/TiddlySpot/BackupDir: מחיצת גיבוי
+Saving/TiddlySpot/Backups: גיבוי
+Saving/TiddlySpot/Filename: שם קובץ לטעינה
+Saving/TiddlySpot/Password: סיסמה
+Saving/TiddlySpot/ServerURL: כתובת שרת 
+Saving/TiddlySpot/UploadDir: מחיצת העלאה
+Saving/TiddlySpot/UserName: שם ויקי
+Settings/AutoSave/Caption: שמירה אוטומטית
+Settings/AutoSave/Disabled/Description: אל שתמור שינויים אוטוטמטית
+Settings/AutoSave/Enabled/Description: שמור שינויים אוטומטית
+Settings/AutoSave/Hint: שמור שינויים אוטומטית בעת עריכה
+Settings/Caption: קביעות
+Settings/DefaultSidebarTab/Caption: לשונית סרגל צד ברירת מחדך
+Settings/DefaultSidebarTab/Hint: קבע איזו לשונית בסרגל הצד מוצגת כברירת מחדל
+Settings/EditorToolbar/Caption: סרגל כלים של העורך
+Settings/EditorToolbar/Description: הראה את סרגל הכלים של העורך
+Settings/EditorToolbar/Hint: הפעל או כבה את סרגל הכלים של העורך
+Settings/Hint: קביעות אלו עוזרות לך לקסטם את התנהגות טידליויקי
+Settings/LinkToBehaviour/Caption: התנהגות הפתיחה של טידלר
+Settings/LinkToBehaviour/InsideRiver/Hint: ניווט מתוך ובתוך נהר הסיפורים
+Settings/LinkToBehaviour/OpenAbove: פתח מעל הטידלר הנוכחי
+Settings/LinkToBehaviour/OpenAtBottom: פתח בתחתית נהר הסיפורים הנוכחי
+Settings/LinkToBehaviour/OpenAtTop: פתח בראש נהר הסיפורים
+Settings/LinkToBehaviour/OpenBelow: פתח מתחת לטידלר הנוכחי
+Settings/LinkToBehaviour/OutsideRiver/Hint: ניווט מחוץ לנהר הסיפורים
+Settings/MissingLinks/Caption: קישורי ויקי
+Settings/MissingLinks/Description: אפשר קישורים לטידלרים חסרים
+Settings/MissingLinks/Hint: בחר האם לקשר לטידלרים שאינם קיימים עדיין
+Settings/NavigationAddressBar/Caption: התנהגות סרגל ניווט הכתובת
+Settings/NavigationAddressBar/Hint: התנהגות סרגל ניווט הכתובת של הדפדפן כשמנווטים לטידלר
+Settings/NavigationAddressBar/No/Description: אל תעדכן את סרגל הכתובת
+Settings/NavigationAddressBar/Permalink/Description: כלול את טידלר המטרה
+Settings/NavigationAddressBar/Permaview/Description: כלול את טידלר המטרה ואת רצף הסיפור הנוכחי
+Settings/NavigationHistory/Caption: הסטורית ניווט
+Settings/NavigationHistory/Hint: עדכן ביטרית גלישה כשמנווטים לטידלר
+Settings/NavigationHistory/No/Description: אל תעדכן היסטוריה
+Settings/NavigationHistory/Yes/Description: עדכן היסטוריה
+Settings/PerformanceInstrumentation/Caption: מעקב לביצועים
+Settings/PerformanceInstrumentation/Description: אפשר מעקב ביצועים
+Settings/TitleLinks/Caption: כותרות טידלרים
+Settings/TitleLinks/Hint: אופציונלית הצג כותרות טידלרים כקישורים
+Settings/TitleLinks/No/Description: אל תראה כותרות טידלרים כקישורים
+Settings/TitleLinks/Yes/Description: הראה כותרות טידלרים כקישורים
+Settings/ToolbarButtons/Caption: כפתורי סרגל כלים
+Settings/ToolbarButtons/Hint: ברירת מחדל של כפתורי סרגל כלים:
+Settings/ToolbarButtons/Icons/Description: כלול צללמית
+Settings/ToolbarButtons/Text/Description: כלול טקסט
+Settings/ToolbarButtonStyle/Caption: סגנון כפתור בסרגל כלים
+Settings/ToolbarButtonStyle/Hint: בחר סגנון לכפתורי סרגל כלים
+Settings/ToolbarButtonStyle/Styles/Borderless: ללא גבול
+Settings/ToolbarButtonStyle/Styles/Boxed: בקופסה
+Settings/ToolbarButtonStyle/Styles/Rounded: מעוגלים
+StoryView/Caption: מבט סיפור
+StoryView/Prompt: מבט נוכחי:
+Theme/Caption: תימה
+Theme/Prompt: תימה נוכחית:
+TiddlerFields/Caption: שדות טידלר
+TiddlerFields/Hint: רשימה המלאה של שדות טידלרים בויקי זה (including system tiddlers but excluding shadow tiddlers).
+Toolbars/Caption: סרגלי כלים
+Toolbars/EditorToolbar/Caption: סרגל כלים עורך
+Toolbars/EditorToolbar/Hint: בחר את הכפתורים שיוצגו בסרגל הכלים של העורך. שים לב שכפתורים מסויימים יוצגו רק עבור סוגים מסויימים של טידלרים
+Toolbars/EditToolbar/Caption: סרגל כלים עריכה
+Toolbars/EditToolbar/Hint: בחר את הכפתורים שיוצגו לטידלרים במצב עריכה
+Toolbars/Hint: בחר איזה כפתורי סרגל כלים יוצגו
+Toolbars/PageControls/Caption: סרגל כלים של עמוד
+Toolbars/PageControls/Hint: בחר איזה כפתורים יוצגו בסרגל הכלים העיקרי
+Toolbars/ViewToolbar/Caption: סרגל כלים של מבטים
+Toolbars/ViewToolbar/Hint: בחר איזה כפתורים יוצגו לטידלרים במצב צפייה
+Tools/Download/Full/Caption: הורד את הויקי המלא

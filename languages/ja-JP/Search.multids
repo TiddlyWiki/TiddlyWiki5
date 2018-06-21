@@ -3,7 +3,7 @@ title: $:/language/Search/
 Advanced/Matches: //<small><<resultCount>> 件一致</small>//
 DefaultResults/Caption: List
 Filter/Caption: フィルタ
-Filter/Hint: [[フィルタ|http://tiddlywiki.com/static/Filters.html]]で検索します。 
+Filter/Hint: [[フィルタ|https://tiddlywiki.com/static/Filters.html]]で検索します。 
 Filter/Matches: //<small><<resultCount>> 件一致</small>//
 Matches: //<small><<resultCount>> 件一致</small>//
 Shadows/Caption: 隠し

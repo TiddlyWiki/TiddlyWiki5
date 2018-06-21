@@ -1,6 +1,6 @@
 caption: Block Quotes
 created: 20131206154636572
-modified: 20160607092444424
+modified: 20170417165145317
 tags: WikiText
 title: Block Quotes in WikiText
 type: text/vnd.tiddlywiki
@@ -33,6 +33,13 @@ CSS classes can be added to a block quote:
 <<wikitext-example src:"<<<.myClass.another-class
 Operating systems are like a brick wall for our minds
 <<< Nobody
+">>
+
+The core includes the class `tc-big-quote` that renders block quotes with outsize double quotes:
+
+<<wikitext-example src:"<<<.tc-big-quote
+A dramatic quote
+<<< Somebody Important
 ">>
 
 ! Single-line Block Quotes

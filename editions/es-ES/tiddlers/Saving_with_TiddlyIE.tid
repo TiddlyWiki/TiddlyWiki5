@@ -18,7 +18,7 @@ type: text/vnd.tiddlywiki
 
 #> {{$:/editions/es-ES/snippets/download-empty-button}}
 
-#>Si el botón no funciona, guarda este enlace: http://tiddlywiki.com/languages/es-ES/empty.html
+#>Si el botón no funciona, guarda este enlace: https://tiddlywiki.com/languages/es-ES/empty.html
 
 #> Seguramente el navegador te pida que confirmes la descarga
 

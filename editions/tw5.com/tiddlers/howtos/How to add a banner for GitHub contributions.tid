@@ -3,7 +3,7 @@ modified: 20141123094403948
 created: 20141123094403948
 tags: Learning
 
-When you edit a tiddler on http://tiddlywiki.com you will see a small ribbon inviting you to edit the source of the tiddler on GitHub.
+When you edit a tiddler on https://tiddlywiki.com you will see a small ribbon inviting you to edit the source of the tiddler on GitHub.
 
 If you are using Node.js, you can replicate this feature for your own TiddlyWiki-based site as follows:
 

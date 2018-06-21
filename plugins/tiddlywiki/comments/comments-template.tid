@@ -1,0 +1,49 @@
+title: $:/plugins/tiddlywiki/comments/comments-template
+
+<div class="tc-comments">
+<ol class="tc-comment-list">
+<$list filter="[all[tiddlers+shadows]comment-target<currentTiddler>sort[created]!has[draft.of]]">
+<li>
+<div class="tc-comment-entry">
+<div class="tc-comment-entry-heading">
+<$link>{{!!creator}} at <$view field="modified" format="date" template="0hh:0mm:0ss DDD DDth MMM YYYY"/></$link>
+<$reveal state="$:/status/IsReadOnly" type="match" text="no" default="no" tag="span">
+<$reveal type="match" state="!!edit-mode" text="yes">
+<$button>
+<$action-setfield $tiddler=<<currentTiddler>> $field="edit-mode" $value="no"/>
+<$action-setfield $tiddler=<<currentTiddler>> $field="text" $value={{!!saved-text}}/>
+cancel
+</$button>
+<$button>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/>
+delete
+</$button>
+<$button>
+<$action-setfield $tiddler=<<currentTiddler>> $field="edit-mode" $value="no"/>
+save
+</$button>
+</$reveal>
+<$reveal type="nomatch" state="!!edit-mode" text="yes">
+<$button>
+<$action-setfield $tiddler=<<currentTiddler>> $field="edit-mode" $value="yes"/>
+<$action-setfield $tiddler=<<currentTiddler>> $field="saved-text" $value={{!!text}}/>
+edit
+</$button>
+</$reveal>
+</$reveal>
+</div>
+<div class="tc-comment-entry-body">
+<$reveal type="match" state="!!edit-mode" text="yes">
+<$edit-text tiddler=<<currentTiddler>> tag="textarea"/>
+</$reveal>
+<$reveal type="nomatch" state="!!edit-mode" text="yes">
+<$transclude tiddler=<<currentTiddler>> mode="block"/>
+<$transclude tiddler="$:/plugins/tiddlywiki/comments/add-comment-button" mode="inline"/>
+</$reveal>
+</div>
+</div>
+<$transclude tiddler="$:/plugins/tiddlywiki/comments/comments-template" mode="inline"/>
+</li>
+</$list>
+</ol>
+</div>

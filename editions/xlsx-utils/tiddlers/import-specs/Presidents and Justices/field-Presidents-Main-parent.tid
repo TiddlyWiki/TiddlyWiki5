@@ -1,0 +1,10 @@
+created: 20161021164844363
+import-field-column: State
+import-field-list-op: append
+import-field-name: tags
+import-field-source: column
+import-spec-role: field
+modified: 20161023172106663
+title: $:/_importspec/Presidents and Justices/Presidents/Main/parent
+type: text/vnd.tiddlywiki
+

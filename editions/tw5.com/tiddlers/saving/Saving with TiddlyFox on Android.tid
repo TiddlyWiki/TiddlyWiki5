@@ -1,6 +1,6 @@
 created: 20140103134551508
-modified: 20160601160224998
-tags: Saving
+modified: 20171113131640857
+tags: [[Saving with TiddlyFox]]
 title: Saving with TiddlyFox on Android
 type: text/vnd.tiddlywiki
 
@@ -13,7 +13,7 @@ type: text/vnd.tiddlywiki
 # Install this extension to be able to save the TiddlyWiki file locally:
 #* https://addons.mozilla.org/en-GB/android/addon/save-link-menus/
 # [[Download]] an empty TiddlyWiki by saving this link:
-#* http://tiddlywiki.com/empty.html
+#* https://tiddlywiki.com/empty.html
 #> (to save the link, ensure you've installed the "save-link-menus" extension and then long-press on the link and choose "Save link")
 # When the file has downloaded, click on it within the notification tray or the download manager application
 # Choose to open the file in Firefox (rather than the default Android viewer)

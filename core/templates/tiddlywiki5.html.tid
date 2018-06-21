@@ -4,7 +4,7 @@ title: $:/core/templates/tiddlywiki5.html
 <!doctype html>
 {{$:/core/templates/MOTW.html}}<html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />		<!-- Force IE standards mode for Intranet and HTA - should be the first meta -->
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="application-name" content="TiddlyWiki" />
 <meta name="generator" content="TiddlyWiki" />
@@ -21,6 +21,7 @@ title: $:/core/templates/tiddlywiki5.html
 
 <!--~~ Raw markup ~~-->
 {{{ [all[shadows+tiddlers]tag[$:/core/wiki/rawmarkup]] [all[shadows+tiddlers]tag[$:/tags/RawMarkup]] ||$:/core/templates/plain-text-tiddler}}}
+{{{ [all[shadows+tiddlers]tag[$:/tags/RawMarkupWikified]] ||$:/core/templates/raw-static-tiddler}}}
 </head>
 <body class="tc-body">
 <!--~~ Static styles ~~-->

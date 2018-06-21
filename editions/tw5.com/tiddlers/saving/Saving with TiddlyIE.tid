@@ -1,6 +1,10 @@
+caption: ~TiddlyIE
 created: 20131211220000000
-modified: 20160601111802610
-tags: [[Saving on InternetExplorer]]
+delivery: Browser Extension
+description: Browser extension for Internet Explorer
+method: save
+modified: 20171113110036278
+tags: Saving InternetExplorer
 title: Saving with TiddlyIE
 type: text/vnd.tiddlywiki
 
@@ -9,7 +13,7 @@ type: text/vnd.tiddlywiki
 # Restart Internet Explorer. IE will prompt you to enable the TiddlyIE add-on.
 #> You may also see a prompt to enable the //Microsoft Script Runtime//
 # [[Download]] an empty TiddlyWiki by saving this link:
-#> http://tiddlywiki.com/empty.html
+#> https://tiddlywiki.com/empty.html
 # Locate the file you just downloaded
 #* You may rename it, but be sure to keep the `.html` or `.htm` extension
 # Open the file in Internet Explorer

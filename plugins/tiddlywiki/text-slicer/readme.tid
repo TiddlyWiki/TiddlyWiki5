@@ -1,5 +1,0 @@
-title: $:/plugins/tiddlywiki/text-slicer/readme
-
-//''This plugin is under active development, and is subject to change in the future''. It is currently only intended for advanced users. The tools are in the early stages of development, and likely to need some customisation to do what you need.//
-
-This plugin contains tools to help slice up long texts into individual tiddlers.

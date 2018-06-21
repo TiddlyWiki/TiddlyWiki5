@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/savetrail/settings
+
+
+<$checkbox tiddler="$:/config/SaveTrailPlugin/enable" field="text" checked="yes" unchecked="no"> Enable automatic saving of modified tiddlers</$checkbox>
+
+<$checkbox tiddler="$:/config/SaveTrailPlugin/enable-drafts" field="text" checked="yes" unchecked="no"> Include automatic saving of draft tiddlers (warning: generates a lot of download files)</$checkbox>

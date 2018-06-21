@@ -10,11 +10,11 @@ Permalinks allow direct links to individual tiddlers within a TiddlyWiki.
 
 The simplest form of permalink ({{$:/core/images/permalink-button}}) is a single target tiddler title appended to the base URL with `#`:
 
-http://tiddlywiki.com/#HelloThere
+https://tiddlywiki.com/#HelloThere
 
 The tiddler title can contain spaces if required:
 
-[[http://tiddlywiki.com/#Using TiddlyWiki on Node.js]]
+[[https://tiddlywiki.com/#Using TiddlyWiki on Node.js]]
 
 Note that double square brackets are not required around the target tiddler title; however, if present they are silently removed.
 
@@ -22,17 +22,17 @@ Note that double square brackets are not required around the target tiddler titl
 
 The permalink can also specify the story list of tiddlers that should be opened alongside the target tiddler as a [[TiddlerFilter|Filters]]:
 
-[[http://tiddlywiki.com/#TiddlerFields:Tiddlers TiddlerTags TiddlerFields ContentType]]
+[[https://tiddlywiki.com/#TiddlerFields:Tiddlers TiddlerTags TiddlerFields ContentType]]
 
 If the target tiddler isn't present in the story list then it is automatically inserted at the top. This means that the following two examples both target the tiddler `Tiddlers` within the story sequence `Tiddlers`, `Tags`, `TiddlerFields`:
 
-[[http://tiddlywiki.com/#Tiddlers:Tags TiddlerFields]]
+[[https://tiddlywiki.com/#Tiddlers:Tags TiddlerFields]]
 
-[[http://tiddlywiki.com/#Tiddlers:Tiddlers Tags TiddlerFields]]
+[[https://tiddlywiki.com/#Tiddlers:Tiddlers Tags TiddlerFields]]
 
 It is also possible to specify a story filter without specifying a target tiddler for navigation:
 
-<a href="http://tiddlywiki.com/#:[tags[task]]" rel="noopener noreferrer">~http://tiddlywiki.com/#:[tags[task]]</a>
+<a href="https://tiddlywiki.com/#:[tags[task]]" rel="noopener noreferrer">~https://tiddlywiki.com/#:[tags[task]]</a>
 
 ! About URL encoding
 

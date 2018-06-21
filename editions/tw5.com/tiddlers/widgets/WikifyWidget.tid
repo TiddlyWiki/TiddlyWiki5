@@ -1,8 +1,9 @@
-title: WikifyWidget
-created: 20160321144949700
-modified: 20160321144949700
-tags: Widgets
 caption: wikify
+created: 20160321144949700
+modified: 20161017122117062
+tags: Widgets
+title: WikifyWidget
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
@@ -23,6 +24,7 @@ The available output types are:
 
 |!Keyword |!Description |
 |text |Return the plain text of the rendered output (ie HTML tags are omitted) |
+|formattedtext |Return the plain text with simple text formatting of the rendered output (ie HTML tags are omitted) |
 |html |Return the rendered HTML of the output |
 |parsetree |Return a formatted JSON representation of the parse tree |
 |widgettree |Return a formatted JSON representation of the widget tree |

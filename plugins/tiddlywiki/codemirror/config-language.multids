@@ -1,0 +1,22 @@
+title: $:/language/codemirror/
+
+homeUrl: http://codemirror.net
+addOnUrl: http://codemirror.net/doc/manual.html#addons
+configUrl: http://codemirror.net/doc/manual.html#config
+controlPanel/hint: These settings let you customise the behaviour of [[CodeMirror|$:/plugins/tiddlywiki/codemirror]].
+controlPanel/usage: Usage information
+editorFont/hint: Editor font family
+editorFont/info: Set the font family for the ~CodeMirror text-editor
+controlPanel/keyboard: Keyboard shortcuts
+keyMap/hint: ~CodeMirror keymap
+keyMap/info: ~The Keyboard KeyMap used within the ~CodeMirror text-editor
+lineNumbers/hint: Enable line numbers
+lineNumbers/info: Whether to show line numbers to the left of the editor.
+lineWrapping/hint: Enable line wrapping
+lineWrapping/info: Whether CodeMirror should scroll or wrap for long lines. Defaults to `false` (scroll).
+showCursorWhenSelecting/hint: Show cursor, when selecting
+showCursorWhenSelecting/info: Whether the cursor should be drawn when a selection is active.
+styleActiveLine/hint: Highlight active line
+styleActiveLine/info: Whether or not to highlight the active text-editor line
+theme/hint: Select a theme
+theme/info: Choose between ~CodeMirror themes

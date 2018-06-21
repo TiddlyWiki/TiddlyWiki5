@@ -1,6 +1,6 @@
 caption: HTML
 created: 20131205160816081
-modified: 20160622112259272
+modified: 20161021102422842
 tags: WikiText
 title: HTML in WikiText
 type: text/vnd.tiddlywiki
@@ -14,25 +14,29 @@ This is my nice and simple block of text. HelloThere
 </article>
 ```
 
+[[Widgets share the same syntax as HTML tags|Widgets in WikiText]], and so the following information applies to them, too.
+
 ! Content Parsing
 
-The content of an HTML element will be parsed in inline mode unless the opening tag is followed by two linebreaks, in which case it is parsed in block mode. (Inline mode means that block mode formatting such as tables, lists and headings is not recognised).
+The content of an HTML element will be parsed in inline mode unless the opening tag is followed by two linebreaks, in which case it will be parsed in block mode. (Inline mode means that block mode formatting such as tables, lists and headings is not recognised).
 
 ! Attributes
 
-Attributes in HTML tags can be specified as a literal, a transclusion or a macro invocation. For example, here the value of the `href` attribute will be set to the value of the tiddler MyLinkDestination:
+In an extension of conventional HTML syntax, attributes of elements/widgets can be specified in several different ways: 
 
-```
-<a href={{MyLinkDestination}} rel="noopener noreferrer">link</a>
-```
+* a literal string
+* a transclusion of a TextReference
+* a transclusion of a [[macro/variable|Macros in WikiText]]
+* as the result of a [[Filter Expression]]
 
-Note that the link should have the `rel` attribute set to `noopener noreferrer` to maintain privacy of the URLs of private TiddlyWiki's (eg on Dropbox). See https://mathiasbynens.github.io/rel-noopener/ for more information.
+!! Literal Attribute Values
 
-Here an attribute is specified as a macro invocation:
+Literal attribute values can use several different styles of quoting:
 
-```
-<a href=<<MyMacro "Brian">> rel="noopener noreferrer">link</a>
-```
+* Single quotes (eg `attr='value'`)
+* Double quotes (eg `attr="value"`)
+* Tripe double quotes (eg `attr="""value"""`)
+* No quoting is necessary for values that do not contain spaces (eg `attr=value`)
 
 Literal attribute values can include line breaks. For example:
 
@@ -43,7 +47,7 @@ Rodentville,
 Ratland."/>
 ```
 
-By using triple-double quotes you can specify attribute values that include single double quotes. For example:
+By using triple-double quotes you can specify attribute values that contain single double quotes. For example:
 
 ```
 <div data-address="""Mouse House,
@@ -51,3 +55,34 @@ By using triple-double quotes you can specify attribute values that include sing
 Rodentville,
 Ratland."""/>
 ```
+
+!! Transcluded Attribute Values
+
+Transcluded attribute values are indicated with double curly braces around a TextReference. For example:
+
+```
+attr={{tiddler}}
+attr={{!!field}}
+attr={{tiddler!!field}}
+```
+
+!! Variable Attribute Values
+
+Variable attribute values are indicated with double angle brackets around a [[macro invocation|Macro Calls in WikiText]]. For example:
+
+```
+<div title=<<MyMacro "Brian">>>
+...
+</div>
+```
+
+!! Filtered Attribute Values
+
+Filtered attribute values are indicated with triple curly braces around a [[Filter Expression]]. The value will be the first item in the resulting list, or the empty string if the list is empty.
+
+This example shows how to add a prefix to a value:
+
+```
+<$text text={{{ [<currentTiddler>]addPrefix[$:/myprefix/]] }}}>
+```
+

@@ -2,7 +2,7 @@ title: $:/language/Modals/SaveInstructions
 type: text/vnd.tiddlywiki
 subtitle: Save your work
 footer: <$button message="tm-close-tiddler">Close</$button>
-help: http://tiddlywiki.com/static/SavingChanges.html
+help: https://tiddlywiki.com/static/SavingChanges.html
 
 इस विकि में आपके परिवर्तन एक ~ टिड्लीविकि HTML फ़ाइल के रूप में सहेजा जाना चाहिए।
 

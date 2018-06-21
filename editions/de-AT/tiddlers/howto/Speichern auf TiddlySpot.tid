@@ -11,8 +11,8 @@ TiddlySpot ist ein freier Hosting Service von Simon und Daniel Baird. Er ist bei
 ~TiddlyWiki5 wird momentan noch nicht als Standard Wiki angeboten, Sie können aber folgende Schritte verwenden um ~TiddlyWiki auf ~TiddlySpot zu speichern.
 
 # Erstellen Sie ein Wiki auf http://tiddlyspot.com/ und merken Sie sich den Namen und Ihr Passwort!
-# Für Österreich: öffnen Sie http://tiddlywiki.com/languages/de-AT/empty.html in Ihrem Browser.
-#* Für Deutschland: http://tiddlywiki.com/languages/de-DE/empty.html
+# Für Österreich: öffnen Sie https://tiddlywiki.com/languages/de-AT/empty.html in Ihrem Browser.
+#* Für Deutschland: https://tiddlywiki.com/languages/de-DE/empty.html
 # Wählen Sie im [[Control-Panel|$:/ControlPanel]], den "Speichern" Tab und tragen Sie im "~TiddlySpot" Bereich, den Wiki Namen und das Passwort ein.
 # Klicken Sie den "Speichern" Button. Nach einiger Zeit, bekommen Sie rechts oben die Mitteilung "Wiki gespeichert". Das Speichern kann je nach Internetverbindung und Wiki Größe einige Sekunden dauern. 
 #* //Das Erstellen eines neuen Wikis funktioniert nicht mit Firefox, da die Sicherheitseinstellungen diese Vorgehensweise nicht erlauben. Google Chrome kann verwendet werden. Ein späteres Editieren von tiddlyspot.com ist auch mit Firefox möglich!//

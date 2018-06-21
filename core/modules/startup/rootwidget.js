@@ -30,6 +30,10 @@ exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-notify",function(event) {
 		$tw.notifier.display(event.param,{variables: event.paramObject});
 	});
+	// Install the copy-to-clipboard  mechanism
+	$tw.rootWidget.addEventListener("tm-copy-to-clipboard",function(event) {
+		$tw.utils.copyToClipboard(event.param);
+	});
 	// Install the scroller
 	$tw.pageScroller = new $tw.utils.PageScroller();
 	$tw.rootWidget.addEventListener("tm-scroll",function(event) {
@@ -38,10 +42,10 @@ exports.startup = function() {
 	var fullscreen = $tw.utils.getFullScreenApis();
 	if(fullscreen) {
 		$tw.rootWidget.addEventListener("tm-full-screen",function(event) {
-			if(document[fullscreen._fullscreenElement]) {
-				document[fullscreen._exitFullscreen]();
+			if(event.event.target.ownerDocument[fullscreen._fullscreenElement]) {
+				event.event.target.ownerDocument[fullscreen._exitFullscreen]();
 			} else {
-				document.documentElement[fullscreen._requestFullscreen](Element.ALLOW_KEYBOARD_INPUT);
+				event.event.target.ownerDocument.documentElement[fullscreen._requestFullscreen](Element.ALLOW_KEYBOARD_INPUT);
 			}
 		});
 	}

@@ -1,124 +1,40 @@
 created: 20130825214200000
-modified: 20150728104424501
+modified: 20161015134454785
 tags: [[TiddlyWiki on Node.js]]
 title: TiddlyWikiFolders
 type: text/vnd.tiddlywiki
 
 As well as traditional single file wikis, [[TiddlyWiki on Node.js]] supports wikis that are stored as a folder of individual tiddler files.
 
-! Wiki folder files and folders
+! Wiki Folder Structure
 
 Wiki folders can contain the following files and folders:
 
-* ''tiddlywiki.info'' - JSON file containing metadata for the wiki
+* ''tiddlywiki.info'' - JSON file containing metadata for the wiki -- see [[tiddlywiki.info Files]]
 * ''\tiddlers'' - folder containing tiddler files comprising the wiki
-* ''\plugins'' - folder containing [[plugin folders|PluginMechanism]] to be included in the wiki
+* ''\plugins'' - folder containing [[plugin folders|PluginFolders]] to be included in the wiki
+* ''\languages'' - folder containing [[plugin folders|PluginFolders]] for language plugins to be included in the wiki
+* ''\themes'' - folder containing [[plugin folders|PluginFolders]] for theme plugins to be included in the wiki
 
-Only the ''tiddlywiki.info'' file is required, the ''tiddlers'' and ''plugins'' folders are optional. Any files and folders not listed above are ignored.
+Only the ''tiddlywiki.info'' file is required; everything else is optional. Any files and folders not listed above are ignored.
 
-!! Content of `tiddlywiki.info` file
+!! Plugin processing
 
-The `tiddlywiki.info` file in a wiki folder contains a JSON object comprising the following fields:
-
-* ''plugins'' - an array of plugin names to be included in the wiki
-* ''themes'' - an array of theme names to be included in the wiki
-* ''languages'' - an array of language names to be included in the wiki
-* ''includeWikis'' - an array of references to external wiki folders to be included in the wiki
-* ''build'' - a hashmap of named build targets, each defined by an array of command tokens (see BuildCommand)
-* ''config'' - an optional hashmap of configuration options (see below)
-
-!!! ''includeWikis''
-
-The entries in the ''includeWikis'' array can be either a string specifying the relative path to the wiki, or an object with the following fields:
-
-* ''path'' - relative path to wiki folder
-* ''read-only'' - set //true// to prevent the tiddlers in the included wiki from being modified. The modifications will be written to the directory specified in ''default-tiddler-location'', described below
-
-!!! ''build''
-
-Note that the build targets of included wikis are merged if a target of that name isn't defined in the current `tiddlywiki.info` file.
-
-!!! ''config''
-
-Configuration options include:
-
-* ''default-tiddler-location'' - a string path to the default location for the filesystem adaptor to save new tiddlers (resolved relative to the wiki folder)
-
-* ''retain-original-tiddler-path'' - If true, the server will generate a tiddler [[$:/config/OriginalTiddlerPaths]] containing the original file paths of each tiddler in the wiki
-
-!!! Example
-
-For example:
+To be usable in the browser, plugins just need to be included in the wiki. For wikis that are generated on the server, TiddlyWikiFolders can contain a [[tiddlywiki.info file|tiddlywiki.info Files]] that identifies the plugins to be included in this wiki:
 
 ```
 {
 	"plugins": [
-		"tiddlywiki/tiddlyweb",
-		"tiddlywiki/filesystem"
-	],
-	"includeWikis": [
-		"../tw5.com"
-	],
-	"build": {
-		"index": [
-			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
-		"favicon": [
-			"--savetiddler","$:/favicon.ico","favicon.ico",
-			"--savetiddler","$:/green_favicon.ico","static/favicon.ico"]
-	},
-	"config": {
-		"retain-original-tiddler-path": true	
-	}
-}
-```
-
-!! Content of `tiddlers` folder
-
-All the TiddlerFiles in the `tiddlers` folder are read into the wiki at startup. Sub-folders are scanned recursively for TiddlerFiles. Newly created tiddlers are stored in TiddlerFiles directly beneath the `tiddlers` folder, unless [[configured otherwise|Customising Tiddler File Naming]].
-
-Sub-folders within the `tiddlers` folder can also be given a `tiddlywiki.files` JSON file that overrides the default processing for that folder. The file format is illustrated with this example:
-
-```
-{
-	"tiddlers": [
-		{
-			"file": "d3.min.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/d3/d3.js",
-				"module-type": "library"
-			},
-			"prefix": "var d3;if($tw.browser){\n",
-			"suffix": "}\nexports.d3 = d3;\n"
-		},
-		{
-			"file": "cloud/d3.layout.cloud.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/d3/d3.layout.cloud.js",
-				"module-type": "library"
-			}
-		},
-		{
-			"file": "local/mytiddler.tid",
-			"isTiddlerFile": true,
-			"fields": {
-				"title": "A different title"
-			}
-		}
-	],
-	"directories": [
-		"../../mytiddlers/store"
+		"tiddlywiki/slider",
+		"tiddlytools/chooser"
 	]
 }
 ```
 
-The JSON data consists of an object with a `tiddlers` property that contains an array of information about each tiddler to be loaded into the wiki. That information consists of:
+Plugins names refer to plugin folders listed in TiddlyWiki5's root `plugins` folder. Plugins can also be included manually by copying them into the `plugins` subfolder of the wiki.
 
-* The relative or absolute path to the file to include as either:
-** `file`: the file containing the tiddler
-** `isTiddlerFile`: if `true`, the file will be deserialised to extract the tiddlers. Otherwise, the raw content of the file is assigned to the `text` field without any parsing
-* `fields`: an object containing fields that override any provided in the tiddler file
-* `prefix` & `suffix`: (optional) specify strings to be prefixed and suffixed to the tiddler file text content
+!! Processing of `tiddlers` folder
 
-The ''directories'' property allows a list of directories to be specified. All tiddlers will be recursively loaded from each directory listed.
+All the TiddlerFiles in the `tiddlers` folder are read into the wiki at startup. Sub-folders are scanned recursively for TiddlerFiles. Newly created tiddlers are stored in TiddlerFiles directly beneath the `tiddlers` folder, unless [[configured otherwise|Customising Tiddler File Naming]].
+
+The default processing for sub-folders within the `tiddlers` folder can  be overridden by providing a JSON file called `tiddlywiki.files` -- see [[tiddlywiki.files Files]].

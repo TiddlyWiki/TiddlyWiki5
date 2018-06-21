@@ -218,6 +218,7 @@ exports.parseAttribute = function(source,pos) {
 	// Define our regexps
 	var reAttributeName = /([^\/\s>"'=]+)/g,
 		reUnquotedAttribute = /([^\/\s<>"'=]+)/g,
+		reFilteredValue = /\{\{\{(.+?)\}\}\}/g,
 		reIndirectValue = /\{\{([^\}]+)\}\}/g;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
@@ -243,29 +244,37 @@ exports.parseAttribute = function(source,pos) {
 			node.type = "string";
 			node.value = stringLiteral.value;
 		} else {
-			// Look for an indirect value
-			var indirectValue = $tw.utils.parseTokenRegExp(source,pos,reIndirectValue);
-			if(indirectValue) {
-				pos = indirectValue.end;
-				node.type = "indirect";
-				node.textReference = indirectValue.match[1];
+			// Look for a filtered value
+			var filteredValue = $tw.utils.parseTokenRegExp(source,pos,reFilteredValue);
+			if(filteredValue) {
+				pos = filteredValue.end;
+				node.type = "filtered";
+				node.filter = filteredValue.match[1];
 			} else {
-				// Look for a unquoted value
-				var unquotedValue = $tw.utils.parseTokenRegExp(source,pos,reUnquotedAttribute);
-				if(unquotedValue) {
-					pos = unquotedValue.end;
-					node.type = "string";
-					node.value = unquotedValue.match[1];
+				// Look for an indirect value
+				var indirectValue = $tw.utils.parseTokenRegExp(source,pos,reIndirectValue);
+				if(indirectValue) {
+					pos = indirectValue.end;
+					node.type = "indirect";
+					node.textReference = indirectValue.match[1];
 				} else {
-					// Look for a macro invocation value
-					var macroInvocation = $tw.utils.parseMacroInvocation(source,pos);
-					if(macroInvocation) {
-						pos = macroInvocation.end;
-						node.type = "macro";
-						node.value = macroInvocation;
-					} else {
+					// Look for a unquoted value
+					var unquotedValue = $tw.utils.parseTokenRegExp(source,pos,reUnquotedAttribute);
+					if(unquotedValue) {
+						pos = unquotedValue.end;
 						node.type = "string";
-						node.value = "true";
+						node.value = unquotedValue.match[1];
+					} else {
+						// Look for a macro invocation value
+						var macroInvocation = $tw.utils.parseMacroInvocation(source,pos);
+						if(macroInvocation) {
+							pos = macroInvocation.end;
+							node.type = "macro";
+							node.value = macroInvocation;
+						} else {
+							node.type = "string";
+							node.value = "true";
+						}
 					}
 				}
 			}

@@ -1,0 +1,29 @@
+title: $:/plugins/tiddlywiki/twitter/usage/widgettimeline
+tags: $:/tags/TwitterUsage
+caption: Widget Timeline
+
+!! Embedding Widget Timelines
+
+To power an embedded timeline with a widget configuration generated at https://twitter.com/settings/widgets.
+
+|!Attribute |!Values |!Default |!Notes |
+|''type'' |"timelineWidget" |none |"timelineWidget" |
+|''widgetId'' |ID of the widget |none |~|
+|''chrome'' |"noheader", "nofooter", "noborders", "transparent", "noscrollbar" |none |Toggle the display of design elements in the widget. This parameter is a space-separated list of values |
+|''height'' |Positive integer |600 |Set a fixed height of the embedded widget |
+|''tweetLimit'' |Range: 1-20 |none |Render a timeline statically, displaying only n number of Tweets |
+|''borderColor'' |Hexadecimal color |Varies by theme |Adjust the color of borders inside the widget |
+|''ariaPolite'' |"polite", "assertive", "rude" |"polite" |Apply the specified aria-polite behavior to the rendered timeline. New Tweets may be added to the top of a timeline, affecting screen readers |
+|''conversation'' |"none", "all" |"all" |Tweets in response to another Tweet will display a compact version of the previous Tweet by default. Use "none" to hide the parent Tweet in the conversation |
+|''cards'' |"hidden", "visible"|visible |Hide photos, videos, and link previews powered by Twitter Cards |
+|''width'' |Positive integer |"auto", derived from container size |Set the maximum width of the embedded Tweet |
+|''align''	|"left", "right", "center"	|none |Float the embedded Tweet to the left or right so that text wraps around it, or align center so it floats in the middle of a paragraph |
+|''theme'' |"dark", "light" |"light"	|Toggle the default color scheme of the embedded Tweet |
+|''linkColor'' |Hexadecimal color |"#2b7bb9" |Adjust the color of links, including hashtags and @mentions, inside the widget |
+|''lang'' |An ISO 639-1 language code |en |The language in which to render a widget, if supported |
+|''dnt'' |"true", "false" |false |Enable Do Not Track for this widget |
+|''related'' |Any comma-separated list of valid Twitter screen names |none |A list of Twitter screen names to be suggested for following after a Tweet or Tweet action is posted |
+|''via'' |Any valid Twitter screen name |none |A Twitter user mentioned in the default Tweet text as via @user where appropriate |
+
+<<twitter-usage """<$twitter type="timelineWidget" widgetId="570670821065379840"/>
+""">>

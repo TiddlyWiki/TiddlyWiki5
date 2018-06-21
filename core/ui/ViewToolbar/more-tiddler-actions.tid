@@ -3,6 +3,7 @@ tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/down-arrow}} {{$:/language/Buttons/More/Caption}}
 description: {{$:/language/Buttons/More/Hint}}
 
+\whitespace trim
 \define config-title()
 $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 \end
@@ -11,9 +12,13 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 {{$:/core/images/down-arrow}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>prefix[yes]]">
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/More/Caption}}/></span>
+<span class="tc-btn-text">
+<$text text=" "/>
+<$text text={{$:/language/Buttons/More/Caption}}/>
+</span>
 </$list>
-</$button><$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="below" animate="yes">
+</$button>
+<$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="belowleft" animate="yes">
 
 <div class="tc-drop-down">
 
@@ -27,7 +32,11 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 
 <$reveal type="match" state=<<config-title>> text="hide">
 
+<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
+
 <$transclude tiddler=<<listItem>> mode="inline"/>
+
+</$set>
 
 </$reveal>
 

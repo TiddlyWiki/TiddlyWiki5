@@ -9,6 +9,7 @@ heading-4: ctrl-4
 heading-5: ctrl-5
 heading-6: ctrl-6
 link: ctrl-L
+linkify: alt-shift-L
 list-bullet: ctrl-shift-L
 list-number: ctrl-shift-N
 mono-block: ctrl-shift-M
@@ -21,3 +22,4 @@ stamp: ctrl-S
 strikethrough: ctrl-T
 subscript: ctrl-shift-B
 superscript: ctrl-shift-P
+transcludify: alt-shift-T

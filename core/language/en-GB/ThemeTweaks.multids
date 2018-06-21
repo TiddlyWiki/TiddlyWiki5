@@ -7,11 +7,12 @@ Options/SidebarLayout: Sidebar layout
 Options/SidebarLayout/Fixed-Fluid: Fixed story, fluid sidebar
 Options/SidebarLayout/Fluid-Fixed: Fluid story, fixed sidebar
 Options/StickyTitles: Sticky titles
-Options/StickyTitles/Hint: Causes tiddler titles to "stick" to the top of the browser window. Caution: Does not work at all with Chrome, and causes some layout issues in Firefox
+Options/StickyTitles/Hint: Causes tiddler titles to "stick" to the top of the browser window
 Options/CodeWrapping: Wrap long lines in code blocks
 Settings: Settings
 Settings/FontFamily: Font family
 Settings/CodeFontFamily: Code font family
+Settings/EditorFontFamily: Editor font family
 Settings/BackgroundImage: Page background image
 Settings/BackgroundImageAttachment: Page background image attachment
 Settings/BackgroundImageAttachment/Scroll: Scroll with tiddlers

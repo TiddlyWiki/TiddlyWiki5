@@ -67,7 +67,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
 		var handled = false;
-		if(self.invokeActions(this,event)) {
+		if(self.invokeActions(self,event)) {
 			handled = true;
 		}
 		if(self.to) {
@@ -95,6 +95,15 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		}
 		return handled;
 	},false);
+	// Make it draggable if required
+	if(this.dragTiddler || this.dragFilter) {
+		$tw.utils.makeDraggable({
+			domNode: domNode,
+			dragTiddlerFn: function() {return self.dragTiddler;},
+			dragFilterFn: function() {return self.dragFilter;},
+			widget: this
+		});
+	}
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -131,12 +140,13 @@ ButtonWidget.prototype.navigateTo = function(event) {
 		navigateFromNode: this,
 		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 		},
-		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1)
+		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1),
+		event: event
 	});
 };
 
 ButtonWidget.prototype.dispatchMessage = function(event) {
-	this.dispatchEvent({type: this.message, param: this.param, tiddlerTitle: this.getVariable("currentTiddler")});
+	this.dispatchEvent({type: this.message, param: this.param, tiddlerTitle: this.getVariable("currentTiddler"), event: event});
 };
 
 ButtonWidget.prototype.triggerPopup = function(event) {
@@ -171,6 +181,8 @@ ButtonWidget.prototype.execute = function() {
 	this.selectedClass = this.getAttribute("selectedClass");
 	this.defaultSetValue = this.getAttribute("default","");
 	this.buttonTag = this.getAttribute("tag");
+	this.dragTiddler = this.getAttribute("dragTiddler");
+	this.dragFilter = this.getAttribute("dragFilter");
 	// Make child widgets
 	this.makeChildWidgets();
 };
@@ -180,7 +192,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes["class"] || changedAttributes.selectedClass || changedAttributes.style || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup])) {
+	if(changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes["class"] || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup])) {
 		this.refreshSelf();
 		return true;
 	}

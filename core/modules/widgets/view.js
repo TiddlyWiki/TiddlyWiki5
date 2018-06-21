@@ -51,15 +51,16 @@ ViewWidget.prototype.execute = function() {
 	this.viewIndex = this.getAttribute("index");
 	this.viewFormat = this.getAttribute("format","text");
 	this.viewTemplate = this.getAttribute("template","");
+	this.viewMode = this.getAttribute("mode","block");
 	switch(this.viewFormat) {
 		case "htmlwikified":
-			this.text = this.getValueAsHtmlWikified();
+			this.text = this.getValueAsHtmlWikified(this.viewMode);
 			break;
 		case "plainwikified":
-			this.text = this.getValueAsPlainWikified();
+			this.text = this.getValueAsPlainWikified(this.viewMode);
 			break;
 		case "htmlencodedplainwikified":
-			this.text = this.getValueAsHtmlEncodedPlainWikified();
+			this.text = this.getValueAsHtmlEncodedPlainWikified(this.viewMode);
 			break;
 		case "htmlencoded":
 			this.text = this.getValueAsHtmlEncoded();
@@ -134,16 +135,25 @@ ViewWidget.prototype.getValueAsText = function() {
 	return this.getValue({asString: true});
 };
 
-ViewWidget.prototype.getValueAsHtmlWikified = function() {
-	return this.wiki.renderText("text/html","text/vnd.tiddlywiki",this.getValueAsText(),{parentWidget: this});
+ViewWidget.prototype.getValueAsHtmlWikified = function(mode) {
+	return this.wiki.renderText("text/html","text/vnd.tiddlywiki",this.getValueAsText(),{
+		parseAsInline: mode !== "block",
+		parentWidget: this
+	});
 };
 
-ViewWidget.prototype.getValueAsPlainWikified = function() {
-	return this.wiki.renderText("text/plain","text/vnd.tiddlywiki",this.getValueAsText(),{parentWidget: this});
+ViewWidget.prototype.getValueAsPlainWikified = function(mode) {
+	return this.wiki.renderText("text/plain","text/vnd.tiddlywiki",this.getValueAsText(),{
+		parseAsInline: mode !== "block",
+		parentWidget: this
+	});
 };
 
-ViewWidget.prototype.getValueAsHtmlEncodedPlainWikified = function() {
-	return $tw.utils.htmlEncode(this.wiki.renderText("text/plain","text/vnd.tiddlywiki",this.getValueAsText(),{parentWidget: this}));
+ViewWidget.prototype.getValueAsHtmlEncodedPlainWikified = function(mode) {
+	return $tw.utils.htmlEncode(this.wiki.renderText("text/plain","text/vnd.tiddlywiki",this.getValueAsText(),{
+		parseAsInline: mode !== "block",
+		parentWidget: this
+	}));
 };
 
 ViewWidget.prototype.getValueAsHtmlEncoded = function() {

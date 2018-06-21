@@ -1,0 +1,12 @@
+created: 20161021171230908
+import-field-column: Column Name
+import-field-list-op: append
+import-field-name: tags
+import-field-source: constant
+import-field-type: string
+import-field-value: States
+import-spec-role: field
+modified: 20161023172043708
+title: $:/_importspec/Presidents and Justices/States/Main/tags
+type: text/vnd.tiddlywiki
+

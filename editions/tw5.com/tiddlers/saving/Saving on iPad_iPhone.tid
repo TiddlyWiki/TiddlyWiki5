@@ -1,22 +1,30 @@
+caption: Quine
 created: 20131129101027725
-modified: 20160602024857740
-tags: Saving
+delivery: App
+description: iPad/iPhone app for working with TiddlyWiki
+method: save
+modified: 20171113105954683
+tags: Saving iOS
 title: Saving on iPad/iPhone
 type: text/vnd.tiddlywiki
 
-The iPad/iPhone app ''TWEdit'' makes it possible to edit and save changes to TiddlyWiki5, including working offline without a network connection. [[Download it here|https://itunes.apple.com/gb/app/twedit/id409607956?mt=8]].
+The iPad/iPhone app ''Quine'' makes it possible to edit and save changes to TiddlyWiki5, including working offline without a network connection. [[Download it here|https://itunes.apple.com/us/app/quine/id1228682923?mt=8]].
 
 Instructions for use:
 
-# Open TWEdit
-# Touch the title in the centre of the toolbar in order
-#* A text box should appear allowing you to enter a URL
-# Enter the URL `http://tiddlywiki.com/empty.html`
-# When the empty TiddlyWiki has loaded, touch the ''save'' icon (it's the second icon from the right on the top toolbar)
-#* An alert box should appear allowing you to enter a local filename
-# Enter the filename you wish to use for the document (ending with `.html`)
-# Try creating a new tiddler using the ''new tiddler'' {{$:/core/images/new-button}} button in the sidebar. Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''ok'' button
+# Open Quine
+# On iPad
+#* Touch the file button (<) or swipe from the left of the screen to open the file list
+# On iPhone
+#* The file list will show automatically unless a wiki is already open
+# Touch the new file button (+) in the file list window to create a new TiddlyWiki5 file
+# Swipe any file item from the right to see a list of additional "actions" possible for that file
+# Touch any listed file item or folder to open it - wikis will open in Quine's custom browser
+# When you have an open TiddlyWiki5:
+# Try creating a new tiddler using the ''new tiddler'' {{$:/core/images/new-button}} button in the sidebar
+# Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''ok'' button
 # Save your changes by clicking the {{$:/core/images/save-button}} ''save changes'' button in the sidebar
 #* A confirmation message should appear at the top right of the window
+# Touch "Done" when done editing a wiki
 
-//Note that TWEdit is published independently of TiddlyWiki//
+//Note that Quine is published independently of TiddlyWiki//

@@ -12,11 +12,11 @@ Les permaliens offrent la possibilités de faire des liens directs vers des tidd
 
 La forme la plus simple d'un permalien vers un tiddler cible unique est son nom précédé de "#" accolé au lien URL de base <<:>>
 
-http://tiddlywiki.com/#HelloThere
+https://tiddlywiki.com/#HelloThere
 
 Le titre du tiddler peut contenir des espaces si nécessaire<<:>>
 
-[[http://tiddlywiki.com/#Using TiddlyWiki on Node.js]]
+[[https://tiddlywiki.com/#Using TiddlyWiki on Node.js]]
 
 Remarquez que les doubles crochets ne sont pas requis autour du titre du tiddler cible<<;>> cependant, s'ils sont présents ils seront supprimés automatiquement.
 
@@ -26,17 +26,17 @@ Remarquez que les doubles crochets ne sont pas requis autour du titre du tiddler
 
 Le permalien peut aussi spécifier le déroulé de la liste de tiddlers qui seront ouverts avec le [[Tiddler Filtre|Filters]] cible<<:>>
 
-[[http://tiddlywiki.com/#TiddlerFields:Tiddlers TiddlerTags TiddlerFields ContentType]]
+[[https://tiddlywiki.com/#TiddlerFields:Tiddlers TiddlerTags TiddlerFields ContentType]]
 
 Si le tiddler cible est absent du déroulé de la liste, il est alors automatiquement inséré au début. Ce qui veut dire que les exemples suivants ciblent tous les deux le tiddler `Tiddlers` avec le déroulé de la suite `Tiddlers`, `Tags`, `TiddlerFields`:
 
-[[http://tiddlywiki.com/#Tiddlers:Tags TiddlerFields]]
+[[https://tiddlywiki.com/#Tiddlers:Tags TiddlerFields]]
 
-[[http://tiddlywiki.com/#Tiddlers:Tiddlers Tags TiddlerFields]]
+[[https://tiddlywiki.com/#Tiddlers:Tiddlers Tags TiddlerFields]]
 
 Il est aussi possible de spécifier, pour les besoins de la navigation, un déroulé filtre sans spécifier de tiddler cible<<:>>
 
-<a href="http://tiddlywiki.com/#:[tags[task]]">~http://tiddlywiki.com/#:[tags[task]]</a>
+<a href="https://tiddlywiki.com/#:[tags[task]]">~https://tiddlywiki.com/#:[tags[task]]</a>
 
 ! Concernant le codage URL
 

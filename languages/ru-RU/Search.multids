@@ -2,7 +2,7 @@ title: $:/language/Search/
 
 DefaultResults/Caption: Список
 Filter/Caption: Фильтр
-Filter/Hint: Поиск с помощью [[фильтров|http://tiddlywiki.com/static/Filters.html]]
+Filter/Hint: Поиск с помощью [[фильтров|https://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small><<resultCount>> совпадений</small>//
 Matches: //<small><<resultCount>> совпадений</small>//
 Shadows/Caption: Встроенные

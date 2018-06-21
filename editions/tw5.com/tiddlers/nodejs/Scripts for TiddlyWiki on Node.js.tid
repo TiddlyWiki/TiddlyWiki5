@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 ! Script Files
 
-The TiddlyWiki5 repository contains several scripts in the `bin` folder that you can use to automate common tasks, or as a useful starting point for your own scripts. See [[Scripts for building tiddlywiki.com]] for details of the scripts used to build and release http://tiddlywiki.com/.
+The TiddlyWiki5 repository contains several scripts in the `bin` folder that you can use to automate common tasks, or as a useful starting point for your own scripts. See [[Scripts for building tiddlywiki.com]] for details of the scripts used to build and release https://tiddlywiki.com/.
 
 All the scripts expect to be run from the root folder of the repository.
 

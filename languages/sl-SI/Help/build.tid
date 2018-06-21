@@ -1,0 +1,11 @@
+title: $:/language/Help/build
+description: Samodejno zaženite nastavljene ukaze
+
+Ta ukaz zgradi določene cilje gradnje za trenutni wiki. Če ni določen noben cilj gradnje, bodo zgrajeni vsi razpoložljivi cilji.
+
+```
+--build <target> [<target> ...]
+```
+
+Cilji gradnje so definirani v datoteki `tiddlywiki.info` v mapi wiki.
+

@@ -1,0 +1,11 @@
+title: $:/language/Help/xlsx-import
+description: Import tiddlers from an XLSX spreadsheet file
+
+Imports tiddlers from an XLSX spreadsheet file
+
+```
+--xlsx-import <filename> <importSpec>
+```
+
+* ''filename'': filename of the `.xlsx` file
+* ''title'': title of the import specification tiddler to be used for the import

@@ -17,10 +17,12 @@ A quick and dirty HTTP function; to be refactored later. Options are:
 	url: URL to retrieve
 	type: GET, PUT, POST etc
 	callback: function invoked with (err,data)
+	returnProp: string name of the property to return as first argument of callback
 */
 exports.httpRequest = function(options) {
 	var type = options.type || "GET",
 		headers = options.headers || {accept: "application/json"},
+		returnProp = options.returnProp || "responseText",
 		request = new XMLHttpRequest(),
 		data = "",
 		f,results;
@@ -41,7 +43,7 @@ exports.httpRequest = function(options) {
 		if(this.readyState === 4) {
 			if(this.status === 200 || this.status === 201 || this.status === 204) {
 				// Success!
-				options.callback(null,this.responseText,this);
+				options.callback(null,this[returnProp],this);
 				return;
 			}
 		// Something went wrong

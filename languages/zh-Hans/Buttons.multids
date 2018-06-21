@@ -14,6 +14,8 @@ CloseOthers/Caption: 关闭其他
 CloseOthers/Hint: 关闭其他条目
 ControlPanel/Caption: 控制台
 ControlPanel/Hint: 开启控制台
+CopyToClipboard/Caption: 复制到剪贴板
+CopyToClipboard/Hint: 将此文本复制到剪贴板
 Delete/Caption: 删除
 Delete/Hint: 删除此条目
 Edit/Caption: 编辑
@@ -54,6 +56,8 @@ Info/Caption: 信息
 Info/Hint: 显示此条目的信息
 Language/Caption: 语言
 Language/Hint: 选择用户介面语言
+Manager/Caption: 条目管理器
+Manager/Hint: 开启条目管理器
 More/Caption: 更多
 More/Hint: 更多动作
 NewHere/Caption: 添加子条目
@@ -76,6 +80,8 @@ Permalink/Caption: 引用链接
 Permalink/Hint: 设置浏览器网址栏为直接链接到此条目
 Permaview/Caption: 永久链接
 Permaview/Hint: 设置浏览器网址栏为直接链接到当前所有已开启条目
+Print/Caption: 打印页面
+Print/Hint: 打印当前页面
 Refresh/Caption: 刷新
 Refresh/Hint: 执行维基的完全刷新
 Save/Caption: 确定
@@ -90,6 +96,12 @@ ShowSideBar/Caption: 显示侧边栏
 ShowSideBar/Hint: 显示侧边栏
 TagManager/Caption: 标签管理
 TagManager/Hint: 标签管理
+Timestamp/Caption: 时间戳记
+Timestamp/Hint: 选择修改是否更新时间戳记
+Timestamp/On/Caption: 时间戳记开启
+Timestamp/On/Hint: 条目被修改时，更新时间戳记
+Timestamp/Off/Caption: 时间戳记关闭
+Timestamp/Off/Hint: 条目被修改时，不更新时间戳记
 Theme/Caption: 布景主题
 Theme/Hint: 选择布景主题
 Bold/Caption: 粗体
@@ -129,6 +141,8 @@ LineWidth/Caption: 线宽
 LineWidth/Hint: 设置绘画的线条宽度
 Link/Caption: 链接
 Link/Hint: 创建维基文字链接
+Linkify/Caption: 维基链接
+Linkify/Hint: 套用维基链接于所选文字
 ListBullet/Caption: 符号清单
 ListBullet/Hint: 套用符号清单格式于包含所选文本的列
 ListNumber/Caption: 数字清单
@@ -149,6 +163,8 @@ PreviewType/Caption: 预览类型
 PreviewType/Hint: 选择预览类型
 Quote/Caption: 引言
 Quote/Hint: 套用引言文本格式于包含所选文本的列
+RotateLeft/Caption: 向左旋转
+RotateLeft/Hint: 图像向左旋转 90 度
 Size/Caption: 图像大小
 Size/Caption/Height: 高度︰
 Size/Caption/Resize: 调整图像的大小
@@ -165,5 +181,7 @@ Subscript/Caption: 下标
 Subscript/Hint: 套用下标格式于所选文本
 Superscript/Caption: 上标
 Superscript/Hint: 套用上标格式于所选文本
+Transcludify/Caption: 嵌入
+Transcludify/Hint: 套用嵌入于所选文字
 Underline/Caption: 下划线
 Underline/Hint: 套用下划线格式于所选文本

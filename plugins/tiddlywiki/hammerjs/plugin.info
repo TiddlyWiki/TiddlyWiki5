@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/hammerjs",
+	"description": "HammerJS library by Jorik Tangelder (Eight Media)",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"list": "readme license"
+}

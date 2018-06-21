@@ -1,7 +1,7 @@
 title: $:/language/
 
 BinaryWarning/Prompt: ਇਹ tiddler ਬਾਇਨਰੀ ਦਾ ਡਾਟਾ ਰੱਖਦਾ ਹੈ
-ClassicWarning/Hint: ਇਹ tiddler 5. ਹੋਰ ਜਾਣਕਾਰੀ ਲਈ http://tiddlywiki.com/static/Upgrading.html ਵੇਖੋ TiddlyWiki ਵਰਜਨ ਨਾਲ ਅਨੁਕੂਲ ਪੂਰੀ ਨਹੀ ਹੈ, ਜੋ ਕਿ TiddlyWiki ਕਲਾਸਿਕ ਵਿਕਿ ਟੈਕਸਟ ਫਾਰਮੈਟ ਹੈ, ਵਿੱਚ ਲਿਖਿਆ ਗਿਆ ਹੈ.
+ClassicWarning/Hint: ਇਹ tiddler 5. ਹੋਰ ਜਾਣਕਾਰੀ ਲਈ https://tiddlywiki.com/static/Upgrading.html ਵੇਖੋ TiddlyWiki ਵਰਜਨ ਨਾਲ ਅਨੁਕੂਲ ਪੂਰੀ ਨਹੀ ਹੈ, ਜੋ ਕਿ TiddlyWiki ਕਲਾਸਿਕ ਵਿਕਿ ਟੈਕਸਟ ਫਾਰਮੈਟ ਹੈ, ਵਿੱਚ ਲਿਖਿਆ ਗਿਆ ਹੈ.
 ClassicWarning/Upgrade/Caption:  ਅੱਪਗਰੇਡ
 CloseAll/Button: ਸਭ ਨੂੰ  ਬੰਦ ਕਰੋ 
 ConfirmCancelTiddler: ਤੁਸੀ "<$ ਪਾਠ = << >> ਦੇ ਸਿਰਲੇਖ />" tiddler ਲਈ ਤਬਦੀਲੀ ਰੱਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?

@@ -1,0 +1,9 @@
+created: 20161021164839163
+import-field-name: role
+import-field-source: constant
+import-field-value: president
+import-spec-role: field
+modified: 20161023172105656
+title: $:/_importspec/Presidents and Justices/Presidents/Main/role
+type: text/vnd.tiddlywiki
+

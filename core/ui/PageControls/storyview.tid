@@ -20,20 +20,6 @@ $:/core/images/storyview-$(storyview)$
 </span>
 <$reveal state=<<qualify "$:/state/popup/storyview">> type="popup" position="below" animate="yes">
 <div class="tc-drop-down">
-<$linkcatcher to="$:/view">
-<$list filter="[storyviews[]]" variable="storyview">
-<$link to=<<storyview>>>
-<span class="tc-drop-down-bullet">
-<$reveal type="match" state="$:/view" text=<<storyview>>>
-&bull;
-</$reveal>
-<$reveal type="nomatch" state="$:/view" text=<<storyview>>>
-&nbsp;
-</$reveal>
-</span>
-<$transclude tiddler=<<icon>>/>
-<$text text=<<storyview>>/></$link>
-</$list>
-</$linkcatcher>
+{{$:/snippets/viewswitcher}}
 </div>
 </$reveal>

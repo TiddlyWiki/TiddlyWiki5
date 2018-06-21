@@ -11,11 +11,14 @@ core/ui/Buttons/refresh: hide
 core/ui/Buttons/import: hide
 core/ui/Buttons/language: hide
 core/ui/Buttons/tag-manager: hide
+core/ui/Buttons/manager: hide
 core/ui/Buttons/more-page-actions: hide
 core/ui/Buttons/new-journal: hide
 core/ui/Buttons/new-image: hide
 core/ui/Buttons/palette: hide
 core/ui/Buttons/permaview: hide
+core/ui/Buttons/print: hide
 core/ui/Buttons/storyview: hide
+core/ui/Buttons/timestamp: hide
 core/ui/Buttons/theme: hide
 core/ui/Buttons/unfold-all: hide

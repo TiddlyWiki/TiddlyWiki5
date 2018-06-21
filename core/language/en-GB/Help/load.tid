@@ -1,10 +1,11 @@
 title: $:/language/Help/load
 description: Load tiddlers from a file
 
-Load tiddlers from 2.x.x TiddlyWiki files (`.html`), `.tiddler`, `.tid`, `.json` or other files
+Load tiddlers from TiddlyWiki (`.html`), `.tiddler`, `.tid`, `.json` or other local files. The processing applied to incoming files is determined by the file extension. Use the alternative `import` command if you need to specify the deserializer and encoding explicitly.
 
 ```
 --load <filepath>
+--load <dirpath>
 ```
 
 To load tiddlers from an encrypted TiddlyWiki file you should first specify the password with the PasswordCommand. For example:

@@ -1,0 +1,16 @@
+caption: encodeuricomponent
+created: 20161017152747386
+modified: 20161017152809900
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input with URI component encoding applied
+op-parameter: 
+op-parameter-name: 
+op-purpose: apply URI component encoding to a string
+tags: [[Filter Operators]] [[String Operators]]
+title: encodeuricomponent Operator
+type: text/vnd.tiddlywiki
+from-version: 5.1.14
+
+See Mozilla Developer Network for details of the [[encodeURIComponent|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent]] operation.
+
+<<.operator-examples "encodeuricomponent">>

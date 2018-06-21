@@ -1,0 +1,196 @@
+modified: 20160305222940000
+created: 20160111034749658
+title: Using ES2016 for Writing Plugins
+type: text/vnd.tiddlywiki
+
+With the advent of ES2015 (also known as ES6) and the availability of [[Babel.js|http://babeljs.io/]] plugin developers can leverage ES2015 when writing TiddlyWiki plugins. Understanding the nuances between TiddlyWiki's module sandbox and how Babel compiles it's output ready for a module system like ~CommonJS/AMD.
+
+Please understand how the PluginMechanism works since this is all about writing a plugin using Babel to compile the output that will be included in the final TiddlyWiki (for example [[TiddlyWiki on Node.js]]).
+
+!! Installing and Configuring Babel
+
+You can install Babel using
+
+```
+$ npm install --global babel-cli babel-presets-es2015
+```
+
+If your developing the plugin for inclusion to the npm registry (or for convenience) you can avoid the global install and save it to the local `package.json` file with
+
+```
+$ npm install --save-dev babel-cli babel-presets-es2015
+```
+
+Inside your plugin project edit the file `.babelrc` and enter the following:
+
+```json
+{
+  "presets": [
+    "es2015"
+  ]
+}
+```
+
+<<.tip "I found it easier to manage my plugins as if they were ''npm'' modules complete with a `package.json` that compiles the output via `npm run build`. See [[npm-scripts documentation|https://docs.npmjs.com/misc/scripts]] for details.">>
+
+!! Compiling the Output
+
+Pick a folder to store the ES2015 JavaScript and a folder to output the TiddlyWiki ready JavaScript. In this example I will use `src` and `lib` respectively. With Babel installed and working I can compile all the JavaScript in the `src` folder to the `lib` folder by running this command:
+
+```
+$ babel src -d lib
+```
+
+<<.warning "Babel will //not// copy over non-JavaScript files. It is up to the developer to include all the supporting files themselves. Babel only converts the ~JavaScript files (ending in `.js`) from the `src` folder to the `lib` folder.">>
+
+!! Imports and Exports
+
+In a plugin written pre-ES2015 one would `require` a module through TiddlyWiki like so:
+
+```javascript
+var Widget = require('$:/core/modules/widgets/widget.js').widget;
+```
+
+But in ES2015 the following would look like:
+
+```javascript
+import { widget as Widget } from '$:/core/modules/widgets/widget.js';
+```
+
+Conveniently when Babel compiles this it will essentially output the same JavaScript as the first pre-ES2016 code.
+
+Also, in ES2016 you are required to declare your imports at the beginning and can not dynamically `require` things. This means you can not have an `import` statement in an if block or in a function. If that functionality is desired then you will have to go back to using the `require()` statement directly. But conciser that by doing so that you may be missing an oppertunity to make your code cleaner and better.
+
+Exporting is the same thing. Instead of assigning to a property of the `exports` variable you use the `export` keyword:
+
+```javascript
+export { MyWidget as mywidget };
+```
+
+<<.tip "It is illegal JavaScript to export with a name that is not an identifier even though it is ok to use a non-identifier (string) as a property key. What this means is if you want a widget to have a dash in it then you have to revert to using the `exports['my-widget'] = MyWidget;` syntax.">>
+
+It is important to understand that in ES2016 the ''default'' export is not supported in TiddlyWiki. This is mostly because the core code expects specific properties to be attached to the `exports` variable. Bable's `export` conversion plays well with this //except// with the default export.
+
+!! Classes
+
+In the example of a widget ES2016 plays well with class inheritance. To contrast the typical Widget definition would look something like this:
+
+```javascript
+function MyWidget() {
+  Widget.call(this);
+}
+MyWidget.prototype = new Widget();
+MyWidget.prototype.render = function(parent, nextSibling) {…};
+// And so on…
+```
+
+With classes this ceremony can be tightened up:
+
+```javascript
+class MyWidget extends Widget {
+  render(parent, nextSibling) {…}
+  // And so on…
+}
+```
+
+With classes one //could// eliminate much of the `Widget.execute()` cruft using <<.def "getters">>. I found this to be more readable then the typical mass assignment to `this`. It gave me the added benefit of allowing calculations in properties that normally would have conflated the `execute()` method. For example developing a compound property like so:
+
+```javascript
+class NameWidget extends Widget {
+  get title() { return this.getAttribute('title'); }
+  get firstName() { return this.getAttribute('first'); }
+  get lastName() { return this.getAttribute('last'); }
+  get fullName() { return `${this.title}. ${this.firstName} ${this.lastName}`; }
+}
+```
+
+!!! Non Class Modules
+
+For non class modules you can use the `export` keyword. Here is a simple [[Startup Module|ModuleType]]:
+
+```javascript
+export function startup() {
+  // Do stuff here
+}
+```
+
+Or in the case of a [[Macro|https://tiddlywiki.com/dev/#JavaScript%20Macros]]:
+
+```javascript
+export const name = 'my-macro';
+export const params = {};
+export function run() {…}
+```
+
+!! Polyfills
+
+ES2015 comes with some features that are part of the JavaScript core objects. These are not supported by all browsers. To use these features in [[most browsers|BrowserCompatibility]] you will need a <<.def "polyfill">>. Babel has a polyfill package that you can include. See [[Adding Babel Polyfill to TiddlyWiki]] for how to accomplish this.
+
+!! Example
+
+Here is an example ES2015 plugin/widget that will show the time and update it:
+
+```javascript
+
+/*\
+title: $:/plugins/sukima/clock-widget.js
+type: application/javascript
+module-type: widget
+
+A updating time stamp
+
+\*/
+import { widget as Widget } from '$:/core/modules/widgets/widget.js';
+
+class ClockWidget extends Widget {
+  constructor(parseTreeNode, options) {
+    super(parseTreeNode, options);
+    this.logger = new $tw.utils.Logger('clock-widget');
+  }
+
+  render(parent, nextSibling) {
+    if (!$tw.browser) { return; }
+    this.logger.log('Rendering clock DOM nodes');
+    this.computeAttributes()
+    this.parentDomNode = parent;
+    this.domNode = $tw.utils.domMaker('div', {
+      document: this.document,
+      class: 'tc-clock-widget'
+    });
+    parent.insertBefore(this.domNode, nextSibling);
+    this.tick();
+  }
+
+  tick() {
+    this.logger.log('Tick!');
+    if (!document.contains(this.domNode)) {
+      // Apparently the widget was removed from the DOM. Do some clean up.
+      return this.stop();
+    }
+    this.start();
+    this.domNode.innerHTML = this.dateString;
+  }
+
+  start() {
+    if (!this.clockTicker) {
+      this.logger.log('Starting clock');
+      this.clockTicker = setInterval(this.tick.bind(this), 1000);
+    }
+  }
+
+  stop() {
+    this.logger.log('Stopping clock');
+    clearInterval(this.clockTicker);
+    this.clockTicker = null;
+  }
+
+  get dateString() {
+    const format = 'DDth MMM YYYY at hh12:0mm:0ss am';
+    return $tw.utils.formatDateString(new Date(), format);
+  }
+}
+
+export { ClockWidget as clock };
+```
+
+<<.tip "Adding an extra space at the top causes Babel's output the preamble tiddler comment without any obscene indenting. Although it doesn't affect TiddlyWiki any, when reading the output it can be confusing when the tiddler information is rendered off the screen to the right.">>

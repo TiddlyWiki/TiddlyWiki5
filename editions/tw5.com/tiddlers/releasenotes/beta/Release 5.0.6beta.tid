@@ -16,7 +16,7 @@ caption: 5.0.6-beta
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3d79eb87d1c609195b8c518c08e167994b20a346]] an [[$:/AdvancedSearch]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bd7db62da052ec6262c3319eaa11f00e5c452a7b]] support for specifying hostname for the ServerCommand
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b9e80a270b7f67db816e9b06e2f71f9c9dd86c17]] a first pass at generating an all-in-one static HTML representation of a wiki, complete with internal anchor links for wiki links
-** See http://tiddlywiki.com/alltiddlers.html
+** See https://tiddlywiki.com/alltiddlers.html
 * [[Hide|https://github.com/Jermolene/TiddlyWiki5/commit/44568dc6ef64be8c1370df8f682777c2c805fee7]] encryption features when running on the server
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/2ee50939447cf2948e49e5905520943ea4075975]] [[double backticks|Formatting in WikiText]] as an alternative for delimitting inline code (thanks to StephanHradek)
 

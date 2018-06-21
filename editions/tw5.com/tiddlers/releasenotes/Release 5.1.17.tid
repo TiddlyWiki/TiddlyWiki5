@@ -1,0 +1,49 @@
+caption: 5.1.17
+created: 20180512104329616
+modified: 20180512104329616
+released: 20180512104329616
+tags: ReleaseNotes
+title: Release 5.1.17
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.16...v5.1.17]]//
+
+!! Reversions
+
+After encountering significant problems we've reluctantly decided to [[remove support|https://github.com/Jermolene/TiddlyWiki5/commit/737e9ae4cb136ca3f473624f64142bd83e532b9b]] for multiple sub-operators with the [[is Operator]] that was added in v5.1.16.
+
+!! Usability Improvements
+
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/7468ad7acf1ca2280ad89ee014484928e160f54b]] appearance of ~TiddlyWiki's "red screen of embarrassment"
+
+!! Bug Fixes
+
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/e6466b2c320cdab46a74aa343b6c56c5783e3f94]] problem with extraneous space in new journal titles
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/b95aa6ec6ad51672e9ed26ab94d7fe799698782c]] problem with repeated use of "new journal" with text set
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/f9be417204695d26d5f458fbc53870b2adb9a372]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/46e8e4343acba876b9540b9fc77a5c85faa10939]]) problem with Etag handling
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3240]] problem with [[is Operator]] introduced in 5.1.16
+* [[Restored|https://github.com/Jermolene/TiddlyWiki5/commit/b2173d11ea550ba4a5f2fd89b1388b392e37dd51]] default of the preview pane being hidden
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/3245]] incorrect plugin library location
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3226]] animation timing problem with reveal widget that sometimes caused the sidebar not to show when requested
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3244]] problem with saving with non-Dat URI schemes
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/4c89bbabbe5f5665e92258b560ed7380ae06d9e8]] deletion of `$:/status/UserName` when logged out
+
+!! Node.js Improvements
+
+* [[Stopped|https://github.com/Jermolene/TiddlyWiki5/pull/2893]] clearing [[$:/status/UserName]] when logged out
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/ab5e5795e88892b5687885c8ead8d6959082399b]] bug with attempting to lazy load tiddlers that do not qualify for syncing
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/2c7f467514cb75aefa87912620575deabde1a530]] support for `/*\` style metadata comments at the top of `*.CSS` files
+
+! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* [[@BramChen|https://github.com/BramChen]]
+* [[@BurningTreeC|https://github.com/BurningTreeC]]
+* [[@danielo515|https://github.com/danielo515]]
+* [[@icarito|https://github.com/icarito]]
+* [[@ldorigo|https://github.com/ldorigo]]
+* [[@mklauber|https://github.com/mklauber]]
+* [[@sukima|https://github.com/sukima]]
+* [[@tobibeer|https://github.com/tobibeer]]
+* [[@twMat|https://github.com/twMat]]

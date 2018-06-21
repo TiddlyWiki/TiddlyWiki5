@@ -1,8 +1,12 @@
 created: 20130825213500000
 modified: 20160610082610879
-tags: Saving
+tags: Saving Android Chrome Firefox InternetExplorer iOS Linux Mac Opera PHP Safari Windows
 title: Saving on TiddlySpot
 type: text/vnd.tiddlywiki
+delivery: Service
+method: save
+caption: TiddlySpot
+description: Free online service for hosting TiddlyWiki files
 
 TiddlySpot is a free hosting service for TiddlyWiki documents from Simon and Daniel Baird. The easiest way to get started is to sign up for a new wiki at http://tiddlyspot.com - by default you'll get the latest release of TiddlyWiki Classic.
 

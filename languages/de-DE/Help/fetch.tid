@@ -1,0 +1,44 @@
+title: $:/language/Help/fetch
+description: Fetch tiddlers from wiki by URL
+
+Abrufen eines oder mehrerer Dateien über HTTP/HTTPS. Importieren der tiddler, die dem Filter entsprechen. Umwandeln der ankommenden Titel, wenn nötig.
+
+```
+--fetch file <url> <import-filter> <transform-filter>
+--fetch files <url-filter> <import-filter> <transform-filter>
+--fetch raw-file <url> <transform-filter>
+--fetch raw-files <url-filter> <transform-filter>
+```
+
+Wird der `file` Parameter verwendet, wird nur eine einzelne Datei geholt. Der erste Parameter ist die URL von der die Datei ''importiert'' werden soll.
+
+Wird der `files` Parameter verwendet, werden mehrere Dateien geholt. In diesem Fall ist der erste Parameter ein Filter, der eine Liste von URLs ergibt, von denen die Dateien gelesen werden sollen. Zum Beispiel: Mehrere Tiddler sind getagged mit: `remote-server` und enthalten ein Feld: `url`. ... Der Filter `[tag[remote-server]get[url]]` wird alle verfügbaren URLs ansprechen.
+
+Werden die `raw-file` oder `raw-files` Varianten verwendet, wird der Klartext der Datei importiert. Es wird nicht versucht die Import-logik anzuwenden.
+
+Der `<import-filter>` Parameter spezifiziert jene Tiddler, die importiert werden sollen. Ohne diesen Parameter wird standardmäßig `[all[tiddlers]]` als Filter verwendet.
+
+Der `<transform-filter>` Parameter, spezifiziert einen Filter, mit dem der Tiddler Name verändert werden kann. zB: `[addprefix[$:/meinImport/]]` würde `$:/meinImport/` allen Tiddler Namen voran stellen.
+
+Wird `--verbose` vor dem `--fetch` Befehl benutzt, dann werden erweiterte Diagnose Infos ausgegeben.
+
+Hinweis: ~TiddlyWiki wird ''keine'' veralteten plugins importieren.
+
+Das folgende Beispiel wird alle "nicht-system" Tiddler von https://tiddlywiki.com holen und in ein `JSON` file speichern.
+
+```
+tiddlywiki --verbose --fetch file "https://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
+```
+
+Das folgende Beispiel holt die "favicon" Datei von tiddlywiki.com und speichert sie als "output.ico".
+
+```
+tiddlywiki --verbose --fetch raw-file "https://tiddlywiki.com/favicon.ico" "[[Icon Tiddler]]" --savetiddler "Icon Tiddler" output.ico
+```
+
+''Wichtig!''
+
+Es wird darauf hingewiesen, dass der Parameter `"[[Icon Tiddler]]"` für den `--fetch` Befehl zusätzliche Klammern enthält. Er wird hier als Tranformations-Filter verwendet!
+
+Der zweite `"Icon Tiddler"` Parameter für `--savetiddler` enthält keine eckigen Klammern. Er wird als Dateiname verwendet
+

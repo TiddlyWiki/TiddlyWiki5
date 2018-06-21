@@ -20,7 +20,7 @@ Parses an operation (i.e. a run) within a filter string
 Returns the new start position, after the parsed operation
 */
 function parseFilterOperation(operators,filterString,p) {
-	var operator, operand, bracketPos, curlyBracketPos;
+	var nextBracketPos, operator;
 	// Skip the starting square bracket
 	if(filterString.charAt(p++) !== "[") {
 		throw "Missing [ in filter expression";
@@ -33,14 +33,14 @@ function parseFilterOperation(operators,filterString,p) {
 			operator.prefix = filterString.charAt(p++);
 		}
 		// Get the operator name
-		var nextBracketPos = filterString.substring(p).search(/[\[\{<\/]/);
+		nextBracketPos = filterString.substring(p).search(/[\[\{<\/]/);
 		if(nextBracketPos === -1) {
 			throw "Missing [ in filter expression";
 		}
 		nextBracketPos += p;
 		var bracket = filterString.charAt(nextBracketPos);
 		operator.operator = filterString.substring(p,nextBracketPos);
-		
+
 		// Any suffix?
 		var colon = operator.operator.indexOf(':');
 		if(colon > -1) {
@@ -79,7 +79,7 @@ console.log("WARNING: Filter",operator.operator,"has a deprecated regexp operand
 				}
 				break;
 		}
-		
+
 		if(nextBracketPos === -1) {
 			throw "Missing closing bracket in filter expression";
 		}
@@ -87,7 +87,7 @@ console.log("WARNING: Filter",operator.operator,"has a deprecated regexp operand
 			operator.operand = filterString.substring(p,nextBracketPos);
 		}
 		p = nextBracketPos + 1;
-			
+
 		// Push this operator
 		operators.push(operator);
 	} while(filterString.charAt(p) !== "]");

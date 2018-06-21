@@ -18,14 +18,14 @@ CloseOthers/Caption: sluit andere
 CloseOthers/Hint: Sluit alle andere tiddlers
 ControlPanel/Caption: bedieningspaneel
 ControlPanel/Hint: Open bedieningspaneel
+CopyToClipboard/Caption: kopieer naar klembord
+CopyToClipboard/Hint: Kopieer deze tekst naar het klembord
 Delete/Caption: verwijder
 Delete/Hint: Verwijder deze tiddler
 Edit/Caption: wijzig
 Edit/Hint: Wijzig deze tiddler
 EditorHeight/Caption: hoogte van de editor
 EditorHeight/Caption/Auto: Pas automatisch hoogte aan zodat inhoud past
-
-
 EditorHeight/Caption/Fixed: Vaste hoogte:
 EditorHeight/Hint: Kies de hoogte van de teksteditor
 Encryption/Caption: versleuteling
@@ -87,6 +87,8 @@ Language/Caption: taal
 Language/Hint: Kies de taal voor de gebruikersomgeving
 LineWidth/Caption: lijnbreedte
 LineWidth/Hint: Stel lijnbreedte in
+Link/Hint: Maak een wikitext link
+Linkify/Hint: Zet selectie tussen vierkante haakjes
 ListBullet/Caption: lijst met opsommingstekens
 ListBullet/Hint: Maak van selectie een lijst met opsommingstekens
 ListNumber/Caption: genummerde lijst
@@ -100,7 +102,6 @@ More/Hint: Meer mogelijkheden
 NewHere/Caption: nieuw hier
 NewHere/Hint: Maak een nieuwe tiddler gelabeld met deze tiddler
 NewImage/Caption: nieuwe afbeelding
-
 NewImage/Hint: Maak een nieuwe afbeelding
 NewJournal/Caption: nieuw journaal
 NewJournal/Hint: Maak een nieuwe journaaltiddler
@@ -115,7 +116,6 @@ Opacity/Hint: Stel de ondoorzichtigheid in
 OpenWindow/Caption: open in een nieuw venster
 OpenWindow/Hint: Open tiddler in nieuw venster
 Paint/Caption: kleur om te tekenen
-
 Paint/Hint: Kies kleur om te tekenen
 Palette/Caption: palet
 Palette/Hint: Kies het kleurpalet
@@ -129,10 +129,14 @@ Preview/Caption: voorbeeldweergave
 Preview/Hint: Toon voorbeeldweergavepaneel
 PreviewType/Caption: type voorbeeldweergave
 PreviewType/Hint: Kies type voorbeeldweergave
+Print/Caption: druk pagina af
+Print/Hint: Druk the actuele pagina af
 Quote/Caption: 'blockquote'
 Quote/Hint: Maak van selectie een 'blockqoute'
 Refresh/Caption: ververs
 Refresh/Hint: Ververs deze wiki
+RotateLeft/Caption: Roteer linksom
+RotateLeft/Hint: Roteer 90 graden linksom
 Save/Caption: opslaan
 Save/Hint: Sla deze tiddler op
 SaveWiki/Caption: opslaan
@@ -161,6 +165,14 @@ TagManager/Caption: labelmanager
 TagManager/Hint: Open labelmanager
 Theme/Caption: thema
 Theme/Hint: Kies het thema
+Timestamp/Caption: tijdstempels
+Timestamp/Hint: Kies of veranderingen de tijdstempels bijwerken
+Timestamp/Off/Caption: tijdstempels zijn uit
+Timestamp/Off/Hint: Werk tijdstempels niet bij als tiddlers veranderd zijn
+Timestamp/On/Caption: tijdstempels zijn aan
+Timestamp/On/Hint: Werk tijdstempels bij als tiddlers veranderd zijn
+Transcludify/Caption: transclusie
+Transcludify/Hint: Zet selectie tussen accolades
 Underline/Caption: onderstreept
 Underline/Hint: Onderstreep het geselecteerde
 Unfold/Caption: klap tiddler uit

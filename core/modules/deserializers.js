@@ -72,19 +72,28 @@ exports["application/x-tiddler-html-div"] = function(text,fields) {
 };
 
 exports["application/json"] = function(text,fields) {
-	var incoming = JSON.parse(text),
+	var incoming,
 		results = [];
-	if($tw.utils.isArray(incoming)) {
-		for(var t=0; t<incoming.length; t++) {
-			var incomingFields = incoming[t],
-				fields = {};
-			for(var f in incomingFields) {
-				if(typeof incomingFields[f] === "string") {
-					fields[f] = incomingFields[f];
-				}
+	try {
+		incoming = JSON.parse(text);
+	} catch(e) {
+		incoming = [{
+			title: "JSON error: " + e,
+			text: ""
+		}]
+	}
+	if(!$tw.utils.isArray(incoming)) {
+		incoming = [incoming];
+	}
+	for(var t=0; t<incoming.length; t++) {
+		var incomingFields = incoming[t],
+			fields = {};
+		for(var f in incomingFields) {
+			if(typeof incomingFields[f] === "string") {
+				fields[f] = incomingFields[f];
 			}
-			results.push(fields);
 		}
+		results.push(fields);
 	}
 	return results;
 };

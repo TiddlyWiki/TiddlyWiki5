@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/comments/add-comment-button
+
+<$reveal state="$:/status/IsReadOnly" type="match" text="no" default="no" tag="div" class="tc-comment-button">
+<$button class="tc-btn-invisible">
+<$set name="username" value={{$:/status/UserName}} emptyValue="(anonymous)">
+<$action-createtiddler $basetitle={{{ [[Comment by ']addsuffix<username>addsuffix[' on ']addsuffix<currentTiddler>addsuffix[']] }}} comment-target=<<currentTiddler>> text="" edit-mode="yes"/>
+</$set>
+add comment {{$:/core/images/add-comment}}
+</$button>
+</$reveal>

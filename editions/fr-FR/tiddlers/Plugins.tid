@@ -39,7 +39,7 @@ Se reporter au [[Mécanisme du Plugin|PluginMechanism]] pour plus de détail sur
 
 # Faites une sauvegarde du fichier HTML TiddlyWiki ([[voir à ce propos|The First Rule of Using TiddlyWiki]])
 # Ouvrez votre TiddlyWiki dans un navigateur
-# Cherchez le lien vers le plugin, de type [[$:/plugins/tiddlywiki/exemple]]. Vous trouverez habituellement ce lien sur la page d'accueil du plugin (voir par exemple, http://tiddlywiki.com/plugins/tiddlywiki/katex/)
+# Cherchez le lien vers le plugin, de type [[$:/plugins/tiddlywiki/exemple]]. Vous trouverez habituellement ce lien sur la page d'accueil du plugin (voir par exemple, https://tiddlywiki.com/plugins/tiddlywiki/katex/)
 # Glissez le lien de type [[$:/plugins/tiddlywiki/exemple]] vers la fenêtre du navigateur affichant votre TiddlyWiki
 # Sauvegardez votre TiddlyWiki
 # ''Rafraichir'' la page afin que les modifications soient prises en compte

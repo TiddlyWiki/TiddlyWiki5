@@ -189,6 +189,35 @@ EditBitmapWidget.prototype.changeCanvasSize = function(newWidth,newHeight) {
 	ctx.drawImage(this.currCanvas,0,0);
 };
 
+/*
+** Rotate the canvas left by 90 degrees
+*/
+EditBitmapWidget.prototype.rotateCanvasLeft = function() {
+	// Get the current size of the image
+	var origWidth = this.currCanvas.width,
+		origHeight = this.currCanvas.height;
+	// Create and size a new canvas
+	var newCanvas = this.document.createElement("canvas"),
+		newWidth = origHeight,
+		newHeight = origWidth;
+	this.initCanvas(newCanvas,newWidth,newHeight);
+	// Copy the old image
+	var ctx = newCanvas.getContext("2d");
+	ctx.save();
+	ctx.translate(newWidth / 2,newHeight / 2);
+	ctx.rotate(-Math.PI / 2);
+	ctx.drawImage(this.currCanvas,-origWidth / 2,-origHeight / 2);
+	ctx.restore();
+	// Set the new canvas as the current one
+	this.currCanvas = newCanvas;
+	// Set the size of the onscreen canvas
+	this.canvasDomNode.width = newWidth;
+	this.canvasDomNode.height = newHeight;
+	// Paint the onscreen canvas with the offscreen canvas
+	ctx = this.canvasDomNode.getContext("2d");
+	ctx.drawImage(this.currCanvas,0,0);
+};
+
 EditBitmapWidget.prototype.handleTouchStartEvent = function(event) {
 	this.brushDown = true;
 	this.strokeStart(event.touches[0].clientX,event.touches[0].clientY);

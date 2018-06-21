@@ -1,0 +1,4 @@
+title: $:/plugins/tiddlywiki/codemirror/keymaps/sublime
+module-type: codemirror-keymap
+
+sublime

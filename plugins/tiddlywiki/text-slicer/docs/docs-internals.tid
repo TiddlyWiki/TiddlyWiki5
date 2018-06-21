@@ -1,0 +1,97 @@
+title: $:/plugins/tiddlywiki/text-slicer/docs/internals
+tags: $:/plugins/tiddlywiki/text-slicer/docs
+caption: Internals
+
+! Introduction
+
+The slicing process is performed by a simple automaton that scans the document and applies simple declarative rules to yield a collection of tiddlers.
+
+The automaton processes the incoming XML document starting with the root element and then recursively visits each child node and their children. Actions are triggered as each component of the document is encountered:
+
+* Opening tags of elements
+* Closing tags of elements
+* Text nodes
+
+Components are matched against the current set of rules to determine what actions should be performed. They can include a combination of:
+
+* Starting a new tiddler with specified fields
+* Rendering the markup for the current tag into the current tiddler
+* Appending the content of the current text node to the current tiddler
+* Threading tiddlers to their parents using a combination of the `list` and `tags` fields
+
+! Slicing State Data
+
+As the automaton performs its scan, it maintains the following state information:
+
+* ''chunks'' - an array of tiddlers without titles, addressed by their numeric index. The title field is reused to hold the plain text of the chunk that is later used to generate the final title for the tiddler
+* ''currentChunk'' - the numeric index of the chunk currently being filled, or `null` if there is no current chunk
+* ''parentStack'' - a stack of parent chunks stored as `{chunk: <chunk-index>, actions: <actions>}`
+
+At the start, the special document chunk is created and pushed onto the stack of parent chunks
+
+! Slicing Rules
+
+Slicing rules are maintained in tiddlers tagged `$:/tags/text-slicer/slicer-rules` with the following fields:
+
+* ''title'' - title of the tiddler containing the listof rules
+* ''name'' - short, human readable name for the set of rules
+* ''inherits-from'' - (optional) the ''name'' field of another set of rules that should be inherited as a base
+* ''text'' - JSON data as described below
+
+The JSON data is an array of rules, each of which is an object with the following fields:
+
+* ''selector'' - a selector string identifying the components to be matched by this rule
+* ''actions'' - an object describing the actions to be performed when this selector matches a tag
+
+!! Selectors
+
+The selector format is a simplified form of CSS selectors. They are specified as follows:
+
+* A ''selector'' is a list of one or more ''match expressions'' separated by commas. The rule is triggered if any of the match expressions produce a positive match
+* A ''match expression'' is a list of one or element ''tag names'' separated by spaces. The rule is triggered if the final tag name in the list matches the tag of the current element, and all of the preceding tags in the expression exist as ancestors of the current element in the specified order (but not necessarily as immediate children of one another)
+* A ''tag name'' is the textual name of an element
+* Tag names in match expressions may optionally be separated by a `>` sign surrounded by spaces to impose the requirement that the left hand element be the immediate parent of the right hand element
+
+!!! Example Selectors
+
+This XML document will be used to illustrate some examples:
+
+```
+<a>
+  <b>
+    <d>one</d>
+  </b>
+  <c>
+    <d>two</d>
+    <e>
+      three
+      <e>
+        four
+      </e>
+    </e>
+  </c>
+</a>
+
+```
+
+|!Selector |!Matches |
+|b |Matches the single `<b>` element |
+|d |Matches both of the two `<d>` elements |
+|c,d |Matches the `<c>` element and both of the two `<d>` elements |
+|c d |Matches the second of the two `<d>` elements |
+|a d |Matches both of the two `<d>` elements |
+|a > d |Doesn't match anything |
+|e |Matches both of the two `<e>` elements |
+|c > e |Matches the outermost of the two `<e>` elements |
+|e > e |Matches the innermost of the two `<e>` elements |
+
+!! Actions
+
+The ''action'' property of a slicer rule is an object that can have any of the following optional fields:
+
+* ''startNewChunk'' - causes a new chunk to be started on encountering an opening tag. The value is an object containing the fields to be assigned to the new chunk
+* ''isParent'' - causes the new chunk to be marked as a child of the current chunk (boolean flag; only applies if ''startNewChunk'' is set)
+* ''headingLevel'' - arrange heading parents according to level (numerical index; only applies if ''startNewChunk'' and ''isParent'' are set)
+* ''dontRenderTag'' - disables the default rendering of opening and closing tags to the current chunk. By default the tags are rendered as XML tags, but this can be overridden via ''markup'' (boolean; defaults to ''false'')
+* ''isImage'' - identifies an element as representing an HTML image element, with special processing for the ''src'' attribute
+* ''markup'' - optional object with either or both of `{wiki: {prefix: <str>,suffix: <str>}}` and `{html: {prefix: <str>,suffix: <str>}}` allowing the rendered tags to be customised

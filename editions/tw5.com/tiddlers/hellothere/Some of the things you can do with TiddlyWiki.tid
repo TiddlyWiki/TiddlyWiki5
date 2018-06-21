@@ -17,4 +17,4 @@ type: text/vnd.tiddlywiki
 * Use familiar web user interface elements such as lightboxes - see SampleWizard
 * Create a slideshow presentation
 * Set up an entire local or online knowledgebase, with a central ~TiddlyWiki file linking to other ~TiddlyWiki files (http://recursos.giffmex.org is a Spanish online example of this)
-* Set up a data visualisation using tiddlers as data (see the visualisations at http://tiddlywiki.com/plugins/tiddlywiki/d3/)
+* Set up a data visualisation using tiddlers as data (see the visualisations at https://tiddlywiki.com/plugins/tiddlywiki/d3/)

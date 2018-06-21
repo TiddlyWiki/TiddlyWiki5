@@ -1,0 +1,55 @@
+title: $:/core/macros/tag-picker
+tags: $:/tags/Macro
+
+\define add-tag-actions()
+<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/NewTagName}}/>
+<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
+\end
+
+\define add-tag-actions()
+<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/NewTagName}}/>
+<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
+\end
+
+\define tag-button()
+<$button class="tc-btn-invisible" tag="a">
+$(actions)$
+<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
+<$macrocall $name="tag-pill" tag=<<tag>>/>
+</$button>
+\end
+
+\define tag-picker(actions)
+<$set name="actions" value="""$actions$""">
+<div class="tc-edit-add-tag">
+<span class="tc-add-tag-name">
+<$keyboard key="ENTER" actions=<<add-tag-actions>>>
+<$edit-text tiddler="$:/temp/NewTagName" tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle"/>
+</$keyboard>
+</span> <$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button> <span class="tc-add-tag-button">
+<$set name="tag" value={{$:/temp/NewTagName}}>
+<$button set="$:/temp/NewTagName" setTo="" class="">
+$actions$
+<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
+{{$:/language/EditTemplate/Tags/Add/Button}}
+</$button>
+</$set>
+</span>
+</div>
+<div class="tc-block-dropdown-wrapper">
+<$reveal state=<<qualify "$:/state/popup/tags-auto-complete">> type="nomatch" text="" default="">
+<div class="tc-block-dropdown">
+<$list filter="[{$:/temp/NewTagName}minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$list filter="[tags[]!is[system]search:title{$:/temp/NewTagName}sort[]]" variable="tag">
+<<tag-button>>
+</$list></$list>
+<hr>
+<$list filter="[{$:/temp/NewTagName}minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$list filter="[tags[]is[system]search:title{$:/temp/NewTagName}sort[]]" variable="tag">
+<<tag-button>>
+</$list></$list>
+</div>
+</$reveal>
+</div>
+</$set>
+\end

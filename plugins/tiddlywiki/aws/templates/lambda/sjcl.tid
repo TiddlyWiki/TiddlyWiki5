@@ -1,0 +1,17 @@
+title: $:/plugins/tiddlywiki/aws/lambda/sjcl
+
+\rules only filteredtranscludeinline transcludeinline
+
+(function() {
+
+var module;
+
+global.sjcl = (function() {
+
+{{ $:/library/sjcl.js ||$:/core/templates/plain-text-tiddler}}
+
+return sjcl;
+
+})();
+
+})();

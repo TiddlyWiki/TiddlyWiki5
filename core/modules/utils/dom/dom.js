@@ -99,7 +99,7 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 		scrollTop = container.scrollTop;
     // Measure the specified minimum height
 	domNode.style.height = minHeight;
-	var measuredHeight = domNode.offsetHeight;
+	var measuredHeight = domNode.offsetHeight || parseInt(minHeight,10);
 	// Set its height to auto so that it snaps to the correct height
 	domNode.style.height = "auto";
 	// Calculate the revised height
@@ -229,6 +229,38 @@ Copy the computed styles from a source element to a destination element
 */
 exports.copyStyles = function(srcDomNode,dstDomNode) {
 	$tw.utils.setStyles(dstDomNode,$tw.utils.getComputedStyles(srcDomNode));
+};
+
+/*
+Copy plain text to the clipboard on browsers that support it
+*/
+exports.copyToClipboard = function(text,options) {
+	options = options || {};
+	var textArea = document.createElement("textarea");
+	textArea.style.position = "fixed";
+	textArea.style.top = 0;
+	textArea.style.left = 0;
+	textArea.style.fontSize = "12pt";
+	textArea.style.width = "2em";
+	textArea.style.height = "2em";
+	textArea.style.padding = 0;
+	textArea.style.border = "none";
+	textArea.style.outline = "none";
+	textArea.style.boxShadow = "none";
+	textArea.style.background = "transparent";
+	textArea.value = text;
+	document.body.appendChild(textArea);
+	textArea.select();
+	textArea.setSelectionRange(0,text.length);
+	var succeeded = false;
+	try {
+		succeeded = document.execCommand("copy");
+	} catch (err) {
+	}
+	if(!options.doNotNotify) {
+		$tw.notifier.display(succeeded ? "$:/language/Notifications/CopiedToClipboard/Succeeded" : "$:/language/Notifications/CopiedToClipboard/Failed");
+	}
+	document.body.removeChild(textArea);
 };
 
 })();

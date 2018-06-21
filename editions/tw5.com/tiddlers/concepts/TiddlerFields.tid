@@ -24,12 +24,16 @@ The standard fields are:
 Other fields used by the core are:
 
 |!Field Name |!Reference |!Description |
+|`class` |ClassField |<<lingo class>> |
 |`color` |ColorField |<<lingo color>> |
 |`description` |DescriptionField |<<lingo description>> |
 |`draft.of` |DraftOfField |<<lingo draft.of>> |
 |`draft.title` |DraftTitleField |<<lingo draft.title>> |
 |`footer` |FooterField |<<lingo footer>> |
+|`icon` |IconField |<<lingo icon>> |
 |`library` |LibraryField |<<lingo library>> |
+|`list-after` |ListAfterField |<<lingo list-after>> |
+|`list-before` |ListBeforeField |<<lingo list-before>> |
 |`name` |NameField |<<lingo name>> |
 |`plugin-priority` |PluginPriorityField |<<lingo plugin-priority>> |
 |`plugin-type` |PluginTypeField |<<lingo plugin-type>> |

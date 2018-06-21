@@ -2,12 +2,13 @@ title: $:/language/Search/
 
 DefaultResults/Caption: List
 Filter/Caption: Filter
-Filter/Hint: Search via a [[filter expression|http://tiddlywiki.com/static/Filters.html]]
+Filter/Hint: Search via a [[filter expression|https://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small><<resultCount>> matches</small>//
 Matches: //<small><<resultCount>> matches</small>//
 Matches/All: All matches:
 Matches/Title: Title matches:
 Search: Search
+Search/TooShort: Search text too short
 Shadows/Caption: Shadows
 Shadows/Hint: Search for shadow tiddlers
 Shadows/Matches: //<small><<resultCount>> matches</small>//

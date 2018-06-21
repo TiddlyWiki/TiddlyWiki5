@@ -1,6 +1,7 @@
 title: $:/TagManager
 icon: $:/core/images/tag-button
 color: #bbb
+caption: {{$:/language/TagManager/Caption}}
 
 \define lingo-base() $:/language/TagManager/
 \define iconEditorTab(type)
@@ -51,7 +52,7 @@ $title$$(currentTiddler)$
 <$list filter="[tags[]!is[system]sort[title]]">
 <tr>
 <td><$edit-text field="color" tag="input" type="color"/></td>
-<td><$transclude tiddler="$:/core/ui/TagTemplate"/></td>
+<td><$macrocall $name="tag" tag=<<currentTiddler>>/></td>
 <td><$count filter="[all[current]tagging[]]"/></td>
 <td>
 <$macrocall $name="iconEditor" title={{!!title}}/>

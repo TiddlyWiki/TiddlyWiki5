@@ -6,10 +6,10 @@ tags: [[$:/tags/Stylesheet]]
 <$list filter="[<background>is[image]]">
 `background: url(`
 <$list filter="[<background>!has[_canonical_uri]]">
-<$macrocall $name="datauri" title={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}}/>
+`"`<$macrocall $name="datauri" title={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}}/>`"`
 </$list>
 <$list filter="[<background>has[_canonical_uri]]">
-<$view tiddler={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}} field="_canonical_uri"/>
+`"`<$view tiddler={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}} field="_canonical_uri"/>`"`
 </$list>
 `) center center;`
 `background-attachment: `{{$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment}}`;
@@ -27,6 +27,15 @@ $text$
 <$reveal state="$:/state/sidebar" type="nomatch" text="yes" default="yes">
 $hiddenSidebarText$
 </$reveal>
+</$reveal>
+\end
+
+\define if-editor-height-fixed(then,else)
+<$reveal state="$:/config/TextEditor/EditorHeight/Mode" type="match" text="fixed">
+$then$
+</$reveal>
+<$reveal state="$:/config/TextEditor/EditorHeight/Mode" type="match" text="auto">
+$else$
 </$reveal>
 \end
 
@@ -69,12 +78,20 @@ html:-webkit-full-screen {
 body.tc-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/fontsize}};
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics/lineheight}};
+	word-wrap: break-word;
+	<<custom-background-datauri>>
 	color: <<colour foreground>>;
 	background-color: <<colour page-background>>;
 	fill: <<colour foreground>>;
-	word-wrap: break-word;
-	<<custom-background-datauri>>
 }
+
+<<if-background-attachment """
+
+body.tc-body {
+        background-color: transparent;
+}
+
+""">>
 
 h1, h2, h3, h4, h5, h6 {
 	line-height: 1.2;
@@ -110,6 +127,48 @@ blockquote {
 	border-left: 5px solid <<colour blockquote-bar>>;
 	margin-left: 25px;
 	padding-left: 10px;
+	quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote.tc-big-quote {
+	font-family: Georgia, serif;
+	position: relative;
+	background: <<colour pre-background>>;
+	border-left: none;
+	margin-left: 50px;
+	margin-right: 50px;
+	padding: 10px;
+    border-radius: 8px;
+}
+
+blockquote.tc-big-quote cite:before {
+	content: "\2014 \2009";
+}
+
+blockquote.tc-big-quote:before {
+	font-family: Georgia, serif;
+	color: <<colour blockquote-bar>>;
+	content: open-quote;
+	font-size: 8em;
+	line-height: 0.1em;
+	margin-right: 0.25em;
+	vertical-align: -0.4em;
+	position: absolute;
+    left: -50px;
+    top: 42px;
+}
+
+blockquote.tc-big-quote:after {
+	font-family: Georgia, serif;
+	color: <<colour blockquote-bar>>;
+	content: close-quote;
+	font-size: 8em;
+	line-height: 0.1em;
+	margin-right: 0.25em;
+	vertical-align: -0.4em;
+	position: absolute;
+    right: -80px;
+    bottom: -20px;
 }
 
 dl dt {
@@ -126,12 +185,21 @@ input:not([type]) {
 	background: <<colour background>>;
 }
 
+input[type="checkbox"] {
+  vertical-align: middle;
+}
+
 .tc-muted {
 	color: <<colour muted-foreground>>;
 }
 
 svg.tc-image-button {
 	padding: 0px 1px 1px 0px;
+}
+
+.tc-icon-wrapper > svg {
+	width: 1em;
+	height: 1em;
 }
 
 kbd {
@@ -207,7 +275,7 @@ table tfoot tr td {
 button.tc-tiddlylink,
 a.tc-tiddlylink {
 	text-decoration: none;
-	font-weight: normal;
+	font-weight: 500;
 	color: <<colour tiddler-link-foreground>>;
 	-webkit-user-select: inherit; /* Otherwise the draggable attribute makes links impossible to select */
 }
@@ -267,6 +335,8 @@ a.tc-tiddlylink-external:hover {
 
 .tc-tiddler-dragger-inner {
 	position: absolute;
+	top: -1000px;
+	left: -1000px;
 	display: inline-block;
 	padding: 8px 20px;
 	font-size: 16.9px;
@@ -301,6 +371,19 @@ a.tc-tiddlylink-external:hover {
 	content: "<<lingo DropMessage>>";
 }
 
+.tc-droppable > .tc-droppable-placeholder {
+	display: none;
+}
+
+.tc-droppable.tc-dragover > .tc-droppable-placeholder {
+	display: block;
+	border: 2px dashed <<colour dropzone-background>>;
+}
+
+.tc-draggable {
+	cursor: move;
+}
+
 /*
 ** Plugin reload warning
 */
@@ -329,6 +412,7 @@ button svg, button img, label svg, label img {
 	margin: 0;
 	background: none;
 	border: none;
+    cursor: pointer;
 }
 
 .tc-btn-boxed {
@@ -388,6 +472,16 @@ html body.tc-body .tc-btn-rounded:hover svg {
 .tc-btn-text {
 	padding: 0;
 	margin: 0;
+}
+
+/* used for documentation "fake" buttons */
+.tc-btn-standard {
+	line-height: 1.8;
+	color: #667;
+	background-color: #e0e0e0;
+	border: 1px solid #888;
+	padding: 2px 1px 2px 1px;
+	margin: 1px 4px 1px 4px;
 }
 
 .tc-btn-big-green {
@@ -521,7 +615,7 @@ button.tc-tag-label, span.tc-tag-label {
 	display: inline-block;
 	padding: 0.16em 0.7em;
 	font-size: 0.9em;
-	font-weight: 300;
+	font-weight: 400;
 	line-height: 1.2em;
 	color: <<colour tag-foreground>>;
 	white-space: nowrap;
@@ -547,6 +641,7 @@ button.tc-untagged-label {
 	height: 1em;
 	width: 1em;
 	fill: <<colour tag-foreground>>;
+	vertical-align: text-bottom;
 }
 
 .tc-tag-manager-table .tc-tag-label {
@@ -621,6 +716,10 @@ button.tc-untagged-label {
 	font-size: 1.5em;
 }
 
+.tc-page-controls .tc-drop-down {
+  font-size: 1rem;
+}
+
 .tc-page-controls button {
 	margin-right: 0.5em;
 }
@@ -688,6 +787,11 @@ button.tc-untagged-label {
 		-webkit-overflow-scrolling: touch;
 		margin: 0 0 0 -42px;
 		padding: 71px 0 28px 42px;
+	}
+
+	html[dir="rtl"] .tc-sidebar-scrollable {
+		left: auto;
+		right: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
 	}
 
 	.tc-story-river {
@@ -857,15 +961,26 @@ button.tc-untagged-label {
 	font-size: 1em;
 }
 
-.tc-tiddler-controls > span > button {
+.tc-tiddler-controls > span > button,
+.tc-tiddler-controls > span > span > button,
+.tc-tiddler-controls > span > span > span > button {
 	vertical-align: baseline;
 	margin-left:5px;
 }
 
 .tc-tiddler-controls button svg, .tc-tiddler-controls button img,
 .tc-search button svg, .tc-search a svg {
-	height: 0.75em;
 	fill: <<colour tiddler-controls-foreground>>;
+}
+
+.tc-tiddler-controls button svg, .tc-tiddler-controls button img {
+	height: 0.75em;
+}
+
+.tc-search button svg, .tc-search a svg {
+    height: 1.2em;
+    width: 1.2em;
+    margin: 0 0.25em;
 }
 
 .tc-tiddler-controls button.tc-selected svg,
@@ -903,8 +1018,10 @@ button.tc-untagged-label {
 .tc-tiddler-frame iframe.tc-edit-texteditor {
 	padding: 3px 3px 3px 3px;
 	border: 1px solid <<colour tiddler-editor-border>>;
+	background-color: <<colour tiddler-editor-background>>;
 	line-height: 1.3em;
 	-webkit-appearance: none;
+	font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
 }
 
 .tc-tiddler-frame .tc-binary-warning {
@@ -914,10 +1031,6 @@ button.tc-untagged-label {
 	padding: 3em 3em 6em 3em;
 	background: <<colour alert-background>>;
 	border: 1px solid <<colour alert-border>>;
-}
-
-.tc-tiddler-frame input.tc-edit-texteditor {
-	background-color: <<colour tiddler-editor-background>>;
 }
 
 canvas.tc-edit-bitmapeditor  {
@@ -1134,6 +1247,10 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 50%;
 }
 
+.tc-edit-add-tag .tc-keyboard {
+	display:inline;
+}
+
 .tc-edit-tags .tc-tag-label {
 	display: inline-block;
 }
@@ -1154,9 +1271,18 @@ html body.tc-body.tc-single-tiddler-window {
 	float: right;
 	width: 49%;
 	border: 1px solid <<colour tiddler-editor-border>>;
-	margin: 4px 3px 3px 3px;
+	margin: 4px 0 3px 3px;
 	padding: 3px 3px 3px 3px;
 }
+
+<<if-editor-height-fixed then:"""
+
+.tc-tiddler-preview-preview {
+	overflow-y: scroll;
+	height: {{$:/config/TextEditor/EditorHeight/Height}};
+}
+
+""">>
 
 .tc-tiddler-frame .tc-tiddler-preview .tc-edit-texteditor {
 	width: 49%;
@@ -1287,11 +1413,6 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-drop-down img {
 	width: 1em;
-}
-
-.tc-drop-down-language-chooser img {
-	width: 2em;
-	vertical-align: baseline;
 }
 
 .tc-drop-down a, .tc-drop-down button {
@@ -1608,6 +1729,8 @@ html body.tc-body.tc-single-tiddler-window {
 	border-right: 1px solid <<colour tab-border>>;
 	border-top-left-radius: 2px;
 	border-top-right-radius: 2px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
 }
 
 .tc-tab-buttons.tc-vertical button {
@@ -1622,6 +1745,8 @@ html body.tc-body.tc-single-tiddler-window {
 	border-right: none;
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
 }
 
 .tc-tab-buttons.tc-vertical button.tc-tab-selected {
@@ -1642,6 +1767,7 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-tab-content.tc-vertical  {
+    word-break: break-word;
 	display: inline-block;
 	vertical-align: top;
 	padding-top: 0;
@@ -1675,7 +1801,7 @@ html body.tc-body.tc-single-tiddler-window {
 	border-top: 1px solid <<colour sidebar-tab-divider>>;
 }
 
-.tc-more-sidebar .tc-tab-buttons button {
+.tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
 	display: block;
 	width: 100%;
 	background-color: <<colour sidebar-tab-background>>;
@@ -1686,9 +1812,116 @@ html body.tc-body.tc-single-tiddler-window {
 	margin-bottom: inherit;
 }
 
-.tc-more-sidebar .tc-tab-buttons button.tc-tab-selected {
+.tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button.tc-tab-selected {
 	background-color: <<colour sidebar-tab-background-selected>>;
 	border: none;
+}
+
+/*
+** Manager
+*/
+
+.tc-manager-wrapper {
+	
+}
+
+.tc-manager-controls {
+	
+}
+
+.tc-manager-control {
+	margin: 0.5em 0;
+}
+
+.tc-manager-list {
+	width: 100%;
+	border-top: 1px solid <<colour muted-foreground>>;
+	border-left: 1px solid <<colour muted-foreground>>;
+	border-right: 1px solid <<colour muted-foreground>>;
+}
+
+.tc-manager-list-item {
+
+}
+
+.tc-manager-list-item-heading {
+    display: block;
+    width: 100%;
+    text-align: left;	
+	border-bottom: 1px solid <<colour muted-foreground>>;
+	padding: 3px;
+}
+
+.tc-manager-list-item-heading-selected {
+	font-weight: bold;
+	color: <<colour background>>;
+	fill: <<colour background>>;
+	background-color: <<colour foreground>>;
+}
+
+.tc-manager-list-item-heading:hover {
+	background: <<colour primary>>;
+	color: <<colour background>>;
+}
+
+.tc-manager-list-item-content {
+	display: flex;
+}
+
+.tc-manager-list-item-content-sidebar {
+    flex: 1 0;
+    background: <<colour tiddler-editor-background>>;
+    border-right: 0.5em solid <<colour muted-foreground>>;
+    border-bottom: 0.5em solid <<colour muted-foreground>>;
+    white-space: nowrap;
+}
+
+.tc-manager-list-item-content-item-heading {
+	display: block;
+	width: 100%;
+	text-align: left;
+    background: <<colour muted-foreground>>;
+	text-transform: uppercase;
+	font-size: 0.6em;
+	font-weight: bold;
+    padding: 0.5em 0 0.5em 0;
+}
+
+.tc-manager-list-item-content-item-body {
+	padding: 0 0.5em 0 0.5em;
+}
+
+.tc-manager-list-item-content-item-body > pre {
+	margin: 0.5em 0 0.5em 0;
+	border: none;
+	background: inherit;
+}
+
+.tc-manager-list-item-content-tiddler {
+    flex: 3 1;
+    border-left: 0.5em solid <<colour muted-foreground>>;
+    border-right: 0.5em solid <<colour muted-foreground>>;
+    border-bottom: 0.5em solid <<colour muted-foreground>>;
+}
+
+.tc-manager-list-item-content-item-body > table {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.tc-manager-list-item-content-item-body > table td {
+	border: none;
+}
+
+.tc-manager-icon-editor > button {
+	width: 100%;
+}
+
+.tc-manager-icon-editor > button > svg,
+.tc-manager-icon-editor > button > button {
+	width: 100%;
+	height: auto;
 }
 
 /*
@@ -1842,6 +2075,14 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	padding: 1em 1em 1em 1em;
 }
 
+.tc-check-list {
+	line-height: 2em;
+}
+
+.tc-check-list .tc-image-button {
+	height: 1.5em;
+}
+
 /*
 ** Message boxes
 */
@@ -1853,6 +2094,12 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	font-size: 12px;
 	line-height: 18px;
 	color: <<colour message-foreground>>;
+}
+
+.tc-message-box svg {
+	width: 1em;
+	height: 1em;
+    vertical-align: text-bottom;
 }
 
 /*
@@ -1878,25 +2125,62 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 */
 
 .tc-chooser {
-	border: 1px solid <<colour table-border>>;
+	border-right: 1px solid <<colour table-header-background>>;
+	border-left: 1px solid <<colour table-header-background>>;
 }
+
 
 .tc-chooser-item {
-	border: 8px;
-	padding: 2px 4px;
+	border-bottom: 1px solid <<colour table-header-background>>;
+	border-top: 1px solid <<colour table-header-background>>;
+	padding: 2px 4px 2px 14px;
 }
 
-.tc-chooser-item a.tc-tiddlylink {
+.tc-drop-down .tc-chooser-item {
+	padding: 2px;
+}
+
+.tc-chosen,
+.tc-chooser-item:hover {
+	background-color: <<colour table-header-background>>;
+	border-color: <<colour table-footer-background>>;
+}
+
+.tc-chosen .tc-tiddlylink {
+	cursor:default;
+}
+
+.tc-chooser-item .tc-tiddlylink {
 	display: block;
 	text-decoration: none;
-	color: <<colour tiddler-link-foreground>>;
-	background-color: <<colour tiddler-link-background>>;
+	background-color: transparent;
 }
 
-.tc-chooser-item a.tc-tiddlylink:hover {
+.tc-chooser-item:hover .tc-tiddlylink:hover {
 	text-decoration: none;
-	color: <<colour tiddler-link-background>>;
-	background-color: <<colour tiddler-link-foreground>>;
+}
+
+.tc-drop-down .tc-chosen .tc-tiddlylink,
+.tc-drop-down .tc-chooser-item .tc-tiddlylink:hover {
+	color: <<colour foreground>>;
+}
+
+.tc-chosen > .tc-tiddlylink:before {
+	margin-left: -10px;
+	position: relative;
+	content: "» ";
+}
+
+.tc-chooser-item svg,
+.tc-chooser-item img{
+	width: 1em;
+	height: 1em;
+	vertical-align: middle;
+}
+
+.tc-language-chooser .tc-image-button img {
+	width: 2em;
+	vertical-align: -0.15em;
 }
 
 /*
@@ -1968,10 +2252,6 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	font-size: 0.95em;
 	font-weight: 200;
 	line-height: 1.5;
-}
-
-.tc-table-of-contents li li li a {
-	font-weight: bold;
 }
 
 .tc-table-of-contents li li li li {
@@ -2165,10 +2445,84 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 }
 
 /*
+** Diffs
+*/
+
+.tc-diff-equal {
+	background-color: <<colour diff-equal-background>>;
+	color: <<colour diff-equal-foreground>>;
+}
+
+.tc-diff-insert {
+	background-color: <<colour diff-insert-background>>;
+	color: <<colour diff-insert-foreground>>;
+}
+
+.tc-diff-delete {
+	background-color: <<colour diff-delete-background>>;
+	color: <<colour diff-delete-foreground>>;
+}
+
+.tc-diff-invisible {
+	background-color: <<colour diff-invisible-background>>;
+	color: <<colour diff-invisible-foreground>>;
+}
+
+.tc-diff-tiddlers th {
+	text-align: right;
+	background: <<colour background>>;
+	font-weight: normal;
+	font-style: italic;
+}
+
+.tc-diff-tiddlers pre {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+/*
 ** Errors
 */
 
 .tc-error {
 	background: #f00;
 	color: #fff;
+}
+
+/*
+** Tree macro
+*/
+
+.tc-tree div {
+    	padding-left: 14px;
+}
+
+.tc-tree ol {
+    	list-style-type: none;
+    	padding-left: 0;
+    	margin-top: 0;
+}
+
+.tc-tree ol ol {
+    	padding-left: 1em;    
+}
+
+.tc-tree button { 
+    	color: #acacac;
+}
+
+.tc-tree svg {
+     	fill: #acacac;
+}
+
+.tc-tree span svg {
+    	width: 1em;
+    	height: 1em;
+    	vertical-align: baseline;
+}
+
+.tc-tree li span {
+    	color: lightgray;
 }

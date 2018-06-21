@@ -1,7 +1,6 @@
 {
-	"description": "Documentation from http://tiddlywiki.com",
+	"description": "Documentation from https://tiddlywiki.com",
 	"plugins": [
-		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/railroad",
@@ -14,6 +13,8 @@
 		"tiddlywiki/seamless",
 		"tiddlywiki/centralised",
 		"tiddlywiki/tight",
+		"tiddlywiki/heavier",
+		"tiddlywiki/tight-heavier",
 		"tiddlywiki/readonly"
 	],
 	"languages": [
@@ -40,7 +41,7 @@
 			"--rendertiddler","ReadMe","readme.md","text/html",
 			"--rendertiddler","ReadMeBinFolder","bin/readme.md","text/html",
 			"--rendertiddler","ContributingTemplate","contributing.md","text/html",
-			"--rendertiddler","$:/core/copyright.txt","licenses/copyright.md","text/plain"],
+			"--rendertiddler","$:/core/copyright.txt","license","text/plain"],
 		"tw2": [
 			"--rendertiddler","TiddlyWiki2ReadMe","tw2/readme.md","text/html"],
 		"static": [
