@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/serverroute/delete-tiddlers.js
+title: $:/core/modules/serverroute/delete-tiddler.js
 type: application/javascript
 module-type: serverroute
 
