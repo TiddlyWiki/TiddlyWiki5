@@ -7,14 +7,19 @@ GET /favicon.ico
 
 \*/
 (function() {
-	module.exports = {
-		method: "GET",
-		path: /^\/favicon.ico$/,
 
-		handler: function(request,response,state) {
-			response.writeHead(200, {"Content-Type": "image/x-icon"});
-			var buffer = state.wiki.getTiddlerText("$:/favicon.ico","");
-			response.end(buffer,"base64");
-		}
-	};
+/*jslint node: true, browser: true */
+/*global $tw: false */
+"use strict";
+
+exports.method = "GET";
+
+exports.path = /^\/favicon.ico$/;
+
+exports.handler = function(request,response,state) {
+	response.writeHead(200, {"Content-Type": "image/x-icon"});
+	var buffer = state.wiki.getTiddlerText("$:/favicon.ico","");
+	response.end(buffer,"base64");
+};
+
 }());

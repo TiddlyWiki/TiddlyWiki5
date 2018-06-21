@@ -152,7 +152,7 @@ SimpleServer.prototype.listen = function(port,host) {
 };
 
 var Command = function(params,commander,callback) {
-	var _this = this;
+	var self = this;
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
@@ -163,7 +163,7 @@ var Command = function(params,commander,callback) {
 	// Add route handlers
 	$tw.modules.forEachModuleOfType("serverroute", function(title,routeDefinition) {
 		// console.log("Loading server route " + title);
-		_this.server.addRoute(routeDefinition);
+		self.server.addRoute(routeDefinition);
 	});
 };
 
