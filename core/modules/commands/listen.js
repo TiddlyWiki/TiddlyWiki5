@@ -17,7 +17,9 @@ var Server = require("$:/core/modules/server.js").Server;
 exports.info = {
 	name: "listen",
 	synchronous: true,
-	namedParameters: [] // Use named parameters, but none of them are mandatory
+	namedParameterMode: true,
+	mandatoryParameters: [],
+	optionalParameters: ["port","host","rootTiddler","renderType","serveType","username","password","pathprefix","debugLevel"]
 };
 
 var Command = function(params,commander,callback) {
@@ -25,7 +27,6 @@ var Command = function(params,commander,callback) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
-	this.knownParameters = ["port","host","rootTiddler","renderType","serveType","username","password","pathprefix","debugLevel"];
 };
 
 Command.prototype.execute = function() {
@@ -35,7 +36,7 @@ Command.prototype.execute = function() {
 	}
 	// Set up server
 	var variables = Object.create(null);
-	$tw.utils.each(this.knownParameters,function(name) {
+	$tw.utils.each(exports.info.optionalParameters,function(name) {
 		if($tw.utils.hop(self.params,name)) {
 			variables[name] = self.params[name];
 		}
