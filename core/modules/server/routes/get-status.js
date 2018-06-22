@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/serverroute/get-status.js
+title: $:/core/modules/server/routes/get-status.js
 type: application/javascript
 module-type: serverroute
 

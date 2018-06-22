@@ -12,7 +12,7 @@ Listen for HTTP requests and serve tiddlers
 /*global $tw: false */
 "use strict";
 
-var Server = require("$:/core/modules/server.js").Server;
+var Server = require("$:/core/modules/server/server.js").Server;
 
 exports.info = {
 	name: "listen",

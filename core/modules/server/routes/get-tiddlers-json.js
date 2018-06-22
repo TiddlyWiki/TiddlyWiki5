@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/serverroute/get-tiddlers-json.js
+title: $:/core/modules/server/routes/get-tiddlers-json.js
 type: application/javascript
 module-type: serverroute
 

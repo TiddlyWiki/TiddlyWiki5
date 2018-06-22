@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/serverroute/get-favicon.js
+title: $:/core/modules/server/routes/get-favicon.js
 type: application/javascript
 module-type: serverroute
 

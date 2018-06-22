@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/server.js
+title: $:/core/modules/server/server.js
 type: application/javascript
 module-type: library
 

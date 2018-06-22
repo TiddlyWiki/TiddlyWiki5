@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/serverroute/get-file.js
+title: $:/core/modules/server/routes/get-file.js
 type: application/javascript
 module-type: serverroute
 
