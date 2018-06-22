@@ -19,7 +19,7 @@ exports.path = /^\/status$/;
 exports.handler = function(request,response,state) {
 	response.writeHead(200, {"Content-Type": "application/json"});
 	var text = JSON.stringify({
-		username: state.server.get("username"),
+		username: state.authenticatedUsername,
 		space: {
 			recipe: "default"
 		},

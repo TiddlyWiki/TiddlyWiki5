@@ -90,17 +90,56 @@ Server.prototype.findMatchingRoute = function(request,state) {
 	return null;
 };
 
-Server.prototype.checkCredentials = function(request,incomingUsername,incomingPassword) {
-	var header = request.headers.authorization || "",
-		token = header.split(/\s+/).pop() || "",
-		auth = $tw.utils.base64Decode(token),
-		parts = auth.split(/:/),
-		username = parts[0],
-		password = parts[1];
-	if(incomingUsername === username && incomingPassword === password) {
-		return "ALLOWED";
+Server.prototype.authenticateRequestBasic = function(request,response,state) {
+	if(!this.credentialsData) {
+		// Authenticate as anonymous if no credentials have been specified
+		return true;
 	} else {
-		return "DENIED";
+		// Extract the incoming username and password from the request
+		var header = request.headers.authorization || "",
+			token = header.split(/\s+/).pop() || "",
+			auth = $tw.utils.base64Decode(token),
+			parts = auth.split(/:/),
+			incomingUsername = parts[0],
+			incomingPassword = parts[1];
+		// Check that at least one of the credentials matches
+		var matchingCredentials = this.credentialsData.find(function(credential) {
+			return credential.username === incomingUsername && credential.password === incomingPassword;
+		});
+		if(matchingCredentials) {
+			// If so, add the authenticated username to the request state
+			state.authenticatedUsername = incomingUsername;
+			return true;
+		} else {
+			// If not, return an authentication challenge
+			var servername = state.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5";
+			response.writeHead(401,"Authentication required",{
+				"WWW-Authenticate": 'Basic realm="Please provide your username and password to login to ' + servername + '"'
+			});
+			response.end();
+			return false;
+		}
+	}
+};
+
+Server.prototype.authenticateRequestByHeader = function(request,response,state) {
+	var self = this,
+		header = self.get("authenticatedUserHeader")
+	if(!header) {
+		// Authenticate as anonymous if no trusted authenticated user header is specified
+		return true;
+	} else {
+		// Otherwise, authenticate as the username in the specified header
+		var username = request.headers[header];
+		if(!username) {
+			var servername = state.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5";
+			response.writeHead(401,"Authorization header required to login to '" + servername + "'");
+			response.end();
+			return false;
+		} else {
+			state.authenticatedUsername = username;
+			return true;
+		}
 	}
 };
 
@@ -111,26 +150,19 @@ Server.prototype.requestHandler = function(request,response) {
 	state.wiki = self.wiki;
 	state.server = self;
 	state.urlInfo = url.parse(request.url);
+	// Authenticate: provide error response on failure, add "username" to the state on success
+	if(!this.authenticateRequestBasic(request,response,state) ||  !this.authenticateRequestByHeader(request,response,state)) {
+		return;
+	}
+	// Authorize
+
+	// Find the route that matches this path
+	var route = self.findMatchingRoute(request,state);
 	// Optionally output debug info
 	if(self.get("debugLevel") !== "none") {
 		console.log("Request path:",JSON.stringify(state.urlInfo));
 		console.log("Request headers:",JSON.stringify(request.headers));
-	}
-	// Find the route that matches this path
-	var route = self.findMatchingRoute(request,state);
-	// Check for the username and password if we've got one
-	var username = self.get("username"),
-		password = self.get("password");
-	if(username && password) {
-		// Check they match
-		if(self.checkCredentials(request,username,password) !== "ALLOWED") {
-			var servername = state.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5";
-			response.writeHead(401,"Authentication required",{
-				"WWW-Authenticate": 'Basic realm="Please provide your username and password to login to ' + servername + '"'
-			});
-			response.end();
-			return;
-		}
+		console.log("authenticatedUsername:",state.authenticatedUsername);
 	}
 	// Return a 404 if we didn't find a route
 	if(!route) {
@@ -178,6 +210,30 @@ Server.prototype.listen = function(port,host) {
 	// Warn if required plugins are missing
 	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
 		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
+	}
+	// Read the credentials data if present
+	var credentialsFilepath = this.get("credentials");
+	if(credentialsFilepath) {
+		credentialsFilepath = path.join($tw.boot.wikiPath,credentialsFilepath);
+		if(fs.existsSync(credentialsFilepath) && !fs.statSync(credentialsFilepath).isDirectory()) {
+			var credentialsText = fs.readFileSync(credentialsFilepath,"utf8"),
+				credentialsData = $tw.utils.parseCsvStringWithHeader(credentialsText);
+			if(typeof credentialsData === "string") {
+				$tw.utils.error("Error: " + credentialsData + " reading credentials from '" + credentialsFilepath + "'");
+			} else {
+				this.credentialsData = credentialsData;
+			}
+		} else {
+			$tw.utils.error("Error: Unable to load user credentials from '" + credentialsFilepath + "'");
+		}
+	}
+	// Add the hardcoded username and password if specified
+	if(this.get("username") && this.get("password")) {
+		this.credentialsData = this.credentialsData || [];
+		this.credentialsData.push({
+			username: this.get("username"),
+			password: this.get("password")
+		});
 	}
 	return http.createServer(this.requestHandler.bind(this)).listen(port,host);
 };

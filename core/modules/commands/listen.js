@@ -19,7 +19,7 @@ exports.info = {
 	synchronous: true,
 	namedParameterMode: true,
 	mandatoryParameters: [],
-	optionalParameters: ["port","host","rootTiddler","renderType","serveType","username","password","pathprefix","debugLevel"]
+	optionalParameters: ["port","host","rootTiddler","renderType","serveType","username","password","pathprefix","debugLevel","credentials"]
 };
 
 var Command = function(params,commander,callback) {
