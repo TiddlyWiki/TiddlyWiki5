@@ -96,7 +96,7 @@ Commander.prototype.executeNextCommand = function() {
 				}
 				// Parse named parameters if required
 				if(command.info.namedParameterMode) {
-					params = this.extractNamedParameters(params,command.info.mandatoryParameters,command.info.optionalParameters);
+					params = this.extractNamedParameters(params,command.info.mandatoryParameters);
 					if(typeof params === "string") {
 						return this.callback(params);
 					}
@@ -130,12 +130,10 @@ Commander.prototype.executeNextCommand = function() {
 };
 
 /*
-Given an array of parameter strings `params` in name:value format, and an array of mandatory parameter names in `mandatoryParameters`, and an array of optional parameters in
-`optionalParameter`, returns a hashmap of values or a string if error
+Given an array of parameter strings `params` in name:value format, and an array of mandatory parameter names in `mandatoryParameters`, returns a hashmap of values or a string if error
 */
-Commander.prototype.extractNamedParameters = function(params,mandatoryParameters,optionalParameters) {
+Commander.prototype.extractNamedParameters = function(params,mandatoryParameters) {
 	mandatoryParameters = mandatoryParameters || [];
-	optionalParameters = optionalParameters || [];
 	var errors = [],
 		paramsByName = Object.create(null);
 	// Extract the parameters
@@ -144,18 +142,12 @@ Commander.prototype.extractNamedParameters = function(params,mandatoryParameters
 		if(index < 1) {
 			errors.push("malformed named parameter: '" + param + "'");
 		}
-		paramsByName[param.slice(0,index)] = param.slice(index+1);
+		paramsByName[param.slice(0,index)] = $tw.utils.trim(param.slice(index+1));
 	});
 	// Check the mandatory parameters are present
 	$tw.utils.each(mandatoryParameters,function(mandatoryParameter) {
 		if(!$tw.utils.hop(paramsByName,mandatoryParameter)) {
 			errors.push("missing mandatory parameter: '" + mandatoryParameter + "'");
-		}
-	});
-	// Check there no parameters that are not mandatory or optional
-	$tw.utils.each(paramsByName,function(value,name) {
-		if(mandatoryParameters.indexOf(name) === -1 && optionalParameters.indexOf(name) === -1) {
-			errors.push("unknown parameter: '" + name + "'");			
 		}
 	});
 	// Return any errors
