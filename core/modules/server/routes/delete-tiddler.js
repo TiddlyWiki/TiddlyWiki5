@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/server/routes/delete-tiddler.js
 type: application/javascript
-module-type: serverroute
+module-type: route
 
 DELETE /recipes/default/tiddlers/:title
 

@@ -12,8 +12,8 @@ isfilteroperator: Operands for the ''is'' filter operator.
 library: Generic module type for general purpose JavaScript modules.
 macro: JavaScript macro definitions.
 parser: Parsers for different content types.
+route: Defines how individual URL patterns are handled by the built-in HTTP server.
 saver: Savers handle different methods for saving files from the browser.
-serverroute: Server routes handle different HTTP requests when using the `--server` command.
 startup: Startup functions.
 storyview: Story views customise the animation and behaviour of list widgets.
 texteditoroperation: A text editor toolbar operation.

@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/server/routes/get-favicon.js
 type: application/javascript
-module-type: serverroute
+module-type: route
 
 GET /favicon.ico
 

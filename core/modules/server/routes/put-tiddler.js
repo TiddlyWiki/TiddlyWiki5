@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/server/routes/put-tiddler.js
 type: application/javascript
-module-type: serverroute
+module-type: route
 
 PUT /recipes/default/tiddlers/:title
 

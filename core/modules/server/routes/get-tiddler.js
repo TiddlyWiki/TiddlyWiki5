@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/server/routes/get-tiddler.js
 type: application/javascript
-module-type: serverroute
+module-type: route
 
 GET /recipes/default/tiddlers/:title
 

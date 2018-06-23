@@ -32,7 +32,7 @@ function Server(options) {
 	this.wiki = options.wiki;
 	this.variables = $tw.utils.extend({},this.defaultVariables,options.variables);
 	// Add route handlers
-	$tw.modules.forEachModuleOfType("serverroute", function(title,routeDefinition) {
+	$tw.modules.forEachModuleOfType("route", function(title,routeDefinition) {
 		// console.log("Loading server route " + title);
 		self.addRoute(routeDefinition);
 	});
