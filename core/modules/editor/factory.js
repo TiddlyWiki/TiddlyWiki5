@@ -285,19 +285,17 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	Propogate keydown events to our container for the keyboard widgets benefit
 	*/
 	EditTextWidget.prototype.propogateKeydownEvent = function(event) {
-		if(this.engine.constructor.name === "FramedEngine") {
-			var newEvent = this.document.createEventObject ? this.document.createEventObject() : this.document.createEvent("Events");
-			if(newEvent.initEvent) {
-				newEvent.initEvent("keydown", true, true);
-			}
-			newEvent.keyCode = event.keyCode;
-			newEvent.which = event.which;
-			newEvent.metaKey = event.metaKey;
-			newEvent.ctrlKey = event.ctrlKey;
-			newEvent.altKey = event.altKey;
-			newEvent.shiftKey = event.shiftKey;
-			return !this.parentDomNode.dispatchEvent(newEvent);
+		var newEvent = this.document.createEventObject ? this.document.createEventObject() : this.document.createEvent("Events");
+		if(newEvent.initEvent) {
+			newEvent.initEvent("keydown", true, true);
 		}
+		newEvent.keyCode = event.keyCode;
+		newEvent.which = event.which;
+		newEvent.metaKey = event.metaKey;
+		newEvent.ctrlKey = event.ctrlKey;
+		newEvent.altKey = event.altKey;
+		newEvent.shiftKey = event.shiftKey;
+		return !this.parentDomNode.dispatchEvent(newEvent);
 	};
 
 	return EditTextWidget;
