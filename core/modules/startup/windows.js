@@ -68,6 +68,8 @@ exports.startup = function() {
 				}
 			}
 			if(key !== undefined) {
+				event.preventDefault();
+				event.stopPropagation();
 				$tw.rootWidget.invokeActionString(action,$tw.rootWidget);
 				return true;
 			}
