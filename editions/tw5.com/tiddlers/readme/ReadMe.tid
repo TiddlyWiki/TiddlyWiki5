@@ -17,7 +17,9 @@ Developer documentation is in progress at https://tiddlywiki.com/dev/
 
 ! Join the Community
 
-{{Forums}}
+<$vars tv-adjust-heading-level="1">
+<$transclude mode="block" tiddler="Forums"/>
+</$vars>
 
 ! Installing TiddlyWiki on Node.js
 
