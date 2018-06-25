@@ -2,6 +2,7 @@ title: $:/language/Docs/ModuleTypes/
 
 allfilteroperator: A sub-operator for the ''all'' filter operator.
 animation: Animations that may be used with the RevealWidget.
+authenticator: Defines how requests are authenticated by the built-in HTTP server.
 bitmapeditoroperation: A bitmap editor toolbar operation.
 command: Commands that can be executed under Node.js.
 config: Data to be inserted into `$tw.config`.

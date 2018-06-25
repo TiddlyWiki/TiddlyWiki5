@@ -29,9 +29,30 @@ options: variables - optional hashmap of variables to set (a misnomer - they are
 function Server(options) {
 	var self = this;
 	this.routes = options.routes || [];
+	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
-	this.variables = $tw.utils.extend({},this.defaultVariables,options.variables);
-	// Add route handlers
+	this.servername = this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5";
+	// Initialise the variables
+	this.variables = $tw.utils.extend({},this.defaultVariables);
+	if(options.variables) {
+		for(var variable in options.variables) {
+			if(options.variables[variable]) {
+				this.variables[variable] = options.variables[variable];
+			}
+		}		
+	}
+	$tw.utils.extend({},this.defaultVariables,options.variables);
+	// Initialise authorization
+	this.authorizationPrincipals = {
+		readers: (this.get("readers") || this.get("username") || "(anon)").split(",").map($tw.utils.trim),
+		writers: (this.get("writers") || this.get("username") || "(anon)").split(",").map($tw.utils.trim)
+	}
+	// Load and initialise authenticators
+	$tw.modules.forEachModuleOfType("authenticator", function(title,authenticatorDefinition) {
+		// console.log("Loading server route " + title);
+		self.addAuthenticator(authenticatorDefinition.AuthenticatorClass);
+	});
+	// Load route handlers
 	$tw.modules.forEachModuleOfType("route", function(title,routeDefinition) {
 		// console.log("Loading server route " + title);
 		self.addRoute(routeDefinition);
@@ -47,19 +68,24 @@ Server.prototype.defaultVariables = {
 	debugLevel: "none"
 };
 
-Server.prototype.set = function(obj) {
-	var self = this;
-	$tw.utils.each(obj,function(value,name) {
-		self.variables[name] = value;
-	});
-};
-
 Server.prototype.get = function(name) {
 	return this.variables[name];
 };
 
 Server.prototype.addRoute = function(route) {
 	this.routes.push(route);
+};
+
+Server.prototype.addAuthenticator = function(AuthenticatorClass) {
+	// Instantiate and initialise the authenticator
+	var authenticator = new AuthenticatorClass(this),
+		result = authenticator.init();
+	if(typeof result === "string") {
+		$tw.utils.error("Error: " + result);
+	} else if(result) {
+		// Only use the authenticator if it initialised successfully
+		this.authenticators.push(authenticator);
+	}
 };
 
 Server.prototype.findMatchingRoute = function(request,state) {
@@ -90,57 +116,13 @@ Server.prototype.findMatchingRoute = function(request,state) {
 	return null;
 };
 
-Server.prototype.authenticateRequestBasic = function(request,response,state) {
-	if(!this.credentialsData) {
-		// Authenticate as anonymous if no credentials have been specified
-		return true;
-	} else {
-		// Extract the incoming username and password from the request
-		var header = request.headers.authorization || "",
-			token = header.split(/\s+/).pop() || "",
-			auth = $tw.utils.base64Decode(token),
-			parts = auth.split(/:/),
-			incomingUsername = parts[0],
-			incomingPassword = parts[1];
-		// Check that at least one of the credentials matches
-		var matchingCredentials = this.credentialsData.find(function(credential) {
-			return credential.username === incomingUsername && credential.password === incomingPassword;
-		});
-		if(matchingCredentials) {
-			// If so, add the authenticated username to the request state
-			state.authenticatedUsername = incomingUsername;
-			return true;
-		} else {
-			// If not, return an authentication challenge
-			var servername = state.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5";
-			response.writeHead(401,"Authentication required",{
-				"WWW-Authenticate": 'Basic realm="Please provide your username and password to login to ' + servername + '"'
-			});
-			response.end();
-			return false;
-		}
-	}
-};
-
-Server.prototype.authenticateRequestByHeader = function(request,response,state) {
-	var self = this,
-		header = self.get("authenticatedUserHeader")
-	if(!header) {
-		// Authenticate as anonymous if no trusted authenticated user header is specified
-		return true;
-	} else {
-		// Otherwise, authenticate as the username in the specified header
-		var username = request.headers[header];
-		if(!username) {
-			var servername = state.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5";
-			response.writeHead(401,"Authorization header required to login to '" + servername + "'");
-			response.end();
-			return false;
-		} else {
-			state.authenticatedUsername = username;
-			return true;
-		}
-	}
+Server.prototype.methodMappings = {
+	"GET": "readers",
+	"OPTIONS": "readers",
+	"HEAD": "readers",
+	"PUT": "writers",
+	"POST": "writers",
+	"DELETE": "writers"
 };
 
 Server.prototype.requestHandler = function(request,response) {
@@ -150,12 +132,29 @@ Server.prototype.requestHandler = function(request,response) {
 	state.wiki = self.wiki;
 	state.server = self;
 	state.urlInfo = url.parse(request.url);
-	// Authenticate: provide error response on failure, add "username" to the state on success
-	if(!this.authenticateRequestBasic(request,response,state) ||  !this.authenticateRequestByHeader(request,response,state)) {
-		return;
+	// Get the principals authorized to access this resource
+	var principals = this.authorizationPrincipals[this.methodMappings[request.method] || "readers"] || [];
+	// Check whether anonymous access is enabled
+	if(principals.indexOf("(anon)") === -1) {
+		// Complain if there are no active authenticators
+		if(this.authenticators.length < 1) {
+			$tw.utils.error("Warning: Authentication required but no authentication modules are active");
+			response.writeHead(401,"Authentication required to login to '" + this.servername + "'");
+			response.end();
+			return;
+		}
+		// Authenticate
+		if(!this.authenticators[0].authenticateRequest(request,response,state)) {
+			// Bail if we failed (the authenticator will have sent the response)
+			return;
+		}
+		// Authorize with the authenticated username
+		if(principals.indexOf(state.authenticatedUsername) === -1) {
+			response.writeHead(401,"'" + state.authenticatedUsername + "' is not authorized to access '" + this.servername + "'");
+			response.end();
+			return;
+		}
 	}
-	// Authorize
-
 	// Find the route that matches this path
 	var route = self.findMatchingRoute(request,state);
 	// Optionally output debug info
@@ -210,30 +209,6 @@ Server.prototype.listen = function(port,host) {
 	// Warn if required plugins are missing
 	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
 		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
-	}
-	// Read the credentials data if present
-	var credentialsFilepath = this.get("credentials");
-	if(credentialsFilepath) {
-		credentialsFilepath = path.join($tw.boot.wikiPath,credentialsFilepath);
-		if(fs.existsSync(credentialsFilepath) && !fs.statSync(credentialsFilepath).isDirectory()) {
-			var credentialsText = fs.readFileSync(credentialsFilepath,"utf8"),
-				credentialsData = $tw.utils.parseCsvStringWithHeader(credentialsText);
-			if(typeof credentialsData === "string") {
-				$tw.utils.error("Error: " + credentialsData + " reading credentials from '" + credentialsFilepath + "'");
-			} else {
-				this.credentialsData = credentialsData;
-			}
-		} else {
-			$tw.utils.error("Error: Unable to load user credentials from '" + credentialsFilepath + "'");
-		}
-	}
-	// Add the hardcoded username and password if specified
-	if(this.get("username") && this.get("password")) {
-		this.credentialsData = this.credentialsData || [];
-		this.credentialsData.push({
-			username: this.get("username"),
-			password: this.get("password")
-		});
 	}
 	return http.createServer(this.requestHandler.bind(this)).listen(port,host);
 };
