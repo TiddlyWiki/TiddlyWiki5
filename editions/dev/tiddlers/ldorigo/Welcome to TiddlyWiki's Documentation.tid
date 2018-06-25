@@ -1,0 +1,14 @@
+created: 20182506164000000
+modified: 20182506164000000
+title: Welcome to TiddlyWiki's Documentation
+
+This is an attempt by @ldorigo to make TiddlyWiki's code (and documentation) more accessible to newcomers.
+
+My goals are two:
+
+* Unify what's already present into a more uniform documentation, improving accessibility (some tiddlers are currently only accessible by search) and removing duplicate information
+
+* Create a "step-by-step" tutorial that explains the source code, from boot to plugins.
+** Ideally, map each source code file to a corresponding tiddler on this wiki, which will contain detailed information on that file's functionality
+
+[[Start Here]]
