@@ -20,7 +20,7 @@ exports.handler = function(request,response,state) {
 	var path = require("path"),
 		fs = require("fs"),
 		util = require("util");
-	var filename = path.join($tw.boot.wikiPath,"files",decodeURIComponent(state.params[0])),
+	var filename = path.resolve($tw.boot.wikiPath,"files",decodeURIComponent(state.params[0])),
 		extension = path.extname(filename);
 	fs.readFile(filename,function(err,content) {
 		var status,content,type = "text/plain";
