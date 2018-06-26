@@ -14,7 +14,7 @@ Authenticator for trusted header authentication
 
 function HeaderAuthenticator(server) {
 	this.server = server;
-	this.header = server.get("authenticatedUserHeader");
+	this.header = server.get("authenticateduserheader");
 }
 
 /*

@@ -36,13 +36,13 @@ Command.prototype.execute = function() {
 		variables: {
 			port: this.params[0],
 			host: this.params[6],
-			rootTiddler: this.params[1],
-			renderType: this.params[2],
-			serveType: this.params[3],
+			roottiddler: this.params[1],
+			rendertype: this.params[2],
+			servetype: this.params[3],
 			username: this.params[4],
 			password: this.params[5],
 			pathprefix: this.params[7],
-			debugLevel: this.params[8]
+			debuglevel: this.params[8]
 		}
 	});
 	var nodeServer = this.server.listen();

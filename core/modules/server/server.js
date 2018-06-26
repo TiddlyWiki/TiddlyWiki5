@@ -62,10 +62,10 @@ function Server(options) {
 Server.prototype.defaultVariables = {
 	port: "8080",
 	host: "127.0.0.1",
-	rootTiddler: "$:/core/save/all",
-	renderType: "text/plain",
-	serveType: "text/html",
-	debugLevel: "none"
+	roottiddler: "$:/core/save/all",
+	rendertype: "text/plain",
+	servetype: "text/html",
+	debuglevel: "none"
 };
 
 Server.prototype.get = function(name) {
@@ -158,7 +158,7 @@ Server.prototype.requestHandler = function(request,response) {
 	// Find the route that matches this path
 	var route = self.findMatchingRoute(request,state);
 	// Optionally output debug info
-	if(self.get("debugLevel") !== "none") {
+	if(self.get("debuglevel") !== "none") {
 		console.log("Request path:",JSON.stringify(state.urlInfo));
 		console.log("Request headers:",JSON.stringify(request.headers));
 		console.log("authenticatedUsername:",state.authenticatedUsername);
