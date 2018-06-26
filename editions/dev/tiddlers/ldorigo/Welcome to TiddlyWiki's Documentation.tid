@@ -11,4 +11,8 @@ My goals are two:
 * Create a "step-by-step" tutorial that explains the source code, from boot to plugins.
 ** Ideally, map each source code file to a corresponding tiddler on this wiki, which will contain detailed information on that file's functionality
 
-[[Start Here]]
+<div class="tc-table-of-contents">
+
+<<toc-selective-expandable "Welcome to TiddlyWiki's Documentation" "sort[toc-order]">>
+
+</div>

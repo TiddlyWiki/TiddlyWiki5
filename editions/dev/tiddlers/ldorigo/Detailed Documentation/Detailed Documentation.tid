@@ -1,0 +1,12 @@
+modified: 2018260600000000
+created: 2018260600000000
+tags: [[Welcome to TiddlyWiki's Documentation]]
+toc-order: 3
+title: Detailed Documentation
+
+
+This section will eventually describe the source code in as much detail as possible.
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable "Detailed Documentation">>
+</div>
