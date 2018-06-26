@@ -5,6 +5,8 @@ modified: 20140717182928525
 tags: $:/tags/SideBar
 title: NEW NEW TOC
 
+TODO: Delete
+
 \define toc-heading(caption,body)
 <$reveal type="nomatch" state=<<qualify "$:/state/toc/$caption$">> text="show">
 <$button set=<<qualify "$:/state/toc/$caption$">> setTo="show" class="tc-btn-invisible">{{$:/core/images/right-arrow}} $caption$

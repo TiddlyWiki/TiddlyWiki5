@@ -3,6 +3,9 @@ modified: 20140101174811711
 title: package.json for NW.js
 type: text/plain
 
+
+TODO: What is this for and what's it doing here?
+
 {
     "name": "tiddlywiki",
     "main": "./index.html",

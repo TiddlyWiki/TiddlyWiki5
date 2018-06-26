@@ -5,6 +5,8 @@ sub.num: 2
 tags: doc
 title: Extending the Store
 
+TODO: delete
+
 <$list filter="[!has[draft.of]has[chapter.of]chapter.of[Extending the Store]tag[doc]sort[sub.num]]">
 
 

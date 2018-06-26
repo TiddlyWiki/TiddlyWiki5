@@ -3,6 +3,8 @@ modified: 20140714171831330
 tags: doc
 title: Table of Contents
 
+TODO: Rework and ultimately remove
+
 \define toc-heading(caption,body)
 <$reveal type="nomatch" state=<<qualify "$:/state/toc/$caption$">> text="show">
 <$button set=<<qualify "$:/state/toc/$caption$">> setTo="show" class="tc-btn-invisible">{{$:/core/images/right-arrow}} $caption$

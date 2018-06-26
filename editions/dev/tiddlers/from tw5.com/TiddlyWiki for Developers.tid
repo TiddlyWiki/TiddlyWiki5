@@ -4,6 +4,9 @@ tags: introduction dev
 title: TiddlyWiki for Developers
 type: text/vnd.tiddlywiki
 
+
+TODO: Remove this file and move its contents to relevant places.
+
 TiddlyWiki is published as OpenSource which means that anyone can read the code and contribute to its development.
 
 ! Resources
