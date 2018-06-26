@@ -12,8 +12,8 @@ Nothing has to be loaded at runtime: the HTML file contains everything needed to
 
 For more details, see [[TiddlyWiki as a Single Page Application]].
 
-
-TiddlyWiki is highly customisable because of a very sophisticated module concept. Except for the [[Microkernel]] written in JavaScript, the whole application is built from of a datastructure called [[Tiddler]] and a markup language called [[WikiText]].
+TiddlyWiki is highly customisable because of a very sophisticated module concept. Except for the [[Microkernel]] written in JavaScript, 
+the whole application is built from of a datastructure called [[Tiddler|Tiddler as Basic Element]] and a markup language called [[WikiText|WikiText Markup]].
 [[Modules]] and [[Plugins]] are all implemented as tiddlers.
 
 
