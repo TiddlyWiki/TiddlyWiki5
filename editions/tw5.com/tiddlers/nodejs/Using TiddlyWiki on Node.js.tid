@@ -1,10 +1,10 @@
 created: 20131219100520659
-modified: 20140920135025757
+modified: 20180626122347768
 tags: [[TiddlyWiki on Node.js]]
 title: Using TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
 
-TiddlyWiki5 can be used on the command line to perform an extensive set of operations based on TiddlyWikiFolders, TiddlerFiles and TiddlyWikiFiles.
+TiddlyWiki5 includes a set of [[Commands]] for use on the command line to perform an extensive set of operations based on TiddlyWikiFolders, TiddlerFiles and TiddlyWikiFiles.
 
 For example, the following command loads the tiddlers from a TiddlyWiki HTML file and then saves one of them in static HTML:
 
@@ -22,6 +22,10 @@ The commands and their individual arguments follow, each command being identifie
 tiddlywiki [<wikipath>] [--<command> [<arg>[,<arg>]]]
 ```
 
-The available commands are:
+<<.from-version "5.1.18">> Commands such as the ListenCommand that support large numbers of parameters can use NamedCommandParameters to make things less unwieldy. For example:
 
-<<list-links "[tag[Commands]]">>
+```
+tiddlywiki wikipath --listen username=jeremy port=8090
+```
+
+See [[Commands]] for a full listing of the available commands.
