@@ -43,9 +43,10 @@ function Server(options) {
 	}
 	$tw.utils.extend({},this.defaultVariables,options.variables);
 	// Initialise authorization
+	var authorizedUserName = (this.get("username") && this.get("password")) ? this.get("username") : "(anon)";
 	this.authorizationPrincipals = {
-		readers: (this.get("readers") || this.get("username") || "(anon)").split(",").map($tw.utils.trim),
-		writers: (this.get("writers") || this.get("username") || "(anon)").split(",").map($tw.utils.trim)
+		readers: (this.get("readers") || authorizedUserName).split(",").map($tw.utils.trim),
+		writers: (this.get("writers") || authorizedUserName).split(",").map($tw.utils.trim)
 	}
 	// Load and initialise authenticators
 	$tw.modules.forEachModuleOfType("authenticator", function(title,authenticatorDefinition) {
