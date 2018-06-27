@@ -150,7 +150,7 @@ Server.prototype.requestHandler = function(request,response) {
 			return;
 		}
 		// Authorize with the authenticated username
-		if(principals.indexOf(state.authenticatedUsername) === -1) {
+		if(principals.indexOf(state.authenticatedUsername) === -1 && principals.indexOf("(authenticated)") === -1) {
 			response.writeHead(401,"'" + state.authenticatedUsername + "' is not authorized to access '" + this.servername + "'");
 			response.end();
 			return;
