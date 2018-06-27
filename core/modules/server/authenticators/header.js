@@ -32,7 +32,6 @@ HeaderAuthenticator.prototype.authenticateRequest = function(request,response,st
 	// Otherwise, authenticate as the username in the specified header
 	var username = request.headers[this.header];
 	if(!username) {
-		var servername = state.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5";
 		response.writeHead(401,"Authorization header required to login to '" + state.server.servername + "'");
 		response.end();
 		return false;
