@@ -126,6 +126,14 @@ Server.prototype.methodMappings = {
 	"DELETE": "writers"
 };
 
+/*
+Check whether a given user is authorized for the specified authorizationType ("readers" or "writers"). Pass null or undefined as the username to check for anonymous access
+*/
+Server.prototype.isAuthorized = function(authorizationType,username) {
+	var principals = this.authorizationPrincipals[authorizationType] || [];
+	return principals.indexOf("(anon)") !== -1 || (username && (principals.indexOf("(authenticated)") !== -1 || principals.indexOf(username) !== -1));
+}
+
 Server.prototype.requestHandler = function(request,response) {
 	// Compose the state object
 	var self = this;
@@ -134,9 +142,9 @@ Server.prototype.requestHandler = function(request,response) {
 	state.server = self;
 	state.urlInfo = url.parse(request.url);
 	// Get the principals authorized to access this resource
-	var principals = this.authorizationPrincipals[this.methodMappings[request.method] || "readers"] || [];
+	var authorizationType = this.methodMappings[request.method] || "readers";
 	// Check whether anonymous access is enabled
-	if(principals.indexOf("(anon)") === -1) {
+	if(!this.isAuthorized(authorizationType,null)) {
 		// Complain if there are no active authenticators
 		if(this.authenticators.length < 1) {
 			$tw.utils.error("Warning: Authentication required but no authentication modules are active");
@@ -150,7 +158,7 @@ Server.prototype.requestHandler = function(request,response) {
 			return;
 		}
 		// Authorize with the authenticated username
-		if(principals.indexOf(state.authenticatedUsername) === -1 && principals.indexOf("(authenticated)") === -1) {
+		if(this.isAuthorized(authorizationType,state.authenticatedUsername)) {
 			response.writeHead(401,"'" + state.authenticatedUsername + "' is not authorized to access '" + this.servername + "'");
 			response.end();
 			return;
