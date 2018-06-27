@@ -1,6 +1,7 @@
 created: 20140708082703387
 modified: 20140715094732261
 tags: [[Introduction]]
+toc-order: 2
 title: Tiddler as Basic Element
 
 By managing nearly every part of the application as tiddlers, the application only needs to provide some basic functionality to manage the individual tiddlers,

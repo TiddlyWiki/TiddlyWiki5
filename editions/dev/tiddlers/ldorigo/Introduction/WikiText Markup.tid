@@ -1,6 +1,7 @@
 created: 20140708083145150
 modified: 20140717212656341
 tags: [[Introduction]]
+toc-order: 3
 title: WikiText Markup
 
 The WikiText is a markup language, created especially for the requirements of the TiddlyWiki application. It is based on [[Markdown|http://daringfireball.net/projects/markdown]], 

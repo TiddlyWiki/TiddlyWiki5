@@ -10,7 +10,7 @@ TiddlyWiki is a personal notebook application inspired by Wikis.
 It's a one-page application, an approach to build rich web applications where the whole application is delivered in one HTML file which contains source code to dynamically change the view and behaviour of the application as well as its data. 
 Nothing has to be loaded at runtime: the HTML file contains everything needed to start the and run the app. 
 
-For more details, see [[TiddlyWiki as a Single Page Application]].
+For more details, see [[TiddlyWiki as Single Page Application]].
 
 TiddlyWiki is highly customisable because of a very sophisticated module concept. Except for the [[Microkernel]] written in JavaScript, 
 the whole application is built from of a datastructure called [[Tiddler|Tiddler as Basic Element]] and a markup language called [[WikiText|WikiText Markup]].
@@ -19,6 +19,6 @@ the whole application is built from of a datastructure called [[Tiddler|Tiddler 
 
 <div class="tc-table-of-contents">
 
-<<toc-selective-expandable "Introduction">>
+<<toc-selective-expandable "Introduction" "sort[toc-order]">>
 
 </div>
