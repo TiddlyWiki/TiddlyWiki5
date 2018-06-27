@@ -16,6 +16,7 @@ The syncer tracks changes to the store. If a syncadaptor is used then individual
 Defaults
 */
 Syncer.prototype.titleIsLoggedIn = "$:/status/IsLoggedIn";
+Syncer.prototype.titleIsReadOnly = "$:/status/IsReadOnly";
 Syncer.prototype.titleUserName = "$:/status/UserName";
 Syncer.prototype.titleSyncFilter = "$:/config/SyncFilter";
 Syncer.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
@@ -169,12 +170,13 @@ Syncer.prototype.getStatus = function(callback) {
 		// Mark us as not logged in
 		this.wiki.addTiddler({title: this.titleIsLoggedIn,text: "no"});
 		// Get login status
-		this.syncadaptor.getStatus(function(err,isLoggedIn,username) {
+		this.syncadaptor.getStatus(function(err,isLoggedIn,username,isReadOnly) {
 			if(err) {
 				self.logger.alert(err);
 				return;
 			}
 			// Set the various status tiddlers
+			self.wiki.addTiddler({title: self.titleIsReadOnly,text: isReadOnly ? "yes" : "no"});
 			self.wiki.addTiddler({title: self.titleIsLoggedIn,text: isLoggedIn ? "yes" : "no"});
 			if(isLoggedIn) {
 				self.wiki.addTiddler({title: self.titleUserName,text: username || ""});
