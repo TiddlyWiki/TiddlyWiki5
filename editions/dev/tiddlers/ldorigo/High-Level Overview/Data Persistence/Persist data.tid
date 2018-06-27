@@ -1,6 +1,5 @@
 created: 20140708085735260
 modified: 20140708085759751
-tags: Introduction
 title: Data Persistence
 
 TiddlyWiki supports a wide range of methods to persist your data. One of this methods is the HTML5 fallback saver. This methods works on almost every browser. With this method a copy of the entire wiki will be downloaded by the browser. This means you get a new file everytime you hit the save button.  To avoid this and because every Browser has a different API to allow writing direct to the file system there a some plugins for the different browsers. These plug-ins allow the user to save direct to the current open TiddlyWiki-File. The Listing below shows the HTML5-compliant to save the changes via the HTML5 fallback saver by downloading the TW as a complete HTML-file.

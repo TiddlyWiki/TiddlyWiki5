@@ -1,6 +1,5 @@
 created: 20140710183759647
 modified: 20140717203802364
-tags: Introduction
 title: TiddlyWiki Core Application
 
 The microkernel builds up the base functionality to manage tiddlers by providing a basic wiki store and a barebone tiddler model.
