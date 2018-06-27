@@ -1,10 +1,28 @@
 created: 20130825162100000
-modified: 20140614120823657
+modified: 20180627132000000
 tags: Introduction
+toc-order: 4
 title: TiddlyWiki Architecture
 type: text/vnd.tiddlywiki
 
 The heart of TiddlyWiki is an extensible representation transformation engine for text and images. Given the text of a tiddler and its associated [[ContentType|https://tiddlywiki.com/#ContentType]], the engine can produce a rendering of the tiddler in a new [[ContentType|https://tiddlywiki.com/#ContentType]]. Furthermore, it can efficiently selectively update the rendering to track any changes in the tiddler or its dependents.
+
+
+! The one thing you need to know
+
+TiddlyWiki's architecture is very different from an HTML page written using jQuery. This section concisely explains what TiddlyWiki does differently. It may not make much sense on the first reading.
+
+The key to understanding how it works internally is to see that the RefreshMechanism requires that any region of the DOM can be regenerated at any time. This means that the entire state of the user interface must reside in the tiddler store, from where it is synchronised into the DOM. This is done to improve performance by minimising the DOM interactions during the refresh cycles.
+
+It also determines the standard UI flow:
+
+# An event handler on a widget is triggered
+# The event handler can manipulate the DOM nodes directly created by the widget, and/or modify the state of the tiddler store
+# The core then issues a store change event which triggers the refresh cycle
+# Each widget in the tree then gets a chance to refresh itself to reflect the changes in the store if they need to
+
+From a technical perspective, TiddlyWiki is a fairly classic MVC architecture, with strict separation of concerns. The model is the tiddler store, the view is a rendering tree (such as the one created from [[$:/core/ui/PageTemplate]] in startup.js), and the controller is the core code itself.
+
 
 ! Overview
 
@@ -18,13 +36,15 @@ DOM events trigger actions on widgets which update the tiddler store. The update
 
 {{Server Architecture.svg}}
 
+TODO: Delete/displace next sentence? Seems a bit out of context
+
 When programming TiddlyWiki 5 plugins which make changes outside the scope of the included examples, you will need a more in-depth understanding of TiddlyWiki's internal architecture.
 
 ! Model
 
 TiddlyWiki's data model is a fairly simple key-value store.
 
-* Each tiddler is simply an object with a `fields` member containing members such as `title`, `text`, `tags` and so on.
+* Each [[tiddler|Tiddler as Basic Element]] is simply an object with a `fields` member containing members such as `title`, `text`, `tags` and so on.
 * The core `Wiki` class defined in `boot/boot.js` implements simple associative array behaviours like insertion, deletion, iteration, listing keys, and get-by-key.
 * The code in `core/modules/wiki.js` then extends the `Wiki` class with functionality such as event dispatch and various cache-backed methods such as `getTiddlersWithTag`.
 
@@ -42,6 +62,9 @@ $tw.wiki.makeTiddlerIterator($tw.wiki.getTiddlersWithTag('timeline')
 
 Data which should not be visible to end users under normal operation (eg. internal components, plugins, persisted state for GUI widgets) is stored in [[system tiddlers|https://tiddlywiki.com/#SystemTiddlers]] organised via a set of [[namespaces|https://tiddlywiki.com/#Naming%20of%20System%20Tiddlers]].
 
+TODO: Clarify next sentence? What is a "hierarchical browsing interface"?
+
+
 The similarity between filesystem paths and system tiddler names is intentional and will be used to provide a hierarchical browsing interface in a future TiddlyWiki release.
 
 ! View
@@ -57,12 +80,15 @@ In a desktop application, the base widget class defines a method such as `paint(
 
 In TiddlyWiki, the `Widget` class in `core/modules/widgets/widgets.js` defines a `render(parent, nextSibling)` method which TiddlyWiki calls in response to various events such as changes in the model.
 
+TODO: Add a link to relevant documentation for the `refresh(changedTiddlers)` method
+
+
 (The potential inefficiency of this approach is mitigated via a `refresh(changedTiddlers)` method which TiddlyWiki calls to ask your widget whether its current rendering is stale.)
 
 !! Locus of Control
 
-While TiddlyWiki's extended [[WikiText]] is similar in design to HTML templating languages with logic constructs, you can't just ignore it and assemble all of your content in raw Javascript because it is used to define most of TiddlyWiki's UI.
+While TiddlyWiki's extended [[WikiText| WikiText Markup]] is similar in design to HTML templating languages with logic constructs, you can't just ignore it and assemble all of your content in raw Javascript because it is used to define most of TiddlyWiki's UI.
 
 In this respect, it's closer to a glue language like Qt Quick or Python with Javascript filling the "create new components" role of C/C++ in widget toolkits like Qt and GTK+.
 
-To familiarise yourself with this, read [[Widgets in WikiText|https://tiddlywiki.com/#Widgets%20in%20WikiText]] and [[Introduction to Filters|https://tiddlywiki.com/#Introduction%20to%20Filters]]. then examine the internals for a tiddler like [[TaskManagementExample|https://tiddlywiki.com/#TaskManagementExample]].
+To familiarise yourself with this, read [[Widgets in WikiText|https://tiddlywiki.com/#Widgets%20in%20WikiText]] and [[Introduction to Filters|https://tiddlywiki.com/#Introduction%20to%20Filters]]. Then examine the internals for a tiddler like [[TaskManagementExample|https://tiddlywiki.com/#TaskManagementExample]].
