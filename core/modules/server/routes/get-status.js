@@ -20,6 +20,7 @@ exports.handler = function(request,response,state) {
 	response.writeHead(200, {"Content-Type": "application/json"});
 	var text = JSON.stringify({
 		username: state.authenticatedUsername || state.server.get("username") || "",
+		read_only: !state.server.isAuthorized("writers"),
 		space: {
 			recipe: "default"
 		},
