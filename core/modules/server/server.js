@@ -16,8 +16,7 @@ if($tw.node) {
 	var util = require("util"),
 		fs = require("fs"),
 		url = require("url"),
-		path = require("path"),
-		http = require("http");
+		path = require("path");
 }
 
 /*
@@ -60,6 +59,17 @@ function Server(options) {
 		// console.log("Loading server route " + title);
 		self.addRoute(routeDefinition);
 	});
+	// Initialise the http vs https
+	this.listenOptions = {};
+	this.protocol = "http";
+	var tlsKeyFilepath = this.get("tlskey"),
+		tlsCertFilepath = this.get("tlscert");
+	if(tlsCertFilepath && tlsKeyFilepath) {
+		this.listenOptions.key = fs.readFileSync(path.resolve($tw.boot.wikiPath,tlsKeyFilepath),"utf8");
+		this.listenOptions.cert = fs.readFileSync(path.resolve($tw.boot.wikiPath,tlsCertFilepath),"utf8");
+		this.protocol = "https";
+	}
+	this.transport = require(this.protocol);
 }
 
 Server.prototype.defaultVariables = {
@@ -221,13 +231,14 @@ Server.prototype.listen = function(port,host) {
 	if(parseInt(port,10).toString() !== port) {
 		port = process.env[port] || 8080;
 	}
-	$tw.utils.log("Serving on " + host + ":" + port,"brown/orange");
+	$tw.utils.log("Serving on " + this.protocol + "://" + host + ":" + port,"brown/orange");
 	$tw.utils.log("(press ctrl-C to exit)","red");
 	// Warn if required plugins are missing
 	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
 		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
 	}
-	return http.createServer(this.requestHandler.bind(this)).listen(port,host);
+	// Listen
+	return this.transport.createServer(this.listenOptions,this.requestHandler.bind(this)).listen(port,host);
 };
 
 exports.Server = Server;
