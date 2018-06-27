@@ -42,6 +42,8 @@ function Server(options) {
 		}		
 	}
 	$tw.utils.extend({},this.defaultVariables,options.variables);
+	// Initialise CSRF
+	this.csrfDisable = this.get("csrfdisable") === "yes";
 	// Initialise authorization
 	var authorizedUserName = (this.get("username") && this.get("password")) ? this.get("username") : "(anon)";
 	this.authorizationPrincipals = {
@@ -143,6 +145,12 @@ Server.prototype.requestHandler = function(request,response) {
 	state.urlInfo = url.parse(request.url);
 	// Get the principals authorized to access this resource
 	var authorizationType = this.methodMappings[request.method] || "readers";
+	// Check for the CSRF header if this is a write
+	if(!this.csrfDisable && authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
+		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
+		response.end();
+		return;		
+	}
 	// Check whether anonymous access is enabled
 	if(!this.isAuthorized(authorizationType,null)) {
 		// Complain if there are no active authenticators
