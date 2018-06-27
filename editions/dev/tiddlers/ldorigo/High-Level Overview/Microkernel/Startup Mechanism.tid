@@ -1,10 +1,11 @@
 created: 20140502142900000
-modified: 20140502142900000
-tags: Mechanisms
-title: StartupMechanism
+modified: 20180626142900000
+tags: Microkernel
+toc-order: 3
+title: Startup Mechanism
 type: text/vnd.tiddlywiki
 
-The startup mechanism runs the installed startup modules at the end of the [[boot process|BootMechanism]].
+The startup mechanism runs the installed startup modules at the end of the [[boot process|Boot Mechanism]].
 
 ! Startup Modules
 
@@ -23,7 +24,6 @@ Startup modules are executed in sequence according to their declared dependencie
 
 There is no guarantee of the execution order of tasks that share the same dependencies.
 
-! Startup Modules
 
 The core defines the following startup modules:
 

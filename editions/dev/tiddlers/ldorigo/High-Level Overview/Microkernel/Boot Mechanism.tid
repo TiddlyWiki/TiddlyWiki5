@@ -1,7 +1,8 @@
 created: 20130825142900000
-modified: 20140502142900000
-tags: Mechanisms
-title: BootMechanism
+modified: 20180626142900000
+toc-order: 2
+tags: Microkernel
+title: Boot Mechanism
 type: text/vnd.tiddlywiki
 
 !Introduction
@@ -40,4 +41,4 @@ On the server, `core/boot.js` is executed directly. It uses the `Node.js` local 
 
 The boot process sets up the `$tw` global variable that is used to store all the state data of the system.
 
-At the end of the boot process the StartupMechanism schedules the execution of startup modules to bring up the rest of TiddlyWiki.
+At the end of the boot process the [[Startup Mechanism]] schedules the execution of startup modules to bring up the rest of TiddlyWiki.
