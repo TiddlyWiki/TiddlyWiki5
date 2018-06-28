@@ -1,10 +1,11 @@
 created: 20130825162500000
 modified: 20140206221900969
-tags: Mechanisms
-title: LazyLoadingMechanism
+tags: [[Core Plugin]]
+toc-order: 6
+title: Lazy Loading Mechanism
 type: text/vnd.tiddlywiki
 
-TiddlyWiki currently only implements LazyLoading when it is running in the browser talking to a TiddlyWeb-compatible server.
+TiddlyWiki currently only implements Lazy Loading when it's running in the browser, talking to a TiddlyWeb-compatible server.
 
 In the [[configuration for TiddlyWeb|TiddlyWiki in the Sky for TiddlyWeb]], the browser first requests a "skinny" version of each tiddler (consisting of all the fields apart from the text field). Subsequently, an attempt to read those skinny tiddlers with `wiki.getTiddler()` returns just the skinny fields, but an attempt to read one using `wiki.getTiddlerText()` will trigger an asynchronous load of the full tiddler text, which in turn triggers a refresh cycle, updating the display to reflect the newly loaded tiddler. Widgets that loop through all tiddlers are fine; it's only if they trigger `wiki.getTiddlerText()` for a tiddler that it will get loaded.
 

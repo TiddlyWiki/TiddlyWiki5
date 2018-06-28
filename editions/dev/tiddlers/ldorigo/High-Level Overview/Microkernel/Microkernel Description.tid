@@ -21,4 +21,4 @@ Besides some utility functions, the most important object that is provided by th
 <<< The microkernel constructs a initial $tw object containing the needed structures and functions.
 
 
-An additional feature of the microkernel is the ability to encrypt and decrypt a block of text. To provide this functionality the microkernel has a built in password-vault to store the current used password. The library used to encrypt and decrypt data is the [[StandfordJavaScript Crypto Libary|http://bitwiseshiftleft.github.io/sjcl/]]. This feature allows the micro-kernel to load encrypted tiddlers from the TiddlyWiki file, but it also allows extension plug-ins to use the encrypt functionality e.g. to persist an encrypted TiddlyWiki.  
+An additional feature of the microkernel is the ability to encrypt and decrypt a block of text. To provide this functionality the microkernel has a built in password-vault to store the current used password. See [[Encryption Mechanism]] for more information.
