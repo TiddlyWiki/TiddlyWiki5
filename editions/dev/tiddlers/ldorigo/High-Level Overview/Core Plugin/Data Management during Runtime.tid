@@ -1,7 +1,7 @@
 created: 20140708085451064
 modified: 20180626085602231
 tags: [[Core Plugin]]
-toc-order: 3
+toc-order: 4
 title: Data Management During Runtime
 
 At runtime, the data of Tiddlywiki is stored in javascript objects. 
