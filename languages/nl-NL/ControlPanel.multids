@@ -11,7 +11,9 @@ Basics/DefaultTiddlers/Prompt: Standaard tiddlers:
 Basics/DefaultTiddlers/TopHint: Kies welke tiddlers bij opstarten getoond worden:
 Basics/Language/Prompt: Hallo! Huidige taal:
 Basics/NewJournal/Tags/Prompt: Labels voor nieuwe journaaltiddlers
+Basics/NewJournal/Text/Prompt: Tekst voor nieuwe journaaltiddlers
 Basics/NewJournal/Title/Prompt: Titel voor nieuwe journaaltiddlers
+Basics/NewTiddler/Title/Prompt: Titel voor nieuwe tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Aantal overschreven schaduwtiddlers:
 Basics/ShadowTiddlers/Prompt: Aantal schaduwtiddlers:
 Basics/Subtitle/Prompt: Ondertitel:
@@ -105,9 +107,11 @@ Settings/AutoSave/Disabled/Description: Sla veranderingen niet automatisch op
 Settings/AutoSave/Enabled/Description: Sla veranderingen automatisch op
 Settings/AutoSave/Hint: Sla veranderingen tijdens wijzigen automatisch op
 Settings/CamelCase/Caption: 'Camel Case' wiki links
-Settings/CamelCase/Description: Zet automatisch ~CamelCase linken aan
-Settings/CamelCase/Hint: Je kan globaal het automatisch linken van ~CamelCase woorden uitzetten. Dit vereist herladen van de wiki om effect te hebben.
+Settings/CamelCase/Description: Zet automatisch 'Camel Case' linken aan
+Settings/CamelCase/Hint: Je kan globaal het automatisch linken van 'Camel Case' woorden uitzetten. Dit vereist herladen van de wiki om effect te hebben.
 Settings/Caption: Instellingen
+Settings/DefaultMoreSidebarTab/Caption: Standaard 'Meer' zijpaneel tab
+Settings/DefaultMoreSidebarTab/Hint: Geef aan welke 'Meer' tab in het zijpaneel standaard wordt getoond
 Settings/DefaultSidebarTab/Caption: Standaard tab in zijpaneel
 Settings/DefaultSidebarTab/Hint: Geef aan welke tab in het zijpaneel standaard wordt getoond
 Settings/EditorToolbar/Caption: Editor knoppenbalk
@@ -155,6 +159,10 @@ Settings/ToolbarButtonStyle/Styles/Boxed: Vierkante rand
 Settings/ToolbarButtonStyle/Styles/Rounded: Ronde rand
 StoryView/Caption: 'Story' view
 StoryView/Prompt: Huidige view:
+Stylesheets/Caption: Stijlbladen
+Stylesheets/Expand/Caption: Klap alles uit
+Stylesheets/Hint: Dit is de getoonde CSS van de huidige stijlblad-tiddlers gelabeld met <<tag "$:/tags/Stylesheet">>
+Stylesheets/Restore/Caption: Herstel
 Theme/Caption: Thema
 Theme/Prompt: Huidig thema:
 TiddlerFields/Caption: Tiddler velden

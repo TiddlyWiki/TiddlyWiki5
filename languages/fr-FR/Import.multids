@@ -7,6 +7,12 @@ Listing/Import/Caption: Importer
 Listing/Select/Caption: Sélectionner
 Listing/Status/Caption: Statut
 Listing/Title/Caption: Titre
+Listing/Preview: Prévisualisation :
+Listing/Preview/Text: Texte
+Listing/Preview/TextRaw: Texte (brut)
+Listing/Preview/Fields: Champs
+Listing/Preview/Diff: Diff
+Listing/Preview/DiffFields: Diff (champs)
 Upgrader/Plugins/Suppressed/Incompatible: Plugin bloqué : incompatible ou obsolète
 Upgrader/Plugins/Suppressed/Version: Plugin bloqué (la version <<incoming>> en cours d'importation est plus ancienne que la version <<existing>> actuelle)
 Upgrader/Plugins/Upgraded: Plugin mis à jour depuis <<incoming>> vers <<upgraded>>

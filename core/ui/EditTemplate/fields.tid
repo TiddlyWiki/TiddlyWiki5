@@ -10,10 +10,13 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 [[hide]] -[title{$(config-title)$}]
 \end
 
-\define new-field-inner()
+\define new-field()
+<$vars name={{$:/temp/newfieldname}}>
 <$reveal type="nomatch" text="" default=<<name>>>
 <$button>
-<$action-sendmessage $message="tm-add-field" $name=<<name>> $value=<<value>>/>
+<$action-sendmessage $message="tm-add-field"
+$name=<<name>>
+$value={{$:/temp/newfieldvalue}}/>
 <$action-deletetiddler $tiddler="$:/temp/newfieldname"/>
 <$action-deletetiddler $tiddler="$:/temp/newfieldvalue"/>
 <<lingo Fields/Add/Button>>
@@ -24,14 +27,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 <<lingo Fields/Add/Button>>
 </$button>
 </$reveal>
-\end
-
-\define new-field()
-<$set name="name" value={{$:/temp/newfieldname}}>
-<$set name="value" value={{$:/temp/newfieldvalue}}>
-<<new-field-inner>>
-</$set>
-</$set>
+</$vars>
 \end
 
 <div class="tc-edit-fields">

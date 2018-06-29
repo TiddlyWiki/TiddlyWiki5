@@ -18,7 +18,7 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 </span>
 </$list>
 </$button>
-<$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="below" animate="yes">
+<$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="belowleft" animate="yes">
 
 <div class="tc-drop-down">
 

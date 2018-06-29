@@ -85,6 +85,14 @@ body.tc-body {
 	fill: <<colour foreground>>;
 }
 
+<<if-background-attachment """
+
+body.tc-body {
+        background-color: transparent;
+}
+
+""">>
+
 h1, h2, h3, h4, h5, h6 {
 	line-height: 1.2;
 	font-weight: 300;
@@ -177,6 +185,10 @@ input:not([type]) {
 	background: <<colour background>>;
 }
 
+input[type="checkbox"] {
+  vertical-align: middle;
+}
+
 .tc-muted {
 	color: <<colour muted-foreground>>;
 }
@@ -263,7 +275,7 @@ table tfoot tr td {
 button.tc-tiddlylink,
 a.tc-tiddlylink {
 	text-decoration: none;
-	font-weight: normal;
+	font-weight: 500;
 	color: <<colour tiddler-link-foreground>>;
 	-webkit-user-select: inherit; /* Otherwise the draggable attribute makes links impossible to select */
 }
@@ -460,6 +472,16 @@ html body.tc-body .tc-btn-rounded:hover svg {
 .tc-btn-text {
 	padding: 0;
 	margin: 0;
+}
+
+/* used for documentation "fake" buttons */
+.tc-btn-standard {
+	line-height: 1.8;
+	color: #667;
+	background-color: #e0e0e0;
+	border: 1px solid #888;
+	padding: 2px 1px 2px 1px;
+	margin: 1px 4px 1px 4px;
 }
 
 .tc-btn-big-green {
@@ -692,6 +714,10 @@ button.tc-untagged-label {
 .tc-page-controls {
 	margin-top: 14px;
 	font-size: 1.5em;
+}
+
+.tc-page-controls .tc-drop-down {
+  font-size: 1rem;
 }
 
 .tc-page-controls button {
@@ -1389,11 +1415,6 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 1em;
 }
 
-.tc-drop-down-language-chooser img {
-	width: 2em;
-	vertical-align: baseline;
-}
-
 .tc-drop-down a, .tc-drop-down button {
 	display: block;
 	padding: 0 14px 0 14px;
@@ -2054,6 +2075,14 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	padding: 1em 1em 1em 1em;
 }
 
+.tc-check-list {
+	line-height: 2em;
+}
+
+.tc-check-list .tc-image-button {
+	height: 1.5em;
+}
+
 /*
 ** Message boxes
 */
@@ -2096,25 +2125,62 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 */
 
 .tc-chooser {
-	border: 1px solid <<colour table-border>>;
+	border-right: 1px solid <<colour table-header-background>>;
+	border-left: 1px solid <<colour table-header-background>>;
 }
+
 
 .tc-chooser-item {
-	border: 8px;
-	padding: 2px 4px;
+	border-bottom: 1px solid <<colour table-header-background>>;
+	border-top: 1px solid <<colour table-header-background>>;
+	padding: 2px 4px 2px 14px;
 }
 
-.tc-chooser-item a.tc-tiddlylink {
+.tc-drop-down .tc-chooser-item {
+	padding: 2px;
+}
+
+.tc-chosen,
+.tc-chooser-item:hover {
+	background-color: <<colour table-header-background>>;
+	border-color: <<colour table-footer-background>>;
+}
+
+.tc-chosen .tc-tiddlylink {
+	cursor:default;
+}
+
+.tc-chooser-item .tc-tiddlylink {
 	display: block;
 	text-decoration: none;
-	color: <<colour tiddler-link-foreground>>;
-	background-color: <<colour tiddler-link-background>>;
+	background-color: transparent;
 }
 
-.tc-chooser-item a.tc-tiddlylink:hover {
+.tc-chooser-item:hover .tc-tiddlylink:hover {
 	text-decoration: none;
-	color: <<colour tiddler-link-background>>;
-	background-color: <<colour tiddler-link-foreground>>;
+}
+
+.tc-drop-down .tc-chosen .tc-tiddlylink,
+.tc-drop-down .tc-chooser-item .tc-tiddlylink:hover {
+	color: <<colour foreground>>;
+}
+
+.tc-chosen > .tc-tiddlylink:before {
+	margin-left: -10px;
+	position: relative;
+	content: "» ";
+}
+
+.tc-chooser-item svg,
+.tc-chooser-item img{
+	width: 1em;
+	height: 1em;
+	vertical-align: middle;
+}
+
+.tc-language-chooser .tc-image-button img {
+	width: 2em;
+	vertical-align: -0.15em;
 }
 
 /*
@@ -2376,6 +2442,44 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 .tc-thumbnail-wrapper:hover .tc-thumbnail-caption {
 	filter: alpha(opacity=1);
 	opacity: 1;
+}
+
+/*
+** Diffs
+*/
+
+.tc-diff-equal {
+	background-color: <<colour diff-equal-background>>;
+	color: <<colour diff-equal-foreground>>;
+}
+
+.tc-diff-insert {
+	background-color: <<colour diff-insert-background>>;
+	color: <<colour diff-insert-foreground>>;
+}
+
+.tc-diff-delete {
+	background-color: <<colour diff-delete-background>>;
+	color: <<colour diff-delete-foreground>>;
+}
+
+.tc-diff-invisible {
+	background-color: <<colour diff-invisible-background>>;
+	color: <<colour diff-invisible-foreground>>;
+}
+
+.tc-diff-tiddlers th {
+	text-align: right;
+	background: <<colour background>>;
+	font-weight: normal;
+	font-style: italic;
+}
+
+.tc-diff-tiddlers pre {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
 }
 
 /*

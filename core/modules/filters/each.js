@@ -18,18 +18,34 @@ Export our filter function
 */
 exports.each = function(source,operator,options) {
 	var results =[] ,
-		value,values = {},
-		field = operator.operand || "title";
-	if(operator.suffix !== "list-item") {
+	value,values = {},
+	field = operator.operand || "title";
+	if(operator.suffix === "value" && field === "title") {
 		source(function(tiddler,title) {
-			if(tiddler) {
-				value = (field === "title") ? title : tiddler.getFieldString(field);
-				if(!$tw.utils.hop(values,value)) {
-					values[value] = true;
-					results.push(title);
-				}
+			if(!$tw.utils.hop(values,title)) {
+				values[title] = true;
+				results.push(title);
 			}
 		});
+	} else if(operator.suffix !== "list-item") {
+		if(field === "title") {
+			source(function(tiddler,title) {
+				if(tiddler && !$tw.utils.hop(values,title)) {
+					values[title] = true;
+					results.push(title);
+				}
+			});
+		} else {
+			source(function(tiddler,title) {
+				if(tiddler) {
+					value = tiddler.getFieldString(field);
+					if(!$tw.utils.hop(values,value)) {
+						values[value] = true;
+						results.push(title);
+					}
+				}
+			});
+		}
 	} else {
 		source(function(tiddler,title) {
 			if(tiddler) {

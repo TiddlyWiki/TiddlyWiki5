@@ -42,6 +42,8 @@ https://tiddlywiki.com/
 [[TW5|https://tiddlywiki.com/]]
 
 [[Mail me|mailto:me@where.net]]
+
+[[Open file|file:///c:/users/me/index.html]]
 ```
 
 For this syntax to work, the URL has to be recognisable as a URL. Otherwise, it is treated as a tiddler title. As a result, in case you want to link to a resource locatable using a relative path, use the extended syntax:
@@ -52,6 +54,8 @@ For this syntax to work, the URL has to be recognisable as a URL. Otherwise, it 
 [ext[Open file|./index.html]]
 
 [ext[Open file|../README.md]]
+
+[ext[Open file|c:\users\me\index.html]]
 ```
 
 The extended syntax still works with full URLs, although in that case it is not necessary:
@@ -60,6 +64,10 @@ The extended syntax still works with full URLs, although in that case it is not 
 [ext[https://tiddlywiki.com]]
 
 [ext[TW5|https://tiddlywiki.com]]
+
+[ext[Mail me|mailto:me@where.net]]
+
+[ext[Open file|file:///c:/users/me/index.html]]
 ```
 
 You can also use the extended syntax to force an external link:

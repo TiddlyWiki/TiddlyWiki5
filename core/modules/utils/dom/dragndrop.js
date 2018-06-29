@@ -32,10 +32,14 @@ exports.makeDraggable = function(options) {
 	// Add event handlers
 	$tw.utils.addEventListeners(domNode,[
 		{name: "dragstart", handlerFunction: function(event) {
+			if(event.dataTransfer === undefined) {
+				return false;
+			}
 			// Collect the tiddlers being dragged
 			var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
 				dragFilter = options.dragFilterFn && options.dragFilterFn(),
-				titles = dragTiddler ? [dragTiddler] : [];
+				titles = dragTiddler ? [dragTiddler] : [],
+			    	startActions = options.startActions;
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
@@ -46,6 +50,10 @@ exports.makeDraggable = function(options) {
 				$tw.dragInProgress = domNode;
 				// Set the dragging class on the element being dragged
 				$tw.utils.addClass(event.target,"tc-dragging");
+				// Invoke drag-start actions if given
+				if(startActions !== undefined) {
+					options.widget.invokeActionString(startActions,options.widget,event,{actionTiddler: titleString});
+				}
 				// Create the drag image elements
 				dragImage = options.widget.document.createElement("div");
 				dragImage.className = "tc-tiddler-dragger";
@@ -97,7 +105,20 @@ exports.makeDraggable = function(options) {
 		}},
 		{name: "dragend", handlerFunction: function(event) {
 			if(event.target === domNode) {
+				// Collect the tiddlers being dragged
+				var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
+					dragFilter = options.dragFilterFn && options.dragFilterFn(),
+					titles = dragTiddler ? [dragTiddler] : [],
+			    		endActions = options.endActions;
+				if(dragFilter) {
+					titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
+				}
+				var titleString = $tw.utils.stringifyList(titles);
 				$tw.dragInProgress = null;
+				// Invoke drag-end actions if given
+				if(endActions !== undefined) {
+					options.widget.invokeActionString(endActions,options.widget,event,{actionTiddler: titleString});
+				}
 				// Remove the dragging class on the element being dragged
 				$tw.utils.removeClass(event.target,"tc-dragging");
 				// Delete the drag image element

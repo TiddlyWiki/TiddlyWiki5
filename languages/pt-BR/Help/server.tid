@@ -1,0 +1,37 @@
+title: $:/language/Help/server
+description: Atribui um interface de servidor HTTP à TiddlyWiki
+
+O servidor incluído na TiddlyWiki 5 é muito elementar. Apesar de compatível com a TiddlyWeb não suporta muitas das funcionalidades necessárias para utilização robusta com interface pela Internet.
+
+Na sua forma mais elementar serve a representação de um tiddler específico. Com parâmetros adicionais serve tiddlers codificados em JSON, e suporta operações HTTP básicas para `GET`, `PUT` e `DELETE`.
+
+```
+--server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host> <pathprefix>
+```
+
+Os parâmetros são:
+
+* ''port'' - número da porta pela qual servir (por padrão "8080")
+* ''roottiddler'' - o tiddler a ser servido na raiz (por padrão "$:/core/save/all") 
+* ''rendertype'' - o formato de arquivo para o qual o tiddler deve ser representado (por padrão "text/plain")
+* ''servetype'' - o formato de arquivo para o qual o tiddler deve ser apresentado (por padrão "text/html")
+* ''username'' - o nome de usuário pré definido com o qual se assinam as edições
+* ''password'' - senha opcional para autenticação básica
+* ''host'' - endereço opcional do servidor de onde servir (por padrão  "127.0.0.1" conhecido como "localhost")
+* ''pathprefix'' - prefixo opcional para caminhos
+
+Se o parâmetro senha for especificado o navegador irá pedir ao usuário um nome e senha. Tenha em atenção que a senha é transmitida em texto simples tornando esta implementação imprópria para utilização geral
+
+Por exemplo:
+
+```
+--server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
+```
+
+O nome de usuário e a senha podem ser vazios se necessitar de definir o nome do servidor ou prefixo para caminhos e não pretender que a senha seja requerida:
+
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
+Para correr servidores TiddlyWiki múltiplos ao mesmo tempo é necessário colocar cada um numa porta diferente.

@@ -12,7 +12,7 @@ dependents: De lijst van plugintitels waarvan een plugin afhankelijk is
 description: De beschrijvende tekst voor een plugin of een modale dialoog
 draft.of: Voor concepttiddlers; bevat de titel van de te maken tiddler
 draft.title: Voor concepttiddlers; bevat de voorgestelde titel van de tiddler
-footer: De voettekst van een wizard
+footer: De voettekst van een 'wizard'
 hack-to-give-us-something-to-compare-against: Een tijdelijk opslagveld dat in [[$:/core/templates/static.content]] gebruikt wordt
 icon: De titel van de pictogramtiddler die met deze tiddler gekoppeld is
 library: Als 'yes' ingevuld is, dient de tiddler als JavaScript-bibliotheek opgeslagen te worden

@@ -16,6 +16,14 @@ button-border:
 code-background: #f7f7f9
 code-border: #e1e1e8
 code-foreground: #dd1144
+diff-delete-background: #ffc9c9
+diff-delete-foreground: <<colour foreground>>
+diff-equal-background: 
+diff-equal-foreground: <<colour foreground>>
+diff-insert-background: #aaefad
+diff-insert-foreground: <<colour foreground>>
+diff-invisible-background: 
+diff-invisible-foreground: <<colour muted-foreground>>
 dirty-indicator: #ff0000
 download-background: #34c734
 download-foreground: <<colour background>>

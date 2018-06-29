@@ -42,10 +42,10 @@ exports.startup = function() {
 	var fullscreen = $tw.utils.getFullScreenApis();
 	if(fullscreen) {
 		$tw.rootWidget.addEventListener("tm-full-screen",function(event) {
-			if(document[fullscreen._fullscreenElement]) {
-				document[fullscreen._exitFullscreen]();
+			if(event.event.target.ownerDocument[fullscreen._fullscreenElement]) {
+				event.event.target.ownerDocument[fullscreen._exitFullscreen]();
 			} else {
-				document.documentElement[fullscreen._requestFullscreen](Element.ALLOW_KEYBOARD_INPUT);
+				event.event.target.ownerDocument.documentElement[fullscreen._requestFullscreen](Element.ALLOW_KEYBOARD_INPUT);
 			}
 		});
 	}

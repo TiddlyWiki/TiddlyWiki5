@@ -51,7 +51,7 @@ BeakerSaver.prototype.info = {
 Static method that returns true if this saver is capable of working
 */
 exports.canSave = function(wiki) {
-	return !!window.DatArchive;
+	return !!window.DatArchive && location.protocol==="dat:";
 };
 
 /*

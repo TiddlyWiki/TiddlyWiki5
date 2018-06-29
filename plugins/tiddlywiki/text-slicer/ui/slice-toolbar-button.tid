@@ -11,7 +11,7 @@ Slice this text tiddler into chunks
 \end
 
 <$button tooltip=<<hint>> aria-label=<<hint>> class=<<tv-config-toolbar-class>>>
-<$action-sendmessage $message="tm-modal" $param="$:/plugins/tiddlywiki/text/slicer/ui/slice-modal" currentTiddler=<<currentTiddler>>/>
+<$action-sendmessage $message="tm-modal" $param="$:/plugins/tiddlywiki/text-slicer/ui/slice-modal" currentTiddler=<<currentTiddler>>/>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/plugins/tiddlywiki/text-slicer/images/text-slicer-icon}}
 </$list>

@@ -329,7 +329,7 @@ Sort an array of tiddler titles by a specified field
 	isDescending: true if the sort should be descending
 	isCaseSensitive: true if the sort should consider upper and lower case letters to be different
 */
-exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric) {
+exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric,isAlphaNumeric) {
 	var self = this;
 	titles.sort(function(a,b) {
 		var x,y,
@@ -358,6 +358,8 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 		y = Number(b);
 		if(isNumeric && (!isNaN(x) || !isNaN(y))) {
 			return compareNumbers(x,y);
+		} else if(isAlphaNumeric) {
+			return isDescending ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
 		} else if($tw.utils.isDate(a) && $tw.utils.isDate(b)) {
 			return isDescending ? b - a : a - b;
 		} else {
@@ -567,6 +569,8 @@ exports.sortByList = function(array,listTitle) {
 					afterTitle = tiddler.fields["list-after"];
 				if(beforeTitle === "") {
 					newPos = 0;
+				} else if(afterTitle === "") {
+					newPos = titles.length;
 				} else if(beforeTitle) {
 					newPos = titles.indexOf(beforeTitle);
 				} else if(afterTitle) {
@@ -781,6 +785,14 @@ exports.initParsers = function(moduleType) {
 			}
 		}
 	});
+	// Use the generic binary parser for any binary types not registered so far
+	if($tw.Wiki.parsers["application/octet-stream"]) {
+		Object.keys($tw.config.contentTypeInfo).forEach(function(type) {
+			if(!$tw.utils.hop($tw.Wiki.parsers,type) && $tw.config.contentTypeInfo[type].encoding === "base64") {
+				$tw.Wiki.parsers[type] = $tw.Wiki.parsers["application/octet-stream"];
+			}
+		});		
+	}
 };
 
 /*
@@ -843,7 +855,7 @@ exports.parseTextReference = function(title,field,index,options) {
 	}
 	if(field === "text" || (!field && !index)) {
 		if(tiddler && tiddler.fields) {
-			return this.parseText(tiddler.fields.type || "text/vnd.tiddlywiki",tiddler.fields.text,options);			
+			return this.parseText(tiddler.fields.type,tiddler.fields.text,options);			
 		} else {
 			return null;
 		}

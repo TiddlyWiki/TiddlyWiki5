@@ -1,6 +1,6 @@
 caption: tabs
 created: 20131228162203521
-modified: 20171113135543552
+modified: 20180408084453861
 tags: Macros [[Core Macros]]
 title: tabs Macro
 type: text/vnd.tiddlywiki
@@ -25,6 +25,8 @@ By default the tabs are arranged horizontally above the content. To get vertical
 : Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the content of the selected tab
 ;buttonTemplate
 : Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the content of the button for the selected tab
+;retain
+: Optionally, "yes" specifies that the content of the tabs should be retained when switching to another tab, avoiding re-rendering it (this can be useful to avoid video or audio sources unexpectedly resetting)
 
 Within the template, the title of the selected tab is available in the <<.var currentTab>> variable.
 

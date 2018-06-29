@@ -3,9 +3,19 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/new-journal-button}} {{$:/language/Buttons/NewJournal/Caption}}
 description: {{$:/language/Buttons/NewJournal/Hint}}
 
+\define journalActions()
+<$wikify name="journalTitle" text="""<$macrocall $name="now" format=<<journalTitleTemplate>>/>""">
+<$reveal type="nomatch" state=<<journalTitle>> text="">
+<$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<journalTags>> text={{{ [<journalTitle>get[]] }}}/>
+</$reveal>
+<$reveal type="match" state=<<journalTitle>> text="">
+<$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<journalTags>> text=<<journalText>>/>
+</$reveal>
+</$wikify>
+\end
+
 \define journalButton()
-<$button tooltip={{$:/language/Buttons/NewJournal/Hint}} aria-label={{$:/language/Buttons/NewJournal/Caption}} class=<<tv-config-toolbar-class>>>
-<$action-sendmessage $message="tm-new-tiddler" title=<<now "$(journalTitleTemplate)$">> tags="$(journalTags)$" text="$(journalText)$"/>
+<$button tooltip={{$:/language/Buttons/NewJournal/Hint}} aria-label={{$:/language/Buttons/NewJournal/Caption}} class=<<tv-config-toolbar-class>> actions=<<journalActions>>>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/new-journal-button}}
 </$list>

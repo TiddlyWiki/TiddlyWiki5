@@ -4,7 +4,7 @@ description: Toont hulp voor een TiddlyWiki commando
 Toont hulptekst voor een commando:
 
 ```
---help [<command>]
+--help [<commando>]
 ```
 
 wordt de commandonaam weggelaten dan wordt een lijst van beschikbare commando's getoond.

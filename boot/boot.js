@@ -135,8 +135,8 @@ $tw.utils.error = function(err) {
 		var dm = $tw.utils.domMaker,
 			heading = dm("h1",{text: errHeading}),
 			prompt = dm("div",{text: promptMsg, "class": "tc-error-prompt"}),
-			message = dm("div",{text: err}),
-			button = dm("button",{text: ( $tw.language == undefined ? "close" : $tw.language.getString("Buttons/Close/Caption") )}),
+			message = dm("div",{text: err, "class":"tc-error-message"}),
+			button = dm("div",{children: [dm("button",{text: ( $tw.language == undefined ? "close" : $tw.language.getString("Buttons/Close/Caption") )})], "class": "tc-error-prompt"}),
 			form = dm("form",{children: [heading,prompt,message,button], "class": "tc-error-form"});
 		document.body.insertBefore(form,document.body.firstChild);
 		form.addEventListener("submit",function(event) {
@@ -1281,8 +1281,7 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields,options) {
 /*
 Register the built in tiddler deserializer modules
 */
-$tw.modules.define("$:/boot/tiddlerdeserializer/js","tiddlerdeserializer",{
-	"application/javascript": function(text,fields) {
+var deserializeHeaderComment = function(text,fields) {
 		var headerCommentRegExp = new RegExp($tw.config.jsModuleHeaderRegExpString,"mg"),
 			match = headerCommentRegExp.exec(text);
 		fields.text = text;
@@ -1290,7 +1289,12 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/js","tiddlerdeserializer",{
 			fields = $tw.utils.parseFields(match[1].split(/\r?\n\r?\n/mg)[0],fields);
 		}
 		return [fields];
-	}
+	};
+$tw.modules.define("$:/boot/tiddlerdeserializer/js","tiddlerdeserializer",{
+	"application/javascript": deserializeHeaderComment
+});
+$tw.modules.define("$:/boot/tiddlerdeserializer/css","tiddlerdeserializer",{
+	"text/css": deserializeHeaderComment
 });
 $tw.modules.define("$:/boot/tiddlerdeserializer/tid","tiddlerdeserializer",{
 	"application/x-tiddler": function(text,fields) {
@@ -1942,7 +1946,7 @@ $tw.boot.startup = function(options) {
 		// For writable tiddler files, a hashmap of title to {filepath:,type:,hasMetaFile:}
 		$tw.boot.files = Object.create(null);
 		// System paths and filenames
-		$tw.boot.bootPath = path.dirname(module.filename);
+		$tw.boot.bootPath = options.bootPath || path.dirname(module.filename);
 		$tw.boot.corePath = path.resolve($tw.boot.bootPath,"../core");
 		// If there's no arguments then default to `--help`
 		if($tw.boot.argv.length === 0) {
@@ -1995,8 +1999,10 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.wordprocessingml.document","base64",".docx");
 	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","base64",".xlsx");
 	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.presentationml.presentation","base64",".pptx");
+	$tw.utils.registerFileType("text/x-bibtex","utf8",".bib",{deserializerType:"application/x-bibtex"});
 	$tw.utils.registerFileType("application/x-bibtex","utf8",".bib");
 	$tw.utils.registerFileType("application/epub+zip","base64",".epub");
+	$tw.utils.registerFileType("application/octet-stream","base64",".octet-stream");
 	// Create the wiki store for the app
 	$tw.wiki = new $tw.Wiki();
 	// Install built in tiddler fields modules

@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/codemirror-closebrackets/readme
+
+This plugin adds the ability to automatically insert the closing brackets when you type an opening bracket.
+Also enables highlighting of matching brackets.
+
+It needs the latest [[CodeMirror plugin|$:/plugins/tiddlywiki/codemirror]] to be installed
+

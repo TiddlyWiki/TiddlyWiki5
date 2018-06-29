@@ -58,7 +58,7 @@ SimpleServer.prototype.findMatchingRoute = function(request,state) {
 			match;
 		if(pathprefix) {
 			if(pathname.substr(0,pathprefix.length) === pathprefix) {
-				pathname = pathname.substr(pathprefix.length);
+				pathname = pathname.substr(pathprefix.length) || "/";
 				match = potentialRoute.path.exec(pathname);
 			} else {
 				match = false;
@@ -98,6 +98,11 @@ SimpleServer.prototype.requestHandler = function(request,response) {
 	state.wiki = self.wiki;
 	state.server = self;
 	state.urlInfo = url.parse(request.url);
+	// Optionally output debug info
+	if(self.get("debugLevel") !== "none") {
+		console.log("Request path:",JSON.stringify(state.urlInfo));
+		console.log("Request headers:",JSON.stringify(request.headers));
+	}
 	// Find the route that matches this path
 	var route = self.findMatchingRoute(request,state);
 	// Check for the username and password if we've got one
@@ -143,7 +148,7 @@ SimpleServer.prototype.requestHandler = function(request,response) {
 };
 	
 SimpleServer.prototype.listen = function(port,host) {
-	http.createServer(this.requestHandler.bind(this)).listen(port,host);
+	return http.createServer(this.requestHandler.bind(this)).listen(port,host);
 };
 
 var Command = function(params,commander,callback) {
@@ -290,22 +295,28 @@ Command.prototype.execute = function() {
 		username = this.params[4],
 		password = this.params[5],
 		host = this.params[6] || "127.0.0.1",
-		pathprefix = this.params[7];
+		pathprefix = this.params[7],
+		debugLevel = this.params[8] || "none";
+	if(parseInt(port,10).toString() !== port) {
+		port = process.env[port] || 8080;
+	}
 	this.server.set({
 		rootTiddler: rootTiddler,
 		renderType: renderType,
 		serveType: serveType,
 		username: username,
 		password: password,
-		pathprefix: pathprefix
+		pathprefix: pathprefix,
+		debugLevel: debugLevel
 	});
-	this.server.listen(port,host);
+	var nodeServer = this.server.listen(port,host);
 	$tw.utils.log("Serving on " + host + ":" + port,"brown/orange");
 	$tw.utils.log("(press ctrl-C to exit)","red");
 	// Warn if required plugins are missing
 	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
 		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
 	}
+	$tw.hooks.invokeHook('th-server-command-post-start', this.server, nodeServer);
 	return null;
 };
 

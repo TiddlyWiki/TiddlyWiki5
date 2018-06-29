@@ -1,7 +1,7 @@
 title: $:/language/Help/rendertiddlers
-description: Enregistre un ensemble de tiddlers sélectionnés par un filtre, avec un rendu correspondant au type de contenu (ContentType) spécifié
+description: Exécute le contenu d'un ensemble de tiddlers sélectionnés par un filtre, pour le type de contenu (ContentType) spécifié
 
-Enregistre un ensemble de tiddlers (sélectionnés par un filtre) dans le répertoire indiqué et avec l'extension indiquée — par défaut `.html`. Le choix du rendu est fonction du type de contenu (ContentType) spécifié — par défaut `text/html` :
+Enregistre vers le chemin indiqué et avec l'extension indiquée — par défaut `.html`, le résultat de l'exécution d'un ensemble de tiddlers (sélectionnés par un filtre). Le résultat de l'exécution est rendu selon le type de contenu (ContentType) spécifié — par défaut `text/html` :
 
 ```
 --rendertiddlers <filtre> <modèle> <chemindurépertoire> [<type>] [<extension>] ["noclean"]

@@ -1,0 +1,58 @@
+title: $:/plugins/tiddlywiki/codemirror-keymap-sublime-text/readme
+
+This plugin adds a ''Keymap'' with the most important ''Sublime Text'' keyboard shortcuts
+
+Shortcuts that interfere with ~TiddlyWiki shortcuts differ from the original sublime shortcuts to preserve functionality
+
+
+|Shortcut |Function |h
+|Shift-Tab |indentLess |
+|Shift-Ctrl-K |deleteLine |
+|Alt-Q |wrapLines |
+|Alt-T |transposeChars |
+|Alt-Left |goSubwordLeft |
+|Alt-Right |goSubwordRight |
+|Ctrl-Up |scrollLineUp |
+|Ctrl-Down |scrollLineDown |
+|Alt-L |selectLine |
+|Shift-Alt-L |splitSelectionByLine |
+|Ctrl-Esc |singleSelectionTop |
+|Shift-Enter |insertLineAfter |
+|Shift-Ctrl-Enter |insertLineBefore |
+|Ctrl-D |selectNextOccurrence |
+|Shift-Ctrl-Space |selectScope |
+|Shift-Ctrl-M |selectBetweenBrackets |
+|Alt-M |goToBracket |
+|Shift-Ctrl-Up |swapLineUp |
+|Shift-Ctrl-Down |swapLineDown |
+|Ctrl-/ |toggleCommentIndented |
+|Ctrl-J |joinLines |
+|Shift-Ctrl-D |duplicateLine |
+|F9 |sortLines |
+|Ctrl-F9 |sortLinesInsensitive |
+|F2 |nextBookmark |
+|Shift-F2 |prevBookmark |
+|Ctrl-F2 |toggleBookmark |
+|Shift-Ctrl-F2 |clearBookmarks |
+|Alt-F2 |selectBookmarks |
+|Backspace |smartBackspace |
+|Ctrl-K Ctrl-K |delLineRight |
+|Ctrl-K Alt-U |upcaseAtCursor |
+|Ctrl-K Alt-L |downcaseAtCursor |
+|Ctrl-K Ctrl-Space |setSublimeMark |
+|Ctrl-K Ctrl-A |selectToSublimeMark |
+|Ctrl-K Alt-D |deleteToSublimeMark |
+|Ctrl-K Ctrl-X |swapWithSublimeMark |
+|Ctrl-K Ctrl-Y |sublimeYank |
+|Ctrl-K Ctrl-C |showInCenter |
+|Ctrl-K Ctrl-G |clearBookmarks |
+|Ctrl-K Ctrl-Backspace |delLineLeft |
+|Ctrl-K Ctrl-0 |unfoldAll |
+|Ctrl-K Ctrl-J |unfoldAll |
+|Ctrl-Alt-Up |addCursorToPrevLine |
+|Ctrl-Alt-Down |addCursorToNextLine |
+|Ctrl-F3 |findUnder |
+|Shift-Ctrl-F3 |findUnderPrevious |
+|Shift-Ctrl-[ |fold |
+|Shift-Ctrl-] |unfold |
+|Ctrl-H |replace |
