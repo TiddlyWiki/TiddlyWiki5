@@ -1,14 +1,10 @@
 created: 20140717174825427
 modified: 20140717181845115
-tags: [[The User Interface]]
-title: Transclusion and TextReference
+tags: [[User Interface]]
+toc-order: 2
+title: Transclusion and Text Reference
 
-TODO: Reformat to be more stand-aloneish
-
-The previous parts about [[Widgets]] and the [[Parser]] explained how a block of WikiText is transformed into a DOM representation and how this presentation can react on changes to the wiki store.
-The previous chapters also describe that WikiText is saved in individual tiddlers, including the WikiText describing the UI components.
-This raises the question, how these multiple tiddlers are build up to a single UI.
-But before answering this question we need to introduce text references and transclusion.
+This section describes how transclusion and Text References are handled by TiddlyWiki.
 
 !!! ~TextReference
 A text reference describes a special notation to indirectly refer to the contents of a specified tiddler field.
@@ -20,10 +16,10 @@ The syntax of a text reference is:
 !!<fieldname> - specifies a field of the current tiddlers
 ```
 
-To obtain the actual text, the core plug-in adds a function to the wiki store ``getTextReference(textRef,defaultText,currTiddlerTitle)``. The "currentTiddlerTitle" is the title of a tiddler which is used when no tiddlerTitle is specified in the text reference.
+To obtain the actual text, the [[Core Plugin]] adds a function to the wiki store ``getTextReference(textRef,defaultText,currTiddlerTitle)``. The `currentTiddlerTitle` is the title of a tiddler which is used when no tiddlerTitle is specified in the text reference.
 What the currentTiddler should be, depends on where the text reference is used.
 If it is for example used as a widget attribute, the current tiddler is the tiddler which contains this widget.
-Text references are used by widgets (attributes), filteroperators (parameter) and in transclusions.
+Text references are used by [[Widget]]s (attributes), filteroperators (parameter) and in transclusions.
 These elements use the ``getTextReference(textRef,defaultText,currTiddlerTitle)`` function.
 
 !!! Transclusion

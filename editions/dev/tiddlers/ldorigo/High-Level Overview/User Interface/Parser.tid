@@ -1,24 +1,41 @@
-chapter.of: UI and Rendering Pipeline
 created: 20140717174120958
 modified: 20140717202324456
-sub.num: 2
-tags: doc
+tags: [[User Interface]]
+toc-order: 1
 title: Parser
 
-TODO: Merge with [[ParsingMechanism]]
 
-The first stage of WikiText processing is the parser.
-A Parser is provided by a module with ``module-type: parser`` and is responsible to transform block of text to a parse-tree.
-The parse-tree consists of nested nodes like
+The first stage of WikiText UI processing is the parser.
+A Parser is provided by a module with ``module-type: parser`` and is responsible to transform a block of text into a parse-tree.
+The parse-tree consists of nested nodes like this:
+
 
 ```js
-{type: "element", tag: <string>, attributes: {}, children: []} - an HTML element
-{type: "text", text: <string>} - a text node
-{type: "entity", entity: <string>} - an HTML entity like &copy; for a copyright symbol
-{type: "raw", html: <string>} - raw HTML
+{
+    type: "element", 
+    tag: <string>, 
+    attributes: {}, 
+    children: []
+} - a HTML element
+
+{
+    type: "text", 
+    text: <string>
+} - a text node
+
+{
+    type: "entity", 
+    entity: <string>
+} - a HTML entity like &copy; for a copyright symbol
+
+{
+    type: "raw", 
+    html: <string>
+} - raw HTML
 ```
 
-The core plug-in provides a recursive descent WikiText parser which loads it's individual rules from individual modules.
+The [[Core Plugin]] provides a recursive descent [[WikiText]] parser which loads its individual rules from individual modules.
+
 Thus a developer can provide additional rules by using ``module-type: wikirule``. Each rule can produce a list of parse-tree nodes.
 A simple example for a wikirule producing a ``<hr>`` from ``---`` can be found in [[horizrule.js|$:/core/modules/parsers/wikiparser/rules/horizrule.js]]
 
@@ -29,14 +46,82 @@ It the recognises them by the $ character at the beginning of the tag name and i
 it uses the tag name for the type:
 
 ```js
-{type: "list", tag: "$list", attributes: {}, children: []} - a list element
+{
+    type: "list", 
+    tag: "$list", 
+    attributes: {}, 
+    children: []
+} - a list element
 ```
 
-The [[Widgets]] part will reveal why this makes sense and how each node is transformed into a widget.
-Another special characteristic of the html-rule or the parse nodes in general is the attributes property.
-Attributes in the parse-tree are not stored as simple strings but they are nodes of its own to make indirect text references available as attributes as described in [[Widgets]]:
+The [[Widgets]] section explains why this makes sense and how each node is transformed into a widget.
+Another special characteristic of the html-rule or the parse nodes in general is the `attributes` property.
+Attributes in the parse-tree are not stored as simple strings but they are nodes of their own to make indirect text references available as attributes, as described in [[Widgets]]:
 
 ```js
-{type: "string", value: <string>} - literal string
-{type: "indirect", textReference: <textReference>} - indirect through a text reference
+{
+    type: "string", 
+    value: <string>
+} - literal string
+
+{
+    type: "indirect", 
+    textReference: <textReference>
+} - indirect through a text reference
+```
+
+Here is a more advanced example:
+
+```js
+> JSON.stringify($tw.wiki.parseText("text/vnd.tiddlywiki","Some //italics// and a {{Transclusion}}.").tree)
+
+[
+	{
+		type: "element", 
+		tag: "p", 
+		children: [
+			{
+				type: "text", 
+				text: "Some "
+			},
+			{
+				type: "element", 
+				tag: "em", 
+				children: [
+					{
+						type: "text", 
+						text: "italics"
+					}
+				]
+			},
+			{
+				type: "text", 
+				text: " and a "
+			},
+			{
+				type: "tiddler", 
+				attributes: {
+					tiddler: {
+						type: "string", 
+						value: "Transclusion"
+					}
+				}, children: [
+					{
+						type: "transclude", 
+						attributes:{
+							tiddler: {
+								type: "string", 
+								value: "Transclusion"
+							}
+						}
+					}
+				]
+			},
+			{
+				type: "text", 
+				text: "."
+			}
+		]
+	}
+]
 ```
