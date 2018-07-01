@@ -1,0 +1,7 @@
+created: 20180701175133376
+modified: 20180701184605633
+tags: [[WebServer Authentication]]
+title: WebServer Basic Authentication
+type: text/vnd.tiddlywiki
+
+Basic authentication is only available if credentials are specified via the  [[password|WebServer Parameter: password]] or [[credentials|WebServer Parameter: credentials]] parameters.

@@ -1,0 +1,49 @@
+created: 20180626150526207
+modified: 20180701181140249
+tags: ListenCommand ServerCommand Features
+title: WebServer
+type: text/vnd.tiddlywiki
+
+When [[running under Node.js|TiddlyWiki on Node.js]], TiddlyWiki includes a simple HTTP/HTTPS web server that allows you to use it from any browser running on the same machine or over a network.
+
+<<.tip """The web server includes a very simple mechanism allowing multiple users to log in with different credentials. The implementation is designed to be simple and easy to use, and would not generally be considered robust enough for use on the open internet. It is intended for use by individuals or small groups on a trusted network. It is recommended to use an external proxy before exposing it on the Internet.""">>
+
+! How It Works
+
+The web server listens for requests coming over the network, and performs the following actions in turn:
+
+* [[Authentication|WebServer Authentication]] is the process of identifying the current user. TiddlyWiki supports three types of authentication:
+** [[Anonymous Access|WebServer Anonymous Access]] allows any user to access resources without requiring authentication. Optionally, a username can still be specified for signing edits
+** [[Basic Authentication|WebServer Basic Authentication]] requires the user to enter a username and password combination which TiddlyWiki validates against an internal database of credentials
+** [[Header Authentication|WebServer Header Authentication]] requires an external proxy to place the username of the current user in a trusted header of the request. It is often used as the basis of "single sign-on" features
+* [[Authorization|WebServer Authorization]] is the process of determining which resources may be accessed by a particular user. TiddlyWiki implements a simple scheme whereby read and write access to the wiki can be independently controlled.
+* [[Routing|WebServer Routing]] is the process of acting on the request, and returning any required data.
+
+! Usage
+
+The web server is started with the ListenCommand (which supersedes the older ServerCommand). All parameters are optional, so the simplest form is:
+
+```
+tiddlywiki mywikifolder --listen
+```
+
+By default, the wiki will be served with no security. Adding username and password parameters enforces basic authentication:
+
+```
+tiddlywiki mywikifolder --listen username=test password=tset
+```
+
+(Note that the ListenCommand uses [[NamedCommandParameters]])
+
+!! Arguments
+
+The full list of available optional parameters is:
+
+<<list-links filter:"[tag[WebServer Parameters]]">>
+
+! Examples
+
+ 5124  openssl req -newkey rsa:2048 -new -nodes -keyout key.pem -out csr.pem
+ 5125  openssl x509 -req -days 365 -in csr.pem -signkey key.pem -out server.crt
+ 5126  tiddlywiki editions/tw5.com-server/ --listen username=joe password=bloggs tlskey=key.pem tlscert=server.crt
+ 

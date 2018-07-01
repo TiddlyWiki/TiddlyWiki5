@@ -1,0 +1,7 @@
+created: 20180701175127987
+modified: 20180701184603110
+tags: [[WebServer Authentication]]
+title: WebServer Header Authentication
+type: text/vnd.tiddlywiki
+
+Header authentication is only available if is configured via the [[authenticated-user-header|WebServer Parameter: authenticated-user-header]]
