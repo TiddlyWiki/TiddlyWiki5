@@ -42,7 +42,7 @@ function Server(options) {
 	}
 	$tw.utils.extend({},this.defaultVariables,options.variables);
 	// Initialise CSRF
-	this.csrfDisable = this.get("csrfdisable") === "yes";
+	this.csrfDisable = this.get("csrf-disable") === "yes";
 	// Initialise authorization
 	var authorizedUserName = (this.get("username") && this.get("password")) ? this.get("username") : "(anon)";
 	this.authorizationPrincipals = {
@@ -62,8 +62,8 @@ function Server(options) {
 	// Initialise the http vs https
 	this.listenOptions = {};
 	this.protocol = "http";
-	var tlsKeyFilepath = this.get("tlskey"),
-		tlsCertFilepath = this.get("tlscert");
+	var tlsKeyFilepath = this.get("tls-key"),
+		tlsCertFilepath = this.get("tls-cert");
 	if(tlsCertFilepath && tlsKeyFilepath) {
 		this.listenOptions.key = fs.readFileSync(path.resolve($tw.boot.wikiPath,tlsKeyFilepath),"utf8");
 		this.listenOptions.cert = fs.readFileSync(path.resolve($tw.boot.wikiPath,tlsCertFilepath),"utf8");
@@ -75,10 +75,14 @@ function Server(options) {
 Server.prototype.defaultVariables = {
 	port: "8080",
 	host: "127.0.0.1",
-	roottiddler: "$:/core/save/all",
-	rendertype: "text/plain",
-	servetype: "text/html",
-	debuglevel: "none"
+	"root-tiddler": "$:/core/save/all",
+	"root-render-type": "text/plain",
+	"root-serve-type": "text/html",
+	"tiddler-render-type": "text/html",
+	"tiddlertemplate": "$:/core/templates/server/static.tiddler.html",
+	"system-tiddler-render-type": "text/plain",
+	"system-tiddler-template": "$:/core/templates/wikified-tiddler",
+	"debug-level": "none"
 };
 
 Server.prototype.get = function(name) {
@@ -102,7 +106,7 @@ Server.prototype.addAuthenticator = function(AuthenticatorClass) {
 };
 
 Server.prototype.findMatchingRoute = function(request,state) {
-	var pathprefix = this.get("pathprefix") || "";
+	var pathprefix = this.get("path-prefix") || "";
 	for(var t=0; t<this.routes.length; t++) {
 		var potentialRoute = this.routes[t],
 			pathRegExp = potentialRoute.path,
@@ -185,7 +189,7 @@ Server.prototype.requestHandler = function(request,response) {
 	// Find the route that matches this path
 	var route = self.findMatchingRoute(request,state);
 	// Optionally output debug info
-	if(self.get("debuglevel") !== "none") {
+	if(self.get("debug-level") !== "none") {
 		console.log("Request path:",JSON.stringify(state.urlInfo));
 		console.log("Request headers:",JSON.stringify(request.headers));
 		console.log("authenticatedUsername:",state.authenticatedUsername);
