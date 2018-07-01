@@ -1,5 +1,6 @@
 title: $:/core/templates/server/static.tiddler.wikitext
 
+\whitespace trim
 <div class="tc-tiddler-title">
 <div class="tc-titlebar">
 <h2><$text text=<<currentTiddler>>/></h2>

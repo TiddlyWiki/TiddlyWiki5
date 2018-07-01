@@ -1,29 +1,29 @@
 title: $:/core/templates/server/static.tiddler.html
 
+\whitespace trim
 \define tv-wikilink-template() $uri_encoded$
-`<!doctype html>
+<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="generator" content="TiddlyWiki" />
-<meta name="tiddlywiki-version" content="`{{$:/core/templates/version}}`" />
+<meta name="tiddlywiki-version" content={{$:/core/templates/version}} />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="format-detection" content="telephone=no">
-<link id="faviconLink" rel="shortcut icon" href="%24%3A%2Ffavicon.ico">
+<link id="faviconLink" rel="shortcut icon" href="favicon.ico">
 <link rel="stylesheet" href="%24%3A%2Fcore%2Ftemplates%2Fstatic.template.css">
-<title>`<$view field="caption"><$view field="title"/></$view>: {{$:/core/wiki/title}}`</title>
+<title><$view field="caption"><$view field="title"/></$view>: {{$:/core/wiki/title}}</title>
 </head>
 <body class="tc-body">
+<$transclude tiddler="$:/core/templates/server/static.sidebar.wikitext" mode="inline"/>
 <section class="tc-story-river">
 <div class="tc-tiddler-frame">
-`<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
-<$view tiddler="$:/core/templates/server/static.tiddler.wikitext" format="htmlwikified"/>
-</$importvariables>`
+<$transclude tiddler="$:/core/templates/server/static.tiddler.wikitext" mode="inline"/>
 </div>
 </section>
 </body>
 </html>
-`
+</$importvariables>
