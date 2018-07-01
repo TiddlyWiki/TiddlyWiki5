@@ -79,7 +79,7 @@ Server.prototype.defaultVariables = {
 	"root-render-type": "text/plain",
 	"root-serve-type": "text/html",
 	"tiddler-render-type": "text/html",
-	"tiddlertemplate": "$:/core/templates/server/static.tiddler.html",
+	"tiddler-template": "$:/core/templates/server/static.tiddler.html",
 	"system-tiddler-render-type": "text/plain",
 	"system-tiddler-template": "$:/core/templates/wikified-tiddler",
 	"debug-level": "none"
