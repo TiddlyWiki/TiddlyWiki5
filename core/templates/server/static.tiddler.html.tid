@@ -15,7 +15,7 @@ title: $:/core/templates/server/static.tiddler.html
 <meta name="format-detection" content="telephone=no">
 <link id="faviconLink" rel="shortcut icon" href="favicon.ico">
 <link rel="stylesheet" href="%24%3A%2Fcore%2Ftemplates%2Fstatic.template.css">
-<title><$view field="caption"><$view field="title"/></$view>: {{$:/core/wiki/title}}</title>
+<title><$view field="caption" format="plainwikified"><$view field="title"/></$view>: <$view tiddler="$:/core/wiki/title" format="plainwikified"/></title>
 </head>
 <body class="tc-body">
 <$transclude tiddler="$:/core/templates/server/static.sidebar.wikitext" mode="inline"/>
