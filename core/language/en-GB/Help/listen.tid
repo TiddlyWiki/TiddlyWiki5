@@ -15,7 +15,8 @@ All parameters are optional with safe defaults, and can be specified in any orde
 * ''path-prefix'' - optional prefix for paths
 * ''port'' - port number on which to listen; non-numeric values are interpreted as a system environment variable from which the port number is extracted (defaults to "8080")
 * ''credentials'' - pathname of credentials CSV file (relative to wiki folder)
-* ''username'' - the default username for signing edits
+* ''anon-username'' - the username for signing edits for anonymous users
+* ''username'' - optional username for basic authentication
 * ''password'' - optional password for basic authentication
 * ''authenticated-user-header'' - optional name of header to be used for trusted authentication
 * ''readers'' - comma separated list of principals allowed to write to this wiki
