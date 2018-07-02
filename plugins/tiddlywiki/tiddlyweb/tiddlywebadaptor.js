@@ -79,10 +79,11 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 				// Check if we're logged in
 				self.isLoggedIn = json.username !== "GUEST";
 				self.isReadOnly = !!json["read_only"];
+				self.isAnonymous = !!json.anonymous;
 			}
 			// Invoke the callback if present
 			if(callback) {
-				callback(null,self.isLoggedIn,json.username,self.isReadOnly);
+				callback(null,self.isLoggedIn,json.username,self.isReadOnly,self.isAnonymous);
 			}
 		}
 	});

@@ -165,26 +165,20 @@ Server.prototype.requestHandler = function(request,response) {
 		response.end();
 		return;		
 	}
-	// Check whether anonymous access is enabled
-	if(!this.isAuthorized(authorizationType,null)) {
-		// Complain if there are no active authenticators
-		if(this.authenticators.length < 1) {
-			$tw.utils.error("Warning: Authentication required but no authentication modules are active");
-			response.writeHead(401,"Authentication required to login to '" + this.servername + "'");
-			response.end();
-			return;
-		}
-		// Authenticate
+	// Check whether anonymous access is granted
+	state.allowAnon = this.isAuthorized(authorizationType,null);
+	// Authenticate with the first active authenticator
+	if(this.authenticators.length > 0) {
 		if(!this.authenticators[0].authenticateRequest(request,response,state)) {
 			// Bail if we failed (the authenticator will have sent the response)
 			return;
-		}
-		// Authorize with the authenticated username
-		if(!this.isAuthorized(authorizationType,state.authenticatedUsername)) {
-			response.writeHead(401,"'" + state.authenticatedUsername + "' is not authorized to access '" + this.servername + "'");
-			response.end();
-			return;
-		}
+		}		
+	}
+	// Authorize with the authenticated username
+	if(!this.isAuthorized(authorizationType,state.authenticatedUsername)) {
+		response.writeHead(401,"'" + state.authenticatedUsername + "' is not authorized to access '" + this.servername + "'");
+		response.end();
+		return;
 	}
 	// Find the route that matches this path
 	var route = self.findMatchingRoute(request,state);

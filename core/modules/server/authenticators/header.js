@@ -31,11 +31,12 @@ Returns false if the request couldn't be authenticated having sent an appropriat
 HeaderAuthenticator.prototype.authenticateRequest = function(request,response,state) {
 	// Otherwise, authenticate as the username in the specified header
 	var username = request.headers[this.header];
-	if(!username) {
+	if(!username && !state.allowAnon) {
 		response.writeHead(401,"Authorization header required to login to '" + state.server.servername + "'");
 		response.end();
 		return false;
 	} else {
+		// authenticatedUsername will be undefined for anonymous users
 		state.authenticatedUsername = username;
 		return true;
 	}

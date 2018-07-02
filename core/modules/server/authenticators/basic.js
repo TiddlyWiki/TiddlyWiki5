@@ -61,8 +61,12 @@ Returns false if the request couldn't be authenticated having sent an appropriat
 */
 BasicAuthenticator.prototype.authenticateRequest = function(request,response,state) {
 	// Extract the incoming username and password from the request
-	var header = request.headers.authorization || "",
-		token = header.split(/\s+/).pop() || "",
+	var header = request.headers.authorization || "";
+	if(!header && state.allowAnon) {
+		// If there's no header and anonymous access is allowed then we don't set authenticatedUsername
+		return true;
+	}
+	var token = header.split(/\s+/).pop() || "",
 		auth = $tw.utils.base64Decode(token),
 		parts = auth.split(/:/),
 		incomingUsername = parts[0],
