@@ -1,0 +1,16 @@
+title: $:/core/templates/tiddlywiki5.js
+
+\rules only filteredtranscludeinline transcludeinline
+
+/*
+{{ $:/core/copyright.txt }}
+*/
+
+<!--~~ Library modules ~~-->
+{{{ [is[system]type[application/javascript]library[yes]] ||$:/core/templates/plain-text-tiddler}}}
+<!--~~ Boot prefix ~~-->
+{{ $:/boot/bootprefix.js ||$:/core/templates/plain-text-tiddler}}
+<!--~~ Core plugin ~~-->
+{{$:/core/templates/tiddlywiki5.js/tiddlers}}
+<!--~~ Boot kernel ~~-->
+{{ $:/boot/boot.js ||$:/core/templates/plain-text-tiddler}}
