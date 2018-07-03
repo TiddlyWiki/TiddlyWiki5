@@ -1,7 +1,7 @@
 created: 20180702160923664
-modified: 20180702161839087
-tags: WebServer
-title: WebServer HTTPS
+modified: 20180703100549667
+tags: [[WebServer Guides]]
+title: Using HTTPS
 type: text/vnd.tiddlywiki
 
 By default, TiddlyWiki's WebServer serves resources over the insecure HTTP protocol. The risk is minimal if it is only being used within a private, trusted network but in many situations it is desirable to use a secure HTTPS connection.
@@ -13,7 +13,7 @@ Certificates can be obtained from a certification authority such as https://lets
 To create the required certificate files with the popular [[openssl|https://www.openssl.org/]] utility:
 
 ```
-openssl req -newkey rsa:2048 -new -nodes -keyout key.pem -out csr.pem
-openssl x509 -req -days 365 -in csr.pem -signkey key.pem -out server.crt
+openssl req -newkey rsa:2048 -new -nodes -keyout mywikifolder/key.pem -out mywikifolder/csr.pem
+openssl x509 -req -days 365 -in mywikifolder/csr.pem -signkey mywikifolder/key.pem -out mywikifolder/server.crt
 tiddlywiki mywikifolder --listen username=joe password=bloggs tlskey=key.pem tlscert=server.crt
 ```
