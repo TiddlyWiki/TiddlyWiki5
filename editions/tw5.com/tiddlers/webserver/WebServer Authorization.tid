@@ -26,6 +26,5 @@ tiddlywiki mywikifolder --listen credentials=myusers.csv readers=joe,mary writer
 In the following example, read access is granted to all authenticated users, but only "mary" is granted write access:
 
 ```
-tiddlywiki mywikifolder --listen credentials=myusers.csv readers=(authenticated) writers=mary
+tiddlywiki mywikifolder --listen credentials=myusers.csv "readers=(authenticated)" writers=mary
 ```
-
