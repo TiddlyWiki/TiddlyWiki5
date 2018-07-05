@@ -60,13 +60,15 @@ function Server(options) {
 		self.addRoute(routeDefinition);
 	});
 	// Initialise the http vs https
-	this.listenOptions = {};
+	this.listenOptions = null;
 	this.protocol = "http";
 	var tlsKeyFilepath = this.get("tls-key"),
 		tlsCertFilepath = this.get("tls-cert");
 	if(tlsCertFilepath && tlsKeyFilepath) {
-		this.listenOptions.key = fs.readFileSync(path.resolve($tw.boot.wikiPath,tlsKeyFilepath),"utf8");
-		this.listenOptions.cert = fs.readFileSync(path.resolve($tw.boot.wikiPath,tlsCertFilepath),"utf8");
+		this.listenOptions = {
+			key: fs.readFileSync(path.resolve($tw.boot.wikiPath,tlsKeyFilepath),"utf8"),
+			cert: fs.readFileSync(path.resolve($tw.boot.wikiPath,tlsCertFilepath),"utf8")
+		};
 		this.protocol = "https";
 	}
 	this.transport = require(this.protocol);
@@ -236,7 +238,13 @@ Server.prototype.listen = function(port,host) {
 		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
 	}
 	// Listen
-	return this.transport.createServer(this.listenOptions,this.requestHandler.bind(this)).listen(port,host);
+	var server;
+	if(this.listenOptions {
+		server = this.transport.createServer(this.listenOptions,this.requestHandler.bind(this));
+	} else {
+		server = this.transport.createServer(this.requestHandler.bind(this));
+	}
+	return server.listen(port,host);
 };
 
 exports.Server = Server;
