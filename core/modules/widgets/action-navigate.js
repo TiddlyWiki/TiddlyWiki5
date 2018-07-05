@@ -55,6 +55,7 @@ NavigateWidget.prototype.refresh = function(changedTiddlers) {
 Invoke the action associated with this widget
 */
 NavigateWidget.prototype.invokeAction = function(triggeringWidget,event) {
+	event = event || {};
 	var bounds = triggeringWidget && triggeringWidget.getBoundingClientRect && triggeringWidget.getBoundingClientRect(),
 		suppressNavigation = event.metaKey || event.ctrlKey || (event.button === 1);
 	if(this.actionScroll === "yes") {

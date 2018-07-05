@@ -1,0 +1,10 @@
+key: ((new-journal))
+tags: $:/tags/KeyboardShortcut
+title: $:/core/ui/KeyboardShortcuts/new-journal
+
+\define journalAction()
+{{$:/core/ui/Actions/new-journal}}
+\end
+<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}}>
+<<journalAction>>
+</$navigator>
