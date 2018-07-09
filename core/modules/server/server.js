@@ -239,7 +239,7 @@ Server.prototype.listen = function(port,host) {
 	}
 	// Listen
 	var server;
-	if(this.listenOptions {
+	if(this.listenOptions) {
 		server = this.transport.createServer(this.listenOptions,this.requestHandler.bind(this));
 	} else {
 		server = this.transport.createServer(this.requestHandler.bind(this));
