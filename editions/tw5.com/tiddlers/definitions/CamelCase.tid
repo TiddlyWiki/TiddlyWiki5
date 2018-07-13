@@ -3,4 +3,10 @@ modified: 201308281853
 tags: Definitions
 title: CamelCase
 
-CamelCase is formed by taking a phrase, capitalising the initial letter of each word, and smashing the words together to form a portmanteau word. Most wikis use CamelCase to signal phrases that should automatically become links.
+CamelCase is formed by taking a phrase, capitalising the initial letter of each word, and smashing the words together to form a portmanteau word. Most wikis use [[CamelCase|]] to signal phrases that should automatically become links.
+
+Wikipedia defines CamelCase as:
+
+<<<
+the practice of writing compound words or phrases such that each word or abbreviation in the middle of the phrase begins with a capital letter, with no intervening spaces or punctuation
+<<<https://en.wikipedia.org/wiki/Camel_case
