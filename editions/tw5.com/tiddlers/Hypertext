@@ -1,0 +1,18 @@
+created: 20180713184021140
+modified: 20180713191037339
+tags: 
+title: Hypertext
+
+<<<
+Hypertext is text displayed on a computer display or other electronic devices with references (hyperlinks) to other text that the reader can immediately access, or where text can be revealed progressively at multiple levels of detail 
+
+<<<https://en.wikipedia.org/wiki/Hypertext
+
+TiddlyWiki has its own WikiText to write 
+[[HyperText Markup Language]], it could be defined as a browser based hypertext editor. 
+
+The [[CodeMirror Plugin]] offers features associated with text stand alone text editors.
+
+
+
+
