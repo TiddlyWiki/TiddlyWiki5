@@ -1,11 +1,13 @@
-title: WidgetModules
-tags: Modules
+title: Widget Modules
+tags: [[Modules and Plugins]]
 created: 201311011307
 modified: 201311011307
+toc-order: 5
 
-! Introduction
+TODO: This whole tiddler is rather confusing, it will need to be rewritten after I get a better understanding of widgets.
 
-Widget modules are used as part of the RenderingMechanism to implement each type of renderable entity. As well as the widgets that are familiar to end users, the following primitives are also implemented as widgets:
+
+Widget modules are used when building the [[Widget]] in the [[User Interface]] to implement each type of renderable entity. As well as the widgets that are familiar to end users, the following primitives are also implemented as widgets:
 
 * HTML text nodes
 * HTML element nodes
@@ -20,7 +22,7 @@ The following widget properties are defined by the core. The lifecycle of a widg
 |!Name |!Description |
 |''parseTreeNode'' |Reference to the parse tree node corresponding to this widget |
 |''wiki'' |Reference to the [[Wiki]] object associated with this widget |
-|''variables'' |Hashmap of information about each [[widget variable|WidgetVariables]] (see below) |
+|''variables'' |Hashmap of information about each widget variable (see below) |
 |''parentWidget'' |Reference to the parent widget |
 |''document'' |Reference to the document object associated with this widget. Usually either the browser global `document` variable or a reference to the FakeDomMechanism's `$tw.fakeDocument` |
 |''attributes'' |Hashmap of information about each attribute attached to this widget (see below) |
@@ -28,7 +30,7 @@ The following widget properties are defined by the core. The lifecycle of a widg
 |''domNodes'' |For widgets that directly generate DOM nodes, an array of the generated nodes |
 |''eventListeners'' |Array of event listener definitions |
 
-!! Widget Variables
+! Widget Variables
 
 The widget variables defined on a widget are stored in a hashmap of the variable name. The hashmap contains:
 
@@ -36,7 +38,7 @@ The widget variables defined on a widget are stored in a hashmap of the variable
 * `params`: array of parameters for macro definitions, each `{name: "<name>", default: "<optionaldefault>"}`
 * `value`: string value of variable
 
-!! Widget Attributes
+! Widget Attributes
 
 The widget attributes associated with a widget are stored in a hashmap of the attribute name. The hashmap contains an object that describes the attribute value. Currently three attribute value types are supported:
 

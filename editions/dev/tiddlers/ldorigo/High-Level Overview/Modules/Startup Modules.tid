@@ -1,9 +1,10 @@
 created: 20140708084217106
 modified: 20140717180507412
-tags: Modules
+toc-order: 1
+tags: [[Modules and Plugins]]
 title: Startup Modules
 
-Modules with ``module-type: startup`` have to export a  function named ``startup`` and may export a name property to identify this module. The startup function will be executed by the boot kernel at the end of the boot process.
+Modules with ``module-type: startup`` have to export a function named ``startup`` and may export a name property to identify themselves. The startup function will be executed by the boot kernel at the end of the boot process:
 
 ```js
 // From boot.js:
@@ -23,4 +24,4 @@ $tw.boot.executeNextStartupTask();
 
 ``executeNextStartupTask()`` will execute the remaining startup modules in ``remainingStartupModules``. A startup module can export the variables ``before`` and/or ``after``, each containing an array of names of other startup modules. ``executeNextStartupTask()`` will use this information to execute the modules in the correct order.
 
-Startup modules can be marked as synchronous by exporting ``synchronous = true``. If synchronous is set to false, the startup function is executed with an callback function as the first argument. The startup function has to call this function to allow subsequent startup modules to get executed. This is necessary when the startup function itself uses asynchronous calls.
+Startup modules can be marked as synchronous by exporting ``synchronous = true``. If `synchronous` is set to `false`, the startup function is executed with a callback function as the first argument. The startup function has to call this callback to allow subsequent startup modules to get executed. This is necessary when the startup function itself uses asynchronous calls.
