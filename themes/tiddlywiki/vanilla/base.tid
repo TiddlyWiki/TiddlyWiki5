@@ -2526,3 +2526,9 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 .tc-tree li span {
     	color: lightgray;
 }
+
+select {
+        color: <<colour select-tag-foreground>>;
+        background: <<colour select-tag-background>>;
+}
+
