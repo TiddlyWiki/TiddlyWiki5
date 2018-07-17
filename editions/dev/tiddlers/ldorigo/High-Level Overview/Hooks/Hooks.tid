@@ -2,6 +2,7 @@ created: 20141122200310516
 modified: 20170209130807520
 title: Hooks
 tags: [[High-Level Overview]]
+toc-order: 6
 type: text/vnd.tiddlywiki
 
 Hooks provide a way for plugins to intercept and modify default functionality. Hooks are added as follows:

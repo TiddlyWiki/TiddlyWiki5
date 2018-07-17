@@ -13,6 +13,6 @@ My goals are two:
 
 <div class="tc-table-of-contents">
 
-<<toc-selective-expandable "Welcome to TiddlyWiki's Documentation" "sort[toc-order]">>
+<<toc-selective-expandable "Welcome to TiddlyWiki's Documentation" "sortn[toc-order]">>
 
 </div>

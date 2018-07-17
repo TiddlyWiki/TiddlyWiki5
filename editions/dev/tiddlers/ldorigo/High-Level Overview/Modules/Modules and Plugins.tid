@@ -1,6 +1,7 @@
 created: 20140708084103508
 modified: 20140715094857594
 tags: [[High-Level Overview]]
+toc-order: 5
 title: Modules and Plugins
 
 After the [[Boot Mechanism]] provides the functions used to load tiddlers, the rest of the TiddlyWiki application is loaded as modules.
@@ -25,6 +26,6 @@ For example, by providing a module-type of `saver`, TiddlyWiki knows that this m
 
 <div class="tc-table-of-contents">
 
-<<toc-selective-expandable "Modules and Plugins" "sort[toc-order]">>
+<<toc-selective-expandable "Modules and Plugins" "sortn[toc-order]">>
 
 </div>

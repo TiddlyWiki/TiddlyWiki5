@@ -1,6 +1,6 @@
-chapter.of: TiddlyWiki - A quick Overview
 created: 20140708081952235
 modified: 20180626195539035
+toc-order: 1
 tags: [[High-Level Overview]]
 title: Microkernel
 
@@ -12,6 +12,6 @@ The microkernel is the only part of TiddlyWiki that is //not// managed as tiddle
 
 <div class="tc-table-of-contents">
 
-<<toc-selective-expandable "Microkernel" "sort[toc-order]">>
+<<toc-selective-expandable "Microkernel" "sortn[toc-order]">>
 
 </div>

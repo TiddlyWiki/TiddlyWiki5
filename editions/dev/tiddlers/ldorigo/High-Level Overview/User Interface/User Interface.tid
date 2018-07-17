@@ -1,6 +1,7 @@
 created: 20140708082154372
 modified: 20140715083432391
 tags: [[High-Level Overview]]
+toc-order: 3
 title: User Interface
 
 Following the "anything is a tiddler" concept, even the UI is built from Tiddlers.
@@ -17,6 +18,6 @@ This section describes in detail the different parts of the UI rendering.
 
 <div class="tc-table-of-contents">
 
-<<toc-selective-expandable "User Interface" "sort[toc-order]">>
+<<toc-selective-expandable "User Interface" "sortn[toc-order]">>
 
 </div>
