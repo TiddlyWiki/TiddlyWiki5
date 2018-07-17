@@ -1,8 +1,8 @@
 created: 20170209145207186
 modified: 20170209145633522
-tags: HookMechanism
+tags: Hooks
+toc-order: 8
 title: Hook: th-renaming-tiddler
-type: text/vnd.tiddlywiki
 
 This hook allows plugins to inspect tiddlers before they are modified by the `tm-rename-tiddler` message.
 

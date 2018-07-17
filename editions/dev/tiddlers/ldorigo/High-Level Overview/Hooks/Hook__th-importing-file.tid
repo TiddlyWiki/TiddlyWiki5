@@ -1,8 +1,8 @@
 created: 20171010115148355
 modified: 20171010115148355
-tags: HookMechanism
+tags: Hooks
+toc-order: 4
 title: Hook: th-importing-file
-type: text/vnd.tiddlywiki
 
 This hook allows plugins to inspect or modify the details of files imported via drag and drop or the "import" button. It is invoked as each [[File object|https://developer.mozilla.org/en-US/docs/Web/API/File]] provided by the browser in response to an import or drag and drop is being read. The hook function can choose to ignore the file, in which case TiddlyWiki's default processing proceeds to read and import the content of the file. Alternatively, the hook function can process the file to extract the tiddlers itself, and then pass them back to TiddlyWiki to be handled by the rest of the import process.
 

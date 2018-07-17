@@ -1,7 +1,8 @@
 created: 20150908150314994
 modified: 20170209145506427
-tags: HookMechanism
+tags: Hooks
 title: Hook: th-saving-tiddler
+toc-order: 11
 type: text/vnd.tiddlywiki
 
 This hook allows plugins to inspect or modify tiddlers before they are saved via the ''confirm'' toolbar button; the hook is not invoked for tiddlers that are saved through other means, such as state tiddlers created by the ActionSetFieldWidget.
