@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/commands/server.js
+title: $:/core/modules/commands/listen.js
 type: application/javascript
 module-type: command
 
-Deprecated legacy command for serving tiddlers
+Listen for HTTP requests and serve tiddlers
 
 \*/
 (function(){
@@ -15,8 +15,10 @@ Deprecated legacy command for serving tiddlers
 var Server = require("$:/core/modules/server/server.js").Server;
 
 exports.info = {
-	name: "server",
-	synchronous: true
+	name: "listen",
+	synchronous: true,
+	namedParameterMode: true,
+	mandatoryParameters: [],
 };
 
 var Command = function(params,commander,callback) {
@@ -27,23 +29,14 @@ var Command = function(params,commander,callback) {
 };
 
 Command.prototype.execute = function() {
+	var self = this;
 	if(!$tw.boot.wikiTiddlersPath) {
 		$tw.utils.warning("Warning: Wiki folder '" + $tw.boot.wikiPath + "' does not exist or is missing a tiddlywiki.info file");
 	}
 	// Set up server
 	this.server = new Server({
 		wiki: this.commander.wiki,
-		variables: {
-			port: this.params[0],
-			host: this.params[6],
-			"root-tiddler": this.params[1],
-			"root-render-type": this.params[2],
-			"root-serve-type": this.params[3],
-			username: this.params[4],
-			password: this.params[5],
-			"path-prefix": this.params[7],
-			"debug-level": this.params[8]
-		}
+		variables: self.params
 	});
 	var nodeServer = this.server.listen();
 	$tw.hooks.invokeHook("th-server-command-post-start",this.server,nodeServer);

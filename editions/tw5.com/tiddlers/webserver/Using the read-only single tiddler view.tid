@@ -1,0 +1,7 @@
+created: 20180703095435813
+modified: 20180703100525994
+tags: [[WebServer Guides]]
+title: Using the read-only single tiddler view
+type: text/vnd.tiddlywiki
+
+As well as serving the full interactive wiki at the path `/` (e.g. http://127.0.0.1:8080/), TiddlyWiki also serves an experimental single tiddler per page, read-only view of the wiki at the path `/<url-encoded-tiddler-title>` (e.g. http://127.0.0.1:8080/HelloThere). It uses a simplified page layout, and implements links between tiddlers, but there are no other interactive features.

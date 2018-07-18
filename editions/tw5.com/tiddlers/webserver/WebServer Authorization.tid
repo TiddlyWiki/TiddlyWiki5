@@ -1,0 +1,30 @@
+created: 20180630194006239
+modified: 20180701174944267
+tags: WebServer
+title: WebServer Authorization
+type: text/vnd.tiddlywiki
+
+''Authorization'' is the process of determining which resources may be accessed by a particular user. It occurs after [[authentication|WebServer Authentication]] has determined the identity of the user. TiddlyWiki's WebServer implements a simple authorization scheme which permits independent control of who has read and write access to a wiki.
+
+The WebServer parameters [[readers|WebServer Parameter: readers]] and [[writers|WebServer Parameter: writers]] each contain a comma separated list of //principals// (which is to say, either usernames or certain special tokens) which should have read or write access respectively.
+
+The available special tokens are:
+
+* ''(anon)'' - indicates all anonymous users
+* ''(authenticated)'' - indicates all authenticated users
+
+!! Examples
+
+These example use the [[credentials|WebServer Parameter: credentials]] parameter to specify the location of a file containing usernames and passwords.
+
+In the first example, read access is permitted for the users "joe" and "mary", with write access restricted to "mary":
+
+```
+tiddlywiki mywikifolder --listen credentials=myusers.csv readers=joe,mary writers=mary
+```
+
+In the following example, read access is granted to all authenticated users, but only "mary" is granted write access:
+
+```
+tiddlywiki mywikifolder --listen credentials=myusers.csv "readers=(authenticated)" writers=mary
+```

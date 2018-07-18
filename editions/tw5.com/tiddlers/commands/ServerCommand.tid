@@ -1,8 +1,12 @@
+caption: server
 created: 20131219163923630
-modified: 20131229130513478
+modified: 20180626150505679
 tags: Commands
 title: ServerCommand
 type: text/vnd.tiddlywiki
-caption: server
+
+''Note that the `--server` command is now deprecated in favour of the new ListenCommand''.
+
+See WebServer for details of TiddlyWiki's web server functionality.
 
 {{$:/language/Help/server}}
