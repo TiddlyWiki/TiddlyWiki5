@@ -200,10 +200,10 @@ Server.prototype.requestHandler = function(request,response) {
 	// TODO: Presumably this would need tweaking if we supported PUTting binary tiddlers
 	request.setEncoding("utf8");
 	// Dispatch the appropriate method
-	if(route.bodyFormat === "stream" || !route.bodyFormat || request.method === "GET" || request.method === "HEAD"){
-		//let the route handle the request stream itself if there is one
+	if(route.bodyFormat === "stream" || request.method === "GET" || request.method === "HEAD"){
+		//let the route handle the request stream itself
 		route.handler(request,response,state);
-	} else if(route.bodyFormat === "string"){
+	} else if(route.bodyFormat === "string" || !route.bodyFormat){
 		var data = "";
 		request.on("data",function(chunk) {
 			data += chunk.toString();
