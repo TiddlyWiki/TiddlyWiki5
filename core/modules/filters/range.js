@@ -17,23 +17,22 @@ Export our filter function
 */
 exports.range = function(source,operator,options) {
 	var results = [];
-
 	// Split the operand into numbers delimited by these symbols
-	var parts = operator.operand.split(/[,:;]/g), beg, end, inc, i, fixed = 0;
-
-	for (i = 0; i < parts.length; ++i) {
+	var parts = operator.operand.split(/[,:;]/g),
+		beg, end, inc, i, fixed = 0;
+	for (i=0; i<parts.length; i++) {
 		// Validate real number
-		if (!/^\s*[+-]?((\d+(\.\d*)?)|(\.\d+))\s*$/.test(parts[i]))
-			return ["range: bad number \""+parts[i]+"\""];
-
+		if(!/^\s*[+-]?((\d+(\.\d*)?)|(\.\d+))\s*$/.test(parts[i])) {
+			return ["range: bad number \"" + parts[i] + "\""];
+		}
 		// Count digits; the most precise number determines decimal places in output.
 		var frac = /\.\d+/.exec(parts[i]);
-		if (frac) fixed = Math.max(fixed, frac[0].length-1);
-		
+		if(frac) {
+			fixed = Math.max(fixed,frac[0].length-1);
+		}
 		parts[i] = parseFloat(parts[i]);
 	}
-
-	switch (parts.length) {
+	switch(parts.length) {
 		case 1:
 			beg = 0;
 			end = parts[0];
@@ -50,30 +49,42 @@ exports.range = function(source,operator,options) {
 			inc = Math.abs(parts[2]);
 			break;
 	}
-
-	if (inc === 0) return ["range: increment 0 causes infinite loop"];
-
+	if(inc === 0) {
+		return ["range: increment 0 causes infinite loop"];
+	}
 	// May need to count backwards
-	var direction = ((end<beg) ? -1 : 1);
+	var direction = ((end < beg) ? -1 : 1);
 	inc *= direction;
-
 	// Estimate number of resulting elements
-	if ((end-beg)/inc > 10000) return ["range: too many steps (over 10K)"];
-
+	if((end - beg) / inc > 10000) {
+		return ["range: too many steps (over 10K)"];
+	}
 	// Avoid rounding error on last step
-	end += direction * 0.5 * Math.pow(0.1, fixed);
-
+	end += direction * 0.5 * Math.pow(0.1,fixed);
 	var safety = 10010;
-
 	// Enumerate the range
-	if (end<beg) {for (i = beg; i > end; i += inc) {results.push(i.toFixed(fixed)); if (--safety<0) break;}}
-	else         {for (i = beg; i < end; i += inc) {results.push(i.toFixed(fixed)); if (--safety<0) break;}}
-
-	if (safety<0) return ["range: unexpectedly large output"];
-
+	if (end<beg) {
+		for(i=beg; i>end; i+=inc) {
+			results.push(i.toFixed(fixed));
+			if(--safety<0) {
+				break;
+			}
+		}
+	} else {
+		for(i=beg; i<end; i+=inc) {
+			results.push(i.toFixed(fixed));
+			if(--safety<0) {
+				break;
+			}
+		}
+	}
+	if(safety<0) {
+		return ["range: unexpectedly large output"];
+	}
 	// Reverse?
-	if (operator.prefix === "!") results.reverse();
-
+	if(operator.prefix === "!") {
+		results.reverse();
+	}
 	return results;
 };
 
