@@ -196,12 +196,11 @@ Server.prototype.requestHandler = function(request,response) {
 		response.end();
 		return;
 	}
-
-	//receive the request body if necessary and hand off to the route handler
-	if(route.bodyFormat === "stream" || request.method === "GET" || request.method === "HEAD"){
-		//let the route handle the request stream itself
+	// Receive the request body if necessary and hand off to the route handler
+	if(route.bodyFormat === "stream" || request.method === "GET" || request.method === "HEAD") {
+		// Let the route handle the request stream itself
 		route.handler(request,response,state);
-	} else if(route.bodyFormat === "string" || !route.bodyFormat){
+	} else if(route.bodyFormat === "string" || !route.bodyFormat) {
 		// Set the encoding for the incoming request
 		request.setEncoding("utf8");
 		var data = "";
@@ -212,17 +211,18 @@ Server.prototype.requestHandler = function(request,response) {
 			state.data = data;
 			route.handler(request,response,state);
 		});
-	} else if(route.bodyFormat === "buffer"){
+	} else if(route.bodyFormat === "buffer") {
 		var data = [];
 		request.on("data",function(chunk) {
 			data.push(chunk);
 		});
-		request.on("end",function(){
+		request.on("end",function() {
 			state.data = Buffer.concat(data);
 			route.handler(request,response,state);
 		})
 	} else {
-		throw "Invalid bodyFormat " + route.bodyFormat + " in route " + route.method + " " + route.path.source;
+		response.writeHead(400,"Invalid bodyFormat " + route.bodyFormat + " in route " + route.method + " " + route.path.source);
+		response.end();
 	}
 };
 
