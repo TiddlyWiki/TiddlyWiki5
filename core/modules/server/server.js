@@ -196,25 +196,33 @@ Server.prototype.requestHandler = function(request,response) {
 		response.end();
 		return;
 	}
-	// Set the encoding for the incoming request
-	// TODO: Presumably this would need tweaking if we supported PUTting binary tiddlers
-	request.setEncoding("utf8");
-	// Dispatch the appropriate method
-	switch(request.method) {
-		case "GET": // Intentional fall-through
-		case "DELETE":
+
+	//receive the request body if necessary and hand off to the route handler
+	if(route.bodyFormat === "stream" || request.method === "GET" || request.method === "HEAD"){
+		//let the route handle the request stream itself
+		route.handler(request,response,state);
+	} else if(route.bodyFormat === "string" || !route.bodyFormat){
+		// Set the encoding for the incoming request
+		request.setEncoding("utf8");
+		var data = "";
+		request.on("data",function(chunk) {
+			data += chunk.toString();
+		});
+		request.on("end",function() {
+			state.data = data;
 			route.handler(request,response,state);
-			break;
-		case "PUT":
-			var data = "";
-			request.on("data",function(chunk) {
-				data += chunk.toString();
-			});
-			request.on("end",function() {
-				state.data = data;
-				route.handler(request,response,state);
-			});
-			break;
+		});
+	} else if(route.bodyFormat === "buffer"){
+		var data = [];
+		request.on("data",function(chunk) {
+			data.push(chunk);
+		});
+		request.on("end",function(){
+			state.data = Buffer.concat(data);
+			route.handler(request,response,state);
+		})
+	} else {
+		throw "Invalid bodyFormat " + route.bodyFormat + " in route " + route.method + " " + route.path.source;
 	}
 };
 
