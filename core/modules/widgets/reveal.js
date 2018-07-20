@@ -174,18 +174,16 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		var refreshed = false,
-			currentlyOpen = this.isOpen;
-		this.readState();
-		if(this.isOpen !== currentlyOpen) {
+		var currentlyOpen = this.isOpen;
+		if(this.isOpen !== currentlyOpen || (this.stateTitle && changedTiddlers[this.stateTitle])) {
 			if(this.retain === "yes") {
 				this.updateState();
 			} else {
 				this.refreshSelf();
-				refreshed = true;
+				return true;
 			}
 		}
-		return this.refreshChildren(changedTiddlers) || refreshed;
+		return this.refreshChildren(changedTiddlers);
 	}
 };
 
