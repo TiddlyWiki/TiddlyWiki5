@@ -79,6 +79,7 @@ KeyboardWidget.prototype.execute = function() {
 	this.tag = this.getAttribute("tag");
 	this.keyInfoArray = $tw.keyboardManager.parseKeyDescriptors(this.key);
 	this["class"] = this.getAttribute("class");
+	this.shortcutKeyDescriptor = this.key.match(/^\(\(.*\)\)$/g) ? this.key.replace(/^\(\(/,'').replace(/\)\)$/,'') : undefined;
 	// Make child widgets
 	this.makeChildWidgets();
 };
@@ -88,7 +89,8 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 KeyboardWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.message || changedAttributes.param || changedAttributes.key || changedAttributes["class"] || changedAttributes.tag) {
+	if(changedAttributes.message || changedAttributes.param || changedAttributes.key || changedAttributes["class"] || changedAttributes.tag ||
+	  (this.shortcutKeyDescriptor && changedTiddlers["$:/config/shortcuts/" + this.shortcutKeyDescriptor])) {
 		this.refreshSelf();
 		return true;
 	}
