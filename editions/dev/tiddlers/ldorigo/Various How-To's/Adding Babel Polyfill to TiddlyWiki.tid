@@ -2,6 +2,7 @@ modified: 20160112175006000
 created: 20160112025328000
 title: Adding Babel Polyfill to TiddlyWiki
 type: text/vnd.tiddlywiki
+tags: [[Various How-To's]]
 
 Not all browsers support the latest features of ES2015. The Babel project offers a polyfill that can be included into your TiddlyWiki so those features can be available to your plugins. To do this you will need a copy of the polyfill source.
 
