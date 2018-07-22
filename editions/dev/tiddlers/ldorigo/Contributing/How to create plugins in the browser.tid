@@ -1,6 +1,7 @@
 created: 2014013122133816
 modified: 20150502082437656
-tags: howto, [[Contributing to the TiddlyWiki Plugin Library]]
+tags: [[Contributing to the TiddlyWiki Plugin Library]]
+toc-order: 2
 title: How to create plugins in the browser
 type: text/vnd.tiddlywiki
 

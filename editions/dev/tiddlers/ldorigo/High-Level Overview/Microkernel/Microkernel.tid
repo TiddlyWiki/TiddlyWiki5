@@ -12,6 +12,6 @@ The microkernel is the only part of TiddlyWiki that is //not// managed as tiddle
 
 <div class="tc-table-of-contents">
 
-<<toc-selective-expandable "Microkernel" "sortn[toc-order]">>
+<<toc-selective-expandable "Microkernel" "nsort[toc-order]">>
 
 </div>

@@ -26,6 +26,6 @@ For example, by providing a module-type of `saver`, TiddlyWiki knows that this m
 
 <div class="tc-table-of-contents">
 
-<<toc-selective-expandable "Modules and Plugins" "sortn[toc-order]">>
+<<toc-selective-expandable "Modules and Plugins" "nsort[toc-order]">>
 
 </div>

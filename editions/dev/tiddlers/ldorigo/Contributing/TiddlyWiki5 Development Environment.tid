@@ -1,9 +1,11 @@
 created: 201308251618
 modified: 201308262048
-tags: [[Development Environment]]
+tags: [[Contributing to the TiddlyWiki Core]]
+toc-order: 1
 title: TiddlyWiki5 Development Environment
 
-//This information is for people who are working on the development of TiddlyWiki5 itself, and isn't relevant for end users//
+
+TODO: This should be greatly expanded, including information and suggestions on how to initially set up the development environment.
 
 ! Setting up npm
 

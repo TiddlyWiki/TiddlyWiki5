@@ -16,6 +16,6 @@ The TiddlyWiki Core Application is provided as a single plugin which is the focu
 
 <div class="tc-table-of-contents">
 
-<<toc-selective-expandable "Core Plugin" "sortn[toc-order]">>
+<<toc-selective-expandable "Core Plugin" "nsort[toc-order]">>
 
 </div>

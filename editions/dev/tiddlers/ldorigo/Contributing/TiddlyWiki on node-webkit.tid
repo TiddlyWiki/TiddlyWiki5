@@ -9,7 +9,7 @@ tags: [[Development Environment]]
 ! Setting up
 
 # Create a folder with the following contents:
-## The appropriate copy of [[NW.js]] for your platform, downloaded from https://github.com/nwjs/nw.js
+## The appropriate copy of [[NW.js]] for your platform, downloaded from [[https://github.com/nwjs/nw.js]]
 ## Your TiddlyWiki HTML file as `index.html`
 ## A file called `package.json` with the following content:
 ##> {{package.json for NW.js}}

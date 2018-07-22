@@ -17,6 +17,6 @@ While the microkernel contains a bare store and some deserializers to load tiddl
 
 <div class="tc-table-of-contents">
 
-<<toc-selective-expandable "Data Persistence" "sortn[toc-order]">>
+<<toc-selective-expandable "Data Persistence" "nsort[toc-order]">>
 
 </div>
