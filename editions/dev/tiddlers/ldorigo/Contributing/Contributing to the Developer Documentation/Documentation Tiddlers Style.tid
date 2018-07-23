@@ -1,0 +1,11 @@
+created: 20141016083308219
+modified: 20141107213203691
+title: Documentation Tiddlers Style
+type: text/vnd.tiddlywiki
+toc-order: 2
+tags: [[Contributing to the Developer Documentation]]
+
+The rules described here are similar to the ones on TiddlyWiki's Documentation for [[Instruction Tiddlers|https://tiddlywiki.com/#Instruction%20Tiddlers]] and [[Reference Tiddlers|https://tiddlywiki.com/#Reference%20Tiddlers]].
+
+Most sections in this documentation are adressed to advanced users, and serve as reference. They should follow [[Reference Tiddlers|https://tiddlywiki.com/#Reference%20Tiddlers]] rules. 
+The only exceptions are in the [[Contributing]] and [[Various How-To's]] sections, which can have more of a tutorial style, and can thus follow the rules prescribed for [[Instruction Tiddlers|https://tiddlywiki.com/#Instruction%20Tiddlers]].
