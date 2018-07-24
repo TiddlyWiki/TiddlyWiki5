@@ -26,4 +26,6 @@ The main structure of the documentation is more or less fixed as follows:
 ** ...
 * ''Various How-To's'': General tutorials that don't fit elsewhere in the documentation.
 
-Feel free to add more sub-sections to the existing ones. Each section should contain a tiddler with the same name that briefly describes what the section is about, and containt a table of contents for the section. TODO: Make a macro for this?
+Feel free to add more sub-sections to the existing ones. 
+
+Each (sub-)section should contain a tiddler with the same name that briefly describes what the section is about and contains a table of contents for the section. TODO: Make a macro for this?
