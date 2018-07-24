@@ -1,0 +1,7 @@
+created: 20182506164000000
+modified: 20182506164000000
+title: Make a script to test for documentation guidelines
+tags: task
+
+
+A subset of the [[guidelines|Contributing to the Developer Documentation]] should be easy to check automatically (with regexes and the likes). It would be nice to have a script that automatically checks wether the rules are applied, to make it easier to expand the documentation while keeping a coherent style.

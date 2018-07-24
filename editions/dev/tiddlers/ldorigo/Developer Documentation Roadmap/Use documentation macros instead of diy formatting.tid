@@ -1,0 +1,7 @@
+created: 20182506164000000
+modified: 20182506164000000
+title: Use documentation macros instead of diy formatting
+tags: task
+
+
+Similarly to the official TiddlyWiki documentation, it's better to use the documentation macros defined in [[doc-macros]] rather than inline bold/italic/list formattings.

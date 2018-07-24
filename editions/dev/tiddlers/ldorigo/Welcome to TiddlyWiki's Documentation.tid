@@ -2,14 +2,13 @@ created: 20182506164000000
 modified: 20182506164000000
 title: Welcome to TiddlyWiki's Documentation
 
-This is an attempt by @ldorigo to make TiddlyWiki's code (and documentation) more accessible to newcomers.
 
-My goals are two:
+Welcome to the developer documentation for TiddlyWiki (https://tiddlywiki.com/).
 
-* Unify what's already present into a more uniform documentation, improving accessibility (some tiddlers are currently only accessible by search) and removing duplicate information
+The present wiki is an attempt by [[ldorigo|https://github.com/ldorigo]] to unify pre-existing documentation, both from the original TiddlyWiki's docs and from the work of Christian Jurke and Christian Heigele. Don't hesitate to contact me for questions regarding the documentation, either privately or on the [[Gitter Chat|https://gitter.im/TiddlyWiki/developers-and-geeks]].
 
-* Create a "step-by-step" tutorial that explains the source code, from boot to plugins.
-** Ideally, map each source code file to a corresponding tiddler on this wiki, which will contain detailed information on that file's functionality
+This is still a work in progress, so feel free to contribute if you are able to! You can see a list of to-do's here: [[Developer Documentation Roadmap]].
+
 
 <div class="tc-table-of-contents">
 

@@ -1,0 +1,8 @@
+created: 20182506164000000
+modified: 20182506164000000
+title: Check and remove TODO's from existing files
+tags: task
+
+
+Some tiddlers in this documentation currently contain sentences starting with `TODO:...`. They should be resolved/removed.
+
