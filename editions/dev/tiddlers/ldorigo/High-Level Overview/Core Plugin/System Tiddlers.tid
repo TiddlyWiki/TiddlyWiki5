@@ -6,7 +6,7 @@ title: System Tiddlers
 
 The core plug-in creates a distinction between //System Tiddlers// and normal (user-generated) ones.
 
-This is necessary because tiddlers are used both by the users (as the building blocks for their wiki) and the developers (as ways to extend/modify TiddlyWiki's working).
+This is necessary because tiddlers are used both by the users (as the building blocks for their wiki) and the developers (as ways to extend/modify ~TiddlyWiki's working).
 
 The core plug-in introduces the concept of system tiddlers. It builds on the convention that internal tiddler names start with ``$:/``.
 
@@ -15,4 +15,4 @@ These functions work with all tiddlers in the store but the options parameter pr
 By default it doesn't return system tiddlers. To get a list of all tiddlers including system tiddlers, this must be requested explicitly via the options.
 If a function wants to present a list of tiddlers to the user it can use these new functions so that internal application tiddlers don't clutter the list of results.
 
-These functions are added via the [Wikimethod Module Type]].
+These functions are added via [Wikimethod Modules]].

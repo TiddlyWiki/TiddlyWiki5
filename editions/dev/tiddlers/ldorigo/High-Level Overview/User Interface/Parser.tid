@@ -34,14 +34,14 @@ The parse-tree consists of nested nodes like this:
 } - raw HTML
 ```
 
-The [[Core Plugin]] provides a recursive descent [[WikiText]] parser which loads its individual rules from individual modules.
+The [[Core Plugin]] provides a recursive descent ~WikiText parser which loads its individual rules from individual modules.
 
 Thus a developer can provide additional rules by using ``module-type: wikirule``. Each rule can produce a list of parse-tree nodes.
 A simple example for a wikirule producing a ``<hr>`` from ``---`` can be found in [[horizrule.js|$:/core/modules/parsers/wikiparser/rules/horizrule.js]]
 
-HTML tags can be embedded into WikiText because of the [[html rule|$:/core/modules/parsers/wikiparser/rules/html.js]].
+HTML tags can be embedded into ~WikiText because of the [[html rule|$:/core/modules/parsers/wikiparser/rules/html.js]].
 This rule matches HTML tag syntax and creates ``type: "element"`` nodes.
-But the html-rule has another special purpose. By parsing the HTML tag syntax it implicitly parses WikiText widgets.
+But the html-rule has another special purpose. By parsing the HTML tag syntax it implicitly parses ~WikiText widgets.
 It the recognises them by the $ character at the beginning of the tag name and instead of producing "element" nodes 
 it uses the tag name for the type:
 

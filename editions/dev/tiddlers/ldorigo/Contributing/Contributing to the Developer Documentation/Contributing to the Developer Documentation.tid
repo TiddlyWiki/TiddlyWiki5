@@ -5,7 +5,7 @@ type: text/vnd.tiddlywiki
 toc-order: 4
 tags: [[Contributing]]
 
-This section presents a set of guidelines and rules for contributions to TiddlyWiki's developer documentation. Most rules are copied/adapted from [[the main documentation|https://tiddlywiki.com/#Documentation%20Style%20Guide]].
+This section presents a set of guidelines and rules for contributions to ~TiddlyWiki's developer documentation. Most rules are copied/adapted from [[the main documentation|https://tiddlywiki.com/#Documentation%20Style%20Guide]].
 
 The main structure of the documentation is more or less fixed as follows:
 

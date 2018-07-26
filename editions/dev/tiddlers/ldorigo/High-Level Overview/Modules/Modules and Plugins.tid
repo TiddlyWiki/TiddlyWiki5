@@ -4,8 +4,8 @@ tags: [[High-Level Overview]]
 toc-order: 5
 title: Modules and Plugins
 
-After the [[Boot Mechanism]] provides the functions used to load tiddlers, the rest of the TiddlyWiki application is loaded as modules.
-A module is a tiddler which has the type ``application/javascript`` and contains CommonJS compatible JavaScript code. This means a single module provides its public structures and functions in a variable called ``export``. Other modules can obtain these structures and functions by using a global ``require`` function.
+After the [[Boot Mechanism]] provides the functions used to load tiddlers, the rest of the ~TiddlyWiki application is loaded as modules.
+A module is a tiddler which has the type ``application/javascript`` and contains ~CommonJS compatible ~JavaScript code. This means a single module provides its public structures and functions in a variable called ``export``. Other modules can obtain these structures and functions by using a global ``require`` function.
 
 ```js
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -16,13 +16,13 @@ ButtonWidget.prototype = new Widget();
 In most cases, module tiddlers are packed into a plugin.
 Following the "everything is a tiddler" ideology, a plugin is a tiddler containing a bunch of other tiddlers. These are first converted into a JSON structure which then becomes the body of the plug-in tiddler.
 
-Plugins are not restricted to modules. They can contain, for example: widgets (TODO: Aren't widgets modules??), UI parts written in WikiText, even new filter operators or extensions to the WikiText parser. 
+Plugins are not restricted to modules. They can contain, for example: widgets (TODO: Aren't widgets modules??), UI parts written in ~WikiText, even new filter operators or extensions to the ~WikiText parser. 
 
 In fact the whole TW core is provided as a single plugin (hence the name [[Core Plugin]]). Tiddlers provided in a plugin are called shadow tiddlers and can not be edited. Instead, when trying to edit a shadow tiddler, a new tiddler with the same name is created which then "overrides" the shadow tiddler.
 
 Instead of requiring a specific module directly, a module developer can specify the type of the module he is developing by setting the field `module-type`.
 
-For example, by providing a module-type of `saver`, TiddlyWiki knows that this module implements a way of saving the whole wiki and when the user clicks on the save button, TiddlyWiki automatically considers the provided module to save the current state.
+For example, by providing a module-type of `saver`, ~TiddlyWiki knows that this module implements a way of saving the whole wiki and when the user clicks on the save button, ~TiddlyWiki automatically considers the provided module to save the current state.
 
 <div class="tc-table-of-contents">
 

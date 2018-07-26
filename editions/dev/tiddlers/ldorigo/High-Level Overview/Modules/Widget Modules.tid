@@ -7,7 +7,7 @@ toc-order: 5
 TODO: This whole tiddler is rather confusing, it will need to be rewritten after I get a better understanding of widgets.
 
 
-Widget modules are used when building the [[Widget]] in the [[User Interface]] to implement each type of renderable entity. As well as the widgets that are familiar to end users, the following primitives are also implemented as widgets:
+Widget modules are used when building the widgets in the [[User Interface]] to implement each type of renderable entity. As well as the widgets that are familiar to end users, the following primitives are also implemented as widgets:
 
 * HTML text nodes
 * HTML element nodes
@@ -21,10 +21,10 @@ The following widget properties are defined by the core. The lifecycle of a widg
 
 |!Name |!Description |
 |''parseTreeNode'' |Reference to the parse tree node corresponding to this widget |
-|''wiki'' |Reference to the [[Wiki]] object associated with this widget |
+|''wiki'' |Reference to the Wiki object associated with this widget |
 |''variables'' |Hashmap of information about each widget variable (see below) |
 |''parentWidget'' |Reference to the parent widget |
-|''document'' |Reference to the document object associated with this widget. Usually either the browser global `document` variable or a reference to the FakeDomMechanism's `$tw.fakeDocument` |
+|''document'' |Reference to the document object associated with this widget. Usually either the browser global `document` variable or a reference to the [[Fake Dom Mechanism]]'s `$tw.fakeDocument` |
 |''attributes'' |Hashmap of information about each attribute attached to this widget (see below) |
 |''children'' |Array of child widgets |
 |''domNodes'' |For widgets that directly generate DOM nodes, an array of the generated nodes |

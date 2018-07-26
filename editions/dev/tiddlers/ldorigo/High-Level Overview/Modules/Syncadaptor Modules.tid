@@ -5,14 +5,14 @@ title: Syncadaptor Modules
 toc-order: 5
 
 
-Syncadaptor Modules encapsulate storage mechanisms that can be used by the SyncMechanism. Two examples are:
+Syncadaptor modules encapsulate storage mechanisms that can be used by the [[Syncer]]. Two examples are:
 
-* The TiddlyWebAdaptor which interfaces with servers compatible with TiddlyWeb's HTTP API, such as TiddlyWeb itself and TiddlyWiki5's built-in ServerMechanism.
+* The ~TiddlyWeb Adaptor which interfaces with servers compatible with ~TiddlyWeb's HTTP API, such as ~TiddlyWeb itself and ~TiddlyWiki5's built-in server mechanism.
 
-* The LocalFileAdaptor which interfaces with file systems with an API compatible with Node.js's `fs` module
+* The local file adaptor which interfaces with file systems with an API compatible with Node.js's `fs` module
 
-SyncAdaptorModules are represented as JavaScript tiddlers with the field `module-type` set to `syncadaptor`.
+Syncadaptor modules are represented as ~JavaScript tiddlers with the field `module-type` set to `syncadaptor`.
 
-The `adaptorClass` property should be exposed via the `exports` object. It must contain the JavaScript class for the adaptor (see [[Adaptor Class]]).
+The `adaptorClass` property should be exposed via the `exports` object. It must contain the ~JavaScript class for the adaptor (see [[Adaptor Class]]).
 
 Nothing should be exported if the adaptor detects that it isn't capable of operating successfully (eg, because it only runs on either the browser or the server, or because a dependency is missing).

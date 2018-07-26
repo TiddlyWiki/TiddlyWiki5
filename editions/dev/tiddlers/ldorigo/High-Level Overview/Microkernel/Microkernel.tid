@@ -6,9 +6,9 @@ title: Microkernel
 
 
 
-The TiddlyWiki application is based on a microkernel architecture, that means it separates its minimal functional core from the extended functionality provided by plugins and modules. The TiddlyWiki microkernel is responsible for starting up the application. It provides a few helper methods but its main task is to give the possibility of storing data and loading plugins.
+The ~TiddlyWiki application is based on a microkernel architecture, that means it separates its minimal functional core from the extended functionality provided by plugins and modules. The ~TiddlyWiki microkernel is responsible for starting up the application. It provides a few helper methods but its main task is to give the possibility of storing data and loading plugins.
 
-The microkernel is the only part of TiddlyWiki that is //not// managed as tiddlers.
+The microkernel is the only part of ~TiddlyWiki that is //not// managed as tiddlers.
 
 <div class="tc-table-of-contents">
 

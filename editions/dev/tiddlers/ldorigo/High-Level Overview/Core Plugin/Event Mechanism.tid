@@ -12,6 +12,6 @@ The [[Core Plugin]] adds an event system to the bare wiki store.
 
 The event system provides the ability to listen for events, the most important of which is the //change// event which notifies listeners when tiddlers have changed, with a list of the modified tiddlers.
 
-The event mechanism is one of the few mechanisms that needs a [[Hook]] in the [[Microkernel]]: the microkernel contains an empty function `enqueueTiddlerEvent(event)` and calls this function when a tiddler is added or deleted.
+The event mechanism is one of the few mechanisms that needs a [[Hook|Hooks]] in the [[Microkernel]]: the microkernel contains an empty function `enqueueTiddlerEvent(event)` and calls this function when a tiddler is added or deleted.
 The event mechanism from the core plug-in overwrites this function with it's own implementation.
-The functions composing the event system are added via the [[Wikimethod Module Type]].
+The functions composing the event system are added via [[Wikimethod Modules]].

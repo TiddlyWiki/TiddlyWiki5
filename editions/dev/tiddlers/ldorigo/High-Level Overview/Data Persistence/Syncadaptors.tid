@@ -2,5 +2,5 @@ tags: [[Data Persistence]]
 title: Syncadaptors
 toc-order: 3
 
-When using node.js as a server for TiddlyWiki, tiddlers are saved as plain text in different `.tid` files. This process is managed by [[Syncadaptor Modules]].
+When using node.js as a server for ~TiddlyWiki, tiddlers are saved as plain text in different `.tid` files. This process is managed by [[Syncadaptor Modules]].
 

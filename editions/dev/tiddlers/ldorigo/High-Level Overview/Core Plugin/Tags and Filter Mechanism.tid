@@ -16,7 +16,7 @@ The above functions use this field to calculate their results and cache them in 
 
 Organising information with tags is easy, intuitive and is common throughout the web.
 In most cases the functions mentioned above are not enough and a more sophisticated way of querying is needed.
-But instead of focusing only on tags TiddlyWiki introduces a querying system that isn't bound to tags or single tiddlers: the filter mechanism.
+But instead of focusing only on tags ~TiddlyWiki introduces a querying system that isn't bound to tags or single tiddlers: the filter mechanism.
 
 !!! Filter mechanism
 
@@ -47,4 +47,4 @@ If the provided filter operators are not enough, a developer can add new filters
 Tags and the filter mechanism are used throughout the [[Core Plugin]] for internal puproses.
 Tags which start with ``$:/`` are normally hidden from the casual user, similar to [[System Tiddlers]]
 
-The filter mechanism is added to the wiki store with the [[Wikimethod Module Type]].
+The filter mechanism is added to the wiki store with [[Wikimethod Modules]].

@@ -5,7 +5,7 @@ toc-order: 2
 title: Creating Plugins in the Browser
 type: text/vnd.tiddlywiki
 
-The recommended technique for building TiddlyWiki plugins involves running [[TiddlyWiki on Node.js|https://tiddlywiki.com/#TiddlyWiki%20on%20Node.js]], see [[Developing plugins using Node.js and GitHub]]. There is now an experimental technique for creating plugins directly in the browser.
+The recommended technique for building ~TiddlyWiki plugins involves running [[TiddlyWiki on Node.js|https://tiddlywiki.com/#TiddlyWiki%20on%20Node.js]], see [[Developing plugins using Node.js and ~GitHub]]. There is now an experimental technique for creating plugins directly in the browser.
 
 ! Overview
 
@@ -20,7 +20,7 @@ To make a modified copy of a plugin, one edits the constituent shadow tiddlers (
 
 !! 1. Setup your development environment
 
-Start with a blank TiddlyWiki. It is useful to create a ''HelloThere'' tiddler that contains links to various tiddlers that you'll be opening frequently during plugin development:
+Start with a blank ~TiddlyWiki. It is useful to create a ''~HelloThere'' tiddler that contains links to various tiddlers that you'll be opening frequently during plugin development:
 
 * The plugin itself (eg `$:/plugins/yourname/pluginname`)
 * The payload tiddlers that are to be packed into the plugin (eg `$:/plugins/yourname/pluginname/mywidget.js`)
@@ -47,13 +47,13 @@ Save the plugin tiddler
 
 !! 3. Modify the payload tiddlers
 
-Create the payload tiddlers by clicking on the links in the ''HelloThere'' tiddler from step 1.
+Create the payload tiddlers by clicking on the links in the ''~HelloThere'' tiddler from step 1.
 
 !! 4. Pack the plugin
 
-Open the browser developer console, and type the following JavaScript statement, but first change the first parameter to the name of your plugin. The second parameter is an optional array of tiddler titles to be added to the plugin:
+Open the browser developer console, and type the following ~JavaScript statement, but first change the first parameter to the name of your plugin. The second parameter is an optional array of tiddler titles to be added to the plugin:
 
-```js
+```js 
 $tw.utils.repackPlugin("$:/plugins/yourname/pluginname",["$:/plugins/yourname/pluginname/mywidget.js"])
 ```
 

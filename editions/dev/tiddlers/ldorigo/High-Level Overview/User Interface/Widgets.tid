@@ -2,12 +2,12 @@ created: 20140717174307709
 modified: 20140717181543163
 tags: [[User Interface]]
 toc-order: 3
-title: Widget
+title: Widgets
 
-Once the WikiText has been transformed into a parse tree by the [[Parser]], the next step is to transform this parse tree into a widget tree by transforming each node into a widget object.
+Once the ~WikiText has been transformed into a parse tree by the [[Parser]], the next step is to transform this parse tree into a widget tree by transforming each node into a widget object.
 
-The [[Core Plugin]] provides a basic [[widget object|Widget Class]] which receives the parse node it should represent and a DOM node. The widget must then create the DOM structure which represents the parse tree node and add it to the provided DOM node.
-A LinkWidget, for example, would create the DOM node for a ``<a>...</a>`` tag and put it in the provided DOM node.
+The [[Core Plugin]] provides a basic widget object which receives the parse node it should represent and a DOM node. The widget must then create the DOM structure which represents the parse tree node and add it to the provided DOM node.
+A [[Link Widget|https://tiddlywiki.com/#LinkWidget]], for example, would create the DOM node for a ``<a>...</a>`` tag and put it in the provided DOM node.
 
 When a widget gets a parse node with child nodes it must create the corresponding child widgets.
 
@@ -29,7 +29,7 @@ Would be transformed to a [[TextWidget|$:/core/modules/widgets/text.js]].
 (Note that the ~TextWidget module exports a property "text".)
 
 TODO: Next line is confusing
-This means that widgets in WikiText are not actually a feature added to WikiText but instead a specific widget used directly, instead of the parser choosing a widget type.
+This means that widgets in ~WikiText are not actually a feature added to ~WikiText but instead a specific widget used directly, instead of the parser choosing a widget type.
 
 The [[Introduction]] mentions how dynamic behaviour can be added by widgets. This is achieved in two ways: [[Messages]] and [[Selective Update]].
 

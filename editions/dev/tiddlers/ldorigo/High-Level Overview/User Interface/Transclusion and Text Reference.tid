@@ -4,7 +4,7 @@ tags: [[User Interface]]
 toc-order: 2
 title: Transclusion and Text Reference
 
-This section describes how transclusion and Text References are handled by TiddlyWiki.
+This section describes how transclusion and Text References are handled by ~TiddlyWiki.
 
 !!! ~TextReference
 A text reference describes a special notation to indirectly refer to the contents of a specified tiddler field.
@@ -19,7 +19,7 @@ The syntax of a text reference is:
 To obtain the actual text, the [[Core Plugin]] adds a function to the wiki store ``getTextReference(textRef,defaultText,currTiddlerTitle)``. The `currentTiddlerTitle` is the title of a tiddler which is used when no tiddlerTitle is specified in the text reference.
 What the currentTiddler should be, depends on where the text reference is used.
 If it is for example used as a widget attribute, the current tiddler is the tiddler which contains this widget.
-Text references are used by [[Widget]]s (attributes), filteroperators (parameter) and in transclusions.
+Text references are used by [[Widgets]] (attributes), filteroperators (parameter) and in transclusions.
 These elements use the ``getTextReference(textRef,defaultText,currTiddlerTitle)`` function.
 
 !!! Transclusion
@@ -55,7 +55,7 @@ Hans Dampf has a very important task for us:
 Hans needs some more Dampf.
 ```
 
-Transclusion and templates is one of the most important concepts in TiddlyWiki.
+Transclusion and templates is one of the most important concepts in ~TiddlyWiki.
 It allows us to include other tiddlers using the metadata for our current tiddler.
 It also allows us to transclude a template tiddler with a third tiddler set as the currentTiddler with the ~TiddlerWidget:
 
@@ -67,5 +67,5 @@ It also allows us to transclude a template tiddler with a third tiddler set as t
 
 This way we can create a different view on a tiddler which does not only show it's title and it's content
 but shows it's content and metadata in editable text fields and allows us to edit this tiddler.
-Also the template concept is used by the ~ListWidget to show the tiddlers through a specified template.
-Finally, when wanting to download the wiki as a new html file, this html file is created by binding a list of all tiddlers to a template and sending the resulting text to the syncer module described in [[Extended Persistence]] to save the current wiki.
+Also the template concept is used by the [[List Widget|https://tiddlywiki.com/#ListWidget]] to show the tiddlers through a specified template.
+Finally, when wanting to download the wiki as a new html file, this html file is created by binding a list of all tiddlers to a template and sending the resulting text to the syncer module described in [[Data Persistence]] to save the current wiki.

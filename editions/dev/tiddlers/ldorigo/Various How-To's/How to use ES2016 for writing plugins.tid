@@ -4,9 +4,9 @@ title: How to use ES2016 for writing plugins
 type: text/vnd.tiddlywiki
 tags: [[Various How-To's]]
 
-With the advent of ES2015 (also known as ES6) and the availability of [[Babel.js|http://babeljs.io/]] plugin developers can leverage ES2015 when writing TiddlyWiki plugins. Understanding the nuances between TiddlyWiki's module sandbox and how Babel compiles it's output ready for a module system like ~CommonJS/AMD.
+With the advent of ES2015 (also known as ES6) and the availability of [[Babel.js|http://babeljs.io/]] plugin developers can leverage ES2015 when writing ~TiddlyWiki plugins. Understanding the nuances between ~TiddlyWiki's module sandbox and how Babel compiles it's output ready for a module system like ~CommonJS/AMD.
 
-Please understand how the PluginMechanism works since this is all about writing a plugin using Babel to compile the output that will be included in the final TiddlyWiki (for example [[TiddlyWiki on Node.js]]).
+Please understand how the [[Plugin Mechanism|https://tiddlywiki.com/#PluginMechanism]] works since this is all about writing a plugin using Babel to compile the output that will be included in the final ~TiddlyWiki (for example [[TiddlyWiki on Node.js|https://tiddlywiki.com/#PluginMechanism]]).
 
 !! Installing and Configuring Babel
 
@@ -36,7 +36,7 @@ Inside your plugin project edit the file `.babelrc` and enter the following:
 
 !! Compiling the Output
 
-Pick a folder to store the ES2015 JavaScript and a folder to output the TiddlyWiki ready JavaScript. In this example I will use `src` and `lib` respectively. With Babel installed and working I can compile all the JavaScript in the `src` folder to the `lib` folder by running this command:
+Pick a folder to store the ES2015 ~JavaScript and a folder to output the ~TiddlyWiki ready ~JavaScript. In this example I will use `src` and `lib` respectively. With Babel installed and working I can compile all the ~JavaScript in the `src` folder to the `lib` folder by running this command:
 
 ```
 $ babel src -d lib
@@ -46,7 +46,7 @@ $ babel src -d lib
 
 !! Imports and Exports
 
-In a plugin written pre-ES2015 one would `require` a module through TiddlyWiki like so:
+In a plugin written pre-ES2015 one would `require` a module through ~TiddlyWiki like so:
 
 ```javascript
 var Widget = require('$:/core/modules/widgets/widget.js').widget;
@@ -58,7 +58,7 @@ But in ES2015 the following would look like:
 import { widget as Widget } from '$:/core/modules/widgets/widget.js';
 ```
 
-Conveniently when Babel compiles this it will essentially output the same JavaScript as the first pre-ES2016 code.
+Conveniently when Babel compiles this it will essentially output the same ~JavaScript as the first pre-ES2016 code.
 
 Also, in ES2016 you are required to declare your imports at the beginning and can not dynamically `require` things. This means you can not have an `import` statement in an if block or in a function. If that functionality is desired then you will have to go back to using the `require()` statement directly. But conciser that by doing so that you may be missing an oppertunity to make your code cleaner and better.
 
@@ -68,9 +68,9 @@ Exporting is the same thing. Instead of assigning to a property of the `exports`
 export { MyWidget as mywidget };
 ```
 
-<<.tip "It is illegal JavaScript to export with a name that is not an identifier even though it is ok to use a non-identifier (string) as a property key. What this means is if you want a widget to have a dash in it then you have to revert to using the `exports['my-widget'] = MyWidget;` syntax.">>
+<<.tip "It is illegal ~JavaScript to export with a name that is not an identifier even though it is ok to use a non-identifier (string) as a property key. What this means is if you want a widget to have a dash in it then you have to revert to using the `exports['my-widget'] = MyWidget;` syntax.">>
 
-It is important to understand that in ES2016 the ''default'' export is not supported in TiddlyWiki. This is mostly because the core code expects specific properties to be attached to the `exports` variable. Bable's `export` conversion plays well with this //except// with the default export.
+It is important to understand that in ES2016 the ''default'' export is not supported in ~TiddlyWiki. This is mostly because the core code expects specific properties to be attached to the `exports` variable. Bable's `export` conversion plays well with this //except// with the default export.
 
 !! Classes
 
@@ -107,7 +107,7 @@ class NameWidget extends Widget {
 
 !!! Non Class Modules
 
-For non class modules you can use the `export` keyword. Here is a simple [[Startup Module|ModuleType]]:
+For non class modules you can use the `export` keyword. Here is a simple [[Startup Module|Startup Modules]]:
 
 ```javascript
 export function startup() {
@@ -125,7 +125,7 @@ export function run() {…}
 
 !! Polyfills
 
-ES2015 comes with some features that are part of the JavaScript core objects. These are not supported by all browsers. To use these features in [[most browsers|BrowserCompatibility]] you will need a <<.def "polyfill">>. Babel has a polyfill package that you can include. See [[Adding Babel Polyfill to TiddlyWiki]] for how to accomplish this.
+ES2015 comes with some features that are part of the ~JavaScript core objects. These are not supported by all browsers. To use these features in [[most browsers|https://tiddlywiki.com/#BrowserCompatibility]] you will need a <<.def "polyfill">>. Babel has a polyfill package that you can include. See [[How to add Babel polyfill to TiddlyWiki]] for how to accomplish this.
 
 !! Example
 
@@ -194,4 +194,4 @@ class ClockWidget extends Widget {
 export { ClockWidget as clock };
 ```
 
-<<.tip "Adding an extra space at the top causes Babel's output the preamble tiddler comment without any obscene indenting. Although it doesn't affect TiddlyWiki any, when reading the output it can be confusing when the tiddler information is rendered off the screen to the right.">>
+<<.tip "Adding an extra space at the top causes Babel's output the preamble tiddler comment without any obscene indenting. Although it doesn't affect ~TiddlyWiki any, when reading the output it can be confusing when the tiddler information is rendered off the screen to the right.">>

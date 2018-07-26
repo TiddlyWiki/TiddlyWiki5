@@ -4,4 +4,4 @@ tags: [[Modules and Plugins]]
 title: Wikimethod Modules
 toc-order: 2
 
-The [[startup module|Startup Modules]] [[$:/core/modules/startup/load-modules.js]] in the TiddlyWiki [[Core Plugin]] loads all modules of type ``wikimethod`` and puts their exported functions into the wiki store.
+The [[startup module|Startup Modules]] [[$:/core/modules/startup/load-modules.js]] in the ~TiddlyWiki [[Core Plugin]] loads all modules of type ``wikimethod`` and puts their exported functions into the wiki store.

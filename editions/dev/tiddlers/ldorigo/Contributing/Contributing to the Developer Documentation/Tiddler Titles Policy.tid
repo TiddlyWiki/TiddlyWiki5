@@ -21,7 +21,7 @@ Avoid starting a title with the word <<.word the>>.
 
 Filenames should be identical to the tiddler title.
 
-In the past, many tiddlers had CamelCase titles. This is gradually being phased out of the documentation to improve readability. ~CamelCase titles should no longer be used, even for tags, except for the following standard spellings: <<.word "JavaScript">>, <<.word "TiddlyWiki">>, <<.word "GitHub">>, <<.word "WikiText">>.
+In the past, many tiddlers had ~CamelCase titles. This is gradually being phased out of the documentation to improve readability. ~CamelCase titles should no longer be used, even for tags, except for the following standard spellings: <<.word "JavaScript">>, <<.word "TiddlyWiki">>, <<.word "GitHub">>, <<.word "WikiText">>.
 
 Tiddlers in the [[Various How-To's]] section often have longer titles that can be more complicated than just a noun phrase, e.g. <<.tid "How to customise the password prompt">>. These titles use sentence case, i.e. only the first word (and any proper names) starts with a capital letter.
 

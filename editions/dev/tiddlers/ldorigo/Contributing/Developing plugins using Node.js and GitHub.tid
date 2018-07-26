@@ -2,7 +2,7 @@ created: 20140320055936611
 modified: 20141022145259278
 tags: [[Contributing to the TiddlyWiki Plugin Library]]
 toc-order: 1
-title: Developing plugins using Node.js and GitHub
+title: Developing plugins using Node.js and ~GitHub
 type: text/vnd.tiddlywiki
 
 The most practical way to develop plugins is to use Node.js with the tiddlywiki5 repository to build your plugins, and to use ~GitHub to manage you files.

@@ -19,6 +19,6 @@ A saver module has to export two functions:
 
 This saver object has to provide an ``info`` property containing a name, a priority, an array of methods it supports and a method ``save(text,method,callback)``. This method is called from TW with the actual text which should be saved, the method which is used and a callback function to report errors: ``callback("Error while saving")`` or to notify that saving went well: ``callback(null, "Saving went well :)")``. If the saver method successfully saved the file it has to return true, and false otherwise.
 
-Saves are triggered by [[messages|Messages]] from the UI. The [[Syncer Module]] uses the saver with the highest priority capable of the requested method to save the file.
+Saves are triggered by [[messages|Messages]] from the UI. The [[Syncer]] uses the saver with the highest priority capable of the requested method to save the file.
 
 The core plug-in contains a saver capable of saving the current state of the wiki to the local hard drive by using a special Firefox extension called Tiddlyfox. If this extension is not available, the savers ``canSave`` method would return false. A saver with a lower priority would then ask the user to save the current state as a new HTML file.
