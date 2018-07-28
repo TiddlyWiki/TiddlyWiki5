@@ -497,15 +497,21 @@ exports.htmlEncode = function(s) {
 // Converts all HTML entities to their character equivalents
 exports.entityDecode = function(s) {
 	var converter = String.fromCodePoint || String.fromCharCode,
-		e = s.substr(1,s.length-2); // Strip the & and the ;
+		e = s.substr(1,s.length-2), // Strip the & and the ;
+		c;
 	if(e.charAt(0) === "#") {
 		if(e.charAt(1) === "x" || e.charAt(1) === "X") {
-			return converter(parseInt(e.substr(2),16));
+			c = parseInt(e.substr(2),16);
 		} else {
-			return converter(parseInt(e.substr(1),10));
+			c = parseInt(e.substr(1),10);
+		}
+		if(isNaN(c)) {
+			return s;
+		} else {
+			return converter(c);
 		}
 	} else {
-		var c = $tw.config.htmlEntities[e];
+		c = $tw.config.htmlEntities[e];
 		if(c) {
 			return converter(c);
 		} else {
