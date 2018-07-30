@@ -1,10 +1,10 @@
 created: 20140418142957325
-modified: 20170630223008226
+modified: 20180730201626985
 tags: Features
 title: DateFormat
 type: text/vnd.tiddlywiki
 
-The ViewWidget accepts a `template` attribute that allows the format of date values to be specified. The format string is processed with the following substitutions:
+When used to display date values (with the `format` attribute set to ''date''), the ViewWidget accepts a `template` attribute that allows the format of the date values to be specified. The format string is processed with the following substitutions:
 
 |!Token |!Substituted Value |
 |`DDD` |Day of week in full (eg, "Monday") |
