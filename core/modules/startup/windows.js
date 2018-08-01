@@ -58,6 +58,15 @@ exports.startup = function() {
 		var styleElement = srcDocument.createElement("style");
 		styleElement.innerHTML = styleContainer.textContent;
 		srcDocument.head.insertBefore(styleElement,srcDocument.head.firstChild);
+		// Add click listener to be able to cancel popups
+		srcDocument.addEventListener("click", function(event) {
+			var numPopups = $tw.popup.popups.length;
+			if(numPopups !== 0) {
+				for(var i=0; i < numPopups; i++) {
+					$tw.popup.handleEvent(event);
+				}
+			}
+		});
 		// Render the text of the tiddler
 		var parser = $tw.wiki.parseTiddler(template),
 			widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument, parentWidget: $tw.rootWidget, variables: variables});
