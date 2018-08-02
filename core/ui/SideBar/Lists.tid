@@ -1,0 +1,11 @@
+created: 20170204162317277
+modified: 20170206014025090
+tags: $:/tags/SideBarSection
+title: $:/core/ui/SideBar/lists
+type: text/vnd.tiddlywiki
+
+<div class="tc-sidebar-lists">
+
+<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/SideBar]!has[draft.of]]" default={{$:/config/DefaultSidebarTab}} state="$:/state/tab/sidebar" />
+
+</div>

@@ -1,5 +1,8 @@
-title: $:/core/ui/PageTemplate/sidebar
+created: 20170206014440836
+modified: 20170206014445278
 tags: $:/tags/PageTemplate
+title: $:/core/ui/PageTemplate/sidebar
+type: text/vnd.tiddlywiki
 
 <$scrollable fallthrough="no" class="tc-sidebar-scrollable">
 
@@ -7,21 +10,11 @@ tags: $:/tags/PageTemplate
 
 <$reveal state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes" animate="yes">
 
-<h1 class="tc-site-title">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/SideBarSection]!has[draft.of]]">
 
-<$transclude tiddler="$:/SiteTitle" mode="inline"/>
+<$transclude/>
 
-</h1>
-
-<div class="tc-site-subtitle">
-
-<$transclude tiddler="$:/SiteSubtitle" mode="inline"/>
-
-</div>
-
-{{||$:/core/ui/PageTemplate/pagecontrols}}
-
-<$transclude tiddler="$:/core/ui/SideBarLists" mode="inline"/>
+</$list>
 
 </$reveal>
 
