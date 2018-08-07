@@ -7,11 +7,11 @@ type: text/vnd.tiddlywiki
 
 A [[macro|Macros]] is defined using a `\define` [[pragma|Pragma]]. Like any pragma, this can only appear at the start of a tiddler.
 
-The first line of the definition specifies the macro name and any parameters. Each parameter has a name, and optionally a default value that is used if no value is supplied on a particular call to the macro. The lines that follow contain the macro's text (i.e. the snippet represented by the macro name), until `\end` appears on a line by itself:
+The first line of the definition specifies the macro name and any parameters. Each parameter has a name and, optionally, a default value that is used if no value is supplied on a particular call to the macro. The lines that follow contain the macro's text (i.e. the snippet represented by the macro name), until `\end` appears on a line by itself:
 
 <$codeblock code={{$:/editions/tw5.com/macro-examples/say-hi}}/>
 
-Alternatively, the entire definition can be presented on a single line, without an `\end` marker:
+Alternatively, the entire definition can be presented on a single line without an `\end` marker:
 
 ```
 \define sayhi(name:"Bugs Bunny") Hi, I'm $name$.
@@ -19,7 +19,7 @@ Alternatively, the entire definition can be presented on a single line, without 
 
 A more formal [[presentation|Macro Definition Syntax]] of this syntax is also available.
 
-!!Accessing variables and parameters
+!! Accessing variables and parameters
 Inside the macro there are a few methods for accessing variables and parameters defined outside of the macro or in the macro parameter list. 
 
 |syntax|description|h
@@ -31,7 +31,7 @@ Inside the macro there are a few methods for accessing variables and parameters 
 
 !!! Placeholders `$(...)$`
 
-The snippet can contain placeholders for parameters. These consist of a parameter name between dollar signs, like `$this$`.
+The macro can contain placeholders for parameters. These consist of a parameter name between dollar signs, like `$this$`.
 
 It can also contain placeholders for [[variables|Variables]]. These consist of a variable name (or macro name) between dollar signs and round brackets, like `$(this)$`.
 
@@ -64,7 +64,7 @@ For example, consider this macro. It invokes another macro using the single para
 The code above will fail if the macro is invoked with the argument containing triple double quotes (for example `<<film-quote 'I quote thrice """ - see!?'>>`). Using parameter variables offers a workaround:
 
 ```
-\define film-quote(line) <$macrocall $name="anothermacro" actor="Bugs Bunny" line=<<line>>/>
+\define film-quote(line) <$macrocall $name="anothermacro" actor="Bugs Bunny" line=<<__line__>>/>
 ```
 
 !! Scope
