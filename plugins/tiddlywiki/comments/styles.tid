@@ -17,6 +17,11 @@ tags: [[$:/tags/Stylesheet]]
 	text-align: right;
 }
 
+.tc-sidebar-scrollable .tc-comment-button button {
+	width: auto;
+	text-align: right;
+}
+
 .tc-comment-button button svg {
 	fill: #26cb56;
 	height: 2em;
