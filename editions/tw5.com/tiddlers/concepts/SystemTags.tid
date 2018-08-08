@@ -1,5 +1,5 @@
 created: 20130822080600000
-modified: 20180323092909513
+modified: 20180808094618436
 tags: Concepts
 title: SystemTags
 type: text/vnd.tiddlywiki
@@ -46,6 +46,7 @@ These are the available system tags
 |<<tag "$:/tags/SearchResults">> |for customised search results |
 |<<tag "$:/tags/ServerConnection">> |for plugin import handling |
 |<<tag "$:/tags/SideBar">> |for sidebar tabs |
+|<<tag "$:/tags/SideBarSegment">> |for sidebar segments |
 |<<tag "$:/tags/StartupAction">> |startup actions executed on all platforms |
 |<<tag "$:/tags/StartupAction/Browser">> |startup actions only executed when running in the browser |
 |<<tag "$:/tags/StartupAction/Node">> |startup actions only executed when running under Node.js |
