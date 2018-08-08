@@ -498,9 +498,9 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		},
 		templateTiddler,
 		additionalFields,
+		this.wiki.getCreationFields(),
 		existingTiddler,
 		filteredAdditionalFields,
-		this.wiki.getCreationFields(),
 		{
 			title: draftTitle,
 			"draft.of": title,
