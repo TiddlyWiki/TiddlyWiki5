@@ -25,9 +25,11 @@ var Popup = function(options) {
 /*
 Trigger a popup open or closed. Parameters are in a hashmap:
 	title: title of the tiddler where the popup details are stored
-	domNode: dom node to which the popup will be positioned
+	domNode: dom node to which the popup will be positioned (one of domNode or domNodeRect is required)
+	domNodeRect: rectangle to which the popup will be positioned
 	wiki: wiki
 	force: if specified, forces the popup state to true or false (instead of toggling it)
+	floating: if true, skips registering the popup, meaning that it will need manually clearing
 */
 Popup.prototype.triggerPopup = function(options) {
 	// Check if this popup is already active
@@ -113,7 +115,7 @@ Popup.prototype.show = function(options) {
 	// Cancel any higher level popups
 	this.cancel(info.popupLevel);
 	// Store the popup details if not already there
-	if(this.findPopup(options.title) === -1) {
+	if(!options.floating && this.findPopup(options.title) === -1) {
 		this.popups.push({
 			title: options.title,
 			wiki: options.wiki,
@@ -121,9 +123,20 @@ Popup.prototype.show = function(options) {
 		});
 	}
 	// Set the state tiddler
+	var rect;
+	if(options.domNodeRect) {
+		rect = options.domNodeRect;
+	} else {
+		rect = {
+			left: options.domNode.offsetLeft,
+			top: options.domNode.offsetTop,
+			width: options.domNode.offsetWidth,
+			height: options.domNode.offsetHeight
+		};
+	}
 	options.wiki.setTextReference(options.title,
-			"(" + options.domNode.offsetLeft + "," + options.domNode.offsetTop + "," + 
-				options.domNode.offsetWidth + "," + options.domNode.offsetHeight + ")");
+			"(" + rect.left + "," + rect.top + "," + 
+				rect.width + "," + rect.height + ")");
 	// Add the click handler if we have any popups
 	if(this.popups.length > 0) {
 		this.rootElement.addEventListener("click",this,true);		
