@@ -329,3 +329,5 @@ Luca Dorigo, @ldorigo, 2018/05/05
 Anthony Muscio, @AnthonyMuscio, 2018/05/21
 
 Muhammad Talha Mansoor, @talha131, 2018/07/16
+
+Bimba László, @bimlas, 2018/08/10
