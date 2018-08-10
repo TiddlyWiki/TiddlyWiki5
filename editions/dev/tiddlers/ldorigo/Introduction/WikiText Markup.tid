@@ -5,26 +5,40 @@ toc-order: 3
 title: WikiText Markup
 
 The ~WikiText is a markup language, created especially for the requirements of the ~TiddlyWiki application. It is based on [[Markdown|http://daringfireball.net/projects/markdown]], 
-but extended with some ~TiddlyWiki specific features.  
+but extended with some ~TiddlyWiki-specific features.  
 On one hand its a text-to-HTML conversion language and on the other hand its used to provide the interactive features of ~TiddlyWiki.
-The aim of this language is to allow the user of the software to focus on the writing. 
-The ~WikiText is used to format Tiddlers within the ~TiddlyWiki application. 
+Its aim is to allow ~TiddlyWiki's users to focus on the writing. 
+
 The tags of the ~WikiText syntax can be used within the standard text input field. 
-During the saving process these tags renders to HTML elements for example:
+During the saving process, these tags render to HTML elements. For example:
 
 ```
-WikiText:--- 
+--- 
+```
 Renders as:
-HTML:<hr>
-WikiText:[img[https://tiddlywiki.com/favicon.ico]]
-Renders as: TW
-HTML:<img src="https://tiddlywiki.com/favicon.ico">
+
+---
+
+(HTML `<hr>`)
+
+
+```
+[img[https://tiddlywiki.com/favicon.ico]]
 ```
 
-Furthermore ~WikiText is used to access the [[Widgets]] which are integrated in the application.
-These widgets are used to enhance the ~WikiText with a rich functionality. Widgets are based on ~HTML-Syntax but always starts with a $:
+Renders as: 
+
+[img[https://tiddlywiki.com/favicon.ico]]
+
+(HTML: `<img src="https://tiddlywiki.com/favicon.ico">`)
+
+Furthermore ~WikiText is used to access [[Widgets]] which are used to enhance ~WikiText with rich functionality. Widgets are based on ~HTML-Syntax but always start with a `$`:
 
 ```
 WikiText:
 <$button message="tm-close-tiddler">Close Me!</$button> 
 ```
+
+Renders as:
+
+<$button message="tm-close-tiddler">Close Me!</$button> 

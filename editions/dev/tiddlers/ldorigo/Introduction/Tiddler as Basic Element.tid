@@ -4,29 +4,26 @@ tags: [[Introduction]]
 toc-order: 2
 title: Tiddler as Basic Element
 
-By managing nearly every part of the application as tiddlers, the application only needs to provide some basic functionality to manage the individual tiddlers,
-load and persist them, render them to HTML output and provide a way to register for the changes made to tiddlers.
-This way the whole wiki application can be built from these simple concepts.
-[[Plugins|Modules and Plugins]] can be used to add new functionality to the existing [[Modules|Modules and Plugins]] or even to replace individual tiddlers/modules,
-enabling developers to build whole new applications on the ~TiddlyWiki base system.
-
-A //tiddler// is the smallest unit of the ~TiddlyWiki system. 
-It can contain any data like plain text, ~WikiText markup, ~JavaScript code (module tiddler), JSON structures, 
+A <<.def tiddler>> is the smallest unit of the ~TiddlyWiki system. 
+It can contain any data: plain text, ~WikiText markup, ~JavaScript code (module tiddler), JSON structures, 
 images in SVG format or even binary images encoded with base64.
-Internally Tiddlers are immutable objects containing a bunch of key:value pairs called fields. 
-The only required field of a tiddler is the title field. The Standard fields of a tiddler are listed below. 
-Nearly everything in ~TiddlyWiki is loaded as tiddlers. Plug-ins for example are a bunch of tiddlers that are distributed as a single JSON tiddler. 
+Internally, tiddlers are immutable objects containing a bunch of `key:value` pairs called fields. 
+The only required field of a tiddler is the title field. The standard fields of a tiddler are listed below. 
+
+Nearly all aspects of ~TiddlyWiki are managed by tiddlers. This means the application itself only needs to provide some basic functionality to manage individual tiddlers, load and persist them, render them to HTML output and provide a way to register for changes.
+
+[[Plugins|Modules and Plugins]] can be used to add new functionality to the existing [[Modules|Modules and Plugins]] or even to replace individual tiddlers/modules, enabling developers to build whole new applications on the ~TiddlyWiki base system.
 
 The only exception is the [[Microkernel]] which isn't a tiddler.
 
-<dl>
-<dt>created</dt> <dd>Timestamp number of milliseconds since 01.01.1970.</dd>
-<dt>modified</dt> <dd>Timestamp number of milliseconds since 01.01.1970.</dd>
-<dt>tags</dt> <dd>list of tags seperated by whitespace. Tags which contain whitespaces are wrapped by `[[ ]]`, e.g. `[[example Tag]]`.</dd>
-<dt>type</dt> <dd>Type of the Tiddler, e.g. text/plain or text/vnd.tiddlywiki .</dd>
-<dt>title</dt> <dd>Title of the Tiddler</dd>
-<dt>list</dt> <dd>An ordered list of tiddler titles associated with a tiddler</dd>
-</dl>
+
+| !Field | !Explanation |
+|created |Timestamp number of milliseconds since 01.01.1970. |
+|modified |Timestamp number of milliseconds since 01.01.1970. |
+|tags |list of tags seperated by whitespace. Tags which contain whitespaces are wrapped by `[[ ]]`, e.g. `[[example Tag]]`.|
+|type |Type of the Tiddler, e.g. text/plain or text/vnd.tiddlywiki .|
+|title |Title of the Tiddler|
+|list |An ordered list of tiddler titles associated with a tiddler|
 
 Tiddlers are used in multiple roles and on different levels. 
 
@@ -44,6 +41,6 @@ Because fields for metadata and especially tags are an easy way for the user to 
 A filter string like ``[tag[learncard]topic[math]!tag[successful]]`` would filter all tiddlers tagged with "learncard", with the value "math" in the topic-field and are not tagged with "successful".
 A user could use this filter together with the ``<$list>`` widget to display a list of all math learncards which are not yet answered successfully in a wiki page.
 
-Another example which shows how the "anything is a tiddler" concept leads to an environment where a single feature brings great benefit is the drag and drop feature.
-HTML5 standard comes with a native drag and drop feature. ~TiddlyWiki uses this feature and makes it possible to drag and drop a tiddler from one instance to another.
-And because anything is a tiddler, this brings the ability to drag and drop individual wiki pages, ~JavaScript modules, UI components and whole plug-ins between ~TiddlyWiki instances.
+Another great example of how the "everything is a tiddler" philosophy leads to an environment where a single feature brings great benefit is drag and drop.
+The HTML5 standard comes with a native drag and drop feature. ~TiddlyWiki uses this feature and makes it possible to drag and drop a tiddler from one instance to another.
+And because anything is a tiddler, this gives the ability to drag and drop individual wiki pages, ~JavaScript modules, UI components and whole plug-ins between ~TiddlyWiki instances.

@@ -5,14 +5,14 @@ toc-order: 4
 title: TiddlyWiki Architecture
 type: text/vnd.tiddlywiki
 
-The heart of ~TiddlyWiki is an extensible representation transformation engine for text and images. Given the text of a tiddler and its associated [[Content Type|https://tiddlywiki.com/#ContentType]], the engine can produce a rendering of the tiddler in a new [[Content Type|https://tiddlywiki.com/#ContentType]]. Furthermore, it can efficiently selectively update the rendering to track any changes in the tiddler or its dependents.
+The heart of ~TiddlyWiki is an extensible representation transformation engine for text and images. Given the text of a tiddler and its associated [[Content Type|https://tiddlywiki.com/#ContentType]], the engine can produce a rendering of the tiddler in a different [[Content Type|https://tiddlywiki.com/#ContentType]]. Furthermore, it can efficiently selectively update the rendering to track any changes in the tiddler or its dependents.
 
 
 ! The one thing you need to know
 
 ~TiddlyWiki's architecture is very different from an HTML page written using jQuery. This section concisely explains what ~TiddlyWiki does differently. It may not make much sense on the first reading.
 
-The key to understanding how it works internally is to see that the ui refreshing mechanism requires that any region of the DOM can be regenerated at any time. This means that the entire state of the user interface must reside in the tiddler store, from where it is synchronised into the DOM. This is done to improve performance by minimising the DOM interactions during the refresh cycles.
+The key to understanding how it works internally is to see that the ui refreshing mechanism requires that any region of the DOM can be regenerated at any time (similarly to [[React|https://reactjs.org/]], for those who know it). This means that the entire state of the user interface must reside in the tiddler store, from where it is synchronised into the DOM. This is done to improve performance by minimising the DOM interactions during the refresh cycles.
 
 It also determines the standard UI flow:
 
@@ -35,10 +35,6 @@ DOM events trigger actions on widgets which update the tiddler store. The update
 ! Client/Server Architecture
 
 {{Server Architecture.svg}}
-
-TODO: Delete/displace next sentence? Seems a bit out of context
-
-When programming ~TiddlyWiki 5 plugins which make changes outside the scope of the included examples, you will need a more in-depth understanding of ~TiddlyWiki's internal architecture.
 
 ! Model
 
