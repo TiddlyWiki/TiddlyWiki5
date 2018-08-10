@@ -18,10 +18,10 @@ exports.path = /^\/view\/([^\/]+)$/;
 
 exports.handler = function(request,response,state) {
 	var title = decodeURIComponent(state.params[0]),
-	    tiddler = state.wiki.getTiddler(title);
+		tiddler = state.wiki.getTiddler(title);
 	if(tiddler) {
 		var renderType = tiddler.getFieldString("_render_type"),
-		    renderTemplate = tiddler.getFieldString("_render_template");
+			renderTemplate = tiddler.getFieldString("_render_template");
 		// Tiddler fields '_render_type' and '_render_template' overwrite
 		// system wide settings for render type and template
 		if(state.wiki.isSystemTiddler(title)) {
