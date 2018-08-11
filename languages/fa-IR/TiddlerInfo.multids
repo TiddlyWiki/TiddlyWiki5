@@ -1,0 +1,21 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: پیشرفته
+Advanced/PluginInfo/Empty/Hint: هیچ
+Advanced/PluginInfo/Heading: جزییات افزونه
+Advanced/PluginInfo/Hint: این افزونه شامل تیدلرهای سایه‌ای زیر می‌شود:
+Advanced/ShadowInfo/Heading: وضعیت سایه
+Advanced/ShadowInfo/NotShadow/Hint: این تیدلر <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> یک تیدلر سایه‌ای نیست
+Advanced/ShadowInfo/OverriddenShadow/Hint: توسط یک تیدلر معمولی جایگزین شد
+Advanced/ShadowInfo/Shadow/Hint: این تیدلر <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> یک تیدلر سایه‌ای است
+Advanced/ShadowInfo/Shadow/Source: در افزونه مشخص شده است <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Fields/Caption: فضاهای خالی
+List/Caption: لیست
+List/Empty: این تیدلر شامل لیستی نمی‌شود
+Listed/Caption: لیست شده
+Listed/Empty: این تیدلر توسط هیچ مورد دیگر لیست نشده است
+References/Caption: مراجع
+References/Empty: هیچ تیدلری به این یکی پیوند نشده است
+Tagging/Caption: برچسب‌گذاری
+Tagging/Empty: هیچ تیدلری با این یکی برچسب نشده است
+Tools/Caption: ابزارها

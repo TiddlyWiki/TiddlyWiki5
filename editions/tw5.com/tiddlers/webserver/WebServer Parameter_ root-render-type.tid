@@ -1,0 +1,12 @@
+caption: root-render-type
+created: 20180630180301861
+modified: 20180702160458499
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: root-render-type
+type: text/vnd.tiddlywiki
+
+The [[web server configuration parameter|WebServer Parameters]] ''root-render-type'' determines the way that the [[root wiki tiddler|WebServer Parameter: root-tiddler]] is rendered:
+
+* `text/plain` (default) -- the plain text content of the output is rendered (i.e. HTML elements are ignored)
+* `text/html` -- the full HTML content of the output is rendered (i.e. including HTML elements)
+

@@ -71,9 +71,10 @@ Set the value of a context variable
 name: name of the variable
 value: value of the variable
 params: array of {name:, default:} for each parameter
+isMacroDefinition: true if the variable is set via a \define macro pragma (and hence should have variable substitution performed)
 */
-Widget.prototype.setVariable = function(name,value,params) {
-	this.variables[name] = {value: value, params: params};
+Widget.prototype.setVariable = function(name,value,params,isMacroDefinition) {
+	this.variables[name] = {value: value, params: params, isMacroDefinition: !!isMacroDefinition};
 };
 
 /*
@@ -83,52 +84,76 @@ options: see below
 Options include
 params: array of {name:, value:} for each parameter
 defaultValue: default value if the variable is not defined
+
+Returns an object with the following fields:
+
+params: array of {name:,value:} of parameters passed to wikitext variables
+text: text of variable, with parameters properly substituted
 */
-Widget.prototype.getVariable = function(name,options) {
+Widget.prototype.getVariableInfo = function(name,options) {
 	options = options || {};
 	var actualParams = options.params || [],
 		parentWidget = this.parentWidget;
 	// Check for the variable defined in the parent widget (or an ancestor in the prototype chain)
 	if(parentWidget && name in parentWidget.variables) {
 		var variable = parentWidget.variables[name],
-			value = variable.value;
+			value = variable.value,
+			params = this.resolveVariableParameters(variable.params,actualParams);
 		// Substitute any parameters specified in the definition
-		value = this.substituteVariableParameters(value,variable.params,actualParams);
-		value = this.substituteVariableReferences(value);
-		return value;
+		$tw.utils.each(params,function(param) {
+			value = $tw.utils.replaceString(value,new RegExp("\\$" + $tw.utils.escapeRegExp(param.name) + "\\$","mg"),param.value);
+		});
+		// Only substitute variable references if this variable was defined with the \define pragma
+		if(variable.isMacroDefinition) {
+			value = this.substituteVariableReferences(value);			
+		}
+		return {
+			text: value,
+			params: params
+		};
 	}
 	// If the variable doesn't exist in the parent widget then look for a macro module
-	return this.evaluateMacroModule(name,actualParams,options.defaultValue);
+	return {
+		text: this.evaluateMacroModule(name,actualParams,options.defaultValue)
+	};
 };
 
-Widget.prototype.substituteVariableParameters = function(text,formalParams,actualParams) {
-	if(formalParams) {
-		var nextAnonParameter = 0, // Next candidate anonymous parameter in macro call
-			paramInfo, paramValue;
-		// Step through each of the parameters in the macro definition
-		for(var p=0; p<formalParams.length; p++) {
-			// Check if we've got a macro call parameter with the same name
-			paramInfo = formalParams[p];
-			paramValue = undefined;
-			for(var m=0; m<actualParams.length; m++) {
-				if(actualParams[m].name === paramInfo.name) {
-					paramValue = actualParams[m].value;
-				}
+/*
+Simplified version of getVariableInfo() that just returns the text
+*/
+Widget.prototype.getVariable = function(name,options) {
+	return this.getVariableInfo(name,options).text;
+};
+
+Widget.prototype.resolveVariableParameters = function(formalParams,actualParams) {
+	formalParams = formalParams || [];
+	actualParams = actualParams || [];
+	var nextAnonParameter = 0, // Next candidate anonymous parameter in macro call
+		paramInfo, paramValue,
+		results = [];
+	// Step through each of the parameters in the macro definition
+	for(var p=0; p<formalParams.length; p++) {
+		// Check if we've got a macro call parameter with the same name
+		paramInfo = formalParams[p];
+		paramValue = undefined;
+		for(var m=0; m<actualParams.length; m++) {
+			if(actualParams[m].name === paramInfo.name) {
+				paramValue = actualParams[m].value;
 			}
-			// If not, use the next available anonymous macro call parameter
-			while(nextAnonParameter < actualParams.length && actualParams[nextAnonParameter].name) {
-				nextAnonParameter++;
-			}
-			if(paramValue === undefined && nextAnonParameter < actualParams.length) {
-				paramValue = actualParams[nextAnonParameter++].value;
-			}
-			// If we've still not got a value, use the default, if any
-			paramValue = paramValue || paramInfo["default"] || "";
-			// Replace any instances of this parameter
-			text = text.replace(new RegExp("\\$" + $tw.utils.escapeRegExp(paramInfo.name) + "\\$","mg"),paramValue);
 		}
+		// If not, use the next available anonymous macro call parameter
+		while(nextAnonParameter < actualParams.length && actualParams[nextAnonParameter].name) {
+			nextAnonParameter++;
+		}
+		if(paramValue === undefined && nextAnonParameter < actualParams.length) {
+			paramValue = actualParams[nextAnonParameter++].value;
+		}
+		// If we've still not got a value, use the default, if any
+		paramValue = paramValue || paramInfo["default"] || "";
+		// Store the parameter name and value
+		results.push({name: paramInfo.name, value: paramValue});
 	}
-	return text;
+	return results;
 };
 
 Widget.prototype.substituteVariableReferences = function(text) {
@@ -222,7 +247,9 @@ Widget.prototype.computeAttributes = function() {
 		self = this,
 		value;
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
-		if(attribute.type === "indirect") {
+		if(attribute.type === "filtered") {
+			value = self.wiki.filterTiddlers(attribute.filter,self)[0] || "";
+		} else if(attribute.type === "indirect") {
 			value = self.wiki.getTextReference(attribute.textReference,"",self.getVariable("currentTiddler"));
 		} else if(attribute.type === "macro") {
 			value = self.getVariable(attribute.value.name,{params: attribute.value.params});
@@ -493,8 +520,11 @@ Widget.prototype.invokeActions = function(triggeringWidget,event) {
 	for(var t=0; t<this.children.length; t++) {
 		var child = this.children[t];
 		// Invoke the child if it is an action widget
-		if(child.invokeAction && child.invokeAction(triggeringWidget,event)) {
-			handled = true;
+		if(child.invokeAction) {
+			child.refreshSelf();
+			if(child.invokeAction(triggeringWidget,event)) {
+				handled = true;
+			}
 		}
 		// Propagate through through the child if it permits it
 		if(child.allowActionPropagation() && child.invokeActions(triggeringWidget,event)) {
@@ -504,6 +534,24 @@ Widget.prototype.invokeActions = function(triggeringWidget,event) {
 	return handled;
 };
 
+/*
+Invoke the action widgets defined in a string
+*/
+Widget.prototype.invokeActionString = function(actions,triggeringWidget,event,variables) {
+	actions = actions || "";
+	var parser = this.wiki.parseText("text/vnd.tiddlywiki",actions,{
+			parentWidget: this,
+			document: this.document
+		}),
+		widgetNode = this.wiki.makeWidget(parser,{
+			parentWidget: this,
+			document: this.document,
+			variables: variables
+		});
+	var container = this.document.createElement("div");
+	widgetNode.render(container,null);
+	return widgetNode.invokeActions(this,event);
+};
 
 Widget.prototype.allowActionPropagation = function() {
 	return true;

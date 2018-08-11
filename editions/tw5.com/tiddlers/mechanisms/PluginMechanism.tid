@@ -1,14 +1,16 @@
 created: 20130826122000000
-modified: 20141029221758239
+modified: 20161015122959346
 tags: Mechanisms
 title: PluginMechanism
 type: text/vnd.tiddlywiki
 
-[[Plugins]] are bundles of tiddlers that are distributed and managed as a single unit by being packed into a single JSON tiddler. If a tiddler isn't found in the main store, then the registered plugins are searched for it instead.
+! Introduction
 
-Tiddlers within plugins behave something like shadow tiddlers in classic TiddlyWiki: they can be freely overwritten by creating a tiddler with the same title, but deleting that tiddler restores the underlying tiddler value from the plugin.
+[[Plugins]] are bundles of tiddlers that are distributed and managed as a single unit by being packed into a single JSON tiddler. Users can install them with drag and drop, or using the [[plugin library|Installing a plugin from the plugin library]].
 
-Plugins have a `plugin-type` field that may be (see the table below):
+The tiddlers within registered plugins behave as ShadowTiddlers: they can be freely overwritten by creating a tiddler with the same title, but deleting that tiddler restores the underlying tiddler value from the plugin.
+
+Plugins have a `plugin-type` field that may take the following values:
 
 * `plugin` //(default)// - a plain plugin
 * `theme` - a theme plugin (see ThemeMechanism)
@@ -18,103 +20,9 @@ Plugins can be used to package ordinary content, or can include JavaScript [[mod
 
 Plugins conventionally have a title of the form `$:/plugins/publisher/name`. Plugins that are part of the core TiddlyWiki distribution have titles of the form `$:/plugins/tiddlywiki/name`.
 
-Plugins that define macros, views or other named entities are expected to prefix the name with their publisher identifier, for example: `tiddlytools.slider`.
+When [[running TiddlyWiki under Node.js|TiddlyWiki on Node.js]], plugins can also be stored as individual tiddler files in [[PluginFolders]].
 
-! Plugin fields
+! More information
 
-Plugins are stored as tiddlers with the following fields:
+<<list-links "[tag[PluginMechanism]]">>
 
-|!Field |!Description |
-|title |Title of plugin |
-|description |Description of plugin |
-|author |Author of plugin |
-|version |Version string (must conform to SemanticVersioning convention) |
-|source |Source URL of plugin |
-|type |Must be ''application/json'' |
-|plugin-type |Can be ''plugin'' (default), ''language'' or ''theme'' |
-|text |JSON encoding of the list of tiddlers comprising the plugin |
-|list |Names of exposed plugin information tiddlers (see below) |
-|name |Name of the theme (only for themes) |
-|dependents |List of dependent plugins (currently only implemented for themes) |
-
-! Plugin folders
-
-On the server, plugins can be stored as ordinary JSON tiddlers but it is often more convenient to store them as separate tiddler files within folders. Plugin folders must contain a `plugin.info` file that contains the metadata for the plugin. It can also optionally identify files external to the plugin folder that should be loaded as tiddlers.
-
-The `plugin.info` file should contain the following JSON structure:
-
-The JSON structure for plugin tiddlers is as follows:
-
-```
-{
-	"title": "$:/plugins/publisher/name",
-	"description": "An exemplary plugin for demonstration purposes",
-	"author": "JeremyRuston",
-	"version": "1.2.3-alpha3",
-	"core-version": ">=5.0.0",
-	"source": "http://tiddlywiki.com/MyPlugin",
-	"plugin-type": "plugin",
-	"list": "readme license history"
-}
-```
-
-By convention, the titles of the individual tiddlers are prefixed with the title of the containing plugin, but they are not restricted to do so.
-
-Note that if the `version` field is omitted from a `plugin.info` file when the plugin folder is packed then it is automatically filled in by the core to the current core version number. This is to ensure that all the core plugins carry the correct version number. Generally plugin authors will want to ensure that they do explicitly specify a version number.
-
-! Plugin library
-
-The standard distribution of TiddlyWiki includes a number of standard plugins in the `plugins` directory.
-
-! Including plugins in a wiki
-
-To be usable in the browser, plugins just need to be included in the wiki. For wikis that are generated on the server, TiddlyWikiFolders can contain a `tiddlywiki.info` file that identifies the plugins to be included in this wiki:
-
-```
-{
-	"plugins": [
-		"tiddlywiki/slider",
-		"tiddlytools/chooser"
-	]
-}
-```
-
-Plugins names refer to plugin folders listed in TiddlyWiki5's root `plugins` folder.
-
-Plugins can also be included manually by copying them into the `plugins` subfolder of the wiki.
-
-! Plugin processing
-
-The wiki object keeps track of all of the currently loaded plugins. If a request for a tiddler isn't in the store then the wiki looks through the cascade of plugins to find the requested tiddler. It is a similar idea to the way that shadow tiddlers are implemented in classic TiddlyWiki.
-
-In the browser, any constituent tiddlers that are JavaScript modules (ie shadow tiddlers of content type `application/javascript` and possessing the field `module-type`) are executed during startup processing.
-
-!! Disabling Plugins
-
-Plugins can be disabled by creating a tiddler titled `$:/config/Plugins/Disabled/` concatenated with the plugin title, and setting its text to `yes`.
-
-For example, to disable the plugin `$:/plugins/tiddlywiki/highlight`, the title would be:
-
-```
-$:/config/Plugins/Disabled/$:/plugins/tiddlywiki/highlight
-```
-
-! Information Tiddlers for Plugins
-
-Plugin authors are encouraged to provide special information and documentation tiddlers that TiddlyWiki can include as plugin information tabs in the [[control panel|$:/ControlPanel]].
-
-Plugins should provide an icon contained in a tiddler with the title formed of `<plugin-name>/icon` (for example, [[$:/core/icon]]).
-
-Plugins expose the names of the individual information tabs that they wish to display in the `list` field of the plugin tiddler. By convention, some or all of the following should be provided:
-
-* ''readme'': basic information about the plugin
-* ''license'': the license under which the plugin is published
-
-The title of the associated information tiddler must be formed as follows:
-
-# `$:/<plugin-name>/<current-language>/<tab-name>` (for example, ''$:/core/en-GB/readme'')
-# `$:/<plugin-name>/<tab-name>` (for example, ''$:/core/readme'')
-
-Thus, plugins can provide language-specific versions of each information tiddler.
-
-Note that information tiddlers should not reference other tiddlers within the plugin. This is because plugins containing themes or languages are dynamically switched in and out as they are selected, and so their information tiddlers  may not be available for viewing. The control panel uses the 'subtiddler' attribute of the TranscludeWidget to access these tiddlers, which works independently of the plugin switching mechanism.

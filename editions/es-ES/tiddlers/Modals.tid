@@ -1,0 +1,13 @@
+caption: Modales
+created: 20160107225427489
+es-title: Diálogos modales
+modified: 20160429053708789
+tags: Features
+title: Modals
+type: text/vnd.tiddlywiki
+
+Los diálogos modales (o <<.word asistentes>> difuminan la ventana principal de ~TiddlyWiki para mostrar un tiddler aislado que el usuario tiene que atender explícitamente.
+
+Los modales se muestran mediante el mensaje [[tm-modal|WidgetMessage: tm-modal]].
+
+<$button message="tm-modal" param="SampleWizard">Modal de ejemplo</$button>

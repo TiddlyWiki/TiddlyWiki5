@@ -1,0 +1,50 @@
+created: 20161220154952676
+modified: 20161220161706470
+tags: Learning
+title: Formatting List Results as Tables (no CSS)
+type: text/vnd.tiddlywiki
+
+Sometimes you want the results of a ``<$list>`` widget to be formatted in the form of multiple columns instead of just one straight listing. The following method creates an actual table structure and uses the [[nth operator|nth Operator]] to provide break points for the rows.  It is not responsive, that is,  it doesn't re-position to display fewer columns if the window is too small.
+
+In the first, outer list structure you must provide a count to indicate at item number rows should occur. So, in the following example, each row breaks after 4 items, so the sequence is 1,5,9, etc. Note that this requires you to know in advance the maximum number of items there will be. There is also an internal limit that is set to n-1 items, where n is the number of columns you want. 
+
+Note also that you need to repeat the driving filter operator inside of the internal `<$list>` widget.  Obviously this technique lends itself to a macro implementation.
+
+For other table-making techniques see also:
+
+* [[Formatting List Results as Tables with CSS - Variable Column Method]]
+* [[Formatting List Results as Tables with CSS - Specified Columns Methods]]
+
+
+!! Example code for a four-column table with fewer than 70 items
+
+```
+<table>
+<$list filter="1 5 9 13 17 21 25 29 33 37 41 45 49 53 57 61 65" variable ="rows">
+    <$list filter="[tag[Filter Operators]limit[50]] +[nth<rows>]" variable="cell">
+        <tr>
+        <td> <<cell>> </td>
+        <$list filter="[tag[Filter Operators]limit[50]] +[allafter<cell>limit[3]]" variable="this">
+            <td> <<this>> </td>
+        </$list>
+        </tr>
+    </$list>
+</$list>
+</table>
+```
+
+!! Result
+
+<table>
+<$list filter="1 5 9 13 17 21 25 29 33 37 41 45 49 53 57 61 65" variable ="rows">
+    <$list filter="[tag[Filter Operators]limit[50]] +[nth<rows>]" variable="cell">
+        <tr>
+        <td> <<cell>> </td>
+        <$list filter="[tag[Filter Operators]limit[50]] +[allafter<cell>limit[3]]" variable="this">
+            <td> <<this>> </td>
+        </$list>
+        </tr>
+    </$list>
+</$list>
+</table>
+

@@ -1,0 +1,19 @@
+caption: tm-navigate
+created: 20140226085215941
+es-title: Mensaje: tm-navigate
+modified: 20160415144216276
+tags: Messages
+title: WidgetMessage: tm-navigate
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-navigate` inserta el tiddler que se indica en la StoryList y lo coloca al inicio de la HistoryList. Si el tiddler no está ya en la StoryList, se colocará inmediatamente después del que se especifique en `event.navigateFromTitle`.
+
+Este mensaje precisa de las siguientes propiedades del objeto `event`:
+
+|!Nombre |!Descripción |
+|navigateTo |Título del tiddler al que se navega |
+|navigateFromTitle |Título del tiddler desde el que se inicia la navegación |
+|navigateFromClientRect |Coordenadas en la página cliente del cuadro del elemento que inicia la navegación |
+|navigateSuppressNavigation |''true'' hace que el nuevo tiddler se añada a la StoryList, sin sumarse a la HistoryList. Esto suprime el desplazamiento asociado con la navegación a un tiddler |
+
+Este mensaje pueden generarlo LinkWidget, ActionNavigateWidget y ButtonWidget, pero lo procesa NavigatorWidget.

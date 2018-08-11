@@ -1,0 +1,23 @@
+caption: Instalar plugins
+created: 20160107222430613
+es-title: Cómo instalar manualmente un plugin
+modified: 20160504155741852
+tags: Plugins
+title: Manually installing a plugin
+type: text/vnd.tiddlywiki
+
+# Sólo [[por si acaso|The First Rule of Using TiddlyWiki]], haz copia de seguridad de tu archivo HTML de ~TiddlyWiki
+
+# Abre ~TiddlyWiki en el navegador
+
+# En otra ventana del navegador, busca un enlace al plugin que quieres instalar en la página que lo contiene, p. ej., el enlace <<.tid ~$:/plugins/tiddlywiki/katex>> en https://tiddlywiki.com/plugins/tiddlywiki/katex/)
+
+# Arrastra el enlace hasta tu página. Aparecerá una banda de color verde en la parte superior de la pantalla. 
+
+# Suelta el enlace y aparecerá el tiddler de importación que te mostrará el título del tiddler que acabas de arrastrar. Confirma la importación con el botón.
+
+# Guarda los cambios con el botón <<.button save-wiki>>
+
+# Recarga la página
+
+# El plugin está instalado y listo para su uso

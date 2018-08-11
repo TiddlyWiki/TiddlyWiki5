@@ -16,10 +16,11 @@ Filter operator for returning the names of the wiki parser rules in this wiki
 Export our filter function
 */
 exports.wikiparserrules = function(source,operator,options) {
-	var results = [];
+	var results = [],
+		operand = operator.operand;
 	$tw.utils.each($tw.modules.types.wikirule,function(mod) {
 		var exp = mod.exports;
-		if(exp.types[operator.operand]) {
+		if(!operand || exp.types[operand]) {
 			results.push(exp.name);
 		}
 	});

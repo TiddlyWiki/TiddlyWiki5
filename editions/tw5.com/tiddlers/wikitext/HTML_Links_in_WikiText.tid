@@ -1,0 +1,17 @@
+created: 20161021101834041
+modified: 20161021102041147
+tags: [[HTML in WikiText]]
+title: HTML Links in WikiText
+type: text/vnd.tiddlywiki
+
+It is often useful to be able to create HTML links to external resources. For example, here the value of the `href` attribute will be set to the value of the tiddler MyLinkDestination:
+
+```
+<a href={{MyLinkDestination}}>link</a>
+```
+
+However, there is an unexpected security issue that means that most of the time the link should have the `rel` attribute set to `noopener noreferrer` to maintain privacy of the URLs of private TiddlyWiki's (eg on Dropbox). See https://mathiasbynens.github.io/rel-noopener/ for more information.
+
+```
+<a href={{MyLinkDestination}} rel="noopener noreferrer">link</a>
+```

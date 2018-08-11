@@ -1,0 +1,23 @@
+caption: Tipografía
+created: 20141226192500000
+es-title: Estilo: Tipografía
+modified: 20160418170133348
+tags: documenting
+title: Typography
+type: text/vnd.tiddlywiki
+
+Se recomienda el uso de las [[macros de documentación|Documentation Macros]] para facilitar las futuras tareas de mantenimiento del texto frente a nuevos cambios y actualizaciones. 
+
+Se recomienda precaución en el uso arbitrario de estilos directos de formato (''negrita'', //cursiva// ...etc). Si se puede usar una macro, conviene usarla. Si no existe la macro adecuada, se puede crear o, si no se sabe cómo, pedir su creación en el [[Grupo de Google|http://groups.google.com/group/TiddlyWiki]].
+
+Por el mismo motivo, se aconseja el uso de acentos graves <code>&#96;...&#96;</code> para transcribir fragmentos de código y ~WikiText, pero no para nombres de cosas tales como campos, operadores, variables o widgets. Estas tienen su macro correspondiente.
+
+Para mantener cierto orden y evitar colisiones de código al usar distintos sistemas operativos:
+
+* Apóstrofos y comillas deben ser del tipo recto `'` `"`
+
+* Las elipsis se señalan con tres puntos individuales `...`, en lugar de con <<.word "puntos suspensivos">> `…`.
+
+* Se recomienda evitar el uso de un único guión como signo de puntuación. En su lugar, debe usarse guión doble `--` --que ~TiddlyWiki interpreta como guión corto o <<.word en-dash>>--.
+
+*Los elementos de una lista o tabla llevan punto al final <<.em únicamente>> si se trata de frases completas. Si no es así, no llevan puntuación alguna.

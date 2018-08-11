@@ -1,13 +1,14 @@
 created: 20131212175656755
-modified: 20131212180213909
+modified: 20151223222712715
 tags: Mechanisms
 title: PopupMechanism
 type: text/vnd.tiddlywiki
 
 The popup mechanism allows blocks of content to be selectively displayed and positioned with respect to an anchor. It has several parts:
 
-* StateTiddlers to record whether a popup is currently displayed or not
+* [[StateTiddlers|StateMechanism]] to record whether a popup is currently displayed or not
 * The RevealWidget to selectively display the popup content
+** For "sticky" popups — those that don't close when clicking inside one — set the ''class'' attribute to `tc-popup-keep`
 * The ButtonWidget to trigger the display of the popup by setting the state tiddler appropriately
 
 

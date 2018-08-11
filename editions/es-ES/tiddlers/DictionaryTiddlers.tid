@@ -1,0 +1,15 @@
+caption: Tiddlers diccionario
+created: 20141228094500000
+es-title: Tiddlers diccionario
+modified: 20160511055855885
+tags: Concepts
+title: DictionaryTiddlers
+type: text/vnd.tiddlywiki
+
+Un <<.def "tiddler diccionario">> es un [[tiddler de datos|DataTiddlers]] que contiene una simple lista de pares de nombre-valor.
+
+Su [[tipo|ContentType]] es <code>application/x-tiddler-dictionary</code>.
+
+El campo <<.field text>> consta de una o más líneas con el formato <code>//name//: //value//</code>.
+
+Una [[paleta de colores|ColourPalettes]], es un ejemplo de diccionario. 

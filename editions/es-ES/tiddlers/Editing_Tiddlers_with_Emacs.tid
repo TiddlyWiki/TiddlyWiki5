@@ -1,0 +1,40 @@
+caption: Edición con Emacs
+created: 20140406210404245
+es-title: Editar tiddlers con Emacs
+modified: 20160418044315545
+tags: Learning
+title: Editing Tiddlers with Emacs
+type: text/vnd.tiddlywiki
+
+Michael Fogleman ha escrito [[tid-mode|https://github.com/mwfogleman/tid-mode]], un modo de edición para [[Emacs|http://www.gnu.org/software/emacs/]] con el fin de editar los archivos .tid de TiddlyWiki. Deriva de text-mode, se vale de los útiles //minor modes// //org-struct// y //subword// y actualiza los tiempos de modificación al guardar un archivo .tid.
+
+Redactó también dos funiones de ayuda para editar TiddlyWiki con Emacs. El primero abre un directorio de tiddlers en Dired. El segundo abre TiddlyWiki en el navegador.
+
+```
+(defun open-wiki ()
+  "Abre un directorio de TiddlyWiki en Dired."
+  (interactive)
+  (dired "~/Dropbox/wiki/tiddlers/"))
+```
+  
+```
+(defun browse-wiki ()
+  "Abre TiddlyWiki en el navegador."
+  (interactive)
+  (browse-url "127.0.0.1:8080/"))
+```
+
+Esta última función puede requerir que se indique un navegador:
+
+```
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "chromium")
+```
+
+Puedes vincular cualquiera de estas funciones con la función global-set-key:
+
+```
+(global-set-key (kbd "C-c w") 'open-wiki)
+```
+
+Por el momento, no están integradas en tid-mode.

@@ -3,7 +3,7 @@ title: $:/core/modules/macros/makedatauri.js
 type: application/javascript
 module-type: macro
 
-Macro to convert the content of a tiddler to a data URI
+Macro to convert a string of text to a data URI
 
 <<makedatauri text:"Text to be converted" type:"text/vnd.tiddlywiki">>
 

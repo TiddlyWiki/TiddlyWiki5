@@ -10,7 +10,7 @@
 		},{
 			"file": "codemirror.css",
 			"fields": {
-				"type": "text/css",
+				"type": "text/vnd.tiddlywiki",
 				"title": "$:/plugins/tiddlywiki/codemirror/lib/codemirror.css",
 				"tags": "[[$:/tags/Stylesheet]]"
 			}
@@ -26,49 +26,21 @@
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.js",
-				"module-type": "library"
+				"module-type": "codemirror"
 			}
 		},{
-			"file": "addon/edit/matchbrackets.js",
+			"file": "addon/selection/activeline.js",
 			"fields": {
 				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js",
-				"module-type": "library"
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/selection/activeline.js",
+				"module-type": "codemirror"
 			}
 		},{
-			"file": "addon/search/searchcursor.js",
+			"file": "mode/tw-meta.js",
 			"fields": {
 				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js",
-				"module-type": "library"
-			}
-		},{
-			"file": "mode/javascript/javascript.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/mode/javascript/javascript.js",
-				"module-type": "library"
-			}
-		},{
-			"file": "keymap/vim.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/keymap/vim.js",
-				"module-type": "library"
-			}
-		},{
-			"file": "keymap/sublime.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/keymap/sublime.js",
-				"module-type": "library"
-			}
-		},{
-			"file": "keymap/emacs.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/codemirror/keymap/emacs.js",
-				"module-type": "library"
+				"title": "$:/plugins/tiddlywiki/codemirror/mode/tw-meta.js",
+				"module-type": "codemirror"
 			}
 		}
 	]

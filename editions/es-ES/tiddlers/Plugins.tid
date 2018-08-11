@@ -1,0 +1,17 @@
+caption: Plugins
+created: 20140910215514237
+es-title: Complementos y extensiones
+modified: 20160504145400028
+tags: Concepts TableOfContents
+title: Plugins
+type: text/vnd.tiddlywiki
+
+Los complementos y extensiones (<<.def plugins>>) de ~TiddlyWiki son componentes opcionales que modifican y extienden su funcionalidad. Puedes instalarlos desde la [[librería oficial|Installing a plugin from the plugin library]] o desde las distintas páginas de [[recursos|Resources]] publicadas por la comunidad.
+
+{{$:/core/ui/ControlPanel/Plugins/AddPlugins}}
+
+Estructuralmente, un plugin es un paquete de tiddlers distribuido conjuntamente como un único tiddler, que puede ser instalado, copiado o borrado como una sola unidad. Cada tiddler que forma parte del plugin es un tiddler oculto. [[Aquí|PluginMechanism]] puedes profundizar sobre el tema sobre cómo funcionan y se implementan a nivel interno.
+
+Los complementos y extensiones pueden contener módulos de JavaScript, hojas de estilos y plantillas. También pueden usarse para distribuir texto común, imágenes, audio o cualquier otro tipo de contenidos.
+
+<<list-links "[tag[Plugins]]">>

@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/codemirror-search-replace/readme
+
+This plugin enhances the [[CodeMirror|http://codemirror.net]] text editor with Search and Replace functionality. It needs the latest [[CodeMirror plugin|$:/plugins/tiddlywiki/codemirror]] to be installed
+
+It adds these Keyboard Shortcuts to ~CodeMirror:
+
+|Shortcut |Function |h
+|Ctrl-F / Cmd-F |Start searching |
+|Ctrl-G / Cmd-G / Shift-F3 |Find next |
+|Shift-Ctrl-G / Shift-Cmd-G / F3 |Find previous |
+|Shift-Ctrl-F / Cmd-Option-F |Replace |
+|Shift-Ctrl-R / Shift-Cmd-Option-F |Replace all |
+|Alt-F |Persistent search (dialog doesn't autoclose, enter to find next, Shift-Enter to find previous) |
+|Alt-G |Jump to line |
+

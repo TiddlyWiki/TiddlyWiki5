@@ -20,6 +20,12 @@ title: $:/plugins/tiddlywiki/text-slicer/templates/static/tiddler
 
 </$list>
 
+<$list filter="[<toc-type>prefix[note]]" variable="item">
+
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/note" mode="block"/>
+
+</$list>
+
 <$list filter="[<toc-type>prefix[list]]" variable="item">
 
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/list" mode="block"/>

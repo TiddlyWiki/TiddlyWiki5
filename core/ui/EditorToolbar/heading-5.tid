@@ -1,0 +1,14 @@
+title: $:/core/ui/EditorToolbar/heading-5
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/heading-5
+caption: {{$:/language/Buttons/Heading5/Caption}}
+description: {{$:/language/Buttons/Heading5/Hint}}
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+shortcuts: ((heading-5))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="prefix-lines"
+	character="!"
+	count="5"
+/>

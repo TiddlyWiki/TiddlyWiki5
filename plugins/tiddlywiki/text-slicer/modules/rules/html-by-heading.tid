@@ -1,0 +1,189 @@
+title: $:/plugins/tiddlywiki/text-slicer/slicer-rules/html-by-heading.json
+name: html-by-heading
+caption: By Heading (HTML)
+description: One tiddler per heading, threaded (HTML)
+inherits-from: html-by-paragraph
+type: application/json
+tags: $:/tags/text-slicer/slicer-rules
+
+[
+	{
+		"selector": "address,center,fieldset,form,hr,iframe,isindex,noframes,noscript,ol,ul,li,pre,table",
+		"actions": {}
+	},
+	{
+		"selector": "blockquote",
+		"actions": {
+			"markup": {
+				"wiki": {
+					"prefix": "<<<\n",
+					"suffix": "<<<\n"
+				}
+			}
+		}
+	},
+	{
+		"selector": "dd",
+		"actions": {
+			"markup": {
+				"wiki": {
+					"prefix": "\n: ",
+					"suffix": "\n"
+				}
+			}
+		}
+	},
+	{
+		"selector": "dl",
+		"actions": {
+			"markup": {
+				"wiki": {
+					"prefix": "\n",
+					"suffix": "\n"
+				}
+			}
+		}
+	},
+	{
+		"selector": "dt",
+		"actions": {
+			"markup": {
+				"wiki": {
+					"prefix": "\n; ",
+					"suffix": "\n"
+				}
+			}
+		}
+	},
+	{
+		"selector": "h1",
+		"actions": {
+			"startNewChunk": {
+				"toc-type": "heading",
+				"toc-heading-level": "h1"
+			},
+			"mergeNext": true,
+			"setCaption": true,
+			"isParent": true,
+			"headingLevel": 1,
+			"markup": {
+				"wiki": {
+					"prefix": "! ",
+					"suffix": "\n"
+				}
+			}
+		}
+	},
+	{
+		"selector": "h2",
+		"actions": {
+			"startNewChunk": {
+				"toc-type": "heading",
+				"toc-heading-level": "h2"
+			},
+			"mergeNext": true,
+			"setCaption": true,
+			"isParent": true,
+			"headingLevel": 2,
+			"markup": {
+				"wiki": {
+					"prefix": "!! ",
+					"suffix": "\n"
+				}
+			}
+		}
+	},
+	{
+		"selector": "h3",
+		"actions": {
+			"startNewChunk": {
+				"toc-type": "heading",
+				"toc-heading-level": "h3"
+			},
+			"mergeNext": true,
+			"setCaption": true,
+			"isParent": true,
+			"headingLevel": 3,
+			"markup": {
+				"wiki": {
+					"prefix": "!!! ",
+					"suffix": "\n"
+				}
+			}
+		}
+	},
+	{
+		"selector": "h4",
+		"actions": {
+			"startNewChunk": {
+				"toc-type": "heading",
+				"toc-heading-level": "h4"
+			},
+			"mergeNext": true,
+			"setCaption": true,
+			"isParent": true,
+			"headingLevel": 4,
+			"markup": {
+				"wiki": {
+					"prefix": "!!!! ",
+					"suffix": "\n"
+				}
+			}
+		}
+	},
+	{
+		"selector": "h5",
+		"actions": {
+			"startNewChunk": {
+				"toc-type": "heading",
+				"toc-heading-level": "h5"
+			},
+			"mergeNext": true,
+			"setCaption": true,
+			"isParent": true,
+			"headingLevel": 5,
+			"markup": {
+				"wiki": {
+					"prefix": "!!!!! ",
+					"suffix": "\n"
+				}
+			}
+		}
+	},
+	{
+		"selector": "h6",
+		"actions": {
+			"startNewChunk": {
+				"toc-type": "heading",
+				"toc-heading-level": "h6"
+			},
+			"mergeNext": true,
+			"setCaption": true,
+			"isParent": true,
+			"headingLevel": 6,
+			"markup": {
+				"wiki": {
+					"prefix": "!!!!!! ",
+					"suffix": "\n"
+				}
+			}
+		}
+	},
+	{
+		"selector": "p",
+		"actions": {
+			"markup": {
+				"wiki": {
+					"prefix": "",
+					"suffix": "\n"
+				}
+			}
+		}
+	},
+	{
+		"selector": "*",
+		"actions": {
+			"dontRenderTag": true
+		}
+	}
+]

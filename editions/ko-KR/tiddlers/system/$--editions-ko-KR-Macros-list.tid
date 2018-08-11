@@ -1,0 +1,24 @@
+created: 20141127091159720
+modified: 20160429070443000
+tags: $:/tags/Macro
+title: $:/editions/ko-KR/Macros/list
+type: text/vnd.tiddlywiki
+
+\define list-links(filter,type:"ul",subtype:"li",class:"")
+<!-- Essentially overriding $:/core/macros/list
+	 so that the list item is rather labeled with ko-title
+     when present. -->
+<$type$ class="$class$">
+<$list filter="$filter$">
+<$subtype$>
+<$link to={{!!title}}>
+<$transclude field="caption">
+<$view field="ko-title">
+<$view field="title"/>
+</$view>
+</$transclude>
+</$link>
+</$subtype$>
+</$list>
+</$type$>
+\end

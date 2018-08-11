@@ -1,10 +1,7 @@
 title: $:/language/EditTemplate/
 
 Body/External/Hint: Isto es un nota externe salvate extra le file principal del TiddlyWiki. Tu pote rediger le etiquettas e quadros ma non directemente rediger le contento mesme
-Body/Hint: Usa [[wiki text|http://tiddlywiki.com/static/WikiText.html]] pro adder formatation, ligamines e functiones dynamic
 Body/Placeholder: Scribe le texto pro iste nota
-Body/Preview/Button/Hide: cela previsualisation
-Body/Preview/Button/Show: monstra previsualisation
 Field/Remove/Caption: remove quadro
 Field/Remove/Hint: Remove quadro
 Fields/Add/Button: adde

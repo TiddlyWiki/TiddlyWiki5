@@ -1,0 +1,17 @@
+caption: tm-close-tiddler
+created: 20140226193940778
+es-title: Mensaje: tm-close-tiddler
+modified: 20160416044845312
+tags: Messages navigator-message
+title: WidgetMessage: tm-close-tiddler
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-close-tiddler` elimina de la StoryList el tiddler que se indique. 
+
+Requiere las siguientes propiedades del objeto `event`:
+
+|!Nombre |!Descripción |
+|param |Título del tiddler que se quiere cerrar |
+|tiddlerTitle |Título alternativo usado si no se especifica ''param'' (asignado automáticamente por ButtonWidget)  |
+
+Este mensaje normalmente lo genera ButtonWidget y lo procesa NavigatorWidget.

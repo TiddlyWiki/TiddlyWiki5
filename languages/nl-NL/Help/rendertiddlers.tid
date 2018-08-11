@@ -4,7 +4,7 @@ description: Render (toon) een reeks tiddlers die aan een filter voldoen tot sep
 Render (toon) een reeks tiddlers die aan een filter voldoen tot separate tiddlers van een gegeven inhoudstype (standaard `text/html`) en extensie (standaard `.html`).
 
 ```
---rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
+--rendertiddlers <filter> <template> <bestandspad> [<type>] [<extensie>]
 ```
 
 B.v.:

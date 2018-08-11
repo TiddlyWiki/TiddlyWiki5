@@ -3,17 +3,16 @@ title: $:/snippets/currpalettepreview
 \define swatchStyle()
 background-color: $(swatchColour)$;
 \end
-\define swatch(colour)
-<$set name="swatchColour" value={{##$colour$}}>
-<div class="tc-swatch" style=<<swatchStyle>>/>
-</$set>
+\define swatch()
+<$set name="swatchColour" value={{##$(colour)$}}
+><div class="tc-swatch" style=<<swatchStyle>> title=<<colour>>/></$set>
 \end
-<div class="tc-swatches-horiz">
-<<swatch foreground>>
-<<swatch background>>
-<<swatch muted-foreground>>
-<<swatch primary>>
-<<swatch page-background>>
-<<swatch tab-background>>
-<<swatch tiddler-info-background>>
-</div>
+<div class="tc-swatches-horiz"><$list filter="
+foreground
+background
+muted-foreground
+primary
+page-background
+tab-background
+tiddler-info-background
+" variable="colour"><<swatch>></$list></div>

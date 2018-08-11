@@ -1,0 +1,13 @@
+caption: Espacios en blanco
+created: 20150124182304000
+es-title: Espacios en blanco
+modified: 20160421063428408
+tags: [[Filter Syntax]]
+title: Filter Whitespace
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+{( "espacio" | "tabulador" | "entrada de línea" | "return" | "tabulador vertical" | "entrada de formulario" )}
+"""/>
+
+Entre las diferentes [[instrucciones|Filter Run]] de una [[expresión|Filter Expression]] pueden aparecer diferentes caracteres en blanco.

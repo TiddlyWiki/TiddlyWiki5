@@ -61,6 +61,20 @@ exports.toggleClass = function(el,className,status) {
 };
 
 /*
+Get the first parent element that has scrollbars or use the body as fallback.
+*/
+exports.getScrollContainer = function(el) {
+	var doc = el.ownerDocument;
+	while(el.parentNode) {	
+		el = el.parentNode;
+		if(el.scrollTop) {
+			return el;
+		}
+	}
+	return doc.body;
+};
+
+/*
 Get the scroll position of the viewport
 Returns:
 	{
@@ -74,6 +88,31 @@ exports.getScrollPosition = function() {
 	} else {
 		return {x: document.documentElement.scrollLeft, y: document.documentElement.scrollTop};
 	}
+};
+
+/*
+Adjust the height of a textarea to fit its content, preserving scroll position, and return the height
+*/
+exports.resizeTextAreaToFit = function(domNode,minHeight) {
+	// Get the scroll container and register the current scroll position
+	var container = $tw.utils.getScrollContainer(domNode),
+		scrollTop = container.scrollTop;
+    // Measure the specified minimum height
+	domNode.style.height = minHeight;
+	var measuredHeight = domNode.offsetHeight || parseInt(minHeight,10);
+	// Set its height to auto so that it snaps to the correct height
+	domNode.style.height = "auto";
+	// Calculate the revised height
+	var newHeight = Math.max(domNode.scrollHeight + domNode.offsetHeight - domNode.clientHeight,measuredHeight);
+	// Only try to change the height if it has changed
+	if(newHeight !== domNode.offsetHeight) {
+		domNode.style.height = newHeight + "px";
+		// Make sure that the dimensions of the textarea are recalculated
+		$tw.utils.forceLayout(domNode);
+		// Set the container to the position we registered at the beginning
+		container.scrollTop = scrollTop;
+	}
+	return newHeight;
 };
 
 /*
@@ -164,5 +203,64 @@ exports.addEventListeners = function(domNode,events) {
 	});
 };
 
+/*
+Get the computed styles applied to an element as an array of strings of individual CSS properties
+*/
+exports.getComputedStyles = function(domNode) {
+	var textAreaStyles = window.getComputedStyle(domNode,null),
+		styleDefs = [],
+		name;
+	for(var t=0; t<textAreaStyles.length; t++) {
+		name = textAreaStyles[t];
+		styleDefs.push(name + ": " + textAreaStyles.getPropertyValue(name) + ";");
+	}
+	return styleDefs;
+};
+
+/*
+Apply a set of styles passed as an array of strings of individual CSS properties
+*/
+exports.setStyles = function(domNode,styleDefs) {
+	domNode.style.cssText = styleDefs.join("");
+};
+
+/*
+Copy the computed styles from a source element to a destination element
+*/
+exports.copyStyles = function(srcDomNode,dstDomNode) {
+	$tw.utils.setStyles(dstDomNode,$tw.utils.getComputedStyles(srcDomNode));
+};
+
+/*
+Copy plain text to the clipboard on browsers that support it
+*/
+exports.copyToClipboard = function(text,options) {
+	options = options || {};
+	var textArea = document.createElement("textarea");
+	textArea.style.position = "fixed";
+	textArea.style.top = 0;
+	textArea.style.left = 0;
+	textArea.style.fontSize = "12pt";
+	textArea.style.width = "2em";
+	textArea.style.height = "2em";
+	textArea.style.padding = 0;
+	textArea.style.border = "none";
+	textArea.style.outline = "none";
+	textArea.style.boxShadow = "none";
+	textArea.style.background = "transparent";
+	textArea.value = text;
+	document.body.appendChild(textArea);
+	textArea.select();
+	textArea.setSelectionRange(0,text.length);
+	var succeeded = false;
+	try {
+		succeeded = document.execCommand("copy");
+	} catch (err) {
+	}
+	if(!options.doNotNotify) {
+		$tw.notifier.display(succeeded ? "$:/language/Notifications/CopiedToClipboard/Succeeded" : "$:/language/Notifications/CopiedToClipboard/Failed");
+	}
+	document.body.removeChild(textArea);
+};
 
 })();

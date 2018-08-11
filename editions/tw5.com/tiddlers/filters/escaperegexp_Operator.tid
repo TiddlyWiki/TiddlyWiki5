@@ -1,0 +1,16 @@
+caption: escaperegexp
+created: 20161017153116372
+modified: 20161017153230962
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input with escaping applied to special regular expression characters
+op-parameter: 
+op-parameter-name: 
+op-purpose: escape special characters used in regular expressions
+tags: [[Filter Operators]] [[String Operators]]
+title: escaperegexp Operator
+type: text/vnd.tiddlywiki
+from-version: 5.1.14
+
+See Mozilla Developer Network for details of the [[regular expression syntax|https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/RegExp]].
+
+<<.operator-examples "escaperegexp">>

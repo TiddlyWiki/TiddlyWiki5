@@ -1,0 +1,4 @@
+title: $:/themes/tiddlywiki/tight-heavier/base
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline

@@ -1,0 +1,10 @@
+title: $:/language/Help/output
+description: Nastavi osnovni izhodni imenik za naslednje ukaze.
+
+Nastavi osnovni izhodni imenik za naslednje ukaze. Privzeti izhodni imenik je poddirektorij `output` v imeniku izdaje.
+
+```
+--output <pathname>
+```
+
+Če je podan imenik "relativen", ga ustvari glede na obstoječi delovni imenik. Na primer `--output .` nastavi trenutni delovni imenik kot izhodni imenik.

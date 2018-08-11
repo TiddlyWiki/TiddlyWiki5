@@ -1,0 +1,30 @@
+caption: action-createtiddler
+created: 20161020152745942
+modified: 20161020155119177
+tags: Widgets ActionWidgets
+title: ActionCreateTiddlerWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The ''action-createtiddler'' widget is an [[action widget|ActionWidgets]] that creates new tiddlers. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+
+There are several differences from the [[tm-new-tiddler message|WidgetMessage: tm-new-tiddler]]:
+
+* The new tiddler is not automatically displayed in the [[story river|StoryRiver]]
+* The title of the new tiddler is made available for subsequent operations
+
+! Content and Attributes
+
+The ''action-createtiddler'' widget is invisible. Any content within it is ignored.
+
+|!Attribute |!Description |
+|$basetitle |The initial title that will be attempted. If a tiddler with that title already exists, then a numerical counter is added to the title and incremented until it is unique|
+|$savetitle |A text reference identifying a field or index into which the title of the newly created tiddler will be stored after it is created |
+|$timestamp |Specifies whether the timestamp(s) of the target tiddler will be updated (''modified'' and ''modifier'', plus ''created'' and ''creator'' for newly created tiddlers). Can be "yes" (the default) or "no" |
+|//{any attributes not starting with $}// |Each attribute name specifies a field to be created in the new tiddler  |
+
+! Examples
+
+<$macrocall $name='wikitext-example-without-html'
+src={{ActionCreateTiddlerWidget Example}}/>

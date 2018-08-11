@@ -1,0 +1,14 @@
+title: $:/core/ui/EditorToolbar/superscript
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/superscript
+caption: {{$:/language/Buttons/Superscript/Caption}}
+description: {{$:/language/Buttons/Superscript/Hint}}
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+shortcuts: ((superscript))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="^^"
+	suffix="^^"
+/>

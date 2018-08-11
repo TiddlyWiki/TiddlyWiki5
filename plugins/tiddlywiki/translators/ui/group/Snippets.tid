@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/Snippets
+caption: Snippets
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[tiddlers+shadows]prefix[$:/language/Snippets/]sort[title]]
+\end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/Snippets/]]
+\end
+
+! Snippets
+
+Text snippets for use by the stamp text editor toolbar button.
+
+<<translatableStringEditor editorFields:"caption text">>

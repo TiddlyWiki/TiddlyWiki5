@@ -1,12 +1,38 @@
 created: 20141008134425548
-modified: 20150128163157192
+modified: 20160429165240169
 tags: Widgets
 title: ActionWidgets
 type: text/vnd.tiddlywiki
 
-Action widgets are a special type of widget that perform an action such as sending a message, navigating to a tiddler, or changing the value of a tiddler. They are used in association with other widgets that trigger those actions (for example, the ButtonWidget).
+Action widgets are a special type of widget that have no visual appearance but perform an action when triggered (such as sending a message, navigating to a tiddler, or changing the value of a tiddler). Action widgets are used in association with other widgets that trigger those actions (for example, the ButtonWidget).
 
-Action widgets are invisible. They need not be immediate children of their triggering widget, but they must be descendents of it. The actions are performed in sequence. For example, here is a button that triggers two actions of sending different messages:
+The following action widgets are provided:
+
+<<list-links "[tag[ActionWidgets]]">>
+
+There are two ways to use action widgets:
+
+* Using the `actions` attribute of the triggering widget (this is the preferred way)
+* Embedding the actions within the triggering widget (an older technique that is now deprecated)
+
+!! Assigning action widgets with the `actions` attribute
+
+The action widgets are passed as a string to the `actions` attribute of the triggering widget. Usually, it is more convenient to use a macro to assign the action widgets to a variable. For example, here is a button that triggers two actions of sending different messages:
+
+```
+\define my-actions()
+<$action-sendmessage $message="tm-home"/>
+<$action-sendmessage $message="tm-full-screen"/>
+\end
+
+<$button actions=<<my-actions>>>
+Click me!
+</$button>
+```
+
+!! Assigning action widgets by embedding
+
+The action widgets need not be immediate children of their triggering widget, but they must be descendents of it. The actions are performed in sequence. Here is the above example rewritten to use embedding:
 
 ```
 <$button>
@@ -16,6 +42,3 @@ Click me!
 </$button>
 ```
 
-The following action widgets are provided:
-
-<<list-links "[tag[ActionWidgets]]">>

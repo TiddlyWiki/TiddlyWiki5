@@ -1,0 +1,29 @@
+caption: Modo Seguro
+created: 20140419082845576
+es-title: TiddlyWiki en modo de recuperación
+modified: 20160503162352208
+tags: Features
+title: SafeMode
+type: text/vnd.tiddlywiki
+
+! Introducción
+
+El <<.def "modo seguro">> desactiva la mayoría de customizaciones en ~TiddlyWiki en caso de que, a fuerza de adaptaciones sucesivas, dejen de funcionar correctamente. Un caso frecuente es el de la [[actualización|Upgrading]] del núcleo, que muchas veces <<.word rompe>> las customizaciones del usuario, especialmente en versiones Beta.
+
+! Cómo activar el modo seguro
+
+Modo seguro se activa al arrancar ~TiddlyWiki con el hash `#:safe`. 
+
+https://tiddlywiki.com/#:safe
+
+! Cómo trabaja el modo seguro
+
+Activar modo seguro produce los siguientes cambios en el funcionamiento de ~TiddlyWiki:
+
+* Todos los plugins se desactivan temporalmente.
+
+* Todos aquellos tiddlers que <<.word puentean>> tiddlers ocultos reciben el prefijo `SAFE:`, lo que restaura los originales
+
+* Algunas opciones de configuración se ignoran y usan los valores por defecto.
+
+Se muestra un informe de los tiddlers modificados por el usuario, de modo que pueden inspeccionarse en busca de fallos.

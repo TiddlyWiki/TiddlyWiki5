@@ -1,0 +1,13 @@
+caption: Videos
+created: 20140912150153512
+es-title: Videos
+modified: 20160417153908323
+tags: Learning
+title: Videos
+type: text/vnd.tiddlywiki
+
+Están disponibles los siguientes videos sobre TiddlyWiki:
+
+<<list-links "[tag[Videos]]">>
+
+La finalidad es mantener una serie de videos que sirvan de guía para la puesta en marcha de ~TiddlyWiki. Toda [[contribución|Contributing]] es bienvenida.

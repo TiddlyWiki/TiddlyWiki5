@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/qrcode/ViewToolbarButton/Raw
+tags: $:/tags/ViewToolbarButton/QRcode
+caption: Raw content of this tiddler
+subtitle: QR code of raw tiddler content
+
+\define image()
+<img src=<<makeqr text:"""$(content)$""" size:"350">>/>
+\end
+
+<$set name="content" value={{!!text}}>
+<<image>>
+</$set>

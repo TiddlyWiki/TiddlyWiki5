@@ -2,7 +2,6 @@ created: 20141212105914482
 modified: 20141212110330815
 tags: $:/tags/Macro
 title: $:/core/macros/timeline
-type: text/vnd.tiddlywiki
 
 \define timeline-title()
 <!-- Override this macro with a global macro 

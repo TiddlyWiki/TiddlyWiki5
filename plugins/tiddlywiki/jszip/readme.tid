@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/jszip/readme
+
+This plugin packages [[JSZip|https://stuk.github.io/jszip/]] for use by other plugins. It does not provide any end-user visible features.

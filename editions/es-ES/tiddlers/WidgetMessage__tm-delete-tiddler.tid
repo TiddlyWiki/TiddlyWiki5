@@ -1,0 +1,17 @@
+caption: tm-delete-tiddler
+created: 20140226090324129
+es-title: Mensaje: tm-delete-tiddler
+modified: 20160416044521502
+tags: Messages navigator-message
+title: WidgetMessage: tm-delete-tiddler
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-delete-tiddler` borra el tiddler especificado y lo elimina de la StoryList actual. Si se trata de un borrador, elimina también el tiddler especificado en el campo `draft.of`.
+
+Requiere las siguientes propiedades del objeto `event`:
+
+|!Nombre |!Descripción |
+|param |Título del tiddler para borrar |
+|tiddlerTitle |Título alternativo usado si no se especifica ''param'' (asignado automáticamente por ButtonWidget)  |
+
+Este mensaje lo genera normalmente ButtonWidget y lo procesa NavigatorWidget.

@@ -1,10 +1,10 @@
 created: 20140418142957325
-modified: 20140912145809035
+modified: 20180730201626985
 tags: Features
 title: DateFormat
 type: text/vnd.tiddlywiki
 
-The ViewWidget accepts a `template` attribute that allows the format of date values to be specified. The format string is processed with the following substitutions:
+When used to display date values (with the `format` attribute set to ''date''), the ViewWidget accepts a `template` attribute that allows the format of the date values to be specified. The format string is processed with the following substitutions:
 
 |!Token |!Substituted Value |
 |`DDD` |Day of week in full (eg, "Monday") |
@@ -30,10 +30,13 @@ The ViewWidget accepts a `template` attribute that allows the format of date val
 |`0mm` |Minutes with leading zero |
 |`ss` |Seconds |
 |`0ss` |Seconds with leading zero |
+|`XXX` |Milliseconds |
+|`0XXX` |Milliseconds with leading zero |
 |`am` or `pm` |Lower case AM/PM indicator |
 |`AM` or `PM` |Upper case AM/PM indicator |
 |`TZD` |Timezone offset |
 |`\x` |Used to escape a character that would otherwise have special meaning |
+|`[UTC]`|Time-shift the represented date to UTC. Must be at very start of format string|
 
 Note that other text is passed through unchanged, allowing commas, colons or other separators to be used.
 

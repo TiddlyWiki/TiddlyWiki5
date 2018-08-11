@@ -22,7 +22,7 @@ Quand vous mettez à niveau, n'oubliez pas [[la première règle d'utilisation d
 Cette procédure fonctionnera sur la plupart des navigateurs de bureau. Notez que vos données personnelles ne quittent pas votre navigateur pendant la procédure.
 
 # Localisez votre fichier <<tw>> sur le système de fichiers (à l'aide de Windows Explorer, du Finder sur Mac OS X, ou de votre gestionnaire de fichiers sur Linux)
-# Visitez la page http://tiddlywiki.com/upgrade.html dans votre navigateur
+# Visitez la page https://tiddlywiki.com/upgrade.html dans votre navigateur
 # Faites glisser votre ancien fichier <<tw>> HTML sur la fenêtre du navigateur
 #* Si le fichier est crypté, un mot de passe vous sera demandé
 # Passez en revue la liste des tiddlers qui seront mis à niveau
@@ -33,7 +33,7 @@ Cela aura pour résultat de télécharger sur votre ordinateur un fichier nommé
 
 ! Mise à niveau hors ligne
 
-Vous pouvez également télécharger le fichier http://tiddlywiki.com/upgrade.html localement et effectuer la même procédure de glisser-déposer pour mettre vos fichiers à niveau.
+Vous pouvez également télécharger le fichier https://tiddlywiki.com/upgrade.html localement et effectuer la même procédure de glisser-déposer pour mettre vos fichiers à niveau.
 
 ! Problèmes avec les mises à niveau
 

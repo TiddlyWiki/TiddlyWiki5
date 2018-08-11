@@ -1,0 +1,7 @@
+title: $:/core/templates/raw-static-tiddler
+
+<!--
+
+This template is used for saving tiddlers as static HTML
+
+--><$view field="text" format="plainwikified" />

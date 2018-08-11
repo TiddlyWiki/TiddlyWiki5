@@ -1,0 +1,25 @@
+created: 20160424181300000
+modified: 20160424181300000
+tags: [[TiddlyWiki on Node.js]]
+title: Customising Tiddler File Naming
+type: text/vnd.tiddlywiki
+
+By default, a [[TiddlyWiki on Node.js]] instance using a [[wiki folder|TiddlyWikiFolders]] will create new tiddler files by using the sanitised and disambiguated title as filename.
+
+This can be customised by creating a tiddler [[$:/config/FileSystemPaths]] containing one or more [[filter expressions|Filter Syntax]], each on a line of its own. Newly created tiddlers are matched to each filter in turn, and the first output of the first filter to produce any output is taken as a logical path to be used for the tiddler file. Logical paths don't include the `.tid` extension, and they can use `/` or `\` as directory separator (when generating the physical path, this is replaced by the correct separator for the platform ~TiddlyWiki is running on). If none of the filters matches, the logical path is simply the title with all occurences of `/` replaced by `_` (for backwards compatibility).
+
+In both cases, the characters `<>:"\|?*^` are replaced by `_` in order to guarantee that the resulting path is legal on all supported platforms.
+
+!! Example
+
+```
+[is[system]removeprefix[$:/]addprefix[_system/]]
+[tag[task]addprefix[mytasks/]]
+[!has[draft.of]]
+```
+
+This will store newly created system tiddlers in `tiddlers/_system` (after stripping the `$:/` prefix), tiddlers tagged [[task]] in a subdirectory `tiddlers/mytasks`, and also create subdirectory structures for all other non-draft tiddlers.
+
+Thus, $:/config/FileSystemPaths itself will end up in `tiddlers/_system/config/FileSystemPaths.tid` or `tiddlers\_system\config\FileSystemPaths.tid`, depending on the platform.
+
+The final `[!has[draft.of]]` will match all remaining non-draft tiddlers. Because there was a match, any `/` or `\` in the tiddler title is mapped to a path separator. Thus, `some/thing/entirely/new` will be saved to `tiddlers/some/thing/entirely/new.tid` (ie, the file `new.tid` in a directory called `entirely`).

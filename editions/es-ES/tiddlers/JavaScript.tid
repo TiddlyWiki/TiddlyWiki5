@@ -1,0 +1,15 @@
+created: 20130825142100000
+modified: 20160504163509529
+tags: Definitions
+title: JavaScript
+type: text/vnd.tiddlywiki
+
+~JavaScript es un lenguaje de programación originariamente para incluir pequeños //scripts// en páginas web. Por ese motivo se lo consideraba más un juguete que un lenguaje en sí. Con los años, sin embargo, se ha reconocido su potencial y se ha ganado por propio derecho un lugar en la programación más allá de los límites del propio navegador y la web. 
+
+~JavaScript tiene este aspecto:
+
+```
+function circleArea(radius) {
+	return radius * 2 * 3.141592653;
+}
+```

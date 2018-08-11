@@ -3,15 +3,17 @@ title: $:/language/ControlPanel/
 Advanced/Caption: Erweitert
 Advanced/Hint: Interne Informationen über dieses ~TiddlyWiki.
 Appearance/Caption: Design
-Appearance/Hint: Möglichkeiten um das Aussehen Ihres ~TiddlyWiki's anzupassen.
+Appearance/Hint: Möglichkeiten um das Aussehen Ihres ~TiddlyWikis anzupassen.
 Basics/AnimDuration/Prompt: Dauer der Animation:
 Basics/Caption: Basis
 Basics/DefaultTiddlers/BottomHint: Verwenden Sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Leerzeichen oder wählen Sie <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Offene Tiddler beim Laden wiederherstellen.</$button>
 Basics/DefaultTiddlers/Prompt: Standard-Tiddler:
 Basics/DefaultTiddlers/TopHint: Tiddler, die beim Start geladen werden:
 Basics/Language/Prompt: Hallo! Aktuelle Sprache:
-Basics/NewJournal/Title/Prompt: Titel des neuen Journal-Tiddlers
-Basics/NewJournal/Tags/Prompt: Tags des neuen Journal-Tiddlers
+Basics/NewJournal/Title/Prompt: Titel des neuen Journal-Tiddlers:
+Basics/NewJournal/Text/Prompt: Text des neuen Journal-Tiddlers:
+Basics/NewJournal/Tags/Prompt: Tags des neuen Journal-Tiddlers:
+Basics/NewTiddler/Title/Prompt: Titel des neuen Tiddlers:
 Basics/OverriddenShadowTiddlers/Prompt: Anzahl überschriebener Schatten-Tiddler:
 Basics/ShadowTiddlers/Prompt: Anzahl Schatten-Tiddler:
 Basics/Subtitle/Prompt: Untertitel:
@@ -27,6 +29,19 @@ EditorTypes/Hint: Diese Tiddler definieren, welcher Editor für bestimmte Tiddle
 EditorTypes/Type/Caption: MIME-Type
 Info/Caption: Info
 Info/Hint: Informationen über dieses TiddlyWiki
+KeyboardShortcuts/Add/Prompt: Tastenkürzel hier eingeben
+KeyboardShortcuts/Add/Caption: Tastenkürzel erstellen
+KeyboardShortcuts/Caption: Tastenkürzel
+KeyboardShortcuts/Hint: Tastenkürzel Zuweisungen bearbeiten
+KeyboardShortcuts/NoShortcuts/Caption: Keine Tastenkürzel Zusweisungen vorhanden
+KeyboardShortcuts/Remove/Hint: Löschen eines Tastenkürzels
+KeyboardShortcuts/Platform/All: Alle Plattformen
+KeyboardShortcuts/Platform/Mac: Nur Macintosh
+KeyboardShortcuts/Platform/NonMac: Alle Plattformen, außer Macintosh
+KeyboardShortcuts/Platform/Linux: Nur Linux
+KeyboardShortcuts/Platform/NonLinux: Alle Plattformen, außer Linux
+KeyboardShortcuts/Platform/Windows: Nur Windows
+KeyboardShortcuts/Platform/NonWindows: Alle Plattformen, außer Windows
 LoadedModules/Caption: Geladene Module
 LoadedModules/Hint: Hier werden die geladenen Module und ihre Quelltext-Komponenten angezeigt. Kursiv hervorgehobene Tiddler haben keinen Quelltext. Sie werden während des Boot-Prozesses (Aufrufen des Tiddlywikis) erstellt.
 Palette/Caption: Palette
@@ -39,12 +54,13 @@ Palette/HideEditor/Caption: Editor ausblenden
 Palette/Prompt: Ausgewählte Farbpalette:
 Palette/ShowEditor/Caption: Editor zeigen
 Parsing/Caption: Parser
-Parsing/Hint: Hier können Sie die globalen Parser Einstellungen ändern. ACHTUNG: Manche Einstellungen können dazu führen, dass ~TiddlyWiki nicht mehr richtig funktioniert. Sollte das der Fall sein, dann können Sie die Änderungen im [["safe mode"|http://tiddlywiki.com/#SafeMode]] rückgängig machen.
+Parsing/Hint: Hier können Sie die globalen Parser-Einstellungen ändern. ACHTUNG: Manche Einstellungen können dazu führen, dass ~TiddlyWiki nicht mehr richtig funktioniert. Sollte das der Fall sein, dann können Sie die Änderungen im [["safe mode"|https://tiddlywiki.com/#SafeMode]] rückgängig machen.
 Parsing/Block/Caption: Block Regeln
 Parsing/Inline/Caption: Inline Regeln
 Parsing/Pragma/Caption: Pragma Regeln
-Plugins/Add/Hint: Suche und installiere neue Plugins
 Plugins/Add/Caption: Suche
+Plugins/Add/Hint: Suche und installiere neue Plugins
+Plugins/AlreadyInstalled/Hint: Dieses Plugin ist bereits installiert. Version: <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: deaktivieren
 Plugins/Disable/Hint: Deaktivieren Sie dieses Plugin beim nächsten Laden der Seite.
@@ -52,29 +68,39 @@ Plugins/Disabled/Status: (deaktiviert)
 Plugins/Empty/Hint: keine
 Plugins/Enable/Caption: aktivieren
 Plugins/Enable/Hint: Aktivieren Sie dieses Plugin beim nächsten Laden der Seite.
-Plugins/Install: installieren
+Plugins/Install/Caption: installieren
 Plugins/Installed/Hint: Momentan installierte Plugins
 Plugins/Languages/Caption: Sprachen
 Plugins/Languages/Hint: Spracherweiterungen
-Plugins/OpenPluginLibrary: Öffne das Plugin Verzeichnis
+Plugins/NoInfoFound/Hint: Kein ''"<$text text=<<currentTab>>/>"'' gefunden
+Plugins/NotInstalled/Hint: Dieses Plugin ist momentan nicht installiert
+Plugins/OpenPluginLibrary: Öffne das Plugin-Verzeichnis
+Plugins/ClosePluginLibrary: Schließe das Plugin-Verzeichnis
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Erweiterungen
-Plugins/Reinstall: erneut installieren
+Plugins/Reinstall/Caption: erneut installieren
 Plugins/Themes/Caption: Themes
 Plugins/Themes/Hint: Theme Erweiterungen
 Saving/Caption: Speichern
-Saving/Heading: Speichern
+Saving/DownloadSaver/AutoSave/Description: Erlaube automatisches Speichern für den "Download Saver"
+Saving/DownloadSaver/AutoSave/Hint: Erlaube automatisches Speichern für den "Download Saver"
+Saving/DownloadSaver/Caption: Download Saver
+Saving/DownloadSaver/Hint: Diese Einstellungen gelten für den HTML5-compatiblen "Download Saver"
+Saving/General/Caption: Allgemein
+Saving/General/Hint: Diese Einstellungen gelten für alle Speichermechanismen
+Saving/Hint: Einstellungen zu den TiddlyWiki Speichermechanismen
 Saving/TiddlySpot/Advanced/Heading: Erweiterte Einstellungen
-Saving/TiddlySpot/BackupDir: "Backup" Verzeichnis
+Saving/TiddlySpot/BackupDir: Verzeichnis für das "Backup"
 Saving/TiddlySpot/Backups: "Backups"
+Saving/TiddlySpot/Caption: Speichern auf ~TiddlySpot
 Saving/TiddlySpot/Description: Diese Einstellungen sind nur für http://tiddlyspot.com und kompatible Server aktiv!
-Saving/TiddlySpot/Filename: "Upload" Dateiname
+Saving/TiddlySpot/Filename: Dateiname für den "Upload"
 Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //Die standard Server-URL ist `http://<wikiname>.tiddlyspot.com/store.cgi` und kann im Feld 'Server-URL' verändert werden. zB: http://example.com/store.php//
+Saving/TiddlySpot/Hint: //Die Standard-Server-URL ist `http://<wikiname>.tiddlyspot.com/store.cgi` und kann im Feld 'Server-URL' verändert werden. zB: http://example.com/store.php//
 Saving/TiddlySpot/Password: Passwort
 Saving/TiddlySpot/ServerURL: Server-URL
-Saving/TiddlySpot/UploadDir: "Upload" Verzeichnis
-Saving/TiddlySpot/UserName: Wiki Name
+Saving/TiddlySpot/UploadDir: Verzeichnis für den "Upload"
+Saving/TiddlySpot/UserName: Name des Wikis
 Settings/AutoSave/Caption: Automatisch speichern
 Settings/AutoSave/Disabled/Description: Änderungen NICHT automatisch speichern
 Settings/AutoSave/Enabled/Description: Änderungen automatisch speichern
@@ -83,6 +109,13 @@ Settings/CamelCase/Caption: Camel Case Wiki Links
 Settings/CamelCase/Hint: Hier können Sie die automatische Umwandlung von "~CamelCase Links" einstellen. ''Wichtig:'' Die Seite muss neu geladen werden, damit die Einstellungen wirksam werden.
 Settings/CamelCase/Description: Automatische ~CamelCase Umwandlung aktivieren
 Settings/Caption: Einstellungen
+Settings/EditorToolbar/Caption: Editor Toolbar
+Settings/EditorToolbar/Hint: Aktivieren oder deaktivieren der Editor Toolbar
+Settings/EditorToolbar/Description: Editor Toolbar anzeigen
+Settings/InfoPanelMode/Caption: Tiddler Info Panel Modus
+Settings/InfoPanelMode/Hint: Einstellung, wann das Info Panel geschlossen wird:
+Settings/InfoPanelMode/Popup/Description: Tiddler Info-Panel schließt automatisch
+Settings/InfoPanelMode/Sticky/Description: TiddlerTiddler Info-Panel bleibt offen, bis es geschlossen wird
 Settings/Hint: Diese erweiterten Einstellungen ermöglichen Ihnen, das Verhalten von TiddlyWiki zu ändern.
 Settings/NavigationAddressBar/Caption: Navigation Adresszeile
 Settings/NavigationAddressBar/Hint: Verhalten der Adresszeile des Browsers, wenn ein Tiddler geöffnet wird:
@@ -106,7 +139,9 @@ Settings/ToolbarButtons/Hint: Standard Toolbar Button Erscheinungsbild:
 Settings/ToolbarButtons/Icons/Description: Icon anzeigen
 Settings/ToolbarButtons/Text/Description: Text anzeigen
 Settings/DefaultSidebarTab/Caption: Standard Sidebar Tab
-Settings/DefaultSidebarTab/Hint: Definition, welcher Sidebar Tab standardmäßig aktiv ist.
+Settings/DefaultSidebarTab/Hint: Definition, welcher "Sidebar Tab" standardmäßig aktiv ist.
+Settings/DefaultMoreSidebarTab/Caption: Standard "Mehr Sidebar Tab"
+Settings/DefaultMoreSidebarTab/Hint: Definition, welcher "Mehr Sidebar Tab" standardmäßig aktiv ist.
 Settings/LinkToBehaviour/Caption: Tiddler Öffnen
 Settings/LinkToBehaviour/InsideRiver/Hint: Navigation bei Klicks //innerhalb// der Story
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation bei Klicks //außerhalb// der Story
@@ -118,18 +153,27 @@ Settings/TitleLinks/Caption: Tiddler Titel
 Settings/TitleLinks/Hint: Tiddler Titel als Links anzeigen:
 Settings/TitleLinks/No/Description: Tiddler Titel normal anzeigen.
 Settings/TitleLinks/Yes/Description: Tiddler Titel als Link anzeigen.
+Settings/MissingLinks/Caption: Wiki-Links
+Settings/MissingLinks/Hint: Aktiviere Links zu fehlenden Tiddlern. zB: FehlenderTiddler [[Einführung]]
+Settings/MissingLinks/Description: Aktiviere Links zu fehlenden Tiddlern.
 StoryView/Caption: Anzeige
 StoryView/Prompt: Ausgewählte Anzeige:
+Stylesheets/Caption: Stylesheets
+Stylesheets/Expand/Caption: Alle erweitern
+Stylesheets/Hint: Hier wird der "erweiterte" CSS Code dargestellt. Die Reihenfolge, kann in der "Tag-Liste" <<tag "$:/tags/Stylesheet">> mit "Drag & Drop" angepasst werden!
+Stylesheets/Restore/Caption: Alle zurücksetzen
 Theme/Caption: Theme
 Theme/Prompt: Ausgewähltes Theme:
 TiddlerFields/Caption: Tiddler Felder
-TiddlerFields/Hint: Hier finden Sie alle [[Felder|TiddlerFields]], die in diesem Wiki verwendet werden. Inklusive der Felder aus System-, exklusive Schatten-Tiddler. 
+TiddlerFields/Hint: Hier finden Sie alle [[Felder|TiddlerFields]], die in diesem Wiki verwendet werden. Inklusive der Felder aus System-, exklusive Schatten-Tiddler.
 Toolbars/Caption: Toolbar
 Toolbars/EditToolbar/Caption: Edit Toolbar
-Toolbars/EditToolbar/Hint: Auswählen, welche Buttons im "Edit Modus" angezeigt werden:
+Toolbars/EditToolbar/Hint: Auswählen, welche Buttons im "Edit Modus" angezeigt werden. Verwenden Sie "Drag and Drop", um die Reihenfolge zu ändern
 Toolbars/Hint: Auswählen, welche "Toolbar Button" angezeigt werden
 Toolbars/PageControls/Caption: Page Toolbar
-Toolbars/PageControls/Hint: Auswählen, welche Buttons im Hauptmenü angezeigt werden:
+Toolbars/PageControls/Hint: Auswählen, welche Buttons im Hauptmenü angezeigt werden. Verwenden Sie "Drag and Drop", um die Reihenfolge zu ändern
+Toolbars/EditorToolbar/Caption: Editor Toolbar
+Toolbars/EditorToolbar/Hint: Auswählen, welche Editorbuttons angezeigt werden sollen. Manche Buttons sind vom Tiddler-Typ abhängig und werden eventuell ausgeblendet.
 Toolbars/ViewToolbar/Caption: View Toolbar
-Toolbars/ViewToolbar/Hint: Auswählen, welche Buttons im "View Modus" angezeigt werden:
+Toolbars/ViewToolbar/Hint: Auswählen, welche Buttons im "View Modus" angezeigt werden. Verwenden Sie "Drag and Drop", um die Reihenfolge zu ändern
 Tools/Download/Full/Caption: Herunterladen des ''gesamten Wikis''

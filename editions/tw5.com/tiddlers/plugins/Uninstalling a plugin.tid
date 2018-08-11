@@ -1,0 +1,38 @@
+created: 20160107222504269
+modified: 20160720145839711
+tags: Plugins
+title: Uninstalling a plugin
+type: text/vnd.tiddlywiki
+
+! Standalone Configuration
+
+Follow these instructions when using TiddlyWiki as a standalone HTML file:
+
+# Create a backup of your current TiddlyWiki HTML file ([[just in case|The First Rule of Using TiddlyWiki]])
+# Open the [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}} and go to the ''Plugins'' tab
+# Click on the plugin you want to delete to open its tiddler
+# Click the {{$:/core/images/down-arrow}} ''more'' button and {{$:/core/images/delete-button}} ''delete'' the tiddler
+# Save your TiddlyWiki {{$:/core/images/save-button}}
+# ''Refresh the window so that TiddlyWiki completely removes the plugin'' {{$:/core/images/refresh-button}}
+# The plugin should now be deleted
+
+! Client-Server Configuration
+
+Follow these instructions when using TiddlyWiki under Node.js:
+
+# Quit the server if it is running
+# Edit the `tiddlywiki.info` file (it is in JSON format) and locate the `plugins` and `themes` section (see below)
+# Remove the entries corresponding to the plugins you wish to remove. Take care to retain commas to separate items, but do not terminate the last item in a list with a comma
+# Restart the server
+
+```
+{
+	"plugins": [
+		"tiddlywiki/codemirror"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	]
+}
+```

@@ -6,8 +6,8 @@ module-type: wikirule
 Wiki text inline rule for external links. For example:
 
 ```
-[ext[http://tiddlywiki.com/fractalveg.jpg]]
-[ext[Tooltip|http://tiddlywiki.com/fractalveg.jpg]]
+[ext[https://tiddlywiki.com/fractalveg.jpg]]
+[ext[Tooltip|https://tiddlywiki.com/fractalveg.jpg]]
 ```
 
 \*/
@@ -106,6 +106,7 @@ exports.parseLink = function(source,pos) {
 	}
 	node.attributes.href = {type: "string", value: URL};
 	node.attributes.target = {type: "string", value: "_blank"};
+	node.attributes.rel = {type: "string", value: "noopener noreferrer"};
 	// Update the end position
 	node.end = closePos + 2;
 	return node;

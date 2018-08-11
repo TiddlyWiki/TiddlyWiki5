@@ -1,12 +1,12 @@
 title: $:/language/EditTemplate/
 
-Body/External/Hint: This is an external tiddler stored outside of the main TiddlyWiki file. You can edit the tags and fields but cannot directly edit the content itself
-Body/Hint: Use [[wiki text|http://tiddlywiki.com/static/WikiText.html]] to add formatting, images, and dynamic features
+Body/External/Hint: This tiddler shows content stored outside of the main TiddlyWiki file. You can edit the tags and fields but cannot directly edit the content itself
 Body/Placeholder: Type the text for this tiddler
-Body/Preview/Button/Hide: hide preview
-Body/Preview/Button/Show: show preview
+Body/Preview/Type/Output: output
 Field/Remove/Caption: remove field
 Field/Remove/Hint: Remove field
+Field/Dropdown/Caption: field list
+Field/Dropdown/Hint: Show field list
 Fields/Add/Button: add
 Fields/Add/Name/Placeholder: field name
 Fields/Add/Prompt: Add a new field:
@@ -19,6 +19,9 @@ Tags/Add/Button: add
 Tags/Add/Placeholder: tag name
 Tags/Dropdown/Caption: tag list
 Tags/Dropdown/Hint: Show tag list
+Title/BadCharacterWarning: Warning: avoid using any of the characters <<bad-chars>> in tiddler titles
+Title/Exists/Prompt: Target tiddler already exists
+Title/Relink/Prompt: Update ''<$text text=<<fromTitle>>/>'' to ''<$text text=<<toTitle>>/>'' in the //tags// and //list// fields of other tiddlers
 Type/Dropdown/Caption: content type list
 Type/Dropdown/Hint: Show content type list
 Type/Delete/Caption: delete content type

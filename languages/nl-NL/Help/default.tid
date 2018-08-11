@@ -5,7 +5,7 @@ description:
 $:/language/Help/$(command)$
 \end
 ```
-usage: tiddlywiki [<wikifolder>] [--<command> [<args>...]...]
+usage: tiddlywiki [<wikifolder>] [--<commando> [<argumenten>...]...]
 ```
 
 Beschikbare commando's:
@@ -19,5 +19,5 @@ Beschikbare commando's:
 Om gedetaillerde hulp over een commando te krijgen:
 
 ```
-tiddlywiki --help <command>
+tiddlywiki --help <commando>
 ```

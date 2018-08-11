@@ -49,7 +49,10 @@ exports.startup = function() {
 			$tw.wiki.removeEventListener("change",refreshHandler);
 		},false);
 		// Set up the styles
-		var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet",{document: $tw.fakeDocument, variables: variables}),
+		var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet",{
+				document: $tw.fakeDocument,
+				variables: variables,
+				importPageMacros: true}),
 			styleContainer = $tw.fakeDocument.createElement("style");
 		styleWidgetNode.render(styleContainer,null);
 		var styleElement = srcDocument.createElement("style");

@@ -1,0 +1,14 @@
+created: 20150926162849519
+modified: 20180701185329863
+tags: [[Installing TiddlyWiki on Node.js]]
+title: Installing TiddlyWiki Prerelease on Node.js
+type: text/vnd.tiddlywiki
+
+# Clone a local copy of the TiddlyWiki5 GitHub repository from https://github.com/Jermolene/TiddlyWiki5
+# Open a command line terminal and change the current working directory to the root of the TiddlyWiki5 repo
+# Type `npm link` (Windows) or `sudo npm link` (Mac/Linux) to tell [[npm]] to use this copy of the repo as the globally installed one
+# Inside the root, you can launch ~TiddlyWiki like this:  <br/>``tiddlywiki editions/tw5.com-server --listen``
+
+After this procedure you can work with TiddlyWiki5 via [[npm]] as though it had been installed in the usual way with `npm install -g tiddlywiki`.
+
+Update the clone from time to time in order to ensure that you have the latest code.

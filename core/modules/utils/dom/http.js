@@ -17,10 +17,12 @@ A quick and dirty HTTP function; to be refactored later. Options are:
 	url: URL to retrieve
 	type: GET, PUT, POST etc
 	callback: function invoked with (err,data)
+	returnProp: string name of the property to return as first argument of callback
 */
 exports.httpRequest = function(options) {
 	var type = options.type || "GET",
 		headers = options.headers || {accept: "application/json"},
+		returnProp = options.returnProp || "responseText",
 		request = new XMLHttpRequest(),
 		data = "",
 		f,results;
@@ -41,11 +43,11 @@ exports.httpRequest = function(options) {
 		if(this.readyState === 4) {
 			if(this.status === 200 || this.status === 201 || this.status === 204) {
 				// Success!
-				options.callback(null,this.responseText,this);
+				options.callback(null,this[returnProp],this);
 				return;
 			}
 		// Something went wrong
-		options.callback("XMLHttpRequest error code: " + this.status);
+		options.callback($tw.language.getString("Error/XMLHttpRequest") + ": " + this.status);
 		}
 	};
 	// Make the request
@@ -57,6 +59,9 @@ exports.httpRequest = function(options) {
 	}
 	if(data && !$tw.utils.hop(headers,"Content-type")) {
 		request.setRequestHeader("Content-type","application/x-www-form-urlencoded; charset=UTF-8");
+	}
+	if(!$tw.utils.hop(headers,"X-Requested-With")) {
+		request.setRequestHeader("X-Requested-With","TiddlyWiki");
 	}
 	try {
 		request.send(data);

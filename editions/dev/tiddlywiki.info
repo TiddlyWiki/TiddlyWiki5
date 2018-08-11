@@ -1,15 +1,13 @@
 {
-	"description": "Developer documentation from http://tiddlywiki.com/dev/",
+	"description": "Developer documentation from https://tiddlywiki.com/dev/",
 	"plugins": [
 		"tiddlywiki/highlight",
-		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/github-fork-ribbon"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite",
-		"tiddlywiki/nighttime",
 		"tiddlywiki/starlight",
 		"tiddlywiki/seamless",
 		"tiddlywiki/centralised",
@@ -17,15 +15,30 @@
 		"tiddlywiki/readonly"
 	],
 	"languages": [
-		"en-US",
-		"en-GB",
+		"ca-ES",
+		"cs-CZ",
+		"da-DK",
 		"de-AT",
 		"de-DE",
+		"el-GR",
+		"en-GB",
+		"en-US",
+		"es-ES",
+		"fa-IR",
 		"fr-FR",
-		"zh-Hans",
-		"zh-Hant",
+		"hi-IN",
+		"ia-IA",
 		"it-IT",
-		"ja-JP"
+		"ja-JP",
+		"ko-KR",
+		"nl-NL",
+		"pa-IN",
+		"pt-PT",
+		"ru-RU",
+		"sk-SK",
+		"sv-SE",
+		"zh-Hans",
+		"zh-Hant"
 	],
 	"build": {
 		"index": [
@@ -42,5 +55,8 @@
 			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
 			"--rendertiddlers","[!is[system]]","$:/core/templates/static.tiddler.html","static","text/plain",
 			"--rendertiddler","$:/core/templates/static.template.css","static/static.css","text/plain"]
+	},
+	"config": {
+		"retain-original-tiddler-path": true
 	}
 }

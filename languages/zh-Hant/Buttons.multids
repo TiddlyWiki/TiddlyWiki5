@@ -14,6 +14,8 @@ CloseOthers/Caption: 關閉其他
 CloseOthers/Hint: 關閉其他條目
 ControlPanel/Caption: 控制台
 ControlPanel/Hint: 開啟控制台
+CopyToClipboard/Caption: 複製到剪貼簿
+CopyToClipboard/Hint: 將此文字複製到剪貼簿
 Delete/Caption: 刪除
 Delete/Hint: 刪除此條目
 Edit/Caption: 編輯
@@ -54,6 +56,8 @@ Info/Caption: 資訊
 Info/Hint: 顯示此條目的資訊
 Language/Caption: 語言
 Language/Hint: 選擇使用者介面語言
+Manager/Caption: 條目管理器
+Manager/Hint: 開啟條目管理器
 More/Caption: 更多
 More/Hint: 更多動作
 NewHere/Caption: 新增子條目
@@ -62,6 +66,10 @@ NewJournal/Caption: 新增日誌
 NewJournal/Hint: 建立一個新的日誌條目
 NewJournalHere/Caption: 新增子日誌
 NewJournalHere/Hint: 建立一個標籤含此條目名稱的新日誌條目
+NewImage/Caption: 新增圖像
+NewImage/Hint: 建立一個新的圖像條目
+NewMarkdown/Caption: 新增 Markdown 條目
+NewMarkdown/Hint: 建立一個新的 Markdown 條目
 NewTiddler/Caption: 新增條目
 NewTiddler/Hint: 建立一個新的條目
 OpenWindow/Caption: 開啟於新視窗
@@ -72,6 +80,8 @@ Permalink/Caption: 引用連結
 Permalink/Hint: 設定瀏覽器網址列為直接連結到此條目
 Permaview/Caption: 固定連結
 Permaview/Hint: 設定瀏覽器網址列為直接連結到當前所有已開啟條目
+Print/Caption: 列印頁面
+Print/Hint: 列印當前頁面
 Refresh/Caption: 重新整理
 Refresh/Hint: 執行維基的完全刷新
 Save/Caption: 確定
@@ -86,5 +96,92 @@ ShowSideBar/Caption: 顯示側邊欄
 ShowSideBar/Hint: 顯示側邊欄
 TagManager/Caption: 標籤管理
 TagManager/Hint: 標籤管理
+Timestamp/Caption: 時間戳記
+Timestamp/Hint: 選擇修改是否更新時間戳記
+Timestamp/On/Caption: 時間戳記開啟
+Timestamp/On/Hint: 條目被修改時，更新時間戳記
+Timestamp/Off/Caption: 時間戳記關閉
+Timestamp/Off/Hint: 條目被修改時，不更新時間戳記
 Theme/Caption: 佈景主題
 Theme/Hint: 選擇佈景主題
+Bold/Caption: 粗體
+Bold/Hint: 套用粗體格式於所選文字
+Clear/Caption: 清除
+Clear/Hint: 清除圖像為純色
+EditorHeight/Caption: 編輯器高度
+EditorHeight/Caption/Auto: 自動調整高度以適合內容
+EditorHeight/Caption/Fixed: 固定高度︰
+EditorHeight/Hint: 選擇文字編輯器的高度
+Excise/Caption: 剪切
+Excise/Caption/Excise: 執行剪切
+Excise/Caption/MacroName: 巨集名稱︰
+Excise/Caption/NewTitle: 新條目的名稱︰
+Excise/Caption/Replace: 替換剪切的文本為：
+Excise/Caption/Replace/Macro: 巨集
+Excise/Caption/Replace/Link: 鏈接
+Excise/Caption/Replace/Transclusion: 嵌入
+Excise/Caption/Tag: 將新條目的標籤設為此條目的名稱
+Excise/Caption/TiddlerExists: 警示：條目已經存在
+Excise/Hint: 剪切所選文字到一個新條目
+Heading1/Caption: 標題 1
+Heading1/Hint: 套用標題級別 1 的格式於包含所選文字的列
+Heading2/Caption: 標題 2
+Heading2/Hint: 套用標題級別 2 的格式於包含所選文字的列
+Heading3/Caption: 標題 3
+Heading3/Hint: 套用標題級別 3 的格式於包含所選文字的列
+Heading4/Caption: 標題 4
+Heading4/Hint: 套用標題級別 4 的格式於包含所選文字的列
+Heading5/Caption: 標題 5
+Heading5/Hint: 套用標題級別 5 的格式於包含所選文字的列
+Heading6/Caption: 標題 6
+Heading6/Hint: 套用標題級別 6 的格式於包含所選文字的列
+Italic/Caption: 斜體
+Italic/Hint: 套用斜體格式於所選文字
+LineWidth/Caption: 線寬
+LineWidth/Hint: 設定繪畫的線條寬度
+Link/Caption: 鏈接
+Link/Hint: 建立維基文字鏈接
+Linkify/Caption: 維基鏈接
+Linkify/Hint: 套用維基鏈接於所選文字
+ListBullet/Caption: 符號清單
+ListBullet/Hint: 套用符號清單格式於包含所選文字的列
+ListNumber/Caption: 數字清單
+ListNumber/Hint: 套用數字清單格式於包含所選文字的列
+MonoBlock/Caption: 等寬區塊
+MonoBlock/Hint: 套用等寬區塊格式於包含所選文字的列
+MonoLine/Caption: 等寬
+MonoLine/Hint: 套用等寬字元格式於所選文字
+Opacity/Caption: 不透明度
+Opacity/Hint: 設定繪畫的不透明度
+Paint/Caption: 繪畫顏色
+Paint/Hint: 設定繪畫的顏色
+Picture/Caption: 圖片
+Picture/Hint: 插入圖片
+Preview/Caption: 預覽
+Preview/Hint: 顯示預覽窗格
+PreviewType/Caption: 預覽類型
+PreviewType/Hint: 選擇預覽類型
+Quote/Caption: 引言
+Quote/Hint: 套用引言文字格式於包含所選文字的列
+RotateLeft/Caption: 向左旋轉
+RotateLeft/Hint: 圖像向左旋轉 90 度
+Size/Caption: 圖像大小
+Size/Caption/Height: 高度︰
+Size/Caption/Resize: 調整圖像的大小
+Size/Caption/Width: 寬度：
+Size/Hint: 設定圖像的大小
+Stamp/Caption: 印記
+Stamp/Caption/New: 新增您自己的
+Stamp/Hint: 插入一個預配置的文字片段
+Stamp/New/Title: 在選單中顯示的標題
+Stamp/New/Text: 片段的文字。（記得在 `caption` 欄位中新增一個說明性的標題）。
+Strikethrough/Caption: 刪除線
+Strikethrough/Hint: 套用刪除線格式於所選文字
+Subscript/Caption: 下標
+Subscript/Hint: 套用下標格式於所選文字
+Superscript/Caption: 上標
+Superscript/Hint: 套用上標格式於所選文字
+Transcludify/Caption: 嵌入
+Transcludify/Hint: 套用嵌入於所選文字
+Underline/Caption: 底線
+Underline/Hint: 套用底線格式於所選文字

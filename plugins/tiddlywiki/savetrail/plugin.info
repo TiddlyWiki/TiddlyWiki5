@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/savetrail",
+	"description": "Auto-download modified tiddlers",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"list": "readme settings"
+}

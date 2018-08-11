@@ -10,7 +10,7 @@ op-suffix: optionally, the name of a [[field|TiddlerFields]]
 op-suffix-name: F
 op-parameter: one or more search terms, separated by spaces
 op-output: those input tiddlers in which <<.em all>> of the search terms can be found in the value of field <<.place F>>
-op-neg-output: those input tiddlers in which <<.em not>> all of the search terms can be so found
+op-neg-output: those input tiddlers in which <<.em not>> all of the search terms can be found
 
 When used with a suffix, the <<.op search>> operator is similar to <<.olink regexp>> but less powerful.
 

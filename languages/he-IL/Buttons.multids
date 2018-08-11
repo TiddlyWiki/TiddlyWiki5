@@ -1,0 +1,169 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: חיפוש מתקדם
+AdvancedSearch/Hint: חיפוש מתקדם
+Bold/Caption: הדגש
+Bold/Hint: עיצוב טקסט מודגש
+Cancel/Caption: בטל
+Cancel/Hint: בטל שינויים בטידלר
+Clear/Caption: נקה
+Clear/Hint: נקה את התמונה לצבע אחיד
+Clone/Caption: שכםל
+Clone/Hint: שכפל את הטידלר
+Close/Caption: סגור
+Close/Hint: סגור טידלר זה
+CloseAll/Caption: סגור הכל
+CloseAll/Hint: סגור את כל הטידלרים
+CloseOthers/Caption: סגור אחרים
+CloseOthers/Hint: סגור טידלרים אחרים
+ControlPanel/Caption: לוח בקרה
+ControlPanel/Hint: פתח לוח בקרה
+Delete/Caption: מחק
+Delete/Hint: מחק טידלר זה
+Edit/Caption: ערוך
+Edit/Hint: ערוך טידלר זה
+EditorHeight/Caption: גובה העורך
+EditorHeight/Caption/Auto: התאם גובה לתוכן אוטומטית
+EditorHeight/Caption/Fixed: גובה קבוע
+EditorHeight/Hint: בחר את הגובה של העורך
+Encryption/Caption: הצפנה
+Encryption/ClearPassword/Caption: נקה סיסמה
+Encryption/ClearPassword/Hint: נקה סיסמה ושמור את הויקי ללא הצפנה
+Encryption/Hint: קבע או נקה סיסמה לשמירת ויקי זה
+Encryption/SetPassword/Caption: קבע סיסמה
+Encryption/SetPassword/Hint: קבע סיסמה לשמירת הויקי עם הצפנה
+Excise/Caption: הוצא
+Excise/Caption/Excise: הוצא לטידלר אחר
+Excise/Caption/MacroName: :שם המקרו
+Excise/Caption/NewTitle: שם הטידלר החדש:
+Excise/Caption/Replace: החלך את הטקסט המוצא ב:
+Excise/Caption/Replace/Link: קישור
+Excise/Caption/Replace/Macro: מקרו
+Excise/Caption/Replace/Transclusion: תרגום
+Excise/Caption/Tag: תייג את הטידלר החדש בשם של הטידלר הנוכחי
+Excise/Caption/TiddlerExists: אזהרה: טידלר כבר קיים
+Excise/Hint: הוצא את הטקסט הנבחר לטידלר חדש
+ExportPage/Caption: ייצא הכל
+ExportPage/Hint: ייצא את כל הטידלרים
+ExportTiddler/Caption: יצא טידלר
+ExportTiddler/Hint: יצא טידלר
+ExportTiddlers/Caption: ייצא טידלרים
+ExportTiddlers/Hint: ייצא טידלרים
+Fold/Caption: קפל טילדר
+Fold/FoldBar/Caption: קפל סרגל
+Fold/FoldBar/Hint: סרגלים אופציונליים לקפל ולפתוח טידלרים
+Fold/Hint: קפל את גוף הטידלר הזה
+FoldAll/Caption: קפל את כל הטידלרים
+FoldAll/Hint: קפל את הגופים של כל הטידלרים הפתוחים
+FoldOthers/Caption: קפל טידלרים אחרים
+FoldOthers/Hint: קפל את הגופים של כל הטידלרים הפתוחים האחרים
+FullScreen/Caption: מסך מלא
+FullScreen/Hint: היכנס או צא ממסך מלא
+Heading1/Caption: כותרת 1
+Heading1/Hint: יישם עיצוב כותרת ברמה 1 לשורות המכילות את הבחירה
+Heading2/Caption: כותרת 2
+Heading2/Hint: יישם עיצוב כותרת ברמה 2 לשורות המכילות את הבחירה
+Heading3/Caption: כותרת 3
+Heading3/Hint: יישם עיצוב כותרת ברמה 3 לשורות המכילות את הבחירה
+Heading4/Caption: כותרת 4
+Heading4/Hint: יישם עיצוב כותרת ברמה 4 לשורות המכילות את הבחירה
+Heading5/Caption: כותרת 5
+Heading5/Hint: יישם עיצוב כותרת ברמה 5 לשורות המכילות את הבחירה
+Heading6/Caption: כותרת 6
+Heading6/Hint: יישם עיצוב כותרת ברמה 6 לשורות המכילות את הבחירה
+Help/Caption: עזרה
+Help/Hint: הראה פנל עזרה
+HideSideBar/Caption: הסתר סרגל צידי
+HideSideBar/Hint: הסתר סרגל צידי
+Home/Caption: בית
+Home/Hint: פתח את טידלרי ברירת המחדל
+Import/Caption: יבא
+Import/Hint: ייבא סוגים רבים של קבצים כולל טקסט, תמונה TIDDLYWIKI ו JSON
+Info/Caption: מידע
+Info/Hint: הראה מידע לטידלר זה
+Italic/Caption: נטוי
+Italic/Hint: יישם עצוב טקסט נטוי לבחירה
+Language/Caption: שפה
+Language/Hint: בחר את שפת ממשק המשתמש
+LineWidth/Caption: רוחב שורה
+LineWidth/Hint: קבע רוחב שורה לציור
+Link/Caption: קישור
+Link/Hint: צור קישור WikiText
+ListBullet/Caption: רשימה עם תבליטים
+ListBullet/Hint: הוסף תבליטים לשורות שנבחרו
+ListNumber/Caption: רשימה ממוספרת
+ListNumber/Hint: מספר את השורות שנבחרו
+MonoBlock/Caption: בלוק בריווח אחיד
+MonoBlock/Hint: יישם ריווח אחיד לטקסט שנבחר
+MonoLine/Caption: בריווח אחיד
+MonoLine/Hint: ישם ריווח אחיד לטקסט שנבחרn
+More/Caption: עוד
+More/Hint: פעולות נוספות
+NewHere/Caption: חדש כאן
+NewHere/Hint: צור טידלר חדש מתויג בנוכחי
+NewImage/Caption: תמונה חדשה
+NewImage/Hint: צור טילדר תמונה חדש
+NewJournal/Caption: יומן חדש
+NewJournal/Hint: צור טידלר יומן חדש
+NewJournalHere/Caption: יומן חדש כאן
+NewJournalHere/Hint: צור טידלר יומן חדש מתויג בטידלר הנוכחי
+NewMarkdown/Caption: טידלר מרקדאון חדש
+NewMarkdown/Hint: צור טידלר מרקדאון חדש
+NewTiddler/Caption: טידלר חדש
+NewTiddler/Hint: צור טידלר חדש
+Opacity/Caption: שקיפות
+Opacity/Hint: קבע את שקיפות הציור
+OpenWindow/Caption: פתח בחלון חדש
+OpenWindow/Hint: פתח טידלר בחלון חדש
+Paint/Caption: צבע ציור
+Paint/Hint: קבע  את צבע הציור
+Palette/Caption: פלטת צבעים
+Palette/Hint: בחר את פלטת הצבעים
+Permalink/Caption: קישור קבוע
+Permalink/Hint: כוון את הדפדפן לקישור ישיר לטידלר זה
+Permaview/Caption: מבט קבוע
+Permaview/Hint: כוון את הדפדפן לקישור ישיר לכל הטידלרים שבסיפור זה
+Picture/Caption: תמונה
+Picture/Hint: הכנס תמונה
+Preview/Caption: מבט מקדים
+Preview/Hint: הראה את פנל המבט המקדים
+PreviewType/Caption: סוג המבט המקדים
+PreviewType/Hint: בחר סוג מבט מקדים
+Quote/Caption: צטט
+Quote/Hint: עיצוב ציטוט לבחירה
+Refresh/Caption: רענן
+Refresh/Hint: בצע רענון מלא של הויקי הזה
+Save/Caption: אשר
+Save/Hint: אשר שינויים לטידלר זה 
+SaveWiki/Caption: שמור שינויים 
+SaveWiki/Hint: שמור שינויים
+ShowSideBar/Caption: הראה פנל צד
+ShowSideBar/Hint: הראה פנל צד
+Size/Caption: גודל תמונה
+Size/Caption/Height: גובה
+Size/Caption/Resize: שנה גודל תמונה
+Size/Caption/Width: רוחב:
+Size/Hint: קבע גודל תמונה
+Stamp/Caption: חותמת
+Stamp/Caption/New: הוסף את שלך
+Stamp/Hint: הכנס קטע טקסט מוכן מראש
+Stamp/New/Text: הטקסט להכניס (זכור להוסיף כותרת אינפורמטיבית בשדה הכותרת)
+Stamp/New/Title: שם כמופיע בתפריט
+StoryView/Caption: מבט סיפור
+StoryView/Hint: בחר את ויזואליזציית הסיפור
+Strikethrough/Caption: קו מוחק
+Strikethrough/Hint: הוסף קו מחיקה לבחירה
+Subscript/Caption: כתב תחתי
+Subscript/Hint: עצב את הבחירה ככתב תחתי
+Superscript/Caption: כתב עילי
+Superscript/Hint: עצב את הבחירה ככתב עילי
+TagManager/Caption: מנהל תגים
+TagManager/Hint: פתח את מנהל התגים
+Theme/Caption: תימה
+Theme/Hint: בחר את התימה להצגה
+Underline/Caption: קו תחתי
+Underline/Hint: עצב את הבחירה עם קו תחתי
+Unfold/Caption: הראה טידלר
+Unfold/Hint: הראהאת גוף הטידלר הזה
+UnfoldAll/Caption: הראה את כל הטידלרים
+UnfoldAll/Hint: הראה את הגופים של כל הטידלרים הפתוחים

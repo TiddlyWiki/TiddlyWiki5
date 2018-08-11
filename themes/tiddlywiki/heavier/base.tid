@@ -1,0 +1,35 @@
+title: $:/themes/tiddlywiki/heavier/base
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+html body strong,
+html body button.tc-tiddlylink,
+html body a.tc-tiddlylink,
+html body a.tc-tiddlylink-shadow,
+html body .tc-menu-list-count {
+	font-weight: 700;
+}
+
+html body h1,
+html body h2,
+html body h3,
+html body h4,
+html body h5,
+html body h6,
+html body a.tc-tiddlylink-shadow.tc-tiddlylink-resolves,
+html body button.tc-tag-label,
+html body span.tc-tag-label,
+html body .tc-sidebar-header .tc-title a.tc-tiddlylink-resolves,
+html body .tc-site-title,
+html body .tc-titlebar,
+html body .tc-subtitle,
+html body .tc-tiddler-missing .tc-title,
+html body .tc-tab-buttons button,
+html body .tc-tiddler-frame .tc-tiddler-body {
+	font-weight: 500;
+}
+
+html body .tc-view-field-name {
+	font-weight: 400;
+}

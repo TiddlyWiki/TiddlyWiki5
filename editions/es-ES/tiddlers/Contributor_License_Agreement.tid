@@ -1,0 +1,15 @@
+caption: CLA - Acuerdo de licencia
+created: 20150630205511173
+es-title: Acuerdo de licencia de contribución
+modified: 20160413171201065
+tags: 
+title: Contributor License Agreement
+type: text/vnd.tiddlywiki
+
+Al igual que sucede en otros proyectos de Código Abierto, TiddlyWiki5 necesita que quien quiera contribuir con él, firme un acuerdo de licencia de contribución. 
+
+Es un acuerdo legal que permite a quien contribuye afirmar que los derechos de su contribución son exclusivamente suyos y que está de acuerdo en licenciarlos a la Asociación UnaMesa (entidad legal que, en nombre de la comunidad, es propietaria de TiddlyWiki).
+
+* Si eres persona física, necesitas firmar la [[licencia individual|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-individual.md]]
+
+*Si eres persona fiscal, la de [[entidades|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-entity.md]]

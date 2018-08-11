@@ -1,0 +1,31 @@
+caption: Enlaces
+created: 20130825202900000
+es-title: Enlaces - TiddlerLinks
+modified: 20160414061639029
+tags: Concepts
+title: TiddlerLinks
+type: text/vnd.tiddlywiki
+
+Un enlace es la región de un tiddler sobre la que se puede hacer clic para navegar a otro. El comportamiento de navegación lo determina el StoryView actual. La vista "classic" muestra la historia como una secuencia lineal de tiddlers.
+
+Si se mantiene pulsada la tecla ''Ctrl'' o ''command'' al hacer clic en un enlace, se abre el tiddler de destino, pero no se navega hasta él. Esta es una forma muy útil de //poner en cola// una serie de tiddlers para su lectura.
+
+Los enlaces o //links// son útiles para modelar relaciones orgánicas entre tiddlers y, más particularmente, para iterar la navegación entre tiddlers.
+
+El [[Panel de información|InfoPanel]] muestra en la pestaña ''Referencias'' una lista de los links que //llegan// al tiddler.
+
+En [[Filtros|Filters]] se pueden incluir los siguientes operadores para trabajar con enlaces:
+
+* `[links[]]` - devuelve el título de los tiddlers enlazados desde el tiddler o selección actual de tiddlers.
+
+* `[backlinks[]]` - devuelve el título de los tiddlers que enlazan con el tiddler o selección actual de tiddlers.
+
+TiddlyWiki5 modifica la apariencia de los enlaces para dar información adicional sobre el tipo de tiddler al que se enlaza:
+
+|!Descripción del link |!Apariencia |
+|A un tiddler existente |[[TalCual|TiddlerLinks]] |
+|A un tiddler que no existe (faltante) |[[TalCual|ATiddlerThatDoesntExist]] |
+|A un tiddler oculto que no ha sido anulado |[[TalCual|$:/core/copyright.txt]] |
+|A un tiddler oculto que ha sido anulado por un tiddler común  |[[TalCual|$:/SiteTitle]] |
+
+Los enlaces externos se muestran así: https://tiddlywiki.com/ o [[así|https://tiddlywiki.com/]].

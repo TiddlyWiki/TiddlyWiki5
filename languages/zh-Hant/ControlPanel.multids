@@ -10,8 +10,10 @@ Basics/DefaultTiddlers/BottomHint: 標題含空白時請使用 &#91;&#91;雙中�
 Basics/DefaultTiddlers/Prompt: 首頁：
 Basics/DefaultTiddlers/TopHint: 預設開啟的條目：
 Basics/Language/Prompt: 您好！當前的語言：
-Basics/NewJournal/Title/Prompt: 新日誌條目的名稱
 Basics/NewJournal/Tags/Prompt: 新日誌條目的標籤
+Basics/NewJournal/Text/Prompt: 新日誌條目的內容
+Basics/NewJournal/Title/Prompt: 新日誌條目的名稱
+Basics/NewTiddler/Title/Prompt: 新條目的名稱
 Basics/OverriddenShadowTiddlers/Prompt: 被覆寫的預設條目數量：
 Basics/ShadowTiddlers/Prompt: 預設條目數量：
 Basics/Subtitle/Prompt: 副標題：
@@ -27,6 +29,19 @@ EditorTypes/Hint: 這些條目決定使用哪個編輯器來編輯特定條目�
 EditorTypes/Type/Caption: 類型
 Info/Caption: 資訊
 Info/Hint: 有關此 TiddlyWiki 的資訊
+KeyboardShortcuts/Add/Prompt: 在此輸入快捷鍵
+KeyboardShortcuts/Add/Caption: 新增快捷鍵
+KeyboardShortcuts/Caption: 快捷鍵
+KeyboardShortcuts/Hint: 管理鍵盤快捷鍵分配
+KeyboardShortcuts/NoShortcuts/Caption: 尚無指定快捷鍵
+KeyboardShortcuts/Remove/Hint: 刪除快捷鍵
+KeyboardShortcuts/Platform/All: 所有平臺
+KeyboardShortcuts/Platform/Mac: 僅 Macintosh 平臺
+KeyboardShortcuts/Platform/NonMac: 僅非 Macintosh 平臺
+KeyboardShortcuts/Platform/Linux: 僅 Linux 平臺
+KeyboardShortcuts/Platform/NonLinux: 僅非 Linux 平臺
+KeyboardShortcuts/Platform/Windows: 僅 Windows 平臺
+KeyboardShortcuts/Platform/NonWindows: 僅非 Windows 平臺
 LoadedModules/Caption: 已載入的模組
 LoadedModules/Hint: 這些是當前已載入的模組之源碼條目。斜體的模組則無源碼條目，通常是因為它們是在引導過程中設置。
 Palette/Caption: 調色盤
@@ -40,6 +55,7 @@ Palette/Prompt: 當前的調色盤：
 Palette/ShowEditor/Caption: 顯示編輯器
 Plugins/Add/Hint: 從官方插件庫安裝插件
 Plugins/Add/Caption: 獲取更多插件
+Plugins/AlreadyInstalled/Hint: 此插件已經安裝版本 <$text text=<<installedVersion>>/>
 Plugins/Caption: 插件
 Plugins/Disable/Caption: 停用
 Plugins/Disable/Hint: 重新載入頁面時停用此插件
@@ -47,26 +63,37 @@ Plugins/Disabled/Status: (已停用)
 Plugins/Empty/Hint: 無
 Plugins/Enable/Caption: 啟用
 Plugins/Enable/Hint: 重新載入頁面時啟用此插件
-Plugins/Install: 安裝
+Plugins/Install/Caption: 安裝
 Plugins/Installed/Hint: 當前已安裝的插件：
 Plugins/Languages/Caption: 語言
 Plugins/Languages/Hint: 語言包插件
+Plugins/NoInfoFound/Hint: 無 ''"<$text text=<<currentTab>>/>"''
+Plugins/NoInformation/Hint: 未提供資訊
+Plugins/NotInstalled/Hint: 尚未安裝此插件
 Plugins/OpenPluginLibrary: 開啟插件程式庫
+Plugins/ClosePluginLibrary: 關閉插件程式庫
 Plugins/Plugins/Caption: 插件
 Plugins/Plugins/Hint: 插件
-Plugins/Reinstall: 重新安裝
+Plugins/Reinstall/Caption: 重新安裝
 Plugins/Themes/Caption: 佈景主題
 Plugins/Themes/Hint: 佈景主題插件
 Parsing/Caption: 解析
-Parsing/Hint: 在此您可以全域停用個別的維基語法解析規則。請小心，停用某些解析規則，會妨礙 ~TiddlyWiki 正常運作 (您可以用[[安全模式|http://tiddlywiki.com/#SafeMode]]恢復正常操作)
+Parsing/Hint: 在此您可以全域停用或啟用維基解析規則。要使更改生效，請儲存並重新載入您的維基。停用某些解析規則，會妨礙 <$text text="TiddlyWiki"/>  正常運作。可使用[[安全模式|https://tiddlywiki.com/#SafeMode]]恢復正常操作。
 Parsing/Block/Caption: 區塊解析規則
 Parsing/Inline/Caption: 行內解析規則
 Parsing/Pragma/Caption: 編譯指示解析規則
 Saving/Caption: 儲存
-Saving/Heading: 儲存
+Saving/DownloadSaver/AutoSave/Description: 允許下載儲存模組的自動儲存
+Saving/DownloadSaver/AutoSave/Hint: 啟用下載儲存模組的自動儲存
+Saving/DownloadSaver/Caption: 下載儲存模組
+Saving/DownloadSaver/Hint: 這些設定適用於相容 HTML5 的下載儲存模組
+Saving/General/Caption: 通用
+Saving/General/Hint: 這些設定適用於所有已載入的儲存模組
+Saving/Hint: 用於通過儲存模組將整個 TiddlyWiki 保存為單個檔案的設定
 Saving/TiddlySpot/Advanced/Heading: 進階設定
 Saving/TiddlySpot/BackupDir: 備份資料夾
 Saving/TiddlySpot/Backups: 備份
+Saving/TiddlySpot/Caption: ~TiddlySpot 儲存模組
 Saving/TiddlySpot/Description: 這些設定只適用於儲存到 http://tiddlyspot.com 或相容的遠端伺服器時。
 Saving/TiddlySpot/Filename: 上傳檔名
 Saving/TiddlySpot/Heading: ~TiddlySpot
@@ -78,13 +105,22 @@ Saving/TiddlySpot/UserName: 帳號
 Settings/AutoSave/Caption: 自動儲存
 Settings/AutoSave/Disabled/Description: 不要自動儲存變更
 Settings/AutoSave/Enabled/Description: 自動儲存變更
-Settings/AutoSave/Hint: 在編輯過程中自動儲存變更
+Settings/AutoSave/Hint: 當使用支援的儲存模組時，在編輯期間嘗試自動儲存變更
 Settings/CamelCase/Caption: 駝峰式維基鏈接
 Settings/CamelCase/Hint: 您可以全域停用駝峰式短語自動鏈接。須儲存後重新載入，方才生效。
 Settings/CamelCase/Description: 啟用自動駝峰式鏈接
 Settings/Caption: 設定
 Settings/DefaultSidebarTab/Caption: 預設側邊欄頁籤
 Settings/DefaultSidebarTab/Hint: 指定預設顯示的側邊欄頁籤
+Settings/DefaultMoreSidebarTab/Caption: 更多側邊欄的預設頁籤
+Settings/DefaultMoreSidebarTab/Hint: 指定預設顯示的更多側欄頁籤
+Settings/EditorToolbar/Caption: 編輯器工具列
+Settings/EditorToolbar/Hint: 啟用或停用編輯器工具列︰
+Settings/EditorToolbar/Description: 顯示編輯器工具列
+Settings/InfoPanelMode/Caption: 條目資訊面板模式
+Settings/InfoPanelMode/Hint: 控制條目資訊面板何時關閉︰
+Settings/InfoPanelMode/Popup/Description: 條目資訊面板自動關閉
+Settings/InfoPanelMode/Sticky/Description: 條目資訊面板保持開啟狀態，直到明確關閉
 Settings/Hint: 這些進階設定讓您自訂 TiddlyWiki 的行為。
 Settings/LinkToBehaviour/Caption: 條目開啟行為
 Settings/LinkToBehaviour/InsideRiver/Hint: 從故事河//中//導航
@@ -93,6 +129,9 @@ Settings/LinkToBehaviour/OpenAbove: 開啟於當前條目之上
 Settings/LinkToBehaviour/OpenBelow: 開啟於當前條目之下
 Settings/LinkToBehaviour/OpenAtTop: 開啟於故事河的頂端
 Settings/LinkToBehaviour/OpenAtBottom: 開啟於故事河的底部
+Settings/MissingLinks/Caption: 維基鏈接
+Settings/MissingLinks/Hint: 選擇是否要鏈接到尚未存在的條目
+Settings/MissingLinks/Description: 啟用鏈接到佚失條目
 Settings/NavigationAddressBar/Caption: 網址列導覽
 Settings/NavigationAddressBar/Hint: 在瀏覽器網址列導覽到條目時的行為：
 Settings/NavigationAddressBar/No/Description: 不更新網址列
@@ -120,16 +159,22 @@ Settings/TitleLinks/No/Description: 不顯示條目標題為鏈接
 Settings/TitleLinks/Yes/Description: 顯示條目標題為鏈接
 StoryView/Caption: 檢視模式
 StoryView/Prompt: 當前的檢視模式：
+Stylesheets/Caption: 樣式表
+Stylesheets/Expand/Caption: 全部展開
+Stylesheets/Hint: 這是當前標籤為 <<tag "$:/tags/Stylesheet">> 的樣式表條目呈現的 CSS
+Stylesheets/Restore/Caption: 復原
 Theme/Caption: 佈景主題
 Theme/Prompt: 當前的佈景主題：
 TiddlerFields/Caption: 條目欄位
 TiddlerFields/Hint: 這是本維基使用中的所有條目欄位（含系統條目的欄位，但預設條目的欄位除外）。
 Toolbars/Caption: 工具列
 Toolbars/EditToolbar/Caption: 編輯工具列
-Toolbars/EditToolbar/Hint: 選擇將顯示哪些按鈕於條目的編輯模式工具列
+Toolbars/EditToolbar/Hint: 選擇將顯示哪些按鈕於條目的編輯模式工具列。拖放可改變順序。
 Toolbars/Hint: 選擇將顯示哪些工具列按鈕
 Toolbars/PageControls/Caption: 頁面工具列
-Toolbars/PageControls/Hint: 選擇將顯示哪些按鈕於主頁面的工具列
+Toolbars/PageControls/Hint: 選擇將顯示哪些按鈕於主頁面的工具列。拖放可改變順序。
+Toolbars/EditorToolbar/Caption: 編輯器工具列
+Toolbars/EditorToolbar/Hint: 選擇將顯示哪些按鈕於編輯器工具列。請注意，某些按鈕只會出現在編輯某一類型的條目時。拖放可改變順序。
 Toolbars/ViewToolbar/Caption: 檢視工具列
-Toolbars/ViewToolbar/Hint: 選擇將顯示哪些按鈕於條目的檢視模式工具列
+Toolbars/ViewToolbar/Hint: 選擇將顯示哪些按鈕於條目的檢視模式工具列。拖放可改變順序。
 Tools/Download/Full/Caption: 下載完整副本

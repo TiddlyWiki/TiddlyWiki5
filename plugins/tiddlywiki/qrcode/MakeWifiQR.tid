@@ -1,0 +1,28 @@
+title: $:/plugins/tiddlywiki/qrcode/MakeWifiQR
+tags: $:/tags/MakeQR
+caption: Wifi
+
+\define wifi-url()
+WIFI:T:WPA;S:SSID;P:password;;
+\end
+
+\define image(network,encryption,ssid,password)
+<img src=<<makeqr text:"""WIFI:T:$encryption$;S:$ssid$;P:$password$;;""" size:"350">>/>
+\end
+
+! Enter the details of your wifi network
+
+Encryption: <$select tiddler="$:/config/plugins/tiddlywiki/qrcode/wifi/encryption" default="none">
+<option value="none">None</option>
+<option value="WEP">WEP</option>
+<option value="WPA">WPA</option>
+<option value="WPA2">WPA2</option>
+</$select>
+
+SSID: <$edit-text tiddler="$:/config/plugins/tiddlywiki/qrcode/wifi/ssid" tag="input" default=""/>
+
+Password: <$edit-text tiddler="$:/config/plugins/tiddlywiki/qrcode/wifi/password" tag="input" default=""/>
+
+! Here is your QR code
+
+<$macrocall $name="image" network={{$:/config/plugins/tiddlywiki/qrcode/wifi/network}} encryption={{$:/config/plugins/tiddlywiki/qrcode/wifi/encryption}} ssid={{$:/config/plugins/tiddlywiki/qrcode/wifi/ssid}} password={{$:/config/plugins/tiddlywiki/qrcode/wifi/password}}/>

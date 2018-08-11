@@ -1,0 +1,13 @@
+caption: "Índice del libro de Abdías", de Dave Gifford
+created: 20131207085406905
+es-title: "Índice del libro de Abdías", de Dave Gifford
+modified: 20160417152959549
+tags: Examples
+title: Obadiah TOC
+type: text/vnd.tiddlywiki
+url: http://giffmex.org/experiments/obadiah.html
+
+Introducción de Dave Gifford al libro bíblico de Abdías, que usa la macro Índice y varios ajustes personalizados de ~TiddlyWiki: botones "nuevo aquí", [[esta plantilla personalizada de visualización|http://giffmex.org/experiments/obadiah.html#%24%3A%2F_aa%2FViewTemplate%2FNoteList]] para añadir notas e imágenes dentro de cualquier tiddler y un tiddler de transclusión para facilitar la impresión ([[este tiddler|http://giffmex.org/experiments/obadiah.html#An%20introduction%20to%20Obadiah]])
+
+{{!!url}}
+

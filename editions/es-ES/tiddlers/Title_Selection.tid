@@ -1,0 +1,13 @@
+caption: Selección de títulos
+created: 20150117152418000
+es-title: Selección de títulos
+modified: 20160419163955922
+tags: Concepts
+title: Title Selection
+type: text/vnd.tiddlywiki
+
+Una <<.def "selección de títulos">> es una lista ordenada de títulos (o cadenas similares), en que cada elemento aparece sólo una vez.
+
+La selección de títulos es importante en operaciones de [[búsqueda|Filters]]
+
+La manera más sencilla de obtener una es escribiendo una [[lista|Title List]].

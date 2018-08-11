@@ -4,9 +4,9 @@ title: Translations
 $(languagePluginTitle)$/icon
 \end
 
-The following plugin translations are currently available:
+TiddlyWiki is currently available in <$count filter="[[$:/languages/en-GB]] [plugin-type[language]sort[title]] -[[$:/languages/de-AT]]"/> languages:
 
-<div class="tc-drop-down-language-chooser" style="font-size: 16px; line-height: 20px;">
+<div class="tc-drop-down-language-chooser" style="font-size: 10px; line-height: 12px; -moz-columns:2; -webkit-columns:2; columns:2;">
 <$list filter="[[$:/languages/en-GB]] [plugin-type[language]sort[title]] -[[$:/languages/de-AT]]">
 <div class="tc-language-list">
 <span class="tc-language-list-greeting">

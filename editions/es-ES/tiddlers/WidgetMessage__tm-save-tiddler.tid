@@ -1,0 +1,15 @@
+caption: tm-save-tiddler
+created: 20140226090544323
+es-title: Mensaje: tm-save-tiddler
+modified: 20160415101900363
+tags: Messages navigator-message
+title: WidgetMessage: tm-save-tiddler
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-save-tiddler` se aplica a los tiddlers en borrador. Sobreescribe el tiddler identificado en el campo `draft.of` y elimina el borrador. Este mensaje requere las siguientes propiedades del objeto `event`
+
+|!Nombre |!Descripción |
+|param |Título del tiddler que se sobreescribe |
+|tiddlerTitle |Tídulo alternativo si no se especifica ''param'' (asignado automáticamente por ButtonWidget)  |
+
+Este mensaje normalmente lo genera ButtonWidget y lo procesa NavigatorWidget.

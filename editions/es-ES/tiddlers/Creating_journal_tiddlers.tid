@@ -1,0 +1,47 @@
+caption: Entradas de diario
+created: 20141010093214683
+es-title: Creación de entradas de diario
+modified: 20160422153138748
+tags: [[Working with TiddlyWiki]]
+title: Creating journal tiddlers
+type: text/vnd.tiddlywiki
+
+!! Introducción
+
+Las <<.def "entradas de diario">> son tiddlers que usan fechas u horas como título. Son una forma rápida de registrar información que precisa de algún tipo de marca de tiempo.
+
+En ellos puedes, como en cualquier otro tiddler, usar etiquetas para enlazar con otros y así establecer diferentes relaciones entre fragmentos de información que de otro modo estarían inconexos. 
+
+Por ejemplo: podemos usar una entrada de diario titulada <<.tid "10 de octubre">> para registrar pensamientos e información diversa de aquel día. Las etiquetas <<.tag shopping>> y <<.tag Londres>> podrían servirnos, además de para indicarnos que esa fecha tiene que ver con estar de shopping en Londres, para etiquetar con ellas cualquier otra información relativa a ambos temas.
+
+!! Creación de una entrada de diario
+
+La manera más sencilla es mediante el botón <<.button new-journal>> de la pestaña <<.sidebar-tab Tools>> de la barra lateral.  Si lo usas con frecuencia, pincha en la casilla para que aparezca entre los iconos que se muestran sobre el cuadro de búsqueda.
+
+El botón <<.button new-journal>> crea un tiddler en blanco con etiqueta <<.tag Diario>> y título derivado de la fecha de hoy. Si ya existe una entrada con esa misma fecha, entonces lo abre para su edición.
+
+!! Creación de una entrada con etiquetas
+
+Es habitual, revisando u organizando notas o trabajando en grupo, crear una entrada con la fecha del día y etiquetarla con el título de los tiddlers que revisamos. Además de creando una entrada y escribiendo etiquetas manualmente, tenemos otra forma de hacerlo, que añade automáticamente las etiquetas:
+
+* En el tiddler que estamos revisando, pinchamos en el botón <<.button more-tiddler-actions>> y hacemos clic en <<.button new-journal-here>>. 
+**Algo menos a mano, peo igualmente útil, este botón está también está en la pestaña <<.info-tab Tools>> del panel de <<.button info>> del tiddler.
+
+*En el siguiente tiddler que revisemos, repetimos la operación anterior y se nos volverá a abrir la entrada, que además de la etiqueta <<.tag Diario>> y la del título anterior, llevará ya la del nuevo.
+
+Pongamos por caso que estamos revisando un tiddler llamado <<.tid "Quijote">>. Del modo antes descrito, tendremos una entrada con la fecha del día y la etiqueta <<.tag Quijote>> en la que hacer nuestras anotaciones, que guardamos y cerramos para seguir revisando notas.
+
+Al rato, mientras revisamos otro tiddler llamado <<.tid Hamlet>>, repetimos la operación y el resultado será la entrada del día abierta y lista para escribir en ella nuestra anotación, con las etiquetas <<.tag Diario>>, <<.tag Quijote>> y <<.tag Hamlet>> añadidas automáticamente, sin riesgo de equivocarnos y sin tener que perder concentración rebuscando entre otras entradas.
+
+!! Customización de entradas
+
+Podemos configurar mínimamente cómo se crean las nuevas entradas de diario en la pestaña <<.controlpanel-tab Basics>>, de la sección <<.controlpanel-tab Info>> del [[panel de control|$:/ControlPanel]]
+
+* <<.em "Formato de título para las nuevas entradas de diario">> permite especificar el título de las entradas como una cadena con [[formato de fecha|DateFormat]]. El valor por defecto `DD de MMM de YYYY` da como resultado fechas del estilo <<.word "10 de octubre de 2014">>
+
+* <<.em "Etiqueta para las nuevas entradas de diario">> permite [[especificar|Title List]] qué etiquetas aparecerán por defecto al crear nuevas entradas. Por ejemplo: `DIario [[Vacaciones de verano]]`...etc
+
+<<.def Nota:>> Si quieres crear entradas separadas cada vez que pulses <<.button new-journal>>, aunque lo hagas varias veces el mismo día, puedes incluir la hora en el formato del título. Algo como `YYYY-0MM-0DD a las 0hh0mm'0ss''` dará como resultado títulos del estilo <<.em "2016-06-08 a las 07:09:05">>
+
+<<.def Nota2:>> Otro truco muy útil es incluir `$(currentTiddler)$` en el título. Esto significa que si pulsas <<.button new-journal-here>> en un tiddler, su título, además de etiquetar la entrada, forma parte del título. 
+

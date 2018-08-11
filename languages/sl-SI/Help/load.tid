@@ -1,0 +1,16 @@
+title: $:/language/Help/load
+description: Naloži tiddlerje iz datoteke
+
+Naloži tiddlerje iz 2.x.x TiddlyWiki datotek (`.html`),` .tiddler`, `.tid`,` .json` ali druge datotek
+
+```
+--load <filepath>
+```
+
+Če želite naložiti podatke iz šifrirane datoteke TiddlyWiki, morate najprej določiti geslo s parametrom "password". Na primer:
+
+```
+tiddlywiki ./MyWiki --password pa55w0rd --load my_encrypted_wiki.html
+```
+
+Upoštevajte, da TiddlyWiki ne bo naložil starejše različice že naloženega vtičnika.

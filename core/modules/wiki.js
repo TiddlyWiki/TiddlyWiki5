@@ -24,7 +24,8 @@ Adds the following properties to the wiki object:
 
 var widget = require("$:/core/modules/widgets/widget.js");
 
-var USER_NAME_TITLE = "$:/status/UserName";
+var USER_NAME_TITLE = "$:/status/UserName",
+	TIMESTAMP_DISABLE_TITLE = "$:/config/TimestampDisable";
 
 /*
 Get the value of a text reference. Text references can have any of these forms:
@@ -193,11 +194,11 @@ exports.generateNewTitle = function(baseTitle,options) {
 };
 
 exports.isSystemTiddler = function(title) {
-	return title.indexOf("$:/") === 0;
+	return title && title.indexOf("$:/") === 0;
 };
 
 exports.isTemporaryTiddler = function(title) {
-	return title.indexOf("$:/temp/") === 0;
+	return title && title.indexOf("$:/temp/") === 0;
 };
 
 exports.isImageTiddler = function(title) {
@@ -231,27 +232,35 @@ exports.importTiddler = function(tiddler) {
 Return a hashmap of the fields that should be set when a tiddler is created
 */
 exports.getCreationFields = function() {
-	var fields = {
-			created: new Date()
-		},
-		creator = this.getTiddlerText(USER_NAME_TITLE);
-	if(creator) {
-		fields.creator = creator;
+	if(this.getTiddlerText(TIMESTAMP_DISABLE_TITLE,"").toLowerCase() !== "yes") {
+		var fields = {
+				created: new Date()
+			},
+			creator = this.getTiddlerText(USER_NAME_TITLE);
+		if(creator) {
+			fields.creator = creator;
+		}
+		return fields;
+	} else {
+		return {};
 	}
-	return fields;
 };
 
 /*
 Return a hashmap of the fields that should be set when a tiddler is modified
 */
 exports.getModificationFields = function() {
-	var fields = Object.create(null),
-		modifier = this.getTiddlerText(USER_NAME_TITLE);
-	fields.modified = new Date();
-	if(modifier) {
-		fields.modifier = modifier;
+	if(this.getTiddlerText(TIMESTAMP_DISABLE_TITLE,"").toLowerCase() !== "yes") {
+		var fields = Object.create(null),
+			modifier = this.getTiddlerText(USER_NAME_TITLE);
+		fields.modified = new Date();
+		if(modifier) {
+			fields.modifier = modifier;
+		}
+		return fields;
+	} else {
+		return {};
 	}
-	return fields;
 };
 
 /*
@@ -320,7 +329,7 @@ Sort an array of tiddler titles by a specified field
 	isDescending: true if the sort should be descending
 	isCaseSensitive: true if the sort should consider upper and lower case letters to be different
 */
-exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric) {
+exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric,isAlphaNumeric) {
 	var self = this;
 	titles.sort(function(a,b) {
 		var x,y,
@@ -328,7 +337,7 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 				var result = 
 					isNaN(x) && !isNaN(y) ? (isDescending ? -1 : 1) :
 					!isNaN(x) && isNaN(y) ? (isDescending ? 1 : -1) :
-					                        (isDescending ? y - x :  x - y);
+											(isDescending ? y - x :  x - y);
 				return result;
 			};
 		if(sortField !== "title") {
@@ -349,6 +358,8 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 		y = Number(b);
 		if(isNumeric && (!isNaN(x) || !isNaN(y))) {
 			return compareNumbers(x,y);
+		} else if(isAlphaNumeric) {
+			return isDescending ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
 		} else if($tw.utils.isDate(a) && $tw.utils.isDate(b)) {
 			return isDescending ? b - a : a - b;
 		} else {
@@ -558,6 +569,8 @@ exports.sortByList = function(array,listTitle) {
 					afterTitle = tiddler.fields["list-after"];
 				if(beforeTitle === "") {
 					newPos = 0;
+				} else if(afterTitle === "") {
+					newPos = titles.length;
 				} else if(beforeTitle) {
 					newPos = titles.indexOf(beforeTitle);
 				} else if(afterTitle) {
@@ -632,10 +645,10 @@ exports.getTiddlerDataCached = function(titleOrTiddler,defaultData) {
 	if(tiddler) {
 		return this.getCacheForTiddler(tiddler.fields.title,"data",function() {
 			// Return the frozen value
-			var value = self.getTiddlerData(tiddler.fields.title,defaultData);
+			var value = self.getTiddlerData(tiddler.fields.title,undefined);
 			$tw.utils.deepFreeze(value);
 			return value;
-		});
+		}) || defaultData;
 	} else {
 		return defaultData;
 	}
@@ -671,7 +684,7 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 Extract an indexed field from within a data tiddler
 */
 exports.extractTiddlerDataItem = function(titleOrTiddler,index,defaultText) {
-	var data = this.getTiddlerData(titleOrTiddler,Object.create(null)),
+	var data = this.getTiddlerDataCached(titleOrTiddler,Object.create(null)),
 		text;
 	if(data && $tw.utils.hop(data,index)) {
 		text = data[index];
@@ -772,6 +785,14 @@ exports.initParsers = function(moduleType) {
 			}
 		}
 	});
+	// Use the generic binary parser for any binary types not registered so far
+	if($tw.Wiki.parsers["application/octet-stream"]) {
+		Object.keys($tw.config.contentTypeInfo).forEach(function(type) {
+			if(!$tw.utils.hop($tw.Wiki.parsers,type) && $tw.config.contentTypeInfo[type].encoding === "base64") {
+				$tw.Wiki.parsers[type] = $tw.Wiki.parsers["application/octet-stream"];
+			}
+		});		
+	}
 };
 
 /*
@@ -784,6 +805,7 @@ Options include:
 	_canonical_uri: optional string of the canonical URI of this content
 */
 exports.parseText = function(type,text,options) {
+	text = text || "";
 	options = options || {};
 	// Select a parser
 	var Parser = $tw.Wiki.parsers[type];
@@ -833,7 +855,7 @@ exports.parseTextReference = function(title,field,index,options) {
 	}
 	if(field === "text" || (!field && !index)) {
 		if(tiddler && tiddler.fields) {
-			return this.parseText(tiddler.fields.type || "text/vnd.tiddlywiki",tiddler.fields.text,options);			
+			return this.parseText(tiddler.fields.type,tiddler.fields.text,options);			
 		} else {
 			return null;
 		}
@@ -903,31 +925,54 @@ options: as for wiki.makeWidget() plus:
 options.field: optional field to transclude (defaults to "text")
 options.mode: transclusion mode "inline" or "block"
 options.children: optional array of children for the transclude widget
+options.importVariables: optional importvariables filter string for macros to be included
+options.importPageMacros: optional boolean; if true, equivalent to passing "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]" to options.importVariables
 */
 exports.makeTranscludeWidget = function(title,options) {
 	options = options || {};
-	var parseTree = {tree: [{
+	var parseTreeDiv = {tree: [{
 			type: "element",
 			tag: "div",
-			children: [{
-				type: "transclude",
-				attributes: {
-					tiddler: {
-						name: "tiddler",
-						type: "string",
-						value: title}},
-				isBlock: !options.parseAsInline}]}
-	]};
+			children: []}]},
+		parseTreeImportVariables = {
+			type: "importvariables",
+			attributes: {
+				filter: {
+					name: "filter",
+					type: "string"
+				}
+			},
+			isBlock: false,
+			children: []},
+		parseTreeTransclude = {
+			type: "transclude",
+			attributes: {
+				tiddler: {
+					name: "tiddler",
+					type: "string",
+					value: title}},
+			isBlock: !options.parseAsInline};
+	if(options.importVariables || options.importPageMacros) {
+		if(options.importVariables) {
+			parseTreeImportVariables.attributes.filter.value = options.importVariables;
+		} else if(options.importPageMacros) {
+			parseTreeImportVariables.attributes.filter.value = "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]";
+		}
+		parseTreeDiv.tree[0].children.push(parseTreeImportVariables);
+		parseTreeImportVariables.children.push(parseTreeTransclude);
+	} else {
+		parseTreeDiv.tree[0].children.push(parseTreeTransclude);
+	}
 	if(options.field) {
-		parseTree.tree[0].children[0].attributes.field = {type: "string", value: options.field};
+		parseTreeTransclude.attributes.field = {type: "string", value: options.field};
 	}
 	if(options.mode) {
-		parseTree.tree[0].children[0].attributes.mode = {type: "string", value: options.mode};
+		parseTreeTransclude.attributes.mode = {type: "string", value: options.mode};
 	}
 	if(options.children) {
-		parseTree.tree[0].children[0].children = options.children;
+		parseTreeTransclude.children = options.children;
 	}
-	return $tw.wiki.makeWidget(parseTree,options);
+	return $tw.wiki.makeWidget(parseTreeDiv,options);
 };
 
 /*
@@ -1074,18 +1119,42 @@ exports.getTiddlerText = function(title,defaultText) {
 };
 
 /*
+Check whether the text of a tiddler matches a given value. By default, the comparison is case insensitive, and any spaces at either end of the tiddler text is trimmed
+*/
+exports.checkTiddlerText = function(title,targetText,options) {
+	options = options || {};
+	var text = this.getTiddlerText(title,"");
+	if(!options.noTrim) {
+		text = text.trim();
+	}
+	if(!options.caseSensitive) {
+		text = text.toLowerCase();
+		targetText = targetText.toLowerCase();
+	}
+	return text === targetText;
+}
+
+/*
 Read an array of browser File objects, invoking callback(tiddlerFieldsArray) once they're all read
 */
-exports.readFiles = function(files,callback) {
+exports.readFiles = function(files,options) {
+	var callback;
+	if(typeof options === "function") {
+		callback = options;
+		options = {};
+	} else {
+		callback = options.callback;
+	}
 	var result = [],
-		outstanding = files.length;
-	for(var f=0; f<files.length; f++) {
-		this.readFile(files[f],function(tiddlerFieldsArray) {
+		outstanding = files.length,
+		readFileCallback = function(tiddlerFieldsArray) {
 			result.push.apply(result,tiddlerFieldsArray);
 			if(--outstanding === 0) {
 				callback(result);
 			}
-		});
+		};
+	for(var f=0; f<files.length; f++) {
+		this.readFile(files[f],Object.assign({},options,{callback: readFileCallback}));
 	}
 	return files.length;
 };
@@ -1093,7 +1162,14 @@ exports.readFiles = function(files,callback) {
 /*
 Read a browser File object, invoking callback(tiddlerFieldsArray) with an array of tiddler fields objects
 */
-exports.readFile = function(file,callback) {
+exports.readFile = function(file,options) {
+	var callback;
+	if(typeof options === "function") {
+		callback = options;
+		options = {};
+	} else {
+		callback = options.callback;
+	}
 	// Get the type, falling back to the filename extension
 	var self = this,
 		type = file.type;
@@ -1113,33 +1189,44 @@ exports.readFile = function(file,callback) {
 	if($tw.log.IMPORT) {
 		console.log("Importing file '" + file.name + "', type: '" + type + "', isBinary: " + isBinary);
 	}
+	// Give the hook a chance to process the drag
+	if($tw.hooks.invokeHook("th-importing-file",{
+		file: file,
+		type: type,
+		isBinary: isBinary,
+		callback: callback
+	}) !== true) {
+		this.readFileContent(file,type,isBinary,options.deserializer,callback);
+	}
+};
+
+/*
+Lower level utility to read the content of a browser File object, invoking callback(tiddlerFieldsArray) with an array of tiddler fields objects
+*/
+exports.readFileContent = function(file,type,isBinary,deserializer,callback) {
+	var self = this;
 	// Create the FileReader
 	var reader = new FileReader();
 	// Onload
 	reader.onload = function(event) {
-		// Deserialise the file contents
 		var text = event.target.result,
 			tiddlerFields = {title: file.name || "Untitled", type: type};
-		// Are we binary?
 		if(isBinary) {
-			// The base64 section starts after the first comma in the data URI
 			var commaPos = text.indexOf(",");
 			if(commaPos !== -1) {
-				tiddlerFields.text = text.substr(commaPos+1);
-				callback([tiddlerFields]);
+				text = text.substr(commaPos + 1);
 			}
+		}
+		// Check whether this is an encrypted TiddlyWiki file
+		var encryptedJson = $tw.utils.extractEncryptedStoreArea(text);
+		if(encryptedJson) {
+			// If so, attempt to decrypt it with the current password
+			$tw.utils.decryptStoreAreaInteractive(encryptedJson,function(tiddlers) {
+				callback(tiddlers);
+			});
 		} else {
-			// Check whether this is an encrypted TiddlyWiki file
-			var encryptedJson = $tw.utils.extractEncryptedStoreArea(text);
-			if(encryptedJson) {
-				// If so, attempt to decrypt it with the current password
-				$tw.utils.decryptStoreAreaInteractive(encryptedJson,function(tiddlers) {
-					callback(tiddlers);
-				});
-			} else {
-				// Otherwise, just try to deserialise any tiddlers in the file
-				callback(self.deserializeTiddlers(type,text,tiddlerFields));
-			}
+			// Otherwise, just try to deserialise any tiddlers in the file
+			callback(self.deserializeTiddlers(type,text,tiddlerFields,{deserializer: deserializer}));
 		}
 	};
 	// Kick off the read
@@ -1164,7 +1251,9 @@ exports.findDraft = function(targetTitle) {
 }
 
 /*
-Check whether the specified draft tiddler has been modified
+Check whether the specified draft tiddler has been modified.
+If the original tiddler doesn't exist, create  a vanilla tiddler variable,
+to check if additional fields have been added.
 */
 exports.isDraftModified = function(title) {
 	var tiddler = this.getTiddler(title);
@@ -1172,11 +1261,9 @@ exports.isDraftModified = function(title) {
 		return false;
 	}
 	var ignoredFields = ["created", "modified", "title", "draft.title", "draft.of"],
-		origTiddler = this.getTiddler(tiddler.fields["draft.of"]);
-	if(!origTiddler) {
-		return tiddler.fields.text !== "";
-	}
-	return tiddler.fields["draft.title"] !== tiddler.fields["draft.of"] || !tiddler.isEqual(origTiddler,ignoredFields);
+		origTiddler = this.getTiddler(tiddler.fields["draft.of"]) || new $tw.Tiddler({text:"", tags:[]}),
+		titleModified = tiddler.fields["draft.title"] !== tiddler.fields["draft.of"];
+	return titleModified || !tiddler.isEqual(origTiddler,ignoredFields);
 };
 
 /*
@@ -1218,3 +1305,4 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 };
 
 })();
+

@@ -7,5 +7,5 @@ Construir os alvos de construção especificados para a wiki actual. Se nenhum a
 --build <alvo> [<alvo> ...]
 ```
 
-Os alvos de contrução são definidos no ficheiro `tiddlywiki.info` na pasta da wiki.
+Os alvos de construção são definidos no ficheiro `tiddlywiki.info` na pasta da wiki.
 

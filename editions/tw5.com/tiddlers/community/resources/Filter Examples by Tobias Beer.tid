@@ -1,0 +1,14 @@
+created: 20141122093837330
+modified: 20161224181607230
+tags: Resources
+title: "Filter Examples" by Tobias Beer
+type: text/vnd.tiddlywiki
+url: http://tobibeer.github.io/tw/filters/#Filter%20Examples
+
+This wiki gives examples for various [[filters|Filters]] and their use in the [[list widget|ListWidget]]
+
+{{!!url}}
+
+<<<
+This wiki gives examples for various [[filters|Filters]] and their use in the [[list widget|ListWidget]]. A good starting point to understand what filters yield which results also is [[test-filters.js|https://github.com/Jermolene/TiddlyWiki5/blob/master/editions/test/tiddlers/tests/test-filters.js]].
+<<<

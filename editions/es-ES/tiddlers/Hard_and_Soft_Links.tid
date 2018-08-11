@@ -1,0 +1,17 @@
+caption: Enlaces físicos y simbólicos
+created: 20150123220237000
+es-title: Enlaces físicos y simbólicos
+modified: 20160511060750282
+tags: Concepts
+title: Hard and Soft Links
+type: text/vnd.tiddlywiki
+
+Un <<.def "enlace físico">> o <<.def "hard link">> es uno que puede reconocerse visualmente, examinando el texto en WikiText.
+
+Un enlace es <<.def simbólico>> o <<.def "soft link">> si:
+
+* forma parte de una [[transclusión|Transclusion]] de otro tiddler
+* proviene de una [[macro|Macros]] o una [[variable|Variables]]
+* lo genera un widget cuyo atributo <<.attr to>> es una transclusión, macro o variable
+
+<$macrocall $name=".warning" _="""Los operadores de filtro como <<.olink backlinks>>, <<.olink links>>, <<.olink all>> o <<.olink is>> no reconocen enlaces simbólicos."""/>

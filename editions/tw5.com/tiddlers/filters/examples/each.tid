@@ -7,5 +7,7 @@ type: text/vnd.tiddlywiki
 <<.operator-example 1 "[each[color]]">>
 <<.operator-example 2 "[sort[title]each[type]]" "the alphabetically first tiddler of each type">>
 <<.operator-example 3 "[each:list-item[list]]" "all tiddlers listed anywhere in the core list field">>
+<<.operator-example 4 "[[Non existing]] [[GettingStarted]] +[each:value[]]" "Compare this to `+[each[]]` below">>
+<<.operator-example 5 "[[Non existing]] [[GettingStarted]] +[each[]]" "Compare this to `+[each:value[]]` above">>
 
 For an example of using the <<.op each>> operator to generate a two-tier list of groups and members, see [[GroupedLists]].

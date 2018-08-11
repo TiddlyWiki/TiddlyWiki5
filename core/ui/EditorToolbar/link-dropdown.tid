@@ -1,0 +1,50 @@
+title: $:/core/ui/EditorToolbar/link-dropdown
+
+\define lingo-base() $:/language/Buttons/Link/
+
+\define add-link-actions()
+<$action-sendmessage $message="tm-edit-text-operation" $param="make-link" text={{$(linkTiddler)$}} />
+<$action-deletetiddler $tiddler=<<dropdown-state>> />
+<$action-deletetiddler $tiddler=<<searchTiddler>> />
+<$action-deletetiddler $tiddler=<<linkTiddler>> />
+\end
+
+\define external-link()
+<$button class="tc-btn-invisible" style="width: auto; display: inline-block; background-colour: inherit;" actions=<<add-link-actions>>>
+{{$:/core/images/chevron-right}}
+</$button>
+\end
+
+\define body(config-title)
+''<<lingo Hint>>''
+
+<$vars searchTiddler="""$config-title$/search""" linkTiddler="""$config-title$/link""" linktext="" >
+
+<$vars linkTiddler=<<searchTiddler>>>
+<$keyboard key="ENTER" actions=<<add-link-actions>>>
+<$edit-text tiddler=<<searchTiddler>> type="search" tag="input" focus="true" placeholder={{$:/language/Search/Search}} default=""/>
+<$reveal tag="span" state=<<searchTiddler>> type="nomatch" text="">
+<<external-link>>
+<$button class="tc-btn-invisible" style="width: auto; display: inline-block; background-colour: inherit;">
+<$action-setfield $tiddler=<<searchTiddler>> text="" />
+{{$:/core/images/close-button}}
+</$button>
+</$reveal>
+</$keyboard>
+</$vars>
+
+<$reveal tag="div" state=<<searchTiddler>> type="nomatch" text="">
+
+<$linkcatcher actions=<<add-link-actions>> to=<<linkTiddler>>>
+
+{{$:/core/ui/SearchResults}}
+
+</$linkcatcher>
+
+</$reveal>
+
+</$vars>
+
+\end
+
+<$macrocall $name="body" config-title=<<qualify "$:/state/Link/">>/>

@@ -1,10 +1,7 @@
 title: $:/language/EditTemplate/
 
 Body/External/Hint: ਇਹ ਮੁੱਖ TiddlyWiki ਫਾਇਲ ਦੇ ਬਾਹਰ ਹੀ ਸੰਭਾਲਿਆ ਇੱਕ ਬਾਹਰੀ tiddler ਹੈ. ਤੁਸ ਟੈਗ ਅਤੇ ਖੇਤਰ ਨੂੰ ਸੋਧ ਸਕਦੇ ਹੋ, ਪਰ ਆਪਣੇ ਆਪ ਸਿੱਧੇ ਤੌਰ 'ਤੇ ਸਮੱਗਰੀ ਨੂੰ ਸੋਧ ਨਹੀ ਕਰ ਸਕਦੇ
-Body/Hint: ਸ਼ਾਮਿਲ ਕਰਨ ਲਈ ਫਾਰਮਿਟ, ਚਿੱਤਰ, ਅਤੇ ਆਰਜੀ ਫੀਚਰ: | [//tiddlywiki.com/static/WikiText.html] http [ਵਿਕਿ ਟੈਕਸਟ] ਵਰਤੋ
 Body/Placeholder:  ਪਾਠ ਟਾਈਪ ਲਈ ਇਸ tiddler ਨੂੰ  ਵਰਤੋ
-Body/Preview/Button/Hide: ਝਲਕ ਨੂੰ ਓਹਲੇ ਕਰਨ 
-Body/Preview/Button/Show: ਜਾਣਕਾਰੀ ਦੀ ਪ੍ਰਦਰਸ਼ਨੀ
 Field/Remove/Caption: ਖੇਤਰ ਨੂੰ ਹਟਾਉਣ
 Field/Remove/Hint: ਖੇਤਰ ਨੂੰ ਹਟਾਉਣ
 Fields/Add/Button: ਸ਼ਾਮਿਲ ਕਰੋ

@@ -1,0 +1,14 @@
+title: $:/core/ui/EditorToolbar/italic
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/italic
+caption: {{$:/language/Buttons/Italic/Caption}}
+description: {{$:/language/Buttons/Italic/Hint}}
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+shortcuts: ((italic))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="//"
+	suffix="//"
+/>

@@ -20,12 +20,9 @@ exports.sameday = function(source,operator,options) {
 		fieldName = operator.suffix || "modified",
 		targetDate = (new Date($tw.utils.parseDate(operator.operand))).setHours(0,0,0,0);
 	// Function to convert a date/time to a date integer
-	var isSameDay = function(dateField) {
-			return (new Date(dateField)).setHours(0,0,0,0) === targetDate;
-		};
 	source(function(tiddler,title) {
-		if(tiddler && tiddler.fields[fieldName]) {
-			if(isSameDay($tw.utils.parseDate(tiddler.fields[fieldName]))) {
+		if(tiddler) {
+			if(tiddler.getFieldDay(fieldName) === targetDate) {
 				results.push(title);
 			}
 		}

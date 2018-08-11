@@ -1,0 +1,47 @@
+caption: Formatos de fecha
+created: 20140418142957325
+es-title: Formatos de fecha
+modified: 20160422160649482
+tags: Features
+title: DateFormat
+type: text/vnd.tiddlywiki
+
+ViewWidget acepta un atributo <<.em "de plantilla">> que permite dar formato a los valores de fecha que se especifiquen. La cadena que da formato a la fecha se procesa con arreglo a las siguientes sustituciones:
+
+|!Símbolo |!Valor sustitutivo |
+|`DDD` |Día completo de la semana|
+|`ddd` |Día de la semana, abreviado |
+|`DD` |Día del mes |
+|`0DD` |Día del mes, con cero delante |
+|`DDth` |Añade sufijo al día |
+|`WW` |Número de semana ISO-8601 |
+|`0WW` |Número de semana, con cero delante|
+|`MMM` |Mes completo |
+|`mmm` |Mes, abreviado |
+|`MM` |Mes, en cifras |
+|`0MM` |Mes, en cifras, con cero delante|
+|`YYYY` |Año completo |
+|`YY` |Año, en dos cifras |
+|`wYYYY` |Año completo con respecto al número de semana |
+|`wYY` |Año en dos cifras con respecto al número de semana |
+|`hh` |Hora |
+|`0hh` |Hora, con cero delante |
+|`hh12` |Hora, en ciclos de 12 horas |
+|`0hh12` |Hora en ciclos de 12 horas, con cero delante |
+|`mm` |Minutos |
+|`0mm` |Minutos, con cero delante |
+|`ss` |Segundos |
+|`0ss` |Segundos, con cero delante |
+|`am` o `pm` |Indicador am/pm en minúsculas|
+|`AM` o `PM` |Indicador AM/PM en mayúsculas |
+|`TZD` |Huso horario |
+|`\` |Escape de caracteres. Los caracteres así marcados no se interpretan   |
+
+Otro texto añadido al formato pasa sin cambios, de modo que se admiten comas, guiones, barras, dos puntos y otros separadores.
+
+!! Ejemplos
+
+|!Plantilla |!Resultadao |
+|`DDth de MMM de YYYY` |1º de mayo de 2011 |
+|`DD MMM \M\M\M YYYY` |1 mayo MMM 2011 |
+|`DD mmm hh:mm:ss` |1 may 2011 11:38:42 |

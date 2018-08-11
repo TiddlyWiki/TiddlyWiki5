@@ -1,0 +1,77 @@
+caption: Actualizaciones
+created: 20131202102427114
+es-title: Actualizar TiddlyWiki a la última versión
+modified: 20160421152501155
+tags: Features [[Working with TiddlyWiki]]
+title: Upgrading
+type: text/vnd.tiddlywiki
+
+Se publican con regularidad nuevas versiones de TiddlyWiki que incorporan correcciones de <<.word bugs>> y mejoras. Es buena idea mantenerse al día actualizándolo a la última versión.
+
+<<.tip "
+El procedimiento que aquí se describe es para actualizar un Tiddlywiki autónomo como ''archivo único en html''. Para actualizar [[TiddlyWiki en Node.js|TiddlyWiki on Node.js]], el procedimiento [[es otro|Upgrading TiddlyWiki on Node.js]].
+">>
+
+<<.tip "
+Al actualizar, recuerda la [[primera regla de uso de TiddlyWiki|The First Rule of Using TiddlyWiki]] y que ''tú eres el responsable de velar por tus datos''. Asegúrate de hacer copias de seguridad con regularidad y, muy especialmente, antes de actualizar el núcleo de ~TiddlyWiki
+">>
+
+!! Actualización online
+
+Este procedimiento funcionará en la mayoría de navegadores. Ni uno solo de tus datos personales saldrá de tu ordenador durante todo el proceso.
+
+# Localiza el archivo HTML de ~TiddlyWiki en tu disco duro
+
+# Abre el navegador y ve a https://tiddlywiki.com/upgrade.html. Ahí encontrarás el <<.word Upgrader>>: asistente de actualización de ~TiddlyWiki. Tiene una gran flecha en el centro y, debajo de ella, el número de versión al que corresponde
+
+# Arrastra el archivo HTML de TiddlyWiki a la ventana del navegador donde tienes el Upgrader y suéltalo sobre la flecha
+
+#* Si tu archivo está cifrado, se te pedirá la contraseña
+
+# Se te mostrará una tabla de tiddlers
+
+#* Son <<.em "absolutamente todos">> los tiddlers que forman parte de tu versión de ~TiddlyWiki
+
+#* En la columna <<.def Select>>, verás <<.em marcados>> los tiddlers que formarán parte de la nueva versión.
+Guarda los cambios de la nueva versión
+#* Los tiddlers que <<.def NO>> se actualizarán aparecen <<.em desmarcados>> y una nota en la columna <<.def status>> te dice el motivo. Si todo te parece bien...
+
+# ...haz clic en el botón <<.def Upgrade>>, que tienes arriba del todo
+
+# Haz clic en el botón verde <<.def "Save upgraded ~TiddlyWiki file">>
+
+El navegador te pedirá que descargues un archivo llamado <<.word "upgrade.thml">>. Este archivo es la versión actualizada de tu archivo. Localízalo en tu disco duro, cambia el nombre por el de tu wiki y sustituye en su localización el viejo archivo por el nuevo.
+
+!! Actualización offline
+
+Puedes descargar el <<.def Upgrader>> a tu disco duro y realizar el proceso anterior de arrastra-y-suelta para actualizar tu archivo localmente, sin necesidad de conexión de red.
+
+!! Problemas conocidos durante la actualización
+
+!!! Firefox Security Restrictions
+
+Se han dado casos del siguiente error al intentar actualizar en Firefox: 
+
+<<<
+Error while saving:
+
+Error:NS_ERROR_DOM_BAD_URI: Access to restricted URI denied
+<<<
+
+* La actualización falla o se interrumpe por restricciones de seguridad de Firefox. 
+
+* Comprueba si la versión de Firefox instalada en tu ordenador es la última disponible. En caso negativo, actualiza el navegador y vuelve a intentarlo.
+
+* Si el error persiste, sugerimos usar otro navegador o actualizar ~TiddlyWiki offline 
+
+!!! Customizaciones incompatibles
+
+Es posible --y se han dado casos de ello-- que customizaciones de versiones anteriores de ~Tiddlywiki dejen de funcionar después actualizar el núcleo a la última versión. 
+
+Hay dos maneras maneras en que puedes diagnosticar y solucionar los problemas que se presenten: 
+
+* Repite la actualización deseleccionando manualmente los tiddlers de tu versión que aplican customizaciones a ~TiddlyWiki
+* Desactiva las customizaciones abriendo ~TiddlyWiki en [[Modo seguro|SafeMode]]
+
+<<.tip
+"Puedes ver una lista de tiddlers ocultos modificados en la pestaña ''Filtro'' de la [[Búsqueda avanzada|$:/AdvancedSearch]]. En el desplegable, selecciona 'Tiddlers ocultos anulados' ">>

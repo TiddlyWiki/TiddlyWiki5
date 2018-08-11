@@ -1,0 +1,13 @@
+caption: tv-auto-open-on-import
+created: 20150228120919000
+es-title: Variable: tv-auto-open-on-import
+modified: 20160416040705105
+tags: Variables [[Core Variables]] [[Configuration Variables]]
+title: tv-auto-open-on-import Variable
+type: text/vnd.tiddlywiki
+
+La [[variable|Variables]] <<.def tv-auto-open-on-import>> controla si el mensaje `tm-import-tiddlers` abre en el StoryRiver el tiddler [[$:/Import]] (que muestra la lista de tiddlers pendientes de importación).
+
+Por defecto, el tiddler se abre, pero si la variable tiene valor <<.value no>>, no lo hace.
+
+Un ejemplo de ajuste de esta variable con valor <<.value no>> puede verse en el plugin de actualización en el [[asistente de actualización de TiddlyWiki|https://www.tiddlywiki.com/upgrade.html]], donde el usuario arrastra los archivos que quiera actualizar pero en pantalla no se muestra la importación del modo habitual.

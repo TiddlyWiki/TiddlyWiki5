@@ -1,0 +1,13 @@
+caption: Autoguardado
+created: 20140206211715540
+es-title: Guardado automático
+modified: 20160428155227657
+tags: Features
+title: AutoSave
+type: text/vnd.tiddlywiki
+
+Si hay un SaverModule disponible que lo permita, ~TiddlyWiki guardará el documento en su estado actual en cuanto se pulsen los botones <<.button save>> o <<.button delete>>
+
+Debieras ver entonces una notificación amarilla en la esquina superior derecha de la ventana que confirma que se ha realizado el guardado.
+
+Se puede activar y desactivar el guardado automático en la pestaña <<.controlpanel-tab Settings>> del panel de control. Entre bambalinas, se controla mediante el tiddler de configuración <<.tid ~$:/config/AutoSave>>, que en su cuerpo indica con los valores <<.em Sí>> o <<.em No>> si activa el autoguardado.

@@ -6,6 +6,10 @@ title: Release 5.1.9
 type: text/vnd.tiddlywiki
 released: 20150703153725652
 
+\define custom-colour-picker(tiddler,colour)
+<$edit-text tiddler="""$tiddler$""" index="""$colour$""" type="color" tag="input"/>
+\end
+
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.8...v5.1.9]]//
 
 ! Major Improvements
@@ -52,12 +56,12 @@ An experimental new tiddler toolbar button opens a single tiddler in a separate 
 <$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/vanilla"/>
 <$action-setfield $tiddler="$:/palette" text="$:/palettes/ContrastDark"/>
 Dark palette
-</$button>. Foreground: <<colour-picker "$:/palettes/ContrastDark" "foreground">>, Background: <<colour-picker "$:/palettes/ContrastDark" "background">>
+</$button>. Foreground: <<custom-colour-picker "$:/palettes/ContrastDark" "foreground">>, Background: <<custom-colour-picker "$:/palettes/ContrastDark" "background">>
 ** <$button>
 <$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/vanilla"/>
 <$action-setfield $tiddler="$:/palette" text="$:/palettes/ContrastLight"/>
 Light palette
-</$button>. Foreground: <<colour-picker "$:/palettes/ContrastLight" "foreground">>, Background: <<colour-picker "$:/palettes/ContrastLight" "background">>
+</$button>. Foreground: <<custom-colour-picker "$:/palettes/ContrastLight" "foreground">>, Background: <<custom-colour-picker "$:/palettes/ContrastLight" "background">>
 ** <$button>
 <$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/snowwhite"/>
 <$action-setfield $tiddler="$:/palette" text="$:/palettes/Vanilla"/>

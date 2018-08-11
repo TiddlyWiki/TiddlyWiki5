@@ -1,0 +1,13 @@
+created: 20160602043529506
+modified: 20160602043531313
+tags: [[TiddlyWiki on Node.js]]
+title: Serving TW5 from Android
+type: text/vnd.tiddlywiki
+
+[[Termux|https://termux.com/]] is an open source Android application that combines a Linux system and a terminal.
+
+Once you open //Termux// on your Android system, it is straightforward to [[install|Installing TiddlyWiki on Node.js]] and [[run|Using TiddlyWiki on Node.js]] the [[Node.js flavour of TiddlyWiki|TiddlyWiki on Node.js]] from the command line. 
+
+From then on, as long as //Termux// is not closed, you may access your wiki anytime from your favourite Web browser pointing on the expected address and port.
+
+> __note to contributors__: in //Termux//, you may as well install //git//, //emacs// or //vi//, in order to edit and maintain individual tiddler files. This would probably require that you also attach a more powerful keyboard to your Android, like the [[Hacker's Keyboard|https://github.com/klausw/hackerskeyboard/]] application or a Bluetooth external device.

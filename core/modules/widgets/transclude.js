@@ -68,7 +68,7 @@ TranscludeWidget.prototype.execute = function() {
 			parseTreeNodes = [{type: "element", tag: "span", attributes: {
 				"class": {type: "string", value: "tc-error"}
 			}, children: [
-				{type: "text", text: "Recursive transclusion error in transclude widget"}
+				{type: "text", text: $tw.language.getString("Error/RecursiveTransclusion")}
 			]}];
 		}
 	}

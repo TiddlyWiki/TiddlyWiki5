@@ -1,0 +1,8 @@
+title: $:/language/Snippets/Table4x3
+tags: $:/tags/TextEditor/Snippet
+caption: Tabel med 4 kolonner og 3 rækker
+
+|! |!Alpha |!Beta |!Gamma |!Delta |
+|!En | | | | |
+|!To | | | | |
+|!Tre | | | | |

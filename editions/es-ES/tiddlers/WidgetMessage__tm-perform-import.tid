@@ -1,0 +1,16 @@
+caption: tm-perform-import
+created: 20140716084242809
+es-title: Mensajes: tm-perform-import
+modified: 20160415113056593
+tags: Messages navigator-message
+title: WidgetMessage: tm-perform-import
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-perform-import` toma tiddlers de un plugin específico y los copia en el TiddlerStore principal. Consulta UpgradeMechanism para tener una idea general de cómo el núcleo usa este mensaje.
+
+|!Nombre |!Descripción |
+|param |Título del tiddler pendiente de importar. (Por defecto, ''$:/Import'' |
+
+Para seleccionar los tiddlers que van a importarse, se usan campos con nombres formados por `selection-` más el título del tiddler. El valor ''unchecked'' omite el tiddler durante la importación.
+
+Este mensaje normalmente lo genera ButtonWidget y lo procesa NavigatorWidget.

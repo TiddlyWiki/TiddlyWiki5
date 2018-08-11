@@ -28,7 +28,7 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
 	try {
 		jsonPluginTiddler = JSON.parse(pluginTiddler.fields.text);
 	} catch(e) {
-		throw "Cannot parse plugin tiddler " + title + "\nError: " + e;
+		throw "Cannot parse plugin tiddler " + title + "\n" + $tw.language.getString("Error/Caption") + ": " + e;
 	}
 	// Get the list of tiddlers
 	var tiddlers = Object.keys(jsonPluginTiddler.tiddlers);

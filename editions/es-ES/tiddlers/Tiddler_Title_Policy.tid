@@ -1,0 +1,32 @@
+caption: Estilo: Títulos
+created: 20150110183300000
+es-title: Estilo de los títulos
+modified: 20160418153611550
+tags: [[Improving TiddlyWiki Documentation]]
+title: Tiddler Title Policy
+type: text/vnd.tiddlywiki
+
+Muchos tiddlers de la documentación, especialmente [[los de referencia|Reference Tiddlers]], hacen referencia a un único concepto. Sus títulos debieran ser sintagmas nominales simples y claros como <<.tid "List Widget">>, <<.tid "~TiddlerFields">> o <<.tid "Material de referencia">>.
+
+En la edición original inglesa, cada sustantivo del título se escribe con mayúscula, mientras que artículos, preposiciones y conjunciones se escriben con minúscula. Ej:<<.tid "Ejemplo de Título de la Edición en Inglés">>
+
+En la presente edición en castellano, sólo lleva mayúscula la palabra inicial del título y el resto se escribe en minúscula y termina sin punto: <<.tid "Ejemplo de título de la edición en castellano">>
+
+Las etiquetas siguen también este mismo patrón.
+
+Los títulos de este tipo son en plural si se refieren a una categoría de elementos: ---Ej: <<.tid "Atajos de teclado">>---, ya que etiquetan tiddlers más específicos dentro de su categoría.
+
+Cuando el objeto del título sea un concepto más que una categoría, se enuncia en singular. Ej:<<.tid "List Widget">>, <<.tid "Operador de etiqueta">>
+
+En la edición inglesa, los títulos comienzan enunciando su parte más distintiva. Por ejemplo, los tiddlers que documentan operadores de filtro tienen títulos del estilo  <<.tid "addprefix Operator">>. De este modo, en teoría, el lector puede identificar rápidamente un tiddler particular en una lista de enlaces. 
+
+En la presente edición en castellano, sin embargo y por coherencia gramatical, los títulos se enuncian en el orden lógico y acostumbrado en nuestra lengua. El ejemplo anterior sería, por tanto: <<.tid "Operador addprefix">>. Nótese, sin embargo, lo siguiente:
+
+*Con el fin de mantener la integridad del código de ~TiddlyWiki y las referencias de su documentación, así como de facilitar futuras actualizaciones, estamos obligados a dejar los títulos de de la documentación original en inglés sin traducir. Esto, que podría ser un inconveniente, nos da la ventaja de poder explotar las funcionalidades de TiddlyWiki y así ofrecer al lector un doble juego de títulos para cada tiddler:
+
+** Un ''título completo'', que es el que corresponde a la traducción del título original, que se muestra en el encabezamiento de cada tiddler (en el presente: <<.tid "Estilo de los títulos">>)
+** Un ''título abreviado'', que es una descripción esquemática del contenido del tiddler, lo que resulta útil para identificar un tiddler en particular en una lista de enlaces o en el índice de la barra lateral (en el presente: <<.tid "Estilo: Títulos">>)
+
+Al redactar material de referencia debe evitarse que el título comience con artículo y en general debe evitarse el abuso de determinantes.
+
+En anteriores ediciones, muchos títulos se escribían en CamelCase. Para hacerlos más legibles, se ha ido abandonando gradualmente esta práctica y se desaconseja su uso, salvo en casos como TiddlyWiki o JavaScript, ya que tal es su forma estándar. 

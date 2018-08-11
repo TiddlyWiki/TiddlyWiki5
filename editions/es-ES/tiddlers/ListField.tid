@@ -1,0 +1,17 @@
+caption: list
+created: 20130830092500000
+es-title: Campo "list"
+modified: 20160415043859028
+tags: Fields
+title: ListField
+type: text/vnd.tiddlywiki
+
+El [[campo|TiddlerFields]] `list` es una característica opcional que se usa para estructurar contenido. Su valor es una [[lista|Title List]] y puede usarse de varias maneras:
+
+* El campo `list` de un tiddler que se usa como etiqueta determina el orden en que se presentan los tiddlers que llevan esa etiqueta. Más detalles en [[Etiquetas|Tagging]]
+
+* El [[filtro|Filters]] `list` selecciona entradas de una lista
+
+* El [[filtro|Filters]]  `listed` muestra qué tiddlers incluyen un tiddler (o selección de varios tiddlers) como entradas de lista.
+
+* El widget [[Navegador|NavigatorWidget]] manipula un StoryList que contiene un campo `list` de los tiddlers que se muestran en la columna principal.

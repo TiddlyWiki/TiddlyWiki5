@@ -1,0 +1,45 @@
+caption: Proponer mejoras en documentación
+created: 20140820151051019
+es-title: Mejorar la documentación de TiddlyWiki
+modified: 20160419141618531
+tags: Community
+title: Improving TiddlyWiki Documentation
+type: text/vnd.tiddlywiki
+
+Cualquiera puede proponer mejoras en la documentación de TiddlyWiki que aparece en https://tiddlywiki.com.
+
+# Lee y sigue la [[Guía de estilo para documentación |Documentation Style Guide]]
+
+# Date de alta en https://github.com
+
+# Si no lo has hecho aún, firma el [[acuerdo de licencia de contribución|Contributor License Agreement]]
+
+# En https://tiddlywiki.com, haz clic en el botón <<.button "edit">> del tiddler que quieres mejorar
+
+# Aparecerá un banner de color rosa con el texto <<.em "Can you help us improve this documentation? Find out how to edit this tiddler on ~GitHub">>
+
+## Haz clic en el enlace externo <<.dlink-ex "this tiddler on ~GitHub">>
+
+## Se te indicará que necesitas hacer un <<.def fork>> del repositorio para poder proponer cambios. Un <<.def fork>> es una copia del repositorio que incluirá los cambios que propongas.
+
+# Se abrirá una nueva ventana en el navegador, con el tiddler listo para editar en github.com
+
+# Bajo la ventana de edición del tiddler, verás un cuadro titulado <<.word "Propose file change">>
+
+# Escribe un breve título que explique la naturaleza del cambio, p. ej.: <<.word "Sustitución de formato directo por estilos">>
+
+# Si es necesario, puedes desarrollarlo convenientemente más abajo
+
+# Haz clic en el botón verde <<.word "Propose file change">>
+
+# En la página siguiente, pulsa el botón verde <<.word "Create pull request">>
+
+[[Jermolene|https://github.com/Jermolene]] u otro de los desarrolladores principales tendrán así la oportunidad de incorporar tus cambios en la próxima edición de https://tiddlywiki.com.
+
+Mario Pietsch ha creado estos videotutoriales al respecto:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/L4zTkMYcri8" frameborder="0" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6ElUruH92tc" frameborder="0" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/axFCk9KsMFc" frameborder="0" allowfullscreen></iframe>

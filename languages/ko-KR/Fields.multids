@@ -2,9 +2,9 @@ title: $:/language/Docs/Fields/
 
 _canonical_uri: 바깥 그림 티들러의 전체 URI
 bag: 티들러의 유래가 된 가방 이름
-caption: 탭이나 버튼에 보여줄 텍스트
+caption: 탭이나 버튼에 표시할 텍스트
 color: 티들러와 연관된 CSS 색 값
-component: [[알럿 티들러|AlertMechanism]]에 대해 담당하는 구성 요소의 이름
+component: [[경보 티들러|AlertMechanism]]에 대해 담당하는 구성 요소의 이름
 created: 티들러가 만들어진 날짜
 creator: 티들러를 만든 사람의 이름
 current-tiddler: [[역사 목록|HistoryMechanism]]에서 최상위 티들러를 캐시하는 데 사용
@@ -24,7 +24,7 @@ modifier: 티들러를 마지막으로 수정한 사람과 관련된 티들러 �
 name: 플러그인 티들러와 연관된 사람이 읽을 수 있는 이름
 plugin-priority: 플러그인 티들러의 우선 순위를 나타내는 숫자 값
 plugin-type: 플러그인 티들러에서 플러그인의 형식
-released: TiddlyWiki 배포 날짜
+released: 티들리위키 배포 날짜
 revision: 서버에 열린 티들러의 판
 source: 티들러와 연관된 원본 URL
 subtitle: 마법사를 위한 부제목 텍스트

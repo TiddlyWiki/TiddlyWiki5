@@ -1,0 +1,36 @@
+caption: range
+created: 20171102134825376
+modified: 20180425132848231
+tags: Widgets
+title: RangeWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The range widget displays an HTML `<input type="range">` that reflects a given tiddler field numeric value. Adjusting the radio button sets the tiddler field to the value.
+
+! Content and Attributes
+
+The content of the `<$range>` widget is ignored.
+
+|!Attribute |!Description |
+|tiddler |Title of the tiddler to manipulate (defaults to the [[current tiddler|Current Tiddler]]) |
+|field |The field of the //tiddler// bound to the radio button|
+|min |The minimum value to be able to be set by the `<$range>` widget.|
+|max |The maximum value to be able to be set by the `<$range>` widget.|
+|increment |The minimum amount by which a value may be changed.  Defaults to 1.|
+|default |The default value displayed if the field is missing or empty.|
+|class |CSS classes to be assigned to the label around the radio button |
+
+! Examples
+
+!! Range -1 to 10
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$range tiddler="$:/_RangeDemo/1" min="-1" max="10" default="1" increment="1"/> {{$:/_RangeDemo/1}}"""/>
+
+!! Range 0 to 1
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$range tiddler="$:/_RangeDemo/2" min="0" max="1" default=".01" increment=".01"/> {{$:/_RangeDemo/2}}"""/>
+

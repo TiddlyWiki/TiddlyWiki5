@@ -1,0 +1,11 @@
+caption: tm-full-screen
+created: 20140811112400855
+es-title: Mensaje: tm-full-screen
+modified: 20160416042755269
+tags: Messages
+title: WidgetMessage: tm-full-screen
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-full-screen` alterna el modo de vista en pantalla completa, si el navegador lo permite. 
+
+Este mensaje lo procesa el núcleo de ~TiddlyWiki.

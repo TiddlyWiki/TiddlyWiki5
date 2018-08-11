@@ -1,0 +1,71 @@
+caption: Ajustes de tema
+created: 20160427065547366
+modified: 20160427065556693
+tags: $:/tags/ControlPanel/Appearance
+title: $:/themes/tiddlywiki/vanilla/themetweaks
+type: text/vnd.tiddlywiki
+
+\define backgroundimage-dropdown()
+<div class="tc-drop-down-wrapper">
+<$button popup=<<qualify "$:/state/popup/themetweaks/backgroundimage">> class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/down-arrow}}</$button>
+<$reveal state=<<qualify "$:/state/popup/themetweaks/backgroundimage">> type="popup" position="belowleft" text="" default="">
+<div class="tc-drop-down">
+<$linkcatcher to="$:/themes/tiddlywiki/vanilla/settings/backgroundimage">
+<$link to="">
+(none)
+</$link>
+<hr>
+<$list filter="[all[shadows+tiddlers]is[image]] -[type[application/pdf]] +[sort[title]]">
+<$link to={{!!title}}>
+<$transclude/> <$view field="title"/>
+</$link>
+</$list>
+</$linkcatcher>
+</div>
+</$reveal>
+</div>
+\end
+
+\define backgroundimageattachment-dropdown()
+<$select tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment" default="scroll">
+<option value="scroll">Scroll with tiddlers</option>
+<option value="fixed">Fixed to window</option>
+</$select>
+\end
+
+\define backgroundimagesize-dropdown()
+<$select tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize" default="scroll">
+<option value="auto">Auto</option>
+<option value="cover">Cover</option>
+<option value="contain">Contain</option>
+</$select>
+\end
+
+You can tweak certain aspects of the ''Vanilla'' theme.
+
+! Options
+
+|[[Sidebar layout|$:/themes/tiddlywiki/vanilla/options/sidebarlayout]] |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/sidebarlayout"><option value="fixed-fluid">Fixed story, fluid sidebar</option><option value="fluid-fixed">Fluid story, fixed sidebar</option></$select> |
+|[[Sticky titles|$:/themes/tiddlywiki/vanilla/options/stickytitles]]<br>//Causes tiddler titles to "stick" to the top of the browser window. Caution: Does not work at all with Chrome, and causes some layout issues in Firefox// |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/stickytitles"><option value="no">No</option><option value="yes">Yes</option></$select> |
+
+! Settings
+
+|[[Font family|$:/themes/tiddlywiki/vanilla/settings/fontfamily]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/fontfamily" default="" tag="input"/> | |
+|[[Code font family|$:/themes/tiddlywiki/vanilla/settings/codefontfamily]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/codefontfamily" default="" tag="input"/> | |
+|[[Page background image|$:/themes/tiddlywiki/vanilla/settings/backgroundimage]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimage" default="" tag="input"/> |<<backgroundimage-dropdown>> |
+|[[Page background image attachment |$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment]] |<<backgroundimageattachment-dropdown>> | |
+|[[Page background image size |$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize]] |<<backgroundimagesize-dropdown>> | |
+
+! Sizes
+
+|[[Font size|$:/themes/tiddlywiki/vanilla/metrics/fontsize]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/fontsize" default="" tag="input"/> |
+|[[Line height|$:/themes/tiddlywiki/vanilla/metrics/lineheight]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/lineheight" default="" tag="input"/> |
+|[[Font size for tiddler body|$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize" default="" tag="input"/> |
+|[[Line height for tiddler body|$:/themes/tiddlywiki/vanilla/metrics/bodylineheight]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodylineheight" default="" tag="input"/> |
+|[[Story left position|$:/themes/tiddlywiki/vanilla/metrics/storyleft]]<br>//how far the left margin of the story river<br>(tiddler area) is from the left of the page// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyleft" default="" tag="input"/> |
+|[[Story top position|$:/themes/tiddlywiki/vanilla/metrics/storytop]]<br>//how far the top margin of the story river<br>is from the top of the page// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storytop" default="" tag="input"/> |
+|[[Story right|$:/themes/tiddlywiki/vanilla/metrics/storyright]]<br>//how far the left margin of the sidebar <br>is from the left of the page// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" default="" tag="input"/> |
+|[[Story width|$:/themes/tiddlywiki/vanilla/metrics/storywidth]]<br>//the overall width of the story river// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storywidth" default="" tag="input"/> |
+|[[Tiddler width|$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth]]<br>//within the story river//<br> |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth" default="" tag="input"/> |
+|[[Sidebar breakpoint|$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint]]<br>//the minimum page width at which the story<br>river and sidebar will appear side by side// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint" default="" tag="input"/> |
+|[[Sidebar width|$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth]]<br>//the width of the sidebar in fluid-fixed layout// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" default="" tag="input"/> |

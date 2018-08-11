@@ -1,5 +1,5 @@
 created: 20130825161100000
-modified: 20140928165957195
+modified: 20160602060511458
 tags: Definitions
 title: TiddlyFox
 type: text/vnd.tiddlywiki
@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 //~TiddlyFox// peut être téléchargé depuis le site //Mozilla Addons//<<dp>>
 
-https://addons.mozilla.org/en-US/firefox/addon/tiddlyfox/
+https://addons.mozilla.org/fr/firefox/addon/tiddlyfox/
 
 <<<
 Vous pouvez également installer la dernière version de développement de ~TiddlyFox directement depuis GitHub<<dp>>

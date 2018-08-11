@@ -1,0 +1,18 @@
+{
+	"tiddlers": [
+		{
+			"file": "ios-drag-drop.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/mobiledragdrop/ios-drag-drop.js"
+			}
+		},
+		{
+			"file": "LICENSE",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/mobiledragdrop/license"
+			}
+		}
+	]
+}

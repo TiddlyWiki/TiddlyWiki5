@@ -1,0 +1,69 @@
+caption: Permalinks
+created: 20140502213500000
+es-title: Permalinks
+modified: 20160502145938493
+tags: Features Concepts
+title: PermaLinks
+type: text/vnd.tiddlywiki
+
+Un <<.def permalink>> permite enlaces directos a tiddlers individuales de un ~TiddlyWiki
+
+!Permalinks sencillos
+
+La forma más simple de un permalink es un enlace sencillo adjunto a la dirección de base con `#`:
+
+https://tiddlywiki.com/#HelloThere
+
+El título del tiddler puede contener espacios si es necesario:
+
+[[https://tiddlywiki.com/#Using TiddlyWiki on Node.js]]
+
+No es necesario encerrar el título en corchetes dobles, aunque si lo haces, no pasa nada, porque se elmininan.
+
+! Permalinks al ~StoryRiver
+
+El permalink también puede definir la secuencia de tiddlers que se abre junto al tiddler principal, como hace un [[filtro|Filters]]:
+
+[[https://tiddlywiki.com/#TiddlerFields:Tiddlers TiddlerTags TiddlerFields ContentType]]
+
+Si el tiddler principal no está presente entre los tiddlers de la StoryRiver, se inserta automáticamente al principio, lo que significa que estos dos ejemplos apuntan al tiddler <<.tid Tiddlers>> en la secuencia <<.tid "Tiddlers, Tags, ~TiddlerFields">>:
+
+[[https://tiddlywiki.com/#Tiddlers:Tags TiddlerFields]]
+
+[[https://tiddlywiki.com/#Tiddlers:Tiddlers Tags TiddlerFields]]
+
+También es posible definir un filtro sin especificar un tiddler en concreto:
+
+<a href="https://tiddlywiki.com/#:[tags[task]]">~https://tiddlywiki.com/#:[tags[task]]</a>
+
+! Codificación de URL's
+
+Existen restricciones técnicas a los caracteres que pueden usarse en una URL. Para permitir apuntar a cualquier tiddler, los caracteres no permitidos están sujetos a un proceso llamado <<.def codificación>>, mediante el cual los caracteres problemáticos se sustituyen por un código numérico, también llamado <<.def "código por ciento">>. Así, por ejemplo, el caracter que representa un espacio se sustituye por el código `%20`.
+
+Tanto el título del tiddler como el filtro de la historia deben codificarse para URL (no así los dos puntos). ~Tiddlywiki genera URL's debidamente codificadas que pueden tener un aspecto bastante aterrador. Sin embargo, en la práctica, los navegadores procesan todos los caracteres en fragmentos de URL, así que cuando creas permalinks de forma manual puedes ignorar la codificación URL.
+
+! Comportamiento de los permalinks
+
+Dos importantes aspectos del comportamiento de los permalinks en ~TiddlyWiki pueden controlarse con las opciones de la pestaña <<.controlpanel-tab Advanced>>/<<.controlpanel-tab Settings>>:
+
+* Actualizar o no la barra del navegador según se navega para que refleje los cambios que se producen al abrir nuevos tiddlers en la historia y en tal caso, si la actualización incluye la secuencia completa de tiddlers navegados
+
+* Actualizar o no el historial del navegador, de modo que se pueda retroceder en la apertura de tiddlers mediante los botones <<.place Adelante>> y <<.place Atrás>> del navegador (desactivado por defecto)
+
+Escribir o navegar a un permalink siempre hará que el navegador lo procese, lo que abre y cierra tiddlers del modo que el permalink requiere, en lugar de, por ejemplo, añadir el permalink a la vista actual de tiddlers.
+
+!! Detalles técnicos
+
+Al iniciarse y cada vez que un permalink varía dinámicamente --editando la barra de direcciones, por ejemplo--, ~TIddlyWiki procesa los permalinks conforme a las siguientes reglas. 
+
+# Si el permalink contiene <<.def "dos puntos">>, considera la cadena anterior como <<.em target>> y la posterior como <<.em filtro>> del StoryRiver
+
+# Si no contiene dos puntos, considera toda la cadena como <<.em target>> y el filtro como <<.word "no especificado">>
+
+# Si no se especifica filtro, pero sí un <<.em target>>, al arrancar considera que el filtro está en blanco. Si tampoco se especifica target, considera a los tiddlers por defecto como tal.
+
+# Fuera del proceso de arranque, considera la actual lista de tiddlers de la historia un filtro no especificado 
+
+# Considera los tiddlers abiertos como lista de tiddlers del permalink
+# Si se especifica target, pero no está abierto, lo añade al principio de la lista
+# Si se especifica target, lo pone en foco. De otro modo, lo pone en el primer tiddler de la lista

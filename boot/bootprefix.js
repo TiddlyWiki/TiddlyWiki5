@@ -99,7 +99,14 @@ $tw.preloadTiddler = function(fields) {
 	$tw.preloadTiddlers.push(fields);
 };
 
-return $tw
+/*
+Convenience function for pushing an array of tiddlers onto the preloading array
+*/
+$tw.preloadTiddlerArray = function(fieldsArray) {
+	$tw.preloadTiddlers.push.apply($tw.preloadTiddlers,fieldsArray);
+};
+
+return $tw;
 
 });
 

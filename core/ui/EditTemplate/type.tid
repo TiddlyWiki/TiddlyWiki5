@@ -10,7 +10,7 @@ tags: $:/tags/EditTemplate
 <$reveal state=<<qualify "$:/state/popup/type-dropdown">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown tc-edit-type-dropdown">
 <$linkcatcher to="!!type">
-<$list filter='[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]each[group]sort[group]]'>
+<$list filter='[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]each[group]sort[group-sort]]'>
 <div class="tc-dropdown-item">
 <$text text={{!!group}}/>
 </div>

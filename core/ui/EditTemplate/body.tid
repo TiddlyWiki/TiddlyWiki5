@@ -2,6 +2,9 @@ title: $:/core/ui/EditTemplate/body
 tags: $:/tags/EditTemplate
 
 \define lingo-base() $:/language/EditTemplate/Body/
+\define config-visibility-title()
+$:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
+\end
 <$list filter="[is[current]has[_canonical_uri]]">
 
 <div class="tc-message-box">
@@ -20,19 +23,17 @@ tags: $:/tags/EditTemplate
 
 <$reveal state="$:/state/showeditpreview" type="match" text="yes">
 
-<em class="tc-edit"><<lingo Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="no"><<lingo Preview/Button/Hide>></$button>
-
 <div class="tc-tiddler-preview">
+
+<$transclude tiddler="$:/core/ui/EditTemplate/body/editor" mode="inline"/>
+
 <div class="tc-tiddler-preview-preview">
-<$set name="tv-tiddler-preview" value="yes">
 
-<$transclude />
+<$transclude tiddler={{$:/state/editpreviewtype}} mode="inline">
 
-</$set>
-</div>
+<$transclude tiddler="$:/core/ui/EditTemplate/body/preview/output" mode="inline"/>
 
-<div class="tc-tiddler-preview-edit">
-<$edit field="text" class="tc-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}/>
+</$transclude>
 
 </div>
 
@@ -42,8 +43,7 @@ tags: $:/tags/EditTemplate
 
 <$reveal state="$:/state/showeditpreview" type="nomatch" text="yes">
 
-<em class="tc-edit"><<lingo Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="yes"><<lingo Preview/Button/Show>></$button>
-<$edit field="text" class="tc-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}/>
+<$transclude tiddler="$:/core/ui/EditTemplate/body/editor" mode="inline"/>
 
 </$reveal>
 

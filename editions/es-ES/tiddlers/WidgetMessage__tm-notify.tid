@@ -1,0 +1,14 @@
+caption: tm-notify
+created: 20140811112304772
+es-title: Mensaje: tm-notify
+modified: 20160415114838901
+tags: Messages
+title: WidgetMessage: tm-notify
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-notify` muestra un tiddler determinado como una pequeña alerta en la esquina superior derecha de la página. Requiere las siguientes propiedades del objeto `event`:
+
+|!Nombre |!Descripción |
+|param |Título del tiddler que se mostrará |
+
+Este mensaje lo procesa el núcleo de ~TiddlyWiki

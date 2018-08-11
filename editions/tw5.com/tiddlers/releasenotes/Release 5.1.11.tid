@@ -1,0 +1,11 @@
+caption: 5.1.11
+created: 20160130124109312
+modified: 20160130124109312
+tags: ReleaseNotes
+title: Release 5.1.11
+type: text/vnd.tiddlywiki
+released: 20160130124109312
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.10...v5.1.11]]//
+
+This is a bug-fix release for [[Release 5.1.10]] that fixes a serious issue affecting the operation of the official plugin library.

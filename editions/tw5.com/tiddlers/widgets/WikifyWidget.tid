@@ -1,0 +1,30 @@
+caption: wikify
+created: 20160321144949700
+modified: 20161017122117062
+tags: Widgets
+title: WikifyWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The wikify widget parses and renders a string of text and assigns the result to a specified [[variable|Variables]]. The new value of the variable is available to the content within the wikify widget.
+
+! Content and Attributes
+
+The content of the `<$wikify>` widget is the scope for the value assigned to the variable.
+
+|!Attribute |!Description |
+|name |The name of the variable to assign |
+|text |The text to parse and render |
+|type |The ContentType of the text (defaults to `text/vnd.tiddlywiki`) |
+|mode |The parse mode: `block` (the default) or `inline` |
+|output |Keyword indicating the desired output type, defaulting to `text` (see below) |
+
+The available output types are:
+
+|!Keyword |!Description |
+|text |Return the plain text of the rendered output (ie HTML tags are omitted) |
+|formattedtext |Return the plain text with simple text formatting of the rendered output (ie HTML tags are omitted) |
+|html |Return the rendered HTML of the output |
+|parsetree |Return a formatted JSON representation of the parse tree |
+|widgettree |Return a formatted JSON representation of the widget tree |

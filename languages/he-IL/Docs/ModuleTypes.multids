@@ -1,0 +1,22 @@
+title: $:/language/Docs/ModuleTypes/
+
+animation: אנימציות שאפשר להתשמש בהן עם RevealWidget.
+command: פקודות שאפשר להפעיל תחת Node.js.
+config: נתונים להכנסה לתוך `$tw.config`.
+filteroperator: מתודות אופרטוראי פילטר אינדיבידואליות
+global: נתונים גלובלים להכנסה לתוך `$tw`.
+isfilteroperator: אופרנדים עבור ''is'' אופרטור פילטר
+macro: JavaScript הגדרות מקרו
+parser: פורשים לסוגי תוכן שונים
+saver: שומרים מטפלים בשיטות שונות לשמירת קובץ מהדפדפן
+startup: פונקציות אתחול
+storyview: מבטי סיפור מקסטמים את ההנפשה וההתגנהגות של וידג'טי רשימה
+tiddlerdeserializer: ממירים סוגי תוכן שונים לטידלרים
+tiddlerfield: מגדירים את ההתנהגות של שדות טידלרים אינדיבידואליים.
+tiddlermethod: מוסיף שיטות ל `$tw.Tiddler` אב הטיפוס
+upgrader: מיישם עיבוד שדרוג לטידלרים בזמן ייבוא/שדרוג
+utils: מוסיף שיטות ל `$tw.utils`.
+utils-node: מוסיף Node.js-specific שיטות ל `$tw.utils`.
+widget: וידג'טים העוטפים DOM התוויה ועדכון
+wikimethod: מוסיף שיטות ל `$tw.Wiki`.
+wikirule: חוקי פרישה אינדיבידואלים עבור WikiText פורש העיקרי

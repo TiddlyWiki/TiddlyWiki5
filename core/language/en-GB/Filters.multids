@@ -11,4 +11,5 @@ SystemTiddlers: System tiddlers
 ShadowTiddlers: Shadow tiddlers
 OverriddenShadowTiddlers: Overridden shadow tiddlers
 SystemTags: System tags
+StoryList: Tiddlers in the story river, excluding <$text text="$:/AdvancedSearch"/>
 TypedTiddlers: Non wiki-text tiddlers

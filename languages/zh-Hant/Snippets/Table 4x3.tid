@@ -1,0 +1,8 @@
+title: $:/language/Snippets/Table4x3
+tags: $:/tags/TextEditor/Snippet
+caption: 4 x 3 的表格
+
+|! | !一 | !二 | !三 | !四 |
+|! 1| | | | |
+|! 2| | | | |
+|! 3 | | | | |

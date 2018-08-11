@@ -40,10 +40,15 @@ SetWidget.prototype.execute = function() {
 	// Get our parameters
 	this.setName = this.getAttribute("name","currentTiddler");
 	this.setFilter = this.getAttribute("filter");
+	this.setSelect = this.getAttribute("select");
+	this.setTiddler = this.getAttribute("tiddler");
+	this.setSubTiddler = this.getAttribute("subtiddler");
+	this.setField = this.getAttribute("field");
+	this.setIndex = this.getAttribute("index");
 	this.setValue = this.getAttribute("value");
 	this.setEmptyValue = this.getAttribute("emptyValue");
 	// Set context variable
-	this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params);
+	this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,!!this.parseTreeNode.isMacroDefinition);
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
@@ -53,16 +58,42 @@ Get the value to be assigned
 */
 SetWidget.prototype.getValue = function() {
 	var value = this.setValue;
-	if(this.setFilter) {
+	if(this.setTiddler) {
+		var tiddler;
+		if(this.setSubTiddler) {
+			tiddler = this.wiki.getSubTiddler(this.setTiddler,this.setSubTiddler);
+		} else {
+			tiddler = this.wiki.getTiddler(this.setTiddler);			
+		}
+		if(!tiddler) {
+			value = this.setEmptyValue;
+		} else if(this.setField) {
+			value = tiddler.getFieldString(this.setField) || this.setEmptyValue;
+		} else if(this.setIndex) {
+			value = this.wiki.extractTiddlerDataItem(this.setTiddler,this.setIndex,this.setEmptyValue);
+		} else {
+			value = tiddler.fields.text || this.setEmptyValue ;
+		}
+	} else if(this.setFilter) {
 		var results = this.wiki.filterTiddlers(this.setFilter,this);
-		if(!this.setValue) {
-			value = $tw.utils.stringifyList(results);
+		if(this.setValue == null) {
+			var select;
+			if(this.setSelect) {
+				select = parseInt(this.setSelect,10);
+			}
+			if(select !== undefined) {
+				value = results[select] || "";
+			} else {
+				value = $tw.utils.stringifyList(results);			
+			}
 		}
 		if(results.length === 0 && this.setEmptyValue !== undefined) {
 			value = this.setEmptyValue;
 		}
+	} else if(!value && this.setEmptyValue) {
+		value = this.setEmptyValue;
 	}
-	return value;
+	return value || "";
 };
 
 /*
@@ -70,7 +101,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 SetWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.name || changedAttributes.filter || changedAttributes.value || changedAttributes.emptyValue ||
+	if(changedAttributes.name || changedAttributes.filter || changedAttributes.select || changedAttributes.tiddler || (this.setTiddler && changedTiddlers[this.setTiddler]) || changedAttributes.field || changedAttributes.index || changedAttributes.value || changedAttributes.emptyValue ||
 	   (this.setFilter && this.getValue() != this.variables[this.setName].value)) {
 		this.refreshSelf();
 		return true;

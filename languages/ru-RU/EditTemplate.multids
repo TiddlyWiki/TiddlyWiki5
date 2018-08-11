@@ -1,10 +1,7 @@
 title: $:/language/EditTemplate/
 
 Body/External/Hint: Содержимое этой заметки находится вне TiddlyWiki. Но вы можете редактировать метки и поля
-Body/Hint: Воспользуйтесь [[WikiText|http://tiddlywiki.com/static/WikiText.html]] для форматирования, добавления изображений и макросов
 Body/Placeholder: Введите текст заметки
-Body/Preview/Button/Hide: скрыть предпросмотр
-Body/Preview/Button/Show: предпросмотр
 Field/Remove/Caption: удалить поле
 Field/Remove/Hint: Удалить поле
 Fields/Add/Button: добавить

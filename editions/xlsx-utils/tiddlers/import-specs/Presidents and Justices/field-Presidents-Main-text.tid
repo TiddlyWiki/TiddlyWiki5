@@ -1,0 +1,9 @@
+created: 20161023172104652
+import-field-column: Description
+import-field-name: text
+import-field-source: column
+import-spec-role: field
+modified: 20161023172104652
+title: $:/_importspec/Presidents and Justices/Presidents/Main/text
+type: text/vnd.tiddlywiki
+

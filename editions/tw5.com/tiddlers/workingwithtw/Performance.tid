@@ -1,5 +1,5 @@
 created: 20150330155120127
-modified: 20150330155547626
+modified: 20160607145222633
 tags: [[Working with TiddlyWiki]]
 title: Performance
 type: text/vnd.tiddlywiki
@@ -9,4 +9,4 @@ TiddlyWiki ships with defaults that are designed to get the best out of modern d
 * ''Avoid the "Recent" tab''. It is computationally slow to generate and update in response to tiddler changes.
 * ''Use the "Vanilla" theme''. The default "Snow White" theme includes visual effects like shadows, transparency and blurring that can be slow to render on older devices
 * ''Avoid large tiddlers''. Large bitmaps can significantly slow TiddlyWiki's performance. For example, an image taken with a modern smartphone will often be 5MB or more. Use ExternalImages whenever possible
-* ''Don't have too many tiddlers open at once''. Every tiddler you have open will require processing to keep it up to date as the store changes (for example, while you type into a draft tiddler). It is particularly easy when using zoomin story view to end up with dozens of tiddlers listed in the ''Open'' tab in the sidebar. Get into the habit of periodically closing all open tiddlers with the ''close all'' button
+* ''Don't have too many tiddlers open at once''. Every tiddler you have open will require processing to keep it up to date as the store changes (for example, while you type into a draft tiddler). It is particularly easy when using zoomin story view to end up with dozens of tiddlers listed in the ''Open'' tab in the sidebar. Get into the habit of periodically closing all open tiddlers with the {{$:/core/images/close-all-button}} ''close all'' button

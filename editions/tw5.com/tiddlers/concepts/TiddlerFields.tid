@@ -1,5 +1,5 @@
 created: 20130825213300000
-modified: 20140419151511111
+modified: 20160610081054535
 tags: Concepts
 title: TiddlerFields
 type: text/vnd.tiddlywiki
@@ -19,16 +19,21 @@ The standard fields are:
 |`tags` |TagsField |<<lingo tags>> |
 |`type` |TypeField |<<lingo type>> |
 |`list` |ListField |<<lingo list>> |
+|`caption` |CaptionField |<<lingo caption>> |
 
 Other fields used by the core are:
 
 |!Field Name |!Reference |!Description |
+|`class` |ClassField |<<lingo class>> |
 |`color` |ColorField |<<lingo color>> |
 |`description` |DescriptionField |<<lingo description>> |
 |`draft.of` |DraftOfField |<<lingo draft.of>> |
 |`draft.title` |DraftTitleField |<<lingo draft.title>> |
 |`footer` |FooterField |<<lingo footer>> |
+|`icon` |IconField |<<lingo icon>> |
 |`library` |LibraryField |<<lingo library>> |
+|`list-after` |ListAfterField |<<lingo list-after>> |
+|`list-before` |ListBeforeField |<<lingo list-before>> |
 |`name` |NameField |<<lingo name>> |
 |`plugin-priority` |PluginPriorityField |<<lingo plugin-priority>> |
 |`plugin-type` |PluginTypeField |<<lingo plugin-type>> |
@@ -41,4 +46,4 @@ The TiddlyWebAdaptor uses a few more fields:
 |`bag` |BagField |<<lingo bag>> |
 |`revision` |RevisionField |<<lingo revision>> |
 
-See the ''Advanced > TiddlerFields'' tab of the [[control panel|$:/ControlPanel]] for details of the fields used in this wiki.
+See the ''Advanced > Tiddler Fields'' tab of the [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}} for details of the fields used in this wiki.

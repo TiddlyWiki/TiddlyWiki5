@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/comments/header-view-template-segment
+tags: $:/tags/ViewTemplate
+list-before: $:/core/ui/ViewTemplate/body
+
+<$list filter="[all[current]has[comment-target]]" variable="ignore">
+<div class="tc-is-comment-header">
+This tiddler is a comment on <$link to={{!!comment-target}}><$text text={{!!comment-target}}/></$link>
+</div>
+</$list>

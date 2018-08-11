@@ -11,7 +11,9 @@ Basics/DefaultTiddlers/Prompt: Default tiddlers:
 Basics/DefaultTiddlers/TopHint: Choose which tiddlers are displayed at startup:
 Basics/Language/Prompt: Hello! Current language:
 Basics/NewJournal/Title/Prompt: Title of new journal tiddlers
+Basics/NewJournal/Text/Prompt: Text for new journal tiddlers
 Basics/NewJournal/Tags/Prompt: Tags for new journal tiddlers
+Basics/NewTiddler/Title/Prompt: Title of new tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Number of overridden shadow tiddlers:
 Basics/ShadowTiddlers/Prompt: Number of shadow tiddlers:
 Basics/Subtitle/Prompt: Subtitle:
@@ -27,6 +29,19 @@ EditorTypes/Hint: These tiddlers determine which editor is used to edit specific
 EditorTypes/Type/Caption: Type
 Info/Caption: Info
 Info/Hint: Information about this TiddlyWiki
+KeyboardShortcuts/Add/Prompt: Type shortcut here
+KeyboardShortcuts/Add/Caption: add shortcut
+KeyboardShortcuts/Caption: Keyboard Shortcuts
+KeyboardShortcuts/Hint: Manage keyboard shortcut assignments
+KeyboardShortcuts/NoShortcuts/Caption: No keyboard shortcuts assigned
+KeyboardShortcuts/Remove/Hint: remove keyboard shortcut
+KeyboardShortcuts/Platform/All: All platforms
+KeyboardShortcuts/Platform/Mac: Macintosh platform only
+KeyboardShortcuts/Platform/NonMac: Non-Macintosh platforms only
+KeyboardShortcuts/Platform/Linux: Linux platform only
+KeyboardShortcuts/Platform/NonLinux: Non-Linux platforms only
+KeyboardShortcuts/Platform/Windows: Windows platform only
+KeyboardShortcuts/Platform/NonWindows: Non-Windows platforms only
 LoadedModules/Caption: Loaded Modules
 LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
 Palette/Caption: Palette
@@ -39,12 +54,13 @@ Palette/HideEditor/Caption: hide editor
 Palette/Prompt: Current palette:
 Palette/ShowEditor/Caption: show editor
 Parsing/Caption: Parsing
-Parsing/Hint: Here you can globally disable individual wiki parser rules. Take care as disabling some parser rules can prevent ~TiddlyWiki functioning correctly (you can restore normal operation with [[safe mode|http://tiddlywiki.com/#SafeMode]] )
+Parsing/Hint: Here you can globally disable/enable wiki parser rules. For changes to take effect, save and reload your wiki. Disabling certain parser rules can prevent <$text text="TiddlyWiki"/> from functioning correctly. Use [[safe mode|https://tiddlywiki.com/#SafeMode]] to restore normal operation.
 Parsing/Block/Caption: Block Parse Rules
 Parsing/Inline/Caption: Inline Parse Rules
 Parsing/Pragma/Caption: Pragma Parse Rules
-Plugins/Add/Hint: Install plugins from the official library
 Plugins/Add/Caption: Get more plugins
+Plugins/Add/Hint: Install plugins from the official library
+Plugins/AlreadyInstalled/Hint: This plugin is already installed at version <$text text=<<installedVersion>>/>
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: disable
 Plugins/Disable/Hint: Disable this plugin when reloading page
@@ -52,21 +68,31 @@ Plugins/Disabled/Status: (disabled)
 Plugins/Empty/Hint: None
 Plugins/Enable/Caption: enable
 Plugins/Enable/Hint: Enable this plugin when reloading page
-Plugins/Install: install
+Plugins/Install/Caption: install
 Plugins/Installed/Hint: Currently installed plugins:
 Plugins/Languages/Caption: Languages
 Plugins/Languages/Hint: Language pack plugins
+Plugins/NoInfoFound/Hint: No ''"<$text text=<<currentTab>>/>"'' found
+Plugins/NotInstalled/Hint: This plugin is not currently installed
 Plugins/OpenPluginLibrary: open plugin library
+Plugins/ClosePluginLibrary: close plugin library
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins
-Plugins/Reinstall: reinstall
+Plugins/Reinstall/Caption: reinstall
 Plugins/Themes/Caption: Themes
 Plugins/Themes/Hint: Theme plugins
 Saving/Caption: Saving
-Saving/Heading: Saving
+Saving/DownloadSaver/AutoSave/Description: Permit automatic saving for the download saver
+Saving/DownloadSaver/AutoSave/Hint: Enable Autosave for Download Saver
+Saving/DownloadSaver/Caption: Download Saver
+Saving/DownloadSaver/Hint: These settings apply to the HTML5-compatible download saver
+Saving/General/Caption: General
+Saving/General/Hint: These settings apply to all the loaded savers
+Saving/Hint: Settings used for saving the entire TiddlyWiki as a single file via a saver module
 Saving/TiddlySpot/Advanced/Heading: Advanced Settings
 Saving/TiddlySpot/BackupDir: Backup Directory
 Saving/TiddlySpot/Backups: Backups
+Saving/TiddlySpot/Caption: ~TiddlySpot Saver
 Saving/TiddlySpot/Description: These settings are only used when saving to http://tiddlyspot.com or a compatible remote server
 Saving/TiddlySpot/Filename: Upload Filename
 Saving/TiddlySpot/Heading: ~TiddlySpot
@@ -78,11 +104,18 @@ Saving/TiddlySpot/UserName: Wiki Name
 Settings/AutoSave/Caption: Autosave
 Settings/AutoSave/Disabled/Description: Do not save changes automatically
 Settings/AutoSave/Enabled/Description: Save changes automatically
-Settings/AutoSave/Hint: Automatically save changes during editing
+Settings/AutoSave/Hint: Attempt to automatically save changes during editing when using a supporting saver
 Settings/CamelCase/Caption: Camel Case Wiki Links
 Settings/CamelCase/Hint: You can globally disable automatic linking of ~CamelCase phrases. Requires reload to take effect
 Settings/CamelCase/Description: Enable automatic ~CamelCase linking
 Settings/Caption: Settings
+Settings/EditorToolbar/Caption: Editor Toolbar
+Settings/EditorToolbar/Hint: Enable or disable the editor toolbar:
+Settings/EditorToolbar/Description: Show editor toolbar
+Settings/InfoPanelMode/Caption: Tiddler Info Panel Mode
+Settings/InfoPanelMode/Hint: Control when the tiddler info panel closes:
+Settings/InfoPanelMode/Popup/Description: Tiddler info panel closes automatically
+Settings/InfoPanelMode/Sticky/Description: Tiddler info panel stays open until explicitly closed
 Settings/Hint: These settings let you customise the behaviour of TiddlyWiki.
 Settings/NavigationAddressBar/Caption: Navigation Address Bar
 Settings/NavigationAddressBar/Hint: Behaviour of the browser address bar when navigating to a tiddler:
@@ -107,6 +140,8 @@ Settings/ToolbarButtons/Icons/Description: Include icon
 Settings/ToolbarButtons/Text/Description: Include text
 Settings/DefaultSidebarTab/Caption: Default Sidebar Tab
 Settings/DefaultSidebarTab/Hint: Specify which sidebar tab is displayed by default
+Settings/DefaultMoreSidebarTab/Caption: Default More Sidebar Tab
+Settings/DefaultMoreSidebarTab/Hint: Specify which More sidebar tab is displayed by default
 Settings/LinkToBehaviour/Caption: Tiddler Opening Behaviour
 Settings/LinkToBehaviour/InsideRiver/Hint: Navigation from //within// the story river
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation from //outside// the story river
@@ -118,18 +153,27 @@ Settings/TitleLinks/Caption: Tiddler Titles
 Settings/TitleLinks/Hint: Optionally display tiddler titles as links
 Settings/TitleLinks/No/Description: Do not display tiddler titles as links
 Settings/TitleLinks/Yes/Description: Display tiddler titles as links
+Settings/MissingLinks/Caption: Wiki Links
+Settings/MissingLinks/Hint: Choose whether to link to tiddlers that do not exist yet
+Settings/MissingLinks/Description: Enable links to missing tiddlers
 StoryView/Caption: Story View
 StoryView/Prompt: Current view:
+Stylesheets/Caption: Stylesheets
+Stylesheets/Expand/Caption: Expand All
+Stylesheets/Hint: This is the rendered CSS of the current stylesheet tiddlers tagged with <<tag "$:/tags/Stylesheet">>
+Stylesheets/Restore/Caption: Restore
 Theme/Caption: Theme
 Theme/Prompt: Current theme:
 TiddlerFields/Caption: Tiddler Fields
 TiddlerFields/Hint: This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
 Toolbars/Caption: Toolbars
 Toolbars/EditToolbar/Caption: Edit Toolbar
-Toolbars/EditToolbar/Hint: Choose which buttons are displayed for tiddlers in edit mode
+Toolbars/EditToolbar/Hint: Choose which buttons are displayed for tiddlers in edit mode. Drag and drop to change the ordering
 Toolbars/Hint: Select which toolbar buttons are displayed
 Toolbars/PageControls/Caption: Page Toolbar
-Toolbars/PageControls/Hint: Choose which buttons are displayed on the main page toolbar
+Toolbars/PageControls/Hint: Choose which buttons are displayed on the main page toolbar. Drag and drop to change the ordering
+Toolbars/EditorToolbar/Caption: Editor Toolbar
+Toolbars/EditorToolbar/Hint: Choose which buttons are displayed in the editor toolbar. Note that some buttons will only appear when editing tiddlers of a certain type. Drag and drop to change the ordering
 Toolbars/ViewToolbar/Caption: View Toolbar
-Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode
+Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode. Drag and drop to change the ordering
 Tools/Download/Full/Caption: Download full wiki

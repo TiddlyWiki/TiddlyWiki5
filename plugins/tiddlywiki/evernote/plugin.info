@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/evernote",
+	"description": "Evernote migration tools",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"list": "readme docs"
+}

@@ -1,0 +1,48 @@
+caption: Edición de tiddlers
+created: 20140904140300000
+es-title: Crear y editar tiddlers
+modified: 20160422153052849
+tags: [[Working with TiddlyWiki]]
+title: Creating and editing tiddlers
+type: text/vnd.tiddlywiki
+
+! Crear un tiddler
+
+Un tiddler se crea con un simple clic, bien en el botón <<.button new-tiddler>> de la  barra lateral, o en el enlace a un tiddler vacío, que se distinguen por estar en [[cursiva azul]]
+
+Mira también:
+
+* [[Creación de entradas de diario|Creating journal tiddlers]]
+
+! Editar un tiddler
+
+Haz clic en el botón <<.button edit>>, situado arriba a la derecha del tiddler que quieres editar. 
+
+!! Borrador
+
+Cuando creas un tiddler nuevo o editas uno ya existente, el tiddler se muestra en modo borrador o de edición y muestra un panel de control que permite modificarlo de varias formas, compuesto de las siguientes partes (de arriba hacia abajo):
+
+''Campo de título'' - SIrve para cambiar el título de un tiddler (por defecto "Nuevo Tiddler")
+
+*''Selector de etiquetas'' - SIrve para añadir o quitar etiquetas. A medida que escribas en el cuadro, una lista desplegable te mostrará cualquier etiqueta ya existente que coincida con lo escrito. Puedes seleccionar una etiqueta de la lista o escribir una completamente nueva y pulsar el botón ''añadir'' para incorporarla al tiddler. Cada etiqueta se muestra como una //píldora// coloreada. Si haces clic en la ''x'' de una píldora, quitarás la etiqueta del tiddler y si no hay más tiddlers con esa etiqueta, la borrarás también de la lista.
+
+*''Área de texto'' - Escribe aquí el contenido del texto. Pulsando el botón ''mostrar vista previa'' verás qué aspecto tendrán tus cambios cuando guardes el tiddler y salgas del modo de edición. Si te molesta, puedes ocultarla pulsando el botón ''ocultar vista previa''.
+
+*''Selector de tipo'' - Se usa cuando hay que indicar a TIddlywiki que interprete ese tiddler de forma especial, de acuerdo con el tipo seleccionado. Por ejemplo, una imagen en jpg: si seleccionamos el tipo como "imagen .JPEG", Tiddlywiki sabrá cómo interpretar el tiddler y nos mostrará la imagen que queremos ver. Si no seleccionamos nada, nos mostrará un montón de código incomprensible, ya que el tipo por defecto es `text/vnd.tiddlywiki`, lo que significa que el tiddler contiene WikiText... y como tal lo interpreta.
+
+*''Selector de campos'' - Se usa para añadir o quitar campos del tiddler. Estos campos sirven tanto para complementar la información del tiddler como para establecer la relación que mantiene con otros. Por ejemplo: si estás editando un tiddler que servirá para etiquetar a otros tiddlers, puedes añadir un [[campo ''list''|ListField]] para establecer el orden que esos otros tiddlers tendrán en la lista.
+
+
+! Guardar, cancelar o borrar
+
+Cuando termines con la edición, pulsa uno de los botones que tienes arriba a la derecha del tiddler:
+
+*El botón <<.button save>> guarda los cambios realizados en el tiddler y sale del editor. 
+
+**Si tienes el wiki configurado para que [[guarde automáticamente|AutoSave]] los cambios, no necesitas hacer nada más: tus cambios quedan guardados de forma permanente al salir del editor. Si no tienes el Autosave configurado, los cambios se guardan sólo temporalmente en el navegador y se perderán en cuanto cierres la página. ~TiddlyWIki te avisa en tal caso de que tienes cambios pendientes de guardar mostrándote un botón rojo a la derecha, en la barra lateral. 
+
+**Ese es el botón  <<.button save-wiki>> . Para conservar tus cambios permanentemente, haz clic en él. ~TiddlyWiki guardará los cambios y el botón cambiará su color, indicando que ya no hay peligro.
+
+*El botón <<.button cancel>>  interrumpe la edición, descarta todos los cambios (previa confirmación) y sale del editor.
+
+*El botón <<.button delete>> elimina por completo el tiddler. Para hacerlo pide confirmación, pero ten en cuenta que una vez confirmado, el borrado de un tiddler es irrecuperable.

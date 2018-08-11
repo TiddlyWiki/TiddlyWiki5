@@ -37,10 +37,10 @@ function SaverHandler(options) {
 		// Listen out for changes to tiddlers
 		this.wiki.addEventListener("change",function(changes) {
 			// Filter the changes so that we only count changes to tiddlers that we care about
-			var filteredChanges = self.filterFn.call(self.wiki,function(callback) {
+			var filteredChanges = self.filterFn.call(self.wiki,function(iterator) {
 				$tw.utils.each(changes,function(change,title) {
 					var tiddler = self.wiki.getTiddler(title);
-					callback(tiddler,title);
+					iterator(tiddler,title);
 				});
 			});
 			// Adjust the number of changes
@@ -151,7 +151,7 @@ SaverHandler.prototype.saveWiki = function(options) {
 		text = this.wiki.renderTiddler(downloadType,template,options),
 		callback = function(err) {
 			if(err) {
-				alert("Error while saving:\n\n" + err);
+				alert($tw.language.getString("Error/WhileSaving") + ":\n\n" + err);
 			} else {
 				// Clear the task queue if we're saving (rather than downloading)
 				if(method !== "download") {

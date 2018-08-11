@@ -1,0 +1,35 @@
+caption: ¡Hola!
+created: 20130822170200000
+es-title: ¡Hola! ¿Qué tal?
+list: [[A Gentle Guide to TiddlyWiki]] [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[What happened to the original TiddlyWiki?]]
+modified: 20160605052349288
+tags: TableOfContents
+title: HelloThere
+type: text/vnd.tiddlywiki
+
+''¿Nunca has tenido la sensación de que no te cabe en la cabeza todo lo que tienes que recordar?''
+
+BIenvenido a TiddlyWiki, un bloc de notas [[no lineal|Philosophy of Tiddlers]] único para [[capturar|Creating and editing tiddlers]], [[organizar|Structuring TiddlyWiki]] y [[compartir|Sharing your tiddlers with others]] información compleja.
+
+Úsalo para mantener tu [[lista de tareas|TaskManagementExample]], para desarrollar un [[ensayo o novela|"TiddlyWiki for Scholars" by Alberto Molina]], o incluso para organizar tu boda. Toma nota de todo cuanto te pase por la cabeza o construye una web flexible y ágil, que satisfaga tus necesidades.
+
+<div style="font-size:0.7em;text-align:center;margin-top:2em;margin-bottom:2em;">
+<<list-thumbnails filter:"[tag[HelloThumbnail]]" width:"168" height:"95">>
+</div>
+
+Al revés que los servicios online convencionales, TiddlyWiki te deja escoger dónde quieres guardar tus datos, garantizándote que, por más que pase el tiempo, podrás seguir usando en el futuro las notas que tomes hoy.
+
+<div style="font-size:0.7em;text-align:center;margin-top:3em;margin-bottom:3em;">
+<a href="http://groups.google.com/group/TiddlyWiki" class="tc-btn-big-green" style="background-color:#FF8C19;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/mail}} ~TiddlyWiki en Google Groups
+</a>
+<a href="https://www.youtube.com/c/JeremyRuston" class="tc-btn-big-green" style="background-color:#e52d27;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/video}} ~TiddlyWiki en ~YouTube
+</a>
+<a href="https://twitter.com/TiddlyWiki" class="tc-btn-big-green" style="background-color:#5E9FCA;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/twitter}} @~TiddlyWiki en Twitter
+</a>
+<a href="https://github.com/Jermolene/TiddlyWiki5" class="tc-btn-big-green" style="background-color:#444;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/github}} ~TiddlyWiki en ~GitHub
+</a>
+</div>

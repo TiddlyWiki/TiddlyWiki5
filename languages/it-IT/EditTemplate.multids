@@ -1,10 +1,7 @@
 title: $:/language/EditTemplate/
 
 Body/External/Hint: Questo &egrave; un frammento esterno memorizzato al di fuori del file principale TiddlyWiki. Puoi editare le etichette ed i campi ma non puoi editare il contenuto
-Body/Hint: Utilizza il formato wiki per definire la formattazione, aggiungere immagini e caratteristiche dinamiche
 Body/Placeholder: Digita il testo di questo frammento
-Body/Preview/Button/Hide: Nascondi preview
-Body/Preview/Button/Show: Mostra preview
 Field/Remove/Caption: Rimuovi campo
 Field/Remove/Hint: Rimuovi campo
 Fields/Add/Button: Aggiungi

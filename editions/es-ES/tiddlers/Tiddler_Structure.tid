@@ -1,0 +1,21 @@
+caption: Estilo: Estructura de tiddlers
+created: 20150110183300000
+es-title: Estructura de tiddlers
+modified: 20160418155732287
+tags: [[Improving TiddlyWiki Documentation]]
+title: Tiddler Structure
+type: text/vnd.tiddlywiki
+
+Conforme a nuestra [[filosofía|Philosophy of Tiddlers]], los tiddlers de la documentación son breves y están interrelacionados.
+
+Cuando parece que un tiddler necesita subapartardos, es señal de que quizá convendría dividirlo en tiddlers más pequeños. Es razonable, sin embargo, que un tiddler [[de referencia|Reference Tiddlers]] vaya encabezado por una sección introductoria general, seguido de una serie de secciones.
+
+Coherencia terminológica es esencial para no confundir al lector. 
+
+Consistencia tipográfica y de puntuación dan calidad profesional a la documentación. El uso de macros se recomienda por razones de consistencia del texto y de mantenimiento de futuras revisiones.
+
+Se aconseja el uso de listas numeradas para intrucciones paso-a-paso y el de viñetas para listas cuyo orden es arbitrario. Se prefiere el uso de listas de definición sobre el de listas con viñetas si cada elemento de la lista comienza con un término y dos puntos. En la medida de lo posible conviene evitar niveles excesivos de anidamiento de listas.
+
+Conviene usar tablas cuando la información encaja naturalmente en tres o cuatro columnas y para listas de parámetros, atributos... etc 
+
+La documentación describe la realidad actual de ~TiddlyWiki y debe evitarse discutir futuras aspiraciones del proyecto.

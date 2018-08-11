@@ -1,0 +1,7 @@
+title: $:/language/Snippets/MacroDefinition
+tags: $:/tags/TextEditor/Snippet
+caption: Makro definition
+
+\define macroName(param1:"default value",param2)
+Makroens tekst
+\end

@@ -1,0 +1,10 @@
+created: 20170703193252423
+modified: 20170703193353918
+tags: OfficialPlugins
+title: Amazon Web Services Plugin
+type: text/vnd.tiddlywiki
+
+The Amazon Web Services Plugin provides several tools for working with Amazon Web Services:
+
+* Templates for saving a TiddlyWiki as a single JavaScript file in a ZIP file that can be executed as an AWS Lambda function. In this form, TiddlyWiki is a self contained single file containing both code and data, just like the standalone HTML file configuration
+* Commands that can be used to interact with AWS services, under both the Node.js and Lambda configurations of TiddlyWiki
