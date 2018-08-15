@@ -40,6 +40,18 @@ exports.getFieldString = function(field) {
 };
 
 /*
+Get the value of a field as a list
+*/
+exports.getFieldList = function(field) {
+	var value = this.fields[field];
+	// Check for a missing field
+	if(value === undefined || value === null) {
+		return [];
+	}
+	return $tw.utils.parseStringArray(value);
+};
+
+/*
 Get all the fields as a hashmap of strings. Options:
 	exclude: an array of field names to exclude
 */
