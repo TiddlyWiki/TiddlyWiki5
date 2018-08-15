@@ -2,7 +2,7 @@ title: $:/plugins/tiddlywiki/comments/comments-template
 
 <div class="tc-comments">
 <ol class="tc-comment-list">
-<$list filter="[all[tiddlers+shadows]comment-target<currentTiddler>sort[created]!has[draft.of]]">
+<$list filter="[all[tiddlers+shadows]role[comment]contains<currentTiddler>sort[created]!has[draft.of]]">
 <li>
 <div class="tc-comment-entry">
 <div class="tc-comment-entry-heading">
