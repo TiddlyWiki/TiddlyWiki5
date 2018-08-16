@@ -59,6 +59,12 @@ PageScroller.prototype.scrollIntoView = function(element) {
 	// Now get ready to scroll the body
 	this.cancelScroll();
 	this.startTime = Date.now();
+	// Get the height of any position:fixed toolbars
+	var toolbar = document.querySelector(".tc-adjust-top-of-scroll"),
+		offset = 0;
+	if(toolbar) {
+		offset = parseInt(window.getComputedStyle(toolbar).offsetHeight,10);
+	}
 	// Get the client bounds of the element and adjust by the scroll position
 	var getBounds = function() {
 			var clientBounds = element.getBoundingClientRect(),
@@ -98,7 +104,7 @@ PageScroller.prototype.scrollIntoView = function(element) {
 				bounds = getBounds(),
 				endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,window.innerWidth),
 				endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,window.innerHeight);
-			window.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y) * t);
+			window.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y) * t - offset);
 			if(t < 1) {
 				self.idRequestFrame = self.requestAnimationFrame.call(window,drawFrame);
 			}
