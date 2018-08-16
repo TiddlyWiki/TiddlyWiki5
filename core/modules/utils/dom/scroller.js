@@ -63,7 +63,7 @@ PageScroller.prototype.scrollIntoView = function(element) {
 	var toolbar = document.querySelector(".tc-adjust-top-of-scroll"),
 		offset = 0;
 	if(toolbar) {
-		offset = parseInt(window.getComputedStyle(toolbar).offsetHeight,10);
+		offset = toolbar.offsetHeight;
 	}
 	// Get the client bounds of the element and adjust by the scroll position
 	var getBounds = function() {
