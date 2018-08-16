@@ -27,6 +27,9 @@ var DEFAULT_TIDDLERS_TITLE = "$:/DefaultTiddlers";
 // Config
 var CONFIG_UPDATE_ADDRESS_BAR = "$:/config/Navigation/UpdateAddressBar"; // Can be "no", "permalink", "permaview"
 var CONFIG_UPDATE_HISTORY = "$:/config/Navigation/UpdateHistory"; // Can be "yes" or "no"
+var CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD = "$:/config/Navigation/Permalinkview/CopyToClipboard"; // Can be "yes" (default) or "no"
+var CONFIG_PERMALINKVIEW_UPDATE_ADDRESS_BAR = "$:/config/Navigation/Permalinkview/UpdateAddressBar"; // Can be "yes" (default) or "no"
+
 
 exports.startup = function() {
 	// Open startup tiddlers
@@ -72,18 +75,20 @@ exports.startup = function() {
 		// Listen for the tm-permalink message
 		$tw.rootWidget.addEventListener("tm-permalink",function(event) {
 			updateLocationHash({
-				updateAddressBar: "permalink",
+				updateAddressBar: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_UPDATE_ADDRESS_BAR,"yes").trim() === "yes" ? "permalink" : "none",
 				updateHistory: $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim(),
-				targetTiddler: event.param || event.tiddlerTitle
+				targetTiddler: event.param || event.tiddlerTitle,
+				copyToClipboard: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD,"yes").trim() === "yes" ? "permalink" : "none"
 			});
 		});
 		// Listen for the tm-permaview message
 		$tw.rootWidget.addEventListener("tm-permaview",function(event) {
 			updateLocationHash({
-				updateAddressBar: "permaview",
+				updateAddressBar: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_UPDATE_ADDRESS_BAR,"yes").trim() === "yes" ? "permaview" : "none",
 				updateHistory: $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim(),
-				targetTiddler: event.param || event.tiddlerTitle
-			});
+				targetTiddler: event.param || event.tiddlerTitle,
+				copyToClipboard: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD,"yes").trim() === "yes" ? "permaview" : "none"
+			});				
 		});
 	}
 };
@@ -146,41 +151,52 @@ function openStartupTiddlers(options) {
 options: See below
 options.updateAddressBar: "permalink", "permaview" or "no" (defaults to "permaview")
 options.updateHistory: "yes" or "no" (defaults to "no")
+options.copyToClipboard: "permalink", "permaview" or "no" (defaults to "no")
 options.targetTiddler: optional title of target tiddler for permalink
 */
 function updateLocationHash(options) {
-	if(options.updateAddressBar !== "no") {
-		// Get the story and the history stack
-		var storyList = $tw.wiki.getTiddlerList(DEFAULT_STORY_TITLE),
-			historyList = $tw.wiki.getTiddlerData(DEFAULT_HISTORY_TITLE,[]),
+	// Get the story and the history stack
+	var storyList = $tw.wiki.getTiddlerList(DEFAULT_STORY_TITLE),
+		historyList = $tw.wiki.getTiddlerData(DEFAULT_HISTORY_TITLE,[]),
+		targetTiddler = "";
+	if(options.targetTiddler) {
+		targetTiddler = options.targetTiddler;
+	} else {
+		// The target tiddler is the one at the top of the stack
+		if(historyList.length > 0) {
+			targetTiddler = historyList[historyList.length-1].title;
+		}
+		// Blank the target tiddler if it isn't present in the story
+		if(storyList.indexOf(targetTiddler) === -1) {
 			targetTiddler = "";
-		if(options.targetTiddler) {
-			targetTiddler = options.targetTiddler;
-		} else {
-			// The target tiddler is the one at the top of the stack
-			if(historyList.length > 0) {
-				targetTiddler = historyList[historyList.length-1].title;
-			}
-			// Blank the target tiddler if it isn't present in the story
-			if(storyList.indexOf(targetTiddler) === -1) {
-				targetTiddler = "";
-			}
 		}
-		// Assemble the location hash
-		if(options.updateAddressBar === "permalink") {
+	}
+	// Assemble the location hash
+	switch(options.updateAddressBar) {
+		case "permalink":
 			$tw.locationHash = "#" + encodeURIComponent(targetTiddler);
-		} else {
+			break;
+		case "permaview":
 			$tw.locationHash = "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
-		}
-		// Only change the location hash if we must, thus avoiding unnecessary onhashchange events
-		if($tw.utils.getLocationHash() !== $tw.locationHash) {
-			if(options.updateHistory === "yes") {
-				// Assign the location hash so that history is updated
-				window.location.hash = $tw.locationHash;
-			} else {
-				// We use replace so that browser history isn't affected
-				window.location.replace(window.location.toString().split("#")[0] + $tw.locationHash);
-			}
+			break;
+	}
+	// Copy URL to the clipboard
+	switch(options.copyToClipboard) {
+		case "permalink":
+			$tw.utils.copyToClipboard($tw.utils.getLocationPath() + "#" + encodeURIComponent(targetTiddler));
+			break;
+		case "permaview":
+			$tw.utils.copyToClipboard($tw.utils.getLocationPath() + "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList)));
+			break;
+	}
+	// Only change the location hash if we must, thus avoiding unnecessary onhashchange events
+	if($tw.utils.getLocationHash() !== $tw.locationHash) {
+		if(options.updateHistory === "yes") {
+			// Assign the location hash so that history is updated
+			window.location.hash = $tw.locationHash;
+		} else {
+			// We use replace so that browser history isn't affected
+			window.location.replace(window.location.toString().split("#")[0] + $tw.locationHash);
 		}
 	}
 }
