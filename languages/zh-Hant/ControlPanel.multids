@@ -141,6 +141,10 @@ Settings/NavigationHistory/Caption: 歷史記錄導覽
 Settings/NavigationHistory/Hint: 當導覽到條目時，更新瀏覽器歷史記錄：
 Settings/NavigationHistory/No/Description: 不更新歷史記錄
 Settings/NavigationHistory/Yes/Description: 更新歷史記錄
+Settings/NavigationPermalinkviewMode/Caption: 引用連結/固定連結 模式
+Settings/NavigationPermalinkviewMode/Hint: 選擇 引用連結/固定連結 的處理方式：
+Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: 將 引用連結/固定連結 網址複製到剪貼簿
+Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: 以 引用連結/固定連結 更新網址列
 Settings/PerformanceInstrumentation/Caption: 效能檢測
 Settings/PerformanceInstrumentation/Hint: 在瀏覽器的開發人員主控台，顯示效能統計資訊。需要重新載入才能生效。
 Settings/PerformanceInstrumentation/Description: 啟用效能檢測
