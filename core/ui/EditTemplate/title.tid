@@ -5,7 +5,7 @@ tags: $:/tags/EditTemplate
 
 <$vars pattern="""[\|\[\]{}]""" bad-chars="""`| [ ] { }`""">
 
-<$list filter="[is[current]regexp:draft.title<pattern>]" variable="listItem">
+<$list filter="[all[current]regexp:draft.title<pattern>]" variable="listItem">
 
 <div class="tc-message-box">
 

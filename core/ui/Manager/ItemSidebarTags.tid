@@ -19,7 +19,7 @@ caption: {{$:/language/Manager/Item/Tags}}
 \end
 
 <p>
-<$list filter="[is[current]tags[]] [list[$:/config/Manager/RecentTags]] +[sort[title]] " variable="tag">
+<$list filter="[all[current]tags[]] [list[$:/config/Manager/RecentTags]] +[sort[title]] " variable="tag">
 <div>
 <$checkbox tiddler=<<currentTiddler>> tag=<<tag>> actions=<<tag-checkbox-actions>>>
 <$macrocall $name="tag-pill" tag=<<tag>>/>
