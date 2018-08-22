@@ -13,7 +13,7 @@ title: $:/plugins/tiddlywiki/comments/comments-template
 </div>
 <div class="tc-comment-entry-body">
 <$reveal type="match" state="!!edit-mode" text="yes">
-<$edit-text tiddler=<<currentTiddler>> tag="textarea"/>
+<$edit-text tiddler=<<currentTiddler>> tag="textarea" focus="true"/>
 </$reveal>
 <$reveal type="nomatch" state="!!edit-mode" text="yes">
 <$transclude tiddler=<<currentTiddler>> mode="block"/>
