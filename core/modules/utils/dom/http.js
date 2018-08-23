@@ -15,6 +15,7 @@ Browser HTTP support
 /*
 A quick and dirty HTTP function; to be refactored later. Options are:
 	url: URL to retrieve
+	headers: hashmap of headers to send
 	type: GET, PUT, POST etc
 	callback: function invoked with (err,data)
 	returnProp: string name of the property to return as first argument of callback
