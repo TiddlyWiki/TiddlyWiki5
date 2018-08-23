@@ -1982,6 +1982,43 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 /*
+** Floating drafts list
+*/
+
+.tc-drafts-list {
+	z-index: 2000;
+	position: fixed;
+	font-size: 0.8em;
+	left: 0;
+	bottom: 0;
+}
+
+.tc-drafts-list a {
+	margin: 0 0.5em;
+	padding: 4px 4px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	border: 1px solid <<colour background>>;
+	border-bottom-none;
+	background: <<colour dirty-indicator>>;
+	color: <<colour background>>;
+	fill: <<colour background>>;
+}
+
+.tc-drafts-list a:hover {
+	text-decoration: none;
+	background: <<colour foreground>>;
+	color: <<colour background>>;
+	fill: <<colour background>>;
+}
+
+.tc-drafts-list a svg {
+	width: 1em;
+	height: 1em;
+	vertical-align: text-bottom;
+}
+
+/*
 ** Control panel
 */
 
