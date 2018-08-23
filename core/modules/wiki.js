@@ -1278,6 +1278,18 @@ exports.addToHistory = function(title,fromPageRect,historyTitle) {
 };
 
 /*
+Add a new tiddler to the story river
+title: a title string or an array of title strings
+fromTitle: the title of the tiddler from which the navigation originated
+storyTitle: title of story tiddler (defaults to $:/StoryList)
+options: see story.js
+*/
+exports.addToStory = function(title,fromTitle,storyTitle,options) {
+	var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
+	story.addToStory(title,fromTitle,options);
+};
+
+/*
 Invoke the available upgrader modules
 titles: array of tiddler titles to be processed
 tiddlers: hashmap by title of tiddler fields of pending import tiddlers. These can be modified by the upgraders. An entry with no fields indicates a tiddler that was pending import has been suppressed. When entries are added to the pending import the tiddlers hashmap may have entries that are not present in the titles array
