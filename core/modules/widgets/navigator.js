@@ -324,9 +324,11 @@ Generate a title for the draft of a given tiddler
 */
 NavigatorWidget.prototype.generateDraftTitle = function(title) {
 	var c = 0,
-		draftTitle;
+		draftTitle,
+		username = this.wiki.getTiddlerText("$:/status/UserName"),
+		attribution = username ? " by " + username : "";
 	do {
-		draftTitle = "Draft " + (c ? (c + 1) + " " : "") + "of '" + title + "'";
+		draftTitle = "Draft " + (c ? (c + 1) + " " : "") + "of '" + title + "'" + attribution;
 		c++;
 	} while(this.wiki.tiddlerExists(draftTitle));
 	return draftTitle;
