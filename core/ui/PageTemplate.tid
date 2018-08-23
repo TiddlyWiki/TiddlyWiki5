@@ -1,7 +1,7 @@
 title: $:/core/ui/PageTemplate
 
 \define containerClasses()
-tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$
+tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 \end
 
 <$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
@@ -12,7 +12,7 @@ tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$
 
 <$set name="tv-config-toolbar-class" value={{$:/config/Toolbar/ButtonClass}}>
 
-<$set name="themeTitle" value={{$:/view}}>
+<$set name="storyviewTitle" value={{$:/view}}>
 
 <$set name="currentTiddler" value={{$:/language}}>
 
