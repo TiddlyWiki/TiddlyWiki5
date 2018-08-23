@@ -28,9 +28,9 @@ The HTTP WebServer functionality has been significantly improved:
 
 See WebServer for more details, or [[see the changes on GitHub|https://github.com/Jermolene/TiddlyWiki5/pull/2679]].
 
-!! New and Improved Plugins
+!! Comment Plugin
 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/acaa07a964a004759ddb8fb755484918b3322815]] new commenting plugin -- see $:/plugins/tiddlywiki/comments
+This release [[adds|https://github.com/Jermolene/TiddlyWiki5/commit/acaa07a964a004759ddb8fb755484918b3322815]] a new commenting plugin -- see $:/plugins/tiddlywiki/comments
 
 !! Translation Improvements
 
