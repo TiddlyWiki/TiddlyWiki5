@@ -916,4 +916,10 @@ exports.transliterate = function(str) {
 	});
 };
 
+exports.transliterateToSafeASCII = function(str) {
+	return str.replace(/[^\x00-\x7F]/g,function(ch) {
+		return exports.transliterationPairs[ch] || ""
+	});
+};
+
 })();
