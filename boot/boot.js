@@ -1818,7 +1818,7 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 	$tw.loadPlugins(wikiInfo.themes,$tw.config.themesPath,$tw.config.themesEnvVar);
 	$tw.loadPlugins(wikiInfo.languages,$tw.config.languagesPath,$tw.config.languagesEnvVar);
 	// Load the wiki files, registering them as writable
-	var resolvedWikiPath = path.resolve(wikiPath,$tw.config.wikiTiddlersSubDir);
+	var resolvedWikiPath = path.resolve(wikiPath,wikiInfo.wikiTiddlersSubDir || $tw.config.wikiTiddlersSubDir);
 	$tw.utils.each($tw.loadTiddlersFromPath(resolvedWikiPath),function(tiddlerFile) {
 		if(!options.readOnly && tiddlerFile.filepath) {
 			$tw.utils.each(tiddlerFile.tiddlers,function(tiddler) {
@@ -1845,9 +1845,9 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
 	}
 	// Save the path to the tiddlers folder for the filesystemadaptor
-	$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,config["default-tiddler-location"] || $tw.config.wikiTiddlersSubDir);
+	$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,config["default-tiddler-location"] || wikiInfo.wikiTiddlersSubDir || $tw.config.wikiTiddlersSubDir);
 	// Load any plugins within the wiki folder
-	var wikiPluginsPath = path.resolve(wikiPath,$tw.config.wikiPluginsSubDir);
+	var wikiPluginsPath = path.resolve(wikiPath,wikiInfo.wikiPluginsSubDir || $tw.config.wikiPluginsSubDir);
 	if(fs.existsSync(wikiPluginsPath)) {
 		var pluginFolders = fs.readdirSync(wikiPluginsPath);
 		for(var t=0; t<pluginFolders.length; t++) {
@@ -1858,7 +1858,7 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		}
 	}
 	// Load any themes within the wiki folder
-	var wikiThemesPath = path.resolve(wikiPath,$tw.config.wikiThemesSubDir);
+	var wikiThemesPath = path.resolve(wikiPath,wikiInfo.wikiThemesSubDir || $tw.config.wikiThemesSubDir);
 	if(fs.existsSync(wikiThemesPath)) {
 		var themeFolders = fs.readdirSync(wikiThemesPath);
 		for(var t=0; t<themeFolders.length; t++) {
@@ -1869,7 +1869,7 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		}
 	}
 	// Load any languages within the wiki folder
-	var wikiLanguagesPath = path.resolve(wikiPath,$tw.config.wikiLanguagesSubDir);
+	var wikiLanguagesPath = path.resolve(wikiPath,wikiInfo.wikiLanguagesSubDir || $tw.config.wikiLanguagesSubDir);
 	if(fs.existsSync(wikiLanguagesPath)) {
 		var languageFolders = fs.readdirSync(wikiLanguagesPath);
 		for(var t=0; t<languageFolders.length; t++) {
