@@ -32,6 +32,12 @@ See WebServer for more details, or [[see the changes on GitHub|https://github.co
 
 This release [[adds|https://github.com/Jermolene/TiddlyWiki5/commit/acaa07a964a004759ddb8fb755484918b3322815]] a new commenting plugin -- see $:/plugins/tiddlywiki/comments
 
+!!! Single Tiddler Mode ([[#3412|https://github.com/Jermolene/TiddlyWiki5/pull/3412]])
+
+"Single tiddler mode" fixes a long-standing problem with the ''zoomin'' story view whereby although only a single tiddler was displayed at once, all previously navigated tiddlers were actually open, but hidden. This had a significant effect on performance, and a number of unexpected side-effects that hampered usability.
+
+Single tiddler mode changes navigation to replace the story list with the target tiddler, rather than the usual behaviour of adding the target tiddler to the story list. It is engaged automatically when selecting the ''zoomin'' story view.
+
 !! Translation Improvements
 
 New and improved translations:
@@ -68,10 +74,6 @@ New and improved translations:
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3334]] problem with using full screen on secondary windows
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/a3a4c28143138ca2bde1b8426c910b5e3d6a7110]] subtle bug whereby the RevealWidget was not refreshing properly when the state tiddler of a popup changed
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/3373]] problem with malformed HTML entities
-
-!! Developer Bug Fixes and Improvements
-
-* 
 
 ! Contributors
 
