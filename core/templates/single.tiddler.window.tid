@@ -12,7 +12,7 @@ title: $:/core/templates/single.tiddler.window
 
 <$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
 
-<$navigator story="$:/StoryList" history="$:/HistoryList">
+<$navigator story="$:/StoryList" history="$:/HistoryList" singleTiddlerMode={{{ [{$:/view}getstoryviewsingletiddlermode[]] }}}>
 
 <$transclude mode="block"/>
 

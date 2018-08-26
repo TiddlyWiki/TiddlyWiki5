@@ -116,7 +116,11 @@ NavigatorWidget.prototype.replaceFirstTitleInStory = function(storyList,oldTitle
 };
 
 NavigatorWidget.prototype.addToStory = function(title,fromTitle) {
-	this.wiki.addToStory(title,fromTitle,this.storyTitle,{openLinkFromInsideRiver: this.getAttribute("openLinkFromInsideRiver","top"),openLinkFromOutsideRiver: this.getAttribute("openLinkFromOutsideRiver","top")});
+	this.wiki.addToStory(title,fromTitle,this.storyTitle,{
+		openLinkFromInsideRiver: this.getAttribute("openLinkFromInsideRiver","top"),
+		openLinkFromOutsideRiver: this.getAttribute("openLinkFromOutsideRiver","top"),
+		singleTiddlerMode: this.getAttribute("singleTiddlerMode","no") === "yes",
+	});
 };
 
 /*
