@@ -40,6 +40,8 @@ New and improved translations:
 
 !! Usability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3bfa9c6f100cfd7107f2c5bf4cfc5dd40a93d54d]] persistent indicators at the bottom of the window showing any hidden drafts
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/7dbe117bc55a9cda91ce7b480525a2b2a70b8229]] current username (if set) to the title of draft tiddlers, making them easier to identify in multiuser scenarios
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6b14969cf60bdcad16ac5978030bf1d929a712c6]] a warning for binary tiddlers in view mode
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/issues/3255]] permalink/permaview to copy the URL to the clipboard as well as updating the address bar. This behaviour can be customised in $:/ControlPanel settings
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/d96c84426484747ab19d92b1d9f49e01c9dad985]] saving to use the $:/SiteTitle as the basis of the filename
