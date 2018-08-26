@@ -60,6 +60,10 @@ NavigatorWidget.prototype.execute = function() {
 	// Get our parameters
 	this.storyTitle = this.getAttribute("story");
 	this.historyTitle = this.getAttribute("history");
+	this.openLinkFromInsideRiver = this.getAttribute("openLinkFromInsideRiver","top");
+	this.openLinkFromOutsideRiver = this.getAttribute("openLinkFromOutsideRiver","top");
+	this.singleTiddlerMode = this.getAttribute("singleTiddlerMode","no") === "yes";
+	this.relinkOnRename = this.getAttribute("relinkOnRename","no").toLowerCase().trim() === "yes";
 	this.setVariable("tv-story-list",this.storyTitle);
 	this.setVariable("tv-history-list",this.historyTitle);
 	// Construct the child widgets
@@ -71,7 +75,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 NavigatorWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.story || changedAttributes.history) {
+	if(changedAttributes.story || changedAttributes.history || changedAttributes.openLinkFromInsideRiver || changedAttributes.openLinkFromOutsideRiver || changedAttributes.singleTiddlerMode || changedAttributes.relinkOnRename) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -117,9 +121,9 @@ NavigatorWidget.prototype.replaceFirstTitleInStory = function(storyList,oldTitle
 
 NavigatorWidget.prototype.addToStory = function(title,fromTitle) {
 	this.wiki.addToStory(title,fromTitle,this.storyTitle,{
-		openLinkFromInsideRiver: this.getAttribute("openLinkFromInsideRiver","top"),
-		openLinkFromOutsideRiver: this.getAttribute("openLinkFromOutsideRiver","top"),
-		singleTiddlerMode: this.getAttribute("singleTiddlerMode","no") === "yes",
+		openLinkFromInsideRiver: this.openLinkFromInsideRiver,
+		openLinkFromOutsideRiver: this.openLinkFromOutsideRiver,
+		singleTiddlerMode: this.singleTiddlerMode
 	});
 };
 
@@ -324,8 +328,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 				newTiddler = $tw.hooks.invokeHook("th-saving-tiddler",newTiddler);
 				this.wiki.addTiddler(newTiddler);
 				// If enabled, relink references to renamed tiddler
-				var shouldRelink = this.getAttribute("relinkOnRename","no").toLowerCase().trim() === "yes";
-				if(isRename && shouldRelink && this.wiki.tiddlerExists(draftOf)) {
+				if(isRename && this.relinkOnRename && this.wiki.tiddlerExists(draftOf)) {
 console.log("Relinking '" + draftOf + "' to '" + draftTitle + "'");
 					this.wiki.relinkTiddler(draftOf,draftTitle);
 				}
