@@ -127,6 +127,12 @@ NavigatorWidget.prototype.addToStory = function(title,fromTitle) {
 	});
 };
 
+NavigatorWidget.prototype.removeFromStory = function(title) {
+	var storyList = this.getStoryList();
+	this.removeTitleFromStory(storyList,title);
+	this.saveStoryList(storyList);
+};
+
 /*
 Add a new record to the top of the history stack
 title: a title string or an array of title strings
@@ -152,11 +158,34 @@ NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 
 // Close a specified tiddler
 NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
-	var title = event.param || event.tiddlerTitle,
-		storyList = this.getStoryList();
-	// Look for tiddlers with this title to close
-	this.removeTitleFromStory(storyList,title);
-	this.saveStoryList(storyList);
+	var title = event.param || event.tiddlerTitle;
+	if(this.singleTiddlerMode) {
+		// Get the history stack and find the topmost occurance of the current tiddler
+		var history = this.wiki.getTiddlerDataCached(this.historyTitle,[]),
+			currPos = history.findIndex(function(historyRecord) {
+				return historyRecord.title === title;
+			}),
+			newTitle;
+		// Skip over any duplicates
+		while(currPos > 0 && history[currPos - 1].title === title) {
+			currPos--;
+		}
+		// Get the new title
+		if(currPos > 0) {
+			newTitle = history[currPos - 1].title;
+		}
+		// Navigate to the new title if we've got one
+		if(newTitle) {
+			this.addToStory(newTitle);
+			this.addToHistory(newTitle);
+		} else {
+			// If there's nothing to navigate back to then we really do close the last tiddler
+			this.removeFromStory(title);
+		}
+	} else {
+		// Look for tiddlers with this title to close
+		this.removeFromStory(title);
+	}
 	return false;
 };
 
