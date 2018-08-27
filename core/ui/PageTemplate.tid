@@ -14,6 +14,8 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 
 <$set name="storyviewTitle" value={{$:/view}}>
 
+<$set name="tv-storyview-single-tiddler-mode" value={{{ [<storyviewTitle>getstoryviewsingletiddlermode[]] }}}>
+
 <$set name="currentTiddler" value={{$:/language}}>
 
 <$set name="languageTitle" value={{!!name}}>
@@ -22,7 +24,7 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 
 <div class=<<containerClasses>>>
 
-<$navigator story="$:/StoryList" history="$:/HistoryList" singleTiddlerMode={{{ [{$:/view}getstoryviewsingletiddlermode[]] }}} openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
+<$navigator story="$:/StoryList" history="$:/HistoryList" singleTiddlerMode=<<tv-storyview-single-tiddler-mode>> openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
 
 <$dropzone>
 
@@ -37,6 +39,8 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 </$navigator>
 
 </div>
+
+</$set>
 
 </$set>
 
