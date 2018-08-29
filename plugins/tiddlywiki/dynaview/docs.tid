@@ -34,23 +34,6 @@ The background task can optionally dynamically update a pair of state tiddlers w
 * Set the configuration tiddler $:/config/DynaView/ViewportDimensions to the text "yes" to enable this feature
 * The viewport dimensions can be found in $:/state/DynaView/ViewportDimensions/Width and $:/state/DynaView/ViewportDimensions/Height
 
-!! Font "Optisizer"
-
-The background task can optionally dynamically optimise the font size of a passage of text to match a desired line length.
-
-* Set the configuration tiddler $:/config/DynaView/Optisizer to the text "yes" to enable this feature
-* Optionally, update the configuration tiddler $:/config/DynaView/Optisizer/Text with the "maquette" -- a character string matchng the desired length (this string should not include spaces).
-* Assign the following CSS classes to appropriate elements on the page:
-** `.tc-dynaview-optisizer-site` for an HTML element whose `offsetWidth` property gives the desired output width
-** `.tc-dynaview-optisizer-maquette` for an HTML element that will contain the maquette
-* The computed optimum font size can be found in the tiddler $:/state/DynaView/Optisizer/FontSize
-
-The tiddler $:/plugins/tiddlywiki/dynaview/optisizer-maquette contains an example configuration that can be used to adjust the size of tiddler body text. To use it:
-
-* Set $:/config/DynaView/Optisizer to the text "yes"
-* Set $:/themes/tiddlywiki/vanilla/metrics/bodyfontsize to `{{$:/state/DynaView/Optisizer/FontSize}}`
-* Set $:/themes/tiddlywiki/vanilla/metrics/bodylineheight to `1.5` to ensure that the line height matches the font size
-
 ! Zoom Features
 
 !! Document Body Zoom Classes
