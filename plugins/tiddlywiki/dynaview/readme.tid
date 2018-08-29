@@ -7,7 +7,6 @@ This plugin makes it possible to build user interfaces that dynamically respond 
 * CSS classes that allow rendering to be deferred until the output is scrolled into view
 * CSS classes that allow the opacity of DOM elements to vary according to the current zoom level
 * A daemon that can dynamically update a pair of state tiddlers with the current dimensions of the browser viewport
-* A daemon that can dynamically adjust the size of text to yield a particular number of characters per line
 * A daemon that can dynamically update the address bar with the title of the tiddler at the top of the viewport
 
 Some points to note about the zoom features:

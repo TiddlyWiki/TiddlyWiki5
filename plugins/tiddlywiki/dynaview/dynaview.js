@@ -28,7 +28,6 @@ exports.startup = function() {
 	window.addEventListener("scroll",onScroll,false);
 	window.addEventListener("resize",onResize,false);
 	$tw.hooks.addHook("th-page-refreshed",function() {
-		optisizeFonts();
 		checkTopmost();
 		checkVisibility();
 		saveViewportDimensions();
@@ -58,62 +57,12 @@ function onResize(event) {
 
 function worker() {
 	if(isWaitingForAnimationFrame & (ANIM_FRAME_CAUSED_BY_RESIZE | ANIM_FRAME_CAUSED_BY_LOAD)) {
-		optisizeFonts();
 		saveViewportDimensions();
 	}
 	setZoomClasses();
 	checkTopmost();
 	checkVisibility();
 	isWaitingForAnimationFrame = 0;
-}
-
-var lastSiteWidth, lastMaquetteString;
-
-function optisizeFonts() {
-	if($tw.wiki.getTiddlerText("$:/config/DynaView/Optisizer") === "yes") {
-		var domSite = document.querySelector(".tc-dynaview-optisizer-site"),
-			domMaquette = document.querySelector(".tc-dynaview-optisizer-maquette");
-		if(domSite && domMaquette) {
-			// Check that we're not at the same size as last time
-			if(domSite.offsetWidth === lastSiteWidth && $tw.wiki.getTiddlerText("$:/config/DynaView/Optisizer/Text") === lastMaquetteString) {
-				return;
-			}
-			// Get the current font size
-			domMaquette.style.fontSize = "";
-			var initialFontSize = parseInt(window.getComputedStyle(domMaquette).fontSize,10),
-				minFontSize = 1,
-				maxFontSize = 100,
-				adjustFontSize = maxFontSize,
-				newFontSize = initialFontSize,
-				maquetteWidth;
-			lastSiteWidth = domSite.offsetWidth;
-			lastMaquetteString = $tw.wiki.getTiddlerText("$:/config/DynaView/Optisizer/Text");
-			while(domMaquette.firstChild) {
-				domMaquette.removeChild(domMaquette.firstChild);
-			}
-			domMaquette.appendChild(document.createTextNode(lastMaquetteString));
-			// We use a binary search algorithm to find the optimum size
-			do {
-				// Apply the size we're considering
-				domMaquette.style.fontSize = newFontSize + "px";
-				// Measure the width of the maquette
-				maquetteWidth = domMaquette.offsetWidth;
-				// Adjust bigger or smaller
-				if(maquetteWidth < lastSiteWidth) {
-					newFontSize += adjustFontSize;
-				} else {
-					newFontSize -= adjustFontSize;
-				}
-				newFontSize = Math.min(newFontSize,maxFontSize);
-				newFontSize = Math.max(newFontSize,minFontSize);
-				adjustFontSize = adjustFontSize / 2;
-			} while (adjustFontSize > 0.5);
-			var newFontSizeString = newFontSize + "px";
-			if($tw.wiki.getTiddlerText("$:/state/DynaView/Optisizer/FontSize") !== newFontSizeString) {
-				$tw.wiki.setText("$:/state/DynaView/Optisizer/FontSize",undefined,undefined,newFontSizeString,undefined);
-			}
-		}
-	}
 }
 
 function setZoomClasses() {
