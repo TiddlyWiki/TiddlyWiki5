@@ -1,5 +1,5 @@
-title: $:/plugins/tiddlywiki/help/styles
-tags: [[$:/tags/Stylesheet]]
+title: $:/plugins/tiddlywiki/dynaview/styles
+tags: $:/tags/Stylesheet
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
