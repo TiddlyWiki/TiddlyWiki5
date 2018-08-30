@@ -54,6 +54,7 @@ These are the available system tags
 |<<tag "$:/tags/TagDropdown">> |for tags dropdown sorting |
 |<<tag "$:/tags/Texteditor/Snippet">> |for text snippets |
 |<<tag "$:/tags/TiddlerInfo">> |for tiddler info panel tabs |
+|<<tag "$:/tags/TiddlerInfoSegment">> |for tiddler info panel segments |
 |<<tag "$:/tags/TiddlerInfo/Advanced">> |for tabs under the advanced tiddler tab |
 |<<tag "$:/tags/ToolbarButtonStyle">> |for the style of the buttons |
 |<<tag "$:/tags/TopLeftBar">> |for the top left bar |
