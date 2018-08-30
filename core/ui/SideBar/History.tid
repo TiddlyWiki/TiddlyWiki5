@@ -1,5 +1,0 @@
-title: $:/core/ui/SideBar/History
-tags: $:/tags/SideBar
-caption: {{$:/language/SideBar/History/Caption}}
-
-<$list filter="[list[$:/HistoryList]limit[100]]" template="$:/core/ui/ListItemTemplate"/>
