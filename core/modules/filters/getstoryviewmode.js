@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/filters/getstoryviewsingletiddlermode.js
+title: $:/core/modules/filters/getstoryviewmode.js
 type: application/javascript
 module-type: filteroperator
 
-Filter operator for retrieving the single tiddler mode status of a storyview.
+Filter operator for retrieving modes from a storyview. Only "singletiddlermode" is implemented at present
 
 \*/
 (function(){
@@ -16,10 +16,13 @@ Filter operator for retrieving the single tiddler mode status of a storyview.
 Export our filter functions
 */
 
-exports.getstoryviewsingletiddlermode = function(source,operator,options) {
+exports.getstoryviewmode = function(source,operator,options) {
 	// Initialise the storyviews if they've not been done already
 	var storyviews = {};
 	$tw.modules.applyMethods("storyview",storyviews);
+	if(operator.operand !== "singletiddlermode") {
+		return [];
+	}
 	var results = [];
 	source(function(tiddler,title) {
 		var storyview = storyviews[title];

@@ -14,7 +14,7 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 
 <$set name="storyviewTitle" value={{$:/view}}>
 
-<$set name="tv-storyview-single-tiddler-mode" value={{{ [<storyviewTitle>getstoryviewsingletiddlermode[]] }}}>
+<$set name="tv-storyview-single-tiddler-mode" value={{{ [<storyviewTitle>getstoryviewmode[singletiddlermode]] }}}>
 
 <$set name="currentTiddler" value={{$:/language}}>
 
