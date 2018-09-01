@@ -158,10 +158,20 @@ function checkTopmost() {
 	}
 }
 
+var previousViewportWidth, previousViewportHeight;
+
 function saveViewportDimensions() {
+	var viewportWidth = window.innerWidth || document.documentElement.clientWidth,
+		viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+	if(document.querySelector(".tc-dynaview-request-refresh-on-resize")) {
+		if(previousViewportWidth !== viewportWidth || previousViewportHeight !== viewportHeight) {
+			var count = parseInt($tw.wiki.getTiddlerText("$:/state/DynaView/ViewportDimensions/ResizeCount","0"),10) || 0;
+			$tw.wiki.addTiddler(new $tw.Tiddler({title: "$:/state/DynaView/ViewportDimensions/ResizeCount", text: (count + 1) + ""}));
+			previousViewportWidth = viewportWidth;
+			previousViewportHeight = viewportHeight;
+		}
+	}
 	if($tw.wiki.getTiddlerText("$:/config/DynaView/ViewportDimensions") === "yes") {
-		var viewportWidth = window.innerWidth || document.documentElement.clientWidth,
-			viewportHeight = window.innerHeight || document.documentElement.clientHeight;
 		if($tw.wiki.getTiddlerText("$:/state/DynaView/ViewportDimensions/Width") !== viewportWidth.toString()) {
 			$tw.wiki.setText("$:/state/DynaView/ViewportDimensions/Width",undefined,undefined,viewportWidth.toString(),undefined);
 		}

@@ -27,6 +27,13 @@ The background task detects the tiddler at the top of the viewport and sets the 
 
 ! Viewport Size Features
 
+!! Resize Tracking
+
+Some widgets require re-rendering or refreshing if the size of the viewport changes. This can be accomplished using "resize counting" in two steps:
+
+* Ensure that a DOM element with the class `tc-dynaview-request-refresh-on-resize` is present in the DOM to enable resize counting
+* Have the widget check for changes to the tiddler $:/state/DynaView/ViewportDimensions/ResizeCount to detect viewport resizes
+
 !! Viewport Size Tracking
 
 The background task can optionally dynamically update a pair of state tiddlers with the dimensions of the browser viewport.
