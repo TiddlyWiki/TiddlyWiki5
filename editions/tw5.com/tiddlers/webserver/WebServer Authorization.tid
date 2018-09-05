@@ -1,5 +1,5 @@
 created: 20180630194006239
-modified: 20180701174944267
+modified: 20180904174030250
 tags: WebServer
 title: WebServer Authorization
 type: text/vnd.tiddlywiki
@@ -12,6 +12,17 @@ The available special tokens are:
 
 * ''(anon)'' - indicates all anonymous users
 * ''(authenticated)'' - indicates all authenticated users
+
+!! Read-only Mode
+
+Read-only mode is engaged when the current user is not authorized to write to the current wiki.
+
+User interface features concerned with creating or editing content are disabled in read-only mode:
+
+* ''clone'', ''delete'', ''new-here'' and ''new-journal-here'' tiddler toolbar buttons
+* ''import'', ''manager'', ''new-tiddler'' ''new-image'' and ''new-journal'' page control buttons
+
+The tiddler $:/status/IsReadOnly is set to `yes` when read-only mode is engaged.
 
 !! Examples
 
