@@ -11,31 +11,36 @@ caption: {{$:/language/TagManager/Caption}}
 </$link>
 </$list>
 \end
-\define iconEditor(title)
-<div class="tc-drop-down-wrapper">
-<$button popup=<<qualify "$:/state/popup/icon/$title$">> class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/down-arrow}}</$button>
-<$reveal state=<<qualify "$:/state/popup/icon/$title$">> type="popup" position="belowleft" text="" default="">
+\define iconEditor-inner(title,state)
+<$button popup=<<__state__>> class="tc-btn-invisible tc-btn-dropdown" nostatereference="true">{{$:/core/images/down-arrow}}</$button>
+<$reveal state=<<__state__>> type="popup" position="belowleft" text="" default="" nostatereference="true">
 <div class="tc-drop-down">
-<$linkcatcher to="$title$!!icon">
-<<iconEditorTab type:"!">>
+<$linkcatcher actions="""<$action-setfield $tiddler={{{ [[$(encodedTitle)$]decodeuricomponent[]] }}} icon=<<navigateTo>>/>""">
+<$macrocall $name="iconEditorTab" type="!"/>
 <hr/>
-<<iconEditorTab type:"">>
+<$macrocall $name="iconEditorTab" type=""/>
 </$linkcatcher>
 </div>
 </$reveal>
+\end
+\define iconEditor(title)
+<$wikify name="toggle-state" text="""<$macrocall $name="qualify" title={{{ [[$:/state/popup/icon/]addsuffix<__title__>] }}}/>""">
+<div class="tc-drop-down-wrapper">
+<$macrocall $name="iconEditor-inner" title=<<__title__>> state=<<toggle-state>>/>
 </div>
+</$wikify>
 \end
 \define qualifyTitle(title)
 $title$$(currentTiddler)$
 \end
 \define toggleButton(state)
-<$reveal state="$state$" type="match" text="closed" default="closed">
-<$button set="$state$" setTo="open" class="tc-btn-invisible tc-btn-dropdown" selectedClass="tc-selected">
+<$reveal state=<<__state__>> type="match" text="closed" default="closed" nostatereference="true">
+<$button set=<<__state__>> setTo="open" class="tc-btn-invisible tc-btn-dropdown" selectedClass="tc-selected" nostatereference="true">
 {{$:/core/images/info-button}}
 </$button>
 </$reveal>
-<$reveal state="$state$" type="match" text="open" default="closed">
-<$button set="$state$" setTo="closed" class="tc-btn-invisible tc-btn-dropdown" selectedClass="tc-selected">
+<$reveal state=<<__state__>> type="match" text="open" default="closed" nostatereference="true">
+<$button set=<<__state__>> setTo="closed" class="tc-btn-invisible tc-btn-dropdown" selectedClass="tc-selected" nostatereference="true">
 {{$:/core/images/info-button}}
 </$button>
 </$reveal>
@@ -50,21 +55,24 @@ $title$$(currentTiddler)$
 <th><<lingo Info/Heading>></th>
 </tr>
 <$list filter="[tags[]!is[system]sort[title]]">
+<$wikify name="toggle-state" text="""<$macrocall $name="qualify" title={{{ [[$:/state/tag-manager/]addsuffix<currentTiddler>] }}}/>""">
 <tr>
 <td><$edit-text field="color" tag="input" type="color"/></td>
-<td><$macrocall $name="tag" tag=<<currentTiddler>>/></td>
+<td><$list filter="[<currentTiddler>]" template="$:/core/ui/TagTemplate"/></td>
 <td><$count filter="[all[current]tagging[]]"/></td>
 <td>
-<$macrocall $name="iconEditor" title={{!!title}}/>
+<$vars encodedTitle={{{ [<currentTiddler>encodeuricomponent[]] }}}>
+<$macrocall $name="iconEditor" title={{{ [<currentTiddler>] }}}/>
+</$vars>
 </td>
 <td>
-<$macrocall $name="toggleButton" state=<<qualifyTitle "$:/state/tag-manager/">> /> 
+<$macrocall $name="toggleButton" state=<<toggle-state>> />
 </td>
 </tr>
 <tr>
 <td></td>
 <td colspan="4">
-<$reveal state=<<qualifyTitle "$:/state/tag-manager/">> type="match" text="open" default="">
+<$reveal state=<<toggle-state>> type="match" text="open" default="" nostatereference="true">
 <table>
 <tbody>
 <tr><td><<lingo Colour/Heading>></td><td><$edit-text field="color" tag="input" type="text" size="9"/></td></tr>
@@ -74,6 +82,7 @@ $title$$(currentTiddler)$
 </$reveal>
 </td>
 </tr>
+</$wikify>
 </$list>
 <tr>
 <td></td>
