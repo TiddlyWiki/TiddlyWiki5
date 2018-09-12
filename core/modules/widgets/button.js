@@ -167,7 +167,7 @@ ButtonWidget.prototype.triggerPopup = function(event) {
 };
 
 ButtonWidget.prototype.setTiddler = function() {
-	if(this.getVariable("noStateReference") !== "true") {
+	if(this.noStateReference !== "true") {
 		this.wiki.setTextReference(this.set,this.setTo,this.getVariable("currentTiddler"));
 	} else {
 		this.wiki.setText(this.set,"text",undefined,this.setTo);
