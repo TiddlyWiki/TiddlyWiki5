@@ -122,7 +122,7 @@ ButtonWidget.prototype.getBoundingClientRect = function() {
 };
 
 ButtonWidget.prototype.isSelected = function() {
-	if(this.getVariable("noStateReference") !== "true") {
+	if(this.noStateReference !== "true") {
 		return this.wiki.getTextReference(this.set,this.defaultSetValue,this.getVariable("currentTiddler")) === this.setTo;
 	} else {
 		return this.wiki.getTiddlerText(this.set) === this.setTo;
@@ -160,7 +160,7 @@ ButtonWidget.prototype.triggerPopup = function(event) {
 		wiki: this.wiki,
 		widget: this
 	};
-	if(this.getVariable("noStateReference") === "true") {
+	if(this.noStateReference === "true") {
 		options.noStateReference = "true";
 	}
 	$tw.popup.triggerPopup(options);
@@ -196,6 +196,7 @@ ButtonWidget.prototype.execute = function() {
 	this.buttonTag = this.getAttribute("tag");
 	this.dragTiddler = this.getAttribute("dragTiddler");
 	this.dragFilter = this.getAttribute("dragFilter");
+	this.noStateReference = this.getAttribute("noStateReference");
 	// Make child widgets
 	this.makeChildWidgets();
 };
