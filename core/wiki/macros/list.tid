@@ -68,7 +68,7 @@ tags: $:/tags/Macro
 \end
 
 \define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div")
-<$set name="tag" value="""$tag$""">
+<$set name="tag" value=<<__tag__>>>
 <$list filter="[<tag>tagging[]$subFilter$]" emptyMessage=<<__emptyMessage__>>>
 <$elementTag$ class="tc-menu-list-item">
 <$droppable actions=<<list-tagged-draggable-drop-actions>>>
