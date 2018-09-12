@@ -122,7 +122,11 @@ ButtonWidget.prototype.getBoundingClientRect = function() {
 };
 
 ButtonWidget.prototype.isSelected = function() {
-    return this.wiki.getTextReference(this.set,this.defaultSetValue,this.getVariable("currentTiddler")) === this.setTo;
+	if(this.getVariable("noStateReference") !== "true") {
+		return this.wiki.getTextReference(this.set,this.defaultSetValue,this.getVariable("currentTiddler")) === this.setTo;
+	} else {
+		return this.wiki.getTiddlerText(this.set) === this.setTo;
+	}
 };
 
 ButtonWidget.prototype.isPoppedUp = function() {
@@ -150,15 +154,24 @@ ButtonWidget.prototype.dispatchMessage = function(event) {
 };
 
 ButtonWidget.prototype.triggerPopup = function(event) {
-	$tw.popup.triggerPopup({
+	var options = {
 		domNode: this.domNodes[0],
 		title: this.popup,
-		wiki: this.wiki
-	});
+		wiki: this.wiki,
+		widget: this
+	};
+	if(this.getVariable("noStateReference") === "true") {
+		options.noStateReference = "true";
+	}
+	$tw.popup.triggerPopup(options);
 };
 
 ButtonWidget.prototype.setTiddler = function() {
-	this.wiki.setTextReference(this.set,this.setTo,this.getVariable("currentTiddler"));
+	if(this.getVariable("noStateReference") !== "true") {
+		this.wiki.setTextReference(this.set,this.setTo,this.getVariable("currentTiddler"));
+	} else {
+		this.wiki.setText(this.set,"text",undefined,this.setTo);
+	}
 };
 
 /*
