@@ -19,7 +19,12 @@ Export our filter functions
 exports.decodeuricomponent = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		results.push(decodeURIComponent(title));
+		var value = title;
+		try {
+			value = decodeURIComponent(title);
+		} catch(e) {
+		}
+		results.push(value);
 	});
 	return results;
 };
@@ -35,7 +40,12 @@ exports.encodeuricomponent = function(source,operator,options) {
 exports.decodeuri = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		results.push(decodeURI(title));
+		var value = title;
+		try {
+			value = decodeURI(title);
+		} catch(e) {
+		}
+		results.push(value);
 	});
 	return results;
 };
