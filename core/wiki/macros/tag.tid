@@ -9,7 +9,7 @@ color:$(foregroundColor)$;
 
 \define tag-pill-inner(tag,icon,colour,fallbackTarget,colourA,colourB,element-tag,element-attributes,actions)
 <$vars foregroundColor=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">> backgroundColor="""$colour$""">
-<$element-tag$ $element-attributes$ class="tc-tag-label tc-btn-invisible" style=<<tag-pill-styles>>>
+<$element-tag$ $element-attributes$ class="tc-tag-label tc-btn-invisible tc-tab-label-colored" style=<<tag-pill-styles>>>
 $actions$<$transclude tiddler="""$icon$"""/> <$view tiddler="""$tag$""" field="title" format="text" />
 </$element-tag$>
 </$vars>
