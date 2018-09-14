@@ -640,7 +640,6 @@ button.tc-untagged-label {
 .tc-tag-label svg, .tc-tag-label img {
 	height: 1em;
 	width: 1em;
-	fill: <<colour tag-foreground>>;
 	vertical-align: text-bottom;
 }
 
