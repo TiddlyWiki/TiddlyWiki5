@@ -101,6 +101,7 @@ RevealWidget.prototype.execute = function() {
 	this.retain = this.getAttribute("retain","no");
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
+	this.noStateReference = this.getAttribute("noStateReference");
 	// Compute the title of the state tiddler and read it
 	this.stateTitle = this.state;
 	this.readState();
@@ -115,7 +116,12 @@ Read the state tiddler
 */
 RevealWidget.prototype.readState = function() {
 	// Read the information from the state tiddler
-	var state = this.stateTitle ? this.wiki.getTextReference(this.stateTitle,this["default"],this.getVariable("currentTiddler")) : this["default"];
+	var state;
+	if(this.noStateReference !== "true") {
+		state = this.stateTitle ? this.wiki.getTextReference(this.stateTitle,this["default"],this.getVariable("currentTiddler")) : this["default"];
+	} else {
+		state = this.stateTitle ? this.wiki.getTiddlerText(this.stateTitle,this["default"]) :this["default"];
+	}
 	switch(this.type) {
 		case "popup":
 			this.readPopupState(state);
