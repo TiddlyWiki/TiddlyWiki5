@@ -1154,7 +1154,7 @@ exports.readFiles = function(files,options) {
 			}
 		};
 	for(var f=0; f<files.length; f++) {
-		this.readFile(files[f],Object.assign({},options,{callback: readFileCallback}));
+		this.readFile(files[f],$tw.utils.extend({},options,{callback: readFileCallback}));
 	}
 	return files.length;
 };
