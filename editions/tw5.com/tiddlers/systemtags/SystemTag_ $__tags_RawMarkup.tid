@@ -1,0 +1,9 @@
+caption: $:/tags/RawMarkup
+created: 20180926170345251
+description: marks plain text tiddlers to be included as raw markup at the bottom of the `<head>` section in the generated HTML file
+modified: 20180926171456471
+tags: SystemTags
+title: SystemTag: $:/tags/RawMarkup
+type: text/vnd.tiddlywiki
+
+The [[system tag|SystemTags]] `$:/tags/RawMarkup` marks plain text tiddlers to be included as raw markup at the bottom of the `<head>` section in the generated HTML file
