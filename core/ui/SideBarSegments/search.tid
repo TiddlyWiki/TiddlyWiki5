@@ -20,8 +20,10 @@ tags: $:/tags/SideBarSegment
 <$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
 {{$:/core/images/down-arrow}}
 <$list filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
-<$set name="resultCount" value="""<$count filter="[!is[system]search{$(searchTiddler)$}]"/>""">
+<$set name="searchTerm" value={{{ [<searchTiddler>get[text]] }}}>
+<$set name="resultCount" value="""<$count filter="[!is[system]search<searchTerm>]"/>""">
 {{$:/language/Search/Matches}}
+</$set>
 </$set>
 </$list>
 </$button>

@@ -1,68 +1,31 @@
 created: 20130822080600000
-modified: 20180808094618436
-tags: Concepts
+modified: 20180927080631239
+tags: Reference Concepts
 title: SystemTags
 type: text/vnd.tiddlywiki
 
 System tags are used to give special behaviour to tiddlers.
 
-! Available system tags
+These are the system tags defined by the ~TiddlyWiki core:
 
-These are the available system tags
+<table>
+<tbody>
+<$list filter="[tag[SystemTags]]">
+<tr>
+<td>
+<$macrocall $name="tag" tag={{!!caption}}/>
+</td>
+<td>
+<$link>
+{{!!description}}
+</$link>
+</td>
+</tr>
+</$list>
+</tbody>
+</table>
 
-|<<tag "$:/tags/AboveStory">> |for elements to be placed at the top of the story river |
-|<<tag "$:/tags/AdvancedSearch">> |for search elements |
-|<<tag "$:/tags/AdvancedSearch/FilterButton">> |for filter buttons |
-|<<tag "$:/tags/Alert">> |for alerts |
-|<<tag "$:/tags/BelowStory">> |for elements to be placed at the bottom of the story river |
-|<<tag "$:/tags/ControlPanel">> |for control panel tabs |
-|<<tag "$:/tags/ControlPanel/Advanced">> |for control panel advanced tabs |
-|<<tag "$:/tags/ControlPanel/Appearance">> |for control panel appearance tabs |
-|<<tag "$:/tags/ControlPanel/Info">> |for control panel info tabs |
-|<<tag "$:/tags/ControlPanel/Saving">> |for saving configurations |
-|<<tag "$:/tags/ControlPanel/Settings">> |for control panel settings tabs |
-|<<tag "$:/tags/ControlPanel/Toolbars">> |for control panel toolbar customisation tabs |
-|<<tag "$:/tags/EditorToolbar">> |for the editor toolbar buttons |
-|<<tag "$:/tags/EditPreview">> |for custom preview panes |
-|<<tag "$:/tags/EditTemplate">> |for the edit template |
-|<<tag "$:/tags/EditToolbar">> |for the edit mode tiddler toolbar |
-|<<tag "$:/tags/Exporter">> |for the exporters |
-|<<tag "$:/tags/Filter">> |for filters in advanced seach sample filter dropdown |
-|<<tag "$:/tags/Image">> |for (core) images |
-|<<tag "$:/tags/ImportPreview">> |for preview types for the import listing |
-|<<tag "$:/tags/Manager/ItemMain">> |for the tiddler manager. $:/Manager |
-|<<tag "$:/tags/Manager/ItemSidebar">> |for the tiddler manager |
-|<<tag "$:/tags/Macro">> |for global macros |
-|<<tag "$:/tags/MoreSideBar">> |for tabs in the "more" sidebar |
-|<<tag "$:/tags/MoreSideBar/Plugins">> |for Sidebar: More: Plugins tab |
-|<<tag "$:/tags/PageControls">> |for the page control tools in the sidebar |
-|<<tag "$:/tags/PageTemplate">> |for the main page elements |
-|<<tag "$:/tags/Palette">> |for colour palettes |
-|<<tag "$:/tags/PluginLibrary">> |for the plugin library |
-|<<tag "$:/tags/RawMarkup">> |for raw markup to be included in the generated HTML file. To activate the tag, TiddlyWiki needs to be reloaded |
-|<<tag "$:/tags/RawMarkupWikified">> |for raw markup to be included in the generated HTML file. To activate the tag, TiddlyWiki needs to be reloaded |
-|<<tag "$:/tags/RawStaticContent">> |for "raw" content to be saved into the TW code. Be careful! |
-|<<tag "$:/tags/RemoteAssetInfo">> |for plugin import handling |
-|<<tag "$:/tags/SearchResults">> |for customised search results |
-|<<tag "$:/tags/ServerConnection">> |for plugin import handling |
-|<<tag "$:/tags/SideBar">> |for sidebar tabs |
-|<<tag "$:/tags/SideBarSegment">> |for sidebar segments |
-|<<tag "$:/tags/StartupAction">> |startup actions executed on all platforms |
-|<<tag "$:/tags/StartupAction/Browser">> |startup actions only executed when running in the browser |
-|<<tag "$:/tags/StartupAction/Node">> |startup actions only executed when running under Node.js |
-|<<tag "$:/tags/Stylesheet">> |to indicate that a tiddler should be applied as a CSS stylesheet |
-|<<tag "$:/tags/TagDropdown">> |for tags dropdown sorting |
-|<<tag "$:/tags/Texteditor/Snippet">> |for text snippets |
-|<<tag "$:/tags/TiddlerInfo">> |for tiddler info panel tabs |
-|<<tag "$:/tags/TiddlerInfoSegment">> |for tiddler info panel segments |
-|<<tag "$:/tags/TiddlerInfo/Advanced">> |for tabs under the advanced tiddler tab |
-|<<tag "$:/tags/ToolbarButtonStyle">> |for the style of the buttons |
-|<<tag "$:/tags/TopLeftBar">> |for the top left bar |
-|<<tag "$:/tags/TopRightBar">> |for the top right bar |
-|<<tag "$:/tags/ViewTemplate">> |for the view template |
-|<<tag "$:/tags/ViewToolbar">> |for the view mode tiddler toolbar |
-
-! ~TiddlyWiki plugins
+!! System tags defined by ~TiddlyWiki plugins
 
 |<<tag "$:/tags/HelpPanel>> |can be seen at: [[tiddlywiki prerelease|https://tiddlywiki.com/prerelease/]] see: top left page control bubble|
 |<<tag "$:/tags/HelpPanel/Videos>> |help panel "videos" tab|
@@ -72,13 +35,3 @@ These are the available system tags
 |<<tag "$:/tags/ViewToolbarButton/QRcode>> |see: [[tiddlywiki prerelease|https://tiddlywiki.com/prerelease/]] |
 |<<tag "$:/tags/test-spec>> |tiddlywiki test suite |
 
-
-! System tags in use
-
-These are the system tags in use in this wiki:
-
-<ul>
-<$list filter="[all[shadows+tiddlers]tags[]prefix[$:/]sort[title]]">
-<li>{{||$:/core/ui/TagTemplate}}</li>
-</$list>
-</ul>
