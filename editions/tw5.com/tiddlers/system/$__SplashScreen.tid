@@ -103,8 +103,6 @@ Please wait while {{$:/SiteTitle}} is loading
   <div class="tc-splash-bounce-3"></div>
 </div>
 
-</div>
-
 <!-- Demonstrating how to embed a wikitext SVG graphic --> 
 <div class="tc-splash-text">
 {{$:/core/images/home-button||$:/core/templates/plain-text-tiddler}}
@@ -113,4 +111,6 @@ Please wait while {{$:/SiteTitle}} is loading
 <!-- Demonstrating how to embed a bitmap graphic --> 
 <div class="tc-splash-text">
 <img src="data:image/jpeg;base64,{{Motovun Jack.jpg||$:/core/templates/plain-text-tiddler}}" width="100"/>
+</div>
+
 </div>
