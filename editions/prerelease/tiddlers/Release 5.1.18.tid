@@ -13,7 +13,7 @@ type: text/vnd.tiddlywiki
 
 The HTTP WebServer functionality has been significantly improved:
 
-* Adds ability to make a wiki that is read-only for anonymous users, but allows editing for users who log in
+* Adds ability to make a wiki that is read-only for anonymous users (with the editing UI hidden), but allows editing for users who log in
 * Adds support for serving static file attachments over HTTP
 * Adds support for multiple user credentials for basic authentication via a CSV file containing usernames/passwords
 * Hides UI features like the new tiddler button and the edit button when the user only has read-only access to the wiki
