@@ -4,6 +4,7 @@ tags: $:/tags/RawMarkupWikified/TopBody
 title: $:/SplashScreen
 type: text/vnd.tiddlywiki
 
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
 \rules only filteredtranscludeinline transcludeinline macrocallinline
 <div class="tc-remove-when-wiki-loaded">
 <style scoped>
