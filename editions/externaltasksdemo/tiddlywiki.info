@@ -1,0 +1,45 @@
+{
+	"description": "Edition demonstrating external tasks",
+	"plugins": [
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"includeWikis": [
+		"../tw5.com"
+	],
+	"external-tasks": {
+		"stats": {
+			"path": "./demo-tasks/stats.js",
+			"input": {
+				"format": "json-raw-tiddlers"
+			},
+			"environment": {
+				"MY_VARIABLE": "value"
+			},
+			"output": {
+				"format": "json-raw-tiddlers"
+			},
+			"timeout": 100
+		},
+		"mimic": {
+			"path": "./demo-tasks/mimic.js",
+			"arguments": ["ngram-length"],
+			"input": {
+				"format": "rendered-text"
+			},
+			"environment": {
+				"MY_VARIABLE": "value"
+			},
+			"output": {
+				"format": "text",
+				"tiddler": {
+					"title": "HelloThere",
+					"type": "text/plain"
+				}
+			},
+			"timeout": 100
+		}
+	}
+}

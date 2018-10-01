@@ -1,6 +1,8 @@
-modified: 20141122200310516
+created: 20181001170605910
+modified: 20181001171639702
 tags: TableOfContents
 title: HelloThere
+type: text/vnd.tiddlywiki
 
 Welcome to the developer documentation for TiddlyWiki (https://tiddlywiki.com/). It is currently a work in progress as material from two different sources is adapted and merged in addition to original content being added:
 
@@ -22,5 +24,6 @@ Welcome to the developer documentation for TiddlyWiki (https://tiddlywiki.com/).
 ** SyncAdaptorModules
 ** WidgetModules
 ** WikiRuleModules
-*Original developer documentation
+* New developer documentation
 ** HookMechanism
+** [[External Shell Tasks]]
