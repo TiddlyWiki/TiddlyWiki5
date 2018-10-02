@@ -1,5 +1,5 @@
 created: 20180626150526207
-modified: 20180703095555387
+modified: 20181002103605866
 tags: ListenCommand ServerCommand Features
 title: WebServer
 type: text/vnd.tiddlywiki
@@ -14,7 +14,7 @@ The web server listens for requests coming over the network, and performs the fo
 
 * [[Authentication|WebServer Authentication]] is the process of identifying the current user. TiddlyWiki supports three types of authentication: [[Anonymous|WebServer Anonymous Access]], [[Basic|WebServer Basic Authentication]] and [[Header|WebServer Header Authentication]]
 * [[Authorization|WebServer Authorization]] is the process of determining which resources may be accessed by a particular user. TiddlyWiki implements a simple scheme whereby read and write access to the wiki can be independently controlled.
-* [[Routing|WebServer Routing]] is the process of acting on the request, and returning any required data.
+* Routing is the process of dispatching the request to the [[API handler|WebServer API]], and returning any required data.
 
 ! Usage
 
