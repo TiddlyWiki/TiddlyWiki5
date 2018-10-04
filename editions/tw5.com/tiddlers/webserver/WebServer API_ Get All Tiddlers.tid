@@ -1,5 +1,5 @@
 created: 20181002131215403
-modified: 20181002131322026
+modified: 20181003174025431
 tags: [[WebServer API]]
 title: WebServer API: Get All Tiddlers
 type: text/vnd.tiddlywiki
@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 Gets an array of all raw tiddlers, excluding the ''text'' field.
 
 ```
-GET /recipes/default/tiddlers/tiddlers.json
+GET /recipes/default/tiddlers.json
 ```
 
 Parameters:

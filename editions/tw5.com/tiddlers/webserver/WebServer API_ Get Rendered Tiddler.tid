@@ -1,7 +1,7 @@
 created: 20181002125954409
-modified: 20181002130237725
+modified: 20181002135401854
 tags: [[WebServer API]]
-title: WebServer API: Get Tiddler Rendering
+title: WebServer API: Get Rendered Tiddler
 type: text/vnd.tiddlywiki
 
 Gets a rendering of the specified tiddler. See [[using the read-only single tiddler view|Using the read-only single tiddler view]] for more details.
