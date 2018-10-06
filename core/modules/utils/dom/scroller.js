@@ -104,7 +104,7 @@ PageScroller.prototype.scrollIntoView = function(element) {
 				bounds = getBounds(),
 				endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,window.innerWidth),
 				endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,window.innerHeight);
-			window.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y) * t - offset);
+			window.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y - offset) * t);
 			if(t < 1) {
 				self.idRequestFrame = self.requestAnimationFrame.call(window,drawFrame);
 			}
