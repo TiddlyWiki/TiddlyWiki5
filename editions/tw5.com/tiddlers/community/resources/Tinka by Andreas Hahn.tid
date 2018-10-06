@@ -1,5 +1,5 @@
 created: 20140920124011558
-modified: 20170305081535978
+modified: 20181006224229791
 tags: Resources
 title: Tinka by Andreas Hahn
 type: text/vnd.tiddlywiki
@@ -14,3 +14,16 @@ See https://github.com/TinkaPlugin/Tinka for the GitHub repo.
 <<<
 This is a Control Panel extension that aims to simplify the plugin creation and editing process. After installing, you will find a new tab in your control panel that makes creating and modifying plugins a little bit easier.
 <<<
+
+!!! Supplemental information regarding adding items to the list field
+
+//The following information is not currently available (2018-10-06) on the Tinka github site, but may be helpful to users. //
+
+Items added to the `list` field will become tab entries in the generated plugin. Each item in the list should have a corresponding tiddler with the format:
+
+```
+$:/plugins/<author>/<plugin>/<tiddler>
+```
+
+where `<author>` is the name you provided as author, `<plugin>` is the name of the plugin you are creating, and `<tiddler>` is the same as the name that appears in the list entry.  The contents of the tab referenced in the `list` field will then be provided by the corresponding `$:/plugins/<author>/<plugin>/<tiddler>` tiddler.
+
