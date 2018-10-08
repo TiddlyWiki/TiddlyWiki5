@@ -204,8 +204,8 @@ CodeMirrorEngine.prototype.createTextOperation = function() {
 	}
 	var operation = {
 		text: this.cm.getValue(),
-		selStart: self.editorManager.selectionStart || Math.min(anchorPos,headPos),
-		selEnd: self.editorManager.selectionEnd || Math.max(anchorPos,headPos),
+		selStart: this.editorManager.selectionStart || Math.min(anchorPos,headPos),
+		selEnd: this.editorManager.selectionEnd || Math.max(anchorPos,headPos),
 		cutStart: null,
 		cutEnd: null,
 		replacement: null,
