@@ -91,6 +91,7 @@ function CodeMirrorEngine(options) {
 	this.value = options.value;
 	this.parentNode = options.parentNode;
 	this.nextSibling = options.nextSibling;
+	this.editorManager = $tw.editorManager[self.widget.editorStateQualifier];
 	// Create the wrapper DIV
 	this.domNode = this.widget.document.createElement("div");
 	if(this.widget.editClass) {
@@ -122,6 +123,19 @@ function CodeMirrorEngine(options) {
 	});
 	this.cm.on("keydown",function(cm,event) {
 		return self.widget.handleKeydownEvent.call(self.widget,event);
+	});
+	// Save selections when the editor blurs (opening preview, clicking toolbar buttons, clicking outside ...)
+	this.cm.on("blur",function(cm,event) {
+		var selections = cm.listSelections();
+		self.editorManager.selectionStart = cm.indexFromPos(selections[0].anchor);
+		self.editorManager.selectionEnd = cm.indexFromPos(selections[0].head);
+	});
+	// On focus, if there are saved selections, restore them
+	this.cm.on("focus",function(cm,event) {
+		if(self.editorManager.selectionStart && self.editorManager.selectionEnd) {
+			cm.setSelection(cm.posFromIndex(self.editorManager.selectionStart),cm.posFromIndex(self.editorManager.selectionEnd), { scroll: false });
+			self.scrollIntoView();
+		}	
 	});
 }
 
@@ -162,7 +176,22 @@ Focus the engine node
 */
 CodeMirrorEngine.prototype.focus  = function() {
 	this.cm.focus();
-}
+};
+
+/*
+Scroll the cursor into view
+*/
+CodeMirrorEngine.prototype.scrollIntoView = function() {
+	var selections = this.cm.listSelections();
+	var anchorPos = this.cm.indexFromPos(selections[0].anchor),
+		headPos = this.cm.indexFromPos(selections[0].head);
+	var scrollMargin = 200; //ToDo: calculate scroll margin using editor height
+	if(anchorPos < headPos) {
+		this.cm.scrollIntoView(selections[0].anchor,scrollMargin);
+	} else {
+		this.cm.scrollIntoView(selections[0].head,scrollMargin);
+	}
+};
 
 /*
 Create a blank structure representing a text operation
@@ -175,8 +204,8 @@ CodeMirrorEngine.prototype.createTextOperation = function() {
 	}
 	var operation = {
 		text: this.cm.getValue(),
-		selStart: Math.min(anchorPos,headPos),
-		selEnd: Math.max(anchorPos,headPos),
+		selStart: self.editorManager.selectionStart || Math.min(anchorPos,headPos),
+		selEnd: self.editorManager.selectionEnd || Math.max(anchorPos,headPos),
 		cutStart: null,
 		cutEnd: null,
 		replacement: null,
@@ -193,6 +222,10 @@ Execute a text operation
 CodeMirrorEngine.prototype.executeTextOperation = function(operation) {
 	// Perform the required changes to the text area and the underlying tiddler
 	var newText = operation.text;
+	if(operation.newSelStart && operation.newSelEnd) {
+		this.editorManager.selectionStart = operation.newSelStart;
+		this.editorManager.selectionEnd = operation.newSelEnd;
+	}
 	if(operation.replacement !== null) {
 		this.cm.replaceRange(operation.replacement,this.cm.posFromIndex(operation.cutStart),this.cm.posFromIndex(operation.cutEnd));
 		this.cm.setSelection(this.cm.posFromIndex(operation.newSelStart),this.cm.posFromIndex(operation.newSelEnd));
