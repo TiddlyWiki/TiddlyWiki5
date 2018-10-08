@@ -92,6 +92,10 @@ KeyboardWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	}
+	var tempKeyInfoArray = $tw.keyboardManager.parseKeyDescriptors(this.key);
+	if(tempKeyInfoArray !== this.keyInfoArray) {
+		this.keyInfoArray = tempKeyInfoArray;
+	}
 	return this.refreshChildren(changedTiddlers);
 };
 
