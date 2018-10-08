@@ -132,10 +132,14 @@ function CodeMirrorEngine(options) {
 	});
 	// On focus, if there are saved selections, restore them
 	this.cm.on("focus",function(cm,event) {
-		if(self.editorManager.selectionStart && self.editorManager.selectionEnd) {
+		if(!self.focusClick && self.editorManager.selectionStart && self.editorManager.selectionEnd) {
 			cm.setSelection(cm.posFromIndex(self.editorManager.selectionStart),cm.posFromIndex(self.editorManager.selectionEnd), { scroll: false });
 			self.scrollIntoView();
+			self.focusClick = false;
 		}	
+	});
+	this.cm.on("mousedown",function() {
+		self.focusClick = true;
 	});
 }
 
