@@ -40,6 +40,9 @@ var EDITOR_MAPPING_PREFIX = "$:/config/EditorTypeMappings/";
 Compute the internal state of the widget
 */
 EditWidget.prototype.execute = function() {
+	this.editorStateQualifier = this.getVariable("storyTiddler");
+	$tw.editorManager = $tw.editorManager || [];
+	$tw.editorManager[this.editorStateQualifier] = $tw.editorManager[this.editorStateQualifier] || {};
 	// Get our parameters
 	this.editTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.editField = this.getAttribute("field","text");
