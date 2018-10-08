@@ -187,14 +187,14 @@ Scroll the cursor into view
 */
 CodeMirrorEngine.prototype.scrollIntoView = function() {
 	var selections = this.cm.listSelections();
+	var scrollInfo = this.cm.getScrollInfo(),
+		viewportHeight = window.innerHeight || this.domNode.ownerDocument.documentElement.clientHeight;
+	var scrollMargin = this.widget.wiki.getTiddlerText("$:/config/TextEditor/EditorHeight/Mode") === "fixed" ? 
+	    			scrollInfo.clientHeight / 4 : viewportHeight / 4;
 	var anchorPos = this.cm.indexFromPos(selections[0].anchor),
 		headPos = this.cm.indexFromPos(selections[0].head);
-	var scrollMargin = 200; //ToDo: calculate scroll margin using editor height
-	if(anchorPos < headPos) {
-		this.cm.scrollIntoView(selections[0].anchor,scrollMargin);
-	} else {
-		this.cm.scrollIntoView(selections[0].head,scrollMargin);
-	}
+	anchorPos < headPos ? this.cm.scrollIntoView(selections[0].anchor,scrollMargin) : 
+				this.cm.scrollIntoView(selections[0].head,scrollMargin);
 };
 
 /*
