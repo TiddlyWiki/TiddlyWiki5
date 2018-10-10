@@ -116,6 +116,11 @@ Read the state tiddler
 RevealWidget.prototype.readState = function() {
 	// Read the information from the state tiddler
 	var state = this.stateTitle ? this.wiki.getTextReference(this.stateTitle,this["default"],this.getVariable("currentTiddler")) : this["default"];
+	
+	// If state tiddler is not yet loaded (lazily loaded), use default value until it gets udpated
+	if(state == null)
+		state = this["default"];
+	
 	switch(this.type) {
 		case "popup":
 			this.readPopupState(state);
