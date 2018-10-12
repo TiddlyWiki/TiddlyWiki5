@@ -3,12 +3,14 @@ created: 20180830194141190
 delivery: Browser Extension & Executable
 description: Browser extension & executable for desktops
 method: save
-modified: 20180830195059704
+modified: 20181012165153986
 tags: Windows Linux Chrome Firefox Saving Resources plugins
 title: "Timimi" Extension and executable by Riz
 type: text/vnd.tiddlywiki
 url: https://github.com/ibnishak/Timimi
 
 `Timimi` is a Web Extension and executable for Firefox, Chrome and Chromium that allows it to save standalone ~TiddlyWiki files.
+
+{{!!url}}
 
 This is an addon using native messaging, essentially handing over the contents to a webextension host (executable) which does the actual saving. Once installed, you can save the standalone TW from anywhere in your hard drive without any more interactions, like the original Tiddlyfox addon.
