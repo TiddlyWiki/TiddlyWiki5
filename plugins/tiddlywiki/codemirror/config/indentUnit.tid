@@ -1,3 +1,4 @@
 title: $:/config/codemirror/indentUnit
+type: integer
 
 2
