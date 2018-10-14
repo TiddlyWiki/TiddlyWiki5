@@ -27,6 +27,9 @@ process.stdin.on("end",function() {
 });
 
 function mimic(sourceText,paramNgramLength) {
+	if(!sourceText) {
+		return "";
+	}
 	var tree = {};
 	scanText(tree,sourceText,paramNgramLength);
 	return generateText(tree,sourceText,paramNgramLength,paramOutputLength);
