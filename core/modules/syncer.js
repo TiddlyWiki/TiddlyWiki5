@@ -84,6 +84,11 @@ function Syncer(options) {
 		$tw.rootWidget.addEventListener("tm-server-refresh",function() {
 			self.handleRefreshEvent();
 		});
+		$tw.rootWidget.addEventListener("tm-execute-job",function(event) {
+			if(self.syncadaptor && self.syncadaptor.executeJob) {
+				self.syncadaptor.executeJob(event);
+			}
+		});
 	}
 	// Listen out for lazyLoad events
 	if(!this.disableUI) {
