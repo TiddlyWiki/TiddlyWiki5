@@ -1,14 +1,15 @@
 {
 	"description": "Edition demonstrating external pipes",
 	"plugins": [
+		"tiddlywiki/tiddlyweb"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
 	],
-	"includeWikis": [
-		"../tw5.com"
-	],
+	"config": {
+		"allow-remote-commands": true
+	},
 	"external-pipes": {
 		"reverser": {
 			"type": "socket",
@@ -20,7 +21,7 @@
 			"output": {
 				"format": "text",
 				"tiddler": {
-					"title": "HelloThere",
+					"title": "PipeOutput",
 					"type": "text/plain"
 				}
 			},
@@ -41,7 +42,7 @@
 			"error": {
 				"format": "text",
 				"tiddler": {
-					"title": "HelloThere",
+					"title": "PipeOutput",
 					"type": "text/plain",
 					"result": "error"
 				}
@@ -61,7 +62,7 @@
 			"output": {
 				"format": "text",
 				"tiddler": {
-					"title": "HelloThere",
+					"title": "PipeOutput",
 					"type": "text/plain"
 				}
 			},
