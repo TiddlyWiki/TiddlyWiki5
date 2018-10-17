@@ -1,0 +1,29 @@
+caption: regexps
+created: 20170924210519129
+modified: 20181017155814981
+op-input: a [[selection of titles|Title Selection]]
+op-neg-output: those input tiddlers in which field <<.place F>> does <<.em not>> match <<.place X>>
+op-output: one or more sub-strings of input tiddlers in which <<.place X>> matches contents of field <<.place F>>
+op-parameter: a regular expression
+op-parameter-name: X
+op-purpose: find sub-string(s) of input tiddlers
+op-suffix: the name of a [[field|TiddlerFields]]
+op-suffix-name: F
+tags: [[String Operators]] [[Filter Operators]] [[Field Operators]] [[Negatable Operators]]
+title: regexps Operator
+type: text/vnd.tiddlywiki
+
+<<.def "Regular expressions">> are concise strings of characters that denote patterns of text to search for. The format used in ~TiddlyWiki is fully defined in [[this Mozilla reference|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions]].
+
+The [[filter syntax|Filter Run]] makes it impossible to directly specify a regular expression that contains square brackets. The solution is to store the expression in a [[variable|Variables]]. See the <<.operator-examples "regexps" "examples">>.
+
+The parameter <<.place X>> can optionally start or end with a string of flags:
+
+<$railroad text=""" "(?" { ("i"|"m"|:"g") } ")" """/>
+
+The `i` flag is is used to force the difference between capital and lowercase letters to be ignored. The `m` flag is not generally useful.
+
+The `g` flag is used to determine if all matches of the regular expression will be returned. If sub-groups are used (indicated by paired `(` and `)` symbols) they will be ignored if the `g` flag is used. If the `g` flag is not used, then all matching sub-groups will be returned. If the `g` flag is not used and sub-groups are not used, then just the first match will be returned.
+
+
+<<.operator-examples "regexps">>
