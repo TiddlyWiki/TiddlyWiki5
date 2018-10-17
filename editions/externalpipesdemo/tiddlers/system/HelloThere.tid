@@ -24,6 +24,15 @@ Mimic
 Stats
 </$button>
 
+<$button>
+<$action-sendmessage $message="tm-execute-job" 0="--verbose" 1="--fetch" 2="raw-file" 3="http://api.open-notify.org/astros.json" statusTitle="JobStatus"/>
+Fetch number of people in space
+</$button>
+
+Output:
+
+{{http://api.open-notify.org/astros.json}}
+
 This demo requires the example task `reverser.js 8081` to be running in a separate command window.
 
 <$button>

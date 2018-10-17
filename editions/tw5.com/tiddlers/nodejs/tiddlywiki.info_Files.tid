@@ -1,5 +1,5 @@
 created: 20161015114042793
-modified: 20161015121622327
+modified: 20181017171429110
 tags: TiddlyWikiFolders
 title: tiddlywiki.info Files
 type: text/vnd.tiddlywiki
@@ -31,6 +31,8 @@ Configuration options include:
 * ''default-tiddler-location'' - a string path to the default location for the filesystem adaptor to save new tiddlers (resolved relative to the wiki folder)
 
 * ''retain-original-tiddler-path'' - If true, the server will generate a tiddler [[$:/config/OriginalTiddlerPaths]] containing the original file paths of each tiddler in the wiki
+
+* ''allow-remote-commands'' - <<.from-version "5.1.18">> if true, [[remote commands|Using remote commands]] will be permitted for all authorized users
 
 !!! Example
 
