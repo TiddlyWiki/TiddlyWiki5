@@ -7,6 +7,10 @@
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
 	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"]
+	},
 	"config": {
 		"allow-remote-commands": true
 	},
@@ -56,6 +60,25 @@
 			"type": "task",
 			"path": "./demo-tasks/mimic.js",
 			"arguments": ["ngram-length"],
+			"input": {
+				"format": "rendered-text"
+			},
+			"output": {
+				"format": "text",
+				"tiddler": {
+					"title": "PipeOutput",
+					"type": "text/plain"
+				}
+			},
+			"environment": {
+				"MY_VARIABLE": "value"
+			},
+			"timeout": 100
+		},
+		"recaser": {
+			"type": "socket-erlang",
+			"host": "127.0.0.1",
+			"port": 8081,
 			"input": {
 				"format": "rendered-text"
 			},
