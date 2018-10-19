@@ -49,3 +49,32 @@ This example fetches JSON data from  `http://api.open-notify.org/astros.json` an
 Fetch number of people in space
 </$button>
 ```
+
+
+!! Remote Command Tests
+
+<$button message="tm-server-refresh">Refresh</$button>
+
+Status: {{JobStatus}} {{JobStatus!!message}}
+
+These tests don't produce any output.
+
+<$button>
+<$action-sendmessage $message="tm-execute-job" commands="--version" statusTitle="JobStatus"/>
+Job!
+</$button>
+
+<$button>
+<$action-sendmessage $message="tm-execute-job" commands="--versionitis" statusTitle="JobStatus"/>
+Illegal command
+</$button>
+
+<$button>
+<$action-sendmessage $message="tm-execute-job" 0="--verbose" 1="--fetch" 2="raw-file" 3="http://api.open-notify.org/astros.json" statusTitle="JobStatus"/>
+Fetch number of people in space
+</$button>
+
+Output:
+
+{{http://api.open-notify.org/astros.json}}
+

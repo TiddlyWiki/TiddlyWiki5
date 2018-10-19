@@ -2,49 +2,40 @@ title: HelloThere
 
 ! External Pipe Demos
 
-Status: {{JobStatus}} {{JobStatus!!message}} <$button message="tm-server-refresh">Refresh</$button>
+Note that the browser polls the server every {{$:/config/SyncPollingInterval}}ms. You can trigger an instaneous poll:  <$button message="tm-server-refresh">Refresh</$button>
 
-<$button>
-<$action-sendmessage $message="tm-execute-job" commands="--version" statusTitle="JobStatus"/>
-Job!
-</$button>
+Status: {{JobStatus}} {{JobStatus!!message}}
 
-<$button>
-<$action-sendmessage $message="tm-execute-job" commands="--versionitis" statusTitle="JobStatus"/>
-Illegal command
-</$button>
+!! Reverser
 
-<$button>
-<$action-sendmessage $message="tm-execute-job" 1="--pipe" 2="mimic" 3="[[Alice in Wonderland]]" 4="5" 5="5000" statusTitle="JobStatus"/>
-Mimic
-</$button>
-
-<$button>
-<$action-sendmessage $message="tm-execute-job" 1="--pipe" 2="stats" 3="[[Alice in Wonderland]]" statusTitle="JobStatus"/>
-Stats
-</$button>
-
-<$button>
-<$action-sendmessage $message="tm-execute-job" 0="--verbose" 1="--fetch" 2="raw-file" 3="http://api.open-notify.org/astros.json" statusTitle="JobStatus"/>
-Fetch number of people in space
-</$button>
-
-Output:
-
-{{http://api.open-notify.org/astros.json}}
-
-This demo requires the example task `reverser.js 8081` to be running in a separate command window.
+This demo requires the example task `reverser.js 8081` to be running in a separate command window. You can edit the [[Sample Text]].
 
 <$button>
 <$action-sendmessage $message="tm-execute-job" 1="--pipe" 2="reverser" 3="[[Sample Text]]" statusTitle="JobStatus"/>
 Reverser
 </$button>
 
-This demo requires the example task `./recaser.js 8081` or `./recase_erl.sh` to be running in a separate command window.
+!! Recaser
+
+This demo requires the example task `./recaser.js 8081` or `./recase_erl.sh` to be running in a separate command window. You can edit the [[Sample Text]].
 
 <$button>
 <$action-sendmessage $message="tm-execute-job" 1="--pipe" 2="recaser" 3="[[Sample Text]]" statusTitle="JobStatus"/>
 Recaser
+</$button>
+
+!! Mimic
+
+<$button>
+<$action-sendmessage $message="tm-execute-job" 1="--pipe" 2="mimic" 3="[[Alice in Wonderland]]" 4="5" 5="5000" statusTitle="JobStatus"/>
+Mimic
+</$button>
+
+!! Stats
+
+<$button>
+<$action-sendmessage $message="tm-execute-job" 1="--pipe" 2="stats" 3="[[Alice in Wonderland]]" statusTitle="JobStatus"/>
+Stats
 </$button>
 
 !! Demo Output
