@@ -5,64 +5,95 @@ module-type: filteroperator
 
 Filter operator that gathering "family" of tiddler based on <field>
 
-[kindred:<direction>[<field>]]
+[kindred:<field>[<tiddler_from_family>]]
+[kindredup:<field>[<tiddler_from_family>]]
+[kindreddown:<field>[<tiddler_from_family>]]
 
 \*/
-(function(){
+(function () {
 
-	/*jslint node: true, browser: true */
-	/*global $tw: false */
-	"use strict";
+  /*jslint node: true, browser: true */
+  /*global $tw: false */
+  "use strict";
 
-	/*
-	Export our filter function
-	*/
-	exports.kindred= function(source,operator,options) {
-		var results = [],
-			base_title = '',
-			direction = (operator.suffix || 'both').toLowerCase(),
-			fieldname = (operator.operand || 'tags').toLowerCase();
-		source(function(tiddler, title) {
-			base_title = title;
-			if ((direction === 'up') || (direction === 'both')) {
-				findRecursivelyUp(tiddler, title);
-			}
-			if ((direction === 'down') || (direction === 'both')) {
-				findRecursivelyDown(title);
-			}
-		});
+  // TODO: Should I set global tw to true?
 
-		function addToResultsIfNotFoundAlready(title) {
-			// Parse, but do not add the base tiddler
-			if (title === base_title) {
-				return true;
-			}
-			if (results.includes(title)) {
-				return false;
-			}
-			results.push(title);
-			return true
-		}
+  function collectFamilyMembers(tiddler, title, fieldname, direction) {
+    var family_members = [];
 
-		function findRecursivelyUp(tiddler, title) {
-			if (addToResultsIfNotFoundAlready(title)) {
-				if (tiddler) {
-					tiddler.getFieldList(fieldname).forEach(function (target_title) {
-						findRecursivelyUp(options.wiki.getTiddler(target_title), target_title);
-					});
-				}
-			}
-		}
+    function addToResultsIfNotFoundAlready(title) {
+      if (family_members.includes(title)) {
+        return false;
+      }
+      family_members.push(title);
+      return true
+    }
 
-		function findRecursivelyDown(title) {
-			if (addToResultsIfNotFoundAlready(title)) {
-				options.wiki.findListingsOfTiddler(title, fieldname).forEach(function (target_title) {
-					findRecursivelyDown(target_title);
-				});
-			}
-		}
+    function findRecursivelyUp(tiddler, title) {
+      if (addToResultsIfNotFoundAlready(title)) {
+        if (tiddler) {
+          tiddler.getFieldList(fieldname).forEach(function (target_title) {
+            findRecursivelyUp($tw.wiki.getTiddler(target_title), target_title);
+          });
+        }
+      }
+    }
 
-		return results;
-	};
+    function findRecursivelyDown(title) {
+      if (addToResultsIfNotFoundAlready(title)) {
+        $tw.wiki.findListingsOfTiddler(title, fieldname).forEach(function (target_title) {
+          findRecursivelyDown(target_title);
+        });
+      }
+    }
+
+    if ((direction === 'up') || (direction === 'both')) {
+      findRecursivelyUp(tiddler, title);
+    }
+    if (direction === 'both') {
+      // Remove the base family member:
+      // If it's already in the results, it will be skipped when parsing in
+      // the oposite direction.
+      family_members.shift();
+    }
+    if ((direction === 'down') || (direction === 'both')) {
+      findRecursivelyDown(title);
+    }
+    return family_members;
+  }
+
+  function executeSource(source, operator, direction) {
+
+    // TODO: System tiddlers are not shown???
+
+    var results = [],
+      fieldname = (operator.suffix || 'tags').toLowerCase(),
+      title_from_family = operator.operand,
+      tiddler_from_family = $tw.wiki.getTiddler(title_from_family),
+      family_members = collectFamilyMembers(tiddler_from_family, title_from_family, fieldname, direction);
+
+    source(function (tiddler, title) {
+      if (family_members.includes(title)) {
+        results.push(title);
+      }
+    });
+
+    return results;
+  }
+
+  /*
+  Export our filter function
+  */
+  exports.kindred = function (source, operator, options) {
+    return executeSource(source, operator, 'both');
+  };
+
+  exports.kindredup = function (source, operator, options) {
+    return executeSource(source, operator, 'up');
+  };
+
+  exports.kindreddown = function (source, operator, options) {
+    return executeSource(source, operator, 'down');
+  };
 
 })();
