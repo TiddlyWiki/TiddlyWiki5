@@ -28,7 +28,7 @@ Filter operator that gathering "family" of tiddler based on <field>
 				findRecursivelyUp(tiddler, title);
 			}
 			if ((direction === 'down') || (direction === 'both')) {
-				findRecursivelyDown(tiddler, title);
+				findRecursivelyDown(title);
 			}
 		});
 
@@ -54,10 +54,10 @@ Filter operator that gathering "family" of tiddler based on <field>
 			}
 		}
 
-		function findRecursivelyDown(tiddler, title) {
+		function findRecursivelyDown(title) {
 			if (addToResultsIfNotFoundAlready(title)) {
 				$tw.wiki.findListingsOfTiddler(title, fieldname).forEach(function (target_title) {
-					findRecursivelyDown($tw.wiki.getTiddler(target_title), target_title);
+					findRecursivelyDown(target_title);
 				});
 			}
 		}
