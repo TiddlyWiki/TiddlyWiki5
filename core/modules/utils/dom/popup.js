@@ -110,10 +110,32 @@ Popup.prototype.popupInfo = function(domNode) {
 Display a popup by adding it to the stack
 */
 Popup.prototype.show = function(options) {
-	// Find out what was clicked on
-	var info = this.popupInfo(options.domNode);
-	// Cancel any higher level popups
-	this.cancel(info.popupLevel);
+	var cancelLevel;
+	// Cancel any popups who aren't an ancestor of the current node
+	for(var t=0; t<this.popups.length; t++) {
+		var popup = this.popups[t];
+
+		var node = options.domNode;
+		var isFound = false;
+
+		while(node) {
+			if(node == popup.domNode) {
+				isFound = true;
+				break;
+			}
+			node = node.parentNode;
+		}
+
+		if(!isFound) {
+			cancelLevel = t;
+			break;
+		}
+	}
+
+	if(cancelLevel !== undefined) {
+		this.cancel(cancelLevel);
+	}
+
 	// Store the popup details if not already there
 	if(!options.floating && this.findPopup(options.title) === -1) {
 		this.popups.push({
