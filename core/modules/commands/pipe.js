@@ -134,19 +134,24 @@ Command.prototype.pipeSocket = function(pipeInfo,options) {
 
 Command.prototype.pipeSocketErlang = function(pipeInfo,options) {
 	var self = this,
+		encoding = pipeInfo.encoding || "utf8",
 		net = require("net"),
 		socket = new net.Socket(),
 		accumulator = Buffer.alloc(0);
 	socket.connect(pipeInfo.port,pipeInfo.host || 8081,function() {
 		self.log("Socket connection",pipeInfo.port,pipeInfo.host);
+		var dataBytes = Buffer.from(options.data,encoding);
+		// Write 32-bit big endian message length
 		var lengthBytes = Buffer.alloc(4);
-		lengthBytes.writeUInt32BE(options.data.length,0)
-console.log("Wring butes",options.data.length)
+		lengthBytes.writeUInt32BE(dataBytes.length + 1,0)
+console.log("Writing bytes",dataBytes.length + 1);
 		socket.write(lengthBytes);
+		// Write 8-bit type
 		var typeByte = Buffer.alloc(1);
 		typeByte.writeUInt8(1,0);
 		socket.write(typeByte);
-		socket.write(options.data);
+		// Write data
+		socket.write(dataBytes);
 	});
 	socket.on("error",function(e) {
 		self.log("Socket error",e)
@@ -154,14 +159,18 @@ console.log("Wring butes",options.data.length)
 	socket.on("data",function(data) {
 console.log("Received data",data.length)
 		accumulator = Buffer.concat([accumulator,data]);
-		while(accumulator.length > 5) {
-			var length = accumulator.readInt32BE(0),
-				type = accumulator.readUInt8(4);
-			if(accumulator.length > (length + 5)) {
-				var data = accumulator.toString("utf8",5,length + 5);
+		while(accumulator.length > 4) {
+			var length = accumulator.readInt32BE(0);
+			if(accumulator.length >= (length + 4)) {
+				if(length < 2) {
+					throw "ERROR: Incoming message length field is less than 2";
+				}
+				var type = accumulator.readUInt8(4),
+					dataLength = length - 1,
+					data = accumulator.toString(encoding,5,dataLength + 5);
 console.log("Got message",length,type)
 				self.processIncomingData(data,pipeInfo);
-				accumulator = accumulator.slice(length + 5);
+				accumulator = accumulator.slice(length + 4);
 socket.end();
 return self.callback(null);
 			} else {

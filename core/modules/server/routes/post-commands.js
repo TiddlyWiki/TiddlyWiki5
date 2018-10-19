@@ -18,8 +18,6 @@ exports.path = /^\/commands\/$/;
 
 exports.handler = function(request,response,state) {	
 	// Check we're enabled
-
-console.log("wikiInfo",$tw.boot.wikiInfo)
 	if(!($tw.boot.wikiInfo.config || {})["allow-remote-commands"]) {
 		response.writeHead(404);
 		response.end();

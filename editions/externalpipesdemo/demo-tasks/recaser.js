@@ -29,18 +29,22 @@ server.on("connection", function(sock) {
 	sock.on("data",function(data) {
 		console.log("DATA " + sock.remoteAddress + ": " + data.length);
 		accumulator = Buffer.concat([accumulator,Buffer.from(data)]);
-		while(accumulator.length > 5) {
-			var length = accumulator.readInt32BE(0),
-				type = accumulator.readUInt8(4);
-			if(accumulator.length > (length + 5)) {
-				var data = accumulator.toString("utf8",5,length + 5);
-				accumulator = accumulator.slice(length + 5);
+		while(accumulator.length > 4) {
+			var length = accumulator.readInt32BE(0);
+			if(accumulator.length >= (length + 4)) {
+				if(length < 2) {
+					throw "ERROR: Incoming message length field is less than 2";
+				}
+				var type = accumulator.readUInt8(4),
+					dataLength = length - 1,
+					data = accumulator.toString("latin1",5,dataLength + 5);
+				accumulator = accumulator.slice(length + 4);
 				// Recase it
 console.log("MESSAGE",length,type);
-				var recasedData = recase(data);
+				var recasedData = Buffer.from(recase(data),"latin1");
 				// Send it back
 				var lengthBytes = Buffer.alloc(4);
-				lengthBytes.writeUInt32BE(recasedData.length,0)
+				lengthBytes.writeUInt32BE(recasedData.length + 1,0)
 console.log("RESPONSE",1,recasedData.length)
 				sock.write(lengthBytes);
 				var typeByte = Buffer.alloc(1);

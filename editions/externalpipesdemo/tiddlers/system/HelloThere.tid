@@ -36,8 +36,15 @@ Output:
 This demo requires the example task `reverser.js 8081` to be running in a separate command window.
 
 <$button>
-<$action-sendmessage $message="tm-execute-job" 1="--pipe" 2="reverser" 3="[[Alice in Wonderland]]" statusTitle="JobStatus"/>
+<$action-sendmessage $message="tm-execute-job" 1="--pipe" 2="reverser" 3="[[Sample Text]]" statusTitle="JobStatus"/>
 Reverser
+</$button>
+
+This demo requires the example task `./recaser.js 8081` or `./recase_erl.sh` to be running in a separate command window.
+
+<$button>
+<$action-sendmessage $message="tm-execute-job" 1="--pipe" 2="recaser" 3="[[Sample Text]]" statusTitle="JobStatus"/>
+Recaser
 </$button>
 
 !! Demo Output
