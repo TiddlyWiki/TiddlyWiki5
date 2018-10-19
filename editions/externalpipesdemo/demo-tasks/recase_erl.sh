@@ -19,7 +19,7 @@ par_connect(Listen) ->
 loop(Socket) -> 
     receive
 	{tcp,Socket,Bin} ->
-	    io:format("received ~p bytes~n",[size(Bin)]),
+	    io:format("received ~p bytes ~s ~n",[size(Bin), Bin]),
 	    Return = recase_binary(Bin),
 	    io:format("sending: ~p bytes~n",[size(Return)]),
 	    gen_tcp:send(Socket, Return),
@@ -30,8 +30,8 @@ loop(Socket) ->
 
 recase_binary(<<1,B/binary>>) ->
     L = binary_to_list(B),
-    L1 = [recase(I) || I<- L],
-    B1 = list_to_binary(tl(L1)),
+    L1 = [recase(I) || I <- L],
+    B1 = list_to_binary(L1),
     <<1,B1/binary>>.
 
 recase(I) when I >= $a, I =< $z -> I - $a + $A;
