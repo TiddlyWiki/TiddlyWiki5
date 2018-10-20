@@ -274,6 +274,79 @@ KeyboardManager.prototype.checkKeyDescriptors = function(event,keyInfoArray) {
 	return false;
 };
 
+KeyboardManager.prototype.getShortcutTiddlerList = function() {
+	return $tw.wiki.getTiddlersWithTag("$:/tags/KeyboardShortcut");
+};
+
+KeyboardManager.prototype.updateShortcutLists = function(tiddlerList) {
+	this.shortcutTiddlers = tiddlerList;
+	for(var i=0; i < tiddlerList.length; i++) {
+		var title = tiddlerList[i],
+			tiddlerFields = $tw.wiki.getTiddler(title).fields;
+		this.shortcutKeysList[i] = tiddlerFields.key !== undefined ? tiddlerFields.key : undefined;
+		this.shortcutActionList[i] = tiddlerFields.text;
+		this.shortcutParsedList[i] = this.shortcutKeysList[i] !== undefined ? this.parseKeyDescriptors(this.shortcutKeysList[i]) : undefined;
+	}
+};
+
+KeyboardManager.prototype.handleKeydownEvent = function(event) {
+	var key, action;
+	for(var i=0; i < this.shortcutTiddlers.length; i++) {
+		if(this.shortcutParsedList[i] !== undefined && this.checkKeyDescriptors(event,this.shortcutParsedList[i])) {
+			key = this.shortcutParsedList[i];
+			action = this.shortcutActionList[i];
+		}
+	}
+	if(key !== undefined) {
+		event.preventDefault();
+		event.stopPropagation();
+		$tw.rootWidget.invokeActionString(action,$tw.rootWidget);
+		return true;
+	}
+	return false;
+};
+
+// Returns true if a passed array contains a Tiddler that has changed
+KeyboardManager.prototype.hasAnyTiddlerChanged = function(changedTiddlers,tiddlerList) {
+	for(var i=0; i < tiddlerList.length; i++) {
+		if($tw.utils.hop(changedTiddlers,tiddlerList[i])) {
+			return true;
+		}
+	}
+	return false;
+};
+
+KeyboardManager.prototype.detectNewShortcuts = function(changedTiddlers) {
+	var shortcutConfigTiddlers = [],
+		pattern = /^\$:\/config\/shortcuts.*$/,
+		handled = false;
+	Object.keys(changedTiddlers).forEach(function(configTiddler) {
+		if(pattern.test(configTiddler)) {
+			shortcutConfigTiddlers.push(configTiddler);
+			handled = true;
+		}
+	});
+	if(handled) {
+		return this.hasAnyTiddlerChanged(changedTiddlers,shortcutConfigTiddlers);
+	} else {
+		return false;
+	}
+};
+
+KeyboardManager.prototype.handleShortcutChanges = function(changedTiddlers) {
+	var newList = this.getShortcutTiddlerList();
+	var hasChanged = false;
+	// First inspect the existing shortcut-tiddlers
+	hasChanged = this.hasAnyTiddlerChanged(changedTiddlers,this.shortcutTiddlers) ? true :
+		(this.hasAnyTiddlerChanged(changedTiddlers,newList) ? true :
+		(this.detectNewShortcuts(changedTiddlers))
+	);
+	// Re-cache shortcuts if something changed
+	if(hasChanged) {
+		this.updateShortcutLists(newList);
+	}
+};
+
 exports.KeyboardManager = KeyboardManager;
 
 })();
