@@ -1,0 +1,41 @@
+created: 20160424150551727
+modified: 20171114215846324
+tags: [[Customise TiddlyWiki]]
+title: Making a custom journal button
+type: text/vnd.tiddlywiki
+
+To get your own ''//custom//'' Journal button, start by cloning the [[New Journal|$:/core/ui/Buttons/new-journal]] button.
+
+Then create your own config tiddlers, eg: 
+
+* ``$:/config/myNewTiddler/Tags`` and ... 
+* ``$:/config/myNewTiddler/Title`` and ... 
+* ``$:/config/myNewTiddler/Text``
+
+
+Edit your custom button and "search and replace" the config tiddler names.
+
+Change the following lines, near the end  of the tiddler 
+from
+
+```
+<$set name="journalTitleTemplate" value={{$:/config/NewJournal/Title}}>
+<$set name="journalTags" value={{$:/config/NewJournal/Tags}}>
+<$set name="journalText" value={{$:/config/NewJournal/Text}}>
+```
+
+to
+
+```
+<$set name="journalTitleTemplate" value={{$:/config/myNewTiddler/Title}}>
+<$set name="journalTags" value={{$:/config/myNewTiddler/Tags}}>
+<$set name="journalText" value={{$:/config/myNewTiddler/Text}}>
+```
+
+if you want to see your config tiddlers in the sidebar use:
+
+```
+<$set name="journalTitleTemplate" value={{config/myNewTiddler/Title}}>
+<$set name="journalTags" value={{config/myNewTiddler/Tags}}>
+<$set name="journalText" value={{config/myNewTiddler/Text}}>
+```

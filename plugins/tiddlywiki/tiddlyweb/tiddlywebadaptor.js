@@ -19,8 +19,17 @@ function TiddlyWebAdaptor(options) {
 	this.wiki = options.wiki;
 	this.host = this.getHost();
 	this.recipe = undefined;
+	this.hasStatus = false;
 	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
+	this.isLoggedIn = false;
+	this.isReadOnly = false;
 }
+
+TiddlyWebAdaptor.prototype.name = "tiddlyweb";
+
+TiddlyWebAdaptor.prototype.isReady = function() {
+	return this.hasStatus;
+};
 
 TiddlyWebAdaptor.prototype.getHost = function() {
 	var text = this.wiki.getTiddlerText(CONFIG_HOST_TIDDLER,DEFAULT_HOST_TIDDLER),
@@ -30,7 +39,7 @@ TiddlyWebAdaptor.prototype.getHost = function() {
 		];
 	for(var t=0; t<substitutions.length; t++) {
 		var s = substitutions[t];
-		text = text.replace(new RegExp("\\$" + s.name + "\\$","mg"),s.value);
+		text = $tw.utils.replaceString(text,new RegExp("\\$" + s.name + "\\$","mg"),s.value);
 	}
 	return text;
 };
@@ -51,12 +60,12 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 	$tw.utils.httpRequest({
 		url: this.host + "status",
 		callback: function(err,data) {
+			self.hasStatus = true;
 			if(err) {
 				return callback(err);
 			}
 			// Decode the status JSON
-			var json = null,
-				isLoggedIn = false;
+			var json = null;
 			try {
 				json = JSON.parse(data);
 			} catch (e) {
@@ -68,11 +77,13 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 					self.recipe = json.space.recipe;
 				}
 				// Check if we're logged in
-				isLoggedIn = json.username !== "GUEST";
+				self.isLoggedIn = json.username !== "GUEST";
+				self.isReadOnly = !!json["read_only"];
+				self.isAnonymous = !!json.anonymous;
 			}
 			// Invoke the callback if present
 			if(callback) {
-				callback(null,isLoggedIn,json.username);
+				callback(null,self.isLoggedIn,json.username,self.isReadOnly,self.isAnonymous);
 			}
 		}
 	});
@@ -157,6 +168,9 @@ Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
 TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 	var self = this;
+	if(this.isReadOnly) {
+		return callback(null);
+	}
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(tiddler.fields.title),
 		type: "PUT",
@@ -201,9 +215,12 @@ options include:
 tiddlerInfo: the syncer's tiddlerInfo for this tiddler
 */
 TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
-	var self = this,
-		bag = options.tiddlerInfo.adaptorInfo.bag;
+	var self = this;
+	if(this.isReadOnly) {
+		return callback(null);
+	}
 	// If we don't have a bag it means that the tiddler hasn't been seen by the server, so we don't need to delete it
+	var bag = options.tiddlerInfo.adaptorInfo.bag;
 	if(!bag) {
 		return callback(null);
 	}

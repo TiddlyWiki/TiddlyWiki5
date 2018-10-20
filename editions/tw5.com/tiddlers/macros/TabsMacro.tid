@@ -1,13 +1,13 @@
 caption: tabs
 created: 20131228162203521
-modified: 20150221211706000
+modified: 20180408084453861
 tags: Macros [[Core Macros]]
 title: tabs Macro
 type: text/vnd.tiddlywiki
 
 The <<.def tabs>> [[macro|Macros]] presents a [[selection of tiddlers|Title Selection]] as a set of tabs that the user can switch between.
 
-The tabs display the <<.field caption>> field of a tiddler if it has one, or the tiddler's title otherwise.
+The tabs display the <<.field caption>> field of a tiddler if it has one, or the tiddler's title otherwise. If specified, the tabs display the <<.field tooltip>> field of a tiddler as the respective button tooltip.
 
 By default the tabs are arranged horizontally above the content. To get vertical tabs, set the <<.param class>> parameter to <<.value tc-vertical>>.
 
@@ -23,9 +23,19 @@ By default the tabs are arranged horizontally above the content. To get vertical
 : Additional [[CSS|Cascading Style Sheets]] classes for the generated `div` elements. Multiple classes can be separated with spaces
 ;template
 : Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the content of the selected tab
+;buttonTemplate
+: Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the content of the button for the selected tab
+;retain
+: Optionally, "yes" specifies that the content of the tabs should be retained when switching to another tab, avoiding re-rendering it (this can be useful to avoid video or audio sources unexpectedly resetting)
 
 Within the template, the title of the selected tab is available in the <<.var currentTab>> variable.
 
-The <<.vlink currentTiddler>> variable is not affected by the <<.var tabs>> macro.
+The <<.vlink currentTiddler>> variable is not affected by the <<.var tabs>> macro. This can put you in trouble if the list of tabs includes tiddlers that depend on the value of the <<.vlink currentTiddler>>, for example tiddlers listing children based on its own name. To overcome this problem you can use a [[TemplateTiddler|TemplateTiddlers]] like the following:
+
+```
+<$tiddler tiddler=<<currentTab>>>
+<$transclude mode="block" />
+</$tiddler>
+```
 
 <<.macro-examples "tabs">>

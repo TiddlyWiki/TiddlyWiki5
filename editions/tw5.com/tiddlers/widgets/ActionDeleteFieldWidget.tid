@@ -14,7 +14,7 @@ The ''action-deletefield'' widget is an [[action widget|ActionWidgets]] that del
 The ''action-deletefield'' widget is invisible. Any content within it is ignored.
 
 |!Attribute |!Description |
-|$tiddler |The title of the tiddler whose fields are to be modified (if not provided defaults to the [[current tiddler|Current Tiddler]] |
+|$tiddler |The title of the tiddler whose fields are to be modified (if not provided defaults to the [[current tiddler|Current Tiddler]]) |
 |$field |Optional name of a field to delete |
 |//{any attributes not starting with $}// |Each attribute name specifies a field to be deleted. The attribute value is ignored and need not be specified |
 

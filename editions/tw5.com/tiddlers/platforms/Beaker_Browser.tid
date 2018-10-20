@@ -1,0 +1,21 @@
+created: 20161229113910984
+modified: 20171113110222980
+title: Beaker Browser
+type: text/vnd.tiddlywiki
+
+From [[Beaker Browser website|https://beakerbrowser.com/]]:
+
+> Beaker is a Peer-to-Peer Web Browser, made for users to run applications independently of hosts. Using P2P Hypermedia, Beaker separates frontend apps from backend services, so that users are completely in control of their software and data. Read more.
+
+Beaker is a fork of the open source Chromium browser (which is the core engine powering Google's Chrome browser). 
+
+Beaker adds the ability to host sites within the browser, and browse to those sites via the `dat://` protocol. The extraordinary thing is that if you are running Beaker then you can also browse to sites hosted by other users, without needing any server in between.
+
+Further, you can opt to host a site belonging to somebody else, forming part of a Bittorrent-like swarm of peers serving the content to other browsers. You can also //fork// a site, making your own copy that you can change as you need.
+
+The main disadvantage is that mainstream browsers cannot use `dat://` sites.
+
+Most of the magic is accomplished by the underlying [[Dat protocol|https://datproject.org/]].
+
+<<.from-version "5.1.14">> TiddlyWiki incorporates a special saver module permitting changes to be saved directly from Beaker browser. See  [[Saving on Beaker Browser]] for instructions.
+

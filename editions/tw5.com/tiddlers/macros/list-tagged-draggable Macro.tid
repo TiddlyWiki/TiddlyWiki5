@@ -1,0 +1,25 @@
+caption: list-tagged-draggable
+created: 20170329092723939
+modified: 20180109171254045
+tags: Macros [[Core Macros]]
+title: list-tagged-draggable Macro
+type: text/vnd.tiddlywiki
+
+The <<.def list-tagged-draggable>> [[macro|Macros]] renders the tiddlers with a particular tag as a list of links that can be reordered via [[drag and drop|Drag and Drop]].
+
+!! Parameters
+
+;tag
+: The title of the tag
+;subFilter
+: An optional subfilter to filter out unwanted items (eg `!tag[done]`)
+;itemTemplate
+: Optional title of a tiddler to use as the template for rendering list items
+;emptyMessage
+: Optional wikitext to display if there are no tiddlers with the specified tag
+
+Note that the [[ordering|Order of Tagged Tiddlers]] is accomplished by assigning a new list to the `list` field of the tag tiddler. Any `list-before` or `list-after` fields on any of the other tiddlers carrying the tag are also removed to ensure the `list` field is respected.
+
+If the `itemTemplate` parameter is not provided then the list items are rendered as simple links. Within the `itemTemplate`, the [[currentTiddler Variable]] refers to the current list item.
+
+<<.macro-examples "list-tagged-draggable">>

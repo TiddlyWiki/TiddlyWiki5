@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/xlsx-utils/docs/editor
+
+!!! Import Specifications
+
+Import specifications govern how spreadsheets are converted into individual tiddlers.
+
+Each "workbook" describes how spreadsheets of a particular format should be converted.

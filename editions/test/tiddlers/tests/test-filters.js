@@ -51,12 +51,14 @@ describe("Filter tests", function() {
 		title: "TiddlerOne",
 		text: "The quick brown fox in $:/TiddlerTwo",
 		tags: ["one"],
+		authors: "Joe Bloggs",
 		modifier: "JoeBloggs",
 		modified: "201304152222"});
 	wiki.addTiddler({
 		title: "$:/TiddlerTwo",
 		text: "The rain in Spain\nfalls mainly on the plain and [[a fourth tiddler]]",
 		tags: ["two"],
+		authors: "[[John Doe]]",
 		modifier: "JohnDoe",
 		modified: "201304152211"});
 	wiki.addTiddler({
@@ -69,14 +71,21 @@ describe("Filter tests", function() {
 		title: "a fourth tiddler",
 		text: "The quality of mercy is not drained by [[Tiddler Three]]",
 		tags: [],
+		empty: "not",
 		modifier: "JohnDoe"});
 	wiki.addTiddler({
 		title: "one",
 		text: "This is the text of tiddler [[one]]",
 		list: "[[Tiddler Three]] [[TiddlerOne]]",
+		empty: "",
 		modifier: "JohnDoe"});
 
 	// Our tests
+
+	it("should handle the lookup operator", function() {
+		expect(wiki.filterTiddlers("Six Seventh 8 +[lookup[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,,Tidd");
+		expect(wiki.filterTiddlers("Six Seventh 8 +[lookup:8[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,Tidd,Tidd");
+	});
 
 	it("should retrieve shadow tiddlers", function() {
 		expect(wiki.getTiddlerText("Tiddler8")).toBe("Tidd");
@@ -189,6 +198,12 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[!has[modified]sort[title]]").join(",")).toBe("a fourth tiddler,one");
 	});
 
+	it("should handle the has:field operator", function() {
+		expect(wiki.filterTiddlers("[has:field[empty]sort[title]]").join(",")).toBe("a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[!has:field[empty]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne");
+	});
+
+
 	it("should handle the limit operator", function() {
 		expect(wiki.filterTiddlers("[!is[system]sort[title]limit[2]]").join(",")).toBe("a fourth tiddler,one");
 		expect(wiki.filterTiddlers("[prefix[Tid]sort[title]limit[1]]").join(",")).toBe("Tiddler Three");
@@ -217,6 +232,8 @@ describe("Filter tests", function() {
 
 	it("should handle the each operator", function() {
 		expect(wiki.filterTiddlers("[each[modifier]sort[title]]").join(",")).toBe("$:/TiddlerTwo,TiddlerOne");
+		expect(wiki.filterTiddlers("[each:list-item[tags]sort[title]]").join(",")).toBe("one,two");
+		expect(wiki.filterTiddlers("[each:list-item[authors]sort[title]]").join(",")).toBe("Bloggs,Joe,John Doe");
 	});
 
 	it("should handle the eachday operator", function() {

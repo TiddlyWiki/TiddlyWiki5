@@ -1,0 +1,35 @@
+caption: Guardar: TiddlyIE
+created: 20131211220000000
+es-title: Guardar con TiddlyIE
+modified: 20160603131831758
+tags: [[Saving on InternetExplorer]]
+title: Saving with TiddlyIE
+type: text/vnd.tiddlywiki
+
+#Descarga e instala la extensión TiddlyIE:
+#* https://github.com/davidjade/TiddlyIE/releases
+
+#Reinicia Internet Explorer. Se te preguntará si quieres activar TiddlyIE
+
+#>Puede que también te pida activar //Microsoft Script Runtime//
+
+
+# Descarga un TiddlyWiki en blanco pulsando este botón
+
+#> {{$:/editions/es-ES/snippets/download-empty-button}}
+
+#>Si el botón no funciona, guarda este enlace: https://tiddlywiki.com/languages/es-ES/empty.html
+
+#> Seguramente el navegador te pida que confirmes la descarga
+
+#Localiza el archivo que acabas de descargar
+
+#*Puedes cambiarle el nombre, pero mantén la extensión `.html` o `.htm`
+
+#Abre el archivo con Internet Explorer
+
+# Crea un nuevo tiddler usando el botón ''Nuevo tiddler'' {{$:/core/images/new-button}} de la barra lateral. Escribe algo en él y haz clic en el botón ''OK'' {{$:/core/images/done-button}}
+
+# Guarda los cambios con el botón ''Guardar cambios'' {{$:/core/images/save-button}} de la barra lateral. Internet Explorer abrirá un cuadro de diálogo para que confirmes que quieres guardar el archivo localmente.
+
+# Recarga la página para comprobar que los cambios se han guardado correctamente

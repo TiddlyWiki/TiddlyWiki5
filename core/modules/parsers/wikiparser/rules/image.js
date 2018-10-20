@@ -6,10 +6,10 @@ module-type: wikirule
 Wiki text inline rule for embedding images. For example:
 
 ```
-[img[http://tiddlywiki.com/fractalveg.jpg]]
-[img width=23 height=24 [http://tiddlywiki.com/fractalveg.jpg]]
-[img width={{!!width}} height={{!!height}} [http://tiddlywiki.com/fractalveg.jpg]]
-[img[Description of image|http://tiddlywiki.com/fractalveg.jpg]]
+[img[https://tiddlywiki.com/fractalveg.jpg]]
+[img width=23 height=24 [https://tiddlywiki.com/fractalveg.jpg]]
+[img width={{!!width}} height={{!!height}} [https://tiddlywiki.com/fractalveg.jpg]]
+[img[Description of image|https://tiddlywiki.com/fractalveg.jpg]]
 [img[TiddlerTitle]]
 [img[Description of image|TiddlerTitle]]
 ```

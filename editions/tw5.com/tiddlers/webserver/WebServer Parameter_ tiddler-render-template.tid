@@ -1,0 +1,8 @@
+caption: tiddler-render-template
+created: 20180808094255388
+modified: 20180808094407363
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: tiddler-render-template
+type: text/vnd.tiddlywiki
+
+The [[web server configuration parameter|WebServer Parameters]] ''tiddler-render-template'' is used to specify the template for serving ordinary, non-system tiddlers in the [[read-only single tiddler view|Using the read-only single tiddler view]]. The default value is `$:/core/templates/server/static.tiddler.html` which renders tiddlers in a lightweight page with a simple sidebar.

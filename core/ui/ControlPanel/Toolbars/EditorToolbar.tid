@@ -1,0 +1,11 @@
+title: $:/core/ui/ControlPanel/Toolbars/EditorToolbar
+tags: $:/tags/ControlPanel/Toolbars
+caption: {{$:/language/ControlPanel/Toolbars/EditorToolbar/Caption}}
+
+\define lingo-base() $:/language/TiddlerInfo/
+
+\define config-base() $:/config/EditorToolbarButtons/Visibility/
+
+{{$:/language/ControlPanel/Toolbars/EditorToolbar/Hint}}
+
+<$macrocall $name="list-tagged-draggable" tag="$:/tags/EditorToolbar" itemTemplate="$:/core/ui/ControlPanel/Toolbars/EditorItemTemplate"/>

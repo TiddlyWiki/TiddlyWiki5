@@ -1,0 +1,6 @@
+title: $:/language/Exporters/
+
+CsvFile: file CSV
+JsonFile: file JSON
+StaticRiver: HTML statico
+TidFile: ".tid" file

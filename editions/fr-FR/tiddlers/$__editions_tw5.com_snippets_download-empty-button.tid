@@ -1,9 +1,0 @@
-created: 20150614115838978
-modified: 20150614115932020
-title: $:/editions/tw5.com/snippets/download-empty-button
-type: text/vnd.tiddlywiki
-
-<$button class="tc-btn-big-green">
-<$action-sendmessage $message="tm-download-file" $param="$:/editions/tw5.com/download-empty" filename="empty.html"/>
-Télécharger la base {{$:/core/images/save-button}}
-</$button>

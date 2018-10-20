@@ -1,0 +1,11 @@
+caption: Ajuste oculto: Search ~AutoFocus 
+created: 20150619162518761
+es-title: Ajuste oculto: AutoFocus de la barra de búsqueda
+modified: 20160426152203677
+tags: [[Hidden Settings]]
+title: Hidden Setting: Search AutoFocus
+type: text/vnd.tiddlywiki
+
+Al abrir TiddlyWiki, el foco se sitúa por defecto en la barra de búsqueda. Si esto te ocasiona algún problema, puedes modificarlo cambiando el texto de <<.em true>> a <<.em false>> en el siguiente tiddler: 
+
+$:/config/Search/AutoFocus

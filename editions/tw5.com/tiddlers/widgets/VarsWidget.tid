@@ -32,9 +32,9 @@ Using the `<$vars>` widget, this situation may be handled in the following way:
 In contrast, here is the same example using the `<$set>` widget:
 
 ```
-<$set name="greeting" value="Hi" />
-<$set name="me" value={{!!title}} />
-<$set name="sentence" value=<<helloworld>> />
+<$set name="greeting" value="Hi" >
+<$set name="me" value={{!!title}} >
+<$set name="sentence" value=<<helloworld>> >
   <<greeting>>! I am <<me>> and I say: <<sentence>>
 </$set>
 </$set>

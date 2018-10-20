@@ -73,7 +73,7 @@ TiddlyFoxSaver.prototype.info = {
 Static method that returns true if this saver is capable of working
 */
 exports.canSave = function(wiki) {
-	return (window.location.protocol === "file:");
+	return true;
 };
 
 /*

@@ -1,0 +1,19 @@
+caption: Idiomas
+created: 20141202125500000
+es-title: Idiomas
+modified: 20160503163510984
+tags: TableOfContents
+title: Languages
+type: text/vnd.tiddlywiki
+
+!! Plugins de idioma
+
+La interfaz de usuario de ~TiddlyWiki está disponible en más de 20 idiomas. Puedes instalar cualquiera de ellos desde el panel de control, en la pestaña <<.controlpanel-tab Plugins>>.
+
+Aprendiendo a [[traducir TiddlyWiki|Translate TiddlyWiki into your language]] a tu idioma puedes contribuir a ampliar la librería. 
+
+!! Ediciones en otros idiomas
+
+Existen ediciones precompiladas en algunos idiomas, que contienen documentación adicional:
+
+<<list-links "[tag[Languages]]">>

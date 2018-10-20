@@ -10,4 +10,4 @@ The `tm-add-field` message is handled by the FieldManglerWidget. It adds the spe
 |!Name |!Description |
 |param |Name of field to add |
 
-The add field  message is usually generated with the ButtonWidget, and is handled by the FieldManglerWidget.
+The add field message is usually generated with the ButtonWidget, and is handled by the FieldManglerWidget.

@@ -1,0 +1,18 @@
+caption: "Interactive Git Documentation", de Devin Weaver
+created: 20150621212120755
+es-title: "Interactive Git Documentation", de Devin Weaver
+modified: 20160417095622425
+tags: Examples
+title: Interactive Git Documentation by Devin Weaver
+type: text/vnd.tiddlywiki
+url: http://sukima.github.io/GitFixUm/
+
+Guía para arreglar un repositorio //roto// de Git, al estilo //elige tu propia aventura//
+
+{{!!url}}
+
+<<<
+Este documento es un intento de hacer una guía bastante exhaustiva para recuperar un repositorio de Git de lo que no tenías intención de hacer.
+
+No es que Git sea tan complicado que necesites todo un libro para resolver tu problema en particular, sino que el abanico de cosas que puedes haber hecho para armar lío es tan grande, que se necesitan varias técnicas para solucionarlo, dependiendo de qué hayas hecho y de qué querías hacer. 
+<<<

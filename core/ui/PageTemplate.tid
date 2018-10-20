@@ -1,10 +1,9 @@
 title: $:/core/ui/PageTemplate
 
 \define containerClasses()
-tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$
+tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 \end
-
-<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
 
 <$set name="tv-config-toolbar-icons" value={{$:/config/Toolbar/Icons}}>
 
@@ -12,7 +11,7 @@ tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$
 
 <$set name="tv-config-toolbar-class" value={{$:/config/Toolbar/ButtonClass}}>
 
-<$set name="themeTitle" value={{$:/view}}>
+<$set name="storyviewTitle" value={{$:/view}}>
 
 <$set name="currentTiddler" value={{$:/language}}>
 
@@ -22,7 +21,7 @@ tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$
 
 <div class=<<containerClasses>>>
 
-<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}}>
+<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
 
 <$dropzone>
 
@@ -51,5 +50,3 @@ tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$
 </$set>
 
 </$set>
-
-</$importvariables>

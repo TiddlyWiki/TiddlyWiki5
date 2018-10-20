@@ -1,14 +1,15 @@
 title: $:/language/Import/
 
+Imported/Hint:  Se importaron los siguientes tiddlers
 Listing/Cancel/Caption: Cancelar
-Listing/Hint: Estos tiddlers están listos para ser importados:
+Listing/Hint: Tiddlers listos para importar
 Listing/Import/Caption: Importar
 Listing/Select/Caption: Seleccionar
 Listing/Status/Caption: Estado
 Listing/Title/Caption: Título
-Upgrader/Plugins/Suppressed/Incompatible: Extensión incompatible u obsoleta bloqueada
-Upgrader/Plugins/Suppressed/Version: Extensión bloqueada (debido a que la <<incoming>> extensión es más antigua que la <<existing>> extensión)
-Upgrader/Plugins/Upgraded: Extensión actualizada de <<incoming>> a <<upgraded>>
+Upgrader/Plugins/Suppressed/Incompatible: Plugin bloqueado, incompatible u obsoleto
+Upgrader/Plugins/Suppressed/Version: Plugin bloqueado debido a que <<incoming>> es más antiguo que el <<existing>>
+Upgrader/Plugins/Upgraded: Plugin actualizado de <<incoming>> a <<upgraded>>
 Upgrader/State/Suppressed: Tiddler temporal bloqueado
 Upgrader/System/Suppressed: Tiddler de sistema bloqueado
 Upgrader/ThemeTweaks/Created: Ajuste de tema migrado de <$text text=<<from>>/>

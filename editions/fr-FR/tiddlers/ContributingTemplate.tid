@@ -3,7 +3,7 @@ modified: 20130825144900000
 title: ContributingTemplate
 type: text/vnd.tiddlywiki
 
-\define tv-wikilink-template() http://tiddlywiki.com/static/$uri_doubleencoded$.html
+\define tv-wikilink-template() https://tiddlywiki.com/static/$uri_doubleencoded$.html
 ! Contributing to TiddlyWiki5
 
 {{Contributing}}

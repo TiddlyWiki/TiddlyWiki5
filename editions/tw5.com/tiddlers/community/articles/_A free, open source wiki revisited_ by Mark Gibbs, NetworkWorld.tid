@@ -1,0 +1,16 @@
+created: 20160204225047445
+modified: 20160204225307847
+tags: Articles
+title: "A free, open source wiki revisited" by Mark Gibbs, NetworkWorld
+type: text/vnd.tiddlywiki
+url: http://www.networkworld.com/article/3028098/open-source-tools/tiddlywiki-a-free-open-source-wiki-revisited.html
+
+Interesting article giving the perspective of someone who has been away from TiddlyWiki for a few years:
+
+{{!!url}}
+
+<<<
+Way back in the mists of time (actually, January 2009) I wrote about a really cool tool called TiddlyWiki, a “non-linear personal web notebook”. Fast forward to today and I just had an out of body experience: Completely by accident I found a TiddlyWiki that I started when I wrote that piece and it still works! 
+
+Finding code that works flawlessly after just two or three years is magical enough but after seven years?! And given that TiddlyWiki is written as a single page Web application and considering how different browsers are now than they were in 2009, the fact that the old version of TiddlyWiki still works is not short of miraculous.
+<<<

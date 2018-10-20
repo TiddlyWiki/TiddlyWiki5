@@ -1,0 +1,16 @@
+created: 20160618090057124
+modified: 20160618090130833
+tags: Learning
+title: Using Stamp
+type: text/vnd.tiddlywiki
+
+! Insert snippets
+You can insert preconfigured snippets of text to use stamp from toolbar. Click ''stamp'' ({{$:/core/images/stamp}}) and just select a snippet.
+
+! Create a snippet
+# Click ''stamp'' ({{$:/core/images/stamp}})
+# Create a snippet tiddler to use "//Add your own//" menu
+# Type some text of snippet for the tiddler, and caption for the name as shown in menu
+# Click the {{$:/core/images/done-button}} ''ok'' button
+
+''Tip:'' You can also create a snippet tiddler using the ''new tiddler'' {{$:/core/images/new-button}} button in the sidebar, and add tag ''~$:/tags/TextEditor/Snippet''

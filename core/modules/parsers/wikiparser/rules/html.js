@@ -97,10 +97,17 @@ exports.parseTag = function(source,pos,options) {
 		return null;
 	}
 	node.tag = token.match[1];
+	if(node.tag.slice(1).indexOf("$") !== -1) {
+		return null;
+	}
 	if(node.tag.charAt(0) === "$") {
 		node.type = node.tag.substr(1);
 	}
 	pos = token.end;
+	// Check that the tag is terminated by a space, / or >
+	if(!$tw.utils.parseWhiteSpace(source,pos) && !(source.charAt(pos) === "/") && !(source.charAt(pos) === ">") ) {
+		return null;
+	}
 	// Process attributes
 	var attribute = $tw.utils.parseAttribute(source,pos);
 	while(attribute) {

@@ -1,10 +1,8 @@
 title: $:/language/EditTemplate/
 
-Body/External/Hint: Ceci est un tiddler externe, conservé en dehors du fichier TiddlyWiki principal. Vous pouvez éditer les tags et les champs mais pas directement le contenu lui-même
-Body/Hint: Utilisez [[WikiText|http://tiddlywiki.com/static/WikiText.html]] pour formater ou ajouter des images et des fonctions dynamiques
+Body/External/Hint: Ce tiddler affiche du contenu situé en dehors du fichier TiddlyWiki principal. Vous pouvez éditer les tags et les champs mais pas directement le contenu lui-même
 Body/Placeholder: Entrez le texte ici
-Body/Preview/Button/Hide: Cacher la prévisualisation
-Body/Preview/Button/Show: Afficher la prévisualisation
+Body/Preview/Type/Output: sortie
 Field/Remove/Caption: supprimer le champ
 Field/Remove/Hint: Supprime le champ
 Fields/Add/Button: ajouter
@@ -13,12 +11,15 @@ Fields/Add/Prompt: Ajouter un nouveau champ :
 Fields/Add/Value/Placeholder: valeur du champ
 Fields/Add/Dropdown/System: Champs système
 Fields/Add/Dropdown/User: Champs utilisateur
-Shadow/OverriddenWarning: Ce tiddler est une version modifiée d'un tiddler « shadow ». Pour revenir à la version par défaut, il vous suffit de supprimer ce tiddler.
-Shadow/Warning: Ceci est un tiddler « shadow ». Toute modification supplantera la version par défaut 
+Shadow/OverriddenWarning: Ce tiddler est une version modifiée d'un tiddler « shadow ». Pour revenir à la version par défaut du plugin <<pluginLink>>, il vous suffit de supprimer ce tiddler.
+Shadow/Warning: Ceci est un tiddler « shadow ». Toute modification supplantera la version issue du plugin <<pluginLink>>
 Tags/Add/Button: ajouter
 Tags/Add/Placeholder: nom du tag
 Tags/Dropdown/Caption: liste des tags
 Tags/Dropdown/Hint: Montre la liste des tags
+Title/BadCharacterWarning: Attention : il est préférable d'éviter l'usage des caractères <<bad-chars>> dans les titres des tiddlers
+Title/Exists/Prompt: Le tiddler cible existe déjà
+Title/Relink/Prompt: Changer ''<$text text=<<fromTitle>>/>'' en ''<$text text=<<toTitle>>/>'' dans les //tags// et les champs //list// des autres tiddlers
 Type/Dropdown/Caption: liste des types de contenu
 Type/Dropdown/Hint: Montre la liste des types de contenu
 Type/Delete/Caption: supprimer le type de contenu

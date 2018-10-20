@@ -1,0 +1,29 @@
+caption: Parámetros
+created: 20150220152540000
+es-title: Parámetros de filtro
+modified: 20160421055748029
+tags: [[Filter Syntax]]
+title: Filter Parameter
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+( "[" [:{/"nada excepto ]"/}] "]"
+  |
+  "{" [:{/"nada excepto }"/}] "}"
+  |
+  "<" [:{/"nada excepto >"/}] ">"
+)
+"""/>
+
+Los parámetros de un [[operador|Filter Operators]] son valores que pueden ser:
+
+;<<.def rígidos>> o <<.def "a fuego">>
+: `[tal cual]`
+: El parámetro es el valor exacto y literal que aparece entre corchetes.
+;<<.def flexibles>>
+: <<.def indirectos>>
+:: `{tal cual}`
+:: El parámetro es el texto indicado por la [[referencia|TextReference]] cuyo nombre se muestra entre llaves, es decir, el valor de determinado [[campo|TiddlerFields]] en un tiddler en concreto o el valor de una propiedad de determinado [[tiddler de datos|DataTiddlers]].
+: <<.def variables>>
+:: `<tal cual>`
+:: El parámetro es el valor actual de la [[variable|Variables]] cuyo nombre aparece entre comillas angulares simples. Los parámetros de macros <<.em no>> están soportados.

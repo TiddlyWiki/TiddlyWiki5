@@ -1,0 +1,14 @@
+caption: Aprender TIddlyWiki
+created: 20140912140047779
+es-title: Aprende a usar TiddlyWiki
+list: Videos [[Introduction to Filters]] [[Sharing a TiddlyWiki on Dropbox]] [[Sharing your tiddlers with others]] [[Copying tiddlers between TiddlyWiki files]] [[Creating SubStories]] [[Editing Tiddlers with Emacs]] [[ImageGallery Example]] [[Making curved text with SVG]] TaskManagementExample [[Adding a Twitter Follow button]] [[Philosophy of Tiddlers]] [[Adopt a Titles Policy]]
+modified: 20160421063611395
+tags: TableOfContents
+title: Learning
+type: text/vnd.tiddlywiki
+
+Aprende a usar TiddlyWiki:
+
+<<list-links "[tag[Learning]]">>
+
+MIra también la [[documentación|Reference]] completa, que incluye nociones avanzadas de WikiText, macros, widgets, filtros... etc.

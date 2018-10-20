@@ -1,0 +1,17 @@
+caption: entity
+created: 20160314165608218
+modified: 20160314165658703
+tags: Widgets
+title: EntityWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The entity widget displays a specified HTML character entity.
+
+! Content and Attributes
+
+The content of the `<$entity>` widget is not used.
+
+|!Attribute |!Description |
+|entity |The entity to display (eg, `&times;`) |

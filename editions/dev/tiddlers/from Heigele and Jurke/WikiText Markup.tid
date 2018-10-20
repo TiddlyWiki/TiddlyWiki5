@@ -12,9 +12,9 @@ During the saving process these tags renders to HTML elements for example:
 WikiText:--- 
 Renders as:
 HTML:<hr>
-WikiText:[img[http://tiddlywiki.com/favicon.ico]]
+WikiText:[img[https://tiddlywiki.com/favicon.ico]]
 Renders as: TW
-HTML:<img src="http://tiddlywiki.com/favicon.ico">
+HTML:<img src="https://tiddlywiki.com/favicon.ico">
 ```
 
 Furthermore the WikiText is used to access the widgets which are integrated in the application.These widgets are used to enhance the the WikiText with a rich functionality. Widgets are based on the ~HTML-Syntax but always starts with a $.

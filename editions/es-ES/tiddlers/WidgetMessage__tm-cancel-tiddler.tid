@@ -1,0 +1,17 @@
+caption: tm-cancel-tiddler
+created: 20140226193622350
+es-title: Mensaje: tm-cancel-tiddler
+modified: 20160416050616634
+tags: Messages navigator-message
+title: WidgetMessage: tm-cancel-tiddler
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-cancel-tiddler` cancela la edición de un tiddler y abandona los cambios realizados en el borrador.
+
+Requiere de las siguientes propiedades del objeto `event`:
+
+|!Nombre |!Descripción |
+|param |Título del tiddler cuya edición se cancela |
+|tiddlerTitle |Título alternativo usado si no se especifica ''param'' (asignado automáticamente por ButtonWidget)  |
+
+Este mensaje lo genera normalmente ButtonWidget y lo procesa NavigatorWidget.

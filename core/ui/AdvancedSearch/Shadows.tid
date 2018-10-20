@@ -21,6 +21,8 @@ caption: {{$:/language/Search/Shadows/Caption}}
 
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 
+<$list filter="[{$:/temp/advancedsearch}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+
 <$set name="resultCount" value="""<$count filter="[all[shadows]search{$:/temp/advancedsearch}] -[[$:/temp/advancedsearch]]"/>""">
 
 <div class="tc-search-results">
@@ -32,6 +34,8 @@ caption: {{$:/language/Search/Shadows/Caption}}
 </div>
 
 </$set>
+
+</$list>
 
 </$reveal>
 

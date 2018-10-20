@@ -4,7 +4,7 @@ tags: [[TiddlyWiki on Node.js]]
 title: Building TiddlyWikiClassic
 type: text/vnd.tiddlywiki
 
-TiddlyWiki5 can be used to build older 2.x.x versions of TiddlyWikiClassic from their constituent components. Doing so involves these  features:
+TiddlyWiki5 can be used to build older 2.x.x versions of TiddlyWikiClassic from their constituent components. Doing so involves these features:
 
 * The `tiddlywiki/classictools` plugin, containing a deserializer module which allows tiddlers to be loaded from TiddlyWiki 2.x.x `.recipe` files
 * The `stripcomments` format for the ViewWidget, which strips single line JavaScript comments starting `//#`

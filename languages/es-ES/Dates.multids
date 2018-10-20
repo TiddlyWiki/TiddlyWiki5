@@ -1,36 +1,36 @@
 title: $:/language/
 
-Date/DaySuffix/1: ro
-Date/DaySuffix/10: mo
-Date/DaySuffix/11: mo
-Date/DaySuffix/12: mo
-Date/DaySuffix/13: ro
-Date/DaySuffix/14: to
-Date/DaySuffix/15: to
-Date/DaySuffix/16: to
-Date/DaySuffix/17: mo
-Date/DaySuffix/18: vo
-Date/DaySuffix/19: no
-Date/DaySuffix/2: do
-Date/DaySuffix/20: mo
-Date/DaySuffix/21: ro
-Date/DaySuffix/22: do
-Date/DaySuffix/23: ro
-Date/DaySuffix/24: to
-Date/DaySuffix/25: to
-Date/DaySuffix/26: to
-Date/DaySuffix/27: mo
-Date/DaySuffix/28: vo
-Date/DaySuffix/29: no
-Date/DaySuffix/3: ro
-Date/DaySuffix/30: mo
-Date/DaySuffix/31: ro
-Date/DaySuffix/4: to
-Date/DaySuffix/5: to
-Date/DaySuffix/6: to
-Date/DaySuffix/7: mo
-Date/DaySuffix/8: vo
-Date/DaySuffix/9: no
+Date/DaySuffix/1: º
+Date/DaySuffix/10: 
+Date/DaySuffix/11: 
+Date/DaySuffix/12: 
+Date/DaySuffix/13: 
+Date/DaySuffix/14: 
+Date/DaySuffix/15: 
+Date/DaySuffix/16: 
+Date/DaySuffix/17: 
+Date/DaySuffix/18: 
+Date/DaySuffix/19: 
+Date/DaySuffix/2: 
+Date/DaySuffix/20: 
+Date/DaySuffix/21: 
+Date/DaySuffix/22: 
+Date/DaySuffix/23: 
+Date/DaySuffix/24: 
+Date/DaySuffix/25: 
+Date/DaySuffix/26: 
+Date/DaySuffix/27: 
+Date/DaySuffix/28: 
+Date/DaySuffix/29: 
+Date/DaySuffix/3: 
+Date/DaySuffix/30: 
+Date/DaySuffix/31: 
+Date/DaySuffix/4: 
+Date/DaySuffix/5: 
+Date/DaySuffix/6: 
+Date/DaySuffix/7: 
+Date/DaySuffix/8: 
+Date/DaySuffix/9: 
 Date/Long/Day/0: domingo
 Date/Long/Day/1: lunes
 Date/Long/Day/2: martes
@@ -50,13 +50,13 @@ Date/Long/Month/6: junio
 Date/Long/Month/7: julio
 Date/Long/Month/8: agosto
 Date/Long/Month/9: septiembre
-Date/Short/Day/0: Dom
-Date/Short/Day/1: Lun
-Date/Short/Day/2: Mar
-Date/Short/Day/3: Mié
-Date/Short/Day/4: Jue
-Date/Short/Day/5: Vie
-Date/Short/Day/6: Sáb
+Date/Short/Day/0: Do
+Date/Short/Day/1: Lu
+Date/Short/Day/2: Ma
+Date/Short/Day/3: Mi
+Date/Short/Day/4: Ju
+Date/Short/Day/5: Vi
+Date/Short/Day/6: Sá
 Date/Short/Month/1: Ene
 Date/Short/Month/12: Dic
 Date/Short/Month/4: Abr
@@ -65,7 +65,7 @@ RelativeDate/Future/Days: dentro de <<period>> días
 RelativeDate/Future/Hours: en <<period>> horas
 RelativeDate/Future/Minutes: en <<period>> minutos
 RelativeDate/Future/Months: dentro de <<period>> meses
-RelativeDate/Future/Second: dentro de 1 segundo
+RelativeDate/Future/Second: en 1 segundo
 RelativeDate/Future/Seconds: en <<period>> segundos
 RelativeDate/Future/Years: dentro de <<period>> años
 RelativeDate/Past/Days: hace <<period>> días

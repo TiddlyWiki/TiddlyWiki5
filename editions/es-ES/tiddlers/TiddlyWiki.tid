@@ -1,0 +1,15 @@
+created: 20130822170700000
+modified: 20160412092500740
+tags: Concepts
+title: TiddlyWiki
+type: text/vnd.tiddlywiki
+
+~TiddlyWiki es una potente herramienta interactiva para la manipulación de información compleja con estructura que no encaja fácilmente en las herramientas tradicionales, como hojas de cálculo o procesadores de texto.
+
+~TiddlyWiki está diseñado para adaptarse a tu forma de pensar y ayudarte a manejar todo aquello que no acaba de encajar. La [[idea fundamental |Philosophy of Tiddlers]] es que la información es más útil y está más a mano si la dividimos en unidades mínimas, semánticamente significativas --[[tiddlers|Tiddlers]]-- y le damos títulos que permitan  [[estructurarlas|Structuring TiddlyWiki]] mediante [[enlaces|TiddlerLinks]], [[etiquetas|Tagging]], [[listas|ListField]] y [[macros|Macros]].
+
+Los tiddlers se valen de una notación especial que llamamos WikiText para explotar, de forma sencilla, una amplia variedad de opciones de formato de texto y enlace hipertextual.  ~TiddlyWiki tiene como objetivo proporcionar una interfaz fluida de trabajo que permita agregar tiddlers y componer así narraciones más largas.
+
+La gente adora ~TiddlyWIki. Primero, porque puede usarse tal cual, sin necesidad de complicadas infrastructuras de servidor y, porque al ser de [[código abierto|OpenSource]], brinda una libertad sin precedentes para que cualquiera pueda mantener su información más preciada bajo su propio control.
+
+~TiddlyWiki fue creado originalmente por JeremyRuston y es en la actualidad un próspero proyecto open source, con una animada [[comunidad|Community]] de desarrolladores independientes.

@@ -1,0 +1,17 @@
+caption: tm-permalink
+created: 20140723103751357
+es-title: Mensaje: tm-permalink
+modified: 20160415111836727
+tags: Messages
+title: WidgetMessage: tm-permalink
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-permalink` cambia la dirección de la barra del navegador para formar un  [[permalink|PermaLinks]]: dirección web que lleva hasta un tiddler específico (por defecto, el tiddler actual).
+
+Este mensaje permite las siguientes propiedades del objeto `event`:
+
+|!Nombre |!Descripción |
+|param |Título del tiddler para el permalink |
+|tiddlerTitle |El tiddler actual (usado por defecto si no se especifica otro en el `param`) |
+
+Este mensaje puede generarse con el ButtonWidget y lo procesa el mecanismo StoryMechanism

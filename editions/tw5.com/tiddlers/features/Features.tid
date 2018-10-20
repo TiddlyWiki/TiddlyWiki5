@@ -1,23 +1,11 @@
 created: 20130822172800000
-modified: 20140920143945484
+modified: 20160107225826644
 tags: TableOfContents
 title: Features
 type: text/vnd.tiddlywiki
-
-\define alert-demo()
-<$fieldmangler tiddler="SampleAlert"><$set name="currentTiddler" value="SampleAlert"><$button message="tm-add-tag" param="$:/tags/Alert">alerts</$button></$set></$fieldmangler>
-\end
 
 Further information about specific TiddlyWiki features:
 
 <<list-links "[tag[Features]]">>
 
-----
-
-* Familiar user interface elements like <<alert-demo>>, <$button message="tm-modal" param="SampleWizard">wizards</$button> and <$button message="tm-notify" param="SampleNotification">notifications</$button>
-* Try out the <$button message="tm-full-screen">full screen support</$button>
-* Explore the [[D3.js visualisation plugin|http://tiddlywiki.com/plugins/tiddlywiki/d3/index.html]]
-* [[CodeMirror support via a plugin|http://tiddlywiki.com/plugins/tiddlywiki/codemirror/index.html]]
-* [[Markdown support via a plugin|http://tiddlywiki.com/plugins/tiddlywiki/markdown/index.html]]
-* [[Classic TiddlyWiki markup support via a plugin|http://tiddlywiki.com/plugins/tiddlywiki/tw2parser/index.html]]
-* Last but not least, TiddlyWiki is a rare example of a practical [[quine|Quine]]
+Last but not least, TiddlyWiki is a rare example of a practical [[quine|Quine]]

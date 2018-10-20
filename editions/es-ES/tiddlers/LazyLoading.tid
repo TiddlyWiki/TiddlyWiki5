@@ -1,0 +1,34 @@
+caption: Carga diferida
+created: 20140206214608586
+es-title: Carga diferida o Lazy Loading
+modified: 20160503054340337
+tags: Features
+title: LazyLoading
+type: text/vnd.tiddlywiki
+
+Generalmente, todo el contenido de todos los tiddlers se incrusta en el archivo HTML principal. <<.def "Lazy loading">> o <<.def "Carga diferida">> es la técnica por la que sólo se incrustan los metadatos del tiddler (es decir, todos los campos menos <<.field text>>), que se pide al servidor cuando se necesita. ([[Más información, aquí|https://es.wikipedia.org/wiki/Lazy_loading]])
+
+Puede aplicarse carga diferida en dos configuraciones:
+
+* En [[Node.js|TiddlyWiki on Node.js]] se puede aplicar a los tiddlers de imágenes o a todos los tiddlers excepto los de sistema
+
+* En [[TiddlyWiki in the Sky for TiddlyWeb]], se puede aplicar a todos los tiddlers
+
+! Carga diferida en Node.js
+
+Para iniciar ~TiddlyWiki en carga diferida de imágenes, utiliza este comando: 
+
+```
+tiddlywiki --server 8080 $:/core/save/lazy-images
+```
+
+para aplicar la carga diferida a todos los tiddlers salvo los de sistema, utiliza este este otro:
+
+```
+tiddlywiki --server 8080 $:/core/save/lazy-all
+```
+
+! Carga diferida en TiddlyWeb
+
+En la configuración actual, la carga diferida se aplica por defecto.
+

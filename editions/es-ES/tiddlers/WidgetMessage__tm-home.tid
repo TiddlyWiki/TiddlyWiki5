@@ -1,0 +1,15 @@
+caption: tm-home
+created: 20140819110529062
+es-title: Mensajes: tm-home
+modified: 20160416042553510
+tags: Messages
+title: WidgetMessage: tm-home
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-home` cierra cualquier tiddler que se haya abierto y abre los tiddlers por defecto definidos en [[$:/DefaultTiddlers]]. 
+
+También elimina cualquier [[permalink|PermaLinks]] de la barra de dirección del navegador
+
+No requiere propiedad alguna del objeto `event`.
+
+Este mensaje normalmente lo genera ButtonWidget y lo procesa el núcleo de ~TiddlyWiki.

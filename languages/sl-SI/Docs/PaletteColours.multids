@@ -1,0 +1,105 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: Ozadje opozorila
+alert-border: Rob opozorila
+alert-highlight: Poudarek opozorila
+alert-muted-foreground: Ospredje izklopljenega opozorila
+background: Splošno ozadje
+blockquote-bar: Oznaka citata
+button-background: Privzeto ozadje gumba
+button-border: Privzeta rob gumba
+button-foreground: Privzeto ospredje gumba
+code-background: Ozadje kode
+code-border: Rob kode
+code-foreground: Ospredje kode
+dirty-indicator: Indikator neshranjenih sprememb
+download-background: Ozadje gumba prejemanje
+download-foreground: Ospredje gumba prejemanje
+dragger-background: Ozadje vlečenja
+dragger-foreground: Ospredje vlečenja
+dropdown-background: Ozadje pogovornega okna za izbiro
+dropdown-border: Rob pogovornega okna za izbiro
+dropdown-tab-background: Ozadje zavihka pogovornega okna za izbiro
+dropdown-tab-background-selected: Ozadje izbranega zavihka pogovornega okna za izbiro
+dropzone-background: Ozadje uvozne cone
+external-link-background: Ozadje zunanje povezave
+external-link-background-hover: Ozadje zunanje povezave ob prehodu
+external-link-background-visited: Ozadje obiskane zunanje povezave
+external-link-foreground: Ospredje zunanje povezave
+external-link-foreground-hover: Ospredje zunanje povezave ob prehodu
+external-link-foreground-visited: Ospredje obiskane zunanje povezave
+foreground: Splošno ospredje
+message-background: Ozadje sporočilnega polja
+message-border: Rob sporočilnega polja
+message-foreground: Ospredje sporočilnega polja
+modal-backdrop: Zatemnjeno modalno pogovorno okno
+modal-background: Ozadje modalnega pogovornega okna
+modal-border: Rob modalnega pogovornega okna
+modal-footer-background: Ozadje noge modalnega pogovornega okna
+modal-footer-border: Rob noge modalnega pogovornega okna
+modal-header-border: Rob glave modalnega pogovornega okna
+muted-foreground: Splošno izklopljeno ospredje
+notification-background: Ozadje obvestila
+notification-border: Rob obvestila
+page-background: Ozadje strani
+pre-background: Ozadje predoblikovane kode
+pre-border: Rob predoblikovane kode
+primary: Splošna osnovna barva
+sidebar-button-foreground: Ospredje gumba v stranski vrstici
+sidebar-controls-foreground: Ospredje nadzornih elementov v stranski vrstici
+sidebar-controls-foreground-hover: Ospredje nadzornih elementov v stranski vrstici ob prehodu
+sidebar-foreground: Ospredje stranske vrstice
+sidebar-foreground-shadow: Senčno ospredje stranske vrstice
+sidebar-muted-foreground: Izklopljeno ospredje stranske vrstice
+sidebar-muted-foreground-hover: Izklopljeno ospredje stranske vrstice ob prehodu
+sidebar-tab-background: Ozadje zavihka v stranski vrstici
+sidebar-tab-background-selected: Ozadje izbranega zavihka v stranski vrstici
+sidebar-tab-border: Rob zavihka v stranski vrstici
+sidebar-tab-border-selected: Rob izbranega zavihka v stranski vrstici
+sidebar-tab-divider: Razdelilnik zavihkov v stranski vrstici
+sidebar-tab-foreground: Ospredje zavihka v stranski vrstici
+sidebar-tab-foreground-selected: Ospredje izbranega zavihka v stranski vrstici
+sidebar-tiddler-link-foreground: Ospredje povezave do tiddlerja v stranski vrstici
+sidebar-tiddler-link-foreground-hover: Ospredje povezave do tiddlerja v stranski vrstici ob prehodu
+site-title-foreground: Ospredje naslova strani
+static-alert-foreground: Ospredje statičnega opozorila
+tab-background: Ozadje zavihka
+tab-background-selected: Ozadje izbranega zavihka
+tab-border: Rob zavihka
+tab-border-selected: Rob izbranih zavihkov
+tab-divider: Razdelilnik zavihkov
+tab-foreground: Ospredje zavihkov
+tab-foreground-selected: Ospredje izbranih zavihkov
+table-border: Rob tabele
+table-footer-background: Ozadje noge tabele
+table-header-background: Ozadje glave tabele
+tag-background: Ozadje oznake
+tag-foreground: Ospredje oznake
+tiddler-background: Ozadje tiddlerja
+tiddler-border: Rob tiddlerja
+tiddler-controls-foreground: Ospredje nadzornih elementov tiddlerja
+tiddler-controls-foreground-hover: Ospredje nadzornih elementov tiddlerja ob prehodu
+tiddler-controls-foreground-selected: Ospredje izbranih nadzornih elementov tiddlerja
+tiddler-editor-background: Ozadje urejevalnika tiddlerja
+tiddler-editor-border: Rob urejevalnika tiddlerja
+tiddler-editor-border-image: Rob urejevalnika slikovnega tiddlerja
+tiddler-editor-fields-even: Ozadje urejevalnika tiddlerja za soda polja
+tiddler-editor-fields-odd: Ozadje urejevalnika tiddlerja za liha polja
+tiddler-info-background: Ozadje informacijske plošče tiddlerja
+tiddler-info-border: Rob informacijske plošče tiddlerja
+tiddler-info-tab-background: Ozadje zavihka informacijske plošče tiddlerja
+tiddler-link-background: Ozadje povezave do tiddlerja
+tiddler-link-foreground: Ospredje povezave do tiddlerja
+tiddler-subtitle-foreground: Ospredje podnaslova tiddlerja
+tiddler-title-foreground: Ospredje naslova tiddlerja
+toolbar-cancel-button: Ospredje 'cancel' gumba orodne vrstice
+toolbar-close-button: Ospredje 'close' gumba orodne vrstice
+toolbar-delete-button: Ospredje 'delete' gumba orodne vrstice
+toolbar-done-button: Ospredje 'done' gumba orodne vrstice
+toolbar-edit-button: Ospredje 'edit' gumba orodne vrstice
+toolbar-info-button: Ospredje 'info' gumba orodne vrstice
+toolbar-new-button: Ospredje 'new tiddler' gumba orodne vrstice
+toolbar-options-button: Ospredje 'options' gumba orodne vrstice
+toolbar-save-button: Ospredje 'save' gumba orodne vrstice
+untagged-background: Ozadje neoznačene pilule
+very-muted-foreground: Zelo zatemnjeno ospredje

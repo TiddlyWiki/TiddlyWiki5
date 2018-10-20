@@ -11,7 +11,7 @@ L'une des aptitudes-clé de WikiText est sa capacité à créer des liens vers d
 * Lien vers un tiddler via le titre&nbsp;: `[[Titre du Tiddler]]`
 * Lien vers un tiddler avec libellé&nbsp;: `[[Texte à afficher|Titre du Tiddler]]`
 * Pour les tiddlers conformes aux règles CamelCase, saisir leur titre génère automatiquement la création du lien
-* Pour un lien vers un site externe, saisir l'URL complète du site&nbsp;: `http://tiddlywiki.com/` ou `[[TW5|http://tiddlywiki.com/]]`
+* Pour un lien vers un site externe, saisir l'URL complète du site&nbsp;: `https://tiddlywiki.com/` ou `[[TW5|https://tiddlywiki.com/]]`
 
 Vous pouvez annuler la prise en compte du lien en le préfixant du signe `~`. 
 

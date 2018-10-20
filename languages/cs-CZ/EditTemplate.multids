@@ -1,10 +1,7 @@
 title: $:/language/EditTemplate/
 
 Body/External/Hint: Tohle je externí tiddler uložený mimo hlavní soubor TiddlyWiki. Můžete upravovat štítky a pole, ale nemůžete přímo upravovat samotný obsah
-Body/Hint: Použijte [[wiki text|http://tiddlywiki.com/static/WikiText.html]] pro vložení formátování, obrázků a pod.
 Body/Placeholder: Vložte text...
-Body/Preview/Button/Hide: skrýt náhled
-Body/Preview/Button/Show: náhled
 Field/Remove/Caption: odstranit pole
 Field/Remove/Hint: Odstranit pole
 Fields/Add/Button: přidat

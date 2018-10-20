@@ -14,6 +14,10 @@ title: $:/plugins/tiddlywiki/text-slicer/templates/plain/tiddler
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/paragraph" mode="block"/>
 </$list>
 
+<$list filter="[<toc-type>prefix[note]]" variable="item">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/note" mode="block"/>
+</$list>
+
 <$list filter="[<toc-type>prefix[list]]" variable="item">
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/list" mode="block"/>
 </$list>
@@ -24,6 +28,18 @@ title: $:/plugins/tiddlywiki/text-slicer/templates/plain/tiddler
 
 <$list filter="[<toc-type>prefix[image]]" variable="item">
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/image" mode="block"/>
+</$list>
+
+<$list filter="[<toc-type>prefix[def-list]]" variable="item">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/def-list" mode="block"/>
+</$list>
+
+<$list filter="[<toc-type>prefix[term]]" variable="item">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/term" mode="block"/>
+</$list>
+
+<$list filter="[<toc-type>prefix[definition]]" variable="item">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/definition" mode="block"/>
 </$list>
 
 </$vars>

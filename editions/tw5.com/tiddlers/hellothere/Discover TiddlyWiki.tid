@@ -1,5 +1,5 @@
 created: 20140904121000000
-modified: 20150414072046785
+modified: 20151023165341339
 tags: HelloThere
 title: Discover TiddlyWiki
 type: text/vnd.tiddlywiki
@@ -13,7 +13,7 @@ You've never seen //anything// like ~TiddlyWiki. ~TiddlyWiki is:
 
 ! ~TiddlyWiki is a Tool
 
-''~TiddlyWiki is first and foremost a tool:'' it is a free downloadable tool for capturing and organising content from the web, from your documents or from your brain. Its a tool for note-taking, bookmarking, pinning, writing, managing to-do lists and projects, collaborating, blogging, and publishing.
+''~TiddlyWiki is first and foremost a tool:'' it is a free downloadable tool for capturing and organising content from the web, from your documents or from your brain. It is a tool for note-taking, bookmarking, pinning, writing, managing to-do lists and projects, collaborating, blogging, and publishing.
 
 In ~TiddlyWiki you create or paste content into notes called tiddlers, then connect your tiddlers with hyperlinks and tags. You can then quickly retrieve your notes through features such as tag pills, sidebar tabs, and ~TiddlyWiki's lightning fast search window. You can even dynamically include one tiddler's content inside another - similar to using building blocks - to create articles, lists, presentations and more.
 

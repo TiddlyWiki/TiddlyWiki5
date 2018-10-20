@@ -6,6 +6,9 @@ alert-highlight: Realce de alertas
 alert-muted-foreground: Fundo de alertas silenciados
 background: Fundo geral
 blockquote-bar: Barra de citação
+button-background: Fundo de botão pré-definido
+button-border: Moldura de botão pré-definido
+button-foreground: Primeiro plano de botão pré-definido
 code-background: Fundo de código
 code-border: Margem de código
 code-foreground: Primeiro plano de código
@@ -58,6 +61,7 @@ sidebar-tab-foreground: Primeiro plano de separador da barra lateral
 sidebar-tab-foreground-selected: Primeiro plano de separador seleccionado da barra lateral
 sidebar-tiddler-link-foreground: Primeiro plano de ligação para tiddler na barra lateral
 sidebar-tiddler-link-foreground-hover: Primeiro plano de ligação para tiddler na barra lateral sob o cursor
+site-title-foreground: Primeiro plano do site
 static-alert-foreground: Primeiro plano de alerta estático
 tab-background: Fundo de separador
 tab-background-selected: Fundo de separador seleccionado

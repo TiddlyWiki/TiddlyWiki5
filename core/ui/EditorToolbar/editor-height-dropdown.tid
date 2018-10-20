@@ -1,0 +1,8 @@
+title: $:/core/ui/EditorToolbar/editor-height-dropdown
+
+\define lingo-base() $:/language/Buttons/EditorHeight/
+''<<lingo Hint>>''
+
+<$radio tiddler="$:/config/TextEditor/EditorHeight/Mode" value="auto"> {{$:/core/images/auto-height}} <<lingo Caption/Auto>></$radio>
+
+<$radio tiddler="$:/config/TextEditor/EditorHeight/Mode" value="fixed"> {{$:/core/images/fixed-height}} <<lingo Caption/Fixed>> <$edit-text tag="input" tiddler="$:/config/TextEditor/EditorHeight/Height" default="100px"/></$radio>

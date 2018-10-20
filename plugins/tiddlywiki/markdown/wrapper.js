@@ -48,6 +48,18 @@ function transformNode(node) {
 				delete widget.attributes.src;
 			}
 		}
+		// Convert internal links to proper wikilinks
+		if (widget.tag === "a" && widget.attributes.href.value[0] === "#") {
+			widget.type = "link";
+			widget.attributes.to = widget.attributes.href;
+			if (widget.attributes.to.type === "string") {
+				//Remove '#' before conversion to wikilink
+				widget.attributes.to.value = widget.attributes.to.value.substr(1);
+			}
+			//Children is fine
+			delete widget.tag;
+			delete widget.attributes.href;
+		}
 		return widget;
 	} else {
 		return {type: "text", text: node};

@@ -1,0 +1,27 @@
+caption: Ejemplos
+created: 20140320230543190
+es-title: Ejemplos
+modified: 20160605052926372
+tags: HelloThere Community
+title: Examples
+type: text/vnd.tiddlywiki
+
+Esta es una muestra de algunos interesantes ejemplos  de uso de ~TiddlyWiki en la web.
+
+Envía más ejemplos que encuentres para ampliar esta lista via [[GitHub|https://github.com/Jermolene/TiddlyWiki5]] o [[Twitter|https://twitter.com/tiddlywiki]], o publícalas en el [[grupo|https://groups.google.com/forum/?hl=es#!forum/tiddlywiki]]
+
+<div class="tc-link-info">
+
+<$list filter="[tag[Examples]!sort[modified]]">
+
+<div class="tc-link-info-item">
+
+! <$link><$view field="title"/></$link>
+
+<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+
+<$transclude/>
+
+</div>
+
+</$list>

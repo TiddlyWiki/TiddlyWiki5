@@ -14,5 +14,4 @@ Os parâmetros são:
 * ''filter'' - filtro que selecciona os tiddlers a ser afectados
 * ''fieldname'' - nome do campo a modificar (por defeito "texto")
 * ''templatetitle'' - o tiddler a interpretar para o campo especificado. Se for deixado em branco ou estiver em falta o campo especificado será eliminado
-* ''type'' - O tipo de texto a interpretar (por defeito "text/plain"; "text/html" pode ser utilizado para incluir etiquetas HTML)
-
+* ''rendertype'' - O tipo de texto a interpretar (por defeito "text/plain"; "text/html" pode ser utilizado para incluir etiquetas HTML)

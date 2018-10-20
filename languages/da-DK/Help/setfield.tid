@@ -14,5 +14,4 @@ Parametrene er:
 * ''filter'' - filter der identificerer de tiddlere der påvirkes
 * ''fieldname'' - feltet der ændres (standard til "text")
 * ''templatetitle'' - tiddleren der wikificeres til det angivne felt. Hvis tom eller manglende slettes det specificerede felt
-* ''type'' - text type til renderingr (standard til "text/plain"; "text/html" kan bruges for at inkludere HTML tags)
-
+* ''rendertype'' - text type til renderingr (standard til "text/plain"; "text/html" kan bruges for at inkludere HTML tags)

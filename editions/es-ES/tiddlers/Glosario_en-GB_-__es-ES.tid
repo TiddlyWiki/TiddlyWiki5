@@ -1,0 +1,16 @@
+created: 20141217193625476
+modified: 20160411174752421
+title: Glosario en-GB -> es-ES
+type: text/vnd.tiddlywiki
+
+|!en-GB |!es-ES |!Comentario |h
+|Tiddler |Tiddler|Invariable |
+
+(Véase el capítulo de [[tablas|Tables in WikiText]] para saber cómo editar el glosario)
+
+----
+
+!!!''¡Importante!!'' - Palabras y referencias reservadas para el sistema
+
+* Nombres de `campo` y sus referencias (nombre del campo, sin separador, seguido de //Field//. P. Ej.:ListField)
+* Nombre de widgets. P. Ej.: NavigatorWidget

@@ -1,19 +1,19 @@
+caption: Formatting
 created: 20131205155959399
-modified: 20131230120942930
+modified: 20160606135946509
 tags: WikiText
 title: Formatting in WikiText
 type: text/vnd.tiddlywiki
-caption: Formatting
 
 Available character formatting includes:
 
-* <code>&#96;backticks&#96;</code> for `code`
+* <code>&#96;backticks&#96;</code> for `code` ({{$:/core/images/mono-line}})
 ** Alternatively, <code>&#96;&#96;double backticks allows &#96;embedded&#96; backticks&#96;&#96;</code>
-* `''bold''` for ''bold text''
-* `//italic//` for //italic text//
-* `__underscore__` for __underscored text__
-* `^^superscript^^` for ^^superscript^^ text
-* `,,subscript,,` for ,,subscripted,, text
-* `~~strikethrough~~` for ~~strikethrough~~ text
+* `''bold''` for ''bold text'' ({{$:/core/images/bold}})
+* `//italic//` for //italic text// ({{$:/core/images/italic}})
+* `__underscore__` for __underscored text__ ({{$:/core/images/underline}})
+* `^^superscript^^` for ^^superscripted^^ text ({{$:/core/images/superscript}})
+* `,,subscript,,` for ,,subscripted,, text ({{$:/core/images/subscript}})
+* `~~strikethrough~~` for ~~strikethrough~~ text ({{$:/core/images/strikethrough}})
 
 See also: [[Code Blocks in WikiText]]

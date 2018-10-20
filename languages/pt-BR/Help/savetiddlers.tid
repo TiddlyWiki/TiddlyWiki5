@@ -1,0 +1,12 @@
+title: $:/language/Help/savetiddlers
+description: Salva um conjunto de tiddlers em bruto para uma pasta
+
+Salva um conjunto de tiddlers no seu formato bruto texto ou binário para o caminho especificado.
+
+```
+--savetiddlers <filtro> <caminho>
+```
+
+Por padrão, o caminho é resolvido relativamente à sub-pasta `output` do diretório de edição. O comando `--output` pode ser utilizado para redireccionar para umo diretório de destino diferente.
+
+Quaisquer pastas em falta no caminho de destino serão automaticamente criadas.

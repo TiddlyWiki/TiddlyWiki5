@@ -1,10 +1,7 @@
 title: $:/language/EditTemplate/
 
 Body/External/Hint: This is an external tiddler stored outside of the main TiddlyWiki file. You can edit the tags and fields but cannot directly edit the content itself
-Body/Hint: Use [[wiki text|http://tiddlywiki.com/static/WikiText.html]] to add formatting, images, and dynamic features
 Body/Placeholder: Type the text for this tiddler
-Body/Preview/Button/Hide: göm förhandsvisning
-Body/Preview/Button/Show: visa förhandsvisning
 Field/Remove/Caption: ta bort fält
 Field/Remove/Hint: Ta bort fält
 Fields/Add/Button: lägg till

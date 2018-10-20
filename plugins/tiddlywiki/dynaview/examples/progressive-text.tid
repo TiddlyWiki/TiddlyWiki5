@@ -1,0 +1,47 @@
+title: $:/plugins/tiddlywiki/dynaview/examples/progressive-text
+tags: $:/tags/dynaviewExamples
+caption: Progressive Text
+
+//Zoom into the space below to see a poem//
+
+''N.B. This example only works in Safari at the moment''
+
+<pre><div class="tc-dynaview-zoom-visible-1-and-above" style="font-size: 0.7em;line-height:1.5;">
+         'Fury said to a
+         mouse, That he
+        met in the
+       house,</div><div class="tc-dynaview-zoom-visible-1a-and-above" style="font-size: 0.6em;line-height:1.5;">     "Let us
+      both go to
+       law: I will
+        prosecute
+         YOU.--Come,</div><div class="tc-dynaview-zoom-visible-1b-and-above" style="font-size: 0.5em;line-height:1.5;">           I'll take no
+           denial; We
+          must have a
+        trial: For</div><div class="tc-dynaview-zoom-visible-1c-and-above" style="font-size: 0.4em;line-height:1.5;">      really this
+     morning I've
+    nothing
+    to do."</div><div class="tc-dynaview-zoom-visible-2-and-above" style="font-size: 0.3em;line-height:1.5;">     Said the
+      mouse to the
+       cur, "Such
+        a trial,
+         dear Sir,</div><div class="tc-dynaview-zoom-visible-2a-and-above" style="font-size: 0.25em;line-height:1.5;">            With
+          no jury
+        or judge,
+       would be
+      wasting
+      our
+      breath."</div><div class="tc-dynaview-zoom-visible-3-and-above" style="font-size: 0.2em;line-height:1.5;">       "I'll be
+        judge, I'll
+         be jury,"
+            Said
+         cunning
+          old Fury:
+          "I'll
+          try the
+            whole
+            cause,</div><div class="tc-dynaview-zoom-visible-4-and-above" style="font-size: 0.15em;line-height:1.5;">              and
+           condemn
+           you
+          to
+           death."'
+</div></pre>

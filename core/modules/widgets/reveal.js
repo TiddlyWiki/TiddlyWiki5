@@ -121,17 +121,28 @@ RevealWidget.prototype.readState = function() {
 			this.readPopupState(state);
 			break;
 		case "match":
-			this.readMatchState(state);
+			this.isOpen = !!(this.compareStateText(state) == 0);
 			break;
 		case "nomatch":
-			this.readMatchState(state);
-			this.isOpen = !this.isOpen;
+			this.isOpen = !(this.compareStateText(state) == 0);
+			break;
+		case "lt":
+			this.isOpen = !!(this.compareStateText(state) < 0);
+			break;
+		case "gt":
+			this.isOpen = !!(this.compareStateText(state) > 0);
+			break;
+		case "lteq":
+			this.isOpen = !(this.compareStateText(state) > 0);
+			break;
+		case "gteq":
+			this.isOpen = !(this.compareStateText(state) < 0);
 			break;
 	}
 };
 
-RevealWidget.prototype.readMatchState = function(state) {
-	this.isOpen = state === this.text;
+RevealWidget.prototype.compareStateText = function(state) {
+	return state.localeCompare(this.text,undefined,{numeric: true,sensitivity: "case"});
 };
 
 RevealWidget.prototype.readPopupState = function(state) {
@@ -163,18 +174,17 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		var refreshed = false,
-			currentlyOpen = this.isOpen;
+		var currentlyOpen = this.isOpen;
 		this.readState();
-		if(this.isOpen !== currentlyOpen) {
+		if(this.isOpen !== currentlyOpen || (this.stateTitle && changedTiddlers[this.stateTitle])) {
 			if(this.retain === "yes") {
 				this.updateState();
 			} else {
 				this.refreshSelf();
-				refreshed = true;
+				return true;
 			}
 		}
-		return this.refreshChildren(changedTiddlers) || refreshed;
+		return this.refreshChildren(changedTiddlers);
 	}
 };
 
@@ -182,6 +192,7 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 Called by refresh() to dynamically show or hide the content
 */
 RevealWidget.prototype.updateState = function() {
+	var self = this;
 	// Read the current state
 	this.readState();
 	// Construct the child nodes if needed
@@ -202,8 +213,12 @@ RevealWidget.prototype.updateState = function() {
         $tw.anim.perform(this.openAnimation,domNode);
 	} else {
 		$tw.anim.perform(this.closeAnimation,domNode,{callback: function() {
-			domNode.setAttribute("hidden","true");
-        }});
+			//make sure that the state hasn't changed during the close animation
+			self.readState()
+			if(!self.isOpen) {
+				domNode.setAttribute("hidden","true");
+			}
+        	}});
 	}
 };
 

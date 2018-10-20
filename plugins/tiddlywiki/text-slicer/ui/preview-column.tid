@@ -3,9 +3,15 @@ tags: $:/tags/AboveStory
 
 <$scrollable fallthrough="no" class="tc-document-preview-column">
 
-<$vars tv-default-heading-state="closed" tv-heading-status-config-prefix="preview-column">
+<$vars
+	tv-default-heading-state="open"
+>
 
-<$list filter="[toc-type[document]!has[draft.of]sort[title]]" template="$:/plugins/tiddlywiki/text-slicer/templates/interactive/document"/>
+<$list filter="[toc-type[document]!has[draft.of]sort[title]limit[1]]" emptyMessage={{$:/plugins/tiddlywiki/text-slicer/ui/preview-column/empty}}>
+
+<$list filter="[toc-type[document]!has[draft.of]sort[title]butfirst[1]limit[1]]" emptyMessage={{$:/plugins/tiddlywiki/text-slicer/ui/preview-column/single}} template="$:/plugins/tiddlywiki/text-slicer/ui/preview-column/multiple"/>
+
+</$list>
 
 </$vars>
 

@@ -1,0 +1,19 @@
+{
+	"tiddlers": [
+		{
+			"file": "addon/edit/closebrackets.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js",
+				"module-type": "codemirror"
+			}
+		},{
+			"file": "addon/edit/matchbrackets.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js",
+				"module-type": "codemirror"
+			}
+		}
+	]
+}

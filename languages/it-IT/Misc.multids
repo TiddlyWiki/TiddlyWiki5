@@ -1,8 +1,33 @@
 title: $:/language/
 
-ClassicWarning/Hint: Questo frammento &egrave; scritto nel formato testo wiki di TiddlyWiki Classic e non &egrave; pienamente compatibile con TiddlyWiki versione 5. Vedi http://tiddlywiki.com/static/Upgrading.html per maggiori dettagli a riguardo 
+BinaryWarning/Prompt: Questo frammento contiene dati binari
+ClassicWarning/Hint: Questo frammento &egrave; scritto nel formato testo wiki di TiddlyWiki Classic e non &egrave; pienamente compatibile con TiddlyWiki versione 5. Vedi https://tiddlywiki.com/static/Upgrading.html per maggiori dettagli a riguardo
 ClassicWarning/Upgrade/Caption: Aggiorna
 CloseAll/Button: Chiudi tutto
-MissingTiddler/Hint: Frammento mancante "<$text text=<<currentTiddler>>/>" - clicca {{$:/core/images/edit-button}} per crearlo
-RecentChanges/DateFormat: DDth MMM YYYY
+ConfirmCancelTiddler: Vuoi annullare le modifiche al frammento "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: Vuoi cancellare il frammento "<$text text=<<title>>/>"?
+ConfirmEditShadowTiddler: Stai per editare un frammento nascosto. Ogni modifica dei default di sistema render&agrave; i futuri aggiornamenti non semplici. Sei sicuro di voler editare "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: Vuoi sovrascrivere il frammento "<$text text=<<title>>/>"?
+Count: Conteggio
+DefaultNewTiddlerTitle: Nuovo frammento
+DropMessage: Rilascia qui (o usa il tasto 'Escape' per cancellare)
+Encryption/Cancel: Cancella
+Encryption/ConfirmClearPassword: Vuoi cancellare la password? Questa operazione rimuover&agrave; la crittografia applicata quando salverai questo wiki
+Encryption/Password: Password
+Encryption/PasswordNoMatch: Le password non corrispondono
+Encryption/PromptSetPassword: Imposta una nuova pasword per questo ~TiddlyWiki
+Encryption/RepeatPassword: Ripeti password
+Encryption/SetPassword: Imposta password
+Encryption/Username: NomeUtente
+InvalidFieldName: Caratteri non consentiti nel campo nome "<$text text=<<fieldName>>/>". I campi nome possono solo contenere lettere minuscole, numeri ed i caratteri sottolineato (`_`), meno (`-`) e punto (`.`)
+MissingTiddler/Hint: Frammento mancante "<$text text=<<currentTiddler>>/>" - clicca {{||$:/core/ui/Buttons/edit}} per crearlo
+OfficialPluginLibrary: Libreria ufficiale plugin ~TiddlyWiki
+PluginReloadWarning: Salva {{$:/core/ui/Buttons/save-wiki}} e ricarica {{$:/core/ui/Buttons/refresh}} per consentire alle modifiche ai plugin di avere effetto
+RecentChanges/DateFormat: DD MM YYYY
 SystemTiddler/Tooltip: Questo &egrave; un frammento di sistema
+TagManager/Colour/Heading: Colore
+TagManager/Count/Heading: Conteggio
+TagManager/Icon/Heading: Icona
+TagManager/Info/Heading: Info
+TagManager/Tag/Heading: Etichetta
+UnsavedChangesWarning: Ci sono modifiche non salvate in ~TiddlyWiki

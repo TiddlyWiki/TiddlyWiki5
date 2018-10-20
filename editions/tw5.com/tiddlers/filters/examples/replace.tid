@@ -1,0 +1,11 @@
+created: 20151017153634099
+modified: 20151108052127454
+tags: [[Operator Examples]] [[replace Operator]]
+title: replace Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[list[Days of the Week]] Last +[replace[Wednesday]]">>
+<<.operator-example 2 "[list[Days of the Week]] Last +[replace:2[Tuesday]]">>
+<<.operator-example 3 "[list[Days of the Week]] [[Yesterday]] [[Today]] [[Tomorrow]] +[replace:3[Tuesday]]">>

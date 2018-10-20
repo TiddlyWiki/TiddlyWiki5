@@ -1,0 +1,11 @@
+caption: ~CamelCase
+created: 20130828185300000
+es-title: CamelCase
+modified: 20160424053359855
+tags: Definitions
+title: CamelCase
+type: text/vnd.tiddlywiki
+
+El [[CamelCase|https://es.wikipedia.org/wiki/CamelCase]] se forma tomando una frase, poniendo la inicial de cada palabra en mayúscula y pegando una palabra a la otra, sin espacios. Esto hace que visualmente al texto le salgan //jorobas// y de ahí el nombre. 
+
+La mayoría de wikis usan ~CamelCase como una forma rápida de crear hipertexto.

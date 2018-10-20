@@ -1,0 +1,15 @@
+created: 20161208000000000
+modified: 20161208000000000
+tags: Learning [[Customise TiddlyWiki]]
+title: How to widen tiddlers (aka storyriver)
+type: text/vnd.tiddlywiki
+
+You can change the width of the main column of tiddlers (also known as the story river)  by:
+
+* Clicking on the settings cog to open the control panel
+* In the control panel select "Appearance" and then "Theme Tweaks". 
+* Under Theme tweaks, scroll down. 
+
+There you will see settings for `story right`, `story width`, and `tiddler width`. By setting these numbers to something larger, you can widen the tiddlers. In general, `story right` and `story width` should be the same size, and `tiddler width` a little bit smaller. You could even use percentages for tiddler width. You will also probably want to change the sidebar breakpoint to something larger than the story river, unless you don't mind the sidebar floating to the top of the page.
+
+

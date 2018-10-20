@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/codemirror-mode-css/readme
+
+This plugin adds Syntax Highlighting for CSS tiddlers (text/css) to the [[CodeMirror|http://codemirror.net]] text editor. It needs the latest [[CodeMirror plugin|$:/plugins/tiddlywiki/codemirror]] to be installed
+
+

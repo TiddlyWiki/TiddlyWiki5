@@ -3,9 +3,8 @@ tags: $:/tags/ControlPanel/Toolbars
 caption: {{$:/language/ControlPanel/Toolbars/EditToolbar/Caption}}
 
 \define lingo-base() $:/language/TiddlerInfo/
-\define config-title()
-$:/config/EditToolbarButtons/Visibility/$(listItem)$
-\end
+
+\define config-base() $:/config/EditToolbarButtons/Visibility/
 
 {{$:/language/ControlPanel/Toolbars/EditToolbar/Hint}}
 
@@ -13,11 +12,7 @@ $:/config/EditToolbarButtons/Visibility/$(listItem)$
 
 <$set name="tv-config-toolbar-text" value="yes">
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditToolbar]!has[draft.of]]" variable="listItem">
-
-<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"/> <$transclude tiddler=<<listItem>> field="caption"/> <i class="tc-muted">-- <$transclude tiddler=<<listItem>> field="description"/></i>
-
-</$list>
+<$macrocall $name="list-tagged-draggable" tag="$:/tags/EditToolbar" itemTemplate="$:/core/ui/ControlPanel/Toolbars/ItemTemplate"/>
 
 </$set>
 

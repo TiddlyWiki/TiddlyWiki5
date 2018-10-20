@@ -1,0 +1,32 @@
+title: $:/Manager/ItemSidebar/Tags
+tags: $:/tags/Manager/ItemSidebar
+caption: {{$:/language/Manager/Item/Tags}}
+
+\define tag-checkbox-actions()
+<$action-listops
+	$tiddler="$:/config/Manager/RecentTags"
+	$subfilter="[<tag>] [list[$:/config/Manager/RecentTags]] +[limit[12]]"
+/>
+\end
+
+\define tag-picker-actions()
+<<tag-checkbox-actions>>
+<$action-listops
+	$tiddler=<<currentTiddler>>
+	$field="tags"
+	$subfilter="[<tag>] [all[current]tags[]]"
+/>
+\end
+
+<p>
+<$list filter="[all[current]tags[]] [list[$:/config/Manager/RecentTags]] +[sort[title]] " variable="tag">
+<div>
+<$checkbox tiddler=<<currentTiddler>> tag=<<tag>> actions=<<tag-checkbox-actions>>>
+<$macrocall $name="tag-pill" tag=<<tag>>/>
+</$checkbox>
+</div>
+</$list>
+</p>
+<p>
+<$macrocall $name="tag-picker" actions=<<tag-picker-actions>>/>
+</p>

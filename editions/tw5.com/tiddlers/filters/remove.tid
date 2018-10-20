@@ -1,0 +1,16 @@
+caption: remove
+created: 20151017144531676
+modified: 20170125200005000
+op-input: a list of items
+op-neg-output: items removed from current list that appear at the tail of the operand array
+op-output: items removed from current list that appear at the head of the operand array
+op-parameter: an array of items to remove
+op-parameter-name: array
+op-prefix: causes N items from the end of the array to be removed
+op-purpose: remove a list of titles specified in the operand from the input
+op-suffix: an integer N, defaulting to all
+tags: [[Filter Operators]] [[Order Operators]] [[Listops Operators]]
+title: remove Operator
+type: text/vnd.tiddlywiki
+
+<<.operator-examples "remove">>

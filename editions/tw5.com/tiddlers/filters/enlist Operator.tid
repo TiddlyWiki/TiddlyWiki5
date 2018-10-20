@@ -1,0 +1,24 @@
+caption: enlist
+created: 20170221144241063
+modified: 20170221151340420
+op-input: ignored
+op-neg-input: a [[selection of titles|Title Selection]]
+op-neg-output: those input titles that are <<.em not>> listed in <<.place L>>
+op-output: the titles stored as a [[title list|Title List]] at <<.place L>>
+op-parameter: a [[title list|Title List]]
+op-parameter-name: L
+op-purpose: select titles from the operand interpreted as a [[title list|Title List]]
+tags: [[Filter Operators]] [[Field Operators]] [[Selection Constructors]] [[Negatable Operators]]
+title: enlist Operator
+type: text/vnd.tiddlywiki
+
+<<.tip " Literal filter operands cannot contain square brackets but you can work around the issue by using a variable:">>
+
+```
+<$set name="myList" value="first [[second with a space]] third">
+<$list filter="[enlist<myList>]">
+...
+```
+
+
+<<.operator-examples "enlist">>

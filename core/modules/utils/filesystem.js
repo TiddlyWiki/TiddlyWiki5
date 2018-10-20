@@ -57,7 +57,7 @@ var FILE_BUFFER_LENGTH = 64 * 1024,
 exports.copyFile = function(srcPath,dstPath) {
 	// Create buffer if required
 	if(!fileBuffer) {
-		fileBuffer = new Buffer(FILE_BUFFER_LENGTH);
+		fileBuffer = Buffer.alloc(FILE_BUFFER_LENGTH);
 	}
 	// Create any directories in the destination
 	$tw.utils.createDirectory(path.dirname(dstPath));
@@ -158,6 +158,27 @@ exports.isDirectoryEmpty = function(dirPath) {
 		}
 	});
 	return empty;
+};
+
+/*
+Recursively delete a tree of empty directories
+*/
+exports.deleteEmptyDirs = function(dirpath,callback) {
+	var self = this;
+	fs.readdir(dirpath,function(err,files) {
+		if(err) {
+			return callback(err);
+		}
+		if(files.length > 0) {
+			return callback(null);
+		}
+		fs.rmdir(dirpath,function(err) {
+			if(err) {
+				return callback(err);
+			}
+			self.deleteEmptyDirs(path.dirname(dirpath),callback);
+		});
+	});
 };
 
 })();

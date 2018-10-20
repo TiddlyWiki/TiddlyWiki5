@@ -1,9 +1,9 @@
 title: $:/language/Docs/PaletteColours/
 
-alert-background: 알럿 배경
-alert-border: 알럿 테두리
-alert-highlight: 알럿 강조
-alert-muted-foreground: 알럿 조용한 전경
+alert-background: 경보 배경
+alert-border: 경보 테두리
+alert-highlight: 경보 강조
+alert-muted-foreground: 경보 조용한 전경
 background: 일반 배경
 blockquote-bar: 인용문 막대
 button-background: 기본 버튼 배경
@@ -62,7 +62,7 @@ sidebar-tab-foreground-selected: 선택한 탭에 대한 사이드바 탭 전경
 sidebar-tiddler-link-foreground: 사이드바 티들러 링크 전경
 sidebar-tiddler-link-foreground-hover: 사이드바 티들러 링크 전경 가리킬 때
 site-title-foreground: 사이트 제목 전경
-static-alert-foreground: 정적 알럿 전경
+static-alert-foreground: 정적 경보 전경
 tab-background: 탭 배경
 tab-background-selected: 선택한 탭에 대한 탭 배경
 tab-border: 탭 테두리
@@ -92,14 +92,14 @@ tiddler-link-background: 티들러 링크 배경
 tiddler-link-foreground: 티들러 링크 전경
 tiddler-subtitle-foreground: 티들러 부제목 전경
 tiddler-title-foreground: 티들러 제목 전경
-toolbar-cancel-button: 툴바 '취소' 버튼 전경
-toolbar-close-button: 툴바 '닫기' 버튼 전경
-toolbar-delete-button: 툴바 '삭제' 버튼 전경
-toolbar-done-button: 툴바 '완료' 버튼 전경
-toolbar-edit-button: 툴바 '편집' 버튼 전경
-toolbar-info-button: 툴바 '정보' 버튼 전경
-toolbar-new-button: 툴바 '새 티들러' 버튼 전경
-toolbar-options-button: 툴바 '옵션' 버튼 전경
-toolbar-save-button: 툴바 '저장' 버튼 전경
+toolbar-cancel-button: 도구 모음 '취소' 버튼 전경
+toolbar-close-button: 도구 모음 '닫기' 버튼 전경
+toolbar-delete-button: 도구 모음 '삭제' 버튼 전경
+toolbar-done-button: 도구 모음 '완료' 버튼 전경
+toolbar-edit-button: 도구 모음 '편집' 버튼 전경
+toolbar-info-button: 도구 모음 '정보' 버튼 전경
+toolbar-new-button: 도구 모음 '새 티들러' 버튼 전경
+toolbar-options-button: 도구 모음 '옵션' 버튼 전경
+toolbar-save-button: 도구 모음 '저장' 버튼 전경
 untagged-background: 태그되지 않음 배경
 very-muted-foreground: 매우 조용한 전경

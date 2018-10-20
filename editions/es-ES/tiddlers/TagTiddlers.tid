@@ -1,0 +1,13 @@
+caption: ~TagTiddlers
+created: 20141228094500000
+es-title: Tiddlers etiqueta
+modified: 20160426090824254
+tags: Tagging
+title: TagTiddlers
+type: text/vnd.tiddlywiki
+
+Un <<.def ~TagTiddler>> o <<.word "tiddler etiqueta">> es un tiddler cuyo título se usa para etiquetar a otros.
+
+La pestaña <<.info-tab Tagging>> del InfoPanel muestra qué tiddlers usan el título del actual como etiqueta. 
+
+Se pueden usar etiquetas sin correspondencia con un ~TagTiddler.

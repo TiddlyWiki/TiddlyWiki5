@@ -14,5 +14,4 @@ Parametrarna är:
 * ''filter'' - filtrera de identifierade tiddlers som kommer påverkas
 * ''fieldname'' - fältet som ska ändras (standard satt till "text")
 * ''templatetitle'' - tiddlern som ska wikifieras till ett specifikt fält. Om det är blankt eller saknas så kommer det specificerade fältet tas bort
-* ''type'' - texttypen att rendera (standard satt till "text/plain"; "text/html" kan användas för att få med HTML-taggar)
-
+* ''rendertype'' - texttypen att rendera (standard satt till "text/plain"; "text/html" kan användas för att få med HTML-taggar)

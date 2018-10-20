@@ -1,0 +1,38 @@
+caption: Imágenes en ~WikiText
+created: 20131205160221762
+es-title: Uso y manipulación de imágenes en WikiText
+modified: 20160427054751442
+tags: WikiText [[Working with TiddlyWiki]]
+title: Images in WikiText
+type: text/vnd.tiddlywiki
+
+! Inserción y formato de imágenes
+
+Se puede insertar y dar formato a imágenes con WikiText. La sintaxis para ello es la siguiente:
+
+`[img atributo [descripción|origen]]`
+
+!!Ejemplos:
+
+|!Acción |!Sintaxis |!Código de ejemplo |!Resultado |
+|Insertar imagen<br> (origen interno) |`[img[Título del tiddler con la imagen]]` |`[img[Motovun Jack.jpg]]` |[img[Motovun Jack.jpg]] |
+|Insertar imagen<br> (origen externo) |`[img[URL de la imagen]]` |`[img[https://tiddlywiki.com/favicon.ico]]` |[img[https://tiddlywiki.com/favicon.ico]] |
+|Insertar imagen<br> con descripción emergente |`[img[descripción|origen]]` |`[img[Descripción emergente|Motovun Jack.jpg ]]`<br><br>^^(Pasa el ratón por encima de la imagen para ver la descripción emergente)^^ |[img[Esta es una descripción emergente|Motovun Jack.jpg]] |
+|Insertar imagen <br>con atributos |`[img atributo[descripción|origen]]` |`[img width=100 [Motovun Jack.jpg]]` |[img width=100 [Motovun Jack.jpg]] |
+
+Los atributos pueden definirse directamente como el valor de clases CSS como ancho y altura o por [[transclusión|Transclusion]] o [[referencia|TextReference]] de variables.
+
+La sintaxis de imágenes en ~TiddlyWiki se compone de métodos abreviados para invocar ImageWidget.
+
+! Inserción de imágenes mediante transclusión de tiddlers
+
+También puede mostrarse la imagen contenida en un tiddler por [[transclusión|Transclusion]] de este, escribiendo el título del tiddler entre llaves. Esto simplifica muchas veces la inclusión, pero tiene la desventaja de no poder controlar directamente el tamaño de la imagen.
+
+
+`{{Motovun Jack.jpg}}` se muestra como:
+
+{{Motovun Jack.jpg}}
+
+!Uso de imágenes externas
+
+{{ExternalImages}}

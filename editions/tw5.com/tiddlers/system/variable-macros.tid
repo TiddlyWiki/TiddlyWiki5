@@ -7,7 +7,7 @@ tags: $:/tags/Macro
 \define .macro-examples(m,text:"Examples") <$link to="$m$ Macro (Examples)">$text$</$link>
 \define .widget-examples(w,text:"Examples") <$link to="$w$ Widget (Examples)">$text$</$link>
 
-\define .js-macro-link(_) [[$_$|http://tiddlywiki.com/dev/index.html#JavaScript%20Macros]]
+\define .js-macro-link(_) [[$_$|https://tiddlywiki.com/dev/index.html#JavaScript%20Macros]]
 
 \define .this-is-static-link-variable() <<.tip "This variable has no useful effect when ~TiddlyWiki is running in a browser, as the `href` attribute is ignored there -- links between tiddlers are performed by JavaScript instead. The variable comes into play when one is using the [[Node.js configuration|TiddlyWiki on Node.js]] to [[generate a static version|RenderTiddlersCommand]] of a wiki.">>
 

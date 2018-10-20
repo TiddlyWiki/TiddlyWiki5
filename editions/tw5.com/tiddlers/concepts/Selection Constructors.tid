@@ -1,0 +1,13 @@
+created: 20150117204109000
+modified: 20150917193713204
+tags: Filters
+title: Selection Constructors
+type: text/vnd.tiddlywiki
+
+The output of a [[Filter Step]] depends on its [[operator|Filter Operators]]:
+
+* Most operators derive their output from their input. For example, many of them output a subset of their input, and thus truly live up to the name of <<.word filters>>, narrowing down the overall output of the containing [[run|Filter Run]]. These operators are called <<.def "selection modifiers">>.
+
+* A few operators ignore their input and generate an independent output instead. These are called <<.def "selection constructors">>: they construct an entirely new [[selection|Title Selection]].
+
+A good example of a constructor is <<.olink title>>. The output of `[title[A]title[B]]` is just <<.tid B>>. But the <<.olink field>> operator is a modifier, so `[title[A]field:title[B]` outputs nothing at all.

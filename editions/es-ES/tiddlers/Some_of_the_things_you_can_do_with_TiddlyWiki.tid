@@ -1,0 +1,35 @@
+caption: Cosas que puedes hacer
+created: 20140904090300000
+es-title: Varias de las muchas cosas que puedes hacer con TiddlyWiki
+modified: 20160605050204409
+tags: HelloThere
+title: Some of the things you can do with TiddlyWiki
+type: text/vnd.tiddlywiki
+
+* Tomar notas y usar etiquetas y enlaces para formar relaciones entre ellas
+
+* Organizarte usando pestañas, solapas, tablas, listas e índices 
+
+* Organizar tus páginas web favoritas, como en [[este ejemplo|http://giffmex.org/experiments/tidmarks.html]]
+
+* Llevar el control de tareas y reuniones y organizarlos con múltiples etiquetas (mira nuestro sencillo ejemplo de [[administrador de tareas|TaskManagementExample]]
+
+* Hacer inventario de absolutamente todo: de tus recetas, tu biblioteca, tus contactos, tu colección de música ...etc.
+
+* Crear un blog o página web personal
+
+* Escribir un libro
+
+* Organizar tus imágenes en galerías (mira un sencillo ejemplo de [[hoja de contactos|ImageGallery Example]]
+
+* Compartir con otros la información de tu ~TiddlyWiki, bien como archivo publicado online, como adjunto en un correo, como documento de tiddler individual o como enlace a un tiddler específico publicado online. Intenta arrastrar un tiddler de un ~TiddlyWiki a otro y verás qué ocurre)
+
+* Bocetar sobre una imagen (edita [[Motovun Jack.jpg]] y dibuja con el ratón sobre la imagen para ver qué pasa)
+
+* Usar elementos web habituales, como las llamadas //lightboxes//. (MIra un ejemplo pulsando el botón que aparece en SampleWizard)
+
+* Crear una presentación de diapositivas
+
+* Preparar toda una base de conocimientos, local u online con un archivo ~TiddlyWiki que enlace a otros. Aquí hay un [[ejemplo en castellano|http://recursos.giffmex.org]]
+
+* Preparar una presentación visual de datos, usando tiddlers como fuente de datos. Un buen ejemplo lo tienes [[en esta página| https://tiddlywiki.com/plugins/tiddlywiki/d3/]]

@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/aws/lambda/package-info
+
+\rules only filteredtranscludeinline transcludeinline codeinline macrocallinline
+`
+var lambdaPackageInfo = {
+	"version": "`<<version>>`",
+	"engines": {
+		"node": ">=0.8.2"
+	}
+};
+`

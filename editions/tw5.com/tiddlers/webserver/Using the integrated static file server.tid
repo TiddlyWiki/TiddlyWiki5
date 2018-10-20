@@ -1,0 +1,16 @@
+created: 20180703095630828
+modified: 20180703100445719
+tags: [[WebServer Guides]]
+title: Using the integrated static file server
+type: text/vnd.tiddlywiki
+
+Any files in the subfolder `files` of the wiki folder will be available via the route `\files\<uri-encoded-filename>`. For example: http://127.0.0.1:8080/files/Motovun%20Jack.jpg
+
+This can be useful for publishing large files that you don't want to incorporate into the main wiki (PDFs, videos, large images, etc.).
+
+Static files can be referenced directly:
+
+* `[ext[./files/a-big-document.pdf]]` - to make a link to a PDF
+* `[img[./files/a-big-image.png]]` - to embed an image
+
+Alternatively, the ''_canonical_uri'' field can be used to reference the files as [[external tiddlers|ExternalImages]].

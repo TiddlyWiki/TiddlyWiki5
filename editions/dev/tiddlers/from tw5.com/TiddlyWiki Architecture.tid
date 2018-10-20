@@ -4,7 +4,7 @@ tags: dev
 title: TiddlyWiki Architecture
 type: text/vnd.tiddlywiki
 
-The heart of TiddlyWiki is an extensible representation transformation engine for text and images. Given the text of a tiddler and its associated [[ContentType|http://tiddlywiki.com/#ContentType]], the engine can produce a rendering of the tiddler in a new [[ContentType|http://tiddlywiki.com/#ContentType]]. Furthermore, it can efficiently selectively update the rendering to track any changes in the tiddler or its dependents.
+The heart of TiddlyWiki is an extensible representation transformation engine for text and images. Given the text of a tiddler and its associated [[ContentType|https://tiddlywiki.com/#ContentType]], the engine can produce a rendering of the tiddler in a new [[ContentType|https://tiddlywiki.com/#ContentType]]. Furthermore, it can efficiently selectively update the rendering to track any changes in the tiddler or its dependents.
 
 ! Overview
 
@@ -40,7 +40,7 @@ $tw.wiki.makeTiddlerIterator($tw.wiki.getTiddlersWithTag('timeline')
 });
 ```
 
-Data which should not be visible to end users under normal operation (eg. internal components, plugins, persisted state for GUI widgets) is stored in [[system tiddlers|http://tiddlywiki.com/#SystemTiddlers]] organised via a set of [[namespaces|http://tiddlywiki.com/#Naming%20of%20System%20Tiddlers]].
+Data which should not be visible to end users under normal operation (eg. internal components, plugins, persisted state for GUI widgets) is stored in [[system tiddlers|https://tiddlywiki.com/#SystemTiddlers]] organised via a set of [[namespaces|https://tiddlywiki.com/#Naming%20of%20System%20Tiddlers]].
 
 The similarity between filesystem paths and system tiddler names is intentional and will be used to provide a hierarchical browsing interface in a future TiddlyWiki release.
 
@@ -51,7 +51,7 @@ TiddlyWiki's view layer has a //lot// in common with desktop widget toolkits and
 !! Role of the DOM
 Because TiddlyWiki may re-render content, plugins should treat the DOM as write-only.
 
-In other words, any state you store in the DOM could vanish at any instant and you need to use TiddlyWiki's internal [[StateMechanism|http://tiddlywiki.com/#StateMechanism]] instead.
+In other words, any state you store in the DOM could vanish at any instant and you need to use TiddlyWiki's internal [[StateMechanism|https://tiddlywiki.com/#StateMechanism]] instead.
 
 In a desktop application, the base widget class defines a method such as `paint(canvas)` which is called in response to `expose` events or "data has changed" messages.
 
@@ -65,4 +65,4 @@ While TiddlyWiki's extended [[WikiText]] is similar in design to HTML templating
 
 In this respect, it's closer to a glue language like Qt Quick or Python with Javascript filling the "create new components" role of C/C++ in widget toolkits like Qt and GTK+.
 
-To familiarise yourself with this, read [[Widgets in WikiText|http://tiddlywiki.com/#Widgets%20in%20WikiText]] and [[Introduction to Filters|http://tiddlywiki.com/#Introduction%20to%20Filters]]. then examine the internals for a tiddler like [[TaskManagementExample|http://tiddlywiki.com/#TaskManagementExample]].
+To familiarise yourself with this, read [[Widgets in WikiText|https://tiddlywiki.com/#Widgets%20in%20WikiText]] and [[Introduction to Filters|https://tiddlywiki.com/#Introduction%20to%20Filters]]. then examine the internals for a tiddler like [[TaskManagementExample|https://tiddlywiki.com/#TaskManagementExample]].

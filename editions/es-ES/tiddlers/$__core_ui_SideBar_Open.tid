@@ -1,0 +1,15 @@
+caption: {{$:/language/SideBar/Open/Caption}}
+created: 20160429080322465
+modified: 20160515100901701
+tags: $:/tags/SideBar
+title: $:/core/ui/SideBar/Open
+type: text/vnd.tiddlywiki
+
+\define lingo-base() $:/language/CloseAll/
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
+
+<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link to={{!!title}}><$transclude field="es-title"><$view field="title"/></$transclude></$link>
+
+</$list>
+
+<$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini"><<lingo Button>></$button>

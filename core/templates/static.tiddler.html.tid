@@ -4,6 +4,7 @@ title: $:/core/templates/static.tiddler.html
 \define tv-config-toolbar-icons() no
 \define tv-config-toolbar-text() no
 \define tv-config-toolbar-class() tc-btn-invisible
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
 `<!doctype html>
 <html>
 <head>
@@ -13,6 +14,7 @@ title: $:/core/templates/static.tiddler.html
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="mobile-web-app-capable" content="yes"/>
 <meta name="format-detection" content="telephone=no">
 <link id="faviconLink" rel="shortcut icon" href="favicon.ico">
 <link rel="stylesheet" href="static.css">
@@ -21,9 +23,7 @@ title: $:/core/templates/static.tiddler.html
 <body class="tc-body">
 `{{$:/StaticBanner||$:/core/templates/html-tiddler}}`
 <section class="tc-story-river">
-`<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
-<$view tiddler="$:/core/ui/ViewTemplate" format="htmlwikified"/>
-</$importvariables>`
+`<$view tiddler="$:/core/ui/ViewTemplate" format="htmlwikified"/>`
 </section>
 </body>
 </html>

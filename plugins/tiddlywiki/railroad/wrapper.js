@@ -97,6 +97,7 @@ RailroadWidget.prototype.patchLinks = function(node) {
 					if(child.attributes["data-tw-external"]) {
 						// External links are straightforward
 						child.setAttribute("target","_blank");
+						child.setAttribute("rel","noopener noreferrer");
 					} else {
 						// Each internal link gets its own onclick handler, capturing its own copy of target
 						(function(myTarget) {

@@ -1,6 +1,6 @@
 caption: select
 created: 20131024141900000
-modified: 20141203155137508
+modified: 20160429175220241
 tags: Widgets
 title: SelectWidget
 type: text/vnd.tiddlywiki
@@ -8,7 +8,9 @@ type: text/vnd.tiddlywiki
 ! Introduction
 
 The select widget displays a popup menu based on a [[HTML select element|https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select]]. The popup (or dropdown) contains a list of items defined by `<option>` and `<optgroup>` elements. 
-Every time the user selects a new value in the menu, the selected value is written to the text of a specified tiddler field or index. If the tiddler value changes the menu is automatically updated to reflect the new value.
+Every time the user selects a new value in the menu, the selected value is written to the text of a specified tiddler field or index and any ActionWidgets within the `actions` attribute are triggered. Conversely, if the tiddler value is changed independently the select widget is automatically updated to reflect the new value.
+
+In multiple selection mode, the list of selected values is bound to the specified tiddler field or index. Browsers generally use the <kbd>ctrl</kbd> or <kbd>cmd</kbd> keys for multiple selection.
 
 For example, this select widget displays a list of the tags in this wiki:
 
@@ -34,7 +36,9 @@ The content of the `<$select>` widget should be one or more HTML `<option>` or `
 |index |The index of a property in a [[DataTiddler|DataTiddlers]] (takes precedence over the field attribute) |
 |class |CSS classes to be assigned to the HTML select element |
 |default |Default value to be used if the tiddler, field or index specifies a missing value |
-
+|multiple |If present, switches to multiple selection mode |
+|size |The number of rows to display in multiple selection mode |
+|actions |A string containing ActionWidgets to be triggered when the key combination is detected |
 
 ! Examples
 
@@ -99,3 +103,17 @@ This example uses a nested pair of list widgets. The outer one generates the `<o
 </optgroup>
 </$list>
 </$select>"/>
+
+!! Multiple Selections
+
+This example uses the `multiple` keyword to specify that we should be able to select multiple items.
+
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/generated-list-demo-state' field='testing' multiple size='8'>
+<$list filter='[tag[TableOfContents]]'>
+<option><$view field='title'/></option>
+</$list>
+</$select><br />
+<$list filter='[list[$:/generated-list-demo-state!!testing]]'>
+<$view field='title' /><br />
+</$list>
+"/>

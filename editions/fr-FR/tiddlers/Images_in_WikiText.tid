@@ -12,11 +12,11 @@ Les images peuvent être affichées avec WikiText avec la syntaxe suivante, selo
 
 ```
 [img[Sainte Anastasie.png]] 
-ou [img[http://tiddlywiki.com/favicon.ico]]
+ou [img[https://tiddlywiki.com/favicon.ico]]
 ```
 
 [img[Sainte Anastasie.png]]
-ou [img[http://tiddlywiki.com/favicon.ico]]
+ou [img[https://tiddlywiki.com/favicon.ico]]
 
 Si la source de l'image correspond au titre d'un tiddler, alors le tiddler est affiché directement. Autrement elle est interprétée comme une URL et la balise HTML `<img>` est générée muni de l'attribut `src` contenant l'URL.
 

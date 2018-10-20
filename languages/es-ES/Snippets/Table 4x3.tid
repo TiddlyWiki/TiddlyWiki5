@@ -1,0 +1,8 @@
+title: $:/language/Snippets/Table4x3
+tags: $:/tags/TextEditor/Snippet
+caption: Table with 4 columns by 3 rows
+
+|! |!Alfa |!Beta |!Gamma |!Delta |
+|!Uno | | | | |
+|!Dos | | | | |
+|!Tres | | | | |

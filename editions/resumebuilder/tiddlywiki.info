@@ -12,8 +12,8 @@
 	],
 	"languages": [
 	],
-    "includeWikis": [
-    ],
+	"includeWikis": [
+	],
 	"build": {
 		"index": [
 			"--rendertiddler","$:/core/save/all","index.html","text/plain"],

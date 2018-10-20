@@ -1,0 +1,43 @@
+created: 20160107222352710
+modified: 20160720145836265
+tags: Plugins
+title: Installing a plugin from the plugin library
+type: text/vnd.tiddlywiki
+
+! Standalone Configuration
+
+Follow these instructions when using TiddlyWiki as a standalone HTML file:
+
+# Create a backup of your current TiddlyWiki HTML file ([[just in case|The First Rule of Using TiddlyWiki]])
+# Open your TiddlyWiki in a browser
+# Open the [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}}, click on the ''Plugins'' tab and then the {{$:/core/images/download-button}} ''Get more plugins'' button
+# Click {{$:/core/images/chevron-right}} ''open plugin library'' to open the official plugin library
+# When the library listing is loaded:
+## Use the tab to select between ''plugins'', ''themes'' and ''languages''
+## Use the ''search'' box to search the plugin details
+# Click the ''install'' button to install a plugin
+# Save your TiddlyWiki {{$:/core/images/save-button}}
+# ''Refresh the page so that TiddlyWiki loads the new plugin'' {{$:/core/images/refresh-button}}
+# The plugin should now be available for use
+
+! Client-Server Configuration
+
+Follow these instructions when using TiddlyWiki under Node.js:
+
+# Identify the plugins you want to install using the ''Plugins'' tab of [[control panel|$:/ControlPanel]] (''don't'' install the plugins from here, though). Plugins are identified by their type (ie language, theme or plugin) and their publisher and title. For example, the plugin `$:/plugins/tiddlywiki/internals` is referred to as ''tiddlywiki/internals''
+# Quit the server if it is running
+# Edit the `tiddlywiki.info` file (it is in JSON format) and locate the `plugins` and `themes` section (see below)
+# Add entries corresponding to the plugins you wish to add. Take care to retain commas to separate items, but do not terminate the last item in a list with a comma
+# Restart the server
+
+```
+{
+	"plugins": [
+		"tiddlywiki/codemirror"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	]
+}
+```

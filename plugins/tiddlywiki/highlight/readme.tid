@@ -45,3 +45,4 @@ The plugin includes support for the following languages (referred to as "brushes
 * sql
 * xml
 
+You can also specify the language as a MIME content type (eg `text/html` or `text/css`). The mapping is accomplished via mapping tiddlers whose titles start with `$:/config/HighlightPlugin/TypeMappings/`.

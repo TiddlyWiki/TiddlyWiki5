@@ -1,4 +1,5 @@
 title: $:/language/Help/default
+description: 
 
 \define commandTitle()
 $:/language/Help/$(command)$
@@ -15,7 +16,7 @@ $:/language/Help/$(command)$
 </$list>
 </ul>
 
-Για αναλυτική βοήθεια για κάποια εντολή:
+Για να βρείτε αναλυτική βοήθεια για μία συγκεκριμένη εντολή:
 
 ```
 tiddlywiki --help <εντολή>

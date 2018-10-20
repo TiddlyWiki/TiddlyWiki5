@@ -57,7 +57,8 @@ EditWidget.prototype.execute = function() {
 			index: {type: "string", value: this.editIndex},
 			"class": {type: "string", value: this.editClass},
 			"placeholder": {type: "string", value: this.editPlaceholder}
-		}
+		},
+		children: this.parseTreeNode.children
 	}]);
 };
 

@@ -1,0 +1,8 @@
+title: $:/language/Snippets/Table4x3
+tags: $:/tags/TextEditor/Snippet
+caption: Tabela s 4 stolpci in 3 vrsticami
+
+|! |!Alfa |!Beta |!Gama |!Delta |
+|!Ena| | | | |
+|!Dva| | | | |
+|!Tri| | | | |

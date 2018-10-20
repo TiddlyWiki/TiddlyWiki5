@@ -54,7 +54,7 @@ UploadSaver.prototype.save = function(text,method,callback) {
 	// Do the HTTP post
 	var http = new XMLHttpRequest();
 	http.open("POST",url,true,username,password);
-	http.setRequestHeader("Content-Type","multipart/form-data; ;charset=UTF-8; boundary=" + boundary);
+	http.setRequestHeader("Content-Type","multipart/form-data; charset=UTF-8; boundary=" + boundary);
 	http.onreadystatechange = function() {
 		if(http.readyState == 4 && http.status == 200) {
 			if(http.responseText.substr(0,4) === "0 - ") {
@@ -67,7 +67,7 @@ UploadSaver.prototype.save = function(text,method,callback) {
 	try {
 		http.send(data);
 	} catch(ex) {
-		return callback("Error:" + ex);
+		return callback($tw.language.getString("Error/Caption") + ":" + ex);
 	}
 	$tw.notifier.display("$:/language/Notifications/Save/Starting");
 	return true;

@@ -1,0 +1,41 @@
+caption: Contribuciones
+created: 20131101111400000
+es-title: Cómo contribuir con TiddlyWiki
+modified: 20160413170206770
+tags: Community
+title: Contributing
+type: text/vnd.tiddlywiki
+
+Estamos encantados de recibir contribuciones al código y la documentación de TiddlyWiki, ya sea:
+
+* [[Reportando Bugs|ReportingBugs]]
+
+* Ayudando a [[mejorar la documentación|Improving TiddlyWiki Documentation]]
+
+* Aportando código a través de [[GitHub|https://github.com/Jermolene/TiddlyWiki5]]
+** Más detalles en https://tiddlywiki.com/dev 
+
+Hay, además, más formas de 
+[[contribuir con el proyecto|HelpingTiddlyWiki]].
+
+!! CLA: Acuerdo de licencia de contribución
+
+{{Contributor License Agreement}}
+
+!! Cómo firmar el CLA
+
+{{Signing the Contributor License Agreement}}
+
+---
+
+//Los documentos que componen el CLA de este proyecto se crearon usando las siguientes plantillas del//  [[Proyecto Harmony|http://www.harmonyagreements.org]]:
+
+* "HA-CLA-I-LIST Version 1.0" para el "CLA-individual" 
+* "HA-CLA-E-LIST Version 1.0" para el "CLA-entity"
+
+-----------
+Observaciones:
+
+*>«When not owning the copyright in the entire work of authorship...»
+
+En caso de que, como dice el texto, no seas propietario de los derechos de la totalidad del trabajo de tu autoría, exprésalo claramente. De otro modo, asumiremos que eres el único poseedor legal de los derechos de tu contribución al proyecto. En tal caso, proporciona también enlaces e información que aclare bajo qué licencia se distribuye el código del que no eres propietario. 

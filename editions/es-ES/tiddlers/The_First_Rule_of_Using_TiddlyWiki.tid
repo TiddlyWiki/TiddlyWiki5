@@ -1,0 +1,39 @@
+caption: Primera regla de uso
+created: 20140419132828051
+es-title: Primera regla al usar TiddlyWiki
+modified: 20160421134758270
+tags: [[Working with TiddlyWiki]]
+title: The First Rule of Using TiddlyWiki
+type: text/vnd.tiddlywiki
+
+!! Historias de terror
+
+Cada tanto se cuentan en los grupos de discusión historias que parten el corazón sobre usuarios que por uno u otro motivo han perdido los datos guardados en TiddlyWiki:
+
+>Mi TiddlyWiki acaba de ser borrado por completo durante un cuelgue de Firefox cuando guardaba...
+
+https://groups.google.com/d/topic/tiddlywiki/oG2L7OXhUoI/discussion
+
+> La última vez que lo usé fue anoche, en casa, en mi ordenador con Windows 7. Le di a <<.button save>> para guardar la última entrada y se guardó via TiddlyFox. Expulsé el USB, llegué al trabajo esta mañana, enchufé el USB, metí la contraseña y, como se negaba a abrir, después de varios intentos busqué el archivo html de TW5. Fue entonces cuando me di cuenta de que el tamaño del archivo ya no es de 3Mb, sino de 80Kb. Me parece que lo he perdido todo.
+
+https://groups.google.com/d/topic/tiddlywiki/SXStDJ0ntGI/discussion
+
+¡Que no te pase a ti!!
+
+!!! La primera regla de uso de TiddlyWiki es:
+
+<p style="font-size:40pt;line-height:48pt;font-weight:700;color:red;">
+¡¡Haz copia de seguridad!!
+</p>
+
+TiddlyWiki es un sistema altamente flexible y customizable que te pone firmemente a cargo de tus datos. En el desarrollo de TiddlyWiki se pone todo el cuidado posible para garantizar que es un lugar seguro donde guardar tus datos más preciados. Sin embargo y en última instancia, la responsibilidad de reducir el riesgo de pérdida de datos recae sobre sus usuarios.
+
+La mejor manera de asegurarse de que tus datos están seguros es mediante un riguroso sistema de <<.word backup>> o copia de seguridad.
+
+*Usa servicios del estilo de Dropbox para tener siempre una copia de seguridad online. Dropbox tiene además una [[característica especial|https://www.dropbox.com/help/11]], que guarda y permite recuperar versiones anteriores de un archivo.
+
+* Haz copia de seguridad antes de actualizar TiddlyWiki a una nueva versión
+
+* Piensa siempre en cómo protegerte en el peor de los casos: ¿qué pasa si falla el USB o se rompe el disco duro? ¿Qué pasa si el ordenador se bloquea por un virus?
+
+* Actúa de manera defensiva y redundante: haz varias copias de seguridad y mantenlas en distintos sitios

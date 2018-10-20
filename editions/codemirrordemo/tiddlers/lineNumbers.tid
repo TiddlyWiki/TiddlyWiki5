@@ -1,0 +1,4 @@
+title: $:/config/codemirror/lineNumbers
+type: bool
+
+true

@@ -1,16 +1,28 @@
 title: $:/core/ui/EditTemplate
 
+\define actions()
+<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/NewTagName}}/>
+<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
+<$action-sendmessage $message="tm-add-field" $name={{$:/temp/newfieldname}} $value={{$:/temp/newfieldvalue}}/>
+<$action-deletetiddler $tiddler="$:/temp/newfieldname"/>
+<$action-deletetiddler $tiddler="$:/temp/newfieldvalue"/>
+<$action-sendmessage $message="tm-save-tiddler"/>
+\end
 \define frame-classes()
 tc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$
 \end
-<div class=<<frame-classes>>>
+<div class=<<frame-classes>> data-tiddler-title=<<currentTiddler>>>
+<$fieldmangler>
 <$set name="storyTiddler" value=<<currentTiddler>>>
-<$keyboard key={{$:/config/shortcuts/cancel-edit-tiddler}} message="tm-cancel-tiddler">
-<$keyboard key={{$:/config/shortcuts/save-tiddler}} message="tm-save-tiddler">
+<$keyboard key="((cancel-edit-tiddler))" message="tm-cancel-tiddler">
+<$keyboard key="((save-tiddler))" actions=<<actions>>>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/EditTemplate]!has[draft.of]]" variable="listItem">
+<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
 <$transclude tiddler=<<listItem>>/>
+</$set>
 </$list>
 </$keyboard>
 </$keyboard>
 </$set>
+</$fieldmangler>
 </div>

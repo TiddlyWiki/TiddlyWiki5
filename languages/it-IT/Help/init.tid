@@ -1,5 +1,5 @@
 title: $:/language/Help/init
-description: Initialise a new wiki folder
+description: Inizializza un nuovo wiki folder
 
 Inizializza un [[WikiFolder|WikiFolders]] vuoto con una copia della specifica edizione.
 

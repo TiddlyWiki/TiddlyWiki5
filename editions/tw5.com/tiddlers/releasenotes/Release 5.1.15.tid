@@ -1,0 +1,86 @@
+caption: 5.1.15
+created: 20170426172144552
+modified: 20171113161124237
+released: 20171113161124237
+tags: ReleaseNotes
+title: Release 5.1.15
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.14...v5.1.15]]//
+
+!! New and Improved Plugins
+
+* New [[Amazon Web Services Plugin]] with primitives for running TiddlyWiki in the cloud
+* New [[External Attachments Plugin]] that allows automatic creation of [[ExternalImages]] for TiddlyDesktop
+
+!! Translation Improvements
+
+New and improved translations:
+
+* New Persian translation
+* Updated Chinese and Greek translations
+
+Another improvement that benefits users of translations is the addition of about 800 new //transliteration pairs//. These are substitutions that are performed when converting a tiddler title into a filename, such as the two characters "oe" for the single character "œ". See [[the commit|https://github.com/Jermolene/TiddlyWiki5/commit/5cdf86b3072604f8c556c84f266767be5b8e75c3]] for more details. The result is that automatically generated filenames are much more readable.
+
+!! Usability Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1e9d214f67906e63758f8665091bc0ef6651f10d]] new "Explorer" tab to "More" sidebar and underlying [[tree Macro]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/cee7baa1831a8f236c46d8c438c2a4d9bda8a0e2]] configuration option in [[theme tweaks|$:/themes/tiddlywiki/vanilla/themetweaks]] for the editor font
+
+!! Hackability Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/aa417fe899d0983ad8a3fe1fdfe9cac42364b2b6]] new [[lookup Operator]] to simplify use of lookup tables
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/5dd3d97760083f7c6ba9a6cd6186525edb3fb836]] the SetWidget with ''tiddler'', ''field'' and ''index'' attributes
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d966583854d7c7f4a7df25c0e2a8d6b9e217a12c]] new ''whitespace'' [[Pragma]] allowing whitespace to be selectively ignored within wikitext
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/ef9efbc3995248d72148423bee10a1374c842926]] support for saving in [[Beaker Browser]]
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/4db950cc450ef1ea87ce8f480fe882f2b108cdb4]] [[date formatting|DateFormat]] to support milliseconds and UTC dates
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/dc295b2536cdf411893e15b6dc0d62107f50a08d]] LinkCatcherWidget to make the target tiddler available within the action string
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/596dfa1d5058e030a318e4a0f23d078500c3d154]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/a4d919f45caae393f99018e0d797980b3667867f]]) the DropzoneWidget and BrowseWidget to allow the deserializer to be manually specified
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/523280362b529ee73229001a1bcd79272f483908]] new `tc-btn-*` classes to toolbar buttons allowing easier custom styling
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8293a77c6e6870960956dcf1501c687d2f88ea3c]] new ''mode'' attribute to the ViewWidget, allowing control over the parsing mode for wikified output formats
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d7a6816307f4fd47df29cb8e0343ea39c079a2b0]] new [[jsonstringify Operator]]
+
+!! Node.js Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/35a7a66b019f2ea0532ba65cd5475f5cfe46a860]] SaveCommand and RenderCommand, intended as more flexible replacements for RenderTiddlerCommand, RenderTiddlersCommand, SaveTiddlerCommand and SaveTiddlersCommand
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/51b1ead5c9aa5a754e7fdc0bfbf241dd98db5f7c]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/1b7d9d65f42e77fdceb11b0b0b9ab9a63f6762e9]]) more colour to command line output
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c179dc93cbd8947f92a8007d28c497b70efc4204]] new "raw" options to the FetchCommand
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e951047461c3c2c273484a759ce5fc2c388fb684]] new ImportCommand
+
+!! Bug Fixes
+
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/2821]] problem with "new journal" button clearing the text field
+* [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/c069d48a2a690b333c0733328f3574ae8a76e435]] extraneous URI encoding of filename with PUT saver
+* [[Restored|https://github.com/Jermolene/TiddlyWiki5/pull/2940]] ability to use sub-filter with image-picker macro
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/ccac0258af9b6d8c93d41b1f170e20dbf2efe3f3]] problem with the download saver and filenames containing spaces, accents or other characters that need URL encoding
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/2850]] problem with importing JSON tiddlers with leading or trailing spaces in the title
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/683285d44943db2d993bd574ed2d2f8a07dfc816]] plugin display so that "contents" tab is shown even if no other tabs are provided
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/2842]] problem with `allbefore:include` filter operator
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/e471bd54d42226d3b6d070b8561f8883f44df68a]] Update Stanford JavaScript Library to version 1.0.7
+
+!! Developer Bug Fixes and Improvements
+
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/0bc325025a61c265dafe7ce8750ea8deed2be51b]] `$tw.boot.boot()` to add a callback parameter
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/d89010752a8b169a4917bde9a9028ddd871e743d]] navigation handling to pass original event data
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/518f57f4bbc747c3675260eb3ffde1dc7468c805]] new `th-importing-files` hook
+
+! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* [[@0mp|https://github.com/0mp]]
+* [[@Arlen22|https://github.com/Arlen22]]
+* [[@BramChen|https://github.com/BramChen]]
+* [[@cjhunt|https://github.com/cjhunt]]
+* [[@danielo515|https://github.com/danielo515]]
+* [[@hoelzro|https://github.com/hoelzro]]
+* [[@Marxsal|https://github.com/Marxsal]]
+* [[@maxthomax|https://github.com/maxthomax]]
+* [[@morosanuae|https://github.com/morosanuae]]
+* [[@pmario|https://github.com/pmario]]
+* [[@rubaboo|https://github.com/rubaboo]]
+* [[@saqimtiaz|https://github.com/saqimtiaz]]
+* [[@telmiger|https://github.com/telmiger]]
+* [[@twMat|https://github.com/twMat]]
+* [[@xcazin|https://github.com/xcazin]]
+ 

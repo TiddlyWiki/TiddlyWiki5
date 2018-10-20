@@ -1,0 +1,28 @@
+caption: Uso en Node.js
+created: 20131219100520659
+es-title: Uso de TiddlyWiki en Node.js
+modified: 20160506051541044
+tags: [[TiddlyWiki on Node.js]]
+title: Using TiddlyWiki on Node.js
+type: text/vnd.tiddlywiki
+
+~TiddlyWiki se puede usar desde la línea de comandos para ejecutar una larga lista de operaciones basadas en [[carpetas|TiddlyWikiFolders]], [[tiddlers|TiddlerFiles]] y archivos HTML de ~Tiddlywiki.
+
+Por ejemplo, el siguiente comando carga tiddlers de un archivo HTML de ~TiddlyWIki y guarda uno de ellos (~ReadMe) como HTML estático (readme.html):
+
+```
+tiddlywiki --verbose --load mi_wiki.html --rendertiddler ReadMe ./readme.html
+```
+Ejecutar ~TiddlyWiki desde la línea de comandos pone en marcha el núcleo, carga los plugins y establece un <<.word almacén>> de tiddlers en blanco. A partir de entonces procesa los argumentos de la línea de comandos de izquierda a derecha. Los argumentos se separan con espacios.
+
+El primer argumento es la ruta opcional al [[WikiFolder|TiddlyWikiFolders]] que se va a cargar. Si no se especifica, se usa el directorio actual.
+
+Le siguen uno o varios comandos con sus respectivos argumentos. Los comandos se identifican con el prefijo `--`.
+
+```
+tiddlywiki [<ruta>] [--<comando> [<argumento>[,<argumento>]]]
+```
+
+Los comandos disponibles son:
+
+<<list-links "[tag[Commands]]">>

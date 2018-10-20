@@ -1,0 +1,23 @@
+caption: InfoPanel
+created: 20150917193630604
+es-title: Panel de información de tiddler
+modified: 20160429043844918
+tags: Features
+title: InfoPanel
+type: text/vnd.tiddlywiki
+
+Cada tiddler contiene un panel oculto con información adicional. Para mostrarlo, haz clic en el botón <<.button more-tiddler-actions>> en la barra del título y selecciona el botón <<.button info>> en la lista desplegable.
+
+El InfoPanel contiene las siguientes pestañas:
+
+* <<.info-tab Tools>> ofrece botones para realizar diferentes acciones. Puedes seleccionar el botón que quieras añadir a la barra del tiddler marcando la casilla que tiene al lado. Esto afectará a todos los tiddlers en el wiki. 
+
+* <<.info-tab References>>, <<.info-tab Tagging>>, <<.info-tab List>> y <<.info-tab Listed>> dan un listado de diferentes tipos de tiddlers relacionados con el actual. Ver [[uso de links para navegar entre tiddlers |Using links to navigate between tiddlers]]
+
+* <<.info-tab Fields>> da una lista de los [[campos|TiddlerFields]] contenidos en el tiddler, excepto <<.field text>>
+
+* <<.info-tab Advanced>> indica si el tiddler es de tipo [[oculto|ShadowTiddlers]]. Si lo es, dice también de qué plugin forma parte y si está o no anulado por un tiddler común. 
+
+* <<.example-tab "Sources">> indica el origen, en el sitio de TiddlyWiki, de aquellos tiddlers que forman parte de la documentación oficial, donde se lo encuentra como página HTML estática. En tal caso, para facilitar contribuciones que mejoren la documentación, se muestra también la ruta del archivo original en GitHub.
+
+Para cerrar el panel, basta con hacer clic fuera de él.

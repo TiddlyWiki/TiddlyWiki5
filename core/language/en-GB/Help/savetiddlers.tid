@@ -1,7 +1,9 @@
 title: $:/language/Help/savetiddlers
 description: Saves a group of raw tiddlers to a directory
 
-Saves a group of tiddlers in their raw text or binary format to the specified directory. 
+(Note: The `--savetiddlers` command is deprecated in favour of the new, more flexible `--save` command)
+
+Saves a group of tiddlers in their raw text or binary format to the specified directory.
 
 ```
 --savetiddlers <filter> <pathname> ["noclean"]

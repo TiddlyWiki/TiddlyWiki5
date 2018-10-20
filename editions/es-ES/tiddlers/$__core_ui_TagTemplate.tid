@@ -1,0 +1,33 @@
+created: 20160504080001125
+modified: 20160515100830717
+title: $:/core/ui/TagTemplate
+type: text/vnd.tiddlywiki
+
+\define tag-styles()
+background-color:$(backgroundColor)$;
+fill:$(foregroundColor)$;
+color:$(foregroundColor)$;
+\end
+
+\define tag-body-inner(colour,fallbackTarget,colourA,colourB)
+<$set name="foregroundColor" value=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">>>
+<$set name="backgroundColor" value="""$colour$""">
+<$button popup=<<qualify "$:/state/popup/tag">> class="tc-btn-invisible tc-tag-label" style=<<tag-styles>>>
+<$transclude tiddler={{!!icon}}/> <$view field="es-title"><$view field="title" format="text" /></$view>
+</$button>
+<$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes"><div class="tc-drop-down"><$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+<hr>
+<$list filter="[all[current]tagging[]]" template="$:/core/ui/ListItemTemplate"/>
+</div>
+</$reveal>
+</$set>
+</$set>
+\end
+
+\define tag-body(colour,palette)
+<span class="tc-tag-list-item">
+<$macrocall $name="tag-body-inner" colour="""$colour$""" fallbackTarget={{$palette$##tag-background}} colourA={{$palette$##foreground}} colourB={{$palette$##background}}/>
+</span>
+\end
+
+<$macrocall $name="tag-body" colour={{!!color}} palette={{$:/palette}}/>

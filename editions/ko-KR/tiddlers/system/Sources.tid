@@ -1,0 +1,28 @@
+title: $:/editions/ko-KR/TiddlerInfo/Sources
+tags: $:/tags/TiddlerInfo
+caption: 자료
+
+\define makeStaticLink()
+https://tiddlywiki.com/languages/ko-KR/static/<$view tiddler=<<currentTiddler>> field="title" format="doubleurlencoded"/>.html
+\end
+\define outerMakeStaticLink()
+<$macrocall $name="makeStaticLink" $output="text/plain"/>
+\end
+\define makeGitHubLink()
+https://github.com/Jermolene/TiddlyWiki5/blob/master/editions/ko-KR/tiddlers/$(githubLink)$
+\end
+\define outerMakeGitHubLink()
+<$set name="githubLink" value={{$:/config/OriginalTiddlerPaths##$(currentTiddler)$}}>
+<a href=<<makeGitHubLink>> class="tc-tiddlylink-external" target="_blank"><$text text=<<makeGitHubLink>>/></a>
+</$set>
+\end
+<$list filter="[all[current]!is[system]!is[shadow]]">
+
+이 티들러의 정적 HTML 표현은 다음 URL에서 사용할 수 있습니다:
+
+* <<outerMakeStaticLink>>
+
+이 티들러에 대해 ~GitHub pull request를 보내서 우리에게 설명문서를 개선하는 데 도움을 주세요:
+
+* <<outerMakeGitHubLink>>
+</$list>

@@ -4,14 +4,17 @@ title: $:/core/templates/tiddlywiki5.html
 <!doctype html>
 {{$:/core/templates/MOTW.html}}<html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />		<!-- Force IE standards mode for Intranet and HTA - should be the first meta -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<!--~~ Raw markup for the top of the head section ~~-->
+{{{ [all[shadows+tiddlers]tag[$:/tags/RawMarkupWikified/TopHead]] ||$:/core/templates/raw-static-tiddler}}}
+<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 <meta name="application-name" content="TiddlyWiki" />
 <meta name="generator" content="TiddlyWiki" />
 <meta name="tiddlywiki-version" content="{{$:/core/templates/version}}" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="mobile-web-app-capable" content="yes"/>
 <meta name="format-detection" content="telephone=no" />
 <meta name="copyright" content="{{$:/core/copyright.txt}}" />
 <link id="faviconLink" rel="shortcut icon" href="favicon.ico">
@@ -20,8 +23,11 @@ title: $:/core/templates/tiddlywiki5.html
 
 <!--~~ Raw markup ~~-->
 {{{ [all[shadows+tiddlers]tag[$:/core/wiki/rawmarkup]] [all[shadows+tiddlers]tag[$:/tags/RawMarkup]] ||$:/core/templates/plain-text-tiddler}}}
+{{{ [all[shadows+tiddlers]tag[$:/tags/RawMarkupWikified]] ||$:/core/templates/raw-static-tiddler}}}
 </head>
 <body class="tc-body">
+<!--~~ Raw markup for the top of the body section ~~-->
+{{{ [all[shadows+tiddlers]tag[$:/tags/RawMarkupWikified/TopBody]] ||$:/core/templates/raw-static-tiddler}}}
 <!--~~ Static styles ~~-->
 <div id="styleArea">
 {{$:/boot/boot.css||$:/core/templates/css-tiddler}}
@@ -46,5 +52,7 @@ title: $:/core/templates/tiddlywiki5.html
 <div id="bootKernel" style="display:none;">
 {{ $:/boot/boot.js ||$:/core/templates/javascript-tiddler}}
 </div>
+<!--~~ Raw markup for the bottom of the body section ~~-->
+{{{ [all[shadows+tiddlers]tag[$:/tags/RawMarkupWikified/BottomBody]] ||$:/core/templates/raw-static-tiddler}}}
 </body>
 </html>

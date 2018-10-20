@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/plain/term
+
+\define body()
+<dt>
+
+<$transclude/>
+
+</dt>
+\end
+
+<<body>>

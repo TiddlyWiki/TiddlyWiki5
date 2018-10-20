@@ -18,7 +18,12 @@ exports.types = {inline: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /~?\$:\/[a-zA-Z0-9/.\-_]+/mg;
+	this.matchRegExp = new RegExp(
+		"~?\\$:\\/[" +
+		$tw.config.textPrimitives.anyLetter.substr(1,$tw.config.textPrimitives.anyLetter.length - 2) +
+		"\/._-]+",
+		"mg"
+	);
 };
 
 exports.parse = function() {

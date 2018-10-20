@@ -1,0 +1,32 @@
+caption: Exportación de tiddlers
+created: 20151006145934884
+es-title: Cómo exportar tiddlers
+modified: 20160419161840318
+tags: Learning
+title: How to export tiddlers
+type: text/vnd.tiddlywiki
+
+!! Exportar todos los tiddlers
+
+Para exportar <<.em todos>> los tiddlers del wiki, haz clic en la pestaña <<.sidebar-tab Tools>> de la barra lateral y a continuación selecciona el botón <<.button export-page>>. Un menú desplegable te dará la opción de exportar los tiddlers en varios formatos.
+
+!! Exportar un solo tiddler
+
+Si quieres exportar un tiddler en particular, abre primero dicho tiddler y haz clic en el botón <<.button more-tiddler-actions>> de la barra. De la lista desplegable que aparece, selecciona la opción <<.button export-tiddler>>. Un menú desplegable te mostrará las diferentes opciones de exportación disponibles.
+
+!! Exportar tiddlers coincidentes con un criterio de búsqueda (filtros)
+
+Para exportar una selección de tiddlers, haz clic en la lupa junto al área de <<.button advanced-search>> de la barra lateral para abrir el tiddler de [[Búsqueda avanzada|$:/AdvancedSearch]]. Haz clic en la pestaña <<.advancedsearch-tab Filter>>, que es la que te permite exportar una selección de tiddlers y escribe el criterio de búsqueda conforme a la sintaxis empleada por los [[filtros|Filters]].
+
+Una vez escrita la expresión de filtrado, aparecerá la lista de tiddlers coincidentes con el criterio de búsqueda. Entonces puedes hacer clic en el botón {{$:/core/ui/Buttons/export-tiddler}}, a la derecha del campo de búsqueda. Un menú desplegable te ofrecerá las opciones de exportación disponibles.
+
+!! Formatos de exportación
+
+Actualmente, los formatos de exportación disponibles son:
+
+  * CSV
+  * JSON
+  * HTML estático
+  * archivo .tid
+
+<<.warning "La exportación en formato ''.tid'' difiere de las demás, ya que por ahora sólo es capaz de exportar un único tiddler --el primero de la lista--. Para exportar en este formato la selección entera, habrá que abrirlos todos y exportar manualmente tiddler por tiddler.">>

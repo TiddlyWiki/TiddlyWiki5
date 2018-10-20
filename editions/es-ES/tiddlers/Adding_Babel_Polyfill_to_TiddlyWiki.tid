@@ -1,0 +1,67 @@
+caption: Añadir a ~Tiddlywiki el Polyfill de Babel
+created: 20160112025328000
+es-title: Incorporar el polyfill de Babel a TiddlyWiki
+modified: 20160506153636017
+tags: documenting Concepts
+title: Adding Babel Polyfill to TiddlyWiki
+type: text/vnd.tiddlywiki
+
+No todos los navegadores soportan las últimas características de ES2015. El proyecto [[Babel|https://babeljs.io/docs/learn-es2015/]] ofrece un [[polyfill|https://en.wikipedia.org/wiki/Polyfill]] que puede incluirse en ~TiddlyWiki, de modo que dichas características estén disponibles para nuevos plugins. Para hacerlo, es necesaria una copia del código fuente del polyfill. 
+
+Puede obtenerse una copia a través de <<.def "npm">> o se puede descargar desde la página del proyecto. En la documentación del [[polyfill de Babel|https://babeljs.io/docs/usage/polyfill/]] existe información específica para su instalación. 
+
+Hay que crear una carpeta `plugins/babel-polyfill` dentro de la carpeta <<.place editions>> de ~TiddlyWiki. En ella hay que crear el documento `plugins/babel-polyfill/plugin.info`, con el siguiente contenido:
+
+```json
+{
+  "title": "$:/plugins/babel/babel-polyfill",
+  "description": "Babel Polyfills for ES2015 support",
+  "author": "Your Name Here",
+  "core-version": ">=5.0.0"
+}
+```
+
+Crea la carpeta `plugins/babel-polyfill/files`. Dentro, el archivo `plugins/babel-polyfill/files/tiddlywiki.files`, con el siguiente contenido:
+
+```json
+{
+  "tiddlers": [
+    {
+      "file": "polyfill.min.js",
+      "fields": {
+        "title": "$:/plugins/babel/babel-polyfill/polyfill.min.js",
+        "type": "application/javascript",
+        "module-type": "library",
+        "global-module": "true"
+      }
+    }
+  ]
+}
+```
+
+Copia entonces el archivo `polyfill.min.js` que ya has descargado.
+
+<<.tip "Si lo has descargado vía ''npm'', tiene que estar en `./node_modules/babel-polyfill/dist/polyfill.min.js`.">>
+
+Por último, necesitarás un inicializador, para lo que deberás crear el archivo `plugins/babel-polyfill/plugin.js`, con el siguiente contenido:
+
+```javascript
+/*\
+title: $:/plugins/babel/babel-polyfill/plugin.js
+type: application/javascript
+module-type: startup
+
+Load the babel-polyfill library on startup
+
+\*/
+
+exports.startup = function() {
+  $tw.modules.execute('$:/plugins/babel/babel-polyfill/polyfill.min.js');
+}
+```
+
+<<.warning "Debido a que se prevee que el polyfill se use en el navegador, necesitamos cargar la librería de manera condicional, lo que ES2016 no permite. Es por esto por lo que no usamos para ello la declaración `import` de ES2015, sino que está escrito como dependencia de ~TiddlyWiki">>
+
+Ahora están disponibles todas las características del entorno de ejecución ES2015. 
+
+En [[Escribir plugins con ES2016|Using ES2016 for Writing Plugins]] está disponible la información necesaria sobre la sintaxis de ES2015 para programar plugins.

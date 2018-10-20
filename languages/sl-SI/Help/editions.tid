@@ -1,0 +1,8 @@
+title: $:/language/Help/editions
+description: Navede razpoložljive izdaje TiddlyWiki
+
+Navede imena in opise razpoložljivih izdaj. Z ukazom "--init" lahko ustvarite nov wiki določene izdaje.
+
+```
+--editions
+```

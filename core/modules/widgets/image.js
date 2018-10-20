@@ -87,6 +87,9 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 						src = _canonical_uri;
 						break;
 				}	
+			} else {
+				// Just trigger loading of the tiddler
+				this.wiki.getTiddlerText(this.imageSource);
 			}
 		}
 	}

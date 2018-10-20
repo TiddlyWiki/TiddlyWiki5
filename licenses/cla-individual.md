@@ -5,8 +5,7 @@ Thank you for your interest in contributing to TiddlyWiki5. TiddlyWiki is owned 
 
 This contributor agreement ("Agreement") documents the rights granted by contributors to Us. To make this document effective, please sign it and send it to Us by electronic submission, following the instructions in `contributing.md`, which is in the root directory of the project repository. This is a legally binding document, so please read it carefully before agreeing to it. The Agreement may cover more than one software project managed by Us.
 
-1. Definitions
----------------
+## 1. Definitions
 
 "You" means the individual who Submits a Contribution to Us.
 
@@ -26,8 +25,7 @@ This contributor agreement ("Agreement") documents the rights granted by contrib
 
 "Media" means any portion of a Contribution which is not software.
 
-2. Grant of Rights
-------------------
+## 2. Grant of Rights
 
 ### 2.1 Copyright License
 
@@ -61,8 +59,7 @@ Any rights not expressly licensed under this section are expressly reserved by Y
 
 We may use 3rd party libraries to create TiddlyWiki5 plugins. These libraries may have their own licenses. 3rd party software and licenses are not subject in this CLA, while TiddlyWiki5 plugins that use these libraries are. 3rd party libraries may be included everywhere, especially in the following directories and their subdirectories: `plugins/` and `editions/`.
 
-3. Agreement
-------------
+## 3. Agreement
 
 You confirm that:
 
@@ -74,18 +71,15 @@ You confirm that:
 
 (d) You have followed the instructions in `contributing.md`, if You do not own the Copyright in the entire work of authorship Submitted. The file can be found in the root directory of the project repository.
 
-4. Disclaimer
--------------
+## 4. Disclaimer
 
 EXCEPT FOR THE EXPRESS WARRANTIES IN SECTION 3, THE CONTRIBUTION IS PROVIDED "AS IS". MORE PARTICULARLY, ALL EXPRESS OR IMPLIED WARRANTIES INCLUDING, WITHOUT LIMITATION, ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT ARE EXPRESSLY DISCLAIMED BY YOU TO US. TO THE EXTENT THAT ANY SUCH WARRANTIES CANNOT BE DISCLAIMED, SUCH WARRANTY IS LIMITED IN DURATION TO THE MINIMUM PERIOD PERMITTED BY LAW.
 
-5. Consequential Damage Waiver
-------------------------------
+## 5. Consequential Damage Waiver
 
 TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL YOU BE LIABLE FOR ANY LOSS OF PROFITS, LOSS OF ANTICIPATED SAVINGS, LOSS OF DATA, INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL AND EXEMPLARY DAMAGES ARISING OUT OF THIS AGREEMENT REGARDLESS OF THE LEGAL OR EQUITABLE THEORY (CONTRACT, TORT OR OTHERWISE) UPON WHICH THE CLAIM IS BASED.
 
-6. Miscellaneous
-----------------
+## 6. Miscellaneous
 
 6.1 This Agreement will be governed by and construed in accordance with the laws of the State of California and the United States excluding its conflicts of law provisions. Under certain circumstances, the governing law in this section might be superseded by the United Nations Convention on Contracts for the International Sale of Goods ("UN Convention") and the parties intend to avoid the application of the UN Convention to this Agreement and, thus, exclude the application of the UN Convention in its entirety to this Agreement.
 
@@ -104,8 +98,7 @@ The below-signed are contributors to a code repository that is part of the proje
 
 eg: Jeremy Ruston, @Jermolene, 2011/11/22
 
-Contributors
-------------
+## Contributors
 
 Mario Pietsch, @pmario, 2013/09/21
 
@@ -141,7 +134,7 @@ Bram Chen, @BramChen, 2014/02/20
 
 Xavier Cazin, @xcazin, 2014/02/21
 
-Rustem Akbulatov, @nameanyone, 2014/03/04
+Rustem Akbulatov, @rubaboo, 2014/03/04
 
 Harald Albrecht, @TheDiveO, 2014/03/12
 
@@ -252,3 +245,89 @@ William Jackson, @matabele 2015/09/26
 Karl Knechtel, @zahlman, 2015/10/03
 
 Tony Grosinger @tgrosinger 2015/10/03
+
+Antaeus Feldspar @afeldspar 2015/10/20
+
+Soeren Enevoldsen, @senevoldsen90, 2015/10/09
+
+Santiago Pelufo, @spelufo, 2015/12/18
+
+Matthew Lauber, @mklauber, 2015/11/13
+
+Matthew DeAbreu, @mdeabreu, 2016/01/05
+
+Cameron Fischer, @flibbles, 2016/01/08
+
+Jim, @ARRRRGH, 2016/01/11
+
+Koke Laast, @Koke24, 2016/01/27
+
+Thomas Elmiger, @telmiger, 2016/02/02
+
+Richard Rath @rcrath 2016/02/12
+
+Eric Drechsel @edrex 2016/02/15
+
+Tomasz Pijanowski @zakrec 2016/02/21
+
+@FND 2016/02/27
+
+Cengizhan Kurt, @webninjasi, 2016/03/03
+
+Knut Franke, @nome, 2016/03/20
+
+Pau Deluca, @PauDeLuca, 2016/04/11
+
+Brent Maxwell, @brentmaxwell, 2016/05/20
+
+Thomas Herlea, @maxthomax, 2016/06/09
+
+Segey Shishkin, @serj_aleks, 2016/07/28
+
+Przemek Wesołek, @jest, 2016/08/05
+
+Doron Tzur, @DoronTzur 2016/08/16
+
+Hans Christian Haase, @hchaase, 2016/08/11
+
+steve schneider, @stevesunypoly, 2016/08/26
+
+Nuno Mota, @nmota, 2016/12/16
+
+Sylvain Comte, @sycom, 2016/12/20
+
+Saul D Beniquez, @beniquezsd 2017/01/01
+
+Rizwan Ishak, @ibnishak, 2017/01/10
+
+Stefano De Dionigi, @dedioste, 2017/01/19
+
+Matias Goldman, @twMat, 2017/01/22
+
+Andrew Webb, @tejjyid, 2017/03/06
+
+Richard Decal, @crypdick, 2017/04/04
+
+Adrian Morosanu, @morosanuae, 2017/06/02
+
+Rob Hoelz, @hoelzro, 2017/05/08
+
+Saq Imtiaz, @saqimtiaz, 2017/06/14
+
+Simon Huber, @BurningTreeC, 2017/12/22
+
+Brian McKee, @furicle, 2018/01/08
+
+Diego Mesa, @diego898, 2018/01/11
+
+Mete Balci, @metebalci, 2018/03/19
+
+Sebastian Silva, @icarito, 2018/04/03
+
+Luca Dorigo, @ldorigo, 2018/05/05
+
+Anthony Muscio, @AnthonyMuscio, 2018/05/21
+
+Muhammad Talha Mansoor, @talha131, 2018/07/16
+
+Bimba László, @bimlas, 2018/08/10

@@ -1,0 +1,11 @@
+created: 20141212105632762
+modified: 20160429070739423
+tags: $:/tags/Macro
+title: $:/editions/ko-KR/Macros/timeline-title
+type: text/vnd.tiddlywiki
+
+\define timeline-title()
+<$view field="ko-title">
+<$view field="title"/>
+</$view>
+\end

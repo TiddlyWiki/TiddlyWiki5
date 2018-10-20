@@ -1,0 +1,11 @@
+caption: tm-close-all-tiddlers
+created: 20140226194242809
+es-title: Mensaje: tm-close-all-tiddlers
+modified: 20160416045312918
+tags: Messages navigator-message
+title: WidgetMessage: tm-close-all-tiddlers
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-close-all-tiddlers` vacía la StoryList.
+
+Este mensaje lo genera normalmente ButtonWidget y lo procesa NavigatorWidget.

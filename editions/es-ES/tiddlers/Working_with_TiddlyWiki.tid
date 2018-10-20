@@ -1,0 +1,13 @@
+caption: Trabajar con TiddlyWiki
+created: 20140904101100000
+es-title: Trabajar con TiddlyWiki
+list: [[The First Rule of Using TiddlyWiki]] GettingStarted [[Getting Started Video]] Upgrading [[Navigating between open tiddlers]] [[Using links to navigate between tiddlers]] [[Searching in TiddlyWiki]] [[Creating and editing tiddlers]] [[Creating journal tiddlers]] Saving [[Formatting text in TiddlyWiki]] [[Structuring TiddlyWiki]] Tagging [[Images in WikiText]] KeyboardShortcuts Encryption
+modified: 20160421093840593
+tags: TableOfContents
+title: Working with TiddlyWiki
+type: text/vnd.tiddlywiki
+
+Información de ayuda para empezar a usar ~TiddlyWiki:
+
+<<list-links "[tag[Working with TiddlyWiki]]">>
+

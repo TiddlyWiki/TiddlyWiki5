@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/term
+
+\define body()
+<$link tag="dt" class="tc-document-tiddler-link">
+
+<$transclude/>
+
+</$link>
+\end
+
+<<body>>

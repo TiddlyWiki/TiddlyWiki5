@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/dynaview/macros
+tags: $:/tags/Macro
+
+\define transclude-when-visible(tiddler,mode:"block",state,minHeight:"1em",loadingText:"&hellip;")
+<$reveal state=<<__state__>> type="match" text="visible" tag="div">
+<div class="tc-dynaview-set-tiddler-when-visible" data-dynaview-set-tiddler=<<__state__>> data-dynaview-set-value="visible">
+<$transclude tiddler=<<__tiddler__>> mode=<<__mode__>>/>
+</div>
+</$reveal>
+<$reveal state=<<__state__>> type="nomatch" text="visible" tag="div">
+<div class="tc-dynaview-set-tiddler-when-visible" style="min-height: $minHeight$;" data-dynaview-set-tiddler=<<__state__>> data-dynaview-set-value="visible">
+$loadingText$
+</div>
+</$reveal>
+\end

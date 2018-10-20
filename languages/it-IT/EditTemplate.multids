@@ -1,16 +1,24 @@
 title: $:/language/EditTemplate/
 
-Body/Hint: Utilizza il formato wiki per definire la formattazione, aggiungere immagini e caratteristiche dinamiche
+Body/External/Hint: Questo &egrave; un frammento esterno memorizzato al di fuori del file principale TiddlyWiki. Puoi editare le etichette ed i campi ma non puoi editare il contenuto
 Body/Placeholder: Digita il testo di questo frammento
-Body/Preview/Button/Hide: Nascondi preview
-Body/Preview/Button/Show: Mostra preview
+Field/Remove/Caption: Rimuovi campo
+Field/Remove/Hint: Rimuovi campo
 Fields/Add/Button: Aggiungi
+Fields/Add/Dropdown/System: Campi di sistema
+Fields/Add/Dropdown/User: Campi utente
 Fields/Add/Name/Placeholder: Nome campo
 Fields/Add/Prompt: Aggiungi un nuovo campo:
 Fields/Add/Value/Placeholder: Valore campo
+Shadow/OverriddenWarning: Questo &egrave; un frammento nascosto modificato. Puoi ritornare alla versione di default cancellando questo frammento
+Shadow/Warning: Questo &egrave; un frammento nascosto. Qualsiasi modifica ricoprir&agrave; la versione di default
 Tags/Add/Button: Aggiungi
-Tags/Add/Placeholder: Nome categoria
-Tags/Dropdown/Caption: lista dei tag
-Tags/Dropdown/Hint: Mostra la lista dei tag
+Tags/Add/Placeholder: Nome etichetta
+Tags/Dropdown/Caption: Lista delle etichette
+Tags/Dropdown/Hint: Mostra la lista delle etichette
+Type/Delete/Caption: Cancella il tipo di contenuto
+Type/Delete/Hint: Cancella il tipo di contenuto
+Type/Dropdown/Caption: Elenca il tipo di contenuto
+Type/Dropdown/Hint: Mostra la lista del tipo di contenuto
 Type/Placeholder: Tipo contenuto
 Type/Prompt: Tipo:

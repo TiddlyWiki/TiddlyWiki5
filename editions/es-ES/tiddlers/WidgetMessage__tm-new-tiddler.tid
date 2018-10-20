@@ -1,0 +1,42 @@
+caption: tm-new-tiddler
+created: 20140226194405353
+es-title: Mensaje: tm-new-tiddler
+modified: 20160415130948422
+tags: Messages navigator-message
+title: WidgetMessage: tm-new-tiddler
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-new-tiddler` crea un nuevo borrador y lo añade a la StoryList actual. Precisa de las siguientes propiedades del objeto `event`:
+
+
+|!Nombre |!Descripción |
+|param |Título opcional de un tiddler que sirva de plantilla para el nuevo tiddler |
+|paramObject |HashMap opcional de TiddlerFields adicionales |
+|navigateFromTitle |Título del tiddler desde el que se inició la navegación hacia el nuevo tiddler |
+
+El título del borrador se elige conforme a las siguientes reglas:
+
+* Si se usó un HashMap y se definió un campo `title`, usa su valor
+
+* Si se usó plantilla, usa el título y un sufijo numérico para hacerlo único
+
+* Si no, genera un nuevo título basándose en el nuevo título por defecto y un sufijo numérico para hacerlo único.
+
+El mensaje `tm-new-tiddler` se genera normalmente con ButtonWidget o  ActionSendMessageWidget y lo procesa NavigatorWidget.
+
+!! Ejemplos
+
+Si queremos hacer un botón que cree nuevos tiddlers con la etiqueta "tarea", tendremos que crear un tiddler llamado por ejemplo "~PlantillaTarea" con las etiquetas que se quieren asignar ("tarea", en este caso) y entonces definir el botón de esta forma: 
+
+```
+<$button message="tm-new-tiddler" param="PlantillaTarea">Nueva Tarea </$button>
+```
+
+Si en lugar de a partir de una plantilla, queremos un botón que cree tiddlers a partir de una serie de atributos:
+
+```
+<$button>
+<$action-sendmessage $message="tm-new-tiddler" title="This is newly created tiddler" tags="OneTag [[Another Tag]]" text=<<now "Today is DDth, MMM YYYY">>/>
+New Tiddler
+</$button>
+```

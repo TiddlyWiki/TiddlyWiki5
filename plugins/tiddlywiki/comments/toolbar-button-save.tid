@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/comments/toolbar-button-save
+tags: $:/tags/CommentToolbarButton
+
+<$reveal state="$:/status/IsReadOnly" type="match" text="no" default="no" tag="span">
+<$reveal type="match" state="!!edit-mode" text="yes">
+<$button>
+<$action-setfield $tiddler=<<currentTiddler>> $field="edit-mode" $value="no"/>
+save
+</$button>
+</$reveal>
+</$reveal>

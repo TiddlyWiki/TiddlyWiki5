@@ -12,7 +12,7 @@ The parse-tree consists of nested nodes like
 ```js
 {type: "element", tag: <string>, attributes: {}, children: []} - an HTML element
 {type: "text", text: <string>} - a text node
-{type: "entity", value: <string>} - an HTML entity like &copy; for a copyright symbol
+{type: "entity", entity: <string>} - an HTML entity like &copy; for a copyright symbol
 {type: "raw", html: <string>} - raw HTML
 ```
 

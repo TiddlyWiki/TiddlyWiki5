@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/def-list
+
+\define body()
+<dl>
+<$list filter="""[all[current]] $(tv-exclude-filter)$ +[limit[1]]""" variable="item">
+<$list filter={{!!toc-list-filter}} template="$:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler"/>
+</$list>
+</dl>
+\end
+
+<<body>>

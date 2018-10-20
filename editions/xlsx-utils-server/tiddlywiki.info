@@ -1,0 +1,19 @@
+{
+	"description": "Server configuration of the xlsx-utils edition",
+	"plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem",
+		"tiddlywiki/jszip",
+		"tiddlywiki/xlsx-utils"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"includeWikis": [
+		"../xlsx-utils"
+	],
+	"config": {
+		"default-tiddler-location": "../xlsx-utils/tiddlers"
+	}
+}

@@ -1,0 +1,17 @@
+caption: Edición básica
+created: 20140916213421041
+es-title: Edición básica
+modified: 20160603133503597
+tags: Editions
+title: Empty Edition
+type: text/vnd.tiddlywiki
+
+La edición básica de TiddlyWiki es una distribución sin modificar del núcleo de ~TiddlyWiki, sin otros plugins ni configuración adicional instalados. 
+
+Puede descargarse desde:
+
+> {{$:/editions/es-ES/snippets/download-empty-button}}
+
+>Si el botón no funciona, guarda este enlace: https://tiddlywiki.com/languages/es-ES/empty.html
+
+> Seguramente el navegador te pida que confirmes la descarga

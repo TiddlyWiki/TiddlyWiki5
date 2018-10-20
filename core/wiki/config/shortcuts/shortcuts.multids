@@ -1,0 +1,25 @@
+title: $:/config/shortcuts/
+
+cancel-edit-tiddler: escape
+excise: ctrl-E
+heading-1: ctrl-1
+heading-2: ctrl-2
+heading-3: ctrl-3
+heading-4: ctrl-4
+heading-5: ctrl-5
+heading-6: ctrl-6
+link: ctrl-L
+linkify: alt-shift-L
+list-bullet: ctrl-shift-L
+list-number: ctrl-shift-N
+mono-block: ctrl-shift-M
+mono-line: ctrl-M
+picture: ctrl-shift-I
+preview: alt-P
+quote: ctrl-Q
+save-tiddler: ctrl+enter
+stamp: ctrl-S
+strikethrough: ctrl-T
+subscript: ctrl-shift-B
+superscript: ctrl-shift-P
+transcludify: alt-shift-T

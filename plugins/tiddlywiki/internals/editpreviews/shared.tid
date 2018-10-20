@@ -1,0 +1,25 @@
+title: $:/plugins/tiddlywiki/internals/EditTemplate/body/preview/shared
+
+\define body()
+
+Mode: <$select tiddler="$(tv-mode-configuration)$" default="block">
+<option value="inline">Inline</option>
+<option value="block">Block</option>
+</$select>
+
+<$macrocall $name="preview" mode={{$(tv-mode-configuration)$}}/>
+\end
+
+<div class="tc-internal-tree-preview-wrapper">
+
+<div class="tc-internal-tree-preview">
+
+<$vars tv-mode-configuration=<<qualify "$:/state/internals/preview/mode">>>
+
+<<body>>
+
+</$vars>
+
+</div>
+
+</div>

@@ -1,0 +1,59 @@
+created: 20161015114042793
+modified: 20161015121622327
+tags: TiddlyWikiFolders
+title: tiddlywiki.info Files
+type: text/vnd.tiddlywiki
+
+[[TiddlyWikiFolders]] are configured with a single `tiddlywiki.info` file in the root of the wiki folder. It should contain a JSON object comprising the following properties:
+
+* ''plugins'' - an array of plugin names to be included in the wiki
+* ''themes'' - an array of theme names to be included in the wiki
+* ''languages'' - an array of language names to be included in the wiki
+* ''includeWikis'' - an array of references to external wiki folders to be included in the wiki
+* ''build'' - a hashmap of named build targets, each defined by an array of command tokens (see BuildCommand)
+* ''config'' - an optional hashmap of configuration options (see below)
+
+!!! ''includeWikis''
+
+The entries in the ''includeWikis'' array can be either a string specifying the relative path to the wiki, or an object with the following fields:
+
+* ''path'' - relative path to wiki folder
+* ''read-only'' - set //true// to prevent the tiddlers in the included wiki from being modified. The modifications will be written to the directory specified in ''default-tiddler-location'', described below
+
+!!! ''build''
+
+Note that the build targets of included wikis are merged if a target of that name isn't defined in the current `tiddlywiki.info` file.
+
+!!! ''config''
+
+Configuration options include:
+
+* ''default-tiddler-location'' - a string path to the default location for the filesystem adaptor to save new tiddlers (resolved relative to the wiki folder)
+
+* ''retain-original-tiddler-path'' - If true, the server will generate a tiddler [[$:/config/OriginalTiddlerPaths]] containing the original file paths of each tiddler in the wiki
+
+!!! Example
+
+For example:
+
+```
+{
+	"plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem"
+	],
+	"includeWikis": [
+		{"path": "../tw5.com", "read-only": true}
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+		"favicon": [
+			"--savetiddler","$:/favicon.ico","favicon.ico",
+			"--savetiddler","$:/green_favicon.ico","static/favicon.ico"]
+	},
+	"config": {
+		"retain-original-tiddler-path": true	
+	}
+}
+```

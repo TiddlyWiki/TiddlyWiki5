@@ -1,0 +1,11 @@
+caption: Notificaciones
+created: 20160107225753340
+es-title: Mensajes de notificación
+modified: 20160429053719631
+tags: Features
+title: Notifications
+type: text/vnd.tiddlywiki
+
+Las <<.def notificaciones>> son pequeños mensajes de información que aparecen en la esquina superior derecha de la ventana y que desaparecen automáticamente.
+
+<$button message="tm-notify" param="SampleNotification">Notificación de ejemplo</$button>

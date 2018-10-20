@@ -12,11 +12,12 @@ Command to slice a specified tiddler
 /*global $tw: false */
 "use strict";
 
-var widget = require("$:/core/modules/widgets/widget.js");
+var widget = require("$:/core/modules/widgets/widget.js"),
+	textSlicer = require("$:/plugins/tiddlywiki/text-slicer/modules/slicer.js");
 
 exports.info = {
 	name: "slice",
-	synchronous: true
+	synchronous: false
 };
 
 var Command = function(params,commander,callback) {
@@ -31,11 +32,24 @@ Command.prototype.execute = function() {
 	}
 	var self = this,
 		wiki = this.commander.wiki,
-		tiddlerTitle = this.params[0],
-		slicer = new $tw.Slicer(wiki,tiddlerTitle);
-	slicer.sliceTiddler(tiddlerTitle)
-	slicer.outputTiddlers();
-	slicer.destroy();
+		sourceTitle = this.params[0],
+		destTitle = this.params[1],
+		slicerRules = this.params[2],
+		outputMode = this.params[3],
+		slicer = new textSlicer.Slicer({
+			sourceTiddlerTitle: sourceTitle,
+			baseTiddlerTitle: destTitle,
+			slicerRules: slicerRules,
+			outputMode: outputMode,
+			wiki: wiki,
+			callback: function(err,tiddlers) {
+				if(err) {
+					return self.callback(err);
+				}
+				wiki.addTiddlers(tiddlers);
+				self.callback();	
+			}
+		});
 	return null;
 };
 

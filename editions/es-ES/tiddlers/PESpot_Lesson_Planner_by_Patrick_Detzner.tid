@@ -1,0 +1,15 @@
+caption: "PESpot Lesson Planner", de Patrick Detzner
+created: 20150403104722092
+es-title: "PESpot Lesson Planner", de Patrick Detzner
+modified: 20160417153558347
+tags: Examples
+title: PESpot Lesson Planner by Patrick Detzner
+type: text/vnd.tiddlywiki
+url: http://pespot.tiddlyspot.com
+
+Sistema para crear planes docentes, construido con TiddlyWiki
+
+{{!!url}}
+
+<<<
+Construí un programa que sirviera de ayuda para la redacción y planifiación de leciones y que automatizara algunas de las tediosas tareas envueltas en la creación de un plan dociente. <<<

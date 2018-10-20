@@ -56,18 +56,25 @@ var WikiTextParser = function(type,text,options) {
 	this.source = text;
 	this.nextMatch = 0;
 	this.children = [];
-	//this.children.push({type: "text",text:"hello to the queen"});
 	this.tree =[];
 	this.output = null;
 	this.subWikify(this.children);
-	var parser = $tw.wiki.old_parseTiddler("$:/plugins/tiddlywiki/tw2parser/macrodefs",{parseAsInline:false});
+	// prepend tw2 macros locally to the content
+	var parser = $tw.wiki.parseTiddler("$:/plugins/tiddlywiki/tw2parser/macrodefs",{parseAsInline:false});
 	this.tree = [{
 		type: "element",
 		tag: "div",
-			children:this.children
+		children:this.children
 	}];
-	Array.prototype.push.apply(parser.tree,this.tree);
-	this.tree = parser.tree;
+	// clone the output of parser 
+	var root = JSON.parse(JSON.stringify(parser.tree));
+	// macros are defined in a linear tree; walk down the tree and append the source's parsed content 
+	var baseroot = root;
+	while (root[0] && root[0].children && root[0].children.length !== 0 ){ 
+		root = root[0].children;
+	}
+	root[0].children[0] = this.tree[0];
+	this.tree = baseroot;
 };
 
 

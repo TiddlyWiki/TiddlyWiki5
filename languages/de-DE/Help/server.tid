@@ -11,7 +11,7 @@ Der Server kann spezifische Tiddler im angegebenen Format anzeigen (rendern). Zu
 
 Die Parameter sind: 
 
-* ''port'' - Port Nummer mit der kommuniziert werden soll (Standard: "8080").
+* ''port'' - Port Nummer mit der kommuniziert werden soll (Standard: "8080"). Ein "nicht-numerisher" Wert wird als System-Umgebungsvariable interpretiert, von der der Wert gelesen werden soll.
 * ''roottiddler'' - Der Tiddler, der als ~Basis-Tiddler verwendet werden soll ( Standard: "$:/core/save/all").
 * ''rendertype'' -  MIME-Type, zu dem der ~Basis-Tiddler "gerendert" werden soll ( Standard: "text/plain").
 * ''servetype'' - MIME-Type, mit dem der Basis-Tiddler ausgeliefert werden soll ( Standard: "text/html").
@@ -34,4 +34,9 @@ Der Name und das Passwort können als "leere" Zeichenketten definiert werden, we
 --server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
 ```
 
-Es ist möglich mehrere TiddlyWiki Server gleichzeitig zu starten. Jeder Server muss jedoch mit einem eigenen Port gestartet werden.
+Es ist möglich mehrere TiddlyWiki Server gleichzeitig zu starten. Jeder Server muss jedoch mit einem eigenen Port gestartet werden. Es kann sinnvoll sein, den Prozess mit lokalen "Umgebungsvariable" zu starten. Hier wird "MEINE_PORT_NUMMER" als Beispiel verwendet.
+
+
+```
+--server MEINE_PORT_NUMMER $:/core/save/all text/plain text/html MyUserName passw0rd
+```

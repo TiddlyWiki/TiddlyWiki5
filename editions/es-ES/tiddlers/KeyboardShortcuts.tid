@@ -1,0 +1,15 @@
+caption: Atajos de teclado
+created: 20140526204527418
+es-title: Atajos de teclado
+modified: 20160423061920763
+tags: Features [[Working with TiddlyWiki]]
+title: KeyboardShortcuts
+type: text/vnd.tiddlywiki
+
+~TiddlyWiki ofrece actualmente un muy limitado soporte de atajos de teclado, pero está en proyecto desarrollarlo en próximas ediciones.
+
+!! Atajos de edición
+
+|Teclas |Descripción |
+|<kbd>ctrl-enter</kbd> |Confirmar los cambios realizados en el borrador en foco |
+|<kbd>escape</kbd> |Descartar los cambios realizados y abandonar la edición del borrador en foco |

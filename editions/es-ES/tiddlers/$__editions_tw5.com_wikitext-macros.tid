@@ -1,0 +1,47 @@
+created: 20150117184156000
+modified: 20160428152133143
+tags: $:/tags/Macro
+title: $:/editions/tw5.com/wikitext-macros
+type: text/vnd.tiddlywiki
+
+\define wikitext-example(src)
+<div class="doc-example">
+
+```
+$src$
+```
+
+Tiene este aspecto:
+
+$src$
+
+... y su código HTML es:
+
+$$$text/vnd.tiddlywiki>text/html
+$src$
+$$$
+</div>
+\end
+
+\define wikitext-example-without-html(src)
+<div class="doc-example">
+
+```
+$src$
+```
+
+Este es su aspecto:
+
+$src$
+</div>
+\end
+
+\define tw-code(tiddler)
+<$codeblock language={{$tiddler$!!type}} code={{$tiddler$}}/>
+\end
+
+\define tw-code-link(tiddler)
+[[$tiddler$]]:
+
+<<tw-code $tiddler$>>
+\end

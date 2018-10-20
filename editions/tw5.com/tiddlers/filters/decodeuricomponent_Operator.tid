@@ -1,0 +1,16 @@
+caption: decodeuricomponent
+created: 20161017152454726
+modified: 20161017152630625
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input with URI component decoding applied
+op-parameter: 
+op-parameter-name: 
+op-purpose: apply URI component decoding to a string
+tags: [[Filter Operators]] [[String Operators]]
+title: decodeuricomponent Operator
+type: text/vnd.tiddlywiki
+from-version: 5.1.14
+
+See Mozilla Developer Network for details of the [[decodeURIComponent|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent]] operation.
+
+<<.operator-examples "decodeuricomponent">>

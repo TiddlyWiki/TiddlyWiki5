@@ -4,13 +4,13 @@ description: Initialiseer een nieuwe wiki folder
 Initialiseer een lege [[WikiFolder|WikiFolders]] met een kopie van de gespecificeerde editie.
 
 ```
---init <edition> [<edition> ...]
+--init <editie> [<editie> ...]
 ```
 
 B.v.:
 
 ```
-tiddlywiki ./MyWikiFolder --init empty
+tiddlywiki ./MijnWikiFolder --init empty
 ```
 
 N.B.:

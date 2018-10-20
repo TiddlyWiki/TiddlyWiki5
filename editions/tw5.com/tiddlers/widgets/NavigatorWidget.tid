@@ -1,9 +1,9 @@
+caption: navigator
 created: 20131024141900000
-modified: 20150619154056283
+modified: 20170629074415261
 tags: Widgets
 title: NavigatorWidget
 type: text/vnd.tiddlywiki
-caption: navigator
 
 ! Introduction
 
@@ -32,3 +32,11 @@ The following [[Messages]] are handled by the navigator widget:
 </li>
 </$list>
 </ul>
+
+! Variables
+
+The following [[Variables]] are assigned by the navigator widget:
+
+* <<.vlink tv-story-list>>, giving the name of the tiddler containing the story list
+* <<.vlink tv-history-list>>, giving the name of the tiddler containing the history list
+

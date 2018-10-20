@@ -1,0 +1,13 @@
+caption: Ajuste oculto: Retardo del teclado
+created: 20150619162409306
+es-title: Ajuste oculto: Retardo entre pulsaciones del teclado
+modified: 20160426153953083
+tags: [[Hidden Settings]]
+title: Hidden Setting: Typing Refresh Delay
+type: text/vnd.tiddlywiki
+
+Para asegurar que al escribir no haya errores de interpretación de las pulsaciones del teclado, TiddlyWiki retarda el procesamiento de cambios en el borrador durante un breve período. El valor por defecto de 400 ms da un nivel óptimo de respuesta en la mayoría de casos, pero no siempre es el más conveniente en dispositivos móviles de baja potencia. 
+
+Para modificar el tiempo de retardo, basta con cambiar el valor en milisegundos de este tiddler:
+
+$:/config/Drafts/TypingTimeout

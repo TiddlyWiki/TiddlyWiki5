@@ -1,0 +1,26 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: זהו טידלר חיצוני המוחסן מחוץ לקובץ העיקרי של הטידליויקי. אתה יכול לערוך את התגים והשדות אבל לא ישירות את התוכן עצמו.
+Body/Placeholder: הקש את הטקסט לטידלר הזה
+Body/Preview/Type/Output: פלט
+Field/Remove/Caption: הסר שדה
+Field/Remove/Hint: הסר שדה
+Fields/Add/Button: הוסף
+Fields/Add/Dropdown/System: שדות מערכת
+Fields/Add/Dropdown/User: שדות משתמש
+Fields/Add/Name/Placeholder: שם שדה
+Fields/Add/Prompt: הוסף שדה חדש:
+Fields/Add/Value/Placeholder: ערך השדה
+Shadow/OverriddenWarning: זהו טידלר צל ששונה. אתה יכול לחזור לגרסה המקורית שבפלאגין<<pluginLink>> על ידי מחיקת הטידלר הזה
+Shadow/Warning: זהו טידלר צל. כל שינוי יחליף למעשה את הגריסה המקורית מהפלאגין <<pluginLink>>
+Tags/Add/Button: הוסף
+Tags/Add/Placeholder: שם התג
+Tags/Dropdown/Caption: רשימת תגים
+Tags/Dropdown/Hint: הראה רשימת תגים
+Title/BadCharacterWarning: אזהרה: הימנע משימוש בסימנים <<bad-chars>> בשמות טידלרים
+Type/Delete/Caption: מחק סוג תוכן
+Type/Delete/Hint: מחק סוג תוכן
+Type/Dropdown/Caption: רשימת סוגי תוכן
+Type/Dropdown/Hint: הראה רשימת סוגי תוכן
+Type/Placeholder: סוג תוכן
+Type/Prompt: סוג:

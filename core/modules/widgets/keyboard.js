@@ -33,15 +33,23 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
+	var tag = this.parseTreeNode.isBlock ? "div" : "span";
+	if(this.tag && $tw.config.htmlUnsafeElements.indexOf(this.tag) === -1) {
+		tag = this.tag;
+	}
 	// Create element
-	var domNode = this.document.createElement("div");
+	var domNode = this.document.createElement(tag);
 	// Assign classes
 	var classes = (this["class"] || "").split(" ");
 	classes.push("tc-keyboard");
 	domNode.className = classes.join(" ");
 	// Add a keyboard event handler
 	domNode.addEventListener("keydown",function (event) {
-		if($tw.utils.checkKeyDescriptor(event,self.keyInfo)) {
+		if($tw.keyboardManager.checkKeyDescriptors(event,self.keyInfoArray)) {
+			self.invokeActions(self,event);
+			if(self.actions) {
+				self.invokeActionString(self.actions,self,event);
+			}
 			self.dispatchMessage(event);
 			event.preventDefault();
 			event.stopPropagation();
@@ -64,10 +72,12 @@ Compute the internal state of the widget
 */
 KeyboardWidget.prototype.execute = function() {
 	// Get attributes
+	this.actions = this.getAttribute("actions");
 	this.message = this.getAttribute("message");
 	this.param = this.getAttribute("param");
 	this.key = this.getAttribute("key");
-	this.keyInfo = $tw.utils.parseKeyDescriptor(this.key);
+	this.tag = this.getAttribute("tag");
+	this.keyInfoArray = $tw.keyboardManager.parseKeyDescriptors(this.key);
 	this["class"] = this.getAttribute("class");
 	// Make child widgets
 	this.makeChildWidgets();
@@ -78,7 +88,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 KeyboardWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.message || changedAttributes.param || changedAttributes.key || changedAttributes["class"]) {
+	if(changedAttributes.message || changedAttributes.param || changedAttributes.key || changedAttributes["class"] || changedAttributes.tag) {
 		this.refreshSelf();
 		return true;
 	}

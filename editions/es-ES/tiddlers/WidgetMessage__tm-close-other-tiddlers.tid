@@ -1,0 +1,17 @@
+caption: tm-close-other-tiddlers
+created: 20140302183306544
+es-title: Mensaje: tm-close-other-tiddlers
+modified: 20160416045151243
+tags: Messages navigator-message
+title: WidgetMessage: tm-close-other-tiddlers
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-close-other-tiddlers` elimina de la StoryList todos los tiddlers menos el que se indica. 
+
+Requiere las siguientes propiedades del objeto `event`:
+
+|!Nombre |!Descripción |
+|param |Título del tiddler que no se cerrará |
+|tiddlerTitle |Título alternativo usado si no se especifica ''param'' (asignado automáticamente por ButtonWidget)  |
+
+Este mensaje lo genera normalmente ButtonWidget y lo procesa NavigatorWidget.

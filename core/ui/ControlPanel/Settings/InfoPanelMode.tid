@@ -1,0 +1,10 @@
+title: $:/core/ui/ControlPanel/Settings/InfoPanelMode
+tags: $:/tags/ControlPanel/Settings
+caption: {{$:/language/ControlPanel/Settings/InfoPanelMode/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Settings/InfoPanelMode/
+<$link to="$:/config/TiddlerInfo/Mode"><<lingo Hint>></$link>
+
+<$radio tiddler="$:/config/TiddlerInfo/Mode" value="popup"> <<lingo Popup/Description>> </$radio>
+
+<$radio tiddler="$:/config/TiddlerInfo/Mode" value="sticky"> <<lingo Sticky/Description>> </$radio>

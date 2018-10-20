@@ -1,0 +1,21 @@
+title: $:/core/ui/EditorToolbar/picture-dropdown
+
+\define replacement-text()
+[img[$(imageTitle)$]]
+\end
+
+''{{$:/language/Buttons/Picture/Hint}}''
+
+<$macrocall $name="image-picker" actions="""
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="replace-selection"
+	text=<<replacement-text>>
+/>
+
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+
+"""/>

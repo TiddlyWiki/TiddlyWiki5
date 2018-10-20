@@ -7,4 +7,5 @@ text/css: codemirror
 text/html: codemirror
 text/plain: codemirror
 text/vnd.tiddlywiki: codemirror
+text/x-markdown: codemirror
 text/x-tiddlywiki: codemirror

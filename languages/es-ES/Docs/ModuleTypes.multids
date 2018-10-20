@@ -1,22 +1,22 @@
 title: $:/language/Docs/ModuleTypes/
 
-animation: Animaciones que pueden usarse con el RevealWidget.
-command: Comandos que pueden ser ejecutados en Node.js.
-config: Datos a ser insertados en `$tw.config`.
-filteroperator: Modos de operación individual de filtrado.
-global: Datos globales a ser insertados en `$tw`.
-isfilteroperator: Operandos para el operador de filtro ''is''.
-macro: Definiciones macro JavaScript.
-parser: Analizadores para diferentes tipos de contenido.
-saver: Guarda archivos desde el navegador en diferentes métodos.
+animation: Animaciones que pueden usarse con RevealWidget
+command: Comandos que pueden ejecutarse en Node.js
+config: Datos para insertar en `$tw.config`
+filteroperator: Operadores individuales de filtrado
+global: Datos globales para insertar en `$tw`
+isfilteroperator: Operandos para el operador ''is''
+macro: Definiciones macro de JavaScript.
+parser: Reglas sintácticas para diversos tipos de contenido.
+saver: Guarda archivos desde el navegador con diferentes métodos.
 startup: Funciones de inicio
-storyview: Personaliza la animación y comportamiento de las listas.
-tiddlerdeserializer: Convierte diferentes tipos de contenido en tiddlers.
-tiddlerfield: Define el comportamiento de un campo de tiddler individual.
-tiddlermethod: Añade métodos al tiddler prototipo `$tw.Tiddler`.
+storyview: Personaliza la animación y comportamiento de listas
+tiddlerdeserializer: Convierte diferentes tipos de contenido en tiddlers
+tiddlerfield: Define el comportamiento de un campo individual
+tiddlermethod: Añade métodos al prototipo `$tw.Tiddler`
 upgrader: Aplica la actualización a los tiddlers durante el proceso de actualización/importación.
-utils: Añade métodos a `$tw.utils`.
-utils-node: Añade métodos específicos de Node.js a `$tw.utils`.
-widget: Sintetiza representación y renovación de ''DOM''.
-wikimethod: Añade métodos a `$tw.Wiki`.
-wikirule: Reglas de análisis individual del analizador principal de WikiText.
+utils: Añade métodos a `$tw.utils`
+utils-node: Añade métodos específicos de Node.js a `$tw.utils`
+widget: Encapsula la representación y recarga de ''DOM''
+wikimethod: Añade métodos a `$tw.Wiki`
+wikirule: Reglas individuales del intérprete principal de WikiText

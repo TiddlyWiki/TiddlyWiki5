@@ -1,0 +1,49 @@
+created: 20131219100608529
+es-title: Instalar TiddlyWiki en Node.js
+modified: 20160603132303620
+tags: [[TiddlyWiki on Node.js]]
+title: Installing TiddlyWiki on Node.js
+type: text/vnd.tiddlywiki
+
+# Descarga e instala [[Node.js]] desde la página oficial: http://nodejs.org
+
+#Abre una terminal de línea de comandos y teclea:
+
+#> `npm install -g tiddlywiki` (ver nota * más abajo)
+
+#> Si te da fallo, necesitas volver a ejecutar la orden como administrador:
+
+#> `sudo npm install -g tiddlywiki` (Mac/Linux)
+
+# Comprueba que TiddlyWiki se ha instalado con el comando:
+
+#> `tiddlywiki --version`
+
+# Si todo está bien, TiddlyWiki devolverá el número de versión (p. ej, en este caso, <<version>>. Puede que también muestre alguna información complementaria, de depuración. 
+
+# Probemos a ponerlo en marcha:
+
+## `tiddlywiki miwiki --init server` creará, en el mismo directorio en el que hayas abierto la consola, una carpeta llamada ''miwiki'', con los componentes necesarios.
+
+## `tiddlywiki miwiki --server` pondrá en marcha TiddlyWiki, que podrás ver y editar en el navegador.
+
+## Abre el navegador y escribe http://127.0.0.1:8080/ (o __localhost:8080__) en la barra de direcciones.
+
+## Crea y edita tiddlers del modo acostumbrado. Los cambios se guardarán automáticamente en la carpeta ''miwiki/tiddlers''
+
+## Para apagar TiddlyWiki, cierra el navegador y haz ''Ctrl-C'' en la línea de comandos (o ciérrala: la consola te advertirá de que al hacerlo //matarás// el proceso en marcha. Confirma y listo)
+
+# # Como opción, puedes hacer una copia offline del wiki:
+
+#* Con TiddlyWiki abierto en el navegador, haz click en el botón ''Guardar cambios'' {{$:/core/images/save-button}} de la barra lateral
+
+#* Con TiddlyWiki apagado y desde el mismo directorio desde donde lo iniciaste, teclea el siguiente comando en la consola:
+
+#>`tiddlywiki --build index`
+
+
+> ''Nota:'' El argumento `-g` hace que TiddlyWiki se instale globalmente (es decir, en todo el equipo). Sin él, TiddlyWiki estará disponible __únicamente en el directorio desde el que lo instales__.
+
+> ''Si usas Debian'' o un sistema basado en Debian y recibes un mensaje del tipo `node: command not found` pese a haber instalado node.js, puede que necesites crear un enlace simbólico entre `nodejs` y `node`. En tal caso, consulta el manual de tu distribución de Linux y `whereis` ([[más información sobre este comando|https://en.wikipedia.org/wiki/Whereis]]) para crearlo correctamente (ver también [[issue 1434|http://github.com/Jermolene/TiddlyWiki5/issues/1434]] en GitHub).
+
+>Ejemplo en Debian v8.0: `sudo ln -s /usr/bin/nodejs /usr/bin/node`

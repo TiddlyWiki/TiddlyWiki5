@@ -19,9 +19,9 @@ Bilder können in WikiText mit folgender Syntax verwendet werden:
 oder 
 
 ```
-[img[http://tiddlywiki.com/favicon.ico]]  Dieses verlinkte Bild wird eventuell nicht angezeigt, wenn Sie offline sind!
+[img[https://tiddlywiki.com/favicon.ico]]  Dieses verlinkte Bild wird eventuell nicht angezeigt, wenn Sie offline sind!
 ```
-[img[http://tiddlywiki.com/favicon.ico]]
+[img[https://tiddlywiki.com/favicon.ico]]
 
 Wenn die Bildquelle der Titel eines existierenden Tiddlers ist, dann wird dieser direkt angezeigt. Ansonsten wird die Quelle als URL angesehen und ein HTML `<img>` Element wird erzeugt. Das `src` Attribut wird auf die [[URL]] gesetzt. 
 

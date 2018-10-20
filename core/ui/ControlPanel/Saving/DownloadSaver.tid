@@ -1,0 +1,11 @@
+title: $:/core/ui/ControlPanel/Saving/DownloadSaver
+tags: $:/tags/ControlPanel/Saving
+caption: {{$:/language/ControlPanel/Saving/DownloadSaver/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Saving/DownloadSaver/
+
+<<lingo Hint>>
+
+!! <$link to="$:/config/DownloadSaver/AutoSave"><<lingo AutoSave/Hint>></$link>
+
+<$checkbox tiddler="$:/config/DownloadSaver/AutoSave" field="text" checked="yes" unchecked="no" default="no"> <<lingo AutoSave/Description>> </$checkbox>

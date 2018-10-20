@@ -1,0 +1,41 @@
+title: $:/language/ThemeTweaks/
+
+Metrics: גדלים
+Metrics/BodyFontSize: גודל גופן לגוף הטידלר
+Metrics/BodyLineHeight: גובה שורה לגוף הטידלר
+Metrics/FontSize: גודל גופן
+Metrics/LineHeight: גובה שורה
+Metrics/SidebarBreakpoint: נקודת השבירה של סרגל הצד
+Metrics/SidebarBreakpoint/Hint: רוחב דף מינימלי בו הסיפור וסרגל הצד יופיעו צד לצד
+Metrics/SidebarWidth: רוחב סרגל צד
+Metrics/SidebarWidth/Hint: רוחב סרגל צד במתווה סורם-קבוע
+Metrics/StoryLeft: מיקום שמאל הסיפור
+Metrics/StoryLeft/Hint: כמה רחוק שול שמאל של הטידלרים משול שמאל של העמוד
+Metrics/StoryRight: ימין הסיפור
+Metrics/StoryRight/Hint: כמה רחוק שול שמאל של סרגל הצד משול שמאל של העמוד
+Metrics/StoryTop: המיקום העליון של הסיפור
+Metrics/StoryTop/Hint: מרחק ראש הסיפור מראש הדף
+Metrics/StoryWidth: רוחב הסיפור
+Metrics/StoryWidth/Hint: הרוחב הכולל של נהר הסיפורים
+Metrics/TiddlerWidth: רוחב הטידלר
+Metrics/TiddlerWidth/Hint: בתוך נהר הסיפורים
+Options: אפשרויות
+Options/CodeWrapping: קפל שורות ארוכות בבלוקי קוד
+Options/SidebarLayout: מתווה סרגל צד
+Options/SidebarLayout/Fixed-Fluid: סיפור קבוע לוח צד גמיש
+Options/SidebarLayout/Fluid-Fixed: סיפור גמיש לוח צד קבוע
+Options/StickyTitles: כותרות דביקות
+Options/StickyTitles/Hint: גורם לכותרות טידלרים להידבק לראש חלון הדפדפן. לא עובד כלל בכרום וגורם בעיות מתווה בפירפוקס
+Settings: קביעות
+Settings/BackgroundImage: תמונת רקע של עמוד
+Settings/BackgroundImageAttachment: תמונת רקע עמוד מוצמדת
+Settings/BackgroundImageAttachment/Fixed: קבוע לחלון
+Settings/BackgroundImageAttachment/Scroll: גלגל עם טידלרים
+Settings/BackgroundImageSize: גודל תמונת רקע עמוד
+Settings/BackgroundImageSize/Auto: אוטומטי
+Settings/BackgroundImageSize/Contain: מכיל
+Settings/BackgroundImageSize/Cover: כיסוי
+Settings/CodeFontFamily: משפחת גופני קוד
+Settings/FontFamily: משפחת גופנים
+ThemeTweaks: התאמות תימה
+ThemeTweaks/Hint: אתה יכול להתאים היבטים מסויימים של תימת הווניל

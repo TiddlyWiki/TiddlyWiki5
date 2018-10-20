@@ -1,0 +1,47 @@
+{
+	"tiddlers": [
+		{
+			"file": "dom.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/xmldom/dom",
+				"module-type": "library"
+			},
+			"prefix": "",
+			"suffix": ""
+		},{
+			"file": "dom-parser.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/xmldom/dom-parser",
+				"module-type": "library"
+			},
+			"prefix": "",
+			"suffix": ""
+		},{
+			"file": "entities.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/xmldom/entities",
+				"module-type": "library"
+			},
+			"prefix": "",
+			"suffix": ""
+		},{
+			"file": "sax.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/xmldom/sax",
+				"module-type": "library"
+			},
+			"prefix": "",
+			"suffix": ""
+		},{
+			"file": "LICENSE",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/xmldom/license"
+			}
+		}
+	]
+}
