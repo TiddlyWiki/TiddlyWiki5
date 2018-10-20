@@ -31,9 +31,9 @@ exports.startup = function() {
 		man.updateShortcutLists(man.shortcutTiddlers);
 
 		// Keydown Listener for shortcuts
-		document.addEventListener("keydown",function(event) {
-			man.handleKeydownEvent(event);
-		},false);
+		$tw.utils.addEventListeners(document,[
+			{name: "keydown",handlerObject: $tw.keyboardManager,handlerMethod: "handleKeydownEvent"}
+		]);
 
 		// Detect changed shortcuts
 		$tw.wiki.addEventListener("change",function(changes) {
