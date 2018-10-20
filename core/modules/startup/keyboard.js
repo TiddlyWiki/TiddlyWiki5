@@ -35,22 +35,6 @@ exports.startup = function() {
 			man.handleKeydownEvent(event);
 		},false);
 
-		// New listeners for new windows
-		$tw.hooks.addHook("th-opening-window",function(srcDocument) {
-			srcDocument.addEventListener("keydown",function(event) {
-				man.handleKeydownEvent(event);
-			},false);
-			// Add click listener to be able to cancel popups
-			srcDocument.addEventListener("click", function(event) {
-				var numPopups = $tw.popup.popups.length;
-				if(numPopups !== 0) {
-					for(var i=0; i < numPopups; i++) {
-						$tw.popup.handleEvent(event);
-					}
-				}
-			});
-		});
-
 		// Detect changed shortcuts
 		$tw.wiki.addEventListener("change",function(changes) {
 			man.handleShortcutChanges(changes);
