@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/KeeBoord/modules/startup/keyboard.js
+title: $:/core/modules/startup/keyboard.js
 type: application/javascript
 module-type: startup
 
