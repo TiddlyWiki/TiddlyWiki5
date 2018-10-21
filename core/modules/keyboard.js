@@ -337,9 +337,7 @@ KeyboardManager.prototype.detectNewShortcuts = function(changedTiddlers) {
 
 KeyboardManager.prototype.handleShortcutChanges = function(changedTiddlers) {
 	var newList = this.getShortcutTiddlerList();
-	var hasChanged = false;
-	// First inspect the existing shortcut-tiddlers
-	hasChanged = this.hasAnyTiddlerChanged(changedTiddlers,this.shortcutTiddlers) ? true :
+	var hasChanged = this.hasAnyTiddlerChanged(changedTiddlers,this.shortcutTiddlers) ? true :
 		(this.hasAnyTiddlerChanged(changedTiddlers,newList) ? true :
 		(this.detectNewShortcuts(changedTiddlers))
 	);
