@@ -229,10 +229,9 @@ KeyboardManager.prototype.parseKeyDescriptors = function(keyDescriptors,options)
 							result.push.apply(result,self.parseKeyDescriptors(keyDescriptors,options));
 						}
 					};
-				lookupName("shortcuts");
-				lookupName($tw.platform.isMac ? "shortcuts-mac" : "shortcuts-not-mac");
-				lookupName($tw.platform.isWindows ? "shortcuts-windows" : "shortcuts-not-windows");
-				lookupName($tw.platform.isLinux ? "shortcuts-linux" : "shortcuts-not-linux");
+				$tw.utils.each(self.lookupNames,function(platformDescriptor) {
+					lookupName(platformDescriptor);
+				});
 			}
 		} else {
 			result.push(self.parseKeyDescriptor(keyDescriptor));
