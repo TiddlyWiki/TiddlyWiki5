@@ -317,13 +317,16 @@ KeyboardManager.prototype.hasAnyTiddlerChanged = function(changedTiddlers,tiddle
 
 KeyboardManager.prototype.detectNewShortcuts = function(changedTiddlers) {
 	var shortcutConfigTiddlers = [],
-		pattern = /^\$:\/config\/shortcuts.*$/,
 		handled = false;
-	Object.keys(changedTiddlers).forEach(function(configTiddler) {
-		if(pattern.test(configTiddler)) {
-			shortcutConfigTiddlers.push(configTiddler);
-			handled = true;
-		}
+	$tw.utils.each(this.lookupNames,function(platformDescriptor) {
+		var pattern = "^\\$:/config/" + platformDescriptor + "/.*$";
+		var configTiddlerRegex = new RegExp(pattern);
+		Object.keys(changedTiddlers).forEach(function(configTiddler) {
+			if(configTiddlerRegex.test(configTiddler)) {
+				shortcutConfigTiddlers.push(configTiddler);
+				handled = true;
+			}
+		});
 	});
 	if(handled) {
 		return this.hasAnyTiddlerChanged(changedTiddlers,shortcutConfigTiddlers);
