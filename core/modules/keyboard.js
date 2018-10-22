@@ -138,6 +138,13 @@ function KeyboardManager(options) {
 	});
 	// Save the platform-specific name of the "meta" key
 	this.metaKeyName = $tw.platform.isMac ? "cmd-" : "win-";
+	this.shortcutKeysList = [], // Stores the shortcut-key descriptors
+	this.shortcutActionList = [], // Stores the corresponding action strings
+	this.shortcutParsedList = []; // Stores the parsed key descriptors
+	this.lookupNames = ["shortcuts"];
+	$tw.platform.isMac ? this.lookupNames.push("shortcuts-mac") : this.lookupNames.push("shortcuts-not-mac");
+	$tw.platform.isWindows ? this.lookupNames.push("shortcuts-windows") : this.lookupNames.push("shortcuts-not-windows");
+	$tw.platform.isLinux ? this.lookupNames.push("shortcuts-linux") : this.lookupNames.push("shortcuts-not-linux");
 }
 
 /*
