@@ -312,10 +312,10 @@ KeyboardManager.prototype.handleKeydownEvent = function(event) {
 	return false;
 };
 
-// Returns true if a passed array contains a Tiddler that has changed
-KeyboardManager.prototype.hasAnyTiddlerChanged = function(changedTiddlers,tiddlerList) {
-	for(var i=0; i < tiddlerList.length; i++) {
-		if($tw.utils.hop(changedTiddlers,tiddlerList[i])) {
+// Detect if an object contains an item that's present in a passed array
+$tw.utils.hopArray = function(object,array) {
+	for(var i=0; i < array.length; i++) {
+		if($tw.utils.hop(object,array[i])) {
 			return true;
 		}
 	}
