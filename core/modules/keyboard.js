@@ -335,7 +335,7 @@ KeyboardManager.prototype.detectNewShortcuts = function(changedTiddlers) {
 		});
 	});
 	if(handled) {
-		return this.hasAnyTiddlerChanged(changedTiddlers,shortcutConfigTiddlers);
+		return $tw.utils.hopArray(changedTiddlers,shortcutConfigTiddlers);
 	} else {
 		return false;
 	}
@@ -343,8 +343,8 @@ KeyboardManager.prototype.detectNewShortcuts = function(changedTiddlers) {
 
 KeyboardManager.prototype.handleShortcutChanges = function(changedTiddlers) {
 	var newList = this.getShortcutTiddlerList();
-	var hasChanged = this.hasAnyTiddlerChanged(changedTiddlers,this.shortcutTiddlers) ? true :
-		(this.hasAnyTiddlerChanged(changedTiddlers,newList) ? true :
+	var hasChanged = $tw.utils.hopArray(changedTiddlers,this.shortcutTiddlers) ? true :
+		($tw.utils.hopArray(changedTiddlers,newList) ? true :
 		(this.detectNewShortcuts(changedTiddlers))
 	);
 	// Re-cache shortcuts if something changed
