@@ -327,9 +327,8 @@ KeyboardManager.prototype.detectNewShortcuts = function(changedTiddlers) {
 		handled = false;
 	$tw.utils.each(this.lookupNames,function(platformDescriptor) {
 		var pattern = "^\\$:/config/" + platformDescriptor + "/.*$";
-		var configTiddlerRegex = new RegExp(pattern);
 		Object.keys(changedTiddlers).forEach(function(configTiddler) {
-			if(configTiddlerRegex.test(configTiddler)) {
+			if(configTiddler.match(pattern) !== null) {
 				shortcutConfigTiddlers.push(configTiddler);
 				handled = true;
 			}
