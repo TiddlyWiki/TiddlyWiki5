@@ -8,12 +8,14 @@ A `Keyboard Shortcut Descriptor` has the following format:
 ```
 	ctrl+enter
 	ctrl+shift+alt+A
+	alt-shift-T
+	alt-Space
 ```
 
 It can have multiple Key combinations:
 
 ```
-ctrl+enter alt+shift+A ctrl+alt+9
+ctrl+enter alt+shift+A ctrl+alt+9 alt-Space ctrl-Backspace
 ```
 
 There are ''two ways'' Keyboard Shortcut Descriptors can be used:
