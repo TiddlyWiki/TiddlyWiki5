@@ -21,7 +21,7 @@ Keyboard shortcuts are available for common editing operations within the Text E
 * Creating a new tiddler (defaults to <kbd>alt-N</kbd>)
 * Creating a new journal (defaults to <kbd>alt-J</kbd>)
 
-The current shortcuts can be inspected and customised in the "Keyboard Shortcuts" tab of [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}}.
+The current shortcuts can be inspected and customised in the "Keyboard Shortcuts" tab of the [[Control Panel|$:/ControlPanel]] {{$:/core/images/options-button}}.
 
 !! Special Keys
 
