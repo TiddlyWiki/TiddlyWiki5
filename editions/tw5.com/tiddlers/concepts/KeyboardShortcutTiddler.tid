@@ -9,4 +9,4 @@ A ''Keyboard Shortcut Tiddler'' is made of three parts:
 
 If the [[Keyboard Shortcut Descriptor]] has the form `((my-shortcut))` it's a ''reference'' to a ''configuration Tiddler'' that stores the corresponding [[Keyboard Shortcut|Keyboard Shortcuts]]
 
-In order to make a ''shortcut'' editable through the <<.controlpanel-tab KeyboardShortcuts>> it's sufficient to create a tiddler `$:/config/ShortcutInfo/my-shortcut`, where the ''suffix'' is the ''reference'' used for the [[Keyboard Shortcut|Keyboard Shortcuts]]
+In order to make a ''shortcut'' editable through the <<.controlpanel-tab KeyboardShortcuts>> Tab in the $:/ControlPanel it's sufficient to create a tiddler `$:/config/ShortcutInfo/my-shortcut`, where the ''suffix'' is the ''reference'' used for the [[Keyboard Shortcut|Keyboard Shortcuts]]
