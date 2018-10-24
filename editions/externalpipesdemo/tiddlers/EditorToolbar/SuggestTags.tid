@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/externaltasksdemo/EditorToolbar/SuggestTags
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/tag-button
+caption: Suggest Tags
+description: Invoke external programme to suggest tags for this tiddler
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+button-classes: tc-text-editor-toolbar-item-start-group
+shortcuts: ((suggest-tags))
+dropdown: $:/plugins/tiddlywiki/externaltasksdemo/EditorToolbar/SuggestTagsDropdown
+
+<$set name="inputFilter" filter="[<targetTiddler>]">
+<$action-sendmessage $message="tm-execute-job" 1="--pipe" 2="badtagger" 3=<<inputFilter>> 4="PipeOutput" statusTitle="JobStatus"/>
+</$set>
+Suggest Tags - <$text text=<<targetTiddler>>/>
+

@@ -70,7 +70,7 @@ function computeStats(tiddlers) {
 	// Output
 	return [
 		{
-			title: "HelloThere",
+			title: "PipeOutput",
 			text: numTiddlers + " tiddlers in sample.\n" + wordCount + " words in sample.\n" + sortedWords.filter(function(word) {
 				return word.length > 1 && wordFrequency[word] > 1;
 			}).map(function(word) {

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /*
-A socket server that listens on a host/port for connections and reverses the case of incoming text
+A socket server that listens on a host/port for connections and suggests tags for the incoming text
 
-	recaser.js <port> <host>
+	badtagger.js <port> <host>
 
 This utility is provided as an example of using an external task that doesn't have any prior knowledge of
 TiddlyWiki. Like many Unix utilities, it just reads and writes to a socket.
@@ -41,16 +41,16 @@ server.on("connection", function(sock) {
 				accumulator = accumulator.slice(length + 4);
 				// Recase it
 console.log("MESSAGE",length,type);
-				var recasedData = Buffer.from(recase(data),"latin1");
+				var suggestedTags = Buffer.from(suggestTags(data),"latin1");
 				// Send it back
 				var lengthBytes = Buffer.alloc(4);
-				lengthBytes.writeUInt32BE(recasedData.length + 1,0)
-console.log("RESPONSE",1,recasedData.length)
+				lengthBytes.writeUInt32BE(suggestedTags.length + 1,0)
+console.log("RESPONSE",1,suggestedTags.length)
 				sock.write(lengthBytes);
 				var typeByte = Buffer.alloc(1);
 				typeByte.writeUInt8(1,0);
 				sock.write(typeByte);
-				sock.write(recasedData);
+				sock.write(suggestedTags);
 			} else {
 				break;
 			}
@@ -65,13 +65,16 @@ console.log("RESPONSE",1,recasedData.length)
 	});
 });
 
-function recase(str) {
-	return str.split("").map(function(char) {
-		if(char >= "A" && char <= "Z") {
-			return char.toLowerCase();
-		} else {
-			return char.toUpperCase();
-		}
-	}).join("");
+function suggestTags(str) {
+	var tags = [];
+	if(/e/mi.test(str)) {
+		tags.push("elephant");		
+	}
+	if(/s/mi.test(str)) {
+		tags.push("snake");		
+	}
+	if(/c/mi.test(str)) {
+		tags.push("cow");
+	}
+	return tags.join("\n");
 }
-
