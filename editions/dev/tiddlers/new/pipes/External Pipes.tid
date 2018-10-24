@@ -63,12 +63,14 @@ Pipes can be invoked via the `--pipe` command, or via a widget message propagate
 The `--pipe` command triggers the invocation of a pipe task. The parameters are:
 
 ```
-tiddlywiki <wikifolder> --pipe <pipename> <filter> <arguments>...
+tiddlywiki <wikifolder> --pipe <pipename> <filter> <incomingTitle> <arguments>...
 ```
 
 The ''pipename'' identifies the pipe, and must match the name defined in the `tiddlywiki.info` file.
 
 The ''filter'' identifies the tiddlers to be passed to the pipe
+
+The ''incomingTitle'' provides a title to be applied to incoming tiddlers for the `raw-text` output format
 
 The remaining ''arguments'' are passed through to external task pipes, and ignored for other types of pipe.
 
@@ -85,7 +87,7 @@ The edition `editions/externalpipesdemo` in the TiddlyWiki5 repo contains a demo
 The `mimic.js` example is a simple command line tool that accepts source text via stdin and outputs a sort of statistical parody of the input text. It is written without any knowledge of TiddlyWiki, and so serves as an example of using an existing text-based tool with TiddlyWiki.
 
 ```
-tiddlywiki editions/externalpipesdemo/ --verbose --pipe mimic '[[Alice in Wonderland]]' 5 4000 --build index
+tiddlywiki editions/externalpipesdemo/ --verbose --pipe mimic '[[Alice in Wonderland]]' HelloThere 5 4000 --build index
 ```
 
 View the resulting wiki at `editions/externaltaskdemo/output/index.html`: the tiddler "HelloThere" will contain a garbled version of the "Alice in Wonderland" text.
@@ -95,7 +97,7 @@ View the resulting wiki at `editions/externaltaskdemo/output/index.html`: the ti
 The `stats.js` example is a simple command line tool that accepts source text via stdin and outputs a sort of statistical parody of the input text. It is written without any knowledge of TiddlyWiki, and so serves as an example of using an existing text-based tool with TiddlyWiki.
 
 ```
-tiddlywiki editions/externalpipesdemo/ --verbose --pipe stats '[[Alice in Wonderland]]' --build index
+tiddlywiki editions/externalpipesdemo/ --verbose --pipe stats '[[Alice in Wonderland]]' HelloThere --build index
 ```
 
 View the resulting wiki at `editions/externaltaskdemo/output/index.html`: the tiddler "HelloThere" will contain statistics about the "Alice in Wonderland" text.
@@ -115,7 +117,7 @@ To run the server, open a command prompt in the `demo-tasks` directory and run:
 And then in another command prompt in the root of the repo run:
 
 ```
-tiddlywiki editions/externalpipesdemo/ --verbose --pipe reverser '[[Alice in Wonderland]]' --build index
+tiddlywiki editions/externalpipesdemo/ --verbose --pipe reverser '[[Alice in Wonderland]]' HelloThere --build index
 ```
 
 View the resulting wiki at `editions/externaltaskdemo/output/index.html`: the tiddler "HelloThere" will contain the reversed text of "Alice in Wonderland".

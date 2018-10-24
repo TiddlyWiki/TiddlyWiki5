@@ -1,0 +1,13 @@
+title: $:/language/Help/pipe
+description: Pipe data to/from external processes
+
+Pipe data to/from external processes.
+
+```
+--pipe <pipename> <filter> <incomingTitle> <arguments>...
+```
+
+* ''pipename'': identifies the pipe, matching the name defined in the `tiddlywiki.info` file
+* ''filter'': identifies the tiddlers to be passed to the pipe
+* ''incomingTitle'': provides a title to be applied to incoming tiddlers for the `raw-text` output format
+* ''arguments'': passed through to external task pipes, and ignored for other types of pipe
