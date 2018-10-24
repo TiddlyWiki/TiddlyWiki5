@@ -62,21 +62,49 @@ Filter operator that gathering "family" of tiddler based on <field>
     return family_members;
   }
 
+  // TODO: Is there a better way for unique?
+  function uniqueArray(input) {
+    var seen = {},
+      output = [],
+      len = input.length,
+      j = 0;
+    for (var i = 0; i < len; i++) {
+      var item = input[i];
+      if (seen[item] !== 1) {
+        seen[item] = 1;
+        output[j++] = item;
+      }
+    }
+    return output;
+  }
+
   function executeSource(source, operator, direction) {
 
-    // TODO: System tiddlers are not shown???
+    // TODO: $:/tags/SideBar is not shown with operand, for example
+    // [[Drag and Drop]kindred[]] shows this tiddler, but
+    // [kindred[Drag and Drop]] is not, because this tiddler is not exists in
+    // the Advanced Filter's input list by default. Try to log to console the
+    // family members.
 
     var results = [],
-      fieldname = (operator.suffix || 'tags').toLowerCase(),
-      title_from_family = operator.operand,
-      tiddler_from_family = $tw.wiki.getTiddler(title_from_family),
-      family_members = collectFamilyMembers(tiddler_from_family, title_from_family, fieldname, direction);
+      fieldname = (operator.suffix || 'tags').toLowerCase();
 
-    source(function (tiddler, title) {
-      if (family_members.includes(title)) {
-        results.push(title);
-      }
-    });
+    if (operator.operand !== '') {
+      var title_from_family = operator.operand,
+        tiddler_from_family = $tw.wiki.getTiddler(title_from_family),
+        family_members = collectFamilyMembers(tiddler_from_family, title_from_family, fieldname, direction);
+
+      source(function (tiddler, title) {
+        if (family_members.includes(title)) {
+          results.push(title);
+        }
+      });
+    } else {
+      source(function (tiddler, title) {
+        results = results.concat(collectFamilyMembers(tiddler, title, fieldname, direction));
+      });
+      results = uniqueArray(results);
+    }
 
     return results;
   }
