@@ -1116,6 +1116,7 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-editor-toolbar button:hover {
 	background-color: <<colour tiddler-controls-foreground-selected>>;
 	fill: <<colour background>>;
+	color: <<colour background>>;
 }
 
 .tc-editor-toolbar .tc-text-editor-toolbar-more {
