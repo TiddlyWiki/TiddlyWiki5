@@ -29,50 +29,73 @@ Command.prototype.execute = function() {
 		return "Missing parameters";
 	}
 	var name = self.params[0], // External pipe name
-		filter = self.params[1], // Filter of tiddlers to write to the pipe
-		args = self.params.slice(2); // Remaining arguments are passed on as tasks arguments
+		outgoingFilter = self.params[1], // Filter of tiddlers to write to the pipe
+		incomingTitle = self.params[2],
+		args = self.params.slice(3); // Remaining arguments are passed on as tasks arguments
 	// Find the pipe information
 	var pipeInfo = ($tw.boot.wikiInfo["external-pipes"] || {})[name];
 	if(!pipeInfo) {
 		return this.callback("External pipe \"" + name + "\" not found");
 	}
+	// Create the pipe instance and process a message
+	var pipe = new Pipe({
+		name: name,
+		pipeInfo: pipeInfo,
+		outgoingFilter: outgoingFilter,
+		incomingTitle: incomingTitle,
+		args: args,
+		command: this
+	});
+	pipe.processMessage(this.callback);
+};
+
+function Pipe(options) {
+	this.name = options.name;
+	this.pipeInfo = options.pipeInfo;
+	this.outgoingFilter = options.outgoingFilter;
+	this.incomingTitle = options.incomingTitle;
+	this.args = options.args;
+	this.command = options.command;
+}
+
+Pipe.prototype.processMessage = function(callback) {
 	// Get the outgoing data
-	var data = this.composeOutgoingData(filter,pipeInfo);
+	var data = this.composeOutgoingData(this.outgoingFilter);
 	// Connect to the pipe
-	var options = {
-			args: args,
-			data: data
-		};
-	switch(pipeInfo.type) {
+	switch(this.pipeInfo.type) {
 		case "task":
-			return this.pipeExternalTask(pipeInfo,options);
+			this.pipeExternalTask(data,callback);
+			break;
 		case "socket":
-			return this.pipeSocket(pipeInfo,options);
+			this.pipeSocket(data,callback);
+			break;
 		case "socket-erlang":
-			return this.pipeSocketErlang(pipeInfo,options);
+			this.pipeSocketErlang(data,callback);
+			break;
 		default:
-			return "Invalid pipe specifier '" + name + "'"
+			callback("Invalid pipe specifier '" + this.name + "': " + this.pipeInfo.type);
+			break;
 	}
 };
 
-Command.prototype.log = function(args) {
-	this.commander.log("Pipe: " + Array.prototype.slice.call(arguments,0).join(" "));
+Pipe.prototype.log = function(args) {
+	this.command.commander.log("Pipe: " + Array.prototype.slice.call(arguments,0).join(" "));
 };
 
-Command.prototype.pipeExternalTask = function(pipeInfo,options) {
+Pipe.prototype.pipeExternalTask = function(data,callback) {
 	var self = this,
 		spawn = require("child_process").spawn,
 		path = require("path"),
-		childProcess = spawn(path.resolve($tw.boot.wikiPath,pipeInfo.path),options.args,{
+		childProcess = spawn(path.resolve($tw.boot.wikiPath,this.pipeInfo.path),this.args,{
 			stdio: ["pipe","pipe",process.stderr],
 			shell: true,
-			env: $tw.utils.extend({},process.env,pipeInfo.environment)
+			env: $tw.utils.extend({},process.env,this.pipeInfo.environment)
 		});
 	// Pass the tiddlers over the outgoing stream
 	childProcess.stdin.on("error",function(err) {
 		self.log("Task stdin error",err)
 	});
-	childProcess.stdin.write(options.data);
+	childProcess.stdin.write(data);
 	childProcess.stdin.end();
 	// Catch the output
 	var chunks = [];
@@ -81,7 +104,7 @@ Command.prototype.pipeExternalTask = function(pipeInfo,options) {
 	});
 	childProcess.stdout.on("close",function() {
 		self.log("Task stdout close");
-		self.processIncomingData(chunks.join(""),pipeInfo);
+		self.processIncomingData(chunks.join(""));
 	});
 	childProcess.stdout.on("error",function(err) {
 		self.log("Task stdout error",err)
@@ -93,24 +116,23 @@ Command.prototype.pipeExternalTask = function(pipeInfo,options) {
 	childProcess.on("exit",function(code,signal) {
 		self.log("Task exit",code,signal)
 		if(code !== 0) {
-			return self.callback("Error executing external task: " + code);
+			return callback("Error executing external task: " + code);
 		}
 		// Exit successfully
-		self.callback(null);
+		callback(null);
 	});
-	return null;
 };
 
-Command.prototype.pipeSocket = function(pipeInfo,options) {
+Pipe.prototype.pipeSocket = function(data,callback) {
 	var self = this,
 		net = require("net"),
 		socket = new net.Socket({
 			allowHalfOpen: true
 		}),
 		chunks = [];
-	socket.connect(pipeInfo.port,pipeInfo.host || 8081,function() {
-		self.log("Socket connection",pipeInfo.port,pipeInfo.host);
-		socket.write(options.data);
+	socket.connect(this.pipeInfo.port,this.pipeInfo.host || 8081,function() {
+		self.log("Socket connection",this.pipeInfo.port,this.pipeInfo.host);
+		socket.write(data);
 		socket.end();
 	});
 	socket.on("error",function(e) {
@@ -120,27 +142,27 @@ Command.prototype.pipeSocket = function(pipeInfo,options) {
 		chunks.push(data.toString());
 	});
 	socket.on("end",function() {
-		self.processIncomingData(chunks.join(""),pipeInfo);
+		self.processIncomingData(chunks.join(""));
 		self.log("Socket end");
 		socket.destroy();
 	});
 	// Add a "close" event handler for the client socket
 	socket.on("close",function() {
 		self.log("Socket closed");
-		return self.callback(null);
+		return callback(null);
 	});
 	return null;
 };
 
-Command.prototype.pipeSocketErlang = function(pipeInfo,options) {
+Pipe.prototype.pipeSocketErlang = function(data,callback) {
 	var self = this,
-		encoding = pipeInfo.encoding || "utf8",
+		encoding = this.pipeInfo.encoding || "utf8",
 		net = require("net"),
 		socket = new net.Socket(),
 		accumulator = Buffer.alloc(0);
-	socket.connect(pipeInfo.port,pipeInfo.host || 8081,function() {
-		self.log("Socket connection",pipeInfo.port,pipeInfo.host);
-		var dataBytes = Buffer.from(options.data,encoding);
+	socket.connect(this.pipeInfo.port,this.pipeInfo.host || 8081,function() {
+		self.log("Socket connection",self.pipeInfo.port,self.pipeInfo.host);
+		var dataBytes = Buffer.from(data,encoding);
 		// Write 32-bit big endian message length
 		var lengthBytes = Buffer.alloc(4);
 		lengthBytes.writeUInt32BE(dataBytes.length + 1,0)
@@ -162,17 +184,17 @@ console.log("Received data",data.length)
 		while(accumulator.length > 4) {
 			var length = accumulator.readInt32BE(0);
 			if(accumulator.length >= (length + 4)) {
-				if(length < 2) {
-					throw "ERROR: Incoming message length field is less than 2";
+				if(length < 1) {
+					throw "ERROR: Incoming message length field is less than 1";
 				}
 				var type = accumulator.readUInt8(4),
 					dataLength = length - 1,
 					data = accumulator.toString(encoding,5,dataLength + 5);
 console.log("Got message",length,type)
-				self.processIncomingData(data,pipeInfo);
+				self.processIncomingData(data);
 				accumulator = accumulator.slice(length + 4);
 socket.end();
-return self.callback(null);
+return callback(null);
 			} else {
 				break;
 			}
@@ -185,31 +207,31 @@ return self.callback(null);
 	// Add a "close" event handler for the client socket
 	socket.on("close",function() {
 		self.log("Socket closed");
-		return self.callback(null);
+		return callback(null);
 	});
 	return null;
 };
 
-Command.prototype.composeOutgoingData = function(filter,pipeInfo) {
+Pipe.prototype.composeOutgoingData = function(outgoingFilter) {
 	var self = this,
-		pipeInfoInput = pipeInfo.input || {},
+		pipeInfoInput = this.pipeInfo.input || {},
 		data;
 	switch(pipeInfoInput.format || "json-raw-tiddlers") {
 		case "rendered-text":
-			var titles = self.commander.wiki.filterTiddlers(filter),
+			var titles = self.command.commander.wiki.filterTiddlers(outgoingFilter),
 				output = [];
 			$tw.utils.each(titles,function(title) {
-				output.push(self.commander.wiki.renderTiddler("text/plain",title));
+				output.push(self.command.commander.wiki.renderTiddler("text/plain",title));
 			});
 			data = output.join("");
 			break;
 		case "json-rendered-text-tiddlers":
-			var titles = self.commander.wiki.filterTiddlers(filter),
+			var titles = self.command.commander.wiki.filterTiddlers(outgoingFilter),
 				tiddlers = [];
 			$tw.utils.each(titles,function(title) {
 				tiddlers.push({
 					title: title,
-					text: self.commander.wiki.renderTiddler("text/plain",title)
+					text: self.command.commander.wiki.renderTiddler("text/plain",title)
 				})
 			});
 			data = JSON.stringify(tiddlers); 
@@ -217,33 +239,35 @@ Command.prototype.composeOutgoingData = function(filter,pipeInfo) {
 		case "json-raw-tiddlers":
 			// Intentional fall-through
 		default:
-			data = this.commander.wiki.getTiddlersAsJson(filter);
+			data = this.command.commander.wiki.getTiddlersAsJson(outgoingFilter);
 			break;
 	}
 	return data;
 };
 
-Command.prototype.processIncomingData = function(data,pipeInfo) {
-	var self = this,
-		pipeInfoOutput = pipeInfo.output || {},
+Pipe.prototype.processIncomingData = function(data) {
+	var pipeInfoOutput = this.pipeInfo.output || {},
 		jsonData;
 	switch(pipeInfoOutput.format || "text") {
 		case "json-raw-tiddlers":
 			try {
 				jsonData = JSON.parse(data);
 			} catch(e) {
-				self.log("Error parsing returned JSON: " + e + "\n\n\n->\n" + data);
+				this.log("Error parsing returned JSON: " + e + "\n\n\n->\n" + data);
 			}
 			// Add the tiddlers
 			if(jsonData) {
-				this.commander.wiki.addTiddlers(jsonData);				
+				this.command.commander.wiki.addTiddlers(jsonData);				
 			}
 			break;
 		case "text":
 			// Intentional fall-through
 		default:
-			this.commander.wiki.addTiddler(new $tw.Tiddler(pipeInfoOutput.tiddler,{
-				text: data
+console.log("Writing tiddler",pipeInfoOutput.tiddler,{
+				text: data, title: this.incomingTitle
+			})
+			this.command.commander.wiki.addTiddler(new $tw.Tiddler(pipeInfoOutput.tiddler,{
+				text: data, title: this.incomingTitle || pipeInfoOutput.tiddler.title
 			}));
 			break;
 	}
