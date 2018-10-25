@@ -3,11 +3,7 @@ title: $:/core/modules/filters/kindred.js
 type: application/javascript
 module-type: filteroperator
 
-Filter operator that gathering "family" of tiddler based on <field>
-
-[kindred:<field>[<tiddler_from_family>]]
-[kindredup:<field>[<tiddler_from_family>]]
-[kindreddown:<field>[<tiddler_from_family>]]
+Filter operator that recursively finds connection between tiddlers
 
 \*/
 (function () {
@@ -29,35 +25,35 @@ Filter operator that gathering "family" of tiddler based on <field>
       return true
     }
 
-    function findRecursivelyUp(tiddler, title) {
+    function findConnectionsFrom(tiddler, title) {
       if (addToResultsIfNotFoundAlready(title)) {
         if (tiddler) {
           tiddler.getFieldList(fieldname).forEach(function (target_title) {
-            findRecursivelyUp($tw.wiki.getTiddler(target_title), target_title);
+            findConnectionsFrom($tw.wiki.getTiddler(target_title), target_title);
           });
         }
       }
     }
 
-    function findRecursivelyDown(title) {
+    function findConnectionsTo(title) {
       if (addToResultsIfNotFoundAlready(title)) {
         $tw.wiki.findListingsOfTiddler(title, fieldname).forEach(function (target_title) {
-          findRecursivelyDown(target_title);
+          findConnectionsTo(target_title);
         });
       }
     }
 
-    if ((direction === 'up') || (direction === 'both')) {
-      findRecursivelyUp(tiddler, title);
+    if ((direction === 'from') || (direction === 'with')) {
+      findConnectionsFrom(tiddler, title);
     }
-    if (direction === 'both') {
+    if (direction === 'with') {
       // Remove the base family member:
       // If it's already in the results, it will be skipped when parsing in
-      // the oposite direction.
+      // the opposite direction.
       family_members.shift();
     }
-    if ((direction === 'down') || (direction === 'both')) {
-      findRecursivelyDown(title);
+    if ((direction === 'to') || (direction === 'with')) {
+      findConnectionsTo(title);
     }
     return family_members;
   }
@@ -78,17 +74,19 @@ Filter operator that gathering "family" of tiddler based on <field>
     return output;
   }
 
-  function executeSource(source, operator, direction) {
-
-    // TODO: $:/tags/SideBar is not shown with operand, for example
-    // [[Drag and Drop]kindred[]] shows this tiddler, but
-    // [kindred[Drag and Drop]] is not, because this tiddler is not exists in
-    // the Advanced Filter's input list by default. Try to log to console the
-    // family members.
-
+  /*
+    Export our filter function
+    */
+  exports.kindred = function (source, operator, options) {
     var results = [],
-      fieldname = (operator.suffix || 'tags').toLowerCase(),
-      needs_exclusion = operator.prefix === '!';
+      needs_exclusion = operator.prefix === '!',
+      suffix_list = (operator.suffix || '').split(':'),
+      fieldname = (suffix_list[0] || 'tags').toLowerCase(),
+      direction = (suffix_list[1] || 'with').toLowerCase();
+
+    if ((operator.operand === '') && (needs_exclusion)) {
+      return [];
+    }
 
     if (operator.operand !== '') {
       var title_from_family = operator.operand,
@@ -109,20 +107,4 @@ Filter operator that gathering "family" of tiddler based on <field>
 
     return results;
   }
-
-  /*
-  Export our filter function
-  */
-  exports.kindred = function (source, operator, options) {
-    return executeSource(source, operator, 'both');
-  };
-
-  exports.kindredup = function (source, operator, options) {
-    return executeSource(source, operator, 'up');
-  };
-
-  exports.kindreddown = function (source, operator, options) {
-    return executeSource(source, operator, 'down');
-  };
-
 })();
