@@ -20,21 +20,10 @@ exports.synchronous = true;
 
 exports.startup = function() {
 	if($tw.browser) {
-		var man = $tw.keyboardManager;
-		// Get existing shortcut-tiddlers
-		man.shortcutTiddlers = man.getShortcutTiddlerList();
-		// Cache shortcuts and corresponding actions
-		man.updateShortcutLists(man.shortcutTiddlers);
-
 		// Keydown Listener for shortcuts
 		$tw.utils.addEventListeners(document,[
 			{name: "keydown",handlerObject: $tw.keyboardManager,handlerMethod: "handleKeydownEvent"}
 		]);
-
-		// Detect changed shortcuts
-		$tw.wiki.addEventListener("change",function(changes) {
-			man.handleShortcutChanges(changes);
-		});
 	}
 };
 
