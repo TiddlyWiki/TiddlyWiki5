@@ -312,16 +312,6 @@ KeyboardManager.prototype.handleKeydownEvent = function(event) {
 	return false;
 };
 
-// Detect if an object contains an item that's present in a passed array
-$tw.utils.hopArray = function(object,array) {
-	for(var i=0; i < array.length; i++) {
-		if($tw.utils.hop(object,array[i])) {
-			return true;
-		}
-	}
-	return false;
-};
-
 KeyboardManager.prototype.detectNewShortcuts = function(changedTiddlers) {
 	var shortcutConfigTiddlers = [],
 		handled = false;
