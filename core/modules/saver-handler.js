@@ -22,6 +22,7 @@ function SaverHandler(options) {
 	this.wiki = options.wiki;
 	this.dirtyTracking = options.dirtyTracking;
 	this.pendingAutoSave = false;
+	this.autosaveTemplate = null;
 	// Make a logger
 	this.logger = new $tw.utils.Logger("saver-handler");
 	// Initialise our savers
@@ -51,6 +52,7 @@ function SaverHandler(options) {
 				// Check if we're dirty
 				if(self.numChanges > 0) {
 					self.saveWiki({
+						template: self.autosaveTemplate,
 						method: "autosave",
 						downloadType: "text/plain"
 					});
@@ -65,6 +67,7 @@ function SaverHandler(options) {
 				// Check if we're dirty
 				if(self.numChanges > 0) {
 					self.saveWiki({
+						template: event.param,
 						method: "autosave",
 						downloadType: "text/plain"
 					});
@@ -72,6 +75,7 @@ function SaverHandler(options) {
 			} else {
 				// Otherwise put ourselves in the "pending autosave" state and wait for the change event before we do the autosave
 				self.pendingAutoSave = true;
+				self.autosaveTemplate = event.param;
 			}
 		});
 		// Set up our beforeunload handler
