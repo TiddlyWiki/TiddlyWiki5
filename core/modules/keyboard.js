@@ -286,7 +286,7 @@ KeyboardManager.prototype.getShortcutTiddlerList = function() {
 
 KeyboardManager.prototype.updateShortcutLists = function(tiddlerList) {
 	this.shortcutTiddlers = tiddlerList;
-	for(var i=0; i < tiddlerList.length; i++) {
+	for(var i=0; i<tiddlerList.length; i++) {
 		var title = tiddlerList[i],
 			tiddlerFields = $tw.wiki.getTiddler(title).fields;
 		this.shortcutKeysList[i] = tiddlerFields.key !== undefined ? tiddlerFields.key : undefined;
@@ -297,7 +297,7 @@ KeyboardManager.prototype.updateShortcutLists = function(tiddlerList) {
 
 KeyboardManager.prototype.handleKeydownEvent = function(event) {
 	var key, action;
-	for(var i=0; i < this.shortcutTiddlers.length; i++) {
+	for(var i=0; i<this.shortcutTiddlers.length; i++) {
 		if(this.shortcutParsedList[i] !== undefined && this.checkKeyDescriptors(event,this.shortcutParsedList[i])) {
 			key = this.shortcutParsedList[i];
 			action = this.shortcutActionList[i];
