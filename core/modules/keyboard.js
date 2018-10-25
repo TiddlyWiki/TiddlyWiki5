@@ -326,9 +326,10 @@ KeyboardManager.prototype.detectNewShortcuts = function(changedTiddlers) {
 	var shortcutConfigTiddlers = [],
 		handled = false;
 	$tw.utils.each(this.lookupNames,function(platformDescriptor) {
-		var pattern = "^\\$:/config/" + platformDescriptor + "/.*$";
+		var descriptorString = "$:/config/" + platformDescriptor + "/";
 		Object.keys(changedTiddlers).forEach(function(configTiddler) {
-			if(configTiddler.match(pattern) !== null) {
+			var configString = configTiddler.substr(0, configTiddler.lastIndexOf("/") + 1);
+			if(configString === descriptorString) {
 				shortcutConfigTiddlers.push(configTiddler);
 				handled = true;
 			}
