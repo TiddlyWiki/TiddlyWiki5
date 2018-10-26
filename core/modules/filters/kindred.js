@@ -87,7 +87,8 @@ Filter operator that gathering "family" of tiddler based on <field>
     // family members.
 
     var results = [],
-      fieldname = (operator.suffix || 'tags').toLowerCase();
+      fieldname = (operator.suffix || 'tags').toLowerCase(),
+      needs_exclusion = operator.prefix === '!';
 
     if (operator.operand !== '') {
       var title_from_family = operator.operand,
@@ -95,7 +96,7 @@ Filter operator that gathering "family" of tiddler based on <field>
         family_members = collectFamilyMembers(tiddler_from_family, title_from_family, fieldname, direction);
 
       source(function (tiddler, title) {
-        if (family_members.includes(title)) {
+        if (needs_exclusion !== family_members.includes(title)) {
           results.push(title);
         }
       });
