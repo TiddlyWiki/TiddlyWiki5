@@ -253,6 +253,8 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[search:modifier,authors:casesensitive[do]sort[title]]").join(",")).toBe("");
 		expect(wiki.filterTiddlers("[search:authors:casesensitive,whitespace[John    Doe]sort[title]]").join(",")).toBe("$:/TiddlerTwo");
 		expect(wiki.filterTiddlers("[search:modifier:regexp[(d|bl)o(ggs|e)]sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[search:-modifier,authors:[g]sort[title]]").join(",")).toBe("Tiddler Three");
+		expect(wiki.filterTiddlers("[search:*:[g]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 	});
 
 	it("should handle the each operator", function() {

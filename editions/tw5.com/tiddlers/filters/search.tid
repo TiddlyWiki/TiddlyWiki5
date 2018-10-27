@@ -19,7 +19,10 @@ The <<.op search>> operator uses an extended syntax that permits multiple fields
 [search:<field list>:<flag list>[<operand>]]
 ```
 
-* ''field list'': a comma delimited list of field names to restrict the search (defaults to <<.field tags>>, <<.field text>> or <<.field title>>) if blank
+* ''field list'': a comma delimited list of field names to restrict the search
+** defaults to <<.field tags>>, <<.field text>> and <<.field title>> if blank
+** an asterisk `*` instead of the field list causes the search to be performed across all fields available on each tiddler
+** preceding the list with a minus sign `-` reverses the order so that the search is performed on all fields except the listed fields
 * ''flag list'': a comma delimited list of flags (defaults to `words` if blank)
 * ''operand'': filter operand
 

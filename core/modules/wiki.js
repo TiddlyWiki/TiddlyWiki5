@@ -1048,6 +1048,7 @@ Options available:
 	invert: If true returns tiddlers that do not contain the specified string
 	caseSensitive: If true forces a case sensitive search
 	field: If specified, restricts the search to the specified field, or an array of field names
+	excludeField: If true, the field options are inverted to specify the fields that are not to be searched
 	The search mode is determined by the first of these boolean flags to be true
 		literal: searches for literal string
 		whitespace: same as literal except runs of whitespace are treated as a single space
@@ -1083,7 +1084,6 @@ exports.search = function(text,options) {
 			searchTermsRegExps = null;
 console.log("Regexp error",e)
 		}
-console.log("Regexps are ",searchTermsRegExps)
 	} else {
 		terms = text.split(/ +/);
 		if(terms.length === 1 && terms[0] === "") {
@@ -1095,6 +1095,7 @@ console.log("Regexps are ",searchTermsRegExps)
 			}
 		}
 	}
+	// Accumulate the array of fields to be searched or excluded from the search
 	var fields = [];
 	if(options.field) {
 		if($tw.utils.isArray(options.field)) {
@@ -1105,7 +1106,8 @@ console.log("Regexps are ",searchTermsRegExps)
 			fields.push(options.field);
 		}
 	}
-	if(fields.length === 0) {
+	// Use default fields if none specified and we're not excluding fields (excluding fields with an empty field array is the same as searching all fields)
+	if(fields.length === 0 && !options.excludeField) {
 		fields.push("title");
 		fields.push("tags");
 		fields.push("text");
@@ -1119,10 +1121,23 @@ console.log("Regexps are ",searchTermsRegExps)
 		if(!tiddler) {
 			tiddler = new $tw.Tiddler({title: title, text: "", type: "text/vnd.tiddlywiki"});
 		}
-		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type] || $tw.config.contentTypeInfo["text/vnd.tiddlywiki"];
-		for(var fieldIndex=0; fieldIndex<fields.length; fieldIndex++) {
+		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type] || $tw.config.contentTypeInfo["text/vnd.tiddlywiki"],
+			searchFields;
+		// Get the list of fields we're searching
+		if(options.excludeField) {
+			searchFields = Object.keys(tiddler.fields);
+			$tw.utils.each(fields,function(fieldName) {
+				var p = searchFields.indexOf(fieldName);
+				if(p !== -1) {
+					searchFields.splice(p,1);
+				}
+			});
+		} else {
+			searchFields = fields;
+		}
+		for(var fieldIndex=0; fieldIndex<searchFields.length; fieldIndex++) {
 			// Don't search the text field if the content type is binary
-			var fieldName = fields[fieldIndex];
+			var fieldName = searchFields[fieldIndex];
 			if(fieldName === "text" && contentTypeInfo.encoding !== "utf8") {
 				break;
 			}
@@ -1147,7 +1162,8 @@ console.log("Regexps are ",searchTermsRegExps)
 						}
 					}
 				} else {
-					// If the field isn't an array, test each regexp against it and fail if any do not match
+					// If the field isn't an array, force it to a string and test each regexp against it and fail if any do not match
+					str = tiddler.getFieldString(fieldName);
 					for(t=0; t<searchTermsRegExps.length; t++) {
 						if(!searchTermsRegExps[t].test(str)) {
 							matches = false;
