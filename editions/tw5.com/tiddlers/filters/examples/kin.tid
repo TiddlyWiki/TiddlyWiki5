@@ -1,26 +1,26 @@
 created: 20181026114434874
 modified: 20181027193703795
-tags: [[Operator Examples]] [[kindred Operator]]
-title: kindred Operator (Examples)
+tags: [[Operator Examples]] [[kin Operator]]
+title: kin Operator (Examples)
 type: text/vnd.tiddlywiki
 
 Filter the input titles for those which connected with parameter title
 
-<<.operator-example 1 "[kindred[Filter Syntax]]">>
+<<.operator-example 1 "[kin[Filter Syntax]]">>
 
 Collect titles connected with input title (even if the title tiddler is not exists)
 
-<<.operator-example 2 "[[Filter Syntax]kindred[]]">>
+<<.operator-example 2 "[[Filter Syntax]kin[]]">>
 
 Get ancestors of tiddler based on <<.field tags>> and <<.field list>> (remember: <<.field tags>> points to parents while <<.field list>> points to children)
 
-<<.operator-example 3 "[kindred:tags:from[Filter Syntax]]">>
-<<.operator-example 4 "[kindred:list:to[Filter Syntax]]">>
+<<.operator-example 3 "[kin:tags:from[Filter Syntax]]">>
+<<.operator-example 4 "[kin:list:to[Filter Syntax]]">>
 
 Filter input titles to those which are connected to both parameter titles (find intersection, common titles)
 
-<<.operator-example 6 "[kindred[Variables]kindred[Filter Syntax]]">>
+<<.operator-example 6 "[kin[Variables]kin[Filter Syntax]]">>
 
 Get tiddlers which are not related to the [[TableOfContents]] (by <<.field tags>>), but has tags
 
-<<.operator-example 7 "[!is[system]type[text/vnd.tiddlywiki]!kindred[TableOfContents]has[tags]]>>
+<<.operator-example 7 "[!is[system]type[text/vnd.tiddlywiki]!kin[TableOfContents]has[tags]]>>

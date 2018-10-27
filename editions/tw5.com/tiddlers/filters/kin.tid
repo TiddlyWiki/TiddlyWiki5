@@ -1,15 +1,15 @@
-caption: kindred
+caption: kin
 created: 20181025133804171
-modified: 20181027193949233
+modified: 20181027202618759
 op-input: a [[selection of titles|Title Selection]]
 op-neg-output: ''with parameter <<.place T>>''<br>&raquo; those input titles which are ''<<.em not>> connected to <<.place T>>''<br>''without parameter <<.place T>>''<br>&raquo; ignored
 op-output: ''with parameter <<.place T>>''<br>&raquo; those input titles which are ''connected to <<.place T>>'' <br>''without <<.place T>>''<br>&raquo; ''all'' tiddler titles which are ''connected to input titles''
 op-parameter: a tiddler title or nothing
 op-parameter-name: T
-op-purpose: select or collect tiddler titles that are connected to given tiddlers in any depth, connection is based on a field
+op-purpose: recursively finds kindred between tiddlers
 op-suffix: [[field|TiddlerFields]] which connecting tiddlers (defaulting to <<.field tags>>) and direction (defaulting to `with`)
 tags: [[Negatable Operators]] [[Tag Operators]] [[Filter Operators]] [[Field Operators]]
-title: kindred Operator
+title: kin Operator
 type: text/vnd.tiddlywiki
 
 The syntax of suffix is:
@@ -21,10 +21,10 @@ The syntax of suffix is:
 The `<field>` suffix is assumed to be a [[title list|Title List]].
 
 |!Direction|!Members|
-|^`to`|Ancestors of tiddler and the tiddler itslef|
-|^`with`|All tiddlers connected to the tiddler and the tiddler itslef|
-|^`from`|Succesors of tiddler and the tiddler itslef|
+|^`to`|Find the title of <<.place T>> in the target field of input tiddlers recursively + <<.place T>> itself|
+|^`with`|Union of `from` and `to`|
+|^`from`|Find the input titles in the target field of <<.place T>> recursively  + <<.place T>> itself|
 
 <<.op {{!!caption}}>> is a [[modifier|Selection Constructors]], but without <<.place T>> is a [[constructor|Selection Constructors]].
 
-<<.operator-examples "kindred">>
+<<.operator-examples "kin">>

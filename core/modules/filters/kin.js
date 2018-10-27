@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/filters/kindred.js
+title: $:/core/modules/filters/kin.js
 type: application/javascript
 module-type: filteroperator
 
-Filter operator that recursively finds connection between tiddlers
+Filter operator that recursively finds kindred between tiddlers
 
 \*/
 (function () {
@@ -25,26 +25,26 @@ Filter operator that recursively finds connection between tiddlers
       return true
     }
 
-    function findConnectionsFrom(tiddler, title) {
+    function findKindredFrom(tiddler, title) {
       if (addToResultsIfNotFoundAlready(title)) {
         if (tiddler) {
           tiddler.getFieldList(fieldname).forEach(function (target_title) {
-            findConnectionsFrom($tw.wiki.getTiddler(target_title), target_title);
+            findKindredFrom($tw.wiki.getTiddler(target_title), target_title);
           });
         }
       }
     }
 
-    function findConnectionsTo(title) {
+    function findKindredTo(title) {
       if (addToResultsIfNotFoundAlready(title)) {
         $tw.wiki.findListingsOfTiddler(title, fieldname).forEach(function (target_title) {
-          findConnectionsTo(target_title);
+          findKindredTo(target_title);
         });
       }
     }
 
     if ((direction === 'from') || (direction === 'with')) {
-      findConnectionsFrom(tiddler, title);
+      findKindredFrom(tiddler, title);
     }
     if (direction === 'with') {
       // Remove the base family member:
@@ -53,7 +53,7 @@ Filter operator that recursively finds connection between tiddlers
       family_members.shift();
     }
     if ((direction === 'to') || (direction === 'with')) {
-      findConnectionsTo(title);
+      findKindredTo(title);
     }
     return family_members;
   }
@@ -77,7 +77,7 @@ Filter operator that recursively finds connection between tiddlers
   /*
     Export our filter function
     */
-  exports.kindred = function (source, operator, options) {
+  exports.kin = function (source, operator, options) {
     var results = [],
       needs_exclusion = operator.prefix === '!',
       suffix_list = (operator.suffix || '').split(':'),
