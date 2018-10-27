@@ -9,9 +9,10 @@ Navigator widget
 (function(){
 
 /*jslint node: true, browser: true */
-/*global $tw: false */
+/*global $tw: false, require: false */
 "use strict";
 
+var SAVE_TEMPLATE = "$:/config/SaveWikiButton/Template";
 var IMPORT_TITLE = "$:/Import";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -245,7 +246,7 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	this.removeTitleFromStory(storyList,title);
 	this.saveStoryList(storyList);
 	// Trigger an autosave
-	$tw.rootWidget.dispatchEvent({type: "tm-auto-save-wiki", param: this.wiki.getTiddlerText("$:/config/SaveWikiButton/Template")});
+	$tw.rootWidget.dispatchEvent({type: "tm-auto-save-wiki", param: this.wiki.getTiddlerText(SAVE_TEMPLATE)});
 	return false;
 };
 
@@ -343,7 +344,7 @@ console.log("Relinking '" + draftOf + "' to '" + draftTitle + "'");
 					}
 				}
 				// Trigger an autosave
-				$tw.rootWidget.dispatchEvent({type: "tm-auto-save-wiki", param: this.wiki.getTiddlerText("$:/config/SaveWikiButton/Template")});
+				$tw.rootWidget.dispatchEvent({type: "tm-auto-save-wiki", param: this.wiki.getTiddlerText(SAVE_TEMPLATE)});
 			}
 		}
 	}
@@ -564,7 +565,7 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	// Navigate to the $:/Import tiddler
 	this.addToHistory([event.param]);
 	// Trigger an autosave
-	$tw.rootWidget.dispatchEvent({type: "tm-auto-save-wiki", param: this.wiki.getTiddlerText("$:/config/SaveWikiButton/Template")});
+	$tw.rootWidget.dispatchEvent({type: "tm-auto-save-wiki", param: this.wiki.getTiddlerText(SAVE_TEMPLATE)});
 };
 
 NavigatorWidget.prototype.handleFoldTiddlerEvent = function(event) {
