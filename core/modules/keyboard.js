@@ -145,8 +145,7 @@ function KeyboardManager(options) {
 	$tw.platform.isMac ? this.lookupNames.push("shortcuts-mac") : this.lookupNames.push("shortcuts-not-mac");
 	$tw.platform.isWindows ? this.lookupNames.push("shortcuts-windows") : this.lookupNames.push("shortcuts-not-windows");
 	$tw.platform.isLinux ? this.lookupNames.push("shortcuts-linux") : this.lookupNames.push("shortcuts-not-linux");
-	this.shortcutTiddlers = this.getShortcutTiddlerList();
-	this.updateShortcutLists(this.shortcutTiddlers);
+	this.updateShortcutLists(this.getShortcutTiddlerList());
 	$tw.wiki.addEventListener("change",function(changes) {
 		self.handleShortcutChanges(changes);
 	});
