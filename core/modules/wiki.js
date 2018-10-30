@@ -1082,7 +1082,7 @@ exports.search = function(text,options) {
 			searchTermsRegExps = [new RegExp("(" + text + ")",flags)];			
 		} catch(e) {
 			searchTermsRegExps = null;
-console.log("Regexp error",e)
+			console.log("Regexp error parsing " + text + ": ",e);
 		}
 	} else {
 		terms = text.split(/ +/);
