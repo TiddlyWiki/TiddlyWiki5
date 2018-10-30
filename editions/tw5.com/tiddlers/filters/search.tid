@@ -11,7 +11,7 @@ op-parameter: one or more search terms, separated by spaces, or a literal search
 op-output: those input tiddlers in which <<.em all>> of the search terms can be found in the value of field <<.place F>>
 op-neg-output: those input tiddlers in which <<.em not>> all of the search terms can be found
 
-<<.from-version "5.1.18">> Earlier versions do not support searching multiple fields, or the ''literal'' or ''casesensitive'' options.
+<<.from-version "5.1.18">> The search filter operator was significantly enhanced in 5.1.18. Earlier versions do not support the extended syntax and therefore do not permit searching multiple fields, or the ''literal'' or ''casesensitive'' options.
 
 The <<.op search>> operator uses an extended syntax that permits multiple fields and flags to be passed:
 

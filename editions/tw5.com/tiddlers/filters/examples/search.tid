@@ -13,4 +13,3 @@ type: text/vnd.tiddlywiki
 <$macrocall $name=".operator-example" n="7" eg="[!is[system]search::literal[the first]]" ie="non-system tiddlers containing a case-insensitive match for the literal phrase <<.word 'the first'>>"/>
 <$macrocall $name=".operator-example" n="8" eg="[!is[system]search::literal,casesensitive[The first]]" ie="non-system tiddlers containing a case-sensitive match for the literal phrase <<.word 'The first'>>"/>
 <$macrocall $name=".operator-example" n="9" eg="[search:caption,description:casesensitive,words[arch]]" ie="any tiddlers containing a case-sensitive match for the word `arch` in their <<.field caption>> or <<.field description>> fields"/>
- d
