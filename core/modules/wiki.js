@@ -1047,8 +1047,13 @@ Options available:
 	exclude: An array of tiddler titles to exclude from the search
 	invert: If true returns tiddlers that do not contain the specified string
 	caseSensitive: If true forces a case sensitive search
-	literal: If true, searches for literal string, rather than separate search terms
-	field: If specified, restricts the search to the specified field
+	field: If specified, restricts the search to the specified field, or an array of field names
+	excludeField: If true, the field options are inverted to specify the fields that are not to be searched
+	The search mode is determined by the first of these boolean flags to be true
+		literal: searches for literal string
+		whitespace: same as literal except runs of whitespace are treated as a single space
+		regexp: treats the search term as a regular expression
+		words: (default) treats search string as a list of tokens, and matches if all tokens are found, regardless of adjacency or ordering
 */
 exports.search = function(text,options) {
 	options = options || {};
@@ -1064,6 +1069,21 @@ exports.search = function(text,options) {
 		} else {
 			searchTermsRegExps = [new RegExp("(" + $tw.utils.escapeRegExp(text) + ")",flags)];
 		}
+	} else if(options.whitespace) {
+		terms = [];
+		$tw.utils.each(text.split(/\s+/g),function(term) {
+			if(term) {
+				terms.push($tw.utils.escapeRegExp(term));
+			}
+		});
+		searchTermsRegExps = [new RegExp("(" + terms.join("\\s+") + ")",flags)];
+	} else if(options.regexp) {
+		try {
+			searchTermsRegExps = [new RegExp("(" + text + ")",flags)];			
+		} catch(e) {
+			searchTermsRegExps = null;
+			console.log("Regexp error parsing /(" + text + ")/" + flags + ": ",e);
+		}
 	} else {
 		terms = text.split(/ +/);
 		if(terms.length === 1 && terms[0] === "") {
@@ -1075,6 +1095,23 @@ exports.search = function(text,options) {
 			}
 		}
 	}
+	// Accumulate the array of fields to be searched or excluded from the search
+	var fields = [];
+	if(options.field) {
+		if($tw.utils.isArray(options.field)) {
+			$tw.utils.each(options.field,function(fieldName) {
+				fields.push(fieldName);
+			});
+		} else {
+			fields.push(options.field);
+		}
+	}
+	// Use default fields if none specified and we're not excluding fields (excluding fields with an empty field array is the same as searching all fields)
+	if(fields.length === 0 && !options.excludeField) {
+		fields.push("title");
+		fields.push("tags");
+		fields.push("text");
+	}
 	// Function to check a given tiddler for the search term
 	var searchTiddler = function(title) {
 		if(!searchTermsRegExps) {
@@ -1085,24 +1122,63 @@ exports.search = function(text,options) {
 			tiddler = new $tw.Tiddler({title: title, text: "", type: "text/vnd.tiddlywiki"});
 		}
 		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type] || $tw.config.contentTypeInfo["text/vnd.tiddlywiki"],
-			match;
-		for(var t=0; t<searchTermsRegExps.length; t++) {
-			match = false;
-			if(options.field) {
-				match = searchTermsRegExps[t].test(tiddler.getFieldString(options.field));
-			} else {
-				// Search title, tags and body
-				if(contentTypeInfo.encoding === "utf8") {
-					match = match || searchTermsRegExps[t].test(tiddler.fields.text);
+			searchFields;
+		// Get the list of fields we're searching
+		if(options.excludeField) {
+			searchFields = Object.keys(tiddler.fields);
+			$tw.utils.each(fields,function(fieldName) {
+				var p = searchFields.indexOf(fieldName);
+				if(p !== -1) {
+					searchFields.splice(p,1);
 				}
-				var tags = tiddler.fields.tags ? tiddler.fields.tags.join("\0") : "";
-				match = match || searchTermsRegExps[t].test(tags) || searchTermsRegExps[t].test(tiddler.fields.title);
-			}
-			if(!match) {
-				return false;
-			}
+			});
+		} else {
+			searchFields = fields;
 		}
-		return true;
+		for(var fieldIndex=0; fieldIndex<searchFields.length; fieldIndex++) {
+			// Don't search the text field if the content type is binary
+			var fieldName = searchFields[fieldIndex];
+			if(fieldName === "text" && contentTypeInfo.encoding !== "utf8") {
+				break;
+			}
+			var matches = true,
+				str = tiddler.fields[fieldName],
+				t;
+			if(str) {
+				if($tw.utils.isArray(str)) {
+					// If the field value is an array, test each regexp against each field array entry and fail if each regexp doesn't match at least one field array entry
+					for(t=0; t<searchTermsRegExps.length; t++) {
+						var thisRegExpMatches = false
+						for(var s=0; s<str.length; s++) {
+							if(searchTermsRegExps[t].test(str[s])) {
+								thisRegExpMatches = true;
+								break;
+							}
+						}
+						// Bail if the current search expression doesn't match any entry in the current field array
+						if(!thisRegExpMatches) {
+							matches = false;
+							break;
+						}
+					}
+				} else {
+					// If the field isn't an array, force it to a string and test each regexp against it and fail if any do not match
+					str = tiddler.getFieldString(fieldName);
+					for(t=0; t<searchTermsRegExps.length; t++) {
+						if(!searchTermsRegExps[t].test(str)) {
+							matches = false;
+							break;
+						}
+					}
+				}
+			} else {
+				matches = false;
+			}
+			if(matches) {
+				return true;
+			}
+		};
+		return false;
 	};
 	// Loop through all the tiddlers doing the search
 	var results = [],
