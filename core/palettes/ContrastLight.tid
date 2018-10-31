@@ -1,6 +1,6 @@
-title: $:/palettes/ContrastDark
-name: Contrast (Dark)
-description: High contrast and unambiguous (dark version)
+title: $:/palettes/ContrastLight
+name: Contrast (Light)
+description: High contrast and unambiguous (light version)
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 
@@ -8,7 +8,7 @@ alert-background: #f00
 alert-border: <<colour background>>
 alert-highlight: <<colour foreground>>
 alert-muted-foreground: #800
-background: #000
+background: #fff
 blockquote-bar: <<colour muted-foreground>>
 button-background: <<colour background>>
 button-foreground: <<colour foreground>>
@@ -32,7 +32,7 @@ external-link-background: inherit
 external-link-foreground-hover: inherit
 external-link-foreground-visited: #00a
 external-link-foreground: #00e
-foreground: #fff
+foreground: #000
 message-background: <<colour foreground>>
 message-border: <<colour background>>
 message-foreground: <<colour background>>
@@ -51,7 +51,7 @@ pre-border: <<colour foreground>>
 primary: #00f
 select-tag-background:
 select-tag-foreground:
-sidebar-background: 
+sidebar-background: white
 sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: <<colour background>>
 sidebar-controls-foreground: <<colour foreground>>
@@ -80,8 +80,8 @@ tab-foreground: <<colour background>>
 table-border: #dddddd
 table-footer-background: #a8a8a8
 table-header-background: #f0f0f0
-tag-background: #fff
-tag-foreground: #000
+tag-background: #000
+tag-foreground: #fff
 tiddler-background: <<colour background>>
 tiddler-border: <<colour foreground>>
 tiddler-controls-foreground-hover: #ddd
