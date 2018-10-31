@@ -153,7 +153,7 @@ exports.isArrayEqual = function(array1,array2) {
 Determine whether an array-item is an object-property
 */
 exports.hopArray = function(object,array) {
-	for(var i=0; i < array.length; i++) {
+	for(var i=0; i<array.length; i++) {
 		if($tw.utils.hop(object,array[i])) {
 			return true;
 		}
