@@ -134,6 +134,7 @@ message-border: #cfd6e6
 modal-border: #999999
 select-tag-background:
 select-tag-foreground:
+sidebar-background:
 sidebar-controls-foreground-hover:
 sidebar-muted-foreground-hover:
 sidebar-tab-background: #ded8c5
