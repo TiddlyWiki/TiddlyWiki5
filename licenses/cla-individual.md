@@ -333,3 +333,5 @@ Muhammad Talha Mansoor, @talha131, 2018/07/16
 Bimba László, @bimlas, 2018/08/10
 
 Yurii Rashkovskii, @yrashk, 2018/10/19
+
+Abraham Samma, @abesamma, 2018/10/31
