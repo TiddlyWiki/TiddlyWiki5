@@ -142,9 +142,9 @@ function KeyboardManager(options) {
 	this.shortcutActionList = [], // Stores the corresponding action strings
 	this.shortcutParsedList = []; // Stores the parsed key descriptors
 	this.lookupNames = ["shortcuts"];
-	$tw.platform.isMac ? this.lookupNames.push("shortcuts-mac") : this.lookupNames.push("shortcuts-not-mac");
-	$tw.platform.isWindows ? this.lookupNames.push("shortcuts-windows") : this.lookupNames.push("shortcuts-not-windows");
-	$tw.platform.isLinux ? this.lookupNames.push("shortcuts-linux") : this.lookupNames.push("shortcuts-not-linux");
+	this.lookupNames.push($tw.platform.isMac ? "shortcuts-mac" : "shortcuts-not-mac")
+	this.lookupNames.push($tw.platform.isWindows ? "shortcuts-windows" : "shortcuts-not-windows");
+	this.lookupNames.push($tw.platform.isLinux ? "shortcuts-linux" : "shortcuts-not-linux");
 	this.updateShortcutLists(this.getShortcutTiddlerList());
 	$tw.wiki.addEventListener("change",function(changes) {
 		self.handleShortcutChanges(changes);
