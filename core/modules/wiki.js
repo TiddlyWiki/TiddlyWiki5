@@ -1100,7 +1100,9 @@ exports.search = function(text,options) {
 	if(options.field) {
 		if($tw.utils.isArray(options.field)) {
 			$tw.utils.each(options.field,function(fieldName) {
-				fields.push(fieldName);
+				if(fieldName) {
+					fields.push(fieldName);					
+				}
 			});
 		} else {
 			fields.push(options.field);

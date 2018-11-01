@@ -22,16 +22,18 @@ exports.search = function(source,operator,options) {
 				return (operator.suffixes[1] || []).indexOf(flag) !== -1;
 			},
 			excludeFields = false,
-			firstChar = operator.suffixes[0][0].charAt(0),
+			fieldList = operator.suffixes[0] || [],
+			firstField = fieldList[0] || "", 
+			firstChar = firstField.charAt(0),
 			fields;
-		if(operator.suffixes[0][0].charAt(0) === "-") {
-			fields = [operator.suffixes[0][0].slice(1)].concat(operator.suffixes[0].slice(1));
+		if(firstChar === "-") {
+			fields = [firstField.slice(1)].concat(fieldList.slice(1));
 			excludeFields = true;
-		} else if(operator.suffixes[0][0] === "*"){
+		} else if(fieldList[0] === "*"){
 			fields = [];
 			excludeFields = true;
 		} else {
-			fields = operator.suffixes[0].slice(0);
+			fields = fieldList.slice(0);
 		}
 		return options.wiki.search(operator.operand,{
 			source: source,
