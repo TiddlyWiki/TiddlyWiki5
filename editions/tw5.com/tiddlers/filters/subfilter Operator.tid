@@ -12,6 +12,8 @@ tags: [[Filter Operators]] [[Field Operators]] [[Selection Constructors]] [[Nega
 title: subfilter Operator
 type: text/vnd.tiddlywiki
 
+<<.from-version "5.1.18">> Note that the subfilter operator was introduced in version 5.1.18 and is not available in earlier versions.
+
 <<.tip " Literal filter operands cannot contain square brackets but you can work around the issue by using a variable:">>
 
 ```
