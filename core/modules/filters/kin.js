@@ -15,18 +15,19 @@ Filter operator that recursively finds kindred between tiddlers
   // TODO: Should I set global tw to true?
 
   function collectFamilyMembers(tiddler, title, fieldname, direction) {
-    var family_members = [];
+    var family_members_from = [],
+      family_members_to = [];
 
-    function addToResultsIfNotFoundAlready(title) {
-      if (family_members.includes(title)) {
+    function addToResultsIfNotFoundAlready(list, title) {
+      if (list.includes(title)) {
         return false;
       }
-      family_members.push(title);
+      list.push(title);
       return true
     }
 
     function findKindredFrom(tiddler, title) {
-      if (addToResultsIfNotFoundAlready(title)) {
+      if (addToResultsIfNotFoundAlready(family_members_from, title)) {
         if (tiddler) {
           tiddler.getFieldList(fieldname).forEach(function (target_title) {
             findKindredFrom($tw.wiki.getTiddler(target_title), target_title);
@@ -36,7 +37,7 @@ Filter operator that recursively finds kindred between tiddlers
     }
 
     function findKindredTo(title) {
-      if (addToResultsIfNotFoundAlready(title)) {
+      if (addToResultsIfNotFoundAlready(family_members_to, title)) {
         $tw.wiki.findListingsOfTiddler(title, fieldname).forEach(function (target_title) {
           findKindredTo(target_title);
         });
@@ -46,16 +47,10 @@ Filter operator that recursively finds kindred between tiddlers
     if ((direction === 'from') || (direction === 'with')) {
       findKindredFrom(tiddler, title);
     }
-    if (direction === 'with') {
-      // Remove the base family member:
-      // If it's already in the results, it will be skipped when parsing in
-      // the opposite direction.
-      family_members.shift();
-    }
     if ((direction === 'to') || (direction === 'with')) {
       findKindredTo(title);
     }
-    return family_members;
+    return uniqueArray(family_members_from.concat(family_members_to));
   }
 
   // TODO: Is there a better way for unique?
@@ -76,6 +71,8 @@ Filter operator that recursively finds kindred between tiddlers
 
   /*
     Export our filter function
+
+    TODO: May I add tests? (editions/test/tiddlers/tests)
     */
   exports.kin = function (source, operator, options) {
     var results = [],
