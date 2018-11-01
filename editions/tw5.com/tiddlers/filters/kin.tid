@@ -1,12 +1,12 @@
 caption: kin
 created: 20181025133804171
-modified: 20181027202618759
+modified: 20181102155624126
 op-input: a [[selection of titles|Title Selection]]
-op-neg-output: ''with parameter <<.place T>>''<br>&raquo; those input titles which are ''<<.em not>> connected to <<.place T>>''<br>''without parameter <<.place T>>''<br>&raquo; ignored
-op-output: ''with parameter <<.place T>>''<br>&raquo; those input titles which are ''connected to <<.place T>>'' <br>''without <<.place T>>''<br>&raquo; ''all'' tiddler titles which are ''connected to input titles''
+op-neg-output: ''with parameter <<.place T>>''<br>&raquo; those input titles which are ''<<.em not>> kin with <<.place T>>''<br>''without parameter <<.place T>>''<br>&raquo; ignored
+op-output: ''with parameter <<.place T>>''<br>&raquo; those input titles which are ''kin with <<.place T>>'' <br>''without <<.place T>>''<br>&raquo; ''all'' tiddler titles which are ''kin with input titles''
 op-parameter: a tiddler title or nothing
 op-parameter-name: T
-op-purpose: recursively finds kindred between tiddlers
+op-purpose: recursively looking for kinship between tiddler titles
 op-suffix: [[field|TiddlerFields]] which connecting tiddlers (defaulting to <<.field tags>>) and direction (defaulting to `with`)
 tags: [[Negatable Operators]] [[Tag Operators]] [[Filter Operators]] [[Field Operators]]
 title: kin Operator

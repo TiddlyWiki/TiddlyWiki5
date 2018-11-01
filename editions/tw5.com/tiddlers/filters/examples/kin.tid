@@ -1,10 +1,10 @@
 created: 20181026114434874
-modified: 20181101135634331
+modified: 20181102160039607
 tags: [[Operator Examples]] [[kin Operator]]
 title: kin Operator (Examples)
 type: text/vnd.tiddlywiki
 
-\define item-class(highlightfilter) <$list filter="""[all[current]$highlightfilter$first[]]""">highlighted-toc-item</$list>
+\define item-class(highlightfilter) <$list filter="""[$highlightfilter$is[current]first[]]""">highlighted-toc-item</$list>
 
 \define each-level(tiddlername, highlightfilter)
   <li>
@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
   <$link class=<<transcluded-item-class """$highlightfilter$""">> >[[$(currentTiddler)$]]</$link>
   </$wikify>
   <ul>
-  <$list filter="""[all[current]tagging[]kin[$tiddlername$]]""">
+  <$list filter="""$tiddlername$ +[kin[]tag[$(currentTiddler)$]]""">
     <<each-level """$tiddlername$""" """$highlightfilter$""">>
   </$list>
   </ul>
@@ -23,7 +23,7 @@ type: text/vnd.tiddlywiki
   <div class="tc-table-of-contents">
   <$tiddler tiddler="TableOfContents">
     <ul>
-      <<each-level "Filter Syntax"  """$highlightfilter$""">>
+      <<each-level "[[Filter Syntax]] [[kin Operator]]"  """$highlightfilter$""">>
     </ul>
   </$tiddler>
   </div>
@@ -46,14 +46,14 @@ type: text/vnd.tiddlywiki
 }
 </style>
 
-Family tree of [[Filter Syntax]] tiddler (to really understand, look at the [[TableOfContents]])
+Family tree of [[Filter Syntax]] and [[kin Operator]] (to really understand, look at the [[TableOfContents]])
 
 <<kin-toc "!is[current]">>
 
 <<kin-example-with-toc 1 "kin[Filter Syntax]" "input titles which are family members of the parameter title">>
-<<kin-example-with-toc 2 "[Filter Syntax]kin[]" "collected titles which are family members of input tiddlers">>
+<<kin-example-with-toc 2 "[Filter Syntax]] [[kin Operator]] +[kin[]" "collected titles which are family members of input tiddlers">>
 <<kin-example-with-toc 3 "kin:tags:from[Filter Syntax]" "ancestors of tiddler based on `tags` field (`tags` points to parents)">>
-<<kin-example-with-toc 4 "kin:list:to[Filter Syntax]" "ancestors of tiddler based on `list` field (`list` points to children)<br>[[Reference]] listing [[Concepts]], but [[Concepts]] does not listing [[Filters]] so they do not belong to a family based on `list`">>
-<<kin-example-with-toc 5 "kin::from[Filter Syntax]kin::to[Concepts]" "subset of the family tree">>
-<<kin-example-with-toc 6 "kin[Filter Syntax]kin[Variables]" "common family members of each of the specified titles (intersection)">>
+<<kin-example-with-toc 4 "kin:list:to[Filter Syntax]" "ancestors of tiddler based on `list` field (`list` points to children)<br>[[Reference]] listing [[Concepts]], but [[Concepts]] does not listing [[Filters]] so they do not belong to the same family based on `list`">>
+<<kin-example-with-toc 5 "kin::from[Filter Expression]kin::to[Filters]" "subset of the family tree">>
+<<kin-example-with-toc 6 "kin[Filter Syntax]kin[kin Operator]" "common family members of each of the specified titles (intersection)">>
 <<.operator-example 7 "[!is[system]type[text/vnd.tiddlywiki]!kin[TableOfContents]first[10]]" "first 10 tiddlers which are not related to [[TableOfContents]] (by `tags`)">>
