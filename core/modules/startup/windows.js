@@ -70,6 +70,12 @@ exports.startup = function() {
 			widgetNode.refresh(changes);
 		};
 		$tw.wiki.addEventListener("change",refreshHandler);
+		// Listen for keyboard shortcuts
+		$tw.utils.addEventListeners(srcDocument,[{
+			name: "keydown",
+			handlerObject: $tw.keyboardManager,
+			handlerMethod: "handleKeydownEvent"
+		}]);
 		srcWindow.haveInitialisedWindow = true;
 	});
 	// Close open windows when unloading main window
