@@ -9,10 +9,8 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 (function() {
 
 	/*jslint node: true, browser: true */
-	/*global $tw: false */
+	/*global $tw: true */
 	"use strict";
-
-	// TODO: Should I set global tw to true?
 
 	function collectTitlesRecursively(baseTiddler,baseTitle,fieldName,direction) {
 		var titlesPointingFromBase = [],
@@ -29,7 +27,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 		function collectTitlesPointingFrom(tiddler,title) {
 			if(addToResultsIfNotFoundAlready(titlesPointingFromBase,title)) {
 				if(tiddler) {
-					tiddler.getFieldList(fieldName).forEach(function(targetTitle) {
+					$tw.utils.each(tiddler.getFieldList(fieldName),function(targetTitle) {
 						collectTitlesPointingFrom($tw.wiki.getTiddler(targetTitle),targetTitle);
 					});
 				}
@@ -38,7 +36,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 
 		function collectTitlesPointingTo(title) {
 			if(addToResultsIfNotFoundAlready(titlesPointingToBase,title)) {
-				$tw.wiki.findListingsOfTiddler(title,fieldName).forEach(function(targetTitle) {
+				$tw.utils.each($tw.wiki.findListingsOfTiddler(title,fieldName),function(targetTitle) {
 					collectTitlesPointingTo(targetTitle);
 				});
 			}
@@ -50,23 +48,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 		if((direction === "to") || (direction === "with")) {
 			collectTitlesPointingTo(baseTitle);
 		}
-		return uniqueArray(titlesPointingFromBase.concat(titlesPointingToBase));
-	}
-
-	// TODO: Is there a better way for unique?
-	function uniqueArray(input) {
-		var seen = {},
-			output = [],
-			len = input.length,
-			j = 0;
-		for(var i = 0; i < len; i++) {
-			var item = input[i];
-			if(seen[item] !== 1) {
-				seen[item] = 1;
-				output[j++] = item;
-			}
-		}
-		return output;
+		return $tw.utils.pushTop(titlesPointingFromBase,titlesPointingToBase);
 	}
 
 	/*
@@ -77,6 +59,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 	exports.kin = function(source,operator,options) {
 		var results = [],
 			needsExclusion = operator.prefix === "!",
+			// TODO: Use operator.suffixes (see #3502)
 			suffixList = (operator.suffix || "").split(":"),
 			fieldName = (suffixList[0] || "tags").toLowerCase(),
 			direction = (suffixList[1] || "with").toLowerCase();
@@ -97,9 +80,8 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 			});
 		} else {
 			source(function(tiddler,title) {
-				results = results.concat(collectTitlesRecursively(tiddler,title,fieldName,direction));
+				results = $tw.utils.pushTop(results,collectTitlesRecursively(tiddler,title,fieldName,direction));
 			});
-			results = uniqueArray(results);
 		}
 
 		return results;
