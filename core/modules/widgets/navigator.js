@@ -469,7 +469,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	if(storyList.indexOf(draftTitle) === -1) {
 		var slot = storyList.indexOf(event.navigateFromTitle);
 		if(slot === -1) {
-			slot = this.openLinkFromOutsideRiver === "bottom" ? storyList.length - 1 : slot;
+			slot = this.getAttribute("openLinkFromOutsideRiver","top") === "bottom" ? storyList.length - 1 : slot;
 		}
 		storyList.splice(slot + 1,0,draftTitle);
 	}
