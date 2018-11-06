@@ -39,10 +39,10 @@ Compute the internal state of the widget
 QualifyWidget.prototype.execute = function() {
 	// Get our parameters
 	this.qualifyName = this.getAttribute("name");
-	this.qualifyText = this.getAttribute("text");
+	this.qualifyTitle = this.getAttribute("title");
 	// Set context variable
 	if(this.qualifyName) {
-		this.setVariable(this.qualifyName,this.qualifyText + "-" + this.getStateQualifier());
+		this.setVariable(this.qualifyName,this.qualifyTitle + "-" + this.getStateQualifier());
 	}
 	// Construct the child widgets
 	this.makeChildWidgets();
@@ -53,7 +53,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 QualifyWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.name || changedAttributes.text) {
+	if(changedAttributes.name || changedAttributes.title) {
 		this.refreshSelf();
 		return true;
 	} else {

@@ -32,7 +32,7 @@ tags: $:/tags/Macro
 
 \define toc-linked-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
 <!-- helper function -->
-<$qualify name="toc-state" text={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
+<$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item" value="toc-item-selected">
     <li class=<<toc-item-class>>>
     <$link>
@@ -58,7 +58,7 @@ tags: $:/tags/Macro
 
 \define toc-unlinked-expandable-body(tag,sort:"",itemClassFilter:" ",exclude,path)
 <!-- helper function -->
-<$qualify name="toc-state" text={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
+<$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item" value="toc-item-selected">
     <li class=<<toc-item-class>>>
       <$reveal type="nomatch" state=<<toc-state>> text="open">
@@ -98,7 +98,7 @@ tags: $:/tags/Macro
 \end
 
 \define toc-linked-selective-expandable-body(tag,sort:"",itemClassFilter:" ",exclude,path)
-<$qualify name="toc-state" text={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
+<$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item" value="toc-item-selected" >
     <li class=<<toc-item-class>>>
       <$link>
@@ -125,7 +125,7 @@ tags: $:/tags/Macro
 \end
 
 \define toc-unlinked-selective-expandable-body(tag,sort:"",itemClassFilter:" ",exclude,path)
-<$qualify name="toc-state" text={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
+<$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item" value="toc-item-selected">
     <li class=<<toc-item-class>>>
       <$list filter="[all[current]tagging[]limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button> <$view field='caption'><$view field='title'/></$view>">
