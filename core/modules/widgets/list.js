@@ -258,7 +258,8 @@ ListWidget.prototype.insertListItem = function(index,title) {
 	widget.render(this.parentDomNode,nextSibling);
 	// Animate the insertion if required
 	if(this.storyview && this.storyview.insert) {
-		this.storyview.insert(widget);
+		var bottom = index === this.list.length - 1 ? true : false;
+		this.storyview.insert(widget,bottom);
 	}
 	return true;
 };
@@ -270,7 +271,8 @@ ListWidget.prototype.removeListItem = function(index) {
 	var widget = this.children[index];
 	// Animate the removal if required
 	if(this.storyview && this.storyview.remove) {
-		this.storyview.remove(widget);
+		var bottom = index === this.list.length ? true : false;
+		this.storyview.remove(widget,bottom);
 	} else {
 		widget.removeChildDomNodes();
 	}
