@@ -59,10 +59,9 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 	exports.kin = function(source,operator,options) {
 		var results = [],
 			needsExclusion = operator.prefix === "!",
-			// TODO: Use operator.suffixes (see #3502)
-			suffixList = (operator.suffix || "").split(":"),
-			fieldName = (suffixList[0] || "tags").toLowerCase(),
-			direction = (suffixList[1] || "with").toLowerCase();
+			suffixes = operator.suffixes || [],
+			fieldName = ((suffixes[0] || [])[0] || "tags").toLowerCase(),
+			direction = ((suffixes[1] || [])[0] || "with").toLowerCase();
 
 		if((operator.operand === "") && (needsExclusion)) {
 			return [];
