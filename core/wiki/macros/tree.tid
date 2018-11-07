@@ -39,10 +39,10 @@ tags: $:/tags/Macro
 
 \define tree-node(prefix)
 <ol>
-<$list filter="[all[shadows+tiddlers]removeprefix[$prefix$]splitbefore[/]sort[title]] +[!suffix[/]]" variable="chunk">
+<$list filter="""[all[shadows+tiddlers]removeprefix[$prefix$]splitbefore[/]sort[title]] +[!suffix[/]]""" variable="chunk">
 <<leaf-node """$prefix$""">>
 </$list>
-<$list filter="[all[shadows+tiddlers]removeprefix[$prefix$]splitbefore[/]sort[title]] +[suffix[/]]" variable="chunk">
+<$list filter="""[all[shadows+tiddlers]removeprefix[$prefix$]splitbefore[/]sort[title]] +[suffix[/]]""" variable="chunk">
 <<branch-node """$prefix$""">>
 </$list>
 </ol>
