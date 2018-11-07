@@ -12,7 +12,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 	/*global $tw: true */
 	"use strict";
 
-	function collectTitlesRecursively(baseTiddler,baseTitle,fieldName,direction) {
+	function collectTitlesRecursively(baseTiddler,baseTitle,options) {
 		var titlesPointingFromBase = [],
 			titlesPointingToBase = [];
 
@@ -27,7 +27,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 		function collectTitlesPointingFrom(tiddler,title) {
 			if(addToResultsIfNotFoundAlready(titlesPointingFromBase,title)) {
 				if(tiddler) {
-					$tw.utils.each(tiddler.getFieldList(fieldName),function(targetTitle) {
+					$tw.utils.each(tiddler.getFieldList(options.fieldName),function(targetTitle) {
 						collectTitlesPointingFrom($tw.wiki.getTiddler(targetTitle),targetTitle);
 					});
 				}
@@ -36,16 +36,16 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 
 		function collectTitlesPointingTo(title) {
 			if(addToResultsIfNotFoundAlready(titlesPointingToBase,title)) {
-				$tw.utils.each($tw.wiki.findListingsOfTiddler(title,fieldName),function(targetTitle) {
+				$tw.utils.each($tw.wiki.findListingsOfTiddler(title,options.fieldName),function(targetTitle) {
 					collectTitlesPointingTo(targetTitle);
 				});
 			}
 		}
 
-		if((direction === "from") || (direction === "with")) {
+		if((options.direction === "from") || (options.direction === "with")) {
 			collectTitlesPointingFrom(baseTiddler,baseTitle);
 		}
-		if((direction === "to") || (direction === "with")) {
+		if((options.direction === "to") || (options.direction === "with")) {
 			collectTitlesPointingTo(baseTitle);
 		}
 		return $tw.utils.pushTop(titlesPointingFromBase,titlesPointingToBase);
@@ -60,8 +60,10 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 		var results = [],
 			needsExclusion = operator.prefix === "!",
 			suffixes = operator.suffixes || [],
-			fieldName = ((suffixes[0] || [])[0] || "tags").toLowerCase(),
-			direction = ((suffixes[1] || [])[0] || "with").toLowerCase();
+			suffixOptions = {
+				fieldName: ((suffixes[0] || [])[0] || "tags").toLowerCase(),
+				direction: ((suffixes[1] || [])[0] || "with").toLowerCase(),
+			};
 
 		if((operator.operand === "") && (needsExclusion)) {
 			return [];
@@ -70,7 +72,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 		if(operator.operand !== "") {
 			var baseTitle = operator.operand,
 				baseTiddler = $tw.wiki.getTiddler(baseTitle),
-				foundTitles = collectTitlesRecursively(baseTiddler,baseTitle,fieldName,direction);
+				foundTitles = collectTitlesRecursively(baseTiddler,baseTitle,suffixOptions);
 
 			source(function(tiddler,title) {
 				if(needsExclusion !== foundTitles.includes(title)) {
@@ -79,7 +81,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 			});
 		} else {
 			source(function(tiddler,title) {
-				results = $tw.utils.pushTop(results,collectTitlesRecursively(tiddler,title,fieldName,direction));
+				results = $tw.utils.pushTop(results,collectTitlesRecursively(tiddler,title,suffixOptions));
 			});
 		}
 
