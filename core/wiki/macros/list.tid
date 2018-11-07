@@ -61,7 +61,8 @@ tags: $:/tags/Macro
 <!-- Save the new order to the Tag Tiddler -->
 <$action-listops $tiddler=<<__tag__>> $field="list" $filter="+[enlist<order>] +[insertbefore:currentTiddler<actionTiddler>]"/>
 <!-- Make sure the newly added item has the right tag -->
-<$action-listops $tiddler=<<actionTiddler>> $tags=<<__tag__>>/>
+<!-- Removing this line makes it work as intended -->
+<!--<$action-listops $tiddler=<<actionTiddler>> $tags=<<__tag__>>/>-->
 </$set>
 \end
 
