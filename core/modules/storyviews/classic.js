@@ -45,7 +45,7 @@ ClassicStoryView.prototype.insert = function(widget,options) {
 		currMarginBottom = parseInt(computedStyle.marginBottom,10),
 		currMarginTop = parseInt(computedStyle.marginTop,10),
 		currHeight = targetElement.offsetHeight + currMarginTop,
-	    	isBottom = options.index === options.listLength;
+	    	isBottom = options.index === options.listLength - 1;
 	var initialStyle = isBottom ? [
 		{transition: "none"},
 		{opacity: "0.0"}
