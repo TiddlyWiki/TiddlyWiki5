@@ -272,7 +272,7 @@ ListWidget.prototype.removeListItem = function(index) {
 	// Animate the removal if required
 	if(this.storyview && this.storyview.remove) {
 		var options = {index: index, listLength: this.list.length};
-		this.storyview.remove(widget,bottom);
+		this.storyview.remove(widget,options);
 	} else {
 		widget.removeChildDomNodes();
 	}
