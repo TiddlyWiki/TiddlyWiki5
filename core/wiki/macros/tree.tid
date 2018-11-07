@@ -1,13 +1,18 @@
 title: $:/core/macros/tree
 tags: $:/tags/Macro
 
+\define link(full-title, chunk)
+<$link to=<<__full-title__>>>
+<$text text=<<__chunk__>>/>
+</$link>
+\end
+
 \define leaf-node(prefix)
 <li>
-<$list filter="""[[$prefix$$(chunk)$]is[shadow]] [[$prefix$$(chunk)$]is[tiddler]] +[removeprefix[$prefix$]] +[limit[1]]""" 
-emptyMessage="""<$text text="$prefix$$(chunk)$"/>""">
-<span>{{$:/core/images/file}}</span> <$link to="""$prefix$$(chunk)$""">
-<$view field="title"/>
-</$link> 
+<$list filter="""[[$prefix$$(chunk)$]is[shadow]] [[$prefix$$(chunk)$]is[tiddler]]""" variable="full-title">
+<$list filter="""[<full-title>] +[removeprefix[$prefix$]]""" variable="chunk">
+<span>{{$:/core/images/file}}</span> <$macrocall $name="link" full-title=<<full-title>> chunk=<<chunk>>/>
+</$list>
 </$list>
 </li>
 \end
@@ -34,10 +39,10 @@ emptyMessage="""<$text text="$prefix$$(chunk)$"/>""">
 
 \define tree-node(prefix)
 <ol>
-<$list filter="[all[shadows+tiddlers]removeprefix[$prefix$]splitbefore[/]sort[title]] +[!suffix[/]]" variable="chunk">
+<$list filter="""[all[shadows+tiddlers]removeprefix[$prefix$]splitbefore[/]sort[title]] +[!suffix[/]]""" variable="chunk">
 <<leaf-node """$prefix$""">>
 </$list>
-<$list filter="[all[shadows+tiddlers]removeprefix[$prefix$]splitbefore[/]sort[title]] +[suffix[/]]" variable="chunk">
+<$list filter="""[all[shadows+tiddlers]removeprefix[$prefix$]splitbefore[/]sort[title]] +[suffix[/]]""" variable="chunk">
 <<branch-node """$prefix$""">>
 </$list>
 </ol>
