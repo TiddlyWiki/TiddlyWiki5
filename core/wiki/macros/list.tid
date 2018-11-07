@@ -61,8 +61,14 @@ tags: $:/tags/Macro
 <!-- Save the new order to the Tag Tiddler -->
 <$action-listops $tiddler=<<__tag__>> $field="list" $filter="+[enlist<order>] +[insertbefore:currentTiddler<actionTiddler>]"/>
 <!-- Make sure the newly added item has the right tag -->
-<!-- Removing this line makes it work as intended -->
+<!-- Removing this line makes dragging tags within the dropdown work as intended -->
 <!--<$action-listops $tiddler=<<actionTiddler>> $tags=<<__tag__>>/>-->
+<!-- Using the following 5 lines as replacement makes dragging titles from outside into the dropdown apply the tag -->
+<$list filter="[<actionTiddler>!contains:tags<__tag__>]">
+<$fieldmangler tiddler=<<actionTiddler>>>
+<$action-sendmessage $message="tm-add-tag" $param=<<__tag__>>/>
+</$fieldmangler>
+</$list>
 </$set>
 \end
 
