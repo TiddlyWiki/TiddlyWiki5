@@ -33,8 +33,16 @@ exports.startup = function() {
 			height = paramObject.height || "600",
 			variables = $tw.utils.extend({},paramObject,{currentTiddler: title});
 		// Open the window
-		var srcWindow = window.open("","external-" + title,"scrollbars,width=" + width + ",height=" + height),
+		var srcWindow,
+		    srcDocument;
+		// In case that popup blockers deny opening a new window
+		try {
+			srcWindow = window.open("","external-" + title,"scrollbars,width=" + width + ",height=" + height),
 			srcDocument = srcWindow.document;
+		}
+		catch(e) {
+			return;
+		}
 		windows[title] = srcWindow;
 		// Check for reopening the same window
 		if(srcWindow.haveInitialisedWindow) {
@@ -70,6 +78,12 @@ exports.startup = function() {
 			widgetNode.refresh(changes);
 		};
 		$tw.wiki.addEventListener("change",refreshHandler);
+		// Listen for keyboard shortcuts
+		$tw.utils.addEventListeners(srcDocument,[{
+			name: "keydown",
+			handlerObject: $tw.keyboardManager,
+			handlerMethod: "handleKeydownEvent"
+		}]);
 		srcWindow.haveInitialisedWindow = true;
 	});
 	// Close open windows when unloading main window

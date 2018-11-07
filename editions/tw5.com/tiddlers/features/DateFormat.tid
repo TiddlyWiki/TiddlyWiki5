@@ -45,4 +45,4 @@ Note that other text is passed through unchanged, allowing commas, colons or oth
 |!Template |!Output |
 |`DDth MMM YYYY` |16th February 2011 |
 |`DDth MMM \M\M\M YYYY` |16th February MMM 2011 |
-|`DDth mmm hh:mm:ss` |16th Feb 2011 11:38:42 |
+|`DDth mmm YYYY 0hh:0mm:0ss` |16th Feb 2011 11:38:42 |

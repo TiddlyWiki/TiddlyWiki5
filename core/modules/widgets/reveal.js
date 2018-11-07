@@ -58,23 +58,23 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 	domNode.style.zIndex = "1000";
 	switch(this.position) {
 		case "left":
-			domNode.style.left = (this.popup.left - domNode.offsetWidth) + "px";
+			domNode.style.left = Math.max(0, this.popup.left - domNode.offsetWidth) + "px";
 			domNode.style.top = this.popup.top + "px";
 			break;
 		case "above":
 			domNode.style.left = this.popup.left + "px";
-			domNode.style.top = (this.popup.top - domNode.offsetHeight) + "px";
+			domNode.style.top = Math.max(0, this.popup.top - domNode.offsetHeight) + "px";
 			break;
 		case "aboveright":
 			domNode.style.left = (this.popup.left + this.popup.width) + "px";
-			domNode.style.top = (this.popup.top + this.popup.height - domNode.offsetHeight) + "px";
+			domNode.style.top = Math.max(0, this.popup.top + this.popup.height - domNode.offsetHeight) + "px";
 			break;
 		case "right":
 			domNode.style.left = (this.popup.left + this.popup.width) + "px";
 			domNode.style.top = this.popup.top + "px";
 			break;
 		case "belowleft":
-			domNode.style.left = (this.popup.left + this.popup.width - domNode.offsetWidth) + "px";
+			domNode.style.left = Math.max(0, this.popup.left + this.popup.width - domNode.offsetWidth) + "px";
 			domNode.style.top = (this.popup.top + this.popup.height) + "px";
 			break;
 		default: // Below

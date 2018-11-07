@@ -32,9 +32,7 @@ tags: $:/tags/Macro
 
 \define toc-linked-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
 <!-- helper function -->
-<$wikify name="toc-state" text="""
-  <$macrocall $name="qualify" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}} />
-""">
+<$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item" value="toc-item-selected">
     <li class=<<toc-item-class>>>
     <$link>
@@ -55,14 +53,12 @@ tags: $:/tags/Macro
     </$reveal>
     </li>
   </$set>
-</$wikify>
+</$qualify>
 \end
 
 \define toc-unlinked-expandable-body(tag,sort:"",itemClassFilter:" ",exclude,path)
 <!-- helper function -->
-<$wikify name="toc-state" text="""
-  <$macrocall $name="qualify" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}} />
-""">
+<$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item" value="toc-item-selected">
     <li class=<<toc-item-class>>>
       <$reveal type="nomatch" state=<<toc-state>> text="open">
@@ -82,7 +78,7 @@ tags: $:/tags/Macro
       </$reveal>
     </li>
   </$set>
-</$wikify>
+</$qualify>
 \end
 
 \define toc-expandable-empty-message()
@@ -102,9 +98,7 @@ tags: $:/tags/Macro
 \end
 
 \define toc-linked-selective-expandable-body(tag,sort:"",itemClassFilter:" ",exclude,path)
-<$wikify name="toc-state" text="""
-  <$macrocall $name="qualify" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}} />
-""">
+<$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item" value="toc-item-selected" >
     <li class=<<toc-item-class>>>
       <$link>
@@ -127,13 +121,11 @@ tags: $:/tags/Macro
       </$reveal>
     </li>
   </$set>
-</$wikify>
+</$qualify>
 \end
 
 \define toc-unlinked-selective-expandable-body(tag,sort:"",itemClassFilter:" ",exclude,path)
-<$wikify name="toc-state" text="""
-  <$macrocall $name="qualify" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}} />
-""">
+<$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item" value="toc-item-selected">
     <li class=<<toc-item-class>>>
       <$list filter="[all[current]tagging[]limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button> <$view field='caption'><$view field='title'/></$view>">
@@ -155,7 +147,7 @@ tags: $:/tags/Macro
       </$reveal>
     </li>
   </$set>
-</$wikify>
+</$qualify>
 \end
 
 \define toc-selective-expandable-empty-message()
