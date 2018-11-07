@@ -24,20 +24,26 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 			return true
 		}
 
-		function collectTitlesPointingFrom(tiddler,title) {
+		function collectTitlesPointingFrom(tiddler,title,currentDepth = 0) {
+			if((options.depth) && (currentDepth++ > options.depth)) {
+				return;
+			}
 			if(addToResultsIfNotFoundAlready(titlesPointingFromBase,title)) {
 				if(tiddler) {
 					$tw.utils.each(tiddler.getFieldList(options.fieldName),function(targetTitle) {
-						collectTitlesPointingFrom($tw.wiki.getTiddler(targetTitle),targetTitle);
+						collectTitlesPointingFrom($tw.wiki.getTiddler(targetTitle),targetTitle,currentDepth);
 					});
 				}
 			}
 		}
 
-		function collectTitlesPointingTo(title) {
+		function collectTitlesPointingTo(title,currentDepth = 0) {
+			if((options.depth) && (currentDepth++ > options.depth)) {
+				return;
+			}
 			if(addToResultsIfNotFoundAlready(titlesPointingToBase,title)) {
 				$tw.utils.each($tw.wiki.findListingsOfTiddler(title,options.fieldName),function(targetTitle) {
-					collectTitlesPointingTo(targetTitle);
+					collectTitlesPointingTo(targetTitle,currentDepth);
 				});
 			}
 		}
@@ -63,6 +69,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 			suffixOptions = {
 				fieldName: ((suffixes[0] || [])[0] || "tags").toLowerCase(),
 				direction: ((suffixes[1] || [])[0] || "with").toLowerCase(),
+				depth: Number((suffixes[2] || [])[0]),
 			};
 
 		if((operator.operand === "") && (needsExclusion)) {
