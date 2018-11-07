@@ -33,7 +33,7 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});
 };
 
-ClassicStoryView.prototype.insert = function(widget,bottom) {
+ClassicStoryView.prototype.insert = function(widget,options) {
 	var targetElement = widget.findFirstDomNode(),
 		duration = $tw.utils.getAnimationDuration();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
@@ -44,8 +44,9 @@ ClassicStoryView.prototype.insert = function(widget,bottom) {
 	var computedStyle = window.getComputedStyle(targetElement),
 		currMarginBottom = parseInt(computedStyle.marginBottom,10),
 		currMarginTop = parseInt(computedStyle.marginTop,10),
-		currHeight = targetElement.offsetHeight + currMarginTop;
-	var initialStyle = bottom ? [
+		currHeight = targetElement.offsetHeight + currMarginTop,
+	    	isBottom = options.index === options.listLength;
+	var initialStyle = isBottom ? [
 		{transition: "none"},
 		{opacity: "0.0"}
 	] : [
@@ -53,7 +54,7 @@ ClassicStoryView.prototype.insert = function(widget,bottom) {
 		{marginBottom: (-currHeight) + "px"},
 		{opacity: "0.0"}
 	];
-	var finalStyle = bottom ? [
+	var finalStyle = isBottom ? [
 		{transition: "opacity " + duration + "ms " + easing + ", " +
 					"margin-bottom " + duration + "ms " + easing},
 		{opacity: "1.0"}
@@ -77,7 +78,7 @@ ClassicStoryView.prototype.insert = function(widget,bottom) {
 	$tw.utils.setStyle(targetElement,finalStyle);
 };
 
-ClassicStoryView.prototype.remove = function(widget,bottom) {
+ClassicStoryView.prototype.remove = function(widget,options) {
 	var targetElement = widget.findFirstDomNode(),
 		duration = $tw.utils.getAnimationDuration(),
 		removeElement = function() {
@@ -93,8 +94,9 @@ ClassicStoryView.prototype.remove = function(widget,bottom) {
 		computedStyle = window.getComputedStyle(targetElement),
 		currMarginBottom = parseInt(computedStyle.marginBottom,10),
 		currMarginTop = parseInt(computedStyle.marginTop,10),
-		currHeight = targetElement.offsetHeight + currMarginTop;
-	var initialStyle = bottom ? [
+		currHeight = targetElement.offsetHeight + currMarginTop,
+	    	isBottom = options.index === options.listLength;
+	var initialStyle = isBottom ? [
 		{transition: "none"},
 		{transform: "translateX(0px)"},
 		{opacity: "1.0"}
@@ -104,7 +106,7 @@ ClassicStoryView.prototype.remove = function(widget,bottom) {
 		{marginBottom:  currMarginBottom + "px"},
 		{opacity: "1.0"}
 	];
-	var finalStyle = bottom ? [
+	var finalStyle = isBottom ? [
 		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", " +
 					"opacity " + duration + "ms " + easing + ", " +
 					"margin-bottom " + duration + "ms " + easing},
