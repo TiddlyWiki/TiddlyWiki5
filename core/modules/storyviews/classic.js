@@ -33,7 +33,7 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});
 };
 
-ClassicStoryView.prototype.insert = function(widget) {
+ClassicStoryView.prototype.insert = function(widget,bottom) {
 	var targetElement = widget.findFirstDomNode(),
 		duration = $tw.utils.getAnimationDuration();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
@@ -45,6 +45,24 @@ ClassicStoryView.prototype.insert = function(widget) {
 		currMarginBottom = parseInt(computedStyle.marginBottom,10),
 		currMarginTop = parseInt(computedStyle.marginTop,10),
 		currHeight = targetElement.offsetHeight + currMarginTop;
+	var initialStyle = bottom ? [
+		{transition: "none"},
+		{opacity: "0.0"}
+	] : [
+		{transition: "none"},
+		{marginBottom: (-currHeight) + "px"},
+		{opacity: "0.0"}
+	];
+	var finalStyle = bottom ? [
+		{transition: "opacity " + duration + "ms " + easing + ", " +
+					"margin-bottom " + duration + "ms " + easing},
+		{opacity: "1.0"}
+	] : [
+		{transition: "opacity " + duration + "ms " + easing + ", " +
+					"margin-bottom " + duration + "ms " + easing},
+		{marginBottom: currMarginBottom + "px"},
+		{opacity: "1.0"}
+	];
 	// Reset the margin once the transition is over
 	setTimeout(function() {
 		$tw.utils.setStyle(targetElement,[
@@ -53,22 +71,13 @@ ClassicStoryView.prototype.insert = function(widget) {
 		]);
 	},duration);
 	// Set up the initial position of the element
-	$tw.utils.setStyle(targetElement,[
-		{transition: "none"},
-		{marginBottom: (-currHeight) + "px"},
-		{opacity: "0.0"}
-	]);
+	$tw.utils.setStyle(targetElement,initialStyle);
 	$tw.utils.forceLayout(targetElement);
 	// Transition to the final position
-	$tw.utils.setStyle(targetElement,[
-		{transition: "opacity " + duration + "ms " + easing + ", " +
-					"margin-bottom " + duration + "ms " + easing},
-		{marginBottom: currMarginBottom + "px"},
-		{opacity: "1.0"}
-	]);
+	$tw.utils.setStyle(targetElement,finalStyle);
 };
 
-ClassicStoryView.prototype.remove = function(widget) {
+ClassicStoryView.prototype.remove = function(widget,bottom) {
 	var targetElement = widget.findFirstDomNode(),
 		duration = $tw.utils.getAnimationDuration(),
 		removeElement = function() {
@@ -85,24 +94,36 @@ ClassicStoryView.prototype.remove = function(widget) {
 		currMarginBottom = parseInt(computedStyle.marginBottom,10),
 		currMarginTop = parseInt(computedStyle.marginTop,10),
 		currHeight = targetElement.offsetHeight + currMarginTop;
-	// Remove the dom nodes of the widget at the end of the transition
-	setTimeout(removeElement,duration);
-	// Animate the closure
-	$tw.utils.setStyle(targetElement,[
+	var initialStyle = bottom ? [
+		{transition: "none"},
+		{transform: "translateX(0px)"},
+		{opacity: "1.0"}
+	] : [
 		{transition: "none"},
 		{transform: "translateX(0px)"},
 		{marginBottom:  currMarginBottom + "px"},
 		{opacity: "1.0"}
-	]);
-	$tw.utils.forceLayout(targetElement);
-	$tw.utils.setStyle(targetElement,[
+	];
+	var finalStyle = bottom ? [
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", " +
+					"opacity " + duration + "ms " + easing + ", " +
+					"margin-bottom " + duration + "ms " + easing},
+		{transform: "translateX(-" + currWidth + "px)"},
+		{opacity: "0.0"}
+	] : [
 		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", " +
 					"opacity " + duration + "ms " + easing + ", " +
 					"margin-bottom " + duration + "ms " + easing},
 		{transform: "translateX(-" + currWidth + "px)"},
 		{marginBottom: (-currHeight) + "px"},
 		{opacity: "0.0"}
-	]);
+	];
+	// Remove the dom nodes of the widget at the end of the transition
+	setTimeout(removeElement,duration);
+	// Animate the closure
+	$tw.utils.setStyle(targetElement,initialStyle);
+	$tw.utils.forceLayout(targetElement);
+	$tw.utils.setStyle(targetElement,finalStyle);
 };
 
 exports.classic = ClassicStoryView;
