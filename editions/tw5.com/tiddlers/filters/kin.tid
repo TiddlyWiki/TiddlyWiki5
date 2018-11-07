@@ -1,30 +1,40 @@
 caption: kin
 created: 20181025133804171
-modified: 20181102155624126
+modified: 20181107224931131
 op-input: a [[selection of titles|Title Selection]]
-op-neg-output: ''with parameter <<.place T>>''<br>&raquo; those input titles which are ''<<.em not>> kin with <<.place T>>''<br>''without parameter <<.place T>>''<br>&raquo; ignored
-op-output: ''with parameter <<.place T>>''<br>&raquo; those input titles which are ''kin with <<.place T>>'' <br>''without <<.place T>>''<br>&raquo; ''all'' tiddler titles which are ''kin with input titles''
-op-parameter: a tiddler title or nothing
-op-parameter-name: T
+op-neg-output: ''with parameter <<.place B>>''<br>&raquo; those input titles which are ''<<.em not>> kin with <<.place B>>''<br>''without parameter <<.place B>>''<br>&raquo; ignored
+op-output: ''with parameter <<.place B>>''<br>&raquo; those input titles which are ''kin with <<.place B>>'' <br>''without <<.place B>>''<br>&raquo; ''all'' tiddler titles which are ''kin with input titles'' (treat input titles as base tiddlers)
+op-parameter: base tiddler title or nothing
+op-parameter-name: B
 op-purpose: recursively looking for kinship between tiddler titles
-op-suffix: [[field|TiddlerFields]] which connecting tiddlers (defaulting to <<.field tags>>) and direction (defaulting to `with`)
+op-suffix: the <<.op kin>> operator uses a rich suffix, see below for details
 tags: [[Negatable Operators]] [[Tag Operators]] [[Filter Operators]] [[Field Operators]]
 title: kin Operator
 type: text/vnd.tiddlywiki
 
-The syntax of suffix is:
+The purpose of the <<.op {{!!caption}}>> operator with examples:
 
-<$railroad text="""
-[: "<field>" ] ":" [: ("to" |: "with" | "from") ]
-"""/>
+* Finds out where base tiddler originates and what other elements originate from it
+* Finds the ancestors and successors of a family member
+* Finds the "leaves" of the branch of the base tiddler in a tree-like structure (where the base tiddler is a leaf)
+* Finds the super- and subsets / groups of a mathematical set (where the base tiddler is a set)
 
-The `<field>` suffix is assumed to be a [[title list|Title List]].
+[img[kin Operator.svg]]
 
-|!Direction|!Members|
-|^`to`|Find the title of <<.place T>> in the target field of input tiddlers recursively + <<.place T>> itself|
-|^`with`|Union of `from` and `to`|
-|^`from`|Find the input titles in the target field of <<.place T>> recursively  + <<.place T>> itself|
+The <<.op {{!!caption}}>> operator uses an extended syntax that permits multiple fields and flags to be passed:
 
-<<.op {{!!caption}}>> is a [[modifier|Selection Constructors]], but without <<.place T>> is a [[constructor|Selection Constructors]].
+```
+[kin:<field>:<direction>:<depth>[<operand>]]
+```
+
+* ''field'': name of the [[field|TiddlerFields]] which connecting tiddlers (assumed to be a [[title list|Title List]], defaulting to <<.field tags>>)
+* ''direction'':  collect the tiddler titles in this direction relative to the base tiddler
+** ''from'': collect kins of base tiddler pointing from it (including the base tiddler title itself)
+** ''to'': collect kins of base tiddler pointing to it (including the base tiddler title itself)
+** ''with'': (the default) union of the aboves
+* ''depth'': maximum depth of the collected labels in the tree structure relative to the base tiddler (a positive number, not limited by default)
+* ''operand'': filter operand, the base tiddler
+
+<<.op {{!!caption}}>> is a [[modifier|Selection Constructors]], but without <<.place B>> parameter is a [[constructor|Selection Constructors]].
 
 <<.operator-examples "kin">>

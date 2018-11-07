@@ -1,5 +1,5 @@
 created: 20181026114434874
-modified: 20181102160039607
+modified: 20181107224559880
 tags: [[Operator Examples]] [[kin Operator]]
 title: kin Operator (Examples)
 type: text/vnd.tiddlywiki
@@ -51,9 +51,11 @@ Family tree of [[Filter Syntax]] and [[kin Operator]] (to really understand, loo
 <<kin-toc "!is[current]">>
 
 <<kin-example-with-toc 1 "kin[Filter Syntax]" "input titles which are family members of the parameter title">>
-<<kin-example-with-toc 2 "[Filter Syntax]] [[kin Operator]] +[kin[]" "collected titles which are family members of input tiddlers">>
-<<kin-example-with-toc 3 "kin:tags:from[Filter Syntax]" "ancestors of tiddler based on `tags` field (`tags` points to parents)">>
-<<kin-example-with-toc 4 "kin:list:to[Filter Syntax]" "ancestors of tiddler based on `list` field (`list` points to children)<br>[[Reference]] listing [[Concepts]], but [[Concepts]] does not listing [[Filters]] so they do not belong to the same family based on `list`">>
+<<kin-example-with-toc 2 "kin[Filter Syntax]kin[kin Operator]" "common family members of each of the specified titles (intersection)">>
+<<kin-example-with-toc 3 "[Filter Syntax]] [[kin Operator]] +[kin[]" "collected titles which are family members of any of the input tiddlers">>
+<<kin-example-with-toc 4 "kin::to[Filters]" "successors of the given tiddler">>
 <<kin-example-with-toc 5 "kin::from[Filter Expression]kin::to[Filters]" "subset of the family tree">>
-<<kin-example-with-toc 6 "kin[Filter Syntax]kin[kin Operator]" "common family members of each of the specified titles (intersection)">>
-<<.operator-example 7 "[!is[system]type[text/vnd.tiddlywiki]!kin[TableOfContents]first[10]]" "first 10 tiddlers which are not related to [[TableOfContents]] (by `tags`)">>
+<<kin-example-with-toc 6 "kin::from:2[Filter Expression]" "ancestors of the given tiddler until the given depth">>
+<<kin-example-with-toc 7 "kin:tags:from[Filter Syntax]" "ancestors of tiddler based on `tags` field (`tags` points to parents)">>
+<<kin-example-with-toc 8 "kin:list:to[Filter Syntax]" "ancestors of tiddler based on `list` field (`list` points to children)<br>[[Reference]] listing [[Concepts]], but [[Concepts]] does not listing [[Filters]] so they do not belong to the same family based on `list`">>
+<<.operator-example 9 "[!is[system]type[text/vnd.tiddlywiki]!kin[TableOfContents]first[10]]" "first 10 tiddlers which are not related to [[TableOfContents]] (by `tags`)">>
