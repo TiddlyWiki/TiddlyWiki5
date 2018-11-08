@@ -1,5 +1,5 @@
 created: 20181026114434874
-modified: 20181107224559880
+modified: 20181108070317997
 tags: [[Operator Examples]] [[kin Operator]]
 title: kin Operator (Examples)
 type: text/vnd.tiddlywiki
@@ -49,6 +49,8 @@ type: text/vnd.tiddlywiki
 Family tree of [[Filter Syntax]] and [[kin Operator]] (to really understand, look at the [[TableOfContents]])
 
 <<kin-toc "!is[current]">>
+
+''The "Show tree" button below the examples only helps in understanding the filter, it's not part of the output.''
 
 <<kin-example-with-toc 1 "kin[Filter Syntax]" "input titles which are family members of the parameter title">>
 <<kin-example-with-toc 2 "kin[Filter Syntax]kin[kin Operator]" "common family members of each of the specified titles (intersection)">>
