@@ -17,56 +17,55 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 			titlesPointingToBase = [];
 
 		function addToResultsIfNotFoundAlready(list,title) {
-			if(list.includes(title)) {
+			if(list.indexOf(title) !== -1) {
 				return false;
 			}
 			list.push(title);
 			return true
 		}
 
-		function collectTitlesPointingFrom(tiddler,title,currentDepth = 0) {
+		function collectTitlesPointingFrom(tiddler,title,currentDepth) {
 			if((options.depth) && (currentDepth++ > options.depth)) {
 				return;
 			}
 			if(addToResultsIfNotFoundAlready(titlesPointingFromBase,title)) {
 				if(tiddler) {
 					$tw.utils.each(tiddler.getFieldList(options.fieldName),function(targetTitle) {
-						collectTitlesPointingFrom($tw.wiki.getTiddler(targetTitle),targetTitle,currentDepth);
+						collectTitlesPointingFrom(options.wiki.getTiddler(targetTitle),targetTitle,currentDepth);
 					});
 				}
 			}
 		}
 
-		function collectTitlesPointingTo(title,currentDepth = 0) {
+		function collectTitlesPointingTo(title,currentDepth) {
 			if((options.depth) && (currentDepth++ > options.depth)) {
 				return;
 			}
 			if(addToResultsIfNotFoundAlready(titlesPointingToBase,title)) {
-				$tw.utils.each($tw.wiki.findListingsOfTiddler(title,options.fieldName),function(targetTitle) {
+				$tw.utils.each(options.wiki.findListingsOfTiddler(title,options.fieldName),function(targetTitle) {
 					collectTitlesPointingTo(targetTitle,currentDepth);
 				});
 			}
 		}
 
 		if((options.direction === "from") || (options.direction === "with")) {
-			collectTitlesPointingFrom(baseTiddler,baseTitle);
+			collectTitlesPointingFrom(baseTiddler,baseTitle,0);
 		}
 		if((options.direction === "to") || (options.direction === "with")) {
-			collectTitlesPointingTo(baseTitle);
+			collectTitlesPointingTo(baseTitle,0);
 		}
 		return $tw.utils.pushTop(titlesPointingFromBase,titlesPointingToBase);
 	}
 
 	/*
-	  Export our filter function
-
-	  TODO: May I add tests? (editions/test/tiddlers/tests)
-	  */
+	Export our filter function
+	*/
 	exports.kin = function(source,operator,options) {
 		var results = [],
 			needsExclusion = operator.prefix === "!",
 			suffixes = operator.suffixes || [],
-			suffixOptions = {
+			filterOptions = {
+				wiki: options.wiki,
 				fieldName: ((suffixes[0] || [])[0] || "tags").toLowerCase(),
 				direction: ((suffixes[1] || [])[0] || "with").toLowerCase(),
 				depth: Number((suffixes[2] || [])[0]),
@@ -78,8 +77,8 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 
 		if(operator.operand !== "") {
 			var baseTitle = operator.operand,
-				baseTiddler = $tw.wiki.getTiddler(baseTitle),
-				foundTitles = collectTitlesRecursively(baseTiddler,baseTitle,suffixOptions);
+				baseTiddler = options.wiki.getTiddler(baseTitle),
+				foundTitles = collectTitlesRecursively(baseTiddler,baseTitle,filterOptions);
 
 			source(function(tiddler,title) {
 				if(needsExclusion !== foundTitles.includes(title)) {
@@ -88,7 +87,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 			});
 		} else {
 			source(function(tiddler,title) {
-				results = $tw.utils.pushTop(results,collectTitlesRecursively(tiddler,title,suffixOptions));
+				results = $tw.utils.pushTop(results,collectTitlesRecursively(tiddler,title,filterOptions));
 			});
 		}
 
