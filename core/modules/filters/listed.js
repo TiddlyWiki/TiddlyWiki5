@@ -19,7 +19,7 @@ exports.listed = function(source,operator,options) {
 	var field = operator.operand || "list",
 		results = [];
 	source(function(tiddler,title) {
-		$tw.utils.pushTop(results,options.wiki.findListingsOfTiddler(title,field));
+		$tw.utils.pushTop(results,options.wiki.findTiddlersByField(title,field));
 	});
 	return results;
 };

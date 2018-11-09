@@ -522,7 +522,7 @@ exports.getTagMap = function() {
 /*
 Lookup a given tiddler and return a list of all the tiddlers that include it in the specified list field
 */
-exports.findListingsOfTiddler = function(targetTitle,fieldName) {
+exports.findTiddlersByField = function(targetTitle,fieldName) {
 	fieldName = fieldName || "list";
 	var titles = [];
 	this.each(function(tiddler,title) {

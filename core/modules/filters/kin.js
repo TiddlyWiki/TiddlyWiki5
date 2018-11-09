@@ -42,7 +42,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 				return;
 			}
 			if(addToResultsIfNotFoundAlready(titlesPointingToBase,title)) {
-				$tw.utils.each(options.wiki.findListingsOfTiddler(title,options.fieldName),function(targetTitle) {
+				$tw.utils.each(options.wiki.findTiddlersByField(title,options.fieldName),function(targetTitle) {
 					collectTitlesPointingTo(targetTitle,currentDepth);
 				});
 			}
