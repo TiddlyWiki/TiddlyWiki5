@@ -238,6 +238,8 @@ describe("Filter tests", function() {
 		});
 
 		expect(treeWiki.filterTiddlers("[kin[A]sort[title]]").join(",")).toBe("A,B,C,D,E,F,G");
+		expect(treeWiki.filterTiddlers("[kin::from[A]sort[title]]").join(",")).toBe("A,B,C");
+		expect(treeWiki.filterTiddlers("[kin::to[A]sort[title]]").join(",")).toBe("A,B,C,D,E,F,G");
 		expect(treeWiki.filterTiddlers("[kin[A]!kin::to[D]sort[title]]").join(",")).toBe("A,B,C");
 		expect(treeWiki.filterTiddlers("[kin::from:2[F]sort[title]]").join(",")).toBe("D,E,F");
 		expect(treeWiki.filterTiddlers("[kin:list[C]]").join(",")).toBe("A,C,E");
