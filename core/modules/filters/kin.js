@@ -81,7 +81,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 				foundTitles = collectTitlesRecursively(baseTiddler,baseTitle,filterOptions);
 
 			source(function(tiddler,title) {
-				if(needsExclusion !== foundTitles.includes(title)) {
+				if(needsExclusion === (foundTitles.indexOf(title) === -1)) {
 					results.push(title);
 				}
 			});
