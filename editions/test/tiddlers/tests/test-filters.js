@@ -203,7 +203,7 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[!untagged[]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne");
 	});
 
-	describe("testing the kin operator",function() {
+	it("should handle the kin operator",function() {
 		// It needs a tree-like wiki to test recursion.
 		var treeWiki = new $tw.Wiki();
 		treeWiki.addTiddler({
@@ -237,12 +237,10 @@ describe("Filter tests", function() {
 			tags: ["D"],
 		});
 
-		it("should handle the kin operator",function() {
-			expect(treeWiki.filterTiddlers("[kin[A]sort[title]]").join(",")).toBe("A,B,C,D,E,F,G");
-			expect(treeWiki.filterTiddlers("[kin[A]!kin::to[D]sort[title]]").join(",")).toBe("A,B,C");
-			expect(treeWiki.filterTiddlers("[kin::from:2[F]sort[title]]").join(",")).toBe("D,E,F");
-			expect(treeWiki.filterTiddlers("[kin:list[C]]").join(",")).toBe("A,C,E");
-		});
+		expect(treeWiki.filterTiddlers("[kin[A]sort[title]]").join(",")).toBe("A,B,C,D,E,F,G");
+		expect(treeWiki.filterTiddlers("[kin[A]!kin::to[D]sort[title]]").join(",")).toBe("A,B,C");
+		expect(treeWiki.filterTiddlers("[kin::from:2[F]sort[title]]").join(",")).toBe("D,E,F");
+		expect(treeWiki.filterTiddlers("[kin:list[C]]").join(",")).toBe("A,C,E");
 	});
 
 	it("should handle the links operator", function() {
