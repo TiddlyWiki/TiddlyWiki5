@@ -45,7 +45,7 @@ ClassicStoryView.prototype.insert = function(widget,options) {
 		currMarginBottom = parseInt(computedStyle.marginBottom,10),
 		currMarginTop = parseInt(computedStyle.marginTop,10),
 		currHeight = targetElement.offsetHeight + currMarginTop,
-	    	isBottom = options.index === options.listLength - 1;
+	    	isBottom = options.listLength !== 1 && options.index === options.listLength - 1;
 	var initialStyle = isBottom ? [{marginTop: (-currHeight) + "px"}] : [{marginBottom: (-currHeight) + "px"}];
 	var finalStyle = isBottom ? [{transition: "opacity " + duration + "ms " + easing + ", " +
 						"margin-top " + duration + "ms " + easing},
@@ -95,16 +95,20 @@ ClassicStoryView.prototype.remove = function(widget,options) {
 		currMarginBottom = parseInt(computedStyle.marginBottom,10),
 		currMarginTop = parseInt(computedStyle.marginTop,10),
 		currHeight = targetElement.offsetHeight + currMarginTop,
-	    	isBottom = options.index === options.listLength;
+	    	isBottom = options.index === options.listLength,
+	    	viewPortHeight = window.innerHeight || document.documentElement.clientHeight;
+	if(targetElement.ownerDocument.documentElement.scrollHeight - viewPortHeight < currHeight + currMarginTop + currMarginBottom) {
+		currHeight = -(currMarginBottom + currMarginTop);
+	}
 	var initialStyle = isBottom ? [{marginTop:  currMarginTop + "px"}]: [{marginBottom:  currMarginBottom + "px"}];
 	var finalStyle = isBottom ? [{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", " +
 						"opacity " + duration + "ms " + easing + ", " +
 						"margin-top " + duration + "ms " + easing},
-					{marginTop: (-currHeight) + "px"}] :
+					{marginTop: (-currHeight) - currMarginTop - currMarginBottom + "px"}] :
 					[{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", " +
 						"opacity " + duration + "ms " + easing + ", " +
 						"margin-bottom " + duration + "ms " + easing},
-					{marginBottom: (-currHeight) + "px"}];
+					{marginBottom: (-currHeight) - currMarginTop - currMarginBottom + "px"}];
 	// Remove the dom nodes of the widget at the end of the transition
 	setTimeout(removeElement,duration);
 	// Animate the closure
