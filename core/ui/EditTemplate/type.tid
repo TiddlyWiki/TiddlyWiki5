@@ -7,6 +7,7 @@ tags: $:/tags/EditTemplate
 </$fieldmangler></div>
 
 <div class="tc-block-dropdown-wrapper">
+<$vars tv-override-missing-links="true">
 <$reveal state=<<qualify "$:/state/popup/type-dropdown">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown tc-edit-type-dropdown">
 <$linkcatcher to="!!type">
@@ -20,4 +21,5 @@ tags: $:/tags/EditTemplate
 </$linkcatcher>
 </div>
 </$reveal>
+</$vars>
 </div>
