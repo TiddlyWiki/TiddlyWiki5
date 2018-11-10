@@ -16,13 +16,11 @@ caption: {{$:/language/TagManager/Caption}}
 <$button popup=<<qualify "$:/state/popup/icon/$title$">> class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/down-arrow}}</$button>
 <$reveal state=<<qualify "$:/state/popup/icon/$title$">> type="popup" position="belowleft" text="" default="">
 <div class="tc-drop-down">
-<$vars tv-override-missing-links="true">
 <$linkcatcher to="$title$!!icon">
 <<iconEditorTab type:"!">>
 <hr/>
 <<iconEditorTab type:"">>
 </$linkcatcher>
-</$vars>
 </div>
 </$reveal>
 </div>
