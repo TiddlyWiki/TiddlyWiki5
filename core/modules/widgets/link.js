@@ -37,9 +37,10 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 	// Get the value of the tv-wikilinks configuration macro
 	var wikiLinksMacro = this.getVariable("tv-wikilinks"),
 		useWikiLinks = wikiLinksMacro ? (wikiLinksMacro.trim() !== "no") : true,
-		missingLinksEnabled = !(this.hideMissingLinks && this.isMissing && !this.isShadow);
+		missingLinksEnabled = !(this.hideMissingLinks && this.isMissing && !this.isShadow),
+	    	overrideMissingLinksEnabled = this.getVariable("tv-override-missing-links") === "true";
 	// Render the link if required
-	if(useWikiLinks && missingLinksEnabled) {
+	if(useWikiLinks && (missingLinksEnabled || overrideMissingLinksEnabled)) {
 		this.renderLink(parent,nextSibling);
 	} else {
 		// Just insert the link text
