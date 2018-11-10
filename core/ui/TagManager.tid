@@ -13,8 +13,8 @@ caption: {{$:/language/TagManager/Caption}}
 \end
 \define iconEditor(title)
 <div class="tc-drop-down-wrapper">
-<$button popup=<<qualify "$:/state/popup/icon/$title$">> class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/down-arrow}}</$button>
-<$reveal state=<<qualify "$:/state/popup/icon/$title$">> type="popup" position="belowleft" text="" default="">
+<$button popupTitle=<<qualify "$:/state/popup/icon/$title$">> class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/down-arrow}}</$button>
+<$reveal stateTitle=<<qualify "$:/state/popup/icon/$title$">> type="popup" position="belowleft" text="" default="">
 <div class="tc-drop-down">
 <$linkcatcher to="$title$!!icon">
 <<iconEditorTab type:"!">>
@@ -29,13 +29,13 @@ caption: {{$:/language/TagManager/Caption}}
 $title$$(currentTiddler)$
 \end
 \define toggleButton(state)
-<$reveal state="$state$" type="match" text="closed" default="closed">
-<$button set="$state$" setTo="open" class="tc-btn-invisible tc-btn-dropdown" selectedClass="tc-selected">
+<$reveal stateTitle="$state$" type="match" text="closed" default="closed">
+<$button setTitle="$state$" setTo="open" class="tc-btn-invisible tc-btn-dropdown" selectedClass="tc-selected">
 {{$:/core/images/info-button}}
 </$button>
 </$reveal>
-<$reveal state="$state$" type="match" text="open" default="closed">
-<$button set="$state$" setTo="closed" class="tc-btn-invisible tc-btn-dropdown" selectedClass="tc-selected">
+<$reveal stateTitle="$state$" type="match" text="open" default="closed">
+<$button setTitle="$state$" setTo="closed" class="tc-btn-invisible tc-btn-dropdown" selectedClass="tc-selected">
 {{$:/core/images/info-button}}
 </$button>
 </$reveal>
@@ -64,7 +64,7 @@ $title$$(currentTiddler)$
 <tr>
 <td></td>
 <td colspan="4">
-<$reveal state=<<qualifyTitle "$:/state/tag-manager/">> type="match" text="open" default="">
+<$reveal stateTitle=<<qualifyTitle "$:/state/tag-manager/">> type="match" text="open" default="">
 <table>
 <tbody>
 <tr><td><<lingo Colour/Heading>></td><td><$edit-text field="color" tag="input" type="text" size="9"/></td></tr>
