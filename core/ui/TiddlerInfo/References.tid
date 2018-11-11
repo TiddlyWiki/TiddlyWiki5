@@ -3,5 +3,5 @@ tags: $:/tags/TiddlerInfo
 caption: {{$:/language/TiddlerInfo/References/Caption}}
 
 \define lingo-base() $:/language/TiddlerInfo/
-<$list filter="[all[current]backlinks[]sort[title]]" emptyMessage=<<lingo References/Empty>> template="$:/core/ui/ListItemTemplate">
+<$list filter="[<operandTitle>] [all[current]] +[each[]first[]backlinks[]sort[title]]" emptyMessage=<<lingo References/Empty>> template="$:/core/ui/ListItemTemplate">
 </$list>

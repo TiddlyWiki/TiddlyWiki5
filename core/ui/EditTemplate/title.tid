@@ -50,8 +50,9 @@ tags: $:/tags/EditTemplate
 <$checkbox tiddler="$:/config/RelinkOnRename" field="text" checked="yes" unchecked="no" default="no"> {{$:/language/EditTemplate/Title/Relink/Prompt}}</$checkbox>
 
 <$reveal type="match" state="$:/state/showeditreferencing" text="show">
-<$list filter="[<fromTitle>backlinks[]sort[title]]" emptyMessage=<<lingo TiddlerInfo/References/Empty>> template="$:/core/ui/ListItemTemplate">
-</$list>
+<$vars operandTitle=<<fromTitle>> >
+{{$:/core/ui/TiddlerInfo/References}}
+</$vars>
 </$reveal>
 
 </$vars>
