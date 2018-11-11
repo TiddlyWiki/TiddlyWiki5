@@ -1,6 +1,15 @@
 title: $:/core/ui/EditTemplate/title
 tags: $:/tags/EditTemplate
 
+\define backlinksLink()
+<$button class="tc-btn-invisible tc-tiddlylink">
+<$action-setfield $tiddler="$:/temp/advancedsearch" text="""[[$(fromTitle)$]backlinks[]sort[title]]"""/>
+<$action-setfield $tiddler="$:/temp/search" text=""/>
+<$action-navigate $to="$:/core/ui/AdvancedSearch/Filter"/>
+<<lingo TiddlerInfo/References/Caption>>
+</$button>
+\end
+
 <$edit-text field="draft.title" class="tc-titlebar tc-edit-texteditor" focus="true"/>
 
 <$vars pattern="""[\|\[\]{}]""" bad-chars="""`| [ ] { }`""">
@@ -40,5 +49,3 @@ tags: $:/tags/EditTemplate
 </$list>
 
 </$reveal>
-
-
