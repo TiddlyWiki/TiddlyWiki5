@@ -2,12 +2,17 @@ title: $:/core/ui/EditTemplate/title
 tags: $:/tags/EditTemplate
 
 \define backlinksLink()
-<$button class="tc-btn-invisible tc-tiddlylink">
-<$action-setfield $tiddler="$:/temp/advancedsearch" text="""[[$(fromTitle)$]backlinks[]sort[title]]"""/>
-<$action-setfield $tiddler="$:/temp/search" text=""/>
-<$action-navigate $to="$:/core/ui/AdvancedSearch/Filter"/>
-<<lingo TiddlerInfo/References/Caption>>
+<$reveal type="nomatch" state="$:/state/showeditreferencing" text="show">
+<$button set="$:/state/showeditreferencing" setTo="show" class="tc-btn-invisible tc-tiddlylink">
+<<lingo TiddlerInfo/References/Caption>> {{$:/core/images/down-arrow}}
 </$button>
+</$reveal>
+
+<$reveal type="match" state="$:/state/showeditreferencing" text="show">
+<$button set="$:/state/showeditreferencing" setTo="hide" class="tc-btn-invisible tc-tiddlylink">
+<<lingo TiddlerInfo/References/Caption>> {{$:/core/images/up-arrow}}
+</$button>
+</$reveal>
 \end
 
 <$edit-text field="draft.title" class="tc-titlebar tc-edit-texteditor" focus="true"/>
@@ -43,6 +48,11 @@ tags: $:/tags/EditTemplate
 <$vars fromTitle={{!!draft.of}} toTitle={{!!draft.title}}>
 
 <$checkbox tiddler="$:/config/RelinkOnRename" field="text" checked="yes" unchecked="no" default="no"> {{$:/language/EditTemplate/Title/Relink/Prompt}}</$checkbox>
+
+<$reveal type="match" state="$:/state/showeditreferencing" text="show">
+<$list filter="[<fromTitle>backlinks[]sort[title]]" emptyMessage=<<lingo TiddlerInfo/References/Empty>> template="$:/core/ui/ListItemTemplate">
+</$list>
+</$reveal>
 
 </$vars>
 
