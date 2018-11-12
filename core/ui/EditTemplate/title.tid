@@ -50,9 +50,9 @@ tags: $:/tags/EditTemplate
 <$checkbox tiddler="$:/config/RelinkOnRename" field="text" checked="yes" unchecked="no" default="no"> {{$:/language/EditTemplate/Title/Relink/Prompt}}</$checkbox>
 
 <$reveal type="match" state="$:/state/showeditreferencing" text="show">
-<$vars operandTitle=<<fromTitle>> >
-{{$:/core/ui/TiddlerInfo/References}}
-</$vars>
+<$tiddler tiddler=<<fromTitle>> >
+<$transclude tiddler="$:/core/ui/TiddlerInfo/References"/>
+</$tiddler>
 </$reveal>
 
 </$vars>
