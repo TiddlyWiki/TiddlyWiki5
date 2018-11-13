@@ -7,6 +7,9 @@ tc-tiddler-frame tc-tiddler-view-frame $(missingTiddlerClass)$ $(shadowTiddlerCl
 \define folded-state()
 $:/state/folded/$(currentTiddler)$
 \end
+\define hidden-styles()
+height: $(tiddlerHeight)$
+\end
 <$vars storyTiddler=<<currentTiddler>> tiddlerInfoState=<<qualify "$:/state/popup/tiddler-info">> userClass={{!!class}}>
 <$tiddler tiddler=<<currentTiddler>>>
 <div data-tiddler-title=<<currentTiddler>> data-tags={{!!tags}} class=<<frame-classes>>>
@@ -20,8 +23,10 @@ $:/state/folded/$(currentTiddler)$
 </div>
 </$reveal>
 <$reveal state=<<state>> type="nomatch" text="true" tag="div">
-<div class="tc-dynaview-set-tiddler-when-visible tc-dynaview-expand-viewport" style="min-height: 5em;" data-dynaview-set-tiddler=<<state>> data-dynaview-set-value="true" data-dynaview-unset-tiddler=<<state>> data-dynaview-unset-value="false" data-dynaview-has-triggered={{{ [<state>get[text]] }}}>
+<$vars tiddlerHeight={{{ [<state>get[height]] }}}>
+<div class="tc-dynaview-set-tiddler-when-visible tc-dynaview-expand-viewport" style=<<hidden-styles>> data-dynaview-set-tiddler=<<state>> data-dynaview-set-value="true" data-dynaview-unset-tiddler=<<state>> data-dynaview-unset-value="false" data-dynaview-has-triggered={{{ [<state>get[text]] }}}>
 </div>
+</$vars>
 </$reveal>
 </$set>
 
