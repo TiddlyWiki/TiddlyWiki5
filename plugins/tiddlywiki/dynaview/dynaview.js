@@ -118,7 +118,7 @@ function checkVisibility() {
 				tiddler = element.getAttribute("data-dynaview-unset-tiddler");
 				value = element.getAttribute("data-dynaview-unset-value") || "";
 				if(tiddler && $tw.wiki.getTiddlerText(tiddler) !== value) {
-					$tw.wiki.addTiddler(new $tw.Tiddler({title: tiddler, text: value}));
+					$tw.wiki.addTiddler(new $tw.Tiddler({title: tiddler, text: value, height: elementRect.height + "px"}));
 				}
 				element.setAttribute("data-dynaview-has-triggered","false");				
 			}
