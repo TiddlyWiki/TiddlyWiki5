@@ -68,6 +68,10 @@ TagManager/Count/Heading: Count
 TagManager/Icon/Heading: Icon
 TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
+TagManager/Caption: User-Tags
+TagManager/Hint: [[Tags|https://tiddlywiki.com#TiddlerFields]] currently used in this wiki
+TagManager/SystemTags/Caption: System-Tags
+TagManager/SystemTags/Hint: [[SystemTags|https://tiddlywiki.com#SystemTags]] currently used in this wiki:
 Tiddler/DateFormat: DDth MMM YYYY at hh12:0mmam
 UnsavedChangesWarning: You have unsaved changes in TiddlyWiki
 Yes: Yes

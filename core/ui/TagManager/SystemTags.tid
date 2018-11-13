@@ -1,0 +1,11 @@
+title: $:/core/ui/TagManager/SystemTags
+tags: $:/tags/TagManager
+caption: {{$:/language/TagManager/SystemTags/Caption}}
+
+\define lingo-base() $:/language/TagManager/SystemTags/
+
+<<lingo Hint>>
+
+<$list filter="[all[shadows+tiddlers]tags[]prefix[$:/]sort[title]]">
+{{||$:/core/ui/TagTemplate}}<br>
+</$list>
