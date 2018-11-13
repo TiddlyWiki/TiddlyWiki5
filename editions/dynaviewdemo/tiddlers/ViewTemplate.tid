@@ -15,6 +15,7 @@ height: $(tiddlerHeight)$
 <div data-tiddler-title=<<currentTiddler>> data-tags={{!!tags}} class=<<frame-classes>>>
 
 <$set name="state" value={{{ [[$:/state/viewtemplate/visibility/]addsuffix<currentTiddler>] }}}>
+<$vars tiddlerHeight={{{ [<state>get[height]] }}}>
 <$reveal state=<<state>> type="match" text="true" tag="div">
 <div class="tc-dynaview-set-tiddler-when-visible tc-dynaview-expand-viewport" data-dynaview-set-tiddler=<<state>> data-dynaview-set-value="true" data-dynaview-unset-tiddler=<<state>> data-dynaview-unset-value="false" data-dynaview-has-triggered={{{ [<state>get[text]] }}}>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewTemplate]!has[draft.of]]" variable="listItem">
@@ -23,11 +24,10 @@ height: $(tiddlerHeight)$
 </div>
 </$reveal>
 <$reveal state=<<state>> type="nomatch" text="true" tag="div">
-<$vars tiddlerHeight={{{ [<state>get[height]] }}}>
 <div class="tc-dynaview-set-tiddler-when-visible tc-dynaview-expand-viewport" style=<<hidden-styles>> data-dynaview-set-tiddler=<<state>> data-dynaview-set-value="true" data-dynaview-unset-tiddler=<<state>> data-dynaview-unset-value="false" data-dynaview-has-triggered={{{ [<state>get[text]] }}}>
 </div>
-</$vars>
 </$reveal>
+</$vars>
 </$set>
 
 </div>
