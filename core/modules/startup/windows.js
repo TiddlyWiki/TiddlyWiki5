@@ -83,6 +83,10 @@ exports.startup = function() {
 			name: "keydown",
 			handlerObject: $tw.keyboardManager,
 			handlerMethod: "handleKeydownEvent"
+		},{
+			name: "click",
+			handlerObject: $tw.popup,
+			handlerMethod: "handleEvent"
 		}]);
 		srcWindow.haveInitialisedWindow = true;
 	});
