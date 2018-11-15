@@ -53,10 +53,10 @@ PageScroller.prototype.handleEvent = function(event) {
 /*
 Handle a scroll event hitting the page document
 */
-PageScroller.prototype.scrollIntoView = function(element) {
+PageScroller.prototype.scrollIntoView = function(element,callback) {
 	var self = this,
 		duration = $tw.utils.getAnimationDuration(),
-	    srcWindow = element.ownerDocument.defaultView;
+	    srcWindow = element ? element.ownerDocument.defaultView : window;
 	// Now get ready to scroll the body
 	this.cancelScroll(srcWindow);
 	this.startTime = Date.now();
@@ -68,8 +68,8 @@ PageScroller.prototype.scrollIntoView = function(element) {
 	}
 	// Get the client bounds of the element and adjust by the scroll position
 	var getBounds = function() {
-			var clientBounds = element.getBoundingClientRect(),
-				scrollPosition = $tw.utils.getScrollPosition(srcWindow);
+			var clientBounds = typeof callback === 'function' ? callback() : element.getBoundingClientRect(),
+				scrollPosition = $tw.utils.getScrollPosition();
 			return {
 				left: clientBounds.left + scrollPosition.x,
 				top: clientBounds.top + scrollPosition.y - offset,
