@@ -150,6 +150,18 @@ exports.isArrayEqual = function(array1,array2) {
 };
 
 /*
+Determine whether an array-item is an object-property
+*/
+exports.hopArray = function(object,array) {
+	for(var i=0; i<array.length; i++) {
+		if($tw.utils.hop(object,array[i])) {
+			return true;
+		}
+	}
+	return false;
+};
+
+/*
 Push entries onto an array, removing them first if they already exist in the array
 	array: array to modify (assumed to be free of duplicates)
 	value: a single value to push or an array of values to push

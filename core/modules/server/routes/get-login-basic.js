@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/server/routes/get-login-basic.js
+title: $:/core/modules/server/routes/get-login/basic.js
 type: application/javascript
 module-type: route
 
-GET /login-basic -- force a Basic Authentication challenge
+GET /login/basic -- force a Basic Authentication challenge
 
 \*/
 (function() {
@@ -14,7 +14,7 @@ GET /login-basic -- force a Basic Authentication challenge
 
 exports.method = "GET";
 
-exports.path = /^\/login-basic$/;
+exports.path = /^\/login\/basic$/;
 
 exports.handler = function(request,response,state) {
 	if(!state.authenticatedUsername) {

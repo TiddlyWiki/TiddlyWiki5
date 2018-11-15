@@ -33,9 +33,9 @@ var PageScroller = function() {
 		};
 };
 
-PageScroller.prototype.cancelScroll = function() {
+PageScroller.prototype.cancelScroll = function(srcWindow) {
 	if(this.idRequestFrame) {
-		this.cancelAnimationFrame.call(window,this.idRequestFrame);
+		this.cancelAnimationFrame.call(srcWindow,this.idRequestFrame);
 		this.idRequestFrame = null;
 	}
 };
@@ -55,12 +55,13 @@ Handle a scroll event hitting the page document
 */
 PageScroller.prototype.scrollIntoView = function(element,callback) {
 	var self = this,
-		duration = $tw.utils.getAnimationDuration();
+		duration = $tw.utils.getAnimationDuration(),
+	    srcWindow = element ? element.ownerDocument.defaultView : window;
 	// Now get ready to scroll the body
-	this.cancelScroll();
+	this.cancelScroll(srcWindow);
 	this.startTime = Date.now();
 	// Get the height of any position:fixed toolbars
-	var toolbar = document.querySelector(".tc-adjust-top-of-scroll"),
+	var toolbar = srcWindow.document.querySelector(".tc-adjust-top-of-scroll"),
 		offset = 0;
 	if(toolbar) {
 		offset = toolbar.offsetHeight;
@@ -71,7 +72,7 @@ PageScroller.prototype.scrollIntoView = function(element,callback) {
 				scrollPosition = $tw.utils.getScrollPosition();
 			return {
 				left: clientBounds.left + scrollPosition.x,
-				top: clientBounds.top + scrollPosition.y,
+				top: clientBounds.top + scrollPosition.y - offset,
 				width: clientBounds.width,
 				height: clientBounds.height
 			};
@@ -96,17 +97,17 @@ PageScroller.prototype.scrollIntoView = function(element,callback) {
 				t = ((Date.now()) - self.startTime) / duration;	
 			}
 			if(t >= 1) {
-				self.cancelScroll();
+				self.cancelScroll(srcWindow);
 				t = 1;
 			}
 			t = $tw.utils.slowInSlowOut(t);
-			var scrollPosition = $tw.utils.getScrollPosition(),
+			var scrollPosition = $tw.utils.getScrollPosition(srcWindow),
 				bounds = getBounds(),
-				endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,window.innerWidth),
-				endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,window.innerHeight);
-			window.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y - offset) * t);
+				endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,srcWindow.innerWidth),
+				endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,srcWindow.innerHeight);
+			srcWindow.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y) * t);
 			if(t < 1) {
-				self.idRequestFrame = self.requestAnimationFrame.call(window,drawFrame);
+				self.idRequestFrame = self.requestAnimationFrame.call(srcWindow,drawFrame);
 			}
 		};
 	drawFrame();

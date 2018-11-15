@@ -1,7 +1,7 @@
 caption: reveal
 created: 20131024141900000
 jeremy: tiddlywiki
-modified: 20161216153618769
+modified: 20181007231748909
 tags: Widgets
 title: RevealWidget
 type: text/vnd.tiddlywiki
@@ -27,7 +27,7 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 |state |A TextReference containing the state |
 |tag |Overrides the default HTML element tag (`<div>` in block mode or `<span>` in inline mode) |
 |type |The type of matching performed: ''match'', ''nomatch'', ''popup'', ''lt'', ''gt'', ''lteq'' or ''gteq'' |
-|text |The text to match when the type is ''match'' and ''nomatch'' |
+|text |The text to match when the type is ''match'', ''nomatch'', ''lt'', ''gt'', ''lteq'' or ''gteq'' |
 |class |An optional CSS class name to be assigned to the HTML element<br/>&raquo; Set to `tc-popup-keep` to make a popup "sticky", so it won't close when you click inside of it|
 |style |An optional CSS style attribute to be assigned to the HTML element |
 |position |The position used for the popup when the type is ''popup''. Can be ''left'', ''above'', ''aboveright'', ''right'', ''belowleft'' or ''below'' |

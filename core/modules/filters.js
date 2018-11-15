@@ -40,12 +40,23 @@ function parseFilterOperation(operators,filterString,p) {
 		nextBracketPos += p;
 		var bracket = filterString.charAt(nextBracketPos);
 		operator.operator = filterString.substring(p,nextBracketPos);
-
 		// Any suffix?
 		var colon = operator.operator.indexOf(':');
 		if(colon > -1) {
+			// The raw suffix for older filters
 			operator.suffix = operator.operator.substring(colon + 1);
 			operator.operator = operator.operator.substring(0,colon) || "field";
+			// The processed suffix for newer filters
+			operator.suffixes = [];
+			$tw.utils.each(operator.suffix.split(":"),function(subsuffix) {
+				operator.suffixes.push([]);
+				$tw.utils.each(subsuffix.split(","),function(entry) {
+					entry = $tw.utils.trim(entry);
+					if(entry) {
+						operator.suffixes[operator.suffixes.length - 1].push(entry); 
+					}
+				});
+			});
 		}
 		// Empty operator means: title
 		else if(operator.operator === "") {
@@ -208,6 +219,7 @@ exports.compileFilter = function(filterString) {
 							operand: operand,
 							prefix: operator.prefix,
 							suffix: operator.suffix,
+							suffixes: operator.suffixes,
 							regexp: operator.regexp
 						},{
 							wiki: self,
