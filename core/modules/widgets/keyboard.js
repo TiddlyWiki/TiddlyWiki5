@@ -71,6 +71,7 @@ KeyboardWidget.prototype.dispatchMessage = function(event) {
 Compute the internal state of the widget
 */
 KeyboardWidget.prototype.execute = function() {
+	var self = this;
 	// Get attributes
 	this.actions = this.getAttribute("actions");
 	this.message = this.getAttribute("message");
