@@ -26,11 +26,11 @@ Display a modal dialogue
 Options include:
 	downloadLink: Text of a big download link to include
 */
-Modal.prototype.display = function(event,options) {
+Modal.prototype.display = function(title,options) {
 	options = options || {};
-	var title = event.param;
-	this.srcDocument = options.variables && (options.variables.rootwindow === "true" || options.variables.rootwindow === "yes") ? document :
-				event.event.target.ownerDocument || document;
+	this.srcDocument = options.variables && (options.variables.rootwindow === "true" ||
+				options.variables.rootwindow === "yes") ? document :
+				(options.event.event ? options.event.event.target.ownerDocument : document);
 	this.srcWindow = this.srcDocument.defaultView;
 	var self = this,
 		refreshHandler,
