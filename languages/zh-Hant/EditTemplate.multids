@@ -22,6 +22,7 @@ Tags/Dropdown/Hint: 顯示標籤清單
 Title/BadCharacterWarning: 請注意，避免在條目名稱中使用這些字元：<<bad-chars>>
 Title/Exists/Prompt: 目標條目已經存在
 Title/Relink/Prompt: 將在其他條目的 //tags// 和 //list// 欄位中的 ''<$text text=<<fromTitle>>/>'' 改為 ''<$text text=<<toTitle>>/>''
+Title/References/Prompt: 下列對此條目的引用，不會自動更新：
 Type/Dropdown/Caption: 內容類型清單
 Type/Dropdown/Hint: 顯示內容類型清單
 Type/Delete/Caption: 刪除內容類型
