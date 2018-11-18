@@ -122,6 +122,9 @@ RevealWidget.prototype.readState = function() {
 		(this.stateIndex ? this.wiki.extractTiddlerDataItem(this.stateTitle,this.stateIndex) :
 			this.wiki.getTiddlerText(this.stateTitle))) || this["default"] || this.getVariable("currentTiddler") :
 		(this.stateTiddlerTitle ? this.wiki.getTextReference(this.state,this["default"],this.getVariable("currentTiddler")) : this["default"]);
+	if(state === null) {
+		state = this["default"];
+	}
 	switch(this.type) {
 		case "popup":
 			this.readPopupState(state);
