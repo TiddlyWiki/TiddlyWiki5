@@ -58,23 +58,23 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 	domNode.style.zIndex = "1000";
 	switch(this.position) {
 		case "left":
-			domNode.style.left = (this.popup.left - domNode.offsetWidth) + "px";
+			domNode.style.left = Math.max(0, this.popup.left - domNode.offsetWidth) + "px";
 			domNode.style.top = this.popup.top + "px";
 			break;
 		case "above":
 			domNode.style.left = this.popup.left + "px";
-			domNode.style.top = (this.popup.top - domNode.offsetHeight) + "px";
+			domNode.style.top = Math.max(0, this.popup.top - domNode.offsetHeight) + "px";
 			break;
 		case "aboveright":
 			domNode.style.left = (this.popup.left + this.popup.width) + "px";
-			domNode.style.top = (this.popup.top + this.popup.height - domNode.offsetHeight) + "px";
+			domNode.style.top = Math.max(0, this.popup.top + this.popup.height - domNode.offsetHeight) + "px";
 			break;
 		case "right":
 			domNode.style.left = (this.popup.left + this.popup.width) + "px";
 			domNode.style.top = this.popup.top + "px";
 			break;
 		case "belowleft":
-			domNode.style.left = (this.popup.left + this.popup.width - domNode.offsetWidth) + "px";
+			domNode.style.left = Math.max(0, this.popup.left + this.popup.width - domNode.offsetWidth) + "px";
 			domNode.style.top = (this.popup.top + this.popup.height) + "px";
 			break;
 		default: // Below
@@ -102,7 +102,10 @@ RevealWidget.prototype.execute = function() {
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
 	// Compute the title of the state tiddler and read it
-	this.stateTitle = this.state;
+	this.stateTiddlerTitle = this.state;
+	this.stateTitle = this.getAttribute("stateTitle");
+	this.stateField = this.getAttribute("stateField");
+	this.stateIndex = this.getAttribute("stateIndex");
 	this.readState();
 	// Construct the child widgets
 	var childNodes = this.isOpen ? this.parseTreeNode.children : [];
@@ -115,7 +118,10 @@ Read the state tiddler
 */
 RevealWidget.prototype.readState = function() {
 	// Read the information from the state tiddler
-	var state = this.stateTitle ? this.wiki.getTextReference(this.stateTitle,this["default"],this.getVariable("currentTiddler")) : this["default"];
+	var state = this.stateTitle ? (this.stateField ? this.wiki.getTiddler(this.stateTitle).getFieldString(this.stateField) :
+		(this.stateIndex ? this.wiki.extractTiddlerDataItem(this.stateTitle,this.stateIndex) :
+			this.wiki.getTiddlerText(this.stateTitle))) || this["default"] || this.getVariable("currentTiddler") :
+		(this.stateTiddlerTitle ? this.wiki.getTextReference(this.state,this["default"],this.getVariable("currentTiddler")) : this["default"]);
 	switch(this.type) {
 		case "popup":
 			this.readPopupState(state);
@@ -170,13 +176,13 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RevealWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes["default"] || changedAttributes.animate) {
+	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex) {
 		this.refreshSelf();
 		return true;
 	} else {
 		var currentlyOpen = this.isOpen;
 		this.readState();
-		if(this.isOpen !== currentlyOpen || (this.stateTitle && changedTiddlers[this.stateTitle])) {
+		if(this.isOpen !== currentlyOpen || (this.stateTiddlerTitle && changedTiddlers[this.stateTiddlerTitle])) {
 			if(this.retain === "yes") {
 				this.updateState();
 			} else {
@@ -218,7 +224,7 @@ RevealWidget.prototype.updateState = function() {
 			if(!self.isOpen) {
 				domNode.setAttribute("hidden","true");
 			}
-        	}});
+		}});
 	}
 };
 

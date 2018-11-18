@@ -3,7 +3,7 @@ created: 20160216191710789
 delivery: Protocol
 description: Standard web protocol available on products such as Sharepoint
 method: save
-modified: 20171113160440615
+modified: 20171117171334181
 tags: Saving Android Chrome Firefox InternetExplorer iOS Linux Mac Opera PHP Safari Windows
 title: Saving via WebDAV
 type: text/vnd.tiddlywiki
@@ -28,4 +28,4 @@ Many [[NAS|https://en.wikipedia.org/wiki/NAS]] or [[Subversion|https://en.wikipe
 
 !! Free Hosting
 
-None of the ~WebDAV hosting services tested (~~box.com~~, ~~swissdisk.com~~) support accessing HTML files via a webbrowser, so they won't work with ~TiddlyWiki. Maybe someday soon there will be a free ~WebDAV hosting service for ~TiddlyWikis.
+Several ~WebDAV hosting services tested (~~box.com~~, ~~swissdisk.com~~) don't support accessing HTML files via a webbrowser, so they won't work with ~TiddlyWiki. However, The GMX mediacenter (www.gmx.net) has been reported as working with WebDAV with a free account.

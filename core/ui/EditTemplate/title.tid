@@ -35,10 +35,27 @@ tags: $:/tags/EditTemplate
 
 <$checkbox tiddler="$:/config/RelinkOnRename" field="text" checked="yes" unchecked="no" default="no"> {{$:/language/EditTemplate/Title/Relink/Prompt}}</$checkbox>
 
+<$vars stateTiddler=<<qualify "$:/state/edit/references">> >
+
+<$reveal type="nomatch" state=<<stateTiddler>> text="show">
+<$button set=<<stateTiddler>> setTo="show" class="tc-btn-invisible">{{$:/core/images/right-arrow}} 
+<<lingo EditTemplate/Title/References/Prompt>></$button>
+</$reveal>
+<$reveal type="match" state=<<stateTiddler>> text="show">
+<$button set=<<stateTiddler>> setTo="hide" class="tc-btn-invisible">{{$:/core/images/down-arrow}} 
+<<lingo EditTemplate/Title/References/Prompt>></$button>
+</$reveal>
+
+<$reveal type="match" state=<<stateTiddler>> text="show">
+<$tiddler tiddler=<<fromTitle>> >
+<$transclude tiddler="$:/core/ui/TiddlerInfo/References"/>
+</$tiddler>
+</$reveal>
+
+</$vars>
+
 </$vars>
 
 </$list>
 
 </$reveal>
-
-
