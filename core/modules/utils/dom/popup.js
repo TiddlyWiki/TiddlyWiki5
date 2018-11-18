@@ -134,9 +134,13 @@ Popup.prototype.show = function(options) {
 			height: options.domNode.offsetHeight
 		};
 	}
-	options.wiki.setTextReference(options.title,
-			"(" + rect.left + "," + rect.top + "," + 
-				rect.width + "," + rect.height + ")");
+	var popupRect = "(" + rect.left + "," + rect.top + "," + 
+				rect.width + "," + rect.height + ")";
+	if(options.noStateReference) {
+		options.wiki.setText(options.title,"text",undefined,popupRect);
+	} else {
+		options.wiki.setTextReference(options.title,popupRect);
+	}
 	// Add the click handler if we have any popups
 	if(this.popups.length > 0) {
 		this.rootElement.addEventListener("click",this,true);		
