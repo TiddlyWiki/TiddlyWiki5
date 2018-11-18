@@ -36,19 +36,19 @@ tags: $:/tags/Macro
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item" value="toc-item-selected">
     <li class=<<toc-item-class>>>
     <$link>
-      <$reveal type="nomatch" state=<<toc-state>> text="open">
-        <$button set=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
+      <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
+        <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
           {{$:/core/images/right-arrow}}
         </$button>
       </$reveal>
-      <$reveal type="match" state=<<toc-state>> text="open">
-        <$button set=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
+      <$reveal type="match" stateTitle=<<toc-state>> text="open">
+        <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
           {{$:/core/images/down-arrow}}
         </$button>
       </$reveal>
       <<toc-caption>>
     </$link>
-    <$reveal type="match" state=<<toc-state>> text="open">
+    <$reveal type="match" stateTitle=<<toc-state>> text="open">
       <$macrocall $name="toc-expandable" tag=<<currentTiddler>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<__exclude__>> path=<<__path__>>/>
     </$reveal>
     </li>
@@ -61,19 +61,19 @@ tags: $:/tags/Macro
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item" value="toc-item-selected">
     <li class=<<toc-item-class>>>
-      <$reveal type="nomatch" state=<<toc-state>> text="open">
-        <$button set=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
+      <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
+        <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
           {{$:/core/images/right-arrow}}
           <<toc-caption>>
         </$button>
       </$reveal>
-      <$reveal type="match" state=<<toc-state>> text="open">
-        <$button set=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
+      <$reveal type="match" stateTitle=<<toc-state>> text="open">
+        <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
           {{$:/core/images/down-arrow}}
           <<toc-caption>>
         </$button>
       </$reveal>
-      <$reveal type="match" state=<<toc-state>> text="open">
+      <$reveal type="match" stateTitle=<<toc-state>> text="open">
         <$macrocall $name="toc-expandable" tag=<<currentTiddler>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<__exclude__>> path=<<__path__>>/>
       </$reveal>
     </li>
@@ -103,20 +103,20 @@ tags: $:/tags/Macro
     <li class=<<toc-item-class>>>
       <$link>
           <$list filter="[all[current]tagging[]limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button>">
-          <$reveal type="nomatch" state=<<toc-state>> text="open">
-            <$button set=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
+          <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
+            <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
               {{$:/core/images/right-arrow}}
             </$button>
           </$reveal>
-          <$reveal type="match" state=<<toc-state>> text="open">
-            <$button set=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
+          <$reveal type="match" stateTitle=<<toc-state>> text="open">
+            <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
               {{$:/core/images/down-arrow}}
             </$button>
           </$reveal>
         </$list>
         <<toc-caption>>
       </$link>
-      <$reveal type="match" state=<<toc-state>> text="open">
+      <$reveal type="match" stateTitle=<<toc-state>> text="open">
         <$macrocall $name="toc-selective-expandable" tag=<<currentTiddler>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<__exclude__>> path=<<__path__>>/>
       </$reveal>
     </li>
@@ -129,20 +129,20 @@ tags: $:/tags/Macro
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item" value="toc-item-selected">
     <li class=<<toc-item-class>>>
       <$list filter="[all[current]tagging[]limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button> <$view field='caption'><$view field='title'/></$view>">
-        <$reveal type="nomatch" state=<<toc-state>> text="open">
-          <$button set=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
+        <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
+          <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
             {{$:/core/images/right-arrow}}
             <<toc-caption>>
           </$button>
         </$reveal>
-        <$reveal type="match" state=<<toc-state>> text="open">
-          <$button set=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
+        <$reveal type="match" stateTitle=<<toc-state>> text="open">
+          <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
             {{$:/core/images/down-arrow}}
             <<toc-caption>>
           </$button>
         </$reveal>
       </$list>
-      <$reveal type="match" state=<<toc-state>> text="open">
+      <$reveal type="match" stateTitle=<<toc-state>> text="open">
         <$macrocall $name="toc-selective-expandable" tag=<<currentTiddler>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<__exclude__>> path=<<__path__>>/>
       </$reveal>
     </li>
@@ -175,13 +175,13 @@ tags: $:/tags/Macro
       </div>
     </$linkcatcher>
     <div class="tc-tabbed-table-of-contents-content">
-      <$reveal state=<<__selectedTiddler__>> type="nomatch" text="">
+      <$reveal stateTitle=<<__selectedTiddler__>> type="nomatch" text="">
         <$transclude mode="block" tiddler=<<__template__>>>
           <h1><<toc-caption>></h1>
           <$transclude mode="block">$missingText$</$transclude>
         </$transclude>
       </$reveal>
-      <$reveal state=<<__selectedTiddler__>> type="match" text="">
+      <$reveal stateTitle=<<__selectedTiddler__>> type="match" text="">
         $unselectedText$
       </$reveal>
     </div>
