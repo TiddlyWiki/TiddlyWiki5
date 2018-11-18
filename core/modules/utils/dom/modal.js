@@ -28,6 +28,10 @@ Options include:
 */
 Modal.prototype.display = function(title,options) {
 	options = options || {};
+	this.srcDocument = options.variables && (options.variables.rootwindow === "true" ||
+				options.variables.rootwindow === "yes") ? document :
+				(options.event.event ? options.event.event.target.ownerDocument : document);
+	this.srcWindow = this.srcDocument.defaultView;
 	var self = this,
 		refreshHandler,
 		duration = $tw.utils.getAnimationDuration(),
@@ -39,16 +43,16 @@ Modal.prototype.display = function(title,options) {
 	// Create the variables
 	var variables = $tw.utils.extend({currentTiddler: title},options.variables);
 	// Create the wrapper divs
-	var wrapper = document.createElement("div"),
-		modalBackdrop = document.createElement("div"),
-		modalWrapper = document.createElement("div"),
-		modalHeader = document.createElement("div"),
-		headerTitle = document.createElement("h3"),
-		modalBody = document.createElement("div"),
-		modalLink = document.createElement("a"),
-		modalFooter = document.createElement("div"),
-		modalFooterHelp = document.createElement("span"),
-		modalFooterButtons = document.createElement("span");
+	var wrapper = this.srcDocument.createElement("div"),
+		modalBackdrop = this.srcDocument.createElement("div"),
+		modalWrapper = this.srcDocument.createElement("div"),
+		modalHeader = this.srcDocument.createElement("div"),
+		headerTitle = this.srcDocument.createElement("h3"),
+		modalBody = this.srcDocument.createElement("div"),
+		modalLink = this.srcDocument.createElement("a"),
+		modalFooter = this.srcDocument.createElement("div"),
+		modalFooterHelp = this.srcDocument.createElement("span"),
+		modalFooterButtons = this.srcDocument.createElement("span");
 	// Up the modal count and adjust the body class
 	this.modalCount++;
 	this.adjustPageClass();
@@ -80,7 +84,7 @@ Modal.prototype.display = function(title,options) {
 					value: title
 		}}}],
 		parentWidget: $tw.rootWidget,
-		document: document,
+		document: this.srcDocument,
 		variables: variables,
 		importPageMacros: true
 	});
@@ -88,7 +92,7 @@ Modal.prototype.display = function(title,options) {
 	// Render the body of the message
 	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		parentWidget: $tw.rootWidget,
-		document: document,
+		document: this.srcDocument,
 		variables: variables,
 		importPageMacros: true
 	});
@@ -96,16 +100,16 @@ Modal.prototype.display = function(title,options) {
 	// Setup the link if present
 	if(options.downloadLink) {
 		modalLink.href = options.downloadLink;
-		modalLink.appendChild(document.createTextNode("Right-click to save changes"));
+		modalLink.appendChild(this.srcDocument.createTextNode("Right-click to save changes"));
 		modalBody.appendChild(modalLink);
 	}
 	// Render the footer of the message
 	if(tiddler && tiddler.fields && tiddler.fields.help) {
-		var link = document.createElement("a");
+		var link = this.srcDocument.createElement("a");
 		link.setAttribute("href",tiddler.fields.help);
 		link.setAttribute("target","_blank");
 		link.setAttribute("rel","noopener noreferrer");
-		link.appendChild(document.createTextNode("Help"));
+		link.appendChild(this.srcDocument.createTextNode("Help"));
 		modalFooterHelp.appendChild(link);
 		modalFooterHelp.style.float = "left";
 	}
@@ -129,7 +133,7 @@ Modal.prototype.display = function(title,options) {
 			}}}
 		]}],
 		parentWidget: $tw.rootWidget,
-		document: document,
+		document: this.srcDocument,
 		variables: variables,
 		importPageMacros: true
 	});
@@ -155,13 +159,13 @@ Modal.prototype.display = function(title,options) {
 			{opacity: "0"}
 		]);
 		$tw.utils.setStyle(modalWrapper,[
-			{transform: "translateY(" + window.innerHeight + "px)"}
+			{transform: "translateY(" + self.srcWindow.innerHeight + "px)"}
 		]);
 		// Set up an event for the transition end
-		window.setTimeout(function() {
+		self.srcWindow.setTimeout(function() {
 			if(wrapper.parentNode) {
 				// Remove the modal message from the DOM
-				document.body.removeChild(wrapper);
+				self.srcDocument.body.removeChild(wrapper);
 			}
 		},duration);
 		// Don't let anyone else handle the tm-close-tiddler message
@@ -176,10 +180,10 @@ Modal.prototype.display = function(title,options) {
 	]);
 	$tw.utils.setStyle(modalWrapper,[
 		{transformOrigin: "0% 0%"},
-		{transform: "translateY(" + (-window.innerHeight) + "px)"}
+		{transform: "translateY(" + (-this.srcWindow.innerHeight) + "px)"}
 	]);
 	// Put the message into the document
-	document.body.appendChild(wrapper);
+	this.srcDocument.body.appendChild(wrapper);
 	// Set up animation for the styles
 	$tw.utils.setStyle(modalBackdrop,[
 		{transition: "opacity " + duration + "ms ease-out"}
@@ -200,8 +204,9 @@ Modal.prototype.display = function(title,options) {
 };
 
 Modal.prototype.adjustPageClass = function() {
-	if($tw.pageContainer) {
-		$tw.utils.toggleClass($tw.pageContainer,"tc-modal-displayed",this.modalCount > 0);
+	var windowContainer = $tw.pageContainer ? ($tw.pageContainer === this.srcDocument.body.firstChild ? $tw.pageContainer : this.srcDocument.body.firstChild) : null;
+	if(windowContainer) {
+		$tw.utils.toggleClass(windowContainer,"tc-modal-displayed",this.modalCount > 0);
 	}
 };
 
