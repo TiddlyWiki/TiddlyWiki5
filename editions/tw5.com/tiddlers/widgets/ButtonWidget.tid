@@ -29,10 +29,14 @@ The content of the `<$button>` widget is displayed within the button.
 |message |The name of the [[widget message|Messages]] to send when the button is clicked |
 |param |The optional parameter to the message |
 |set |A TextReference to which a new value will be assigned |
-|setTo |The new value to assign to the TextReference identified in the `set` attribute |
+|setTitle |A title to which a new value will be assigned, ''without'' TextReference. Gets preferred over <<.attr state>> |
+|setField |A ''field name'' to which the new value will be assigned, if the attribute <<.attr stateTitle>> is present. Defaults to the ''text'' field |
+|setIndex |An ''index'' to which the new value will be assigned, if the attribute <<.attr stateTitle>> is present |
+|setTo |The new value to assign to the TextReference identified in the `set` attribute or the text field / the field specified through `setField` / the index specified through `setIndex` of the title given through `setTitle` |
 |selectedClass |An optional additional CSS class to be assigned if the popup is triggered or the tiddler specified in `set` already has the value specified in `setTo`  |
 |default |Default value if `set` tiddler is missing for testing against `setTo` to determine `selectedClass` |
 |popup |Title of a state tiddler for a popup that is toggled when the button is clicked. See PopupMechanism for details |
+|popupTitle |Title of a state tiddler for a popup that is toggled when the button is clicked. In difference to the <<.attr popup>> attribute, ''no'' TextReference is used. See PopupMechanism for details |
 |aria-label |Optional [[Accessibility]] label |
 |tooltip |Optional tooltip |
 |class |An optional CSS class name to be assigned to the HTML element|
@@ -42,6 +46,9 @@ The content of the `<$button>` widget is displayed within the button.
 |dragFilter |An optional filter making the button draggable and identifying the list of payload tiddlers. See DraggableWidget for details |
 
 ''Note:'' In almost all other cases where a TextReference is used as a widget attribute, it will be placed between curly brackets, to [[transclude|Transclusion in WikiText]] the value currently stored there. However, when we use a TextReference as the value of a button widget's `set` attribute, we are referencing //the storage location itself//, rather than the value stored there, so we do ''not'' use curly brackets there. //Example:// we could code a button widget that sets the `caption` field of TiddlerA to be the same as that of TiddlerB as:
+
+<<.tip """<$macrocall $name=".from-version" version="5.1.18"/> <$macrocall $name=".attr" _="stateTitle"/>, <$macrocall $name=".attr" _="stateField"/> and <$macrocall $name=".attr" _="stateIndex"/> attributes allow specifying Tiddler states ''directly'', without interpreting them as [[TextReferences|TextReference]].
+This is useful for edge-cases where titles may contain characters that are used to denote Tiddler fields or indices (`!!`, `##`)""">>
 
 ```
 <$button set="TiddlerA!!caption" setTo={{TiddlerB!!caption}} >
