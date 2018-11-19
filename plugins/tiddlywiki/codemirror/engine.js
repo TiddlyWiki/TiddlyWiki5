@@ -109,7 +109,9 @@ function CodeMirrorEngine(options) {
 	// Create the CodeMirror instance
 	this.cm = window.CodeMirror(function(cmDomNode) {
 		// Note that this is a synchronous callback that is called before the constructor returns
-		self.domNode.appendChild(cmDomNode);
+		if(!self.widget.document.isTiddlyWikiFakeDom) {
+			self.domNode.appendChild(cmDomNode);
+		}
 	},config);
 
 	// Set up a change event handler
