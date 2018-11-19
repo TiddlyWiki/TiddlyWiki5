@@ -74,7 +74,7 @@ caption: {{$:/language/TagManager/Caption}}
 </$list>
 <tr>
 <td></td>
-<td>
+<td style="position:relative;">
 {{$:/core/ui/UntaggedTemplate}}
 </td>
 <td>
