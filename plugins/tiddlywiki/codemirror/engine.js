@@ -109,6 +109,7 @@ function CodeMirrorEngine(options) {
 	// Create the CodeMirror instance
 	this.cm = window.CodeMirror(function(cmDomNode) {
 		// Note that this is a synchronous callback that is called before the constructor returns
+		Object.defineProperty(cmDomNode,"parentNode",{writable: true});
 		self.domNode.appendChild(cmDomNode);
 	},config);
 
