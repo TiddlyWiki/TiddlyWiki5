@@ -119,7 +119,7 @@ exports.parseFilter = function(filterString) {
 		p = 0, // Current position in the filter string
 		match;
 	var whitespaceRegExp = /(\s+)/mg,
-		operandRegExp = /((?:\+|\-)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
+		operandRegExp = /((?:\+|\-|~)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
 	while(p < filterString.length) {
 		// Skip any whitespace
 		whitespaceRegExp.lastIndex = p;
@@ -258,6 +258,13 @@ exports.compileFilter = function(filterString) {
 						source = self.makeTiddlerIterator(results);
 						results.splice(0,results.length);
 						$tw.utils.pushTop(results,operationSubFunction(source,widget));
+					};
+				case "~": // This operation is unioned into the result only if the main result so far is empty
+					return function(results,source,widget) {
+						if(results.length === 0) {
+							// Main result so far is empty
+							$tw.utils.pushTop(results,operationSubFunction(source,widget));
+						}
 					};
 			}
 		})());
