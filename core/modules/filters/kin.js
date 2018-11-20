@@ -25,9 +25,10 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 		}
 
 		function collectTitlesPointingFrom(tiddler,title,currentDepth) {
-			if((options.depth) && (currentDepth++ > options.depth)) {
+			if((options.depth) && (currentDepth > options.depth)) {
 				return;
 			}
+			currentDepth += 1;
 			if(addToResultsIfNotFoundAlready(titlesPointingFromBase,title)) {
 				if(tiddler) {
 					$tw.utils.each(tiddler.getFieldList(options.fieldName),function(targetTitle) {
@@ -38,9 +39,10 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 		}
 
 		function collectTitlesPointingTo(title,currentDepth) {
-			if((options.depth) && (currentDepth++ > options.depth)) {
+			if((options.depth) && (currentDepth > options.depth)) {
 				return;
 			}
+			currentDepth += 1;
 			if(addToResultsIfNotFoundAlready(titlesPointingToBase,title)) {
 				$tw.utils.each(options.wiki.findTiddlersByField(title,options.fieldName),function(targetTitle) {
 					collectTitlesPointingTo(targetTitle,currentDepth);
