@@ -69,7 +69,7 @@ PageScroller.prototype.scrollIntoView = function(element,callback) {
 	// Get the client bounds of the element and adjust by the scroll position
 	var getBounds = function() {
 			var clientBounds = typeof callback === 'function' ? callback() : element.getBoundingClientRect(),
-				scrollPosition = $tw.utils.getScrollPosition();
+				scrollPosition = $tw.utils.getScrollPosition(srcWindow);
 			return {
 				left: clientBounds.left + scrollPosition.x,
 				top: clientBounds.top + scrollPosition.y - offset,
