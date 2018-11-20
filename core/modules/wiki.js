@@ -538,6 +538,45 @@ exports.findListingsOfTiddler = function(targetTitle,fieldName) {
 Sorts an array of tiddler titles according to an ordered list
 */
 exports.sortByList = function(array,listTitle) {
+	var self = this,
+		replacedTitles = Object.create(null);
+	function replaceItem(title) {
+		if(!$tw.utils.hop(replacedTitles, title)) {
+			replacedTitles[title] = true;
+			var newPos = -1,
+				tiddler = self.getTiddler(title);
+			if(tiddler) {
+				var beforeTitle = tiddler.fields["list-before"],
+					afterTitle = tiddler.fields["list-after"];
+				if(beforeTitle === "") {
+					newPos = 0;
+				} else if(afterTitle === "") {
+					newPos = titles.length;
+				} else if(beforeTitle) {
+					replaceItem(beforeTitle);
+					newPos = titles.indexOf(beforeTitle);
+				} else if(afterTitle) {
+					replaceItem(afterTitle);
+					newPos = titles.indexOf(afterTitle);
+					if(newPos >= 0) {
+						++newPos;
+					}
+				}
+				// We get the currPos //after// figuring out the newPos, because recursive replaceItem calls might alter title's currPos
+				var currPos = titles.indexOf(title);
+				if(newPos === -1) {
+					newPos = currPos;
+				}
+				if(currPos >= 0 && newPos !== currPos) {
+					titles.splice(currPos,1);
+					if(newPos >= currPos) {
+						newPos--;
+					}
+					titles.splice(newPos,0,title);
+				}
+			}
+		}
+	}
 	var list = this.getTiddlerList(listTitle);
 	if(!array || array.length === 0) {
 		return [];
@@ -558,46 +597,7 @@ exports.sortByList = function(array,listTitle) {
 			}
 		}
 		// Finally obey the list-before and list-after fields of each tiddler in turn
-		var sortedTitles = titles.slice(0),
-			replacedTitles = Object.create(null),
-			self = this;
-		function replaceItem(title) {
-			if(!$tw.utils.hop(replacedTitles, title)) {
-				replacedTitles[title] = true;
-				var newPos = -1,
-					tiddler = self.getTiddler(title);
-				if(tiddler) {
-					var beforeTitle = tiddler.fields["list-before"],
-						afterTitle = tiddler.fields["list-after"];
-					if(beforeTitle === "") {
-						newPos = 0;
-					} else if(afterTitle === "") {
-						newPos = titles.length;
-					} else if(beforeTitle) {
-						replaceItem(beforeTitle);
-						newPos = titles.indexOf(beforeTitle);
-					} else if(afterTitle) {
-						replaceItem(afterTitle);
-						newPos = titles.indexOf(afterTitle);
-						if(newPos >= 0) {
-							++newPos;
-						}
-					}
-					// We get the currPos //after// figuring out the newPos, because recursive replaceItem calls might alter title's currPos
-					var currPos = titles.indexOf(title);
-					if(newPos === -1) {
-						newPos = currPos;
-					}
-					if(currPos >= 0 && newPos !== currPos) {
-						titles.splice(currPos,1);
-						if(newPos >= currPos) {
-							newPos--;
-						}
-						titles.splice(newPos,0,title);
-					}
-				}
-			}
-		};
+		var sortedTitles = titles.slice(0);
 		for(t=0; t<sortedTitles.length; t++) {
 			title = sortedTitles[t];
 			replaceItem(title);
