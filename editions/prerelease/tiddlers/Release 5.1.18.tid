@@ -18,6 +18,7 @@ As of 5.1.18, many of these problems have been fixed by refactoring the features
 * [[Table-of-Contents Macros]]
 * [[tree Macro]]
 * [[tag Macro]]
+* [[list-tagged-draggable Macro]]
 
 Note that using certain characters in tiddler titles will still prevent some features from being used correctly. For example, two vertical bar characters are used in the double curly braces transclusion syntax to separate the tiddler title from the template title: `{{title||template}}`. However, although it would be impossible to transclude a tiddler called `title||template` using that syntax, one could still transclude it using `<$transclude tiddler="title||template"/>`.
 
