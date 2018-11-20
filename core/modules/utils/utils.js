@@ -224,6 +224,20 @@ exports.removeArrayEntries = function(array,value) {
 };
 
 /*
+Collect keys of object (probably hash) where callback yields to true
+ */
+exports.getObjectKeysByExpression = function(object,callback) {
+	var key,
+		results = [];
+	for (key in object) {
+		if (object.hasOwnProperty(key) && callback(object[key])) {
+			results.push(key);
+		}
+	}
+	return results;
+};
+
+/*
 Check whether any members of a hashmap are present in another hashmap
 */
 exports.checkDependencies = function(dependencies,changes) {

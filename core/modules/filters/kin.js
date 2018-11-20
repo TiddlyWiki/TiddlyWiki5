@@ -13,23 +13,23 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 	"use strict";
 
 	function collectTitlesRecursively(baseTiddler,baseTitle,options) {
-		var titlesPointingFromBase = [],
-			titlesPointingToBase = [];
+		var cacheName = "kin-filter-" + baseTitle + "-" + options.fieldName + "-",
+			titlesPointingFromBase = {},
+			titlesPointingToBase = {},
+			resultsFrom = [],
+			resultsTo = [];
 
-		function addToResultsIfNotFoundAlready(list,title) {
-			if(list.indexOf(title) !== -1) {
+		function addToResultsIfNotFoundAlready(alreadyFound,title,depth) {
+			if(title in alreadyFound) {
 				return false;
 			}
-			list.push(title);
+			alreadyFound[title] = depth;
 			return true
 		}
 
 		function collectTitlesPointingFrom(tiddler,title,currentDepth) {
-			if((options.depth) && (currentDepth > options.depth)) {
-				return;
-			}
-			currentDepth += 1;
-			if(addToResultsIfNotFoundAlready(titlesPointingFromBase,title)) {
+			if(addToResultsIfNotFoundAlready(titlesPointingFromBase,title,currentDepth)) {
+				currentDepth += 1;
 				if(tiddler) {
 					$tw.utils.each(tiddler.getFieldList(options.fieldName),function(targetTitle) {
 						collectTitlesPointingFrom(options.wiki.getTiddler(targetTitle),targetTitle,currentDepth);
@@ -39,24 +39,39 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 		}
 
 		function collectTitlesPointingTo(title,currentDepth) {
-			if((options.depth) && (currentDepth > options.depth)) {
-				return;
-			}
-			currentDepth += 1;
-			if(addToResultsIfNotFoundAlready(titlesPointingToBase,title)) {
+			if(addToResultsIfNotFoundAlready(titlesPointingToBase,title,currentDepth)) {
+				currentDepth += 1;
 				$tw.utils.each(options.wiki.findTiddlersByField(title,options.fieldName),function(targetTitle) {
 					collectTitlesPointingTo(targetTitle,currentDepth);
 				});
 			}
 		}
 
+		function getResultsInGivenDepth(cachedData) {
+			if(options.depth) {
+				return $tw.utils.getObjectKeysByExpression(cachedData,function(value) {
+					return value <= options.depth;
+				})
+			} else {
+				return Object.keys(cachedData);
+			}
+		}
+
 		if((options.direction === "from") || (options.direction === "with")) {
-			collectTitlesPointingFrom(baseTiddler,baseTitle,0);
+			resultsFrom = $tw.wiki.getGlobalCache(cacheName + "from",function() {
+				collectTitlesPointingFrom(baseTiddler,baseTitle,0);
+				return titlesPointingFromBase;
+			});
+			resultsFrom = getResultsInGivenDepth(resultsFrom);
 		}
 		if((options.direction === "to") || (options.direction === "with")) {
-			collectTitlesPointingTo(baseTitle,0);
+			resultsTo = $tw.wiki.getGlobalCache(cacheName + "to",function() {
+				collectTitlesPointingTo(baseTitle,0);
+				return titlesPointingToBase;
+			});
+			resultsTo = getResultsInGivenDepth(resultsTo);
 		}
-		return $tw.utils.pushTop(titlesPointingFromBase,titlesPointingToBase);
+		return $tw.utils.pushTop(resultsFrom,resultsTo);
 	}
 
 	/*
