@@ -9,6 +9,18 @@ type: text/vnd.tiddlywiki
 
 !! Major Improvements
 
+!!! Special Characters in Tiddler Titles
+
+In previous versions of TiddlyWiki, there were some special character sequences in tiddler titles that would break certain features. For example, a tiddler title ending in double quotes would cause the [[Table-of-Contents Macros]] to render incorrectly.
+
+As of 5.1.18, many of these problems have been fixed by refactoring the features to use the latest abilities of wikitext:
+
+* [[Table-of-Contents Macros]]
+* [[tree Macro]]
+* [[tag Macro]]
+
+Note that using certain characters in tiddler titles will still prevent some features from being used correctly. For example, two vertical bar characters are used in the double curly braces transclusion syntax to separate the tiddler title from the template title: `{{title||template}}`. However, although it would be impossible to transclude a tiddler called `title||template` using that syntax, one could still transclude it using `<$transclude tiddler="title||template"/>`.
+
 !!! Node.js HTTP Server
 
 The HTTP WebServer functionality has been significantly improved:
@@ -32,6 +44,10 @@ See WebServer for more details, or [[see the changes on GitHub|https://github.co
 
 This release [[adds|https://github.com/Jermolene/TiddlyWiki5/commit/acaa07a964a004759ddb8fb755484918b3322815]] a new commenting plugin -- see $:/plugins/tiddlywiki/comments
 
+!! AWS Plugin
+
+Support for running TiddlyWiki as a Lambda function has been [[improved|https://github.com/Jermolene/TiddlyWiki5/commit/d6a0b06f024e14e9c0a57df5d2b80c8a1cdbd1c2]] with support for GZip compression of the JSON payload.
+
 !! Translation Improvements
 
 New and improved translations:
@@ -40,6 +56,7 @@ New and improved translations:
 
 !! Usability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/cfb2d7c9c8d899729b67864070d1958b35cc0ca2]] support for splash screens to be shown while TiddlyWiki is loading -- see [[Creating a splash screen]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3bfa9c6f100cfd7107f2c5bf4cfc5dd40a93d54d]] persistent indicators at the bottom of the window showing any hidden drafts
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/7dbe117bc55a9cda91ce7b480525a2b2a70b8229]] current username (if set) to the title of draft tiddlers, making them easier to identify in multiuser scenarios
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6b14969cf60bdcad16ac5978030bf1d929a712c6]] a warning for binary tiddlers in view mode
@@ -49,15 +66,19 @@ New and improved translations:
 
 !! Hackability Improvements
 
+* [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/commit/d6a0b06f024e14e9c0a57df5d2b80c8a1cdbd1c2]] the [[search Operator]] to support searching arbitrary lists of fields, literal searches, whitespace-tolerant searches and regexp searches
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/763f8afaf2dc7dcaa2d4a492887a944d84c4fed2]] new [[contains Operator]] for searching within list fields
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/issues/3396]] support for a navigation scroll offset to avoid navigating to tiddlers resulting in them being obscured under a `position:fixed` top menu bar
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/issues/3396]] support for a navigation scroll offset to avoid navigating to tiddlers resulting in them being obscured under a `position:fixed` top menu bar -- see [[Hidden Setting: Scroll Top Adjustment]]
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/3140ff9e490cc2e725c0d02edab8db93009d74b2]] [[WidgetMessage: tm-full-screen]] message to support forcing the status instead of just toggling it
 * [[Refactored|https://github.com/Jermolene/TiddlyWiki5/pull/2758]] the sidebar to make it be dynamically built from the tag <<tag "$:/tags/SideBarSegment">>
+* [[Refactored|https://github.com/Jermolene/TiddlyWiki5/commit/19f7287a536e48225ec706589ffb307dfc991c9e]] the tiddler info panel to make it be dynamically built from the tag <<tag "$:/tags/TiddlerInfoSegment">>
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3346]] new [[range Operator]] for generating ranges of numbers
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3360]] palette support for `<select>` element colouring
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bef3242075b6d962b7963b9c9c7042c39198fc8f]] new text editor operation ''save-selection'' -- see [[WidgetMessage: tm-edit-text-operation]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f54a0a11bce9e47542df32610fae489f4a1dba8c]] support for editor toolbar buttons to have action widgets
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/2e51f08bef8656fdca83fff6163dc67cbaefa2d4]] support for rebasing headings at render time -- see [[tv-adjust-heading-level Variable]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3423]] experimental support for packaging TiddlyWiki's JavaScript core into an external script [[for use with the new Web Server enhancements|Using the external JavaScript template]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/fe85845c3ce78ff102e411d01873912b3de8705e]] new `\import` [[Pragma]] as a more concise alternative to using the ImportVariablesWidget directly
 
 !! Bug Fixes
 
@@ -68,15 +89,17 @@ New and improved translations:
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3334]] problem with using full screen on secondary windows
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/a3a4c28143138ca2bde1b8426c910b5e3d6a7110]] subtle bug whereby the RevealWidget was not refreshing properly when the state tiddler of a popup changed
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/3373]] problem with malformed HTML entities
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/874318091e20293c6f141080cc4330eb7aa02273]] crash when passing illegal arguments to the [[decodeuri Operator]] and [[decodeuricomponent Operator]]
 
 !! Developer Bug Fixes and Improvements
 
-* 
+* [[Refactored|https://github.com/Jermolene/TiddlyWiki5/pull/2027]] `$tw.utils.parseStringArray()` to optionally allow non-unique entries
 
 ! Contributors
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
+* [[@abesamma|https://github.com/abesamma]]
 * [[@AnthonyMuscio|https://github.com/AnthonyMuscio]]
 * [[@Arlen22|https://github.com/Arlen22]]
 * [[@bimlas|https://github.com/bimlas]]
@@ -84,9 +107,11 @@ New and improved translations:
 * [[@BurningTreeC|https://github.com/BurningTreeC]]
 * [[@Drakor|https://github.com/Drakor]]
 * [[@EvanBalster|https://github.com/EvanBalster]]
+* [[@flibbles|https://github.com/flibbles]]
 * [[@jho1965us|https://github.com/jho1965us]]
 * [[@Marxsal|https://github.com/Marxsal]]
 * [[@pmario|https://github.com/pmario]]
 * [[@talha131|https://github.com/talha131]]
 * [[@TechLifeWeb|https://github.com/TechLifeWeb]]
 * [[@twMat|https://github.com/twMat]]
+* [[@yrashk|https://github.com/yrashk]]
