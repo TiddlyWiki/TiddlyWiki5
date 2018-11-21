@@ -13,6 +13,21 @@ tags: $:/tags/Macro
 </$vars>
 \end
 
+\define clear-tag-input-actions()
+<$list filter="[[$(saveInputTiddler)$]!is[missing]get[text]minlength[1]]" emptyMessage="""
+<$action-deletetiddler $tiddler={{{ [[$(newTagNameTiddler)$]] }}}/>
+<$action-deletetiddler $tiddler={{{ [[$(saveInputTiddler)$]] }}}/>
+<$action-deletetiddler $tiddler="$:/temp/SelectedTag"/>
+<$action-sendmessage $message="tm-cancel-tiddler"/>
+""">
+<$action-setfield $tiddler="$:/temp/SelectedTag" refresh-tiddler={{{ [[$(currentTiddler)$]] }}}/>
+<$action-setfield $tiddler="$:/temp/SelectedTag" text={{{ [[$(currentTiddler)$]] }}}/>
+<$action-deletetiddler $tiddler={{{ [[$(newTagNameTiddler)$]] }}}/>
+<$action-deletetiddler $tiddler={{{ [[$(saveInputTiddler)$]] }}}/>
+<$action-setfield $tiddler="$:/temp/SelectedTag" text=""/>
+</$list>
+\end
+
 \define tag-button(selectedClass)
 <$button class="tc-btn-invisible $selectedClass$" tag="a">
 $(actions)$
@@ -50,8 +65,9 @@ $(filteredNonSystemTags)$ $(filteredSystemTags)$
 <$keyboard key="Down" actions=<<select-tag-actions "after">>>
 <$keyboard key="Up" actions=<<select-tag-actions "before" "reverse[]">>>
 <$keyboard key="ENTER" actions=<<add-tag-actions>>>
+<$keyboard key="Escape" actions=<<clear-tag-input-actions>>>
 <$edit-text tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" saveTiddler=<<saveInputTiddler>> refreshTiddler="$:/temp/SelectedTag"/>
-</$keyboard></$keyboard></$keyboard>
+</$keyboard></$keyboard></$keyboard></$keyboard>
 </span> <$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button> <span class="tc-add-tag-button">
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$button setTitle=<<newTagNameTiddler>> setTo="" class="">
