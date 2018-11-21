@@ -8,7 +8,7 @@ Keyboard shortcuts can either be used with the <<.wlink KeyboardWidget>> Widget 
 
 <<.tip """The <$macrocall $name=".wlink" to="KeyboardWidget"/> Widget makes the shortcuts accessible within an `input` or `textarea` field
 
-A shortcut defined with a [[Keyboard Shortcut Tiddler]] makes the shortcut accessible globally""">>
+A shortcut defined through a [[Keyboard Shortcut Tiddler]] makes the shortcut accessible globally""">>
 
 Keyboard shortcuts are available for common editing operations within the Text Editor:
 
