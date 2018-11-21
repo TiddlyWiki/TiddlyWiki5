@@ -13,18 +13,26 @@ tags: $:/tags/Macro
 </$vars>
 \end
 
-\define clear-tag-input-actions()
-<$list filter="[[$(newTagNameTiddler)$]!is[missing]get[text]minlength[1]]" emptyMessage="""
+\define reset-tag-input-actions()
 <$action-deletetiddler $tiddler={{{ [[$(newTagNameTiddler)$]] }}}/>
 <$action-deletetiddler $tiddler={{{ [[$(saveInputTiddler)$]] }}}/>
 <$action-deletetiddler $tiddler="$:/temp/SelectedTag"/>
 <$action-sendmessage $message="tm-cancel-tiddler"/>
+\end
+
+\define clear-tag-input-actions()
+<$list filter="[[$(newTagNameTiddler)$]!is[missing]get[text]minlength[1]]" emptyMessage="""
+<<reset-tag-input-actions>>
+""">
+<$list filter="[[$(saveInputTiddler)$]!is[missing]get[text]minlength[1]]" emptyMessage="""
+<<reset-tag-input-actions>>
 """>
 <$action-setfield $tiddler="$:/temp/SelectedTag" refresh-tiddler={{{ [[$(currentTiddler)$]] }}}/>
 <$action-setfield $tiddler="$:/temp/SelectedTag" text={{{ [[$(currentTiddler)$]] }}}/>
 <$action-deletetiddler $tiddler={{{ [[$(newTagNameTiddler)$]] }}}/>
 <$action-deletetiddler $tiddler={{{ [[$(saveInputTiddler)$]] }}}/>
 <$action-setfield $tiddler="$:/temp/SelectedTag" text=""/>
+</$list>
 </$list>
 \end
 
