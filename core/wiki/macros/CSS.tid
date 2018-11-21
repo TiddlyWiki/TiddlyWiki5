@@ -74,3 +74,42 @@ column-count: $columns$;
 \define if-background-attachment(text)
 <$reveal state="$:/themes/tiddlywiki/vanilla/settings/backgroundimage" type="nomatch" text="">$text$</$reveal>
 \end
+
+\define if-sticky-titles-render-css()
+``
+[data-tiddler-title="``$(cssEscapedTitle)$``"] .tc-tiddler-title {
+	position: -webkit-sticky;
+	position: -moz-sticky;
+	position: -o-sticky;
+	position: -ms-sticky;
+	position: sticky;
+	top: 0px;
+	background: ``<<colour tiddler-background>>``;
+	z-index: calc(500 + ``$(storyCount)$`` - ``$(tiddlerIndex)$``);
+}
+``
+\end
+
+\define if-sticky-titles()
+<$reveal state="$:/themes/tiddlywiki/vanilla/options/stickytitles" type="match" text="yes">
+
+<$vars storyCount={{{ [list[$:/StoryList]count[]] }}}>
+
+<$list filter="[list[$:/StoryList]]" variable="tiddlerTitle">
+
+<$list filter="[list[$:/StoryList]] +[allbefore<tiddlerTitle>count[]]" variable="tiddlerIndex">
+
+<$vars cssEscapedTitle={{{ [<tiddlerTitle>stringify[]] }}}>
+
+<<if-sticky-titles-render-css>>
+
+</$vars>
+
+</$list>
+
+</$list>
+
+</$vars>
+
+</$reveal>
+\end
