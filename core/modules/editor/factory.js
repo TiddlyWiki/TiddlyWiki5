@@ -132,6 +132,14 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 					};
 				updateFields[self.editField] = value;
 				self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getCreationFields(),tiddler,updateFields,self.wiki.getModificationFields()));
+				if(self.editSaveTiddler) {
+					var saveTiddler = self.wiki.getTiddler(self.editSaveTiddler),
+						updateFields = {
+							title: self.editSaveTiddler
+						};
+					updateFields[self.editField] = value;
+					self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getCreationFields(),saveTiddler,updateFields,self.wiki.getModificationFields()));
+				}
 			};
 		}
 		if(this.editType) {
@@ -199,6 +207,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		// Determine whether to show the toolbar
 		this.editShowToolbar = this.wiki.getTiddlerText(ENABLE_TOOLBAR_TITLE,"yes");
 		this.editShowToolbar = (this.editShowToolbar === "yes") && !!(this.children && this.children.length > 0) && (!this.document.isTiddlyWikiFakeDom);
+		this.editSaveTiddler = this.getAttribute("saveTiddler");
 	};
 
 	/*
