@@ -9,6 +9,16 @@ type: text/vnd.tiddlywiki
 
 !! Major Improvements
 
+!!! Global Keyboard Shortcuts
+
+This version introduces new infrastructure to handle global keyboard shortcuts. The core ships with the following shortcuts:
+
+* <kbd>alt-I</kbd> - New image
+* <kbd>alt-J</kbd> - New journal
+* <kbd>alt-N</kbd> - New tiddler
+
+You can also add your own -- LINK TBD
+
 !!! Special Characters in Tiddler Titles
 
 In previous versions of TiddlyWiki, there were some special character sequences in tiddler titles that would break certain features. For example, a tiddler title ending in double quotes would cause the [[Table-of-Contents Macros]] to render incorrectly.
@@ -19,6 +29,7 @@ As of 5.1.18, many of these problems have been fixed by refactoring the features
 * [[tree Macro]]
 * [[tag Macro]]
 * [[list-tagged-draggable Macro]]
+* $:/TagManager
 
 Note that using certain characters in tiddler titles will still prevent some features from being used correctly. For example, two vertical bar characters are used in the double curly braces transclusion syntax to separate the tiddler title from the template title: `{{title||template}}`. However, although it would be impossible to transclude a tiddler called `title||template` using that syntax, one could still transclude it using `<$transclude tiddler="title||template"/>`.
 
@@ -53,20 +64,28 @@ Support for running TiddlyWiki as a Lambda function has been [[improved|https://
 
 New and improved translations:
 
-* 
+* Catalan
+* Chinese Simplified and Chinese Traditional
 
 !! Usability Improvements
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/cfb2d7c9c8d899729b67864070d1958b35cc0ca2]] support for splash screens to be shown while TiddlyWiki is loading -- see [[Creating a splash screen]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/88664f028611162730b898025a45d29568eb205a]] display of backlinks when renaming a tiddler
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3bfa9c6f100cfd7107f2c5bf4cfc5dd40a93d54d]] persistent indicators at the bottom of the window showing any hidden drafts
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/7dbe117bc55a9cda91ce7b480525a2b2a70b8229]] current username (if set) to the title of draft tiddlers, making them easier to identify in multiuser scenarios
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6b14969cf60bdcad16ac5978030bf1d929a712c6]] a warning for binary tiddlers in view mode
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/issues/3255]] permalink/permaview to copy the URL to the clipboard as well as updating the address bar. This behaviour can be customised in $:/ControlPanel settings
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/d96c84426484747ab19d92b1d9f49e01c9dad985]] saving to use the $:/SiteTitle as the basis of the filename
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/09112ed455e7c4be2e50e88c00f370d726d71f64]] support for [[webp|https://en.wikipedia.org/wiki/WebP]], [[heic and heif|https://en.wikipedia.org/wiki/High_Efficiency_Image_File_Format]] image formats
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/97b098b059aa75e9c5965cafa5973ea6d98951d7]] tiddler positioning when creating new tiddlers
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/55b5b6dd56d9146b39482fbd2ae0353adce037f1]] smooth scrolling in new windows
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/c82edbe6bc9dfe6166650e4300a860c6ee625c76]] problem dismissing popups within new windows
 
 !! Hackability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3558]] a new filter prefix `~` allowing if-then-else logic within filters -- see [[Filter Expression]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/33dd367a6548824567995bb48e87eece755681e8]] a new [[subfilter Operator]] to allow nested filters to be used
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/849844be12196781017b3a517839c4721771efd7]] new ''stateTitle'', ''stateField'' and ''stateIndex'' attributes to the ButtonWidget and the RevealWidget, making it possible to use state tiddlers whose titles contain `!!` or `##`
 * [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/commit/d6a0b06f024e14e9c0a57df5d2b80c8a1cdbd1c2]] the [[search Operator]] to support searching arbitrary lists of fields, literal searches, whitespace-tolerant searches and regexp searches
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/763f8afaf2dc7dcaa2d4a492887a944d84c4fed2]] new [[contains Operator]] for searching within list fields
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/issues/3396]] support for a navigation scroll offset to avoid navigating to tiddlers resulting in them being obscured under a `position:fixed` top menu bar -- see [[Hidden Setting: Scroll Top Adjustment]]
@@ -91,6 +110,9 @@ New and improved translations:
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/a3a4c28143138ca2bde1b8426c910b5e3d6a7110]] subtle bug whereby the RevealWidget was not refreshing properly when the state tiddler of a popup changed
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/3373]] problem with malformed HTML entities
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/874318091e20293c6f141080cc4330eb7aa02273]] crash when passing illegal arguments to the [[decodeuri Operator]] and [[decodeuricomponent Operator]]
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/457f03798c69f2053894d9971d4b187521c0d9ad]] errors when a popup blocker blocks opening a new window
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/3aae643e140044e440673772d90ebaf0be18ec1f]] problems using a lazily loaded tidler as a state tiddler with the RevealWidget
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/33ba69e852966d7c5449842a95636024857d7177]] problem with modals not appearing in the correct window
 
 !! Developer Bug Fixes and Improvements
 
