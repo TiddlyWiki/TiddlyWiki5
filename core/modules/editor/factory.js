@@ -208,6 +208,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editShowToolbar = this.wiki.getTiddlerText(ENABLE_TOOLBAR_TITLE,"yes");
 		this.editShowToolbar = (this.editShowToolbar === "yes") && !!(this.children && this.children.length > 0) && (!this.document.isTiddlyWikiFakeDom);
 		this.editSaveTiddler = this.getAttribute("saveTiddler");
+		this.editRefreshTiddler = this.getAttribute("refreshTiddler");
 	};
 
 	/*
@@ -219,6 +220,12 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
 			this.refreshSelf();
 			return true;
+		} else if(this.editRefreshTiddler && changedTiddlers[this.editRefreshTiddler]) {
+			if(this.getVariable("currentTiddler") === this.wiki.getTiddler(this.editRefreshTiddler).getFieldString("refresh-tiddler")) {
+				editInfo = this.getEditInfo();
+				this.engine.domNode.value = editInfo.value;
+				this.engine.focus();
+			}
 		} else if(changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
