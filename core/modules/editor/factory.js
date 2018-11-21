@@ -221,7 +221,8 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			this.refreshSelf();
 			return true;
 		} else if(this.editRefreshTiddler && changedTiddlers[this.editRefreshTiddler]) {
-			if(this.getVariable("currentTiddler") === this.wiki.getTiddler(this.editRefreshTiddler).getFieldString("refresh-tiddler")) {
+			var tiddler = this.wiki.getTiddler(this.editRefreshTiddler);
+			if(tiddler && this.getVariable("currentTiddler") === tiddler.getFieldString("refresh-tiddler")) {
 				editInfo = this.getEditInfo();
 				this.engine.domNode.value = editInfo.value;
 				this.engine.focus();
