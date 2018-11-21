@@ -75,7 +75,7 @@ column-count: $columns$;
 <$reveal state="$:/themes/tiddlywiki/vanilla/settings/backgroundimage" type="nomatch" text="">$text$</$reveal>
 \end
 
-\define if-sticky-titles-render-css()
+\define if-sticky-titles-calc-zindex()
 ``
 [data-tiddler-title="``$(cssEscapedTitle)$``"] .tc-tiddler-title {
 	z-index: calc(500 + ``$(storyCount)$`` - ``$(tiddlerIndex)$``);
@@ -106,7 +106,7 @@ column-count: $columns$;
 
 <$vars cssEscapedTitle={{{ [<tiddlerTitle>stringify[]] }}}>
 
-<<if-sticky-titles-render-css>>
+<<if-sticky-titles-calc-zindex>>
 
 </$vars>
 
