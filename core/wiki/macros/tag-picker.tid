@@ -13,28 +13,35 @@ tags: $:/tags/Macro
 </$vars>
 \end
 
-\define reset-tag-input-actions()
+\define cancel-tag-input-tiddler()
 <$action-deletetiddler $tiddler={{{ [[$(newTagNameTiddler)$]] }}}/>
 <$action-deletetiddler $tiddler={{{ [[$(saveInputTiddler)$]] }}}/>
 <$action-deletetiddler $tiddler="$:/temp/SelectedTag"/>
 <$action-sendmessage $message="tm-cancel-tiddler"/>
 \end
 
-\define clear-tag-input-actions()
-<$list filter="[[$(newTagNameTiddler)$]!is[missing]get[text]minlength[1]]" emptyMessage="""
-<<reset-tag-input-actions>>
-""">
-<$list filter="[[$(saveInputTiddler)$]!is[missing]get[text]minlength[1]]" emptyMessage="""
-<<reset-tag-input-actions>>
-""">
+\define clear-tag-input-field()
 <$action-setfield $tiddler="$:/temp/SelectedTag" refresh-tiddler={{{ [[$(currentTiddler)$]] }}}/>
 <$action-setfield $tiddler="$:/temp/SelectedTag" text={{{ [[$(currentTiddler)$]] }}}/>
 <$action-deletetiddler $tiddler={{{ [[$(newTagNameTiddler)$]] }}}/>
 <$action-deletetiddler $tiddler={{{ [[$(saveInputTiddler)$]] }}}/>
 <$action-setfield $tiddler="$:/temp/SelectedTag" text=""/>
+\end
+
+\define clear-tag-input-actions()
+<$list filter="[[$(newTagNameTiddler)$]is[missing]]" variable="ignore">
+<$list filter="[[$(saveInputTiddler)$]is[missing]]" variable="ignore">
+<<cancel-tag-input-tiddler>>
 </$list>
+</$list>
+<$list filter="[[$(newTagNameTiddler)$]!is[missing]get[text]minlength[1]]" variable="ignore">
+<<clear-tag-input-field>>
+</$list>
+<$list filter="[[$(saveInputTiddler)$]!is[missing]get[text]minlength[1]]" variable="ignore">
+<<clear-tag-input-field>>
 </$list>
 \end
+
 
 \define tag-button(selectedClass)
 <$button class="tc-btn-invisible $selectedClass$" tag="a">
