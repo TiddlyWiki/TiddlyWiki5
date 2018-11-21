@@ -10,7 +10,6 @@ tags: $:/tags/Macro
 <$action-sendmessage $message="tm-remove-tag" $param=<<selectedTag>>/>
 </$list>
 <$action-deletetiddler $tiddler={{{ [[$:/temp/NewTagName/]addsuffix[$(currentTiddler)$]] }}}/>
-<$action-deletetiddler $tiddler="$:/temp/SelectedTag"/>
 </$vars>
 \end
 
@@ -19,7 +18,6 @@ tags: $:/tags/Macro
 $(actions)$
 <$action-deletetiddler $tiddler={{{ [[$:/temp/NewTagName/]addsuffix[$(currentTiddler)$]] }}}/>
 <$action-deletetiddler $tiddler={{{ [[$:/temp/NewTagName/Input/]addsuffix[$(currentTiddler)$]] }}}/>
-<$action-deletetiddler $tiddler="$:/temp/SelectedTag"/>
 <$macrocall $name="tag-pill" tag=<<tag>>/>
 </$button>
 \end
@@ -60,7 +58,6 @@ $(filteredNonSystemTags)$ $(filteredSystemTags)$
 $actions$
 <$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
 <$action-deletetiddler $tiddler=<<saveInputTiddler>>/>
-<$action-deletetiddler $tiddler="$:/temp/SelectedTag"/>
 {{$:/language/EditTemplate/Tags/Add/Button}}
 </$button>
 </$set>
