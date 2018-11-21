@@ -78,13 +78,6 @@ column-count: $columns$;
 \define if-sticky-titles-render-css()
 ``
 [data-tiddler-title="``$(cssEscapedTitle)$``"] .tc-tiddler-title {
-	position: -webkit-sticky;
-	position: -moz-sticky;
-	position: -o-sticky;
-	position: -ms-sticky;
-	position: sticky;
-	top: 0px;
-	background: ``<<colour tiddler-background>>``;
 	z-index: calc(500 + ``$(storyCount)$`` - ``$(tiddlerIndex)$``);
 }
 ``
@@ -92,6 +85,18 @@ column-count: $columns$;
 
 \define if-sticky-titles()
 <$reveal state="$:/themes/tiddlywiki/vanilla/options/stickytitles" type="match" text="yes">
+
+``
+.tc-tiddler-title {
+	position: -webkit-sticky;
+	position: -moz-sticky;
+	position: -o-sticky;
+	position: -ms-sticky;
+	position: sticky;
+	top: 0px;
+	background: ``<<colour tiddler-background>>``;
+}
+``
 
 <$vars storyCount={{{ [list[$:/StoryList]count[]] }}}>
 
