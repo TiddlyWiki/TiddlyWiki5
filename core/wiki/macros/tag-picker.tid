@@ -29,15 +29,7 @@ tags: $:/tags/Macro
 \end
 
 \define clear-tag-input-actions()
-<$list filter="[[$(newTagNameTiddler)$]is[missing]]" variable="ignore">
-<$list filter="[[$(saveInputTiddler)$]is[missing]]" variable="ignore">
-<<cancel-tag-input-tiddler>>
-</$list>
-</$list>
-<$list filter="[[$(newTagNameTiddler)$]!is[missing]get[text]minlength[1]]" variable="ignore">
-<<clear-tag-input-field>>
-</$list>
-<$list filter="[[$(saveInputTiddler)$]!is[missing]get[text]minlength[1]]" variable="ignore">
+<$list filter="[[$(newTagNameTiddler)$]!is[missing]get[text]minlength[1]] [[$(saveInputTiddler)$]!is[missing]get[text]minlength[1]] +[limit[1]]" variable="ignore" emptyMessage="""<<cancel-tag-input-tiddler>>""">
 <<clear-tag-input-field>>
 </$list>
 \end
