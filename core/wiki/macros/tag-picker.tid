@@ -2,54 +2,90 @@ title: $:/core/macros/tag-picker
 tags: $:/tags/Macro
 
 \define add-tag-actions()
-<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/NewTagName}}/>
-<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
+<$vars selectedTag={{{ [[$:/temp/NewTagName/]addsuffix[$(currentTiddler)$]get[text]] }}}>
+<$list filter="[[$(currentTiddler)$]!contains:tags<selectedTag>]" variable="ignore">
+<$action-sendmessage $message="tm-add-tag" $param=<<selectedTag>>/>
+</$list>
+<$list filter="[[$(currentTiddler)$]contains:tags<selectedTag>]" variable="ignore">
+<$action-sendmessage $message="tm-remove-tag" $param=<<selectedTag>>/>
+</$list>
+<$action-deletetiddler $tiddler={{{ [[$:/temp/NewTagName/]addsuffix[$(currentTiddler)$]] }}}/>
+<$action-deletetiddler $tiddler="$:/temp/SelectedTag"/>
+</$vars>
 \end
 
-\define add-tag-actions()
-<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/NewTagName}}/>
-<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
-\end
-
-\define tag-button()
-<$button class="tc-btn-invisible" tag="a">
+\define tag-button(selectedClass)
+<$button class="tc-btn-invisible $selectedClass$" tag="a">
 $(actions)$
-<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
+<$action-deletetiddler $tiddler={{{ [[$:/temp/NewTagName/]addsuffix[$(currentTiddler)$]] }}}/>
+<$action-deletetiddler $tiddler={{{ [[$:/temp/NewTagName/Input/]addsuffix[$(currentTiddler)$]] }}}/>
+<$action-deletetiddler $tiddler="$:/temp/SelectedTag"/>
 <$macrocall $name="tag-pill" tag=<<tag>>/>
 </$button>
 \end
 
+\define get-tags-list()
+$(filteredNonSystemTags)$ $(filteredSystemTags)$
+\end
+
+\define select-tag-actions(beforeafter,reverse)
+<$vars userInput={{{ [[$(saveInputTiddler)$]get[text]] }}} selectedDropDownTag={{{ [[$(newTagNameTiddler)$]get[text]] }}}>
+<$set name="filteredNonSystemTags" filter="[tags[]!is[system]search:title<userInput>sort[]]">
+<$set name="filteredSystemTags" filter="[tags[]is[system]search:title<userInput>sort[]]">
+<$set name="tagsList" filter=<<get-tags-list>>>
+<$list filter="[enlist<tagsList>] +[$beforeafter$<selectedDropDownTag>] ~[enlist<tagsList>$reverse$nth[1]]" variable="nextTag">
+<$action-setfield $tiddler={{{ [[$:/temp/NewTagName/]addsuffix[$(currentTiddler)$]] }}} text=<<nextTag>>/>
+<$action-deletetiddler $tiddler="$:/temp/SelectedTag"/>
+<$action-setfield $tiddler="$:/temp/SelectedTag" refresh-tiddler={{{ [[$(currentTiddler)$]] }}}/>
+<$action-setfield $tiddler="$:/temp/SelectedTag" text=<<nextTag>>/>
+</$list>
+</$set>
+</$set>
+</$set>
+</$vars>
+\end
+
 \define tag-picker(actions)
-<$set name="actions" value="""$actions$""">
+<$vars newTagNameTiddler={{{ [[$:/temp/NewTagName/]addsuffix<currentTiddler>] }}} saveInputTiddler={{{ [[$:/temp/NewTagName/Input/]addsuffix<currentTiddler>] }}} actions=<<__actions__>>>
 <div class="tc-edit-add-tag">
 <span class="tc-add-tag-name">
+<$keyboard key="Down" actions=<<select-tag-actions "after">>>
+<$keyboard key="Up" actions=<<select-tag-actions "before" "reverse[]">>>
 <$keyboard key="ENTER" actions=<<add-tag-actions>>>
-<$edit-text tiddler="$:/temp/NewTagName" tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle"/>
-</$keyboard>
+<$edit-text tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" saveTiddler=<<saveInputTiddler>> refreshTiddler="$:/temp/SelectedTag"/>
+</$keyboard></$keyboard></$keyboard>
 </span> <$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button> <span class="tc-add-tag-button">
-<$set name="tag" value={{$:/temp/NewTagName}}>
-<$button set="$:/temp/NewTagName" setTo="" class="">
+<$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
+<$button setTitle=<<newTagNameTiddler>> setTo="" class="">
 $actions$
-<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
+<$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
+<$action-deletetiddler $tiddler=<<saveInputTiddler>>/>
+<$action-deletetiddler $tiddler="$:/temp/SelectedTag"/>
 {{$:/language/EditTemplate/Tags/Add/Button}}
 </$button>
 </$set>
 </span>
 </div>
 <div class="tc-block-dropdown-wrapper">
+<$vars userInput={{{ [<saveInputTiddler>get[text]] }}}>
 <$reveal state=<<qualify "$:/state/popup/tags-auto-complete">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown">
-<$list filter="[{$:/temp/NewTagName}minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
-<$list filter="[tags[]!is[system]search:title{$:/temp/NewTagName}sort[]]" variable="tag">
-<<tag-button>>
+<$list filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$list filter="[tags[]!is[system]search:title<userInput>sort[]]" variable="tag">
+<$list filter="[<newTagNameTiddler>get[text]removeprefix<tag>suffix[]]" emptyMessage="""<<tag-button>>""">
+<<tag-button "tc-tag-button-selected">>
+</$list>
 </$list></$list>
 <hr>
-<$list filter="[{$:/temp/NewTagName}minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
-<$list filter="[tags[]is[system]search:title{$:/temp/NewTagName}sort[]]" variable="tag">
-<<tag-button>>
+<$list filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$list filter="[tags[]is[system]search:title<userInput>sort[]]" variable="tag">
+<$list filter="[<newTagNameTiddler>get[text]removeprefix<tag>suffix[]]" emptyMessage="""<<tag-button>>""">
+<<tag-button "tc-tag-button-selected">>
+</$list>
 </$list></$list>
 </div>
 </$reveal>
+</$vars>
 </div>
-</$set>
+</$vars>
 \end
