@@ -21,8 +21,8 @@ tags: $:/tags/Macro
 \end
 
 \define clear-tag-input-field()
-<$action-setfield $tiddler="$:/temp/SelectedTag" refresh-tiddler={{{ [[$(currentTiddler)$]] }}}/>
-<$action-setfield $tiddler="$:/temp/SelectedTag" text={{{ [[$(currentTiddler)$]] }}}/>
+<$action-setfield $tiddler="$:/temp/SelectedTag" refresh-tiddler={{{ [[$(tv-refresh-input-variable)$]] }}}/>
+<$action-setfield $tiddler="$:/temp/SelectedTag" text={{{ [[$(tv-refresh-input-variable)$]] }}}/>
 <$action-deletetiddler $tiddler={{{ [[$(newTagNameTiddler)$]] }}}/>
 <$action-deletetiddler $tiddler={{{ [[$(saveInputTiddler)$]] }}}/>
 <$action-setfield $tiddler="$:/temp/SelectedTag" text=""/>
@@ -56,7 +56,7 @@ $(filteredNonSystemTags)$ $(filteredSystemTags)$
 <$list filter="[enlist<tagsList>] +[$beforeafter$<selectedDropDownTag>] ~[enlist<tagsList>$reverse$nth[1]]" variable="nextTag">
 <$action-setfield $tiddler={{{ [[$:/temp/NewTagName/]addsuffix[$(currentTiddler)$]] }}} text=<<nextTag>>/>
 <$action-deletetiddler $tiddler="$:/temp/SelectedTag"/>
-<$action-setfield $tiddler="$:/temp/SelectedTag" refresh-tiddler={{{ [[$(currentTiddler)$]] }}}/>
+<$action-setfield $tiddler="$:/temp/SelectedTag" refresh-tiddler={{{ [[$(tv-refresh-input-variable)$]] }}}/>
 <$action-setfield $tiddler="$:/temp/SelectedTag" text=<<nextTag>>/>
 </$list>
 </$set>
@@ -66,7 +66,7 @@ $(filteredNonSystemTags)$ $(filteredSystemTags)$
 \end
 
 \define tag-picker(actions)
-<$vars newTagNameTiddler={{{ [[$:/temp/NewTagName/]addsuffix<currentTiddler>] }}} saveInputTiddler={{{ [[$:/temp/NewTagName/Input/]addsuffix<currentTiddler>] }}} actions=<<__actions__>>>
+<$vars newTagNameTiddler={{{ [[$:/temp/NewTagName/]addsuffix<currentTiddler>] }}} saveInputTiddler={{{ [[$:/temp/NewTagName/Input/]addsuffix<currentTiddler>] }}} actions=<<__actions__>> tv-refresh-input-variable=<<currentTiddler>>>
 <div class="tc-edit-add-tag">
 <span class="tc-add-tag-name">
 <$keyboard key="Down" actions=<<select-tag-actions "after">>>
