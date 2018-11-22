@@ -43,13 +43,13 @@ $(dropDownFilter1)$ $(dropDownFilter2)$
 </$vars>
 \end
 
-\define selectable-dropdown-input(editTiddler,inputTag,inputDefault,inputPlaceHolder,inputPopup,inputClass,saveTiddler,refreshTiddler,filterTiddler,refreshQualifier)
+\define selectable-dropdown-input(editTiddler,inputTag,inputDefault,inputPlaceHolder,inputPopup,inputClass,inputFocus:"no",saveTiddler,refreshTiddler,filterTiddler,refreshQualifier)
 <$vars tv-refresh-input-qualifier=<<__refreshQualifier__>>>
 <$keyboard key="((input-down))" actions="""<$macrocall $name="select-dropdown-actions" beforeafter="after" reverse="" editTiddler=<<__editTiddler__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>> filter1={{{ [<__filterTiddler__>get[dropdown-filter-1]] }}} filter2={{{ [<__filterTiddler__>get[dropdown-filter-2]] }}}/>""">
 <$keyboard key="((input-up))" actions="""<$macrocall $name="select-dropdown-actions" beforeafter="before" reverse="reverse[]" editTiddler=<<__editTiddler__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>> filter1={{{ [<__filterTiddler__>get[dropdown-filter-1]] }}} filter2={{{ [<__filterTiddler__>get[dropdown-filter-2]] }}}/>""">
 <$keyboard key="((input-accept))" actions="""<$macrocall $name="accept-input-actions" editTiddler=<<__editTiddler__>> acceptActions={{{ [<__filterTiddler__>get[accept-actions]] }}}/>""">
 <$keyboard key="((input-clear))" actions="""<$macrocall $name="clear-input-actions" editTiddler=<<__editTiddler__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>> clearEmptyActions={{{ [<__filterTiddler__>get[clear-input-empty-actions]] }}} refreshQualifier=<<__refreshQualifier__>>/>""">
-<$edit-text tiddler=<<__editTiddler__>> tag=<<__inputTag__>> default=<<__inputDefault__>> placeholder=<<__inputPlaceHolder__>> focusPopup=<<__inputPopup__>> class=<<__inputClass__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>>/>
+<$edit-text tiddler=<<__editTiddler__>> tag=<<__inputTag__>> default=<<__inputDefault__>> placeholder=<<__inputPlaceHolder__>> focusPopup=<<__inputPopup__>> class=<<__inputClass__>> focus=<<__inputFocus__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>>/>
 </$keyboard></$keyboard></$keyboard></$keyboard>
 </$vars>
 \end
