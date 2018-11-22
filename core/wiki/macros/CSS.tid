@@ -77,16 +77,13 @@ column-count: $columns$;
 
 \define calc-zindex-for-sticky-titles()
 \rules only
-
 [data-tiddler-title="$(cssEscapedTitle)$"] .tc-tiddler-title {
 	z-index: calc(500 + $(storyCount)$ - $(tiddlerIndex)$);
 }
-
 \end
 
 \define sticky-titles()
 <$reveal state="$:/themes/tiddlywiki/vanilla/options/stickytitles" type="match" text="yes">
-
 ``
 .tc-tiddler-title {
 	position: -webkit-sticky;
@@ -99,28 +96,16 @@ column-count: $columns$;
 	z-index: 500;
 }
 ``
-
 <$set name="excluded" filter={{$:/config/StickyTitles/exclude}}>
-
 <$vars storyCount={{{ [list[$:/StoryList]] -[enlist<excluded>] +[count[]] }}}>
-
 <$list filter="[list[$:/StoryList]]  -[enlist<excluded>]" variable="tiddlerTitle">
-
 <$set name="tiddlerIndex" value={{{ [list[$:/StoryList]]  -[enlist<excluded>] +[allbefore<tiddlerTitle>count[]] }}}>
-
 <$vars cssEscapedTitle={{{ [<tiddlerTitle>stringify[]] }}}>
-
 <<calc-zindex-for-sticky-titles>>
-
 </$vars>
-
 </$set>
-
 </$list>
-
 </$vars>
-
 </$set>
-
 </$reveal>
 \end
