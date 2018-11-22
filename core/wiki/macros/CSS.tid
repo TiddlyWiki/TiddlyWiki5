@@ -99,11 +99,13 @@ column-count: $columns$;
 }
 ``
 
-<$vars storyCount={{{ [list[$:/StoryList]count[]] }}}>
+<$set name="excluded" filter={{$:/config/StickyTitles/exclude}}>
 
-<$list filter="[list[$:/StoryList]]" variable="tiddlerTitle">
+<$vars storyCount={{{ [list[$:/StoryList]] -[enlist<excluded>] +[count[]] }}}>
 
-<$set name="tiddlerIndex" value={{{ [list[$:/StoryList]] +[allbefore<tiddlerTitle>count[]] }}}>
+<$list filter="[list[$:/StoryList]]  -[enlist<excluded>]" variable="tiddlerTitle">
+
+<$set name="tiddlerIndex" value={{{ [list[$:/StoryList]]  -[enlist<excluded>] +[allbefore<tiddlerTitle>count[]] }}}>
 
 <$vars cssEscapedTitle={{{ [<tiddlerTitle>stringify[]] }}}>
 
@@ -116,6 +118,8 @@ column-count: $columns$;
 </$list>
 
 </$vars>
+
+</$set>
 
 </$reveal>
 \end
