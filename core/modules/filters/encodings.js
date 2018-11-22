@@ -102,7 +102,7 @@ exports.escapecss = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
 		// escape any character with a special meaning in CSS
-		results.push(title.replace(/[\!\"\#\$\%\&\'\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\\\]\^\`\{\}\~]/g, '\\$&'));
+		results.push($tw.utils.escapeCssSelector(title));
 	});
 	return results;
 };
