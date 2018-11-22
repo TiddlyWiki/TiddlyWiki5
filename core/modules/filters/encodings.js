@@ -101,10 +101,8 @@ exports.escaperegexp = function(source,operator,options) {
 exports.escapecss = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		// encode the title
-		var escapedTitle = encodeURIComponent(title);
-		// escape any remaining character with a special meaning in CSS
-		results.push(escapedTitle.replace(/[\!\"\#\$\%\&\'\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\\\]\^\`\{\}\~]/g, '\\$&'));
+		// escape any character with a special meaning in CSS
+		results.push(title.replace(/[\!\"\#\$\%\&\'\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\\\]\^\`\{\}\~]/g, '\\$&'));
 	});
 	return results;
 };
