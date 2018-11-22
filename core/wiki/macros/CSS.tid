@@ -76,12 +76,12 @@ column-count: $columns$;
 \end
 
 \define calc-zindex-for-sticky-titles()
-\rules except dash entity
-``
-[data-tiddler-title="``$(cssEscapedTitle)$``"] .tc-tiddler-title {
-	z-index: calc(500 + ``$(storyCount)$`` - ``$(tiddlerIndex)$``);
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+[data-tiddler-title="$(cssEscapedTitle)$"] .tc-tiddler-title {
+	z-index: calc(500 + $(storyCount)$ - $(tiddlerIndex)$);
 }
-``
+
 \end
 
 \define sticky-titles()
