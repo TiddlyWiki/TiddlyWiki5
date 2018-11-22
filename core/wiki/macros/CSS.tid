@@ -76,7 +76,7 @@ column-count: $columns$;
 \end
 
 \define calc-zindex-for-sticky-titles()
-\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+\rules only
 
 [data-tiddler-title="$(cssEscapedTitle)$"] .tc-tiddler-title {
 	z-index: calc(500 + $(storyCount)$ - $(tiddlerIndex)$);
