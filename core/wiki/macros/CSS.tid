@@ -83,6 +83,7 @@ column-count: $columns$;
 \end
 
 \define sticky-titles()
+\whitespace trim
 <$reveal state="$:/themes/tiddlywiki/vanilla/options/stickytitles" type="match" text="yes">
 ``
 .tc-tiddler-title {
