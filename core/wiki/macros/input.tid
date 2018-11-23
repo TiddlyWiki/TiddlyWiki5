@@ -27,7 +27,7 @@ $(dropDownFilter1)$ $(dropDownFilter2)$
 \end
 
 \define select-dropdown-actions(beforeafter,reverse,editTiddler,saveTiddler,refreshTiddler,filter1,filter2,filterMinLength)
-<$list filter="[<__saveTiddler__>get[text]minlength[$filterMinLength$]]">
+<$list filter="[<__saveTiddler__>get[text]minlength[$filterMinLength$]] [[$filterMinLength$]removeprefix[0]suffix[]]">
 <$vars userInput={{{ [<__saveTiddler__>get[text]] }}} selectedDropDownItem={{{ [<__editTiddler__>get[text]] }}}>
 <$set name="dropDownFilter1" filter=<<__filter1__>>>
 <$set name="dropDownFilter2" filter=<<__filter2__>>>
