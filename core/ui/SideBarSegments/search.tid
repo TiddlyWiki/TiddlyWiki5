@@ -4,8 +4,9 @@ tags: $:/tags/SideBarSegment
 <div class="tc-sidebar-lists">
 
 <$set name="searchTiddler" value="$:/temp/search">
+<$vars filterTiddler={{{ [[$:/state/tab/search-results/sidebar]!is[missing]get[text]] ~[[$:/core/ui/DefaultSearchResultList]] }}}>
 <div class="tc-search">
-<$edit-text tiddler="$:/temp/search" type="search" tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> class="tc-popup-handle"/>
+<$macrocall $name="selectable-dropdown-input" editTiddler=<<searchTiddler>> inputPopup=<<qualify "$:/state/popup/search-dropdown">> inputClass="tc-popup-handle" inputFocus={{$:/config/Search/AutoFocus}} saveTiddler="$:/temp/search/input" filterTiddler=<<filterTiddler>> refreshTiddler="$:/temp/SelectedSearchItem" refreshQualifier=<<qualify "$:/temp/search">>/>
 <$reveal state="$:/temp/search" type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
@@ -41,13 +42,19 @@ tags: $:/tags/SideBarSegment
 
 <$list filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 
+<$vars userInput={{$:/temp/search/input}}>
+
 {{$:/core/ui/SearchResults}}
+
+</$vars>
 
 </$list>
 
 </$reveal>
 
 </$reveal>
+
+</$vars>
 
 </$set>
 
