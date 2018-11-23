@@ -611,7 +611,7 @@ button svg.tc-image-button, button .tc-image-button img {
 	vertical-align: baseline;
 }
 
-.tc-tag-button-selected {
+.tc-tag-button-selected, .tc-list-item-selected a.tc-tiddlylink {
 	background-color: <<colour primary>>;
 }
 
