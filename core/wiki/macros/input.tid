@@ -45,7 +45,7 @@ $(dropDownFilter1)$ $(dropDownFilter2)$
 </$list>
 \end
 
-\define selectable-dropdown-input(editTiddler,inputTag:"input",inputDefault,inputPlaceHolder,inputPopup,inputClass,inputFocus:"no",saveTiddler,refreshTiddler,filterTiddler,refreshQualifier,filterMinLength:"1")
+\define selectable-dropdown-input(editTiddler,inputTag:"input",inputDefault,inputPlaceHolder,inputPopup,inputClass,inputFocus:"no",saveTiddler,refreshTiddler,filterTiddler,refreshQualifier,filterMinLength:"0")
 <$vars tv-refresh-input-qualifier=<<__refreshQualifier__>>>
 <$keyboard key="((input-down))" actions="""<$macrocall $name="select-dropdown-actions" beforeafter="after" reverse="" editTiddler=<<__editTiddler__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>> filter1={{{ [<__filterTiddler__>get[dropdown-filter-1]] }}} filter2={{{ [<__filterTiddler__>get[dropdown-filter-2]] }}} filterMinLength="$filterMinLength$"/>""">
 <$keyboard key="((input-up))" actions="""<$macrocall $name="select-dropdown-actions" beforeafter="before" reverse="reverse[]" editTiddler=<<__editTiddler__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>> filter1={{{ [<__filterTiddler__>get[dropdown-filter-1]] }}} filter2={{{ [<__filterTiddler__>get[dropdown-filter-2]] }}} filterMinLength="$filterMinLength$"/>""">
