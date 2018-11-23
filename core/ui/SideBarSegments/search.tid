@@ -6,7 +6,7 @@ tags: $:/tags/SideBarSegment
 <$set name="searchTiddler" value="$:/temp/search">
 <$vars filterTiddler={{{ [[$:/state/tab/search-results/sidebar]!is[missing]get[text]] ~[[$:/core/ui/DefaultSearchResultList]] }}}>
 <div class="tc-search">
-<$macrocall $name="selectable-dropdown-input" editTiddler=<<searchTiddler>> inputPopup=<<qualify "$:/state/popup/search-dropdown">> inputClass="tc-popup-handle" inputFocus={{$:/config/Search/AutoFocus}} saveTiddler="$:/temp/search/input" filterTiddler=<<filterTiddler>> refreshTiddler="$:/temp/SelectedSearchItem" refreshQualifier=<<qualify "$:/temp/search">>/>
+<$macrocall $name="selectable-dropdown-input" editTiddler=<<searchTiddler>> inputPopup=<<qualify "$:/state/popup/search-dropdown">> inputClass="tc-popup-handle" inputFocus={{$:/config/Search/AutoFocus}} saveTiddler="$:/temp/search/input" filterTiddler=<<filterTiddler>> refreshTiddler="$:/temp/SelectedSearchItem" refreshQualifier=<<qualify "$:/temp/search">> inputPlaceHolder={{{ [<searchTiddler>is[missing]addprefix{$:/temp/search/input}removesuffix<searchTiddler>] [<searchTiddler>!is[missing]get[text]prefix{$:/temp/search/input}removeprefix{$:/temp/search/input}suffix[]] [<searchTiddler>!is[missing]get[text]prefix{$:/temp/SelectedSearchItem}removeprefix{$:/temp/SelectedSearchItem}suffix[]] ~[{$:/temp/search/input}] }}}/>
 <$reveal state="$:/temp/search/input" type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search/input}}/>
