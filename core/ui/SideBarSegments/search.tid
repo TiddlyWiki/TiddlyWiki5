@@ -7,21 +7,21 @@ tags: $:/tags/SideBarSegment
 <$vars filterTiddler={{{ [[$:/state/tab/search-results/sidebar]!is[missing]get[text]] ~[[$:/core/ui/DefaultSearchResultList]] }}}>
 <div class="tc-search">
 <$macrocall $name="selectable-dropdown-input" editTiddler=<<searchTiddler>> inputPopup=<<qualify "$:/state/popup/search-dropdown">> inputClass="tc-popup-handle" inputFocus={{$:/config/Search/AutoFocus}} saveTiddler="$:/temp/search/input" filterTiddler=<<filterTiddler>> refreshTiddler="$:/temp/SelectedSearchItem" refreshQualifier=<<qualify "$:/temp/search">>/>
-<$reveal state="$:/temp/search" type="nomatch" text="">
+<$reveal state="$:/temp/search/input" type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
-<$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
-<$action-setfield $tiddler="$:/temp/search" text=""/>
+<$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search/input}}/>
+<$action-setfield $tiddler="$:/temp/search/input" text=""/>
 <$action-navigate $to="$:/AdvancedSearch"/>
 {{$:/core/images/advanced-search-button}}
 </$button>
 <$button class="tc-btn-invisible">
-<$action-setfield $tiddler="$:/temp/search" text="" />
+<$action-setfield $tiddler="$:/temp/search/input" text="" />
 {{$:/core/images/close-button}}
 </$button>
 <$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
 {{$:/core/images/down-arrow}}
-<$list filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
-<$set name="searchTerm" value={{{ [<searchTiddler>get[text]] }}}>
+<$list filter="[{$:/temp/search/input}minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
+<$set name="searchTerm" value={{{ [[$:/temp/search/input]get[text]] }}}>
 <$set name="resultCount" value="""<$count filter="[!is[system]search<searchTerm>]"/>""">
 {{$:/language/Search/Matches}}
 </$set>
@@ -29,18 +29,18 @@ tags: $:/tags/SideBarSegment
 </$list>
 </$button>
 </$reveal>
-<$reveal state="$:/temp/search" type="match" text="">
+<$reveal state="$:/temp/search/input" type="match" text="">
 <$button to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 {{$:/core/images/advanced-search-button}}
 </$button>
 </$reveal>
 </div>
 
-<$reveal tag="div" class="tc-block-dropdown-wrapper" state="$:/temp/search" type="nomatch" text="">
+<$reveal tag="div" class="tc-block-dropdown-wrapper" state="$:/temp/search/input" type="nomatch" text="">
 
 <$reveal tag="div" class="tc-block-dropdown tc-search-drop-down tc-popup-handle" state=<<qualify "$:/state/popup/search-dropdown">> type="nomatch" text="" default="">
 
-<$list filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$list filter="[{$:/temp/search/input}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 
 <$vars userInput={{$:/temp/search/input}}>
 
