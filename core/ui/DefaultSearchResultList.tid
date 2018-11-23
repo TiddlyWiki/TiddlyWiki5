@@ -1,15 +1,26 @@
 title: $:/core/ui/DefaultSearchResultList
 tags: $:/tags/SearchResults
 caption: {{$:/language/Search/DefaultResults/Caption}}
+accept-actions: <$action-navigate $to=<<selectedDropDownItem>>/>
+clear-input-empty-actions: <$action-deletetiddler $tiddler=<<__editTiddler__>>/><$action-deletetiddler $tiddler=<<__saveTiddler__>>/><$action-deletetiddler $tiddler=<<__refreshTiddler__>>/>
+dropdown-filter-1: [!is[system]search:title<userInput>sort[title]limit[250]]
+dropdown-filter-2: [!is[system]search:caption,tags,text:whitespace<userInput>sort[title]limit[250]] -[!is[system]search:title<userInput>sort[title]limit[250]]
 
 \define searchResultList()
 //<small>{{$:/language/Search/Matches/Title}}</small>//
+<$list filter="[!is[system]search:title<userInput>sort[title]limit[250]]">
+<$list filter="[{$:/temp/search}removeprefix<currentTiddler>suffix[]]" variable="ignore" emptyMessage="""<$transclude tiddler="$:/core/ui/ListItemTemplate"/>""">
+<span class="tc-list-item-selected"><$transclude tiddler="$:/core/ui/ListItemTemplate"/></span>
+</$list>
+</$list>
 
-<$list filter="[!is[system]search:title{$(searchTiddler)$}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+//<small>{{$:/language/Search/Matches/More}}</small>//
 
-//<small>{{$:/language/Search/Matches/All}}</small>//
-
-<$list filter="[!is[system]search{$(searchTiddler)$}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+<$list filter="[!is[system]search:caption,tags,text:whitespace<userInput>sort[title]limit[250]] -[!is[system]search:title<userInput>sort[title]limit[250]]">
+<$list filter="[{$:/temp/search}removeprefix<currentTiddler>suffix[]]" variable="ignore" emptyMessage="""<$transclude tiddler="$:/core/ui/ListItemTemplate"/>""">
+<span class="tc-list-item-selected"><$transclude tiddler="$:/core/ui/ListItemTemplate"/></span>
+</$list>
+</$list>
 
 \end
 <<searchResultList>>
