@@ -26,7 +26,8 @@ $acceptActions$
 $(dropDownFilter1)$ $(dropDownFilter2)$
 \end
 
-\define select-dropdown-actions(beforeafter,reverse,editTiddler,saveTiddler,refreshTiddler,filter1,filter2)
+\define select-dropdown-actions(beforeafter,reverse,editTiddler,saveTiddler,refreshTiddler,filter1,filter2,filterMinLength)
+<$list filter="[<__saveTiddler__>get[text]minlength[$filterMinLength$]]">
 <$vars userInput={{{ [<__saveTiddler__>get[text]] }}} selectedDropDownItem={{{ [<__editTiddler__>get[text]] }}}>
 <$set name="dropDownFilter1" filter=<<__filter1__>>>
 <$set name="dropDownFilter2" filter=<<__filter2__>>>
@@ -41,11 +42,12 @@ $(dropDownFilter1)$ $(dropDownFilter2)$
 </$set>
 </$set>
 </$vars>
+</$list>
 \end
 
-\define selectable-dropdown-input(editTiddler,inputTag:"input",inputDefault,inputPlaceHolder,inputPopup,inputClass,inputFocus:"no",saveTiddler,refreshTiddler,filterTiddler,refreshQualifier)
+\define selectable-dropdown-input(editTiddler,inputTag:"input",inputDefault,inputPlaceHolder,inputPopup,inputClass,inputFocus:"no",saveTiddler,refreshTiddler,filterTiddler,refreshQualifier,filterMinLength:"1")
 <$vars tv-refresh-input-qualifier=<<__refreshQualifier__>>>
-<$keyboard key="((input-down))" actions="""<$macrocall $name="select-dropdown-actions" beforeafter="after" reverse="" editTiddler=<<__editTiddler__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>> filter1={{{ [<__filterTiddler__>get[dropdown-filter-1]] }}} filter2={{{ [<__filterTiddler__>get[dropdown-filter-2]] }}}/>""">
+<$keyboard key="((input-down))" actions="""<$macrocall $name="select-dropdown-actions" beforeafter="after" reverse="" editTiddler=<<__editTiddler__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>> filter1={{{ [<__filterTiddler__>get[dropdown-filter-1]] }}} filter2={{{ [<__filterTiddler__>get[dropdown-filter-2]] }}} filterMinLength="$filterMinLength$"/>""">
 <$keyboard key="((input-up))" actions="""<$macrocall $name="select-dropdown-actions" beforeafter="before" reverse="reverse[]" editTiddler=<<__editTiddler__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>> filter1={{{ [<__filterTiddler__>get[dropdown-filter-1]] }}} filter2={{{ [<__filterTiddler__>get[dropdown-filter-2]] }}}/>""">
 <$keyboard key="((input-accept))" actions="""<$macrocall $name="accept-input-actions" editTiddler=<<__editTiddler__>> acceptActions={{{ [<__filterTiddler__>get[accept-actions]] }}}/>""">
 <$keyboard key="((input-clear))" actions="""<$macrocall $name="clear-input-actions" editTiddler=<<__editTiddler__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>> clearEmptyActions={{{ [<__filterTiddler__>get[clear-input-empty-actions]] }}} refreshQualifier=<<__refreshQualifier__>>/>""">
