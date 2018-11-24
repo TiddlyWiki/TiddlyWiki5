@@ -84,7 +84,7 @@ $(cssContent)$
 
 \define assign-css-to-data-tag(tag:"data-tiddler-title",text:"",title:"",classesBefore:"",classesAfter:"")
 \whitespace trim
-<$vars escapedTitle={{{ [<__title__>escapedatacss[]] }}} cssContent=<<__text__>> dataTag=<<__tag__>> classesBefore=<<__classesBefore__>> classesAfter=<<__classesAfter__>>>
+<$vars escapedTitle={{{ [<__title__>escapecss[]] }}} cssContent=<<__text__>> dataTag=<<__tag__>> classesBefore=<<__classesBefore__>> classesAfter=<<__classesAfter__>>>
 <<create-data-tag>>
 </$vars>
 \end
