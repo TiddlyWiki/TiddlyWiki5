@@ -8,7 +8,7 @@ tags: $:/tags/AdvancedSearch/FilterButton
 </span>
 
 <$reveal state=<<qualify "$:/state/filterDropdown">> type="popup" position="belowleft" animate="yes">
-<$vars tv-override-missing-links="true">
+<$vars tv-hide-missing-links="no">
 <$linkcatcher to="$:/temp/advancedsearch">
 <div class="tc-block-dropdown-wrapper">
 <div class="tc-block-dropdown tc-edit-type-dropdown">
