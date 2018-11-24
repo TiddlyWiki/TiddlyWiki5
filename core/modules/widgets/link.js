@@ -13,7 +13,6 @@ Link widget
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
-var MISSING_LINK_CONFIG_TITLE = "$:/config/MissingLinks";
 
 var LinkWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
@@ -39,7 +38,7 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 		useWikiLinks = wikiLinksMacro ? (wikiLinksMacro.trim() !== "no") : true,
 		missingLinksEnabled = !(this.hideMissingLinks && this.isMissing && !this.isShadow);
 	// Render the link if required
-	if(useWikiLinks && (missingLinksEnabled || this.getVariable("tv-hide-missing-links") === "no")) {
+	if(useWikiLinks && missingLinksEnabled) {
 		this.renderLink(parent,nextSibling);
 	} else {
 		// Just insert the link text
@@ -182,7 +181,7 @@ LinkWidget.prototype.execute = function() {
 	// Determine the link characteristics
 	this.isMissing = !this.wiki.tiddlerExists(this.to);
 	this.isShadow = this.wiki.isShadowTiddler(this.to);
-	this.hideMissingLinks = ($tw.wiki.getTiddlerText(MISSING_LINK_CONFIG_TITLE,"yes") === "no");
+	this.hideMissingLinks = this.getVariable("tv-hide-missing-links") === "yes";
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -192,7 +191,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 LinkWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.to || changedTiddlers[this.to] || changedAttributes["aria-label"] || changedAttributes.tooltip || changedTiddlers[MISSING_LINK_CONFIG_TITLE]) {
+	if(changedAttributes.to || changedTiddlers[this.to] || changedAttributes["aria-label"] || changedAttributes.tooltip || changedTiddlers["$:/config/MissingLinks"]) {
 		this.refreshSelf();
 		return true;
 	}
