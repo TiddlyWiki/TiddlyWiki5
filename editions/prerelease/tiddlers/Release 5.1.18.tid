@@ -19,6 +19,25 @@ This version introduces new infrastructure to handle global keyboard shortcuts. 
 
 You can also add your own -- LINK TBD
 
+!!! Node.js HTTP Server
+
+The HTTP WebServer functionality has been significantly improved:
+
+* Adds ability to make a wiki that is [[read-only for anonymous users (with the editing UI hidden), but allows editing for users who log in|WebServer Authorization]]
+* Hides UI features like the new tiddler button and the edit button when the user only has read-only access to the wiki
+* Adds support for [[serving static file attachments over HTTP|Using the integrated static file server]]
+* Adds support for [[multiple user credentials|WebServer Parameter: credentials]] for basic authentication via a CSV file containing usernames/passwords
+* Adds support for [[serving over HTTPS|Using HTTPS]] as well as HTTP
+* Adds support for [[authentication via a trusted header|WebServer Parameter: authenticated-user-header]], making it easier to integrate with corporate single sign on (and Windows authentication)
+* Adds support for more fine grained authorisation (ie granting/denying individual users read/write permission to resources)
+* Better [[debugging information|WebServer Parameter: debug-level]]
+* Experimental support for a new, plain HTML [[single tiddler per page view|Using the read-only single tiddler view]]
+* Adds a simple level of [[CSRF protection|WebServer Parameter: csrf-disable]]
+* Deprecating the existing ServerCommand in favour of a new  ListenCommand using the new NamedCommandParameters support for named parameters that can be specified in any order
+* Refactoring routes as separate modules, making it easier to extend the server with new functionality
+
+See WebServer for more details, or [[see the changes on GitHub|https://github.com/Jermolene/TiddlyWiki5/pull/2679]].
+
 !!! Special Characters in Tiddler Titles
 
 In previous versions of TiddlyWiki, there were some special character sequences in tiddler titles that would break certain features. For example, a tiddler title ending in double quotes would cause the [[Table-of-Contents Macros]] to render incorrectly.
@@ -32,25 +51,6 @@ As of 5.1.18, many of these problems have been fixed by refactoring the features
 * $:/TagManager
 
 Note that using certain characters in tiddler titles will still prevent some features from being used correctly. For example, two vertical bar characters are used in the double curly braces transclusion syntax to separate the tiddler title from the template title: `{{title||template}}`. However, although it would be impossible to transclude a tiddler called `title||template` using that syntax, one could still transclude it using `<$transclude tiddler="title||template"/>`.
-
-!!! Node.js HTTP Server
-
-The HTTP WebServer functionality has been significantly improved:
-
-* Adds ability to make a wiki that is read-only for anonymous users (with the editing UI hidden), but allows editing for users who log in
-* Adds support for serving static file attachments over HTTP
-* Adds support for multiple user credentials for basic authentication via a CSV file containing usernames/passwords
-* Hides UI features like the new tiddler button and the edit button when the user only has read-only access to the wiki
-* Adds support for serving over HTTPS as well as HTTP
-* Adds support for authentication via a trusted header, making it easier to integrate with corporate single sign on (and Windows authentication)
-* Adds support for more fine grained authorisation (ie granting/denying individual users read/write permission to resources)
-* Better debugging information
-* Experimental support for a new, plain HTML single tiddler per page view
-* Adds a simple level of [[CSRF protection|WebServer Parameter: csrf-disable]]
-* Deprecating the existing `--server` command in favour of a new  `--listen` command using the new NamedCommandParameters support for named parameters that can be specified in any order
-* Refactoring routes as separate modules, making it easier to extend the server with new functionality
-
-See WebServer for more details, or [[see the changes on GitHub|https://github.com/Jermolene/TiddlyWiki5/pull/2679]].
 
 !! Comment Plugin
 
@@ -66,6 +66,7 @@ New and improved translations:
 
 * Catalan
 * Chinese Simplified and Chinese Traditional
+* German
 
 !! Usability Improvements
 
@@ -80,6 +81,7 @@ New and improved translations:
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/97b098b059aa75e9c5965cafa5973ea6d98951d7]] tiddler positioning when creating new tiddlers
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/55b5b6dd56d9146b39482fbd2ae0353adce037f1]] smooth scrolling in new windows
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/c82edbe6bc9dfe6166650e4300a860c6ee625c76]] problem dismissing popups within new windows
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3530]] handling of disabled missing links so that core user interface features are not broken (see also [[here|https://github.com/Jermolene/TiddlyWiki5/commit/a83cd3f984c88a1ecf5861c2c25ffb483b08f0ac]]) 
 
 !! Hackability Improvements
 
