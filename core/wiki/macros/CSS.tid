@@ -75,15 +75,26 @@ column-count: $columns$;
 <$reveal state="$:/themes/tiddlywiki/vanilla/settings/backgroundimage" type="nomatch" text="">$text$</$reveal>
 \end
 
-\define set-zindex-for-sticky-titles()
+\define create-data-tag()
 \rules only
-[data-tiddler-title="$(cssEscapedTitle)$"] .tc-tiddler-title {
-z-index: $(zIndex)$;
+$(classesBefore)$[$(dataTag)$="$(escapedTitle)$"]$(classesAfter)$ {
+$(cssContent)$
 }
+\end
+
+\define assign-css-to-data-tag(tag:"data-tiddler-title",text:"",title:"",classesBefore:"",classesAfter:"")
+\whitespace trim
+<$vars escapedTitle={{{ [<__title__>escapedatacss[]] }}} cssContent=<<__text__>> dataTag=<<__tag__>> classesBefore=<<__classesBefore__>> classesAfter=<<__classesAfter__>>>
+<<create-data-tag>>
+</$vars>
 \end
 
 \define get-full-zindex-list()
 $(zIndexFilter)$ $(tiddlerList)$
+\end
+
+\define sticky-z-index()
+z-index: $(zIndex)$;
 \end
 
 \define sticky-titles()
@@ -112,9 +123,7 @@ $(zIndexFilter)$ $(tiddlerList)$
 <$set name="tiddlerIndex" value={{{ [list[$:/StoryList]allafter<morePopupTiddler>limit[20]] +[allbefore<zIndexTiddler>] [<morePopupTiddler>] +[count[]] }}}>
 <$set name="reversedTiddler" value={{{ [enlist<tiddlerList>reverse[]nth<tiddlerIndex>] }}}>
 <$set name="zIndex" value={{{ [enlist<zIndexList>] +[allbefore<reversedTiddler>count[]] }}}>
-<$set name="cssEscapedTitle" value={{{ [<zIndexTiddler>stringify[]] }}}>
-<<set-zindex-for-sticky-titles>>
-</$set>
+<$macrocall $name="assign-css-to-data-tag" title=<<zIndexTiddler>> text=<<sticky-z-index>> classesAfter=" .tc-tiddler-title"/>
 </$set>
 </$set>
 </$set>
