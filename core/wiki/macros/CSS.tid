@@ -111,7 +111,7 @@ $(zIndexFilter)$ $(tiddlerList)$
 <$set name="zIndexList" value=<<get-full-zindex-list>>>
 <$set name="tiddlerIndex" value={{{ [list[$:/StoryList]allafter<morePopupTiddler>limit[20]] +[allbefore<zIndexTiddler>] [<morePopupTiddler>] +[count[]] }}}>
 <$set name="reversedTiddler" value={{{ [enlist<tiddlerList>reverse[]nth<tiddlerIndex>] }}}>
-<$set name="zIndex" value={{{ [enlist<zIndexList>reverse[]] +[allbefore<reversedTiddler>count[]] }}}>
+<$set name="zIndex" value={{{ [enlist<zIndexList>] +[allbefore<reversedTiddler>count[]] }}}>
 <$set name="cssEscapedTitle" value={{{ [<zIndexTiddler>stringify[]] }}}>
 <<set-zindex-for-sticky-titles>>
 </$set>
