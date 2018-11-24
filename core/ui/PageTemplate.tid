@@ -11,6 +11,8 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 
 <$set name="tv-config-toolbar-class" value={{$:/config/Toolbar/ButtonClass}}>
 
+<$set name="tv-hide-missing-links" value={{$:/config/MissingLinks}}>
+
 <$set name="storyviewTitle" value={{$:/view}}>
 
 <$set name="currentTiddler" value={{$:/language}}>
@@ -36,6 +38,8 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 </$navigator>
 
 </div>
+
+</$set>
 
 </$set>
 
