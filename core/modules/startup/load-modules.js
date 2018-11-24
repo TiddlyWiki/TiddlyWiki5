@@ -19,6 +19,7 @@ exports.synchronous = true;
 exports.startup = function() {
 	// Load modules
 	$tw.modules.applyMethods("utils",$tw.utils);
+	$tw.modules.applyMethods("polyfill");
 	if($tw.node) {
 		$tw.modules.applyMethods("utils-node",$tw.utils);
 	}
