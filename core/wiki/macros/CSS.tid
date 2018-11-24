@@ -74,3 +74,54 @@ column-count: $columns$;
 \define if-background-attachment(text)
 <$reveal state="$:/themes/tiddlywiki/vanilla/settings/backgroundimage" type="nomatch" text="">$text$</$reveal>
 \end
+
+\define set-zindex-for-sticky-titles()
+\rules only
+[data-tiddler-title="$(cssEscapedTitle)$"] .tc-tiddler-title {
+z-index: $(zIndex)$;
+}
+\end
+
+\define get-full-zindex-list()
+$(zIndexFilter)$ $(tiddlerList)$
+\end
+
+\define sticky-titles()
+\whitespace trim
+<$reveal state="$:/themes/tiddlywiki/vanilla/options/stickytitles" type="match" text="yes">
+``
+.tc-tiddler-title {
+	position: -webkit-sticky;
+	position: -moz-sticky;
+	position: -o-sticky;
+	position: -ms-sticky;
+	position: sticky;
+	top: 0px;
+	background: ``<<colour tiddler-background>>``;
+	z-index: 500;
+}
+``
+<$set name="morePopupTiddler" value={{{ [all[tiddlers]removeprefix[$:/state/popup/more/]] }}}>
+<$vars cssEscapedTitle={{{ [<morePopupTiddler>stringify[]] }}} zIndex="520">
+<<set-zindex-for-sticky-titles>>
+</$vars>
+<$set name="tiddlerList" filter="[list[$:/StoryList]allafter<morePopupTiddler>limit[20]]">
+<$list filter="[enlist<tiddlerList>]" variable="zIndexTiddler">
+<$set name="zIndexFilter" filter="[range[1,500]addsuffix<zIndexTiddler>]">
+<$set name="zIndexList" value=<<get-full-zindex-list>>>
+<$set name="tiddlerIndex" value={{{ [list[$:/StoryList]allafter<morePopupTiddler>limit[20]] +[allbefore<zIndexTiddler>] [<morePopupTiddler>] +[count[]] }}}>
+<$set name="reversedTiddler" value={{{ [enlist<tiddlerList>reverse[]nth<tiddlerIndex>] }}}>
+<$set name="zIndex" value={{{ [enlist<zIndexList>reverse[]] +[allbefore<reversedTiddler>count[]] }}}>
+<$set name="cssEscapedTitle" value={{{ [<zIndexTiddler>stringify[]] }}}>
+<<set-zindex-for-sticky-titles>>
+</$set>
+</$set>
+</$set>
+</$set>
+</$set>
+</$set>
+</$list>
+</$set>
+</$set>
+</$reveal>
+\end
