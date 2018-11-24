@@ -7,7 +7,7 @@ description: {{$:/language/Buttons/More/Hint}}
 \define config-title()
 $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 \end
-<$button popup=<<qualify "$:/state/popup/more">> tooltip={{$:/language/Buttons/More/Hint}} aria-label={{$:/language/Buttons/More/Caption}} class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
+<$button popupTitle={{{ [[$:/state/popup/more/]addsuffix<currentTiddler>] }}} tooltip={{$:/language/Buttons/More/Hint}} aria-label={{$:/language/Buttons/More/Caption}} class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/down-arrow}}
 </$list>
@@ -18,7 +18,7 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 </span>
 </$list>
 </$button>
-<$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="belowleft" animate="yes">
+<$reveal stateTitle={{{ [[$:/state/popup/more/]addsuffix<currentTiddler>] }}} type="popup" position="belowleft" animate="yes">
 
 <div class="tc-drop-down">
 
@@ -30,7 +30,7 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] -[[$:/core/ui/Buttons/more-tiddler-actions]]" variable="listItem">
 
-<$reveal type="match" state=<<config-title>> text="hide">
+<$reveal type="match" stateTitle=<<config-title>> text="hide">
 
 <$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
 
