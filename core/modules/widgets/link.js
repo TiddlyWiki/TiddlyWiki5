@@ -181,7 +181,7 @@ LinkWidget.prototype.execute = function() {
 	// Determine the link characteristics
 	this.isMissing = !this.wiki.tiddlerExists(this.to);
 	this.isShadow = this.wiki.isShadowTiddler(this.to);
-	this.hideMissingLinks = this.getVariable("tv-hide-missing-links") === "yes";
+	this.hideMissingLinks = (this.getVariable("tv-show-missing-links") || "yes") === "no";
 	// Make the child widgets
 	this.makeChildWidgets();
 };
