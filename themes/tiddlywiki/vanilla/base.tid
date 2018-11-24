@@ -844,7 +844,6 @@ button.tc-untagged-label {
 	background-color: <<colour tiddler-background>>;
 	border: 1px solid <<colour tiddler-border>>;
 }
-<<sticky-titles>>
 
 .tc-tiddler-info {
 	padding: 14px 42px 14px 42px;
