@@ -113,9 +113,7 @@ z-index: $(zIndex)$;
 }
 ``
 <$set name="morePopupTiddler" value={{{ [all[tiddlers]removeprefix[$:/state/popup/more/]] }}}>
-<$vars cssEscapedTitle={{{ [<morePopupTiddler>stringify[]] }}} zIndex="520">
-<<set-zindex-for-sticky-titles>>
-</$vars>
+<$macrocall $name="assign-css-to-data-tag" title=<<morePopupTiddler>> text="z-index: 520;" classesAfter=" .tc-tiddler-title"/>
 <$set name="tiddlerList" filter="[list[$:/StoryList]allafter<morePopupTiddler>limit[20]]">
 <$list filter="[enlist<tiddlerList>]" variable="zIndexTiddler">
 <$set name="zIndexFilter" filter="[range[1,500]addsuffix<zIndexTiddler>]">
