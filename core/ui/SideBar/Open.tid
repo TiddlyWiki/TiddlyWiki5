@@ -2,6 +2,7 @@ title: $:/core/ui/SideBar/Open
 tags: $:/tags/SideBar
 caption: {{$:/language/SideBar/Open/Caption}}
 
+\whitespace trim
 \define lingo-base() $:/language/CloseAll/
 
 \define drop-actions()
