@@ -77,14 +77,14 @@ column-count: $columns$;
 
 \define create-data-tag()
 \rules only
-$(classesBefore)$[$(tagName)$="$(escapedTagValue)$"]$(classesAfter)$ {
+$(classesBefore)$[$(tagName)$$(tagSelector)$"$(escapedTagValue)$"]$(classesAfter)$ {
 $(tagStyles)$
 }
 \end
 
-\define assign-css-to-data-tag(tagName:"data-tiddler-title",tagStyles:"",tagValue:"",classesBefore:"",classesAfter:"")
+\define assign-css-to-data-tag(tagName:"data-tiddler-title",tagSelector:"=",tagValue:"",tagStyles:"",classesBefore:"",classesAfter:"")
 \whitespace trim
-<$vars escapedTagValue={{{ [<__tagValue__>escapecss[]] }}} tagStyles=<<__tagStyles__>> tagName=<<__tagName__>> classesBefore=<<__classesBefore__>> classesAfter=<<__classesAfter__>>>
+<$vars escapedTagValue={{{ [<__tagValue__>escapecss[]] }}} tagStyles=<<__tagStyles__>> tagName=<<__tagName__>> tagSelector=<<__tagSelector__>> classesBefore=<<__classesBefore__>> classesAfter=<<__classesAfter__>>>
 <<create-data-tag>>
 </$vars>
 \end
