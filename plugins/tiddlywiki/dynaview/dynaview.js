@@ -28,7 +28,6 @@ exports.startup = function() {
 	window.addEventListener("scroll",onScroll,false);
 	window.addEventListener("resize",onResize,false);
 	$tw.hooks.addHook("th-page-refreshed",function() {
-		optisizeFonts();
 		checkTopmost();
 		checkVisibility();
 		saveViewportDimensions();
@@ -58,62 +57,12 @@ function onResize(event) {
 
 function worker() {
 	if(isWaitingForAnimationFrame & (ANIM_FRAME_CAUSED_BY_RESIZE | ANIM_FRAME_CAUSED_BY_LOAD)) {
-		optisizeFonts();
 		saveViewportDimensions();
 	}
 	setZoomClasses();
 	checkTopmost();
 	checkVisibility();
 	isWaitingForAnimationFrame = 0;
-}
-
-var lastSiteWidth, lastMaquetteString;
-
-function optisizeFonts() {
-	if($tw.wiki.getTiddlerText("$:/config/DynaView/Optisizer") === "yes") {
-		var domSite = document.querySelector(".tc-dynaview-optisizer-site"),
-			domMaquette = document.querySelector(".tc-dynaview-optisizer-maquette");
-		if(domSite && domMaquette) {
-			// Check that we're not at the same size as last time
-			if(domSite.offsetWidth === lastSiteWidth && $tw.wiki.getTiddlerText("$:/config/DynaView/Optisizer/Text") === lastMaquetteString) {
-				return;
-			}
-			// Get the current font size
-			domMaquette.style.fontSize = "";
-			var initialFontSize = parseInt(window.getComputedStyle(domMaquette).fontSize,10),
-				minFontSize = 1,
-				maxFontSize = 100,
-				adjustFontSize = maxFontSize,
-				newFontSize = initialFontSize,
-				maquetteWidth;
-			lastSiteWidth = domSite.offsetWidth;
-			lastMaquetteString = $tw.wiki.getTiddlerText("$:/config/DynaView/Optisizer/Text");
-			while(domMaquette.firstChild) {
-				domMaquette.removeChild(domMaquette.firstChild);
-			}
-			domMaquette.appendChild(document.createTextNode(lastMaquetteString));
-			// We use a binary search algorithm to find the optimum size
-			do {
-				// Apply the size we're considering
-				domMaquette.style.fontSize = newFontSize + "px";
-				// Measure the width of the maquette
-				maquetteWidth = domMaquette.offsetWidth;
-				// Adjust bigger or smaller
-				if(maquetteWidth < lastSiteWidth) {
-					newFontSize += adjustFontSize;
-				} else {
-					newFontSize -= adjustFontSize;
-				}
-				newFontSize = Math.min(newFontSize,maxFontSize);
-				newFontSize = Math.max(newFontSize,minFontSize);
-				adjustFontSize = adjustFontSize / 2;
-			} while (adjustFontSize > 0.5);
-			var newFontSizeString = newFontSize + "px";
-			if($tw.wiki.getTiddlerText("$:/state/DynaView/Optisizer/FontSize") !== newFontSizeString) {
-				$tw.wiki.setText("$:/state/DynaView/Optisizer/FontSize",undefined,undefined,newFontSizeString,undefined);
-			}
-		}
-	}
 }
 
 function setZoomClasses() {
@@ -137,41 +86,11 @@ function setZoomClasses() {
 function checkVisibility() {
 	var elements = document.querySelectorAll(".tc-dynaview-set-tiddler-when-visible");
 	$tw.utils.each(elements,function(element) {
-		// Bail if we've already triggered this element
-		if(element.getAttribute("data-dynaview-has-triggered") === "true") {
-			if(element.getAttribute("data-dynaview-unset-tiddler") !== undefined && element.getAttribute("data-dynaview-unset-value") !== undefined) {
-				// Check if the element is visible
-				var elementRect = element.getBoundingClientRect(),
-					viewportWidth = window.innerWidth || document.documentElement.clientWidth,
-					viewportHeight = window.innerHeight || document.documentElement.clientHeight,
-					viewportRect = {
-						left: 0,
-						right: viewportWidth,
-						top: 0,
-						bottom: viewportHeight
-					};
-				if(element.classList.contains("tc-dynaview-expand-viewport")) {
-					viewportRect.left -= viewportWidth;
-					viewportRect.right += viewportWidth;
-					viewportRect.top -= viewportHeight;
-					viewportRect.bottom += viewportHeight;
-				}
-				if(elementRect.left > viewportRect.right || 
-					elementRect.right < viewportRect.left || 
-					elementRect.top > viewportRect.bottom ||
-					elementRect.bottom < viewportRect.top) {
-					// Set the tiddler value
-					var tiddler = element.getAttribute("data-dynaview-unset-tiddler"),
-						value = element.getAttribute("data-dynaview-unset-value") || "";
-					if(tiddler && $tw.wiki.getTiddlerText(tiddler) !== value) {
-						$tw.wiki.addTiddler(new $tw.Tiddler({title: tiddler, text: value}));
-					}
-					element.setAttribute("data-dynaview-has-triggered","false");
-				}
-			}
+		// Bail if we've already triggered this element and we're not unsetting a tiddler when this element leaves the viewport
+		if(element.getAttribute("data-dynaview-has-triggered") === "true" && !element.hasAttribute("data-dynaview-unset-tiddler")) {
 			return;
 		}
-		// Check if the element is visible
+		// Calculate whether the element is visible
 		var elementRect = element.getBoundingClientRect(),
 			viewportWidth = window.innerWidth || document.documentElement.clientWidth,
 			viewportHeight = window.innerHeight || document.documentElement.clientHeight,
@@ -180,20 +99,33 @@ function checkVisibility() {
 				right: viewportWidth,
 				top: 0,
 				bottom: viewportHeight
-			};
+			},
+			tiddler,
+			value;
 		if(element.classList.contains("tc-dynaview-expand-viewport")) {
 			viewportRect.left -= viewportWidth;
 			viewportRect.right += viewportWidth;
 			viewportRect.top -= viewportHeight;
 			viewportRect.bottom += viewportHeight;
 		}
-		if(!(elementRect.left > viewportRect.right || 
-				elementRect.right < viewportRect.left || 
-				elementRect.top > viewportRect.bottom ||
-				elementRect.bottom < viewportRect.top)) {
-			// Set the tiddler value
-			var tiddler = element.getAttribute("data-dynaview-set-tiddler"),
-				value = element.getAttribute("data-dynaview-set-value") || "";
+		if(elementRect.left > viewportRect.right || 
+			elementRect.right < viewportRect.left || 
+			elementRect.top > viewportRect.bottom ||
+			elementRect.bottom < viewportRect.top) {
+			// Element is not visible
+			// Set the unset tiddler if required and this element has previously been triggered
+			if(element.getAttribute("data-dynaview-has-triggered") === "true" && element.hasAttribute("data-dynaview-unset-tiddler")) {
+				tiddler = element.getAttribute("data-dynaview-unset-tiddler");
+				value = element.getAttribute("data-dynaview-unset-value") || "";
+				if(tiddler && $tw.wiki.getTiddlerText(tiddler) !== value) {
+					$tw.wiki.addTiddler(new $tw.Tiddler({title: tiddler, text: value}));
+				}
+				element.setAttribute("data-dynaview-has-triggered","false");				
+			}
+		} else {
+			// Element is visible
+			tiddler = element.getAttribute("data-dynaview-set-tiddler");
+			value = element.getAttribute("data-dynaview-set-value") || "";
 			if(tiddler && $tw.wiki.getTiddlerText(tiddler) !== value) {
 				$tw.wiki.addTiddler(new $tw.Tiddler({title: tiddler, text: value}));
 			}
@@ -226,10 +158,20 @@ function checkTopmost() {
 	}
 }
 
+var previousViewportWidth, previousViewportHeight;
+
 function saveViewportDimensions() {
+	var viewportWidth = window.innerWidth || document.documentElement.clientWidth,
+		viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+	if(document.querySelector(".tc-dynaview-request-refresh-on-resize")) {
+		if(previousViewportWidth !== viewportWidth || previousViewportHeight !== viewportHeight) {
+			var count = parseInt($tw.wiki.getTiddlerText("$:/state/DynaView/ViewportDimensions/ResizeCount","0"),10) || 0;
+			$tw.wiki.addTiddler(new $tw.Tiddler({title: "$:/state/DynaView/ViewportDimensions/ResizeCount", text: (count + 1) + ""}));
+			previousViewportWidth = viewportWidth;
+			previousViewportHeight = viewportHeight;
+		}
+	}
 	if($tw.wiki.getTiddlerText("$:/config/DynaView/ViewportDimensions") === "yes") {
-		var viewportWidth = window.innerWidth || document.documentElement.clientWidth,
-			viewportHeight = window.innerHeight || document.documentElement.clientHeight;
 		if($tw.wiki.getTiddlerText("$:/state/DynaView/ViewportDimensions/Width") !== viewportWidth.toString()) {
 			$tw.wiki.setText("$:/state/DynaView/ViewportDimensions/Width",undefined,undefined,viewportWidth.toString(),undefined);
 		}

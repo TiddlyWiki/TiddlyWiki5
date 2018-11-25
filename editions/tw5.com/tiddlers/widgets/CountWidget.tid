@@ -6,7 +6,7 @@ caption: count
 
 ! Introduction
 
-The count widget displays the number of matches to a specified [[filter expression|Filters]].
+The count widget displays the number of unique items in the output of specified [[filter expressions|Filters]].
 
 ! Content and Attributes
 

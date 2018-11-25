@@ -22,10 +22,8 @@ Startup actions are useful for customising TiddlyWiki according to environmental
 </$reveal>
 ```
 
-Note that global macros are not available within startup action tiddlers by default. If you need to access them then you'll need to explicitly include them:
+Note that global macros are not available within startup action tiddlers by default. If you need to access them then you'll need to explicitly include them with an ''import'' [[pragma|Pragma]] at the top of the tiddler:
 
 ```
-<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
-...actions that depend upon global macros...
-</$importvariables>
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
 ```

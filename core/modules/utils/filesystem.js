@@ -57,7 +57,7 @@ var FILE_BUFFER_LENGTH = 64 * 1024,
 exports.copyFile = function(srcPath,dstPath) {
 	// Create buffer if required
 	if(!fileBuffer) {
-		fileBuffer = new Buffer(FILE_BUFFER_LENGTH);
+		fileBuffer = Buffer.alloc(FILE_BUFFER_LENGTH);
 	}
 	// Create any directories in the destination
 	$tw.utils.createDirectory(path.dirname(dstPath));

@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 caption: regexp
 op-purpose: filter the input by pattern-matched field
 op-input: a [[selection of titles|Title Selection]]
-op-suffix: the name of a [[field|TiddlerFields]]
+op-suffix: the name of a [[field|TiddlerFields]], defaulting to <<.field title>>
 op-suffix-name: F
 op-parameter: a regular expression
 op-parameter-name: X

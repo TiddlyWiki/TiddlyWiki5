@@ -22,6 +22,7 @@ Title/Exists/Prompt: Tiddler Name existiert bereits
 Title/Relink/Prompt: Ändere ''<$text text=<<fromTitle>>/>'' -> ''<$text text=<<toTitle>>/>'' in //tags// und //list// Feld aller anderen Tiddler
 Type/Dropdown/Caption: Tiddler Typ Liste
 Type/Dropdown/Hint: Anzeigen der Tiddler Typ Liste
+Title/References/Prompt: Die folgenden Referenz-Links zu diesem Tiddler werden NICHT automatisch geändert
 Type/Delete/Caption: Lösche Inhalts Typ
 Type/Delete/Hint: Lösche Inhalts Typ
 Type/Placeholder: Tiddler Format

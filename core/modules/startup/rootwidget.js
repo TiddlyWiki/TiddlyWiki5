@@ -23,7 +23,7 @@ exports.startup = function() {
 	// Install the modal message mechanism
 	$tw.modal = new $tw.utils.Modal($tw.wiki);
 	$tw.rootWidget.addEventListener("tm-modal",function(event) {
-		$tw.modal.display(event.param,{variables: event.paramObject});
+		$tw.modal.display(event.param,{variables: event.paramObject, event: event});
 	});
 	// Install the notification  mechanism
 	$tw.notifier = new $tw.utils.Notifier($tw.wiki);
@@ -42,10 +42,16 @@ exports.startup = function() {
 	var fullscreen = $tw.utils.getFullScreenApis();
 	if(fullscreen) {
 		$tw.rootWidget.addEventListener("tm-full-screen",function(event) {
-			if(document[fullscreen._fullscreenElement]) {
-				document[fullscreen._exitFullscreen]();
+			if(event.param === "enter") {
+				event.event.target.ownerDocument.documentElement[fullscreen._requestFullscreen](Element.ALLOW_KEYBOARD_INPUT);
+			} else if(event.param === "exit") {
+				event.event.target.ownerDocument[fullscreen._exitFullscreen]();
 			} else {
-				document.documentElement[fullscreen._requestFullscreen](Element.ALLOW_KEYBOARD_INPUT);
+				if(event.event.target.ownerDocument[fullscreen._fullscreenElement]) {
+					event.event.target.ownerDocument[fullscreen._exitFullscreen]();
+				} else {
+					event.event.target.ownerDocument.documentElement[fullscreen._requestFullscreen](Element.ALLOW_KEYBOARD_INPUT);
+				}				
 			}
 		});
 	}

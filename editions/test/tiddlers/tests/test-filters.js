@@ -14,6 +14,26 @@ Tests the filtering mechanism.
 
 describe("Filter tests", function() {
 
+	// Test filter parsing
+	it("should parse new-style rich operator suffixes", function() {
+		expect($tw.wiki.parseFilter("[search:: four, , five,, six [operand]]")).toEqual(
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ': four, , five,, six ', suffixes : [ [  ], [ 'four', 'five', 'six' ] ], operand : 'operand' } ] } ]
+		);
+		expect($tw.wiki.parseFilter("[search: one, two ,three :[operand]]")).toEqual(
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ' one, two ,three :', suffixes : [ [ 'one', 'two', 'three' ], [  ] ], operand : 'operand' } ] } ]
+		);
+		expect($tw.wiki.parseFilter("[search: one, two ,three :[operand]]")).toEqual(
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ' one, two ,three :', suffixes : [ [ 'one', 'two', 'three' ], [  ] ], operand : 'operand' } ] } ]
+		);
+		expect($tw.wiki.parseFilter("[search: one, two ,three : four, , five,, six [operand]]")).toEqual(
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ' one, two ,three : four, , five,, six ', suffixes : [ [ 'one', 'two', 'three' ], [ 'four', 'five', 'six' ] ], operand : 'operand' } ] } ]
+		);
+		expect($tw.wiki.parseFilter("[search: , : [operand]]")).toEqual(
+			 [ { prefix : '', operators : [ { operator : 'search', suffix : ' , : ', suffixes : [ [  ], [  ] ], operand : 'operand' } ] } ]
+		);
+	});
+
+
 	// Create a wiki
 	var wiki = new $tw.Wiki({
 		shadowTiddlers: {
@@ -81,6 +101,13 @@ describe("Filter tests", function() {
 		modifier: "JohnDoe"});
 
 	// Our tests
+
+	it("should handle the ~ prefix", function() {
+		expect(wiki.filterTiddlers("[modifier[JoeBloggs]] ~[[No such tiddler]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("[modifier[JaneBloggs]] ~[[No such tiddler]]").join(",")).toBe("No such tiddler");
+		expect(wiki.filterTiddlers("~[[No such tiddler]]").join(",")).toBe("No such tiddler");
+		expect(wiki.filterTiddlers("[my-field[present]] ~[[No such tiddler]]").join(",")).toBe("No such tiddler");
+	});
 
 	it("should handle the lookup operator", function() {
 		expect(wiki.filterTiddlers("Six Seventh 8 +[lookup[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,,Tidd");
@@ -228,6 +255,13 @@ describe("Filter tests", function() {
 	it("should handle the search operator", function() {
 		expect(wiki.filterTiddlers("[search[the]sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three,TiddlerOne");
 		expect(wiki.filterTiddlers("[search{Tiddler8}sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[search:modifier[og]sort[title]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("[search:modifier,authors:casesensitive[Do]sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three");
+		expect(wiki.filterTiddlers("[search:modifier,authors:casesensitive[do]sort[title]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("[search:authors:casesensitive,whitespace[John    Doe]sort[title]]").join(",")).toBe("$:/TiddlerTwo");
+		expect(wiki.filterTiddlers("[search:modifier:regexp[(d|bl)o(ggs|e)]sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[search:-modifier,authors:[g]sort[title]]").join(",")).toBe("Tiddler Three");
+		expect(wiki.filterTiddlers("[search:*:[g]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 	});
 
 	it("should handle the each operator", function() {

@@ -86,6 +86,59 @@ describe("Tag tests", function() {
 		expect(wiki.filterTiddlers("[tag[TiddlerSeventh]]").join(",")).toBe("Tiddler10,TiddlerOne,Tiddler Three,Tiddler11,Tiddler9,a fourth tiddler");
 	});
 
+	// Tests for issue (#3296)
+	it("should apply tag ordering in order of dependency", function () {
+		var wiki = new $tw.Wiki();
+
+		wiki.addTiddler({ title: "A", text: "", tags: "sortTag", "list-after": "B"});
+		wiki.addTiddler({ title: "B", text: "", tags: "sortTag", "list-after": "C"});
+		wiki.addTiddler({ title: "C", text: "", tags: "sortTag"});
+
+		expect(wiki.filterTiddlers("[tag[sortTag]]").join(',')).toBe("C,B,A");
+	});
+
+	it("should handle self-referencing dependency without looping infinitely", function() {
+		var wiki = new $tw.Wiki();
+
+		wiki.addTiddler({ title: "A", text: "", tags: "sortTag"});
+		wiki.addTiddler({ title: "B", text: "", tags: "sortTag", "list-after": "B"});
+		wiki.addTiddler({ title: "C", text: "", tags: "sortTag"});
+
+		expect(wiki.filterTiddlers("[tag[sortTag]]").join(',')).toBe("A,B,C");
+	});
+
+	it("should handle empty list-after ordering", function() {
+		var wiki = new $tw.Wiki();
+
+		wiki.addTiddler({ title: "A", text: "", tags: "sortTag", "list-after": ""});
+		wiki.addTiddler({ title: "B", text: "", tags: "sortTag"});
+		wiki.addTiddler({ title: "C", text: "", tags: "sortTag"});
+
+		expect(wiki.filterTiddlers("[tag[sortTag]]").join(',')).toBe("B,C,A");
+	});
+
+	// If a tiddler in the tag references a tiddler OUTSIDE of the tag
+	// with list-after/before, we need to make sure we don't accidentally
+	// handle that external tiddler, or that reference.
+	it("should gracefully handle dependencies that aren't in the tag list", function() {
+		var wiki = new $tw.Wiki();
+
+		wiki.addTiddler({ title: "A", text: "", tags: "sortTag"});
+		wiki.addTiddler({ title: "B", text: "", tags: "sortTag", "list-after": "Z"});
+		wiki.addTiddler({ title: "C", text: "", tags: "sortTag"});
+		wiki.addTiddler({ title: "Z", text: "", tags: "EXCLUDED", "list-before": ""});
+
+		expect(wiki.filterTiddlers("[tag[sortTag]]").join(',')).toBe("A,B,C");
+	});
+
+	it("should handle javascript-specific titles", function() {
+		var wiki = new $tw.Wiki();
+
+		wiki.addTiddler({ title: "A", text: "", tags: "sortTag"});
+		wiki.addTiddler({ title: "__proto__", text: "", tags: "sortTag", "list-before": ""});
+
+		expect(wiki.filterTiddlers("[tag[sortTag]]").join(',')).toBe("__proto__,A");
+	});
 });
 
 })();

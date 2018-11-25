@@ -63,7 +63,8 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 				addWidgetNode({
 					type: "set",
 					attributes: parseTreeNode.attributes,
-					params: parseTreeNode.params
+					params: parseTreeNode.params,
+					isMacroDefinition: parseTreeNode.isMacroDefinition
 				});
 				parseTreeNode = parseTreeNode.children[0];
 			}

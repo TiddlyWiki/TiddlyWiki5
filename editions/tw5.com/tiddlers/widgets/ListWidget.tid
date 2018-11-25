@@ -1,8 +1,9 @@
-created: 201310241419
-modified: 201502231037
+caption: list
+created: 20131024141900000
+modified: 20181013230425882
 tags: Widgets Lists
 title: ListWidget
-caption: list
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
@@ -95,3 +96,9 @@ In order for the storyviews to animate correctly each entry in the list should b
 !! History and navigation
 
 The optional `history` attribute specifies the name of a tiddler that is used to track the current tiddler for navigation purposes. When the history tiddler changes the list view responds by telling the listview to handle navigating to the new tiddler. See HistoryMechanism for details.
+
+!! Additional Notes and Edge Cases
+
+* If the `filter` attribute is not present then a default of `[!is[system]sort[title]]` is used
+* If the list widget is completely empty (ie only whitespace between the opening and closing tags), then it behaves as if the content were a `DIV` or a `SPAN` containing a link to the current tiddler (it’s a `DIV` if the list widget is in block mode, or a SPAN if it is in inline mode)
+* If the `template` attribute is not present then the content of the list widget will be used as the template, unless the widget is completely empty in which case a default template is used

@@ -132,6 +132,8 @@ external-link-background: inherit
 external-link-foreground-hover: inherit
 message-border: #cfd6e6
 modal-border: #999999
+select-tag-background:
+select-tag-foreground:
 sidebar-controls-foreground-hover:
 sidebar-muted-foreground-hover:
 sidebar-tab-background: #ded8c5

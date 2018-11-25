@@ -116,51 +116,7 @@ NavigatorWidget.prototype.replaceFirstTitleInStory = function(storyList,oldTitle
 };
 
 NavigatorWidget.prototype.addToStory = function(title,fromTitle) {
-	var storyList = this.getStoryList();
-	// Quit if we cannot get hold of the story list
-	if(!storyList) {
-		return;
-	}
-	// See if the tiddler is already there
-	var slot = storyList.indexOf(title);
-	// Quit if it already exists in the story river
-	if(slot >= 0) {
-		return;
-	}
-	// First we try to find the position of the story element we navigated from
-	var fromIndex = storyList.indexOf(fromTitle);
-	if(fromIndex >= 0) {
-		// The tiddler is added from inside the river
-		// Determine where to insert the tiddler; Fallback is "below"
-		switch(this.getAttribute("openLinkFromInsideRiver","below")) {
-			case "top":
-				slot = 0;
-				break;
-			case "bottom":
-				slot = storyList.length;
-				break;
-			case "above":
-				slot = fromIndex;
-				break;
-			case "below": // Intentional fall-through
-			default:
-				slot = fromIndex + 1;
-				break;
-		}
-	} else {
-		// The tiddler is opened from outside the river. Determine where to insert the tiddler; default is "top"
-		if(this.getAttribute("openLinkFromOutsideRiver","top") === "bottom") {
-			// Insert at bottom
-			slot = storyList.length;
-		} else {
-			// Insert at top
-			slot = 0;
-		}
-	}
-	// Add the tiddler
-	storyList.splice(slot,0,title);
-	// Save the story
-	this.saveStoryList(storyList);
+	this.wiki.addToStory(title,fromTitle,this.storyTitle,{openLinkFromInsideRiver: this.getAttribute("openLinkFromInsideRiver","top"),openLinkFromOutsideRiver: this.getAttribute("openLinkFromOutsideRiver","top")});
 };
 
 /*
@@ -324,9 +280,11 @@ Generate a title for the draft of a given tiddler
 */
 NavigatorWidget.prototype.generateDraftTitle = function(title) {
 	var c = 0,
-		draftTitle;
+		draftTitle,
+		username = this.wiki.getTiddlerText("$:/status/UserName"),
+		attribution = username ? " by " + username : "";
 	do {
-		draftTitle = "Draft " + (c ? (c + 1) + " " : "") + "of '" + title + "'";
+		draftTitle = "Draft " + (c ? (c + 1) + " " : "") + "of '" + title + "'" + attribution;
 		c++;
 	} while(this.wiki.tiddlerExists(draftTitle));
 	return draftTitle;
@@ -498,9 +456,9 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		},
 		templateTiddler,
 		additionalFields,
+		this.wiki.getCreationFields(),
 		existingTiddler,
 		filteredAdditionalFields,
-		this.wiki.getCreationFields(),
 		{
 			title: draftTitle,
 			"draft.of": title,
@@ -510,6 +468,9 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Update the story to insert the new draft at the top and remove any existing tiddler
 	if(storyList.indexOf(draftTitle) === -1) {
 		var slot = storyList.indexOf(event.navigateFromTitle);
+		if(slot === -1) {
+			slot = this.getAttribute("openLinkFromOutsideRiver","top") === "bottom" ? storyList.length - 1 : slot;
+		}
 		storyList.splice(slot + 1,0,draftTitle);
 	}
 	if(storyList.indexOf(title) !== -1) {

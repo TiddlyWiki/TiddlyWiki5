@@ -58,7 +58,7 @@ This can be fixed by amending tiddler "A":
 # Item two
 ```
 
-! SubTiddler Access
+! ~SubTiddler Access
 
 The transclude widget allows access to the individual tiddlers stored within a [[plugin|Plugins]].
 
