@@ -101,15 +101,8 @@ exports.escaperegexp = function(source,operator,options) {
 exports.escapecss = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		// escape any character with a special meaning in CSS if CSS.escape is available
-		var result;
-		try {
-			result = CSS.escape(title);
-		}
-		catch(e) {
-			result = title;
-		}
-		results.push(result);
+		// escape any character with a special meaning in CSS using CSS.escape()
+		results.push(CSS.escape(title));
 	});
 	return results;
 };
