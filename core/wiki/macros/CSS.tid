@@ -77,14 +77,14 @@ column-count: $columns$;
 
 \define create-data-tag()
 \rules only
-$(classesBefore)$[$(dataTag)$="$(escapedTitle)$"]$(classesAfter)$ {
-$(cssContent)$
+$(classesBefore)$[$(tagName)$="$(escapedTagValue)$"]$(classesAfter)$ {
+$(tagStyles)$
 }
 \end
 
-\define assign-css-to-data-tag(tag:"data-tiddler-title",text:"",title:"",classesBefore:"",classesAfter:"")
+\define assign-css-to-data-tag(tagName:"data-tiddler-title",tagStyles:"",tagValue:"",classesBefore:"",classesAfter:"")
 \whitespace trim
-<$vars escapedTitle={{{ [<__title__>escapecss[]] }}} cssContent=<<__text__>> dataTag=<<__tag__>> classesBefore=<<__classesBefore__>> classesAfter=<<__classesAfter__>>>
+<$vars escapedTagValue={{{ [<__tagValue__>escapecss[]] }}} tagStyles=<<__tagStyles__>> tagName=<<__tagName__>> classesBefore=<<__classesBefore__>> classesAfter=<<__classesAfter__>>>
 <<create-data-tag>>
 </$vars>
 \end
@@ -113,7 +113,7 @@ z-index: $(zIndex)$;
 }
 ``
 <$set name="morePopupTiddler" value={{{ [all[tiddlers]removeprefix[$:/state/popup/more/]] }}}>
-<$macrocall $name="assign-css-to-data-tag" title=<<morePopupTiddler>> text="z-index: 520;" classesAfter=" .tc-tiddler-title"/>
+<$macrocall $name="assign-css-to-data-tag" tagValue=<<morePopupTiddler>> tagStyles="z-index: 520;" classesAfter=" .tc-tiddler-title"/>
 <$set name="tiddlerList" filter="[list[$:/StoryList]allafter<morePopupTiddler>limit[20]]">
 <$list filter="[enlist<tiddlerList>]" variable="zIndexTiddler">
 <$set name="zIndexFilter" filter="[range[1,500]addsuffix<zIndexTiddler>]">
@@ -121,7 +121,7 @@ z-index: $(zIndex)$;
 <$set name="tiddlerIndex" value={{{ [list[$:/StoryList]allafter<morePopupTiddler>limit[20]] +[allbefore<zIndexTiddler>] [<morePopupTiddler>] +[count[]] }}}>
 <$set name="reversedTiddler" value={{{ [enlist<tiddlerList>reverse[]nth<tiddlerIndex>] }}}>
 <$set name="zIndex" value={{{ [enlist<zIndexList>] +[allbefore<reversedTiddler>count[]] }}}>
-<$macrocall $name="assign-css-to-data-tag" title=<<zIndexTiddler>> text=<<sticky-z-index>> classesAfter=" .tc-tiddler-title"/>
+<$macrocall $name="assign-css-to-data-tag" tagValue=<<zIndexTiddler>> tagStyles=<<sticky-z-index>> classesAfter=" .tc-tiddler-title"/>
 </$set>
 </$set>
 </$set>
