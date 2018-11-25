@@ -1,6 +1,8 @@
 title: $:/core/ui/EditTemplate/tags
 tags: $:/tags/EditTemplate
 
+\whitespace trim
+
 \define lingo-base() $:/language/EditTemplate/
 
 \define tag-styles()
@@ -10,6 +12,7 @@ color:$(foregroundColor)$;
 \end
 
 \define tag-body-inner(colour,fallbackTarget,colourA,colourB,icon)
+\whitespace trim
 <$vars foregroundColor=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">> backgroundColor="""$colour$""">
 <span style=<<tag-styles>> class="tc-tag-label">
 <$transclude tiddler="""$icon$"""/> <$view field="title" format="text" />
