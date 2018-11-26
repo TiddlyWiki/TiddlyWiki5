@@ -15,7 +15,7 @@ color:$(foregroundColor)$;
 \whitespace trim
 <$vars foregroundColor=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">> backgroundColor="""$colour$""">
 <span style=<<tag-styles>> class="tc-tag-label tc-tag-list-item">
-<$transclude tiddler="""$icon$"""/><$view field="title" format="text" />
+<$transclude tiddler="""$icon$"""/>&nbsp;<$view field="title" format="text" />
 <$button message="tm-remove-tag" param={{!!title}} class="tc-btn-invisible tc-remove-tag-button">&times;</$button>
 </span>
 </$vars>
