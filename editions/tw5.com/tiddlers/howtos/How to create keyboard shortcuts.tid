@@ -47,10 +47,10 @@ type: text/vnd.tiddlywiki
 </$reveal>
 
 <$reveal type="nomatch" text="show" state="$:/state/how-to/kb-shortcuts/global-actions">
-<$button class="tc-btn-invisible" set="$:/state/how-to/kb-shortcuts/global-actions" setTo="show">''Show'' "How to create the shortcut-actions for <<.tag input>> and <<.tag textarea>> fields"</$button>
+<$button class="tc-btn-invisible" set="$:/state/how-to/kb-shortcuts/global-actions" setTo="show">''Show'' "How to create the shortcut-actions for `global` keyboard shortcuts"</$button>
 </$reveal>
 <$reveal type="match" text="show" state="$:/state/how-to/kb-shortcuts/global-actions">
-<$button class="tc-btn-invisible" set="$:/state/how-to/kb-shortcuts/global-actions" setTo="hide">''Hide'' "How to create the shortcut-actions for <<.tag input>> and <<.tag textarea>> fields"</$button>
+<$button class="tc-btn-invisible" set="$:/state/how-to/kb-shortcuts/global-actions" setTo="hide">''Hide'' "How to create the shortcut-actions for `global` keyboard shortcuts"</$button>
 </$reveal>
 <br>
 <$reveal type="match" text="show" animate="yes" retain="yes" state="$:/state/how-to/kb-shortcuts/global-actions">
