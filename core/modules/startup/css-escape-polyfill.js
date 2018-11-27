@@ -31,8 +31,8 @@ if (typeof exports == 'object') {
 }
 }(typeof global != 'undefined' ? global : this, function(root) {
 
-	if (root.CSSA && root.CSSA.escape) {
-		return root.CSSA.escape;
+	if (root.CSS && root.CSS.escape) {
+		return root.CSS.escape;
 	}
 
 	// https://drafts.csswg.org/cssom/#serialize-an-identifier
@@ -114,11 +114,11 @@ if (typeof exports == 'object') {
 		return result;
 	};
 
-	if (!root.CSSA) {
-		root.CSSA = {};
+	if (!root.CSS) {
+		root.CSS = {};
 	}
 
-	root.CSSA.escape = cssEscape;
+	root.CSS.escape = cssEscape;
 	return cssEscape;
 
 }));
