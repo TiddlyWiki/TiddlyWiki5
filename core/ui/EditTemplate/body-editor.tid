@@ -6,7 +6,6 @@ title: $:/core/ui/EditTemplate/body/editor
   class="tc-edit-texteditor"
   placeholder={{$:/language/EditTemplate/Body/Placeholder}}
   tabIndex={{$:/config/EditTabIndex}}
-  cancelPopups="yes"
 
 ><$set
 
