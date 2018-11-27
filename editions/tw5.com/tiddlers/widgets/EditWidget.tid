@@ -17,4 +17,3 @@ The content of the `<$edit>` widget is ignored.
 |field |The field to edit (defaults to `text`). Takes precedence over the `index` attribute |
 |index |The index to edit |
 |class |A CSS class to be added the generated editing widget |
-|cancelPopups |"yes" or "no" - whether the input or textarea should cancel popups when it gets focused. Defaults to "no" |
