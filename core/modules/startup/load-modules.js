@@ -19,7 +19,6 @@ exports.synchronous = true;
 exports.startup = function() {
 	// Load modules
 	$tw.modules.applyMethods("utils",$tw.utils);
-	$tw.modules.applyMethods("polyfill");
 	if($tw.node) {
 		$tw.modules.applyMethods("utils-node",$tw.utils);
 	}
@@ -29,6 +28,10 @@ exports.startup = function() {
 	$tw.modules.applyMethods("tiddlermethod",$tw.Tiddler.prototype);
 	$tw.modules.applyMethods("wikimethod",$tw.Wiki.prototype);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
+	var polyfills = $tw.modules.types["polyfill"];
+	$tw.utils.each(polyfills,function(element,title) {
+		$tw.modules.execute(title);
+	});
 	$tw.macros = $tw.modules.getModulesByTypeAsHashmap("macro");
 	$tw.wiki.initParsers();
 	$tw.Commander.initCommands();
