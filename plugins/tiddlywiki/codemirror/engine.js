@@ -118,18 +118,6 @@ function CodeMirrorEngine(options) {
 		}
 	},config);
 
-	// Focus listener for cancelling Popups
-	this.cm.on("focus",function() {
-		if(self.widget.editCancelPopups) {
-			var numPopups = $tw.popup.popups.length;
-			if(numPopups !== 0) {
-				for(var i=0; i < numPopups; i++) {
-					$tw.popup.cancel(i);
-				}
-			}
-		}
-		return true;
-	});
 	// Set up a change event handler
 	this.cm.on("change",function() {
 		self.widget.saveChanges(self.getText());
