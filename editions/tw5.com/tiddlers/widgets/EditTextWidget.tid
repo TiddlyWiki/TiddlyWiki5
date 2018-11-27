@@ -30,7 +30,6 @@ The content of the `<$edit-text>` widget is ignored.
 |autoHeight |Either "yes" or "no" to specify whether to automatically resize `textarea` editors to fit their content (defaults to "yes") |
 |minHeight |Minimum height for automatically resized `textarea` editors, specified in CSS length units such as "px", "em" or "%" |
 |rows|Sets the rows attribute of a generated textarea |
-|cancelPopups |"yes" or "no" - whether the input or textarea should cancel popups when it gets focused. Defaults to "no" |
 
 ! Notes
 
