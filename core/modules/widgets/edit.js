@@ -47,7 +47,6 @@ EditWidget.prototype.execute = function() {
 	this.editClass = this.getAttribute("class");
 	this.editPlaceholder = this.getAttribute("placeholder");
 	this.editTabIndex = this.getAttribute("tabIndex");
-	this.editCancelPopups = this.getAttribute("cancelPopups", "no");
 	// Choose the appropriate edit widget
 	this.editorType = this.getEditorType();
 	// Make the child widgets
@@ -59,8 +58,7 @@ EditWidget.prototype.execute = function() {
 			index: {type: "string", value: this.editIndex},
 			"class": {type: "string", value: this.editClass},
 			"placeholder": {type: "string", value: this.editPlaceholder},
-			"tabIndex": {type: "string", value: this.editTabIndex},
-			"cancelPopups": {type: "string", value: this.editCancelPopups}
+			"tabIndex": {type: "string", value: this.editTabIndex}
 		},
 		children: this.parseTreeNode.children
 	}]);
