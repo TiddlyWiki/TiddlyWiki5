@@ -152,8 +152,10 @@ function openStartupTiddlers(options) {
 		if(target.indexOf("[[") === 0 && target.substr(-2) === "]]") {
 			target = target.substr(2,target.length - 4);
 		}
+		$tw.wiki.setText(DEFAULT_HISTORY_TITLE,"focus-tiddler",undefined,target);
 		$tw.wiki.addToHistory(target);
 	} else if(storyList.length > 0) {
+		$tw.wiki.setText(DEFAULT_HISTORY_TITLE,"focus-tiddler",undefined,storyList[0]);
 		$tw.wiki.addToHistory(storyList[0]);
 	}
 }
