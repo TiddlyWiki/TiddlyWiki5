@@ -6,7 +6,10 @@ tags: $:/tags/SideBarSegment
 <$set name="searchTiddler" value="$:/temp/search">
 <$vars filterTiddler={{{ [[$:/state/tab/search-results/sidebar]!is[missing]get[text]] ~[[$:/core/ui/DefaultSearchResultList]] }}}>
 <div class="tc-search">
+<$keyboard key="((input-tabs-right))" actions="""<$macrocall $name="select-dropdown-actions" beforeafter="after" reverse="" editTiddler="$:/state/tab/search-results/sidebar" saveTiddler="$:/state/tab/search-results/sidebar" filter1={{{ [all[tiddlers+shadows]tag[$:/tags/SearchResults]] }}}/>""">
+<$keyboard key="((input-tabs-left))" actions="""<$macrocall $name="select-dropdown-actions" beforeafter="before" reverse="" editTiddler="$:/state/tab/search-results/sidebar" saveTiddler="$:/state/tab/search-results/sidebar" filter1={{{ [all[tiddlers+shadows]tag[$:/tags/SearchResults]reverse[]] }}}/>""">
 <$macrocall $name="selectable-dropdown-input" editTiddler=<<searchTiddler>> inputPopup=<<qualify "$:/state/popup/search-dropdown">> inputClass="tc-popup-handle" inputFocus={{$:/config/Search/AutoFocus}} saveTiddler="$:/temp/search/input" filterTiddler=<<filterTiddler>> refreshTiddler="$:/temp/SelectedSearchItem" refreshCondition="""[<__refreshTiddler__>get[refresh-qualifier]removeprefix<__refreshQualifier__>suffix[]addprefix[true]] ~[[false]]""" refreshQualifier=<<qualify "$:/temp/search">> filterMinLength={{$:/config/Search/MinLength}}/>
+</$keyboard></$keyboard>
 <$reveal state="$:/temp/search/input" type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search/input}}/>
