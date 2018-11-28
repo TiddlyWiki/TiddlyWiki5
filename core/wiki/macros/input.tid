@@ -1,6 +1,16 @@
 title: $:/core/macros/input
 tags: $:/tags/Macro
 
+\define change-input-tab(stateTitle,tag,beforeafter,defaultState)
+<$set name="tabsList" filter="[all[tiddlers+shadows]tag<__tag__>sort[]]">
+<$set name="currentState" value={{{ [<__stateTitle__>!is[missing]get[text]] ~[<__defaultState__>] }}}>
+<$list filter="[enlist<tabsList>$beforeafter$<currentState>]" variable="nextTab">
+<$action-setfield $tiddler=<<__stateTitle__>> text=<<nextTab>>/>
+</$list>
+</$set>
+</$set>
+\end
+
 \define accept-input-actions(editTiddler,acceptActions)
 <$vars selectedDropDownItem={{{ [<__editTiddler__>get[text]] }}}>
 $acceptActions$
