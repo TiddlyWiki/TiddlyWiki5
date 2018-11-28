@@ -156,7 +156,7 @@ NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
 	var title = event.param || event.tiddlerTitle,
 		storyList = this.getStoryList();
-	var adjacentTiddler = this.historyTitle ? this.findAdjacentTiddler(title) : null;
+	var adjacentTiddler = this.historyTitle ? this.findAdjacentStoryTiddler(title) : null;
 	// Look for tiddlers with this title to close
 	this.removeTitleFromStory(storyList,title);
 	this.saveStoryList(storyList);
