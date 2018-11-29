@@ -1,0 +1,8 @@
+title: $:/language/Shortcuts/
+
+Input/Accept/Hint: accept the selected dropdown item
+Input/Clear/Hint: clear the focused input field
+Input/Down/Hint: select the next item within a dropdown list
+Input/Tabs-Right/Hint: select the next tab within a dropdown
+Input/Tabs-Left/Hint: select the previous tab within a dropdown
+Input/Up/Hint: select the previous item within a dropdown list
