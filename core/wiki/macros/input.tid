@@ -2,12 +2,12 @@ title: $:/core/macros/input
 tags: $:/tags/Macro
 
 \define change-input-tab(stateTitle,tag,beforeafter,defaultState)
-<$set name="tabsList" filter="[all[tiddlers+shadows]tag<__tag__>]">
-<$set name="currentState" value={{{ [<__stateTitle__>!is[missing]get[text]] ~[<__defaultState__>] }}}>
-<$list filter="[enlist<tabsList>sort[]] +[$beforeafter$<currentState>]" variable="nextTab">
+<$set name="tabsList" filter="[all[shadows+tiddlers]tag<__tag__>!has[draft.of]]">
+<$vars currentState={{{ [<__stateTitle__>!is[missing]get[text]] ~[<__defaultState__>] }}} firstTab={{{ [enlist<tabsList>nth[1]] }}} lastTab={{{ [enlist<tabsList>last[]] }}}>
+<$set name="nextTab" value={{{ [all[shadows+tiddlers]tag<__tag__>!has[draft.of]$beforeafter$<currentState>] ~[[$beforeafter$]removeprefix[after]suffix[]addprefix<firstTab>] ~[[$beforeafter$]removeprefix[before]suffix[]addprefix<lastTab>] }}}>
 <$action-setfield $tiddler=<<__stateTitle__>> text=<<nextTab>>/>
-</$list>
 </$set>
+</$vars>
 </$set>
 \end
 
