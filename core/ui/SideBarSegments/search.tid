@@ -3,11 +3,11 @@ tags: $:/tags/SideBarSegment
 
 <div class="tc-sidebar-lists">
 
-<$set name="searchTiddler" value="$:/temp/search">
-<$vars filterTiddler={{{ [[$:/state/tab/search-results/sidebar]!is[missing]get[text]] ~[[$:/core/ui/DefaultSearchResultList]] }}}>
+<$vars searchTiddler="$:/temp/search" defaultSearchResults={{$:/config/SearchResults/Default}} tabStateTiddler="$:/state/tab/search-results/sidebar">
+<$set name="filterTiddler" value={{{ [<tabStateTiddler>!is[missing]get[text]] ~[<defaultSearchResults>] }}}>
 <div class="tc-search">
-<$keyboard key="((input-tabs-right))" actions="""<<change-input-tab "$:/state/tab/search-results/sidebar" "$:/tags/SearchResults" "before" "$:/core/ui/DefaultSearchResultList">>""">
-<$keyboard key="((input-tabs-left))" actions="""<<change-input-tab "$:/state/tab/search-results/sidebar" "$:/tags/SearchResults" "after" "$:/core/ui/DefaultSearchResultList">>""">
+<$keyboard key="((input-tabs-right))" actions="""<$macrocall $name="change-input-tab" stateTitle=<<tabStateTiddler>> tag="$:/tags/SearchResults" beforeafter="after" defaultState=<<defaultSearchResults>>/>""">
+<$keyboard key="((input-tabs-left))" actions="""<$macrocall $name="change-input-tab" stateTitle=<<tabStateTiddler>> tag="$:/tags/SearchResults" beforeafter="before" defaultState=<<defaultSearchResults>>/>""">
 <$macrocall $name="selectable-dropdown-input" editTiddler=<<searchTiddler>> inputPopup=<<qualify "$:/state/popup/search-dropdown">> inputClass="tc-popup-handle" inputFocus={{$:/config/Search/AutoFocus}} saveTiddler="$:/temp/search/input" filterTiddler=<<filterTiddler>> refreshTiddler="$:/temp/SelectedSearchItem" refreshCondition="""[<__refreshTiddler__>get[refresh-qualifier]removeprefix<__refreshQualifier__>suffix[]addprefix[true]] ~[[false]]""" refreshQualifier=<<qualify "$:/temp/search">> filterMinLength={{$:/config/Search/MinLength}}/>
 </$keyboard></$keyboard>
 <$reveal state="$:/temp/search/input" type="nomatch" text="">
@@ -57,8 +57,8 @@ tags: $:/tags/SideBarSegment
 
 </$reveal>
 
-</$vars>
-
 </$set>
+
+</$vars>
 
 </div>
