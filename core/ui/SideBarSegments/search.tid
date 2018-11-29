@@ -18,6 +18,7 @@ tags: $:/tags/SideBarSegment
 {{$:/core/images/advanced-search-button}}
 </$button>
 <$button class="tc-btn-invisible">
+<$action-setfield $tiddler="$:/temp/search" text="" />
 <$action-setfield $tiddler="$:/temp/search/input" text="" />
 {{$:/core/images/close-button}}
 </$button>
