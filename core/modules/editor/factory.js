@@ -210,6 +210,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editSaveTiddler = this.getAttribute("saveTiddler");
 		this.editRefreshTiddler = this.getAttribute("refreshTiddler");
 		this.editRefreshCondition = this.getAttribute("refreshCondition");
+		this.editRefreshAction = this.getAttribute("refreshAction");
 	};
 
 	/*
@@ -218,13 +219,21 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
+		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.refreshAction || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
 			this.refreshSelf();
 			return true;
 		} else if(this.editRefreshTiddler && this.editRefreshCondition && changedTiddlers[this.editRefreshTiddler] && (this.getAttribute("refreshCondition") === "true" || this.getAttribute("refreshCondition") === "yes")) {
-			editInfo = this.getEditInfo();
-			this.engine.domNode.value = editInfo.value;
-			this.engine.focus();
+			switch(this.editRefreshAction) {
+				case "focus-update":
+					var editInfo = this.getEditInfo();
+					this.engine.domNode.value = editInfo.value;
+					this.engine.focus();
+					break;
+				default:
+					var editInfo = this.getEditInfo();
+					this.engine.domNode.value = editInfo.value;
+					this.engine.focus();
+			}	
 		} else if(changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
