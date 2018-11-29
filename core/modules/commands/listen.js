@@ -39,7 +39,7 @@ Command.prototype.execute = function() {
 		variables: self.params
 	});
 	var nodeServer = this.server.listen();
-	$tw.hooks.invokeHook("th-server-command-post-start",this.server,nodeServer);
+	$tw.hooks.invokeHook("th-server-command-post-start",this.server,nodeServer,"tiddlywiki");
 	return null;
 };
 
