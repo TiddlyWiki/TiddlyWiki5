@@ -9,6 +9,12 @@ heading-3: {{$:/language/Buttons/Heading3/Hint}}
 heading-4: {{$:/language/Buttons/Heading4/Hint}}
 heading-5: {{$:/language/Buttons/Heading5/Hint}}
 heading-6: {{$:/language/Buttons/Heading6/Hint}}
+input-accept: {{$:/language/Shortcuts/Input/Accept/Hint}}
+input-clear: {{$:/language/Shortcuts/Input/Clear/Hint}}
+input-down: {{$:/language/Shortcuts/Input/Down/Hint}}
+input-tabs-left: {{$:/language/Shortcuts/Input/Tabs-Left/Hint}}
+input-tabs-right: {{$:/language/Shortcuts/Input/Tabs-Right/Hint}}
+input-up: {{$:/language/Shortcuts/Input/Up/Hint}}
 italic: {{$:/language/Buttons/Italic/Hint}}
 link: {{$:/language/Buttons/Link/Hint}}
 list-bullet: {{$:/language/Buttons/ListBullet/Hint}}
