@@ -29,11 +29,13 @@ description: 提供一个 HTTP 服务器介面到 TiddlyWiki (已弃用，支持
 --server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
 ```
 
-若您需要设置主机名称或路径前缀而不要求输入密码，则可以指定空字符串的使用者名和密码：
+若您需要设置主机名称或路径前缀，而不要求输入密码，则可以指定空字符串的使用者名和密码。
 
 ```
 --server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
 ```
+
+使用这样的位址，会将您的系统暴露给本地网络。有关向整个本地网络开启实例的信息，以及可能的安全问题，请参阅 TiddlyWiki.com 的 WebServer 条目。
 
 同时执行多个 TiddlyWiki 服务，须分别指定不同的埠号。使用环境变数，有助于将埠号传递给 Node.js 进程。本示例引用一个名为 "MY_PORT_NUMBER" 的环境变数:
 
