@@ -1,5 +1,5 @@
 created: 20180626150526207
-modified: 20181002103605866
+modified: 20181107173250253
 tags: ListenCommand ServerCommand Features
 title: WebServer
 type: text/vnd.tiddlywiki
@@ -28,6 +28,8 @@ tiddlywiki mywikifolder --listen
 ```
 
 Visit http://127.0.0.1:8080/ to access the wiki. Access is anonymous, so anyone can read or write to the wiki.
+
+This will typically be available only to users on the local machine. For information on how to open the instance to the local network see the Web Server [[host|WebServer Parameter: host]] parameter entry. 
 
 !! Authenticated Access
 
