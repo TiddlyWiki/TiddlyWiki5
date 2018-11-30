@@ -19,16 +19,7 @@ exports.synchronous = true;
 
 /*! https://mths.be/cssescape v1.5.1 by @mathias | MIT license */
 // https://github.com/umdjs/umd/blob/master/returnExports.js
-if (typeof exports == 'object') {
-	// For Node.js.
-	module.exports = factory(root);
-} else if (typeof define == 'function' && define.amd) {
-	// For AMD. Register as an anonymous module.
-	define([], factory.bind(root, root));
-} else {
-	// For browser globals (not exposing the function separately).
-	factory(root);
-}
+exports.startup = factory(root);
 }(typeof global != 'undefined' ? global : this, function(root) {
 
 	if (root.CSS && root.CSS.escape) {
@@ -119,6 +110,5 @@ if (typeof exports == 'object') {
 	}
 
 	root.CSS.escape = cssEscape;
-	return cssEscape;
 
 }));
