@@ -1023,6 +1023,11 @@ button.tc-untagged-label {
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
 }
 
+.tc-tiddler-frame.tc-tiddler-edit-frame iframe.tc-edit-texteditor {
+border-radius: 2px;
+background-color: <<colour tiddler-background>>;
+}
+
 .tc-tiddler-frame .tc-binary-warning {
 	width: 100%;
 	height: 5em;
