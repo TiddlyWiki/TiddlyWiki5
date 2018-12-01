@@ -52,13 +52,11 @@ As of 5.1.18, many of these problems have been fixed by refactoring the features
 
 Note that using certain characters in tiddler titles will still prevent some features from being used correctly. For example, two vertical bar characters are used in the double curly braces transclusion syntax to separate the tiddler title from the template title: `{{title||template}}`. However, although it would be impossible to transclude a tiddler called `title||template` using that syntax, one could still transclude it using `<$transclude tiddler="title||template"/>`.
 
-!! Comment Plugin
+!! Plugin Improvements
 
-This release [[adds|https://github.com/Jermolene/TiddlyWiki5/commit/acaa07a964a004759ddb8fb755484918b3322815]] a new commenting plugin -- see $:/plugins/tiddlywiki/comments
-
-!! AWS Plugin
-
-Support for running TiddlyWiki as a Lambda function has been [[improved|https://github.com/Jermolene/TiddlyWiki5/commit/d6a0b06f024e14e9c0a57df5d2b80c8a1cdbd1c2]] with support for GZip compression of the JSON payload.
+* ''KaTeX Plugin'' -- the [[KaTeX Plugin]] has been [[updated to KaTeX v0.10.0|https://github.com/Jermolene/TiddlyWiki5/pull/3600]]. The plugin [[now incorporates|https://github.com/Jermolene/TiddlyWiki5/pull/3601]] an [[extension for chemical formulae|https://github.com/mhchem/MathJax-mhchem]]
+* ''Comment Plugin'' -- this release [[adds|https://github.com/Jermolene/TiddlyWiki5/commit/acaa07a964a004759ddb8fb755484918b3322815]] a new commenting plugin -- see $:/plugins/tiddlywiki/comments
+* ''AWS Plugin'' -- support for running TiddlyWiki as a Lambda function has been [[improved|https://github.com/Jermolene/TiddlyWiki5/commit/d6a0b06f024e14e9c0a57df5d2b80c8a1cdbd1c2]] with support for GZip compression of the JSON payload
 
 !! Translation Improvements
 
@@ -67,6 +65,7 @@ New and improved translations:
 * Catalan
 * Chinese Simplified and Chinese Traditional
 * Dutch
+* French
 * German
 
 !! Usability Improvements
@@ -102,6 +101,7 @@ New and improved translations:
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/2e51f08bef8656fdca83fff6163dc67cbaefa2d4]] support for rebasing headings at render time -- see [[tv-adjust-heading-level Variable]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3423]] experimental support for packaging TiddlyWiki's JavaScript core into an external script [[for use with the new Web Server enhancements|Using the external JavaScript template]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/fe85845c3ce78ff102e411d01873912b3de8705e]] new `\import` [[Pragma]] as a more concise alternative to using the ImportVariablesWidget directly
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3530]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/a83cd3f984c88a1ecf5861c2c25ffb483b08f0ac	]]) new [[tv-show-missing-links Variable]] for tighter control over rendering of missing links by the LinkWidget
 
 !! Bug Fixes
 
@@ -109,6 +109,7 @@ New and improved translations:
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/35cbb127a3c21b7047517f1eeeff571a420b82ae]] problem with unwanted variable substitutions by restricting variable substitutions to macros defined with the ''define'' pragma
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/c72e4f01f1a3051e169593a217bffab8eec279f6]] problem with the 'excise' editor toolbar button not showing if the tiddler type is "text/vnd.tiddlywiki"
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/929b0c98330ad25aa4a32cd201274a6e89cd8902]] problem with generation of wifi QR codes
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3495]] [[$tw.platform.isLinux]] on the latest Firefox
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3334]] problem with using full screen on secondary windows
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/a3a4c28143138ca2bde1b8426c910b5e3d6a7110]] subtle bug whereby the RevealWidget was not refreshing properly when the state tiddler of a popup changed
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/3373]] problem with malformed HTML entities
@@ -116,6 +117,7 @@ New and improved translations:
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/457f03798c69f2053894d9971d4b187521c0d9ad]] errors when a popup blocker blocks opening a new window
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/3aae643e140044e440673772d90ebaf0be18ec1f]] problems using a lazily loaded tidler as a state tiddler with the RevealWidget
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/33ba69e852966d7c5449842a95636024857d7177]] problem with modals not appearing in the correct window
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/19c49ae18a48a368ca24bb1493fc9876fa7c7570]] the animations for adding and removing tags in edit mode, and a [[similar fix|https://github.com/Jermolene/TiddlyWiki5/pull/3578]] for the animations in the "Open" sidebar tab
 
 !! Developer Bug Fixes and Improvements
 
