@@ -96,7 +96,6 @@ FramedEngine.prototype.copyStyles = function() {
 	this.domNode.style.margin = "0";
 	this.domNode.style.resize = "none";
 	this.domNode.style.border = "none";
-	this.domNode.style["border-radius"] = "2px";
 	this.domNode.style["padding-left"] = "0.5em";
 	this.domNode.style["padding-top"] = "0.3em";
 	this.domNode.style["background-color"] = this.widget.wiki.extractTiddlerDataItem(this.widget.wiki.getTiddlerText("$:/palette"),"background");
