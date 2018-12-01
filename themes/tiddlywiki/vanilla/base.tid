@@ -1274,6 +1274,8 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-tiddler-preview {
 	overflow: auto;
+	margin-left: -0.3em;
+	padding-left: 0.3em;
 }
 
 .tc-tiddler-preview-preview {
