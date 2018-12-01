@@ -651,6 +651,10 @@ button.tc-untagged-label {
 	width: 100%;
 }
 
+button.tc-btn-invisible.tc-remove-tag-button {
+	outline: none;
+}
+
 /*
 ** Page layout
 */
