@@ -27,10 +27,10 @@
 			"prefix": "(function(document) {\n",
 			"suffix": "\n})(!$tw.browser ? $tw.fakeDocument : window.document)\n"
 		},{
-			"file": "mchem.min.js",
+			"file": "mhchem.min.js",
 			"fields": {
 				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/katex/mchem.min.js",
+				"title": "$:/plugins/tiddlywiki/katex/mhchem.min.js",
 				"module-type": "library"
 			}
 		}
