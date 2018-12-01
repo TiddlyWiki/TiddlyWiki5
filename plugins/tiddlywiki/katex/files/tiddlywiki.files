@@ -26,6 +26,13 @@
 			},
 			"prefix": "(function(document) {\n",
 			"suffix": "\n})(!$tw.browser ? $tw.fakeDocument : window.document)\n"
+		},{
+			"file": "mchem.min.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/katex/mchem.min.js",
+				"module-type": "library"
+			}
 		}
 	]
 }
