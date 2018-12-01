@@ -231,7 +231,7 @@ td .tc-doc-warning, td .tc-doc-tip, td .tc-doc-note {
 .doc-block-icon {
     position: absolute;
     left: -2.7em;
-    top: .5em;
+    top: .75em;
 }
 
 .doc-from-version {
