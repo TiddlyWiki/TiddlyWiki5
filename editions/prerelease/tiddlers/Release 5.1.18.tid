@@ -17,7 +17,7 @@ This version introduces new infrastructure to handle global keyboard shortcuts. 
 * <kbd>alt-J</kbd> - New journal
 * <kbd>alt-N</kbd> - New tiddler
 
-You can also add your own -- LINK TBD
+See [[How to create keyboard shortcuts]]
 
 !!! Node.js HTTP Server
 
