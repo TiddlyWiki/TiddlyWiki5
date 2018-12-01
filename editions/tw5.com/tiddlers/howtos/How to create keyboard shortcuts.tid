@@ -64,13 +64,13 @@ type: text/vnd.tiddlywiki
 
 > If the tiddler has the tag <<tag $:/tags/KeyboardShortcut>>, the field ''key'' with the [[Keyboard Shortcut Descriptor]] as its value and some actions in its text field, the actions will be triggered when the mechanism detects the configured key-combination
 
-<$macrocall $name=".tip" _="""''Macros'' defined ''outside'' our keyboard-shortcut tiddlers (through a tiddler tagged <<tag-pill $:/tags/Macro>>) don't work out-of-the-box when triggered with a global keyboard shortcut, but there's a simple workaround using the [[import pragma|Pragma]], adding the following line ''on top'' of your keyboard-shortcut tiddler containing the macro:
+<$macrocall $name=".tip" _="""''Macros'' defined ''outside'' our keyboard-shortcut tiddlers (through a tiddler tagged <<tag-pill $:/tags/Macro>>) don't work out-of-the-box when triggered with a global keyboard shortcut, but there's a simple workaround using the [[import pragma|Pragma]], adding the following line ''on top'' of your keyboard-shortcut tiddler:
 
 <pre>
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
 </pre>
 
-or even simpler, if the tiddler containing the macro is known and - for example - titled `my-macro-tiddler`:
+or even simpler, if the tiddler that contains the macro definition is known and - for example - titled `my-macro-tiddler`:
 
 <pre>
 \import [[my-macro-tiddler]]
