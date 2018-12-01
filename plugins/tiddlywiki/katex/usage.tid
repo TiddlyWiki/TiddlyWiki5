@@ -1,5 +1,12 @@
 title: $:/plugins/tiddlywiki/katex/usage
 
+!! Reference:
+
+# Mathematical typesetting: [ext[https://katex.org/docs/supported.html]]
+# Chemical typesetting: [ext[https://mhchem.github.io/MathJax-mhchem/]]
+
+<hr>
+
 The usual way to include ~LaTeX is to use `$$`. For example:
 
 ```
