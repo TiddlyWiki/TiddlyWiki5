@@ -172,16 +172,8 @@ tr.doc-table-subheading {
 	border-left: .4em solid #EDE06D;
 }
 
-.doc-icon-block svg {
-	fill: #FFFBDB;
-}
-
-.doc-icon-block .tc-image-tip {
-	fill: #f0f4f0;
-}
-
-.doc-icon-block .tc-image-warning {
-	fill: #f4f0f0;
+.doc-icon-block svg, .doc-icon-block .tc-image-tip, .doc-icon-block .tc-image-warning {
+	fill: <<colour foreground>>;
 }
 
 td .doc-icon-block .tc-image-warning, td .doc-icon-block .tc-image-tip, td .doc-icon-block .tc-image-note, td .doc-icon-block svg {
@@ -193,8 +185,12 @@ td .tc-doc-warning, td .tc-doc-tip, td .tc-doc-note {
 }
 
 .tc-doc-tip, .tc-doc-warning, .tc-doc-note {
-	display: inline-block;
+	display: block;
 	border-radius: 2px;
+}
+
+table .tc-doc-tip, table .tc-doc-warning, table .tc-doc-note {
+	display: inline-block;
 }
 
 .tc-doc-tip button.tc-tiddlylink, .tc-doc-tip a.tc-tiddlylink {
