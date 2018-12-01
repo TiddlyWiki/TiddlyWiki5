@@ -207,7 +207,7 @@ table .tc-doc-tip, table .tc-doc-warning, table .tc-doc-note {
 
 .tc-doc-tip {
 	background-color: #879687;
-	border: 1px solid #4C964F;
+	border: 1px solid #879687;
 }
 
 .tc-doc-warning {
