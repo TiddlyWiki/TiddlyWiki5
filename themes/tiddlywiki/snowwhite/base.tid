@@ -51,7 +51,6 @@ textarea.tc-edit-texteditor {
 }
 
 .tc-tiddler-frame.tc-tiddler-edit-frame iframe.tc-edit-texteditor {
-	border: none;
 	<<box-shadow "1px 1px 5px rgba(0, 0, 0, 0.5)">>
 }
 
