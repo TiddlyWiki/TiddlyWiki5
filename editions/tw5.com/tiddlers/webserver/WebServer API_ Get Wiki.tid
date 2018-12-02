@@ -1,0 +1,23 @@
+created: 20181002124430552
+modified: 20181002124755134
+tags: [[WebServer API]]
+title: WebServer API: Get Wiki
+type: text/vnd.tiddlywiki
+
+Get the main wiki
+
+```
+GET /
+```
+
+The wiki is composed by rendering the tiddler identified in the [[root-tiddler|WebServer Parameter: root-tiddler]] parameter with the render type in the [[root-render-type|WebServer Parameter: root-render-type]] parameter. This is then served with the content type from the [[root-serve-type|WebServer Parameter: root-serve-type]] parameter.
+
+Parameters:
+
+* none
+
+Response:
+
+* 200 OK
+*> `Content-Type: text/html`
+*> Body: data retrieved from file

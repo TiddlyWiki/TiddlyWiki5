@@ -1,17 +1,17 @@
 caption: Macro Definitions
 created: 20150220181617000
-modified: 20171215152754837
+modified: 20180820165115455
 tags: WikiText
 title: Macro Definitions in WikiText
 type: text/vnd.tiddlywiki
 
 A [[macro|Macros]] is defined using a `\define` [[pragma|Pragma]]. Like any pragma, this can only appear at the start of a tiddler.
 
-The first line of the definition specifies the macro name and any parameters. Each parameter has a name, and optionally a default value that is used if no value is supplied on a particular call to the macro. The lines that follow contain the macro's text (i.e. the snippet represented by the macro name), until `\end` appears on a line by itself:
+The first line of the definition specifies the macro name and any parameters. Each parameter has a name and, optionally, a default value that is used if no value is supplied on a particular call to the macro. The lines that follow contain the text of the macro text (i.e. the snippet represented by the macro name), until `\end` appears on a line by itself:
 
 <$codeblock code={{$:/editions/tw5.com/macro-examples/say-hi}}/>
 
-Alternatively, the entire definition can be presented on a single line, without an `\end` marker:
+Alternatively, the entire definition can be presented on a single line without an `\end` marker:
 
 ```
 \define sayhi(name:"Bugs Bunny") Hi, I'm $name$.
@@ -19,11 +19,22 @@ Alternatively, the entire definition can be presented on a single line, without 
 
 A more formal [[presentation|Macro Definition Syntax]] of this syntax is also available.
 
-!! Placeholders
+!! Accessing variables and parameters
 
-The snippet can contain placeholders for parameters. These consist of a parameter name between dollar signs, like `$this$`.
+Inside the macro there are several methods for accessing variables defined outside of the macro or parameters from the macro parameter list. 
 
-It can also contain placeholders for [[variables|Variables]]. These consist of a variable name (or macro name) between dollar signs and round brackets, like `$(this)$`.
+|syntax|description|h
+|`$...$`|Text substitution of a parameter defined in the macro parameters list |
+|`<<__...__>>`|Parameter-as-variable access to a parameter defined in the macro parameters list |
+|`$(...)$`|Text substitution of a variable defined outside of the macro |
+|`<<...>>`|Access to a variable (or other macro) defined outside of the macro |
+<br>
+
+!!! Placeholders `$(...)$`
+
+The macro can contain placeholders for parameters. These consist of a parameter name between dollar signs, like `$this$`.
+
+The macro can also contain placeholders for [[variables|Variables]]. These consist of a variable name (or macro name) between dollar signs and round brackets, like `$(this)$`.
 
 The actual value of the parameter or variable is substituted for the placeholder whenever the macro is called:
 
@@ -35,9 +46,9 @@ eg="""<$set name="address" value="Rabbit Hole Hill">
 </$set>"""/>
 </$importvariables>
 
-!! Parameters as Variables
+!!! Parameters as Variables `<<__...__>>`
 
-The parameters to a wikitext macro are also available as special variables named as the parameter name wrapped in double underscores. For example, the example above could also be expressed as:
+Parameters in a wikitext macro can be accessed as variables by using the syntax `<<__...__>>`, i.e the parameter name surrounded by double underscores. For example, the example above could also be expressed as:
 
 ```
 \define sayhi(name:"Bugs Bunny") Hi, I'm <$text text=<<__name__>>/>.
@@ -45,24 +56,16 @@ The parameters to a wikitext macro are also available as special variables named
 
 Accessing parameters as variables only works in macros that are wikified and not, for example, when a macro is used as an attribute value. The advantage of the technique is that it avoids the parameter value being substituted into the macro as a literal string, which in turn can help avoid issues with parameters that contain quotes.
 
-For example, consider this macro. It is intended to wrap a DIV around another macro invocation, passing through the single parameter to the inner macro:
+For example, consider this macro. It invokes another macro using the single parameter as an argument for it:
 
 ```
-\define related-tags(base-tag)
-<div class="wrapper">
-<$macrocall $name="anothermacro" param="""$base-tag$"""/>
-</div>
-\end
+\define film-quote(line) <$macrocall $name="anothermacro" actor="Bugs Bunny" line="""$line$"""/>
 ```
 
-The code above will fail if the macro is invoked with the argument containing triple double quotes (for example `<<related-tags 'Triple """ Quotes'>>`). Using parameter variables offers a workaround:
+The code above will fail if the macro is invoked with the argument containing triple double quotes (for example `<<film-quote 'I quote thrice """ - see!?'>>`). Using parameter variables offers a workaround:
 
 ```
-\define related-tags(base-tag)
-<div class="wrapper">
-<$macrocall $name="anothermacro" param=<<__base-tag__>>/>
-</div>
-\end
+\define film-quote(line) <$macrocall $name="anothermacro" actor="Bugs Bunny" line=<<__line__>>/>
 ```
 
 !! Scope

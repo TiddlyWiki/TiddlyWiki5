@@ -35,6 +35,9 @@ exports["image/jpg"] = ImageParser;
 exports["image/jpeg"] = ImageParser;
 exports["image/png"] = ImageParser;
 exports["image/gif"] = ImageParser;
+exports["image/webp"] = ImageParser;
+exports["image/heic"] = ImageParser;
+exports["image/heif"] = ImageParser;
 exports["image/x-icon"] = ImageParser;
 
 })();

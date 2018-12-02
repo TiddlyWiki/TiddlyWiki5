@@ -3,7 +3,7 @@ created: 20131219100608529
 delivery: DIY
 description: Flexible hosting on your own machine or in the cloud
 method: sync
-modified: 20171115174105090
+modified: 20180701185303780
 tags: Saving [[TiddlyWiki on Node.js]] Windows Mac Linux
 title: Installing TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
@@ -20,7 +20,7 @@ type: text/vnd.tiddlywiki
 # In response, you should see TiddlyWiki report its current version (eg "<<version>>"; you may also see other debugging information reported)
 # Try it out:
 ## `tiddlywiki mynewwiki --init server` to create a folder for a new wiki that includes server-related components
-## `tiddlywiki mynewwiki --server` to start TiddlyWiki
+## `tiddlywiki mynewwiki --listen` to start TiddlyWiki
 ## Visit http://127.0.0.1:8080/ in your browser
 ## Try editing and creating tiddlers
 # Optionally, make an offline copy:

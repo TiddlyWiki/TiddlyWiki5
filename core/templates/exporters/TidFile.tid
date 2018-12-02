@@ -6,4 +6,5 @@ extension: .tid
 \define renderContent()
 {{{ $(exportFilter)$ +[limit[1]] ||$:/core/templates/tid-tiddler}}}
 \end
-<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]"><<renderContent>></$importvariables>
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+<<renderContent>>

@@ -6,7 +6,7 @@ caption: text
 
 ! Introduction
 
-The text widget displays plain text.
+The text widget displays plain text without parsing it as [[WikiText]], opposite of [[WikifyWidget]].
 
 ! Content and Attributes
 
@@ -14,3 +14,25 @@ The content of the `<$text>` widget is not used.
 
 |!Attribute |!Description |
 |text |The text to display |
+
+! Example
+
+```
+<$vars string="//italic//">
+
+* <<string>>
+* <$text text=<<string>>/>
+
+</$vars>
+```
+
+Displays as:
+
+<<<
+<$vars string="//italic//">
+
+* <<string>>
+* <$text text=<<string>>/>
+
+</$vars>
+<<<

@@ -1,5 +1,5 @@
 created: 20140206214608586
-modified: 20151105122712982
+modified: 20180701185417525
 tags: Features
 title: LazyLoading
 type: text/vnd.tiddlywiki
@@ -19,17 +19,13 @@ To start TiddlyWiki with lazy loading for image tiddlers use this command:
 
 
 ```
-tiddlywiki --server 8080 $:/core/save/lazy-images
+tiddlywiki --listen root-tiddler=$:/core/save/lazy-images
 ```
 
 To apply lazy loading to all non-system tiddlers use this command:
 
 
 ```
-tiddlywiki --server 8080 $:/core/save/lazy-all
+tiddlywiki --listen root-tiddler=$:/core/save/lazy-all
 ```
-
-! Lazy loading under TiddlyWeb
-
-With the current configuration, lazy loading is enabled by default.
 

@@ -327,3 +327,15 @@ Sebastian Silva, @icarito, 2018/04/03
 Luca Dorigo, @ldorigo, 2018/05/05
 
 Anthony Muscio, @AnthonyMuscio, 2018/05/21
+
+Muhammad Talha Mansoor, @talha131, 2018/07/16
+
+Bimba László, @bimlas, 2018/08/10
+
+Andres Carrera, @Lioric, 2018/10/11
+
+Yurii Rashkovskii, @yrashk, 2018/10/19
+
+Abraham Samma, @abesamma, 2018/10/31
+
+German Ramírez, @g0erman, 2018/11/14

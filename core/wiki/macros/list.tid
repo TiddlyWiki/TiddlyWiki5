@@ -50,28 +50,33 @@ tags: $:/tags/Macro
 </$vars>
 \end
 
-\define list-tagged-draggable-drop-actions()
+\define list-tagged-draggable-drop-actions(tag)
 <!-- Save the current ordering of the tiddlers with this tag -->
-<$set name="order" filter="[<tag>tagging[]]">
+<$set name="order" filter="[<__tag__>tagging[]]">
 <!-- Remove any list-after or list-before fields from the tiddlers with this tag -->
-<$list filter="[<tag>tagging[]]">
+<$list filter="[<__tag__>tagging[]]">
 <$action-deletefield $field="list-before"/>
 <$action-deletefield $field="list-after"/>
 </$list>
-<!-- Assign the list field of the tag with the current ordering -->
-<$action-setfield $tiddler=<<tag>> $field="list" $value=<<order>>/>
-<!-- Add the newly inserted item to the list -->
-<$action-listops $tiddler=<<tag>> $field="list" $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
+<!-- Save the new order to the Tag Tiddler -->
+<$action-listops $tiddler=<<__tag__>> $field="list" $filter="+[enlist<order>] +[insertbefore:currentTiddler<actionTiddler>]"/>
 <!-- Make sure the newly added item has the right tag -->
-<$action-listops $tiddler=<<actionTiddler>> $tags="[<tag>]"/>
+<!-- Removing this line makes dragging tags within the dropdown work as intended -->
+<!--<$action-listops $tiddler=<<actionTiddler>> $tags=<<__tag__>>/>-->
+<!-- Using the following 5 lines as replacement makes dragging titles from outside into the dropdown apply the tag -->
+<$list filter="[<actionTiddler>!contains:tags<__tag__>]">
+<$fieldmangler tiddler=<<actionTiddler>>>
+<$action-sendmessage $message="tm-add-tag" $param=<<__tag__>>/>
+</$fieldmangler>
+</$list>
 </$set>
 \end
 
 \define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div")
-<$set name="tag" value="""$tag$""">
-<$list filter="[<tag>tagging[]$subFilter$]" emptyMessage=<<__emptyMessage__>>>
+<$set name="tag" value=<<__tag__>>>
+<$list filter="[<__tag__>tagging[]$subFilter$]" emptyMessage=<<__emptyMessage__>>>
 <$elementTag$ class="tc-menu-list-item">
-<$droppable actions=<<list-tagged-draggable-drop-actions>>>
+<$droppable actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>""">
 <$elementTag$ class="tc-droppable-placeholder">
 &nbsp;
 </$elementTag$>
@@ -86,7 +91,7 @@ tags: $:/tags/Macro
 </$elementTag$>
 </$list>
 <$tiddler tiddler="">
-<$droppable actions=<<list-tagged-draggable-drop-actions>>>
+<$droppable actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>""">
 <$elementTag$ class="tc-droppable-placeholder">
 &nbsp;
 </$elementTag$>

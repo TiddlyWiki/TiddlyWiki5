@@ -268,7 +268,7 @@ $tw.utils.stringifyList = function(value) {
 };
 
 // Parse a string array from a bracketted list. For example "OneTiddler [[Another Tiddler]] LastOne"
-$tw.utils.parseStringArray = function(value) {
+$tw.utils.parseStringArray = function(value, allowDuplicate) {
 	if(typeof value === "string") {
 		var memberRegExp = /(?:^|[^\S\xA0])(?:\[\[(.*?)\]\])(?=[^\S\xA0]|$)|([\S\xA0]+)/mg,
 			results = [], names = {},
@@ -277,7 +277,7 @@ $tw.utils.parseStringArray = function(value) {
 			match = memberRegExp.exec(value);
 			if(match) {
 				var item = match[1] || match[2];
-				if(item !== undefined && !$tw.utils.hop(names,item)) {
+				if(item !== undefined && (!$tw.utils.hop(names,item) || allowDuplicate)) {
 					results.push(item);
 					names[item] = true;
 				}
@@ -1985,6 +1985,9 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("image/jpeg","base64",[".jpg",".jpeg"],{flags:["image"]});
 	$tw.utils.registerFileType("image/png","base64",".png",{flags:["image"]});
 	$tw.utils.registerFileType("image/gif","base64",".gif",{flags:["image"]});
+	$tw.utils.registerFileType("image/webp","base64",".webp",{flags:["image"]});
+	$tw.utils.registerFileType("image/heic","base64",".heic",{flags:["image"]});
+	$tw.utils.registerFileType("image/heif","base64",".heif",{flags:["image"]});
 	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",{flags:["image"]});
 	$tw.utils.registerFileType("image/x-icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("application/font-woff","base64",".woff");

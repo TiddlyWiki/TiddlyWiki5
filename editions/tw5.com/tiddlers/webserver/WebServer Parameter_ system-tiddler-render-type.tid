@@ -1,0 +1,10 @@
+caption: system-tiddler-render-type
+created: 20180808092758577
+modified: 20180810053136312
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: system-tiddler-render-type
+type: text/vnd.tiddlywiki
+
+The [[web server configuration parameter|WebServer Parameters]] ''system-tiddler-render-type'' is used to specify the render type for serving system tiddlers in the [[read-only single tiddler view|Using the read-only single tiddler view]]. The default value is `text/plain`, causing the raw text of rendered system tiddlers to be returned. Alternatively, `text/html` can be used to cause the full HTML of the rendered tiddlers to be returned.
+
+<<.tip "This setting may be overwritten by specifying the `_render_type` field of a tiddler.">>

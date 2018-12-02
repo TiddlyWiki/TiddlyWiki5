@@ -35,7 +35,7 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 
 <$reveal type="nomatch" text="" default="" state=<<tiddlerInfoState>> class="tc-tiddler-info tc-popup-handle" animate="yes" retain="yes">
 
-<$transclude tiddler="$:/core/ui/TiddlerInfo"/>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TiddlerInfoSegment]!has[draft.of]] [[$:/core/ui/TiddlerInfo]]" variable="listItem"><$transclude tiddler=<<listItem>> mode="block"/></$list>
 
 </$reveal>
 </div>

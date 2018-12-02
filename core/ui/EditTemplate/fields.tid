@@ -65,6 +65,7 @@ $value={{$:/temp/newfieldvalue}}/>
 <$button popup=<<qualify "$:/state/popup/field-dropdown">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Field/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Field/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>
 <$reveal state=<<qualify "$:/state/popup/field-dropdown">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown tc-edit-type-dropdown">
+<$set name="tv-show-missing-links" value="yes">
 <$linkcatcher to="$:/temp/newfieldname">
 <div class="tc-dropdown-item">
 <<lingo Fields/Add/Dropdown/User>>
@@ -83,6 +84,7 @@ $value={{$:/temp/newfieldvalue}}/>
 </$link>
 </$list>
 </$linkcatcher>
+</$set>
 </div>
 </$reveal>
 <span class="tc-edit-field-add-value">

@@ -59,6 +59,13 @@ exports.startup = function() {
 		$tw.pageWidgetNode.render($tw.pageContainer,null);
    		$tw.hooks.invokeHook("th-page-refreshed");
 	})();
+	// Remove any splash screen elements
+	var removeList = document.querySelectorAll(".tc-remove-when-wiki-loaded");
+	$tw.utils.each(removeList,function(removeItem) {
+		if(removeItem.parentNode) {
+			removeItem.parentNode.removeChild(removeItem);
+		}
+	});
 	// Prepare refresh mechanism
 	var deferredChanges = Object.create(null),
 		timerId;

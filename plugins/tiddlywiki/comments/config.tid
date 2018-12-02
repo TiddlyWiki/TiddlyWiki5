@@ -7,6 +7,12 @@ $description$
 </$button>
 \end
 
+! Wiki Comments
+
+<$checkbox tiddler="$:/config/Comments/EnableWikiComments" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/Comments/EnableWikiComments">Allow wiki-level comments as well as tiddler comments</$link> </$checkbox>
+
+! Tiddler Comments
+
 This filter expression determines which tiddlers will have commenting enabled:
 
 <$edit-text tiddler="$:/config/Comments/EnableFilter" tag="input"/>
