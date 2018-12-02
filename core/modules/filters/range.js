@@ -34,8 +34,16 @@ exports.range = function(source,operator,options) {
 	}
 	switch(parts.length) {
 		case 1:
-			beg = 0;
 			end = parts[0];
+			if (end >= 1) {
+				beg = 1;
+			}
+			else if (end <= -1) {
+				beg = -1;
+			}
+			else {
+				return [];
+			}
 			inc = 1;
 			break;
 		case 2:
