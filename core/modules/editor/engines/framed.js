@@ -40,7 +40,6 @@ function FramedEngine(options) {
 	// Style the iframe
 	this.iframeNode.className = this.dummyTextArea.className;
 	this.iframeNode.style["border-radius"] = "2px";
-	this.iframeNode.style.border = "none";
 	this.iframeNode.style.padding = "0";
 	this.iframeNode.style.resize = "none";
 	this.iframeNode.style["background-color"] = this.widget.wiki.extractTiddlerDataItem(this.widget.wiki.getTiddlerText("$:/palette"),"background");
