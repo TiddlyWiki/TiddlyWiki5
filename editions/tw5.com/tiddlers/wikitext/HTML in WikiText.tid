@@ -16,9 +16,11 @@ This is my nice and simple block of text. HelloThere
 
 [[Widgets share the same syntax as HTML tags|Widgets in WikiText]], and so the following information applies to them, too.
 
-! Content Parsing
+! Block mode versus Inline mode
 
-The content of an HTML element will be parsed in inline mode unless the opening tag is followed by two linebreaks, in which case it will be parsed in block mode. (Inline mode means that block mode formatting such as tables, lists and headings is not recognised).
+To get the content of an HTML element to be parsed in block mode, the opening tag must be followed by two linebreaks.
+
+Without the two linebreaks, the tag content will be parsed in inline mode which means that block mode formatting such as wikitext tables, lists and headings is not recognised.
 
 ! Attributes
 

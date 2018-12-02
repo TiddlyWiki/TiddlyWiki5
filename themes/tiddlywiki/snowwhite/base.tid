@@ -50,6 +50,10 @@ textarea.tc-edit-texteditor {
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
 }
 
+.tc-tiddler-frame.tc-tiddler-edit-frame iframe.tc-edit-texteditor {
+	<<box-shadow "1px 1px 5px rgba(0, 0, 0, 0.5)">>
+}
+
 canvas.tc-edit-bitmapeditor  {
 	<<box-shadow "2px 2px 5px rgba(0, 0, 0, 0.5)">>
 }

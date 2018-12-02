@@ -18,6 +18,8 @@ CloseOthers/Caption: sluit andere
 CloseOthers/Hint: Sluit alle andere tiddlers
 ControlPanel/Caption: bedieningspaneel
 ControlPanel/Hint: Open bedieningspaneel
+CopyToClipboard/Caption: kopieer naar klembord
+CopyToClipboard/Hint: Kopieer deze tekst naar het klembord
 Delete/Caption: verwijder
 Delete/Hint: Verwijder deze tiddler
 Edit/Caption: wijzig
@@ -85,6 +87,8 @@ Language/Caption: taal
 Language/Hint: Kies de taal voor de gebruikersomgeving
 LineWidth/Caption: lijnbreedte
 LineWidth/Hint: Stel lijnbreedte in
+Link/Hint: Maak een wikitext link
+Linkify/Hint: Zet selectie tussen vierkante haakjes
 ListBullet/Caption: lijst met opsommingstekens
 ListBullet/Hint: Maak van selectie een lijst met opsommingstekens
 ListNumber/Caption: genummerde lijst
@@ -131,6 +135,8 @@ Quote/Caption: 'blockquote'
 Quote/Hint: Maak van selectie een 'blockqoute'
 Refresh/Caption: ververs
 Refresh/Hint: Ververs deze wiki
+RotateLeft/Caption: Roteer linksom
+RotateLeft/Hint: Roteer 90 graden linksom
 Save/Caption: opslaan
 Save/Hint: Sla deze tiddler op
 SaveWiki/Caption: opslaan
@@ -165,6 +171,8 @@ Timestamp/Off/Caption: tijdstempels zijn uit
 Timestamp/Off/Hint: Werk tijdstempels niet bij als tiddlers veranderd zijn
 Timestamp/On/Caption: tijdstempels zijn aan
 Timestamp/On/Hint: Werk tijdstempels bij als tiddlers veranderd zijn
+Transcludify/Caption: transclusie
+Transcludify/Hint: Zet selectie tussen accolades
 Underline/Caption: onderstreept
 Underline/Hint: Onderstreep het geselecteerde
 Unfold/Caption: klap tiddler uit

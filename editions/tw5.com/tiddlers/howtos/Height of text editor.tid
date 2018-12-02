@@ -1,0 +1,6 @@
+created: 20160817103854725
+modified: 20160817105415313
+tags: [[Editor toolbar]]
+title: Height of text editor
+
+The button {{ $:/core/ui/EditorToolbar/editor-height}} let you adjust the height of the text input field.

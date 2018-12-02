@@ -66,7 +66,7 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 
 \define shortcut-list(caption,prefix)
 <tr>
-<$list filter="[all[tiddlers+shadows][$prefix$$(shortcutName)$]]" variable="shortcutTitle">
+<$list filter="[[$prefix$$(shortcutName)$]]" variable="shortcutTitle">
 <<shortcut-list-item "$caption$">>
 </$list>
 </tr>

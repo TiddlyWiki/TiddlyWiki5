@@ -11,7 +11,7 @@ title: $:/core/ui/EditTemplate
 \define frame-classes()
 tc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$
 \end
-<div class=<<frame-classes>>>
+<div class=<<frame-classes>> data-tiddler-title=<<currentTiddler>>>
 <$fieldmangler>
 <$set name="storyTiddler" value=<<currentTiddler>>>
 <$keyboard key="((cancel-edit-tiddler))" message="tm-cancel-tiddler">

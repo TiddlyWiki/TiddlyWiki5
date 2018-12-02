@@ -57,7 +57,15 @@ exports.startup = function() {
 		$tw.utils.addClass($tw.pageContainer,"tc-page-container-wrapper");
 		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
 		$tw.pageWidgetNode.render($tw.pageContainer,null);
+   		$tw.hooks.invokeHook("th-page-refreshed");
 	})();
+	// Remove any splash screen elements
+	var removeList = document.querySelectorAll(".tc-remove-when-wiki-loaded");
+	$tw.utils.each(removeList,function(removeItem) {
+		if(removeItem.parentNode) {
+			removeItem.parentNode.removeChild(removeItem);
+		}
+	});
 	// Prepare refresh mechanism
 	var deferredChanges = Object.create(null),
 		timerId;
@@ -65,6 +73,7 @@ exports.startup = function() {
 		// Process the refresh
 		$tw.pageWidgetNode.refresh(deferredChanges);
 		deferredChanges = Object.create(null);
+   		$tw.hooks.invokeHook("th-page-refreshed");
 	}
 	// Add the change event handler
 	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {

@@ -72,7 +72,7 @@ SelectWidget.prototype.setSelectValue = function() {
 	var value = this.selectDefault;
 	// Get the value
 	if(this.selectIndex) {
-		value = this.wiki.extractTiddlerDataItem(this.selectTitle,this.selectIndex);
+		value = this.wiki.extractTiddlerDataItem(this.selectTitle,this.selectIndex,value);
 	} else {
 		var tiddler = this.wiki.getTiddler(this.selectTitle);
 		if(tiddler) {

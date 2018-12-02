@@ -49,6 +49,8 @@ page-background: #ffffff
 pre-background: #f5f5f5
 pre-border: #cccccc
 primary: #7897f3
+select-tag-background:
+select-tag-foreground:
 sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: #000000
 sidebar-controls-foreground: #ccc

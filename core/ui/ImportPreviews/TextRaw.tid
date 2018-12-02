@@ -1,0 +1,5 @@
+title: $:/core/ui/ImportPreviews/TextRaw
+tags: $:/tags/ImportPreview
+caption: {{$:/language/Import/Listing/Preview/TextRaw}}
+
+<pre><code><$view tiddler=<<currentTiddler>> subtiddler=<<payloadTiddler>> /></code></pre>

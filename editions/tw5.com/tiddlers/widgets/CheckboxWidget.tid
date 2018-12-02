@@ -26,7 +26,8 @@ The content of the `<$checkbox>` widget is displayed within an HTML `<label>` el
 |unchecked |The value of the field corresponding to the checkbox being unchecked |
 |default |The default value to use if the field is not defined |
 |class |The class that will be assigned to the label element |
-|actions |<<.from-version "5.1.14">> A string containing ActionWidgets to be triggered when the checkbox is clicked |
+|actions |<<.from-version "5.1.14">> A string containing ActionWidgets to be triggered when the checkbox is checked |
+|uncheckactions |<<.from-version "5.1.16">> A string containing ActionWidgets to be triggered when the checkbox is unchecked |
 
 !! Tag Mode
 

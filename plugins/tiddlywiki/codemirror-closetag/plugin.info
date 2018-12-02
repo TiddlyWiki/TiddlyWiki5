@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/codemirror-closetag",
+	"description": "CodeMirror AddOn: Auto-Close Tags",
+	"author": "JeremyRuston",
+	"list": "readme"
+}

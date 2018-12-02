@@ -45,6 +45,8 @@ page-background: Page background
 pre-background: Preformatted code background
 pre-border: Preformatted code border
 primary: General primary
+select-tag-background: `<select>` element background
+select-tag-foreground: `<select>` element text
 sidebar-button-foreground: Sidebar button foreground
 sidebar-controls-foreground-hover: Sidebar controls foreground hover
 sidebar-controls-foreground: Sidebar controls foreground

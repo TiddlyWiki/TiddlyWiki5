@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/comments/add-comment-button-actions
+
+<$set name="username" value={{$:/status/UserName}} emptyValue="(anonymous)">
+<$set name="target" filter="[<currentTiddler>]">
+<$action-createtiddler $basetitle={{{ [[Comment by ']addsuffix<username>addsuffix[' on ']addsuffix<currentTiddler>addsuffix[']] }}} role="comment" list=<<target>> text="" edit-mode="yes"/>
+</$set>
+</$set>

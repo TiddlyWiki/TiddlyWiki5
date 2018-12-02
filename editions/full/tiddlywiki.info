@@ -9,7 +9,6 @@
 		"tiddlywiki/codemirror",
 		"tiddlywiki/d3",
 		"tiddlywiki/github-fork-ribbon",
-		"tiddlywiki/googleanalytics",
 		"tiddlywiki/help",
 		"tiddlywiki/highlight",
 		"tiddlywiki/internals",
@@ -23,6 +22,7 @@
 		"tiddlywiki/stacked-view",
 		"tiddlywiki/text-slicer",
 		"tiddlywiki/xlsx-utils",
+		"tiddlywiki/sax",
 		"tiddlywiki/xmldom"
 	],
 	"languages": [
@@ -46,6 +46,7 @@
 		"nl-NL",
 		"pa-IN",
 		"pt-PT",
+		"pt-BR",
 		"ru-RU",
 		"sk-SK",
 		"sl-SI",

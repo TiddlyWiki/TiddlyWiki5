@@ -1,8 +1,9 @@
-created: 20140917083515996
-modified: 20150221223214000
-title: list-links Macro
-tags: Macros [[Core Macros]]
 caption: list-links
+created: 20140917083515996
+modified: 20180109171310659
+tags: Macros [[Core Macros]]
+title: list-links Macro
+type: text/vnd.tiddlywiki
 
 The <<.def list-links>> [[macro|Macros]] returns a formatted list of links to a [[selection of tiddlers|Title Selection]].
 
@@ -18,5 +19,7 @@ If a tiddler has a <<.field caption>> field, this is shown instead of the tiddle
 : An HTML element to use for each item in the list, defaulting to `li`
 ;class
 : A [[CSS|Cascading Style Sheets]] class for the overall list element
+;emptyMessage
+: Optional wikitext to display if there are no tiddlers with the specified tag
 
 <<.macro-examples "list-links">>

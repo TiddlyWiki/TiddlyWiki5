@@ -11,7 +11,9 @@ Basics/DefaultTiddlers/Prompt: Standaard tiddlers:
 Basics/DefaultTiddlers/TopHint: Kies welke tiddlers bij opstarten getoond worden:
 Basics/Language/Prompt: Hallo! Huidige taal:
 Basics/NewJournal/Tags/Prompt: Labels voor nieuwe journaaltiddlers
+Basics/NewJournal/Text/Prompt: Tekst voor nieuwe journaaltiddlers
 Basics/NewJournal/Title/Prompt: Titel voor nieuwe journaaltiddlers
+Basics/NewTiddler/Title/Prompt: Titel voor nieuwe tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Aantal overschreven schaduwtiddlers:
 Basics/ShadowTiddlers/Prompt: Aantal schaduwtiddlers:
 Basics/Subtitle/Prompt: Ondertitel:
@@ -105,9 +107,11 @@ Settings/AutoSave/Disabled/Description: Sla veranderingen niet automatisch op
 Settings/AutoSave/Enabled/Description: Sla veranderingen automatisch op
 Settings/AutoSave/Hint: Sla veranderingen tijdens wijzigen automatisch op
 Settings/CamelCase/Caption: 'Camel Case' wiki links
-Settings/CamelCase/Description: Zet automatisch ~CamelCase linken aan
-Settings/CamelCase/Hint: Je kan globaal het automatisch linken van ~CamelCase woorden uitzetten. Dit vereist herladen van de wiki om effect te hebben.
+Settings/CamelCase/Description: Zet automatisch 'Camel Case' linken aan
+Settings/CamelCase/Hint: Je kan globaal het automatisch linken van 'Camel Case' woorden uitzetten. Dit vereist herladen van de wiki om effect te hebben.
 Settings/Caption: Instellingen
+Settings/DefaultMoreSidebarTab/Caption: Standaard 'Meer' zijpaneel tab
+Settings/DefaultMoreSidebarTab/Hint: Geef aan welke 'Meer' tab in het zijpaneel standaard wordt getoond
 Settings/DefaultSidebarTab/Caption: Standaard tab in zijpaneel
 Settings/DefaultSidebarTab/Hint: Geef aan welke tab in het zijpaneel standaard wordt getoond
 Settings/EditorToolbar/Caption: Editor knoppenbalk
@@ -137,6 +141,9 @@ Settings/NavigationHistory/Caption: Navigeer-geschiedenis
 Settings/NavigationHistory/Hint: Werk de browsergeschiedenis bij als er naar een tiddler genavigeerd wordt:
 Settings/NavigationHistory/No/Description: Werk de browsergeschiedenis niet bij
 Settings/NavigationHistory/Yes/Description: Werk de browsergeschiedenis bij
+Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: Kopieer permalink/permaview URL naar klembord
+Settings/NavigationPermalinkviewMode/Hint: Kies hoe permalink/permaview wordt behandeld:
+Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Werk de adresbalk bij met permalink/permaview URL
 Settings/PerformanceInstrumentation/Caption: Prestatiemeting
 Settings/PerformanceInstrumentation/Description: Zet prestatiemeting aan
 Settings/PerformanceInstrumentation/Hint: Toont prestatiestatistieken in de 'browser console'. Dit vereist herladen van de wiki om effect te hebben
@@ -155,6 +162,10 @@ Settings/ToolbarButtonStyle/Styles/Boxed: Vierkante rand
 Settings/ToolbarButtonStyle/Styles/Rounded: Ronde rand
 StoryView/Caption: 'Story' view
 StoryView/Prompt: Huidige view:
+Stylesheets/Caption: Stijlbladen
+Stylesheets/Expand/Caption: Klap alles uit
+Stylesheets/Hint: Dit is de getoonde CSS van de huidige stijlblad-tiddlers gelabeld met <<tag "$:/tags/Stylesheet">>
+Stylesheets/Restore/Caption: Herstel
 Theme/Caption: Thema
 Theme/Prompt: Huidig thema:
 TiddlerFields/Caption: Tiddler velden

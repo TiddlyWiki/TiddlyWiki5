@@ -40,12 +40,23 @@ function parseFilterOperation(operators,filterString,p) {
 		nextBracketPos += p;
 		var bracket = filterString.charAt(nextBracketPos);
 		operator.operator = filterString.substring(p,nextBracketPos);
-
 		// Any suffix?
 		var colon = operator.operator.indexOf(':');
 		if(colon > -1) {
+			// The raw suffix for older filters
 			operator.suffix = operator.operator.substring(colon + 1);
 			operator.operator = operator.operator.substring(0,colon) || "field";
+			// The processed suffix for newer filters
+			operator.suffixes = [];
+			$tw.utils.each(operator.suffix.split(":"),function(subsuffix) {
+				operator.suffixes.push([]);
+				$tw.utils.each(subsuffix.split(","),function(entry) {
+					entry = $tw.utils.trim(entry);
+					if(entry) {
+						operator.suffixes[operator.suffixes.length - 1].push(entry); 
+					}
+				});
+			});
 		}
 		// Empty operator means: title
 		else if(operator.operator === "") {
@@ -108,7 +119,7 @@ exports.parseFilter = function(filterString) {
 		p = 0, // Current position in the filter string
 		match;
 	var whitespaceRegExp = /(\s+)/mg,
-		operandRegExp = /((?:\+|\-)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
+		operandRegExp = /((?:\+|\-|~)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
 	while(p < filterString.length) {
 		// Skip any whitespace
 		whitespaceRegExp.lastIndex = p;
@@ -208,6 +219,7 @@ exports.compileFilter = function(filterString) {
 							operand: operand,
 							prefix: operator.prefix,
 							suffix: operator.suffix,
+							suffixes: operator.suffixes,
 							regexp: operator.regexp
 						},{
 							wiki: self,
@@ -246,6 +258,13 @@ exports.compileFilter = function(filterString) {
 						source = self.makeTiddlerIterator(results);
 						results.splice(0,results.length);
 						$tw.utils.pushTop(results,operationSubFunction(source,widget));
+					};
+				case "~": // This operation is unioned into the result only if the main result so far is empty
+					return function(results,source,widget) {
+						if(results.length === 0) {
+							// Main result so far is empty
+							$tw.utils.pushTop(results,operationSubFunction(source,widget));
+						}
 					};
 			}
 		})());

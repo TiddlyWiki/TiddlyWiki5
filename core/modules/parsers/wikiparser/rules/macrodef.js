@@ -84,7 +84,8 @@ exports.parse = function() {
 			value: {type: "string", value: text}
 		},
 		children: [],
-		params: params
+		params: params,
+		isMacroDefinition: true
 	}];
 };
 

@@ -1,0 +1,19 @@
+{
+	"tiddlers": [
+		{
+			"file": "addon/fullscreen/fullscreen.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/fullscreen/fullscreen.js",
+				"module-type": "codemirror"
+			}
+		},{
+			"file": "addon/fullscreen/fullscreen.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/fullscreen/fullscreen.css",
+				"tags": "[[$:/tags/Stylesheet]]"
+			}
+		}
+	]
+}

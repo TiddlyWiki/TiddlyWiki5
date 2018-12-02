@@ -4,8 +4,7 @@ caption: {{$:/core/images/new-journal-button}} {{$:/language/Buttons/NewJournal/
 description: {{$:/language/Buttons/NewJournal/Hint}}
 
 \define journalButton()
-<$button tooltip={{$:/language/Buttons/NewJournal/Hint}} aria-label={{$:/language/Buttons/NewJournal/Caption}} class=<<tv-config-toolbar-class>>>
-<$action-sendmessage $message="tm-new-tiddler" title=<<now "$(journalTitleTemplate)$">> tags="$(journalTags)$" text="$(journalText)$"/>
+<$button tooltip={{$:/language/Buttons/NewJournal/Hint}} aria-label={{$:/language/Buttons/NewJournal/Caption}} class=<<tv-config-toolbar-class>> actions={{$:/core/ui/Actions/new-journal}}>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/new-journal-button}}
 </$list>
@@ -14,8 +13,4 @@ description: {{$:/language/Buttons/NewJournal/Hint}}
 </$list>
 </$button>
 \end
-<$set name="journalTitleTemplate" value={{$:/config/NewJournal/Title}}>
-<$set name="journalTags" value={{$:/config/NewJournal/Tags}}>
-<$set name="journalText" value={{$:/config/NewJournal/Text}}>
 <<journalButton>>
-</$set></$set></$set>

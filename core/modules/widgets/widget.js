@@ -71,9 +71,10 @@ Set the value of a context variable
 name: name of the variable
 value: value of the variable
 params: array of {name:, default:} for each parameter
+isMacroDefinition: true if the variable is set via a \define macro pragma (and hence should have variable substitution performed)
 */
-Widget.prototype.setVariable = function(name,value,params) {
-	this.variables[name] = {value: value, params: params};
+Widget.prototype.setVariable = function(name,value,params,isMacroDefinition) {
+	this.variables[name] = {value: value, params: params, isMacroDefinition: !!isMacroDefinition};
 };
 
 /*
@@ -102,7 +103,10 @@ Widget.prototype.getVariableInfo = function(name,options) {
 		$tw.utils.each(params,function(param) {
 			value = $tw.utils.replaceString(value,new RegExp("\\$" + $tw.utils.escapeRegExp(param.name) + "\\$","mg"),param.value);
 		});
-		value = this.substituteVariableReferences(value);
+		// Only substitute variable references if this variable was defined with the \define pragma
+		if(variable.isMacroDefinition) {
+			value = this.substituteVariableReferences(value);			
+		}
 		return {
 			text: value,
 			params: params

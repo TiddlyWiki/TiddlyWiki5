@@ -14,6 +14,8 @@ CloseOthers/Caption: Andere schließen
 CloseOthers/Hint: Alle anderen Tiddler schließen
 ControlPanel/Caption: Control-Panel
 ControlPanel/Hint: Öffne das Control-Panel
+CopyToClipboard/Caption: Kopiere in die Zwischenablage
+CopyToClipboard/Hint: Kopiere diesen Text in die Zwischenablage
 Delete/Caption: Löschen
 Delete/Hint: Lösche diesen Tiddler
 Edit/Caption: Bearbeiten
@@ -139,6 +141,8 @@ LineWidth/Caption: Zeilen Länge
 LineWidth/Hint: Wählen Sie die Zeilenlänge
 Link/Caption: Link
 Link/Hint: Erstellt einen Wiki-Link
+Linkify/Caption: Wikilink
+Linkify/Hint: Wikilink - Den selektierten Text in eckige Klammern setzen
 ListBullet/Caption: Punkteliste
 ListBullet/Hint: Zeilen, die eine Markierung enthalten, werden als Punkteliste formatiert
 ListNumber/Caption: Aufzählungsliste
@@ -159,6 +163,8 @@ PreviewType/Caption: Vorschau Typ
 PreviewType/Hint: Wählen Sie den Vorschau Typ
 Quote/Caption: Zitat
 Quote/Hint: Alle Zeilen, die eine Markierung enthalten werden als Referenz/Zitat formatiert
+RotateLeft/Caption: Links rotieren
+RotateLeft/Hint: Rotiere das Bild um 90° nach links
 Size/Caption: Bildgröße
 Size/Caption/Height: Höhe:
 Size/Caption/Resize: Bildgröße ändern
@@ -175,5 +181,7 @@ Subscript/Caption: Tiefsgestellt
 Subscript/Hint: Ausgewählten Text tiefgestellt darstellen
 Superscript/Caption: Hochgestellt
 Superscript/Hint: Ausgewählten Text hochgestellt darstellen
+Transcludify/Caption: Transklusion
+Transcludify/Hint: Transklusion - Den selektierten Text in geschwungene Klammern setzen
 Underline/Caption: Unterstreichen
 Underline/Hint: Ausgewählten Text unterstrichen darstellen

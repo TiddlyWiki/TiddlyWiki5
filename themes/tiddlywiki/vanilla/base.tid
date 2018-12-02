@@ -85,6 +85,14 @@ body.tc-body {
 	fill: <<colour foreground>>;
 }
 
+<<if-background-attachment """
+
+body.tc-body {
+        background-color: transparent;
+}
+
+""">>
+
 h1, h2, h3, h4, h5, h6 {
 	line-height: 1.2;
 	font-weight: 300;
@@ -177,6 +185,10 @@ input:not([type]) {
 	background: <<colour background>>;
 }
 
+input[type="checkbox"] {
+  vertical-align: middle;
+}
+
 .tc-muted {
 	color: <<colour muted-foreground>>;
 }
@@ -263,7 +275,7 @@ table tfoot tr td {
 button.tc-tiddlylink,
 a.tc-tiddlylink {
 	text-decoration: none;
-	font-weight: normal;
+	font-weight: 500;
 	color: <<colour tiddler-link-foreground>>;
 	-webkit-user-select: inherit; /* Otherwise the draggable attribute makes links impossible to select */
 }
@@ -462,6 +474,16 @@ html body.tc-body .tc-btn-rounded:hover svg {
 	margin: 0;
 }
 
+/* used for documentation "fake" buttons */
+.tc-btn-standard {
+	line-height: 1.8;
+	color: #667;
+	background-color: #e0e0e0;
+	border: 1px solid #888;
+	padding: 2px 1px 2px 1px;
+	margin: 1px 4px 1px 4px;
+}
+
 .tc-btn-big-green {
 	display: inline-block;
 	padding: 8px;
@@ -618,7 +640,6 @@ button.tc-untagged-label {
 .tc-tag-label svg, .tc-tag-label img {
 	height: 1em;
 	width: 1em;
-	fill: <<colour tag-foreground>>;
 	vertical-align: text-bottom;
 }
 
@@ -628,6 +649,10 @@ button.tc-untagged-label {
 
 .tc-tag-manager-tag {
 	width: 100%;
+}
+
+button.tc-btn-invisible.tc-remove-tag-button {
+	outline: none;
 }
 
 /*
@@ -692,6 +717,10 @@ button.tc-untagged-label {
 .tc-page-controls {
 	margin-top: 14px;
 	font-size: 1.5em;
+}
+
+.tc-page-controls .tc-drop-down {
+  font-size: 1rem;
 }
 
 .tc-page-controls button {
@@ -998,6 +1027,11 @@ button.tc-untagged-label {
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
 }
 
+.tc-tiddler-frame.tc-tiddler-edit-frame iframe.tc-edit-texteditor {
+border-radius: 2px;
+background-color: <<colour tiddler-background>>;
+}
+
 .tc-tiddler-frame .tc-binary-warning {
 	width: 100%;
 	height: 5em;
@@ -1090,6 +1124,7 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-editor-toolbar button:hover {
 	background-color: <<colour tiddler-controls-foreground-selected>>;
 	fill: <<colour background>>;
+	color: <<colour background>>;
 }
 
 .tc-editor-toolbar .tc-text-editor-toolbar-more {
@@ -1239,6 +1274,8 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-tiddler-preview {
 	overflow: auto;
+	margin-left: -0.3em;
+	padding-left: 0.3em;
 }
 
 .tc-tiddler-preview-preview {
@@ -1387,11 +1424,6 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-drop-down img {
 	width: 1em;
-}
-
-.tc-drop-down-language-chooser img {
-	width: 2em;
-	vertical-align: baseline;
 }
 
 .tc-drop-down a, .tc-drop-down button {
@@ -1961,6 +1993,43 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 /*
+** Floating drafts list
+*/
+
+.tc-drafts-list {
+	z-index: 2000;
+	position: fixed;
+	font-size: 0.8em;
+	left: 0;
+	bottom: 0;
+}
+
+.tc-drafts-list a {
+	margin: 0 0.5em;
+	padding: 4px 4px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	border: 1px solid <<colour background>>;
+	border-bottom-none;
+	background: <<colour dirty-indicator>>;
+	color: <<colour background>>;
+	fill: <<colour background>>;
+}
+
+.tc-drafts-list a:hover {
+	text-decoration: none;
+	background: <<colour foreground>>;
+	color: <<colour background>>;
+	fill: <<colour background>>;
+}
+
+.tc-drafts-list a svg {
+	width: 1em;
+	height: 1em;
+	vertical-align: text-bottom;
+}
+
+/*
 ** Control panel
 */
 
@@ -2054,6 +2123,14 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	padding: 1em 1em 1em 1em;
 }
 
+.tc-check-list {
+	line-height: 2em;
+}
+
+.tc-check-list .tc-image-button {
+	height: 1.5em;
+}
+
 /*
 ** Message boxes
 */
@@ -2096,25 +2173,62 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 */
 
 .tc-chooser {
-	border: 1px solid <<colour table-border>>;
+	border-right: 1px solid <<colour table-header-background>>;
+	border-left: 1px solid <<colour table-header-background>>;
 }
+
 
 .tc-chooser-item {
-	border: 8px;
-	padding: 2px 4px;
+	border-bottom: 1px solid <<colour table-header-background>>;
+	border-top: 1px solid <<colour table-header-background>>;
+	padding: 2px 4px 2px 14px;
 }
 
-.tc-chooser-item a.tc-tiddlylink {
+.tc-drop-down .tc-chooser-item {
+	padding: 2px;
+}
+
+.tc-chosen,
+.tc-chooser-item:hover {
+	background-color: <<colour table-header-background>>;
+	border-color: <<colour table-footer-background>>;
+}
+
+.tc-chosen .tc-tiddlylink {
+	cursor:default;
+}
+
+.tc-chooser-item .tc-tiddlylink {
 	display: block;
 	text-decoration: none;
-	color: <<colour tiddler-link-foreground>>;
-	background-color: <<colour tiddler-link-background>>;
+	background-color: transparent;
 }
 
-.tc-chooser-item a.tc-tiddlylink:hover {
+.tc-chooser-item:hover .tc-tiddlylink:hover {
 	text-decoration: none;
-	color: <<colour tiddler-link-background>>;
-	background-color: <<colour tiddler-link-foreground>>;
+}
+
+.tc-drop-down .tc-chosen .tc-tiddlylink,
+.tc-drop-down .tc-chooser-item .tc-tiddlylink:hover {
+	color: <<colour foreground>>;
+}
+
+.tc-chosen > .tc-tiddlylink:before {
+	margin-left: -10px;
+	position: relative;
+	content: "» ";
+}
+
+.tc-chooser-item svg,
+.tc-chooser-item img{
+	width: 1em;
+	height: 1em;
+	vertical-align: middle;
+}
+
+.tc-language-chooser .tc-image-button img {
+	width: 2em;
+	vertical-align: -0.15em;
 }
 
 /*
@@ -2379,6 +2493,44 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 }
 
 /*
+** Diffs
+*/
+
+.tc-diff-equal {
+	background-color: <<colour diff-equal-background>>;
+	color: <<colour diff-equal-foreground>>;
+}
+
+.tc-diff-insert {
+	background-color: <<colour diff-insert-background>>;
+	color: <<colour diff-insert-foreground>>;
+}
+
+.tc-diff-delete {
+	background-color: <<colour diff-delete-background>>;
+	color: <<colour diff-delete-foreground>>;
+}
+
+.tc-diff-invisible {
+	background-color: <<colour diff-invisible-background>>;
+	color: <<colour diff-invisible-foreground>>;
+}
+
+.tc-diff-tiddlers th {
+	text-align: right;
+	background: <<colour background>>;
+	font-weight: normal;
+	font-style: italic;
+}
+
+.tc-diff-tiddlers pre {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+/*
 ** Errors
 */
 
@@ -2422,3 +2574,9 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 .tc-tree li span {
     	color: lightgray;
 }
+
+select {
+        color: <<colour select-tag-foreground>>;
+        background: <<colour select-tag-background>>;
+}
+

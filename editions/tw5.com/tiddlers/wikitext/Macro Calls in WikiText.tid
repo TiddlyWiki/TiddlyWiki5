@@ -20,3 +20,7 @@ The syntax is actually a shorthand for a <<.wlink MacroCallWidget>> widget. The 
 As macros are simply parameterised [[variables|Variables]], a variable's value can be inserted using the same techniques.
 
 [[Examples|Macro Calls in WikiText (Examples)]]
+
+!! Named vs.unnamed parameters
+
+In the wikitext notation, using named parameters is always the safer choice compared to defining values only. Not naming parameters may have confusing side effects. For example, imagine the first parameter of some macro specifies a [[state tiddler|StateMechanism]] while the second one is intended for a [[template|Transclusion with Templates]] tiddler. Should you accidentally forget to define the first parameter or are confused about the order, the next time your macro is run, which might even be triggered using the preview, your template tiddler may inadvertently be overriden with what was intended to be the state.

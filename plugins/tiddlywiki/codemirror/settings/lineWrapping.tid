@@ -1,0 +1,9 @@
+title: $:/core/ui/ControlPanel/Settings/codemirror/lineWrapping
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: {{$:/language/codemirror/lineWrapping/hint}}
+
+\define lingo-base() $:/language/codemirror/lineWrapping/
+<<lingo hint>>
+
+<$checkbox tiddler="$:/config/codemirror/lineWrapping" field="text" checked="true" unchecked="false" default="true"> <$link to="$:/config/codemirror/lineWrapping"><<lingo info>></$link> </$checkbox>
+

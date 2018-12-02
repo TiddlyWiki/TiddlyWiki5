@@ -1,6 +1,6 @@
 caption: view
 created: 20131024141900000
-modified: 20170824195528248
+modified: 20180730201626985
 tags: Widgets
 title: ViewWidget
 type: text/vnd.tiddlywiki
@@ -18,7 +18,7 @@ The content of the `<$view>` widget is displayed if the field or property is mis
 |field |The name of the field to view (defaults to "text") |
 |index |The name of the index to view |
 |format |The format for displaying the field (see below) |
-|template |Optional template string used with certain formats such as dates |
+|template |Optional template string used when the `format` attribute is set to "date" |
 |subtiddler |Optional SubTiddler title when the target tiddler is a [[plugin|Plugins]] (see below) |
 |mode |<<.from-version "5.1.15">> Optional transclusion parsing mode for wikified formats. May be "inline" or "block" (the default) |
 

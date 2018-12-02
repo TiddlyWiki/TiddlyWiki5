@@ -5,9 +5,11 @@ tags: Widgets
 title: DraggableWidget
 type: text/vnd.tiddlywiki
 
-The `draggable` widget creates a DOM element that can be dragged by the user. It only works on browsers that support drag and drop, which typically means desktop browsers, but [[there are workarounds|Mobile Drag And Drop Shim Plugin]].
+The DraggableWidget creates a DOM element that can be dragged by the user. It only works on browsers that support drag and drop, which typically means desktop browsers, but [[there are workarounds|Mobile Drag And Drop Shim Plugin]].
 
-The draggable element can be assigned a list of tiddlers that are used as the payload. See DragAndDropMechanism for an overview.
+The draggable element can be assigned a list of tiddlers that are used as the payload.
+If desired it can invoke actions when dragging starts and when it ends.
+See DragAndDropMechanism for an overview.
 
 ! Content and Attributes
 
@@ -16,7 +18,11 @@ The draggable element can be assigned a list of tiddlers that are used as the pa
 |filter |Optional filter defining the payload tiddlers for the drag |
 |class |Optional CSS classes to assign to the draggable element. The class `tc-draggable` is added automatically, and the class `tc-dragging` is applied while the element is being dragged |
 |tag |Optional tag to override the default "div" element |
+|startactions |Optional action string that gets invoked when dragging ''starts'' |
+|endactions |Optional action string that gets invoked when dragging ''ends'' |
 
 Either or both of the ''tiddler'' and ''filter'' attributes must be specified in order for there to be a payload to drag.
+
+The ''actionTiddler'' variable is accessible in both //startactions// and //endactions//. It holds the payload tiddler(s) specified through the //tiddler// attribute.
 
 The LinkWidget incorporates the functionality of the DraggableWidget via the ''draggable'' attribute.
