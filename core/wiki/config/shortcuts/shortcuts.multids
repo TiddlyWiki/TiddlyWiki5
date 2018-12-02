@@ -14,9 +14,6 @@ list-bullet: ctrl-shift-L
 list-number: ctrl-shift-N
 mono-block: ctrl-shift-M
 mono-line: ctrl-M
-new-image: alt-I
-new-journal: alt-J
-new-tiddler: alt-N
 picture: ctrl-shift-I
 preview: alt-P
 quote: ctrl-Q

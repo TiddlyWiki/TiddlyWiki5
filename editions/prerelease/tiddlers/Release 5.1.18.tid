@@ -13,9 +13,9 @@ type: text/vnd.tiddlywiki
 
 This version introduces new infrastructure to handle global keyboard shortcuts. The core ships with the following shortcuts:
 
-* <kbd>alt-I</kbd> - New image
-* <kbd>alt-J</kbd> - New journal
-* <kbd>alt-N</kbd> - New tiddler
+* <kbd>alt-I</kbd> (or <kbd>ctrl-I</kbd> on Mac) - New image
+* <kbd>alt-J</kbd> (or <kbd>ctrl-J</kbd> on Mac) - New journal
+* <kbd>alt-N</kbd> (or <kbd>ctrl-N</kbd> on Mac) - New tiddler
 
 See [[How to create keyboard shortcuts]]
 
