@@ -1275,13 +1275,16 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-tiddler-preview {
 	overflow: auto;
 	margin-left: -0.3em;
+	margin-right: -0.3em;
 	padding-left: 0.3em;
+	padding-right: 0.3em;
 }
 
 .tc-tiddler-preview-preview {
 	float: right;
 	width: 49%;
 	border: 1px solid <<colour tiddler-editor-border>>;
+	border-radius: 2px;
 	margin: 4px 0 3px 3px;
 	padding: 3px 3px 3px 3px;
 }
