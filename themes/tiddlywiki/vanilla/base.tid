@@ -1286,7 +1286,7 @@ html body.tc-body.tc-single-tiddler-window {
 	border: 1px solid <<colour tiddler-editor-border>>;
 	border-radius: 2px;
 	margin: 4px 0 3px 3px;
-	padding: 3px 3px 3px 3px;
+	padding: 3px 3px 3px 0.5em;
 }
 
 <<if-editor-height-fixed then:"""
