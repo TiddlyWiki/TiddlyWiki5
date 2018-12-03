@@ -23,7 +23,7 @@ exports.startup = factory(root);
 }(typeof global != 'undefined' ? global : this, function(root) {
 
 	if (root.CSS && root.CSS.escape) {
-		return root.CSS.escape;
+		return;
 	}
 
 	// https://drafts.csswg.org/cssom/#serialize-an-identifier
