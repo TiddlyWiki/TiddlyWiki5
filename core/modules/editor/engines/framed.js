@@ -39,11 +39,9 @@ function FramedEngine(options) {
 	this.iframeDoc.close();
 	// Style the iframe
 	this.iframeNode.className = this.dummyTextArea.className;
-	this.iframeNode.style["border-radius"] = "2px";
 	this.iframeNode.style.border = "none";
 	this.iframeNode.style.padding = "0";
 	this.iframeNode.style.resize = "none";
-	this.iframeNode.style["background-color"] = this.widget.wiki.extractTiddlerDataItem(this.widget.wiki.getTiddlerText("$:/palette"),"background");
 	this.iframeDoc.body.style.margin = "0";
 	this.iframeDoc.body.style.padding = "0";
 	this.widget.domNodes.push(this.iframeNode);
@@ -94,12 +92,6 @@ FramedEngine.prototype.copyStyles = function() {
 	this.domNode.style.display = "block";
 	this.domNode.style.width = "100%";
 	this.domNode.style.margin = "0";
-	this.domNode.style.resize = "none";
-	this.domNode.style.border = "none";
-	this.domNode.style["border-radius"] = "2px";
-	this.domNode.style["padding-left"] = "0.5em";
-	this.domNode.style["padding-top"] = "0.3em";
-	this.domNode.style["background-color"] = this.widget.wiki.extractTiddlerDataItem(this.widget.wiki.getTiddlerText("$:/palette"),"background");
 	// In Chrome setting -webkit-text-fill-color overrides the placeholder text colour
 	this.domNode.style["-webkit-text-fill-color"] = "currentcolor";
 };
