@@ -30,7 +30,7 @@ tags: $:/tags/Macro
 <$macrocall $name="toc-body-solid"  tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> />
 \end
 
-\define toc-linked-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
+\define toc-linked-expandable-body-solid(tag,sort:"",itemClassFilter,exclude,path)
 <!-- helper function -->
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item" value="toc-item-selected">
