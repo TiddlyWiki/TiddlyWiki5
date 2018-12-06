@@ -1,0 +1,33 @@
+created: 20170510094040705
+creator: Mat von TWaddle
+list-after: $:/core/ui/ViewTemplate/body
+modified: 20180513192121310
+modifier: Mat von TWaddle
+tags: $:/tags/Macro
+title: $:/plugins/TWaddle/richlink/main
+type: text/vnd.tiddlywiki
+
+\define applytemplate(signum)
+<$set name=template filter="[{$:/richlink/.dictionary##$signum$}addprefix[$:/]]">
+<$tiddler tiddler=<<template>> >
+     <$transclude/>
+</$tiddler>
+</$set>
+\end
+
+\define richlink(link, 1, 2, 3)
+<$vars link="$link$" 1="$1$" 2="$2$" 3="$3$">
+<$set name="domain" filter="""[[$link$]removeprefix[https://]splitbefore[/]removesuffix[/]] [[$link$]removeprefix[http://]splitbefore[/]removesuffix[/]] [[$link$]removeprefix[https%3A//]splitbefore[/]removesuffix[/]] [[$link$]removeprefix[http%3A//]splitbefore[/]removesuffix[/]]""" >
+  <$macrocall $name=applytemplate signum=<<domain>> />
+</$set>
+<$set name="filetype" filter="""[[$link$]split:afterlast[.]]""" >
+ <$macrocall $name=applytemplate signum=<<filetype>> />
+</$set>
+</$vars>
+\end
+
+<$list filter="[all[current]has[attachment]get[attachment]]" 
+         variable="link">
+{{$:/core/images/import-button}}<$macrocall $name=richlink link=<<link>>/>
+</$list>
+

@@ -1,0 +1,50 @@
+author: Felix Küppers
+core-version: >=5.1.5
+created: 20180220045519689
+dependents: 
+description: TopStoryView – Always scroll navigated tiddlers to the top
+list: Configuration License Readme
+modified: 20180513190227225
+plugin-type: plugin
+released: 
+source: https://github.com/felixhayashi/TW5-TopStoryView
+title: $:/plugins/felixhayashi/topstoryview
+type: application/json
+version: 0.2.0
+
+{
+    "tiddlers": {
+        "$:/plugins/felixhayashi/topstoryview/config.js": {
+            "text": "/*\\\n\ntitle: $:/plugins/felixhayashi/topstoryview/config.js\ntype: application/javascript\nmodule-type: library\n\n@preserve\n\n\\*/\n(function(){\"use strict\";exports.config={classNames:{storyRiver:\"tc-story-river\",backDrop:\"story-backdrop\",tiddlerFrame:\"tc-tiddler-frame\",tiddlerTitle:\"tc-title\"},references:{userConfig:\"$:/config/topStoryView\",focussedTiddlerStore:\"$:/temp/focussedTiddler\",refreshTrigger:\"$:/temp/focussedTiddler/refresh\"},checkbackTime:$tw.utils.getAnimationDuration()}})();",
+            "title": "$:/plugins/felixhayashi/topstoryview/config.js",
+            "type": "application/javascript",
+            "module-type": "library"
+        },
+        "$:/plugins/felixhayashi/topstoryview/layout": {
+            "text": "html .tc-story-river:after {\n  content: \"\";\n  display: block; }\n",
+            "title": "$:/plugins/felixhayashi/topstoryview/layout",
+            "type": "text/vnd.tiddlywiki",
+            "tags": [
+                "$:/tags/Stylesheet"
+            ]
+        },
+        "$:/plugins/felixhayashi/topstoryview/Configuration": {
+            "title": "$:/plugins/felixhayashi/topstoryview/Configuration",
+            "text": "Please see the [[GitHub page|https://github.com/felixhayashi/TW5-TopStoryView]] for more information on the options.\n\nSave and reload the wiki to activate changes.\n\n<table>\n  <tr>\n    <th align=\"left\">Scroll offset:</th>\n    <td><$edit-text tiddler=\"$:/config/topStoryView\" field=\"scroll-offset\" tag=\"input\" default=\"150px\" /></td>\n  </tr>\n</table>"
+        },
+        "$:/plugins/felixhayashi/topstoryview/License": {
+            "title": "$:/plugins/felixhayashi/topstoryview/License",
+            "text": "This code is released under the BSD license. For the exact terms visit:\n\nhttps://github.com/felixhayashi/TW5-TopStoryView/blob/master/LICENSE"
+        },
+        "$:/plugins/felixhayashi/topstoryview/Readme": {
+            "title": "$:/plugins/felixhayashi/topstoryview/Readme",
+            "text": "Please visit the [[GitHub page|https://github.com/felixhayashi/TW5-TopStoryView]] for more information."
+        },
+        "$:/plugins/felixhayashi/topstoryview/top.js": {
+            "text": "/*\\\ntitle: $:/plugins/felixhayashi/topstoryview/top.js\ntype: application/javascript\nmodule-type: storyview\n\nViews the story as a linear sequence\n\n@preserve\n\n\\*/\n(function(){\"use strict\";var t=require(\"$:/plugins/felixhayashi/topstoryview/config.js\").config;var e=\"cubic-bezier(0.645, 0.045, 0.355, 1)\";var i=function(e){this.listWidget=e;this.pageScroller=new $tw.utils.PageScroller;this.pageScroller.scrollIntoView=this.scrollIntoView;this.pageScroller.storyRiverDomNode=document.getElementsByClassName(t.classNames.storyRiver)[0];var i=$tw.wiki.getTiddler(t.references.userConfig);var o=i?i.fields:{};$tw.hooks.addHook(\"th-opening-default-tiddlers-list\",this.hookOpenDefaultTiddlers);var r=parseInt(o[\"scroll-offset\"]);this.pageScroller.scrollOffset=isNaN(r)?71:r;this.recalculateBottomSpace()};i.prototype.refreshStart=function(t,e){};i.prototype.refreshEnd=function(t,e){};i.prototype.hookOpenDefaultTiddlers=function(t){return t};i.prototype.navigateTo=function(t){var e=this.listWidget.findListItem(0,t.title);if(e===undefined)return;var i=this.listWidget.children[e];var o=i.findFirstDomNode();if(!(o instanceof Element))return;this.pageScroller.scrollIntoView(o)};i.prototype.insert=function(t){if(!t)return;var e=t.findFirstDomNode();if(!(e instanceof Element))return;this.startInsertAnimation(e,function(){this.recalculateBottomSpace()}.bind(this))};i.prototype.remove=function(t){if(!t)return;var e=t.findFirstDomNode();if(!(e instanceof Element)){t.removeChildDomNodes();return}var i=this.getLastFrame()===e;this.startRemoveAnimation(t,e,function(){t.removeChildDomNodes();this.recalculateBottomSpace();if(i){this.pageScroller.scrollIntoView(this.getLastFrame())}}.bind(this))};i.prototype.getLastFrame=function(){var t=this.listWidget.children[this.listWidget.children.length-1];return t?t.findFirstDomNode():null};i.prototype.recalculateBottomSpace=function(){var t=this.pageScroller.storyRiverDomNode;if(this.getLastFrame()){var e=this.getLastFrame().getBoundingClientRect();var i=window.innerHeight;if(e.height<i){t.style[\"paddingBottom\"]=i-e.height+\"px\";return}}t.style[\"paddingBottom\"]=\"\"};i.prototype.scrollIntoView=function(t){if(this.preventNextScrollAttempt){this.preventNextScrollAttempt=false}if(!t)return;var e=$tw.utils.getAnimationDuration();this.cancelScroll();this.startTime=Date.now();var i=$tw.utils.getScrollPosition();var o=t.getBoundingClientRect(),r={left:o.left+i.x,top:o.top+i.y,width:o.width,height:o.height};var n=function(t,e,i,o){if(t<=i){return t}else if(e<o&&i<t+e-o){return t+e-o}else if(i<t){return t}else{return i}},s=n(r.left,r.width,i.x,window.innerWidth),a=r.top-this.scrollOffset;if(s!==i.x||a!==i.y){var l=this,c;c=function(){var t;if(e<=0){t=1}else{t=(Date.now()-l.startTime)/e}if(t>=1){l.cancelScroll();t=1}t=$tw.utils.slowInSlowOut(t);window.scrollTo(i.x+(s-i.x)*t,i.y+(a-i.y)*t);if(t<1){l.idRequestFrame=l.requestAnimationFrame.call(window,c)}};c()}};i.prototype.startInsertAnimation=function(t,i){var o=$tw.utils.getAnimationDuration();var r=window.getComputedStyle(t),n=parseInt(r.marginBottom,10),s=parseInt(r.marginTop,10),a=t.offsetHeight+s;setTimeout(function(){$tw.utils.setStyle(t,[{transition:\"none\"},{marginBottom:\"\"}]);i()},o);$tw.utils.setStyle(t,[{transition:\"none\"},{marginBottom:-a+\"px\"},{opacity:\"0.0\"}]);$tw.utils.forceLayout(t);$tw.utils.setStyle(t,[{transition:\"opacity \"+o+\"ms \"+e+\", \"+\"margin-bottom \"+o+\"ms \"+e},{marginBottom:n+\"px\"},{opacity:\"1.0\"}])};i.prototype.startRemoveAnimation=function(t,i,o){var r=$tw.utils.getAnimationDuration();var n=i.offsetWidth,s=window.getComputedStyle(i),a=parseInt(s.marginBottom,10),l=parseInt(s.marginTop,10),c=i.offsetHeight+l;setTimeout(o,r);$tw.utils.setStyle(i,[{transition:\"none\"},{transform:\"translateX(0px)\"},{marginBottom:a+\"px\"},{opacity:\"1.0\"}]);$tw.utils.forceLayout(i);$tw.utils.setStyle(i,[{transition:$tw.utils.roundTripPropertyName(\"transform\")+\" \"+r+\"ms \"+e+\", \"+\"opacity \"+r+\"ms \"+e+\", \"+\"margin-bottom \"+r+\"ms \"+e},{transform:\"translateX(-\"+n+\"px)\"},{marginBottom:-c+\"px\"},{opacity:\"0.0\"}])};exports.top=i})();",
+            "title": "$:/plugins/felixhayashi/topstoryview/top.js",
+            "type": "application/javascript",
+            "module-type": "storyview"
+        }
+    }
+}

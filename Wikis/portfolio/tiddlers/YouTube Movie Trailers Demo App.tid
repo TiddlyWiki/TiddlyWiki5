@@ -1,0 +1,29 @@
+created: 20160311173146611
+modified: 20180515185129904
+title: YouTube Movie Trailers Demo App
+tmap.id: 547b5800-c729-429a-9af8-d8fd60c5cc06
+type: text/vnd.tiddlywiki
+
+During an interview process I was given a small project to complete. I limited myself to working for a single 90-minute period. [[Interviewer requirements|YouTube Movie Trailers Demo App requirements]]
+
+//This bonuses as a movie recommendation post, since I choose the 5 movies! ;)//
+
+
+This project uses:
+
+*the Angular Material-Start as a responsive UI base 
+**https://github.com/angular/material-start
+*Angular Youtube Embed angularjs directive
+**https://github.com/brandly/angular-youtube-embed
+*IMDB api for movie data
+
+
+View the full code here:
+https://github.com/alecperkey/material-start
+
+
+
+iframe'd demo (http://aperk.net/youtube-player/app/):
+
+<iframe style="height:640px;width:420px;" src="http://aperk.net/youtube-player/app/"></iframe>
+

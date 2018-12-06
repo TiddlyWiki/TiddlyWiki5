@@ -1,0 +1,11 @@
+created: 20151013111537864
+modified: 20180513192724602
+title: Font Awesome for TiddlyWiki
+tmap.id: e5cac075-352b-4cb6-a552-836b2067fdc1
+type: text/vnd.tiddlywiki
+
+You can add [[Font Awesome|https://fortawesome.github.io/Font-Awesome/]] to your wiki by using one of the sources below.
+
+[[@tobibeer|https://github.com/tobibeer]] created a great reference page for how to employ Font Awesome with TiddlyWiki. I recommend you follow his instructions on how to install and use Font Awesome: http://tobibeer.github.io/tw/fa.
+
+[[@TheDiveO|https://github.com/TheDiveO]] also created a Font Awesome plugin. See [[TW5FontAwesome Plugin|https://github.com/TheDiveO/TW5FontAwesome]]. However, his provided version is out of date. 

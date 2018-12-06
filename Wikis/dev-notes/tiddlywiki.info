@@ -1,0 +1,58 @@
+{
+    "description": "Basic client-server edition",
+    "plugins": [
+        "tiddlywiki/tiddlyweb",
+        "tiddlywiki/filesystem",
+        "tiddlywiki/highlight"
+    ],
+    "themes": [
+        "tiddlywiki/vanilla",
+        "tiddlywiki/snowwhite"
+    ],
+    "build": {
+        "index": [
+            "--rendertiddler",
+            "$:/plugins/tiddlywiki/tiddlyweb/save/offline",
+            "index.html",
+            "text/plain"
+        ],
+        "externalimages": [
+            "--savetiddlers",
+            "[is[image]]",
+            "images",
+            "--setfield",
+            "[is[image]]",
+            "_canonical_uri",
+            "$:/core/templates/canonical-uri-external-image",
+            "text/plain",
+            "--setfield",
+            "[is[image]]",
+            "text",
+            "",
+            "text/plain",
+            "--rendertiddler",
+            "$:/plugins/tiddlywiki/tiddlyweb/save/offline",
+            "externalimages.html",
+            "text/plain"
+        ],
+        "static": [
+            "--rendertiddler",
+            "$:/core/templates/static.template.html",
+            "static.html",
+            "text/plain",
+            "--rendertiddler",
+            "$:/core/templates/alltiddlers.template.html",
+            "alltiddlers.html",
+            "text/plain",
+            "--rendertiddlers",
+            "[!is[system]]",
+            "$:/core/templates/static.tiddler.html",
+            "static",
+            "text/plain",
+            "--rendertiddler",
+            "$:/core/templates/static.template.css",
+            "static/static.css",
+            "text/plain"
+        ]
+    }
+}

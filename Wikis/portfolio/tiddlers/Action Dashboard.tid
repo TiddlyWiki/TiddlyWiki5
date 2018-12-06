@@ -1,0 +1,13 @@
+created: 20180217053225351
+modified: 20180513191036296
+title: Action Dashboard
+tmap.id: b4c71030-3674-48ef-acb5-cefe46e750be
+type: text/vnd.tiddlywiki
+
+<$transclude tiddler="$:/plugins/gsd5/core/ui/lists/next-action-list"/>
+
+<$transclude tiddler="$:/plugins/gsd5/core/ui/lists/waiting-action-list"/>
+
+<$transclude tiddler="$:/plugins/gsd5/core/ui/lists/future-action-list"/>
+
+<$transclude tiddler="$:/plugins/gsd5/core/ui/lists/completed-action-list"/>

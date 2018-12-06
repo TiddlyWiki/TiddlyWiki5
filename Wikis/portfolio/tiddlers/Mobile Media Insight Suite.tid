@@ -1,0 +1,29 @@
+created: 20160311191507959
+modified: 20180515185129907
+title: Mobile Media Insight Suite
+tmap.id: 0a6e010d-7767-42da-9a86-ec25e4237185
+type: text/vnd.tiddlywiki
+
+The Challenge:
+
+In 2 weeks, modify the 'PRIME Media Insight Suite' desktop application to give users the best mobile experience for analyzing media coverage live on the floor at the North American International Auto Show (NAIAS).
+
+<iframe width="100%" height="500" src="http://www.youtube.com/embed/L1u7SiFzR3o" frameborder="0" allowfullscreen></iframe>
+
+This non-existent 'Mobile Media Insight Suite' would ideally be ported from the Sencha ExtJS framework into the Sencha Touch framework for an optimized mobile experience. However, this project was solely my task, and there was certainly not enough time to refactor the entire UI codebase to a new framework.
+
+Sub-challenges and solutions:
+
+#The NAIAS suite itself was to have 9 top-level dashboards, with many 2nd layer dashboards for drilling down to analyze refined datasets in detail. These dashboards rendered once based on the initial viewport of the browser (i.e. they weren't fluidly responsive). ''Initially, the UI of each of these dashboards had a prerequisite requirement of a >960px width container--in other words, the underlying component was only made for desktop.''
+##Solution: ''Design 2 alternative sets of dashboard UIs (phone and tablet)''. I explored novel approaches for the desktop apps backend chart layout configuration. For example, instead of 2 rows of charts with 3 columns, we used a 3 by 2 grid for medium screens (600-959px) and a 6 by 1 grid for small screens (<600px). A few rounds of quick wireframing and feedback iteration determined which features wouldn't be desirable or possible on mobile, and so the development began.
+#A key feature of the 'Mobile Media Insight Suite' was that it should be marketable as an 'app'. However, ''2 weeks was not enough time to get an app developed and approved on the app stores.''
+##Solution: I made the package //mobile web app ready// so supporting devices allowed fullscreen and other app-like features. In order to streamline the user experience, I also implemented the AddToHomescreen library which guides users to download a shortcut launcher onto their mobile homescreen.
+#The load times when navigating between dashboards on the desktop app were >5s. ''We could expect a blank white screen for up to 1 minute on mobile 3G!''
+##Solution: Make it a single-page app. Combined with a load mask, this was a great way to reduce perceived loading time for the user. I choose to use AngularJS and write a few custom directives:
+##*A ''custom iframe directive'' which updated the src attribute according to the dashboard selected and also sized itself using the iframe resizer library by David J Bradshaw <a href="https://github.com/davidjbradshaw/iframe-resizer">(github)</a>.
+##*A ''custom loading mask directive'' using GSAP animation library. 
+#The desktop app navigation menu was not mobile-ready.
+##Solution: The Angular-Material UI modern responsive sidebar UI component. This UI library also gave me access to many quality UI components optimized by the expert Material Design Team at Google. 
+
+
+Along with some very complicated CSS hacks to the underlying component a 'Mobile Media Insight Suite' was born. I certainly wouldn't recommend trying to convert a heavy desktop app (using the monolithic ExtJS framework) into a mobile one, but such alchemy can be successful!
