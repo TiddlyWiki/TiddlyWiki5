@@ -1,0 +1,8 @@
+caption: Active Projects
+created: 20180217053342409
+modified: 20180513191036647
+tags: $:/tags/GSD5Lists
+title: $:/plugins/gsd5/core/ui/lists/active-project-list
+type: text/vnd.tiddlywiki
+
+<<gsd5-list title:"Active Projects" gsd_type:"project" gsd_status:"active" gsd_complete:"false" realmAware:"true" sort:"title" order:"ascending" groupBy:"none" customFilter:"none">>

@@ -1,0 +1,13 @@
+created: 20170511001906426
+creator: Mat von TWaddle
+modified: 20180513192121338
+modifier: Mat von TWaddle
+tags: $:/tags/Macro
+title: $:/richlink/soundcloud
+type: text/vnd.tiddlywiki
+
+\define soundcloud(link)
+<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=$link$&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+\end
+
+<$macrocall $name=soundcloud link=<<link>>/>

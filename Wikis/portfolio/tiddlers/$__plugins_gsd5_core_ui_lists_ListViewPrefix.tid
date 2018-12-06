@@ -1,0 +1,21 @@
+created: 20180217054532351
+modified: 20180513191036650
+title: $:/plugins/gsd5/core/ui/lists/ListViewPrefix
+type: text/vnd.tiddlywiki
+
+<$list filter="[is[current]field:gsd_type[action]]">
+<$complete tiddler=<<currentTiddler>>/>
+<$list filter="[is[current]!field:gsd_complete[true]]">
+<$radio tiddler=<<currentTiddler>> class="list-status next" field="gsd_status" value="next">Next</$radio>
+<$radio tiddler=<<currentTiddler>> class="list-status waiting" field="gsd_status" value="waiting">Waiting</$radio>
+<$radio tiddler=<<currentTiddler>> class="list-status future" field="gsd_status" value="future">Future</$radio>
+</$list>
+</$list>
+
+<$list filter="[is[current]field:gsd_type[project]]">
+<$complete tiddler=<<currentTiddler>>/>
+<$list filter="[is[current]!field:gsd_complete[true]]">
+<$radio tiddler=<<currentTiddler>> class="list-status next" field="gsd_status" value="active">Active</$radio>
+<$radio tiddler=<<currentTiddler>> class="list-status future" field="gsd_status" value="future">Future</$radio>
+</$list>
+</$list>

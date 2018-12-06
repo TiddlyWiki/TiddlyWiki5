@@ -1,0 +1,14 @@
+{
+  "name": "wikis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",  
+  "scripts": {
+    "dev-notes:run": "tiddlywiki ./dev-notes --listen port=8080",
+    "dev-notes:build": "tiddlywiki ./dev-notes --build index",
+    "portfolio:run": "tiddlywiki ./portfolio --listen port=8081",
+    "portfolio:build": "tiddlywiki ./portfolio --build index"
+  },
+  "author": "",
+  "license": "ISC"
+}

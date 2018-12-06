@@ -1,0 +1,90 @@
+created: 20160307171843616
+modified: 20180515201559167
+title: Resume
+tmap.id: 74fbf52d-a101-437a-b463-83c2060e46a6
+type: text/vnd.tiddlywiki
+
+<h2>Experience</h2>
+
+*Lead Developer (NodeJS, React Native)
+** //Positive Head Applications, September 2017-current (advisor role)//
+** Lead development for the universal Web + Android & iOS (React Native) social messenger application.
+** Research, organize, & implement requirements in a modular architecture for both server and client-side features.
+** Document code base & remaining tasks for successful launch of alpha, beta, and long term vision.
+** Utilize modern best practices of the 2018 Node.js ecosystem, serverless API architectures, GraphQL, React Native, Redux, Webpack, Docker, etc.
+** Maintain a public/private wiki (http://phead.tiddlyspot.com) to present clear vision & actualize community interest in collaboration via Github, Discord, OpenCollective, etc.
+*Web App Developer, React JS
+**//Groundspeed Analytics, March 2016-March 2017//
+**Architect code base repositories for server and client, using modern NodeJS ecosystem and ReactJS. 
+**Design interface using atomic design practices, starting from quick wireframe prototyping until all data visualization requirements and user inputs satisfied business and aesthetic requirements. 
+**Bridged HighCharts & jQuery Datatables APIs to work in React ecosystem. Open-sourced the jQuery Datatables wrapper as [[react-jquery-datatables|https://github.com/alecperkey/react-jquery-datatables]] NPM module.
+*Web App Developer, Solutions Architect
+**//PRIME Research, July 2012-February 2016//
+**liaised with Fortune 500 clients, project managers, and global development teams to ensure the most important product features and client needs were satisfied
+**developed software solutions including the [[Mobile Media Insight Suite|http://aperk.tiddlyspot.com/#Mobile%20Media%20Insight%20Suite:Directory%20%5B%5BMobile%20Media%20Insight%20Suite%5D%5D%20Resume%20%5B%5BProject%20Dashboard%5D%5D]] app to secure million-dollar licensing contracts on a tight deadline
+**fostered an open culture of knowledge management and global, inter-department cooperation
+*Web Strategist
+**//Synod Residential Services, August 2011-July 2012//
+**developed the company intranet utilizing best available cloud services
+**lead the digitization of internal processes
+**designed interfaces for these processes
+**performed user tests to refine usability
+**coached employees of all skill levels to utilize web resources 
+** fostered a positive shift in company culture
+
+<h2>Education</h2>
+
+*Associate of Arts, Web Development; concentrations in Usability, Rich Web Applications
+**Washtenaw Community College, Ann Arbor, MI
+**December 2012
+**GPA: 3.7
+*Lifelong education
+**Smashing Conf, Oxford 2015
+**Egghead.io
+**Personal Dev Wiki
+**Book Reviews
+
+
+&nbsp;
+<h2>Recent Projects</h2>
+
+*Positive Head applications
+*Groundspeed Analytics ([[demo site|http://groundspeed.com/]])
+*Mastercard Conversation Suite <a href="http://newsroom.mastercard.com/videos/mastercard-conversation-suite-video/">(video overview)</a> //- PRIME Research//
+*Mobile Conversation Suite (<a href="http://www.prime-research.com/index.php/products-and-services/mobile">sales page)</a> //- PRIME Research//
+*//Full demos only available upon request//
+<h2>Skills</h2>
+
+
+*Javascript Development
+**NodeJS, React, React Native, GraphQL, Webpack, Docker, etc
+*Usability
+**information architecture, user testing, card sorts, site deconstruction, storyboards, process reviews, accessibility inspections
+*Graphics
+**Photoshop, Illustrator, GSAP vector animation, HighCharts, D3.js, data visualization best practices
+
+<h2>References</h2>
+
+*Brandon Beachum
+**Creator & Host at Positive Head. CEO of Positive Head Applications
+*Jeff Mason
+**Founder & CEO of Groundspeed Analytics
+*Ibrahim Dabo
+**Digital Communications Manager & Web Team Leader at General Board of Global Ministries
+*Timo Rompf
+**COO and Senior Vice President Americas, PRIME Research
+*Mark Weiner
+**CEO and Senior Consultant, PRIME Research
+*Simon Grimm
+**Portal Team Lead Germany, PRIME Research
+*Chi-Chi Millaway
+**Director of Social Media & Digital Analytics, PRIME Research
+*Keta Cowan
+**CEO at Synod Residential Services
+*Jacob Moga
+**Computer and Network Security, Synod Residential Services
+
+<h2>Contact</h2>
+
+*[[aperkdev@gmail.com|mailto:aperkdev@gmail.com]]
+*skype: alecperkey
