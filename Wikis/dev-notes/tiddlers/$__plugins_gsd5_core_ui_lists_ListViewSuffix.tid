@@ -1,0 +1,20 @@
+created: 20180217054408692
+modified: 20180513191036653
+title: $:/plugins/gsd5/core/ui/lists/ListViewSuffix
+type: text/vnd.tiddlywiki
+
+<$list filter="[is[current]field:gsd_type[action]]">
+<$list filter="[is[current]!field:text[]!field:gsd_complete[true]]">
+<span class="gsd-muted"><$transclude tiddler="$:/plugins/gsd5/core/images/excerpt"/></span>
+</$list>
+<$list filter="[is[current]field:gsd_complete[true]]">
+<span class="gsd-muted">(<$view field="gsd_comp_date" format="relativedate"/>)</span>
+<span class="gsd-muted"><$transclude tiddler="$:/plugins/gsd5/core/ui/buttons/delete-tiddler-button"/></span>
+</$list>
+</$list>
+
+<$list filter="[is[current]field:gsd_type[project]]">
+<$list filter="[is[current]field:gsd_complete[true]]">
+<span class="gsd-muted"><$transclude tiddler="$:/plugins/gsd5/core/ui/buttons/delete-tiddler-button"/></span>
+</$list>
+</$list>

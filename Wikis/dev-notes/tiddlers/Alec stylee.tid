@@ -1,0 +1,16 @@
+created: 20150822152602396
+modified: 20180513192724597
+tags: $:/tags/Stylesheet
+title: Alec stylee
+tmap.id: 81433041-9bc5-490f-a05c-78bb0f318010
+type: text/vnd.tiddlywiki
+
+.iframe800{
+width:100%;height:800px;}
+
+html button {
+    line-height: 1.5 !important;
+    color: #4e7baa;
+    background: #fffffe;
+    border-color: #268bd2;
+}

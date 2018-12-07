@@ -1,0 +1,76 @@
+created: 20180217053056730
+modified: 20180513191036644
+tags: $:/tags/Macro
+title: $:/plugins/gsd5/core/macro/gsd5-list
+type: text/vnd.tiddlywiki
+
+\define gsd5-list(title:"Next Action",gsd_type:"action",gsd_status:"next",gsd_complete:"false",realmAware:"false",sort:"title",order:"ascending",groupBy:"none",customFilter:"none",dateTemplate:"DDth MMM YYYY",ownerField:"none",owner:"{{!!title}}")
+<$set name="listState" value=<<qualify "$:/state/gsd-list">>>
+<$set name="caller" value=$owner$>
+<div class="tw-menu-list-item">
+<span class="gsd-list-title"><$checkbox tiddler=<<listState>> field="text" checked="hide" unchecked="show" default="show">&nbsp;$title$<$reveal state=<<listState>> type="match" text="hide" default="show" retain="yes">{{$:/core/images/chevron-down}}</$reveal></$checkbox></span>
+<hr/>
+<!-- No/All Realm -->
+<$reveal state="$:/currentRealm" type="match" text="all" default="all">
+<!-- Group Header -->
+	<$reveal state=<<listState>> type="match" text="show" default="show" retain="yes">
+	<$list filter=<<list-composer gsd_type:$gsd_type$ gsd_status:$gsd_status$ gsd_complete:$gsd_complete$ realmAware:"false" sort:$sort$ order:$order$ groupBy:$groupBy$ groupTail:"false" groupTailHeader:"false" groupHeader:"true" customFilter:$customFilter$ ownerField:$ownerField$>>>
+		<div class="tc-menu-list-item  gsd5-project-list">
+		<<view-composer groupTitle:"$groupBy$" dateTemplate:"$dateTemplate$">>
+		<$list filter=<<list-composer gsd_type:$gsd_type$ gsd_status:$gsd_status$ gsd_complete:$gsd_complete$ realmAware:"false" sort:$sort$ order:$order$ groupBy:$groupBy$ groupTail:"false" groupTailHeader:"false" groupHeader:"false" customFilter:$customFilter$ ownerField:$ownerField$>>>
+			<div class="tc-menu-list-subitem">
+				<$transclude tiddler="$:/plugins/gsd5/core/ui/lists/ListViewPrefix"/>
+				<$link to={{!!title}}><$view field="title"/></$link>
+				&nbsp;<$transclude tiddler="$:/plugins/gsd5/core/ui/lists/ListViewSuffix"/>
+			</div>
+		</$list>
+		</div>
+	</$list>
+	<$list filter=<<list-composer gsd_type:$gsd_type$ gsd_status:$gsd_status$ gsd_complete:$gsd_complete$ realmAware:"false" sort:$sort$ order:$order$ groupBy:$groupBy$ groupTail:"false" groupTailHeader:"true" groupHeader:"false" customFilter:$customFilter$ ownerField:$ownerField$>>>
+	<div class="tc-menu-list-item  gsd5-project-list">
+		No Group
+	</div>
+	</$list>
+	<$list filter=<<list-composer gsd_type:$gsd_type$ gsd_status:$gsd_status$ gsd_complete:$gsd_complete$ realmAware:"false" sort:$sort$ order:$order$ groupBy:$groupBy$ groupTail:"true" groupTailHeader:"false" groupHeader:"false" customFilter:$customFilter$ ownerField:$ownerField$>>>
+		<div class="tc-menu-list-subitem">
+			<$transclude tiddler="$:/plugins/gsd5/core/ui/lists/ListViewPrefix"/>
+			<$link to={{!!title}}><$view field="title"/></$link>
+			&nbsp;<$transclude tiddler="$:/plugins/gsd5/core/ui/lists/ListViewSuffix"/>
+		</div>
+	</$list>
+	</$reveal>
+</$reveal>
+<!-- Realm -->
+<$reveal state="$:/currentRealm" type="nomatch" text="all" default="all">
+<!-- Group Header -->
+	<$reveal state=<<listState>> type="match" text="show" default="show" retain="yes">
+	<$list filter=<<list-composer gsd_type:$gsd_type$ gsd_status:$gsd_status$ gsd_complete:$gsd_complete$ realmAware:"true" sort:$sort$ order:$order$ groupBy:$groupBy$ groupTail:"false" groupTailHeader:"false" groupHeader:"true" customFilter:$customFilter$ ownerField:$ownerField$>>>
+		<div class="tc-menu-list-item  gsd5-project-list">
+		<<view-composer groupTitle:"$groupBy$" dateTemplate:"$dateTemplate$">>
+		<$list filter=<<list-composer gsd_type:$gsd_type$ gsd_status:$gsd_status$ gsd_complete:$gsd_complete$ realmAware:"true" sort:$sort$ order:$order$ groupBy:$groupBy$ groupTail:"false" groupTailHeader:"false" groupHeader:"false" customFilter:$customFilter$ ownerField:$ownerField$>>>
+			<div class="tc-menu-list-subitem">
+				<$transclude tiddler="$:/plugins/gsd5/core/ui/lists/ListViewPrefix"/>
+				<$link to={{!!title}}><$view field="title"/></$link>
+				&nbsp;<$transclude tiddler="$:/plugins/gsd5/core/ui/lists/ListViewSuffix"/>
+			</div>
+		</$list>
+		</div>
+	</$list>
+	<$list filter=<<list-composer gsd_type:$gsd_type$ gsd_status:$gsd_status$ gsd_complete:$gsd_complete$ realmAware:"true" sort:$sort$ order:$order$ groupBy:$groupBy$ groupTail:"false" groupTailHeader:"true" groupHeader:"false" customFilter:$customFilter$ ownerField:$ownerField$>>>
+	<div class="tc-menu-list-item  gsd5-project-list">
+		No Group
+	</div>
+	</$list>
+	<$list filter=<<list-composer gsd_type:$gsd_type$ gsd_status:$gsd_status$ gsd_complete:$gsd_complete$ realmAware:"true" sort:$sort$ order:$order$ groupBy:$groupBy$ groupTail:"true" groupTailHeader:"false" groupHeader:"false" customFilter:$customFilter$ ownerField:$ownerField$>>>
+		<div class="tc-menu-list-subitem">
+			<$transclude tiddler="$:/plugins/gsd5/core/ui/lists/ListViewPrefix"/>
+			<$link to={{!!title}}><$view field="title"/></$link>
+			&nbsp;<$transclude tiddler="$:/plugins/gsd5/core/ui/lists/ListViewSuffix"/>
+		</div>
+	</$list>
+	</$reveal>
+</$reveal>
+</div>
+</$set>
+</$set>
+\end

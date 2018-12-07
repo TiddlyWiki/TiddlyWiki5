@@ -1,0 +1,613 @@
+author: Roma Hicks
+core-version: >=5.1.8
+created: 20150921142457352
+dependents: 
+description: TiddlyWiki5 Getting Stuff Done plugin
+list: readme
+modified: 20180513190155654
+plugin-type: plugin
+title: $:/plugins/gsd5/core
+type: application/json
+version: 0.6.0-beta
+
+{
+    "tiddlers": {
+        "$:/plugins/gsd5/core/images/rubbishbin": {
+            "title": "$:/plugins/gsd5/core/images/rubbishbin",
+            "tags": "$:/tags/Image",
+            "text": "<svg class=\"tc-image-home-button tc-image-button\" width=\"22pt\" height=\"22pt\" viewBox=\"0 0 8 8\"><path d=\"M3 0c-.55 0-1 .45-1 1h-1c-.55 0-1 .45-1 1h7c0-.55-.45-1-1-1h-1c0-.55-.45-1-1-1h-1zm-2 3v4.81c0 .11.08.19.19.19h4.63c.11 0 .19-.08.19-.19v-4.81h-1v3.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5v-3.5h-1v3.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5v-3.5h-1z\" /></svg>\n"
+        },
+        "$:/plugins/gsd5/core/images/contact": {
+            "title": "$:/plugins/gsd5/core/images/contact",
+            "tags": "$:/tags/Image",
+            "text": "<svg class=\"tc-image-home-button tc-image-button\" width=\"10pt\" height=\"10pt\" viewBox=\"0 0 8 8\"><path d=\"M4 0c-1.1 0-2 1.12-2 2.5s.9 2.5 2 2.5 2-1.12 2-2.5-.9-2.5-2-2.5zm-2.09 5c-1.06.05-1.91.92-1.91 2v1h8v-1c0-1.08-.84-1.95-1.91-2-.54.61-1.28 1-2.09 1-.81 0-1.55-.39-2.09-1z\" /></svg>\n"
+        },
+        "$:/plugins/gsd5/core/images/context": {
+            "title": "$:/plugins/gsd5/core/images/context",
+            "tags": "$:/tags/Image",
+            "text": "<svg class=\"tc-image-home-button tc-image-button\" width=\"22pt\" height=\"22pt\" viewBox=\"0 0 8 8\"><path d=\"M0 0v4h4v-4h-4zm5 2v3h-3v1h4v-4h-1zm2 2v3h-3v1h4v-4h-1z\" /></svg>\n"
+        },
+        "$:/plugins/gsd5/core/images/control": {
+            "title": "$:/plugins/gsd5/core/images/control",
+            "tags": "$:/tags/Image",
+            "text": "<svg class=\"tc-image-home-button tc-image-button\" width=\"22pt\" height=\"22pt\" viewBox=\"0 0 8 8\"><path d=\"M4 0c-2.2 0-4 1.8-4 4h1c0-1.66 1.34-3 3-3s3 1.34 3 3h1c0-2.2-1.8-4-4-4zm-.59 2.09c-.81.25-1.41 1.01-1.41 1.91 0 1.11.9 2 2 2 1.11 0 2-.89 2-2 0-.9-.59-1.65-1.41-1.91l-.59.88-.59-.88z\" transform=\"translate(0 1)\" /></svg>\n"
+        },
+        "$:/plugins/gsd5/core/images/convert": {
+            "title": "$:/plugins/gsd5/core/images/convert",
+            "tags": "$:/tags/Image",
+            "text": "<svg class=\"tc-image-home-button tc-image-button\" width=\"22pt\" height=\"22pt\" viewBox=\"0 0 8 8\"><path d=\"M1.5 0c-.83 0-1.5.67-1.5 1.5 0 .66.41 1.2 1 1.41v2.19c-.59.2-1 .75-1 1.41 0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5c0-.6-.34-1.1-.84-1.34.09-.09.21-.16.34-.16h2c.82 0 1.5-.68 1.5-1.5v-.59c.59-.2 1-.75 1-1.41 0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5c0 .66.41 1.2 1 1.41v.59c0 .28-.22.5-.5.5h-2c-.17 0-.35.04-.5.09v-1.19c.59-.2 1-.75 1-1.41 0-.83-.67-1.5-1.5-1.5z\"\n  /></svg>\n"
+        },
+        "$:/plugins/gsd5/core/images/dashboard": {
+            "title": "$:/plugins/gsd5/core/images/dashboard",
+            "tags": "$:/tags/Image",
+            "text": "<svg class=\"tc-image-home-button tc-image-button\" width=\"22pt\" height=\"22pt\" viewBox=\"0 0 8 8\"><path d=\"M4 0c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm0 1c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 1c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm-1.66 1a.5.5 0 0 0-.19.84l.91.91c-.02.08-.06.16-.06.25 0 .55.45 1 1 1s1-.45 1-1-.45-1-1-1c-.09 0-.17.04-.25.06l-.91-.91a.5.5 0 0 0-.44-.16.5.5 0 0 0-.06 0zm3.16 0c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5z\"/></svg>\n"
+        },
+        "$:/plugins/gsd5/core/images/globe": {
+            "title": "$:/plugins/gsd5/core/images/globe",
+            "tags": "$:/tags/Image",
+            "text": "<svg class=\"tc-image-home-button tc-image-button\" width=\"22pt\" height=\"22pt\" viewBox=\"0 0 8 8\"><path d=\"M4 0c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 1c.33 0 .64.09.94.19-.21.2-.45.38-.41.56.04.18.69.13.69.5 0 .27-.42.35-.13.66.35.35-.64.98-.66 1.44-.03.83.84.97 1.53.97.42 0 .53.2.5.44-.54.77-1.46 1.25-2.47 1.25-.38 0-.73-.09-1.06-.22.22-.44-.28-1.31-.75-1.59-.23-.23-.72-.14-1-.25-.09-.27-.18-.54-.19-.84.03-.05.08-.09.16-.09.19 0 .45.38.59.34.18-.04-.74-1.31-.31-1.56.2-.12.6.39.47-.16-.12-.51.36-.28.66-.41.26-.11.45-.41.13-.59-.06-.03-.13-.1-.22-.19.45-.27.97-.44 1.53-.44zm2.31 1.09c.18.22.32.46.44.72 0 .01 0 .02 0 .03-.04.07-.11.11-.22.22-.28.28-.32-.21-.44-.31-.13-.12-.6.02-.66-.13-.07-.18.5-.42.88-.53z\"\n  /></svg>\n"
+        },
+        "$:/plugins/gsd5/core/images/excerpt": {
+            "title": "$:/plugins/gsd5/core/images/excerpt",
+            "tags": "$:/tags/Image",
+            "text": "<svg class=\"tc-image-home-button tc-image-button\" width=\"10pt\" height=\"10pt\" viewBox=\"0 0 8 8\"><path d=\"M.09 0c-.06 0-.09.04-.09.09v5.81c0 .05.04.09.09.09h5.91l2 2v-7.91c0-.06-.04-.09-.09-.09h-7.81z\" /></svg>\n"
+        },
+        "$:/plugins/gsd5/core/images/project": {
+            "title": "$:/plugins/gsd5/core/images/project",
+            "tags": "$:/tags/Image",
+            "text": "<svg class=\"tc-image-home-button tc-image-button\" width=\"22pt\" height=\"22pt\" viewBox=\"0 0 8 8\"><path d=\"M0 0v7h1v-7h-1zm7 0v7h1v-7h-1zm-5 1v1h2v-1h-2zm1 2v1h2v-1h-2zm1 2v1h2v-1h-2z\" /></svg>\n"
+        },
+        "$:/plugins/gsd5/core/images/reference": {
+            "title": "$:/plugins/gsd5/core/images/reference",
+            "tags": "$:/tags/Image",
+            "text": "<svg class=\"tc-image-home-button tc-image-button\" width=\"10pt\" height=\"10pt\" viewBox=\"0 0 8 8\"><path d=\"M1 0c-.07 0-.13.01-.19.03-.39.08-.7.39-.78.78-.03.06-.03.12-.03.19v5.5c0 .83.67 1.5 1.5 1.5h5.5v-1h-5.5c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h5.5v-5.5c0-.28-.22-.5-.5-.5h-.5v3l-1-1-1 1v-3h-3z\" /></svg>\n"
+        },
+        "$:/plugins/gsd5/core/images/task": {
+            "title": "$:/plugins/gsd5/core/images/task",
+            "tags": "$:/tags/Image",
+            "text": "<svg class=\"tc-image-home-button tc-image-button\" width=\"22pt\" height=\"22pt\" viewBox=\"0 0 8 8\"><path d=\"M0 0v7h7v-3.59l-1 1v1.59h-5v-5h3.59l1-1h-5.59zm7 0l-3 3-1-1-1 1 2 2 4-4-1-1z\" /></svg>\n"
+        },
+        "$:/plugins/gsd5/core/macro/list-composer.js": {
+            "text": "/*\\\ntitle: $:/plugins/gsd5/core/macro/list-composer.js\ntype: application/javascript\nmodule-type: macro\n\nMacro to choose which of two colours has the highest contrast with a base colour\n\n\\*/\n(function(){\n\n/*jslint node: true, browser: true */\n/*global $tw: false */\n\"use strict\";\n\nexports.name = \"list-composer\";\n\nexports.params = [\n\t{name: \"gsd_type\"},\n\t{name: \"gsd_complete\"},\n\t{name: \"gsd_status\"},\n\t{name: \"realmAware\"},\n\t{name: \"sort\"},\n\t{name: \"order\"},\n\t{name: \"groupBy\"},\n\t{name: \"groupTail\"},\n\t{name: \"groupTailHeader\"},\n\t{name: \"groupHeader\"},\n\t{name: \"customFilter\"},\n\t{name: \"ownerField\"},\n\t{name: \"owner\"}\n];\n\nfunction processType(filter) {\n\tfilter.strings.type = \"field:gsd_type[\" + filter.values.gsd_type + \"]\";\n\treturn filter;\n}\n\nfunction processComplete(filter) {\n\tif(filter.values.gsd_type===\"action\"||filter.values.gsd_type===\"project\") {\n\t\tfilter.strings.complete = \"field:gsd_complete[\" + filter.values.gsd_complete + \"]\";\n\t}\n\treturn filter;\n}\n\nfunction processStatus(filter) {\n\tif(filter.values.gsd_complete===\"true\"||filter.values.gsd_status===\"none\") {\n\t\treturn filter;\n\t}\n\tif(filter.values.gsd_type===\"action\"||filter.values.gsd_type===\"project\") {\n\t\tfilter.strings.status = \"field:gsd_status[\" + filter.values.gsd_status + \"]\";\n\t}\n\treturn filter;\n}\n\nfunction processRealm(filter) {\n\tif(filter.values.realmAware===\"true\") {\n\t\tfilter.strings.realm = \"field:gsd_realm{$:/currentRealm}\";\n\t}\n\treturn filter;\n}\n\nfunction processSort(filter) {\n\tif(filter.values.sort!==\"none\") {\n\t\tif(filter.values.order===\"descending\") {\n\t\t\tfilter.strings.sort = \"!nsort[\" + filter.values.sort + \"]\";\n\t\t} else {\n\t\t\tfilter.strings.sort = \"nsort[\" + filter.values.sort + \"]\";\n\t\t}\n\t}\n\treturn filter;\n}\n\nfunction processGroup(filter) {\n\tif(filter.values.groupHeader===\"true\") {\n\t\tif(filter.values.groupBy===\"none\") {\n\t\t\treturn filter;\n\t\t} else {\n\t\t\tif(filter.values.groupBy===\"created\"||filter.values.groupBy===\"modified\"||filter.values.groupBy===\"gsd_comp_date\") {\n\t\t\t\tfilter.strings.group = \"has[\" + filter.values.groupBy + \"]eachday[\" + filter.values.groupBy + \"]\";\n\t\t\t} else {\n\t\t\t\tfilter.strings.group = \"has[\" + filter.values.groupBy + \"]each[\" + filter.values.groupBy + \"]\";\n\t\t\t}\n\t\t}\n\t} else if(filter.values.groupTailHeader===\"true\") {\n\t\tif(filter.values.groupBy===\"none\") {\n\t\t\treturn filter;\n\t\t} else {\n\t\t\tfilter.strings.group = \"field:\" + filter.values.groupBy + \"[]limit[1]\";\n\t\t}\n\t} else if(filter.values.groupTail===\"true\") {\n\t\tif(filter.values.groupBy===\"none\") {\n\t\t\treturn filter;\n\t\t} else {\n\t\t\tfilter.strings.group = \"field:\" + filter.values.groupBy + \"[]\";\n\t\t}\n\t}\n\treturn filter;\n}\n\nfunction processCustomFilter(filter) {\n\tif(filter.values.customFilter!==\"none\") {\n\t\tfilter.strings.customFilter = filter.values.customFilter;\n\t}\n\treturn filter;\n}\n\nfunction processOwner(filter) {\n\tif(filter.values.groupHeader===\"true\") {\n\t\tif(filter.values.ownerField===\"none\") {\n\t\t\treturn filter;\n\t\t} else if(filter.values.ownerField===\"tag\") {\n\t\t\tfilter.strings.owner = \"tag<caller>\";\n\t\t} else {\n\t\t\tfilter.strings.owner = \"field:\" + filter.values.ownerField + \"<caller>\";\n\t\t}\n\t} else if(filter.values.groupTailHeader===\"true\") {\n\t\tif(filter.values.ownerField===\"none\") {\n\t\t\treturn filter;\n\t\t} else if(filter.values.ownerField===\"tag\") {\n\t\t\tfilter.strings.owner = \"tag<caller>\";\n\t\t} else {\n\t\t\tfilter.strings.owner = \"field:\" + filter.values.ownerField + \"<caller>\";\n\t\t}\n\t} else if(filter.values.groupTail===\"true\") {\n\t\tif(filter.values.ownerField===\"none\") {\n\t\t\treturn filter;\n\t\t} else if(filter.values.ownerField===\"tag\") {\n\t\t\tfilter.strings.owner = \"tag<caller>\";\n\t\t} else {\n\t\t\tfilter.strings.owner = \"field:\" + filter.values.ownerField + \"<caller>\";\n\t\t}\n\t} else {\n\t\tif(filter.values.groupBy===\"created\"||filter.values.groupBy===\"modified\"||filter.values.groupBy===\"gsd_comp_date\") {\n\t\t\tfilter.strings.owner = \"sameday:\" + filter.values.groupBy + \"{!!title}\";\n\t\t} else {\n\t\t\tfilter.strings.owner = \"field:\" + filter.values.groupBy + \"{!!title}\";\n\t\t}\n\t\tif(filter.values.ownerField===\"none\") {\n\t\t\treturn filter;\n\t\t} else if(filter.values.ownerField===\"tag\") {\n\t\t\tfilter.strings.owner += \"tag<caller>\";\n\t\t} else {\n\t\t\tfilter.strings.owner += \"field:\" + filter.values.ownerField + \"<caller>\";\n\t\t}\n\t}\n\treturn filter;\n}\n\nfunction processFieldValue(filter) {\n\tif(filter.values.groupHeader===\"true\") {\n\t\tfilter.strings.fieldValue = \"_fieldvalue[\" + filter.values.groupBy + \"]\";\n\t}\n\treturn filter;\n}\n\n// Run the macro\nexports.run = function(gsd_type,gsd_complete,gsd_status,realmAware,sort,order,groupBy,groupTail,groupTailHeader,groupHeader,customFilter,ownerField,owner) {\n\t// Prepare the filterString object.\n\tvar filter = {},\n\t\tcomposedFilter= \"\";\n\n\t// Process values to resolve any wikitext.\n\tfilter.values = {\n\t\tgsd_type: $tw.wiki.renderText(\"text/plain\",\"text/vnd.tiddlywiki\",gsd_type),\n\t\tgsd_complete: $tw.wiki.renderText(\"text/plain\",\"text/vnd.tiddlywiki\",gsd_complete),\n\t\tgsd_status: $tw.wiki.renderText(\"text/plain\",\"text/vnd.tiddlywiki\",gsd_status),\n\t\trealmAware: $tw.wiki.renderText(\"text/plain\",\"text/vnd.tiddlywiki\",realmAware),\n\t\tsort: $tw.wiki.renderText(\"text/plain\",\"text/vnd.tiddlywiki\",sort),\n\t\torder: $tw.wiki.renderText(\"text/plain\",\"text/vnd.tiddlywiki\",order),\n\t\tgroupBy: $tw.wiki.renderText(\"text/plain\",\"text/vnd.tiddlywiki\",groupBy),\n\t\tgroupTail: $tw.wiki.renderText(\"text/plain\",\"text/vnd.tiddlywiki\",groupTail),\n\t\tgroupTailHeader: $tw.wiki.renderText(\"text/plain\",\"text/vnd.tiddlywiki\",groupTailHeader),\n\t\tgroupHeader: $tw.wiki.renderText(\"text/plain\",\"text/vnd.tiddlywiki\",groupHeader),\n\t\tcustomFilter: customFilter,\n\t\townerField: $tw.wiki.renderText(\"text/plain\",\"text/vnd.tiddlywiki\",ownerField)\n\t};\n\n\t// String are used to created the final filter statement.\n\tfilter.strings = {\n\t\ttype: \"\",\n\t\tcomplete: \"\",\n\t\tstatus: \"\",\n\t\trealm: \"\",\n\t\tsort: \"\",\n\t\tgroup: \"\",\n\t\tcustomFilter: \"\",\n\t\towner: \"\",\n\t\tfieldValue: \"\"\n\t};\n\n\t/*\n\t * The filter composer falls into three major concerns:\n\t * groupHeader - If items are to be grouped by a field, this set of rules returns tiddlers found in the grouping field.\n\t * groupTailHeader - A rather ugly name; a reveal-like widget to show the 'No Group' header of items with out a group, if they exist.\n\t * groupTail - If items do not have a value for the group-field, they are shown here as without group.\n\t * (else) - Basic list construction.\n\t */\n\n\tfilter = processType(filter);\n\tfilter = processStatus(filter);\n\tfilter = processRealm(filter);\n\tfilter = processComplete(filter);\n\tfilter = processSort(filter);\n\tfilter = processGroup(filter);\n\tfilter = processCustomFilter(filter);\n\tfilter = processOwner(filter);\n\tfilter = processFieldValue(filter);\n\n\t// Finally, compose the final filter statement.\n\tfor(var x in filter.strings) {\n\t\tif(filter.strings.hasOwnProperty(x)) {\n\t\t\tcomposedFilter += filter.strings[x];\n\t\t}\n\t}\n\n\tif(filter.values.groupHeader===\"true\"&&filter.values.groupBy===\"none\"){\n\t\tcomposedFilter = \"\";\n\t} else if(filter.values.groupTailHeader===\"true\"&&filter.values.groupBy===\"none\") {\n\t\tcomposedFilter = \"\";\n\t} else {\n\t\tcomposedFilter = \"[\" + composedFilter + \"]\";\n\t}\n\n\treturn composedFilter;\n};\n\n})();\n",
+            "title": "$:/plugins/gsd5/core/macro/list-composer.js",
+            "type": "application/javascript",
+            "module-type": "macro"
+        },
+        "$:/plugins/gsd5/core/macro/gsd5-list": {
+            "title": "$:/plugins/gsd5/core/macro/gsd5-list",
+            "tags": "$:/tags/Macro",
+            "text": "\\define gsd5-list(title:\"Next Action\",gsd_type:\"action\",gsd_status:\"next\",gsd_complete:\"false\",realmAware:\"false\",sort:\"title\",order:\"ascending\",groupBy:\"none\",customFilter:\"none\",dateTemplate:\"DDth MMM YYYY\",ownerField:\"none\",owner:\"{{!!title}}\")\n<$set name=\"listState\" value=<<qualify \"$:/state/gsd-list\">>>\n<$set name=\"caller\" value=$owner$>\n<div class=\"tw-menu-list-item\">\n<span class=\"gsd-list-title\"><$checkbox tiddler=<<listState>> field=\"text\" checked=\"hide\" unchecked=\"show\" default=\"show\">&nbsp;$title$<$reveal state=<<listState>> type=\"match\" text=\"hide\" default=\"show\" retain=\"yes\">{{$:/core/images/chevron-down}}</$reveal></$checkbox></span>\n<hr/>\n<!-- No/All Realm -->\n<$reveal state=\"$:/currentRealm\" type=\"match\" text=\"all\" default=\"all\">\n<!-- Group Header -->\n\t<$reveal state=<<listState>> type=\"match\" text=\"show\" default=\"show\" retain=\"yes\">\n\t<$list filter=<<list-composer gsd_type:$gsd_type$ gsd_status:$gsd_status$ gsd_complete:$gsd_complete$ realmAware:\"false\" sort:$sort$ order:$order$ groupBy:$groupBy$ groupTail:\"false\" groupTailHeader:\"false\" groupHeader:\"true\" customFilter:$customFilter$ ownerField:$ownerField$>>>\n\t\t<div class=\"tc-menu-list-item  gsd5-project-list\">\n\t\t<<view-composer groupTitle:\"$groupBy$\" dateTemplate:\"$dateTemplate$\">>\n\t\t<$list filter=<<list-composer gsd_type:$gsd_type$ gsd_status:$gsd_status$ gsd_complete:$gsd_complete$ realmAware:\"false\" sort:$sort$ order:$order$ groupBy:$groupBy$ groupTail:\"false\" groupTailHeader:\"false\" groupHeader:\"false\" customFilter:$customFilter$ ownerField:$ownerField$>>>\n\t\t\t<div class=\"tc-menu-list-subitem\">\n\t\t\t\t<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewPrefix\"/>\n\t\t\t\t<$link to={{!!title}}><$view field=\"title\"/></$link>\n\t\t\t\t&nbsp;<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewSuffix\"/>\n\t\t\t</div>\n\t\t</$list>\n\t\t</div>\n\t</$list>\n\t<$list filter=<<list-composer gsd_type:$gsd_type$ gsd_status:$gsd_status$ gsd_complete:$gsd_complete$ realmAware:\"false\" sort:$sort$ order:$order$ groupBy:$groupBy$ groupTail:\"false\" groupTailHeader:\"true\" groupHeader:\"false\" customFilter:$customFilter$ ownerField:$ownerField$>>>\n\t<div class=\"tc-menu-list-item  gsd5-project-list\">\n\t\tNo Group\n\t</div>\n\t</$list>\n\t<$list filter=<<list-composer gsd_type:$gsd_type$ gsd_status:$gsd_status$ gsd_complete:$gsd_complete$ realmAware:\"false\" sort:$sort$ order:$order$ groupBy:$groupBy$ groupTail:\"true\" groupTailHeader:\"false\" groupHeader:\"false\" customFilter:$customFilter$ ownerField:$ownerField$>>>\n\t\t<div class=\"tc-menu-list-subitem\">\n\t\t\t<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewPrefix\"/>\n\t\t\t<$link to={{!!title}}><$view field=\"title\"/></$link>\n\t\t\t&nbsp;<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewSuffix\"/>\n\t\t</div>\n\t</$list>\n\t</$reveal>\n</$reveal>\n<!-- Realm -->\n<$reveal state=\"$:/currentRealm\" type=\"nomatch\" text=\"all\" default=\"all\">\n<!-- Group Header -->\n\t<$reveal state=<<listState>> type=\"match\" text=\"show\" default=\"show\" retain=\"yes\">\n\t<$list filter=<<list-composer gsd_type:$gsd_type$ gsd_status:$gsd_status$ gsd_complete:$gsd_complete$ realmAware:\"true\" sort:$sort$ order:$order$ groupBy:$groupBy$ groupTail:\"false\" groupTailHeader:\"false\" groupHeader:\"true\" customFilter:$customFilter$ ownerField:$ownerField$>>>\n\t\t<div class=\"tc-menu-list-item  gsd5-project-list\">\n\t\t<<view-composer groupTitle:\"$groupBy$\" dateTemplate:\"$dateTemplate$\">>\n\t\t<$list filter=<<list-composer gsd_type:$gsd_type$ gsd_status:$gsd_status$ gsd_complete:$gsd_complete$ realmAware:\"true\" sort:$sort$ order:$order$ groupBy:$groupBy$ groupTail:\"false\" groupTailHeader:\"false\" groupHeader:\"false\" customFilter:$customFilter$ ownerField:$ownerField$>>>\n\t\t\t<div class=\"tc-menu-list-subitem\">\n\t\t\t\t<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewPrefix\"/>\n\t\t\t\t<$link to={{!!title}}><$view field=\"title\"/></$link>\n\t\t\t\t&nbsp;<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewSuffix\"/>\n\t\t\t</div>\n\t\t</$list>\n\t\t</div>\n\t</$list>\n\t<$list filter=<<list-composer gsd_type:$gsd_type$ gsd_status:$gsd_status$ gsd_complete:$gsd_complete$ realmAware:\"true\" sort:$sort$ order:$order$ groupBy:$groupBy$ groupTail:\"false\" groupTailHeader:\"true\" groupHeader:\"false\" customFilter:$customFilter$ ownerField:$ownerField$>>>\n\t<div class=\"tc-menu-list-item  gsd5-project-list\">\n\t\tNo Group\n\t</div>\n\t</$list>\n\t<$list filter=<<list-composer gsd_type:$gsd_type$ gsd_status:$gsd_status$ gsd_complete:$gsd_complete$ realmAware:\"true\" sort:$sort$ order:$order$ groupBy:$groupBy$ groupTail:\"true\" groupTailHeader:\"false\" groupHeader:\"false\" customFilter:$customFilter$ ownerField:$ownerField$>>>\n\t\t<div class=\"tc-menu-list-subitem\">\n\t\t\t<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewPrefix\"/>\n\t\t\t<$link to={{!!title}}><$view field=\"title\"/></$link>\n\t\t\t&nbsp;<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewSuffix\"/>\n\t\t</div>\n\t</$list>\n\t</$reveal>\n</$reveal>\n</div>\n</$set>\n</$set>\n\\end\n"
+        },
+        "$:/plugins/gsd5/core/macro/view-composer.js": {
+            "text": "/*\\\ntitle: $:/plugins/gsd5/core/macro/view-composer.js\ntype: application/javascript\nmodule-type: macro\n\nMacro that selects the correct view widget based upon grouping type.  Used with the filter-composer macro.\n\n\n\\*/\n(function(){\n\n/*jslint node: true, browser: true */\n/*global $tw: false */\n\"use strict\";\n\nexports.name = \"view-composer\";\n\nexports.params = [\n\t{name: \"groupTitle\"},\n\t{name: \"dateTemplate\"}\n];\n\n// Run the macro\nexports.run = function(groupTitle, dateTemplate) {\n\n\tvar templateString=\"\",\n\t\tlinkString='&nbsp;<span style=\"font-size: 12px; line-height: 18px;\"><$link to=<<currentTiddler>>>>></$link></span>';\n\n\t// Process values to resolve any wikitext.\n\tgroupTitle = $tw.wiki.renderText(\"text/plain\",\"text/vnd.tiddlywiki\",groupTitle);\n\tdateTemplate = $tw.wiki.renderText(\"text/plain\",\"text/vnd.tiddlywiki\",dateTemplate);\n\n\tif(groupTitle===\"modified\"||groupTitle===\"created\"||groupTitle===\"gsd_comp_date\") {\n\t\ttemplateString = ' format=\"date\" template=\"' + dateTemplate + '\" ';\n\t\tlinkString = \"\";\n\t}\n\n\treturn '<$view field=\"title\"' + templateString + ' />' + linkString;\n};\n\n})();\n",
+            "title": "$:/plugins/gsd5/core/macro/view-composer.js",
+            "type": "application/javascript",
+            "module-type": "macro"
+        },
+        "$:/plugins/gsd5/core/modules/filters/datefilter.js": {
+            "text": "/*\\\ntitle: $:/plugins/gsd5/core/modules/filters/datefilter.js\ntype: application/javascript\nmodule-type: filteroperator\n\nFilter operator for comparing date with date field.\n\n\\*/\n(function(){\n// jslint node: true, browser: true\n// global $tw: false\n\"use strict\";\n// Export our filter function\nexports.date = function(source,operator,options) {\n    var results = [],\n        fieldname = (operator.suffix || \"created\").toLowerCase();\n    if(operator.prefix === \"!\") {\n        source(function(tiddler,title) {\n            if(tiddler) {\n                var field_string = tiddler.getFieldString(fieldname);\n                var field_object = $tw.utils.parseDate(field_string);\n                if(operator.operand.split(\"-\").length === 1) {\n                    var now = new Date();\n                    now.setUTCHours(0);\n                    now.setUTCMinutes(0);\n                    now.setUTCSeconds(0);\n                    now.setUTCMilliseconds(0);\n                    var offsetDays = parseInt(operator.operand) * 86400000;\n                    var test_object = new Date(now - offsetDays);\n                } else {\n                    var test_object = new Date(operator.operand);\n                }\n                if(isNaN(field_object.valueOf()) === false && isNaN(test_object.valueOf()) === false && field_object <= test_object) {\n                    results.push(title);\n                }\n            }\n        });\n    } else {\n        source(function(tiddler,title) {\n            if(tiddler) {\n                var field_string = tiddler.getFieldString(fieldname);\n                var field_object = $tw.utils.parseDate(field_string);\n                if(operator.operand.split(\"-\").length === 1) {\n                    var now = new Date();\n                    now.setUTCHours(0);\n                    now.setUTCMinutes(0);\n                    now.setUTCSeconds(0);\n                    now.setUTCMilliseconds(0);\n                    var offsetDays = parseInt(operator.operand) * 86400000\n                    var test_object = new Date(now-offsetDays);\n                } else {\n                    var test_object = new Date(operator.operand);\n                }\n                if(isNaN(field_object.valueOf()) === false && isNaN(test_object.valueOf()) === false && field_object >= test_object) {\n                    results.push(title);\n                }\n            }\n        });\n    }\n    return results;\n};\n\n})();\n",
+            "title": "$:/plugins/gsd5/core/modules/filters/datefilter.js",
+            "type": "application/javascript",
+            "module-type": "filteroperator"
+        },
+        "$:/plugins/gsd5/core/modules/filters/fieldvalue.js": {
+            "text": "/*\\\ntitle: $:/plugins/gsd5/core/modules/filters/fieldvalue.js\ntype: application/javascript\nmodule-type: filteroperator\n\nFilter operator for returning the value of target field.  Does not take an argument/operand.\nA variation of the field filter found in TW5 core.\n\n\\*/\n(function(){\n\n/*jslint node: true, browser: true */\n/*global $tw: false */\n\"use strict\";\n\n/*\nExport our filter function\n*/\nexports._fieldvalue = function(source,operator,options) {\n    var results = [],\n        fieldname = (operator.operand || \"title\").toLowerCase();\n    if(operator.prefix === \"!\") {\n        source(function(tiddler,title) {\n            if(tiddler) {\n                var text = tiddler.getFieldString(fieldname);\n                if(text !== null) {\n                    results.push(text);;\n                }\n            }\n        });\n    } else {\n        source(function(tiddler,title) {\n            if(tiddler) {\n                var text = tiddler.getFieldString(fieldname);\n                if(text !== null) {\n                    results.push(text);\n                }\n            }\n        });\n    }\n    return results;\n};\n\n})();",
+            "title": "$:/plugins/gsd5/core/modules/filters/fieldvalue.js",
+            "type": "application/javascript",
+            "module-type": "filteroperator"
+        },
+        "$:/plugins/gsd5/core/modules/widgets/complete.js": {
+            "text": "/*\\\ntitle: $:/plugins/gsd5/core/modules/widgets/complete.js\ntype: application/javascript\nmodule-type: widget\n\nMarks an action or project complete and queues the next dependent action.\n\\*/\n(function() {\n\n//jslint node: true, browser: true\n//global $tw: false\n\"use_strict\";\n\nvar Widget = require(\"$:/core/modules/widgets/widget.js\").widget;\n\nvar CompleteWidget = function(parseTreeNode, options) {\n  this.initialise(parseTreeNode, options);\n};\n\nCompleteWidget.prototype = new Widget();\n\nCompleteWidget.prototype.render = function(parent, nextSibling) {\n  var self = this;\n  // Save the parent dom node\n  this.parentDomNode = parent;\n  // Compute our attributes\n  this.computeAttributes();\n  // Execute our logic\n  this.execute();\n  // Create our elements\n  this.labelDomNode = this.document.createElement(\"label\");\n  this.inputDomNode = this.document.createElement(\"input\");\n  this.inputDomNode.setAttribute(\"type\",\"checkbox\");\n  this.inputDomNode.setAttribute(\"class\",\"tc-complete-box\");\n  if(this.getValue()) {\n    this.inputDomNode.setAttribute(\"checked\",\"true\");\n  }\n  this.labelDomNode.appendChild(this.inputDomNode);\n  this.spanDomNode = this.document.createElement(\"span\");\n  this.labelDomNode.appendChild(this.spanDomNode);\n  // Add a click event handler\n  this.inputDomNode.addEventListener(\"change\", function() {\n    self.handleChangeEvent();\n  });\n  // Insert the label into the DOM and render any children\n  parent.insertBefore(this.labelDomNode,nextSibling);\n  this.renderChildren(this.spanDomNode,null);\n  this.domNodes.push(this.labelDomNode);\n};\n\nCompleteWidget.prototype.getValue = function() {\n  var tiddler = this.wiki.getTiddler(this.completeTitle);\n  if(tiddler.fields.gsd_complete === \"true\") {\n    return true;\n  }\n  return false;\n};\n\nCompleteWidget.prototype.handleChangeEvent = function() {\n  this.wiki.setText(this.completeTitle, \"gsd_complete\", null, this.inputDomNode.checked.toString());\n  var now = new Date();\n  this.wiki.setText(this.completeTitle, \"gsd_comp_date\", null, $tw.utils.stringifyDate(now));\n  this.changeDependants();\n  $tw.rootWidget.dispatchEvent({type: \"tm-auto-save-wiki\"});\n};\n\nCompleteWidget.prototype.changeDependants = function() {\n  var self = this;\n  if(this.inputDomNode.checked === true) {\n    this.wiki.forEachTiddler(function(title, tiddler) {\n      if(tiddler.fields.gsd_status === \"future\" && tiddler.fields.gsd_action === self.completeTitle) {\n        this.setText(title, \"gsd_status\", null, \"next\");\n      }\n    });\n  }\n};\n\nCompleteWidget.prototype.execute = function() {\n  this.completeTitle = this.getAttribute(\"tiddler\",this.getVariable(\"currentTiddler\"));\n  this.makeChildWidgets();\n};\n\nCompleteWidget.prototype.refresh = function(changedTiddlers) {\n  var changedAttributes = this.computeAttributes();\n  if(changedAttributes.tiddler || changedAttributes.checked || changedAttributes.unchecked) {\n    this.refreshSelf();\n    return true;\n  } else {\n    var refreshed = false;\n    if(changedTiddlers[this.completeTitle]) {\n      this.inputDomNode.checked = this.getValue();\n      refreshed = true;\n    }\n    return this.refreshChildren(changedTiddlers) || refreshed;\n  }\n};\n\nexports.complete = CompleteWidget;\n\n})();\n",
+            "title": "$:/plugins/gsd5/core/modules/widgets/complete.js",
+            "type": "application/javascript",
+            "module-type": "widget"
+        },
+        "$:/plugins/gsd5/core/modules/widgets/convert.js": {
+            "text": "/*\\\ntitle: $:/plugins/gsd5/core/modules/widgets/convert.js\ntype: application/javascript\nmodule-type: widget\n\nConvert Action to Project widget\n\n\\*/\n(function(){\n\n// slint node: true, browser: true\n// global $tw: false\n\"use strict\";\nvar Widget = require(\"$:/core/modules/widgets/widget.js\").widget;\nvar ConvertWidget = function(parseTreeNode,options) {\n    this.initialise(parseTreeNode,options);\n};\n\nConvertWidget.prototype = new Widget();\n\nConvertWidget.prototype.render = function(parent,nextSibling) {\n    var self = this;\n    // Remember parent\n    this.parentDomNode = parent;\n    // Compute attributes and execute state\n    this.computeAttributes();\n    this.execute();\n    // Create element\n    var domNode = this.document.createElement(\"button\");\n    // Assign classes\n    var classes = this[\"class\"].split(\" \") || [];\n    if(this.selectedClass) {\n        if(this.set && this.setTo && this.isSelected()) {\n            $tw.utils.pushTop(classes,this.selectedClass.split(\" \"));\n        }\n        if(this.popup && this.isPoppedUp()) {\n            $tw.utils.pushTop(classes,this.selectedClass.split(\" \"));\n        }\n    }\n    domNode.className = classes.join(\" \");\n    // Assign other attributes\n    if(this.style) {\n        domNode.setAttribute(\"style\",this.style);\n    }\n    if(this.tooltip) {\n        domNode.setAttribute(\"title\",this.tooltip);\n    }\n    if(this[\"aria-label\"]) {\n        domNode.setAttribute(\"aria-label\",this[\"aria-label\"]);\n    }\n    // Add a click event handler\n    domNode.addEventListener(\"click\",function (event) {\n        self.handleClickEvent();\n    });\n    // Insert element\n    parent.insertBefore(domNode,nextSibling);\n    this.renderChildren(domNode,null);\n    this.domNodes.push(domNode);\n};\n\nConvertWidget.prototype.handleClickEvent = function() {\n    var tiddler = this.wiki.getTiddler(this.to);\n    // Check if tiddler is an action.and not completed.\n    if(tiddler.fields.gsd_type === \"action\" && tiddler.fields.gsd_complete === \"false\") {\n        // Change next actions to active projects, others to future.\n        if(tiddler.fields.gsd_status === \"next\") {\n            this.wiki.setText(this.to, \"gsd_status\", null, \"active\");\n        } else {\n            this.wiki.setText(this.to, \"gsd_status\", null, \"future\");\n        }\n        // Remove previous dependencies.\n        if(tiddler.fields.gsd_action) {\n            this.wiki.setText(this.to, \"gsd_action\", null, \"\");\n        }\n        // Finally, change the type to project.\n        this.wiki.setText(this.to, \"gsd_type\", null, \"project\");\n    }\n};\n\nConvertWidget.prototype.execute = function() {\n    // Get attributes\n    this.to = this.getAttribute(\"to\",this.getVariable(\"currentTiddler\"));\n    this[\"class\"] = this.getAttribute(\"class\",\"\");\n    this[\"aria-label\"] = this.getAttribute(\"aria-label\");\n    this.tooltip = this.getAttribute(\"tooltip\");\n    this.style = this.getAttribute(\"style\");\n    this.selectedClass = this.getAttribute(\"selectedClass\");\n    // Make child widgets\n    this.makeChildWidgets();\n};\n\nConvertWidget.prototype.refresh = function(changedTiddlers) {\n    var changedAttributes = this.computeAttributes();\n    if(changedAttributes.to || changedAttributes[\"class\"] || changedAttributes.selectedClass || changedAttributes.style) {\n        this.refreshSelf();\n        return true;\n    }\n    return this.refreshChildren(changedTiddlers);\n};\n\nexports.convert = ConvertWidget;\n\n})();\n",
+            "title": "$:/plugins/gsd5/core/modules/widgets/convert.js",
+            "type": "application/javascript",
+            "module-type": "widget"
+        },
+        "$:/plugins/gsd5/core/modules/widgets/gsdtiddler.js": {
+            "text": "/*\\\ntitle: $:/plugins/gsd5/core/modules/widgets/gsdtiddler.js\ntype: application/javascript\nmodule-type: widget\n\nNew GSD5 Tiddler Widget\n\n\\*/\n(function() {\n\n// jslint node: true, browser: true\n// global $tw: false\n\"use_strict\";\nvar Widget = require(\"$:/core/modules/widgets/widget.js\").widget;\nvar GSDTiddler = function(parseTreeNode,options) {\n    this.initialise(parseTreeNode, options);\n};\n// Inherit from Widget\nGSDTiddler.prototype = new Widget();\n// Render to DOM\nGSDTiddler.prototype.render = function(parent,nextSibling) {\n    var self = this;\n    this.parentDomNode = parent;\n    this.computeAttributes();\n    this.execute();\n    // Create DOM element\n    var domNode = this.document.createElement(\"button\");\n    domNode.className = this[\"class\"];\n    if(this.title) {\n        domNode.setAttribute(\"title\", this.title);\n    }\n    if(this[\"aria-label\"]) {\n        domNode.setAttribute(\"aria-label\", this[\"aria-label\"]);\n    }\n    // Add event listener\n    domNode.addEventListener(\n        \"click\",\n        function(event) {\n        self.handleClick(event);\n        },\n        false\n    );\n    // Insert element\n    parent.insertBefore(domNode, nextSibling);\n    this.renderChildren(domNode, null);\n    this.domNodes.push(domNode);\n};\n\nGSDTiddler.prototype.handleClick = function(event) {\n    var title = prompt(\"Enter title:\");\n    if(!title) {\n        return;\n    }\n    /*\n    Special thanks to Stephan \"Skeeve\" Hradek for the NewTiddler plugin.\n    Much of the following code is pulled from his plugin.\n    http://tiddlystuff.tiddlyspot.com\n    */\n    var skeleton = this.wiki.getTiddlerAsJson(this.newtiddlerSkeleton);\n    var skeletonClone = JSON.parse(this.substituteVariableReferences(skeleton));\n    var basetitle = title;\n    var newTitle = basetitle;\n    for(var t=1; this.wiki.tiddlerExists(newTitle); t++) {\n        newTitle = basetitle + \" \" + t;\n    }\n    skeletonClone.title = newTitle;\n    var created = this.wiki.getCreationFields();\n    for(var creationField in created) {\n        skeletonClone[creationField] = created[creationField];\n    }\n    var modified = this.wiki.getModificationFields();\n    for(var modificationField in modified) {\n        skeletonClone[modificationField] = modified[modificationField];\n    }\n    this.wiki.addTiddler(skeletonClone);\n    switch(this.newtiddlerEdit) {\n        case \"show\":\n        case \"yes\":\n            var bounds = this.domNodes[0].getBoundingClientRect();\n            this.dispatchEvent({\n                type: \"tm-navigate\",\n                navigateTo: newTitle,\n                navigateFromTitle: this.getVariable(\"currentTiddler\"),\n                navigateFromNode: this,\n                navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height}\n            });\n            if(this.newtiddlerEdit === \"yes\") {\n                this.dispatchEvent({type: \"tm-edit-tiddler\", tiddlerTitle: newTitle});\n            }\n            break;\n        case \"no\":\n            break;\n    }\n    var self = this;\n    setTimeout(function() {\n    // Set the dependant on-the-fly, if enabled.\n    if(self.setNow===\"true\") {\n\t\tvar gsdType = self.getVariable(\"gsd_type\");\n\t\t// Set the target tiddler, usually currentTiddler, gsd_* field to the title of the newly created GSD5 tiddler.\n\t\tself.wiki.setText(self.parentTiddler, \"gsd_\"+gsdType, null, title);\n\t}\n    $tw.rootWidget.dispatchEvent({type: \"tm-auto-save-wiki\"});\n    }, 500);\n};\n\nGSDTiddler.prototype.execute = function() {\n    // Get attributes\n    this[\"class\"] = this.getAttribute(\"class\", \"\");\n    this[\"aria-label\"] = this.getAttribute(\"aria-label\");\n    this.title = this.getAttribute(\"title\");\n    this.newtiddlerSkeleton = this.getAttribute(\"skeleton\");\n    this.newtiddlerEdit = this.getAttribute(\"edit\", \"show\");\n    this.parentTiddler = this.getAttribute(\"tiddler\", this.getVariable(\"currentTiddler\"));\n    this.setNow = this.getAttribute(\"setNow\", \"false\");\n    this.makeChildWidgets();\n};\n\nGSDTiddler.prototype.refresh = function(changedTiddlers) {\n    var changedAttributes = this.computeAttributes();\n    if(changedAttributes[\"class\"] || changedAttributes.edit) {\n        this.refreshSelf();\n        return true;\n    }\n    return this.refreshChildren(changedTiddlers);\n};\n\nexports.gsdtiddler = GSDTiddler;\n\n})();\n",
+            "title": "$:/plugins/gsd5/core/modules/widgets/gsdtiddler.js",
+            "type": "application/javascript",
+            "module-type": "widget"
+        },
+        "$:/plugins/gsd5/core/modules/widgets/prereq.js": {
+            "text": "/*\\\ntitle: $:/plugins/gsd5/core/modules/widgets/prereq.js\ntype: application/javascript\nmodule-type: widget\n\nWidget to set prerequisite actions.\n\n\\*/\n(function() {\n\n// jslint node: true, browser: true\n// global $tw: false\n\"use_strict\";\n\nvar Widget = require(\"$:/core/modules/widgets/widget.js\").widget;\n\nvar PrereqWidget = function(parseTreeNode,options) {\n    this.initialise(parseTreeNode, options);\n};\n\n// Inherit from Widget\nPrereqWidget.prototype = new Widget();\n\n// Render to DOM\nPrereqWidget.prototype.render = function(parent,nextSibling) {\n    var self = this;\n    this.parentDomNode = parent;\n    this.computeAttributes();\n    this.execute();\n    this.selectDomNode = this.document.createElement(\"select\");\n    this.selectDomNode.addEventListener(\"change\", function() {\n        self.handleChangeEvent();\n    });\n    parent.insertBefore(this.selectDomNode,nextSibling);\n    this.renderChildren(this.selectDomNode,null);\n    this.domNodes.push(this.selectDomNode);\n    this.setSelectValue();\n};\n\nPrereqWidget.prototype.execute = function() {\n    this.prereqTitle = this.getAttribute(\"tiddler\",this.getVariable(\"currentTiddler\"));\n    this.prereqDefault = this.getAttribute(\"default\");\n    this.makeChildWidgets();\n};\n\nPrereqWidget.prototype.setSelectValue = function() {\n    var value = this.prereqDefault;\n    var tiddler = this.wiki.getTiddler(this.prereqTitle);\n    if(tiddler.fields.gsd_action) {\n        value = tiddler.fields.gsd_action;\n    }\n    this.selectDomNode.value = value;\n};\n\nPrereqWidget.prototype.handleChangeEvent = function() {\n    var tiddler = this.wiki.getTiddler(this.prereqTitle);\n    if(tiddler.fields.gsd_type !== \"action\") {\n        return;\n    }\n    this.wiki.setText(this.prereqTitle, \"gsd_action\", null, this.selectDomNode.value);\n    this.setStatus();\n};\n\nPrereqWidget.prototype.setStatus = function() {\n    if(this.selectDomNode.value !== \"none\") {\n        var currentTiddler = this.wiki.getTiddler(this.prereqTitle);\n        if(currentTiddler.fields.gsd_completed !== \"completed\" || currentTiddler.fields.gsd_status !== \"waiting\") {\n            this.wiki.setText(this.prereqTitle, \"gsd_status\", null, \"future\");\n        }\n    }\n};\n\nPrereqWidget.prototype.refresh = function(changedTiddlers) {\n    var changedAttributes = this.computeAttributes();\n    if(changedAttributes.prereqTitle) {\n        this.refreshSelf();\n        return true;\n    } else {\n        if(changedTiddlers[this.prereqTitle]) {\n            this.setSelectValue();\n        }\n        return this.refreshChildren(changedTiddlers);\n    }\n};\n\nexports.prereq = PrereqWidget;\n\n})();\n",
+            "title": "$:/plugins/gsd5/core/modules/widgets/prereq.js",
+            "type": "application/javascript",
+            "module-type": "widget"
+        },
+        "$:/plugins/gsd5/core/modules/widgets/toggleButton.js": {
+            "text": "/*\\\ntitle: $:/plugins/gsd5/core/modules/widgets/toggleButton.js\ntype: application/javascript\nmodule-type: widget\n\nToggle Button widget allows a button to have behaviour similar to the checkbox.\n\n\\*/\n(function(){\n\n// slint node: true, browser: true\n// global $tw: false\n\"use strict\";\nvar Widget = require(\"$:/core/modules/widgets/widget.js\").widget;\nvar ToggleButton = function(parseTreeNode,options) {\n    this.initialise(parseTreeNode,options);\n};\n\nToggleButton.prototype = new Widget();\n\nToggleButton.prototype.render = function(parent,nextSibling) {\n    var self = this;\n    // Remember parent\n    this.parentDomNode = parent;\n    // Compute attributes and execute state\n    this.computeAttributes();\n    this.execute();\n    // Create element\n    var domNode = this.document.createElement(\"button\");\n    // Assign classes\n    var classes = this[\"class\"].split(\" \") || [];\n    if(this.selectedClass) {\n        if(this.set && this.setTo && this.isSelected()) {\n            $tw.utils.pushTop(classes,this.selectedClass.split(\" \"));\n        }\n        if(this.popup && this.isPoppedUp()) {\n            $tw.utils.pushTop(classes,this.selectedClass.split(\" \"));\n        }\n    }\n    domNode.className = classes.join(\" \");\n    // Assign other attributes\n    if(this.style) {\n        domNode.setAttribute(\"style\",this.style);\n    }\n    if(this.tooltip) {\n        domNode.setAttribute(\"title\",this.tooltip);\n    }\n    if(this[\"aria-label\"]) {\n        domNode.setAttribute(\"aria-label\",this[\"aria-label\"]);\n    }\n    // Add a click event handler\n    domNode.addEventListener(\"click\",function (event) {\n        self.handleClickEvent();\n    });\n    // Insert element\n    parent.insertBefore(domNode,nextSibling);\n    this.renderChildren(domNode,null);\n    this.domNodes.push(domNode);\n};\n\nToggleButton.prototype.handleClickEvent = function() {\n    var toggleState = this.getValue();\n    if(toggleState === this.toggleOff) {\n        this.wiki.setText(this.toggleTitle, this.toggleField, null, this.toggleOn);\n    }\n    if(toggleState === this.toggleOn) {\n        this.wiki.setText(this.toggleTitle, this.toggleField, null, this.toggleOff);\n    }\n};\n\nToggleButton.prototype.getValue = function() {\n    var tiddler = this.wiki.getTiddler(this.toggleTitle);\n    if(tiddler) {\n        if(this.toggleField) {\n            var value = tiddler.fields[this.toggleField] || this.toggleDefault || \"\";\n            if(value === this.toggleOn) {\n                return this.toggleOn;\n            }\n            if(value === this.toggleOff) {\n                return this.toggleOff;\n            }\n        }\n    } else {\n        if(this.toggleField) {\n            if(this.toggleDefault === this.toggleOn) {\n                return this.toggleOn;\n            }\n            if(this.toggleDefault === this.toggleOff) {\n                return this.toggleOff;\n            }\n        }\n    }\n    return this.toggleOff;\n};\n\nToggleButton.prototype.execute = function() {\n    // Get attributes\n    this.toggleTitle = this.getAttribute(\"tiddler\",this.getVariable(\"currentTiddler\"));\n    this.toggleField = this.getAttribute(\"field\",\"text\");\n    this.toggleOn = this.getAttribute(\"on\");\n    this.toggleOff = this.getAttribute(\"off\");\n    this.toggleDefault = this.getAttribute(\"default\");\n    this[\"class\"] = this.getAttribute(\"class\",\"\");\n    this[\"aria-label\"] = this.getAttribute(\"aria-label\");\n    this.tooltip = this.getAttribute(\"tooltip\");\n    this.style = this.getAttribute(\"style\");\n    this.selectedClass = this.getAttribute(\"selectedClass\");\n    // Make child widgets\n    this.makeChildWidgets();\n};\n\nToggleButton.prototype.refresh = function(changedTiddlers) {\n    var changedAttributes = this.computeAttributes();\n    if(changedAttributes.to || changedAttributes[\"class\"] || changedAttributes.selectedClass || changedAttributes.style) {\n        this.refreshSelf();\n        return true;\n    }\n    return this.refreshChildren(changedTiddlers);\n};\n\nexports.toggle = ToggleButton;\n\n})();\n",
+            "title": "$:/plugins/gsd5/core/modules/widgets/toggleButton.js",
+            "type": "application/javascript",
+            "module-type": "widget"
+        },
+        "$:/DefaultTiddlers": {
+            "title": "$:/DefaultTiddlers",
+            "text": "[[Dashboard]]"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/advanced-search": {
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/advanced-search",
+            "text": "hide"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/close-all": {
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/close-all",
+            "text": "hide"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/encryption": {
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/encryption",
+            "text": "hide"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/export-page": {
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/export-page",
+            "text": "hide"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/full-screen": {
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/full-screen",
+            "text": "hide"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/home": {
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/home",
+            "text": "hide"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/refresh": {
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/refresh",
+            "text": "hide"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/import": {
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/import",
+            "text": "hide"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/language": {
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/language",
+            "text": "hide"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/tag-manager": {
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/tag-manager",
+            "text": "hide"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/more-page-actions": {
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/more-page-actions",
+            "text": "hide"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/new-journal": {
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/new-journal",
+            "text": "hide"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/permaview": {
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/permaview",
+            "text": "hide"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/storyview": {
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/storyview",
+            "text": "hide"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/theme": {
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/theme",
+            "text": "hide"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/new-tiddler": {
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/new-tiddler",
+            "text": "hide"
+        },
+        "$:/tags/PageControls": {
+            "title": "$:/tags/PageControls",
+            "list": "[[$:/plugins/gsd5/core/ui/buttons/dashboard-button]] [[$:/core/ui/Buttons/home]] [[$:/core/ui/Buttons/close-all]] [[$:/core/ui/Buttons/permaview]] [[$:/plugins/gsd5/core/ui/buttons/add-action-button]] [[$:/plugins/gsd5/core/ui/buttons/add-project-button]] [[$:/core/ui/Buttons/new-tiddler]] [[$:/core/ui/Buttons/new-journal]] [[$:/core/ui/Buttons/import]] [[$:/core/ui/Buttons/export-page]] [[$:/core/ui/Buttons/control-panel]] [[$:/core/ui/Buttons/advanced-search]] [[$:/core/ui/Buttons/tag-manager]] [[$:/core/ui/Buttons/language]] [[$:/core/ui/Buttons/theme]] [[$:/core/ui/Buttons/storyview]] [[$:/core/ui/Buttons/encryption]] [[$:/core/ui/Buttons/full-screen]] [[$:/core/ui/Buttons/save-wiki]] [[$:/core/ui/Buttons/refresh]] [[$:/core/ui/Buttons/more-page-actions]]"
+        },
+        "$:/core/ui/SideBar/Recent": {
+            "title": "$:/core/ui/SideBar/Recent",
+            "caption": "{{$:/language/SideBar/Recent/Caption}}",
+            "text": "<$macrocall $name=\"timeline\" format={{$:/language/RecentChanges/DateFormat}}/>\n"
+        },
+        "$:/tags/SideBar": {
+            "title": "$:/tags/SideBar",
+            "list": "[[$:/core/ui/SideBar/Open]] [[$:/plugins/gsd5/core/ui/sidebar/collect-sidebar]] [[$:/plugins/gsd5/core/ui/sidebar/review-sidebar]] [[$:/core/ui/SideBar/Recent]] [[$:/core/ui/SideBar/Tools]] [[$:/core/ui/SideBar/More]]"
+        },
+        "$:/SiteSubtitle": {
+            "title": "$:/SiteSubtitle",
+            "text": "a getting-stuff-done tool\n"
+        },
+        "$:/SiteTitle": {
+            "title": "$:/SiteTitle",
+            "text": "GSD5\n"
+        },
+        "$:/core/ui/SideBar/Tools": {
+            "title": "$:/core/ui/SideBar/Tools",
+            "tags": "$:/tags/MoreSideBar",
+            "caption": "{{$:/language/SideBar/Tools/Caption}}",
+            "text": "\\define lingo-base() $:/language/ControlPanel/\n\\define config-title()\n$:/config/PageControlButtons/Visibility/$(listItem)$\n\\end\n\n<<lingo Basics/Version/Prompt>> <<version>>\n\n<$set name=\"tv-config-toolbar-icons\" value=\"yes\">\n\n<$set name=\"tv-config-toolbar-text\" value=\"yes\">\n\n<$set name=\"tv-config-toolbar-class\" value=\"\">\n\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]\" variable=\"listItem\">\n\n<div style=\"position:relative;\">\n\n<$checkbox tiddler=<<config-title>> field=\"text\" checked=\"show\" unchecked=\"hide\" default=\"show\"/> <$transclude tiddler=<<listItem>>/> <i class=\"tc-muted\"><$transclude tiddler=<<listItem>> field=\"description\"/></i>\n\n</div>\n\n</$list>\n\n</$set>\n\n</$set>\n\n</$set>\n"
+        },
+        "$:/core/ui/ViewTemplate": {
+            "title": "$:/core/ui/ViewTemplate",
+            "text": "\\define frame-classes()\ntc-tiddler-frame tc-tiddler-view-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$ $(tiddlerTagClasses)$\n\\end\n\n<$set name=\"blueboxState\" value=<<qualify \"$:/state/gsd/bluebox\">>><$set name=\"storyTiddler\" value=<<currentTiddler>>><$set name=\"tiddlerInfoState\" value=<<qualify \"$:/state/popup/tiddler-info\">>><$tiddler tiddler=<<currentTiddler>>><div class=<<frame-classes>>><$list filter=\"[all[shadows+tiddlers]tag[$:/tags/ViewTemplate]!has[draft.of]]\" variable=\"listItem\"><$transclude tiddler=<<listItem>>/></$list>\n</div>\n</$tiddler></$set></$set></$set>\n"
+        },
+        "$:/core/ui/ViewTemplate/body": {
+            "title": "$:/core/ui/ViewTemplate/body",
+            "tags": "$:/tags/ViewTemplate",
+            "text": "<div class=\"tc-tiddler-body\">\n\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/addins/ViewBody\"/>\n\n<$list filter=\"[all[current]!has[plugin-type]!field:hide-body[yes]]\">\n\n<$transclude>\n\n<$transclude tiddler=\"$:/language/MissingTiddler/Hint\"/>\n\n</$transclude>\n\n</$list>\n\n</div>\n"
+        },
+        "$:/core/ui/ViewTemplate/subtitle": {
+            "title": "$:/core/ui/ViewTemplate/subtitle",
+            "tags": "$:/tags/ViewTemplate",
+            "text": "<div class=\"tc-subtitle\">\n//{{!!gsd_type}}//<br/>\n<$link to={{!!modifier}}>\n<$view field=\"modifier\"/>\n</$link> <$view field=\"modified\" format=\"relativedate\"/>\n</div>\n"
+        },
+        "$:/core/ui/ViewTemplate/title": {
+            "title": "$:/core/ui/ViewTemplate/title",
+            "tags": "$:/tags/ViewTemplate",
+            "text": "\\define title-styles()\nfill:$(foregroundColor)$;\n\\end\n\\define config-title()\n$:/config/ViewToolbarButtons/Visibility/$(listItem)$\n\\end\n<div class=\"tc-tiddler-title\">\n<div class=\"tc-titlebar\">\n<span class=\"tc-tiddler-controls\">\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]]\" variable=\"listItem\"><$reveal type=\"nomatch\" state=<<config-title>> text=\"hide\"><$transclude tiddler=<<listItem>>/></$reveal></$list>\n</span>\n<$set name=\"foregroundColor\" value={{!!color}}>\n<span class=\"tc-tiddler-title-icon\" style=<<title-styles>>>\n<$transclude tiddler={{!!icon}}/>\n</span>\n</$set>\n<$list filter=\"[all[current]removeprefix[$:/]]\">\n<h2 class=\"tc-title\" title={{$:/language/SystemTiddler/Tooltip}}>\n<span class=\"tc-system-title-prefix\">$:/</span><$text text=<<currentTiddler>>/>\n</h2>\n</$list>\n<$list filter=\"[all[current]!prefix[$:/]]\">\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/addins/ViewComplete\"/>\n<h2 class=\"tc-title\">\n<$view field=\"title\"/>\n</h2>\n</$list>\n</div>\n\n<$reveal type=\"nomatch\" text=\"\" default=\"\" state=<<tiddlerInfoState>> class=\"tc-tiddler-info tc-popup-handle\" animate=\"yes\" retain=\"yes\">\n\n<$transclude tiddler=\"$:/core/ui/TiddlerInfo\"/>\n\n</$reveal>\n</div>"
+        },
+        "$:/tags/ViewToolbar": {
+            "title": "$:/tags/ViewToolbar",
+            "list": "[[$:/plugins/gsd5/core/ui/buttons/hide-controls]] [[$:/core/ui/Buttons/more-tiddler-actions]] [[$:/core/ui/Buttons/info]] [[$:/core/ui/Buttons/new-here]] [[$:/core/ui/Buttons/new-journal-here]] [[$:/core/ui/Buttons/clone]] [[$:/core/ui/Buttons/export-tiddler]] [[$:/core/ui/Buttons/edit]] [[$:/core/ui/Buttons/permalink]] [[$:/core/ui/Buttons/permaview]] [[$:/core/ui/Buttons/close-others]] [[$:/core/ui/Buttons/close]]"
+        },
+        "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/clone": {
+            "title": "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/clone",
+            "text": "hide"
+        },
+        "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/close-others": {
+            "title": "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/close-others",
+            "text": "hide"
+        },
+        "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/export-tiddler": {
+            "title": "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/export-tiddler",
+            "text": "hide"
+        },
+        "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/info": {
+            "title": "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/info",
+            "text": "hide"
+        },
+        "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/more-tiddler-actions": {
+            "title": "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/more-tiddler-actions",
+            "text": "show"
+        },
+        "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/new-here": {
+            "title": "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/new-here",
+            "text": "hide"
+        },
+        "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/new-journal-here": {
+            "title": "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/new-journal-here",
+            "text": "hide"
+        },
+        "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/permalink": {
+            "title": "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/permalink",
+            "text": "hide"
+        },
+        "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/permaview": {
+            "title": "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/permaview",
+            "text": "hide"
+        },
+        "$:/config/ViewToolbarButtons/Visibility/$:/plugins/gsd5/core/ui/buttons/hide-controls": {
+            "title": "$:/config/ViewToolbarButtons/Visibility/$:/plugins/gsd5/core/ui/buttons/hide-controls",
+            "text": "hide"
+        },
+        "Action Dashboard": {
+            "title": "Action Dashboard",
+            "text": "<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/next-action-list\"/>\n\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/waiting-action-list\"/>\n\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/future-action-list\"/>\n\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/completed-action-list\"/>\n"
+        },
+        "$:/plugins/gsd5/core/ui/buttons/add-action-button": {
+            "title": "$:/plugins/gsd5/core/ui/buttons/add-action-button",
+            "tags": "$:/tags/PageControls",
+            "caption": "{{$:/core/images/refresh-button}} new action",
+            "description": "Add new action",
+            "text": "<$set name=\"gsd_type\" value=\"action\">\n<$set name=\"gsd_status\" value=\"next\">\n<$set name=\"gsd_complete\" value=\"false\">\n<$set name=\"gsd_realm\" value={{$:/currentRealm}}>\n<$gsdtiddler skeleton=\"$:/plugins/gsd5/core/ui/skeletons/ActionSkeleton\" edit={{$:/plugins/gsd5/core/ui/config/new-action-show}} title=\"Add new action\" aria-label=\"new action\" class=<<tv-config-toolbar-class>>>\n<$list filter=\"[<tv-config-toolbar-icons>prefix[yes]]\">\n{{$:/plugins/gsd5/core/images/task}}\n</$list>\n<$list filter=\"[<tv-config-toolbar-text>prefix[yes]]\">\n<$text text=\"new action\"/>\n</$list>\n</$gsdtiddler>\n</$set>\n</$set>\n</$set>\n</$set>\n"
+        },
+        "$:/plugins/gsd5/core/ui/buttons/add-project-button": {
+            "title": "$:/plugins/gsd5/core/ui/buttons/add-project-button",
+            "tags": "$:/tags/PageControls",
+            "caption": "{{$:/plugins/gsd5/core/images/project}} new project",
+            "description": "Add new project",
+            "text": "<$set name=\"gsd_type\" value=\"project\">\n<$set name=\"gsd_status\" value=\"active\">\n<$set name=\"gsd_complete\" value=\"false\">\n<$set name=\"gsd_realm\" value={{$:/currentRealm}}>\n<$gsdtiddler skeleton=\"$:/plugins/gsd5/core/ui/skeletons/ActionSkeleton\" edit={{$:/plugins/gsd5/core/ui/config/new-project-show}} title=\"Add new project\" aria-label=\"new project\" class=<<tv-config-toolbar-class>>>\n<$list filter=\"[<tv-config-toolbar-icons>prefix[yes]]\">\n{{$:/plugins/gsd5/core/images/project}}\n</$list>\n<$list filter=\"[<tv-config-toolbar-text>prefix[yes]]\">\n<$text text=\"new project\"/>\n</$list>\n</$gsdtiddler>\n</$set>\n</$set>\n</$set>\n</$set>\n\n"
+        },
+        "$:/plugins/gsd5/core/ui/buttons/convert-action-button": {
+            "title": "$:/plugins/gsd5/core/ui/buttons/convert-action-button",
+            "description": "Convert Action to Project",
+            "tags": "$:/tags/GSD5ActionCore",
+            "text": "<$list filter=\"[is[current]field:gsd_complete[false]]\">\n<$convert class=\"gsd-bluebox-button\" tooltip=\"Covert Action to Project\" aria-label=\"Convert Action to Project\">{{$:/plugins/gsd5/core/images/convert}} Convert</$convert>\n</$list>"
+        },
+        "$:/plugins/gsd5/core/ui/buttons/dashboard-button": {
+            "title": "$:/plugins/gsd5/core/ui/buttons/dashboard-button",
+            "tags": "$:/tags/PageControls",
+            "caption": "{{$:/plugins/gsd5/core/images/dashboard}} open dashboard",
+            "description": "Open the dashboard",
+            "text": "<$button to=\"Dashboard\" title=\"Open the dashboard\" aria-label=\"open dashboard\" class=<<tv-config-toolbar-class>>>\n<$list filter=\"[<tv-config-toolbar-icons>prefix[yes]]\">\n{{$:/plugins/gsd5/core/images/dashboard}}\n</$list>\n<$list filter=\"[<tv-config-toolbar-text>prefix[yes]]\">\n<$text text=\"open dashboard\"/>\n</$list>\n</$button>"
+        },
+        "$:/plugins/gsd5/core/ui/buttons/delete-tiddler-button": {
+            "title": "$:/plugins/gsd5/core/ui/buttons/delete-tiddler-button",
+            "caption": "{{$:/plugins/gsd5/core/images/rubbishbin}} delete tiddler",
+            "description": "Delete tiddler",
+            "text": "<$button class=\"tc-btn-invisible\" message=\"tm-delete-tiddler\" param=<<currentTiddler>>>\n\t{{$:/plugins/gsd5/core/images/rubbishbin}}\n</$button>\n"
+        },
+        "$:/plugins/gsd5/core/ui/buttons/hide-controls": {
+            "title": "$:/plugins/gsd5/core/ui/buttons/hide-controls",
+            "tags": "$:/tags/ViewToolbar",
+            "caption": "{{$:/plugins/gsd5/core/images/control}} hide controls",
+            "description": "Hide GSD5 Controls",
+            "text": "<$list filter=\"[is[current]has[gsd_type]] [is[current]field:title[Dashboard]]\">\n<$toggle tiddler=<<blueboxState>> on=\"hide\" off=\"show\" default=\"show\" tooltip=\"Toggle Blue-Box Controls\" aria-label=\"toggle controls\" class=<<tv-config-toolbar-class>> selectedClass=\"tc-selected\">\n<$list filter=\"[<tv-config-toolbar-icons>prefix[yes]]\">\n{{$:/plugins/gsd5/core/images/control}}\n</$list>\n<$list filter=\"[<tv-config-toolbar-text>prefix[yes]]\">\n<span class=\"tc-btn-text\"><$text text=\"toggle controls\"/></span>\n</$list>\n</$toggle>\n</$list>"
+        },
+        "Cleanup": {
+            "title": "Cleanup",
+            "text": "<div class=\"tc-message-box\">\n\nThe following actions and projects are older than 14 days and can be possibly deleted.\n\n</div>\n\n<<gsd5-list title:\"Completed Actions\" gsd_type:\"action\" gsd_status:\"none\" gsd_complete:\"true\" realmAware:\"true\" sort:\"gsd_comp_date\" order:\"descending\" groupBy:\"none\" customFilter:\"!date:gsd_comp_date[14]\">>\n\n<<gsd5-list title:\"Completed Projects\" gsd_type:\"project\" gsd_status:\"none\" gsd_complete:\"true\" realmAware:\"true\" sort:\"gsd_comp_date\" order:\"descending\" groupBy:\"none\" customFilter:\"!date:gsd_comp_date[14]\">>\n"
+        },
+        "Completed Actions": {
+            "title": "Completed Actions",
+            "text": "<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/completed-action-list\" mode=\"block\">"
+        },
+        "Completed Projects": {
+            "title": "Completed Projects",
+            "text": "<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/completed-project-list\"/>\n"
+        },
+        "$:/config/GSD5DashboardGroup": {
+            "title": "$:/config/GSD5DashboardGroup",
+            "text": "none"
+        },
+        "$:/config/GSD5ReferencesGroup": {
+            "title": "$:/config/GSD5ReferencesGroup",
+            "text": "none"
+        },
+        "$:/currentRealm": {
+            "title": "$:/currentRealm",
+            "text": "all"
+        },
+        "$:/config/GSD5Lists/visibility/$:/plugins/gsd5/core/ui/lists/next-action-list": {
+            "title": "$:/config/GSD5Lists/visibility/$:/plugins/gsd5/core/ui/lists/next-action-list",
+            "text": "show"
+        },
+        "$:/config/GSD5Lists/visibility/$:/plugins/gsd5/core/ui/lists/waiting-action-list": {
+            "title": "$:/config/GSD5Lists/visibility/$:/plugins/gsd5/core/ui/lists/waiting-action-list",
+            "text": "show"
+        },
+        "$:/config/GSD5Lists/visibility/$:/plugins/gsd5/core/ui/lists/future-action-list": {
+            "title": "$:/config/GSD5Lists/visibility/$:/plugins/gsd5/core/ui/lists/future-action-list",
+            "text": "show"
+        },
+        "$:/config/GSD5Lists/visibility/$:/plugins/gsd5/core/ui/lists/active-project-list": {
+            "title": "$:/config/GSD5Lists/visibility/$:/plugins/gsd5/core/ui/lists/active-project-list",
+            "text": "show"
+        },
+        "Contacts": {
+            "title": "Contacts",
+            "text": "<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/contacts-list\"/>"
+        },
+        "Contexts": {
+            "title": "Contexts",
+            "text": "<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/context-list\"/>\n"
+        },
+        "$:/plugins/gsd5/core/ui/control-panel/core": {
+            "title": "$:/plugins/gsd5/core/ui/control-panel/core",
+            "tags": "$:/tags/GSD5Plugin",
+            "caption": "Core",
+            "text": "\\define config-lists()\n$:/config/GSD5Lists/visibility/$(listItem)$\n\\end\n\\define list-caption()\n{{$(listItem)$!!caption}}\n\\end\n\n! Core\n\n<div style=\"border-top:1px solid #eee;\">\n\n''General''\n\n<$checkbox tiddler=\"$:/plugins/gsd5/core/ui/config/new-action-show\" field=\"text\" checked=\"show\" unchecked=\"no\"> Show new Actions upon creation</$checkbox><br/>\n<$checkbox tiddler=\"$:/plugins/gsd5/core/ui/config/new-project-show\" field=\"text\" checked=\"show\" unchecked=\"no\"> Show new Projects upon creation</$checkbox><br/>\n<$checkbox tiddler=\"$:/config/ViewToolbarButtons/Visibility/$:/plugins/gsd5/core/ui/buttons/hide-controls\" field=\"text\" checked=\"show\" unchecked=\"hide\"> Show ~BlueBox minimize button</$checkbox>\n\n</div>\n\n<div style=\"border-top:1px solid #eee;\">\n\n''Dashboard''\n\n//Dashboard Lists//<br/>\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5Lists]!has[draft.of]]\" variable=\"listItem\">\n<$checkbox tiddler=<<config-lists>> field=\"text\" checked=\"show\" unchecked=\"hide\"> <<list-caption>> </$checkbox><br/>\n</$list>\n\n//Dashboard Options//<br/>\n<$checkbox tiddler=\"$:/config/GSD5DashboardGroup\" field=\"text\" checked=\"gsd_project\" unchecked=\"none\"> Group Actions in Dashboard by Project</$checkbox><br/>\n<$checkbox tiddler=\"$:/config/GSD5DashboardCore/visibility/$:/plugins/gsd5/core/ui/lists/realm-list\" field=\"text\" checked=\"show\" unchecked=\"hide\"> Show Realm selector in the Dashboard </$checkbox>\n\n</div>\n"
+        },
+        "$:/plugins/gsd5/core/ui/control-panel": {
+            "title": "$:/plugins/gsd5/core/ui/control-panel",
+            "tags": "$:/tags/ControlPanel",
+            "caption": "GSD5",
+            "text": "<div class=\"tc-control-panel\">\n<<tabs \"[all[shadows+tiddlers]tag[$:/tags/GSD5Plugin]!has[draft.of]]\" \"$:/plugins/gsd5/core/ui/control-panel/core\" \"$:/state/tab/gsd5panel\" \"tc-vertical\">>\n</div>\n"
+        },
+        "Dashboard": {
+            "title": "Dashboard",
+            "text": "\\define config-lists()\n$:/config/GSD5Lists/visibility/$(listItem)$\n\\end\n\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5Lists]!has[draft.of]]\" variable=\"listItem\">\n\n<$reveal state=<<config-lists>> type=\"match\" text=\"show\" default=\"hide\">\n<$transclude tiddler=<<listItem>>/>\n</$reveal>\n\n</$list>\n"
+        },
+        "Delegated Actions": {
+            "title": "Delegated Actions",
+            "text": "<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/waiting-action-list-by-contact\"/>\n"
+        },
+        "$:/plugins/gsd5/core/ui/lists/active-project-list": {
+            "title": "$:/plugins/gsd5/core/ui/lists/active-project-list",
+            "tags": "$:/tags/GSD5Lists",
+            "caption": "Active Projects",
+            "text": "<<gsd5-list title:\"Active Projects\" gsd_type:\"project\" gsd_status:\"active\" gsd_complete:\"false\" realmAware:\"true\" sort:\"title\" order:\"ascending\" groupBy:\"none\" customFilter:\"none\">>\n"
+        },
+        "$:/plugins/gsd5/core/ui/lists/completed-action-list": {
+            "title": "$:/plugins/gsd5/core/ui/lists/completed-action-list",
+            "tags": "$:/tags/GSD5Lists",
+            "caption": "Completed Actions",
+            "text": "<<gsd5-list title:\"Completed Action\" gsd_type:\"action\" gsd_complete:\"true\" realmAware:\"true\" sort:\"gsd_comp_date\" order:\"descending\" groupBy:{{$:/config/GSD5DashboardGroup}} customFilter:\"none\">>\n"
+        },
+        "$:/plugins/gsd5/core/ui/lists/completed-project-list": {
+            "title": "$:/plugins/gsd5/core/ui/lists/completed-project-list",
+            "tags": "$:/tags/GSD5Lists",
+            "caption": "Completed Projects",
+            "text": "<<gsd5-list title:\"Completed Projects\" gsd_type:\"project\" gsd_status:\"active\" gsd_complete:\"true\" realmAware:\"true\" sort:\"gsd_comp_date\" order:\"descending\" groupBy:\"none\" customFilter:\"none\">>\n"
+        },
+        "$:/plugins/gsd5/core/ui/lists/contacts-list": {
+            "title": "$:/plugins/gsd5/core/ui/lists/contacts-list",
+            "tags": "$:/tags/GSD5Lists",
+            "caption": "Contacts",
+            "text": "<<gsd5-list title:\"Contacts\" gsd_type:\"contact\" realmAware:\"true\" sort:\"title\" order:\"ascending\" customFilter:\"none\">>"
+        },
+        "$:/plugins/gsd5/core/ui/lists/contacts-action-list": {
+            "title": "$:/plugins/gsd5/core/ui/lists/contacts-action-list",
+            "text": "<p>\n<<gsd5-list title:\"Waiting Actions\" gsd_type:\"action\" gsd_status:\"waiting\" gsd_complete:\"false\" realmAware:\"true\" sort:\"title\" order:\"ascending\" groupBy:\"gsd_project\" customFilter:\"none\" ownerField:\"gsd_contact\">>\n</p>\n<p>\n<<gsd5-list title:\"Future Actions\" gsd_type:\"action\" gsd_status:\"future\" gsd_complete:\"false\" realmAware:\"true\" sort:\"title\" order:\"ascending\" groupBy:\"gsd_project\" customFilter:\"none\" ownerField:\"gsd_contact\">>\n</p>"
+        },
+        "$:/plugins/gsd5/core/ui/lists/context-action-list": {
+            "title": "$:/plugins/gsd5/core/ui/lists/context-action-list",
+            "text": "<<gsd5-list title:\"Next Action By Project\" gsd_type:\"action\" gsd_status:\"next\" gsd_complete:\"false\" realmAware:\"true\" sort:\"title\" order:\"ascending\" groupBy:\"gsd_project\" customFilter:\"none\" ownerField:\"tag\">>\n\n<<gsd5-list title:\"Wating Action By Project\" gsd_type:\"action\" gsd_status:\"waiting\" gsd_complete:\"false\" realmAware:\"true\" sort:\"title\" order:\"ascending\" groupBy:\"gsd_project\" customFilter:\"none\" ownerField:\"tag\">>\n\n<<gsd5-list title:\"Future Action By Project\" gsd_type:\"action\" gsd_status:\"future\" gsd_complete:\"false\" realmAware:\"true\" sort:\"title\" order:\"ascending\" groupBy:\"gsd_project\" customFilter:\"none\" ownerField:\"tag\">>"
+        },
+        "$:/plugins/gsd5/core/ui/lists/context-list": {
+            "title": "$:/plugins/gsd5/core/ui/lists/context-list",
+            "text": "<<gsd5-list title:\"Contexts\" gsd_type:\"context\" realmAware:\"true\" sort:\"title\" order:\"ascending\" groupBy:\"none\" customFilter:\"none\">>"
+        },
+        "$:/plugins/gsd5/core/ui/lists/future-action-list": {
+            "title": "$:/plugins/gsd5/core/ui/lists/future-action-list",
+            "tags": "$:/tags/GSD5Lists",
+            "caption": "Future Actions",
+            "text": "<<gsd5-list title:\"Future Action\" gsd_type:\"action\" gsd_status:\"future\" gsd_complete:\"false\" realmAware:\"true\" sort:\"title\" order:\"ascending\" groupBy:{{$:/config/GSD5DashboardGroup}} customFilter:\"none\">>\n"
+        },
+        "$:/plugins/gsd5/core/ui/lists/future-project-list": {
+            "title": "$:/plugins/gsd5/core/ui/lists/future-project-list",
+            "tags": "$:/tags/GSD5Lists",
+            "caption": "Future Projects",
+            "text": "<<gsd5-list title:\"Future Projects\" gsd_type:\"project\" gsd_status:\"future\" gsd_complete:\"false\" realmAware:\"true\" sort:\"title\" order:\"ascending\" groupBy:\"none\" customFilter:\"none\">>\n"
+        },
+        "$:/plugins/gsd5/core/ui/lists/ListViewPrefix": {
+            "title": "$:/plugins/gsd5/core/ui/lists/ListViewPrefix",
+            "text": "<$list filter=\"[is[current]field:gsd_type[action]]\">\n<$complete tiddler=<<currentTiddler>>/>\n<$list filter=\"[is[current]!field:gsd_complete[true]]\">\n<$radio tiddler=<<currentTiddler>> class=\"list-status next\" field=\"gsd_status\" value=\"next\">n</$radio>\n<$radio tiddler=<<currentTiddler>> class=\"list-status waiting\" field=\"gsd_status\" value=\"waiting\">w</$radio>\n<$radio tiddler=<<currentTiddler>> class=\"list-status future\" field=\"gsd_status\" value=\"future\">f</$radio>\n</$list>\n</$list>\n\n<$list filter=\"[is[current]field:gsd_type[project]]\">\n<$complete tiddler=<<currentTiddler>>/>\n<$list filter=\"[is[current]!field:gsd_complete[true]]\">\n<$radio tiddler=<<currentTiddler>> class=\"list-status next\" field=\"gsd_status\" value=\"active\">a</$radio>\n<$radio tiddler=<<currentTiddler>> class=\"list-status future\" field=\"gsd_status\" value=\"future\">f</$radio>\n</$list>\n</$list>\n"
+        },
+        "$:/plugins/gsd5/core/ui/lists/ListViewSuffix": {
+            "title": "$:/plugins/gsd5/core/ui/lists/ListViewSuffix",
+            "text": "<$list filter=\"[is[current]field:gsd_type[action]]\">\n<$list filter=\"[is[current]!field:text[]!field:gsd_complete[true]]\">\n<span class=\"gsd-muted\"><$transclude tiddler=\"$:/plugins/gsd5/core/images/excerpt\"/></span>\n</$list>\n<$list filter=\"[is[current]field:gsd_complete[true]]\">\n<span class=\"gsd-muted\">(<$view field=\"gsd_comp_date\" format=\"relativedate\"/>)</span>\n<span class=\"gsd-muted\"><$transclude tiddler=\"$:/plugins/gsd5/core/ui/buttons/delete-tiddler-button\"/></span>\n</$list>\n</$list>\n\n<$list filter=\"[is[current]field:gsd_type[project]]\">\n<$list filter=\"[is[current]field:gsd_complete[true]]\">\n<span class=\"gsd-muted\"><$transclude tiddler=\"$:/plugins/gsd5/core/ui/buttons/delete-tiddler-button\"/></span>\n</$list>\n</$list>\n"
+        },
+        "$:/plugins/gsd5/core/ui/lists/next-action-list": {
+            "title": "$:/plugins/gsd5/core/ui/lists/next-action-list",
+            "tags": "$:/tags/GSD5Lists",
+            "caption": "Next Actions",
+            "text": "<<gsd5-list title:\"Next Action\" gsd_type:\"action\" gsd_status:\"next\" gsd_complete:\"false\" realmAware:\"true\" sort:\"title\" order:\"ascending\" groupBy:{{$:/config/GSD5DashboardGroup}} customFilter:\"none\">>\n"
+        },
+        "$:/plugins/gsd5/core/ui/lists/realm-list": {
+            "title": "$:/plugins/gsd5/core/ui/lists/realm-list",
+            "tags": "$:/tags/GSD5DashboardCore",
+            "text": "<div class=\"tw-menu-list-item\">\n  Realm\n  <$linkcatcher set=\"$:/currentRealm\" setTo=\"all\">\n    <div class=\"tw-menu-list-subitem\">\n      <$reveal state=\"$:/currentRealm\" type=\"match\" text=\"all\">&bull;</$reveal>\n      <$reveal state=\"$:/currentRealm\" type=\"nomatch\" text=\"all\">&nbsp;&nbsp;</$reveal>\n      <$link to=\"\">&nbsp;all</$link>\n    </div>\n  </$linkcatcher>\n  <$linkcatcher to=\"$:/currentRealm\">\n    <$list filter=\"[field:gsd_type[realm]]\">\n      <div class=\"tw-menu-list-subitem\">\n        <$reveal state=\"$:/currentRealm\" type=\"match\" text={{!!title}}>&bull;</$reveal>\n        <$reveal state=\"$:/currentRealm\" type=\"nomatch\" text={{!!title}}>&nbsp;&nbsp;</$reveal>\n        <$link to={{!!title}}>&nbsp;<$view field=\"title\" format=\"text\"/></$link>\n      </div>\n    </$list>\n  </$linkcatcher>\n</div>\n\n"
+        },
+        "$:/plugins/gsd5/core/ui/lists/references-list": {
+            "title": "$:/plugins/gsd5/core/ui/lists/references-list",
+            "caption": "References",
+            "text": "<<gsd5-list title:\"References\" gsd_type:\"reference\" realmAware:\"true\" sort:\"title\" order:\"ascending\" groupBy:{{$:/config/GSD5ReferencesGroup}} filter:\"none\">>\n"
+        },
+        "$:/plugins/gsd5/core/ui/lists/waiting-action-list-by-contact": {
+            "title": "$:/plugins/gsd5/core/ui/lists/waiting-action-list-by-contact",
+            "tags": "$:/tags/GSD5Lists",
+            "caption": "Waiting Actions by Contact",
+            "text": "<<gsd5-list title:\"Delegated Actions By Contact\" gsd_type:\"action\" gsd_status:\"waiting\" gsd_complete:\"false\" realmAware:\"true\" sort:\"title\" order:\"ascending\" groupBy:\"gsd_contact\" customFilter:\"none\">>"
+        },
+        "$:/plugins/gsd5/core/ui/lists/waiting-action-list": {
+            "title": "$:/plugins/gsd5/core/ui/lists/waiting-action-list",
+            "tags": "$:/tags/GSD5Lists",
+            "caption": "Waiting Actions",
+            "text": "<<gsd5-list title:\"Waiting Action\" gsd_type:\"action\" gsd_status:\"waiting\" gsd_complete:\"false\" realmAware:\"true\" sort:\"title\" order:\"ascending\" groupBy:{{$:/config/GSD5DashboardGroup}} customFilter:\"none\">>\n"
+        },
+        "No Next Action": {
+            "title": "No Next Action",
+            "text": "<div class=\"tc-message-box\">\n\nThe following Projects are without a next Action.  They should be examined for the next possible action to be taken.\n\n</div>\n\nProjects without Next Actions\n\n-----\n\n<$list filter=\"[field:gsd_type[project]!field:gsd_status[future]!field:gsd_complete[true]] -[field:gsd_type[action]field:gsd_status[next]!field:gsd_complete[true]_fieldvalue[gsd_project]]\">\n<div class=\"tw-menu-list-subitem\">\n<$complete tiddler=<<currentTiddler>>/>\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewStatus\"/>\n<span class=\"list-link\">\n<$link to={{!!title}}>\n<$view field=\"title\"/>\n</$link>\n</span>\n<$list filter=[is[current]!field:text[]]>\n&nbsp;<$transclude tiddler=\"$:/plugins/gsd5/core/images/excerpt\"/>\n</$list>\n</div>\n</$list>\n"
+        },
+        "No Realm Items": {
+            "title": "No Realm Items",
+            "text": "<div class=\"tc-message-box\">\n\nThe following Actions and Projects do not have a Realm and should be assigned a Realm.\n\n</div>\n\n<<gsd5-list title:\"Actions With No Realm\" gsd_type:\"action\" gsd_status:\"none\" gsd_complete:\"false\" realmAware:\"true\" sort:\"title\" order:\"ascending\" groupBy:\"none\" customFilter:\"field:gsd_realm[all]\">>\n\n<<gsd5-list title:\"Project With No Realm\" gsd_type:\"project\" gsd_status:\"none\" gsd_complete:\"false\" realmAware:\"true\" sort:\"title\" order:\"ascending\" groupBy:\"none\" customFilter:\"field:gsd_realm[all]\">>\n"
+        },
+        "Project Dashboard": {
+            "title": "Project Dashboard",
+            "text": "<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/active-project-list\"/>\n\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/future-project-list\"/>\n\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/completed-project-list\"/>\n"
+        },
+        "$:/language/Help/gsd5/about": {
+            "title": "$:/language/Help/gsd5/about",
+            "text": "This plugin turns the TiddlyWiki5 into a Getting-Stuff-Done tool.  Manage tasks, projects, and references in a easy-to-use web application.\n\nGTD® and Getting Things Done® are registered trademarks of the David Allen Company. (please link David Allen Company to: http://www.davidco.com) GSD5 is not affiliated with or endorsed by the David Allen Company.\n\n* Author: Roma Quintin Hicks\n* E-Mail: roma0104@gmail.com\n"
+        },
+        "References": {
+            "title": "References",
+            "text": "<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/references-list\"/>\n"
+        },
+        "$:/plugins/gsd5/core/ui/sidebar/collect-sidebar": {
+            "title": "$:/plugins/gsd5/core/ui/sidebar/collect-sidebar",
+            "tags": "$:/tags/SideBar",
+            "caption": "Collect",
+            "text": "<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/realm-list\"/>\n\n<$set name=\"gsd_type\" value=\"action\">\n<$set name=\"gsd_status\" value=\"next\">\n<$set name=\"gsd_complete\" value=\"false\">\n<$set name=\"gsd_realm\" value={{$:/currentRealm}}>\n<$gsdtiddler skeleton=\"$:/plugins/gsd5/core/ui/skeletons/ActionSkeleton\" edit={{$:/plugins/gsd5/core/ui/config/new-tiddler-show}}>{{$:/plugins/gsd5/core/images/task}} New Action</$gsdtiddler>\n</$set>\n</$set>\n</$set>\n</$set>\n\n<$set name=\"gsd_type\" value=\"project\">\n<$set name=\"gsd_status\" value=\"active\">\n<$set name=\"gsd_complete\" value=\"false\">\n<$set name=\"gsd_realm\" value={{$:/currentRealm}}>\n<$gsdtiddler skeleton=\"$:/plugins/gsd5/core/ui/skeletons/ActionSkeleton\" edit={{$:/plugins/gsd5/core/ui/config/new-tiddler-show}}>{{$:/plugins/gsd5/core/images/project}} New Project</$gsdtiddler>\n</$set>\n</$set>\n</$set>\n</$set>\n\n<$set name=\"gsd_type\" value=\"contact\">\n<$set name=\"gsd_realm\" value={{$:/currentRealm}}>\n<$gsdtiddler skeleton=\"$:/plugins/gsd5/core/ui/skeletons/ContactSkeleton\">{{$:/plugins/gsd5/core/images/contact}} New Contact</$gsdtiddler>\n</$set>\n</$set>\n\n<$set name=\"gsd_type\" value=\"reference\">\n<$set name=\"gsd_realm\" value={{$:/currentRealm}}>\n<$gsdtiddler skeleton=\"$:/plugins/gsd5/core/ui/skeletons/ReferenceSkeleton\">{{$:/plugins/gsd5/core/images/reference}} New Reference</$gsdtiddler>\n</$set>\n</$set>\n\n<$set name=\"gsd_type\" value=\"context\">\n<$set name=\"gsd_realm\" value={{$:/currentRealm}}>\n<$gsdtiddler skeleton=\"$:/plugins/gsd5/core/ui/skeletons/ContextSkeleton\" edit=\"no\">{{$:/plugins/gsd5/core/images/context}} New Context</$gsdtiddler>\n</$set>\n</$set>\n\n<$set name=\"gsd_type\" value=\"realm\">\n<$gsdtiddler skeleton=\"$:/plugins/gsd5/core/ui/skeletons/RealmSkeleton\" edit=\"no\">{{$:/plugins/gsd5/core/images/globe}} New Realm</$gsdtiddler>\n</$set>\n\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5Collect]!has[draft.of]]\">\n\n  {{currentTiddler}}\n  \n</$list>"
+        },
+        "$:/plugins/gsd5/core/ui/sidebar/review-sidebar": {
+            "title": "$:/plugins/gsd5/core/ui/sidebar/review-sidebar",
+            "tags": "$:/tags/SideBar",
+            "caption": "Review",
+            "text": "<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/realm-list\"/>\n\n<$link to=\"Dashboard\">Dashboard</$link><br/>\n<$link to=\"Action Dashboard\">Action Dashboard</$link><br/>\n<$link to=\"Project Dashboard\">Project Dashboard</$link><br/>\n<$link to=\"Delegated Actions\">Delegated Actions</$link><br/>\n<$link to=\"References\">References</$link><br/>\n<$link to=\"Contacts\">Contacts</$link><br/>\n<$link to=\"No Realm Items\">No Realm Items</$link><br/>\n<$link to=\"No Next Action\">No Next Action</$link><br/>\n<$link to=\"Contexts\">Contexts</$link><br/>\n<$link to=\"Completed Actions\">Completed Actions</$link><br/>\n<$link to=\"Completed Projects\">Completed Projects</$link><br/>\n<$link to=\"Cleanup\">Cleanup</$link>\n\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5Review]!has[draft.of]]\">\n  <$link to={{!!title}}>{{!!title}}</$link><br/>\n</$list>\n"
+        },
+        "$:/plugins/gsd5/core/ui/skeletons/ActionSkeleton": {
+            "title": "$:/plugins/gsd5/core/ui/skeletons/ActionSkeleton",
+            "gsd_type": "$(gsd_type)$",
+            "gsd_status": "$(gsd_status)$",
+            "gsd_complete": "$(gsd_complete)$",
+            "gsd_realm": "$(gsd_realm)$",
+            "gsd_project": "$(gsd_project)$",
+            "gsd_contact": ""
+        },
+        "$:/plugins/gsd5/core/ui/skeletons/ContactSkeleton": {
+            "title": "$:/plugins/gsd5/core/ui/skeletons/ContactSkeleton",
+            "gsd_type": "$(gsd_type)$",
+            "gsd_realm": "$(gsd_realm)$"
+        },
+        "$:/plugins/gsd5/core/ui/skeletons/ContextSkeleton": {
+            "title": "$:/plugins/gsd5/core/ui/skeletons/ContextSkeleton",
+            "gsd_type": "$(gsd_type)$",
+            "gsd_realm": "$(gsd_realm)$",
+            "text": "<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/context-action-list\" mode=\"block\"/>"
+        },
+        "$:/plugins/gsd5/core/ui/skeletons/RealmSkeleton": {
+            "title": "$:/plugins/gsd5/core/ui/skeletons/RealmSkeleton",
+            "gsd_type": "$(gsd_type)$"
+        },
+        "$:/plugins/gsd5/core/ui/skeletons/ReferenceSkeleton": {
+            "title": "$:/plugins/gsd5/core/ui/skeletons/ReferenceSkeleton",
+            "gsd_type": "$(gsd_type)$",
+            "gsd_project": "$(gsd_project)$",
+            "gsd_realm": "$(gsd_realm)$"
+        },
+        "$:/plugins/gsd5/core/ui/stylesheet/gsd5-stylesheet": {
+            "title": "$:/plugins/gsd5/core/ui/stylesheet/gsd5-stylesheet",
+            "tags": "$:/tags/Stylesheet",
+            "text": ".tc-complete-box {\n  position: relative;\n  vertical-align: middle;\n}\n\n.body-status input[type=\"radio\"] {\n  display: none;\n}\n\n.body-status span {\n  display:inline-block;\n  padding:0.1em 0.8em;\n  font-weight: bold;\n  color: silver;\n  border: #EFD982 1px solid;\n}\n\n.list-status input[type=\"radio\"] {\n  display: none;\n}\n\n.list-status span {\n  font-size: small;\n  margin-top: 0.3em;\n  padding: 0em 0.3em;\n  display:inline-block;\n  color: silver;\n  border: #EFD982 1px solid;\n}\n\n.list-link {\n  margin-left: 0.5em;\n}\n\n.next input[type=\"radio\"]:checked + span {\n  background-color: #BCE8C3;\n  color: darkgreen;\n  border: darkgreen 1px solid;\n}\n\n.waiting input[type=\"radio\"]:checked + span {\n  background-color: #FFDEAD;\n  color: darkgoldenrod;\n  border: darkgoldenrod 1px solid;\n}\n\n.future input[type=\"radio\"]:checked + span {\n  background-color: #A8DCF6;\n  color: #1C88BD;\n  border: #1C88BD 1px solid;\n}\n\n.content-box:after {\n  content: \"\";\n  display: table;\n  clear: both;\n}\n\n.content-left {\n  //background-color: lightgreen;\n  width: 50%;\n  float: left;\n}\n\n.gsd5-project-list {\n  padding-top: 5px;\n}\n\n.gsd5-project-list:first-of-type {\n  padding-top: 0;\n}\n\n.gsd-plugin-box:after {\n  content: \"\";\n  display: table;\n  clear: both;\n}\n\n@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {\n  .gsd-plugin-core {\n    padding-top: 0.5em;\n    padding-bottom: 0.5em;\n    max-width: 50%;\n    min-width: 50%;\n    float: left;\n  }\n\n  .gsd-plugin-other {\n    padding-top: 0.5em;\n    padding-bottom: 0.5em;\n    max-width: 50%;\n    min-width: 50%;\n    float: right;\n  }\n}\n\n@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {\n  .gsd-plugin-core {\n    padding-top: 0.5em;\n  }\n\n  .gsd-plugin-other {\n    padding-bottom: 0.5em;\n  }\n}\n\n.gsd-context-box {\n  border: #dce0ea 1px solid;\n  background-color: #eff4ff;\n  padding-left: 5px;\n}\n\n.gsd-context-button {\n  width:100%;\n  text-align:left;\n}\n\n.gsd-list-new-button {\n  font-size:1.5em;\n}\n\n.gsd-bluebox-title{\n  font-size:1.33em;\n  width:100%;\n}\n\n.gsd-bluebox-toggle{\n  display:inline;\n  vertical-align:bottom;\n  fill:<<colour tiddler-controls-foreground>>;\n}\n\n.gsd-bluebox-toggle:hover{\n  fill:<<colour tiddler-controls-foreground-hover>>;\n}\n\n.gsd-bluebox-toggle input{\n  display:none;\n}\n\n.gsd-bluebox-toggle svg {\n  vertical-align:middle;\n  height:0.75em;\n}\n\n.gsd-bluebox-min-notice {\n  width:100%;\n}\n\n.gsd-muted {\n  color: <<colour muted-foreground>>;\n}\n\n.gsd-muted svg {\n  opacity: 0.25;\n}\n\n.gsd-list-title input[type=checkbox]{\n  display:none;\n}\n\n.gsd-list-title input[type=checkbox] + span svg {\n  fill: <<colour tiddler-controls-foreground>>;\n  height: 0.8em;\n}"
+        },
+        "$:/tags/GSD5ActionCore": {
+            "title": "$:/tags/GSD5ActionCore",
+            "list": "[[$:/plugins/gsd5/core/ui/addins/ViewStatus]] [[$:/plugins/gsd5/core/ui/buttons/convert-action-button]] [[$:/plugins/gsd5/core/ui/addins/ViewPrereq]] [[$:/plugins/gsd5/core/ui/addins/ViewContact]] [[$:/plugins/gsd5/core/ui/addins/ViewRealm]]"
+        },
+        "$:/tags/GSD5ContactCore": {
+            "title": "$:/tags/GSD5ContactCore",
+            "list": "[[$:/plugins/gsd5/core/ui/addins/ViewRealm]]"
+        },
+        "$:/tags/GSD5DashboardCore": {
+            "title": "$:/tags/GSD5DashboardCore",
+            "list": "[[$:/plugins/gsd5/core/ui/lists/realm-list]]"
+        },
+        "$:/tags/GSD5Lists": {
+            "title": "$:/tags/GSD5Lists",
+            "list": "[[$:/plugins/gsd5/core/ui/lists/next-action-list]] [[$:/plugins/gsd5/core/ui/lists/waiting-action-list]] [[$:/plugins/gsd5/core/ui/lists/waiting-action-list-by-contact]] [[$:/plugins/gsd5/core/ui/lists/future-action-list]] [[$:/plugins/gsd5/core/ui/lists/active-project-list]] [[$:/plugins/gsd5/core/ui/lists/future-project-list]] [[$:/plugins/gsd5/core/ui/lists/completed-action-list]] [[$:/plugins/gsd5/core/ui/lists/completed-project-list]] [[$:/plugins/gsd5/core/ui/lists/contacts]]"
+        },
+        "$:/tags/GSD5ProjectCore": {
+            "title": "$:/tags/GSD5ProjectCore",
+            "list": "[[$:/plugins/gsd5/core/ui/addins/ViewStatus]] [[$:/plugins/gsd5/core/ui/addins/ViewPrereq]] [[$:/plugins/gsd5/core/ui/addins/ViewContact]] [[$:/plugins/gsd5/core/ui/addins/ViewRealm]]"
+        },
+        "$:/tags/GSD5ReferenceCore": {
+            "title": "$:/tags/GSD5ReferenceCore",
+            "list": "[[$:/plugins/gsd5/core/ui/addins/ViewPrereq]]"
+        },
+        "$:/plugins/gsd5/core/ui/addins/ProjectViewBody": {
+            "title": "$:/plugins/gsd5/core/ui/addins/ProjectViewBody",
+            "tags": "$:/tags/ViewTemplate",
+            "text": "<$list filter=[is[current]field:gsd_type[project]]>\n\n<div class=\"tc-menu-list-item\">\nNext Actions\n<$set name=\"gsd_type\" value=\"action\">\n<$set name=\"gsd_status\" value=\"next\">\n<$set name=\"gsd_complete\" value=\"false\">\n<$set name=\"gsd_project\" value={{!!title}}>\n<$set name=\"gsd_realm\" value={{!!gsd_realm}}>\n<$gsdtiddler skeleton=\"$:/plugins/gsd5/core/ui/skeletons/ActionSkeleton\" title=\"Add new action\" edit={{$:/plugins/gsd5/core/ui/config/new-action-show}} aria-label=\"new action\" class=\"gsd-list-new-button tc-btn-invisible\">\n+\n</$gsdtiddler>\n</$set>\n</$set>\n</$set>\n</$set>\n</$set>\n<hr/>\n<$list filter=[field:gsd_type[action]field:gsd_status[next]field:gsd_complete[false]field:gsd_project{!!title}]>\n<div class=\"tc-menu-list-subitem\">\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewPrefix\"/>\n<span class=\"list-link\"><$link to={{!!title}}><$view field=\"title\"/></$link></span>\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewSuffix\"/>\n</div>\n</$list>\n</div>\n\n<div class=\"tc-menu-list-item\">\nWaiting Actions\n<$set name=\"gsd_type\" value=\"action\">\n<$set name=\"gsd_status\" value=\"waiting\">\n<$set name=\"gsd_complete\" value=\"false\">\n<$set name=\"gsd_project\" value={{!!title}}>\n<$set name=\"gsd_realm\" value={{!!gsd_realm}}>\n<$gsdtiddler skeleton=\"$:/plugins/gsd5/core/ui/skeletons/ActionSkeleton\" title=\"Add new action\" edit={{$:/plugins/gsd5/core/ui/config/new-action-show}} aria-label=\"new action\" class=\"gsd-list-new-button tc-btn-invisible\">\n+\n</$gsdtiddler>\n</$set>\n</$set>\n</$set>\n</$set>\n</$set>\n<hr/>\n<$list filter=[field:gsd_type[action]field:gsd_status[waiting]field:gsd_complete[false]field:gsd_project{!!title}]>\n<div class=\"tc-menu-list-subitem\">\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewPrefix\"/>\n<span class=\"list-link\"><$link to={{!!title}}><$view field=\"title\"/></$link></span>\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewSuffix\"/>\n</div>\n</$list>\n</div>\n\n<div class=\"tc-menu-list-item\">\nFuture Actions\n<$set name=\"gsd_type\" value=\"action\">\n<$set name=\"gsd_status\" value=\"future\">\n<$set name=\"gsd_complete\" value=\"false\">\n<$set name=\"gsd_project\" value={{!!title}}>\n<$set name=\"gsd_realm\" value={{!!gsd_realm}}>\n<$gsdtiddler skeleton=\"$:/plugins/gsd5/core/ui/skeletons/ActionSkeleton\" title=\"Add new action\" edit={{$:/plugins/gsd5/core/ui/config/new-action-show}} aria-label=\"new action\" class=\"gsd-list-new-button tc-btn-invisible\">\n+\n</$gsdtiddler>\n</$set>\n</$set>\n</$set>\n</$set>\n</$set>\n<hr/>\n<$list filter=[field:gsd_type[action]field:gsd_status[future]field:gsd_complete[false]field:gsd_project{!!title}]>\n<div class=\"tc-menu-list-subitem\">\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewPrefix\"/>\n<span class=\"list-link\"><$link to={{!!title}}><$view field=\"title\"/></$link></span>\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewSuffix\"/>\n</div>\n</$list>\n</div>\n\n<div class=\"tc-menu-list-item\">\nSubprojects\n<$set name=\"gsd_type\" value=\"project\">\n<$set name=\"gsd_status\" value=\"active\">\n<$set name=\"gsd_complete\" value=\"false\">\n<$set name=\"gsd_project\" value={{!!title}}>\n<$set name=\"gsd_realm\" value={{!!gsd_realm}}>\n<$gsdtiddler skeleton=\"$:/plugins/gsd5/core/ui/skeletons/ActionSkeleton\" title=\"Add new action\" edit={{$:/plugins/gsd5/core/ui/config/new-project-show}} aria-label=\"new action\" class=\"gsd-list-new-button tc-btn-invisible\">\n+\n</$gsdtiddler>\n</$set>\n</$set>\n</$set>\n</$set>\n</$set>\n<hr/>\n<$list filter=[field:gsd_type[project]field:gsd_project{!!title}]>\n<div class=\"tc-menu-list-subitem\">\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewPrefix\"/>\n<span class=\"list-link\"><$link to={{!!title}}><$view field=\"title\"/></$link></span>\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewSuffix\"/>\n</div>\n</$list>\n</div>\n\n<div class=\"tc-menu-list-item\">\nReferences\n<$set name=\"gsd_type\" value=\"reference\">\n<$set name=\"gsd_project\" value={{!!title}}>\n<$set name=\"gsd_realm\" value={{!!gsd_realm}}>\n<$gsdtiddler skeleton=\"$:/plugins/gsd5/core/ui/skeletons/ReferenceSkeleton\" title=\"Add new action\" aria-label=\"new action\" class=\"gsd-list-new-button tc-btn-invisible\">\n+\n</$gsdtiddler>\n</$set>\n</$set>\n</$set>\n<hr/>\n<$list filter=[field:gsd_type[reference]field:gsd_project{!!title}]>\n<div class=\"tc-menu-list-subitem\">\n<span class=\"list-link\"><$link to={{!!title}}><$view field=\"title\"/></$link></span>\n</div>\n</$list>\n</div>\n\n<div class=\"tc-menu-list-item\">\nCompleted Actions\n<hr/>\n<$list filter=[field:gsd_type[action]field:gsd_complete[true]field:gsd_project{!!title}!sort[gsd_comp_date]]>\n<div class=\"tc-menu-list-subitem\">\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewPrefix\"/>\n<span class=\"list-link\"><$link to={{!!title}}><$view field=\"title\"/></$link></span>\n<$transclude tiddler=\"$:/plugins/gsd5/core/ui/lists/ListViewSuffix\"/>\n</div>\n</$list>\n</div>\n\n</$list>\n"
+        },
+        "$:/plugins/gsd5/core/ui/addins/ViewBody": {
+            "title": "$:/plugins/gsd5/core/ui/addins/ViewBody",
+            "text": "\\define dashboard-visibility()\n$:/config/GSD5DashboardCore/visibility/$(listItem)$\n\\end\n\n\\define minimized-notice()\n<$reveal state=<<blueboxState>> type=\"match\" text=\"hide\" default=\"show\">\n<div class=\"gsd-bluebox-min-notice\">//BlueBox minimized//</div>\n</$reveal>\n\\end\n\n<!-- Dashboard -->\n<$list filter=\"[all[shadows+tiddlers]is[current]field:title[Dashboard]]\">\n<$list filter=\"[all[shadows+tiddlers]prefix[$:/config/GSD5DashboardCore/visibility/]!has[draft.of]field:text[show]] [all[shadows+tiddlers]prefix[$:/config/GSD5DashboardPlugin/visibility/]!has[draft.of]field:text[show]] +[limit[1]]\" variable=\"pass\">\n<div class=\"tc-message-box gsd-plugin-box\">\n<<minimized-notice>>\n<$reveal state=<<blueboxState>> type=\"match\" text=\"show\" default=\"show\" retain=\"yes\">\n<div class=\"gsd-plugin-core\">\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5DashboardCore]!has[draft.of]]\" variable=\"listItem\">\n<$reveal state=<<dashboard-visibility>> type=\"match\" text=\"show\" default=\"hide\">\n<$transclude tiddler=<<listItem>>/>\n</$reveal>\n</$list>\n</div>\n<div class=\"gsd-plugin-other\">\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5DashboardPlugin]!has[draft.of]]\" variable=\"listItem\">\n<$transclude tiddler=<<listItem>>/>\n</$list>\n</div>\n</$reveal>\n</div>\n</$list>\n</$list>\n\n<!-- Action -->\n<$list filter=[is[current]field:gsd_type[action]]>\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5ActionCore]!has[draft.of]] [all[shadows+tiddlers]tag[$:/tags/GSD5ActionPlugin]!has[draft.of]] +[limit[1]]\" variable=\"pass\">\n<div class=\"tc-message-box gsd-plugin-box\">\n<<minimized-notice>>\n<$reveal state=<<blueboxState>> type=\"match\" text=\"show\" default=\"show\" retain=\"yes\">\n<div class=\"gsd-plugin-core\">\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5ActionCore]!has[draft.of]]\" variable=\"listItem\">\n<$transclude tiddler=<<listItem>>/>\n</$list>\n</div>\n<div class=\"gsd-plugin-other\">\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5ActionPlugin]!has[draft.of]]\" variable=\"listItem\">\n<$transclude tiddler=<<listItem>>/>\n</$list>\n</div>\n</$reveal>\n</div>\n</$list>\n</$list>\n\n<!-- Project -->\n<$list filter=[is[current]field:gsd_type[project]]>\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5ProjectCore]!has[draft.of]] [all[shadows+tiddlers]tag[$:/tags/GSD5ProjectPlugin]!has[draft.of]] +[limit[1]]\" variable=\"pass\">\n<div class=\"tc-message-box gsd-plugin-box\">\n<<minimized-notice>>\n<$reveal state=<<blueboxState>> type=\"match\" text=\"show\" default=\"show\" retain=\"yes\">\n<div class=\"gsd-plugin-core\">\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5ProjectCore]!has[draft.of]]\" variable=\"listItem\">\n<$transclude tiddler=<<listItem>>/>\n</$list>\n</div>\n<div class=\"gsd-plugin-other\">\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5ProjectPlugin]!has[draft.of]]\" variable=\"listItem\">\n<$transclude tiddler=<<listItem>>/>\n</$list>\n</div>\n</$reveal>\n</div>\n</$list>\n</$list>\n\n<!-- Reference -->\n<$list filter=[is[current]field:gsd_type[reference]]>\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5ReferenceCore]!has[draft.of]] [all[shadows+tiddlers]tag[$:/tags/GSD5ReferencePlugin]!has[draft.of]] +[limit[1]]\" variable=\"pass\">\n<div class=\"tc-message-box gsd-plugin-box\">\n<<minimized-notice>>\n<$reveal state=<<blueboxState>> type=\"match\" text=\"show\" default=\"show\" retain=\"yes\">\n<div class=\"gsd-plugin-core\">\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5ReferenceCore]!has[draft.of]]\" variable=\"listItem\">\n<$transclude tiddler=<<listItem>>/>\n</$list>\n</div>\n<div class=\"gsd-plugin-other\">\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5ReferencePlugin]!has[draft.of]]\" variable=\"listItem\">\n<$transclude tiddler=<<listItem>>/>\n</$list>\n</div>\n</$reveal>\n</div>\n</$list>\n</$list>\n\n<!-- Contact -->\n<$list filter=[is[current]field:gsd_type[contact]]>\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5ContactCore]!has[draft.of]] [all[shadows+tiddlers]tag[$:/tags/GSD5ContactPlugin]!has[draft.of]] +[limit[1]]\" variable=\"pass\">\n<div class=\"tc-message-box gsd-plugin-box\">\n<<minimized-notice>>\n<$reveal state=<<blueboxState>> type=\"match\" text=\"show\" default=\"show\" retain=\"yes\">\n<div class=\"gsd-plugin-core\">\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5ContactCore]!has[draft.of]]\" variable=\"listItem\">\n<$transclude tiddler=<<listItem>>/>\n</$list>\n</div>\n<div class=\"gsd-plugin-other\">\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5ContactPlugin]!has[draft.of]]\" variable=\"listItem\">\n<$transclude tiddler=<<listItem>>/>\n</$list>\n</div>\n</$reveal>\n</div>\n</$list>\n{{||$:/plugins/gsd5/core/ui/lists/contacts-action-list}}\n</$list>\n\n<!-- Context -->\n<$list filter=[is[current]field:gsd_type[context]]>\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5ContextCore]!has[draft.of]] [all[shadows+tiddlers]tag[$:/tags/GSD5ContextPlugin]!has[draft.of]] +[limit[1]]\" variable=\"pass\">\n<div class=\"tc-message-box gsd-plugin-box\">\n<<minimized-notice>>\n<$reveal state=<<blueboxState>> type=\"match\" text=\"show\" default=\"show\" retain=\"yes\">\n<div class=\"gsd-plugin-core\">\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5ContextCore]!has[draft.of]]\" variable=\"listItem\">\n<$transclude tiddler=<<listItem>>/>\n</$list>\n</div>\n<div class=\"gsd-plugin-other\">\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/GSD5ContextPlugin]!has[draft.of]]\" variable=\"listItem\">\n<$transclude tiddler=<<listItem>>/>\n</$list>\n</div>\n</$reveal>\n</div>\n</$list>\n</$list>\n\n<!-- Reference Dashboard -->\n<$list filter=\"[all[shadows+tiddlers]is[current]field:title[References]]\">\n<div class=\"tc-message-box\">\n<<minimized-notice>>\n<$reveal state=<<blueboxState>> type=\"match\" text=\"show\" default=\"show\" retain=\"yes\">\n\n<$checkbox tiddler=\"$:/config/GSD5ReferencesGroup\" field=\"text\" checked=\"gsd_project\" unchecked=\"none\">&nbsp;Group By Project</$checkbox>\n\n</$reveal>\n</div>\n</$list>\n"
+        },
+        "$:/plugins/gsd5/core/ui/addins/ViewComplete": {
+            "title": "$:/plugins/gsd5/core/ui/addins/ViewComplete",
+            "text": "<$list filter=[is[current]field:gsd_type[action]][is[current]field:gsd_type[project]]>\n<$complete></$complete>\n</$list>\n"
+        },
+        "$:/plugins/gsd5/core/ui/addins/ViewContact": {
+            "title": "$:/plugins/gsd5/core/ui/addins/ViewContact",
+            "tags": "$:/tags/GSD5ActionCore $:/tags/GSD5ProjectCore",
+            "text": "<p class=\"gsd-bluebox-droplist\">\n    Contact:<br/>\n    <$select field=\"gsd_contact\" default=\"none\">\n        <option value=\"\">--</option>\n        <$set name=\"parentTiddler\" value=<<currentTiddler>> >\n            <$list filter=\"[is[current]!field:gsd_realm[all]]\" >\n                <optgroup label={{!!gsd_realm}}>\n                    <$list filter=[field:gsd_type[contact]field:gsd_realm{!!gsd_realm}]>\n                        <option value=<<currentTiddler>>><<currentTiddler>></option>\n                    </$list>\n                </optgroup>\n            </$list>\n            <optgroup label=\"All Realms\">\n                <$list filter=[field:gsd_type[contact]field:gsd_realm[all]]>\n                    <option value=<<currentTiddler>>><<currentTiddler>></option>\n                </$list>\n            </optgroup>\n        </$set>\n    </$select>\n    <span class=\"goto-link\">\n        <$list filter=[is[current]!field:gsd_contact[]]>\n            &nbsp;<$link to={{!!gsd_contact}}>>></$link>\n        </$list>\n        <$list filter=[is[current]field:gsd_contact[]]>\n        <$set name=\"gsd_type\" value=\"contact\">\n        <$set name=\"gsd_realm\" value={{$:/currentRealm}}>\n        &nbsp;<$gsdtiddler class=\"tc-btn-invisible\" setNow=\"true\" skeleton=\"$:/plugins/gsd5/core/ui/skeletons/ContactSkeleton\" edit={{$:/plugins/gsd5/core/ui/config/new-tiddler-show}}><span style=\"text-decoration:underline\">new</span></$gsdtiddler>\n        </$set>\n        </$set>\n        </$list>\n    </span>\n</p>\n"
+        },
+        "$:/plugins/gsd5/core/ui/addins/ViewContext": {
+            "title": "$:/plugins/gsd5/core/ui/addins/ViewContext",
+            "tags": "$:/tags/GSD5ActionPlugin",
+            "text": "\\define unique-id()\n$(currentTiddler)$-toggle\n\\end\n\n<p>\n    <div class=\"gsd-context-box\">\n        <$set name=\"parentTiddler\" value=<<currentTiddler>>>\n        <$set name=\"ContextStatus\" value=<<qualify \"$:/state/popup/context\">>>\n            <$button popup=<<ContextStatus>> class=\"tc-btn-invisible gsd-context-button\">+ Contexts</$button>\n            <$reveal state=<<ContextStatus>> type=\"nomatch\" text=\"\" class=\"tc-popup-handle\" default=\"\" retain=\"yes\" animate=\"yes\">\n            <div class=\"tc-menu-list-subitem\">\n\n\t\t\t<$list filter=\"[field:gsd_type[context]field:gsd_realm{!!gsd_realm}] [field:gsd_type[context]field:gsd_realm[all]]\" emptyMessage=\"<em>-no contexts-</em>\">\n\t\t\t\t<div class=\"tc-menu-list-subitem\">\n\t\t\t\t<$checkbox tiddler=<<parentTiddler>> tag=<<currentTiddler>>>\n\t\t\t\t\t<<currentTiddler>>\n\t\t\t\t</$checkbox>\n\t\t\t\t</div>\n\t\t\t</$list>\n\n\t\t\t</div>\n\t\t\t</$reveal>\n\t\t</$set>\n        </$set>\n    </div>\n</p>"
+        },
+        "$:/plugins/gsd5/core/ui/addins/ViewPrereq": {
+            "title": "$:/plugins/gsd5/core/ui/addins/ViewPrereq",
+            "tags": "$:/tags/GSD5ActionCore $:/tags/GSD5ProjectCore $:/tags/GSD5ReferenceCore",
+            "text": "\\define gsd-tiddler-fly(type,status)\n<$set name=\"gsd_type\" value=$type$>\n<$set name=\"gsd_status\" value=$status$>\n<$set name=\"gsd_complete\" value=\"false\">\n<$set name=\"gsd_realm\" value={{$:/currentRealm}}>\n<$gsdtiddler class=\"tc-btn-invisible\" setNow=\"true\" skeleton=\"$:/plugins/gsd5/core/ui/skeletons/ActionSkeleton\" edit={{$:/plugins/gsd5/core/ui/config/new-tiddler-show}}><span style=\"text-decoration:underline\">new</span></$gsdtiddler>\n</$set>\n</$set>\n</$set>\n</$set>\n\\end\n\n<$list filter=[is[current]field:gsd_type[project]]>\n<p class=\"gsd-bluebox-droplist\">\nSubproject of: <br/>\n<$select field=\"gsd_project\" default=\"\">\n  <option value=\"\">--</option>\n  <$list filter=\"[field:gsd_type[project]!field:gsd_complete[true]!is[current]field:gsd_realm{!!gsd_realm}]\">\n  <option value=<<currentTiddler>>><<currentTiddler>></option>\n  </$list>\n  </$select>\n  <span class=\"goto-link\">\n  <$list filter=[is[current]!field:gsd_project[]]>\n  &nbsp;<$link to={{!!gsd_project}}>>></$link>\n  </$list>\n  <$list filter=\"[is[current]field:gsd_project[]]\">\n  &nbsp;<<gsd-tiddler-fly \"project\" \"active\">>\n  </$list>\n  </span>\n</p>\n</$list>\n\n<$list filter=[is[current]field:gsd_type[action]]>\n<p class=\"gsd-bluebox-droplist\">\nProject of: <br/>\n<$select field=\"gsd_project\" default=\"\">\n  <option value=\"\">--</option>\n  <$list filter=\"[field:gsd_type[project]!field:gsd_complete[true]field:gsd_realm{!!gsd_realm}]\">\n  <option value=<<currentTiddler>>><<currentTiddler>></option>\n  </$list>\n</$select>\n<span class=\"goto-link\">\n  <$list filter=[is[current]!field:gsd_project[]]>\n    &nbsp;<$link to={{!!gsd_project}}>>></$link>\n  </$list>\n  <$list filter=\"[is[current]field:gsd_project[]]\">\n    &nbsp;<<gsd-tiddler-fly \"project\" \"active\">>\n  </$list>\n</span>\n</p>\n<p class=\"gsd-bluebox-droplist\">\nDepends on: <br/>\n<$prereq default=\"\">\n  <option value=\"\">--</option>\n  <$set name=\"currentTitle\" value=<<currentTiddler>> >\n    <$list filter=\"[field:gsd_type[action]!field:gsd_complete[true]field:gsd_realm{$:/currentRealm!!text}!has[gsd_project]limit[1]]\">\n      <optgroup label=\"No Project\">\n        <$list filter=\"[field:gsd_type[action]!field:gsd_complete[true]field:gsd_realm{$:/currentRealm!!text}!has[gsd_project]!title<currentTitle>]\">\n          <option value=<<currentTiddler>>><<currentTiddler>></option>\n        </$list>\n      </optgroup>\n    </$list>\n  </$set>\n<$set name=\"currentTitle\" value=<<currentTiddler>> >\n  <$list filter=\"[field:gsd_type[action]!field:gsd_complete[true]field:gsd_realm{$:/currentRealm!!text}has[gsd_project]each[gsd_project]]\">\n    <optgroup label={{!!gsd_project}}>\n     <$list filter=\"[field:gsd_type[action]!field:gsd_complete[true]!title<currentTitle>field:gsd_project{!!gsd_project}]\">\n       <option value=<<currentTiddler>>><<currentTiddler>></option>\n     </$list>\n    </optgroup>\n  </$list>\n</$set>\n</$prereq>\n<span class=\"goto-link\">\n  <$list filter=[is[current]!field:gsd_action[]]>\n    &nbsp;<$link to={{!!gsd_action}}>>></$link>\n  </$list>\n  <$list filter=\"[is[current]field:gsd_action[]]\">\n    &nbsp;<<gsd-tiddler-fly \"action\" \"next\">>\n  </$list>\n</span>\n</p>\n</$list>\n\n<$list filter=[is[current]field:gsd_type[reference]]>\n<p class=\"gsd-bluebox-droplist\">\nProject of: <br/>\n<$select field=\"gsd_project\" default=\"\">\n  <option value=\"\">--</option>\n  <$list filter=\"[field:gsd_type[project]!field:gsd_complete[true]field:gsd_realm{!!gsd_realm}]\">\n  <option value=<<currentTiddler>>><<currentTiddler>></option>\n  </$list>\n  </$select>\n  <span class=\"goto-link\">\n  <$list filter=[is[current]!field:gsd_project[]]>\n  &nbsp;<$link to={{!!gsd_project}}>>></$link>\n  </$list>\n  <$list filter=\"[is[current]field:gsd_project[]]\">\n  &nbsp;<<gsd-tiddler-fly \"project\" \"active\">>\n  </$list>\n  </span>\n</p>\n</$list>\n"
+        },
+        "$:/plugins/gsd5/core/ui/addins/ViewRealm": {
+            "title": "$:/plugins/gsd5/core/ui/addins/ViewRealm",
+            "tags": "$:/tags/GSD5ActionCore $:/tags/GSD5ProjectCore $:/tags/GSD5ReferenceCore $:/tags/GSD5ContactCore $:/tags/GSD5ContextCore",
+            "text": "<p class=\"gsd-bluebox-droplist\">\nRealm:<br/>\n<$select field=\"gsd_realm\" default=\"\">\n<option value=\"all\">--</option>\n<$list filter=\"[field:gsd_type[realm]]\">\n<option value=<<currentTiddler>>><<currentTiddler>></option>\n</$list>\n</$select>\n</p>\n"
+        },
+        "$:/plugins/gsd5/core/ui/addins/ViewStatus": {
+            "title": "$:/plugins/gsd5/core/ui/addins/ViewStatus",
+            "tags": "$:/tags/GSD5ActionCore $:/tags/GSD5ProjectCore",
+            "text": "<$list filter=[is[current]field:gsd_type[action]!field:gsd_complete[true]]>\n<p class=\"gsd-bluebox-droplist\">\n<$radio class=\"body-status next\" field=\"gsd_status\" value=\"next\">next</$radio>\n<$radio class=\"body-status waiting\" field=\"gsd_status\" value=\"waiting\">waiting</$radio>\n<$radio class=\"body-status future\" field=\"gsd_status\" value=\"future\">future</$radio>\n</p>\n</$list>\n\n<$list filter=[is[current]field:gsd_type[project]!field:gsd_complete[true]]>\n<p class=\"gsd-bluebox-droplist\">\n<$radio class=\"body-status next\" field=\"gsd_status\" value=\"active\">active</$radio>\n<$radio class=\"body-status future\" field=\"gsd_status\" value=\"future\">future</$radio>\n</p>\n</$list>\n"
+        }
+    }
+}
