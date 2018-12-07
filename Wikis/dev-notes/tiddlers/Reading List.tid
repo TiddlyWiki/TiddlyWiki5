@@ -1,0 +1,47 @@
+created: 20181206200123693
+modified: 20181207152836518
+title: Reading List
+type: text/vnd.tiddlywiki
+
+Articles recommended by P.Cauley:
+https://www.one-tab.com/page/9MFSp37kTPaULZA4hdIXVQ
+
+*[[How to Build an Augmented Images Application with ARCore]]
+*[[5 Ways to Style React Components in 2019]]
+*[[Updating Your React Native App -by- React Native Training -@- Medium]]
+*[[How to Develop a Location-based Application Using React Native]]
+*[[Introducing the Canvas 2D Context API for Expo -@- Exposition]]
+*[[Map Clustering with React Native (Expo) -by- Christopher Hernandez -@- Medium]]
+*[[Animated Graph in React Native -by- React Native Motion -@- Medium]]
+*[[Under the hood of React’s hooks system -@- The Guild -@- Medium]]
+*[[Flux without the Fuss: from Containers to Hooks -@- Iqoqo Engineering -@- Medium]]
+*[[Simple Code Reuse with React Hooks -@- Bits and Pieces]]
+*[[Continuous Integration for React Native with Azure Pipelines]]
+
+Mentioned in Team Slack
+ - https://www.one-tab.com/page/-k--XEDlR1acLQkxsY39dw
+
+*[[JavaScript Style Guide -@- airbnb/javascript]]
+
+*[[Gitflow Workflow -@- Atlassian Git Tutorial]]
+
+*[[Git Client - Glo Boards -@- GitKraken]]
+
+*[[Making Sense of React Hooks -@- Medium]]
+
+*[[React Navigation: Routing and navigation for your React Native apps]]
+
+*[[Automating React Documentation using React-Docgen]]
+
+*[[Documenting components -@- React Styleguidist]]
+
+*[[pedronauck/docz]]
+
+*[[erikras/ducks-modular-redux]]
+
+*[[callstack/haul]]
+
+*[[Apollo Universal Starter Kit]]
+
+*[[Debugging a Non Reproducible Crash]]
+
