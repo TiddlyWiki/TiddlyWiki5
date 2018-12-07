@@ -1,0 +1,9 @@
+created: 20181207183415570
+modified: 20181207191719872
+tags: $:/tags/ViewTemplate
+title: ArticleMetaHeaderTemplate
+type: text/vnd.tiddlywiki
+
+<$list filter="[is[current]tag[Article]]">
+<$transclude tiddler="ArticleMetaTableTemplate"/>
+</$list>

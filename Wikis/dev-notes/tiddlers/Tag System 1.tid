@@ -1,0 +1,13 @@
+created: 20181207174404247
+modified: 20181207174518095
+tags: meta-topic meta
+title: Tag System
+type: text/vnd.tiddlywiki
+
+The [[Tag system]] includes tags of the following types:
+
+<<list-links filter:"[tag[tag-system-type]]">>
+
+...and includes these tags:
+
+<<list-links filter:"[tag[tag-system]]">>

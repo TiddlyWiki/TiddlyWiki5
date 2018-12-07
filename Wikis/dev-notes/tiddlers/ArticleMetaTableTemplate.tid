@@ -1,0 +1,15 @@
+created: 20181207185005475
+modified: 20181207191913709
+tags: 
+title: ArticleMetaTableTemplate
+type: text/vnd.tiddlywiki
+
+<div>
+
+|aperk-article-meta-table-template tc-message-box|k
+|source | {{!!source}}|
+|publisher | {{!!publisher}}|
+|released | {{!!released}}|
+
+
+</div>

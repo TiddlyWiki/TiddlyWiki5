@@ -3,9 +3,9 @@ gsd_complete: false
 gsd_contact: 
 gsd_project: Outline Goals
 gsd_realm: all
-gsd_status: next
+gsd_status: future
 gsd_type: action
-modified: 20181207163944944
+modified: 20181207174256987
 title: Comments
 type: text/vnd.tiddlywiki
 
