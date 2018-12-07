@@ -1,0 +1,18 @@
+created: 20181207153821669
+modified: 20181207155206611
+tags: 
+title: Macros Examples
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1" eg="""<<tag>>"""/>
+<$macrocall $name=".example" n="2" eg="""<<tag isRead>>"""/>
+
+<<tag>>
+
+<<tag isRead>>
+
+<<list-links filter:"[tag[isRead]]">>
+
+<<tabs "[tag[isRead]]" "SampleTabTwo" "$:/state/tab2" "tc-vertical">>
+
+<<tree prefix:"$:/">>

@@ -1,0 +1,23 @@
+created: 20181207155241887
+modified: 20181207155330045
+tags: 
+title: dumpvariables Macro example
+type: text/vnd.tiddlywiki
+
+```
+<$set name="EXAMPLE" value="123..789">
+<$set name="EXAMPLE2" value="456">
+
+<<dumpvariables>>
+
+</$set>
+</$set>
+```
+
+<$set name="EXAMPLE" value="123..789">
+<$set name="EXAMPLE2" value="456">
+
+<<dumpvariables>>
+
+</$set>
+</$set>
