@@ -1,5 +1,5 @@
 created: 20150822152602396
-modified: 20180513192724597
+modified: 20181207191401603
 tags: $:/tags/Stylesheet
 title: Alec stylee
 tmap.id: 81433041-9bc5-490f-a05c-78bb0f318010
@@ -13,4 +13,9 @@ html button {
     color: #4e7baa;
     background: #fffffe;
     border-color: #268bd2;
+}
+
+.aperk-article-meta-table-template {
+    margin: 0px;
+    font-weight: bold;
 }

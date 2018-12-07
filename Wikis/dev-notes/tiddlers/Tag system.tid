@@ -6,7 +6,9 @@ gsd_project: Outline Goals
 gsd_realm: all
 gsd_status: next
 gsd_type: action
-modified: 20181207174251662
-title: Tagging system
+modified: 20181207174403276
+tags: meta
+title: Tag system
 type: text/vnd.tiddlywiki
 
+{{Tag System}}

@@ -1,10 +1,9 @@
 created: 20181206210820272
-modified: 20181206211056952
+modified: 20181207175410250
 source: 5 Ways to Style React Components in 2019
-tags: styling decisionAide
+tags: toDecide styling
 title: Ways to style react components
 type: text/vnd.tiddlywiki
-
 
 |''Choice''|''Benefits''|''Implementations''|
 |Inline CSS|colocation JSX & CSS||
