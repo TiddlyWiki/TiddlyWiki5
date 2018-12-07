@@ -1,6 +1,9 @@
 color: #000000
 created: 20181207180441952
-modified: 20181207180444027
+data-darkreader-inline-color: 
+modified: 20181207210603563
+style: --darkreader-inline-color:#000000;
+tags: topic
 title: react-components
 type: text/vnd.tiddlywiki
 

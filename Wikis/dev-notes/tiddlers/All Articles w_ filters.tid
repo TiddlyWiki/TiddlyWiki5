@@ -1,12 +1,13 @@
 created: 20181207163905103
 gsd_action: filters for fields: released (date), publisher, etc
-gsd_complete: false
+gsd_comp_date: 20181207210926721
+gsd_complete: true
 gsd_contact: 
 gsd_project: Outline Goals
 gsd_realm: all
-gsd_status: future
+gsd_status: next
 gsd_type: action
-modified: 20181207174303400
+modified: 20181207210927842
 title: All Articles w/ filters
 type: text/vnd.tiddlywiki
 

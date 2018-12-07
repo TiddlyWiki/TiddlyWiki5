@@ -1,12 +1,13 @@
 created: 20181207164508323
 gsd_action: define article tags
-gsd_complete: false
+gsd_comp_date: 20181207210846553
+gsd_complete: true
 gsd_contact: 
 gsd_project: Outline Goals
 gsd_realm: all
 gsd_status: next
 gsd_type: action
-modified: 20181207164517792
+modified: 20181207210847663
 title: filters for article tags
 type: text/vnd.tiddlywiki
 
