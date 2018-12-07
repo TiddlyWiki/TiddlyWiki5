@@ -1,0 +1,28 @@
+created: 20170510152735336
+creator: Mat von TWaddle
+modified: 20180513192121313
+modifier: Mat von TWaddle
+tags: 
+title: $:/richlink/.dictionary
+type: application/x-tiddler-dictionary
+
+www.youtube.com: richlink/youtube
+soundcloud.com: richlink/soundcloud
+en.wikipedia.org: richlink/wikipedia
+tiddlywiki.com: richlink/docs
+twitter.com: richlink/tweet
+github.com: richlink/github
+jsfiddle.net: richlink/jsfiddle
+disq.us: richlink/disqus
+pdf: richlink/iframe
+txt: richlink/txt
+jpg: richlink/img
+JPG: richlink/img
+png: richlink/img
+mp3: richlink/audio
+ogg: richlink/audio
+wav: richlink/audio
+flac: richlink/audio
+mp4: richlink/video
+ogv: richlink/video
+webm: richlink/video

@@ -1,0 +1,37 @@
+created: 20170510173425597
+creator: Mat von TWaddle
+modified: 20180513192121332
+modifier: Mat von TWaddle
+tags: 
+title: $:/richlink/img
+type: text/vnd.tiddlywiki
+
+<div class="richlink-img">
+<$image source=<<link>>/>
+<span class="richlink-img-caption">
+<<1>>
+</span>
+</div>
+
+<style>
+.richlink-img {
+    display:inline-block;
+    background: #fff;
+    margin: 0 0 27px 30px;
+    padding: 10px 10px 15px;
+    text-align: center;
+    font-family: "Marker Felt",sans-serif;
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.55);
+    -moz-box-shadow: 0 3px 6px rgba(0,0,0,.55);
+    -webkit-transform: rotate(-2deg);
+    -webkit-transition: -webkit-transform .15s linear;
+    -moz-transform: rotate(-2deg);
+}
+.richlink-img-caption {
+    display:block;
+    text-align:center;
+}
+</style>
