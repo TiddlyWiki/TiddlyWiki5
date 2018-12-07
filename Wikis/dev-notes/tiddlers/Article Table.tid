@@ -1,7 +1,11 @@
 created: 20181207193433575
-modified: 20181207210338058
+modified: 20181207214329129
 tags: 
 title: Article Table
 type: text/vnd.tiddlywiki
+
+```
+<<RowTable '[tag[Article]]' 'release publisher source' 'topic purpose articleState'>>
+```
 
 <<RowTable '[tag[Article]]' 'release publisher source' 'topic purpose articleState'>>

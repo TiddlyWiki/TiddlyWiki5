@@ -1,7 +1,9 @@
 created: 20181207174404247
-modified: 20181207220705589
+draft.of: Tag System
+draft.title: Tag System
+modified: 20181207220753161
 tags: meta-topic meta
-title: Tag System
+title: Draft of 'Tag System'
 type: text/vnd.tiddlywiki
 
 The [[Tag system]] describes at the highest level with __E__ntity and __Q__uality tags.
@@ -11,7 +13,7 @@ These Entities and Qualities may have sub-types.
 
 <<list-links filter:"[tag[tag-system-type]]">>
 
-`${Entity}-subType`
+`${Entity}-subType` is 
 
 <<list-links filter:"[tag[]tag[isTagType]]">>
 

@@ -1,7 +1,9 @@
 color: #01b124
 created: 20181207171845469
-modified: 20181207180634808
-tags: tag-system-type
+data-darkreader-inline-color: 
+modified: 20181207215519679
+style: --darkreader-inline-color:#009209;
+tags: Article-tagType tag-system-type
 title: articleState
 type: text/vnd.tiddlywiki
 
