@@ -1,0 +1,10 @@
+created: 20181206205151460
+modified: 20181206205649815
+tags: containsPotentialRead
+title: CSS-in-JS
+type: text/vnd.tiddlywiki
+
+So what’s the difference between CSS-in-JS and Inline styles? let’s take it to the ground level. Here’s a simple explanation that makes things clearer at the most down-to-earth level possible: ''CSS-in-JS attaches a `<style>` tag on top of the DOM while inline styles just attaches the properties to the DOM node.''
+
+Implementations:
+https://blog.bitsrc.io/9-css-in-js-libraries-you-should-know-in-2018-25afb4025b9b

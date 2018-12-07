@@ -1,0 +1,6 @@
+created: 20181206202953854
+modified: 20181206202956495
+title: Apollo Universal Starter Kit
+type: text/vnd.tiddlywiki
+
+a GraphQL-based JavaScript starter application for mobile, web, and server development. The code for each platform is built with Webpack to enable ultimate code reuse. The stack includes Apollo, GraphQL, React, React Native, Expo, Node.js, Express, Knex, SQLite, Bootstrap, Babel, SpinJS, Webpack, and other tools.

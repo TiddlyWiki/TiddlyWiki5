@@ -1,0 +1,6 @@
+created: 20181206202936476
+modified: 20181206211113365
+title: erikras/ducks-modular-redux
+type: text/vnd.tiddlywiki
+
+A proposal for bundling reducers, action types and actions when using Redux
