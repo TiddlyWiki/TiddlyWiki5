@@ -1,0 +1,8 @@
+created: 20181206205336109
+modified: 20181206211103765
+title: styled-components
+type: text/vnd.tiddlywiki
+
+https://github.com/styled-components/styled-components
+
+Styled-components are created by defining components using the ES6 template literal notation. CSS properties can be added to the component just like you would do using CSS. When the JS is parsed, styled-components will generate unique class names, and inject the CSS into the DOM. 

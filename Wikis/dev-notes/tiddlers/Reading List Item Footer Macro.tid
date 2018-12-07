@@ -1,0 +1,9 @@
+created: 20181207153632612
+modified: 20181207154638386
+tags: 
+title: Reading List Item Footer Macro
+type: text/vnd.tiddlywiki
+
+|source | {{!!source}}|
+|publisher | {{!!publisher}}|
+|released | {{!!released}}|
