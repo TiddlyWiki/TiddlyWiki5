@@ -1,6 +1,12 @@
 created: 20181207180108111
-modified: 20181207181641719
+modified: 20181207203131569
 tags: react-native isUnread Article
 title: How to Build an Augmented Images Application with ARCore
+topics: react-native
 type: text/vnd.tiddlywiki
 
+
+
+<$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
+<div class="tc-tags-wrapper"><$list filter="[all[current]tags[]sort[title]]" template="$:/core/ui/TagTemplate" storyview="pop"/></div>
+</$reveal>

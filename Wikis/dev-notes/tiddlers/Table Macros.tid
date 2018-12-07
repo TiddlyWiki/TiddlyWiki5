@@ -1,0 +1,471 @@
+created: 20150319034848355
+modified: 20181207210541613
+tags: $:/tags/Macro
+title: Table Macros
+type: text/vnd.tiddlywiki
+
+\define TableWizardDisplayTableDummyMacro()
+  <<DisplayTable """$(ConfigTiddler)$""">>
+\end
+
+\define TableWizardColumnSelectCheckbox()
+  <$checkbox tiddler='$:/state/$(ConfigTiddler)$/Display Columns/$(ThisDisplayColumn)$' field='show' checked='$(ThisDisplayColumn)$' unchecked=''>
+    <$view tiddler="""$(ThisDisplayColumn)$""" field=caption>
+      $(ThisDisplayColumn)$
+    </$view>
+  </$checkbox>  
+\end
+
+\define TableWizardSubcolumnSelectCheckbox()
+  <$checkbox tiddler='$:/state/$(ConfigTiddler)$/Display Subcolumns/$(ThisDisplaySubcolumn)$' field='show' checked='$(ThisDisplaySubcolumn)$' unchecked=''>
+    <$view tiddler="""$(ThisDisplaySubcolumn)$""" field=caption>
+      $(ThisDisplaySubcolumn)$
+    </$view>
+  </$checkbox>  
+\end
+
+\define TableWizardRowSelectCheckbox()
+  <$checkbox tiddler='$:/state/$(ConfigTiddler)$/Display Rows/$(ThisDisplayRow)$' field='show' checked='$(ThisDisplayRow)$' unchecked=''>
+    <$view tiddler="""$(ThisDisplayRow)$""" field=caption>
+      $(ThisDisplayRow)$
+    </$view>
+  </$checkbox>  
+\end
+
+\define TableWizardMakeColumnSelectCheckbox()
+  <$list filter='[tag{$(ConfigTiddler)$!!column_tag}]' variable=ThisDisplayColumn>
+    <<TableWizardColumnSelectCheckbox>>
+  </$list>
+\end
+
+\define TableWizardMakeSubcolumnSelectCheckbox()
+  <$list filter='[tag{$(ConfigTiddler)$!!subcolumn_tag}]' variable=ThisDisplaySubcolumn>
+    <<TableWizardSubcolumnSelectCheckbox>>
+  </$list>
+\end
+
+\define TableWizardMakeRowSelectCheckbox()
+  <$list filter='[tag{$(ConfigTiddler)$!!row_tag}]' variable=ThisDisplayRow>
+    <<TableWizardRowSelectCheckbox>>
+  </$list>
+\end
+
+\define TableWizardButtonSubcolumn()
+  <$reveal type='nomatch' state="""$:/state/$(ConfigTiddler)$/$(ThisRow)$/$(ThisColumn)$/$(ThisSubcolumn)$""" text='edit'>
+    <div style='height:100%;width:100%;'>
+      <$button class='tc-btn-invisible' style='height:100%;width:100%;'>
+        <$view tiddler="""$:/Data/$(ThisRow)$/$(ThisColumn)$/$(ThisSubcolumn)$/$(ThisItem)$""" field=subcolumn_data>
+          <<MissingMessage>>
+        </$view>
+        <$action-setfield $tiddler="""$:/state/$(ConfigTiddler)$/$(ThisRow)$/$(ThisColumn)$/$(ThisSubcolumn)$""" $value=edit/>
+      </$button>
+    </div>
+  </$reveal>
+  <$reveal type='match' state="""$:/state/$(ConfigTiddler)$/$(ThisRow)$/$(ThisColumn)$/$(ThisSubcolumn)$""" text='edit'>
+    <$button>
+      {{$:/core/images/done-button}}
+      <$action-setfield $tiddler="""$:/state/$(ConfigTiddler)$/$(ThisRow)$/$(ThisColumn)$/$(ThisSubcolumn)$""" $value=''/>
+    </$button>
+    <$edit-text tiddler="""$:/Data/$(ThisRow)$/$(ThisColumn)$/$(ThisSubcolumn)$/$(ThisItem)$""" field=subcolumn_data size=1/>
+  </$reveal>
+\end
+
+\define TableWizardSubcolumnDisplayEntry()
+  <td>
+    <$reveal type='nomatch' state="""$(ConfigTiddler)$!!allow_edit""" text='yes'>
+      <$view tiddler="""$:/Data/$(ThisRow)$/$(ThisColumn)$/$(ThisSubcolumn)$/$(ThisItem)$""" field=subcolumn_data>
+        <<MissingMessage>>
+      </$view>
+    </$reveal>
+    <$reveal type='match' state="""$(ConfigTiddler)$!!allow_edit""" text='yes'>
+      <<TableWizardButtonSubcolumn>>
+    </$reveal>
+  </td>
+\end
+
+\define TableWizardButtonColumn()
+  <$reveal type='nomatch' state="""$:/state/$(ConfigTiddler)$/$(ThisRow)$/$(ThisColumn)$!!$(ThisColumn)$""" text='edit'>
+    <div style='height:100%;width:100%;'>
+      <$button class='tc-btn-invisible' style='height:100%;width:100%;'>
+        <$view tiddler="""$:/Data/$(ThisRow)$/$(ThisColumn)$/$(ThisItem)$""" field='column_data'>
+          <<MissingMessage>>
+        </$view>
+        <$action-setfield $tiddler="""$:/state/$(ConfigTiddler)$/$(ThisRow)$/$(ThisColumn)$""" $field=$(ThisColumn)$ $value=edit/>
+      </$button>
+    </div>
+  </$reveal>
+  <$reveal type='match' state="""$:/state/$(ConfigTiddler)$/$(ThisRow)$/$(ThisColumn)$!!$(ThisColumn)$""" text='edit'>
+    <$button>
+      {{$:/core/images/done-button}}
+      <$action-setfield $tiddler="""$:/state/$(ConfigTiddler)$/$(ThisRow)$/$(ThisColumn)$""" $field=$(ThisColumn)$ $value=''/>
+    </$button>
+      <$edit-text tiddler="""$:/Data/$(ThisRow)$/$(ThisColumn)$/$(ThisItem)$""" field=column_data size=1/>
+  </$reveal>
+\end
+
+\define TableWizardColumnDisplayEntry()
+  <td>
+    <$reveal type='nomatch' state="""$(ConfigTiddler)$!!allow_edit""" text='yes'>
+      <$view tiddler="""$:/Data/$(ThisRow)$/$(ThisColumn)$/$(ThisItem)$""" field='column_data'>
+        <<MissingMessage>>
+      </$view>
+    </$reveal>
+    <$reveal type='match' state="""$(ConfigTiddler)$!!allow_edit""" text='yes'>
+      <<TableWizardButtonColumn>>
+    </$reveal>
+  </td>
+\end
+
+\define TableWizardDisplayTableWithSubcolumns(DataTag ColumnTag SubcolumnTag RowTag SubcolumnPerColumn EmptyMessage)
+@@text-align:center;
+  <$set name='ColumnList' filter='[prefix[$:/state/$(ConfigTiddler)$/Display Columns]has[show]get[show]tag[$ColumnTag$]sort[title]]-[[text]]-[[title]]-[[modified]]-[[created]]'>
+    <$set name='SubcolumnList' filter='[prefix[$:/state/$(ConfigTiddler)$/Display Subcolumns]has[show]get[show]tag[$SubcolumnTag$]sort[title]]-[[text]]-[[title]]-[[modified]]-[[created]]'>
+      <$set name='RowList' filter='[prefix[$:/state/$(ConfigTiddler)$/Display Rows]has[show]get[show]tag[$RowTag$]sort[title]]-[[text]]-[[title]]-[[modified]]-[[created]]'>
+        <$set name=MissingMessage value='$EmptyMessage$'>
+          <$set name=ThisItem value={{$(ConfigTiddler)$!!selected_data}}>
+            <table style='width:100%;border-color:black;'>
+              <tr>
+                <td style='background-color:lightgrey;border-color:black;'>
+                </td>
+                <$list filter=<<ColumnList>>>
+                  <td colspan="$SubcolumnPerColumn$" style='background-color:lightgrey;border-color:black;'>
+                    <$link to=<<currentTiddler>>>
+                      <$view field='caption'>
+                        <<currentTiddler>>
+                      </$view>
+                    </$link>
+                  </td>
+                </$list>
+              </tr>
+                <tr style='width:100%;bordor-color:black;'>
+                  <td style='border-left-color:black;'>
+                  </td>
+                  <$list filter=<<ColumnList>>>
+                    <$list filter=<<SubcolumnList>> variable=ThisSubcolumn>
+                      <td>
+                        <$link to=<<ThisSubcolumn>>>
+                          <$view tiddler=<<ThisSubcolumn>> field=caption>
+                            <<ThisSubcolumn>>
+                          </$view>
+                        </$link>
+                      </td>
+                    </$list>
+                  </$list>
+                </tr>
+                <$list filter=<<RowList>> variable=ThisRow>
+                  <tr>
+                    <td style='border-left:0px;'>
+                      <$link to=<<ThisRow>>>
+                        <$view tiddler=<<ThisRow>> field=caption>
+                          <<ThisRow>>
+                        </$view>
+                      </$link>
+                    </td>
+                    <$list filter=<<ColumnList>> variable=ThisColumn>
+                      <$list filter=<<SubcolumnList>> variable=ThisSubcolumn>
+                        <<TableWizardSubcolumnDisplayEntry>>
+                      </$list>
+                    </$list>
+                  </tr>
+                </$list>
+            </table>
+          </$set>
+        </$set>
+      </$set>
+    </$set>
+  </$set>
+@@
+\end
+
+\define TableWizardDisplayTableMacro(DataTag ColumnTag RowTag EmptyMessage)
+@@text-align:center;
+  <$set name='ColumnList' filter='[prefix[$:/state/$(ConfigTiddler)$/Display Columns]has[show]get[show]tag[$ColumnTag$]sort[title]]-[[text]]-[[title]]-[[modified]]-[[created]]'>
+    <$set name='RowList' filter='[prefix[$:/state/$(ConfigTiddler)$/Display Rows]has[show]get[show]tag[$RowTag$]sort[title]]-[[text]]-[[title]]-[[modified]]-[[created]]'>
+      <$set name=ThisItem value={{$(ConfigTiddler)$!!selected_data}}>
+        <$set name=MissingMessage value='$EmptyMessage$'>
+          <table style='width:100%;border-color:black;'>
+            <tr>
+              <td style='background-color:lightgrey;border-color:black;'>
+              </td>
+              <$list filter=<<ColumnList>>>
+                <td style='background-color:lightgrey;border-color:black;'>
+                  <$link to=<<currentTiddler>>>
+                    <$view field='caption'>
+                      <<currentTiddler>>
+                    </$view>
+                  </$link>
+                </td>
+              </$list>
+            </tr>
+            <$list filter=<<RowList>> variable=ThisRow>
+              <tr>
+                <td style='border-left:0px;'>
+                  <$link to=<<ThisRow>>>
+                    <$view tiddler=<<ThisRow>> field=caption>
+                      <<ThisRow>>
+                    </$view>
+                  </$link>
+                </td>
+                <$list filter=<<ColumnList>> variable=ThisColumn>
+                  <<TableWizardColumnDisplayEntry>>
+                </$list>
+              </tr>
+            </$list>
+          </table>
+        </$set>
+      </$set>
+    </$set>
+  </$set>
+@@
+\end
+
+\define MakeTableWizard()
+
+Enter the name of the configuration tiddler to create:
+
+<$edit-text tiddler='$:/temp/MakeTableWizard' field='config_tiddler_name' class='tc-edit-texteditor' placeholder='Configuration Tiddler Name'/>
+
+<$reveal type='match' state='$:/temp/MakeTableWizard!!config_tiddler_name' text=''>
+You have to enter a configuration tiddler name first.
+</$reveal>
+
+<$reveal type='nomatch' state='$:/temp/MakeTableWizard!!config_tiddler_name' text=''>
+
+<$set name=ConfigTiddler value={{$:/temp/MakeTableWizard!!config_tiddler_name}}>
+<$checkbox tiddler=<<ConfigTiddler>> field='include_subcolumns' checked='yes' unchecked='no'>Include Subcolumns</$checkbox><br>
+
+<$tiddler tiddler=<<ConfigTiddler>>>
+Data tag:
+<$edit-text field='dataset_tag' class='tc-edit-texteditor'/>
+
+Select Dataset Name <$reveal type='nomatch' state='!!show_new_dataset' text='true'>(<$button>Create New Datasets<$action-setfield show_new_dataset=true/></$button>):<br><br></$reveal>
+<$reveal type='match' state='!!show_new_dataset' text='true'>(<$button>Done Creating Datasets<$action-setfield show_new_dataset=false/></$button>):<br><br>
+<$edit-text tiddler='$:/temp/MakeTableWizard' field='new_dataset_name' class='tc-edit-texteditor' placeholder='New Dataset Name'/>
+<$button>Create Dataset<$action-setfield $tiddler={{$:/temp/MakeTableWizard!!new_dataset_name}} tags={{!!dataset_tag}}/><$action-setfield $tiddler='$:/temp/MakeTableWizard' new_dataset_name=''/></$button><br><br>
+</$reveal>
+<$select field='selected_data'><$list filter='[tag{!!dataset_tag}]'><option><<currentTiddler>></option></$list></$select>
+<br>
+
+<$set name=SelectedData value={{!!selected_data}}>
+
+Column tag:
+<$edit-text field='column_tag' class='tc-edit-texteditor'/><br><br>
+
+Select Columns to display <$reveal type='nomatch' state='!!show_new_column' text='true'>(<$button>Create New Columns<$action-setfield show_new_column=true/></$button>):<br><br></$reveal>
+<$reveal type='match' state='!!show_new_column' text='true'>(<$button>Done Creating Columns<$action-setfield show_new_column=false/></$button>):<br><br>
+<$edit-text tiddler='$:/temp/MakeTableWizard' field='new_column_name' class='tc-edit-texteditor' placeholder='New Column Name'/>
+<$button>Create Column<$action-setfield $tiddler={{$:/temp/MakeTableWizard!!new_column_name}} tags={{!!column_tag}}/><$action-setfield $tiddler='$:/temp/MakeTableWizard' new_column_name=''/></$button><br><br>
+</$reveal>
+
+<<TableWizardMakeColumnSelectCheckbox>><br><br>
+
+<$reveal type='match' state='!!include_subcolumns' text='yes'>
+
+Subcolumn tag:
+<$edit-text field='subcolumn_tag' class='tc-edit-texteditor'/>
+
+Subcolumns per column:
+<$edit-text field='subcolumn_per_column' class='tc-edit-texteditor'/>
+
+Select subcolumns to display <$reveal type='nomatch' state='!!show_new_subcolumn' text='true'>(<$button>Create New Subcolmun<$action-setfield show_new_subcolumn=true/></$button>):<br><br></$reveal>
+<$reveal type='match' state='!!show_new_subcolumn' text='true'>(<$button>Done Creating Subcolumns<$action-setfield show_new_subcolumn=false/></$button>):<br><br>
+<$edit-text tiddler='$:/temp/MakeTableWizard' field='new_subcolumn_name' class='tc-edit-texteditor' placeholder='New Subcolumn Name'/>
+<$button>Create Subcolumn<$action-setfield $tiddler={{$:/temp/MakeTableWizard!!new_subcolumn_name}} tags={{!!subcolumn_tag}}/><$action-setfield $tiddler='$:/temp/MakeTableWizard' new_subcolumn_name=''/></$button><br><br>
+</$reveal>
+
+<<TableWizardMakeSubcolumnSelectCheckbox>><br>
+
+</$reveal>
+
+Row tag:
+<$edit-text field='row_tag' class='tc-edit-texteditor'/><br><br>
+
+Select rows to display <$reveal type='nomatch' state='!!show_new_row' text='true'>(<$button>Create New Rows<$action-setfield show_new_row=true/></$button>):<br><br></$reveal>
+<$reveal type='match' state='!!show_new_row' text='true'>(<$button>Done Creating Rows<$action-setfield show_new_row=false/></$button>):<br><br>
+<$edit-text tiddler='$:/temp/MakeTableWizard' field='new_row_name' class='tc-edit-texteditor' placeholder='New Row Name'/>
+<$button>Create Row<$action-setfield $tiddler={{$:/temp/MakeTableWizard!!new_row_name}} tags={{!!row_tag}}/><$action-setfield $tiddler='$:/temp/MakeTableWizard' new_row_name=''/></$button><br><br>
+</$reveal>
+
+<<TableWizardMakeRowSelectCheckbox>><br><br>
+
+Empty cell message:
+<$edit-text field='empty_message' class='tc-edit-texteditor'/>
+
+<$checkbox field='allow_edit' checked='yes' unchecked='no'>Allow Inline Editing</$checkbox><br>
+
+<$reveal type='match' state='!!show_table' text='yes'>
+
+</$reveal>
+
+</$set>
+
+</$tiddler>
+<$button>Refresh Table
+<$action-setfield dummy=1/>
+</$button>
+<<TableWizardDisplayTableDummyMacro>>
+</$set>
+</$reveal>
+\end
+
+\define TableWizardDisplayTableInside()
+<$reveal type='nomatch' state="""$(ConfigTiddler)$!!include_subcolumns""" text='yes'>
+<$macrocall $name=TableWizardDisplayTableMacro DataTag={{$(ConfigTiddler)$!!dataset_tag}} ColumnTag={{$(ConfigTiddler)$!!column_tag}} RowTag={{$(ConfigTiddler)$!!row_tag}} EmptyMessage={{$(ConfigTiddler)$!!empty_message}}/>
+</$reveal>
+
+<$reveal type='match' state="""$(ConfigTiddler)$!!include_subcolumns""" text='yes'>
+<$macrocall $name=TableWizardDisplayTableWithSubcolumns DataTag={{$(ConfigTiddler)$!!dataset_tag}} ColumnTag={{$(ConfigTiddler)$!!column_tag}} RowTag={{$(ConfigTiddler)$!!row_tag}} EmptyMessage={{$(ConfigTiddler)$!!empty_message}} SubcolumnTag={{$(ConfigTiddler)$!!subcolumn_tag}} SubcolumnPerColumn={{$(ConfigTiddler)$!!subcolumn_per_column}}/>
+</$reveal>
+\end
+
+\define DisplayTable(ConfigTiddler)
+<$set name=ConfigTiddler value="""$ConfigTiddler$""">
+<<TableWizardDisplayTableInside>>
+</$set>
+\end
+
+\define TableMacrosColumnInnerInnerRows()
+<tr>
+  <th>
+  </th>
+  <$list filter='$(ColumnList)$+[sort{$(TableMacrosMakeTableSortStateTiddler)$}]'>
+    <th>
+      <<currentTiddler>>
+    </th>
+  </$list>
+</tr>
+<$list filter=<<FieldsList>> variable=ThisField>
+  <tr>
+    <th>
+      <$button class='tc-btn-invisible' set=<<TableMacrosMakeTableSortStateTiddler>> setTo=<<ThisField>>><<ThisField>></$button>
+    </th>
+    <$list filter='$(ColumnList)$+[sort{$(TableMacrosMakeTableSortStateTiddler)$}]' variable=ThisTiddler>
+      <td>
+        <<TableMacrosInlineEditButton>>
+      </td>
+    </$list>
+  </tr>
+</$list>
+\end
+
+\define TableMacrosInnerColumnTable()
+<$set name=FieldsList1 filter='$(ColumnList)$+[fields[]]-[[text]]-[[title]]-[[modified]]-[[created]]-[[tags]]'>
+<$set name=FieldsList filter='[is[system]!is[system]]$(FieldsUsed)$' emptyValue=<<FieldsList1>>>
+<$set name=RowOrColumn value=Column>
+<$set name=TableSortState value=<<TableMacrosMakeTableSortState>>>
+  <table>
+    <<TableMacrosColumnInnerInnerRows>>
+  </table>
+</$set>
+</$set>
+</$set>
+</$set>
+\end
+
+\define TableMacrosMakeTableSortState()
+{{$:/state/tables/Sort/$(RowOrColumn)$/$(FieldsList)$}}
+\end
+
+\define TableMacrosMakeTableSortStateTiddler()
+$:/state/tables/Sort/$(RowOrColumn)$/$(FieldsList)$
+\end
+
+\define TableMacrosRowTableInnerInnerRows()
+<$list filter='$(RowList)$+[sort{$(TableMacrosMakeTableSortStateTiddler)$}]' variable=ThisTiddler>
+  <tr>
+    <th>
+
+                      <$link to=<<ThisTiddler>>>
+                        <$view tiddler=<<ThisTiddler>> field=caption>
+                          <<ThisTiddler>>
+                        </$view>
+                      </$link>
+
+    </th>
+    <$list filter=<<FieldsList>> variable=ThisField>
+      <td>
+        <<TableMacrosInlineEditButton>>
+      </td>
+    </$list>
+
+    <$list filter=<<TagsTypeList>> variable=ThisTagType>
+      <td>
+        <<TableMacrosInlineTags>>
+      </td>
+    </$list>
+
+  </tr>
+</$list>
+\end
+
+\define TableMacrosInnerRowTable()
+<$set name=FieldsList1 filter='$(RowList)$+[fields[]]-[[text]]-[[title]]-[[modified]]-[[created]]-[[tags]]'>
+<$set name=FieldsList filter='[is[system]!is[system]]$(FieldsUsed)$' emptyValue=<<FieldsList1>>><$set name=TagsTypeList filter='[is[system]!is[system]]$(TagTypesUsed)$' emptyValue='-'>
+<$set name=RowOrColumn value=Row>
+<$set name=TableSortState value=<<TableMacrosMakeTableSortState>>>
+  <table>
+    <tr>
+      <th>
+        <$button class='tc-btn-invisible' style='width:100%;height:100%' set=<<TableMacrosMakeTableSortStateTiddler>> setTo=title>Title</$button>
+      </th>
+      <$list filter=<<FieldsList>>>
+        <th>
+          <$button class='tc-btn-invisible' set=<<TableMacrosMakeTableSortStateTiddler>> setTo=<<currentTiddler>>><<currentTiddler>></$button>
+        </th>
+      </$list>
+      <$list filter=<<TagsTypeList>>>
+        <th>
+          <$button class='tc-btn-invisible' set=<<TableMacrosMakeTableSortStateTiddler>> setTo=<<currentTiddler>>><<currentTiddler>></$button>
+        </th>
+      </$list>
+    </tr>
+    <<TableMacrosRowTableInnerInnerRows>>
+  </table>
+</$set>
+</$set>
+</$set>
+</$set>
+\end
+
+\define ColumnTable(filter fields)
+<$set name='ColumnList' value='$filter$'>
+<$set name='FieldsUsed' value='$fields$'>
+
+<<TableMacrosInnerColumnTable>>
+
+</$set>
+</$set>
+\end
+
+\define RowTable(filter fields tagtypes)
+<$set name='RowList' value='$filter$'>
+<$set name='FieldsUsed' value='$fields$'>
+<$set name='TagTypesUsed' value='$tagtypes$'>
+
+<<TableMacrosInnerRowTable>>
+
+</$set>
+</$set>
+\end
+
+\define TableMacrosInlineEditButton()
+<$reveal type='nomatch' state="""$:/temp/edit/$(ThisTiddler)$/$(ThisField)$""" text='edit'>
+<$button set="""$:/temp/edit/$(ThisTiddler)$/$(ThisField)$""" setTo=edit class='tc-btn-invisible' style='width:100%;hegiht:100%'>
+<$view tiddler=<<ThisTiddler>> field=<<ThisField>>>--</$view>
+</$button>
+</$reveal>
+<$reveal type='match' state="""$:/temp/edit/$(ThisTiddler)$/$(ThisField)$""" text='edit'>
+<$button set="""$:/temp/edit/$(ThisTiddler)$/$(ThisField)$""" setTo=noedit>{{$:/core/images/done-button}}</$button>
+<$edit-text tiddler=<<ThisTiddler>> field=<<ThisField>> size=1/>
+</$reveal>
+\end
+
+\define TableMacrosInlineTags()
+<$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
+<div class="tc-tags-wrapper">
+
+<$list filter='[[$(ThisTiddler)$]tags[]tag[$(ThisTagType)$]]' template="$:/core/ui/TagTemplate" storyview="pop"/>
+
+</div>
+</$reveal>
+\end

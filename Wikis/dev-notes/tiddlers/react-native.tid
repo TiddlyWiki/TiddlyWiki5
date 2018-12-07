@@ -1,6 +1,9 @@
 color: #000000
 created: 20181207180447662
-modified: 20181207180449727
+data-darkreader-inline-color: 
+modified: 20181207210621452
+style: --darkreader-inline-color:#000000;
+tags: topic
 title: react-native
 type: text/vnd.tiddlywiki
 
