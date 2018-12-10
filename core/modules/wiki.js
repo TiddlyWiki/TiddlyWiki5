@@ -101,7 +101,7 @@ exports.deleteTextReference = function(textRef,currTiddlerTitle) {
 exports.addEventListener = function(type,listener) {
 	this.eventListeners = this.eventListeners || {};
 	this.eventListeners[type] = this.eventListeners[type]  || [];
-	this.eventListeners[type].push(listener);
+	this.eventListeners[type].push(listener);	
 };
 
 exports.removeEventListener = function(type,listener) {
@@ -186,8 +186,8 @@ exports.generateNewTitle = function(baseTitle,options) {
 	var c = 0,
 		title = baseTitle;
 	while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
-		title = baseTitle +
-			(options.prefix || " ") +
+		title = baseTitle + 
+			(options.prefix || " ") + 
 			(++c);
 	}
 	return title;
@@ -203,7 +203,7 @@ exports.isTemporaryTiddler = function(title) {
 
 exports.isImageTiddler = function(title) {
 	var tiddler = this.getTiddler(title);
-	if(tiddler) {
+	if(tiddler) {		
 		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"];
 		return !!contentTypeInfo && contentTypeInfo.flags.indexOf("image") !== -1;
 	} else {
@@ -334,7 +334,7 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 	titles.sort(function(a,b) {
 		var x,y,
 			compareNumbers = function(x,y) {
-				var result =
+				var result = 
 					isNaN(x) && !isNaN(y) ? (isDescending ? -1 : 1) :
 					!isNaN(x) && isNaN(y) ? (isDescending ? 1 : -1) :
 											(isDescending ? y - x :  x - y);
@@ -670,7 +670,7 @@ exports.getTiddlerDataCached = function(titleOrTiddler,defaultData) {
 	var self = this,
 		tiddler = titleOrTiddler;
 	if(!(tiddler instanceof $tw.Tiddler)) {
-		tiddler = this.getTiddler(tiddler);
+		tiddler = this.getTiddler(tiddler);	
 	}
 	if(tiddler) {
 		return this.getCacheForTiddler(tiddler.fields.title,"data",function() {
@@ -691,7 +691,7 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 	var tiddler = titleOrTiddler,
 		data;
 	if(!(tiddler instanceof $tw.Tiddler)) {
-		tiddler = this.getTiddler(tiddler);
+		tiddler = this.getTiddler(tiddler);	
 	}
 	if(tiddler && tiddler.fields.text) {
 		switch(tiddler.fields.type) {
@@ -821,7 +821,7 @@ exports.initParsers = function(moduleType) {
 			if(!$tw.utils.hop($tw.Wiki.parsers,type) && $tw.config.contentTypeInfo[type].encoding === "base64") {
 				$tw.Wiki.parsers[type] = $tw.Wiki.parsers["application/octet-stream"];
 			}
-		});
+		});		
 	}
 };
 
@@ -885,7 +885,7 @@ exports.parseTextReference = function(title,field,index,options) {
 	}
 	if(field === "text" || (!field && !index)) {
 		if(tiddler && tiddler.fields) {
-			return this.parseText(tiddler.fields.type,tiddler.fields.text,options);
+			return this.parseText(tiddler.fields.type,tiddler.fields.text,options);			
 		} else {
 			return null;
 		}
@@ -1083,7 +1083,7 @@ exports.search = function(text,options) {
 		searchTermsRegExps = [new RegExp("(" + terms.join("\\s+") + ")",flags)];
 	} else if(options.regexp) {
 		try {
-			searchTermsRegExps = [new RegExp("(" + text + ")",flags)];
+			searchTermsRegExps = [new RegExp("(" + text + ")",flags)];			
 		} catch(e) {
 			searchTermsRegExps = null;
 			console.log("Regexp error parsing /(" + text + ")/" + flags + ": ",e);
@@ -1105,7 +1105,7 @@ exports.search = function(text,options) {
 		if($tw.utils.isArray(options.field)) {
 			$tw.utils.each(options.field,function(fieldName) {
 				if(fieldName) {
-					fields.push(fieldName);
+					fields.push(fieldName);					
 				}
 			});
 		} else {
