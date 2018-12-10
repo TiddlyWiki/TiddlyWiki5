@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 <<.from-version "5.1.16">>
 
-The ~TiddlyWiki core adds several `attributes` to the rendered content. With those attributes it's possible to apply custom styles to the tiddler content. 
+The ~TiddlyWiki core adds several `attributes` to the rendered content. These make it possible to apply custom styles to tiddlers. 
 
 For example this tiddler is tagged: <<tag "How to apply custom styles">> and <<tag "example-test">> so the attribute looks like this: 
 
@@ -16,11 +16,11 @@ For example this tiddler is tagged: <<tag "How to apply custom styles">> and <<t
 data-tags="[[How to apply custom styles]] example-test"
 ```
 
-''Important:'' Tiddler tags are ''not'' sorted, so the order in the rendered output may be different!
+''Important:'' Tiddler tags are ''not'' sorted so the order in the rendered output may be different!
 
 !! Examples
 
-The following CSS is defined in [[Custom data-styles]] and creates a pink border for exactly this tiddler.
+The following CSS is defined in [[Custom data-styles]] and creates a pink border for all tiddlers (including this one) tagged with `example-test`.
 
 ```
 [data-tags*="example-test"] {
@@ -32,7 +32,7 @@ The following CSS is defined in [[Custom data-styles]] and creates a pink border
 
 So to display tiddlers tagged: `data-tags-styles` in a decent way we can use the following code. (I could have used: `$:/tags/Stylesheet`, but that would affect all stylesheets in this wiki, which is not intended. amt ;)
 
-''Important:'' Don't forget the `.tc.tiddler.body`, otherwise the whole tiddler, including the title will be changed! see: [[Custom data-styles]]
+''Important:'' Don't forget to also specify `.tc-tiddler-body` or the whole tiddler, including the title, will be changed! see: [[Custom data-styles]]
 
 ```
 [data-tags*="data-tags-styles"] .tc-tiddler-body {
@@ -53,7 +53,7 @@ So to display tiddlers tagged: `data-tags-styles` in a decent way we can use the
 
 !! Hard Linebreaks
 
-This mechanism may be handy for users, who want to write prose text! see: [[Hard Linebreaks with CSS]]
+This mechanism may be handy for users who want to write prose text! See: [[Hard Linebreaks with CSS]]
 
 !! More Possibilities
 

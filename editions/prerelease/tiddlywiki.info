@@ -1,7 +1,6 @@
 {
 	"description": "Content for the current prerelease",
 	"plugins": [
-		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/help",
@@ -10,7 +9,6 @@
 		"tiddlywiki/internals",
 		"tiddlywiki/highlight",
 		"tiddlywiki/markdown",
-		"tiddlywiki/qrcode",
 		"tiddlywiki/bibtex",
 		"tiddlywiki/savetrail",
 		"tiddlywiki/external-attachments",

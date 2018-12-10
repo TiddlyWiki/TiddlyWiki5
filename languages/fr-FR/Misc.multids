@@ -55,8 +55,7 @@ Manager/Item/RawText: Texte brut
 Manager/Item/Tags: Tags
 Manager/Item/Tools: Outils
 Manager/Item/WikifiedText: Texte wikifié
-MissingTiddler/Hint: Le tiddler « <$text text=<<currentTiddler>>/> » est manquant
-- cliquez sur {{||$:/core/ui/Buttons/edit}} pour le créer
+MissingTiddler/Hint: Le tiddler « <$text text=<<currentTiddler>>/> » est manquant -- cliquez sur {{||$:/core/ui/Buttons/edit}} pour le créer
 No: Non
 OfficialPluginLibrary: Bibliothèque officielle des plugins ~TiddlyWiki
 OfficialPluginLibrary/Hint: La bibliothèque officielle des plugins ~TiddlyWiki sur tiddlywiki.com. Plugins, thèmes et packs pour les différentes langues sont maintenus par l'équipe responsable du noyau.

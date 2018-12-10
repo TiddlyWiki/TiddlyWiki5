@@ -3,19 +3,8 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/new-journal-button}} {{$:/language/Buttons/NewJournal/Caption}}
 description: {{$:/language/Buttons/NewJournal/Hint}}
 
-\define journalActions()
-<$wikify name="journalTitle" text="""<$macrocall $name="now" format=<<journalTitleTemplate>>/>""">
-<$reveal type="nomatch" state=<<journalTitle>> text="">
-<$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<journalTags>> text={{{ [<journalTitle>get[]] }}}/>
-</$reveal>
-<$reveal type="match" state=<<journalTitle>> text="">
-<$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<journalTags>> text=<<journalText>>/>
-</$reveal>
-</$wikify>
-\end
-
 \define journalButton()
-<$button tooltip={{$:/language/Buttons/NewJournal/Hint}} aria-label={{$:/language/Buttons/NewJournal/Caption}} class=<<tv-config-toolbar-class>> actions=<<journalActions>>>
+<$button tooltip={{$:/language/Buttons/NewJournal/Hint}} aria-label={{$:/language/Buttons/NewJournal/Caption}} class=<<tv-config-toolbar-class>> actions={{$:/core/ui/Actions/new-journal}}>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/new-journal-button}}
 </$list>
@@ -24,8 +13,4 @@ description: {{$:/language/Buttons/NewJournal/Hint}}
 </$list>
 </$button>
 \end
-<$set name="journalTitleTemplate" value={{$:/config/NewJournal/Title}}>
-<$set name="journalTags" value={{$:/config/NewJournal/Tags}}>
-<$set name="journalText" value={{$:/config/NewJournal/Text}}>
 <<journalButton>>
-</$set></$set></$set>

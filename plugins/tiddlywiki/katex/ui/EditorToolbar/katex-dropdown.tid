@@ -51,3 +51,5 @@ title: $:/plugins/tiddlywiki/katex/ui/EditorToolbar/katex-dropdown
 </$button>
 
 [ext[KaTeX functions catalogue|https://khan.github.io/KaTeX/function-support.html]]
+
+[ext[Chemical equations reference|https://mhchem.github.io/MathJax-mhchem/]]

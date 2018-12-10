@@ -134,6 +134,12 @@ exports.makeDraggable = function(options) {
 
 exports.importDataTransfer = function(dataTransfer,fallbackTitle,callback) {
 	// Try each provided data type in turn
+	if($tw.log.IMPORT) {
+		console.log("Available data types:");
+		for(var type=0; type<dataTransfer.types.length; type++) {
+			console.log("type",dataTransfer.types[type],dataTransfer.getData(dataTransfer.types[type]))
+		}
+	}
 	for(var t=0; t<importDataTypes.length; t++) {
 		if(!$tw.browser.isIE || importDataTypes[t].IECompatible) {
 			// Get the data

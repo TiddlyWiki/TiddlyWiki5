@@ -1,5 +1,5 @@
 created: 20140126125259638
-modified: 20171113161541234
+modified: 20171118195316103
 tags: Definitions Platforms
 title: TiddlyDesktop
 type: text/vnd.tiddlywiki
@@ -16,4 +16,4 @@ TiddlyDesktop is based on the OpenSource project [[NW.js]]. The source is on Git
 
 https://github.com/Jermolene/TiddlyDesktop/
 
-See [[TiddlyDesktop Releases]]
+See [[TiddlyDesktop Releases]] and [[How to Customize TiddlyDesktop]]

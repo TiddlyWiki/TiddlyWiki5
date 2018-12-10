@@ -1,13 +1,13 @@
 title: $:/language/EditTemplate/
 
 Body/External/Hint: Aquest és un tiddler extern desat fora del fitxer del TiddlyWiki principal. Podeu editar les etiquetes i camps però no podeu editar directament el seu contingut
-Body/Placeholder: Escribiu el text per aquest tiddler
+Body/Placeholder: Escriviu el text per aquest tiddler
 Field/Remove/Caption: suprimeix el camp
 Field/Remove/Hint: Suprimeix el camp
 Fields/Add/Button: afegeix
 Fields/Add/Name/Placeholder: nom del camp
 Fields/Add/Prompt: Afegeix un nou camp
-Fields/Add/Value/Placeholder: valos del camp
+Fields/Add/Value/Placeholder: valors del camp
 Shadow/OverriddenWarning: Aquest és un tiddler ombra modificat. Podeu restablir la versió per omisió suprimint aquest tiddler
 Shadow/Warning: Aquest és un tiddler ombra. Qualsevol canvi sobreescriurà la versió per omisió
 Tags/Add/Button: afegeix

@@ -1,6 +1,6 @@
 title: $:/core/ui/PageStylesheet
 
-<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
 
 <$set name="currentTiddler" value={{$:/language}}>
 
@@ -13,5 +13,3 @@ title: $:/core/ui/PageStylesheet
 </$set>
 
 </$set>
-
-</$importvariables>

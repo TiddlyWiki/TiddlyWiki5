@@ -71,6 +71,7 @@ KeyboardWidget.prototype.dispatchMessage = function(event) {
 Compute the internal state of the widget
 */
 KeyboardWidget.prototype.execute = function() {
+	var self = this;
 	// Get attributes
 	this.actions = this.getAttribute("actions");
 	this.message = this.getAttribute("message");
@@ -79,6 +80,13 @@ KeyboardWidget.prototype.execute = function() {
 	this.tag = this.getAttribute("tag");
 	this.keyInfoArray = $tw.keyboardManager.parseKeyDescriptors(this.key);
 	this["class"] = this.getAttribute("class");
+	if(this.key.substr(0,2) === "((" && this.key.substr(-2,2) === "))") {
+		this.shortcutTiddlers = [];
+		var name = this.key.substring(2,this.key.length -2);
+		$tw.utils.each($tw.keyboardManager.lookupNames,function(platformDescriptor) {
+			self.shortcutTiddlers.push("$:/config/" + platformDescriptor + "/" + name);
+		});
+	}
 	// Make child widgets
 	this.makeChildWidgets();
 };
@@ -91,6 +99,10 @@ KeyboardWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.message || changedAttributes.param || changedAttributes.key || changedAttributes["class"] || changedAttributes.tag) {
 		this.refreshSelf();
 		return true;
+	}
+	// Update the keyInfoArray if one of its shortcut-config-tiddlers has changed
+	if(this.shortcutTiddlers && $tw.utils.hopArray(changedTiddlers,this.shortcutTiddlers)) {
+		this.keyInfoArray = $tw.keyboardManager.parseKeyDescriptors(this.key);
 	}
 	return this.refreshChildren(changedTiddlers);
 };

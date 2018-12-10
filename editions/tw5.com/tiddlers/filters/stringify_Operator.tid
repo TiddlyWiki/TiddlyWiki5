@@ -15,7 +15,7 @@ The following substitutions are made:
 
 |!Character |!Replacement |
 |`\` |`\\` |
-|`"` |`\\` |
+|`"` |`\"` |
 |`\r` (carriage return) |`\\r` |
 |`\n` (line feed) |`\\n` |
 |`\x08` (backspace) |`\\b` |

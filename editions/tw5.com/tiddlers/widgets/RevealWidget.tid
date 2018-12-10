@@ -1,7 +1,7 @@
 caption: reveal
 created: 20131024141900000
 jeremy: tiddlywiki
-modified: 20161216153618769
+modified: 20181007231748909
 tags: Widgets
 title: RevealWidget
 type: text/vnd.tiddlywiki
@@ -25,17 +25,23 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 
 |!Attribute |!Description |
 |state |A TextReference containing the state |
+|stateTitle |A title containing the state, ''without'' TextReference. Gets preferred over the <<.attr state>> attribute |
+|stateField |A ''field name'' which is used to look for the state, if the attribute <<.attr stateTitle>> is present |
+|stateIndex |An ''index'' which is used to look for the state, if the attribute <<.attr stateTitle>> is present |
 |tag |Overrides the default HTML element tag (`<div>` in block mode or `<span>` in inline mode) |
 |type |The type of matching performed: ''match'', ''nomatch'', ''popup'', ''lt'', ''gt'', ''lteq'' or ''gteq'' |
-|text |The text to match when the type is ''match'' and ''nomatch'' |
+|text |The text to match when the type is ''match'', ''nomatch'', ''lt'', ''gt'', ''lteq'' or ''gteq'' |
 |class |An optional CSS class name to be assigned to the HTML element<br/>&raquo; Set to `tc-popup-keep` to make a popup "sticky", so it won't close when you click inside of it|
 |style |An optional CSS style attribute to be assigned to the HTML element |
 |position |The position used for the popup when the type is ''popup''. Can be ''left'', ''above'', ''aboveright'', ''right'', ''belowleft'' or ''below'' |
 |default |Default value to use when the state tiddler is missing |
 |animate |Set to "yes" to animate opening and closure (defaults to "no") |
-|retain |Set to "yes" to force the content to be retained even when hidden (defaults to "no")|
+|retain |Set to "yes" to force the content to be retained even when hidden (defaults to "no") |
 
-Retaining the content when hidden can give poor performance since the hidden content requires refresh processing even though it is not displayed. On the other hand, the content can be revealed much more quickly. Note that setting ''animate="yes"'' will also force ''retain="yes"''.
+<<.tip """<$macrocall $name=".from-version" version="5.1.18"/> <$macrocall $name=".attr" _="stateTitle"/>, <$macrocall $name=".attr" _="stateField"/> and <$macrocall $name=".attr" _="stateIndex"/> attributes allow specifying Tiddler states ''directly'', without interpreting them as [[TextReferences|TextReference]].
+This is useful for edge-cases where titles may contain characters that are used to denote Tiddler fields or indices (`!!`, `##`)""">>
+
+<<.tip """Retaining the content when hidden can give poor performance since the hidden content requires refresh processing even though it is not displayed. On the other hand, the content can be revealed much more quickly. Note that setting ''animate="yes"'' will also force ''retain="yes"''""">>
 
 ! Examples
 
