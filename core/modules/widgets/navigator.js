@@ -485,7 +485,8 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 // Import JSON tiddlers into a pending import tiddler
 NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	// Get the tiddlers
-	var tiddlers = [];
+	var tiddlers = [],
+		warning = [];
 	try {
 		tiddlers = JSON.parse(event.param);
 	} catch(e) {
@@ -506,10 +507,26 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 		tiddlerFields.title = $tw.utils.trim(tiddlerFields.title);
 		var title = tiddlerFields.title;
 		if(title) {
+			if(title.indexOf('$:/core/') === 0) {
+				warning.push(title);
+			}
 			incomingTiddlers.push(title);
 			importData.tiddlers[title] = tiddlerFields;
 		}
 	});
+	// Show warning about risky tiddlers
+	if(warning.length) {
+		var titles = [];
+		$tw.utils.each(warning,function(title) {
+			titles.push(title);
+		});
+		var logger = new $tw.utils.Logger("import");
+		logger.alert($tw.language.getString(
+			"Import/Warning/Core",
+			{variables: {
+			"titles": titles.join(", "),
+		}}));
+	}
 	// Give the active upgrader modules a chance to process the incoming tiddlers
 	var messages = this.wiki.invokeUpgraders(incomingTiddlers,importData.tiddlers);
 	$tw.utils.each(messages,function(message,title) {

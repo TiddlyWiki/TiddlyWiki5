@@ -19,3 +19,4 @@ Upgrader/Plugins/Upgraded: Upgraded plugin from <<incoming>> to <<upgraded>>
 Upgrader/State/Suppressed: Blocked temporary state tiddler
 Upgrader/System/Suppressed: Blocked system tiddler
 Upgrader/ThemeTweaks/Created: Migrated theme tweak from <$text text=<<from>>/>
+Warning/Core: You are about importing risky tiddlers (<<titles>>). It is strongly recommend in the strongest terms NOT to use any hack that requires overwriting a core module, because it is likely to make the system unusable. Never import such tiddlers into an important wiki, just into a testing environment!
