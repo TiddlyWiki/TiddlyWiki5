@@ -1,17 +1,19 @@
 created: 20181207174404247
-modified: 20181207220705589
+modified: 20181210153555768
 tags: meta-topic meta
 title: Tag System
 type: text/vnd.tiddlywiki
 
-The [[Tag system]] describes at the highest level with __E__ntity and __Q__uality tags.
-These Entities and Qualities may have sub-types.
+The [[Tag system]] describes at the highest level with ''__E__ntity'' and ''__Q__uality'' tags.
+The system treats entities (''__E__'') as nodes of a graph,  while qualities (''__Q__'') are edges (see [[Graph Theory|https://en.wikipedia.org/wiki/Graph_theory#Linguistics]])
+
+For example: The E: //Article//
 
 `${Entity}` tags
 
 <<list-links filter:"[tag[tag-system-type]]">>
 
-`${Entity}-subType`
+`${Entity}-subType` is 
 
 <<list-links filter:"[tag[]tag[isTagType]]">>
 
