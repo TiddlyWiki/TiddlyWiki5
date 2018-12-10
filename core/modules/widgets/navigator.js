@@ -125,8 +125,8 @@ title: a title string or an array of title strings
 fromPageRect: page coordinates of the origin of the navigation
 */
 NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
-	this.wiki.setText(this.historyTitle,"focus-tiddler",undefined,title);
 	this.wiki.addToHistory(title,fromPageRect,this.historyTitle);
+	this.wiki.setText(this.historyTitle,"focus-tiddler",undefined,title);
 };
 
 NavigatorWidget.prototype.findAdjacentStoryTiddler = function(title,storyList) {
