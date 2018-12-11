@@ -1,5 +1,5 @@
 created: 20150319034848355
-modified: 20181207210541613
+modified: 20181211192736200
 tags: $:/tags/Macro
 title: Table Macros
 type: text/vnd.tiddlywiki
@@ -384,7 +384,7 @@ $:/state/tables/Sort/$(RowOrColumn)$/$(FieldsList)$
     </th>
     <$list filter=<<FieldsList>> variable=ThisField>
       <td>
-        <<TableMacrosInlineEditButton>>
+        <<TableMacrosInlineNoEditButton>>
       </td>
     </$list>
 
@@ -394,13 +394,21 @@ $:/state/tables/Sort/$(RowOrColumn)$/$(FieldsList)$
       </td>
     </$list>
 
+    <$list filter=<<NodeTagsList>> variable=ThisNodeTag>
+      <td>
+        <<TableMacrosInlineNodeTagsOfNodeTiddler>>
+      </td>
+    </$list>
+
   </tr>
 </$list>
 \end
 
 \define TableMacrosInnerRowTable()
 <$set name=FieldsList1 filter='$(RowList)$+[fields[]]-[[text]]-[[title]]-[[modified]]-[[created]]-[[tags]]'>
-<$set name=FieldsList filter='[is[system]!is[system]]$(FieldsUsed)$' emptyValue=<<FieldsList1>>><$set name=TagsTypeList filter='[is[system]!is[system]]$(TagTypesUsed)$' emptyValue='-'>
+<$set name=FieldsList filter='[is[system]!is[system]]$(FieldsUsed)$' emptyValue=<<FieldsList1>>>
+<$set name=TagsTypeList filter='[is[system]!is[system]]$(TagTypesUsed)$' emptyValue='-'>
+<$set name=NodeTagsList filter='[is[system]!is[system]]$(NodeTagsUsed)$' emptyValue='-'>
 <$set name=RowOrColumn value=Row>
 <$set name=TableSortState value=<<TableMacrosMakeTableSortState>>>
   <table>
@@ -414,6 +422,11 @@ $:/state/tables/Sort/$(RowOrColumn)$/$(FieldsList)$
         </th>
       </$list>
       <$list filter=<<TagsTypeList>>>
+        <th>
+          <$button class='tc-btn-invisible' set=<<TableMacrosMakeTableSortStateTiddler>> setTo=<<currentTiddler>>><<currentTiddler>></$button>
+        </th>
+      </$list>
+      <$list filter=<<NodeTagsList>>>
         <th>
           <$button class='tc-btn-invisible' set=<<TableMacrosMakeTableSortStateTiddler>> setTo=<<currentTiddler>>><<currentTiddler>></$button>
         </th>
@@ -437,10 +450,11 @@ $:/state/tables/Sort/$(RowOrColumn)$/$(FieldsList)$
 </$set>
 \end
 
-\define RowTable(filter fields tagtypes)
+\define RowTable(filter fields tagtypes nodetags)
 <$set name='RowList' value='$filter$'>
 <$set name='FieldsUsed' value='$fields$'>
 <$set name='TagTypesUsed' value='$tagtypes$'>
+<$set name='NodeTagsUsed' value='$nodetags$'>
 
 <<TableMacrosInnerRowTable>>
 
@@ -457,6 +471,16 @@ $:/state/tables/Sort/$(RowOrColumn)$/$(FieldsList)$
 <$reveal type='match' state="""$:/temp/edit/$(ThisTiddler)$/$(ThisField)$""" text='edit'>
 <$button set="""$:/temp/edit/$(ThisTiddler)$/$(ThisField)$""" setTo=noedit>{{$:/core/images/done-button}}</$button>
 <$edit-text tiddler=<<ThisTiddler>> field=<<ThisField>> size=1/>
+</$reveal>
+\end
+
+\define TableMacrosInlineNodeTagsOfNodeTiddler()
+<$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
+<div class="tc-tags-wrapper">
+
+<$list filter='[tag[$(ThisTiddler)$]tag[$(ThisNodeTag)$]]' storyview="pop"/>
+
+</div>
 </$reveal>
 \end
 

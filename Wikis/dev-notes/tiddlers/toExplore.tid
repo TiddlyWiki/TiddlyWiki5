@@ -1,7 +1,10 @@
 color: #0433ff
 created: 20181207172002992
-modified: 20181207181849389
-tags: purpose tag-system
-title: toExplore
+data-darkreader-inline-color: 
+list: 
+modified: 20181211195604338
+style: --darkreader-inline-color:#0016e2;
+tags: Purpose tag-system
+title: ToExplore
 type: text/vnd.tiddlywiki
 

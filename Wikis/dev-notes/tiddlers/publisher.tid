@@ -1,0 +1,6 @@
+created: 20181210185356081
+modified: 20181210185449154
+title: publisher
+type: text/vnd.tiddlywiki
+
+Field representing publisher of an [[Article]], such as an independent Author's site, a channel on Medium, or the domain/brand of a blog.

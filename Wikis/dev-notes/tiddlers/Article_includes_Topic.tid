@@ -1,0 +1,9 @@
+created: 20181211163234447
+edge_longform_for: Topic_#000000
+edge_shorthand_for: Article>includes>Topic
+modified: 20181211163556597
+tags: Edge
+title: Article>includes>Topic
+type: text/vnd.tiddlywiki
+
+edge_shorthand_for: {{!!edge_longform_for}}

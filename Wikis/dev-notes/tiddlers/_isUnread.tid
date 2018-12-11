@@ -1,9 +1,10 @@
 color: #01b124
-created: 20181207171845469
+created: 20181207172153207
 data-darkreader-inline-color: 
-modified: 20181207215519679
+list: 
+modified: 20181211160337224
 style: --darkreader-inline-color:#009209;
-tags: Article-tagType tag-system-type
-title: articleState
+tags: Article_property
+title: _isUnread
 type: text/vnd.tiddlywiki
 

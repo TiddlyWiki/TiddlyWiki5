@@ -1,0 +1,8 @@
+created: 20181211171204073
+edge_longform_for: Purpose_#0433ff
+modified: 20181211171234517
+tags: Edge
+title: Node>has>Purpose
+type: text/vnd.tiddlywiki
+
+edge_shorthand_for: {{!!edge_longform_for}}

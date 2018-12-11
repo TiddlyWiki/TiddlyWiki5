@@ -1,0 +1,6 @@
+created: 20181210185233767
+modified: 20181210185351132
+title: source
+type: text/vnd.tiddlywiki
+
+A field on [[Article]] entities, representing URL of the Article.

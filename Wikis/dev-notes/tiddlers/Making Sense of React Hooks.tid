@@ -1,9 +1,10 @@
 created: 20181207181715861
-modified: 20181207214429452
+list: 
+modified: 20181211180241363
 publisher: Dan Abramov
 released: 10/30/2018
 source: https://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889
-tags: toReference toExplore react-hooks isUnread Article
+tags: ToReference ToExplore React-Hooks _isUnread Article
 title: Making Sense of React Hooks
 type: text/vnd.tiddlywiki
 

@@ -1,0 +1,10 @@
+created: 20181211171103671
+edge_shorthand_for: Node>has>Purpose
+modified: 20181211171156379
+tags: Edge_shorthand
+title: Purpose_#0433ff
+type: text/vnd.tiddlywiki
+
+WIP
+
+* format as `${N}.has:${Purpose}` or as #0433ff `${Purpose}` tag template

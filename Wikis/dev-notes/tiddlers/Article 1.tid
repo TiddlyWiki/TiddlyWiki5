@@ -1,6 +1,24 @@
 color: #005010
 created: 20181207175910555
-modified: 20181207175936373
+list: [[5 Ways to Style React Components in 2019]] [[How to Build an Augmented Images Application with ARCore]] [[How to solve any problem?]] [[Incremental reading]] [[Making Sense of React Hooks]] [[Updating Your React Native App]]
+modified: 20181211162924565
+tags: Node
 title: Article
 type: text/vnd.tiddlywiki
 
+What makes a node an Article, includes: 
+
+* containing fields:
+** [[source]]
+** [[publisher]]
+** [[released]]
+
+Additionally, the content of the 'Article' entity nodes may contain:
+
+* plain text notes specific to the Article instance
+** ideally these are minimal
+* unstructured or semi-structured graph data
+** via links within the card's content
+* highly structured graph data
+** such as use of [[Topic]] tags, which represent a consistent edge type between the Article instance and a Topic node
+*** this //consistent edge type// representation is known as an [[Edge_shorthand]], in this instance the [[Article>includes>Topic]]
