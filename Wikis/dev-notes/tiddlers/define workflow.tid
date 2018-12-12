@@ -5,8 +5,10 @@ gsd_project: Incremental reading workflow
 gsd_realm: all
 gsd_status: next
 gsd_type: action
-modified: 20181210150205711
+modified: 20181212170722262
 title: define workflow
 type: text/vnd.tiddlywiki
 
-[[Incremental reading]]
+[[Incremental reading]] of [[Prioritized Articles]]
+
+[[Cloze Generation]] of [[Prioritized Clozes]]

@@ -1,6 +1,6 @@
 created: 20181207181715861
 list: 
-modified: 20181211180241363
+modified: 20181212201828966
 publisher: Dan Abramov
 released: 10/30/2018
 source: https://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889
@@ -8,3 +8,17 @@ tags: ToReference ToExplore React-Hooks _isUnread Article
 title: Making Sense of React Hooks
 type: text/vnd.tiddlywiki
 
+Purposes tagged {{!!title}}<<list-links filter:'[tag[React-Hooks]tag[Purpose]]' >>
+
+<div>
+<img style="width:45%" src="https://pbs.twimg.com/media/DqnGs6yWwAAYPXp.jpg">
+<img style="width:45%" src="https://pbs.twimg.com/media/DqnGuEnWsAAt1Xt.jpg">
+</div>
+
+<div>
+<img style="width:45%" src="https://cdn-images-1.medium.com/max/640/1*9QhpwSGTKM-c8sc4UNcxqA.png">
+<img style="width:45%" src="https://cdn-images-1.medium.com/max/640/1*j8U3U0nZvmEKJrSOK7iH5g.png">
+</div>
+the ''built-in React Hooks like `useState` and `useEffect`'' serve as the basic building blocks. We can use them from our components directly, or we can combine them into ''custom Hooks like `useWindowWidth`''. 
+
+[[custom React-Hooks (examples)]]

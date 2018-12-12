@@ -1,0 +1,12 @@
+created: 20181212200444250
+modified: 20181212201707199
+tags: [[custom React-Hooks (examples)]]
+title: useTimeMachine(...)
+type: text/vnd.tiddlywiki
+
+const [state, setState, timeMachine] = useTimeMachine(...)
+
+// render timeMachine to see intermediate state values and navigate back and forth between them
+
+---
+time travel for any primitive value during render: https://codesandbox.io/s/9j29j6qqp4

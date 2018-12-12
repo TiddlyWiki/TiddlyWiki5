@@ -5,9 +5,9 @@
   "main": "index.js",  
   "scripts": {
     "dev-notes:run:lan": "tiddlywiki ./dev-notes --listen host=0.0.0.0 port=9292",
-    "dev-notes:run": "tiddlywiki ./dev-notes --listen",
+    "dev-notes:run": "tiddlywiki ./dev-notes --listen port=8083",
     "dev-notes:build": "tiddlywiki ./dev-notes --build index",
-    "portfolio:run": "tiddlywiki ./portfolio --listen port=8081",
+    "portfolio:run": "tiddlywiki ./portfolio --listen port=8084",
     "portfolio:build": "tiddlywiki ./portfolio --build index"
   },
   "author": "",

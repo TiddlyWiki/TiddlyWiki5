@@ -1,0 +1,11 @@
+color: #0433ff
+created: 20181211194316238
+data-darkreader-inline-color: 
+modified: 20181212172144918
+style: --darkreader-inline-color:#0016e2;
+tags: React-Hooks Purpose
+title: structures logic into isolated units for reuse within components
+type: text/vnd.tiddlywiki
+
+`{{c1::React-Hooks::pattern}} structures {{c2::logic}} into isolated units for reuse within {{c3::components}}`
+

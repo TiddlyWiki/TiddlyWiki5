@@ -1,0 +1,10 @@
+color: #0433ff
+created: 20181212193849190
+data-darkreader-inline-color: 
+modified: 20181212194013450
+style: --darkreader-inline-color:#0016e2;
+tags: React-Hooks Purpose
+title: make components truly declarative even if they contain state and side effects
+type: text/vnd.tiddlywiki
+
+`{{c1::React-Hooks::pattern}} make components truly declarative even if they contain {{c2::state and side effects::___ or ___}}

@@ -1,0 +1,10 @@
+color: #0433ff
+created: 20181212164235213
+data-darkreader-inline-color: 
+modified: 20181212172249487
+style: --darkreader-inline-color:#0016e2;
+tags: React-Hooks Purpose
+title: use functions always, instead of deciding between: functions, classes, higher-order components, and render props.
+type: text/vnd.tiddlywiki
+
+`{{c1::React-Hooks::pattern}} (serve the purpose to) Always use functions instead of deciding between: functions, {{c2::classes, higher-order components, and render props.::three alternative React patterns}}`

@@ -1,8 +1,0 @@
-color: #0433ff
-created: 20181211193840999
-modified: 20181211194730334
-tags: React-Hooks Purpose
-title: Split one component into smaller functions based on what pieces are related
-type: text/vnd.tiddlywiki
-
- (such as setting up a subscription or fetching data)

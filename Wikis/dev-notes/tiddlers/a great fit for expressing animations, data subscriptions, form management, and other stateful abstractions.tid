@@ -1,0 +1,11 @@
+color: #0433ff
+created: 20181212201906667
+data-darkreader-inline-color: 
+modified: 20181212201956822
+style: --darkreader-inline-color:#0016e2;
+tags: React-Hooks Purpose
+title: a great fit for expressing animations, data subscriptions, form management, and other stateful abstractions
+type: text/vnd.tiddlywiki
+
+`{{c1::React-Hooks::pattern}} a great fit for expressing animations, data subscriptions, form management, and other {{c2::stateful}} abstractions`
+

@@ -1,0 +1,29 @@
+created: 20181212171037067
+modified: 20181212171314586
+tags: meta WIP
+title: test cloze generation from tags of Topic tagged Purpose
+type: text/vnd.tiddlywiki
+
+example from [[React-Hooks]]
+
+`Purposes tagged {{!!title}}<<list-links filter:'[tag[React-Hooks]tag[Purpose]]' >>`
+
+---
+`// loop Purpose(s) tagged $(titleOfTopic)$`
+
+```
+{{c1::
+$(titleOfTopic)$
+::
+$(optionalTopicClassHint)$
+}}
+```
+```
+ fulfill the purpose of 
+{{Purpose[i]!!title}}*
+
+// *if c2 field, 
+// store substring to $(c2)$, 
+// find & replace substring !!title like
+// titleBeginning + {{c2::$(c2)$::$(c2Hint)$}} + titleEnding
+```
