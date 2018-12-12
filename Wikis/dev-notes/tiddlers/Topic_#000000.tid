@@ -1,0 +1,23 @@
+created: 20181211162547317
+edge_shorthand_for: Article>includes>Topic
+modified: 20181211172910707
+tags: Edge_shorthand
+title: Topic_#000000
+type: text/vnd.tiddlywiki
+
+`<<list-links "[tag[Topic]sort[title]]">>`
+
+<<list-links "[tag[Topic]sort[title]]">>
+
+---
+
+* format as `A.inc:${Topic}` or as black `${Topic}` tag template
+
+---
+I.e.
+
+*N:Article.
+**''>''//''E'':includesTopic://`${Topic}` 
+***= [[includesTopic:React-Hooks]] 
+*** (shorthand) = [[React-Hooks]]
+****where includesTopic is an implicit //''>E''//dge directed from any Article to (''>'') any Topic, in this case [[React-Hooks]]

@@ -1,13 +1,43 @@
 created: 20181207174404247
-modified: 20181207174518095
-tags: meta-topic meta
+modified: 20181211195023483
+tags: WIP meta-topic meta
 title: Tag System
 type: text/vnd.tiddlywiki
 
-The [[Tag system]] includes tags of the following types:
 
-<<list-links filter:"[tag[tag-system-type]]">>
+!!!The [[Tag system]] describes cards at the highest level with ''__N__ode'' and ''__E__dge'' tags.
+ (see [[Graph Theory|https://en.wikipedia.org/wiki/Graph_theory#Linguistics]])
 
-...and includes these tags:
+---
+*`Node` tags <<list-links filter:"[tag[Node]]">>
+*`Edge` tags <<list-links filter:"[tag[Edge]]">>
+**`Edge_shorthand` tags: <<list-links filter:"[tag[Edge_shorthand]]">>
+*Property tags:
+**`Article_property` tags <<list-links filter:"[tag[Article_property]]">>
 
-<<list-links filter:"[tag[tag-system]]">>
+---
+!!! //For example//: The card [[Making Sense of React Hooks]] is a node entity of [[Article]] class...
+
+<<<
+{{Article}}
+<<<
+---
+
+
+[[Making Sense of React Hooks]] has the following tags:
+
+>{{{ [[Making Sense of React Hooks]tags[]sort[]] ||$:/core/ui/TagTemplate}}}
+
+*`Node` tags <<list-links filter:"[[Making Sense of React Hooks]tags[]tag[Node]]">>
+*`Edge` tags <<list-links filter:"[[Making Sense of React Hooks]tags[]tag[]]">>
+**`Edge_shorthand` tags for 
+***//of [[Topic_#000000]]:// <<list-links filter:"[[Making Sense of React Hooks]tags[]tag[Topic]]">>
+***//of [[Purpose_#0433ff]]:// <<list-links filter:"[[Making Sense of React Hooks]tags[]tag[Purpose]]">>
+
+
+*Property tags:
+**`Article_property` tags <<list-links filter:"[[Making Sense of React Hooks]tags[]tag[Article_property]]">>
+
+
+
+

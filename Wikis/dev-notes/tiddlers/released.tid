@@ -1,0 +1,6 @@
+created: 20181210185457399
+modified: 20181210185534111
+title: released
+type: text/vnd.tiddlywiki
+
+A field representing the published date of an [[Article]] in `mm/dd/yyyy` format.

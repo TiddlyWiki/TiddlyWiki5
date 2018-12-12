@@ -1,0 +1,11 @@
+color: #01b124
+created: 20181211160404232
+modified: 20181211172737172
+tags: tag-system
+title: Article_property
+type: text/vnd.tiddlywiki
+
+<<list-links "[tag[Article_property]sort[title]]">>
+
+
+a property of the Article class useful for the tag system. It doesn't represent any connection to another Node at this time. Perhaps it should be an edge if it represented <E:isReadBy:${N.Person}, or a field of Article if the Tag System UI didn't benefit from its representation this way currently.
