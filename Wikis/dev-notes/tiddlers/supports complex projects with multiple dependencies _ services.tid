@@ -1,0 +1,7 @@
+created: 20181213215231745
+modified: 20181213215250673
+tags: Monorepo Purpose
+title: supports complex projects with multiple dependencies / services
+type: text/vnd.tiddlywiki
+
+Continuous integration runs tests against the entire monorepo, so once PR is merged you bump the version of all sub-services and there is no doubt what versions are compatible with each other. Version 1.2 of service A is always compatible with version 1.2 of service B. This is why complex projects with multiple dependencies often use monorepo as well (Babel, React, Angular, Jest). Due to the very same reason, large-scale refactorings are also feasible.

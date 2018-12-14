@@ -1,0 +1,8 @@
+created: 20181213214833204
+modified: 20181213224704537
+tags: Topic Repo-Architecture
+title: Monorepo
+type: text/vnd.tiddlywiki
+
+Purposes tagged {{!!title}}<<list-links filter:'[tag[Monorepo]tag[Purpose]]' >>
+

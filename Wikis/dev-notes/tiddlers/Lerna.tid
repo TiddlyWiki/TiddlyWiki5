@@ -1,0 +1,21 @@
+created: 20181213221831490
+modified: 20181214050739598
+tags: Topic
+title: Lerna
+type: text/vnd.tiddlywiki
+
+Purposes tagged {{!!title}}<<list-links filter:'[tag[Lerna]tag[Purpose]]' >>
+
+
+!!What can Lerna do?
+The two primary commands in Lerna are lerna bootstrap and lerna publish.
+
+bootstrap will link dependencies in the repo together. publish will help publish any updated packages.
+
+https://github.com/lerna/lerna#concepts
+
+Changes in the common package are immediately reflected in the alice app which makes for an excellent developer experience. -- from [[Solve code sharing and setup project with Lerna and monorepo]]
+
+Articles tagged {{!!title}}<<list-links filter:'[tag[Lerna]tag[Article]]' >>
+
+

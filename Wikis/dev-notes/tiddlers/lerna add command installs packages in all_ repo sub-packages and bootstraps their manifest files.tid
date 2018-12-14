@@ -1,0 +1,14 @@
+created: 20181213230818392
+modified: 20181213231343904
+tags: Purpose Lerna
+title: lerna add command installs packages in all* repo sub-packages and bootstraps their manifest files
+type: text/vnd.tiddlywiki
+
+https://github.com/lerna/lerna/tree/master/commands/add#readme
+
+`npx lerna add @yourproject/common` to link common packages to repo sub-packages
+
+
+lerna add respects the --ignore, --scope and --include-filtered-dependencies flags (see Filter Flags: https://www.npmjs.com/package/@lerna/filter-options).
+
+

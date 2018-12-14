@@ -1,0 +1,7 @@
+created: 20181213215345989
+modified: 20181213215438035
+tags: Monorepo Purpose
+title: forces collaboration by encouraging a single root config of all contained repo modules
+type: text/vnd.tiddlywiki
+
+forces collaboration, it encourages having the same coding style by having a single config for your linter/code formatter/module bundler and so on.
