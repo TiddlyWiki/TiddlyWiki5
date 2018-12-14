@@ -1,6 +1,6 @@
 created: 20180218014658009
-modified: 20180513192121261
+modified: 20181214054845493
 title: $:/config/DefaultSidebarTab
 type: text/vnd.tiddlywiki
 
-$:/plugins/gsd5/core/ui/sidebar/review-sidebar
+$:/core/ui/SideBar/More
