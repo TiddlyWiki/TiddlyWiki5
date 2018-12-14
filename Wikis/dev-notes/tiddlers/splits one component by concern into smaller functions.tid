@@ -1,0 +1,10 @@
+color: #0433ff
+created: 20181211193840999
+data-darkreader-inline-color: 
+modified: 20181212172439937
+style: --darkreader-inline-color:#0016e2;
+tags: React-Hooks Purpose
+title: splits one component by concern into smaller functions
+type: text/vnd.tiddlywiki
+
+ (such as setting up a subscription or fetching data)

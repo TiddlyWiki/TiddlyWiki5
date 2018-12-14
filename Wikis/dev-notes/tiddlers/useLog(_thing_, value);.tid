@@ -1,0 +1,9 @@
+created: 20181212200211927
+modified: 20181212200437038
+tags: [[custom React-Hooks (examples)]]
+title: useLog("thing", value);
+type: text/vnd.tiddlywiki
+
+useLog("thing", value);
+
+// Each useLog in currently mounted components is rendered in a list overlay on top of the app. Like a debug panel.

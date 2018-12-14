@@ -1,0 +1,12 @@
+color: #0433ff
+created: 20181212194814046
+data-darkreader-inline-color: 
+modified: 20181212194913689
+style: --darkreader-inline-color:#0016e2;
+tags: React-Hooks Purpose
+title: are NOT a way to share state — but a way to share stateful logic
+type: text/vnd.tiddlywiki
+
+`{{c1::React-Hooks::pattern}} are NOT a way to share state — but a way to share stateful logic`
+
+Hooks are fully encapsulated — each time you call a Hook, it gets isolated local state within the currently executing component.

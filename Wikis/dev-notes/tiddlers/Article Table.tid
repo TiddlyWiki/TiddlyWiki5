@@ -1,5 +1,5 @@
 created: 20181207193433575
-modified: 20181211193141848
+modified: 20181213221939964
 tags: 
 title: Article Table
 type: text/vnd.tiddlywiki
@@ -8,4 +8,4 @@ type: text/vnd.tiddlywiki
 <<RowTable '[tag[Article]]' 'release publisher source' 'Topic Purpose Article_property' '-'>>
 ```
 
-<<RowTable '[tag[Article]]' 'release publisher source' 'Topic Purpose Article_property' '-'>>
+<<RowTable '[tag[Article]]' 'release publisher source' 'Topic Purpose Article_property' ''>>

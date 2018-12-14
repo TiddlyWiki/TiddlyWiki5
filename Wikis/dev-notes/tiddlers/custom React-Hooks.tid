@@ -1,0 +1,53 @@
+created: 20181212202050073
+modified: 20181212204634128
+tags: Topic React-Hooks
+title: custom React-Hooks
+type: text/vnd.tiddlywiki
+
+Examples of {{!!title}} <<list-links filter:'[tag[custom React-Hooks (examples)]]' >>
+
+''React custom Hooks provide functions with a way to declare //__state__// and //__side effects__//. ''
+
+And that’s exactly what built-in Hooks like ''//__useState__//'' and ''//__useEffect__//'' let us do. Documentation: https://reactjs.org/docs/hooks-overview.html
+
+It turns out that these built-in Hooks are also ''sufficient for defining components in general'', as they provide us with all the necessary features like state. 
+
+''This is why we’d like Hooks to become the primary way to define React components in the future.''
+
+it doesn’t make sense to have two different recommended ways (classes, functions + hooks) to write components. 
+
+Hook covers all use cases for classes'' while providing more flexibility in extracting, testing, and reusing code''. This is why Hooks represent our vision for the future of React.
+
+---
+
+Usage constraints: https://reactjs.org/docs/hooks-rules.html
+
+* ''Hooks must be called on the top level of our components''.
+** ''Don’t call Hooks inside loops, conditions, or nested functions.'' Instead, always use Hooks at the top level of your React function. By following this rule, you ensure that Hooks are called in the same order each time a component renders. That’s what allows React to correctly preserve the state of Hooks between multiple useState and useEffect calls.
+**If we want to run an effect conditionally, we can put that condition inside our Hook:
+
+Bad:
+
+```
+  useEffect(function persistForm() {
+  // 🔴 We're breaking the first rule by using a Hook in a condition
+  if (name !== '') {
+    useEffect(function persistForm() {
+      localStorage.setItem('formData', name);
+    });
+  }
+```
+Good
+
+```
+  useEffect(function persistForm() {
+    // 👍 We're not breaking the first rule anymore
+    if (name !== '') {
+      localStorage.setItem('formData', name);
+    }
+  });
+```
+
+Eslint plugin to enforce rules: https://reactjs.org/docs/hooks-rules.html#eslint-plugin
+
+

@@ -1,0 +1,11 @@
+color: #0433ff
+created: 20181212172848301
+data-darkreader-inline-color: 
+modified: 20181212173037812
+style: --darkreader-inline-color:#0016e2;
+tags: React-Hooks Purpose
+title: expose React state, lifecycle, and context methods to functions
+type: text/vnd.tiddlywiki
+
+`{{c1::React-Hooks::pattern}} expose React {{c2::state, lifecycle, and context::three types}} methods to functions`
+

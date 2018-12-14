@@ -1,0 +1,47 @@
+created: 20181213214119261
+list: 
+modified: 20181214052625880
+publisher: Michał Załęcki
+released: 11/19/2018
+source: https://medium.com/@MichalZalecki/solve-code-sharing-and-setup-project-with-lerna-and-monorepo-d0f3e4728809
+source_github: https://github.com/MichalZalecki/lerna-monorepo-example
+tags: WIP Lerna Monorepo _isUnread Repo-Architecture Code-Reuse ToReference ToExplore Article
+title: Solve code sharing and setup project with Lerna and monorepo
+type: text/vnd.tiddlywiki
+
+WIP: add below to [[Article]] header template
+
+|//field//:|source_github|//value//:| {{!!source_github}}|
+
+
+
+
+
+!!Topic: [[Monorepo]]:
+
+
+<<<
+{{Monorepo}}
+<<<
+
+
+!! Error in article:
+ `import Hello from "@yourproject/common/Hello";` should be `".../common/Header";`
+
+!! Deployment of lerna monorepo...
+* it may be required to provide more guidance for your deployment tool or create a custom script 
+*//UNCLEAR--//for example, it may require service to Heroku as you want to separate it from the rest of the project. I solved this using separate Dockerfiles, so it comes down to specifying a different path when running docker build.
+*Example dockerfile: 
+**https://github.com/MichalZalecki/lerna-monorepo-example/blob/master/packages/alice/Dockerfile
+**You can now build the image and run the container. Execute the following commands from the root of the repository.
+**`docker build -t yourproject/alice -f ./packages/alice/Dockerfile .`
+**`docker run --rm -p 8080:80 --name yourproject-alice yourproject/alice`
+
+
+https://github.com/MichalZalecki/lerna-monorepo-example
+
+
+<div>
+<img style="width:45%" src="https://pbs.twimg.com/media/asdf.jpg">
+<img style="width:45%" src="https://pbs.twimg.com/media/asdf.jpg">
+</div>
