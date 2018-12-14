@@ -23,12 +23,20 @@ If no language is specified highlight.js will attempt to automatically detect th
 The plugin includes support for the following languages (referred to as "brushes" by highlight.js):
 
 * apache
+* asciidoc
 * bash
+* cmake
 * coffeescript
 * cpp
 * cs
 * css
 * diff
+* dockerfile
+* erlang
+* fortran
+* go
+* haskell
+* html
 * http
 * ini
 * java
@@ -36,13 +44,16 @@ The plugin includes support for the following languages (referred to as "brushes
 * json
 * makefile
 * markdown
+* matlab
 * nginx
 * objectivec
 * perl
 * php
 * python
 * ruby
+* rust
 * sql
+* typescript
 * xml
 
 You can also specify the language as a MIME content type (eg `text/html` or `text/css`). The mapping is accomplished via mapping tiddlers whose titles start with `$:/config/HighlightPlugin/TypeMappings/`.
