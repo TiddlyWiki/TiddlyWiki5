@@ -10,6 +10,10 @@ type: text/vnd.tiddlywiki
 
 This release consists of fixes for bugs discovered in v5.1.18.
 
+!! Hackability Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a8b8fb3b6f587ee8813cc0bafdc008bf12ecb7d1]] new [[hidden setting for the filename used when saving|Hidden Setting: Filename for Save Wiki Button]]
+
 !! Bug Fixes
 
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/3630]] incompatible change to the construction of filename used for saving
