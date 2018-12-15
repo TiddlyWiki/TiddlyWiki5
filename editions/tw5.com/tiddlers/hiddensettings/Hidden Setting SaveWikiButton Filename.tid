@@ -1,0 +1,13 @@
+created: 20181215154811835
+modified: 20181215154811835
+tags: [[Hidden Settings]]
+title: Hidden Setting: Filename for Save Wiki Button
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.19">> This value is wikified to determine the filename when saving via the "save wiki" page control button.
+
+By default, this setting is empty, which triggers the default handling where the filename portion of the URL is used.
+
+The value `{{$:/SiteTitle}}.html` causes the filename to be constructed from the site title with a `.html` extension.
+
+$:/config/SaveWikiButton/Filename
