@@ -264,6 +264,10 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[search:*:[g]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 	});
 
+	it("should yield search results that have search tokens spread across different fields", function() {
+		expect(wiki.filterTiddlers("[search[fox one]sort[title]]").join(",")).toBe("TiddlerOne");
+	});
+
 	it("should handle the each operator", function() {
 		expect(wiki.filterTiddlers("[each[modifier]sort[title]]").join(",")).toBe("$:/TiddlerTwo,TiddlerOne");
 		expect(wiki.filterTiddlers("[each:list-item[tags]sort[title]]").join(",")).toBe("one,two");
