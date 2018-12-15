@@ -12,7 +12,8 @@ This release consists of fixes for bugs discovered in v5.1.18.
 
 !! Bug Fixes
 
-* 
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/3630]] incompatible change to the construction of filename used for saving
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3640]] problem with fonts for the [[KaTeX Plugin]]
 
 ! Contributors
 
