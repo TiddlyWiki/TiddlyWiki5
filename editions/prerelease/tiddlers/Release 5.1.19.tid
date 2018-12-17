@@ -18,9 +18,14 @@ This release consists of fixes for bugs discovered in v5.1.18.
 
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/3630]] incompatible change to the construction of filename used for saving
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3640]] problem with fonts for the [[KaTeX Plugin]]
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/3647]] problem with forcing basic authentication for the WebServer
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3650]] problem with the ButtonWidget not refreshing when the `popupTitle` attribute changes
+* [[Fixed|https://github.com/Jermolene/build.jermolene.github.io/issues/5]] problem with `empty.html` accidentally containing a splash screen
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3641]] regression with search matches across multiple fields
 
 ! Contributors
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 * [[@BurningTreeC|https://github.com/BurningTreeC]]
+* [[@hoelzro|https://github.com/hoelzro]]
