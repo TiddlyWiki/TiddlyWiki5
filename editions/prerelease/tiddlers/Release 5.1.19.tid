@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.18...v5.1.19]]//
 
-This release consists of fixes for bugs discovered in v5.1.18.
+This release consists of fixes for bugs discovered in [[Release 5.1.18]].
 
 !! Hackability Improvements
 
@@ -27,4 +27,5 @@ This release consists of fixes for bugs discovered in v5.1.18.
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 * [[@BurningTreeC|https://github.com/BurningTreeC]]
+* [[@dlund4|https://github.com/dlund4]]
 * [[@hoelzro|https://github.com/hoelzro]]
