@@ -30,6 +30,9 @@ Unlike conventional online services, TiddlyWiki lets you choose where to keep yo
 <a href="https://github.com/Jermolene/TiddlyWiki5" class="tc-btn-big-green" style="background-color:#444;" target="_blank" rel="noopener noreferrer">
 {{$:/core/images/github}} ~TiddlyWiki on ~GitHub
 </a>
+<a href="https://gitter.im/TiddlyWiki/public" class="tc-btn-big-green" style="background-color:#753a88;background-image:linear-gradient(to left,#cc2b5e,#753a88);" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/gitter}} ~TiddlyWiki on Gitter
+</a>
 </div>
 
 <<<.tc-big-quote
