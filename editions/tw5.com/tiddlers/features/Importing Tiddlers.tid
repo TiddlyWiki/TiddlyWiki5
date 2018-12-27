@@ -8,7 +8,7 @@ You can import tiddlers into a ~TiddlyWiki from external files or directly from 
 
 !! Importing content from external files
 
-There are several ways to import content from external files:
+There are several ways to import content (both text and images) from external files:
 
 * Use the {{$:/core/images/import-button}} ''import'' button (under the ''Tools'' tab in the sidebar) to select a local file
 * Drag and drop files from Windows Explorer or OS X Finder etc. into the TiddlyWiki browser window
