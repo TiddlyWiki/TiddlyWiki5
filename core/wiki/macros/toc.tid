@@ -26,7 +26,7 @@ tags: $:/tags/Macro
 </ol>
 \end
 
-\define toc(tag,sort:"",itemClassFilter:" ")
+\define toc(tag,sort:"",itemClassFilter:" ",exclude)
 <$macrocall $name="toc-body"  tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> />
 \end
 
