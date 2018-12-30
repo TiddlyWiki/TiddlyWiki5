@@ -39,7 +39,7 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create the diff
 	var dmpObject = new dmp.diff_match_patch(),
-		diffs = dmpObject.diff_main(this.getAttribute("source"),this.getAttribute("dest"));
+		diffs = dmpObject.diff_main(this.getAttribute("source", "diff: no source attribute"),this.getAttribute("dest", "diff: no dest attribute"));
 	// Apply required cleanup
 	switch(this.getAttribute("cleanup","semantic")) {
 		case "none":
