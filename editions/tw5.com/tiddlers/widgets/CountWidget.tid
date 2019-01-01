@@ -18,7 +18,10 @@ The content of the `<$count>` widget is ignored.
 ! Example
 
 ```
-There are <$count filter="[tag[Examples]]"/> tiddlers tagged with Examples.
+There are <$count filter="[tag[Examples]]"/> tiddlers tagged with Examples
 ```
+Displays as:
 
-There are <$count filter="[tag[Examples]]"/> tiddlers tagged with Examples.
+<<<
+There are <$count filter="[tag[Examples]]"/> tiddlers tagged with Examples
+<<<
