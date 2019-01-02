@@ -1,11 +1,13 @@
 created: 20181211180430478
-modified: 20181211195346216
+modified: 20190102151013172
 tags: 
 title: Topic Table
 type: text/vnd.tiddlywiki
 
 ```
 <<RowTable '[tag[Topic]]' 'field1 field2 field3' 'tagType1' 'NodeTag1 NodeTag2'>>
+
+<<RowTable '[tag[Topic]]' '-' 'Node Topic' 'Article Purpose'>>
 ```
 
 <<RowTable '[tag[Topic]]' '-' 'Node Topic' 'Article Purpose'>>

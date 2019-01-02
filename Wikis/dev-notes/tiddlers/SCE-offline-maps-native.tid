@@ -1,0 +1,16 @@
+created: 20190102153324272
+modified: 20190102161351323
+tags: SCE-workflow
+title: SCE-offline-maps-native
+type: text/vnd.tiddlywiki
+
+*''Offline''
+** What:
+*** Map tile assets, GPS data, ...?
+** Using...
+*** SQLLite
+**** share DB between apps (if simple)
+*''Maps''
+** add Service to persist GPS data to Redis (& SQL server?) per user (for: sorting other users by distance for sharing WO)
+*''Native''
+** define native todos (mostly offline functionality)

@@ -1,0 +1,13 @@
+created: 20190102150624758
+modified: 20190102152553838
+tags: 
+title: SCE Meeting Notes Table
+type: text/vnd.tiddlywiki
+
+```
+<<RowTable '[tag[Purpose]]' '-' 'Node Topic' 'Article Topic Purpose'>>
+
+\define RowTable(filter fields tagtypes nodetags)
+```
+
+<<RowTable '[tag[MeetingNotes]]' 'description' 'Node' 'Topic Purpose'>>

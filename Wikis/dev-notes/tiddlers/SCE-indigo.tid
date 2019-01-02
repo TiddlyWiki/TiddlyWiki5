@@ -1,0 +1,11 @@
+created: 20190102154859388
+modified: 20190102160248517
+tags: SCE-workflow
+title: SCE-indigo
+type: text/vnd.tiddlywiki
+
+*''Description:'' middleware for..
+*''Todo:''
+** use feathers Redux http://github.com/feathers-plus/feathers-redux to connect from apps
+** define layer-based streaming to app (for offline data)
+**
