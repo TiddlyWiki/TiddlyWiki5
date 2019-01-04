@@ -137,7 +137,7 @@ describe("Tag tests", function() {
 		wiki.addTiddler({ title: "A", text: "", tags: "sortTag"});
 		wiki.addTiddler({ title: "__proto__", text: "", tags: "sortTag", "list-before": ""});
 
-		expect(wiki.filterTiddlers("[tag[sortTag]]").join(',')).toBe("__proto__,A");
+		expect(wiki.filterTiddlers("[tag[sortTag]]").join(',')).toBe("__proto__,A,failed-test");
 	});
 });
 
