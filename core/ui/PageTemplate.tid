@@ -27,7 +27,7 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 
 <$dropzone>
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageTemplate]!has[draft.of]]" variable="listItem">
+<$list filter="[subfilter<tv-pagetemplate>] ~[all[shadows+tiddlers]tag[$:/tags/PageTemplate]!has[draft.of]]" variable="listItem">
 
 <$transclude tiddler=<<listItem>>/>
 
