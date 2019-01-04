@@ -67,6 +67,7 @@ echo "<a href='./plugins/tiddlywiki/tahoelafs/index.html'>Moved to http://tiddly
 node $TW5_BUILD_TIDDLYWIKI \
 	../TiddlyWiki5/editions/test \
 	--verbose \
+	--version \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all test.html text/plain \
 	|| exit 1
