@@ -1,6 +1,6 @@
 language: node_js
   - "node"
 install:
-  - npm install tiddlywiki
+  - npm --force install tiddlywiki
 script:
   - ./bin/build-release.sh
