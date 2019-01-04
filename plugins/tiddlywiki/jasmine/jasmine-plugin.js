@@ -70,7 +70,11 @@ exports.startup = function() {
 		$tw.utils.evalSandboxed(code,context,title);
 	});
 	// Execute the tests
-	jasmineEnv.execute();
+	jasmineEnv.execute(function(passed) {
+		if(!passed) {
+			process.exit(1); // Error if tests failed
+		}
+	});
 };
 
 })();
