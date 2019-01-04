@@ -57,6 +57,16 @@ exports.startup = function() {
 			includeStackTrace: true
 		}));
 	}
+	// Add a reporter that exits with an error code if any tests failed
+	jasmineEnv.addReporter({
+		reportRunnerResults: function(runner) {
+			var c = runner.results().failedCount;
+			if(c > 0) {
+				console.log("Exitting with test failure count: ",c);
+				process.exit(1);
+			}
+		}
+	});
 	// Iterate through all the test modules
 	var tests = $tw.wiki.filterTiddlers(TEST_TIDDLER_FILTER);
 	$tw.utils.each(tests,function(title,index) {
@@ -70,11 +80,7 @@ exports.startup = function() {
 		$tw.utils.evalSandboxed(code,context,title);
 	});
 	// Execute the tests
-	jasmineEnv.execute(function(passed) {
-		if(!passed) {
-			process.exit(1); // Error if tests failed
-		}
-	});
+	jasmineEnv.execute();
 };
 
 })();
