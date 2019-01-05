@@ -56,22 +56,6 @@ echo "<a href='./plugins/tiddlywiki/highlight/index.html'>Moved to http://tiddly
 echo "<a href='./plugins/tiddlywiki/markdown/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/markdown/index.html</a>" > $TW5_BUILD_OUTPUT/markdowndemo.html
 echo "<a href='./plugins/tiddlywiki/tahoelafs/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/tahoelafs/index.html</a>" > $TW5_BUILD_OUTPUT/tahoelafs.html
 
-######################################################
-#
-# Tests
-#
-######################################################
-
-# /test.html			Wiki for running tests in browser
-# Also runs the serverside tests
-node $TW5_BUILD_TIDDLYWIKI \
-	../TiddlyWiki5/editions/test \
-	--verbose \
-	--version \
-	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all test.html text/plain \
-	|| exit 1
-
 # ######################################################
 # #
 # # Core distribution

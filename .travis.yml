@@ -1,6 +1,26 @@
 language: node_js
   - "node"
-install:
-  - npm --force install tiddlywiki
-script:
-  - ./bin/build-release.sh
+
+stages:
+  - install
+    if: branch = "master"
+  - test
+  - build
+    if: branch = "master"
+  - pre-deploy
+    if: branch = "master"
+  - deploy
+    if: branch = "master"
+
+jobs:  
+  include:
+    - stage: install
+      script: npm --force install tiddlywiki
+    - stage: test
+      script: ./bin/test.sh
+    - stage: build
+      script: ./bin/build-site.sh
+    - stage: pre-deploy
+      script: 
+    - stage: deploy
+      script: ./bin/deploy-site.sh
