@@ -21,6 +21,6 @@ jobs:
     - stage: build
       script: ./bin/build-site.sh
     - stage: pre-deploy
-      script: 
+      script: skip
     - stage: deploy
       script: ./bin/deploy-site.sh
