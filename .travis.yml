@@ -2,14 +2,14 @@ language: node_js
   - "node"
 
 stages:
-  - install
+  - name: install
     if: branch = "master"
-  - test
-  - build
+  - name: test
+  - name: build
     if: branch = "master"
-  - pre-deploy
+  - name: pre-deploy
     if: branch = "master"
-  - deploy
+  - name: deploy
     if: branch = "master"
 
 jobs:  
