@@ -24,7 +24,9 @@ listen 命令使用[[命名的命令參數|NamedCommandParameters]]：
 * ''csrf-disable'' - 設置為 "yes" 以禁用 CSRF 檢查 (預設為 "no")
 * ''root-tiddler'' - 服務的基本條目 (預設為 "$:/core/save/all")
 * ''root-render-type'' - 呈現的基本條目的內容類型 (預設為 "text/plain")
-* ''rooot-serve-type'' - 服務的基本條目的內容類型 (預設為 "text/html")
+* ''root-serve-type'' - 服務的基本條目的內容類型 (預設為 "text/html")
 * ''tls-cert'' - TLS 證書檔案的路徑名（相對於維基資料夾）
 * ''tls-key'' - TLS 密鑰檔案的路徑名（相對於維基資料夾）
 * ''debug-level'' - 可選的偵錯層級；設定為 "debug" 來檢視請求的詳細資訊；(預設為 "none")
+
+有關向整個本地網路開啟實例的資訊，以及可能的安全問題，請參閱 TiddlyWiki.com 的 WebServer 條目。

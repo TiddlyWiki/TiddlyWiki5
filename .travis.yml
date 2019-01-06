@@ -1,0 +1,26 @@
+language: node_js
+  - "node"
+
+stages:
+  - name: install
+    if: branch = "master"
+  - name: test
+  - name: build
+    if: branch = "master"
+  - name: pre-deploy
+    if: branch = "master"
+  - name: deploy
+    if: branch = "master"
+
+jobs:  
+  include:
+    - stage: install
+      script: npm --force install tiddlywiki
+    - stage: test
+      script: ./bin/test.sh
+    - stage: build
+      script: ./bin/build-site.sh
+    - stage: pre-deploy
+      script: skip
+    - stage: deploy
+      script: ./bin/deploy-site.sh

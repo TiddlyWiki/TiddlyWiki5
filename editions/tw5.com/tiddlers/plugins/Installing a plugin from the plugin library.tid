@@ -26,7 +26,7 @@ Follow these instructions when using TiddlyWiki under Node.js:
 
 # Identify the plugins you want to install using the ''Plugins'' tab of [[control panel|$:/ControlPanel]] (''don't'' install the plugins from here, though). Plugins are identified by their type (ie language, theme or plugin) and their publisher and title. For example, the plugin `$:/plugins/tiddlywiki/internals` is referred to as ''tiddlywiki/internals''
 # Quit the server if it is running
-# Edit the `tiddlywiki.info` file (it is in JSON format) and locate the `plugins` and `themes` section (see below)
+# Edit the `tiddlywiki.info` file (it is in JSON format) and locate the `plugins`, `themes` or `languages` section (see below)
 # Add entries corresponding to the plugins you wish to add. Take care to retain commas to separate items, but do not terminate the last item in a list with a comma
 # Restart the server
 
@@ -38,6 +38,11 @@ Follow these instructions when using TiddlyWiki under Node.js:
 	"themes": [
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
-	]
+	],
+    "languages": [
+        "es-ES",
+        "fr-FR",
+        "en-EN"
+    ]
 }
 ```

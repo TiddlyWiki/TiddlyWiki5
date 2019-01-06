@@ -82,11 +82,12 @@ Returns:
 		y: vertical scroll position in pixels
 	}
 */
-exports.getScrollPosition = function() {
-	if("scrollX" in window) {
-		return {x: window.scrollX, y: window.scrollY};
+exports.getScrollPosition = function(srcWindow) {
+	var scrollWindow = srcWindow || window;
+	if("scrollX" in scrollWindow) {
+		return {x: scrollWindow.scrollX, y: scrollWindow.scrollY};
 	} else {
-		return {x: document.documentElement.scrollLeft, y: document.documentElement.scrollTop};
+		return {x: scrollWindow.document.documentElement.scrollLeft, y: scrollWindow.document.documentElement.scrollTop};
 	}
 };
 
@@ -119,7 +120,7 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 Gets the bounding rectangle of an element in absolute page coordinates
 */
 exports.getBoundingPageRect = function(element) {
-	var scrollPos = $tw.utils.getScrollPosition(),
+	var scrollPos = $tw.utils.getScrollPosition(element.ownerDocument.defaultView),
 		clientRect = element.getBoundingClientRect();
 	return {
 		left: clientRect.left + scrollPos.x,

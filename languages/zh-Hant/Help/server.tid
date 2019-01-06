@@ -14,7 +14,7 @@ description: 提供一個 HTTP 伺服器介面到 TiddlyWiki (已棄用，支持
 * ''port'' - 要偵聽的埠號；非數值會被解譯為一個系統環境變數，從其中提取埠號 (預設為 "8080")
 * ''root-tiddler'' - 服務的基本條目 (預設為 "$:/core/save/all")
 * ''root-render-type'' - 呈現的基本條目的內容類型 (預設為 "text/plain")
-* ''rooot-serve-type'' - 服務的基本條目的內容類型 (預設為 "text/html")
+* ''root-serve-type'' - 服務的基本條目的內容類型 (預設為 "text/html")
 * ''username'' - 預設的編輯者署名
 * ''password'' - 可選的基本驗證密碼
 * ''host'' - 可選的主機名稱， (預設為 "127.0.0.1" 或名為 "localhost")
@@ -29,11 +29,13 @@ description: 提供一個 HTTP 伺服器介面到 TiddlyWiki (已棄用，支持
 --server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
 ```
 
-若您需要設定主機名稱或路徑前綴而不要求輸入密碼，則可以指定空字串的使用者名和密碼：
+若您需要設定主機名稱或路徑前綴，而不要求輸入密碼，則可以指定空字串的使用者名和密碼。
 
 ```
 --server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
 ```
+
+使用這樣的位址，會將您的系統暴露給本地網路。有關向整個本地網路開啟實例的資訊，以及可能的安全問題，請參閱 TiddlyWiki.com 的 WebServer 條目。
 
 同時執行多個 TiddlyWiki 伺服器，須分別指定不同的埠號。使用環境變數，有助於將埠號傳遞給 Node.js 進程。本示例引用一個名為 "MY_PORT_NUMBER" 的環境變數:
 

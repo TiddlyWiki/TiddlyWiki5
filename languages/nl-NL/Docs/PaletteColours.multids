@@ -45,6 +45,8 @@ page-background: Achtergrond pagina
 pre-background: Achtergrond gepreformatteerde code
 pre-border: Rand gepreformatteerde code
 primary: Primaire kleur
+select-tag-background: `<select>` element achtergrond
+select-tag-foreground: `<select>` element tekst
 sidebar-button-foreground: Voorgrond zijpaneelknop
 sidebar-controls-foreground: Voorgrond knoppen zijpaneel
 sidebar-controls-foreground-hover: Voorgrond mouseover knoppen zijpaneel

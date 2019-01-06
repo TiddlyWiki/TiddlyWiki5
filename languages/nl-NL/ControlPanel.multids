@@ -141,6 +141,9 @@ Settings/NavigationHistory/Caption: Navigeer-geschiedenis
 Settings/NavigationHistory/Hint: Werk de browsergeschiedenis bij als er naar een tiddler genavigeerd wordt:
 Settings/NavigationHistory/No/Description: Werk de browsergeschiedenis niet bij
 Settings/NavigationHistory/Yes/Description: Werk de browsergeschiedenis bij
+Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: Kopieer permalink/permaview URL naar klembord
+Settings/NavigationPermalinkviewMode/Hint: Kies hoe permalink/permaview wordt behandeld:
+Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Werk de adresbalk bij met permalink/permaview URL
 Settings/PerformanceInstrumentation/Caption: Prestatiemeting
 Settings/PerformanceInstrumentation/Description: Zet prestatiemeting aan
 Settings/PerformanceInstrumentation/Hint: Toont prestatiestatistieken in de 'browser console'. Dit vereist herladen van de wiki om effect te hebben

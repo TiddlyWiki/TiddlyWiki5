@@ -468,6 +468,9 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Update the story to insert the new draft at the top and remove any existing tiddler
 	if(storyList.indexOf(draftTitle) === -1) {
 		var slot = storyList.indexOf(event.navigateFromTitle);
+		if(slot === -1) {
+			slot = this.getAttribute("openLinkFromOutsideRiver","top") === "bottom" ? storyList.length - 1 : slot;
+		}
 		storyList.splice(slot + 1,0,draftTitle);
 	}
 	if(storyList.indexOf(title) !== -1) {

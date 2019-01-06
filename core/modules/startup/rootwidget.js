@@ -23,7 +23,7 @@ exports.startup = function() {
 	// Install the modal message mechanism
 	$tw.modal = new $tw.utils.Modal($tw.wiki);
 	$tw.rootWidget.addEventListener("tm-modal",function(event) {
-		$tw.modal.display(event.param,{variables: event.paramObject});
+		$tw.modal.display(event.param,{variables: event.paramObject, event: event});
 	});
 	// Install the notification  mechanism
 	$tw.notifier = new $tw.utils.Notifier($tw.wiki);

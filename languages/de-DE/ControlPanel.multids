@@ -126,6 +126,10 @@ Settings/NavigationHistory/Caption: Browser Chronik
 Settings/NavigationHistory/Hint: Die Browser Chronik ändern, wenn ein Tiddler angezeigt wird:
 Settings/NavigationHistory/No/Description: Browser Chronik nicht ändern.
 Settings/NavigationHistory/Yes/Description: Browser Chronik ändern.
+Settings/NavigationPermalinkviewMode/Caption: "Permalink/permaview" Modus
+Settings/NavigationPermalinkviewMode/Hint: Wähle, wie "permalink/permaview" verwendet werden soll:
+Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: URL in die Zwischenablage kopieren
+Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Adressleiste mit URL aktualisieren
 Settings/PerformanceInstrumentation/Caption: Performance Messung
 Settings/PerformanceInstrumentation/Hint: Anzeige der Performance Statistik in der Browser Entwickler Konsole. ''Wichtig:'' Seite neu laden um die Einstellung zu aktivieren!
 Settings/PerformanceInstrumentation/Description: Aktiviere Performance Messung
