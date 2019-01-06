@@ -2,27 +2,17 @@ language: node_js
   - "node"
 
 stages:
-  - name: install
-    if: branch = "master"
   - name: test
-  - name: pre-build
-    if: branch = "master"
   - name: build
-    if: branch = "master"
-  - name: deploy
     if: branch = "master"
 
 jobs:  
   include:
-    - stage: install
-      script: npm --force install tiddlywiki
     - stage: test
       script: ./bin/test.sh
-    - stage: pre-build
-      script: skip
     - stage: build
       script:
+        - npm --force install tiddlywiki
         - export TW5_BUILD_TIDDLYWIKI='./node_modules/tiddlywiki/tiddlywiki.js'
         - ./bin/build-site.sh
-    - stage: deploy
-      script: ./bin/deploy-site.sh
+        - ./bin/deploy-site.sh
