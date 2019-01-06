@@ -35,6 +35,8 @@ fi
 
 echo "Using TW5_BUILD_OUTPUT as [$TW5_BUILD_OUTPUT]"
 
+echo "Git details: $GIT_DETAILS"
+
 # Make the CNAME file that GitHub Pages requires
 
 echo "tiddlywiki.com" > $TW5_BUILD_OUTPUT/CNAME
