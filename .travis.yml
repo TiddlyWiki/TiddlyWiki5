@@ -21,7 +21,8 @@ jobs:
     - stage: pre-build
       script: skip
     - stage: build
-      script: TW5_BUILD_TIDDLYWIKI='./node_modules/tiddlywiki/tiddlywiki.js' && \
-        ./bin/build-site.sh
+      script:
+        - TW5_BUILD_TIDDLYWIKI='./node_modules/tiddlywiki/tiddlywiki.js'
+        - ./bin/build-site.sh
     - stage: deploy
       script: ./bin/deploy-site.sh
