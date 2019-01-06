@@ -56,25 +56,26 @@ echo "<a href='./plugins/tiddlywiki/highlight/index.html'>Moved to http://tiddly
 echo "<a href='./plugins/tiddlywiki/markdown/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/markdown/index.html</a>" > $TW5_BUILD_OUTPUT/markdowndemo.html
 echo "<a href='./plugins/tiddlywiki/tahoelafs/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/tahoelafs/index.html</a>" > $TW5_BUILD_OUTPUT/tahoelafs.html
 
-# ######################################################
-# #
-# # Core distribution
-# #
-# ######################################################
+######################################################
+#
+# Core distribution
+#
+######################################################
 
-# # /index.html			Main site
-# # /favicon.ico			Favicon for main site
-# # /static.html			Static rendering of default tiddlers
-# # /alltiddlers.html		Static rendering of all tiddlers
-# # /static/*				Static single tiddlers
-# # /static/static.css	Static stylesheet
-# # /static/favicon.ico	Favicon for static pages
-# node $TW5_BUILD_TIDDLYWIKI \
-# 	$TW5_BUILD_MAIN_EDITION \
-# 	--verbose \
-# 	--output $TW5_BUILD_OUTPUT \
-# 	--build favicon static index \
-# 	|| exit 1
+# /index.html			Main site
+# /favicon.ico			Favicon for main site
+# /static.html			Static rendering of default tiddlers
+# /alltiddlers.html		Static rendering of all tiddlers
+# /static/*				Static single tiddlers
+# /static/static.css	Static stylesheet
+# /static/favicon.ico	Favicon for static pages
+node $TW5_BUILD_TIDDLYWIKI \
+	$TW5_BUILD_MAIN_EDITION \
+	--verbose \
+	--version \
+	--output $TW5_BUILD_OUTPUT \
+	--build favicon static index \
+	|| exit 1
 
 # # /empty.html			Empty
 # # /empty.hta			For Internet Explorer

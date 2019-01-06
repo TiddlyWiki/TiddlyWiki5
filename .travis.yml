@@ -5,9 +5,9 @@ stages:
   - name: install
     if: branch = "master"
   - name: test
-  - name: build
+  - name: pre-build
     if: branch = "master"
-  - name: pre-deploy
+  - name: build
     if: branch = "master"
   - name: deploy
     if: branch = "master"
@@ -18,9 +18,11 @@ jobs:
       script: npm --force install tiddlywiki
     - stage: test
       script: ./bin/test.sh
+    - stage: pre-build
+      script: skip
     - stage: build
       script: ./bin/build-site.sh
-    - stage: pre-deploy
-      script: skip
+      env:
+        - TW5_BUILD_TIDDLYWIKI = ./node_modules/tiddlywiki/tiddlywiki.js
     - stage: deploy
       script: ./bin/deploy-site.sh
