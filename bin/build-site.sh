@@ -8,11 +8,15 @@ if [  -z "$TW5_BUILD_VERSION" ]; then
     TW5_BUILD_VERSION=v5.1.19
 fi
 
+echo "Using TW5_BUILD_VERSION as [$TW5_BUILD_VERSION]"
+
 # Default to using tw5.com as the main edition for /index.html
 
 if [  -z "$TW5_BUILD_MAIN_EDITION" ]; then
     TW5_BUILD_MAIN_EDITION=./editions/tw5.com
 fi
+
+echo "Using TW5_BUILD_MAIN_EDITION as [$TW5_BUILD_MAIN_EDITION]"
 
 # Default to the version of TiddlyWiki installed in this repo
 
@@ -20,11 +24,15 @@ if [  -z "$TW5_BUILD_TIDDLYWIKI" ]; then
     TW5_BUILD_TIDDLYWIKI=./tiddlywiki.js
 fi
 
+echo "Using TW5_BUILD_TIDDLYWIKI as [$TW5_BUILD_TIDDLYWIKI]"
+
 # Set up the build details
 
 if [  -z "$TW5_BUILD_DETAILS" ]; then
     TW5_BUILD_DETAILS="$(git symbolic-ref --short HEAD)-$(git rev-parse HEAD) from $(git remote get-url origin)"
 fi
+
+echo "Using TW5_BUILD_DETAILS as [$TW5_BUILD_DETAILS]"
 
 # Set up the build output directory
 
