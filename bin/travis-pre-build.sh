@@ -18,6 +18,4 @@ git remote add upstream "https://$GH_TOKEN@github.com/Jermolene/Testing2019.git"
 
 git fetch upstream || exit 1
 
-git reset upstream/master || exit 1
-
 cd .. || exit 1
