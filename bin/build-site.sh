@@ -66,7 +66,7 @@ echo "<a href='./plugins/tiddlywiki/tahoelafs/index.html'>Moved to http://tiddly
 
 # Put the build details into a .tid file so that it can be included in each build
 
-echo "title: $:/build\ntext: $TW5_BUILD_DETAILS\n" > $TW5_BUILD_OUTPUT/build.tid
+echo -e "title: $:/build\ntext: $TW5_BUILD_DETAILS\n" > $TW5_BUILD_OUTPUT/build.tid
 
 ######################################################
 #
