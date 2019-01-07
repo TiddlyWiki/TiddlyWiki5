@@ -15,9 +15,9 @@ jobs:
     - stage: build-prerelease
       script:
         - ./bin/travis-pre-build.sh
-        - export TW5_BUILD_VERSION=v5.1.20-prerelease # Eeek need to automate this
-        - export TW5_BUILD_DETAILS="Prerelease built from branch '$TRAVIS_BRANCH' at commit $(git rev-parse HEAD) of $(git remote get-url origin) at $(date '%H:%M:%S +%Y-%m-%d')"
         - export TW5_BUILD_TIDDLYWIKI='./node_modules/tiddlywiki/tiddlywiki.js'
+        - export TW5_BUILD_VERSION=$(./bin/get-version-number)
+        - export TW5_BUILD_DETAILS="Prerelease built from branch '$TRAVIS_BRANCH' at commit $(git rev-parse HEAD) of $(git remote get-url origin) at $(date '%H:%M:%S +%Y-%m-%d')"
         - export TW5_BUILD_MAIN_EDITION='./editions/prerelease'
         - export TW5_BUILD_OUTPUT='./output/prerelease'
         - ./bin/build-site.sh
@@ -25,9 +25,9 @@ jobs:
     - stage: build-tiddlywiki-com
       script:
         - ./bin/travis-pre-build.sh
-        - export TW5_BUILD_VERSION=v5.1.19 # Eeek need to automate this
-        - export TW5_BUILD_DETAILS="Built from branch '$TRAVIS_BRANCH' at commit $(git rev-parse HEAD) of $(git remote get-url origin) at $(date '%H:%M:%S +%Y-%m-%d')"
         - export TW5_BUILD_TIDDLYWIKI='./tiddlywiki.js'
+        - export TW5_BUILD_VERSION=$(./bin/get-version-number)
+        - export TW5_BUILD_DETAILS="Built from branch '$TRAVIS_BRANCH' at commit $(git rev-parse HEAD) of $(git remote get-url origin) at $(date '%H:%M:%S +%Y-%m-%d')"
         - export TW5_BUILD_MAIN_EDITION='./editions/tw5.com'
         - export TW5_BUILD_OUTPUT='./output'
         - ./bin/build-site.sh
