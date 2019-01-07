@@ -20,6 +20,12 @@ if [  -z "$TW5_BUILD_TIDDLYWIKI" ]; then
     TW5_BUILD_TIDDLYWIKI=./tiddlywiki.js
 fi
 
+# Set up the build details
+
+if [  -z "$TW5_BUILD_DETAILS" ]; then
+    TW5_BUILD_DETAILS="$(git symbolic-ref --short HEAD)-$(git rev-parse HEAD) from $(git remote get-url origin)"
+fi
+
 # Set up the build output directory
 
 if [  -z "$TW5_BUILD_OUTPUT" ]; then
@@ -35,7 +41,7 @@ fi
 
 echo "Using TW5_BUILD_OUTPUT as [$TW5_BUILD_OUTPUT]"
 
-echo "Git details: $GIT_DETAILS"
+echo "Build details: $TW5_BUILD_DETAILS"
 
 # Make the CNAME file that GitHub Pages requires
 
@@ -58,6 +64,10 @@ echo "<a href='./plugins/tiddlywiki/highlight/index.html'>Moved to http://tiddly
 echo "<a href='./plugins/tiddlywiki/markdown/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/markdown/index.html</a>" > $TW5_BUILD_OUTPUT/markdowndemo.html
 echo "<a href='./plugins/tiddlywiki/tahoelafs/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/tahoelafs/index.html</a>" > $TW5_BUILD_OUTPUT/tahoelafs.html
 
+# Put the build details into a .tid file so that it can be included in each build
+
+echo "title: $:/build\ntext: $TW5_BUILD_DETAILS\n" > $TW5_BUILD_OUTPUT/build.tid
+
 ######################################################
 #
 # Core distribution
@@ -75,9 +85,12 @@ node $TW5_BUILD_TIDDLYWIKI \
 	$TW5_BUILD_MAIN_EDITION \
 	--verbose \
 	--version \
+	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
 	--build favicon static index \
 	|| exit 1
+
+more $TW5_BUILD_OUTPUT/build.tid
 
 # # /empty.html			Empty
 # # /empty.hta			For Internet Explorer
