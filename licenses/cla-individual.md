@@ -339,3 +339,5 @@ Yurii Rashkovskii, @yrashk, 2018/10/19
 Abraham Samma, @abesamma, 2018/10/31
 
 German Ramírez, @g0erman, 2018/11/14
+
+Johannes Löthberg, @kyrias, 2019/01/07
