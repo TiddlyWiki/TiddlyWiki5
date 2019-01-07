@@ -66,7 +66,7 @@ echo "<a href='./plugins/tiddlywiki/tahoelafs/index.html'>Moved to http://tiddly
 
 # Put the build details into a .tid file so that it can be included in each build
 
-echo -e "title: $:/build\ntext: $TW5_BUILD_DETAILS\n" > $TW5_BUILD_OUTPUT/build.tid
+echo -e "title: $:/build\n\n$TW5_BUILD_DETAILS\n" > $TW5_BUILD_OUTPUT/build.tid
 
 ######################################################
 #
@@ -89,8 +89,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--output $TW5_BUILD_OUTPUT \
 	--build favicon static index \
 	|| exit 1
-
-more $TW5_BUILD_OUTPUT/build.tid
 
 # # /empty.html			Empty
 # # /empty.hta			For Internet Explorer
