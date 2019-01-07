@@ -13,7 +13,20 @@ jobs:
     - stage: build
       script:
         - npm --force install tiddlywiki
-        - export TW5_BUILD_DETAILS="$TRAVIS_BRANCH-$(git rev-parse HEAD) from $(git remote get-url origin)"
+        - pwd
+        - cd output
+        - git init
+        - git config --global user.email "travis@travis-ci.org"
+        - git config --global user.name "Travis CI"
+        - git remote add upstream "https://$GH_TOKEN@github.com/Jermolene/Testing2019.git"
+        - git fetch upstream
+        - git reset upstream/master
+        - cd ..
+        - export TW5_BUILD_DETAILS="Built from branch '$TRAVIS_BRANCH' at commit $(git rev-parse HEAD) of $(git remote get-url origin)"
         - export TW5_BUILD_TIDDLYWIKI='./node_modules/tiddlywiki/tiddlywiki.js'
         - ./bin/build-site.sh
-        - ./bin/deploy-site.sh
+        - cd output
+        - git add -A .
+        - git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
+        - git push -q upstream HEAD:master >/dev/null 2>&1
+        - cd ..
