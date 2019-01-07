@@ -13,7 +13,7 @@ jobs:
     - stage: build
       script:
         - npm --force install tiddlywiki
-        - export GIT_DETAILS="$(git symbolic-ref --short HEAD)-$(git rev-parse HEAD) from $(git remote get-url origin)"
+        - export GIT_DETAILS="$TRAVIS_BRANCH-$(git rev-parse HEAD) from $(git remote get-url origin)"
         - export TW5_BUILD_TIDDLYWIKI='./node_modules/tiddlywiki/tiddlywiki.js'
         - ./bin/build-site.sh
         - ./bin/deploy-site.sh
