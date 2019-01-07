@@ -12,8 +12,6 @@ var fs = require("fs"),
 var filename = path.resolve(path.dirname(process.env["TW5_BUILD_TIDDLYWIKI"]),"./package.json"),
 	json = JSON.parse(fs.readFileSync(filename,"utf8"));
 
-console.log("Extracting version from ",filename)
-
 if(!json.version) {
 	throw "Missing version number in package.json";
 }
