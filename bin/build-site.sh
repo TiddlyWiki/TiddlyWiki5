@@ -107,6 +107,15 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--build empty \
 	|| exit 1
 
+
+# /test.html			Test edition
+node ./tiddlywiki.js \
+	./editions/test \
+	--verbose \
+	--version \
+	--rendertiddler $:/core/save/all test.html text/plain \
+	|| exit 1
+
 # /dev/index.html			Developer docs
 # /dev/favicon.ico			Favicon for dev site
 # /dev/static.html			Static rendering of default tiddlers

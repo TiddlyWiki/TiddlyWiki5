@@ -16,4 +16,4 @@ if(!json.version) {
 	throw "Missing version number in package.json";
 }
 
-process.stdout.write(json.version.split("-")[0]);
+process.stdout.write("v" + json.version.split("-")[0]);
