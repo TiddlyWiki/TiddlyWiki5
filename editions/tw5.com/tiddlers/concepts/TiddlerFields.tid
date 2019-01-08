@@ -30,6 +30,7 @@ Other fields used by the core are:
 |`draft.of` |DraftOfField |<<lingo draft.of>> |
 |`draft.title` |DraftTitleField |<<lingo draft.title>> |
 |`footer` |FooterField |<<lingo footer>> |
+|`hide-body`|HideBodyField|<<lingo hide-body>>|
 |`icon` |IconField |<<lingo icon>> |
 |`library` |LibraryField |<<lingo library>> |
 |`list-after` |ListAfterField |<<lingo list-after>> |
