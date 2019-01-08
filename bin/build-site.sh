@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Build all tiddlywiki.com assets
+# Build all tiddlywiki.com assets.
 
 # Default to the current version number for building the plugin library
 
