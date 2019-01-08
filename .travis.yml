@@ -1,6 +1,9 @@
 language: node_js
   - "node"
 
+before_install:
+- export TZ=GMT
+
 stages:
   - name: test
   - name: build-prerelease
