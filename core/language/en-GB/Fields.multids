@@ -14,6 +14,7 @@ draft.of: For draft tiddlers, contains the title of the tiddler of which this is
 draft.title: For draft tiddlers, contains the proposed new title of the tiddler
 footer: The footer text for a wizard
 hack-to-give-us-something-to-compare-against: A temporary storage field used in [[$:/core/templates/static.content]]
+hide-body: The view template will hide bodies of tiddlers with value: ''yes''
 icon: The title of the tiddler containing the icon associated with a tiddler
 library: If set to "yes" indicates that a tiddler should be saved as a JavaScript library
 list: An ordered list of tiddler titles associated with a tiddler
@@ -31,6 +32,6 @@ subtitle: The subtitle text for a wizard
 tags: A list of tags associated with a tiddler
 text: The body text of a tiddler
 title: The unique name of a tiddler
-toc-link: A value of <<.value no>> will supress the tiddler's link in a Table of Contents tree
+toc-link: Suppress the tiddler's link in a Table of Contents tree with value: ''no''
 type: The content type of a tiddler
 version: Version information for a plugin
