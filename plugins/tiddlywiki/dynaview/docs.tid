@@ -13,6 +13,12 @@ The components of this plugin include:
 
 ! Scroll Features
 
+!! Scroll Position Preservation
+
+Some recent browsers have a feature called "scroll anchoring" whereby they suppress the apparent scrolling that occurs when elements are inserted or removed above the current viewport. (See https://github.com/WICG/ScrollAnchoring for more details).
+
+~DynaView can optionally polyfill this behaviour for older browsers by setting the configuration tiddler $:/config/DynaView/PreserveScrollPosition to `yes`.
+
 !! Set tiddler field when visible
 
 The background task detects when elements with the class `tc-dynaview-set-tiddler-when-visible` scroll into view. The first time that they do, the background task assigns the value in the attribute `data-dynaview-set-value` to the tiddler whose title is in the attribute `data-dynaview-set-tiddler`. This assignment can be tied to a reveal widget to cause content to be displayed when it becomes visible. If the class `tc-dynaview-expand-viewport` is set then the viewport is expanded so that the processing occurs when elements move near the viewport.
