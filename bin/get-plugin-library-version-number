@@ -9,10 +9,11 @@ if(!process.env["TW5_BUILD_TIDDLYWIKI"]) {
 var fs = require("fs"),
 	path = require("path");
 
-var json = JSON.parse(fs.readFileSync(path.resolve(path.dirname(process.env["TW5_BUILD_TIDDLYWIKI"]),"./package.json"),"utf8"));
+var filename = path.resolve(path.dirname(process.env["TW5_BUILD_TIDDLYWIKI"]),"./package.json"),
+	json = JSON.parse(fs.readFileSync(filename,"utf8"));
 
 if(!json.version) {
 	throw "Missing version number in package.json";
 }
 
-process.stdout.write(json.version.split("-")[0]);
+process.stdout.write("v" + json.version.split("-")[0]);

@@ -340,4 +340,10 @@ Abraham Samma, @abesamma, 2018/10/31
 
 German Ramírez, @g0erman, 2018/11/14
 
+@00SS, 2018/12/10
+
+David Nebauer, @dnebauer, 2019/01/01
+
+Moritz Ulrich, @the-kenny, 2019/01/03
+
 Johannes Löthberg, @kyrias, 2019/01/07

@@ -11,9 +11,9 @@ git config --global user.name "Travis CI" || exit 1
 
 git add -A . || exit 1
 
-git commit --quiet --message "Travis build: $TRAVIS_BUILD_NUMBER" || exit 1
+git commit --message "Travis build: $TRAVIS_BUILD_NUMBER of $TRAVIS_BRANCH ($(date +'%F %T %Z'))" || exit 1
 
-git remote add deploy "https://$GH_TOKEN@github.com/Jermolene/Testing2019.git" &>/dev/null || exit 1
+git remote add deploy "https://$GH_TOKEN@github.com/Jermolene/jermolene.github.io.git" &>/dev/null || exit 1
 
 git push deploy master &>/dev/null || exit 1
 
