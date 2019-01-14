@@ -1,6 +1,3 @@
-title: $:/core/ui/EditTemplate/title
-tags: $:/tags/EditTemplate
-
 <$edit-text field="draft.title" class="tc-titlebar tc-edit-texteditor" focus="true"/>
 
 <$vars pattern="""[\|\[\]{}]""" bad-chars="""`| [ ] { }`""">
@@ -35,9 +32,7 @@ tags: $:/tags/EditTemplate
 
 <$checkbox tiddler="$:/config/RelinkOnRename" field="text" checked="yes" unchecked="no" default="no"> {{$:/language/EditTemplate/Title/Relink/Prompt}}</$checkbox>
 
-<$set name="backlinks" filter="[title<fromTitle>backlinks[]]">
-
-<$reveal type="nomatch" default=<<backlinks>> text="">
+<$list filter="[title<fromTitle>backlinks[]first[]]">
 
 <$vars stateTiddler=<<qualify "$:/state/edit/references">> >
 
@@ -58,9 +53,7 @@ tags: $:/tags/EditTemplate
 
 </$vars>
 
-</$reveal>
-
-</$set>
+</$list>
 
 </$vars>
 
