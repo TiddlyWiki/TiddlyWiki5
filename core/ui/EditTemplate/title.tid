@@ -1,3 +1,6 @@
+title: $:/core/ui/EditTemplate/title
+tags: $:/tags/EditTemplate
+
 <$edit-text field="draft.title" class="tc-titlebar tc-edit-texteditor" focus="true"/>
 
 <$vars pattern="""[\|\[\]{}]""" bad-chars="""`| [ ] { }`""">
