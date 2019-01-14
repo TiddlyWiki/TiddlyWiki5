@@ -345,3 +345,5 @@ German Ramírez, @g0erman, 2018/11/14
 David Nebauer, @dnebauer, 2019/01/01
 
 Moritz Ulrich, @the-kenny, 2019/01/03
+
+Johannes Löthberg, @kyrias, 2019/01/07
