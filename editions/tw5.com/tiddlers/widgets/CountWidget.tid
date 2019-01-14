@@ -16,12 +16,4 @@ The content of the `<$count>` widget is ignored.
 |filter |The filter expression to count |
 
 ! Example
-
-```
-There are <$count filter="[tag[Examples]]"/> tiddlers tagged with Examples
-```
-Displays as:
-
-<<<
-There are <$count filter="[tag[Examples]]"/> tiddlers tagged with Examples
-<<<
+<<wikitext-example-without-html """There are <$count filter="[tag[Examples]]"/> tiddlers tagged with Examples""">>
