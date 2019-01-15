@@ -32,6 +32,6 @@ subtitle: The subtitle text for a wizard
 tags: A list of tags associated with a tiddler
 text: The body text of a tiddler
 title: The unique name of a tiddler
-toc-link: Suppresses the tiddler's link in a Table of Contents tree if set to: ''no''
+toc-link: Suppresses the tiddler's link in a Table of Contents tree if set to: ''no'' 
 type: The content type of a tiddler
 version: Version information for a plugin
