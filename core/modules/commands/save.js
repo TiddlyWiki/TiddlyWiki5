@@ -40,7 +40,7 @@ Command.prototype.execute = function() {
 			contentTypeInfo = $tw.config.contentTypeInfo[type] || {encoding: "utf8"},
 			filepath = path.resolve(self.commander.outputPath,wiki.filterTiddlers(filenameFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0]);
 		if(self.commander.verbose) {
-			console.log("Saving \"" + title + "\" to \"" + filepath + "\"");
+			self.commander.log("Saving \"" + title + "\" to \"" + filepath + "\"");
 		}
 		$tw.utils.createFileDirectories(filepath);
 		fs.writeFileSync(filepath,tiddler.fields.text,contentTypeInfo.encoding);

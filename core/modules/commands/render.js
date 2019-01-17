@@ -52,7 +52,7 @@ Command.prototype.execute = function() {
 		var text = type === "text/html" ? container.innerHTML : container.textContent,
 			filepath = path.resolve(self.commander.outputPath,wiki.filterTiddlers(filenameFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0]);
 		if(self.commander.verbose) {
-			console.log("Rendering \"" + title + "\" to \"" + filepath + "\"");
+			self.commander.log("Rendering \"" + title + "\" to \"" + filepath + "\"");
 		}
 		$tw.utils.createFileDirectories(filepath);
 		fs.writeFileSync(filepath,text,"utf8");
