@@ -28,12 +28,14 @@ exports.handler = function(request,response,state) {
 		"Content-Type": state.server.get("root-serve-type")
 	};
 
-	if (/\bdeflate\b/.test(acceptEncoding)) {
-		responseHeaders['Content-Encoding'] = 'deflate';
-		text = zlib.deflateSync(text);
-	} else if (/\bgzip\b/.test(acceptEncoding)) {
-		responseHeaders['Content-Encoding'] = 'gzip';
-		text = zlib.gzipSync(text);
+	if(state.server.enableGzip) {
+		if (/\bdeflate\b/.test(acceptEncoding)) {
+			responseHeaders['Content-Encoding'] = 'deflate';
+			text = zlib.deflateSync(text);
+		} else if (/\bgzip\b/.test(acceptEncoding)) {
+			responseHeaders['Content-Encoding'] = 'gzip';
+			text = zlib.gzipSync(text);
+		}
 	}
 
 	response.writeHead(200, responseHeaders);

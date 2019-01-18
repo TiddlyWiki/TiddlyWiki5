@@ -43,6 +43,8 @@ function Server(options) {
 	$tw.utils.extend({},this.defaultVariables,options.variables);
 	// Initialise CSRF
 	this.csrfDisable = this.get("csrf-disable") === "yes";
+	// Initialize Gzip compression
+	this.enableGzip = this.get("gzip") === "yes";
 	// Initialise authorization
 	var authorizedUserName = (this.get("username") && this.get("password")) ? this.get("username") : "(anon)";
 	this.authorizationPrincipals = {
@@ -84,7 +86,8 @@ Server.prototype.defaultVariables = {
 	"tiddler-render-template": "$:/core/templates/server/static.tiddler.html",
 	"system-tiddler-render-type": "text/plain",
 	"system-tiddler-render-template": "$:/core/templates/wikified-tiddler",
-	"debug-level": "none"
+	"debug-level": "none",
+	"gzip": "no"
 };
 
 Server.prototype.get = function(name) {
