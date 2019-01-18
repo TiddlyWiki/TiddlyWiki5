@@ -25,7 +25,7 @@ Either or both of the ''tiddler'' and ''filter'' attributes must be specified in
 
 The [[actionTiddler Variable]] is accessible in both //startactions// and //endactions//. It holds the payload tiddler(s) specified through the //tiddler// and //filter// attributes as a [[Title List]] using double square brackets to quote titles that include whitespace.
 
-<<.tip """Note that the [[actionTiddler Variable]] holds a [[Title List]] quoted with double square brackets. This is unlike the DroppableWidget which uses the same variable to pass a single unquoted title.""">
+<<.tip """Note that the [[actionTiddler Variable]] holds a [[Title List]] quoted with double square brackets. This is unlike the DroppableWidget which uses the same variable to pass a single unquoted title.""">>
 
 
 The LinkWidget incorporates the functionality of the DraggableWidget via the ''draggable'' attribute.
