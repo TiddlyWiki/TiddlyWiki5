@@ -10,7 +10,6 @@ $:/state/folded/$(currentTiddler)$
 <$vars storyTiddler=<<currentTiddler>> tiddlerInfoState=<<qualify "$:/state/popup/tiddler-info">> userClass={{!!class}}>
 <$tiddler tiddler=<<currentTiddler>>>
 <div data-tiddler-title=<<currentTiddler>> data-tags={{!!tags}} class=<<frame-classes>>>
-
 <$set name="state" value={{{ [[$:/state/viewtemplate/visibility/]addsuffix<currentTiddler>] }}}>
 <$reveal stateTitle=<<state>> type="match" text="true" tag="div">
 <div class="tc-dynaview-set-tiddler-when-visible tc-dynaview-expand-viewport" data-dynaview-set-tiddler=<<state>> data-dynaview-set-value="true" data-dynaview-unset-tiddler=<<state>> data-dynaview-unset-value="false" data-dynaview-has-triggered={{{ [<state>get[text]] }}}>
@@ -24,7 +23,6 @@ $:/state/folded/$(currentTiddler)$
 </div>
 </$reveal>
 </$set>
-
 </div>
 </$tiddler>
 </$vars>
