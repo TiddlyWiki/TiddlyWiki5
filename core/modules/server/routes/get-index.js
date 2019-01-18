@@ -28,6 +28,12 @@ exports.handler = function(request,response,state) {
 		"Content-Type": state.server.get("root-serve-type")
 	};
 
+	/*
+	If the gzip=yes flag for `listen` is set, check if the user agent permits
+	compression. If so, compress our response. Note that we use the synchronous
+	functions from zlib to stay in the imperative style. The current `Server`
+	doesn't depend on this, and we may just as well use the async versions.
+	*/
 	if(state.server.enableGzip) {
 		if (/\bdeflate\b/.test(acceptEncoding)) {
 			responseHeaders['Content-Encoding'] = 'deflate';
