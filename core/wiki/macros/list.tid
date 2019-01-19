@@ -19,7 +19,7 @@ tags: $:/tags/Macro
 <$action-listops $tiddler=<<targetTiddler>> $field=<<targetField>> $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
 \end
 
-\define list-links-draggable(tiddler,field:"list",type:"ul",subtype:"li",class:"",itemTemplate)
+\define list-links-draggable(tiddler,field:"list",type:"ul",subtype:"li",class:"",itemTemplate,startactions,endactions)
 <$vars targetTiddler="""$tiddler$""" targetField="""$field$""">
 <$type$ class="$class$">
 <$list filter="[list[$tiddler$!!$field$]]">
@@ -29,7 +29,7 @@ tags: $:/tags/Macro
 </div>
 <div>
 <$transclude tiddler="""$itemTemplate$""">
-<$link to={{!!title}}>
+<$link to={{!!title}} startactions="""$startactions$""" endactions="""$endactions$""">
 <$transclude field="caption">
 <$view field="title"/>
 </$transclude>
@@ -38,7 +38,6 @@ tags: $:/tags/Macro
 </div>
 </$droppable>
 </$list>
-</$type$>
 <$tiddler tiddler="">
 <$droppable actions=<<list-links-draggable-drop-actions>> tag="div">
 <div class="tc-droppable-placeholder">
@@ -47,6 +46,7 @@ tags: $:/tags/Macro
 <div style="height:0.5em;"/>
 </$droppable>
 </$tiddler>
+</$type$>
 </$vars>
 \end
 
@@ -72,7 +72,7 @@ tags: $:/tags/Macro
 </$set>
 \end
 
-\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div")
+\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",startactions,endactions)
 <$set name="tag" value=<<__tag__>>>
 <$list filter="[<__tag__>tagging[]$subFilter$]" emptyMessage=<<__emptyMessage__>>>
 <$elementTag$ class="tc-menu-list-item">
@@ -82,7 +82,7 @@ tags: $:/tags/Macro
 </$elementTag$>
 <$elementTag$>
 <$transclude tiddler="""$itemTemplate$""">
-<$link to={{!!title}}>
+<$link to={{!!title}} startactions=<<__startactions__>> endactions=<<__endactions__>>>
 <$view field="title"/>
 </$link>
 </$transclude>
