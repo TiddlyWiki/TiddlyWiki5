@@ -133,6 +133,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		$tw.utils.makeDraggable({
 			domNode: domNode,
 			dragTiddlerFn: function() {return self.to;},
+			startActions: self.startActions,
+			endActions: self.endActions,
 			widget: this
 		});
 	}
@@ -177,6 +179,8 @@ LinkWidget.prototype.execute = function() {
 	this.overrideClasses = this.getAttribute("overrideClass");
 	this.tabIndex = this.getAttribute("tabindex");
 	this.draggable = this.getAttribute("draggable","yes");
+	this.startActions = this.getAttribute("startactions");
+	this.endActions = this.getAttribute("endactions");
 	this.linkTag = this.getAttribute("tag","a");
 	// Determine the link characteristics
 	this.isMissing = !this.wiki.tiddlerExists(this.to);
@@ -191,7 +195,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 LinkWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.to || changedTiddlers[this.to] || changedAttributes["aria-label"] || changedAttributes.tooltip) {
+	if(changedAttributes.to || changedTiddlers[this.to] || changedAttributes["aria-label"] || changedAttributes.tooltip || changedTiddlers.tag || changedTiddlers["class"]) {
 		this.refreshSelf();
 		return true;
 	}
