@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 !Introduction
 
-At its heart, ~TiddlyWiki5 is a relatively small boot kernel that runs either under Node.js or in the browser with all other functionality added via dynamically loaded [[modules|Modules and Plugins]].
+At its heart, ~TiddlyWiki5 is a relatively small kernel that runs either under Node.js or in the browser. All other functionality is added by dynamically loaded [[modules|Modules and Plugins]].
 
 The kernel boots just enough of the ~TiddlyWiki environment to allow it to load and execute module tiddlers. The module system is compatible with ~CommonJS and Node.js.
 
@@ -21,7 +21,7 @@ The tiddler [[$:/boot/boot.js]] is a barebones ~TiddlyWiki kernel that is just s
 
 The boot kernel includes:
 
-* Several short shared utility functions
+* Several short, shared utility functions
 * A handful of methods implementing the module mechanism
 * The `$tw.Tiddler` class (and field definition plugins)
 * The `$tw.Wiki` class (and tiddler deserialization methods)
