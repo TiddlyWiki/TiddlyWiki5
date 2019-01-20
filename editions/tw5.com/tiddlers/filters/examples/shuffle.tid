@@ -1,0 +1,30 @@
+tags: [[Operator Examples]] [[shuffle Operator]]
+title: shuffle Operator (Examples)
+type: text/vnd.tiddlywiki
+
+
+<<.operator-example 1 "[list[Days of the Week]shuffle[]]" "tiddlers modified within the last 14 days">>
+<<.operator-example 2 "[list[Days of the Week]shuffle[]first[2]]" "2 random tiddlers from the input list">>
+
+If a parameter is provided the list will be ordered identically every time it is rendered.  This can be useful in conjunction a button that updates a state tiddler.  Set the parameter of this operator to reference that state tiddler, and create a button that updates that tiddler, and now the ordering of the random operators only changes when the button is pressed.
+
+
+```
+<$button>
+<$action-setfield $tiddler="$:/temp/shuffle/example" $field="state" $value=<<now "0hh:0mm:0ss">>/>
+Change Order
+</$button>
+
+<$list filter="[list[Days of the Week]shuffle{$:/temp/shuffle/example!!state}]">
+
+</$list>
+```
+
+<$button>
+<$action-setfield $tiddler="$:/temp/shuffle/example" $field="state" $value=<<now "0hh:0mm:0ss">>/>
+Update
+</$button>
+
+<$list filter="[list[Days of the Week]shuffle{$:/temp/shuffle/example!!state}]">
+
+</$list>

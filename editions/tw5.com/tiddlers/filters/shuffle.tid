@@ -1,0 +1,13 @@
+tags: [[Filter Operators]] [[Order Operators]]
+title: shuffle Operator
+type: text/vnd.tiddlywiki
+caption: shuffle
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input tiddlers in a random order based on the provided seed.
+op-parameter: a string to use as a seed for the randomization
+op-parameter-name: seed
+op-purpose: randomize the order of the input list.
+
+This operator takes the input list and randomizes the order of the list.  If no parameter is provided, the list order is random every time.
+
+<<.operator-examples "shuffle">>
