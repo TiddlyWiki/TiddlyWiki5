@@ -1,0 +1,14 @@
+created: 20190115201352150
+modified: 20190115201544151
+title: cloze
+type: text/vnd.tiddlywiki
+
+[[Prioritized Clozes]]
+
+[[Cloze Generation]]
+
+Types:
+<<list-links filter:"[tag[cloze.type]]">>
+
+All:
+<<list-links filter:"[tag[cloze]]">>

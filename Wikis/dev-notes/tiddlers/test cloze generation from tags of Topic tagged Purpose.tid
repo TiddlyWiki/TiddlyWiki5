@@ -1,8 +1,10 @@
 created: 20181212171037067
-modified: 20181212171314586
+modified: 20190115201311180
 tags: meta WIP
 title: test cloze generation from tags of Topic tagged Purpose
 type: text/vnd.tiddlywiki
+
+[[cloze]]
 
 example from [[React-Hooks]]
 

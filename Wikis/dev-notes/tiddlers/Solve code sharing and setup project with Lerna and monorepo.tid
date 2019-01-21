@@ -1,6 +1,6 @@
 created: 20181213214119261
 list: 
-modified: 20181214052625880
+modified: 20181214161452953
 publisher: Michał Załęcki
 released: 11/19/2018
 source: https://medium.com/@MichalZalecki/solve-code-sharing-and-setup-project-with-lerna-and-monorepo-d0f3e4728809
@@ -27,6 +27,8 @@ WIP: add below to [[Article]] header template
 
 !! Error in article:
  `import Hello from "@yourproject/common/Hello";` should be `".../common/Header";`
+
+!![[step by step commands]]
 
 !! Deployment of lerna monorepo...
 * it may be required to provide more guidance for your deployment tool or create a custom script 

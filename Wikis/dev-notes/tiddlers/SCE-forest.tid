@@ -1,0 +1,12 @@
+created: 20190102154311439
+modified: 20190102192847648
+tags: SCE-workflow
+title: SCE-forest
+type: text/vnd.tiddlywiki
+
+* ''Description'': UI Component Library package
+* ''Todo'':
+** define & add [[Storybook workflow|SCE-storybook-workflow]]
+** define & migrate: existing components such as:
+***accordian, text, cards, modals, other widgets, etc
+** ? integrate Jest snapshots

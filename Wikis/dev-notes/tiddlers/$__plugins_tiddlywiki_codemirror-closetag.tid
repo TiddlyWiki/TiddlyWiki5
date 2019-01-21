@@ -1,0 +1,50 @@
+author: JeremyRuston
+created: 20181214161411797
+dependents: 
+description: CodeMirror AddOn: Auto-Close Tags
+list: readme
+modified: 20181214161411797
+plugin-type: plugin
+title: $:/plugins/tiddlywiki/codemirror-closetag
+type: application/json
+version: 5.1.18
+
+{
+    "tiddlers": {
+        "$:/config/codemirror/autoCloseTags": {
+            "title": "$:/config/codemirror/autoCloseTags",
+            "type": "bool",
+            "text": "true\n"
+        },
+        "$:/language/codemirror/autoCloseTags/hint": {
+            "title": "$:/language/codemirror/autoCloseTags/hint",
+            "text": "Auto-close tags"
+        },
+        "$:/language/codemirror/autoCloseTags/info": {
+            "title": "$:/language/codemirror/autoCloseTags/info",
+            "text": "Whether or not to automatically close tags"
+        },
+        "$:/plugins/tiddlywiki/codemirror/addon/fold/xml-fold.js": {
+            "text": "// CodeMirror, copyright (c) by Marijn Haverbeke and others\n// Distributed under an MIT license: http://codemirror.net/LICENSE\n!function(e){\"object\"==typeof exports&&\"object\"==typeof module?e(require(\"../../lib/codemirror\")):\"function\"==typeof define&&define.amd?define([\"../../lib/codemirror\"],e):e(CodeMirror)}(function(e){\"use strict\";var n=e.Pos;function t(e,n){return e.line-n.line||e.ch-n.ch}var i=\"A-Z_a-z\\\\u00C0-\\\\u00D6\\\\u00D8-\\\\u00F6\\\\u00F8-\\\\u02FF\\\\u0370-\\\\u037D\\\\u037F-\\\\u1FFF\\\\u200C-\\\\u200D\\\\u2070-\\\\u218F\\\\u2C00-\\\\u2FEF\\\\u3001-\\\\uD7FF\\\\uF900-\\\\uFDCF\\\\uFDF0-\\\\uFFFD\",r=new RegExp(\"<(/?)([\"+i+\"][A-Z_a-z\\\\u00C0-\\\\u00D6\\\\u00D8-\\\\u00F6\\\\u00F8-\\\\u02FF\\\\u0370-\\\\u037D\\\\u037F-\\\\u1FFF\\\\u200C-\\\\u200D\\\\u2070-\\\\u218F\\\\u2C00-\\\\u2FEF\\\\u3001-\\\\uD7FF\\\\uF900-\\\\uFDCF\\\\uFDF0-\\\\uFFFD-:.0-9\\\\u00B7\\\\u0300-\\\\u036F\\\\u203F-\\\\u2040]*)\",\"g\");function u(e,n,t,i){this.line=n,this.ch=t,this.cm=e,this.text=e.getLine(n),this.min=i?Math.max(i.from,e.firstLine()):e.firstLine(),this.max=i?Math.min(i.to-1,e.lastLine()):e.lastLine()}function f(e,t){var i=e.cm.getTokenTypeAt(n(e.line,t));return i&&/\\btag\\b/.test(i)}function o(e){if(!(e.line>=e.max))return e.ch=0,e.text=e.cm.getLine(++e.line),!0}function l(e){if(!(e.line<=e.min))return e.text=e.cm.getLine(--e.line),e.ch=e.text.length,!0}function c(e){for(;;){var n=e.text.indexOf(\">\",e.ch);if(-1==n){if(o(e))continue;return}if(f(e,n+1)){var t=e.text.lastIndexOf(\"/\",n),i=t>-1&&!/\\S/.test(e.text.slice(t+1,n));return e.ch=n+1,i?\"selfClose\":\"regular\"}e.ch=n+1}}function a(e){for(;;){var n=e.ch?e.text.lastIndexOf(\"<\",e.ch-1):-1;if(-1==n){if(l(e))continue;return}if(f(e,n+1)){r.lastIndex=n,e.ch=n;var t=r.exec(e.text);if(t&&t.index==n)return t}else e.ch=n}}function s(e){for(;;){r.lastIndex=e.ch;var n=r.exec(e.text);if(!n){if(o(e))continue;return}if(f(e,n.index+1))return e.ch=n.index+n[0].length,n;e.ch=n.index+1}}function h(e){for(;;){var n=e.ch?e.text.lastIndexOf(\">\",e.ch-1):-1;if(-1==n){if(l(e))continue;return}if(f(e,n+1)){var t=e.text.lastIndexOf(\"/\",n),i=t>-1&&!/\\S/.test(e.text.slice(t+1,n));return e.ch=n+1,i?\"selfClose\":\"regular\"}e.ch=n}}function F(e,t){for(var i=[];;){var r,u=s(e),f=e.line,o=e.ch-(u?u[0].length:0);if(!u||!(r=c(e)))return;if(\"selfClose\"!=r)if(u[1]){for(var l=i.length-1;l>=0;--l)if(i[l]==u[2]){i.length=l;break}if(l<0&&(!t||t==u[2]))return{tag:u[2],from:n(f,o),to:n(e.line,e.ch)}}else i.push(u[2])}}function x(e,t){for(var i=[];;){var r=h(e);if(!r)return;if(\"selfClose\"!=r){var u=e.line,f=e.ch,o=a(e);if(!o)return;if(o[1])i.push(o[2]);else{for(var l=i.length-1;l>=0;--l)if(i[l]==o[2]){i.length=l;break}if(l<0&&(!t||t==o[2]))return{tag:o[2],from:n(e.line,e.ch),to:n(u,f)}}}else a(e)}}e.registerHelper(\"fold\",\"xml\",function(e,i){for(var r=new u(e,i.line,0);;){var f=s(r);if(!f||r.line!=i.line)return;var o=c(r);if(!o)return;if(!f[1]&&\"selfClose\"!=o){var l=n(r.line,r.ch),a=F(r,f[2]);return a&&t(a.from,l)>0?{from:l,to:a.from}:null}}}),e.findMatchingTag=function(e,i,r){var f=new u(e,i.line,i.ch,r);if(-1!=f.text.indexOf(\">\")||-1!=f.text.indexOf(\"<\")){var o=c(f),l=o&&n(f.line,f.ch),s=o&&a(f);if(o&&s&&!(t(f,i)>0)){var h={from:n(f.line,f.ch),to:l,tag:s[2]};return\"selfClose\"==o?{open:h,close:null,at:\"open\"}:s[1]?{open:x(f,s[2]),close:h,at:\"close\"}:{open:h,close:F(f=new u(e,l.line,l.ch,r),s[2]),at:\"open\"}}}},e.findEnclosingTag=function(e,n,t,i){for(var r=new u(e,n.line,n.ch,t);;){var f=x(r,i);if(!f)break;var o=F(new u(e,n.line,n.ch,t),f.tag);if(o)return{open:f,close:o}}},e.scanForClosingTag=function(e,n,t,i){return F(new u(e,n.line,n.ch,i?{from:0,to:i}:null),t)}});\n",
+            "type": "application/javascript",
+            "title": "$:/plugins/tiddlywiki/codemirror/addon/fold/xml-fold.js",
+            "module-type": "codemirror"
+        },
+        "$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js": {
+            "text": "// CodeMirror, copyright (c) by Marijn Haverbeke and others\n// Distributed under an MIT license: http://codemirror.net/LICENSE\n!function(e){\"object\"==typeof exports&&\"object\"==typeof module?e(require(\"../../lib/codemirror\"),require(\"../fold/xml-fold\")):\"function\"==typeof define&&define.amd?define([\"../../lib/codemirror\",\"../fold/xml-fold\"],e):e(CodeMirror)}(function(e){e.defineOption(\"autoCloseTags\",!1,function(i,s,l){if(l!=e.Init&&l&&i.removeKeyMap(\"autoCloseTags\"),s){var d={name:\"autoCloseTags\"};(\"object\"!=typeof s||s.whenClosing)&&(d[\"'/'\"]=function(t){return(n=t).getOption(\"disableInput\")?e.Pass:o(n,!0);var n}),(\"object\"!=typeof s||s.whenOpening)&&(d[\"'>'\"]=function(o){return function(o){if(o.getOption(\"disableInput\"))return e.Pass;for(var i=o.listSelections(),s=[],l=o.getOption(\"autoCloseTags\"),d=0;d<i.length;d++){if(!i[d].empty())return e.Pass;var c=i[d].head,f=o.getTokenAt(c),g=e.innerMode(o.getMode(),f.state),u=g.state;if(\"xml\"!=g.mode.name||!u.tagName)return e.Pass;var m=\"html\"==g.mode.configuration,h=\"object\"==typeof l&&l.dontCloseTags||m&&t,p=\"object\"==typeof l&&l.indentTags||m&&n,v=u.tagName;f.end>c.ch&&(v=v.slice(0,v.length-f.end+c.ch));var b=v.toLowerCase();if(!v||\"string\"==f.type&&(f.end!=c.ch||!/[\\\"\\']/.test(f.string.charAt(f.string.length-1))||1==f.string.length)||\"tag\"==f.type&&\"closeTag\"==u.type||f.string.indexOf(\"/\")==f.string.length-1||h&&a(h,b)>-1||r(o,v,c,u,!0))return e.Pass;var y=p&&a(p,b)>-1;s[d]={indent:y,text:\">\"+(y?\"\\n\\n\":\"\")+\"</\"+v+\">\",newPos:y?e.Pos(c.line+1,0):e.Pos(c.line,c.ch+1)}}for(var x=\"object\"==typeof l&&l.dontIndentOnAutoClose,d=i.length-1;d>=0;d--){var P=s[d];o.replaceRange(P.text,i[d].head,i[d].anchor,\"+insert\");var T=o.listSelections().slice(0);T[d]={head:P.newPos,anchor:P.newPos},o.setSelections(T),!x&&P.indent&&(o.indentLine(P.newPos.line,null,!0),o.indentLine(P.newPos.line+1,null,!0))}}(o)}),i.addKeyMap(d)}});var t=[\"area\",\"base\",\"br\",\"col\",\"command\",\"embed\",\"hr\",\"img\",\"input\",\"keygen\",\"link\",\"meta\",\"param\",\"source\",\"track\",\"wbr\"],n=[\"applet\",\"blockquote\",\"body\",\"button\",\"div\",\"dl\",\"fieldset\",\"form\",\"frameset\",\"h1\",\"h2\",\"h3\",\"h4\",\"h5\",\"h6\",\"head\",\"html\",\"iframe\",\"layer\",\"legend\",\"object\",\"ol\",\"p\",\"select\",\"table\",\"ul\"];function o(t,n){for(var o=t.listSelections(),a=[],i=n?\"/\":\"</\",s=t.getOption(\"autoCloseTags\"),l=\"object\"==typeof s&&s.dontIndentOnSlash,d=0;d<o.length;d++){if(!o[d].empty())return e.Pass;var c,f=o[d].head,g=t.getTokenAt(f),u=e.innerMode(t.getMode(),g.state),m=u.state;if(n&&(\"string\"==g.type||\"<\"!=g.string.charAt(0)||g.start!=f.ch-1))return e.Pass;if(\"xml\"!=u.mode.name)if(\"htmlmixed\"==t.getMode().name&&\"javascript\"==u.mode.name)c=i+\"script\";else{if(\"htmlmixed\"!=t.getMode().name||\"css\"!=u.mode.name)return e.Pass;c=i+\"style\"}else{if(!m.context||!m.context.tagName||r(t,m.context.tagName,f,m))return e.Pass;c=i+m.context.tagName}\">\"!=t.getLine(f.line).charAt(g.end)&&(c+=\">\"),a[d]=c}if(t.replaceSelections(a),o=t.listSelections(),!l)for(d=0;d<o.length;d++)(d==o.length-1||o[d].head.line<o[d+1].head.line)&&t.indentLine(o[d].head.line)}function a(e,t){if(e.indexOf)return e.indexOf(t);for(var n=0,o=e.length;n<o;++n)if(e[n]==t)return n;return-1}function r(t,n,o,a,r){if(!e.scanForClosingTag)return!1;var i=Math.min(t.lastLine()+1,o.line+500),s=e.scanForClosingTag(t,o,null,i);if(!s||s.tag!=n)return!1;for(var l=a.context,d=r?1:0;l&&l.tagName==n;l=l.prev)++d;o=s.to;for(var c=1;c<d;c++){var f=e.scanForClosingTag(t,o,null,i);if(!f||f.tag!=n)return!1;o=f.to}return!0}e.commands.closeTag=function(e){return o(e)}});",
+            "type": "application/javascript",
+            "title": "$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js",
+            "module-type": "codemirror"
+        },
+        "$:/plugins/tiddlywiki/codemirror-closetag/readme": {
+            "title": "$:/plugins/tiddlywiki/codemirror-closetag/readme",
+            "text": "This plugin adds the ability to ''automatically close Tags''. It needs the latest [[CodeMirror plugin|$:/plugins/tiddlywiki/codemirror]] to be installed\n\n\n"
+        },
+        "$:/core/ui/ControlPanel/Settings/codemirror/autoCloseTags": {
+            "title": "$:/core/ui/ControlPanel/Settings/codemirror/autoCloseTags",
+            "tags": "$:/tags/ControlPanel/Settings/CodeMirror",
+            "caption": "{{$:/language/codemirror/autoCloseTags/hint}}",
+            "text": "\\define lingo-base() $:/language/codemirror/autoCloseTags/\n<<lingo hint>>\n\n<$checkbox tiddler=\"$:/config/codemirror/autoCloseTags\" field=\"text\" checked=\"true\" unchecked=\"false\" default=\"true\"> <$link to=\"$:/config/codemirror/autoCloseTags\"><<lingo info>></$link> </$checkbox>\n\n"
+        }
+    }
+}

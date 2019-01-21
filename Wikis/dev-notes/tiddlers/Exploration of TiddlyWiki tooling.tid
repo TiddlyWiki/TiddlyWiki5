@@ -3,9 +3,9 @@ gsd_complete: false
 gsd_contact: 
 gsd_project: 
 gsd_realm: all
-gsd_status: active
+gsd_status: future
 gsd_type: project
-modified: 20181213221558586
+modified: 20181214154321687
 title: Exploration of TiddlyWiki tooling
 type: text/vnd.tiddlywiki
 
