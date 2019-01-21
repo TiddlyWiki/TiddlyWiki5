@@ -1,0 +1,43 @@
+color: #0433ff
+created: 20190102150712911
+description: Re-align on our work flow, the middleware, and our testing strategy. 
+modified: 20190102161309918
+purpose: Have a clear understanding of each piece of the project. 
+style: --darkreader-inline-color:#0016e2;
+tags: MeetingNotes
+title: SCE-workflow
+type: text/vnd.tiddlywiki
+
+!!!''Description:'' {{!!description}}
+
+!!!''Purpose:'' {{!!purpose}}
+
+!!!''Agenda:''
+
+!!!Review PPO sects
+
+1/ [[Testing & Documentation|SCE-testing-documentation]]
+
+{{SCE-testing-documentation}}
+
+2/ [[Indigo (middleware)|SCE-indigo]]
+
+{{SCE-indigo}}
+
+3/ [[Forest (UI Library)|SCE-forest]]
+
+{{SCE-forest}}
+
+4/ Off-cycle Inspections & Other
+
+5/ [[Process|SCE-process]]
+
+{{SCE-process}}
+
+6/ [[Offline, Maps, & Native|SCE-offline-maps-native]]
+
+{{SCE-offline-maps-native}}
+
+!!!''Items tagged:'' {{!!title}}
+<<list-links filter:'[tag[SCE-workflow]]' >>
+

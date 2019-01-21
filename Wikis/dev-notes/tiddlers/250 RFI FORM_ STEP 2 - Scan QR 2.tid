@@ -1,0 +1,135 @@
+created: 20190104154925540
+modified: 20190104195752047
+tags: 
+title: 250 RFI FORM: STEP 2 - Scan QR 2
+type: text/vnd.tiddlywiki
+
+//As a foreman, I see://
+
+#''NavigationHeader''
+#* .buttonLeft.title = __"Save & Exit"__
+#*//UI only, functionality called in Story 261//
+#''ScreenHeader.Breadcrumbs''
+#* .step: 2
+#* .position: 'top'
+#* //ref ticket #114//
+#''ScreenHeader''
+#* .title: __"Scan QR"__
+#''PhaseForm:''
+##propTypes: 
+##* .phase<'A'|'B'|'C'>
+##''Panel''
+##* .title: __"Phase: ${phase}"__
+##* .titlePosition: "center"
+##* .noBorder
+##* .children
+##*#''ScanButton''
+##*#* .label: {state.[...].scan[$phase].isLoaded ? __"Rescan": "Scan"__}
+##*#''TextInput'' 
+##*#* .label: __"Serial Number"__
+##*#* .hintText: "Enter or scan..."
+##*#''TextInput'' 
+##*#* .label: __"8-Digit Radio ID"__
+##*#* .hintText: "Enter or scan..."
+##*#''TextInput'' 
+##*#*  .label: __'Field Current - Phase ${phase}' __
+##*#*  .hintText: "Enter Field Current"
+##*#*  .inputAdornment: { adornment: "__AMPS__", position: "right" }
+##*#** e.g. https://material-ui.com/demos/text-fields/#input-adornments
+##''ACTION::SCAN_BUTTON_CLICK''($phase) =>
+###navigate to ScanScreen^^1^^ with param:$phase 
+#''ACTION::SCAN_SUCCESS'' => 
+## Save data to redux
+##* `store.surveys.localData[$survey_id].scans[$phase].data = {...}`
+##Fields (and ScanButton.label) automtically re-initialize with new store data
+#''Panel''
+#* .title: __"Installation Direction"__
+#* .titlePosition: "center"
+#* .noBorder
+#* .children
+#**''Select''
+#*** label: __'Installed Direction'__^^2^^
+#*** options:
+#****  North (N)
+#****  East (E)
+#****  South (S)
+#****  West (W)
+#****  Northeast (NE)
+#****  Southeast (SE)
+#****  Southwest (SW)
+#****  Northwest (NW)
+#  ''LatLongInfo''
+#*  ''LatLongInfo.Row''
+#** .label: 'Latitude'
+#** .coords: <String: minutes, seconds, degrees, hemisphere>
+#*  ''LatLongInfo.Row''
+#** .label: 'Longitude'
+#** .coords: <String: minutes, seconds, degrees, hemisphere>
+#*''ACTION::LATLONGCOORDS_UPDATED''`(coords, survey_id, phase) =>`
+#** `store.surveys.data[survey_id].coords[phase] = utils.splitCoords(coords) => { latitude: {minutes: NUMBER, seconds: NUMBER, degrees: NUMBER, hemisphere: <N|S|E|W>}, longitude: {...} }`
+#  ''Button''
+#* .label: __"Continue to Review and Confirm button"__
+#* .disabled: _.find(store.surveys.data[survey_id].scans, 'isValid')
+#*  ''Dialog.Warning: ''
+##* .status: 'warning'
+##* .title: 'Warning'
+##* .warnings: [string, ...]
+##*# `const invalidScans = _.filter(store.surveys.data[survey_id].scans, ['isValid', false]')`
+##*# `const warnings = _.reduce(invalidScans, o =>` `'Looks like you skipped Phase ${o.phase}. Did you want to install it? \n', '')`
+##*''ButtonBarBottom''
+##** .items: Array of Button
+##*** ''Button''
+##**** .label: "Close"
+##**** .onPress: function toggleDialogVisibility
+##*** ''Button''
+##**** .label: "Skip"
+##**** .onPress: function handleNextStep
+#* ''ACTION::CONTINUE_REVIEW_CONFIRM''
+#**Save work so far & Goes to __Step 4^^3^^__
+#  ''Match UX''^^4^^
+#  ''Error Messaging'' [...]^^5^^
+*Zeplin: [https://app.zeplin.io/project/5c23267fa1a063afdb855f6d/screen/5c2455d9c449feaf647a8b8a]
+*Error Messaging: [https://app.zeplin.io/project/5c23267fa1a063afdb855f6d/screen/5c246ac96309de2479861a2d]
+
+---
+^^1^^ 
+''ScanScreen'' 
+
+*__Does not exist yet__
+* will create placeholder screen for completion of this ticket with:
+** .title: 'Scan Screen'
+** ''Button''
+*** .label: 'Simulate Scan'
+**''ACTION::SIMULATE_SCAN_SUCCESS''(scanData) =>
+*** `({
+  coords: STRING
+  timestamp: UNIX_TIMESTAMP
+  serialNumber: 10_DIGIT?
+  radioId: 8_DIGIT?
+})`
+*** navigate back
+
+^^2^^
+''"Installed Direction"''
+
+* __redundant with "Installation Direction"__
+* __inconsistent with "Installation Direction"__
+
+^^3^^
+''Assumed typo:'' should be step 3 (not step 4)
+
+^^4^^
+''Match UX'''
+* No UX provided for:
+
+*# ''Dropdown open state'' with options (Installation Direction)
+*# ''Disabled Button gray'' is unspecific
+*# ''Warning Dialog'' aka skipped phase(s) OR <15 amp 'popup'
+*#* //"style similar to other pop-ups for messaging as per the style guide:"// ''is unclear, still need access to Zeplin: aperkey@nexient.com''
+*#* ''fixed spacing typos''. Will use: `If the minimum line current is less than 15 amps, do not install the RFI at the site and contact the District (Troubleman) and Field Engineering to identify an alternate location.`
+
+^^5^^
+''Error Messaging''
+
+* Confusion due to phrasing: "//Error Messaging//". Understood as //'Warning Copy'//
+**why: errors prevent continue/'skip' functionality, while warnings allow.

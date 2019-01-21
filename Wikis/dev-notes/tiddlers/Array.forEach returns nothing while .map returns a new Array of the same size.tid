@@ -1,0 +1,11 @@
+color: #0433ff
+created: 20190115200946360
+data-darkreader-inline-color: 
+modified: 20190115201504452
+style: --darkreader-inline-color:#0016e2;
+tags: cloze cloze.es6
+title: Array.forEach returns nothing while .map returns a new Array of the same size
+type: text/vnd.tiddlywiki
+
+`Array.{{c1::forEach::method}} returns {{c2::nothing}} while .map returns a new Array of the same size`
+

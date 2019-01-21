@@ -1,0 +1,42 @@
+created: 20190104153823237
+modified: 20190104154659406
+tags: 
+title: 250 RFI FORM: STEP 2 - Scan QR
+type: text/vnd.tiddlywiki
+
+As a foreman, I see:
+Black header navigation: Save & Exit - UI only, functionality called in Story 261
+Breadcrumbs to go to Step 2 (described in ticket 114)
+Header: Scan QR
+Phase A, B & C sections:
+Serial Number
+8-Digit Radio ID
+Field Current
+Scan button - depending on which phase they click on, goes to the Scan A, B or C screen.
+As users captures the scan, they come back to this page with the info captured filled out in the fields.
+the button copy changes from Scan to "Rescan" if there is a previous scan already
+Installation Direction, drop down
+North (N)
+East (E)
+South (S)
+West (W)
+Northeast (NE)
+Southeast (SE)
+Southwest (SW)
+Northwest (NW)
+Lat/Long info should be blank till it is captured.
+Lat long will be displayed for Phase A, unless there is no phase A scan, in that case it will be for Phase B & If there is no Phase B, then it will be for Phase C.
+Continue to Review and Confirm button
+Button is greyed out, till the required fields are entered - Required fields are at least one set of 3 completed fields for Phase A, B OR C
+For validation: If user goes clicks the button with less than 3 set (A, B, or C) completed, display pop-up with confirmation message:
+Looks like you skipped Phase <insert missed phase or phases>. Did you want to install <insert missed phase or phases>?
+Close - closes the pop-up & user stays on the screen
+Skip - skips the unscanned phases & goes to "C" below
+Save work so far & Goes to Step 4
+Match UX
+Error Messaging - If user enters amp less than 15 in any of the field current fields, then display the following message in the pop-up (style similar to other pop-ups for messaging as per the style guide:
+If the minimum line current is less than 15 amps, do-not install the RFI at the site and contact the District (Troubleman) and Field Engineering to identify an alternate location.
+
+
+Zeplin:  https://app.zeplin.io/project/5c23267fa1a063afdb855f6d/screen/5c2455d9c449feaf647a8b8a
+Error Messaging: https://app.zeplin.io/project/5c23267fa1a063afdb855f6d/screen/5c246ac96309de2479861a2d

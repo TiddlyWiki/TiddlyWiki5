@@ -1,0 +1,13 @@
+created: 20190102153036780
+modified: 20190102160610634
+tags: SCE-workflow
+title: SCE-process
+type: text/vnd.tiddlywiki
+
+*''Sprint planning''
+** factor in test coverage to estimations
+*'' Peer-reviews''
+** Post-Dev:Done: Tag PR: Patrick, One Peer
+** Post-Review: Tag QA
+*''Post-release''
+**add note for QA to get build

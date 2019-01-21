@@ -1,0 +1,65 @@
+color: #0433ff
+created: 20190102161706809
+modified: 20190102161827283
+tags: MeetingNotes
+title: SCE-workflow 1
+type: text/vnd.tiddlywiki
+
+
+!!!''Description:'' Re-align on our work flow, the middleware, and our testing strategy. 
+
+!!!''Purpose:'' Have a clear understanding of each piece of the project.
+
+!!!''Agenda:''
+
+1/ [[Testing & Documentation|SCE-testing-documentation]]
+
+*''PropTypes'' 
+**on each component
+*''JS Doc ''
+** middleware-only for now
+*''Post-release''
+**add note for QA to get build
+
+2/ [[Indigo (middleware)|SCE-indigo]]
+
+*''Description:'' middleware for..
+*''Todo:''
+** use feathers Redux http://github.com/feathers-plus/feathers-redux to connect from apps
+** define layer-based streaming to app (for offline data)
+
+3/ [[Forest (UI Library)|SCE-forest]]
+
+* ''Description'': UI Component Library package
+* ''Todo'':
+** define & add Storybook workflow
+** define & migrate: existing components such as:
+***accordian, text, cards, modals, other widgets, etc
+** ? integrate Jest snapshots
+
+4/ Off-cycle Inspections & Other
+
+5/ [[Process|SCE-process]]
+
+*''Sprint planning''
+** factor in test coverage to estimations
+** Say something, be more vocal
+*'' Peer-reviews''
+** Post-Dev:Done: Tag PR: Patrick, One Peer
+** Post-Review: Tag QA
+*''Post-release''
+**add note for QA to get build
+* Be more active/transparent on slack
+
+6/ [[Offline, Maps, & Native|SCE-offline-maps-native]]
+
+*''Offline''
+** What:
+*** Map tile assets, GPS data, ...?
+** Using...
+*** SQLLite
+**** share DB between apps (if simple)
+*''Maps''
+** add Service to persist GPS data to Redis (& SQL server?) per user (for: sorting other users by distance for sharing WO)
+*''Native''
+** define native todos (mostly offline functionality)

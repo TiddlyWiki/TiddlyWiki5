@@ -1,0 +1,13 @@
+created: 20190102151925760
+modified: 20190102160632770
+tags: SCE-workflow
+title: SCE-testing-documentation
+type: text/vnd.tiddlywiki
+
+*''PropTypes'' 
+**on each component
+*''JS Doc ''
+** middleware-only for now
+
+*''Post-release''
+**add note for QA to get build
