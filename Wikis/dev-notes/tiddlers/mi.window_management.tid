@@ -1,0 +1,30 @@
+created: 20190115180548332
+modified: 20190115183823350
+tags: mi.type mi.context_switch yak
+title: mi.window_management
+type: text/vnd.tiddlywiki
+
+Types:
+<<list-links filter:"[tags[mi.type]tag[mi.window_management]]">>
+
+All:
+<<list-links filter:"[tag[mi.window_management]]">>
+
+```
+shortcuts: {
+
+  maximizeApp(application){
+  	// window = getWindow()
+  	maximizeAppInWindow(window, application)
+  },
+  
+  maximizeAppInWindow(window, application){
+  	// call shortcut command
+    switchDesktopTo
+  },
+  
+  getWindow(window = 'active'){
+  	
+  }
+}
+```

@@ -1,5 +1,5 @@
 created: 20160307193957653
-modified: 20190102150619487
+modified: 20190115201557880
 tags: 
 title: Directory
 tmap.id: 439ee05a-62d2-44e2-ba32-7a3ae60c9268
@@ -15,3 +15,4 @@ type: text/vnd.tiddlywiki
 ---
 *[[Chrome Extensions]]
 *[[Meta]]
+*[[cloze]]

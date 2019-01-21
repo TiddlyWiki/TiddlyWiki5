@@ -1,0 +1,13 @@
+created: 20190115214852376
+modified: 20190115214908754
+tags: mi.type
+title: mi.vsc
+type: text/vnd.tiddlywiki
+
+[[shortcuts.vsc]]
+
+Types:
+<<list-links filter:"[tags[mi.type]tag[mi.vsc]]">>
+
+All:
+<<list-links filter:"[tag[mi.vsc]]">>
