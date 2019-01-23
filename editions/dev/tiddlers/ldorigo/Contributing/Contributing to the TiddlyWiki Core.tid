@@ -5,7 +5,7 @@ type: text/vnd.tiddlywiki
 toc-order: 1
 tags: [[Contributing]]
 
-The ~TiddlyWiki core is the container for all the generic features of ~TiddlyWiki that are of universal utility. Concretely, it comprises the tiddlers in the `$:/core` plugin.
+The ~TiddlyWiki core is the container for all the generic features of ~TiddlyWiki that are of universal utility. Concretely, it comprises the tiddlers in the `$:/core` plugin. 
 
 ! Core Contribution Requirements
 
