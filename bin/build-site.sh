@@ -224,6 +224,16 @@ node $TW5_BUILD_TIDDLYWIKI \
 #
 ######################################################
 
+# /plugins/tiddlywiki/innerwiki/index.html	Demo wiki with Innerwiki plugin
+
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/innerwikidemo \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT \
+	--rendertiddler $:/core/save/all plugins/tiddlywiki/innerwikidemo/index.html text/plain \
+	|| exit 1
+
 # /plugins/tiddlywiki/dynaview/index.html	Demo wiki with DynaView plugin
 # /plugins/tiddlywiki/dynaview/empty.html	Empty wiki with DynaView plugin
 

@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/innerwiki/inner-example
+
+<$innerwiki width="1200" height="400" style="width:100%;">
+	<$data title="HelloThere" text="! This tiddler is inside a wiki that is inside a wiki that is inside a wiki"/>
+	<$data title="$:/DefaultTiddlers" text="HelloThere"/>
+	<$data title="$:/palette" text="$:/palettes/SolarFlare"/>
+</$innerwiki>
