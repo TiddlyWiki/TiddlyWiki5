@@ -231,7 +231,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all plugins/tiddlywiki/innerwikidemo/index.html text/plain \
+	--rendertiddler $:/core/save/all plugins/tiddlywiki/innerwiki/index.html text/plain \
 	|| exit 1
 
 # /plugins/tiddlywiki/dynaview/index.html	Demo wiki with DynaView plugin
