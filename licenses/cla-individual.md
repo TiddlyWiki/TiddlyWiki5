@@ -351,3 +351,5 @@ Johannes Löthberg, @kyrias, 2019/01/07
 Ben Webber, @benwebber, 2019/01/09
 
 Jesse Weinstein, @JesseWeinstein, 2019/01/14
+
+Adam Sherwood, @admls, 2019/01/27
