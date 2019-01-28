@@ -48,6 +48,7 @@ InnerWikiWidget.prototype.render = function(parent,nextSibling) {
 	domSVG.style = this.innerWikiStyle;
 	domSVG.style.position = "absolute";
 	domSVG.style.zIndex = "1";
+	domSVG.style.pointerEvents = "none";
 	domSVG.setAttribute("viewBox","0 0 " + this.innerWikiClipWidth + " " + this.innerWikiClipHeight);
 	domWrapper.appendChild(domSVG);
 	this.setVariable("namespace","http://www.w3.org/2000/svg");
