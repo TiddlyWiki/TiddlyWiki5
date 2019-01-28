@@ -40,11 +40,19 @@ InnerWikiWidget.prototype.render = function(parent,nextSibling) {
 	classes.push("tc-innerwiki-wrapper");
 	domWrapper.className = classes.join(" ");
 	domWrapper.style = this.innerWikiStyle;
+	domWrapper.style.overflow = "hidden";
+	domWrapper.style.position = "relative";
+	domWrapper.style.boxSizing = "content-box";
+	// Set up the SVG container
+	var domSVG = this.document.createElementNS("http://www.w3.org/2000/svg","svg");
+	domSVG.style = this.innerWikiStyle;
+	domSVG.style.position = "absolute";
+	domSVG.style.zIndex = "1";
+	domSVG.setAttribute("viewBox","0 0 " + this.innerWikiClipWidth + " " + this.innerWikiClipHeight);
+	domWrapper.appendChild(domSVG);
+	this.setVariable("namespace","http://www.w3.org/2000/svg");
 	// If we're on the real DOM, adjust the wrapper and iframe
 	if(!this.document.isTiddlyWikiFakeDom) {
-		domWrapper.style.overflow = "hidden";
-		domWrapper.style.position = "relative";
-		domWrapper.style.boxSizing = "content-box";
 		// Create iframe
 		var domIFrame = this.document.createElement("iframe");
 		domIFrame.className = "tc-innerwiki-iframe";
@@ -54,10 +62,16 @@ InnerWikiWidget.prototype.render = function(parent,nextSibling) {
 		domIFrame.width = this.innerWikiWidth;
 		domIFrame.height = this.innerWikiHeight;
 		domWrapper.appendChild(domIFrame);
+	} else {
+		// Create image placeholder
+		var domImage = this.document.createElement("img");
+		domImage.style = this.innerWikiStyle;
+		domImage.setAttribute("src",this.innerWikiFilename);
+		domWrapper.appendChild(domImage);
 	}
 	// Insert wrapper into the DOM
 	parent.insertBefore(domWrapper,nextSibling);
-	this.renderChildren(domWrapper,null);
+	this.renderChildren(domSVG,null);
 	this.domNodes.push(domWrapper);
 	// If we're on the real DOM, finish the initialisation that needs us to be in the DOM
 	if(!this.document.isTiddlyWikiFakeDom) {
@@ -65,14 +79,16 @@ InnerWikiWidget.prototype.render = function(parent,nextSibling) {
 		domIFrame.contentWindow.document.open();
 		domIFrame.contentWindow.document.write(this.createInnerHTML());
 		domIFrame.contentWindow.document.close();
-		// Scale the iframe and adjust the height of the wrapper
-		var clipLeft = self.innerWikiClipLeft,
-			clipTop = self.innerWikiClipTop,
-			clipWidth = self.innerWikiClipWidth,
-			clipHeight = self.innerWikiClipHeight,
-			translateX = -clipLeft,
-			translateY = -clipTop,
-			scale = domWrapper.clientWidth / clipWidth;
+	}
+	// Scale the iframe and adjust the height of the wrapper
+	var clipLeft = this.innerWikiClipLeft,
+		clipTop = this.innerWikiClipTop,
+		clipWidth = this.innerWikiClipWidth,
+		clipHeight = this.innerWikiClipHeight,
+		translateX = -clipLeft,
+		translateY = -clipTop,
+		scale = domWrapper.clientWidth / clipWidth;
+	if(!this.document.isTiddlyWikiFakeDom) {
 		domIFrame.style.transformOrigin = (-translateX) + "px " + (-translateY) + "px";
 		domIFrame.style.transform = "translate(" + translateX + "px," + translateY + "px) scale(" + scale + ")";
 		domWrapper.style.height = (clipHeight * scale) + "px";
@@ -205,7 +221,7 @@ InnerWikiWidget.prototype.saveScreenshot = function(options,callback) {
 		return callback(null);
 	}
 	var path = require("path"),
-		filepath = path.resolve(basepath,this.innerWikiFilename) + ".png";
+		filepath = path.resolve(basepath,this.innerWikiFilename);
 	$tw.utils.createFileDirectories(filepath);
 	console.log("Taking screenshot",filepath);
 	// Fire up Puppeteer

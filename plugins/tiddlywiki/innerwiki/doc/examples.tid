@@ -1,5 +1,11 @@
 title: $:/plugins/tiddlywiki/innerwiki/examples
 
+\define big-arrow(x,y,colour:"#ff0000",border:"#000000")
+	<g transform="translate($x$,$y$)">
+		<path d="m-81.43106,34.99315l40.25737,-49.78116l40.25737,49.78116l-20.12869,0l0,50.02069l-40.25737,0l0,-50.02069l-20.12869,0l0,0z" fill="$colour$" stroke="$border$" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" transform="rotate(49.3775 -41.1737 35.1129)"/>
+	</g>
+\end
+
 \define example(text)
 <$codeblock code=<<__text__>>/>
 
@@ -12,10 +18,10 @@ $text$
 
 The innerwiki widget specifies the dimensions of the virtual screen used to render the wiki (in pixels) and CSS styles to apply to it. Nested `<$data>` widgets are used to specify individual payload tiddlers to be loaded into the wiki. In this example, we initialise the innerwiki with two tiddlers "HelloThere" and "$:/DefaultTiddlers":
 
-<<example """<$innerwiki width="1200" height="400" style="width:100%;" filename="screenshot-1">
+<$macrocall $name="example" text="""<$innerwiki width="1200" height="400" style="width:100%;" filename="screenshot-1.png">
 	<$data title="HelloThere" text="This tiddler is inside a wiki"/>
 	<$data title="$:/DefaultTiddlers" text="HelloThere"/>
-</$innerwiki>""">>
+</$innerwiki>"""/>
 
 Note that the "screenshot" is a shrunken but fully interactive TiddlyWiki.
 
@@ -24,50 +30,70 @@ Note that the "screenshot" is a shrunken but fully interactive TiddlyWiki.
 To render these examples as a PNG bitmap under Node.js, execute the following at the command prompt:
 
 ```
-tiddlywiki mywiki --screenshot $:/plugins/tiddlywiki/innerwiki/examples
+tiddlywiki editions/innerwikidemo --screenshot $:/plugins/tiddlywiki/innerwiki/examples
 ```
 
 The screenshots will be saved as `screenshot-1.png` etc in the `./output` folder of the wiki.
+
+To render this example tiddler as a static HTML file that embeds the screenshot images and includes the SVG overlays:
+
+```
+tiddlywiki editions/innerwikidemo --render '[[$:/plugins/tiddlywiki/innerwiki/examples]]' "examples.html" --build index
+```
+
+!! SVG overlays
+
+Any displayable content within innerwiki widget is displayed within an automatically created SVG element. This allows overlays to be added:
+
+<$macrocall $name="example" text="""<$innerwiki width="1200" height="400" style="width:100%;" filename="screenshot-2.png">
+	<$data title="HelloThere" text="This tiddler is inside a wiki"/>
+	<$data title="$:/DefaultTiddlers" text="HelloThere"/>
+	<circle cx="600" cy="50" r="40" stroke="black" stroke-width="2" fill="green" />
+	<<big-arrow 600 50>>
+</$innerwiki>"""/>
+
+Notice how macros can be used to encapsulate SVG fragments ([[see the source of this tiddler|$:/plugins/tiddlywiki/innerwiki/examples]]).
 
 !! Clipping
 
 A clipping rectangle can be applied to limit the area of the wiki that is displayed. For example:
 
-<<example """<$innerwiki width="1200" height="400" style="width:100%;" clipLeft="500" clipTop="100" clipWidth="600" clipHeight="300" filename="screenshot-2">
+<$macrocall $name="example" text="""<$innerwiki width="1200" height="400" style="width:100%;" clipLeft="500" clipTop="100" clipWidth="600" clipHeight="300" filename="screenshot-3.png">
 	<$data title="HelloThere" text="! This tiddler is inside a wiki that is inside a wiki"/>
 	<$data title="$:/DefaultTiddlers" text="HelloThere"/>
-</$innerwiki>""">>
+</$innerwiki>"""/>
 
 !! Transcluding payload tiddlers
 
 This example shows how the `<$data>` widget can be transcluded from other tiddlers (see $:/plugins/tiddlywiki/innerwiki/example-data):
 
-<<example """<$innerwiki width="600" height="400" style="width:100%;" filename="screenshot-3">
+<$macrocall $name="example" text="""<$innerwiki width="600" height="400" style="width:100%;" filename="screenshot-4.png">
 	{{$:/plugins/tiddlywiki/innerwiki/example-data}}
 	<$data title="HelloThere" text="! This tiddler is inside a wiki that is inside a wiki"/>
 	<$data title="$:/DefaultTiddlers" text="HelloThere"/>
-</$innerwiki>""">>
+</$innerwiki>"""/>
 
 !! Customising the wiki state
 
 By injecting the right payload tiddlers, the innerwiki can be initialised to any desired state. In this example we inject a configuration tiddler to make the "more" page control button visible, and a state tiddler to cause the dropdown to appear:
 
-<<example """<$innerwiki template="$:/plugins/tiddlywiki/innerwiki/template" filename="screenshot-4" width="1200" height="400" clipLeft="500" clipTop="100" clipWidth="600" clipHeight="300" style="width:100%;">
+<$macrocall $name="example" text="""<$innerwiki template="$:/plugins/tiddlywiki/innerwiki/template" filename="screenshot-5.png" width="1200" height="400" clipLeft="500" clipTop="100" clipWidth="600" clipHeight="300" style="width:100%;">
 	<$data title="HelloThere" text="! This tiddler is inside a wiki that is inside a wiki"/>
 	<$data title="$:/DefaultTiddlers" text="HelloThere"/>
 	<$data title="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/more-page-actions" text="show"/>
 	<$data title="$:/state/popup/more--1600698846" text="(151,144,21,25)"/>
-</$innerwiki>""">>
+</$innerwiki>"""/>
 
 !! Inception
 
 An innerwiki can itself contain an inner-innerwiki:
 
-<<example """<$innerwiki width="1200" height="600" style="width:100%;" filename="screenshot-5">
+<$macrocall $name="example" text="""<$innerwiki width="1200" height="600" style="width:100%;" filename="screenshot-6.png">
 	<$data title="HelloThere" text="! This tiddler is inside a wiki that is inside a wiki"/>
 	<$data title="$:/DefaultTiddlers" text="HelloThere $:/plugins/tiddlywiki/innerwiki/inner-example"/>
 	<$data $tiddler="$:/plugins/tiddlywiki/innerwiki"/>
-</$innerwiki>""">>
+	<<big-arrow 100 50 colour:#00ff00>>
+</$innerwiki>"""/>
 
 (You can see the innerwiki here: $:/plugins/tiddlywiki/innerwiki/inner-example)
 

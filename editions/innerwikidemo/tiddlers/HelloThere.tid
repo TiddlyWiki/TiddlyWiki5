@@ -8,5 +8,7 @@ To try these examples under Node.js:
 # Execute the following command in the root of the TiddlyWiki 5 repo:
 
 ```
-./tiddlywiki.js editions/innerwikidemo --screenshot '[[$:/plugins/tiddlywiki/innerwiki/examples]]' 4
+./tiddlywiki.js editions/innerwikidemo --screenshot '[[$:/plugins/tiddlywiki/innerwiki/examples]]' 4 --render '[[$:/plugins/tiddlywiki/innerwiki/examples]]' "examples.html"
 ```
+
+Open `examples.html` to see the generated static HTML rendering.
