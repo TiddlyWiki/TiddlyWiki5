@@ -79,21 +79,26 @@ By injecting the right payload tiddlers, the innerwiki can be initialised to any
 
 <$macrocall $name="example" text="""<$innerwiki template="$:/plugins/tiddlywiki/innerwiki/template" filename="screenshot-5.png" width="1200" height="400" style="width:100%;">
 	<$data title="HelloThere" text="! This tiddler is inside a wiki that is inside a wiki"/>
-	<$data title="Draft of 'HelloThere'" text="This tiddler is inside a wiki that is inside a wiki" draft.of="HelloThere" draft.title="HelloThere"/>
-	<$data title="$:/DefaultTiddlers" text="[[Draft of 'HelloThere']]"/>
+	<$data title="$:/DefaultTiddlers" text="HelloThere"/>
 	<$data title="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/more-page-actions" text="show"/>
 	<$data title="$:/state/popup/more--1600698846" text="(151,144,21,25)"/>
+</$innerwiki>"""/>
+
+<$macrocall $name="example" text="""<$innerwiki template="$:/plugins/tiddlywiki/innerwiki/template" filename="screenshot-6.png" width="1200" height="400" style="width:100%;">
+	<$data title="HelloThere" text="! This tiddler is inside a wiki that is inside a wiki"/>
+	<$data title="Draft of 'HelloThere'" text="This tiddler is inside a wiki that is inside a wiki" draft.of="HelloThere" draft.title="HelloThere"/>
+	<$data title="$:/DefaultTiddlers" text="[[Draft of 'HelloThere']]"/>
+	<$data title="$:/state/sidebar" text="no"/>
+	<$data title="$:/state/showeditpreview" text="yes"/>
 </$innerwiki>"""/>
 
 !! Inception
 
 An innerwiki can itself contain an inner-innerwiki:
 
-<$macrocall $name="example" text="""<$innerwiki width="1200" height="600" style="width:100%;" filename="screenshot-6.png">
+<$macrocall $name="example" text="""<$innerwiki width="1200" height="600" style="width:100%;" filename="screenshot-7.png">
 	<$data title="HelloThere" text="! This tiddler is inside a wiki that is inside a wiki"/>
 	<$data title="$:/DefaultTiddlers" text="HelloThere $:/plugins/tiddlywiki/innerwiki/inner-example"/>
-	<$data title="$:/state/sidebar" text="no"/>
-	<$data title="$:/state/showeditpreview" text="yes"/>
 	<$data $tiddler="$:/plugins/tiddlywiki/innerwiki"/>
 	<<big-arrow 100 50 colour:#00ff00>>
 </$innerwiki>"""/>
