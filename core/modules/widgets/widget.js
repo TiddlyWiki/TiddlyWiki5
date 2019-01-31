@@ -42,6 +42,7 @@ Widget.prototype.initialise = function(parseTreeNode,options) {
 	this.document = options.document;
 	this.attributes = {};
 	this.children = [];
+	this.transclusionWidgets = [];
 	this.domNodes = [];
 	this.eventListeners = {};
 	// Hashmap of the widget classes
@@ -555,6 +556,15 @@ Widget.prototype.invokeActionString = function(actions,triggeringWidget,event,va
 
 Widget.prototype.allowActionPropagation = function() {
 	return true;
+};
+
+Widget.prototype.findParentTranscludeWidget = function() {
+	var node = this;
+	var transclusionVariable = this.getVariable("transclusion");
+	while(node.getVariable("transclusion") === transclusionVariable) {
+		node = node.parentWidget;
+	}
+	return node !== this ? node : null;
 };
 
 exports.widget = Widget;
