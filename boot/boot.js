@@ -89,7 +89,9 @@ Helper for making DOM elements
 tag: tag name
 options: see below
 Options include:
+namespace: defaults to http://www.w3.org/1999/xhtml
 attributes: hashmap of attribute values
+style: hashmap of styles
 text: text to add as a child node
 children: array of further child nodes
 innerHTML: optional HTML for element
@@ -99,7 +101,7 @@ eventListeners: array of event listeners (this option won't work until $tw.utils
 */
 $tw.utils.domMaker = function(tag,options) {
 	var doc = options.document || document;
-	var element = doc.createElement(tag);
+	var element = doc.createElementNS(options.namespace || "http://www.w3.org/1999/xhtml",tag);
 	if(options["class"]) {
 		element.className = options["class"];
 	}
@@ -114,6 +116,9 @@ $tw.utils.domMaker = function(tag,options) {
 	}
 	$tw.utils.each(options.attributes,function(attribute,name) {
 		element.setAttribute(name,attribute);
+	});
+	$tw.utils.each(options.style,function(value,name) {
+		element.style[name] = value;
 	});
 	if(options.eventListeners) {
 		$tw.utils.addEventListeners(element,options.eventListeners);
