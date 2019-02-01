@@ -15,6 +15,7 @@ Widget to represent a single item of data
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var DataWidget = function(parseTreeNode,options) {
+	this.dataWidgetTag = parseTreeNode.type;
 	this.initialise(parseTreeNode,options);
 };
 
@@ -52,5 +53,6 @@ DataWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.data = DataWidget;
+exports.anchor = DataWidget;
 
 })();

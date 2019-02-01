@@ -47,6 +47,22 @@ This example injects all image tiddlers with the addition of the field "custom" 
 <$data $filter="[is[image]]" custom="Beta"/>
 ```
 
+! `<$anchor>` widget
+
+The `<$anchor>` widget is used within the `<$innerwiki>` widget to specify draggable anchors to be overlaid on the innerwiki.
+
+It supports the following attributes:
+
+|!Attribute |!Description |
+|x |The title of the tiddler containing the X coordinate of the anchor |
+|y |The title of the tiddler containing the Y coordinate of the anchor |
+
+This example declares an anchor whose coordinates are contained in the tiddlers [[my-anchor-x]] and [[my-anchor-y]]:
+
+```
+<$anchor x="my-anchor-x" y="my-anchor-y"/>
+```
+
 ! `screenshot` command
 
 Saves PNG screenshots of the `<$innerwiki>` widgets rendered by a set of tiddlers identified by a filter.

@@ -92,11 +92,32 @@ By injecting the right payload tiddlers, the innerwiki can be initialised to any
 	<$data title="$:/state/showeditpreview" text="yes"/>
 </$innerwiki>"""/>
 
+!! Draggable anchors
+
+This example shows how the `<$anchor>` widget is used to display draggable anchors overlaid on the innerwiki. The `<$anchor>` widget is used to declare the tiddlers containing the coordinates of each anchor. These tiddlers can then be transcluded by SVG graphic primitives to position them according to the anchor locations.
+
+<$macrocall $name="example" text="""screenshot-7-anchor-1-x: <$edit-text tag="input" tiddler="screenshot-7-anchor-1-x"/>
+
+screenshot-7-anchor-1-y: <$edit-text tag="input" tiddler="screenshot-7-anchor-1-y"/>
+
+screenshot-7-anchor-2-x: <$edit-text tag="input" tiddler="screenshot-7-anchor-2-x"/>
+
+screenshot-7-anchor-2-y: <$edit-text tag="input" tiddler="screenshot-7-anchor-2-y"/>
+
+<$innerwiki template="$:/plugins/tiddlywiki/innerwiki/template" filename="screenshot-7.png" width="1200" height="400" style="width:100%;">
+	<$anchor x="screenshot-7-anchor-1-x" y="screenshot-7-anchor-1-y"/>
+	<$anchor x="screenshot-7-anchor-2-x" y="screenshot-7-anchor-2-y"/>
+	<$data title="HelloThere" text="! This tiddler is inside a wiki that is inside a wiki"/>
+	<$data title="$:/DefaultTiddlers" text="HelloThere"/>
+	<$macrocall $name="big-arrow" x={{screenshot-7-anchor-1-x}} y={{screenshot-7-anchor-1-y}}/>
+	<circle cx={{screenshot-7-anchor-2-x}} cy={{screenshot-7-anchor-2-y}} r="50" stroke="blue" stroke-width="2" fill="green" />
+</$innerwiki>"""/>
+
 !! Inception
 
 An innerwiki can itself contain an inner-innerwiki:
 
-<$macrocall $name="example" text="""<$innerwiki width="1200" height="600" style="width:100%;" filename="screenshot-7.png">
+<$macrocall $name="example" text="""<$innerwiki width="1200" height="600" style="width:100%;" filename="screenshot-8.png">
 	<$data title="HelloThere" text="! This tiddler is inside a wiki that is inside a wiki"/>
 	<$data title="$:/DefaultTiddlers" text="HelloThere $:/plugins/tiddlywiki/innerwiki/inner-example"/>
 	<$data $tiddler="$:/plugins/tiddlywiki/innerwiki"/>
