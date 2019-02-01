@@ -118,10 +118,21 @@ Read the state tiddler
 */
 RevealWidget.prototype.readState = function() {
 	// Read the information from the state tiddler
-	var state = this.stateTitle ? (this.stateField ? this.wiki.getTiddler(this.stateTitle).getFieldString(this.stateField) :
-		(this.stateIndex ? this.wiki.extractTiddlerDataItem(this.stateTitle,this.stateIndex) :
-			this.wiki.getTiddlerText(this.stateTitle))) || this["default"] || this.getVariable("currentTiddler") :
-		(this.stateTiddlerTitle ? this.wiki.getTextReference(this.state,this["default"],this.getVariable("currentTiddler")) : this["default"]);
+	var state;
+	if(this.stateTitle) {
+		var stateTitleTiddler = this.wiki.getTiddler(this.stateTitle);
+		if(this.stateField) {
+			state = stateTitleTiddler ? stateTitleTiddler.getFieldString(this.stateField) : this["default"] || this.getVariable("currentTiddler");
+		} else if(this.stateIndex) {
+			state = stateTitleTiddler ? this.wiki.extractTiddlerDataItem(this.stateTitle,this.stateIndex) : this["default"] || this.getVariable("currentTiddler");
+		} else if(stateTitleTiddler) {
+			state = this.wiki.getTiddlerText(this.stateTitle) || this["default"] || this.getVariable("currentTiddler");	
+		} else {
+			state = this["default"] || this.getVariable("currentTiddler");
+		}
+	} else {
+		state = this.stateTiddlerTitle ? this.wiki.getTextReference(this.state,this["default"],this.getVariable("currentTiddler")) : this["default"];
+	}
 	if(state === null) {
 		state = this["default"];
 	}
