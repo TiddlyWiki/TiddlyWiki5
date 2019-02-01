@@ -35,6 +35,8 @@ tags: $:/tags/EditTemplate
 
 <$checkbox tiddler="$:/config/RelinkOnRename" field="text" checked="yes" unchecked="no" default="no"> {{$:/language/EditTemplate/Title/Relink/Prompt}}</$checkbox>
 
+<$list filter="[title<fromTitle>backlinks[]limit[1]]" variable="listItem">
+
 <$vars stateTiddler=<<qualify "$:/state/edit/references">> >
 
 <$reveal type="nomatch" state=<<stateTiddler>> text="show">
@@ -53,6 +55,8 @@ tags: $:/tags/EditTemplate
 </$reveal>
 
 </$vars>
+
+</$list>
 
 </$vars>
 
