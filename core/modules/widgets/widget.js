@@ -565,7 +565,7 @@ Widget.prototype.generateTransclusionFootprint = function() {
 		if(node === parentTransclusionWidget) {
 			break;
 		} else if(node.parentWidget && node.parentWidget.children) {
-			footprint = footprint + "" + node.parentWidget.children.indexOf(node);
+			footprint = footprint + "-" + node.parentWidget.children.indexOf(node);
 		}
 	}
 	return footprint;
