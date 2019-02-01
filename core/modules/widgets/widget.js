@@ -557,6 +557,25 @@ Widget.prototype.allowActionPropagation = function() {
 	return true;
 };
 
+Widget.prototype.generateTransclusionFootprint = function() {
+	var parentTransclusionWidget = this.findParentTransclusionWidget(),
+	    node = this,
+	    footprint = node.parentWidget.children.indexOf(node);
+	while(node = node.parentWidget && node !== parentTransclusionWidget) {
+		footprint += "" + node.parentWidget.children.indexOf(node);
+	}
+	return footprint;
+};
+
+Widget.prototype.findParentTransclusionWidget = function() {
+	var node = this;
+	var transclusionVariable = this.getVariable("transclusion");
+	while(node.getVariable("transclusion") === transclusionVariable) {
+		node = node.parentWidget;
+	}
+	return node !== this ? node : null;
+};
+
 exports.widget = Widget;
 
 })();
