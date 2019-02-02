@@ -101,8 +101,13 @@ Focus the engine node
 */
 SimpleEngine.prototype.focus  = function() {
 	if(this.domNode.focus && this.domNode.select) {
+		var selections = $tw.inputManager.getSelections(this.widget.editQualifiedID);
 		this.domNode.focus();
 		this.domNode.select();
+		if(selections) {
+			this.domNode.selectionStart = selections.selectionStart;
+			this.domNode.selectionEnd = selections.selectionEnd;
+		}
 	}
 };
 
@@ -110,6 +115,8 @@ SimpleEngine.prototype.focus  = function() {
 Handle a dom "input" event which occurs when the text has changed
 */
 SimpleEngine.prototype.handleInputEvent = function(event) {
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
 	return true;
@@ -119,6 +126,9 @@ SimpleEngine.prototype.handleInputEvent = function(event) {
 Handle a dom "focus" event
 */
 SimpleEngine.prototype.handleFocusEvent = function(event) {
+	$tw.inputManager.updateFocusInput(this.widget.editQualifiedID);
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
 	if(this.widget.editFocusPopup) {
 		$tw.popup.triggerPopup({
 			domNode: this.domNode,
