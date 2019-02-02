@@ -224,6 +224,8 @@ FramedEngine.prototype.executeTextOperation = function(operation) {
 		this.domNode.focus();
 		this.domNode.setSelectionRange(operation.newSelStart,operation.newSelEnd);
 	}
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",operation.newSelStart);
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",operation.newSelEnd);
 	this.domNode.focus();
 	return newText;
 };
