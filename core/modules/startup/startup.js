@@ -95,6 +95,8 @@ exports.startup = function() {
 			handlerMethod: "handleKeydownEvent"
 		}]);
 	}
+	// Kick off the input manager
+	$tw.inputManager = new $tw.InputManager();
 	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
 	$tw.rootWidget = new widget.widget({
 		type: "widget",
