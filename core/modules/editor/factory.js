@@ -78,6 +78,10 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.addEventListeners([
 			{type: "tm-edit-text-operation", handler: "handleEditTextOperationMessage"}
 		]);
+		// Focus again if inputManager allows to
+		if($tw.inputManager.shouldFocusAgain(this.editQualifiedID)) {
+			this.engine.focus();
+		}
 	};
 
 	/*
@@ -199,6 +203,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		// Determine whether to show the toolbar
 		this.editShowToolbar = this.wiki.getTiddlerText(ENABLE_TOOLBAR_TITLE,"yes");
 		this.editShowToolbar = (this.editShowToolbar === "yes") && !!(this.children && this.children.length > 0) && (!this.document.isTiddlyWikiFakeDom);
+		this.editQualifiedID = this.getStateQualifier() + "_" + this.generateTransclusionFootprint();
 	};
 
 	/*
@@ -213,6 +218,9 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		} else if(changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
+			if($tw.inputManager.shouldFocusAgain(this.editQualifiedID)) {
+				this.engine.focus();
+			}
 		}
 		this.engine.fixHeight();
 		if(this.editShowToolbar) {
