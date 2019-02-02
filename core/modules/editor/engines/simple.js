@@ -52,7 +52,8 @@ function SimpleEngine(options) {
 	// Add an input event handler
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},
-		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"}
+		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"},
+		{name: "blur", handlerObject: this, handlerMethod: "handleBlurEvent"}
 	]);
 	// Insert the element into the DOM
 	this.parentNode.insertBefore(this.domNode,this.nextSibling);
@@ -139,6 +140,14 @@ SimpleEngine.prototype.handleFocusEvent = function(event) {
 		});
 	}
 	return true;
+};
+
+/*
+Handle a blur event
+*/
+SimpleEngine.prototype.handleBlurEvent = function(event) {
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
 };
 
 /*
