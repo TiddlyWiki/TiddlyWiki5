@@ -12,17 +12,20 @@ Input handling utilities
 /*global $tw: false */
 "use strict";
 
+var STATE_CURRENT_FOCUS = "$:/state/current-focus";
+
 function InputManager(options) {
-	options = options || "";
+	options = options || {};
+	this.wiki = options.wiki || $tw.wiki;
 	this.inputs = [];
 }
 
 InputManager.prototype.findInputById = function(identifier) {
 	var result;
 	for(var i=0; i<this.inputs.length; i++) {
-		var object = this.inputs[i];
-		if(object["id"] === identifier) {
-			result = object;
+		var inputInfo = this.inputs[i];
+		if(inputInfo["id"] === identifier) {
+			result = inputInfo;
 			break;
 		}
 	}
@@ -30,8 +33,8 @@ InputManager.prototype.findInputById = function(identifier) {
 };
 
 InputManager.prototype.shouldFocusAgain = function(identifier) {
-	var object = this.findInputById(identifier);
-	if(object && object.shouldFocusAgain && $tw.wiki.getTiddlerText("$:/state/current-focus") === identifier) {
+	var inputInfo = this.findInputById(identifier);
+	if(inputInfo && inputInfo.shouldFocusAgain && (this.wiki.getTiddlerText(STATE_CURRENT_FOCUS) === identifier)) {
 		return true;
 	} else {
 		return false;
@@ -39,32 +42,32 @@ InputManager.prototype.shouldFocusAgain = function(identifier) {
 };
 
 InputManager.prototype.setValue = function(identifier,name,value) {
-	var object = this.findInputById(identifier);
-	if(object) {
-		object[name] = value;
+	var inputInfo = this.findInputById(identifier);
+	if(inputInfo) {
+		inputInfo[name] = value;
 	} else {
-		var options = {
+		var newInputInfo = {
 			id: identifier
 		};
-		options[name] = value;
-		this.inputs.push(options);
+		newInputInfo[name] = value;
+		this.inputs.push(newInputInfo);
 	}
 };
 
 InputManager.prototype.getSelections = function(identifier) {
-	var object = this.findInputById(identifier);
-	if(object) {
-		var selStart = object.selectionStart;
-		var selEnd = object.selectionEnd;
+	var inputInfo = this.findInputById(identifier),
+	    result;
+	if(inputInfo) {
+		var selStart = inputInfo.selectionStart,
+		    selEnd = inputInfo.selectionEnd;
 		if(selStart && selEnd) {
-			return {
+			result = {
 				selectionStart: selStart,
 				selectionEnd: selEnd
 			};
-		} else {
-			return null;
 		}
 	}
+	return result;
 };
 
 exports.InputManager = InputManager;
