@@ -126,6 +126,7 @@ SimpleEngine.prototype.handleInputEvent = function(event) {
 Handle a dom "focus" event
 */
 SimpleEngine.prototype.handleFocusEvent = function(event) {
+	this.widget.wiki.setText("$:/state/current-focus","text",undefined,this.widget.editQualifiedID);
 	$tw.inputManager.updateFocusInput(this.widget.editQualifiedID);
 	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
 	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
