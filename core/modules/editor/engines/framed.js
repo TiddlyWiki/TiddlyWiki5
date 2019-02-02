@@ -76,7 +76,8 @@ function FramedEngine(options) {
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
-		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"}
+		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"},
+		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"}
 	]);
 	// Insert the element into the DOM
 	this.iframeDoc.body.appendChild(this.domNode);
@@ -143,9 +144,24 @@ Focus the engine node
 */
 FramedEngine.prototype.focus  = function() {
 	if(this.domNode.focus && this.domNode.select) {
+		var selections = $tw.inputManager.getSelections(this.widget.editQualifiedID);
 		this.domNode.focus();
 		this.domNode.select();
+		if(selections) {
+			this.domNode.selectionStart = selections.selectionStart;
+			this.domNode.selectionEnd = selections.selectionEnd;
+		}
 	}
+};
+
+/*
+Handle a focus event
+*/
+FramedEngine.prototype.handleFocusEvent = function() {
+	this.widget.wiki.setText("$:/state/current-focus","text",undefined,this.widget.editQualifiedID);
+	$tw.inputManager.updateFocusInput(this.widget.editQualifiedID);
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
 };
 
 /*
@@ -160,6 +176,8 @@ FramedEngine.prototype.handleClickEvent = function(event) {
 Handle a dom "input" event which occurs when the text has changed
 */
 FramedEngine.prototype.handleInputEvent = function(event) {
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
 	return true;
