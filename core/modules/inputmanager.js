@@ -70,6 +70,17 @@ InputManager.prototype.getSelections = function(identifier) {
 	return result;
 };
 
+InputManager.prototype.updateFocusInput = function(identifier) {
+	for(var i=0; i<this.inputs.length; i++) {
+		var inputInfo = this.inputs[i];
+		if(inputInfo["id"] === identifier) {
+			inputInfo.shouldFocusAgain = true;
+		} else {
+			inputInfo.shouldFocusAgain = false;
+		}
+	}
+};
+
 exports.InputManager = InputManager;
 
 })();
