@@ -77,7 +77,8 @@ function FramedEngine(options) {
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
 		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"},
-		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"}
+		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"},
+		{name: "blur",handlerObject: this,handlerMethod: "handleBlurEvent"}
 	]);
 	// Insert the element into the DOM
 	this.iframeDoc.body.appendChild(this.domNode);
@@ -162,6 +163,14 @@ FramedEngine.prototype.handleFocusEvent = function() {
 	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
 	$tw.inputManager.updateFocusInput(this.widget.editQualifiedID);
 	this.widget.wiki.setText("$:/state/current-focus","text",undefined,this.widget.editQualifiedID);
+};
+
+/*
+Handle a blur event
+*/
+FramedEngine.prototype.handleBlurEvent = function() {
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
 };
 
 /*
