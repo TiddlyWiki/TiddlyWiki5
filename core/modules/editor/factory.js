@@ -71,10 +71,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		// Fix height
 		this.engine.fixHeight();
 		// Focus if required
-		if(this.editFocus === "true" || this.editFocus === "yes") {
-			this.engine.focus();
-		} else if($tw.inputManager.shouldFocusAgain(this.editQualifiedID)) {
-			// Focus again if inputManager allows to
+		if(this.editFocus === "true" || this.editFocus === "yes" || $tw.inputManager.shouldFocusAgain(this.editQualifiedID)) {
 			this.engine.focus();
 		}
 		// Add widget message listeners
