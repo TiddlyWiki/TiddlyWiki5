@@ -5,6 +5,8 @@ tags: Releases
 title: TiddlyWiki Prerelease
 type: text/vnd.tiddlywiki
 
-This version of ~TiddlyWiki is: <<version>>
+This TiddlyWiki uses the newest  released version: <<version>>
 
-The pre-release for the upcoming version can be found at [ext[https://tiddlywiki.com/prerelease/]]
+The pre-release for the upcoming version, provided for testing purposes, can be found at [ext[https://tiddlywiki.com/prerelease/]]
+
+<<.warning "Please don't try to use the pre-release version for anything important!">>
