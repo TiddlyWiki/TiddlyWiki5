@@ -73,15 +73,14 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		// Focus if required
 		if(this.editFocus === "true" || this.editFocus === "yes") {
 			this.engine.focus();
+		} else if($tw.inputManager.shouldFocusAgain(this.editQualifiedID)) {
+			// Focus again if inputManager allows to
+			this.engine.focus();
 		}
 		// Add widget message listeners
 		this.addEventListeners([
 			{type: "tm-edit-text-operation", handler: "handleEditTextOperationMessage"}
 		]);
-		// Focus again if inputManager allows to
-		if($tw.inputManager.shouldFocusAgain(this.editQualifiedID)) {
-			this.engine.focus();
-		}
 	};
 
 	/*
