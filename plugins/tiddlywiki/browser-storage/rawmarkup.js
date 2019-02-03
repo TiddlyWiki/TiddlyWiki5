@@ -28,7 +28,6 @@ function hookBootTiddlersLoaded() {
 	for(var index=0; index<window.localStorage.length; index++) {
 		var key = window.localStorage.key(index),
 			parts = key.split("#");
-console.log("key",key)
 		// If it's ours
 		if(parts[0] === "tw5" && parts[1] === url) {
 			// Read it as JSON
@@ -45,7 +44,6 @@ console.log("key",key)
 						// Get any existing tiddler
 						var title = incomingTiddler.fields.title,
 							existingTiddler = $tw.wiki.getTiddler(title);
-console.log("Existing",title,existingTiddler,existingTiddler && existingTiddler.isEqual(incomingTiddler))
 						if(existingTiddler && existingTiddler.isEqual(incomingTiddler)) {
 							// If the incoming tiddler is the same as the existing then we can delete the local storage version
 							window.localStorage.removeItem(key);
