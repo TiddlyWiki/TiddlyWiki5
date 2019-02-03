@@ -133,23 +133,6 @@ exports.count = function(object) {
 };
 
 /*
-Check if an array is equal by value and by reference.
-*/
-exports.isArrayEqual = function(array1,array2) {
-	if(array1 === array2) {
-		return true;
-	}
-	array1 = array1 || [];
-	array2 = array2 || [];
-	if(array1.length !== array2.length) {
-		return false;
-	}
-	return array1.every(function(value,index) {
-		return value === array2[index];
-	});
-};
-
-/*
 Determine whether an array-item is an object-property
 */
 exports.hopArray = function(object,array) {
@@ -159,46 +142,6 @@ exports.hopArray = function(object,array) {
 		}
 	}
 	return false;
-};
-
-/*
-Push entries onto an array, removing them first if they already exist in the array
-	array: array to modify (assumed to be free of duplicates)
-	value: a single value to push or an array of values to push
-*/
-exports.pushTop = function(array,value) {
-	var t,p;
-	if($tw.utils.isArray(value)) {
-		// Remove any array entries that are duplicated in the new values
-		if(value.length !== 0) {
-			if(array.length !== 0) {
-				if(value.length < array.length) {
-					for(t=0; t<value.length; t++) {
-						p = array.indexOf(value[t]);
-						if(p !== -1) {
-							array.splice(p,1);
-						}
-					}
-				} else {
-					for(t=array.length-1; t>=0; t--) {
-						p = value.indexOf(array[t]);
-						if(p !== -1) {
-							array.splice(t,1);
-						}
-					}
-				}
-			}
-			// Push the values on top of the main array
-			array.push.apply(array,value);
-		}
-	} else {
-		p = array.indexOf(value);
-		if(p !== -1) {
-			array.splice(p,1);
-		}
-		array.push(value);
-	}
-	return array;
 };
 
 /*
