@@ -2154,6 +2154,8 @@ $tw.boot.startup = function(options) {
 	if($tw.preloadTiddlers) {
 		$tw.wiki.addTiddlers($tw.preloadTiddlers);
 	}
+	// Give hooks a chance to modify the store
+	$tw.hooks.invokeHook("th-boot-tiddlers-loaded");
 	// Unpack plugin tiddlers
 	$tw.wiki.readPluginInfo();
 	$tw.wiki.registerPluginTiddlers("plugin",$tw.safeMode ? ["$:/core"] : undefined);
