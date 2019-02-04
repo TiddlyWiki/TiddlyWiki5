@@ -53,7 +53,8 @@ function SimpleEngine(options) {
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},
 		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"},
-		{name: "blur", handlerObject: this, handlerMethod: "handleBlurEvent"}
+		{name: "blur",handlerObject: this,handlerMethod: "updateGlobalSelections"},
+		{name: "select",handlerObject: this,handlerMethod: "updateGlobalSelections"}
 	]);
 	// Insert the element into the DOM
 	this.parentNode.insertBefore(this.domNode,this.nextSibling);
@@ -122,8 +123,7 @@ SimpleEngine.prototype.focus  = function() {
 Handle a dom "input" event which occurs when the text has changed
 */
 SimpleEngine.prototype.handleInputEvent = function(event) {
-	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
-	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
+	this.updateGlobalSelections();
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
 	return true;
@@ -133,8 +133,7 @@ SimpleEngine.prototype.handleInputEvent = function(event) {
 Handle a dom "focus" event
 */
 SimpleEngine.prototype.handleFocusEvent = function(event) {
-	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
-	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
+	this.updateGlobalSelections();
 	$tw.inputManager.updateFocusInput(this.widget.editQualifiedID);
 	if(this.widget.editFocusPopup) {
 		$tw.popup.triggerPopup({
@@ -150,7 +149,7 @@ SimpleEngine.prototype.handleFocusEvent = function(event) {
 /*
 Handle a blur event
 */
-SimpleEngine.prototype.handleBlurEvent = function(event) {
+SimpleEngine.prototype.updateGlobalSelections = function(event) {
 	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
 	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
 };
