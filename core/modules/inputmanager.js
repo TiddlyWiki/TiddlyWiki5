@@ -30,7 +30,7 @@ function InputManager(options) {
 
 /*
 Find the input with the given identifier in the inputs array
-Returns an "inputInfo" object of the form
+Returns either UNDEFINED or an "inputInfo" object of the form
 {
 	id: "a unique id",
 	selectionStart:"x",
@@ -81,7 +81,7 @@ InputManager.prototype.setValue = function(identifier,name,value) {
 };
 
 /*
-Returns an object of the form
+Returns either UNDEFINED or an object of the form
 {
 	selectionStart: "x",
 	selectionEnd: "y"
