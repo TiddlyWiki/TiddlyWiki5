@@ -215,7 +215,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			var editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
 			if($tw.inputManager.shouldFocusAgain(this.editQualifiedID)) {
-				this.engine.focus();
+				this.engine.domNode.focus();
 			}
 		}
 		this.engine.fixHeight();
