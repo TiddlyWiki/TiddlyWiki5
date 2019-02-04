@@ -103,11 +103,12 @@ Focus the engine node
 SimpleEngine.prototype.focus  = function() {
 	if(this.domNode.focus && this.domNode.select) {
 		var selections = $tw.inputManager.getSelections(this.widget.editQualifiedID);
-		this.domNode.focus();
-		this.domNode.select();
 		if(selections) {
-			this.domNode.selectionStart = selections.selectionStart;
-			this.domNode.selectionEnd = selections.selectionEnd;
+			this.domNode.setSelectionRange(selections.selectionStart,selections.selectionEnd);
+			this.domNode.focus();
+		} else {
+			this.domNode.focus();
+			this.domNode.select();
 		}
 	}
 };
