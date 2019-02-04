@@ -3,7 +3,14 @@ title: $:/core/modules/inputmanager.js
 type: application/javascript
 module-type: global
 
-Input handling utilities
+global inputManager module $tw.inputManager
+stores information about input and textarea fields in objects of the form
+{
+	id: "a unique id",
+	selectionStart:"x",
+	selectionEnd:"y",
+	shouldFocusAgain:boolean
+}
 
 \*/
 (function(){
@@ -17,9 +24,20 @@ var STATE_CURRENT_FOCUS = "$:/state/current-focus";
 function InputManager(options) {
 	options = options || {};
 	this.wiki = options.wiki || $tw.wiki;
+	// initialise the array that stores input information
 	this.inputs = [];
 }
 
+/*
+Find the input with the given identifier in the inputs array
+Returns an "inputInfo" object of the form
+{
+	id: "a unique id",
+	selectionStart:"x",
+	selectionEnd:"y",
+	shouldFocusAgain:boolean
+}
+*/
 InputManager.prototype.findInputById = function(identifier) {
 	var result;
 	for(var i=0; i<this.inputs.length; i++) {
@@ -32,6 +50,11 @@ InputManager.prototype.findInputById = function(identifier) {
 	return result;
 };
 
+/*
+Returns the value of the inputInfo's "shouldFocusAgain" property
+If an input gets focus the input engine calls $tw.inputManager.updateFocusInput(id) to set
+its input as the one that should update again, because it's the last one that got focus
+*/
 InputManager.prototype.shouldFocusAgain = function(identifier) {
 	var inputInfo = this.findInputById(identifier);
 	if(inputInfo && inputInfo.shouldFocusAgain && (this.wiki.getTiddlerText(STATE_CURRENT_FOCUS) === identifier)) {
@@ -41,6 +64,9 @@ InputManager.prototype.shouldFocusAgain = function(identifier) {
 	}
 };
 
+/*
+A method used within the input engines to set / update values in its associated inputInfo object
+*/
 InputManager.prototype.setValue = function(identifier,name,value) {
 	var inputInfo = this.findInputById(identifier);
 	if(inputInfo) {
@@ -54,6 +80,14 @@ InputManager.prototype.setValue = function(identifier,name,value) {
 	}
 };
 
+/*
+Returns an object of the form
+{
+	selectionStart: "x",
+	selectionEnd: "y"
+}
+used within input engines to restore selections
+*/
 InputManager.prototype.getSelections = function(identifier) {
 	var inputInfo = this.findInputById(identifier),
 	    result;
@@ -66,6 +100,10 @@ InputManager.prototype.getSelections = function(identifier) {
 	return result;
 };
 
+/*
+Updates all inputInfo objects within the inputs array so that only the input with
+the given identifier has "shouldFocusAgain" set to true
+*/
 InputManager.prototype.updateFocusInput = function(identifier) {
 	for(var i=0; i<this.inputs.length; i++) {
 		var inputInfo = this.inputs[i];
