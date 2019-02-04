@@ -147,8 +147,13 @@ FramedEngine.prototype.focus  = function() {
 	if(this.domNode.focus && this.domNode.select) {
 		var selections = $tw.inputManager.getSelections(this.widget.editQualifiedID);
 		if(selections) {
-			this.domNode.setSelectionRange(selections.selectionStart,selections.selectionEnd);
+			//when the domNode gets focus, the selections need already to be up to date,
+			//otherwise they get overwritten by default selections.
+			//after focusing, set selection range, which moves cursor into view (if outside)
+			this.domNode.selectionStart = selections.selectionStart;
+			this.domNode.selectionEnd = selections.selectionEnd;
 			this.domNode.focus();
+			this.domNode.setSelectionRange(selections.selectionStart,selections.selectionEnd);
 		} else {
 			this.domNode.focus();
 			this.domNode.select();
