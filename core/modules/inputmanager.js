@@ -26,6 +26,7 @@ function InputManager(options) {
 	this.wiki = options.wiki || $tw.wiki;
 	// initialise the array that stores input information
 	this.inputs = [];
+	this.focusedInput = null;
 }
 
 /*
@@ -112,6 +113,10 @@ InputManager.prototype.updateFocusInput = function(identifier) {
 		} else {
 			inputInfo.shouldFocusAgain = false;
 		}
+	}
+	if(identifier !== this.focusedInput) {
+		this.wiki.setText(STATE_CURRENT_FOCUS,"text",undefined,identifier);
+		this.focusedInput = identifier;
 	}
 };
 
