@@ -7,8 +7,8 @@ global inputManager module $tw.inputManager
 stores information about input and textarea fields in objects of the form
 {
 	id: "a unique id",
-	selectionStart:"x",
-	selectionEnd:"y",
+	selectionStart: selectionStart,
+	selectionEnd: selectionEnd,
 	shouldFocusAgain:boolean
 }
 
