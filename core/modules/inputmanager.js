@@ -33,8 +33,8 @@ Find the input with the given identifier in the inputs array
 Returns either UNDEFINED or an "inputInfo" object of the form
 {
 	id: "a unique id",
-	selectionStart:"x",
-	selectionEnd:"y",
+	selectionStart: selectionStart,
+	selectionEnd: selectionEnd,
 	shouldFocusAgain:boolean
 }
 */
@@ -83,8 +83,8 @@ InputManager.prototype.setValue = function(identifier,name,value) {
 /*
 Returns either UNDEFINED or an object of the form
 {
-	selectionStart: "x",
-	selectionEnd: "y"
+	selectionStart: selectionStart,
+	selectionEnd: selectionEnd
 }
 used within input engines to restore selections
 */
