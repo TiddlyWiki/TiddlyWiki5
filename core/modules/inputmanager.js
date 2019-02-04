@@ -58,14 +58,10 @@ InputManager.prototype.getSelections = function(identifier) {
 	var inputInfo = this.findInputById(identifier),
 	    result;
 	if(inputInfo) {
-		var selStart = inputInfo.selectionStart,
-		    selEnd = inputInfo.selectionEnd;
-		if(selStart && selEnd) {
-			result = {
-				selectionStart: selStart,
-				selectionEnd: selEnd
-			};
-		}
+		result = {
+			selectionStart: inputInfo.selectionStart,
+			selectionEnd: inputInfo.selectionEnd
+		};
 	}
 	return result;
 };
