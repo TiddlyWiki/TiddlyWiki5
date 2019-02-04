@@ -78,7 +78,8 @@ function FramedEngine(options) {
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
 		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"},
 		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"},
-		{name: "blur",handlerObject: this,handlerMethod: "handleBlurEvent"}
+		{name: "blur",handlerObject: this,handlerMethod: "updateGlobalSelections"},
+		{name: "select",handlerObject: this,handlerMethod: "updateGlobalSelections"}
 	]);
 	// Insert the element into the DOM
 	this.iframeDoc.body.appendChild(this.domNode);
@@ -165,15 +166,14 @@ FramedEngine.prototype.focus  = function() {
 Handle a focus event
 */
 FramedEngine.prototype.handleFocusEvent = function() {
-	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
-	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
+	this.updateGlobalSelections();
 	$tw.inputManager.updateFocusInput(this.widget.editQualifiedID);
 };
 
 /*
 Handle a blur event
 */
-FramedEngine.prototype.handleBlurEvent = function() {
+FramedEngine.prototype.updateGlobalSelections = function() {
 	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
 	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
 };
@@ -190,8 +190,7 @@ FramedEngine.prototype.handleClickEvent = function(event) {
 Handle a dom "input" event which occurs when the text has changed
 */
 FramedEngine.prototype.handleInputEvent = function(event) {
-	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
-	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
+	this.updateGlobalSelections();
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
 	return true;
@@ -238,8 +237,7 @@ FramedEngine.prototype.executeTextOperation = function(operation) {
 		this.domNode.focus();
 		this.domNode.setSelectionRange(operation.newSelStart,operation.newSelEnd);
 	}
-	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",operation.newSelStart);
-	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",operation.newSelEnd);
+	this.updateGlobalSelections();
 	this.domNode.focus();
 	return newText;
 };
