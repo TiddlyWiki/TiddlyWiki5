@@ -26,7 +26,6 @@ function InputManager(options) {
 	this.wiki = options.wiki || $tw.wiki;
 	// initialise the array that stores input information
 	this.inputs = [];
-	this.focusedInput = null;
 }
 
 /*
@@ -103,7 +102,8 @@ InputManager.prototype.getSelections = function(identifier) {
 
 /*
 Updates all inputInfo objects within the inputs array so that only the input with
-the given identifier has "shouldFocusAgain" set to true
+the given identifier has "shouldFocusAgain" set to true.
+Further - if it has changed - updates $:/state/current-focus with the unique id of the currently focused input
 */
 InputManager.prototype.updateFocusInput = function(identifier) {
 	for(var i=0; i<this.inputs.length; i++) {
@@ -114,7 +114,7 @@ InputManager.prototype.updateFocusInput = function(identifier) {
 			inputInfo.shouldFocusAgain = false;
 		}
 	}
-	if(identifier !== this.focusedInput) {
+	if(identifier !== this.wiki.getTiddlerText(STATE_CURRENT_FOCUS)) {
 		this.wiki.setText(STATE_CURRENT_FOCUS,"text",undefined,identifier);
 		this.focusedInput = identifier;
 	}
