@@ -231,6 +231,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	so that subclasses can override updateEditor() and still use updateEditorDomNode()
 	*/
 	EditTextWidget.prototype.updateEditor = function(text,type) {
+		this.engine.updateGlobalSelections();
 		this.updateEditorDomNode(text,type);
 	};
 
