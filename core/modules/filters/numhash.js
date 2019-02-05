@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/filters/qfp.js
+title: $:/core/modules/filters/numhash.js
 type: application/javascript
 module-type: filteroperator
 
@@ -20,7 +20,7 @@ filter="{|$:/core/ui/PageTemplate/story|||} {|$:/core/ui/PageTemplate|||} +[qfp[
 /*
 Export our filter function
 */
-exports.qfp = function(source,operator,options) {
+exports.numhash = function(source,operator,options) {
 	var titles = [],
 	results = [],
 	hashString;
