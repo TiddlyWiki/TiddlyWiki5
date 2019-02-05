@@ -8,7 +8,7 @@ Example feeding it with a list of transclusion variables that model the path
 from a given point up to the page template (returns the same qualified string
 like the <<qualify>> macro would do at that point):
 
-filter="{|$:/core/ui/PageTemplate/story|||} {|$:/core/ui/PageTemplate|||} +[qfp[]]"
+filter="{|$:/core/ui/PageTemplate/story|||} {|$:/core/ui/PageTemplate|||} +[numhash[]]"
 
 \*/
 (function(){
