@@ -1,0 +1,11 @@
+created: 20190205172944412
+modified: 20190205172944412
+tags: [[Filter Operators]] [[String Operators]]
+title: numhash Operator
+type: text/vnd.tiddlywiki
+caption: numhash
+op-purpose: create a numeric hash string from all input titles
+op-input: a [[selection of titles|Title Selection]]
+op-output: a numeric hash string like the ones produced by the qualify macro and widget
+
+<<.operator-examples "numhash">>
