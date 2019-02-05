@@ -1,0 +1,8 @@
+created: 20190205173637147
+modified: 20190205173637147
+tags: [[numhash Operator]] [[Operator Examples]]
+title: numhash Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "HelloThere Learning [[Working with TiddlyWiki]] +[numhash[]]">>
+<<.operator-example 2 "[list[$:/StoryList]numhash[]]">>
