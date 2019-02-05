@@ -28,11 +28,7 @@ exports.numhash = function(source,operator,options) {
 			titles.push(title);
 	});
 	if(titles.length) {
-		hashString = $tw.utils.hashString(titles.join("")).toString();
-		while(hashString.length < 11) {
-			hashString = "-" + hashString;
-		}
-		results.push(hashString);
+		results.push($tw.utils.hashString(titles.join("")).toString());
 	}
 return results;
 };
