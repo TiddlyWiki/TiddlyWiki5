@@ -561,7 +561,8 @@ Widget.prototype.generateTransclusionFootprint = function() {
 	var parentTransclusionWidget = this.findParentTransclusionWidget(),
 	    node = this,
 	    footprint = node.parentWidget.children.indexOf(node);
-	while(node = node.parentWidget) {
+	while(node) {
+		node = node.parentWidget;
 		if(node === parentTransclusionWidget) {
 			break;
 		} else if(node.parentWidget && node.parentWidget.children) {
