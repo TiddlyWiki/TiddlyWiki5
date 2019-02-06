@@ -18,4 +18,6 @@ Upgrader/Plugins/Suppressed/Version: 封鎖的插件 (由於傳入的 <<incoming
 Upgrader/Plugins/Upgraded: 升級插件，從 <<incoming>> 到 <<upgraded>>
 Upgrader/State/Suppressed: 封鎖的暫存狀態條目
 Upgrader/System/Suppressed: 封鎖的系統條目
+Upgrader/System/Warning: 核心模組條目
+Upgrader/System/Alert: 您即將導入一個條目會覆蓋一個核心模組條目。不建議這樣做，因為可能會使系統不穩定。
 Upgrader/ThemeTweaks/Created: 從 <$text text=<<from>>/> 遷移佈景主題
