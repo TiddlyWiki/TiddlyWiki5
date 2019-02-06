@@ -361,6 +361,20 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[list[TiddlerSeventh]before[MissingTiddler]]").join(",")).toBe("a fourth tiddler");
 	});
 
+	it("should handle the math operators", function() {
+		expect(wiki.filterTiddlers("[[2]add[2]]").join(",")).toBe("4");
+		expect(wiki.filterTiddlers("[[4]subtract[2]]").join(",")).toBe("2");
+		expect(wiki.filterTiddlers("[[24]divide[8]]").join(",")).toBe("3");
+		expect(wiki.filterTiddlers("[[355]divide[113]sign[]multiply[4]]").join(",")).toBe("4");
+		expect(wiki.filterTiddlers("[[355]divide[113]add[0.5]round[]multiply[4]]").join(",")).toBe("16");
+		expect(wiki.filterTiddlers("1 2 3 4 +[sum[]]").join(",")).toBe("10");
+		expect(wiki.filterTiddlers("1 2 3 4 +[product[]]").join(",")).toBe("24");
+		expect(wiki.filterTiddlers("1 2 3 4 +[maxall[]]").join(",")).toBe("4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[minall[]]").join(",")).toBe("1");
+		expect(wiki.filterTiddlers("1 2 3 4 +[max[2]]").join(",")).toBe("2,2,3,4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[min[2]]").join(",")).toBe("1,2,2,2");
+	});
+
 });
 
 })();
