@@ -23,7 +23,8 @@ if(Object.prototype.hasOwnProperty.call($tw.hooks.names,hookName)) {
 
 // Load tiddlers from browser storage
 function hookBootTiddlersLoaded() {
-	var url = window.location.protocol === "file:" ? window.location.pathname : "";
+	var url = window.location.protocol === "file:" ? window.location.pathname : "",
+		log = [];
 	// Step through each browsder storage item
 	for(var index=0; index<window.localStorage.length; index++) {
 		var key = window.localStorage.key(index),
@@ -47,15 +48,19 @@ function hookBootTiddlersLoaded() {
 						if(existingTiddler && existingTiddler.isEqual(incomingTiddler)) {
 							// If the incoming tiddler is the same as the existing then we can delete the local storage version
 							window.localStorage.removeItem(key);
-							console.log("Removing from local storage",title)
 						}
 						$tw.wiki.addTiddler(incomingTiddler);
-						console.log("Loading from local storage",title);
+						log.push(title);
 					}
 				}
 			}
 		}
 	}
+	// Save the log
+	$tw.wiki.addTiddler({
+		title: "$:/temp/BrowserStorage/Log",
+		text: $tw.utils.stringifyList(log)
+	});
 }
 
 })();

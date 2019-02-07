@@ -1,9 +1,19 @@
 title: $:/plugins/tiddlywiki/browser-storage/settings
 
-This filter determines which tiddlers will be saved to local storage. By default, it contains `[is[tiddler]]` meaning that it will attempt to save all tiddlers. Other useful values include `[prefix[$:/state/]]` to just save state tiddlers, thus preserving selected tabs, and the open/closed status of table of contents entries.
+! Save Filter
+
+This filter determines which tiddlers will be saved to local storage. By default, it contains `[all[]]` meaning that it will attempt to save all tiddlers. Other useful values include `[prefix[$:/state/]]` to just save state tiddlers, thus preserving selected tabs, and the open/closed status of table of contents entries.
 
 <$link to="$:/config/BrowserStorage/SaveFilter">Browser Storage Save Filter</$link>: <$edit-text tiddler="$:/config/BrowserStorage/SaveFilter" default="" tag="input" size="50"/>
+
+! Custom Quota Exceeded Alert
 
 This setting allows a custom alert message to be displayed when an attempt to store a tiddler fails due to the storage quota being exceeded:
 
 <$link to="$:/config/BrowserStorage/QuotaExceededAlert">Quota Exceeded Alert</$link>: <$edit-text tiddler="$:/config/BrowserStorage/QuotaExceededAlert" default="" tag="input" size="50"/>
+
+! Startup Log
+
+The tiddler $:/temp/BrowserStorage/Log contains a log of the tiddlers that were loaded from local storage at startup:
+
+<<list-links "[enlist{$:/temp/BrowserStorage/Log}sort[]]">>

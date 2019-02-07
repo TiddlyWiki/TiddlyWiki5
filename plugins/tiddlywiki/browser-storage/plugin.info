@@ -1,6 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/browser-storage",
-	"description": "Local storage in the browser",
+	"description": "Browser-based local storage",
 	"author": "Jeremy Ruston ",
 	"core-version": ">=5.0.0",
 	"list": "readme settings"
