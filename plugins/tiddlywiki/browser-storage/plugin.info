@@ -3,5 +3,5 @@
 	"description": "Local storage in the browser",
 	"author": "Jeremy Ruston ",
 	"core-version": ">=5.0.0",
-	"list": "readme"
+	"list": "readme settings"
 }

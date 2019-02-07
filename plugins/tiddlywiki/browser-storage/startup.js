@@ -18,7 +18,10 @@ exports.platforms = ["browser"];
 exports.after = ["load-modules"];
 exports.synchronous = true;
 
+var SAVE_FILTER_TITLE = "$:/config/BrowserStorage/SaveFilter"
+
 exports.startup = function() {
+	var self = this;
 	// Compute our prefix for local storage keys
 	var url = window.location.protocol === "file:" ? window.location.pathname : "",
 		prefix = "tw5#" + url + "#";
@@ -26,9 +29,27 @@ exports.startup = function() {
 	var logger = new $tw.utils.Logger("browser-storage",{
 			colour: "cyan"
 		});
+	// Function to compile the filter
+	var filterFn,
+		compileFilter = function() {
+			filterFn = $tw.wiki.compileFilter($tw.wiki.getTiddlerText(SAVE_FILTER_TITLE));
+	}
+	compileFilter();
 	// Track tiddler changes
 	$tw.wiki.addEventListener("change",function(changes) {
-		$tw.utils.each(changes,function(change,title) {
+		// Recompile the filter if it has changed
+		if(changes[SAVE_FILTER_TITLE]) {
+			compileFilter();
+		}
+		// Filter the changes
+		var filteredChanges = filterFn.call($tw.wiki,function(iterator) {
+			$tw.utils.each(changes,function(change,title) {
+				var tiddler = $tw.wiki.getTiddler(title);
+				iterator(tiddler,title);
+			});
+		});
+console.log("Filtered changes",filteredChanges)
+		$tw.utils.each(filteredChanges,function(title) {
 			// Get the tiddler
 			var tiddler = $tw.wiki.getTiddler(title);
 			if(tiddler) {
