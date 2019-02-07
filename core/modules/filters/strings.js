@@ -35,7 +35,7 @@ exports.concat = makeStringBinaryOperator(
 );
 
 exports.split = makeStringBinaryOperator(
-	function(a,b) {return [("" + a).split(b)];}
+	function(a,b) {return ("" + a).split(b);}
 );
 
 exports.join = makeStringArrayOperator(
