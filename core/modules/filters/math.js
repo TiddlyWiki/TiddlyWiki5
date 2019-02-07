@@ -75,6 +75,18 @@ exports.min = makeNumericBinaryOperator(
 	function(a,b) {return Math.min(a,b);}
 );
 
+exports.fixed = makeNumericBinaryOperator(
+	function(a,b) {return Number.prototype.toFixed.call(a,b);}
+);
+
+exports.precision = makeNumericBinaryOperator(
+	function(a,b) {return Number.prototype.toPrecision.call(a,b);}
+);
+
+exports.exponential = makeNumericBinaryOperator(
+	function(a,b) {return Number.prototype.toExponential.call(a,b);}
+);
+
 exports.sum = makeNumericArrayOperator(
 	function(accumulator,value) {return accumulator + value},
 	0 // Initial value
@@ -104,7 +116,7 @@ function makeNumericBinaryOperator(fnCalc) {
 		});
 		return result;
 	};
-};
+}
 
 function makeNumericArrayOperator(fnCalc,initialValue) {
 	initialValue = initialValue || 0;
@@ -117,7 +129,7 @@ function makeNumericArrayOperator(fnCalc,initialValue) {
 			return fnCalc(accumulator,parseNumber(currentValue));
 		},initialValue))];
 	};
-};
+}
 
 function parseNumber(str) {
 	return parseFloat(str) || 0;
