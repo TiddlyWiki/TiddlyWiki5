@@ -4,7 +4,7 @@
 		"tiddlywiki/bibtex",
 		"tiddlywiki/blog",
 		"tiddlywiki/browser-sniff",
-		"tiddlywiki/browser-storage"
+		"tiddlywiki/browser-storage",
 		"tiddlywiki/cecily",
 		"tiddlywiki/classictools",
 		"tiddlywiki/codemirror",
