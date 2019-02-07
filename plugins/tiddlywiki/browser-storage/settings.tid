@@ -4,3 +4,6 @@ This filter determines which tiddlers will be saved to local storage. By default
 
 <$link to="$:/config/BrowserStorage/SaveFilter">Browser Storage Save Filter</$link>: <$edit-text tiddler="$:/config/BrowserStorage/SaveFilter" default="" tag="input" size="50"/>
 
+This setting allows a custom alert message to be displayed when an attempt to store a tiddler fails due to the storage quota being exceeded:
+
+<$link to="$:/config/BrowserStorage/QuotaExceededAlert">Quota Exceeded Alert</$link>: <$edit-text tiddler="$:/config/BrowserStorage/QuotaExceededAlert" default="" tag="input" size="50"/>

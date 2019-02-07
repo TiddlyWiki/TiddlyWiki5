@@ -18,7 +18,10 @@ exports.platforms = ["browser"];
 exports.after = ["load-modules"];
 exports.synchronous = true;
 
-var SAVE_FILTER_TITLE = "$:/config/BrowserStorage/SaveFilter"
+var SAVE_FILTER_TITLE = "$:/config/BrowserStorage/SaveFilter",
+	QUOTA_EXCEEDED_ALERT_TITLE = "$:/config/BrowserStorage/QuotaExceededAlert",
+	DEFAULT_QUOTA_EXCEEDED_ALERT_PREFIX = "Quota exceeded attempting to store `",
+	DEFAULT_QUOTA_EXCEEDED_ALERT_SUFFIX = "` in browser local storage";
 
 exports.startup = function() {
 	var self = this;
@@ -61,7 +64,8 @@ console.log("Filtered changes",filteredChanges)
 				} catch(e) {
 					if(e.name === "QuotaExceededError") {
 						// Complain if we failed
-						logger.alert("Quota exceeded trying to store '" + title + "' in browser local storage");
+						var msg = $tw.wiki.getTiddlerText(QUOTA_EXCEEDED_ALERT_TITLE,DEFAULT_QUOTA_EXCEEDED_ALERT_PREFIX + title + DEFAULT_QUOTA_EXCEEDED_ALERT_SUFFIX);
+						logger.alert(msg);
 						// No point in keeping old values around for this tiddler
 						window.localStorage.removeItem(prefix + title);
 					} else {
