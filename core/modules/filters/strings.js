@@ -15,7 +15,7 @@ Sum/product/maxall/minall operate on the entire list, returning a single item.
 "use strict";
 
 exports.length = makeStringBinaryOperator(
-	function(a) {return [("" + a).length];}
+	function(a) {return ["" + ("" + a).length];}
 );
 
 exports.uppercase = makeStringBinaryOperator(
