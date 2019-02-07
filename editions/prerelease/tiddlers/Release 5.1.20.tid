@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 !! Major Improvements
 
-[[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0ea00b59b0dcd3de003e92a6bc0b27814fd0ec81]] support for mathematical operations within filters.
+Added several new [[Mathematics Operators]] for working with numbers.
 
 !! Plugin Improvements
 
