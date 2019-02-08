@@ -176,6 +176,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editMinHeight = this.getAttribute("minHeight",DEFAULT_MIN_TEXT_AREA_HEIGHT);
 		this.editFocusPopup = this.getAttribute("focusPopup");
 		this.editFocus = this.getAttribute("focus");
+		this.editTabIndex = this.getAttribute("tabindex");
 		// Get the default editor element tag and type
 		var tag,type;
 		if(this.editField === "text") {
