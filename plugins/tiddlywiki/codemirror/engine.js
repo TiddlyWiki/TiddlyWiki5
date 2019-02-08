@@ -125,6 +125,16 @@ function CodeMirrorEngine(options) {
 	this.cm.on("keydown",function(cm,event) {
 		return self.widget.handleKeydownEvent.call(self.widget,event);
 	});
+	this.cm.on("focus",function(cm,event) {
+		self.handleFocusEvent();
+		return true;
+	});
+	this.cm.on("blur",function(cm,event) {
+		self.updateGlobalSelections();
+	});
+	this.cm.on("cursorActivity",function(cm,event) {
+		self.updateGlobalSelections();
+	});
 }
 
 /*
@@ -163,8 +173,33 @@ CodeMirrorEngine.prototype.fixHeight = function() {
 Focus the engine node
 */
 CodeMirrorEngine.prototype.focus  = function() {
-	this.cm.focus();
-}
+	var selections = $tw.inputManager.getSelections(this.widget.editQualifiedID);
+	if(selections) {
+		this.cm.focus();
+		this.cm.setSelection(this.cm.posFromIndex(selections.selectionStart),this.cm.posFromIndex(selections.selectionEnd));
+	} else {
+		this.cm.focus();
+	}
+};
+
+CodeMirrorEngine.prototype.handleFocusEvent = function() {
+	this.updateGlobalSelections();
+	$tw.inputManager.updateFocusInput(this.widget.editQualifiedID);
+};
+
+CodeMirrorEngine.prototype.updateGlobalSelections = function() {
+	var selections = this.cm.listSelections(),
+	    anchorPos,
+	    headPos;
+	if(selections.length > 0) {
+		anchorPos = this.cm.indexFromPos(selections[0].anchor),
+		headPos = this.cm.indexFromPos(selections[0].head);
+	} else {
+		anchorPos = headPos = this.cm.indexFromPos(this.cm.getCursor());
+	}
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",anchorPos);
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",headPos);
+};
 
 /*
 Create a blank structure representing a text operation
@@ -200,6 +235,7 @@ CodeMirrorEngine.prototype.executeTextOperation = function(operation) {
 		this.cm.setSelection(this.cm.posFromIndex(operation.newSelStart),this.cm.posFromIndex(operation.newSelEnd));
 		newText = operation.text.substring(0,operation.cutStart) + operation.replacement + operation.text.substring(operation.cutEnd);
 	}
+	this.updateGlobalSelections();
 	this.cm.focus();
 	return newText;
 };
