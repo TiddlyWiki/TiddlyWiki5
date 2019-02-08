@@ -21,6 +21,7 @@ function SaverHandler(options) {
 	var self = this;
 	this.wiki = options.wiki;
 	this.dirtyTracking = options.dirtyTracking;
+	this.preloadDirty = options.preloadDirty || [];
 	this.pendingAutoSave = false;
 	// Make a logger
 	this.logger = new $tw.utils.Logger("saver-handler");
@@ -33,7 +34,13 @@ function SaverHandler(options) {
 		// Compile the dirty tiddler filter
 		this.filterFn = this.wiki.compileFilter(this.wiki.getTiddlerText(this.titleSyncFilter));
 		// Count of changes that have not yet been saved
-		this.numChanges = 0;
+		var filteredChanges = self.filterFn.call(self.wiki,function(iterator) {
+				$tw.utils.each(self.preloadDirty,function(title) {
+					var tiddler = self.wiki.getTiddler(title);
+					iterator(tiddler,title);
+				});
+		});
+		this.numChanges = filteredChanges.length;
 		// Listen out for changes to tiddlers
 		this.wiki.addEventListener("change",function(changes) {
 			// Filter the changes so that we only count changes to tiddlers that we care about

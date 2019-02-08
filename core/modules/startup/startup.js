@@ -130,7 +130,11 @@ exports.startup = function() {
 		$tw.syncer = new $tw.Syncer({wiki: $tw.wiki, syncadaptor: $tw.syncadaptor});
 	} 
 	// Setup the saver handler
-	$tw.saverHandler = new $tw.SaverHandler({wiki: $tw.wiki, dirtyTracking: !$tw.syncadaptor});
+	$tw.saverHandler = new $tw.SaverHandler({
+		wiki: $tw.wiki,
+		dirtyTracking: !$tw.syncadaptor,
+		preloadDirty: $tw.boot.preloadDirty || []
+	});
 	// Host-specific startup
 	if($tw.browser) {
 		// Install the popup manager

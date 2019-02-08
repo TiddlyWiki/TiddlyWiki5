@@ -12,6 +12,8 @@ Startup code injected as raw markup
 // Need to initialise these because we run before bootprefix.js and boot.js
 $tw = window.$tw || Object.create(null);
 $tw.hooks = $tw.hooks || { names: {}};
+$tw.boot = $tw.boot || {};
+$tw.boot.preloadDirty = $tw.boot.preloadDirty || [];
 
 // Hook the point in the startup process when the tiddlers have been loaded but plugins not unpacked
 var hookName = "th-boot-tiddlers-loaded";
@@ -48,14 +50,17 @@ function hookBootTiddlersLoaded() {
 						if(existingTiddler && existingTiddler.isEqual(incomingTiddler)) {
 							// If the incoming tiddler is the same as the existing then we can delete the local storage version
 							window.localStorage.removeItem(key);
+						} else {
+							$tw.wiki.addTiddler(incomingTiddler);
+							log.push(title);
 						}
-						$tw.wiki.addTiddler(incomingTiddler);
-						log.push(title);
 					}
 				}
 			}
 		}
 	}
+	// Make sure that all the tiddlers we've loaded are marked as dirty at startup
+	Array.prototype.push.apply($tw.boot.preloadDirty,log);
 	// Save the log
 	$tw.wiki.addTiddler({
 		title: "$:/temp/BrowserStorage/Log",
