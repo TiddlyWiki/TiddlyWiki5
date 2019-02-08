@@ -26,8 +26,7 @@ var SAVE_FILTER_TITLE = "$:/config/BrowserStorage/SaveFilter",
 exports.startup = function() {
 	var self = this;
 	// Compute our prefix for local storage keys
-	var url = window.location.protocol === "file:" ? window.location.pathname : "",
-		prefix = "tw5#" + url + "#";
+	var prefix = "tw5#" + window.location.pathname + "#";
 	// Make a logger
 	var logger = new $tw.utils.Logger("browser-storage",{
 			colour: "cyan"

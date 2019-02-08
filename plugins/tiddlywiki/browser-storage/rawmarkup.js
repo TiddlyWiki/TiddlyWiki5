@@ -23,7 +23,7 @@ if(Object.prototype.hasOwnProperty.call($tw.hooks.names,hookName)) {
 
 // Load tiddlers from browser storage
 function hookBootTiddlersLoaded() {
-	var url = window.location.protocol === "file:" ? window.location.pathname : "",
+	var url = window.location.pathname,
 		log = [];
 	// Step through each browsder storage item
 	for(var index=0; index<window.localStorage.length; index++) {
