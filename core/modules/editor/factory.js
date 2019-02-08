@@ -217,7 +217,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		}
 		this.engine.fixHeight();
 		if(this.editShowToolbar) {
-			return this.refreshChildren(changedTiddlers);			
+			return this.refreshChildren(changedTiddlers);
 		} else {
 			return false;
 		}
@@ -267,7 +267,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 				    el.dispatchEvent(clickEvent);
 					event.preventDefault();
 					event.stopPropagation();
-					return true;			
+					return true;
 				}
 			}
 		}
