@@ -88,7 +88,13 @@ exports.exponential = makeNumericBinaryOperator(
 );
 
 exports.equals = makeNumericBinaryOperator(
-	function(a,b) {return a === b ? a : null;}
+	function(a,b,prefix) {
+		if(prefix === "!") {
+			return a !== b ? a : null;
+		} else {
+			return a === b ? a : null;
+		}
+	}
 );
 
 exports.sum = makeNumericArrayOperator(
@@ -116,7 +122,7 @@ function makeNumericBinaryOperator(fnCalc) {
 		var result = [],
 			numOperand = parseNumber(operator.operand);
 		source(function(tiddler,title) {
-			var fnCalcResult = fnCalc(parseNumber(title),numOperand);
+			var fnCalcResult = fnCalc(parseNumber(title),numOperand,operator.prefix);
 			if(fnCalcResult) {
 				result.push(stringifyNumber(fnCalcResult));
 			}
