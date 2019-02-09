@@ -53,7 +53,7 @@ function parseFilterOperation(operators,filterString,p) {
 				$tw.utils.each(subsuffix.split(","),function(entry) {
 					entry = $tw.utils.trim(entry);
 					if(entry) {
-						operator.suffixes[operator.suffixes.length - 1].push(entry); 
+						operator.suffixes[operator.suffixes.length - 1].push(entry);
 					}
 				});
 			});
@@ -177,6 +177,11 @@ source: an iterator function for the source tiddlers, called source(iterator), w
 widget: an optional widget node for retrieving the current tiddler etc.
 */
 exports.compileFilter = function(filterString) {
+	var allowDuplicate = false
+	if (filterString[0] === '?') {
+		allowDuplicate = true
+		filterString = filterString.slice(1)
+	}
 	var filterParseTree;
 	try {
 		filterParseTree = this.parseFilter(filterString);
@@ -246,7 +251,7 @@ exports.compileFilter = function(filterString) {
 			switch(operation.prefix || "") {
 				case "": // No prefix means that the operation is unioned into the result
 					return function(results,source,widget) {
-						$tw.utils.pushTop(results,operationSubFunction(source,widget));
+						$tw.utils.pushTop(results,operationSubFunction(source,widget), allowDuplicate);
 					};
 				case "-": // The results of this operation are removed from the main result
 					return function(results,source,widget) {
@@ -257,13 +262,13 @@ exports.compileFilter = function(filterString) {
 						// This replaces all the elements of the array, but keeps the actual array so that references to it are preserved
 						source = self.makeTiddlerIterator(results);
 						results.splice(0,results.length);
-						$tw.utils.pushTop(results,operationSubFunction(source,widget));
+						$tw.utils.pushTop(results,operationSubFunction(source,widget), allowDuplicate);
 					};
 				case "~": // This operation is unioned into the result only if the main result so far is empty
 					return function(results,source,widget) {
 						if(results.length === 0) {
 							// Main result so far is empty
-							$tw.utils.pushTop(results,operationSubFunction(source,widget));
+							$tw.utils.pushTop(results,operationSubFunction(source,widget), allowDuplicate);
 						}
 					};
 			}
