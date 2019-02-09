@@ -72,13 +72,14 @@ $tw.utils.isArrayEqual = function(array1,array2) {
 Push entries onto an array, removing them first if they already exist in the array
 	array: array to modify (assumed to be free of duplicates)
 	value: a single value to push or an array of values to push
+	allowDuplicate: a boolean flag, if true than duplicate entries are not removed
 */
-$tw.utils.pushTop = function(array,value) {
+$tw.utils.pushTop = function(array,value, allowDuplicate) {
 	var t,p;
 	if($tw.utils.isArray(value)) {
 		// Remove any array entries that are duplicated in the new values
 		if(value.length !== 0) {
-			if(array.length !== 0) {
+			if(array.length !== 0 && !allowDuplicate) {
 				if(value.length < array.length) {
 					for(t=0; t<value.length; t++) {
 						p = array.indexOf(value[t]);
@@ -100,7 +101,7 @@ $tw.utils.pushTop = function(array,value) {
 		}
 	} else {
 		p = array.indexOf(value);
-		if(p !== -1) {
+		if(p !== -1 && !allowDuplicate) {
 			array.splice(p,1);
 		}
 		array.push(value);
