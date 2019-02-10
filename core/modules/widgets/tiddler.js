@@ -62,7 +62,9 @@ TiddlerWidget.prototype.computeTiddlerState = function() {
 		tiddlerTagClasses: this.getTagClasses()
 	};
 	// Compute a simple hash to make it easier to detect changes
-	state.hash = state.currentTiddler + state.missingTiddlerClass + state.shadowTiddlerClass + state.systemTiddlerClass + state.tiddlerTagClasses;
+	state.shortHash = state.currentTiddler + state.missingTiddlerClass + state.shadowTiddlerClass + state.systemTiddlerClass;
+	state.hash = state.shortHash + state.tiddlerTagClasses;
+	
 	return state;
 };
 
@@ -86,11 +88,19 @@ TiddlerWidget.prototype.getTagClasses = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 TiddlerWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes(),
+	var self = this,
+	    changedAttributes = this.computeAttributes(),
 		newTiddlerState = this.computeTiddlerState();
-	if(changedAttributes.tiddler || newTiddlerState.hash !== this.tiddlerState.hash) {
+	if(changedAttributes.tiddler || newTiddlerState.shortHash !== this.tiddlerState.shortHash) {
 		this.refreshSelf();
 		return true;
+	} else if(newTiddlerState.hash !== this.tiddlerState.hash) {
+		// if only tags have changed update tiddlerTagClasses and refresh children but
+		// wait for animation to finish
+		setTimeout(function(){
+			self.setVariable("tiddlerTagClasses",newTiddlerState.tiddlerTagClasses);
+			self.refreshChildren(changedTiddlers);
+		},$tw.utils.getAnimationDuration());
 	} else {
 		return this.refreshChildren(changedTiddlers);		
 	}
