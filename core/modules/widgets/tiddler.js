@@ -99,8 +99,9 @@ TiddlerWidget.prototype.refresh = function(changedTiddlers) {
 		// wait for animation to finish
 		setTimeout(function(){
 			self.setVariable("tiddlerTagClasses",newTiddlerState.tiddlerTagClasses);
-			self.refreshChildren(changedTiddlers);
+			self.refreshChildren(self.tiddlerTitle);
 		},$tw.utils.getAnimationDuration());
+		return this.refreshChildren(changedTiddlers);
 	} else {
 		return this.refreshChildren(changedTiddlers);		
 	}
