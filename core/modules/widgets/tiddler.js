@@ -97,7 +97,7 @@ TiddlerWidget.prototype.refresh = function(changedTiddlers) {
 	} else if(newTiddlerState.hash !== this.tiddlerState.hash) {
 		// if only tags have changed update tiddlerTagClasses and refresh children but
 		// wait for animation to finish
-		self.tiddlerState = newTiddlerState;
+		self.tiddlerState.hash = newTiddlerState.hash;
 		setTimeout(function(){
 			self.setVariable("tiddlerTagClasses",newTiddlerState.tiddlerTagClasses);
 			self.refreshChildren(self.tiddlerTitle);
