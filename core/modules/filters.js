@@ -178,9 +178,9 @@ widget: an optional widget node for retrieving the current tiddler etc.
 */
 exports.compileFilter = function(filterString) {
 	var allowDuplicate = false
-	if (filterString[0] === '?') {
+	if (filterString.trim()[0] === '?') {
 		allowDuplicate = true
-		filterString = filterString.slice(1)
+		filterString = filterString.trim().slice(1)
 	}
 	var filterParseTree;
 	try {
