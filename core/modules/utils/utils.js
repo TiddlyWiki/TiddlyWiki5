@@ -651,7 +651,7 @@ exports.extractVersionInfo = function() {
 Get the animation duration in ms
 */
 exports.getAnimationDuration = function() {
-	return parseInt($tw.wiki.getTiddlerText("$:/config/AnimationDuration","400"),10);
+	return parseInt($tw.wiki.getTiddlerText("$:/config/AnimationDuration","400"),10) || 0;
 };
 
 /*
