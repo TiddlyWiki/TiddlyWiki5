@@ -1,0 +1,13 @@
+created: 20190214084155450
+creator: HC Haase
+key: ((save-wiki))
+modified: 20190214084739789
+modifier: HC Haase
+tags: $:/tags/KeyboardShortcut
+title: $:/core/ui/KeyboardShortcuts/save-wiki
+
+
+<$wikify name="site-title" text={{$:/config/SaveWikiButton/Filename}}>
+<$action-sendmessage $message="tm-save-wiki" $param={{$:/config/SaveWikiButton/Template}} filename=<<site-title>>/>
+</$wikify>
+
