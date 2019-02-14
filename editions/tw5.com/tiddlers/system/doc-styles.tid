@@ -1,5 +1,5 @@
 created: 20150117152612000
-modified: 201804111739
+modified: 20190129000000000
 tags: $:/tags/Stylesheet
 title: $:/editions/tw5.com/doc-styles
 type: text/vnd.tiddlywiki
@@ -13,6 +13,7 @@ type: text/vnd.tiddlywiki
 	font-style: italic;
 	font-variant: small-caps;
 	text-decoration: none;
+        font-size: 1.2em;
 }
 
 .doc-strong {
@@ -66,7 +67,18 @@ a .doc-attr {
 }
 
 .doc-button svg {
-	height: 1em;
+	height: 1.3em;
+        vertical-align: text-bottom;
+}
+
+.doc-images svg {
+	height: 1.3em;
+        vertical-align: text-bottom;
+}
+
+.doc-buttons button {
+font-size: 1.3em;
+padding: 0.3em 0.3em;
 }
 
 td svg {
@@ -197,3 +209,35 @@ tr.doc-table-subheading {
 	height: 1em;
     vertical-align: text-bottom;
 }
+.doc-placeholder {
+       color: #bbb;
+       font-style: normal;
+}
+
+.doc-placeholder {
+       color: #bbb;
+       font-style: normal;
+}
+
+.doc-code-disp {
+ background-color: <<color background>>;
+	border: none;
+	color: <<color very-muted-foreground>>;
+	font-weight: normal;
+	padding: 0;
+}
+
+.doc-dynamic-table {
+  max-width:80%; /* could transclude tiddler width instead */
+  -ms-box-orient: vertical; /* might be unnecessary */
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: inline-flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
