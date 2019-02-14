@@ -1,0 +1,25 @@
+title: The Widget Tree
+tags: Structure Widgets WidgetTree
+
+[[Widgets|WidgetModules]] in TiddlyWiki build a DOM-like Tree Structure called the ''Widget Tree''
+
+The Widget Tree starts with the ''root Widget'' that initializes on [[Startup|RootWidget and Rendering Startup]] (see $:/core/modules/startup.js and $:/core/modules/startup/rootwidget.js for reference)
+
+The Tree Structure allows walking the Tree up and down accessing the parent Widget through `this.parentWidget` and accessing child widgets through `this.children[index]` or `this.parentWidget.children[index]`
+
+
+* root widget
+** first child widget
+*** first child-widget's child widget
+**** ...
+*** /first child-widget's child widget
+*** sibling widget to first child-widget's child widget
+*** /sibling widget to first child-widget's child widget
+** /first child widget
+** sibling widget to first child widget
+*** ...
+** /sibling widget to first child widget
+** ...
+* /root widget
+
+<<.tip "some widgets don't make child widgets. widgets that make child widgets call the `makeChildWidgets` method, see WidgetModules and $:/core/modules/widgets/widget.js for reference">>
