@@ -1,34 +1,31 @@
 created: 20150117152607000
-modified: 201804111739
+modified: 20190211000000000
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/doc-macros
 type: text/vnd.tiddlywiki
 
 \define .concat(1,2,3,4,5) $1$$2$$3$$4$$5$
 
-\define .def(_) <dfn class="doc-def">$_$</dfn>
-\define .em(_) <em class="doc-em">$_$</em>
-\define .strong(_) <strong class="doc-strong">$_$</strong>
-\define .place(_) <code class="doc-place">$_$</code>
-\define .word(_) "$_$"
+\define .def(_) <dfn class="doc-def">"""$_$"""</dfn>
 
-\define .preamble(_) :.doc-preamble $_$
-\define .note(_)
-@@.doc-note
-;Note
-: $_$
-@@
-\end
+\define .em(_) <em class="doc-em">"""$_$"""</em>
+\define .strong(_) <strong class="doc-strong">"""$_$"""</strong>
+\define .place(_) <code class="doc-place">"""$_$"""</code>
+\define .word(_) """"$_$""""
 
-\define .tid(_) <code class="doc-tiddler">$_$</code>
-\define .tag(_) <code class="doc-tag">$_$</code>
-\define .field(_) <code class="doc-field">$_$</code>
-\define .value(_) <code class="doc-value">$_$</code>
-\define .op(_) <code class="doc-operator">$_$</code>
-\define .var(_) <code class="doc-var">$_$</code>
-\define .wid(_) <code class="doc-widget">$$_$</code>
-\define .attr(_) <code class="doc-attr">$_$</code>
-\define .param(_) <code class="doc-param">$_$</code>
+\define .preamble(_) <dd class="doc-preamble">"""$_$"""</dd>
+
+\define .note(_) <dl class="doc-note"><dt>Note</dt><dd>"""$_$"""</dd></dl>
+
+\define .tid(_) <code class="doc-tiddler"><$text text="""$_$"""/></code>
+\define .tag(_) <code class="doc-tag"><$text text="""$_$"""/></code>
+\define .field(_) <code class="doc-field"><$text text="""$_$"""></code>
+\define .value(_) <code class="doc-value"><$text text="""$_$"""/></code>
+\define .op(_) <code class="doc-operator"><$text text="""$_$"""/></code>
+\define .var(_) <code class="doc-var"><$text text="""$_$"""/></code>
+\define .wid(_) <code class="doc-widget">$<$text text="""$_$"""/></code>
+\define .attr(_) <code class="doc-attr"><$text text="""$_$"""/></code>
+\define .param(_) <code class="doc-param"><$text text="""$_$"""/></code>
 
 \define .mtitle(_) $_$ Macro
 \define .otitle(_) $_$ Operator
@@ -61,7 +58,17 @@ type: text/vnd.tiddlywiki
 \define .toc-tab() <<.tab "TableOfContents">>
 \define .example-tab(_) <span class="doc-tab">$_$</span>
 
-\define .button(_) <span class="doc-button">{{$:/core/ui/Buttons/$_$!!caption}}</span>
+\define .button(_) <span class="doc-button"> {{$:/core/ui/Buttons/$_$!!caption}}</span>
+
+\define .button-only(_) <span class="doc-images"> {{$:/core/ui/Buttons/$_$}} </span>
+
+\define .image(_) <span class="doc-button"> {{$:/core/images/$_$}} $_$ </span>
+
+\define .image-only(_) <span class="doc-images"> {{$:/core/images/$_$}} </span>
+
+\define .image-button(_) <span class="tc-editor-toolbar"><button class="tc-btn-invisible" title="$_$"> {{$:/core/images/$_$}} </button></span> <span class="doc-button">$_$</span>
+
+\define .image-button-only(_) <span class="tc-editor-toolbar"><button class="tc-btn-invisible" title="$_$"> {{$:/core/images/$_$}} </button></span>
 
 \define .tip(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/tip}}</div> $_$</div>
 \define .warning(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/warning}}</div> $_$</div>
@@ -110,5 +117,10 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 </$reveal>
 </$list>
 \end
+\define .placeholder-body()    <span class="doc-placeholder">{{$:/language/EditTemplate/Body/Placeholder}}</span>
+\define .placeholder-type()    <span class="doc-placeholder">{{$:/language/EditTemplate/Type/Placeholder}}</span>
+\define .placeholder-tags()    <span class="doc-placeholder">{{$:/language/EditTemplate/Tags/Add/Placeholder}}</span>
+\define .placeholder-fields(_) <span class="doc-placeholder">{{$:/language/EditTemplate/Fields/Add/$_$/Placeholder}}</span>
+
 
 <pre><$view field="text"/></pre>
