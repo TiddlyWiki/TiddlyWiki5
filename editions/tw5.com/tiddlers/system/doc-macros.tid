@@ -35,14 +35,14 @@ type: text/vnd.tiddlywiki
 \define .clink(_,to) <span class="doc-clink"><<.link """$_$""" "$to$">></span>
 \define .dlink(_,to) <$macrocall $name=".link" _=<<.def "$_$">> to="$to$">/>
 \define .dlink-ex(_,to) <a href="$to$" class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><<.def "$_$">></a>
-\define .flink(to) <$macrocall $name=".link" _=<<.field {{$to$!!caption}}>> to="$to$"/>
+\define .flink(to) <$macrocall $name=".link" _="""<code class="doc-field">{{$to$!!caption}}</code>""" to="$to$"/>
 \define .mlink(_,to) <$macrocall $name=".link" _=<<.var "$_$">> to=<<.mtitle "$_$">>/>
 \define .mlink2(_,to) <$macrocall $name=".link" _=<<.var "$_$">> to="$to$"/>
 \define .olink(_) <$macrocall $name=".link" _=<<.op "$_$">> to=<<.otitle "$_$">>/>
 \define .olink2(_,to) <$macrocall $name=".link" _=<<.op "$_$">> to=<<.otitle "$to$">>/>
 \define .vlink(_,to) <$macrocall $name=".link" _=<<.var "$_$">> to=<<.vtitle "$_$">>/>
 \define .vlink2(_,to) <$macrocall $name=".link" _=<<.var "$_$">> to="$to$"/>
-\define .wlink(to) <$macrocall $name=".link" _=<<.wid {{$to$!!caption}}>> to="$to$"/>
+\define .wlink(to) <$macrocall $name=".link" _="""<code class="doc-widget">${{$to$!!caption}}</code>""" to="$to$"/>
 \define .wlink2(_,to) <$macrocall $name=".link" _="$_$" to="$to$"/>
 
 \define .key(_) <span class="doc-key">$_$</span>
