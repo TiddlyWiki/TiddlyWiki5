@@ -82,6 +82,10 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 			domNode.style.top = (this.popup.top + this.popup.height) + "px";
 			break;
 	}
+	var storyTiddler = this.getVariable("storyTiddler");
+	if(storyTiddler) {
+		this.wiki.setText(this.stateTitle ? this.stateTitle : this.state,"popup-tiddler",undefined,storyTiddler);	
+	}
 };
 
 /*
