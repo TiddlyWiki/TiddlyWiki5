@@ -1,163 +1,340 @@
 created: 20150110182600000
-modified: 20150228082845000
-title: Documentation Macros
+modified: 20190214000000000
 tags: [[Improving TiddlyWiki Documentation]]
+title: Documentation Macros
 
-The following macros are used throughout ~TiddlyWiki's documentation. Their names start with a dot to keep them out of the way of names that a user might try experimenting with.
+\define .code-disp(_,xtra) <span class="doc-code-disp"> <small><$macrocall $name=".if" cond="$xtra$" then=<<.code-disp-extra-yes _:[[$_$]]  xtra:"""$xtra$""">> else=<<.code-disp-extra-no _:[[$_$]] >>/></small></span>
 
-!General
+\define .code-disp-extra-yes(_,xtra) <$text text="""<<$_$ "$xtra$">>"""/>
+\define .code-disp-extra-no(_) <$text text="""<<$_$>>"""/>
 
-|!Macro |!Used for |!Example |
-|.def |the defining instance of a term |<<.def widget>> |
-|.em |minor emphasis within a sentence |<<.em not>> |
-|.place |a placeholder for the user to fill in |<<.place tagname>> |
-|.strong |major emphasis within a tiddler |<<.strong Important!>> |
-|.word |a mention of an ordinary word or phrase |<<.word "hello world">> |
+\define .line4(_,desc,term,xtra)
+ <tr><td>$_$</td><td>$desc$</td><td><<$_$ """$term$""" """$xtra$""">></td><td><$macrocall $name=".if" cond="$term$" then=<<.code-disp [[$_$ "$term$"]] """$xtra$""">>  else=<<.code-disp $_$>>/></td></tr>
+\end
 
-!Advice
+\define .line3(_,term,xtra)
+\rules except wikilink
+<tr><td>$term$</td><td><<$_$ """$term$""">></td><td><$macrocall $name=".if" cond="$term$" then=<<.code-disp [[$_$ "$term$"]] """$xtra$""">>  else=<<.code-disp-extra-no $_$>>/></td></tr>
+\end
 
-|!Macro |!Used for |!Example |
-|^.tip |^hints and tips |<<.tip "Turn your screen on, otherwise<br>you won't be able to see much.">> |
-|^.warning |^warning advice |<<.warning "Make a backup of your file<br>before you upgrade.">> |
+\define .line3-1(_,desc,location)
+\rules except wikilink
+<tr><td><<.code-disp [[$_$ "$term$"]]>></td><td>$desc$</td><td><$link to="$:/editions/tw5.com/$location$">$location$</$link></td></tr>
+\end
 
-!Blocks
-|!Macro |!Used for |
-|.preamble |an introductory sentence that stands apart from the rest of the tiddler |
 
-!Tiddlers and fields
+\define .line4-start()
+<tr><th>Macro</th><th>Used for</th><th>Example</th><th>Code</th></tr>
+\end
+\define .line3-start()
+<tr><th>Parameter</th><th>Example</th><th>Code</th></tr>
+\end
 
-|!Macro |!Used for |!Example |
-|.tid |a tiddler title |<<.tid Example>> |
-|.tag |a tag |<<.tag Example>> |
-|.field |a field name |<<.field example>> |
-|.value |a field value |<<.value "example value">> |
-|.op |a filter operator |<<.op backlinks>> |
-|.var |a variable or macro name |<<.var currentTiddler>> |
-|.wid |a widget name |<<.wid list>> |
-|.attr |an attribute name |<<.attr filter>> |
-|.param |a macro parameter name |<<.param text>> |
+\define .line3-1-start()
+<tr><th>Macro</th><th>Description and usage</th><th>Location</th></tr>
+<tr><td></td><td></td><td><$text text="$:/editions/tw5.com/"/></td></tr>
+\end
 
-!Links
+\define doc-link-to-clipboard(parameter) <<.image $(currentTiddler)$>>
 
-|!Macro |!Used for |!Example |
-|.link |a link containing WikiText |<<.link "^^an^^ ~~example~~" Example>> |
-|.clink |a code link |<<.clink `<$list>` ListWidget>> |
-|.dlink |a link on a defining instance of a term |<<.dlink widget Widgets>> |
-|.dlink-ex |an external link on a defining instance of a term |<<.dlink-ex Example "http://example.com/">> |
-|.flink |a link to a field |<<.flink ListField>> |
-|.mlink |a link to a macro |<<.mlink qualify>> |
-|.mlink2 |a link to a macro, with specified target |<<.mlink2 foo "Examples of Macros">> |
-|.olink |a link to an operator |<<.olink prefix>> |
-|.olink2 |a link to an operator, with specified target |<<.olink2 foo prefix>> |
-|.vlink |a link to a variable |<<.vlink currentTiddler>> |
-|.vlink2 |a link to a variable, with specified target |<<.vlink2 foo "Examples of Variables">> |
-|.wlink |a link to a widget |<<.wlink ButtonWidget>> |
-|.wlink2 |a link to a widget, with specified text |<<.wlink2 foo ButtonWidget>> |
+\define doc-link-tool-to-clipboard(parameter) <<.image-button $(currentTiddler)$>>
 
-!User interface
+\define make-image-link() 
+$:/core/images/$(currentTiddler)$
+\end
 
-|!Macro |!Used for |!Example |
-|.key |a key on the keyboard |<<.key Escape>> |
-|.keycombo |a key combination |<<.keycombo Ctrl Enter>> |
+<!-- 
+Notes for ADDING more definitions:
+Below macros are defined in : $:/editions/tw5.com/doc-macros
 
-!Tabs
+.line3-start & .line3-1-start & .line4-start : 
+    gives the table header cells
 
-|!Macro |!Used for |!Example |
-|.sidebar-tab |the name of a sidebar tab |<<.sidebar-tab More>> |
-|.more-tab |the name of a subtab of the More tab |<<.more-tab Shadows>> |
-|.info-tab |the name of a tiddler info tab |<<.info-tab Fields>> |
-|.controlpanel-tab |the name of a Control Panel tab |<<.controlpanel-tab Settings>> |
-|.advancedsearch-tab |the name of an Advanced Search tab |<<.advancedsearch-tab Filter>> |
-|.toc-tab |name of the tw5.com TOC tab |<<.toc-tab>> |
-|.example-tab |an example tab name |<<.example-tab "Notes">> |
+.line3 : 
+Used so far for parameters (for .button macro)
+    Needs 2+Options 3 : 1) the macro being introduced 2) the parameter
 
-!!Parameters for .sidebar-tab
+.line3-1 : 
+Used so far for Display Macros (bottom of this tiddler)
+    Needs 3: 1) the macro being introduced & its parameters 2) a description of what it does 3) the tiddler it is located in
 
-|Open |<<.sidebar-tab Open>> |
-|Recent |<<.sidebar-tab Recent>> |
-|Tools |<<.sidebar-tab Tools>> |
-|More |<<.sidebar-tab More>> |
+.line4 : 
+    Needs 3+Optional 4 : 1) the macro being introduced 2) its usage description 3) the example you want to display 4) An extra parameter for example in macros .mlink2 .olink2 .vlink2 .wlink2
 
-!!Parameters for .more-tab
+Note: The <table> must be opened before .line3 or .line4 and closed </table> after.
+-->
 
-|All |<<.more-tab All>> |
-|Recent |<<.more-tab Recent>> |
-|Tags |<<.more-tab Tags>> |
-|Missing |<<.more-tab Missing>> |
-|Drafts |<<.more-tab Drafts>> |
-|Orphans |<<.more-tab Orphans>> |
-|Types |<<.more-tab Types>> |
-|System |<<.more-tab System>> |
-|Shadows |<<.more-tab Shadows>> |
+The following macros are used throughout ~TiddlyWiki's documentation. They help to keep a consistent presentation style, as well as allowing changes that could affect a lot of documentation to be made in just one place.
 
-!!Parameters for .info-tab
+Their names start with a dot to keep them out of the way of names that a user might try experimenting with. 
 
-|Tools |<<.info-tab Tools>> |
-|References |<<.info-tab References>> |
-|Tagging |<<.info-tab Tagging>> |
-|List |<<.info-tab List>> |
-|Listed |<<.info-tab Listed>> |
-|Fields |<<.info-tab Fields>> |
-|Advanced |<<.info-tab Advanced>> |
+The CSS file associated with these macros is [[here|$:/editions/tw5.com/doc-styles]]. The macro definitions file is [[here|$:/editions/tw5.com/doc-macros]].
 
-!!Parameters for .controlpanel-tab
+!!General
 
-|Info |<<.controlpanel-tab Info>> |
-|Appearance |<<.controlpanel-tab Appearance>> |
-|Settings |<<.controlpanel-tab Settings>> |
-|Saving |<<.controlpanel-tab Saving>> |
-|Plugins |<<.controlpanel-tab Plugins>> |
+<table style="width:auto">
+<<.line4-start>>
+<<.line4 .def "the defining instance of a term" widget>>
+<<.line4 .em "minor emphasis within a sentence" not>>
+<<.line4 .place "a placeholder for the user to fill in" tagname>>
+<<.line4 .strong "major emphasis within a tiddler" Important!>>
+<<.line4 .word "a mention of an ordinary word or phrase" "hello world">>
+</table>
 
-!!Parameters for .advancedsearch-tab
+!!Advice
 
-|Standard |<<.advancedsearch-tab Standard>> |
-|System |<<.advancedsearch-tab System>> |
-|Shadows |<<.advancedsearch-tab Shadows>> |
-|Filter |<<.advancedsearch-tab Filter>> |
+<table style="width:80%">
+<<.line4-start>>
+<<.line4 .tip "hints and tips" "Turn your screen on, otherwise
+you won't be able to see much.">>
+<<.line4 .warning "warning advice" "Make a backup of your file
+before you upgrade.">>
+<<.line4 .note "a Note" "Don't forget to click the Add button.">>
+</table>
 
-!Buttons
+!!Blocks
 
-|!Macro |!Used for |!Example |
-|.button |a standard button name and icon |<<.button "new-tiddler">> |
+<table style="width:80%">
+<<.line4-start>>
+<<.line4 .preamble "an introductory sentence that stands apart from the rest of the tiddler" "This is a good place to begin from.">>
+</table>
 
-!!Parameters for .button
+Note: To use macros inside the ''Advice'' and ''Blocks'' macros, use this method:
 
-!!!Tiddler toolbar
+```
+<$macrocall $name=".preamble" _="This is a good <<.word place>> to begin from."/>
 
-|clone |<<.button "clone">> |
-|close |<<.button "close">> |
-|close-others |<<.button "close-others">> |
-|edit |<<.button "edit">> |
-|export-tiddler |<<.button "export-tiddler">> |
-|info |<<.button "info">> |
-|more-tiddler-actions |<<.button "more-tiddler-actions">> |
-|new-here |<<.button "new-here">> |
-|new-journal-here |<<.button "new-journal-here">> |
-|permalink |<<.button "permalink">> |
+```
 
-!!!Edit-mode toolbar
+<$macrocall $name=".preamble" _="This is a good <<.word place>> to begin from."/>
 
-|cancel |<<.button "cancel">> |
-|delete |<<.button "delete">> |
-|save |<<.button "save">> |
+!!Tiddlers and fields
 
-!!!Page toolbar
+<table style="width:auto">
+<<.line4-start>>
+<<.line4 .tid "a tiddler title" "Example">>
+<<.line4 .tag "a tag" "Example">>
+<<.line4 .field "a field name" "example">>
+<<.line4 .value "a field value" "example value">>
+<<.line4 .op "a filter operator" "backlinks">>
+<<.line4 .var "a variable or macro name" "currentTiddler">>
+<<.line4 .wid "a widget name" "list">>
+<<.line4 .attr "an attribute name" "filter">>
+<<.line4 .param "a macro parameter name" "text">>
+</table>
 
-|advanced-search |<<.button "advanced-search">> |
-|close-all |<<.button "close-all">> |
-|control-panel |<<.button "control-panel">> |
-|encryption |<<.button "encryption">> |
-|export-page |<<.button "export-page">> |
-|full-screen |<<.button "full-screen">> |
-|home |<<.button "home">> |
-|import |<<.button "import">> |
-|language |<<.button "language">> |
-|more-page-actions |<<.button "more-page-actions">> |
-|new-journal |<<.button "new-journal">> |
-|new-tiddler |<<.button "new-tiddler">> |
-|permaview |<<.button "permaview">> |
-|refresh |<<.button "refresh">> |
-|save-wiki |<<.button "save-wiki">> |
-|storyview |<<.button "storyview">> |
-|tag-manager |<<.button "tag-manager">> |
-|theme |<<.button "theme">> |
+!!Placeholders
+!!! When editing tiddlers:
+<table style="width:auto">
+<<.line4-start>>
+<<.line4 .placeholder-body "display shown in empty ''text'' area" >>
+<<.line4 .placeholder-type "display shown in empty tiddler ''type'' area" >>
+<<.line4 .placeholder-tags "display shown in empty ''tag'' area" >>
+<<.line4 .placeholder-fields "display shown in empty ''field name'' <br>__parameter__: ''Name''" Name>>
+<<.line4 .placeholder-fields "display shown in empty ''field value'' area<br>__parameter__: ''Value''" Value>>
+</table>
+
+!!Links
+
+<table style="width:auto">
+<<.line4-start>>
+<<.line4 .link "a link containing WikiText" "^^an^^ ~~example~~">>
+<<.line4 .clink "a code link"  `<$list>` ListWidget>>
+<<.line4 .dlink "a link on a defining instance of a term" widget Widgets>>
+<<.line4 .dlink-ex "an external link on a defining instance of a term" "Example" "http://example.com/">>
+<<.line4 .flink "a link to a field" "ListField">>
+<<.line4 .mlink "a link to a macro" "qualify">>
+<<.line4 .mlink2 "a link to a macro, with specified target" foo "Examples of Macros">>
+<<.line4 .olink "a link to an operator" "prefix">>
+<<.line4 .olink2 "a link to an operator, with specified target" foo prefix>>
+<<.line4 .vlink "a link to a variable" "currentTiddler">>
+<<.line4 .vlink2 "a link to a variable, with specified target" foo "Examples of Variables">>
+<<.line4 .wlink "a link to a widget" "ButtonWidget">>
+<<.line4 .wlink2 "a link to a widget, with specified text" "foo" "ButtonWidget">>
+</table>
+
+!!User interface
+
+<table style="width:auto">
+<<.line4-start>>
+<<.line4 .key "a key on the keyboard" "Escape">>
+<<.line4 .keycombo "a key combination" Ctrl Enter>>
+</table>
+
+!!Tabs
+
+<table style="width:auto">
+<<.line4-start>>
+<<.line4 .sidebar-tab "the name of a sidebar tab" "More">>
+<<.line4 .more-tab "the name of a subtab of the More tab" "Shadows">>
+<<.line4 .info-tab "the name of a tiddler info tab" "Fields">>
+<<.line4 .controlpanel-tab "the name of a Control Panel tab" "Settings">>
+<<.line4 .advancedsearch-tab "the name of an Advanced Search tab" "Filter">>
+<<.line4 .toc-tab "name of the tw5.com TOC tab" >>
+<<.line4 .example-tab "an example tab name" "Notes">>
+</table>
+
+!!!Parameters for ''.sidebar-tab''  (check=<$count filter="[all[shadows]tag[$:/tags/SideBar]]"/>)
+
+<table style="width:auto">
+<<.line3-start>>
+<$list filter="[all[shadows]tag[$:/tags/SideBar]removeprefix[$:/core/ui/SideBar/]]" variable="file">
+<$macrocall $name=".line3" _=".sidebar-tab" term=<<file>>/>
+</$list>
+</table>
+
+!!!Parameters for ''.more-tab'' (check=<$count filter="[all[shadows]tag[$:/tags/MoreSideBar]]"/>)
+
+<table style="width:auto">
+<<.line3-start>>
+<$list filter="[all[shadows]tag[$:/tags/MoreSideBar]removeprefix[$:/core/ui/MoreSideBar/]]" variable="file">
+<$macrocall $name=".line3" _=".more-tab" term=<<file>>/>
+</$list>
+</table>
+
+!!!Parameters for ''.info-tab'' (check=<$count filter="[all[shadows]tag[$:/tags/TiddlerInfo]]"/>)
+
+<table style="width:auto">
+<<.line3-start>>
+<$list filter="[all[shadows]tag[$:/tags/TiddlerInfo]removeprefix[$:/core/ui/TiddlerInfo/]]" variable="file">
+<$macrocall $name=".line3" _=".info-tab" term=<<file>>/>
+</$list>
+</table>
+
+!!!Parameters for ''.controlpanel-tab'' (check=<$count filter="[all[shadows]prefix[$:/core/ui/ControlPanel/]removeprefix[$:/core/ui/ControlPanel/]splitbefore[/]!suffix[/]]"/>)
+
+<table style="width:auto">
+<<.line3-start>>
+<$list filter="[all[shadows]prefix[$:/core/ui/ControlPanel/]removeprefix[$:/core/ui/ControlPanel/]splitbefore[/]!suffix[/]]" variable="file">
+<$macrocall $name=".line3" _=".controlpanel-tab" term=<<file>>/>
+</$list>
+</table>
+
+!!!Parameters for ''.advancedsearch-tab'' (check=<$count filter="[all[shadows]tag[$:/tags/AdvancedSearch]]"/>)
+
+<table style="width:auto">
+<<.line3-start>>
+<$list filter="[all[shadows]tag[$:/tags/AdvancedSearch]removeprefix[$:/core/ui/AdvancedSearch/]]" variable="file">
+<$macrocall $name=".line3" _=".advancedsearch-tab" term=<<file>>/>
+</$list>
+</table>
+
+!!Buttons
+
+<table style="width:auto">
+<<.line4-start>>
+<<.line4 .button "a standard button name and icon" "new-tiddler">>
+<<.line4 .button-only "a standard button icon only" "new-tiddler">>
+</table>
+
+To display just the button without any accompanying text, amend the below macros by hand to <$text text="<<.button-only ... >>"/>
+
+!!!Parameters for ''.button'' & ''.button-only''
+
+!!!Tiddler toolbar - (check=<$count filter="[all[shadows]tag[$:/tags/ViewToolbar]]"/>)
+
+<table style="width:auto">
+<<.line3-start>>
+<$list filter="[all[shadows]tag[$:/tags/ViewToolbar]removeprefix[$:/core/ui/Buttons/]sort[]]" variable="file">
+<$macrocall $name=".line3" _=".button" term=<<file>>/>
+</$list>
+</table>
+
+!!!Edit-mode toolbar - (check=<$count filter="[all[shadows]tag[$:/tags/EditToolbar]]"/>)
+
+<table style="width:auto">
+<<.line3-start>>
+<$list filter="[all[shadows]tag[$:/tags/EditToolbar]removeprefix[$:/core/ui/Buttons/]sort[]]" variable="file">
+<$macrocall $name=".line3" _=".button" term=<<file>>/>
+</$list>
+</table>
+
+!!!Page toolbar - (check=<$count filter="[all[shadows]tag[$:/tags/PageControls]]"/>)
+
+<table style="width:auto">
+<<.line3-start>>
+<$list filter="[all[shadows]tag[$:/tags/PageControls]removeprefix[$:/core/ui/Buttons/]sort[]]" variable="file">
+<$macrocall $name=".line3" _=".button" term=<<file>>/>
+</$list>
+</table>
+
+!!Images
+
+<table style="width:auto">
+<<.line4-start>>
+<<.line4 .image "a standard image and name" "preview-open">>
+<<.line4 .image-only "a standard image only" "preview-closed">>
+</table>
+
+<!-- 
+Table layout taken from instructions show in tiddler:
+    Formatting List Results as Tables with CSS - Variable Column Method
+to get the images in a table width 80% of the tiddler.
+-->
+
+!!!Parameters for ''.image'' & ''.image-only'' - (check=<$count filter="[all[shadows]tag[$:/tags/Image]]"/>)
+Click the image to copy the <$text text="<<.image ... >>"/> macro code to the clipboard.<br>
+Amend by hand after pasting to get the <$text text="<<.image-only ... >>"/> macro.
+
+<div class="doc-dynamic-table doc-buttons">
+<$list filter="[all[shadows]tag[$:/tags/Image]]">
+    <$set name="image" value=<<currentTiddler>>>
+    <$list filter="[<image>removeprefix[$:/core/images/]]">
+<$button message="tm-copy-to-clipboard" param=<<doc-link-to-clipboard>> tooltip=<<currentTiddler>> class="tc-btn-invisible">
+            <$transclude tiddler=<<image>>/>
+        </$button>
+    </$list>  
+    </$set>
+</$list>
+</div>
+
+<hr>
+
+!!!Parameters for ''.image-button'' & ''.image-button-only'' - (check=<$count filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]]"/>)
+Click the image to copy the <$text text="<<.image-button ... >>"/> macro code to the clipboard.<br>
+Amend by hand after pasting to get the <$text text="<<.image-button-only ... >>"/> macro.
+
+<!-- 
+Table layout taken from instructions show in tiddler:
+    Formatting List Results as Tables with CSS - Variable Column Method
+to get the images in a table width 80% of the tiddler.
+
+Removes titles whose icons that use a different icon name than the tiddler title suffix, then adds them back with the the correct title suffix (except for "clear" that is left out completely).
+
+-->
+
+<div class="doc-dynamic-table">
+<$list   filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]removeprefix[$:/core/ui/EditorToolbar/]] -[[clear]] -[[editor-height]] -[[more]] -[[preview]] -[[preview-type]] [[auto-height]] [[fixed-height]] [[down-arrow]] [[preview-closed]] [[preview-open]] [[chevron-down]]">
+    <$set name="image" value=<<make-image-link>>>
+    <span class="tc-editor-toolbar">
+    <$button message="tm-copy-to-clipboard" param=<<doc-link-tool-to-clipboard>> tooltip=paint class="tc-btn-invisible">
+        <$transclude tiddler=<<image>>/>
+    </$button>
+    </span>
+    </$set>
+</$list>
+</div>
+
+<hr>
+
+!! Display Macros
+
+<table style="width:80%">
+<<.line3-1-start>>
+<<.line3-1 '.example n:"" eg:"" egvar:"NO-SUCH-VAR"' "For Try It examples" doc-macros>>
+<<.line3-1 'wikitext-example src:""' "For ~WikiText examples when HTML tags <br>need to be shown" wikitext-macros>>
+<<.line3-1 'wikitext-example-without-html src:""' "For ~WikiText examples when HTML tags <br />do ''not'' need to be shown" wikitext-macros>>
+<<.line3-1 'tw-code tiddler:""' "Used in [[GroupedLists]]" wikitext-macros>>
+<<.line3-1 'tw-code-link tiddler:""' "Used in [[GroupedLists]]" wikitext-macros>>
+<<.line3-1 '.operator-examples op:"" text:"Examples"' """Creates the "Example" link to<br> an Operator definition's example tiddler""" operator-macros>>
+<<.line3-1 '.operator-example n:"" eg:"" ie:""' """Used in an "Example tiddler" of an Operator.<br>''n'' is the example number<br>''eg'' is the filter<br>''ie'' is an explanation (if needed)""" operator-macros>>
+<<.line3-1 '.this-is-operator-example' "Used in tiddler: [[Days of the Week]]" operator-macros>>
+<<.line3-1 '.variable-examples v:"" text:"Examples"' """Create the "Example" link to<br> a Variable definition's example tiddler""" variable-macros>>
+<<.line3-1 '.macro-examples m:"" text:"Examples"' """Create the "Example" link to<br> a Macro definition's example tiddler""" variable-macros>>
+<<.line3-1 '.widget-examples w:"" text:"Examples"' """Create the "Example" link to<br> a Widget definition's example tiddler""" variable-macros>>
+<<.line3-1 '.js-macro-link _:""' "Used to create a link in tiddlers:<br>[[Macros]] & [[tv-get-export-path Variable]]" variable-macros>>
+<<.line3-1 '.this-is-static-link-variable' "Used to give a tip in tiddlers:<br>[[tv-filter-export-link Variable]] <br> [[tv-get-export-link Variable]] <br> [[tv-wikilink-template Variable]]" variable-macros>>
+<<.line3-1  '.this-is-toolbar-config-variable configTiddler:"")' "|Used to give a message in tiddlers:<br> [[tv-config-toolbar-icons Variable]] <br> [[tv-config-toolbar-text Variable]]" variable-macros>>
+<<.line3-1 '.from-version version:""' "Shows from which version a new feature was added" version-macros>>
+<<.line3-1 'style-guide good:"" bad:""' "Not used anywhere!" style-guide-macros>>
+</table>
