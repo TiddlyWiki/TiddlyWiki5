@@ -99,6 +99,7 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 		    viewportWidth = domNode.ownerDocument.defaultView.innerWidth || domNode.ownerDocument.documentElement.clientWidth,
 		    rect = domNode.getBoundingClientRect();
 		if((rect.x + domNodeWidth) > viewportWidth) {
+			// -19 for the standard width of scrollbars
 			domNodeLeft = domNodeLeft - ((rect.x + domNodeWidth) - viewportWidth) - 19;
 		}
 	}
