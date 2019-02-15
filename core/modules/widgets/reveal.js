@@ -56,36 +56,54 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 RevealWidget.prototype.positionPopup = function(domNode) {
 	domNode.style.position = "absolute";
 	domNode.style.zIndex = "1000";
-	switch(this.position) {
-		case "left":
-			domNode.style.left = Math.max(0, this.popup.left - domNode.offsetWidth) + "px";
-			domNode.style.top = this.popup.top + "px";
-			break;
-		case "above":
-			domNode.style.left = this.popup.left + "px";
-			domNode.style.top = Math.max(0, this.popup.top - domNode.offsetHeight) + "px";
-			break;
-		case "aboveright":
-			domNode.style.left = (this.popup.left + this.popup.width) + "px";
-			domNode.style.top = Math.max(0, this.popup.top + this.popup.height - domNode.offsetHeight) + "px";
-			break;
-		case "right":
-			domNode.style.left = (this.popup.left + this.popup.width) + "px";
-			domNode.style.top = this.popup.top + "px";
-			break;
-		case "belowleft":
-			domNode.style.left = Math.max(0, this.popup.left + this.popup.width - domNode.offsetWidth) + "px";
-			domNode.style.top = (this.popup.top + this.popup.height) + "px";
-			break;
-		default: // Below
-			domNode.style.left = this.popup.left + "px";
-			domNode.style.top = (this.popup.top + this.popup.height) + "px";
-			break;
-	}
-	var storyTiddler = this.getVariable("storyTiddler");
+	var storyTiddler = this.getVariable("storyTiddler"),
+	    domNodeLeft,
+	    domNodeTop;
+	//if the popup belongs to a tiddler in the story river,
+	//set the field "popup-tiddler" of the popup state tiddler to the
+	//corresponding tiddler title
 	if(storyTiddler) {
 		this.wiki.setText(this.stateTitle ? this.stateTitle : this.state,"popup-tiddler",undefined,storyTiddler);	
 	}
+	switch(this.position) {
+		case "left":
+			domNodeLeft = Math.max(0, this.popup.left - domNode.offsetWidth) + "px";
+			domNodeTop = this.popup.top + "px";
+			break;
+		case "above":
+			domNodeLeft = this.popup.left + "px";
+			domNodeTop = Math.max(0, this.popup.top - domNode.offsetHeight) + "px";
+			break;
+		case "aboveright":
+			domNodeLeft = (this.popup.left + this.popup.width) + "px";
+			domNodeTop = Math.max(0, this.popup.top + this.popup.height - domNode.offsetHeight) + "px";
+			break;
+		case "right":
+			domNodeLeft = (this.popup.left + this.popup.width) + "px";
+			domNodeTop = this.popup.top + "px";
+			break;
+		case "belowleft":
+			domNodeLeft = Math.max(0, this.popup.left + this.popup.width - domNode.offsetWidth) + "px";
+			domNodeTop = (this.popup.top + this.popup.height) + "px";
+			break;
+		default: // Below
+			domNodeLeft = this.popup.left + "px";
+			domNodeTop = (this.popup.top + this.popup.height) + "px";
+			break;
+	}
+	//if the absolute right of the popup is outside the viewport,
+	//adjust the left position
+	//do this only if the popup is within a tiddler in the story river
+	if(storyTiddler) {
+		var domNodeWidth = domNode.getBoundingClientRect().width,
+		    viewportWidth = domNode.ownerDocument.defaultView.innerWidth || domNode.ownerDocument.documentElement.clientWidth,
+		    rect = domNode.getBoundingClientRect();
+		if((rect.x + domNodeWidth) > viewportWidth) {
+			domNodeLeft = domNodeLeft - ((rect.x + domNodeWidth) - viewportWidth) - 19;
+		}
+	}
+	domNode.style.left = domNodeLeft + "px";
+	domNode.style.top = domNodeTop + "px";
 };
 
 /*
