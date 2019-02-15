@@ -138,7 +138,7 @@ Note: To use macros inside the ''Advice'' and ''Blocks'' macros, use this method
 
 <table style="width:auto">
 <<.line4-start>>
-<<.line4 .link "a link containing WikiText" "^^an^^ ~~example~~">>
+<<.line4 .link "a link containing WikiText" "^^an^^ ~~example~~" Example>>
 <<.line4 .clink "a code link"  `<$list>` ListWidget>>
 <<.line4 .dlink "a link on a defining instance of a term" widget Widgets>>
 <<.line4 .dlink-ex "an external link on a defining instance of a term" "Example" "http://example.com/">>
