@@ -307,7 +307,7 @@ Removes titles whose icons that use a different icon name than the tiddler title
 <$list   filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]removeprefix[$:/core/ui/EditorToolbar/]] -[[clear]] -[[editor-height]] -[[more]] -[[preview]] -[[preview-type]] [[auto-height]] [[fixed-height]] [[down-arrow]] [[preview-closed]] [[preview-open]] [[chevron-down]]">
     <$set name="image" value=<<make-image-link>>>
     <span class="tc-editor-toolbar">
-    <$button message="tm-copy-to-clipboard" param=<<doc-link-tool-to-clipboard>> tooltip=paint class="tc-btn-invisible">
+    <$button message="tm-copy-to-clipboard" param=<<doc-link-tool-to-clipboard>> tooltip=<<currentTiddler>> class="tc-btn-invisible">
         <$transclude tiddler=<<image>>/>
     </$button>
     </span>
