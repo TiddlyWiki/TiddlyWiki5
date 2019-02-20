@@ -254,6 +254,10 @@ table tfoot tr td {
 	white-space: nowrap;
 }
 
+.tc-tiddler-info table.tc-view-field-table td:nth-child(2) {
+	word-break: break-all;
+}
+
 .tc-tiddler-frame img,
 .tc-tiddler-frame svg,
 .tc-tiddler-frame canvas,
