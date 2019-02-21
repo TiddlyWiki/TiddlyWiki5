@@ -76,11 +76,12 @@ tags: $:/tags/Macro
 </$set>
 \end
 
-\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div")
+\define list-tagged-draggable(tag,subFilter,type:"ul",subtype:"li",class:"",emptyMessage,itemTemplate,elementTag:"div")
 <$set name="tag" value=<<__tag__>>>
+<$type$ class="$class$">
 <$list filter="[<__tag__>tagging[]$subFilter$]" emptyMessage=<<__emptyMessage__>>>
 <$elementTag$ class="tc-menu-list-item">
-<$droppable actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>""">
+<$droppable actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>""" tag="""$subtype$""">
 <$elementTag$ class="tc-droppable-placeholder">
 &nbsp;
 </$elementTag$>
@@ -94,6 +95,7 @@ tags: $:/tags/Macro
 </$droppable>
 </$elementTag$>
 </$list>
+</$type$>
 <$tiddler tiddler="">
 <$droppable actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>""">
 <$elementTag$ class="tc-droppable-placeholder">
