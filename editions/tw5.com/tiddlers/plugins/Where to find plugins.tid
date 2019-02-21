@@ -1,0 +1,7 @@
+created: 20190221000000000
+modified: 20190221000000000
+tags: Plugins
+title: Where to find plugins
+
+To find the plugin, search for its name by opening the <<.button control-panel>>, then on the <<.controlpanel-tab Plugins>> tab, click on the
+{{$:/core/ui/ControlPanel/Plugins/AddPlugins}} button. For installing a plugin, see [[Installing a plugin from the plugin library]].
