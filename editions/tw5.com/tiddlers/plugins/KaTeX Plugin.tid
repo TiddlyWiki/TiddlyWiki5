@@ -1,10 +1,11 @@
 created: 20160107223410181
-list: 
-modified: 20170228102517666
+modified: 20190221000000000
 tags: OfficialPlugins [[Plugin Editions]]
 title: KaTeX Plugin
 type: text/vnd.tiddlywiki
 
 This plugin adds the ability to display mathematical notation written in ~LaTeX.
 
-See [ext[https://tiddlywiki.com/plugins/tiddlywiki/katex|plugins/tiddlywiki/katex]]
+See the demo at [ext[https://tiddlywiki.com/plugins/tiddlywiki/katex/|plugins/tiddlywiki/katex/]]
+
+{{Where to find plugins}}
