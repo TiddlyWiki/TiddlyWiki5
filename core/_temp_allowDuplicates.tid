@@ -1,0 +1,92 @@
+title: $:/core/_temp_allowDuplicates
+tags: $:/tags/AboveStory
+
+<div class="marching-ants-box" style="
+    position: fixed;
+    top: 100px;
+    left: -4px;
+    max-width: 50%;
+    z-index: 1000;
+    padding: 1em;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    color: #fff;">
+
+<$reveal type="match" state="$:/state/_temp_allowDuplicatesWarning" text="hide" default="show">
+
+<$button set="$:/state/_temp_allowDuplicatesWarning" setTo="show" class="tc-btn-invisible" style="
+    width: 100%;
+    text-align: left;
+    fill: #ff0;">
+
+{{$:/core/images/warning}}
+
+</$button>
+
+</$reveal>
+
+<$reveal type="nomatch" state="$:/state/_temp_allowDuplicatesWarning" text="hide" default="show">
+
+<$button set="$:/state/_temp_allowDuplicatesWarning" setTo="hide" class="tc-btn-invisible" style="
+    width: 100%;
+    text-align: left;
+    fill: #ff0;">
+
+<span style="float:right;">{{$:/core/images/chevron-left}}</span> {{$:/core/images/warning}}
+
+</$button>
+
+<div style="
+	font-weight: bold;">
+
+{{$:/core/_temp_allowDuplicates/Heading}}
+
+</div>
+
+<div style="">
+
+{{$:/core/_temp_allowDuplicates/Warning}}
+
+</div>
+
+<$list filter="1 1 1 1 +[butfirst[]limit[1]]" emptyMessage="""
+
+<div style="
+	font-weight: bold;
+	color: #0f0;">
+
+{{$:/core/_temp_allowDuplicates/StatusOff}}
+
+//Append `#dupes` to the browser address bar to enable//
+
+</div>
+""">
+
+<div style="
+	font-weight: bold;
+	color: #fff;
+	font-size: 1.5em;
+	padding: 4px;" class="marching-ants-box">
+
+{{$:/core/_temp_allowDuplicates/StatusOn}}
+
+//Remove `#dupes` from the browser address bar to disable//
+
+</div>
+
+</$list>
+
+</$reveal>
+
+</div>
+
+<style>
+@keyframes marching-ants { to { background-position: 100% 100% } }
+
+.marching-ants-box {
+	border: 4px solid transparent;
+	background: linear-gradient(#d85858, #d85858) padding-box,
+	            repeating-linear-gradient(-45deg, #f00 0, #f00 25%, transparent 0, transparent 50%) 0 / 12px 12px;
+	animation: marching-ants 12s linear infinite;
+}
+</style>
