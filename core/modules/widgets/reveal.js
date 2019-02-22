@@ -49,6 +49,7 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	}
 	if(!this.isOpen) {
 		domNode.setAttribute("hidden","true");
+		domNode.setAttribute("isHidden","true");
 	}
 	this.domNodes.push(domNode);
 };
@@ -230,13 +231,17 @@ RevealWidget.prototype.updateState = function() {
 	}
 	if(this.isOpen) {
 		domNode.removeAttribute("hidden");
+		domNode.removeAttribute("isHidden");
         $tw.anim.perform(this.openAnimation,domNode);
 	} else {
+		domNode.setAttribute("isHidden","true");
 		$tw.anim.perform(this.closeAnimation,domNode,{callback: function() {
 			//make sure that the state hasn't changed during the close animation
 			self.readState()
 			if(!self.isOpen) {
 				domNode.setAttribute("hidden","true");
+			} else {
+				domNode.removeAttribute("isHidden");
 			}
 		}});
 	}
