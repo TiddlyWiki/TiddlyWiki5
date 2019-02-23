@@ -244,11 +244,22 @@ InnerWikiWidget.prototype.refreshDimensions = function() {
 		// adapt the height of the domWrapper
 		this.domWrapper.style.height = (domWrapperRect.width / aspectRatio) + "px";
 		// calculate the new scaleFactor
-		var newScale = domWrapperRect.width / this.clipWidth;
+		this.scale = domWrapperRect.width / this.clipWidth;
 		// transform the domIFrame accordingly
-		this.domIFrame.style.transform = "translate(" + (-this.clipLeft) + "px," + (-this.clipTop) + "px) scale(" + newScale + ")";
+		this.domIFrame.style.transform = "translate(" + (-this.clipLeft) + "px," + (-this.clipTop) + "px) scale(" + this.scale + ")";
 		// update anchors here
-		
+		this.deleteAnchors();
+		this.domAnchorContainer.style.transform = "scale(" + this.scale + ")";
+		this.domAnchorContainer.removeChild(this.domAnchorBackdrop);
+		this.domAnchorBackdrop = dm("div",{
+			document: this.document,
+			style: {
+				position: "absolute",
+				display: "none"
+			}
+		});
+		this.domAnchorContainer.appendChild(this.domAnchorBackdrop);
+		this.createAnchors();
 	} else {
 		this.hasDimensionsRefreshed = null;
 	}
