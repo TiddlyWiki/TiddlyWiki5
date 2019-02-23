@@ -205,6 +205,76 @@ exports.addEventListeners = function(domNode,events) {
 };
 
 /*
+Listen for resize events on a give domNode and execute a callback on resize
+http://www.backalleycoder.com/2013/03/18/cross-browser-event-based-element-resize-detection/
+*/
+exports.addResizeListener = function(domNode,callback) {
+	if(domNode && !domNode.__resizeListeners__) {
+		domNode.__resizeListeners__ = [];
+		if(domNode.ownerDocument.attachEvent) {
+			domNode.__resizeTrigger__ = domNode;
+			domNode.attachEvent('onresize',$tw.utils.resizeListener);
+		}
+		else {
+			if(domNode.ownerDocument.defaultView.getComputedStyle(domNode).position == 'static') {
+				domNode.style.position = 'relative';
+			}
+			var resizeObject = domNode.__resizeTrigger__ = domNode.ownerDocument.createElement('object');
+			resizeObject.setAttribute('style', 'display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; pointer-events: none; z-index: -1;');
+			resizeObject.__resizeElement__ = domNode;
+			resizeObject.onload = function(e) {
+				resizeObject.contentDocument.defaultView.__resizeTrigger__ = resizeObject.__resizeElement__;
+				resizeObject.contentDocument.defaultView.addEventListener("resize",$tw.utils.resizeListener);
+			};
+			resizeObject.type = 'text/html';
+			if($tw.browser.isIE) {
+				domNode.appendChild(resizeObject);
+			}
+			resizeObject.data = 'about:blank';
+			if(!$tw.browser.isIE) {
+				domNode.appendChild(resizeObject);
+			}
+		}
+	} else if(domNode) {
+		domNode.__resizeListeners__.push(callback);
+	}
+};
+
+exports.removeResizeListener = function(domNode,callback) {
+	if(domNode && domNode.__resizeListeners__) {
+		domNode.__resizeListeners__.splice(domNode.__resizeListeners__.indexOf(callback),1);
+		if(!domNode.__resizeListeners__.length) {
+			if(domNode.ownerDocument.attachEvent) {
+				domNode.detachEvent('onresize',$tw.utils.resizeListener);
+			}
+			else {
+				domNode.ownerDocument.defaultView.removeEventListener('resize',$tw.utils.resizeListener);
+				domNode.__resizeTrigger__ = $tw.utils.isDOMElement(domNode.__resizeTrigger__) && domNode.__resizeTrigger__ !== undefined ? !domNode.removeChild(domNode.__resizeTrigger__) : undefined;
+			}
+		}
+	}
+};
+
+exports.resizeListener = function(event) {
+	var win = event.target || event.srcElement;
+	if (win.__resizeRAF__) $tw.pageScroller.cancelAnimationFrame.call(win,win.__resizeRAF__);
+	win.__resizeRAF__ = $tw.pageScroller.requestAnimationFrame.call(win,function(){
+		var trigger = win.__resizeTrigger__;
+		trigger.__resizeListeners__.forEach(function(fn){
+			fn.call(trigger,event);
+		});
+	});
+};
+
+/*
+Is a given object an existing DOM element
+returns true if existing, false otherwise
+*/
+exports.isDOMElement = function(obj) {
+	return !!(obj && obj.nodeType === 1);
+};
+
+/*
 Get the computed styles applied to an element as an array of strings of individual CSS properties
 */
 exports.getComputedStyles = function(domNode) {
