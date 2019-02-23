@@ -235,8 +235,9 @@ exports.addResizeListener = function(domNode,callback) {
 				domNode.appendChild(resizeObject);
 			}
 		}
+		$tw.utils.pushTop(domNode.__resizeListeners__,callback);
 	} else if(domNode) {
-		domNode.__resizeListeners__.push(callback);
+		$tw.utils.pushTop(domNode.__resizeListeners__,callback);
 	}
 };
 
