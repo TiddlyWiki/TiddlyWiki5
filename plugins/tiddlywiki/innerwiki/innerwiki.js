@@ -135,6 +135,9 @@ InnerWikiWidget.prototype.render = function(parent,nextSibling) {
 		this.domIFrame.style.transformOrigin = this.clipLeft + "px " + this.clipTop + "px";
 		this.domIFrame.style.transform = "translate(" + (-this.clipLeft) + "px," + (-this.clipTop) + "px) scale(" + this.scale + ")";
 		this.domWrapper.style.height = (this.clipHeight * this.scale) + "px";
+		$tw.utils.addResizeListener(this.domWrapper,function() {
+			self.refreshDimensions();
+		});
 	}
 };
 
@@ -219,6 +222,22 @@ InnerWikiWidget.prototype.deleteAnchors = function() {
 		if(node.tagName === "IMG") {
 			node.parentNode.removeChild(node);
 		}
+	}
+};
+
+/*
+Refresh dimensions of domWrapper and domIFrame
+*/
+InnerWikiWidget.prototype.refreshDimensions = function() {
+	// We're setting a different height to the domWrapper
+	// That will cause the resizeListener to call refreshDimensions again
+	// this.hasDimensionsRefreshed breaks the loop
+	if(!this.hasDimensionsRefreshed) {
+		this.hasDimensionsRefreshed = true;
+		// update dimensions here
+		
+	} else {
+		this.hasDimensionsRefreshed = null;
 	}
 };
 
@@ -333,8 +352,12 @@ InnerWikiWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 InnerWikiWidget.prototype.refresh = function(changedTiddlers) {
+	var self = this;
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.template || changedAttributes.width || changedAttributes.height || changedAttributes.style || changedAttributes.class) {
+		$tw.utils.removeResizeListener(this.domWrapper,function() {
+			self.refreshDimensions();
+		});
 		this.refreshSelf();
 		return true;
 	} else {
