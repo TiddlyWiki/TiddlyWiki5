@@ -205,7 +205,7 @@ exports.addEventListeners = function(domNode,events) {
 };
 
 /*
-Listen for resize events on a give domNode and execute a callback on resize
+Listen for resize events on a given domNode and execute a callback on resize
 http://www.backalleycoder.com/2013/03/18/cross-browser-event-based-element-resize-detection/
 */
 exports.addResizeListener = function(domNode,callback) {
