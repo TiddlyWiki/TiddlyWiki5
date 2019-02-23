@@ -235,6 +235,19 @@ InnerWikiWidget.prototype.refreshDimensions = function() {
 	if(!this.hasDimensionsRefreshed) {
 		this.hasDimensionsRefreshed = true;
 		// update dimensions here
+		// get the new dimensions of the domWrapper, they have changed
+		var domWrapperRect = this.domWrapper.getBoundingClientRect();
+		// get the current dimensions of the domIFrame
+		var domIFrameRect = this.domIFrame.getBoundingClientRect();
+		// calculate aspect ratio
+		var aspectRatio = domIFrameRect.width / domIFrameRect.height;
+		// adapt the height of the domWrapper
+		this.domWrapper.style.height = (domWrapperRect.width / aspectRatio) + "px";
+		// calculate the new scaleFactor
+		var newScale = domWrapperRect.width / this.clipWidth;
+		// transform the domIFrame accordingly
+		this.domIFrame.style.transform = "translate(" + (-this.clipLeft) + "px," + (-this.clipTop) + "px) scale(" + newScale + ")";
+		// update anchors here
 		
 	} else {
 		this.hasDimensionsRefreshed = null;
