@@ -7,5 +7,5 @@ type: text/vnd.tiddlywiki
 The Markdown plugin enables you to use tiddlers that are written in standard Markdown markup.
 
 See the demo at [ext[https://tiddlywiki.com/plugins/tiddlywiki/markdown/|plugins/tiddlywiki/markdown/]]
-
-{{Where to find plugins}}
+<hr>
+[[How to get this plugin|Where to find official plugins]].
