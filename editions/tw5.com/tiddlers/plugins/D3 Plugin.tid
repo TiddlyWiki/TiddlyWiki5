@@ -7,5 +7,5 @@ type: text/vnd.tiddlywiki
 The D3 plugin integrates the D3 visualisation library with TiddlyWiki.
 
 See the demo at [ext[https://tiddlywiki.com/plugins/tiddlywiki/d3/|plugins/tiddlywiki/d3/]]
-
-{{Where to find plugins}}
+<hr>
+[[How to get this plugin|Where to find official plugins]].
