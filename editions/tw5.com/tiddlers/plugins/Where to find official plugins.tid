@@ -1,0 +1,11 @@
+created: 20190221000000000
+modified: 20190221000000000
+tags: Plugins
+title: Where to find official plugins
+
+You can find official plugins by opening the <<.button control-panel>>, and on the <<.controlpanel-tab Plugins>> tab, click on the
+{{$:/core/ui/ControlPanel/Plugins/AddPlugins}} button.
+
+Search for the plugin by its name.
+
+Further instructions can be found at  [[Installing a plugin from the plugin library]].
