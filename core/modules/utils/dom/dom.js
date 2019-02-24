@@ -209,13 +209,14 @@ Listen for resize events on a given domNode and execute a callback on resize
 http://www.backalleycoder.com/2013/03/18/cross-browser-event-based-element-resize-detection/
 */
 exports.addResizeListener = function(domNode,callback) {
-	if(domNode && !domNode.__resizeListeners__) {
-		domNode.__resizeListeners__ = [];
+	if(domNode) {
+		if(!domNode.__resizeListeners__) {
+			domNode.__resizeListeners__ = [];
+		}
 		if(domNode.ownerDocument.attachEvent) {
 			domNode.__resizeTrigger__ = domNode;
 			domNode.attachEvent('onresize',$tw.utils.resizeListener);
-		}
-		else {
+		} else {
 			if(domNode.ownerDocument.defaultView.getComputedStyle(domNode).position == 'static') {
 				domNode.style.position = 'relative';
 			}
@@ -235,8 +236,6 @@ exports.addResizeListener = function(domNode,callback) {
 				domNode.appendChild(resizeObject);
 			}
 		}
-		$tw.utils.pushTop(domNode.__resizeListeners__,callback);
-	} else if(domNode) {
 		$tw.utils.pushTop(domNode.__resizeListeners__,callback);
 	}
 };
