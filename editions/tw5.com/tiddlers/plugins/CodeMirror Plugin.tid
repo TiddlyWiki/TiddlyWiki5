@@ -4,9 +4,8 @@ tags: OfficialPlugins [[Plugin Editions]]
 title: CodeMirror Plugin
 type: text/vnd.tiddlywiki
 
-The ~CodeMirror plugin adds a sophisticated web-based editor to ~TiddlyWiki.
+The ~CodeMirror plugin adds a sophisticated web-based editor to TiddlyWiki.
 
 See the demo at [ext[https://tiddlywiki.com/plugins/tiddlywiki/codemirror/|plugins/tiddlywiki/codemirror/]] for a demo.
-
-{{Where to find plugins}}
-
+<hr>
+[[How to get this plugin|Where to find official plugins]].
