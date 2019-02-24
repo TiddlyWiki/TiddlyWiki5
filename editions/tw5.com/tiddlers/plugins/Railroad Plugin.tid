@@ -8,5 +8,5 @@ type: text/vnd.tiddlywiki
 
 {{$:/plugins/tiddlywiki/railroad/syntax}}
 
----
-{{Where to find plugins}}
+<hr>
+[[How to get this plugin|Where to find official plugins]].
