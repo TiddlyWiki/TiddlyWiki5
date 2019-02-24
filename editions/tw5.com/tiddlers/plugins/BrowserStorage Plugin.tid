@@ -4,7 +4,7 @@ tags: OfficialPlugins
 title: BrowserStorage Plugin
 type: text/vnd.tiddlywiki
 
-The ~BrowserStorage Plugin enables ~TiddlyWiki to save tiddlers in [[browser local storage|https://en.wikipedia.org/wiki/Web_storage#localStorage]]. This means that changes are stored within the browser, and automatically re-applied any time the base wiki is reloaded.
+The ~BrowserStorage Plugin enables TiddlyWiki to save tiddlers in [[browser local storage|https://en.wikipedia.org/wiki/Web_storage#localStorage]]. This means that changes are stored within the browser, and automatically re-applied any time the base wiki is reloaded.
 
 Browser local storage is not a panacea for ~TiddlyWiki:
 
@@ -14,5 +14,5 @@ Browser local storage is not a panacea for ~TiddlyWiki:
 * Browsers tie local storage to a URL which can lead to problems if you move a wiki to a URL previously occupied by a different wiki
 
 Please use this plugin with caution. There are a number of unresolved issues and open questions.
-
-{{Where to find plugins}}
+<hr>
+[[How to get this plugin|Where to find official plugins]].
