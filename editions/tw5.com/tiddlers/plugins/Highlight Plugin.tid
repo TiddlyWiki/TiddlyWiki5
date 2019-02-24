@@ -7,5 +7,5 @@ type: text/vnd.tiddlywiki
 The Highlight plugin provides the ability to apply syntax colouring to text.
 
 See the demo at [ext[https://tiddlywiki.com/plugins/tiddlywiki/highlight/|plugins/tiddlywiki/highlight/]]
-
-{{Where to find plugins}}
+<hr>
+[[How to get this plugin|Where to find official plugins]].
