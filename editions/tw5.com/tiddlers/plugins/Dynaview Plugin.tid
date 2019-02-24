@@ -10,5 +10,5 @@ The Dynaview Plugin makes it possible to build user interfaces that dynamically 
 * CSS classes that allow the opacity of DOM elements to vary according to the current zoom level
 
 See the demo at [ext[https://tiddlywiki.com/plugins/tiddlywiki/dynaview|plugins/tiddlywiki/dynaview]]
-
-{{Where to find plugins}}
+<hr>
+[[How to get this plugin|Where to find official plugins]].
