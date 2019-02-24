@@ -7,5 +7,5 @@ type: text/vnd.tiddlywiki
 This plugin adds the ability to display mathematical notation written in ~LaTeX.
 
 See the demo at [ext[https://tiddlywiki.com/plugins/tiddlywiki/katex/|plugins/tiddlywiki/katex/]]
-
-{{Where to find plugins}}
+<hr>
+[[How to get this plugin|Where to find official plugins]].
