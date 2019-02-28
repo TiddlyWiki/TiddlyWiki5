@@ -19,7 +19,7 @@ exports.variable = function(source,prefix,options) {
 	var results = [];
 	if(prefix === "!") {
 		source(function(tiddler,title) {
-			if(!title in options.widget.variables) {
+			if(!(title in options.widget.variables)) {
 				results.push(title);
 			}
 		});
