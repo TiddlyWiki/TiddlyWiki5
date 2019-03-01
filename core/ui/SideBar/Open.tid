@@ -10,9 +10,7 @@ caption: {{$:/language/SideBar/Open/Caption}}
 \end
 
 \define placeholder()
-\whitespace trim
-<div class="tc-droppable-placeholder" style="line-height:2em;height:2em;">
-</div>
+<div class="tc-droppable-placeholder"/>
 \end
 
 \define droppable-item(button)
@@ -25,9 +23,10 @@ $button$
 </$droppable>
 \end
 
+<div class="tc-sidebar-tab-open">
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
-<div style="position: relative;">
-<$macrocall $name="droppable-item" button="""<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>"""/>
+<div class="tc-sidebar-tab-open-item">
+<$macrocall $name="droppable-item" button="""<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini">&times;</$button>&nbsp;<$link to={{!!title}}><$view field="title"/></$link>"""/>
 </div>
 </$list>
 <$tiddler tiddler="">
@@ -35,3 +34,4 @@ $button$
 <$macrocall $name="droppable-item" button="""<$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini"><<lingo Button>></$button>"""/>
 </div>
 </$tiddler>
+</div>
