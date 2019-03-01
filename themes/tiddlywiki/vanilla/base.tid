@@ -384,6 +384,20 @@ a.tc-tiddlylink-external:hover {
 	cursor: move;
 }
 
+.tc-sidebar-tab-open .tc-droppable-placeholder {
+	line-height: 2em;
+	height: 2em;
+}
+
+.tc-sidebar-tab-open-item {
+	position: relative;
+}
+
+.tc-sidebar-tab-open .tc-btn-invisible.tc-btn-mini svg {
+	font-size: 0.7em;
+	fill: <<colour muted-foreground>>;
+}
+
 /*
 ** Plugin reload warning
 */
