@@ -1,6 +1,6 @@
 caption: tree
 created: 20170628164534981
-modified: 20170628164654430
+modified: 20190301000000000
 tags: Macros [[Core Macros]]
 title: tree Macro
 type: text/vnd.tiddlywiki
@@ -10,6 +10,6 @@ The <<.def tree>> [[macro|Macros]] renders an expandable tree view based on tidd
 !! Parameters
 
 ;prefix
-: The prefix from which to generate the tree, e.g. `$:/`
+: The prefix from which to generate the tree, defaulting to `$:/`
 
 <<.macro-examples "tree">>
