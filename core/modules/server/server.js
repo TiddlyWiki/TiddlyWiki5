@@ -239,7 +239,7 @@ Server.prototype.listen = function(port,host,prefix) {
 	// Handle defaults for port and host
 	port = port || this.get("port");
 	host = host || this.get("host");
-	prefix = prefix || this.get("path-prefix");
+	prefix = prefix || this.get("path-prefix") || "";
 	// Check for the port being a string and look it up as an environment variable
 	if(parseInt(port,10).toString() !== port) {
 		port = process.env[port] || 8080;
