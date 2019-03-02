@@ -76,7 +76,7 @@ EditShortcutWidget.prototype.execute = function() {
 	this.shortcutStyle = this.getAttribute("style");
 	this.shortcutTooltip = this.getAttribute("tooltip");
 	this.shortcutAriaLabel = this.getAttribute("aria-label");
-	this.shorcutFocus = this.getAttribute("focus");
+	this.shortcutFocus = this.getAttribute("focus");
 };
 
 /*
@@ -138,7 +138,7 @@ Selectively refreshes the widget if needed. Returns true if the widget needed re
 */
 EditShortcutWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.placeholder || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.style || changedAttributes.tooltip || changedAttributes["aria-label"]) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.placeholder || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.style || changedAttributes.tooltip || changedAttributes["aria-label"] || changedAttributes.focus) {
 		this.refreshSelf();
 		return true;
 	} else if(changedTiddlers[this.shortcutTiddler]) {
