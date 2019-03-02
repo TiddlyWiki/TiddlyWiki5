@@ -76,7 +76,7 @@ EditShortcutWidget.prototype.execute = function() {
 	this.shortcutStyle = this.getAttribute("style");
 	this.shortcutTooltip = this.getAttribute("tooltip");
 	this.shortcutAriaLabel = this.getAttribute("aria-label");
-	this.shorcutFocus = this.getAttribute("focus");
+	this.shortcutFocus = this.getAttribute("focus");
 };
 
 /*
