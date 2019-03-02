@@ -57,6 +57,10 @@ EditShortcutWidget.prototype.render = function(parent,nextSibling) {
 	// Link into the DOM
 	parent.insertBefore(this.inputNode,nextSibling);
 	this.domNodes.push(this.inputNode);
+	// Focus the input Node if focus === "yes" or focus === "true"
+	if(this.shortcutFocus === "yes" || this.shortcutFocus === "true") {
+		this.focus();
+	}
 };
 
 /*
@@ -72,6 +76,7 @@ EditShortcutWidget.prototype.execute = function() {
 	this.shortcutStyle = this.getAttribute("style");
 	this.shortcutTooltip = this.getAttribute("tooltip");
 	this.shortcutAriaLabel = this.getAttribute("aria-label");
+	this.shorcutFocus = this.getAttribute("focus");
 };
 
 /*
@@ -115,6 +120,16 @@ EditShortcutWidget.prototype.handleKeydownEvent = function(event) {
 		return true;		
 	} else {
 		return false;
+	}
+};
+
+/*
+focus the input node
+*/
+EditShortcutWidget.prototype.focus = function() {
+	if(this.inputNode.focus && this.inputNode.select) {
+		this.inputNode.focus();
+		this.inputNode.select();
 	}
 };
 
