@@ -176,8 +176,8 @@ dl dt {
 	margin-top: 6px;
 }
 
-textarea, input {
-	outline-color: <<colour outline>>;
+button, textarea, input, select {
+	outline-color: <<colour muted-foreground>>;
 }
 
 textarea,
@@ -420,10 +420,6 @@ a.tc-tiddlylink-external:hover {
 /*
 ** Buttons
 */
-
-button {
-	outline-color: <<colour outline>>;
-}
 
 button svg, button img, label svg, label img {
 	vertical-align: middle;
