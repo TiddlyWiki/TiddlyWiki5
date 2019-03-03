@@ -2128,6 +2128,7 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 
 .tc-plugin-info-dropdown-body {
 	padding: 1em 1em 1em 1em;
+	clear: both;
 }
 
 .tc-check-list {
