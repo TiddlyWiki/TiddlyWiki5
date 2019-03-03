@@ -40,8 +40,8 @@ exports.startup = function() {
 	compileFilter();
 	// Listen for tm-clear-browser-storage messages
 	$tw.rootWidget.addEventListener("tm-clear-browser-storage",function(event) {
-		window.localStorage.clear();
 		$tw.wiki.addTiddler({title: ENABLED_TITLE, text: "no"});
+		clearLocalStorage();
 	});
 	// Track tiddler changes
 	$tw.wiki.addEventListener("change",function(changes) {
@@ -66,32 +66,57 @@ exports.startup = function() {
 			if(title === ENABLED_TITLE) {
 				return;
 			}
-			// Get the tiddler
-			var tiddler = $tw.wiki.getTiddler(title);
-			if(tiddler) {
-				// Get the JSON of the tiddler				
-				var json = JSON.stringify(tiddler.getFieldStrings());
-				// Try to save it to local storage
-				try {
-					window.localStorage.setItem(prefix + title,json);
-				} catch(e) {
-					if(e.name === "QuotaExceededError") {
-						// Complain if we failed
-						var msg = $tw.wiki.getTiddlerText(QUOTA_EXCEEDED_ALERT_TITLE,DEFAULT_QUOTA_EXCEEDED_ALERT_PREFIX + title + DEFAULT_QUOTA_EXCEEDED_ALERT_SUFFIX);
-						logger.alert(msg);
-						// No point in keeping old values around for this tiddler
-						window.localStorage.removeItem(prefix + title);
-					} else {
-						throw e;
-					}
-				}
-				console.log("browser-storage: Saving",title);
-			} else {
-				window.localStorage.removeItem(prefix + title);
-				console.log("browser-storage: Deleting",title);
-			}
+			// Save the tiddler
+			saveTiddlerToLocalStorage(title,{
+				logger: logger,
+				prefix: prefix
+			});
 		});
 	});
 };
+
+function saveTiddlerToLocalStorage(title,options) {
+	options = options || {};
+	// Get the tiddler
+	var tiddler = $tw.wiki.getTiddler(title);
+	if(tiddler) {
+		// Get the JSON of the tiddler				
+		var json = JSON.stringify(tiddler.getFieldStrings());
+		// Try to save it to local storage
+		try {
+			window.localStorage.setItem(options.prefix + title,json);
+		} catch(e) {
+			if(e.name === "QuotaExceededError") {
+				// Complain if we failed
+				var msg = $tw.wiki.getTiddlerText(QUOTA_EXCEEDED_ALERT_TITLE,DEFAULT_QUOTA_EXCEEDED_ALERT_PREFIX + title + DEFAULT_QUOTA_EXCEEDED_ALERT_SUFFIX);
+				if(options.logger) {
+					options.logger.alert(msg);					
+				}
+				// No point in keeping old values around for this tiddler
+				window.localStorage.removeItem(options.prefix + title);
+			} else {
+				throw e;
+			}
+		}
+		console.log("browser-storage: Saving",title);
+	} else {
+		window.localStorage.removeItem(options.prefix + title);
+		console.log("browser-storage: Deleting",title);
+	}
+}
+
+function clearLocalStorage() {
+	var url = window.location.pathname,
+		log = [];
+	// Step through each browsder storage item
+	for(var index=window.localStorage.length - 1; index>=0; index--) {
+		var key = window.localStorage.key(index),
+			parts = key.split("#");
+		// Delete it if it's ours
+		if(parts[0] === "tw5" && parts[1] === url) {
+			window.localStorage.removeItem(key);
+		}
+	}
+}
 
 })();
