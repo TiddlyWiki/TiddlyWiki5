@@ -177,7 +177,7 @@ dl dt {
 }
 
 button, textarea, input, select {
-	outline-color: <<colour muted-foreground>>;
+	outline-color: <<colour primary>>;
 }
 
 textarea,
