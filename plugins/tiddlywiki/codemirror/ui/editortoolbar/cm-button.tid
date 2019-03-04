@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/codemirror/ui/EditorToolbar/cm-button
+tags: $:/tags/EditorToolbar
+description: ~CodeMirror options
+condition: [<targetTiddler>get[type]lookup[$:/config/EditorTypeMappings/]removeprefix[codemirror]] [<targetTiddler>!has[type]addprefix{$:/config/EditorTypeMappings/text/vnd.tiddlywiki}removesuffix<targetTiddler>removeprefix[codemirror]]
+caption: ~CodeMirror options
+dropdown: $:/plugins/tiddlywiki/codemirror/ui/EditorToolbar/cm-dropdown
+icon: $:/core/images/options-button
+shortcuts:
