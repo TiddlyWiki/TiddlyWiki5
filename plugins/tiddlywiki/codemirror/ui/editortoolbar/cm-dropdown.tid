@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/codemirror/ui/EditorToolbar/cm-dropdown
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Settings/CodeMirror]]">
+
+<$transclude/>
+
+</$list>
