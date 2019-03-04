@@ -93,7 +93,7 @@ tag-foreground: #4C566A
 tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>
 tiddler-controls-foreground-hover: 
-tiddler-controls-foreground-selected: #2E3440
+tiddler-controls-foreground-selected: #EBCB8B
 tiddler-controls-foreground: #4C566A
 tiddler-editor-background: #2e3440
 tiddler-editor-border-image: #2e3440
