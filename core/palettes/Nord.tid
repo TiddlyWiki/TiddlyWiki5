@@ -5,10 +5,10 @@ tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 license: MIT, arcticicestudio, https://github.com/arcticicestudio/nord/blob/develop/LICENSE.md
 
-alert-background: #EBCB8B
+alert-background: #D08770
 alert-border: #D08770
 alert-highlight: #B48EAD
-alert-muted-foreground: #D08770
+alert-muted-foreground: #4C566A
 background: #3b4252
 blockquote-bar: <<colour muted-foreground>>
 button-background: #4C566A
@@ -32,8 +32,8 @@ dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
 dropdown-background: <<colour background>>
 dropdown-border: <<colour background>>
-dropdown-tab-background-selected: #fff
-dropdown-tab-background: #ececec
+dropdown-tab-background-selected: #ECEFF4
+dropdown-tab-background: #4C566A
 dropzone-background: #A3BE8C
 external-link-background-hover: inherit
 external-link-background-visited: inherit
@@ -51,9 +51,9 @@ modal-border: #3b4252
 modal-footer-background: #3b4252
 modal-footer-border: #3b4252
 modal-header-border: #3b4252
-muted-foreground: #434C5E
-notification-background: #EBCB8B
-notification-border: #D08770
+muted-foreground: #4C566A
+notification-background: #D08770
+notification-border: #EBCB8B
 page-background: #2e3440
 pre-background: #2E3440
 pre-border: #2E3440
@@ -63,7 +63,7 @@ select-tag-foreground: <<colour foreground>>
 sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: #4C566A
 sidebar-controls-foreground: #3B4252
-sidebar-foreground-shadow: #4C566A
+sidebar-foreground-shadow: transparent
 sidebar-foreground: #D8DEE9
 sidebar-muted-foreground-hover: #4C566A
 sidebar-muted-foreground: #4C566A
@@ -85,9 +85,9 @@ tab-border: #4C566A
 tab-divider: #4C566A
 tab-foreground-selected: #4C566A
 tab-foreground: #D8DEE9
-table-border: #434C5E
+table-border: #4C566A
 table-footer-background: #2e3440
-table-header-background: #3B4252
+table-header-background: #2e3440
 tag-background: #A3BE8C
 tag-foreground: #4C566A
 tiddler-background: <<colour background>>
@@ -116,5 +116,5 @@ toolbar-close-button:
 toolbar-delete-button: 
 toolbar-cancel-button: 
 toolbar-done-button: 
-untagged-background: #3B4252
-very-muted-foreground: #3B4252
+untagged-background: #2d3038
+very-muted-foreground: #2d3038
