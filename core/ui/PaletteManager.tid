@@ -4,6 +4,9 @@ title: $:/PaletteManager
 \define describePaletteColour(colour)
 <$transclude tiddler="$:/language/Docs/PaletteColours/$colour$"><$text text="$colour$"/></$transclude>
 \end
+\define edit-colour-placeholder()
+ edit $(colourName)$
+ \end
 \define colour-tooltip(showhide) $showhide$ editor for $(newColourName)$ 
 \define resolve-colour(macrocall)
 \import $:/core/macros/utils
@@ -15,7 +18,7 @@ title: $:/PaletteManager
 \define delete-colour-index-actions() <$action-setfield $index=<<colourName>>/>
 \define palette-manager-colour-row-segment()
 \whitespace trim
-<$edit-text index=<<colourName>> tag="input"/>
+<$edit-text index=<<colourName>> tag="input" placeholder=<<edit-colour-placeholder>> default=""/>
 <br>
 <$edit-text index=<<colourName>> type="color" tag="input" class="tc-palette-manager-colour-input"/>
 <$list filter="[<currentTiddler>getindex<colourName>removeprefix[<<]removesuffix[>>]] [<currentTiddler>getindex<colourName>removeprefix[<$]removesuffix[/>]]" variable="ignore">
