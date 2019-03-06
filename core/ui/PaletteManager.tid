@@ -83,6 +83,6 @@ title: $:/PaletteManager
 
 <$button message="tm-new-tiddler" param={{$:/palette}}><<lingo Clone/Caption>></$button>
 
-<$checkbox tiddler="$:/state/palettemanager/showexternal" field="text" checked="yes" unchecked="no"><<lingo Names/External/Show>></$checkbox>
+<$checkbox tiddler="$:/state/palettemanager/showexternal" field="text" checked="yes" unchecked="no">&nbsp;<<lingo Names/External/Show>></$checkbox>
 
 <<palette-manager-table>>
