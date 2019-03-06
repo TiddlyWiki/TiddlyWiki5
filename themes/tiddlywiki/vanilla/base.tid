@@ -2260,6 +2260,11 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	border: 1px solid #888;
 }
 
+input.tc-palette-manager-colour-input {
+	width: 100%;
+	padding: 0;
+}
+
 /*
 ** Table of contents
 */
