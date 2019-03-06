@@ -67,7 +67,6 @@ title: $:/PaletteManager
 </$list>
 </tbody>
 </table>
-</$set>
 \end
 <$set name="currentTiddler" value={{$:/palette}}>
 
