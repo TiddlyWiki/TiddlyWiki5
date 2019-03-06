@@ -28,7 +28,7 @@ title: $:/PaletteManager
 <$button tooltip=<<colour-tooltip show>> aria-label=<<colour-tooltip show>> class="tc-btn-invisible" set=<<state>> setTo="show">{{$:/core/images/down-arrow}}&nbsp;<$text text=<<newColourName>>/></$button><br>
 </$reveal>
 <$reveal state=<<state>> type="match" text="show">
-<$button tooltip=<<colour-tooltip hide>> aria-label=<<colour-tooltip show>> class="tc-btn-invisible" set=<<state>> setTo="hide">{{$:/core/images/up-arrow}}&nbsp;<$text text=<<newColourName>>/></$button><br>
+<$button tooltip=<<colour-tooltip hide>> aria-label=<<colour-tooltip show>> class="tc-btn-invisible" actions="""<$action-deletetiddler $tiddler=<<state>>/>""">{{$:/core/images/up-arrow}}&nbsp;<$text text=<<newColourName>>/></$button><br>
 </$reveal>
 <$reveal state=<<state>> type="match" text="show">
 <$set name="colourName" value=<<newColourName>>>
