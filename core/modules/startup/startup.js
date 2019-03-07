@@ -83,7 +83,7 @@ exports.startup = function() {
 		pluginType: "language",
 		controllerTitle: "$:/language",
 		defaultPlugins: [
-			"$:/languages/en-US"
+			"$:/languages/en-GB"
 		],
 		onSwitch: function(plugins) {
 			if($tw.browser) {
