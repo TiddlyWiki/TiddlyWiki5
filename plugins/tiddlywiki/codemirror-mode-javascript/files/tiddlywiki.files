@@ -5,7 +5,8 @@
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/mode/javascript/javascript.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "13"
 			}
 		}
 	]
