@@ -5,14 +5,16 @@
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "6"
 			}
 		},{
 			"file": "addon/edit/matchbrackets.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "7"
 			}
 		}
 	]
