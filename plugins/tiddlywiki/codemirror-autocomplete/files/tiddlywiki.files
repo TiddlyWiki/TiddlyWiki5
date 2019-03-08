@@ -5,35 +5,40 @@
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "18"
 			}
 		},{
 			"file": "addon/hint/css-hint.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/hint/css-hint.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "21"
 			}
 		},{
 			"file": "addon/hint/html-hint.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/hint/html-hint.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "20"
 			}
 		},{
 			"file": "addon/hint/javascript-hint.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/hint/javascript-hint.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "22"
 			}
 		},{
 			"file": "addon/hint/show-hint.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/hint/show-hint.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "17"
 			}
 		},{
 			"file": "addon/hint/show-hint.css",
@@ -47,7 +52,8 @@
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/hint/xml-hint.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "19"
 			}
 		}
 	]
