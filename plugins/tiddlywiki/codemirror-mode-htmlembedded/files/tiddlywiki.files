@@ -5,14 +5,16 @@
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/mode/multiplex.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "15"
 			}
 		},{
 			"file": "mode/htmlembedded/htmlembedded.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/mode/htmlembedded/htmlembedded.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "16"
 			}
 		}
 	]
