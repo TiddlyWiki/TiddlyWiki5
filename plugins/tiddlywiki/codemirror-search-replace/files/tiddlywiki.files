@@ -5,21 +5,24 @@
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/search/search.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "5"
 			}
 		},{
 			"file": "addon/search/jump-to-line.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/search/jump-to-line.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "4"
 			}
 		},{
 			"file": "addon/search/searchcursor.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "3"
 			}
 		}
 	]
