@@ -5,7 +5,8 @@
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/fullscreen/fullscreen.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "10"
 			}
 		},{
 			"file": "addon/fullscreen/fullscreen.css",
