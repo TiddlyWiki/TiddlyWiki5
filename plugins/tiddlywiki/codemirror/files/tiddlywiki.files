@@ -26,21 +26,24 @@
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "1"
 			}
 		},{
 			"file": "addon/selection/activeline.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/selection/activeline.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "2"
 			}
 		},{
 			"file": "mode/tw-meta.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/mode/tw-meta.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "0"
 			}
 		}
 	]
