@@ -5,14 +5,16 @@
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/fold/xml-fold.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "8"
 			}
 		},{
 			"file": "addon/edit/closetag.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js",
-				"module-type": "codemirror"
+				"module-type": "codemirror",
+				"require-index": "9"
 			}
 		}
 	]
