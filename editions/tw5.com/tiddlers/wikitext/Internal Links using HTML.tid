@@ -22,8 +22,11 @@ The following applies for proper (limited) useage:
 : is case sensitive
 :;Suggested that:
 :: not to use URI encoding or the `%` character (see the warning below)
-:: preferably not contain any whitespace (see note 1. below) but if it does, the value should be within double quotes
-:: each value to be unique in the ~TiddlyWiki  (see note 2. below)
+:: <span id=<<qualify #note.1-return>>/> preferably not contain any whitespace (see <a href=<<qualify ##note.1>> title="click to go to note 1.">note 1.</a> below) but if it does, the value should be within double quotes 
+:: <span id=<<qualify #note.2-return>>/> each value to be unique in the ~TiddlyWiki  (see <a href=<<qualify ##note.2>> title="click to go to note 2.">note 2.</a> below)
+
+
+
 
 ; Constructing the link
 : The `<a>` HTML element is used with its <<.attr href>> attribute
@@ -50,15 +53,13 @@ The following applies for proper (limited) useage:
 :: the tiddler is folded
 :: the target is within a non-displaying <<.wlink RevealWidget>> widget
 :: the<<.button "control-panel">> , <<.controlpanel-tab "Appearance">> , <<.controlpanel-tab "StoryView">> is set to (the single page view)  <<.def zoomin>> and the tiddler is not at the top of the story river (not displayed) 
+: <kbd>Ctrl</kbd>+<kbd>Click</kbd> on such a link will open a new browser window/tab & not the targeted tiddler.
 
 <<.warning "Some browsers will not navigate to an ''id'' that includes an encoded [ext[URI|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI]] that has a `%` character followed by 2 characters. ">>
 
-<$macrocall $name=.note _="""1. The HTML5 specifications for the <<.attr id>> attribute  says that its value should not contain any whitespace. However a value with whitespace that is surrounded by double-quotes (or triple double-quotes) works ^^(Mar 2019)^^ as an internal navigation marker in ~TiddlyWiki. However it may not work for other code that wants to reference the same <<.attr id>>.
+<$macrocall $name=.note _="""<span id=<<qualify #note.1>>><a href=<<qualify ##note.1-return>> title="click to return">1.</a></span> The HTML5 specifications for the <<.attr id>> attribute  says that its value should not contain any whitespace. However a value with whitespace that is surrounded by double-quotes (or triple double-quotes) works ^^(Mar 2019)^^ as an internal navigation marker in ~TiddlyWiki. However it may not work for other code that wants to reference the same <<.attr id>>.
 
-2. If transclusions create multiple instances of the <<.attr id>>, navigation will take place to the first instance found that satisfies the above criteria.
-
-3. The Keyboard Combination <kbd>Ctrl</kbd>+ <kbd>Click</kbd> on such a link will open a new browser window/tab & not the targeted tiddler."""  />
-
+<span id=<<qualify #note.2>>><a href=<<qualify ##note.2-return>> title="click to return">2.</a></span> If transclusions create multiple instances of the same <<.attr id>> attribute, navigation will take place to the first instance found that satisfies the above criteria. To avoid this, you can use the [[qualify macro|qualify Macro]] in both the <<.attr id>> and the <<.attr href>> attributes in a similar style to the example given below: <a href=<<qualify ##qualify-example>> >Avoiding duplicate IDs when transcluding</a>."""  />
 
 </section>
 
@@ -108,6 +109,18 @@ The links below will take you to specified parts of this tiddler.
 * <a href="""##"Example":-InternalLinksUsingHTML""">Example</a>
 * <a href="##Another%20Example:-Internal%20Links%20using%20HTML">Another Example</a>
 * <a href="##Suggestions%0">Suggestions</a>
+
+<h2 id=<<qualify #qualify-example>>> Avoiding duplicate  IDs when transcluding</h2>
+The <<.attr id>> and link to this header has been made as follows:
+
+```
+<a href=<<qualify ##qualify-example>>>Avoiding duplicate IDs when transcluding</a>
+
+<h2 id=<<qualify #qualify-example>>>Avoiding duplicate IDs when transcluding</h2>
+```
+;For this to work:
+: that <<.attr id>> value cannot be surrounded by singe or double quotes
+: both the <<.attr id>> and the link must be in the same tiddler.
 
 !! Hint
 
