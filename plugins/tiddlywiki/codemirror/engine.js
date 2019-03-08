@@ -20,14 +20,23 @@ CONFIG_FILTER = "[all[shadows+tiddlers]prefix[$:/config/codemirror/]]"
 if($tw.browser && !window.CodeMirror) {
 
 	var modules = $tw.modules.types["codemirror"];
-	var req = Object.getOwnPropertyNames(modules);
+	var req = Object.getOwnPropertyNames(modules),
+	    reqSorted = [];
+	if($tw.utils.isArray(req)) {
+		for(var i=0; i<req.length; i++) {
+			var moduleIndex = $tw.wiki.getTiddler(req[i]).getFieldString("require-index");
+			reqSorted[moduleIndex] = req[i];
+		}
+	}
 
 	window.CodeMirror = require("$:/plugins/tiddlywiki/codemirror/lib/codemirror.js");
 	// Install required CodeMirror plugins
 	if(req) {
 		if($tw.utils.isArray(req)) {
-			for(var index=0; index<req.length; index++) {
-				require(req[index]);
+			for(var index=0; index<reqSorted.length; index++) {
+				if(reqSorted[index]) {
+					require(reqSorted[index]);
+				}
 			}
 		} else {
 			require(req);
