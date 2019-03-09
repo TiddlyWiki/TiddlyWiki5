@@ -1,4 +1,6 @@
 title: $:/palettes/SolarizedLight
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
 description: Precision colors for machines and people
 license: MIT, Ethan Schoonover, https://github.com/altercation/solarized/blob/master/LICENSE
 name: SolarizedLight
