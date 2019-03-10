@@ -10,7 +10,7 @@ alert-muted-foreground: <<colour muted-foreground>>
 background: #303030
 blockquote-bar: <<colour page-background>>
 button-background: transparent
-button-foreground: inherent
+button-foreground: inherit
 button-border: <<colour tag-background>>
 code-background: <<colour pre-background>>
 code-border: <<colour pre-border>>
