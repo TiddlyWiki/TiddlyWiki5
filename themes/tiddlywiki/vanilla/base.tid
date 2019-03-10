@@ -388,7 +388,8 @@ a.tc-tiddlylink-external:hover {
 	cursor: move;
 }
 
-.tc-sidebar-tab-open .tc-droppable-placeholder {
+.tc-sidebar-tab-open .tc-droppable-placeholder, .tc-tagged-draggable-list .tc-droppable-placeholder,
+.tc-links-draggable-list .tc-droppable-placeholder {
 	line-height: 2em;
 	height: 2em;
 }
