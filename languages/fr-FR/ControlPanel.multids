@@ -161,7 +161,7 @@ Settings/MissingLinks/Hint: Peut-on pointer vers des tiddlers qui n'existent pas
 Settings/MissingLinks/Description: Active les liens vers les tiddlers inexistants
 StoryView/Caption: Vue sur le déroulé
 StoryView/Prompt: Vue courante :
-Stylesheets/Caption: Stylesheets
+Stylesheets/Caption: Feuilles de style
 Stylesheets/Expand/Caption: Tout déployer
 Stylesheets/Hint: Voici le rendu CSS courant pour les tiddlers feuilles de style tagués avec <<tag "$:/tags/Stylesheet">>
 Stylesheets/Restore/Caption: Restaurer
