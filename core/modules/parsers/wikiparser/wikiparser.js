@@ -27,6 +27,7 @@ Attributes are stored as hashmaps of the following objects:
 
 var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
+	this.autoParagraph = options.autoParagraph;
 	var self = this;
 	// Check for an externally linked tiddler
 	if($tw.browser && (text || "") === "" && options._canonical_uri) {

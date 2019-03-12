@@ -847,6 +847,7 @@ exports.parseText = function(type,text,options) {
 	// Return the parser instance
 	return new Parser(type,text,{
 		parseAsInline: options.parseAsInline,
+		autoParagraph: options.autoParagraph,
 		wiki: this,
 		_canonical_uri: options._canonical_uri
 	});
