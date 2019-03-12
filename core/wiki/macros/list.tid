@@ -20,13 +20,13 @@ tags: $:/tags/Macro
 \end
 
 \define list-links-draggable(tiddler,field:"list",type:"ul",subtype:"li",class:"",itemTemplate)
+\whitespace trim
+<span class="tc-links-draggable-list">
 <$vars targetTiddler="""$tiddler$""" targetField="""$field$""">
 <$type$ class="$class$">
 <$list filter="[list[$tiddler$!!$field$]]">
 <$droppable actions=<<list-links-draggable-drop-actions>> tag="""$subtype$""">
-<div class="tc-droppable-placeholder">
-&nbsp;
-</div>
+<div class="tc-droppable-placeholder"/>
 <div>
 <$transclude tiddler="""$itemTemplate$""">
 <$link to={{!!title}}>
@@ -48,6 +48,7 @@ tags: $:/tags/Macro
 </$droppable>
 </$tiddler>
 </$vars>
+</span>
 \end
 
 \define list-tagged-draggable-drop-actions(tag)
@@ -73,13 +74,13 @@ tags: $:/tags/Macro
 \end
 
 \define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div")
+\whitespace trim
+<span class="tc-tagged-draggable-list">
 <$set name="tag" value=<<__tag__>>>
 <$list filter="[<__tag__>tagging[]$subFilter$]" emptyMessage=<<__emptyMessage__>>>
 <$elementTag$ class="tc-menu-list-item">
 <$droppable actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>""">
-<$elementTag$ class="tc-droppable-placeholder">
-&nbsp;
-</$elementTag$>
+<$elementTag$ class="tc-droppable-placeholder"/>
 <$elementTag$>
 <$transclude tiddler="""$itemTemplate$""">
 <$link to={{!!title}}>
@@ -92,12 +93,11 @@ tags: $:/tags/Macro
 </$list>
 <$tiddler tiddler="">
 <$droppable actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>""">
-<$elementTag$ class="tc-droppable-placeholder">
-&nbsp;
-</$elementTag$>
+<$elementTag$ class="tc-droppable-placeholder"/>
 <$elementTag$ style="height:0.5em;">
 </$elementTag$>
 </$droppable>
 </$tiddler>
 </$set>
+</span>
 \end

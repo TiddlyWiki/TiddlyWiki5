@@ -176,6 +176,10 @@ dl dt {
 	margin-top: 6px;
 }
 
+button, textarea, input, select {
+	outline-color: <<colour primary>>;
+}
+
 textarea,
 input[type=text],
 input[type=search],
@@ -382,6 +386,21 @@ a.tc-tiddlylink-external:hover {
 
 .tc-draggable {
 	cursor: move;
+}
+
+.tc-sidebar-tab-open .tc-droppable-placeholder, .tc-tagged-draggable-list .tc-droppable-placeholder,
+.tc-links-draggable-list .tc-droppable-placeholder {
+	line-height: 2em;
+	height: 2em;
+}
+
+.tc-sidebar-tab-open-item {
+	position: relative;
+}
+
+.tc-sidebar-tab-open .tc-btn-invisible.tc-btn-mini svg {
+	font-size: 0.7em;
+	fill: <<colour muted-foreground>>;
 }
 
 /*

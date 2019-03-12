@@ -1,5 +1,5 @@
 created: 20140720164948099
-modified: 20161017122011379
+modified: 20190307175403915
 tags: Mechanisms
 title: InfoMechanism
 type: text/vnd.tiddlywiki
@@ -14,6 +14,7 @@ System tiddlers in the namespace `$:/info/` are used to expose information about
 
 |!Title |!Description |
 |[[$:/info/browser]] |Running in the browser? ("yes" or "no") |
+|[[$:/info/browser/language]] |<<.from-version "5.1.20">> Language as reported by browser (note that some browsers report two character codes such as `en` while others report full codes such as `en-GB`) |
 |[[$:/info/browser/screen/width]] |Screen width in pixels |
 |[[$:/info/browser/screen/height]] |Screen height in pixels |
 |[[$:/info/node]] |Running under [[Node.js]]? ("yes" or "no") |

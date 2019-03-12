@@ -55,6 +55,15 @@
 			}
 		},
 		{
+			"file": "../../../../../languages/en-US/icon.tid",
+			"isTiddlerFile": true,
+			"fields": {
+				"title": "Language Icon: en-US",
+				"language": "en-US",
+				"tags": "Language Icon"
+			}
+		},
+		{
 			"file": "../../../../../languages/es-ES/icon.tid",
 			"isTiddlerFile": true,
 			"fields": {

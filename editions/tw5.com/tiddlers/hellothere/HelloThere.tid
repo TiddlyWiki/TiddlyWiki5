@@ -1,6 +1,6 @@
 created: 20130822170200000
 list: [[A Gentle Guide to TiddlyWiki]] [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[What happened to the original TiddlyWiki?]] [[HelloThumbnail - TWEUM2017]]
-modified: 20181206090053690
+modified: 20181220163418974
 tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
@@ -17,20 +17,29 @@ Use it to keep your [[to-do list|TaskManagementExample]], to plan an [[essay or 
 
 Unlike conventional online services, TiddlyWiki lets you choose where to keep your data, guaranteeing that in the decades to come you will [[still be able to use|Future Proof]] the notes you take today.
 
-<div style="font-size:0.7em;text-align:center;max-width:800px;margin:3em auto;">
-<a href="http://groups.google.com/group/TiddlyWiki" class="tc-btn-big-green" style="background-color:#FF8C19;" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/help}} ~TiddlyWiki Forum
+<div style="font-size:0.7em;text-align:center;margin:3em auto;">
+<a href="http://groups.google.com/group/TiddlyWiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#FF8C19;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/help}} Forum
 </a>
-<a href="https://www.youtube.com/c/JeremyRuston" class="tc-btn-big-green" style="background-color:#e52d27;" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/video}} ~TiddlyWiki on ~YouTube
+<a href="https://www.youtube.com/c/JeremyRuston" class="tc-btn-big-green" style="border-radius:4px;background-color:#e52d27;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/video}} ~YouTube
 </a>
-<a href="https://twitter.com/TiddlyWiki" class="tc-btn-big-green" style="background-color:#5E9FCA;" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/twitter}} @~TiddlyWiki on Twitter
+<a href="https://twitter.com/TiddlyWiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#5E9FCA;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/twitter}} Twitter
 </a>
-<a href="https://github.com/Jermolene/TiddlyWiki5" class="tc-btn-big-green" style="background-color:#444;" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/github}} ~TiddlyWiki on ~GitHub
+<a href="https://github.com/Jermolene/TiddlyWiki5" class="tc-btn-big-green" style="border-radius:4px;background-color:#444;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/github}} ~GitHub
+</a>
+<a href="https://gitter.im/TiddlyWiki/public" class="tc-btn-big-green" style="border-radius:4px;background-color:#753a88;background-image:linear-gradient(to left,#cc2b5e,#753a88);" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/gitter}} Gitter
 </a>
 </div>
+
+<<<.tc-big-quote
+''The ~TiddlyWiki is the best software I've ever found for organising my ideas.''
+
+It's well worth spending an hour or so playing with it to see how it can help you. This will be time well-spent and will change how you think and how you organise your ideas.
+<<< [[Joe Armstrong, Co-inventor of Erlang|https://joearms.github.io/]]
 
 <<<.tc-big-quote
 ''~TiddlyWiki gets a Gearhead rating of 6 out of 5 (it's that good).''

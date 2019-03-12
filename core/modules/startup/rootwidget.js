@@ -42,15 +42,16 @@ exports.startup = function() {
 	var fullscreen = $tw.utils.getFullScreenApis();
 	if(fullscreen) {
 		$tw.rootWidget.addEventListener("tm-full-screen",function(event) {
+			var fullScreenDocument = event.event ? event.event.target.ownerDocument : document;
 			if(event.param === "enter") {
-				event.event.target.ownerDocument.documentElement[fullscreen._requestFullscreen](Element.ALLOW_KEYBOARD_INPUT);
+				fullScreenDocument.documentElement[fullscreen._requestFullscreen](Element.ALLOW_KEYBOARD_INPUT);
 			} else if(event.param === "exit") {
-				event.event.target.ownerDocument[fullscreen._exitFullscreen]();
+				fullScreenDocument[fullscreen._exitFullscreen]();
 			} else {
-				if(event.event.target.ownerDocument[fullscreen._fullscreenElement]) {
-					event.event.target.ownerDocument[fullscreen._exitFullscreen]();
+				if(fullScreenDocument[fullscreen._fullscreenElement]) {
+					fullScreenDocument[fullscreen._exitFullscreen]();
 				} else {
-					event.event.target.ownerDocument.documentElement[fullscreen._requestFullscreen](Element.ALLOW_KEYBOARD_INPUT);
+					fullScreenDocument.documentElement[fullscreen._requestFullscreen](Element.ALLOW_KEYBOARD_INPUT);
 				}				
 			}
 		});

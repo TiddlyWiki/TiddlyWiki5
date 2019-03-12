@@ -1,5 +1,5 @@
 created: 20180626150526207
-modified: 20181107173250253
+modified: 20181216181934282
 tags: ListenCommand ServerCommand Features
 title: WebServer
 type: text/vnd.tiddlywiki
@@ -45,7 +45,7 @@ Visiting the wiki will prompt for a username and password, and access is denied 
 
 This example adds the [[authorization|WebServer Authorization]] parameters [[readers|WebServer Parameter: readers]] and [[writers|WebServer Parameter: writers]] to grant read access to anonymous users, but require authentication as "joe" in order to gain write access.
 
-> Note that anonymous users can trigger a username/password prompt by visiting the route `\login/basic` (eg http://127.0.0.1:8080/login/basic).
+> Note that anonymous users can trigger a username/password prompt by visiting the route `\login-basic` (eg http://127.0.0.1:8080/login-basic).
 
 ```
 tiddlywiki mywikifolder --listen "readers=(anon)" writers=joe username=joe password=bloggs

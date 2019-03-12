@@ -4,8 +4,10 @@ title: $:/core/templates/tiddlywiki5-external-js.html
 <!doctype html>
 {{$:/core/templates/MOTW.html}}<html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<!--~~ Raw markup for the top of the head section ~~-->
+{{{ [all[shadows+tiddlers]tag[$:/tags/RawMarkupWikified/TopHead]] ||$:/core/templates/raw-static-tiddler}}}
+<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 <meta name="application-name" content="TiddlyWiki" />
 <meta name="generator" content="TiddlyWiki" />
 <meta name="tiddlywiki-version" content="{{$:/core/templates/version}}" />
@@ -24,6 +26,8 @@ title: $:/core/templates/tiddlywiki5-external-js.html
 {{{ [all[shadows+tiddlers]tag[$:/tags/RawMarkupWikified]] ||$:/core/templates/raw-static-tiddler}}}
 </head>
 <body class="tc-body">
+<!--~~ Raw markup for the top of the body section ~~-->
+{{{ [all[shadows+tiddlers]tag[$:/tags/RawMarkupWikified/TopBody]] ||$:/core/templates/raw-static-tiddler}}}
 <!--~~ Static styles ~~-->
 <div id="styleArea">
 {{$:/boot/boot.css||$:/core/templates/css-tiddler}}
@@ -36,6 +40,8 @@ title: $:/core/templates/tiddlywiki5-external-js.html
 </noscript>
 <!--~~ Ordinary tiddlers ~~-->
 {{$:/core/templates/store.area.template.html}}
+<!--~~ Raw markup for the bottom of the body section ~~-->
+{{{ [all[shadows+tiddlers]tag[$:/tags/RawMarkupWikified/BottomBody]] ||$:/core/templates/raw-static-tiddler}}}
 </body>
 <script src="%24%3A%2Fcore%2Ftemplates%2Ftiddlywiki5.js" onerror="alert('Error: Cannot load tiddlywiki.js');"></script>
 </html>

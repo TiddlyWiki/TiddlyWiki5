@@ -3,5 +3,5 @@
 	"description": "Highlight.js: syntax highlighting",
 	"author": "JoaoBolila",
 	"core-version": ">=5.0.0",
-	"list": "readme usage license"
+	"list": "readme usage howto license"
 }
