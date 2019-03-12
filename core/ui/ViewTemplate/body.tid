@@ -5,7 +5,7 @@ tags: $:/tags/ViewTemplate
 
 <$list filter="[all[current]!has[plugin-type]!field:hide-body[yes]]">
 
-<$set name="autoParagraph" value="yes">
+<$set name="tv-auto-paragraph" value="yes">
 
 <$transclude>
 
