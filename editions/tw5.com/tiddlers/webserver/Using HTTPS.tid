@@ -15,5 +15,5 @@ To create the required certificate files with the popular [[openssl|https://www.
 ```
 openssl req -newkey rsa:2048 -new -nodes -keyout mywikifolder/key.pem -out mywikifolder/csr.pem
 openssl x509 -req -days 365 -in mywikifolder/csr.pem -signkey mywikifolder/key.pem -out mywikifolder/server.crt
-tiddlywiki mywikifolder --listen username=joe password=bloggs tlskey=key.pem tlscert=server.crt
+tiddlywiki mywikifolder --listen username=joe password=bloggs tls-key=key.pem tls-cert=server.crt
 ```

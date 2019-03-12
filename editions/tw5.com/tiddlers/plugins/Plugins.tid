@@ -1,10 +1,10 @@
 created: 20140910215514237
-modified: 20160107224627982
+modified: 20190108000000000
 tags: Concepts TableOfContents
 title: Plugins
 type: text/vnd.tiddlywiki
 
-Plugins in TiddlyWiki5 are used to distribute optional components that customise and extend TiddlyWiki. You can install them from the [[official plugin library|Installing a plugin from the plugin library]] or from [[community sites|Resources]].
+Plugins in TiddlyWiki5 can be used to distribute optional components that customise and extend TiddlyWiki. You can install them from the [[official plugin library|Installing a plugin from the plugin library]] or from [[community sites|Resources]].
 
 {{$:/core/ui/ControlPanel/Plugins/AddPlugins}}
 
@@ -14,3 +14,5 @@ Plugins can contain JavaScript modules, style sheets, and templates. Plugins can
 
 
 <<list-links "[tag[Plugins]]">>
+
+<$macrocall $name=".note" _="There is a plugin called $:/core that contains the main core code of ~TiddlyWiki. It is always present, and it is the source of default [[Shadow tiddlers|ShadowTiddlers]]. You can see the details of this in the <<.button control-panel>> on the <<.controlpanel-tab Plugins>> sub-tab."> 

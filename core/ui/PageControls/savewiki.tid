@@ -4,7 +4,7 @@ caption: {{$:/core/images/save-button}} {{$:/language/Buttons/SaveWiki/Caption}}
 description: {{$:/language/Buttons/SaveWiki/Hint}}
 
 <$button tooltip={{$:/language/Buttons/SaveWiki/Hint}} aria-label={{$:/language/Buttons/SaveWiki/Caption}} class=<<tv-config-toolbar-class>>>
-<$wikify name="site-title" text="{{$:/SiteTitle}}.html">
+<$wikify name="site-title" text={{$:/config/SaveWikiButton/Filename}}>
 <$action-sendmessage $message="tm-save-wiki" $param={{$:/config/SaveWikiButton/Template}} filename=<<site-title>>/>
 </$wikify>
 <span class="tc-dirty-indicator">

@@ -125,6 +125,10 @@ Settings/NavigationHistory/Caption: Historique de navigation
 Settings/NavigationHistory/Hint: Mise à jour de l'historique de navigation du navigateur lorsqu'on pointe vers un tiddler :
 Settings/NavigationHistory/No/Description: Ne pas mettre à jour l'historique
 Settings/NavigationHistory/Yes/Description: Mettre à jour l'historique
+Settings/NavigationPermalinkviewMode/Caption: Mode Permalink/permaview
+Settings/NavigationPermalinkviewMode/Hint: Choisit la manière de traiter l'URL permalink/permaview:
+Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: Copie l'URL permalink/permaview dans le presse-papier
+Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Met à jour la barre d'adresse à partir de l'URL permalink/permaview
 Settings/PerformanceInstrumentation/Caption: Instrumentation de la performance
 Settings/PerformanceInstrumentation/Hint: Affiche des statistiques de performance dans la console de développement du navigateur. Nécessite de recharger la page pour prendre effet.
 Settings/PerformanceInstrumentation/Description: Active l'instrumentation de la performance

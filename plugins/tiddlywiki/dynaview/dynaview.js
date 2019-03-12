@@ -15,7 +15,7 @@ Zoom everything
 // Export name and synchronous status
 exports.name = "dynaview";
 exports.platforms = ["browser"];
-exports.after = ["render"];
+exports.before = ["story"];
 exports.synchronous = true;
 
 var isWaitingForAnimationFrame = 0, // Bitmask:
@@ -23,12 +23,33 @@ var isWaitingForAnimationFrame = 0, // Bitmask:
 	ANIM_FRAME_CAUSED_BY_SCROLL = 2, // Animation frame was requested because of page scroll
 	ANIM_FRAME_CAUSED_BY_RESIZE = 4; // Animation frame was requested because of window resize
 
+var LOCAL_STORAGE_KEY_PREFIX = "tw5-dynaview-scroll-position#";
+
+var hasRestoredScrollPosition = false;
+
 exports.startup = function() {
+	var topmost = null, lastScrollY;
+	$tw.boot.disableStartupNavigation = true;
 	window.addEventListener("load",onLoad,false);
 	window.addEventListener("scroll",onScroll,false);
 	window.addEventListener("resize",onResize,false);
+	$tw.hooks.addHook("th-page-refreshing",function() {
+		if(!hasRestoredScrollPosition) {
+			topmost = restoreScrollPosition();
+		} else if(shouldPreserveScrollPosition()) {
+			topmost = findTopmostTiddler();
+		}
+		lastScrollY = window.scrollY;
+	});
 	$tw.hooks.addHook("th-page-refreshed",function() {
-		checkTopmost();
+		if(lastScrollY === window.scrollY) { // Don't do scroll anchoring if the scroll position got changed
+			if(shouldPreserveScrollPosition() || !hasRestoredScrollPosition) {
+				scrollToTiddler(topmost);
+				hasRestoredScrollPosition = true;
+			}
+		}
+		updateAddressBar();
+		saveScrollPosition();
 		checkVisibility();
 		saveViewportDimensions();
 	});
@@ -60,7 +81,8 @@ function worker() {
 		saveViewportDimensions();
 	}
 	setZoomClasses();
-	checkTopmost();
+	updateAddressBar();
+	saveScrollPosition();
 	checkVisibility();
 	isWaitingForAnimationFrame = 0;
 }
@@ -134,28 +156,91 @@ function checkVisibility() {
 	});
 }
 
-function checkTopmost() {
+function updateAddressBar() {
 	if($tw.wiki.getTiddlerText("$:/config/DynaView/UpdateAddressBar") === "yes") {
-		var elements = document.querySelectorAll(".tc-tiddler-frame[data-tiddler-title]"),
-			topmostElement = null,
-			topmostElementTop = 1 * 1000 * 1000;
-		$tw.utils.each(elements,function(element) {
-			// Check if the element is visible
-			var elementRect = element.getBoundingClientRect();
-			if((elementRect.top < topmostElementTop) && (elementRect.bottom > 0)) {
-				topmostElement = element;
-				topmostElementTop = elementRect.top;
-			}
-		});
-		if(topmostElement) {
-			var title = topmostElement.getAttribute("data-tiddler-title"),
-				hash = "#" + encodeURIComponent(title) + ":" + encodeURIComponent("[list[$:/StoryList]]");
+		var top = findTopmostTiddler();
+		if(top.element) {
+			var hash = "#" + encodeURIComponent(top.title) + ":" + encodeURIComponent("[list[$:/StoryList]]");
 			if(title && $tw.locationHash !== hash) {
 				$tw.locationHash = hash;
 				window.location.hash = hash;			
 			}
 		}
 	}
+}
+
+function saveScrollPosition() {
+	if(hasRestoredScrollPosition && $tw.wiki.getTiddlerText("$:/config/DynaView/RestoreScrollPositionAtStartup") === "yes") {
+		var top = findTopmostTiddler();
+		if(top.element) {
+			try {
+				window.localStorage.setItem(LOCAL_STORAGE_KEY_PREFIX + window.location.pathname,JSON.stringify({
+					title: top.title,
+					offset: top.offset
+				}));
+			} catch(e) {
+				console.log("Error setting local storage",e)
+			}
+		}
+	}
+}
+
+function restoreScrollPosition() {
+	var str = window.localStorage.getItem(LOCAL_STORAGE_KEY_PREFIX + window.location.pathname),
+		json;
+	if(str) {
+		try {
+			json = JSON.parse(str);
+		} catch(e) {
+			// Ignore errors
+		};
+	}
+	return json;
+}
+
+/*
+tiddlerDetails: {title: <title of tiddler to scroll to>, offset: <offset in pixels from the top of the tiddler>}
+*/
+function scrollToTiddler(tiddlerDetails) {
+	if(!$tw.pageScroller.isScrolling() && tiddlerDetails) {
+		var elements = document.querySelectorAll(".tc-tiddler-frame[data-tiddler-title]"),
+			topmostTiddlerElement = null;
+		$tw.utils.each(elements,function(element) {
+			if(element.getAttribute("data-tiddler-title") === tiddlerDetails.title) {
+				topmostTiddlerElement = element;
+			}
+		});
+		if(topmostTiddlerElement) {
+			var rect = topmostTiddlerElement.getBoundingClientRect(),
+				scrollY = Math.round(window.scrollY + rect.top + tiddlerDetails.offset);
+			if(scrollY !== window.scrollY) {
+				window.scrollTo(window.scrollX,scrollY);					
+			}
+		}
+	}
+}
+
+function shouldPreserveScrollPosition() {
+	return $tw.wiki.getTiddlerText("$:/config/DynaView/PreserveScrollPosition") === "yes";
+}
+
+function findTopmostTiddler() {
+	var elements = document.querySelectorAll(".tc-tiddler-frame[data-tiddler-title]"),
+		topmostElement = null,
+		topmostElementTop = 1 * 1000 * 1000;
+	$tw.utils.each(elements,function(element) {
+		// Check if the element is visible
+		var elementRect = element.getBoundingClientRect();
+		if((elementRect.top < topmostElementTop) && (elementRect.bottom > 0)) {
+			topmostElement = element;
+			topmostElementTop = elementRect.top;
+		}
+	});
+	return {
+		element: topmostElement,
+		offset: -topmostElementTop,
+		title: topmostElement.getAttribute("data-tiddler-title")
+	};
 }
 
 var previousViewportWidth, previousViewportHeight;

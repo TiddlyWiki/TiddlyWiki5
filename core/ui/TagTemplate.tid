@@ -1,5 +1,6 @@
 title: $:/core/ui/TagTemplate
 
+\whitespace trim
 <span class="tc-tag-list-item">
 <$set name="transclusion" value=<<currentTiddler>>>
 <$macrocall $name="tag-pill-body" tag=<<currentTiddler>> icon={{!!icon}} colour={{!!color}} palette={{$:/palette}} element-tag="""$button""" element-attributes="""popup=<<qualify "$:/state/popup/tag">> dragFilter='[all[current]tagging[]]' tag='span'"""/>

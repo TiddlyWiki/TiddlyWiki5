@@ -1,11 +1,11 @@
 created: 20130825213300000
-modified: 20160610081054535
+modified: 20180104000000000
 tags: Concepts
 title: TiddlerFields
 type: text/vnd.tiddlywiki
 
 \define lingo-base() $:/language/Docs/Fields/
-TiddlerFields are name:value pairs that make up a [[tiddler|Tiddlers]]. Field names must be lowercase letters, digits or the characters `-` (dash), `_` (underscore) and `.` (period).
+~TiddlerFields are name:value pairs that make up a [[tiddler|Tiddlers]]. Field names must be lowercase letters, digits or the characters `-` (dash), `_` (underscore) and `.` (period).
 
 The standard fields are:
 
@@ -30,6 +30,7 @@ Other fields used by the core are:
 |`draft.of` |DraftOfField |<<lingo draft.of>> |
 |`draft.title` |DraftTitleField |<<lingo draft.title>> |
 |`footer` |FooterField |<<lingo footer>> |
+|`hide-body`|HideBodyField|<<lingo hide-body>>|
 |`icon` |IconField |<<lingo icon>> |
 |`library` |LibraryField |<<lingo library>> |
 |`list-after` |ListAfterField |<<lingo list-after>> |
@@ -39,6 +40,7 @@ Other fields used by the core are:
 |`plugin-type` |PluginTypeField |<<lingo plugin-type>> |
 |`source` |SourceField |<<lingo source>> |
 |`subtitle` |SubtitleField |<<lingo subtitle>> |
+|`toc-link`|TocLink|<<lingo toc-link>>|
 
 The TiddlyWebAdaptor uses a few more fields:
 
@@ -46,4 +48,4 @@ The TiddlyWebAdaptor uses a few more fields:
 |`bag` |BagField |<<lingo bag>> |
 |`revision` |RevisionField |<<lingo revision>> |
 
-See the ''Advanced > Tiddler Fields'' tab of the [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}} for details of the fields used in this wiki.
+Details of the fields used in this ~TiddlyWiki are shown in the [[control panel|$:/ControlPanel]] {{$:/core/ui/Buttons/control-panel}} under the <<.controlpanel-tab Info>> tab >> <<.info-tab Advanced>> sub-tab >> Tiddler Fields

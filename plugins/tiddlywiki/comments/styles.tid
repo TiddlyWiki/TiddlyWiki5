@@ -4,12 +4,14 @@ tags: [[$:/tags/Stylesheet]]
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
 .tc-is-comment-header {
-	background: #c1e1e9;
 	padding: 0.25em;
+	border: 2px solid #c1e1ea;
+	border-radius: 4px;
+	background: #f1fcff;
 }
 
 .tc-comments-segment {
-	border-top: 2px solid #c1e1e9;
+	border-top: 2px solid #d7eef4;
 }
 
 .tc-comment-button button {
@@ -41,16 +43,18 @@ tags: [[$:/tags/Stylesheet]]
 }
 
 .tc-comment-entry {
-	border: 1px solid #c1e1ea;
+	position: relative;
+	border: 2px solid #c1e1ea;
+	border-radius: 4px;
 	margin: 0.5em 0 0 0;
-	background: #dbf6ff;
+	background: #f1fcff;
 }
 
 .tc-comment-entry-heading {
 	font-size: 0.7em;
 	font-weight: bold;
 	text-transform: uppercase;
-	background: #c1e1ea;
+	background: #d7eef4;
 	color: #5B6D80;
 	padding: 0 0.5em;
 }

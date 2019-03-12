@@ -17,11 +17,9 @@ caption: {{$:/language/SideBar/Open/Caption}}
 <div>
 <$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>
 
-<$set name="state" value={{{ [[$:/state/viewtemplate/visibility/]addsuffix<currentTiddler>] }}}>
-<$set name="visibility" tiddler=<<state>>>
-- <$text text=<<visibility>>/>
-</$set>
-</$set>
+<$reveal type="match" stateTitle={{{ [[$:/state/viewtemplate/visibility/]addsuffix<currentTiddler>] }}} text="true">
+<span style="display: inline-block; background: red; color: white; padding: 2px; border-radius: 2px;font-size: 0.5em;line-height: 1;text-shadow: none;font-weight: bold;vertical-align: middle;">LOADED</span>
+</$reveal>
 </div>
 </$droppable>
 </div>

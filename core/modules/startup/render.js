@@ -71,9 +71,10 @@ exports.startup = function() {
 		timerId;
 	function refresh() {
 		// Process the refresh
+		$tw.hooks.invokeHook("th-page-refreshing");
 		$tw.pageWidgetNode.refresh(deferredChanges);
 		deferredChanges = Object.create(null);
-   		$tw.hooks.invokeHook("th-page-refreshed");
+		$tw.hooks.invokeHook("th-page-refreshed");
 	}
 	// Add the change event handler
 	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {

@@ -1,0 +1,13 @@
+created: 20181215154811835
+modified: 20181215154811835
+tags: [[Hidden Settings]]
+title: Hidden Setting: Template for Save Wiki Button
+type: text/vnd.tiddlywiki
+
+Determines the template used when saving via the "save wiki" page control button.
+
+Defaults to `$:/core/save/all`.
+
+You can change this setting to choose what is saved when the "save wiki" button is clicked.
+
+$:/config/SaveWikiButton/Template

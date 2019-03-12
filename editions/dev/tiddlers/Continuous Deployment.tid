@@ -1,0 +1,8 @@
+created: 20190115173727727
+modified: 20190115173903645
+title: Continuous Deployment
+type: text/vnd.tiddlywiki
+
+TiddlyWiki 5 uses [[Travis CI|https://travis-ci.org/]] for continuous deployment. It is driven by the `.travis.yml` file in the root of the repo, along with the scripts in the `bin` folder that it invokes.
+
+The build history can be seen at https://travis-ci.org/Jermolene/TiddlyWiki5

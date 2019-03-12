@@ -14,5 +14,7 @@ Hook function parameters:
 ** Defined in core/modules/commands/server.js
 * NodeJS HTTP Server instance
 ** See the NodeJS docs at [ext[https://nodejs.org/docs/latest-v8.x/api/http.html#http_class_http_server]]
+* Name of server invoking this hook (for special handling of the NodeJS HTTP server instance argument). 
+** Current known values: `tiddlywiki`, `tiddlyserver`. 
 
 Return value is ignored.
