@@ -1,0 +1,14 @@
+title: $:/core/ui/ControlPanel/Settings/EditTabIndex
+tags: $:/tags/ControlPanel/Settings
+caption: {{$:/language/ControlPanel/Settings/EditTabIndex/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Settings/EditTabIndex/
+\define tab-index-input()
+<$link to="$:/config/EditTabIndex"><<lingo Description>></$link><br>
+<$edit-text tag="input" default="" placeholder="$(placeholder)$" tiddler="$:/config/EditTabIndex" field="text" size="2">
+\end
+<<lingo Hint>>
+
+<$wikify name="placeholder" text=<<lingo Placeholder>>>
+<<tab-index-input>>
+</$wikify>
