@@ -112,11 +112,28 @@ Settings/Caption: Settings
 Settings/EditorToolbar/Caption: Editor Toolbar
 Settings/EditorToolbar/Hint: Enable or disable the editor toolbar:
 Settings/EditorToolbar/Description: Show editor toolbar
+Settings/EditTabIndex/Caption: Tabindex for ~EditMode inputs
+Settings/EditTabIndex/Description: A positive numeric tabindex for Tiddler inputs in ~EditMode
+Settings/EditTabIndex/Hint: tabindex
+Settings/Hint: These settings let you customise the behaviour of TiddlyWiki.
 Settings/InfoPanelMode/Caption: Tiddler Info Panel Mode
 Settings/InfoPanelMode/Hint: Control when the tiddler info panel closes:
 Settings/InfoPanelMode/Popup/Description: Tiddler info panel closes automatically
 Settings/InfoPanelMode/Sticky/Description: Tiddler info panel stays open until explicitly closed
-Settings/Hint: These settings let you customise the behaviour of TiddlyWiki.
+Settings/DefaultSidebarTab/Caption: Default Sidebar Tab
+Settings/DefaultSidebarTab/Hint: Specify which sidebar tab is displayed by default
+Settings/DefaultMoreSidebarTab/Caption: Default More Sidebar Tab
+Settings/DefaultMoreSidebarTab/Hint: Specify which More sidebar tab is displayed by default
+Settings/LinkToBehaviour/Caption: Tiddler Opening Behaviour
+Settings/LinkToBehaviour/InsideRiver/Hint: Navigation from //within// the story river
+Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation from //outside// the story river
+Settings/LinkToBehaviour/OpenAbove: Open above the current tiddler
+Settings/LinkToBehaviour/OpenBelow: Open below the current tiddler
+Settings/LinkToBehaviour/OpenAtTop: Open at the top of the story river
+Settings/LinkToBehaviour/OpenAtBottom: Open at the bottom of the story river
+Settings/MissingLinks/Caption: Wiki Links
+Settings/MissingLinks/Hint: Choose whether to link to tiddlers that do not exist yet
+Settings/MissingLinks/Description: Enable links to missing tiddlers
 Settings/NavigationAddressBar/Caption: Navigation Address Bar
 Settings/NavigationAddressBar/Hint: Behaviour of the browser address bar when navigating to a tiddler:
 Settings/NavigationAddressBar/No/Description: Do not update the address bar
@@ -133,6 +150,10 @@ Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Update addres
 Settings/PerformanceInstrumentation/Caption: Performance Instrumentation
 Settings/PerformanceInstrumentation/Hint: Displays performance statistics in the browser developer console. Requires reload to take effect
 Settings/PerformanceInstrumentation/Description: Enable performance instrumentation
+Settings/TitleLinks/Caption: Tiddler Titles
+Settings/TitleLinks/Hint: Optionally display tiddler titles as links
+Settings/TitleLinks/No/Description: Do not display tiddler titles as links
+Settings/TitleLinks/Yes/Description: Display tiddler titles as links
 Settings/ToolbarButtonStyle/Caption: Toolbar Button Style
 Settings/ToolbarButtonStyle/Hint: Choose the style for toolbar buttons:
 Settings/ToolbarButtonStyle/Styles/Borderless: Borderless
@@ -142,24 +163,6 @@ Settings/ToolbarButtons/Caption: Toolbar Buttons
 Settings/ToolbarButtons/Hint: Default toolbar button appearance:
 Settings/ToolbarButtons/Icons/Description: Include icon
 Settings/ToolbarButtons/Text/Description: Include text
-Settings/DefaultSidebarTab/Caption: Default Sidebar Tab
-Settings/DefaultSidebarTab/Hint: Specify which sidebar tab is displayed by default
-Settings/DefaultMoreSidebarTab/Caption: Default More Sidebar Tab
-Settings/DefaultMoreSidebarTab/Hint: Specify which More sidebar tab is displayed by default
-Settings/LinkToBehaviour/Caption: Tiddler Opening Behaviour
-Settings/LinkToBehaviour/InsideRiver/Hint: Navigation from //within// the story river
-Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation from //outside// the story river
-Settings/LinkToBehaviour/OpenAbove: Open above the current tiddler
-Settings/LinkToBehaviour/OpenBelow: Open below the current tiddler
-Settings/LinkToBehaviour/OpenAtTop: Open at the top of the story river
-Settings/LinkToBehaviour/OpenAtBottom: Open at the bottom of the story river
-Settings/TitleLinks/Caption: Tiddler Titles
-Settings/TitleLinks/Hint: Optionally display tiddler titles as links
-Settings/TitleLinks/No/Description: Do not display tiddler titles as links
-Settings/TitleLinks/Yes/Description: Display tiddler titles as links
-Settings/MissingLinks/Caption: Wiki Links
-Settings/MissingLinks/Hint: Choose whether to link to tiddlers that do not exist yet
-Settings/MissingLinks/Description: Enable links to missing tiddlers
 StoryView/Caption: Story View
 StoryView/Prompt: Current view:
 Stylesheets/Caption: Stylesheets
