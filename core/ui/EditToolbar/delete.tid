@@ -3,7 +3,11 @@ tags: $:/tags/EditToolbar $:/tags/ViewToolbar
 caption: {{$:/core/images/delete-button}} {{$:/language/Buttons/Delete/Caption}}
 description: {{$:/language/Buttons/Delete/Hint}}
 
+<$list filter="[all[current]!is[missing]" variable="ignore" emptyMessage="""
+<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Delete/Hint}} aria-label={{$:/language/Buttons/Delete/Caption}} class=<<tv-config-toolbar-class>>>
+""">
 <$button message="tm-delete-tiddler" tooltip={{$:/language/Buttons/Delete/Hint}} aria-label={{$:/language/Buttons/Delete/Caption}} class=<<tv-config-toolbar-class>>>
+</$list>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/delete-button}}
 </$list>
