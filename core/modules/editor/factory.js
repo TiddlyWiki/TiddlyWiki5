@@ -213,6 +213,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			return true;
 		} else if(changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
+			$tw.hooks.invokeHook("th-refreshing-input",this,editInfo,changedTiddlers,changedAttributes);
 			this.updateEditor(editInfo.value,editInfo.type);
 		}
 		this.engine.fixHeight();
