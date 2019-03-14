@@ -70,8 +70,10 @@ function CodeMirrorEngine(options) {
 		}
 	},config);
 	
-	this.widget.wiki.addEventListener("change",function(changes) {
-		self.refresh(changes);
+	$tw.hooks.addHook("th-refreshing-input",function(widget,editInfo,changedTiddlers,changedAttributes) {
+		if(widget === self.widget) {
+			self.refreshCodeMirrorOptions(changedTiddlers);
+		}
 	});
 
 	// Set up a change event handler
@@ -224,7 +226,7 @@ CodeMirrorEngine.prototype.assignConfigurationValues = function(tiddler,type,cmO
 /*
 Update CodeMirror options when configuration tiddlers change
 */
-CodeMirrorEngine.prototype.refresh = function(changedTiddlers) {
+CodeMirrorEngine.prototype.refreshCodeMirrorOptions = function(changedTiddlers) {
 	var self = this,
 	    configTiddlers = $tw.wiki.filterTiddlers(CONFIG_FILTER),
 	    config = {},
