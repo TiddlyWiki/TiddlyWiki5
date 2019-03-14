@@ -69,12 +69,6 @@ function CodeMirrorEngine(options) {
 			self.domNode.appendChild(cmDomNode);
 		}
 	},config);
-	
-	$tw.hooks.addHook("th-refreshing-input",function(widget,editInfo,changedTiddlers,changedAttributes) {
-		if(widget === self.widget) {
-			self.refreshCodeMirrorOptions(changedTiddlers);
-		}
-	});
 
 	// Set up a change event handler
 	this.cm.on("change",function() {
