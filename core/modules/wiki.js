@@ -153,6 +153,7 @@ exports.enqueueTiddlerEvent = function(title,isDeleted) {
 			self.changedTiddlers = Object.create(null);
 			self.eventsTriggered = false;
 			if($tw.utils.count(changes) > 0) {
+				$tw.hooks.invokeHook("th-changed-tiddlers",changes);
 				self.dispatchEvent("change",changes);
 			}
 		});
