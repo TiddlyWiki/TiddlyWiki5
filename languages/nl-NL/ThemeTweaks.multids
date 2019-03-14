@@ -20,7 +20,7 @@ Metrics/StoryWidth/Hint: de totale breedte van de 'story river'
 Metrics/TiddlerWidth: Tiddler-breedte
 Metrics/TiddlerWidth/Hint: binnen de 'story river'
 Options: Opties
-Options/CodeWrapping: Breek lange regels in code-blokken af (word wrap)
+Options/CodeWrapping: Breek lange regels in code-blokken af ('word wrap')
 Options/SidebarLayout: Zijpaneel layout
 Options/SidebarLayout/Fixed-Fluid: 'Fixed story', 'fluid' zijpaneel
 Options/SidebarLayout/Fluid-Fixed: 'Fluid' story, 'fixed' zijpaneel

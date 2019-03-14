@@ -1,0 +1,11 @@
+tags: Variables [[Core Variables]]
+title: tv-show-missing-links Variable
+type: text/vnd.tiddlywiki
+
+The <<.def tv-show-missing-links>> [[variable|Variables]] defines if ''missing links'' within the ''scope'' of the variable are rendered as links or not.
+
+Globally, the variable is set within the ~PageTemplate and can be changed in the $:/ControlPanel under Settings - Show missing links to tiddlers
+
+If <<.def tv-show-missing-links>> is set to ''no'', missing links are rendered as plain text
+
+If <<.def tv-show-missing-links>> is set to ''yes'', missing links are rendered as wiki-links

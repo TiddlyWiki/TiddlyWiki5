@@ -1,0 +1,11 @@
+created: 20181215154811835
+modified: 20190122000000000
+tags: [[Hidden Settings]]
+title: Hidden Setting: Filename for Save Wiki Button
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.19">> When saving a ~TiddlyWiki using the <<.button save-wiki>> button, the default  file name used for saving is constructed using the Title of the ~TiddlyWiki as entered in the [[Control Panel|$:/ControlPanel]], which is stored in the tiddler [[$:/SiteTitle]].
+
+The value used is in the form `{{$:/SiteTitle}}.html`. This causes the filename to be constructed from the site Title with a `.html` extension.
+
+If a tiddler named [[$:/config/SaveWikiButton/Filename]] is created, the text in that tiddler will be used as the default file name used for saving the ~TiddlyWiki.

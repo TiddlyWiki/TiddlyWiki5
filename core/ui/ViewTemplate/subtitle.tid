@@ -1,7 +1,7 @@
 title: $:/core/ui/ViewTemplate/subtitle
 tags: $:/tags/ViewTemplate
 
-<$reveal type="nomatch" state=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
+<$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
 <div class="tc-subtitle">
 <$link to={{!!modifier}}>
 <$view field="modifier"/>

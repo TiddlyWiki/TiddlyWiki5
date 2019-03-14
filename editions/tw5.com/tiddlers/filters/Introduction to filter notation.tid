@@ -83,3 +83,5 @@ as an alternative to `[tag[Vegetarian]]`. This allows the preference to change o
 <<.def "Angle brackets">> `<>` mean that the parameter is the name of a [[variable|Variables]] whose value is to be used instead. Here we use the built-in <<.vlink currentTiddler>> variable in a filter that selects any tiddlers whose text contains the title of the current one:
 
 > `[search<currentTiddler>]`
+
+Note that these special brackets cannot be nested. It is not possible for example to write `[search{<currentTiddler>}]`.

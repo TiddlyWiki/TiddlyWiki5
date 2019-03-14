@@ -159,7 +159,7 @@ tags: $:/tags/Macro
   <ol class="tc-toc toc-selective-expandable">
     <$list filter="""[all[shadows+tiddlers]tag<__tag__>!has[draft.of]$sort$] -[<__tag__>] -[enlist<__exclude__>]""">
       <$list filter="[all[current]toc-link[no]]" variable="ignore" emptyMessage=<<toc-selective-expandable-empty-message>> >
-        <$macrocall $name=toc-unlinked-selective-expandable-body tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<excluded>> path=<<path>> >
+        <$macrocall $name="toc-unlinked-selective-expandable-body" tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<excluded>> path=<<path>>/>
       </$list>
     </$list>
   </ol>

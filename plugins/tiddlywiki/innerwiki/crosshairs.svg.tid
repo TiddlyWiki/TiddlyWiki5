@@ -1,0 +1,21 @@
+title: $:/plugins/tiddlywiki/innerwiki/crosshairs.svg
+type: image/svg+xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128px" height="128px" viewBox="0 0 128 128" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path d="M104.938091,68 L64,64 L68,103.85205 L68,108 C68,110.209139 66.209139,112 64,112 C61.790861,112 60,110.209139 60,108 L60,103.159803 L63.9305182,64 L22.9924274,68 L20,68 C17.790861,68 16,66.209139 16,64 C16,61.790861 17.790861,60 20,60 L22.9924274,60 L63.9305182,64 L60,24.8401973 L60,20 C60,17.790861 61.790861,16 64,16 C66.209139,16 68,17.790861 68,20 L68,24.1479497 L64,64 L104.938091,60 L108,60 C110.209139,60 112,61.790861 112,64 C112,66.209139 110.209139,68 108,68 L104.938091,68 Z" id="path-1"></path>
+        <filter x="-15.6%" y="-15.6%" width="131.2%" height="131.2%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="2.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="0" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Combined-Shape">
+            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+            <use fill="#FF0000" fill-rule="evenodd" xlink:href="#path-1"></use>
+        </g>
+    </g>
+</svg>

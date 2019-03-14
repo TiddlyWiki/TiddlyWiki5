@@ -114,6 +114,7 @@ Popup.prototype.show = function(options) {
 	var info = this.popupInfo(options.domNode);
 	// Cancel any higher level popups
 	this.cancel(info.popupLevel);
+
 	// Store the popup details if not already there
 	if(!options.floating && this.findPopup(options.title) === -1) {
 		this.popups.push({

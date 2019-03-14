@@ -1,7 +1,6 @@
 title: $:/TagManager
 icon: $:/core/images/tag-button
 color: #bbb
-caption: {{$:/language/TagManager/Caption}}
 
 \define lingo-base() $:/language/TagManager/
 \define iconEditorTab(type)

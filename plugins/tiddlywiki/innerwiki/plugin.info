@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/innerwiki",
+	"description": "Innerwiki: programmable screenshots",
+	"author": "Jeremy Ruston",
+	"plugin-type": "plugin",
+	"list": "readme docs examples"
+}
