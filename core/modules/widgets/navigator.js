@@ -130,7 +130,7 @@ NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
 };
 
 NavigatorWidget.prototype.findAdjacentStoryTiddler = function(title,storyList) {
-	if(this.wiki.getTiddler(this.historyTitle).getFieldString("focus-tiddler") === title) {
+	if(this.wiki.getTiddler(this.storyTitle).getFieldString("focus-tiddler") === title) {
 		var titleIndex = storyList.indexOf(title);
 		return storyList[titleIndex + 1] ? storyList[titleIndex + 1] :
 			(storyList[titleIndex - 1] ? storyList[titleIndex - 1] : null);
@@ -156,12 +156,12 @@ NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
 	var title = event.param || event.tiddlerTitle,
 		storyList = this.getStoryList();
-	var adjacentTiddler = this.historyTitle ? this.findAdjacentStoryTiddler(title,storyList) : null;
+	var adjacentTiddler = this.storyTitle ? this.findAdjacentStoryTiddler(title,storyList) : null;
 	// Look for tiddlers with this title to close
 	this.removeTitleFromStory(storyList,title);
 	this.saveStoryList(storyList);
 	if(adjacentTiddler) {
-		this.wiki.setText(this.historyTitle,"focus-tiddler",undefined,adjacentTiddler);
+		this.wiki.setText(this.storyTitle,"focus-tiddler",undefined,adjacentTiddler);
 	}
 	return false;
 };
@@ -169,8 +169,8 @@ NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
 // Close all tiddlers
 NavigatorWidget.prototype.handleCloseAllTiddlersEvent = function(event) {
 	this.saveStoryList([]);
-	if(this.historyTitle) {
-		this.wiki.setText(this.historyTitle,"focus-tiddler",undefined,"");
+	if(this.storyTitle) {
+		this.wiki.setText(this.storyTitle,"focus-tiddler",undefined,"");
 	}
 	return false;
 };
@@ -179,8 +179,8 @@ NavigatorWidget.prototype.handleCloseAllTiddlersEvent = function(event) {
 NavigatorWidget.prototype.handleCloseOtherTiddlersEvent = function(event) {
 	var title = event.param || event.tiddlerTitle;
 	this.saveStoryList([title]);
-	if(this.historyTitle) {
-		this.wiki.setText(this.historyTitle,"focus-tiddler",undefined,title);
+	if(this.storyTitle) {
+		this.wiki.setText(this.storyTitle,"focus-tiddler",undefined,title);
 	}
 	return false;
 };
@@ -251,7 +251,7 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 			))) {
 		return false;
 	}
-	if(this.historyTitle) {
+	if(this.storyTitle) {
 		adjacentTiddler = this.findAdjacentStoryTiddler(title,storyList);
 	}
 	// Delete the original tiddler
@@ -269,7 +269,7 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	this.removeTitleFromStory(storyList,title);
 	this.saveStoryList(storyList);
 	if(adjacentTiddler) {
-		this.wiki.setText(this.historyTitle,"focus-tiddler",undefined,adjacentTiddler);
+		this.wiki.setText(this.storyTitle,"focus-tiddler",undefined,adjacentTiddler);
 	}
 	// Trigger an autosave
 	$tw.rootWidget.dispatchEvent({type: "tm-auto-save-wiki"});
@@ -400,7 +400,7 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 		}
 		// Remove the draft tiddler
 		if(isConfirmed) {
-			if(!originalTiddler && this.historyTitle) {
+			if(!originalTiddler && this.storyTitle) {
 				adjacentTiddler = this.findAdjacentStoryTiddler(draftTitle,this.getStoryList());
 			}
 			this.wiki.deleteTiddler(draftTitle);
@@ -413,7 +413,7 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 				}
 				this.saveStoryList(storyList);
 				if(adjacentTiddler) {
-					this.wiki.setText(this.historyTitle,"focus-tiddler",undefined,adjacentTiddler);
+					this.wiki.setText(this.storyTitle,"focus-tiddler",undefined,adjacentTiddler);
 				}
 			}
 		}
