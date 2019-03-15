@@ -214,7 +214,6 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			this.refreshSelf();
 			return true;
 		} else if(changedTiddlers[this.editTitle]) {
-			$tw.hooks.invokeHook("th-refreshing-input-text",this,editInfo,changedTiddlers,changedAttributes);
 			this.updateEditor(editInfo.value,editInfo.type);
 		}
 		this.engine.fixHeight();
