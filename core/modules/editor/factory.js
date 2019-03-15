@@ -206,13 +206,14 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 	*/
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
-		var changedAttributes = this.computeAttributes();
+		var changedAttributes = this.computeAttributes(),
+			editInfo = this.getEditInfo();
+		$tw.hooks.invokeHook("th-refreshing-input",this,editInfo,changedTiddlers,changedAttributes);
 		// Completely rerender if any of our attributes have changed
 		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
 			this.refreshSelf();
 			return true;
 		} else if(changedTiddlers[this.editTitle]) {
-			var editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
 		}
 		this.engine.fixHeight();
