@@ -35,53 +35,6 @@ if($tw.browser && !window.CodeMirror) {
 	}
 }
 
-function getCmConfig() {
-	var type,
-		test,
-		value,
-		element,
-		extend,
-		tiddler,
-		config = {},
-		configTiddlers = $tw.wiki.filterTiddlers(CONFIG_FILTER);
-
-	if ($tw.utils.isArray(configTiddlers)) {
-		for (var i=0; i<configTiddlers.length; i++) {
-			tiddler = $tw.wiki.getTiddler(configTiddlers[i]);
-				if (tiddler) {
-				element = configTiddlers[i].replace(/\$:\/config\/codemirror\//ig,"");
-					type = (tiddler.fields.type) ? tiddler.fields.type.trim().toLocaleLowerCase() : "string";
-				switch (type) {
-					case "bool":
-					test = tiddler.fields.text.trim().toLowerCase();
-					value = (test === "true") ? true : false;
-					config[element] = value;
-					break;
-					case "string":
-					value = tiddler.fields.text.trim();
-					config[element] = value;
-					break;
-					case "integer":
-					value = parseInt(tiddler.fields.text.trim(), 10);
-					config[element] = value;
-					break;
-					case "json":
-					value = JSON.parse(tiddler.fields.text.trim());
-						extend = (tiddler.fields.extend) ? tiddler.fields.extend : element;
-
-					if (config[extend]) {
-						$tw.utils.extend(config[extend], value);
-					} else {
-						config[extend] = value;
-					}
-					break;
-				}
-			}
-		}
-	}
-	return config;
-}
-
 function CodeMirrorEngine(options) {
 
 	// Save our options
@@ -102,7 +55,7 @@ function CodeMirrorEngine(options) {
 	
 	// Set all cm-plugin defaults
 	// Get the configuration options for the CodeMirror object
-	var config = getCmConfig();
+	var config = this.getCmConfig();
 
 	config.mode = options.type;
 	config.value = options.value;
@@ -129,6 +82,29 @@ function CodeMirrorEngine(options) {
 		return self.widget.handleKeydownEvent.call(self.widget,event);
 	});
 }
+
+/*
+Collect configuration options
+*/
+CodeMirrorEngine.prototype.getCmConfig = function() {
+	var type,
+	    element,
+	    tiddler,
+	    config = {},
+	    configTiddlers = $tw.wiki.filterTiddlers(CONFIG_FILTER);
+
+	if ($tw.utils.isArray(configTiddlers)) {
+		for (var i=0; i<configTiddlers.length; i++) {
+			tiddler = $tw.wiki.getTiddler(configTiddlers[i]);
+			if (tiddler) {
+				element = configTiddlers[i].replace(/\$:\/config\/codemirror\//ig,"");
+				type = (tiddler.fields.type) ? tiddler.fields.type.trim().toLocaleLowerCase() : "string";
+				this.assignConfigurationValues(tiddler,type,element,config);
+			}
+		}
+	}
+	return config;
+};
 
 /*
 Set the text of the engine if it doesn't currently have focus
@@ -205,6 +181,65 @@ CodeMirrorEngine.prototype.executeTextOperation = function(operation) {
 	}
 	this.cm.focus();
 	return newText;
+};
+
+/*
+Extract configuration values from codemirror configuration tiddlers
+*/
+CodeMirrorEngine.prototype.assignConfigurationValues = function(tiddler,type,cmOption,config) {
+	var test,
+	    value,
+	    extend;
+	switch (type) {
+		case "bool":
+		test = tiddler.fields.text.trim().toLowerCase();
+		value = (test === "true") ? true : false;
+		config[cmOption] = value;
+		break;
+		case "string":
+		value = tiddler.fields.text.trim();
+		config[cmOption] = value;
+		break;
+		case "integer":
+		value = parseInt(tiddler.fields.text.trim(), 10);
+		config[cmOption] = value;
+		break;
+		case "json":
+		value = JSON.parse(tiddler.fields.text.trim());
+			extend = (tiddler.fields.extend) ? tiddler.fields.extend : cmOption;
+
+		if (config[extend]) {
+			$tw.utils.extend(config[extend], value);
+		} else {
+			config[extend] = value;
+		}
+		break;
+	}
+};
+
+/*
+Update CodeMirror options when configuration tiddlers change
+*/
+CodeMirrorEngine.prototype.refreshCodeMirrorOptions = function(changedTiddlers) {
+	var self = this,
+	    configTiddlers = $tw.wiki.filterTiddlers(CONFIG_FILTER),
+	    config = {},
+	    hasChanged;
+	for(var i=0; i<configTiddlers.length; i++) {
+		if(changedTiddlers[configTiddlers[i]]) {
+			hasChanged = true;
+			var cmOption = configTiddlers[i].replace(/\$:\/config\/codemirror\//ig,""),
+			    tiddler = this.widget.wiki.getTiddler(configTiddlers[i]);
+			var type = (tiddler.fields.type) ? tiddler.fields.type.trim().toLocaleLowerCase() : "string";
+			this.assignConfigurationValues(tiddler,type,cmOption,config);
+		}
+	}
+	if(hasChanged) {
+		$tw.utils.each(Object.keys(config),function(cmConfigOption) {
+			self.cm.setOption(cmConfigOption,config[cmConfigOption]);
+		});
+	}
+	return true;
 };
 
 exports.CodeMirrorEngine = CodeMirrorEngine;
