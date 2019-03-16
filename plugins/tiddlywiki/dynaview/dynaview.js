@@ -239,7 +239,7 @@ function findTopmostTiddler() {
 	return {
 		element: topmostElement,
 		offset: -topmostElementTop,
-		title: topmostElement.getAttribute("data-tiddler-title")
+		title: topmostElement ? topmostElement.getAttribute("data-tiddler-title") : null
 	};
 }
 
