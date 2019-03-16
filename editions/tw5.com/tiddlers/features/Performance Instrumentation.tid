@@ -1,0 +1,31 @@
+created: 20190316163428191
+modified: 20190316163657710
+tags: Features
+title: Performance Instrumentation
+type: text/vnd.tiddlywiki
+
+The core has built-in performance instrumentation for the refresh cycle. See “Performance Instrumentation” on the “Settings” tab of control panel. The wiki will need to be reloaded before it takes effect.
+
+With performance instrumentation switched on, there is additional timing information displayed the browser developer console each time a refresh cycle is triggered. For example:
+
+```
+performance: mainRender: 327.83ms 
+performance: +filter: 49.70ms 
+performance: styleRefresh: 9.14ms 
+performance: +filter: 2.46ms 
+performance: mainRefresh: 68.10ms 
+performance: +filter: 37.69ms 
+```
+
+The information above should be interpreted as follows:
+
+<<<
+"Initial rendering of the main page took 327ms (of which 50ms was filter evaluation). Refreshing the page stylesheet took 9ms (of which 2ms was filter evaluation). Refreshing the main page took 68ms (of which 38ms was filter evaluation)"
+<<<
+
+* mainRender is the time taken for the initial display of the page template
+* styleRefresh is the time taken to refresh the page stylesheet
+* mainRender is the time taken to refresh the main page template
+* in each case, +filter denotes the time taken up with filter evaluation.
+
+As an example, try switching between the sidebar tabs to compare how long they take to render.
