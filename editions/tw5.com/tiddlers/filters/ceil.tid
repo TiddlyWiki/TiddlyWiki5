@@ -1,0 +1,12 @@
+created: 20190317115107064
+modified: 20190317115217492
+caption: ceil
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input as numbers, but the the smallest integer greater than or equal to each one
+op-purpose: treating each input title as a number, returning the the smallest integer greater than or equal to each one
+tags: [[Binary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: ceil Operator
+
+<<.from-version "5.1.20">>
+
+<<.operator-examples "ceil">>
