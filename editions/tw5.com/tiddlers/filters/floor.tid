@@ -1,0 +1,12 @@
+created: 20190317115719393
+modified: 20190317115852500
+caption: floor
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input as numbers, but the largest integer less than or equal to each one
+op-purpose: treating each input title as a number, returning the largest integer less than or equal to each one
+tags: [[Binary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: floor Operator
+
+<<.from-version "5.1.20">>
+
+<<.operator-examples "floor">>
