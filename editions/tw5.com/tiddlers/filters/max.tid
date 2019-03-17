@@ -1,0 +1,14 @@
+created: 20190317122629200
+modified: 20190317123323087
+caption: max
+op-input: a [[selection of titles|Title Selection]]
+op-output: the largest value of each input title treated as a number and compared with <<.place N>>
+op-parameter: a number
+op-parameter-name: N
+op-purpose: treating each input title as a number, comparing each one with the operand and returning the largest number of each title - <<.place N>> comparison
+tags: [[Binary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: max Operator
+
+<<.from-version "5.1.20">>
+
+<<.operator-examples "max">>
