@@ -1,0 +1,12 @@
+created: 20190317123513970
+modified: 20190317123819303
+caption: maxall
+op-input: a [[selection of titles|Title Selection]]
+op-output: a new list containing the largest number
+op-purpose: treating each input title as a number, returning the largest number among all input titles
+tags: [[Binary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: maxall Operator
+
+<<.from-version "5.1.20">>
+
+<<.operator-examples "maxall">>
