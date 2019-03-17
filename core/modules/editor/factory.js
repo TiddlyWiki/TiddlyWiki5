@@ -208,7 +208,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes(),
 			editInfo = this.getEditInfo();
-		$tw.hooks.invokeHook("th-refreshing-input",this,editInfo,changedTiddlers,changedAttributes);
+		$tw.hooks.invokeHook("th-edit-text-widget-refreshing",this,editInfo,changedTiddlers,changedAttributes);
 		// Completely rerender if any of our attributes have changed
 		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
 			this.refreshSelf();
