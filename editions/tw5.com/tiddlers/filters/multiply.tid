@@ -1,0 +1,14 @@
+created: 20190317114223627
+modified: 20190317114419683
+caption: multiply
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input as numbers, but with each one multiplied by <<.place N>>
+op-parameter: a number
+op-parameter-name: N
+op-purpose: treating each input title as a number, multiply each by the numeric value of the operand
+tags: [[Binary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: multiply Operator
+
+<<.from-version "5.1.20">>
+
+<<.operator-examples "multiply">>
