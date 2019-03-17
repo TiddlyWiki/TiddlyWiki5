@@ -1,0 +1,12 @@
+created: 20190317114725072
+modified: 20190317114939924
+caption: abs
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input as numbers, but the absolute numeric value of each one
+op-purpose: treating each input title as a number, returning the absolute numeric value of each one
+tags: [[Binary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: abs Operator
+
+<<.from-version "5.1.20">>
+
+<<.operator-examples "abs">>
