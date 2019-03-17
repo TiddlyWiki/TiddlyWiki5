@@ -1,0 +1,14 @@
+created: 20190317110043400
+modified: 20190317112641460
+caption: subtract
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input as numbers, but with <<.place N>> subtracted from each one
+op-parameter: a number
+op-parameter-name: N
+op-purpose: treating each input title as a number, subtract from each the numeric value of the operand
+tags: [[Binary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: subtract Operator
+
+<<.from-version "5.1.20">>
+
+<<.operator-examples "subtract">>
