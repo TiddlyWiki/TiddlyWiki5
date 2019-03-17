@@ -4,7 +4,7 @@ caption: round
 op-input: a [[selection of titles|Title Selection]]
 op-output: the input as numbers, but the value of each one rounded to the nearest integer
 op-purpose: treating each input title as a number, returning the value of each one rounded to the nearest integer
-tags: [[Binary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+tags: [[Unary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
 title: round Operator
 
 <<.from-version "5.1.20">>
