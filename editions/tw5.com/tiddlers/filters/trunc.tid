@@ -1,0 +1,12 @@
+created: 20190317120107986
+modified: 20190317120154912
+caption: trunc
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input as numbers, but the integer part of each one by removing any fractional digits
+op-purpose: treating each input title as a number, returning the integer part of each one by removing any fractional digits
+tags: [[Binary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: trunc Operator
+
+<<.from-version "5.1.20">>
+
+<<.operator-examples "trunc">>
