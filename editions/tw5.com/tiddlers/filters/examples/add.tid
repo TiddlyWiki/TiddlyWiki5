@@ -1,0 +1,17 @@
+created: 20190317134935192
+modified: 20190317140215898
+tags: [[Operator Examples]] [[add Operator]]
+title: add Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "1 2.71828 3.14159 +[add[1]]">>
+
+<<.operator-example 2 "[list[Days of the Week]] -[[Sunday]] +[count[]add[100]]">>
+
+<<.operator-example 3 "1 2.71828 3.14159 +[add[-1.001]]">>
+
+//non-numeric operand that cannot be parsed to a numeric value, nothing is added//
+<<.operator-example 4 "1 2 3 +[add[hello]]">>
+
+//`<<now>>` is parsed to a number, here it's the hour part of <<now>>//
+<<.operator-example 5 "1 2 3 +[add<now>]">>
