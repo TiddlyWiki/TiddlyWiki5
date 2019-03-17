@@ -1,0 +1,14 @@
+created: 20190317130224730
+modified: 20190317130730489
+caption: fixed
+op-input: a [[selection of titles|Title Selection]]
+op-output: a list containing each input title treated as a number and formatted with <<.place N>> digits after the decimal point
+op-parameter: a number
+op-parameter-name: N
+op-purpose: treating each input title as a number, formatting each using fixed-point notation with <<.place N>> digits after the decimal point
+tags: [[Binary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: fixed Operator
+
+<<.from-version "5.1.20">>
+
+<<.operator-examples "fixed">>
