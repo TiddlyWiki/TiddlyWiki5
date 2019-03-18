@@ -4,7 +4,7 @@ title: WidgetSubclassingMechanism
 
 !! Introduction
 
-The widget subclassing mechanism allows widgets to be subclassed with additional methods and properties. The subclassed widgets can either overwrite the existing definition of the baseclass widget, or it can be made availabel as a new widget
+The widget subclassing mechanism allows widgets to be subclassed with additional methods and properties. The subclassed widgets can either overwrite the existing definition of the baseclass widget, or it can be made available as a new widget
 
 Widget subclasses are defined in modules of module-type `widget-subclass`. They should export the following properties:
 
