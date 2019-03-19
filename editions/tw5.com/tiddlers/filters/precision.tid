@@ -12,3 +12,5 @@ title: precision Operator
 <<.from-version "5.1.20">>
 
 <<.operator-examples "precision">>
+
+<$macrocall $name=".tip" _="""the <<.op precision>> operator uses scientific notation conventions and can therefor return numbers in `exponential notation`. Results can however be converted to decimal using other [[Mathematics Operators]]"""/>
