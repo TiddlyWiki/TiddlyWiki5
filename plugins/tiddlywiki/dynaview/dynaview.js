@@ -108,10 +108,6 @@ function setZoomClasses() {
 function checkVisibility() {
 	var elements = document.querySelectorAll(".tc-dynaview-set-tiddler-when-visible");
 	$tw.utils.each(elements,function(element) {
-		// Bail if we've already triggered this element and we're not unsetting a tiddler when this element leaves the viewport
-		if(element.getAttribute("data-dynaview-has-triggered") === "true" && !element.hasAttribute("data-dynaview-unset-tiddler")) {
-			return;
-		}
 		// Calculate whether the element is visible
 		var elementRect = element.getBoundingClientRect(),
 			viewportWidth = window.innerWidth || document.documentElement.clientWidth,
@@ -122,8 +118,9 @@ function checkVisibility() {
 				top: 0,
 				bottom: viewportHeight
 			},
-			tiddler,
-			value;
+			title = element.getAttribute("data-dynaview-set-tiddler"),
+			setValue = element.getAttribute("data-dynaview-set-value") || "",
+			unsetValue = element.getAttribute("data-dynaview-unset-value") || "";
 		if(element.classList.contains("tc-dynaview-expand-viewport")) {
 			viewportRect.left -= viewportWidth;
 			viewportRect.right += viewportWidth;
@@ -135,23 +132,15 @@ function checkVisibility() {
 			elementRect.top > viewportRect.bottom ||
 			elementRect.bottom < viewportRect.top) {
 			// Element is not visible
-			// Set the unset tiddler if required and this element has previously been triggered
-			if(element.getAttribute("data-dynaview-has-triggered") === "true" && element.hasAttribute("data-dynaview-unset-tiddler")) {
-				tiddler = element.getAttribute("data-dynaview-unset-tiddler");
-				value = element.getAttribute("data-dynaview-unset-value") || "";
-				if(tiddler && $tw.wiki.getTiddlerText(tiddler) !== value) {
-					$tw.wiki.addTiddler(new $tw.Tiddler({title: tiddler, text: value}));
-				}
-				element.setAttribute("data-dynaview-has-triggered","false");				
+			// Set the unset tiddler if required
+			if(title && unsetValue && $tw.wiki.getTiddlerText(title) === setValue) {
+				$tw.wiki.addTiddler(new $tw.Tiddler({title: title, text: unsetValue}));
 			}
 		} else {
 			// Element is visible
-			tiddler = element.getAttribute("data-dynaview-set-tiddler");
-			value = element.getAttribute("data-dynaview-set-value") || "";
-			if(tiddler && $tw.wiki.getTiddlerText(tiddler) !== value) {
-				$tw.wiki.addTiddler(new $tw.Tiddler({title: tiddler, text: value}));
+			if(title && $tw.wiki.getTiddlerText(title) !== setValue) {
+				$tw.wiki.addTiddler(new $tw.Tiddler({title: title, text: setValue}));
 			}
-			element.setAttribute("data-dynaview-has-triggered","true");
 		}
 	});
 }

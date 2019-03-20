@@ -27,11 +27,15 @@ Note that it is not recommended to use this setting at the same time as the "Upd
 
 !! Set tiddler field when visible
 
-The background task detects when elements with the class `tc-dynaview-set-tiddler-when-visible` scroll into view. The first time that they do, the background task assigns the value in the attribute `data-dynaview-set-value` to the tiddler whose title is in the attribute `data-dynaview-set-tiddler`. This assignment can be tied to a reveal widget to cause content to be displayed when it becomes visible. If the class `tc-dynaview-expand-viewport` is set then the viewport is expanded so that the processing occurs when elements move near the viewport.
+The background task detects when elements with the class `tc-dynaview-set-tiddler-when-visible` scroll into view. The first time that they do, the background task assigns the value in the attribute `data-dynaview-set-value` to the tiddler whose title is in the attribute `data-dynaview-set-tiddler`.
 
-!! Unset tiddler field when set visible before but then scrolled out of view
+This assignment can be tied to a reveal widget to cause content to be displayed when it becomes visible.
 
-The background task detects when elements with the class `tc-dynaview-set-tiddler-when-visible` scroll out view after they have scrolled into view. When scrolling out of view after they have scrolled in, the background task assigns the value in the attribute `data-dynaview-unset-value` to the tiddler whose title is in the attribute `data-dynaview-unset-tiddler`. This assignment can be tied to a reveal widget to cause content to be hidden when it becomes invisible. If the class `tc-dynaview-expand-viewport` is set then the viewport is expanded so that the processing occurs when elements move near the viewport.
+If the class `tc-dynaview-expand-viewport` is set then the viewport is expanded so that the processing occurs when elements move near the viewport.
+
+!!! Unset tiddler field when set visible before but then scrolled out of view
+
+In addition to the processing described above, if the element also has the attribute `data-dynaview-unset-value` then its value will be assigned to the associated tiddler if the element is out of view and the current value of the tiddler corresponds to the value specified in the `data-dynaview-set-value` attribute.
 
 !! Update address bar when scrolling
 
