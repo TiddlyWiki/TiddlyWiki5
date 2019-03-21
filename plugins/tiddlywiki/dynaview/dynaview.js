@@ -18,6 +18,10 @@ exports.platforms = ["browser"];
 exports.before = ["story"];
 exports.synchronous = true;
 
+var STATE_OUT_OF_VIEW = "0",
+	STATE_NEAR_VIEW = "1",
+	STATE_IN_VIEW = "2";
+
 var isWaitingForAnimationFrame = 0, // Bitmask:
 	ANIM_FRAME_CAUSED_BY_LOAD = 1, // Animation frame was requested because of page load
 	ANIM_FRAME_CAUSED_BY_SCROLL = 2, // Animation frame was requested because of page scroll
@@ -106,7 +110,7 @@ function setZoomClasses() {
 }
 
 function checkVisibility() {
-	var elements = document.querySelectorAll(".tc-dynaview-set-tiddler-when-visible");
+	var elements = document.querySelectorAll(".tc-dynaview-track-tiddler-when-visible");
 	$tw.utils.each(elements,function(element) {
 		// Calculate whether the element is visible
 		var elementRect = element.getBoundingClientRect(),
@@ -118,28 +122,30 @@ function checkVisibility() {
 				top: 0,
 				bottom: viewportHeight
 			},
-			title = element.getAttribute("data-dynaview-set-tiddler"),
-			setValue = element.getAttribute("data-dynaview-set-value") || "",
-			unsetValue = element.getAttribute("data-dynaview-unset-value") || "";
-		if(element.classList.contains("tc-dynaview-expand-viewport")) {
-			viewportRect.left -= viewportWidth;
-			viewportRect.right += viewportWidth;
-			viewportRect.top -= viewportHeight;
-			viewportRect.bottom += viewportHeight;
-		}
-		if(elementRect.left > viewportRect.right || 
-			elementRect.right < viewportRect.left || 
-			elementRect.top > viewportRect.bottom ||
-			elementRect.bottom < viewportRect.top) {
-			// Element is not visible
-			// Set the unset tiddler if required
-			if(title && unsetValue && $tw.wiki.getTiddlerText(title) === setValue) {
-				$tw.wiki.addTiddler(new $tw.Tiddler({title: title, text: unsetValue}));
+			title = element.getAttribute("data-dynaview-track-tiddler");
+		if(title) {
+			var currValue = $tw.wiki.getTiddlerText(title),
+				newValue = currValue;
+			// Within viewport
+			if(!(elementRect.left > viewportRect.right || 
+								elementRect.right < viewportRect.left || 
+								elementRect.top > viewportRect.bottom ||
+								elementRect.bottom < viewportRect.top)) {
+				newValue = STATE_IN_VIEW;
+			// Near viewport
+			} else if(!(elementRect.left > (viewportRect.right + viewportWidth) || 
+								elementRect.right < (viewportRect.left - viewportWidth) || 
+								elementRect.top > (viewportRect.bottom + viewportHeight) ||
+								elementRect.bottom < (viewportRect.top - viewportHeight))) {
+				newValue = STATE_NEAR_VIEW;
+			} else {
+				// Outside viewport
+				if(currValue !== undefined) {
+					newValue = STATE_OUT_OF_VIEW;
+				}
 			}
-		} else {
-			// Element is visible
-			if(title && $tw.wiki.getTiddlerText(title) !== setValue) {
-				$tw.wiki.addTiddler(new $tw.Tiddler({title: title, text: setValue}));
+			if(newValue !== currValue) {
+				$tw.wiki.addTiddler(new $tw.Tiddler({title: title, text: newValue}));				
 			}
 		}
 	});
