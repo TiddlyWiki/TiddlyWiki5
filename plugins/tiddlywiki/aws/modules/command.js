@@ -59,8 +59,8 @@ Command.prototype.subCommands["s3-load"] = function() {
 		bucket = this.params[2],
 		filepaths = this.params.slice(3);
 	// Check parameters
-	if(!region || !bucket || filepaths.length < 1) {
-		throw "Missing parameters";
+	if(!region || !bucket) {
+		self.callback("Missing parameters");
 	}
 	async.eachLimit(
 		filepaths,
