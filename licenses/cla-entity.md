@@ -12,7 +12,7 @@ This contributor agreement ("Agreement") documents the rights granted by contrib
 "CLA" means Contributor License Agreement (this document).
 
 "Contribution" means any work of authorship that is Submitted by You to Us in which You own or assert ownership of the Copyright. If You do not own the Copyright in the entire work of authorship, please follow the instructions in `contributing.md`, which is in the root directory of the project repository.
- 
+
 "Copyright" means all rights protecting works of authorship owned or controlled by You or Your Affiliates, including copyright, moral and neighboring rights, as appropriate, for the full term of their existence including any extensions by You.
 
 "Material" means the work of authorship which is made available by Us to third parties. When this Agreement covers more than one software project, the Material means the work of authorship to which the Contribution was Submitted. After You Submit the Contribution, it may be included in the Material.
@@ -25,7 +25,7 @@ This contributor agreement ("Agreement") documents the rights granted by contrib
 
 "Media" means any portion of a Contribution which is not software.
 
-"Legal Entity" means an entity which is not a natural person. 
+"Legal Entity" means an entity which is not a natural person.
 
 "Affiliates" means other Legal Entities that control, are controlled by, or under common control with that Legal Entity. For the purposes of this definition, "control" means (i) the power, direct or indirect, to cause the direction or management of such Legal Entity, whether by contract or otherwise, (ii) ownership of fifty percent (50%) or more of the outstanding shares or securities which vote to elect the management or other persons who direct such Legal Entity or (iii) beneficial ownership of such entity.
 
@@ -71,7 +71,7 @@ You confirm that:
 
 (a) You have the legal authority to enter into this Agreement.
 
-(b) You or Your Affiliates own the Copyright and patent claims covering the Contribution which are required to grant the rights under Section 2. 
+(b) You or Your Affiliates own the Copyright and patent claims covering the Contribution which are required to grant the rights under Section 2.
 
 (c) The grant of rights under Section 2 does not violate any grant of rights which You or Your Affiliates have made to third parties.
 
@@ -109,3 +109,5 @@ eg: Jeremy Ruston, @Jermolene for Federatial Limited, 2011/11/22
 Jeremy Ruston, @Jermolene for Federatial Limited, 2011/11/22
 
 Google Inc, 2015/12/21
+
+Brooks Boyd, @MidnightLightning for MidnightDesign, LLC 2019/03/21
