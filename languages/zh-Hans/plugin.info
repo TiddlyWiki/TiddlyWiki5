@@ -4,5 +4,6 @@
 	"plugin-type": "language",
 	"description": "Chinese (Simplified)",
 	"author": "BramChen",
-	"core-version": ">=5.0.8"
+	"core-version": ">=5.0.8",
+	"plugin-priority": 100
 }

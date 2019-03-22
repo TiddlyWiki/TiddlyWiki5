@@ -52,6 +52,63 @@ $tw.utils.isArray = function(value) {
 };
 
 /*
+Check if an array is equal by value and by reference.
+*/
+$tw.utils.isArrayEqual = function(array1,array2) {
+	if(array1 === array2) {
+		return true;
+	}
+	array1 = array1 || [];
+	array2 = array2 || [];
+	if(array1.length !== array2.length) {
+		return false;
+	}
+	return array1.every(function(value,index) {
+		return value === array2[index];
+	});
+};
+
+/*
+Push entries onto an array, removing them first if they already exist in the array
+	array: array to modify (assumed to be free of duplicates)
+	value: a single value to push or an array of values to push
+*/
+$tw.utils.pushTop = function(array,value) {
+	var t,p;
+	if($tw.utils.isArray(value)) {
+		// Remove any array entries that are duplicated in the new values
+		if(value.length !== 0) {
+			if(array.length !== 0) {
+				if(value.length < array.length) {
+					for(t=0; t<value.length; t++) {
+						p = array.indexOf(value[t]);
+						if(p !== -1) {
+							array.splice(p,1);
+						}
+					}
+				} else {
+					for(t=array.length-1; t>=0; t--) {
+						p = value.indexOf(array[t]);
+						if(p !== -1) {
+							array.splice(t,1);
+						}
+					}
+				}
+			}
+			// Push the values on top of the main array
+			array.push.apply(array,value);
+		}
+	} else {
+		p = array.indexOf(value);
+		if(p !== -1) {
+			array.splice(p,1);
+		}
+		array.push(value);
+	}
+	return array;
+};
+
+/*
 Determine if a value is a date
 */
 $tw.utils.isDate = function(value) {
@@ -89,7 +146,9 @@ Helper for making DOM elements
 tag: tag name
 options: see below
 Options include:
+namespace: defaults to http://www.w3.org/1999/xhtml
 attributes: hashmap of attribute values
+style: hashmap of styles
 text: text to add as a child node
 children: array of further child nodes
 innerHTML: optional HTML for element
@@ -99,7 +158,7 @@ eventListeners: array of event listeners (this option won't work until $tw.utils
 */
 $tw.utils.domMaker = function(tag,options) {
 	var doc = options.document || document;
-	var element = doc.createElement(tag);
+	var element = doc.createElementNS(options.namespace || "http://www.w3.org/1999/xhtml",tag);
 	if(options["class"]) {
 		element.className = options["class"];
 	}
@@ -114,6 +173,9 @@ $tw.utils.domMaker = function(tag,options) {
 	}
 	$tw.utils.each(options.attributes,function(attribute,name) {
 		element.setAttribute(name,attribute);
+	});
+	$tw.utils.each(options.style,function(value,name) {
+		element.style[name] = value;
 	});
 	if(options.eventListeners) {
 		$tw.utils.addEventListeners(element,options.eventListeners);
@@ -860,6 +922,61 @@ $tw.Tiddler = function(/* [fields,] fields */) {
 
 $tw.Tiddler.prototype.hasField = function(field) {
 	return $tw.utils.hop(this.fields,field);
+};
+
+/*
+Compare two tiddlers for equality
+tiddler: the tiddler to compare
+excludeFields: array of field names to exclude from the comparison
+*/
+$tw.Tiddler.prototype.isEqual = function(tiddler,excludeFields) {
+	if(!(tiddler instanceof $tw.Tiddler)) {
+		return false;
+	}
+	excludeFields = excludeFields || [];
+	var self = this,
+		differences = []; // Fields that have differences
+	// Add to the differences array
+	function addDifference(fieldName) {
+		// Check for this field being excluded
+		if(excludeFields.indexOf(fieldName) === -1) {
+			// Save the field as a difference
+			$tw.utils.pushTop(differences,fieldName);
+		}
+	}
+	// Returns true if the two values of this field are equal
+	function isFieldValueEqual(fieldName) {
+		var valueA = self.fields[fieldName],
+			valueB = tiddler.fields[fieldName];
+		// Check for identical string values
+		if(typeof(valueA) === "string" && typeof(valueB) === "string" && valueA === valueB) {
+			return true;
+		}
+		// Check for identical array values
+		if($tw.utils.isArray(valueA) && $tw.utils.isArray(valueB) && $tw.utils.isArrayEqual(valueA,valueB)) {
+			return true;
+		}
+		// Check for identical date values
+		if($tw.utils.isDate(valueA) && $tw.utils.isDate(valueB) && valueA.getTime() === valueB.getTime()) {
+			return true;
+		}
+		// Otherwise the fields must be different
+		return false;
+	}
+	// Compare our fields
+	for(var fieldName in this.fields) {
+		if(!isFieldValueEqual(fieldName)) {
+			addDifference(fieldName);
+		}
+	}
+	// There's a difference for every field in the other tiddler that we don't have
+	for(fieldName in tiddler.fields) {
+		if(!(fieldName in this.fields)) {
+			addDifference(fieldName);
+		}
+	}
+	// Return whether there were any differences
+	return differences.length === 0;
 };
 
 /*
@@ -2037,6 +2154,8 @@ $tw.boot.startup = function(options) {
 	if($tw.preloadTiddlers) {
 		$tw.wiki.addTiddlers($tw.preloadTiddlers);
 	}
+	// Give hooks a chance to modify the store
+	$tw.hooks.invokeHook("th-boot-tiddlers-loaded");
 	// Unpack plugin tiddlers
 	$tw.wiki.readPluginInfo();
 	$tw.wiki.registerPluginTiddlers("plugin",$tw.safeMode ? ["$:/core"] : undefined);

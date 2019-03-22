@@ -35,6 +35,8 @@ exports.getInfoTiddlerFields = function() {
 		// Screen size
 		infoTiddlerFields.push({title: "$:/info/browser/screen/width", text: window.screen.width.toString()});
 		infoTiddlerFields.push({title: "$:/info/browser/screen/height", text: window.screen.height.toString()});
+		// Language
+		infoTiddlerFields.push({title: "$:/info/browser/language", text: navigator.language || ""});
 	}
 	return infoTiddlerFields;
 };

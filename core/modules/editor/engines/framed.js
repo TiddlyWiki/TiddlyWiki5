@@ -70,6 +70,9 @@ function FramedEngine(options) {
 	if(this.widget.editRows) {
 		this.domNode.setAttribute("rows",this.widget.editRows);
 	}
+	if(this.widget.editTabIndex) {
+		this.iframeNode.setAttribute("tabindex",this.widget.editTabIndex);
+	}
 	// Copy the styles from the dummy textarea
 	this.copyStyles();
 	// Add event listeners

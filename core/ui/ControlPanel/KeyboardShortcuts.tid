@@ -6,7 +6,7 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 
 \define new-shortcut(title)
 <div class="tc-dropdown-item-plain">
-<$edit-shortcut tiddler="$title$" placeholder={{$:/language/ControlPanel/KeyboardShortcuts/Add/Prompt}} style="width:auto;"/> <$button>
+<$edit-shortcut tiddler="$title$" placeholder={{$:/language/ControlPanel/KeyboardShortcuts/Add/Prompt}} focus="true" style="width:auto;"/> <$button>
 <<lingo Add/Caption>>
 <$action-listops
 	$tiddler="$(shortcutTitle)$"

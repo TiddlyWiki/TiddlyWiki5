@@ -303,6 +303,7 @@ describe("Filter tests", function() {
 		});
 
 		it("should handle the '[is[missing]]' operator", function() {
+			expect(wiki.filterTiddlers("[all[]]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
 			expect(wiki.filterTiddlers("[all[missing]]").join(",")).toBe("TiddlerZero");
 			expect(wiki.filterTiddlers("[!is[missing]sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three,TiddlerOne");
 			expect(wiki.filterTiddlers("[[TiddlerOne]is[missing]]").join(",")).toBe("");
@@ -359,6 +360,32 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[list[TiddlerSeventh]before[TiddlerOne]]").join(",")).toBe("");
 		expect(wiki.filterTiddlers("[list[TiddlerSeventh]before[a fourth tiddler]]").join(",")).toBe("Tiddler Three");
 		expect(wiki.filterTiddlers("[list[TiddlerSeventh]before[MissingTiddler]]").join(",")).toBe("a fourth tiddler");
+	});
+
+	it("should handle the string operators", function() {
+		expect(wiki.filterTiddlers("John Paul George Ringo +[length[]]").join(",")).toBe("4,4,6,5");
+		expect(wiki.filterTiddlers("John Paul George Ringo +[uppercase[]]").join(",")).toBe("JOHN,PAUL,GEORGE,RINGO");
+		expect(wiki.filterTiddlers("John Paul George Ringo +[lowercase[]]").join(",")).toBe("john,paul,george,ringo");
+		expect(wiki.filterTiddlers("John Paul George Ringo +[concat[y]]").join(",")).toBe("Johny,Pauly,Georgey,Ringoy");
+		expect(wiki.filterTiddlers("John Paul George Ringo +[split[]]").join(",")).toBe("J,o,h,n,P,a,u,l,G,e,o,r,g,e,R,i,n,g,o");
+		expect(wiki.filterTiddlers("[[John. Paul. George. Ringo.]] +[split[.]trim[]]").join(",")).toBe("John,Paul,George,Ringo");
+		expect(wiki.filterTiddlers("John Paul George Ringo +[split[e]]").join(",")).toBe("John,Paul,G,org,Ringo");
+		expect(wiki.filterTiddlers("John Paul George Ringo +[join[ ]split[e]join[ee]split[ ]]").join(",")).toBe("John,Paul,Geeorgee,Ringo");
+		expect(wiki.filterTiddlers("[[ John ]] [[Paul ]] [[ George]] Ringo +[trim[]join[-]]").join(",")).toBe("John-Paul-George-Ringo");
+	});
+
+	it("should handle the mathematics operators", function() {
+		expect(wiki.filterTiddlers("[[2]add[2]]").join(",")).toBe("4");
+		expect(wiki.filterTiddlers("[[4]subtract[2]]").join(",")).toBe("2");
+		expect(wiki.filterTiddlers("[[24]divide[8]]").join(",")).toBe("3");
+		expect(wiki.filterTiddlers("[[355]divide[113]sign[]multiply[4]]").join(",")).toBe("4");
+		expect(wiki.filterTiddlers("[[355]divide[113]add[0.5]round[]multiply[4]]").join(",")).toBe("16");
+		expect(wiki.filterTiddlers("1 2 3 4 +[sum[]]").join(",")).toBe("10");
+		expect(wiki.filterTiddlers("1 2 3 4 +[product[]]").join(",")).toBe("24");
+		expect(wiki.filterTiddlers("1 2 3 4 +[maxall[]]").join(",")).toBe("4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[minall[]]").join(",")).toBe("1");
+		expect(wiki.filterTiddlers("1 2 3 4 +[max[2]]").join(",")).toBe("2,2,3,4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[min[2]]").join(",")).toBe("1,2,2,2");
 	});
 
 });
