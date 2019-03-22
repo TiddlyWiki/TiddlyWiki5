@@ -42,6 +42,15 @@ Command.prototype.execute = function() {
 
 Command.prototype.subCommands = {};
 
+// Set credentials profile
+Command.prototype.subCommands["profile"] = function() {
+	var AWS = require("aws-sdk"),
+		profile = this.params[1],
+		credentials = new AWS.SharedIniFileCredentials({profile: profile});
+	AWS.config.update({credentials: credentials});
+	this.callback(null);
+};
+
 // Load tiddlers from files in an S3 bucket
 Command.prototype.subCommands["s3-load"] = function() {
 	var self = this,
