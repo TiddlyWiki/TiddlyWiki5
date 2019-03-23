@@ -26,7 +26,8 @@ var pluginOpts = {
 var remarkableOpts = {
 	breaks: parseAsBoolean("$:/config/markdown/breaks"),
 	linkify: parseAsBoolean("$:/config/markdown/linkify"),
-	quotes: $tw.wiki.getTiddlerText("$:/config/markdown/quotes")
+	quotes: $tw.wiki.getTiddlerText("$:/config/markdown/quotes"),
+	typographer: parseAsBoolean("$:/config/markdown/typographer")
 };
 
 var md = new Remarkable(remarkableOpts);
