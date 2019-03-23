@@ -23,8 +23,13 @@ var pluginOpts = {
 	renderWikiText: parseAsBoolean("$:/config/markdown/renderWikiText"),
 	renderWikiTextPragma: $tw.wiki.getTiddlerText("$:/config/markdown/renderWikiTextPragma").trim()
 };
+var remarkableOpts = {
+	breaks: parseAsBoolean("$:/config/markdown/breaks"),
+	linkify: parseAsBoolean("$:/config/markdown/linkify"),
+	quotes: $tw.wiki.getTiddlerText("$:/config/markdown/quotes")
+};
 
-var md = new Remarkable();
+var md = new Remarkable(remarkableOpts);
 
 function findTagWithType(nodes, startPoint, type, level) {
 	for (var i = startPoint; i < nodes.length; i++) {
