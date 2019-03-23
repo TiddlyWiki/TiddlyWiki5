@@ -29,6 +29,14 @@ CodeBlockWidget.prototype.postRender = function() {
 	}
 	if(language && hljs.listLanguages().indexOf(language) !== -1) {
 		domNode.className = language.toLowerCase() + " hljs";
+
+		// Change input line endings to LF since Highlight.js seems to balk if
+		// it isn't. Tends to happen on .js files loaded from TiddlyWikiFolders
+		// if the files were saved with CRLF endings.
+		if(domNode.textContent) {
+			domNode.textContent = domNode.textContent.replace(/\r\n?/g, "\n");
+		}
+
 		if($tw.browser && !domNode.isTiddlyWikiFakeDom) {
 			hljs.highlightBlock(domNode);			
 		} else {
