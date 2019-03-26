@@ -4,7 +4,7 @@ tags: Macros [[Core Macros]]
 title: unusedtitle Macro
 type: text/vnd.tiddlywiki
 
-The <<.def unused>> [[macro|Macros]] returns an unused title. Optionally you can provide a base title to generate the new title.
+The <<.def unusedtitle>> [[macro|Macros]] returns an unused title. Optionally you can provide a base title to generate the new title.
 
 It uses the same method as the create new tiddler button, a number is appended to the end of the base name.
 
