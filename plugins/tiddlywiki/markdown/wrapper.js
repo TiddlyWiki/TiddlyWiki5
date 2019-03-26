@@ -83,6 +83,8 @@ function convertNodes(remarkableTree, isStartOfInline) {
 			i = wrappedElement("h" + currentNode.hLevel, i, currentNode.level, "heading_close", remarkableTree);
 		} else if (currentNode.type === "bullet_list_open") {
 			i = wrappedElement("ul", i, currentNode.level, "bullet_list_close", remarkableTree);
+		} else if (currentNode.type == 'ordered_list_open') {
+			i = wrappedElement('ol', i, currentNode.level,'ordered_list_close', remarkableTree);
 		} else if (currentNode.type === "list_item_open") {
 			i = wrappedElement("li", i, currentNode.level, "list_item_close", remarkableTree);
 		} else if (currentNode.type === "link_open") {
@@ -143,6 +145,11 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				type: "element",
 				tag: "br",
 			});
+		} else if (currentNode.type == 'hr') {
+			out.push({
+				type: 'element',
+				tag: 'hr',
+			});
 		} else if (currentNode.type === "inline") {
 			out = out.concat(convertNodes(currentNode.children, true));
 		} else if (currentNode.type === "text") {
@@ -179,7 +186,10 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				}
 
 				// If the original text element started with a space, add it back in
-				if (rs[0].type === "text" && currentNode.content[0] === " ") {
+				if (rs.length > 0
+					&& rs[0].type === "text"
+					&& currentNode.content[0] === " "
+				) {
 					rs[0].text = " " + rs[0].text;
 				}
 				out = out.concat(rs);
