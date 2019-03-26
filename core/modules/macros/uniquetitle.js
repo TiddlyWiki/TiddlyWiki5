@@ -1,8 +1,8 @@
 /*\
-title: $:/core/modules/macros/uniquetitle.js
+title: $:/core/modules/macros/unusedtitle.js
 type: application/javascript
 module-type: macro
-Macro to return a unique title given a base name
+Macro to return a new title that is unused in the wiki. It can be given a name as a base.
 \*/
 (function(){
 
@@ -14,7 +14,7 @@ Macro to return a unique title given a base name
 Information about this macro
 */
 
-exports.name = "uniquetitle";
+exports.name = "unusedtitle";
 
 exports.params = [
 	{name: "baseName"},
@@ -25,7 +25,7 @@ exports.params = [
 Run the macro
 */
 exports.run = function(baseName, options) {
-	if (!baseName) {
+	if(!baseName) {
 		baseName = $tw.language.getString("DefaultNewTiddlerTitle");
 	}
 	return this.wiki.generateNewTitle(baseName, options);
