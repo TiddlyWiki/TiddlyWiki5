@@ -1,0 +1,7 @@
+tags: [[uniquetitle Macro]] [[Macro Examples]]
+title: uniquetitle Macro (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1" eg="""<<uniquetitle>>"""/>
+<$macrocall $name=".example" n="2" eg="""<<uniquetitle AnotherBase>>"""/>
+<$macrocall $name=".example" n="3" eg="""<<uniquetitle TiddlyWiki>>"""/>
