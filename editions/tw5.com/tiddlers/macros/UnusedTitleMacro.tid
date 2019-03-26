@@ -1,10 +1,10 @@
 
-caption: uniquetitle
+caption: unusedtitle
 tags: Macros [[Core Macros]]
-title: uniquetitle Macro
+title: unusedtitle Macro
 type: text/vnd.tiddlywiki
 
-The <<.def uniquetitle>> [[macro|Macros]] returns a unique title. Optionally you can provide a base title to generate the unique title.
+The <<.def unused>> [[macro|Macros]] returns an unused title. Optionally you can provide a base title to generate the new title.
 
 It uses the same method as the create new tiddler button, a number is appended to the end of the base name.
 
@@ -13,4 +13,4 @@ It uses the same method as the create new tiddler button, a number is appended t
 ;baseName
 : A string specifying the desired base name, defaulting to `New Tiddler`
 
-<<.macro-examples "uniquetitle">>
+<<.macro-examples "unusedtitle">>
