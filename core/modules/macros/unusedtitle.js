@@ -24,11 +24,11 @@ exports.params = [
 /*
 Run the macro
 */
-exports.run = function(baseName, options) {
+exports.run = function(basename, options) {
 	if(!baseName) {
-		baseName = $tw.language.getString("DefaultNewTiddlerTitle");
+		basename = $tw.language.getString("DefaultNewTiddlerTitle");
 	}
-	return this.wiki.generateNewTitle(baseName, options);
+	return this.wiki.generateNewTitle(basename, options);
 };
 
 })();
