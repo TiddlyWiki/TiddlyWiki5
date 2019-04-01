@@ -1,0 +1,25 @@
+created: 20190401121100000
+modified: 20190401121100000
+tags: [[Working with TiddlyWiki]] [[The First Rule of Using TiddlyWiki]]
+title: Backup Using Git
+type: text/vnd.tiddlywiki
+
+I use TiddlyWiki from a nodejs setup, using docker. See [[Installing TiddlyWiki on Node.js]].
+
+I set up a volume, with my data. Then, a git repository for storing data:
+
+!! commands:
+
+!!! To Backup
+
+```
+git add .
+git commit -m "Sync"
+```
+
+!!! To Sync to the remote
+
+```
+git pull; git push
+```
+
