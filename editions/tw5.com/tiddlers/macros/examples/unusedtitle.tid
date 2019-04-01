@@ -4,4 +4,4 @@ type: text/vnd.tiddlywiki
 
 <$macrocall $name=".example" n="1" eg="""<<unusedtitle>>"""/>
 <$macrocall $name=".example" n="2" eg="""<<unusedtitle AnotherBase>>"""/>
-<$macrocall $name=".example" n="3" eg="""<<unusedtitle TiddlyWiki>>"""/>
+<$macrocall $name=".example" n="3" eg="""<<unusedtitle baseTitle:"TiddlyWiki">>"""/>
