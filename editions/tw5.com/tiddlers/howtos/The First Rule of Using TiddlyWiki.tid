@@ -1,5 +1,5 @@
 created: 20140419132828051
-modified: 20140919154434409
+modified: 20190401121900000
 tags: [[Working with TiddlyWiki]]
 title: The First Rule of Using TiddlyWiki
 type: text/vnd.tiddlywiki
@@ -32,3 +32,10 @@ The best way to make sure that your data is safe is to practise a rigorous syste
 * Retain backups before upgrading to a new version of TiddlyWiki
 * Figure out and protect yourself from the worst case scenarios: what if your USB stick or hard drive fails? What if your computer is hit by a ransomeware virus?
 * Be defensive and redundant: for example, take multiple backups and keep them in separate physical locations
+
+
+!! Backup strategies
+
+!!! Git Repository
+
+See [[Backup Using Git]]
