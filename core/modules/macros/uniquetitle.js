@@ -17,18 +17,18 @@ Information about this macro
 exports.name = "unusedtitle";
 
 exports.params = [
-	{name: "baseName"},
+	{name: "baseTitle"},
 	{name: "options"}
 ];
 
 /*
 Run the macro
 */
-exports.run = function(baseName, options) {
-	if(!baseName) {
-		baseName = $tw.language.getString("DefaultNewTiddlerTitle");
+exports.run = function(baseTitle, options) {
+	if(!baseTitle) {
+		baseTitle = $tw.language.getString("DefaultNewTiddlerTitle");
 	}
-	return this.wiki.generateNewTitle(baseName, options);
+	return this.wiki.generateNewTitle(baseTitle, options);
 };
 
 })();
