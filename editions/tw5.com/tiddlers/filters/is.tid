@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20161127142329969
+modified: 20190225130632157
 tags: [[Filter Operators]] [[Common Operators]] [[Negatable Operators]]
 title: is Operator
 type: text/vnd.tiddlywiki
@@ -22,6 +22,7 @@ The parameter <<.place C>> is one of the following fundamental categories:
 |^`system` |is a [[system tiddler|SystemTiddlers]], i.e. its title starts with `$:/` |
 |^`tag` |is in use as a tag |
 |^`tiddler` |exists as a non-shadow tiddler |
+|^`variable` |<<.from-version "5.1.20">> exists as a variable (whether or not it has a non-blank value) |
 
 If <<.place C>> is anything else an error message is returned. <<.from-version "5.1.14">> if <<.place C>> is blank, the output is passed through unchanged (in earlier versions an error message was returned).
 

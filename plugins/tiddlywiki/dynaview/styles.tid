@@ -1,7 +1,18 @@
 title: $:/plugins/tiddlywiki/dynaview/styles
 tags: $:/tags/Stylesheet
 
+\define if-tiddler-is(title,value,text)
+<$reveal stateTitle=<<__title__>> text=<<__value__>> type="match">
+<$text text=<<__text__>>/>
+</$reveal>
+\end
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+<<if-tiddler-is title:"$:/config/DynaView/PreserveScrollPosition" value:"yes" text:"""
+body {
+	overflow-anchor: none; /* Turn off browser scroll anchoring */
+}
+""">>
 
 body.tc-dynaview .tc-dynaview-zoom-visible-1-and-above,
 body.tc-dynaview .tc-dynaview-zoom-visible-1a-and-above,

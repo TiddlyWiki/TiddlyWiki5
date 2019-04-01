@@ -145,6 +145,7 @@ SelectWidget.prototype.execute = function() {
 	this.selectDefault = this.getAttribute("default");
 	this.selectMultiple = this.getAttribute("multiple", false);
 	this.selectSize = this.getAttribute("size");
+	this.selectTooltip = this.getAttribute("tooltip");
 	// Make the child widgets
 	var selectNode = {
 		type: "element",
@@ -160,6 +161,9 @@ SelectWidget.prototype.execute = function() {
 	if(this.selectSize) {
 		$tw.utils.addAttributeToParseTreeNode(selectNode,"size",this.selectSize);
 	}
+	if(this.selectTooltip) {
+		$tw.utils.addAttributeToParseTreeNode(selectNode,"title",this.selectTooltip);
+	}
 	this.makeChildWidgets([selectNode]);
 };
 
@@ -169,7 +173,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 SelectWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// If we're using a different tiddler/field/index then completely refresh ourselves
-	if(changedAttributes.selectTitle || changedAttributes.selectField || changedAttributes.selectIndex) {
+	if(changedAttributes.selectTitle || changedAttributes.selectField || changedAttributes.selectIndex || changedAttributes.selectTooltip) {
 		this.refreshSelf();
 		return true;
 	// If the target tiddler value has changed, just update setting and refresh the children

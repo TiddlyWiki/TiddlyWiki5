@@ -1,14 +1,81 @@
 caption: 5.1.20
 created: 20181220163418974
-modified: 20181220163418974
+modified: 20190305165612365
 tags: ReleaseNotes
 title: Release 5.1.20
 type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.19...v5.1.20]]//
 
+!! Major Improvements
+
+Added several new [[Mathematics Operators]] for working with numbers: [[negate|negate Operator]], [[abs|abs Operator]], [[ceil|ceil Operator]], [[floor|floor Operator]], [[round|round Operator]], [[trunc|trunc Operator]], [[sign|sign Operator]], [[add|add Operator]], [[subtract|subtract Operator]], [[multiply|multiply Operator]], [[divide|divide Operator]], [[remainder|remainder Operator]], [[max|max Operator]], [[min|min Operator]], [[fixed|fixed Operator]], [[precision|precision Operator]], [[exponential|exponential Operator]], [[sum|sum Operator]], [[product|product Operator]], [[maxall|maxall Operator]] and [[minall|minall Operator]].
+
+Added serveral new string operators: [[length|length Operator]], [[uppercase|uppercase Operator]], [[lowercase|lowercase Operator]], [[trim|trim Operator]], [[concat|concat Operator]], [[split|split Operator]] and [[join|join Operator]].
+
+Added several new palettes. See the [[palette manager|$:/core/ui/ControlPanel/Palette]].
+
+!! Plugin Improvements
+
+New and improved plugins:
+
+* New [[BrowserStorage Plugin]] for saving tiddlers in browser local storage
+* New [[Innerwiki Plugin]] for rendering TiddlyWiki screenshots
+* Several improvements to the [[CodeMirror Plugin]]:
+** [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3810]] support for smart indent
+* Several improvements to the [[DynaView Plugin]]:
+** [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a9e595c3f633391003224e499440cdeb8560c055]] support for restoring the scroll position at startup from local storage
+
+!! Translation Improvements
+
+New and improved translations:
+
+* Chinese Simplified and Chinese Traditional
+
+
+!! Usability Improvements
+
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/5a37a84a54f2dc9ccf106309b739cfa693bae3e3]] the plugin library to search all plugin fields
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e5f3301c1c36e8add4ed89ab1bd53a9b68411d3f]] a warning when core JavaScript modules are overwritten via import
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3654]] prompt for references when renaming a tiddler
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0e6855eba8945e023cc5ef19809cfb6d6025627b]] a new filter preset for advanced search for "tiddlers modified this session"
+
+!! Hackability Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/36e76429b1a1d4638374d513430393db5693b932]] new `[is[variable]]` option to the [[is Operator]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/94f143bf643e36e817d1dd5b678515853eed6aca]] optional autofocus for the text inputs in $:/AdvancedSearch (controlled by the same [[Hidden Setting: Search AutoFocus]] as the sidebar search)
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3677]] support for deflate and gzip compression to the WebServer ListenCommand
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3756]] optional ''tabindex'' attribute to simple, framed and CodeMirror text editor engines
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3758]] ''tabindex'' attributes to edit templates
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3822]] outline colour to button, textarea, input
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/477c41f84304ed83245c87068dba3695a5053d62]] ''tooltip'' attribute to SelectWidget
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/348a0bc8bcbf5c42d9b93e5e208696d28fc95cb7]] an option for plugins to disable the initial navigation at startup
+
+!! Bug Fixes
+
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/8b04cfd4d5142a957f2e3da80c3f079e215b9e75]] a long standing problem with the main standalone HTML file template whereby raw markup tiddlers would be included even if not selected by the save filter
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3572]] overlapping dropdowns with sticky titles enabled
+* [[Removed|https://github.com/Jermolene/TiddlyWiki5/pull/3749]] apparently obsolete limitation of selection wrapping in text editor
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3745]] bug in RevealWidget when stateTitle tiddler is missing
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/72f2a9425197b013ab3664e1679c6763d92d4382]] bug with animation duration being blank
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3806]] Firefox problem with drag and drop placeholders in the "open" tab of the sidebar
+* [[Ameliorated|https://github.com/Jermolene/TiddlyWiki5/pull/3809]] Firefox problem with sticky placeholder during drag and drop operations
+
+!! Developer Bug Fixes and Improvements
 
 ! Contributors
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
+* [[@00SS|https://github.com/00SS]]
+* [[@admls|https://github.com/admls]]
+* [[@benwebber|https://github.com/benwebber]]
+* [[@bimlas|https://github.com/bimlas]]
+* [[@BramChen|https://github.com/BramChen]]
+* [[@BurningTreeC|https://github.com/BurningTreeC]]
+* [[@diego898|https://github.com/diego898]]
+* [[@dnebauer|https://github.com/dnebauer]]
+* [[@JesseWeinstein|https://github.com/JesseWeinstein]]
+* [[@kyrias|https://github.com/kyrias]]
+* [[@MarxSal|https://github.com/MarxSal]]
+* [[@the-kenny|https://github.com/the-kenny]]

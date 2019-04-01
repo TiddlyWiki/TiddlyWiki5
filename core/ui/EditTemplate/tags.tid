@@ -39,5 +39,7 @@ color:$(foregroundColor)$;
 <$macrocall $name="tag-body" colour={{!!color}} palette={{$:/palette}} icon={{!!icon}}/>
 </$list>
 </$fieldmangler>
+<$set name="tabIndex" value={{$:/config/EditTabIndex}}>
 <$macrocall $name="tag-picker" actions=<<tag-picker-actions>>/>
+</$set>
 </div>

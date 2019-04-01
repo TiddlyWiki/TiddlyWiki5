@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/browser-storage/icon
+tags: $:/tags/Image
+
+<svg class="tc-image-down-arrow tc-image-button" viewBox="0 0 128 128" width="22pt" height="22pt">
+    <g stroke="none" stroke-width="1" fill-rule="evenodd">
+        <ellipse id="Oval" cx="64" cy="16" rx="40" ry="16"></ellipse>
+        <path d="M24,96 C24,104.836556 41.90861,112 64,112 C86.09139,112 104,104.836556 104,96 L104,112 C104,120.836556 86.09139,128 64,128 C41.90861,128 24,120.836556 24,112 L24,96 Z" id="Combined-Shape"></path>
+        <path d="M24,72 C24,80.836556 41.90861,88 64,88 C86.09139,88 104,80.836556 104,72 L104,88 C104,96.836556 86.09139,104 64,104 C41.90861,104 24,96.836556 24,88 L24,72 Z" id="Combined-Shape-Copy-16"></path>
+        <path d="M24,48 C24,56.836556 41.90861,64 64,64 C86.09139,64 104,56.836556 104,48 L104,64 C104,72.836556 86.09139,80 64,80 C41.90861,80 24,72.836556 24,64 L24,48 Z" id="Combined-Shape-Copy-17"></path>
+        <path d="M24,24 C24,32.836556 41.90861,40 64,40 C86.09139,40 104,32.836556 104,24 L104,40 C104,48.836556 86.09139,56 64,56 C41.90861,56 24,48.836556 24,40 L24,24 Z" id="Combined-Shape-Copy-18"></path>
+    </g>
+</svg>

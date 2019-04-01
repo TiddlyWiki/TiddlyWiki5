@@ -590,7 +590,7 @@ NavigatorWidget.prototype.handleFoldOtherTiddlersEvent = function(event) {
 NavigatorWidget.prototype.handleFoldAllTiddlersEvent = function(event) {
 	var self = this,
 		paramObject = event.paramObject || {},
-		prefix = paramObject.foldedStatePrefix;
+		prefix = paramObject.foldedStatePrefix || "$:/state/folded/";
 	$tw.utils.each(this.getStoryList(),function(title) {
 		self.wiki.setText(prefix + title,"text",null,"hide");
 	});

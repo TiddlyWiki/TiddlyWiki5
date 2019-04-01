@@ -31,5 +31,6 @@ subtitle: Texte du sous-titre pour un wizard
 tags: Liste des tags associés à un tiddler
 text: Texte du corps de ce tiddler
 title: Nom unique du tiddler
+toc-link: Une valeur à ''no'' supprime le lien vers le tiddler dans l'arborescences des tables des matières
 type: Type de contenu du tiddler
 version: S'il s'agit d'un plugin, l'information de version
