@@ -10,7 +10,7 @@ It uses the same method as the create new tiddler button, a number is appended t
 
 !! Parameters
 
-;baseName
+;baseTitle
 : A string specifying the desired base name, defaulting to `New Tiddler`
 
 <<.macro-examples "unusedtitle">>
