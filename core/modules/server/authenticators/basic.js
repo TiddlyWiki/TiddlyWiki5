@@ -66,11 +66,8 @@ BasicAuthenticator.prototype.authenticateRequest = function(request,response,sta
 
 	var date = new Date();
 	//Token is invalid after 24h
-	//date.setDate(date.getDate() + 1);
-	//var timestamp = date.getTime();
-
-    var newDateObj = new Date(date.getTime() + 30000);
-    var timestamp = newDateObj.getTime();
+	date.setDate(date.getDate() + 1);
+	var timestamp = date.getTime();
 
 	var id=uuid.v4();
 
