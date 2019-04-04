@@ -61,12 +61,16 @@ Returns false if the request couldn't be authenticated having sent an appropriat
 */
 BasicAuthenticator.prototype.authenticateRequest = function(request,response,state) {
 
+    cleanAuthfile();
 	const uuid  = require('uuid');
 
 	var date = new Date();
 	//Token is invalid after 24h
-	date.setDate(date.getDate() + 1);
-	var timestamp = date.getTime();
+	//date.setDate(date.getDate() + 1);
+	//var timestamp = date.getTime();
+
+    var newDateObj = new Date(date.getTime() + 30000);
+    var timestamp = newDateObj.getTime();
 
 	var id=uuid.v4();
 
@@ -137,7 +141,6 @@ function authenticateUser(id, timestamp, name){
 }
 
 function checkUserID(id){
-	cleanAuthfile();
 	var userarray = getAuthFile();
 	var now = new Date().getTime();
 
@@ -186,24 +189,19 @@ function cleanAuthfile() {//writeFile
 	}
 
 	//delete file after retrieving it
-
 	var now = new Date().getTime();
 	var newfile="";
 	for (var index = 0; index < content.length; ++index) {
 
 		var entry=content[index].split(', ');
-
-		if(now>entry[1]){
-			var t = entry[0]+", "+entry[1]+", "+entry[2]+"\n"
-			newfile.concat(t);
+		if(now < entry[1]){
+            var t = entry[0]+", "+entry[1]+", "+entry[2]+"\n";
+            newfile=newfile.concat(t);
 		}
-
 	}
 
-	//todo: fix cleanup
-	//fs.unlinkSync(filename());
-	//fs.appendFileSync(filename(),newfile);
-	//fs.writeFileSync(filename(),newfile);
+	fs.unlinkSync(filename());
+    fs.writeFileSync(filename(),newfile);
 
 }
 
