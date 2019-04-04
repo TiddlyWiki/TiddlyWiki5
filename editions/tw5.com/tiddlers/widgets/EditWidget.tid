@@ -17,3 +17,4 @@ The content of the `<$edit>` widget is ignored.
 |field |The field to edit (defaults to `text`). Takes precedence over the `index` attribute |
 |index |The index to edit |
 |class |A CSS class to be added the generated editing widget |
+|tabindex |Sets the `tabindex` attribute of the input or textarea to the given value |

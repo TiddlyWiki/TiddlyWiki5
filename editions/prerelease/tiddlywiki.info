@@ -14,7 +14,8 @@
 		"tiddlywiki/external-attachments",
 		"tiddlywiki/dynaview",
 		"tiddlywiki/codemirror",
-		"tiddlywiki/comments"
+		"tiddlywiki/comments",
+		"tiddlywiki/browser-storage"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
