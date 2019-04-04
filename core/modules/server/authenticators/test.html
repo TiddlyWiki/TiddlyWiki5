@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+</head>
+<body>
+
+<h1>Tiddlywiki UIAuth</h1>
+<p>Login</p>
+
+<form action="/">
+    Username<br>
+    <input type="text" id="user" value="test">
+    <br>
+    Password:<br>
+    <input type="password" id="passwd" value="test">
+    <br><br>
+</form>
+<button onclick="CallWebAPI()">Click me</button>
+
+
+</body>
+
+<script>
+
+function authenticateUser(user, password)
+{
+    var token = user + ":" + password;
+
+    // Should i be encoding this value????? does it matter???
+    // Base64 Encoding -> btoa
+    var hash = btoa(token);
+
+    return "Basic " + hash;
+    }
+
+    function CallWebAPI() {
+
+    var user = document.getElementById("user").value;
+    var pass = document.getElementById("passwd").value;
+
+    console.log(user);
+    console.log(pass);
+
+    document.cookie = "session.id=id";
+    document.cookie = "session.timestamp=time";
+    // New XMLHTTPRequest
+    var request = new XMLHttpRequest();
+    request.open("GET", "/", false);
+    request.setRequestHeader("authuser", user);
+    request.setRequestHeader("authpass", pass);
+    request.send();
+    // view request status
+    console.log(request.status);
+    if(request.status>=200 && request.status<300){
+        document.cookie = "session.user=user";
+        var location =
+            window.location.protocol + "//" +
+            window.location.hostname +
+            (window.location.port ? ":" + window.location.port : "") +
+            '/';
+
+        window.location.replace(location);
+    }
+    }
+    </script>
+    </html>

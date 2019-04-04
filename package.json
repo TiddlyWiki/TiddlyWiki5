@@ -23,7 +23,9 @@
     "tiddlywiki5",
     "wiki"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "uuid": "^3.3.2"
+  },
   "devDependencies": {},
   "bundleDependencies": [],
   "license": "BSD",

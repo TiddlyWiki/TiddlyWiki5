@@ -60,34 +60,171 @@ Returns true if the request is authenticated and assigns the "authenticatedUsern
 Returns false if the request couldn't be authenticated having sent an appropriate response to the browser
 */
 BasicAuthenticator.prototype.authenticateRequest = function(request,response,state) {
-	// Extract the incoming username and password from the request
+
+
+
+	var cookies = parseCookies(request);
+
+	//npm install uuid TODO add to packages
+	const uuid  = require('uuid');
+
+
+	var date = new Date();
+	//Token is invalid after 24h
+	date.setDate(date.getDate() + 1);
+	var timestamp = date.getTime();
+
+
+
+	var id=uuid.v4();
+
+	if(cookies['session.id']){
+		id=cookies['session.id'];
+	}
+	console.log("startauth with id: "+id+" at "+timestamp);
+
+	var name="auth.temp";
+	var authfilecotent="";
+	try {
+		if (fs.existsSync(name)) {
+			var contents = fs.readFileSync(name, 'utf8');
+			console.log(contents);
+			authfilecotent = contents.split(", ");
+		}
+	} catch(err) {
+		console.error(err)
+	}
+
+	if(authfilecotent[0]===cookies['session.id']){
+		console.log("session known");
+		state.authenticatedUsername = cookies['session.user'];
+		return true;
+	}
+
+	var headers = request.headers;
+	console.log("auth user: "+headers.authuser);
+	console.log("auth pass: "+headers.authpass);
+
 	var header = request.headers.authorization || "";
 	if(!header && state.allowAnon) {
 		// If there's no header and anonymous access is allowed then we don't set authenticatedUsername
 		return true;
 	}
-	var token = header.split(/\s+/).pop() || "",
-		auth = $tw.utils.base64Decode(token),
-		parts = auth.split(/:/),
-		incomingUsername = parts[0],
-		incomingPassword = parts[1];
+
+
 	// Check that at least one of the credentials matches
 	var matchingCredentials = this.credentialsData.find(function(credential) {
-		return credential.username === incomingUsername && credential.password === incomingPassword;
+		return credential.username === headers.authuser && credential.password === headers.authpass;
 	});
+
+	console.log("matching? "+matchingCredentials);
 	if(matchingCredentials) {
+		console.log("matching! "+ headers.authuser);
+		authenticateUser(name, id, "", "", timestamp);
 		// If so, add the authenticated username to the request state
-		state.authenticatedUsername = incomingUsername;
+		state.authenticatedUsername = headers.authuser;
 		return true;
 	} else {
-		// If not, return an authentication challenge
-		response.writeHead(401,"Authentication required",{
-			"WWW-Authenticate": 'Basic realm="Please provide your username and password to login to ' + state.server.servername + '"'
-		});
-		response.end();
+
+		var resp="\n" +
+			"<!DOCTYPE html>\n" +
+			"<html>\n" +
+			"<head>\n" +
+			"    <title>Page Title</title>\n" +
+			"</head>\n" +
+			"<body>\n" +
+			"\n" +
+			"<h1>Tiddlywiki UIAuth</h1>\n" +
+			"<p>Login</p>\n" +
+			"\n" +
+			"<form action=\"/\">\n" +
+			"    Username<br>\n" +
+			"    <input type=\"text\" id=\"user\" value=\"test\">\n" +
+			"    <br>\n" +
+			"    Password:<br>\n" +
+			"    <input type=\"password\" id=\"passwd\" value=\"test\">\n" +
+			"    <br><br>\n" +
+			"</form>\n" +
+			"<button onclick=\"CallWebAPI()\">Click me</button>\n" +
+			"\n" +
+			"\n" +
+			"</body>\n" +
+			"\n" +
+			"<script>\n" +
+			"\n" +
+			"function authenticateUser(user, password)\n" +
+			"{\n" +
+			"    var token = user + \":\" + password;\n" +
+			"\n" +
+			"    // Should i be encoding this value????? does it matter???\n" +
+			"    // Base64 Encoding -> btoa\n" +
+			"    var hash = btoa(token);\n" +
+			"\n" +
+			"    return \"Basic \" + hash;\n" +
+			"    }\n" +
+			"\n" +
+			"    function CallWebAPI() {\n" +
+			"\n" +
+			"    var user = document.getElementById(\"user\").value;\n" +
+			"    var pass = document.getElementById(\"passwd\").value;\n" +
+			"\n" +
+			"    console.log(user);\n" +
+			"    console.log(pass);\n" +
+			"\n" +
+			"    document.cookie = \"session.id="+id+"\";"+
+			"    document.cookie = \"session.timestamp="+timestamp+"\";"+
+			"    // New XMLHTTPRequest\n" +
+			"    var request = new XMLHttpRequest();\n" +
+			"    request.open(\"GET\", \"/\", false);\n" +
+			"    request.setRequestHeader(\"authuser\", user);\n" +
+			"    request.setRequestHeader(\"authpass\", pass);\n" +
+			"    request.send();\n" +
+			"    // view request status\n" +
+			"    console.log(request.status);\n" +
+			"    if(request.status>=200 && request.status<300){\n" +
+			"    document.cookie = \"session.user=\"+user+\"\";"+
+			"        var location =\n" +
+			"            window.location.protocol + \"//\" +\n" +
+			"            user + \":\" + pass + \"@\" +\n" +
+			"            window.location.hostname +\n" +
+			"            (window.location.port ? \":\" + window.location.port : \"\") +\n" +
+			"            '/';\n" +
+			"\n" +
+			"        window.location.replace(location);\n" +
+			"    }\n" +
+			"    }\n" +
+			"    </script>\n" +
+			"    </html>"
+
+		/*response.writeHead(401,"Authentication required",{
+			"WWW-Authenticate": 'xBasic realm="Please provide your username and password to login to ' + state.server.servername + '"'
+		});*/
+		response.end(resp);
+		//response.end();
 		return false;
+
+
 	}
 };
+
+function authenticateUser(location, id, name, pw, timestamp){
+	fs.writeFileSync(location,id+", "+timestamp);
+}
+
+
+	function parseCookies (request) {
+		var list = {},
+			rc = request.headers.cookie;
+
+		rc && rc.split(';').forEach(function( cookie ) {
+			var parts = cookie.split('=');
+			//list[parts.shift().trim()] = decodeURI(parts.join('='));
+			list[parts.shift().trim()]=decodeURI(parts.join('='));
+		});
+
+		return list;
+	}
+
 
 exports.AuthenticatorClass = BasicAuthenticator;
 
