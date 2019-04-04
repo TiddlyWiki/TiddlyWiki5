@@ -61,49 +61,27 @@ Returns false if the request couldn't be authenticated having sent an appropriat
 */
 BasicAuthenticator.prototype.authenticateRequest = function(request,response,state) {
 
-
-
-	var cookies = parseCookies(request);
-
-	//npm install uuid TODO add to packages
 	const uuid  = require('uuid');
-
 
 	var date = new Date();
 	//Token is invalid after 24h
 	date.setDate(date.getDate() + 1);
 	var timestamp = date.getTime();
 
-
-
 	var id=uuid.v4();
 
+	var cookies = parseCookies(request);
 	if(cookies['session.id']){
 		id=cookies['session.id'];
 	}
 	console.log("startauth with id: "+id+" at "+timestamp);
 
-	var name="auth.temp";
-	var authfilecotent="";
-	try {
-		if (fs.existsSync(name)) {
-			var contents = fs.readFileSync(name, 'utf8');
-			console.log(contents);
-			authfilecotent = contents.split(", ");
-		}
-	} catch(err) {
-		console.error(err)
-	}
-
-	if(authfilecotent[0]===cookies['session.id']){
-		console.log("session known");
+	if(checkUserID(cookies['session.id'])){
 		state.authenticatedUsername = cookies['session.user'];
 		return true;
 	}
 
 	var headers = request.headers;
-	console.log("auth user: "+headers.authuser);
-	console.log("auth pass: "+headers.authpass);
 
 	var header = request.headers.authorization || "";
 	if(!header && state.allowAnon) {
@@ -111,119 +89,135 @@ BasicAuthenticator.prototype.authenticateRequest = function(request,response,sta
 		return true;
 	}
 
-
 	// Check that at least one of the credentials matches
 	var matchingCredentials = this.credentialsData.find(function(credential) {
 		return credential.username === headers.authuser && credential.password === headers.authpass;
 	});
 
-	console.log("matching? "+matchingCredentials);
+	//console.log("matching? "+matchingCredentials);
 	if(matchingCredentials) {
-		console.log("matching! "+ headers.authuser);
-		authenticateUser(name, id, "", "", timestamp);
+		//console.log("matching! "+ headers.authuser);
+		//create new uuid to authenticate the client
+		id=uuid.v4();
+		authenticateUser(id,  timestamp, headers.authuser);
+		//send new id as content to the client
+		response.end(id);
 		// If so, add the authenticated username to the request state
 		state.authenticatedUsername = headers.authuser;
 		return true;
 	} else {
+		if(headers.authuser || headers.authpass){
+			response.writeHead(406,"Wrong Password");
+			response.end();
+			return false;
+		}
 
-		var resp="\n" +
-			"<!DOCTYPE html>\n" +
-			"<html>\n" +
-			"<head>\n" +
-			"    <title>Page Title</title>\n" +
-			"</head>\n" +
-			"<body>\n" +
-			"\n" +
-			"<h1>Tiddlywiki UIAuth</h1>\n" +
-			"<p>Login</p>\n" +
-			"\n" +
-			"<form action=\"/\">\n" +
-			"    Username<br>\n" +
-			"    <input type=\"text\" id=\"user\" value=\"test\">\n" +
-			"    <br>\n" +
-			"    Password:<br>\n" +
-			"    <input type=\"password\" id=\"passwd\" value=\"test\">\n" +
-			"    <br><br>\n" +
-			"</form>\n" +
-			"<button onclick=\"CallWebAPI()\">Click me</button>\n" +
-			"\n" +
-			"\n" +
-			"</body>\n" +
-			"\n" +
-			"<script>\n" +
-			"\n" +
-			"function authenticateUser(user, password)\n" +
-			"{\n" +
-			"    var token = user + \":\" + password;\n" +
-			"\n" +
-			"    // Should i be encoding this value????? does it matter???\n" +
-			"    // Base64 Encoding -> btoa\n" +
-			"    var hash = btoa(token);\n" +
-			"\n" +
-			"    return \"Basic \" + hash;\n" +
-			"    }\n" +
-			"\n" +
-			"    function CallWebAPI() {\n" +
-			"\n" +
-			"    var user = document.getElementById(\"user\").value;\n" +
-			"    var pass = document.getElementById(\"passwd\").value;\n" +
-			"\n" +
-			"    console.log(user);\n" +
-			"    console.log(pass);\n" +
-			"\n" +
-			"    document.cookie = \"session.id="+id+"\";"+
-			"    document.cookie = \"session.timestamp="+timestamp+"\";"+
-			"    // New XMLHTTPRequest\n" +
-			"    var request = new XMLHttpRequest();\n" +
-			"    request.open(\"GET\", \"/\", false);\n" +
-			"    request.setRequestHeader(\"authuser\", user);\n" +
-			"    request.setRequestHeader(\"authpass\", pass);\n" +
-			"    request.send();\n" +
-			"    // view request status\n" +
-			"    console.log(request.status);\n" +
-			"    if(request.status>=200 && request.status<300){\n" +
-			"    document.cookie = \"session.user=\"+user+\"\";"+
-			"        var location =\n" +
-			"            window.location.protocol + \"//\" +\n" +
-			"            user + \":\" + pass + \"@\" +\n" +
-			"            window.location.hostname +\n" +
-			"            (window.location.port ? \":\" + window.location.port : \"\") +\n" +
-			"            '/';\n" +
-			"\n" +
-			"        window.location.replace(location);\n" +
-			"    }\n" +
-			"    }\n" +
-			"    </script>\n" +
-			"    </html>"
+		id=uuid.v4();
+		timestamp = date.getTime();
 
-		/*response.writeHead(401,"Authentication required",{
-			"WWW-Authenticate": 'xBasic realm="Please provide your username and password to login to ' + state.server.servername + '"'
-		});*/
+		var resp=fs.readFileSync('core/modules/server/authenticators/template.html', 'utf8');
+
+		resp=resp.replace('$%%ID_REPLACE%%$', id);
+		resp=resp.replace('$%%TIME_REPLACE%%$', timestamp);
+
 		response.end(resp);
-		//response.end();
 		return false;
 
 
 	}
 };
 
-function authenticateUser(location, id, name, pw, timestamp){
-	fs.writeFileSync(location,id+", "+timestamp);
+
+
+function filename() {
+	return "auth.temp";
+}
+function authenticateUser(id, timestamp, name){
+	fs.appendFileSync(filename(),id+", "+timestamp+", "+name+"\n");
 }
 
+function checkUserID(id){
+	cleanAuthfile();
+	var userarray = getAuthFile();
+	var now = new Date().getTime();
 
-	function parseCookies (request) {
-		var list = {},
-			rc = request.headers.cookie;
-
-		rc && rc.split(';').forEach(function( cookie ) {
-			var parts = cookie.split('=');
-			//list[parts.shift().trim()] = decodeURI(parts.join('='));
-			list[parts.shift().trim()]=decodeURI(parts.join('='));
-		});
-
-		return list;
+	if(typeof userarray[id] !== 'undefined'){
+		if(now<userarray[id].timestamp){
+			return true;
+		}
 	}
+	return false;
+}
+
+function getAuthFile() {
+	var content=[];
+	try {
+		if (fs.existsSync(filename())) {
+			var contents = fs.readFileSync(filename(), 'utf8');
+			content = contents.replace(/\r\n/g,'\n').split('\n');
+		}
+	} catch(err) {
+		console.error(err)
+	}
+
+	var authentries=[];
+	for (var index = 0; index < content.length; ++index) {
+
+		var entry=content[index].split(', ');
+		var obj = new Object();
+
+		obj.id=entry[0];
+		obj.timestamp=entry[1];
+		authentries[obj.id]=obj;
+	}
+
+	return authentries;
+}
+
+function cleanAuthfile() {//writeFile
+	var content=[];
+	try {
+		if (fs.existsSync(filename())) {
+			var contents = fs.readFileSync(filename(), 'utf8');
+			content = contents.replace(/\r\n/g,'\n').split('\n');
+		}
+	} catch(err) {
+		console.error(err)
+	}
+
+	//delete file after retrieving it
+
+	var now = new Date().getTime();
+	var newfile="";
+	for (var index = 0; index < content.length; ++index) {
+
+		var entry=content[index].split(', ');
+
+		if(now>entry[1]){
+			var t = entry[0]+", "+entry[1]+", "+entry[2]+"\n"
+			newfile.concat(t);
+		}
+
+	}
+
+	//todo: fix cleanup
+	//fs.unlinkSync(filename());
+	//fs.appendFileSync(filename(),newfile);
+	//fs.writeFileSync(filename(),newfile);
+
+}
+
+function parseCookies (request) {
+	var list = {}, rc = request.headers.cookie;
+
+	rc && rc.split(';').forEach(function( cookie ) {
+		var parts = cookie.split('=');
+		//list[parts.shift().trim()] = decodeURI(parts.join('='));
+		list[parts.shift().trim()]=decodeURI(parts.join('='));
+	});
+
+	return list;
+}
 
 
 exports.AuthenticatorClass = BasicAuthenticator;

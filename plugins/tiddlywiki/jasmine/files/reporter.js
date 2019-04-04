@@ -176,7 +176,7 @@
       var results = runner.results();
       var specs = runner.specs();
       var msg = '';
-      msg += specs.length + ' test' + ((specs.length === 1) ? '' : 's') + ', ';
+      msg += specs.length + ' template.html' + ((specs.length === 1) ? '' : 's') + ', ';
       msg += results.totalCount + ' assertion' + ((results.totalCount === 1) ? '' : 's') + ', ';
       msg += results.failedCount + ' failure' + ((results.failedCount === 1) ? '' : 's') + '\n';
       return msg;
