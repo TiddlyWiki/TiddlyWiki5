@@ -85,7 +85,6 @@
 </body>
 <script>
     function Login() {
-        console.log("Login!!");
         var user = document.getElementById("user").value;
         var pass = document.getElementById("passwd").value;
 
@@ -101,10 +100,8 @@
         request.setRequestHeader("authpass", pass);
         request.send();
         // view request status
-        console.log("state "+request.status);
         if(request.status>=200 && request.status<300){
             document.cookie = "session.user="+user;
-            console.log("response "+request.response);
             document.cookie = "session.id="+request.response;
             var location =
                 window.location.protocol + "//" +
@@ -113,7 +110,6 @@
                 '/';
             window.location.replace(location);
         }else{
-            console.log("Error! Wrong Password!");
             document.getElementById("error").classList.remove("hidden");
             setTimeout(function() { document.getElementById("error").classList.add("hidden"); }, 5000);
         }
