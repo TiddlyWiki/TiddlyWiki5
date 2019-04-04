@@ -34,6 +34,7 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	if(this.revealTag && $tw.config.htmlUnsafeElements.indexOf(this.revealTag) === -1) {
 		tag = this.revealTag;
 	}
+	if(this.revealTag || this.class || this.style || this.type === "popup" || this.animate === "yes" || this.retain === "yes"){
 	var domNode = this.document.createElement(tag);
 	var classes = this["class"].split(" ") || [];
 	classes.push("tc-reveal");
@@ -51,6 +52,9 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 		domNode.setAttribute("hidden","true");
 	}
 	this.domNodes.push(domNode);
+	} else {
+		this.renderChildren(parent, nextSibling);
+	}
 };
 
 RevealWidget.prototype.positionPopup = function(domNode) {
