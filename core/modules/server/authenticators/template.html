@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tiddlywiki Authentication</title>
+</head>
+<style>
+    body {
+        background-color: linen;
+        font-family: Arial;
+    }
+
+    h1 {
+        color: maroon;
+        margin-left: 40px;
+    }
+    .test{
+        margin: auto;
+        width: 50%;
+        padding: auto;
+    }
+
+    input[type=text], input[type=password] {
+        padding:5px;
+        border:2px solid #ccc;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    input[type=text]:focus, input[type=password]:focus {
+        border-color:#333;
+    }
+
+    button {
+        padding:5px;
+        border:2px solid #ccc;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        width: 50%;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .button-wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    h1 {
+        text-align:center;
+    }
+
+    .footer{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .hidden{
+        display: none;
+    }
+</style>
+<body>
+
+    <div class="test">
+        <h1>Tiddlywiki UIAuth</h1>
+        <form action="/">
+            <input type="text" id="user" placeholder="Username">
+            <input type="password" id="passwd" placeholder="Password">
+        </form>
+        <br>
+        <div class="button-wrapper">
+            <button onclick="Login()">Login</button>
+        </div>
+        <div id="error" class="error hidden">
+            Password Wrong
+        </div>
+    </div>
+    <div class="footer">
+        This Site uses Cookies
+    </div>
+</body>
+<script>
+    function hidePassword() {
+        document.getElementById("error").classList.add("hidden");
+    }
+    function Login() {
+        console.log("Login!!");
+        var user = document.getElementById("user").value;
+        var pass = document.getElementById("passwd").value;
+
+        console.log(user);
+        console.log(pass);
+
+        document.cookie = "session.id=$%%ID_REPLACE%%$";
+        document.cookie = "session.timestamp=$%%TIME_REPLACE%%$";
+        // New XMLHTTPRequest
+        var request = new XMLHttpRequest();
+        request.open("GET", "/", false);
+        request.setRequestHeader("authuser", user);
+        request.setRequestHeader("authpass", pass);
+        request.send();
+        // view request status
+        console.log("state "+request.status);
+        if(request.status>=200 && request.status<300){
+            document.cookie = "session.user="+user;
+            console.log("response "+request.response);
+            document.cookie = "session.id="+request.response;
+            var location =
+                window.location.protocol + "//" +
+                window.location.hostname +
+                (window.location.port ? ":" + window.location.port : "") +
+                '/';
+            window.location.replace(location);
+        }else{
+            console.log("Error! Wrong Password!");
+            document.getElementById("error").classList.remove("hidden");
+            setTimeout(function() { document.getElementById("error").classList.add("hidden"); }, 5000);
+        }
+    }
+
+
+</script>
+</html>
