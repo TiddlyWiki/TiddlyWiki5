@@ -28,6 +28,11 @@ if($tw.node) {
 	fs = require("fs");
 	path = require("path");
 	vm = require("vm");
+	try {
+		if (!fs.existsSync('auth.temp')) {
+			fs.unlinkSync('auth.temp');
+		}
+	} catch(err) {}
 }
 
 /////////////////////////// Utility functions

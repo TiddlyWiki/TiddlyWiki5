@@ -75,7 +75,6 @@ BasicAuthenticator.prototype.authenticateRequest = function(request,response,sta
 	if(cookies['session.id']){
 		id=cookies['session.id'];
 	}
-	console.log("startauth with id: "+id+" at "+timestamp);
 
 	if(checkUserID(cookies['session.id'])){
 		state.authenticatedUsername = cookies['session.user'];
@@ -133,8 +132,13 @@ BasicAuthenticator.prototype.authenticateRequest = function(request,response,sta
 function filename() {
 	return "auth.temp";
 }
+
 function authenticateUser(id, timestamp, name){
-	fs.appendFileSync(filename(),id+", "+timestamp+", "+name+"\n");
+    try {
+        fs.appendFileSync(filename(),id+", "+timestamp+", "+name+"\n");
+    } catch(err) {
+        console.error(err)
+    }
 }
 
 function checkUserID(id){
@@ -197,9 +201,14 @@ function cleanAuthfile() {//writeFile
 		}
 	}
 
-	fs.unlinkSync(filename());
-    fs.writeFileSync(filename(),newfile);
-
+    try {
+	    if (fs.existsSync('auth.temp')) {
+	        fs.unlinkSync('auth.temp');
+	    }
+        fs.writeFileSync(filename(),newfile);
+    } catch(err) {
+        console.error(err)
+    }
 }
 
 function parseCookies (request) {
