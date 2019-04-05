@@ -7,13 +7,11 @@ $:/config/SideBarSegments/Visibility/$(listItem)$
 
 <$scrollable fallthrough="no" class="tc-sidebar-scrollable">
 
-<div class="tc-sidebar-header">
-
-<$reveal state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes" animate="yes">
+<$reveal state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes" animate="yes" tag="div" class="tc-sidebar-header">
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/SideBarSegment]!has[draft.of]]" variable="listItem">
 
-<$reveal type="nomatch" state=<<config-title>> text="hide"  tag="div">
+<$reveal type="nomatch" state=<<config-title>> text="hide" nowrap="yes">
 
 <$transclude tiddler=<<listItem>> mode="block"/>
 
@@ -22,7 +20,5 @@ $:/config/SideBarSegments/Visibility/$(listItem)$
 </$list>
 
 </$reveal>
-
-</div>
 
 </$scrollable>

@@ -34,7 +34,10 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	if(this.revealTag && $tw.config.htmlUnsafeElements.indexOf(this.revealTag) === -1) {
 		tag = this.revealTag;
 	}
-	if(this.revealTag || this.class || this.style || this.type === "popup" || this.animate === "yes" || this.retain === "yes"){
+	if(this.revealTag || this.class || this.style 
+		|| this.type === "popup" || this.animate === "yes" 
+		|| this.retain === "yes" || this.nowrap === "no"
+	){
 		var domNode = this.document.createElement(tag);
 		var classes = this["class"].split(" ") || [];
 		classes.push("tc-reveal");
@@ -103,6 +106,7 @@ RevealWidget.prototype.execute = function() {
 	this["default"] = this.getAttribute("default","");
 	this.animate = this.getAttribute("animate","no");
 	this.retain = this.getAttribute("retain","no");
+	this.nowrap = this.getAttribute("nowrap", "no");
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
 	// Compute the title of the state tiddler and read it
