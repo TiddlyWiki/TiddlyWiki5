@@ -115,7 +115,8 @@ BasicAuthenticator.prototype.authenticateRequest = function(request,response,sta
 		id=uuid.v4();
 		timestamp = date.getTime();
 
-		var resp=fs.readFileSync('core/modules/server/authenticators/template.html', 'utf8');
+		var appDir = path.resolve('core/modules/server/authenticators/');
+		var resp=fs.readFileSync(appDir+'/template.html', 'utf8');
 
 		resp=resp.replace('$%%ID_REPLACE%%$', id);
 		resp=resp.replace('$%%TIME_REPLACE%%$', timestamp);
