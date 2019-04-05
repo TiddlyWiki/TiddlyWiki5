@@ -21,6 +21,8 @@ A <<.def "filter operator">> is a predefined keyword attached to an individual [
 
 ''Important:'' Each first [[step|Filter Step]] of a [[filter run|Filter Run]] not given any input titles receives the output of <$link to="all Operator">[all[tiddlers]]</$link> as its input.
 
+[[Filters]] and Filter Operators are most commonly used in the ListWidget, SetWidget and [[Filtered Transclusions|Transclusion in WikiText]] `{{{ filter }}}`
+
 The following table lists all core operators, the most common ones marked ✓. The last column indicates whether an operator allows ''negation'' using the <$link to="Filter Step"><code>!</code> prefix</$link>. For specifics as to each operator's negated output please refer to its documentation.
 
 <table>
