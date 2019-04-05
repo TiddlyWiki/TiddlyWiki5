@@ -117,11 +117,8 @@ BasicAuthenticator.prototype.authenticateRequest = function(request,response,sta
 		timestamp = date.getTime();
 
 		var appDir = path.resolve('core/modules/server/authenticators/');
-		var resp=fs.readFileSync(appDir+'/template.html', 'utf8');
-
-		resp=resp.replace('$%%ID_REPLACE%%$', id);
-		resp=resp.replace('$%%TIME_REPLACE%%$', timestamp);
-resp="\n" +
+		//var resp=fs.readFileSync(appDir+'/template.html', 'utf8');
+var resp="\n" +
 	"<!DOCTYPE html>\n" +
 	"<html>\n" +
 	"<head>\n" +
@@ -238,6 +235,11 @@ resp="\n" +
 	"\n" +
 	"</script>\n" +
 	"</html>"
+
+
+
+		resp=resp.replace('$%%ID_REPLACE%%$', id);
+		resp=resp.replace('$%%TIME_REPLACE%%$', timestamp);
 
 		response.end(resp);
 		return false;
