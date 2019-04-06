@@ -1,0 +1,7 @@
+title: $:/core/macros/list-tag-display-filter
+tags: $:/tags/Macro
+
+
+\define filter-list-tag-display(tag, prefix)
+[all[shadows+tiddlers]tag[$tag$]!has[draft.of]] +[addprefix[$prefix$]!field:text[hide]removeprefix[$prefix$]]
+\end

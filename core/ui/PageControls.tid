@@ -1,13 +1,7 @@
 title: $:/core/ui/PageTemplate/pagecontrols
 
-\define config-prefix()
-$:/config/PageControlButtons/Visibility/
-\end
-\define display-filter(tag)
-[all[shadows+tiddlers]tag[$tag$]!has[draft.of]] +[addprefix[$(config-prefix)$]!field:text[hide]removeprefix[$(config-prefix)$]]
-\end
 <div class="tc-page-controls">
-<$list filter=<<display-filter "$:/tags/PageControls">> variable="listItem">
+<$list filter=<<filter-list-tag-display "$:/tags/PageControls" "$:/config/PageControlButtons/Visibility/">> variable="listItem">
 <$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
 <$transclude tiddler=<<listItem>> mode="inline"/>
 </$set>
