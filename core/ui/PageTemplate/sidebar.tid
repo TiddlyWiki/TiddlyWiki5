@@ -1,21 +1,19 @@
 title: $:/core/ui/PageTemplate/sidebar
 tags: $:/tags/PageTemplate
 
-\define config-title()
-$:/config/SideBarSegments/Visibility/$(listItem)$
+\define config-prefix()
+$:/config/SideBarSegments/Visibility/
 \end
-
+\define display-filter(tag)
+[all[shadows+tiddlers]tag[$tag$]!has[draft.of]] +[addprefix[$(config-prefix)$]!field:text[hide]removeprefix[$(config-prefix)$]]
+\end
 <$scrollable fallthrough="no" class="tc-sidebar-scrollable">
 
 <$reveal state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes" animate="yes" tag="div" class="tc-sidebar-header">
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/SideBarSegment]!has[draft.of]]" variable="listItem">
-
-<$reveal type="nomatch" state=<<config-title>> text="hide" nowrap="yes">
+<$list filter=<<display-filter "$:/tags/SideBarSegment">> variable="listItem">
 
 <$transclude tiddler=<<listItem>> mode="block"/>
-
-</$reveal>
 
 </$list>
 
