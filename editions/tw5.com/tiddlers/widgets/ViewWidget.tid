@@ -46,9 +46,9 @@ The following formats can be specified in the `format` attribute:
 !!!!View the value in a date field of the currentTiddler as a relative date
 :<<wikitext-example-compact '<$view field=modified format=relativedate/>'>>
 !!!!View the value in a date field of the currentTiddler as formated date
-<<wikitext-example-compact '<$view field=created format=date template="[UTC]YYYY-0MM-0DD"/>'>>
+:<<wikitext-example-compact '<$view field=created format=date template="[UTC]YYYY-0MM-0DD"/>'>>
 !!!!View a date field as its raw value
-<<wikitext-example-compact '<$view field=created format=text />'>>
+:<<wikitext-example-compact '<$view field=created format=text />'>>
 !!!!See ''String Operators'' in [[Filter Operators]] 
 :To apply similar formatting within Filters, including from titles and variables
 
