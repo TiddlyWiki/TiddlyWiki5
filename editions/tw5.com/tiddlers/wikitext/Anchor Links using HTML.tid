@@ -1,5 +1,5 @@
 created: 20190311000000000
-modified: 20190311000000000
+modified: 20190407000000000
 tags: [[HTML in WikiText]]
 title: Anchor Links using HTML
 
@@ -38,7 +38,6 @@ The following applies for proper (limited) useage:
 <h1 id="#heading-01"> My Heading</h1>
 
 <a href="##heading-01">Link to My Heading</a>
-
 ```
 
 ; Navigating to the reference
@@ -56,7 +55,7 @@ The following applies for proper (limited) useage:
 
 <<.warning "Some browsers will not navigate to an ''id'' whose value includes an encoded [ext[URI|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI]] that has a `%` character followed by 2 characters. ">>
 
-<$macrocall $name=.note _="""<span id=<<qualify #note.1>>><a href=<<qualify ##note.1-return>> title="click to return">1.</a></span> The [ext[HTML5 specifications|https://www.w3schools.com/tags/att_global_id.asp]] for the <<.attr id>> attribute  says that its value should not contain any whitespace. However a value with whitespace that is surrounded by double-quotes (or triple double-quotes) works ^^(Mar 2019)^^ as an anchor navigation marker in ~TiddlyWiki. However it may not work for other code that wants to reference the same <<.attr id>>.
+<$macrocall $name=.note _="""<span id=<<qualify #note.1>>><a href=<<qualify ##note.1-return>> title="click to return">1.</a></span> The [ext[HTML5 specifications|https://www.w3schools.com/tags/att_global_id.asp]] for the <<.attr id>> attribute  says that its value should not contain any whitespace. However a value with whitespace that is surrounded by double-quotes (or triple double-quotes) works ^^(Apr 2019)^^ as an anchor navigation marker in ~TiddlyWiki. However it may not work for other code that wants to reference the same <<.attr id>> and in future, if a [[WikiText]] method of creating and accessing anchor links is implemented, it is likely that <<.attr id>> attributes with spaces will not work.
 
 <span id=<<qualify #note.2>>><a href=<<qualify ##note.2-return>> title="click to return">2.</a></span> If transclusions create multiple instances of the same <<.attr id>> attribute, navigation will take place to the first instance found that satisfies the above criteria. To avoid this, you can use the [[qualify macro|qualify Macro]] in both the <<.attr id>> and the <<.attr href>> attributes in a similar style to the example given below: <a href=<<qualify ##qualify-example>> >Avoiding duplicate IDs when transcluding</a>."""  />
 
@@ -86,8 +85,8 @@ A link to scroll to this section could be made as follows:
 Clicking this anchor link goes to: <a href="##unique001">Section 1</a>
 ```
 Clicking this anchor link goes to: <a href="##unique001">Section 1</a>
-
 <hr>
+
 <h2 id="#Suggestions%0">Suggestions for HTML elements to use</h2>
 
 Some suggestions for the HTML element you choose for marking a position using the <<.attr id>> attribute:
