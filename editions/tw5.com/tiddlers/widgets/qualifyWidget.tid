@@ -1,0 +1,27 @@
+caption: qualify
+created: 20190409000000000
+modified: 20190409000000000
+tags: Widgets
+title: qualifyWidget
+
+! Introduction
+
+The qualify widget returns a unique string that encodes its position within the widget tree as identified by the stack of transcluded tiddlers that lead to that position, and assigns the result to a specified variable. 
+
+The value of the variable is available to the content within the qualify widget.
+
+! Content and Attributes
+
+|!Attribute |!Description |
+|name |The name of the variable to assign |
+|title |The prefix for the returned string, normally a tiddler title. Defaults to `undefined-` |
+
+! Example
+
+<$macrocall $name="wikitext-example-without-html" src="""<$qualify name="some-name" title="HelloThere"> 
+
+<$text text=<<some-name>>/>
+
+</$qualify> """/>
+
+Also see the [[qualify Macro]].
