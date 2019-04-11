@@ -34,6 +34,10 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 			"Content-Type": "application/json;charset=UTF-8",
 			"Authorization": "Basic " + window.btoa(username + ":" + password)
 		};
+	// Bail if we don't have everything we need
+	if(!username || !password || !repo || !path || !filename) {
+		return false;
+	}
 	// Make sure the path start and ends with a slash
 	if(path.substring(0,1) !== "/") {
 		path = "/" + path;
@@ -43,10 +47,6 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 	}
 	// Compose the base URI
 	var uri = "https://api.github.com/repos/" + repo + "/contents" + path;
-	// Bail if we don't have everything we need
-	if(!username || !password || !repo || !path || !filename) {
-		return false;
-	}
 	// Perform a get request to get the details (inc shas) of files in the same path as our file
 	$tw.utils.httpRequest({
 		url: uri,
