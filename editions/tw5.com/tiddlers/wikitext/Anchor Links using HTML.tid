@@ -35,7 +35,7 @@ The following applies for proper (limited) useage:
 <h2 id="""#"Example":-AnchorLinksUsingHTML""">Example:</h2>
 
 ```
-<h1 id="#heading-01"> My Heading</h1>
+<h1 id="#heading-01">My Heading</h1>
 
 <a href="##heading-01">Link to My Heading</a>
 ```
