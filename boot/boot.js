@@ -1855,8 +1855,10 @@ $tw.loadPlugin = function(name,paths) {
 		var pluginFields = $tw.loadPluginFolder(pluginPath);
 		if(pluginFields) {
 			$tw.wiki.addTiddler(pluginFields);
+			return;
 		}
 	}
+	console.log("Warning: Cannot find plugin '" + name + "'");
 };
 
 /*
@@ -1870,7 +1872,7 @@ $tw.getLibraryItemSearchPaths = function(libraryPath,envVar) {
 	if(env) {
 		env.split(path.delimiter).map(function(item) {
 			if(item) {
-				pluginPaths.push(item)
+				pluginPaths.push(item);
 			}
 		});
 	}
@@ -2006,6 +2008,14 @@ $tw.loadTiddlersNode = function() {
 	});
 	// Load the core tiddlers
 	$tw.wiki.addTiddler($tw.loadPluginFolder($tw.boot.corePath));
+	// Load any extra plugins
+	$tw.utils.each($tw.boot.extraPlugins,function(name) {
+		var parts = name.split("/"),
+			type = parts[0];
+		if(parts.length  === 3 && ["plugins","themes","languages"].indexOf(type) !== -1) {
+			$tw.loadPlugins([parts[1] + "/" + parts[2]],$tw.config[type + "Path"],$tw.config[type + "EnvVar"]);
+		}
+	});
 	// Load the tiddlers from the wiki directory
 	if($tw.boot.wikiPath) {
 		$tw.boot.wikiInfo = $tw.loadWikiTiddlers($tw.boot.wikiPath);
@@ -2068,6 +2078,12 @@ $tw.boot.startup = function(options) {
 		// If there's no arguments then default to `--help`
 		if($tw.boot.argv.length === 0) {
 			$tw.boot.argv = ["--help"];
+		}
+		// Parse any extra plugin references
+		$tw.boot.extraPlugins = $tw.boot.extraPlugins || [];
+		while($tw.boot.argv[0] && $tw.boot.argv[0].indexOf("+") === 0) {
+			$tw.boot.extraPlugins.push($tw.boot.argv[0].substring(1));
+			$tw.boot.argv.splice(0,1);
 		}
 		// If the first command line argument doesn't start with `--` then we
 		// interpret it as the path to the wiki folder, which will otherwise default
