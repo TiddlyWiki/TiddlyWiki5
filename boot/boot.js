@@ -1469,8 +1469,40 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/html","tiddlerdeserializer",{
 });
 $tw.modules.define("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
 	"application/json": function(text,fields) {
-		var data = JSON.parse(text);
-		return $tw.utils.isArray(data) ? data : [data];
+		var isTiddlerValid = function(data) {
+				// Not valid if it's not an object with a title property
+				if(typeof(data) !== "object" || !$tw.utils.hop(data,"title")) {
+					return false;
+				}
+				for(var f in data) {
+					if($tw.utils.hop(data,f)) {
+						// Check field name doesn't contain whitespace or control characters
+						if(typeof(data[f]) !== "string" || /[\x00-\x1F\s]/.test(f)) {
+							return false;
+						}
+					}
+				}
+				return true;
+			},
+			isTiddlerArrayValid = function(data) {
+				for(var t=0; t<data.length; t++) {
+					if(!isTiddlerValid(data[t])) {
+						return false;
+					}
+				}
+				return true;
+			},
+			data = JSON.parse(text);
+		if($tw.utils.isArray(data) && isTiddlerArrayValid(data)) {
+			return data;
+		} else if(isTiddlerValid(data)) {
+			return [data];
+		} else {
+			// Plain JSON file
+			fields.text = text;
+			fields.type = "application/json";
+			return [fields];
+		}
 	}
 });
 
@@ -1623,9 +1655,11 @@ $tw.loadTiddlersFromFile = function(filepath,fields) {
 		typeInfo = type ? $tw.config.contentTypeInfo[type] : null,
 		data = fs.readFileSync(filepath,typeInfo ? typeInfo.encoding : "utf8"),
 		tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
-		metadata;
-	if(ext !== ".json" && tiddlers.length === 1) {
 		metadata = $tw.loadMetadataForFile(filepath);
+	if(metadata) {
+		if(type === "application/json") {
+			tiddlers = [{text: data, type: "application/json"}];
+		}
 		tiddlers = [$tw.utils.extend({},tiddlers[0],metadata)];
 	}
 	return {filepath: filepath, type: type, tiddlers: tiddlers, hasMetaFile: !!metadata};
