@@ -222,7 +222,7 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 	// Take the file extension from the tiddler content type
 	var contentTypeInfo = $tw.config.contentTypeInfo[fileInfo.type] || {extension: ""};
 	// Generate the filepath
-	fileInfo.filepath = $tw.utils.generateTiddlerFilepath(tiddler,{
+	fileInfo.filepath = $tw.utils.generateTiddlerFilepath(tiddler.fields.title,{
 		extension: contentTypeInfo.extension,
 		directory: options.directory,
 		pathFilters: options.pathFilters
@@ -238,7 +238,7 @@ Options include:
 	pathFilters: optional array of filters to be used to generate the base path
 	wiki: optional wiki for evaluating the pathFilters
 */
-exports.generateTiddlerFilepath = function(tiddler,options) {
+exports.generateTiddlerFilepath = function(title,options) {
 	var self = this,
 		directory = options.directory || "",
 		extension = options.extension || "",
@@ -247,7 +247,7 @@ exports.generateTiddlerFilepath = function(tiddler,options) {
 	if(options.pathFilters && options.wiki) {
 		$tw.utils.each(options.pathFilters,function(filter) {
 			if(!filepath) {
-				var source = options.wiki.makeTiddlerIterator([tiddler.fields.title]),
+				var source = options.wiki.makeTiddlerIterator([title]),
 					result = options.wiki.filterTiddlers(filter,null,source);
 				if(result.length > 0) {
 					filepath = result[0];
@@ -257,7 +257,7 @@ exports.generateTiddlerFilepath = function(tiddler,options) {
 	}
 	// If not, generate a base pathname
 	if(!filepath) {
-		filepath = tiddler.fields.title;
+		filepath = title;
 		// If the filepath already ends in the extension then remove it
 		if(filepath.substring(filepath.length - extension.length) === extension) {
 			filepath = filepath.substring(0,filepath.length - extension.length);
@@ -275,7 +275,7 @@ exports.generateTiddlerFilepath = function(tiddler,options) {
 	if(!filepath) {
 		// ...then just use the character codes of the title
 		filepath = "";	
-		$tw.utils.each(tiddler.fields.title.split(""),function(char) {
+		$tw.utils.each(title.split(""),function(char) {
 			if(filepath) {
 				filepath += "-";
 			}
@@ -304,18 +304,41 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 	if(fileInfo.hasMetaFile) {
 		// Save the tiddler as a separate body and meta file
 		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
-		fs.writeFile(fileInfo.filepath,tiddler.fields.text,{encoding: typeInfo.encoding},function(err) {
+		fs.writeFile(fileInfo.filepath,tiddler.fields.text,typeInfo.encoding,function(err) {
 			if(err) {
 				return callback(err);
 			}
-			fs.writeFile(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text"]}),{encoding: "utf8"},callback);
+			fs.writeFile(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text"]}),"utf8",callback);
 		});
 	} else {
 		// Save the tiddler as a self contained templated file
 		if(fileInfo.type === "application/x-tiddler") {
-			fs.writeFile(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),{encoding: "utf8"},callback);
+			fs.writeFile(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8",callback);
 		} else {
-			fs.writeFile(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings()],null,$tw.config.preferences.jsonSpaces),{encoding: "utf8"},callback);
+			fs.writeFile(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings()],null,$tw.config.preferences.jsonSpaces),"utf8",callback);
+		}
+	}
+};
+
+/*
+Save a tiddler to a file described by the fileInfo:
+	filepath: the absolute path to the file containing the tiddler
+	type: the type of the tiddler file (NOT the type of the tiddler)
+	hasMetaFile: true if the file also has a companion .meta file
+*/
+exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
+	$tw.utils.createDirectory(path.dirname(fileInfo.filepath));
+	if(fileInfo.hasMetaFile) {
+		// Save the tiddler as a separate body and meta file
+		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
+		fs.writeFileSync(fileInfo.filepath,tiddler.fields.text,typeInfo.encoding);
+		fs.writeFileSync(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text"]}),"utf8");
+	} else {
+		// Save the tiddler as a self contained templated file
+		if(fileInfo.type === "application/x-tiddler") {
+			fs.writeFileSync(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8");
+		} else {
+			fs.writeFileSync(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings()],null,$tw.config.preferences.jsonSpaces),"utf8");
 		}
 	}
 };
