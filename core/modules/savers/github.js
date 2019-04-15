@@ -56,16 +56,18 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 			ref: branch
 		},
 		callback: function(err,getResponseDataJson,xhr) {
-			if(err) {
+			var getResponseData,sha = "";
+			if(err && xhr.status !== 404) {
 				return callback(err);					
 			}
-			var getResponseData = JSON.parse(getResponseDataJson),
-				sha = "";
-			$tw.utils.each(getResponseData,function(details) {
-				if(details.name === filename) {
-					sha = details.sha;
-				}
-			});
+			if(xhr.status !== 404) {
+				getResponseData = JSON.parse(getResponseDataJson);
+				$tw.utils.each(getResponseData,function(details) {
+					if(details.name === filename) {
+						sha = details.sha;
+					}
+				});				
+			}
 			var data = {
 					message: "Saved by TiddlyWiki",
 					content: base64utf8.base64.encode.call(base64utf8,text),
