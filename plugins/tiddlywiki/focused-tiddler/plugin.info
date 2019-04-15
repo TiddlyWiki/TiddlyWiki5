@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/focused-tiddler",
+	"description": "Update HistoryList focused tiddler title",
+	"author": "PMario",
+	"core-version": ">=5.1.15",
+	"list": "readme docs examples config"
+}

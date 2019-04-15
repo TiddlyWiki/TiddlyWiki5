@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/focused-tiddler/readme
+
+! Focused Tiddler
+
+This plugin updates the $:/HistoryList tiddler field named: `focused-tiddler`.
+
+The field is updated with the window.scroll() event and basically contains the "top-most" tiddler. This position is depending on the active "story-view" setting. 
+
