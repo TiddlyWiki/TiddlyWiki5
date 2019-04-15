@@ -29,6 +29,7 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 		path = this.wiki.getTiddlerText("$:/GitHub/Path"),
 		filename = this.wiki.getTiddlerText("$:/GitHub/Filename"),
 		branch = this.wiki.getTiddlerText("$:/GitHub/Branch") || "master",
+		endpoint = this.wiki.getTiddlerText("$:/GitHub/Url") || "https://api.github.com",
 		headers = {
 			"Accept": "application/vnd.github.v3+json",
 			"Content-Type": "application/json;charset=UTF-8",
@@ -46,7 +47,7 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 		path = path + "/";
 	}
 	// Compose the base URI
-	var uri = "https://api.github.com/repos/" + repo + "/contents" + path;
+	var uri = endpoint + "/repos/" + repo + "/contents" + path;
 	// Perform a get request to get the details (inc shas) of files in the same path as our file
 	$tw.utils.httpRequest({
 		url: uri,
