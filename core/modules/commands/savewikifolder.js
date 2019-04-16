@@ -5,7 +5,7 @@ module-type: command
 
 Command to save the current wiki as a wiki folder
 
---savewikifolder <wikifolderpath> [<filter>] [<options>]
+--savewikifolder <wikifolderpath> [<filter>]
 
 \*/
 (function(){
@@ -148,13 +148,7 @@ WikiFolderMaker.prototype.saveCustomPlugin = function(pluginTiddler) {
 		directory = $tw.utils.generateTiddlerFilepath(titleParts[titleParts.length - 1],{
 			directory: path.resolve(this.wikiFolderPath,pluginTiddler.fields["plugin-type"] + "s")
 		}),
-		pluginInfo = {
-			title: pluginTitle,
-			description: pluginTiddler.fields.description,
-			author: pluginTiddler.fields.author,
-			"core-version": pluginTiddler.fields["core-version"],
-			list: pluginTiddler.fields.list
-		};
+		pluginInfo = pluginTiddler.getFieldStrings({exclude: ["text","type"]});
 	this.saveJSONFile(directory + path.sep + "plugin.info",pluginInfo);
 	self.log("Writing " + directory + path.sep + "plugin.info: " + JSON.stringify(pluginInfo,null,$tw.config.preferences.jsonSpaces));
 	var pluginTiddlers = JSON.parse(pluginTiddler.fields.text).tiddlers; // A hashmap of tiddlers in the plugin
