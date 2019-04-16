@@ -29,7 +29,7 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 		path = this.wiki.getTiddlerText("$:/GitHub/Path"),
 		filename = this.wiki.getTiddlerText("$:/GitHub/Filename"),
 		branch = this.wiki.getTiddlerText("$:/GitHub/Branch") || "master",
-		endpoint = this.wiki.getTiddlerText("$:/GitHub/Url") || "https://api.github.com",
+		endpoint = this.wiki.getTiddlerText("$:/GitHub/ServerURL") || "https://api.github.com",
 		headers = {
 			"Accept": "application/vnd.github.v3+json",
 			"Content-Type": "application/json;charset=UTF-8",

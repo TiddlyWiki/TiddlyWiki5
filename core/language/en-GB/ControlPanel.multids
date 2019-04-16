@@ -92,7 +92,7 @@ Saving/Hint: Settings used for saving the entire TiddlyWiki as a single file via
 Saving/GitHub/Branch: Target branch for saving (defaults to `master`)
 Saving/GitHub/Caption: ~GitHub Saver
 Saving/GitHub/Description: These settings are only used when saving to ~GitHub
-Saving/GitHub/URL: Server URL (defaults to `https://api.github.com`)
+Saving/GitHub/ServerURL: Server URL (defaults to `https://api.github.com`)
 Saving/GitHub/Filename: Filename of target file (e.g. `index.html`)
 Saving/GitHub/Password: Password, OAUTH token, or personal access token
 Saving/GitHub/Path: Path to target file (e.g. `/wiki/`)

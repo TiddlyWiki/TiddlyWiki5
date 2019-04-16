@@ -12,4 +12,4 @@ caption: {{$:/language/ControlPanel/Saving/GitHub/Caption}}
 |<<lingo Branch>> |<$edit-text tiddler="$:/GitHub/Branch" default="" tag="input"/> |
 |<<lingo Path>> |<$edit-text tiddler="$:/GitHub/Path" default="" tag="input"/> |
 |<<lingo Filename>> |<$edit-text tiddler="$:/GitHub/Filename" default="" tag="input"/> |
-|<<lingo Url>> |<$edit-text tiddler="$:/GitHub/Url" default="" tag="input"/> |
+|<<lingo ServerURL>> |<$edit-text tiddler="$:/GitHub/ServerURL" default="" tag="input"/> |
