@@ -93,6 +93,7 @@ Saving/Hint: 用於通過儲存模組將整個 TiddlyWiki 儲存為單個檔案�
 Saving/GitHub/Branch: 用於儲存的目標分支 (預設值為 `master`)
 Saving/GitHub/Caption: ~GitHub 儲存模組
 Saving/GitHub/Description: 這些設定僅用於儲存到 ~GitHub
+Saving/GitHub/ServerURL: 伺服器網址 (預設值為 `https://api.github.com`)
 Saving/GitHub/Filename: 目標檔案的檔案名稱 (例如，`index.html`)
 Saving/GitHub/Password: 密碼、OAUTH 令牌，或個人存取的令牌
 Saving/GitHub/Path: 目標檔案的路徑 (例如，`/wiki/`)
