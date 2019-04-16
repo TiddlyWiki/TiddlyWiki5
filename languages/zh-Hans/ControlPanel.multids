@@ -91,7 +91,7 @@ Saving/General/Caption: 通用
 Saving/General/Hint: 这些设置适用于所有已载入的保存模块
 Saving/Hint: 用于通过保存模块将整个 TiddlyWiki 保存为单个文件的设置
 Saving/GitHub/Branch: 用于保存的目标分支 (默认值为 `master`)
-Saving/GitHub/Caption: ~GitHub 保存模组
+Saving/GitHub/Caption: ~GitHub 保存模块
 Saving/GitHub/Description: 这些设定仅用于保存到 ~GitHub
 Saving/GitHub/ServerURL: 服务器网址 (默认值为 `https://api.github.com`)
 Saving/GitHub/Filename: 目标文件的文件名称 (例如，`index.html`)
