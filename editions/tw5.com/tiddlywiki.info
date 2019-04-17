@@ -2,6 +2,7 @@
 	"description": "Documentation from https://tiddlywiki.com",
 	"plugins": [
 		"tiddlywiki/nodewebkitsaver",
+		"tiddlywiki/focused-tiddler",
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/railroad",
 		"tiddlywiki/evernote"

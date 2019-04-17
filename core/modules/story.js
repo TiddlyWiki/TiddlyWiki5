@@ -98,7 +98,7 @@ Story.prototype.addToHistory = function(navigateTo,navigateFromClientRect) {
 		historyList.push({title: title, fromPageRect: navigateFromClientRect});
 	});
 	var current = titles[titles.length-1];
-	this.wiki.setTiddlerData(this.historyTitle,historyList,{"current-tiddler": current}, {"focused-tiddler": current});
+	this.wiki.setTiddlerData(this.historyTitle,historyList,{"current-tiddler": current, "focused-tiddler": current});
 };
 
 Story.prototype.storyCloseTiddler = function(targetTitle) {

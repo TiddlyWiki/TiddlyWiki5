@@ -50,7 +50,16 @@ NavigatorWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
+
+	$tw.utils.addEventListeners(this.parentDomNode,[
+		{name: "scroll", handlerObject: this, handlerMethod: "test"}
+	]);
+
 	this.renderChildren(parent,nextSibling);
+};
+
+NavigatorWidget.prototype.test = function(event) {
+	console.log("test");
 };
 
 /*

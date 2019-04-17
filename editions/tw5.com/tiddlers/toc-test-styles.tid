@@ -1,0 +1,9 @@
+created: 20190405150534024
+modified: 20190416100717457
+tags: $:/tags/Stylesheet
+title: toc-test-styles
+type: text/vnd.tiddlywiki
+
+.tc-table-of-contents .toc-item-selected >a {
+color: red;
+}
