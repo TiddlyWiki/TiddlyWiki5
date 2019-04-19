@@ -92,11 +92,12 @@ Saving/Hint: Settings used for saving the entire TiddlyWiki as a single file via
 Saving/GitHub/Branch: Target branch for saving (defaults to `master`)
 Saving/GitHub/Caption: ~GitHub Saver
 Saving/GitHub/Description: These settings are only used when saving to ~GitHub
-Saving/GitHub/ServerURL: Server URL (defaults to `https://api.github.com`)
 Saving/GitHub/Filename: Filename of target file (e.g. `index.html`)
+Saving/GitHub/ServiceType: Type of Git hosting service
 Saving/GitHub/Password: Password, OAUTH token, or personal access token
 Saving/GitHub/Path: Path to target file (e.g. `/wiki/`)
 Saving/GitHub/Repo: Target repository (e.g. `Jermolene/TiddlyWiki5`)
+Saving/GitHub/ServerURL: Server API URL
 Saving/GitHub/UserName: Username
 Saving/TiddlySpot/Advanced/Heading: Advanced Settings
 Saving/TiddlySpot/BackupDir: Backup Directory

@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/savers/github.js
+title: $:/core/modules/savers/git-service.js
 type: application/javascript
 module-type: saver
 
-Saves wiki by pushing a commit to the GitHub v3 REST API
+Saves wiki by pushing a commit to the selected Git service REST API
 
 \*/
 (function(){
@@ -23,20 +23,17 @@ var GitHubSaver = function(wiki) {
 
 GitHubSaver.prototype.save = function(text,method,callback) {
 	var self = this,
+		titleOfSelectedService = this.wiki.getTiddlerText("$:/GitHub/ServiceType"),
+		service = require(titleOfSelectedService),
 		username = this.wiki.getTiddlerText("$:/GitHub/Username"),
 		password = $tw.utils.getPassword("github"),
 		repo = this.wiki.getTiddlerText("$:/GitHub/Repo"),
 		path = this.wiki.getTiddlerText("$:/GitHub/Path"),
 		filename = this.wiki.getTiddlerText("$:/GitHub/Filename"),
 		branch = this.wiki.getTiddlerText("$:/GitHub/Branch") || "master",
-		endpoint = this.wiki.getTiddlerText("$:/GitHub/ServerURL") || "https://api.github.com",
-		headers = {
-			"Accept": "application/vnd.github.v3+json",
-			"Content-Type": "application/json;charset=UTF-8",
-			"Authorization": "Basic " + window.btoa(username + ":" + password)
-		};
+		apiUrl = this.wiki.getTiddlerText("$:/GitHub/ServerURL") || this.wiki.getTiddler(titleOfSelectedService).fields['default-api-url'];
 	// Bail if we don't have everything we need
-	if(!username || !password || !repo || !path || !filename) {
+	if(!service || !username || !password || !repo || !path || !filename) {
 		return false;
 	}
 	// Make sure the path start and ends with a slash
@@ -46,11 +43,11 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 	if(path.substring(path.length - 1) !== "/") {
 		path = path + "/";
 	}
-	// Compose the base URI
-	var uri = endpoint + "/repos/" + repo + "/contents" + path;
+	// Get service-specific headers
+	var headers = service.headers(username, password);
 	// Perform a get request to get the details (inc shas) of files in the same path as our file
 	$tw.utils.httpRequest({
-		url: uri,
+		url: service.getRequestUriForFilelist(apiUrl,repo,path),
 		type: "GET",
 		headers: headers,
 		data: {
@@ -61,6 +58,7 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 			if(err && xhr.status !== 404) {
 				return callback(err);					
 			}
+			var requestType = service.requestTypeIfFileExists;
 			if(xhr.status !== 404) {
 				getResponseData = JSON.parse(getResponseDataJson);
 				$tw.utils.each(getResponseData,function(details) {
@@ -68,17 +66,19 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 						sha = details.sha;
 					}
 				});				
+			} else {
+				requestType = service.requestTypeIfFileNotExists;
 			}
-			var data = {
-					message: "Saved by TiddlyWiki",
-					content: base64utf8.base64.encode.call(base64utf8,text),
-					branch: branch,
-					sha: sha
-				};
+			var data = service.formatDataForCreatingCommit(
+				"Saved by TiddlyWiki",
+				base64utf8.base64.encode.call(base64utf8,text),
+				branch,
+				sha
+			);
 			// Perform a PUT request to save the file
 			$tw.utils.httpRequest({
-				url: uri + filename,
-				type: "PUT",
+				url: service.getRequestUriForSendingFile(apiUrl,repo,path,filename),
+				type: requestType,
 				headers: headers,
 				data: JSON.stringify(data),
 				callback: function(err,putResponseDataJson,xhr) {
