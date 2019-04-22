@@ -1,0 +1,20 @@
+title: $:/core/ui/ControlPanel/Saving/GitService
+tags: $:/tags/ControlPanel/Saving
+caption: {{$:/language/ControlPanel/Saving/GitService/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Saving/GitService/
+
+<$wikify name="defaultApiUrl" text="""<$transclude tiddler={{$:/GitService/ServiceType}} field="default-api-url"/>""">
+
+<<lingo Description>>
+
+|<<lingo ServiceType>> |<$select tiddler="$:/GitService/ServiceType"><$list filter="[all[shadows+tiddlers]module-type[gitservice]!has[draft.of]]"><option value=<<currentTiddler>>><$transclude field="caption"><$text text=<<currentTiddler>>/></$transclude></option></$list></$select> |
+|<<lingo UserName>> |<$edit-text tiddler="$:/GitService/Username" default="" tag="input"/> |
+|<<lingo Password>> |<$password name="gitservice"/> |
+|<<lingo Repo>> |<$edit-text tiddler="$:/GitService/Repo" default="" tag="input"/> |
+|<<lingo Branch>> |<$edit-text tiddler="$:/GitService/Branch" default="" tag="input"/> |
+|<<lingo Path>> |<$edit-text tiddler="$:/GitService/Path" default="" tag="input"/> |
+|<<lingo Filename>> |<$edit-text tiddler="$:/GitService/Filename" default="" tag="input"/> |
+|<<lingo ServerURL>> |<$edit-text tiddler="$:/GitService/ServerURL" default=<<defaultApiUrl>> tag="input"/> |
+
+</$wikify>
