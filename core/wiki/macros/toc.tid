@@ -9,6 +9,10 @@ tags: $:/tags/Macro
 </$set>
 \end
 
+\define xx(){{{ [<tv-history-list>get[focused-tiddler]] }}}
+
+\define focusedFilter() [all[current]]-[<tv-history-list>get[focused-tiddler]]
+
 \define toc-body(tag,sort:"",itemClassFilter,exclude,path)
 <ol class="tc-toc">
   <$list filter="""[all[shadows+tiddlers]tag<__tag__>!has[draft.of]$sort$] -[<__tag__>] -[enlist<__exclude__>]""">
@@ -167,18 +171,16 @@ tags: $:/tags/Macro
 \end
 
 \define toc-tabbed-external-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"")
-<$tiddler tiddler={{{ [<__selectedTiddler__>get[text]] }}}>
+<$navigator story="StoryList" history="HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
+<$linkcatcher actions=<<test>> >
   <div class="tc-tabbed-table-of-contents">
-    <$linkcatcher to=<<__selectedTiddler__>>>
       <div class="tc-table-of-contents">
-        <$macrocall $name="toc-selective-expandable" tag=<<__tag__>> sort=<<__sort__>> itemClassFilter="[all[current]]-[<__selectedTiddler__>get[text]]"/>
+        <$macrocall $name="toc-selective-expandable" tag=<<__tag__>> sort=<<__sort__>>/>
       </div>
-    </$linkcatcher>
     <div class="tc-tabbed-table-of-contents-content">
       <$reveal stateTitle=<<__selectedTiddler__>> type="nomatch" text="">
         <$transclude mode="block" tiddler=<<__template__>>>
-          <h1><<toc-caption>></h1>
-          <$transclude mode="block">$missingText$</$transclude>
+          <$list filter="[list<tv-story-list>]" history=<<tv-history-list>> template="Template" emptyMessage=<<__unselectedText__>>/>
         </$transclude>
       </$reveal>
       <$reveal stateTitle=<<__selectedTiddler__>> type="match" text="">
@@ -186,12 +188,35 @@ tags: $:/tags/Macro
       </$reveal>
     </div>
   </div>
-</$tiddler>
+</$linkcatcher>
+</$navigator>
+\end
+
+\define test()
+<$action-sendmessage $message="tm-close-all-tiddlers"/>
+<$action-navigate $to=<<navigateTo>>/>
 \end
 
 \define toc-tabbed-internal-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"")
-<$linkcatcher to=<<__selectedTiddler__>>>
-  <$macrocall $name="toc-tabbed-external-nav" tag=<<__tag__>> sort=<<__sort__>> selectedTiddler=<<__selectedTiddler__>> unselectedText=<<__unselectedText__>> missingText=<<__missingText__>> template=<<__template__>>/>
+<$navigator story="StoryList" history="HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
+<$linkcatcher actions=<<test>> >
+  <div class="tc-tabbed-table-of-contents">
+      <div class="tc-table-of-contents">
+        <$macrocall $name="toc-selective-expandable" tag=<<__tag__>> sort=<<__sort__>>/>
+      </div>
+    <div class="tc-tabbed-table-of-contents-content">
+      <$reveal stateTitle=<<__selectedTiddler__>> type="nomatch" text="">
+        <$transclude mode="block" tiddler=<<__template__>>>
+          <$list filter="[list<tv-story-list>]" history=<<tv-history-list>> template="Template" emptyMessage=<<__unselectedText__>>/>
+        </$transclude>
+      </$reveal>
+      <$reveal stateTitle=<<__selectedTiddler__>> type="match" text="">
+        $unselectedText$
+      </$reveal>
+    </div>
+  </div>
 </$linkcatcher>
+</$navigator>
 \end
+
 
