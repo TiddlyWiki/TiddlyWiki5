@@ -173,11 +173,11 @@ tags: $:/tags/Macro
 <$action-navigate $to=<<navigateTo>>/>
 \end
 
-\define toc-tabbed-external-nav(tag,sort:"",unselectedText,missingText,template:"TemplateExternalLink")
+\define toc-tabbed-external-nav(tag,sort:"",unselectedText,missingText,template:"$:/core/macros/toc/template/external-link")
 <$macrocall $name="toc-tabbed-internal-nav" tag=<<__tag__>> sort=<<__sort__>> unselectedText=<<__unselectedText__>> missingText=<<__missingText__>> template=<<__template__>> />
 \end
 
-\define toc-tabbed-internal-nav(tag,sort:"",unselectedText,missingText,template:"Template")
+\define toc-tabbed-internal-nav(tag,sort:"",unselectedText,missingText,template:"$:/core/macros/toc/template/internal-link")
 <$navigator story=<<qualify "$:/StoryList">> history=<<qualify "$:/HistoryList">> openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
 <$linkcatcher actions=<<catch>> >
   <div class="tc-tabbed-table-of-contents">

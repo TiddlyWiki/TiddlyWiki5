@@ -1,0 +1,7 @@
+title: $:/core/macros/toc/template/external-link
+type: text/vnd.tiddlywiki
+
+<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
+<h1><<toc-caption>></h1>
+<$transclude mode="block"></$transclude>
+</$navigator>

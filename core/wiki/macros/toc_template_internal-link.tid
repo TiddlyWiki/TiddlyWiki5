@@ -1,0 +1,5 @@
+title: $:/core/macros/toc/template/internal-link
+type: text/vnd.tiddlywiki
+
+<h1><<toc-caption>></h1>
+<$transclude mode="block"></$transclude>
