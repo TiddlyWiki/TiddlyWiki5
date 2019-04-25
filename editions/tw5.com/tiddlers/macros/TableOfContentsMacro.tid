@@ -1,5 +1,5 @@
 created: 20140919155729620
-modified: 20150221224034000
+modified: 20190425143718936
 tags: Macros [[Core Macros]]
 title: Table-of-Contents Macros
 type: text/vnd.tiddlywiki
@@ -51,12 +51,8 @@ These two parameters are combined into a single [[filter expression|Filter Expre
 
 <<.var toc-tabbed-internal-nav>> and <<.var toc-tabbed-external-nav>> take additional parameters:
 
-;selectedTiddler
-: The title of the [[state tiddler|StateMechanism]] for noting the currently selected tiddler, defaulting to `$:/temp/toc/selectedTiddler`. It is recommended that this be a [[system tiddler|SystemTiddlers]]
 ;unselectedText
 : The text to display when no tiddler is selected in the tree
-;missingText
-: The text to display if the selected tiddler doesn't exist
 ;template
 : Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the selected tiddler into the right-hand panel
 
