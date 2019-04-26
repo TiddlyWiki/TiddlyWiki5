@@ -18,7 +18,7 @@ tags: $:/tags/Macro
       <$set name=xx filter="[enlist<__visited__>] [<currentTiddler>]">
       <$set name="toc-item-class" filter="[all[current]]-[<tv-history-list>get[focused-tiddler]]" emptyValue="toc-item-selected" value="toc-item">
         <li class=<<toc-item-class>>>
-          <$list filter="[all[current]toc-link[no]]" emptyMessage="<$link tooltip=<<xx>>><<toc-caption>></$link>">
+          <$list filter="[all[current]toc-link[no]]" emptyMessage="<$link><<toc-caption>></$link>">
             <<toc-caption>>
           </$list>
           <$macrocall $name="toc-body" tag=<<currentTiddler>> sort=<<__sort__>> visited=<<xx>> path=<<path>>/>
