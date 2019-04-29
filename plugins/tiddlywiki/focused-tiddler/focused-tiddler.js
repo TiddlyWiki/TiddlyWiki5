@@ -46,7 +46,12 @@ function worker() {
 
 function setFocusedTiddler(forceTitle) {
 	var historyTiddler = $tw.wiki.getTiddler(HISTORY_TIDDLER);
-	var old = (historyTiddler.fields && historyTiddler.fields["focused-tiddler"]) ? historyTiddler.fields["focused-tiddler"] : "";
+	var old = (historyTiddler && historyTiddler.fields && historyTiddler.fields["focused-tiddler"]) ? historyTiddler.fields["focused-tiddler"] : "";
+
+	if (historyTiddler === undefined) {
+		//Story is empty at app startup
+		return;
+	}
 
 	if (forceTitle !== undefined) {
 		$tw.wiki.addTiddler(new $tw.Tiddler(
