@@ -13,8 +13,6 @@ tags: $:/tags/Macro
 </$set> 
 \end
 
-\define focusedFilter() [all[current]]-[<tv-history-list>get[focused-tiddler]]
-
 \define toc-body(tag,sort:"")
 \whitespace trim
 <ol class="tc-toc">
