@@ -1,8 +1,0 @@
-created: 20190416110034612
-modified: 20190416110048462
-tags: 
-title: Template
-type: text/vnd.tiddlywiki
-
-<h1><<toc-caption>></h1>
-<$transclude mode="block">$missingText$</$transclude>
