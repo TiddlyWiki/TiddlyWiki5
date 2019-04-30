@@ -10,22 +10,31 @@ caption: {{$:/language/SideBar/Open/Caption}}
 \end
 
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
-<div style="position: relative;">
-<$droppable actions=<<drop-actions>>>
-<div class="tc-droppable-placeholder">
-&nbsp;
-</div>
-<div>
-<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>
-</div>
-</$droppable>
-</div>
+  <div style="position: relative;">
+    <$droppable actions=<<drop-actions>>>
+      <div class="tc-droppable-placeholder">
+        &nbsp;
+      </div>
+      <$set name="toc-item-class" filter="[all[current]]-[<tv-history-list>get[focused-tiddler]]" emptyValue="toc-item-selected" value="toc-item">
+      <div>
+        <$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini">
+          &times;
+        </$button>
+          &nbsp;<$link to={{!!title}} class=<<toc-item-class>>><$view field="title"/></$link>
+      </div>
+      </$set>
+    </$droppable>
+  </div>
 </$list>
+
 <$tiddler tiddler="">
-<$droppable actions=<<drop-actions>>>
-<div class="tc-droppable-placeholder">
-&nbsp;
-</div>
-<$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini"><<lingo Button>></$button>
-</$droppable>
+  <$droppable actions=<<drop-actions>>>
+    <div class="tc-droppable-placeholder">
+      &nbsp;
+    </div>
+    <$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini">
+      <<lingo Button>>
+    </$button>
+  </$droppable>
 </$tiddler>
+
