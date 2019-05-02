@@ -19,6 +19,7 @@ var ClassicStoryView = function(listWidget) {
 };
 
 ClassicStoryView.prototype.navigateTo = function(historyInfo) {
+	var duration = $tw.utils.getAnimationDuration()
 	var listElementIndex = this.listWidget.findListItem(0,historyInfo.title);
 	if(listElementIndex === undefined) {
 		return;
@@ -29,13 +30,18 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 	if(!(targetElement instanceof Element)) {
 		return;
 	}
-	// Scroll the node into view
-	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});
+	if(duration) {
+		// Scroll the node into view
+		this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});	
+	} else {
+		targetElement.scrollIntoView();
+	}
 };
 
 ClassicStoryView.prototype.insert = function(widget) {
-	var targetElement = widget.findFirstDomNode(),
-		duration = $tw.utils.getAnimationDuration();
+	var duration = $tw.utils.getAnimationDuration();
+	if(duration) {
+	var targetElement = widget.findFirstDomNode();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!(targetElement instanceof Element)) {
 		return;
@@ -66,11 +72,13 @@ ClassicStoryView.prototype.insert = function(widget) {
 		{marginBottom: currMarginBottom + "px"},
 		{opacity: "1.0"}
 	]);
+	}
 };
 
 ClassicStoryView.prototype.remove = function(widget) {
+	var duration = $tw.utils.getAnimationDuration();
+	if(duration) {
 	var targetElement = widget.findFirstDomNode(),
-		duration = $tw.utils.getAnimationDuration(),
 		removeElement = function() {
 			widget.removeChildDomNodes();
 		};
@@ -103,6 +111,9 @@ ClassicStoryView.prototype.remove = function(widget) {
 		{marginBottom: (-currHeight) + "px"},
 		{opacity: "0.0"}
 	]);
+	} else {
+		widget.removeChildDomNodes();
+	}
 };
 
 exports.classic = ClassicStoryView;
