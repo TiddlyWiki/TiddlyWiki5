@@ -20,7 +20,7 @@ function Performance(enabled) {
 }
 
 Performance.prototype.showGreeting = function() {
-	this.logger("Execute $tw.perf.log(); to see filter execution timings");
+	this.logger.log("Execute $tw.perf.log(); to see filter execution timings");
 };
 
 /*
