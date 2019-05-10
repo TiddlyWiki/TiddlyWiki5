@@ -142,10 +142,10 @@ RevealWidget.prototype.readState = function() {
 			this.readPopupState(state);
 			break;
 		case "match":
-			this.isOpen = !!(this.compareStateText(state) == 0);
+			this.isOpen = this.text === state;
 			break;
 		case "nomatch":
-			this.isOpen = !(this.compareStateText(state) == 0);
+			this.isOpen = this.text !== state;
 			break;
 		case "lt":
 			this.isOpen = !!(this.compareStateText(state) < 0);
