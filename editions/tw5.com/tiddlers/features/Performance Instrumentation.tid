@@ -1,5 +1,5 @@
 created: 20190316163428191
-modified: 20190316163657710
+modified: 20190510133455372
 tags: Features
 title: Performance Instrumentation
 type: text/vnd.tiddlywiki
@@ -10,22 +10,27 @@ With performance instrumentation switched on, there is additional timing informa
 
 ```
 performance: mainRender: 327.83ms 
-performance: +filter: 49.70ms 
 performance: styleRefresh: 9.14ms 
-performance: +filter: 2.46ms 
 performance: mainRefresh: 68.10ms 
-performance: +filter: 37.69ms 
 ```
 
 The information above should be interpreted as follows:
 
-<<<
-"Initial rendering of the main page took 327ms (of which 50ms was filter evaluation). Refreshing the page stylesheet took 9ms (of which 2ms was filter evaluation). Refreshing the main page took 68ms (of which 38ms was filter evaluation)"
-<<<
-
 * mainRender is the time taken for the initial display of the page template
 * styleRefresh is the time taken to refresh the page stylesheet
 * mainRender is the time taken to refresh the main page template
-* in each case, +filter denotes the time taken up with filter evaluation.
 
 As an example, try switching between the sidebar tabs to compare how long they take to render.
+
+More detailed information on filter execution timings is also available. With performance instrumentation enabled, ype the following JavaScript command in the browser developer console:
+
+```
+tw.perf.log()
+```
+
+A table is displayed with the following information:
+
+* ''name'' - the string "Filter: " plus the text of the filter
+* ''invocations'' - the number of invocations of the filter since startup
+* ''totalTime'' - the total time in milliseconds spent evaluating this filter since startup
+* ''percentTime'' - the percentage of the execution time of this filter against the total execution time of all filters
