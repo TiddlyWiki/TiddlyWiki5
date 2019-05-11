@@ -357,3 +357,5 @@ Adam Sherwood, @admls, 2019/01/27
 Joshua Fontany, @joshuafontany, 2019/03/07
 
 Irene Castaños, @jdjdjdjdjdjd, 2019/03/11
+
+Alvaro Garcia, @alvarogarcia7, 2019/04/01
