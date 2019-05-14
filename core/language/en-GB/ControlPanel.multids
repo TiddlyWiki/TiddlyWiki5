@@ -89,16 +89,16 @@ Saving/DownloadSaver/Hint: These settings apply to the HTML5-compatible download
 Saving/General/Caption: General
 Saving/General/Hint: These settings apply to all the loaded savers
 Saving/Hint: Settings used for saving the entire TiddlyWiki as a single file via a saver module
-Saving/GitService/Branch: Target branch for saving (defaults to `master`)
-Saving/GitService/Caption: Git Service Saver
-Saving/GitService/Description: These settings are only used when saving to a Git service
+Saving/GitService/Branch: Target branch for saving
+Saving/GitService/Description: These settings are only used when saving to <<service-name>>
 Saving/GitService/Filename: Filename of target file (e.g. `index.html`)
-Saving/GitService/ServiceType: Type of Git hosting service
 Saving/GitService/Password: Password, OAUTH token, or personal access token
 Saving/GitService/Path: Path to target file (e.g. `/wiki/`)
 Saving/GitService/Repo: Target repository (e.g. `Jermolene/TiddlyWiki5`)
 Saving/GitService/ServerURL: Server API URL
 Saving/GitService/UserName: Username
+Saving/GitService/GitHub/Caption: ~GitHub Saver
+Saving/GitService/GitLab/Caption: ~GitLab Saver
 Saving/TiddlySpot/Advanced/Heading: Advanced Settings
 Saving/TiddlySpot/BackupDir: Backup Directory
 Saving/TiddlySpot/Backups: Backups
