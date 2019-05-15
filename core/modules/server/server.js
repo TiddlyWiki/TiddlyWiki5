@@ -118,6 +118,9 @@ Server.prototype.findMatchingRoute = function(request,state) {
 			pathRegExp = potentialRoute.path,
 			pathname = state.urlInfo.pathname,
 			match;
+		if (request.method !== potentialRoute.method) {
+			continue;
+		}
 		if(pathprefix) {
 			if(pathname.substr(0,pathprefix.length) === pathprefix) {
 				pathname = pathname.substr(pathprefix.length) || "/";
