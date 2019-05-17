@@ -1,5 +1,6 @@
+bag: default
 created: 20180626150526207
-modified: 20181216181934282
+modified: 20190517030627918
 tags: ListenCommand ServerCommand Features
 title: WebServer
 type: text/vnd.tiddlywiki
@@ -12,7 +13,7 @@ When [[running under Node.js|TiddlyWiki on Node.js]], TiddlyWiki includes a simp
 
 The web server listens for requests coming over the network, and performs the following actions in turn:
 
-* [[Authentication|WebServer Authentication]] is the process of identifying the current user. TiddlyWiki supports three types of authentication: [[Anonymous|WebServer Anonymous Access]], [[Basic|WebServer Basic Authentication]] and [[Header|WebServer Header Authentication]]
+* [[Authentication|WebServer Authentication]] is the process of identifying the current user. TiddlyWiki supports four types of authentication: [[Anonymous|WebServer Anonymous Access]], [[Basic|WebServer Basic Authentication]], [[Header|WebServer Header Authentication]] and [[Hash|WebServer Hash based Authentication]].
 * [[Authorization|WebServer Authorization]] is the process of determining which resources may be accessed by a particular user. TiddlyWiki implements a simple scheme whereby read and write access to the wiki can be independently controlled.
 * Routing is the process of dispatching the request to the [[API handler|WebServer API]], and returning any required data.
 
@@ -52,6 +53,15 @@ tiddlywiki mywikifolder --listen "readers=(anon)" writers=joe username=joe passw
 ```
 
 Note  the double quotes that are required for parameters containing special characters.
+
+!! Hash based authentication
+
+If you do not want to store the passwords in plain text on the server, you can use [[Hash based authentication|WebServer Hash based Authentication]].
+
+```
+tiddlywiki mywikifolder --listen auth-type=hash username=joe password='8733b885c6f31bcddeb3b3c83c8120afd99405b038c1694a3a00e5590b9ee1e6:71f3ecf56303649ae7169a387455f489' secret-key=e5b25c2282106d062f1217014d758fd58edbb9acfdddc63cc1475adeda3a911e
+```
+
 
 ! Arguments
 

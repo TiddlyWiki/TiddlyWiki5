@@ -42,8 +42,7 @@ Command.prototype.execute = function() {
 			username: this.params[4],
 			password: this.params[5],
 			"path-prefix": this.params[7],
-			"debug-level": this.params[8],
-			"passwordhash": this.params[9]
+			"debug-level": this.params[8]
 		}
 	});
 	var nodeServer = this.server.listen();

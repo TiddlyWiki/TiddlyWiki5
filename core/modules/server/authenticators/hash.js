@@ -21,22 +21,35 @@ Returns true if the authenticator is active, false if it is inactive, or a strin
 */
 HashAuthenticator.prototype.init = function() {
 	// Read the credentials data
-	var pwHash = this.server.get("passwordhash");
-	var user = this.server.get("username");
-	if(pwHash && user) {
-		var pwInfo = $tw.utils.extractHashInfo(pwHash);
-		if (typeof(pwInfo) === 'string') {
-			$tw.utils.warning("Warning: invalid password hash: " + pwInfo);
-			return errMsg;
-		} else {
-			this.rootpath = this.server.get('pathprefix') || '/';
-			this.loginPath = (this.server.get('pathprefix') || '') + '/login-hash';
-			this.user = user;
-			this.pwInfo = pwInfo;
-			return true;
-		}
+	var authType = this.server.get("auth-type");
+	if (authType !== 'hash') {
+		return false;
 	}
-	return false;
+	var secret = $tw.utils.parseSecret(this.server.get('secret-key'));
+	if (typeof(secret) === 'string') {
+		return secret;
+	}
+	var credfile = this.server.get('credentials');
+	var pwMap = {};
+	if (credfile) {
+		pwMap = $tw.utils.loadCredentialFile(credfile);
+		if (typeof(pwMap) === 'string') {
+			return pwMap;
+		}
+	} else {
+		var pwHash = this.server.get("password");
+		var user = this.server.get("username");
+		if (!pwHash || !user) {
+			return "Expected 'credentials' or ('username' and 'password')";
+		}
+		pwMap[user] = $tw.utils.parsePasswordHash(pwHash);
+	}
+
+	this.secretKey = secret;
+	this.rootpath = this.server.get('pathprefix') || '/';
+	this.loginPath = (this.server.get('pathprefix') || '') + '/login-hash';
+	this.pwMap = pwMap;
+	return true;
 };
 
 /*
@@ -50,14 +63,14 @@ HashAuthenticator.prototype.authenticateRequest = function(request,response,stat
 	for (var i = 0; i < cookies.length; ++i) {
 		var parts = cookies[i].match(/([^=]*)=(.*)$/);
 		if (parts && parts[1].trim() === "a") {
-			username = $tw.utils.validateCookie(parts[2], this.pwInfo.secretKey);
+			username = $tw.utils.validateCookie(parts[2], this.secretKey);
 			break;
 		}
 	}
 	if (state.urlInfo.pathname === this.loginPath) {
 		state.rootpath = this.rootpath;
-		state.pwInfo = this.pwInfo;
-		state.user = this.user;
+		state.pwMap = this.pwMap;
+		state.secretKey = this.secretKey;
 	}
 	if (typeof(username) === 'string') {
 		state.authenticatedUsername = username;

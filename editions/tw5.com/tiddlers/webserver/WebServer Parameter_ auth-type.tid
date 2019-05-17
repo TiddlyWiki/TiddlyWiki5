@@ -1,0 +1,8 @@
+caption: auth-type
+created: 20190517071000000
+modified: 20190517014801368
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: auth-type
+type: text/vnd.tiddlywiki
+
+The [[web server configuration parameter|WebServer Parameters]] ''auth-type'' should be set to 'hash' to activate the hash based password authentication.

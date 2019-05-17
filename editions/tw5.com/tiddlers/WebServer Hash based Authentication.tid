@@ -1,0 +1,11 @@
+caption: Hash based Authentication
+created: 20190517024009970
+modified: 20190517030521846
+title: WebServer Hash based Authentication
+type: text/vnd.tiddlywiki
+
+Hash based authentication makes use of a password hash to authenticate. It does not require plain text password to be stored on the server. And from the browser to server the hash of hash and one time session id is transmitted preventing replay of the transmitted hash.
+
+To activate hash based auth, the [[web server configuration auth-type|WebServer Parameter: auth-type]] should be set to 'hash'. When this parameter is set the [[web server configuration password|WebServer Password]] is expected to be hash:salt. You can use a utility function in generatePasswordHash in core/modules/utils/auth.js to generate .the hash with salt string.
+
+If you are using  [[web server configuration credentials|WebServer Parameter: credentials]] then the passwords in the file should be credential hash.

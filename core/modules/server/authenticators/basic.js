@@ -28,6 +28,9 @@ function BasicAuthenticator(server) {
 Returns true if the authenticator is active, false if it is inactive, or a string if there is an error
 */
 BasicAuthenticator.prototype.init = function() {
+	if(this.server.get('auth-type')) {
+		return false;
+	}
 	// Read the credentials data
 	this.credentialsFilepath = this.server.get("credentials");
 	if(this.credentialsFilepath) {
