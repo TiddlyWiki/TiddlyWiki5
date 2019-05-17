@@ -70,7 +70,7 @@ Saves wiki by pushing a commit to the GitHub v3 REST API
 					});
 				}
 				var data = {
-					message: "Saved by TiddlyWiki",
+					message: $tw.language.getRawString("ControlPanel/Saving/GitService/CommitMessage"),
 					content: base64utf8.base64.encode.call(base64utf8,text),
 					branch: branch,
 					sha: sha

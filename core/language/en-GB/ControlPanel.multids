@@ -90,6 +90,7 @@ Saving/General/Caption: General
 Saving/General/Hint: These settings apply to all the loaded savers
 Saving/Hint: Settings used for saving the entire TiddlyWiki as a single file via a saver module
 Saving/GitService/Branch: Target branch for saving
+Saving/GitService/CommitMessage: Saved by TiddlyWiki
 Saving/GitService/Description: These settings are only used when saving to <<service-name>>
 Saving/GitService/Filename: Filename of target file (e.g. `index.html`)
 Saving/GitService/Path: Path to target file (e.g. `/wiki/`)

@@ -72,7 +72,7 @@ Saves wiki by pushing a commit to the GitLab REST API
 					});
 				}
 				var data = {
-					commit_message: "Saved by TiddlyWiki",
+					commit_message: $tw.language.getRawString("ControlPanel/Saving/GitService/CommitMessage"),
 					content: base64utf8.base64.encode.call(base64utf8,text),
 					branch: branch,
 					sha: sha
