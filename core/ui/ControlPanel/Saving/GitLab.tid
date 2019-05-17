@@ -8,7 +8,7 @@ caption: {{$:/language/ControlPanel/Saving/GitService/GitLab/Caption}}
 <<lingo Description>>
 
 |<<lingo UserName>> |<$edit-text tiddler="$:/GitLab/Username" default="" tag="input"/> |
-|<<lingo Password>> |<$password name="gitlab"/> |
+|<<lingo GitLab/Password>> |<$password name="gitlab"/> |
 |<<lingo Repo>> |<$edit-text tiddler="$:/GitLab/Repo" default="" tag="input"/> |
 |<<lingo Branch>> |<$edit-text tiddler="$:/GitLab/Branch" default="master" tag="input"/> |
 |<<lingo Path>> |<$edit-text tiddler="$:/GitLab/Path" default="" tag="input"/> |
