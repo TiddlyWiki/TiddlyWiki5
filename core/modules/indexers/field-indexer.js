@@ -15,7 +15,21 @@ Indexes the tiddlers with each field value
 function FieldIndexer(wiki) {
 	this.wiki = wiki;
 	this.index = null;
+	this.addIndexMethods();
 }
+
+FieldIndexer.prototype.addIndexMethods = function() {
+	var self = this;
+	this.wiki.each.hasNonEmptyField = function(name) {
+		var titles = self.wiki.allTitles();
+		return self.lookupNonEmptyField(name).filter(function(title) {
+			return titles.indexOf(title) !== -1;
+		});
+	};
+	this.wiki.eachShadowPlusTiddlers.byField = function(name,value) {
+		return self.lookup(name,value).slice(0);
+	};
+};
 
 /*
 Tear down and then rebuild the index as if all tiddlers have changed

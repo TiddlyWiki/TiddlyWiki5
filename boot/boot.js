@@ -1125,30 +1125,9 @@ $tw.Wiki = function(options) {
 		}
 	};
 
-	this.each.byTag = function(tag) {
-		var titles = getTiddlerTitles();
-		return self.getIndexer("TagIndexer").lookup(tag).filter(function(title) {
-			return titles.indexOf(title) !== -1;
-		});
-	};
-
-	this.each.hasNonEmptyField = function(name) {
-		var titles = getTiddlerTitles();
-		return self.getIndexer("FieldIndexer").lookupNonEmptyField(name).filter(function(title) {
-			return titles.indexOf(title) !== -1;
-		});
-	};
-
 	// Get an array of all shadow tiddler titles
 	this.allShadowTitles = function() {
 		return getShadowTiddlerTitles().slice(0);
-	};
-
-	this.allShadowTitles.byTag = function(tag) {
-		var titles = getShadowTiddlerTitles();
-		return self.getIndexer("TagIndexer").lookup(tag).filter(function(title) {
-			return titles.indexOf(title) !== -1;
-		});
 	};
 
 	// Iterate through all shadow tiddler titles
@@ -1180,10 +1159,6 @@ $tw.Wiki = function(options) {
 		}
 	};
 
-	this.eachTiddlerPlusShadows.byTag = function(tag) {
-		return self.getIndexer("TagIndexer").lookup(tag).slice(0);
-	};
-
 	// Iterate through all the shadows and then the tiddlers
 	this.eachShadowPlusTiddlers = function(callback) {
 		var index,titlesLength,title,
@@ -1204,14 +1179,6 @@ $tw.Wiki = function(options) {
 				callback(tiddlers[title],title);
 			}
 		}
-	};
-
-	this.eachShadowPlusTiddlers.byTag = function(tag) {
-		return self.getIndexer("TagIndexer").lookup(tag).slice(0);
-	};
-
-	this.eachShadowPlusTiddlers.byField = function(name,value) {
-		return self.getIndexer("FieldIndexer").lookup(name,value).slice(0);
 	};
 
 	// Test for the existence of a tiddler (excludes shadow tiddlers)

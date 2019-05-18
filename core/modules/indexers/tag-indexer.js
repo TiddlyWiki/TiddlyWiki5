@@ -15,7 +15,30 @@ Indexes the tiddlers with each tag
 function TagIndexer(wiki) {
 	this.wiki = wiki;
 	this.index = null;
+	this.addIndexMethods();
 }
+
+TagIndexer.prototype.addIndexMethods = function() {
+	var self = this;
+	this.wiki.each.byTag = function(tag) {
+		var titles = self.wiki.allTitles();
+		return self.lookup(tag).filter(function(title) {
+			return titles.indexOf(title) !== -1;
+		});
+	};
+	this.wiki.allShadowTitles.byTag = function(tag) {
+		var titles = self.wiki.allShadowTitles();
+		return self.lookup(tag).filter(function(title) {
+			return titles.indexOf(title) !== -1;
+		});
+	};
+	this.wiki.eachTiddlerPlusShadows.byTag = function(tag) {
+		return self.lookup(tag).slice(0);
+	};
+	this.wiki.eachShadowPlusTiddlers.byTag = function(tag) {
+		return self.lookup(tag).slice(0);
+	};
+};
 
 /*
 Tear down and then rebuild the index as if all tiddlers have changed
