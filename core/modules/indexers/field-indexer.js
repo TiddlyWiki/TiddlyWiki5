@@ -91,7 +91,6 @@ FieldIndexer.prototype.lookup = function(name,value) {
 
 // Lookup the given field returning a list of tiddler titles
 FieldIndexer.prototype.lookupNonEmptyField = function(name) {
-console.log("Looking up",name)
 	// Update the index if it has yet to be built
 	if(this.index === null || !this.index[name]) {
 		this.buildIndexForField(name);
@@ -101,7 +100,7 @@ console.log("Looking up",name)
 		results = [];
 	$tw.utils.each(Object.keys(baseIndex),function(value) {
 		if(value) {
-			$tw.utils.pushTop(results,baseIndex[name]);
+			$tw.utils.pushTop(results,baseIndex[value]);
 		}
 	});
 	return results;
