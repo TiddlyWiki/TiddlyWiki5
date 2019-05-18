@@ -115,6 +115,7 @@ FieldIndexer.prototype.update = function(oldTiddler,newTiddler) {
 		$tw.utils.each(this.index,function(indexEntry,name) {
 			if(name in newTiddler.fields) {
 				var value = newTiddler.getFieldString(name);
+				indexEntry[value] = indexEntry[value] || [];
 				indexEntry[value].push(newTiddler.fields.title);
 			}
 		});		
