@@ -26,6 +26,33 @@ FieldIndexer.prototype.addIndexMethods = function() {
 			return titles.indexOf(title) !== -1;
 		});
 	};
+	this.wiki.eachShadow.hasNonEmptyField = function(name) {
+		var titles = self.wiki.allShadowTitles();
+		return self.lookupNonEmptyField(name).filter(function(title) {
+			return titles.indexOf(title) !== -1;
+		});
+	};
+	this.wiki.eachTiddlerPlusShadows.hasNonEmptyField = function(name) {
+		return self.lookupNonEmptyField(name).slice(0);
+	};
+	this.wiki.eachShadowPlusTiddlers.hasNonEmptyField = function(name) {
+		return self.lookupNonEmptyField(name).slice(0);
+	};
+	this.wiki.each.byField = function(name,value) {
+		var titles = self.wiki.allTitles();
+		return self.lookup(name,value).filter(function(title) {
+			return titles.indexOf(title) !== -1;
+		});
+	};
+	this.wiki.eachShadow.byField = function(name,value) {
+		var titles = self.wiki.allShadowTitles();
+		return self.lookup(name,value).filter(function(title) {
+			return titles.indexOf(title) !== -1;
+		});
+	};
+	this.wiki.eachTiddlerPlusShadows.byField = function(name,value) {
+		return self.lookup(name,value).slice(0);
+	};
 	this.wiki.eachShadowPlusTiddlers.byField = function(name,value) {
 		return self.lookup(name,value).slice(0);
 	};

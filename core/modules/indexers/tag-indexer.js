@@ -26,7 +26,7 @@ TagIndexer.prototype.addIndexMethods = function() {
 			return titles.indexOf(title) !== -1;
 		});
 	};
-	this.wiki.allShadowTitles.byTag = function(tag) {
+	this.wiki.eachShadow.byTag = function(tag) {
 		var titles = self.wiki.allShadowTitles();
 		return self.lookup(tag).filter(function(title) {
 			return titles.indexOf(title) !== -1;

@@ -63,7 +63,7 @@ exports.field = function(source,operator,options) {
 							results.push(title);
 						}
 					}
-				});				
+				});
 			}
 		}
 	}
