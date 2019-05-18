@@ -36,7 +36,7 @@ exports.tag = function(source,operator,options) {
 			});
 		} else {
 			// Returns empty results if operator.operand is missing
-			if(typeof source.byTag === "function") {
+			if(source.byTag) {
 				results = source.byTag(operator.operand);
 			} else {
 				tiddlers = options.wiki.getTiddlersWithTag(operator.operand);

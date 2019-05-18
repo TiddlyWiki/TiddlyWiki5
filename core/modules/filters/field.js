@@ -53,7 +53,7 @@ exports.field = function(source,operator,options) {
 				}
 			});
 		} else {
-			if(typeof source.byField === "function") {
+			if(source.byField) {
 				results = source.byField(fieldname,operator.operand);
 			} else {
 				source(function(tiddler,title) {
