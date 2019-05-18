@@ -36,9 +36,11 @@ FieldIndexer.prototype.buildIndexForField = function(name) {
 	var baseIndex = this.index[name];
 	// Update the index for each tiddler
 	this.wiki.eachTiddlerPlusShadows(function(tiddler,title) {
-		var value = tiddler.getFieldString(name);
-		baseIndex[value] = baseIndex[value] || [];
-		baseIndex[value].push(title);
+		if(name in tiddler.fields) {
+			var value = tiddler.getFieldString(name);
+			baseIndex[value] = baseIndex[value] || [];
+			baseIndex[value].push(title);			
+		}
 	});
 };
 
@@ -85,6 +87,24 @@ FieldIndexer.prototype.lookup = function(name,value) {
 		this.buildIndexForField(name);
 	}
 	return this.index[name][value] || [];
+};
+
+// Lookup the given field returning a list of tiddler titles
+FieldIndexer.prototype.lookupNonEmptyField = function(name) {
+console.log("Looking up",name)
+	// Update the index if it has yet to be built
+	if(this.index === null || !this.index[name]) {
+		this.buildIndexForField(name);
+	}
+	// Collect the tiddlers with this field
+	var baseIndex = this.index[name],
+		results = [];
+	$tw.utils.each(Object.keys(baseIndex),function(value) {
+		if(value) {
+			$tw.utils.pushTop(results,baseIndex[name]);
+		}
+	});
+	return results;
 };
 
 exports.FieldIndexer = FieldIndexer;

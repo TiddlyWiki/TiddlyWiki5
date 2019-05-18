@@ -1132,6 +1132,13 @@ $tw.Wiki = function(options) {
 		});
 	};
 
+	this.each.hasNonEmptyField = function(name) {
+		var titles = getTiddlerTitles();
+		return self.getIndexer("FieldIndexer").lookupNonEmptyField(name).filter(function(title) {
+			return titles.indexOf(title) !== -1;
+		});
+	};
+
 	// Get an array of all shadow tiddler titles
 	this.allShadowTitles = function() {
 		return getShadowTiddlerTitles().slice(0);
