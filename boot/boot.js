@@ -1035,9 +1035,8 @@ $tw.Wiki = function(options) {
 				shadowTiddlerTitles = Object.keys(shadowTiddlers);
 			}
 			return shadowTiddlerTitles;
-		};
-
-	var indexers = [],
+		},
+		indexers = [],
 		indexersByName = Object.create(null);
 
 	this.addIndexer = function(indexer,name) {
@@ -1323,6 +1322,10 @@ $tw.Wiki = function(options) {
 			indexer.rebuild();
 		});
 	};
+
+	if(this.addIndexersToWiki) {
+		this.addIndexersToWiki();
+	}
 };
 
 // Dummy methods that will be filled in after boot

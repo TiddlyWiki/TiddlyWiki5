@@ -27,9 +27,7 @@ exports.startup = function() {
 	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
 	$tw.modules.applyMethods("tiddlermethod",$tw.Tiddler.prototype);
 	$tw.modules.applyMethods("wikimethod",$tw.Wiki.prototype);
-	$tw.utils.each($tw.modules.applyMethods("indexer"),function(Indexer,name) {
-		$tw.wiki.addIndexer(new Indexer($tw.wiki),name);
-	});
+	$tw.wiki.addIndexersToWiki();
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	$tw.macros = $tw.modules.getModulesByTypeAsHashmap("macro");
 	$tw.wiki.initParsers();

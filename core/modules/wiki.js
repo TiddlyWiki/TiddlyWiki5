@@ -28,6 +28,16 @@ var USER_NAME_TITLE = "$:/status/UserName",
 	TIMESTAMP_DISABLE_TITLE = "$:/config/TimestampDisable";
 
 /*
+Add available indexers to this wiki
+*/
+exports.addIndexersToWiki = function() {
+	var self = this;
+	$tw.utils.each($tw.modules.applyMethods("indexer"),function(Indexer,name) {
+		self.addIndexer(new Indexer(self),name);
+	});
+};
+
+/*
 Get the value of a text reference. Text references can have any of these forms:
 	<tiddlertitle>
 	<tiddlertitle>!!<fieldname>
