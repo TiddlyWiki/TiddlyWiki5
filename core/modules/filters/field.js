@@ -53,14 +53,18 @@ exports.field = function(source,operator,options) {
 				}
 			});
 		} else {
-			source(function(tiddler,title) {
-				if(tiddler) {
-					var text = tiddler.getFieldString(fieldname);
-					if(text !== null && text === operator.operand) {
-						results.push(title);
+			if(typeof source.byField === "function") {
+				results = source.byField(fieldname,operator.operand);
+			} else {
+				source(function(tiddler,title) {
+					if(tiddler) {
+						var text = tiddler.getFieldString(fieldname);
+						if(text !== null && text === operator.operand) {
+							results.push(title);
+						}
 					}
-				}
-			});
+				});				
+			}
 		}
 	}
 	return results;

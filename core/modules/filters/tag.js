@@ -25,9 +25,10 @@ exports.tag = function(source,operator,options) {
 		});
 	} else {
 		// Old semantics:
-		var tiddlers = options.wiki.getTiddlersWithTag(operator.operand);
+		var tiddlers;
 		if(operator.prefix === "!") {
 			// Returns a copy of the input if operator.operand is missing
+			tiddlers = options.wiki.getTiddlersWithTag(operator.operand);
 			source(function(tiddler,title) {
 				if(tiddlers.indexOf(title) === -1) {
 					results.push(title);
@@ -35,12 +36,17 @@ exports.tag = function(source,operator,options) {
 			});
 		} else {
 			// Returns empty results if operator.operand is missing
-			source(function(tiddler,title) {
-				if(tiddlers.indexOf(title) !== -1) {
-					results.push(title);
-				}
-			});
-			results = options.wiki.sortByList(results,operator.operand);
+			if(typeof source.byTag === "function") {
+				results = source.byTag(operator.operand);
+			} else {
+				tiddlers = options.wiki.getTiddlersWithTag(operator.operand);
+				source(function(tiddler,title) {
+					if(tiddlers.indexOf(title) !== -1) {
+						results.push(title);
+					}
+				});
+				results = options.wiki.sortByList(results,operator.operand);
+			}
 		}		
 	}
 	return results;
