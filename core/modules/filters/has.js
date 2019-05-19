@@ -41,15 +41,11 @@ exports.has = function(source,operator,options) {
 				}
 			});
 		} else {
-			if(source.hasNonEmptyField) {
-				results = source.hasNonEmptyField(operator.operand);
-			} else {
-				source(function(tiddler,title) {
-					if(tiddler && $tw.utils.hop(tiddler.fields,operator.operand) && !(tiddler.fields[operator.operand] === "" || tiddler.fields[operator.operand].length === 0)) {
-						results.push(title);
-					}
-				});				
-			}
+			source(function(tiddler,title) {
+				if(tiddler && $tw.utils.hop(tiddler.fields,operator.operand) && !(tiddler.fields[operator.operand] === "" || tiddler.fields[operator.operand].length === 0)) {
+					results.push(title);
+				}
+			});				
 		}
 	}
 	return results;

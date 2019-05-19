@@ -16,7 +16,7 @@ Filter operator for comparing fields for equality
 Export our filter function
 */
 exports.field = function(source,operator,options) {
-	var results = [],
+	var results = [],indexedResults,
 		fieldname = (operator.suffix || operator.operator || "title").toLowerCase();
 	if(operator.prefix === "!") {
 		if(operator.regexp) {
@@ -54,17 +54,19 @@ exports.field = function(source,operator,options) {
 			});
 		} else {
 			if(source.byField) {
-				results = source.byField(fieldname,operator.operand);
-			} else {
-				source(function(tiddler,title) {
-					if(tiddler) {
-						var text = tiddler.getFieldString(fieldname);
-						if(text !== null && text === operator.operand) {
-							results.push(title);
-						}
-					}
-				});
+				indexedResults = source.byField(fieldname,operator.operand);
+				if(indexedResults) {
+					return indexedResults
+				}
 			}
+			source(function(tiddler,title) {
+				if(tiddler) {
+					var text = tiddler.getFieldString(fieldname);
+					if(text !== null && text === operator.operand) {
+						results.push(title);
+					}
+				}
+			});
 		}
 	}
 	return results;

@@ -12,6 +12,8 @@ Indexes the tiddlers with each field value
 /*global modules: false */
 "use strict";
 
+var MAXIMUM_INDEXED_VALUE_LENGTH = 128;
+
 function FieldIndexer(wiki) {
 	this.wiki = wiki;
 	this.index = null;
@@ -20,41 +22,27 @@ function FieldIndexer(wiki) {
 
 FieldIndexer.prototype.addIndexMethods = function() {
 	var self = this;
-	this.wiki.each.hasNonEmptyField = function(name) {
-		var titles = self.wiki.allTitles();
-		return self.lookupNonEmptyField(name).filter(function(title) {
-			return titles.indexOf(title) !== -1;
-		});
-	};
-	this.wiki.eachShadow.hasNonEmptyField = function(name) {
-		var titles = self.wiki.allShadowTitles();
-		return self.lookupNonEmptyField(name).filter(function(title) {
-			return titles.indexOf(title) !== -1;
-		});
-	};
-	this.wiki.eachTiddlerPlusShadows.hasNonEmptyField = function(name) {
-		return self.lookupNonEmptyField(name).slice(0);
-	};
-	this.wiki.eachShadowPlusTiddlers.hasNonEmptyField = function(name) {
-		return self.lookupNonEmptyField(name).slice(0);
-	};
 	this.wiki.each.byField = function(name,value) {
-		var titles = self.wiki.allTitles();
-		return self.lookup(name,value).filter(function(title) {
+		var titles = self.wiki.allTitles(),
+			lookup = self.lookup(name,value);
+		return lookup && lookup.filter(function(title) {
 			return titles.indexOf(title) !== -1;
 		});
 	};
 	this.wiki.eachShadow.byField = function(name,value) {
-		var titles = self.wiki.allShadowTitles();
-		return self.lookup(name,value).filter(function(title) {
+		var titles = self.wiki.allShadowTitles(),
+			lookup = self.lookup(name,value);
+		return lookup && lookup.filter(function(title) {
 			return titles.indexOf(title) !== -1;
 		});
 	};
 	this.wiki.eachTiddlerPlusShadows.byField = function(name,value) {
-		return self.lookup(name,value).slice(0);
+		var lookup = self.lookup(name,value);
+		return lookup ? lookup.slice(0) : null;
 	};
 	this.wiki.eachShadowPlusTiddlers.byField = function(name,value) {
-		return self.lookup(name,value).slice(0);
+		var lookup = self.lookup(name,value);
+		return lookup ? lookup.slice(0) : null;
 	};
 };
 
@@ -79,8 +67,11 @@ FieldIndexer.prototype.buildIndexForField = function(name) {
 	this.wiki.eachTiddlerPlusShadows(function(tiddler,title) {
 		if(name in tiddler.fields) {
 			var value = tiddler.getFieldString(name);
-			baseIndex[value] = baseIndex[value] || [];
-			baseIndex[value].push(title);			
+			// Skip any values above the maximum length
+			if(value.length < MAXIMUM_INDEXED_VALUE_LENGTH) {
+				baseIndex[value] = baseIndex[value] || [];
+				baseIndex[value].push(title);
+			}
 		}
 	});
 };
@@ -115,8 +106,10 @@ FieldIndexer.prototype.update = function(oldTiddler,newTiddler) {
 		$tw.utils.each(this.index,function(indexEntry,name) {
 			if(name in newTiddler.fields) {
 				var value = newTiddler.getFieldString(name);
-				indexEntry[value] = indexEntry[value] || [];
-				indexEntry[value].push(newTiddler.fields.title);
+				if(value.length < MAXIMUM_INDEXED_VALUE_LENGTH) {
+					indexEntry[value] = indexEntry[value] || [];
+					indexEntry[value].push(newTiddler.fields.title);
+				}
 			}
 		});		
 	}
@@ -124,28 +117,15 @@ FieldIndexer.prototype.update = function(oldTiddler,newTiddler) {
 
 // Lookup the given field returning a list of tiddler titles
 FieldIndexer.prototype.lookup = function(name,value) {
+	// Fail the lookup if the value is too long
+	if(value.length >= MAXIMUM_INDEXED_VALUE_LENGTH) {
+		return null;
+	}
 	// Update the index if it has yet to be built
 	if(this.index === null || !this.index[name]) {
 		this.buildIndexForField(name);
 	}
 	return this.index[name][value] || [];
-};
-
-// Lookup the given field returning a list of tiddler titles
-FieldIndexer.prototype.lookupNonEmptyField = function(name) {
-	// Update the index if it has yet to be built
-	if(this.index === null || !this.index[name]) {
-		this.buildIndexForField(name);
-	}
-	// Collect the tiddlers with this field
-	var baseIndex = this.index[name],
-		results = [];
-	$tw.utils.each(Object.keys(baseIndex),function(value) {
-		if(value) {
-			$tw.utils.pushTop(results,baseIndex[value]);
-		}
-	});
-	return results;
 };
 
 exports.FieldIndexer = FieldIndexer;
