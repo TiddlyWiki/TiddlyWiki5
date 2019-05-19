@@ -124,8 +124,8 @@ NavigatorWidget.prototype.replaceFirstTitleInStory = function(storyList,oldTitle
 	}
 };
 
-NavigatorWidget.prototype.addToStory = function(title,fromTitle) {
-	this.wiki.addToStory(title,fromTitle,this.storyTitle,{openLinkFromInsideRiver: this.getAttribute("openLinkFromInsideRiver","top"),openLinkFromOutsideRiver: this.getAttribute("openLinkFromOutsideRiver","top")});
+NavigatorWidget.prototype.addToStory = function(title,fromTitle,storyTitle) {
+	this.wiki.addToStory(title,fromTitle,(storyTitle) ? storyTitle : this.storyTitle,{openLinkFromInsideRiver: this.getAttribute("openLinkFromInsideRiver","top"),openLinkFromOutsideRiver: this.getAttribute("openLinkFromOutsideRiver","top")});
 };
 
 /*
@@ -133,8 +133,8 @@ Add a new record to the top of the history stack
 title: a title string or an array of title strings
 fromPageRect: page coordinates of the origin of the navigation
 */
-NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
-	this.wiki.addToHistory(title,fromPageRect,this.historyTitle);
+NavigatorWidget.prototype.addToHistory = function(title,fromPageRect,historyTitle) {
+	this.wiki.addToHistory(title,fromPageRect,(historyTitle) ? historyTitle : this.historyTitle);
 };
 
 /*
@@ -143,9 +143,9 @@ Handle a tm-navigate event
 NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 	event = $tw.hooks.invokeHook("th-navigating",event);
 	if(event.navigateTo) {
-		this.addToStory(event.navigateTo,event.navigateFromTitle);
+		this.addToStory(event.navigateTo,event.navigateFromTitle,event.storyTitle);
 		if(!event.navigateSuppressNavigation) {
-			this.addToHistory(event.navigateTo,event.navigateFromClientRect);
+			this.addToHistory(event.navigateTo,event.navigateFromClientRect,event.historyTitle);
 		}
 	}
 	return false;
@@ -171,6 +171,9 @@ NavigatorWidget.prototype.handleCloseAllTiddlersEvent = function(event) {
 NavigatorWidget.prototype.handleCloseOtherTiddlersEvent = function(event) {
 	var title = event.param || event.tiddlerTitle;
 	this.saveStoryList([title]);
+	if(!event.navigateSuppressNavigation) {
+		this.addToHistory(title,event.navigateFromClientRect,event.historyTitle);
+	}
 	return false;
 };
 
