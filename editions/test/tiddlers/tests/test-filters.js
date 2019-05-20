@@ -40,6 +40,7 @@ describe("Filter tests", function() {
 
 	describe("With all indexers", function() {
 		var wiki = setupWiki();
+		wiki.getIndexer("FieldIndexer").setMaxIndexedValueLength(8); // Note that JoeBloggs is 9, and JohnDoe is 7
 		runTests(wiki);
 	});
 
@@ -144,6 +145,12 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("[field:modifier[JoeBloggs]]").join(",")).toBe("TiddlerOne");
 		expect(wiki.filterTiddlers("[!field:modifier[JoeBloggs]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
 		expect(wiki.filterTiddlers("[!is[system]!field:modifier[JoeBloggs]]").join(",")).toBe("Tiddler Three,a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[modifier[JohnDoe]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[!modifier[JohnDoe]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("[!is[system]!modifier[JohnDoe]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("[field:modifier[JohnDoe]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[!field:modifier[JohnDoe]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("[!is[system]!field:modifier[JohnDoe]]").join(",")).toBe("TiddlerOne");
 	});
 
 	it("should handle the regexp operator", function() {
@@ -355,7 +362,7 @@ function runTests(wiki) {
 			type: "widget",
 			children: [{type: "widget", children: []}]
 		},{
-			wiki: $tw.wiki,
+			wiki: wiki,
 			document: $tw.document
 		});
 		rootWidget.makeChildWidgets();

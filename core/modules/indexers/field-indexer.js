@@ -12,13 +12,20 @@ Indexes the tiddlers with each field value
 /*global modules: false */
 "use strict";
 
-var MAXIMUM_INDEXED_VALUE_LENGTH = 128;
+var DEFAULT_MAXIMUM_INDEXED_VALUE_LENGTH = 128;
 
 function FieldIndexer(wiki) {
 	this.wiki = wiki;
 	this.index = null;
+	this.maxIndexedValueLength = DEFAULT_MAXIMUM_INDEXED_VALUE_LENGTH;
 	this.addIndexMethods();
 }
+
+// Provided for testing
+FieldIndexer.prototype.setMaxIndexedValueLength = function(length) {
+	this.index = null;
+	this.maxIndexedValueLength = length;
+};
 
 FieldIndexer.prototype.addIndexMethods = function() {
 	var self = this;
@@ -68,7 +75,7 @@ FieldIndexer.prototype.buildIndexForField = function(name) {
 		if(name in tiddler.fields) {
 			var value = tiddler.getFieldString(name);
 			// Skip any values above the maximum length
-			if(value.length < MAXIMUM_INDEXED_VALUE_LENGTH) {
+			if(value.length < self.maxIndexedValueLength) {
 				baseIndex[value] = baseIndex[value] || [];
 				baseIndex[value].push(title);
 			}
@@ -82,6 +89,7 @@ oldTiddler: old tiddler value, or null for creation
 newTiddler: new tiddler value, or null for deletion
 */
 FieldIndexer.prototype.update = function(oldTiddler,newTiddler) {
+	var self = this;
 	// Don't do anything if the index hasn't been built yet
 	if(this.index === null) {
 		return;
@@ -106,7 +114,7 @@ FieldIndexer.prototype.update = function(oldTiddler,newTiddler) {
 		$tw.utils.each(this.index,function(indexEntry,name) {
 			if(name in newTiddler.fields) {
 				var value = newTiddler.getFieldString(name);
-				if(value.length < MAXIMUM_INDEXED_VALUE_LENGTH) {
+				if(value.length < self.maxIndexedValueLength) {
 					indexEntry[value] = indexEntry[value] || [];
 					indexEntry[value].push(newTiddler.fields.title);
 				}
@@ -118,7 +126,7 @@ FieldIndexer.prototype.update = function(oldTiddler,newTiddler) {
 // Lookup the given field returning a list of tiddler titles
 FieldIndexer.prototype.lookup = function(name,value) {
 	// Fail the lookup if the value is too long
-	if(value.length >= MAXIMUM_INDEXED_VALUE_LENGTH) {
+	if(value.length >= this.maxIndexedValueLength) {
 		return null;
 	}
 	// Update the index if it has yet to be built
