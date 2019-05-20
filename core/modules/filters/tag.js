@@ -16,7 +16,7 @@ Filter operator for checking for the presence of a tag
 Export our filter function
 */
 exports.tag = function(source,operator,options) {
-	var results = [];
+	var results = [],indexedResults;
 	if((operator.suffix || "").toLowerCase() === "strict" && !operator.operand) {
 		// New semantics:
 		// Always return copy of input if operator.operand is missing
@@ -37,7 +37,10 @@ exports.tag = function(source,operator,options) {
 		} else {
 			// Returns empty results if operator.operand is missing
 			if(source.byTag) {
-				results = source.byTag(operator.operand);
+				indexedResults = source.byTag(operator.operand);
+				if(indexedResults) {
+					return indexedResults;
+				}
 			} else {
 				tiddlers = options.wiki.getTiddlersWithTag(operator.operand);
 				source(function(tiddler,title) {

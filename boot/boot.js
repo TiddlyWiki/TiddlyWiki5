@@ -1036,10 +1036,15 @@ $tw.Wiki = function(options) {
 			}
 			return shadowTiddlerTitles;
 		},
+		enableIndexers = options.enableIndexers || null, // Array of indexer names to enable, or null to use all available indexers
 		indexers = [],
 		indexersByName = Object.create(null);
 
 	this.addIndexer = function(indexer,name) {
+		// Bail if this indexer is not enabled
+		if(enableIndexers && enableIndexers.indexOf(name) === -1) {
+			return;
+		}
 		indexers.push(indexer);
 		indexersByName[name] = indexer;
 	};

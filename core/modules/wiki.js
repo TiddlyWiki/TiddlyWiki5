@@ -488,7 +488,52 @@ exports.getOrphanTitles = function() {
 Retrieves a list of the tiddler titles that are tagged with a given tag
 */
 exports.getTiddlersWithTag = function(tag) {
-	return this.getIndexer("TagIndexer").lookup(tag);
+	// Try to use the indexer
+	var self = this,
+		tagIndexer = this.getIndexer("TagIndexer"),
+		results = tagIndexer && tagIndexer.lookup(tag);
+	if(!results) {
+		// If not available, perform a manual scan
+		results = this.getGlobalCache("taglist-" + tag,function() {
+			var tagmap = self.getTagMap();
+			return self.sortByList(tagmap[tag],tag);
+		});
+	}
+	return results;
+};
+
+/*
+Get a hashmap by tag of arrays of tiddler titles
+*/
+exports.getTagMap = function() {
+	var self = this;
+	return this.getGlobalCache("tagmap",function() {
+		var tags = Object.create(null),
+			storeTags = function(tagArray,title) {
+				if(tagArray) {
+					for(var index=0; index<tagArray.length; index++) {
+						var tag = tagArray[index];
+						if($tw.utils.hop(tags,tag)) {
+							tags[tag].push(title);
+						} else {
+							tags[tag] = [title];
+						}
+					}
+				}
+			},
+			title, tiddler;
+		// Collect up all the tags
+		self.eachShadow(function(tiddler,title) {
+			if(!self.tiddlerExists(title)) {
+				tiddler = self.getTiddler(title);
+				storeTags(tiddler.fields.tags,title);
+			}
+		});
+		self.each(function(tiddler,title) {
+			storeTags(tiddler.fields.tags,title);
+		});
+		return tags;
+	});
 };
 
 /*

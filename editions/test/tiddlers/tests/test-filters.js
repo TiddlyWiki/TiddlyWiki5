@@ -33,9 +33,19 @@ describe("Filter tests", function() {
 		);
 	});
 
+	describe("With no indexers", function() {
+		var wiki = setupWiki({enableIndexers: []});
+		runTests(wiki);
+	});
 
+	describe("With all indexers", function() {
+		var wiki = setupWiki();
+		runTests(wiki);
+	});
+
+function setupWiki(wikiOptions) {
 	// Create a wiki
-	var wiki = new $tw.Wiki({
+	var wiki = new $tw.Wiki($tw.utils.extend({
 		shadowTiddlers: {
 			"$:/TiddlerFive": {
 				tiddler: new $tw.Tiddler({title: "$:/TiddlerFive",
@@ -64,8 +74,8 @@ describe("Filter tests", function() {
 				})
 			}
 		}
-	});
-
+	},
+	wikiOptions));
 	// Add a few  tiddlers
 	wiki.addTiddler({
 		title: "TiddlerOne",
@@ -99,8 +109,11 @@ describe("Filter tests", function() {
 		list: "[[Tiddler Three]] [[TiddlerOne]]",
 		empty: "",
 		modifier: "JohnDoe"});
+	return wiki;
+}
 
-	// Our tests
+// Our tests
+function runTests(wiki) {
 
 	it("should handle the ~ prefix", function() {
 		expect(wiki.filterTiddlers("[modifier[JoeBloggs]] ~[[No such tiddler]]").join(",")).toBe("TiddlerOne");
@@ -387,6 +400,8 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("1 2 3 4 +[max[2]]").join(",")).toBe("2,2,3,4");
 		expect(wiki.filterTiddlers("1 2 3 4 +[min[2]]").join(",")).toBe("1,2,2,2");
 	});
+
+}
 
 });
 
