@@ -13,7 +13,7 @@ The ~TiddlyWiki core adds several `attributes` to the rendered content. With tho
 For example this tiddler is named: "{{!!title}}" so the attribute looks like this: 
 
 ```
-data-tiddler-title="Custom styles by title"
+data-tiddler-title="Custom styles by data-tiddler-title"
 ```
 
 !! Examples
@@ -21,7 +21,7 @@ data-tiddler-title="Custom styles by title"
 The following CSS is defined in [[Custom data-styles]] and creates a blue border for exactly this tiddler.
 
 ```
-[data-tiddler-title="Custom styles by title"] {
+[data-tiddler-title="Custom styles by data-tiddler-title"] {
   border: 1px solid blue;
 }
 ```
