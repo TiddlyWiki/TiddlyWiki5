@@ -2074,10 +2074,17 @@ $tw.loadTiddlersNode = function() {
 	$tw.wiki.addTiddler($tw.loadPluginFolder($tw.boot.corePath));
 	// Load any extra plugins
 	$tw.utils.each($tw.boot.extraPlugins,function(name) {
-		var parts = name.split("/"),
-			type = parts[0];
-		if(parts.length  === 3 && ["plugins","themes","languages"].indexOf(type) !== -1) {
-			$tw.loadPlugins([parts[1] + "/" + parts[2]],$tw.config[type + "Path"],$tw.config[type + "EnvVar"]);
+		if(name.charAt(0) === "+") { // Relative path to plugin
+			var pluginFields = $tw.loadPluginFolder(name.substring(1));;
+			if(pluginFields) {
+				$tw.wiki.addTiddler(pluginFields);
+			}
+		} else {
+			var parts = name.split("/"),
+				type = parts[0];
+			if(parts.length  === 3 && ["plugins","themes","languages"].indexOf(type) !== -1) {
+				$tw.loadPlugins([parts[1] + "/" + parts[2]],$tw.config[type + "Path"],$tw.config[type + "EnvVar"]);
+			}			
 		}
 	});
 	// Load the tiddlers from the wiki directory
