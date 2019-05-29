@@ -181,15 +181,12 @@ function saveScrollPosition() {
 }
 
 function restoreScrollPosition() {
-	var str = window.localStorage.getItem(LOCAL_STORAGE_KEY_PREFIX + window.location.pathname),
-		json;
-	if(str) {
-		try {
-			json = JSON.parse(str);
-		} catch(e) {
-			// Ignore errors
-		};
-	}
+	var json;
+	try {
+		json = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY_PREFIX + window.location.pathname));
+	} catch(e) {
+		// Ignore errors
+	};
 	return json;
 }
 
