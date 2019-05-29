@@ -355,3 +355,5 @@ Jesse Weinstein, @JesseWeinstein, 2019/01/14
 Adam Sherwood, @admls, 2019/01/27
 
 Joshua Fontany, @joshuafontany, 2019/03/07
+
+Dong Zhihong, @donmor, 2019/05/29
