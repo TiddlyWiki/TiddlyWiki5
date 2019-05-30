@@ -1,0 +1,8 @@
+title: $:/language/Help/deletetiddlers
+description: Deletes a group of tiddlers
+
+Deletes a group of tiddlers identified by a filter.
+
+```
+--deletetiddlers <filter>
+```
