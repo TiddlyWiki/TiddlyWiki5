@@ -3,14 +3,15 @@ created: 20171109172705241
 delivery: Google Drive Add-on
 description: Google Drive add-on to save TiddlyWiki files
 method: save
-modified: 20171113134317867
+modified: 20190531161707260
 tags: Saving plugins Resources Android Chrome Firefox InternetExplorer iOS Linux Mac Opera PHP Safari Windows
 title: TiddlyDrive Add-on for Google Drive by Joshua Stubbs
 type: text/vnd.tiddlywiki
-url: https://chrome.google.com/webstore/detail/tiddly-drive/oaphhjhbbabdjnpjpiliepphpmnioolo
+url: https://lordratte.gitlab.io/tiddlydrive/#installation-guide
 
 An add-on for Google Drive that allows TiddlyWiki files stored there to be opened and saved directly
 
+To find out how to add it to your account, go to the project's info page: 
 {{!!url}}
 
 <<<
