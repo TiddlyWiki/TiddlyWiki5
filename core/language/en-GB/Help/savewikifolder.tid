@@ -1,7 +1,7 @@
 title: $:/language/Help/savewikifolder
 description: Saves a wiki to a new wiki folder
 
-Saves the current wiki as a wiki folder, including tiddlers, plugins and configuration:
+<<.from-version "5.1.20">> Saves the current wiki as a wiki folder, including tiddlers, plugins and configuration:
 
 ```
 --savewikifolder <wikifolderpath> [<filter>]
