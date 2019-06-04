@@ -279,15 +279,7 @@ NavigatorWidget.prototype.makeDraftTiddler = function(targetTitle) {
 Generate a title for the draft of a given tiddler
 */
 NavigatorWidget.prototype.generateDraftTitle = function(title) {
-	var c = 0,
-		draftTitle,
-		username = this.wiki.getTiddlerText("$:/status/UserName"),
-		attribution = username ? " by " + username : "";
-	do {
-		draftTitle = "Draft " + (c ? (c + 1) + " " : "") + "of '" + title + "'" + attribution;
-		c++;
-	} while(this.wiki.tiddlerExists(draftTitle));
-	return draftTitle;
+	return this.wiki.generateDraftTitle(title);
 };
 
 // Take a tiddler out of edit mode, saving the changes

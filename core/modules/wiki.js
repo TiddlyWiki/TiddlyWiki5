@@ -1403,6 +1403,21 @@ exports.addToStory = function(title,fromTitle,storyTitle,options) {
 };
 
 /*
+Generate a title for the draft of a given tiddler
+*/
+exports.generateDraftTitle = function(title) {
+	var c = 0,
+		draftTitle,
+		username = this.getTiddlerText("$:/status/UserName"),
+		attribution = username ? " by " + username : "";
+	do {
+		draftTitle = "Draft " + (c ? (c + 1) + " " : "") + "of '" + title + "'" + attribution;
+		c++;
+	} while(this.tiddlerExists(draftTitle));
+	return draftTitle;
+};
+
+/*
 Invoke the available upgrader modules
 titles: array of tiddler titles to be processed
 tiddlers: hashmap by title of tiddler fields of pending import tiddlers. These can be modified by the upgraders. An entry with no fields indicates a tiddler that was pending import has been suppressed. When entries are added to the pending import the tiddlers hashmap may have entries that are not present in the titles array
