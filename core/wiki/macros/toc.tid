@@ -13,7 +13,7 @@ tags: $:/tags/Macro
 </$set> 
 \end
 
-\define getItemClass() [all[current]]-[<tv-history-list>get[current-tiddler]]
+\define getItemClass() [all[current]]-[<tv-history-list>get[focused-tiddler]]
 
 \define toc-body(tag,sort:"")
 \whitespace trim
@@ -45,7 +45,7 @@ tags: $:/tags/Macro
 <$vars toc-state={{{ [[$:/state/toc]addsuffix[/]addsuffix<name>addsuffix<path>addsuffix[/]addsuffix<currentTiddler>] }}} >
   <$set name="toc-item-class" filter=<<getItemClass>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
-    <$link  tooltip="">
+    <$link tooltip="">
       <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
         <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
           {{$:/core/images/right-arrow}}&nbsp;
