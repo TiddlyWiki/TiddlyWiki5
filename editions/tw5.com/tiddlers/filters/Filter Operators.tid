@@ -1,5 +1,6 @@
+bag: default
 created: 20140410103123179
-modified: 20190206140446821
+modified: 20190607141505033
 tags: Filters
 title: Filter Operators
 type: text/vnd.tiddlywiki
@@ -30,7 +31,9 @@ The following table lists all core operators, the most common ones marked ✓. T
 <th align="center">✓</th>
 <th align="center">`!`</th>
 </tr>
-<<.operator-rows "[tag[Filter Operators]!tag[Order Operators]!tag[Mathematics Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
+<<.operator-rows "[tag[Filter Operators]!tag[Order Operators]!tag[Mathematics Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]!tag[Data Operators]sort[]]">>
+<<.group-heading "Data Operators">>
+<<.operator-rows "[tag[Data Operators]sort[]]">>
 <<.group-heading "Order Operators">>
 <<.operator-rows "[tag[Filter Operators]tag[Order Operators]!tag[Listops Operators]!tag[Mathematics Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
 <<.group-heading "Listops Operators">>

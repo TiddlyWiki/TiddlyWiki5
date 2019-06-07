@@ -1,9 +1,11 @@
-created: 20150203140000000
-modified: 20150203140000000
-tags: [[Filter Operators]] [[Field Operators]]
-title: getindex Operator
+bag: default
 caption: getindex
+created: 20150203140000000
+modified: 20190607140948137
 op-purpose: select all values of a data property in the input titles
+tags: [[Data Operators]] [[Filter Operators]]
+title: getindex Operator
+type: text/vnd.tiddlywiki
 
 <$macrocall $name=".operator-def"
 input="a [[selection of titles|Title Selection]]"
