@@ -1,0 +1,46 @@
+bag: default
+created: 20190607104842485
+modified: 20190607190641638
+tags: [[Operator Examples]] [[keyvalues Operator]]
+title: keyvalues Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".operator-example" n="1" eg="[[data]keyvalues[]]" ie="use the data-tiddler: <<.word data>> and show all keys and values"/>
+<$macrocall $name=".operator-example" n="2" eg="[[data]keyvalues:value,key:..[]]" ie="use the data-tiddler: <<.word 'data'>> and show all keys and values. Use a `..` string as separator. Values come first"/>
+<$macrocall $name=".operator-example" n="3" eg="[[data]keyvalues:value:+[]]" ie="same as above, but only show the value. The separator will be ignored, if only 1 element is shown"/>
+<$macrocall $name=".operator-example" n="4" eg="[tag[test-data]keyvalues[]]" ie="use all data-tiddlers tagged <<.op 'test-data'>>"/>
+<$macrocall $name=".operator-example" n="5" eg="[tag[test-data]keyvalues[]sort[]]" ie="same as above, but ''sorted''"/>
+
+!! The following examples work with [[regexp Operator]] rules. 
+
+<$macrocall $name=".operator-example" n="6" eg="[tag[test-data]keyvalues[test]]" ie="filter for keys that ''contain'' word <<.word test>>"/>
+<$macrocall $name=".operator-example" n="7" eg="[tag[test-data]keyvalues[^test]]" ie="filter for keys that ''start'' with the word <<.word test>>"/>
+<$macrocall $name=".operator-example" n="8" eg="[tag[test-data]keyvalues[test$]]" ie="filter for keys that ''end'' with the word <<.word test>>"/>
+<$set name="digit-pattern" value="^[0][3-9]">
+`<$set name="digit-pattern" value="^[0][3-9]">`
+<$macrocall $name=".operator-example" n="9" eg="[tag[test-data]keyvalues<digit-pattern>]" ie="use all data-tiddlers tagged <<.op 'test-data'>>. only show key 03 up to 09"/>
+<$macrocall $name=".operator-example" n="10" eg="[tag[test-data]keyvalues:value<digit-pattern>]" ie="same as above, but only show <<.field values>>"/>
+</$set>
+
+A bit more code to test with: 
+
+```
+<$set name="digit-pattern" value="[0][0-9]">
+<$list filter="[tag[test-data]keyvalues:key,value:--><digit-pattern>sort[]]" variable=item>
+<<item>><br>
+</$list>
+</$set>
+```
+
+```
+<$set name="digit-pattern" value="[0][0-9]">
+<$list filter="[tag[test-data]keyvalues:key,value:--><digit-pattern>sum[]]" variable=item>
+<<item>><br>
+</$list>
+</$set>
+```
+
+!! Some Useful Links
+
+* ~RegExp Info: https://www.regular-expressions.info/javascript.html
+* ~RegExp Playground: https://regexr.com/
