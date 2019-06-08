@@ -24,7 +24,7 @@ exports.keyvalues = function(source,operator,options) {
 		useKey = true,
 		useValue = false,
 		v1, v2, flags, pass, match, data,
-		regexp, regexpstring;
+		regexp, regexpString;
 
 	// Process key, value parameters
 	if(operator.suffixes && operator.suffixes[0].length > 0) {
