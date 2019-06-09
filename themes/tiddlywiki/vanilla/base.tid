@@ -2379,6 +2379,11 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	flex: 1 0 50%;
 }
 
+.tc-item-selected > a.tc-tiddlylink,
+.toc-item-selected > a.tc-tiddlylink {
+    color: <<colour sidebar-tiddler-link-foreground-hover>>;
+}
+
 /*
 ** Dirty indicator
 */
