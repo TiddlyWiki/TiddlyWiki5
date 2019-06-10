@@ -13,7 +13,7 @@ tags: $:/tags/Macro
 </$set> 
 \end
 
-\define getItemClass() [all[current]]-[<tv-history-list>get[focused-tiddler]]
+\define getItemClass() [all[current]] -[<tv-history-list>get[focused-tiddler]]
 
 \define toc-body(tag,sort:"")
 \whitespace trim
