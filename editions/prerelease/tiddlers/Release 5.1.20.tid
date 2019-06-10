@@ -13,6 +13,11 @@ Added several new [[Mathematics Operators]] for working with numbers: [[negate|n
 
 Added several new string operators: [[length|length Operator]], [[uppercase|uppercase Operator]], [[lowercase|lowercase Operator]], [[trim|trim Operator]], [[concat|concat Operator]], [[split|split Operator]] and [[join|join Operator]].
 
+There is now finer control over TiddlyWiki's default behaviour of removing duplicates from filter resulst, making it much easier to work with the new mathematics and string operators:
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/37bb75f0cf446d62eb45d07b9f9b0aa14814a43f]] support for new `=` prefix for merging filter runs without removing duplicates
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/18fe112da7d3ac210a5a0b9cf73fe9050717d4e3]] option for the [[enlist Operator]] to not remove duplicates
+
 !! Plugin Improvements
 
 New and improved plugins:
@@ -22,6 +27,7 @@ New and improved plugins:
 * Several improvements to the [[CodeMirror Plugin]], including [[adding|https://github.com/Jermolene/TiddlyWiki5/pull/3810]] support for smart indent
 * Several improvements to the [[Dynaview Plugin]], including [[adding|https://github.com/Jermolene/TiddlyWiki5/commit/a9e595c3f633391003224e499440cdeb8560c055]] support for restoring the scroll position at startup from local storage
 * Several improvements to the [[Amazon Web Services Plugin]], including [[adding|https://github.com/Jermolene/TiddlyWiki5/commit/fffd0ee9e17d6b6a561648a42f0f200d4bb04046]] support for specifying credentials
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3898]] support for language aliases with the [[Highlight Plugin]]
 
 !! Translation Improvements
 
@@ -45,7 +51,6 @@ New and improved translations:
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e5f3301c1c36e8add4ed89ab1bd53a9b68411d3f]] a warning when core JavaScript modules are overwritten via import
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3654]] prompt for references when renaming a tiddler
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0e6855eba8945e023cc5ef19809cfb6d6025627b]] a new filter preset for advanced search for "tiddlers modified this session"
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3898]] support for language aliases with the [[Highlight Plugin]]
 
 !! Hackability Improvements
 
