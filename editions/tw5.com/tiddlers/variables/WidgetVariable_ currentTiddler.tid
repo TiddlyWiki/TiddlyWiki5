@@ -9,6 +9,8 @@ The <<.def currentTiddler>> [[variable|Variables]] contains the title of the [[c
 
 Several aspects of WikiText use this tiddler as their context. As a result, within a <<.wlink ListWidget>> widget or a [[template tiddler|TemplateTiddlers]], there is often no need to explicitly specify a tiddler title.
 
+The value of currentTiddler is stored in the $:/HistoryList `current-tiddler` field.
+
 Compare <<.vlink storyTiddler>>.
 
 <<.variable-examples "currentTiddler">>
