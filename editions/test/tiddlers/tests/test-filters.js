@@ -408,6 +408,36 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("1 2 3 4 +[min[2]]").join(",")).toBe("1,2,2,2");
 	});
 
+	it("should handle the allafter operator", function() {
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter[]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter:include[]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter[1]]").join(",")).toBe("2,3,4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter:include[1]]").join(",")).toBe("1,2,3,4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter[2]]").join(",")).toBe("3,4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter:include[2]]").join(",")).toBe("2,3,4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter[3]]").join(",")).toBe("4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter:include[3]]").join(",")).toBe("3,4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter[4]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter:include[4]]").join(",")).toBe("4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter[5]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter:include[5]]").join(",")).toBe("");
+	});
+
+	it("should handle the allbefore operator", function() {
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore[]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore:include[]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore[1]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore:include[1]]").join(",")).toBe("1");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore[2]]").join(",")).toBe("1");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore:include[2]]").join(",")).toBe("1,2");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore[3]]").join(",")).toBe("1,2");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore:include[3]]").join(",")).toBe("1,2,3");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore[4]]").join(",")).toBe("1,2,3");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore:include[4]]").join(",")).toBe("1,2,3,4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore[5]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore:include[5]]").join(",")).toBe("");
+	});
+
 }
 
 });
