@@ -30,15 +30,11 @@ exports.trim = makeStringBinaryOperator(
 	function(a) {return [$tw.utils.trim(a)];}
 );
 
-exports.concat = makeStringBinaryOperator(
-	function(a,b) {return ["" + a + b];}
-);
-
 exports.split = makeStringBinaryOperator(
 	function(a,b) {return ("" + a).split(b).filter(function(str) {return !!str;});}
 );
 
-exports.join = makeStringArrayOperator(
+exports.join = makeStringReducingOperator(
 	function(accumulator,value,operand) {
 		return "" + (accumulator ? accumulator + (operand || "") + value : value);
 	}
@@ -54,7 +50,7 @@ function makeStringBinaryOperator(fnCalc) {
 	};
 }
 
-function makeStringArrayOperator(fnCalc,initialValue) {
+function makeStringReducingOperator(fnCalc,initialValue) {
 	initialValue = initialValue || "";
 	return function(source,operator,options) {
 		var result = [];
@@ -66,5 +62,16 @@ function makeStringArrayOperator(fnCalc,initialValue) {
 		},initialValue)];
 	};
 }
+
+exports.splitregexp = function(source,operator,options) {
+	var result = [],
+		suffix = operator.suffix || "",
+		flags = (suffix.indexOf("m") !== -1 ? "m" : "") + (suffix.indexOf("i") !== -1 ? "i" : ""),
+		regExp = new RegExp(operator.operand || "",flags);
+	source(function(tiddler,title) {
+		Array.prototype.push.apply(result,title.split(regExp));
+	});
+	return result;
+};
 
 })();
