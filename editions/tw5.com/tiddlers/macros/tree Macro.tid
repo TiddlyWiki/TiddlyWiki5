@@ -5,11 +5,13 @@ tags: Macros [[Core Macros]]
 title: tree Macro
 type: text/vnd.tiddlywiki
 
-The <<.def tree>> [[macro|Macros]] renders an expandable tree view based on tiddler titles.
+The <<.def tree>> [[macro|Macros]] renders an expandable tree view based on a prefix and separator within tiddler titles.
 
 !! Parameters
 
 ;prefix
-: The prefix from which to generate the tree, e.g. `$:/`
+: The prefix from which to generate the tree, defaults to `$:/`
+;separator
+: The separator between parts of the tiddler titles, defaults to `/`
 
 <<.macro-examples "tree">>
