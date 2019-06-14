@@ -69,7 +69,7 @@ New and improved translations:
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c036c228269fc30d0df770a7c7713fd9af829df7]] $:/info/browser/language to the InfoMechanism
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f047e7cbf50edcf4775b50bdebc3f704970b8cde]] an example of using StartupActions to set the default language
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/edd3156430dd94b0ced630a1b70f2e2ef0ff6c36]] importing of JSON files to verify whether they are valid tiddler files, and import them as plain JSON if not
-* [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/issues/3974]] the ListWidget to use the title of the target tiddler as a default if it has no content
+* [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/issues/3974]] the LinkWidget to use the title of the target tiddler as a default if it has no content
 
 !! Bug Fixes
 
