@@ -5,9 +5,9 @@ tags: $:/tags/Macro
 \whitespace trim
 <$set name="tv-wikilinks" value=no>
   <$list filter="[all[current]has[caption]]" 
-      emptyMessage="""<$transclude field=title><$view field=title/></$transclude>""">
+      emptyMessage="<$view field=title format=text/>">
      <$transclude field=caption>
-       <$view field="title"/>
+       <$view field=title format=text/>
      </$transclude>
   </$list>
 </$set> 
