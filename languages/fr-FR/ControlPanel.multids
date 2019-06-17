@@ -57,7 +57,7 @@ Parsing/Caption: Analyse
 Parsing/Hint: Ici, vous pouvez activer/désactiver globalement les règles de l'analyseur du wiki. Les changements seront effectifs après enregistrement et rechargement de votre wiki. Désactiver certaines règles peut empêcher <$text text="TiddlyWiki"/> de fonctionner correctement. Pour restaurer le fonctionnement normal, utilisez le [[safe mode|https://tiddlywiki.com/#SafeMode]].
 Parsing/Block/Caption: Règles d'analyse Block
 Parsing/Inline/Caption: Règles d'analyse Inline
-Parsing/Pragma/Caption: Règles d'analyse PragmaP
+Parsing/Pragma/Caption: Règles d'analyse Pragma
 Plugins/Add/Caption: Ajouter des plugins
 Plugins/Add/Hint: Installer des plugins à partir de la bibliothèque officielle
 Plugins/AlreadyInstalled/Hint: Ce plugin est déjà installé dans la version <$text text=<<installedVersion>>/>
@@ -88,6 +88,15 @@ Saving/DownloadSaver/Hint: Ces paramètres s'appliquent à l'enregistreur de té
 Saving/General/Caption: Général
 Saving/General/Hint: Ces paramètres s'appliquent à tous les enregistreurs chargés
 Saving/Hint: Paramètres pour enregistrer le ~TiddlyWiki complet dans un seul fichier, via un module enregistreur
+Saving/GitHub/Branch: Branche cible dans laquelle enregistrer (`master` par défaut)
+Saving/GitHub/Caption: Enregistreur ~GitHub
+Saving/GitHub/Description: Ces paramètres ne sont utilisés que pour l'enregistrement sur ~GitHub
+Saving/GitHub/ServerURL: URL du serveur (`https://api.github.com` par défaut)
+Saving/GitHub/Filename: Nom du fichier cible (par ex. `index.html`)
+Saving/GitHub/Password: Mot de passe, jeton OAUTH, ou //personal access token//
+Saving/GitHub/Path: Chemin vers le fichier cible (par ex. `/wiki/`)
+Saving/GitHub/Repo: //Repository// cible (par ex. `Jermolene/TiddlyWiki5`)
+Saving/GitHub/UserName: Nom d'utilisateur
 Saving/TiddlySpot/Advanced/Heading: Paramètres avancés
 Saving/TiddlySpot/BackupDir: Dossier des //sauvegardes//
 Saving/TiddlySpot/Backups: Sauvegardes
