@@ -5,7 +5,7 @@ op-input: a [[selection of titles|Title Selection]]
 op-output: the input titles split into separate items according to the specified separator <<.place S>>
 op-parameter: The substring at which to split each title
 op-parameter-name: S
-op-purpose: returns each item in the list split into separate strings according to the specified separator <<.place S>>
+op-purpose: returns each item in the list split into separate strings according to the specified separator <<.place S>>; duplicates are <<.em not>> removed
 tags: [[Filter Operators]]
 title: split Operator
 type: text/vnd.tiddlywiki
