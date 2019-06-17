@@ -10,4 +10,6 @@ type: text/vnd.tiddlywiki
 
 <<.from-version "5.1.20">> See [[Mathematics Operators]] for an overview.
 
+<<.tip " The trunc operator rounds towards zero. To round away from zero, use [[untrunc|untrunc Operator]].">>
+
 <<.operator-examples "trunc">>

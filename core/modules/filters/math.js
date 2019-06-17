@@ -43,6 +43,10 @@ exports.trunc = makeNumericBinaryOperator(
 	function(a) {return Math.trunc(a)}
 );
 
+exports.untrunc = makeNumericBinaryOperator(
+	function(a) {return Math.ceil(Math.abs(a)) * Math.sign(a)}
+);
+
 exports.sign = makeNumericBinaryOperator(
 	function(a) {return Math.sign(a)}
 );
