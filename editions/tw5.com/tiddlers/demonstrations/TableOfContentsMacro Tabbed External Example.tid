@@ -1,13 +1,15 @@
-created: 20150221205834000
-modified: 20150221210006000
-title: Example Table of Contents: Tabbed External
 caption: Tabbed External
+created: 20150221205834000
+modified: 20190617112945147
 tags: table-of-contents-example
-order: 6
+title: Example Table of Contents: Tabbed External
+type: text/vnd.tiddlywiki
 
 <$macrocall
 	$name="toc-tabbed-external-nav"
 	tag="TableOfContents"
+        sort=""
+        exclude=""
 	selectedTiddler="$:/temp/toc/selectedTiddler"
 	unselectedText="<p>Select a topic in the table of contents. Click the arrow to expand a topic.</p>"
 	missingText="<p>Missing tiddler.</p>"
@@ -17,6 +19,8 @@ order: 6
 <$macrocall
 	$name="toc-tabbed-external-nav"
 	tag="TableOfContents"
+        sort=""
+        exclude=""
 	selectedTiddler="$:/temp/toc/selectedTiddler"
 	unselectedText="<p>Select a topic in the table of contents. Click the arrow to expand a topic.</p>"
 	missingText="<p>Missing tiddler.</p>"

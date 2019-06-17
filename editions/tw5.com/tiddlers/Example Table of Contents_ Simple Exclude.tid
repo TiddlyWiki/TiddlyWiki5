@@ -1,0 +1,22 @@
+bag: default
+caption: Simple Exclude
+created: 20190617113812401
+modified: 20190617113843355
+tags: table-of-contents-example
+title: Example Table of Contents: Simple Exclude
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1"
+eg="""<div class="tc-table-of-contents">
+<<toc tag:"Contents" sort:"" exclude:"">>
+</div>"""/>
+
+<$macrocall $name=".example" n="2"
+eg="""<div class="tc-table-of-contents">
+<<toc tag:"Contents" sort:"" exclude:"First">>
+</div>"""/>
+
+<$macrocall $name=".example" n="3"
+eg="""<div class="tc-table-of-contents">
+<<toc tag:"Contents" sort:"" exclude:"[tag[First]] Third">>
+</div>"""/>

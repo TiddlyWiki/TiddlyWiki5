@@ -1,5 +1,5 @@
 created: 20150221193056000
-modified: 20181106221404624
+modified: 20190617112352834
 tags: [[Table-of-Contents Macros]] [[Macro Examples]]
 title: Table-of-Contents Macros (Examples)
 type: text/vnd.tiddlywiki
@@ -17,4 +17,4 @@ You can explore the same structure with these clickable tag pills:
 
 The tabbed example uses the real TableOfContents of this documentation instead.
 
-<<tabs "[tag[table-of-contents-example]nsort[order]]" "Example Table of Contents: Simple">>
+<<tabs "[tag[table-of-contents-example]]" "Example Table of Contents: Simple">>

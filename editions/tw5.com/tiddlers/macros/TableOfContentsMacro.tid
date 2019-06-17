@@ -1,5 +1,5 @@
 created: 20140919155729620
-modified: 20150221224034000
+modified: 20190617115456598
 tags: Macros [[Core Macros]]
 title: Table-of-Contents Macros
 type: text/vnd.tiddlywiki
@@ -44,8 +44,10 @@ To make a table of contents appear in the sidebar, see [[How to add a new tab to
 : The root tag that identifies the top level of the tree
 ;sort
 : An optional extra [[filter step|Filter Step]], e.g. `sort[title]`
+;exclude
+: An optional extra [[filter step|Filter Step]], e.g. `titles` or `[tag[title]]` 
 
-These two parameters are combined into a single [[filter expression|Filter Expression]] like this:
+The first two parameters are combined into a single [[filter expression|Filter Expression]] like this:
 
 > `[tag[$tag$]$sort$]`
 
