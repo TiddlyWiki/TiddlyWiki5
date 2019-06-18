@@ -63,7 +63,7 @@ It is often necessary to use triple quotes with the `actions` attribute. Alterna
 
 <$macrocall $name='wikitext-example-without-html' src='<$fieldmangler>
 <$set filter="[[Features]] [[Encryption]] +[tags[]]" name="tag">
-<$checkbox actions="""<$action-setfield  $field="tags" $value=<<tag>> /><$action-sendmessage $message="tm-add-tag" $param=<<tag>> />""" field="checked" checked="YES" unchecked="NO" >
+<$checkbox actions="""<$action-setfield  $field="tags" $value=<<tag>> ><$action-sendmessage $message="tm-add-tag" $param=<<tag>> />""" field="checked" checked="YES" unchecked="NO" >
     Add tags from tiddlers [[Features]] and [[Encryption]]
 </$checkbox>
 </$set>
