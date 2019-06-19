@@ -26,6 +26,10 @@ exports.lowercase = makeStringBinaryOperator(
 	function(a) {return [("" + a).toLowerCase()];}
 );
 
+exports.sentencecase = makeStringBinaryOperator(
+	function(a) {return [$tw.utils.toSentenceCase(a)];}
+);
+
 exports.trim = makeStringBinaryOperator(
 	function(a) {return [$tw.utils.trim(a)];}
 );

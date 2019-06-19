@@ -93,6 +93,13 @@ exports.trim = function(str) {
 };
 
 /*
+Convert a string to sentence case (ie capitalise each initial letter)
+*/
+exports.toSentenceCase = function(str) {
+  return (str || "").toLowerCase().replace(/(^|\s)\S/g, function(c) {return c.toUpperCase();});
+}
+
+/*
 Find the line break preceding a given position in a string
 Returns position immediately after that line break, or the start of the string
 */

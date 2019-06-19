@@ -1,0 +1,15 @@
+caption: sentencecase
+created: 20190619110607457
+modified: 20190619110736016
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input titles with each word capitalised
+op-purpose: returns each item in the list capitalised
+tags: [[Filter Operators]]
+title: sentencecase Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">>
+
+See also [[lowercase Operator]], [[uppercase Operator]].
+
+<<.operator-examples "sentencecase">>
