@@ -30,6 +30,10 @@ exports.sentencecase = makeStringBinaryOperator(
 	function(a) {return [$tw.utils.toSentenceCase(a)];}
 );
 
+exports.titlecase = makeStringBinaryOperator(
+	function(a) {return [$tw.utils.toTitleCase(a)];}
+);
+
 exports.trim = makeStringBinaryOperator(
 	function(a) {return [$tw.utils.trim(a)];}
 );
