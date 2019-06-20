@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 The new tiddler message creates a new draft tiddler and adds it to the current story. It requires the following properties on the `event` object:
 
 |!Name |!Description |
-|param |The optional title of a tiddler to use as a template for the new tiddler |
+|$param |The optional title of a tiddler to use as a template for the new tiddler |
 |paramObject |Optional hashmap of additional tiddler fields |
 |navigateFromTitle |Title of the tiddler from which the navigation to the new tiddler was initiated |
 
