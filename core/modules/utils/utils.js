@@ -93,12 +93,19 @@ exports.trim = function(str) {
 };
 
 /*
-Convert a string to sentence case (ie capitalise each initial letter)
+Convert a string to sentence case (ie capitalise first letter)
 */
 exports.toSentenceCase = function(str) {
-  return (str || "").toLowerCase().replace(/(^|\s)\S/g, function(c) {return c.toUpperCase();});
+	return (str || "").replace(/^\S/, function(c) {return c.toUpperCase();});
 }
 
+/*
+Convert a string to title case (ie capitalise each initial letter)
+*/
+exports.toTitleCase = function(str) {
+	return (str || "").replace(/(^|\s)\S/g, function(c) {return c.toUpperCase();});
+}
+	
 /*
 Find the line break preceding a given position in a string
 Returns position immediately after that line break, or the start of the string
