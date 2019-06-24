@@ -1,7 +1,7 @@
 created: 20190620140005348
 modified: 20190620140412655
-tags: [[uppercase Operator]] [[Operator Examples]]
-title: sentencecase Operator (Examples)
+tags: [[titlecase Operator]] [[Operator Examples]]
+title: titlecase Operator (Examples)
 type: text/vnd.tiddlywiki
 
 <<.operator-example 1 "[[abc def ghi jkl]titlecase[]]">>
