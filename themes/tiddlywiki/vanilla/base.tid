@@ -662,6 +662,11 @@ button.tc-untagged-label {
 	vertical-align: text-bottom;
 }
 
+.tc-edit-tags button.tc-remove-tag-button svg {
+	font-size: 0.7em;
+	vertical-align: middle;
+}
+
 .tc-tag-manager-table .tc-tag-label {
 	white-space: normal;
 }
