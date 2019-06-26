@@ -47,6 +47,8 @@ LoadedModules/Hint: 这些是当前已加载的模块之源码条目。斜体的
 Palette/Caption: 调色板
 Palette/Editor/Clone/Caption: 复制
 Palette/Editor/Clone/Prompt: 建议您修改前先复制此默认调色板
+Palette/Editor/Delete/Hint: 从当前调色板中删除此项
+Palette/Editor/Names/External/Show: 显示不属于当前调色板的颜色名称
 Palette/Editor/Prompt/Modified: 此默认调色板已被修改过
 Palette/Editor/Prompt: 编辑
 Palette/Editor/Reset/Caption: 重置
