@@ -15,11 +15,11 @@ The ''port'' parameter accepts two types of value:
 This example configures the server to listen on port 8090:
 
 ```
-tiddlywiki mywikifolder --listen port:8090
+tiddlywiki mywikifolder --listen port=8090
 ```
 
 This example configures the server to listen on the port specified in the environment variable `THE_PORT`:
 
 ```
-tiddlywiki mywikifolder --listen port:THE_PORT
+tiddlywiki mywikifolder --listen port=THE_PORT
 ```

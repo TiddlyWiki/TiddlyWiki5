@@ -1,5 +1,5 @@
 created: 20160424150551727
-modified: 20170101020235437
+modified: 20190115162340362
 tags: Learning
 title: Concatenating text and variables using macro substitution
 type: text/vnd.tiddlywiki
@@ -21,7 +21,7 @@ But that won't work. If you try this, the link will be interpreted very literall
 
 The solution is to use a macro to put the rendered value of `<<currentTiddler>>` together with the bit of additional text, `-Contact`.
 
-Create a macro either at the top of the tiddler or in a global tiddler (see [[Macros]]) like this:
+Create a macro at the top of the tiddler like this:
 
 ```
 \define linkup(link) [[Additional Info|$link$-Contact]]

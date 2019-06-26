@@ -43,6 +43,8 @@ function Server(options) {
 	$tw.utils.extend({},this.defaultVariables,options.variables);
 	// Initialise CSRF
 	this.csrfDisable = this.get("csrf-disable") === "yes";
+	// Initialize Gzip compression
+	this.enableGzip = this.get("gzip") === "yes";
 	// Initialise authorization
 	var authorizedUserName = (this.get("username") && this.get("password")) ? this.get("username") : "(anon)";
 	this.authorizationPrincipals = {
@@ -84,7 +86,8 @@ Server.prototype.defaultVariables = {
 	"tiddler-render-template": "$:/core/templates/server/static.tiddler.html",
 	"system-tiddler-render-type": "text/plain",
 	"system-tiddler-render-template": "$:/core/templates/wikified-tiddler",
-	"debug-level": "none"
+	"debug-level": "none",
+	"gzip": "no"
 };
 
 Server.prototype.get = function(name) {
@@ -229,17 +232,19 @@ Server.prototype.requestHandler = function(request,response) {
 /*
 Listen for requests
 port: optional port number (falls back to value of "port" variable)
-host: optional host address (falls back to value of "hist" variable)
+host: optional host address (falls back to value of "host" variable)
+prefix: optional prefix (falls back to value of "path-prefix" variable)
 */
-Server.prototype.listen = function(port,host) {
+Server.prototype.listen = function(port,host,prefix) {
 	// Handle defaults for port and host
 	port = port || this.get("port");
 	host = host || this.get("host");
+	prefix = prefix || this.get("path-prefix") || "";
 	// Check for the port being a string and look it up as an environment variable
 	if(parseInt(port,10).toString() !== port) {
 		port = process.env[port] || 8080;
 	}
-	$tw.utils.log("Serving on " + this.protocol + "://" + host + ":" + port,"brown/orange");
+	$tw.utils.log("Serving on " + this.protocol + "://" + host + ":" + port + prefix,"brown/orange");
 	$tw.utils.log("(press ctrl-C to exit)","red");
 	// Warn if required plugins are missing
 	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {

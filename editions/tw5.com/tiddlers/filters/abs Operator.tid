@@ -1,0 +1,13 @@
+caption: abs
+created: 20190611174137960
+modified: 20190611174208327
+op-input: a [[selection of titles|Title Selection]]
+op-output: the absolute value of the input numbers
+op-purpose: calculate the absolute value of a list of numbers
+tags: [[Unary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: abs Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">> See [[Mathematics Operators]] for an overview.
+
+<<.operator-examples "abs">>

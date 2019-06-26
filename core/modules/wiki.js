@@ -28,6 +28,16 @@ var USER_NAME_TITLE = "$:/status/UserName",
 	TIMESTAMP_DISABLE_TITLE = "$:/config/TimestampDisable";
 
 /*
+Add available indexers to this wiki
+*/
+exports.addIndexersToWiki = function() {
+	var self = this;
+	$tw.utils.each($tw.modules.applyMethods("indexer"),function(Indexer,name) {
+		self.addIndexer(new Indexer(self),name);
+	});
+};
+
+/*
 Get the value of a text reference. Text references can have any of these forms:
 	<tiddlertitle>
 	<tiddlertitle>!!<fieldname>
@@ -478,11 +488,18 @@ exports.getOrphanTitles = function() {
 Retrieves a list of the tiddler titles that are tagged with a given tag
 */
 exports.getTiddlersWithTag = function(tag) {
-	var self = this;
-	return this.getGlobalCache("taglist-" + tag,function() {
-		var tagmap = self.getTagMap();
-		return self.sortByList(tagmap[tag],tag);
-	});
+	// Try to use the indexer
+	var self = this,
+		tagIndexer = this.getIndexer("TagIndexer"),
+		results = tagIndexer && tagIndexer.lookup(tag);
+	if(!results) {
+		// If not available, perform a manual scan
+		results = this.getGlobalCache("taglist-" + tag,function() {
+			var tagmap = self.getTagMap();
+			return self.sortByList(tagmap[tag],tag);
+		});
+	}
+	return results;
 };
 
 /*
@@ -1119,6 +1136,8 @@ exports.search = function(text,options) {
 		if(!searchTermsRegExps) {
 			return true;
 		}
+		var notYetFound = searchTermsRegExps.slice();
+
 		var tiddler = self.getTiddler(title);
 		if(!tiddler) {
 			tiddler = new $tw.Tiddler({title: title, text: "", type: "text/vnd.tiddlywiki"});
@@ -1137,50 +1156,40 @@ exports.search = function(text,options) {
 		} else {
 			searchFields = fields;
 		}
-		for(var fieldIndex=0; fieldIndex<searchFields.length; fieldIndex++) {
+		for(var fieldIndex=0; notYetFound.length>0 && fieldIndex<searchFields.length; fieldIndex++) {
 			// Don't search the text field if the content type is binary
 			var fieldName = searchFields[fieldIndex];
 			if(fieldName === "text" && contentTypeInfo.encoding !== "utf8") {
 				break;
 			}
-			var matches = true,
-				str = tiddler.fields[fieldName],
+			var str = tiddler.fields[fieldName],
 				t;
 			if(str) {
 				if($tw.utils.isArray(str)) {
 					// If the field value is an array, test each regexp against each field array entry and fail if each regexp doesn't match at least one field array entry
-					for(t=0; t<searchTermsRegExps.length; t++) {
-						var thisRegExpMatches = false
-						for(var s=0; s<str.length; s++) {
-							if(searchTermsRegExps[t].test(str[s])) {
-								thisRegExpMatches = true;
-								break;
+					for(var s=0; s<str.length; s++) {
+						for(t=0; t<notYetFound.length;) {
+							if(notYetFound[t].test(str[s])) {
+								notYetFound.splice(t, 1);
+							} else {
+								t++;
 							}
-						}
-						// Bail if the current search expression doesn't match any entry in the current field array
-						if(!thisRegExpMatches) {
-							matches = false;
-							break;
 						}
 					}
 				} else {
 					// If the field isn't an array, force it to a string and test each regexp against it and fail if any do not match
 					str = tiddler.getFieldString(fieldName);
-					for(t=0; t<searchTermsRegExps.length; t++) {
-						if(!searchTermsRegExps[t].test(str)) {
-							matches = false;
-							break;
+					for(t=0; t<notYetFound.length;) {
+						if(notYetFound[t].test(str)) {
+							notYetFound.splice(t, 1);
+						} else {
+							t++;
 						}
 					}
 				}
-			} else {
-				matches = false;
-			}
-			if(matches) {
-				return true;
 			}
 		};
-		return false;
+		return notYetFound.length == 0;
 	};
 	// Loop through all the tiddlers doing the search
 	var results = [],
@@ -1391,6 +1400,21 @@ options: see story.js
 exports.addToStory = function(title,fromTitle,storyTitle,options) {
 	var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
 	story.addToStory(title,fromTitle,options);
+};
+
+/*
+Generate a title for the draft of a given tiddler
+*/
+exports.generateDraftTitle = function(title) {
+	var c = 0,
+		draftTitle,
+		username = this.getTiddlerText("$:/status/UserName"),
+		attribution = username ? " by " + username : "";
+	do {
+		draftTitle = "Draft " + (c ? (c + 1) + " " : "") + "of '" + title + "'" + attribution;
+		c++;
+	} while(this.tiddlerExists(draftTitle));
+	return draftTitle;
 };
 
 /*

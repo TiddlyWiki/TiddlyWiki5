@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/browser-storage/readme
+
+This plugin enables TiddlyWiki to save tiddlers in [[browser local storage|https://en.wikipedia.org/wiki/Web_storage#localStorage]]. This means that changes are stored within the browser, and automatically re-applied any time the base wiki is reloaded.
+
+At startup, the plugin reads tiddlers from local storage. Any tiddlers that are identical to those built into the file are deleted from local storage. Once the wiki is up and running, any tiddler changes are written straight to local storage.
+
+Browser local storage is not a panacea for TiddlyWiki:
+
+* Browsers limit the amount of local storage available to a page, typically to 5 or 10MB
+* Keeping personal data in browser local storage can lead to unexpected privacy violations
+* Browsers reserve the right to without warning delete data stored in local storage at any time
+* Browsers tie local storage to a URL which can lead to problems if you move a wiki to a URL previously occupied by a different wiki
+
+Please use this plugin with caution. There are a number of unresolved issues and open questions:
+
+* Innerwikis read the local storage of their parent wikis
+* This plugin does not interfere with the existing saver mechanism, so you'll still get warnings when refreshing the page, even if your changes are safely committed to local storage
+* Deleted tiddlers will be restored when the wiki is refreshed
+* There is a possibility that tiddlers might be transferred between different wikis if they are accessed via the same URL. This is particularly likely when running in local client server configuration under Node.js

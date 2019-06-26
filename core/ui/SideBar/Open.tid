@@ -9,23 +9,29 @@ caption: {{$:/language/SideBar/Open/Caption}}
 <$action-listops $tiddler="$:/StoryList" $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
 \end
 
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
-<div style="position: relative;">
+\define placeholder()
+<div class="tc-droppable-placeholder"/>
+\end
+
+\define droppable-item(button)
+\whitespace trim
 <$droppable actions=<<drop-actions>>>
-<div class="tc-droppable-placeholder">
-&nbsp;
-</div>
+<<placeholder>>
 <div>
-<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>
+$button$
 </div>
 </$droppable>
+\end
+
+<div class="tc-sidebar-tab-open">
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
+<div class="tc-sidebar-tab-open-item">
+<$macrocall $name="droppable-item" button="""<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini">{{$:/core/images/close-button}}</$button>&nbsp;<$link to={{!!title}}><$view field="title"/></$link>"""/>
 </div>
 </$list>
 <$tiddler tiddler="">
-<$droppable actions=<<drop-actions>>>
-<div class="tc-droppable-placeholder">
-&nbsp;
+<div>
+<$macrocall $name="droppable-item" button="""<$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini"><<lingo Button>></$button>"""/>
 </div>
-<$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini"><<lingo Button>></$button>
-</$droppable>
 </$tiddler>
+</div>

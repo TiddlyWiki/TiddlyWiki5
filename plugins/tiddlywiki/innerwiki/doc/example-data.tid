@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/innerwiki/example-data
+
+<$data title="$:/SiteTitle" text="Innerwiki Demo"/>
+<$data title="$:/SiteSubtitle" text="Wikis spawning wikis"/>
+

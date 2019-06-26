@@ -176,6 +176,10 @@ dl dt {
 	margin-top: 6px;
 }
 
+button, textarea, input, select {
+	outline-color: <<colour primary>>;
+}
+
 textarea,
 input[type=text],
 input[type=search],
@@ -382,6 +386,21 @@ a.tc-tiddlylink-external:hover {
 
 .tc-draggable {
 	cursor: move;
+}
+
+.tc-sidebar-tab-open .tc-droppable-placeholder, .tc-tagged-draggable-list .tc-droppable-placeholder,
+.tc-links-draggable-list .tc-droppable-placeholder {
+	line-height: 2em;
+	height: 2em;
+}
+
+.tc-sidebar-tab-open-item {
+	position: relative;
+}
+
+.tc-sidebar-tab-open .tc-btn-invisible.tc-btn-mini svg {
+	font-size: 0.7em;
+	fill: <<colour muted-foreground>>;
 }
 
 /*
@@ -641,6 +660,11 @@ button.tc-untagged-label {
 	height: 1em;
 	width: 1em;
 	vertical-align: text-bottom;
+}
+
+.tc-edit-tags button.tc-remove-tag-button svg {
+	font-size: 0.7em;
+	vertical-align: middle;
 }
 
 .tc-tag-manager-table .tc-tag-label {
@@ -1027,11 +1051,6 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
 }
 
-.tc-tiddler-frame.tc-tiddler-edit-frame iframe.tc-edit-texteditor {
-border-radius: 2px;
-background-color: <<colour tiddler-background>>;
-}
-
 .tc-tiddler-frame .tc-binary-warning {
 	width: 100%;
 	height: 5em;
@@ -1274,19 +1293,14 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-tiddler-preview {
 	overflow: auto;
-	margin-left: -0.3em;
-	margin-right: -0.3em;
-	padding-left: 0.3em;
-	padding-right: 0.3em;
 }
 
 .tc-tiddler-preview-preview {
 	float: right;
 	width: 49%;
 	border: 1px solid <<colour tiddler-editor-border>>;
-	border-radius: 2px;
 	margin: 4px 0 3px 3px;
-	padding: 3px 3px 3px 0.5em;
+	padding: 3px 3px 3px 3px;
 }
 
 <<if-editor-height-fixed then:"""
@@ -2250,6 +2264,11 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	height: 2em;
 	margin: 0.4em;
 	border: 1px solid #888;
+}
+
+input.tc-palette-manager-colour-input {
+	width: 100%;
+	padding: 0;
 }
 
 /*

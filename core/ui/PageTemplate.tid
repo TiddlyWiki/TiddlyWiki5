@@ -15,11 +15,7 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 
 <$set name="storyviewTitle" value={{$:/view}}>
 
-<$set name="currentTiddler" value={{$:/language}}>
-
-<$set name="languageTitle" value={{!!name}}>
-
-<$set name="currentTiddler" value="">
+<$set name="languageTitle" value={{{ [{$:/language}get[name]] }}}>
 
 <div class=<<containerClasses>>>
 
@@ -38,10 +34,6 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 </$navigator>
 
 </div>
-
-</$set>
-
-</$set>
 
 </$set>
 

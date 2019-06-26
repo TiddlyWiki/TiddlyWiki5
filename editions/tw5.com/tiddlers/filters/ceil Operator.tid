@@ -1,0 +1,13 @@
+caption: ceil
+created: 20190611174247845
+modified: 20190611174443899
+op-input: a [[selection of titles|Title Selection]]
+op-output: rounds each of the input numbers up to the next largest integer
+op-purpose: rounds a list of numbers up to the next largest integer
+tags: [[Unary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: ceil Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">> See [[Mathematics Operators]] for an overview.
+
+<<.operator-examples "ceil">>

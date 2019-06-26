@@ -55,6 +55,27 @@ exports.startup = function() {
 	$tw.version = $tw.utils.extractVersionInfo();
 	// Set up the performance framework
 	$tw.perf = new $tw.Performance($tw.wiki.getTiddlerText(PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE,"no") === "yes");
+	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
+	$tw.rootWidget = new widget.widget({
+		type: "widget",
+		children: []
+	},{
+		wiki: $tw.wiki,
+		document: $tw.browser ? document : $tw.fakeDocument
+	});
+	// Execute any startup actions
+	var executeStartupTiddlers = function(tag) {
+		$tw.utils.each($tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[" + tag + "]!has[draft.of]]"),function(title) {
+			$tw.rootWidget.invokeActionString($tw.wiki.getTiddlerText(title),$tw.rootWidget);
+		});
+	};
+	executeStartupTiddlers("$:/tags/StartupAction");
+	if($tw.browser) {
+		executeStartupTiddlers("$:/tags/StartupAction/Browser");		
+	}
+	if($tw.node) {
+		executeStartupTiddlers("$:/tags/StartupAction/Node");		
+	}
 	// Kick off the language manager and switcher
 	$tw.language = new $tw.Language();
 	$tw.languageSwitcher = new $tw.PluginSwitcher({
@@ -62,7 +83,7 @@ exports.startup = function() {
 		pluginType: "language",
 		controllerTitle: "$:/language",
 		defaultPlugins: [
-			"$:/languages/en-US"
+			"$:/languages/en-GB"
 		],
 		onSwitch: function(plugins) {
 			if($tw.browser) {
@@ -95,27 +116,6 @@ exports.startup = function() {
 			handlerMethod: "handleKeydownEvent"
 		}]);
 	}
-	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
-	$tw.rootWidget = new widget.widget({
-		type: "widget",
-		children: []
-	},{
-		wiki: $tw.wiki,
-		document: $tw.browser ? document : $tw.fakeDocument
-	});
-	// Execute any startup actions
-	var executeStartupTiddlers = function(tag) {
-		$tw.utils.each($tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[" + tag + "]!has[draft.of]]"),function(title) {
-			$tw.rootWidget.invokeActionString($tw.wiki.getTiddlerText(title),$tw.rootWidget);
-		});
-	};
-	executeStartupTiddlers("$:/tags/StartupAction");
-	if($tw.browser) {
-		executeStartupTiddlers("$:/tags/StartupAction/Browser");		
-	}
-	if($tw.node) {
-		executeStartupTiddlers("$:/tags/StartupAction/Node");		
-	}
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
 	// Find a working syncadaptor
@@ -130,7 +130,11 @@ exports.startup = function() {
 		$tw.syncer = new $tw.Syncer({wiki: $tw.wiki, syncadaptor: $tw.syncadaptor});
 	} 
 	// Setup the saver handler
-	$tw.saverHandler = new $tw.SaverHandler({wiki: $tw.wiki, dirtyTracking: !$tw.syncadaptor});
+	$tw.saverHandler = new $tw.SaverHandler({
+		wiki: $tw.wiki,
+		dirtyTracking: !$tw.syncadaptor,
+		preloadDirty: $tw.boot.preloadDirty || []
+	});
 	// Host-specific startup
 	if($tw.browser) {
 		// Install the popup manager

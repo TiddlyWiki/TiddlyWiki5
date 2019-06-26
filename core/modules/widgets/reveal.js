@@ -118,10 +118,22 @@ Read the state tiddler
 */
 RevealWidget.prototype.readState = function() {
 	// Read the information from the state tiddler
-	var state = this.stateTitle ? (this.stateField ? this.wiki.getTiddler(this.stateTitle).getFieldString(this.stateField) :
-		(this.stateIndex ? this.wiki.extractTiddlerDataItem(this.stateTitle,this.stateIndex) :
-			this.wiki.getTiddlerText(this.stateTitle))) || this["default"] || this.getVariable("currentTiddler") :
-		(this.stateTiddlerTitle ? this.wiki.getTextReference(this.state,this["default"],this.getVariable("currentTiddler")) : this["default"]);
+	var state,
+	    defaultState = this["default"];
+	if(this.stateTitle) {
+		var stateTitleTiddler = this.wiki.getTiddler(this.stateTitle);
+		if(this.stateField) {
+			state = stateTitleTiddler ? stateTitleTiddler.getFieldString(this.stateField) || defaultState : defaultState;
+		} else if(this.stateIndex) {
+			state = stateTitleTiddler ? this.wiki.extractTiddlerDataItem(this.stateTitle,this.stateIndex) || defaultState : defaultState;
+		} else if(stateTitleTiddler) {
+			state = this.wiki.getTiddlerText(this.stateTitle) || defaultState;
+		} else {
+			state = defaultState;
+		}
+	} else {
+		state = this.stateTiddlerTitle ? this.wiki.getTextReference(this.state,this["default"],this.getVariable("currentTiddler")) : this["default"];
+	}
 	if(state === null) {
 		state = this["default"];
 	}
@@ -130,10 +142,10 @@ RevealWidget.prototype.readState = function() {
 			this.readPopupState(state);
 			break;
 		case "match":
-			this.isOpen = !!(this.compareStateText(state) == 0);
+			this.isOpen = this.text === state;
 			break;
 		case "nomatch":
-			this.isOpen = !(this.compareStateText(state) == 0);
+			this.isOpen = this.text !== state;
 			break;
 		case "lt":
 			this.isOpen = !!(this.compareStateText(state) < 0);
@@ -185,7 +197,7 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 	} else {
 		var currentlyOpen = this.isOpen;
 		this.readState();
-		if(this.isOpen !== currentlyOpen || (this.stateTiddlerTitle && changedTiddlers[this.stateTiddlerTitle])) {
+		if(this.isOpen !== currentlyOpen) {
 			if(this.retain === "yes") {
 				this.updateState();
 			} else {
