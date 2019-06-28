@@ -34,6 +34,19 @@ exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-copy-to-clipboard",function(event) {
 		$tw.utils.copyToClipboard(event.param);
 	});
+	// Install the tm-focus-selector message
+	$tw.rootWidget.addEventListener("tm-focus-selector",function(event) {
+		var selector = event.param || "",
+			element;
+		try {
+			element = document.querySelector(selector);
+		} catch(e) {
+			console.log("Error in selector: ",selector)
+		}
+		if(element && element.focus) {
+			element.focus();
+		}
+	});
 	// Install the scroller
 	$tw.pageScroller = new $tw.utils.PageScroller();
 	$tw.rootWidget.addEventListener("tm-scroll",function(event) {
