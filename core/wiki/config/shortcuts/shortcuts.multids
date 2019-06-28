@@ -2,7 +2,7 @@ title: $:/config/shortcuts/
 
 cancel-edit-tiddler: escape
 excise: ctrl-E
-focus-sidebar-search: ctrl-shift-F
+sidebar-search: ctrl-shift-F
 heading-1: ctrl-1
 heading-2: ctrl-2
 heading-3: ctrl-3
