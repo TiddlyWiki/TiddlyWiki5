@@ -1,0 +1,11 @@
+title: $:/core/ui/KeyboardShortcuts/focus-sidebar-search
+tags: $:/tags/KeyboardShortcut
+key: ((focus-sidebar-search))
+
+<$fieldmangler tiddler="$:/core/ui/SideBarSegments/search">
+<$list filter="[{$:/state/sidebar}removeprefix[no]]">
+<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
+</$list>
+<$action-sendmessage $message="tm-add-tag" $param="$:/tags/RefreshTag"/>
+<$action-sendmessage $message="tm-remove-tag" $param="$:/tags/RefreshTag"/>
+</$fieldmangler>
