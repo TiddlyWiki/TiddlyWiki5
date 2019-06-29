@@ -1,4 +1,6 @@
 caption: escapecss
+created: 20190629072855199
+modified: 20190629072855199
 op-input: a [[selection of titles|Title Selection]]
 op-output: the input with CSS escaping applied through the CSS.escape() method
 op-parameter: 
