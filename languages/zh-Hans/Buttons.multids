@@ -32,6 +32,7 @@ ExportTiddler/Caption: 导出此条目
 ExportTiddler/Hint: 导出此条目
 ExportTiddlers/Caption: 导出条目
 ExportTiddlers/Hint: 导出条目
+SidebarSearch/Hint: 选择侧边栏的查找字段
 Fold/Caption: 收合条目
 Fold/Hint: 收合此条目的内容
 Unfold/Caption: 展开条目
