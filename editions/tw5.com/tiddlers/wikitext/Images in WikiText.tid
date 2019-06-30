@@ -53,5 +53,5 @@ Renders as:
 
 ! Importing Images
 
-Use the {{$:/core/images/import-button}} ''import'' button (under the ''Tools'' tab in the sidebar), or drag and drop.
-See ImportingTiddlers for details.
+Use the <<.button import>> button (under the <<.sidebar-tab Tools>> tab in the sidebar), or drag and drop.
+See [[ImportingTiddlers]] for details.
