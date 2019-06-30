@@ -601,9 +601,7 @@ NavigatorWidget.prototype.handleRenameTiddlerEvent = function(event) {
 	var paramObject = event.paramObject || {},
 		from = paramObject.from || event.tiddlerTitle,
 		to = paramObject.to;
-	var oldTiddler = this.getTiddler(from),
-		newTiddler = new $tw.Tiddler(oldTiddler,{title: to},this.getModificationFields());
-	$tw.wiki.renameTiddler(oldTiddler,newTiddler);
+	$tw.wiki.renameTiddler(from,to);
 };
 
 exports.navigator = NavigatorWidget;
