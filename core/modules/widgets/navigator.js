@@ -598,11 +598,12 @@ NavigatorWidget.prototype.handleUnfoldAllTiddlersEvent = function(event) {
 };
 
 NavigatorWidget.prototype.handleRenameTiddlerEvent = function(event) {
-	event = $tw.hooks.invokeHook("th-renaming-tiddler", event);
 	var paramObject = event.paramObject || {},
 		from = paramObject.from || event.tiddlerTitle,
 		to = paramObject.to;
-	$tw.wiki.renameTiddler(from,to);
+	var oldTiddler = this.getTiddler(from),
+		newTiddler = new $tw.Tiddler(oldTiddler,{title: to},this.getModificationFields());
+	$tw.wiki.renameTiddler(oldTiddler,newTiddler);
 };
 
 exports.navigator = NavigatorWidget;
