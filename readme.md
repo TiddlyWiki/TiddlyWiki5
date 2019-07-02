@@ -15,98 +15,84 @@
 <li>
 <a class="tc-tiddlylink tc-tiddlylink-resolves" href="https://tiddlywiki.com/static/TiddlyWikiFolders.html">
 TiddlyWikiFolders
-
 </a>
 </li>
 
 <li>
 <a class="tc-tiddlylink tc-tiddlylink-resolves" href="https://tiddlywiki.com/static/MultiTiddlerFileSyntax.html">
 MultiTiddlerFileSyntax
-
 </a>
 </li>
 
 <li>
 <a class="tc-tiddlylink tc-tiddlylink-resolves" href="https://tiddlywiki.com/static/MultiTiddlerFiles.html">
 MultiTiddlerFiles
-
 </a>
 </li>
 
 <li>
 <a class="tc-tiddlylink tc-tiddlylink-resolves" href="https://tiddlywiki.com/static/TiddlerFiles.html">
 TiddlerFiles
-
 </a>
 </li>
 
 <li>
 <a class="tc-tiddlylink tc-tiddlylink-resolves" href="https://tiddlywiki.com/static/Generating%2520Static%2520Sites%2520with%2520TiddlyWiki.html">
 Generating Static Sites with TiddlyWiki
-
 </a>
 </li>
 
 <li>
 <a class="tc-tiddlylink tc-tiddlylink-resolves" href="https://tiddlywiki.com/static/How%2520to%2520build%2520a%2520TiddlyWiki5%2520from%2520individual%2520tiddlers.html">
 How to build a TiddlyWiki5 from individual tiddlers
-
 </a>
 </li>
 
 <li>
 <a class="tc-tiddlylink tc-tiddlylink-resolves" href="https://tiddlywiki.com/static/Using%2520TiddlyWiki%2520for%2520GitHub%2520project%2520documentation.html">
 Using TiddlyWiki for GitHub project documentation
-
 </a>
 </li>
 
 <li>
 <a class="tc-tiddlylink tc-tiddlylink-resolves" href="https://tiddlywiki.com/static/Using%2520a%2520custom%2520path%2520prefix%2520with%2520the%2520client-server%2520edition.html">
 Using a custom path prefix with the client-server edition
-
 </a>
 </li>
 
 <li>
 <a class="tc-tiddlylink tc-tiddlylink-resolves" href="https://tiddlywiki.com/static/Building%2520TiddlyWikiClassic.html">
 Building TiddlyWikiClassic
-
 </a>
 </li>
 
 <li>
 <a class="tc-tiddlylink tc-tiddlylink-resolves" href="https://tiddlywiki.com/static/Customising%2520Tiddler%2520File%2520Naming.html">
 Customising Tiddler File Naming
-
 </a>
 </li>
 
 <li>
 <a class="tc-tiddlylink tc-tiddlylink-resolves" href="https://tiddlywiki.com/static/Environment%2520Variables%2520on%2520Node.js.html">
 Environment Variables on Node.js
-
 </a>
 </li>
 
 <li>
 <a class="tc-tiddlylink tc-tiddlylink-resolves" href="https://tiddlywiki.com/static/Scripts%2520for%2520TiddlyWiki%2520on%2520Node.js.html">
 Scripts for TiddlyWiki on Node.js
-
 </a>
 </li>
 
 <li>
 <a class="tc-tiddlylink tc-tiddlylink-resolves" href="https://tiddlywiki.com/static/Serving%2520TW5%2520from%2520Android.html">
 Serving TW5 from Android
-
 </a>
 </li>
 
 <li>
 <a class="tc-tiddlylink tc-tiddlylink-resolves" href="https://tiddlywiki.com/static/Working%2520with%2520the%2520TiddlyWiki5%2520repository.html">
 Working with the TiddlyWiki5 repository
-
 </a>
 </li>
 
