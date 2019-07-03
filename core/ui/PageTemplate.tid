@@ -1,5 +1,6 @@
 title: $:/core/ui/PageTemplate
 
+\whitespace trim
 \define containerClasses()
 tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 \end
