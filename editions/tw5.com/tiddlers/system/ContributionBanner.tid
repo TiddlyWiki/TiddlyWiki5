@@ -5,16 +5,16 @@ list-after: $:/core/ui/EditTemplate/title
 \define makeGitHubLink()
 https://github.com/Jermolene/TiddlyWiki5/edit/tiddlywiki-com/editions/tw5.com/tiddlers/$(githubLink)$
 \end
-\define innerMakeGitHubLink(linkText)
-<$set name="githubLink" value={{$:/config/OriginalTiddlerPaths##$(draftOfTiddler)$}}>
+\define innerMakeGitHubLink(linkText,tiddler)
+<$set name="githubLink" value={{{ [[$:/config/OriginalTiddlerPaths]getindex<__tiddler__>] }}}>
 <a href=<<makeGitHubLink>> class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">$linkText$</a>
 </$set>
 \end
 \define outerMakeGitHubLink(linkText)
-<$set name="draftOfTiddler" value={{$(currentTiddler)$!!draft.of}}>
-<<innerMakeGitHubLink "$linkText$">>
+<$set name="draftOfTiddler" value={{{ [[$(currentTiddler)$]get[draft.of]] }}}>
+<$macrocall $name="innerMakeGitHubLink" linkText="$linkText$" tiddler=<<draftOfTiddler>>/>
 </$set>
 \end
 <div class="tc-improvement-banner">
-{{$:/core/images/star-filled}} Can you help us improve this documentation? [[Find out how|Improving TiddlyWiki Documentation]] to edit <<outerMakeGitHubLink "this tiddler on ~GitHub">>
+{{$:/core/images/star-filled}} Can you help us improve this documentation? [[Find out how|Improving TiddlyWiki Documentation]] to edit <$macrocall $name="outerMakeGitHubLink" linkText="this tiddler on ~GitHub"/>
 </div>

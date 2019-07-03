@@ -2,6 +2,7 @@ title: $:/core/macros/list
 tags: $:/tags/Macro
 
 \define list-links(filter,type:"ul",subtype:"li",class:"",emptyMessage)
+\whitespace trim
 <$type$ class="$class$">
 <$list filter="$filter$" emptyMessage=<<__emptyMessage__>>>
 <$subtype$>
