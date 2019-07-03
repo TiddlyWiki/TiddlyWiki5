@@ -225,7 +225,8 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 	fileInfo.filepath = $tw.utils.generateTiddlerFilepath(tiddler.fields.title,{
 		extension: contentTypeInfo.extension,
 		directory: options.directory,
-		pathFilters: options.pathFilters
+		pathFilters: options.pathFilters,
+		wiki: options.wiki
 	});
 	return fileInfo;
 };
