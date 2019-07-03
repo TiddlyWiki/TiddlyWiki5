@@ -15,7 +15,7 @@ caption: {{$:/language/ControlPanel/Palette/Caption}}
 <$reveal type="match" state="$:/state/ShowPaletteEditor" text="yes">
 
 <$button set="$:/state/ShowPaletteEditor" setTo="no"><<lingo HideEditor/Caption>></$button>
-{{$:/snippets/paletteeditor}}
+{{$:/PaletteManager}}
 
 </$reveal>
 

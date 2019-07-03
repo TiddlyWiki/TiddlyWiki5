@@ -662,6 +662,11 @@ button.tc-untagged-label {
 	vertical-align: text-bottom;
 }
 
+.tc-edit-tags button.tc-remove-tag-button svg {
+	font-size: 0.7em;
+	vertical-align: middle;
+}
+
 .tc-tag-manager-table .tc-tag-label {
 	white-space: normal;
 }
@@ -2259,6 +2264,11 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	height: 2em;
 	margin: 0.4em;
 	border: 1px solid #888;
+}
+
+input.tc-palette-manager-colour-input {
+	width: 100%;
+	padding: 0;
 }
 
 /*

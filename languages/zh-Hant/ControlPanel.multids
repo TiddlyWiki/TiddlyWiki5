@@ -47,6 +47,8 @@ LoadedModules/Hint: 這些是當前已載入的模組之源碼條目。斜體的
 Palette/Caption: 調色盤
 Palette/Editor/Clone/Caption: 複製
 Palette/Editor/Clone/Prompt: 建議您修改前先複製此預設調色盤
+Palette/Editor/Delete/Hint: 從當前調色盤中刪除此項
+Palette/Editor/Names/External/Show: 顯示不屬於當前調色盤的顏色名稱
 Palette/Editor/Prompt/Modified: 此預設調色盤已被修改過
 Palette/Editor/Prompt: 編輯
 Palette/Editor/Reset/Caption: 重置
