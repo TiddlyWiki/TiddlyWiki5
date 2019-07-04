@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/btc/selectable-inputs/modules/this-subclasses/edit-text-subclass.js
+title: $:/core/modules/widgets/subclasses/edit-text-subclass.js
 type: application/javascript
 module-type: widget-subclass
 
