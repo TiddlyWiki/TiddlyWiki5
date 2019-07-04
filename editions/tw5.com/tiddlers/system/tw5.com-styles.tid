@@ -36,6 +36,7 @@ tags: $:/tags/Stylesheet
 	margin-top: 6px;
 	margin-bottom: 12px;
 	<<box-shadow "2px 2px 2px rgba(0,0,0,0.4)">>
+	color: <<colour background>>;
 }
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
