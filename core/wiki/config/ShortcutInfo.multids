@@ -27,4 +27,5 @@ stamp: {{$:/language/Buttons/Stamp/Hint}}
 strikethrough: {{$:/language/Buttons/Strikethrough/Hint}}
 subscript: {{$:/language/Buttons/Subscript/Hint}}
 superscript: {{$:/language/Buttons/Superscript/Hint}}
+toggle-sidebar: {{$:/language/Buttons/ToggleSidebar/Hint}}
 underline: {{$:/language/Buttons/Underline/Hint}}
