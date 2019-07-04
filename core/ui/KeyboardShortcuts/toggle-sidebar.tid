@@ -4,6 +4,6 @@ key: ((toggle-sidebar))
 
 <$list filter="[[$:/state/sidebar]is[missing]] [{$:/state/sidebar}removeprefix[yes]]" emptyMessage="""
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
->
+""">
 <$action-setfield $tiddler="$:/state/sidebar" text="no"/>
 </$list>
