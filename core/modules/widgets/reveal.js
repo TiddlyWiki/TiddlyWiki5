@@ -56,32 +56,39 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 RevealWidget.prototype.positionPopup = function(domNode) {
 	domNode.style.position = "absolute";
 	domNode.style.zIndex = "1000";
+	var left,top;
 	switch(this.position) {
 		case "left":
-			domNode.style.left = Math.max(0, this.popup.left - domNode.offsetWidth) + "px";
-			domNode.style.top = this.popup.top + "px";
+			left = this.popup.left - domNode.offsetWidth;
+			top = this.popup.top;
 			break;
 		case "above":
-			domNode.style.left = this.popup.left + "px";
-			domNode.style.top = Math.max(0, this.popup.top - domNode.offsetHeight) + "px";
+			left = this.popup.left;
+			top = this.popup.top - domNode.offsetHeight;
 			break;
 		case "aboveright":
-			domNode.style.left = (this.popup.left + this.popup.width) + "px";
-			domNode.style.top = Math.max(0, this.popup.top + this.popup.height - domNode.offsetHeight) + "px";
+			left = this.popup.left + this.popup.width;
+			top = this.popup.top + this.popup.height - domNode.offsetHeight;
 			break;
 		case "right":
-			domNode.style.left = (this.popup.left + this.popup.width) + "px";
-			domNode.style.top = this.popup.top + "px";
+			left = this.popup.left + this.popup.width;
+			top = this.popup.top;
 			break;
 		case "belowleft":
-			domNode.style.left = Math.max(0, this.popup.left + this.popup.width - domNode.offsetWidth) + "px";
-			domNode.style.top = (this.popup.top + this.popup.height) + "px";
+			left = this.popup.left + this.popup.width - domNode.offsetWidth;
+			top = this.popup.top + this.popup.height;
 			break;
 		default: // Below
-			domNode.style.left = this.popup.left + "px";
-			domNode.style.top = (this.popup.top + this.popup.height) + "px";
+			left = this.popup.left;
+			top = this.popup.top + this.popup.height;
 			break;
 	}
+	if(!this.positionAllowNegative) {
+		left = Math.max(0,left);
+		top = Math.max(0,top);
+	}
+	domNode.style.left = left + "px";
+	domNode.style.top = top + "px";
 };
 
 /*
@@ -94,6 +101,7 @@ RevealWidget.prototype.execute = function() {
 	this.type = this.getAttribute("type");
 	this.text = this.getAttribute("text");
 	this.position = this.getAttribute("position");
+	this.positionAllowNegative = this.getAttribute("positionAllowNegative") === "yes";
 	this["class"] = this.getAttribute("class","");
 	this.style = this.getAttribute("style","");
 	this["default"] = this.getAttribute("default","");
@@ -191,7 +199,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RevealWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex) {
+	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes.positionAllowNegative || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex) {
 		this.refreshSelf();
 		return true;
 	} else {
