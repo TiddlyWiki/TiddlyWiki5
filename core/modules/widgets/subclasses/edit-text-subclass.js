@@ -42,19 +42,7 @@ exports.prototype.refresh = function(event) {
 
 		var refreshCondition = this.getAttribute("refreshCondition");
 		if(this.refreshTiddler && event[this.refreshTiddler] && (refreshCondition === "true" || refreshCondition === "yes")) {
-			var refreshAction = this.refreshAction;
-			if(refreshAction) {
-				switch(refreshAction) {
-					case "focus-update":
-						this.engine.domNode.value = this.getEditInfo().value;
-						this.engine.focus();
-						break;
-					case "focus":
-						this.engine.focus();
-						break;
-					default:
-				}
-			}
+			this.engine.domNode.value = this.getEditInfo().value;
 			this.wiki.deleteTiddler(this.refreshTiddler);
 		} else if(event[this.editTitle] && (event[this.editTitle].deleted !== true)) {
 			if(!event[this.refreshTiddler] && refreshCondition !== "true" && refreshCondition !== "yes") {
