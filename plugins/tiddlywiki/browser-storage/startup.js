@@ -80,6 +80,7 @@ function saveTiddlerToLocalStorage(title,options) {
 	// Get the tiddler
 	var tiddler = $tw.wiki.getTiddler(title);
 	if(tiddler) {
+		console.log("browser-storage: Saving",title);
 		// Get the JSON of the tiddler				
 		var json = JSON.stringify(tiddler.getFieldStrings());
 		// Try to save it to local storage
@@ -90,18 +91,21 @@ function saveTiddlerToLocalStorage(title,options) {
 				// Complain if we failed
 				var msg = $tw.wiki.getTiddlerText(QUOTA_EXCEEDED_ALERT_TITLE,DEFAULT_QUOTA_EXCEEDED_ALERT_PREFIX + title + DEFAULT_QUOTA_EXCEEDED_ALERT_SUFFIX);
 				if(options.logger) {
-					options.logger.alert(msg);					
+					options.logger.alert(msg);
 				}
 				// No point in keeping old values around for this tiddler
 				window.localStorage.removeItem(options.prefix + title);
 			} else {
-				throw e;
+				console.log("Browser-storage error:",e);
 			}
 		}
-		console.log("browser-storage: Saving",title);
 	} else {
-		window.localStorage.removeItem(options.prefix + title);
 		console.log("browser-storage: Deleting",title);
+		try {
+			window.localStorage.removeItem(options.prefix + title);
+		} catch(e) {
+			console.log("Browser-storage error:",e);
+		}
 	}
 }
 

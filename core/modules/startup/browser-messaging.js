@@ -144,9 +144,9 @@ exports.startup = function() {
 	});
 	// Listen for window messages from other windows
 	window.addEventListener("message",function listener(event){
-		console.log("browser-messaging: ",document.location.toString())
-		console.log("browser-messaging: Received message from",event.origin);
-		console.log("browser-messaging: Message content",event.data);
+		// console.log("browser-messaging: ",document.location.toString())
+		// console.log("browser-messaging: Received message from",event.origin);
+		// console.log("browser-messaging: Message content",event.data);
 		switch(event.data.verb) {
 			case "GET-RESPONSE":
 				if(event.data.status.charAt(0) === "2") {

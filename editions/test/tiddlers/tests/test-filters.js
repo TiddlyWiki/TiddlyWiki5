@@ -33,9 +33,20 @@ describe("Filter tests", function() {
 		);
 	});
 
+	describe("With no indexers", function() {
+		var wiki = setupWiki({enableIndexers: []});
+		runTests(wiki);
+	});
 
+	describe("With all indexers", function() {
+		var wiki = setupWiki();
+		wiki.getIndexer("FieldIndexer").setMaxIndexedValueLength(8); // Note that JoeBloggs is 9, and JohnDoe is 7
+		runTests(wiki);
+	});
+
+function setupWiki(wikiOptions) {
 	// Create a wiki
-	var wiki = new $tw.Wiki({
+	var wiki = new $tw.Wiki($tw.utils.extend({
 		shadowTiddlers: {
 			"$:/TiddlerFive": {
 				tiddler: new $tw.Tiddler({title: "$:/TiddlerFive",
@@ -64,8 +75,8 @@ describe("Filter tests", function() {
 				})
 			}
 		}
-	});
-
+	},
+	wikiOptions));
 	// Add a few  tiddlers
 	wiki.addTiddler({
 		title: "TiddlerOne",
@@ -99,8 +110,11 @@ describe("Filter tests", function() {
 		list: "[[Tiddler Three]] [[TiddlerOne]]",
 		empty: "",
 		modifier: "JohnDoe"});
+	return wiki;
+}
 
-	// Our tests
+// Our tests
+function runTests(wiki) {
 
 	it("should handle the ~ prefix", function() {
 		expect(wiki.filterTiddlers("[modifier[JoeBloggs]] ~[[No such tiddler]]").join(",")).toBe("TiddlerOne");
@@ -131,6 +145,12 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[field:modifier[JoeBloggs]]").join(",")).toBe("TiddlerOne");
 		expect(wiki.filterTiddlers("[!field:modifier[JoeBloggs]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
 		expect(wiki.filterTiddlers("[!is[system]!field:modifier[JoeBloggs]]").join(",")).toBe("Tiddler Three,a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[modifier[JohnDoe]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[!modifier[JohnDoe]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("[!is[system]!modifier[JohnDoe]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("[field:modifier[JohnDoe]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[!field:modifier[JohnDoe]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("[!is[system]!field:modifier[JohnDoe]]").join(",")).toBe("TiddlerOne");
 	});
 
 	it("should handle the regexp operator", function() {
@@ -342,7 +362,7 @@ describe("Filter tests", function() {
 			type: "widget",
 			children: [{type: "widget", children: []}]
 		},{
-			wiki: $tw.wiki,
+			wiki: wiki,
 			document: $tw.document
 		});
 		rootWidget.makeChildWidgets();
@@ -366,10 +386,9 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("John Paul George Ringo +[length[]]").join(",")).toBe("4,4,6,5");
 		expect(wiki.filterTiddlers("John Paul George Ringo +[uppercase[]]").join(",")).toBe("JOHN,PAUL,GEORGE,RINGO");
 		expect(wiki.filterTiddlers("John Paul George Ringo +[lowercase[]]").join(",")).toBe("john,paul,george,ringo");
-		expect(wiki.filterTiddlers("John Paul George Ringo +[concat[y]]").join(",")).toBe("Johny,Pauly,Georgey,Ringoy");
 		expect(wiki.filterTiddlers("John Paul George Ringo +[split[]]").join(",")).toBe("J,o,h,n,P,a,u,l,G,e,o,r,g,e,R,i,n,g,o");
-		expect(wiki.filterTiddlers("[[John. Paul. George. Ringo.]] +[split[.]trim[]]").join(",")).toBe("John,Paul,George,Ringo");
-		expect(wiki.filterTiddlers("John Paul George Ringo +[split[e]]").join(",")).toBe("John,Paul,G,org,Ringo");
+		expect(wiki.filterTiddlers("[[John. Paul. George. Ringo.]] +[split[.]trim[]]").join(",")).toBe("John,Paul,George,Ringo,");
+		expect(wiki.filterTiddlers("John Paul George Ringo +[split[e]]").join(",")).toBe("John,Paul,G,org,,Ringo");
 		expect(wiki.filterTiddlers("John Paul George Ringo +[join[ ]split[e]join[ee]split[ ]]").join(",")).toBe("John,Paul,Geeorgee,Ringo");
 		expect(wiki.filterTiddlers("[[ John ]] [[Paul ]] [[ George]] Ringo +[trim[]join[-]]").join(",")).toBe("John-Paul-George-Ringo");
 	});
@@ -387,6 +406,38 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("1 2 3 4 +[max[2]]").join(",")).toBe("2,2,3,4");
 		expect(wiki.filterTiddlers("1 2 3 4 +[min[2]]").join(",")).toBe("1,2,2,2");
 	});
+
+	it("should handle the allafter operator", function() {
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter[]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter:include[]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter[1]]").join(",")).toBe("2,3,4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter:include[1]]").join(",")).toBe("1,2,3,4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter[2]]").join(",")).toBe("3,4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter:include[2]]").join(",")).toBe("2,3,4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter[3]]").join(",")).toBe("4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter:include[3]]").join(",")).toBe("3,4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter[4]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter:include[4]]").join(",")).toBe("4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter[5]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allafter:include[5]]").join(",")).toBe("");
+	});
+
+	it("should handle the allbefore operator", function() {
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore[]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore:include[]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore[1]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore:include[1]]").join(",")).toBe("1");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore[2]]").join(",")).toBe("1");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore:include[2]]").join(",")).toBe("1,2");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore[3]]").join(",")).toBe("1,2");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore:include[3]]").join(",")).toBe("1,2,3");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore[4]]").join(",")).toBe("1,2,3");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore:include[4]]").join(",")).toBe("1,2,3,4");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore[5]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore:include[5]]").join(",")).toBe("");
+	});
+
+}
 
 });
 

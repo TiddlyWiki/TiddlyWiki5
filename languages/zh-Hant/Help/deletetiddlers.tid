@@ -1,0 +1,8 @@
+title: $:/language/Help/deletetiddlers
+description: 刪除一組條目
+
+<<.from-version "5.1.20">> 刪除由篩選器標識的一組條目。
+
+```
+--deletetiddlers <filter>
+```

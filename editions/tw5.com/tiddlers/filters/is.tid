@@ -13,7 +13,7 @@ op-neg-output: those input tiddlers that do <<.em not>> belong to category <<.pl
 
 The parameter <<.place C>> is one of the following fundamental categories:
 
-|!Category |!Matches any tiddler that... |
+|!Category |!Matches any tiddler title that... |
 |^`current` |is the [[current tiddler|Current Tiddler]] |
 |^`image` |has an image ContentType |
 |^`missing` |does not exist (other than possibly as a shadow tiddler), regardless of whether there are any links to it |
@@ -22,7 +22,8 @@ The parameter <<.place C>> is one of the following fundamental categories:
 |^`system` |is a [[system tiddler|SystemTiddlers]], i.e. its title starts with `$:/` |
 |^`tag` |is in use as a tag |
 |^`tiddler` |exists as a non-shadow tiddler |
-|^`variable` |<<.from-version "5.1.20">> exists as a variable (whether or not it has a non-blank value) |
+|^`variable` |<<.from-version "5.1.20">> exists as a variable (whether or not that variable has a non-blank value) |
+|^`blank` |<<.from-version "5.1.20">> is blank (i.e. is a zero length string) |
 
 If <<.place C>> is anything else an error message is returned. <<.from-version "5.1.14">> if <<.place C>> is blank, the output is passed through unchanged (in earlier versions an error message was returned).
 

@@ -43,6 +43,10 @@ exports.trunc = makeNumericBinaryOperator(
 	function(a) {return Math.trunc(a)}
 );
 
+exports.untrunc = makeNumericBinaryOperator(
+	function(a) {return Math.ceil(Math.abs(a)) * Math.sign(a)}
+);
+
 exports.sign = makeNumericBinaryOperator(
 	function(a) {return Math.sign(a)}
 );
@@ -76,33 +80,33 @@ exports.min = makeNumericBinaryOperator(
 );
 
 exports.fixed = makeNumericBinaryOperator(
-	function(a,b) {return Number.prototype.toFixed.call(a,b);}
+	function(a,b) {return Number.prototype.toFixed.call(a,Math.min(Math.max(b,0),100));}
 );
 
 exports.precision = makeNumericBinaryOperator(
-	function(a,b) {return Number.prototype.toPrecision.call(a,b);}
+	function(a,b) {return Number.prototype.toPrecision.call(a,Math.min(Math.max(b,1),100));}
 );
 
 exports.exponential = makeNumericBinaryOperator(
-	function(a,b) {return Number.prototype.toExponential.call(a,b);}
+	function(a,b) {return Number.prototype.toExponential.call(a,Math.min(Math.max(b,0),100));}
 );
 
-exports.sum = makeNumericArrayOperator(
+exports.sum = makeNumericReducingOperator(
 	function(accumulator,value) {return accumulator + value},
 	0 // Initial value
 );
 
-exports.product = makeNumericArrayOperator(
+exports.product = makeNumericReducingOperator(
 	function(accumulator,value) {return accumulator * value},
 	1 // Initial value
 );
 
-exports.maxall = makeNumericArrayOperator(
+exports.maxall = makeNumericReducingOperator(
 	function(accumulator,value) {return Math.max(accumulator,value)},
 	-Infinity // Initial value
 );
 
-exports.minall = makeNumericArrayOperator(
+exports.minall = makeNumericReducingOperator(
 	function(accumulator,value) {return Math.min(accumulator,value)},
 	Infinity // Initial value
 );
@@ -118,7 +122,7 @@ function makeNumericBinaryOperator(fnCalc) {
 	};
 }
 
-function makeNumericArrayOperator(fnCalc,initialValue) {
+function makeNumericReducingOperator(fnCalc,initialValue) {
 	initialValue = initialValue || 0;
 	return function(source,operator,options) {
 		var result = [];

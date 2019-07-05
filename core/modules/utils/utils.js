@@ -12,6 +12,8 @@ Various static utility functions.
 /*global $tw: false */
 "use strict";
 
+var base64utf8 = require("$:/core/modules/utils/base64-utf8/base64-utf8.module.js");
+
 /*
 Display a message, in colour if we're on a terminal
 */
@@ -92,6 +94,20 @@ exports.trim = function(str) {
 	}
 };
 
+/*
+Convert a string to sentence case (ie capitalise first letter)
+*/
+exports.toSentenceCase = function(str) {
+	return (str || "").replace(/^\S/, function(c) {return c.toUpperCase();});
+}
+
+/*
+Convert a string to title case (ie capitalise each initial letter)
+*/
+exports.toTitleCase = function(str) {
+	return (str || "").replace(/(^|\s)\S/g, function(c) {return c.toUpperCase();});
+}
+	
 /*
 Find the line break preceding a given position in a string
 Returns position immediately after that line break, or the start of the string
@@ -669,12 +685,14 @@ exports.hashString = function(str) {
 Decode a base64 string
 */
 exports.base64Decode = function(string64) {
-	if($tw.browser) {
-		// TODO
-		throw "$tw.utils.base64Decode() doesn't work in the browser";
-	} else {
-		return Buffer.from(string64,"base64").toString();
-	}
+	return base64utf8.base64.decode.call(base64utf8,string64);
+};
+
+/*
+Encode a string to base64
+*/
+exports.base64Encode = function(string64) {
+	return base64utf8.base64.encode.call(base64utf8,string64);
 };
 
 /*

@@ -1,0 +1,8 @@
+created: 20190613154338930
+modified: 20190613154445868
+tags: [[split Operator]] [[Operator Examples]]
+title: split Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[a b c d e]split[ ]]">>
+<<.operator-example 2 "[[Mississippi]split[i]]">>

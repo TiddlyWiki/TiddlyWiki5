@@ -9,13 +9,14 @@ type: text/vnd.tiddlywiki
 
 !! Major Improvements
 
-Added several new [[Mathematics Operators]] for working with numbers: [[negate|negate Operator]], [[abs|abs Operator]], [[ceil|ceil Operator]], [[floor|floor Operator]], [[round|round Operator]], [[trunc|trunc Operator]], [[sign|sign Operator]], [[add|add Operator]], [[subtract|subtract Operator]], [[multiply|multiply Operator]], [[divide|divide Operator]], [[remainder|remainder Operator]], [[max|max Operator]], [[min|min Operator]], [[fixed|fixed Operator]], [[precision|precision Operator]], [[exponential|exponential Operator]], [[sum|sum Operator]], [[product|product Operator]], [[maxall|maxall Operator]] and [[minall|minall Operator]].
+Added several new [[Mathematics Operators]] for working with numbers: [[negate|negate Operator]], [[abs|abs Operator]], [[ceil|ceil Operator]], [[floor|floor Operator]], [[round|round Operator]], [[trunc|trunc Operator]], [[untrunc|untrunc Operator]], [[sign|sign Operator]], [[add|add Operator]], [[subtract|subtract Operator]], [[multiply|multiply Operator]], [[divide|divide Operator]], [[remainder|remainder Operator]], [[max|max Operator]], [[min|min Operator]], [[fixed|fixed Operator]], [[precision|precision Operator]], [[exponential|exponential Operator]], [[sum|sum Operator]], [[product|product Operator]], [[maxall|maxall Operator]] and [[minall|minall Operator]].
 
-Added serveral new string operators: [[length|length Operator]], [[uppercase|uppercase Operator]], [[lowercase|lowercase Operator]], [[trim|trim Operator]], [[concat|concat Operator]], [[split|split Operator]] and [[join|join Operator]].
+Added several new string operators: [[length|length Operator]], [[uppercase|uppercase Operator]], [[lowercase|lowercase Operator]], [[titlecase|titlecase Operator]], [[sentencecase|sentencecase Operator]], [[trim|trim Operator]], [[split|split Operator]], [[splitregexp|splitregexp Operator]] and [[join|join Operator]].
 
-Added several new palettes. See the [[palette manager|$:/core/ui/ControlPanel/Palette]].
+There is now finer control over TiddlyWiki's default behaviour of removing duplicates from filter results, making it much easier to work with the new mathematics and string operators:
 
-Added new [[GitHub saver|Saving to GitHub]].
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/37bb75f0cf446d62eb45d07b9f9b0aa14814a43f]] support for new `=` prefix for merging filter runs without removing duplicates
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/18fe112da7d3ac210a5a0b9cf73fe9050717d4e3]] option for the [[enlist Operator]] to not remove duplicates
 
 !! Plugin Improvements
 
@@ -23,20 +24,30 @@ New and improved plugins:
 
 * New [[BrowserStorage Plugin]] for saving tiddlers in browser local storage
 * New [[Innerwiki Plugin]] for rendering TiddlyWiki screenshots
-* Several improvements to the [[CodeMirror Plugin]]:
-** [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3810]] support for smart indent
-* Several improvements to the [[DynaView Plugin]]:
-** [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a9e595c3f633391003224e499440cdeb8560c055]] support for restoring the scroll position at startup from local storage
+* Several improvements to the [[CodeMirror Plugin]], including [[adding|https://github.com/Jermolene/TiddlyWiki5/pull/3810]] support for smart indent
+* Several improvements to the [[Dynaview Plugin]], including [[adding|https://github.com/Jermolene/TiddlyWiki5/commit/a9e595c3f633391003224e499440cdeb8560c055]] support for restoring the scroll position at startup from local storage
+* Several improvements to the [[Amazon Web Services Plugin]], including [[adding|https://github.com/Jermolene/TiddlyWiki5/commit/fffd0ee9e17d6b6a561648a42f0f200d4bb04046]] support for specifying credentials
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3898]] support for language aliases with the [[Highlight Plugin]]
 
 !! Translation Improvements
 
 New and improved translations:
 
+* Catalan
 * Chinese Simplified and Chinese Traditional
+* French
+* US English
 
+!! Performance Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3951]] pluggable index modules to accelerate the [[field Operator]] and the [[tag Operator]] (in tests on a wiki with 60K tiddlers, startup time is reduced by 25% with these optimisations, and refresh time is reduced by a factor of three.)
+* [[Optimised|https://github.com/Jermolene/TiddlyWiki5/commit/fddc5d4ee627232441278284ed6bee2f50fe8b26]] the "Classic" storyview to perform much faster when the animation duration is set to zero (approximtely 50% speed improvement was observed in tests opening a storyview with 8,000 entries)
+* [[Optimised|https://github.com/Jermolene/TiddlyWiki5/commit/7869546fef7b2ea5fd6fd72feacd565a7f177fb6]] the RevealWidget to avoid using the relatively slow `localeCompare()` method to compare strings
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/e8d1fbba6c109ccbeaedc1b34e47677c0ada7529]] [[Performance Instrumentation]] to show the timings for individual filters
 
 !! Usability Improvements
 
+* Several new palettes: "Nord", "Solarized Light", "Spartan Day", "Spartan Night" and "Twilight"
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/5a37a84a54f2dc9ccf106309b739cfa693bae3e3]] the plugin library to search all plugin fields
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e5f3301c1c36e8add4ed89ab1bd53a9b68411d3f]] a warning when core JavaScript modules are overwritten via import
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3654]] prompt for references when renaming a tiddler
@@ -44,14 +55,22 @@ New and improved translations:
 
 !! Hackability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/aa5eaa98fcb8658dbc2b93476c2e09c9207439d8]] a saver for [[Saving to GitHub]]
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/37ea659bf011b1d4a152f54171399d94f5bba3ef]] the [[dumpvariables Macro]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/754c1251a9bdf45e8f64079a4bbdaed2d05be2b7]] new [[variables Operator]] and [[getvariable Operator]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3880]] new [[unusedtitle Macro]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/36e76429b1a1d4638374d513430393db5693b932]] new `[is[variable]]` option to the [[is Operator]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/90684f9f52809ff5df39629d3b161d7ff23002f4]] new `[is[blank]]` option to the [[is Operator]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/94f143bf643e36e817d1dd5b678515853eed6aca]] optional autofocus for the text inputs in $:/AdvancedSearch (controlled by the same [[Hidden Setting: Search AutoFocus]] as the sidebar search)
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3677]] support for deflate and gzip compression to the WebServer ListenCommand
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3756]] optional ''tabindex'' attribute to simple, framed and CodeMirror text editor engines
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3758]] ''tabindex'' attributes to edit templates
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3822]] outline colour to button, textarea, input
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/477c41f84304ed83245c87068dba3695a5053d62]] ''tooltip'' attribute to SelectWidget
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/348a0bc8bcbf5c42d9b93e5e208696d28fc95cb7]] an option for plugins to disable the initial navigation at startup
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c036c228269fc30d0df770a7c7713fd9af829df7]] $:/info/browser/language to the InfoMechanism
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f047e7cbf50edcf4775b50bdebc3f704970b8cde]] an example of using StartupActions to set the default language
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/edd3156430dd94b0ced630a1b70f2e2ef0ff6c36]] importing of JSON files to verify whether they are valid tiddler files, and import them as plain JSON if not
+* [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/issues/3974]] the LinkWidget to use the title of the target tiddler as a default if it has no content
 
 !! Bug Fixes
 
@@ -62,8 +81,24 @@ New and improved translations:
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/72f2a9425197b013ab3664e1679c6763d92d4382]] bug with animation duration being blank
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3806]] Firefox problem with drag and drop placeholders in the "open" tab of the sidebar
 * [[Ameliorated|https://github.com/Jermolene/TiddlyWiki5/pull/3809]] Firefox problem with sticky placeholder during drag and drop operations
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3819]] [[CodeMirror Plugin]] to use ''tiddler-editor-border'' colour
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/8012a3508f209fbbe68484e30ed65832cf5146b9]] problem using the TiddlySpot saver with cookies disabled
+
+!! Node.js Bug Fixes and Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/373afd72c804b0ffa2779849ba0d278d53e65df4]] new SaveWikiFolderCommand to save a wiki as a [[wiki folder|TiddlyWikiFolders]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/5b09881679200dc78e5962a0588c8f214ddedbbb]] new DeleteTiddlersCommand
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8c72a28f0c70e6a62387ccdd1431f9225a5fd2de]] (and [[also here|https://github.com/Jermolene/TiddlyWiki5/commit/feab75a6d1723cd6db5912b2902f0ec33c550fb6]]) ability to specify plugins on the command line (see [[Using TiddlyWiki on Node.js]])
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3677]] support for deflate and gzip compression to the WebServer ListenCommand
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/12630d4a91b4cc7b1eb846c3afbeda16858df05a]] an option to the LoadCommand to ignore loading errors
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/7fcd2f132e91aa375a1fece501b14e991ba1bd4c]] handling of JSON files by the file system adaptor:
+** Use `.json` files (instead of `.tid`) for any tiddler whose fields contain values that can't be stored as a .tid file
+** Save `application/json` tiddlers as `.json` files
 
 !! Developer Bug Fixes and Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e52a616891977bde142334df2a72c7dd121efb82]] support for widget subclassing -- see https://tiddlywiki.com/prerelease/dev/#WidgetSubclassingMechanism
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/pull/3635]] [[Highlight Plugin]] to use highlight.js v9.15.6
 
 ! Contributors
 
@@ -77,7 +112,16 @@ New and improved translations:
 * [[@BurningTreeC|https://github.com/BurningTreeC]]
 * [[@diego898|https://github.com/diego898]]
 * [[@dnebauer|https://github.com/dnebauer]]
+* [[@inmysocks|https://github.com/inmysocks]]
+* [[@jdjdjdjdjdjd|https://github.com/jdjdjdjdjdjd]]
 * [[@JesseWeinstein|https://github.com/JesseWeinstein]]
+* [[@joshuafontany|https://github.com/joshuafontany]]
+* [[@Kartiku|https://github.com/Kartiku]]
 * [[@kyrias|https://github.com/kyrias]]
 * [[@MarxSal|https://github.com/MarxSal]]
+* [[@MidnightLightning|https://github.com/MidnightLightning]]
+* [[@rmunn|https://github.com/rmunn]]
+* [[@talha131|https://github.com/talha131]]
+* [[@telmiger|https://github.com/telmiger]]
 * [[@the-kenny|https://github.com/the-kenny]]
+* [[@xcazin|https://github.com/xcazin]]

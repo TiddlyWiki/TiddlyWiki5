@@ -1035,7 +1035,23 @@ $tw.Wiki = function(options) {
 				shadowTiddlerTitles = Object.keys(shadowTiddlers);
 			}
 			return shadowTiddlerTitles;
-		};
+		},
+		enableIndexers = options.enableIndexers || null, // Array of indexer names to enable, or null to use all available indexers
+		indexers = [],
+		indexersByName = Object.create(null);
+
+	this.addIndexer = function(indexer,name) {
+		// Bail if this indexer is not enabled
+		if(enableIndexers && enableIndexers.indexOf(name) === -1) {
+			return;
+		}
+		indexers.push(indexer);
+		indexersByName[name] = indexer;
+	};
+
+	this.getIndexer = function(name) {
+		return indexersByName[name] || null;
+	};
 
 	// Add a tiddler to the store
 	this.addTiddler = function(tiddler) {
@@ -1046,6 +1062,7 @@ $tw.Wiki = function(options) {
 		if(tiddler) {
 			var title = tiddler.fields.title;
 			if(title) {
+				var oldTiddler = this.getTiddler(title);
 // Uncomment the following line for detailed logs of all tiddler writes
 // console.log("Adding",title,tiddler)
 				tiddlers[title] = tiddler;
@@ -1054,6 +1071,9 @@ $tw.Wiki = function(options) {
 				}
 				this.clearCache(title);
 				this.clearGlobalCache();
+				$tw.utils.each(indexers,function(indexer) {
+					indexer.update(oldTiddler,tiddler);
+				});
 				this.enqueueTiddlerEvent(title);
 			}
 		}
@@ -1064,6 +1084,7 @@ $tw.Wiki = function(options) {
 // Uncomment the following line for detailed logs of all tiddler deletions
 // console.log("Deleting",title)
 		if($tw.utils.hop(tiddlers,title)) {
+			var oldTiddler = this.getTiddler(title);
 			delete tiddlers[title];
 			if(tiddlerTitles) {
 				var index = tiddlerTitles.indexOf(title);
@@ -1073,6 +1094,10 @@ $tw.Wiki = function(options) {
 			}
 			this.clearCache(title);
 			this.clearGlobalCache();
+			var newTiddler = this.getTiddler(title);
+			$tw.utils.each(indexers,function(indexer) {
+				indexer.update(oldTiddler,newTiddler);
+			});
 			this.enqueueTiddlerEvent(title,true);
 		}
 	};
@@ -1159,7 +1184,6 @@ $tw.Wiki = function(options) {
 				callback(tiddlers[title],title);
 			}
 		}
-
 	};
 
 	// Test for the existence of a tiddler (excludes shadow tiddlers)
@@ -1273,8 +1297,14 @@ $tw.Wiki = function(options) {
 		shadowTiddlerTitles = null;
 		this.clearCache(null);
 		this.clearGlobalCache();
+		$tw.utils.each(indexers,function(indexer) {
+			indexer.rebuild();
+		});
 	};
 
+	if(this.addIndexersToWiki) {
+		this.addIndexersToWiki();
+	}
 };
 
 // Dummy methods that will be filled in after boot
@@ -2044,10 +2074,17 @@ $tw.loadTiddlersNode = function() {
 	$tw.wiki.addTiddler($tw.loadPluginFolder($tw.boot.corePath));
 	// Load any extra plugins
 	$tw.utils.each($tw.boot.extraPlugins,function(name) {
-		var parts = name.split("/"),
-			type = parts[0];
-		if(parts.length  === 3 && ["plugins","themes","languages"].indexOf(type) !== -1) {
-			$tw.loadPlugins([parts[1] + "/" + parts[2]],$tw.config[type + "Path"],$tw.config[type + "EnvVar"]);
+		if(name.charAt(0) === "+") { // Relative path to plugin
+			var pluginFields = $tw.loadPluginFolder(name.substring(1));;
+			if(pluginFields) {
+				$tw.wiki.addTiddler(pluginFields);
+			}
+		} else {
+			var parts = name.split("/"),
+				type = parts[0];
+			if(parts.length  === 3 && ["plugins","themes","languages"].indexOf(type) !== -1) {
+				$tw.loadPlugins([parts[1] + "/" + parts[2]],$tw.config[type + "Path"],$tw.config[type + "EnvVar"]);
+			}			
 		}
 	});
 	// Load the tiddlers from the wiki directory
