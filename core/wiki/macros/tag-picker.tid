@@ -40,12 +40,12 @@ $actions$
 <$reveal state=<<qualify "$:/state/popup/tags-auto-complete">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown">
 <$list filter="[{$:/temp/NewTagName}minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
-<$list filter="[tags[]!is[system]search:title{$:/temp/NewTagName}sort[]]" variable="tag">
+<$list filter="[subfilter{$:/core/filters/Tags}]" variable="tag">
 <<tag-button>>
 </$list></$list>
 <hr>
 <$list filter="[{$:/temp/NewTagName}minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
-<$list filter="[tags[]is[system]search:title{$:/temp/NewTagName}sort[]]" variable="tag">
+<$list filter="[subfilter{$:/core/filters/SystemTags}]" variable="tag">
 <<tag-button>>
 </$list></$list>
 </div>
