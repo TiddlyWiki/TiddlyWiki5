@@ -33,11 +33,11 @@ A similar syntax can be used to transclude a list of tiddlers matching a specifi
 
 ! Generated Widgets
 
-The WikiText transclusion syntax generates a TiddlerWidget wrapped around a TranscludeWidget. For example, `{{MyTiddler||MyTemplate!!myField}}` generates the following pair of widgets:
+The syntax - `{{...}}` and `{{{...}}}` - are designed for convenience. Behind the scenes each generates a TiddlerWidget wrapped around a TranscludeWidget. For example, `{{MyTiddler||MyTemplate}}` generates the following pair of widgets:
 
 ```
 <$tiddler tiddler="MyTiddler">
-<$transclude tiddler="MyTemplate" field="myField"/>
+<$transclude tiddler="MyTemplate"/>
 </$tiddler>
 ```
 
