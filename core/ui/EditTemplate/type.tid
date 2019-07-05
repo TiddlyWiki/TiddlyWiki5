@@ -11,11 +11,11 @@ tags: $:/tags/EditTemplate
 <$reveal state=<<qualify "$:/state/popup/type-dropdown">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown tc-edit-type-dropdown">
 <$linkcatcher to="!!type">
-<$list filter='[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]each[group]sort[group-sort]]'>
+<$list filter='[subfilter{$:/core/filters/Types/GroupSort}]'>
 <div class="tc-dropdown-item">
 <$text text={{!!group}}/>
 </div>
-<$list filter="[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]group{!!group}] +[sort[description]]"><$link to={{!!name}}><$view field="description"/> (<$view field="name"/>)</$link>
+<$list filter="[subfilter{$:/core/filters/Types}]"><$link to={{!!name}}><$view field="description"/> (<$view field="name"/>)</$link>
 </$list>
 </$list>
 </$linkcatcher>
