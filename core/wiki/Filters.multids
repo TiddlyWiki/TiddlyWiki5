@@ -1,6 +1,9 @@
 title: $:/core/filters/
 
+Fields: [!is[shadow]!is[system]fields[]search:title{$:/temp/newfieldname}sort[]] -created -creator -draft.of -draft.title -modified -modifier -tags -text -title -type
+Fields/System: [fields[]search:title{$:/temp/newfieldname}sort[]] -[!is[shadow]!is[system]fields[]]
 SearchResults/AllMatches: [!is[system]search{$(searchTiddler)$}sort[title]limit[250]]
 SearchResults/Matches: [!is[system]search:title{$(searchTiddler)$}sort[title]limit[250]]
 SystemTags: [tags[]is[system]search:title{$:/temp/NewTagName}sort[]]
 Tags: [tags[]!is[system]search:title{$:/temp/NewTagName}sort[]]
+Types: [all[shadows+tiddlers]prefix[$:/language/Docs/Types/]each[group]sort[group-sort]]
