@@ -1,0 +1,6 @@
+title: $:/core/filters/
+
+SearchResults/AllMatches: [!is[system]search{$(searchTiddler)$}sort[title]limit[250]]
+SearchResults/Matches: [!is[system]search:title{$(searchTiddler)$}sort[title]limit[250]]
+SystemTags: [tags[]is[system]search:title{$:/temp/NewTagName}sort[]]
+Tags: [tags[]!is[system]search:title{$:/temp/NewTagName}sort[]]
