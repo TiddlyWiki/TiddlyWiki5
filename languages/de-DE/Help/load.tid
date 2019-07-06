@@ -7,9 +7,11 @@ Die Umsetzung der geladenen Datei wird anhand der Datei-Erweiterung bestimmt. Ve
 
 
 ```
---load <filepath>
---load <dirpath>
+--load <filepath> [noerror]
+--load <dirpath> [noerror]
 ```
+
+Der "load" Befehl erzeugt eine Fehlermeldung, wenn keine Tiddler gefunden werden. Diese Verhalten kann mit dem Parameter "noerror" unterdrückt werden.
 
 Um Daten aus einer verschlüsselten TiddlyWiki Datei zu laden, muss zuerst mit dem "password" Parameter ein Passwort definiert werden. 
 
