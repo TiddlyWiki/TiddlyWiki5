@@ -1,5 +1,6 @@
+bag: default
 created: 20140919155729620
-modified: 20190617115456598
+modified: 20190706213740253
 tags: Macros [[Core Macros]]
 title: Table-of-Contents Macros
 type: text/vnd.tiddlywiki
@@ -40,18 +41,23 @@ To make a table of contents appear in the sidebar, see [[How to add a new tab to
 
 !! Parameters
 
-;tag
+; tag
 : The root tag that identifies the top level of the tree
-;sort
+; sort
 : An optional extra [[filter step|Filter Step]], e.g. `sort[title]`
-;exclude
-: An optional extra [[filter step|Filter Step]], e.g. `titles` or `[tag[title]]` 
+; exclude
+: <<.from-version "5.1.20">> An optional extra [[filter step|Filter Step]], e.g. `titles` or `[tag[title]]` 
 
+<<<
 The first two parameters are combined into a single [[filter expression|Filter Expression]] like this:
 
 > `[tag[$tag$]$sort$]`
+<<<
 
-<<.var toc-tabbed-internal-nav>> and <<.var toc-tabbed-external-nav>> take additional parameters:
+; name
+: <<.from-version "5.1.20">> If several TOCs are created, they need a unique name. This name can be used by future plugins, that implement an "auto expand/fold" mechanism, depending on a focused tidler. As default the `<<qualify>>` macro is used. The content of the qualify macro is not human predictable. A manually defined name is! 
+
+!!! <<.var toc-tabbed-internal-nav>> and <<.var toc-tabbed-external-nav>> take additional parameters:
 
 ;selectedTiddler
 : The title of the [[state tiddler|StateMechanism]] for noting the currently selected tiddler, defaulting to `$:/temp/toc/selectedTiddler`. It is recommended that this be a [[system tiddler|SystemTiddlers]]
