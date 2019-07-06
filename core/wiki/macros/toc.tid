@@ -13,8 +13,6 @@ tags: $:/tags/Macro
 </$set> 
 \end
 
-\define getItemClass() [all[current]] -[<tv-history-list>get[focused-tiddler]]
-
 \define toc-body(tag,sort:"")
 \whitespace trim
 <ol class="tc-toc">
@@ -112,11 +110,11 @@ tags: $:/tags/Macro
 
 \define toc-expandable(tag,sort:"",exclude:"",name)
 \whitespace trim
-<$vars name=<<__name__>> >
+<$set name=name value=<<__name__>> emptyValue=<<qualify>> >
   <$set name=visited filter=<<__exclude__>> >
      <$macrocall $name="toc-expandableX" tag=<<__tag__>> sort=<<__sort__>>/>
   </$set>
-</$vars>
+</$set>
 \end
 
 \define toc-linked-selective-expandable-body()
@@ -193,13 +191,13 @@ tags: $:/tags/Macro
 </$vars>
 \end
 
-\define toc-selective-expandable(tag,sort:"",exclude:"",name:a)
+\define toc-selective-expandable(tag,sort:"",exclude:"",name)
 \whitespace trim
-<$vars name=<<__name__>> >
+<$set name=name value=<<__name__>> emptyValue=<<qualify>> >
   <$set name=visited filter=<<__exclude__>> >
      <$macrocall $name="toc-selective-expandableX" tag=<<__tag__>> sort=<<__sort__>>/>
   </$set>
-</$vars>
+</$set>
 \end
 
 \define toc-tabbed-external-nav(tag,sort:"",exclude:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"")
