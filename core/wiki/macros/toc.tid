@@ -3,11 +3,11 @@ tags: $:/tags/Macro
 
 \define toc-caption()
 \whitespace trim
-<$set name="tv-wikilinks" value=no>
-  <$list filter="[all[current]has[caption]]" 
-      emptyMessage="<$view field=title format=text/>">
-     <$transclude field=caption>
-       <$view field=title format=text/>
+<$set name="tv-wikilinks" value="no">
+  <$list filter="[all[current]has[caption]]"
+      emptyMessage="<$view field="title" format="text"/>">
+     <$transclude field="caption">
+       <$view field="title" format="text"/>
      </$transclude>
   </$list>
 </$set> 
@@ -17,7 +17,7 @@ tags: $:/tags/Macro
 \whitespace trim
 <ol class="tc-toc">
   <$list filter="""[all[shadows+tiddlers]tag<__tag__>!has[draft.of]$sort$] -[<__tag__>] -[enlist<visited>]""">
-    <$set name=visited filter="[enlist<visited>] [<currentTiddler>]">
+    <$set name="visited" filter="[enlist<visited>] [<currentTiddler>]">
       <$set name="toc-item-class" filter=<<getItemClass>> emptyValue="toc-item-selected" value="toc-item">
         <li class=<<toc-item-class>>>
           <$list filter="[all[current]toc-link[no]]" emptyMessage="<$link><<toc-caption>></$link>">
@@ -33,7 +33,7 @@ tags: $:/tags/Macro
 
 \define toc(tag,sort:"",exclude:"")
 \whitespace trim
-<$set name=visited filter=<<__exclude__>> >
+<$set name="visited" filter=<<__exclude__>> >
   <$macrocall $name="toc-body"  tag=<<__tag__>> sort=<<__sort__>>/>
 </$set>
 \end
@@ -57,7 +57,7 @@ tags: $:/tags/Macro
       <<toc-caption>>
     </$link>
     <$reveal type="match" stateTitle=<<toc-state>> text="open">
-      <$macrocall $name="toc-expandableX" tag=<<currentTiddler>> sort=<<sort>> />
+      <$macrocall $name="toc-expandable_private" tag=<<currentTiddler>> sort=<<sort>> />
     </$reveal>
     </li>
   </$set>
@@ -82,7 +82,7 @@ tags: $:/tags/Macro
         </$button>
       </$reveal>
       <$reveal type="match" stateTitle=<<toc-state>> text="open">
-        <$macrocall $name="toc-expandableX" tag=<<currentTiddler>> sort=<<sort>> />
+        <$macrocall $name="toc-expandable_private" tag=<<currentTiddler>> sort=<<sort>> />
       </$reveal>
     </li>
   </$set>
@@ -93,10 +93,10 @@ tags: $:/tags/Macro
 <$macrocall $name="toc-linked-expandable-body"/>
 \end
 
-\define toc-expandableX(tag,sort:"")
+\define toc-expandable_private(tag,sort:"")
 \whitespace trim
 <$vars tag=<<__tag__>> sort=<<__sort__>> path={{{ [<path>addsuffix[/]addsuffix<__tag__>] }}}>
-  <$set name=visited filter="[enlist<visited>] [<__tag__>]">
+  <$set name="visited" filter="[enlist<visited>] [<__tag__>]">
     <ol class="tc-toc toc-expandable">
       <$list filter="""[all[shadows+tiddlers]tag<tag>!has[draft.of]$sort$] -[<tag>] -[enlist<visited>]""">
         <$list filter="[all[current]toc-link[no]]" emptyMessage=<<toc-expandable-empty-message>> >
@@ -110,9 +110,9 @@ tags: $:/tags/Macro
 
 \define toc-expandable(tag,sort:"",exclude:"",name)
 \whitespace trim
-<$set name=name value=<<__name__>> emptyValue=<<qualify>> >
-  <$set name=visited filter=<<__exclude__>> >
-     <$macrocall $name="toc-expandableX" tag=<<__tag__>> sort=<<__sort__>>/>
+<$set name="name" value=<<__name__>> emptyValue=<<qualify>> >
+  <$set name="visited" filter=<<__exclude__>> >
+     <$macrocall $name="toc-expandable_private" tag=<<__tag__>> sort=<<__sort__>>/>
   </$set>
 </$set>
 \end
@@ -138,7 +138,7 @@ tags: $:/tags/Macro
         <<toc-caption>>
       </$link>
       <$reveal type="match" stateTitle=<<toc-state>> text="open">
-        <$macrocall $name="toc-selective-expandableX" tag=<<currentTiddler>> sort=<<sort>> />
+        <$macrocall $name="toc-selective-expandable_private" tag=<<currentTiddler>> sort=<<sort>> />
       </$reveal>
     </li>
   </$set>
@@ -165,7 +165,7 @@ tags: $:/tags/Macro
         </$reveal>
       </$list>
       <$reveal type="match" stateTitle=<<toc-state>> text="open">
-        <$macrocall $name="toc-selective-expandableX" tag=<<currentTiddler>> sort=<<sort>> />
+        <$macrocall $name="toc-selective-expandable_private" tag=<<currentTiddler>> sort=<<sort>> />
       </$reveal>
     </li>
   </$set>
@@ -176,10 +176,10 @@ tags: $:/tags/Macro
 <$macrocall $name="toc-linked-selective-expandable-body"/>
 \end
 
-\define toc-selective-expandableX(tag,sort:"")
+\define toc-selective-expandable_private(tag,sort:"")
 \whitespace trim
 <$vars tag=<<__tag__>> sort=<<__sort__>> path={{{ [<path>addsuffix[/]addsuffix<__tag__>] }}}>
-  <$set name=visited filter="[enlist<visited>] [<__tag__>]">
+  <$set name="visited" filter="[enlist<visited>] [<__tag__>]">
     <ol class="tc-toc toc-selective-expandable">
       <$list filter="""[all[shadows+tiddlers]tag<tag>!has[draft.of]$sort$] -[<tag>] -[enlist<visited>]""">
         <$list filter="[all[current]toc-link[no]]" variable="ignore" emptyMessage=<<toc-selective-expandable-empty-message>> >
@@ -193,9 +193,9 @@ tags: $:/tags/Macro
 
 \define toc-selective-expandable(tag,sort:"",exclude:"",name)
 \whitespace trim
-<$set name=name value=<<__name__>> emptyValue=<<qualify>> >
-  <$set name=visited filter=<<__exclude__>> >
-     <$macrocall $name="toc-selective-expandableX" tag=<<__tag__>> sort=<<__sort__>>/>
+<$set name="name" value=<<__name__>> emptyValue=<<qualify>> >
+  <$set name="visited" filter=<<__exclude__>> >
+     <$macrocall $name="toc-selective-expandable_private" tag=<<__tag__>> sort=<<__sort__>>/>
   </$set>
 </$set>
 \end
@@ -205,7 +205,7 @@ tags: $:/tags/Macro
   <div class="tc-tabbed-table-of-contents">
     <$linkcatcher to=<<__selectedTiddler__>>>
       <div class="tc-table-of-contents">
-        <$set name=getItemClass value="""[all[current]]-[<__selectedTiddler__>get[text]]""">
+        <$set name="getItemClass" value="""[all[current]]-[<__selectedTiddler__>get[text]]""">
           <$macrocall $name="toc-selective-expandable" tag=<<__tag__>> sort=<<__sort__>>  exclude=<<__exclude__>> />
         </$set>
       </div>
