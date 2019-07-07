@@ -252,13 +252,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	Cancel Popups
 	*/
 	EditTextWidget.prototype.cancelPopups = function() {
-		var numPopups = $tw.popup.popups.length;
-		for(var i=0; i<numPopups.length; i++) {
-			var popup = $tw.popup.popups.pop();
-			if(popup.title) {
-				this.wiki.deleteTiddler(popup.title);
-			}
-        	}
+		$tw.popup.cancel($tw.popup.popups.length);
 	};
 
 	/*
