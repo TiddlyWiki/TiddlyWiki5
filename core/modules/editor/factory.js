@@ -252,7 +252,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	Cancel Popups
 	*/
 	EditTextWidget.prototype.cancelPopups = function() {
-		$tw.popup.cancel();
+		$tw.popup.cancel(0);
 	};
 
 	/*
