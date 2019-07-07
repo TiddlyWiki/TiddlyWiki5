@@ -1115,6 +1115,7 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-editor-toolbar button {
 	vertical-align: middle;
 	background-color: <<colour tiddler-controls-foreground>>;
+	color: <<colour tiddler-controls-foreground-selected>>;
 	fill: <<colour tiddler-controls-foreground-selected>>;
 	border-radius: 4px;
 	padding: 3px;
