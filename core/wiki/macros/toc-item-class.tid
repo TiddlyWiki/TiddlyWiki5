@@ -1,4 +1,0 @@
-title: $:/core/macros/toc/item-class
-tags: $:/tags/Macro
-
-\define getItemClass() [all[current]] -[<tv-history-list>get[current-tiddler]]

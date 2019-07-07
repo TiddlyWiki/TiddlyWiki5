@@ -5,13 +5,15 @@ tags: $:/tags/Macro
 \whitespace trim
 <$set name="tv-wikilinks" value="no">
   <$list filter="[all[current]has[caption]]"
-      emptyMessage="<$view field="title" format="text"/>">
+      emptyMessage="<$view field='title' format='text'/>">
      <$transclude field="caption">
        <$view field="title" format="text"/>
      </$transclude>
   </$list>
 </$set> 
 \end
+
+\define getItemClass() [all[current]] -[<tv-history-list>get{$:/core/macros/toc/focused-field}]
 
 \define toc-body(tag,sort:"")
 \whitespace trim
@@ -205,7 +207,7 @@ tags: $:/tags/Macro
   <div class="tc-tabbed-table-of-contents">
     <$linkcatcher to=<<__selectedTiddler__>>>
       <div class="tc-table-of-contents">
-        <$set name="getItemClass" value="""[all[current]]-[<__selectedTiddler__>get[text]]""">
+        <$set name="getItemClass" value="""[all[current]] -[<__selectedTiddler__>get[text]]""">
           <$macrocall $name="toc-selective-expandable" tag=<<__tag__>> sort=<<__sort__>>  exclude=<<__exclude__>> />
         </$set>
       </div>
