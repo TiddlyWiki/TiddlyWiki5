@@ -249,6 +249,19 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	};
 
 	/*
+	Cancel Popups
+	*/
+	EditTextWidget.prototype.cancelPopups = function() {
+		var numPopups = $tw.popup.popups.length;
+		for(var i=0; i<numPopups.length; i++) {
+			var popup = $tw.popup.popups.pop();
+			if(popup.title) {
+				this.wiki.deleteTiddler(popup.title);
+			}
+        	}
+	};
+
+	/*
 	Handle a dom "keydown" event, which we'll bubble up to our container for the keyboard widgets benefit
 	*/
 	EditTextWidget.prototype.handleKeydownEvent = function(event) {
