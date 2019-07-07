@@ -524,7 +524,7 @@ html body.tc-body .tc-btn-rounded:hover svg {
 	fill: <<colour download-foreground>>;
 }
 
-.tc-more-plugins-btn {
+.tc-primary-btn {
  	background: <<colour primary>>;
 }
 
