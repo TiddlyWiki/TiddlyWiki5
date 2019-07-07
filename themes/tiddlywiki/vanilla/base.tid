@@ -524,6 +524,10 @@ html body.tc-body .tc-btn-rounded:hover svg {
 	fill: <<colour download-foreground>>;
 }
 
+.tc-more-plugins-btn {
+ 	background: <<colour primary>>;
+}
+
 .tc-sidebar-lists input {
 	color: <<colour foreground>>;
 }
