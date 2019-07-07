@@ -83,7 +83,7 @@ $(itemFilter1)$ $(itemFilter2)$
 </$list>
 \end
 
-\define selectable-input(tiddler:"",field:"text",index:"",tag:"input",type:"",default:"",placeholder:" selectable",focusPopup:"",class:"tc-selectable-input",focus:"no",saveTiddler:"",refreshTiddler:"",refreshAction:"focus-update",refreshCondition:"",filterTiddler:"",filter1Field:"input-filter-1",filter2Field:"input-filter-2",refreshQualifier:"",filterMinLength:"0",tabindex:"",size:"",autoHeight:"",minHeight:"",rows:"")
+\define selectable-input(tiddler:"",field:"text",index:"",tag:"input",type:"",default:"",placeholder:"",focusPopup:"",class:"tc-selectable-input",focus:"no",saveTiddler:"",refreshTiddler:"",refreshAction:"focus-update",refreshCondition:"",filterTiddler:"",filter1Field:"input-filter-1",filter2Field:"input-filter-2",refreshQualifier:"",filterMinLength:"0",tabindex:"",size:"",autoHeight:"",minHeight:"",rows:"")
 <$vars tv-refresh-input-qualifier=<<__refreshQualifier__>> 1Filter={{{ [<__filterTiddler__>get<__filter1Field__>] }}} 2Filter={{{ [<__filterTiddler__>get<__filter2Field__>] }}}>
 <$keyboard key="((input-down))" actions="""<$macrocall $name="selectable-input-actions" beforeafter="after" reverse="" tiddler=<<__tiddler__>> field=<<__field__>> index=<<__index__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>> filter1=<<1Filter>> filter2=<<2Filter>> filterMinLength="$filterMinLength$"/>""">
 <$keyboard key="((input-up))" actions="""<$macrocall $name="selectable-input-actions" beforeafter="before" reverse="reverse[]" tiddler=<<__tiddler__>> field=<<__field__>> index=<<__index__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>> filter1=<<1Filter>> filter2=<<2Filter>> filterMinLength="$filterMinLength$"/>""">
