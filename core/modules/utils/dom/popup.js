@@ -153,16 +153,17 @@ Detect if a Popup contains an input field that has focus
 Returns true or false
 */
 Popup.prototype.detectInputWithinPopup = function(node) {
+	var withinPopup = false;
 	for(var i=0; i<this.popups.length; i++) {
 		var popup = this.popups[i].domNode;
 		while(node) {
 			if(node === popup || (node.classList && node.classList.contains("tc-popup-keep"))) {
-				return true;
+				withinPopup = true;
 			}
 			node = node.parentNode;
 		}
 	}
-	return false;
+	return withinPopup;
 };
 
 /*
