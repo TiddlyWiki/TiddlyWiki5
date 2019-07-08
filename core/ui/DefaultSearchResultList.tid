@@ -9,7 +9,7 @@ caption: {{$:/language/Search/DefaultResults/Caption}}
 
 //<small>{{$:/language/Search/Matches/All}}</small>//
 
-<$list filter="[!is[system]search{$(searchTiddler)$}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+<$list filter="[!is[system]search{$(searchTiddler)$}sort[title]limit[250]] -[!is[system]search:title{$(searchTiddler)$}]" template="$:/core/ui/ListItemTemplate"/>
 
 \end
 <<searchResultList>>
