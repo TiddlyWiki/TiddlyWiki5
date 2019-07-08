@@ -173,7 +173,7 @@ Popup.prototype.cancel = function(level) {
 	var numPopups = this.popups.length;
 	level = Math.max(0,Math.min(level,numPopups));
 	for(var t=level; t<numPopups; t++) {
-		var focusedInput = this.popups[i].domNode.ownerDocument.querySelector("input:focus-within");
+		var focusedInput = this.popups[t].domNode.ownerDocument.querySelector("input:focus-within");
 		var inputWithinPopup;
 		if(focusedInput) {
 			inputWithinPopup = this.detectInputWithinPopup(focusedInput);
