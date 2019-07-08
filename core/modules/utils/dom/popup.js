@@ -144,8 +144,25 @@ Popup.prototype.show = function(options) {
 	}
 	// Add the click handler if we have any popups
 	if(this.popups.length > 0) {
-		this.rootElement.addEventListener("click",this,true);		
+		this.rootElement.addEventListener("click",this,true);
 	}
+};
+
+/*
+Detect if a Popup contains an input field that has focus
+Returns true or false
+*/
+Popup.prototype.detectInputWithinPopup = function(node) {
+	for(var i=0; i<this.popups.length; i++) {
+		var popup = this.popups[i].domNode;
+		while(node) {
+			if(node === popup || (node.classList && node.classList.contains("tc-popup-keep"))) {
+				return true;
+			}
+			node = node.parentNode;
+		}
+	}
+	return false;
 };
 
 /*
@@ -156,9 +173,16 @@ Popup.prototype.cancel = function(level) {
 	var numPopups = this.popups.length;
 	level = Math.max(0,Math.min(level,numPopups));
 	for(var t=level; t<numPopups; t++) {
-		var popup = this.popups.pop();
-		if(popup.title) {
-			popup.wiki.deleteTiddler(popup.title);
+		var focusedInput = this.popups[i].domNode.ownerDocument.querySelector("input:focus-within");
+		var inputWithinPopup;
+		if(focusedInput) {
+			inputWithinPopup = this.detectInputWithinPopup(focusedInput);
+		}
+		if(!inputWithinPopup) {
+			var popup = this.popups.pop();
+			if(popup.title) {
+				popup.wiki.deleteTiddler(popup.title);
+			}
 		}
 	}
 	if(this.popups.length === 0) {
