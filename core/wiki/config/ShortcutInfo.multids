@@ -1,5 +1,6 @@
 title: $:/config/ShortcutInfo/
 
+add-field: {{$:/language/EditTemplate/Fields/Add/Button}}
 bold: {{$:/language/Buttons/Bold/Hint}}
 cancel-edit-tiddler: {{$:/language/Buttons/Cancel/Hint}}
 excise: {{$:/language/Buttons/Excise/Hint}}
