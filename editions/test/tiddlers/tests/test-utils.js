@@ -25,6 +25,17 @@ describe("Utility tests", function() {
 		expect(psa(" [[Tidd\u00a0ler8]] two ")).toEqual(["Tidd\u00a0ler8","two"]);
 	});
 
+	it("should handle stringifying a string array", function() {
+		var str = $tw.utils.stringifyList;
+		expect(str([])).toEqual("");
+		expect(str(["Tiddler8"])).toEqual("Tiddler8");
+		expect(str(["Tiddler8  "])).toEqual("[[Tiddler8  ]]");
+		expect(str(["A+B", "A-B", "A=B"])).toEqual("A+B A-B A=B");
+		expect(str(["A B"])).toEqual("[[A B]]");
+		expect(str(["+T", "-T", "~T", "=T", "$T"])).toEqual("[[+T]] [[-T]] [[~T]] [[=T]] $T");
+		expect(str(["A", "", "B"])).toEqual("A  B");
+	});
+
 	it("should handle formatting a date string", function() {
 		var fds = $tw.utils.formatDateString,
 			// nov is month: 10!
