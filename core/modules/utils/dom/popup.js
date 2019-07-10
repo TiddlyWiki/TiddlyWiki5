@@ -149,16 +149,40 @@ Popup.prototype.show = function(options) {
 };
 
 /*
+Detect if a Popup contains an input field that has focus
+Returns true or false
+*/
+Popup.prototype.detectInputWithinPopup = function(node) {
+	var withinPopup = false;
+	for(var i=0; i<this.popups.length; i++) {
+		var popup = (this.popups[i] && this.popups[i].domNode) ? this.popups[i].domNode : null;
+		while(node && popup) {
+			if(node === popup || (node.classList && node.classList.contains("tc-popup-keep"))) {
+				withinPopup = true;
+			}
+			node = node.parentNode;
+		}
+	}
+	return withinPopup;
+};
+
+/*
 Cancel all popups at or above a specified level or DOM node
 level: popup level to cancel (0 cancels all popups)
 */
-Popup.prototype.cancel = function(level) {
+Popup.prototype.cancel = function(level,focusedInputNode) {
 	var numPopups = this.popups.length;
 	level = Math.max(0,Math.min(level,numPopups));
 	for(var t=level; t<numPopups; t++) {
-		var popup = this.popups.pop();
-		if(popup.title) {
-			popup.wiki.deleteTiddler(popup.title);
+		var inputWithinPopup;
+		if(focusedInputNode) {
+			inputWithinPopup = this.detectInputWithinPopup(focusedInputNode);
+		}
+		if(!inputWithinPopup) {
+			var popup = this.popups.pop();
+			if(popup.title) {
+				popup.wiki.deleteTiddler(popup.title);
+			}
 		}
 	}
 	if(this.popups.length === 0) {
