@@ -180,8 +180,12 @@ Popup.prototype.cancel = function(level,focusedInputNode) {
 		}
 		if(!inputWithinPopup) {
 			var popup = this.popups.pop();
-			if(popup.title) {
-				popup.wiki.deleteTiddler(popup.title);
+		  if(popup.title) {
+			  if(popup.noStateReference) {
+				  popup.wiki.deleteTiddler(popup.title);
+			  } else {
+				  popup.wiki.deleteTiddler($tw.utils.parseTextReference(popup.title).title);
+        }
 			}
 		}
 	}
