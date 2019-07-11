@@ -158,7 +158,11 @@ Popup.prototype.cancel = function(level) {
 	for(var t=level; t<numPopups; t++) {
 		var popup = this.popups.pop();
 		if(popup.title) {
-			popup.wiki.deleteTiddler(popup.title);
+			if(popup.noStateReference) {
+				popup.wiki.deleteTiddler(popup.title);
+			} else {
+				popup.wiki.deleteTiddler($tw.utils.parseTextReference(popup.title).title);
+			}
 		}
 	}
 	if(this.popups.length === 0) {
