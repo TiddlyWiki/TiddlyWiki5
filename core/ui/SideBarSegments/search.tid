@@ -1,16 +1,22 @@
 title: $:/core/ui/SideBarSegments/search
 tags: $:/tags/SideBarSegment
 
+\define advanced-search-actions()
+<$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
+<$action-setfield $tiddler="$:/temp/search" text=""/>
+<$action-navigate $to="$:/AdvancedSearch"/>
+\end
+
 <div class="tc-sidebar-lists tc-sidebar-search">
 
 <$set name="searchTiddler" value="$:/temp/search">
 <div class="tc-search">
+<$keyboard key="((advanced-search))" actions=<<advanced-search-actions>>>
 <$edit-text tiddler="$:/temp/search" type="search" tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> class="tc-popup-handle"/>
+</$keyboard>
 <$reveal state="$:/temp/search" type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
-<$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
-<$action-setfield $tiddler="$:/temp/search" text=""/>
-<$action-navigate $to="$:/AdvancedSearch"/>
+<<advanced-search-actions>>
 {{$:/core/images/advanced-search-button}}
 </$button>
 <$button class="tc-btn-invisible">
