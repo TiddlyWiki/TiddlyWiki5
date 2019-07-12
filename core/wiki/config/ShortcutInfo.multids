@@ -1,6 +1,6 @@
 title: $:/config/ShortcutInfo/
 
-advanced-search: {{$:/language/Buttons/AdvancedSearch/Hint}} - <kbd>{{$:/config/shortcuts/advanced-search}}</kbd>
+advanced-search: {{$:/language/Buttons/AdvancedSearch/Hint}}
 bold: {{$:/language/Buttons/Bold/Hint}}
 cancel-edit-tiddler: {{$:/language/Buttons/Cancel/Hint}}
 excise: {{$:/language/Buttons/Excise/Hint}}
