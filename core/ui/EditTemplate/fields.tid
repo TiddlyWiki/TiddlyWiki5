@@ -9,14 +9,18 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 \define config-filter()
 [[hide]] -[title{$(config-title)$}]
 \end
+\define current-tiddler-new-field-selector()
+[data-tiddler-title="$(currentTiddlerCSSescaped)$"] .tc-edit-field-add-name input
+\end
 
 \define new-field-actions()
-<$vars name={{$:/temp/newfieldname}}>
+<$vars name={{$:/temp/newfieldname}} currentTiddlerCSSescaped={{{ [<currentTiddler>escapecss[]] }}}>
 <$action-sendmessage $message="tm-add-field"
 $name=<<name>>
 $value={{$:/temp/newfieldvalue}}/>
 <$action-deletetiddler $tiddler="$:/temp/newfieldname"/>
 <$action-deletetiddler $tiddler="$:/temp/newfieldvalue"/>
+<$action-sendmessage $message="tm-focus-selector" $param=<<current-tiddler-new-field-selector>>/>
 </$vars>
 \end
 
