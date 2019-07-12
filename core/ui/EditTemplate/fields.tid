@@ -10,15 +10,22 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 [[hide]] -[title{$(config-title)$}]
 \end
 
+\define current-tiddler-new-field-selector()
+[data-tiddler-title="$(currentTiddlerCSSescaped)$"] .tc-edit-field-add-name input
+\end
+
+\define new-field-actions()
+<$action-sendmessage $message="tm-add-field" $name={{$:/temp/newfieldname}} $value={{$:/temp/newfieldvalue}}/>
+<$action-deletetiddler $tiddler="$:/temp/newfieldname"/>
+<$action-deletetiddler $tiddler="$:/temp/newfieldvalue"/>
+<$action-sendmessage $message="tm-focus-selector" $param=<<current-tiddler-new-field-selector>>/>
+\end
+
 \define new-field()
 <$vars name={{$:/temp/newfieldname}}>
 <$reveal type="nomatch" text="" default=<<name>>>
 <$button>
-<$action-sendmessage $message="tm-add-field"
-$name=<<name>>
-$value={{$:/temp/newfieldvalue}}/>
-<$action-deletetiddler $tiddler="$:/temp/newfieldname"/>
-<$action-deletetiddler $tiddler="$:/temp/newfieldvalue"/>
+<$macrocall $name="new-field-actions"/>
 <<lingo Fields/Add/Button>>
 </$button>
 </$reveal>
@@ -88,10 +95,15 @@ $value={{$:/temp/newfieldvalue}}/>
 </div>
 </$reveal>
 <span class="tc-edit-field-add-value">
+<$set name="currentTiddlerCSSescaped" value={{{ [<currentTiddler>escapecss[]] }}}>
+<$keyboard key="((add-field))" actions=<<new-field-actions>>>
 <$edit-text tiddler="$:/temp/newfieldvalue" tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Value/Placeholder}} class="tc-edit-texteditor" tabindex={{$:/config/EditTabIndex}}/>
+</$keyboard>
+</$set>
 </span>
 <span class="tc-edit-field-add-button">
 <$macrocall $name="new-field"/>
 </span>
 </div>
 </$fieldmangler>
+
