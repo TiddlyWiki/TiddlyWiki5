@@ -94,16 +94,16 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 </$set>
 </div>
 </$reveal>
-<span class="tc-edit-field-add-value">
 <$set name="currentTiddlerCSSescaped" value={{{ [<currentTiddler>escapecss[]] }}}>
+<span class="tc-edit-field-add-value">
 <$keyboard key="((add-field))" actions=<<new-field-actions>>>
 <$edit-text tiddler="$:/temp/newfieldvalue" tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Value/Placeholder}} class="tc-edit-texteditor" tabindex={{$:/config/EditTabIndex}}/>
 </$keyboard>
-</$set>
 </span>
 <span class="tc-edit-field-add-button">
 <$macrocall $name="new-field"/>
 </span>
+</$set>
 </div>
 </$fieldmangler>
 
