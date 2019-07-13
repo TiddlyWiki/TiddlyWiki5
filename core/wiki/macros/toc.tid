@@ -58,7 +58,7 @@ tags: $:/tags/Macro
 </$qualify>
 \end
 
-\define toc-unlinked-expandable-body(tag,sort:"",itemClassFilter:" ",exclude,path)
+\define toc-unlinked-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
 <!-- helper function -->
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
@@ -101,7 +101,7 @@ tags: $:/tags/Macro
 </$vars>
 \end
 
-\define toc-linked-selective-expandable-body(tag,sort:"",itemClassFilter:" ",exclude,path)
+\define toc-linked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item" >
     <li class=<<toc-item-class>>>
@@ -128,7 +128,7 @@ tags: $:/tags/Macro
 </$qualify>
 \end
 
-\define toc-unlinked-selective-expandable-body(tag,sort:"",itemClassFilter:" ",exclude,path)
+\define toc-unlinked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
