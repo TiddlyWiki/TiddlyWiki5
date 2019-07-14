@@ -1,6 +1,6 @@
 title: $:/core/ui/EditTemplate
 
-\define actions()
+\define save-tiddler-actions()
 <$action-sendmessage $message="tm-add-tag" $param={{$(newTagNameTiddler)$}}/>
 <$action-deletetiddler $tiddler="$(newTagNameTiddler)$"/>
 <$action-sendmessage $message="tm-add-field" $name={{$(newFieldNameTiddler)$}} $value={{$(newFieldValueTiddler)$}}/>
@@ -16,7 +16,7 @@ tc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerCl
 <$fieldmangler>
 <$set name="storyTiddler" value=<<currentTiddler>>>
 <$keyboard key="((cancel-edit-tiddler))" message="tm-cancel-tiddler">
-<$keyboard key="((save-tiddler))" actions=<<actions>>>
+<$keyboard key="((save-tiddler))" actions=<<save-tiddler-actions>>>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/EditTemplate]!has[draft.of]]" variable="listItem">
 <$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
 <$transclude tiddler=<<listItem>>/>
