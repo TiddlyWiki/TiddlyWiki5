@@ -42,44 +42,27 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 	this.filter = this.getAttribute("filter");
 	// Compute the filter
 	this.tiddlerList = tiddlerList || this.wiki.filterTiddlers(this.filter,this);
-	// Accumulate the <$set> widgets from each tiddler
-	var widgetStackStart,widgetStackEnd;
-	function addWidgetNode(widgetNode) {
-		if(widgetNode) {
-			if(!widgetStackStart && !widgetStackEnd) {
-				widgetStackStart = widgetNode;
-				widgetStackEnd = widgetNode;
-			} else {
-				widgetStackEnd.children = [widgetNode];
-				widgetStackEnd = widgetNode;
-			}
-		}
-	}
+	// Accumulate variables for every found <$set> widgets from each tiddler
 	$tw.utils.each(this.tiddlerList,function(title) {
 		var parser = self.wiki.parseTiddler(title);
 		if(parser) {
 			var parseTreeNode = parser.tree[0];
 			while(parseTreeNode && parseTreeNode.type === "set") {
-				addWidgetNode({
+				var widget = self.makeChildWidget({
 					type: "set",
 					attributes: parseTreeNode.attributes,
 					params: parseTreeNode.params,
 					isMacroDefinition: parseTreeNode.isMacroDefinition
 				});
+				widget.computeAttributes();
+				widget.execute();
+				Object.assign(self.variables,widget.variables);
 				parseTreeNode = parseTreeNode.children[0];
 			}
 		} 
 	});
-	// Add our own children to the end of the pile
-	var parseTreeNodes;
-	if(widgetStackStart && widgetStackEnd) {
-		parseTreeNodes = [widgetStackStart];
-		widgetStackEnd.children = this.parseTreeNode.children;
-	} else {
-		parseTreeNodes = this.parseTreeNode.children;
-	}
 	// Construct the child widgets
-	this.makeChildWidgets(parseTreeNodes);
+	this.makeChildWidgets();
 };
 
 /*
