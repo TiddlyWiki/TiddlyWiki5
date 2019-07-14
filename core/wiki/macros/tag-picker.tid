@@ -48,7 +48,7 @@ $actions$
 \end
 
 \define tag-picker(actions)
-<$vars actions="""$actions$""" newTagNameTiddler=<<qualify "$:/temp/NewTagName">>>
+<$vars actions="""$actions$""">
 <$macrocall $name="tag-picker-inner" actions=<<__actions__>>/>
 </$vars>
 \end
