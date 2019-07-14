@@ -511,6 +511,7 @@ html body.tc-body .tc-btn-rounded:hover svg {
 	color: <<colour download-foreground>>;
 	fill: <<colour download-foreground>>;
 	border: none;
+	border-radius: 2px;
 	font-size: 1.2em;
 	line-height: 1.4em;
 	text-decoration: none;
