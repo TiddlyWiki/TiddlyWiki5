@@ -1,0 +1,7 @@
+title: $:/core/ui/KeyboardShortcuts/advanced-search
+key: ((advanced-search))
+
+<$navigator story="$:/StoryList" history="$:/HistoryList">
+<$action-navigate $to="$:/AdvancedSearch"/>
+<$action-sendmessage $message="tm-focus-selector" $param="""[data-tiddler-title="$:/AdvancedSearch"] .tc-search input"""/>
+</$navigator>
