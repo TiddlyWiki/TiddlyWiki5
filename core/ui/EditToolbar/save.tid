@@ -5,12 +5,7 @@ description: {{$:/language/Buttons/Save/Hint}}
 
 \define save-tiddler-button()
 <$fieldmangler><$button tooltip={{$:/language/Buttons/Save/Hint}} aria-label={{$:/language/Buttons/Save/Caption}} class=<<tv-config-toolbar-class>>>
-<$action-sendmessage $message="tm-add-tag" $param={{$(newTagNameTiddler)$}}/>
-<$action-deletetiddler $tiddler="$(newTagNameTiddler)$"/>
-<$action-sendmessage $message="tm-add-field" $name={{$(newFieldNameTiddler)$}} $value={{$(newFieldValueTiddler)$}}/>
-<$action-deletetiddler $tiddler="$(newFieldNameTiddler)$"/>
-<$action-deletetiddler $tiddler="$(newFieldValueTiddler)$"/>
-<$action-sendmessage $message="tm-save-tiddler"/>
+<<save-tiddler-actions>>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/done-button}}
 </$list>
