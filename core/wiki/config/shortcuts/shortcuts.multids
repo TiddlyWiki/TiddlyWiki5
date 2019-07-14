@@ -1,5 +1,6 @@
 title: $:/config/shortcuts/
 
+add-field: enter
 cancel-edit-tiddler: escape
 excise: ctrl-E
 sidebar-search: ctrl-shift-F
