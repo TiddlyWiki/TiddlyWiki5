@@ -1,17 +1,18 @@
 title: $:/core/ui/EditTemplate
 
 \define actions()
-<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/NewTagName}}/>
-<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
-<$action-sendmessage $message="tm-add-field" $name={{$:/temp/newfieldname}} $value={{$:/temp/newfieldvalue}}/>
-<$action-deletetiddler $tiddler="$:/temp/newfieldname"/>
-<$action-deletetiddler $tiddler="$:/temp/newfieldvalue"/>
+<$action-sendmessage $message="tm-add-tag" $param={{$(newTagNameTiddler)$}}/>
+<$action-deletetiddler $tiddler="$(newTagNameTiddler)$"/>
+<$action-sendmessage $message="tm-add-field" $name={{$(newFieldNameTiddler)$}} $value={{$(newFieldValueTiddler)$}}/>
+<$action-deletetiddler $tiddler="$(newFieldNameTiddler)$"/>
+<$action-deletetiddler $tiddler="$(newFieldValueTiddler)$"/>
 <$action-sendmessage $message="tm-save-tiddler"/>
 \end
 \define frame-classes()
 tc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$
 \end
 <div class=<<frame-classes>> data-tiddler-title=<<currentTiddler>>>
+<$vars newTagNameTiddler=<<qualify "$:/temp/NewTagName">> newFieldNameTiddler=<<qualify "$:/temp/newfieldname">> newFieldValueTiddler=<<qualify "$:/temp/newfieldvalue">>>
 <$fieldmangler>
 <$set name="storyTiddler" value=<<currentTiddler>>>
 <$keyboard key="((cancel-edit-tiddler))" message="tm-cancel-tiddler">
@@ -25,4 +26,5 @@ tc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerCl
 </$keyboard>
 </$set>
 </$fieldmangler>
+</$vars>
 </div>
