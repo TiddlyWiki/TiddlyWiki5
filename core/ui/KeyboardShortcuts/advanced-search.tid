@@ -1,4 +1,5 @@
 title: $:/core/ui/KeyboardShortcuts/advanced-search
+tags: $:/tags/KeyboardShortcut
 key: ((advanced-search))
 
 <$navigator story="$:/StoryList" history="$:/HistoryList">
