@@ -107,8 +107,6 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 </table>
 </div>
 
-<$vars newFieldNameTiddler=<<qualify "$:/temp/newfieldname">> newFieldValueTiddler=<<qualify "$:/temp/newfieldvalue">>>
 <$fieldmangler>
 <$macrocall $name="new-field-macro-outer"/>
 </$fieldmangler>
-</$vars>
