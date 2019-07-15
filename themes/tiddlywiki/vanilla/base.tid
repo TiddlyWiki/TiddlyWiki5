@@ -2142,7 +2142,7 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	padding: 1em 1em 1em 1em;
 }
 
-.tc-tab-content .tc-plugin-info.tc-plugin-addon {
+.tc-tab-content .tc-plugin-info.tc-plugin-addon, .tc-tab-content .tc-plugin-info-dropdown.tc-plugin-addon {
 	margin-left: 2em;
 }
 
