@@ -62,7 +62,7 @@ $:/config/Plugins/Disabled/$(currentTiddler)$
 </$link>
 </$reveal>
 <$reveal type="match" text="yes" state=<<popup-state>> default="""$default-popup-state$""">
-<div class="tc-plugin-info-dropdown">
+<div class={{{ [tag[$:/tags/Plugins/AddOn]addprefix[tc-plugin-info-dropdown ]removesuffix{!!title}addsuffix[tc-plugin-addon]] ~[[tc-plugin-info-dropdown]] }}}>
 <div class="tc-plugin-info-dropdown-body">
 <$list filter="[all[current]] -[[$:/core]]">
 <div style="float:right;">
