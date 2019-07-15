@@ -1,5 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/codemirror-mode-xml",
+	"tags": "$:/tags/Plugins/AddOn",
 	"description": "CodeMirror Mode: XML Highlighting",
 	"author": "JeremyRuston",
 	"list": "readme"
