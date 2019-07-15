@@ -52,7 +52,7 @@ $:/config/Plugins/Disabled/$(currentTiddler)$
 \define plugin-info(type,default-popup-state)
 <$set name="popup-state" value=<<popup-state-macro>>>
 <$reveal type="nomatch" state=<<plugin-disable-title>> text="yes">
-<$link to={{!!title}} class="tc-plugin-info">
+<$link to={{!!title}} class={{{ [tag[$:/tags/Plugins/AddOn]addprefix[tc-plugin-info ]removesuffix{!!title}addsuffix[tc-plugin-addon]] ~[[tc-plugin-info]] }}}>
 <<plugin-table-body type:"$type$" default-popup-state:"""$default-popup-state$""">>
 </$link>
 </$reveal>
