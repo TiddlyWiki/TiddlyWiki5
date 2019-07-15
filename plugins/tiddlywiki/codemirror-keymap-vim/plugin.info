@@ -1,5 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/codemirror-keymap-vim",
+	"tags": "$:/tags/Plugins/AddOn",
 	"description": "CodeMirror Keymap: Vim",
 	"author": "JeremyRuston",
 	"list": "readme"
