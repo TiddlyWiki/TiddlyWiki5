@@ -1,5 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/codemirror-keymap-emacs",
+	"tags": "$:/tags/Plugins/AddOn",
 	"description": "CodeMirror Keymap: Emacs",
 	"author": "JeremyRuston",
 	"list": "readme"
