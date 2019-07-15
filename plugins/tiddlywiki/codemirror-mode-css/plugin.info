@@ -1,5 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/codemirror-mode-css",
+	"tags": "$:/tags/Plugins/AddOn",
 	"description": "CodeMirror Mode: CSS Highlighting",
 	"author": "JeremyRuston",
 	"list": "readme"
