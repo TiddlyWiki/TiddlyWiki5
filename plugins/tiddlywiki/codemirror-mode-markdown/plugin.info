@@ -1,5 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/codemirror-mode-markdown",
+	"tags": "$:/tags/Plugins/AddOn",
 	"description": "CodeMirror Mode: Markdown Highlighting",
 	"author": "JeremyRuston",
 	"list": "readme"
