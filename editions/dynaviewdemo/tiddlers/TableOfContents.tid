@@ -1,0 +1,33 @@
+title: $:/_Sidebar/TableOfContents
+tags: $:/tags/SideBar
+caption: Contents
+
+\define toc-body(tag,sort:"",exclude,path)
+<ol class="tc-toc">
+  <$list filter="""[all[shadows+tiddlers]tag<__tag__>!has[draft.of]$sort$] -[<__tag__>] -[enlist<__exclude__>]""">
+    <$vars item=<<currentTiddler>> path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}} excluded="""[enlist<__exclude__>] -[<__tag__>]""">
+      <li>
+        <$link to={{{ [enlist{!!story-tiddlers}] }}}>
+					<$list filter="[enlist{!!story-tiddlers}addprefix[$:/state/viewtemplate/visibility/]text[2]limit[1]]" variable="listItem" emptyMessage="""<div style="display:inline-block;width:4px;height:1em;background-color:transparent;"></div>""">
+						<div style="display:inline-block;width:4px;height:1em;background-color:red;"></div>
+					</$list>
+          <$view field='caption'>
+	          <$view field='title'/>
+          </$view>
+        </$link>
+        <$macrocall $name="toc-body" tag=<<item>> sort=<<__sort__>> exclude=<<excluded>> path=<<path>>/>
+      </li>
+    </$vars>
+  </$list>
+</ol>
+\end
+
+\define toc(tag,sort:"")
+<$macrocall $name="toc-body"  tag=<<__tag__>> sort=<<__sort__>> />
+\end
+
+<div class='tc-table-of-contents'>
+
+<<toc "TableOfContents">>
+
+</div>

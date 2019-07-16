@@ -15,7 +15,7 @@ draft.title: 草稿條目的標題
 footer: wizard 的註腳
 hack-to-give-us-something-to-compare-against: 於 [[$:/core/templates/static.content]] 使用的臨時儲存欄位
 icon: 條目的標題含有與條目關聯的圖示
-library: 若設為 “yes”，表示條目應該被儲存為一個 JavaScript 程式庫
+library: 若設為 "yes"，表示條目應該被儲存為一個 JavaScript 程式庫
 list: 條目的列表，指定一些條目的標題清單
 list-before: 當前條目名稱將被新增到條目排序清單中的設定條目名稱之前，或若此欄位存在但是空的，則被新增於清單的前端
 list-after: 當前條目名稱將被新增到條目排序清單中的設定條目名稱之後，或若此欄位存在但是空的，則被新增於清單的尾端
@@ -31,5 +31,6 @@ subtitle: 一個 wizard 的副標題
 tags: 條目的標籤清單
 text: 條目的內文
 title: 條目的唯一名稱
+toc-link: 若設爲: "no"，則抑制目錄樹中的條目鏈接。
 type: 條目的內容類型
 version: 插件的版本資訊

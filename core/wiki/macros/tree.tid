@@ -1,11 +1,11 @@
 title: $:/core/macros/tree
 tags: $:/tags/Macro
 
-\define leaf-link(full-title, chunk)
+\define leaf-link(full-title,chunk,separator: "/")
 <$link to=<<__full-title__>>><$text text=<<__chunk__>>/></$link>
 \end
 
-\define leaf-node(prefix, chunk)
+\define leaf-node(prefix,chunk)
 <li>
 <$list filter="[<__prefix__>addsuffix<__chunk__>is[shadow]] [<__prefix__>addsuffix<__chunk__>is[tiddler]]" variable="full-title">
 <$list filter="[<full-title>removeprefix<__prefix__>]" variable="chunk">
@@ -15,7 +15,7 @@ tags: $:/tags/Macro
 </li>
 \end
 
-\define branch-node(prefix, chunk)
+\define branch-node(prefix,chunk,separator: "/")
 <li>
 <$set name="reveal-state" value={{{ [[$:/state/tree/]addsuffix<__prefix__>addsuffix<__chunk__>] }}}>
 <$reveal type="nomatch" stateTitle=<<reveal-state>> text="show">
@@ -30,28 +30,28 @@ tags: $:/tags/Macro
 </$reveal>
 <span>(<$count filter="[all[shadows+tiddlers]removeprefix<__prefix__>removeprefix<__chunk__>] -[<__prefix__>addsuffix<__chunk__>]"/>)</span>
 <$reveal type="match" stateTitle=<<reveal-state>> text="show">
-<$macrocall $name="tree-node" prefix={{{ [<__prefix__>addsuffix<__chunk__>] }}}/>
+<$macrocall $name="tree-node" prefix={{{ [<__prefix__>addsuffix<__chunk__>] }}} separator=<<__separator__>>/>
 </$reveal>
 </$set>
 </li>
 \end
 
-\define tree-node(prefix)
+\define tree-node(prefix,separator: "/")
 <ol>
-<$list filter="[all[shadows+tiddlers]removeprefix<__prefix__>splitbefore[/]sort[]!suffix[/]]" variable="chunk">
-<$macrocall $name="leaf-node" prefix=<<__prefix__>> chunk=<<chunk>>/>
+<$list filter="[all[shadows+tiddlers]removeprefix<__prefix__>splitbefore<__separator__>sort[]!suffix<__separator__>]" variable="chunk">
+<$macrocall $name="leaf-node" prefix=<<__prefix__>> chunk=<<chunk>> separator=<<__separator__>>/>
 </$list>
-<$list filter="[all[shadows+tiddlers]removeprefix<__prefix__>splitbefore[/]sort[]suffix[/]]" variable="chunk">
-<$macrocall $name="branch-node" prefix=<<__prefix__>> chunk=<<chunk>>/>
+<$list filter="[all[shadows+tiddlers]removeprefix<__prefix__>splitbefore<__separator__>sort[]suffix<__separator__>]" variable="chunk">
+<$macrocall $name="branch-node" prefix=<<__prefix__>> chunk=<<chunk>> separator=<<__separator__>>/>
 </$list>
 </ol>
 \end
 
-\define tree(prefix: "$:/")
+\define tree(prefix: "$:/",separator: "/")
 <div class="tc-tree">
 <span><$text text=<<__prefix__>>/></span>
 <div>
-<$macrocall $name="tree-node" prefix=<<__prefix__>>/>
+<$macrocall $name="tree-node" prefix=<<__prefix__>> separator=<<__separator__>>/>
 </div>
 </div>
 \end

@@ -6,7 +6,7 @@ caption: {{$:/language/Search/Filter/Caption}}
 <<lingo Filter/Hint>>
 
 <div class="tc-search tc-advanced-search">
-<$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/>
+<$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input" focus={{$:/config/Search/AutoFocus}}/>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch/FilterButton]!has[draft.of]]"><$transclude/></$list>
 </div>
 

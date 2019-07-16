@@ -28,6 +28,16 @@ var USER_NAME_TITLE = "$:/status/UserName",
 	TIMESTAMP_DISABLE_TITLE = "$:/config/TimestampDisable";
 
 /*
+Add available indexers to this wiki
+*/
+exports.addIndexersToWiki = function() {
+	var self = this;
+	$tw.utils.each($tw.modules.applyMethods("indexer"),function(Indexer,name) {
+		self.addIndexer(new Indexer(self),name);
+	});
+};
+
+/*
 Get the value of a text reference. Text references can have any of these forms:
 	<tiddlertitle>
 	<tiddlertitle>!!<fieldname>
@@ -478,11 +488,18 @@ exports.getOrphanTitles = function() {
 Retrieves a list of the tiddler titles that are tagged with a given tag
 */
 exports.getTiddlersWithTag = function(tag) {
-	var self = this;
-	return this.getGlobalCache("taglist-" + tag,function() {
-		var tagmap = self.getTagMap();
-		return self.sortByList(tagmap[tag],tag);
-	});
+	// Try to use the indexer
+	var self = this,
+		tagIndexer = this.getIndexer("TagIndexer"),
+		results = tagIndexer && tagIndexer.lookup(tag);
+	if(!results) {
+		// If not available, perform a manual scan
+		results = this.getGlobalCache("taglist-" + tag,function() {
+			var tagmap = self.getTagMap();
+			return self.sortByList(tagmap[tag],tag);
+		});
+	}
+	return results;
 };
 
 /*
@@ -1383,6 +1400,21 @@ options: see story.js
 exports.addToStory = function(title,fromTitle,storyTitle,options) {
 	var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
 	story.addToStory(title,fromTitle,options);
+};
+
+/*
+Generate a title for the draft of a given tiddler
+*/
+exports.generateDraftTitle = function(title) {
+	var c = 0,
+		draftTitle,
+		username = this.getTiddlerText("$:/status/UserName"),
+		attribution = username ? " by " + username : "";
+	do {
+		draftTitle = "Draft " + (c ? (c + 1) + " " : "") + "of '" + title + "'" + attribution;
+		c++;
+	} while(this.tiddlerExists(draftTitle));
+	return draftTitle;
 };
 
 /*

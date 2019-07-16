@@ -1,14 +1,17 @@
 title: $:/language/
 
+AboveStory/ClassicPlugin/Warning: Sembla que intenteu carregar un connector dissenyat per a ~TiddlyWiki Classic. Tingueu en compte que [[aquests connectors no funcionen amb la versió 5.x.x de TiddlyWiki |https://tiddlywiki.com/#TiddlyWikiClassic]]. S'han detectat connectors de ~TiddlyWiki Classic:
 BinaryWarning/Prompt: Aquest tiddler conté dades binàries
-ClassicWarning/Hint: Aquest tiddler està escrit en format de text de TiddlyWiki, que no es totalment compatible amb la versió 5 de TiddlyWiki. Veieu els detalls a https://tiddlywiki.com/static/Upgrading.html . 
+ClassicWarning/Hint: Aquest tiddler està escrit en format de text de TiddlyWiki, que no es totalment compatible amb la versió 5 de TiddlyWiki. Veieu els detalls a https://tiddlywiki.com/static/Upgrading.html .
 ClassicWarning/Upgrade/Caption: actualitza
 CloseAll/Button: tanca-ho tot
 ConfirmCancelTiddler: Voleu descartar els canvis del tiddler "<$text text=<<title>>/>"?
 ConfirmDeleteTiddler: Voleu suprimir el tiddler "<$text text=<<title>>/>"?
 ConfirmEditShadowTiddler: Aneu a editar un TiddlerOmbra. Qualsevol canvi sobreescriurà les opcions per omisió del sistema i complicarà les actualitzacions. Segur que voleu editar "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: Segur que voleu sobreescriure el tiddler "<$text text=<<title>>/>"?
+Count: compte
 DefaultNewTiddlerTitle: Nou Tiddler
+Diffs/CountMessage: <<diff-count>> diferències
 DropMessage: Dexeu-ho anar aquí (o anul·leu-ho amb la tecla 'Escape')
 Encryption/Cancel: Anul·la
 Encryption/ConfirmClearPassword: Voleu suprimir la contrasenya? Això eliminarà l'encriptació utilitzada quan es desa aquest wiki
@@ -18,14 +21,49 @@ Encryption/PromptSetPassword: Indiqueu una nova contrasenya per aquest TiddlyWik
 Encryption/RepeatPassword: Repetiu la contrasenya
 Encryption/SetPassword: Indiqueu la contrasenya
 Encryption/Username: Usuari
+Error/Caption: S'ha produït un error
+Error/EditConflict: El fitxer ha canviat al servidor
+Error/Filter: S'ha produït un error de filtre
+Error/FilterSyntax: S'ha produït un error de sintaxi en l'expressió del filtre
+Error/IsFilterOperator: S'ha produït un error del filtre: operant desconegut per a l’operador de filtre "is"
+Error/LoadingPluginLibrary: S'ha produït un error en carregar la biblioteca del connector
+Error/RecursiveTransclusion: S'ha produït un error de transclusió recursiva en el widget de transclusió
+Error/RetrievingSkinny: S'ha produït un error en recuperar la llista de tiddler parcials
+Error/SavingToTWEdit: S'ha produït un error en desar a TWEdit
+Error/WhileSaving: S'ha produït un error en desar
+Error/XMLHttpRequest: Codi d'error XMLHttpRequest
+InternalJavaScriptError/Hint: Bé, això és compromès. Es recomana que reiniciau TiddlyWiki actualitzant el navegador
+InternalJavaScriptError/Title: Error de JavaScript intern
 InvalidFieldName: Hi ha caràcters il·legals al nom del camp "<$text text=<<fieldName>>/>". Els camps només poden utilitzar minúscules, digits i els caràcters subratllat (`_`), guió (`-`) i punt (`.`)
+LazyLoadingWarning: <p>Tractant de carregar contingut extern de ''<$text text={{!!_canonical_uri}}/>''</p><p>Si aquest missatge no desapareix, o bé el tipus de contingut del tiddler no coincideix amb el tipus de contingut extern o bé esteu utilitzant un navegador que no admet contingut extern per als wikis carregats com a fitxers independents. Mireu https://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: Inicieu sessió a TiddlySpace
+Manager/Controls/FilterByTag/None: (cap)
+Manager/Controls/FilterByTag/Prompt: Filtra per etiqueta:
+Manager/Controls/Order/Prompt: Ordre invers
+Manager/Controls/Search/Placeholder: Cerca
+Manager/Controls/Search/Prompt: Cerca:
+Manager/Controls/Show/Option/Tags: etiquetes
+Manager/Controls/Show/Prompt: Mostra:
+Manager/Controls/Sort/Prompt: Ordena per:
+Manager/Item/Colour: Color
+Manager/Item/Fields: Camps
+Manager/Item/Icon: Icona
+Manager/Item/Icon/None: (cap)
+Manager/Item/RawText: Text en brut
+Manager/Item/Tags: Etiquetes
+Manager/Item/Tools: Eines
+Manager/Item/WikifiedText: Text en format Wiki
 MissingTiddler/Hint: Falta el tiddler "<$text text=<<currentTiddler>>/>" - cliqueu {{||$:/core/ui/Buttons/edit}} per generar-ho
-OfficialPluginLibrary: Biblioteca de connectors de ~TiddlyWiki Oficial
+OfficialPluginLibrary: Biblioteca Oficial de connectors de ~TiddlyWiki
+OfficialPluginLibrary/Hint: La biblioteca de complements oficials de ~TiddlyWiki a tiddlywiki.com. L'equip principal gestiona els connectors, els temes i els paquets d'idioma.
 PluginReloadWarning: Deseu si us plau {{$:/core/ui/Buttons/save-wiki}} i torneu a carregar {{$:/core/ui/Buttons/refresh}} per tal que els canvis als connectors es puguin activar
 RecentChanges/DateFormat: DD MMM YYYY
 SystemTiddler/Tooltip: Aquest és un tiddler del sistema
+SystemTiddlers/Include/Prompt: Inclou els tiddlers del sistema
 TagManager/Colour/Heading: Color
+TagManager/Count/Heading: Compte
 TagManager/Icon/Heading: Icona
 TagManager/Info/Heading: Informació
 TagManager/Tag/Heading: Etiqueta
 UnsavedChangesWarning: Teniu canvis sense desar al TiddlyWiki
+Yes: Sí

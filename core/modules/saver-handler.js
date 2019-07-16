@@ -21,6 +21,7 @@ function SaverHandler(options) {
 	var self = this;
 	this.wiki = options.wiki;
 	this.dirtyTracking = options.dirtyTracking;
+	this.preloadDirty = options.preloadDirty || [];
 	this.pendingAutoSave = false;
 	// Make a logger
 	this.logger = new $tw.utils.Logger("saver-handler");
@@ -33,7 +34,13 @@ function SaverHandler(options) {
 		// Compile the dirty tiddler filter
 		this.filterFn = this.wiki.compileFilter(this.wiki.getTiddlerText(this.titleSyncFilter));
 		// Count of changes that have not yet been saved
-		this.numChanges = 0;
+		var filteredChanges = self.filterFn.call(self.wiki,function(iterator) {
+				$tw.utils.each(self.preloadDirty,function(title) {
+					var tiddler = self.wiki.getTiddler(title);
+					iterator(tiddler,title);
+				});
+		});
+		this.numChanges = filteredChanges.length;
 		// Listen out for changes to tiddlers
 		this.wiki.addEventListener("change",function(changes) {
 			// Filter the changes so that we only count changes to tiddlers that we care about
@@ -144,8 +151,12 @@ Save the wiki contents. Options are:
 SaverHandler.prototype.saveWiki = function(options) {
 	options = options || {};
 	var self = this,
-		method = options.method || "save",
-		variables = options.variables || {},
+		method = options.method || "save";
+	// Ignore autosave if disabled
+	if(method === "autosave" && this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes") {
+		return false;
+	}
+	var	variables = options.variables || {},
 		template = options.template || "$:/core/save/all",
 		downloadType = options.downloadType || "text/plain",
 		text = this.wiki.renderTiddler(downloadType,template,options),
@@ -164,10 +175,6 @@ SaverHandler.prototype.saveWiki = function(options) {
 				}
 			}
 		};
-	// Ignore autosave if disabled
-	if(method === "autosave" && this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes") {
-		return false;
-	}
 	// Call the highest priority saver that supports this method
 	for(var t=this.savers.length-1; t>=0; t--) {
 		var saver = this.savers[t];

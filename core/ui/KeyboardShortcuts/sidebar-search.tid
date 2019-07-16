@@ -1,0 +1,5 @@
+title: $:/core/ui/KeyboardShortcuts/sidebar-search
+tags: $:/tags/KeyboardShortcut
+key: ((sidebar-search))
+
+<$action-sendmessage $message="tm-focus-selector" $param=".tc-search input"/>

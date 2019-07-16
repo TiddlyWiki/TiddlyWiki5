@@ -37,6 +37,7 @@ Compute the internal state of the widget
 CreateTiddlerWidget.prototype.execute = function() {
 	this.actionBaseTitle = this.getAttribute("$basetitle");
 	this.actionSaveTitle = this.getAttribute("$savetitle");
+	this.actionSaveDraftTitle = this.getAttribute("$savedrafttitle");
 	this.actionTimestamp = this.getAttribute("$timestamp","yes") === "yes";
 };
 
@@ -72,6 +73,9 @@ CreateTiddlerWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var tiddler = this.wiki.addTiddler(new $tw.Tiddler(creationFields,fields,modificationFields,{title: title}));
 	if(this.actionSaveTitle) {
 		this.wiki.setTextReference(this.actionSaveTitle,title,this.getVariable("currentTiddler"));
+	}
+	if(this.actionSaveDraftTitle) {
+		this.wiki.setTextReference(this.actionSaveDraftTitle,this.wiki.generateDraftTitle(title),this.getVariable("currentTiddler"));
 	}
 	return true; // Action was invoked
 };

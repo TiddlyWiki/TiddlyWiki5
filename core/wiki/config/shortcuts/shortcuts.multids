@@ -1,7 +1,9 @@
 title: $:/config/shortcuts/
 
+advanced-search: ctrl-shift-A
 cancel-edit-tiddler: escape
 excise: ctrl-E
+sidebar-search: ctrl-shift-F
 heading-1: ctrl-1
 heading-2: ctrl-2
 heading-3: ctrl-3
@@ -22,4 +24,5 @@ stamp: ctrl-S
 strikethrough: ctrl-T
 subscript: ctrl-shift-B
 superscript: ctrl-shift-P
+toggle-sidebar: alt-shift-S
 transcludify: alt-shift-T

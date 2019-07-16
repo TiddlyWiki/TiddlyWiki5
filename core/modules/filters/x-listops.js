@@ -95,7 +95,7 @@ Extended filter operators to manipulate the current list.
     exports.allafter = function (source, operator) {
         var results = prepare_results(source),
             index = results.indexOf(operator.operand);
-        return (index === -1 || index > (results.length - 2)) ? [] :
+        return (index === -1) ? [] :
             (operator.suffix) ? results.slice(index) :
             results.slice(index + 1);
     };
@@ -106,7 +106,7 @@ Extended filter operators to manipulate the current list.
     exports.allbefore = function (source, operator) {
         var results = prepare_results(source),
             index = results.indexOf(operator.operand);
-        return (index < 0) ? [] :
+        return (index === -1) ? [] :
             (operator.suffix) ? results.slice(0, index + 1) :
             results.slice(0, index);
     };

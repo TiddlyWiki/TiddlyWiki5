@@ -353,3 +353,7 @@ Ben Webber, @benwebber, 2019/01/09
 Jesse Weinstein, @JesseWeinstein, 2019/01/14
 
 Adam Sherwood, @admls, 2019/01/27
+
+Joshua Fontany, @joshuafontany, 2019/03/07
+
+Irene Castaños, @jdjdjdjdjdjd, 2019/03/11
