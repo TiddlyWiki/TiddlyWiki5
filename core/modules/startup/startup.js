@@ -55,6 +55,8 @@ exports.startup = function() {
 	$tw.version = $tw.utils.extractVersionInfo();
 	// Set up the performance framework
 	$tw.perf = new $tw.Performance($tw.wiki.getTiddlerText(PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE,"no") === "yes");
+	// Kick off the input manager
+	$tw.inputManager = new $tw.InputManager();
 	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
 	$tw.rootWidget = new widget.widget({
 		type: "widget",
