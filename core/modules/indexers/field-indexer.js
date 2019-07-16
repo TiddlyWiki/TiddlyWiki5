@@ -16,6 +16,9 @@ var DEFAULT_MAXIMUM_INDEXED_VALUE_LENGTH = 128;
 
 function FieldIndexer(wiki) {
 	this.wiki = wiki;
+}
+
+FieldIndexer.prototype.init = function() {
 	this.index = null;
 	this.maxIndexedValueLength = DEFAULT_MAXIMUM_INDEXED_VALUE_LENGTH;
 	this.addIndexMethods();

@@ -14,7 +14,10 @@ Indexes the tiddlers with each tag
 
 function TagIndexer(wiki) {
 	this.wiki = wiki;
-	this.index = null;
+}
+
+TagIndexer.prototype.init = function() {
+	this.index = null; // Hashmap of tag title to {isSorted: bool, titles: [array]}
 	this.addIndexMethods();
 }
 
