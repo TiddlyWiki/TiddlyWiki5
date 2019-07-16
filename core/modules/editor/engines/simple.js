@@ -54,6 +54,7 @@ function SimpleEngine(options) {
 	}
 	// Add an input event handler
 	$tw.utils.addEventListeners(this.domNode,[
+		{name: "blur",handlerObject: this,handlerMethod: "updateGlobalSelections"},
 		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},
 		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"}
 	]);
@@ -104,8 +105,19 @@ Focus the engine node
 */
 SimpleEngine.prototype.focus  = function() {
 	if(this.domNode.focus && this.domNode.select) {
-		this.domNode.focus();
-		this.domNode.select();
+		var selections = $tw.inputManager.getSelections(this.widget.editQualifiedID);
+		if(selections) {
+			//when the domNode gets focus, the selections need already to be up to date,
+			//otherwise they get overwritten by default selections.
+			//after focusing, set selection range, which moves cursor into view (if outside)
+			this.domNode.selectionStart = selections.selectionStart;
+			this.domNode.selectionEnd = selections.selectionEnd;
+			this.domNode.focus();
+			this.domNode.setSelectionRange(selections.selectionStart,selections.selectionEnd);
+		} else {
+			this.domNode.focus();
+			this.domNode.select();
+		}
 	}
 };
 
@@ -113,6 +125,7 @@ SimpleEngine.prototype.focus  = function() {
 Handle a dom "input" event which occurs when the text has changed
 */
 SimpleEngine.prototype.handleInputEvent = function(event) {
+	this.updateGlobalSelections();
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
 	return true;
@@ -122,6 +135,8 @@ SimpleEngine.prototype.handleInputEvent = function(event) {
 Handle a dom "focus" event
 */
 SimpleEngine.prototype.handleFocusEvent = function(event) {
+	this.updateGlobalSelections();
+	$tw.inputManager.updateFocusInput(this.widget.editQualifiedID);
 	this.widget.cancelPopups();
 	if(this.widget.editFocusPopup) {
 		$tw.popup.triggerPopup({
@@ -132,6 +147,14 @@ SimpleEngine.prototype.handleFocusEvent = function(event) {
 		});
 	}
 	return true;
+};
+
+/*
+Update the globally stored selections of the input
+*/
+SimpleEngine.prototype.updateGlobalSelections = function(event) {
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
 };
 
 /*
