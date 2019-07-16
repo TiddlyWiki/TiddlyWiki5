@@ -78,6 +78,7 @@ function FramedEngine(options) {
 	this.copyStyles();
 	// Add event listeners
 	$tw.utils.addEventListeners(this.domNode,[
+		{name: "blur",handlerObject: this,handlerMethod: "updateGlobalSelections"},
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
 		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
@@ -149,17 +150,38 @@ Focus the engine node
 */
 FramedEngine.prototype.focus  = function() {
 	if(this.domNode.focus && this.domNode.select) {
-		this.domNode.focus();
-		this.domNode.select();
+		var selections = $tw.inputManager.getSelections(this.widget.editQualifiedID);
+		if(selections) {
+			//when the domNode gets focus, the selections need already to be up to date,
+			//otherwise they get overwritten by default selections.
+			//after focusing, set selection range, which moves cursor into view (if outside)
+			this.domNode.selectionStart = selections.selectionStart;
+			this.domNode.selectionEnd = selections.selectionEnd;
+			this.domNode.focus();
+			this.domNode.setSelectionRange(selections.selectionStart,selections.selectionEnd);
+		} else {
+			this.domNode.focus();
+			this.domNode.select();
+		}
 	}
 };
 	
 /*
-Handle the focus event
+Handle a focus event
 */
 FramedEngine.prototype.handleFocusEvent = function(event) {
 	this.widget.cancelPopups();
+	this.updateGlobalSelections();
+	$tw.inputManager.updateFocusInput(this.widget.editQualifiedID);
 	return true;
+};
+
+/*
+Update the globally stored selections of the textarea
+*/
+FramedEngine.prototype.updateGlobalSelections = function() {
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
 };
 
 /*
@@ -174,6 +196,7 @@ FramedEngine.prototype.handleClickEvent = function(event) {
 Handle a dom "input" event which occurs when the text has changed
 */
 FramedEngine.prototype.handleInputEvent = function(event) {
+	this.updateGlobalSelections();
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
 	return true;
@@ -220,6 +243,7 @@ FramedEngine.prototype.executeTextOperation = function(operation) {
 		this.domNode.focus();
 		this.domNode.setSelectionRange(operation.newSelStart,operation.newSelEnd);
 	}
+	this.updateGlobalSelections();
 	this.domNode.focus();
 	return newText;
 };
