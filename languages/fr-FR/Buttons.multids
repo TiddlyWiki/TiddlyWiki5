@@ -38,8 +38,8 @@ Unfold/Caption: déplier le tiddler
 Unfold/Hint: Déplie le corps de ce tiddler
 FoldOthers/Caption: replier les autres tiddlers
 FoldOthers/Hint: Replie le corps des autres tiddlers ouverts
-FoldAll/Caption: replie tous les tiddlers
-FoldAll/Hint: Replier le corps de tous les tiddlers ouverts
+FoldAll/Caption: replier tous les tiddlers
+FoldAll/Hint: Replie le corps de tous les tiddlers ouverts
 UnfoldAll/Caption: déplier tous les tiddlers
 UnfoldAll/Hint: Déplie le corps de tous les tiddlers ouverts
 FullScreen/Caption: plein-écran
@@ -54,6 +54,8 @@ Home/Caption: accueil
 Home/Hint: Ouvre les tiddlers par défaut
 Language/Caption: langue
 Language/Hint: Choix de la langue pour l'interface utilisateur
+Manager/Caption: gestionnaire de tiddlers
+Manager/Hint: Ouvre le gestionnaire de tiddlers
 More/Caption: plus
 More/Hint: Actions supplémentaires
 NewHere/Caption: nouveau, à partir d'ici

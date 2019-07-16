@@ -1,7 +1,7 @@
 title: $:/core/ui/SideBarSegments/search
 tags: $:/tags/SideBarSegment
 
-<div class="tc-sidebar-lists">
+<div class="tc-sidebar-lists tc-sidebar-search">
 
 <$set name="searchTiddler" value="$:/temp/search">
 <div class="tc-search">

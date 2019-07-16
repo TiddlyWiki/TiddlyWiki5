@@ -1,0 +1,39 @@
+caption: split
+created: 20190613153944647
+modified: 20190613154541225
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input titles split into separate items according to the specified separator <<.place S>>
+op-parameter: The substring at which to split each title
+op-parameter-name: S
+op-purpose: returns each item in the list split into separate strings according to the specified separator <<.place S>>; duplicates are <<.em not>> removed
+tags: [[Filter Operators]]
+title: split Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">>
+
+Note that in some circumstances the <<.op split>> operator will include blank items in the list of results. For example, 
+
+```
+[[the band thethe are the best the]split[the]]
+```
+
+The following results are returned:
+
+```
+["", " band ", "", " are ", " best ", ""]
+```
+
+Where it might be expected that the results would be:
+
+```
+[" band ", " are ", " best "]
+```
+
+The blank items mark the boundaries between matches. If they are not required they can be removed with the ''blank'' category of the [[is Operator]]: `[[the band thethe are the best the]split[the]!is[blank]]`.
+
+The reason that the blank items can be useful is that they allow search and replace operations to be constructed from a combination of the [[split Operator]] or [[splitregexp Operator]] and the [[join Operator]]. For example:
+
+<<.operator-example 1 "[[the band thethe are the best the]split[the]join[every]]">>
+
+<<.operator-examples "split">>

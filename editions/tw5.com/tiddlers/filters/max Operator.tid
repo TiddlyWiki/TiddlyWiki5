@@ -1,0 +1,17 @@
+caption: max
+created: 20190611130631390
+modified: 20190611131047026
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input as numbers, with any that are less than <<.place N>> being replaced by <<.place N>>
+op-parameter: a number
+op-parameter-name: N
+op-purpose: treating each input title as a number, take the maximum of its value and the numeric value of the operand
+tags: [[Filter Operators]] [[Mathematics Operators]] [[Binary Mathematics Operators]]
+title: max Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">> See [[Mathematics Operators]] for an overview.
+
+See also the [[min Operator]], and compare with the [[maxall Operator]] and the [[minall Operator]].
+
+<<.operator-examples "max">>

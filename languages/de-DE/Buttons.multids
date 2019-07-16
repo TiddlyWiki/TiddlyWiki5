@@ -32,6 +32,7 @@ ExportTiddler/Caption: Exportieren
 ExportTiddler/Hint: Diesen Tiddler exportieren
 ExportTiddlers/Caption: Mehrere exportieren
 ExportTiddlers/Hint: Mehrere Tiddler exportieren
+SidebarSearch/Hint: Aktiviere das "sidebar" Suchfeld
 Fold/Caption: Ausblenden Textbereich
 Fold/Hint: Der Tiddler Textbereich wird ausgeblendet
 Fold/FoldBar/Caption: Textbereich ein/aus
@@ -181,6 +182,7 @@ Subscript/Caption: Tiefsgestellt
 Subscript/Hint: Ausgewählten Text tiefgestellt darstellen
 Superscript/Caption: Hochgestellt
 Superscript/Hint: Ausgewählten Text hochgestellt darstellen
+ToggleSidebar/Hint: Invertiere die "sidebar" Sichtbarkeit
 Transcludify/Caption: Transklusion
 Transcludify/Hint: Transklusion - Den selektierten Text in geschwungene Klammern setzen
 Underline/Caption: Unterstreichen

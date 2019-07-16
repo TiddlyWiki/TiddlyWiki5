@@ -49,6 +49,9 @@ function SimpleEngine(options) {
 	if(this.widget.editClass) {
 		this.domNode.className = this.widget.editClass;
 	}
+	if(this.widget.editTabIndex) {
+		this.domNode.setAttribute("tabindex",this.widget.editTabIndex);
+	}
 	// Add an input event handler
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},
@@ -135,6 +138,7 @@ Handle a dom "focus" event
 SimpleEngine.prototype.handleFocusEvent = function(event) {
 	this.updateGlobalSelections();
 	$tw.inputManager.updateFocusInput(this.widget.editQualifiedID);
+	this.widget.cancelPopups();
 	if(this.widget.editFocusPopup) {
 		$tw.popup.triggerPopup({
 			domNode: this.domNode,

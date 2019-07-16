@@ -1,7 +1,7 @@
 caption: reveal
 created: 20131024141900000
 jeremy: tiddlywiki
-modified: 20181007231748909
+modified: 20190704145627537
 tags: Widgets
 title: RevealWidget
 type: text/vnd.tiddlywiki
@@ -34,6 +34,7 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 |class |An optional CSS class name to be assigned to the HTML element<br/>&raquo; Set to `tc-popup-keep` to make a popup "sticky", so it won't close when you click inside of it|
 |style |An optional CSS style attribute to be assigned to the HTML element |
 |position |The position used for the popup when the type is ''popup''. Can be ''left'', ''above'', ''aboveright'', ''right'', ''belowleft'' or ''below'' |
+|positionAllowNegative |Set to "yes" to prevent computed popup positions from being clamped to be above zero |
 |default |Default value to use when the state tiddler is missing |
 |animate |Set to "yes" to animate opening and closure (defaults to "no") |
 |retain |Set to "yes" to force the content to be retained even when hidden (defaults to "no") |

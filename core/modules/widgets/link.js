@@ -183,7 +183,14 @@ LinkWidget.prototype.execute = function() {
 	this.isShadow = this.wiki.isShadowTiddler(this.to);
 	this.hideMissingLinks = (this.getVariable("tv-show-missing-links") || "yes") === "no";
 	// Make the child widgets
-	this.makeChildWidgets();
+	var templateTree;
+	if(this.parseTreeNode.children && this.parseTreeNode.children.length > 0) {
+		templateTree = this.parseTreeNode.children;
+	} else {
+		// Default template is a link to the title
+		templateTree = [{type: "text", text: this.to}];
+	}
+	this.makeChildWidgets(templateTree);
 };
 
 /*

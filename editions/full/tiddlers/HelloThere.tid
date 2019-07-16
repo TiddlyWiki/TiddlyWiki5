@@ -8,5 +8,5 @@ It is intended for use in testing TiddlyWiki - in particular, for switching betw
 
 ---
 
-{{$:/core/ui/ControlPanel/Plugins/Installed}}
+{{$:/core/ui/ControlPanel/Plugins}}
 

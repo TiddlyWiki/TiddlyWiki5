@@ -176,6 +176,10 @@ dl dt {
 	margin-top: 6px;
 }
 
+button, textarea, input, select {
+	outline-color: <<colour primary>>;
+}
+
 textarea,
 input[type=text],
 input[type=search],
@@ -384,6 +388,21 @@ a.tc-tiddlylink-external:hover {
 	cursor: move;
 }
 
+.tc-sidebar-tab-open .tc-droppable-placeholder, .tc-tagged-draggable-list .tc-droppable-placeholder,
+.tc-links-draggable-list .tc-droppable-placeholder {
+	line-height: 2em;
+	height: 2em;
+}
+
+.tc-sidebar-tab-open-item {
+	position: relative;
+}
+
+.tc-sidebar-tab-open .tc-btn-invisible.tc-btn-mini svg {
+	font-size: 0.7em;
+	fill: <<colour muted-foreground>>;
+}
+
 /*
 ** Plugin reload warning
 */
@@ -492,6 +511,7 @@ html body.tc-body .tc-btn-rounded:hover svg {
 	color: <<colour download-foreground>>;
 	fill: <<colour download-foreground>>;
 	border: none;
+	border-radius: 2px;
 	font-size: 1.2em;
 	line-height: 1.4em;
 	text-decoration: none;
@@ -641,6 +661,11 @@ button.tc-untagged-label {
 	height: 1em;
 	width: 1em;
 	vertical-align: text-bottom;
+}
+
+.tc-edit-tags button.tc-remove-tag-button svg {
+	font-size: 0.7em;
+	vertical-align: middle;
 }
 
 .tc-tag-manager-table .tc-tag-label {
@@ -1091,6 +1116,7 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-editor-toolbar button {
 	vertical-align: middle;
 	background-color: <<colour tiddler-controls-foreground>>;
+	color: <<colour tiddler-controls-foreground-selected>>;
 	fill: <<colour tiddler-controls-foreground-selected>>;
 	border-radius: 4px;
 	padding: 3px;
@@ -2240,6 +2266,11 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	height: 2em;
 	margin: 0.4em;
 	border: 1px solid #888;
+}
+
+input.tc-palette-manager-colour-input {
+	width: 100%;
+	padding: 0;
 }
 
 /*

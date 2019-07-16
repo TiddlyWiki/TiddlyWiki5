@@ -9,6 +9,16 @@ Perform operation on Amazon Web Services
 --aws <sub-command> [<parameter> ...]
 ```
 
+! "profile" subcommand
+
+Sets the AWS credentials profile to be used for subsequent commands.
+
+```
+--aws profile <profile-name>
+```
+
+* ''profile-name'': AWS profile name
+
 ! "s3-load" subcommand
 
 Load tiddlers from files in an S3 bucket.

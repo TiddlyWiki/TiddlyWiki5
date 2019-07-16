@@ -47,6 +47,8 @@ LoadedModules/Hint: 這些是當前已載入的模組之源碼條目。斜體的
 Palette/Caption: 調色盤
 Palette/Editor/Clone/Caption: 複製
 Palette/Editor/Clone/Prompt: 建議您修改前先複製此預設調色盤
+Palette/Editor/Delete/Hint: 從當前調色盤中刪除此項
+Palette/Editor/Names/External/Show: 顯示不屬於當前調色盤的顏色名稱
 Palette/Editor/Prompt/Modified: 此預設調色盤已被修改過
 Palette/Editor/Prompt: 編輯
 Palette/Editor/Reset/Caption: 重置
@@ -89,7 +91,16 @@ Saving/DownloadSaver/Caption: 下載儲存模組
 Saving/DownloadSaver/Hint: 這些設定適用於相容 HTML5 的下載儲存模組
 Saving/General/Caption: 通用
 Saving/General/Hint: 這些設定適用於所有已載入的儲存模組
-Saving/Hint: 用於通過儲存模組將整個 TiddlyWiki 保存為單個檔案的設定
+Saving/Hint: 用於通過儲存模組將整個 TiddlyWiki 儲存為單個檔案的設定
+Saving/GitHub/Branch: 用於儲存的目標分支 (預設值為 `master`)
+Saving/GitHub/Caption: ~GitHub 儲存模組
+Saving/GitHub/Description: 這些設定僅用於儲存到 ~GitHub
+Saving/GitHub/ServerURL: 伺服器網址 (預設值為 `https://api.github.com`)
+Saving/GitHub/Filename: 目標檔案的檔案名稱 (例如，`index.html`)
+Saving/GitHub/Password: 密碼、OAUTH 令牌，或個人存取的令牌
+Saving/GitHub/Path: 目標檔案的路徑 (例如，`/wiki/`)
+Saving/GitHub/Repo: 目標存儲庫 (例如，`Jermolene/TiddlyWiki5`)
+Saving/GitHub/UserName: 使用者名稱
 Saving/TiddlySpot/Advanced/Heading: 進階設定
 Saving/TiddlySpot/BackupDir: 備份資料夾
 Saving/TiddlySpot/Backups: 備份

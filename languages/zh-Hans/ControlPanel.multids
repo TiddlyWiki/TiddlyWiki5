@@ -47,6 +47,8 @@ LoadedModules/Hint: 这些是当前已加载的模块之源码条目。斜体的
 Palette/Caption: 调色板
 Palette/Editor/Clone/Caption: 复制
 Palette/Editor/Clone/Prompt: 建议您修改前先复制此默认调色板
+Palette/Editor/Delete/Hint: 从当前调色板中删除此项
+Palette/Editor/Names/External/Show: 显示不属于当前调色板的颜色名称
 Palette/Editor/Prompt/Modified: 此默认调色板已被修改过
 Palette/Editor/Prompt: 编辑
 Palette/Editor/Reset/Caption: 重置
@@ -90,6 +92,15 @@ Saving/DownloadSaver/Hint: 这些设置适用于兼容 HTML5 的下载保存模�
 Saving/General/Caption: 通用
 Saving/General/Hint: 这些设置适用于所有已载入的保存模块
 Saving/Hint: 用于通过保存模块将整个 TiddlyWiki 保存为单个文件的设置
+Saving/GitHub/Branch: 用于保存的目标分支 (默认值为 `master`)
+Saving/GitHub/Caption: ~GitHub 保存模块
+Saving/GitHub/Description: 这些设定仅用于保存到 ~GitHub
+Saving/GitHub/ServerURL: 服务器网址 (默认值为 `https://api.github.com`)
+Saving/GitHub/Filename: 目标文件的文件名称 (例如，`index.html`)
+Saving/GitHub/Password: 密码、OAUTH 令牌，或个人存取的令牌
+Saving/GitHub/Path: 目标文件的路径 (例如，`/wiki/`)
+Saving/GitHub/Repo: 目标存储库 (例如，`Jermolene/TiddlyWiki5`)
+Saving/GitHub/UserName: 用户名称
 Saving/TiddlySpot/Advanced/Heading: 高级设置
 Saving/TiddlySpot/BackupDir: 备份文件夹
 Saving/TiddlySpot/Backups: 备份

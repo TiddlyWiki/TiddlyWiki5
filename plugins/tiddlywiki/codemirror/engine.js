@@ -106,6 +106,9 @@ function CodeMirrorEngine(options) {
 
 	config.mode = options.type;
 	config.value = options.value;
+	if(this.widget.editTabIndex) {
+		config["tabindex"] = this.widget.editTabIndex;
+	}
 	// Create the CodeMirror instance
 	this.cm = window.CodeMirror(function(cmDomNode) {
 		// Note that this is a synchronous callback that is called before the constructor returns
@@ -121,6 +124,9 @@ function CodeMirrorEngine(options) {
 	this.cm.on("drop",function(cm,event) {
 		event.stopPropagation(); // Otherwise TW's dropzone widget sees the drop event
 		return false;
+	});
+	this.cm.on("focus",function() {
+		self.widget.cancelPopups();
 	});
 	this.cm.on("keydown",function(cm,event) {
 		return self.widget.handleKeydownEvent.call(self.widget,event);

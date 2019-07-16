@@ -41,7 +41,7 @@ BasicAuthenticator.prototype.init = function() {
 				this.credentialsData = credentialsData;
 			}
 		} else {
-			return "Error: Unable to load user credentials from '" + credentialsFilepath + "'";
+			return "Error: Unable to load user credentials from '" + resolveCredentialsFilepath + "'";
 		}
 	}
 	// Add the hardcoded username and password if specified
