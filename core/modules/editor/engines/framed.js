@@ -170,9 +170,9 @@ FramedEngine.prototype.focus  = function() {
 Handle a focus event
 */
 FramedEngine.prototype.handleFocusEvent = function(event) {
-	this.widget.cancelPopups();
 	this.updateGlobalSelections();
 	$tw.inputManager.updateFocusInput(this.widget.editQualifiedID);
+	this.widget.cancelPopups();
 	return true;
 };
 
