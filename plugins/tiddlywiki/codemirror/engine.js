@@ -207,7 +207,7 @@ Handle a focus event
 CodeMirrorEngine.prototype.handleFocusEvent = function() {
 	this.updateGlobalSelections();
 	$tw.inputManager.updateFocusInput(this.widget.editQualifiedID);
-	self.widget.cancelPopups();
+	this.widget.cancelPopups();
 };
 
 /*
