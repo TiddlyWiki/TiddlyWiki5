@@ -120,7 +120,8 @@ Popup.prototype.show = function(options) {
 		this.popups.push({
 			title: options.title,
 			wiki: options.wiki,
-			domNode: options.domNode
+			domNode: options.domNode,
+			noStateReference: options.noStateReference
 		});
 	}
 	// Set the state tiddler
