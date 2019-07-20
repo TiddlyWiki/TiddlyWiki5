@@ -34,6 +34,12 @@ fi
 
 echo "Using TW5_BUILD_DETAILS as [$TW5_BUILD_DETAILS]"
 
+if [  -z "$TW5_BUILD_COMMIT" ]; then
+	TW5_BUILD_COMMIT="$(git rev-parse HEAD)"
+fi
+
+echo "Using TW5_BUILD_COMMIT as [$TW5_BUILD_COMMIT]"
+
 # Set up the build output directory
 
 if [  -z "$TW5_BUILD_OUTPUT" ]; then
@@ -74,7 +80,7 @@ echo "<a href='./plugins/tiddlywiki/tahoelafs/index.html'>Moved to http://tiddly
 
 # Put the build details into a .tid file so that it can be included in each build (deleted at the end of this script)
 
-echo -e -n "title: $:/build\n\n$TW5_BUILD_DETAILS\n" > $TW5_BUILD_OUTPUT/build.tid
+echo -e -n "title: $:/build\ncommit: $TW5_BUILD_COMMIT\n\n$TW5_BUILD_DETAILS\n" > $TW5_BUILD_OUTPUT/build.tid
 
 ######################################################
 #

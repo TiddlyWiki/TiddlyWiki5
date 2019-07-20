@@ -18,4 +18,6 @@ Upgrader/Plugins/Suppressed/Version: Plugin bloqué (la version <<incoming>> en 
 Upgrader/Plugins/Upgraded: Plugin mis à jour depuis <<incoming>> vers <<upgraded>>
 Upgrader/State/Suppressed: Tiddler d'état temporaire bloqué
 Upgrader/System/Suppressed: Tiddler système bloqué
+Upgrader/System/Warning: Tiddler du module //core//
+Upgrader/System/Alert: Vous êtes sur le point d'importer un tiddler qui écrasera un tiddler du module //core//. Ceci est déconseillé car cela peut rendre le système instable
 Upgrader/ThemeTweaks/Created: Thème modifié à partir de <$text text=<<from>>/>

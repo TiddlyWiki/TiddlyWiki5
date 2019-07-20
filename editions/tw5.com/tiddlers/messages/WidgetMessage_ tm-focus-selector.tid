@@ -1,0 +1,12 @@
+caption: tm-focus-selector
+created: 20190628162542132
+modified: 20190628162542132
+tags: Messages
+title: WidgetMessage: tm-focus-selector
+type: text/vnd.tiddlywiki
+
+The `tm-focus-selector` message sets the focus to the DOM element identified by the selector in the `param` parameter. 
+
+|!Name |!Description |
+|param |Selector identifying the DOM element to be focussed  |
+

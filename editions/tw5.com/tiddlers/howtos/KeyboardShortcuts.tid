@@ -6,8 +6,8 @@ type: text/vnd.tiddlywiki
 
 Keyboard shortcuts can either be used with the <<.wlink KeyboardWidget>> Widget or with [[Keyboard Shortcut Tiddlers|Keyboard Shortcut Tiddler]]
 
-<<.tip """The <$macrocall $name=".wlink" to="KeyboardWidget"/> Widget makes the shortcuts accessible within an `input` or `textarea` field
-
+<<.tip """The <$macrocall $name=".wlink" to="KeyboardWidget"/> Widget makes the shortcuts accessible within an `input` or `textarea` field.
+<br>
 A shortcut defined through a [[Keyboard Shortcut Tiddler]] makes the shortcut accessible globally""">>
 
 !!!See [[How to create keyboard shortcuts]] with a detailed explanation for creating your own shortcuts

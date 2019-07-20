@@ -42,7 +42,8 @@ DropZoneWidget.prototype.render = function(parent,nextSibling) {
 		{name: "dragover", handlerObject: this, handlerMethod: "handleDragOverEvent"},
 		{name: "dragleave", handlerObject: this, handlerMethod: "handleDragLeaveEvent"},
 		{name: "drop", handlerObject: this, handlerMethod: "handleDropEvent"},
-		{name: "paste", handlerObject: this, handlerMethod: "handlePasteEvent"}
+		{name: "paste", handlerObject: this, handlerMethod: "handlePasteEvent"},
+		{name: "dragend", handlerObject: this, handlerMethod: "handleDragEndEvent"}
 	]);
 	domNode.addEventListener("click",function (event) {
 	},false);
@@ -101,6 +102,10 @@ DropZoneWidget.prototype.handleDragOverEvent  = function(event) {
 
 DropZoneWidget.prototype.handleDragLeaveEvent  = function(event) {
 	this.leaveDrag(event);
+};
+
+DropZoneWidget.prototype.handleDragEndEvent = function(event) {
+	$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
 };
 
 DropZoneWidget.prototype.handleDropEvent  = function(event) {

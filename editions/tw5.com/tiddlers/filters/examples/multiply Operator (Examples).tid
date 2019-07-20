@@ -1,0 +1,8 @@
+created: 20190611125743568
+modified: 20190611125757767
+tags: [[multiply Operator]] [[Operator Examples]]
+title: multiply Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[23]multiply[19]]">>
+<<.operator-example 2 "=1 =2 =3 =4 +[multiply[4]]">>

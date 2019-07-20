@@ -13,7 +13,7 @@ Upgrader module that suppresses certain system tiddlers that shouldn't be import
 "use strict";
 
 var DONT_IMPORT_LIST = ["$:/StoryList","$:/HistoryList"],
-	DONT_IMPORT_PREFIX_LIST = ["$:/temp/","$:/state/"],
+	DONT_IMPORT_PREFIX_LIST = ["$:/temp/","$:/state/","$:/Import"],
 	WARN_IMPORT_PREFIX_LIST = ["$:/core/modules/"];
 
 exports.upgrade = function(wiki,titles,tiddlers) {

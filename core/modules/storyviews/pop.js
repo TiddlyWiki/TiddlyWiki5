@@ -44,7 +44,14 @@ PopStoryView.prototype.insert = function(widget) {
 			{transition: "none"},
 			{transform: "none"}
 		]);
+		$tw.utils.setStyle(widget.document.body,[
+			{"overflow-x": ""}
+		]);
 	},duration);
+	// Prevent the page from overscrolling due to the zoom factor
+	$tw.utils.setStyle(widget.document.body,[
+		{"overflow-x": "hidden"}
+	]);
 	// Set up the initial position of the element
 	$tw.utils.setStyle(targetElement,[
 		{transition: "none"},

@@ -17,7 +17,7 @@ A quick and dirty HTTP function; to be refactored later. Options are:
 	url: URL to retrieve
 	headers: hashmap of headers to send
 	type: GET, PUT, POST etc
-	callback: function invoked with (err,data)
+	callback: function invoked with (err,data,xhr)
 	returnProp: string name of the property to return as first argument of callback
 */
 exports.httpRequest = function(options) {
@@ -48,7 +48,7 @@ exports.httpRequest = function(options) {
 				return;
 			}
 		// Something went wrong
-		options.callback($tw.language.getString("Error/XMLHttpRequest") + ": " + this.status);
+		options.callback($tw.language.getString("Error/XMLHttpRequest") + ": " + this.status,null,this);
 		}
 	};
 	// Make the request
@@ -67,7 +67,7 @@ exports.httpRequest = function(options) {
 	try {
 		request.send(data);
 	} catch(e) {
-		options.callback(e);
+		options.callback(e,null,this);
 	}
 	return request;
 };

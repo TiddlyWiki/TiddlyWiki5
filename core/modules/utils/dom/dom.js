@@ -136,11 +136,15 @@ exports.getBoundingPageRect = function(element) {
 Saves a named password in the browser
 */
 exports.savePassword = function(name,password) {
+	var done = false;
 	try {
-		if(window.localStorage) {
-			localStorage.setItem("tw5-password-" + name,password);
-		}
+		window.localStorage.setItem("tw5-password-" + name,password);
+		done = true;
 	} catch(e) {
+	}
+	if(!done) {
+		$tw.savedPasswords = $tw.savedPasswords || Object.create(null);
+		$tw.savedPasswords[name] = password;
 	}
 };
 
@@ -148,10 +152,15 @@ exports.savePassword = function(name,password) {
 Retrieve a named password from the browser
 */
 exports.getPassword = function(name) {
+	var value;
 	try {
-		return window.localStorage ? localStorage.getItem("tw5-password-" + name) : "";
+		value = window.localStorage.getItem("tw5-password-" + name);
 	} catch(e) {
-		return "";
+	}
+	if(value !== undefined) {
+		return value;
+	} else {
+		return ($tw.savedPasswords || Object.create(null))[name] || "";
 	}
 };
 

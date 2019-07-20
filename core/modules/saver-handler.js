@@ -151,8 +151,12 @@ Save the wiki contents. Options are:
 SaverHandler.prototype.saveWiki = function(options) {
 	options = options || {};
 	var self = this,
-		method = options.method || "save",
-		variables = options.variables || {},
+		method = options.method || "save";
+	// Ignore autosave if disabled
+	if(method === "autosave" && this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes") {
+		return false;
+	}
+	var	variables = options.variables || {},
 		template = options.template || "$:/core/save/all",
 		downloadType = options.downloadType || "text/plain",
 		text = this.wiki.renderTiddler(downloadType,template,options),
@@ -171,10 +175,6 @@ SaverHandler.prototype.saveWiki = function(options) {
 				}
 			}
 		};
-	// Ignore autosave if disabled
-	if(method === "autosave" && this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes") {
-		return false;
-	}
 	// Call the highest priority saver that supports this method
 	for(var t=this.savers.length-1; t>=0; t--) {
 		var saver = this.savers[t];

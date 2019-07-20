@@ -1,0 +1,19 @@
+title: $:/language/Help/savewikifolder
+description: Speichert ein Wiki in einen neues Verzeichnis
+
+<<.from-version "5.1.20">> Speichert das aktuelle Wiki als ein Wiki-Verzeichnis. Inklusive Tiddlern, Plugins und Konfiguration:
+
+```
+--savewikifolder <wikifolderpath> [<filter>]
+```
+
+* Das Zielverzeichnis muss leer sein, oder nicht existent
+* Der "filter" Parameter definiert, welche Tiddler inkludiert werden. Diser Parameter is optional. Standard: `[all[tiddlers]]`
+* Plugins des offiziellen Plugin-Verzeichnisses werden durch Referenzen zu den Plugins in der `tiddlywiki.info` Datei ersetzt.
+* Drittanbieter Plugins werden in ihre eigenen Verzeichnisse entpackt
+
+Diese Funktion wird vor allem dazu verwendet, eine Wiki-Datei in einzelne Tiddler in einem Wiki-Verzeichnis umzuwandeln. 
+
+```
+tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder
+```

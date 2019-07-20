@@ -11,5 +11,7 @@ type: json
 	"Alt-T": "transposeChars",
 	"Alt-U": "undoSelection",
 	"Shift-Alt-U": "redoSelection",
-	"Cmd-U": ""
+	"Cmd-U": "",
+	"Tab": "indentAuto()",
+	"Enter": "newLineAndIndent()"
 }

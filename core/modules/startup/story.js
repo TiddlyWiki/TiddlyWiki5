@@ -36,7 +36,9 @@ var HELP_OPEN_EXTERNAL_WINDOW = "http://tiddlywiki.com/#WidgetMessage%3A%20tm-op
 
 exports.startup = function() {
 	// Open startup tiddlers
-	openStartupTiddlers();
+	openStartupTiddlers({
+		disableHistory: $tw.boot.disableStartupNavigation
+	});
 	if($tw.browser) {
 		// Set up location hash update
 		$tw.wiki.addEventListener("change",function(changes) {
@@ -106,6 +108,7 @@ exports.startup = function() {
 
 /*
 Process the location hash to open the specified tiddlers. Options:
+disableHistory: if true $:/History is NOT updated
 defaultToCurrentStory: If true, the current story is retained as the default, instead of opening the default tiddlers
 */
 function openStartupTiddlers(options) {
@@ -146,15 +149,18 @@ function openStartupTiddlers(options) {
 	}
 	// Save the story list
 	$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
-	// If a target tiddler was specified add it to the history stack
-	if(target && target !== "") {
-		// The target tiddler doesn't need double square brackets, but we'll silently remove them if they're present
-		if(target.indexOf("[[") === 0 && target.substr(-2) === "]]") {
-			target = target.substr(2,target.length - 4);
-		}
-		$tw.wiki.addToHistory(target);
-	} else if(storyList.length > 0) {
-		$tw.wiki.addToHistory(storyList[0]);
+	// Update history
+	if(!options.disableHistory) {
+		// If a target tiddler was specified add it to the history stack
+		if(target && target !== "") {
+			// The target tiddler doesn't need double square brackets, but we'll silently remove them if they're present
+			if(target.indexOf("[[") === 0 && target.substr(-2) === "]]") {
+				target = target.substr(2,target.length - 4);
+			}
+			$tw.wiki.addToHistory(target);
+		} else if(storyList.length > 0) {
+			$tw.wiki.addToHistory(storyList[0]);
+		}		
 	}
 }
 
