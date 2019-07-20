@@ -13,6 +13,17 @@ Adds an EventEmitter class which may be used on both the server and client
 /*global $tw: false */
 "use strict";
 
+/**
+ * @type {new (){
+ *   eventListeners: Record<string, any[]>;
+ *   addEventListener(type, handler);
+ *   removeEventListener(type, handler);
+ *   dispatchEvent(type, ...args);
+ *   on(type, handler);
+ *   off(type, handler); 
+ *   emit(type, ...args);
+ * }} 
+ */
 function EventEmitter() {
   this.eventListeners = Object.create(null);
 }
