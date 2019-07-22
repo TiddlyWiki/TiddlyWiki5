@@ -16,7 +16,12 @@ On the client, it is an EventSource instance.
  */
 var activeConnections = [];
 
-var serverEvents = { handleConnection, activeConnections, broadcastEvent, isServer: true }
+var serverEvents = { 
+  handleConnection: handleConnection, 
+  activeConnections: activeConnections, 
+  broadcastEvent: broadcastEvent, 
+  isServer: true 
+}
 
 /**
  * @this {typeof serverEvents}
@@ -57,7 +62,7 @@ function handleConnection(request, response, state) {
   this.activeConnections.push(connection);
 
   request.on("close", (function(self){ return function () {
-    let index = self.activeConnections.indexOf(connection);
+    var index = self.activeConnections.indexOf(connection);
     if (index !== -1) self.activeConnections.splice(index, 1);
   } })(this));
 
@@ -84,7 +89,7 @@ function handleConnection(request, response, state) {
 
 }
 if ($tw.browser) {
-  let eventsURL = location.protocol + "//" + location.host + location.pathname
+  var eventsURL = location.protocol + "//" + location.host + location.pathname
     + (location.pathname.endsWith("/") ? "" : "/")
     + "status/events";
   exports.serverEvents = new EventSource(eventsURL, { withCredentials: true });
