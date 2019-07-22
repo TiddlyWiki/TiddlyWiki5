@@ -60,9 +60,9 @@ EventEmitter.prototype.dispatchEvent = function(type /*, args */) {
 
 // Add the lovely shorthand method names for these three
 
-EventEmitter.prototype.on = WikiMethod.addEventListener;
-EventEmitter.prototype.off = WikiMethod.removeEventListener;
-EventEmitter.prototype.emit = WikiMethod.dispatchEvent;
+EventEmitter.prototype.on = EventEmitter.prototype.addEventListener;
+EventEmitter.prototype.off = EventEmitter.prototype.removeEventListener;
+EventEmitter.prototype.emit = EventEmitter.prototype.dispatchEvent;
 
 exports.EventEmitter = EventEmitter;
 
