@@ -89,6 +89,15 @@ Saving/DownloadSaver/Hint: Diese Einstellungen gelten für den HTML5-compatiblen
 Saving/General/Caption: Allgemein
 Saving/General/Hint: Diese Einstellungen gelten für alle Speichermechanismen
 Saving/Hint: Einstellungen zu den TiddlyWiki Speichermechanismen
+Saving/GitHub/Branch: Ziel "branch" zum Speichern (Standard: `master`)
+Saving/GitHub/Caption: ~GitHub Saver
+Saving/GitHub/Description: Diese Einstellungen werden nur zum Speichern auf GitHub verwendet
+Saving/GitHub/ServerURL: Server URL (Standard: `https://api.github.com`)
+Saving/GitHub/Filename: Dateiname für Zielpfad (zB: `index.html`)
+Saving/GitHub/Password: Password, OAUTH token, oder persönlicher "Zugriffs-Token"
+Saving/GitHub/Path: Pfad für Datei (zB: `/wiki/`)
+Saving/GitHub/Repo: Ziel "Repository" (zB: `Jermolene/TiddlyWiki5`)
+Saving/GitHub/UserName: Benuzername
 Saving/TiddlySpot/Advanced/Heading: Erweiterte Einstellungen
 Saving/TiddlySpot/BackupDir: Verzeichnis für das "Backup"
 Saving/TiddlySpot/Backups: "Backups"

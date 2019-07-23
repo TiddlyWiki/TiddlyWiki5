@@ -182,6 +182,7 @@ Subscript/Caption: 下標
 Subscript/Hint: 套用下標格式於所選文字
 Superscript/Caption: 上標
 Superscript/Hint: 套用上標格式於所選文字
+ToggleSidebar/Hint: 切換顯示或隱藏側邊欄
 Transcludify/Caption: 嵌入
 Transcludify/Hint: 套用嵌入於所選文字
 Underline/Caption: 底線

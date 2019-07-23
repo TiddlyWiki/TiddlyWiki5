@@ -1013,7 +1013,7 @@ $tw.modules.define("$:/boot/tiddlerfields/list","tiddlerfield",{
 /*
 Wiki constructor. State is stored in private members that only a small number of privileged accessor methods have direct access. Methods added via the prototype have to use these accessors and cannot access the state data directly.
 options include:
-shadowTiddlers: Array of shadow tiddlers to be added
+enableIndexers - Array of indexer names to enable, or null to use all available indexers
 */
 $tw.Wiki = function(options) {
 	options = options || {};
@@ -1028,7 +1028,7 @@ $tw.Wiki = function(options) {
 		},
 		pluginTiddlers = [], // Array of tiddlers containing registered plugins, ordered by priority
 		pluginInfo = Object.create(null), // Hashmap of parsed plugin content
-		shadowTiddlers = options.shadowTiddlers || Object.create(null), // Hashmap by title of {source:, tiddler:}
+		shadowTiddlers = Object.create(null), // Hashmap by title of {source:, tiddler:}
 		shadowTiddlerTitles = null,
 		getShadowTiddlerTitles = function() {
 			if(!shadowTiddlerTitles) {
@@ -1036,7 +1036,7 @@ $tw.Wiki = function(options) {
 			}
 			return shadowTiddlerTitles;
 		},
-		enableIndexers = options.enableIndexers || null, // Array of indexer names to enable, or null to use all available indexers
+		enableIndexers = options.enableIndexers || null,
 		indexers = [],
 		indexersByName = Object.create(null);
 
@@ -1047,6 +1047,7 @@ $tw.Wiki = function(options) {
 		}
 		indexers.push(indexer);
 		indexersByName[name] = indexer;
+		indexer.init();
 	};
 
 	this.getIndexer = function(name) {

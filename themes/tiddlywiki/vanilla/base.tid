@@ -511,6 +511,7 @@ html body.tc-body .tc-btn-rounded:hover svg {
 	color: <<colour download-foreground>>;
 	fill: <<colour download-foreground>>;
 	border: none;
+	border-radius: 2px;
 	font-size: 1.2em;
 	line-height: 1.4em;
 	text-decoration: none;
@@ -1115,6 +1116,7 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-editor-toolbar button {
 	vertical-align: middle;
 	background-color: <<colour tiddler-controls-foreground>>;
+	color: <<colour tiddler-controls-foreground-selected>>;
 	fill: <<colour tiddler-controls-foreground-selected>>;
 	border-radius: 4px;
 	padding: 3px;
