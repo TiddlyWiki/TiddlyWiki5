@@ -13,4 +13,5 @@ description: {{$:/language/Buttons/Close/Hint}}
 <$text text={{$:/language/Buttons/Close/Caption}}/>
 </span>
 </$list>
+<$action-navigate $to={{{ [list[$:/StoryList]before<currentTiddler>] }}}/>
 </$button>
