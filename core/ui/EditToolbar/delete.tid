@@ -10,4 +10,5 @@ description: {{$:/language/Buttons/Delete/Hint}}
 <$list filter="[<tv-config-toolbar-text>prefix[yes]]">
 <span class="tc-btn-text"><$text text={{$:/language/Buttons/Delete/Caption}}/></span>
 </$list>
+<$action-navigate $to={{{ [list[$:/StoryList]before<currentTiddler>] }}}/>
 </$button>
