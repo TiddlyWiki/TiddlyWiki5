@@ -491,7 +491,7 @@ exports.getTiddlersWithTag = function(tag) {
 	// Try to use the indexer
 	var self = this,
 		tagIndexer = this.getIndexer("TagIndexer"),
-		results = tagIndexer && tagIndexer.lookup(tag);
+		results = tagIndexer && tagIndexer.subIndexers[3].lookup(tag);
 	if(!results) {
 		// If not available, perform a manual scan
 		results = this.getGlobalCache("taglist-" + tag,function() {

@@ -1063,18 +1063,35 @@ $tw.Wiki = function(options) {
 		if(tiddler) {
 			var title = tiddler.fields.title;
 			if(title) {
-				var oldTiddler = this.getTiddler(title);
 // Uncomment the following line for detailed logs of all tiddler writes
 // console.log("Adding",title,tiddler)
+				// Record the old tiddler state
+				var updateDescriptor = {
+					old: {
+						tiddler: this.getTiddler(title),
+						shadow: this.isShadowTiddler(title),
+						exists: this.tiddlerExists(title)
+					}
+				}
+				// Save the new tiddler
 				tiddlers[title] = tiddler;
+				// Check we've got it's title
 				if(tiddlerTitles && tiddlerTitles.indexOf(title) === -1) {
 					tiddlerTitles.push(title);
 				}
+				// Record the new tiddler state
+				updateDescriptor["new"] = {
+					tiddler: tiddler,
+					shadow: this.isShadowTiddler(title),
+					exists: this.tiddlerExists(title)
+				}
+				// Update indexes
 				this.clearCache(title);
 				this.clearGlobalCache();
 				$tw.utils.each(indexers,function(indexer) {
-					indexer.update(oldTiddler,tiddler);
+					indexer.update(updateDescriptor);
 				});
+				// Queue a change event
 				this.enqueueTiddlerEvent(title);
 			}
 		}
@@ -1085,20 +1102,36 @@ $tw.Wiki = function(options) {
 // Uncomment the following line for detailed logs of all tiddler deletions
 // console.log("Deleting",title)
 		if($tw.utils.hop(tiddlers,title)) {
-			var oldTiddler = this.getTiddler(title);
+			// Record the old tiddler state
+			var updateDescriptor = {
+				old: {
+					tiddler: this.getTiddler(title),
+					shadow: this.isShadowTiddler(title),
+					exists: this.tiddlerExists(title)
+				}
+			}
+			// Delete the tiddler
 			delete tiddlers[title];
+			// Delete it from the list of titles
 			if(tiddlerTitles) {
 				var index = tiddlerTitles.indexOf(title);
 				if(index !== -1) {
 					tiddlerTitles.splice(index,1);
 				}				
 			}
+			// Record the new tiddler state
+			updateDescriptor["new"] = {
+				tiddler: this.getTiddler(title),
+				shadow: this.isShadowTiddler(title),
+				exists: this.tiddlerExists(title)
+			}
+			// Update indexes
 			this.clearCache(title);
 			this.clearGlobalCache();
-			var newTiddler = this.getTiddler(title);
 			$tw.utils.each(indexers,function(indexer) {
-				indexer.update(oldTiddler,newTiddler);
+				indexer.update(updateDescriptor);
 			});
+			// Queue a change event
 			this.enqueueTiddlerEvent(title,true);
 		}
 	};
