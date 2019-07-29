@@ -3,6 +3,9 @@ tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/close-button}} {{$:/language/Buttons/Close/Caption}}
 description: {{$:/language/Buttons/Close/Hint}}
 
+\define navigate-before-after-actions()
+<$action-navigate $to={{{ [list[$:/StoryList]$(beforeAfter)$<currentTiddler>] }}}/>
+\end
 \whitespace trim
 <$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
@@ -13,5 +16,7 @@ description: {{$:/language/Buttons/Close/Hint}}
 <$text text={{$:/language/Buttons/Close/Caption}}/>
 </span>
 </$list>
-<$action-navigate $to={{{ [list[$:/StoryList]before<currentTiddler>] }}}/>
+<$set name="beforeAfter" value={{$:/config/Navigation/BeforeAfter}}>
+<<navigate-before-after-actions>>
+</$set>
 </$button>
