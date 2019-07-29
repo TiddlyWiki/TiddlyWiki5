@@ -3,6 +3,11 @@ tags: $:/tags/EditToolbar
 caption: {{$:/core/images/cancel-button}} {{$:/language/Buttons/Cancel/Caption}}
 description: {{$:/language/Buttons/Cancel/Hint}}
 
+\define navigate-before-after-actions()
+<$list filter="[<currentTiddler>get[draft.of]is[missing]]" variable="ignore">
+<$action-navigate $to={{{ [list[$:/StoryList]$(beforeAfter)$<currentTiddler>] }}}/>
+</$list>
+\end
 <$button message="tm-cancel-tiddler" tooltip={{$:/language/Buttons/Cancel/Hint}} aria-label={{$:/language/Buttons/Cancel/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/cancel-button}}
@@ -10,7 +15,7 @@ description: {{$:/language/Buttons/Cancel/Hint}}
 <$list filter="[<tv-config-toolbar-text>prefix[yes]]">
 <span class="tc-btn-text"><$text text={{$:/language/Buttons/Cancel/Caption}}/></span>
 </$list>
-<$list filter="[<currentTiddler>get[draft.of]is[missing]]" variable="ignore">
-<$action-navigate $to={{{ [list[$:/StoryList]before<currentTiddler>] }}}/>
-</$list>
+<$set name="beforeAfter" value={{$:/config/Navigation/BeforeAfter}}>
+<<navigate-before-after-actions>>
+</$set>
 </$button>
