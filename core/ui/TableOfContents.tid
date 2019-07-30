@@ -1,0 +1,14 @@
+title: $:/core/ui/TableOfContents
+tags: $:/tags/SideBar
+caption: {{$:/language/SideBar/Contents/Caption}}
+
+<div class="tc-table-of-contents">
+<$select tiddler="$:/config/TableOfContents/Tag" default="">
+<$list filter="[tags[]]">
+<option value=<<currentTiddler>>><$text text=<<currentTiddler>>/></option>
+</$list>
+</$select>
+
+<$macrocall $name="toc-selective-expandable" tag={{$:/config/TableOfContents/Tag}}/>
+
+</div>
