@@ -2,5 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/codemirror-keymap-sublime-text",
 	"description": "CodeMirror Keymap: Sublime Text",
 	"author": "JeremyRuston",
-	"list": "readme"
+	"list": "readme",
+	"parent-plugin": "$:/plugins/tiddlywiki/codemirror"
 }
