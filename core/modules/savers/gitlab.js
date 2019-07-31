@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/savers/github.js
+title: $:/core/modules/savers/gitlab.js
 type: application/javascript
 module-type: saver
 
-Saves wiki by pushing a commit to the GitHub v3 REST API
+Saves wiki by pushing a commit to the GitLab REST API
 
 \*/
 (function(){
@@ -15,23 +15,23 @@ Saves wiki by pushing a commit to the GitHub v3 REST API
 /*
 Select the appropriate saver module and set it up
 */
-var GitHubSaver = function(wiki) {
+var GitLabSaver = function(wiki) {
 	this.wiki = wiki;
 };
 
-GitHubSaver.prototype.save = function(text,method,callback) {
+GitLabSaver.prototype.save = function(text,method,callback) {
+	/* See https://docs.gitlab.com/ee/api/repository_files.html */
 	var self = this,
-		username = this.wiki.getTiddlerText("$:/GitHub/Username"),
-		password = $tw.utils.getPassword("github"),
-		repo = this.wiki.getTiddlerText("$:/GitHub/Repo"),
-		path = this.wiki.getTiddlerText("$:/GitHub/Path"),
-		filename = this.wiki.getTiddlerText("$:/GitHub/Filename"),
-		branch = this.wiki.getTiddlerText("$:/GitHub/Branch") || "master",
-		endpoint = this.wiki.getTiddlerText("$:/GitHub/ServerURL") || "https://api.github.com",
+		username = this.wiki.getTiddlerText("$:/GitLab/Username"),
+		password = $tw.utils.getPassword("gitlab"),
+		repo = this.wiki.getTiddlerText("$:/GitLab/Repo"),
+		path = this.wiki.getTiddlerText("$:/GitLab/Path"),
+		filename = this.wiki.getTiddlerText("$:/GitLab/Filename"),
+		branch = this.wiki.getTiddlerText("$:/GitLab/Branch") || "master",
+		endpoint = this.wiki.getTiddlerText("$:/GitLab/ServerURL") || "https://gitlab.com/api/v4",
 		headers = {
-			"Accept": "application/vnd.github.v3+json",
 			"Content-Type": "application/json;charset=UTF-8",
-			"Authorization": "Basic " + window.btoa(username + ":" + password)
+			"Private-Token": password
 		};
 	// Bail if we don't have everything we need
 	if(!username || !password || !repo || !path || !filename) {
@@ -45,10 +45,10 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 		path = path + "/";
 	}
 	// Compose the base URI
-	var uri = endpoint + "/repos/" + repo + "/contents" + path;
+	var uri = endpoint + "/projects/" + encodeURIComponent(repo) + "/repository/";
 	// Perform a get request to get the details (inc shas) of files in the same path as our file
 	$tw.utils.httpRequest({
-		url: uri,
+		url: uri + "tree/" + encodeURIComponent(path.replace(/^\/+|\/$/g, '')),
 		type: "GET",
 		headers: headers,
 		data: {
@@ -59,24 +59,26 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 			if(err && xhr.status !== 404) {
 				return callback(err);
 			}
+			var requestType = "POST";
 			if(xhr.status !== 404) {
 				getResponseData = JSON.parse(getResponseDataJson);
 				$tw.utils.each(getResponseData,function(details) {
 					if(details.name === filename) {
+						requestType = "PUT";
 						sha = details.sha;
 					}
 				});
 			}
 			var data = {
-				message: $tw.language.getRawString("ControlPanel/Saving/GitService/CommitMessage"),
+				commit_message: $tw.language.getRawString("ControlPanel/Saving/GitService/CommitMessage"),
 				content: $tw.utils.base64Encode(text),
 				branch: branch,
 				sha: sha
 			};
-			// Perform a PUT request to save the file
+			// Perform a request to save the file
 			$tw.utils.httpRequest({
-				url: uri + filename,
-				type: "PUT",
+				url: uri + "files/" + encodeURIComponent(path.replace(/^\/+/, '') + filename),
+				type: requestType,
 				headers: headers,
 				data: JSON.stringify(data),
 				callback: function(err,putResponseDataJson,xhr) {
@@ -95,8 +97,8 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 /*
 Information about this saver
 */
-GitHubSaver.prototype.info = {
-	name: "github",
+GitLabSaver.prototype.info = {
+	name: "gitlab",
 	priority: 2000,
 	capabilities: ["save", "autosave"]
 };
@@ -112,7 +114,7 @@ exports.canSave = function(wiki) {
 Create an instance of this saver
 */
 exports.create = function(wiki) {
-	return new GitHubSaver(wiki);
+	return new GitLabSaver(wiki);
 };
 
 })();
