@@ -10,9 +10,7 @@ caption: {{$:/language/ControlPanel/Plugins/Caption}}
 <$list filter="[!has[draft.of]plugin-type[$type$]field:parent-plugin[]] [!has[draft.of]plugin-type[$type$]get[parent-plugin]] +[sort[description]]" emptyMessage=<<lingo "Empty/Hint">>>
 {{||$:/core/ui/Components/plugin-info}}
 <$list filter="[!has[draft.of]plugin-type[$type$]contains:parent-plugin<currentTiddler>]">
-
-:{{||$:/core/ui/Components/plugin-info}}
-
+<dd>{{||$:/core/ui/Components/plugin-info}}</dd>
 </$list>
 </$list>
 </$set>
