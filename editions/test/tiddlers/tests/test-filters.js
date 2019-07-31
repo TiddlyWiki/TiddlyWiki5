@@ -238,6 +238,16 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("[[TiddlerOne]tags[]sort[title]]").join(",")).toBe("one");
 	});
 
+	it("should handle the match operator", function() {
+		expect(wiki.filterTiddlers("[match[TiddlerOne]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("TiddlerOne TiddlerOne =[match[TiddlerOne]]").join(",")).toBe("TiddlerOne,TiddlerOne");
+		expect(wiki.filterTiddlers("[!match[TiddlerOne]]").join(",")).toBe("$:/ShadowPlugin,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[match:casesensitive[tiddlerone]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("[!match:casesensitive[tiddlerone]]").join(",")).toBe("$:/ShadowPlugin,TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[match:caseinsensitive[tiddlerone]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("[!match:caseinsensitive[tiddlerone]]").join(",")).toBe("$:/ShadowPlugin,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
+	});
+
 	it("should handle the tagging operator", function() {
 		expect(wiki.filterTiddlers("[[one]tagging[]sort[title]]").join(",")).toBe("Tiddler Three,Tiddler8,TiddlerOne,TiddlerSeventh");
 		expect(wiki.filterTiddlers("[[one]tagging[]]").join(",")).toBe("Tiddler Three,TiddlerOne,TiddlerSeventh,Tiddler8");
