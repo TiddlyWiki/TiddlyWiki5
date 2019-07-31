@@ -9,7 +9,7 @@ Saves wiki by pushing a commit to the GitHub v3 REST API
 (function(){
 
 /*jslint node: true, browser: true */
-/*global $tw: true */
+/*global $tw: false */
 "use strict";
 
 /*
