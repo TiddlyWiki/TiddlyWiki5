@@ -14,7 +14,7 @@ GET /:title
 
 exports.method = "GET";
 
-exports.path = /^\/([^\/]+)$/;
+exports.path = /^\/static\/([^\/]+)$/;
 
 exports.handler = function(request,response,state) {
 	var title = decodeURIComponent(state.params[0]),
