@@ -5,14 +5,17 @@ caption: {{$:/language/ControlPanel/Plugins/Caption}}
 \define lingo-base() $:/language/ControlPanel/Plugins/
 
 \define plugin-table(type)
+\whitespace trim
 <$set name="plugin-type" value="""$type$""">
 <$set name="qualified-state" value=<<qualify "$:/state/plugin-info">>>
-<$list filter="[!has[draft.of]plugin-type[$type$]field:parent-plugin[]] [!has[draft.of]plugin-type[$type$]get[parent-plugin]] +[sort[description]]" emptyMessage=<<lingo "Empty/Hint">>>
+<$set name="parentPluginFilter" filter="[!has[draft.of]plugin-type[$type$]get[parent-plugin]split[ ]]">
+<$list filter="[!has[draft.of]plugin-type[$type$]field:parent-plugin[]] [enlist<parentPluginFilter>] +[sort[description]]" emptyMessage=<<lingo "Empty/Hint">>>
 {{||$:/core/ui/Components/plugin-info}}
 <$list filter="[!has[draft.of]plugin-type[$type$]contains:parent-plugin<currentTiddler>]">
 <dd>{{||$:/core/ui/Components/plugin-info}}</dd>
 </$list>
 </$list>
+</$set>
 </$set>
 </$set>
 \end
