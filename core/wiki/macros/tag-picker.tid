@@ -6,11 +6,6 @@ tags: $:/tags/Macro
 <$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
 \end
 
-\define add-tag-actions()
-<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/NewTagName}}/>
-<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
-\end
-
 \define tag-button()
 <$button class="tc-btn-invisible" tag="a">
 $(actions)$
