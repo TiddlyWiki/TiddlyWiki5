@@ -15,14 +15,14 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 \end
 
 \define new-field-actions()
-<$action-sendmessage $message="tm-add-field" $name={{$(newFieldNameTiddler)$}} $value={{$(newFieldValueTiddler)$}}/>
-<$action-deletetiddler $tiddler="$(newFieldNameTiddler)$"/>
-<$action-deletetiddler $tiddler="$(newFieldValueTiddler)$"/>
+<$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
+<$action-deletetiddler $tiddler=<<newFieldNameTiddler>>/>
+<$action-deletetiddler $tiddler=<<newFieldValueTiddler>>/>
 <$action-sendmessage $message="tm-focus-selector" $param=<<current-tiddler-new-field-selector>>/>
 \end
 
 \define new-field()
-<$vars name={{{ [{$(newFieldNameTiddler)$}] }}}>
+<$vars name={{{ [<newFieldNameTiddler>] }}}>
 <$reveal type="nomatch" text="" default=<<name>>>
 <$button>
 <$macrocall $name="new-field-actions"/>
@@ -49,7 +49,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 <$reveal state=<<qualify "$:/state/popup/field-dropdown">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown tc-edit-type-dropdown">
 <$set name="tv-show-missing-links" value="yes">
-<$linkcatcher to="$(newFieldNameTiddler)$">
+<$linkcatcher to=<<newFieldNameTiddler>>>
 <div class="tc-dropdown-item">
 <<lingo Fields/Add/Dropdown/User>>
 </div>
