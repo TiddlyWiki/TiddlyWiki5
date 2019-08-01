@@ -511,6 +511,7 @@ html body.tc-body .tc-btn-rounded:hover svg {
 	color: <<colour download-foreground>>;
 	fill: <<colour download-foreground>>;
 	border: none;
+	border-radius: 2px;
 	font-size: 1.2em;
 	line-height: 1.4em;
 	text-decoration: none;
@@ -522,6 +523,10 @@ html body.tc-body .tc-btn-rounded:hover svg {
 	width: 2em;
 	vertical-align: middle;
 	fill: <<colour download-foreground>>;
+}
+
+.tc-primary-btn {
+ 	background: <<colour primary>>;
 }
 
 .tc-sidebar-lists input {

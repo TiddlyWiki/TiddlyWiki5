@@ -73,13 +73,13 @@ Compute the internal state of the widget
 KeyboardWidget.prototype.execute = function() {
 	var self = this;
 	// Get attributes
-	this.actions = this.getAttribute("actions");
-	this.message = this.getAttribute("message");
-	this.param = this.getAttribute("param");
-	this.key = this.getAttribute("key");
-	this.tag = this.getAttribute("tag");
+	this.actions = this.getAttribute("actions","");
+	this.message = this.getAttribute("message","");
+	this.param = this.getAttribute("param","");
+	this.key = this.getAttribute("key","");
+	this.tag = this.getAttribute("tag","");
 	this.keyInfoArray = $tw.keyboardManager.parseKeyDescriptors(this.key);
-	this["class"] = this.getAttribute("class");
+	this["class"] = this.getAttribute("class","");
 	if(this.key.substr(0,2) === "((" && this.key.substr(-2,2) === "))") {
 		this.shortcutTiddlers = [];
 		var name = this.key.substring(2,this.key.length -2);

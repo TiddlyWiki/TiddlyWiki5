@@ -193,7 +193,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			type = type || "text";
 		}
 		// Get the rest of our parameters
-		this.editTag = this.getAttribute("tag",tag);
+		this.editTag = this.getAttribute("tag",tag) || "input";
 		this.editType = this.getAttribute("type",type);
 		// Make the child widgets
 		this.makeChildWidgets();
@@ -246,6 +246,13 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		if(text !== editInfo.value) {
 			editInfo.update(text);
 		}
+	};
+
+	/*
+	Cancel Popups
+	*/
+	EditTextWidget.prototype.cancelPopups = function() {
+		$tw.popup.cancel(0,this.engine.domNode);
 	};
 
 	/*

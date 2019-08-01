@@ -1013,7 +1013,7 @@ $tw.modules.define("$:/boot/tiddlerfields/list","tiddlerfield",{
 /*
 Wiki constructor. State is stored in private members that only a small number of privileged accessor methods have direct access. Methods added via the prototype have to use these accessors and cannot access the state data directly.
 options include:
-shadowTiddlers: Array of shadow tiddlers to be added
+enableIndexers - Array of indexer names to enable, or null to use all available indexers
 */
 $tw.Wiki = function(options) {
 	options = options || {};
@@ -1028,7 +1028,7 @@ $tw.Wiki = function(options) {
 		},
 		pluginTiddlers = [], // Array of tiddlers containing registered plugins, ordered by priority
 		pluginInfo = Object.create(null), // Hashmap of parsed plugin content
-		shadowTiddlers = options.shadowTiddlers || Object.create(null), // Hashmap by title of {source:, tiddler:}
+		shadowTiddlers = Object.create(null), // Hashmap by title of {source:, tiddler:}
 		shadowTiddlerTitles = null,
 		getShadowTiddlerTitles = function() {
 			if(!shadowTiddlerTitles) {
@@ -1036,7 +1036,7 @@ $tw.Wiki = function(options) {
 			}
 			return shadowTiddlerTitles;
 		},
-		enableIndexers = options.enableIndexers || null, // Array of indexer names to enable, or null to use all available indexers
+		enableIndexers = options.enableIndexers || null,
 		indexers = [],
 		indexersByName = Object.create(null);
 
@@ -1047,6 +1047,7 @@ $tw.Wiki = function(options) {
 		}
 		indexers.push(indexer);
 		indexersByName[name] = indexer;
+		indexer.init();
 	};
 
 	this.getIndexer = function(name) {
@@ -1062,18 +1063,35 @@ $tw.Wiki = function(options) {
 		if(tiddler) {
 			var title = tiddler.fields.title;
 			if(title) {
-				var oldTiddler = this.getTiddler(title);
 // Uncomment the following line for detailed logs of all tiddler writes
 // console.log("Adding",title,tiddler)
+				// Record the old tiddler state
+				var updateDescriptor = {
+					old: {
+						tiddler: this.getTiddler(title),
+						shadow: this.isShadowTiddler(title),
+						exists: this.tiddlerExists(title)
+					}
+				}
+				// Save the new tiddler
 				tiddlers[title] = tiddler;
+				// Check we've got it's title
 				if(tiddlerTitles && tiddlerTitles.indexOf(title) === -1) {
 					tiddlerTitles.push(title);
 				}
+				// Record the new tiddler state
+				updateDescriptor["new"] = {
+					tiddler: tiddler,
+					shadow: this.isShadowTiddler(title),
+					exists: this.tiddlerExists(title)
+				}
+				// Update indexes
 				this.clearCache(title);
 				this.clearGlobalCache();
 				$tw.utils.each(indexers,function(indexer) {
-					indexer.update(oldTiddler,tiddler);
+					indexer.update(updateDescriptor);
 				});
+				// Queue a change event
 				this.enqueueTiddlerEvent(title);
 			}
 		}
@@ -1084,20 +1102,36 @@ $tw.Wiki = function(options) {
 // Uncomment the following line for detailed logs of all tiddler deletions
 // console.log("Deleting",title)
 		if($tw.utils.hop(tiddlers,title)) {
-			var oldTiddler = this.getTiddler(title);
+			// Record the old tiddler state
+			var updateDescriptor = {
+				old: {
+					tiddler: this.getTiddler(title),
+					shadow: this.isShadowTiddler(title),
+					exists: this.tiddlerExists(title)
+				}
+			}
+			// Delete the tiddler
 			delete tiddlers[title];
+			// Delete it from the list of titles
 			if(tiddlerTitles) {
 				var index = tiddlerTitles.indexOf(title);
 				if(index !== -1) {
 					tiddlerTitles.splice(index,1);
 				}				
 			}
+			// Record the new tiddler state
+			updateDescriptor["new"] = {
+				tiddler: this.getTiddler(title),
+				shadow: this.isShadowTiddler(title),
+				exists: this.tiddlerExists(title)
+			}
+			// Update indexes
 			this.clearCache(title);
 			this.clearGlobalCache();
-			var newTiddler = this.getTiddler(title);
 			$tw.utils.each(indexers,function(indexer) {
-				indexer.update(oldTiddler,newTiddler);
+				indexer.update(updateDescriptor);
 			});
+			// Queue a change event
 			this.enqueueTiddlerEvent(title,true);
 		}
 	};
