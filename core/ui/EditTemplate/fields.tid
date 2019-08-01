@@ -22,7 +22,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 \end
 
 \define new-field()
-<$vars name={{{ [<newFieldNameTiddler>] }}}>
+<$vars name={{{ [<newFieldNameTiddler>get[text]] }}}>
 <$reveal type="nomatch" text="" default=<<name>>>
 <$button>
 <$macrocall $name="new-field-actions"/>
@@ -53,7 +53,8 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 <div class="tc-dropdown-item">
 <<lingo Fields/Add/Dropdown/User>>
 </div>
-<$list filter="[!is[shadow]!is[system]fields[]search:title{$(newFieldNameTiddler)$}sort[]] -created -creator -draft.of -draft.title -modified -modifier -tags -text -title -type"  variable="currentField">
+<$vars name={{{ [<newFieldNameTiddler>get[text]] }}}>
+<$list filter="[!is[shadow]!is[system]fields[]search:title<name>sort[]] -created -creator -draft.of -draft.title -modified -modifier -tags -text -title -type"  variable="currentField">
 <$link to=<<currentField>>>
 <<currentField>>
 </$link>
@@ -61,11 +62,12 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 <div class="tc-dropdown-item">
 <<lingo Fields/Add/Dropdown/System>>
 </div>
-<$list filter="[fields[]search:title{$(newFieldNameTiddler)$}sort[]] -[!is[shadow]!is[system]fields[]]" variable="currentField">
+<$list filter="[fields[]search:title<name>sort[]] -[!is[shadow]!is[system]fields[]]" variable="currentField">
 <$link to=<<currentField>>>
 <<currentField>>
 </$link>
 </$list>
+</$vars>
 </$linkcatcher>
 </$set>
 </div>
