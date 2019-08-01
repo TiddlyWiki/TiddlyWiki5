@@ -1,11 +1,11 @@
 title: $:/core/ui/EditTemplate
 
 \define save-tiddler-actions()
-<$action-sendmessage $message="tm-add-tag" $param={{$(newTagNameTiddler)$}}/>
-<$action-deletetiddler $tiddler="$(newTagNameTiddler)$"/>
-<$action-sendmessage $message="tm-add-field" $name={{$(newFieldNameTiddler)$}} $value={{$(newFieldValueTiddler)$}}/>
-<$action-deletetiddler $tiddler="$(newFieldNameTiddler)$"/>
-<$action-deletetiddler $tiddler="$(newFieldValueTiddler)$"/>
+<$action-sendmessage $message="tm-add-tag" $param={{{ [<newTagNameTiddler>get[text]] }}}/>
+<$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
+<$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
+<$action-deletetiddler $tiddler=<<newFieldNameTiddler>>/>
+<$action-deletetiddler $tiddler=<<newFieldValueTiddler>>/>
 <$action-sendmessage $message="tm-save-tiddler"/>
 \end
 \define frame-classes()
