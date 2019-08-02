@@ -9,7 +9,7 @@ caption: {{$:/language/Search/DefaultResults/Caption}}
 
 <$list filter="[enlist<titleList>limit[250]]" template="$:/core/ui/ListItemTemplate"/>
 
-//<small>{{$:/language/Search/Matches/All}}</small>//
+//<small>{{$:/language/Search/Matches/Other}}</small>//
 
 <$list filter="[!is[system]search{$(searchTiddler)$}sort[title]] -[enlist<titleList>] +[limit[250]]" template="$:/core/ui/ListItemTemplate"/>
 
