@@ -29,11 +29,12 @@ $value={{$:/temp/newfieldvalue}}/>
 </$reveal>
 </$vars>
 \end
+\whitespace trim
 
 <div class="tc-edit-fields">
 <table class="tc-edit-fields">
 <tbody>
-<$list filter="[all[current]fields[]] +[sort[title]]" variable="currentField">
+<$list filter="[all[current]fields[]] +[sort[title]]" variable="currentField" storyview="pop">
 <$list filter=<<config-filter>> variable="temp">
 <tr class="tc-edit-field">
 <td class="tc-edit-field-name">
