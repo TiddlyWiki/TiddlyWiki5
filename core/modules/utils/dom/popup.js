@@ -158,7 +158,7 @@ Popup.prototype.detectInputWithinPopup = function(node) {
 	for(var i=0; i<this.popups.length; i++) {
 		var popup = (this.popups[i] && this.popups[i].domNode) ? this.popups[i].domNode : null;
 		while(node && popup) {
-			if(node === popup || (node.classList && node.classList.contains("tc-popup-keep"))) {
+			if(node === popup || (node.classList && (node.classList.contains("tc-popup-keep") || node.classList.contains("tc-popup-handle")))) {
 				withinPopup = true;
 			}
 			node = node.parentNode;

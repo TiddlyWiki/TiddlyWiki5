@@ -128,6 +128,15 @@ function setupWiki(wikiOptions) {
 // Our tests
 function runTests(wiki) {
 
+	it("should handle the then and else operators", function() {
+		expect(wiki.filterTiddlers("[modifier[JoeBloggs]then[JaneBloggs]]").join(",")).toBe("JaneBloggs");
+		expect(wiki.filterTiddlers("[!modifier[JoeBloggs]then[JaneBloggs]]").join(",")).toBe("JaneBloggs,JaneBloggs,JaneBloggs,JaneBloggs,JaneBloggs");
+		expect(wiki.filterTiddlers("[modifier[DaveBloggs]then[JaneBloggs]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("[modifier[JoeBloggs]else[JaneBloggs]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("[!modifier[JoeBloggs]else[JaneBloggs]]").join(",")).toBe("$:/ShadowPlugin,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[modifier[DaveBloggs]else[JaneBloggs]]").join(",")).toBe("JaneBloggs");
+	});
+
 	it("should handle the ~ prefix", function() {
 		expect(wiki.filterTiddlers("[modifier[JoeBloggs]] ~[[No such tiddler]]").join(",")).toBe("TiddlerOne");
 		expect(wiki.filterTiddlers("[modifier[JaneBloggs]] ~[[No such tiddler]]").join(",")).toBe("No such tiddler");

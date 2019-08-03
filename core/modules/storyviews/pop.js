@@ -72,7 +72,7 @@ PopStoryView.prototype.remove = function(widget) {
 	var targetElement = widget.findFirstDomNode(),
 		duration = $tw.utils.getAnimationDuration(),
 		removeElement = function() {
-			if(targetElement.parentNode) {
+			if(targetElement && targetElement.parentNode) {
 				widget.removeChildDomNodes();
 			}
 		};
