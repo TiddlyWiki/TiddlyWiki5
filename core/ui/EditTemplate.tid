@@ -12,9 +12,8 @@ title: $:/core/ui/EditTemplate
 tc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$
 \end
 <div class=<<frame-classes>> data-tiddler-title=<<currentTiddler>>>
-<$vars newTagNameTiddler=<<qualify "$:/temp/NewTagName">> newFieldNameTiddler=<<qualify "$:/temp/newfieldname">> newFieldValueTiddler=<<qualify "$:/temp/newfieldvalue">>>
 <$fieldmangler>
-<$set name="storyTiddler" value=<<currentTiddler>>>
+<$vars storyTiddler=<<currentTiddler>> newTagNameTiddler=<<qualify "$:/temp/NewTagName">> newFieldNameTiddler=<<qualify "$:/temp/NewFieldName">> newFieldValueTiddler=<<qualify "$:/temp/NewFieldValue">>>
 <$keyboard key="((cancel-edit-tiddler))" message="tm-cancel-tiddler">
 <$keyboard key="((save-tiddler))" actions=<<save-tiddler-actions>>>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/EditTemplate]!has[draft.of]]" variable="listItem">
@@ -24,7 +23,6 @@ tc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerCl
 </$list>
 </$keyboard>
 </$keyboard>
-</$set>
-</$fieldmangler>
 </$vars>
+</$fieldmangler>
 </div>
