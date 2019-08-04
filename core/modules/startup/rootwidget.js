@@ -44,13 +44,7 @@ exports.startup = function() {
 			console.log("Error in selector: ",selector)
 		}
 		if(element && element.focus) {
-			if(event.paramObject.delayed === "yes" || event.paramObject.delayed === "true") {
-				setTimeout(function() {
-					element.focus();
-				},$tw.utils.getAnimationDuration());
-			} else {
-				element.focus();
-			}
+			element.focus(event.paramObject);
 		}
 	});
 	// Install the scroller
