@@ -131,7 +131,8 @@ NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
 };
 
 NavigatorWidget.prototype.findAdjacentStoryTiddler = function(title,storyList) {
-	if(this.wiki.getTiddler(this.historyTitle).getFieldString("focus-tiddler") === title) {
+	var historyTiddler = this.wiki.getTiddler(this.historyTitle);
+	if(historyTiddler && historyTiddler.getFieldString("focus-tiddler") === title) {
 		var titleIndex = storyList.indexOf(title);
 		return storyList[titleIndex + 1] ? storyList[titleIndex + 1] :
 			(storyList[titleIndex - 1] ? storyList[titleIndex - 1] : null);
