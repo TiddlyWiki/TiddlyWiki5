@@ -9,4 +9,4 @@ The `tm-focus-selector` message sets the focus to the DOM element identified by 
 
 |!Name |!Description |
 |param |Selector identifying the DOM element to be focussed  |
-
+|paramObject |Optional hashmap of additional parameters passed to the `focus` command |
