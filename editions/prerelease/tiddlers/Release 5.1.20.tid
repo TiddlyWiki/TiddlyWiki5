@@ -18,6 +18,10 @@ There is now finer control over TiddlyWiki's default behaviour of removing dupli
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/37bb75f0cf446d62eb45d07b9f9b0aa14814a43f]] support for new `=` prefix for merging filter runs without removing duplicates
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/18fe112da7d3ac210a5a0b9cf73fe9050717d4e3]] option for the [[enlist Operator]] to not remove duplicates
 
+Keyboard shortcut handling has been significantly improved:
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bf51ae001993565fd43443d053ea83e209b67c6f]] a keyboard shortcut (default <kbd>ctrl</kbd>-<kbd>shift</kbd>-<kbd>F</kbd>) for focussing the sidebar search field 
+
 !! Plugin Improvements
 
 New and improved plugins:
@@ -52,12 +56,16 @@ New and improved translations:
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e5f3301c1c36e8add4ed89ab1bd53a9b68411d3f]] a warning when core JavaScript modules are overwritten via import
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3654]] prompt for references when renaming a tiddler
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0e6855eba8945e023cc5ef19809cfb6d6025627b]] a new filter preset for advanced search for "tiddlers modified this session"
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/3832]] the [[palette manager|$:/PaletteManager]] with the ability to delete entries, and directly edit indirect entries
 
 !! Hackability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4051]] support for [[configurable view and edit templates|Hidden Setting: ViewTemplate and EditTemplate]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/aa5eaa98fcb8658dbc2b93476c2e09c9207439d8]] a saver for [[Saving to GitHub]]
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/37ea659bf011b1d4a152f54171399d94f5bba3ef]] the [[dumpvariables Macro]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/754c1251a9bdf45e8f64079a4bbdaed2d05be2b7]] new [[variables Operator]] and [[getvariable Operator]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ed67f4a88b29c5c81d4de31203dbf23d66955fb7]] new [[WidgetMessage: tm-focus-selector]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3546]] new [[escapecss Operator]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3880]] new [[unusedtitle Macro]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/36e76429b1a1d4638374d513430393db5693b932]] new `[is[variable]]` option to the [[is Operator]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/90684f9f52809ff5df39629d3b161d7ff23002f4]] new `[is[blank]]` option to the [[is Operator]]
@@ -83,6 +91,7 @@ New and improved translations:
 * [[Ameliorated|https://github.com/Jermolene/TiddlyWiki5/pull/3809]] Firefox problem with sticky placeholder during drag and drop operations
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3819]] [[CodeMirror Plugin]] to use ''tiddler-editor-border'' colour
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/8012a3508f209fbbe68484e30ed65832cf5146b9]] problem using the TiddlySpot saver with cookies disabled
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3611]] framed text editor to use correct background colour
 
 !! Node.js Bug Fixes and Improvements
 
