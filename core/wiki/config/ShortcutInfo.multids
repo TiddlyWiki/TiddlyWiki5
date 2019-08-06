@@ -1,5 +1,6 @@
 title: $:/config/ShortcutInfo/
 
+advanced-search: {{$:/language/Buttons/AdvancedSearch/Hint}}
 bold: {{$:/language/Buttons/Bold/Hint}}
 cancel-edit-tiddler: {{$:/language/Buttons/Cancel/Hint}}
 excise: {{$:/language/Buttons/Excise/Hint}}
@@ -22,8 +23,10 @@ picture: {{$:/language/Buttons/Picture/Hint}}
 preview: {{$:/language/Buttons/Preview/Hint}}
 quote: {{$:/language/Buttons/Quote/Hint}}
 save-tiddler: {{$:/language/Buttons/Save/Hint}}
+sidebar-search: {{$:/language/Buttons/SidebarSearch/Hint}}
 stamp: {{$:/language/Buttons/Stamp/Hint}}
 strikethrough: {{$:/language/Buttons/Strikethrough/Hint}}
 subscript: {{$:/language/Buttons/Subscript/Hint}}
 superscript: {{$:/language/Buttons/Superscript/Hint}}
+toggle-sidebar: {{$:/language/Buttons/ToggleSidebar/Hint}}
 underline: {{$:/language/Buttons/Underline/Hint}}

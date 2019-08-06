@@ -33,6 +33,10 @@ var PageScroller = function() {
 		};
 };
 
+PageScroller.prototype.isScrolling = function() {
+	return this.idRequestFrame !== null;
+}
+
 PageScroller.prototype.cancelScroll = function(srcWindow) {
 	if(this.idRequestFrame) {
 		this.cancelAnimationFrame.call(srcWindow,this.idRequestFrame);

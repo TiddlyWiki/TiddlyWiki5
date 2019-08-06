@@ -13,8 +13,8 @@ Es können noch zusätzliche Variablen per Name und Wert gesetzt werden.
 
 * ''tiddler-filter'': Ein Filter, der die Auszugebenden Tiddler eindeutig spezifiziert. 
 * ''filename-filter'': [Option] Filter, der aus Tiddler Titeln, Pfadnamen extrahiert. Wenn weggelassen, dann wird der Standard verwendet: `[is[tiddler]addsuffix[.html]]`, welcher den Titel als Dateiname verwendet.
-* ''template'': [Option] Template, das verwendet werden soll
 * ''render-type'': [Option] Ausgabe Type: `text/html` (Standard) generiert HTML Text und `text/plain` gibt den "reinen" Text Inhalt zurück. `text/plain` ignoriert HTML Marker und andere "nicht-druckbare" Zeichen.
+* ''template'': [Option] Template, das verwendet werden soll
 * ''name'': [Option] Name einer zusätzlichen Variablen.
 * ''value'': [Option] Wert dieser zusätzlichen Variablen.
 

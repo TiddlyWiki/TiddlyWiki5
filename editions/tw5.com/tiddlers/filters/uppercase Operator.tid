@@ -1,0 +1,15 @@
+caption: uppercase
+created: 20190613153420821
+modified: 20190619110837473
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input titles with each lowercase letter replaced by the equivalent uppercase letter
+op-purpose: returns each item in the list as uppercase
+tags: [[Filter Operators]]
+title: uppercase Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">>
+
+See also [[lowercase Operator]] and [[sentencecase Operator]].
+
+<<.operator-examples "uppercase">>

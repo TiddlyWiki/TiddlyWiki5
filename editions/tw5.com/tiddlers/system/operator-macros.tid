@@ -28,6 +28,10 @@ tags: $:/tags/Macro
 </$list>
 \end
 
+\define .inline-operator-example(eg)
+<code><$text text=<<__eg__>>/></code> evaluates to <$list filter=<<__eg__>> emptyMessage="(empty)"> <code><$text text=<<currentTiddler>>/></code> </$list>
+\end
+
 \define .this-is-operator-example() This example tiddler is used to illustrate some of the [[Filter Operators]].
 \define .using-days-of-week() These examples make use of the [[Days of the Week]] tiddler.
 \define .s-matching-is-case-sensitive() In looking for matches for <<.place S>>, capital and lowercase letters are treated as different.

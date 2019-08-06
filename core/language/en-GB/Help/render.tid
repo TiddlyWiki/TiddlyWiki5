@@ -13,8 +13,8 @@ A name and value for an additional variable may optionally also be specified.
 
 * ''tiddler-filter'': A filter identifying the tiddler(s) to be rendered
 * ''filename-filter'': Optional filter transforming tiddler titles into pathnames. If omitted, defaults to `[is[tiddler]addsuffix[.html]]`, which uses the unchanged tiddler title as the filename
-* ''template'': Optional template through which each tiddler is rendered
 * ''render-type'': Optional render type: `text/html` (the default) returns the full HTML text and `text/plain` just returns the text content (ie it ignores HTML tags and other unprintable material)
+* ''template'': Optional template through which each tiddler is rendered
 * ''name'': Name of optional variable
 * ''value'': Value of optional variable
 

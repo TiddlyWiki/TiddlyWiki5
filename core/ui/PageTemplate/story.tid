@@ -1,6 +1,7 @@
 title: $:/core/ui/PageTemplate/story
 tags: $:/tags/PageTemplate
 
+\whitespace trim
 <section class="tc-story-river">
 
 <section class="story-backdrop">
@@ -13,7 +14,7 @@ tags: $:/tags/PageTemplate
 
 </section>
 
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/core/ui/ViewTemplate" editTemplate="$:/core/ui/EditTemplate" storyview={{$:/view}} emptyMessage={{$:/config/EmptyStoryMessage}}/>
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template={{$:/config/ui/ViewTemplate}} editTemplate={{$:/config/ui/EditTemplate}} storyview={{$:/view}} emptyMessage={{$:/config/EmptyStoryMessage}}/>
 
 <section class="story-frontdrop">
 

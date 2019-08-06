@@ -14,6 +14,7 @@ draft.of: Entwurf von - enthält den Titel des Tiddlers, zu dem dieser Entwurf-T
 draft.title: Entwurf Titel - enthält den neuen Titel, wenn der Entwurf-Tiddler gespeichert wird. 
 footer: Der Fußnoten Text bei einem "~Wizard-Dialog"
 hack-to-give-us-something-to-compare-against: Ein temporäres Feld, verwendet in [[$:/core/templates/static.content]]
+hide-body: Der Textbereich eines Tiddlers wird verborgen, wenn dieses Feld auf ''"yes"'' gesetzt wird
 icon: Der Titel eines ~Icon-Tiddlers, der mit diesem Tiddler verbunden ist.
 library: Wenn dieses Feld="yes" ist, dann soll der Tiddler als JavaScript Bibliothek gespeichert werden.
 list: Eine geordnete Tiddler Liste, die mit diesem Tiddler verbunden ist.
@@ -31,5 +32,6 @@ subtitle: Der Untertitel für einen "~Wizard-Dialog".
 tags: Eine Liste von "Tags" für diesen Tiddler.
 text: Der Haupttext eines Tiddlers.
 title: Ein individueller einmaliger Name eines Tiddlers.
+toc-link: Unterdrückt die Anzeige als Link, wenn der Wert auf ''"no"'' gesetzt wird
 type: Legt den Typ eines Tiddlers fest (aka MIME-type).
 version: Versions-Information eines "plugins".

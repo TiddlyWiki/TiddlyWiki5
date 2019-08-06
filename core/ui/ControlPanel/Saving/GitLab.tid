@@ -1,0 +1,16 @@
+title: $:/core/ui/ControlPanel/Saving/GitLab
+tags: $:/tags/ControlPanel/Saving
+caption: {{$:/language/ControlPanel/Saving/GitService/GitLab/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Saving/GitService/
+\define service-name() ~GitLab
+
+<<lingo Description>>
+
+|<<lingo UserName>> |<$edit-text tiddler="$:/GitLab/Username" default="" tag="input"/> |
+|<<lingo GitLab/Password>> |<$password name="gitlab"/> |
+|<<lingo Repo>> |<$edit-text tiddler="$:/GitLab/Repo" default="" tag="input"/> |
+|<<lingo Branch>> |<$edit-text tiddler="$:/GitLab/Branch" default="master" tag="input"/> |
+|<<lingo Path>> |<$edit-text tiddler="$:/GitLab/Path" default="" tag="input"/> |
+|<<lingo Filename>> |<$edit-text tiddler="$:/GitLab/Filename" default="" tag="input"/> |
+|<<lingo ServerURL>> |<$edit-text tiddler="$:/GitLab/ServerURL" default="https://gitlab.com/api/v4" tag="input"/> |
