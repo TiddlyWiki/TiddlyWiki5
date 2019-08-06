@@ -28,15 +28,15 @@ There is now finer control over TiddlyWiki's default behaviour of removing dupli
 
 !! Improved Keyboard Shortcuts
 
-Keyboard shortcut handling has been significantly improved with the following new global shortcuts
+Keyboard shortcut handling has been significantly improved with the following new global shortcuts (configurable via $:/ControlPanel):
 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bf51ae001993565fd43443d053ea83e209b67c6f]] a keyboard shortcut (default <kbd>ctrl-shift-F</kbd>) for focussing the sidebar search field 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ef7210adf4ecbec9838dcf898a5841f3ffa31567]] a keyboard shortcut (default <kbd>alt-shift-S</kbd>) for toggling the visibility of the sidebar
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/2bcb36f15147e3470688bd90276fa038c2991976]] a keyboard shortcut (default <kbd>ctrl-shift-A</kbd>) for opening the advanced search tiddler
+* <kbd>ctrl-shift-F</kbd> - focus the sidebar search field 
+* <kbd>alt-shift-S</kbd> - toggle the visibility of the sidebar
+* <kbd>ctrl-shift-A</kbd> - open the advanced search tiddler
 
 !! Saving to ~GitHub and ~GitLab
 
-[[Added|https://github.com/Jermolene/TiddlyWiki5/commit/aa5eaa98fcb8658dbc2b93476c2e09c9207439d8]] a [[Git service saver|Saving to a Git service]] for saving direct to ~GitHub and ~GitLab
+[[Added|https://github.com/Jermolene/TiddlyWiki5/commit/aa5eaa98fcb8658dbc2b93476c2e09c9207439d8]] a [[Git service saver|Saving to a Git service]] for saving directly to ~GitHub and ~GitLab
 
 !! Plugin Improvements
 
