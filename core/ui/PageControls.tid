@@ -1,17 +1,13 @@
 title: $:/core/ui/PageTemplate/pagecontrols
 
 \whitespace trim
-\define config-title()
-$:/config/PageControlButtons/Visibility/$(listItem)$
+\define list-display-filter(tag, prefix)
+[all[shadows+tiddlers]tag[$tag$]!has[draft.of]] +[addprefix[$prefix$]!field:text[hide]removeprefix[$prefix$]]
 \end
 <div class="tc-page-controls">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">
-<$set name="hidden" value=<<config-title>>>
-<$list filter="[<hidden>!text[hide]]" storyview="pop">
+<$list filter=<<list-display-filter "$:/tags/PageControls" "$:/config/PageControlButtons/Visibility/">> variable="listItem" storyview="pop">
 <$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
 <$transclude tiddler=<<listItem>> mode="inline"/>
-</$set>
-</$list>
 </$set>
 </$list>
 </div>
