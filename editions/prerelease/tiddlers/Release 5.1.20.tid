@@ -21,6 +21,9 @@ There is now finer control over TiddlyWiki's default behaviour of removing dupli
 Keyboard shortcut handling has been significantly improved:
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bf51ae001993565fd43443d053ea83e209b67c6f]] a keyboard shortcut (default <kbd>ctrl</kbd>-<kbd>shift</kbd>-<kbd>F</kbd>) for focussing the sidebar search field 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ef7210adf4ecbec9838dcf898a5841f3ffa31567]] a keyboard shortcut (default <kbd>alt</kbd>-<kbd>shift</kbd>-<kbd>S</kbd>) for toggling the visibility of the sidebar
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/2bcb36f15147e3470688bd90276fa038c2991976]] a keyboard shortcut (default <kbd>ctrl</kbd>-<kbd>shift</kbd>-<kbd>A</kbd>) for opening the advanced search tiddler
+
 
 !! Plugin Improvements
 
@@ -28,9 +31,11 @@ New and improved plugins:
 
 * New [[BrowserStorage Plugin]] for saving tiddlers in browser local storage
 * New [[Innerwiki Plugin]] for rendering TiddlyWiki screenshots
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/pull/4133]] [[KaTeX Plugin]] to ~KaTeX v0.10.2
 * Several improvements to the [[CodeMirror Plugin]], including [[adding|https://github.com/Jermolene/TiddlyWiki5/pull/3810]] support for smart indent
 * Several improvements to the [[Dynaview Plugin]], including [[adding|https://github.com/Jermolene/TiddlyWiki5/commit/a9e595c3f633391003224e499440cdeb8560c055]] support for restoring the scroll position at startup from local storage
 * Several improvements to the [[Amazon Web Services Plugin]], including [[adding|https://github.com/Jermolene/TiddlyWiki5/commit/fffd0ee9e17d6b6a561648a42f0f200d4bb04046]] support for specifying credentials
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3131]] an editor toolbar button for the [[KaTeX Plugin]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3898]] support for language aliases with the [[Highlight Plugin]]
 
 !! Translation Improvements
@@ -40,6 +45,7 @@ New and improved translations:
 * Catalan
 * Chinese Simplified and Chinese Traditional
 * French
+* German
 * US English
 
 !! Performance Improvements
@@ -48,6 +54,7 @@ New and improved translations:
 * [[Optimised|https://github.com/Jermolene/TiddlyWiki5/commit/fddc5d4ee627232441278284ed6bee2f50fe8b26]] the "Classic" storyview to perform much faster when the animation duration is set to zero (approximtely 50% speed improvement was observed in tests opening a storyview with 8,000 entries)
 * [[Optimised|https://github.com/Jermolene/TiddlyWiki5/commit/7869546fef7b2ea5fd6fd72feacd565a7f177fb6]] the RevealWidget to avoid using the relatively slow `localeCompare()` method to compare strings
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/e8d1fbba6c109ccbeaedc1b34e47677c0ada7529]] [[Performance Instrumentation]] to show the timings for individual filters
+* [[Optimised|https://github.com/Jermolene/TiddlyWiki5/pull/4102]] rendering and refreshing child widgets
 
 !! Usability Improvements
 
@@ -57,15 +64,23 @@ New and improved translations:
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3654]] prompt for references when renaming a tiddler
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0e6855eba8945e023cc5ef19809cfb6d6025627b]] a new filter preset for advanced search for "tiddlers modified this session"
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/3832]] the [[palette manager|$:/PaletteManager]] with the ability to delete entries, and directly edit indirect entries
+* Added a number of animations (some of were already present but had been broken over the years) for changes in:
+** [[Tags in the view template|https://github.com/Jermolene/TiddlyWiki5/pull/4142]]
+** [[Page controls|https://github.com/Jermolene/TiddlyWiki5/pull/4145]]
+** [[Top left and top right bar|https://github.com/Jermolene/TiddlyWiki5/pull/4146]]
+** [[Tabs|https://github.com/Jermolene/TiddlyWiki5/pull/4149]]
+** [[Fields in the edit template|https://github.com/Jermolene/TiddlyWiki5/pull/4148]]
 
 !! Hackability Improvements
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4051]] support for [[configurable view and edit templates|Hidden Setting: ViewTemplate and EditTemplate]]
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/aa5eaa98fcb8658dbc2b93476c2e09c9207439d8]] a saver for [[Saving to GitHub]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/aa5eaa98fcb8658dbc2b93476c2e09c9207439d8]] a saver for [[Saving to GitHub]] and [[Saving to GitLab]]
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/37ea659bf011b1d4a152f54171399d94f5bba3ef]] the [[dumpvariables Macro]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/754c1251a9bdf45e8f64079a4bbdaed2d05be2b7]] new [[variables Operator]] and [[getvariable Operator]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ed67f4a88b29c5c81d4de31203dbf23d66955fb7]] new [[WidgetMessage: tm-focus-selector]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3546]] new [[escapecss Operator]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/5faae2547d68d386b2aa33255dcceed3539aa57e]] new [[match Operator]] for text comparison
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/17711657b6028a177c8aef97f7a0a1c084d65436]] new [[Conditional Operators]] [[then Operator]] and [[else Operator]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/3880]] new [[unusedtitle Macro]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/36e76429b1a1d4638374d513430393db5693b932]] new `[is[variable]]` option to the [[is Operator]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/90684f9f52809ff5df39629d3b161d7ff23002f4]] new `[is[blank]]` option to the [[is Operator]]
@@ -78,7 +93,10 @@ New and improved translations:
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c036c228269fc30d0df770a7c7713fd9af829df7]] $:/info/browser/language to the InfoMechanism
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f047e7cbf50edcf4775b50bdebc3f704970b8cde]] an example of using StartupActions to set the default language
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/edd3156430dd94b0ced630a1b70f2e2ef0ff6c36]] importing of JSON files to verify whether they are valid tiddler files, and import them as plain JSON if not
-* [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/issues/3974]] the LinkWidget to use the title of the target tiddler as a default if it has no content
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/issues/3974]] the LinkWidget to use the title of the target tiddler as a default if it has no content
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/2a4c60b23dc1436af6206fad5a56742550eac1a3]] [[WidgetMessage: tm-open-window]] to allow a window title to be specified
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8e7c0907f8cce4708a02486fc93dcea1ab115196]] ''checkActions'' attribute to the CheckboxWidget
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3afaa9de9aaae7654c1d03ddc22ee97724cbb159]] support for searches anchored to the start of a field
 
 !! Bug Fixes
 
@@ -92,6 +110,9 @@ New and improved translations:
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3819]] [[CodeMirror Plugin]] to use ''tiddler-editor-border'' colour
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/8012a3508f209fbbe68484e30ed65832cf5146b9]] problem using the TiddlySpot saver with cookies disabled
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3611]] framed text editor to use correct background colour
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/f5b25994322e58de84cae70ab67a68b1413db27f]] problem with the class `tc-sidebar-lists` being used on two different areas of the sidebar, making it impossible to distinguish them in CSS selectors
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/7f78065992baf290ae221fb12c63e52e0f8da403]] problem with unnecessary "list" field created when renaming tiddlers
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/394725f00cd8f38089d2840aa026d72c88627bff]] crash with EditBitmapWidget and missing tiddlers
 
 !! Node.js Bug Fixes and Improvements
 
