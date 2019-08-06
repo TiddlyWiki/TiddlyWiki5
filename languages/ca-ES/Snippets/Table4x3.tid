@@ -1,0 +1,8 @@
+title: $:/language/Snippets/Table4x3
+tags: $:/tags/TextEditor/Snippet
+caption: Taula amb 4 columnes i 3 files
+
+|! |!Alpha |!Beta |!Gamma |!Delta |
+|!Un | | | | |
+|!Dos | | | | |
+|!Tres | | | | |
