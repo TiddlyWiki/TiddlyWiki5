@@ -126,9 +126,13 @@ fromPageRect: page coordinates of the origin of the navigation
 */
 NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
 	this.wiki.addToHistory(title,fromPageRect,this.historyTitle);
+	this.setFocusTiddler(title);
+};
+
+NavigatorWidget.prototype.setFocusTiddler = function(title) {
 	this.wiki.setText(this.historyTitle,"previous-focus-tiddler",undefined,this.wiki.getTiddler(this.historyTitle).getFieldString("focus-tiddler"));
 	this.wiki.setText(this.historyTitle,"focus-tiddler",undefined,title);
-};
+}
 
 NavigatorWidget.prototype.findAdjacentStoryTiddler = function(title,storyList) {
 	var historyTiddler = this.wiki.getTiddler(this.historyTitle);
@@ -163,8 +167,7 @@ NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
 	this.removeTitleFromStory(storyList,title);
 	this.saveStoryList(storyList);
 	if(adjacentTiddler) {
-		this.wiki.setText(this.historyTitle,"previous-focus-tiddler",undefined,this.wiki.getTiddler(this.historyTitle).getFieldString("focus-tiddler"));
-		this.wiki.setText(this.historyTitle,"focus-tiddler",undefined,adjacentTiddler);
+		this.setFocusTiddler(adjacentTiddler);
 	}
 	return false;
 };
@@ -173,8 +176,7 @@ NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
 NavigatorWidget.prototype.handleCloseAllTiddlersEvent = function(event) {
 	this.saveStoryList([]);
 	if(this.historyTitle) {
-		this.wiki.setText(this.historyTitle,"previous-focus-tiddler",undefined,this.wiki.getTiddler(this.historyTitle).getFieldString("focus-tiddler"));
-		this.wiki.setText(this.historyTitle,"focus-tiddler",undefined,"");
+		this.setFocusTiddler("");
 	}
 	return false;
 };
@@ -184,8 +186,7 @@ NavigatorWidget.prototype.handleCloseOtherTiddlersEvent = function(event) {
 	var title = event.param || event.tiddlerTitle;
 	this.saveStoryList([title]);
 	if(this.historyTitle) {
-		this.wiki.setText(this.historyTitle,"previous-focus-tiddler",undefined,this.wiki.getTiddler(this.historyTitle).getFieldString("focus-tiddler"));
-		this.wiki.setText(this.historyTitle,"focus-tiddler",undefined,title);
+		this.setFocusTiddler(title);
 	}
 	return false;
 };
@@ -274,8 +275,7 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	this.removeTitleFromStory(storyList,title);
 	this.saveStoryList(storyList);
 	if(adjacentTiddler) {
-		this.wiki.setText(this.historyTitle,"previous-focus-tiddler",undefined,this.wiki.getTiddler(this.historyTitle).getFieldString("focus-tiddler"));
-		this.wiki.setText(this.historyTitle,"focus-tiddler",undefined,adjacentTiddler);
+		this.setFocusTiddler(adjacentTiddler);
 	}
 	// Trigger an autosave
 	$tw.rootWidget.dispatchEvent({type: "tm-auto-save-wiki"});
@@ -411,8 +411,7 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 				}
 				this.saveStoryList(storyList);
 				if(adjacentTiddler) {
-					this.wiki.setText(this.historyTitle,"previous-focus-tiddler",undefined,this.wiki.getTiddler(this.historyTitle).getFieldString("focus-tiddler"));
-					this.wiki.setText(this.historyTitle,"focus-tiddler",undefined,adjacentTiddler);
+					this.setFocusTiddler(adjacentTiddler);
 				}
 			}
 		}
