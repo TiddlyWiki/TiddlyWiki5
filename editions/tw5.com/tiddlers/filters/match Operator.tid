@@ -25,6 +25,6 @@ The <<.op match>> operator uses an extended syntax that permits multiple flags t
 The available flags are:
 
 * ''casesensitive'': (default), this flag forces a case-sensitive match, where upper and lower case letters are considered different
-* "caseinsensitive". overrides the default so that upper and lower case letters are considered identical for matching purposes
+* ''caseinsensitive'': overrides the default so that upper and lower case letters are considered identical for matching purposes
 
 <<.operator-examples "match">>
