@@ -1,0 +1,40 @@
+title: $:/core/macros/replace-text
+tags: $:/tags/Macro
+
+\define search_replace_run(source:"",replace:"",replaceWith:"")
+\whitespace trim
+<$list filter="[<__source__>search<__replace__>]" emptyMessage="""<$text text=<<__source__>> />""" >
+<$list variable="p1" filter="[<__source__>splitbefore<__replace__>]">
+<$list variable="p2" filter="[<__source__>removeprefix<p1>]" emptyMessage="""<$text text=<<__source__>>/>""">
+<$list variable="p3" filter="[<p1>removesuffix<__replace__>addsuffix<__replaceWith__>]" emptyMessage="""<$text text=<<__source__>>/>""">
+<$text text=<<p3>>/>
+<$macrocall $name="search_replace_run" source=<<p2>> replace=<<__replace__>> replaceWith=<<__replaceWith__>> />
+</$list>
+</$list>
+</$list>
+</$list>
+\end
+
+\define replace-text(tiddler:"",field:"text",replace:"",replaceWith:"")
+\whitespace trim
+<$wikify name="source" text="""<$view tiddler=<<__tiddler__>> field=<<__field__>> mode="block" format="text"/>""">
+<$wikify name="result" text="""<$macrocall $name="search_replace_run" source=<<source>> replace=<<__replace__>> replaceWith=<<__replaceWith__>>/>""">
+<$text text=<<result>>/>
+</$wikify>
+</$wikify>
+\end
+
+\define replace-text-diff(tiddler:"",field:"text",replace:"",replaceWith:"")
+<$wikify name="result" text="""<$macrocall $name="replace-text" tiddler=<<__tiddler__>> field=<<__field__>> replace=<<__replace__>> replaceWith=<<__replaceWith__>>/>""">
+<$diff-text source={{{ [<__tiddler__>get<__field__>] }}} dest=<<result>>/>
+</$wikify>
+\end
+
+\define replace-text-button(tiddler:"",field:"text",replace:"",replaceWith:"")
+\whitespace trim
+<$wikify name="result" text="""<$macrocall $name="replace-text" tiddler=<<__tiddler__>> field=<<__field__>> replace=<<__replace__>> replaceWith=<<__replaceWith__>>/>""">
+
+<$button><$action-setfield $tiddler=<<__tiddler__>> $field=<<__field__>> $value=<<result>>/>Replace?</$button>
+
+</$wikify>
+\end
