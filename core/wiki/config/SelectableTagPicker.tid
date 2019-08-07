@@ -1,0 +1,6 @@
+title: $:/config/selectable/tag-picker
+accept-actions: <$list filter="[[$(currentTiddler)$]!contains:tags<selectedItem>]" variable="ignore"><$action-sendmessage $message="tm-add-tag" $param=<<selectedItem>>/></$list><$list filter="[[$(currentTiddler)$]contains:tags<selectedItem>]" variable="ignore"><$action-sendmessage $message="tm-remove-tag" $param=<<selectedItem>>/></$list><$action-deletetiddler $tiddler=<<__tiddler__>>/><$action-deletetiddler $tiddler=<<__saveTiddler__>>/>
+clear-actions: <$action-deletetiddler $tiddler=<<__tiddler__>>/><$action-deletetiddler $tiddler=<<__saveTiddler__>>/>
+clear-empty-actions: <$action-deletetiddler $tiddler=<<__tiddler__>>/><$action-deletetiddler $tiddler=<<__saveTiddler__>>/><$action-deletetiddler $tiddler=<<__refreshTiddler__>>/><$action-sendmessage $message="tm-cancel-tiddler"/>
+input-filter-1: [tags[]!is[system]search:title<userInput>sort[]]
+input-filter-2: [tags[]is[system]search:title<userInput>sort[]]
