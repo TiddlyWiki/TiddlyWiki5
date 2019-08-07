@@ -187,6 +187,7 @@ Subscript/Caption: subscript
 Subscript/Hint: Apply subscript formatting to selection
 Superscript/Caption: superscript
 Superscript/Hint: Apply superscript formatting to selection
+ToggleSidebar/Hint: Toggle the sidebar visibility
 Transcludify/Caption: transclusion
 Transcludify/Hint: Wrap selection in curly brackets
 Underline/Caption: underline

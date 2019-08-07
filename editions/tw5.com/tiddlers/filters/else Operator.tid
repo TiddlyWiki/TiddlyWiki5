@@ -1,0 +1,15 @@
+caption: else
+created: 20190802113024942
+modified: 20190802113919945
+op-input: a [[selection of titles|Title Selection]]
+op-output: the original input titles unless empty, in which case return a list with the single entry  <<.place E>>
+op-parameter: a string
+op-parameter-name: E
+op-purpose: if the list of input titles is empty then return a list consisting of a single constant string, otherwise return the original titles
+tags: [[Conditional Operators]] [[Filter Operators]]
+title: else Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">> See [[Conditional Operators]] for an overview.
+
+<<.operator-examples "else">>

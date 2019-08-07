@@ -92,15 +92,18 @@ Saving/DownloadSaver/Hint: 這些設定適用於相容 HTML5 的下載儲存模�
 Saving/General/Caption: 通用
 Saving/General/Hint: 這些設定適用於所有已載入的儲存模組
 Saving/Hint: 用於通過儲存模組將整個 TiddlyWiki 儲存為單個檔案的設定
-Saving/GitHub/Branch: 用於儲存的目標分支 (預設值為 `master`)
-Saving/GitHub/Caption: ~GitHub 儲存模組
-Saving/GitHub/Description: 這些設定僅用於儲存到 ~GitHub
-Saving/GitHub/ServerURL: 伺服器網址 (預設值為 `https://api.github.com`)
-Saving/GitHub/Filename: 目標檔案的檔案名稱 (例如，`index.html`)
-Saving/GitHub/Password: 密碼、OAUTH 令牌，或個人存取的令牌
-Saving/GitHub/Path: 目標檔案的路徑 (例如，`/wiki/`)
-Saving/GitHub/Repo: 目標存儲庫 (例如，`Jermolene/TiddlyWiki5`)
-Saving/GitHub/UserName: 使用者名稱
+Saving/GitService/Branch: 用於儲存的目標分支
+Saving/GitService/CommitMessage: 由 TiddlyWiki 儲存
+Saving/GitService/Description: 這些設定僅用於儲存至 <<service-name>>
+Saving/GitService/Filename: 目標檔案的檔案名稱 (例如，`index.html`)
+Saving/GitService/Path: 目標檔案的路徑 (例如，`/wiki/`)
+Saving/GitService/Repo: 目標存儲庫 (例如，`Jermolene/TiddlyWiki5`)
+Saving/GitService/ServerURL: 伺服器 API 網址
+Saving/GitService/UserName: 使用者名稱
+Saving/GitService/GitHub/Caption: ~GitHub 儲存模組
+Saving/GitService/GitHub/Password: 密碼、OAUTH 令牌，或個人存取令牌 (詳見 [[GitHub 說明頁面|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]])
+Saving/GitService/GitLab/Caption: ~GitLab 儲存模組
+Saving/GitService/GitLab/Password: 個人存取令牌的 API (詳見 [[GitLab 說明頁面|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html for details]])
 Saving/TiddlySpot/Advanced/Heading: 進階設定
 Saving/TiddlySpot/BackupDir: 備份資料夾
 Saving/TiddlySpot/Backups: 備份

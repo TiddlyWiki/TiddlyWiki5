@@ -10,10 +10,10 @@ description: {{$:/language/Buttons/Save/Hint}}
 <$action-deletetiddler $tiddler="$:/temp/newfieldname"/>
 <$action-deletetiddler $tiddler="$:/temp/newfieldvalue"/>
 <$action-sendmessage $message="tm-save-tiddler"/>
-<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/done-button}}
 </$list>
-<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
 <span class="tc-btn-text"><$text text={{$:/language/Buttons/Save/Caption}}/></span>
 </$list>
 </$button></$fieldmangler>

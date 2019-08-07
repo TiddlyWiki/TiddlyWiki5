@@ -266,6 +266,8 @@ exports.generateTiddlerFilepath = function(title,options) {
 		// Remove any forward or backward slashes so we don't create directories
 		filepath = filepath.replace(/\/|\\/g,"_");
 	}
+	// Don't let the filename start with a dot because such files are invisible on *nix
+	filepath = filepath.replace(/^\./g,"_");
 	// Remove any characters that can't be used in cross-platform filenames
 	filepath = $tw.utils.transliterate(filepath.replace(/<|>|\:|\"|\||\?|\*|\^/g,"_"));
 	// Truncate the filename if it is too long

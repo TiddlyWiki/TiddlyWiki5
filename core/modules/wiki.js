@@ -491,7 +491,7 @@ exports.getTiddlersWithTag = function(tag) {
 	// Try to use the indexer
 	var self = this,
 		tagIndexer = this.getIndexer("TagIndexer"),
-		results = tagIndexer && tagIndexer.lookup(tag);
+		results = tagIndexer && tagIndexer.subIndexers[3].lookup(tag);
 	if(!results) {
 		// If not available, perform a manual scan
 		results = this.getGlobalCache("taglist-" + tag,function() {
@@ -1065,6 +1065,7 @@ Options available:
 	invert: If true returns tiddlers that do not contain the specified string
 	caseSensitive: If true forces a case sensitive search
 	field: If specified, restricts the search to the specified field, or an array of field names
+	anchored: If true, forces all but regexp searches to be anchored to the start of text
 	excludeField: If true, the field options are inverted to specify the fields that are not to be searched
 	The search mode is determined by the first of these boolean flags to be true
 		literal: searches for literal string
@@ -1079,12 +1080,13 @@ exports.search = function(text,options) {
 		invert = !!options.invert;
 	// Convert the search string into a regexp for each term
 	var terms, searchTermsRegExps,
-		flags = options.caseSensitive ? "" : "i";
+		flags = options.caseSensitive ? "" : "i",
+		anchor = options.anchored ? "^" : "";
 	if(options.literal) {
 		if(text.length === 0) {
 			searchTermsRegExps = null;
 		} else {
-			searchTermsRegExps = [new RegExp("(" + $tw.utils.escapeRegExp(text) + ")",flags)];
+			searchTermsRegExps = [new RegExp("(" + anchor + $tw.utils.escapeRegExp(text) + ")",flags)];
 		}
 	} else if(options.whitespace) {
 		terms = [];
@@ -1093,7 +1095,7 @@ exports.search = function(text,options) {
 				terms.push($tw.utils.escapeRegExp(term));
 			}
 		});
-		searchTermsRegExps = [new RegExp("(" + terms.join("\\s+") + ")",flags)];
+		searchTermsRegExps = [new RegExp("(" + anchor + terms.join("\\s+") + ")",flags)];
 	} else if(options.regexp) {
 		try {
 			searchTermsRegExps = [new RegExp("(" + text + ")",flags)];			
@@ -1108,7 +1110,7 @@ exports.search = function(text,options) {
 		} else {
 			searchTermsRegExps = [];
 			for(t=0; t<terms.length; t++) {
-				searchTermsRegExps.push(new RegExp("(" + $tw.utils.escapeRegExp(terms[t]) + ")",flags));
+				searchTermsRegExps.push(new RegExp("(" + anchor + $tw.utils.escapeRegExp(terms[t]) + ")",flags));
 			}
 		}
 	}
@@ -1386,8 +1388,10 @@ fromPageRect: page coordinates of the origin of the navigation
 historyTitle: title of history tiddler (defaults to $:/HistoryList)
 */
 exports.addToHistory = function(title,fromPageRect,historyTitle) {
-	var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
-	story.addToHistory(title,fromPageRect);
+	if(historyTitle) {
+		var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
+		story.addToHistory(title,fromPageRect);		
+	}
 };
 
 /*
@@ -1398,8 +1402,10 @@ storyTitle: title of story tiddler (defaults to $:/StoryList)
 options: see story.js
 */
 exports.addToStory = function(title,fromTitle,storyTitle,options) {
-	var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
-	story.addToStory(title,fromTitle,options);
+	if(storyTitle) {
+		var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
+		story.addToStory(title,fromTitle,options);		
+	}
 };
 
 /*

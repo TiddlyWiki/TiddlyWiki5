@@ -6,6 +6,11 @@ clear-empty-actions: <$action-deletetiddler $tiddler=<<__tiddler__>>/><$action-d
 input-filter-1: [tags[]!is[system]search:title<userInput>sort[]]
 input-filter-2: [tags[]is[system]search:title<userInput>sort[]]
 
+\define add-tag-actions()
+<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/NewTagName}}/>
+<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
+\end
+
 \define tag-button(selectedClass)
 <$button class="tc-btn-invisible $selectedClass$" tag="a">
 $(actions)$

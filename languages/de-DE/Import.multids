@@ -18,4 +18,6 @@ Upgrader/Plugins/Suppressed/Version: Einige "plugins" weden unterdrückt! Import
 Upgrader/Plugins/Upgraded:  Aktualisieren der plugins von: <<incoming>> nach: <<upgraded>>
 Upgrader/State/Suppressed: Unterdrückte temporäre Status Tiddler
 Upgrader/System/Suppressed: Unterdrückte "System Tiddler"
+Upgrader/System/Warning: "Core Modul Tiddler"
+Upgrader/System/Alert: Sie sind dabei einen Tiddler zu importieren, der einen "Core Tiddler" überschreibt. Diese Aktion wird nicht empfohlen! Das System kann instabil werden
 Upgrader/ThemeTweaks/Created: Migrieren der "theme tweaks" von: <$text text=<<from>>/>

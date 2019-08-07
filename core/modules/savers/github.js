@@ -12,8 +12,6 @@ Saves wiki by pushing a commit to the GitHub v3 REST API
 /*global $tw: false */
 "use strict";
 
-var base64utf8 = require("$:/core/modules/utils/base64-utf8/base64-utf8.module.js");
-
 /*
 Select the appropriate saver module and set it up
 */
@@ -59,7 +57,7 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 		callback: function(err,getResponseDataJson,xhr) {
 			var getResponseData,sha = "";
 			if(err && xhr.status !== 404) {
-				return callback(err);					
+				return callback(err);
 			}
 			if(xhr.status !== 404) {
 				getResponseData = JSON.parse(getResponseDataJson);
@@ -67,14 +65,14 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 					if(details.name === filename) {
 						sha = details.sha;
 					}
-				});				
+				});
 			}
 			var data = {
-					message: "Saved by TiddlyWiki",
-					content: base64utf8.base64.encode.call(base64utf8,text),
-					branch: branch,
-					sha: sha
-				};
+				message: $tw.language.getRawString("ControlPanel/Saving/GitService/CommitMessage"),
+				content: $tw.utils.base64Encode(text),
+				branch: branch,
+				sha: sha
+			};
 			// Perform a PUT request to save the file
 			$tw.utils.httpRequest({
 				url: uri + filename,

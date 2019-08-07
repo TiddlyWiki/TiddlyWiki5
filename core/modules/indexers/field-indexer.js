@@ -16,6 +16,9 @@ var DEFAULT_MAXIMUM_INDEXED_VALUE_LENGTH = 128;
 
 function FieldIndexer(wiki) {
 	this.wiki = wiki;
+}
+
+FieldIndexer.prototype.init = function() {
 	this.index = null;
 	this.maxIndexedValueLength = DEFAULT_MAXIMUM_INDEXED_VALUE_LENGTH;
 	this.addIndexMethods();
@@ -85,23 +88,22 @@ FieldIndexer.prototype.buildIndexForField = function(name) {
 
 /*
 Update the index in the light of a tiddler value changing; note that the title must be identical. (Renames are handled as a separate delete and create)
-oldTiddler: old tiddler value, or null for creation
-newTiddler: new tiddler value, or null for deletion
+updateDescriptor: {old: {tiddler: <tiddler>, shadow: <boolean>, exists: <boolean>},new: {tiddler: <tiddler>, shadow: <boolean>, exists: <boolean>}}
 */
-FieldIndexer.prototype.update = function(oldTiddler,newTiddler) {
+FieldIndexer.prototype.update = function(updateDescriptor) {
 	var self = this;
 	// Don't do anything if the index hasn't been built yet
 	if(this.index === null) {
 		return;
 	}
 	// Remove the old tiddler from the index
-	if(oldTiddler) {
+	if(updateDescriptor.old.tiddler) {
 		$tw.utils.each(this.index,function(indexEntry,name) {
-			if(name in oldTiddler.fields) {
-				var value = oldTiddler.getFieldString(name),
+			if(name in updateDescriptor.old.tiddler.fields) {
+				var value = updateDescriptor.old.tiddler.getFieldString(name),
 					tiddlerList = indexEntry[value];
 				if(tiddlerList) {
-					var index = tiddlerList.indexOf(oldTiddler.fields.title);
+					var index = tiddlerList.indexOf(updateDescriptor.old.tiddler.fields.title);
 					if(index !== -1) {
 						tiddlerList.splice(index,1);
 					}
@@ -110,13 +112,13 @@ FieldIndexer.prototype.update = function(oldTiddler,newTiddler) {
 		});
 	}
 	// Add the new tiddler to the index
-	if(newTiddler) {
+	if(updateDescriptor["new"].tiddler) {
 		$tw.utils.each(this.index,function(indexEntry,name) {
-			if(name in newTiddler.fields) {
-				var value = newTiddler.getFieldString(name);
+			if(name in updateDescriptor["new"].tiddler.fields) {
+				var value = updateDescriptor["new"].tiddler.getFieldString(name);
 				if(value.length < self.maxIndexedValueLength) {
 					indexEntry[value] = indexEntry[value] || [];
-					indexEntry[value].push(newTiddler.fields.title);
+					indexEntry[value].push(updateDescriptor["new"].tiddler.fields.title);
 				}
 			}
 		});		
