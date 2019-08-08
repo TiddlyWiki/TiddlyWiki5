@@ -85,19 +85,31 @@ Plugins/Themes/Caption: Temes
 Plugins/Themes/Hint: Connectors del tema
 Saving/Caption: Desa
 Saving/DownloadSaver/AutoSave/Description: Permet que el gestor de baixades desi automàticament
-Saving/DownloadSaver/AutoSave/Hint: Habiliteu el desat automàtic pel gestor de baixades
+Saving/DownloadSaver/AutoSave/Hint: Activa el desat automàtic pel gestor de baixades
 Saving/DownloadSaver/Caption: Gestor de baixades
 Saving/DownloadSaver/Hint: Aquesta configuració s’aplica al gestor de baixades compatible amb HTML5
 Saving/General/Hint: Aquests valors s'apliquen a tots els gestors de baixades carregats
-Saving/GitHub/Branch: Branca destí a on desar (per omissió és `master`)
+Saving/GitHub/Branch: Branca destinació a on desar (per omissió és `master`)
 Saving/GitHub/Caption: Gestor de baixades de ~GitHub
 Saving/GitHub/Description: Aquests valors només s’utilitzen quan es desa a ~ GitHub
 Saving/GitHub/Filename: Nom del fitxer destinació (per exemple, `index.html`)
 Saving/GitHub/Password: Contrasenya, clau OAUTH o clau d'accés personal
 Saving/GitHub/Path: Ruta al fitxer destinació (per exemple, `/wiki/`)
-Saving/GitHub/Repo: Repositori destí (per exemple, `Jermolene/TiddlyWiki5`)
-Saving/GitHub/ServerURL: URL del servidor (per omissió és  `https://api.github.com`)
+Saving/GitHub/Repo: Repositori destinació (per exemple, `Jermolene/TiddlyWiki5`)
+Saving/GitHub/ServerURL: URL del servidor (per omissió és `https://api.github.com`)
 Saving/GitHub/UserName: Nom d'usuari
+Saving/GitService/Branch: Branca destinació a on desar
+Saving/GitService/CommitMessage: Desat per TiddlyWiki
+Saving/GitService/Description: Aquests paràmetres només s'utilitzen quan es desa a <<service-name>>
+Saving/GitService/Filename: Nom del fitxer destinació (per exemple `index.html`)
+Saving/GitService/GitHub/Caption: Gestor de baixades de ~GitHub
+Saving/GitService/GitHub/Password: Contrasenya, clau OAUTH o clau d'accés personal (veieu els detalls a la [[pàgina d'ajuda del GitHub|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] )
+Saving/GitService/GitLab/Caption: Gestor de baixades de ~GitLab
+Saving/GitService/GitLab/Password: Clau d'accés personal de l'API (veieu els detalls a la [[pàgina d'ajuda del GitLab|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] )
+Saving/GitService/Path: Ruta del fitxer destinació (e.g. `/wiki/`)
+Saving/GitService/Repo: Repositori destinació (e.g. `Jermolene/TiddlyWiki5`)
+Saving/GitService/ServerURL: URL de l'API del servidor
+Saving/GitService/UserName: NomDUsuari
 Saving/Heading: S'està desant
 Saving/Hint: Configuració que s’utilitza per desar tot el TiddlyWiki com a un únic fitxer amb un mòdul de desar
 Saving/TiddlySpot/Advanced/Heading: Paràmetres avançats
@@ -116,7 +128,7 @@ Settings/AutoSave/Disabled/Description: No desis els canvis de forma automàtica
 Settings/AutoSave/Enabled/Description: Desa els canvis de forma automàtica
 Settings/AutoSave/Hint: Desa els canvis de forma automàtica mentre s'està editant
 Settings/CamelCase/Caption: Enllaços wiki tipus CamelCase
-Settings/CamelCase/Description: Habilita l'enllaç automàtic de ~CamelCase
+Settings/CamelCase/Description: Activa l'enllaç automàtic de ~CamelCase
 Settings/CamelCase/Hint: Podeu desactivar l’enllaç automàtic de les frases ~CamelCase globalment. Cal que es torni a carregar per tenir efecte
 Settings/Caption: Paràmetres
 Settings/DefaultMoreSidebarTab/Caption: Pestanya Més de la barra lateral per omissió
@@ -134,8 +146,8 @@ Settings/InfoPanelMode/Sticky/Description: El tauler d’informació del Tiddler
 Settings/LinkToBehaviour/Caption: Comportament d'obertura del tiddler
 Settings/LinkToBehaviour/InsideRiver/Hint: Navegació des de //dins de// la cronologia
 Settings/LinkToBehaviour/OpenAbove: Obre per sobre del tiddler actual
-Settings/LinkToBehaviour/OpenAtBottom: Obriu a la part inferior de la cronologia
-Settings/LinkToBehaviour/OpenAtTop: Obriu a la part superior de la cronologia
+Settings/LinkToBehaviour/OpenAtBottom: Obre a la part inferior de la cronologia
+Settings/LinkToBehaviour/OpenAtTop: Obre a la part superior de la cronologia
 Settings/LinkToBehaviour/OpenBelow: Obre per sota del tiddler actual
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navegació des de //fora de//la cronologia
 Settings/MissingLinks/Caption: Enllaços Wiki
@@ -144,19 +156,19 @@ Settings/MissingLinks/Hint: Escolliu si voleu enllaçar els tiddlers que encara 
 Settings/NavigationAddressBar/Caption: Barra d'adreces de navegació
 Settings/NavigationAddressBar/Hint: Comportament de la barra d'adreces en navegar cap a un tiddler:
 Settings/NavigationAddressBar/No/Description: No actualitzis la barra d'adreces
-Settings/NavigationAddressBar/Permalink/Description: Inclou el tiddler destí
-Settings/NavigationAddressBar/Permaview/Description: Inclou el tiddler destí i la seqùència actual
+Settings/NavigationAddressBar/Permalink/Description: Inclou el tiddler destinació
+Settings/NavigationAddressBar/Permaview/Description: Inclou el tiddler destinació i la seqùència actual
 Settings/NavigationHistory/Caption: Històrial de navegació
 Settings/NavigationHistory/Hint: Actualitza l'històrial del navegador en navegar cap a un tiddler:
 Settings/NavigationHistory/No/Description: No actualitzis la cronologia
 Settings/NavigationHistory/Yes/Description: Actualitza la cronologia
 Settings/NavigationPermalinkviewMode/Caption: Mode enllaç permanent/vista permanent
-Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: Copieu l’URL de l'enllaç permanent/vista permanent al portapapers
+Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: Copia l’URL de l'enllaç permanent/vista permanent al portapapers
 Settings/NavigationPermalinkviewMode/Hint: Trieu com es gestiona l'enllaç permanent/vista permanent
 Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Actualitzeu la barra d’adreça amb l’URL de l'enllaç permanent/vista permanent
-Settings/PerformanceInstrumentation/Caption: Instrumentació del rendiment
-Settings/PerformanceInstrumentation/Description: Habilita la instrumentació del rendiment
-Settings/PerformanceInstrumentation/Hint: Mostra estadístiques de rendiment a la consola del desenvolupador del navegador. Cal tornar-ho a carregar per que tingui efecte
+Settings/PerformanceInstrumentation/Caption: Instruments del rendiment
+Settings/PerformanceInstrumentation/Description: Activa els instruments del rendiment
+Settings/PerformanceInstrumentation/Hint: Mostra les estadístiques de rendiment a la consola del desenvolupador del navegador. Cal tornar-ho a carregar per que tingui efecte
 Settings/TitleLinks/Caption: Títols dels Tiddlers
 Settings/TitleLinks/Hint: Mostra opcionalment els títols de tiddler com a enllaços
 Settings/TitleLinks/No/Description: No mostris els títols dels tiddlers com a enllaços
