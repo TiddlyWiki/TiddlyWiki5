@@ -103,7 +103,7 @@ Saving/GitService/UserName: 用户名称
 Saving/GitService/GitHub/Caption: ~GitHub 保存模块
 Saving/GitService/GitHub/Password: 密码、OAUTH 令牌，或个人存取令牌 (详见 [[GitHub 帮助页面|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]])
 Saving/GitService/GitLab/Caption: ~GitLab 保存模块
-Saving/GitService/GitLab/Password: 个人存取令牌的 API (详见 [[GitLab 帮助页面|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html for details]])
+Saving/GitService/GitLab/Password: 个人存取令牌的 API (详见 [[GitLab 帮助页面|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]])
 Saving/TiddlySpot/Advanced/Heading: 高级设置
 Saving/TiddlySpot/BackupDir: 备份文件夹
 Saving/TiddlySpot/Backups: 备份
