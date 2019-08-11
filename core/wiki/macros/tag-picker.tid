@@ -23,7 +23,7 @@ $(actions)$
 <div class="tc-edit-add-tag">
 <span class="tc-add-tag-name">
 <$set name="currentCSSSelector" value=<<get-css-input-selector>>>
-<$macrocall $name="selectable-input" tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" saveTiddler=<<saveInputTiddler>> refreshTiddler=<<qualify "$:/temp/SelectedTag">> filterTiddler="$:/config/selectable/tag-picker" refreshQualifier=<<qualify "$:/qualifier/refresh-input">> tabindex={{$:/config/EditTabIndex}}/>
+<$macrocall $name="selectable-input" tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" saveTiddler=<<saveInputTiddler>> refreshTiddler=<<qualify "$:/temp/SelectedTag">> filterTiddler="$:/config/ui/tag-picker" refreshQualifier=<<qualify "$:/qualifier/refresh-input">> tabindex={{$:/config/EditTabIndex}}/>
 </$set>
 </span> <$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button> <span class="tc-add-tag-button">
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
