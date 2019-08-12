@@ -1,0 +1,21 @@
+tags: [[Data Persistence]]
+title: Savers and Deserializers
+toc-order: 2
+
+Savers and Deserializers are responsible for saving (or reading) the whole ~TiddlyWiki application to (or from) a HTML file.
+
+~TiddlyWiki structures the HTML file into two `<div>` blocks depending on whether the encryption of the ~TiddlyWiki is activated or not. If the ~TiddlyWiki is not encrypted the data is stored in the `<div>` block called "~StoreArea". Every created Tiddler is stored in its own `<div>` with a few custom values. An example of a saved Tiddler is shown below (\prettyref{lst:data-div}). 
+
+```html
+<div created="20140611153703343" modified="20140611153734589" tags="testTag" testfield="testvalue" title="TestTiddler" type="text/plain">
+	<pre>testText</pre>
+</div>
+```
+The `<div>` has the same attributes as the standard tiddler fields, listed in [[TiddlerFields|https://tiddlywiki.com/#TiddlerFields]]. All attributes which are not in this list are parsed as a custom field. The only required attribute is the name attribute, all other attributes are optional.
+
+When encryption is activated, the data is stored in a special `<div>` called "encryptedStoreArea". ~TiddlyWiki uses the Standford [[JavaScript Crypto Libary|http://bitwiseshiftleft.github.io/sjcl/]]. The encrypted Tiddlers are saved in a JSON string within this `<div>` block.
+
+
+The default saver is the HTML5 fallback saver. This saver works on almost every browser: a copy of the entire wiki will be downloaded by the browser. Meaning you get a new file each time you hit the save button.  To avoid this and because every Browser has a different API to allow direct writing to the file system, there a some plugins for the different browsers. These plugins allow the user to save directly to the current open ~TiddlyWiki File. 
+
+Savers and Deserializers (other than the ones in the [[Microkernel]]) are implemented, respectively, in [[Saver Modules]] and [[Deserializer Modules]].

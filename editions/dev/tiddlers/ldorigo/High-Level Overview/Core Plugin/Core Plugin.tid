@@ -1,0 +1,21 @@
+created: 20140710183759647
+modified: 20180626203802364
+tags: [[High-Level Overview]]
+toc-order: 2
+title: Core Plugin
+
+The [[Microkernel]] builds up the base functionality to manage tiddlers by providing a basic wiki store and a barebone tiddler model.
+The microkernel can also load a set of (decrypted) tiddlers and provides a [[Module|Modules and Plugins]] system, enabling a developer to extend the kernel and add functionality with module tiddlers and [[Plugin|Modules and Plugins]]s.
+
+The ~TiddlyWiki Core Application is provided as a single plugin which is the focus of this section.
+
+
+<<<
+{{arch.svg}}
+<<< The ~TiddlyWiki Application consists of a microkernel and several modules building up the full application.
+
+<div class="tc-table-of-contents">
+
+<<toc-selective-expandable "Core Plugin" "nsort[toc-order]">>
+
+</div>

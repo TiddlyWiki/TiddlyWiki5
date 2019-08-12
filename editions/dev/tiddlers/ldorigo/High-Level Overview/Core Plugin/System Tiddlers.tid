@@ -1,0 +1,18 @@
+created: 20140710184959721
+modified: 20140715084818289
+toc-order: 2
+tags: [[Core Plugin]]
+title: System Tiddlers
+
+The core plug-in creates a distinction between //System Tiddlers// and normal (user-generated) ones.
+
+This is necessary because tiddlers are used both by the users (as the building blocks for their wiki) and the developers (as ways to extend/modify ~TiddlyWiki's working).
+
+The core plug-in introduces the concept of system tiddlers. It builds on the convention that internal tiddler names start with ``$:/``.
+
+Then the core plug-in introduces a set of new functions to the wiki store which are used to retrieve tiddlers like ``getTiddlers(options)`` and ``forEachTiddler(callback, options)``.
+These functions work with all tiddlers in the store but the options parameter provides the ability to sort tiddlers by a field-name and exclude tiddlers with a specific tag.
+By default it doesn't return system tiddlers. To get a list of all tiddlers including system tiddlers, this must be requested explicitly via the options.
+If a function wants to present a list of tiddlers to the user it can use these new functions so that internal application tiddlers don't clutter the list of results.
+
+These functions are added via [Wikimethod Modules]].

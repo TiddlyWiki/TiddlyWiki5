@@ -1,0 +1,31 @@
+created: 20141016083308219
+modified: 20141107213203691
+title: Contributing to the Developer Documentation
+type: text/vnd.tiddlywiki
+toc-order: 4
+tags: [[Contributing]]
+
+This section presents a set of guidelines and rules for contributions to ~TiddlyWiki's developer documentation. Most rules are copied/adapted from [[the main documentation|https://tiddlywiki.com/#Documentation%20Style%20Guide]]. Make sure to read [[Github Branches]] as well.
+
+The main structure of the documentation is more or less fixed as follows:
+
+* ''Introduction'': Contains a broad description of TW's architecture, defines basic concepts. 
+* ''High-Level overview'': Contains detailed but high level descriptions of the different components of the app
+** ''Microkernel'': Description of the boot mechanisms and the microkernel
+** ''Core Plugin''
+** ''User Interface'': Description of the rendering process, both for tiddlers and for the general UI of the app
+** ''Data Persistence'': Description of the various mechanisms for saving data
+** ''Modules'': Description of the various modules. 
+** ''Hooks''
+* ''Detailed Documentation'': Will contain a code-level description/explanation of the various parts of the app. 
+* ''Contributing'': Contains all the information relevant to people who want to contribute to TW, including:
+** Setting up the development environment
+** Style guides
+** Documentation style guides
+** Tests
+** ...
+* ''Various How-To's'': General tutorials that don't fit elsewhere in the documentation.
+
+Feel free to add more sub-sections to the existing ones. 
+
+Each (sub-)section should contain a tiddler with the same name that briefly describes what the section is about and contains a table of contents for the section. TODO: Make a macro for this?

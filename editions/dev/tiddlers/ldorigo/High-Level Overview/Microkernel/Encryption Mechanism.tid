@@ -1,0 +1,19 @@
+created: 20130825154200000
+modified: 20131129163653069
+tags: Microkernel
+toc-order: 5
+title: Encryption Mechanism
+type: text/vnd.tiddlywiki
+
+~TiddlyWiki5 allows the entire content of a ~TiddlyWiki HTML file to be encrypted with the Stanford ~JavaScript Crypto Library. Opening an encrypted ~TiddlyWiki in the browser prompts for a password before decrypting and displaying the content.
+
+For instructions on how to use ~TiddlyWiki5's encryption features, see [[Encryption|https://tiddlywiki.com/#Encryption]].
+
+The Encryption Mechanism is implemented with the following elements:
+
+* A password vault within the [[Boot Mechanism]] which holds the current encryption password
+* The ability of the [[Boot Mechanism]] to read a block of encrypted tiddlers from the ~TiddlyWiki file, prompt the user for a password, and decrypt the tiddlers
+* Handlers for the messages [[WidgetMessage: tm-set-password|https://tiddlywiki.com/#WidgetMessage%3A%20tm-set-password]] and [[WidgetMessage: tm-clear-password|https://tiddlywiki.com/#WidgetMessage%3A%20tm-set-password]] that handle the user interface for password changes
+* The [[EncryptWidget|https://tiddlywiki.com/#EncryptWidget]] within the main file template that encrypts a filtered list of tiddlers with the currently held password
+* The [[$:/isEncrypted]] tiddler that contains "yes" or "no" according to whether there is a password in the password vault
+** The availability of this tiddler allows the [[Reveal Widget|https://tiddlywiki.com/#RevealWidget]] to be used to selectively display user interface elements according to whether encryption is in force

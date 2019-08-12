@@ -1,0 +1,17 @@
+created: 20140708084404389
+modified: 20140715184857524
+tags: [[Modules and Plugins]]
+title: Deserializer Modules
+
+Modules with ``module-type: tiddlerdeserializer`` provide functions to create tiddlers out of textual representation. 
+
+Each function must be associated with a type like ``application/json`` or ``text/html``. It takes as arguments the textual representation of the tiddlers, some default field values and the type of the text block.
+It then returns an array of ~JavaScript objects representing the resulting tiddlers.
+
+Deserializers are not managed by the [[Syncer]]: they are actually part of the [[Microkernel]].
+
+This is necessary because the microkernel needs a way of loading tiddlers //before// it can load the [[Core Plugin]] and execute its startup modules. (Since the core plugin is a tiddler itself, it couldn't work otherwise)
+
+
+The ``load-modules`` [[startup module|Startup Modules]] loads additional deserializers and pushes them into the store.
+The core plugin for example contains a few deserializers which can read a whole ~TiddlyWiki5 or classic HTML file and load the individual tiddlers into the store.

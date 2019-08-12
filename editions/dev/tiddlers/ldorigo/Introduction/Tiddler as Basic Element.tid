@@ -1,0 +1,46 @@
+created: 20140708082703387
+modified: 20140715094732261
+tags: [[Introduction]]
+toc-order: 2
+title: Tiddler as Basic Element
+
+A <<.def tiddler>> is the smallest unit of the ~TiddlyWiki system. 
+It can contain any data: plain text, ~WikiText markup, ~JavaScript code (module tiddler), JSON structures, 
+images in SVG format or even binary images encoded with base64.
+Internally, tiddlers are immutable objects containing a bunch of `key:value` pairs called fields. 
+The only required field of a tiddler is the title field. The standard fields of a tiddler are listed below. 
+
+Nearly all aspects of ~TiddlyWiki are managed by tiddlers. This means the application itself only needs to provide some basic functionality to manage individual tiddlers, load and persist them, render them to HTML output and provide a way to register for changes.
+
+[[Plugins|Modules and Plugins]] can be used to add new functionality to the existing [[Modules|Modules and Plugins]] or even to replace individual tiddlers/modules, enabling developers to build whole new applications on the ~TiddlyWiki base system.
+
+The only exception is the [[Microkernel]] which isn't a tiddler.
+
+
+| !Field | !Explanation |
+|created |Timestamp number of milliseconds since 01.01.1970. |
+|modified |Timestamp number of milliseconds since 01.01.1970. |
+|tags |list of tags seperated by whitespace. Tags which contain whitespaces are wrapped by `[[ ]]`, e.g. `[[example Tag]]`.|
+|type |Type of the Tiddler, e.g. text/plain or text/vnd.tiddlywiki .|
+|title |Title of the Tiddler|
+|list |An ordered list of tiddler titles associated with a tiddler|
+
+Tiddlers are used in multiple roles and on different levels. 
+
+A developer uses tiddlers as the basic element containing application code, configuration values and even as a form of variable to save the current UI state.
+On a different level, a tiddler is also the basic unit of work for the wiki user, e.g. the individual wiki pages are implemented as tiddlers.
+
+This makes sense for multiple reasons:
+
+Because the UI of ~TiddlyWiki is built from tiddlers, the wiki user is able to edit the interface of his own ~TiddlyWiki just by editing a tiddler.
+For example to add a list of tiddler links to the sidebar, the user just needs to create a new tiddler, put the links into this tiddler and tag this tiddler with ``$:/tags/SideBar``.
+This way the user can customize his work environment just by using mechanisms he already uses to manage his wiki pages.
+Tiddlers consist of fields. When using a tiddler as wiki page, the user can use these fields to store meta information, like tags.
+
+Because fields for metadata and especially tags are an easy way for the user to organize his wiki pages, ~TiddlyWiki provides a special [[Filter Mechanism|Tags and Filter Mechanism]] to choose tiddlers using their metadata.
+A filter string like ``[tag[learncard]topic[math]!tag[successful]]`` would filter all tiddlers tagged with "learncard", with the value "math" in the topic-field and are not tagged with "successful".
+A user could use this filter together with the ``<$list>`` widget to display a list of all math learncards which are not yet answered successfully in a wiki page.
+
+Another great example of how the "everything is a tiddler" philosophy leads to an environment where a single feature brings great benefit is drag and drop.
+The HTML5 standard comes with a native drag and drop feature. ~TiddlyWiki uses this feature and makes it possible to drag and drop a tiddler from one instance to another.
+And because anything is a tiddler, this gives the ability to drag and drop individual wiki pages, ~JavaScript modules, UI components and whole plug-ins between ~TiddlyWiki instances.

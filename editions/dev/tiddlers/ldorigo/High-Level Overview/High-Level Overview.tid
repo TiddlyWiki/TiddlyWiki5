@@ -1,0 +1,14 @@
+modified: 2018260600000000
+created: 2018260600000000
+tags: [[Welcome to TiddlyWiki's Documentation]]
+toc-order: 2
+title: High-Level Overview
+
+The goal of this section give a detailed but high-level description of ~TiddlyWiki's internals. 
+It should be read in order, and you probably want to start by the [[Introduction]] to get a general idea of how ~TiddlyWiki works on the inside.
+
+<div class="tc-table-of-contents">
+
+<<toc-selective-expandable "High-Level Overview" "nsort[toc-order]" >>
+
+</div>

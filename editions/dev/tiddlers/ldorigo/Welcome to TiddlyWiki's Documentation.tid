@@ -1,0 +1,17 @@
+created: 20182506164000000
+modified: 20182506164000000
+title: Welcome to TiddlyWiki's Documentation
+
+
+Welcome to the developer documentation for ~TiddlyWiki (https://tiddlywiki.com/).
+
+The present wiki is an attempt by [[ldorigo|https://github.com/ldorigo]] to unify pre-existing documentation, both from the original ~TiddlyWiki's docs and from the work of Christian Jurke and Christian Heigele. Don't hesitate to contact me for questions regarding the documentation, either privately or on the [[Gitter Chat|https://gitter.im/TiddlyWiki/developers-and-geeks]].
+
+This is still a work in progress, so feel free to contribute if you are able to! You can see a list of to-do's here: [[Developer Documentation Roadmap]].
+
+
+<div class="tc-table-of-contents">
+
+<<toc-selective-expandable "Welcome to TiddlyWiki's Documentation" "nsort[toc-order]">>
+
+</div>

@@ -1,0 +1,65 @@
+tags: [[Filter Operators]]
+title: Filter Operator Example
+type: text/vnd.tiddlywiki
+
+Suppose we want to make a filter operator that returns every other tiddler from the input list. A typical invocation might look like `[tags[interesting]everyother[]]`.
+
+We make a new tiddler, set its `type` and `module-type` appropriately, and begin writing the code:
+
+```
+(function(){
+"use strict";
+    
+exports.everyother = function(source, operator, options) {
+    // TODO
+}
+})();
+```
+
+For the example filter syntax, our function will be called with
+
+* source: an iterator over all the tiddlers tagged as `interesting`
+* operator: an object `{operator: "everyother", operand: ""}`
+* options: an object with the current Wiki object and a widget object, neither of which we need
+
+As is usually the case, we don't care about `operator.operator` here (since that information has already been used to look up our function); we also don't care about `operator.operand`, since there is no meaningful operand for this operation.
+
+We could implement the operator by iterating over the input tiddlers and explicitly building a result array of titles:
+
+```
+(function(){
+"use strict";
+    
+exports.everyother = function(source, operator, options) {
+    var result = [];
+    var include = true;
+    source(function(tiddler, title) {
+        if (include) { result.push(title); }
+        include = !include;
+    });
+    return result;
+}
+})();
+```
+
+That is, we supply a callback to `source` that negates `include` each time through (in order to grab every other result) and pushes the `title` of every other tiddler onto the result.
+
+Alternatively, we can return our own iterator, by returning a function that accepts a similar callback and only calls it on every other tiddler:
+
+```
+(function(){
+"use strict";
+    
+exports.everyother = function(source, operator, options) {
+    return function(callback) {
+        var include = true;
+        source(function(tiddler, title) {
+            if (include) { callback(tiddler, title); }
+            include = !include;
+        });
+    };
+}
+})();
+```
+
+Either way, we could interpret the `!` flag on the filter, if present, to mean that we want the //other// half of the tiddlers, by using it to set the initial value of `include`: `var include = operator.prefix !== "!";`

@@ -1,0 +1,15 @@
+created: 20140708085451064
+modified: 20180626085602231
+tags: [[Core Plugin]]
+toc-order: 4
+title: Data Management During Runtime
+
+At runtime, the data of Tiddlywiki is stored in javascript objects. 
+
+These objects are synchronized with the DOM-Representation of Tiddlywiki. This means every change to the original data of a Tiddler fires an event which changes all DOM-Representations of the Tiddler and the javascript object. The bare-bones Wiki store is created during the [[boot process|Boot Mechanism]] and is kept in an object called `$tw.Wiki`. This object contains, amongst others, a hashmap of all the tiddlers. The Hashmap is used to store the javascript object representation of the different Tiddlers. Furthermore this object is used to manage the tiddlers during runtime, it provides methods for adding tiddlers, search tiddlers by name and delete tiddlers.
+
+
+TODO: Clarify what a "widget" is and add link to the relevant section.
+
+Every change to the DOM triggers an event which changes the corresponding widget, which in turn changes the tiddler store. 
+~WikiText is parsed by a set of rules into the parse tree, and this parse tree is rendered as a tree of widgets. This Rendertree is synchronised to the DOM. Every modification on the Rendertree provokes a start of the rendering pipeline, and every modification to the ~WikiText triggers an event in the Rendertree. This Process uses a selective updating method so that only the changed parts are updated: only widgets which have to change the DOM (in consequence to the change of a tiddler) are refreshed.

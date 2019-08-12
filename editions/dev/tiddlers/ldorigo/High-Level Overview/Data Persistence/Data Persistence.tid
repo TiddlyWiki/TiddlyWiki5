@@ -1,0 +1,22 @@
+created: 20140708082053686
+modified: 20140717195758655
+tags: [[High-Level Overview]]
+toc-order: 4
+title: Data Persistence
+
+~TiddlyWiki provides many ways to save (persist) data. They fall into two broad categories: [[Savers and Deserializers]], at the wiki level, and [[Syncadaptors]] at the tiddler level.
+
+
+While the microkernel contains a bare store and some deserializers to load tiddlers from JSON files or from the DOM of the current HTML file, the core plug-in adds some more deserializers and a mechanism for persisting and synchronising tiddlers: the [[Syncer]].
+
+
+
+<<<
+[img width=500 [overview.svg]]
+<<< Tiddlers can be persisted from/to hard disk or synced with a remote server.
+
+<div class="tc-table-of-contents">
+
+<<toc-selective-expandable "Data Persistence" "nsort[toc-order]">>
+
+</div>

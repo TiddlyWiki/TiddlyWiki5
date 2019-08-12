@@ -1,0 +1,7 @@
+created: 20182506164000000
+modified: 20182506164000000
+title: Add next and previous buttons
+tags: task
+
+
+Tiddlers in the documentation are currently ordered thanks to the `toc-order` tag. It should be possible to edit the default tiddler template to automatically add links to the previous and next tiddlers in a section.

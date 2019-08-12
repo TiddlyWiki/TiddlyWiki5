@@ -1,0 +1,31 @@
+tags: [[Modules and Plugins]]
+title: Filter Operators
+toc-order: 4
+type: text/vnd.tiddlywiki
+
+Filter operators are modules (tiddlers of type `application/javascript`) with their `module-type` field set to `filteroperator`. They export one or more functions implementing a filter.
+
+Each function must be called with three arguments:
+
+* A tiddler iterator representing the results of the previous filter step (or all tiddlers, if this filter appears first in an expression), conventionally named `source`.
+* An object, conventionally called `operator`, representing the arguments for this filter step, with the following keys:
+** //operator//: the name of the filter operator specified in the ~WikiText
+** //operand//: the operand for the filter step (as a string; if the filter specified it in angle brackets or braces, the text reference or variable name will have already been resolved)
+** //prefix//: (optional) a string containing a single exclamation mark if the filter operator is to be negated
+** //suffix//: (optional) a string containing an additional filter argument (typically a tiddler field name) following the filter name (separated by a colon in the filter syntax)
+** //regexp//: (optional, deprecated) used instead of //operand// if the filter operand is a regexp.
+* An object, conventionally called `options`, with the following keys:
+** //wiki//: The `$tw.Wiki` object
+** //widget//: (optional) a widget node.
+
+The function should return either a new tiddler iterator, or an array of tiddler titles (as strings). The underlying filter mechanism will convert back and forth between iterators and arrays as needed.
+
+
+There are several filter operators built into the core which can serve as a jumping off point for your own filter operators:
+
+https://github.com/Jermolene/TiddlyWiki5/tree/master/core/modules/filters
+
+See also [[Filter Operator Example]] for an example of how to creat your filter operator.
+
+
+''Important'': as with [[JavaScript Macros|How to implement macros in JavaScript]], filter operators should not make modifications to tiddlers, but only return a list of tiddlers or a tiddler iterator.
