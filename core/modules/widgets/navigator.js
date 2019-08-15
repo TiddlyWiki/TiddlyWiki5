@@ -60,6 +60,13 @@ NavigatorWidget.prototype.execute = function() {
 	// Get our parameters
 	this.storyTitle = this.getAttribute("story");
 	this.historyTitle = this.getAttribute("history");
+	if(this.storyTitle) {
+		this.story = new $tw.Story({
+			wiki: this.wiki,
+			storyTitle: this.storyTitle,
+			historyTitle: this.historyTitle
+		});
+	}
 	this.setVariable("tv-story-list",this.storyTitle);
 	this.setVariable("tv-history-list",this.historyTitle);
 	// Construct the child widgets
@@ -123,7 +130,7 @@ NavigatorWidget.prototype.replaceFirstTitleInStory = function(storyList,oldTitle
 
 NavigatorWidget.prototype.addToStory = function(title,fromTitle) {
 	if(this.storyTitle) {
-		this.wiki.addToStory(title,fromTitle,this.storyTitle,{
+		this.story.addToStory(title,fromTitle,this.storyTitle,{
 			openLinkFromInsideRiver: this.getAttribute("openLinkFromInsideRiver","top"),
 			openLinkFromOutsideRiver: this.getAttribute("openLinkFromOutsideRiver","top")
 		});
@@ -136,7 +143,7 @@ title: a title string or an array of title strings
 fromPageRect: page coordinates of the origin of the navigation
 */
 NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
-	this.wiki.addToHistory(title,fromPageRect,this.historyTitle);
+	this.story.addToHistory(title,fromPageRect,this.historyTitle);
 };
 
 /*
