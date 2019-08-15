@@ -1382,33 +1382,6 @@ exports.isDraftModified = function(title) {
 };
 
 /*
-Add a new record to the top of the history stack
-title: a title string or an array of title strings
-fromPageRect: page coordinates of the origin of the navigation
-historyTitle: title of history tiddler (defaults to $:/HistoryList)
-*/
-exports.addToHistory = function(title,fromPageRect,historyTitle) {
-	if(historyTitle) {
-		var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
-		story.addToHistory(title,fromPageRect);		
-	}
-};
-
-/*
-Add a new tiddler to the story river
-title: a title string or an array of title strings
-fromTitle: the title of the tiddler from which the navigation originated
-storyTitle: title of story tiddler (defaults to $:/StoryList)
-options: see story.js
-*/
-exports.addToStory = function(title,fromTitle,storyTitle,options) {
-	if(storyTitle) {
-		var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
-		story.addToStory(title,fromTitle,options);		
-	}
-};
-
-/*
 Generate a title for the draft of a given tiddler
 */
 exports.generateDraftTitle = function(title) {
