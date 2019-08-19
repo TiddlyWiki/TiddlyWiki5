@@ -48,12 +48,9 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 	var uri = endpoint + "/projects/" + encodeURIComponent(repo) + "/repository/";
 	// Perform a get request to get the details (inc shas) of files in the same path as our file
 	$tw.utils.httpRequest({
-		url: uri + "tree/" + encodeURIComponent(path.replace(/^\/+|\/$/g, '')),
+		url: uri + "tree/?path=" + encodeURIComponent(path.replace(/^\/+|\/$/g, '')) + "&branch=" + encodeURIComponent(branch.replace(/^\/+|\/$/g, '')),
 		type: "GET",
 		headers: headers,
-		data: {
-			ref: branch
-		},
 		callback: function(err,getResponseDataJson,xhr) {
 			var getResponseData,sha = "";
 			if(err && xhr.status !== 404) {
