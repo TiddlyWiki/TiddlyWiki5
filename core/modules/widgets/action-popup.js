@@ -39,11 +39,11 @@ ActionPopupWidget.prototype.render = function(parent,nextSibling) {
 };
 
 ActionPopupWidget.prototype.triggerPopup = function(event) {
-		$tw.popup.triggerPopup({
-			domNode: this.domNodes[0],
-			title: this.popup,
-			wiki: this.wiki
-		});
+	$tw.popup.triggerPopup({
+		domNode: this.domNodes[0],
+		title: this.popup,
+		wiki: this.wiki
+	});
 };
 
 /*
