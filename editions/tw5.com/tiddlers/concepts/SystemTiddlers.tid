@@ -4,7 +4,7 @@ tags: Concepts
 title: SystemTiddlers
 type: text/vnd.tiddlywiki
 
-Tiddlers are classified as system tiddlers if their title starts with the special string `$:/`. The only difference from ordinary tiddlers is that they are hidden from most searches and lists in the sidebar. (In particular, system tiddlers are shown in the "More/System" list).
+Tiddlers are classified as system tiddlers if their title starts with the special string `$:/`. System tiddlers are hidden from most searches and lists in the sidebar. (In particular, system tiddlers are shown in the "More/System" list). A [[Module|Modules]] must be a system tiddler.
 
 System tiddlers provide a simple way to hide the internal components of TiddlyWiki so that they don't clutter things up, getting in the way of the users content.
 
