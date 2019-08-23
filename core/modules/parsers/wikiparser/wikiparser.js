@@ -143,6 +143,23 @@ WikiParser.prototype.skipWhitespace = function(options) {
 };
 
 /*
+Skip [inline whitespace followed by a newline]* at the current position.
+This is for example needed for pre´s. We want to skip the newlines after the
+opening pre tag, but we dont want to skip inline whitespace following immediately
+after those newlines. That is because the first code line in the pre may
+intentionally start with an indent. We (have to) assume here that the user does not
+intentionally start his pre´s with newlines. For these cases there is css padding.
+*/
+WikiParser.prototype.skipNewlines = function() {
+	var newlinesRegExp = /((?:[^\S\n]*\r?\n)+)/mg;
+	newlinesRegExp.lastIndex = this.pos;
+	var newlinesMatch = newlinesRegExp.exec(this.source);
+	if(newlinesMatch && newlinesMatch.index === this.pos) {
+		this.pos = newlinesRegExp.lastIndex;
+	}
+};
+
+/*
 Get the next match out of an array of parse rule instances
 */
 WikiParser.prototype.findNextMatch = function(rules,startPos) {
@@ -297,7 +314,7 @@ WikiParser.prototype.parseInlineRunUnterminated = function(options) {
 	}
 	// Process the remaining text
 	if(this.pos < this.sourceLength) {
-		this.pushTextWidget(tree,this.source.substr(this.pos));
+		this.pushTextWidget(tree,this.source.substr(this.pos),true);
 	}
 	this.pos = this.sourceLength;
 	return tree;
@@ -316,8 +333,9 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 		// Return if we've found the terminator, and it precedes any inline rule match
 		if(terminatorMatch) {
 			if(!inlineRuleMatch || inlineRuleMatch.matchIndex >= terminatorMatch.index) {
+				// Preceding text
 				if(terminatorMatch.index > this.pos) {
-					this.pushTextWidget(tree,this.source.substring(this.pos,terminatorMatch.index));
+					this.pushTextWidget(tree,this.source.substring(this.pos,terminatorMatch.index),true);
 				}
 				this.pos = terminatorMatch.index;
 				if(options.eatTerminator) {
@@ -344,7 +362,7 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 	}
 	// Process the remaining text
 	if(this.pos < this.sourceLength) {
-		this.pushTextWidget(tree,this.source.substr(this.pos));
+		this.pushTextWidget(tree,this.source.substr(this.pos),true);
 	}
 	this.pos = this.sourceLength;
 	return tree;
@@ -353,12 +371,14 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 /*
 Push a text widget onto an array, respecting the configTrimWhiteSpace setting
 */
-WikiParser.prototype.pushTextWidget = function(array,text) {
+WikiParser.prototype.pushTextWidget = function(array,text,trimEnd=false) {
 	if(this.configTrimWhiteSpace) {
 		text = $tw.utils.trim(text);
+	} else if (trimEnd) {
+		text = text.trimEnd(); // meanwhile we have native trim functions
 	}
 	if(text) {
-		array.push({type: "text", text: text});		
+		array.push({type: "text", text: text});
 	}
 };
 
@@ -415,4 +435,3 @@ WikiParser.prototype.amendRules = function(type,names) {
 exports["text/vnd.tiddlywiki"] = WikiParser;
 
 })();
-

@@ -47,16 +47,41 @@ exports.parse = function() {
 	this.nextTag = null;
 	// Advance the parser position to past the tag
 	this.parser.pos = tag.end;
-	// Check for two or more immediately following double linebreaks. If they are there,
-	// then the childs will be parsed in block mode, otherwise in inline mode.
-	var hasTwoLineBreaks = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
+	// Check for immediately following linebreaks. This affects the body parsing
+	// below. If there are two linebreaks, then the childs will be parsed
+	// in block mode. Otherwise in inline mode. Further, this will affect how
+	// whitespace after the opening tag will be trimmed. If there are no linebreaks
+	// then trim all preceeding whitespace before the inline run. If there are
+	// one or more linebreaks, then just trim the preceeding newlines (so that
+	// eg. an indented first line in a pre stays).
+	var linebreaks = 0;
+	if (!tag.isSelfClosing) {
+		var temp = $tw.utils.parseTokenRegExp(
+			this.parser.source, this.parser.pos,
+			/([^\S\n\r]*\r?\n|$)?([^\S\n\r]*\r?\n|$)?/g
+		);
+		if (typeof(temp.match[1]) !== 'undefined') {
+			if (typeof(temp.match[2]) !== 'undefined') {
+				linebreaks = 2;
+			} else {
+				linebreaks = 1;
+			}
+		}
+	}
 	// Set whether we're in block mode
-	tag.isBlock = this.is.block || hasTwoLineBreaks;
+	tag.isBlock = this.is.block || (linebreaks > 1);
 	// Parse the body if we need to
 	if(!tag.isSelfClosing && $tw.config.htmlVoidElements.indexOf(tag.tag) === -1) {
-			var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">",
-				reEnd = new RegExp("(" + reEndString + ")","mg");
-		if(hasTwoLineBreaks) {
+		var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">";
+		var reEnd = new RegExp("(" + reEndString + ")","mg");
+		// trim preceeding whitespaces based on the amount of linebreaks.
+		if (linebreaks === 0) {
+			this.parser.skipWhitespace();
+		} else {
+			this.parser.skipNewlines();
+		}
+		// the amount of newlines also defines the parsing mode for the children.
+		if(linebreaks > 1) {
 			tag.children = this.parser.parseBlocks(reEndString);
 		} else {
 			tag.children = this.parser.parseInlineRun(reEnd);
