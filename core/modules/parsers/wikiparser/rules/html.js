@@ -47,15 +47,16 @@ exports.parse = function() {
 	this.nextTag = null;
 	// Advance the parser position to past the tag
 	this.parser.pos = tag.end;
-	// Check for an immediately following double linebreak
-	var hasLineBreak = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
+	// Check for two or more immediately following double linebreaks. If they are there,
+	// then the childs will be parsed in block mode, otherwise in inline mode.
+	var hasTwoLineBreaks = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
 	// Set whether we're in block mode
-	tag.isBlock = this.is.block || hasLineBreak;
+	tag.isBlock = this.is.block || hasTwoLineBreaks;
 	// Parse the body if we need to
 	if(!tag.isSelfClosing && $tw.config.htmlVoidElements.indexOf(tag.tag) === -1) {
 			var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">",
 				reEnd = new RegExp("(" + reEndString + ")","mg");
-		if(hasLineBreak) {
+		if(hasTwoLineBreaks) {
 			tag.children = this.parser.parseBlocks(reEndString);
 		} else {
 			tag.children = this.parser.parseInlineRun(reEnd);
@@ -130,7 +131,9 @@ exports.parseTag = function(source,pos,options) {
 		return null;
 	}
 	pos = token.end;
-	// Check for a required line break
+	// Check for an immediately following line break. If there is one, then this
+	// element will not be wrapped in a p. If there is none, abort and instead
+	// later parse this element during an inline run (it will be wrapped in a p).
 	if(options.requireLineBreak) {
 		token = $tw.utils.parseTokenRegExp(source,pos,/([^\S\n\r]*\r?\n|$)/g);
 		if(!token) {
