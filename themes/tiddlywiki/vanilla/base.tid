@@ -715,6 +715,10 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	fill: <<colour foreground>>;
 }
 
+.tc-page-controls, .tc-sidebar-search, .tc-sidebar-tabs {
+	margin-top: 14px;
+}
+
 .tc-sidebar-header {
 	color: <<colour sidebar-foreground>>;
 	fill: <<colour sidebar-foreground>>;
@@ -744,7 +748,6 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-page-controls {
-	margin-top: 14px;
 	font-size: 1.5em;
 }
 
