@@ -363,3 +363,5 @@ Dong Zhihong, @donmor, 2019/05/29
 Joshua Stubbs, @LordRatte, 2019/05/31
 
 Robin Munn, @rmunn, 2019/06/16
+
+Mark Kerrigan, @markkerrigan, 2019/08/24
