@@ -5,11 +5,15 @@ tags: $:/tags/ViewTemplate
 
 <$list filter="[all[current]!has[plugin-type]!field:hide-body[yes]]">
 
+<$set name="tv-auto-paragraph" value="yes">
+
 <$transclude>
 
 <$transclude tiddler="$:/language/MissingTiddler/Hint"/>
 
 </$transclude>
+
+</$set>
 
 </$list>
 

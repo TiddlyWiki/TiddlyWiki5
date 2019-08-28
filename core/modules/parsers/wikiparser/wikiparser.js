@@ -27,6 +27,13 @@ Attributes are stored as hashmaps of the following objects:
 
 var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
+	//fallback to true for weird edge cases or third party libraries
+	if(typeof options.autoParagraph === "boolean"){
+		this.autoParagraph = options.autoParagraph;
+	} else {
+		this.autoParagraph = true;
+		// console.log(new Error("autoParagraph is undefined\n" + this.source));
+	}
 	var self = this;
 	// Check for an externally linked tiddler
 	if($tw.browser && (text || "") === "" && options._canonical_uri) {
@@ -211,7 +218,9 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 		return nextMatch.rule.parse();
 	}
 	// Treat it as a paragraph if we didn't find a block rule
-	return [{type: "element", tag: "p", children: this.parseInlineRun(terminatorRegExp)}];
+	var children = this.parseInlineRun(terminatorRegExp);
+	if(this.autoParagraph) return [{type: "element", tag: "p", children: children}];
+	else return children;
 };
 
 /*

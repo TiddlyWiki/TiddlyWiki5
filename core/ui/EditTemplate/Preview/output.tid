@@ -4,6 +4,10 @@ caption: {{$:/language/EditTemplate/Body/Preview/Type/Output}}
 
 <$set name="tv-tiddler-preview" value="yes">
 
+<$set name="tv-auto-paragraph" value="yes">
+
 <$transclude />
+
+</$set>
 
 </$set>

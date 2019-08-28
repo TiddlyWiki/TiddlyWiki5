@@ -42,10 +42,12 @@ WikifyWidget.prototype.execute = function() {
 	this.wikifyText = this.getAttribute("text");
 	this.wikifyType = this.getAttribute("type");
 	this.wikifyMode = this.getAttribute("mode","block");
+	this.autoParagraph = this.getAttribute("autoParagraph", this.getVariable("tv-auto-paragraph"));
 	this.wikifyOutput = this.getAttribute("output","text");
 	// Create the parse tree
 	this.wikifyParser = this.wiki.parseText(this.wikifyType,this.wikifyText,{
-			parseAsInline: this.wikifyMode === "inline"
+			parseAsInline: this.wikifyMode === "inline",
+			autoParagraph: this.autoParagraph
 		});
 	// Create the widget tree 
 	this.wikifyWidgetNode = this.wiki.makeWidget(this.wikifyParser,{
