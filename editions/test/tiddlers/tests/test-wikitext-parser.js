@@ -176,6 +176,11 @@ describe("WikiText parser tests", function() {
 		);
 		expect(parse("\r\t ...")).toEqual(parse("..."));
 		expect(parse("...\n\n")).toEqual(parse("..."));
+
+		expect(parse("<e>...</e>")).toEqual(
+			[ { "type": "element", "tag": "p", "children": [ { "type": "element", "tag": "e", "isBlock": false, "start": 0, "end": 3, "attributes": {}, "children": [ { "type": "text", "text": "..." } ] } ] } ]
+		);
+
 		expect(parse("<e>\n\n...</e>")).toEqual(
 			[ { type : 'element', tag : 'e', isBlock : true, start : 0, end : 3, attributes : {}, children : [ { type : 'element', tag : 'p', children : [ { type : 'text', text : '...' } ] } ] } ]
 		);
