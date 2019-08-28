@@ -141,6 +141,47 @@ describe("WikiText parser tests", function() {
 
 	});
 
+	it("should parse elements in inline mode", function() {
+		expect(parse("<inline></inline>")).toEqual(
+			[ { type : 'element', tag : 'p', children : [ { type : 'element', tag : 'inline', isBlock : false, start : 0, end : 8, attributes : {}, children : [] } ] } ]
+		);
+		expect(parse("<inline>")).toEqual(parse("<inline></inline>"));
+		expect(parse("<inline/>")).toEqual(
+			[ { type : 'element', tag : 'p', children : [ { type : 'element', tag : 'inline', isSelfClosing : true, isBlock : false, start : 0, end : 9, attributes : {} } ] } ]
+		);
+		expect(parse("<x>!inline</x>")).toEqual(
+			[ { type : 'element', tag : 'p', children : [ { type : 'element', tag : 'x', isBlock : false, start : 0, end : 3, attributes : {}, children : [ { type : 'text', text : '!inline' } ] } ] } ]
+		);
+		expect(parse("<x>!inline")).toEqual(parse("<x>!inline</x>"));
+	});
+
+	it("should parse elements in block mode", function() {
+		expect(parse("<block>\n\n</block>")).toEqual(
+			[ { type : 'element', tag : 'block', isBlock : true, start : 0, end : 7, attributes : {}, children : [] } ]
+		);
+		expect(parse("<block>\n\n")).toEqual(parse("<block>\n\n</block>"));
+		expect(parse("<block/>\n")).toEqual(
+			[ { type : 'element', tag : 'block', isSelfClosing : true, isBlock : true, start : 0, end : 8, attributes : {} } ]
+		);
+
+		expect(parse("<x>\n\n!block\n\n</x>")).toEqual(
+			[ { type : 'element', tag : 'x', isBlock : true, start : 0, end : 3, attributes : {}, children : [ { type : 'element', tag : 'h1', attributes : { 'class' : { type : 'string', value : '' } }, children : [ { type : 'text', text : 'block' } ] } ] } ]
+		);
+		expect(parse("<x>\n\n!block")).toEqual(parse("<x>\n\n!block\n\n</x>"));
+	});
+
+	it("should trim unneeded, but preserve needed whitespace", function() {
+		expect(parse("...")).toEqual(
+			[ { type : 'element', tag : 'p', children : [ { type : 'text', text : '...' } ] } ]
+		);
+		expect(parse("\r\t ...")).toEqual(parse("..."));
+		expect(parse("...\n\n")).toEqual(parse("..."));
+		expect(parse("<e>\n\n...</e>")).toEqual(
+			[ { type : 'element', tag : 'e', isBlock : true, start : 0, end : 3, attributes : {}, children : [ { type : 'element', tag : 'p', children : [ { type : 'text', text : '...' } ] } ] } ]
+		);
+		expect(parse("<e>\n\n...\n\n</e>")).toEqual(parse("<e>\n\n...</e>"));
+	});
+
 });
 
 })();
