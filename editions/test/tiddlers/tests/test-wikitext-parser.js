@@ -170,6 +170,19 @@ describe("WikiText parser tests", function() {
 		expect(parse("<x>\n\n!block")).toEqual(parse("<x>\n\n!block\n\n</x>"));
 	});
 
+	it("should parse elements in block, children in inline mode", function() {
+		expect(parse("<block>\n</block>")).toEqual(
+			[ { "type": "element", "tag": "block", "isBlock": true, "start": 0, "end": 7, "attributes": {}, "children": [] } ]
+		);
+		expect(parse("<block>\n</block>")).toEqual(parse("<block>\n\n</block>"));
+		expect(parse("<block>\n")).toEqual(parse("<block>\n</block>"));
+
+		expect(parse("<block>\n!inline</block>")).toEqual(
+			[ { "type": "element", "tag": "block", "isBlock": true, "start": 0, "end": 7, "attributes": {}, "children": [ { "type": "text", "text": "!inline" } ] } ]
+		);
+		expect(parse("<block>\n!inline")).toEqual(parse("<block>\n!inline</block>"));
+	});
+
 	it("should trim unneeded, but preserve needed whitespace", function() {
 		// autoparagraphed elements / whitespace before end of parsed string
 		expect(parse("...")).toEqual(
