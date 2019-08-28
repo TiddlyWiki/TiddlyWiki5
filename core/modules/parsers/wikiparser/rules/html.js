@@ -58,7 +58,7 @@ exports.parse = function() {
 	if (!tag.isSelfClosing) {
 		var temp = $tw.utils.parseTokenRegExp(
 			this.parser.source, this.parser.pos,
-			/([^\S\n\r]*\r?\n|$)?([^\S\n\r]*\r?\n|$)?/g
+			/([^\S\n\r]*\r?\n)?([^\S\n\r]*\r?\n)?/g
 		);
 		if (typeof(temp.match[1]) !== 'undefined') {
 			if (typeof(temp.match[2]) !== 'undefined') {
@@ -160,7 +160,7 @@ exports.parseTag = function(source,pos,options) {
 	// element will not be wrapped in a p. If there is none, abort and instead
 	// later parse this element during an inline run (it will be wrapped in a p).
 	if(options.requireLineBreak) {
-		token = $tw.utils.parseTokenRegExp(source,pos,/([^\S\n\r]*\r?\n|$)/g);
+		token = $tw.utils.parseTokenRegExp(source,pos,/([^\S\n\r]*\r?\n)/g);
 		if(!token) {
 			return null;
 		}
