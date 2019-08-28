@@ -217,6 +217,13 @@ describe("WikiText parser tests", function() {
 		);
 		expect(parse("<e>\n\n... \t\r\n</e>")).toEqual(parse("<e>\n\n...</e>"));
 		expect(parse("<e>\n\n...\n\n</e>")).toEqual(parse("<e>\n\n...</e>"));
+
+		// preserve whitespace between nodes, only trim inside.
+		expect(
+			parse("i <em> like </em> Wikis!")
+		).toEqual(
+			parse("i <em>like</em> Wikis!")
+		);
 	});
 
 });
