@@ -206,6 +206,11 @@ describe("WikiText parser tests", function() {
 		expect(parse("<e>\n... \t\r\n</e>")).toEqual(parse("<e>\n...</e>"));
 		expect(parse("<e>\n...\n\n</e>")).toEqual(parse("<e>\n...</e>"));
 
+		// preserve an indented first line in the element block, children inline mode. Needed for eg. pre´s.
+		expect(parse("<pre>\n    i am indented\n</pre>")).toEqual(
+			[ { "type": "element", "tag": "pre", "isBlock": true, "start": 0, "end": 5, "attributes": {}, "children": [ { "type": "text", "text": "    i am indented" } ] } ]
+		);
+
 		// block mode
 		expect(parse("<e>\n\n...</e>")).toEqual(
 			[ { type : 'element', tag : 'e', isBlock : true, start : 0, end : 3, attributes : {}, children : [ { type : 'element', tag : 'p', children : [ { type : 'text', text : '...' } ] } ] } ]
