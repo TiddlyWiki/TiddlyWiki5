@@ -4,7 +4,7 @@ tags: [[WebServer API]]
 title: WebServer API: Get All Tiddlers
 type: text/vnd.tiddlywiki
 
-Gets an array of all raw tiddlers, excluding the ''text'' field.
+Gets an array of all raw tiddlers (expect system tiddlers), excluding the ''text'' field.
 
 ```
 GET /recipes/default/tiddlers.json
