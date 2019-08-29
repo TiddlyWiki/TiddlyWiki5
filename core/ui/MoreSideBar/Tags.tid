@@ -18,7 +18,7 @@ caption: {{$:/language/SideBar/Tags/Caption}}
 
 <$list filter={{$:/core/Filters/AllTags!!filter}}>
 
-<$transclude tiddler="$:/core/ui/TagTemplate"></$transclude>
+<$transclude tiddler="$:/core/ui/TagTemplate"/>
 
 </$list>
 
