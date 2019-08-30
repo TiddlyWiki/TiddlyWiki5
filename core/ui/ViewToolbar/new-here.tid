@@ -9,7 +9,7 @@ $(tags)$ $(moreTags)$
 \end
 \define newHereActions()
 <$set name="tags" filter="[<currentTiddler>]">
-<$set name="moreTags" value={{$:/config/NewTiddler/Tags}}>
+<$set name="moreTags" value={{$:/language/DefaultNewTiddlerTags}}>
 <$action-sendmessage $message="tm-new-tiddler" tags=<<get-tags>>/>
 </$set>
 </$set>
