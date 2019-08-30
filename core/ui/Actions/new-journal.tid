@@ -5,7 +5,7 @@ description: create a new journal tiddler
 \define get-tags()
 $(journalTags)$ $(moreTags)$
 \end
-<$vars journalTitleTemplate={{$:/config/NewJournal/Title}} journalTags={{$:/config/NewJournal/Tags}} moreTags={{$:/config/NewTiddler/Tags}} journalText={{$:/config/NewJournal/Text}}>
+<$vars journalTitleTemplate={{$:/config/NewJournal/Title}} journalTags={{$:/config/NewJournal/Tags}} moreTags={{$:/language/DefaultNewTiddlerTags}} journalText={{$:/config/NewJournal/Text}}>
 <$wikify name="journalTitle" text="""<$macrocall $name="now" format=<<journalTitleTemplate>>/>""">
 <$reveal type="nomatch" state=<<journalTitle>> text="">
 <$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<get-tags>> text={{{ [<journalTitle>get[]] }}}/>
