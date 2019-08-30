@@ -7,44 +7,28 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.20...v5.1.21]]//
 
-!! Plugin Improvements
-
-New and improved plugins:
-
-* 
-
-!! Translation Improvements
-
-New and improved translations:
-
-* 
-
-!! Performance Improvements
-
-* 
-
-!! Usability Improvements
-
-* 
+This is a minor bug fix release for [[Release 5.1.20]].
 
 !! Hackability Improvements
 
-* 
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/pull/4189]] the ''Open'' sidebar tab to use the `tv-config-story-list` variable
 
 !! Bug Fixes
 
-* 
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/a170210069bbec265992b365a61e0722b480ab1d]] crash with ActionDeleteFieldWidget and a missing ''tiddler'' attribute
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4087]] edge cases where some tiddler lists were not valid when interpreted as a filter
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/471b73158a887d2f060194741739c1da8b5d44d8]] problem with too many alerts when upgrading a wiki containing an overwritten core module
+* [[Reverted|https://github.com/Jermolene/TiddlyWiki5/commit/83386f34b50a9d93171df133957d489b5de629ef]] inadvertently switching on performance instrumentation
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/4218]] bug with WikiText within field names
 
-!! Node.js Bug Fixes and Improvements
+!! Node.js Bug Fixes
 
-* 
-
-!! Developer Bug Fixes and Improvements
-
-* 
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4174]] bug with [[customised tiddler file naming|Customising Tiddler File Naming]]
 
 ! Contributors
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
-* 
+* [[@BurningTreeC|https://github.com/BurningTreeC]]
+* [[@flibbles|https://github.com/flibbles]]
+* [[@hoelzro|https://github.com/hoelzro]]
