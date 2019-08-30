@@ -370,4 +370,6 @@ Stefan Schuster-Teupke, @StefanSTFG, 2019/08/26
 
 Nils-Hero Lindemann, @heronils, 2019/08/26
 
+Marica Odagaki, @ento, 2019/08/30
+
 Mark Stegeman, @markstegeman, 2019/08/31
