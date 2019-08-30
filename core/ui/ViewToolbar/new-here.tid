@@ -4,9 +4,14 @@ caption: {{$:/core/images/new-here-button}} {{$:/language/Buttons/NewHere/Captio
 description: {{$:/language/Buttons/NewHere/Hint}}
 
 \whitespace trim
+\define get-tags()
+$(tags)$ $(moreTags)$
+\end
 \define newHereActions()
 <$set name="tags" filter="[<currentTiddler>]">
-<$action-sendmessage $message="tm-new-tiddler" tags=<<tags>>/>
+<$set name="moreTags" value={{$:/config/NewTiddler/Tags}}>
+<$action-sendmessage $message="tm-new-tiddler" tags=<<get-tags>>/>
+</$set>
 </$set>
 \end
 \define newHereButton()
