@@ -1,14 +1,4 @@
 (function() {
-  //
-  // Imports
-  //
-  var util;
-  try {
-    util = require('util')
-  } catch(e) {
-    util = require('sys')
-  }
-
   var jasmineNode = {};
   //
   // Helpers
@@ -17,7 +7,7 @@
 
 
   jasmineNode.TerminalReporter = function(config) {
-    this.print_ = config.print || util.print;
+    this.print_ = config.print || console.log;
     this.color_ = config.color ? this.ANSIColors : this.NoColors;
 
     this.started_ = false;

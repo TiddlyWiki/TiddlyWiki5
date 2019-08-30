@@ -52,7 +52,7 @@ exports.startup = function() {
 		jasmine.jasmine.TerminalVerboseReporter = reporterExports.jasmineNode.TerminalVerboseReporter;
 		jasmine.jasmine.TerminalReporter = reporterExports.jasmineNode.TerminalReporter;
 		jasmineEnv.addReporter(new jasmine.jasmine.TerminalVerboseReporter({
-			print: require("util").print,
+			print: console.log,
 			color: true,
 			includeStackTrace: true
 		}));
