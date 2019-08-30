@@ -73,7 +73,7 @@ $value={{$:/temp/newfieldvalue}}/>
 </div>
 <$list filter="[!is[shadow]!is[system]fields[]search:title{$:/temp/newfieldname}sort[]] -created -creator -draft.of -draft.title -modified -modifier -tags -text -title -type"  variable="currentField">
 <$link to=<<currentField>>>
-<<currentField>>
+<$text text=<<currentField>>/>
 </$link>
 </$list>
 <div class="tc-dropdown-item">
@@ -81,7 +81,7 @@ $value={{$:/temp/newfieldvalue}}/>
 </div>
 <$list filter="[fields[]search:title{$:/temp/newfieldname}sort[]] -[!is[shadow]!is[system]fields[]]" variable="currentField">
 <$link to=<<currentField>>>
-<<currentField>>
+<$text text=<<currentField>>/>
 </$link>
 </$list>
 </$linkcatcher>
