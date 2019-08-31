@@ -56,17 +56,17 @@ exports.startup = function() {
 			color: true,
 			includeStackTrace: true
 		}));
-	}
-	// Add a reporter that exits with an error code if any tests failed
-	jasmineEnv.addReporter({
-		reportRunnerResults: function(runner) {
-			var c = runner.results().failedCount;
-			if(c > 0) {
-				console.log("Exitting with test failure count: ",c);
-				process.exit(1);
+		// Add a reporter that exits with an error code if any tests failed
+		jasmineEnv.addReporter({
+			reportRunnerResults: function(runner) {
+				var c = runner.results().failedCount;
+				if(c > 0) {
+					console.log("Exitting with test failure count: ",c);
+					process.exit(1);
+				}
 			}
-		}
-	});
+		});
+	}
 	// Iterate through all the test modules
 	var tests = $tw.wiki.filterTiddlers(TEST_TIDDLER_FILTER);
 	$tw.utils.each(tests,function(title,index) {
