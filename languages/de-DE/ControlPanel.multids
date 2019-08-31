@@ -13,6 +13,7 @@ Basics/Language/Prompt: Hallo! Aktuelle Sprache:
 Basics/NewJournal/Title/Prompt: Titel des neuen Journal-Tiddlers:
 Basics/NewJournal/Text/Prompt: Text des neuen Journal-Tiddlers:
 Basics/NewJournal/Tags/Prompt: Tags des neuen Journal-Tiddlers:
+Basics/NewTiddler/Tags/Prompt: Tags des neuen Tiddlers:
 Basics/NewTiddler/Title/Prompt: Titel des neuen Tiddlers:
 Basics/OverriddenShadowTiddlers/Prompt: Anzahl überschriebener Schatten-Tiddler:
 Basics/ShadowTiddlers/Prompt: Anzahl Schatten-Tiddler:
