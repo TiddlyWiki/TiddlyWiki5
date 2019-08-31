@@ -32,7 +32,6 @@ exports.startup = function() {
 	});
 	// Prepare the Jasmine environment
 	var jasmineEnv = jasmine.jasmine.getEnv();
-	jasmineEnv.updateInterval = 1000;
 	// Execute the appropriate reporter
 	var reporterTitle = $tw.browser ? "$:/plugins/tiddlywiki/jasmine/jasmine-html.js" : "$:/plugins/tiddlywiki/jasmine/reporter.js";
 	context.require = function(moduleTitle) {
