@@ -103,15 +103,8 @@ exports.startup = function() {
 	context = $tw.utils.extend({},jasmineInterface,context);
 	// Iterate through all the test modules
 	var tests = $tw.wiki.filterTiddlers(TEST_TIDDLER_FILTER);
-	$tw.utils.each(tests,function(title,index) {
-		// Get the test specification code
-		var code = $tw.wiki.getTiddlerText(title,"");
-		// Add a require handler
-		context.require = function(moduleTitle) {
-			return $tw.modules.execute(moduleTitle,title);
-		};
-		// Execute the test code with the context variables
-		$tw.utils.evalSandboxed(code,context,title);
+	$tw.utils.each(tests,function(title) {
+		evalInContext(title);
 	});
 	// In a browser environment, jasmine-core/boot.js calls `execute()` for us.
 	// In Node.js, we call it manually.
