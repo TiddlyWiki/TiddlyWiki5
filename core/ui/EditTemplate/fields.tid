@@ -58,12 +58,12 @@ $value={{$:/temp/newfieldvalue}}/>
 <$fieldmangler>
 <div class="tc-edit-field-add">
 <em class="tc-edit">
-<<lingo Fields/Add/Prompt>>
+<<lingo Fields/Add/Prompt>>&nbsp;
 </em>
 <span class="tc-edit-field-add-name">
 <$edit-text tiddler="$:/temp/newfieldname" tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}} focusPopup=<<qualify "$:/state/popup/field-dropdown">> class="tc-edit-texteditor tc-popup-handle" tabindex={{$:/config/EditTabIndex}}/>
 </span>
-<$button popup=<<qualify "$:/state/popup/field-dropdown">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Field/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Field/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>
+<$button popup=<<qualify "$:/state/popup/field-dropdown">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Field/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Field/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>&nbsp;
 <$reveal state=<<qualify "$:/state/popup/field-dropdown">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown tc-edit-type-dropdown">
 <$set name="tv-show-missing-links" value="yes">
@@ -90,7 +90,7 @@ $value={{$:/temp/newfieldvalue}}/>
 </$reveal>
 <span class="tc-edit-field-add-value">
 <$edit-text tiddler="$:/temp/newfieldvalue" tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Value/Placeholder}} class="tc-edit-texteditor" tabindex={{$:/config/EditTabIndex}}/>
-</span>
+</span>&nbsp;
 <span class="tc-edit-field-add-button">
 <$macrocall $name="new-field"/>
 </span>
