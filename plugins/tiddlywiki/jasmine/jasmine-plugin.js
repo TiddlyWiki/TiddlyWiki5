@@ -89,7 +89,7 @@ exports.startup = function() {
 		jasmineCore.files = {
 			path: "$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core"
 		};
-		// jasmine.js references `process.exit`
+		// 'jasmine/jasmine.js' references `process.exit`
 		context.process = process;
 
 		var JasmineNode = evalInContext("$:/plugins/tiddlywiki/jasmine/jasmine/jasmine.js");
