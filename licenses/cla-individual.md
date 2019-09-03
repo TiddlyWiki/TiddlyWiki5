@@ -363,3 +363,11 @@ Dong Zhihong, @donmor, 2019/05/29
 Joshua Stubbs, @LordRatte, 2019/05/31
 
 Robin Munn, @rmunn, 2019/06/16
+
+Mark Kerrigan, @markkerrigan, 2019/08/24
+
+Stefan Schuster-Teupke, @StefanSTFG, 2019/08/26
+
+Nils-Hero Lindemann, @heronils, 2019/08/26
+
+Mark Stegeman, @markstegeman, 2019/08/31
