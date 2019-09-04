@@ -11,7 +11,7 @@ This is a minor bug fix release for [[Release 5.1.20]].
 
 !! Hackability Improvements
 
-* [[Updated|https://github.com/Jermolene/TiddlyWiki5/pull/4189]] the ''Open'' sidebar tab to use the `tv-config-story-list` variable
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/pull/4189]] the ''Open'' sidebar tab to use the `tv-story-list` variable
 
 !! Bug Fixes
 
@@ -20,6 +20,9 @@ This is a minor bug fix release for [[Release 5.1.20]].
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/471b73158a887d2f060194741739c1da8b5d44d8]] problem with too many alerts when upgrading a wiki containing an overwritten core module
 * [[Reverted|https://github.com/Jermolene/TiddlyWiki5/commit/83386f34b50a9d93171df133957d489b5de629ef]] inadvertently switching on performance instrumentation
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/4218]] bug with WikiText within field names
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/dd09266b467173e45d75c172b2e82fd542f682fe]] problem with classes in the [[Table-of-Contents Macros]]
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4203]] missing foreground colour for buttons with class `tc-btn-invisible`
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4227]] whitespace around field editor inputs
 
 !! Node.js Bug Fixes
 
@@ -29,6 +32,10 @@ This is a minor bug fix release for [[Release 5.1.20]].
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
+* [[@bimlas|https://github.com/bimlas]]
 * [[@BurningTreeC|https://github.com/BurningTreeC]]
 * [[@flibbles|https://github.com/flibbles]]
+* [[@heronils|https://github.com/heronils]]
 * [[@hoelzro|https://github.com/hoelzro]]
+* [[@markstegeman|https://github.com/markstegeman]]
+* [[@StefanSTFG|https://github.com/StefanSTFG]]
