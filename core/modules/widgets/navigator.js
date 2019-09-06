@@ -549,13 +549,16 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	var self = this,
 		importTiddler = this.wiki.getTiddler(event.param),
 		importData = this.wiki.getTiddlerDataCached(event.param,{tiddlers: {}}),
-		importReport = [];
+		importReport = [],
+	    	moreTags = this.wiki.getTiddlerText("$:/language/DefaultNewTiddlerTags");
 	// Add the tiddlers to the store
 	importReport.push($tw.language.getString("Import/Imported/Hint") + "\n");
 	$tw.utils.each(importData.tiddlers,function(tiddlerFields) {
 		var title = tiddlerFields.title;
 		if(title && importTiddler && importTiddler.fields["selection-" + title] !== "unchecked") {
-			var tiddler = new $tw.Tiddler(tiddlerFields);
+			var tiddler = new $tw.Tiddler(tiddlerFields,{
+				tags: tiddlerFields.tags + " " + moreTags
+			});
 			tiddler = $tw.hooks.invokeHook("th-importing-tiddler",tiddler);
 			self.wiki.addTiddler(tiddler);
 			importReport.push("# [[" + tiddlerFields.title + "]]");
