@@ -649,6 +649,10 @@ button.tc-tag-label, span.tc-tag-label {
 	border-radius: 1em;
 }
 
+.tc-sidebar-scrollable .tc-tag-label {
+	text-shadow: none;
+}
+
 .tc-untagged-separator {
 	width: 10em;
 	left: 0;
