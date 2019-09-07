@@ -317,7 +317,7 @@ $tw.utils.stringifyList = function(value) {
 		var result = new Array(value.length);
 		for(var t=0, l=value.length; t<l; t++) {
 			var entry = value[t] || "";
-			if(entry.indexOf(" ") !== -1 || "+-~=".indexOf(entry[0]) !== -1) {
+			if(entry.indexOf(" ") !== -1) {
 				result[t] = "[[" + entry + "]]";
 			} else {
 				result[t] = entry;
