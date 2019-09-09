@@ -556,18 +556,7 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	$tw.utils.each(importData.tiddlers,function(tiddlerFields) {
 		var title = tiddlerFields.title;
 		if(title && importTiddler && importTiddler.fields["selection-" + title] !== "unchecked") {
-			var tiddler;
-			if(moreTags && tiddlerFields.tags) {
-				tiddler = new $tw.Tiddler(tiddlerFields,{
-					tags: tiddlerFields.tags + " " + moreTags
-				});
-			} else if (moreTags) {
-				tiddler = new $tw.Tiddler(tiddlerFields,{
-					tags: moreTags
-				});
-			} else {
-				tiddler = new $tw.Tiddler(tiddlerFields);
-			}
+			var tiddler = new $tw.Tiddler(tiddlerFields);
 			tiddler = $tw.hooks.invokeHook("th-importing-tiddler",tiddler);
 			self.wiki.addTiddler(tiddler);
 			importReport.push("# [[" + tiddlerFields.title + "]]");
