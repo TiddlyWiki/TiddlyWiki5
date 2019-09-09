@@ -549,8 +549,7 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	var self = this,
 		importTiddler = this.wiki.getTiddler(event.param),
 		importData = this.wiki.getTiddlerDataCached(event.param,{tiddlers: {}}),
-		importReport = [],
-	    	moreTags = this.wiki.getTiddlerText("$:/language/DefaultNewTiddlerTags");
+		importReport = [];
 	// Add the tiddlers to the store
 	importReport.push($tw.language.getString("Import/Imported/Hint") + "\n");
 	$tw.utils.each(importData.tiddlers,function(tiddlerFields) {
