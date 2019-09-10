@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.20...v5.1.21]]//
 
-This is a bug fix release for [[Release 5.1.20]].
+This is a bug fix release that resolves issues introduced in the recent [[Release 5.1.20]].
 
 !! Bug Fixes
 
@@ -25,6 +25,7 @@ This is a bug fix release for [[Release 5.1.20]].
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/4247]] regression with the [[field Operator]] and blank operands
 * [[Reverted|https://github.com/Jermolene/TiddlyWiki5/pull/4249]] erroneous change in v5.1.20 in the way that lists are stringified
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4189]] the ''Open'' sidebar tab to use the `tv-story-list` variable
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4255]] problem [[saving to GitLab|Saving to a Git service]]
 
 !! Node.js Bug Fixes
 
