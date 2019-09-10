@@ -72,6 +72,7 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 			var data = {
 				commit_message: $tw.language.getRawString("ControlPanel/Saving/GitService/CommitMessage"),
 				content: $tw.utils.base64Encode(text),
+				encoding: "base64",
 				branch: branch,
 				sha: sha
 			};
