@@ -21,7 +21,7 @@ A filter operator to randomize the order of the list passed to it.
       return hash;
     }
 
-    var shuffle = function(array, seed=0) {
+    var shuffle = function(array, seed) {
       var currentIndex = array.length, temporaryValue, randomIndex ;
      Math.seedrandom(seed)
 
@@ -42,20 +42,23 @@ A filter operator to randomize the order of the list passed to it.
     }
 
     var prepare_results = function (source) {
-	    var results = [];
-	    source(function(tiddler,title) {
-		    results.push(title);
-	    });
-	    return results;
+      var results = [];
+      source(function(tiddler,title) {
+        results.push(title);
+      });
+      return results;
     };
 
     exports.shuffle = function(source, operator, options) {
-       var results = prepare_results(source);
-       if (operator['operand'] == "") {
-           shuffle(results);
-       } else {
-           shuffle(results, hash(operator['operand']));
-       }
-       return results;
+      var results = prepare_results(source);
+      if (operator['operand'] == "") {
+        if (options.wiki.tiddlerExists("$:/temp/seed") {
+          var tiddler = options.getTiddler("$:/temp/seed")
+          shuffle(results, tiddler.getFieldString("startup"));
+         }
+      } else {
+        shuffle(results, hash(operator['operand']));
+      }
+      return results;
     }
 })();
