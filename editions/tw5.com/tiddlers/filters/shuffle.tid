@@ -8,6 +8,6 @@ op-parameter: a string to use as a seed for the randomization
 op-parameter-name: seed
 op-purpose: randomize the order of the input list.
 
-This operator takes the input list and randomizes the order of the list.  If no parameter is provided, the list order is random every time.
+This operator takes the input list and randomizes the order of the list.  If no parameter is provided, the list order is based on a seed set at startup time.
 
 <<.operator-examples "shuffle">>
