@@ -1,0 +1,4 @@
+tags: $:/tags/StartupAction
+title: $:/core/modules/startup/seedrandom.tid
+
+<$action-setfield $tiddler="$:/temp/seed" startup=<<now "[UTC]YYYY0MM0DD0hh0mm0ssXXX">> />
