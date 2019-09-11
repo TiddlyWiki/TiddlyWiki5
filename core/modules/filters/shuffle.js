@@ -50,15 +50,14 @@ A filter operator to randomize the order of the list passed to it.
     };
 
     exports.shuffle = function(source, operator, options) {
-      var results = prepare_results(source);
-      if (operator['operand'] == "") {
-        if (options.wiki.tiddlerExists("$:/temp/seed") {
-          var tiddler = options.getTiddler("$:/temp/seed")
-          shuffle(results, tiddler.getFieldString("startup"));
-         }
-      } else {
-        shuffle(results, hash(operator['operand']));
-      }
-      return results;
+       var results = prepare_results(source);
+       if (operator['operand'] !== "") {
+         shuffle(results, hash(operator['operand']));
+       } else if (options.wiki.tiddlerExists("$:/temp/seed")) {
+         shuffle(results, options.wiki.getTiddler("$:/temp/seed").getFieldString("startup"));
+       } else {
+         shuffle(results, "");
+       }
+       return results;
     }
 })();
