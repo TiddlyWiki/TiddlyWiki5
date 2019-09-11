@@ -1450,5 +1450,21 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 	return messages;
 };
 
+// Determine whether a plugin contains JS modules. 
+exports.doesPluginContainModules = function(title) {
+	var info = this.getPluginInfo(title) || this.getTiddlerDataCached(title);
+	if(info) {
+		var foundModule = false;
+		$tw.utils.each(info.tiddlers,function(tiddler) {
+			if(tiddler.type === "application/javascript" && $tw.utils.hop(tiddler,"module-type")) {
+				foundModule = true;
+			}
+		});
+		return foundModule;
+	} else {
+		return null;
+	}
+};
+
 })();
 

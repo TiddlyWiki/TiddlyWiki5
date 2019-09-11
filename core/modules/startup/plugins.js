@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/plugins.js
+title: $:/core/modules/startup/plugins.js
 type: application/javascript
 module-type: startup
 
@@ -17,19 +17,31 @@ exports.name = "plugins";
 exports.after = ["load-modules"];
 exports.synchronous = true;
 
+// Stat
+var REQUIRE_RELOAD_DUE_TO_PLUGIN_CHANGE = "$:/status/RequireReloadDueToPluginChange";
+
 exports.startup = function() {
+	$tw.wiki.addTiddler({title: REQUIRE_RELOAD_DUE_TO_PLUGIN_CHANGE,text: "no"});
 	$tw.wiki.addEventListener("change",function(changes) {
-		var titles = Object.keys(changes);
-		// Ignore any changes to plugins with the plugin-type "import"
-		for(var t=titles.length-1; t>=0; t--) {
-			var title = titles[t],
-				tiddler = $tw.wiki.getTiddler(title);
-			if(tiddler && tiddler.fields["plugin-type"] === "import") {
-				titles.splice(t,1);
+		var changesToProcess = [],
+			requireReloadDueToPluginChange = false;
+		$tw.utils.each(Object.keys(changes),function(title) {
+			var tiddler = $tw.wiki.getTiddler(title),
+				containsModules = $tw.wiki.doesPluginContainModules(title);
+			if(containsModules) {
+				requireReloadDueToPluginChange = true;
+			} else if(tiddler && tiddler.fields["plugin-type"] === "import") {
+				// Ignore import tiddlers
+			} else {
+				// Otherwise process it
+				changesToProcess.push(title);
 			}
+		});
+		if(requireReloadDueToPluginChange) {
+			$tw.wiki.addTiddler({title: REQUIRE_RELOAD_DUE_TO_PLUGIN_CHANGE,text: "yes"});
 		}
 		// Read or delete the plugin info of the changed tiddlers
-		var changes = $tw.wiki.readPluginInfo(titles);
+		var changes = $tw.wiki.readPluginInfo(changesToProcess);
 		if(changes.modifiedPlugins.length > 0 || changes.deletedPlugins.length > 0) {
 			// (Re-)register any modified plugins
 			$tw.wiki.registerPluginTiddlers(null,changes.modifiedPlugins);

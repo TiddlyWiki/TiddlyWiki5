@@ -1265,7 +1265,7 @@ $tw.Wiki = function(options) {
 			} else {
 				if(pluginInfo[title]) {
 					delete pluginInfo[title];					
-					results.deletedPlugins.push(tiddler.fields.title);
+					results.deletedPlugins.push(title);
 				}
 			}
 		});
@@ -1275,22 +1275,6 @@ $tw.Wiki = function(options) {
 	// Get plugin info for a plugin
 	this.getPluginInfo = function(title) {
 		return pluginInfo[title];
-	};
-
-	// Determine whether a plugin contains JS modules. 
-	this.doesPluginContainModules = function(title) {
-		var info = pluginInfo[title];
-		if(info) {
-			var foundModule = false;
-			$tw.utils.each(info.tiddlers,function(tiddler) {
-				if(tiddler.type === "application/javascript" && $tw.utils.hop(tiddler,"module-type")) {
-					foundModule = true;
-				}
-			});
-			return foundModule;
-		} else {
-			return null;
-		}
 	};
 
 	// Register the plugin tiddlers of a particular type, or null/undefined for any type, optionally restricting registration to an array of tiddler titles. Return the array of titles affected
