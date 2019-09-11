@@ -44,7 +44,7 @@ exports.startup = function() {
 			console.log("Error in selector: ",selector)
 		}
 		if(element && element.focus) {
-			element.focus();
+			element.focus(event.paramObject);
 		}
 	});
 	// Install the scroller

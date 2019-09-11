@@ -3,5 +3,6 @@
 	"description": "KaTeX: mathematical typography",
 	"author": "JeremyRuston",
 	"core-version": ">=5.0.0",
-	"list": "readme usage"
+	"list": "readme usage",
+	"library-version": "v0.10.2"
 }

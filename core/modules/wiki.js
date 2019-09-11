@@ -1388,8 +1388,10 @@ fromPageRect: page coordinates of the origin of the navigation
 historyTitle: title of history tiddler (defaults to $:/HistoryList)
 */
 exports.addToHistory = function(title,fromPageRect,historyTitle) {
-	var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
-	story.addToHistory(title,fromPageRect);
+	if(historyTitle) {
+		var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
+		story.addToHistory(title,fromPageRect);		
+	}
 };
 
 /*
@@ -1400,8 +1402,10 @@ storyTitle: title of story tiddler (defaults to $:/StoryList)
 options: see story.js
 */
 exports.addToStory = function(title,fromTitle,storyTitle,options) {
-	var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
-	story.addToStory(title,fromTitle,options);
+	if(storyTitle) {
+		var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
+		story.addToStory(title,fromTitle,options);		
+	}
 };
 
 /*

@@ -19,6 +19,10 @@ The conditional operators are:
 
 These operators can be combined. For example:
 
-* <<.inline-operator-example "[[New Tiddler]is[missing]then[I am missing]else[No I am not missing]]">>
+<<.inline-operator-example "[[New Tiddler]is[missing]then[I am missing]else[No I am not missing]]">>
+
+The [[else Operator]] can be used to apply a defaults for missing values. In this example, we take advantage of the fact that the [[get Operator]] returns an empty list if the field or tiddler does not exist:
+
+<<.inline-operator-example "[[HelloThere]get[custom-field]else[default-value]]">>
 
 <<list-links "[tag[Conditional Operators]]">>

@@ -23,7 +23,7 @@ Encryption/SetPassword: Indiqueu la contrasenya
 Encryption/Username: Usuari
 Error/Caption: S'ha produït un error
 Error/EditConflict: El fitxer ha canviat al servidor
-Error/Filter: S'ha produït un error de filtre
+Error/Filter: S'ha produït un error del filtre
 Error/FilterSyntax: S'ha produït un error de sintaxi en l'expressió del filtre
 Error/IsFilterOperator: S'ha produït un error del filtre: operant desconegut per a l’operador de filtre "is"
 Error/LoadingPluginLibrary: S'ha produït un error en carregar la biblioteca del connector
@@ -32,11 +32,11 @@ Error/RetrievingSkinny: S'ha produït un error en recuperar la llista de tiddler
 Error/SavingToTWEdit: S'ha produït un error en desar a TWEdit
 Error/WhileSaving: S'ha produït un error en desar
 Error/XMLHttpRequest: Codi d'error XMLHttpRequest
-InternalJavaScriptError/Hint: Bé, això és compromès. Es recomana que reiniciau TiddlyWiki actualitzant el navegador
-InternalJavaScriptError/Title: Error de JavaScript intern
+InternalJavaScriptError/Hint: Bé, això és compromès. Es recomana que reinicieu TiddlyWiki actualitzant el navegador
+InternalJavaScriptError/Title: S'ha produït un error intern de JavaScript
 InvalidFieldName: Hi ha caràcters il·legals al nom del camp "<$text text=<<fieldName>>/>". Els camps només poden utilitzar minúscules, digits i els caràcters subratllat (`_`), guió (`-`) i punt (`.`)
-LazyLoadingWarning: <p>Tractant de carregar contingut extern de ''<$text text={{!!_canonical_uri}}/>''</p><p>Si aquest missatge no desapareix, o bé el tipus de contingut del tiddler no coincideix amb el tipus de contingut extern o bé esteu utilitzant un navegador que no admet contingut extern per als wikis carregats com a fitxers independents. Mireu https://tiddlywiki.com/#ExternalText</p>
-LoginToTiddlySpace: Inicieu sessió a TiddlySpace
+LazyLoadingWarning: <p>S'està tractant de carregar contingut extern de ''<$text text={{!!_canonical_uri}}/>''</p><p>Si aquest missatge no desapareix, o bé el tipus de contingut del tiddler no coincideix amb el tipus de contingut extern o bé esteu utilitzant un navegador que no admet contingut extern per als wikis carregats com a fitxers independents. Mireu https://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: Inicieu la sessió a TiddlySpace
 Manager/Controls/FilterByTag/None: (cap)
 Manager/Controls/FilterByTag/Prompt: Filtra per etiqueta:
 Manager/Controls/Order/Prompt: Ordre invers
@@ -49,7 +49,7 @@ Manager/Item/Colour: Color
 Manager/Item/Fields: Camps
 Manager/Item/Icon: Icona
 Manager/Item/Icon/None: (cap)
-Manager/Item/RawText: Text en brut
+Manager/Item/RawText: Text cru
 Manager/Item/Tags: Etiquetes
 Manager/Item/Tools: Eines
 Manager/Item/WikifiedText: Text en format Wiki
@@ -65,5 +65,6 @@ TagManager/Count/Heading: Compte
 TagManager/Icon/Heading: Icona
 TagManager/Info/Heading: Informació
 TagManager/Tag/Heading: Etiqueta
+Tiddler/DateFormat: DDth de MMM de YYYY a les hh12:0mmam
 UnsavedChangesWarning: Teniu canvis sense desar al TiddlyWiki
 Yes: Sí

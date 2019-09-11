@@ -28,7 +28,7 @@ tags: $:/tags/Macro
 </ol>
 \end
 
-\define toc(tag,sort:"",itemClassFilter:" ")
+\define toc(tag,sort:"",itemClassFilter:"")
 <$macrocall $name="toc-body"  tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> />
 \end
 
@@ -87,7 +87,7 @@ tags: $:/tags/Macro
 <$macrocall $name="toc-linked-expandable-body" tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<excluded>> path=<<path>>/>
 \end
 
-\define toc-expandable(tag,sort:"",itemClassFilter:" ",exclude,path)
+\define toc-expandable(tag,sort:"",itemClassFilter:"",exclude,path)
 <$vars tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}}>
   <$set name="excluded" filter="""[enlist<__exclude__>] [<__tag__>]""">
     <ol class="tc-toc toc-expandable">

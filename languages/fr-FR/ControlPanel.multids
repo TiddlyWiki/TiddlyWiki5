@@ -87,16 +87,19 @@ Saving/DownloadSaver/Caption: Enregistreur de téléchargement
 Saving/DownloadSaver/Hint: Ces paramètres s'appliquent à l'enregistreur de téléchargement compatible HTML5
 Saving/General/Caption: Général
 Saving/General/Hint: Ces paramètres s'appliquent à tous les enregistreurs chargés
-Saving/Hint: Paramètres pour enregistrer le ~TiddlyWiki complet dans un seul fichier, via un module enregistreur
-Saving/GitHub/Branch: Branche cible dans laquelle enregistrer (`master` par défaut)
-Saving/GitHub/Caption: Enregistreur ~GitHub
-Saving/GitHub/Description: Ces paramètres ne sont utilisés que pour l'enregistrement sur ~GitHub
-Saving/GitHub/ServerURL: URL du serveur (`https://api.github.com` par défaut)
-Saving/GitHub/Filename: Nom du fichier cible (par ex. `index.html`)
-Saving/GitHub/Password: Mot de passe, jeton OAUTH, ou //personal access token//
-Saving/GitHub/Path: Chemin vers le fichier cible (par ex. `/wiki/`)
-Saving/GitHub/Repo: //Repository// cible (par ex. `Jermolene/TiddlyWiki5`)
-Saving/GitHub/UserName: Nom d'utilisateur
+Saving/Hint: Paramètres pour enregistrer l'intégralité du TiddlyWiki dans un seul fichier, selon le module d'enregistrement choisi
+Saving/GitService/Branch: Branche cible où doit s'effectuer l'enregistrement
+Saving/GitService/CommitMessage: Enregistré depuis TiddlyWiki
+Saving/GitService/Description: Ces paramètres ne sont utilisés que pour l'enregistrement sur <<service-name>>
+Saving/GitService/Filename: Nom du fichier cible (par ex. `index.html`)
+Saving/GitService/Path: Chemin vers le fichier cible (par ex. `/wiki/`)
+Saving/GitService/Repo: //Repository// cible (par ex. `Jermolene/TiddlyWiki5`)
+Saving/GitService/ServerURL: URL du serveur d'API
+Saving/GitService/UserName: Nom d'utilisateur
+Saving/GitService/GitHub/Caption: Enregistreur ~GitHub
+Saving/GitService/GitHub/Password: Mot de passe, jeton OAUTH, ou //personal access token// (voir [[GitHub help page|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] pour de plus amples détails)
+Saving/GitService/GitLab/Caption: Enregistreur ~GitLab
+Saving/GitService/GitLab/Password: //Personal access token// pour cette API (voir [[GitLab help page|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] pour de plus amples details)
 Saving/TiddlySpot/Advanced/Heading: Paramètres avancés
 Saving/TiddlySpot/BackupDir: Dossier des //sauvegardes//
 Saving/TiddlySpot/Backups: Sauvegardes
