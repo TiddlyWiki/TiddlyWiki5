@@ -21,7 +21,7 @@ A filter operator to randomize the order of the list passed to it.
       return hash;
     }
 
-    var shuffle = function(array, seed) {
+    var shuffle = function(array, seed=0) {
       var currentIndex = array.length, temporaryValue, randomIndex ;
      Math.seedrandom(seed)
 
