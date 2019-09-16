@@ -65,7 +65,7 @@ Command.prototype.execute = function() {
 		// Save each JSON file and collect the skinny data
 		var pathname = path.resolve(self.commander.outputPath,basepath + encodeURIComponent(title) + ".json");
 		$tw.utils.createFileDirectories(pathname);
-		fs.writeFileSync(pathname,JSON.stringify(tiddler,null,$tw.config.preferences.jsonSpaces),"utf8");
+		fs.writeFileSync(pathname,JSON.stringify(tiddler),"utf8");
 		// Collect the skinny list data
 		var pluginTiddlers = JSON.parse(tiddler.text),
 			readmeContent = (pluginTiddlers.tiddlers[title + "/readme"] || {}).text,
