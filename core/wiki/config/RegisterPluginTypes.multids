@@ -1,7 +1,7 @@
 title: $:/config/RegisterPluginType/
 
 plugin: yes
-theme: yes
-language: yes
+theme: no
+language: no
 info: no
 import: no
