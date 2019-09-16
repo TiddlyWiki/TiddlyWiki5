@@ -17,11 +17,12 @@ exports.name = "plugins";
 exports.after = ["load-modules"];
 exports.synchronous = true;
 
-// Stat
-var REQUIRE_RELOAD_DUE_TO_PLUGIN_CHANGE = "$:/status/RequireReloadDueToPluginChange";
+var TITLE_REQUIRE_RELOAD_DUE_TO_PLUGIN_CHANGE = "$:/status/RequireReloadDueToPluginChange";
+
+var PREFIX_CONFIG_REGISTER_PLUGIN_TYPE = "$:/config/RegisterPluginType/";
 
 exports.startup = function() {
-	$tw.wiki.addTiddler({title: REQUIRE_RELOAD_DUE_TO_PLUGIN_CHANGE,text: "no"});
+	$tw.wiki.addTiddler({title: TITLE_REQUIRE_RELOAD_DUE_TO_PLUGIN_CHANGE,text: "no"});
 	$tw.wiki.addEventListener("change",function(changes) {
 		var changesToProcess = [],
 			requireReloadDueToPluginChange = false;
@@ -30,25 +31,27 @@ exports.startup = function() {
 				containsModules = $tw.wiki.doesPluginContainModules(title);
 			if(containsModules) {
 				requireReloadDueToPluginChange = true;
-			} else if(tiddler && tiddler.fields["plugin-type"] === "import") {
-				// Ignore import tiddlers
-			} else {
-				// Otherwise process it
-				changesToProcess.push(title);
+			} else if(tiddler) {
+				var pluginType = tiddler.fields["plugin-type"];
+				if($tw.wiki.getTiddlerText(PREFIX_CONFIG_REGISTER_PLUGIN_TYPE + (tiddler.fields["plugin-type"] || ""),"no") === "yes") {
+					changesToProcess.push(title);
+				}
 			}
 		});
 		if(requireReloadDueToPluginChange) {
-			$tw.wiki.addTiddler({title: REQUIRE_RELOAD_DUE_TO_PLUGIN_CHANGE,text: "yes"});
+			$tw.wiki.addTiddler({title: TITLE_REQUIRE_RELOAD_DUE_TO_PLUGIN_CHANGE,text: "yes"});
 		}
 		// Read or delete the plugin info of the changed tiddlers
-		var changes = $tw.wiki.readPluginInfo(changesToProcess);
-		if(changes.modifiedPlugins.length > 0 || changes.deletedPlugins.length > 0) {
-			// (Re-)register any modified plugins
-			$tw.wiki.registerPluginTiddlers(null,changes.modifiedPlugins);
-			// Unregister any deleted plugins
-			$tw.wiki.unregisterPluginTiddlers(null,changes.deletedPlugins);
-			// Unpack the shadow tiddlers
-			$tw.wiki.unpackPluginTiddlers();
+		if(changesToProcess.length > 0) {
+			var changes = $tw.wiki.readPluginInfo(changesToProcess);
+			if(changes.modifiedPlugins.length > 0 || changes.deletedPlugins.length > 0) {
+				// (Re-)register any modified plugins
+				$tw.wiki.registerPluginTiddlers(null,changes.modifiedPlugins);
+				// Unregister any deleted plugins
+				$tw.wiki.unregisterPluginTiddlers(null,changes.deletedPlugins);
+				// Unpack the shadow tiddlers
+				$tw.wiki.unpackPluginTiddlers();
+			}
 		}
 	});
 };
