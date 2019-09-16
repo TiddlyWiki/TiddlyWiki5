@@ -1450,12 +1450,16 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 	return messages;
 };
 
-// Determine whether a plugin contains JS modules. 
+// Determine whether a plugin by title contains JS modules. 
 exports.doesPluginContainModules = function(title) {
-	var info = this.getPluginInfo(title) || this.getTiddlerDataCached(title);
-	if(info) {
+	return this.doesPluginInfoContainModules(this.getPluginInfo(title) || this.getTiddlerDataCached(title));
+};
+
+// Determine whether a plugin info structure contains JS modules. 
+exports.doesPluginInfoContainModules = function(pluginInfo) {
+	if(pluginInfo) {
 		var foundModule = false;
-		$tw.utils.each(info.tiddlers,function(tiddler) {
+		$tw.utils.each(pluginInfo.tiddlers,function(tiddler) {
 			if(tiddler.type === "application/javascript" && $tw.utils.hop(tiddler,"module-type")) {
 				foundModule = true;
 			}

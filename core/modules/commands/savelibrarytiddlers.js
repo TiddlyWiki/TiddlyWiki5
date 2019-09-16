@@ -69,6 +69,7 @@ Command.prototype.execute = function() {
 		// Collect the skinny list data
 		var pluginTiddlers = JSON.parse(tiddler.text),
 			readmeContent = (pluginTiddlers.tiddlers[title + "/readme"] || {}).text,
+			doesContainJavaScript = !!$tw.wiki.doesPluginInfoContainModules(pluginTiddlers),
 			iconTiddler = pluginTiddlers.tiddlers[title + "/icon"] || {},
 			iconType = iconTiddler.type,
 			iconText = iconTiddler.text,
@@ -76,7 +77,12 @@ Command.prototype.execute = function() {
 		if(iconType && iconText) {
 			iconContent = $tw.utils.makeDataUri(iconText,iconType);
 		}
-		skinnyList.push($tw.utils.extend({},tiddler,{text: undefined, readme: readmeContent, icon: iconContent}));
+		skinnyList.push($tw.utils.extend({},tiddler,{
+			text: undefined,
+			readme: readmeContent,
+			"contains-javascript": doesContainJavaScript ? "yes" : "no",
+			icon: iconContent
+		}));
 	});
 	// Save the catalogue tiddler
 	if(skinnyListTitle) {
