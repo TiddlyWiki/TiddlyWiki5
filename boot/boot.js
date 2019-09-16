@@ -1237,15 +1237,39 @@ $tw.Wiki = function(options) {
 		return null;
 	};
 
-	// Read plugin info for all plugins
-	this.readPluginInfo = function() {
-		for(var title in tiddlers) {
-			var tiddler = tiddlers[title];
-			if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type")) {
-				pluginInfo[tiddler.fields.title] = JSON.parse(tiddler.fields.text);
+	// Get an array of all the currently recognised plugin types
+	this.getPluginTypes = function() {
+		var types = [];
+		$tw.utils.each(pluginTiddlers,function(pluginTiddler) {
+			var pluginType = pluginTiddler.fields["plugin-type"];
+			if(pluginType && types.indexOf(pluginType) === -1) {
+				types.push(pluginType);
 			}
+		});
+		return types;
+	};
 
-		}
+	// Read plugin info for all plugins, or just an array of titles. Returns the number of plugins updated or deleted
+	this.readPluginInfo = function(titles) {
+		var results = {
+			modifiedPlugins: [],
+			deletedPlugins: []
+		};
+		$tw.utils.each(titles || getTiddlerTitles(),function(title) {
+			var tiddler = tiddlers[title];
+			if(tiddler) {
+				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type")) {
+					pluginInfo[tiddler.fields.title] = JSON.parse(tiddler.fields.text);
+					results.modifiedPlugins.push(tiddler.fields.title);
+				}
+			} else {
+				if(pluginInfo[title]) {
+					delete pluginInfo[title];					
+					results.deletedPlugins.push(title);
+				}
+			}
+		});
+		return results;
 	};
 
 	// Get plugin info for a plugin
@@ -1253,14 +1277,15 @@ $tw.Wiki = function(options) {
 		return pluginInfo[title];
 	};
 
-	// Register the plugin tiddlers of a particular type, optionally restricting registration to an array of tiddler titles. Return the array of titles affected
+	// Register the plugin tiddlers of a particular type, or null/undefined for any type, optionally restricting registration to an array of tiddler titles. Return the array of titles affected
 	this.registerPluginTiddlers = function(pluginType,titles) {
 		var self = this,
 			registeredTitles = [],
 			checkTiddler = function(tiddler,title) {
-				if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] === pluginType) {
+				if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] && (!pluginType || tiddler.fields["plugin-type"] === pluginType)) {
 					var disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
 					if(title === "$:/core" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
+						self.unregisterPluginTiddlers(null,[title]); // Unregister the plugin if it's already registered
 						pluginTiddlers.push(tiddler);
 						registeredTitles.push(tiddler.fields.title);
 					}
@@ -1278,19 +1303,19 @@ $tw.Wiki = function(options) {
 		return registeredTitles;
 	};
 
-	// Unregister the plugin tiddlers of a particular type, returning an array of the titles affected
-	this.unregisterPluginTiddlers = function(pluginType) {
+	// Unregister the plugin tiddlers of a particular type, or null/undefined for any type, optionally restricting unregistering to an array of tiddler titles. Returns an array of the titles affected
+	this.unregisterPluginTiddlers = function(pluginType,titles) {
 		var self = this,
-			titles = [];
+			unregisteredTitles = [];
 		// Remove any previous registered plugins of this type
 		for(var t=pluginTiddlers.length-1; t>=0; t--) {
 			var tiddler = pluginTiddlers[t];
-			if(tiddler.fields["plugin-type"] === pluginType) {
-				titles.push(tiddler.fields.title);
+			if(tiddler.fields["plugin-type"] && (!pluginType || tiddler.fields["plugin-type"] === pluginType) && (!titles || titles.indexOf(tiddler.fields.title) !== -1)) {
+				unregisteredTitles.push(tiddler.fields.title);
 				pluginTiddlers.splice(t,1);
 			}
 		}
-		return titles;
+		return unregisteredTitles;
 	};
 
 	// Unpack the currently registered plugins, creating shadow tiddlers for their constituent tiddlers

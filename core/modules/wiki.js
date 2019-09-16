@@ -1450,5 +1450,25 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 	return messages;
 };
 
+// Determine whether a plugin by title contains JS modules. 
+exports.doesPluginContainModules = function(title) {
+	return this.doesPluginInfoContainModules(this.getPluginInfo(title) || this.getTiddlerDataCached(title));
+};
+
+// Determine whether a plugin info structure contains JS modules. 
+exports.doesPluginInfoContainModules = function(pluginInfo) {
+	if(pluginInfo) {
+		var foundModule = false;
+		$tw.utils.each(pluginInfo.tiddlers,function(tiddler) {
+			if(tiddler.type === "application/javascript" && $tw.utils.hop(tiddler,"module-type")) {
+				foundModule = true;
+			}
+		});
+		return foundModule;
+	} else {
+		return null;
+	}
+};
+
 })();
 
