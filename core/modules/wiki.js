@@ -221,6 +221,16 @@ exports.isImageTiddler = function(title) {
 	}
 };
 
+exports.isBinaryTiddler = function(title) {
+	var tiddler = this.getTiddler(title);
+	if(tiddler) {		
+		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"];
+		return !!contentTypeInfo && contentTypeInfo.encoding === "base64";
+	} else {
+		return null;
+	}
+};
+
 /*
 Like addTiddler() except it will silently reject any plugin tiddlers that are older than the currently loaded version. Returns true if the tiddler was imported
 */
