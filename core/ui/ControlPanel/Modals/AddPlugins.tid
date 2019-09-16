@@ -36,7 +36,7 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 </$list>
 </div>
 <div class="tc-plugin-info-chunk">
-<h1><$view tiddler=<<assetInfo>> field="description"/></h1>
+<h1><strong><$text text={{{ [<assetInfo>get[name]] ~[<assetInfo>get[original-title]split[/]last[1]] }}}/></strong>: <$view tiddler=<<assetInfo>> field="description"/></h1>
 <h2><$view tiddler=<<assetInfo>> field="original-title"/></h2>
 <div><em><$view tiddler=<<assetInfo>> field="version"/></em></div>
 </div>
