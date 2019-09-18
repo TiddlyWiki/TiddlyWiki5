@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 ! Major Improvements
 
-Plugins [[can now|https://github.com/Jermolene/TiddlyWiki5/pull/4259]] be loaded or deleted dynamically, without requiring a reload -- as long as they don't contain any ~JavaScript modules. Plugins that require a reload are indicated in the plugin chooser in $:/ControlPanel.
+Plugins [[can now|https://github.com/Jermolene/TiddlyWiki5/pull/4259]] be loaded or deleted dynamically, without requiring a reload -- as long as they don't contain any ~JavaScript modules. Plugins that require a reload are indicated in the plugin chooser in [[$:/ControlPanel]].
 
 ! Translation Improvements
 
@@ -17,6 +17,7 @@ Plugins [[can now|https://github.com/Jermolene/TiddlyWiki5/pull/4259]] be loaded
 
 ! Hackability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1150c87edb7478af6cc943eb0ef52fdf3051c121]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/8c894612914e21cf941a1daa953538c28ce91d8e]]) new `[is[binary]]` operand for the [[is Operator]]
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/68163684a2e57108e160295e445c194268b873c5]] usage of `publishFilter` in save templates -- see SavingMechanism
 
 ! Bug Fixes
