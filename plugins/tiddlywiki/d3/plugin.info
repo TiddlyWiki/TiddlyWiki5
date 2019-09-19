@@ -1,7 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/d3",
-	"description": "D3: data visualisation",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
+	"name": "D3",
+	"description": "D3 data visualisation demo",
 	"list": "readme"
 }

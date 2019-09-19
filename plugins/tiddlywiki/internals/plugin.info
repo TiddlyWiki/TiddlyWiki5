@@ -1,7 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/internals",
+	"name": "Internals",
 	"description": "Tools for exploring the internals of TiddlyWiki",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
 	"list": "readme"
 }

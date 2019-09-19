@@ -1,6 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/codemirror-mode-htmlmixed",
-	"description": "CodeMirror Mode: HTML Highlighting",
-	"author": "JeremyRuston",
+	"name": "CodeMirror Mode HTML Mixed",
+	"description": "HTML mixed highlighting mode for CodeMirror",
 	"list": "readme"
 }
