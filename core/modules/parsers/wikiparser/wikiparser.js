@@ -163,7 +163,7 @@ WikiParser.prototype.skipNewlines = function() {
 };
 
 /*
-Skip '\' [inline whitespace]* newline [whitespace]* at the current position.
+Skip '\' newline at the current position.
 */
 WikiParser.prototype._explicitLinebreakPattern = /\\\r?\n/g;
 WikiParser.prototype.skipExplicitLinebreak = function() {
