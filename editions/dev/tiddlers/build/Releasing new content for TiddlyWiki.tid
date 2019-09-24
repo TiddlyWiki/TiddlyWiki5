@@ -1,8 +1,8 @@
+created: 20190809094421578
+modified: 20190809104210288
 title: Releasing new content for TiddlyWiki
+type: text/vnd.tiddlywiki
 
-# Change current directory to the `TiddlyWiki5` directory
-# Run `../build.jermolene.github.io/bld.sh` to build the content files
-# Run `../build.jermolene.github.io/readme-bld.sh` to build the readmes
-# Commit the readmes to `TiddlyWiki5` and `build.jermolene.github.io` if necessary
-# Verify that the files in the `jermolene.github.io` directory are correct
-# Run `../build.jermolene.github.io/github-push.sh` to push the new files to GitHub
+To update https://tiddlywiki.com with new content, make a Pull Request with the updated tiddlers to the `tiddlywiki-com` branch. As soon as the PR is merged, the [[Continuous Deployment]] system will automatically rebuild the site.
+
+Note that the PR should only include updates within the `editions` folder of the repo.

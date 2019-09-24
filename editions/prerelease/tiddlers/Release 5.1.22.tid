@@ -1,0 +1,32 @@
+caption: 5.1.22
+created: 20190910152413608
+modified: 20190910152413608
+tags: ReleaseNotes
+title: Release 5.1.22
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.21...v5.1.22]]//
+
+! Major Improvements
+
+Plugins [[can now|https://github.com/Jermolene/TiddlyWiki5/pull/4259]] be loaded or deleted dynamically, without requiring a reload -- as long as they don't contain any ~JavaScript modules. Plugins that require a reload are indicated in the plugin chooser in [[$:/ControlPanel]].
+
+! Translation Improvements
+
+* Improved Dutch translation
+
+! Hackability Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1150c87edb7478af6cc943eb0ef52fdf3051c121]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/8c894612914e21cf941a1daa953538c28ce91d8e]]) new `[is[binary]]` operand for the [[is Operator]]
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/68163684a2e57108e160295e445c194268b873c5]] usage of `publishFilter` in save templates -- see SavingMechanism
+
+! Bug Fixes
+
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4243]] problem with the [[GitLab saver|Saving to a Git service]]
+
+! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* [[@gernert|https://github.com/gernert]]
+* [[@Janno|https://github.com/Janno]]
