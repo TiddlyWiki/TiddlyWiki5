@@ -27,7 +27,7 @@ title: $:/core/ui/EditorToolbar/excise-dropdown
 <<lingo Caption/MacroName>> <$edit-text tag="input" tiddler="""$config-title$/macro-title""" default="translink"/>
 </$reveal>
 
-<$button>
+<$button>\
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="excise"

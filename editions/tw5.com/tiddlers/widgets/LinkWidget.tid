@@ -32,7 +32,7 @@ This means that you can control the text of a link tooltip in several ways:
 ```
 <$link to="HelloThere" tooltip="Custom tooltip">Link 1</$link>
 
-<$set name="tv-wikilink-tooltip" value="I'm a link to {{!!title}}">
+<$set name="tv-wikilink-tooltip" value="I'm a link to {{!!title}}">\
 <$link to="HelloThere">Link 2</$link>
 </$set>
 
@@ -42,7 +42,7 @@ Renders as:
 
 <$link to="HelloThere" tooltip="Custom tooltip">Link 1</$link>
 
-<$set name="tv-wikilink-tooltip" value="I'm a link to {{!!title}}">
+<$set name="tv-wikilink-tooltip" value="I'm a link to {{!!title}}">\
 <$link to="HelloThere">Link 2</$link>
 </$set>
 

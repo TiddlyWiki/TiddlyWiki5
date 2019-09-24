@@ -47,7 +47,7 @@ See [[Alice in Wonderland]] for an example. Try opening it without a network con
 
 A new theme called "Tight" uses reduced padding, margins and font-sizes to pack as much text as possible:
 
-<$button>
+<$button>\
 <$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/tight"/>
 Try it out
 </$button> <$button>

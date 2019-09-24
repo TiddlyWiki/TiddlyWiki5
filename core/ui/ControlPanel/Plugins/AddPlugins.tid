@@ -2,6 +2,6 @@ title: $:/core/ui/ControlPanel/Plugins/AddPlugins
 
 \define lingo-base() $:/language/ControlPanel/Plugins/
 
-<$button message="tm-modal" param="$:/core/ui/ControlPanel/Modals/AddPlugins" tooltip={{$:/language/ControlPanel/Plugins/Add/Hint}} class="tc-btn-big-green tc-primary-btn">
+<$button message="tm-modal" param="$:/core/ui/ControlPanel/Modals/AddPlugins" tooltip={{$:/language/ControlPanel/Plugins/Add/Hint}} class="tc-btn-big-green tc-primary-btn">\
 {{$:/core/images/download-button}} <<lingo Add/Caption>>
 </$button>

@@ -25,7 +25,7 @@ The action widgets are passed as a string to the `actions` attribute of the trig
 <$action-sendmessage $message="tm-full-screen"/>
 \end
 
-<$button actions=<<my-actions>>>
+<$button actions=<<my-actions>>>\
 Click me!
 </$button>
 ```
