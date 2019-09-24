@@ -4,5 +4,5 @@
 
 tiddlywiki editions/prerelease \
 	--verbose \
-	--build favicon index \
+	--build favicon index empty \
 	|| exit 1
