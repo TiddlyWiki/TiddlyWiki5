@@ -24,7 +24,7 @@ A second set of filters are designed to either add or remove from the list, a se
 In this example we shall populate the '~DataIndex' index of the tiddler '~MyData' with the names of the days of the week, then clear this list. 
 
 <$macrocall $name='wikitext-example-without-html'
-src="""<$button>
+src="""<$button>\
 <$action-listops $tiddler="ListopsData" $index="DataIndex" $filter="[list[Days of the Week]]"/>
 Get days-of-the-week
 </$button> 
@@ -39,7 +39,7 @@ Clear
 In this example we shall slice the populated list from the 'DaysOfTheWeek' index of the tiddler '~MyData' in order to insert items before and after a marker item (Wednesday) that are first appended to the list.
 
 <$macrocall $name='wikitext-example-without-html'
-src="""<$button>
+src="""<$button>\
 <$action-listops $tiddler="ListopsData" $index="DataIndex" $subfilter="one two +[putbefore:2[Wednesday]]"/>
 Put 2 Items Before Wednesday
 </$button> 
@@ -54,7 +54,7 @@ Put One Item Before & Two Items After Wednesday
 In this example we shall slice the populated list from the 'DaysOfTheWeek' index of the tiddler '~MyData' in order to replace the marker item (Wednesday) with items which are first appended to the list. We shall then move 3 items to the head of the list which have first been appended to the list from referenced fields.
 
 <$macrocall $name='wikitext-example-without-html'
-src="""<$button>
+src="""<$button>\
 <$action-listops $tiddler="ListopsData" $index="DataIndex" $subfilter="[[---o]] [[o---]] +[replace:2{!!marker}]"/>
 Replace '!!marker' with 2 Items
 </$button>
@@ -71,7 +71,7 @@ In this example we shall slice the populated list from the 'DaysOfTheWeek' index
 <$macrocall $name='wikitext-example-without-html'
 src="""|list: |<$view field="list"/> |
 
-<$button>
+<$button>\
 <$action-listops $tiddler="ListopsData" $index="DataIndex" $subfilter="+[allbefore:include[Wednesday]] +[prepend{!!list}]"/>
 Prepend '!!list' to items before 'Wednesday'
 </$button> 
@@ -92,7 +92,7 @@ In this example we shall populate the list with numbers, then move items one by 
 This example illustrates that the append[] and prepend[] operators do not enforce unique instances of an item and that, with the next run, any duplicates are removed.
 
 <$macrocall $name='wikitext-example-without-html'
-src="""<$button>
+src="""<$button>\
 <$action-listops $tiddler="ListopsData" $index="DataIndex" $filter="[[]]" $subfilter="+[append:3{!!numbers}]"/>
 Setup some numbers
 </$button>
@@ -101,7 +101,7 @@ Setup some numbers
 Append more numbers
 </$button>
 
-<$button>
+<$button>\
 <$action-listops $tiddler="ListopsData" $index="DataIndex" $subfilter="+[putfirst:2[]]"/>
 Move last 2 items to the head
 </$button>

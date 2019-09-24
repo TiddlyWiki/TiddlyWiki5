@@ -53,7 +53,7 @@ title: $:/core/ui/EditorToolbar/size-dropdown
 
 </$reveal>
 
-<$button>
+<$button>\
 <$action-sendmessage
 	$message="tm-edit-bitmap-operation"
 	$param="resize"

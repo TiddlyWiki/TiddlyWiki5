@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 New button caption: <$edit-text tiddler="$:/state/new-button-caption" tag="input" default=""/>
 
-<$button>
+<$button>\
 <$action-createtiddler $basetitle="Homemade Button" tags="$:/tags/PageControls" text={{$:/state/new-button-caption}}/>
 Create non-functional page control button
 </$button>
