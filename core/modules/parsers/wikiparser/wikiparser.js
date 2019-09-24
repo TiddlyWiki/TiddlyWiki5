@@ -385,7 +385,7 @@ WikiParser.prototype.pushTextWidget = function(array,text) {
 		text = $tw.utils.trim(text);
 	}
 	if(text) {
-		array.push({type: "text", text: text});		
+		array.push({type: "text", text: text});
 	}
 };
 
@@ -442,4 +442,3 @@ WikiParser.prototype.amendRules = function(type,names) {
 exports["text/vnd.tiddlywiki"] = WikiParser;
 
 })();
-

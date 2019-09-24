@@ -65,4 +65,3 @@ Test the app by visiting http://localhost/MyApp/ in a browser.
 ** `arguments=".\node_modules\tiddlywiki\tiddlywiki.js ./wiki-server --listen username=joe &quot;password=bloggs&quot; port=PORT path-prefix=/MyApp">`
 ** Take note of the need to use double quotes around non-alphanumeric passwords, and to HTML encode them into `&quot;`
 * If you change the settings in the `web.config` file, or modify the app code, then you'll need to restart the server using the IIS manager application
-
