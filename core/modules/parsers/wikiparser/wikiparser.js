@@ -144,14 +144,13 @@ WikiParser.prototype.skip = function(pattern) {
 Skip any whitespace at the current position. Options are:
 	treatNewlinesAsNonWhitespace: true if newlines are NOT to be treated as whitespace
 */
+WikiParser.prototype._whitespacePattern = /\s+/g;
+WikiParser.prototype._inlineWhitespacePattern = /[^\S\n]+/g;
 WikiParser.prototype.skipWhitespace = function(options) {
 	options = options || {};
-	var whitespaceRegExp = options.treatNewlinesAsNonWhitespace ? /([^\S\n]+)/mg : /(\s+)/mg;
-	whitespaceRegExp.lastIndex = this.pos;
-	var whitespaceMatch = whitespaceRegExp.exec(this.source);
-	if(whitespaceMatch && whitespaceMatch.index === this.pos) {
-		this.pos = whitespaceRegExp.lastIndex;
-	}
+	this.skip(options.treatNewlinesAsNonWhitespace ?
+		this._inlineWhitespacePattern : this._whitespacePattern
+	);
 };
 
 /*
