@@ -55,6 +55,9 @@ exports.parse = function() {
 	if(!tag.isSelfClosing && $tw.config.htmlVoidElements.indexOf(tag.tag) === -1) {
 			var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">",
 				reEnd = new RegExp("(" + reEndString + ")","mg");
+		if (tag.tag === 'pre' || tag.tag === 'code') {
+			this.parser.skipNewlines();
+		}
 		if(hasLineBreak) {
 			tag.children = this.parser.parseBlocks(reEndString);
 		} else {
