@@ -8,6 +8,7 @@ type: text/vnd.tiddlywiki
 !! $title$
 
 <$codeblock code={{$title$}}/>
+
 \end
 
 ! Tiddlers
@@ -22,4 +23,3 @@ type: text/vnd.tiddlywiki
 
 <$macrocall $name=".example" n="1"
 eg="""<$transclude tiddler="Sample Headings 1,2,3" mode="block"/>"""/>
-
