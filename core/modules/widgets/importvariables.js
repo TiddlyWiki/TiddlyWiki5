@@ -56,7 +56,7 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 				});
 				widget.computeAttributes();
 				widget.execute();
-				Object.assign(self.variables,widget.variables);
+				$tw.utils.extend(self.variables,widget.variables);
 				parseTreeNode = parseTreeNode.children[0];
 			}
 		} 
