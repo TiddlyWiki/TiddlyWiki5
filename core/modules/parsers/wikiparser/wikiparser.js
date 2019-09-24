@@ -129,6 +129,18 @@ WikiParser.prototype.instantiateRules = function(classes,type,startPos) {
 };
 
 /*
+Skip a thing at the current parse position if it matches the pattern. the pattern must have the g flag set ('search globally').
+*/
+WikiParser.prototype.skip = function(pattern) {
+	var pos = this.pos;  // Performance
+	pattern.lastIndex = pos;
+	var match = pattern.exec(this.source);
+	if(match && match.index === pos) {
+		this.pos = pattern.lastIndex;
+	}
+};
+
+/*
 Skip any whitespace at the current position. Options are:
 	treatNewlinesAsNonWhitespace: true if newlines are NOT to be treated as whitespace
 */
@@ -140,6 +152,14 @@ WikiParser.prototype.skipWhitespace = function(options) {
 	if(whitespaceMatch && whitespaceMatch.index === this.pos) {
 		this.pos = whitespaceRegExp.lastIndex;
 	}
+};
+
+/*
+Skip '[inline whitespace followed by a newline]*' at the current position.
+*/
+WikiParser.prototype._newlinesPattern = /\s*\n/g;
+WikiParser.prototype.skipNewlines = function() {
+	this.skip(this._newlinesPattern);
 };
 
 /*
