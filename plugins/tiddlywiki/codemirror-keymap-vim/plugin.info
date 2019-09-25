@@ -2,5 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/codemirror-keymap-vim",
 	"name": "CodeMirror Keymap Vim",
 	"description": "Keymap compatible with Vim for CodeMirror",
+	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
 	"list": "readme"
 }

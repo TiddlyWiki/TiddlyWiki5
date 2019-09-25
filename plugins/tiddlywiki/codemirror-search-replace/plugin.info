@@ -2,5 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/codemirror-search-replace",
 	"name": "CodeMirror Search and Replace",
 	"description": "Search and replace for CodeMirror",
+	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
 	"list": "readme"
 }

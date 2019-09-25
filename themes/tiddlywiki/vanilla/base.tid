@@ -2073,10 +2073,15 @@ html body.tc-body.tc-single-tiddler-window {
 	display: flex;
 	border: 1px solid <<colour muted-foreground>>;
 	fill: <<colour muted-foreground>>;
-	background-colour: <<colour background>>;
+	background-color: <<colour background>>;
 	margin: 0.5em 0 0.5em 0;
 	padding: 4px;
     align-items: center;
+}
+
+.tc-plugin-info-sub-plugins .tc-plugin-info {
+	margin: 0.5em 1em 0.5em 1em;
+	background: rgba(255,255,0,0.05);
 }
 
 .tc-plugin-info-disabled {
