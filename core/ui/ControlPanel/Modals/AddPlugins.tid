@@ -5,6 +5,13 @@ subtitle: {{$:/core/images/download-button}} {{$:/language/ControlPanel/Plugins/
 <div>
 <$button class={{{ [<assetInfo>get[original-title]get[version]then[tc-reinstall]] tc-btn-invisible tc-install-plugin +[join[ ]] }}}>
 <$action-sendmessage $message="tm-load-plugin-from-library" url={{!!url}} title={{$(assetInfo)$!!original-title}}/>
+<$set name="url" value={{!!url}}>
+<$set name="currentTiddler" value=<<assetInfo>>>
+<$list filter="[enlist{!!dependents}] [{!!parent-plugin}] +[sort[title]]" variable="dependency">
+<$action-sendmessage $message="tm-load-plugin-from-library" url=<<url>> title=<<dependency>>/>
+</$list>
+</$set>
+</$set>
 {{$:/core/images/download-button}}
 <$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion" emptyMessage="""{{$:/language/ControlPanel/Plugins/Install/Caption}}""">
 {{$:/language/ControlPanel/Plugins/Reinstall/Caption}}
@@ -57,6 +64,16 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 {{$:/language/ControlPanel/Plugins/AlreadyInstalled/Hint}}
 </em>
 </$list>
+<$set name="currentTiddler" value=<<assetInfo>>>
+<$list filter="[enlist{!!dependents}] [<currentTiddler>get[parent-plugin]] +[limit[1]]" variable="ignore">
+<div>
+Also requires:
+<$list filter="[enlist{!!dependents}] [{!!parent-plugin}] +[sort[title]]" variable="dependency">
+<$text text=<<dependency>>/>
+</$list>
+</div>
+</$list>
+</$set>
 </div>
 <div class="tc-plugin-info-dropdown-body">
 <$transclude tiddler=<<assetInfo>> field="readme" mode="block"/>

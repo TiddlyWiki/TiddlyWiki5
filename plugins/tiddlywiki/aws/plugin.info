@@ -2,5 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/aws",
 	"name": "AWS",
 	"description": "Amazon Web Services extensions and tools",
-	"list": "readme setup commands lambda"
+	"list": "readme setup commands lambda",
+	"dependents": ["$:/plugins/tiddlywiki/async","$:/plugins/tiddlywiki/jszip"]
 }
