@@ -1,5 +1,5 @@
 created: 20160107222352710
-modified: 20160720145836265
+modified: 20190927205622498
 tags: Plugins
 title: Installing a plugin from the plugin library
 type: text/vnd.tiddlywiki
@@ -17,7 +17,8 @@ Follow these instructions when using TiddlyWiki as a standalone HTML file:
 ## Use the ''search'' box to search the plugin details
 # Click the ''install'' button to install a plugin
 # Save your TiddlyWiki {{$:/core/images/save-button}}
-# ''Refresh the page so that TiddlyWiki loads the new plugin'' {{$:/core/images/refresh-button}}
+# If a yellow warning bar appears at the top of the window,  refresh the window so that TiddlyWiki completes installation of the plugin {{$:/core/images/refresh-button}}
+#* <<.from-version "5.1.22">> It is no longer necessary to refresh TiddlyWiki when deleting plugins that support dynamic loading. See PluginMechanism for more details
 # The plugin should now be available for use
 
 ! Client-Server Configuration
