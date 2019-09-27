@@ -16,7 +16,7 @@ var AndTidWiki = function(wiki) {
 };
 
 AndTidWiki.prototype.save = function(text,method,callback) {
-	if (method === "download") {
+	if (method === "download" && window.twi.saveDownload) {
 		// Support download
 		window.twi.saveDownload(text);
 	} else if (window.twi.saveWiki) {
