@@ -16,23 +16,31 @@ var AndTidWiki = function(wiki) {
 };
 
 AndTidWiki.prototype.save = function(text,method,callback) {
-	// Get the pathname of this document
-	var pathname = decodeURIComponent(document.location.toString().split("#")[0]);
-	// Strip the file://
-	if(pathname.indexOf("file://") === 0) {
-		pathname = pathname.substr(7);
+	if (method === "download") {
+		// Support download
+		window.twi.saveDownload(text);
+	} else if (window.twi.saveWiki) {
+		// Direct save in Tiddloid
+		window.twi.saveWiki(text);
+	} else {
+		// Get the pathname of this document
+		var pathname = decodeURIComponent(document.location.toString().split("#")[0]);
+		// Strip the file://
+		if(pathname.indexOf("file://") === 0) {
+			pathname = pathname.substr(7);
+		}
+		// Strip any query or location part
+		var p = pathname.indexOf("?");
+		if(p !== -1) {
+			pathname = pathname.substr(0,p);
+		}
+		p = pathname.indexOf("#");
+		if(p !== -1) {
+			pathname = pathname.substr(0,p);
+		}
+		// Save the file
+		window.twi.saveFile(pathname,text);
 	}
-	// Strip any query or location part
-	var p = pathname.indexOf("?");
-	if(p !== -1) {
-		pathname = pathname.substr(0,p);
-	}
-	p = pathname.indexOf("#");
-	if(p !== -1) {
-		pathname = pathname.substr(0,p);
-	}
-	// Save the file
-	window.twi.saveFile(pathname,text);
 	// Call the callback
 	callback(null);
 	return true;
@@ -44,7 +52,7 @@ Information about this saver
 AndTidWiki.prototype.info = {
 	name: "andtidwiki",
 	priority: 1600,
-	capabilities: ["save", "autosave"]
+	capabilities: ["save", "autosave", "download"]
 };
 
 /*
