@@ -1460,13 +1460,13 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 	return messages;
 };
 
-// Determine whether a plugin by title contains JS modules. 
-exports.doesPluginContainModules = function(title) {
-	return this.doesPluginInfoContainModules(this.getPluginInfo(title) || this.getTiddlerDataCached(title));
+// Determine whether a plugin by title is dynamically loadable
+exports.doesPluginRequireReload = function(title) {
+	return this.doesPluginInfoRequireReload(this.getPluginInfo(title) || this.getTiddlerDataCached(title));
 };
 
-// Determine whether a plugin info structure contains JS modules. 
-exports.doesPluginInfoContainModules = function(pluginInfo) {
+// Determine whether a plugin info structure is dynamically loadable
+exports.doesPluginInfoRequireReload = function(pluginInfo) {
 	if(pluginInfo) {
 		var foundModule = false;
 		$tw.utils.each(pluginInfo.tiddlers,function(tiddler) {

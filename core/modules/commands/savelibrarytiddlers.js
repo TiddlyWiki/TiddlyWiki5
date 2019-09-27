@@ -69,7 +69,7 @@ Command.prototype.execute = function() {
 		// Collect the skinny list data
 		var pluginTiddlers = JSON.parse(tiddler.text),
 			readmeContent = (pluginTiddlers.tiddlers[title + "/readme"] || {}).text,
-			doesContainJavaScript = !!$tw.wiki.doesPluginInfoContainModules(pluginTiddlers),
+			doesRequireReload = !!$tw.wiki.doesPluginInfoRequireReload(pluginTiddlers),
 			iconTiddler = pluginTiddlers.tiddlers[title + "/icon"] || {},
 			iconType = iconTiddler.type,
 			iconText = iconTiddler.text,
@@ -80,7 +80,7 @@ Command.prototype.execute = function() {
 		skinnyList.push($tw.utils.extend({},tiddler,{
 			text: undefined,
 			readme: readmeContent,
-			"contains-javascript": doesContainJavaScript ? "yes" : "no",
+			"requires-reload": doesRequireReload ? "yes" : "no",
 			icon: iconContent
 		}));
 	});

@@ -19,7 +19,7 @@ subtitle: {{$:/core/images/download-button}} {{$:/language/ControlPanel/Plugins/
 </$button>
 <div>
 </div>
-<$reveal stateTitle=<<assetInfo>> stateField="contains-javascript" type="match" text="yes">{{$:/language/ControlPanel/Plugins/PluginWillRequireReload}}</$reveal>
+<$reveal stateTitle=<<assetInfo>> stateField="requires-reload" type="match" text="yes">{{$:/language/ControlPanel/Plugins/PluginWillRequireReload}}</$reveal>
 </div>
 \end
 
