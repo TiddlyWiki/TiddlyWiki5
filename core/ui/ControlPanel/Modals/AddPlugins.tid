@@ -78,13 +78,15 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 <div class="tc-plugin-info-dropdown-body">
 <$transclude tiddler=<<assetInfo>> field="readme" mode="block"/>
 </div>
-<div class="tc-plugin-info-sub-plugins">
 <$set name="original-title" value={{{ [<assetInfo>get[original-title]] }}}>
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>limit[1]]" variable="ignore">
+<div class="tc-plugin-info-sub-plugins">
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>sort[title]sort[name]]" variable="assetInfo">
 <<display-plugin-info "$type$">>
 </$list>
-</$set>
 </div>
+</$list>
+</$set>
 </div>
 </$reveal>
 </$set>

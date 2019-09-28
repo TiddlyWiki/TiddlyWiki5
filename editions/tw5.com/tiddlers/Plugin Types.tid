@@ -1,5 +1,5 @@
 created: 20190928081810311
-modified: 20190928081811355
+modified: 20190928103750812
 tags: 
 title: Plugin Types
 type: text/vnd.tiddlywiki
@@ -16,3 +16,5 @@ The following plugin types are used internally by the core:
 * `info` - for the special $:/temp/info-plugin tiddler created by the InfoMechanism
 
 While not supported by the plugin library, it is also possible to use custom plugin types to build plugin-like behaviour with a custom user interface. Plugins with a custom type will automatically receive the same behaviour as plain plugins but can display a custom user interface using an appropriate [[view template segment|SystemTag: $:/tags/ViewTemplate]].
+
+By default, tiddlers within plugins with custom plugin types will not be registered as shadow tiddlers (the constituent tiddlers can still be addressed as subtiddlers by the TranscludeWidget, ViewWidget or the [[plugintiddlers Operator]]). Setting a configuration tiddler `$:/config/RegisterPluginType/<plugin-type>` to `yes` will cause the tiddlers within the plugin to be registered as shadow tiddlers.

@@ -2168,6 +2168,7 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 
 .tc-plugin-info-dropdown {
 	border: 1px solid <<colour muted-foreground>>;
+	background: <<colour background>>;
 	margin-top: -8px;
 }
 
@@ -2180,6 +2181,7 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 
 .tc-plugin-info-dropdown-body {
 	padding: 1em 1em 0 1em;
+	background: <<colour background>>;
 }
 
 .tc-plugin-info-sub-plugins {
