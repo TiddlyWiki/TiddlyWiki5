@@ -2179,7 +2179,12 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 }
 
 .tc-plugin-info-dropdown-body {
-	padding: 1em 1em 1em 1em;
+	padding: 1em 1em 0 1em;
+}
+
+.tc-plugin-info-sub-plugins {
+	padding-top: 0.5em;
+	background: <<colour message-background>>;
 }
 
 .tc-plugin-library-listing .tc-install-plugin {

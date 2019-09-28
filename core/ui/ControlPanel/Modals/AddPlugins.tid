@@ -67,7 +67,7 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 <$set name="currentTiddler" value=<<assetInfo>>>
 <$list filter="[enlist{!!dependents}] [<currentTiddler>get[parent-plugin]] +[limit[1]]" variable="ignore">
 <div>
-Also requires:
+{{$:/language/ControlPanel/Plugins/AlsoRequires}}
 <$list filter="[enlist{!!dependents}] [{!!parent-plugin}] +[sort[title]]" variable="dependency">
 <$text text=<<dependency>>/>
 </$list>

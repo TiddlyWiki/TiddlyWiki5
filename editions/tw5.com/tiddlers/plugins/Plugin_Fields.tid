@@ -1,10 +1,8 @@
 created: 20161015122718559
-modified: 20190927172655698
+modified: 20190928083018378
 tags: PluginMechanism
 title: Plugin Fields
 type: text/vnd.tiddlywiki
-
-! Plugin fields
 
 Plugins are stored as tiddlers with the following fields:
 
@@ -14,6 +12,7 @@ Plugins are stored as tiddlers with the following fields:
 |description |Description of plugin |
 |list |Names of exposed plugin information tiddlers (see below) |
 |name |Brief name of the plugin |
+|plugin-priority |//(optional)// Numerical priority (higher numbers install later, the core plugin has a priority of zero |
 |plugin-type |Generally ''plugin'', ''language'' or ''theme''; see PluginMechanism for details |
 |parent-plugin |//(optional)// <<.from-version "5.1.22">> Title of the plugin under which this plugin should be displayed as a sub-plugin in the control panel plugin chooser |
 |source |//(optional)// Source URL of plugin |

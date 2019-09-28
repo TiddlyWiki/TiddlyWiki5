@@ -1,5 +1,5 @@
 created: 20130826122000000
-modified: 20190927172137277
+modified: 20190928082000464
 tags: Mechanisms
 title: PluginMechanism
 type: text/vnd.tiddlywiki
@@ -16,20 +16,21 @@ By convention, plugin titles have the form `$:/plugins/<publisher>/<name>`. Plug
 
 When [[running TiddlyWiki under Node.js|TiddlyWiki on Node.js]], plugins can also be stored as individual tiddler files in [[PluginFolders]].
 
-Plugins have a `plugin-type` field that determines how it is treated. The following values are defined by the core:
+! Plugin Types
 
-* `plugin` - an ordinary plugin
-* `theme` - a theme plugin (see ThemeMechanism). Only the theme plugin named in the tiddler $:/theme is activated at any one time (along with any dependent theme plugins)
-* `language` - a language plugin (see TranslationMechanism). Only the language plugin named in the tiddler $:/language is activated at any one time (along with any dependent language plugins)
+{{Plugin Types}}
 
-The following plugin types are used internally by the core:
+! Plugin Dependencies
 
-* `import` - for the special $:/Import plugin created while importing is in progress
-* `info` - for the special $:/temp/info-plugin tiddler created by the InfoMechanism
+{{Plugin Dependencies}}
 
-Custom plugin types can also be used. They will automatically receive the same behaviour as plain plugins but can display a custom user interface using an appropriate [[view template segment|SystemTag: $:/tags/ViewTemplate]].
+! Plugin Ordering
 
-See [[Plugin Fields]] for details of the other fields used by plugins.
+{{Plugin Ordering}}
+
+! Plugin Fields
+
+{{Plugin Fields}}
 
 ! More information
 

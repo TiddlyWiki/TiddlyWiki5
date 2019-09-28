@@ -63,6 +63,7 @@ Parsing/Pragma/Caption: Pragma Parse Rules
 Plugins/Add/Caption: Get more plugins
 Plugins/Add/Hint: Install plugins from the official library
 Plugins/AlreadyInstalled/Hint: This plugin is already installed at version <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: Also requires:
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: disable
 Plugins/Disable/Hint: Disable this plugin when reloading page
