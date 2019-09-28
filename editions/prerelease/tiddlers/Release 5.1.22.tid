@@ -11,6 +11,12 @@ type: text/vnd.tiddlywiki
 
 Plugins [[can now|https://github.com/Jermolene/TiddlyWiki5/pull/4259]] be loaded or deleted dynamically, without requiring a reload -- as long as they don't contain any ~JavaScript modules. Plugins that require a reload are indicated in the plugin chooser in [[$:/ControlPanel]].
 
+The [[plugin listing|$:/core/ui/ControlPanel/Plugins]] and the [[plugin chooser|$:/core/ui/ControlPanel/Modals/AddPlugins]] in the control panel feature several improvements:
+
+* The plugin chooser now displays plugins that provide add-on functionality to another plugin as nested "sub-plugins", making the main listing easier to navigate
+* Plugins may now declare dependencies that are automatically installed without user intervention
+* All plugins now feature a concise, informal name (in addition to the description and title)
+
 ! Translation Improvements
 
 * Improved Dutch translation
