@@ -9,3 +9,9 @@ eg="""<<tree prefix:"$:/">>"""/>
 
 <$macrocall $name=".example" n="2"
 eg="""<<tree prefix:"tree-macro-example-" separator:"-">>"""/>
+
+<$macrocall $name=".example" n="3"
+eg="""<<tree-compact prefix:"$:/">>"""/>
+
+<$macrocall $name=".example" n="4"
+eg="""<<tree-compact prefix:"tree-macro-example-" separator:"-">>"""/>
