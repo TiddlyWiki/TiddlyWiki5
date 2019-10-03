@@ -93,7 +93,7 @@ Modal.prototype.display = function(title,options) {
 	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		parentWidget: $tw.rootWidget,
 		document: this.srcDocument,
-		variables: variables,
+		variables: $tw.utils.extend({"tv-auto-paragraph": "yes"},variables),
 		importPageMacros: true
 	});
 	bodyWidgetNode.render(modalBody,null);
