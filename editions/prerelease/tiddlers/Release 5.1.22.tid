@@ -29,6 +29,9 @@ The [[plugin listing|$:/core/ui/ControlPanel/Plugins]] and the [[plugin chooser|
 ! Bug Fixes
 
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4243]] problem with the [[GitLab saver|Saving to a Git service]]
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/4237]] bug with permaview button when placed above the search box
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/a054d100e73db95071299e92c4321c2aa8e42382]] usage of ''count'' parameter of [[WidgetMessage: tm-edit-text-operation]]
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/4284]] bug with toc-selective-expandable macro still showing disclosure arrow despite excluding tiddlers
 
 ! Contributors
 
