@@ -3,6 +3,7 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/new-journal-button}} {{$:/language/Buttons/NewJournal/Caption}}
 description: {{$:/language/Buttons/NewJournal/Hint}}
 
+\whitespace trim
 \define journalButton()
 <$button tooltip={{$:/language/Buttons/NewJournal/Hint}} aria-label={{$:/language/Buttons/NewJournal/Caption}} class=<<tv-config-toolbar-class>> actions={{$:/core/ui/Actions/new-journal}}>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
