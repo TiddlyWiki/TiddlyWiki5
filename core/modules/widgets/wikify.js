@@ -47,7 +47,7 @@ WikifyWidget.prototype.execute = function() {
 	// Create the parse tree
 	this.wikifyParser = this.wiki.parseText(this.wikifyType,this.wikifyText,{
 			parseAsInline: this.wikifyMode === "inline",
-			autoParagraph: this.autoParagraph
+			autoParagraph: this.autoParagraph !== "no"
 		});
 	// Create the widget tree 
 	this.wikifyWidgetNode = this.wiki.makeWidget(this.wikifyParser,{

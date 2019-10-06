@@ -90,7 +90,7 @@ ListWidget.prototype.getEmptyMessage = function() {
 	var emptyMessage = this.getAttribute("emptyMessage",""),
 		parser = this.wiki.parseText("text/vnd.tiddlywiki",emptyMessage,{
 			parseAsInline: true,
-			autoParagraph: this.getVariable("tv-auto-paragraph") === "yes"
+			autoParagraph: this.getVariable("tv-auto-paragraph") !== "no"
 		});
 	if(parser) {
 		return parser.tree;

@@ -58,7 +58,7 @@ MacroCallWidget.prototype.execute = function() {
 		var parser = this.wiki.parseText(this.parseType,text,
 							{
 								parseAsInline: !this.parseTreeNode.isBlock,
-								autoParagraph: this.getVariable("tv-auto-paragraph") === "yes"
+								autoParagraph: this.getVariable("tv-auto-paragraph") !== "no"
 							});
 		parseTreeNodes = parser ? parser.tree : [];
 		// Wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"

@@ -56,7 +56,7 @@ TranscludeWidget.prototype.execute = function() {
 						this.transcludeIndex,
 						{
 							parseAsInline: parseAsInline,
-							autoParagraph: this.getVariable("tv-auto-paragraph") === "yes",
+							autoParagraph: this.getVariable("tv-auto-paragraph") !== "no",
 							subTiddler: this.transcludeSubTiddler
 						}),
 		parseTreeNodes = parser ? parser.tree : this.parseTreeNode.children;
