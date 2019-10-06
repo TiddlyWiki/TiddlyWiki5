@@ -3,6 +3,7 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/advanced-search-button}} {{$:/language/Buttons/AdvancedSearch/Caption}}
 description: {{$:/language/Buttons/AdvancedSearch/Hint}}
 
+\whitespace trim
 \define control-panel-button(class)
 <$button to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="""$(tv-config-toolbar-class)$ $class$""">
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
