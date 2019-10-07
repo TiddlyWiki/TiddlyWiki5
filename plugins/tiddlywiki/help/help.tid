@@ -3,6 +3,7 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/help}} {{$:/language/Buttons/Help/Caption}}
 description: {{$:/language/Buttons/Help/Hint}}
 
+\whitespace trim
 \define help-inner()
 \whitespace trim
 <$reveal type="match" state="$:/config/ShowHelp" text="yes">
