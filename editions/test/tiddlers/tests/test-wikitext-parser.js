@@ -35,7 +35,7 @@ describe("WikiText parser tests", function() {
 		);
 	});
 
-	it("should wrap tags in p´s", function() {
+	it("should wrap elements in p´s", function() {
 		expect(parse("<span></span>")).toEqual(
 
 			[ { type : 'element', tag : 'p', children : [ { type : 'element', tag : 'span', isBlock : false, attributes : {  }, children : [ ], start : 0, end : 6 } ] } ]
@@ -49,7 +49,7 @@ describe("WikiText parser tests", function() {
 		expect(parse("<span>some text")).toEqual(parse("<span>some text</span>"));
 	});
 
-	it("should wrap tags in p´s, because of a linebreak escaper, which it skips", function() {
+	it("should wrap elements in p´s, because of a linebreak escaper, which it skips", function() {
 		expect(parse("<span>\\\nsome text\n</span>")).toEqual(
 
 			[ { type : "element", tag : "p", children : [ { type : "element", tag : "span", isBlock : false, attributes : {}, children : [ { type : "text", text : "\nsome text\n" } ], start : 0, end : 6 } ] } ]
@@ -62,7 +62,7 @@ describe("WikiText parser tests", function() {
 		);
 	});
 
-	it("should not wrap tags in p´s and parse their children in inline mode", function() {
+	it("should not wrap elements in p´s and parse their children in inline mode", function() {
 		expect(parse("<div>\n</div>")).toEqual(
 
 			[ { type : 'element', tag : 'div', isBlock : true, attributes : {  }, children: [ { type : 'text', text : '\n' } ], start : 0, end : 5 } ]
@@ -81,7 +81,7 @@ describe("WikiText parser tests", function() {
 		);
 	});
 
-	it("should not wrap pre/code tags in p´s and skip newlines before their children", function() {
+	it("should not wrap pre/code elements in p´s and skip newlines before their children", function() {
 		expect(parse("<pre>\nlet the linebreak avoid the p, then skip it\n</pre>")).toEqual(
 
 			[ { type: "element", tag: "pre", isBlock: true, attributes: {}, children: [ { type: "text", text: "let the linebreak avoid the p, then skip it\n" } ], start: 0, end: 5 } ]
@@ -107,7 +107,7 @@ describe("WikiText parser tests", function() {
 		);
 	});
 
-	it("should parse standalone tags in block and in inline mode", function() {
+	it("should wrap and not wrap standalone elements in p´s", function() {
 		expect(parse("<span/>")).toEqual(
 
 			[ { type : 'element', tag : 'p', children : [ { type : 'element', tag : 'span', isSelfClosing : true, isBlock : false, attributes : {  }, start : 0, end : 7 } ] } ]
