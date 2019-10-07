@@ -48,7 +48,7 @@ exports.parse = function() {
 	// Advance the parser position to past the tag
 	this.parser.pos = tag.end;
 	// <button>\(newline)... -> <button>...
-	this.parser.skipExplicitLinebreak();
+	this.parser.skipLinebreakEscaper();
 	// Check for an immediately following double linebreak
 	var hasLineBreak = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
 	// Set whether we're in block mode
