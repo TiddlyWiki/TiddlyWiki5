@@ -35,7 +35,7 @@ describe("WikiText parser tests", function() {
 		);
 	});
 
-	it("should parse tags in inline mode", function() {
+	it("should wrap tags in p´s", function() {
 		expect(parse("<span></span>")).toEqual(
 
 			[ { type : 'element', tag : 'p', children : [ { type : 'element', tag : 'span', isBlock : false, attributes : {  }, children : [ ], start : 0, end : 6 } ] } ]
@@ -49,8 +49,12 @@ describe("WikiText parser tests", function() {
 		expect(parse("<span>some text")).toEqual(parse("<span>some text</span>"));
 	});
 
-	it("should parse tags in inline mode, allowing pretty formatting", function() {
-		expect(parse("<span>\\\nsome text\n</span>")).toEqual(parse("<span>some text\n</span>"));
+	it("should wrap tags in p´s, because of a linebreak escaper, which it skips", function() {
+		expect(parse("<span>\\\nsome text\n</span>")).toEqual(
+
+			[ { type : "element", tag : "p", children : [ { type : "element", tag : "span", isBlock : false, attributes : {}, children : [ { type : "text", text : "\nsome text\n" } ], start : 0, end : 6 } ] } ]
+
+		);
 		expect(parse("<span>\\some text</span>")).toEqual(
 
 			[ { type : 'element', tag : 'p', children : [ { type : 'element', tag : 'span', isBlock : false, attributes : {  }, children : [ { type : 'text', text : '\\some text' } ], start : 0, end : 6 } ] } ]
@@ -58,7 +62,7 @@ describe("WikiText parser tests", function() {
 		);
 	});
 
-	it("should parse tags in block-inline mode", function() {
+	it("should not wrap tags in p´s and parse their children in inline mode", function() {
 		expect(parse("<div>\n</div>")).toEqual(
 
 			[ { type : 'element', tag : 'div', isBlock : true, attributes : {  }, children: [ { type : 'text', text : '\n' } ], start : 0, end : 5 } ]
@@ -70,35 +74,35 @@ describe("WikiText parser tests", function() {
 
 		);
 		expect(parse("<div>\nsome text")).toEqual(parse("<div>\nsome text</div>"));
-		expect(parse("<div>\n!not a heading\n</div>")).toEqual(
+		expect(parse("<div>\n!i am not a heading\n</div>")).toEqual(
 
-			[ { type : 'element', tag : 'div', isBlock : true, attributes : {  }, children: [ { type : 'text', text : '\n!not a heading\n' } ], start : 0, end : 5 } ]
-
-		);
-	});
-
-	it("should parse tags in block-inline mode - pre/code special case", function() {
-		expect(parse("<pre>\nwe need the linebreak but we dont want to see it\n</pre>")).toEqual(
-
-			[ { type: "element", tag: "pre", isBlock: true, attributes: {}, children: [ { type: "text", text: "we need the linebreak but we dont want to see it\n" } ], start: 0, end: 5 } ]
-
-		);
-		expect(parse("<pre>\n    but keep the indent\n</pre>")).toEqual(
-
-			[ { type: "element", tag: "pre", isBlock: true, attributes: {}, children: [ { type: "text", text: "    but keep the indent\n" } ], start: 0, end: 5 } ]
+			[ { type : 'element', tag : 'div', isBlock : true, attributes : {  }, children: [ { type : 'text', text : '\n!i am not a heading\n' } ], start : 0, end : 5 } ]
 
 		);
 	});
 
-	it("should parse tags in block mode", function() {
-		expect(parse("<div>\n\nsome text wrapped in a p\n\n</div>")).toEqual(
+	it("should not wrap pre/code tags in p´s and skip newlines before their children", function() {
+		expect(parse("<pre>\nlet the linebreak avoid the p, then skip it\n</pre>")).toEqual(
 
-			[ { type : 'element', tag : 'div', start : 0, end : 5, isBlock : true, attributes : { }, children : [ { type : 'element', tag : 'p', children : [ { type : 'text', text : 'some text wrapped in a p' } ] } ] } ]
+			[ { type: "element", tag: "pre", isBlock: true, attributes: {}, children: [ { type: "text", text: "let the linebreak avoid the p, then skip it\n" } ], start: 0, end: 5 } ]
 
 		);
-		expect(parse("<div>\n\n!a heading\n\n</div>")).toEqual(
+		expect(parse("<pre>\n    but keep indents\n</pre>")).toEqual(
 
-			[ { type : 'element', tag : 'div', start : 0, end : 5, isBlock : true, attributes : { }, children : [ { type: "element", tag: "h1", attributes: { class: { type: "string", value: "" } }, children: [ { type: "text", text: "a heading" } ] } ] } ]
+			[ { type: "element", tag: "pre", isBlock: true, attributes: {}, children: [ { type: "text", text: "    but keep indents\n" } ], start: 0, end: 5 } ]
+
+		);
+	});
+
+	it("should not wrap elements in p´s and parse their children in block mode", function() {
+		expect(parse("<div>\n\ni am inside a p\n\n</div>")).toEqual(
+
+			[ { type : 'element', tag : 'div', start : 0, end : 5, isBlock : true, attributes : { }, children : [ { type : 'element', tag : 'p', children : [ { type : 'text', text : 'i am inside a p' } ] } ] } ]
+
+		);
+		expect(parse("<div>\n\n!i am a heading\n\n</div>")).toEqual(
+
+			[ { type : 'element', tag : 'div', start : 0, end : 5, isBlock : true, attributes : { }, children : [ { type: "element", tag: "h1", attributes: { class: { type: "string", value: "" } }, children: [ { type: "text", text: "i am a heading" } ] } ] } ]
 
 		);
 	});
