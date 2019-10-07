@@ -164,7 +164,7 @@ WikiParser.prototype.skipNewlines = function() {
 /*
 Skip '\' newline at the current position.
 */
-WikiParser.prototype._explicitLinebreakPattern = /\\\r?\n/g;
+WikiParser.prototype._explicitLinebreakPattern = /\\(?=\r?\n)/g;
 WikiParser.prototype.skipExplicitLinebreak = function() {
 	this.skip(this._explicitLinebreakPattern);
 };
