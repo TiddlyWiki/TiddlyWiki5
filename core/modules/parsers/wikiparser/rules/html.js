@@ -50,9 +50,9 @@ exports.parse = function() {
 	// <button>\(newline)... -> <button>...
 	this.parser.skipLinebreakEscaper();
 	// Check for an immediately following double linebreak
-	var hasLineBreak = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
+	var twoLinebreaksAfterTagOpener = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
 	// Set whether we're in block mode
-	tag.isBlock = this.is.block || hasLineBreak;
+	tag.isBlock = this.is.block || twoLinebreaksAfterTagOpener;
 	// Parse the body if we need to
 	if(!tag.isSelfClosing && $tw.config.htmlVoidElements.indexOf(tag.tag) === -1) {
 			var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">",
@@ -60,7 +60,7 @@ exports.parse = function() {
 		if (tag.tag === 'pre' || tag.tag === 'code') {
 			this.parser.skipNewlines();
 		}
-		if(hasLineBreak) {
+		if(twoLinebreaksAfterTagOpener) {
 			tag.children = this.parser.parseBlocks(reEndString);
 		} else {
 			tag.children = this.parser.parseInlineRun(reEnd);
