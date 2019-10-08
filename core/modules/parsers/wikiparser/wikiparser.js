@@ -129,70 +129,6 @@ WikiParser.prototype.instantiateRules = function(classes,type,startPos) {
 };
 
 /*
-Skip a thing at the current parse position if it matches the pattern. the pattern must have the g flag set ('search globally').
-*/
-WikiParser.prototype.skip = function(pattern) {
-	var pos = this.pos;  // Performance
-	pattern.lastIndex = pos;
-	var match = pattern.exec(this.source);
-	if(match && match.index === pos) {
-		this.pos = pattern.lastIndex;
-	}
-};
-
-/*
-Skip any whitespace at the current position. Options are:
-	treatNewlinesAsNonWhitespace: true if newlines are NOT to be treated as whitespace
-*/
-WikiParser.prototype._whitespacePattern = /\s+/g;
-WikiParser.prototype._inlineWhitespacePattern = /[^\S\n]+/g;
-WikiParser.prototype.skipWhitespace = function(options) {
-	options = options || {};
-	this.skip(options.treatNewlinesAsNonWhitespace ?
-		this._inlineWhitespacePattern : this._whitespacePattern
-	);
-};
-
-/*
-Skip '[inline whitespace followed by a newline]*' at the current position.
-*/
-WikiParser.prototype._newlinesPattern = /\s*\n/g;
-WikiParser.prototype.skipNewlines = function() {
-	this.skip(this._newlinesPattern);
-};
-
-/*
-Skip '\' newline at the current position.
-*/
-WikiParser.prototype._linebreakEscaperPattern = /\\(?=\r?\n)/g;
-WikiParser.prototype.skipLinebreakEscaper = function() {
-	this.skip(this._linebreakEscaperPattern);
-};
-
-/*
-Get the next match out of an array of parse rule instances
-*/
-WikiParser.prototype.findNextMatch = function(rules,startPos) {
-	// Find the best matching rule by finding the closest match position
-	var matchingRule,
-		matchingRulePos = this.sourceLength;
-	// Step through each rule
-	for(var t=0; t<rules.length; t++) {
-		var ruleInfo = rules[t];
-		// Ask the rule to get the next match if we've moved past the current one
-		if(ruleInfo.matchIndex !== undefined  && ruleInfo.matchIndex < startPos) {
-			ruleInfo.matchIndex = ruleInfo.rule.findNextMatch(startPos);
-		}
-		// Adopt this match if it's closer than the current best match
-		if(ruleInfo.matchIndex !== undefined && ruleInfo.matchIndex <= matchingRulePos) {
-			matchingRule = ruleInfo;
-			matchingRulePos = ruleInfo.matchIndex;
-		}
-	}
-	return matchingRule;
-};
-
-/*
 Parse any pragmas at the beginning of a block of parse text
 */
 WikiParser.prototype.parsePragmas = function() {
@@ -223,22 +159,89 @@ WikiParser.prototype.parsePragmas = function() {
 };
 
 /*
-Parse a block from the current position
-	terminatorRegExpString: optional regular expression string that identifies the end of plain paragraphs. Must not include capturing parenthesis
+Parse a run of text at the current position
+	terminatorRegExp: a regexp at which to stop the run
+	options: see below
+Options available:
+	eatTerminator: move the parse position past any encountered terminator (default false)
 */
-WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
-	var terminatorRegExp = terminatorRegExpString ? new RegExp("(" + terminatorRegExpString + "|\\r?\\n\\r?\\n)","mg") : /(\r?\n\r?\n)/mg;
-	this.skipWhitespace();
-	if(this.pos >= this.sourceLength) {
-		return [];
+WikiParser.prototype.parseInlineRun = function(terminatorRegExp,options) {
+	if(terminatorRegExp) {
+		return this.parseInlineRunTerminated(terminatorRegExp,options);
+	} else {
+		return this.parseInlineRunUnterminated(options);
 	}
-	// Look for a block rule that applies at the current position
-	var nextMatch = this.findNextMatch(this.blockRules,this.pos);
-	if(nextMatch && nextMatch.matchIndex === this.pos) {
-		return nextMatch.rule.parse();
+};
+
+WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,options) {
+	options = options || {};
+	var tree = [];
+	// Find the next occurrence of the terminator
+	terminatorRegExp.lastIndex = this.pos;
+	var terminatorMatch = terminatorRegExp.exec(this.source);
+	// Find the next occurrence of a inlinerule
+	var inlineRuleMatch = this.findNextMatch(this.inlineRules,this.pos);
+	// Loop around until we've reached the end of the text
+	while(this.pos < this.sourceLength && (terminatorMatch || inlineRuleMatch)) {
+		// Return if we've found the terminator, and it precedes any inline rule match
+		if(terminatorMatch) {
+			if(!inlineRuleMatch || inlineRuleMatch.matchIndex >= terminatorMatch.index) {
+				if(terminatorMatch.index > this.pos) {
+					this.pushTextWidget(tree,this.source.substring(this.pos,terminatorMatch.index));
+				}
+				this.pos = terminatorMatch.index;
+				if(options.eatTerminator) {
+					this.pos += terminatorMatch[0].length;
+				}
+				return tree;
+			}
+		}
+		// Process any inline rule, along with the text preceding it
+		if(inlineRuleMatch) {
+			// Preceding text
+			if(inlineRuleMatch.matchIndex > this.pos) {
+				this.pushTextWidget(tree,this.source.substring(this.pos,inlineRuleMatch.matchIndex));
+				this.pos = inlineRuleMatch.matchIndex;
+			}
+			// Process the inline rule
+			tree.push.apply(tree,inlineRuleMatch.rule.parse());
+			// Look for the next inline rule
+			inlineRuleMatch = this.findNextMatch(this.inlineRules,this.pos);
+			// Look for the next terminator match
+			terminatorRegExp.lastIndex = this.pos;
+			terminatorMatch = terminatorRegExp.exec(this.source);
+		}
 	}
-	// Treat it as a paragraph if we didn't find a block rule
-	return [{type: "element", tag: "p", children: this.parseInlineRun(terminatorRegExp)}];
+	// Process the remaining text
+	if(this.pos < this.sourceLength) {
+		this.pushTextWidget(tree,this.source.substr(this.pos));
+	}
+	this.pos = this.sourceLength;
+	return tree;
+};
+
+WikiParser.prototype.parseInlineRunUnterminated = function(options) {
+	var tree = [];
+	// Find the next occurrence of an inline rule
+	var nextMatch = this.findNextMatch(this.inlineRules,this.pos);
+	// Loop around the matches until we've reached the end of the text
+	while(this.pos < this.sourceLength && nextMatch) {
+		// Process the text preceding the run rule
+		if(nextMatch.matchIndex > this.pos) {
+			this.pushTextWidget(tree,this.source.substring(this.pos,nextMatch.matchIndex));
+			this.pos = nextMatch.matchIndex;
+		}
+		// Process the run rule
+		tree.push.apply(tree,nextMatch.rule.parse());
+		// Look for the next run rule
+		nextMatch = this.findNextMatch(this.inlineRules,this.pos);
+	}
+	// Process the remaining text
+	if(this.pos < this.sourceLength) {
+		this.pushTextWidget(tree,this.source.substr(this.pos));
+	}
+	this.pos = this.sourceLength;
+	return tree;
 };
 
 /*
@@ -292,89 +295,45 @@ WikiParser.prototype.parseBlocksTerminated = function(terminatorRegExpString) {
 };
 
 /*
-Parse a run of text at the current position
-	terminatorRegExp: a regexp at which to stop the run
-	options: see below
-Options available:
-	eatTerminator: move the parse position past any encountered terminator (default false)
+Parse a block from the current position
+	terminatorRegExpString: optional regular expression string that identifies the end of plain paragraphs. Must not include capturing parenthesis
 */
-WikiParser.prototype.parseInlineRun = function(terminatorRegExp,options) {
-	if(terminatorRegExp) {
-		return this.parseInlineRunTerminated(terminatorRegExp,options);
-	} else {
-		return this.parseInlineRunUnterminated(options);
+WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
+	var terminatorRegExp = terminatorRegExpString ? new RegExp("(" + terminatorRegExpString + "|\\r?\\n\\r?\\n)","mg") : /(\r?\n\r?\n)/mg;
+	this.skipWhitespace();
+	if(this.pos >= this.sourceLength) {
+		return [];
 	}
+	// Look for a block rule that applies at the current position
+	var nextMatch = this.findNextMatch(this.blockRules,this.pos);
+	if(nextMatch && nextMatch.matchIndex === this.pos) {
+		return nextMatch.rule.parse();
+	}
+	// Treat it as a paragraph if we didn't find a block rule
+	return [{type: "element", tag: "p", children: this.parseInlineRun(terminatorRegExp)}];
 };
 
-WikiParser.prototype.parseInlineRunUnterminated = function(options) {
-	var tree = [];
-	// Find the next occurrence of an inline rule
-	var nextMatch = this.findNextMatch(this.inlineRules,this.pos);
-	// Loop around the matches until we've reached the end of the text
-	while(this.pos < this.sourceLength && nextMatch) {
-		// Process the text preceding the run rule
-		if(nextMatch.matchIndex > this.pos) {
-			this.pushTextWidget(tree,this.source.substring(this.pos,nextMatch.matchIndex));
-			this.pos = nextMatch.matchIndex;
+/*
+Get the next match out of an array of parse rule instances
+*/
+WikiParser.prototype.findNextMatch = function(rules,startPos) {
+	// Find the best matching rule by finding the closest match position
+	var matchingRule,
+		matchingRulePos = this.sourceLength;
+	// Step through each rule
+	for(var t=0; t<rules.length; t++) {
+		var ruleInfo = rules[t];
+		// Ask the rule to get the next match if we've moved past the current one
+		if(ruleInfo.matchIndex !== undefined  && ruleInfo.matchIndex < startPos) {
+			ruleInfo.matchIndex = ruleInfo.rule.findNextMatch(startPos);
 		}
-		// Process the run rule
-		tree.push.apply(tree,nextMatch.rule.parse());
-		// Look for the next run rule
-		nextMatch = this.findNextMatch(this.inlineRules,this.pos);
-	}
-	// Process the remaining text
-	if(this.pos < this.sourceLength) {
-		this.pushTextWidget(tree,this.source.substr(this.pos));
-	}
-	this.pos = this.sourceLength;
-	return tree;
-};
-
-WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,options) {
-	options = options || {};
-	var tree = [];
-	// Find the next occurrence of the terminator
-	terminatorRegExp.lastIndex = this.pos;
-	var terminatorMatch = terminatorRegExp.exec(this.source);
-	// Find the next occurrence of a inlinerule
-	var inlineRuleMatch = this.findNextMatch(this.inlineRules,this.pos);
-	// Loop around until we've reached the end of the text
-	while(this.pos < this.sourceLength && (terminatorMatch || inlineRuleMatch)) {
-		// Return if we've found the terminator, and it precedes any inline rule match
-		if(terminatorMatch) {
-			if(!inlineRuleMatch || inlineRuleMatch.matchIndex >= terminatorMatch.index) {
-				if(terminatorMatch.index > this.pos) {
-					this.pushTextWidget(tree,this.source.substring(this.pos,terminatorMatch.index));
-				}
-				this.pos = terminatorMatch.index;
-				if(options.eatTerminator) {
-					this.pos += terminatorMatch[0].length;
-				}
-				return tree;
-			}
-		}
-		// Process any inline rule, along with the text preceding it
-		if(inlineRuleMatch) {
-			// Preceding text
-			if(inlineRuleMatch.matchIndex > this.pos) {
-				this.pushTextWidget(tree,this.source.substring(this.pos,inlineRuleMatch.matchIndex));
-				this.pos = inlineRuleMatch.matchIndex;
-			}
-			// Process the inline rule
-			tree.push.apply(tree,inlineRuleMatch.rule.parse());
-			// Look for the next inline rule
-			inlineRuleMatch = this.findNextMatch(this.inlineRules,this.pos);
-			// Look for the next terminator match
-			terminatorRegExp.lastIndex = this.pos;
-			terminatorMatch = terminatorRegExp.exec(this.source);
+		// Adopt this match if it's closer than the current best match
+		if(ruleInfo.matchIndex !== undefined && ruleInfo.matchIndex <= matchingRulePos) {
+			matchingRule = ruleInfo;
+			matchingRulePos = ruleInfo.matchIndex;
 		}
 	}
-	// Process the remaining text
-	if(this.pos < this.sourceLength) {
-		this.pushTextWidget(tree,this.source.substr(this.pos));
-	}
-	this.pos = this.sourceLength;
-	return tree;
+	return matchingRule;
 };
 
 /*
@@ -437,6 +396,47 @@ WikiParser.prototype.amendRules = function(type,names) {
 	processRuleArray(this.pragmaRules);
 	processRuleArray(this.blockRules);
 	processRuleArray(this.inlineRules);
+};
+
+/*
+Skip a thing at the current parse position if it matches the pattern. the pattern must have the g flag set ('search globally').
+*/
+WikiParser.prototype.skip = function(pattern) {
+	var pos = this.pos;  // Performance
+	pattern.lastIndex = pos;
+	var match = pattern.exec(this.source);
+	if(match && match.index === pos) {
+		this.pos = pattern.lastIndex;
+	}
+};
+
+/*
+Skip any whitespace at the current position. Options are:
+	treatNewlinesAsNonWhitespace: true if newlines are NOT to be treated as whitespace
+*/
+WikiParser.prototype._whitespacePattern = /\s+/g;
+WikiParser.prototype._inlineWhitespacePattern = /[^\S\n]+/g;
+WikiParser.prototype.skipWhitespace = function(options) {
+	options = options || {};
+	this.skip(options.treatNewlinesAsNonWhitespace ?
+		this._inlineWhitespacePattern : this._whitespacePattern
+	);
+};
+
+/*
+Skip '[inline whitespace followed by a newline]*' at the current position.
+*/
+WikiParser.prototype._newlinesPattern = /\s*\n/g;
+WikiParser.prototype.skipNewlines = function() {
+	this.skip(this._newlinesPattern);
+};
+
+/*
+Skip '\' newline at the current position.
+*/
+WikiParser.prototype._linebreakEscaperPattern = /\\(?=\r?\n)/g;
+WikiParser.prototype.skipLinebreakEscaper = function() {
+	this.skip(this._linebreakEscaperPattern);
 };
 
 exports["text/vnd.tiddlywiki"] = WikiParser;
