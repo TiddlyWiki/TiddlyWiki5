@@ -55,8 +55,8 @@ exports.parse = function() {
 	tag.isBlock = this.is.block || twoLinebreaksAfterTagOpener;
 	// Parse the body if we need to
 	if(!tag.isSelfClosing && $tw.config.htmlVoidElements.indexOf(tag.tag) === -1) {
-			var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">",
-				reEnd = new RegExp("(" + reEndString + ")","mg");
+		var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">",
+			reEnd = new RegExp("(" + reEndString + ")","mg");
 		if (tag.tag === 'pre' || tag.tag === 'code') {
 			this.parser.skipNewlines();
 		}
