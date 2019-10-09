@@ -53,20 +53,24 @@ exports.parse = function() {
 		// Match the next token
 		match = reMatch.exec(this.parser.source);
 	}
-	// Set it for the current file
 	if(tokens.length > 0) {
+		// Set it for the current file
 		if(tokens[0] === "yes") this.parser.autoParagraph = true;
 		else if (tokens[0] === "no") this.parser.autoParagraph = false;
+		// And set it for everything transcluded or otherwise parsed
+		return [{
+			type: "set",
+			attributes: {
+				name: {type: "string", value: "tv-auto-paragraph"},
+				value: {type: "string", value: tokens[0]}
+			},
+			children: []
+		}];
+	} else {
+		return [];
 	}
-	// And set it for everything transcluded or otherwise parsed
-	return [{
-		type: "set",
-		attributes: {
-			name: {type: "string", value: "tv-auto-paragraph"},
-			value: {type: "string", value: tokens[0]}
-		},
-		children: []
-	}];
+	
+	
 };
 
 })();
