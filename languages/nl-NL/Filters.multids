@@ -8,6 +8,7 @@ Orphans: Weestiddlers
 OverriddenShadowTiddlers: Overschreven schaduwtiddlers
 RecentSystemTiddlers: Onlangs gewijzigde tiddlers inclusief systeemtiddlers
 RecentTiddlers: Onlangs gewijzigde tiddlers
+SessionTiddlers: Tiddlers gewijzigf nadat de wiki geleaden werd
 ShadowTiddlers: Schaduwtiddlers
 StoryList: Tiddlers in de 'story river' behalve <$text text="$:/AdvancedSearch"/>
 SystemTags: Systeemlabels

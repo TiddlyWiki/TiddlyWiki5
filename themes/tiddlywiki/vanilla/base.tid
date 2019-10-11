@@ -431,7 +431,8 @@ button svg, button img, label svg, label img {
 	margin: 0;
 	background: none;
 	border: none;
-    cursor: pointer;
+    	cursor: pointer;
+	color: <<colour foreground>>;
 }
 
 .tc-btn-boxed {
@@ -523,6 +524,10 @@ html body.tc-body .tc-btn-rounded:hover svg {
 	width: 2em;
 	vertical-align: middle;
 	fill: <<colour download-foreground>>;
+}
+
+.tc-primary-btn {
+ 	background: <<colour primary>>;
 }
 
 .tc-sidebar-lists input {
@@ -642,6 +647,10 @@ button.tc-tag-label, span.tc-tag-label {
 	vertical-align: baseline;
 	background-color: <<colour tag-background>>;
 	border-radius: 1em;
+}
+
+.tc-sidebar-scrollable .tc-tag-label {
+	text-shadow: none;
 }
 
 .tc-untagged-separator {
@@ -2061,11 +2070,23 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-plugin-info {
-	display: block;
+	display: flex;
 	border: 1px solid <<colour muted-foreground>>;
-	background-colour: <<colour background>>;
+	fill: <<colour muted-foreground>>;
+	background-color: <<colour background>>;
 	margin: 0.5em 0 0.5em 0;
 	padding: 4px;
+    align-items: center;
+}
+
+.tc-plugin-info-sub-plugins .tc-plugin-info {
+	margin: 0.5em 1em 0.5em 1em;
+	background: rgba(255,255,0,0.05);
+}
+
+.tc-plugin-info-sub-plugins .tc-plugin-info-dropdown {
+	margin-left: 1em;
+	margin-right: 1em;
 }
 
 .tc-plugin-info-disabled {
@@ -2090,44 +2111,64 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 }
 
 .tc-plugin-info-chunk {
-	display: inline-block;
-	vertical-align: middle;
+    margin: 2px;
 }
 
-.tc-plugin-info-chunk h1 {
-	font-size: 1em;
-	margin: 2px 0 2px 0;
+.tc-plugin-info-chunk.tc-plugin-info-toggle {
+	flex-grow: 0;
+	flex-shrink: 0;
+	line-height: 1;
 }
 
-.tc-plugin-info-chunk h2 {
+.tc-plugin-info-chunk.tc-plugin-info-icon {
+	flex-grow: 0;
+	flex-shrink: 0;
+	line-height: 1;
+}
+
+.tc-plugin-info-chunk.tc-plugin-info-description {
+	flex-grow: 1;
+}
+
+.tc-plugin-info-chunk.tc-plugin-info-buttons {
 	font-size: 0.8em;
+	line-height: 1.2;
+	flex-grow: 0;
+	flex-shrink: 0;
+    text-align: right;
+}
+
+.tc-plugin-info-chunk.tc-plugin-info-description h1 {
+	font-size: 1em;
+	line-height: 1.2;
 	margin: 2px 0 2px 0;
 }
 
-.tc-plugin-info-chunk div {
+.tc-plugin-info-chunk.tc-plugin-info-description h2 {
+	font-size: 0.8em;
+	line-height: 1.2;
+	margin: 2px 0 2px 0;
+}
+
+.tc-plugin-info-chunk.tc-plugin-info-description div {
 	font-size: 0.7em;
+	line-height: 1.2;
 	margin: 2px 0 2px 0;
 }
 
-.tc-plugin-info:hover > .tc-plugin-info-chunk > img, .tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
-	width: 2em;
-	height: 2em;
-	fill: <<colour foreground>>;
-}
-
-.tc-plugin-info > .tc-plugin-info-chunk > img, .tc-plugin-info > .tc-plugin-info-chunk > svg {
-	width: 2em;
-	height: 2em;
-	fill: <<colour muted-foreground>>;
-}
-
-.tc-plugin-info.tc-small-icon > .tc-plugin-info-chunk > img, .tc-plugin-info.tc-small-icon > .tc-plugin-info-chunk > svg {
+.tc-plugin-info-chunk.tc-plugin-info-toggle img, .tc-plugin-info-chunk.tc-plugin-info-toggle svg {
 	width: 1em;
 	height: 1em;
 }
 
+.tc-plugin-info-chunk.tc-plugin-info-icon img, .tc-plugin-info-chunk.tc-plugin-info-icon svg {
+	width: 2em;
+	height: 2em;
+}
+
 .tc-plugin-info-dropdown {
 	border: 1px solid <<colour muted-foreground>>;
+	background: <<colour background>>;
 	margin-top: -8px;
 }
 
@@ -2139,8 +2180,28 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 }
 
 .tc-plugin-info-dropdown-body {
-	padding: 1em 1em 1em 1em;
+	padding: 1em 1em 0 1em;
+	background: <<colour background>>;
 }
+
+.tc-plugin-info-sub-plugins {
+	padding-top: 0.5em;
+	background: <<colour message-background>>;
+}
+
+.tc-plugin-library-listing .tc-install-plugin {
+	font-weight: bold;
+	background: green;
+	color: white;
+	fill: white;
+	border-radius: 4px;
+	padding: 3px;
+}
+
+.tc-plugin-library-listing .tc-install-plugin.tc-reinstall {
+	background: blue;
+}
+
 
 .tc-check-list {
 	line-height: 2em;

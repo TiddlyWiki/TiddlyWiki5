@@ -11,10 +11,10 @@ description: {{$:/language/Buttons/NewHere/Hint}}
 \end
 \define newHereButton()
 <$button actions=<<newHereActions>> tooltip={{$:/language/Buttons/NewHere/Hint}} aria-label={{$:/language/Buttons/NewHere/Caption}} class=<<tv-config-toolbar-class>>>
-<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/new-here-button}}
 </$list>
-<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/NewHere/Caption}}/>
 </span>

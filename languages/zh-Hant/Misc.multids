@@ -59,7 +59,7 @@ MissingTiddler/Hint: 佚失條目 "<$text text=<<currentTiddler>>/>" - 點擊 {{
 No: 否
 OfficialPluginLibrary: ~TiddlyWiki 官方插件程式庫
 OfficialPluginLibrary/Hint: 此為在 tiddlywiki.com 的 ~TiddlyWiki 官方插件程式庫。由核心團隊維護的插件、主題和語言包。
-PluginReloadWarning: 請儲存 {{$:/core/ui/Buttons/save-wiki}} 並刷新頁面 {{$:/core/ui/Buttons/refresh}} 允許更改插件才能生效
+PluginReloadWarning: 請儲存 {{$:/core/ui/Buttons/save-wiki}} 並刷新頁面 {{$:/core/ui/Buttons/refresh}} ，使 ~JavaScript 插件的更改生效
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 SystemTiddler/Tooltip: 此為系統條目
 SystemTiddlers/Include/Prompt: 包括系統條目

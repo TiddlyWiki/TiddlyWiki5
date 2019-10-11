@@ -119,7 +119,7 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 </td>
 </tr>
 <$set name="dropdownState" value={{$(dropdownStateTitle)$}}>
-<$list filter="[<dropdownState>prefix[open]]" variable="listItem">
+<$list filter="[<dropdownState>match[open]]" variable="listItem">
 <<shortcut-editor>>
 </$list>
 </$set>

@@ -3,7 +3,7 @@ title: $:/core/ui/EditTemplate/body/editor
 <$edit
 
   field="text"
-  class="tc-edit-texteditor"
+  class="tc-edit-texteditor tc-edit-texteditor-body"
   placeholder={{$:/language/EditTemplate/Body/Placeholder}}
   tabindex={{$:/config/EditTabIndex}}
 

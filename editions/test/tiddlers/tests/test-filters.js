@@ -128,6 +128,15 @@ function setupWiki(wikiOptions) {
 // Our tests
 function runTests(wiki) {
 
+	it("should handle the then and else operators", function() {
+		expect(wiki.filterTiddlers("[modifier[JoeBloggs]then[JaneBloggs]]").join(",")).toBe("JaneBloggs");
+		expect(wiki.filterTiddlers("[!modifier[JoeBloggs]then[JaneBloggs]]").join(",")).toBe("JaneBloggs,JaneBloggs,JaneBloggs,JaneBloggs,JaneBloggs");
+		expect(wiki.filterTiddlers("[modifier[DaveBloggs]then[JaneBloggs]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("[modifier[JoeBloggs]else[JaneBloggs]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("[!modifier[JoeBloggs]else[JaneBloggs]]").join(",")).toBe("$:/ShadowPlugin,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[modifier[DaveBloggs]else[JaneBloggs]]").join(",")).toBe("JaneBloggs");
+	});
+
 	it("should handle the ~ prefix", function() {
 		expect(wiki.filterTiddlers("[modifier[JoeBloggs]] ~[[No such tiddler]]").join(",")).toBe("TiddlerOne");
 		expect(wiki.filterTiddlers("[modifier[JaneBloggs]] ~[[No such tiddler]]").join(",")).toBe("No such tiddler");
@@ -224,9 +233,28 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("[all[shadows]tag[two]sort[title]]").join(",")).toBe("$:/TiddlerFive");
 	});
 
+	it("should handle the all operator with field, has and tag operators", function() {
+		expect(wiki.filterTiddlers("[all[shadows]tag[two]]").join(",")).toBe("$:/TiddlerFive");
+		expect(wiki.filterTiddlers("[all[shadows+tiddlers]tag[two]]").join(",")).toBe("$:/TiddlerFive,$:/TiddlerTwo,Tiddler Three");
+		expect(wiki.filterTiddlers("[all[tiddlers+shadows]tag[two]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,$:/TiddlerFive");
+		expect(wiki.filterTiddlers("[all[shadows+tiddlers]]").join(",")).toBe("$:/TiddlerFive,TiddlerSix,TiddlerSeventh,Tiddler8,$:/ShadowPlugin,TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[all[tiddlers+shadows]]").join(",")).toBe("$:/ShadowPlugin,TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one,$:/TiddlerFive,TiddlerSix,TiddlerSeventh,Tiddler8");
+		expect(wiki.filterTiddlers("[all[tiddlers]tag[two]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three");
+	});
+
 	it("should handle the tags operator", function() {
 		expect(wiki.filterTiddlers("[tags[]sort[title]]").join(",")).toBe("one,two");
 		expect(wiki.filterTiddlers("[[TiddlerOne]tags[]sort[title]]").join(",")).toBe("one");
+	});
+
+	it("should handle the match operator", function() {
+		expect(wiki.filterTiddlers("[match[TiddlerOne]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("TiddlerOne TiddlerOne =[match[TiddlerOne]]").join(",")).toBe("TiddlerOne,TiddlerOne");
+		expect(wiki.filterTiddlers("[!match[TiddlerOne]]").join(",")).toBe("$:/ShadowPlugin,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[match:casesensitive[tiddlerone]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("[!match:casesensitive[tiddlerone]]").join(",")).toBe("$:/ShadowPlugin,TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[match:caseinsensitive[tiddlerone]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("[!match:caseinsensitive[tiddlerone]]").join(",")).toBe("$:/ShadowPlugin,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
 	});
 
 	it("should handle the tagging operator", function() {
@@ -294,6 +322,7 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("[search:modifier:regexp[(d|bl)o(ggs|e)]sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three,TiddlerOne");
 		expect(wiki.filterTiddlers("[search:-modifier,authors:[g]sort[title]]").join(",")).toBe("$:/ShadowPlugin,Tiddler Three");
 		expect(wiki.filterTiddlers("[search:*:[g]sort[title]]").join(",")).toBe("$:/ShadowPlugin,Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[search:text:anchored[the]]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler");
 	});
 
 	it("should yield search results that have search tokens spread across different fields", function() {

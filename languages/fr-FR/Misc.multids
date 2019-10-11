@@ -68,6 +68,6 @@ TagManager/Count/Heading: Total
 TagManager/Icon/Heading: Icône
 TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
-Tiddler/DateFormat: DD MMM YYYY à hhhmm
+Tiddler/DateFormat: DD MMM YYYY à hhh0mm
 UnsavedChangesWarning: Vos dernières modifications n'ont pas été sauvegardées dans votre TiddlyWiki
 Yes: Oui

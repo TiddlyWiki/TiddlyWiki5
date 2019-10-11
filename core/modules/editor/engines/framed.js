@@ -158,7 +158,9 @@ FramedEngine.prototype.focus  = function() {
 Handle the focus event
 */
 FramedEngine.prototype.handleFocusEvent = function(event) {
-	this.widget.cancelPopups();
+	if(this.widget.cancelPopups) {
+		this.widget.cancelPopups();		
+	}
 	return true;
 };
 

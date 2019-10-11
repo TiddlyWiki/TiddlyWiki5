@@ -1,7 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/upgrade",
+	"name": "Upgrade",
 	"description": "Upgrade system for TiddlyWiki versions",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
 	"list": "readme"
 }
