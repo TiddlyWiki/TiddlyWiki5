@@ -249,13 +249,6 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	};
 
 	/*
-	Cancel Popups
-	*/
-	EditTextWidget.prototype.cancelPopups = function() {
-		$tw.popup.cancel(0,this.engine.domNode);
-	};
-
-	/*
 	Handle a dom "keydown" event, which we'll bubble up to our container for the keyboard widgets benefit
 	*/
 	EditTextWidget.prototype.handleKeydownEvent = function(event) {
