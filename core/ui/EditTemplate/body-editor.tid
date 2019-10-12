@@ -6,7 +6,7 @@ title: $:/core/ui/EditTemplate/body/editor
   class="tc-edit-texteditor"
   placeholder={{$:/language/EditTemplate/Body/Placeholder}}
   tabindex={{$:/config/EditTabIndex}}
-  focus={{{ [{$:/config/AutoFocus}match[text]then[true]] ~[[false]] }}}
+  focus={{{ [{$:/config/Autofocus}match[text]then[true]] ~[[false]] }}}
 
 ><$set
 
