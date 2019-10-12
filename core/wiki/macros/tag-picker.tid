@@ -7,7 +7,7 @@ tags: $:/tags/Macro
 \end
 
 \define tag-button()
-<$button class="tc-btn-invisible" tag="a">
+<$button class="tc-btn-invisible" tag="a" tooltip={{$:/language/EditTemplate/Tags/Add/Button/Hint}}>
 $(actions)$
 <$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
 <$macrocall $name="tag-pill" tag=<<tag>>/>
