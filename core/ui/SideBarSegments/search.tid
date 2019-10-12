@@ -1,6 +1,7 @@
 title: $:/core/ui/SideBarSegments/search
 tags: $:/tags/SideBarSegment
 
+\whitespace trim
 <div class="tc-sidebar-lists tc-sidebar-search">
 
 <$set name="searchTiddler" value="$:/temp/search">
