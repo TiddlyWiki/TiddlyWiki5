@@ -5,7 +5,7 @@ Advanced/Hint: Internal information about this TiddlyWiki
 Appearance/Caption: Appearance
 Appearance/Hint: Ways to customise the appearance of your TiddlyWiki.
 Basics/AnimDuration/Prompt: Animation duration:
-Basics/AutoFocus/Prompt: Default AutoFocus field:
+Basics/Autofocus/Prompt: Default AutoFocus field:
 Basics/Caption: Basics
 Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">retain story ordering</$button>
 Basics/DefaultTiddlers/Prompt: Default tiddlers:
