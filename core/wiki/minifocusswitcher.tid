@@ -1,6 +1,6 @@
 title: $:/snippets/minifocusswitcher
 
-<$select tiddler="$:/config/AutoFocus">
+<$select tiddler="$:/config/Autofocus">
 <$list filter="title tags text type fields">
 <option value=<<currentTiddler>>><<currentTiddler>></option>
 </$list>
