@@ -13,7 +13,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 \define new-field()
 <$vars name={{$:/temp/newfieldname}}>
 <$reveal type="nomatch" text="" default=<<name>>>
-<$button>
+<$button tooltip=<<lingo Fields/Add/Button/Hint>>>
 <$action-sendmessage $message="tm-add-field"
 $name=<<name>>
 $value={{$:/temp/newfieldvalue}}/>
