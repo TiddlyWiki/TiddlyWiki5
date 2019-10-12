@@ -25,6 +25,14 @@ color:$(foregroundColor)$;
 <$macrocall $name="tag-body-inner" colour="""$colour$""" fallbackTarget={{$palette$##tag-background}} colourA={{$palette$##foreground}} colourB={{$palette$##background}} icon="""$icon$"""/>
 \end
 
+\define tag-picker-actions()
+<$action-listops
+	$tiddler=<<currentTiddler>>
+	$field="tags"
+	$subfilter="[<tag>] [all[current]tags[]]"
+/>
+\end
+
 <div class="tc-edit-tags">
 <$fieldmangler>
 <$list filter="[all[current]tags[]sort[title]]" storyview="pop">
@@ -32,6 +40,6 @@ color:$(foregroundColor)$;
 </$list>
 </$fieldmangler>
 <$set name="tabIndex" value={{$:/config/EditTabIndex}}>
-<$macrocall $name="tag-picker"/>
+<$macrocall $name="tag-picker" actions=<<tag-picker-actions>>/>
 </$set>
 </div>
