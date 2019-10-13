@@ -16,9 +16,11 @@ var AndTidWiki = function(wiki) {
 };
 
 AndTidWiki.prototype.save = function(text,method,callback) {
-	if (method === "download" && window.twi.saveDownload) {
+	if (method === "download") {
 		// Support download
-		window.twi.saveDownload(text);
+		if (window.twi.saveDownload) {
+			window.twi.saveDownload(text);
+		}
 	} else if (window.twi.saveWiki) {
 		// Direct save in Tiddloid
 		window.twi.saveWiki(text);
