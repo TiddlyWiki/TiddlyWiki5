@@ -14,7 +14,8 @@ $(actions)$
 </$button>
 \end
 
-\define tag-picker()
+\define tag-picker(actions)
+<$set name="actions" value="""$actions$""">
 <div class="tc-edit-add-tag">
 <span class="tc-add-tag-name">
 <$keyboard key="ENTER" actions=<<add-tag-actions>>>
@@ -23,7 +24,7 @@ $(actions)$
 </span> <$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button> <span class="tc-add-tag-button">
 <$set name="tag" value={{$:/temp/NewTagName}}>
 <$button set="$:/temp/NewTagName" setTo="" class="">
-<<add-tag-actions>>
+$actions$
 <$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
 {{$:/language/EditTemplate/Tags/Add/Button}}
 </$button>
@@ -45,4 +46,5 @@ $(actions)$
 </div>
 </$reveal>
 </div>
+</$set>
 \end
