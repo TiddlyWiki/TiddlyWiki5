@@ -19,7 +19,7 @@ A customisable [[table of contents|Table-of-Contents Macros]] can be added to th
 # Add a ''caption'' field with the text ''Contents''
 # Add a ''list-after'' field with the text ''~$:/core/ui/SideBar/Open''
 
-Add entries to the table of contents by creating tiddlers tagged ''~TableOfContents''. An easy way is to choose {{$:/core/images/new-here-button}} ''new here'' from the tiddler toolbar of the ''~TableOfContents'' tiddler. 
-(if you don't see the "new here" button, click on the down arrow {{$:/core/images/down-arrow}} to see more menu options.)
+Add entries to the table of contents by creating tiddlers tagged ''~TableOfContents''. An easy way is to choose <<.icon $:/core/images/new-here-button>> ''new here'' from the tiddler toolbar of the ''~TableOfContents'' tiddler. 
+(if you don't see the "new here" button, click on the down arrow <<.icon $:/core/images/down-arrow>> to see more menu options.)
 
 To create child tiddlers (tiddlers that come below other tiddlers), tag them with the name of the parent tiddler.
