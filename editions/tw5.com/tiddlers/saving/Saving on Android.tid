@@ -1,26 +1,28 @@
-caption: ~AndTidWiki
+caption: Tiddloid and Tiddloid Lite
 created: 20130825161400000
 delivery: App
 description: Android app for saving changes locally to device storage
 method: save
-modified: 20171113105950965
+modified: 20191013145728306
 tags: Saving Android
 title: Saving on Android
 type: text/vnd.tiddlywiki
 
-The AndTidWiki app for Android devices makes it possible to edit and save changes to TiddlyWiki5, including working offline without a network connection. [[Download it here|https://play.google.com/store/apps/details?id=de.mgsimon.android.andtidwiki&hl=en]].
+The Tiddloid or Tiddloid Lite app for Android devices makes it possible to edit and save changes to TiddlyWiki. Get it from GitHub: [[Tiddloid|https://github.com/donmor/Tiddloid]] [[Tiddloid Lite|https://github.com/donmor/TiddloidLite]].
 
-Instructions for use:
+''Instructions for use:''
 
-# [[Download]] an empty TiddlyWiki on another web browser
-# Move the file you just downloaded to the directory `/sdcard/andtidwiki`
-#* You may rename it, but be sure to keep the `.html` or `.htm` extension
-# Open AndTidWiki
-#* Don't use ''Menu''/''new ~TiddlyWiki'' menu option (it only supports the older TiddlyWikiClassic)
-# Open the file by touching its filename
-# Try creating a new tiddler using the ''new tiddler'' <<.icon $:/core/images/new-button>> button in the sidebar. Type some content for the tiddler, and click the <<.icon $:/core/images/done-button>> ''ok'' button
-#* The wiki will be saved, and a confirmation message should appear at the top right of the window
+* ''Creating new Wiki''
+** Open Tiddloid or Toddloid Lite and use ''Toolbar or Menu/New Wiki'' option. Choose a destination file path and a new TiddlyWiki5 document will be created and opened.
+* ''Importing existing Wiki''
+** Open Tiddloid or Toddloid Lite and use ''Toolbar or Menu/Import a file'' option. Choose an existing wiki file and it will be imported and opened.
+* ''Opening''
+** You can reopen a wiki created or imported above by clicking its title in the app.
+* ''Saving''
+** Try making some changes and click the {{$:/core/images/save-button}} ''save changes'' button. The wiki will be saved, and a confirmation message should appear at the top right of the window.
+** The wiki will also be saved when clicking the {{$:/core/images/done-button}} ''ok'' button in a tiddler.
 
-''Note:'' You can save your changes by clicking the <<.icon $:/core/images/save-button>> ''save changes'' button in the sidebar even if you have not clicked the <<.icon $:/core/images/done-button>> ''ok'' button to complete editing a tiddler
+''Note:''
 
-//Note that AndTidWiki is published independently of TiddlyWiki//
+*  Tiddloid Lite supports new devices better. It also supports files on clouds like GDrive and ~OneDrive, while Tiddloid keeps the compatibility to TiddlyWikiClassic. For more difference between Tiddloid and  Tiddloid Lite, please visit [[Tiddloid's homepage|https://github.com/donmor/Tiddloid]].
+* You should keep the `.html` or `.htm` extension of the files to be imported.
