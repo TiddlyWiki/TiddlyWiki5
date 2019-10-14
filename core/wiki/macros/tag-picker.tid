@@ -7,24 +7,23 @@ tags: $:/tags/Macro
 \end
 
 \define tag-button()
-<$button class="tc-btn-invisible" tag="a">
-$(actions)$
+<$button class="tc-btn-invisible" tag="a" tooltip={{$:/language/EditTemplate/Tags/Add/Button/Hint}}>
+<$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
 <$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
 <$macrocall $name="tag-pill" tag=<<tag>>/>
 </$button>
 \end
 
-\define tag-picker(actions)
-<$set name="actions" value="""$actions$""">
+\define tag-picker()
 <div class="tc-edit-add-tag">
 <span class="tc-add-tag-name">
 <$keyboard key="ENTER" actions=<<add-tag-actions>>>
-<$edit-text tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>>/>
+<$edit-text tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}}/>
 </$keyboard>
 </span> <$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button> <span class="tc-add-tag-button">
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
-<$button set=<<newTagNameTiddler>> setTo="" class="">
-$actions$
+<$button set="$:/temp/NewTagName" setTo="" class="">
+<<add-tag-actions>>
 <$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
 {{$:/language/EditTemplate/Tags/Add/Button}}
 </$button>
@@ -48,5 +47,4 @@ $actions$
 </div>
 </$reveal>
 </div>
-</$set>
 \end

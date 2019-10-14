@@ -14,19 +14,19 @@ For example, you might use a journal tiddler called ''10th October 2014'' to rec
 
 ! Creating a journal tiddler
 
-The easiest way to create a journal tiddler is to use the ''new journal'' button {{$:/core/images/new-journal-button}} in the ''Tools'' tab of the sidebar. If you find yourself often using the button, click the checkbox next to it to make the button available just above the search box.
+The easiest way to create a journal tiddler is to use the ''new journal'' button <<.icon $:/core/images/new-journal-button>> in the ''Tools'' tab of the sidebar. If you find yourself often using the button, click the checkbox next to it to make the button available just above the search box.
 
 The ''new journal'' button creates a journal entry as a blank tiddler with the tag ''Journal'' and a title derived from today's date. If a journal tiddler with that title already exists, then this is opened for editing.
 
 ! Creating a tagged journal tiddler
 
-A common sequence of actions is to create (or reopen) today's journal entry and tag it with the title of another tiddler. This can be done with the ''new journal here'' button {{$:/core/images/new-journal-button}} in the other tiddler's toolbar. You can find this button in the ''Tools'' tab of the tiddler's InfoPanel.
+A common sequence of actions is to create (or reopen) today's journal entry and tag it with the title of another tiddler. This can be done with the ''new journal here'' button <<.icon $:/core/images/new-journal-button>> in the other tiddler's toolbar. You can find this button in the ''Tools'' tab of the tiddler's InfoPanel.
 
 For example, you might be reviewing a tiddler called ''Oxford Street'' and realise that it's relevant for planning your shopping trip. Click the ''new journal here'' button on the ''Oxford Street'' tiddler to bring up a journal entry tagged with ''Oxford Street''.
 
 ! Customising journal tiddlers
 
-To configure how new journal entries are created, visit the ''Basics'' tab under ''Info'' in the [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}}:
+To configure how new journal entries are created, visit the ''Basics'' tab under ''Info'' in the [[control panel|$:/ControlPanel]] <<.icon $:/core/images/options-button>>:
 
 * "Title of new journal tiddlers" specifies how these tiddlers should be named, as a [[date format string|DateFormat]]. The default setting of `DDth MMM YYYY` causes new entries to have titles of the form "10th October 2014"
 * "Tags for new journal tiddlers" [specifies|Title List] tags that will automatically appear on new journal entries. For example: `Journal [[Summer vacation]]`

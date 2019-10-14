@@ -58,6 +58,7 @@ Palette/ShowEditor/Caption: 显示编辑器
 Plugins/Add/Hint: 从官方插件库安装插件
 Plugins/Add/Caption: 获取更多插件
 Plugins/AlreadyInstalled/Hint: 此插件已经安装版本 <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: 还需要：
 Plugins/Caption: 插件
 Plugins/Disable/Caption: 禁用
 Plugins/Disable/Hint: 重新加载页面时禁用此插件
@@ -74,6 +75,7 @@ Plugins/NoInformation/Hint: 未提供信息
 Plugins/NotInstalled/Hint: 尚未安装此插件
 Plugins/OpenPluginLibrary: 开启插件程式库
 Plugins/ClosePluginLibrary: 关闭插件程式库
+Plugins/PluginWillRequireReload: （需要重新加载）
 Plugins/Plugins/Caption: 插件
 Plugins/Plugins/Hint: 插件
 Plugins/Reinstall/Caption: 重新安装

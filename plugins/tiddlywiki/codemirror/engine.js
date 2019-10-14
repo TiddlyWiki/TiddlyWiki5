@@ -125,9 +125,6 @@ function CodeMirrorEngine(options) {
 		event.stopPropagation(); // Otherwise TW's dropzone widget sees the drop event
 		return false;
 	});
-	this.cm.on("focus",function() {
-		self.widget.cancelPopups();
-	});
 	this.cm.on("keydown",function(cm,event) {
 		return self.widget.handleKeydownEvent.call(self.widget,event);
 	});

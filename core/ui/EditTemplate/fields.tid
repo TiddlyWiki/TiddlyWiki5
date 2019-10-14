@@ -24,7 +24,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 \define new-field()
 <$vars name={{{ [<newFieldNameTiddler>get[text]] }}}>
 <$reveal type="nomatch" text="" default=<<name>>>
-<$button>
+<$button tooltip=<<lingo Fields/Add/Button/Hint>>>
 <$action-sendmessage $message="tm-add-field"
 $name=<<name>>
 $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
@@ -51,7 +51,7 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 <td class="tc-edit-field-name">
 <$text text=<<currentField>>/>:</td>
 <td class="tc-edit-field-value">
-<$edit-text tiddler=<<currentTiddler>> field=<<currentField>> placeholder={{$:/language/EditTemplate/Fields/Add/Value/Placeholder}} tabindex={{$:/config/EditTabIndex}}/>
+<$edit-text tiddler=<<currentTiddler>> field=<<currentField>> placeholder={{$:/language/EditTemplate/Fields/Add/Value/Placeholder}} tabindex={{$:/config/EditTabIndex}} focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] ~[[false]] }}}/>
 </td>
 <td class="tc-edit-field-remove">
 <$button class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Field/Remove/Hint}} aria-label={{$:/language/EditTemplate/Field/Remove/Caption}}>

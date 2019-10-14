@@ -47,6 +47,8 @@ LoadedModules/Hint: Dit zijn de nu geladen tiddler modules gekoppeld aan hun bro
 Palette/Caption: Palet
 Palette/Editor/Clone/Caption: kloon
 Palette/Editor/Clone/Prompt: Het wordt aanbevolen dit schaduwpalet te klonen alvorens het te wijzigen.
+Palette/Editor/Delete/Hint: verwijder deze invoer van het huidige palet
+Palette/Editor/Names/External/Show: Toon namen van kleuren die niet tot het huiddige palet behoren
 Palette/Editor/Prompt: Wijzigen
 Palette/Editor/Prompt/Modified: Dit schaduwpalet is gewijzigd
 Palette/Editor/Reset/Caption: reset
@@ -89,6 +91,27 @@ Saving/DownloadSaver/Caption: Opslagmodule
 Saving/DownloadSaver/Hint: Deze instellingen gelden voor de HTML5 compatibele opslagmodule
 Saving/General/Caption: Algemeen
 Saving/General/Hint: Deze instellingen gelden voor alle geladen opslagmodules
+Saving/GitHub/Branch: 'Tak' (branch) voor opslaan (standaard `master`)
+Saving/GitHub/Caption: ~GitHub opslagmodule
+Saving/GitHub/Description: Deze instellingen worden alleen gebruikt voor opslaan bij ~GitHub
+Saving/GitHub/Filename: Bestandsnaam van doelbestand (b.v. `index.html`)
+
+Saving/GitHub/Password: Wachtwoord, OAUTH token of persoonlijk toegangstoken
+Saving/GitHub/Path: Pad naar doelbestand (b.v. `/wiki/`)
+Saving/GitHub/Repo: Opslagplaats (b.v. `Jermolene/TiddlyWiki5`)
+Saving/GitHub/ServerURL: Server URL (standaard `https://api.github.com`)
+Saving/GitHub/UserName: Gebruikersnaam
+Saving/GitService/Branch: Doeltak (branch) voor opslaan
+Saving/GitService/CommitMessage: Opgeslagen door TiddlyWiki
+Saving/GitService/Description: Deze instellingen worden alleen gebruikt bij opslaan naar <<service-name>>
+Saving/GitService/Filename: Bestandsnaam van doelbestand (b.v. `index.html`)
+Saving/GitService/GitHub/Password: Wachtwoord, OAUTH token, of persoonlijk toegangs-token (zie [[GitHub help-pagina|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] voor details)
+Saving/GitService/GitLab/Caption: ~GitLab opslagmodule
+Saving/GitService/GitLab/Password: Persoonlijk toegangs-token voor API (zie [[GitLab help-pagina|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] voor details)
+
+Saving/GitService/Path: Pad naar doelbestand (b.v. `/wiki/`)
+Saving/GitService/Repo: Opslagdoel (b.v. `Jermolene/TiddlyWiki5`)
+Saving/GitService/UserName: Gebruikersnaam
 Saving/Heading: Opslaan
 Saving/Hint: Instellingen voor opslaan van de gehele TiddlyWiki als één bestand via een opslagmodule
 Saving/TiddlySpot/Advanced/Heading: Geavanceerde instellingen
@@ -141,6 +164,7 @@ Settings/NavigationHistory/Caption: Navigeer-geschiedenis
 Settings/NavigationHistory/Hint: Werk de browsergeschiedenis bij als er naar een tiddler genavigeerd wordt:
 Settings/NavigationHistory/No/Description: Werk de browsergeschiedenis niet bij
 Settings/NavigationHistory/Yes/Description: Werk de browsergeschiedenis bij
+Settings/NavigationPermalinkviewMode/Caption: Permalink/permaview modus
 Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: Kopieer permalink/permaview URL naar klembord
 Settings/NavigationPermalinkviewMode/Hint: Kies hoe permalink/permaview wordt behandeld:
 Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Werk de adresbalk bij met permalink/permaview URL

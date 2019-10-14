@@ -1,8 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/katex",
-	"description": "KaTeX: mathematical typography",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
+	"name": "KaTeX",
+	"description": "KaTeX library for mathematical typography",
 	"list": "readme usage",
 	"library-version": "v0.10.2"
 }
