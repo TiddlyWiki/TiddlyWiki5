@@ -80,6 +80,7 @@ function FramedEngine(options) {
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "blur",handlerObject: this,handlerMethod: "updateGlobalSelections"},
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
+		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
 		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"},
 		{name: "keyup",handlerObject: this,handlerMethod: "updateGlobalSelections"}
