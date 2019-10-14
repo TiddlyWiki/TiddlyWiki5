@@ -57,7 +57,7 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 		callback: function(err,getResponseDataJson,xhr) {
 			var getResponseData,sha = "";
 			if(err && xhr.status !== 404) {
-				return callback(err);					
+				return callback(err);
 			}
 			if(xhr.status !== 404) {
 				getResponseData = JSON.parse(getResponseDataJson);
@@ -65,14 +65,14 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 					if(details.name === filename) {
 						sha = details.sha;
 					}
-				});				
+				});
 			}
 			var data = {
-					message: "Saved by TiddlyWiki",
-					content: $tw.utils.base64Encode(text),
-					branch: branch,
-					sha: sha
-				};
+				message: $tw.language.getRawString("ControlPanel/Saving/GitService/CommitMessage"),
+				content: $tw.utils.base64Encode(text),
+				branch: branch,
+				sha: sha
+			};
 			// Perform a PUT request to save the file
 			$tw.utils.httpRequest({
 				url: uri + filename,

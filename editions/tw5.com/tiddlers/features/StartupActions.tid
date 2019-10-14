@@ -10,7 +10,7 @@ TiddlyWiki executes any ActionWidgets found in tiddlers with the following syste
 * <<tag "$:/tags/StartupAction/Browser">> (only executed when running in the browser)
 * <<tag "$:/tags/StartupAction/Node">> (only executed when running under Node.js)
 
-Startup actions are useful for customising TiddlyWiki according to environmental factors such as the screen size. For example, the following action widgets when placed in a tiddler tagged <<tag "$:/tags/StartupAction/Browser">> will cause the sidebar to be hidden by default when the screen width is less than 1000 pixels:
+Startup actions are useful for customising TiddlyWiki according to environmental factors such as the screen size. For example, the following action widgets when placed in a tiddler tagged `$:/tags/StartupAction/Browser` will cause the sidebar to be hidden by default when the screen width is less than 1000 pixels:
 
 ```
 <$reveal type="lt" state="$:/info/browser/screen/width" text="3000">

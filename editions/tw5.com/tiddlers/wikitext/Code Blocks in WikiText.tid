@@ -5,7 +5,7 @@ tags: WikiText
 title: Code Blocks in WikiText
 type: text/vnd.tiddlywiki
 
-You can use triple backticks <code>&#96;&#96;&#96;</code> to mark code blocks ({{$:/core/images/mono-block}}):
+You can use triple backticks <code>&#96;&#96;&#96;</code> to mark code blocks (<<.icon $:/core/images/mono-block>>):
 
 <pre>
 &#96;&#96;&#96;

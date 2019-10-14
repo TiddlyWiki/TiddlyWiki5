@@ -10,6 +10,7 @@ description: Slice this text tiddler by headings and lists
 Slice this text tiddler into chunks
 \end
 
+<$list filter="[<currentTiddler>!is[image]!is[binary]]" variable="ignore">
 <$button tooltip=<<hint>> aria-label=<<hint>> class=<<tv-config-toolbar-class>>>
 <$action-sendmessage $message="tm-modal" $param="$:/plugins/tiddlywiki/text-slicer/ui/slice-modal" currentTiddler=<<currentTiddler>>/>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
@@ -19,3 +20,4 @@ Slice this text tiddler into chunks
 <span class="tc-btn-text"> Slice tiddler</span>
 </$list>
 </$button>
+</$list>

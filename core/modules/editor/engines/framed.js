@@ -80,7 +80,6 @@ function FramedEngine(options) {
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "blur",handlerObject: this,handlerMethod: "updateGlobalSelections"},
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
-		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
 		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"},
 		{name: "keyup",handlerObject: this,handlerMethod: "updateGlobalSelections"}
@@ -166,14 +165,13 @@ FramedEngine.prototype.focus  = function() {
 		}
 	}
 };
-	
+
 /*
 Handle a focus event
 */
 FramedEngine.prototype.handleFocusEvent = function(event) {
 	this.updateGlobalSelections();
 	$tw.inputManager.updateFocusInput(this.widget.editQualifiedID);
-	this.widget.cancelPopups();
 	return true;
 };
 

@@ -44,8 +44,8 @@ function relinkTiddler(fromTitle,toTitle,options) {
 			var type = tiddler.fields.type || "";
 			// Don't touch plugins or JavaScript modules
 			if(!tiddler.fields["plugin-type"] && type !== "application/javascript") {
-				var tags = (tiddler.fields.tags || []).slice(0),
-					list = (tiddler.fields.list || []).slice(0),
+				var tags = tiddler.fields.tags ? tiddler.fields.tags.slice(0) : undefined,
+					list = tiddler.fields.list ? tiddler.fields.list.slice(0) : undefined,
 					isModified = false;
 				if(!options.dontRenameInTags) {
 					// Rename tags

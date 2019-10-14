@@ -53,7 +53,7 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 		// Otherwise, we'll need to generate it
 		fileInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
 			directory: $tw.boot.wikiTiddlersPath,
-			pathFilters: this.wiki.getTiddlerText("$:/config/FileSystemPaths"),
+			pathFilters: this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n"),
 			wiki: this.wiki
 		});
 		$tw.boot.files[title] = fileInfo;

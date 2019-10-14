@@ -1,26 +1,36 @@
 created: 20130826122000000
-modified: 20161015122959346
+modified: 20190928082000464
 tags: Mechanisms
 title: PluginMechanism
 type: text/vnd.tiddlywiki
 
 ! Introduction
 
-[[Plugins]] are bundles of tiddlers that are distributed and managed as a single unit by being packed into a single JSON tiddler. Users can install them with drag and drop, or using the [[plugin library|Installing a plugin from the plugin library]].
+[[Plugins]] are bundles of tiddlers that are distributed and managed as a single unit. Users can install them with drag and drop, or using the [[plugin library|Installing a plugin from the plugin library]].
 
-The tiddlers within registered plugins behave as ShadowTiddlers: they can be freely overwritten by creating a tiddler with the same title, but deleting that tiddler restores the underlying tiddler value from the plugin.
+<<.from-version "5.1.22">> Plugins that contain JavaScript modules require a reload of the wiki before they will work. Plugins that do not contain JavaScript modules are automatically dynamically loaded and unloaded. 
 
-Plugins have a `plugin-type` field that may take the following values:
+Plugins can be used to package any tiddler content, including JavaScript [[modules|Modules]] that extend and enhance the core TiddlyWiki5 functionality. The tiddlers within registered plugins are ShadowTiddlers: they can be freely overwritten by creating a tiddler with the same title, but deleting that tiddler restores the underlying tiddler value from the plugin.
 
-* `plugin` //(default)// - a plain plugin
-* `theme` - a theme plugin (see ThemeMechanism)
-* `language` - for translations only
-
-Plugins can be used to package ordinary content, or can include JavaScript [[modules|Modules]] that extend and enhance the core TiddlyWiki5 functionality.
-
-Plugins conventionally have a title of the form `$:/plugins/publisher/name`. Plugins that are part of the core TiddlyWiki distribution have titles of the form `$:/plugins/tiddlywiki/name`.
+By convention, plugin titles have the form `$:/plugins/<publisher>/<name>`. Plugins that are part of the core TiddlyWiki distribution have titles of the form `$:/plugins/tiddlywiki/<name>`.
 
 When [[running TiddlyWiki under Node.js|TiddlyWiki on Node.js]], plugins can also be stored as individual tiddler files in [[PluginFolders]].
+
+! Plugin Types
+
+{{Plugin Types}}
+
+! Plugin Dependencies
+
+{{Plugin Dependencies}}
+
+! Plugin Ordering
+
+{{Plugin Ordering}}
+
+! Plugin Fields
+
+{{Plugin Fields}}
 
 ! More information
 

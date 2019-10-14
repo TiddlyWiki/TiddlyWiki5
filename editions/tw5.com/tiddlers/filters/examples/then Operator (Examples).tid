@@ -1,0 +1,9 @@
+created: 20190802113310992
+modified: 20190802113555129
+tags: [[then Operator]] [[Operator Examples]]
+title: then Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[HelloThereMissing]is[missing]then[yes]]">>
+<<.operator-example 2 "[[HelloThere]is[missing]then[yes]]">>
+

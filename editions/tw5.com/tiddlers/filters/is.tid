@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20190225130632157
+modified: 20190916151432497
 tags: [[Filter Operators]] [[Common Operators]] [[Negatable Operators]]
 title: is Operator
 type: text/vnd.tiddlywiki
@@ -16,6 +16,7 @@ The parameter <<.place C>> is one of the following fundamental categories:
 |!Category |!Matches any tiddler title that... |
 |^`current` |is the [[current tiddler|Current Tiddler]] |
 |^`image` |has an image ContentType |
+|^`binary` |has a binary ContentType |
 |^`missing` |does not exist (other than possibly as a shadow tiddler), regardless of whether there are any links to it |
 |^`orphan` |has no [[hard links|Hard and Soft Links]] to it |
 |^`shadow` |is a [[shadow tiddler|ShadowTiddlers]], regardless of whether it has been overridden with a non-shadow tiddler |

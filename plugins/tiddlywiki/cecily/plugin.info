@@ -1,7 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/cecily",
+	"name": "Cecily",
 	"description": "Zoomable storyview (Cecily)",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
 	"list": "readme"
 }

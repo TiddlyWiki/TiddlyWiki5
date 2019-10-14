@@ -1,6 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/codemirror-fullscreen",
-	"description": "CodeMirror AddOn: Fullscreen Editing",
-	"author": "JeremyRuston",
+	"name": "CodeMirror Fullscreen",
+	"description": "Fullscreen editing for CodeMirror",
+	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
 	"list": "readme"
 }

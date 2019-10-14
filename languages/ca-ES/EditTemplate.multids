@@ -2,9 +2,14 @@ title: $:/language/EditTemplate/
 
 Body/External/Hint: Aquest és un tiddler extern desat fora del fitxer del TiddlyWiki principal. Podeu editar les etiquetes i camps però no podeu editar directament el seu contingut
 Body/Placeholder: Escriviu el text per aquest tiddler
+Body/Preview/Type/Output: s
+Field/Dropdown/Caption: llista de camps
+Field/Dropdown/Hint: Mostra la llista de camps
 Field/Remove/Caption: suprimeix el camp
 Field/Remove/Hint: Suprimeix el camp
 Fields/Add/Button: afegeix
+Fields/Add/Dropdown/System: Camps del sistema
+Fields/Add/Dropdown/User: Camps de l'usuari
 Fields/Add/Name/Placeholder: nom del camp
 Fields/Add/Prompt: Afegeix un nou camp
 Fields/Add/Value/Placeholder: valors del camp
@@ -14,6 +19,10 @@ Tags/Add/Button: afegeix
 Tags/Add/Placeholder: nom de l'etiqueta
 Tags/Dropdown/Caption: llista d'etiquetes
 Tags/Dropdown/Hint: Mostra la llista d'etiquetes
+Title/BadCharacterWarning: Avís: eviteu qualsevol dels caràcters <<bad-chars>> al títol d'un tiddler
+Title/Exists/Prompt: El tiddler destinació ja existeix
+Title/References/Prompt: Les referències següents cap aquest tiddler no s'actualitzaran automàticament:
+Title/Relink/Prompt: Actualitza ''<$text text=<<fromTitle>>/>'' cap a ''<$text text=<<toTitle>>/>'' a les //etiquetes// i a la //lista// de camps d'altres tiddlers
 Type/Delete/Caption: suprimeix el tipus de contingut
 Type/Delete/Hint: Suprimeix el tipus de contingut
 Type/Dropdown/Caption: llista del tipus de contingut

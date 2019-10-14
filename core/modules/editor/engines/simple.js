@@ -137,7 +137,6 @@ Handle a dom "focus" event
 SimpleEngine.prototype.handleFocusEvent = function(event) {
 	this.updateGlobalSelections();
 	$tw.inputManager.updateFocusInput(this.widget.editQualifiedID);
-	this.widget.cancelPopups();
 	if(this.widget.editFocusPopup) {
 		$tw.popup.triggerPopup({
 			domNode: this.domNode,
