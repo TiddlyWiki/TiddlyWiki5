@@ -25,7 +25,7 @@ caption: {{$:/language/ControlPanel/Basics/Caption}}
 |<$link to="$:/config/NewTiddler/Tags"><<lingo NewTiddler/Tags/Prompt>></$link> |{{$:/config/NewTiddler/Tags||$:/core/ui/EditTemplate/tags}} |
 |<$link to="$:/config/NewJournal/Text"><<lingo NewJournal/Text/Prompt>></$link> |<$edit tiddler="$:/config/NewJournal/Text" tag="textarea" class="tc-edit-texteditor" default=""/> |
 |<$link to="$:/config/NewJournal/Tags"><<lingo NewJournal/Tags/Prompt>></$link> |{{$:/config/NewJournal/Tags||$:/core/ui/EditTemplate/tags}} |
-|<<lingo AutoFocus/Prompt>> |{{$:/snippets/minifocusswitcher}} |
+|<$link to="$:/config/AutoFocus"><<lingo AutoFocus/Prompt>></$link> |{{$:/snippets/minifocusswitcher}} |
 |<<lingo Language/Prompt>> |{{$:/snippets/minilanguageswitcher}} |
 |<<lingo Tiddlers/Prompt>> |<<show-filter-count "[!is[system]sort[title]]">> |
 |<<lingo Tags/Prompt>> |<<show-filter-count "[tags[]sort[title]]">> |
