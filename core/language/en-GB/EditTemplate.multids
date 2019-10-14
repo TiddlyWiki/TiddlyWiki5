@@ -8,7 +8,7 @@ Field/Remove/Hint: Remove field
 Field/Dropdown/Caption: field list
 Field/Dropdown/Hint: Show field list
 Fields/Add/Button: add
-Fields/Add/Button/Hint: add field
+Fields/Add/Button/Hint: Add the new field to the tiddler
 Fields/Add/Name/Placeholder: field name
 Fields/Add/Prompt: Add a new field:
 Fields/Add/Value/Placeholder: field value

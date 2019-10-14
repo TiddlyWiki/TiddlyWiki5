@@ -10,15 +10,26 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 [[hide]] -[title{$(config-title)$}]
 \end
 
+\define current-tiddler-new-field-selector()
+[data-tiddler-title="$(currentTiddlerCSSescaped)$"] .tc-edit-field-add-name input
+\end
+
+\define new-field-actions()
+<$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
+<$action-deletetiddler $tiddler=<<newFieldNameTiddler>>/>
+<$action-deletetiddler $tiddler=<<newFieldValueTiddler>>/>
+<$action-sendmessage $message="tm-focus-selector" $param=<<current-tiddler-new-field-selector>>/>
+\end
+
 \define new-field()
-<$vars name={{$:/temp/newfieldname}}>
+<$vars name={{{ [<newFieldNameTiddler>get[text]] }}}>
 <$reveal type="nomatch" text="" default=<<name>>>
 <$button tooltip=<<lingo Fields/Add/Button/Hint>>>
 <$action-sendmessage $message="tm-add-field"
 $name=<<name>>
-$value={{$:/temp/newfieldvalue}}/>
-<$action-deletetiddler $tiddler="$:/temp/newfieldname"/>
-<$action-deletetiddler $tiddler="$:/temp/newfieldvalue"/>
+$value={{{ [<newFieldValueTiddler>get[text]] }}}/>
+<$action-deletetiddler $tiddler=<<newFieldNameTiddler>>/>
+<$action-deletetiddler $tiddler=<<newFieldValueTiddler>>/>
 <<lingo Fields/Add/Button>>
 </$button>
 </$reveal>
@@ -67,11 +78,12 @@ $value={{$:/temp/newfieldvalue}}/>
 <$reveal state=<<qualify "$:/state/popup/field-dropdown">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown tc-edit-type-dropdown">
 <$set name="tv-show-missing-links" value="yes">
-<$linkcatcher to="$:/temp/newfieldname">
+<$linkcatcher to=<<newFieldNameTiddler>>>
 <div class="tc-dropdown-item">
 <<lingo Fields/Add/Dropdown/User>>
 </div>
-<$list filter="[!is[shadow]!is[system]fields[]search:title{$:/temp/newfieldname}sort[]] -created -creator -draft.of -draft.title -modified -modifier -tags -text -title -type"  variable="currentField">
+<$set name="newFieldName" value={{{ [<newFieldNameTiddler>get[text]] }}}>
+<$list filter="[!is[shadow]!is[system]fields[]search:title<newFieldName>sort[]] -created -creator -draft.of -draft.title -modified -modifier -tags -text -title -type"  variable="currentField">
 <$link to=<<currentField>>>
 <$text text=<<currentField>>/>
 </$link>
@@ -79,17 +91,22 @@ $value={{$:/temp/newfieldvalue}}/>
 <div class="tc-dropdown-item">
 <<lingo Fields/Add/Dropdown/System>>
 </div>
-<$list filter="[fields[]search:title{$:/temp/newfieldname}sort[]] -[!is[shadow]!is[system]fields[]]" variable="currentField">
+<$list filter="[fields[]search:title<newFieldName>sort[]] -[!is[shadow]!is[system]fields[]]" variable="currentField">
 <$link to=<<currentField>>>
 <$text text=<<currentField>>/>
 </$link>
 </$list>
+</$set>
 </$linkcatcher>
 </$set>
 </div>
 </$reveal>
 <span class="tc-edit-field-add-value">
-<$edit-text tiddler="$:/temp/newfieldvalue" tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Value/Placeholder}} class="tc-edit-texteditor" tabindex={{$:/config/EditTabIndex}}/>
+<$set name="currentTiddlerCSSescaped" value={{{ [<currentTiddler>escapecss[]] }}}>
+<$keyboard key="((add-field))" actions=<<new-field-actions>>>
+<$edit-text tiddler=<<newFieldValueTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Value/Placeholder}} class="tc-edit-texteditor" tabindex={{$:/config/EditTabIndex}}/>
+</$keyboard>
+</$set>
 </span>&nbsp;
 <span class="tc-edit-field-add-button">
 <$macrocall $name="new-field"/>
