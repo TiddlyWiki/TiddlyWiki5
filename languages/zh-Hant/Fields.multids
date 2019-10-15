@@ -30,6 +30,7 @@ source: 條目的網址
 subtitle: 一個 wizard 的副標題
 tags: 條目的標籤清單
 text: 條目的內文
+throttle.refresh: 如果存在，則限制此條目的刷新
 title: 條目的唯一名稱
 toc-link: 若設爲: "no"，則抑制目錄樹中的條目鏈接。
 type: 條目的內容類型
