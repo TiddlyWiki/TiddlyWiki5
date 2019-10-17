@@ -237,6 +237,9 @@ table {
 	caption-side: bottom;
 	margin-top: 1em;
 	margin-bottom: 1em;
+	/* next 2 elements needed, since normalize 8.0.1 */
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
 table th, table td {
