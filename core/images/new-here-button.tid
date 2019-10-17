@@ -10,5 +10,4 @@ tags: $:/tags/Image
         <rect x="96" y="80" width="16" height="48" rx="8"></rect>
         <rect x="80" y="96" width="48" height="16" rx="8"></rect>
     </g>
-    </g>
 </svg>
