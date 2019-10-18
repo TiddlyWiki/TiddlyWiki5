@@ -2,35 +2,30 @@ title: $:/core/macros/tag-picker
 tags: $:/tags/Macro
 
 \define add-tag-actions()
-<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/NewTagName}}/>
-<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
+<$action-sendmessage $message="tm-add-tag" $param={{{ [<newTagNameTiddler>get[text]] }}}/>
+<$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
 \end
 
 \define tag-button(selectedClass)
-<$button class="tc-btn-invisible $selectedClass$" tag="a">
-$(actions)$
-<$action-deletetiddler $tiddler={{{ [[$:/temp/NewTagName/]addsuffix[$(currentTiddler)$]] }}}/>
-<$action-deletetiddler $tiddler={{{ [[$:/temp/NewTagName/Input/]addsuffix[$(currentTiddler)$]] }}}/>
+<$button class="tc-btn-invisible $selectedClass$" tag="a" tooltip={{$:/language/EditTemplate/Tags/Add/Button/Hint}}>
+<$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
+<$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
 <$macrocall $name="tag-pill" tag=<<tag>>/>
 </$button>
 \end
-\define get-css-input-selector()
-[data-tiddler-title="$(currentTiddlerCSSEscaped)$"] .tc-edit-add-tag .tc-add-tag-name input
-\end
 
-\define tag-picker(actions)
-<$vars newTagNameTiddler={{{ [[$:/temp/NewTagName/]addsuffix<currentTiddler>] }}} saveInputTiddler={{{ [[$:/temp/NewTagName/Input/]addsuffix<currentTiddler>] }}} actions=<<__actions__>> currentTiddlerCSSEscaped={{{ [<currentTiddler>escapecss[]] }}}>
+\define tag-picker()
+<$vars saveInputTiddler={{{ [[$:/temp/NewTagName/Input/]addsuffix<currentTiddler>] }}} currentTiddlerCSSEscaped={{{ [<currentTiddler>escapecss[]] }}}>
 <div class="tc-edit-add-tag">
 <span class="tc-add-tag-name">
 <$set name="currentCSSSelector" value=<<get-css-input-selector>>>
-<$macrocall $name="selectable-input" tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" saveTiddler=<<saveInputTiddler>> refreshTiddler=<<qualify "$:/temp/SelectedTag">> filterTiddler="$:/config/ui/tag-picker" refreshQualifier=<<qualify "$:/qualifier/refresh-input">> tabindex={{$:/config/EditTabIndex}}/>
+<$macrocall $name="selectable-input" tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" saveTiddler=<<saveInputTiddler>> refreshTiddler=<<qualify "$:/temp/SelectedTag">> filterTiddler="$:/config/ui/tag-picker" refreshQualifier=<<qualify "$:/qualifier/refresh-input">> tabindex={{$:/config/EditTabIndex}} focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}}/>
 </$set>
 </span> <$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button> <span class="tc-add-tag-button">
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
-<$button setTitle=<<newTagNameTiddler>> setTo="" class="">
-$actions$
+<$button set="$:/temp/NewTagName" setTo="" class="">
+<<add-tag-actions>>
 <$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
-<$action-deletetiddler $tiddler=<<saveInputTiddler>>/>
 {{$:/language/EditTemplate/Tags/Add/Button}}
 </$button>
 </$set>
