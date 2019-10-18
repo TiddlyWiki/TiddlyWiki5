@@ -14,6 +14,10 @@ tags: $:/tags/Macro
 </$button>
 \end
 
+\define get-css-input-selector()
+[data-tiddler-title="$(currentTiddlerCSSEscaped)$"] .tc-edit-add-tag .tc-add-tag-name input
+\end
+
 \define tag-picker()
 <$vars saveInputTiddler={{{ [[$:/temp/NewTagName/Input/]addsuffix<currentTiddler>] }}} currentTiddlerCSSEscaped={{{ [<currentTiddler>escapecss[]] }}}>
 <div class="tc-edit-add-tag">
