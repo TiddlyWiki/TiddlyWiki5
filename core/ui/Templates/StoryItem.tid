@@ -13,13 +13,13 @@ $:/core/ui/Templates/StoryItem
 </div>
 <div class="tc-stories-toolbar">
 <div class="tc-stories-toolbar-item">
-<$button class="tc-btn-invisible"><$action-listops $tiddler="$:/StoryList/Stories" $subfilter="-[<currentTiddler>]"/><$action-deletetiddler $tiddler=<<currentTiddler>>/>{{$:/core/images/close-button}}<$action-sendmessage $message="tm-notify" $param="$:/language/SideBar/Stories/Deletion/Notification" currentTiddler=<<currentTiddler>>/></$button>
+<$button class="tc-btn-invisible"><$action-listops $tiddler="$:/StoryList/Stories" $subfilter="-[<currentTiddler>]"/><$action-deletetiddler $tiddler=<<currentTiddler>>/>{{$:/core/images/close-button}}</$button>
 </div>
 <div class="tc-stories-toolbar-item">
 <$button class="tc-btn-invisible">{{$:/core/images/edit-button}}<$action-sendmessage $message="tm-edit-tiddler" $param=<<currentTiddler>>/></$button>
 </div>
 <div class="tc-stories-toolbar-item">
-<$button class="tc-btn-invisible"><$action-setfield $tiddler=<<currentTiddler>> list={{$:/StoryList!!list}}/>{{$:/core/images/refresh-button}}<$action-sendmessage $message="tm-notify" $param="$:/language/SideBar/Stories/Update/Notification" currentTiddler=<<currentTiddler>>/></$button>
+<$button class="tc-btn-invisible"><$action-setfield $tiddler=<<currentTiddler>> list={{$:/StoryList!!list}}/>{{$:/core/images/refresh-button}}</$button>
 </div>
 </div>
 </div>
