@@ -1,0 +1,17 @@
+title: $:/core/ui/MoreSideBar/Stories
+tags: $:/tags/MoreSideBar
+
+\whitespace trim
+\define lingo-base() $:/language/SideBar/Stories/
+\define actions()
+<$action-createtiddler $basetitle="$:/Stories/Story" $savetitle="$:/temp/Story/Save" tags="$:/tags/Story"/><$list filter="[{$:/temp/Stories/New/Caption}!match[]]"><$action-setfield $tiddler={{$:/temp/Story/Save}} caption={{$:/temp/Stories/New/Caption}}/><$action-deletetiddler $tiddler="$:/temp/Stories/New/Caption"/></$list>
+<$list filter="[list[$:/StoryList]]"><$action-listops $tiddler={{$:/temp/Story/Save}} $subfilter="[<currentTiddler>]"/></$list>
+\end
+<div class="tc-sidebar-stories">
+<$keyboard key="enter" actions=<<actions>>>
+<$edit-text tiddler="$:/temp/Stories/New/Caption" tag="input" default="" placeholder={{$:/language/SideBar/Stories/New/Prompt}}/></$keyboard>&nbsp;&nbsp;
+<$button tooltip={{$:/language/SideBar/Stories/New/Hint}}><<lingo "New/Add">><<actions>></$button>
+<hr>
+<div class="tc-stories-list">
+<$macrocall $name="list-tagged-draggable" tag="$:/tags/Story" itemTemplate="$:/core/ui/Templates/StoryItem" emptyMessage="" subFilter="!has[draft.of]" storyview="pop"/>
+</div>
