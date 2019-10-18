@@ -1,0 +1,39 @@
+.tc-sidebar-stories input {
+position: relative;
+max-width: 60%;
+}
+
+.tc-stories-list .tc-stories-list-item {
+position: relative;
+max-width: 100%;
+width: 100%;
+background-color: <<colour tiddler-background>>;
+color: <<colour foreground>>;
+padding: 0.5em;
+margin-bottom: 0.5em;
+border-radius: 2px;
+}
+
+.tc-stories-list .tc-stories-toolbar-item {
+display: inline-block;
+}
+
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/Story]has[color]get[color]]">
+
+.tc-stories-{{{ [<currentTiddler>escapecss[]] }}} .tc-stories-icon {
+color: <<currentTiddler>>;
+}
+
+.tc-stories-{{{ [<currentTiddler>escapecss[]] }}} .tc-stories-icon svg {
+fill: <<currentTiddler>>;
+}
+
+.tc-stories-{{{ [<currentTiddler>escapecss[]] }}} .tc-stories-list-item {
+border: 2px solid <<currentTiddler>>;
+}
+
+</$list>
+
+.tc-stories-title {
+display: inline-block;
+}
