@@ -1,0 +1,31 @@
+$:/core/ui/Templates/StoryItem
+
+\define get-color-class() tc-stories-$(color)$
+\define stories-list-row()
+<$set name="color" value={{!!color}}><span class=<<get-color-class>>>
+<$draggable tiddler=<<currentTiddler>> class="tc-stories-list-item">
+<div class="tc-stories-list-info">
+<$linkcatcher actions="""<$action-setfield $tiddler="$:/StoryList" list={{{ [<navigateTo>get[list]] }}}/>""">
+<$link><$list filter="[<currentTiddler>has[icon]]" variable="ignore"><div class="tc-stories-icon"><$transclude tiddler={{!!icon}}/></div></$list><div class="tc-stories-title"><$view field="caption"><$view field="title"/></$view></div></$link>
+</$linkcatcher>
+<div class="tc-stories-content">
+<$transclude mode="block"/>
+</div>
+<div class="tc-stories-toolbar">
+<div class="tc-stories-toolbar-item">
+<$button class="tc-btn-invisible"><$action-listops $tiddler="$:/StoryList/Stories" $subfilter="-[<currentTiddler>]"/><$action-deletetiddler $tiddler=<<currentTiddler>>/>{{$:/core/images/close-button}}<$action-sendmessage $message="tm-notify" $param="$:/language/SideBar/Stories/Deletion/Notification" currentTiddler=<<currentTiddler>>/></$button>
+</div>
+<div class="tc-stories-toolbar-item">
+<$button class="tc-btn-invisible">{{$:/core/images/edit-button}}<$action-sendmessage $message="tm-edit-tiddler" $param=<<currentTiddler>>/></$button>
+</div>
+<div class="tc-stories-toolbar-item">
+<$button class="tc-btn-invisible"><$action-setfield $tiddler=<<currentTiddler>> list={{$:/StoryList!!list}}/>{{$:/core/images/refresh-button}}<$action-sendmessage $message="tm-notify" $param="$:/language/SideBar/Stories/Update/Notification" currentTiddler=<<currentTiddler>>/></$button>
+</div>
+</div>
+</div>
+</$draggable>
+</span>
+</$set>
+\end
+
+<<stories-list-row>>
