@@ -3,7 +3,10 @@ tags: $:/tags/EditToolbar $:/tags/ViewToolbar
 caption: {{$:/core/images/delete-button}} {{$:/language/Buttons/Delete/Caption}}
 description: {{$:/language/Buttons/Delete/Hint}}
 
-<$button message="tm-delete-tiddler" tooltip={{$:/language/Buttons/Delete/Hint}} aria-label={{$:/language/Buttons/Delete/Caption}} class=<<tv-config-toolbar-class>>>
+\define focus-selector()
+[data-tiddler-title="$(cssEscapedTitle)$"].tc-tiddler-frame input
+\end
+<$button actions="""<$list filter="[list[$:/StoryList]after<currentTiddler>]"><$set name="cssEscapedTitle" value={{{ [<currentTiddler>escapecss[]] }}}><$action-sendmessage $message="tm-focus-selector" $param=<<focus-selector>>/></$set></$list><$action-sendmessage $message="tm-delete-tiddler"/>""" tooltip={{$:/language/Buttons/Delete/Hint}} aria-label={{$:/language/Buttons/Delete/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/delete-button}}
 </$list>
