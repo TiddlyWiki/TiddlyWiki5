@@ -18,9 +18,25 @@ This is my nice and simple block of text. HelloThere
 
 ! Block mode versus Inline mode
 
-To get the content of an HTML element to be parsed in block mode, the opening tag must be followed by two linebreaks.
+To parse the content of an HTML element in block mode, append two line breaks after its opening tag:
 
-Without the two linebreaks, the tag content will be parsed in inline mode which means that block mode formatting such as wikitext tables, lists and headings is not recognised.
+<<.with-comment-below "<div>
+
+* List item
+
+</div>" "Becomes <div><ul><li>List item</li></ul></div>">>
+
+To parse the content in inline mode, append only one line break. This will then not recognise block mode formatting such as wikitext tables, lists and headings:
+
+<<.with-comment-below "<div>
+* Not a list item
+</div>" "Becomes <div>* Not a list item</div>">>
+
+To also parse the element itself in inline mode, remove //all// linebreaks after the opening tag:
+
+<<.with-comment-below "<span>* Not a list item</span>" "Becomes <p><span>* Not a list item</span></p>">>
+
+Notice, the //span// gets wrapped in a //p//: It is parsed in inline mode. The //p// becomes the block and the //span// becomes its inline child.
 
 ! Attributes
 
