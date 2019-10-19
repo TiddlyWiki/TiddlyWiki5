@@ -15,7 +15,7 @@ title: $:/core/ui/EditTemplate
 <$list filter="[{!!draft.of}is[missing]]" variable="ignore">
 <$list filter="[list[$:/StoryList]after<currentTiddler>]">
 <$set name="cssEscapedTitle" value={{{ [<currentTiddler>escapecss[]] }}}>
-<$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>>/>
+<$action-sendmessage $message="tm-focus-selector" $param=<<focus-selector>>/>
 </$set>
 </$list>
 </$list>
