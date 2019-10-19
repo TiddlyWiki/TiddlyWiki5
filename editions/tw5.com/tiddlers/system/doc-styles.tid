@@ -129,6 +129,27 @@ td svg {
 	padding-left: 20px;
 }
 
+.with-comment-below {
+background-color: <<colour code-background>>;
+border: 1px solid <<colour pre-border>>;
+padding: 0 3px 2px;
+border-radius: 3px;
+}
+
+.with-comment-below .content,
+.with-comment-below .comment {
+margin: 0;
+padding: 0;
+border: 0;
+background: transparent;
+}
+
+.with-comment-below .comment {
+margin-top: 1em;
+color: #AAA;
+font-style: italic;
+}
+
 .doc-table th, .doc-table tr {
 	vertical-align: top;
 }
