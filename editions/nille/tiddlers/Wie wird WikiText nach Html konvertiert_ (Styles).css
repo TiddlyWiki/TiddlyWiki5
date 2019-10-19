@@ -1,0 +1,19 @@
+aside.info {
+width:33%;
+float:right;
+clear:both;
+margin: 0 0 1em 1em;
+padding:0 0 0 .6em;
+border-left:1px solid #ddd;
+font-size:.8em;
+color:#555;
+}
+
+aside.info *:first-child { margin-top:0; }
+aside.info *:last-child { margin-bottom:0; }
+
+[data-tiddler-title="Wie wird WikiText nach Html konvertiert?"] h1,
+[data-tiddler-title="Wie wird WikiText nach Html konvertiert?"] h2,
+[data-tiddler-title="Wie wird WikiText nach Html konvertiert?"] h3 {
+clear:right;
+} 

@@ -1,0 +1,8 @@
+/*
+fix right-floating elements which overflow the tiddler. Pop ups will still overflow.
+*/
+.tc-tiddler-body {
+overflow:hidden;
+}
+
+abbr {cursor:help;}
