@@ -22,15 +22,8 @@ AndTidWiki.prototype.save = function(text,method,callback,options) {
 		if (window.twi.saveDownload) {
 			window.twi.saveDownload(text,filename);
 		} else {
-			// Using broofa/node-mime, Licensed under https://raw.githubusercontent.com/broofa/node-mime/master/LICENSE
-			if (typeof(mimelite) === "undefined") {
-				var mime = document.createElement("script");
-				mime.setAttribute("src","https://wzrd.in/standalone/mime%2flite@latest");
-				document.body.appendChild(mime);
-			}
 			var link = document.createElement("a");
-			var type = typeof(mimelite) === "object" ? mimelite.getType(filename) : "text/plain" ;
-			link.setAttribute("href","data:" + type + "," + encodeURIComponent(text));
+			link.setAttribute("href","data:text/plain," + encodeURIComponent(text));
 			if (filename) {
 			    link.setAttribute("download",filename);
 			}
