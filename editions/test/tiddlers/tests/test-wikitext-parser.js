@@ -22,102 +22,382 @@ describe("WikiText parser tests", function() {
 		return wiki.parseText("text/vnd.tiddlywiki",text).tree;
 	};
 
-	it("should parse linebreaks", function() {
+	it("should parse void elements defined by the HTML5 standard", function() {
 		expect(parse("<br>")).toEqual(
-
-			[ { type : 'element', tag : 'p', children : [ { type : 'element', tag : 'br', isBlock : false, attributes : {  }, start : 0, end : 4 } ] } ]
-
+			[
+				{
+					type : 'element',
+					tag : 'br',
+					isBlock : true,
+					attributes : {  },
+					start : 0, end : 4
+				}
+			]
+		);
+		expect(parse("<br/>")).toEqual(
+			[
+				{
+					type : 'element',
+					tag : 'br',
+					isSelfClosing : true,
+					isBlock : true,
+					attributes : {  },
+					start : 0, end : 5
+				}
+			]
 		);
 		expect(parse("</br>")).toEqual(
-
-			[ { type : 'element', tag : 'p', children : [ { type : 'text', text : '</br>' } ] } ]
-
+			[
+				{
+					type : 'element',
+					tag : 'p',
+					children : [
+						{ type : 'text', text : '</br>' }
+					]
+				}
+			]
 		);
 	});
-
-	it("should wrap elements in p´s", function() {
+	it("should parse other void elements", function() {
+		expect(parse("<button/>")).toEqual(
+			[
+				{
+					type : 'element',
+					tag : 'button',
+					isSelfClosing : true,
+					isBlock : true,
+					attributes : {  },
+					start : 0, end : 9
+				}
+			]
+		);
+	});
+	it("should parse elements inside of inline contexts in inline mode", function() {
 		expect(parse("<span></span>")).toEqual(
-
-			[ { type : 'element', tag : 'p', children : [ { type : 'element', tag : 'span', isBlock : false, attributes : {  }, children : [ ], start : 0, end : 6 } ] } ]
-
+			[
+				{
+					type : 'element',
+					tag : 'p',
+					children : [
+						{
+							type : 'element',
+							tag : 'span',
+							isBlock : false,
+							attributes : {  },
+							children : [ ],
+							start : 0, end : 6
+						}
+					]
+				}
+			]
 		);
-		expect(parse("<span>some text</span>")).toEqual(
-
-			[ { type : 'element', tag : 'p', children : [ { type : 'element', tag : 'span', isBlock : false, attributes : {  }, children : [ { type : 'text', text : 'some text' } ], start : 0, end : 6 } ] } ]
-
+		expect(parse("<span>text</span>")).toEqual(
+			[
+				{
+					type : 'element',
+					tag : 'p',
+					children : [
+						{
+							type : 'element',
+							tag : 'span',
+							isBlock : false,
+							attributes : {  },
+							children : [
+								{ type : 'text', text : 'text' }
+							],
+							start : 0, end : 6
+						}
+					]
+				}
+			]
 		);
-		expect(parse("<span>some text")).toEqual(parse("<span>some text</span>"));
+		expect(parse("text<span>text</span>")).toEqual(
+			[
+				{
+					type : 'element',
+					tag : 'p',
+					children : [
+						{ type : 'text', text : 'text' },
+						{
+							type : 'element',
+							tag : 'span',
+							isBlock : false,
+							attributes : {  },
+							children : [
+								{ type : 'text', text : 'text' }
+							],
+							start : 4,
+							end : 10
+						}
+					]
+				}
+			]
+		);
+		expect(parse("<span>text</span>text")).toEqual(
+			[
+				{
+					type : 'element',
+					tag : 'p',
+					children : [
+						{
+							type : 'element',
+							tag : 'span',
+							isBlock : false,
+							attributes : {  },
+							children : [
+								{ type : 'text', text : 'text' }
+							],
+							start : 0, end : 6
+						},
+						{ type : 'text', text : 'text' }
+					]
+				}
+			]
+		);
 	});
-
-	it("should wrap elements in p´s, because of a linebreak escaper, which it skips", function() {
-		expect(parse("<span>\\\nsome text\n</span>")).toEqual(
-
-			[ { type : "element", tag : "p", children : [ { type : "element", tag : "span", isBlock : false, attributes : {}, children : [ { type : "text", text : "\nsome text\n" } ], start : 0, end : 6 } ] } ]
-
+	it("should parse linebreak escapers", function() {
+		expect(parse("<span>\\\n</span>")).toEqual(
+			[
+				{
+					type : "element",
+					tag : "p",
+					children : [
+						{
+							type : "element",
+							tag : "span",
+							isBlock : false,
+							attributes : {},
+							children : [
+								{ type : "text", text : "\n" }
+							],
+							start : 0, end : 6
+						}
+					]
+				}
+			]
 		);
-		expect(parse("<span>\\some text</span>")).toEqual(
-
-			[ { type : 'element', tag : 'p', children : [ { type : 'element', tag : 'span', isBlock : false, attributes : {  }, children : [ { type : 'text', text : '\\some text' } ], start : 0, end : 6 } ] } ]
-
+		expect(parse("<span>\\\ntext\n</span>")).toEqual(
+			[
+				{
+					type : "element",
+					tag : "p",
+					children : [
+						{
+							type : "element",
+							tag : "span",
+							isBlock : false,
+							attributes : {},
+							children : [
+								{ type : "text", text : "\ntext\n" }
+							],
+							start : 0, end : 6
+						}
+					]
+				}
+			]
+		);
+		expect(parse("<span>\\text</span>")).toEqual(
+			[
+				{
+					type : 'element',
+					tag : 'p',
+					children : [
+						{
+							type : 'element',
+							tag : 'span',
+							isBlock : false,
+							attributes : {  },
+							children : [
+								{ type : 'text', text : '\\text' }
+							],
+							start : 0, end : 6
+						}
+					]
+				}
+			]
 		);
 	});
-
-	it("should not wrap elements in p´s and parse their children in inline mode", function() {
+	it("should parse elements in block mode and their children in inline mode", function() {
 		expect(parse("<div>\n</div>")).toEqual(
-
-			[ { type : 'element', tag : 'div', isBlock : true, attributes : {  }, children: [ { type : 'text', text : '\n' } ], start : 0, end : 5 } ]
-
+			[
+				{
+					type : 'element',
+					tag : 'div',
+					isBlock : true,
+					attributes : {  },
+					children: [
+						{ type : 'text', text : '\n' }
+					],
+					start : 0, end : 5
+				}
+			]
 		);
-		expect(parse("<div>\nsome text\n</div>")).toEqual(
-
-			[ { type : 'element', tag : 'div', isBlock : true, attributes : {  }, children: [ { type : 'text', text : '\nsome text\n' } ], start : 0, end : 5 } ]
-
+		expect(parse("<div>\ntext\n</div>")).toEqual(
+			[
+				{
+					type : 'element',
+					tag : 'div',
+					isBlock : true,
+					attributes : {  },
+					children: [
+						{ type : 'text', text : '\ntext\n' }
+					],
+					start : 0, end : 5
+				}
+			]
 		);
-		expect(parse("<div>\nsome text")).toEqual(parse("<div>\nsome text</div>"));
 		expect(parse("<div>\n!i am not a heading\n</div>")).toEqual(
-
-			[ { type : 'element', tag : 'div', isBlock : true, attributes : {  }, children: [ { type : 'text', text : '\n!i am not a heading\n' } ], start : 0, end : 5 } ]
-
+			[
+				{
+					type : 'element',
+					tag : 'div',
+					isBlock : true,
+					attributes : {  },
+					children: [
+						{ type : 'text', text : '\n!i am not a heading\n' }
+					],
+					start : 0, end : 5
+				}
+			]
 		);
 	});
-
-	it("should not wrap pre/code elements in p´s and skip newlines before their children", function() {
-		expect(parse("<pre>\nlet the linebreak avoid the p, then skip it\n</pre>")).toEqual(
-
-			[ { type: "element", tag: "pre", isBlock: true, attributes: {}, children: [ { type: "text", text: "let the linebreak avoid the p, then skip it\n" } ], start: 0, end: 5 } ]
-
+	it("should parse preformatted block elements in block mode and skip newlines before first child", function() {
+		expect(parse("<pre>\nLinebreak sets block mode. Then skip it\n</pre>")).toEqual(
+			[
+				{
+					type: "element",
+					tag: "pre",
+					isBlock: true,
+					attributes: {},
+					children: [
+						{ type: "text", text: "Linebreak sets block mode. Then skip it\n" }
+					],
+					start: 0, end: 5
+				}
+			]
 		);
 		expect(parse("<pre>\n    but keep indents\n</pre>")).toEqual(
-
-			[ { type: "element", tag: "pre", isBlock: true, attributes: {}, children: [ { type: "text", text: "    but keep indents\n" } ], start: 0, end: 5 } ]
-
+			[
+				{
+					type: "element",
+					tag: "pre",
+					isBlock: true,
+					attributes: {},
+					children: [
+						{ type: "text", text: "    but keep indents\n" }
+					],
+					start: 0, end: 5
+				}
+			]
 		);
 	});
-
-	it("should not wrap elements in p´s and parse their children in block mode", function() {
-		expect(parse("<div>\n\ni am inside a p\n\n</div>")).toEqual(
-
-			[ { type : 'element', tag : 'div', start : 0, end : 5, isBlock : true, attributes : { }, children : [ { type : 'element', tag : 'p', children : [ { type : 'text', text : 'i am inside a p' } ] } ] } ]
-
+	it("should parse both elements and their children in block mode", function() {
+		expect(parse("<div>\n\ntext\n\n</div>")).toEqual(
+			[
+				{
+					type : 'element',
+					tag : 'div',
+					start : 0,
+					end : 5,
+					isBlock : true,
+					attributes : { },
+					children : [
+						{
+							type : 'element',
+							tag : 'p',
+							children : [
+								{ type : 'text', text : 'text' }
+							]
+						}
+					]
+				}
+			]
 		);
-		expect(parse("<div>\n\n!i am a heading\n\n</div>")).toEqual(
-
-			[ { type : 'element', tag : 'div', start : 0, end : 5, isBlock : true, attributes : { }, children : [ { type: "element", tag: "h1", attributes: { class: { type: "string", value: "" } }, children: [ { type: "text", text: "i am a heading" } ] } ] } ]
-
+		expect(parse("<div>\n\n! text\n\n</div>")).toEqual(
+			[
+				{
+					type : 'element',
+					tag : 'div',
+					start : 0,
+					end : 5,
+					isBlock : true,
+					attributes : { },
+					children : [
+						{
+							type: "element",
+							tag: "h1",
+							attributes: {
+								class: { type: "string", value: "" }
+							},
+							children: [
+								{ type: "text", text: "text" }
+							]
+						}
+					]
+				}
+			]
 		);
 	});
-
-	it("should wrap and not wrap standalone elements in p´s", function() {
-		expect(parse("<span/>")).toEqual(
-
-			[ { type : 'element', tag : 'p', children : [ { type : 'element', tag : 'span', isSelfClosing : true, isBlock : false, attributes : {  }, start : 0, end : 7 } ] } ]
-
+	it("should parse standalone elements inside of inline contexts in inline mode", function() {
+		expect(parse("<span/>text")).toEqual(
+			[
+				{
+					type : 'element',
+					tag : 'p',
+					children : [
+						{
+							type : 'element',
+							tag : 'span',
+							isSelfClosing : true,
+							isBlock : false,
+							attributes : {  },
+							start : 0, end : 7
+						},
+						{type : 'text', text : 'text'}
+					]
+				}
+			]
 		);
-		expect(parse("<div/>\n")).toEqual(
-
-			[ { type : 'element', tag : 'div', isBlock : true, isSelfClosing: true, attributes : {  }, start : 0, end : 6 } ]
-
+		expect(parse("text<span/>")).toEqual(
+			[
+				{
+					type : 'element',
+					tag : 'p',
+					children : [
+						{type : 'text', text : 'text'},
+						{
+							type : 'element',
+							tag : 'span',
+							isSelfClosing : true,
+							isBlock : false,
+							attributes : {  },
+							start : 4, end : 11
+						}
+					]
+				}
+			]
 		);
+	});
+	it("should parse standalone elements inside of block contexts in block mode", function() {
+		expect(parse("<div/>")).toEqual(
+			[
+				{
+					type : 'element',
+					tag : 'div',
+					isBlock : true,
+					isSelfClosing: true,
+					attributes : {  },
+					start : 0, end : 6
+				}
+			]
+		);
+	});
+	it("should close missing tags", function() {
+		/* This tests for something which does not behave intuitive -
+		'<div><span></div>' should become '<div><span></span></div>',
+		not '<p><div><span>&lt;/div&gt;</span></div></p>' -- Nille */
+		expect(parse("<span>text")).toEqual(parse("<span>text</span>"));
+		expect(parse("<div>\ntext")).toEqual(parse("<div>\ntext</div>"));
 	});
 
 	it("should parse tags with attributes", function() {
@@ -136,9 +416,9 @@ describe("WikiText parser tests", function() {
 			[ { type : 'element', tag : 'p', children : [ { type : 'element', tag : 'div', isBlock : false, attributes : { attribute : { type : 'indirect', name: 'attribute', textReference : 'TiddlerTitle', start : 4, end : 31 } }, children : [ { type : 'text', text : 'some text' } ], start : 0, end : 32 } ] } ]
 
 		);
-		expect(parse("<$reveal state='$:/temp/search' type='nomatch' text=''>")).toEqual(
+		expect(parse("<$reveal state='$:/temp/search' type='nomatch' text=''/>")).toEqual(
 
-			[ { type : 'element', tag : 'p', children : [ { type : 'reveal', tag: '$reveal', start : 0, attributes : { state : { start : 8, name : 'state', type : 'string', value : '$:/temp/search', end : 31 }, type : { start : 31, name : 'type', type : 'string', value : 'nomatch', end : 46 }, text : { start : 46, name : 'text', type : 'string', value : '', end : 54 } }, end : 55, isBlock : false, children : [  ] } ] } ]
+			[ { type: 'reveal', tag: '$reveal', attributes: { state: { type: 'string', name: 'state', value: '$:/temp/search', start: 8, end: 31 }, type: { type: 'string', name: 'type', value: 'nomatch', start: 31, end: 46 }, text: { type: 'string', name: 'text', value: '', start: 46, end: 54 } }, isSelfClosing: true, isBlock: true, start: 0, end: 56 } ]
 
 		);
 		expect(parse("<div attribute={{TiddlerTitle!!field}}>some text</div>")).toEqual(
