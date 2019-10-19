@@ -20,7 +20,13 @@ AndTidWiki.prototype.save = function(text,method,callback,options) {
 	if (method === "download") {
 		// Support download
 		if (window.twi.saveDownload) {
-			window.twi.saveDownload(text,filename);
+			try {
+				window.twi.saveDownload(text,filename);
+			} catch(err) {
+				if (err.message === "Method not found") {
+					window.twi.saveDownload(text);
+				}
+			}
 		} else {
 			var link = document.createElement("a");
 			link.setAttribute("href","data:text/plain," + encodeURIComponent(text));
