@@ -15,11 +15,28 @@ Handles saving changes via the AndTidWiki Android app
 var AndTidWiki = function(wiki) {
 };
 
-AndTidWiki.prototype.save = function(text,method,callback) {
+AndTidWiki.prototype.save = function(text,method,callback,options) {
+	var filename = options && options.variables ? options.variables.filename : null;
 	if (method === "download") {
 		// Support download
 		if (window.twi.saveDownload) {
 			window.twi.saveDownload(text);
+		} else {
+			// Using broofa/node-mime, Licensed under https://raw.githubusercontent.com/broofa/node-mime/master/LICENSE
+			if (typeof(mimelite) === "undefined") {
+				var mime = document.createElement("script");
+				mime.setAttribute("src","https://wzrd.in/standalone/mime%2flite@latest");
+				document.body.appendChild(mime);
+			}
+			var link = document.createElement("a");
+			var type = typeof(mimelite) === "object" ? mimelite.getType(filename) : "text/plain" ;
+			link.setAttribute("href","data:" + type + "," + encodeURIComponent(text));
+			if (filename) {
+			    link.setAttribute("download",filename);
+			}
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
 		}
 	} else if (window.twi.saveWiki) {
 		// Direct save in Tiddloid
