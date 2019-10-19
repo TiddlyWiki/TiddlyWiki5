@@ -20,7 +20,7 @@ AndTidWiki.prototype.save = function(text,method,callback,options) {
 	if (method === "download") {
 		// Support download
 		if (window.twi.saveDownload) {
-			window.twi.saveDownload(text);
+			window.twi.saveDownload(text,filename);
 		} else {
 			// Using broofa/node-mime, Licensed under https://raw.githubusercontent.com/broofa/node-mime/master/LICENSE
 			if (typeof(mimelite) === "undefined") {
