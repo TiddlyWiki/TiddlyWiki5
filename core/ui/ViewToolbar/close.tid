@@ -7,7 +7,15 @@ description: {{$:/language/Buttons/Close/Hint}}
 \define focus-selector()
 [data-tiddler-title="$(cssEscapedTitle)$"].tc-tiddler-frame input
 \end
-<$button actions="""<$list filter="[list[$:/StoryList]after<currentTiddler>]"><$set name="cssEscapedTitle" value={{{ [<currentTiddler>escapecss[]] }}}><$action-sendmessage $message="tm-focus-selector" $param=<<focus-selector>>/></$set></$list><$action-sendmessage $message="tm-close-tiddler"/>""" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class=<<tv-config-toolbar-class>>>
+\define close-tiddler-actions()
+<$list filter="[list[$:/StoryList]after<currentTiddler>]">
+<$set name="cssEscapedTitle" value={{{ [<currentTiddler>escapecss[]] }}}>
+<$action-sendmessage $message="tm-focus-selector" $param=<<focus-selector>>/>
+</$set>
+</$list>
+<$action-sendmessage $message="tm-close-tiddler"/>
+\end
+<$button actions=<<close-tiddler-actions>> tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/close-button}}
 </$list>
