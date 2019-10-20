@@ -104,24 +104,30 @@ exports.parseTokenRegExp = function(source,pos,reToken) {
 /*
 Look for a string literal. Returns null if not found, otherwise returns {type: "string", value:, start:, end:,}
 */
-exports.parseStringLiteral = function(source,pos) {
-	var node = {
-		type: "string",
-		start: pos
-	};
-	var reString = /(?:"""([\s\S]*?)"""|"([^"]*)")|(?:'([^']*)')/g;
-	reString.lastIndex = pos;
-	var match = reString.exec(source);
-	if(match && match.index === pos) {
-		node.value = match[1] !== undefined ? match[1] :(
-			match[2] !== undefined ? match[2] : match[3] 
-					);
-		node.end = pos + match[0].length;
-		return node;
-	} else {
+exports.parseStringLiteral = (function() {
+	// define the regex outside of the function.
+	var stringRegex = /([snd]{1,2})?(?:(?:"""([\s\S]*?)"""|"([^"]*)")|(?:'([^']*)'))/g;
+	return function (source,pos) {
+		stringRegex.lastIndex = pos;
+		var match = stringRegex.exec(source);
+		if(match && match.index === pos) {
+			var stringContents = match[2] !== undefined ? match[2]
+				: match[3] !== undefined ? match[3]
+					: match[4];
+			var modifiers = match[1];
+			if (stringContents && modifiers) {
+				stringContents = $tw.utils.modifyStringLiteral(stringContents, modifiers);
+			}
+			return {
+				type: "string",
+				value : stringContents,
+				start: pos,
+				end : pos + match[0].length
+			};
+		}
 		return null;
-	}
-};
+	};
+})();
 
 /*
 Look for a macro invocation parameter. Returns null if not found, or {type: "macro-parameter", name:, value:, start:, end:}
