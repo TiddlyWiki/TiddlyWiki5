@@ -95,6 +95,27 @@ exports.trim = function(str) {
 };
 
 /*
+Modify the content of a WikiText string literal, based on modifiers. The modifiers must be placed directly before the string literal. They are executed in order. For example dn"..." will dedent and then strip the string. Meaning of the modifiers: d=dedent, s=strip, n=strip linebreaks at start and strip end. This function is currently just called from parseStringLiteral.
+*/
+exports.modifyStringLiteral = function (string, modifiers) {
+	var utils = $tw.utils; var len = modifiers.length;  // performance
+	for (var c = 0; c < len; c++) {
+		switch (modifiers[c]) {
+			case "d": string = utils.dedent(string); break;
+			case "s": string = utils.trim(string); break;
+			case "n": string = utils.trimNewlines(string); break;
+			default: // this will anyway not be called because parseStringLiteral matches for ([snd]{1,2})
+				console.log(
+					"modifyStringLiteral() says: '" + modifiers[c] +
+					"' is not a known modifier for a string literal. Ignoring it."
+				);
+				break;
+		}
+	}
+	return string;
+};
+
+/*
 Convert a string to sentence case (ie capitalise first letter)
 */
 exports.toSentenceCase = function(str) {
