@@ -217,81 +217,86 @@ exports.parseMacroInvocation = function(source,pos) {
 /*
 Look for an HTML attribute definition. Returns null if not found, otherwise returns {type: "attribute", name:, valueType: "string|indirect|macro", value:, start:, end:,}
 */
-exports.parseAttribute = function(source,pos) {
-	var node = {
-		start: pos
-	};
-	// Define our regexps
-	var reAttributeName = /([^\/\s>"'=]+)/g,
-		reUnquotedAttribute = /([^\/\s<>"'=]+)/g,
-		reFilteredValue = /\{\{\{(.+?)\}\}\}/g,
-		reIndirectValue = /\{\{([^\}]+)\}\}/g;
-	// Skip whitespace
-	pos = $tw.utils.skipWhiteSpace(source,pos);
-	// Get the attribute name
-	var name = $tw.utils.parseTokenRegExp(source,pos,reAttributeName);
-	if(!name) {
-		return null;
-	}
-	node.name = name.match[1];
-	pos = name.end;
-	// Skip whitespace
-	pos = $tw.utils.skipWhiteSpace(source,pos);
-	// Look for an equals sign
-	var token = $tw.utils.parseTokenString(source,pos,"=");
-	if(token) {
-		pos = token.end;
+exports.parseAttribute = (function() {
+	// define the regexes outside of the function.
+	var reAttributeName = /([^\/\s>"'=]+)/g;		// myattribute
+	var reUnquotedAttribute = /([^\/\s<>"'=]+)/g;	// myattributevalue
+	var reFilteredValue = /\{\{\{(.+?)\}\}\}/g;		// {{{filter expression}}}
+	var reIndirectValue = /\{\{([^\}]+)\}\}/g;		// {{transclude}}
+	return function(source,pos){
+		// make these locally available, for performance
+		var utils = $tw.utils;
+		var skipWhitespace = utils.skipWhiteSpace;
+		var parseTokenRegExp = utils.parseTokenRegExp;
+		// remember the start position
+		var start = pos;
 		// Skip whitespace
-		pos = $tw.utils.skipWhiteSpace(source,pos);
-		// Look for a string literal
-		var stringLiteral = $tw.utils.parseStringLiteral(source,pos);
-		if(stringLiteral) {
-			pos = stringLiteral.end;
-			node.type = "string";
-			node.value = stringLiteral.value;
-		} else {
+		pos = skipWhitespace(source,pos);
+		// Get the attribute name
+		var name = parseTokenRegExp(source,pos,reAttributeName);
+		if(!name) {
+			return null;
+		}
+		pos = name.end;
+		name = name.match[1];
+		// Skip whitespace
+		pos = skipWhitespace(source,pos);
+		// Look for an equals sign
+		var token = utils.parseTokenString(source,pos,"=");
+		// fill these node attributes depending on the type of the attribute value
+		var typ = "string";
+		var value = "true";
+		var filter;
+		var reference;
+		if(token) {
+			pos = token.end;
+			// Skip whitespace
+			pos = skipWhitespace(source,pos);
+			// Look for a string literal
+			if(token = utils.parseStringLiteral(source,pos)) {
+				pos = token.end;
+				value = token.value;
+			}
 			// Look for a filtered value
-			var filteredValue = $tw.utils.parseTokenRegExp(source,pos,reFilteredValue);
-			if(filteredValue) {
-				pos = filteredValue.end;
-				node.type = "filtered";
-				node.filter = filteredValue.match[1];
-			} else {
-				// Look for an indirect value
-				var indirectValue = $tw.utils.parseTokenRegExp(source,pos,reIndirectValue);
-				if(indirectValue) {
-					pos = indirectValue.end;
-					node.type = "indirect";
-					node.textReference = indirectValue.match[1];
-				} else {
-					// Look for a unquoted value
-					var unquotedValue = $tw.utils.parseTokenRegExp(source,pos,reUnquotedAttribute);
-					if(unquotedValue) {
-						pos = unquotedValue.end;
-						node.type = "string";
-						node.value = unquotedValue.match[1];
-					} else {
-						// Look for a macro invocation value
-						var macroInvocation = $tw.utils.parseMacroInvocation(source,pos);
-						if(macroInvocation) {
-							pos = macroInvocation.end;
-							node.type = "macro";
-							node.value = macroInvocation;
-						} else {
-							node.type = "string";
-							node.value = "true";
-						}
-					}
-				}
+			else if(token = parseTokenRegExp(source,pos,reFilteredValue)) {
+				pos = token.end;
+				typ = "filtered";
+				filter = token.match[1];
+			}
+			// Look for an indirect value
+			else if(token = parseTokenRegExp(source,pos,reIndirectValue)) {
+				pos = token.end;
+				typ = "indirect";
+				reference = token.match[1];
+			}
+			// Look for a unquoted value
+			else if(token = parseTokenRegExp(source,pos,reUnquotedAttribute)) {
+				pos = token.end;
+				value = token.match[1];
+			}
+			// Look for a macro invocation value
+			else if(token = utils.parseMacroInvocation(source,pos)) {
+				pos = token.end;
+				typ = "macro";
+				value = token;
 			}
 		}
-	} else {
-		node.type = "string";
-		node.value = "true";
+		// Construct the node and return it
+		var node = {
+			name: name,
+			type: typ,
+			start: start,
+			end: pos
+		};
+		if (filter !== undefined) {
+			node.filter = filter;
+		} else if (reference !== undefined) {
+			node.textReference = reference;
+		} else {
+			node.value = value;
+		}
+		return node;
 	}
-	// Update the end position
-	node.end = pos;
-	return node;
-};
+})();
 
 })();
