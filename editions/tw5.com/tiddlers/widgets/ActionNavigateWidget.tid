@@ -30,9 +30,10 @@ Note that if navigating to multiple tiddlers at once you should use the same `$s
 
 Here is an example of button that navigates to two different tiddlers at once:
 
-<$macrocall $name='wikitext-example-without-html'
-src='<$button>
-<$action-navigate $to="ButtonWidget"/>
-<$action-navigate $to="ActionWidgets"/>
-Click me!
-</$button>'/>
+<$macrocall $name='wikitext-example-without-html' src=dn'
+  <$button>
+    <$action-navigate $to="ButtonWidget"/>
+    <$action-navigate $to="ActionWidgets"/>
+    Click me!
+  </$button>
+'/>

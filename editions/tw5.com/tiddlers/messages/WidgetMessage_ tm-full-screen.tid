@@ -12,17 +12,16 @@ The fullscreen message is used to enter, exit or toggle the "fullscreen" mode of
 
 The fullscreen message is handled by the TiddlyWiki core.
 
+<$macrocall $name='wikitext-example-without-html' src=dn'
+  <$button message="tm-full-screen">
+    Full screen toggle
+  </$button>
 
-<$macrocall $name='wikitext-example-without-html'
-src='<$button message="tm-full-screen">
-Full screen toggle
-</$button>
+  <$button message="tm-full-screen" param="enter">
+    Full screen enter
+  </$button>
 
-<$button message="tm-full-screen" param="enter">
-Full screen enter
-</$button>
-
-<$button message="tm-full-screen" param="exit">
-Full screen exit
-</$button>'/>
-
+  <$button message="tm-full-screen" param="exit">
+    Full screen exit
+  </$button>
+'/>
