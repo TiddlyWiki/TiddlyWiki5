@@ -8,7 +8,7 @@ title: $:/core/ui/EditTemplate
 <$action-deletetiddler $tiddler=<<newFieldValueTiddler>>/>
 <$action-sendmessage $message="tm-save-tiddler"/>
 \end
-\define-focus-selector()
+\define focus-selector()
 [data-tiddler-title="$(cssEscapedTitle)$"].tc-tiddler-frame input
 \end
 \define cancel-tiddler-actions()
