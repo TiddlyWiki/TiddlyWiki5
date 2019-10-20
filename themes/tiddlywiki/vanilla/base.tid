@@ -1816,6 +1816,7 @@ html body.tc-body.tc-single-tiddler-window {
 	border-left: 1px solid <<colour tab-border>>;
 	-webkit-flex: 1 0 70%;
 	flex: 1 0 70%;
+	overflow: auto;
 }
 
 .tc-sidebar-lists .tc-tab-buttons {
