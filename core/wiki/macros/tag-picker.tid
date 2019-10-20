@@ -49,9 +49,9 @@ tags: $:/tags/Macro
 </div>
 \end
 \define tag-picker()
-<$list filter="[<newTagNameTiddler>match[]]" emptyMessage=<<tag-picker>>>
+<$list filter="[<newTagNameTiddler>match[]]" emptyMessage=<<tag-picker-inner>>>
 <$set name="newTagNameTiddler" value=<<qualify "$:/temp/NewTagName">>>
-<<tag-picker>>
+<<tag-picker-inner>>
 </$set>
 </$list>
 \end
