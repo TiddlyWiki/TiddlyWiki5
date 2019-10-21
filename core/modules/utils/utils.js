@@ -172,9 +172,7 @@ exports.dedent = (function() {
 		}
 		// if indent > 0, dedent and return the string, otherwise return the string unchanged
 		if (indent > 0) {
-			console.info(lines.join("\n"));
 			lines = lines.map(function(line){return line.slice(indent);}).join("\n");
-			console.info(lines);
 			return lines;
 		} else {
 			return string;
