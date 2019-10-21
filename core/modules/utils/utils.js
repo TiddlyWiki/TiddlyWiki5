@@ -100,7 +100,8 @@ exports.trim = function(str) {
 };
 
 /*
-Trim newlines from the start and whitespace from the end of a string (for preformatted code where the first non-empty line may be indented)
+Trim newlines from the start and whitespace from the end of a string (for preformatted code
+where the first non-empty line may be indented)
 */
 exports.trimNewlines = function(str) {
 	if(typeof str === "string") {
@@ -111,7 +112,11 @@ exports.trimNewlines = function(str) {
 };
 
 /*
-Modify the content of a WikiText string literal, based on modifiers. The modifiers must be placed directly before the string literal. They are executed in order. For example dn"..." will dedent and then strip the string. Meaning of the modifiers: d=dedent, s=strip, n=strip linebreaks at start and strip end. This function is currently just called from parseStringLiteral.
+Modify the content of a WikiText string literal, based on modifiers. The modifiers must be
+placed directly before the string literal. They are executed in order. For example dn"..."
+will dedent and then strip the string. Meaning of the modifiers: d=dedent, s=strip, n=strip
+linebreaks at start and strip end. This function is currently just called from
+parseStringLiteral.
 */
 exports.modifyStringLiteral = function (string, modifiers) {
 	var utils = $tw.utils; var len = modifiers.length;  // performance
@@ -132,7 +137,8 @@ exports.modifyStringLiteral = function (string, modifiers) {
 };
 
 /*
-Dedent a string. The first " " or "\t" of the first non-empty line defines the overall used indent character.
+Dedent a string. The first " " or "\t" of the first non-empty line defines the overall used
+indent character.
 */
 exports.dedent = (function() {
 	var indentCharRegex = /^(?:([ \t])\s*)?\S/;  // matches the indent character to be used
