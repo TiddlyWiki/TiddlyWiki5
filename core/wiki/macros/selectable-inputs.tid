@@ -1,0 +1,95 @@
+title: $:/core/macros/selectable-inputs
+tags: $:/tags/Macro
+
+\define change-input-tab(stateTitle,tag,beforeafter,defaultState)
+<$set name="tabsList" filter="[all[shadows+tiddlers]tag<__tag__>!has[draft.of]]">
+<$vars currentState={{{ [<__stateTitle__>!is[missing]get[text]] ~[<__defaultState__>] }}} firstTab={{{ [enlist<tabsList>nth[1]] }}} lastTab={{{ [enlist<tabsList>last[]] }}}>
+<$set name="nextTab" value={{{ [all[shadows+tiddlers]tag<__tag__>!has[draft.of]$beforeafter$<currentState>] ~[[$beforeafter$]removeprefix[after]suffix[]addprefix<firstTab>] ~[[$beforeafter$]removeprefix[before]suffix[]addprefix<lastTab>] }}}>
+<$action-setfield $tiddler=<<__stateTitle__>> text=<<nextTab>>/>
+</$set>
+</$vars>
+</$set>
+\end
+
+\define accept-input-actions(tiddler,field,index,saveTiddler,acceptActions)
+<$list filter="[<__index__>match[]]" variable="ignore" emptyMessage="""
+<$vars selectedItem={{{ [<__tiddler__>getindex<__index__>] }}}>
+$acceptActions$
+</$vars>
+""">
+<$vars selectedItem={{{ [<__tiddler__>get<__field__>] }}}>
+$acceptActions$
+</$vars>
+</$list>
+\end
+
+\define clear-input-field(tiddler,field,index,saveTiddler,refreshTiddler,refreshQualifier)
+<$action-setfield $tiddler=<<__refreshTiddler__>> refresh-qualifier=<<__refreshQualifier__>>/>
+<$action-setfield $tiddler=<<__refreshTiddler__>> text=<<__refreshQualifier__>>/>
+<$list filter="[<__index__>!match[]]" variable="ignore" emptyMessage="""
+<$action-setfield $tiddler=<<__tiddler__>> $field=<<__field__>>/>
+""">
+<$action-setfield $tiddler=<<__tiddler__>> $index=<<__index__>>/>
+</$list>
+<$action-deletetiddler $tiddler=<<__saveTiddler__>>/>
+<$action-setfield $tiddler=<<__refreshTiddler__>> text=""/>
+\end
+
+\define clear-input-actions(tiddler,field,index:"",saveTiddler,refreshTiddler,configTiddlerPrefix,clearEmptyInputActions,refreshQualifier)
+<$list filter="[<__index__>!match[]]" variable="ignore" emptyMessage="""
+<$list filter="[<__tiddler__>!is[missing]get<__field__>minlength[1]] [<__saveTiddler__>!is[missing]get[text]minlength[1]] +[limit[1]]" variable="ignore" emptyMessage='$clearEmptyInputActions$'>
+<$list filter="[<__configTiddlerPrefix__>addsuffix[clear-actions]get[text]]" variable="clearInputActions" emptyMessage='
+<$macrocall $name="clear-input-field" tiddler=<<__tiddler__>> field=<<__field__>> index=<<__index__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>> refreshQualifier=<<__refreshQualifier__>>/>
+'>
+<<clearInputActions>>
+</$list>
+</$list>
+""">
+<$list filter="[<__tiddler__>!is[missing]getindex<__index__>minlength[1]] [<__saveTiddler__>!is[missing]get[text]minlength[1]] +[limit[1]]" variable="ignore" emptyMessage='$clearEmptyInputActions$'>
+<$list filter="[<__configTiddlerPrefix__>addsuffix[clear-actions]get[text]]" variable="clearInputActions" emptyMessage='
+<$macrocall $name="clear-input-field" tiddler=<<__tiddler__>> field=<<__field__>> index=<<__index__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>> refreshQualifier=<<__refreshQualifier__>>/>
+'>
+<<clearInputActions>>
+</$list>
+</$list>
+</$list>
+\end
+
+\define get-full-selectable-item-list()
+$(itemFilter1)$ $(itemFilter2)$
+\end
+
+\define selectable-input-actions(beforeafter,reverse,tiddler,field,index:"",saveTiddler,refreshTiddler,filter1,filter2,filterMinLength)
+<$list filter="[<__saveTiddler__>get[text]minlength[$filterMinLength$]] [[$filterMinLength$]removeprefix[0]suffix[]]" variable="ignore">
+<$vars userInput={{{ [<__saveTiddler__>get[text]] ~[[]] }}} selectedItem={{{ [<__index__>match[]addprefix<__tiddler__>get[text]] [<__index__>!match[]addprefix<__tiddler__>removesuffix<__index__>getindex<__index__>] }}}>
+<$set name="itemFilter1" filter=<<__filter1__>>>
+<$set name="itemFilter2" filter=<<__filter2__>>>
+<$set name="itemList" filter=<<get-full-selectable-item-list>>>
+<$list filter="[enlist<itemList>] +[$beforeafter$<selectedItem>] ~[enlist<itemList>$reverse$nth[1]]" variable="nextItem">
+<$action-deletetiddler $tiddler=<<__refreshTiddler__>>/>
+<$action-setfield $tiddler=<<__refreshTiddler__>> refresh-qualifier={{{ [[$(tv-refresh-input-qualifier)$]] }}}/>
+<$list filter="[<__index__>!match[]]" variable="ignore" emptyMessage="""
+<$action-setfield $tiddler=<<__tiddler__>> $field=<<__field__>> $value=<<nextItem>>/>
+""">
+<$action-setfield $tiddler=<<__tiddler__>> $index=<<__index__>> $value=<<nextItem>>/>
+</$list>
+<$action-setfield $tiddler=<<__refreshTiddler__>> text=<<nextItem>>/>
+<$action-sendmessage $message="tm-focus-selector" $param="""$(currentCSSSelector)$"""/>
+</$list>
+</$set>
+</$set>
+</$set>
+</$vars>
+</$list>
+\end
+
+\define selectable-input(tiddler:"",field:"text",index:"",tag:"input",type:"",default:"",placeholder:"",focusPopup:"",class:"tc-selectable-input",focus:"no",saveTiddler:"",refreshTiddler:"",refreshAction:"focus-update",refreshCondition:"",configTiddlerPrefix:"",refreshQualifier:"",filterMinLength:"0",tabindex:"",size:"",autoHeight:"",minHeight:"",rows:"")
+<$vars tv-refresh-input-qualifier=<<__refreshQualifier__>> 1Filter={{{ [<__configTiddlerPrefix__>addsuffix[input-filter-1]get[text]] }}} 2Filter={{{ [<__configTiddlerPrefix__>addsuffix[input-filter-2]get[text]] }}}>
+<$keyboard key="((input-down))" actions="""<$macrocall $name="selectable-input-actions" beforeafter="after" reverse="" tiddler=<<__tiddler__>> field=<<__field__>> index=<<__index__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>> filter1=<<1Filter>> filter2=<<2Filter>> filterMinLength="$filterMinLength$"/>""">
+<$keyboard key="((input-up))" actions="""<$macrocall $name="selectable-input-actions" beforeafter="before" reverse="reverse[]" tiddler=<<__tiddler__>> field=<<__field__>> index=<<__index__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>> filter1=<<1Filter>> filter2=<<2Filter>> filterMinLength="$filterMinLength$"/>""">
+<$keyboard key="((input-accept))" actions="""<$macrocall $name="accept-input-actions" tiddler=<<__tiddler__>> field=<<__field__>> index=<<__index__>> saveTiddler=<<__saveTiddler__>> acceptActions={{{ [<__configTiddlerPrefix__>addsuffix[accept-actions]get[text]] }}}/>""">
+<$keyboard key="((input-clear))" actions="""<$macrocall $name="clear-input-actions" tiddler=<<__tiddler__>> field=<<__field__>> index=<<__index__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>> configTiddlerPrefix=<<__configTiddlerPrefix__>> clearEmptyInputActions={{{ [<__configTiddlerPrefix__>addsuffix[clear-empty-actions]get[text]] }}} refreshQualifier=<<__refreshQualifier__>>/>""">
+<$edit-text tiddler=<<__tiddler__>> field=<<__field__>> index=<<__index__>> tag=<<__tag__>> type=<<__type__>> default=<<__default__>> placeholder=<<__placeholder__>> focusPopup=<<__focusPopup__>> class=<<__class__>> focus=<<__focus__>> saveTiddler=<<__saveTiddler__>> refreshTiddler=<<__refreshTiddler__>> refreshAction=<<__refreshAction__>> refreshCondition={{{ [<__refreshTiddler__>get[refresh-qualifier]removeprefix<__refreshQualifier__>suffix[]addprefix[true]] ~[[false]] }}} tabindex=<<__tabindex__>> size=<<__size__>> autoHeight=<<__autoHeight__>> minHeight=<<__minHeight__>> rows=<<__rows__>>/>
+</$keyboard></$keyboard></$keyboard></$keyboard>
+</$vars>
+\end
