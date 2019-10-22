@@ -1,0 +1,6 @@
+title: $:/config/ui/tag-picker/clear-empty-actions
+
+<$action-deletetiddler $tiddler=<<__tiddler__>>/>
+<$action-deletetiddler $tiddler=<<__saveTiddler__>>/>
+<$action-deletetiddler $tiddler=<<__refreshTiddler__>>/>
+<$action-sendmessage $message="tm-cancel-tiddler"/>
