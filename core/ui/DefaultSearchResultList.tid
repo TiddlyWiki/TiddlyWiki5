@@ -5,11 +5,19 @@ caption: {{$:/language/Search/DefaultResults/Caption}}
 \define searchResultList()
 //<small>{{$:/language/Search/Matches/Title}}</small>//
 
-<$list filter="[!is[system]search:title{$(searchTiddler)$}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+<$list filter="[subfilter{$:/config/ui/sidebar-search/input-filter-1}]">
+<$list filter="[{$:/temp/search}match<currentTiddler>]" variable="ignore" emptyMessage="""<$transclude tiddler="$:/core/ui/ListItemTemplate"/>""">
+<span class="tc-list-item-selected"><$transclude tiddler="$:/core/ui/ListItemTemplate"/></span>
+</$list>
+</$list>
 
 //<small>{{$:/language/Search/Matches/All}}</small>//
 
-<$list filter="[!is[system]search{$(searchTiddler)$}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+<$list filter="[subfilter{$:/config/ui/sidebar-search/input-filter-2}]">
+<$list filter="[{$:/temp/search}match<currentTiddler>]" variable="ignore" emptyMessage="""<$transclude tiddler="$:/core/ui/ListItemTemplate"/>""">
+<span class="tc-list-item-selected"><$transclude tiddler="$:/core/ui/ListItemTemplate"/></span>
+</$list>
+</$list>
 
 \end
 <<searchResultList>>
