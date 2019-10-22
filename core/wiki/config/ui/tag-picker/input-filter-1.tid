@@ -1,0 +1,3 @@
+title: $:/config/ui/tag-picker/input-filter-1
+
+[tags[]!is[system]search:title<userInput>sort[]]
