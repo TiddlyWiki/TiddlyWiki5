@@ -1,3 +1,0 @@
-title: $:/config/ui/sidebar-search/accept-actions
-
-<$action-navigate $to=<<selectedItem>>/>
