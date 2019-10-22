@@ -1,0 +1,3 @@
+title: $:/config/ui/sidebar-search/accept-actions-2
+
+<$action-sendmessage $message="tm-edit-tiddler" $param=<<selectedItem>>/>
