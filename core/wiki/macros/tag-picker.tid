@@ -6,20 +6,25 @@ tags: $:/tags/Macro
 <$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
 \end
 
-\define tag-button()
-<$button class="tc-btn-invisible" tag="a" tooltip={{$:/language/EditTemplate/Tags/Add/Button/Hint}}>
+\define tag-button(selectedClass)
+<$button class="tc-btn-invisible $selectedClass$" tag="a" tooltip={{$:/language/EditTemplate/Tags/Add/Button/Hint}}>
 <$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
 <$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
 <$macrocall $name="tag-pill" tag=<<tag>>/>
 </$button>
 \end
 
+\define get-css-input-selector()
+[data-tiddler-title="$(currentTiddlerCSSEscaped)$"] .tc-edit-add-tag .tc-add-tag-name input
+\end
+
 \define tag-picker-inner()
+<$vars saveInputTiddler={{{ [[$:/temp/NewTagName/Input/]addsuffix<currentTiddler>] }}} currentTiddlerCSSEscaped={{{ [<currentTiddler>escapecss[]] }}}>
 <div class="tc-edit-add-tag">
 <span class="tc-add-tag-name">
-<$keyboard key="ENTER" actions=<<add-tag-actions>>>
-<$edit-text tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}}/>
-</$keyboard>
+<$set name="currentCSSSelector" value=<<get-css-input-selector>>>
+<$macrocall $name="selectable-input" tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" saveTiddler=<<saveInputTiddler>> refreshTiddler=<<qualify "$:/temp/SelectedTag">> configTiddlerPrefix="$:/config/ui/tag-picker/" refreshQualifier=<<qualify "$:/qualifier/refresh-input">> tabindex={{$:/config/EditTabIndex}} focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}}/>
+</$set>
 </span> <$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button> <span class="tc-add-tag-button">
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$button set="$:/temp/NewTagName" setTo="" class="">
@@ -31,22 +36,29 @@ tags: $:/tags/Macro
 </span>
 </div>
 <div class="tc-block-dropdown-wrapper">
+<$set name="userInput" value={{{ [<saveInputTiddler>get[text]] }}}>
 <$reveal state=<<qualify "$:/state/popup/tags-auto-complete">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown">
 <$set name="newTagName" value={{{ [<newTagNameTiddler>get[text]] }}}>
-<$list filter="[<newTagName>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
-<$list filter="[tags[]!is[system]search:title<newTagName>sort[]]" variable="tag">
-<<tag-button>>
+<$list filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$list filter="[subfilter{$:/config/ui/tag-picker/input-filter-1}]" variable="tag">
+<$list filter="[<newTagNameTiddler>get[text]match<tag>]" emptyMessage="""<<tag-button>>""">
+<<tag-button "tc-tag-button-selected">>
+</$list>
 </$list></$list>
 <hr>
-<$list filter="[<newTagName>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
-<$list filter="[tags[]is[system]search:title<newTagName>sort[]]" variable="tag">
-<<tag-button>>
+<$list filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$list filter="[subfilter{$:/config/ui/tag-picker/input-filter-2}]" variable="tag">
+<$list filter="[<newTagNameTiddler>get[text]match<tag>]" emptyMessage="""<<tag-button>>""">
+<<tag-button "tc-tag-button-selected">>
+</$list>
 </$list></$list>
 </$set>
 </div>
 </$reveal>
+</$set>
 </div>
+</$vars>
 \end
 \define tag-picker()
 <$list filter="[<newTagNameTiddler>match[]]" emptyMessage=<<tag-picker-inner>>>
