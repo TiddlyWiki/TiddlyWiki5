@@ -10,7 +10,7 @@ tags: $:/tags/SideBarSegment
 <$vars searchTiddler="$:/temp/search" saveInputTiddler="$:/temp/search/input">
 <div class="tc-search">
 <$set name="currentCSSSelector" value=<<get-css-input-selector>>>
-<$macrocall $name="selectable-input" tiddler="$:/temp/search" type="search" tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> class="tc-popup-handle" saveTiddler=<<saveInputTiddler>> refreshTiddler=<<qualify "$:/temp/SelectedSearchItem">> configTiddlerPrefix="$:/config/ui/sidebar-search/" refreshQualifier=<<qualify "$:/qualifier/refresh-sidebar-input">>/>
+<$macrocall $name="selectable-input" tiddler="$:/temp/search" type="search" tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> class="tc-popup-handle" saveTiddler=<<saveInputTiddler>> refreshTiddler=<<qualify "$:/temp/SelectedSearchItem">> configTiddlerPrefix="$:/config/ui/sidebar-search/" refreshQualifier=<<qualify "$:/qualifier/refresh-sidebar-input">> filterMinLength={{$:/config/Search/MinLength}}/>
 </$set>
 <$reveal state="$:/temp/search" type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
@@ -21,12 +21,13 @@ tags: $:/tags/SideBarSegment
 </$button>
 <$button class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/search" text="" />
+<$action-setfield $tiddler="$:/temp/search/input" text="" />
 {{$:/core/images/close-button}}
 </$button>
 <$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
 {{$:/core/images/down-arrow}}
-<$list filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
-<$set name="searchTerm" value={{{ [<searchTiddler>get[text]] }}}>
+<$list filter="[{$:/temp/search/input}minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
+<$set name="searchTerm" value={{{ [<saveInputTiddler>get[text]] }}}>
 <$set name="resultCount" value="""<$count filter="[!is[system]search<searchTerm>]"/>""">
 {{$:/language/Search/Matches}}
 </$set>
@@ -34,18 +35,18 @@ tags: $:/tags/SideBarSegment
 </$list>
 </$button>
 </$reveal>
-<$reveal state="$:/temp/search" type="match" text="">
+<$reveal state="$:/temp/search/input" type="match" text="">
 <$button to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 {{$:/core/images/advanced-search-button}}
 </$button>
 </$reveal>
 </div>
 
-<$reveal tag="div" class="tc-block-dropdown-wrapper" state="$:/temp/search" type="nomatch" text="">
+<$reveal tag="div" class="tc-block-dropdown-wrapper" state="$:/temp/search/input" type="nomatch" text="">
 
 <$reveal tag="div" class="tc-block-dropdown tc-search-drop-down tc-popup-handle" state=<<qualify "$:/state/popup/search-dropdown">> type="nomatch" text="" default="">
 
-<$list filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$list filter="[{$:/temp/search/input}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 
 <$set name="userInput" value={{$:/temp/search/input}}>
 
