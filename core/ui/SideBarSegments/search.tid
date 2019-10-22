@@ -2,11 +2,16 @@ title: $:/core/ui/SideBarSegments/search
 tags: $:/tags/SideBarSegment
 
 \whitespace trim
+\define get-css-input-selector()
+.tc-search input
+\end
 <div class="tc-sidebar-lists tc-sidebar-search">
-
-<$set name="searchTiddler" value="$:/temp/search">
+ 
+<$vars searchTiddler="$:/temp/search" saveInputTiddler="$:/temp/search/input">
 <div class="tc-search">
-<$edit-text tiddler="$:/temp/search" type="search" tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> class="tc-popup-handle"/>
+<$set name="currentCSSSelector" value=<<get-css-input-selector>>>
+<$macrocall $name="selectable-input" tiddler="$:/temp/search" type="search" tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> class="tc-popup-handle" saveTiddler=<<saveInputTiddler>> refreshTiddler=<<qualify "$:/temp/SelectedSearchItem">> configTiddlerPrefix="$:/config/ui/sidebar-search/" refreshQualifier=<<qualify "$:/qualifier/refresh-sidebar-input">>/>
+</$set>
 <$reveal state="$:/temp/search" type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
@@ -42,7 +47,11 @@ tags: $:/tags/SideBarSegment
 
 <$list filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 
+<$set name="userInput" value={{$:/temp/search/input}}>
+
 {{$:/core/ui/SearchResults}}
+
+</$set>
 
 </$list>
 
@@ -50,6 +59,7 @@ tags: $:/tags/SideBarSegment
 
 </$reveal>
 
-</$set>
+</$vars>
 
 </div>
+
