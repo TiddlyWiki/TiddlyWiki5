@@ -26,10 +26,10 @@ There are two more things you can do with tags:
 
 ! Set a tag's colour and icon
 
-You can use the {{$:/core/images/tag-button}} [[tag manager|$:/TagManager]], found on the ''Tags'' tab under ''More'' in the sidebar, to change the colour of a tag's pill or add an icon to the pill.
+You can use the <<.icon $:/core/images/tag-button>> [[tag manager|$:/TagManager]], found on the ''Tags'' tab under ''More'' in the sidebar, to change the colour of a tag's pill or add an icon to the pill.
 
 * To change the colour, click the button in the ''Colour'' column to select from a colour picker. Alternatively, click the icon in the ''Info'' column, then type a [[CSS]] colour value in the ''Colour'' field
-* To change the icon, click the {{$:/core/images/down-arrow}} button in the ''Icon'' column and choose from the list of available icons
+* To change the icon, click the <<.icon $:/core/images/down-arrow>> button in the ''Icon'' column and choose from the list of available icons
 
 ! Change the order in which tags are listed
 

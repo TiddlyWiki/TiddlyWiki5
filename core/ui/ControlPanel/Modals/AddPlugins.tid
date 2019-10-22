@@ -5,6 +5,13 @@ subtitle: {{$:/core/images/download-button}} {{$:/language/ControlPanel/Plugins/
 <div>
 <$button class={{{ [<assetInfo>get[original-title]get[version]then[tc-reinstall]] tc-btn-invisible tc-install-plugin +[join[ ]] }}}>
 <$action-sendmessage $message="tm-load-plugin-from-library" url={{!!url}} title={{$(assetInfo)$!!original-title}}/>
+<$set name="url" value={{!!url}}>
+<$set name="currentTiddler" value=<<assetInfo>>>
+<$list filter="[enlist{!!dependents}] [{!!parent-plugin}] +[sort[title]]" variable="dependency">
+<$action-sendmessage $message="tm-load-plugin-from-library" url=<<url>> title=<<dependency>>/>
+</$list>
+</$set>
+</$set>
 {{$:/core/images/download-button}}
 <$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion" emptyMessage="""{{$:/language/ControlPanel/Plugins/Install/Caption}}""">
 {{$:/language/ControlPanel/Plugins/Reinstall/Caption}}
@@ -12,7 +19,7 @@ subtitle: {{$:/core/images/download-button}} {{$:/language/ControlPanel/Plugins/
 </$button>
 <div>
 </div>
-<$reveal stateTitle=<<assetInfo>> stateField="contains-javascript" type="match" text="yes">{{$:/language/ControlPanel/Plugins/PluginWillRequireReload}}</$reveal>
+<$reveal stateTitle=<<assetInfo>> stateField="requires-reload" type="match" text="yes">{{$:/language/ControlPanel/Plugins/PluginWillRequireReload}}</$reveal>
 </div>
 \end
 
@@ -57,10 +64,29 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 {{$:/language/ControlPanel/Plugins/AlreadyInstalled/Hint}}
 </em>
 </$list>
+<$set name="currentTiddler" value=<<assetInfo>>>
+<$list filter="[enlist{!!dependents}] [<currentTiddler>get[parent-plugin]] +[limit[1]]" variable="ignore">
+<div>
+{{$:/language/ControlPanel/Plugins/AlsoRequires}}
+<$list filter="[enlist{!!dependents}] [{!!parent-plugin}] +[sort[title]]" variable="dependency">
+<$text text=<<dependency>>/>
+</$list>
+</div>
+</$list>
+</$set>
 </div>
 <div class="tc-plugin-info-dropdown-body">
 <$transclude tiddler=<<assetInfo>> field="readme" mode="block"/>
 </div>
+<$set name="original-title" value={{{ [<assetInfo>get[original-title]] }}}>
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>limit[1]]" variable="ignore">
+<div class="tc-plugin-info-sub-plugins">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>sort[title]sort[name]]" variable="assetInfo">
+<<display-plugin-info "$type$">>
+</$list>
+</div>
+</$list>
+</$set>
 </div>
 </$reveal>
 </$set>
@@ -83,7 +109,9 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 </$reveal>
 <div class="tc-plugin-library-listing">
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]search:author,description,original-title,readme,title{$:/temp/RemoteAssetSearch/$(currentTiddler)$}sort[title]sort[name]]" variable="assetInfo">
+<$list filter="[[$:/temp/RemoteAssetSearch/$(currentTiddler)$]has[text]] ~[<assetInfo>!has[parent-plugin]]" variable="ignore"><!-- Hide sub-plugins if we're not searching -->
 <<display-plugin-info "$type$">>
+</$list>
 </$list>
 </div>
 \end

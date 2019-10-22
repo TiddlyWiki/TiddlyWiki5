@@ -24,7 +24,7 @@ Keyboard shortcuts are available for common editing operations within the Text E
 * Creating a new journal (defaults to <kbd>alt-J</kbd> )
 * Creating a new image (defaults to <kbd>alt-I</kbd> )
 
-The current shortcuts can be inspected and customised in the "Keyboard Shortcuts" tab of the [[Control Panel|$:/ControlPanel]] {{$:/core/images/options-button}}.
+The current shortcuts can be inspected and customised in the "Keyboard Shortcuts" tab of the [[Control Panel|$:/ControlPanel]] <<.icon $:/core/images/options-button>>.
 
 !! Special Keys
 

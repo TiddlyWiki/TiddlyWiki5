@@ -41,14 +41,14 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 		// Check if we're dealing with a plugin
 		if(incomingTiddler && incomingTiddler["plugin-type"]) {
 			// Check whether the plugin contains JS modules
-			var doesContainJavaScript = $tw.wiki.doesPluginInfoContainModules(JSON.parse(incomingTiddler.text)) ? ($tw.wiki.getTiddlerText("$:/language/ControlPanel/Plugins/PluginWillRequireReload") + " ") : "";
-			messages[title] = doesContainJavaScript;
+			var requiresReload = $tw.wiki.doesPluginInfoRequireReload(JSON.parse(incomingTiddler.text)) ? ($tw.wiki.getTiddlerText("$:/language/ControlPanel/Plugins/PluginWillRequireReload") + " ") : "";
+			messages[title] = requiresReload;
 			if(incomingTiddler.version) {
 				// Upgrade the incoming plugin if it is in the upgrade library
 				var libraryTiddler = getLibraryTiddler(title);
 				if(libraryTiddler && libraryTiddler["plugin-type"] && libraryTiddler.version) {
 					tiddlers[title] = libraryTiddler;
-					messages[title] = doesContainJavaScript + $tw.language.getString("Import/Upgrader/Plugins/Upgraded",{variables: {incoming: incomingTiddler.version, upgraded: libraryTiddler.version}});
+					messages[title] = requiresReload + $tw.language.getString("Import/Upgrader/Plugins/Upgraded",{variables: {incoming: incomingTiddler.version, upgraded: libraryTiddler.version}});
 					return;
 				}
 				// Suppress the incoming plugin if it is older than the currently installed one
@@ -57,7 +57,7 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 					// Reject the incoming plugin by blanking all its fields
 					if($tw.utils.checkVersions(existingTiddler.fields.version,incomingTiddler.version)) {
 						tiddlers[title] = Object.create(null);
-						messages[title] = doesContainJavaScript + $tw.language.getString("Import/Upgrader/Plugins/Suppressed/Version",{variables: {incoming: incomingTiddler.version, existing: existingTiddler.fields.version}});
+						messages[title] = requiresReload + $tw.language.getString("Import/Upgrader/Plugins/Suppressed/Version",{variables: {incoming: incomingTiddler.version, existing: existingTiddler.fields.version}});
 						return;
 					}
 				}

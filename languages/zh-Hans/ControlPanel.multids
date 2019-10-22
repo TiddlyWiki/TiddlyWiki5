@@ -5,6 +5,7 @@ Advanced/Hint: 关于此 TiddlyWiki 的内部信息
 Appearance/Caption: 视觉外观
 Appearance/Hint: 定制您的 TiddlyWiki 外观。
 Basics/AnimDuration/Prompt: 动画持续时间：
+Basics/AutoFocus/Prompt: 默认自动停留的栏位：
 Basics/Caption: 基本
 Basics/DefaultTiddlers/BottomHint: 标题含空白时请使用 &#91;&#91;双中括弧&#93;&#93;，或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留开启中的条目顺序</$button>
 Basics/DefaultTiddlers/Prompt: 首页：
@@ -13,6 +14,7 @@ Basics/Language/Prompt: 您好！当前的语言：
 Basics/NewJournal/Tags/Prompt: 新日志条目的标签
 Basics/NewJournal/Text/Prompt: 新日志条目的内容
 Basics/NewJournal/Title/Prompt: 新日志条目的名称
+Basics/NewTiddler/Tags/Prompt: 新条目的标签
 Basics/NewTiddler/Title/Prompt: 新条目的名称
 Basics/OverriddenShadowTiddlers/Prompt: 被覆写的默认条目数量：
 Basics/ShadowTiddlers/Prompt: 默认条目数量：
@@ -58,6 +60,7 @@ Palette/ShowEditor/Caption: 显示编辑器
 Plugins/Add/Hint: 从官方插件库安装插件
 Plugins/Add/Caption: 获取更多插件
 Plugins/AlreadyInstalled/Hint: 此插件已经安装版本 <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: 还需要：
 Plugins/Caption: 插件
 Plugins/Disable/Caption: 禁用
 Plugins/Disable/Hint: 重新加载页面时禁用此插件

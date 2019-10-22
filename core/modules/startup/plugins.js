@@ -28,8 +28,8 @@ exports.startup = function() {
 			requireReloadDueToPluginChange = false;
 		$tw.utils.each(Object.keys(changes),function(title) {
 			var tiddler = $tw.wiki.getTiddler(title),
-				containsModules = $tw.wiki.doesPluginContainModules(title);
-			if(containsModules) {
+				requiresReload = $tw.wiki.doesPluginRequireReload(title);
+			if(requiresReload) {
 				requireReloadDueToPluginChange = true;
 			} else if(tiddler) {
 				var pluginType = tiddler.fields["plugin-type"];

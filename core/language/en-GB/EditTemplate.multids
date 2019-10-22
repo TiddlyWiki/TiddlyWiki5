@@ -8,6 +8,7 @@ Field/Remove/Hint: Remove field
 Field/Dropdown/Caption: field list
 Field/Dropdown/Hint: Show field list
 Fields/Add/Button: add
+Fields/Add/Button/Hint: Add the new field to the tiddler
 Fields/Add/Name/Placeholder: field name
 Fields/Add/Prompt: Add a new field:
 Fields/Add/Value/Placeholder: field value
@@ -16,6 +17,7 @@ Fields/Add/Dropdown/User: User fields
 Shadow/Warning: This is a shadow tiddler. Any changes you make will override the default version from the plugin <<pluginLink>>
 Shadow/OverriddenWarning: This is a modified shadow tiddler. You can revert to the default version in the plugin <<pluginLink>> by deleting this tiddler
 Tags/Add/Button: add
+Tags/Add/Button/Hint: add tag
 Tags/Add/Placeholder: tag name
 Tags/Dropdown/Caption: tag list
 Tags/Dropdown/Hint: Show tag list
