@@ -49,7 +49,7 @@ FullScreen/Caption: full-screen
 FullScreen/Hint: Enter or leave full-screen mode
 Help/Caption: help
 Help/Hint: Show help panel
-italic/Hint: italic
+Italic/Hint: italic
 Import/Caption: import
 Import/Hint: Import many types of file including text, image, TiddlyWiki or JSON
 Info/Caption: info
