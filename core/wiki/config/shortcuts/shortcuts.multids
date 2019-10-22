@@ -11,7 +11,7 @@ heading-3: ctrl-3
 heading-4: ctrl-4
 heading-5: ctrl-5
 heading-6: ctrl-6
-input-accept: enter
+input-accept-1: enter
 input-clear: escape
 input-down: down
 input-up: up
