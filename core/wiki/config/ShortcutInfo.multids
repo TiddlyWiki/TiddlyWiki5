@@ -11,7 +11,8 @@ heading-3: {{$:/language/Buttons/Heading3/Hint}}
 heading-4: {{$:/language/Buttons/Heading4/Hint}}
 heading-5: {{$:/language/Buttons/Heading5/Hint}}
 heading-6: {{$:/language/Buttons/Heading6/Hint}}
-input-accept: {{$:/language/Buttons/Input/Accept/Hint}}
+input-accept-1: {{$:/language/Buttons/Input/Accept-1/Hint}}
+input-accept-2: {{$:/language/Buttons/Input/Accept-2/Hint}}
 input-clear: {{$:/language/Buttons/Input/Clear/Hint}}
 input-down: {{$:/language/Buttons/Input/Down/Hint}}
 input-up: {{$:/language/Buttons/Input/Up/Hint}}
