@@ -1,4 +1,4 @@
-title: $:/config/ui/tag-picker/accept-actions
+title: $:/config/ui/tag-picker/accept-actions-1
 
 <$list filter="[[$(currentTiddler)$]!contains:tags<selectedItem>]" variable="ignore">
 <$action-sendmessage $message="tm-add-tag" $param=<<selectedItem>>/>
