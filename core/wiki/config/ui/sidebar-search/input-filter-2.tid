@@ -1,0 +1,3 @@
+title: $:/config/ui/sidebar-search/input-filter-2
+
+[!is[system]search<userInput>sort[title]limit[250]]
