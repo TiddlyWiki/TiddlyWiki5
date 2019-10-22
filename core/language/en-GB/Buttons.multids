@@ -53,6 +53,10 @@ Import/Caption: import
 Import/Hint: Import many types of file including text, image, TiddlyWiki or JSON
 Info/Caption: info
 Info/Hint: Show information for this tiddler
+Input/Accept/Hint: Accept the selected list item
+Input/Clear/Hint: Clear the input field
+Input/Down/Hint: Select the next list item
+Input/Up/Hint: Select the previous list item
 Home/Caption: home
 Home/Hint: Open the default tiddlers
 Language/Caption: language
