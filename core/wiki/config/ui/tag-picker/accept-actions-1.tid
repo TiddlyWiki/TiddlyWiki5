@@ -7,4 +7,3 @@ title: $:/config/ui/tag-picker/accept-actions-1
 <$action-sendmessage $message="tm-remove-tag" $param=<<selectedItem>>/>
 </$list>
 <$action-deletetiddler $tiddler=<<__tiddler__>>/>
-<$action-deletetiddler $tiddler=<<__saveTiddler__>>/>
