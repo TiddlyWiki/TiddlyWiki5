@@ -65,13 +65,19 @@ type: text/vnd.tiddlywiki
 
 \define .tip(_)
 <div class="doc-icon-block">
-<div class="doc-block-icon">{{$:/core/images/tip}}</div> $_$
+<div class="doc-block-icon">
+{{$:/core/images/tip}}
+</div>
+$_$
 </div>
 \end
 
 \define .warning(_)
 <div class="doc-icon-block">
-<div class="doc-block-icon">{{$:/core/images/warning}}</div> $_$
+<div class="doc-block-icon">
+{{$:/core/images/warning}}
+</div>
+$_$
 </div>
 \end
 
