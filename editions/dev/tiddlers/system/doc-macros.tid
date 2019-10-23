@@ -63,6 +63,8 @@ type: text/vnd.tiddlywiki
 
 \define .button(_) <span class="doc-button">{{$:/core/ui/Buttons/$_$!!caption}}</span>
 
+\define .icon(_) <span class="doc-icon">{{$_$}}</span>
+
 \define .tip(_)
 <div class="doc-icon-block">
 <div class="doc-block-icon">
