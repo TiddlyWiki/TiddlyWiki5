@@ -98,6 +98,12 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 300;
 }
 
+/* Let these behave like p´s in this context. */
+blockquote > div {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
 pre {
 	display: block;
 	padding: 14px;
