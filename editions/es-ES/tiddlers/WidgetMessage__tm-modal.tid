@@ -21,7 +21,7 @@ Este mensaje se genera normalmente con ButtonWidget y lo procesa el núcleo de ~
 Este es un ejemplo de modal y de cómo se le pasan parámetros:
 
 
-<$macrocall $name='wikitext-example-without-html' 
+<$macrocall $name='wikitext-example-without-html'
 
 src='Escribe tu nombre: <$edit-text tiddler="$:/temp/yourName" tag="input" default="Nombre"/>
 
