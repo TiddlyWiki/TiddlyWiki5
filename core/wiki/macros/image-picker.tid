@@ -35,5 +35,4 @@ $actions$
 
 \define image-picker-include-tagged-images(actions)
 <$macrocall $name="image-picker" filter="[all[shadows+tiddlers]is[image]] [all[shadows+tiddlers]tag[$:/tags/Image]] -[type[application/pdf]] +[!has[draft.of]sort[title]]" actions="""$actions$"""/>
-
 \end
