@@ -40,6 +40,11 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 </$reveal>
 </$vars>
 \end
+
+\define get-css-input-selector()
+[data-tiddler-title="$(currentTiddlerCSSEscaped)$"] .tc-edit-field-add input
+\end
+
 \whitespace trim
 
 <div class="tc-edit-fields">
@@ -67,12 +72,13 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 </div>
 
 <$fieldmangler>
+<$vars saveInputTiddler={{{ [[$:/temp/NewFieldName/Input/]addsuffix<currentTiddler>] }}} currentTiddlerCSSEscaped={{{ [<currentTiddler>escapecss[]] }}}>
 <div class="tc-edit-field-add">
 <em class="tc-edit">
 <<lingo Fields/Add/Prompt>>&nbsp;
 </em>
 <span class="tc-edit-field-add-name">
-<$edit-text tiddler=<<newFieldNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}} focusPopup=<<qualify "$:/state/popup/field-dropdown">> class="tc-edit-texteditor tc-popup-handle" tabindex={{$:/config/EditTabIndex}} focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] ~[[false]] }}}/>
+<$macrocall $name="selectable-input" tiddler=<<newFieldNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}} focusPopup=<<qualify "$:/state/popup/field-dropdown">> class="tc-edit-texteditor tc-popup-handle" tabindex={{$:/config/EditTabIndex}} focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] ~[[false]] }}} saveTiddler=<<saveInputTiddler>> refreshTiddler=<<qualify "$:/temp/SelectedFieldName">> configTiddlerPrefix="$:/config/ui/field-name/" refreshQualifier=<<qualify "$:/qualifier/refresh-input">>/>
 </span>&nbsp;
 <$button popup=<<qualify "$:/state/popup/field-dropdown">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Field/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Field/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>&nbsp;
 <$reveal state=<<qualify "$:/state/popup/field-dropdown">> type="nomatch" text="" default="">
@@ -82,19 +88,31 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 <div class="tc-dropdown-item">
 <<lingo Fields/Add/Dropdown/User>>
 </div>
-<$set name="newFieldName" value={{{ [<newFieldNameTiddler>get[text]] }}}>
-<$list filter="[!is[shadow]!is[system]fields[]search:title<newFieldName>sort[]] -created -creator -draft.of -draft.title -modified -modifier -tags -text -title -type"  variable="currentField">
+<$set name="userInput" value={{{ [<saveInputTiddler>get[text]] }}}>
+<$list filter="[subfilter{$:/config/ui/field-name/input-filter-1}]"  variable="currentField">
+<$list filter="[<newFieldNameTiddler>get[text]match<currentField>]" emptyMessage="""<$link to=<<currentField>>>
+<$text text=<<currentField>>/>
+</$link>""">
+<span class="tc-list-item-selected">
 <$link to=<<currentField>>>
 <$text text=<<currentField>>/>
 </$link>
+</span>
+</$list>
 </$list>
 <div class="tc-dropdown-item">
 <<lingo Fields/Add/Dropdown/System>>
 </div>
-<$list filter="[fields[]search:title<newFieldName>sort[]] -[!is[shadow]!is[system]fields[]]" variable="currentField">
+<$list filter="[subfilter{$:/config/ui/field-name/input-filter-2}]" variable="currentField">
+<$list filter="[<newFieldNameTiddler>get[text]match<currentField>]" emptyMessage="""<$link to=<<currentField>>>
+<$text text=<<currentField>>/>
+</$link>""">
+<span class="tc-list-item-selected">
 <$link to=<<currentField>>>
 <$text text=<<currentField>>/>
 </$link>
+</span>
+</$list>
 </$list>
 </$set>
 </$linkcatcher>
@@ -112,4 +130,5 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 <$macrocall $name="new-field"/>
 </span>
 </div>
+</$vars>
 </$fieldmangler>
