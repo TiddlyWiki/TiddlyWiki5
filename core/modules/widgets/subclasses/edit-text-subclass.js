@@ -43,7 +43,6 @@ exports.prototype.refresh = function(event) {
 		var refreshCondition = this.getAttribute("refreshCondition");
 		if(this.refreshTiddler && event[this.refreshTiddler] && (refreshCondition === "true" || refreshCondition === "yes")) {
 			this.engine.domNode.value = this.getEditInfo().value;
-			this.wiki.deleteTiddler(this.refreshTiddler);
 		} else if(event[this.editTitle] && (event[this.editTitle].deleted !== true)) {
 			if(!event[this.refreshTiddler] && refreshCondition !== "true" && refreshCondition !== "yes") {
 				//update the saveTiddler with the new text
