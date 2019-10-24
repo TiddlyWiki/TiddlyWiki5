@@ -11,7 +11,7 @@ caption: {{$:/language/Search/DefaultResults/Caption}}
 </$list>
 </$list>
 
-//<small>{{$:/language/Search/Matches/All}}</small>//
+//<small>{{$:/language/Search/Matches/Other}}</small>//
 
 <$list filter="[subfilter{$:/config/ui/sidebar-search/input-filter-2}]">
 <$list filter="[{$:/temp/search}match<currentTiddler>]" variable="ignore" emptyMessage="""<$transclude tiddler="$:/core/ui/ListItemTemplate"/>""">
