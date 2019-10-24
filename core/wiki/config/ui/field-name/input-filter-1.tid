@@ -1,0 +1,3 @@
+title: $:/config/ui/field-name/input-filter-1
+
+[!is[shadow]!is[system]fields[]search:title<userInput>sort[]] -created -creator -draft.of -draft.title -modified -modifier -tags -text -title -type
