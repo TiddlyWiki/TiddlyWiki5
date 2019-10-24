@@ -64,8 +64,9 @@ $(itemFilter1)$ $(itemFilter2)$
 <$vars userInput={{{ [<__saveTiddler__>get[text]] ~[[]] }}} selectedItem={{{ [<__index__>match[]addprefix<__tiddler__>get[text]] [<__index__>!match[]addprefix<__tiddler__>removesuffix<__index__>getindex<__index__>] }}}>
 <$set name="itemFilter1" filter=<<__filter1__>>>
 <$set name="itemFilter2" filter=<<__filter2__>>>
-<$set name="itemList" filter=<<get-full-selectable-item-list>>>
-<$list filter="[enlist<itemList>] +[$beforeafter$<selectedItem>] ~[enlist<itemList>$reverse$nth[1]]" variable="nextItem">
+<$set name="itemList" value=<<get-full-selectable-item-list>>>
+<$action-setfield $tiddler="testtiddler" text=<<itemList>>/>
+<$list filter="[enlist:raw<itemList>] +[$beforeafter$<selectedItem>] ~[enlist:raw<itemList>$reverse$nth[1]]" variable="nextItem">
 <$action-deletetiddler $tiddler=<<__refreshTiddler__>>/>
 <$action-setfield $tiddler=<<__refreshTiddler__>> refresh-qualifier={{{ [[$(tv-refresh-input-qualifier)$]] }}}/>
 <$list filter="[<__index__>!match[]]" variable="ignore" emptyMessage="""
