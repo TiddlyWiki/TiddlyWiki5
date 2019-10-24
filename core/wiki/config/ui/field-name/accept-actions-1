@@ -1,0 +1,3 @@
+title: $:/config/ui/field-name/accept-actions-1
+
+<$action-sendmessage $message="tm-focus-selector" $param=".tc-edit-field-add-value input"/>
