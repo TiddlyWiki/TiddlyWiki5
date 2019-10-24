@@ -1,0 +1,3 @@
+title: $:/config/ui/field-name/input-filter-2
+
+[fields[]search:title<userInput>sort[]] -[!is[shadow]!is[system]fields[]]
