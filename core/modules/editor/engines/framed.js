@@ -79,6 +79,7 @@ function FramedEngine(options) {
 	// Add event listeners
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
+		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
 		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"}
 	]);
@@ -151,6 +152,16 @@ FramedEngine.prototype.focus  = function() {
 		this.domNode.focus();
 		this.domNode.select();
 	}
+};
+
+/*
+Handle a focus event
+*/
+FramedEngine.prototype.handleFocusEvent = function(event) {
+	var fakeEvent = {};
+	fakeEvent.type = "click";
+	fakeEvent.target = this.iframeNode;
+	$tw.popup.handleEvent(fakeEvent);
 };
 
 /*
