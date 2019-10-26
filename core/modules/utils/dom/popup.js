@@ -58,10 +58,15 @@ Popup.prototype.findPopup = function(title) {
 };
 
 Popup.prototype.handleEvent = function(event) {
-	if(event.type === "click") {
+	if(event.type === "click" || event.type === "focus") {
 		// Find out what was clicked on
 		var info = this.popupInfo(event.target),
+			cancelLevel;
+		if(event.type === "click") {
 			cancelLevel = info.popupLevel - 1;
+		} else {
+			cancelLevel = info.popupLevel;
+		}
 		// Don't remove the level that was clicked on if we clicked on a handle
 		if(info.isHandle) {
 			cancelLevel++;
