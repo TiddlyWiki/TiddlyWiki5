@@ -128,6 +128,9 @@ function CodeMirrorEngine(options) {
 	this.cm.on("keydown",function(cm,event) {
 		return self.widget.handleKeydownEvent.call(self.widget,event);
 	});
+	this.cm.on("focus",function(cm,event) {
+		$tw.popup.handleEvent(event);	
+	});
 }
 
 /*
