@@ -40,7 +40,7 @@ Notice, the //span// gets wrapped in a //p//: It is parsed in inline mode. The /
 
 ! Attributes
 
-In an extension of conventional HTML syntax, attributes of elements/widgets can be specified in several different ways: 
+In an extension of conventional HTML syntax, attributes of elements/widgets can be specified in several different ways:
 
 * a literal string
 * a transclusion of a TextReference
@@ -103,4 +103,3 @@ This example shows how to add a prefix to a value:
 ```
 <$text text={{{ [<currentTiddler>addprefix[$:/myprefix/]] }}} />
 ```
-

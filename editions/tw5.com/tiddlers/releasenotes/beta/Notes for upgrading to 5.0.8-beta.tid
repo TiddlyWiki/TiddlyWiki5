@@ -32,25 +32,21 @@ The positive aspect of the change is that it removes the need to pack multiple H
 
 Consider the difference between these two examples. First, here's an HTML tag that starts with two line breaks:
 
-<<wikitext-example src:"
-<blockquote>
+<<wikitext-example src:"<blockquote>
 
 ! This is a heading
 
 And a paragraph of text.
 
-</blockquote>
-">>
+</blockquote>">>
 
 Secondly, here's an HTML tag with just a single line break. Notice how the heading is no longer recognised as a heading
 
-<<wikitext-example src:"
-<blockquote>
+<<wikitext-example src:"<blockquote>
 ! This is a heading
 
 And a paragraph of text.
-</blockquote>
-">>
+</blockquote>">>
 
 ! Changed commands for [[TiddlyWiki on Node.js]]
 
@@ -64,4 +60,3 @@ tiddlywiki mywikifolder --server
 ```
 
 Note that the name of the ''clientserver'' edition has changed to ''server''.
-
