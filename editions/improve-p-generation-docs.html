@@ -10968,10 +10968,14 @@ width: 33%;
 float: right;
 clear: both;
 margin: 0 0 1em 1em;
-padding: 0 0 0 .6em;
-border-left: 1px solid #ddd;
+padding: 0;
 font-size: .8em;
 color: #555;
+}
+
+aside.info + aside.info {
+border-top: 1px solid #ddd;
+padding: 1em 0 0 0;
 }
 
 aside.info *:first-child { margin-top:0; }
@@ -11048,7 +11052,6 @@ background:transparent;
 
 .not-wikitext { background: white; color: #555; }
 .not-wikitext * { background: transparent; border: 0; padding: 0; }
-
 </pre>
 </div>
 <div created="20160817104110857" modified="20191027004100974" tags="EN" title="Text preview" type="text/vnd.tiddlywiki">
@@ -11129,7 +11132,7 @@ Sie erhalten:
 <div created="20191011110140105" modified="20191027010114038" tags="DE" title="Wie wird WikiText nach Html konvertiert?" type="text/vnd.tiddlywiki">
 <pre>WikiText besteht zum einen aus [[Syntax-Elementen|https://de.wikipedia.org/wiki/Syntax]] die eine [[Markdown|https://de.wikipedia.org/wiki/Markdown]]-ähnliche Natur haben. Das schließt auch die Syntax von [[Makros|Macros]] -- `&lt;&lt;...&gt;&gt;` -- und [[Transklusionen|Transclusion in WikiText]] -- `{{...}}` -- mit ein. ~WikiText kann aber auch beliebig verschachtelte Html-Konstrukte enthalten -- [[Standard-HTML|https://www.w3schools.com/html/html_intro.asp]], die hauseigenen [[Widgets]], andere Dialekte wie [[SVG|https://inkscape.org/de/entwickeln/das-svg-format/]], ja, jeder benutzerdefinierte Element-Name ist erlaubt.
 
-Man kann diese zwei verschiedenen Syntaxen frei mischen, daraus resultieren jedoch einige Syntax-Regeln, insbesondere in Bezug auf [[automatisch erzeugte Textabsätze|Automatisch erzeugte Textabsätze]], die man einhalten muss, um das gewünschte Resultat, sprich [[valides Html|Valides Html]] zu erhalten. Wir sprechen insbesondere von der Funktion die Zeilenumbrüche im WikiText haben. 
+Man kann diese zwei verschiedenen Syntaxen frei mischen, daraus resultieren jedoch einige Syntax-Regeln, insbesondere in Bezug auf [[automatisch erzeugte Textabsätze|Automatisch erzeugte Textabsätze]], die man einhalten muss, um das gewünschte Resultat, sprich [[valides Html|Valides Html]] zu erhalten. Wir sprechen insbesondere von der Funktion die Zeilenumbrüche im WikiText haben.
 
 Diese Syntax-Regeln werden Wir jetzt anhand der Funktionsweise des Wikiparsers betrachten.
 
@@ -11163,20 +11166,6 @@ Tip: Wenn man das Plugin //Tools for exploring the internals of ~TiddlyWiki// in
 
 &lt;/aside&gt;
 
-Wenn der Wikiparser seine Arbeit vollendet hat, wird er einen __Parsebaum__ erzeugt haben.
-
-Der Parsebaum ist eine __Liste__ von __Objekten__, die ihrerseits Kind-Parsebäume enthalten können.
-
-Zum Beispiel erzeugt dieser ~WikiText ...
-
-```
-! Hallo Welt
-
-Die Sonne scheint
-```
-
-... (vereinfacht) diesen Parsebaum:
-
 &lt;aside class=&quot;info&quot;&gt;
 
 `&quot;` und `&quot;` kennzeichnet //Zeichenketten//. Sie sind der für Text zuständige [[Datentyp|https://www.inf-schule.de/programmierung/imperativeprogrammierung/konzepteimp/datentypen/konzept_datentyp]] in Programmiersprachen.
@@ -11204,6 +11193,36 @@ Die Sonne scheint
 Auch `true` und `false` kommen in Parsebäumen vor -- Das sind die zwei Zustände des Datentyps //Bool// (benannt nach [[George Boole|https://de.wikipedia.org/wiki/George_Boole]]). Er dient als An/Aus-Schalter.
 
 &lt;/aside&gt;
+
+&lt;aside class=&quot;info&quot;&gt;
+
+Diese zwei Objekte sind gleich, die Leerzeichen sind unwichtig:
+
+```
+{'foo':'bar'}
+```
+
+```
+{
+    'foo' : 'bar'
+}
+```
+
+&lt;/aside&gt;
+
+Wenn der Wikiparser seine Arbeit vollendet hat, wird er einen __Parsebaum__ erzeugt haben.
+
+Der Parsebaum ist eine __Liste__ von __Objekten__, die ihrerseits Kind-Parsebäume enthalten können.
+
+Zum Beispiel erzeugt dieser ~WikiText ...
+
+```
+! Hallo Welt
+
+Die Sonne scheint
+```
+
+... (vereinfacht) diesen Parsebaum:
 
 ```
 [
@@ -11233,22 +11252,6 @@ Auch `true` und `false` kommen in Parsebäumen vor -- Das sind die zwei Zuständ
 Alle Objekte haben mindestens einen __Schlüssel__ &quot;type&quot;, der den Typ des aktuellen Objekts definiert. Obiger Parsebaum enthält zwei Typen von Objekt: Element-Objekte -- Sie erzeugen Element-Knoten im resultierenden [[DOM|https://de.wikipedia.org/wiki/Document_Object_Model]] -- und Text-Objekte -- Sie erzeugen Textknoten.
 
 Objekte die Kinder haben besitzen einen Schlüssel &quot;children&quot; (deutsch: &quot;Kinder&quot;). Die Kinder werden in Listen verwaltet. Text-Objekte haben niemals Kinder.
-
-&lt;aside class=&quot;info&quot;&gt;
-
-Diese zwei Objekte sind gleich, die Leerzeichen sind unwichtig:
-
-```
-{'foo':'bar'}
-```
-
-```
-{
-    'foo' : 'bar'
-}
-```
-
-&lt;/aside&gt;
 
 In obigem Code-Beispiel dienen übrigens __Leerzeichen__ außerhalb von __Zeichenketten__ nur der Lesbarkeit und sind ohne Bedeutung für [[das verarbeitende Programm|https://www.w3schools.com/js/]]. Im ~WikiText ist das anders. Dort haben Leerzeilen eine Bedeutung für den Parser. Dazu gleich mehr.
 
@@ -11457,10 +11460,18 @@ Am Anfang jedes neuen Textblocks prüft der Parser zuerst, ob eine der Block-Reg
 
 &lt;aside class=&quot;info&quot;&gt;
 
-Block-Regel passt:
-
 ```
 |* Liste
+```
+
+```
+* |Liste
+```
+
+Block-Regel passt!
+
+```
+&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;
 ```
 
 ```
@@ -11481,10 +11492,14 @@ Dann mit dem Zeiger auf zum nächsten Textblock. Die dazwischenliegenden Leerzei
 
 &lt;aside class=&quot;info&quot;&gt;
 
-Keine Block-Regel passt:
-
 ```
 |Text
+```
+
+Keine Block-Regel passt!
+
+```
+&lt;p&gt;&lt;/p&gt;
 ```
 
 ```
@@ -11507,18 +11522,34 @@ Anschließend versucht der Parser alle Inline-Regeln durch.
 
 &lt;aside class=&quot;info&quot;&gt;
 
-Inline-Regel passt:
+```
+&lt;p&gt;&lt;/p&gt;
+```
 
 ```
 |//kursiv//
 ```
 
 ```
-//kursiv//|
+//|kursiv//
+```
+
+Inline-Regel passt!
+
+```
+&lt;p&gt;&lt;em&gt;&lt;/em&gt;&lt;/p&gt;
+```
+
+```
+//kursiv|//
 ```
 
 ```
 &lt;p&gt;&lt;em&gt;kursiv&lt;/em&gt;&lt;/p&gt;
+```
+
+```
+//kursiv//|
 ```
 
 &lt;/aside&gt;
@@ -11529,31 +11560,39 @@ Wenn eine Inline-Regel am Anfang des Textblocks passt, lässt der Parser diese d
 
 &lt;aside class=&quot;info&quot;&gt;
 
-Keine Inline-Regel passt am Anfang:
+```
+&lt;p&gt;&lt;/p&gt;
+```
 
 ```
 |Text //kursiv//
 ```
+
+Keine Inline-Regel passt am Anfang!
 
 ```
 Text |//kursiv//
 ```
 
 ```
-&lt;p&gt;Text ...&lt;/p&gt;
+&lt;p&gt;Text &lt;/p&gt;
 ```
+
+(fortsetzen wie oben)
 
 &lt;/aside&gt;
 
-Wenn auch keine Inline-Regel an dieser Stelle passt, fügt der Parser den Text von hier bis zur nächsten passenden Inline-Regel im Textblock als Text in die Liste der Kinder des Absatz-Parsebaumes ein. Dann verschiebt er den Zeiger an den Anfang dieser Regel, wo es dann mit dem Inline-Parsen weitergeht.
-
 &lt;aside class=&quot;info&quot;&gt;
 
-Keine Inline-Regel passt am Ende:
+```
+&lt;p&gt;Text &lt;em&gt;kursiv&lt;/em&gt;&lt;/p&gt;
+```
 
 ```
 Text //kursiv//| Text
 ```
+
+Keine Inline-Regel passt am Ende!
 
 ```
 Text //kursiv// Text|
@@ -11564,6 +11603,8 @@ Text //kursiv// Text|
 ```
 
 &lt;/aside&gt;
+
+Wenn auch keine Inline-Regel an dieser Stelle passt, fügt der Parser den Text von hier bis zur nächsten passenden Inline-Regel im Textblock als Text in die Liste der Kinder des Absatz-Parsebaumes ein. Dann verschiebt er den Zeiger an den Anfang dieser Regel, wo es dann mit dem Inline-Parsen weitergeht.
 
 Wenn bis zum Ende des Textblocks keine weitere Inline-Regel passt, dann wird der verbleibende Text des Texblocks in den Absatz-Parsebaum eingefügt. Der Zeiger wird ans Ende des Textblocks verschoben.
 
@@ -11673,32 +11714,34 @@ Wenn dieser Tag sich, wie jedes andere gültige ~WikiText-Block-Element, am Anfa
 
 &lt;aside class=&quot;info&quot;&gt;
 
-Parsen eines Inline-Elements in einem Textabsatz
+```
+&lt;p&gt;Text &lt;/p&gt;
+```
 
 ```
 Text |&lt;span&gt;Text&lt;/span&gt;
 ```
 
 ```
-Text &lt;span&gt;Text&lt;/span&gt;|
+Text &lt;span&gt;|Text&lt;/span&gt;
+```
+
+Inline-Html-Regel passt!
+
+```
+&lt;p&gt;Text &lt;span&gt;&lt;/span&gt;&lt;/p&gt;
+```
+
+```
+Text &lt;span&gt;Text|&lt;/span&gt;
 ```
 
 ```
 &lt;p&gt;Text &lt;span&gt;Text&lt;/span&gt;&lt;/p&gt;
 ```
 
-Parsen eines Inline-Elements in einer Liste
-
 ```
-* Text |&lt;span&gt;Text&lt;/span&gt;
-```
-
-```
-* Text &lt;span&gt;Text&lt;/span&gt;|
-```
-
-```
-&lt;ul&gt;&lt;li&gt;Text &lt;span&gt;Text&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;
+Text &lt;span&gt;Text&lt;/span&gt;|
 ```
 
 &lt;/aside&gt;
@@ -11741,7 +11784,7 @@ Wird dieser ~WikiText...
 &lt;p&gt;&lt;element&gt;...&lt;/element&gt;&lt;/p&gt;
 ```
 
-... oder Block-Element werden? 
+... oder Block-Element werden?
 
 ```
 &lt;element&gt;...&lt;/element&gt;
@@ -11755,7 +11798,19 @@ Wenn das html-Element am Start eines Textblocks steht, könnte das Element sowoh
 
 &lt;aside class=&quot;info&quot;&gt;
 
-Starttag parsen ...
+```
+|&lt;span&gt;&lt;/span&gt;
+```
+
+```
+&lt;span&gt;|&lt;/span&gt;
+```
+
+Block-HTML-Regel passt nicht!
+
+```
+&lt;p&gt;&lt;/p&gt;
+```
 
 ```
 |&lt;span&gt;&lt;/span&gt;
@@ -11765,26 +11820,14 @@ Starttag parsen ...
 &lt;span&gt;|&lt;/span&gt;
 ```
 
-... kein Zeilenumbruch. Also kein Block-Element. Darum //p// erzeugen, ...
+Inline-HTML-Regel passt!
 
 ```
-&lt;p&gt;&lt;/p&gt;
-```
-
-... inline parsen, ...
-
-```
-|&lt;span&gt;&lt;/span&gt;
+&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;
 ```
 
 ```
 &lt;span&gt;&lt;/span&gt;|
-```
-
-... und in das //p// einfügen:
-
-```
-&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;
 ```
 
 &lt;/aside&gt;
@@ -11809,10 +11852,15 @@ Starttag parsen ...
 |&lt;/div&gt;
 ```
 
-... Block-Element! Kein //p// erzeugen.
+Block-HTML-Regel passt!
 
 ```
 &lt;div&gt;&lt;/div&gt;
+```
+
+```
+&lt;div&gt;
+&lt;/div&gt;|
 ```
 
 &lt;/aside&gt;
@@ -11860,10 +11908,122 @@ Text
 &lt;/div&gt;
 ```
 
-... gültiges Html erzeugt (//div//´s dürfen Textabsätze enthalten):
+... gültiges Html erzeugt ...
 
 ```
 &lt;div&gt;&lt;p&gt;Text&lt;/p&gt;&lt;/div&gt;
+```
+
+... denn //div//´s dürfen Textabsätze enthalten.
+
+&lt;/aside&gt;
+
+&lt;aside class=&quot;info&quot;&gt;
+
+```
+&lt;div&gt;&lt;/div&gt;
+```
+
+```
+&lt;div&gt;|
+Text
+&lt;/div&gt;
+```
+
+```
+&lt;div&gt;
+|Text
+&lt;/div&gt;
+```
+
+Nur ein Zeilenumbruch, Kinder werden nur mit Inline-Regeln geprüft!
+
+```
+&lt;div&gt;
+Text|
+&lt;/div&gt;
+```
+
+```
+&lt;div&gt;Text&lt;/div&gt;
+```
+
+```
+&lt;div&gt;
+Text
+&lt;/div&gt;|
+```
+
+&lt;/aside&gt;
+
+&lt;aside class=&quot;info&quot;&gt;
+
+```
+&lt;div&gt;&lt;/div&gt;
+```
+
+```
+&lt;div&gt;|
+
+Text
+
+&lt;/div&gt;
+```
+
+```
+&lt;div&gt;
+
+|Text
+
+&lt;/div&gt;
+```
+
+Zwei Zeilenumbrüche. Kinder werden zuerst mit den Blockregeln geparst
+
+```
+&lt;div&gt;
+
+|Text
+
+&lt;/div&gt;
+```
+
+Keine Block-Regel passt!
+
+```
+&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+```
+
+Kinder werden nun mit den Inline-Regeln geparst
+
+```
+&lt;div&gt;
+
+|Text
+
+&lt;/div&gt;
+```
+
+Keine Inline-Regel passt!
+
+```
+&lt;div&gt;
+
+Text|
+
+&lt;/div&gt;
+```
+
+```
+&lt;div&gt;&lt;p&gt;Text&lt;/p&gt;&lt;/div&gt;
+```
+
+```
+&lt;div&gt;
+
+Text
+
+&lt;/div&gt;|
 ```
 
 &lt;/aside&gt;
@@ -11877,36 +12037,6 @@ Laut dem HTML5 Standard dürfen aber Inline-Elemente (zum Beispiel //span//) kei
 Wenn also unser Html-Element, das im ~WikiText am Anfang des Textblocks steht, ein //span// ist, dann sollen die Kinder nur mit den ~WikiText-Inline-Regeln getestet werden.
 
 Wenn es aber ein //div// ist, sind auch die ~WikiText-Block-Regeln ok.
-
-&lt;aside class=&quot;info&quot;&gt;
-
-Ein Zeilenumbruch, Kinder werden nur mit Inline-Regeln geprüft:
-
-```
-&lt;div&gt;
-Text
-&lt;/div&gt;
-```
-
-```
-&lt;div&gt;Text&lt;/div&gt;
-```
-
-Zwei Zeilenumbrüche, Kinder werden normal, mit Block- und Inline-Regeln geprüft. Absatz-Erzeugung inclusive:
-
-```
-&lt;div&gt;
-
-Text
-
-&lt;/div&gt;
-```
-
-```
-&lt;div&gt;&lt;p&gt;Text&lt;/p&gt;&lt;/div&gt;
-```
-
-&lt;/aside&gt;
 
 Der Parser führt also einen erneuten Test durch:
 
@@ -12107,7 +12237,6 @@ Schließen Sie also im Moment bitte ihre Tags, wo notwendig. Das schon erwähnte
 Damit beenden wir unser Beschreibung der Funktionsweise des Wikiparsers. Wir hoffen, daß Sie ihnen dabei geholfen hat, zu verstehen, welchen ~WikiText Sie schreiben müssen um valides Html zu erzeugen.
 
 Viel Spass beim ~WikiTexten!
-
 </pre>
 </div>
 <div created="20191026230051990" modified="20191027004027657" tags="Todo" title="WikiText Cheatsheet" type="text/vnd.tiddlywiki">
