@@ -5,6 +5,7 @@
 #[c]I use it to compare static wikis generated fom different branches.
 #[c]
 #[c]Created with the Code Browser, it looks relatively acceptable with that editor :-)
+#[c]https://github.com/heronils/Code_Browser_49
 #[c]
 
 
@@ -13,8 +14,8 @@ import os
 # pip install regex for super powers
 from regex import compile, sub as replaceall, VERBOSE, DOTALL
 
-old = 'alltiddlers-old.html'
-new = 'alltiddlers-new.html'
+old = 'output/static-output-master.html'
+new = 'output/static-output-feature.html'
 
 def norm(path):
 	isnew = 'new.html' in path
@@ -28,13 +29,13 @@ def norm(path):
 	#[of]:remove style elements
 	#[c]I actually checked manually that nothing in the css code breaks. just some whitespaces are different.
 	#[c]
-
+	
 	text = replaceall(r'<style\s+.+?</style>', '', text, flags=DOTALL)
 	#[cf]
 	#[of]:remove script elements
 	text = replaceall(r'<script\s+.+?</script>', '', text, flags=DOTALL)
 	#[cf]
-
+	
 	#[of]:~ remove svg elements
 	#~ text = replaceall(r'<svg\s+.+?</svg>', '', text, flags=DOTALL)
 	#[cf]
@@ -52,7 +53,7 @@ def norm(path):
 	#[of]remove quoted attributes (only "..." values, not """...""" etc):remove quoted attributes (only "..." values, not """...""" etc)
 	#[c]same here
 	#[c]
-
+	
 	#[of]attributes with non-empty values:attributes with non-empty values
 	text = replaceall(
 		r'''
@@ -72,7 +73,7 @@ def norm(path):
 	)
 	#[cf]
 	#[cf]
-
+	
 	assert '"' not in text
 	#[cf]
 
@@ -93,7 +94,7 @@ def norm(path):
 	#[c]so instead we write a parser so terrible, that i already nearly
 	#[c]forgot how it works :-) But it works!
 	#[c]
-
+	
 	if not isnew:
 		#[of]:pat
 		pat = compile(r'''
@@ -125,13 +126,13 @@ def norm(path):
 			nonlocal cleaned, p_locations
 			doctype, bo, bc, b, v, io, ic, i, other, error = match.groups()
 			#~ print((doctype, bo, bc, b, io, ic, i, other, error))
-
+		
 			if bo is not None:
 				cleaned.append(bo)
 				cleaned[p_locations[-1]] = ''
 				if bo == '<p>':
 					p_locations.append(len(cleaned)-1)
-
+		
 			elif bc is not None:
 				if bc == '</p>':
 					if cleaned[p_locations[-1]]:
@@ -139,29 +140,29 @@ def norm(path):
 					p_locations.pop()
 				else:
 					cleaned.append(bc)
-
+		
 			elif b is not None:
 				cleaned[p_locations[-1]] = ''
 				cleaned.append(b)
-
+		
 			elif v is not None: cleaned.append(v)
-
+		
 			elif error is not None:
 				print(current[-5:])
 				raise Exception(error)
-
+		
 			elif doctype is not None: cleaned.append(doctype)
 			elif io is not None: cleaned.append(io)
 			elif ic is not None: cleaned.append(ic)
 			elif i is not None: cleaned.append(i)
 			elif other is not None: cleaned.append(other)
-
+		
 			return match[0]
 		#[cf]
 		pat.sub(handler, text)
-
+	
 		text = ''.join(cleaned)
-
+	
 	#[c]testing that it works
 	#~ with open('original.txt', 'w', encoding='utf-8') as f:
 		#~ f.write(text)
@@ -233,7 +234,7 @@ def norm(path):
 	#[c]Those get eg. created by the navigator widget in the Tiddler
 	#[c]'Creating SubStories'
 	#[c]
-
+	
 	if not isnew:
 		#[of]<p></p>		-->		(delete):<p>\\s*</p>		-->		(delete)
 		text = replaceall(
@@ -293,14 +294,14 @@ def norm(path):
 	#[cf]
 	#[of]:<a><p><img></p></a>	-->		<a><img></a>
 	#[c]
-
+	
 	text = replaceall(
 		r'<a>\s*<p>\s*<img>\s*</p>\s*</a>',
 		r'<a><img></a>',
 		text
 	)
-
-
+	
+	
 	#[cf]
 	#[cf]
 
