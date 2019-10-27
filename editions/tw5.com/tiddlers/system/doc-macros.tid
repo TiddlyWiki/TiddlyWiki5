@@ -128,18 +128,4 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 </$list>
 \end
 
-\define .with-comment-below(content, comment)
-<div class="with-comment-below">
-
-<pre class="content">
-<$text text="""$content$"""/>
-</pre>
-
-<pre class="comment">
-<$text text="""$comment$"""/>
-</pre>
-
-</div>
-\end
-
 <pre><$view field="text"/></pre>
