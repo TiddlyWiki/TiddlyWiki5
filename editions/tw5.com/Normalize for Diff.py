@@ -18,7 +18,7 @@ old = 'output/static-output-master.html'
 new = 'output/static-output-feature.html'
 
 def norm(path):
-	isnew = 'new.html' in path
+	isnew = 'feature.html' in path
 	with open(path, 'r', encoding='utf-8') as f:
 		text = f.read()
 
