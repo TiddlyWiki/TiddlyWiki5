@@ -77,11 +77,8 @@ def norm(path):
 	assert '"' not in text
 	#[cf]
 
-	# Todo: change generation of nested blockquotes in list.js.
-	# An intermediate p should  not be generated.
-	# (done, --> other PR. lets just exclude blockquotes here)
 	blockelems = '(?:div|ul|ol|dl|table|tr|td|'\
-	'h[1-6]|p|pre|style)'
+	'h[1-6]|p|pre|style|blockquote)'
 
 	#[of]remove p´s we dont want from old wiki:remove p´s we dont want from old wiki
 	#[c]we can not do this using regexes because eg it will not catch (but should)
