@@ -82,6 +82,9 @@ function FramedEngine(options) {
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
 		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"}
 	]);
+	$tw.utils.addEventListeners(this.iframeNode,[
+		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"}
+	]);
 	// Insert the element into the DOM
 	this.iframeDoc.body.appendChild(this.domNode);
 }
@@ -147,6 +150,16 @@ FramedEngine.prototype.fixHeight = function() {
 Focus the engine node
 */
 FramedEngine.prototype.focus  = function() {
+	if(this.domNode.focus && this.domNode.select) {
+		this.domNode.focus();
+		this.domNode.select();
+	}
+};
+
+/*
+Handle a focus event on the iframe
+*/
+FramedEngine.prototype.handleFocusEvent = function(event) {
 	if(this.domNode.focus && this.domNode.select) {
 		this.domNode.focus();
 		this.domNode.select();
