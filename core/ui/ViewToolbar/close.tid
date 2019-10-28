@@ -4,13 +4,15 @@ caption: {{$:/core/images/close-button}} {{$:/language/Buttons/Close/Caption}}
 description: {{$:/language/Buttons/Close/Hint}}
 
 \whitespace trim
-\define focus-selector()
-[data-tiddler-title="$(cssEscapedTitle)$"].tc-tiddler-frame input
+\define close-tiddler-actions-message()
+<$action-sendmessage $message="tm-focus-selector" $param=<<tc-edit-$(fieldSelector)$-selector>>/>
 \end
 \define close-tiddler-actions()
 <$list filter="[list[$:/StoryList]after<currentTiddler>]">
 <$set name="cssEscapedTitle" value={{{ [<currentTiddler>escapecss[]] }}}>
-<$action-sendmessage $message="tm-focus-selector" $param=<<focus-selector>>/>
+<$set name="fieldSelector" value={{$:/config/AutoFocus}}>
+<<close-tiddler-actions-message>>
+</$set>
 </$set>
 </$list>
 <$action-sendmessage $message="tm-close-tiddler"/>
