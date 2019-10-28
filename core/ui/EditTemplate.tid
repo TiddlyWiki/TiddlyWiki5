@@ -8,14 +8,16 @@ title: $:/core/ui/EditTemplate
 <$action-deletetiddler $tiddler=<<newFieldValueTiddler>>/>
 <$action-sendmessage $message="tm-save-tiddler"/>
 \end
-\define focus-selector()
-[data-tiddler-title="$(cssEscapedTitle)$"].tc-tiddler-frame input
+\define cancel-tiddler-actions-message()
+<$action-sendmessage $message="tm-focus-selector" $param=<<tc-edit-$(fieldSelector)$-selector>>/>
 \end
 \define cancel-tiddler-actions()
 <$list filter="[{!!draft.of}is[missing]]" variable="ignore">
 <$list filter="[list[$:/StoryList]after<currentTiddler>]">
 <$set name="cssEscapedTitle" value={{{ [<currentTiddler>escapecss[]] }}}>
-<$action-sendmessage $message="tm-focus-selector" $param=<<focus-selector>>/>
+<$set name="fieldSelector" value={{$:/config/AutoFocus}}>
+<<cancel-tiddler-actions-message>>
+</$set>
 </$set>
 </$list>
 </$list>
