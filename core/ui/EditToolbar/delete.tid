@@ -3,13 +3,15 @@ tags: $:/tags/EditToolbar $:/tags/ViewToolbar
 caption: {{$:/core/images/delete-button}} {{$:/language/Buttons/Delete/Caption}}
 description: {{$:/language/Buttons/Delete/Hint}}
 
-\define focus-selector()
-[data-tiddler-title="$(cssEscapedTitle)$"].tc-tiddler-frame input
+\define delete-tiddler-actions-message()
+<$action-sendmessage $message="tm-focus-selector" $param=<<tc-edit-$(fieldSelector)$-selector>>/>
 \end
 \define delete-tiddler-actions()
 <$list filter="[list[$:/StoryList]after<currentTiddler>]">
 <$set name="cssEscapedTitle" value={{{ [<currentTiddler>escapecss[]] }}}>
-<$action-sendmessage $message="tm-focus-selector" $param=<<focus-selector>>/>
+<$set name="fieldSelector" value={{$:/config/AutoFocus}}>
+<<delete-tiddler-actions-message>>
+</$set>
 </$set>
 </$list>
 <$action-sendmessage $message="tm-delete-tiddler"/>
