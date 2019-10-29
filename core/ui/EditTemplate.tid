@@ -9,7 +9,7 @@ title: $:/core/ui/EditTemplate
 <$action-sendmessage $message="tm-save-tiddler"/>
 \end
 \define cancel-tiddler-actions-message()
-<$action-sendmessage $message="tm-focus-selector" $param=<<tc-edit-$(fieldSelector)$-selector>>/>
+<$action-sendmessage $message="tm-focus-selector" $param=<<tv-edit-$(fieldSelector)$-selector>>/>
 \end
 \define cancel-tiddler-actions()
 <$list filter="[{!!draft.of}is[missing]]" variable="ignore">
