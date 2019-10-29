@@ -12,14 +12,12 @@ title: $:/core/ui/EditTemplate
 <$action-sendmessage $message="tm-focus-selector" $param=<<tv-edit-$(fieldSelector)$-selector>>/>
 \end
 \define cancel-save-tiddler-actions(message)
-<$list filter="[{!!draft.of}is[missing]]" variable="ignore">
 <$list filter="[list[$:/StoryList]after<currentTiddler>]">
 <$set name="cssEscapedTitle" value={{{ [<currentTiddler>escapecss[]] }}}>
 <$set name="fieldSelector" value={{$:/config/AutoFocus}}>
 <<cancel-save-tiddler-actions-message>>
 </$set>
 </$set>
-</$list>
 </$list>
 <$list filter="[[$message$]!match[]]" variable="ignore">
 <$action-sendmessage $message="tm-$message$-tiddler"/>
