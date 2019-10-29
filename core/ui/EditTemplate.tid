@@ -21,7 +21,7 @@ title: $:/core/ui/EditTemplate
 </$set>
 </$list>
 </$list>
-<$list filter="[[$message$]!match[]]">
+<$list filter="[[$message$]!match[]]" variable="ignore">
 <$action-sendmessage $message="tm-$message$-tiddler"/>
 </$list>
 \end
