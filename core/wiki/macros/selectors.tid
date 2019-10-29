@@ -1,18 +1,18 @@
 title: $:/core/macros/selectors
 tags: $:/tags/Macro
 
-\define tc-edit-title-selector()
+\define tv-edit-title-selector()
 [data-tiddler-title="$(cssEscapedTitle)$"] input.tc-titlebar
 \end
-\define tc-edit-tags-selector()
+\define tv-edit-tags-selector()
 [data-tiddler-title="$(cssEscapedTitle)$"] .tc-add-tag-name input
 \end
-\define tc-edit-text-selector()
+\define tv-edit-text-selector()
 [data-tiddler-title="$(cssEscapedTitle)$"] iframe.tc-edit-texteditor-body
 \end
-\define tc-edit-type-selector()
+\define tv-edit-type-selector()
 [data-tiddler-title="$(cssEscapedTitle)$"] .tc-type-selector input
 \end
-\define tc-edit-fields-selector()
+\define tv-edit-fields-selector()
 [data-tiddler-title="$(cssEscapedTitle)$"] .tc-edit-field-add-name input
 \end
