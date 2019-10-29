@@ -4,7 +4,7 @@ caption: {{$:/core/images/delete-button}} {{$:/language/Buttons/Delete/Caption}}
 description: {{$:/language/Buttons/Delete/Hint}}
 
 \define delete-tiddler-actions-message()
-<$action-sendmessage $message="tm-focus-selector" $param=<<tc-edit-$(fieldSelector)$-selector>>/>
+<$action-sendmessage $message="tm-focus-selector" $param=<<tv-edit-$(fieldSelector)$-selector>>/>
 \end
 \define delete-tiddler-actions()
 <$list filter="[list[$:/StoryList]after<currentTiddler>]">
