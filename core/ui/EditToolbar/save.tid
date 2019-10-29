@@ -5,6 +5,7 @@ description: {{$:/language/Buttons/Save/Hint}}
 
 \define save-tiddler-button()
 <$fieldmangler><$button tooltip={{$:/language/Buttons/Save/Hint}} aria-label={{$:/language/Buttons/Save/Caption}} class=<<tv-config-toolbar-class>>>
+<<cancel-save-tiddler-actions>>
 <<save-tiddler-actions>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/done-button}}
