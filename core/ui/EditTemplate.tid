@@ -8,20 +8,22 @@ title: $:/core/ui/EditTemplate
 <$action-deletetiddler $tiddler=<<newFieldValueTiddler>>/>
 <$action-sendmessage $message="tm-save-tiddler"/>
 \end
-\define cancel-tiddler-actions-message()
+\define cancel-save-tiddler-actions-message()
 <$action-sendmessage $message="tm-focus-selector" $param=<<tv-edit-$(fieldSelector)$-selector>>/>
 \end
-\define cancel-tiddler-actions()
+\define cancel-save-tiddler-actions(message)
 <$list filter="[{!!draft.of}is[missing]]" variable="ignore">
 <$list filter="[list[$:/StoryList]after<currentTiddler>]">
 <$set name="cssEscapedTitle" value={{{ [<currentTiddler>escapecss[]] }}}>
 <$set name="fieldSelector" value={{$:/config/AutoFocus}}>
-<<cancel-tiddler-actions-message>>
+<<cancel-save-tiddler-actions-message>>
 </$set>
 </$set>
 </$list>
 </$list>
-<$action-sendmessage $message="tm-cancel-tiddler"/>
+<$list filter="[[$message$]!match[]]">
+<$action-sendmessage $message="tm-$message$-tiddler"/>
+</$list>
 \end
 \define frame-classes()
 tc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$
@@ -29,7 +31,7 @@ tc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerCl
 <div class=<<frame-classes>> data-tiddler-title=<<currentTiddler>>>
 <$fieldmangler>
 <$vars storyTiddler=<<currentTiddler>> newTagNameTiddler=<<qualify "$:/temp/NewTagName">> newFieldNameTiddler=<<qualify "$:/temp/NewFieldName">> newFieldValueTiddler=<<qualify "$:/temp/NewFieldValue">>>
-<$keyboard key="((cancel-edit-tiddler))" actions=<<cancel-tiddler-actions>>>
+<$keyboard key="((cancel-edit-tiddler))" actions=<<cancel-save-tiddler-actions "cancel">>>
 <$keyboard key="((save-tiddler))" actions=<<save-tiddler-actions>>>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/EditTemplate]!has[draft.of]]" variable="listItem">
 <$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
