@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/codemirror/macros
 tags: $:/tags/Macro
 
-\define tc-edit-text-selector()
+\define tv-edit-text-selector()
 [data-tiddler-title="$(cssEscapedTitle)$"] .tc-edit-texteditor-body textarea
 \end
