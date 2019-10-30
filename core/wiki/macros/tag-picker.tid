@@ -91,7 +91,7 @@ $(filter1)$ $(filter2)$
 </$set>
 \end
 \define tag-picker()
-<$list filter="[<newTagNameTiddler>match[]]" emptyMessage=<<tag-picker-inner>>>
+<$list filter="[<newTagNameTiddler>match[]]" variable="ignore" emptyMessage=<<tag-picker-inner>>>
 <$set name="newTagNameTiddler" value=<<qualify "$:/temp/NewTagName">>>
 <<tag-picker-inner>>
 </$set>
