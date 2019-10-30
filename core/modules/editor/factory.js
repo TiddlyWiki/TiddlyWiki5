@@ -97,6 +97,14 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 					data[self.editIndex] = value;
 					self.wiki.setTiddlerData(self.editTitle,data);
 				}
+				if(self.editStoreTiddler) {
+					var tiddler = self.wiki.getTiddler(self.editStoreTiddler);
+					var updateFields = {
+						title: self.editStoreTiddler,
+						text: value
+					};
+					self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getCreationFields(),tiddler,updateFields,self.wiki.getModificationFields()));
+				}
 			};
 		} else {
 			// Get the current tiddler and the field name
@@ -132,6 +140,14 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 					};
 				updateFields[self.editField] = value;
 				self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getCreationFields(),tiddler,updateFields,self.wiki.getModificationFields()));
+				if(self.editStoreTiddler) {
+					tiddler = self.wiki.getTiddler(self.editStoreTiddler);
+					updateFields = {
+						title: self.editStoreTiddler,
+						text: value
+					};
+					self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getCreationFields(),tiddler,updateFields,self.wiki.getModificationFields()));
+				}
 			};
 		}
 		if(this.editType) {
@@ -177,6 +193,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editFocusPopup = this.getAttribute("focusPopup");
 		this.editFocus = this.getAttribute("focus");
 		this.editTabIndex = this.getAttribute("tabindex");
+		this.editStoreTiddler = this.getAttribute("storeTiddler");
 		// Get the default editor element tag and type
 		var tag,type;
 		if(this.editField === "text") {
@@ -208,7 +225,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
+		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.editStoreTiddler || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
 			this.refreshSelf();
 			return true;
 		} else if(changedTiddlers[this.editTitle]) {
