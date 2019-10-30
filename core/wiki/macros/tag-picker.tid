@@ -31,7 +31,7 @@ $(filter1)$ $(filter2)$
 \end
 
 \define next-tag-actions(afterbefore,reverse:"")
-<$set name="newTagName" value={{{ [<saveTiddler>get[text]] }}}>
+<$set name="newTagName" value={{{ [<storeTiddler>get[text]] }}}>
 <$set name="currentTag" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$set name="filter1" filter="[tags[]!is[system]search:title<newTagName>sort[]]">
 <$set name="filter2" filter="[tags[]is[system]search:title<newTagName>sort[]]">
