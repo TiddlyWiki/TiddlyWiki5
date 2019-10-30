@@ -1287,6 +1287,7 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-edit-add-tag .tc-add-tag-name input {
 	width: 50%;
+	background-color: transparent;
 }
 
 .tc-edit-add-tag .tc-keyboard {
