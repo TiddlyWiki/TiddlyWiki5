@@ -3,8 +3,9 @@ tags: $:/tags/Macro
 
 \define add-tag-actions()
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
-<$list filter="[<currentTiddler>!tag<tag>]" emptyMessage="""
-<$action-sendmessage $message="tm-remove-tag" $param=<<tag>>/>""">
+<$list filter="[<currentTiddler>!tag<tag>]" variable="ignore" emptyMessage="""
+<$action-sendmessage $message="tm-remove-tag" $param=<<tag>>/>
+""">
 <$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
 </$list>
 <$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
