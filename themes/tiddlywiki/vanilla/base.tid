@@ -680,6 +680,11 @@ button.tc-untagged-label {
 	vertical-align: middle;
 }
 
+.tc-edit-tags .tc-block-dropdown {
+	max-height: 70vh;
+	overflow-y: scroll;
+}
+
 .tc-tag-manager-table .tc-tag-label {
 	white-space: normal;
 }
