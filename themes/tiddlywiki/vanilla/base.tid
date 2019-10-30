@@ -680,7 +680,7 @@ button.tc-untagged-label {
 	vertical-align: middle;
 }
 
-.tc-edit-tags .tc-block-dropdown {
+.tc-edit-tags .tc-block-dropdown, .tc-tag-manager-table .tc-drop-down {
 	max-height: 70vh;
 	overflow-y: scroll;
 }
