@@ -45,7 +45,7 @@ $(filter1)$ $(filter2)$
 \end
 
 \define tag-picker-inner()
-<$set name="storeTiddler" value=<<qualify "$:/temp/newTagName/input">>>
+<$set name="storeTiddler" value=<<qualify "$:/temp/NewTagName/input">>>
 <div class="tc-edit-add-tag">
 <span class="tc-add-tag-name">
 <$keyboard key="ENTER" actions=<<add-tag-actions>>>
