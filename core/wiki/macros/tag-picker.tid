@@ -65,6 +65,9 @@ $(filter1)$ $(filter2)$
 {{$:/language/EditTemplate/Tags/Add/Button}}
 </$button>
 </$set>
+<$list filter="[<storeTiddler>!is[missing]get[text]]">
+{{$:/language/EditTemplate/Tags/Add/Sort/Hint}}&nbsp;<$text text=<<currentTiddler>>/>
+</$list>
 </span>
 </div>
 <div class="tc-block-dropdown-wrapper">
