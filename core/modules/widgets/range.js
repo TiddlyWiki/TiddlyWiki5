@@ -47,11 +47,9 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 		this.inputDomNode.setAttribute("step", this.increment);
 	}
 	this.inputDomNode.value = this.getValue();
-
-
 	// Add a click event handler
 	$tw.utils.addEventListeners(this.inputDomNode,[
-		{name: "input", handlerObject: this, handlerMethod: "handleChangeEvent"}
+		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"}
 	]);
 	// Insert the label into the DOM and render any children
 	parent.insertBefore(this.inputDomNode,nextSibling);
@@ -60,10 +58,11 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 
 RangeWidget.prototype.getValue = function() {
 	var tiddler = this.wiki.getTiddler(this.tiddlerTitle),
+		fieldName = this.tiddlerField || "text",
 		value   = this.defaultValue;
 	if(tiddler) {
-		if($tw.utils.hop(tiddler.fields,this.tiddlerField)) {
-			value = tiddler.fields[this.tiddlerField] || "";
+		if($tw.utils.hop(tiddler.fields,fieldName)) {
+			value = tiddler.fields[fieldName] || "";
 		} else {
 			value = this.defaultValue || "";
 		}
@@ -71,8 +70,10 @@ RangeWidget.prototype.getValue = function() {
 	return value;
 };
 
-RangeWidget.prototype.handleChangeEvent = function(event) {
-	this.wiki.setText(this.tiddlerTitle ,this.tiddlerField, null,this.inputDomNode.value);
+RangeWidget.prototype.handleInputEvent = function(event) {
+	if(this.getValue() !== this.inputDomNode.value) {
+		this.wiki.setText(this.tiddlerTitle,this.tiddlerField,null,this.inputDomNode.value);
+	}
 };
 
 /*
@@ -102,7 +103,10 @@ RangeWidget.prototype.refresh = function(changedTiddlers) {
 	} else {
 		var refreshed = false;
 		if(changedTiddlers[this.tiddlerTitle]) {
-			this.inputDomNode.checked = this.getValue();
+			var value = this.getValue();
+			if(this.inputDomNode.value !== value) {
+				this.inputDomNode.value = value;				
+			}
 			refreshed = true;
 		}
 		return this.refreshChildren(changedTiddlers) || refreshed;
