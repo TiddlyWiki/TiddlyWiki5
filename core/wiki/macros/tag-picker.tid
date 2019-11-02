@@ -48,10 +48,10 @@ $(filter1)$ $(filter2)$
 <$set name="storeTiddler" value=<<qualify "$:/temp/NewTagName/input">>>
 <div class="tc-edit-add-tag">
 <span class="tc-add-tag-name">
-<$keyboard key="ENTER" actions=<<add-tag-actions>>>
-<$keyboard key="Down" actions=<<next-tag-actions "after">>>
-<$keyboard key="Escape" actions=<<clear-tags-actions>>>
-<$keyboard key="Up" actions=<<next-tag-actions "before" "reverse[]">>>
+<$keyboard key="((input-accept))" actions=<<add-tag-actions>>>
+<$keyboard key="((input-down))" actions=<<next-tag-actions "after">>>
+<$keyboard key="((input-cancel))" actions=<<clear-tags-actions>>>
+<$keyboard key="((input-up))" actions=<<next-tag-actions "before" "reverse[]">>>
 <$edit-text tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}} storeTiddler=<<storeTiddler>>/>
 </$keyboard>
 </$keyboard>
