@@ -1,6 +1,6 @@
 caption: range
 created: 20171102134825376
-modified: 20180425132848231
+modified: 20191104185454972
 tags: Widgets
 title: RangeWidget
 type: text/vnd.tiddlywiki
@@ -15,11 +15,12 @@ The content of the `<$range>` widget is ignored.
 
 |!Attribute |!Description |
 |tiddler |Title of the tiddler to manipulate (defaults to the [[current tiddler|Current Tiddler]]) |
-|field |The field of the //tiddler// bound to the radio button|
-|min |The minimum value to be able to be set by the `<$range>` widget.|
-|max |The maximum value to be able to be set by the `<$range>` widget.|
-|increment |The minimum amount by which a value may be changed.  Defaults to 1.|
-|default |The default value displayed if the field is missing or empty.|
+|field |The field of the //tiddler// bound to the radio button |
+|index|<<.from-version "5.1.22">> The index of the //tiddler//, a [[DataTiddler|DataTiddlers]], to which the radio button is bound<<.tip "be sure to set the //tiddler// correctly">> |
+|min |The minimum value to be able to be set by the `<$range>` widget |
+|max |The maximum value to be able to be set by the `<$range>` widget |
+|increment |The minimum amount by which a value may be changed.  Defaults to 1 |
+|default |The default value displayed if the field is missing or empty |
 |class |CSS classes to be assigned to the label around the radio button |
 
 ! Examples

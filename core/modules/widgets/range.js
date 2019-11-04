@@ -61,10 +61,14 @@ RangeWidget.prototype.getValue = function() {
 		fieldName = this.tiddlerField || "text",
 		value   = this.defaultValue;
 	if(tiddler) {
-		if($tw.utils.hop(tiddler.fields,fieldName)) {
-			value = tiddler.fields[fieldName] || "";
+		if(this.tiddlerIndex) {
+			value = this.wiki.extractTiddlerDataItem(tiddler,this.tiddlerIndex,this.defaultValue || "");
 		} else {
-			value = this.defaultValue || "";
+			if($tw.utils.hop(tiddler.fields,fieldName)) {
+				value = tiddler.fields[fieldName] || "";
+			} else {
+				value = this.defaultValue || "";
+			}
 		}
 	}
 	return value;
@@ -72,7 +76,11 @@ RangeWidget.prototype.getValue = function() {
 
 RangeWidget.prototype.handleInputEvent = function(event) {
 	if(this.getValue() !== this.inputDomNode.value) {
-		this.wiki.setText(this.tiddlerTitle,this.tiddlerField,null,this.inputDomNode.value);
+		if(this.tiddlerIndex) {
+			this.wiki.setText(this.tiddlerTitle,"",this.tiddlerIndex,this.inputDomNode.value);
+		} else {
+			this.wiki.setText(this.tiddlerTitle,this.tiddlerField,null,this.inputDomNode.value);
+		}
 	}
 };
 
@@ -83,6 +91,7 @@ RangeWidget.prototype.execute = function() {
 	// Get the parameters from the attributes
 	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.tiddlerField = this.getAttribute("field");
+	this.tiddlerIndex = this.getAttribute("index");
 	this.minValue = this.getAttribute("min");
 	this.maxValue = this.getAttribute("max");
 	this.increment = this.getAttribute("increment");
@@ -97,7 +106,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RangeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes['min'] || changedAttributes['max'] || changedAttributes['increment'] || changedAttributes["default"] || changedAttributes["class"]) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes['min'] || changedAttributes['max'] || changedAttributes['increment'] || changedAttributes["default"] || changedAttributes["class"]) {
 		this.refreshSelf();
 		return true;
 	} else {
