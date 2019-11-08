@@ -128,7 +128,37 @@ SaverHandler.prototype.initSavers = function(moduleType) {
 			self.savers.push(module.create(self.wiki));
 		}
 	});
-	// Sort the savers into priority order
+	// Sort savers
+	this.sortSavers();
+};
+
+/*
+Update a saver priority
+*/
+SaverHandler.prototype.updateSaver = function(name, priority) {
+	if (priority !== undefined && name !== undefined) {
+		// Locate saver
+		var saver = null;
+		for (var i = 0; i < $tw.saverHandler.savers.length; i++) {
+			var saver = $tw.saverHandler.savers[i];
+			if (saver.info.name === name) {
+				saver = $tw.saverHandler.savers[i];
+				break;
+			}
+		}
+		if (saver != null) {
+			// Update saver priority info
+			saver.info.priority = priority;
+			// Sort savers
+			$tw.utils.sortSavers();
+		}
+	}
+};
+
+/*
+Sort the savers into priority order
+*/
+SaverHandler.prototype.sortSavers = function() {
 	this.savers.sort(function(a,b) {
 		if(a.info.priority < b.info.priority) {
 			return -1;
