@@ -393,10 +393,10 @@ Syncer.prototype.processTaskQueue = function() {
 };
 
 /*
-Choose the next sync task. We prioritise saves, then deletes, then loads from the server, and then in reverse order of modification time
+Choose the next sync task. We prioritise saves, then deletes, then loads from the server
 */
 Syncer.prototype.chooseNextTask = function() {
-	var now = new Date();
+	var thresholdLastSaved = (new Date()) - this.throttleInterval;
 	// First we look for tiddlers that have been modified locally and need saving back to the server
 	var titles = this.filterFn.call(this.wiki);
 	for(var index=0; index<titles.length; index++) {
@@ -404,8 +404,10 @@ Syncer.prototype.chooseNextTask = function() {
 			tiddler = this.wiki.getTiddler(title),
 			tiddlerInfo = this.tiddlerInfo[title];
 		if(tiddler) {
-			// If the tiddler is not known on the server, or has been modified locally then it needs to be saved to the server
-			if(!tiddlerInfo || $tw.wiki.getChangeCount(title) > tiddlerInfo.changeCount) {
+			// If the tiddler is not known on the server, or has been modified locally no more recently than the threshold then it needs to be saved to the server
+ 			var hasChanged = !tiddlerInfo || $tw.wiki.getChangeCount(title) > tiddlerInfo.changeCount,
+ 				hasChangedRecently = !tiddlerInfo || !tiddlerInfo.timestampLastSaved || tiddlerInfo.timestampLastSaved < thresholdLastSaved;
+			if(hasChanged && hasChangedRecently) {
 				return new SaveTiddlerTask(this,title);
 			}
 		}
@@ -454,7 +456,8 @@ SaveTiddlerTask.prototype.run = function(callback) {
 			self.syncer.tiddlerInfo[self.title] = {
 				changeCount: changeCount,
 				adaptorInfo: adaptorInfo,
-				revision: revision
+				revision: revision,
+				timestampLastSaved: new Date()
 			};
 			// Invoke the callback
 			callback(null);
