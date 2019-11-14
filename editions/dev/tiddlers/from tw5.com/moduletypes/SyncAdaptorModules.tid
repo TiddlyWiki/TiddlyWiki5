@@ -52,7 +52,7 @@ Returns an object storing any additional information required by the adaptor.
 Retrieves status information from the server. This method is optional.
 
 |!Parameter |!Description |
-|callback |Callback function invoked with parameters `err,isLoggedIn,username` |
+|callback |Callback function invoked with parameters `err,isLoggedIn,username,isReadOnly` |
 
 !! `login(username,password,callback)`
 

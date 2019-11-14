@@ -27,6 +27,8 @@ function TiddlyWebAdaptor(options) {
 
 TiddlyWebAdaptor.prototype.name = "tiddlyweb";
 
+TiddlyWebAdaptor.prototype.supportsLazyLoading = true;
+
 TiddlyWebAdaptor.prototype.isReady = function() {
 	return this.hasStatus;
 };

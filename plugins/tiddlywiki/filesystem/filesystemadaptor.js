@@ -26,6 +26,8 @@ function FileSystemAdaptor(options) {
 
 FileSystemAdaptor.prototype.name = "filesystem";
 
+FileSystemAdaptor.prototype.supportsLazyLoading = false;
+
 FileSystemAdaptor.prototype.isReady = function() {
 	// The file system adaptor is always ready
 	return true;
