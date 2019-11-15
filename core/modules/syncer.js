@@ -136,6 +136,7 @@ Syncer.prototype.createTiddlerInfo = function(title) {
 Checks whether the wiki is dirty (ie the window shouldn't be closed)
 */
 Syncer.prototype.isDirty = function() {
+	this.logger.log("Checking dirty status");
 	// Check tiddlers that are in the store and included in the filter function
 	var titles = this.filterFn.call(this.wiki);
 	for(var index=0; index<titles.length; index++) {
@@ -370,25 +371,33 @@ Syncer.prototype.processTaskQueue = function() {
 		var task = this.chooseNextTask();
 		// Perform the task if we had one
 		if(task) {
-			self.numTasksInProgress += 1;
+			this.numTasksInProgress += 1;
 			task.run(function(err) {
 				self.numTasksInProgress -= 1;
 				if(err) {
 					self.logger.alert("Sync error while processing " + task.type + " of '" + task.title + "':\n" + err);
+					self.triggerTimeout();
+				} else {
+					self.updateDirtyStatus();
+					// Process the next task
+					self.processTaskQueue.call(self);					
 				}
-				self.updateDirtyStatus();
-				// Process the next task
-				self.processTaskQueue.call(self);
 			});
 		} else {
 			// Make sure we've set a timer if there wasn't a task to perform
-			if(!this.taskTimerId) {
-				this.taskTimerId = setTimeout(function() {
-					self.taskTimerId = null;
-					self.processTaskQueue.call(self);
-				},self.taskTimerInterval);
-			}
+			this.triggerTimeout();
 		}
+	}
+};
+
+
+Syncer.prototype.triggerTimeout = function() {
+	var self = this;
+	if(!this.taskTimerId) {
+		this.taskTimerId = setTimeout(function() {
+			self.taskTimerId = null;
+			self.processTaskQueue.call(self);
+		},self.taskTimerInterval);
 	}
 };
 
