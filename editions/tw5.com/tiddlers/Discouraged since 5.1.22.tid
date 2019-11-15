@@ -1,0 +1,19 @@
+created: 20191113124516224
+modified: 20191113131803076
+title: Discouraged since 5.1.22
+type: text/vnd.tiddlywiki
+
+! Data Tiddlers
+
+As mentioned in the second paragraph, data-tiddlers are "candidate for deprecation" in 5.''2''.x. 
+
+5.''2''.x in TW versioning means: NEXT MAJOR VERSION. 
+
+So data tiddlers will be part of 5.1.x "for ever" because of the "compatibility" philosophy BUT it's use is discouraged.
+
+<<<
+As you may recall, my view on data tiddlers has evolved over the years, and I broadly no longer think they were a good idea. The present implementation is limited, and would take a lot of code and complexity to make it universal. The implementation of data tiddlers is spread throughout the core code, and hard to work with. I think that the whole idea was misguided: it was an attempt to avoid the proliferation of tiddlers, but I now think that that is a non-goal.
+
+Against that background, I think of data tiddlers as a candidate for deprecation in v5.2.x, and so I'm reluctant to expand support at this point. It looks like this operator could be delivered as a plugin, which I think is what I would advise at this point ...
+
+<<<[ext[Jeremy comment about a github PR|https://github.com/Jermolene/TiddlyWiki5/pull/3971#issuecomment-500122689]]

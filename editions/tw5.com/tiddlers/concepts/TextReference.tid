@@ -1,10 +1,11 @@
+bag: default
 created: 20130827075900000
-modified: 20161216173541948
+modified: 20191113133615529
 tags: Concepts
 title: TextReference
 type: text/vnd.tiddlywiki
 
-A TextReference is a general purpose way to describe a fragment of text as either a field of a tiddler, or an index within a [[data tiddler|DataTiddlers]].
+A TextReference is a general purpose way to describe a fragment of text as either a field of a tiddler, or an index within a [[data tiddler|DataTiddlers]] <<.discouraged-since "5.1.22">>
 
 In different situations, text references can be used to retrieve values, or to specify a value that should be modified.
 
@@ -13,7 +14,7 @@ A TextReference consists of several parts:
 * The title of the target tiddler. If omitted, it defaults to the [[Current Tiddler]]
 * Either one of:
 ** The name of a field (marked with `!!`)
-** The name of an index within a [[data tiddler|DataTiddlers]] (marked with `##`)
+** The name of an index within a [[data tiddler|DataTiddlers]] (marked with `##`) <<.discouraged-since "5.1.22">>
 * If both the field and index are omitted, the text field is used as the default
 
 Most of the parts of a text reference can be optional:
@@ -21,7 +22,7 @@ Most of the parts of a text reference can be optional:
 * `tiddlerTitle` - the text [[field|TiddlerFields]] of the specified tiddler
 * `tiddlerTitle!!field` - a [[tiddler field|TiddlerFields]] (eg, `modified`, `modifier`, `type` etc)
 * `!!field` - a [[field|TiddlerFields]] of the current tiddler
-* `tiddlerTitle##propertyIndex` - extracts a named property from DataTiddlers
+* `tiddlerTitle##propertyIndex` - extracts a named property from DataTiddlers <<.discouraged-since "5.1.22">>
 
 Text references can be used in several places:
 

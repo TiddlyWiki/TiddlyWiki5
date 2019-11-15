@@ -1,5 +1,6 @@
+bag: default
 created: 20150117152612000
-modified: 201804111739
+modified: 20191113131607362
 tags: $:/tags/Stylesheet
 title: $:/editions/tw5.com/doc-styles
 type: text/vnd.tiddlywiki
@@ -189,6 +190,10 @@ tr.doc-table-subheading {
     font-weight: bold;
     line-height: 1.5;
     vertical-align: text-bottom;
+}
+
+.doc-discouraged-version {
+  fill: orange;
 }
 
 .doc-deprecated-version svg,

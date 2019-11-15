@@ -1,7 +1,13 @@
-created: 201308291647
-modified: 201308291647
+bag: default
+created: 20130829164700000
+modified: 20191113133321642
 tags: Concepts
 title: DataTiddlers
+type: text/vnd.tiddlywiki
+
+<<.discouraged-since "5.1.22">> [[Discouraged since 5.1.22]]
+
+----
 
 A data tiddler is a miniature database contained within a tiddler.
 

@@ -1,6 +1,7 @@
+bag: default
 caption: select
 created: 20131024141900000
-modified: 20190304122040876
+modified: 20191113132425508
 tags: Widgets
 title: SelectWidget
 type: text/vnd.tiddlywiki
@@ -33,7 +34,7 @@ The content of the `<$select>` widget should be one or more HTML `<option>` or `
 |!Attribute |!Description |
 |tiddler |The title of the tiddler containing the value to be displayed/modified by the select widget (defaults to the current tiddler) |
 |field |The field name for the value in the current tiddler (defaults to "text") |
-|index |The index of a property in a [[DataTiddler|DataTiddlers]] (takes precedence over the field attribute) |
+|index <<.discouraged-since "5.1.22">> |The index of a property in a [[DataTiddler|DataTiddlers]] (takes precedence over the field attribute) |
 |class |CSS classes to be assigned to the HTML select element |
 |tooltip |Optional tooltip |
 |default |Default value to be used if the tiddler, field or index specifies a missing value |

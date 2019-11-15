@@ -1,5 +1,6 @@
+bag: default
 created: 20161008085627406
-modified: 201804111739
+modified: 20191113125543227
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/version-macros
 type: text/vnd.tiddlywiki
@@ -10,6 +11,10 @@ type: text/vnd.tiddlywiki
 
 \define .deprecated-since(version, superseeded:"TODO-Link")
 <$button to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">{{$:/core/images/warning}} Deprecated since: $version$ </$button> use [[$superseeded$]] instead!
+\end
+
+\define .discouraged-since(version)
+<$button to="Discouraged since $version$" tooltip="Discouraged since: $version$" class="doc-discouraged-version tc-btn-invisible">{{$:/core/images/warning}}</$button>
 \end
 
 <pre><$view field="text"/></pre>

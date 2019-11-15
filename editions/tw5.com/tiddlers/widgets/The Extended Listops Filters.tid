@@ -1,3 +1,4 @@
+bag: default
 created: 20151014170727812
 days: Fri Wed Mon Tue
 dofwks: Mon Tue Wed Thu Fri Sat Sun
@@ -6,10 +7,11 @@ item2: seven
 item3: eight
 list: Yesterday Today Tomorrow
 marker: Thursday
-modified: 20151108054957921
+modified: 20191113133013617
 myfield: Monday Tuesday [[Middle of the Week]] Thursday Friday Saturday Sunday
 numbers: 1 2 3 4 five 6 7 8 9
 title: The Extended Listops Filters
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
@@ -17,7 +19,7 @@ A number of extended filters are necessary to manipulate lists.
 
 The first set of filters are designed to move items from the tail of the list and insert them at specified locations in the list. Items are often appended to the list before using these filters. In general, these filters accept a suffix specifying the number of items to move (default to 1.) 
 
-A second set of filters are designed to either add or remove from the list, a selected range of items from an array. These filters are best used with a reference to an array, stored in a field or data index elsewhere in the wiki (they may be used with a simple list of items, provided the items do not include white space.) In general, these filters accept a suffix specifying the number of items to move (default to All.)
+A second set of filters are designed to either add or remove from the list, a selected range of items from an array. These filters are best used with a reference to an array, stored in a field or data index <<.discouraged-since "5.1.22">> elsewhere in the wiki (they may be used with a simple list of items, provided the items do not include white space.) In general, these filters accept a suffix specifying the number of items to move (default to All.)
 
 ! Examples
 

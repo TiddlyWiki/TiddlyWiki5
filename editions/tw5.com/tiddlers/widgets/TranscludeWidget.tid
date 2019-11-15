@@ -1,9 +1,10 @@
+bag: default
+caption: transclude
 created: 20130824142500000
-modified: 20140717175900970
+modified: 20191113130918711
 tags: Widgets
 title: TranscludeWidget
 type: text/vnd.tiddlywiki
-caption: transclude
 
 ! Introduction
 
@@ -14,7 +15,7 @@ The TranscludeWidget dynamically imports content from another tiddler.
 |!Attribute |!Description |
 |tiddler |The title of the tiddler to transclude (defaults to the current tiddler) |
 |field |The field name of the current tiddler (defaults to "text"; if present takes precedence over the index attribute) |
-|index |The index of a property in a [[DataTiddler|DataTiddlers]] |
+|index <<.discouraged-since "5.1.22">> |The index of a property in a [[DataTiddler|DataTiddlers]] |
 |subtiddler |Optional SubTiddler title when the target tiddler is a [[plugin|Plugins]] (see below) |
 |mode |Override the default parsing mode for the transcluded text to "block" or "inline" |
 

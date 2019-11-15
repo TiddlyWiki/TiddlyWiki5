@@ -1,7 +1,13 @@
+bag: default
 created: 20141228094500000
-modified: 20180305111822713
+modified: 20191113133359885
 tags: Concepts
 title: DictionaryTiddlers
+type: text/vnd.tiddlywiki
+
+<<.discouraged-since "5.1.22">> [[Discouraged since 5.1.22]]
+
+----
 
 A dictionary tiddler is a [[data tiddler|DataTiddlers]] containing a simple list of `name: value` pairs.
 

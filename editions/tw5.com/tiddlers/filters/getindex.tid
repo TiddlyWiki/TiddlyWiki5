@@ -1,10 +1,15 @@
+bag: default
 caption: getindex
 created: 20150203140000000
-modified: 20190607140948137
+modified: 20191113133418868
 op-purpose: select all values of a data property in the input titles
 tags: [[Data Operators]] [[Filter Operators]]
 title: getindex Operator
 type: text/vnd.tiddlywiki
+
+<<.discouraged-since "5.1.22">> [[Discouraged since 5.1.22]]
+
+----
 
 <$macrocall $name=".operator-def"
 input="a [[selection of titles|Title Selection]]"

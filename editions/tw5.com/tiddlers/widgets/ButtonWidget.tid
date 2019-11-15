@@ -1,6 +1,7 @@
+bag: default
 caption: button
 created: 20131024141900000
-modified: 20170406085706139
+modified: 20191113132838052
 tags: Widgets
 title: ButtonWidget
 type: text/vnd.tiddlywiki
@@ -31,7 +32,7 @@ The content of the `<$button>` widget is displayed within the button.
 |set |A TextReference to which a new value will be assigned |
 |setTitle |A title to which a new value will be assigned, ''without'' TextReference. Gets preferred over <<.attr state>> |
 |setField |A ''field name'' to which the new value will be assigned, if the attribute <<.attr stateTitle>> is present. Defaults to the ''text'' field |
-|setIndex |An ''index'' to which the new value will be assigned, if the attribute <<.attr stateTitle>> is present |
+|setIndex <<.discouraged-since "5.1.22">> |An ''index'' to which the new value will be assigned, if the attribute <<.attr stateTitle>> is present |
 |setTo |The new value to assign to the TextReference identified in the `set` attribute or the text field / the field specified through `setField` / the index specified through `setIndex` of the title given through `setTitle` |
 |selectedClass |An optional additional CSS class to be assigned if the popup is triggered or the tiddler specified in `set` already has the value specified in `setTo`  |
 |default |Default value if `set` tiddler is missing for testing against `setTo` to determine `selectedClass` |

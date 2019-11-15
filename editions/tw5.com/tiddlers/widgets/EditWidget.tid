@@ -1,8 +1,10 @@
-title: EditWidget
-created: 201310241419
-modified: 20150220161220000
-tags: Widgets
+bag: default
 caption: edit
+created: 20131024141900000
+modified: 20191113132710853
+tags: Widgets
+title: EditWidget
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
@@ -15,6 +17,6 @@ The content of the `<$edit>` widget is ignored.
 |!Attribute |!Description |
 |tiddler |The tiddler to edit (defaults to the [[current tiddler|Current Tiddler]]) |
 |field |The field to edit (defaults to `text`). Takes precedence over the `index` attribute |
-|index |The index to edit |
+|index <<.discouraged-since "5.1.22">> |The index to edit |
 |class |A CSS class to be added the generated editing widget |
 |tabindex |Sets the `tabindex` attribute of the input or textarea to the given value |

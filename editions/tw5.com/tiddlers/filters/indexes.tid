@@ -1,6 +1,7 @@
+bag: default
 caption: indexes
 created: 20140410103123179
-modified: 20190607140913576
+modified: 20191113133446426
 op-input: a [[selection of titles|Title Selection]]
 op-output: all the property names or indices contained in the input data tiddlers
 op-parameter: none
@@ -8,6 +9,10 @@ op-purpose: select all data properties of the input titles
 tags: [[Data Operators]] [[Filter Operators]]
 title: indexes Operator
 type: text/vnd.tiddlywiki
+
+<<.discouraged-since "5.1.22">> [[Discouraged since 5.1.22]]
+
+----
 
 Each input title is processed in turn, and is ignored if it does not denote a [[data tiddler|DataTiddlers]]. The list of property names is retrieved from the data tiddler (in no particular order) and then [[dominantly appended|Dominant Append]] to the operator's output.
 
