@@ -21,10 +21,11 @@ exports.getInfoTiddlerFields = function() {
 	if($tw.browser) {
 		// Document location
 		var setLocationProperty = function(name,value) {
-				infoTiddlerFields.push({title: "$:/info/url/" + name, text: value});			
+				infoTiddlerFields.push({title: "$:/info/url/" + name, text: value});
 			},
 			location = document.location;
 		setLocationProperty("full", (location.toString()).split("#")[0]);
+		setLocationProperty("hash", location.hash);
 		setLocationProperty("host", location.host);
 		setLocationProperty("hostname", location.hostname);
 		setLocationProperty("protocol", location.protocol);
