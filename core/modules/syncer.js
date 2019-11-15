@@ -141,9 +141,8 @@ Syncer.prototype.isDirty = function() {
 	var titles = this.filterFn.call(this.wiki);
 	for(var index=0; index<titles.length; index++) {
 		var title = titles[index],
-			tiddler = this.wiki.getTiddler(title),
 			tiddlerInfo = this.tiddlerInfo[title];
-		if(tiddler) {
+		if(this.wiki.tiddlerExists(title)) {
 			if(tiddlerInfo) {
 				// If the tiddler is known on the server and has been modified locally then it needs to be saved to the server
 				if($tw.wiki.getChangeCount(title) > tiddlerInfo.changeCount) {
@@ -158,9 +157,7 @@ Syncer.prototype.isDirty = function() {
 	// Check tiddlers that are known from the server but not currently in the store
 	titles = Object.keys(this.tiddlerInfo);
 	for(index=0; index<titles.length; index++) {
-		title = titles[index];
-		tiddler = this.wiki.getTiddler(title);
-		if(!tiddler) {
+		if(!this.wiki.tiddlerExists(titles[index])) {
 			// There must be a pending delete
 			return true;
 		}
