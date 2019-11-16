@@ -16,7 +16,8 @@ if($tw.node) {
 	var util = require("util"),
 		fs = require("fs"),
 		url = require("url"),
-		path = require("path");
+		path = require("path"),
+		querystring = require("querystring");
 }
 
 /*
@@ -162,6 +163,7 @@ Server.prototype.requestHandler = function(request,response) {
 	state.wiki = self.wiki;
 	state.server = self;
 	state.urlInfo = url.parse(request.url);
+	state.queryParameters = querystring.parse(state.urlInfo.query);
 	// Get the principals authorized to access this resource
 	var authorizationType = this.methodMappings[request.method] || "readers";
 	// Check for the CSRF header if this is a write

@@ -224,9 +224,9 @@ Syncer.prototype.getStatus = function(callback) {
 Synchronise from the server by reading the skinny tiddler list and queuing up loads for any tiddlers that we don't already have up to date
 */
 Syncer.prototype.syncFromServer = function() {
+	var self = this;
 	if(this.syncadaptor && this.syncadaptor.getSkinnyTiddlers) {
 		this.logger.log("Retrieving skinny tiddler list");
-		var self = this;
 		if(this.pollTimerId) {
 			clearTimeout(this.pollTimerId);
 			this.pollTimerId = null;
@@ -242,6 +242,8 @@ Syncer.prototype.syncFromServer = function() {
 				self.logger.alert($tw.language.getString("Error/RetrievingSkinny") + ":",err);
 				return;
 			}
+			// Keep track of which tiddlers we already know about have been reported this time
+			var previousTitles = Object.keys(self.tiddlerInfo);
 			// Process each incoming tiddler
 			for(var t=0; t<tiddlers.length; t++) {
 				// Get the incoming tiddler fields, and the existing tiddler
@@ -249,19 +251,30 @@ Syncer.prototype.syncFromServer = function() {
 					incomingRevision = tiddlerFields.revision + "",
 					tiddler = self.wiki.getTiddler(tiddlerFields.title),
 					tiddlerInfo = self.tiddlerInfo[tiddlerFields.title],
-					currRevision = tiddlerInfo ? tiddlerInfo.revision : null;
+					currRevision = tiddlerInfo ? tiddlerInfo.revision : null,
+					indexInPreviousTitles = previousTitles.indexOf(tiddlerFields.title);
+				if(indexInPreviousTitles !== -1) {
+					previousTitles.splice(indexInPreviousTitles,1);
+				}
 				// Ignore the incoming tiddler if it's the same as the revision we've already got
 				if(currRevision !== incomingRevision) {
 					// Do a full load if we've already got a fat version of the tiddler
 					if(tiddler && tiddler.fields.text !== undefined) {
 						// Do a full load of this tiddler
-						tiddlerInfo.needsToBeLoaded = true;
+						self.tiddlerInfo[tiddlerFields.title] = self.tiddlerInfo[tiddlerFields.title] || {};
+						self.tiddlerInfo[tiddlerFields.title].needsToBeLoaded = true;
 					} else {
 						// Load the skinny version of the tiddler
 						self.storeTiddler(tiddlerFields,false);
 					}
 				}
 			}
+			// Delete any tiddlers that were previously reported but missing this time
+			$tw.utils.each(previousTitles,function(title) {
+				delete self.tiddlerInfo[title];
+				self.logger.log("Deleting tiddler missing from server:",title);
+				// self.wiki.deleteTiddler(title);
+			});
 		});
 	}
 };

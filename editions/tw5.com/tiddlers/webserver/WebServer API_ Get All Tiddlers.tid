@@ -1,5 +1,5 @@
 created: 20181002131215403
-modified: 20190903094711346
+modified: 20191116164512860
 tags: [[WebServer API]]
 title: WebServer API: Get All Tiddlers
 type: text/vnd.tiddlywiki
@@ -12,7 +12,8 @@ GET /recipes/default/tiddlers.json
 
 Parameters:
 
-* none
+* ''filter'' - filter identifying tiddlers to be returned (optional, defaults to "[all[tiddlers]!is[system]sort[title]]")
+* ''exclude'' - comma delimited list of fields to excluded from the returned tiddlers (optional, defaults to "text")
 
 Response:
 
