@@ -3,42 +3,44 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/cloud-sync}} Server status
 description: Status of synchronisation with server
 
+\whitespace trim
 \define config-title()
 $:/config/PageControlButtons/Visibility/$(listItem)$
 \end
 <$button popup=<<qualify "$:/state/popup/save-wiki">> tooltip="Status of synchronisation with server" aria-label="Server status" class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
-<span class="tc-dirty-indicator">
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
-{{$:/core/images/cloud-sync}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text"><$text text="Server status"/></span>
-</$list>
-</span>
-</$button><$reveal state=<<qualify "$:/state/popup/save-wiki">> type="popup" position="below" animate="yes">
-<div class="tc-drop-down">
-<$reveal state="$:/status/IsLoggedIn" type="nomatch" text="yes">
-<$button message="tm-login" class="tc-btn-invisible">
-{{$:/core/images/unlocked-padlock}} Login
+	<span class="tc-dirty-indicator">
+		<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+			{{$:/core/images/cloud-sync}}
+		</$list>
+		<$list filter="[<tv-config-toolbar-text>match[yes]]">
+			<span class="tc-btn-text"><$text text="Server status"/></span>
+		</$list>
+	</span>
 </$button>
-</$reveal>
-<$reveal state="$:/status/IsLoggedIn" type="match" text="yes">
-<p>
-Currently logged in<$reveal state="$:/status/UserName" type="nomatch" text="" default=""> as <$text text={{$:/status/UserName}}/></$reveal>
-</p>
-<$button tooltip="Get latest changes from the server" aria-label="Refresh from server" class="tc-btn-invisible">
-<$action-sendmessage $message="tm-server-refresh"/>
-{{$:/core/images/refresh-button}} <span class="tc-btn-text"><$text text="Refresh from server"/></span>
-</$button>
-<$button class="tc-btn-invisible">
-<$wikify name="site-title" text={{$:/config/SaveWikiButton/Filename}}>
-<$action-sendmessage $message="tm-download-file" $param={{$:/config/SaveWikiButton/Template}} filename=<<site-title>>/>
-</$wikify>
-{{$:/core/images/download-button}} Save snapshot for offline use
-</$button>
-<$button message="tm-logout" class="tc-btn-invisible">
-{{$:/core/images/cancel-button}} Logout
-</$button>
-</$reveal>
-</div>
+<$reveal state=<<qualify "$:/state/popup/save-wiki">> type="popup" position="below" animate="yes">
+	<div class="tc-drop-down">
+		<$reveal state="$:/status/IsLoggedIn" type="nomatch" text="yes">
+			<$button message="tm-login" class="tc-btn-invisible">
+				{{$:/core/images/unlocked-padlock}} Login
+			</$button>
+		</$reveal>
+		<$reveal state="$:/status/IsLoggedIn" type="match" text="yes">
+			<p>
+				Currently logged in<$reveal state="$:/status/UserName" type="nomatch" text="" default=""> as <$text text={{$:/status/UserName}}/></$reveal>
+			</p>
+			<$button tooltip="Get latest changes from the server" aria-label="Refresh from server" class="tc-btn-invisible">
+				<$action-sendmessage $message="tm-server-refresh"/>
+				{{$:/core/images/refresh-button}} <span clas]s="tc-btn-text"><$text text="Refresh from server"/></span>
+			</$button>
+			<$button class="tc-btn-invisible">
+				<$wikify name="site-title" text={{$:/config/SaveWikiButton/Filename}}>
+					<$action-sendmessage $message="tm-download-file" $param={{$:/config/SaveWikiButton/Template}} filename=<<site-title>>/>
+				</$wikify>
+				{{$:/core/images/download-button}} Save snapshot for offline use
+			</$button>
+			<$button message="tm-logout" class="tc-btn-invisible">
+				{{$:/core/images/cancel-button}} Logout
+			</$button>
+		</$reveal>
+	</div>
 </$reveal>
