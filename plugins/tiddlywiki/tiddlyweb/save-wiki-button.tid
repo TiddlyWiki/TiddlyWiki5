@@ -21,7 +21,7 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 	<div class="tc-drop-down">
 		<$reveal state="$:/status/IsLoggedIn" type="nomatch" text="yes">
 			<$button message="tm-login" class="tc-btn-invisible">
-				{{$:/core/images/unlocked-padlock}} Login
+				{{$:/core/images/unlocked-padlock}}<$text text=" "/>Login
 			</$button>
 		</$reveal>
 		<$reveal state="$:/status/IsLoggedIn" type="match" text="yes">
@@ -30,16 +30,16 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 			</p>
 			<$button tooltip="Get latest changes from the server" aria-label="Refresh from server" class="tc-btn-invisible">
 				<$action-sendmessage $message="tm-server-refresh"/>
-				{{$:/core/images/refresh-button}} <span clas]s="tc-btn-text"><$text text="Refresh from server"/></span>
+				{{$:/core/images/refresh-button}}<$text text=" "/><span clas]s="tc-btn-text"><$text text="Refresh from server"/></span>
 			</$button>
 			<$button class="tc-btn-invisible">
 				<$wikify name="site-title" text={{$:/config/SaveWikiButton/Filename}}>
 					<$action-sendmessage $message="tm-download-file" $param={{$:/config/SaveWikiButton/Template}} filename=<<site-title>>/>
 				</$wikify>
-				{{$:/core/images/download-button}} Save snapshot for offline use
+				{{$:/core/images/download-button}}<$text text=" "/>Save snapshot for offline use
 			</$button>
 			<$button message="tm-logout" class="tc-btn-invisible">
-				{{$:/core/images/cancel-button}} Logout
+				{{$:/core/images/cancel-button}}<$text text=" "/>Logout
 			</$button>
 		</$reveal>
 	</div>
