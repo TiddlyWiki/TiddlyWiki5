@@ -2462,8 +2462,8 @@ input.tc-palette-manager-colour-input {
 */
 
 body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg {
-	color: <<colour dirty-indicator>>;
 	fill: <<colour dirty-indicator>>;
+	color: <<colour dirty-indicator>>;
 }
 
 /*
