@@ -2462,24 +2462,29 @@ input.tc-palette-manager-colour-input {
 */
 
 body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg {
-	fill: <<colour dirty-indicator>>;
+	transition: fill 250ms ease-in-out;
 	color: <<colour dirty-indicator>>;
+	fill: <<colour dirty-indicator>>;
 }
 
-body.tc-dirty .tc-dirty-control {
-	display: inline;
+body .tc-image-cloud-progress {
+	fill: <<colour background>>;
+	transition: opacity 450ms linear;
+	opacity: 0;
 }
 
-body.tc-dirty .tc-dirty-control.tc-hide-when-dirty {
-	display: none;
+body.tc-dirty .tc-image-cloud-progress {
+	opacity: 1;
 }
 
-body .tc-dirty-control.tc-show-when-dirty {
-	display: none;
+body .tc-image-cloud-error {
+	fill: <<colour background>>;
+	transition: fill 450ms linear, opacity 450ms linear;
+	opacity: 0;
 }
 
-body.tc-dirty .tc-dirty-control.tc-show-when-dirty {
-	display: inline;
+body.tc-dirty .tc-image-cloud-error {
+	opacity: 0;
 }
 
 /*
