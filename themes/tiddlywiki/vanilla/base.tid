@@ -2466,6 +2466,22 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	color: <<colour dirty-indicator>>;
 }
 
+body.tc-dirty .tc-dirty-control {
+	display: inline;
+}
+
+body.tc-dirty .tc-dirty-control.tc-hide-when-dirty {
+	display: none;
+}
+
+body .tc-dirty-control.tc-show-when-dirty {
+	display: none;
+}
+
+body.tc-dirty .tc-dirty-control.tc-show-when-dirty {
+	display: inline;
+}
+
 /*
 ** File inputs
 */
