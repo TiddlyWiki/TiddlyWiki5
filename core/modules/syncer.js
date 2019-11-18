@@ -395,6 +395,7 @@ Syncer.prototype.processTaskQueue = function() {
 			});
 		} else {
 			// Make sure we've set a timer if there wasn't a task to perform
+			self.updateDirtyStatus();
 			this.triggerTimeout();
 		}
 	}
