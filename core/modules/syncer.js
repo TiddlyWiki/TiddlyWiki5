@@ -84,6 +84,9 @@ function Syncer(options) {
 		$tw.rootWidget.addEventListener("tm-server-refresh",function() {
 			self.handleRefreshEvent();
 		});
+		$tw.rootWidget.addEventListener("tm-copy-syncer-logs-to-clipboard",function() {
+			$tw.utils.copyToClipboard($tw.utils.getSystemInfo() + "\n\nLog:\n" + self.logger.getBuffer());
+		});
 	}
 	// Listen out for lazyLoad events
 	if(!this.disableUI && $tw.wiki.getTiddlerText(this.titleSyncDisableLazyLoading) !== "yes") {

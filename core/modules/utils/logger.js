@@ -22,15 +22,34 @@ function Logger(componentName,options) {
 	this.componentName = componentName || "";
 	this.colour = options.colour || "white";
 	this.enable = "enable" in options ? options.enable : true;
+	this.save = "save" in options ? options.save : true;
+	this.saveLimit = options.saveLimit || 100 * 1024;
+	this.buffer = "";
 }
 
 /*
 Log a message
 */
 Logger.prototype.log = function(/* args */) {
-	if(this.enable && console !== undefined && console.log !== undefined) {
-		return Function.apply.call(console.log, console, [$tw.utils.terminalColour(this.colour),this.componentName + ":"].concat(Array.prototype.slice.call(arguments,0)).concat($tw.utils.terminalColour()));
-	}
+	var self = this;
+	if(this.enable) {
+		this.buffer += $tw.utils.formatDateString(new Date(),"YYYY MM DD 0hh:0mm:0ss.0XXX") + ":";
+		$tw.utils.each(Array.prototype.slice.call(arguments,0),function(arg,index) {
+			self.buffer += " " + arg;
+		});
+		this.buffer += "\n";
+		self.buffer = self.buffer.slice(-this.saveLimit);
+		if(console !== undefined && console.log !== undefined) {
+			return Function.apply.call(console.log, console, [$tw.utils.terminalColour(this.colour),this.componentName + ":"].concat(Array.prototype.slice.call(arguments,0)).concat($tw.utils.terminalColour()));
+		}
+	} 
+};
+
+/*
+Read the message buffer
+*/
+Logger.prototype.getBuffer = function() {
+	return this.buffer;
 };
 
 /*

@@ -47,5 +47,8 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 				{{$:/core/images/cancel-button}}<$text text=" "/>Logout
 			</$button>
 		</$reveal>
+		<$button message="tm-copy-syncer-logs-to-clipboard" class="tc-btn-invisible">
+			{{$:/core/images/copy-clipboard}}<$text text=" "/>Copy syncer logs to clipboard
+		</$button>
 	</div>
 </$reveal>

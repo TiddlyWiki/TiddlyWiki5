@@ -779,4 +779,22 @@ exports.strEndsWith = function(str,ending,position) {
 	}
 };
 
+/*
+Return system information useful for debugging
+*/
+exports.getSystemInfo = function(str,ending,position) {
+	var results = [],
+		save = function(desc,value) {
+			results.push(desc + ": " + value);
+		};
+	if($tw.browser) {
+		save("User Agent",navigator.userAgent);
+		save("Online Status",window.navigator.onLine);
+	}
+	if($tw.node) {
+		save("Node Version",process.version);
+	}
+	return results.join("\n");
+};
+
 })();
