@@ -1,6 +1,6 @@
 title: $:/core/ui/Buttons/save-wiki
 tags: $:/tags/PageControls
-caption: {{$:/core/images/cloud-sync}} Server status
+caption: {{$:/plugins/tiddlywiki/tiddlyweb/icon/cloud}} Server status
 description: Status of synchronisation with server
 
 \define config-title()
@@ -9,7 +9,7 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 <$button popup=<<qualify "$:/state/popup/save-wiki">> tooltip="Status of synchronisation with server" aria-label="Server status" class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
 <span class="tc-dirty-indicator">
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
-{{$:/core/images/cloud}}
+{{$:/plugins/tiddlywiki/tiddlyweb/icon/cloud}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
 <span class="tc-btn-text"><$text text="Server status"/></span>
@@ -25,7 +25,7 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 </$reveal>
 <$reveal state="$:/status/IsLoggedIn" type="match" text="yes">
 <p>
-Currently logged in<$reveal state="$:/status/UserName" type="nomatch" text="" default=""> as <$text text={{$:/status/UserName}}/></$reveal><$reveal state="$:/status/IsReadOnly" type="match" text="yes" default="no"> (read-only)</$reveal>
+You are logged in<$reveal state="$:/status/UserName" type="nomatch" text="" default=""> as <strong><$text text={{$:/status/UserName}}/></strong></$reveal><$reveal state="$:/status/IsReadOnly" type="match" text="yes" default="no"> (read-only)</$reveal>
 </p>
 <hr/>
 <$button tooltip="Get latest changes from the server" aria-label="Refresh from server" class="tc-btn-invisible">
@@ -34,7 +34,7 @@ Currently logged in<$reveal state="$:/status/UserName" type="nomatch" text="" de
 </$button>
 <$button class="tc-btn-invisible">
 <$wikify name="site-title" text={{$:/config/SaveWikiButton/Filename}}>
-	<$action-sendmessage $message="tm-download-file" $param={{$:/config/SaveWikiButton/Template}} filename=<<site-title>>/>
+<$action-sendmessage $message="tm-download-file" $param={{$:/config/SaveWikiButton/Template}} filename=<<site-title>>/>
 </$wikify>
 {{$:/core/images/download-button}} Save snapshot for offline use
 </$button>
