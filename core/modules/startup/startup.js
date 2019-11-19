@@ -119,15 +119,18 @@ exports.startup = function() {
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
 	// Find a working syncadaptor
-	$tw.syncadaptor = undefined;
+	var syncadaptorClass;
 	$tw.modules.forEachModuleOfType("syncadaptor",function(title,module) {
-		if(!$tw.syncadaptor && module.adaptorClass) {
-			$tw.syncadaptor = new module.adaptorClass({wiki: $tw.wiki});
+		if(!syncadaptorClass && module.adaptorClass) {
+			syncadaptorClass = module.adaptorClass;
 		}
 	});
 	// Set up the syncer object if we've got a syncadaptor
-	if($tw.syncadaptor) {
-		$tw.syncer = new $tw.Syncer({wiki: $tw.wiki, syncadaptor: $tw.syncadaptor});
+	if(syncadaptorClass) {
+		$tw.syncer = new $tw.Syncer({
+			wiki: $tw.wiki,
+			syncadaptorClass: syncadaptorClass
+		});
 	} 
 	// Setup the saver handler
 	$tw.saverHandler = new $tw.SaverHandler({

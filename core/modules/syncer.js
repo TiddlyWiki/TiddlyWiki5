@@ -34,9 +34,8 @@ syncadaptor: reference to syncadaptor to be used
 wiki: wiki to be synced
 */
 function Syncer(options) {
-	var self = this;
+	var self = this;	// Save parameters
 	this.wiki = options.wiki;
-	this.syncadaptor = options.syncadaptor;
 	this.disableUI = !!options.disableUI;
 	this.titleIsLoggedIn = options.titleIsLoggedIn || this.titleIsLoggedIn;
 	this.titleUserName = options.titleUserName || this.titleUserName;
@@ -48,9 +47,11 @@ function Syncer(options) {
 	this.pollTimerInterval = options.pollTimerInterval || parseInt(this.wiki.getTiddlerText(this.titleSyncPollingInterval,""),10) || this.pollTimerInterval;
 	this.logging = "logging" in options ? options.logging : true;
 	// Make a logger
-	this.logger = new $tw.utils.Logger("syncer" + ($tw.browser ? "-browser" : "") + ($tw.node ? "-server" : "")  + (this.syncadaptor.name ? ("-" + this.syncadaptor.name) : ""),{
+	var syncadaptorClassName = options.syncadaptorClass.prototype.name;
+	this.logger = new $tw.utils.Logger("syncer" + ($tw.browser ? "-browser" : "") + ($tw.node ? "-server" : "")  + (syncadaptorClassName ? ("-" + syncadaptorClassName) : ""),{
 			colour: "cyan",
-			enable: this.logging
+			enable: this.logging,
+			save: true
 		});
 	// Compile the dirty tiddler filter
 	this.filterFn = this.wiki.compileFilter(this.wiki.getTiddlerText(this.titleSyncFilter));
@@ -59,6 +60,12 @@ function Syncer(options) {
 	this.taskTimerId = null; // Timer for task dispatch
 	this.pollTimerId = null; // Timer for polling server
 	this.numTasksInProgress = 0;
+	// Create the syncadaptor
+	this.syncadaptor = new options.syncadaptorClass({
+		wiki: $tw.wiki,
+		logger: this.logger
+	});
+	$tw.syncadaptor = this.syncadaptor; // For backwards compatibility
 	// Listen out for changes to tiddlers
 	this.wiki.addEventListener("change",function(changes) {
 		self.processTaskQueue();

@@ -33,12 +33,14 @@ Log a message
 Logger.prototype.log = function(/* args */) {
 	var self = this;
 	if(this.enable) {
-		this.buffer += $tw.utils.formatDateString(new Date(),"YYYY MM DD 0hh:0mm:0ss.0XXX") + ":";
-		$tw.utils.each(Array.prototype.slice.call(arguments,0),function(arg,index) {
-			self.buffer += " " + arg;
-		});
-		this.buffer += "\n";
-		self.buffer = self.buffer.slice(-this.saveLimit);
+		if(this.save) {
+			this.buffer += $tw.utils.formatDateString(new Date(),"YYYY MM DD 0hh:0mm:0ss.0XXX") + ":";
+			$tw.utils.each(Array.prototype.slice.call(arguments,0),function(arg,index) {
+				self.buffer += " " + arg;
+			});
+			this.buffer += "\n";
+			this.buffer = this.buffer.slice(-this.saveLimit);			
+		}
 		if(console !== undefined && console.log !== undefined) {
 			return Function.apply.call(console.log, console, [$tw.utils.terminalColour(this.colour),this.componentName + ":"].concat(Array.prototype.slice.call(arguments,0)).concat($tw.utils.terminalColour()));
 		}

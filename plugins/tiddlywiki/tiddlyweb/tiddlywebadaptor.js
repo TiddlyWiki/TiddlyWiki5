@@ -20,7 +20,7 @@ function TiddlyWebAdaptor(options) {
 	this.host = this.getHost();
 	this.recipe = undefined;
 	this.hasStatus = false;
-	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
+	this.logger = options.logger || new $tw.utils.Logger("TiddlyWebAdaptor");
 	this.isLoggedIn = false;
 	this.isReadOnly = false;
 }
