@@ -18,32 +18,8 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 </$button>
 <$reveal state=<<qualify "$:/state/popup/save-wiki">> type="popup" position="below" animate="yes">
 <div class="tc-drop-down">
-<$reveal state="$:/status/IsLoggedIn" type="nomatch" text="yes">
-<$button message="tm-login" class="tc-btn-invisible">
-{{$:/core/images/unlocked-padlock}} Login
-</$button>
-</$reveal>
-<$reveal state="$:/status/IsLoggedIn" type="match" text="yes">
-<p>
-You are logged in<$reveal state="$:/status/UserName" type="nomatch" text="" default=""> as <strong><$text text={{$:/status/UserName}}/></strong></$reveal><$reveal state="$:/status/IsReadOnly" type="match" text="yes" default="no"> (read-only)</$reveal>
-</p>
-<hr/>
-<$button tooltip="Get latest changes from the server" aria-label="Refresh from server" class="tc-btn-invisible">
-<$action-sendmessage $message="tm-server-refresh"/>
-{{$:/core/images/refresh-button}} <span clas]s="tc-btn-text"><$text text="Refresh from server"/></span>
-</$button>
-<$button class="tc-btn-invisible">
-<$wikify name="site-title" text={{$:/config/SaveWikiButton/Filename}}>
-<$action-sendmessage $message="tm-download-file" $param={{$:/config/SaveWikiButton/Template}} filename=<<site-title>>/>
-</$wikify>
-{{$:/core/images/download-button}} Save snapshot for offline use
-</$button>
-<$button message="tm-logout" class="tc-btn-invisible">
-{{$:/core/images/cancel-button}} Logout
-</$button>
-</$reveal>
-<$button message="tm-copy-syncer-logs-to-clipboard" class="tc-btn-invisible">
-{{$:/core/images/copy-clipboard}} Copy syncer logs to clipboard
-</$button>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/SyncerDropdown]!has[draft.of]]" variable="listItem">
+<$transclude tiddler=<<listItem>>/>
+</$list>
 </div>
 </$reveal>
