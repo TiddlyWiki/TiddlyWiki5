@@ -9,7 +9,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 
 body .tc-image-cloud-idle {
 	fill: <<colour background>>;
-	transition: opacity 450ms linear;
+	transition: opacity 250ms ease-in-out;
 	opacity: 1;	
 }
 
@@ -18,7 +18,7 @@ body.tc-dirty .tc-image-cloud-idle {
 }
 
 body .tc-image-cloud-progress {
-	transition: opacity 450ms linear;
+	transition: opacity 250ms ease-in-out;
 	transform-origin: 50% 50%;
 	transform: rotate(359deg);
 	animation: animation-rotate-slow 2s infinite linear;
@@ -31,7 +31,7 @@ body.tc-dirty .tc-image-cloud-progress {
 }
 
 body .tc-image-cloud-error {
-	transition: opacity 450ms linear;
+	transition: opacity 250ms ease-in-out;
 	transform-origin: 50% 50%;
 	animation: animation-pulse-fast 0.7s infinite linear;
 	fill: <<colour background>>;
