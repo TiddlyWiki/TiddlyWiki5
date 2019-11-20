@@ -36,6 +36,7 @@ The plugin includes support for the following languages (referred to as "brushes
 * css
 * diff
 * dockerfile
+* elixir
 * erlang
 * fortran
 * go
