@@ -612,7 +612,7 @@ NavigatorWidget.prototype.handleRenameTiddlerEvent = function(event) {
 	var paramObject = event.paramObject || {},
 		from = paramObject.from || event.tiddlerTitle,
 		to = paramObject.to;
-	$tw.wiki.renameTiddler(from,to);
+	this.wiki.renameTiddler(from,to);
 };
 
 exports.navigator = NavigatorWidget;
