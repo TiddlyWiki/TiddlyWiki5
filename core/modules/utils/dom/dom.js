@@ -36,8 +36,8 @@ exports.addClass = function(el,className) {
 	var c = el.className.split(" ");
 	if(c.indexOf(className) === -1) {
 		c.push(className);
+		el.className = c.join(" ");
 	}
-	el.className = c.join(" ");
 };
 
 exports.removeClass = function(el,className) {
