@@ -1,9 +1,4 @@
 title: $:/core/images/gitter
 tags: $:/tags/Image
 
-<svg class="tc-image-gitter tc-image-button" width="22pt" height="22pt" viewBox="0 0 18 25">
-  <rect x="15" y="5" width="2" height="10"></rect>
-  <rect x="10" y="5" width="2" height="20"></rect>
-  <rect x="5" y="5" width="2" height="20"></rect>
-  <rect width="2" height="15"></rect>
-</svg>
+<svg width="22pt" height="22pt" class="tc-image-gitter tc-image-button" viewBox="0 0 18 25"><path d="M15 5h2v10h-2zM10 5h2v20h-2zM5 5h2v20H5zM0 0h2v15H0z"/></svg>
