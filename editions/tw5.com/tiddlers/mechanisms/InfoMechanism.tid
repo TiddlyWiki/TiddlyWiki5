@@ -10,6 +10,10 @@ type: text/vnd.tiddlywiki
 
 System tiddlers in the namespace `$:/info/` are used to expose information about the system (including the current browser) so that WikiText applications can adapt themselves to available features.
 
+! Important
+
+The values below are "snapshots". The values are initialized at the wiki startup.
+
 ! Information Tiddlers
 
 |!Title |!Description |
