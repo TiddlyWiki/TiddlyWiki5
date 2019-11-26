@@ -25,6 +25,7 @@ Syncer.prototype.titleSyncDisableLazyLoading = "$:/config/SyncDisableLazyLoading
 Syncer.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
 Syncer.prototype.taskTimerInterval = 1 * 1000; // Interval for sync timer
 Syncer.prototype.throttleInterval = 1 * 1000; // Defer saving tiddlers if they've changed in the last 1s...
+Syncer.prototype.errorRetryInterval = 5 * 1000; // Interval to retry after an error
 Syncer.prototype.fallbackInterval = 10 * 1000; // Unless the task is older than 10s
 Syncer.prototype.pollTimerInterval = 60 * 1000; // Interval for polling for changes from the adaptor
 
@@ -43,6 +44,7 @@ function Syncer(options) {
 	this.titleSavedNotification = options.titleSavedNotification || this.titleSavedNotification;
 	this.taskTimerInterval = options.taskTimerInterval || this.taskTimerInterval;
 	this.throttleInterval = options.throttleInterval || this.throttleInterval;
+	this.errorRetryInterval = options.errorRetryInterval || this.errorRetryInterval;
 	this.fallbackInterval = options.fallbackInterval || this.fallbackInterval;
 	this.pollTimerInterval = options.pollTimerInterval || parseInt(this.wiki.getTiddlerText(this.titleSyncPollingInterval,""),10) || this.pollTimerInterval;
 	this.logging = "logging" in options ? options.logging : true;
@@ -68,7 +70,15 @@ function Syncer(options) {
 	$tw.syncadaptor = this.syncadaptor; // For backwards compatibility
 	// Listen out for changes to tiddlers
 	this.wiki.addEventListener("change",function(changes) {
-		self.processTaskQueue();
+ 		var filteredChanges = self.filterFn.call(self.wiki,function(callback) {
+ 			$tw.utils.each(changes,function(change,title) {
+ 				var tiddler = self.wiki.getTiddler(title);
+ 				callback(tiddler,title);
+ 			});
+ 		});
+ 		if(filteredChanges.length > 0) {
+			self.processTaskQueue(); 			
+ 		}
 	});
 	// Browser event handlers
 	if($tw.browser && !this.disableUI) {
@@ -396,7 +406,8 @@ Syncer.prototype.processTaskQueue = function() {
 				self.numTasksInProgress -= 1;
 				if(err) {
 					self.logger.alert("Sync error while processing " + task.type + " of '" + task.title + "':\n" + err);
-					self.triggerTimeout();
+					self.updateDirtyStatus();
+					self.triggerTimeout(self.errorRetryInterval);
 				} else {
 					self.updateDirtyStatus();
 					// Process the next task
@@ -404,21 +415,20 @@ Syncer.prototype.processTaskQueue = function() {
 				}
 			});
 		} else {
-			// Make sure we've set a timer if there wasn't a task to perform
 			self.updateDirtyStatus();
-			this.triggerTimeout();
+			// this.triggerTimeout();
 		}
 	}
 };
 
 
-Syncer.prototype.triggerTimeout = function() {
+Syncer.prototype.triggerTimeout = function(interval) {
 	var self = this;
 	if(!this.taskTimerId) {
 		this.taskTimerId = setTimeout(function() {
 			self.taskTimerId = null;
 			self.processTaskQueue.call(self);
-		},self.taskTimerInterval);
+		},interval || self.taskTimerInterval);
 	}
 };
 
