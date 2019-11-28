@@ -517,6 +517,22 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<p>New value</p>");
 	});
 
+	it("should can mix setWidgets and macros when importing", function() {
+		var wiki = new $tw.Wiki();
+		// Add some tiddlers
+		wiki.addTiddlers([
+			{title: "A", text: "\\define A() Aval"},
+			{title: "B", text: "<$set name='B' value='Bval'>\n\ndummy text</$set>"},
+			{title: "C", text: "\\define C() Cval"}
+		]);
+		var text = "\\import A B C\n<<A>> <<B>> <<C>>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>Aval Bval Cval</p>");
+	});
+
 	/** Special case. <$importvariables> has different handling if
 	 *  it doesn't end up importing any variables. Make sure it
 	 *  doesn't forget its childrenNodes.
