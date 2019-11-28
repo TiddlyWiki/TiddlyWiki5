@@ -37,32 +37,45 @@ ImportVariablesWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 ImportVariablesWidget.prototype.execute = function(tiddlerList) {
-	var self = this;
+	var widgetPointer = this;
 	// Get our parameters
 	this.filter = this.getAttribute("filter");
 	// Compute the filter
 	this.tiddlerList = tiddlerList || this.wiki.filterTiddlers(this.filter,this);
-	// Accumulate variables for every found <$set> widgets from each tiddler
+	// Accumulate the <$set> widgets from each tiddler
 	$tw.utils.each(this.tiddlerList,function(title) {
-		var parser = self.wiki.parseTiddler(title);
+		var parser = widgetPointer.wiki.parseTiddler(title);
 		if(parser) {
 			var parseTreeNode = parser.tree[0];
 			while(parseTreeNode && parseTreeNode.type === "set") {
-				var widget = self.makeChildWidget({
+				var node = {
 					type: "set",
 					attributes: parseTreeNode.attributes,
 					params: parseTreeNode.params,
 					isMacroDefinition: parseTreeNode.isMacroDefinition
-				});
-				widget.computeAttributes();
-				widget.execute();
-				$tw.utils.extend(self.variables,widget.variables);
+				};
+				if (parseTreeNode.isMacroDefinition) {
+					// Macro definitions can be folded into
+					// current widget instead of adding
+					// another link to the chain.
+					var widget = widgetPointer.makeChildWidget(node);
+					widget.computeAttributes();
+					widget.execute();
+					$tw.utils.extend(widgetPointer.variables,widget.variables);
+				} else {
+					widgetPointer.makeChildWidgets([node]);
+					widgetPointer = widgetPointer.children[0];
+				}
 				parseTreeNode = parseTreeNode.children[0];
 			}
 		} 
 	});
-	// Construct the child widgets
-	this.makeChildWidgets();
+
+	if (widgetPointer != this) {
+		widgetPointer.parseTreeNode.children = this.parseTreeNode.children;
+	} else {
+		widgetPointer.makeChildWidgets();
+	}
 };
 
 /*
