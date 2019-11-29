@@ -70,6 +70,7 @@ function Syncer(options) {
 	$tw.syncadaptor = this.syncadaptor; // For backwards compatibility
 	// Listen out for changes to tiddlers
 	this.wiki.addEventListener("change",function(changes) {
+		// Filter the changes to just include ones that are being synced
  		var filteredChanges = self.filterFn.call(self.wiki,function(callback) {
  			$tw.utils.each(changes,function(change,title) {
  				var tiddler = self.wiki.getTiddler(title);
@@ -400,7 +401,7 @@ Syncer.prototype.processTaskQueue = function() {
 		// Choose the next task to perform
 		var task = this.chooseNextTask();
 		// Perform the task if we had one
-		if(task) {
+		if(typeof task === "object" && task !== null) {
 			this.numTasksInProgress += 1;
 			task.run(function(err) {
 				self.numTasksInProgress -= 1;
@@ -415,12 +416,15 @@ Syncer.prototype.processTaskQueue = function() {
 				}
 			});
 		} else {
-			self.updateDirtyStatus();
-			this.triggerTimeout();
+			// No task is ready so update the status
+			this.updateDirtyStatus();
+			// And trigger a timeout if there is a pending task
+			if(task === true) {
+				this.triggerTimeout();				
+			}
 		}
 	}
 };
-
 
 Syncer.prototype.triggerTimeout = function(interval) {
 	var self = this;
@@ -434,9 +438,12 @@ Syncer.prototype.triggerTimeout = function(interval) {
 
 /*
 Choose the next sync task. We prioritise saves, then deletes, then loads from the server
+
+Returns either a task object, null if there's no upcoming tasks, or the boolean true if there are pending tasks that aren't yet due
 */
 Syncer.prototype.chooseNextTask = function() {
-	var thresholdLastSaved = (new Date()) - this.throttleInterval;
+	var thresholdLastSaved = (new Date()) - this.throttleInterval,
+		havePending = null;
 	// First we look for tiddlers that have been modified locally and need saving back to the server
 	var titles = this.filterFn.call(this.wiki);
 	for(var index=0; index<titles.length; index++) {
@@ -446,10 +453,14 @@ Syncer.prototype.chooseNextTask = function() {
 		if(tiddler) {
 			// If the tiddler is not known on the server, or has been modified locally no more recently than the threshold then it needs to be saved to the server
  			var hasChanged = !tiddlerInfo || $tw.wiki.getChangeCount(title) > tiddlerInfo.changeCount,
- 				hasChangedRecently = !tiddlerInfo || !tiddlerInfo.timestampLastSaved || tiddlerInfo.timestampLastSaved < thresholdLastSaved;
-			if(hasChanged && hasChangedRecently) {
-				return new SaveTiddlerTask(this,title);
-			}
+ 				isReadyToSave = !tiddlerInfo || !tiddlerInfo.timestampLastSaved || tiddlerInfo.timestampLastSaved < thresholdLastSaved;
+ 			if(hasChanged) {
+ 				if(isReadyToSave) {
+					return new SaveTiddlerTask(this,title); 					
+ 				} else {
+ 					havePending = true;
+ 				}
+ 			}
 		}
 	}
 	// Second, we check tiddlers that are known from the server but not currently in the store, and so need deleting on the server
@@ -472,7 +483,7 @@ Syncer.prototype.chooseNextTask = function() {
 		}
 	}
 	// No tasks are ready
-	return null;
+	return havePending;
 };
 
 function SaveTiddlerTask(syncer,title) {
