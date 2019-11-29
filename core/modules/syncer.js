@@ -293,7 +293,7 @@ Syncer.prototype.syncFromServer = function() {
 			$tw.utils.each(previousTitles,function(title) {
 				delete self.tiddlerInfo[title];
 				self.logger.log("Deleting tiddler missing from server:",title);
-				// self.wiki.deleteTiddler(title);
+				self.wiki.deleteTiddler(title);
 			});
 		});
 	}
