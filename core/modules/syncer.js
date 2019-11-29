@@ -416,7 +416,7 @@ Syncer.prototype.processTaskQueue = function() {
 			});
 		} else {
 			self.updateDirtyStatus();
-			// this.triggerTimeout();
+			this.triggerTimeout();
 		}
 	}
 };
