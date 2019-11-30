@@ -13,7 +13,6 @@ description: Die Beschreibung für ein "plugin" oder einen "modalen" Dialog.
 draft.of: Entwurf von - enthält den Titel des Tiddlers, zu dem dieser Entwurf-Tiddler gehört.
 draft.title: Entwurf Titel - enthält den neuen Titel, wenn der Entwurf-Tiddler gespeichert wird. 
 footer: Der Fußnoten Text bei einem "~Wizard-Dialog"
-hack-to-give-us-something-to-compare-against: Ein temporäres Feld, verwendet in [[$:/core/templates/static.content]]
 hide-body: Der Textbereich eines Tiddlers wird verborgen, wenn dieses Feld auf ''"yes"'' gesetzt wird
 icon: Der Titel eines ~Icon-Tiddlers, der mit diesem Tiddler verbunden ist.
 library: Wenn dieses Feld="yes" ist, dann soll der Tiddler als JavaScript Bibliothek gespeichert werden.

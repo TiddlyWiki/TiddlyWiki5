@@ -672,6 +672,8 @@ button.tc-untagged-label {
 .tc-tag-label svg, .tc-tag-label img {
 	height: 1em;
 	width: 1em;
+	margin-right: 3px; 
+	margin-bottom: 1px;
 	vertical-align: text-bottom;
 }
 
@@ -2668,3 +2670,10 @@ select {
         background: <<colour select-tag-background>>;
 }
 
+/*
+** Utility classes for SVG icons
+*/
+
+.tc-fill-background {
+	fill: <<colour background>>;
+}
