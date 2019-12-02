@@ -21,6 +21,7 @@ Syncer.prototype.titleIsReadOnly = "$:/status/IsReadOnly";
 Syncer.prototype.titleUserName = "$:/status/UserName";
 Syncer.prototype.titleSyncFilter = "$:/config/SyncFilter";
 Syncer.prototype.titleSyncPollingInterval = "$:/config/SyncPollingInterval";
+Syncer.prototype.titleSyncDisableLazyLoading = "$:/config/SyncDisableLazyLoading";
 Syncer.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
 Syncer.prototype.taskTimerInterval = 1 * 1000; // Interval for sync timer
 Syncer.prototype.throttleInterval = 1 * 1000; // Defer saving tiddlers if they've changed in the last 1s...
@@ -87,7 +88,7 @@ function Syncer(options) {
 		});
 	}
 	// Listen out for lazyLoad events
-	if(!this.disableUI) {
+	if(!this.disableUI && $tw.wiki.getTiddlerText(this.titleSyncDisableLazyLoading) !== "yes") {
 		this.wiki.addEventListener("lazyLoad",function(title) {
 			self.handleLazyLoadEvent(title);
 		});		

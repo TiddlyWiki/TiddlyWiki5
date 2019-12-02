@@ -1,7 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/powered-by-tiddlywiki",
-	"description": "Powered by TiddlyWiki Banner",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
+	"name": "Powered By TiddlyWiki",
+	"description": "Powered by TiddlyWiki banner",
 	"list": "readme"
 }

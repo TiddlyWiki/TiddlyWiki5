@@ -14,7 +14,7 @@ A tiddler with the <<.def prefix>> `$:/config/ShortcutInfo/` and a ''unique suff
 
 In the [[Keyboard Shortcuts Tab|$:/core/ui/ControlPanel/KeyboardShortcuts]] the ''key combination'' that should trigger the shortcut can be configured:
 
-> Look for the ''unique suffix'' defined for the new shortcut and click the <$button class="tc-btn-invisible">{{$:/core/images/edit-button}}<$action-sendmessage $message="tm-notify" $param="$:/core/images/edit-button"/></$button> button to open a popup that detects ''key combinations'' and shows the detected combination in its input field
+> Look for the ''unique suffix'' defined for the new shortcut and click the <$button class="tc-btn-invisible"><<.icon $:/core/images/edit-button>><$action-sendmessage $message="tm-notify" $param="$:/core/images/edit-button"/></$button> button to open a popup that detects ''key combinations'' and shows the detected combination in its input field
 
 >The ''add shortcut'' assigns the key-combination to the shortcut
 

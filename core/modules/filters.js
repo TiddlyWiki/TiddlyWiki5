@@ -119,7 +119,7 @@ exports.parseFilter = function(filterString) {
 		p = 0, // Current position in the filter string
 		match;
 	var whitespaceRegExp = /(\s+)/mg,
-		operandRegExp = /((?:\+|\-|~)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
+		operandRegExp = /((?:\+|\-|~|=)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
 	while(p < filterString.length) {
 		// Skip any whitespace
 		whitespaceRegExp.lastIndex = p;
@@ -248,6 +248,10 @@ exports.compileFilter = function(filterString) {
 					return function(results,source,widget) {
 						$tw.utils.pushTop(results,operationSubFunction(source,widget));
 					};
+				case "=": // The results of the operation are pushed into the result without deduplication
+					return function(results,source,widget) {
+						Array.prototype.push.apply(results,operationSubFunction(source,widget));
+					};
 				case "-": // The results of this operation are removed from the main result
 					return function(results,source,widget) {
 						$tw.utils.removeArrayEntries(results,operationSubFunction(source,widget));
@@ -270,7 +274,7 @@ exports.compileFilter = function(filterString) {
 		})());
 	});
 	// Return a function that applies the operations to a source iterator of tiddler titles
-	return $tw.perf.measure("filter",function filterFunction(source,widget) {
+	return $tw.perf.measure("filter: " + filterString,function filterFunction(source,widget) {
 		if(!source) {
 			source = self.each;
 		} else if(typeof source === "object") { // Array or hashmap

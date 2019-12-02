@@ -27,6 +27,12 @@ if(Object.prototype.hasOwnProperty.call($tw.hooks.names,hookName)) {
 function hookBootTiddlersLoaded() {
 	var url = window.location.pathname,
 		log = [];
+	// Check that browser storage is available
+	try {
+		window.localStorage;
+	} catch(e) {
+		return;
+	}
 	// Step through each browsder storage item
 	for(var index=0; index<window.localStorage.length; index++) {
 		var key = window.localStorage.key(index),

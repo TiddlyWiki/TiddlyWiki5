@@ -26,22 +26,30 @@ exports.lowercase = makeStringBinaryOperator(
 	function(a) {return [("" + a).toLowerCase()];}
 );
 
+exports.sentencecase = makeStringBinaryOperator(
+	function(a) {return [$tw.utils.toSentenceCase(a)];}
+);
+
+exports.titlecase = makeStringBinaryOperator(
+	function(a) {return [$tw.utils.toTitleCase(a)];}
+);
+
 exports.trim = makeStringBinaryOperator(
 	function(a) {return [$tw.utils.trim(a)];}
 );
 
-exports.concat = makeStringBinaryOperator(
-	function(a,b) {return ["" + a + b];}
-);
-
 exports.split = makeStringBinaryOperator(
-	function(a,b) {return ("" + a).split(b).filter(function(str) {return !!str;});}
+	function(a,b) {return ("" + a).split(b);}
 );
 
-exports.join = makeStringArrayOperator(
+exports.join = makeStringReducingOperator(
 	function(accumulator,value,operand) {
-		return "" + (accumulator ? accumulator + (operand || "") + value : value);
-	}
+		if(accumulator === null) {
+			return value;
+		} else {
+			return accumulator + operand + value;
+		}
+	},null
 );
 
 function makeStringBinaryOperator(fnCalc) {
@@ -54,8 +62,7 @@ function makeStringBinaryOperator(fnCalc) {
 	};
 }
 
-function makeStringArrayOperator(fnCalc,initialValue) {
-	initialValue = initialValue || "";
+function makeStringReducingOperator(fnCalc,initialValue) {
 	return function(source,operator,options) {
 		var result = [];
 		source(function(tiddler,title) {
@@ -66,5 +73,21 @@ function makeStringArrayOperator(fnCalc,initialValue) {
 		},initialValue)];
 	};
 }
+
+exports.splitregexp = function(source,operator,options) {
+	var result = [],
+		suffix = operator.suffix || "",
+		flags = (suffix.indexOf("m") !== -1 ? "m" : "") + (suffix.indexOf("i") !== -1 ? "i" : ""),
+		regExp;
+	try {
+		regExp = new RegExp(operator.operand || "",flags);		
+	} catch(ex) {
+		return ["RegExp error: " + ex];
+	}
+	source(function(tiddler,title) {
+		Array.prototype.push.apply(result,title.split(regExp));
+	});		
+	return result;
+};
 
 })();

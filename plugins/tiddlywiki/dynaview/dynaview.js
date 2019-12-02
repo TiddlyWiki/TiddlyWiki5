@@ -31,6 +31,8 @@ var LOCAL_STORAGE_KEY_PREFIX = "tw5-dynaview-scroll-position#";
 
 var hasRestoredScrollPosition = false;
 
+var localStorageHasFailed = false;
+
 exports.startup = function() {
 	var topmost = null, lastScrollY;
 	$tw.boot.disableStartupNavigation = true;
@@ -165,30 +167,31 @@ function updateAddressBar() {
 }
 
 function saveScrollPosition() {
-	if(hasRestoredScrollPosition && $tw.wiki.getTiddlerText("$:/config/DynaView/RestoreScrollPositionAtStartup") === "yes") {
-		var top = findTopmostTiddler();
-		if(top.element) {
-			try {
-				window.localStorage.setItem(LOCAL_STORAGE_KEY_PREFIX + window.location.pathname,JSON.stringify({
-					title: top.title,
-					offset: top.offset
-				}));
-			} catch(e) {
-				console.log("Error setting local storage",e)
+	if(!localStorageHasFailed) {
+		if(hasRestoredScrollPosition && $tw.wiki.getTiddlerText("$:/config/DynaView/RestoreScrollPositionAtStartup") === "yes") {
+			var top = findTopmostTiddler();
+			if(top.element) {
+				try {
+					window.localStorage.setItem(LOCAL_STORAGE_KEY_PREFIX + window.location.pathname,JSON.stringify({
+						title: top.title,
+						offset: top.offset
+					}));
+				} catch(e) {
+					localStorageHasFailed = true;
+				}
 			}
 		}
 	}
 }
 
 function restoreScrollPosition() {
-	var str = window.localStorage.getItem(LOCAL_STORAGE_KEY_PREFIX + window.location.pathname),
-		json;
-	if(str) {
+	var json;
+	if(!localStorageHasFailed) {
 		try {
-			json = JSON.parse(str);
+			json = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY_PREFIX + window.location.pathname));
 		} catch(e) {
-			// Ignore errors
-		};
+			localStorageHasFailed = true;
+		};		
 	}
 	return json;
 }

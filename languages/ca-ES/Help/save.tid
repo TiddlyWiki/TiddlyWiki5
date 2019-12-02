@@ -1,0 +1,24 @@
+title: $:/language/Help/save
+description: Desa tiddlers individuals a fitxers com a text cru
+
+Desa els tiddlers individuals indicats per un filtre en text cru o en binari als fitxers especificats.
+
+```
+--save <filtre-de-tiddler> <nom-del-filtre>
+```
+* ''filtre-de-tiddler'': Un filtre que indica els tiddler(s) que s'han de desar
+* ''nom-del-filtre'': Filtre opcional que transforma els títols de tiddler en noms de ruta. Si s'omet, el valor per omissió `[is[tiddler]]`, s'utilitza el títol del tiddler sense modificar com a nom de fitxer
+
+Per omissió, el nom del fitxer es resol en relació amb el subcarpeta `output 'de la carpeta d’edició. L'ordre `--output` es pot utilitzar per dirigir la sortida a una altra carpeta.
+
+Notes:
+
+* A la carpeta de sortida no s'esborra cap fitxer existent
+* Es generen automàticament les carpetes que falten a la ruta del nom del fitxer.
+* En guardar un tiddler amb espais en el seu títol, tingueu cura de fer servir tant les cometes necessàries pel vostre intèrpret d'ordres com els dobles claudàtors de TiddlyWiki: `--save" [[Motovun Jack.jpg]] "`
+* El nom del filtre s'avalua amb els elements seleccionats establerts al títol del tiddler que s'està desant, el que permet que el títol s’utilitzi com a base per calcular el nom del fitxer. Per exemple `[encodeuricomponent[]addprefix[static/]]` s'aplica la codificació URI a cada títol i després afegeix el prefix `static/`
+* L'ordre `--save` reemplaça, i és més flexible, que les ordres` --savetiddler` i `--savetiddlers`, que estan obsoletes.
+
+Exemples:
+
+* `--save" [!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]"` -- desa tots els tiddlers d'imatges que no siguin del sistema com a fitxers a la subcarpeta "tiddlers" amb títols codificats en URL

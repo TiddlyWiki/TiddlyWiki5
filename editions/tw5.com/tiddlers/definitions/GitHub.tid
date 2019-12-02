@@ -1,5 +1,5 @@
 created: 20140910212609354
-modified: 20140910212725412
+modified: 20190408173002622
 tags: Definitions
 title: GitHub
 type: text/vnd.tiddlywiki
@@ -9,3 +9,5 @@ GitHub is a hosting service for distributed projects that use git as their versi
 The code and documentation of TiddlyWiki is hosted on GitHub at:
 
 https://github.com/Jermolene/TiddlyWiki5
+
+GitHub also offer a free web hosting service called [[GitHub Pages|https://pages.github.com/]] that can be used directly from the single file configuration. See [[Saving to GitHub]].

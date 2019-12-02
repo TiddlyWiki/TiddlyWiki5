@@ -18,9 +18,9 @@ Instructions for use:
 # Open AndTidWiki
 #* Don't use ''Menu''/''new ~TiddlyWiki'' menu option (it only supports the older TiddlyWikiClassic)
 # Open the file by touching its filename
-# Try creating a new tiddler using the ''new tiddler'' {{$:/core/images/new-button}} button in the sidebar. Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''ok'' button
+# Try creating a new tiddler using the ''new tiddler'' <<.icon $:/core/images/new-button>> button in the sidebar. Type some content for the tiddler, and click the <<.icon $:/core/images/done-button>> ''ok'' button
 #* The wiki will be saved, and a confirmation message should appear at the top right of the window
 
-''Note:'' You can save your changes by clicking the {{$:/core/images/save-button}} ''save changes'' button in the sidebar even if you have not clicked the {{$:/core/images/done-button}} ''ok'' button to complete editing a tiddler
+''Note:'' You can save your changes by clicking the <<.icon $:/core/images/save-button>> ''save changes'' button in the sidebar even if you have not clicked the <<.icon $:/core/images/done-button>> ''ok'' button to complete editing a tiddler
 
 //Note that AndTidWiki is published independently of TiddlyWiki//

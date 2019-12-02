@@ -52,7 +52,7 @@ modal-footer-background: #3b4252
 modal-footer-border: #3b4252
 modal-header-border: #3b4252
 muted-foreground: #4C566A
-notification-background: #D08770
+notification-background: <<colour primary>>
 notification-border: #EBCB8B
 page-background: #2e3440
 pre-background: #2E3440

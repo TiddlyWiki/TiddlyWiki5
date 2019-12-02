@@ -28,6 +28,7 @@ exports.startup = function() {
 		var refreshHandler,
 			title = event.param || event.tiddlerTitle,
 			paramObject = event.paramObject || {},
+			windowTitle = paramObject.windowTitle || title,
 			template = paramObject.template || "$:/core/templates/single.tiddler.window",
 			width = paramObject.width || "700",
 			height = paramObject.height || "600",
@@ -51,7 +52,7 @@ exports.startup = function() {
 		// Initialise the document
 		srcDocument.write("<html><head></head><body class='tc-body tc-single-tiddler-window'></body></html>");
 		srcDocument.close();
-		srcDocument.title = title;
+		srcDocument.title = windowTitle;
 		srcWindow.addEventListener("beforeunload",function(event) {
 			delete windows[title];
 			$tw.wiki.removeEventListener("change",refreshHandler);

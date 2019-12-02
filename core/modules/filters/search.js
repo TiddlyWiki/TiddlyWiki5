@@ -43,6 +43,7 @@ exports.search = function(source,operator,options) {
 			caseSensitive: hasFlag("casesensitive"),
 			literal: hasFlag("literal"),
 			whitespace: hasFlag("whitespace"),
+			anchored: hasFlag("anchored"),
 			regexp: hasFlag("regexp"),
 			words: hasFlag("words")
 		});

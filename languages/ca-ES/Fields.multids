@@ -13,7 +13,7 @@ description: El text que descriu un connector, o un diàleg modal
 draft.of: Per als tiddlers esborranys, conté el títol del tiddler del qual és un esborrany
 draft.title: Per als tiddlers esborranys, conté el títol proposat per al tiddler
 footer: El text del peu d'un assistent
-hack-to-give-us-something-to-compare-against: Un camp d'emmagatzemament temporal utilitzat a [[$:/core/templates/static.content]]
+hide-body: El valor de la plantilla de vista amaga el cos dels tiddlers és: ''sí''
 icon: El títol del tiddler que conté la icona associada amb el tiddler
 library: Si està a "si" indica que un tiddler s'ha de sar com una biblioteca de JavaScript
 list: Una llista ordenada de títols de tiddlers associats amb un tiddler
@@ -31,5 +31,6 @@ subtitle: El text del subtítol d'un assistent
 tags: Una llista d'etiquetes associades a un tiddler
 text: El text del cos d'un tiddler
 title: El nom únic d'un tiddler
+toc-link: El valor de Suprimeix l'enllaç del tiddler a la Taula de Continguts està a: ''no''
 type: El tipus de contingut d'un tiddler
 version: Informació de la versió d'un connector

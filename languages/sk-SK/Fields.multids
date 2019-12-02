@@ -13,7 +13,6 @@ description: Popisný text pre plugin, alebo modálny dialóg
 draft.of: Pre pracovné tiddlery, obsahuje názov tiddlera, pre ktorý je to pracovný tiddler
 draft.title: Pre pracovné tiddlery, obsahuje navrhovaný nový názov pre tiddler
 footer: Text pre pätu stránky do wizardu
-hack-to-give-us-something-to-compare-against: Dočasné úložné pole používané v [[$:/core/templates/static.content]]
 icon: Názov tiddlera obsahujúceho icomu priradenú tiddlera
 library: Ak nastavené ako "yes" signalizuje, že tiddler by sa mal uložiť ako JavaScript knižnica
 list: Zotriedený zoznam názvov tiddlerov priradených tiddlera

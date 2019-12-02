@@ -42,6 +42,15 @@ Command.prototype.execute = function() {
 
 Command.prototype.subCommands = {};
 
+// Set credentials profile
+Command.prototype.subCommands["profile"] = function() {
+	var AWS = require("aws-sdk"),
+		profile = this.params[1],
+		credentials = new AWS.SharedIniFileCredentials({profile: profile});
+	AWS.config.update({credentials: credentials});
+	this.callback(null);
+};
+
 // Load tiddlers from files in an S3 bucket
 Command.prototype.subCommands["s3-load"] = function() {
 	var self = this,
@@ -50,8 +59,8 @@ Command.prototype.subCommands["s3-load"] = function() {
 		bucket = this.params[2],
 		filepaths = this.params.slice(3);
 	// Check parameters
-	if(!region || !bucket || filepaths.length < 1) {
-		throw "Missing parameters";
+	if(!region || !bucket) {
+		self.callback("Missing parameters");
 	}
 	async.eachLimit(
 		filepaths,
