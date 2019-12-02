@@ -12,7 +12,7 @@ Wraps up the remarkable parser for use as a Parser in TiddlyWiki
 /*global $tw: false */
 "use strict";
 
-var Remarkable = require("$:/plugins/tiddlywiki/markdown/remarkable.js");
+const { Remarkable, linkify, utils } = require("$:/plugins/tiddlywiki/markdown/remarkable.js");
 
 ///// Set up configuration options /////
 function parseAsBoolean(tiddlerName) {
@@ -25,12 +25,15 @@ var pluginOpts = {
 };
 var remarkableOpts = {
 	breaks: parseAsBoolean("$:/config/markdown/breaks"),
-	linkify: parseAsBoolean("$:/config/markdown/linkify"),
 	quotes: $tw.wiki.getTiddlerText("$:/config/markdown/quotes"),
 	typographer: parseAsBoolean("$:/config/markdown/typographer")
 };
 
 var md = new Remarkable(remarkableOpts);
+
+if (parseAsBoolean("$:/config/markdown/linkify")) {
+	md = md.use(linkify);
+}
 
 function findTagWithType(nodes, startPoint, type, level) {
 	for (var i = startPoint; i < nodes.length; i++) {
