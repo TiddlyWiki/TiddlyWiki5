@@ -231,6 +231,21 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 	return fileInfo;
 };
 
+/**
+ * Save the boot file info to disk.
+ * This allows simple TiddlyWeb access 
+ * without loading a node instance for it.
+ */
+exports.cacheFileInfo = function() {
+	if($tw.boot.files) {
+		fs.writeFileSync(
+			path.join($tw.boot.wikiPath, "fileinfo.json"), 
+			JSON.stringify($tw.boot.files, null, 2), 
+			"utf8"
+		);
+	}
+}
+
 /*
 Generate the filepath for saving a tiddler
 Options include:

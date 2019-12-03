@@ -57,6 +57,7 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 			wiki: this.wiki
 		});
 		$tw.boot.files[title] = fileInfo;
+		$tw.utils.cacheFileInfo();
 	}
 	callback(null,fileInfo);
 };
