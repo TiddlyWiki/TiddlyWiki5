@@ -2124,7 +2124,6 @@ $tw.loadTiddlersNode = function() {
 	// Load the tiddlers from the wiki directory
 	if($tw.boot.wikiPath) {
 		$tw.boot.wikiInfo = $tw.loadWikiTiddlers($tw.boot.wikiPath);
-		$tw.utils.cacheFileInfo();
 	}
 };
 
