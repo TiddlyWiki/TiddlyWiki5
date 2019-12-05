@@ -150,7 +150,7 @@ SaverHandler.prototype.updateSaver = function(name, priority) {
 			// Update saver priority info
 			saver.info.priority = priority;
 			// Sort savers
-			$tw.utils.sortSavers();
+			this.sortSavers();
 		}
 	}
 };
