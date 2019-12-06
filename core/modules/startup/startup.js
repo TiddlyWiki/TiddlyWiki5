@@ -131,6 +131,7 @@ exports.startup = function() {
 			wiki: $tw.wiki,
 			syncadaptorClass: syncadaptorClass
 		});
+		$tw.syncadaptor = $tw.syncer.syncadaptor; // For backwards compatibility
 	} 
 	// Setup the saver handler
 	$tw.saverHandler = new $tw.SaverHandler({

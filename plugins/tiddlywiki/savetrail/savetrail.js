@@ -26,10 +26,9 @@ var ENABLE_TIDDLER_TITLE = "$:/config/SaveTrailPlugin/enable",
 exports.startup = function() {
 	$tw.savetrail = $tw.savetrail || {};
 	// Create a syncer to handle autosaving
-	$tw.savetrail.syncadaptor = new SaveTrailSyncAdaptor();
 	$tw.savetrail.syncer = new $tw.Syncer({
 		wiki: $tw.wiki,
-		syncadaptor: $tw.savetrail.syncadaptor,
+		syncadaptorClass: SaveTrailSyncAdaptor,
 		titleSyncFilter: SYNC_DRAFTS_FILTER_TIDDLER_TITLE,
 		logging: false,
 		disableUI: true

@@ -67,7 +67,6 @@ function Syncer(options) {
 		wiki: $tw.wiki,
 		logger: this.logger
 	});
-	$tw.syncadaptor = this.syncadaptor; // For backwards compatibility
 	// Listen out for changes to tiddlers
 	this.wiki.addEventListener("change",function(changes) {
 		// Filter the changes to just include ones that are being synced
