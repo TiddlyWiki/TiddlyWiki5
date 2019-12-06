@@ -25,6 +25,7 @@ function Logger(componentName,options) {
 	this.save = "save" in options ? options.save : true;
 	this.saveLimit = options.saveLimit || 100 * 1024;
 	this.buffer = "";
+	this.alertCount = 0;
 }
 
 /*
@@ -91,6 +92,7 @@ Logger.prototype.alert = function(/* args */) {
 					component: this.componentName
 				};
 				existingCount = 0;
+				this.alertCount += 1;
 			}
 			alertFields.modified = new Date();
 			if(++existingCount > 1) {
@@ -105,6 +107,18 @@ Logger.prototype.alert = function(/* args */) {
 			// Print an orange message to the console if not in the browser
 			console.error("\x1b[1;33m" + text + "\x1b[0m");
 		}		
+	}
+};
+
+/*
+Clear outstanding alerts
+*/
+Logger.prototype.clearAlerts = function() {
+	if(this.alertCount > 0) {
+		$tw.utils.each($tw.wiki.getTiddlersWithTag(ALERT_TAG),function(title) {
+			$tw.wiki.deleteTiddler(title);
+		});
+		this.alertCount = 0;
 	}
 };
 

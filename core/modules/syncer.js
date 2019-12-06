@@ -190,7 +190,11 @@ Update the document body with the class "tc-dirty" if the wiki has unsaved/unsyn
 */
 Syncer.prototype.updateDirtyStatus = function() {
 	if($tw.browser && !this.disableUI) {
-		$tw.utils.toggleClass(document.body,"tc-dirty",this.isDirty());
+		var dirty = this.isDirty();
+		$tw.utils.toggleClass(document.body,"tc-dirty",dirty);
+		if(!dirty) {
+			this.logger.clearAlerts();
+		}
 	}
 };
 
