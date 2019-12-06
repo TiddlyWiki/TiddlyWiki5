@@ -1232,9 +1232,9 @@ exports.getTiddlerText = function(title,defaultText) {
 	if(!tiddler) {
 		return defaultText;
 	}
-	if(tiddler.fields.text !== undefined) {
+	if(!tiddler.hasField("_is_skinny")) {
 		// Just return the text if we've got it
-		return tiddler.fields.text;
+		return tiddler.fields.text || "";
 	} else {
 		// Tell any listeners about the need to lazily load this tiddler
 		this.dispatchEvent("lazyLoad",title);
