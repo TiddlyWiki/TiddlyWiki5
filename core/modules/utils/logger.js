@@ -114,9 +114,13 @@ Logger.prototype.alert = function(/* args */) {
 Clear outstanding alerts
 */
 Logger.prototype.clearAlerts = function() {
-	if(this.alertCount > 0) {
+	var self = this;
+	if($tw.browser && this.alertCount > 0) {
 		$tw.utils.each($tw.wiki.getTiddlersWithTag(ALERT_TAG),function(title) {
-			$tw.wiki.deleteTiddler(title);
+			var tiddler = $tw.wiki.getTiddler(title);
+			if(tiddler.fields.component === self.componentName) {
+				$tw.wiki.deleteTiddler(title);
+			}
 		});
 		this.alertCount = 0;
 	}
