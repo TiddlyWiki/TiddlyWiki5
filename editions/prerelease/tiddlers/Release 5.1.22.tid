@@ -17,6 +17,23 @@ The [[plugin listing|$:/core/ui/ControlPanel/Plugins]] and the [[plugin chooser|
 * Plugins may now declare dependencies that are automatically installed without user intervention
 * All plugins now feature a concise, informal name (in addition to the description and title)
 
+! Client-Server Improvements
+
+This release sees several improvements to the client-server configuration:
+
+* Improved resilience to connection errors. Errors encountered by the browser are automatically retried, and when they succeed the associated error messages are automatically removed
+* Changes to system tiddlers are now synchronised from the server to the browser
+* Deletions of tiddlers on the server are now synchronised to the browser
+* New "cloud" page control button with a dropdown menu showing status and additional actions:
+** "Refresh from server" to force an immediate check for changes from the server
+** "Logout"
+** "Save snapshot for offline use" to save a copy of the wiki without the client-server components
+** "Copy syncer logs to clipboard" to make it easier to ask end users for debugging information 
+* Added "filter" and "exclude" parameters to the [[GET /recipes/default/tiddlers.json|WebServer API: Get All Tiddlers]] endpoint to allow the returned tiddlers and fields to be filtered
+* Enhanced LazyLoading to include skinny versions of tiddlers in the HTML file, and to avoid unnecessary loads from the server
+
+See the [[pull request on GitHub for more details|https://github.com/Jermolene/TiddlyWiki5/pull/4373]]. 
+
 ! Translation Improvements
 
 * Improved Dutch translation
