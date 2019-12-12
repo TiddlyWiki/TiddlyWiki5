@@ -377,3 +377,5 @@ Mark Stegeman, @markstegeman, 2019/08/31
 Jan-Oliver Kaiser, @janno, 2019/09/06
 
 Xavier Maysonnave, @xmaysonnave, 2019/11/08
+
+Will Atwood Mitchell, @wam, 2019/12/11
