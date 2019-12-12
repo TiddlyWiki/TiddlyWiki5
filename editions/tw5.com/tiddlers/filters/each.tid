@@ -20,6 +20,6 @@ Each input title is processed in turn. The value of field <<.place F>> in the co
 ;each:value
 :As long as the title is unique it is appended to the output whether or not the corresponding tiddler exists.
 
-Note that if a tiddler does not contain field <<.place F>>, it is treated as if the value of the field were empty. Thus, a filter expression such as `[each[color]]` will return one tiddler that doesn't have a `color` field. To obtain just the tiddlers that have a non-blank value for the `color` field one can use `[each[color]has[color]]`.
+Note that if a tiddler does not contain field <<.place F>>, it is treated as if the value of the field were empty. Thus, a filter expression such as `[each[motovun]]` will return one tiddler that doesn't have a `motovun` field, as well as one tiddler with each distinct value of that field, if any. To obtain just the tiddlers that have a non-blank value for the `motovun` field one can use `[each[motovun]has[motovun]]`.
 
 <<.operator-examples "each">>
