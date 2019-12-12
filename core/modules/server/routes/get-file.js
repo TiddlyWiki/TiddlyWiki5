@@ -19,18 +19,19 @@ exports.path = /^\/files\/(.+)$/;
 exports.handler = function(request,response,state) {
 	var path = require("path"),
 		fs = require("fs"),
-		util = require("util");
-	var filename = path.resolve($tw.boot.wikiPath,"files",decodeURIComponent(state.params[0])),
+		util = require("util"),
+		suppliedFilename = decodeURIComponent(state.params[0]),
+		filename = path.resolve($tw.boot.wikiPath,"files",suppliedFilename),
 		extension = path.extname(filename);
 	fs.readFile(filename,function(err,content) {
 		var status,content,type = "text/plain";
 		if(err) {
 			if(err.code === "ENOENT") {
 				status = 404;
-				content = "File '" + filename + "' not found";
+				content = "File '" + suppliedFilename + "' not found";
 			} else if(err.code === "EACCES") {
 				status = 403;
-				content = "You do not have permission to access the file '" + filename + "'";
+				content = "You do not have permission to access the file '" + suppliedFilename + "'";
 			} else {
 				status = 500;
 				content = err.toString();
