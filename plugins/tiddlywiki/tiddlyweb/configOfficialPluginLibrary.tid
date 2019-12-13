@@ -1,0 +1,3 @@
+title: $:/config/OfficialPluginLibrary
+
+(This core tiddler is overridden by the tiddlyweb plugin to prevent users from installing official plugins via control panel. Instead they should be installed by editing tiddlywiki.info in the root of the wiki folder)
