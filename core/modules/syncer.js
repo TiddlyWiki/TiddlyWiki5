@@ -78,7 +78,18 @@ function Syncer(options) {
  			});
  		});
  		if(filteredChanges.length > 0) {
-			self.processTaskQueue(); 			
+			self.processTaskQueue();
+ 		} else {
+ 			// Look for deletions of tiddlers we're already syncing	
+ 			var outstandingDeletion = false
+			$tw.utils.each(changes,function(change,title,object) {
+				if(change.deleted && $tw.utils.hop(self.tiddlerInfo,title)) {
+					outstandingDeletion = true;
+				}
+			});
+			if(outstandingDeletion) {
+				self.processTaskQueue();
+			}
  		}
 	});
 	// Browser event handlers
