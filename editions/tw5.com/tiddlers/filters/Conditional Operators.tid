@@ -1,0 +1,28 @@
+created: 20190802113703788
+modified: 20190802132727925
+tags: Filters
+title: Conditional Operators
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">>The conditional filter operators allow ''if-then-else'' logic to be expressed within filters.
+
+The foundation is the convention that an empty list can be used to represent the boolean value ''false'' and a list with at one (or more) entries to represent ''true''.
+
+The conditional operators are:
+
+* [[then Operator]] replaces any input values with a constant string. For example:
+** <<.inline-operator-example "[[HelloThere]is[missing]then[FOO]]">>
+** <<.inline-operator-example "[[Missing Tiddler]is[missing]then[FOO]]">>
+* [[else Operator]] if the title list is empty then returns a constant string, otherwise returns the original title list
+** <<.inline-operator-example "[[HelloThere]is[tiddler]else[BAR]]">>
+** <<.inline-operator-example "[[Missing Tiddler]is[tiddler]else[BAR]]">>
+
+These operators can be combined. For example:
+
+<<.inline-operator-example "[[New Tiddler]is[missing]then[I am missing]else[No I am not missing]]">>
+
+The [[else Operator]] can be used to apply a defaults for missing values. In this example, we take advantage of the fact that the [[get Operator]] returns an empty list if the field or tiddler does not exist:
+
+<<.inline-operator-example "[[HelloThere]get[custom-field]else[default-value]]">>
+
+<<list-links "[tag[Conditional Operators]]">>

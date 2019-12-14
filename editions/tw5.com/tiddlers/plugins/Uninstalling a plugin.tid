@@ -1,5 +1,5 @@
 created: 20160107222504269
-modified: 20160720145839711
+modified: 20190927205509760
 tags: Plugins
 title: Uninstalling a plugin
 type: text/vnd.tiddlywiki
@@ -9,12 +9,14 @@ type: text/vnd.tiddlywiki
 Follow these instructions when using TiddlyWiki as a standalone HTML file:
 
 # Create a backup of your current TiddlyWiki HTML file ([[just in case|The First Rule of Using TiddlyWiki]])
-# Open the [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}} and go to the ''Plugins'' tab
-# Click on the plugin you want to delete to open its tiddler
-# Click the {{$:/core/images/down-arrow}} ''more'' button and {{$:/core/images/delete-button}} ''delete'' the tiddler
-# Save your TiddlyWiki {{$:/core/images/save-button}}
-# ''Refresh the window so that TiddlyWiki completely removes the plugin'' {{$:/core/images/refresh-button}}
-# The plugin should now be deleted
+# Open the [[control panel|$:/ControlPanel]] and go to the ''Plugins'' tab
+# Click on the plugin you want to delete to open it as a standalone tiddler
+# Click the <<.icon $:/core/images/down-arrow>> ''more'' button and <<.icon $:/core/images/delete-button>> ''delete'' the tiddler
+# Save your TiddlyWiki <<.icon $:/core/images/save-button>>
+# If a yellow warning bar appears at the top of the window,  refresh the window so that TiddlyWiki completely removes the plugin <<.icon $:/core/images/refresh-button>>
+#* <<.from-version "5.1.22">> It is no longer necessary to refresh TiddlyWiki when deleting plugins that support dynamic loading. See PluginMechanism for more details
+# The plugin should no longer be active or available
+
 
 ! Client-Server Configuration
 

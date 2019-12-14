@@ -1,0 +1,17 @@
+caption: titlecase
+created: 20190620135008529
+modified: 20190620135008529
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input titles with each word capitalised
+op-purpose: returns each item in the list with each word capitalised
+tags: [[Filter Operators]]
+title: titlecase Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">>
+
+See also [[lowercase Operator]], [[uppercase Operator]], [[sentencecase Operator]].
+
+<<.tip " This operator does not change anything except the first letter of each word, so `[[aBcD eFgH]]` would become `[[ABcD EFgH]]`. If you want `[[Abcd Efgh]]`, then use a filter like `[lowercase[]titlecase[]]`.">>
+
+<<.operator-examples "titlecase">>

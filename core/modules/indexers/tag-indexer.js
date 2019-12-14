@@ -14,41 +14,51 @@ Indexes the tiddlers with each tag
 
 function TagIndexer(wiki) {
 	this.wiki = wiki;
-	this.index = null;
-	this.addIndexMethods();
 }
 
-TagIndexer.prototype.addIndexMethods = function() {
+TagIndexer.prototype.init = function() {
+	this.subIndexers = [
+		new TagSubIndexer(this,"each"),
+		new TagSubIndexer(this,"eachShadow"),
+		new TagSubIndexer(this,"eachTiddlerPlusShadows"),
+		new TagSubIndexer(this,"eachShadowPlusTiddlers")
+	];
+	$tw.utils.each(this.subIndexers,function(subIndexer) {
+		subIndexer.addIndexMethod();
+	});
+};
+
+TagIndexer.prototype.rebuild = function() {
+	$tw.utils.each(this.subIndexers,function(subIndexer) {
+		subIndexer.rebuild();
+	});
+};
+
+TagIndexer.prototype.update = function(updateDescriptor) {
+	$tw.utils.each(this.subIndexers,function(subIndexer) {
+		subIndexer.update(updateDescriptor);
+	});
+};
+
+function TagSubIndexer(indexer,iteratorMethod) {
+	this.indexer = indexer;
+	this.iteratorMethod = iteratorMethod;
+	this.index = null; // Hashmap of tag title to {isSorted: bool, titles: [array]} or null if not yet initialised
+}
+
+TagSubIndexer.prototype.addIndexMethod = function() {
 	var self = this;
-	this.wiki.each.byTag = function(tag) {
-		var titles = self.wiki.allTitles();
-		return self.lookup(tag).filter(function(title) {
-			return titles.indexOf(title) !== -1;
-		});
-	};
-	this.wiki.eachShadow.byTag = function(tag) {
-		var titles = self.wiki.allShadowTitles();
-		return self.lookup(tag).filter(function(title) {
-			return titles.indexOf(title) !== -1;
-		});
-	};
-	this.wiki.eachTiddlerPlusShadows.byTag = function(tag) {
-		return self.lookup(tag).slice(0);
-	};
-	this.wiki.eachShadowPlusTiddlers.byTag = function(tag) {
+	this.indexer.wiki[this.iteratorMethod].byTag = function(tag) {
 		return self.lookup(tag).slice(0);
 	};
 };
 
-/*
-Tear down and then rebuild the index as if all tiddlers have changed
-*/
-TagIndexer.prototype.rebuild = function() {
+TagSubIndexer.prototype.rebuild = function() {
 	var self = this;
 	// Hashmap by tag of array of {isSorted:, titles:[]}
 	this.index = Object.create(null);
 	// Add all the tags
-	this.wiki.eachTiddlerPlusShadows(function(tiddler,title) {
+	this.indexer.wiki[this.iteratorMethod](function(tiddler,title) {
 		$tw.utils.each(tiddler.fields.tags,function(tag) {
 			if(!self.index[tag]) {
 				self.index[tag] = {isSorted: false, titles: [title]};
@@ -59,55 +69,11 @@ TagIndexer.prototype.rebuild = function() {
 	});
 };
 
-/*
-Update the index in the light of a tiddler value changing; note that the title must be identical. (Renames are handled as a separate delete and create)
-oldTiddler: old tiddler value, or null for creation
-newTiddler: new tiddler value, or null for deletion
-*/
-TagIndexer.prototype.update = function(oldTiddler,newTiddler) {
-	// Don't update the index if it has yet to be built
-	if(this.index === null) {
-		return;
-	}
-	var self = this,
-		title = oldTiddler ? oldTiddler.fields.title : newTiddler.fields.title;
-	// Handle changes to the tags
-	var oldTiddlerTags = (oldTiddler ? (oldTiddler.fields.tags || []) : []),
-		newTiddlerTags = (newTiddler ? (newTiddler.fields.tags || []) : []);
-	$tw.utils.each(oldTiddlerTags,function(oldTag) {
-		if(newTiddlerTags.indexOf(oldTag) === -1) {
-			// Deleted tag
-			var indexRecord = self.index[oldTag],
-				pos = indexRecord.titles.indexOf(title);
-			if(pos !== -1) {
-				indexRecord.titles.splice(pos,1);
-			}
-		}
-	});
-	$tw.utils.each(newTiddlerTags,function(newTag) {
-		if(oldTiddlerTags.indexOf(newTag) === -1) {
-			// New tag
-			var indexRecord = self.index[newTag];
-			if(!indexRecord) {
-				self.index[newTag] = {isSorted: false, titles: [title]};
-			} else {
-				indexRecord.titles.push(title);
-				indexRecord.isSorted = false;
-			}
-		}
-	});
-	// Handle changes to the list field of tags
-	var oldTiddlerList = (oldTiddler ? (oldTiddler.fields.list || []) : []),
-		newTiddlerList = (newTiddler ? (newTiddler.fields.list || []) : []);
-	if(!$tw.utils.isArrayEqual(oldTiddlerList,newTiddlerList)) {
-		if(self.index[title]) {
-			self.index[title].isSorted = false;			
-		}
-	}
+TagSubIndexer.prototype.update = function(updateDescriptor) {
+	this.index = null;
 };
 
-// Lookup the given tag returning an ordered list of tiddler titles
-TagIndexer.prototype.lookup = function(tag) {
+TagSubIndexer.prototype.lookup = function(tag) {
 	// Update the index if it has yet to be built
 	if(this.index === null) {
 		this.rebuild();
@@ -115,8 +81,8 @@ TagIndexer.prototype.lookup = function(tag) {
 	var indexRecord = this.index[tag];
 	if(indexRecord) {
 		if(!indexRecord.isSorted) {
-			if(this.wiki.sortByList) {
-				indexRecord.titles = this.wiki.sortByList(indexRecord.titles,tag);
+			if(this.indexer.wiki.sortByList) {
+				indexRecord.titles = this.indexer.wiki.sortByList(indexRecord.titles,tag);
 			}			
 			indexRecord.isSorted = true;
 		}
@@ -125,6 +91,7 @@ TagIndexer.prototype.lookup = function(tag) {
 		return [];
 	}
 };
+
 
 exports.TagIndexer = TagIndexer;
 

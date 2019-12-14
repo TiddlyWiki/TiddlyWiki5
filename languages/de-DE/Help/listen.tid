@@ -1,7 +1,7 @@
 title: $:/language/Help/listen
 description: Definiert das HTTP-Server Interface für Tiddlywiki
 
-Stellt das Wiki über einen HTTP-Server zur verfügung.
+Stellt das Wiki über einen HTTP-Server zur Verfügung.
 
 Die "listen" Parameter werden wie folgt verwendet: 
 
@@ -30,3 +30,6 @@ Mögliche Parameter:
 * ''tls-cert'' - Pfad zur "TLS certificate" Datei (relativ zum Wiki Verzeichnis)
 * ''tls-key'' - Pfad zur "TLS key" Datei (relativ zum Wiki Verzeichnis)
 * ''debug-level'' - "debug" bewikt eine detailierte Anzeige der HTTP Anfrage-Parameter. (Standard: "none")
+* ''gzip'' - Wenn auf "yes" gesetzt, dann wird gzip Kompression aktiviert. (Standard: "no")
+
+Für weitere Sicherheitshinweise und Informationen für die Verwendung in lokalen Netzwerken siehe: WebServer auf TiddlyWiki.com

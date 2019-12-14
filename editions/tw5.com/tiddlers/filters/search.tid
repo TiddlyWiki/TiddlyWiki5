@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20181025082022690
+modified: 20190731212738712
 tags: [[Filter Operators]] [[Common Operators]] [[Field Operators]] [[Negatable Operators]]
 title: search Operator
 type: text/vnd.tiddlywiki
@@ -40,5 +40,6 @@ The available flags are:
 ** ''regexp'': treats the search string as a regular expression. Note that the ''regexp'' option obviates the need for the older <<.olink regexp>> operator.
 ** ''words'': (the default) treats the search string as a list of tokens separated by whitespace, and matches if all of the tokens appear in the string (regardless of ordering and whether there is other text in between)
 * ''casesensitive'': if present, this flag forces a case-sensitive match, where upper and lower case letters are considered different. By default, upper and lower case letters are considered identical for matching purposes.
+* ''anchored'': <<.from-version "5.1.20">> anchors the search to the start of the string (applies to ''whitespace'', ''literal'' and ''words'' modes)
 
 <<.operator-examples "search">>

@@ -34,6 +34,7 @@ exports.handler = function(request,response,state) {
 			}
 		});
 		tiddlerFields.revision = state.wiki.getChangeCount(title);
+		tiddlerFields.bag = "default";
 		tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
 		response.writeHead(200, {"Content-Type": "application/json"});
 		response.end(JSON.stringify(tiddlerFields),"utf8");

@@ -1,0 +1,10 @@
+created: 20190620140005348
+modified: 20190620140412655
+tags: [[titlecase Operator]] [[Operator Examples]]
+title: titlecase Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[abc def ghi jkl]titlecase[]]">>
+<<.operator-example 2 "[[abc deF gHi jKL]titlecase[]]">>
+<<.operator-example 3 "[[abc deF gHi jKL]lowercase[]titlecase[]]">>
+<<.operator-example 4 "[tag[HelloThere]titlecase[]]">>

@@ -1,0 +1,9 @@
+created: 20190611151444751
+modified: 20190611154248537
+tags: [[precision Operator]] [[Operator Examples]]
+title: precision Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "123456789 +[precision[3]]">>
+<<.operator-example 2 "123456789 +[precision[13]]">>
+<<.operator-example 3 "1.23E23 +[precision[90]]">>

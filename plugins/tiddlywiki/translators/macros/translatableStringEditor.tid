@@ -3,20 +3,20 @@ tags: $:/tags/Macro
 
 \define translatableStringEditorInner(tiddlerTitle)
 <tr>
-<td width="1px">
+<td width="250px">
 <$link><$list filter=<<shortenTitle>>><$text text=<<currentTiddler>>/></$list></$link>
 </td>
-<td width="100%">
+<td>
 <$list filter="""$(editFieldsFilter)$""" variable="editorField">
 <$edit-text tag="$(editorTagName)$" field=<<editorField>> type="text" class="tc-edit-texteditor" minHeight="10px"/>
 </$list>
 </td>
-<td width="1px">
+<td width="20px">
 <div class="tc-drop-down-wrapper">
 <$button class="tc-btn-invisible" popup=<<qualify "$:/state/popup/translationInfo/$tiddlerTitle$">>>
 {{$:/core/images/down-arrow}}
 </$button>
-<$reveal state=<<qualify "$:/state/popup/translationInfo/$tiddlerTitle$">> type="popup" position="belowleft" text="" default="">
+<$reveal state=<<qualify "$:/state/popup/translationInfo/$tiddlerTitle$">> type="popup" position="belowleft" positionAllowNegative="yes" text="" default="">
 <div class="tc-drop-down">
 <p>
 Original en-GB text:

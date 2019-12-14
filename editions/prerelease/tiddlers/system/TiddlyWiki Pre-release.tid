@@ -7,15 +7,3 @@ This is a pre-release build of TiddlyWiki, [[also available in empty form|https:
 <h1><$text text=<<currentTiddler>>/></h1>
 <$transclude mode="block"/>
 </$list>
-
-! Features held back for later release
-
-These unfinished features are included in this prerelease build, but are not planned for inclusion in the next release.
-
-* <$button>
-<$action-setfield $tiddler="$:/view" text="stacked"/>
-Set "Stacked" story view
-</$button> <$button>
-<$action-setfield $tiddler="$:/view" text="classic"/>
-Revert
-</$button>

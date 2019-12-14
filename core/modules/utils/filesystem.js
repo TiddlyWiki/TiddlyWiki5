@@ -225,7 +225,8 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 	fileInfo.filepath = $tw.utils.generateTiddlerFilepath(tiddler.fields.title,{
 		extension: contentTypeInfo.extension,
 		directory: options.directory,
-		pathFilters: options.pathFilters
+		pathFilters: options.pathFilters,
+		wiki: options.wiki
 	});
 	return fileInfo;
 };
@@ -265,6 +266,8 @@ exports.generateTiddlerFilepath = function(title,options) {
 		// Remove any forward or backward slashes so we don't create directories
 		filepath = filepath.replace(/\/|\\/g,"_");
 	}
+	// Don't let the filename start with a dot because such files are invisible on *nix
+	filepath = filepath.replace(/^\./g,"_");
 	// Remove any characters that can't be used in cross-platform filenames
 	filepath = $tw.utils.transliterate(filepath.replace(/<|>|\:|\"|\||\?|\*|\^/g,"_"));
 	// Truncate the filename if it is too long
@@ -308,14 +311,14 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 			if(err) {
 				return callback(err);
 			}
-			fs.writeFile(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text"]}),"utf8",callback);
+			fs.writeFile(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8",callback);
 		});
 	} else {
 		// Save the tiddler as a self contained templated file
 		if(fileInfo.type === "application/x-tiddler") {
-			fs.writeFile(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8",callback);
+			fs.writeFile(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8",callback);
 		} else {
-			fs.writeFile(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings()],null,$tw.config.preferences.jsonSpaces),"utf8",callback);
+			fs.writeFile(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8",callback);
 		}
 	}
 };
@@ -332,13 +335,13 @@ exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 		// Save the tiddler as a separate body and meta file
 		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
 		fs.writeFileSync(fileInfo.filepath,tiddler.fields.text,typeInfo.encoding);
-		fs.writeFileSync(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text"]}),"utf8");
+		fs.writeFileSync(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8");
 	} else {
 		// Save the tiddler as a self contained templated file
 		if(fileInfo.type === "application/x-tiddler") {
-			fs.writeFileSync(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8");
+			fs.writeFileSync(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8");
 		} else {
-			fs.writeFileSync(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings()],null,$tw.config.preferences.jsonSpaces),"utf8");
+			fs.writeFileSync(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8");
 		}
 	}
 };
