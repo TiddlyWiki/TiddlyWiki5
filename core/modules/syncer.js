@@ -36,8 +36,10 @@ syncadaptor: reference to syncadaptor to be used
 wiki: wiki to be synced
 */
 function Syncer(options) {
-	var self = this;	// Save parameters
+	var self = this;
 	this.wiki = options.wiki;
+	// Save parameters
+	this.syncadaptor = options.syncadaptor;
 	this.disableUI = !!options.disableUI;
 	this.titleIsLoggedIn = options.titleIsLoggedIn || this.titleIsLoggedIn;
 	this.titleUserName = options.titleUserName || this.titleUserName;
@@ -50,12 +52,11 @@ function Syncer(options) {
 	this.pollTimerInterval = options.pollTimerInterval || parseInt(this.wiki.getTiddlerText(this.titleSyncPollingInterval,""),10) || this.pollTimerInterval;
 	this.logging = "logging" in options ? options.logging : true;
 	// Make a logger
-	var syncadaptorClassName = options.syncadaptorClass.prototype.name;
-	this.logger = new $tw.utils.Logger("syncer" + ($tw.browser ? "-browser" : "") + ($tw.node ? "-server" : "")  + (syncadaptorClassName ? ("-" + syncadaptorClassName) : ""),{
-			colour: "cyan",
-			enable: this.logging,
-			save: true
-		});
+	this.logger = new $tw.utils.Logger("syncer" + ($tw.browser ? "-browser" : "") + ($tw.node ? "-server" : "")  + (this.syncadaptor.name ? ("-" + this.syncadaptor.name) : ""),{
+		colour: "cyan",
+		enable: this.logging,
+		saveHistory: true
+	});
 	// Compile the dirty tiddler filter
 	this.filterFn = this.wiki.compileFilter(this.wiki.getTiddlerText(this.titleSyncFilter));
 	// Record information for known tiddlers
