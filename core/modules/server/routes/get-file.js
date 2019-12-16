@@ -26,16 +26,9 @@ exports.handler = function(request,response,state) {
 	fs.readFile(filename,function(err,content) {
 		var status,content,type = "text/plain";
 		if(err) {
-			if(err.code === "ENOENT") {
-				status = 404;
-				content = "File '" + suppliedFilename + "' not found";
-			} else if(err.code === "EACCES") {
-				status = 403;
-				content = "You do not have permission to access the file '" + suppliedFilename + "'";
-			} else {
-				status = 500;
-				content = err.toString();
-			}
+			console.log("Error accessing file " + filename + ": " + err.toString());
+			status = 404;
+			content = "File '" + suppliedFilename + "' not found";
 		} else {
 			status = 200;
 			content = content;
