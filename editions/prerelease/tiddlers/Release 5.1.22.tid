@@ -31,6 +31,8 @@ This release sees several improvements to the client-server configuration:
 ** "Copy syncer logs to clipboard" to make it easier to ask end users for debugging information 
 * Added "filter" and "exclude" parameters to the [[GET /recipes/default/tiddlers.json|WebServer API: Get All Tiddlers]] endpoint to allow the returned tiddlers and fields to be filtered
 * Enhanced LazyLoading to include skinny versions of tiddlers in the HTML file, and to avoid unnecessary loads from the server
+* The official plugin library is now disabled when the tiddlyweb adaptor is active
+* Internal file system details are no longer exposed to browsers when a file request fails (see https://github.com/Jermolene/TiddlyWiki5/issues/3724)
 
 See the [[pull request on GitHub for more details|https://github.com/Jermolene/TiddlyWiki5/pull/4373]]. 
 
