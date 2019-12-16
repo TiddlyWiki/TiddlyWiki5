@@ -29,6 +29,10 @@ TiddlyWebAdaptor.prototype.name = "tiddlyweb";
 
 TiddlyWebAdaptor.prototype.supportsLazyLoading = true;
 
+TiddlyWebAdaptor.prototype.setLoggerSaveBuffer = function(loggerForSaving) {
+	this.logger.setSaveBuffer(loggerForSaving);
+};
+
 TiddlyWebAdaptor.prototype.isReady = function() {
 	return this.hasStatus;
 };

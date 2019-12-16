@@ -24,9 +24,14 @@ function Logger(componentName,options) {
 	this.enable = "enable" in options ? options.enable : true;
 	this.save = "save" in options ? options.save : true;
 	this.saveLimit = options.saveLimit || 100 * 1024;
+	this.saveBufferLogger = this;
 	this.buffer = "";
 	this.alertCount = 0;
 }
+
+Logger.prototype.setSaveBuffer = function(logger) {
+	this.saveBufferLogger = logger;
+};
 
 /*
 Log a message
@@ -34,13 +39,13 @@ Log a message
 Logger.prototype.log = function(/* args */) {
 	var self = this;
 	if(this.enable) {
-		if(this.save) {
-			this.buffer += $tw.utils.formatDateString(new Date(),"YYYY MM DD 0hh:0mm:0ss.0XXX") + ":";
+		if(this.saveBufferLogger.save) {
+			this.saveBufferLogger.buffer += $tw.utils.formatDateString(new Date(),"YYYY MM DD 0hh:0mm:0ss.0XXX") + ":";
 			$tw.utils.each(Array.prototype.slice.call(arguments,0),function(arg,index) {
-				self.buffer += " " + arg;
+				self.saveBufferLogger.buffer += " " + arg;
 			});
-			this.buffer += "\n";
-			this.buffer = this.buffer.slice(-this.saveLimit);			
+			this.saveBufferLogger.buffer += "\n";
+			this.saveBufferLogger.buffer = this.saveBufferLogger.buffer.slice(-this.saveBufferLogger.saveLimit);			
 		}
 		if(console !== undefined && console.log !== undefined) {
 			return Function.apply.call(console.log, console, [$tw.utils.terminalColour(this.colour),this.componentName + ":"].concat(Array.prototype.slice.call(arguments,0)).concat($tw.utils.terminalColour()));
@@ -52,7 +57,7 @@ Logger.prototype.log = function(/* args */) {
 Read the message buffer
 */
 Logger.prototype.getBuffer = function() {
-	return this.buffer;
+	return this.saveBufferLogger.buffer;
 };
 
 /*

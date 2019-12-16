@@ -57,6 +57,9 @@ function Syncer(options) {
 		enable: this.logging,
 		saveHistory: true
 	});
+	if(this.syncadaptor.setLoggerSaveBuffer) {
+		this.syncadaptor.setLoggerSaveBuffer(this.logger);
+	}
 	// Compile the dirty tiddler filter
 	this.filterFn = this.wiki.compileFilter(this.wiki.getTiddlerText(this.titleSyncFilter));
 	// Record information for known tiddlers
@@ -64,11 +67,6 @@ function Syncer(options) {
 	this.taskTimerId = null; // Timer for task dispatch
 	this.pollTimerId = null; // Timer for polling server
 	this.numTasksInProgress = 0;
-	// Create the syncadaptor
-	this.syncadaptor = new options.syncadaptorClass({
-		wiki: $tw.wiki,
-		logger: this.logger
-	});
 	// Listen out for changes to tiddlers
 	this.wiki.addEventListener("change",function(changes) {
 		// Filter the changes to just include ones that are being synced
