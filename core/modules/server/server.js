@@ -238,6 +238,7 @@ host: optional host address (falls back to value of "host" variable)
 prefix: optional prefix (falls back to value of "path-prefix" variable)
 */
 Server.prototype.listen = function(port,host,prefix) {
+	var self = this;
 	// Handle defaults for port and host
 	port = port || this.get("port");
 	host = host || this.get("host");
@@ -246,19 +247,24 @@ Server.prototype.listen = function(port,host,prefix) {
 	if(parseInt(port,10).toString() !== port) {
 		port = process.env[port] || 8080;
 	}
-	$tw.utils.log("Serving on " + this.protocol + "://" + host + ":" + port + prefix,"brown/orange");
-	$tw.utils.log("(press ctrl-C to exit)","red");
 	// Warn if required plugins are missing
 	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
 		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
 	}
-	// Listen
+	// Create the server
 	var server;
 	if(this.listenOptions) {
 		server = this.transport.createServer(this.listenOptions,this.requestHandler.bind(this));
 	} else {
 		server = this.transport.createServer(this.requestHandler.bind(this));
 	}
+	// Display the port number after we've started listening (the port number might have been specified as zero, in which case we will get an assigned port)
+	server.on("listening",function() {
+		var address = server.address();
+		$tw.utils.log("Serving on " + self.protocol + "://" + address.address + ":" + address.port + prefix,"brown/orange");
+		$tw.utils.log("(press ctrl-C to exit)","red");
+	});
+	// Listen
 	return server.listen(port,host);
 };
 
