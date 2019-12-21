@@ -70,7 +70,7 @@ function makeStringReducingOperator(fnCalc,initialValue) {
 		});
 		return [result.reduce(function(accumulator,currentValue) {
 			return fnCalc(accumulator,currentValue,operator.operand || "");
-		},initialValue)];
+		},initialValue) || ""];
 	};
 }
 
