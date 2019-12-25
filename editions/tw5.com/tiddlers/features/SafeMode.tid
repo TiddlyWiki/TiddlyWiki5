@@ -18,7 +18,7 @@ https://tiddlywiki.com/#:safe
 
 Safe mode triggers two changes:
 
-* All plugins are temporarily disabled. You can use the [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}} to disable individual plugins
+* All plugins are temporarily disabled. You can use the [[control panel|$:/ControlPanel]] <<.icon $:/core/images/options-button>> to disable individual plugins
 * Any tiddlers that override shadow tiddlers are renamed to give them the prefix `SAFE: `, thus restoring the underlying shadow tiddler
 * Certain configuration options are ignored, and the default settings used instead:
 ** WikiParserRuleConfiguration

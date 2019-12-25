@@ -20,7 +20,7 @@ The built-in `TiddlySpot `saver can also be used to save changes to a simple PHP
 # Save the file
 # Using FTP or your web interface, upload ''store.php'' to your server. Make sure that the filename is correct
 #* If you've uploaded the file correctly you should be able to view it in your browser (eg, http://example.com/store.php)
-# In TiddlyWiki, go to the ''Saving'' tab of the ''control panel'' {{$:/core/images/options-button}} and enter the following information:
+# In TiddlyWiki, go to the ''Saving'' tab of the ''control panel'' <<.icon $:/core/images/options-button>> and enter the following information:
 #* Your username as the wiki name
 #* Your password
 #* The URL of the ''store.php'' file (//''not'' the URL of the wiki, this must the full URL to the ''store.php'' file//)

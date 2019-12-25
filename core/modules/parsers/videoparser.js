@@ -17,7 +17,8 @@ var VideoParser = function(type,text,options) {
 			type: "element",
 			tag: "video",
 			attributes: {
-				controls: {type: "string", value: "controls"}
+				controls: {type: "string", value: "controls"},
+				style: {type: "string", value: "width: 100%; object-fit: contain"}
 			}
 		},
 		src;

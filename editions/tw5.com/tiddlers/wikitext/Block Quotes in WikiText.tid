@@ -9,7 +9,7 @@ There are two ways to produce HTML block quotes in TiddlyWiki5, one for content 
 
 ! Multi-line Block Quotes
 
-The syntax for multi-line block quotes ({{$:/core/images/quote}}) is:
+The syntax for multi-line block quotes (<<.icon $:/core/images/quote>>) is:
 
 <<wikitext-example src:"<<<
 This is a block quoted paragraph

@@ -21,17 +21,31 @@ The [[plugin listing|$:/core/ui/ControlPanel/Plugins]] and the [[plugin chooser|
 
 * Improved Dutch translation
 
+! Usability Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4238]] support for specifying the field that should receive focus when editing or creating a tiddler
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4293]] ([[and here|https://github.com/Jermolene/TiddlyWiki5/pull/4296]]) spacing for page control buttons
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/9395d7567179c436d0e8ac26fc976d717eae7f50]] display of icons in documentation
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4314]] support in control panel for specifying the tags for new tiddlers and journals
+
 ! Hackability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6089c4de2921df0f76f605f1830fb2c04548f73c]] support for RefreshThrottling via the `throttle.refresh` field
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1150c87edb7478af6cc943eb0ef52fdf3051c121]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/8c894612914e21cf941a1daa953538c28ce91d8e]]) new `[is[binary]]` operand for the [[is Operator]]
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/68163684a2e57108e160295e445c194268b873c5]] usage of `publishFilter` in save templates -- see SavingMechanism
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/89716bb81d68b9c68d3c0fd2f2de96afad1b086a]] CSS class identifying the tiddler body editor
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e9211b0eee8e0b081f9f1597bde6673bf4c55d5c]] CSS classes to identify sidebar tabsets
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/pull/4208]] normalize.css from v3.0.0 to v8.0.1
 
 ! Bug Fixes
 
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/4291]] bug with deletes failing when lazy loading used under Node.js
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4243]] problem with the [[GitLab saver|Saving to a Git service]]
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/4237]] bug with permaview button when placed above the search box
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/a054d100e73db95071299e92c4321c2aa8e42382]] usage of ''count'' parameter of [[WidgetMessage: tm-edit-text-operation]]
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/4284]] bug with toc-selective-expandable macro still showing disclosure arrow despite excluding tiddlers
+* [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/81f1e6af4e5920c6ff41e7f08171bfddc1b26dfc]] erroneous word break setting for vertical tabs
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/d30eacc6520971c95bdabf24f4c4122534d9414a]] problem with programmatically deselecting entries from the SelectWidget in multiple selection mode
 
 ! Contributors
 
