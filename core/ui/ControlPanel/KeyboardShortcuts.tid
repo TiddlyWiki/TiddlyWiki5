@@ -42,7 +42,7 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 </div>
 """>
 <div class="tc-dropdown-item-plain">
-<$button class="tc-btn-invisible" tooltip=<<lingo Remove/Hint>>>
+<$button class="tc-btn-invisible" tooltip={{$:/language/ControlPanel/KeyboardShortcuts/Remove/Hint}}>
 <$action-listops
 	$tiddler="$(shortcutTitle)$"
 	$field="text"
