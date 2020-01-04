@@ -8,8 +8,9 @@ Various static utility functions.
 \*/
 (function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
+/* jslint node: true, browser: true */
+/* eslint no-control-regex: off, no-console: off */
+/* global $tw, require, exports, console, process, document, performance */
 "use strict";
 
 var base64utf8 = require("$:/core/modules/utils/base64-utf8/base64-utf8.module.js");
