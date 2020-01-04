@@ -98,7 +98,8 @@ TextNodeWidget.prototype.execute = function() {
 					childParseTree[index] = {
 						type: "link",
 						attributes: {
-							to: {type: "string", value: match[0]}
+							to: {type: "string", value: match[0]},
+							"class": {type: "string", value: "tc-freelink"}
 						},
 						children: [{
 							type: "plain-text", text: match[0]
