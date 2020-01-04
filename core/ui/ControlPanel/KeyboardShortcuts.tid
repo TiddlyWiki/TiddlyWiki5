@@ -48,7 +48,7 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 	$field="text"
 	$subfilter="+[remove<shortcut>]"
 />
-&times;
+<small>{{$:/core/images/close-button}}</small>
 </$button>
 <kbd>
 <$macrocall $name="displayshortcuts" $output="text/html" shortcuts=<<shortcut>>/>
