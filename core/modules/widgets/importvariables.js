@@ -66,7 +66,7 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 					params: parseTreeNode.params,
 					isMacroDefinition: parseTreeNode.isMacroDefinition
 				});
-				parseTreeNode = parseTreeNode.children[0];
+				parseTreeNode = parseTreeNode.children && parseTreeNode.children[0];
 			}
 		} 
 	});
