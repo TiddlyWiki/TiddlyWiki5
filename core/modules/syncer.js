@@ -133,7 +133,7 @@ function Syncer(options) {
 Read (or re-read) the latest tiddler info from the store
 */
 Syncer.prototype.readTiddlerInfo = function() {
-	// Hashmap by title of {revision:,changeCount:,adaptorInfo:}
+	// Hashmap by title of {revision:,changeCount:,adaptorInfo:,needsToBeLoaded:,hasBeenLazyLoaded:}
 	this.tiddlerInfo = {};
 	// Record information for known tiddlers
 	var self = this,
