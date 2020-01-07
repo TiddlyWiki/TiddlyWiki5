@@ -8,8 +8,10 @@ Tests the filtering mechanism.
 \*/
 (function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false, describe: false, it: false, expect: false, require: false*/
+/* jslint node: true, browser: true */
+/* eslint-env node, browser, jasmine */
+/* eslint no-mixed-spaces-and-tabs: ["error", "smart-tabs"]*/
+/* global $tw, require */
 "use strict";
 
 describe("Filter tests", function() {
@@ -421,13 +423,8 @@ function runTests(wiki) {
 
 		var widget = require("$:/core/modules/widgets/widget.js");
 	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
-		var rootWidget = new widget.widget({
-			type: "widget",
-			children: [{type: "widget", children: []}]
-		},{
-			wiki: wiki,
-			document: $tw.document
-		});
+		var rootWidget = new widget.widget({ type:"widget", children:[ {type:"widget", children:[]} ] },
+										   { wiki:wiki, document:$tw.document});
 		rootWidget.makeChildWidgets();
 		var anchorWidget = rootWidget.children[0];
 		rootWidget.setVariable("myVar","Tidd");
@@ -470,6 +467,8 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("1 2 3 4 +[min[2]]").join(",")).toBe("1,2,2,2");
 	});
 
+/* listops filters */
+	
 	it("should handle the allafter operator", function() {
 		expect(wiki.filterTiddlers("1 2 3 4 +[allafter[]]").join(",")).toBe("");
 		expect(wiki.filterTiddlers("1 2 3 4 +[allafter:include[]]").join(",")).toBe("");
@@ -499,6 +498,131 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore[5]]").join(",")).toBe("");
 		expect(wiki.filterTiddlers("1 2 3 4 +[allbefore:include[5]]").join(",")).toBe("");
 	});
+
+	it("should handle the append operator", function() {
+		expect(wiki.filterTiddlers("a b c +[append[d e]]").join(",")).toBe("a,b,c,d,e");
+		expect(wiki.filterTiddlers("a b c +[append:1[d e]]").join(",")).toBe("a,b,c,d");
+		expect(wiki.filterTiddlers("a b c +[append{TiddlerSeventh!!list}]").join(",")).toBe("a,b,c,TiddlerOne,Tiddler Three,a fourth tiddler,MissingTiddler");
+		expect(wiki.filterTiddlers("a b c +[append:2{TiddlerSeventh!!list}]").join(",")).toBe("a,b,c,TiddlerOne,Tiddler Three");
+		
+		expect(wiki.filterTiddlers("a [[b c]] +[append{TiddlerSix!!filter}]").join(",")).toBe("a,b c,one,a a,[subfilter{hasList!!list}]");
+
+/*
+		// This test fails with V 5.1.21
+		expect(wiki.filterTiddlers("a [[b c]] +[append{filter regexp test!!filter}]").join(",")).toBe("a,b c,+aaa,-bbb,~ccc,aaaaaabbbbbbbbaa,\"bb'b\",'cc\"c',abc,tiddler with spaces,[is[test]],[is[te st]],a,s,df,[enlist<hugo>],+[enlist:raw{test with spaces}],[enlist:raw{test with spaces}],a a, ] [ , [hugo,[subfilter{Story/Tower of Hanoi/A-C Sequence}]");
+*/
+	});
+
+	it("should handle the insertbefore operator", function() {
+		var widget = require("$:/core/modules/widgets/widget.js");
+		var rootWidget = new widget.widget({ type:"widget", children:[ {type:"widget", children:[]} ] },
+										   { wiki:wiki, document:$tw.document});
+		rootWidget.makeChildWidgets();
+		var anchorWidget = rootWidget.children[0];
+		rootWidget.setVariable("myVar","c");
+		rootWidget.setVariable("tidTitle","e");
+		rootWidget.setVariable("tidList","one tid with spaces");
+		
+		expect(wiki.filterTiddlers("a b c d e f +[insertbefore:myVar[f]]",anchorWidget).join(",")).toBe("a,b,f,c,d,e");
+		expect(wiki.filterTiddlers("a b c d e f +[insertbefore:myVar<tidTitle>]",anchorWidget).join(",")).toBe("a,b,e,c,d,f");
+		expect(wiki.filterTiddlers("a b c d e f +[insertbefore:myVar[gg gg]]",anchorWidget).join(",")).toBe("a,b,gg gg,c,d,e,f");
+		expect(wiki.filterTiddlers("a b c d e +[insertbefore:myVar<tidList>]",anchorWidget).join(",")).toBe("a,b,one tid with spaces,c,d,e");
+		expect(wiki.filterTiddlers("a b c d e f +[insertbefore:tidTitle{TiddlerOne!!tags}]",anchorWidget).join(",")).toBe("a,b,c,d,one,e,f");
+
+		// Next 2 tests do weired things, but will pass - there for compatibility reasons
+		expect(wiki.filterTiddlers("a b c [[with space]] +[insertbefore[b]]").join(",")).toBe("a,c,with space,b");
+		expect(wiki.filterTiddlers("a b c d e +[insertbefore:2[b]]").join(",")).toBe("a,c,d,e,b");
+	});
+
+	it("should handle the move operator", function() {
+		expect(wiki.filterTiddlers("a b c d e +[move[c]]").join(",")).toBe("a,b,d,c,e");
+		expect(wiki.filterTiddlers("a b c d e +[move:2[c]]").join(",")).toBe("a,b,d,e,c");
+		expect(wiki.filterTiddlers("a b c d e +[move:10[c]]").join(",")).toBe("a,b,d,e,c");
+		expect(wiki.filterTiddlers("a b c d e +[move:-1[c]]").join(",")).toBe("a,c,b,d,e");
+		expect(wiki.filterTiddlers("a b c d e +[move:-5[c]]").join(",")).toBe("c,a,b,d,e");
+	});
+
+	it("should handle the prepend operator", function() {
+		expect(wiki.filterTiddlers("a b c +[prepend[dd ee]]").join(",")).toBe("dd,ee,a,b,c");
+		expect(wiki.filterTiddlers("a b c +[prepend:3[ff gg]]").join(",")).toBe("ff,gg,a,b,c");
+		expect(wiki.filterTiddlers("a b c +[prepend:1[hh ii]]").join(",")).toBe("hh,a,b,c");
+		expect(wiki.filterTiddlers("a b c +[prepend:0[jj kk]]").join(",")).toBe("a,b,c");
+		expect(wiki.filterTiddlers("a b c +[prepend:-0[ll mm]]").join(",")).toBe("a,b,c");
+		expect(wiki.filterTiddlers("a b c +[prepend:-1[nn oo pp qq]]").join(",")).toBe("nn,oo,pp,a,b,c");
+		expect(wiki.filterTiddlers("a b c +[prepend:-2[rr ss tt uu]]").join(",")).toBe("rr,ss,a,b,c");
+		expect(wiki.filterTiddlers("a b c +[prepend:-4[rr ss tt uu]]").join(",")).toBe("a,b,c");
+		expect(wiki.filterTiddlers("a b c +[prepend:-5[vv ww xx yy]]").join(",")).toBe("a,b,c");
+	});
+
+	it("should handle the putafter operator", function() {
+		expect(wiki.filterTiddlers("a b c dd ee +[putafter[b]]").join(",")).toBe("a,b,ee,c,dd");
+		expect(wiki.filterTiddlers("a b c dd ee +[putafter:1[b]]").join(",")).toBe("a,b,ee,c,dd");
+		expect(wiki.filterTiddlers("a b c dd ee +[putafter:2[b]]").join(",")).toBe("a,b,dd,ee,c");
+		expect(wiki.filterTiddlers("a b c dd ee +[putafter:3[b]]").join(",")).toBe("a,b,c,dd,ee");
+		// It starts to duplicate elements
+		expect(wiki.filterTiddlers("a b c dd ee +[putafter:4[b]]").join(",")).toBe("a,b,b,c,dd,ee");
+		expect(wiki.filterTiddlers("a b c dd ee +[putafter:5[b]]").join(",")).toBe("a,b,a,b,c,dd,ee");
+		// There are only 5 elements in the input
+		expect(wiki.filterTiddlers("a b c ff gg +[putafter:6[b]]").join(",")).toBe("a,b,a,b,c,ff,gg");
+
+		// -1 starts to "eat" elements for the left and duplicates b
+		expect(wiki.filterTiddlers("a b c hh ii +[putafter:-1[b]]").join(",")).toBe("a,b,b,c,hh,ii");
+		// -2 moves c, hh, ii behind b, which is not visible
+		expect(wiki.filterTiddlers("a b c hh ii +[putafter:-2[b]]").join(",")).toBe("a,b,c,hh,ii");
+		// only ii is used from input and it's moved behind b
+		expect(wiki.filterTiddlers("a b c hh ii +[putafter:-4[b]]").join(",")).toBe("a,b,ii,c,hh");
+		// wasting time, because there are only 5 elements
+		expect(wiki.filterTiddlers("a b c hh ii +[putafter:-5[b]]").join(",")).toBe("a,b,c,hh,ii");
+		// there are only 5 elements
+		expect(wiki.filterTiddlers("a b c hh ii +[putafter:-10[b]]").join(",")).toBe("a,b,c,hh,ii");
+
+		// use NAN uses default = 1
+		expect(wiki.filterTiddlers("a b c jj kk +[putafter:NAN[b]]").join(",")).toBe("a,b,kk,c,jj");
+	});
+
+	it("should handle the putbefore operator", function() {
+		expect(wiki.filterTiddlers("a b c dd +[putbefore[b]]").join(",")).toBe("a,dd,b,c");
+		expect(wiki.filterTiddlers("a b c ff +[putbefore:1[b]]").join(",")).toBe("a,ff,b,c");
+		expect(wiki.filterTiddlers("a b c gg +[putbefore:2[b]]").join(",")).toBe("a,c,gg,b");
+
+		// this one is strange
+		expect(wiki.filterTiddlers("a b c ee +[putbefore:0[b]]").join(",")).toBe("a,a,b,c,ee");
+		
+		// b is not part of the list anymore, so it will be appended at the end ???
+		expect(wiki.filterTiddlers("a b c hh +[putbefore:3[b]]").join(",")).toBe("a,b,c,hh");
+		expect(wiki.filterTiddlers("a b c ii +[putbefore:4[b]]").join(",")).toBe("a,a,b,c,ii");
+		
+		// ????
+		expect(wiki.filterTiddlers("a b c ii +[putbefore:10[b]]").join(",")).toBe("a,a,b,c,ii");
+		
+		expect(wiki.filterTiddlers("a b c kk +[putbefore:-1[b]]").join(",")).toBe("a,b,c,kk");
+		expect(wiki.filterTiddlers("a b c ll +[putbefore:-2[b]]").join(",")).toBe("a,c,ll,b");
+		
+		expect(wiki.filterTiddlers("a b c mm +[putbefore:-3[b]]").join(",")).toBe("a,mm,b,c");
+		
+		expect(wiki.filterTiddlers("a b c nn +[putbefore:-10[b]]").join(",")).toBe("a,b,c,nn");
+	});
+/*
+	it("should handle the putfirst operator", function() {
+		expect(wiki.filterTiddlers("a b c +[putfirst[d e]]").join(",")).toBe("");
+	});
+
+	it("should handle the putlast operator", function() {
+		expect(wiki.filterTiddlers("a b c +[putlast[d e]]").join(",")).toBe("");
+	});
+
+	it("should handle the remove operator", function() {
+		expect(wiki.filterTiddlers("a b c +[remove[d e]]").join(",")).toBe("");
+	});
+
+	it("should handle the replace operator", function() {
+		expect(wiki.filterTiddlers("a b c +[replace[d e]]").join(",")).toBe("");
+	});
+
+	it("should handle the sortby operator", function() {
+		expect(wiki.filterTiddlers("a b c +[sortby[d e]]").join(",")).toBe("");
+	});
+*/
 
 }
 
