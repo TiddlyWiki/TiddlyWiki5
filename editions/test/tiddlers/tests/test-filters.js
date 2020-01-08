@@ -506,11 +506,6 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("a b c +[append:2{TiddlerSeventh!!list}]").join(",")).toBe("a,b,c,TiddlerOne,Tiddler Three");
 		
 		expect(wiki.filterTiddlers("a [[b c]] +[append{TiddlerSix!!filter}]").join(",")).toBe("a,b c,one,a a,[subfilter{hasList!!list}]");
-
-/*
-		// This test fails with V 5.1.21
-		expect(wiki.filterTiddlers("a [[b c]] +[append{filter regexp test!!filter}]").join(",")).toBe("a,b c,+aaa,-bbb,~ccc,aaaaaabbbbbbbbaa,\"bb'b\",'cc\"c',abc,tiddler with spaces,[is[test]],[is[te st]],a,s,df,[enlist<hugo>],+[enlist:raw{test with spaces}],[enlist:raw{test with spaces}],a a, ] [ , [hugo,[subfilter{Story/Tower of Hanoi/A-C Sequence}]");
-*/
 	});
 
 	it("should handle the insertbefore operator", function() {
@@ -526,6 +521,7 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("a b c d e f +[insertbefore:myVar[f]]",anchorWidget).join(",")).toBe("a,b,f,c,d,e");
 		expect(wiki.filterTiddlers("a b c d e f +[insertbefore:myVar<tidTitle>]",anchorWidget).join(",")).toBe("a,b,e,c,d,f");
 		expect(wiki.filterTiddlers("a b c d e f +[insertbefore:myVar[gg gg]]",anchorWidget).join(",")).toBe("a,b,gg gg,c,d,e,f");
+		
 		expect(wiki.filterTiddlers("a b c d e +[insertbefore:myVar<tidList>]",anchorWidget).join(",")).toBe("a,b,one tid with spaces,c,d,e");
 		expect(wiki.filterTiddlers("a b c d e f +[insertbefore:tidTitle{TiddlerOne!!tags}]",anchorWidget).join(",")).toBe("a,b,c,d,one,e,f");
 
@@ -547,6 +543,7 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("a b c +[prepend:3[ff gg]]").join(",")).toBe("ff,gg,a,b,c");
 		expect(wiki.filterTiddlers("a b c +[prepend:1[hh ii]]").join(",")).toBe("hh,a,b,c");
 		expect(wiki.filterTiddlers("a b c +[prepend:0[jj kk]]").join(",")).toBe("a,b,c");
+		
 		expect(wiki.filterTiddlers("a b c +[prepend:-0[ll mm]]").join(",")).toBe("a,b,c");
 		expect(wiki.filterTiddlers("a b c +[prepend:-1[nn oo pp qq]]").join(",")).toBe("nn,oo,pp,a,b,c");
 		expect(wiki.filterTiddlers("a b c +[prepend:-2[rr ss tt uu]]").join(",")).toBe("rr,ss,a,b,c");
@@ -585,6 +582,8 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("a b c ff +[putbefore:1[b]]").join(",")).toBe("a,ff,b,c");
 		expect(wiki.filterTiddlers("a b c gg +[putbefore:2[b]]").join(",")).toBe("a,c,gg,b");
 
+		expect(wiki.filterTiddlers("a b c [[g g]] +[putbefore:2[b]]").join(",")).toBe("a,c,g g,b");
+
 		// this one is strange
 		expect(wiki.filterTiddlers("a b c ee +[putbefore:0[b]]").join(",")).toBe("a,a,b,c,ee");
 		
@@ -602,27 +601,61 @@ function runTests(wiki) {
 		
 		expect(wiki.filterTiddlers("a b c nn +[putbefore:-10[b]]").join(",")).toBe("a,b,c,nn");
 	});
-/*
+
 	it("should handle the putfirst operator", function() {
-		expect(wiki.filterTiddlers("a b c +[putfirst[d e]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("a b c +[putfirst[a b]]").join(",")).toBe("c,a,b");
+		expect(wiki.filterTiddlers("a b c +[putfirst[]]").join(",")).toBe("c,a,b");
+		expect(wiki.filterTiddlers("a b c +[putfirst:2[]]").join(",")).toBe("b,c,a");
+		expect(wiki.filterTiddlers("a b c +[putfirst:3[]]").join(",")).toBe("a,b,c");
+		expect(wiki.filterTiddlers("a b c +[putfirst:4[]]").join(",")).toBe("a,b,c");
+		expect(wiki.filterTiddlers("a b c +[putfirst:-0[]]").join(",")).toBe("a,b,c");
+		expect(wiki.filterTiddlers("a b c +[putfirst:-1[]]").join(",")).toBe("b,c,a");
+		expect(wiki.filterTiddlers("a b c +[putfirst:-2[]]").join(",")).toBe("c,a,b");
+		expect(wiki.filterTiddlers("a b c +[putfirst:-4[]]").join(",")).toBe("a,b,c");
 	});
 
 	it("should handle the putlast operator", function() {
-		expect(wiki.filterTiddlers("a b c +[putlast[d e]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("a b c +[putlast[d e]]").join(",")).toBe("b,c,a");
+		expect(wiki.filterTiddlers("a b c +[putlast[]]").join(",")).toBe("b,c,a");
+		expect(wiki.filterTiddlers("a b c +[putlast:1[]]").join(",")).toBe("b,c,a");
+		expect(wiki.filterTiddlers("a b c +[putlast:2[]]").join(",")).toBe("c,a,b");
+		expect(wiki.filterTiddlers("a b c +[putlast:3[]]").join(",")).toBe("a,b,c");
+		expect(wiki.filterTiddlers("a b c +[putlast:4[]]").join(",")).toBe("a,b,c");
+		expect(wiki.filterTiddlers("a b c +[putlast:-0[]]").join(",")).toBe("a,b,c");
+		expect(wiki.filterTiddlers("a b c +[putlast:0[]]").join(",")).toBe("a,b,c");
+		expect(wiki.filterTiddlers("a b c +[putlast:-1[]]").join(",")).toBe("c,a,b");
+		expect(wiki.filterTiddlers("a b c +[putlast:-2[]]").join(",")).toBe("b,c,a");
+		expect(wiki.filterTiddlers("a b c +[putlast:-4[]]").join(",")).toBe("a,b,c");
 	});
 
 	it("should handle the remove operator", function() {
-		expect(wiki.filterTiddlers("a b c +[remove[d e]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("a b c +[remove[d e]]").join(",")).toBe("a,b,c");
+		expect(wiki.filterTiddlers("a b c +[remove[a]]").join(",")).toBe("b,c");
+		expect(wiki.filterTiddlers("a b c +[remove[c b a]]").join(",")).toBe("");
 	});
 
 	it("should handle the replace operator", function() {
-		expect(wiki.filterTiddlers("a b c +[replace[d e]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("a b c dd +[replace[a]]").join(",")).toBe("dd,b,c");
+		expect(wiki.filterTiddlers("a b c dd ee +[replace:2[a]]").join(",")).toBe("dd,ee,b,c");
+		expect(wiki.filterTiddlers("a b c dd ee +[replace:5[c]]").join(",")).toBe("a,b,a,b,c,dd,ee");
+		
+		// strange things happen.
+		expect(wiki.filterTiddlers("a b c dd ee +[replace:-1[c]]").join(",")).toBe("a,b,b,c,dd,ee");
+		expect(wiki.filterTiddlers("a b c dd ee +[replace:-2[c]]").join(",")).toBe("a,b,c,dd,ee");
+		expect(wiki.filterTiddlers("a b c dd ee +[replace:-2[ee]]").join(",")).toBe("a,b,c,dd,c,dd,ee");
 	});
 
 	it("should handle the sortby operator", function() {
-		expect(wiki.filterTiddlers("a b c +[sortby[d e]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("a b c +[sortby[d e]]").join(",")).toBe("a,b,c");
+		expect(wiki.filterTiddlers("a b c +[sortby[b c a]]").join(",")).toBe("b,c,a");
+		expect(wiki.filterTiddlers("aa a b c +[sortby[b c a cc]]").join(",")).toBe("aa,b,c,a");
+		expect(wiki.filterTiddlers("a bb b c +[sortby[b c a cc]]").join(",")).toBe("bb,b,c,a");
+		expect(wiki.filterTiddlers("a bb cc b c +[sortby[b c a cc]]").join(",")).toBe("bb,b,c,a,cc");
+
+		expect(wiki.filterTiddlers("b a b c +[sortby[]]").join(",")).toBe("a,b,c");
+		expect(wiki.filterTiddlers("b a b c +[sortby[a b b c]]").join(",")).toBe("a,b,c");
+		expect(wiki.filterTiddlers("b a b c +[sortby[b a c b]]").join(",")).toBe("b,a,c");
 	});
-*/
 
 }
 
