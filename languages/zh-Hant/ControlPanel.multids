@@ -5,6 +5,7 @@ Advanced/Hint: 關於此 TiddlyWiki 的內部資訊
 Appearance/Caption: 視覺外觀
 Appearance/Hint: 自訂您的 TiddlyWiki 外觀。
 Basics/AnimDuration/Prompt: 動畫持續時間：
+Basics/AutoFocus/Prompt: 預設自動停留的欄位：
 Basics/Caption: 基本
 Basics/DefaultTiddlers/BottomHint: 標題含空白時請使用 &#91;&#91;雙中括弧&#93;&#93;，或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留開啟中的條目順序</$button>
 Basics/DefaultTiddlers/Prompt: 首頁：
@@ -13,6 +14,7 @@ Basics/Language/Prompt: 您好！當前的語言：
 Basics/NewJournal/Tags/Prompt: 新日誌條目的標籤
 Basics/NewJournal/Text/Prompt: 新日誌條目的內容
 Basics/NewJournal/Title/Prompt: 新日誌條目的名稱
+Basics/NewTiddler/Tags/Prompt: 新條目的標籤
 Basics/NewTiddler/Title/Prompt: 新條目的名稱
 Basics/OverriddenShadowTiddlers/Prompt: 被覆寫的預設條目數量：
 Basics/ShadowTiddlers/Prompt: 預設條目數量：
@@ -58,6 +60,7 @@ Palette/ShowEditor/Caption: 顯示編輯器
 Plugins/Add/Hint: 從官方插件庫安裝插件
 Plugins/Add/Caption: 獲取更多插件
 Plugins/AlreadyInstalled/Hint: 此插件已經安裝版本 <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: 還需要：
 Plugins/Caption: 插件
 Plugins/Disable/Caption: 停用
 Plugins/Disable/Hint: 重新載入頁面時停用此插件
@@ -74,6 +77,7 @@ Plugins/NoInformation/Hint: 未提供資訊
 Plugins/NotInstalled/Hint: 尚未安裝此插件
 Plugins/OpenPluginLibrary: 開啟插件程式庫
 Plugins/ClosePluginLibrary: 關閉插件程式庫
+Plugins/PluginWillRequireReload: （需要重新載入）
 Plugins/Plugins/Caption: 插件
 Plugins/Plugins/Hint: 插件
 Plugins/Reinstall/Caption: 重新安裝
@@ -92,15 +96,18 @@ Saving/DownloadSaver/Hint: 這些設定適用於相容 HTML5 的下載儲存模�
 Saving/General/Caption: 通用
 Saving/General/Hint: 這些設定適用於所有已載入的儲存模組
 Saving/Hint: 用於通過儲存模組將整個 TiddlyWiki 儲存為單個檔案的設定
-Saving/GitHub/Branch: 用於儲存的目標分支 (預設值為 `master`)
-Saving/GitHub/Caption: ~GitHub 儲存模組
-Saving/GitHub/Description: 這些設定僅用於儲存到 ~GitHub
-Saving/GitHub/ServerURL: 伺服器網址 (預設值為 `https://api.github.com`)
-Saving/GitHub/Filename: 目標檔案的檔案名稱 (例如，`index.html`)
-Saving/GitHub/Password: 密碼、OAUTH 令牌，或個人存取的令牌
-Saving/GitHub/Path: 目標檔案的路徑 (例如，`/wiki/`)
-Saving/GitHub/Repo: 目標存儲庫 (例如，`Jermolene/TiddlyWiki5`)
-Saving/GitHub/UserName: 使用者名稱
+Saving/GitService/Branch: 用於儲存的目標分支
+Saving/GitService/CommitMessage: 由 TiddlyWiki 儲存
+Saving/GitService/Description: 這些設定僅用於儲存至 <<service-name>>
+Saving/GitService/Filename: 目標檔案的檔案名稱 (例如，`index.html`)
+Saving/GitService/Path: 目標檔案的路徑 (例如，`/wiki/`)
+Saving/GitService/Repo: 目標存儲庫 (例如，`Jermolene/TiddlyWiki5`)
+Saving/GitService/ServerURL: 伺服器 API 網址
+Saving/GitService/UserName: 使用者名稱
+Saving/GitService/GitHub/Caption: ~GitHub 儲存模組
+Saving/GitService/GitHub/Password: 密碼、OAUTH 令牌，或個人存取令牌 (詳見 [[GitHub 說明頁面|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]])
+Saving/GitService/GitLab/Caption: ~GitLab 儲存模組
+Saving/GitService/GitLab/Password: 個人存取令牌的 API (詳見 [[GitLab 說明頁面|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]])
 Saving/TiddlySpot/Advanced/Heading: 進階設定
 Saving/TiddlySpot/BackupDir: 備份資料夾
 Saving/TiddlySpot/Backups: 備份

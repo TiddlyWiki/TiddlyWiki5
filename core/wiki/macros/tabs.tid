@@ -4,7 +4,7 @@ tags: $:/tags/Macro
 \define tabs(tabsList,default,state:"$:/state/tab",class,template,buttonTemplate,retain)
 <div class="tc-tab-set $class$">
 <div class="tc-tab-buttons $class$">
-<$list filter="$tabsList$" variable="currentTab"><$set name="save-currentTiddler" value=<<currentTiddler>>><$tiddler tiddler=<<currentTab>>><$button set=<<qualify "$state$">> setTo=<<currentTab>> default="$default$" selectedClass="tc-tab-selected" tooltip={{!!tooltip}}>
+<$list filter="$tabsList$" variable="currentTab" storyview="pop"><$set name="save-currentTiddler" value=<<currentTiddler>>><$tiddler tiddler=<<currentTab>>><$button set=<<qualify "$state$">> setTo=<<currentTab>> default="$default$" selectedClass="tc-tab-selected" tooltip={{!!tooltip}}>
 <$tiddler tiddler=<<save-currentTiddler>>>
 <$set name="tv-wikilinks" value="no">
 <$transclude tiddler="$buttonTemplate$" mode="inline">

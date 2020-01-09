@@ -66,7 +66,7 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 					widgetPointer.makeChildWidgets([node]);
 					widgetPointer = widgetPointer.children[0];
 				}
-				parseTreeNode = parseTreeNode.children[0];
+				parseTreeNode = parseTreeNode.children && parseTreeNode.children[0];
 			}
 		} 
 	});

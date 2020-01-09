@@ -12,6 +12,7 @@ ConfirmEditShadowTiddler: Está prestes a editar um Tiddler-Sombra. Quaisquer al
 ConfirmOverwriteTiddler: Pretende substituir o tiddler "<$text text=<<title>>/>"?
 Count: contagem
 DefaultNewTiddlerTitle: Novo Tiddler
+Diffs/CountMessage: <<diff-count>> diferenças
 DropMessage: Largue aqui (ou carregue no Escape para cancelar)
 Encryption/Cancel: Cancelar
 Encryption/ConfirmClearPassword: Pretende remover a palavra-passe? Esta acção removerá a encriptação aplicada quando guardar esta wiki
@@ -22,6 +23,7 @@ Encryption/RepeatPassword: Repetir palavra passe
 Encryption/SetPassword: Definir palavra passe
 Encryption/Username: Nome de utilizador
 Error/Caption: Erro
+Error/EditConflict: File changed on server
 Error/Filter: Erro de filtro
 Error/FilterSyntax: Erro de sintaxe na expressão do filtro
 Error/IsFilterOperator: Erro de Filtro: Operando desconhecido para o operador de filtro 'is'
@@ -36,17 +38,20 @@ InternalJavaScriptError/Title: Erro interno JavaScript
 InvalidFieldName: Caracteres ilegais no nome do ficheiro "<$text text=<<fieldName>>/>". Os campos apenas podem conter letras minúsculas, dígitos e os caracteres  subtraço (`_`), hífen (`-`) e ponto final (`.`)
 LazyLoadingWarning: <p>A carregar texto externo de ''<$text text={{!!_canonical_uri}}/>''</p><p>Se esta mensagem não desaparecer pode estar a utilizar um navegador que não suporta texto remoto nesta configuração. Veja https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Entrar em TiddlySpace
+Manager/Controls/FilterByTag/None: (none)
 Manager/Controls/FilterByTag/Prompt: Filtrar por etiqueta:
 Manager/Controls/Order/Prompt: Ordem inversa
-Manager/Controls/Search/Placeholder: Procurar
+Manager/Controls/Search/Placeholder: Procurar 
 Manager/Controls/Search/Prompt: Procurar:
 Manager/Controls/Show/Option/Tags: etiquetas
+Manager/Controls/Show/Option/Tiddlers: tiddlers
 Manager/Controls/Show/Prompt: Mostrar:
 Manager/Controls/Sort/Prompt: Ordenar por:
 Manager/Item/Colour: Cor
 Manager/Item/Fields: Campos
 Manager/Item/Icon: Ícone
-Manager/Item/RawText: Código-fonte
+Manager/Item/Icon/None: (none)
+Manager/Item/RawText: Texto simples
 Manager/Item/Tags: Etiquetas
 Manager/Item/Tools: Ferramentas
 Manager/Item/WikifiedText: Texto formatado
@@ -65,4 +70,4 @@ TagManager/Info/Heading: Informação
 TagManager/Tag/Heading: Etiqueta
 Tiddler/DateFormat: DD de MMM de YYYY às hh12:0mmam
 UnsavedChangesWarning: Têm alterações não guardadas na TiddlyWiki
-Yes: Sim
+Yes: Sim«

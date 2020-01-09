@@ -1,7 +1,7 @@
 title: $:/language/Help/unpackplugin
 description: Extrair tiddlers de conteúdo de uma extensão
 
-Extrai o conteúdo de uma extensão, recriando-o como tiddlers vulgares:
+Extrai o conteúdo de uma extensão, recriando-a como tiddlers vulgares:
 
 ```
 --unpackplugin <título>

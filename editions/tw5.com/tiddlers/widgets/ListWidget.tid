@@ -1,6 +1,6 @@
 caption: list
 created: 20131024141900000
-modified: 20181013230425882
+modified: 20190608162410684
 tags: Widgets Lists
 title: ListWidget
 type: text/vnd.tiddlywiki
@@ -68,7 +68,14 @@ See GroupedLists for how to generate nested and grouped lists using the ListWidg
 
 ! Content and Attributes
 
-The content of the `<$list>` widget is an optional template to use for rendering each tiddler in the list. Alternatively, the template can be specified as a tiddler title in the ``template`` attribute. As a fallback, the default template just displays the tiddler title.
+The content of the `<$list>` widget is an optional template to use for rendering each tiddler in the list.
+
+The action of the list widget depends on the results of the filter combined with several options for specifying the template:
+
+* If the filter evaluates to an empty list, the text of the ''emptyMessage'' attribute is rendered, and all other templates are ignored
+* Otherwise, if the ''template'' attribute is specified then it is taken as the title of a tiddler to use as a template for rendering each item of the list
+* Otherwise, if the list widget content is not blank, it is used as a template for rendering each item of the list
+* Otherwise, a default template is used consisting of a `<span>` or `<div>` element wrapped around a link to the item
 
 |!Attribute |!Description |
 |filter |The [[tiddler filter|Filters]] to display |

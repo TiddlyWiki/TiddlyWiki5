@@ -42,13 +42,13 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 </div>
 """>
 <div class="tc-dropdown-item-plain">
-<$button class="tc-btn-invisible" tooltip=<<lingo Remove/Hint>>>
+<$button class="tc-btn-invisible" tooltip={{$:/language/ControlPanel/KeyboardShortcuts/Remove/Hint}}>
 <$action-listops
 	$tiddler="$(shortcutTitle)$"
 	$field="text"
 	$subfilter="+[remove<shortcut>]"
 />
-&times;
+<small>{{$:/core/images/close-button}}</small>
 </$button>
 <kbd>
 <$macrocall $name="displayshortcuts" $output="text/html" shortcuts=<<shortcut>>/>
@@ -119,7 +119,7 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 </td>
 </tr>
 <$set name="dropdownState" value={{$(dropdownStateTitle)$}}>
-<$list filter="[<dropdownState>prefix[open]]" variable="listItem">
+<$list filter="[<dropdownState>match[open]]" variable="listItem">
 <<shortcut-editor>>
 </$list>
 </$set>

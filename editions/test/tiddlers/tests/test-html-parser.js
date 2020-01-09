@@ -156,7 +156,7 @@ describe("HTML tag new parser tests", function() {
 			null
 		);
 		expect(parser.parseTag("<mytag>",0)).toEqual(
-			{ type : 'element', start : 0, attributes : [  ], tag : 'mytag', end : 7 }
+			{ type : 'element', start : 0, attributes : { }, tag : 'mytag', end : 7 }
 		);
 		expect(parser.parseTag("<mytag attrib1>",0)).toEqual(
 			{ type : 'element', start : 0, attributes : { attrib1 : { type : 'string', value : 'true', start : 6, name : 'attrib1', end : 14 } }, tag : 'mytag', end : 15 }

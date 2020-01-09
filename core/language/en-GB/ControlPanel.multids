@@ -4,25 +4,27 @@ Advanced/Caption: Advanced
 Advanced/Hint: Internal information about this TiddlyWiki
 Appearance/Caption: Appearance
 Appearance/Hint: Ways to customise the appearance of your TiddlyWiki.
-Basics/AnimDuration/Prompt: Animation duration:
+Basics/AnimDuration/Prompt: Animation duration
+Basics/AutoFocus/Prompt: Default focus field for new tiddlers
 Basics/Caption: Basics
 Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">retain story ordering</$button>
-Basics/DefaultTiddlers/Prompt: Default tiddlers:
-Basics/DefaultTiddlers/TopHint: Choose which tiddlers are displayed at startup:
+Basics/DefaultTiddlers/Prompt: Default tiddlers
+Basics/DefaultTiddlers/TopHint: Choose which tiddlers are displayed at startup
 Basics/Language/Prompt: Hello! Current language:
 Basics/NewJournal/Title/Prompt: Title of new journal tiddlers
 Basics/NewJournal/Text/Prompt: Text for new journal tiddlers
 Basics/NewJournal/Tags/Prompt: Tags for new journal tiddlers
 Basics/NewTiddler/Title/Prompt: Title of new tiddlers
-Basics/OverriddenShadowTiddlers/Prompt: Number of overridden shadow tiddlers:
-Basics/ShadowTiddlers/Prompt: Number of shadow tiddlers:
-Basics/Subtitle/Prompt: Subtitle:
-Basics/SystemTiddlers/Prompt: Number of system tiddlers:
-Basics/Tags/Prompt: Number of tags:
-Basics/Tiddlers/Prompt: Number of tiddlers:
-Basics/Title/Prompt: Title of this ~TiddlyWiki:
-Basics/Username/Prompt: Username for signing edits:
-Basics/Version/Prompt: ~TiddlyWiki version:
+Basics/NewTiddler/Tags/Prompt: Tags for new tiddlers
+Basics/OverriddenShadowTiddlers/Prompt: Number of overridden shadow tiddlers
+Basics/ShadowTiddlers/Prompt: Number of shadow tiddlers
+Basics/Subtitle/Prompt: Subtitle
+Basics/SystemTiddlers/Prompt: Number of system tiddlers
+Basics/Tags/Prompt: Number of tags
+Basics/Tiddlers/Prompt: Number of tiddlers
+Basics/Title/Prompt: Title of this ~TiddlyWiki
+Basics/Username/Prompt: Username for signing edits
+Basics/Version/Prompt: ~TiddlyWiki version
 EditorTypes/Caption: Editor Types
 EditorTypes/Editor/Caption: Editor
 EditorTypes/Hint: These tiddlers determine which editor is used to edit specific tiddler types.
@@ -63,6 +65,7 @@ Parsing/Pragma/Caption: Pragma Parse Rules
 Plugins/Add/Caption: Get more plugins
 Plugins/Add/Hint: Install plugins from the official library
 Plugins/AlreadyInstalled/Hint: This plugin is already installed at version <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: Also requires:
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: disable
 Plugins/Disable/Hint: Disable this plugin when reloading page
@@ -78,6 +81,7 @@ Plugins/NoInfoFound/Hint: No ''"<$text text=<<currentTab>>/>"'' found
 Plugins/NotInstalled/Hint: This plugin is not currently installed
 Plugins/OpenPluginLibrary: open plugin library
 Plugins/ClosePluginLibrary: close plugin library
+Plugins/PluginWillRequireReload: (requires reload)
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins
 Plugins/Reinstall/Caption: reinstall
@@ -91,15 +95,18 @@ Saving/DownloadSaver/Hint: These settings apply to the HTML5-compatible download
 Saving/General/Caption: General
 Saving/General/Hint: These settings apply to all the loaded savers
 Saving/Hint: Settings used for saving the entire TiddlyWiki as a single file via a saver module
-Saving/GitHub/Branch: Target branch for saving (defaults to `master`)
-Saving/GitHub/Caption: ~GitHub Saver
-Saving/GitHub/Description: These settings are only used when saving to ~GitHub
-Saving/GitHub/ServerURL: Server URL (defaults to `https://api.github.com`)
-Saving/GitHub/Filename: Filename of target file (e.g. `index.html`)
-Saving/GitHub/Password: Password, OAUTH token, or personal access token
-Saving/GitHub/Path: Path to target file (e.g. `/wiki/`)
-Saving/GitHub/Repo: Target repository (e.g. `Jermolene/TiddlyWiki5`)
-Saving/GitHub/UserName: Username
+Saving/GitService/Branch: Target branch for saving
+Saving/GitService/CommitMessage: Saved by TiddlyWiki
+Saving/GitService/Description: These settings are only used when saving to <<service-name>>
+Saving/GitService/Filename: Filename of target file (e.g. `index.html`)
+Saving/GitService/Path: Path to target file (e.g. `/wiki/`)
+Saving/GitService/Repo: Target repository (e.g. `Jermolene/TiddlyWiki5`)
+Saving/GitService/ServerURL: Server API URL
+Saving/GitService/UserName: Username
+Saving/GitService/GitHub/Caption: ~GitHub Saver
+Saving/GitService/GitHub/Password: Password, OAUTH token, or personal access token (see [[GitHub help page|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] for details)
+Saving/GitService/GitLab/Caption: ~GitLab Saver
+Saving/GitService/GitLab/Password: Personal access token for API (see [[GitLab help page|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] for details)
 Saving/TiddlySpot/Advanced/Heading: Advanced Settings
 Saving/TiddlySpot/BackupDir: Backup Directory
 Saving/TiddlySpot/Backups: Backups
