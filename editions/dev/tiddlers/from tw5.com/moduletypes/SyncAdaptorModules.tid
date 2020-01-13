@@ -49,6 +49,15 @@ Gets the supplemental information that the adaptor needs to keep track of for a 
 
 Returns an object storing any additional information required by the adaptor.
 
+!! `getTiddlerRevision(title)`
+
+Gets the revision ID associated with the specified tiddler title.
+
+|!Parameter |!Description |
+|title |Tiddler title |
+
+Returns a revision ID.
+
 !! `getStatus(callback)`
 
 Retrieves status information from the server. This method is optional.
