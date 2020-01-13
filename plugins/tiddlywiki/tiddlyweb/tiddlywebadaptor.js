@@ -56,6 +56,10 @@ TiddlyWebAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 	};
 };
 
+TiddlyWebAdaptor.prototype.getTiddlerRevision = function(tiddler) {
+	return tiddler.fields.revision;
+};
+
 /*
 Get the current status of the TiddlyWeb connection
 */

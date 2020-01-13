@@ -64,23 +64,27 @@ function Syncer(options) {
 	this.filterFn = this.wiki.compileFilter(this.wiki.getTiddlerText(this.titleSyncFilter));
 	// Record information for known tiddlers
 	this.readTiddlerInfo();
+	this.titlesToBeLoaded = {}; // Hashmap of titles of tiddlers that need loading from the server
+	this.titlesHaveBeenLazyLoaded = {}; // Hashmap of titles of tiddlers that have already been lazily loaded from the server
+	// Timers
 	this.taskTimerId = null; // Timer for task dispatch
 	this.pollTimerId = null; // Timer for polling server
+	// Number of outstanding requests
 	this.numTasksInProgress = 0;
 	// Listen out for changes to tiddlers
 	this.wiki.addEventListener("change",function(changes) {
 		// Filter the changes to just include ones that are being synced
- 		var filteredChanges = self.filterFn.call(self.wiki,function(callback) {
- 			$tw.utils.each(changes,function(change,title) {
- 				var tiddler = self.wiki.getTiddler(title);
- 				callback(tiddler,title);
- 			});
- 		});
- 		if(filteredChanges.length > 0) {
+		var filteredChanges = self.getSyncedTiddlers(function(callback) {
+			$tw.utils.each(changes,function(change,title) {
+				var tiddler = self.wiki.getTiddler(title);
+				callback(tiddler,title);
+			});
+		});
+		if(filteredChanges.length > 0) {
 			self.processTaskQueue();
- 		} else {
- 			// Look for deletions of tiddlers we're already syncing	
- 			var outstandingDeletion = false
+		} else {
+			// Look for deletions of tiddlers we're already syncing	
+			var outstandingDeletion = false
 			$tw.utils.each(changes,function(change,title,object) {
 				if(change.deleted && $tw.utils.hop(self.tiddlerInfo,title)) {
 					outstandingDeletion = true;
@@ -89,7 +93,7 @@ function Syncer(options) {
 			if(outstandingDeletion) {
 				self.processTaskQueue();
 			}
- 		}
+		}
 	});
 	// Browser event handlers
 	if($tw.browser && !this.disableUI) {
@@ -130,37 +134,30 @@ function Syncer(options) {
 }
 
 /*
-Read (or re-read) the latest tiddler info from the store
+Return an array of the tiddler titles that are subjected to syncing
 */
-Syncer.prototype.readTiddlerInfo = function() {
-	// Hashmap by title of {revision:,changeCount:,adaptorInfo:,needsToBeLoaded:,hasBeenLazyLoaded:}
-	this.tiddlerInfo = {};
-	// Record information for known tiddlers
-	var self = this,
-		tiddlers = this.filterFn.call(this.wiki);
-	$tw.utils.each(tiddlers,function(title) {
-		var tiddler = self.wiki.getTiddler(title);
-		self.tiddlerInfo[title] = {
-			revision: tiddler.fields.revision,
-			adaptorInfo: self.syncadaptor && self.syncadaptor.getTiddlerInfo(tiddler),
-			changeCount: self.wiki.getChangeCount(title),
-			hasBeenLazyLoaded: false
-		};
-	});
+Syncer.prototype.getSyncedTiddlers = function(source) {
+	return this.filterFn.call(this.wiki,source);
 };
 
 /*
-Create an tiddlerInfo structure if it doesn't already exist
+Read (or re-read) the latest tiddler info from the store
 */
-Syncer.prototype.createTiddlerInfo = function(title) {
-	if(!$tw.utils.hop(this.tiddlerInfo,title)) {
-		this.tiddlerInfo[title] = {
-			revision: null,
-			adaptorInfo: {},
-			changeCount: -1,
-			hasBeenLazyLoaded: false
+Syncer.prototype.readTiddlerInfo = function() {
+	// Hashmap by title of {revision:,changeCount:,adaptorInfo:}
+	// "revision" is the revision of the tiddler last seen on the server, and "changecount" is the corresponding local changecount
+	this.tiddlerInfo = {};
+	// Record information for known tiddlers
+	var self = this,
+		tiddlers = this.getSyncedTiddlers();
+	$tw.utils.each(tiddlers,function(title) {
+		var tiddler = self.wiki.getTiddler(title);
+		self.tiddlerInfo[title] = {
+			revision: (self.syncadaptor && self.syncadaptor.getTiddlerRevision && self.syncadaptor.getTiddlerRevision(tiddler)) || tiddler.fields.revision,
+			adaptorInfo: self.syncadaptor && self.syncadaptor.getTiddlerInfo(tiddler),
+			changeCount: self.wiki.getChangeCount(title)
 		};
-	}
+	});
 };
 
 /*
@@ -169,7 +166,7 @@ Checks whether the wiki is dirty (ie the window shouldn't be closed)
 Syncer.prototype.isDirty = function() {
 	this.logger.log("Checking dirty status");
 	// Check tiddlers that are in the store and included in the filter function
-	var titles = this.filterFn.call(this.wiki);
+	var titles = this.getSyncedTiddlers();
 	for(var index=0; index<titles.length; index++) {
 		var title = titles[index],
 			tiddlerInfo = this.tiddlerInfo[title];
@@ -212,17 +209,15 @@ Syncer.prototype.updateDirtyStatus = function() {
 /*
 Save an incoming tiddler in the store, and updates the associated tiddlerInfo
 */
-Syncer.prototype.storeTiddler = function(tiddlerFields,hasBeenLazyLoaded) {
+Syncer.prototype.storeTiddler = function(tiddlerFields) {
 	// Save the tiddler
 	var tiddler = new $tw.Tiddler(tiddlerFields);
 	this.wiki.addTiddler(tiddler);
 	// Save the tiddler revision and changeCount details
 	this.tiddlerInfo[tiddlerFields.title] = {
-		revision: tiddlerFields.revision,
+		revision: (self.syncadaptor && self.syncadaptor.getTiddlerRevision && self.syncadaptor.getTiddlerRevision(tiddlerFields.title)) || tiddlerFields.revision,
 		adaptorInfo: this.syncadaptor.getTiddlerInfo(tiddler),
-		changeCount: this.wiki.getChangeCount(tiddlerFields.title),
-		hasBeenLazyLoaded: hasBeenLazyLoaded !== undefined ? hasBeenLazyLoaded : true,
-		needsToBeLoaded: false
+		changeCount: this.wiki.getChangeCount(tiddlerFields.title)
 	};
 };
 
@@ -259,19 +254,45 @@ Syncer.prototype.getStatus = function(callback) {
 Synchronise from the server by reading the skinny tiddler list and queuing up loads for any tiddlers that we don't already have up to date
 */
 Syncer.prototype.syncFromServer = function() {
-	var self = this;
-	if(this.syncadaptor && this.syncadaptor.getSkinnyTiddlers) {
-		this.logger.log("Retrieving skinny tiddler list");
-		if(this.pollTimerId) {
-			clearTimeout(this.pollTimerId);
-			this.pollTimerId = null;
-		}
-		this.syncadaptor.getSkinnyTiddlers(function(err,tiddlers) {
-			// Trigger the next sync
+	var self = this,
+		cancelNextSync = function() {
+			if(self.pollTimerId) {
+				clearTimeout(self.pollTimerId);
+				self.pollTimerId = null;
+			}
+		},
+		triggerNextSync = function() {
 			self.pollTimerId = setTimeout(function() {
 				self.pollTimerId = null;
 				self.syncFromServer.call(self);
 			},self.pollTimerInterval);
+		};
+	if(this.syncadaptor && this.syncadaptor.getUpdatedTiddlers) {
+		this.logger.log("Retrieving updated tiddler list");
+		cancelNextSync();
+		this.syncadaptor.getUpdatedTiddlers(self,function(err,updates) {
+			triggerNextSync();
+			if(err) {
+				self.logger.alert($tw.language.getString("Error/RetrievingSkinny") + ":",err);
+				return;
+			}
+			$tw.utils.each(updates.modifications,function(title) {
+				self.titlesToBeLoaded[title] = true;
+			});
+			$tw.utils.each(updates.deletions,function(title) {
+				delete self.tiddlerInfo[title];
+				self.logger.log("Deleting tiddler missing from server:",title);
+				self.wiki.deleteTiddler(title);
+			});
+			if(updates.modifications.length > 0 || updates.deletions.length > 0) {
+				self.processTaskQueue();
+			}
+		});
+	} else if(this.syncadaptor && this.syncadaptor.getSkinnyTiddlers) {
+		this.logger.log("Retrieving skinny tiddler list");
+		cancelNextSync();
+		this.syncadaptor.getSkinnyTiddlers(function(err,tiddlers) {
+			triggerNextSync();
 			// Check for errors
 			if(err) {
 				self.logger.alert($tw.language.getString("Error/RetrievingSkinny") + ":",err);
@@ -293,15 +314,12 @@ Syncer.prototype.syncFromServer = function() {
 				}
 				// Ignore the incoming tiddler if it's the same as the revision we've already got
 				if(currRevision !== incomingRevision) {
-					// Do a full load if we've already got a fat version of the tiddler
-					if(tiddler && tiddler.fields.text !== undefined) {
-						// Do a full load of this tiddler
-						self.tiddlerInfo[tiddlerFields.title] = self.tiddlerInfo[tiddlerFields.title] || {};
-						self.tiddlerInfo[tiddlerFields.title].needsToBeLoaded = true;
-					} else {
-						// Load the skinny version of the tiddler
-						self.storeTiddler(tiddlerFields,false);
+					// Only load the skinny version if we don't already have a fat version of the tiddler
+					if(!tiddler || tiddler.fields.text === undefined) {
+						self.storeTiddler(tiddlerFields);
 					}
+					// Do a full load of this tiddler
+					self.titlesToBeLoaded[tiddlerFields.title] = true;
 				}
 			}
 			// Delete any tiddlers that were previously reported but missing this time
@@ -310,6 +328,7 @@ Syncer.prototype.syncFromServer = function() {
 				self.logger.log("Deleting tiddler missing from server:",title);
 				self.wiki.deleteTiddler(title);
 			});
+			self.processTaskQueue();
 		});
 	}
 };
@@ -323,14 +342,12 @@ Syncer.prototype.handleLazyLoadEvent = function(title) {
 		return;
 	}
 	// Don't lazy load the same tiddler twice
-	var info = this.tiddlerInfo[title];
-	if(!info || !info.hasBeenLazyLoaded) {
+	if(!this.titlesHaveBeenLazyLoaded[title]) {
 		// Don't lazy load if the tiddler isn't included in the sync filter
-		if(this.filterFn.call(this.wiki).indexOf(title) !== -1) {
+		if(this.getSyncedTiddlers().indexOf(title) !== -1) {
 			// Mark the tiddler as needing loading, and having already been lazily loaded
-			this.createTiddlerInfo(title);
-			this.tiddlerInfo[title].needsToBeLoaded = true;
-			this.tiddlerInfo[title].hasBeenLazyLoaded = true;
+			this.titlesToBeLoaded[title] = true;
+			this.titlesHaveBeenLazyLoaded[title] = true;
 		}
 	}
 };
@@ -459,22 +476,22 @@ Syncer.prototype.chooseNextTask = function() {
 	var thresholdLastSaved = (new Date()) - this.throttleInterval,
 		havePending = null;
 	// First we look for tiddlers that have been modified locally and need saving back to the server
-	var titles = this.filterFn.call(this.wiki);
+	var titles = this.getSyncedTiddlers();
 	for(var index=0; index<titles.length; index++) {
 		var title = titles[index],
 			tiddler = this.wiki.getTiddler(title),
 			tiddlerInfo = this.tiddlerInfo[title];
 		if(tiddler) {
 			// If the tiddler is not known on the server, or has been modified locally no more recently than the threshold then it needs to be saved to the server
- 			var hasChanged = !tiddlerInfo || $tw.wiki.getChangeCount(title) > tiddlerInfo.changeCount,
- 				isReadyToSave = !tiddlerInfo || !tiddlerInfo.timestampLastSaved || tiddlerInfo.timestampLastSaved < thresholdLastSaved;
- 			if(hasChanged) {
- 				if(isReadyToSave) {
+			var hasChanged = !tiddlerInfo || $tw.wiki.getChangeCount(title) > tiddlerInfo.changeCount,
+				isReadyToSave = !tiddlerInfo || !tiddlerInfo.timestampLastSaved || tiddlerInfo.timestampLastSaved < thresholdLastSaved;
+			if(hasChanged) {
+				if(isReadyToSave) {
 					return new SaveTiddlerTask(this,title); 					
- 				} else {
- 					havePending = true;
- 				}
- 			}
+				} else {
+					havePending = true;
+				}
+			}
 		}
 	}
 	// Second, we check tiddlers that are known from the server but not currently in the store, and so need deleting on the server
@@ -487,14 +504,11 @@ Syncer.prototype.chooseNextTask = function() {
 			return new DeleteTiddlerTask(this,title);
 		}
 	}
-	// Check for tiddlers that are known from the server and need loading
-	titles = Object.keys(this.tiddlerInfo);
-	for(index=0; index<titles.length; index++) {
-		title = titles[index];
-		tiddlerInfo = this.tiddlerInfo[title];
-		if(tiddlerInfo.needsToBeLoaded) {
-			return new LoadTiddlerTask(this,title);
-		}
+	// Check for tiddlers that need loading
+	title = Object.keys(this.titlesToBeLoaded)[0];
+	if(title) {
+		delete this.titlesToBeLoaded[title];
+		return new LoadTiddlerTask(this,title);
 	}
 	// No tasks are ready
 	return havePending;
@@ -572,7 +586,7 @@ LoadTiddlerTask.prototype.run = function(callback) {
 		}
 		// Update the info stored about this tiddler
 		if(tiddlerFields) {
-			self.syncer.storeTiddler(tiddlerFields,true);
+			self.syncer.storeTiddler(tiddlerFields);
 		}
 		// Invoke the callback
 		callback(null);
