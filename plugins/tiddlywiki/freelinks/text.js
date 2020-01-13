@@ -12,7 +12,9 @@ An override of the core text widget that automatically linkifies the text
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget,
+	LinkWidget = require("$:/core/modules/widgets/link.js").link,
+	ButtonWidget = require("$:/core/modules/widgets/button.js").button;
 
 var TextNodeWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
@@ -43,8 +45,8 @@ TextNodeWidget.prototype.execute = function() {
 			type: "plain-text",
 			text: this.getAttribute("text",this.parseTreeNode.text || "")
 		}];
-	// Only process links if not disabled
-	if(this.getVariable("tv-wikilinks",{defaultValue:"yes"}).trim() !== "no" && this.getVariable("tv-freelinks",{defaultValue:"no"}).trim() === "yes") {
+	// Only process links if not disabled and we're not within a button or link widget
+	if(this.getVariable("tv-wikilinks",{defaultValue:"yes"}).trim() !== "no" && this.getVariable("tv-freelinks",{defaultValue:"no"}).trim() === "yes" && !this.isWithinButtonOrLink()) {
 		// Get the information about the current tiddler titles, and construct a regexp
 		this.tiddlerTitleInfo = this.wiki.getGlobalCache("tiddler-title-info",function() {
 			var titles = [],
@@ -98,7 +100,8 @@ TextNodeWidget.prototype.execute = function() {
 					childParseTree[index] = {
 						type: "link",
 						attributes: {
-							to: {type: "string", value: match[0]}
+							to: {type: "string", value: match[0]},
+							"class": {type: "string", value: "tc-freelink"}
 						},
 						children: [{
 							type: "plain-text", text: match[0]
@@ -119,6 +122,16 @@ TextNodeWidget.prototype.execute = function() {
 	}
 	// Make the child widgets
 	this.makeChildWidgets(childParseTree);
+};
+
+TextNodeWidget.prototype.isWithinButtonOrLink = function() {
+	var withinButtonOrLink = false,
+		widget = this.parentWidget;
+	while(!withinButtonOrLink && widget) {
+		withinButtonOrLink = widget instanceof ButtonWidget || widget instanceof LinkWidget;
+		widget = widget.parentWidget;
+	}
+	return withinButtonOrLink;
 };
 
 /*
