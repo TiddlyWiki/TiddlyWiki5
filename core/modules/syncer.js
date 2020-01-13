@@ -134,6 +134,14 @@ function Syncer(options) {
 }
 
 /*
+Show a generic network error alert
+*/
+Syncer.prototype.showErrorAlert = function() {
+	$tw.language.getString("Error/NetworkErrorAlert")
+	this.logger.alert("!! ''Network Error''\n\nIt looks like the connection to the server has been lost. This may indicate a problem with your network connection. Please attempt to restore network connectivity before continuing.<br><br>''Any unsaved changes will be automatically synchronised when connectivity is restored''.");
+};
+
+/*
 Return an array of the tiddler titles that are subjected to syncing
 */
 Syncer.prototype.getSyncedTiddlers = function(source) {
@@ -284,7 +292,8 @@ Syncer.prototype.syncFromServer = function() {
 		this.syncadaptor.getUpdatedTiddlers(self,function(err,updates) {
 			triggerNextSync();
 			if(err) {
-				self.logger.alert($tw.language.getString("Error/RetrievingSkinny") + ":",err);
+				self.showErrorAlert();
+				self.logger.log($tw.language.getString("Error/RetrievingSkinny") + ":",err);
 				return;
 			}
 			$tw.utils.each(updates.modifications,function(title) {
@@ -306,7 +315,8 @@ Syncer.prototype.syncFromServer = function() {
 			triggerNextSync();
 			// Check for errors
 			if(err) {
-				self.logger.alert($tw.language.getString("Error/RetrievingSkinny") + ":",err);
+				self.showErrorAlert();
+				self.logger.log($tw.language.getString("Error/RetrievingSkinny") + ":",err);
 				return;
 			}
 			// Keep track of which tiddlers we already know about have been reported this time
@@ -448,7 +458,8 @@ Syncer.prototype.processTaskQueue = function() {
 			task.run(function(err) {
 				self.numTasksInProgress -= 1;
 				if(err) {
-					self.logger.alert("Sync error while processing " + task.type + " of '" + task.title + "':\n" + err);
+					self.showErrorAlert();
+					self.logger.log("Sync error while processing " + task.type + " of '" + task.title + "':\n" + err);
 					self.updateDirtyStatus();
 					self.triggerTimeout(self.errorRetryInterval);
 				} else {
