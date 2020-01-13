@@ -56,7 +56,8 @@ TiddlyWebAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 	};
 };
 
-TiddlyWebAdaptor.prototype.getTiddlerRevision = function(tiddler) {
+TiddlyWebAdaptor.prototype.getTiddlerRevision = function(title) {
+	var tiddler = this.wiki.getTiddler(title);
 	return tiddler.fields.revision;
 };
 
