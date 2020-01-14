@@ -12,13 +12,21 @@ GET /recipes/default/tiddlers/tiddlers.json?filter=<filter>
 /*global $tw: false */
 "use strict";
 
+var DEFAULT_FILTER = "[all[tiddlers]!is[system]sort[title]]";
+
 exports.method = "GET";
 
 exports.path = /^\/recipes\/default\/tiddlers.json$/;
 
 exports.handler = function(request,response,state) {
-	var filter = state.queryParameters.filter || "[all[tiddlers]!is[system]sort[title]]",
-		excludeFields = (state.queryParameters.exclude || "text").split(","),
+	var allowedFilters = $tw.boot.wikiInfo.config["server-get-tiddlers-allowed-filters"],
+		filter = state.queryParameters.filter || DEFAULT_FILTER;
+	if(allowedFilters && allowedFilters.indexOf(filter) === -1) {
+		response.writeHead(401);
+		response.end();
+		return;
+	}
+	var excludeFields = (state.queryParameters.exclude || "text").split(","),
 		titles = state.wiki.filterTiddlers(filter);
 	response.writeHead(200, {"Content-Type": "application/json"});
 	var tiddlers = [];

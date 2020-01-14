@@ -1,5 +1,5 @@
 created: 20181002131215403
-modified: 20191116164512860
+modified: 20200114180029559
 tags: [[WebServer API]]
 title: WebServer API: Get All Tiddlers
 type: text/vnd.tiddlywiki
@@ -15,8 +15,19 @@ Parameters:
 * ''filter'' - filter identifying tiddlers to be returned (optional, defaults to "[all[tiddlers]!is[system]sort[title]]")
 * ''exclude'' - comma delimited list of fields to excluded from the returned tiddlers (optional, defaults to "text")
 
-Response:
+An optional list of permitted filters may be configured in [[tiddlywiki.info|tiddlywiki.info Files]] in the config setting `server-get-tiddlers-allowed-filters`. If the setting is missing then all filters are permitted. For example, the following setting explicitly permits the filter used by the TiddlyWeb adaptor plugin:
 
+```
+...
+"config": {
+	"server-get-tiddlers-allowed-filters": [
+		"[all[tiddlers]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]]"
+	]
+}
+...
+```
+
+Response:
 
 * 200 OK
 *> `Content-Type: application/json`
