@@ -3,7 +3,7 @@ title: $:/core/modules/server/routes/get-tiddlers-json.js
 type: application/javascript
 module-type: route
 
-GET /recipes/default/tiddlers/tiddlers.json
+GET /recipes/default/tiddlers/tiddlers.json?filter=<filter>
 
 \*/
 (function() {
