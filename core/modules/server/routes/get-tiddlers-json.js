@@ -22,7 +22,8 @@ exports.handler = function(request,response,state) {
 	var allowedFilters = $tw.boot.wikiInfo.config["server-get-tiddlers-allowed-filters"],
 		filter = state.queryParameters.filter || DEFAULT_FILTER;
 	if(allowedFilters && allowedFilters.indexOf(filter) === -1) {
-		response.writeHead(401);
+		console.log("Blocked attempt to GET /recipes/default/tiddlers/tiddlers.json with filter: " + filter);
+		response.writeHead(403);
 		response.end();
 		return;
 	}
