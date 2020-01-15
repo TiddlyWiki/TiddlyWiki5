@@ -137,8 +137,8 @@ function Syncer(options) {
 Show a generic network error alert
 */
 Syncer.prototype.showErrorAlert = function() {
-	$tw.language.getString("Error/NetworkErrorAlert")
-	this.logger.alert("!! ''Network Error''\n\nIt looks like the connection to the server has been lost. This may indicate a problem with your network connection. Please attempt to restore network connectivity before continuing.<br><br>''Any unsaved changes will be automatically synchronised when connectivity is restored''.");
+console.log($tw.language.getString("Error/NetworkErrorAlert"))
+	this.logger.alert($tw.language.getString("Error/NetworkErrorAlert"));
 };
 
 /*
