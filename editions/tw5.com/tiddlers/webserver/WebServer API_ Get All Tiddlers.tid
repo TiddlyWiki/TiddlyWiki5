@@ -15,7 +15,12 @@ Parameters:
 * ''filter'' - filter identifying tiddlers to be returned (optional, defaults to "[all[tiddlers]!is[system]sort[title]]")
 * ''exclude'' - comma delimited list of fields to excluded from the returned tiddlers (optional, defaults to "text")
 
-An optional list of permitted filters may be configured in [[tiddlywiki.info|tiddlywiki.info Files]] in the config setting `server-get-tiddlers-allowed-filters`. If the setting is missing then all filters are permitted. For example, the following setting explicitly permits the filter used by the TiddlyWeb adaptor plugin:
+To avoid denial of service attacks with malformed filters by default only the following filters are permitted:
+
+* `[all[tiddlers]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]]` (the filter used by the current TiddlyWeb adaptor)
+* `[all[tiddlers]!is[system]sort[title]]` (the filter used by default when the filter is not specified)
+
+The list of permitted filters may be overridden in [[tiddlywiki.info|tiddlywiki.info Files]] in the config setting `server-get-tiddlers-allowed-filters`. For example, the following setting explicitly permits the filter used by the TiddlyWeb adaptor plugin:
 
 ```
 ...
@@ -27,8 +32,19 @@ An optional list of permitted filters may be configured in [[tiddlywiki.info|tid
 ...
 ```
 
+It is also possible to configure the server to accept any filter, but this should not be done for public facing servers.
+
+```
+...
+"config": {
+	"server-get-tiddlers-allowed-filters": "all"
+}
+...
+```
+
 Response:
 
 * 200 OK
 *> `Content-Type: application/json`
 *> Body: array of all non-system tiddlers in [[TiddlyWeb JSON tiddler format]] 
+* 403 Forbidden
