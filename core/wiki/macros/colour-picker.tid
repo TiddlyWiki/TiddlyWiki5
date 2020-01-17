@@ -15,7 +15,7 @@ $(colour-picker-update-recent)$
 
 $actions$
 
-<div style="background-color: $(colour-picker-value)$; width: 100%; height: 100%; border-radius: 50%;"/>
+<span style="display:inline-block; background-color: $(colour-picker-value)$; width: 100%; height: 100%; border-radius: 50%;"/>
 
 </$button>
 \end
@@ -44,7 +44,7 @@ $actions$
 
 ---
 
-<$edit-text tiddler="$:/config/ColourPicker/New" tag="input" default="" placeholder=""/> 
+<$edit-text tiddler="$:/config/ColourPicker/New" tag="input" default="" placeholder=""/>
 <$edit-text tiddler="$:/config/ColourPicker/New" type="color" tag="input"/>
 <$set name="colour-picker-value" value={{$:/config/ColourPicker/New}}>
 <$macrocall $name="colour-picker-inner" actions="""$actions$"""/>

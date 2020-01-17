@@ -45,6 +45,8 @@ page-background: Fond de page
 pre-background: Fond pour le code préformaté
 pre-border: Bordure pour le code préformaté
 primary: Couleur principale
+select-tag-background: Arrière-plan de l'élément `<select>`
+select-tag-foreground: Texte de l'élément `<select>`
 sidebar-button-foreground: Premier plan des boutons de la barre latérale
 sidebar-controls-foreground-hover: Premier plan au passage de la souris sur les boutons de commande de la barre latérale
 sidebar-controls-foreground: Premier plan sur les boutons de commande de la barre latérale

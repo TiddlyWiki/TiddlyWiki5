@@ -45,9 +45,27 @@ var TW_Element = function(tag,namespace) {
 	this.attributes = {};
 	this.isRaw = false;
 	this.children = [];
-	this.style = {};
+	this._style = {};
 	this.namespaceURI = namespace || "http://www.w3.org/1999/xhtml";
 };
+
+Object.defineProperty(TW_Element.prototype, "style", {
+	get: function() {
+		return this._style;
+	},
+	set: function(str) {
+		var self = this;
+		str = str || "";
+		$tw.utils.each(str.split(";"),function(declaration) {
+			var parts = declaration.split(":"),
+				name = $tw.utils.trim(parts[0]),
+				value = $tw.utils.trim(parts[1]);
+			if(name && value) {
+				self._style[$tw.utils.convertStyleNameToPropertyName(name)] = value;
+			}
+		});
+	}
+});
 
 Object.defineProperty(TW_Element.prototype, "nodeType", {
 	get: function() {
@@ -169,13 +187,13 @@ Object.defineProperty(TW_Element.prototype, "outerHTML", {
 				}
 			}
 		}
-		if(this.style) {
+		if(this._style) {
 			var style = [];
-			for(var s in this.style) {
-				style.push(s + ":" + this.style[s] + ";");
+			for(var s in this._style) {
+				style.push($tw.utils.convertPropertyNameToStyleName(s) + ":" + this._style[s] + ";");
 			}
 			if(style.length > 0) {
-				output.push(" style=\"",style.join(""),"\"")
+				output.push(" style=\"",style.join(""),"\"");
 			}
 		}
 		output.push(">");

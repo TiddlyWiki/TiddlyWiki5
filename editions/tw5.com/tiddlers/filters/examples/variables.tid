@@ -1,0 +1,7 @@
+created: 20190330100101453
+modified: 20190330100101453
+tags: [[variables Operator]] [[Operator Examples]]
+title: variables Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[variables[]prefix[colour]]" "returns the names of any variables whose names start with ''colour''">>

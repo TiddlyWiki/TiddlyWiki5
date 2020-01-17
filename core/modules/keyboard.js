@@ -138,6 +138,17 @@ function KeyboardManager(options) {
 	});
 	// Save the platform-specific name of the "meta" key
 	this.metaKeyName = $tw.platform.isMac ? "cmd-" : "win-";
+	this.shortcutKeysList = [], // Stores the shortcut-key descriptors
+	this.shortcutActionList = [], // Stores the corresponding action strings
+	this.shortcutParsedList = []; // Stores the parsed key descriptors
+	this.lookupNames = ["shortcuts"];
+	this.lookupNames.push($tw.platform.isMac ? "shortcuts-mac" : "shortcuts-not-mac")
+	this.lookupNames.push($tw.platform.isWindows ? "shortcuts-windows" : "shortcuts-not-windows");
+	this.lookupNames.push($tw.platform.isLinux ? "shortcuts-linux" : "shortcuts-not-linux");
+	this.updateShortcutLists(this.getShortcutTiddlerList());
+	$tw.wiki.addEventListener("change",function(changes) {
+		self.handleShortcutChanges(changes);
+	});
 }
 
 /*
@@ -229,10 +240,9 @@ KeyboardManager.prototype.parseKeyDescriptors = function(keyDescriptors,options)
 							result.push.apply(result,self.parseKeyDescriptors(keyDescriptors,options));
 						}
 					};
-				lookupName("shortcuts");
-				lookupName($tw.platform.isMac ? "shortcuts-mac" : "shortcuts-not-mac");
-				lookupName($tw.platform.isWindows ? "shortcuts-windows" : "shortcuts-not-windows");
-				lookupName($tw.platform.isLinux ? "shortcuts-linux" : "shortcuts-not-linux");
+				$tw.utils.each(self.lookupNames,function(platformDescriptor) {
+					lookupName(platformDescriptor);
+				});
 			}
 		} else {
 			result.push(self.parseKeyDescriptor(keyDescriptor));
@@ -272,6 +282,70 @@ KeyboardManager.prototype.checkKeyDescriptors = function(event,keyInfoArray) {
 		}
 	}
 	return false;
+};
+
+KeyboardManager.prototype.getShortcutTiddlerList = function() {
+	return $tw.wiki.getTiddlersWithTag("$:/tags/KeyboardShortcut");
+};
+
+KeyboardManager.prototype.updateShortcutLists = function(tiddlerList) {
+	this.shortcutTiddlers = tiddlerList;
+	for(var i=0; i<tiddlerList.length; i++) {
+		var title = tiddlerList[i],
+			tiddlerFields = $tw.wiki.getTiddler(title).fields;
+		this.shortcutKeysList[i] = tiddlerFields.key !== undefined ? tiddlerFields.key : undefined;
+		this.shortcutActionList[i] = tiddlerFields.text;
+		this.shortcutParsedList[i] = this.shortcutKeysList[i] !== undefined ? this.parseKeyDescriptors(this.shortcutKeysList[i]) : undefined;
+	}
+};
+
+KeyboardManager.prototype.handleKeydownEvent = function(event) {
+	var key, action;
+	for(var i=0; i<this.shortcutTiddlers.length; i++) {
+		if(this.shortcutParsedList[i] !== undefined && this.checkKeyDescriptors(event,this.shortcutParsedList[i])) {
+			key = this.shortcutParsedList[i];
+			action = this.shortcutActionList[i];
+		}
+	}
+	if(key !== undefined) {
+		event.preventDefault();
+		event.stopPropagation();
+		$tw.rootWidget.invokeActionString(action,$tw.rootWidget);
+		return true;
+	}
+	return false;
+};
+
+KeyboardManager.prototype.detectNewShortcuts = function(changedTiddlers) {
+	var shortcutConfigTiddlers = [],
+		handled = false;
+	$tw.utils.each(this.lookupNames,function(platformDescriptor) {
+		var descriptorString = "$:/config/" + platformDescriptor + "/";
+		Object.keys(changedTiddlers).forEach(function(configTiddler) {
+			var configString = configTiddler.substr(0, configTiddler.lastIndexOf("/") + 1);
+			if(configString === descriptorString) {
+				shortcutConfigTiddlers.push(configTiddler);
+				handled = true;
+			}
+		});
+	});
+	if(handled) {
+		return $tw.utils.hopArray(changedTiddlers,shortcutConfigTiddlers);
+	} else {
+		return false;
+	}
+};
+
+KeyboardManager.prototype.handleShortcutChanges = function(changedTiddlers) {
+	var newList = this.getShortcutTiddlerList();
+	var hasChanged = $tw.utils.hopArray(changedTiddlers,this.shortcutTiddlers) ? true :
+		($tw.utils.hopArray(changedTiddlers,newList) ? true :
+		(this.detectNewShortcuts(changedTiddlers))
+	);
+	// Re-cache shortcuts if something changed
+	if(hasChanged) {
+		this.updateShortcutLists(newList);
+	}
 };
 
 exports.KeyboardManager = KeyboardManager;

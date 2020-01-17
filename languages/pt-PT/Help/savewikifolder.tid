@@ -1,0 +1,19 @@
+title: $:/language/Help/savewikifolder
+description: Saves a wiki to a new wiki folder
+
+<<.from-version "5.1.20">> Guarda a wiki actual como uma pasta wiki, incluindo tiddlers, extensões e configurações:
+
+```
+--savewikifolder <wikifolderpath> [<filter>]
+```
+
+* A pasta wiki alvo deve estar vazia ou ser não existente
+* O filtro especifica que tiddlers devem ser incluídos. Opcional, se omisso reverte para `[all[tiddlers]]`
+* Extensões da biblioteca oficial são substituídas por referências às mesmas no ficheiro `tiddlywiki.info`
+* Extensões customizadas são descompactadas na sua própria pasta
+
+Usado frequentemente para converter um ficheiro TiddlyWiki HTML numa pasta wiki:
+
+```
+tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder
+```

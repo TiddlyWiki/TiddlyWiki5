@@ -36,6 +36,7 @@ title: $:/plugins/tiddlywiki/katex/ui/EditorToolbar/katex-dropdown
 	$message="tm-new-tiddler"
 	tags="$:/tags/KaTeX/Snippet"
 	text="""$$snippet$$"""
+	caption="description shown in dropdown"
 />
 
 <$action-deletetiddler
@@ -51,3 +52,5 @@ title: $:/plugins/tiddlywiki/katex/ui/EditorToolbar/katex-dropdown
 </$button>
 
 [ext[KaTeX functions catalogue|https://khan.github.io/KaTeX/function-support.html]]
+
+[ext[Chemical equations reference|https://mhchem.github.io/MathJax-mhchem/]]

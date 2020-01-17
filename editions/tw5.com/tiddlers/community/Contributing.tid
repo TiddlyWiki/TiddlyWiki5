@@ -1,5 +1,5 @@
 created: 20131101111400000
-modified: 20150630205715827
+modified: 20190115165616599
 tags: Community
 title: Contributing
 type: text/vnd.tiddlywiki
@@ -25,9 +25,8 @@ There are other ways to [[help TiddlyWiki|HelpingTiddlyWiki]] too.
 
 //The CLA documents used for this project were created using [[Harmony Project Templates|http://www.harmonyagreements.org]]. "HA-CLA-I-LIST Version 1.0" for "CLA-individual" and "HA-CLA-E-LIST Version 1.0" for "CLA-entity".//
 
-Remarks
--------
+!! Remarks
 
-**When not owning the copyright in the entire work of authorship**
+''If you do not own the copyright in the entire work of authorship'':
 
-In this case, please clearly state so, since otherwise we assume that you are the legal copyright holder of the contributed work! Please provide links and additional information that clarify under which license the rest of the code is distributed.
+In this case, please clearly state so and provide links and any additional information that clarify under which license the rest of the code is distributed.

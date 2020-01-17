@@ -6,6 +6,8 @@ type: text/vnd.tiddlywiki
 
 ~WikiText is a concise, expressive way of typing a wide range of text formatting, hypertext and interactive features. It allows you to focus on writing without a complex user interface getting in the way. It is designed to be familiar for users of [[MarkDown|http://daringfireball.net/projects/markdown/]], but with more of a focus on linking and the interactive features.
 
+~WikiText can also be inserted to the text field using the [[Editor toolbar]].
+
 See [[Formatting text in TiddlyWiki]] for an introduction to WikiText.
 
 The following elements of WikiText syntax are built into the core:

@@ -1,6 +1,6 @@
 title: CountWidget
 created: 201310241419
-modified: 201310300837
+modified: 20181231131
 tags: Widgets
 caption: count
 
@@ -14,3 +14,6 @@ The content of the `<$count>` widget is ignored.
 
 |!Attribute |!Description |
 |filter |The filter expression to count |
+
+! Example
+<<wikitext-example-without-html """There are <$count filter="[tag[Examples]]"/> tiddlers tagged with Examples""">>

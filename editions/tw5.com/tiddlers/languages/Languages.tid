@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 !! Language Plugins
 
-The core TiddlyWiki user interface is available in over 20 languages. You can install language plugins using the plugin manager under the [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}} ''plugins'' tab. You can change the current language using the ''language'' button, found on the "Tools" tab in the sidebar.
+The core TiddlyWiki user interface is available in over 20 languages. You can install language plugins following the instructions [[Installing a plugin from the plugin library]]. You can change the current language using the ''language'' button, found on the "Tools" tab in the sidebar.
 
 You can contribute a new language to the library by learning how to [[translate TiddlyWiki into your language|Translate TiddlyWiki into your language]].
 

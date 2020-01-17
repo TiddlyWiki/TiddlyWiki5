@@ -22,15 +22,17 @@ Options include:
 	document: optional document object to use instead of global document
 */
 var Widget = function(parseTreeNode,options) {
-	if(arguments.length > 0) {
-		this.initialise(parseTreeNode,options);
-	}
+	this.initialise(parseTreeNode,options);
 };
 
 /*
 Initialise widget properties. These steps are pulled out of the constructor so that we can reuse them in subclasses
 */
 Widget.prototype.initialise = function(parseTreeNode,options) {
+	// Bail if parseTreeNode is undefined, meaning  that the widget constructor was called without any arguments so that it can be subclassed
+	if(parseTreeNode === undefined) {
+		return;
+	}
 	options = options || {};
 	// Save widget info
 	this.parseTreeNode = parseTreeNode;
@@ -46,7 +48,21 @@ Widget.prototype.initialise = function(parseTreeNode,options) {
 	this.eventListeners = {};
 	// Hashmap of the widget classes
 	if(!this.widgetClasses) {
+		// Get widget classes
 		Widget.prototype.widgetClasses = $tw.modules.applyMethods("widget");
+		// Process any subclasses
+		$tw.modules.forEachModuleOfType("widget-subclass",function(title,module) {
+			if(module.baseClass) {
+				var baseClass = Widget.prototype.widgetClasses[module.baseClass];
+				if(!baseClass) {
+					throw "Module '" + title + "' is attemping to extend a non-existent base class '" + module.baseClass + "'";
+				}
+				var subClass = module.constructor;
+				subClass.prototype = new baseClass();
+				$tw.utils.extend(subClass.prototype,module.prototype);
+				Widget.prototype.widgetClasses[module.name || module.baseClass] = subClass;
+			}
+		});
 	}
 };
 
@@ -369,9 +385,10 @@ Widget.prototype.previousSibling = function() {
 Render the children of this widget into the DOM
 */
 Widget.prototype.renderChildren = function(parent,nextSibling) {
-	$tw.utils.each(this.children,function(childWidget) {
-		childWidget.render(parent,nextSibling);
-	});
+	var children = this.children;
+	for(var i = 0; i < children.length; i++) {
+		children[i].render(parent,nextSibling);
+	};
 };
 
 /*
@@ -439,11 +456,11 @@ Widget.prototype.refreshSelf = function() {
 Refresh all the children of a widget
 */
 Widget.prototype.refreshChildren = function(changedTiddlers) {
-	var self = this,
+	var children = this.children,
 		refreshed = false;
-	$tw.utils.each(this.children,function(childWidget) {
-		refreshed = childWidget.refresh(changedTiddlers) || refreshed;
-	});
+	for (var i = 0; i < children.length; i++) {
+		refreshed = children[i].refresh(changedTiddlers) || refreshed;
+	}
 	return refreshed;
 };
 

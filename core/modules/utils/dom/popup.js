@@ -114,12 +114,14 @@ Popup.prototype.show = function(options) {
 	var info = this.popupInfo(options.domNode);
 	// Cancel any higher level popups
 	this.cancel(info.popupLevel);
+
 	// Store the popup details if not already there
 	if(!options.floating && this.findPopup(options.title) === -1) {
 		this.popups.push({
 			title: options.title,
 			wiki: options.wiki,
-			domNode: options.domNode
+			domNode: options.domNode,
+			noStateReference: options.noStateReference
 		});
 	}
 	// Set the state tiddler
@@ -134,9 +136,13 @@ Popup.prototype.show = function(options) {
 			height: options.domNode.offsetHeight
 		};
 	}
-	options.wiki.setTextReference(options.title,
-			"(" + rect.left + "," + rect.top + "," + 
-				rect.width + "," + rect.height + ")");
+	var popupRect = "(" + rect.left + "," + rect.top + "," + 
+				rect.width + "," + rect.height + ")";
+	if(options.noStateReference) {
+		options.wiki.setText(options.title,"text",undefined,popupRect);
+	} else {
+		options.wiki.setTextReference(options.title,popupRect);
+	}
 	// Add the click handler if we have any popups
 	if(this.popups.length > 0) {
 		this.rootElement.addEventListener("click",this,true);		
@@ -153,7 +159,11 @@ Popup.prototype.cancel = function(level) {
 	for(var t=level; t<numPopups; t++) {
 		var popup = this.popups.pop();
 		if(popup.title) {
-			popup.wiki.deleteTiddler(popup.title);
+			if(popup.noStateReference) {
+				popup.wiki.deleteTiddler(popup.title);
+			} else {
+				popup.wiki.deleteTiddler($tw.utils.parseTextReference(popup.title).title);
+        		}
 		}
 	}
 	if(this.popups.length === 0) {

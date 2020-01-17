@@ -8,14 +8,22 @@ method: save
 caption: TiddlySpot
 description: Free online service for hosting TiddlyWiki files
 
-TiddlySpot is a free hosting service for TiddlyWiki documents from Simon and Daniel Baird. The easiest way to get started is to sign up for a new wiki at http://tiddlyspot.com - by default you'll get the latest release of TiddlyWiki Classic.
+[[TiddlySpot|http://tiddlyspot.com]] is a free hosting service for TiddlyWiki documents from Simon Baird and Daniel Baird.
 
-You can upload an existing TiddlyWiki5 document from your local disc to TiddlySpot by following these steps:
+! Setting up a TiddlyWiki on TiddlySpot
+To set up a [[TiddlyWiki Classic|TiddlyWikiClassic]], you merely create a new wiki at http://tiddlyspot.com
+
+!!TiddlyWiki5 on TiddlySpot
+~TiddlyWiki5 also functions well on ~TiddlySpot but this version is not offered directly in the TiddlySpot set-up.
+
+The simplest way to create a new ~TiddlySpot with ~TiddlyWiki5 is probably through the community created site http://tiddlywiki5.tiddlyspot.com
+
+Alternatively, you can upload an existing ~TiddlyWiki5 document from your local disc to ~TiddlySpot by following these steps:
 
 # Sign up for a new wiki at http://tiddlyspot.com/, and remember the wiki name and password
 # Open your locally stored TiddlyWiki document in your browser
-# Fill in the TiddlySpot wikiname and password in ''Saving'' tab of the ''control panel'' {{$:/core/images/options-button}}
-# Click the {{$:/core/images/save-button}} ''save changes'' button. You should get a confirmation notification at the top right saying ''Saved wiki''. Saving can take several seconds if you're on a slow connection or working with a large wiki.
+# Fill in the TiddlySpot wikiname and password in ''Saving'' tab of the ''control panel'' <<.icon $:/core/images/options-button>>
+# Click the <<.icon $:/core/images/save-button>> ''save changes'' button. You should get a confirmation notification at the top right saying ''Saved wiki''. Saving can take several seconds if you're on a slow connection or working with a large wiki.
 # Navigate to your TiddlySpot URL at http://{wikiname}.tiddlyspot.com/
 
 Note that your password is sent unencrypted when using TiddlySpot. From http://faq.tiddlyspot.com/:
