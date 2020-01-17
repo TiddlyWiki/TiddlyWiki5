@@ -1,3 +1,4 @@
 title: $:/config/codemirror/lineWrapping
 type: bool
-text: true
+
+true

@@ -38,7 +38,7 @@ Command.prototype.execute = function() {
 			count++;
 		});
 	});
-	if(!count && self.params[1] !== "noerror") {
+	if(!count) {
 		self.callback("No tiddlers found in file \"" + self.params[0] + "\"");
 	} else {
 		self.callback(null);

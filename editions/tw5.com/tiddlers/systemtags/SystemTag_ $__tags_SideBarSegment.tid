@@ -7,5 +7,3 @@ title: SystemTag: $:/tags/SideBarSegment
 type: text/vnd.tiddlywiki
 
 The [[system tag|SystemTags]] `$:/tags/SideBarSegment` marks sidebar segments
-
-Note: You can rearrange the segments by drag-and-dropping the titles inside the tag pill <<tag $:/tags/SideBarSegment>>

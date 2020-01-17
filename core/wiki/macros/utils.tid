@@ -1,5 +1,0 @@
-title: $:/core/macros/utils
-
-\define colour(colour)
-$colour$
-\end

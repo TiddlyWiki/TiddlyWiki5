@@ -16,16 +16,7 @@ Filter operator returning its operand parsed as a list
 Export our filter function
 */
 exports.enlist = function(source,operator,options) {
-	var allowDuplicates = false;
-	switch(operator.suffix) {
-		case "raw":
-			allowDuplicates = true;
-			break;
-		case "dedupe":
-			allowDuplicates = false;
-			break;
-	}
-	var list = $tw.utils.parseStringArray(operator.operand,allowDuplicates);
+	var list = $tw.utils.parseStringArray(operator.operand);
 	if(operator.prefix === "!") {
 		var results = [];
 		source(function(tiddler,title) {

@@ -1,9 +1,0 @@
-caption: $:/tags/Macro
-created: 20200103092530990
-description: marks global macros
-modified: 20200103092606462
-tags: SystemTags
-title: SystemTag: $:/tags/Macro/View
-type: text/vnd.tiddlywiki
-
-The [[system tag|SystemTags]] `$:/tags/Macro/View` marks macros that are only made available within the main view templates and the preview panel.

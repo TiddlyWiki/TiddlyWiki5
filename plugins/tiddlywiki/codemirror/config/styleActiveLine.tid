@@ -1,3 +1,4 @@
 title: $:/config/codemirror/styleActiveLine
 type: bool
-text: false
+
+false

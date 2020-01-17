@@ -29,6 +29,8 @@ exports.init = function(parser) {
 exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
+	// Move past the match
+	this.parser.pos = this.matchRegExp.lastIndex;
 	// Get the match details
 	var template = $tw.utils.trim(this.match[2]),
 		textRef = $tw.utils.trim(this.match[1]);

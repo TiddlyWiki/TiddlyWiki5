@@ -18,8 +18,6 @@ exports.before = ["startup"];
 exports.after = ["load-modules"];
 exports.synchronous = true;
 
-var TITLE_INFO_PLUGIN = "$:/temp/info-plugin";
-
 exports.startup = function() {
 	// Collect up the info tiddlers
 	var infoTiddlerFields = {};
@@ -34,15 +32,15 @@ exports.startup = function() {
 			});
 		}
 	});
-	// Bake the info tiddlers into a plugin. We use the non-standard plugin-type "info" because ordinary plugins are only registered asynchronously after being loaded dynamically
+	// Bake the info tiddlers into a plugin
 	var fields = {
-		title: TITLE_INFO_PLUGIN,
+		title: "$:/temp/info-plugin",
 		type: "application/json",
 		"plugin-type": "info",
 		text: JSON.stringify({tiddlers: infoTiddlerFields},null,$tw.config.preferences.jsonSpaces)
 	};
 	$tw.wiki.addTiddler(new $tw.Tiddler(fields));
-	$tw.wiki.readPluginInfo([TITLE_INFO_PLUGIN]);
+	$tw.wiki.readPluginInfo();
 	$tw.wiki.registerPluginTiddlers("info");
 	$tw.wiki.unpackPluginTiddlers();
 };

@@ -13,12 +13,6 @@ tags: [[$:/tags/Stylesheet]]
     text-rendering: auto;
 }
 
-/* Avoid TW5's max-width: 100% */
-
-.katex svg {
-  max-width: initial;
-}
-
 /* Override font URLs */
 
 @font-face {

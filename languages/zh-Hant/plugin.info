@@ -4,6 +4,5 @@
 	"plugin-type": "language",
 	"description": "Chinese (Traditional)",
 	"author": "BramChen",
-	"core-version": ">=5.0.8",
-	"plugin-priority": 100
+	"core-version": ">=5.0.8"
 }

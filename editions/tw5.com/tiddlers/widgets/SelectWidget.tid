@@ -1,6 +1,6 @@
 caption: select
 created: 20131024141900000
-modified: 20190304122040876
+modified: 20160429175220241
 tags: Widgets
 title: SelectWidget
 type: text/vnd.tiddlywiki
@@ -35,7 +35,6 @@ The content of the `<$select>` widget should be one or more HTML `<option>` or `
 |field |The field name for the value in the current tiddler (defaults to "text") |
 |index |The index of a property in a [[DataTiddler|DataTiddlers]] (takes precedence over the field attribute) |
 |class |CSS classes to be assigned to the HTML select element |
-|tooltip |Optional tooltip |
 |default |Default value to be used if the tiddler, field or index specifies a missing value |
 |multiple |If present, switches to multiple selection mode |
 |size |The number of rows to display in multiple selection mode |
@@ -47,7 +46,7 @@ The content of the `<$select>` widget should be one or more HTML `<option>` or `
 
 This example sets the title of the current wiki [[$:/SiteTitle]] to one of a list of book titles:
 
-<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/SiteTitle' tooltip='Choose a new site title'>
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/SiteTitle'>
 <option>A Tale of Two Cities</option>
 <option>A New Kind of Science</option>
 <option>The Dice Man</option>

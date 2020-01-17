@@ -1,6 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/markdown",
-	"name": "Markdown",
-	"description": "Markdown parser based on markdown-js",
+	"description": "Markdown parser",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
 	"list": "readme usage"
 }

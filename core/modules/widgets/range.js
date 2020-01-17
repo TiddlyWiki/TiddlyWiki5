@@ -47,9 +47,11 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 		this.inputDomNode.setAttribute("step", this.increment);
 	}
 	this.inputDomNode.value = this.getValue();
+
+
 	// Add a click event handler
 	$tw.utils.addEventListeners(this.inputDomNode,[
-		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"}
+		{name: "input", handlerObject: this, handlerMethod: "handleChangeEvent"}
 	]);
 	// Insert the label into the DOM and render any children
 	parent.insertBefore(this.inputDomNode,nextSibling);
@@ -58,30 +60,19 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 
 RangeWidget.prototype.getValue = function() {
 	var tiddler = this.wiki.getTiddler(this.tiddlerTitle),
-		fieldName = this.tiddlerField || "text",
 		value   = this.defaultValue;
 	if(tiddler) {
-		if(this.tiddlerIndex) {
-			value = this.wiki.extractTiddlerDataItem(tiddler,this.tiddlerIndex,this.defaultValue || "");
+		if($tw.utils.hop(tiddler.fields,this.tiddlerField)) {
+			value = tiddler.fields[this.tiddlerField] || "";
 		} else {
-			if($tw.utils.hop(tiddler.fields,fieldName)) {
-				value = tiddler.fields[fieldName] || "";
-			} else {
-				value = this.defaultValue || "";
-			}
+			value = this.defaultValue || "";
 		}
 	}
 	return value;
 };
 
-RangeWidget.prototype.handleInputEvent = function(event) {
-	if(this.getValue() !== this.inputDomNode.value) {
-		if(this.tiddlerIndex) {
-			this.wiki.setText(this.tiddlerTitle,"",this.tiddlerIndex,this.inputDomNode.value);
-		} else {
-			this.wiki.setText(this.tiddlerTitle,this.tiddlerField,null,this.inputDomNode.value);
-		}
-	}
+RangeWidget.prototype.handleChangeEvent = function(event) {
+	this.wiki.setText(this.tiddlerTitle ,this.tiddlerField, null,this.inputDomNode.value);
 };
 
 /*
@@ -91,7 +82,6 @@ RangeWidget.prototype.execute = function() {
 	// Get the parameters from the attributes
 	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.tiddlerField = this.getAttribute("field");
-	this.tiddlerIndex = this.getAttribute("index");
 	this.minValue = this.getAttribute("min");
 	this.maxValue = this.getAttribute("max");
 	this.increment = this.getAttribute("increment");
@@ -106,16 +96,13 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RangeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes['min'] || changedAttributes['max'] || changedAttributes['increment'] || changedAttributes["default"] || changedAttributes["class"]) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes['min'] || changedAttributes['max'] || changedAttributes['increment'] || changedAttributes["default"] || changedAttributes["class"]) {
 		this.refreshSelf();
 		return true;
 	} else {
 		var refreshed = false;
 		if(changedTiddlers[this.tiddlerTitle]) {
-			var value = this.getValue();
-			if(this.inputDomNode.value !== value) {
-				this.inputDomNode.value = value;				
-			}
+			this.inputDomNode.checked = this.getValue();
 			refreshed = true;
 		}
 		return this.refreshChildren(changedTiddlers) || refreshed;

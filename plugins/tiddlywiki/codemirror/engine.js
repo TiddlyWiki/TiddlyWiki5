@@ -106,15 +106,10 @@ function CodeMirrorEngine(options) {
 
 	config.mode = options.type;
 	config.value = options.value;
-	if(this.widget.editTabIndex) {
-		config["tabindex"] = this.widget.editTabIndex;
-	}
 	// Create the CodeMirror instance
 	this.cm = window.CodeMirror(function(cmDomNode) {
 		// Note that this is a synchronous callback that is called before the constructor returns
-		if(!self.widget.document.isTiddlyWikiFakeDom) {
-			self.domNode.appendChild(cmDomNode);
-		}
+		self.domNode.appendChild(cmDomNode);
 	},config);
 
 	// Set up a change event handler

@@ -33,13 +33,9 @@ var PageScroller = function() {
 		};
 };
 
-PageScroller.prototype.isScrolling = function() {
-	return this.idRequestFrame !== null;
-}
-
-PageScroller.prototype.cancelScroll = function(srcWindow) {
+PageScroller.prototype.cancelScroll = function() {
 	if(this.idRequestFrame) {
-		this.cancelAnimationFrame.call(srcWindow,this.idRequestFrame);
+		this.cancelAnimationFrame.call(window,this.idRequestFrame);
 		this.idRequestFrame = null;
 	}
 };
@@ -57,26 +53,25 @@ PageScroller.prototype.handleEvent = function(event) {
 /*
 Handle a scroll event hitting the page document
 */
-PageScroller.prototype.scrollIntoView = function(element,callback) {
+PageScroller.prototype.scrollIntoView = function(element) {
 	var self = this,
-		duration = $tw.utils.getAnimationDuration(),
-	    srcWindow = element ? element.ownerDocument.defaultView : window;
+		duration = $tw.utils.getAnimationDuration();
 	// Now get ready to scroll the body
-	this.cancelScroll(srcWindow);
+	this.cancelScroll();
 	this.startTime = Date.now();
 	// Get the height of any position:fixed toolbars
-	var toolbar = srcWindow.document.querySelector(".tc-adjust-top-of-scroll"),
+	var toolbar = document.querySelector(".tc-adjust-top-of-scroll"),
 		offset = 0;
 	if(toolbar) {
 		offset = toolbar.offsetHeight;
 	}
 	// Get the client bounds of the element and adjust by the scroll position
 	var getBounds = function() {
-			var clientBounds = typeof callback === 'function' ? callback() : element.getBoundingClientRect(),
-				scrollPosition = $tw.utils.getScrollPosition(srcWindow);
+			var clientBounds = element.getBoundingClientRect(),
+				scrollPosition = $tw.utils.getScrollPosition();
 			return {
 				left: clientBounds.left + scrollPosition.x,
-				top: clientBounds.top + scrollPosition.y - offset,
+				top: clientBounds.top + scrollPosition.y,
 				width: clientBounds.width,
 				height: clientBounds.height
 			};
@@ -101,17 +96,17 @@ PageScroller.prototype.scrollIntoView = function(element,callback) {
 				t = ((Date.now()) - self.startTime) / duration;	
 			}
 			if(t >= 1) {
-				self.cancelScroll(srcWindow);
+				self.cancelScroll();
 				t = 1;
 			}
 			t = $tw.utils.slowInSlowOut(t);
-			var scrollPosition = $tw.utils.getScrollPosition(srcWindow),
+			var scrollPosition = $tw.utils.getScrollPosition(),
 				bounds = getBounds(),
-				endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,srcWindow.innerWidth),
-				endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,srcWindow.innerHeight);
-			srcWindow.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y) * t);
+				endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,window.innerWidth),
+				endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,window.innerHeight);
+			window.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y) * t - offset);
 			if(t < 1) {
-				self.idRequestFrame = self.requestAnimationFrame.call(srcWindow,drawFrame);
+				self.idRequestFrame = self.requestAnimationFrame.call(window,drawFrame);
 			}
 		};
 	drawFrame();

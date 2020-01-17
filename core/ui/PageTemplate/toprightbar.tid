@@ -3,7 +3,7 @@ tags: $:/tags/PageTemplate
 
 <span class="tc-topbar tc-topbar-right">
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/TopRightBar]!has[draft.of]]" variable="listItem" storyview="pop">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TopRightBar]!has[draft.of]]" variable="listItem">
 
 <$transclude tiddler=<<listItem>> mode="inline"/>
 

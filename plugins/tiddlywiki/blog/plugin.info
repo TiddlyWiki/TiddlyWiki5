@@ -1,6 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/blog",
-	"name": "Blog",
-	"description": "Blog publishing tools",
+	"description": "Tools for using TiddlyWiki to publish blogs",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
 	"list": "readme docs"
 }

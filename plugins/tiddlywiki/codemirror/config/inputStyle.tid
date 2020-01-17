@@ -1,3 +1,4 @@
 title: $:/config/codemirror/inputStyle
 type: string
-text: textarea
+
+textarea

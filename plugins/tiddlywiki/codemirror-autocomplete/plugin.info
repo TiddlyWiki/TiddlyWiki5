@@ -1,7 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/codemirror-autocomplete",
-	"name": "CodeMirror Autocomplete",
-	"description": "Autocompletion for CodeMirror",
-	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
+	"description": "CodeMirror AddOn: Autocompletion",
+	"author": "JeremyRuston",
 	"list": "readme"
 }

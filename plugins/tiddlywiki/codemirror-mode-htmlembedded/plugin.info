@@ -1,7 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/codemirror-mode-htmlembedded",
-	"name": "CodeMirror Mode HTML Embedded",
-	"description": "Embedded HTML highlighting mode for CodeMirror",
-	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
+	"description": "CodeMirror Mode: Embedded-HTML Highlighting",
+	"author": "JeremyRuston",
 	"list": "readme"
 }

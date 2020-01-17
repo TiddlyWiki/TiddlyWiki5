@@ -3,10 +3,8 @@ title: $:/core/ui/EditTemplate/body/editor
 <$edit
 
   field="text"
-  class="tc-edit-texteditor tc-edit-texteditor-body"
+  class="tc-edit-texteditor"
   placeholder={{$:/language/EditTemplate/Body/Placeholder}}
-  tabindex={{$:/config/EditTabIndex}}
-  focus={{{ [{$:/config/AutoFocus}match[text]then[true]] ~[[false]] }}}
 
 ><$set
 

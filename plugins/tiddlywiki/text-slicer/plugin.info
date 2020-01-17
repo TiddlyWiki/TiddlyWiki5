@@ -1,7 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/text-slicer",
-	"name": "Text Slicer",
 	"description": "Tools for slicing text into tiddlers",
-	"list": "readme docs",
-	"dependents": ["$:/plugins/tiddlywiki/sax"]
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"list": "readme docs"
 }

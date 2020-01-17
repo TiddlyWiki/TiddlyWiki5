@@ -34,13 +34,6 @@ Logger.prototype.log = function(/* args */) {
 };
 
 /*
-Log a structure as a table
-*/
-Logger.prototype.table = function(value) {
-	(console.table || console.log)(value);
-};
-
-/*
 Alert a message
 */
 Logger.prototype.alert = function(/* args */) {

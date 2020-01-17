@@ -36,8 +36,8 @@ exports.addClass = function(el,className) {
 	var c = el.className.split(" ");
 	if(c.indexOf(className) === -1) {
 		c.push(className);
-		el.className = c.join(" ");
 	}
+	el.className = c.join(" ");
 };
 
 exports.removeClass = function(el,className) {
@@ -82,12 +82,11 @@ Returns:
 		y: vertical scroll position in pixels
 	}
 */
-exports.getScrollPosition = function(srcWindow) {
-	var scrollWindow = srcWindow || window;
-	if("scrollX" in scrollWindow) {
-		return {x: scrollWindow.scrollX, y: scrollWindow.scrollY};
+exports.getScrollPosition = function() {
+	if("scrollX" in window) {
+		return {x: window.scrollX, y: window.scrollY};
 	} else {
-		return {x: scrollWindow.document.documentElement.scrollLeft, y: scrollWindow.document.documentElement.scrollTop};
+		return {x: document.documentElement.scrollLeft, y: document.documentElement.scrollTop};
 	}
 };
 
@@ -120,7 +119,7 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 Gets the bounding rectangle of an element in absolute page coordinates
 */
 exports.getBoundingPageRect = function(element) {
-	var scrollPos = $tw.utils.getScrollPosition(element.ownerDocument.defaultView),
+	var scrollPos = $tw.utils.getScrollPosition(),
 		clientRect = element.getBoundingClientRect();
 	return {
 		left: clientRect.left + scrollPos.x,
@@ -136,15 +135,11 @@ exports.getBoundingPageRect = function(element) {
 Saves a named password in the browser
 */
 exports.savePassword = function(name,password) {
-	var done = false;
 	try {
-		window.localStorage.setItem("tw5-password-" + name,password);
-		done = true;
+		if(window.localStorage) {
+			localStorage.setItem("tw5-password-" + name,password);
+		}
 	} catch(e) {
-	}
-	if(!done) {
-		$tw.savedPasswords = $tw.savedPasswords || Object.create(null);
-		$tw.savedPasswords[name] = password;
 	}
 };
 
@@ -152,15 +147,10 @@ exports.savePassword = function(name,password) {
 Retrieve a named password from the browser
 */
 exports.getPassword = function(name) {
-	var value;
 	try {
-		value = window.localStorage.getItem("tw5-password-" + name);
+		return window.localStorage ? localStorage.getItem("tw5-password-" + name) : "";
 	} catch(e) {
-	}
-	if(value !== undefined) {
-		return value;
-	} else {
-		return ($tw.savedPasswords || Object.create(null))[name] || "";
+		return "";
 	}
 };
 

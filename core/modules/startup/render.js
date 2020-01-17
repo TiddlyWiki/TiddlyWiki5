@@ -25,7 +25,7 @@ var PAGE_TEMPLATE_TITLE = "$:/core/ui/PageTemplate";
 
 // Time (in ms) that we defer refreshing changes to draft tiddlers
 var DRAFT_TIDDLER_TIMEOUT_TITLE = "$:/config/Drafts/TypingTimeout";
-var THROTTLE_REFRESH_TIMEOUT = 400;
+var DRAFT_TIDDLER_TIMEOUT = 400;
 
 exports.startup = function() {
 	// Set up the title
@@ -71,19 +71,18 @@ exports.startup = function() {
 		timerId;
 	function refresh() {
 		// Process the refresh
-		$tw.hooks.invokeHook("th-page-refreshing");
 		$tw.pageWidgetNode.refresh(deferredChanges);
 		deferredChanges = Object.create(null);
-		$tw.hooks.invokeHook("th-page-refreshed");
+   		$tw.hooks.invokeHook("th-page-refreshed");
 	}
 	// Add the change event handler
 	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
-		// Check if only tiddlers that are throttled have changed
-		var onlyThrottledTiddlersHaveChanged = true;
+		// Check if only drafts have changed
+		var onlyDraftsHaveChanged = true;
 		for(var title in changes) {
 			var tiddler = $tw.wiki.getTiddler(title);
-			if(!tiddler || !(tiddler.hasField("draft.of") || tiddler.hasField("throttle.refresh"))) {
-				onlyThrottledTiddlersHaveChanged = false;
+			if(!tiddler || !tiddler.hasField("draft.of")) {
+				onlyDraftsHaveChanged = false;
 			}
 		}
 		// Defer the change if only drafts have changed
@@ -91,10 +90,10 @@ exports.startup = function() {
 			clearTimeout(timerId);
 		}
 		timerId = null;
-		if(onlyThrottledTiddlersHaveChanged) {
+		if(onlyDraftsHaveChanged) {
 			var timeout = parseInt($tw.wiki.getTiddlerText(DRAFT_TIDDLER_TIMEOUT_TITLE,""),10);
 			if(isNaN(timeout)) {
-				timeout = THROTTLE_REFRESH_TIMEOUT;
+				timeout = DRAFT_TIDDLER_TIMEOUT;
 			}
 			timerId = setTimeout(refresh,timeout);
 			$tw.utils.extend(deferredChanges,changes);

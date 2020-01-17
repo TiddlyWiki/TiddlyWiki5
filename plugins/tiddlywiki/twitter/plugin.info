@@ -1,6 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/twitter",
-	"name": "Twitter",
-	"description": "Twitter embedding tools",
+	"description": "Twitter for TiddlyWiki",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
 	"list": "readme usage"
 }

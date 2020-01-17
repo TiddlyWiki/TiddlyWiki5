@@ -2,7 +2,6 @@ title: $:/core/macros/list
 tags: $:/tags/Macro
 
 \define list-links(filter,type:"ul",subtype:"li",class:"",emptyMessage)
-\whitespace trim
 <$type$ class="$class$">
 <$list filter="$filter$" emptyMessage=<<__emptyMessage__>>>
 <$subtype$>
@@ -21,13 +20,13 @@ tags: $:/tags/Macro
 \end
 
 \define list-links-draggable(tiddler,field:"list",type:"ul",subtype:"li",class:"",itemTemplate)
-\whitespace trim
-<span class="tc-links-draggable-list">
 <$vars targetTiddler="""$tiddler$""" targetField="""$field$""">
 <$type$ class="$class$">
 <$list filter="[list[$tiddler$!!$field$]]">
 <$droppable actions=<<list-links-draggable-drop-actions>> tag="""$subtype$""">
-<div class="tc-droppable-placeholder"/>
+<div class="tc-droppable-placeholder">
+&nbsp;
+</div>
 <div>
 <$transclude tiddler="""$itemTemplate$""">
 <$link to={{!!title}}>
@@ -49,39 +48,33 @@ tags: $:/tags/Macro
 </$droppable>
 </$tiddler>
 </$vars>
-</span>
 \end
 
-\define list-tagged-draggable-drop-actions(tag)
+\define list-tagged-draggable-drop-actions()
 <!-- Save the current ordering of the tiddlers with this tag -->
-<$set name="order" filter="[<__tag__>tagging[]]">
+<$set name="order" filter="[<tag>tagging[]]">
 <!-- Remove any list-after or list-before fields from the tiddlers with this tag -->
-<$list filter="[<__tag__>tagging[]]">
+<$list filter="[<tag>tagging[]]">
 <$action-deletefield $field="list-before"/>
 <$action-deletefield $field="list-after"/>
 </$list>
-<!-- Save the new order to the Tag Tiddler -->
-<$action-listops $tiddler=<<__tag__>> $field="list" $filter="+[enlist<order>] +[insertbefore:currentTiddler<actionTiddler>]"/>
+<!-- Assign the list field of the tag with the current ordering -->
+<$action-setfield $tiddler=<<tag>> $field="list" $value=<<order>>/>
+<!-- Add the newly inserted item to the list -->
+<$action-listops $tiddler=<<tag>> $field="list" $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
 <!-- Make sure the newly added item has the right tag -->
-<!-- Removing this line makes dragging tags within the dropdown work as intended -->
-<!--<$action-listops $tiddler=<<actionTiddler>> $tags=<<__tag__>>/>-->
-<!-- Using the following 5 lines as replacement makes dragging titles from outside into the dropdown apply the tag -->
-<$list filter="[<actionTiddler>!contains:tags<__tag__>]">
-<$fieldmangler tiddler=<<actionTiddler>>>
-<$action-sendmessage $message="tm-add-tag" $param=<<__tag__>>/>
-</$fieldmangler>
-</$list>
+<$action-listops $tiddler=<<actionTiddler>> $tags="[<tag>]"/>
 </$set>
 \end
 
 \define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div")
-\whitespace trim
-<span class="tc-tagged-draggable-list">
-<$set name="tag" value=<<__tag__>>>
-<$list filter="[<__tag__>tagging[]$subFilter$]" emptyMessage=<<__emptyMessage__>>>
+<$set name="tag" value="""$tag$""">
+<$list filter="[<tag>tagging[]$subFilter$]" emptyMessage=<<__emptyMessage__>>>
 <$elementTag$ class="tc-menu-list-item">
-<$droppable actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>""">
-<$elementTag$ class="tc-droppable-placeholder"/>
+<$droppable actions=<<list-tagged-draggable-drop-actions>>>
+<$elementTag$ class="tc-droppable-placeholder">
+&nbsp;
+</$elementTag$>
 <$elementTag$>
 <$transclude tiddler="""$itemTemplate$""">
 <$link to={{!!title}}>
@@ -93,12 +86,13 @@ tags: $:/tags/Macro
 </$elementTag$>
 </$list>
 <$tiddler tiddler="">
-<$droppable actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>""">
-<$elementTag$ class="tc-droppable-placeholder"/>
+<$droppable actions=<<list-tagged-draggable-drop-actions>>>
+<$elementTag$ class="tc-droppable-placeholder">
+&nbsp;
+</$elementTag$>
 <$elementTag$ style="height:0.5em;">
 </$elementTag$>
 </$droppable>
 </$tiddler>
 </$set>
-</span>
 \end

@@ -1,7 +1,0 @@
-title: Hidden Setting: New-Image Type
-tags: [[Hidden Setting]]
-type: text/vnd.tiddlywiki
-
-By default new images are created with the image-type `jpeg`
-
-The hidden setting in $:/config/NewImageType can be set to another Image-Type which is used for new Image Tiddlers, like `png`

@@ -17,8 +17,7 @@ var VideoParser = function(type,text,options) {
 			type: "element",
 			tag: "video",
 			attributes: {
-				controls: {type: "string", value: "controls"},
-				style: {type: "string", value: "width: 100%; object-fit: contain"}
+				controls: {type: "string", value: "controls"}
 			}
 		},
 		src;
@@ -30,9 +29,8 @@ var VideoParser = function(type,text,options) {
 	this.tree = [element];
 };
 
-exports["video/ogg"] = VideoParser;
-exports["video/webm"] = VideoParser;
 exports["video/mp4"] = VideoParser;
 exports["video/quicktime"] = VideoParser;
 
 })();
+

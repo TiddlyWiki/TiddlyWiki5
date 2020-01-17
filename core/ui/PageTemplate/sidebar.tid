@@ -1,7 +1,6 @@
 title: $:/core/ui/PageTemplate/sidebar
 tags: $:/tags/PageTemplate
 
-\whitespace trim
 \define config-title()
 $:/config/SideBarSegments/Visibility/$(listItem)$
 \end

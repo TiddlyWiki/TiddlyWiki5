@@ -1,3 +1,4 @@
 title: $:/config/codemirror/theme
 type: string
-text: default
+
+default

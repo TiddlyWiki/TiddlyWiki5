@@ -1,5 +1,0 @@
-title: $:/core/Filters/SessionTiddlers
-tags: $:/tags/Filter
-filter: [haschanged[]]
-description: {{$:/language/Filters/SessionTiddlers}}
-

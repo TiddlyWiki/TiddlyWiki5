@@ -31,14 +31,9 @@ var CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD = "$:/config/Navigation/Permalinkview
 var CONFIG_PERMALINKVIEW_UPDATE_ADDRESS_BAR = "$:/config/Navigation/Permalinkview/UpdateAddressBar"; // Can be "yes" (default) or "no"
 
 
-// Links to help, if there is no param
-var HELP_OPEN_EXTERNAL_WINDOW = "http://tiddlywiki.com/#WidgetMessage%3A%20tm-open-external-window";
-
 exports.startup = function() {
 	// Open startup tiddlers
-	openStartupTiddlers({
-		disableHistory: $tw.boot.disableStartupNavigation
-	});
+	openStartupTiddlers();
 	if($tw.browser) {
 		// Set up location hash update
 		$tw.wiki.addEventListener("change",function(changes) {
@@ -61,14 +56,6 @@ exports.startup = function() {
 		$tw.rootWidget.addEventListener("tm-browser-refresh",function(event) {
 			window.location.reload(true);
 		});
-		// Listen for tm-open-external-window message
-		$tw.rootWidget.addEventListener("tm-open-external-window",function(event) {
-			var paramObject = event.paramObject || {},
-				strUrl = event.param || HELP_OPEN_EXTERNAL_WINDOW,
-				strWindowName = paramObject.windowName,
-				strWindowFeatures = paramObject.windowFeatures;
-			window.open(strUrl, strWindowName, strWindowFeatures);
-		});
 		// Listen for the tm-print message
 		$tw.rootWidget.addEventListener("tm-print",function(event) {
 			(event.event.view || window).print();
@@ -82,7 +69,7 @@ exports.startup = function() {
 			storyList = $tw.hooks.invokeHook("th-opening-default-tiddlers-list",storyList);
 			$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
 			if(storyList[0]) {
-				$tw.wiki.addToHistory(storyList[0]);
+				$tw.wiki.addToHistory(storyList[0]);				
 			}
 		});
 		// Listen for the tm-permalink message
@@ -108,7 +95,6 @@ exports.startup = function() {
 
 /*
 Process the location hash to open the specified tiddlers. Options:
-disableHistory: if true $:/History is NOT updated
 defaultToCurrentStory: If true, the current story is retained as the default, instead of opening the default tiddlers
 */
 function openStartupTiddlers(options) {
@@ -149,18 +135,15 @@ function openStartupTiddlers(options) {
 	}
 	// Save the story list
 	$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
-	// Update history
-	if(!options.disableHistory) {
-		// If a target tiddler was specified add it to the history stack
-		if(target && target !== "") {
-			// The target tiddler doesn't need double square brackets, but we'll silently remove them if they're present
-			if(target.indexOf("[[") === 0 && target.substr(-2) === "]]") {
-				target = target.substr(2,target.length - 4);
-			}
-			$tw.wiki.addToHistory(target);
-		} else if(storyList.length > 0) {
-			$tw.wiki.addToHistory(storyList[0]);
-		}		
+	// If a target tiddler was specified add it to the history stack
+	if(target && target !== "") {
+		// The target tiddler doesn't need double square brackets, but we'll silently remove them if they're present
+		if(target.indexOf("[[") === 0 && target.substr(-2) === "]]") {
+			target = target.substr(2,target.length - 4);
+		}
+		$tw.wiki.addToHistory(target);
+	} else if(storyList.length > 0) {
+		$tw.wiki.addToHistory(storyList[0]);
 	}
 }
 

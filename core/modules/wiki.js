@@ -28,16 +28,6 @@ var USER_NAME_TITLE = "$:/status/UserName",
 	TIMESTAMP_DISABLE_TITLE = "$:/config/TimestampDisable";
 
 /*
-Add available indexers to this wiki
-*/
-exports.addIndexersToWiki = function() {
-	var self = this;
-	$tw.utils.each($tw.modules.applyMethods("indexer"),function(Indexer,name) {
-		self.addIndexer(new Indexer(self),name);
-	});
-};
-
-/*
 Get the value of a text reference. Text references can have any of these forms:
 	<tiddlertitle>
 	<tiddlertitle>!!<fieldname>
@@ -216,16 +206,6 @@ exports.isImageTiddler = function(title) {
 	if(tiddler) {		
 		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"];
 		return !!contentTypeInfo && contentTypeInfo.flags.indexOf("image") !== -1;
-	} else {
-		return null;
-	}
-};
-
-exports.isBinaryTiddler = function(title) {
-	var tiddler = this.getTiddler(title);
-	if(tiddler) {		
-		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"];
-		return !!contentTypeInfo && contentTypeInfo.encoding === "base64";
 	} else {
 		return null;
 	}
@@ -498,18 +478,11 @@ exports.getOrphanTitles = function() {
 Retrieves a list of the tiddler titles that are tagged with a given tag
 */
 exports.getTiddlersWithTag = function(tag) {
-	// Try to use the indexer
-	var self = this,
-		tagIndexer = this.getIndexer("TagIndexer"),
-		results = tagIndexer && tagIndexer.subIndexers[3].lookup(tag);
-	if(!results) {
-		// If not available, perform a manual scan
-		results = this.getGlobalCache("taglist-" + tag,function() {
-			var tagmap = self.getTagMap();
-			return self.sortByList(tagmap[tag],tag);
-		});
-	}
-	return results;
+	var self = this;
+	return this.getGlobalCache("taglist-" + tag,function() {
+		var tagmap = self.getTagMap();
+		return self.sortByList(tagmap[tag],tag);
+	});
 };
 
 /*
@@ -565,45 +538,6 @@ exports.findListingsOfTiddler = function(targetTitle,fieldName) {
 Sorts an array of tiddler titles according to an ordered list
 */
 exports.sortByList = function(array,listTitle) {
-	var self = this,
-		replacedTitles = Object.create(null);
-	function replaceItem(title) {
-		if(!$tw.utils.hop(replacedTitles, title)) {
-			replacedTitles[title] = true;
-			var newPos = -1,
-				tiddler = self.getTiddler(title);
-			if(tiddler) {
-				var beforeTitle = tiddler.fields["list-before"],
-					afterTitle = tiddler.fields["list-after"];
-				if(beforeTitle === "") {
-					newPos = 0;
-				} else if(afterTitle === "") {
-					newPos = titles.length;
-				} else if(beforeTitle) {
-					replaceItem(beforeTitle);
-					newPos = titles.indexOf(beforeTitle);
-				} else if(afterTitle) {
-					replaceItem(afterTitle);
-					newPos = titles.indexOf(afterTitle);
-					if(newPos >= 0) {
-						++newPos;
-					}
-				}
-				// We get the currPos //after// figuring out the newPos, because recursive replaceItem calls might alter title's currPos
-				var currPos = titles.indexOf(title);
-				if(newPos === -1) {
-					newPos = currPos;
-				}
-				if(currPos >= 0 && newPos !== currPos) {
-					titles.splice(currPos,1);
-					if(newPos >= currPos) {
-						newPos--;
-					}
-					titles.splice(newPos,0,title);
-				}
-			}
-		}
-	}
 	var list = this.getTiddlerList(listTitle);
 	if(!array || array.length === 0) {
 		return [];
@@ -627,7 +561,36 @@ exports.sortByList = function(array,listTitle) {
 		var sortedTitles = titles.slice(0);
 		for(t=0; t<sortedTitles.length; t++) {
 			title = sortedTitles[t];
-			replaceItem(title);
+			var currPos = titles.indexOf(title),
+				newPos = -1,
+				tiddler = this.getTiddler(title);
+			if(tiddler) {
+				var beforeTitle = tiddler.fields["list-before"],
+					afterTitle = tiddler.fields["list-after"];
+				if(beforeTitle === "") {
+					newPos = 0;
+				} else if(afterTitle === "") {
+					newPos = titles.length;
+				} else if(beforeTitle) {
+					newPos = titles.indexOf(beforeTitle);
+				} else if(afterTitle) {
+					newPos = titles.indexOf(afterTitle);
+					if(newPos >= 0) {
+						++newPos;
+					}
+				}
+				if(newPos === -1) {
+					newPos = currPos;
+				}
+				if(newPos !== currPos) {
+					titles.splice(currPos,1);
+					if(newPos >= currPos) {
+						newPos--;
+					}
+					titles.splice(newPos,0,title);
+				}
+			}
+
 		}
 		return titles;
 	}
@@ -1074,14 +1037,8 @@ Options available:
 	exclude: An array of tiddler titles to exclude from the search
 	invert: If true returns tiddlers that do not contain the specified string
 	caseSensitive: If true forces a case sensitive search
-	field: If specified, restricts the search to the specified field, or an array of field names
-	anchored: If true, forces all but regexp searches to be anchored to the start of text
-	excludeField: If true, the field options are inverted to specify the fields that are not to be searched
-	The search mode is determined by the first of these boolean flags to be true
-		literal: searches for literal string
-		whitespace: same as literal except runs of whitespace are treated as a single space
-		regexp: treats the search term as a regular expression
-		words: (default) treats search string as a list of tokens, and matches if all tokens are found, regardless of adjacency or ordering
+	literal: If true, searches for literal string, rather than separate search terms
+	field: If specified, restricts the search to the specified field
 */
 exports.search = function(text,options) {
 	options = options || {};
@@ -1090,28 +1047,12 @@ exports.search = function(text,options) {
 		invert = !!options.invert;
 	// Convert the search string into a regexp for each term
 	var terms, searchTermsRegExps,
-		flags = options.caseSensitive ? "" : "i",
-		anchor = options.anchored ? "^" : "";
+		flags = options.caseSensitive ? "" : "i";
 	if(options.literal) {
 		if(text.length === 0) {
 			searchTermsRegExps = null;
 		} else {
-			searchTermsRegExps = [new RegExp("(" + anchor + $tw.utils.escapeRegExp(text) + ")",flags)];
-		}
-	} else if(options.whitespace) {
-		terms = [];
-		$tw.utils.each(text.split(/\s+/g),function(term) {
-			if(term) {
-				terms.push($tw.utils.escapeRegExp(term));
-			}
-		});
-		searchTermsRegExps = [new RegExp("(" + anchor + terms.join("\\s+") + ")",flags)];
-	} else if(options.regexp) {
-		try {
-			searchTermsRegExps = [new RegExp("(" + text + ")",flags)];			
-		} catch(e) {
-			searchTermsRegExps = null;
-			console.log("Regexp error parsing /(" + text + ")/" + flags + ": ",e);
+			searchTermsRegExps = [new RegExp("(" + $tw.utils.escapeRegExp(text) + ")",flags)];
 		}
 	} else {
 		terms = text.split(/ +/);
@@ -1120,88 +1061,38 @@ exports.search = function(text,options) {
 		} else {
 			searchTermsRegExps = [];
 			for(t=0; t<terms.length; t++) {
-				searchTermsRegExps.push(new RegExp("(" + anchor + $tw.utils.escapeRegExp(terms[t]) + ")",flags));
+				searchTermsRegExps.push(new RegExp("(" + $tw.utils.escapeRegExp(terms[t]) + ")",flags));
 			}
 		}
-	}
-	// Accumulate the array of fields to be searched or excluded from the search
-	var fields = [];
-	if(options.field) {
-		if($tw.utils.isArray(options.field)) {
-			$tw.utils.each(options.field,function(fieldName) {
-				if(fieldName) {
-					fields.push(fieldName);					
-				}
-			});
-		} else {
-			fields.push(options.field);
-		}
-	}
-	// Use default fields if none specified and we're not excluding fields (excluding fields with an empty field array is the same as searching all fields)
-	if(fields.length === 0 && !options.excludeField) {
-		fields.push("title");
-		fields.push("tags");
-		fields.push("text");
 	}
 	// Function to check a given tiddler for the search term
 	var searchTiddler = function(title) {
 		if(!searchTermsRegExps) {
 			return true;
 		}
-		var notYetFound = searchTermsRegExps.slice();
-
 		var tiddler = self.getTiddler(title);
 		if(!tiddler) {
 			tiddler = new $tw.Tiddler({title: title, text: "", type: "text/vnd.tiddlywiki"});
 		}
 		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type] || $tw.config.contentTypeInfo["text/vnd.tiddlywiki"],
-			searchFields;
-		// Get the list of fields we're searching
-		if(options.excludeField) {
-			searchFields = Object.keys(tiddler.fields);
-			$tw.utils.each(fields,function(fieldName) {
-				var p = searchFields.indexOf(fieldName);
-				if(p !== -1) {
-					searchFields.splice(p,1);
+			match;
+		for(var t=0; t<searchTermsRegExps.length; t++) {
+			match = false;
+			if(options.field) {
+				match = searchTermsRegExps[t].test(tiddler.getFieldString(options.field));
+			} else {
+				// Search title, tags and body
+				if(contentTypeInfo.encoding === "utf8") {
+					match = match || searchTermsRegExps[t].test(tiddler.fields.text);
 				}
-			});
-		} else {
-			searchFields = fields;
+				var tags = tiddler.fields.tags ? tiddler.fields.tags.join("\0") : "";
+				match = match || searchTermsRegExps[t].test(tags) || searchTermsRegExps[t].test(tiddler.fields.title);
+			}
+			if(!match) {
+				return false;
+			}
 		}
-		for(var fieldIndex=0; notYetFound.length>0 && fieldIndex<searchFields.length; fieldIndex++) {
-			// Don't search the text field if the content type is binary
-			var fieldName = searchFields[fieldIndex];
-			if(fieldName === "text" && contentTypeInfo.encoding !== "utf8") {
-				break;
-			}
-			var str = tiddler.fields[fieldName],
-				t;
-			if(str) {
-				if($tw.utils.isArray(str)) {
-					// If the field value is an array, test each regexp against each field array entry and fail if each regexp doesn't match at least one field array entry
-					for(var s=0; s<str.length; s++) {
-						for(t=0; t<notYetFound.length;) {
-							if(notYetFound[t].test(str[s])) {
-								notYetFound.splice(t, 1);
-							} else {
-								t++;
-							}
-						}
-					}
-				} else {
-					// If the field isn't an array, force it to a string and test each regexp against it and fail if any do not match
-					str = tiddler.getFieldString(fieldName);
-					for(t=0; t<notYetFound.length;) {
-						if(notYetFound[t].test(str)) {
-							notYetFound.splice(t, 1);
-						} else {
-							t++;
-						}
-					}
-				}
-			}
-		};
-		return notYetFound.length == 0;
+		return true;
 	};
 	// Loop through all the tiddlers doing the search
 	var results = [],
@@ -1398,10 +1289,8 @@ fromPageRect: page coordinates of the origin of the navigation
 historyTitle: title of history tiddler (defaults to $:/HistoryList)
 */
 exports.addToHistory = function(title,fromPageRect,historyTitle) {
-	if(historyTitle) {
-		var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
-		story.addToHistory(title,fromPageRect);		
-	}
+	var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
+	story.addToHistory(title,fromPageRect);
 };
 
 /*
@@ -1412,25 +1301,8 @@ storyTitle: title of story tiddler (defaults to $:/StoryList)
 options: see story.js
 */
 exports.addToStory = function(title,fromTitle,storyTitle,options) {
-	if(storyTitle) {
-		var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
-		story.addToStory(title,fromTitle,options);		
-	}
-};
-
-/*
-Generate a title for the draft of a given tiddler
-*/
-exports.generateDraftTitle = function(title) {
-	var c = 0,
-		draftTitle,
-		username = this.getTiddlerText("$:/status/UserName"),
-		attribution = username ? " by " + username : "";
-	do {
-		draftTitle = "Draft " + (c ? (c + 1) + " " : "") + "of '" + title + "'" + attribution;
-		c++;
-	} while(this.tiddlerExists(draftTitle));
-	return draftTitle;
+	var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
+	story.addToStory(title,fromTitle,options);
 };
 
 /*
@@ -1458,26 +1330,6 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 		$tw.utils.extend(messages,upgraderMessages);
 	}
 	return messages;
-};
-
-// Determine whether a plugin by title is dynamically loadable
-exports.doesPluginRequireReload = function(title) {
-	return this.doesPluginInfoRequireReload(this.getPluginInfo(title) || this.getTiddlerDataCached(title));
-};
-
-// Determine whether a plugin info structure is dynamically loadable
-exports.doesPluginInfoRequireReload = function(pluginInfo) {
-	if(pluginInfo) {
-		var foundModule = false;
-		$tw.utils.each(pluginInfo.tiddlers,function(tiddler) {
-			if(tiddler.type === "application/javascript" && $tw.utils.hop(tiddler,"module-type")) {
-				foundModule = true;
-			}
-		});
-		return foundModule;
-	} else {
-		return null;
-	}
 };
 
 })();

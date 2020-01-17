@@ -20,8 +20,6 @@ Syncer.prototype.titleIsAnonymous = "$:/status/IsAnonymous";
 Syncer.prototype.titleIsReadOnly = "$:/status/IsReadOnly";
 Syncer.prototype.titleUserName = "$:/status/UserName";
 Syncer.prototype.titleSyncFilter = "$:/config/SyncFilter";
-Syncer.prototype.titleSyncPollingInterval = "$:/config/SyncPollingInterval";
-Syncer.prototype.titleSyncDisableLazyLoading = "$:/config/SyncDisableLazyLoading";
 Syncer.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
 Syncer.prototype.taskTimerInterval = 1 * 1000; // Interval for sync timer
 Syncer.prototype.throttleInterval = 1 * 1000; // Defer saving tiddlers if they've changed in the last 1s...
@@ -45,7 +43,7 @@ function Syncer(options) {
 	this.taskTimerInterval = options.taskTimerInterval || this.taskTimerInterval;
 	this.throttleInterval = options.throttleInterval || this.throttleInterval;
 	this.fallbackInterval = options.fallbackInterval || this.fallbackInterval;
-	this.pollTimerInterval = options.pollTimerInterval || parseInt(this.wiki.getTiddlerText(this.titleSyncPollingInterval,""),10) || this.pollTimerInterval;
+	this.pollTimerInterval = options.pollTimerInterval || this.pollTimerInterval;
 	this.logging = "logging" in options ? options.logging : true;
 	// Make a logger
 	this.logger = new $tw.utils.Logger("syncer" + ($tw.browser ? "-browser" : "") + ($tw.node ? "-server" : "")  + (this.syncadaptor.name ? ("-" + this.syncadaptor.name) : ""),{
@@ -88,7 +86,7 @@ function Syncer(options) {
 		});
 	}
 	// Listen out for lazyLoad events
-	if(!this.disableUI && $tw.wiki.getTiddlerText(this.titleSyncDisableLazyLoading) !== "yes") {
+	if(!this.disableUI) {
 		this.wiki.addEventListener("lazyLoad",function(title) {
 			self.handleLazyLoadEvent(title);
 		});		
@@ -155,7 +153,7 @@ Save an incoming tiddler in the store, and updates the associated tiddlerInfo
 */
 Syncer.prototype.storeTiddler = function(tiddlerFields,hasBeenLazyLoaded) {
 	// Save the tiddler
-	var tiddler = new $tw.Tiddler(tiddlerFields);
+	var tiddler = new $tw.Tiddler(this.wiki.getTiddler(tiddlerFields.title),tiddlerFields);
 	this.wiki.addTiddler(tiddler);
 	// Save the tiddler revision and changeCount details
 	this.tiddlerInfo[tiddlerFields.title] = {

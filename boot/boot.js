@@ -52,63 +52,6 @@ $tw.utils.isArray = function(value) {
 };
 
 /*
-Check if an array is equal by value and by reference.
-*/
-$tw.utils.isArrayEqual = function(array1,array2) {
-	if(array1 === array2) {
-		return true;
-	}
-	array1 = array1 || [];
-	array2 = array2 || [];
-	if(array1.length !== array2.length) {
-		return false;
-	}
-	return array1.every(function(value,index) {
-		return value === array2[index];
-	});
-};
-
-/*
-Push entries onto an array, removing them first if they already exist in the array
-	array: array to modify (assumed to be free of duplicates)
-	value: a single value to push or an array of values to push
-*/
-$tw.utils.pushTop = function(array,value) {
-	var t,p;
-	if($tw.utils.isArray(value)) {
-		// Remove any array entries that are duplicated in the new values
-		if(value.length !== 0) {
-			if(array.length !== 0) {
-				if(value.length < array.length) {
-					for(t=0; t<value.length; t++) {
-						p = array.indexOf(value[t]);
-						if(p !== -1) {
-							array.splice(p,1);
-						}
-					}
-				} else {
-					for(t=array.length-1; t>=0; t--) {
-						p = value.indexOf(array[t]);
-						if(p !== -1) {
-							array.splice(t,1);
-						}
-					}
-				}
-			}
-			// Push the values on top of the main array
-			array.push.apply(array,value);
-		}
-	} else {
-		p = array.indexOf(value);
-		if(p !== -1) {
-			array.splice(p,1);
-		}
-		array.push(value);
-	}
-	return array;
-};
-
-/*
 Determine if a value is a date
 */
 $tw.utils.isDate = function(value) {
@@ -146,9 +89,7 @@ Helper for making DOM elements
 tag: tag name
 options: see below
 Options include:
-namespace: defaults to http://www.w3.org/1999/xhtml
 attributes: hashmap of attribute values
-style: hashmap of styles
 text: text to add as a child node
 children: array of further child nodes
 innerHTML: optional HTML for element
@@ -158,7 +99,7 @@ eventListeners: array of event listeners (this option won't work until $tw.utils
 */
 $tw.utils.domMaker = function(tag,options) {
 	var doc = options.document || document;
-	var element = doc.createElementNS(options.namespace || "http://www.w3.org/1999/xhtml",tag);
+	var element = doc.createElement(tag);
 	if(options["class"]) {
 		element.className = options["class"];
 	}
@@ -173,9 +114,6 @@ $tw.utils.domMaker = function(tag,options) {
 	}
 	$tw.utils.each(options.attributes,function(attribute,name) {
 		element.setAttribute(name,attribute);
-	});
-	$tw.utils.each(options.style,function(value,name) {
-		element.style[name] = value;
 	});
 	if(options.eventListeners) {
 		$tw.utils.addEventListeners(element,options.eventListeners);
@@ -314,13 +252,13 @@ $tw.utils.parseDate = function(value) {
 // Stringify an array of tiddler titles into a list string
 $tw.utils.stringifyList = function(value) {
 	if($tw.utils.isArray(value)) {
-		var result = new Array(value.length);
-		for(var t=0, l=value.length; t<l; t++) {
+		var result = [];
+		for(var t=0; t<value.length; t++) {
 			var entry = value[t] || "";
 			if(entry.indexOf(" ") !== -1) {
-				result[t] = "[[" + entry + "]]";
+				result.push("[[" + entry + "]]");
 			} else {
-				result[t] = entry;
+				result.push(entry);
 			}
 		}
 		return result.join(" ");
@@ -330,7 +268,7 @@ $tw.utils.stringifyList = function(value) {
 };
 
 // Parse a string array from a bracketted list. For example "OneTiddler [[Another Tiddler]] LastOne"
-$tw.utils.parseStringArray = function(value, allowDuplicate) {
+$tw.utils.parseStringArray = function(value) {
 	if(typeof value === "string") {
 		var memberRegExp = /(?:^|[^\S\xA0])(?:\[\[(.*?)\]\])(?=[^\S\xA0]|$)|([\S\xA0]+)/mg,
 			results = [], names = {},
@@ -339,7 +277,7 @@ $tw.utils.parseStringArray = function(value, allowDuplicate) {
 			match = memberRegExp.exec(value);
 			if(match) {
 				var item = match[1] || match[2];
-				if(item !== undefined && (!$tw.utils.hop(names,item) || allowDuplicate)) {
+				if(item !== undefined && !$tw.utils.hop(names,item)) {
 					results.push(item);
 					names[item] = true;
 				}
@@ -925,61 +863,6 @@ $tw.Tiddler.prototype.hasField = function(field) {
 };
 
 /*
-Compare two tiddlers for equality
-tiddler: the tiddler to compare
-excludeFields: array of field names to exclude from the comparison
-*/
-$tw.Tiddler.prototype.isEqual = function(tiddler,excludeFields) {
-	if(!(tiddler instanceof $tw.Tiddler)) {
-		return false;
-	}
-	excludeFields = excludeFields || [];
-	var self = this,
-		differences = []; // Fields that have differences
-	// Add to the differences array
-	function addDifference(fieldName) {
-		// Check for this field being excluded
-		if(excludeFields.indexOf(fieldName) === -1) {
-			// Save the field as a difference
-			$tw.utils.pushTop(differences,fieldName);
-		}
-	}
-	// Returns true if the two values of this field are equal
-	function isFieldValueEqual(fieldName) {
-		var valueA = self.fields[fieldName],
-			valueB = tiddler.fields[fieldName];
-		// Check for identical string values
-		if(typeof(valueA) === "string" && typeof(valueB) === "string" && valueA === valueB) {
-			return true;
-		}
-		// Check for identical array values
-		if($tw.utils.isArray(valueA) && $tw.utils.isArray(valueB) && $tw.utils.isArrayEqual(valueA,valueB)) {
-			return true;
-		}
-		// Check for identical date values
-		if($tw.utils.isDate(valueA) && $tw.utils.isDate(valueB) && valueA.getTime() === valueB.getTime()) {
-			return true;
-		}
-		// Otherwise the fields must be different
-		return false;
-	}
-	// Compare our fields
-	for(var fieldName in this.fields) {
-		if(!isFieldValueEqual(fieldName)) {
-			addDifference(fieldName);
-		}
-	}
-	// There's a difference for every field in the other tiddler that we don't have
-	for(fieldName in tiddler.fields) {
-		if(!(fieldName in this.fields)) {
-			addDifference(fieldName);
-		}
-	}
-	// Return whether there were any differences
-	return differences.length === 0;
-};
-
-/*
 Register and install the built in tiddler field modules
 */
 $tw.modules.define("$:/boot/tiddlerfields/modified","tiddlerfield",{
@@ -1013,7 +896,7 @@ $tw.modules.define("$:/boot/tiddlerfields/list","tiddlerfield",{
 /*
 Wiki constructor. State is stored in private members that only a small number of privileged accessor methods have direct access. Methods added via the prototype have to use these accessors and cannot access the state data directly.
 options include:
-enableIndexers - Array of indexer names to enable, or null to use all available indexers
+shadowTiddlers: Array of shadow tiddlers to be added
 */
 $tw.Wiki = function(options) {
 	options = options || {};
@@ -1028,31 +911,14 @@ $tw.Wiki = function(options) {
 		},
 		pluginTiddlers = [], // Array of tiddlers containing registered plugins, ordered by priority
 		pluginInfo = Object.create(null), // Hashmap of parsed plugin content
-		shadowTiddlers = Object.create(null), // Hashmap by title of {source:, tiddler:}
+		shadowTiddlers = options.shadowTiddlers || Object.create(null), // Hashmap by title of {source:, tiddler:}
 		shadowTiddlerTitles = null,
 		getShadowTiddlerTitles = function() {
 			if(!shadowTiddlerTitles) {
 				shadowTiddlerTitles = Object.keys(shadowTiddlers);
 			}
 			return shadowTiddlerTitles;
-		},
-		enableIndexers = options.enableIndexers || null,
-		indexers = [],
-		indexersByName = Object.create(null);
-
-	this.addIndexer = function(indexer,name) {
-		// Bail if this indexer is not enabled
-		if(enableIndexers && enableIndexers.indexOf(name) === -1) {
-			return;
-		}
-		indexers.push(indexer);
-		indexersByName[name] = indexer;
-		indexer.init();
-	};
-
-	this.getIndexer = function(name) {
-		return indexersByName[name] || null;
-	};
+		};
 
 	// Add a tiddler to the store
 	this.addTiddler = function(tiddler) {
@@ -1065,33 +931,12 @@ $tw.Wiki = function(options) {
 			if(title) {
 // Uncomment the following line for detailed logs of all tiddler writes
 // console.log("Adding",title,tiddler)
-				// Record the old tiddler state
-				var updateDescriptor = {
-					old: {
-						tiddler: this.getTiddler(title),
-						shadow: this.isShadowTiddler(title),
-						exists: this.tiddlerExists(title)
-					}
-				}
-				// Save the new tiddler
 				tiddlers[title] = tiddler;
-				// Check we've got it's title
 				if(tiddlerTitles && tiddlerTitles.indexOf(title) === -1) {
 					tiddlerTitles.push(title);
 				}
-				// Record the new tiddler state
-				updateDescriptor["new"] = {
-					tiddler: tiddler,
-					shadow: this.isShadowTiddler(title),
-					exists: this.tiddlerExists(title)
-				}
-				// Update indexes
 				this.clearCache(title);
 				this.clearGlobalCache();
-				$tw.utils.each(indexers,function(indexer) {
-					indexer.update(updateDescriptor);
-				});
-				// Queue a change event
 				this.enqueueTiddlerEvent(title);
 			}
 		}
@@ -1102,36 +947,15 @@ $tw.Wiki = function(options) {
 // Uncomment the following line for detailed logs of all tiddler deletions
 // console.log("Deleting",title)
 		if($tw.utils.hop(tiddlers,title)) {
-			// Record the old tiddler state
-			var updateDescriptor = {
-				old: {
-					tiddler: this.getTiddler(title),
-					shadow: this.isShadowTiddler(title),
-					exists: this.tiddlerExists(title)
-				}
-			}
-			// Delete the tiddler
 			delete tiddlers[title];
-			// Delete it from the list of titles
 			if(tiddlerTitles) {
 				var index = tiddlerTitles.indexOf(title);
 				if(index !== -1) {
 					tiddlerTitles.splice(index,1);
 				}				
 			}
-			// Record the new tiddler state
-			updateDescriptor["new"] = {
-				tiddler: this.getTiddler(title),
-				shadow: this.isShadowTiddler(title),
-				exists: this.tiddlerExists(title)
-			}
-			// Update indexes
 			this.clearCache(title);
 			this.clearGlobalCache();
-			$tw.utils.each(indexers,function(indexer) {
-				indexer.update(updateDescriptor);
-			});
-			// Queue a change event
 			this.enqueueTiddlerEvent(title,true);
 		}
 	};
@@ -1218,6 +1042,7 @@ $tw.Wiki = function(options) {
 				callback(tiddlers[title],title);
 			}
 		}
+
 	};
 
 	// Test for the existence of a tiddler (excludes shadow tiddlers)
@@ -1237,39 +1062,15 @@ $tw.Wiki = function(options) {
 		return null;
 	};
 
-	// Get an array of all the currently recognised plugin types
-	this.getPluginTypes = function() {
-		var types = [];
-		$tw.utils.each(pluginTiddlers,function(pluginTiddler) {
-			var pluginType = pluginTiddler.fields["plugin-type"];
-			if(pluginType && types.indexOf(pluginType) === -1) {
-				types.push(pluginType);
-			}
-		});
-		return types;
-	};
-
-	// Read plugin info for all plugins, or just an array of titles. Returns the number of plugins updated or deleted
-	this.readPluginInfo = function(titles) {
-		var results = {
-			modifiedPlugins: [],
-			deletedPlugins: []
-		};
-		$tw.utils.each(titles || getTiddlerTitles(),function(title) {
+	// Read plugin info for all plugins
+	this.readPluginInfo = function() {
+		for(var title in tiddlers) {
 			var tiddler = tiddlers[title];
-			if(tiddler) {
-				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type")) {
-					pluginInfo[tiddler.fields.title] = JSON.parse(tiddler.fields.text);
-					results.modifiedPlugins.push(tiddler.fields.title);
-				}
-			} else {
-				if(pluginInfo[title]) {
-					delete pluginInfo[title];					
-					results.deletedPlugins.push(title);
-				}
+			if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type")) {
+				pluginInfo[tiddler.fields.title] = JSON.parse(tiddler.fields.text);
 			}
-		});
-		return results;
+
+		}
 	};
 
 	// Get plugin info for a plugin
@@ -1277,15 +1078,14 @@ $tw.Wiki = function(options) {
 		return pluginInfo[title];
 	};
 
-	// Register the plugin tiddlers of a particular type, or null/undefined for any type, optionally restricting registration to an array of tiddler titles. Return the array of titles affected
+	// Register the plugin tiddlers of a particular type, optionally restricting registration to an array of tiddler titles. Return the array of titles affected
 	this.registerPluginTiddlers = function(pluginType,titles) {
 		var self = this,
 			registeredTitles = [],
 			checkTiddler = function(tiddler,title) {
-				if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] && (!pluginType || tiddler.fields["plugin-type"] === pluginType)) {
+				if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] === pluginType) {
 					var disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
 					if(title === "$:/core" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
-						self.unregisterPluginTiddlers(null,[title]); // Unregister the plugin if it's already registered
 						pluginTiddlers.push(tiddler);
 						registeredTitles.push(tiddler.fields.title);
 					}
@@ -1303,19 +1103,19 @@ $tw.Wiki = function(options) {
 		return registeredTitles;
 	};
 
-	// Unregister the plugin tiddlers of a particular type, or null/undefined for any type, optionally restricting unregistering to an array of tiddler titles. Returns an array of the titles affected
-	this.unregisterPluginTiddlers = function(pluginType,titles) {
+	// Unregister the plugin tiddlers of a particular type, returning an array of the titles affected
+	this.unregisterPluginTiddlers = function(pluginType) {
 		var self = this,
-			unregisteredTitles = [];
+			titles = [];
 		// Remove any previous registered plugins of this type
 		for(var t=pluginTiddlers.length-1; t>=0; t--) {
 			var tiddler = pluginTiddlers[t];
-			if(tiddler.fields["plugin-type"] && (!pluginType || tiddler.fields["plugin-type"] === pluginType) && (!titles || titles.indexOf(tiddler.fields.title) !== -1)) {
-				unregisteredTitles.push(tiddler.fields.title);
+			if(tiddler.fields["plugin-type"] === pluginType) {
+				titles.push(tiddler.fields.title);
 				pluginTiddlers.splice(t,1);
 			}
 		}
-		return unregisteredTitles;
+		return titles;
 	};
 
 	// Unpack the currently registered plugins, creating shadow tiddlers for their constituent tiddlers
@@ -1356,14 +1156,8 @@ $tw.Wiki = function(options) {
 		shadowTiddlerTitles = null;
 		this.clearCache(null);
 		this.clearGlobalCache();
-		$tw.utils.each(indexers,function(indexer) {
-			indexer.rebuild();
-		});
 	};
 
-	if(this.addIndexersToWiki) {
-		this.addIndexersToWiki();
-	}
 };
 
 // Dummy methods that will be filled in after boot
@@ -1558,40 +1352,8 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/html","tiddlerdeserializer",{
 });
 $tw.modules.define("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
 	"application/json": function(text,fields) {
-		var isTiddlerValid = function(data) {
-				// Not valid if it's not an object with a title property
-				if(typeof(data) !== "object" || !$tw.utils.hop(data,"title")) {
-					return false;
-				}
-				for(var f in data) {
-					if($tw.utils.hop(data,f)) {
-						// Check field name doesn't contain whitespace or control characters
-						if(typeof(data[f]) !== "string" || /[\x00-\x1F\s]/.test(f)) {
-							return false;
-						}
-					}
-				}
-				return true;
-			},
-			isTiddlerArrayValid = function(data) {
-				for(var t=0; t<data.length; t++) {
-					if(!isTiddlerValid(data[t])) {
-						return false;
-					}
-				}
-				return true;
-			},
-			data = JSON.parse(text);
-		if($tw.utils.isArray(data) && isTiddlerArrayValid(data)) {
-			return data;
-		} else if(isTiddlerValid(data)) {
-			return [data];
-		} else {
-			// Plain JSON file
-			fields.text = text;
-			fields.type = "application/json";
-			return [fields];
-		}
+		var data = JSON.parse(text);
+		return $tw.utils.isArray(data) ? data : [data];
 	}
 });
 
@@ -1744,11 +1506,9 @@ $tw.loadTiddlersFromFile = function(filepath,fields) {
 		typeInfo = type ? $tw.config.contentTypeInfo[type] : null,
 		data = fs.readFileSync(filepath,typeInfo ? typeInfo.encoding : "utf8"),
 		tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
+		metadata;
+	if(ext !== ".json" && tiddlers.length === 1) {
 		metadata = $tw.loadMetadataForFile(filepath);
-	if(metadata) {
-		if(type === "application/json") {
-			tiddlers = [{text: data, type: "application/json"}];
-		}
 		tiddlers = [$tw.utils.extend({},tiddlers[0],metadata)];
 	}
 	return {filepath: filepath, type: type, tiddlers: tiddlers, hasMetaFile: !!metadata};
@@ -1978,10 +1738,8 @@ $tw.loadPlugin = function(name,paths) {
 		var pluginFields = $tw.loadPluginFolder(pluginPath);
 		if(pluginFields) {
 			$tw.wiki.addTiddler(pluginFields);
-			return;
 		}
 	}
-	console.log("Warning: Cannot find plugin '" + name + "'");
 };
 
 /*
@@ -1995,7 +1753,7 @@ $tw.getLibraryItemSearchPaths = function(libraryPath,envVar) {
 	if(env) {
 		env.split(path.delimiter).map(function(item) {
 			if(item) {
-				pluginPaths.push(item);
+				pluginPaths.push(item)
 			}
 		});
 	}
@@ -2131,21 +1889,6 @@ $tw.loadTiddlersNode = function() {
 	});
 	// Load the core tiddlers
 	$tw.wiki.addTiddler($tw.loadPluginFolder($tw.boot.corePath));
-	// Load any extra plugins
-	$tw.utils.each($tw.boot.extraPlugins,function(name) {
-		if(name.charAt(0) === "+") { // Relative path to plugin
-			var pluginFields = $tw.loadPluginFolder(name.substring(1));;
-			if(pluginFields) {
-				$tw.wiki.addTiddler(pluginFields);
-			}
-		} else {
-			var parts = name.split("/"),
-				type = parts[0];
-			if(parts.length  === 3 && ["plugins","themes","languages"].indexOf(type) !== -1) {
-				$tw.loadPlugins([parts[1] + "/" + parts[2]],$tw.config[type + "Path"],$tw.config[type + "EnvVar"]);
-			}			
-		}
-	});
 	// Load the tiddlers from the wiki directory
 	if($tw.boot.wikiPath) {
 		$tw.boot.wikiInfo = $tw.loadWikiTiddlers($tw.boot.wikiPath);
@@ -2209,12 +1952,6 @@ $tw.boot.startup = function(options) {
 		if($tw.boot.argv.length === 0) {
 			$tw.boot.argv = ["--help"];
 		}
-		// Parse any extra plugin references
-		$tw.boot.extraPlugins = $tw.boot.extraPlugins || [];
-		while($tw.boot.argv[0] && $tw.boot.argv[0].indexOf("+") === 0) {
-			$tw.boot.extraPlugins.push($tw.boot.argv[0].substring(1));
-			$tw.boot.argv.splice(0,1);
-		}
 		// If the first command line argument doesn't start with `--` then we
 		// interpret it as the path to the wiki folder, which will otherwise default
 		// to the current folder
@@ -2256,8 +1993,6 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("application/font-woff","base64",".woff");
 	$tw.utils.registerFileType("application/x-font-ttf","base64",".woff");
 	$tw.utils.registerFileType("audio/ogg","base64",".ogg");
-	$tw.utils.registerFileType("video/ogg","base64",[".ogm",".ogv",".ogg"]);
-	$tw.utils.registerFileType("video/webm","base64",".webm");
 	$tw.utils.registerFileType("video/mp4","base64",".mp4");
 	$tw.utils.registerFileType("audio/mp3","base64",".mp3");
 	$tw.utils.registerFileType("audio/mp4","base64",[".mp4",".m4a"]);
@@ -2302,8 +2037,6 @@ $tw.boot.startup = function(options) {
 	if($tw.preloadTiddlers) {
 		$tw.wiki.addTiddlers($tw.preloadTiddlers);
 	}
-	// Give hooks a chance to modify the store
-	$tw.hooks.invokeHook("th-boot-tiddlers-loaded");
 	// Unpack plugin tiddlers
 	$tw.wiki.readPluginInfo();
 	$tw.wiki.registerPluginTiddlers("plugin",$tw.safeMode ? ["$:/core"] : undefined);

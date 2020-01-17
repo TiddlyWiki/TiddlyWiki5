@@ -1,7 +1,0 @@
-title: $:/core/ui/KeyboardShortcuts/new-tiddler
-tags: $:/tags/KeyboardShortcut
-key: ((new-tiddler))
-
-<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
-{{$:/core/ui/Actions/new-tiddler}}
-</$navigator>

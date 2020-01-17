@@ -17,35 +17,11 @@ Export our filter function
 */
 exports.search = function(source,operator,options) {
 	var invert = operator.prefix === "!";
-	if(operator.suffixes) {
-		var hasFlag = function(flag) {
-				return (operator.suffixes[1] || []).indexOf(flag) !== -1;
-			},
-			excludeFields = false,
-			fieldList = operator.suffixes[0] || [],
-			firstField = fieldList[0] || "", 
-			firstChar = firstField.charAt(0),
-			fields;
-		if(firstChar === "-") {
-			fields = [firstField.slice(1)].concat(fieldList.slice(1));
-			excludeFields = true;
-		} else if(fieldList[0] === "*"){
-			fields = [];
-			excludeFields = true;
-		} else {
-			fields = fieldList.slice(0);
-		}
+	if(operator.suffix) {
 		return options.wiki.search(operator.operand,{
 			source: source,
 			invert: invert,
-			field: fields,
-			excludeField: excludeFields,
-			caseSensitive: hasFlag("casesensitive"),
-			literal: hasFlag("literal"),
-			whitespace: hasFlag("whitespace"),
-			anchored: hasFlag("anchored"),
-			regexp: hasFlag("regexp"),
-			words: hasFlag("words")
+			field: operator.suffix
 		});
 	} else {
 		return options.wiki.search(operator.operand,{

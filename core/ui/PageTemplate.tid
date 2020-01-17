@@ -1,6 +1,5 @@
 title: $:/core/ui/PageTemplate
 
-\whitespace trim
 \define containerClasses()
 tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 \end
@@ -12,13 +11,15 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 
 <$set name="tv-config-toolbar-class" value={{$:/config/Toolbar/ButtonClass}}>
 
-<$set name="tv-show-missing-links" value={{$:/config/MissingLinks}}>
-
 <$set name="storyviewTitle" value={{$:/view}}>
 
 <$set name="tv-storyview-single-tiddler-mode" value={{{ [<storyviewTitle>getstoryviewmode[singletiddlermode]] }}}>
 
-<$set name="languageTitle" value={{{ [{$:/language}get[name]] }}}>
+<$set name="currentTiddler" value={{$:/language}}>
+
+<$set name="languageTitle" value={{!!name}}>
+
+<$set name="currentTiddler" value="">
 
 <div class=<<containerClasses>>>
 
@@ -37,6 +38,8 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 </$navigator>
 
 </div>
+
+</$set>
 
 </$set>
 

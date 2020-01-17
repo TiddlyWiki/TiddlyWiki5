@@ -2,29 +2,35 @@ title: $:/core/macros/tag-picker
 tags: $:/tags/Macro
 
 \define add-tag-actions()
-<$action-sendmessage $message="tm-add-tag" $param={{{ [<newTagNameTiddler>get[text]] }}}/>
-<$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
+<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/NewTagName}}/>
+<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
+\end
+
+\define add-tag-actions()
+<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/NewTagName}}/>
+<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
 \end
 
 \define tag-button()
-<$button class="tc-btn-invisible" tag="a" tooltip={{$:/language/EditTemplate/Tags/Add/Button/Hint}}>
-<$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
-<$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
+<$button class="tc-btn-invisible" tag="a">
+$(actions)$
+<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
 <$macrocall $name="tag-pill" tag=<<tag>>/>
 </$button>
 \end
 
-\define tag-picker-inner()
+\define tag-picker(actions)
+<$set name="actions" value="""$actions$""">
 <div class="tc-edit-add-tag">
 <span class="tc-add-tag-name">
 <$keyboard key="ENTER" actions=<<add-tag-actions>>>
-<$edit-text tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}}/>
+<$edit-text tiddler="$:/temp/NewTagName" tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle"/>
 </$keyboard>
 </span> <$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button> <span class="tc-add-tag-button">
-<$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
+<$set name="tag" value={{$:/temp/NewTagName}}>
 <$button set="$:/temp/NewTagName" setTo="" class="">
-<<add-tag-actions>>
-<$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
+$actions$
+<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
 {{$:/language/EditTemplate/Tags/Add/Button}}
 </$button>
 </$set>
@@ -33,25 +39,17 @@ tags: $:/tags/Macro
 <div class="tc-block-dropdown-wrapper">
 <$reveal state=<<qualify "$:/state/popup/tags-auto-complete">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown">
-<$set name="newTagName" value={{{ [<newTagNameTiddler>get[text]] }}}>
-<$list filter="[<newTagName>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
-<$list filter="[tags[]!is[system]search:title<newTagName>sort[]]" variable="tag">
+<$list filter="[{$:/temp/NewTagName}minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$list filter="[tags[]!is[system]search:title{$:/temp/NewTagName}sort[]]" variable="tag">
 <<tag-button>>
 </$list></$list>
 <hr>
-<$list filter="[<newTagName>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
-<$list filter="[tags[]is[system]search:title<newTagName>sort[]]" variable="tag">
+<$list filter="[{$:/temp/NewTagName}minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$list filter="[tags[]is[system]search:title{$:/temp/NewTagName}sort[]]" variable="tag">
 <<tag-button>>
 </$list></$list>
-</$set>
 </div>
 </$reveal>
 </div>
-\end
-\define tag-picker()
-<$list filter="[<newTagNameTiddler>match[]]" emptyMessage=<<tag-picker-inner>>>
-<$set name="newTagNameTiddler" value=<<qualify "$:/temp/NewTagName">>>
-<<tag-picker-inner>>
 </$set>
-</$list>
 \end

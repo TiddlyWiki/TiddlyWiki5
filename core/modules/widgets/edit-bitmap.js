@@ -14,8 +14,7 @@ Edit-bitmap widget
 
 // Default image sizes
 var DEFAULT_IMAGE_WIDTH = 600,
-	DEFAULT_IMAGE_HEIGHT = 370,
-	DEFAULT_IMAGE_TYPE = "image/png";
+	DEFAULT_IMAGE_HEIGHT = 370;
 
 // Configuration tiddlers
 var LINE_WIDTH_TITLE = "$:/config/BitmapEditor/LineWidth",
@@ -155,13 +154,7 @@ EditBitmapWidget.prototype.loadCanvas = function() {
 		self.refreshToolbar();
 	};
 	// Get the current bitmap into an image object
-	if(tiddler && tiddler.fields.type && tiddler.fields.text) {
-		currImage.src = "data:" + tiddler.fields.type + ";base64," + tiddler.fields.text;		
-	} else {
-		currImage.width = DEFAULT_IMAGE_WIDTH;
-		currImage.height = DEFAULT_IMAGE_HEIGHT;
-		currImage.onerror();
-	}
+	currImage.src = "data:" + tiddler.fields.type + ";base64," + tiddler.fields.text;
 };
 
 EditBitmapWidget.prototype.initCanvas = function(canvas,width,height,image) {
@@ -326,16 +319,18 @@ EditBitmapWidget.prototype.strokeEnd = function() {
 };
 
 EditBitmapWidget.prototype.saveChanges = function() {
-	var tiddler = this.wiki.getTiddler(this.editTitle) || new $tw.Tiddler({title: this.editTitle,type: DEFAULT_IMAGE_TYPE});
-	// data URIs look like "data:<type>;base64,<text>"
-	var dataURL = this.canvasDomNode.toDataURL(tiddler.fields.type),
-		posColon = dataURL.indexOf(":"),
-		posSemiColon = dataURL.indexOf(";"),
-		posComma = dataURL.indexOf(","),
-		type = dataURL.substring(posColon+1,posSemiColon),
-		text = dataURL.substring(posComma+1);
-	var update = {type: type, text: text};
-	this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getModificationFields(),tiddler,update,this.wiki.getCreationFields()));
+	var tiddler = this.wiki.getTiddler(this.editTitle);
+	if(tiddler) {
+		// data URIs look like "data:<type>;base64,<text>"
+		var dataURL = this.canvasDomNode.toDataURL(tiddler.fields.type),
+			posColon = dataURL.indexOf(":"),
+			posSemiColon = dataURL.indexOf(";"),
+			posComma = dataURL.indexOf(","),
+			type = dataURL.substring(posColon+1,posSemiColon),
+			text = dataURL.substring(posComma+1);
+		var update = {type: type, text: text};
+		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getModificationFields(),tiddler,update,this.wiki.getCreationFields()));
+	}
 };
 
 exports["edit-bitmap"] = EditBitmapWidget;

@@ -1,5 +1,5 @@
 title: $:/language/Help/build
-description: Correr automaticamente comandos configurados
+description: Correr comandos configurados automaticamente
 
 Construir os alvos de construção especificados para a wiki actual. Se nenhum alvo for especificado todos os alvos disponíveis serão construídos.
 
@@ -8,3 +8,4 @@ Construir os alvos de construção especificados para a wiki actual. Se nenhum a
 ```
 
 Os alvos de construção são definidos no ficheiro `tiddlywiki.info` na pasta da wiki.
+

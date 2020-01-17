@@ -1,6 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/xmldom",
-	"name": "xmldom",
-	"description": "xmldom library",
+	"description": "Wrapper for xmldom",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
 	"list": "readme license"
 }

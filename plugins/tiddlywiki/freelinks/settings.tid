@@ -1,3 +1,0 @@
-title: $:/plugins/tiddlywiki/freelinks/settings
-
-<$checkbox tiddler="$:/config/Freelinks/Enable" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/Freelinks/Enable">Enable freelinking within tiddler view templates</$link> </$checkbox>
