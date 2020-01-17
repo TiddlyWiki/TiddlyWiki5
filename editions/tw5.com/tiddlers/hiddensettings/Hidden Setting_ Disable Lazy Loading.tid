@@ -1,0 +1,9 @@
+created: 20191025100113266
+modified: 20191025100113266
+tags: [[Hidden Settings]]
+title: Hidden Setting: Disable Lazy Loading
+type: text/vnd.tiddlywiki
+
+LazyLoading can be disabled by setting this value to `yes`
+
+$:/config/SyncDisableLazyLoading

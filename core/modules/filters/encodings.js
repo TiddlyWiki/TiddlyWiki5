@@ -98,4 +98,13 @@ exports.escaperegexp = function(source,operator,options) {
 	return results;
 };
 
+exports.escapecss = function(source,operator,options) {
+	var results = [];
+	source(function(tiddler,title) {
+		// escape any character with a special meaning in CSS using CSS.escape()
+		results.push(CSS.escape(title));
+	});
+	return results;
+};
+
 })();

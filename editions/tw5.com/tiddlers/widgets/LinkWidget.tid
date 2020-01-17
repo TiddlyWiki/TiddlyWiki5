@@ -1,6 +1,6 @@
 caption: link
 created: 20131024141900000
-modified: 20171212063130159
+modified: 20190610195105615
 tags: Widgets
 title: LinkWidget
 type: text/vnd.tiddlywiki
@@ -8,6 +8,10 @@ type: text/vnd.tiddlywiki
 The `link` widget generates links to tiddlers. (Use the HTML `<a>` element to generate external links).
 
 ! Content and Attributes
+
+The content of the link widget is rendered within the `<a>` tag representing the link. If the content is empty then the title of the target tiddler is rendered as the default.
+
+For example, `<$link to="HelloThere"/>` is equivalent to `<$link to="HelloThere">HelloThere</$link>` and `<$link/>` is equivalent to `<$link to=<<currentTiddler>>><$view field="title"/></$link>`.
 
 |!Attribute |!Description |
 |to |The title of the target tiddler for the link (defaults to the [[current tiddler|Current Tiddler]]) |
@@ -19,7 +23,7 @@ The `link` widget generates links to tiddlers. (Use the HTML `<a>` element to ge
 |class|Optional CSS classes //in addition to// the default classes (see below)|
 |overrideClass|<<.from-version "5.1.16">> Optional CSS classes //instead of// the default classes |
 
-The content of the link widget is rendered within the `<a>` tag. The draggable functionality is equivalent to using the DraggableWidget with the ''tiddler'' attribute set to the link target.
+The draggable functionality is equivalent to using the DraggableWidget with the ''tiddler'' attribute set to the link target.
 
 The default value of the tooltip attribute is supplied by the <<.vlink tv-wikilink-tooltip>> variable.
 

@@ -1,12 +1,10 @@
 title: $:/language/Help/server
-description: Fournit une interface serveur HTTP à TiddlyWiki
+description: Fournit une interface serveur HTTP à TiddlyWiki (déprécié en faveur de la nouvelle commande listen)
 
-Le serveur embarqué dans TiddlyWiki5 est très simple. Bien qu'il soit compatible avec TiddlyWeb, il n'a pas la robustesse requise pour une utilisation sur l'Internet.
-
-À la racine de l'url, il sert le tiddler spécifié avec le rendu indiqué. Au-delà, il sert des tiddlers encodés en JSON, et reconnaît les principales opérations HTTP pour `GET`, `PUT` et `DELETE`.
+Ancienne commande pour servir un wiki sur HTTP.
 
 ```
---server <port> <tiddler-racine> <type-du-rendu> <type-du-service> <nom-d-utilisateur> <mot-de-passe> <machine> <prefixe-des-chemins>
+--server <port> <tiddler-racine> <type-du-rendu> <type-du-service> <nom-d-utilisateur> <mot-de-passe> <machine> <préfixe-des-chemins> <niveau-débogage>
 ```
 
 Les arguments sont :
@@ -18,7 +16,8 @@ Les arguments sont :
 * ''nom-d-utilisateur'' - le nom d'utilisateur qui servira par défaut à signer les modifications
 * ''mot-de-passe'' - mot de passe optionnel permettant une authentification basique
 * ''machine'' - nom de machine optionnel d'où le contenu doit être servi ("127.0.0.1" par défaut, autrement dit "localhost")
-* ''prefixe-des-chemins'' - préfixe optionnel pour les chemins
+* ''préfixe-des-chemins'' - préfixe optionnel pour les chemins de fichiers
+* ''niveau-débogage'' - optional debug level; set to "debug" to view request details (defaults to "none")
 
 Si le mot de passe est spécifié en argument, le navigateur demandera à l'utilisateur d'entrer le nom d'utilisateur et le mot de passe. On notera que le mot de passe est transmis en clair, et que cette implémentation ne convient donc pas pour un usage général.
 

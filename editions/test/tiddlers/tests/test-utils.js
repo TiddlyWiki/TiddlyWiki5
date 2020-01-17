@@ -25,6 +25,26 @@ describe("Utility tests", function() {
 		expect(psa(" [[Tidd\u00a0ler8]] two ")).toEqual(["Tidd\u00a0ler8","two"]);
 	});
 
+	it("should handle stringifying a string array", function() {
+		var str = $tw.utils.stringifyList;
+		expect(str([])).toEqual("");
+		expect(str(["Tiddler8"])).toEqual("Tiddler8");
+		expect(str(["Tiddler8  "])).toEqual("[[Tiddler8  ]]");
+		expect(str(["A+B", "A-B", "A=B"])).toEqual("A+B A-B A=B");
+		expect(str(["A B"])).toEqual("[[A B]]");
+		// Starting special characters aren't treated specially,
+		// even though this makes a list incompatible with a filter parser.
+		expect(str(["+T", "-T", "~T", "=T", "$T"])).toEqual("+T -T ~T =T $T");
+		expect(str(["A", "", "B"])).toEqual("A  B");
+	});
+
+	it("stringifyList shouldn't interfere with setting variables to negative numbers", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddler({title: "test", text: "<$set name=X filter='\"-7\"'>{{{ [<X>add[2]] }}}</$set>"});
+		// X shouldn't be wrapped in brackets. If it is, math filters will treat it as zero.
+		expect(wiki.renderTiddler("text/plain","test")).toBe("-5");
+	});
+
 	it("should handle formatting a date string", function() {
 		var fds = $tw.utils.formatDateString,
 			// nov is month: 10!

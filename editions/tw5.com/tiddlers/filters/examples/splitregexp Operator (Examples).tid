@@ -1,0 +1,7 @@
+created: 20190613154934814
+modified: 20190613155013565
+tags: [[splitregexp Operator]] [[Operator Examples]]
+title: splitregexp Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "a=b-c=d-e +[splitregexp[=|-]]">>

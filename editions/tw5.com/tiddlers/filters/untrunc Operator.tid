@@ -1,0 +1,15 @@
+caption: untrunc
+created: 20190617163327756
+modified: 20190617163327756
+op-input: a [[selection of titles|Title Selection]]
+op-output: rounds each of the input numbers to the next integer with largest absolute value, that is, away from zero
+op-purpose: rounds a list of numbers to the next integer with largest absolute value, that is, away from zero
+tags: [[Unary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: untrunc Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">> See [[Mathematics Operators]] for an overview.
+
+<<.tip " This is the inverse operation of [[trunc|trunc Operator]]: trunc rounds to zero, but untrunc rounds away from zero.">>
+
+<<.operator-examples "untrunc">>

@@ -1,6 +1,8 @@
 title: $:/_tw5.com-styles
 tags: $:/tags/Stylesheet
 
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
 .tc-double-spaced-list li {
 	padding-bottom: .5em;
 	padding-top: .5em;

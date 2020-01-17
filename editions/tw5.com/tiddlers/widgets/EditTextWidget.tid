@@ -23,7 +23,8 @@ The content of the `<$edit-text>` widget is ignored.
 |class |A CSS class to be assigned to the generated HTML editing element |
 |placeholder |Placeholder text to be displayed when the edit field is empty |
 |focusPopup |Title of a state tiddler for a popup that is displayed when the editing element has focus  |
-|focus |Set to "yes" or "true" to automatically focus the editor after creation  |
+|focus |Set to "yes" or "true" to automatically focus the editor after creation |
+|tabindex |Sets the `tabindex` attribute of the input or textarea to the given value |
 |tag |Overrides the generated HTML editing element tag. For a multi-line editor use `tag=textarea`. For a single-line editor use `tag=input` |
 |type |Overrides the generated HTML editing element `type` attribute |
 |size |The size of the input field (in characters) |

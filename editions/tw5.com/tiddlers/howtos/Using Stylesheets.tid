@@ -18,7 +18,7 @@ The first steps to changing the appearance of ~TiddlyWiki are to choose and appl
 
 * One of the available themes: <span class="tc-btn-standard"> {{$:/core/ui/Buttons/theme}} </span>
 * Modify the colour palette: <span class="tc-btn-standard"> {{$:/core/ui/Buttons/palette}} </span>
-* Experiment with the <$button actions=<<openCpTheme>> >{{$:/core/images/options-button}} ControlPanel</$button>
+* Experiment with the <$button actions=<<openCpTheme>> ><<.icon $:/core/images/options-button>> ControlPanel</$button>
 
 ! Work with Stylesheets
 

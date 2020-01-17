@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/jasmine/readme
 
-This plugin provides a framework for running tests in the browser and under Node.js. It is based on [[Jasmine|http://pivotal.github.io/jasmine/]] test framework.
+This plugin provides a framework for running tests in the browser and under Node.js. It is based on [[Jasmine|https://jasmine.github.io/]] test framework.
 
 [[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/jasmine]]

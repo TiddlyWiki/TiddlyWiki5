@@ -1,0 +1,10 @@
+title: $:/core/ui/Actions/new-image
+tags: $:/tags/Actions
+description: create a new image tiddler
+
+\define get-type()
+image/$(imageType)$
+\end
+<$vars imageType={{$:/config/NewImageType}}>
+<$action-sendmessage $message="tm-new-tiddler" type=<<get-type>> tags={{$:/config/NewTiddler/Tags!!tags}}/>
+</$vars>

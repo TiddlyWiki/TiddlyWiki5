@@ -20,16 +20,18 @@ exports.handler = function(request,response,state) {
 	var title = decodeURIComponent(state.params[0]),
 		tiddler = state.wiki.getTiddler(title);
 	if(tiddler) {
-		var renderType,template;
-		// Render ordinary tiddlers as HTML, and system tiddlers in plain text
+		var renderType = tiddler.getFieldString("_render_type"),
+			renderTemplate = tiddler.getFieldString("_render_template");
+		// Tiddler fields '_render_type' and '_render_template' overwrite
+		// system wide settings for render type and template
 		if(state.wiki.isSystemTiddler(title)) {
-			renderType = state.server.get("system-tiddler-render-type");
-			template = state.server.get("system-tiddler-template");
+			renderType = renderType || state.server.get("system-tiddler-render-type");
+			renderTemplate = renderTemplate || state.server.get("system-tiddler-render-template");
 		} else {
-			renderType = state.server.get("tiddler-render-type");
-			template = state.server.get("tiddler-template");
+			renderType = renderType || state.server.get("tiddler-render-type");
+			renderTemplate = renderTemplate || state.server.get("tiddler-render-template");
 		}
-		var text = state.wiki.renderTiddler(renderType,template,{parseAsInline: true, variables: {currentTiddler: title}});
+		var text = state.wiki.renderTiddler(renderType,renderTemplate,{parseAsInline: true, variables: {currentTiddler: title}});
 		// Naughty not to set a content-type, but it's the easiest way to ensure the browser will see HTML pages as HTML, and accept plain text tiddlers as CSS or JS
 		response.writeHead(200);
 		response.end(text,"utf8");
