@@ -39,6 +39,9 @@ var ZoominListView = function(listWidget) {
 	});
 };
 
+// Engage single tiddler mode
+ZoominListView.singleTiddlerMode = true;
+
 ZoominListView.prototype.navigateTo = function(historyInfo) {
 	var duration = $tw.utils.getAnimationDuration(),
 		listElementIndex = this.listWidget.findListItem(0,historyInfo.title);
