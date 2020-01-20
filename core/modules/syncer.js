@@ -296,16 +296,18 @@ Syncer.prototype.syncFromServer = function() {
 				self.logger.log($tw.language.getString("Error/RetrievingSkinny") + ":",err);
 				return;
 			}
-			$tw.utils.each(updates.modifications,function(title) {
-				self.titlesToBeLoaded[title] = true;
-			});
-			$tw.utils.each(updates.deletions,function(title) {
-				delete self.tiddlerInfo[title];
-				self.logger.log("Deleting tiddler missing from server:",title);
-				self.wiki.deleteTiddler(title);
-			});
-			if(updates.modifications.length > 0 || updates.deletions.length > 0) {
-				self.processTaskQueue();
+			if(updates) {
+				$tw.utils.each(updates.modifications,function(title) {
+					self.titlesToBeLoaded[title] = true;
+				});
+				$tw.utils.each(updates.deletions,function(title) {
+					delete self.tiddlerInfo[title];
+					self.logger.log("Deleting tiddler missing from server:",title);
+					self.wiki.deleteTiddler(title);
+				});
+				if(updates.modifications.length > 0 || updates.deletions.length > 0) {
+					self.processTaskQueue();
+				}				
 			}
 		});
 	} else if(this.syncadaptor && this.syncadaptor.getSkinnyTiddlers) {
@@ -476,6 +478,8 @@ Syncer.prototype.processTaskQueue = function() {
 				this.triggerTimeout();				
 			}
 		}
+	} else {
+		this.updateDirtyStatus();		
 	}
 };
 
