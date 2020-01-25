@@ -357,6 +357,14 @@ Syncer.prototype.syncFromServer = function() {
 };
 
 /*
+Force load a tiddler from the server
+*/
+Syncer.prototype.enqueueLoadTiddler = function(title) {
+	this.titlesToBeLoaded[title] = true;
+	this.processTaskQueue();
+};
+
+/*
 Lazily load a skinny tiddler if we can
 */
 Syncer.prototype.handleLazyLoadEvent = function(title) {
