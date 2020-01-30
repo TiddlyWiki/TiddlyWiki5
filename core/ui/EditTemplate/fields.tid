@@ -69,7 +69,7 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 <$fieldmangler>
 <div class="tc-edit-field-add">
 <em class="tc-edit">
-<<lingo Fields/Add/Prompt>>&nbsp;
+<<lingo Fields/Add/Prompt>>&nbsp;&nbsp;
 </em>
 <span class="tc-edit-field-add-name">
 <$edit-text tiddler=<<newFieldNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}} focusPopup=<<qualify "$:/state/popup/field-dropdown">> class="tc-edit-texteditor tc-popup-handle" tabindex={{$:/config/EditTabIndex}} focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] ~[[false]] }}}/>
