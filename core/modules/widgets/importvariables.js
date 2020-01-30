@@ -37,49 +37,45 @@ ImportVariablesWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 ImportVariablesWidget.prototype.execute = function(tiddlerList) {
-	var self = this;
+	var widgetPointer = this;
 	// Get our parameters
 	this.filter = this.getAttribute("filter");
 	// Compute the filter
 	this.tiddlerList = tiddlerList || this.wiki.filterTiddlers(this.filter,this);
 	// Accumulate the <$set> widgets from each tiddler
-	var widgetStackStart,widgetStackEnd;
-	function addWidgetNode(widgetNode) {
-		if(widgetNode) {
-			if(!widgetStackStart && !widgetStackEnd) {
-				widgetStackStart = widgetNode;
-				widgetStackEnd = widgetNode;
-			} else {
-				widgetStackEnd.children = [widgetNode];
-				widgetStackEnd = widgetNode;
-			}
-		}
-	}
 	$tw.utils.each(this.tiddlerList,function(title) {
-		var parser = self.wiki.parseTiddler(title);
+		var parser = widgetPointer.wiki.parseTiddler(title);
 		if(parser) {
 			var parseTreeNode = parser.tree[0];
 			while(parseTreeNode && parseTreeNode.type === "set") {
-				addWidgetNode({
+				var node = {
 					type: "set",
 					attributes: parseTreeNode.attributes,
 					params: parseTreeNode.params,
 					isMacroDefinition: parseTreeNode.isMacroDefinition
-				});
+				};
+				if (parseTreeNode.isMacroDefinition) {
+					// Macro definitions can be folded into
+					// current widget instead of adding
+					// another link to the chain.
+					var widget = widgetPointer.makeChildWidget(node);
+					widget.computeAttributes();
+					widget.execute();
+					$tw.utils.extend(widgetPointer.variables,widget.variables);
+				} else {
+					widgetPointer.makeChildWidgets([node]);
+					widgetPointer = widgetPointer.children[0];
+				}
 				parseTreeNode = parseTreeNode.children && parseTreeNode.children[0];
 			}
 		} 
 	});
-	// Add our own children to the end of the pile
-	var parseTreeNodes;
-	if(widgetStackStart && widgetStackEnd) {
-		parseTreeNodes = [widgetStackStart];
-		widgetStackEnd.children = this.parseTreeNode.children;
+
+	if (widgetPointer != this) {
+		widgetPointer.parseTreeNode.children = this.parseTreeNode.children;
 	} else {
-		parseTreeNodes = this.parseTreeNode.children;
+		widgetPointer.makeChildWidgets();
 	}
-	// Construct the child widgets
-	this.makeChildWidgets(parseTreeNodes);
 };
 
 /*
