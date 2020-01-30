@@ -66,6 +66,7 @@ SystemTiddlers/Include/Prompt: Include system tiddlers
 TagManager/Colour/Heading: Colour
 TagManager/Count/Heading: Count
 TagManager/Icon/Heading: Icon
+TagManager/Icons/None: None
 TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
 Tiddler/DateFormat: DDth MMM YYYY at hh12:0mmam
