@@ -9,7 +9,7 @@ Adds tiddler filtering methods to the $tw.Wiki object.
 (function(){
 
 /*jslint node: true, browser: true */
-/*global $tw, console, exports */
+/*global $tw:false, console:false, exports:false */
 "use strict";
 
 /*
