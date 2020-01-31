@@ -8,9 +8,9 @@ Extended filter operators to manipulate the current list.
 \*/
 (function () {
 
-/*jslint node: true, browser: true */
-/*global $tw, exports */
-"use strict";
+    /*jslint node: true, browser: true */
+    /*global $tw: false */
+    "use strict";
 
     /*
     Fetch titles from the current list
