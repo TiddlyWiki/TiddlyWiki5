@@ -465,6 +465,58 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<p>nothing</p>");
 	});
 
+	/**This test confirms that imported set variables properly refresh
+	 * if they use transclusion for their value. This relates to PR #4108.
+	 */
+	it("should refresh imported <$set> widgets", function() {
+		var wiki = new $tw.Wiki();
+		// Add some tiddlers
+		wiki.addTiddlers([
+			{title: "Raw", text: "Initial value"},
+			{title: "Macro", text: "<$set name='test' value={{Raw}}>\n\ndummy text</$set>"},
+			{title: "Caller", text: text}
+		]);
+		var text = "\\import Macro\n<<test>>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>Initial value</p>");
+		wiki.addTiddler({title: "Raw", text: "New value"});
+		// Refresh
+		refreshWidgetNode(widgetNode,wrapper,["Raw"]);
+		expect(wrapper.innerHTML).toBe("<p>New value</p>");
+	});
+
+	it("should can mix setWidgets and macros when importing", function() {
+		var wiki = new $tw.Wiki();
+		// Add some tiddlers
+		wiki.addTiddlers([
+			{title: "A", text: "\\define A() Aval"},
+			{title: "B", text: "<$set name='B' value='Bval'>\n\ndummy text</$set>"},
+			{title: "C", text: "\\define C() Cval"}
+		]);
+		var text = "\\import A B C\n<<A>> <<B>> <<C>>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>Aval Bval Cval</p>");
+	});
+
+	/** Special case. <$importvariables> has different handling if
+	 *  it doesn't end up importing any variables. Make sure it
+	 *  doesn't forget its childrenNodes.
+	 */
+	it("should work when import widget imports nothing", function() {
+		var wiki = new $tw.Wiki();
+		var text = "\\import [prefix[XXX]]\nDon't forget me.";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>Don't forget me.</p>");
+	});
 });
 
 })();

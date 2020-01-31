@@ -15,12 +15,13 @@ tags: $:/tags/Macro
 \end
 
 \define tag-picker-inner()
+\whitespace trim
 <div class="tc-edit-add-tag">
 <span class="tc-add-tag-name">
 <$keyboard key="ENTER" actions=<<add-tag-actions>>>
 <$edit-text tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}}/>
 </$keyboard>
-</span> <$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button> <span class="tc-add-tag-button">
+</span>&nbsp;<$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>&nbsp;<span class="tc-add-tag-button">
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$button set="$:/temp/NewTagName" setTo="" class="">
 <<add-tag-actions>>
@@ -49,6 +50,7 @@ tags: $:/tags/Macro
 </div>
 \end
 \define tag-picker()
+\whitespace trim
 <$list filter="[<newTagNameTiddler>match[]]" emptyMessage=<<tag-picker-inner>>>
 <$set name="newTagNameTiddler" value=<<qualify "$:/temp/NewTagName">>>
 <<tag-picker-inner>>
