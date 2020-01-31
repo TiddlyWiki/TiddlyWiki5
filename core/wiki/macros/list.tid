@@ -74,11 +74,11 @@ tags: $:/tags/Macro
 </$set>
 \end
 
-\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div")
+\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",storyview:"")
 \whitespace trim
 <span class="tc-tagged-draggable-list">
 <$set name="tag" value=<<__tag__>>>
-<$list filter="[<__tag__>tagging[]$subFilter$]" emptyMessage=<<__emptyMessage__>>>
+<$list filter="[<__tag__>tagging[]$subFilter$]" emptyMessage=<<__emptyMessage__>> storyview=<<__storyview__>>>
 <$elementTag$ class="tc-menu-list-item">
 <$droppable actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>""">
 <$elementTag$ class="tc-droppable-placeholder"/>
