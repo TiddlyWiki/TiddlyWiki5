@@ -330,8 +330,6 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 				var shouldRelink = this.getAttribute("relinkOnRename","no").toLowerCase().trim() === "yes";
 				if(isRename && shouldRelink && this.wiki.tiddlerExists(draftOf)) {
 					console.log("Relinking '" + draftOf + "' to '" + draftTitle + "'");
-					// TODO: According to docs, we should pass objects, not just titles
-					// https://tiddlywiki.com/dev/#Hook%3A%20th-relinking-tiddler
 					this.wiki.relinkTiddler(draftOf,draftTitle);
 				}
 				// Remove the draft tiddler
