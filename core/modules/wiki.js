@@ -415,6 +415,30 @@ exports.forEachTiddler = function(/* [options,]callback */) {
 };
 
 /*
+Return an array of tiddler titles that are directly linked within the given parse tree
+ */
+exports.extractLinks = function(parseTreeRoot) {
+	// Count up the links
+	var links = [],
+		checkParseTree = function(parseTree) {
+			for(var t=0; t<parseTree.length; t++) {
+				var parseTreeNode = parseTree[t];
+				if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
+					var value = parseTreeNode.attributes.to.value;
+					if(links.indexOf(value) === -1) {
+						links.push(value);
+					}
+				}
+				if(parseTreeNode.children) {
+					checkParseTree(parseTreeNode.children);
+				}
+			}
+		};
+	checkParseTree(parseTreeRoot);
+	return links;
+};
+
+/*
 Return an array of tiddler titles that are directly linked from the specified tiddler
 */
 exports.getTiddlerLinks = function(title) {
@@ -423,26 +447,10 @@ exports.getTiddlerLinks = function(title) {
 	return this.getCacheForTiddler(title,"links",function() {
 		// Parse the tiddler
 		var parser = self.parseTiddler(title);
-		// Count up the links
-		var links = [],
-			checkParseTree = function(parseTree) {
-				for(var t=0; t<parseTree.length; t++) {
-					var parseTreeNode = parseTree[t];
-					if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
-						var value = parseTreeNode.attributes.to.value;
-						if(links.indexOf(value) === -1) {
-							links.push(value);
-						}
-					}
-					if(parseTreeNode.children) {
-						checkParseTree(parseTreeNode.children);
-					}
-				}
-			};
 		if(parser) {
-			checkParseTree(parser.tree);
+			return self.extractLinks(parser.tree);
 		}
-		return links;
+		return [];
 	});
 };
 
