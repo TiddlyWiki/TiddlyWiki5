@@ -26,26 +26,11 @@ BacklinksIndexer.prototype.rebuild = function() {
 }
 
 BacklinksIndexer.prototype._getLinks = function(tiddler) {
-	var links = [],
-            parser =  this.wiki.parseText(tiddler.fields.type, tiddler.fields.text, {}),
-	    checkParseTree = function(parseTree) {
-			for(var t=0; t<parseTree.length; t++) {
-				var parseTreeNode = parseTree[t];
-				if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
-					var value = parseTreeNode.attributes.to.value;
-					if(links.indexOf(value) === -1) {
-						links.push(value);
-					}
-				}
-				if(parseTreeNode.children) {
-					checkParseTree(parseTreeNode.children);
-				}
-			}
-		};
+	var parser =  this.wiki.parseText(tiddler.fields.type, tiddler.fields.text, {});
 	if(parser) {
-		checkParseTree(parser.tree);
+		return this.wiki.extractLinks(parser.tree);
 	}
-	return links;
+	return [];
 }
 
 BacklinksIndexer.prototype.update = function(updateDescriptor) {
