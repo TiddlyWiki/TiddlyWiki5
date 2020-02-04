@@ -2080,9 +2080,9 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		for(var title in $tw.boot.files) {
 			relativePath = path.relative(resolvedWikiPath,$tw.boot.files[title].filepath);
 			output[title] =
-				path.sep === path.posix.sep ?
+				path.sep === "/" ?
 				relativePath :
-				relativePath.split(path.sep).join(path.posix.sep);
+				relativePath.split(path.sep).join("/");
 		}
 		$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
 	}
