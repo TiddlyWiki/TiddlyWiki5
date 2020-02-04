@@ -1,0 +1,2 @@
+title: $:/config/plugins/share/filter
+text: [all[tiddlers]] -[subfilter{$:/config/plugins/share/exclusions}]
