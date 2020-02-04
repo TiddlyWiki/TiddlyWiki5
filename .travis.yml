@@ -1,5 +1,5 @@
 language: node_js
-  - "node"
+  - 12
 
 stages:
   - name: test
@@ -20,8 +20,8 @@ jobs:
         - export TW5_BUILD_DETAILS="Prerelease built from branch '$TRAVIS_BRANCH' at commit $(git rev-parse HEAD) of $(git remote get-url origin) at $(date +'%F %T %Z')"
         - export TW5_BUILD_MAIN_EDITION='./editions/prerelease'
         - export TW5_BUILD_OUTPUT='./output/prerelease'
-        - ./bin/build-site.sh
-        - ./bin/travis-push.sh
+        - ./bin/build-site.sh || travis_terminate 1
+        - ./bin/travis-push.sh || travis_terminate 1
     - stage: build-tiddlywiki-com
       script:
         - ./bin/travis-pre-build.sh
@@ -30,5 +30,5 @@ jobs:
         - export TW5_BUILD_DETAILS="Built from branch '$TRAVIS_BRANCH' at commit $(git rev-parse HEAD) of $(git remote get-url origin) at $(date +'%F %T %Z')"
         - export TW5_BUILD_MAIN_EDITION='./editions/tw5.com'
         - export TW5_BUILD_OUTPUT='./output'
-        - ./bin/build-site.sh
-        - ./bin/travis-push.sh
+        - ./bin/build-site.sh || travis_terminate 1
+        - ./bin/travis-push.sh || travis_terminate 1
