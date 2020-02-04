@@ -660,8 +660,9 @@ exports.getTiddlerAsJson = function(title) {
 	}
 };
 
-exports.getTiddlersAsJson = function(filter) {
+exports.getTiddlersAsJson = function(filter,spaces) {
 	var tiddlers = this.filterTiddlers(filter),
+		spaces = (spaces === undefined) ? $tw.config.preferences.jsonSpaces : spaces,
 		data = [];
 	for(var t=0;t<tiddlers.length; t++) {
 		var tiddler = this.getTiddler(tiddlers[t]);
@@ -673,7 +674,7 @@ exports.getTiddlersAsJson = function(filter) {
 			data.push(fields);
 		}
 	}
-	return JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
+	return JSON.stringify(data,null,spaces);
 };
 
 /*
