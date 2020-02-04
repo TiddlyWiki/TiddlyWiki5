@@ -136,6 +136,15 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--build index favicon static \
 	|| exit 1
 
+# /share.html				Custom edition for sharing via the URL
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/share \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT \
+	--build share \
+	|| exit 1
+
 # /upgrade.html				Custom edition for performing upgrades
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/upgrade \
