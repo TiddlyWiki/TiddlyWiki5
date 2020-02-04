@@ -1,5 +1,6 @@
 language: node_js
-  - 12
+node_js:
+  - "12.4.0"
 
 stages:
   - name: test
