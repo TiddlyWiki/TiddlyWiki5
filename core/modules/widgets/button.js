@@ -64,6 +64,10 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this["aria-label"]) {
 		domNode.setAttribute("aria-label",this["aria-label"]);
 	}
+	// Set the tabindex
+	if(this.tabIndex) {
+		domNode.setAttribute("tabindex",this.tabIndex);
+	}	
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
 		var handled = false;
@@ -205,6 +209,7 @@ ButtonWidget.prototype.execute = function() {
 	this.setField = this.getAttribute("setField");
 	this.setIndex = this.getAttribute("setIndex");
 	this.popupTitle = this.getAttribute("popupTitle");
+	this.tabIndex = this.getAttribute("tabindex");
 	// Make child widgets
 	this.makeChildWidgets();
 };
