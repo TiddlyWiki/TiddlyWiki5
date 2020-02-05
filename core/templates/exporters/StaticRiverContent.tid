@@ -1,7 +1,5 @@
 title: $:/core/templates/exporters/StaticRiver/Content
 
-\define renderContent()
-{{{ $(exportFilter)$ ||$:/core/templates/static-tiddler}}}
-\end
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
-<<renderContent>>
+<$set name="saveTiddlerAndShadowsFilter" filter="[subfilter<saveTiddlerFilter>]">
+{{{ [enlist<saveTiddlerAndShadowsFilter> || $:/core/templates/static-tiddler ] }}}
