@@ -8,7 +8,7 @@ Field/Remove/Hint: 刪除欄位
 Field/Dropdown/Caption: 欄位列表
 Field/Dropdown/Hint: 顯示欄位列表
 Fields/Add/Button: 新增
-Fields/Add/Button/Hint: 新增欄位
+Fields/Add/Button/Hint: 新增欄位至條目
 Fields/Add/Dropdown/System: 系統欄位
 Fields/Add/Dropdown/User: 使用者欄位
 Fields/Add/Name/Placeholder: 欄位名稱
