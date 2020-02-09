@@ -19,7 +19,7 @@ The content of the `<$range>` widget is ignored.
 |min |The minimum value to be able to be set by the `<$range>` widget.|
 |max |The maximum value to be able to be set by the `<$range>` widget.|
 |increment |The minimum amount by which a value may be changed.  Defaults to 1.|
-|default |The default value displayed if the field is missing or empty.|
+|default |If the field is missing or empty this is the default position for the widget handle relative to the min and max values.|
 |class |CSS classes to be assigned to the label around the range slider |
 
 ! Examples
