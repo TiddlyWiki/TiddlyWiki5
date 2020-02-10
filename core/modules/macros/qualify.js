@@ -9,24 +9,23 @@ Macro to qualify a state tiddler title according
 (function(){
 
 /*jslint node: true, browser: true */
-/*global $tw: false */
+/*global exports:false */
 "use strict";
 
 /*
 Information about this macro
 */
-
 exports.name = "qualify";
-
 exports.params = [
-	{name: "title"}
+	{name: "title"},
+	{name: "isUnique"}
 ];
-
 /*
 Run the macro
 */
-exports.run = function(title) {
-	return title + "-" + this.getStateQualifier();
+exports.run = function(title,isUnique) {
+	if (isUnique === "yes") { return title }
+	else { return title + "-" + this.getStateQualifier(/*name*/) }
 };
 
 })();

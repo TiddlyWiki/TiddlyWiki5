@@ -1,4 +1,5 @@
 created: 20150221172527000
+modified: 20200210091112122
 tags: [[qualify Macro]] [[Macro Examples]]
 title: qualify Macro (Examples)
 type: text/vnd.tiddlywiki
@@ -12,6 +13,12 @@ Each example shows the result of calling <<.var qualify>> and then the value of 
 <$macrocall $name=".example" n="1"
 eg="""<ul>
 <li><code><<qualify "BaseTiddler">></code></li>
+<li><code><<transclusion>></code></li>
+</ul>"""/>
+
+<$macrocall $name=".example" n="2"
+eg="""<ul>
+<li><code><<qualify "this-title" isUnique:"yes">></code></li>
 <li><code><<transclusion>></code></li>
 </ul>"""/>
 

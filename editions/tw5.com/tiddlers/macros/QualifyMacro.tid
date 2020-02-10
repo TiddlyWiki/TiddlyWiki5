@@ -1,9 +1,9 @@
+caption: qualify
 created: 20131228164411884
-modified: 20150221223816000
+modified: 20200210090725587
 tags: Macros [[Core Macros]]
 title: qualify Macro
 type: text/vnd.tiddlywiki
-caption: qualify
 
 The <<.def qualify>> [[macro|Macros]] is an important part of the StateMechanism.
 
@@ -15,5 +15,8 @@ It is implemented using the <<.vlink transclusion>> variable.
 
 ;title
 : The prefix for the returned string, normally a tiddler title
+
+;isUnique
+: If set to ''yes'', the user wants to be responsible, to make the title unique. So the macro will return the "title" value without modifications. If the parameter is not present, it defaults to no
 
 <<.macro-examples "qualify">>
