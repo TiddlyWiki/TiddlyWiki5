@@ -8,7 +8,6 @@
 		"tiddlywiki/powered-by-tiddlywiki",
 		"tiddlywiki/internals",
 		"tiddlywiki/highlight",
-		"tiddlywiki/markdown",
 		"tiddlywiki/bibtex",
 		"tiddlywiki/savetrail",
 		"tiddlywiki/external-attachments",
