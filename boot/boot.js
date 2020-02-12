@@ -2243,7 +2243,6 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("application/hta","utf16le",".hta",{deserializerType:"text/html"});
 	$tw.utils.registerFileType("application/javascript","utf8",".js");
 	$tw.utils.registerFileType("application/json","utf8",".json");
-	$tw.utils.registerFileType("application/csv","utf8",".csv");
 	$tw.utils.registerFileType("application/pdf","base64",".pdf",{flags:["image"]});
 	$tw.utils.registerFileType("application/zip","base64",".zip");
 	$tw.utils.registerFileType("image/jpeg","base64",[".jpg",".jpeg"],{flags:["image"]});
