@@ -694,6 +694,12 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	outline: none;
 }
 
+.tc-tag-button-selected,
+.tc-list-item-selected a.tc-tiddlylink {
+	background-color: <<colour primary>>;
+	color: <<colour tiddler-background>>;
+}
+
 /*
 ** Page layout
 */
