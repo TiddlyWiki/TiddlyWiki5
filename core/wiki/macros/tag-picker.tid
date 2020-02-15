@@ -2,28 +2,65 @@ title: $:/core/macros/tag-picker
 tags: $:/tags/Macro
 
 \define add-tag-actions()
-<$action-sendmessage $message="tm-add-tag" $param={{{ [<newTagNameTiddler>get[text]] }}}/>
+<$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
+<$list filter="[<currentTiddler>!tag<tag>]" variable="ignore" emptyMessage="""
+<$action-sendmessage $message="tm-remove-tag" $param=<<tag>>/>
+""">
+<$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
+</$list>
 <$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
+</$set>
 \end
 
-\define tag-button()
-<$button class="tc-btn-invisible" tag="a" tooltip={{$:/language/EditTemplate/Tags/Add/Button/Hint}}>
+\define tag-button(selectedClass)
+<$button class="tc-btn-invisible $selectedClass$" tag="a" tooltip={{$:/language/EditTemplate/Tags/Add/Button/Hint}}>
 <$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
 <$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
 <$macrocall $name="tag-pill" tag=<<tag>>/>
 </$button>
 \end
 
+\define clear-tags-actions()
+<$list filter="[<storeTitle>!is[missing]]" variable="ignore" emptyMessage="""<$action-deletetiddler $tiddler=<<storeTitle>>/><$action-deletetiddler $tiddler=<<newTagNameTiddler>>/><$action-sendmessage $message="tm-cancel-tiddler"/>""">
+<$action-deletetiddler $tiddler=<<storeTitle>>/><$action-setfield $tiddler=<<newTagNameTiddler>> text=""/>
+</$list>
+\end
+
+\define get-filter-list()
+$(filter1)$ $(filter2)$
+\end
+
+\define next-tag-actions(afterbefore,reverse:"")
+<$set name="newTagName" value={{{ [<storeTitle>get[text]] }}}>
+<$set name="currentTag" value={{{ [<newTagNameTiddler>get[text]] }}}>
+<$set name="filter1" filter="[tags[]!is[system]search:title<newTagName>sort[]]">
+<$set name="filter2" filter="[tags[]is[system]search:title<newTagName>sort[]]">
+<$set name="filterList" filter=<<get-filter-list>>>
+<$action-setfield $tiddler=<<newTagNameTiddler>> text={{{ [enlist<filterList>$afterbefore$<currentTag>] ~[enlist<filterList>$reverse$nth[1]] }}}>
+</$set>
+</$set>
+</$set>
+</$set>
+</$set>
+\end
+
 \define tag-picker-inner()
 \whitespace trim
+<$set name="storeTitle" value=<<qualify "$:/temp/NewTagName/input">>>
 <div class="tc-edit-add-tag">
 <span class="tc-add-tag-name">
-<$keyboard key="ENTER" actions=<<add-tag-actions>>>
-<$edit-text tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}}/>
+<$keyboard key="((input-accept))" actions=<<add-tag-actions>>>
+<$keyboard key="((input-down))" actions=<<next-tag-actions "after">>>
+<$keyboard key="((input-cancel))" actions=<<clear-tags-actions>>>
+<$keyboard key="((input-up))" actions=<<next-tag-actions "before" "reverse[]">>>
+<$edit-text tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}} storeTitle=<<storeTitle>>/>
+</$keyboard>
+</$keyboard>
+</$keyboard>
 </$keyboard>
 </span>&nbsp;<$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>&nbsp;<span class="tc-add-tag-button">
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
-<$button set="$:/temp/NewTagName" setTo="" class="">
+<$button set=<<newTagNameTiddler>> setTo="" class="">
 <<add-tag-actions>>
 <$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
 {{$:/language/EditTemplate/Tags/Add/Button}}
@@ -34,20 +71,25 @@ tags: $:/tags/Macro
 <div class="tc-block-dropdown-wrapper">
 <$reveal state=<<qualify "$:/state/popup/tags-auto-complete">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown">
-<$set name="newTagName" value={{{ [<newTagNameTiddler>get[text]] }}}>
+<$set name="newTagName" value={{{ [<storeTitle>get[text]] }}}>
 <$list filter="[<newTagName>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 <$list filter="[tags[]!is[system]search:title<newTagName>sort[]]" variable="tag">
-<<tag-button>>
+<$list filter="[<newTagNameTiddler>get[text]match<tag>]" emptyMessage="""<<tag-button>>""">
+<<tag-button "tc-tag-button-selected">>
+</$list>
 </$list></$list>
 <hr>
 <$list filter="[<newTagName>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 <$list filter="[tags[]is[system]search:title<newTagName>sort[]]" variable="tag">
-<<tag-button>>
+<$list filter="[<newTagNameTiddler>get[text]match<tag>]" emptyMessage="""<<tag-button>>""">
+<<tag-button "tc-tag-button-selected">>
+</$list>
 </$list></$list>
 </$set>
 </div>
 </$reveal>
 </div>
+</$set>
 \end
 \define tag-picker()
 \whitespace trim
