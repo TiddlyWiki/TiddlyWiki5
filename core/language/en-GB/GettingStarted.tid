@@ -103,6 +103,6 @@ More info can be found at: [[tiddlywiki.com|https://tiddlywiki.com/#list-tagged-
 
 !!! Change the Story Layout
 
->The layout and much more can be change at the Control Panel.
+>The layout and much more can be changed at the Control Panel.
 
 >Open: <$button actions=<<open-cp>> >~ControlPanel : Appearence : Theme Tweaks</$button> to adjust the story width with the "sidebar layout" parameter
