@@ -37,6 +37,7 @@ function Syncer(options) {
 	var self = this;
 	this.wiki = options.wiki;
 	this.syncadaptor = options.syncadaptor;
+	if(this.syncadaptor.setSyncer) this.syncadaptor.setSyncer(this);
 	this.disableUI = !!options.disableUI;
 	this.titleIsLoggedIn = options.titleIsLoggedIn || this.titleIsLoggedIn;
 	this.titleUserName = options.titleUserName || this.titleUserName;
@@ -166,6 +167,20 @@ Syncer.prototype.storeTiddler = function(tiddlerFields,hasBeenLazyLoaded) {
 	};
 };
 
+Syncer.prototype.deleteTiddler = function(title){
+	//get the tiddler by title
+	var tiddler = this.wiki.getTiddler(title);
+	//make sure this tiddler is a synced tiddler
+	var filteredDeletion = this.filterFn.call(this.wiki,function(callback) {
+		callback(tiddler,title);
+	});
+	//if it is, then we delete it
+	for(var i = 0; i < filteredDeletion.length; i++){
+		this.wiki.deleteTiddler(filteredDeletion[i]);
+		delete this.tiddlerInfo[filteredDeletion[i]];
+	}
+}
+
 Syncer.prototype.getStatus = function(callback) {
 	var self = this;
 	// Check if the adaptor supports getStatus()
@@ -206,7 +221,15 @@ Syncer.prototype.syncFromServer = function() {
 			clearTimeout(this.pollTimerId);
 			this.pollTimerId = null;
 		}
+		
 		this.syncadaptor.getSkinnyTiddlers(function(err,tiddlers) {
+			//get an array of the titles being updated
+			// var titles = tiddlers.map(e => e.title);
+			//get the titles in the tiddlerInfo hashmap that are not on the server
+			// var removes = Object.keys(self.tiddlerInfo).filter(e => titles.indexOf(e) === -1);
+			//assume a server delete and handle it locally
+			// removes.forEach(title => self.handleServerDelete(title));
+			
 			// Trigger the next sync
 			self.pollTimerId = setTimeout(function() {
 				self.pollTimerId = null;
@@ -220,25 +243,7 @@ Syncer.prototype.syncFromServer = function() {
 			// Process each incoming tiddler
 			for(var t=0; t<tiddlers.length; t++) {
 				// Get the incoming tiddler fields, and the existing tiddler
-				var tiddlerFields = tiddlers[t],
-					incomingRevision = tiddlerFields.revision + "",
-					tiddler = self.wiki.getTiddler(tiddlerFields.title),
-					tiddlerInfo = self.tiddlerInfo[tiddlerFields.title],
-					currRevision = tiddlerInfo ? tiddlerInfo.revision : null;
-				// Ignore the incoming tiddler if it's the same as the revision we've already got
-				if(currRevision !== incomingRevision) {
-					// Do a full load if we've already got a fat version of the tiddler
-					if(tiddler && tiddler.fields.text !== undefined) {
-						// Do a full load of this tiddler
-						self.enqueueSyncTask({
-							type: "load",
-							title: tiddlerFields.title
-						});
-					} else {
-						// Load the skinny version of the tiddler
-						self.storeTiddler(tiddlerFields,false);
-					}
-				}
+				self.handleServerUpdate(tiddlers[t]);
 			}
 		});
 	}
@@ -287,6 +292,30 @@ Syncer.prototype.handleLazyLoadEvent = function(title) {
 		}
 	}
 };
+
+/* 
+Handle server update event
+*/
+Syncer.prototype.handleServerUpdate = function(tiddlerFields){
+	var incomingRevision = tiddlerFields.revision + "",
+		tiddler = this.wiki.getTiddler(tiddlerFields.title),
+		tiddlerInfo = this.tiddlerInfo[tiddlerFields.title],
+		currRevision = tiddlerInfo ? tiddlerInfo.revision : null;
+	// Ignore the incoming tiddler if it's the same as the revision we've already got
+	if(currRevision !== incomingRevision) {
+		// Do a full load if we've already got a fat version of the tiddler
+		if(tiddler && tiddler.fields.text !== undefined) {
+			// Do a full load of this tiddler
+			this.enqueueSyncTask({
+				type: "load",
+				title: tiddlerFields.title
+			});
+		} else {
+			// Load the skinny version of the tiddler
+			this.storeTiddler(tiddlerFields,false);
+		}
+	}
+}
 
 /*
 Dispay a password prompt and allow the user to login

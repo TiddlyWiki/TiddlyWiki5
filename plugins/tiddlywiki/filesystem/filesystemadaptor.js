@@ -30,6 +30,9 @@ FileSystemAdaptor.prototype.isReady = function() {
 	// The file system adaptor is always ready
 	return true;
 };
+FileSystemAdaptor.prototype.setSyncer = function(syncer) {
+	this.syncer = syncer;
+};
 
 FileSystemAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 	return {};

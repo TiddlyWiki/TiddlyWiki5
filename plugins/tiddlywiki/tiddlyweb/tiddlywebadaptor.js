@@ -31,6 +31,10 @@ TiddlyWebAdaptor.prototype.isReady = function() {
 	return this.hasStatus;
 };
 
+TiddlyWebAdaptor.prototype.setSyncer = function(syncer) {
+	this.syncer = syncer;
+}
+
 TiddlyWebAdaptor.prototype.getHost = function() {
 	var text = this.wiki.getTiddlerText(CONFIG_HOST_TIDDLER,DEFAULT_HOST_TIDDLER),
 		substitutions = [
