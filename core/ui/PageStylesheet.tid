@@ -6,9 +6,28 @@ title: $:/core/ui/PageStylesheet
 
 <$set name="languageTitle" value={{!!name}}>
 
+<$set name="tv-palette" value={{$:/palette}}>
+
+`@media screen {`
+
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
 <$transclude mode="block"/>
 </$list>
+
+`}`
+
+</$set>
+<$set name="tv-palette" value={{$:/palette-print}}>
+
+`@media print {`
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
+<$transclude mode="block"/>
+</$list>
+
+`}`
+
+</$set>
 
 </$set>
 
