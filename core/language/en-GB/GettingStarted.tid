@@ -1,5 +1,43 @@
 title: GettingStarted
 
+\define open-cp()
+<$action-setfield $tiddler="$:/state/tab-390999370" text="$:/core/ui/ControlPanel/Appearance"/>
+<$action-setfield $tiddler="$:/state/tab-2027485122" text="$:/themes/tiddlywiki/vanilla/themetweaks"/>
+<$action-navigate $to="$:/ControlPanel"/>
+\end
+\define create-toc()
+<$action-setfield $tiddler="TableOfContents" list-after="$:/core/ui/SideBar/Open" caption="{{$:/language/SideBar/Contents/Caption}}" 
+text="""<div class="tc-table-of-contents">
+
+<<toc-selective-expandable 'TableOfContents'>>
+
+</div>"""/>
+\end
+\define create-todos()
+<$action-setfield $tiddler="TaskDraggableTemplate" text="""<$checkbox tag="done"> <$link to={{!!title}}><$view field="title"/></$link></$checkbox>"""/>
+<$action-setfield $tiddler="Tasks" 
+text="""!! Outstanding tasks
+
+<$button>
+<$action-sendmessage $message="tm-new-tiddler" title="New Task" tags="task" />New Task
+</$button>
+
+//Drag the tasks to re-order them//
+
+<<list-tagged-draggable tag:"task" subFilter:"!has[draft.of]!tag[done]" itemTemplate:"TaskDraggableTemplate" emptyMessage:"You don't have any active tasks">>
+
+!! Completed tasks
+
+//(Listed in reverse order of completion)//
+
+<$list filter="[!has[draft.of]tag[task]tag[done]sort[created]]">
+<div>
+<$checkbox tag="done"> ~~<$link to={{!!title}}><$view field="title"/></$link>~~</$checkbox>
+</div>
+</$list>
+"""/>
+<$action-navigate $to="Tasks"/>
+\end
 \define lingo-base() $:/language/ControlPanel/Basics/
 Welcome to ~TiddlyWiki and the ~TiddlyWiki community
 
@@ -14,4 +52,57 @@ Before you start storing important information in ~TiddlyWiki it is vital to mak
 |<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
 </div>
 
-See the [[control panel|$:/ControlPanel]] for more options.
+!! More Options
+
+!!! Show Home Button 
+
+<<<
+<$checkbox tiddler="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/home" checked="show" unchecked="hide" field="text"/> Check this box to show the {{$:/core/ui/Buttons/home}} Home button in the sidebar
+
+<$reveal state="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/home" type="match" text="show">
+More page buttons can be found in the right sidebar ''Tools'' tab
+</$reveal>
+<<<
+
+!!! Show Journal Button
+
+<<<
+<$checkbox tiddler="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/new-journal" checked="show" unchecked="hide" field="text"/> Check this box to show the {{$:/core/ui/Buttons/new-journal}} Journal button in the sidebar
+
+<$reveal state="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/new-journal" type="match" text="show">
+More "Journal" and "New Tiddler" options can be found using the {{$:/core/ui/Buttons/control-panel}} $:/ControlPanel '': Info : Basics'' tab. 
+</$reveal>
+<<<
+
+!!! Create Table of Contents 
+
+<<<
+<$checkbox checkactions=<<create-toc>>  tiddler="TableOfContents" tag="$:/tags/SideBar" /> Check this box, to create the "Contents" tab in the sidebar
+
+<$reveal stateTitle="TableOfContents" type="match" stateField="tags" text="$:/tags/SideBar">
+
+The ''tag'' for the TOC is: TableOfContents. <$button><$action-sendmessage $message="tm-new-tiddler" tags="TableOfContents" />Create a TOC tiddler</$button>
+
+><$checkbox tiddler="$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/new-here" checked="show" unchecked="hide" field="text"/> Check this box to show the {{$:/core/ui/Buttons/new-here}} "New Here" Button in the ''tiddler toolbar''. This simplifies to create a TOC hierarchy
+
+</$reveal>
+<<<
+
+!!! Create a Basic ~ToDo List
+
+<<<
+<$checkbox checkactions=<<create-todos>> tiddler="Tasks" tag="TableOfContents" /> Create a very basic sortable ~ToDo App and add it to the TOC if available
+
+<$reveal stateTitle="Tasks" stateField="title" type="match" text="Tasks">
+
+<$checkbox  tiddler="Tasks" tag="$:/tags/SideBar" /> Add Tasks to the right sidebar
+
+More info can be found at: [[tiddlywiki.com|https://tiddlywiki.com/#list-tagged-draggable%20Macro:%5B%5Blist-tagged-draggable%20Macro%5D%5D%20%5B%5BTaskManagementExample%20(Draggable)%5D%5D]]
+</$reveal>
+<<<
+
+!!! Change the Story Layout
+
+>The layout and much more can be change at the Control Panel.
+
+>Open: <$button actions=<<open-cp>> >~ControlPanel : Appearence : Theme Tweaks</$button> to adjust the story width with the "sidebar layout" parameter
