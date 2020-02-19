@@ -24,7 +24,7 @@ exports.method = "GET";
 exports.path = /^\/recipes\/default\/tiddlers.json$/;
 
 exports.handler = function(request,response,state) {
-	var configAllowedFilters = $tw.boot.wikiInfo.config["server-get-tiddlers-allowed-filters"],
+	var configAllowedFilters = $tw.boot.wikiInfo.config && $tw.boot.wikiInfo.config["server-get-tiddlers-allowed-filters"],
 		allowedFilters;
 	if(configAllowedFilters === "all") {
 		allowedFilters = null;
