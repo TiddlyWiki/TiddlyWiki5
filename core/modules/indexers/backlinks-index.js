@@ -38,24 +38,26 @@ BacklinksIndexer.prototype.update = function(updateDescriptor) {
 		return;
 	}
 	var newLinks = [],
-	    oldLinks = [];
+	    oldLinks = [],
+	    self = this;
 	if(updateDescriptor.old.exists) {
 		oldLinks = this._getLinks(updateDescriptor.old.tiddler);
 	}
 	if(updateDescriptor.new.exists) {
 		newLinks = this._getLinks(updateDescriptor.new.tiddler);
 	}
-	for(var link of oldLinks) {
-		if(this.index[link]) {
-			this.index[link].delete(updateDescriptor.old.tiddler.fields.title);
+
+	$tw.utils.each(oldLinks,function(link) {
+		if(self.index[link]) {
+			delete self.index[link][updateDescriptor.old.tiddler.fields.title];
 		}
-	}
-	for(var link of newLinks) {
-		if(!this.index[link]) {
-			this.index[link] = new Set();
+	});
+	$tw.utils.each(newLinks,function(link) {
+		if(!self.index[link]) {
+			self.index[link] = Object.create(null);
 		}
-		this.index[link].add(updateDescriptor.new.tiddler.fields.title);
-	}
+		self.index[link][updateDescriptor.new.tiddler.fields.title] = true;
+	});
 }
 
 BacklinksIndexer.prototype.lookup = function(title) {
@@ -64,16 +66,16 @@ BacklinksIndexer.prototype.lookup = function(title) {
 		var self = this;
 		this.wiki.forEachTiddler(function(title,tiddler) {
 			var links = self._getLinks(tiddler);
-			for(var link of links) {
+			$tw.utils.each(links, function(link) {
 				if(!self.index[link]) {
-					self.index[link] = new Set();
+					self.index[link] = Object.create(null);
 				}
-				self.index[link].add(title);
-			}
+				self.index[link][title] = true;
+			});
 		});
 	}
 	if(this.index[title]) {
-		return Array.from(this.index[title]);
+		return Object.keys(this.index[title]);
 	} else {
 		return [];
 	}
