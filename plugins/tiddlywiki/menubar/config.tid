@@ -1,10 +1,10 @@
 title: $:/plugins/tiddlywiki/menubar/config
 tags: $:/tags/ControlPanel/Toolbars
-caption: Top Menu Bar
+caption: Menu Bar
 
 \define config-base() $:/config/plugins/menubar/MenuItems/Visibility/
 
-! Top Menu Configuration
+! Menu Bar Configuration
 
 !! Menu Items
 
