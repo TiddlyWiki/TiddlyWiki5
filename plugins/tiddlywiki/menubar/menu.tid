@@ -50,6 +50,7 @@ tags: $:/tags/PageTemplate
 <div class="tc-menubar-wide">
 <<menubar-inner wide>>
 </div>
+<div style="clear:both;"/>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]is-dropdown[yes]]">
 <$list filter="[<currentTiddler>addprefix[$:/config/plugins/menubar/MenuItems/Visibility/]get[text]] ~show +[match[show]]" variable="ignore">
 <$set name="dropdown-state" value=<<qualify "$:/state/popup/topmenu/dropdown/">>>
