@@ -30,7 +30,8 @@ The content of the `<$edit-text>` widget is ignored.
 |size |The size of the input field (in characters) |
 |autoHeight |Either "yes" or "no" to specify whether to automatically resize `textarea` editors to fit their content (defaults to "yes") |
 |minHeight |Minimum height for automatically resized `textarea` editors, specified in CSS length units such as "px", "em" or "%" |
-|rows|Sets the rows attribute of a generated textarea |
+|rows |Sets the rows attribute of a generated textarea |
+|storeTitle <<.from-version 5.1.22>> |An additional tiddler title that stores the user's input |
 
 ! Notes
 
