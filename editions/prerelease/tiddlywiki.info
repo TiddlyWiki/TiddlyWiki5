@@ -8,14 +8,14 @@
 		"tiddlywiki/powered-by-tiddlywiki",
 		"tiddlywiki/internals",
 		"tiddlywiki/highlight",
-		"tiddlywiki/markdown",
 		"tiddlywiki/bibtex",
 		"tiddlywiki/savetrail",
 		"tiddlywiki/external-attachments",
 		"tiddlywiki/dynaview",
 		"tiddlywiki/codemirror",
 		"tiddlywiki/comments",
-		"tiddlywiki/browser-storage"
+		"tiddlywiki/browser-storage",
+		"tiddlywiki/menubar"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

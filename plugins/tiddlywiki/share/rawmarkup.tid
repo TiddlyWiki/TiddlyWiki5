@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/share/rawmarkup
+tags: $:/tags/RawMarkupWikified
+
+`<script>`
+`var tiddlywikiSharePluginStartupWarningHtml = "`<$view tiddler="$:/plugins/tiddlywiki/share/startup-warning.html" format="jsencoded"/>`";`
+`var tiddlywikiSharePluginStartupWarningCss = "`<$view tiddler="$:/plugins/tiddlywiki/share/startup-warning.css" format="jsencoded"/>`";`
+{{$:/plugins/tiddlywiki/share/rawmarkup.js}}
+`</script>`

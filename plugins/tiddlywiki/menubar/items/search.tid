@@ -1,0 +1,33 @@
+title: $:/plugins/tiddlywiki/menubar/items/search
+custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
+description: Search
+caption: Search
+tags: $:/tags/MenuBar
+
+<$set name="searchTiddler" value="$:/temp/menubarsearch">
+
+<span style="margin: 0 0.5em;">
+
+<$edit-text tiddler=<<searchTiddler>> tag="input" type="search" focusPopup="$:/state/popup/menubar-search-dropdown" class="tc-popup-handle tc-menu-show-when-wide" placeholder="Search..." default=""/>
+
+</span>
+
+<$reveal tag="div" class="tc-block-dropdown-wrapper" state="$:/state/popup/menubar-search-dropdown" type="nomatch" text="" default="">
+
+<div  class="tc-block-dropdown tc-search-drop-down">
+
+<$list filter="[<searchTiddler>get[text]minlength[1]]" emptyMessage="""<div class="tc-search-results">Type your search terms</div>""" variable="ignore">
+
+<$list filter="[<searchTiddler>get[text]minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+
+{{$:/core/ui/SearchResults}}
+
+</$list>
+
+</$list>
+
+</div>
+
+</$reveal>
+
+</$set>

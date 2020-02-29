@@ -66,6 +66,7 @@ SystemTiddlers/Include/Prompt: 包括系統條目
 TagManager/Colour/Heading: 顏色
 TagManager/Count/Heading: 計數
 TagManager/Icon/Heading: 圖示
+TagManager/Icons/None: 無
 TagManager/Info/Heading: 資訊
 TagManager/Tag/Heading: 標籤
 Tiddler/DateFormat: YYYY年0MM月0DD日 0hh:0mm

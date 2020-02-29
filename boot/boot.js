@@ -2080,9 +2080,9 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		for(var title in $tw.boot.files) {
 			relativePath = path.relative(resolvedWikiPath,$tw.boot.files[title].filepath);
 			output[title] =
-				path.sep === path.posix.sep ?
+				path.sep === "/" ?
 				relativePath :
-				relativePath.split(path.sep).join(path.posix.sep);
+				relativePath.split(path.sep).join("/");
 		}
 		$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
 	}
@@ -2245,6 +2245,7 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("application/json","utf8",".json");
 	$tw.utils.registerFileType("application/pdf","base64",".pdf",{flags:["image"]});
 	$tw.utils.registerFileType("application/zip","base64",".zip");
+	$tw.utils.registerFileType("application/x-zip-compressed","base64",".zip");
 	$tw.utils.registerFileType("image/jpeg","base64",[".jpg",".jpeg"],{flags:["image"]});
 	$tw.utils.registerFileType("image/png","base64",".png",{flags:["image"]});
 	$tw.utils.registerFileType("image/gif","base64",".gif",{flags:["image"]});
