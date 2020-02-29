@@ -6,7 +6,7 @@ description: {{$:/language/Buttons/Help/Hint}}
 \whitespace trim
 \define help-inner()
 \whitespace trim
-<$list filter="[[$:/config/ShowHelp]get[text]match[yes]]" variable="ignore">
+<$list filter="[[$:/config/ShowHelp]get[text]] +[else[no]match[yes]]" variable="ignore">
 <$button set="$:/config/ShowHelp" setTo="no" tooltip={{$:/language/Buttons/Help/Hint}} aria-label={{$:/language/Buttons/Help/Caption}} class="""$(tv-config-toolbar-class)$ tc-selected""">
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/help}}
@@ -16,7 +16,7 @@ description: {{$:/language/Buttons/Help/Hint}}
 </$list>
 </$button>
 </$list>
-<$list filter="[[$:/config/ShowHelp]get[text]!match[yes]]" variable="ignore">
+<$list filter="[[$:/config/ShowHelp]get[text]] +[else[no]!match[yes]]" variable="ignore">
 <$button set="$:/config/ShowHelp" setTo="yes" tooltip={{$:/language/Buttons/Help/Hint}} aria-label={{$:/language/Buttons/Help/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/help}}
