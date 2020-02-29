@@ -14,7 +14,6 @@
 		"tiddlywiki/dynaview",
 		"tiddlywiki/codemirror",
 		"tiddlywiki/comments",
-		"tiddlywiki/browser-storage",
 		"tiddlywiki/menubar"
 	],
 	"themes": [
