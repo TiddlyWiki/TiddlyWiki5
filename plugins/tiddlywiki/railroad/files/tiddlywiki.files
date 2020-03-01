@@ -3,7 +3,7 @@
 		{
 			"file": "railroad-diagrams.css",
 			"fields": {
-				"type": "text/css",
+				"type": "text/vnd.tiddlywiki",
 				"title": "$:/plugins/tiddlywiki/railroad/railroad-diagrams.css",
                                 "tags": "$:/tags/Stylesheet"
 			}
