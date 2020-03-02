@@ -1,0 +1,14 @@
+title: $:/plugins/tiddlywiki/menubar/items/server
+tags: $:/tags/MenuBar
+description: Server options
+caption: Server
+custom-menu-content: <$transclude tiddler="$:/plugins/tiddlywiki/menubar/items/server" mode="inline"/>
+
+<$list filter="[[$:/status/IsLoggedIn]get[text]else[no]match[yes]]" variable="ignore">
+<$transclude tiddler="$:/core/ui/Buttons/save-wiki" mode="inline"/>
+</$list>
+<$list filter="[[$:/status/IsLoggedIn]get[text]else[no]match[no]]" variable="ignore">
+<$button message="tm-login">
+Login
+</$button>
+</$list>
