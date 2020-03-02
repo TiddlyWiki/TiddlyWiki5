@@ -384,4 +384,6 @@ Stefan Krüger, @s-light, 2020/01/04
 
 Lee Sheng Long, @s-l-lee, 2020/01/25
 
+Scott Willeke, @activescott, 2020/02/01
+
 @lucible, 2020/02/05
