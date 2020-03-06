@@ -1,0 +1,43 @@
+title: $:/core/macros/keyboard-driven-input
+tags: $:/tags/Macro
+
+\define get-filter-list()
+$(filter1)$ $(filter2)$
+\end
+
+\define input-next-actions(afterbefore:"after",reverse:"",tiddler,storeTitle,field,index,filter1,filter2)
+<$list filter="[<__storeTitle__>get[text]minlength<__filterMinLength__>] [<__filterMinLength__>match[0]] +[limit[1]]" variable="ignore">
+<$vars userInput={{{ [<__storeTitle__>get[text]] }}} selectedItem={{{ [<__index__>match[]then<__tiddler__>get<__field__>] ~[<__tiddler__>getindex<__index__>] }}}>
+<$set name="filter1" filter=<<__filter1__>>>
+<$set name="filter2" filter=<<__filter2__>>>
+<$set name="filterList" value=<<get-filter-list>>>
+<$set name="nextItem" value={{{ [enlist<filterList>$afterbefore$<selectedItem>] ~[enlist<filterList>$reverse$nth[1]] }}}>
+<$list filter="[<nextItem>minlength[1]]">
+<$list filter="[<__index__>match[]]">
+<$action-setfield $tiddler=<<__tiddler__>> $field=<<__field__>> $value=<<nextItem>>/>
+</$list>
+<$list filter="[<__index__>!match[]]">
+<$action-setfield $tiddler=<<__tiddler__>> $index=<<__index__>> $value=<<nextItem>>/>
+</$list>
+</$list>
+</$set>
+</$set>
+</$set>
+</$set>
+</$vars>
+</$list>
+\end
+
+\define keyboard-driven-input(tiddler,storeTitle,field:"text",index:"",tag:"input",type,input-accept-actions,input-accept-variant-actions,input-cancel-actions,placeholder:"",default:"",class,filter1,filter2,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0")
+<$keyboard key="((input-accept))" actions=<<__input-accept-actions__>>>
+<$keyboard key="((input-accept-variant))" actions=<<__input-accept-variant-actions__>>>
+<$keyboard key="((input-up))" actions="""<$macrocall $name="input-next-actions" filter1=<<__filter1__>> filter2=<<__filter2__>> afterbefore="before" reverse="reverse[]" tiddler=<<__tiddler__>> storeTitle=<<__storeTitle__>> field=<<__field__>> index=<<__index__>> filterMinLength=<<__filterMinLength__>>/>""">
+<$keyboard key="((input-down))" actions="""<$macrocall $name="input-next-actions" filter1=<<__filter1__>> filter2=<<__filter2__>> tiddler=<<__tiddler__>> storeTitle=<<__storeTitle__>> field=<<__field__>> index=<<__index__>> filterMinLength=<<__filterMinLength__>>/>""">
+<$keyboard key="((input-cancel))" actions=<<__input-cancel-actions__>>>
+<$edit-text tiddler=<<__tiddler__>> field=<<__field__>> index=<<__index__>> storeTitle=<<__storeTitle__>> tag=<<__tag__>> class=<<__class__>> placeholder=<<__placeholder__>> default=<<__default__>> focusPopup=<<__focusPopup__>> type=<<__type__>> rows=<<__rows__>> minHeight=<<__minHeight__>>  tabindex=<<__tabindex__>> size=<<__size__>> autoHeight=<<__autoHeight__>>/>
+</$keyboard>
+</$keyboard>
+</$keyboard>
+</$keyboard>
+</$keyboard>
+\end
