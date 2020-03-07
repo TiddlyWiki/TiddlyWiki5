@@ -1,0 +1,29 @@
+caption: action-popup
+created: 20200303114556528
+modified: 20200303114556528
+tags: Widgets ActionWidgets
+title: ActionPopupWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The ''action-popup'' widget is an [[action widget|ActionWidgets]] that triggers the display of a popup defined via a state tiddler. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+
+! Content and Attributes
+
+The ''action-popup'' widget is invisible. Any content within it is ignored.
+
+|!Attribute |!Description |
+|$state |The title of the state tiddler for the popup |
+|$coords |Optional coordinates for the handle to which popup is positioned (in the format `(x,y,w,h)`) |
+
+! Examples
+
+Here is an example of button that triggers the "more" button in the sidebar "Tools" tab
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-setfield $tiddler="$:/state/tab/sidebar-1206596165" $value="$:/core/ui/SideBar/Tools"/>
+<$action-popup $state="$:/state/popup/more-435115636" $coords="(0,20,0,0)"/>
+Click me!
+</$button>'/>
