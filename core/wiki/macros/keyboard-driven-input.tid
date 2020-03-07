@@ -7,19 +7,22 @@ $(filter1)$ $(filter2)$
 
 \define input-next-actions(afterbefore:"after",reverse:"",tiddler,storeTitle,field,index,filter1,filter2)
 <$list filter="[<__storeTitle__>get[text]minlength<__filterMinLength__>] [<__filterMinLength__>match[0]] +[limit[1]]" variable="ignore">
-<$vars userInput={{{ [<__storeTitle__>get[text]] }}} selectedItem={{{ [<__index__>match[]then<__tiddler__>get<__field__>] ~[<__tiddler__>getindex<__index__>] }}}>
+<$vars userInput={{{ [<__storeTitle__>get[text]] }}} selectedItem={{{ [<selectedTiddler>get[text]] }}}>
 <$set name="filter1" filter=<<__filter1__>>>
 <$set name="filter2" filter=<<__filter2__>>>
-<$set name="filterList" value=<<get-filter-list>>>
+<$set name="filterListRaw" value=<<get-filter-list>>>
+<$set name="filterList" filter="[enlist:raw<filterListRaw>indexed[]]">
 <$set name="nextItem" value={{{ [enlist<filterList>$afterbefore$<selectedItem>] ~[enlist<filterList>$reverse$nth[1]] }}}>
 <$list filter="[<nextItem>minlength[1]]">
+<$action-setfield $tiddler=<<selectedTiddler>> text=<<nextItem>>/>
 <$list filter="[<__index__>match[]]">
-<$action-setfield $tiddler=<<__tiddler__>> $field=<<__field__>> $value=<<nextItem>>/>
+<$action-setfield $tiddler=<<__tiddler__>> $field=<<__field__>> $value={{{ [<nextItem>] +[splitregexp[-(?:.(?!-))+$]] }}}/>
 </$list>
 <$list filter="[<__index__>!match[]]">
-<$action-setfield $tiddler=<<__tiddler__>> $index=<<__index__>> $value=<<nextItem>>/>
+<$action-setfield $tiddler=<<__tiddler__>> $index=<<__index__>> $value={{{ [<nextItem>] +[splitregexp[-(?:.(?!-))+$]] }}}/>
 </$list>
 </$list>
+</$set>
 </$set>
 </$set>
 </$set>
@@ -29,6 +32,7 @@ $(filter1)$ $(filter2)$
 \end
 
 \define keyboard-driven-input(tiddler,storeTitle,field:"text",index:"",tag:"input",type,input-accept-actions,input-accept-variant-actions,input-cancel-actions,placeholder:"",default:"",class,filter1,filter2,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0")
+<$set name="selectedTiddler" value=<<qualify "$:/state/selected-item">>>
 <$keyboard key="((input-accept))" actions=<<__input-accept-actions__>>>
 <$keyboard key="((input-accept-variant))" actions=<<__input-accept-variant-actions__>>>
 <$keyboard key="((input-up))" actions="""<$macrocall $name="input-next-actions" filter1=<<__filter1__>> filter2=<<__filter2__>> afterbefore="before" reverse="reverse[]" tiddler=<<__tiddler__>> storeTitle=<<__storeTitle__>> field=<<__field__>> index=<<__index__>> filterMinLength=<<__filterMinLength__>>/>""">
@@ -40,4 +44,5 @@ $(filter1)$ $(filter2)$
 </$keyboard>
 </$keyboard>
 </$keyboard>
+</$set>
 \end
