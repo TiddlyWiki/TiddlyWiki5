@@ -67,7 +67,7 @@ Set the text of the engine if it doesn't currently have focus
 */
 SimpleEngine.prototype.setText = function(text,type) {
 	if(!this.domNode.isTiddlyWikiFakeDom) {
-		if(this.domNode.ownerDocument.activeElement !== this.domNode || text === "") {
+		if(this.domNode.value !== text) {
 			this.domNode.value = text;
 		}
 		// Fix the height if needed
