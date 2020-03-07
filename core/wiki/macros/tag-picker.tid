@@ -18,6 +18,7 @@ tags: $:/tags/Macro
 </$list>
 </$set>
 </$set>
+<$action-deletetiddler $tiddler=<<selectionTiddler>>/>
 \end
 
 \define tag-button(selectedClass)
@@ -30,13 +31,13 @@ tags: $:/tags/Macro
 
 \define clear-tags-actions()
 <$list filter="[<__storeTitle__>!is[missing]] [<__tiddler__>!is[missing]]" variable="ignore" emptyMessage="""<$action-deletetiddler $tiddler=<<__storeTitle__>>/><$action-deletetiddler $tiddler=<<__tiddler__>>/><$action-sendmessage $message="tm-cancel-tiddler"/>""">
-<$action-deletetiddler $tiddler=<<__storeTitle__>>/><$action-deletetiddler $tiddler=<<__tiddler__>>/>
+<$action-deletetiddler $tiddler=<<__storeTitle__>>/><$action-deletetiddler $tiddler=<<__tiddler__>>/><$action-deletetiddler $tiddler=<<selectionTiddler>>/>
 </$list>
 \end
 
 \define tag-picker-inner()
 \whitespace trim
-<$set name="storeTitle" value=<<qualify "$:/temp/NewTagName/input">>>
+<$vars storeTitle=<<qualify "$:/temp/NewTagName/input">> selectionTiddler=<<qualify "$:/state/selected-item">>>
 <$set name="filter1" value="[tags[]!is[system]search:title<userInput>sort[]]">
 <$set name="filter2" value="[tags[]is[system]search:title<userInput>sort[]]">
 <div class="tc-edit-add-tag">
@@ -75,7 +76,7 @@ tags: $:/tags/Macro
 </div>
 </$set>
 </$set>
-</$set>
+</$vars>
 \end
 \define tag-picker()
 \whitespace trim
