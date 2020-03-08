@@ -12,29 +12,17 @@ GET /recipes/default/tiddlers/tiddlers.json?filter=<filter>
 /*global $tw: false */
 "use strict";
 
-var DEFAULT_FILTER = "[all[tiddlers]!is[system]sort[title]]",
-	DEFAULT_TIDDLYWEB_FILTER = "[all[tiddlers]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]]",
-	DEFAULT_ALLOWED_FILTERS = [
-		DEFAULT_FILTER,
-		DEFAULT_TIDDLYWEB_FILTER
-	];
+var DEFAULT_FILTER = "[all[tiddlers]!is[system]sort[title]]";
 
 exports.method = "GET";
 
 exports.path = /^\/recipes\/default\/tiddlers.json$/;
 
 exports.handler = function(request,response,state) {
-	var configAllowedFilters = $tw.boot.wikiInfo.config && $tw.boot.wikiInfo.config["server-get-tiddlers-allowed-filters"],
-		allowedFilters;
-	if(configAllowedFilters === "all") {
-		allowedFilters = null;
-	} else if ($tw.utils.isArray(configAllowedFilters)) {
-		allowedFilters = configAllowedFilters;
-	} else {
-		allowedFilters = DEFAULT_ALLOWED_FILTERS;
-	}
+	
 	var filter = state.queryParameters.filter || DEFAULT_FILTER;
-	if(allowedFilters && allowedFilters.indexOf(filter) === -1) {
+	
+	if(!$tw.wiki.tiddlerExists("$:/config/Server/ExternalFilters/" + filter)) {
 		console.log("Blocked attempt to GET /recipes/default/tiddlers/tiddlers.json with filter: " + filter);
 		response.writeHead(403);
 		response.end();
