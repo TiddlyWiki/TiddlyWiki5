@@ -16,10 +16,10 @@ $(filter1)$ $(filter2)$
 <$list filter="[<nextItem>minlength[1]]">
 <$action-setfield $tiddler=<<selectionTiddler>> text=<<nextItem>>/>
 <$list filter="[<__index__>match[]]">
-<$action-setfield $tiddler=<<__tiddler__>> $field=<<__field__>> $value={{{ [<nextItem>] +[splitregexp[-(?:.(?!-))+$]] }}}/>
+<$action-setfield $tiddler=<<__tiddler__>> $field=<<__field__>> $value={{{ [<nextItem>] +[splitregexp[(?:.(?!-))+$]] }}}/>
 </$list>
 <$list filter="[<__index__>!match[]]">
-<$action-setfield $tiddler=<<__tiddler__>> $index=<<__index__>> $value={{{ [<nextItem>] +[splitregexp[-(?:.(?!-))+$]] }}}/>
+<$action-setfield $tiddler=<<__tiddler__>> $index=<<__index__>> $value={{{ [<nextItem>] +[splitregexp[(?:.(?!-))+$]] }}}/>
 </$list>
 </$list>
 </$set>
