@@ -29,8 +29,8 @@ external-link-foreground-hover: Externer Link Vordergrund (hover)
 external-link-foreground-visited: Externer Link besucht Vordergrund
 external-link-foreground: Externer Link Vordergrund
 foreground: Vordergrund Global
-menubar-background: Oberes Menü Hintergrund
-menubar-foreground: Oberes Menü Vordergrund
+menubar-background: Menü Hintergrund
+menubar-foreground: Menü Vordergrund
 message-background: Meldungs-Box Hintergrund
 message-border: Meldungs-Box Rahmen
 message-foreground: Meldungs-Box Vordergrund
