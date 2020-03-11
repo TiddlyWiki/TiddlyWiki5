@@ -19,14 +19,14 @@ exports.method = "GET";
 exports.path = /^\/recipes\/default\/tiddlers.json$/;
 
 exports.handler = function(request,response,state) {
-	
 	var filter = state.queryParameters.filter || DEFAULT_FILTER;
-	
-	if(!$tw.wiki.tiddlerExists("$:/config/Server/ExternalFilters/" + filter)) {
-		console.log("Blocked attempt to GET /recipes/default/tiddlers/tiddlers.json with filter: " + filter);
-		response.writeHead(403);
-		response.end();
-		return;
+	if($tw.wiki.getTiddlerText("$:/config/Server/AllowAllExternalFilters") !== "yes") {
+		if($tw.wiki.getTiddlerText("$:/config/Server/ExternalFilters/" + filter) !== "yes") {
+			console.log("Blocked attempt to GET /recipes/default/tiddlers/tiddlers.json with filter: " + filter);
+			response.writeHead(403);
+			response.end();
+			return;
+		}
 	}
 	var excludeFields = (state.queryParameters.exclude || "text").split(","),
 		titles = state.wiki.filterTiddlers(filter);

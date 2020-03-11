@@ -1,5 +1,5 @@
 created: 20181002131215403
-modified: 20200114180029559
+modified: 2020031109590546
 tags: [[WebServer API]]
 title: WebServer API: Get All Tiddlers
 type: text/vnd.tiddlywiki
@@ -15,32 +15,16 @@ Parameters:
 * ''filter'' - filter identifying tiddlers to be returned (optional, defaults to "[all[tiddlers]!is[system]sort[title]]")
 * ''exclude'' - comma delimited list of fields to excluded from the returned tiddlers (optional, defaults to "text")
 
-To avoid denial of service attacks with malformed filters by default only the following filters are permitted:
+In order to avoid denial of service attacks with malformed filters in the default configuration the only filter that is accepted is the default filter "[all[tiddlers]!is[system]sort[title]]"; attempts to use any other filter will result in an HTTP 403 error.
 
-* `[all[tiddlers]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]]` (the filter used by the current TiddlyWeb adaptor)
-* `[all[tiddlers]!is[system]sort[title]]` (the filter used by default when the filter is not specified)
-
-The list of permitted filters may be overridden in [[tiddlywiki.info|tiddlywiki.info Files]] in the config setting `server-get-tiddlers-allowed-filters`. For example, the following setting explicitly permits the filter used by the TiddlyWeb adaptor plugin:
+To enable a particular filter, create a tiddler with the title "$:/config/Server/ExternalFilters/" concatenated with the filter text, and the text field set to "yes". For example, the TiddlyWeb plugin includes the following shadow tiddler to enable the filter that it requires:
 
 ```
-...
-"config": {
-	"server-get-tiddlers-allowed-filters": [
-		"[all[tiddlers]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]]"
-	]
-}
-...
+title: $:/config/Server/ExternalFilters/[all[tiddlers]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]]
+text: yes
 ```
 
-It is also possible to configure the server to accept any filter, but this should not be done for public facing servers.
-
-```
-...
-"config": {
-	"server-get-tiddlers-allowed-filters": "all"
-}
-...
-```
+It is also possible to configure the server to accept any filter by creating a tiddler titled $:/config/Server/AllowAllExternalFilters with the text "yes". This should not be done for public facing servers.
 
 Response:
 
