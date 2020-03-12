@@ -1,10 +1,17 @@
 created: 20160107225427489
-modified: 20160107225651558
+modified: 20200312172056083
 tags: Features
 title: Modals
 type: text/vnd.tiddlywiki
 
 Modals (or "wizards") fade the main TiddlyWiki window to display an isolated tiddler that must be explicitly dismissed by the user.
+
+The tiddler to be displayed can contain the following optional fields that are used to customize the modal:
+
+|!Field |!Description |
+|footer|The footer text for the modal|
+|subtitle|The subtitle text for a modal|
+|class|An additional class to apply to the modal wrapper|
 
 Modals are displayed with the [[WidgetMessage: tm-modal]].
 
