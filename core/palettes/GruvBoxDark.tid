@@ -3,7 +3,7 @@ name: Gruvbox Dark
 description: Retro groove color scheme
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
-credits: https://github.com/morhetz/gruvbox
+license: https://github.com/morhetz/gruvbox
 
 alert-background: #cc241d
 alert-border: #cc241d
