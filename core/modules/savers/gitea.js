@@ -59,6 +59,7 @@ GiteaSaver.prototype.save = function(text,method,callback) {
 			if(err && xhr.status !== 404) {
 				return callback(err);
 			}
+			var use_put = true;
 			if(xhr.status !== 404) {
 				getResponseData = JSON.parse(getResponseDataJson);
 				$tw.utils.each(getResponseData,function(details) {
@@ -66,30 +67,47 @@ GiteaSaver.prototype.save = function(text,method,callback) {
 						sha = details.sha;
 					}
 				});
+				if(sha === ""){
+					use_put = false;
+				}
 			}
 			var data = {
 				message: $tw.language.getRawString("ControlPanel/Saving/GitService/CommitMessage"),
 				content: $tw.utils.base64Encode(text),
-				branch: branch,
 				sha: sha
 			};
-			// Perform a PUT request to save the file
 			$tw.utils.httpRequest({
-				url: uri + filename,
-				type: "PUT",
+				url: endpoint + "/repos/" + repo + "/branches/" + branch,
+				type: "GET",
 				headers: headers,
-				data: JSON.stringify(data),
-				callback: function(err,putResponseDataJson,xhr) {
-					if(err) {
-						return callback(err);
+				callback: function(err,getResponseDataJson,xhr) {
+					if(xhr.status === 404) {
+						callback("Please ensure the branch in the gitea repo exists");
+					}else{
+						data["branch"] = branch;
+						self.upload(uri + filename, use_put?"PUT":"POST", headers, data, callback);
 					}
-					var putResponseData = JSON.parse(putResponseDataJson);
-					callback(null);
 				}
 			});
 		}
 	});
 	return true;
+};
+
+GiteaSaver.prototype.upload = function(uri,method,headers,data,callback) {
+	$tw.utils.httpRequest({
+		url: uri,
+		type: method,
+		headers: headers,
+		data: JSON.stringify(data),
+		callback: function(err,putResponseDataJson,xhr) {
+			if(err) {
+				return callback(err);
+			}
+			var putResponseData = JSON.parse(putResponseDataJson);
+			callback(null);
+		}
+	});
 };
 
 /*
