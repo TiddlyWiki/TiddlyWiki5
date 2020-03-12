@@ -12,7 +12,7 @@ tags: $:/tags/Stylesheet
     border: 1px solid #ebefcd;
     padding: 5px 10px;
     margin-bottom: 10px;
-    background: #fcfdf3;
+    background: <<colour code-background>>;
     font-size: 0.8em;
     line-height: 1.2;
 }
