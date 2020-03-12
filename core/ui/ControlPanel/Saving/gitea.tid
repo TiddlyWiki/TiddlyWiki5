@@ -1,0 +1,16 @@
+title: $:/core/ui/ControlPanel/Saving/gitea
+tags: $:/tags/ControlPanel/Saving
+caption: {{$:/language/ControlPanel/Saving/GitService/gitea/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Saving/GitService/
+\define service-name() ~gitea
+
+<<lingo Description>>
+
+|<<lingo UserName>> |<$edit-text tiddler="$:/gitea/Username" default="" tag="input"/> |
+|<<lingo gitea/Password>> |<$password name="gitea"/> |
+|<<lingo Repo>> |<$edit-text tiddler="$:/gitea/Repo" default="" tag="input"/> |
+|<<lingo Branch>> |<$edit-text tiddler="$:/gitea/Branch" default="master" tag="input"/> |
+|<<lingo Path>> |<$edit-text tiddler="$:/gitea/Path" default="" tag="input"/> |
+|<<lingo Filename>> |<$edit-text tiddler="$:/gitea/Filename" default="" tag="input"/> |
+|<<lingo ServerURL>> |<$edit-text tiddler="$:/gitea/ServerURL" default="https://gitea/api/v1" tag="input"/> |
