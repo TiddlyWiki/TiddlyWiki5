@@ -58,7 +58,7 @@ Modal.prototype.display = function(title,options) {
 	this.adjustPageClass();
 	// Add classes
 	$tw.utils.addClass(wrapper,"tc-modal-wrapper");
-	if(tiddler && tiddler.fields && tiddler.fields.class) {
+	if(tiddler.fields && tiddler.fields.class) {
 		$tw.utils.addClass(wrapper,tiddler.fields.class);
 	}
 	$tw.utils.addClass(modalBackdrop,"tc-modal-backdrop");
@@ -107,7 +107,7 @@ Modal.prototype.display = function(title,options) {
 		modalBody.appendChild(modalLink);
 	}
 	// Render the footer of the message
-	if(tiddler && tiddler.fields && tiddler.fields.help) {
+	if(tiddler.fields && tiddler.fields.help) {
 		var link = this.srcDocument.createElement("a");
 		link.setAttribute("href",tiddler.fields.help);
 		link.setAttribute("target","_blank");
