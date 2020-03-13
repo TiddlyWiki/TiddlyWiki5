@@ -53,7 +53,7 @@ modal-border: #504945
 modal-footer-background: #3c3836
 modal-footer-border: #3c3836
 modal-header-border: #3c3836
-muted-foreground: #665c54
+muted-foreground: #989898
 notification-background: <<colour primary>>
 notification-border: <<colour primary>>
 page-background: #282828
@@ -119,4 +119,4 @@ toolbar-delete-button:
 toolbar-cancel-button: 
 toolbar-done-button: 
 untagged-background: #504945
-very-muted-foreground: #32302f
+very-muted-foreground: #665c54
