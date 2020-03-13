@@ -9,7 +9,7 @@ tags: [[$:/tags/Stylesheet]]
 
 nav.tc-menubar {
 	position: fixed;
-	z-index: 1050;
+	z-index: 850;
 	display: inline-block;
 	top: 0;
 	right: 0;
