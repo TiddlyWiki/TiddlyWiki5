@@ -21,13 +21,13 @@ var GiteaSaver = function(wiki) {
 
 GiteaSaver.prototype.save = function(text,method,callback) {
 	var self = this,
-		username = this.wiki.getTiddlerText("$:/gitea/Username"),
-		password = $tw.utils.getPassword("gitea"),
-		repo = this.wiki.getTiddlerText("$:/gitea/Repo"),
-		path = this.wiki.getTiddlerText("$:/gitea/Path",""),
-		filename = this.wiki.getTiddlerText("$:/gitea/Filename"),
-		branch = this.wiki.getTiddlerText("$:/gitea/Branch") || "master",
-		endpoint = this.wiki.getTiddlerText("$:/gitea/ServerURL") || "https://gitea",
+		username = this.wiki.getTiddlerText("$:/Gitea/Username"),
+		password = $tw.utils.getPassword("Gitea"),
+		repo = this.wiki.getTiddlerText("$:/Gitea/Repo"),
+		path = this.wiki.getTiddlerText("$:/Gitea/Path",""),
+		filename = this.wiki.getTiddlerText("$:/Gitea/Filename"),
+		branch = this.wiki.getTiddlerText("$:/Gitea/Branch") || "master",
+		endpoint = this.wiki.getTiddlerText("$:/Gitea/ServerURL") || "https://gitea",
 		headers = {
 			"Accept": "application/json",
 			"Content-Type": "application/json;charset=UTF-8",
@@ -82,7 +82,7 @@ GiteaSaver.prototype.save = function(text,method,callback) {
 				headers: headers,
 				callback: function(err,getResponseDataJson,xhr) {
 					if(xhr.status === 404) {
-						callback("Please ensure the branch in the gitea repo exists");
+						callback("Please ensure the branch in the Gitea repo exists");
 					}else{
 						data["branch"] = branch;
 						self.upload(uri + filename, use_put?"PUT":"POST", headers, data, callback);
@@ -114,7 +114,7 @@ GiteaSaver.prototype.upload = function(uri,method,headers,data,callback) {
 Information about this saver
 */
 GiteaSaver.prototype.info = {
-	name: "gitea",
+	name: "Gitea",
 	priority: 2000,
 	capabilities: ["save", "autosave"]
 };

@@ -107,8 +107,8 @@ Saving/GitService/GitHub/Caption: ~GitHub Saver
 Saving/GitService/GitHub/Password: Password, OAUTH token, or personal access token (see [[GitHub help page|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] for details)
 Saving/GitService/GitLab/Caption: ~GitLab Saver
 Saving/GitService/GitLab/Password: Personal access token for API (see [[GitLab help page|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] for details)
-Saving/GitService/gitea/Caption: gitea saver
-Saving/GitService/gitea/Password: Personal access token for API (via Gitea’s web interface: `Settings | Applications | Generate New Token`)
+Saving/GitService/Gitea/Caption: Gitea Saver
+Saving/GitService/Gitea/Password: Personal access token for API (via Gitea’s web interface: `Settings | Applications | Generate New Token`)
 Saving/TiddlySpot/Advanced/Heading: Advanced Settings
 Saving/TiddlySpot/BackupDir: Backup Directory
 Saving/TiddlySpot/Backups: Backups
