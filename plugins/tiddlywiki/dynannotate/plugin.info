@@ -1,0 +1,9 @@
+{
+	"title": "$:/plugins/tiddlywiki/dynannotate",
+	"description": "Dynamic content annotation",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"version": "0.0.6-prerelease",
+	"list": "readme examples history",
+	"dependents": ["$:/plugins/tiddlywiki/dynaview"]
+}

@@ -12,9 +12,10 @@
 		"tiddlywiki/savetrail",
 		"tiddlywiki/external-attachments",
 		"tiddlywiki/dynaview",
+		"tiddlywiki/dynannotate",
 		"tiddlywiki/codemirror",
 		"tiddlywiki/comments",
-		"tiddlywiki/browser-storage"
+		"tiddlywiki/menubar"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
