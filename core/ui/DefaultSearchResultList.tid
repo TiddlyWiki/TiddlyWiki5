@@ -6,23 +6,18 @@ caption: {{$:/language/Search/DefaultResults/Caption}}
 //<small>{{$:/language/Search/Matches/Title}}</small>//
 
 <$list filter="[!is[system]search:title{$(searchTiddler)$}sort[title]limit[250]]">
-<$list filter="[<currentTiddler>match{$:/temp/search}]" variable="ignore" emptyMessage="""
-{{||$:/core/ui/ListItemTemplate}}
-""">
-<span class="tc-list-item-selected">
-{{||$:/core/ui/ListItemTemplate}}
+<span class={{{[<currentTiddler>match{$:/temp/search}then[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>
-</$list></$list>
+</$list>
 
 //<small>{{$:/language/Search/Matches/All}}</small>//
 
 <$list filter="[!is[system]search{$(searchTiddler)$}sort[title]limit[250]]">
-<$list filter="[<currentTiddler>match{$:/temp/search}]" variable="ignore" emptyMessage="""
-{{||$:/core/ui/ListItemTemplate}}""">
-<span class="tc-list-item-selected">
-{{||$:/core/ui/ListItemTemplate}}
+<span class={{{[<currentTiddler>match{$:/temp/search}then[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>
-</$list></$list>
+</$list>
 
 \end
 <<searchResultList>>
