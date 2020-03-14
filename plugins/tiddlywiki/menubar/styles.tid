@@ -139,6 +139,17 @@ nav.tc-menubar .tc-drop-down ol {
 	margin: 0;
 }
 
+nav.tc-menubar .tc-drop-down .tc-menubar-dropdown-sidebar a,
+nav.tc-menubar .tc-drop-down .tc-menubar-dropdown-sidebar button {
+	display: inline;
+	width: auto;
+}
+
+nav.tc-menubar .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
+	display: block;
+	width: 100%;
+}
+
 @media (max-width: {{$:/config/plugins/menubar/breakpoint}}) {
 
 	.tc-menubar-wide {
