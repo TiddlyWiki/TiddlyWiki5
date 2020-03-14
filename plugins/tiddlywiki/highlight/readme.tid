@@ -50,6 +50,8 @@ The plugin includes support for the following languages (referred to as "brushes
 * javascript
 * json
 * kotlin
+* less
+* lua
 * makefile
 * markdown
 * mathematica
@@ -58,13 +60,20 @@ The plugin includes support for the following languages (referred to as "brushes
 * objectivec
 * perl
 * php
+* plaintext
 * powershell
+* properties
 * python
 * R
 * ruby
 * rust
+* scss
+* shell session
 * sql
+* swift
+* toml
 * typescript
+* vala
 * vim script
 * xml
 * yaml
