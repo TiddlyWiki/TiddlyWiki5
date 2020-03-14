@@ -37,7 +37,7 @@ tags: $:/tags/Macro
 
 \define tag-picker-inner()
 \whitespace trim
-<$vars storeTitle=<<qualify "$:/temp/NewTagName/input">> selectionTiddler=<<qualify "$:/state/selected-item">>>
+<$set name="storeTitle" value=<<qualify "$:/temp/NewTagName/input">>>
 <$set name="filter1" value="[tags[]!is[system]search:title<userInput>sort[]]">
 <$set name="filter2" value="[tags[]is[system]search:title<userInput>sort[]]">
 <div class="tc-edit-add-tag">
@@ -76,7 +76,7 @@ tags: $:/tags/Macro
 </div>
 </$set>
 </$set>
-</$vars>
+</$set>
 \end
 \define tag-picker()
 \whitespace trim
