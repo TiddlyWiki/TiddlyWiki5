@@ -4,7 +4,7 @@ tags: $:/tags/SideBarSegment
 \whitespace trim
 <div class="tc-sidebar-lists tc-sidebar-search">
 
-<$vars name="searchTiddler" value="$:/temp/search/input">
+<$set name="searchTiddler" value="$:/temp/search/input">
 <$set name="filter1" value="[!is[system]search:title<userInput>sort[title]limit[250]]">
 <$set name="filter2" value="[!is[system]search<userInput>sort[title]limit[250]]">
 <div class="tc-search">
