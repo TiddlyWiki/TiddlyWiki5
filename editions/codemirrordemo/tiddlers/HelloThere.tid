@@ -26,15 +26,15 @@ Some commands and functions to try:
 * tiddlers with type `text/html` automatically close tags like `<div>` when the closing `>` gets typed
 * Multiple cursors: holding Ctrl pressed while selecting words results in multiple cursors. If you type, all selections will update
 
-This demo uses the ''Sublime Text Keymap'' - See the Sidebar Tab ''Keymap'' or the [[Sublime Text Keymap Readme|$:/plugins/tiddlywiki/codemirror-keymap-sublime-text/readme]] for all available keyboard shortcuts
+This demo uses the ''Sublime Text Keymap'' - See the Sidebar Tab ''Keymap'' or the [[Sublime Text Keymap Readme|$:/plugins/codemirror5/codemirror-keymap-sublime-text/readme]] for all available keyboard shortcuts
 
 To add the base plugin to your own ~TiddlyWiki5, just drag this link to the browser window:
 
-[[$:/plugins/tiddlywiki/codemirror]]
+[[$:/plugins/codemirror5/codemirror]]
 
-[[CodeMirror plugin Readme|$:/plugins/tiddlywiki/codemirror/readme]]
+[[CodeMirror plugin Readme|$:/plugins/codemirror5/codemirror/readme]]
 
-[[CodeMirror plugin Usage|$:/plugins/tiddlywiki/codemirror/usage]]
+[[CodeMirror plugin Usage|$:/plugins/codemirror5/codemirror/usage]]
 
 To add ~AddOns to your ~CodeMirror plugin, go to ~ControlPanel - Plugins and drag the desired ~AddOn to your wiki browser window
 

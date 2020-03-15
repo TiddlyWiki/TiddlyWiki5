@@ -1,18 +1,18 @@
 {
 	"description": "Demo of the CodeMirror plugin",
 	"plugins": [
-		"tiddlywiki/codemirror",
-		"tiddlywiki/codemirror-closebrackets",
-		"tiddlywiki/codemirror-closetag",
-		"tiddlywiki/codemirror-autocomplete",
-		"tiddlywiki/codemirror-search-replace",
-		"tiddlywiki/codemirror-fullscreen-editing",
-		"tiddlywiki/codemirror-mode-xml",
-		"tiddlywiki/codemirror-mode-javascript",
-		"tiddlywiki/codemirror-mode-css",
-		"tiddlywiki/codemirror-mode-x-tiddlywiki",
-		"tiddlywiki/codemirror-mode-markdown",
-		"tiddlywiki/codemirror-keymap-sublime-text"
+		"codemirror5/codemirror",
+		"codemirror5/codemirror-closebrackets",
+		"codemirror5/codemirror-closetag",
+		"codemirror5/codemirror-autocomplete",
+		"codemirror5/codemirror-search-replace",
+		"codemirror5/codemirror-fullscreen-editing",
+		"codemirror5/codemirror-mode-xml",
+		"codemirror5/codemirror-mode-javascript",
+		"codemirror5/codemirror-mode-css",
+		"codemirror5/codemirror-mode-x-tiddlywiki",
+		"codemirror5/codemirror-mode-markdown",
+		"codemirror5/codemirror-keymap-sublime-text"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
