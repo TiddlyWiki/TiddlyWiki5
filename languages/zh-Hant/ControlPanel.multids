@@ -108,8 +108,8 @@ Saving/GitService/GitHub/Caption: ~GitHub 儲存模組
 Saving/GitService/GitHub/Password: 密碼、OAUTH 權杖，或個人存取權杖 (詳見 [[GitHub 說明頁面|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]])
 Saving/GitService/GitLab/Caption: ~GitLab 儲存模組
 Saving/GitService/GitLab/Password: 個人存取權杖的 API (詳見 [[GitLab 說明頁面|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]])
-Saving/GitService/gitea/Caption: Gitea 儲存模組
-Saving/GitService/gitea/Password: 個人存取權杖的 API (通過 Gitea 的 Web 介面：`設定 | 應用程式 | 產生新的權杖`)
+Saving/GitService/Gitea/Caption: Gitea 儲存模組
+Saving/GitService/Gitea/Password: 個人存取權杖的 API (通過 Gitea 的 Web 介面：`設定 | 應用程式 | 產生新的權杖`)
 Saving/TiddlySpot/Advanced/Heading: 進階設定
 Saving/TiddlySpot/BackupDir: 備份資料夾
 Saving/TiddlySpot/Backups: 備份
