@@ -2170,6 +2170,10 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	height: 1em;
 }
 
+.tc-plugin-info-toggle button {
+	line-height: 3em;
+}
+
 .tc-plugin-info-chunk.tc-plugin-info-icon img, .tc-plugin-info-chunk.tc-plugin-info-icon svg {
 	width: 2em;
 	height: 2em;
