@@ -2,3 +2,4 @@ title: $:/config/plugins/menubar/MenuItems/Visibility/$:/plugins/tiddlywiki/menu
 
 pagecontrols: hide
 server: hide
+sidebar: hide
