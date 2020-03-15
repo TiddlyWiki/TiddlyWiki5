@@ -72,7 +72,7 @@ rm $TW5_BUILD_OUTPUT/dev/static/*
 # Redirects
 
 echo "<a href='./plugins/tiddlywiki/tw2parser/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/tw2parser/index.html</a>" > $TW5_BUILD_OUTPUT/classicparserdemo.html
-echo "<a href='./plugins/tiddlywiki/codemirror/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/codemirror/index.html</a>" > $TW5_BUILD_OUTPUT/codemirrordemo.html
+echo "<a href='./plugins/tiddlywiki/codemirror/index.html'>Moved to http://tiddlywiki.com/plugins/codemirror5/codemirror/index.html</a>" > $TW5_BUILD_OUTPUT/codemirrordemo.html
 echo "<a href='./plugins/tiddlywiki/d3/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/d3/index.html</a>" > $TW5_BUILD_OUTPUT/d3demo.html
 echo "<a href='./plugins/tiddlywiki/highlight/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/highlight/index.html</a>" > $TW5_BUILD_OUTPUT/highlightdemo.html
 echo "<a href='./plugins/tiddlywiki/markdown/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/markdown/index.html</a>" > $TW5_BUILD_OUTPUT/markdowndemo.html
@@ -298,15 +298,15 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--rendertiddler $:/core/save/empty plugins/tiddlywiki/d3/empty.html text/plain \
 	|| exit 1
 
-# /plugins/tiddlywiki/codemirror/index.html	Demo wiki with codemirror plugin
-# /plugins/tiddlywiki/codemirror/empty.html	Empty wiki with codemirror plugin
+# /plugins/codemirror5/codemirror/index.html	Demo wiki with codemirror plugin
+# /plugins/codemirror5/codemirror/empty.html	Empty wiki with codemirror plugin
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/codemirrordemo \
 	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all plugins/tiddlywiki/codemirror/index.html text/plain \
-	--rendertiddler $:/core/save/empty plugins/tiddlywiki/codemirror/empty.html text/plain \
+	--rendertiddler $:/core/save/all plugins/codemirror5/codemirror/index.html text/plain \
+	--rendertiddler $:/core/save/empty plugins/codemirror5/codemirror/empty.html text/plain \
 	|| exit 1
 
 # /plugins/tiddlywiki/markdown/index.html		Demo wiki with Markdown plugin
@@ -450,6 +450,14 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/library/$TW5_BUILD_VERSION \
+	--build \
+	|| exit 1
+
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/pluginlibrary-cm5 \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT/library/$TW5_BUILD_VERSION/codemirror5 \
 	--build \
 	|| exit 1
 
