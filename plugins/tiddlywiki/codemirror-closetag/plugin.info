@@ -1,7 +1,0 @@
-{
-	"title": "$:/plugins/tiddlywiki/codemirror-closetag",
-	"name": "CodeMirror Close Tag",
-	"description": "Close tags automatically for CodeMirror",
-	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
-	"list": "readme"
-}

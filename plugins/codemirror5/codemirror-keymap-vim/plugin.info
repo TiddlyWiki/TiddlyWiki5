@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/codemirror5/codemirror-keymap-vim",
+	"name": "CodeMirror Keymap Vim",
+	"description": "Keymap compatible with Vim for CodeMirror",
+	"dependents": "$:/plugins/codemirror5/codemirror $:/plugins/codemirror5/codemirror-search-replace $:/plugins/codemirror5/codemirror-closebrackets ",
+	"list": "readme"
+}

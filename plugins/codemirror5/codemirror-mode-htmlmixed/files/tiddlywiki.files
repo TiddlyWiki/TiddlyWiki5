@@ -1,0 +1,12 @@
+{
+	"tiddlers": [
+{
+			"file": "mode/htmlmixed/htmlmixed.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/codemirror5/codemirror/mode/htmlmixed/htmlmixed.js",
+				"module-type": "codemirror"
+			}
+		}
+	]
+}

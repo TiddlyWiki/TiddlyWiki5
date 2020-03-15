@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/codemirror5/codemirror-autocomplete",
+	"name": "CodeMirror Autocomplete",
+	"description": "Autocompletion for CodeMirror",
+	"dependents": "$:/plugins/codemirror5/codemirror",
+	"list": "readme"
+}

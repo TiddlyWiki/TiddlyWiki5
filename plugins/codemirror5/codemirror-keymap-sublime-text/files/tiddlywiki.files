@@ -1,0 +1,12 @@
+{
+	"tiddlers": [
+		{
+			"file": "keymap/sublime.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/codemirror5/codemirror/keymap/sublime.js",
+				"module-type": "codemirror"
+			}
+		}
+	]
+}

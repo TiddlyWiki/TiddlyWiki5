@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/codemirror5/codemirror-keymap-sublime-text",
+	"name": "CodeMirror Keymap Sublime Text",
+	"description": "Keymap compatible with Sublime Text for CodeMirror",
+	"dependents": "$:/plugins/codemirror5/codemirror $:/plugins/codemirror5/codemirror-search-replace $:/plugins/codemirror5/codemirror-closebrackets",
+	"list": "readme"
+}

@@ -1,7 +1,0 @@
-{
-	"title": "$:/plugins/tiddlywiki/codemirror-mode-css",
-	"name": "CodeMirror Mode CSS",
-	"description": "CSS highlighting mode for CodeMirror",
-	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
-	"list": "readme"
-}

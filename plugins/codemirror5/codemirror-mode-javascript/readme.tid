@@ -1,0 +1,4 @@
+title: $:/plugins/codemirror5/codemirror-mode-javascript/readme
+
+This plugin adds Syntax Highlighting for Javascript tiddlers (application/javascript) to the [[CodeMirror|http://codemirror.net]] text editor. It needs the latest [[CodeMirror plugin|$:/plugins/codemirror5/codemirror]] to be installed
+

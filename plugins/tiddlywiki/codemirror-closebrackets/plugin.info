@@ -1,7 +1,0 @@
-{
-	"title": "$:/plugins/tiddlywiki/codemirror-closebrackets",
-	"name": "CodeMirror Close Brackets",
-	"description": "Close brackets for CodeMirror",
-	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
-	"list": "readme"
-}

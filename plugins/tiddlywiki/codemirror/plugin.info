@@ -1,6 +1,0 @@
-{
-	"title": "$:/plugins/tiddlywiki/codemirror",
-	"name": "CodeMirror",
-	"description": "CodeMirror editor",
-	"list": "readme usage keyboard license"
-}

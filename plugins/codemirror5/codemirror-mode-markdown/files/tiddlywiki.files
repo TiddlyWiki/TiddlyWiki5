@@ -1,0 +1,12 @@
+{
+	"tiddlers": [
+{
+			"file": "mode/markdown/markdown.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/codemirror5/codemirror/mode/markdown/markdown.js",
+				"module-type": "codemirror"
+			}
+		}
+	]
+}

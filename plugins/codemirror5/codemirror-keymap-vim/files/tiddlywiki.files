@@ -1,0 +1,12 @@
+{
+	"tiddlers": [
+		{
+			"file": "keymap/vim.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/codemirror5/codemirror/keymap/vim.js",
+				"module-type": "codemirror"
+			}
+		}
+	]
+}

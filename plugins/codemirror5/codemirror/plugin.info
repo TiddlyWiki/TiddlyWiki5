@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/codemirror5/codemirror",
+	"name": "CodeMirror",
+	"description": "CodeMirror editor",
+	"list": "readme usage keyboard license"
+}

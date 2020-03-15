@@ -1,0 +1,12 @@
+{
+	"tiddlers": [
+{
+			"file": "mode/css/css.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/codemirror5/codemirror/mode/css/css.js",
+				"module-type": "codemirror"
+			}
+		}
+	]
+}

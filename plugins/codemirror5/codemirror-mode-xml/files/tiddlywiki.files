@@ -1,0 +1,12 @@
+{
+	"tiddlers": [
+		{
+			"file": "mode/xml/xml.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/codemirror5/codemirror/mode/xml/xml.js",
+				"module-type": "codemirror"
+			}
+		}
+	]
+}

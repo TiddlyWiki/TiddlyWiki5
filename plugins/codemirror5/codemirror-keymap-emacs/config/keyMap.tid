@@ -1,0 +1,4 @@
+title: $:/plugins/codemirror5/codemirror/keymaps/emacs
+module-type: codemirror-keymap
+
+emacs

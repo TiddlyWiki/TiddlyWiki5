@@ -1,0 +1,5 @@
+title: $:/plugins/codemirror5/codemirror-closetag/readme
+
+This plugin adds the ability to ''automatically close Tags''. It needs the latest [[CodeMirror plugin|$:/plugins/codemirror5/codemirror]] to be installed
+
+
