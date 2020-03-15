@@ -1,0 +1,6 @@
+title: $:/language/Libraries/
+
+OfficialPluginLibrary: Official ~TiddlyWiki Plugin Library
+OfficialPluginLibrary/Hint: The official ~TiddlyWiki plugin library at tiddlywiki.com. Plugins, themes and language packs are maintained by the core team.
+CodeMirror5/PluginLibrary: ~CodeMirror 5 Plugin Library
+CodeMirror5/PluginLibrary/Hint: This ~CodeMirror 5 plugin library is maintained by the ~TiddlyWiki core team.
