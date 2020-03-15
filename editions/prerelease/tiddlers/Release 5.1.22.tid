@@ -15,7 +15,7 @@ Plugins [[can now|https://github.com/Jermolene/TiddlyWiki5/pull/4259]] be loaded
 
 The [[plugin listing|$:/core/ui/ControlPanel/Plugins]] and the [[plugin chooser|$:/core/ui/ControlPanel/Modals/AddPlugins]] in the control panel feature several improvements:
 
-* The plugin chooser now displays plugins that provide add-on functionality to another plugin as nested "sub-plugins", making the main listing easier to navigate
+* The plugin chooser now displays 2 libraries. Codemirror 5 and other libraries are separated now
 * Plugins may now declare dependencies that are automatically installed without user intervention
 * All plugins now feature a concise, informal name (in addition to the description and title)
 

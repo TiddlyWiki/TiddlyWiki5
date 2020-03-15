@@ -1,0 +1,6 @@
+title: $:/config/CodeMirror-5-PluginLibrary
+tags: $:/tags/PluginLibrary
+url: https://tiddlywiki.com/prerelease/library/v5.1.22/codemirror5/index.html
+caption: {{$:/language/Libraries/CodeMirror5/PluginLibrary}} (Prerelease)
+
+{{$:/language/Libraries/CodeMirror5/PluginLibrary/Hint}}
