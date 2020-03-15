@@ -1,0 +1,6 @@
+title: $:/config/LocalCodeMirror-5-PluginLibrary
+tags: $:/tags/PluginLibrary
+url: http://127.0.0.1:8080/files/prerelease/library/latest/codemirror5/index.html
+caption: {{$:/language/Libraries/CodeMirror5/PluginLibrary}} (Prerelease Local)
+
+{{$:/language/Libraries/CodeMirror5/PluginLibrary/Hint}}

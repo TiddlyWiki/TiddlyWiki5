@@ -1,0 +1,19 @@
+{
+	"description": "Content for the current prerelease",
+	"plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem",
+		"tiddlywiki/internals",
+		"tiddlywiki/menubar"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite",
+		"tiddlywiki/readonly"
+	],
+	"languages": [
+	],
+	"includeWikis": [
+		"../prerelease"
+	]
+}

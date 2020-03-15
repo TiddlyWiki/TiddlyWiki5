@@ -1,0 +1,40 @@
+{
+  "name": "prerelease-test-server",
+  "version": "0.0.1",
+  "description": "tiddlywiki edition development helper",
+  "main": "",
+  "scripts": {
+    "start": "node ../../tiddlywiki . --listen",
+
+    "pretest": "npm run build:test:plugins && npm run build:test:cm5",
+    "test": "npm run build && npm start",
+    
+    "build:test:plugins": "node ../../tiddlywiki ../pluginlibrary --output ../prerelease-server/files/prerelease/library/latest --build library",
+    "build:test:cm5": "node ../../tiddlywiki ../pluginlibrary-cm5 --output ../prerelease-server/files/prerelease/library/latest/codemirror5 --build library",
+
+    "build:plugins": "node ../../tiddlywiki ../pluginlibrary --build library",
+    "build:cm5": "node ../../tiddlywiki ../pluginlibrary-cm5 --build library",
+    
+    "prebuild": "npm run build:plugins && npm run build:cm5",
+    "build": "node ../../tiddlywiki ../prerelease --build index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jermolene/TiddlyWiki5"
+  },
+  "keywords": [
+    "tiddlywiki",
+    "libraries"
+  ],
+  "author": "Mario Pietsch",
+  "license": "BSD 3 clause",
+  "bugs": {
+    "url": "https://github.com/Jermolene/TiddlyWiki5/issues"
+  },
+  "homepage": "https://tiddlywiki.com/prerelease",
+  "dependencies": {
+    "tiddlywiki": "^5.1.22"
+  },
+  "devDependencies": {
+  }
+}

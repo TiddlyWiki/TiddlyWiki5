@@ -1,0 +1,6 @@
+title: $:/config/LocalPluginLibrary
+tags: $:/tags/PluginLibrary
+url: http://127.0.0.1:8080/files/prerelease/library/latest/index.html
+caption: {{$:/language/Libraries/OfficialPluginLibrary}} (Prerelease Local)
+
+A locally installed version of the official ~TiddlyWiki plugin library at tiddlywiki.com for testing and debugging. //Requires a local web server to share the library//

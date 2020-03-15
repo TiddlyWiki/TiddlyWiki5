@@ -1,0 +1,10 @@
+created: 20200315083221031
+modified: 20200315083506915
+tags: 
+title: Remove-all-cm-modules
+type: text/vnd.tiddlywiki
+
+<$button>
+<$action-deletetiddler $filter="[prefix[$:/plugins/codemirror5/]]"/>
+Delete "~CodeMirror all modules"
+</$button>
