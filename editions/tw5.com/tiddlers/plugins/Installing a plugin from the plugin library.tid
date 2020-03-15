@@ -34,7 +34,7 @@ Follow these instructions when using TiddlyWiki under Node.js:
 ```
 {
 	"plugins": [
-		"tiddlywiki/codemirror"
+		"codemirror5/codemirror"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

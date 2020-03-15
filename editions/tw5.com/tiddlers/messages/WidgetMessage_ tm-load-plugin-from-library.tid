@@ -17,7 +17,7 @@ The following snippet will install the CodeMirror plugin from the official plugi
 
 ```
 <$button>
-<$action-sendmessage $message="tm-load-plugin-from-library" title="$:/plugins/tiddlywiki/codemirror" url="https://tiddlywiki.com/library/v5.1.11/index.html"/>
+<$action-sendmessage $message="tm-load-plugin-from-library" title="$:/plugins/codemirror5/codemirror" url="https://tiddlywiki.com/library/v5.1.22/index.html"/>
 Install CodeMirror
 </$button>
 ```

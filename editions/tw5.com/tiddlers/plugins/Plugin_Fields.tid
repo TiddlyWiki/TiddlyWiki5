@@ -20,3 +20,5 @@ Plugins are stored as tiddlers with the following fields:
 |title |Title of plugin |
 |type |Must be ''application/json'' |
 |version |//(optional)// Version string (should conform to [ext[SemanticVersioning|http://semver.org/]] convention) |
+
+TODO see parent-plugin
