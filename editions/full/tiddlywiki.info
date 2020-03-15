@@ -7,7 +7,6 @@
 		"tiddlywiki/browser-storage",
 		"tiddlywiki/cecily",
 		"tiddlywiki/classictools",
-		"tiddlywiki/codemirror",
 		"tiddlywiki/comments",
 		"tiddlywiki/d3",
 		"tiddlywiki/github-fork-ribbon",
@@ -27,7 +26,8 @@
 		"tiddlywiki/twitter",
 		"tiddlywiki/xlsx-utils",
 		"tiddlywiki/sax",
-		"tiddlywiki/xmldom"
+		"tiddlywiki/xmldom",
+		"codemirror5/codemirror"
 	],
 	"languages": [
 		"ca-ES",
