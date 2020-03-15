@@ -2,9 +2,9 @@
 	"description": "A step by step introduction to TiddlyWiki",
 	"plugins": [
 		"tiddlywiki/cecily",
-		"tiddlywiki/codemirror",
 		"tiddlywiki/highlight",
-		"tiddlywiki/katex"
+		"tiddlywiki/katex",
+		"codemirror5/codemirror"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
