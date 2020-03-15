@@ -37,14 +37,16 @@ DropZoneWidget.prototype.render = function(parent,nextSibling) {
 	var domNode = this.document.createElement("div");
 	domNode.className = "tc-dropzone";
 	// Add event handlers
-	$tw.utils.addEventListeners(domNode,[
-		{name: "dragenter", handlerObject: this, handlerMethod: "handleDragEnterEvent"},
-		{name: "dragover", handlerObject: this, handlerMethod: "handleDragOverEvent"},
-		{name: "dragleave", handlerObject: this, handlerMethod: "handleDragLeaveEvent"},
-		{name: "drop", handlerObject: this, handlerMethod: "handleDropEvent"},
-		{name: "paste", handlerObject: this, handlerMethod: "handlePasteEvent"},
-		{name: "dragend", handlerObject: this, handlerMethod: "handleDragEndEvent"}
-	]);
+	if(this.dropzoneEnable) {
+		$tw.utils.addEventListeners(domNode,[
+			{name: "dragenter", handlerObject: this, handlerMethod: "handleDragEnterEvent"},
+			{name: "dragover", handlerObject: this, handlerMethod: "handleDragOverEvent"},
+			{name: "dragleave", handlerObject: this, handlerMethod: "handleDragLeaveEvent"},
+			{name: "drop", handlerObject: this, handlerMethod: "handleDropEvent"},
+			{name: "paste", handlerObject: this, handlerMethod: "handlePasteEvent"},
+			{name: "dragend", handlerObject: this, handlerMethod: "handleDragEndEvent"}
+		]);		
+	}
 	domNode.addEventListener("click",function (event) {
 	},false);
 	// Insert element
@@ -189,6 +191,7 @@ Compute the internal state of the widget
 */
 DropZoneWidget.prototype.execute = function() {
 	this.dropzoneDeserializer = this.getAttribute("deserializer");
+	this.dropzoneEnable = (this.getAttribute("enable") || "yes") === "yes";
 	// Make child widgets
 	this.makeChildWidgets();
 };
@@ -197,6 +200,11 @@ DropZoneWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 DropZoneWidget.prototype.refresh = function(changedTiddlers) {
+	var changedAttributes = this.computeAttributes();
+	if(changedAttributes.enable) {
+		this.refreshSelf();
+		return true;
+	}
 	return this.refreshChildren(changedTiddlers);
 };
 

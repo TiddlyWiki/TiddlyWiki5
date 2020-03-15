@@ -22,7 +22,7 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 
 <$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
 
-<$dropzone>
+<$dropzone enable={{$:/config/PageDropzone/Enable}}>
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/PageTemplate]!has[draft.of]]" variable="listItem">
 
