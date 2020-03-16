@@ -100,8 +100,8 @@ tiddler-controls-foreground: #665c54
 tiddler-editor-background: #282828
 tiddler-editor-border-image: #282828
 tiddler-editor-border: #282828
-tiddler-editor-fields-even: #7c6f64
-tiddler-editor-fields-odd: #665c45
+tiddler-editor-fields-even: #504945
+tiddler-editor-fields-odd: #7c6f64
 tiddler-info-background: #32302f
 tiddler-info-border: #ebdbb2
 tiddler-info-tab-background: #ebdbb2
