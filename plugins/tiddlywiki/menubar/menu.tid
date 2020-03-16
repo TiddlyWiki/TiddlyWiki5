@@ -44,6 +44,7 @@ tags: $:/tags/PageTemplate
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]limit[1]]" variable="listItem">
 <nav class="tc-menubar tc-adjust-top-of-scroll">
+<$scrollable fallthrough="none">
 <div class="tc-menubar-narrow">
 <<menubar-inner narrow>>
 </div>
@@ -64,5 +65,6 @@ tags: $:/tags/PageTemplate
 </$set>
 </$list>
 </$list>
+</$scrollable>
 </nav>
 </$list>

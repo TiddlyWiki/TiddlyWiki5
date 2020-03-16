@@ -9,7 +9,7 @@ tags: [[$:/tags/Stylesheet]]
 
 nav.tc-menubar {
 	position: fixed;
-	z-index: 1100;
+	z-index: 850;
 	display: inline-block;
 	top: 0;
 	right: 0;
@@ -137,6 +137,17 @@ nav.tc-menubar .tc-drop-down .tc-table-of-contents button {
 
 nav.tc-menubar .tc-drop-down ol {
 	margin: 0;
+}
+
+nav.tc-menubar .tc-drop-down .tc-menubar-dropdown-sidebar a,
+nav.tc-menubar .tc-drop-down .tc-menubar-dropdown-sidebar button {
+	display: inline;
+	width: auto;
+}
+
+nav.tc-menubar .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
+	display: block;
+	width: 100%;
 }
 
 @media (max-width: {{$:/config/plugins/menubar/breakpoint}}) {
