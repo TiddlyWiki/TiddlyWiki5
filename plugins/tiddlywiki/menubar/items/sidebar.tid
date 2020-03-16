@@ -4,8 +4,12 @@ description: Sidebar
 is-dropdown: yes
 tags: $:/tags/MenuBar
 
+<$scrollable fallthrough="none">
+
 <div class="tc-popup-keep tc-menubar-dropdown-sidebar">
 
 <$transclude tiddler="$:/core/ui/SideBarSegments/tabs" mode="inline"/>
 
 </div>
+
+</$scrollable>
