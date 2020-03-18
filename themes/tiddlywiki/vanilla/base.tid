@@ -672,6 +672,8 @@ button.tc-untagged-label {
 .tc-tag-label svg, .tc-tag-label img {
 	height: 1em;
 	width: 1em;
+	margin-right: 3px; 
+	margin-bottom: 1px;
 	vertical-align: text-bottom;
 }
 
@@ -1276,6 +1278,10 @@ html body.tc-body.tc-single-tiddler-window {
 	font-style: normal;
 }
 
+.tc-type-selector .tc-edit-typeeditor {
+	width: 20%;
+}
+
 .tc-edit-tags {
 	border: 1px solid <<colour tiddler-editor-border>>;
 	padding: 4px 8px 4px 8px;
@@ -1816,6 +1822,7 @@ html body.tc-body.tc-single-tiddler-window {
 	border-left: 1px solid <<colour tab-border>>;
 	-webkit-flex: 1 0 70%;
 	flex: 1 0 70%;
+	overflow: auto;
 }
 
 .tc-sidebar-lists .tc-tab-buttons {
@@ -2667,3 +2674,10 @@ select {
         background: <<colour select-tag-background>>;
 }
 
+/*
+** Utility classes for SVG icons
+*/
+
+.tc-fill-background {
+	fill: <<colour background>>;
+}

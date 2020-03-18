@@ -30,8 +30,9 @@ var VideoParser = function(type,text,options) {
 	this.tree = [element];
 };
 
+exports["video/ogg"] = VideoParser;
+exports["video/webm"] = VideoParser;
 exports["video/mp4"] = VideoParser;
 exports["video/quicktime"] = VideoParser;
 
 })();
-

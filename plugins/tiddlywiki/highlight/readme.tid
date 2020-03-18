@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/highlight/readme
 
-This plugin provides syntax highlighting of code blocks using v9.15.6 of [[highlight.js|https://github.com/isagalaev/highlight.js]] from Ivan Sagalaev.
+This plugin provides syntax highlighting of code blocks using v9.18.1 of [[highlight.js|https://github.com/isagalaev/highlight.js]] from Ivan Sagalaev.
 
 ! Usage
 
@@ -37,6 +37,7 @@ The plugin includes support for the following languages (referred to as "brushes
 * diff
 * dockerfile
 * erlang
+* elixir
 * fortran
 * go
 * gradle
@@ -49,6 +50,8 @@ The plugin includes support for the following languages (referred to as "brushes
 * javascript
 * json
 * kotlin
+* less
+* lua
 * makefile
 * markdown
 * mathematica
@@ -57,13 +60,20 @@ The plugin includes support for the following languages (referred to as "brushes
 * objectivec
 * perl
 * php
+* plaintext
 * powershell
+* properties
 * python
 * R
 * ruby
 * rust
+* scss
+* shell session
 * sql
+* swift
+* toml
 * typescript
+* vala
 * vim script
 * xml
 * yaml

@@ -280,7 +280,7 @@ exports.formatDateString = function(date,template) {
 				return $tw.utils.pad(date.getSeconds());
 			}],
 			[/^0XXX/, function() {
-				return $tw.utils.pad(date.getMilliseconds());
+				return $tw.utils.pad(date.getMilliseconds(),3);
 			}],
 			[/^0DD/, function() {
 				return $tw.utils.pad(date.getDate());

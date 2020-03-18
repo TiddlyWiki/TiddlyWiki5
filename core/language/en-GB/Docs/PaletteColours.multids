@@ -29,6 +29,8 @@ external-link-foreground-hover: External link foreground hover
 external-link-foreground-visited: External link foreground visited
 external-link-foreground: External link foreground
 foreground: General foreground
+menubar-background: Menu bar background
+menubar-foreground: Menu bar foreground
 message-background: Message box background
 message-border: Message box border
 message-foreground: Message box foreground

@@ -13,7 +13,6 @@ description: Popis pluginu nebo dialogu
 draft.of: Pro rozepsané tiddlery, obsahuje titulek s popisem, že se jedná o rozepsané tiddlery
 draft.title: Pro rozepsané tiddlery, obsahuje návrhy názvů pro nový tiddler
 footer: Patička
-hack-to-give-us-something-to-compare-against: Dočasné pole v [[$:/core/templates/static.content]]
 icon: Název tiddleru obsahujícím ikonu
 library: Je-li nastaveno na "ano", pak se tiddler bude ukládán jako JavaScriptový soubor
 list: Seřazený seznam názvu tiddleru
