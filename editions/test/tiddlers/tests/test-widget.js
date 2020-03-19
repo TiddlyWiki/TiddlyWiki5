@@ -517,6 +517,40 @@ describe("Widget module", function() {
 		// Test the rendering
 		expect(wrapper.innerHTML).toBe("<p>Don't forget me.</p>");
 	});
+
+	/** This test reproduces issue #4504.
+	 *
+	 * The importvariable widget was creating redundant copies into
+	 * itself of variables in widgets higher up in the tree. Normally,
+	 * this caused no errors, but it would mess up qualify-macros.
+	 * They would find multiple instances of the same transclusion
+	 * variable if a transclusion occured higher up in the widget tree
+	 * than an import variables AND that import variables was importing
+	 * at least ONE variable.
+	 */
+	it("adding imported variables doesn't change qualifyers", function() {
+		var wiki = new $tw.Wiki();
+		function getBodyText() {
+			// This transclude wraps "body", which has an
+			// importvariable widget in it.
+			var text = "{{body}}";
+			var tree = parseText("{{body}}",wiki);
+			var widgetNode = createWidgetNode(tree,wiki);
+			var wrapper = renderWidgetNode(widgetNode);
+			return wrapper.innerHTML;
+		};
+		wiki.addTiddlers([
+			{title: "body", text: "\\import A\n<<qualify this>>"},
+			{title: "A", text: "\\define unused() ignored"}
+		]);
+		// Importing two different version of "A" shouldn't cause
+		// the <<qualify>> widget to spit out something different.
+		var withA = getBodyText();
+		wiki.addTiddler({title: "A", text: ""});
+		var withoutA = getBodyText();
+
+		expect(withA).toBe(withoutA);
+	});
 });
 
 })();
