@@ -194,6 +194,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editFocus = this.getAttribute("focus");
 		this.editTabIndex = this.getAttribute("tabindex");
 		this.editStoreTitle = this.getAttribute("storeTitle");
+		this.editRefreshTitle = this.getAttribute("refreshTitle");
 		// Get the default editor element tag and type
 		var tag,type;
 		if(this.editField === "text") {
@@ -225,9 +226,12 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.editStoreTitle || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
+		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.storeTitle || changedAttributes.refreshTitle || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
 			this.refreshSelf();
 			return true;
+		} else if (changedTiddlers[this.editRefreshTitle]) {
+			this.engine.domNode.value = this.getEditInfo().value;
+			this.wiki.deleteTiddler(this.editRefreshTiddler);
 		} else if(changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
