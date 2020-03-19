@@ -5,7 +5,7 @@ tags: $:/tags/Macro
 $(filter1)$ $(filter2)$
 \end
 
-\define input-next-actions(afterbefore:"after",reverse:"",tiddler,storeTitle,field,index,filter1,filter2)
+\define input-next-actions(afterbefore:"after",reverse:"",tiddler,storeTitle,field,index,filter1,filter2,refreshTitle)
 <$list filter="[<__storeTitle__>get[text]minlength<__filterMinLength__>] [<__filterMinLength__>match[0]] +[limit[1]]" variable="ignore">
 <$vars userInput={{{ [<__storeTitle__>get[text]] }}} selectedItem={{{ [<selectionTiddler>get[text]] }}}>
 <$set name="filter1" filter=<<__filter1__>>>
@@ -17,9 +17,11 @@ $(filter1)$ $(filter2)$
 <$action-setfield $tiddler=<<selectionTiddler>> text=<<nextItem>>/>
 <$list filter="[<__index__>match[]]">
 <$action-setfield $tiddler=<<__tiddler__>> $field=<<__field__>> $value={{{ [<nextItem>] +[splitregexp[(?:.(?!-))+$]] }}}/>
+<$action-setfield $tiddler=<<__refreshTitle__>> text="yes"/>
 </$list>
 <$list filter="[<__index__>!match[]]">
 <$action-setfield $tiddler=<<__tiddler__>> $index=<<__index__>> $value={{{ [<nextItem>] +[splitregexp[(?:.(?!-))+$]] }}}/>
+<$action-setfield $tiddler=<<__refreshTitle__>> text="yes"/>
 </$list>
 </$list>
 </$set>
@@ -31,14 +33,14 @@ $(filter1)$ $(filter2)$
 </$list>
 \end
 
-\define keyboard-driven-input(tiddler,storeTitle,field:"text",index:"",tag:"input",type,focus:"",input-accept-actions,input-accept-variant-actions,input-cancel-actions,placeholder:"",default:"",class,filter1,filter2,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0")
+\define keyboard-driven-input(tiddler,storeTitle,field:"text",index:"",tag:"input",type,focus:"",input-accept-actions,input-accept-variant-actions,input-cancel-actions,placeholder:"",default:"",class,filter1,filter2,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0",refreshTitle)
 <$set name="selectionTiddler" value=<<qualify "$:/state/selected-item">>>
 <$keyboard key="((input-accept))" actions=<<__input-accept-actions__>>>
 <$keyboard key="((input-accept-variant))" actions=<<__input-accept-variant-actions__>>>
-<$keyboard key="((input-up))" actions="""<$macrocall $name="input-next-actions" filter1=<<__filter1__>> filter2=<<__filter2__>> afterbefore="before" reverse="reverse[]" tiddler=<<__tiddler__>> storeTitle=<<__storeTitle__>> field=<<__field__>> index=<<__index__>> filterMinLength=<<__filterMinLength__>>/>""">
-<$keyboard key="((input-down))" actions="""<$macrocall $name="input-next-actions" filter1=<<__filter1__>> filter2=<<__filter2__>> tiddler=<<__tiddler__>> storeTitle=<<__storeTitle__>> field=<<__field__>> index=<<__index__>> filterMinLength=<<__filterMinLength__>>/>""">
+<$keyboard key="((input-up))" actions="""<$macrocall $name="input-next-actions" filter1=<<__filter1__>> filter2=<<__filter2__>> refreshTitle=<<__refreshTitle__>> afterbefore="before" reverse="reverse[]" tiddler=<<__tiddler__>> storeTitle=<<__storeTitle__>> field=<<__field__>> index=<<__index__>> filterMinLength=<<__filterMinLength__>>/>""">
+<$keyboard key="((input-down))" actions="""<$macrocall $name="input-next-actions" filter1=<<__filter1__>> filter2=<<__filter2__>> refreshTitle=<<__refreshTitle__>> tiddler=<<__tiddler__>> storeTitle=<<__storeTitle__>> field=<<__field__>> index=<<__index__>> filterMinLength=<<__filterMinLength__>>/>""">
 <$keyboard key="((input-cancel))" actions=<<__input-cancel-actions__>>>
-<$edit-text tiddler=<<__tiddler__>> field=<<__field__>> index=<<__index__>> storeTitle=<<__storeTitle__>> tag=<<__tag__>> class=<<__class__>> placeholder=<<__placeholder__>> default=<<__default__>> focusPopup=<<__focusPopup__>> focus=<<__focus__>> type=<<__type__>> rows=<<__rows__>> minHeight=<<__minHeight__>>  tabindex=<<__tabindex__>> size=<<__size__>> autoHeight=<<__autoHeight__>>/>
+<$edit-text tiddler=<<__tiddler__>> field=<<__field__>> index=<<__index__>> storeTitle=<<__storeTitle__>> tag=<<__tag__>> class=<<__class__>> placeholder=<<__placeholder__>> default=<<__default__>> focusPopup=<<__focusPopup__>> focus=<<__focus__>> type=<<__type__>> rows=<<__rows__>> minHeight=<<__minHeight__>>  tabindex=<<__tabindex__>> size=<<__size__>> autoHeight=<<__autoHeight__>> refreshTitle=<<__refreshTitle__>>/>
 </$keyboard>
 </$keyboard>
 </$keyboard>
