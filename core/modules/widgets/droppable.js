@@ -43,12 +43,14 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	classes.push("tc-droppable");
 	domNode.className = classes.join(" ");
 	// Add event handlers
-	$tw.utils.addEventListeners(domNode,[
-		{name: "dragenter", handlerObject: this, handlerMethod: "handleDragEnterEvent"},
-		{name: "dragover", handlerObject: this, handlerMethod: "handleDragOverEvent"},
-		{name: "dragleave", handlerObject: this, handlerMethod: "handleDragLeaveEvent"},
-		{name: "drop", handlerObject: this, handlerMethod: "handleDropEvent"}
-	]);
+	if(this.droppableEnable) {
+		$tw.utils.addEventListeners(domNode,[
+			{name: "dragenter", handlerObject: this, handlerMethod: "handleDragEnterEvent"},
+			{name: "dragover", handlerObject: this, handlerMethod: "handleDragOverEvent"},
+			{name: "dragleave", handlerObject: this, handlerMethod: "handleDragLeaveEvent"},
+			{name: "drop", handlerObject: this, handlerMethod: "handleDropEvent"}
+		]);		
+	}
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -142,6 +144,7 @@ DroppableWidget.prototype.execute = function() {
 	this.droppableEffect = this.getAttribute("effect","copy");
 	this.droppableTag = this.getAttribute("tag");
 	this.droppableClass = this.getAttribute("class");
+	this.droppableEnable = (this.getAttribute("enable") || "yes") === "yes";
 	// Make child widgets
 	this.makeChildWidgets();
 };
@@ -151,7 +154,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DroppableWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes["class"] || changedAttributes.tag) {
+	if(changedAttributes["class"] || changedAttributes.tag || changedAttributes.enable) {
 		this.refreshSelf();
 		return true;
 	}
