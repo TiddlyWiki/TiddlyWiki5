@@ -53,7 +53,11 @@ modal-border: #504945
 modal-footer-background: #3c3836
 modal-footer-border: #3c3836
 modal-header-border: #3c3836
+<<<<<<< HEAD
 muted-foreground: #d5c4a1
+=======
+muted-foreground: #665c54
+>>>>>>> palette reset
 notification-background: <<colour primary>>
 notification-border: <<colour primary>>
 page-background: #282828
@@ -107,8 +111,13 @@ tiddler-info-border: #ebdbb2
 tiddler-info-tab-background: #ebdbb2
 tiddler-link-background: <<colour background>>
 tiddler-link-foreground: <<colour primary>>
+<<<<<<< HEAD
 tiddler-subtitle-foreground: #d5c4a1
 tiddler-title-foreground: #a89984
+=======
+tiddler-subtitle-foreground: #7c6f64
+tiddler-title-foreground: #7c6f64
+>>>>>>> palette reset
 toolbar-new-button: 
 toolbar-options-button: 
 toolbar-save-button: 
@@ -119,4 +128,8 @@ toolbar-delete-button:
 toolbar-cancel-button: 
 toolbar-done-button: 
 untagged-background: #504945
+<<<<<<< HEAD
 very-muted-foreground: #bdae93
+=======
+very-muted-foreground: #32302f
+>>>>>>> palette reset
