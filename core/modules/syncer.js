@@ -23,6 +23,7 @@ Syncer.prototype.titleSyncFilter = "$:/config/SyncFilter";
 Syncer.prototype.titleSyncPollingInterval = "$:/config/SyncPollingInterval";
 Syncer.prototype.titleSyncDisableLazyLoading = "$:/config/SyncDisableLazyLoading";
 Syncer.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
+Syncer.prototype.titleTaskTimerInterval = "$:/config/TaskTimerInterval"
 Syncer.prototype.taskTimerInterval = 1 * 1000; // Interval for sync timer
 Syncer.prototype.throttleInterval = 1 * 1000; // Defer saving tiddlers if they've changed in the last 1s...
 Syncer.prototype.errorRetryInterval = 5 * 1000; // Interval to retry after an error
@@ -42,7 +43,7 @@ function Syncer(options) {
 	this.titleUserName = options.titleUserName || this.titleUserName;
 	this.titleSyncFilter = options.titleSyncFilter || this.titleSyncFilter;
 	this.titleSavedNotification = options.titleSavedNotification || this.titleSavedNotification;
-	this.taskTimerInterval = options.taskTimerInterval || this.taskTimerInterval;
+	this.taskTimerInterval = options.taskTimerInterval || parseInt(this.wiki.getTiddlerText(this.titleTaskTimerInterval,""),10) || this.taskTimerInterval;
 	this.throttleInterval = options.throttleInterval || this.throttleInterval;
 	this.errorRetryInterval = options.errorRetryInterval || this.errorRetryInterval;
 	this.fallbackInterval = options.fallbackInterval || this.fallbackInterval;
