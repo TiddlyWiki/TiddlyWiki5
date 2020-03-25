@@ -231,7 +231,6 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			return true;
 		} else if (changedTiddlers[this.editRefreshTitle]) {
 			this.engine.domNode.value = this.getEditInfo().value;
-			this.wiki.deleteTiddler(this.editRefreshTitle);
 		} else if(changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
