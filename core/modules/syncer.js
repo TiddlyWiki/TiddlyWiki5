@@ -24,6 +24,7 @@ Syncer.prototype.titleSyncPollingInterval = "$:/config/SyncPollingInterval";
 Syncer.prototype.titleSyncDisableLazyLoading = "$:/config/SyncDisableLazyLoading";
 Syncer.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
 Syncer.prototype.titleSyncThrottleInterval = "$:/config/SyncThrottleInterval";
+Syncer.prototype.titleTaskTimerInterval = "$:/config/TaskTimerInterval"
 Syncer.prototype.taskTimerInterval = 1 * 1000; // Interval for sync timer
 Syncer.prototype.throttleInterval = 1 * 1000; // Defer saving tiddlers if they've changed in the last 1s...
 Syncer.prototype.errorRetryInterval = 5 * 1000; // Interval to retry after an error
@@ -45,7 +46,7 @@ function Syncer(options) {
 	this.titleUserName = options.titleUserName || this.titleUserName;
 	this.titleSyncFilter = options.titleSyncFilter || this.titleSyncFilter;
 	this.titleSavedNotification = options.titleSavedNotification || this.titleSavedNotification;
-	this.taskTimerInterval = options.taskTimerInterval || this.taskTimerInterval;
+	this.taskTimerInterval = options.taskTimerInterval || parseInt(this.wiki.getTiddlerText(this.titleTaskTimerInterval,""),10) || this.taskTimerInterval;
 	this.throttleInterval = options.throttleInterval || parseInt(this.wiki.getTiddlerText(this.titleSyncThrottleInterval,""),10) || this.throttleInterval;
 	this.errorRetryInterval = options.errorRetryInterval || this.errorRetryInterval;
 	this.fallbackInterval = options.fallbackInterval || this.fallbackInterval;
@@ -83,7 +84,7 @@ function Syncer(options) {
 		if(filteredChanges.length > 0) {
 			self.processTaskQueue();
 		} else {
-			// Look for deletions of tiddlers we're already syncing	
+			// Look for deletions of tiddlers we're already syncing
 			var outstandingDeletion = false
 			$tw.utils.each(changes,function(change,title,object) {
 				if(change.deleted && $tw.utils.hop(self.tiddlerInfo,title)) {
@@ -124,7 +125,7 @@ function Syncer(options) {
 	if(!this.disableUI && $tw.wiki.getTiddlerText(this.titleSyncDisableLazyLoading) !== "yes") {
 		this.wiki.addEventListener("lazyLoad",function(title) {
 			self.handleLazyLoadEvent(title);
-		});		
+		});
 	}
 	// Get the login status
 	this.getStatus(function(err,isLoggedIn) {
@@ -155,8 +156,8 @@ Syncer.prototype.getTiddlerRevision = function(title) {
 	if(this.syncadaptor && this.syncadaptor.getTiddlerRevision) {
 		return this.syncadaptor.getTiddlerRevision(title);
 	} else {
-		return this.wiki.getTiddler(title).fields.revision;	
-	} 
+		return this.wiki.getTiddler(title).fields.revision;
+	}
 };
 
 /*
@@ -307,7 +308,7 @@ Syncer.prototype.syncFromServer = function() {
 				});
 				if(updates.modifications.length > 0 || updates.deletions.length > 0) {
 					self.processTaskQueue();
-				}				
+				}
 			}
 		});
 	} else if(this.syncadaptor && this.syncadaptor.getSkinnyTiddlers) {
@@ -475,7 +476,7 @@ Syncer.prototype.processTaskQueue = function() {
 				} else {
 					self.updateDirtyStatus();
 					// Process the next task
-					self.processTaskQueue.call(self);					
+					self.processTaskQueue.call(self);
 				}
 			});
 		} else {
@@ -483,11 +484,11 @@ Syncer.prototype.processTaskQueue = function() {
 			this.updateDirtyStatus();
 			// And trigger a timeout if there is a pending task
 			if(task === true) {
-				this.triggerTimeout();				
+				this.triggerTimeout();
 			}
 		}
 	} else {
-		this.updateDirtyStatus();		
+		this.updateDirtyStatus();
 	}
 };
 
@@ -521,7 +522,7 @@ Syncer.prototype.chooseNextTask = function() {
 				isReadyToSave = !tiddlerInfo || !tiddlerInfo.timestampLastSaved || tiddlerInfo.timestampLastSaved < thresholdLastSaved;
 			if(hasChanged) {
 				if(isReadyToSave) {
-					return new SaveTiddlerTask(this,title); 					
+					return new SaveTiddlerTask(this,title);
 				} else {
 					havePending = true;
 				}

@@ -1,0 +1,10 @@
+title: Hidden Setting: Task Timer Interval
+tags: [[Hidden Settings]]
+
+Specifies the interval at which [[Syncadaptor|https://tiddlywiki.com/dev/#Syncadaptor]] will run the next task in the queue.
+
+Defaults to "1000" (1 * 1000ms = 1s)
+
+Changing needs a restart to take effect.
+
+$:/config/TaskTimerInterval

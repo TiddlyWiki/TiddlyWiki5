@@ -1,0 +1,10 @@
+title: Hidden Setting: Sync Filter
+tags: [[Hidden Settings]]
+
+A filter which determines which tiddlers in the wiki should be synced with the server.
+
+Defaults to "" which syncs everything.
+
+Changing needs a restart to take effect.
+
+$:/config/SyncFilter
