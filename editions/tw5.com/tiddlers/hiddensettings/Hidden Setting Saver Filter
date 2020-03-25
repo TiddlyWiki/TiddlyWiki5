@@ -1,0 +1,10 @@
+title: Hidden Setting: Saver Filter
+tags: [[Hidden Settings]]
+
+A filter which determines which tiddlers should be saved when saving the wiki.
+
+Defaults to "" which saves everything.
+
+Changing needs a restart to take effect.
+
+$:/config/SaverFilter
