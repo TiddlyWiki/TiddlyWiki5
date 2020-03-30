@@ -76,7 +76,7 @@ function Syncer(options) {
 		// Filter the changes to just include ones that are being synced
 		var filteredChanges = self.getSyncedTiddlers(function(callback) {
 			$tw.utils.each(changes,function(change,title) {
-				var tiddler = self.wiki.getTiddler(title);
+				var tiddler = self.wiki.tiddlerExists(title) && self.wiki.getTiddler(title);
 				callback(tiddler,title);
 			});
 		});
@@ -170,7 +170,7 @@ Syncer.prototype.readTiddlerInfo = function() {
 	var self = this,
 		tiddlers = this.getSyncedTiddlers();
 	$tw.utils.each(tiddlers,function(title) {
-		var tiddler = self.wiki.getTiddler(title);
+		var tiddler = self.wiki.tiddlerExists(title) && self.wiki.getTiddler(title);
 		self.tiddlerInfo[title] = {
 			revision: self.getTiddlerRevision(title),
 			adaptorInfo: self.syncadaptor && self.syncadaptor.getTiddlerInfo(tiddler),
@@ -328,7 +328,7 @@ Syncer.prototype.syncFromServer = function() {
 				// Get the incoming tiddler fields, and the existing tiddler
 				var tiddlerFields = tiddlers[t],
 					incomingRevision = tiddlerFields.revision + "",
-					tiddler = self.wiki.getTiddler(tiddlerFields.title),
+					tiddler = self.wiki.tiddlerExists(tiddlerFields.title) && self.wiki.getTiddler(tiddlerFields.title),
 					tiddlerInfo = self.tiddlerInfo[tiddlerFields.title],
 					currRevision = tiddlerInfo ? tiddlerInfo.revision : null,
 					indexInPreviousTitles = previousTitles.indexOf(tiddlerFields.title);
@@ -513,7 +513,7 @@ Syncer.prototype.chooseNextTask = function() {
 	var titles = this.getSyncedTiddlers();
 	for(var index=0; index<titles.length; index++) {
 		var title = titles[index],
-			tiddler = this.wiki.getTiddler(title),
+			tiddler = this.wiki.tiddlerExists(title) && this.wiki.getTiddler(title),
 			tiddlerInfo = this.tiddlerInfo[title];
 		if(tiddler) {
 			// If the tiddler is not known on the server, or has been modified locally no more recently than the threshold then it needs to be saved to the server
@@ -533,7 +533,7 @@ Syncer.prototype.chooseNextTask = function() {
 	for(index=0; index<titles.length; index++) {
 		title = titles[index];
 		tiddlerInfo = this.tiddlerInfo[title];
-		tiddler = this.wiki.getTiddler(title);
+		tiddler = this.wiki.tiddlerExists(title) && this.wiki.getTiddler(title);
 		if(!tiddler) {
 			return new DeleteTiddlerTask(this,title);
 		}
@@ -557,7 +557,7 @@ function SaveTiddlerTask(syncer,title) {
 SaveTiddlerTask.prototype.run = function(callback) {
 	var self = this,
 		changeCount = this.syncer.wiki.getChangeCount(this.title),
-		tiddler = this.syncer.wiki.getTiddler(this.title);
+		tiddler = this.syncer.wiki.tiddlerExists(this.title) && this.syncer.wiki.getTiddler(this.title);
 	this.syncer.logger.log("Dispatching 'save' task:",this.title);
 	if(tiddler) {
 		this.syncer.syncadaptor.saveTiddler(tiddler,function(err,adaptorInfo,revision) {
