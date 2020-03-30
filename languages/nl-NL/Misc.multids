@@ -16,7 +16,7 @@ DropMessage: 'Drop' hier (of klik escape om te annuleren)
 Encryption/Cancel: Annuleer
 Encryption/ConfirmClearPassword: Wil je het wachtwoord verwijderen? Dan wordt de wiki onversleuteld opgeslagen.
 Encryption/Password: Wachtwoord
-Encryption/PasswordNoMatch: Wachtwoorden matchen niet
+Encryption/PasswordNoMatch: Wachtwoorden komen niet overeen
 Encryption/PromptSetPassword: Vul een nieuw wachtwoord in voor deze TiddlyWiki
 Encryption/RepeatPassword: Herhaal wachtwoord
 Encryption/SetPassword: Vul wachtwoord in
@@ -27,6 +27,7 @@ Error/Filter: Filterfout
 Error/FilterSyntax: Syntaxfout in filter expressie
 Error/IsFilterOperator: Filterfout: Onbekende operand voor het 'is' filter
 Error/LoadingPluginLibrary: Fout bij laden van de pluginbibliotheek
+Error/NetworkErrorAlert: `<h2>''Network fout''</h2>De verbinding met de server lijkt verbroken. Mogelijk een probleem met de netwerkverbinding. Herstel de netwerkverbinding voordat verder wordt gegaan.<br><br>''Niet opgeslagen veranderingen worden gesynchroniseerd als de verbinding hersteld is''.`
 Error/RecursiveTransclusion: Recursieve transclusiefout in 'transclude' widget
 Error/RetrievingSkinny: Fout bij ophalen van de 'skinny' tiddlerlijst
 Error/SavingToTWEdit: Fout bij opslaan naar TWEdit
@@ -64,6 +65,7 @@ SystemTiddlers/Include/Prompt: Inclusief systeem tiddlers
 TagManager/Colour/Heading: Kleur
 TagManager/Count/Heading: Aantal
 TagManager/Icon/Heading: Pictogram (icon)
+TagManager/Icons/None: Geen
 TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Label
 Tiddler/DateFormat: DD MMM YYYY om hh12:0mmam
