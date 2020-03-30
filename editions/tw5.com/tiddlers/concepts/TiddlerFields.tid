@@ -1,5 +1,5 @@
 created: 20130825213300000
-modified: 20191013093910961
+modified: 20191206152031468
 tags: Concepts
 title: TiddlerFields
 type: text/vnd.tiddlywiki
@@ -42,11 +42,13 @@ Other fields used by the core are:
 |`subtitle` |<<lingo subtitle>> |
 |`throttle.refresh` |<<lingo throttle.refresh>> |
 |`toc-link`|<<lingo toc-link>>|
+|`_canonical_uri`|<<lingo _canonical_uri>>|
 
 The TiddlyWebAdaptor uses a few more fields:
 
 |!Field Name |!Description |
 |`bag` |<<lingo bag>> |
 |`revision` |<<lingo revision>> |
+|`_is_skinny` |<<lingo _is_skinny>> |
 
 Details of the fields used in this ~TiddlyWiki are shown in the [[control panel|$:/ControlPanel]] {{$:/core/ui/Buttons/control-panel}} under the <<.controlpanel-tab Info>> tab >> <<.info-tab Advanced>> sub-tab >> Tiddler Fields

@@ -1,5 +1,5 @@
 created: 20130825162100000
-modified: 20140814094907624
+modified: 20200113094126878
 tags: dev moduletypes
 title: SyncAdaptorModules
 type: text/vnd.tiddlywiki
@@ -13,6 +13,8 @@ SyncAdaptorModules encapsulate storage mechanisms that can be used by the SyncMe
 * The LocalFileAdaptor interfaces with file systems with an API compatible with Node.js's `fs` module
 
 SyncAdaptorModules are represented as JavaScript tiddlers with the field `module-type` set to `syncadaptor`.
+
+See [[this pull request|https://github.com/Jermolene/TiddlyWiki5/pull/4373]] for background on the evolution of this API.
 
 ! Exports
 
@@ -47,12 +49,21 @@ Gets the supplemental information that the adaptor needs to keep track of for a 
 
 Returns an object storing any additional information required by the adaptor.
 
+!! `getTiddlerRevision(title)`
+
+Gets the revision ID associated with the specified tiddler title.
+
+|!Parameter |!Description |
+|title |Tiddler title |
+
+Returns a revision ID.
+
 !! `getStatus(callback)`
 
 Retrieves status information from the server. This method is optional.
 
 |!Parameter |!Description |
-|callback |Callback function invoked with parameters `err,isLoggedIn,username` |
+|callback |Callback function invoked with parameters `err,isLoggedIn,username,isReadOnly` |
 
 !! `login(username,password,callback)`
 
@@ -70,16 +81,39 @@ Attempts to logout of the server. This method is optional.
 |!Parameter |!Description |
 |callback |Callback function invoked with parameter `err` |
 
+!! `getUpdatedTiddlers(syncer,callback)`
+
+Retrieves the titles of tiddlers that need to be updated from the server.
+
+This method is optional. If an adaptor doesn't implement it then synchronisation will be unidirectional from the TiddlyWiki store to the adaptor, but not the other way.
+
+The syncer will use the `getUpdatedTiddlers()` method in preference to the `getSkinnyTiddlers()` method.
+
+|!Parameter |!Description |
+|syncer |Reference to the syncer object making the call |
+|callback |Callback function invoked with parameter `err,data` -- see below |
+
+The data provided by the callback is as follows:
+
+```
+{
+modifications: [<array of title>],
+deletions: [<array of title>],
+}
+```
+
 !! `getSkinnyTiddlers(callback)`
 
 Retrieves a list of skinny tiddlers from the server.
 
 This method is optional. If an adaptor doesn't implement it then synchronisation will be unidirectional from the TiddlyWiki store to the adaptor, but not the other way.
 
+The syncer will use the `getUpdatedTiddlers()` method in preference to the `getSkinnyTiddlers()` method.
+
 |!Parameter |!Description |
 |callback |Callback function invoked with parameter `err,tiddlers`, where `tiddlers` is an array of tiddler field objects |
 
-!! `saveTiddler(tiddler,callback,tiddlerInfo)`
+!! `saveTiddler(tiddler,callback)`
 
 Saves a tiddler to the server.
 
@@ -96,11 +130,16 @@ Loads a tiddler from the server.
 |title |Title of tiddler to be retrieved |
 |callback |Callback function invoked with parameter `err,tiddlerFields` |
 
-!! `deleteTiddler(title,callback,tiddlerInfo)`
+!! `deleteTiddler(title,callback,options)`
 
 Delete a tiddler from the server.
 
 |!Parameter |!Description |
 |title |Title of tiddler to be deleted |
 |callback |Callback function invoked with parameter `err` |
+|options |See below |
+
+The options parameter contains the following properties:
+
+|!Property |!Description |
 |tiddlerInfo |The tiddlerInfo maintained by the syncer for this tiddler |
