@@ -22,7 +22,7 @@ The information above should be interpreted as follows:
 
 As an example, try switching between the sidebar tabs to compare how long they take to render.
 
-More detailed information on filter execution timings is also available. With performance instrumentation enabled, ype the following JavaScript command in the browser developer console:
+More detailed information on filter execution timings is also available. With performance instrumentation enabled, type the following JavaScript command in the browser developer console:
 
 ```
 $tw.perf.log()

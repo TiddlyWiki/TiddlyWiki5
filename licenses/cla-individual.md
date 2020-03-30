@@ -370,6 +370,22 @@ Stefan Schuster-Teupke, @StefanSTFG, 2019/08/26
 
 Nils-Hero Lindemann, @heronils, 2019/08/26
 
+Marica Odagaki, @ento, 2019/08/30
+
 Mark Stegeman, @markstegeman, 2019/08/31
 
 Jan-Oliver Kaiser, @janno, 2019/09/06
+
+Xavier Maysonnave, @xmaysonnave, 2019/11/08
+
+Will Atwood Mitchell, @wam, 2019/12/11
+
+Stefan Krüger, @s-light, 2020/01/04
+
+Lee Sheng Long, @s-l-lee, 2020/01/25
+
+Scott Willeke, @activescott, 2020/02/01
+
+@lucible, 2020/02/05
+
+Matthias Bilger, @m42e, 2020/03/11

@@ -12,3 +12,13 @@ Add tag ''example'' to this tiddler (current)<$button message="tm-add-tag" param
 Remove tag ''example'' to this tiddler (current)<$button message="tm-remove-tag" param="example">{{$:/core/images/delete-button}}</$button>
 </$fieldmangler>
 """/>
+
+
+<$macrocall $name=".example" n="2"
+eg="""
+<$fieldmangler tiddler="Hello World">
+Add tag ''example'' to the Hello World tiddler<$button message="tm-add-tag" param="example">{{$:/core/images/new-button}}</$button>
+<br>
+Remove tag ''example'' to the Hello World tiddler<$button message="tm-remove-tag" param="example">{{$:/core/images/delete-button}}</$button>
+</$fieldmangler>
+"""/>
