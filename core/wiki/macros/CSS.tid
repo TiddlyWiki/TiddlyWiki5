@@ -60,7 +60,7 @@ column-count: $columns$;
 \end
 
 \define datauri(title)
-<$macrocall $name="makedatauri" type={{$title$!!type}} text={{$title$}}/>
+<$macrocall $name="makedatauri" type={{$title$!!type}} text={{$title$}} _canonical_uri={{$title$!!_canonical_uri}}/>
 \end
 
 \define if-sidebar(text)
