@@ -27,7 +27,13 @@ Nothing should be exported if the adaptor detects that it isn't capable of opera
 
 ! Adaptor Module Methods
 
-Adaptor modules must handle the following methods.
+Adaptor modules must handle the methods described below.
+
+!!! Error Handling
+
+The syncadaptor must invoke the provided callback with the ''err'' parameter containing a string describing the error.
+
+The syncer has special handling for connection errors. For backwards compatibilty reasons, the syncer identifies connection errors as the string comprised of the content of the tiddler $:/language/Error/XMLHttpRequest with the string ": 0" appended to the end. For example, in English, the string is "XMLHttpRequest error code: 0" and in Brazilian Portuguese it is "Código de erro XMLHttpRequest: 0".
 
 !! `Constructor(options)`
 

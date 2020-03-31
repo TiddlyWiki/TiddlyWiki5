@@ -57,6 +57,12 @@ function Syncer(options) {
 		enable: this.logging,
 		saveHistory: true
 	});
+	// Make another logger for connection errors
+	this.loggerConnection = new $tw.utils.Logger("syncer" + ($tw.browser ? "-browser" : "") + ($tw.node ? "-server" : "")  + (this.syncadaptor.name ? ("-" + this.syncadaptor.name) : "") + "-connection",{
+		colour: "cyan",
+		enable: this.logging
+	});
+	// Ask the syncadaptor to use the main logger
 	if(this.syncadaptor.setLoggerSaveBuffer) {
 		this.syncadaptor.setLoggerSaveBuffer(this.logger);
 	}
@@ -136,9 +142,13 @@ function Syncer(options) {
 /*
 Show a generic network error alert
 */
-Syncer.prototype.showErrorAlert = function() {
-console.log($tw.language.getString("Error/NetworkErrorAlert"))
-	this.logger.alert($tw.language.getString("Error/NetworkErrorAlert"));
+Syncer.prototype.displayError = function(msg,err) {
+	if(err === ($tw.language.getString("Error/XMLHttpRequest") + ": 0")) {
+		this.loggerConnection.alert($tw.language.getString("Error/NetworkErrorAlert"));
+		this.logger.log(msg + ":",err);
+	} else {
+		this.logger.alert(msg + ":",err);
+	}
 };
 
 /*
@@ -220,7 +230,7 @@ Syncer.prototype.updateDirtyStatus = function() {
 		var dirty = this.isDirty();
 		$tw.utils.toggleClass(document.body,"tc-dirty",dirty);
 		if(!dirty) {
-			this.logger.clearAlerts();
+			this.loggerConnection.clearAlerts();
 		}
 	}
 };
@@ -292,8 +302,7 @@ Syncer.prototype.syncFromServer = function() {
 		this.syncadaptor.getUpdatedTiddlers(self,function(err,updates) {
 			triggerNextSync();
 			if(err) {
-				self.showErrorAlert();
-				self.logger.log($tw.language.getString("Error/RetrievingSkinny") + ":",err);
+				self.displayError($tw.language.getString("Error/RetrievingSkinny"),err);
 				return;
 			}
 			if(updates) {
@@ -317,8 +326,7 @@ Syncer.prototype.syncFromServer = function() {
 			triggerNextSync();
 			// Check for errors
 			if(err) {
-				self.showErrorAlert();
-				self.logger.log($tw.language.getString("Error/RetrievingSkinny") + ":",err);
+				self.displayError($tw.language.getString("Error/RetrievingSkinny"),err);
 				return;
 			}
 			// Keep track of which tiddlers we already know about have been reported this time
@@ -468,8 +476,7 @@ Syncer.prototype.processTaskQueue = function() {
 			task.run(function(err) {
 				self.numTasksInProgress -= 1;
 				if(err) {
-					self.showErrorAlert();
-					self.logger.log("Sync error while processing " + task.type + " of '" + task.title + "':\n" + err);
+					self.displayError("Sync error while processing " + task.type + " of '" + task.title + "'",err);
 					self.updateDirtyStatus();
 					self.triggerTimeout(self.errorRetryInterval);
 				} else {
