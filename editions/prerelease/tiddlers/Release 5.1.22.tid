@@ -19,7 +19,7 @@ The [[plugin listing|$:/core/ui/ControlPanel/Plugins]] and the [[plugin chooser|
 * Plugins may now declare dependencies that are automatically installed without user intervention
 * All plugins now feature a concise, informal name (in addition to the description and title)
 
-! Client-Server Improvements
+!! Client-Server Improvements
 
 This release sees several improvements to the client-server configuration:
 
