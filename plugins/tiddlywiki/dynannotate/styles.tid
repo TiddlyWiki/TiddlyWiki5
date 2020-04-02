@@ -1,0 +1,44 @@
+title: $:/plugins/tiddlywiki/dynannotate/styles
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+.tc-dynannotation-wrapper {
+	position: relative;
+}
+
+.tc-dynannotation-annotation-overlay {
+	position: absolute;
+	background: rgba(255,255,0,0.3);
+	mix-blend-mode: multiply;
+}
+
+.tc-dynannotation-search-overlay {
+	position: absolute;
+	pointer-events: none;
+	background: rgba(255,0,0,0.3);
+}
+
+.tc-dynannotation-search-overlay-blurred {
+	background: rgba(255,0,0,0.3);
+	mix-blend-mode: multiply;
+	border-radius: 4px;
+	filter: blur(2px);
+}
+
+@keyframes ta-dynannotation-search-overlay-animated { to { background-position: 100% 100% } }
+
+.tc-dynannotation-search-overlay-animated {
+	mix-blend-mode: multiply;
+	background: repeating-linear-gradient(-45deg, #ff8 0, #dd8 25%, transparent 0, transparent 50%) 0 / .6em .6em;
+	animation: ta-dynannotation-search-overlay-animated 12s linear infinite;
+}
+
+.tc-dynannotate-snippet-highlight {
+	background: #efef53;
+}
+
+.tc-dynannotation-example-info {
+	background: #ffa;
+	padding: 1em;
+}

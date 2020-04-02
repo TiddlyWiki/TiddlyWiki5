@@ -465,6 +465,90 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<p>nothing</p>");
 	});
 
+	/**This test confirms that imported set variables properly refresh
+	 * if they use transclusion for their value. This relates to PR #4108.
+	 */
+	it("should refresh imported <$set> widgets", function() {
+		var wiki = new $tw.Wiki();
+		// Add some tiddlers
+		wiki.addTiddlers([
+			{title: "Raw", text: "Initial value"},
+			{title: "Macro", text: "<$set name='test' value={{Raw}}>\n\ndummy text</$set>"},
+			{title: "Caller", text: text}
+		]);
+		var text = "\\import Macro\n<<test>>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>Initial value</p>");
+		wiki.addTiddler({title: "Raw", text: "New value"});
+		// Refresh
+		refreshWidgetNode(widgetNode,wrapper,["Raw"]);
+		expect(wrapper.innerHTML).toBe("<p>New value</p>");
+	});
+
+	it("should can mix setWidgets and macros when importing", function() {
+		var wiki = new $tw.Wiki();
+		// Add some tiddlers
+		wiki.addTiddlers([
+			{title: "A", text: "\\define A() Aval"},
+			{title: "B", text: "<$set name='B' value='Bval'>\n\ndummy text</$set>"},
+			{title: "C", text: "\\define C() Cval"}
+		]);
+		var text = "\\import A B C\n<<A>> <<B>> <<C>>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>Aval Bval Cval</p>");
+	});
+
+	/** Special case. <$importvariables> has different handling if
+	 *  it doesn't end up importing any variables. Make sure it
+	 *  doesn't forget its childrenNodes.
+	 */
+	it("should work when import widget imports nothing", function() {
+		var wiki = new $tw.Wiki();
+		var text = "\\import [prefix[XXX]]\nDon't forget me.";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>Don't forget me.</p>");
+	});
+
+	/** This test reproduces issue #4504.
+	 *
+	 * The importvariable widget was creating redundant copies into
+	 * itself of variables in widgets higher up in the tree. Normally,
+	 * this caused no errors, but it would mess up qualify-macros.
+	 * They would find multiple instances of the same transclusion
+	 * variable if a transclusion occured higher up in the widget tree
+	 * than an importvariables AND that importvariables was importing
+	 * at least ONE variable.
+	 */
+	it("adding imported variables doesn't change qualifyers", function() {
+		var wiki = new $tw.Wiki();
+		function wikiparse(text) {
+			var tree = parseText(text,wiki);
+			var widgetNode = createWidgetNode(tree,wiki);
+			var wrapper = renderWidgetNode(widgetNode);
+			return wrapper.innerHTML;
+		};
+		wiki.addTiddlers([
+			{title: "body", text: "\\import A\n<<qualify this>>"},
+			{title: "A", text: "\\define unused() ignored"}
+		]);
+		// This transclude wraps "body", which has an
+		// importvariable widget in it.
+		var withA = wikiparse("{{body}}");
+		wiki.addTiddler({title: "A", text: ""});
+		var withoutA = wikiparse("{{body}}");
+		// Importing two different version of "A" shouldn't cause
+		// the <<qualify>> widget to spit out something different.
+		expect(withA).toBe(withoutA);
+	});
 });
 
 })();

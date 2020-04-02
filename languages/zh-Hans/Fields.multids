@@ -29,7 +29,9 @@ source: 条目的网址
 subtitle: 一个 wizard 的副标题
 tags: 条目的标签清单
 text: 条目的内文
+throttle.refresh: 如果存在，则限制此条目的刷新
 title: 条目的唯一名称
 toc-link: 若设为: "no"，则抑制目录树中的条目链接。
 type: 条目的内容类型
 version: 插件的版本信息
+_is_skinny: 如果存在，则表示必须从服务器加载条目的文本字段

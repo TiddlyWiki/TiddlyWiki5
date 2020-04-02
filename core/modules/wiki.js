@@ -415,6 +415,30 @@ exports.forEachTiddler = function(/* [options,]callback */) {
 };
 
 /*
+Return an array of tiddler titles that are directly linked within the given parse tree
+ */
+exports.extractLinks = function(parseTreeRoot) {
+	// Count up the links
+	var links = [],
+		checkParseTree = function(parseTree) {
+			for(var t=0; t<parseTree.length; t++) {
+				var parseTreeNode = parseTree[t];
+				if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
+					var value = parseTreeNode.attributes.to.value;
+					if(links.indexOf(value) === -1) {
+						links.push(value);
+					}
+				}
+				if(parseTreeNode.children) {
+					checkParseTree(parseTreeNode.children);
+				}
+			}
+		};
+	checkParseTree(parseTreeRoot);
+	return links;
+};
+
+/*
 Return an array of tiddler titles that are directly linked from the specified tiddler
 */
 exports.getTiddlerLinks = function(title) {
@@ -423,26 +447,10 @@ exports.getTiddlerLinks = function(title) {
 	return this.getCacheForTiddler(title,"links",function() {
 		// Parse the tiddler
 		var parser = self.parseTiddler(title);
-		// Count up the links
-		var links = [],
-			checkParseTree = function(parseTree) {
-				for(var t=0; t<parseTree.length; t++) {
-					var parseTreeNode = parseTree[t];
-					if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
-						var value = parseTreeNode.attributes.to.value;
-						if(links.indexOf(value) === -1) {
-							links.push(value);
-						}
-					}
-					if(parseTreeNode.children) {
-						checkParseTree(parseTreeNode.children);
-					}
-				}
-			};
 		if(parser) {
-			checkParseTree(parser.tree);
+			return self.extractLinks(parser.tree);
 		}
-		return links;
+		return [];
 	});
 };
 
@@ -451,13 +459,18 @@ Return an array of tiddler titles that link to the specified tiddler
 */
 exports.getTiddlerBacklinks = function(targetTitle) {
 	var self = this,
+		backlinksIndexer = this.getIndexer("BacklinksIndexer"),
+		backlinks = backlinksIndexer && backlinksIndexer.lookup(targetTitle);
+
+	if(!backlinks) {
 		backlinks = [];
-	this.forEachTiddler(function(title,tiddler) {
-		var links = self.getTiddlerLinks(title);
-		if(links.indexOf(targetTitle) !== -1) {
-			backlinks.push(title);
-		}
-	});
+		this.forEachTiddler(function(title,tiddler) {
+			var links = self.getTiddlerLinks(title);
+			if(links.indexOf(targetTitle) !== -1) {
+				backlinks.push(title);
+			}
+		});
+	}
 	return backlinks;
 };
 
@@ -660,8 +673,9 @@ exports.getTiddlerAsJson = function(title) {
 	}
 };
 
-exports.getTiddlersAsJson = function(filter) {
+exports.getTiddlersAsJson = function(filter,spaces) {
 	var tiddlers = this.filterTiddlers(filter),
+		spaces = (spaces === undefined) ? $tw.config.preferences.jsonSpaces : spaces,
 		data = [];
 	for(var t=0;t<tiddlers.length; t++) {
 		var tiddler = this.getTiddler(tiddlers[t]);
@@ -673,7 +687,7 @@ exports.getTiddlersAsJson = function(filter) {
 			data.push(fields);
 		}
 	}
-	return JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
+	return JSON.stringify(data,null,spaces);
 };
 
 /*
@@ -1232,9 +1246,9 @@ exports.getTiddlerText = function(title,defaultText) {
 	if(!tiddler) {
 		return defaultText;
 	}
-	if(tiddler.fields.text !== undefined) {
+	if(!tiddler.hasField("_is_skinny")) {
 		// Just return the text if we've got it
-		return tiddler.fields.text;
+		return tiddler.fields.text || "";
 	} else {
 		// Tell any listeners about the need to lazily load this tiddler
 		this.dispatchEvent("lazyLoad",title);
@@ -1398,10 +1412,8 @@ fromPageRect: page coordinates of the origin of the navigation
 historyTitle: title of history tiddler (defaults to $:/HistoryList)
 */
 exports.addToHistory = function(title,fromPageRect,historyTitle) {
-	if(historyTitle) {
-		var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
-		story.addToHistory(title,fromPageRect);		
-	}
+	var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
+	story.addToHistory(title,fromPageRect);		
 };
 
 /*
@@ -1412,10 +1424,8 @@ storyTitle: title of story tiddler (defaults to $:/StoryList)
 options: see story.js
 */
 exports.addToStory = function(title,fromTitle,storyTitle,options) {
-	if(storyTitle) {
-		var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
-		story.addToStory(title,fromTitle,options);		
-	}
+	var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
+	story.addToStory(title,fromTitle,options);		
 };
 
 /*
