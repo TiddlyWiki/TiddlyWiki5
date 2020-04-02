@@ -93,13 +93,15 @@ Saving/GitService/CommitMessage: Enregistré depuis TiddlyWiki
 Saving/GitService/Description: Ces paramètres ne sont utilisés que pour l'enregistrement sur <<service-name>>
 Saving/GitService/Filename: Nom du fichier cible (par ex. `index.html`)
 Saving/GitService/Path: Chemin vers le fichier cible (par ex. `/wiki/`)
-Saving/GitService/Repo: //Repository// cible (par ex. `Jermolene/TiddlyWiki5`)
+Saving/GitService/Repo: //Dépôt// cible (par ex. `Jermolene/TiddlyWiki5`)
 Saving/GitService/ServerURL: URL du serveur d'API
 Saving/GitService/UserName: Nom d'utilisateur
 Saving/GitService/GitHub/Caption: Enregistreur ~GitHub
 Saving/GitService/GitHub/Password: Mot de passe, jeton OAUTH, ou //personal access token// (voir [[GitHub help page|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] pour de plus amples détails)
 Saving/GitService/GitLab/Caption: Enregistreur ~GitLab
 Saving/GitService/GitLab/Password: //Personal access token// pour cette API (voir [[GitLab help page|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] pour de plus amples details)
+Saving/GitService/Gitea/Caption: Enregistreur Gitea
+Saving/GitService/Gitea/Password: //Jeton d'accès// pour cette API (via l'interface web de Gitea : `Configuration | Applications | Générer le nouveau jeton`)
 Saving/TiddlySpot/Advanced/Heading: Paramètres avancés
 Saving/TiddlySpot/BackupDir: Dossier des //sauvegardes//
 Saving/TiddlySpot/Backups: Sauvegardes
