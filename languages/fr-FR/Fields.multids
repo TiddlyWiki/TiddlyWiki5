@@ -29,6 +29,7 @@ source: URL source associée à ce tiddler
 subtitle: Texte du sous-titre pour un wizard
 tags: Liste des tags associés à un tiddler
 text: Texte du corps de ce tiddler
+throttle.refresh: Si présent, ralentit les rafraîchissements de ce tiddler
 title: Nom unique du tiddler
 toc-link: Une valeur à ''no'' supprime le lien vers le tiddler dans l'arborescences des tables des matières
 type: Type de contenu du tiddler
