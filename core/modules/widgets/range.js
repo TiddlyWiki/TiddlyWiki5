@@ -49,7 +49,8 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 	this.inputDomNode.value = this.getValue();
 	// Add a click event handler
 	$tw.utils.addEventListeners(this.inputDomNode,[
-		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"}
+		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"},
+		{name: "change", handlerObject: this, handlerMethod: "handleInputEvent"}		
 	]);
 	// Insert the label into the DOM and render any children
 	parent.insertBefore(this.inputDomNode,nextSibling);
