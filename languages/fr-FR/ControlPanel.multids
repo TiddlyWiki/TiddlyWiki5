@@ -62,6 +62,7 @@ Parsing/Pragma/Caption: Règles d'analyse Pragma
 Plugins/Add/Caption: Ajouter des plugins
 Plugins/Add/Hint: Installer des plugins à partir de la bibliothèque officielle
 Plugins/AlreadyInstalled/Hint: Ce plugin est déjà installé dans la version <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: Requiert également :
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: désactiver
 Plugins/Disable/Hint: Désactive ce plugin au prochain rechargement de la page
