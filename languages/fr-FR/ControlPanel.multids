@@ -48,6 +48,8 @@ LoadedModules/Hint: Liste des modules chargés, liés à leurs tiddlers sources.
 Palette/Caption: Palette
 Palette/Editor/Clone/Caption: Cloner
 Palette/Editor/Clone/Prompt: Il est recommandé de cloner cette palette « shadow » avant de l'éditer
+Palette/Editor/Delete/Hint: supprime cette entrée dans la palette courante
+Palette/Editor/Names/External/Show: Montre les noms de couleur qui ne font pas partie de la palette courante
 Palette/Editor/Prompt/Modified: Cette palette « shadow » a été modifiée
 Palette/Editor/Prompt: Édition de
 Palette/Editor/Reset/Caption: Réinitialiser
