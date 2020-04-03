@@ -35,7 +35,7 @@ DropZoneWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create element
 	var domNode = this.document.createElement("div");
-	domNode.className = "tc-dropzone";
+	domNode.className = this.dropzoneClass || "tc-dropzone";
 	// Add event handlers
 	if(this.dropzoneEnable) {
 		$tw.utils.addEventListeners(domNode,[
@@ -190,6 +190,7 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 Compute the internal state of the widget
 */
 DropZoneWidget.prototype.execute = function() {
+	this.dropzoneClass = this.getAttribute("class");
 	this.dropzoneDeserializer = this.getAttribute("deserializer");
 	this.dropzoneEnable = (this.getAttribute("enable") || "yes") === "yes";
 	// Make child widgets
