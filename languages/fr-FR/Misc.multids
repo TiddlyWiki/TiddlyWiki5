@@ -60,7 +60,7 @@ MissingTiddler/Hint: Le tiddler « <$text text=<<currentTiddler>>/> » est manqu
 No: Non
 OfficialPluginLibrary: Bibliothèque officielle des plugins ~TiddlyWiki
 OfficialPluginLibrary/Hint: La bibliothèque officielle des plugins ~TiddlyWiki sur tiddlywiki.com. Plugins, thèmes et packs pour les différentes langues sont maintenus par l'équipe responsable du noyau.
-PluginReloadWarning: Merci d'enregistrer {{$:/core/ui/Buttons/save-wiki}} et de recharger {{$:/core/ui/Buttons/refresh}} pour que les changements apportés aux plugins prennent effet
+PluginReloadWarning: Merci d'enregistrer {{$:/core/ui/Buttons/save-wiki}} et de recharger {{$:/core/ui/Buttons/refresh}} pour que les changements apportés aux plugins ~JavaScript prennent effet
 RecentChanges/DateFormat: DD MMM YYYY
 SystemTiddler/Tooltip: Ceci est un tiddler système
 SystemTiddlers/Include/Prompt: Inclure les tiddlers système
