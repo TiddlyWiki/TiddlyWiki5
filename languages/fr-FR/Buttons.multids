@@ -179,6 +179,7 @@ Subscript/Caption: indice
 Subscript/Hint: Met en indice le texte sélectionné
 Superscript/Caption: exposant
 Superscript/Hint: Met en exposant le texte sélectionné
+ToggleSidebar/Hint: Bascule la visibilité de la barre latérale
 Transcludify/Caption: transclusion
 Transcludify/Hint: Encadre la sélection avec des accolades
 Underline/Caption: souligné
