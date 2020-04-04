@@ -30,6 +30,7 @@ ExportTiddler/Caption: exporter ce tiddler
 ExportTiddler/Hint: Exporte ce tiddler
 ExportTiddlers/Caption: exporter ces tiddlers
 ExportTiddlers/Hint: Exporte ces tiddlers
+SidebarSearch/Hint: Choisit le champ de recherche dans la barre latérale
 Fold/Caption: replier le tiddler
 Fold/Hint: Replie le corps du tiddler
 Fold/FoldBar/Caption: Barre de repli
@@ -179,6 +180,7 @@ Subscript/Caption: indice
 Subscript/Hint: Met en indice le texte sélectionné
 Superscript/Caption: exposant
 Superscript/Hint: Met en exposant le texte sélectionné
+ToggleSidebar/Hint: Bascule la visibilité de la barre latérale
 Transcludify/Caption: transclusion
 Transcludify/Hint: Encadre la sélection avec des accolades
 Underline/Caption: souligné
