@@ -3,6 +3,7 @@ tags: $:/tags/PageControls
 caption: {{$:/plugins/tiddlywiki/tiddlyweb/icon/cloud}} Server status
 description: Status of synchronisation with server
 
+\whitespace trim
 \define config-title()
 $:/config/PageControlButtons/Visibility/$(listItem)$
 \end

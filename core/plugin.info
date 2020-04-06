@@ -1,5 +1,6 @@
 {
 	"title": "$:/core",
+	"name": "Core",
 	"description": "TiddlyWiki5 core",
 	"author": "JeremyRuston",
 	"core-version": ">=5.0.0",

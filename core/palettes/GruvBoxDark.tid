@@ -120,3 +120,19 @@ toolbar-cancel-button:
 toolbar-done-button: 
 untagged-background: #504945
 very-muted-foreground: #bdae93
+wikilist-background: <<colour page-background>>
+wikilist-button-background: <<colour button-background>>
+wikilist-button-foreground: <<colour button-foreground>>
+wikilist-item: <<colour background>>
+wikilist-toolbar-background: <<colour background>>
+wikilist-toolbar-foreground: <<colour foreground>>
+wikilist-title: <<colour foreground>>
+wikilist-title-svg: <<colour wikilist-title>>
+wikilist-url: <<colour muted-foreground>>
+wikilist-button-open-hover: <<colour primary>>
+wikilist-button-open: <<colour dropzone-background>>
+wikilist-button-remove: <<colour dirty-indicator>>
+wikilist-button-remove-hover: <<colour alert-background>>
+wikilist-droplink-dragover: <<colour dropzone-background>>
+wikilist-button-reveal: <<colour sidebar-tiddler-link-foreground-hover>>
+wikilist-button-reveal-hover: <<colour message-background>>

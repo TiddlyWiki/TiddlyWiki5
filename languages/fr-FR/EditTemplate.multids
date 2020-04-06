@@ -6,6 +6,7 @@ Body/Preview/Type/Output: sortie
 Field/Remove/Caption: supprimer le champ
 Field/Remove/Hint: Supprime le champ
 Fields/Add/Button: ajouter
+Fields/Add/Button/Hint: Ajoute le nouveau champ au tiddler
 Fields/Add/Name/Placeholder: nom du champ
 Fields/Add/Prompt: Ajouter un nouveau champ :
 Fields/Add/Value/Placeholder: valeur du champ

@@ -28,6 +28,7 @@ Error/Filter: Erreur de filtre
 Error/FilterSyntax: Erreur de syntaxe dans l'expression du filtre
 Error/IsFilterOperator: Erreur de filtre : Opérande inconnu pour l'opérateur de filtre 'is'
 Error/LoadingPluginLibrary: Erreur lors du chargement de la bibliothèque de plugins
+Error/NetworkErrorAlert: `<h2>''Erreur Réseau''</h2>Il semble que la connexion au serveur soit perdue. Cela peut indiquer un problème avec votre connexion réseau. Essayez de rétablir la connectivité du réseau avant de continuer.<br><br>''Toute modification non enregistrée sera automatiquement synchronisée lorsque la connectivité sera rétablie''.`
 Error/RecursiveTransclusion: Erreur dans le widget //transclude// : transclusion récursive
 Error/RetrievingSkinny: Erreur pendant la récupération de la liste des tiddlers partiels
 Error/SavingToTWEdit: Erreur lors de l'enregistrement vers TWEdit
@@ -59,13 +60,14 @@ MissingTiddler/Hint: Le tiddler « <$text text=<<currentTiddler>>/> » est manqu
 No: Non
 OfficialPluginLibrary: Bibliothèque officielle des plugins ~TiddlyWiki
 OfficialPluginLibrary/Hint: La bibliothèque officielle des plugins ~TiddlyWiki sur tiddlywiki.com. Plugins, thèmes et packs pour les différentes langues sont maintenus par l'équipe responsable du noyau.
-PluginReloadWarning: Merci d'enregistrer {{$:/core/ui/Buttons/save-wiki}} et de recharger {{$:/core/ui/Buttons/refresh}} pour que les changements apportés aux plugins prennent effet
+PluginReloadWarning: Merci d'enregistrer {{$:/core/ui/Buttons/save-wiki}} et de recharger {{$:/core/ui/Buttons/refresh}} pour que les changements apportés aux plugins ~JavaScript prennent effet
 RecentChanges/DateFormat: DD MMM YYYY
 SystemTiddler/Tooltip: Ceci est un tiddler système
 SystemTiddlers/Include/Prompt: Inclure les tiddlers système
 TagManager/Colour/Heading: Couleur
 TagManager/Count/Heading: Total
 TagManager/Icon/Heading: Icône
+TagManager/Icons/None: Aucune
 TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
 Tiddler/DateFormat: DD MMM YYYY à hhh0mm
