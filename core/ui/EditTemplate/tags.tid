@@ -25,7 +25,7 @@ color:$(foregroundColor)$;
 <$macrocall $name="tag-body-inner" colour="""$colour$""" fallbackTarget={{$palette$##tag-background}} colourA={{$palette$##foreground}} colourB={{$palette$##background}} icon="""$icon$"""/>
 \end
 
-<div class="tc-edit-tags">
+<div class="tc-edit-tags" dir={{$:/config/DefaultTextDirection}}>
 <$fieldmangler>
 <$list filter="[all[current]tags[]sort[title]]" storyview="pop">
 <$macrocall $name="tag-body" colour={{!!color}} palette={{$:/palette}} icon={{!!icon}}/>

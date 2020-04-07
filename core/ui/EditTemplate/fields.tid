@@ -42,7 +42,7 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 \end
 \whitespace trim
 
-<div class="tc-edit-fields">
+<div class="tc-edit-fields" dir={{$:/config/DefaultTextDirection}}>
 <table class="tc-edit-fields">
 <tbody>
 <$list filter="[all[current]fields[]] +[sort[title]]" variable="currentField" storyview="pop">
@@ -67,7 +67,7 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 </div>
 
 <$fieldmangler>
-<div class="tc-edit-field-add">
+<div class="tc-edit-field-add" dir={{$:/config/DefaultTextDirection}}>
 <em class="tc-edit">
 <<lingo Fields/Add/Prompt>>&nbsp;&nbsp;
 </em>

@@ -15,7 +15,7 @@ tags: $:/tags/ViewTemplate
 
 <$list filter="[all[current]field:plugin-type[import]]">
 
-<div class="tc-import">
+<div class="tc-import" dir={{$:/config/DefaultTextDirection}}>
 
 <<lingo Listing/Hint>>
 

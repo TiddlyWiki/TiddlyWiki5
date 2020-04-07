@@ -2,7 +2,7 @@ title: $:/core/ui/ViewTemplate/subtitle
 tags: $:/tags/ViewTemplate
 
 <$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
-<div class="tc-subtitle">
+<div class="tc-subtitle" dir={{$:/config/DefaultTextDirection}}>
 <$link to={{!!modifier}}>
 <$view field="modifier"/>
 </$link> <$view field="modified" format="date" template={{$:/language/Tiddler/DateFormat}}/>

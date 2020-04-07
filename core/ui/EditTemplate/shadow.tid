@@ -12,7 +12,7 @@ tags: $:/tags/EditTemplate
 <$list filter="[all[current]shadowsource[]]" variable="pluginTitle">
 
 <$set name="pluginLink" value=<<pluginLinkBody>>>
-<div class="tc-message-box">
+<div class="tc-message-box" dir={{$:/config/DefaultTextDirection}}>
 
 <<lingo Warning>>
 
@@ -27,7 +27,7 @@ tags: $:/tags/EditTemplate
 <$list filter="[all[current]shadowsource[]]" variable="pluginTitle">
 
 <$set name="pluginLink" value=<<pluginLinkBody>>>
-<div class="tc-message-box">
+<div class="tc-message-box" dir={{$:/config/DefaultTextDirection}}>
 
 <<lingo OverriddenWarning>>
 
