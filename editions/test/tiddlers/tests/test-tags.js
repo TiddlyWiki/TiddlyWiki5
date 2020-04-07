@@ -21,7 +21,7 @@ describe("With no indexers", function() {
 });
 
 describe("With all indexers", function() {
-	var wikiOptions = {enableIndexers: []},
+	var wikiOptions = {},
 		wiki = setupWiki();
 	runTests(wiki,wikiOptions);
 });
