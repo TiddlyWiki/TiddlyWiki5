@@ -13,7 +13,6 @@
 		"tiddlywiki/external-attachments",
 		"tiddlywiki/dynaview",
 		"tiddlywiki/dynannotate",
-		"tiddlywiki/codemirror",
 		"tiddlywiki/comments",
 		"tiddlywiki/menubar"
 	],
