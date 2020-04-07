@@ -51,3 +51,7 @@ Renders as:
 
 {{Motovun Jack.jpg}}
 
+! Importing Images
+
+Use the <<.button import>> button (under the <<.sidebar-tab Tools>> tab in the sidebar), or drag and drop.
+See [[ImportingTiddlers]] for details.

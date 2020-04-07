@@ -280,7 +280,7 @@ exports.formatDateString = function(date,template) {
 				return $tw.utils.pad(date.getSeconds());
 			}],
 			[/^0XXX/, function() {
-				return $tw.utils.pad(date.getMilliseconds());
+				return $tw.utils.pad(date.getMilliseconds(),3);
 			}],
 			[/^0DD/, function() {
 				return $tw.utils.pad(date.getDate());
@@ -728,16 +728,20 @@ exports.timer = function(base) {
 /*
 Convert text and content type to a data URI
 */
-exports.makeDataUri = function(text,type) {
+exports.makeDataUri = function(text,type,_canonical_uri) {
 	type = type || "text/vnd.tiddlywiki";
 	var typeInfo = $tw.config.contentTypeInfo[type] || $tw.config.contentTypeInfo["text/plain"],
 		isBase64 = typeInfo.encoding === "base64",
 		parts = [];
-	parts.push("data:");
-	parts.push(type);
-	parts.push(isBase64 ? ";base64" : "");
-	parts.push(",");
-	parts.push(isBase64 ? text : encodeURIComponent(text));
+	if(_canonical_uri) {
+		parts.push(_canonical_uri);
+	} else {
+		parts.push("data:");
+		parts.push(type);
+		parts.push(isBase64 ? ";base64" : "");
+		parts.push(",");
+		parts.push(isBase64 ? text : encodeURIComponent(text));		
+	}
 	return parts.join("");
 };
 
@@ -777,6 +781,24 @@ exports.strEndsWith = function(str,ending,position) {
 		var lastIndex = str.indexOf(ending, position);
 		return lastIndex !== -1 && lastIndex === position;
 	}
+};
+
+/*
+Return system information useful for debugging
+*/
+exports.getSystemInfo = function(str,ending,position) {
+	var results = [],
+		save = function(desc,value) {
+			results.push(desc + ": " + value);
+		};
+	if($tw.browser) {
+		save("User Agent",navigator.userAgent);
+		save("Online Status",window.navigator.onLine);
+	}
+	if($tw.node) {
+		save("Node Version",process.version);
+	}
+	return results.join("\n");
 };
 
 })();

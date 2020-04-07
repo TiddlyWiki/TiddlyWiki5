@@ -13,7 +13,6 @@ description: 플러그인에 대한 설명문, 또는 모달 대화 상자
 draft.of: 초안 티들러에 대해, 초안인 티들러의 제목을 포함
 draft.title: 초안 티들러에 대해, 티들러의 제안된 새 제목을 포함
 footer: 마법사를 위한 바닥글 텍스트
-hack-to-give-us-something-to-compare-against: [[$:/core/templates/static.content]]에 사용되는 임시 저장 필드
 icon: 티들러와 연관된 아이콘을 포함하는 티들러의 제목
 library: "yes"로 설정하면 티들러가 자바스크립트 라이브러리로 저장해야하는지 나타냄
 list: 티들러와 연관된 티들러 제목의 정렬된 목록

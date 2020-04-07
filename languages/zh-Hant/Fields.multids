@@ -13,7 +13,6 @@ description: 插件的說明、描述
 draft.of: 草稿條目，包含條目的標題、標籤、欄位 ...
 draft.title: 草稿條目的標題
 footer: wizard 的註腳
-hack-to-give-us-something-to-compare-against: 於 [[$:/core/templates/static.content]] 使用的臨時儲存欄位
 icon: 條目的標題含有與條目關聯的圖示
 library: 若設為 "yes"，表示條目應該被儲存為一個 JavaScript 程式庫
 list: 條目的列表，指定一些條目的標題清單
@@ -30,7 +29,9 @@ source: 條目的網址
 subtitle: 一個 wizard 的副標題
 tags: 條目的標籤清單
 text: 條目的內文
+throttle.refresh: 如果存在，則限制此條目的刷新
 title: 條目的唯一名稱
 toc-link: 若設爲: "no"，則抑制目錄樹中的條目鏈接。
 type: 條目的內容類型
 version: 插件的版本資訊
+_is_skinny: 如果存在，則表示必須從伺服器載入條目的文字欄位

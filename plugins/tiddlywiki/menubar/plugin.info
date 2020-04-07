@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/menubar",
+	"name": "Menu Bar",
+	"description": "Menu Bar",
+	"list": "readme config"
+}

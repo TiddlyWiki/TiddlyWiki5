@@ -1,5 +1,5 @@
 title: $:/language/Help/savewikifolder
-description: Saves a wiki to a new wiki folder
+description: Slaat een wiki in een nieuwe wiki-folder op
 
 <<.from-version "5.1.20">> Slaat de wiki als een wiki-folder op inclusief tiddlers, plugins en configuratie:
 
