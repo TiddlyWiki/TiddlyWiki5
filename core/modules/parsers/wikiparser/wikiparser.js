@@ -27,6 +27,7 @@ Attributes are stored as hashmaps of the following objects:
 
 var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
+	this.parseAsInline = options.parseAsInline;
 	var self = this;
 	// Check for an externally linked tiddler
 	if($tw.browser && (text || "") === "" && options._canonical_uri) {
@@ -63,7 +64,7 @@ var WikiParser = function(type,text,options) {
 	this.tree = [];
 	var topBranch = this.parsePragmas();
 	// Parse the text into inline runs or blocks
-	if(options.parseAsInline) {
+	if(this.parseAsInline) {
 		topBranch.push.apply(topBranch,this.parseInlineRun());
 	} else {
 		topBranch.push.apply(topBranch,this.parseBlocks());
