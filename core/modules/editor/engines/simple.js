@@ -52,6 +52,9 @@ function SimpleEngine(options) {
 	if(this.widget.editTabIndex) {
 		this.domNode.setAttribute("tabindex",this.widget.editTabIndex);
 	}
+	if(this.widget.editDir) {
+		this.domNode.setAttribute("dir",this.widget.editDir);
+	}
 	// Add an input event handler
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},

@@ -109,6 +109,9 @@ function CodeMirrorEngine(options) {
 	if(this.widget.editTabIndex) {
 		config["tabindex"] = this.widget.editTabIndex;
 	}
+	if(this.widget.editDir) {
+		config.direction = this.widget.editDir;
+	}
 	// Create the CodeMirror instance
 	this.cm = window.CodeMirror(function(cmDomNode) {
 		// Note that this is a synchronous callback that is called before the constructor returns
