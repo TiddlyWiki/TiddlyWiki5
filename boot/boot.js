@@ -314,13 +314,13 @@ $tw.utils.parseDate = function(value) {
 // Stringify an array of tiddler titles into a list string
 $tw.utils.stringifyList = function(value) {
 	if($tw.utils.isArray(value)) {
-		var result = [];
-		for(var t=0; t<value.length; t++) {
+		var result = new Array(value.length);
+		for(var t=0, l=value.length; t<l; t++) {
 			var entry = value[t] || "";
 			if(entry.indexOf(" ") !== -1) {
-				result.push("[[" + entry + "]]");
+				result[t] = "[[" + entry + "]]";
 			} else {
-				result.push(entry);
+				result[t] = entry;
 			}
 		}
 		return result.join(" ");
