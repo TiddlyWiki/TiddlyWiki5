@@ -101,6 +101,7 @@ FramedEngine.prototype.copyStyles = function() {
 	this.domNode.style.margin = "0";
 	this.domNode.style["background-color"] = this.widget.wiki.extractTiddlerDataItem(this.widget.wiki.getTiddlerText("$:/palette"),"tiddler-editor-background");
 	this.domNode.style.direction = "";
+	this.domNode.style.unicodeBidi = "";
 	// In Chrome setting -webkit-text-fill-color overrides the placeholder text colour
 	this.domNode.style["-webkit-text-fill-color"] = "currentcolor";
 };
