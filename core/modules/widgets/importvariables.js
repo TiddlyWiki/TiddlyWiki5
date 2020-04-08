@@ -61,7 +61,14 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 					var widget = widgetPointer.makeChildWidget(node);
 					widget.computeAttributes();
 					widget.execute();
-					$tw.utils.extend(widgetPointer.variables,widget.variables);
+					// We SHALLOW copy over all variables
+					// in widget. We can't use
+					// $tw.utils.assign, because that copies
+					// up the prototype chain, which we
+					// don't want.
+					$tw.utils.each(Object.keys(widget.variables), function(key) {
+						widgetPointer.variables[key] = widget.variables[key];
+					});
 				} else {
 					widgetPointer.makeChildWidgets([node]);
 					widgetPointer = widgetPointer.children[0];

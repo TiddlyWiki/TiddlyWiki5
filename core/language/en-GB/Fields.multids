@@ -35,3 +35,4 @@ title: The unique name of a tiddler
 toc-link: Suppresses the tiddler's link in a Table of Contents tree if set to: ''no'' 
 type: The content type of a tiddler
 version: Version information for a plugin
+_is_skinny: If present, indicates that the tiddler text field must be loaded from the server

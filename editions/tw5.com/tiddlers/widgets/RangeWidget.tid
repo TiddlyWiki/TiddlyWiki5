@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The range widget displays an HTML `<input type="range">` that reflects a given tiddler field numeric value. Adjusting the radio button sets the tiddler field to the value.
+The range widget displays an HTML `<input type="range">` that reflects a given tiddler field numeric value. Adjusting the range slider sets the tiddler field to the value.
 
 ! Content and Attributes
 

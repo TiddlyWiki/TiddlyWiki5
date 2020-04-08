@@ -1,5 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/dynannotate",
+	"name": "Dynannotate",
 	"description": "Dynamic content annotation",
 	"author": "JeremyRuston",
 	"core-version": ">=5.0.0",
