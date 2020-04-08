@@ -47,7 +47,9 @@ The syntax for filtered transclusion `{{{...}}}` takes a filter as input and out
 
 The [[list-links|list-links Macro]] macro gives a preformatted list, typically a bullet list, in a more simplified way than by using the ListWidget. Behind the scenes it really is the ListWidget applying a default template to each list item.
 
-<$macrocall $name="wikitext-example-without-html" src="""<<list-links "[tag[HelloThere]]">>"""/>
+<$macrocall $name="wikitext-example-without-html" src=dn"""
+  <<list-links "[tag[HelloThere]]">>
+"""/>
 
 !Other “list related” features
 

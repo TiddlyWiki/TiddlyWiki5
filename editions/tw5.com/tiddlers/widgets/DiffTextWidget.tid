@@ -53,9 +53,10 @@ The ''cleanup'' attribute determines which optional post-processing should be ap
 
 In this example we compare two texts:
 
-<$macrocall $name='wikitext-example-without-html'
-src="""<$edit-text tiddler="SampleTiddlerFirst"/>
-
-<$edit-text tiddler="SampleTiddlerSecond"/>
-
-<$diff-text source={{SampleTiddlerFirst}} dest={{SampleTiddlerSecond}}/>"""/>
+<$macrocall $name='wikitext-example-without-html' src=dn"""
+  <$edit-text tiddler="SampleTiddlerFirst"/>
+  
+  <$edit-text tiddler="SampleTiddlerSecond"/>
+  
+  <$diff-text source={{SampleTiddlerFirst}} dest={{SampleTiddlerSecond}}/>
+"""/>

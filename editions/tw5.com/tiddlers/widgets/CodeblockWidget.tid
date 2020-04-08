@@ -29,11 +29,13 @@ The `language` attribute accepts either:
 
 Here is an example embedding the contents of a tiddler as a code block.
 
-<$macrocall $name='wikitext-example-without-html'
-src='<$codeblock code={{$:/editions/tw5.com/macro-examples/say-hi}} />' />
+<$macrocall $name='wikitext-example-without-html' src=dn'
+  <$codeblock code={{$:/editions/tw5.com/macro-examples/say-hi}} />
+'/>
 
 A codeblock may also specify a language.
 
-<$macrocall $name='wikitext-example-without-html'
-src='<$codeblock code="SELECT * FROM users WHERE deleted = false" language="sql" />' />
+<$macrocall $name='wikitext-example-without-html' src=dn'
+  <$codeblock code="SELECT * FROM users WHERE deleted = false" language="sql" />
+'/>
 

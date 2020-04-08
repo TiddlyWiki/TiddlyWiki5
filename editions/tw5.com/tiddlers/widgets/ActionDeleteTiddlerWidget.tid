@@ -27,16 +27,18 @@ The ''action-deletetiddler'' widget is invisible. Any content within it is ignor
 
 Here is an example of a button that deletes the tiddler HelloThere:
 
-<$macrocall $name='wikitext-example-without-html'
-src='<$button>
-<$action-deletetiddler $tiddler="HelloThere"/>
-Delete "~HelloThere"
-</$button>'/>
+<$macrocall $name='wikitext-example-without-html' src=dn'
+  <$button>
+    <$action-deletetiddler $tiddler="HelloThere"/>
+    Delete "~HelloThere"
+  </$button>
+'/>
 
 Here is an example of a button that deletes all tiddlers tagged [[TableOfContents]]:
 
-<$macrocall $name='wikitext-example-without-html'
-src='<$button>
-<$action-deletetiddler $filter="[tag[TableOfContents]]"/>
-Delete tiddlers tagged "~TableOfContents"
-</$button>'/>
+<$macrocall $name='wikitext-example-without-html' src=dn'
+  <$button>
+    <$action-deletetiddler $filter="[tag[TableOfContents]]"/>
+    Delete tiddlers tagged "~TableOfContents"
+  </$button>
+'/>

@@ -82,17 +82,109 @@ exports.repeat = function(str,count) {
 	return result;
 };
 
+// Used below in the trim functions
+var whitespaceAtStartRegex = /^\s\s*/;
+var whitespaceAtEndRegex = /\s\s*$/;
+var newlinesAtStartRegex = /^(?:[^\S\n]*\n)+/;
+
 /*
 Trim whitespace from the start and end of a string
 Thanks to Steven Levithan, http://blog.stevenlevithan.com/archives/faster-trim-javascript
 */
 exports.trim = function(str) {
 	if(typeof str === "string") {
-		return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+		return str.replace(whitespaceAtStartRegex, '').replace(whitespaceAtEndRegex, '');
 	} else {
 		return str;
 	}
 };
+
+/*
+Trim newlines from the start and whitespace from the end of a string (for preformatted code
+where the first non-empty line may be indented)
+*/
+exports.trimNewlines = function(str) {
+	if(typeof str === "string") {
+		return str.replace(newlinesAtStartRegex, '').replace(whitespaceAtEndRegex, '');
+	} else {
+		return str;
+	}
+};
+
+/*
+Modify the content of a WikiText string literal, based on modifiers. The modifiers must be
+placed directly before the string literal. They are executed in order. For example dn"..."
+will dedent and then strip the string. Meaning of the modifiers: d=dedent, s=strip, n=strip
+linebreaks at start and strip end. This function is currently just called from
+parseStringLiteral.
+*/
+exports.modifyStringLiteral = function (string, modifiers) {
+	var utils = $tw.utils; var len = modifiers.length;  // performance
+	for (var c = 0; c < len; c++) {
+		switch (modifiers[c]) {
+			case "d": string = utils.dedent(string); break;
+			case "s": string = utils.trim(string); break;
+			case "n": string = utils.trimNewlines(string); break;
+			default: // this will anyway not be called because parseStringLiteral matches for ([snd]{1,2})
+				console.log(
+					"modifyStringLiteral() says: '" + modifiers[c] +
+					"' is not a known modifier for a string literal. Ignoring it."
+				);
+				break;
+		}
+	}
+	return string;
+};
+
+/*
+Dedent a string. The first " " or "\t" of the first non-empty line defines the overall used
+indent character.
+*/
+exports.dedent = (function() {
+	var indentCharRegex = /^(?:([ \t])\s*)?\S/;  // matches the indent character to be used
+	var newlineRegex = /\r?\n/;
+	return function (string) {
+		var lines = string.split(newlineRegex);
+		// calculate the maximum common indent of all lines in the string
+		var indent; {
+			indent = 999999;
+			var indentChar;
+			var regex = indentCharRegex;  // to be changed after the first match
+			var len = lines.length;
+			for (var c = 0; c < len; c++) {
+				var line = lines[c];
+				var match = line.match(regex);
+				if (match) {  // matches only on non-empty lines
+					// done once
+					if (indentChar === undefined) {
+						if (match[1] === undefined) {  // the string is not indented
+							indent = 0;
+							break;
+						}
+						// We found the Indent char, from now on match the indent size
+						indentChar = match[1];
+						regex = new RegExp(
+							"^(" + indentChar + "*)[^" + indentChar + "\\S]*\\S"
+						);
+						match = line.match(regex);
+					}
+					// done on all non-empty lines
+					indent = Math.min(indent, match[1].length);
+					if (indent === 0) {
+						break;
+					}
+				}
+			}
+		}
+		// if indent > 0, dedent and return the string, otherwise return the string unchanged
+		if (indent > 0) {
+			lines = lines.map(function(line){return line.slice(indent);}).join("\n");
+			return lines;
+		} else {
+			return string;
+		}
+	};
+})();
 
 /*
 Convert a string to sentence case (ie capitalise first letter)

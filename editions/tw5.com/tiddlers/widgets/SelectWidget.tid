@@ -14,11 +14,13 @@ In multiple selection mode, the list of selected values is bound to the specifie
 
 For example, this select widget displays a list of the tags in this wiki:
 
-<$macrocall $name="wikitext-example-without-html" src="<$select tiddler=<<qualify 'select-demo'>> default='HelloThere'>
-<$list filter='[all[shadows+tiddlers]tags[]sort[title]]'>
-<option value=<<currentTiddler>>><$view field='title'/></option>
-</$list>
-</$select>"/>
+<$macrocall $name="wikitext-example-without-html" src=dn"
+  <$select tiddler=<<qualify 'select-demo'>> default='HelloThere'>
+    <$list filter='[all[shadows+tiddlers]tags[]sort[title]]'>
+      <option value=<<currentTiddler>>><$view field='title'/></option>
+    </$list>
+  </$select>
+"/>
 
 The <$link to=<<qualify "select-demo">>>state tiddler</$link> currently contains:
 
@@ -47,63 +49,73 @@ The content of the `<$select>` widget should be one or more HTML `<option>` or `
 
 This example sets the title of the current wiki [[$:/SiteTitle]] to one of a list of book titles:
 
-<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/SiteTitle' tooltip='Choose a new site title'>
-<option>A Tale of Two Cities</option>
-<option>A New Kind of Science</option>
-<option>The Dice Man</option>
-</$select>"/>
+<$macrocall $name="wikitext-example-without-html" src=dn"
+  <$select tiddler='$:/SiteTitle' tooltip='Choose a new site title'>
+    <option>A Tale of Two Cities</option>
+    <option>A New Kind of Science</option>
+    <option>The Dice Man</option>
+  </$select>
+"/>
 
 !! Value lists
 
 In this example the `value` attribute has been used to specify the text that should be used as the value of the entry instead of the display text.
 
-<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/SiteTitle'>
-<option value='cities'>A Tale of Two Cities</option>
-<option value='science'>A New Kind of Science</option>
-<option value='dice'>The Dice Man</option>
-</$select>"/>
+<$macrocall $name="wikitext-example-without-html" src=dn"
+  <$select tiddler='$:/SiteTitle'>
+    <option value='cities'>A Tale of Two Cities</option>
+    <option value='science'>A New Kind of Science</option>
+    <option value='dice'>The Dice Man</option>
+  </$select>
+"/>
 
 !! Option Groups
 
 Entries in the list can be grouped together with the `<optgroup>` element
 
-<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/SiteTitle'>
-<optgroup label='Fiction'>
-<option value='cities'>A Tale of Two Cities</option>
-<option value='dice'>The Dice Man</option>
-</optgroup>
-<optgroup label='Non-fiction'>
-<option value='science'>A New Kind of Science</option>
-<option value='recursive'>The Recursive Universe</option>
-</optgroup>
-</$select>"/>
+<$macrocall $name="wikitext-example-without-html" src=dn"
+  <$select tiddler='$:/SiteTitle'>
+    <optgroup label='Fiction'>
+      <option value='cities'>A Tale of Two Cities</option>
+      <option value='dice'>The Dice Man</option>
+    </optgroup>
+    <optgroup label='Non-fiction'>
+      <option value='science'>A New Kind of Science</option>
+      <option value='recursive'>The Recursive Universe</option>
+    </optgroup>
+  </$select>
+"/>
 
 !! Generated Lists
 
 The ListWidget can be used to generate the options for a select widget. For example, here we combine a select widget listing all the tiddlers tagged ''TableOfContents'' with a transclusion to display the text of the selected one.
 
-<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/generated-list-demo-state'>
-<$list filter='[tag[TableOfContents]]'>
-<option><$view field='title'/></option>
-</$list>
-</$select>
-<$tiddler tiddler={{$:/generated-list-demo-state}}>
-<$transclude mode='block'/>
-</$tiddler>"/>
+<$macrocall $name="wikitext-example-without-html" src=dn"
+  <$select tiddler='$:/generated-list-demo-state'>
+    <$list filter='[tag[TableOfContents]]'>
+    <option><$view field='title'/></option>
+    </$list>
+  </$select>
+  <$tiddler tiddler={{$:/generated-list-demo-state}}>
+    <$transclude mode='block'/>
+  </$tiddler>
+"/>
 
 !! Nested Lists
 
 This example uses a nested pair of list widgets. The outer one generates the `<optgroup>` elements, and the inner one generates `<option>` elements:
 
-<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/generated-list-demo-nestedstate' field='type' default='text/vnd.tiddlywiki'>
-<$list filter='[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]each[group]sort[group]]'>
-<optgroup label={{!!group}}>
-<$list filter='[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]group{!!group}] +[sort[description]]'>
-<option value={{!!name}}><$view field='description'><$view field='title'/></$view> (<$view field='name'/>)</option>
-</$list>
-</optgroup>
-</$list>
-</$select>"/>
+<$macrocall $name="wikitext-example-without-html" src=dn"
+  <$select tiddler='$:/generated-list-demo-nestedstate' field='type' default='text/vnd.tiddlywiki'>
+    <$list filter='[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]each[group]sort[group]]'>
+      <optgroup label={{!!group}}>
+        <$list filter='[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]group{!!group}] +[sort[description]]'>
+          <option value={{!!name}}><$view field='description'><$view field='title'/></$view> (<$view field='name'/>)</option>
+        </$list>
+      </optgroup>
+    </$list>
+  </$select>
+"/>
 
 !! Multiple Selections
 
