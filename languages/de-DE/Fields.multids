@@ -30,7 +30,9 @@ source: Eine Quelltext URL, verbunden mit diesem Tiddler.
 subtitle: Der Untertitel für einen "~Wizard-Dialog".
 tags: Eine Liste von "Tags" für diesen Tiddler.
 text: Der Haupttext eines Tiddlers.
+throttle.refresh: Wenn es existiert, dann wird der "refresh" Zyklus des Tiddlers verzögert.
 title: Ein individueller einmaliger Name eines Tiddlers.
 toc-link: Unterdrückt die Anzeige als Link, wenn der Wert auf ''"no"'' gesetzt wird
 type: Legt den Typ eines Tiddlers fest (aka MIME-type).
 version: Versions-Information eines "plugins".
+_is_skinny: Wenn es existiert, zeigt diese Feld an, dass das "Text-Feld" dynamisch vom Server geladen wird.

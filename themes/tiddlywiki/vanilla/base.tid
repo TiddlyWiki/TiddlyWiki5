@@ -130,6 +130,11 @@ blockquote {
 	quotes: "\201C""\201D""\2018""\2019";
 }
 
+blockquote > div {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
 blockquote.tc-big-quote {
 	font-family: Georgia, serif;
 	position: relative;
