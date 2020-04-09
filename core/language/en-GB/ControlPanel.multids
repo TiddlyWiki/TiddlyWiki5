@@ -87,6 +87,7 @@ Plugins/Plugins/Hint: Plugins
 Plugins/Reinstall/Caption: reinstall
 Plugins/Themes/Caption: Themes
 Plugins/Themes/Hint: Theme plugins
+Plugins/SubPluginPrompt: With <<count>> sub-plugins available
 Saving/Caption: Saving
 Saving/DownloadSaver/AutoSave/Description: Permit automatic saving for the download saver
 Saving/DownloadSaver/AutoSave/Hint: Enable Autosave for Download Saver

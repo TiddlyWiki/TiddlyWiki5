@@ -1,9 +1,7 @@
 title: $:/core/ui/ControlPanel/Modals/AddPlugins
 subtitle: {{$:/core/images/download-button}} {{$:/language/ControlPanel/Plugins/Add/Caption}}
 
-\define install-plugin-button()
-<div>
-<$button class={{{ [<assetInfo>get[original-title]get[version]then[tc-reinstall]] tc-btn-invisible tc-install-plugin +[join[ ]] }}}>
+\define install-plugin-actions()
 <$action-sendmessage $message="tm-load-plugin-from-library" url={{!!url}} title={{$(assetInfo)$!!original-title}}/>
 <$set name="url" value={{!!url}}>
 <$set name="currentTiddler" value=<<assetInfo>>>
@@ -12,6 +10,11 @@ subtitle: {{$:/core/images/download-button}} {{$:/language/ControlPanel/Plugins/
 </$list>
 </$set>
 </$set>
+\end
+
+\define install-plugin-button()
+<div>
+<$button actions=<<install-plugin-actions>> class={{{ [<assetInfo>get[original-title]get[version]then[tc-reinstall]] tc-btn-invisible tc-install-plugin +[join[ ]] }}}>
 {{$:/core/images/download-button}}
 <$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion" emptyMessage="""{{$:/language/ControlPanel/Plugins/Install/Caption}}""">
 {{$:/language/ControlPanel/Plugins/Reinstall/Caption}}
@@ -56,6 +59,7 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 <<install-plugin-button>>
 </div>
 </div>
+<$set name="original-title" value={{{ [<assetInfo>get[original-title]] }}}>
 <$reveal type="match" text="yes" state=<<popup-state>>>
 <div class="tc-plugin-info-dropdown">
 <div class="tc-plugin-info-dropdown-message">
@@ -78,7 +82,6 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 <div class="tc-plugin-info-dropdown-body">
 <$transclude tiddler=<<assetInfo>> field="readme" mode="block"/>
 </div>
-<$set name="original-title" value={{{ [<assetInfo>get[original-title]] }}}>
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>limit[1]]" variable="ignore">
 <div class="tc-plugin-info-sub-plugins">
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>sort[title]]" variable="assetInfo">
@@ -86,9 +89,18 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 </$list>
 </div>
 </$list>
-</$set>
 </div>
 </$reveal>
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>limit[1]]" variable="ignore">
+<$reveal type="nomatch" text="yes" state=<<popup-state>> tag="div" class="tc-plugin-info-sub-plugin-indicator">
+<$wikify name="count" text="""<$count filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>]"/>""">
+<$button class="tc-btn-invisible" set=<<popup-state>> setTo="yes">
+{{$:/language/ControlPanel/Plugins/SubPluginPrompt}}
+</$button>
+</$wikify>
+</$reveal>
+</$list>
+</$set>
 </$set>
 \end
 
