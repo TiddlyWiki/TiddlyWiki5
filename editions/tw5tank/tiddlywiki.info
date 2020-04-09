@@ -1,7 +1,8 @@
 {
 	"description": "Demo of Tank integration",
 	"plugins": [
-		"tiddlywiki/tiddlyweb"
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/internals"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
