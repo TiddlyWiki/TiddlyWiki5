@@ -2106,8 +2106,20 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-plugin-info-sub-plugins .tc-plugin-info {
-	margin: 0.5em 1em 0.5em 1em;
-	background: rgba(255,255,0,0.05);
+    margin: 0.5em;
+	background: <<colour background>>;
+}
+
+.tc-plugin-info-sub-plugin-indicator {
+	margin: -16px 1em 0 2em;
+}
+
+.tc-plugin-info-sub-plugin-indicator button {
+	color: <<colour background>>;
+	background: <<colour foreground>>;
+	border-radius: 8px;
+    padding: 2px 7px;
+    font-size: 0.75em;
 }
 
 .tc-plugin-info-sub-plugins .tc-plugin-info-dropdown {
@@ -2211,11 +2223,12 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 }
 
 .tc-plugin-info-sub-plugins {
-	padding-top: 0.5em;
-	background: <<colour message-background>>;
+	padding: 0.5em;
+    margin: 0 1em 1em 1em;
+	background: <<colour notification-background>>;
 }
 
-.tc-plugin-library-listing .tc-install-plugin {
+.tc-install-plugin {
 	font-weight: bold;
 	background: green;
 	color: white;
@@ -2224,7 +2237,7 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	padding: 3px;
 }
 
-.tc-plugin-library-listing .tc-install-plugin.tc-reinstall {
+.tc-install-plugin.tc-reinstall {
 	background: blue;
 }
 
