@@ -131,7 +131,7 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 \define display-server-connection()
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/ServerConnection]suffix{!!url}]" variable="connectionTiddler" emptyMessage=<<load-plugin-library-button>>>
 
-<<tabs "[[$:/core/ui/ControlPanel/Plugins/Add/Plugins]] [[$:/core/ui/ControlPanel/Plugins/Add/Themes]] [[$:/core/ui/ControlPanel/Plugins/Add/Languages]]" "$:/core/ui/ControlPanel/Plugins/Add/Plugins">>
+<<tabs "[[$:/core/ui/ControlPanel/Plugins/Add/Updates]] [[$:/core/ui/ControlPanel/Plugins/Add/Plugins]] [[$:/core/ui/ControlPanel/Plugins/Add/Themes]] [[$:/core/ui/ControlPanel/Plugins/Add/Languages]]" "$:/core/ui/ControlPanel/Plugins/Add/Plugins">>
 
 </$list>
 \end
