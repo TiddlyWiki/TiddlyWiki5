@@ -991,6 +991,10 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	font-weight: 300;
 }
 
+.tc-subtitle .tc-tiddlylink {
+	margin-right: .3em;
+}
+
 .tc-tiddler-missing .tc-title {
   font-style: italic;
   font-weight: normal;
