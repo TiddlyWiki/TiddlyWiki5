@@ -15,6 +15,7 @@ Basics/NewJournal/Title/Prompt: Modèle pour les titres des tiddlers journaux
 Basics/NewJournal/Text/Prompt: Texte pour les nouveaux tiddlers journaux
 Basics/NewJournal/Tags/Prompt: Tags pour les nouveaux tiddlers journaux
 Basics/NewTiddler/Title/Prompt: Modèle pour les titres des nouveaux tiddlers
+Basics/NewTiddler/Tags/Prompt: Tags pour les nouveaux tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Nombre de tiddlers //shadow// modifiés
 Basics/ShadowTiddlers/Prompt: Nombre de tiddlers //shadow//
 Basics/Subtitle/Prompt: Sous-titre
