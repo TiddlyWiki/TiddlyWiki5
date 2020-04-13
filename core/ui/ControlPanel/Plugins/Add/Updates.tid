@@ -25,7 +25,7 @@ $body$
 <$wikify name="count-filter" text=<<each-updateable-plugin "&#91;&#91;<$text text=<<assetInfo>>/>]]">>><$count filter=<<count-filter>>/></$wikify>
 \end
 
-<$button actions=<<update-all-actions>> class="tc-btn-invisible tc-install-plugin">
+<$button actions=<<update-all-actions>> class="tc-btn-invisible tc-install-plugin tc-reinstall-upgrade">
 {{$:/core/images/download-button}} {{||$:/language/ControlPanel/Plugins/Updates/UpdateAll/Caption}}
 </$button>
 
