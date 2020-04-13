@@ -2237,10 +2237,17 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	padding: 3px;
 }
 
+.tc-install-plugin.tc-reinstall-downgrade {
+	background: red;
+}
+
 .tc-install-plugin.tc-reinstall {
 	background: blue;
 }
 
+.tc-install-plugin.tc-reinstall-upgrade {
+	background: orange;
+}
 
 .tc-check-list {
 	line-height: 2em;
