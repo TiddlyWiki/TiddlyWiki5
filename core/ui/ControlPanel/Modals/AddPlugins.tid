@@ -75,11 +75,10 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 <$set name="original-title" value={{{ [<assetInfo>get[original-title]] }}}>
 <$reveal type="match" text="yes" state=<<popup-state>>>
 <div class="tc-plugin-info-dropdown">
+<$list filter="[enlist{!!dependents}] [<currentTiddler>get[parent-plugin]] +[limit[1]] ~[<assetInfo>get[original-title]!is[tiddler]]" variable="ignore">
 <div class="tc-plugin-info-dropdown-message">
-<$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion" emptyMessage="""{{$:/language/ControlPanel/Plugins/NotInstalled/Hint}}""">
-<em>
-{{$:/language/ControlPanel/Plugins/AlreadyInstalled/Hint}}
-</em>
+<$list filter="[<assetInfo>get[original-title]!is[tiddler]]">
+{{$:/language/ControlPanel/Plugins/NotInstalled/Hint}}
 </$list>
 <$set name="currentTiddler" value=<<assetInfo>>>
 <$list filter="[enlist{!!dependents}] [<currentTiddler>get[parent-plugin]] +[limit[1]]" variable="ignore">
@@ -92,6 +91,7 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 </$list>
 </$set>
 </div>
+</$list>
 <div class="tc-plugin-info-dropdown-body">
 <$transclude tiddler=<<assetInfo>> field="readme" mode="block"/>
 </div>
