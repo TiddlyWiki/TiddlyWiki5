@@ -801,4 +801,16 @@ exports.getSystemInfo = function(str,ending,position) {
 	return results.join("\n");
 };
 
+exports.parseNumber = function(str) {
+	return parseFloat(str) || 0;
+};
+
+exports.parseInt = function(str) {
+	return parseInt(str) || 0;
+};
+
+exports.stringifyNumber = function(num) {
+	return num + "";
+};
+
 })();

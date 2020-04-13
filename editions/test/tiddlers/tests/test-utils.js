@@ -107,6 +107,30 @@ describe("Utility tests", function() {
 
 	});
 
+	it("should compare versions", function() {
+		var cv = $tw.utils.compareVersions;
+		expect(cv("v0.0.0","v0.0.0")).toEqual(0);
+		expect(cv("0.0.0","v0.0.0")).toEqual(0);
+		expect(cv("v0.0.0","0.0.0")).toEqual(0);
+		expect(cv("v0.0.0","not a version")).toEqual(0);
+		expect(cv("v0.0.0",undefined)).toEqual(0);
+		expect(cv("not a version","v0.0.0")).toEqual(0);
+		expect(cv(undefined,"v0.0.0")).toEqual(0);
+		expect(cv("v1.0.0","v1.0.0")).toEqual(0);
+		expect(cv("v1.0.0","1.0.0")).toEqual(0);
+
+		expect(cv("v1.0.1",undefined)).toEqual(+1);
+		expect(cv("v1.0.1","v1.0.0")).toEqual(+1);
+		expect(cv("v1.1.1","v1.1.0")).toEqual(+1);
+		expect(cv("v1.1.2","v1.1.1")).toEqual(+1);
+		expect(cv("1.1.2","v1.1.1")).toEqual(+1);
+
+		expect(cv("v1.0.0","v1.0.1")).toEqual(-1);
+		expect(cv("v1.1.0","v1.1.1")).toEqual(-1);
+		expect(cv("v1.1.1","v1.1.2")).toEqual(-1);
+		expect(cv("1.1.1","1.1.2")).toEqual(-1);
+	});
+
 });
 
 })();
