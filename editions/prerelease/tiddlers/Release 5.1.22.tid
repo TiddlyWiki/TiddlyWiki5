@@ -15,10 +15,10 @@ Plugins [[can now|https://github.com/Jermolene/TiddlyWiki5/pull/4259]] be loaded
 
 The [[plugin listing|$:/core/ui/ControlPanel/Plugins]] and the [[plugin chooser|$:/core/ui/ControlPanel/Modals/AddPlugins]] in the control panel feature several improvements:
 
-* A new "Updates" tab listing all upgrades available from a plugin library, and a button to update all of them with one click
-* The plugin chooser now displays plugins that provide add-on functionality to another plugin as nested "sub-plugins", making the main listing easier to navigate
-* Plugins may now declare dependencies that are automatically installed without user intervention
-* All plugins now feature a concise, informal name (in addition to the description and title)
+* A new ''"Updates" tab'' listing all upgrades available from a plugin library, and a button to update all of them with one click
+* The plugin chooser now displays plugins that provide add-on functionality to another plugin as nested ''"sub-plugins"'', making the main listing easier to navigate
+* Plugins may now declare dependencies that are ''automatically installed'' without user intervention
+* All plugins are now displayed more consistently, including a concise, informal name (in addition to the description and title)
 
 !! Client-Server Improvements
 
@@ -43,12 +43,16 @@ See the [[pull request on GitHub for more details|https://github.com/Jermolene/T
 
 [[Added|https://github.com/Jermolene/TiddlyWiki5/issues/4554]] a new filter operator for comparing numbers, strings, dates and version numbers. For example:
 
-```
-[[2]compare:number:eq[3]] returns nothing
-[[2]compare:number:lt[3]] returns "2"
-[[2]compare:number:eq[2]] returns "2"
-[[1]compare:number:gt[2]then[yes]else[no]]
-```
+:`[[2]compare:number:eq[3]]`
+;returns nothing
+:`[[2]compare:number:lt[3]]`
+; returns "2"
+:`[[2]compare:number:eq[2]]`
+; returns "2"
+:`=1.2 =1.8 =2.3 =3.4 =7.2 +[compare:number:gt[1.5]compare:number:lt[2.5]]`
+; returns "1.8" "2.3"
+:`[[1]compare:number:gt[2]then[yes]else[no]]`
+; returns "no"
 
 !! New Plugins
 
