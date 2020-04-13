@@ -29,38 +29,8 @@ $body$
 {{$:/core/images/download-button}} {{||$:/language/ControlPanel/Plugins/Updates/UpdateAll/Caption}}
 </$button>
 
-<table class="tc-plugin-library-listing">
-<tbody>
-<tr>
-<th>
-Plugin
-</th>
-<th>
-Installed
-</th>
-<th>
-Available
-</th>
-<th>
-Install
-</th>
-</tr>
-<$macrocall $name="each-updateable-plugin" body="""<tr>
-<td>
-<strong><$text text={{{ [<assetInfo>get[name]] ~[<assetInfo>get[original-title]split[/]last[1]] }}}/></strong>: <$view tiddler=<<assetInfo>> field="description"/>
-<br>
-<$text text={{{ [<assetInfo>get[original-title]] }}}/>
-</td>
-<td>
-<$text text=<<installedVersion>>/>
-</td>
-<td>
-<$text text=<<libraryVersion>>/>
-</td>
-<td>
-<<install-plugin-button>>
-</td>
-</tr>
+<div class="tc-plugin-library-listing">
+<$macrocall $name="each-updateable-plugin" body="""
+<$macrocall $name="display-plugin-info" type={{{ [<assetInfo>get[original-plugin-type]] }}}/>
 """/>
-</tbody>
-</table>
+</div>
