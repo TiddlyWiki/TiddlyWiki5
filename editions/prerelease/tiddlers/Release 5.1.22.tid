@@ -39,6 +39,17 @@ This release sees several improvements to the client-server configuration:
 
 See the [[pull request on GitHub for more details|https://github.com/Jermolene/TiddlyWiki5/pull/4373]]. 
 
+!! New [[compare Operator]]
+
+[[Added|https://github.com/Jermolene/TiddlyWiki5/issues/4554]] a new filter operator for comparing numbers, strings, dates and version numbers. For example:
+
+```
+[[2]compare:number:eq[3]] returns nothing
+[[2]compare:number:lt[3]] returns "2"
+[[2]compare:number:eq[2]] returns "2"
+[[1]compare:number:gt[2]then[yes]else[no]]
+```
+
 !! New Plugins
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ad2d4503e584ce9f931dbd1e98f95738b2841e51]] new ''menubar'' plugin that creates a menu bar that is responsive on mobile devices, and supports search, dropdowns and links
