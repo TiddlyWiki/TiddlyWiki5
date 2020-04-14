@@ -580,7 +580,9 @@ Sorts an array of tiddler titles according to an ordered list
 exports.sortByList = function(array,listTitle) {
 	var self = this,
 		replacedTitles = Object.create(null);
-	function replaceItem(title) {
+	// Given a title, this function will place it in the correct location
+	// within titles.
+	function moveItemInList(title) {
 		if(!$tw.utils.hop(replacedTitles, title)) {
 			replacedTitles[title] = true;
 			var newPos = -1,
@@ -593,26 +595,37 @@ exports.sortByList = function(array,listTitle) {
 				} else if(afterTitle === "") {
 					newPos = titles.length;
 				} else if(beforeTitle) {
-					replaceItem(beforeTitle);
+					// if this title is placed relative
+					// to another title, make sure that
+					// title is placed before we place
+					// this one.
+					moveItemInList(beforeTitle);
 					newPos = titles.indexOf(beforeTitle);
 				} else if(afterTitle) {
-					replaceItem(afterTitle);
+					// Same deal
+					moveItemInList(afterTitle);
 					newPos = titles.indexOf(afterTitle);
 					if(newPos >= 0) {
 						++newPos;
 					}
 				}
-				// We get the currPos //after// figuring out the newPos, because recursive replaceItem calls might alter title's currPos
-				var currPos = titles.indexOf(title);
-				if(newPos === -1) {
-					newPos = currPos;
-				}
-				if(currPos >= 0 && newPos !== currPos) {
-					titles.splice(currPos,1);
-					if(newPos >= currPos) {
-						newPos--;
+				// If a new position is specified, let's move it
+				if (newPos !== -1) {
+					// get its current Pos, and make sure
+					// sure that it's _actually_ in the list
+					// and that it would _actually_ move
+					// (#4275) We don't bother calling
+					//         indexOf unless we have a new
+					//         position to work with
+					var currPos = titles.indexOf(title);
+					if(currPos >= 0 && newPos !== currPos) {
+						// move it!
+						titles.splice(currPos,1);
+						if(newPos >= currPos) {
+							newPos--;
+						}
+						titles.splice(newPos,0,title);
 					}
-					titles.splice(newPos,0,title);
 				}
 			}
 		}
@@ -640,7 +653,7 @@ exports.sortByList = function(array,listTitle) {
 		var sortedTitles = titles.slice(0);
 		for(t=0; t<sortedTitles.length; t++) {
 			title = sortedTitles[t];
-			replaceItem(title);
+			moveItemInList(title);
 		}
 		return titles;
 	}
