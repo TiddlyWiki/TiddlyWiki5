@@ -391,3 +391,5 @@ Scott Willeke, @activescott, 2020/02/01
 @lucible, 2020/02/05
 
 Matthias Bilger, @m42e, 2020/03/11
+
+Mandar Vaze, @mandarvaze, 2020/04/08
