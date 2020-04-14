@@ -51,20 +51,9 @@ Command.prototype.execute = function() {
 				}
 			}
 		};
-	var pluginsPaths = $tw.getLibraryItemSearchPaths($tw.config.pluginsPath,$tw.config.pluginsEnvVar);
-	for(var u=0; u<pluginsPaths.length; u++) {
-		collectPublisherPlugins(pluginsPaths[u]);
-	}
-
-	var themesPaths = $tw.getLibraryItemSearchPaths($tw.config.themesPath,$tw.config.themesEnvVar);
-	for(var u=0; u<themesPaths.length; u++) {
-		collectPublisherPlugins(themesPaths[u]);
-	}
-
-	var languagesPaths = $tw.getLibraryItemSearchPaths($tw.config.languagesPath,$tw.config.languagesEnvVar);
-	for(var u=0; u<languagesPaths.length; u++) {
-		collectPlugins(languagesPaths[u]);
-	}
+	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.pluginsPath,$tw.config.pluginsEnvVar),collectPublisherPlugins);
+	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.themesPath,$tw.config.themesEnvVar),collectPublisherPlugins);
+	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.languagesPath,$tw.config.languagesEnvVar),collectPlugins);
 	// Save the upgrade library tiddler
 	var pluginFields = {
 		title: upgradeLibraryTitle,
