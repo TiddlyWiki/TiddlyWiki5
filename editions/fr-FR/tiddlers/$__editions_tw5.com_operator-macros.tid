@@ -27,7 +27,6 @@ type: text/vnd.tiddlywiki
 	</blockquote>
 </$reveal>
 </$list>
-</div>
 \end
 
 \define .this-is-operator-example() This example tiddler is used to illustrate some of the [[Filter Operators]].
