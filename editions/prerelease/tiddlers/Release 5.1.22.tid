@@ -75,6 +75,7 @@ See the [[pull request on GitHub for more details|https://github.com/Jermolene/T
 * [[Optimised|https://github.com/Jermolene/TiddlyWiki5/pull/4108]] ImportVariablesWidget to improve performance of global macros
 * [[Optimised|https://github.com/Jermolene/TiddlyWiki5/commit/18f5333e01eb62ece65a86c457bf8a398f156930]] core SVG images to save approximately 100KB from the core plugin
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4421]] indexer for backlinks
+* [[Optimised|https://github.com/Jermolene/TiddlyWiki5/pull/4397]] [[sort Operator]]
 
 ! Usability Improvements
 
@@ -118,6 +119,7 @@ See the [[pull request on GitHub for more details|https://github.com/Jermolene/T
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4490]] support for a custom class to modal wrapper
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/091bcfce7d1a9c09140992e649f41ae17d27f307]] [[datauri Macro]] to work with tiddlers with a ''_canonical_uri'' field
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4332]] invaldi HTML produced in ">" in blockquote lists
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4540]] new "index" option to the [[has Operator]] for detecting the presence of data tiddler items 
 
 ! Bug Fixes
 
@@ -139,12 +141,16 @@ See the [[pull request on GitHub for more details|https://github.com/Jermolene/T
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/665b63ec38b75dfe62009d2f5514682de60e953f]] lack of refresh when ButtonWidget ''actions'' attribute changes
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4534]] the RangeWidget to work in Internet Explorer 10/11
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/bdc5ac592f17b5ed3bb5ae782e56ced62406d653]] CountWidget to display "0" for an empty filter, instead of "undefined"
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4559]] MakeLibraryCommand to respect environment variables
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4396]] not to return "null" for an empty list
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4551]] z-index for CodeMirror autocomplete dropdowns
 
 ! Contributors
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 * [[@activescott|https://github.com/activescott]]
+* [[@Arlen22|https://github.com/Arlen22]]
 * [[@BramChen|https://github.com/BramChen]]
 * [[@BurningTreeC|https://github.com/BurningTreeC]]
 * [[@donmor|https://github.com/donmor]]
@@ -155,9 +161,14 @@ See the [[pull request on GitHub for more details|https://github.com/Jermolene/T
 * [[@hoelzro|https://github.com/hoelzro]]
 * [[@Janno|https://github.com/Janno]]
 * [[@joshuafontany|https://github.com/joshuafontany]]
+* [[@inmysocks|https://github.com/inmysocks]]
+* [[@kookma|https://github.com/kookma]]
+* [[@linonetwo|https://github.com/linonetwo]]
 * [[@m42e|https://github.com/m42e]]
 * [[@MidnightLightning|https://github.com/MidnightLightning]]
+* [[@mklauber|https://github.com/mklauber]]
 * [[@pmario|https://github.com/pmario]]
 * [[@s-l-lee|https://github.com/s-l-lee]]
 * [[@s-light|https://github.com/s-light]]
 * [[@saqimtiaz|https://github.com/saqimtiaz]]
+* [[@xcazin|https://github.com/xcazin]]
