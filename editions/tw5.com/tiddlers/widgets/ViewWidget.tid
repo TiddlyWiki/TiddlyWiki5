@@ -39,6 +39,10 @@ The following formats can be specified in the `format` attribute:
 |''stripcomments'' |The field is interpreted as JavaScript source code and any lines beginning `\\#` are stripped |
 |''jsencoded'' |The field is displayed as a JavaScript encoded string |
 
+!! "WikiText format"
+
+To display the field content as regular WikiText, for example with working links, use the [[TranscludeWidget]] instead. 
+
 ! SubTiddler Access
 
 The view widget allows access to the individual tiddlers stored within a [[plugin|Plugins]].
