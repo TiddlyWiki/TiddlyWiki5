@@ -970,6 +970,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-tiddler-title-icon {
 	vertical-align: middle;
+	margin-right: .1em;
 }
 
 .tc-system-title-prefix {
@@ -989,6 +990,10 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	font-size: 0.9em;
 	color: <<colour tiddler-subtitle-foreground>>;
 	font-weight: 300;
+}
+
+.tc-subtitle .tc-tiddlylink {
+	margin-right: .3em;
 }
 
 .tc-tiddler-missing .tc-title {
@@ -1399,6 +1404,10 @@ html body.tc-body.tc-single-tiddler-window {
 /*
 ** Storyview Classes
 */
+
+.tc-viewswitcher .tc-image-button {
+	margin-right: .3em;
+}
 
 .tc-storyview-zoomin-tiddler {
 	position: absolute;
