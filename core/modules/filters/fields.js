@@ -7,7 +7,8 @@ Filter operator for returning the names of the fields on the selected tiddlers
 
 \*/
 (function(){
-
+	
+/*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
 
