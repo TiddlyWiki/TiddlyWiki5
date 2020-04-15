@@ -11,10 +11,12 @@ tags: $:/tags/Macro
 </$list>
 <$list filter="[<tagExists>match[true]]">
 <$action-setfield $tiddler=<<__tiddler__>> text={{{ [<__storeTitle__>get[text]] }}}/>
+<$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 </$list>
 <$list filter="[<tagExists>!match[true]]">
 <$action-deletetiddler $tiddler=<<__tiddler__>>/>
 <$action-deletetiddler $tiddler=<<__storeTitle__>>/>
+<$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 </$list>
 </$set>
 </$set>
