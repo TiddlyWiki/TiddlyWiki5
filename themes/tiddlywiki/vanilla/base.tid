@@ -1405,6 +1405,10 @@ html body.tc-body.tc-single-tiddler-window {
 ** Storyview Classes
 */
 
+.tc-viewswitcher .tc-image-button {
+	margin-right: .3em;
+}
+
 .tc-storyview-zoomin-tiddler {
 	position: absolute;
 	display: block;
