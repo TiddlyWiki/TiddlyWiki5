@@ -8,9 +8,7 @@ Filter operator for returning the names of the fields on the selected tiddlers
 \*/
 (function(){
 
-/*jslint node:true, browser:true */
-/*eslint no-unused-vars:0 */
-/*global $tw:false, exports:false */
+/*global $tw: false */
 "use strict";
 
 /*

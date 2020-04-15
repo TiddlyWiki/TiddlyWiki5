@@ -9,7 +9,7 @@ Fields widget
 (function(){
 
 /*jslint node: true, browser: true */
-/*global $tw: false, require:false, exports:false */
+/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
