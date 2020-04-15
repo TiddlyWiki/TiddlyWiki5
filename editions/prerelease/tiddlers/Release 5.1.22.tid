@@ -16,6 +16,7 @@ Plugins [[can now|https://github.com/Jermolene/TiddlyWiki5/pull/4259]] be loaded
 The [[plugin listing|$:/core/ui/ControlPanel/Plugins]] and the [[plugin chooser|$:/core/ui/ControlPanel/Modals/AddPlugins]] in the control panel feature several improvements:
 
 * A new ''"Updates" tab'' listing all upgrades available from a plugin library, and a button to update all of them with one click
+* Tabs are now used to display plugin libraries within the plugin chooser
 * The plugin chooser now displays plugins that provide add-on functionality to another plugin as nested ''"sub-plugins"'', making the main listing easier to navigate
 * Plugins may now declare dependencies that are ''automatically installed'' without user intervention
 * All plugins are now displayed more consistently, including a concise, informal name (in addition to the description and title)
@@ -119,7 +120,9 @@ See the [[pull request on GitHub for more details|https://github.com/Jermolene/T
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4490]] support for a custom class to modal wrapper
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/091bcfce7d1a9c09140992e649f41ae17d27f307]] [[datauri Macro]] to work with tiddlers with a ''_canonical_uri'' field
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4332]] invaldi HTML produced in ">" in blockquote lists
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4540]] new "index" option to the [[has Operator]] for detecting the presence of data tiddler items 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4540]] new "index" option to the [[has Operator]] for detecting the presence of data tiddler items
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4433]] the FieldsWidget with an "include" attribute and more sorting options, and the [[fields Operator]] with new "include" and "exclude" suffixes
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4436]] ActionCreateTiddlerWidget with attributes for specifying a template and for controlling overwriting existing tiddlers
 
 ! Bug Fixes
 
@@ -144,6 +147,7 @@ See the [[pull request on GitHub for more details|https://github.com/Jermolene/T
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4559]] MakeLibraryCommand to respect environment variables
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4396]] not to return "null" for an empty list
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4551]] z-index for CodeMirror autocomplete dropdowns
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4552]] unwanted whitespace within sidebar links
 
 ! Contributors
 
