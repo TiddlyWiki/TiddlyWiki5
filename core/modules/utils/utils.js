@@ -806,7 +806,7 @@ exports.parseNumber = function(str) {
 };
 
 exports.parseInt = function(str) {
-	return parseInt(str) || 0;
+	return parseInt(str,10) || 0;
 };
 
 exports.stringifyNumber = function(num) {
