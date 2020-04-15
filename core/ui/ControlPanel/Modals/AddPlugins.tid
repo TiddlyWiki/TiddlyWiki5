@@ -164,22 +164,33 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 \end
 
 \define plugin-library-listing()
+<div class="tc-tab-set">
+<$set name="defaultTab" value={{{ [all[tiddlers+shadows]tag[$:/tags/PluginLibrary]] }}}>
+<div class="tc-tab-buttons">
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/PluginLibrary]]">
-<div class="tc-plugin-library">
-
-!! <$link><$transclude field="caption"><$view field="title"/></$transclude></$link>
-
+<$button set=<<qualify "$:/state/addplugins/tab">> setTo=<<currentTiddler>> default=<<defaultTab>> selectedClass="tc-tab-selected">
+<$set name="tv-wikilinks" value="no">
+<$transclude field="caption"/>
+</$set>
+</$button>
+</$list>
+</div>
+<div class="tc-tab-divider"/>
+<div class="tc-tab-content">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/PluginLibrary]]">
+<$reveal type="match" state=<<qualify "$:/state/addplugins/tab">> text=<<currentTiddler>> default=<<defaultTab>>>
+<h2><$link><$transclude field="caption"><$view field="title"/></$transclude></$link></h2>
 //<$view field="url"/>//
-
-<$transclude/>
-
+<$transclude mode="block"/>
 <$set name=PluginLibraryURL value={{!!url}}>
 <<close-library-button>>
 </$set>
-
 <<display-server-connection>>
-</div>
+</$reveal>
 </$list>
+</div>
+</$set>
+</div>
 \end
 
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
