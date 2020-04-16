@@ -42,44 +42,53 @@ FieldsWidget.prototype.execute = function() {
 	// Get parameters from our attributes
 	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.template = this.getAttribute("template");
+	this.sort = this.getAttribute("sort","yes") === "yes";
+	this.sortReverse = this.getAttribute("sortReverse","no") === "yes";
 	this.exclude = this.getAttribute("exclude");
+	this.include = this.getAttribute("include",null);
 	this.stripTitlePrefix = this.getAttribute("stripTitlePrefix","no") === "yes";
 	// Get the value to display
 	var tiddler = this.wiki.getTiddler(this.tiddlerTitle);
-	// Get the exclusion list
-	var exclude;
-	if(this.exclude) {
-		exclude = this.exclude.split(" ");
-	} else {
-		exclude = ["text"]; 
-	}
+
+	// Get the inclusion and exclusion list
+	var excludeArr = (this.exclude) ? this.exclude.split(" ") : ["text"];
+	// Include takes precedence
+	var includeArr = (this.include) ? this.include.split(" ") : null;
+
 	// Compose the template
 	var text = [];
 	if(this.template && tiddler) {
 		var fields = [];
-		for(var fieldName in tiddler.fields) {
-			if(exclude.indexOf(fieldName) === -1) {
-				fields.push(fieldName);
+		if (includeArr) { // Include takes precedence
+			for(var i=0; i<includeArr.length; i++) {
+				if(tiddler.fields[includeArr[i]]) {
+					fields.push(includeArr[i]);
+				}
+			}
+		} else {
+			for(var fieldName in tiddler.fields) {
+				if(excludeArr.indexOf(fieldName) === -1) {
+					fields.push(fieldName);
+				}
 			}
 		}
-		fields.sort();
-		for(var f=0; f<fields.length; f++) {
+		if (this.sort) fields.sort();
+		if (this.sortReverse) fields.reverse();
+		for(var f=0, fmax=fields.length; f<fmax; f++) {
 			fieldName = fields[f];
-			if(exclude.indexOf(fieldName) === -1) {
-				var row = this.template,
-					value = tiddler.getFieldString(fieldName);
-				if(this.stripTitlePrefix && fieldName === "title") {
-					var reStrip = /^\{[^\}]+\}(.+)/mg,
-						reMatch = reStrip.exec(value);
-					if(reMatch) {
-						value = reMatch[1];
-					}
+			var row = this.template,
+				value = tiddler.getFieldString(fieldName);
+			if(this.stripTitlePrefix && fieldName === "title") {
+				var reStrip = /^\{[^\}]+\}(.+)/mg,
+					reMatch = reStrip.exec(value);
+				if(reMatch) {
+					value = reMatch[1];
 				}
-				row = $tw.utils.replaceString(row,"$name$",fieldName);
-				row = $tw.utils.replaceString(row,"$value$",value);
-				row = $tw.utils.replaceString(row,"$encoded_value$",$tw.utils.htmlEncode(value));
-				text.push(row);
 			}
+			row = $tw.utils.replaceString(row,"$name$",fieldName);
+			row = $tw.utils.replaceString(row,"$value$",value);
+			row = $tw.utils.replaceString(row,"$encoded_value$",$tw.utils.htmlEncode(value));
+			text.push(row);
 		}
 	}
 	this.text = text.join("");
@@ -90,11 +99,13 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 FieldsWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.template || changedAttributes.exclude || changedAttributes.stripTitlePrefix || changedTiddlers[this.tiddlerTitle]) {
-		this.refreshSelf();
-		return true;
+	if( changedAttributes.tiddler || changedAttributes.template || changedAttributes.exclude ||
+		changedAttributes.include || changedAttributes.sort || changedAttributes.sortReverse ||
+		changedTiddlers[this.tiddlerTitle] || changedAttributes.stripTitlePrefix) {
+			this.refreshSelf();
+			return true;
 	} else {
-		return false;	
+		return false;
 	}
 };
 

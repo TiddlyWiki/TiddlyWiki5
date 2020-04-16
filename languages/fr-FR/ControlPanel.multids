@@ -15,6 +15,7 @@ Basics/NewJournal/Title/Prompt: Modèle pour les titres des tiddlers journaux
 Basics/NewJournal/Text/Prompt: Texte pour les nouveaux tiddlers journaux
 Basics/NewJournal/Tags/Prompt: Tags pour les nouveaux tiddlers journaux
 Basics/NewTiddler/Title/Prompt: Modèle pour les titres des nouveaux tiddlers
+Basics/NewTiddler/Tags/Prompt: Tags pour les nouveaux tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Nombre de tiddlers //shadow// modifiés
 Basics/ShadowTiddlers/Prompt: Nombre de tiddlers //shadow//
 Basics/Subtitle/Prompt: Sous-titre
@@ -69,6 +70,7 @@ Plugins/Caption: Plugins
 Plugins/Disable/Caption: désactiver
 Plugins/Disable/Hint: Désactive ce plugin au prochain rechargement de la page
 Plugins/Disabled/Status: (désactivé)
+Plugins/Downgrade/Caption: version antérieure
 Plugins/Empty/Hint: Aucun
 Plugins/Enable/Caption: activer
 Plugins/Enable/Hint: Active ce plugin au prochain rechargement de la page
@@ -86,6 +88,11 @@ Plugins/Plugins/Hint: Plugins
 Plugins/Reinstall/Caption: réinstalle
 Plugins/Themes/Caption: Thèmes
 Plugins/Themes/Hint: Plugins de thème
+Plugins/Update/Caption: mise à jour
+Plugins/Updates/Caption: Mises à jour
+Plugins/Updates/Hint: Mises à jour disponibles pour les plugins installés
+Plugins/Updates/UpdateAll/Caption: Mettre à jour <<update-count>> plugins
+Plugins/SubPluginPrompt: Avec <<count>> sous-plugins disponibles
 Saving/Caption: Sauvegarde
 Saving/DownloadSaver/AutoSave/Description: Permet l'enregistrement automatique pour l'enregistreur de téléchargement
 Saving/DownloadSaver/AutoSave/Hint: Active l'auto-enregistrement pour l'enregistreur de téléchargement

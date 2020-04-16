@@ -14,6 +14,8 @@ CloseOthers/Caption: fermer les autres tiddlers
 CloseOthers/Hint: Ferme les autres tiddlers
 ControlPanel/Caption: panneau de contrôle
 ControlPanel/Hint: Ouvre le panneau de contrôle
+CopyToClipboard/Caption: copier dans le presse-papier
+CopyToClipboard/Hint: Copie ce texte dans le presse-papier
 Delete/Caption: supprimer
 Delete/Hint: Supprime ce tiddler
 Edit/Caption: éditer

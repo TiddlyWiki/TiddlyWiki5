@@ -51,9 +51,9 @@ Command.prototype.execute = function() {
 				}
 			}
 		};
-	collectPublisherPlugins(path.resolve($tw.boot.corePath,$tw.config.pluginsPath));
-	collectPublisherPlugins(path.resolve($tw.boot.corePath,$tw.config.themesPath));
-	collectPlugins(path.resolve($tw.boot.corePath,$tw.config.languagesPath));
+	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.pluginsPath,$tw.config.pluginsEnvVar),collectPublisherPlugins);
+	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.themesPath,$tw.config.themesEnvVar),collectPublisherPlugins);
+	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.languagesPath,$tw.config.languagesEnvVar),collectPlugins);
 	// Save the upgrade library tiddler
 	var pluginFields = {
 		title: upgradeLibraryTitle,

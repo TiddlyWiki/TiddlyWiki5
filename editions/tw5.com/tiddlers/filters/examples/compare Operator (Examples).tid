@@ -1,0 +1,11 @@
+created: 20200412212935849
+modified: 20200412212935849
+tags: [[compare Operator]] [[Operator Examples]]
+title: compare Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[20200101]compare:date:gt[201912311852]]" "compares two partial dates">>
+<<.operator-example 2 "[[202001011852]compare:integer:gt[20191231]]" "compares the same two strings as integers">>
+<<.operator-example 3 "[list[Days of the Week]compare:string:gt[M]compare:string:lt[W]]">>
+<<.operator-example 4 "[[v5.1.23-prerelease]compare:version:gt[v5.1.22]]">>
+<<.operator-example 5 "[[1]compare:number:gt[2]then[yes]else[no]]">>
