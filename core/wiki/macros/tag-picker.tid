@@ -10,7 +10,12 @@ tags: $:/tags/Macro
 <$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
 </$list>
 <$list filter="[<tagExists>match[true]]">
+<$list filter="[<storeTitle>get[text]!match<tag>]" emptyMessage="""
+<$action-deletetiddler $tiddler=<<__tiddler__>>/>
+<$action-deletetiddler $tiddler=<<__storeTitle__>>/>
+""">
 <$action-setfield $tiddler=<<__tiddler__>> text={{{ [<__storeTitle__>get[text]] }}}/>
+</$list>
 <$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 </$list>
 <$list filter="[<tagExists>!match[true]]">
