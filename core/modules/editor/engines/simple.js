@@ -137,7 +137,7 @@ SimpleEngine.prototype.handleFocusEvent = function(event) {
 /*
 Handle a dom "blur" event
 */
-SimpleEngine.prototype.handleFocusEvent = function(event) {
+SimpleEngine.prototype.handleBlurEvent = function(event) {
 	if(this.widget.editFocusPopup) {
 		$tw.popup.triggerPopup({
 			domNode: this.domNode,
