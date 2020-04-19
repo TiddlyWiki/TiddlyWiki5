@@ -180,7 +180,8 @@ Syncer.prototype.readTiddlerInfo = function() {
 	var self = this,
 		tiddlers = this.getSyncedTiddlers();
 	$tw.utils.each(tiddlers,function(title) {
-		var tiddler = self.wiki.tiddlerExists(title) && self.wiki.getTiddler(title);
+		if(!self.wiki.tiddlerExists(title)) return;
+		var tiddler = self.wiki.getTiddler(title);
 		self.tiddlerInfo[title] = {
 			revision: self.getTiddlerRevision(title),
 			adaptorInfo: self.syncadaptor && self.syncadaptor.getTiddlerInfo(tiddler),
