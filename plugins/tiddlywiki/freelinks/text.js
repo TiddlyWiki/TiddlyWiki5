@@ -14,7 +14,8 @@ An override of the core text widget that automatically linkifies the text
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
 	LinkWidget = require("$:/core/modules/widgets/link.js").link,
-	ButtonWidget = require("$:/core/modules/widgets/button.js").button;
+	ButtonWidget = require("$:/core/modules/widgets/button.js").button,
+	ElementWidget = require("$:/core/modules/widgets/element.js").element;
 
 var TextNodeWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
@@ -128,7 +129,7 @@ TextNodeWidget.prototype.isWithinButtonOrLink = function() {
 	var withinButtonOrLink = false,
 		widget = this.parentWidget;
 	while(!withinButtonOrLink && widget) {
-		withinButtonOrLink = widget instanceof ButtonWidget || widget instanceof LinkWidget;
+		withinButtonOrLink = widget instanceof ButtonWidget || widget instanceof LinkWidget || ((widget instanceof ElementWidget) && widget.parseTreeNode.tag === "a");
 		widget = widget.parentWidget;
 	}
 	return withinButtonOrLink;
