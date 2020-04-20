@@ -10,7 +10,7 @@ There is much flexibility in how the static HTML is generated. The following sce
 
 ! Wiki Snapshots and Tiddler Snapshots
 
-You can explore a static representation of this TiddlyWiki at [ext[static.html]]. That file is a static snapshot of the current DefaultTiddlers. Any tiddlers that it links to are referred to via URLs of the form `/static/HelloThere.html` that point to static snapshots of individual tiddlers. The tiddler HTML files reference a `static.css` stylesheet file.
+You can explore a static representation of the main TiddlyWiki site at https://tiddlywiki.com/static.html. That file is a static snapshot of the current DefaultTiddlers. Any tiddlers that it links to are referred to via URLs of the form `/static/HelloThere.html` that point to static snapshots of individual tiddlers. The tiddler HTML files reference a `static.css` stylesheet file.
 
 The following commands are used to generate the sample static version of the TiddlyWiki5 site:
 
@@ -26,7 +26,7 @@ The first RenderTiddlersCommand generates the HTML representations of individual
 
 It is also possible to produce a single HTML file that contains static representations of tiddlers, and uses standard HTML anchor links to jump between them.
 
-For example: [ext[alltiddlers.html]]
+For example: https://tiddlywiki.com/alltiddlers.html
 
 The example is built by the following commands:
 
