@@ -1,3 +1,7 @@
 title: $:/config/OfficialPluginLibrary
+tags: $:/tags/PluginLibrary
+url: https://tiddlywiki.com/library/v5.1.23/index.html
+caption: {{$:/language/OfficialPluginLibrary}}
+enabled: no
 
-(This core tiddler is overridden by the tiddlyweb plugin to prevent users from installing official plugins via control panel. Instead they should be installed by editing tiddlywiki.info in the root of the wiki folder)
+The official plugin library is disabled when using the client-server configuration. Instead, plugins should be installed via the `tiddlywiki.info` file, as described [[here|https://tiddlywiki.com/#Installing%20a%20plugin%20from%20the%20plugin%20library]].
