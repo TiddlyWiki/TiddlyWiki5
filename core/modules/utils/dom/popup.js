@@ -113,7 +113,7 @@ Popup.prototype.show = function(options) {
 	// Find out what was clicked on
 	var info = this.popupInfo(options.domNode);
 	// Cancel any higher level popups
-	this.cancel(info.popupLevel);
+	this.cancel(info.popupLevel - 1);
 
 	// Store the popup details if not already there
 	if(!options.floating && this.findPopup(options.title) === -1) {
