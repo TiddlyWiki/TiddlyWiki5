@@ -35,8 +35,10 @@ Command.prototype.execute = function() {
 	var collectPlugins = function(folder) {
 			var pluginFolders = fs.readdirSync(folder);
 			for(var p=0; p<pluginFolders.length; p++) {
+				var currentFolder = path.resolve(folder,"./" + pluginFolders[p]);
+				if(!fs.statSync(currentFolder).isDirectory()) continue
 				if(!$tw.boot.excludeRegExp.test(pluginFolders[p])) {
-					pluginFields = $tw.loadPluginFolder(path.resolve(folder,"./" + pluginFolders[p]));
+					pluginFields = $tw.loadPluginFolder(currentFolder);
 					if(pluginFields && pluginFields.title) {
 						tiddlers[pluginFields.title] = pluginFields;
 					}
@@ -46,8 +48,10 @@ Command.prototype.execute = function() {
 		collectPublisherPlugins = function(folder) {
 			var publisherFolders = fs.readdirSync(folder);
 			for(var t=0; t<publisherFolders.length; t++) {
+				var currentFolder = path.resolve(folder,"./" + publisherFolders[t]);
+				if(!fs.statSync(currentFolder).isDirectory()) continue
 				if(!$tw.boot.excludeRegExp.test(publisherFolders[t])) {
-					collectPlugins(path.resolve(folder,"./" + publisherFolders[t]));
+					collectPlugins(currentFolder);
 				}
 			}
 		};
