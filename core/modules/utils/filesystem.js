@@ -16,6 +16,22 @@ var fs = require("fs"),
 	path = require("path");
 
 /*
+Return the subdirectories of a path
+*/
+exports.getSubdirectories = function(dirPath) {
+	if(!$tw.utils.isDirectory(dirPath)) {
+		return null;
+	}
+	var subdirs = [];
+	$tw.utils.each(fs.readdirSync(dirPath),function(itemPath) {
+		if($tw.utils.isDirectory(itemPath)) {
+			subdirs.push(itemPath);
+		}
+	});
+	return subdirs;
+}
+
+/*
 Recursively (and synchronously) copy a directory and all its content
 */
 exports.copyDirectory = function(srcPath,dstPath) {
