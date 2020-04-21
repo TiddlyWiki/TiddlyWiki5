@@ -1,5 +1,5 @@
 created: 20130828190200000
-modified: 20160622111343603
+modified: 20200421001909741
 tags: [[TiddlyWiki on Node.js]]
 title: Generating Static Sites with TiddlyWiki
 type: text/vnd.tiddlywiki
@@ -15,9 +15,9 @@ You can explore a static representation of the main TiddlyWiki site at https://t
 The following commands are used to generate the sample static version of the TiddlyWiki5 site:
 
 ```
---rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html static text/plain
---rendertiddler $:/core/templates/static.template.html static.html text/plain
---rendertiddler $:/core/templates/static.template.css static/static.css text/plain
+tiddlywiki wikipath --rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html static text/plain
+tiddlywiki wikipath --rendertiddler $:/core/templates/static.template.html static.html text/plain
+tiddlywiki wikipath --rendertiddler $:/core/templates/static.template.css static/static.css text/plain
 ```
 
 The first RenderTiddlersCommand generates the HTML representations of individual tiddlers, the second RenderTiddlerCommand saves the static version of the DefaultTiddlers, and the final RenderTiddlerCommand saves the stylesheet. (All the files are placed in the `output` folder of the wiki folder).
