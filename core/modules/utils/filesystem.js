@@ -23,9 +23,9 @@ exports.getSubdirectories = function(dirPath) {
 		return null;
 	}
 	var subdirs = [];
-	$tw.utils.each(fs.readdirSync(dirPath),function(itemPath) {
-		if($tw.utils.isDirectory(itemPath)) {
-			subdirs.push(itemPath);
+	$tw.utils.each(fs.readdirSync(dirPath),function(item) {
+		if($tw.utils.isDirectory(path.resolve(dirPath,item))) {
+			subdirs.push(item);
 		}
 	});
 	return subdirs;
