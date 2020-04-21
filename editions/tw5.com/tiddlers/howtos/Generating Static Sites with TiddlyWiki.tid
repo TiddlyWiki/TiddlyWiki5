@@ -1,10 +1,12 @@
 created: 20130828190200000
-modified: 20200421001909741
+modified: 20200421003440463
 tags: [[TiddlyWiki on Node.js]]
 title: Generating Static Sites with TiddlyWiki
 type: text/vnd.tiddlywiki
 
 TiddlyWiki5 can be used to generate static HTML representations of a TiddlyWiki that doesn't need JavaScript.
+This process requires that TiddlyWiki be installed on Node.js on your local system. See [[Installing TiddlyWiki on Node.js]] for 
+details.
 
 There is much flexibility in how the static HTML is generated. The following scenarios are all illustrated on https://tiddlywiki.com.
 
