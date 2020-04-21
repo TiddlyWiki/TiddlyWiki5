@@ -55,6 +55,7 @@ tags: $:/tags/Macro
 <$button set=<<newTagNameTiddler>> setTo="" class="">
 <$action-sendmessage $message="tm-add-tag" $param={{{ [<newTagNameTiddler>get[text]] }}}/>
 <$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
+<$action-deletetiddler $tiddler=<<storeTitle>>/>
 {{$:/language/EditTemplate/Tags/Add/Button}}
 </$button>
 </$set>
