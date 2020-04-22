@@ -225,6 +225,16 @@ kbd {
 	box-shadow: inset 0 -1px 0 <<colour muted-foreground>>;
 }
 
+::selection {
+	background-color: <<colour primary>>;
+	color: <<colour page-background>>;
+}
+
+::-moz-selection {
+	background-color: <<colour primary>>;
+	color: <<colour page-background>>;
+}
+
 /*
 Markdown likes putting code elements inside pre elements
 */
@@ -970,6 +980,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-tiddler-title-icon {
 	vertical-align: middle;
+	margin-right: .1em;
 }
 
 .tc-system-title-prefix {
@@ -989,6 +1000,10 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	font-size: 0.9em;
 	color: <<colour tiddler-subtitle-foreground>>;
 	font-weight: 300;
+}
+
+.tc-subtitle .tc-tiddlylink {
+	margin-right: .3em;
 }
 
 .tc-tiddler-missing .tc-title {
@@ -1399,6 +1414,10 @@ html body.tc-body.tc-single-tiddler-window {
 /*
 ** Storyview Classes
 */
+
+.tc-viewswitcher .tc-image-button {
+	margin-right: .3em;
+}
 
 .tc-storyview-zoomin-tiddler {
 	position: absolute;
@@ -2237,10 +2256,17 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	padding: 3px;
 }
 
+.tc-install-plugin.tc-reinstall-downgrade {
+	background: red;
+}
+
 .tc-install-plugin.tc-reinstall {
 	background: blue;
 }
 
+.tc-install-plugin.tc-reinstall-upgrade {
+	background: orange;
+}
 
 .tc-check-list {
 	line-height: 2em;

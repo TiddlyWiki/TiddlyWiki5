@@ -180,12 +180,14 @@ Syncer.prototype.readTiddlerInfo = function() {
 	var self = this,
 		tiddlers = this.getSyncedTiddlers();
 	$tw.utils.each(tiddlers,function(title) {
-		var tiddler = self.wiki.tiddlerExists(title) && self.wiki.getTiddler(title);
-		self.tiddlerInfo[title] = {
-			revision: self.getTiddlerRevision(title),
-			adaptorInfo: self.syncadaptor && self.syncadaptor.getTiddlerInfo(tiddler),
-			changeCount: self.wiki.getChangeCount(title)
-		};
+		var tiddler = self.wiki.getTiddler(title);
+		if(tiddler) {
+			self.tiddlerInfo[title] = {
+				revision: self.getTiddlerRevision(title),
+				adaptorInfo: self.syncadaptor && self.syncadaptor.getTiddlerInfo(tiddler),
+				changeCount: self.wiki.getChangeCount(title)
+			};
+		}
 	});
 };
 
@@ -581,6 +583,8 @@ SaveTiddlerTask.prototype.run = function(callback) {
 			};
 			// Invoke the callback
 			callback(null);
+		},{
+			tiddlerInfo: self.syncer.tiddlerInfo[self.title]
 		});
 	} else {
 		this.syncer.logger.log(" Not Dispatching 'save' task:",this.title,"tiddler does not exist");
