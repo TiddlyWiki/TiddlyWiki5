@@ -7,3 +7,10 @@ This plugin provides a `<$twitter>` widget that can embed various entities from 
 * Various types of timeline: profile, likes, list, collection, url and widget
 
 The widget only works in the browser, and not in generated static HTML pages.
+
+This plugin requires an extra step in the installation process: 
+
+After installing the plugin from the library and saving changes, it is necessary to open the file again 
+and ''re-save'' it before the Twitter library will be loaded properly.
+
+If this is not done, you may see `Can't render tweet` error.
