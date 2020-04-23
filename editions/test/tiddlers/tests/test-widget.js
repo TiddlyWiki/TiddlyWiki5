@@ -504,6 +504,20 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<p>Aval Bval Cval</p>");
 	});
 
+	it("can have more than one macroDef variable imported", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "ABC", text: "<$set name=A value=A>\n\n<$set name=B value=B>\n\n<$set name=C value=C>\n\ndummy text</$set></$set></$set>"},
+			{title: "D", text: "\\define D() D"}]);
+		// A and B shouldn't chew up C just cause it's a macroDef
+		var text = "\\import ABC D\n<<A>> <<B>> <<C>> <<D>>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>A B C D</p>");
+	});
+
 	/** Special case. <$importvariables> has different handling if
 	 *  it doesn't end up importing any variables. Make sure it
 	 *  doesn't forget its childrenNodes.

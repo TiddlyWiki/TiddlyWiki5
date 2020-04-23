@@ -71,6 +71,13 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 					});
 				} else {
 					widgetPointer.makeChildWidgets([node]);
+					// No more regenerating children for
+					// this widget. If it needs to refresh,
+					// it'll do so along with the the whole
+					// importvariable tree.
+					if (widgetPointer != this) {
+						widgetPointer.makeChildWidgets = function(){};
+					}
 					widgetPointer = widgetPointer.children[0];
 				}
 				parseTreeNode = parseTreeNode.children && parseTreeNode.children[0];
