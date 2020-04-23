@@ -29,7 +29,7 @@ type: text/vnd.tiddlywiki
 
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/pull/4590]] Vanilla theme to use palette colours for the [[browser selection outline|https://developer.mozilla.org/en-US/docs/Web/CSS/::selection]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1546a4a1895b93a47b79c9d37b94be039604443a]] warning message about using the online plugin library with the client-server configuration
-* [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/4585]] Gruvbox pallete readability of toolbar buttons
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/4585]] Gruvbox palette readability of toolbar buttons
 
 
 ! Hackability Improvements
