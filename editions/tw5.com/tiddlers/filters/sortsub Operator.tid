@@ -13,7 +13,9 @@ op-suffix-name: T
 op-output: the input, sorted into ascending order by the result of evaluating subfilter <<.param S>>
 op-neg-output: the input, sorted into reverse order by the result of evaluating subfilter <<.param S>>
 
-The list of input titles are passed to the subfilter. The subfilter transforms the input titles into the form needed for sorting. For example, the subfilter `[length[]]` transforms each input title in the number representing its length, and thus sorts the input titles according to their length.
+Each item in the list of input titles is passed to the subfilter in turn. The subfilter transforms the input titles into the form needed for sorting. For example, the subfilter `[length[]]` transforms each input title in the number representing its length, and thus sorts the input titles according to their length.
+
+Note that within the subfilter, the "currentTiddler" variable is set to the title of the tiddler being processed. This permits subfilters like `[{!!value}divide{!!cost}]` to be used for computation.
 
 The suffix <<.place T>> determines how the items are compared and can be:
 

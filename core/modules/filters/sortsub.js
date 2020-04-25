@@ -16,17 +16,30 @@ Filter operator for sorting by a subfilter
 Export our filter function
 */
 exports.sortsub = function(source,operator,options) {
-	// Collect the input titles
-	var inputTitles = [];
+	// Compile the subfilter
+	var filterFn = options.wiki.compileFilter(operator.operand);
+	// Collect the input titles and the corresponding sort keys
+	var inputTitles = [],
+		sortKeys = [];
 	source(function(tiddler,title) {
 		inputTitles.push(title);
+		var r = filterFn.call(options.wiki,function(iterator) {
+			iterator(options.wiki.getTiddler(title),title);
+		},{
+			getVariable: function(name) {
+				if(name === "currentTiddler") {
+					return title;
+				} else {
+					return options.widget.getVariable(name);
+				}
+			}
+		});
+		sortKeys.push(r[0] || "");
 	});
-	// Pass them through the subfilter to get the sort keys
-	var sortKeys = options.wiki.filterTiddlers(operator.operand,options.widget,options.wiki.makeTiddlerIterator(inputTitles));
 	// Rather than sorting the titles array, we'll sort the indexes so that we can consult both arrays
-	var indexes = [];
-	while(inputTitles.length > indexes.length) {
-		indexes.push(indexes.length);
+	var indexes = new Array(inputTitles.length);
+	for(var t=0; t<inputTitles.length; t++) {
+		indexes[t] = t;
 	}
 	// Sort the indexes
 	var compareFn = $tw.utils.makeCompareFunction(operator.suffix,{defaultType: "string",invert: operator.prefix === "!"});
