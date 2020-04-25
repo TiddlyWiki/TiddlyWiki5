@@ -34,6 +34,7 @@ type: text/vnd.tiddlywiki
 
 ! Hackability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/619c0752bd3c6e71d1fcdb74daa03cfe8257afe4]] new [[sortsub Operator]] for sorting by a user defined subfilter
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/e71a27ac2d71f2e48f9e4e9156b59bb3ecc2a105]] LinkWidget to work within SVG elements
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c86a621d5d205e1ae0ce999b90ebe09addc45a9f]] ''accept'' attribute to the BrowseWidget
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/77a929faa3a33768e52cf2a34ecbef9c554a6a7b]] ActionPopupWidget to allow popups to be dismissed
