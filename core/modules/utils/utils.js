@@ -813,4 +813,45 @@ exports.stringifyNumber = function(num) {
 	return num + "";
 };
 
+exports.makeCompareFunction = function(type,options) {
+	options = options || {};
+	var gt = options.invert ? -1 : +1,
+		lt = options.invert ? +1 : -1,
+		compare = function(a,b) {
+			if(a > b) {
+				return gt ;
+			} else if(a < b) {
+				return lt;
+			} else {
+				return 0;
+			}
+		},
+		types = {
+			"number": function(a,b) {
+				return compare($tw.utils.parseNumber(a),$tw.utils.parseNumber(b));
+			},
+			"integer": function(a,b) {
+				return compare($tw.utils.parseInt(a),$tw.utils.parseInt(b));
+			},
+			"string": function(a,b) {
+				return compare("" + a,"" +b);
+			},
+			"date": function(a,b) {
+				var dateA = $tw.utils.parseDate(a),
+					dateB = $tw.utils.parseDate(b);
+				if(!isFinite(dateA)) {
+					dateA = new Date(0);
+				}
+				if(!isFinite(dateB)) {
+					dateB = new Date(0);
+				}
+				return compare(dateA,dateB);
+			},
+			"version": function(a,b) {
+				return $tw.utils.compareVersions(a,b);
+			}
+		};
+	return (types[type] || types[options.defaultType] || types.number);
+};
+
 })();
