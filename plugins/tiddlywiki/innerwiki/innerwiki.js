@@ -289,7 +289,7 @@ InnerWikiWidget.prototype.readTiddlerDataWidget = function(dataWidget) {
 	if(titles) {
 		var results = [];
 		$tw.utils.each(titles,function(title,index) {
-			var tiddler = $tw.wiki.getTiddler(title),
+			var tiddler = this.wiki.getTiddler(title),
 				fields;
 			if(tiddler) {
 				fields = tiddler.getFieldStrings();

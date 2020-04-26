@@ -248,7 +248,7 @@ Server.prototype.listen = function(port,host,prefix) {
 		port = process.env[port] || 8080;
 	}
 	// Warn if required plugins are missing
-	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
+	if(!this.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !this.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
 		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
 	}
 	// Create the server
