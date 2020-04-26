@@ -2172,8 +2172,7 @@ $tw.loadTiddlersNode = function() {
 /*
 Startup TiddlyWiki
 */
-$tw.boot.startup = function(options) {
-	options = options || {};
+$tw.boot.initStartup = function(options) {
 	// Get the URL hash and check for safe mode
 	$tw.locationHash = "#";
 	if($tw.browser && !$tw.node) {
@@ -2285,8 +2284,6 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("application/x-bibtex","utf8",".bib");
 	$tw.utils.registerFileType("application/epub+zip","base64",".epub");
 	$tw.utils.registerFileType("application/octet-stream","base64",".octet-stream");
-	// Create the wiki store for the app
-	$tw.wiki = new $tw.Wiki();
 	// Install built in tiddler fields modules
 	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
 	// Install the tiddler deserializer modules
@@ -2306,6 +2303,10 @@ $tw.boot.startup = function(options) {
 			return result;
 		}
 	}
+};
+$tw.boot.loadStartup = function(options){
+	// Create the wiki store for the app
+	$tw.wiki = new $tw.Wiki();
 	// Load tiddlers
 	if($tw.boot.tasks.readBrowserTiddlers) {
 		$tw.loadTiddlersBrowser();
@@ -2318,6 +2319,8 @@ $tw.boot.startup = function(options) {
 	}
 	// Give hooks a chance to modify the store
 	$tw.hooks.invokeHook("th-boot-tiddlers-loaded");
+}
+$tw.boot.execStartup = function(options){
 	// Unpack plugin tiddlers
 	$tw.wiki.readPluginInfo();
 	$tw.wiki.registerPluginTiddlers("plugin",$tw.safeMode ? ["$:/core"] : undefined);
@@ -2346,6 +2349,16 @@ $tw.boot.startup = function(options) {
 	$tw.boot.disabledStartupModules = $tw.boot.disabledStartupModules || [];
 	// Repeatedly execute the next eligible task
 	$tw.boot.executeNextStartupTask(options.callback);
+}
+/*
+Startup TiddlyWiki
+*/
+$tw.boot.startup = function(options) {
+	options = options || {};
+	// Get the URL hash and check for safe mode
+	$tw.boot.initStartup(options);
+	$tw.boot.loadStartup(options);
+	$tw.boot.execStartup(options);
 };
 
 /*
