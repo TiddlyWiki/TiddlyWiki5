@@ -32,6 +32,7 @@ tags: $:/tags/Macro
 <$button class="tc-btn-invisible $selectedClass$" tag="a" tooltip={{$:/language/EditTemplate/Tags/Add/Button/Hint}}>
 <$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
 <$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
+<$action-deletetiddler $tiddler=<<storeTitle>>/>
 <$macrocall $name="tag-pill" tag=<<tag>>/>
 </$button>
 \end
