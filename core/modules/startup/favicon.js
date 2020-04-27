@@ -36,7 +36,11 @@ function setFavicon() {
 	var tiddler = $tw.wiki.getTiddler(FAVICON_TITLE);
 	if(tiddler) {
 		var faviconLink = document.getElementById("faviconLink");
-		faviconLink.setAttribute("href","data:" + tiddler.fields.type + ";base64," + tiddler.fields.text);
+		if(tiddler.fields._canonical_uri) {
+			faviconLink.setAttribute("href",tiddler.fields._canonical_uri);
+		} else {
+			faviconLink.setAttribute("href","data:" + tiddler.fields.type + ";base64," + tiddler.fields.text);			
+		}
 	}
 }
 
