@@ -3,7 +3,7 @@ title: $:/core/modules/server/routes/get-tiddlers-json.js
 type: application/javascript
 module-type: route
 
-GET /recipes/default/tiddlers/tiddlers.json?filter=<filter>
+GET /recipes/default/tiddlers.json?filter=<filter>
 
 \*/
 (function() {
@@ -22,7 +22,7 @@ exports.handler = function(request,response,state) {
 	var filter = state.queryParameters.filter || DEFAULT_FILTER;
 	if($tw.wiki.getTiddlerText("$:/config/Server/AllowAllExternalFilters") !== "yes") {
 		if($tw.wiki.getTiddlerText("$:/config/Server/ExternalFilters/" + filter) !== "yes") {
-			console.log("Blocked attempt to GET /recipes/default/tiddlers/tiddlers.json with filter: " + filter);
+			console.log("Blocked attempt to GET /recipes/default/tiddlers.json with filter: " + filter);
 			response.writeHead(403);
 			response.end();
 			return;

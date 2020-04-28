@@ -16,12 +16,32 @@ var fs = require("fs"),
 	path = require("path");
 
 /*
+Return the subdirectories of a path
+*/
+exports.getSubdirectories = function(dirPath) {
+	if(!$tw.utils.isDirectory(dirPath)) {
+		return null;
+	}
+	var subdirs = [];
+	$tw.utils.each(fs.readdirSync(dirPath),function(item) {
+		if($tw.utils.isDirectory(path.resolve(dirPath,item))) {
+			subdirs.push(item);
+		}
+	});
+	return subdirs;
+}
+
+/*
 Recursively (and synchronously) copy a directory and all its content
 */
 exports.copyDirectory = function(srcPath,dstPath) {
 	// Remove any trailing path separators
-	srcPath = $tw.utils.removeTrailingSeparator(srcPath);
-	dstPath = $tw.utils.removeTrailingSeparator(dstPath);
+	srcPath = path.resolve($tw.utils.removeTrailingSeparator(srcPath));
+	dstPath = path.resolve($tw.utils.removeTrailingSeparator(dstPath));
+	// Check that neither director is within the other
+	if(srcPath.substring(0,dstPath.length) === dstPath || dstPath.substring(0,srcPath.length) === srcPath) {
+		return "Cannot copy nested directories";
+	}
 	// Create the destination directory
 	var err = $tw.utils.createDirectory(dstPath);
 	if(err) {

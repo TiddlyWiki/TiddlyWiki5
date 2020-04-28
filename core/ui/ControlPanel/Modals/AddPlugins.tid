@@ -118,10 +118,12 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 \end
 
 \define load-plugin-library-button()
+<$list filter="[<currentTiddler>get[enabled]else[yes]match[yes]]" variable="ignore">
 <$button class="tc-btn-big-green">
 <$action-sendmessage $message="tm-load-plugin-library" url={{!!url}} infoTitlePrefix="$:/temp/RemoteAssetInfo/"/>
 {{$:/core/images/chevron-right}} {{$:/language/ControlPanel/Plugins/OpenPluginLibrary}}
 </$button>
+</$list>
 \end
 
 \define display-server-assets(type)

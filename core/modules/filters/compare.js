@@ -16,7 +16,7 @@ exports.compare = function(source,operator,options) {
 	var suffixes = operator.suffixes || [],
 		type = (suffixes[0] || [])[0],
 		mode = (suffixes[1] || [])[0],
-		typeFn = types[type] || types.number,
+		typeFn = $tw.utils.makeCompareFunction(type,{defaultType: "number"}),
 		modeFn = modes[mode] || modes.eq,
 		invert = operator.prefix === "!",
 		results = [];
@@ -26,42 +26,6 @@ exports.compare = function(source,operator,options) {
 		}
 	});
 	return results;
-};
-
-var types = {
-	"number": function(a,b) {
-		return compare($tw.utils.parseNumber(a),$tw.utils.parseNumber(b));
-	},
-	"integer": function(a,b) {
-		return compare($tw.utils.parseInt(a),$tw.utils.parseInt(b));
-	},
-	"string": function(a,b) {
-		return compare("" + a,"" +b);
-	},
-	"date": function(a,b) {
-		var dateA = $tw.utils.parseDate(a),
-			dateB = $tw.utils.parseDate(b);
-		if(!isFinite(dateA)) {
-			dateA = new Date(0);
-		}
-		if(!isFinite(dateB)) {
-			dateB = new Date(0);
-		}
-		return compare(dateA,dateB);
-	},
-	"version": function(a,b) {
-		return $tw.utils.compareVersions(a,b);
-	}
-};
-
-function compare(a,b) {
-	if(a > b) {
-		return +1;
-	} else if(a < b) {
-		return -1;
-	} else {
-		return 0;
-	}
 };
 
 var modes = {

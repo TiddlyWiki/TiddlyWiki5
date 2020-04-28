@@ -33,7 +33,7 @@ Command.prototype.execute = function() {
 		tiddlers = {};
 	// Collect up the library plugins
 	var collectPlugins = function(folder) {
-			var pluginFolders = fs.readdirSync(folder);
+			var pluginFolders = $tw.utils.getSubdirectories(folder) || [];
 			for(var p=0; p<pluginFolders.length; p++) {
 				if(!$tw.boot.excludeRegExp.test(pluginFolders[p])) {
 					pluginFields = $tw.loadPluginFolder(path.resolve(folder,"./" + pluginFolders[p]));
@@ -44,7 +44,7 @@ Command.prototype.execute = function() {
 			}
 		},
 		collectPublisherPlugins = function(folder) {
-			var publisherFolders = fs.readdirSync(folder);
+			var publisherFolders = $tw.utils.getSubdirectories(folder) || [];
 			for(var t=0; t<publisherFolders.length; t++) {
 				if(!$tw.boot.excludeRegExp.test(publisherFolders[t])) {
 					collectPlugins(path.resolve(folder,"./" + publisherFolders[t]));

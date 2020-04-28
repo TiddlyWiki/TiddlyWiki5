@@ -46,6 +46,9 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 	if(this.nwsaveas) {
 		domNode.setAttribute("nwsaveas",this.nwsaveas);
 	}
+	if(this.accept) {
+		domNode.setAttribute("accept",this.accept);
+	}
 	// Nw.js supports "webkitdirectory" and "nwdirectory" to allow a directory to be selected
 	if(this.webkitdirectory) {
 		domNode.setAttribute("webkitdirectory",this.webkitdirectory);
@@ -83,6 +86,7 @@ BrowseWidget.prototype.execute = function() {
 	this.param = this.getAttribute("param");
 	this.tooltip = this.getAttribute("tooltip");
 	this.nwsaveas = this.getAttribute("nwsaveas");
+	this.accept = this.getAttribute("accept");
 	this.webkitdirectory = this.getAttribute("webkitdirectory");
 	this.nwdirectory = this.getAttribute("nwdirectory");
 };
