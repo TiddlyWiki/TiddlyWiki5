@@ -6,17 +6,25 @@ caption: {{$:/language/Search/DefaultResults/Caption}}
 //<small>{{$:/language/Search/Matches/Title}}</small>//
 
 <$list filter="[!is[system]search:title{$(searchTiddler)$}sort[title]limit[250]]">
-<span class={{{[<currentTiddler>match{$:/temp/search}then[tc-list-item-selected]] }}}>
+<$set name="state-value" filter="[<searchListState>get[text]]">
+<$set name="qualified-tiddler" filter="[<currentTiddler>addsuffix[-list1]]">
+<span class={{{[<qualified-tiddler>match<state-value>then[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>
+</$set>
+</$set>
 </$list>
 
 //<small>{{$:/language/Search/Matches/All}}</small>//
 
 <$list filter="[!is[system]search{$(searchTiddler)$}sort[title]limit[250]]">
-<span class={{{[<currentTiddler>match{$:/temp/search}then[tc-list-item-selected]] }}}>
+<$set name="state-value" filter="[<searchListState>get[text]]">
+<$set name="qualified-tiddler" filter="[<currentTiddler>addsuffix[-list2]]">
+<span class={{{[<qualified-tiddler>match<state-value>then[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>
+</$set>
+</$set>
 </$list>
 
 \end
