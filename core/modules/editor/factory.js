@@ -97,14 +97,6 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 					data[self.editIndex] = value;
 					self.wiki.setTiddlerData(self.editTitle,data);
 				}
-				if(self.editStoreTitle) {
-					var tiddler = self.wiki.getTiddler(self.editStoreTitle);
-					var updateFields = {
-						title: self.editStoreTitle,
-						text: value
-					};
-					self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getCreationFields(),tiddler,updateFields,self.wiki.getModificationFields()));
-				}
 			};
 		} else {
 			// Get the current tiddler and the field name
