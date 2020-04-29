@@ -45,12 +45,13 @@ tags: $:/tags/Macro
 
 \define tag-picker-inner()
 \whitespace trim
+<$qualify name="q-state" title="$:/state/selected-tag">
 <$vars storeTitle=<<qualify "$:/temp/NewTagName/input">> refreshTitle=<<qualify "$:/temp/NewTagName/refresh">>>
 <$set name="filter1" value="[tags[]!is[system]search:title<userInput>sort[]]">
 <$set name="filter2" value="[tags[]is[system]search:title<userInput>sort[]]">
 <div class="tc-edit-add-tag">
 <span class="tc-add-tag-name">
-<$macrocall $name="keyboard-driven-input" tiddler=<<newTagNameTiddler>> tag="input" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}} inputactions="""<$action-setfield $tiddler=<<storeTitle>> text={{{ [<newTagNameTiddler>get[text]] }}}/>""" storeTitle=<<storeTitle>> filter1=<<filter1>> filter2=<<filter2>> input-accept-actions=<<add-tag-actions>> input-cancel-actions=<<clear-tags-actions>> filterMinLength={{$:/config/Tags/MinLength}} refreshTitle=<<refreshTitle>>/>
+<$macrocall $name="keyboard-driven-input" tiddler=<<newTagNameTiddler>> tag="input" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}} inputactions="""<$action-setfield $tiddler=<<storeTitle>> text={{{ [<newTagNameTiddler>get[text]] }}}/>""" storeTitle=<<storeTitle>> filter1=<<filter1>> filter2=<<filter2>> input-accept-actions=<<add-tag-actions>> input-cancel-actions=<<clear-tags-actions>> filterMinLength={{$:/config/Tags/MinLength}} refreshTitle=<<refreshTitle>> selectionTiddler=<<q-state>>/>
 </span>&nbsp;<$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>&nbsp;<span class="tc-add-tag-button">
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$button set=<<newTagNameTiddler>> setTo="" class="">
@@ -68,16 +69,24 @@ tags: $:/tags/Macro
 <$set name="userInput" value={{{ [<storeTitle>get[text]] }}}>
 <$list filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 <$list filter=<<filter1>> variable="tag">
-<$list filter="[<newTagNameTiddler>get[text]match<tag>]" emptyMessage="""<<tag-button>>""">
+<$set name="state-value" filter="[<q-state>get[text]]">
+<$set name="qualified-tag" filter="[<tag>addsuffix[-list1]]">														
+<$list filter="[<qualified-tag>match<state-value>]" emptyMessage="""<<tag-button>>""">
 <<tag-button "tc-tag-button-selected">>
 </$list>
+</$set>
+</$set>
 </$list></$list>
 <hr>
 <$list filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 <$list filter=<<filter2>> variable="tag">
-<$list filter="[<newTagNameTiddler>get[text]match<tag>]" emptyMessage="""<<tag-button>>""">
+<$set name="state-value" filter="[<q-state>get[text]]">
+<$set name="qualified-tag" filter="[<tag>addsuffix[-list2]]">
+<$list filter="[<qualified-tag>match<state-value>]" emptyMessage="""<<tag-button>>""">
 <<tag-button "tc-tag-button-selected">>
 </$list>
+</$set>
+</$set>
 </$list></$list>
 </$set>
 </div>
@@ -86,6 +95,7 @@ tags: $:/tags/Macro
 </$set>
 </$set>
 </$vars>
+</$qualify>
 \end
 \define tag-picker()
 \whitespace trim
