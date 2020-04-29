@@ -43,7 +43,7 @@ class ServerSentEvents {
         'Cache-Control': 'no-cache',
         'Connection': 'keep-alive'
       });
-      response.write("\n", "utf8");
+
       this.handler(request, state, this.emit.bind(this, response), this.end.bind(this, response));
     } else {
       response.writeHead(406, "Not Acceptable", {});
@@ -58,8 +58,7 @@ class ServerSentEvents {
     if (typeof data !== "string" || data.indexOf("\n") !== -1)
       throw new Error("data must be a single-line string");
 
-    response.write("event: " + type + "\n", "utf8");
-    response.write("data: " + data + "\n\n", "utf8");
+    response.write(`event: ${event}\ndata: ${data}\n\n`, "utf8");
   }
   end(response) {
     response.end();
