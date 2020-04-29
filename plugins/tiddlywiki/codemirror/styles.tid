@@ -5,9 +5,10 @@ tags: [[$:/tags/Stylesheet]]
 
 .CodeMirror {
 	height: auto;
-	border: 1px solid #ddd;
+	border: 1px solid <<colour tiddler-editor-border>>;
 	line-height: 1.5;
-	font-family: "Monaco", monospace;
+	font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
+	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
 }
 
 .CodeMirror-scroll {

@@ -1,0 +1,44 @@
+title: $:/plugins/tiddlywiki/aws/lambda/handler
+type: text/plain
+
+/*
+TiddlyWiki for AWS
+*/
+
+exports.handler = function(event,context,callback) {
+	// Initialise the boot prefix
+	global.$tw = _bootprefix();
+	// Initialise the returned results
+	$tw["lambda-result"] = {
+		"files-written": []
+	};
+	// Some default package info
+	$tw.packageInfo = lambdaPackageInfo;
+	// Load any tiddlers from the package
+	$tw.preloadTiddlerArray(lambdaTiddlers);
+	// Decompress the event data if required
+	if(typeof event.compressed === "string") {
+		require("zlib").gunzip(Buffer.from(event.compressed,"base64"),function(err,buff) {
+			if(err) {
+				return callback(err);
+			}
+			boot(JSON.parse(buff.toString()));
+	  });
+	} else {
+		boot(event);
+	}
+
+	function boot(event) {
+		// Load any tiddlers from the event
+		if(event.tiddlers) {
+			$tw.preloadTiddlerArray(event.tiddlers);	
+		}
+		// Load the commands from the event
+		$tw.boot.argv = (event.commands || []).slice(0);
+		// Boot the TW5 app
+		_boot($tw);
+		$tw.boot.boot(function() {
+			callback(null,$tw["lambda-result"]);
+		});	
+	}
+}

@@ -5,11 +5,10 @@ title: WidgetMessage: tm-modal
 type: text/vnd.tiddlywiki
 caption: tm-modal
 
-The modal message displays a specified tiddler in a modal overlay that dims the main page. It requires the following properties on the `event` object:
-
 |!Name |!Description |
 |param |Title of the tiddler to be displayed |
 |paramObject |Hashmap of variables to be provided to the modal |
+|rootwindow |<<.from-version 5.1.18>> ''yes'' or ''true'' will always display a modal in the wiki-root-window |
 
 The "currentTiddler" variable is set to the title of the modal tiddler, but can be overridden by specifying a different value in `paramObject`.
 
@@ -29,4 +28,6 @@ Your message:
 <$action-sendmessage $message="tm-modal" $param="SampleModal" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}}/>
 Click me!
 </$button>'/>
+
+<<.tip """<$macrocall $name=".from-version" version="5.1.18"/> if triggered from within a ''new window'', the above examples will be displayed within that window. The <$macrocall $name=".attr" _="rootwindow"/> attribute can be set to ''yes'' or ''true'' to inherit this behavior and to display the Modal within the ''root'' window""">>
 

@@ -1,0 +1,35 @@
+created: 20180323092308399
+modified: 20190307183936035
+tags: Features
+title: StartupActions
+type: text/vnd.tiddlywiki
+
+TiddlyWiki executes any ActionWidgets found in tiddlers with the following system tags during startup:
+
+* <<tag "$:/tags/StartupAction">> (executed on all platforms)
+* <<tag "$:/tags/StartupAction/Browser">> (only executed when running in the browser)
+* <<tag "$:/tags/StartupAction/Node">> (only executed when running under Node.js)
+
+Startup actions are useful for customising TiddlyWiki according to environmental factors such as the screen size. For example, the following action widgets when placed in a tiddler tagged `$:/tags/StartupAction/Browser` will cause the sidebar to be hidden by default when the screen width is less than 1000 pixels:
+
+```
+<$reveal type="lt" state="$:/info/browser/screen/width" text="3000">
+<$action-setfield $tiddler="$:/state/sidebar" $value="no"/>
+</$reveal>
+
+<$reveal type="gteq" state="$:/info/browser/screen/width" text="3000">
+<$action-setfield $tiddler="$:/state/sidebar" $value="yes"/>
+</$reveal>
+```
+
+<<.from-version "5.1.20">> This example switches to the language plugin matching the language reported by the browser:
+
+```
+<$action-setfield $tiddler="$:/language" text={{{ [[$:/languages/en-GB]] [plugin-type[language]sort[description]removeprefix[$:/languages/]] +[prefix{$:/info/browser/language}] ~[[en-GB]] +[addprefix[$:/languages/]] }}}/>
+```
+
+Note that global macros are not available within startup action tiddlers by default. If you need to access them then you'll need to explicitly include them with an ''import'' [[pragma|Pragma]] at the top of the tiddler:
+
+```
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+```

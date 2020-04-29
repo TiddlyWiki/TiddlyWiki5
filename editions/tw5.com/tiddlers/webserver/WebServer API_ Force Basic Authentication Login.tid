@@ -1,0 +1,25 @@
+created: 20181002124825195
+modified: 20181216181934282
+tags: [[WebServer API]]
+title: WebServer API: Force Basic Authentication Login
+type: text/vnd.tiddlywiki
+
+Forces the server to request basic authentication login, and then redirects to the root
+
+```
+GET /login-basic
+```
+
+Requests an basic authentication from the browser, and redirects to the root if successful.
+
+Parameters:
+
+* none
+
+Response:
+
+* 302 Found
+*> `Location: /`
+* 401 Unauthorized
+*> `WWW-Authenticate: Basic realm="Please provide your username and password to login to <servername>"
+

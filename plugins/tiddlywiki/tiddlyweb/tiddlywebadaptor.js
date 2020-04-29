@@ -21,9 +21,17 @@ function TiddlyWebAdaptor(options) {
 	this.recipe = undefined;
 	this.hasStatus = false;
 	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
+	this.isLoggedIn = false;
+	this.isReadOnly = false;
 }
 
 TiddlyWebAdaptor.prototype.name = "tiddlyweb";
+
+TiddlyWebAdaptor.prototype.supportsLazyLoading = true;
+
+TiddlyWebAdaptor.prototype.setLoggerSaveBuffer = function(loggerForSaving) {
+	this.logger.setSaveBuffer(loggerForSaving);
+};
 
 TiddlyWebAdaptor.prototype.isReady = function() {
 	return this.hasStatus;
@@ -48,6 +56,11 @@ TiddlyWebAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 	};
 };
 
+TiddlyWebAdaptor.prototype.getTiddlerRevision = function(title) {
+	var tiddler = this.wiki.getTiddler(title);
+	return tiddler.fields.revision;
+};
+
 /*
 Get the current status of the TiddlyWeb connection
 */
@@ -63,8 +76,7 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 				return callback(err);
 			}
 			// Decode the status JSON
-			var json = null,
-				isLoggedIn = false;
+			var json = null;
 			try {
 				json = JSON.parse(data);
 			} catch (e) {
@@ -76,11 +88,13 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 					self.recipe = json.space.recipe;
 				}
 				// Check if we're logged in
-				isLoggedIn = json.username !== "GUEST";
+				self.isLoggedIn = json.username !== "GUEST";
+				self.isReadOnly = !!json["read_only"];
+				self.isAnonymous = !!json.anonymous;
 			}
 			// Invoke the callback if present
 			if(callback) {
-				callback(null,isLoggedIn,json.username);
+				callback(null,self.isLoggedIn,json.username,self.isReadOnly,self.isAnonymous);
 			}
 		}
 	});
@@ -144,6 +158,9 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 	var self = this;
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + this.recipe + "/tiddlers.json",
+		data: {
+			filter: "[all[tiddlers]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]]"
+		},
 		callback: function(err,data) {
 			// Check for errors
 			if(err) {
@@ -165,6 +182,9 @@ Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
 TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 	var self = this;
+	if(this.isReadOnly) {
+		return callback(null);
+	}
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(tiddler.fields.title),
 		type: "PUT",
@@ -209,9 +229,12 @@ options include:
 tiddlerInfo: the syncer's tiddlerInfo for this tiddler
 */
 TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
-	var self = this,
-		bag = options.tiddlerInfo.adaptorInfo.bag;
+	var self = this;
+	if(this.isReadOnly) {
+		return callback(null);
+	}
 	// If we don't have a bag it means that the tiddler hasn't been seen by the server, so we don't need to delete it
+	var bag = options.tiddlerInfo.adaptorInfo && options.tiddlerInfo.adaptorInfo.bag;
 	if(!bag) {
 		return callback(null);
 	}

@@ -1,0 +1,265 @@
+title: $:/plugins/tiddlywiki/text-slicer/slicer-rules/html-by-paragraph.json
+name: html-by-paragraph
+caption: By Paragraph (HTML)
+description: One tiddler per paragraph, threaded by heading (HTML)
+type: application/json
+tags: $:/tags/text-slicer/slicer-rules
+
+[
+	{
+		"selector": "address,center,fieldset,form,hr,iframe,isindex,noframes,noscript,pre,table",
+		"actions": {
+			"startNewChunk": {
+				"toc-type": "paragraph"
+			}
+		}
+	},
+	{
+		"selector": "blockquote",
+		"actions": {
+			"startNewChunk": {
+				"toc-type": "paragraph"
+			},
+			"markup": {
+				"wiki": {
+					"prefix": "<<<\n",
+					"suffix": "<<<\n"
+				}
+			}
+		}
+	},
+	{
+		"selector": "body,div,head,html,span",
+		"actions": {
+			"dontRenderTag": true
+		}
+	},
+	{
+		"selector": "dd",
+		"actions": {
+			"dontRenderTag": true,
+			"startNewChunk": {
+				"toc-type": "definition"
+			}
+		}
+	},
+	{
+		"selector": "dl",
+		"actions": {
+			"dontRenderTag": true,
+			"isParent": true,
+			"startNewChunk": {
+				"toc-type": "def-list",
+				"toc-list-filter": "[list<currentTiddler>!has[draft.of]]"
+			}
+		}
+	},
+	{
+		"selector": "dt",
+		"actions": {
+			"dontRenderTag": true,
+			"startNewChunk": {
+				"toc-type": "term"
+			}
+		}
+	},
+	{
+		"selector": "em,i",
+		"actions": {
+			"markup": {
+				"wiki": {
+					"prefix": "//",
+					"suffix": "//"
+				}
+			}
+		}
+	},
+	{
+		"selector": "h1",
+		"actions": {
+			"dontRenderTag": true,
+			"isParent": true,
+			"headingLevel": 1,
+			"startNewChunk": {
+				"toc-type": "heading",
+				"toc-heading-level": "h1"
+			}
+		}
+	},
+	{
+		"selector": "h2",
+		"actions": {
+			"dontRenderTag": true,
+			"isParent": true,
+			"headingLevel": 2,
+			"startNewChunk": {
+				"toc-type": "heading",
+				"toc-heading-level": "h2"
+			}
+		}
+	},
+	{
+		"selector": "h3",
+		"actions": {
+			"dontRenderTag": true,
+			"isParent": true,
+			"headingLevel": 3,
+			"startNewChunk": {
+				"toc-type": "heading",
+				"toc-heading-level": "h3"
+			}
+		}
+	},
+	{
+		"selector": "h4",
+		"actions": {
+			"dontRenderTag": true,
+			"isParent": true,
+			"headingLevel": 4,
+			"startNewChunk": {
+				"toc-type": "heading",
+				"toc-heading-level": "h4"
+			}
+		}
+	},
+	{
+		"selector": "h5",
+		"actions": {
+			"dontRenderTag": true,
+			"isParent": true,
+			"headingLevel": 5,
+			"startNewChunk": {
+				"toc-type": "heading",
+				"toc-heading-level": "h5"
+			}
+		}
+	},
+	{
+		"selector": "h6",
+		"actions": {
+			"dontRenderTag": true,
+			"isParent": true,
+			"headingLevel": 6,
+			"startNewChunk": {
+				"toc-type": "heading",
+				"toc-heading-level": "h6"
+			}
+		}
+	},
+	{
+		"selector": "img",
+		"actions": {
+			"isImage": true
+		}
+	},
+	{
+		"selector": "li",
+		"actions": {
+			"dontRenderTag": true,
+			"startNewChunk": {
+				"toc-type": "item"
+			}
+		}
+	},
+	{
+		"selector": "ol",
+		"actions": {
+			"dontRenderTag": true,
+			"isParent": true,
+			"startNewChunk": {
+				"toc-type": "list",
+				"toc-list-type": "ol",
+				"toc-list-filter": "[list<currentTiddler>!has[draft.of]]"
+			}
+		}
+	},
+	{
+		"selector": "p",
+		"actions": {
+			"dontRenderTag": true,
+			"startNewChunk": {
+				"toc-type": "paragraph"
+			}
+		}
+	},
+	{
+		"selector": "strike",
+		"actions": {
+			"markup": {
+				"wiki": {
+					"prefix": "~~",
+					"suffix": "~~"
+				}
+			}
+		}
+	},
+	{
+		"selector": "strong,b",
+		"actions": {
+			"markup": {
+				"wiki": {
+					"prefix": "''",
+					"suffix": "''"
+				}
+			}
+		}
+	},
+	{
+		"selector": "sub",
+		"actions": {
+			"markup": {
+				"wiki": {
+					"prefix": ",,",
+					"suffix": ",,"
+				}
+			}
+		}
+	},
+	{
+		"selector": "sup",
+		"actions": {
+			"markup": {
+				"wiki": {
+					"prefix": "^^",
+					"suffix": "^^"
+				}
+			}
+		}
+	},
+	{
+		"selector": "head > title",
+		"actions": {
+			"dontRenderTag": true,
+			"startNewChunk": {
+				"toc-type": "paragraph"
+			}
+		}
+	},
+	{
+		"selector": "u",
+		"actions": {
+			"markup": {
+				"wiki": {
+					"prefix": "__",
+					"suffix": "__"
+				}
+			}
+		}
+	},
+	{
+		"selector": "ul",
+		"actions": {
+			"dontRenderTag": true,
+			"isParent": true,
+			"startNewChunk": {
+				"toc-type": "list",
+				"toc-list-type": "ul",
+				"toc-list-filter": "[list<currentTiddler>!has[draft.of]]"
+			}
+		}
+	},
+	{
+		"selector": "*",
+		"actions": {}
+	}
+]

@@ -7,11 +7,12 @@ Options/SidebarLayout: 侧边栏布局
 Options/SidebarLayout/Fixed-Fluid: 固定故事，浮动侧边栏
 Options/SidebarLayout/Fluid-Fixed: 浮动故事，固定侧边栏
 Options/StickyTitles: 置顶标题
-Options/StickyTitles/Hint: 导致条目名称"黏着"于浏览器窗口的顶部。<br>注意︰此功能无法运作于 Chrome，且于 Firefox 中会导致一些布局问题
+Options/StickyTitles/Hint: 使条目名称"黏着"于浏览器窗口的顶端
 Options/CodeWrapping: 在代码区块中折行
 Settings: 设置
 Settings/FontFamily: 字型
 Settings/CodeFontFamily: 代码字型
+Settings/EditorFontFamily: 编辑器字型
 Settings/BackgroundImage: 页面背景图像
 Settings/BackgroundImageAttachment: 页面背景图像附属
 Settings/BackgroundImageAttachment/Scroll: 随条目卷动

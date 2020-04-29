@@ -20,12 +20,12 @@ Metrics/StoryWidth/Hint: de totale breedte van de 'story river'
 Metrics/TiddlerWidth: Tiddler-breedte
 Metrics/TiddlerWidth/Hint: binnen de 'story river'
 Options: Opties
-Options/CodeWrapping: Breek lange regels in code-blokken af (word wrap)
+Options/CodeWrapping: Breek lange regels in code-blokken af ('word wrap')
 Options/SidebarLayout: Zijpaneel layout
 Options/SidebarLayout/Fixed-Fluid: 'Fixed story', 'fluid' zijpaneel
 Options/SidebarLayout/Fluid-Fixed: 'Fluid' story, 'fixed' zijpaneel
 Options/StickyTitles: Vaststaande ('sticky') titels
-Options/StickyTitles/Hint: Doet tiddler-titels vaststaan ('stick') aan de bovenkant van het browserscherm. Waarschuwing: Werkt helemaal niet bij Chrome en heeft layoutproblemen bij Firefox
+Options/StickyTitles/Hint: Doet tiddler-titels vaststaan ('stick') aan de bovenkant van het browserscherm. Waarschuwing: Werkt niet bij alle browsers
 Settings: Instellingen
 Settings/BackgroundImage: Pagina achtergrond afbeelding
 Settings/BackgroundImageAttachment: Binding van pagina achtergrond afbeelding
@@ -35,6 +35,7 @@ Settings/BackgroundImageSize: Pagina achtergrond afbeeldingsmaat
 Settings/BackgroundImageSize/Contain: 'Contain'
 Settings/BackgroundImageSize/Cover: 'Cover'
 Settings/CodeFontFamily: Lettertype voor code
+Settings/EditorFontFamily: Lettertype voor editor
 Settings/FontFamily: Lettertype
 ThemeTweaks: Thema 'tweaks'
 ThemeTweaks/Hint: Je kan bepaalde aspecten van het ''Vanilla'' thema 'tweaken'

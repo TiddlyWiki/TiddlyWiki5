@@ -1,6 +1,6 @@
 caption: set
 created: 20131115182700000
-modified: 20161017122456014
+modified: 20180315165405442
 tags: Widgets
 title: SetWidget
 type: text/vnd.tiddlywiki
@@ -16,9 +16,13 @@ The content of the `<$set>` widget is the scope for the value assigned to the va
 |!Attribute |!Description |
 |name |The name of the variable to assign (defaults to "currentTiddler") |
 |value |The value to assign to the variable if the filter is missing or not empty |
+|tiddler |<<.from-version "5.1.15">> Optional title of the tiddler from which to read the value |
+|subtiddler |<<.from-version "5.1.16">> Optionally specifies the title of a subtiddler within a plugin tiddler identified by the ''tiddler'' attribute |
+|field |<<.from-version "5.1.15">> Optional field of the tiddler from which to read the value (only used if ''tiddler'' is used) |
+|index |<<.from-version "5.1.15">> Optional index of the tiddler from which to read the value (only used if ''tiddler'' is used) |
 |filter |An optional filter to be evaluated and assigned to the variable (see below) |
 |select |<<.from-version "5.1.14">> An optional zero-based index of the item to return from the filter output (see below) |
-|emptyValue |The value to assign to the variable if the filter is present and evaluates to an empty list (see below) |
+|emptyValue |The value to assign to the variable if the specified value is missing or empty (see below) |
 
 !! Simple Variable Assignment
 
@@ -64,6 +68,24 @@ This form of the set variable widget evaluates the filter and assigns the result
 
 ```
 <$set name="myVariable" filter="[tag[HelloThere]]" select="0">
+<$text text=<<myVariable>>/>
+</$set>
+```
+
+!! Transcluded Variable Assignment
+
+<<.from-version "5.1.15">> This form of the set variable widget obtains the value to assign to the variable from a value in a tiddler field or index. For example:
+
+```
+<$set name="myVariable" tiddler="HelloThere" field="text">
+<$text text=<<myVariable>>/>
+</$set>
+```
+
+The example above could also be written as `<$set name="myVariable" value={{HelloThere!!text}}>`. The advantage of using the ''tiddler'' attribute is that the tiddler title and field or index can themselves be computed. For example:
+
+```
+<$set name="myVariable" tiddler=<<myTiddler>> field={{$:/currentField}}>
 <$text text=<<myVariable>>/>
 </$set>
 ```

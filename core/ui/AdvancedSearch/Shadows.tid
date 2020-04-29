@@ -8,7 +8,7 @@ caption: {{$:/language/Search/Shadows/Caption}}
 <<lingo Shadows/Hint>>
 
 <div class="tc-search">
-<$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/>
+<$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input" focus={{$:/config/Search/AutoFocus}}/>
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 <$button class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" $field="text" $value=""/>

@@ -1,6 +1,8 @@
 title: $:/language/Help/savetiddler
 description: Saves a raw tiddler to a file
 
+(Note: The `--savetiddler` command is deprecated in favour of the new, more flexible `--save` command)
+
 Saves an individual tiddler in its raw text or binary format to the specified filename.
 
 ```

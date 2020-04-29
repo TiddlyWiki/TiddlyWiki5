@@ -5,15 +5,14 @@ Thank you for your interest in contributing to TiddlyWiki5. TiddlyWiki is owned 
 
 This contributor agreement ("Agreement") documents the rights granted by contributors to Us. To make this document effective, please sign it and send it to Us by electronic submission, following the instructions in `contributing.md`, which is in the root directory of the project repository. This is a legally binding document, so please read it carefully before agreeing to it. The Agreement may cover more than one software project managed by Us.
 
-1. Definitions
---------------
+## 1. Definitions
 
 "You" means any Legal Entity on behalf of whom a Contribution has been received by Us.
 
 "CLA" means Contributor License Agreement (this document).
 
 "Contribution" means any work of authorship that is Submitted by You to Us in which You own or assert ownership of the Copyright. If You do not own the Copyright in the entire work of authorship, please follow the instructions in `contributing.md`, which is in the root directory of the project repository.
- 
+
 "Copyright" means all rights protecting works of authorship owned or controlled by You or Your Affiliates, including copyright, moral and neighboring rights, as appropriate, for the full term of their existence including any extensions by You.
 
 "Material" means the work of authorship which is made available by Us to third parties. When this Agreement covers more than one software project, the Material means the work of authorship to which the Contribution was Submitted. After You Submit the Contribution, it may be included in the Material.
@@ -26,13 +25,12 @@ This contributor agreement ("Agreement") documents the rights granted by contrib
 
 "Media" means any portion of a Contribution which is not software.
 
-"Legal Entity" means an entity which is not a natural person. 
+"Legal Entity" means an entity which is not a natural person.
 
 "Affiliates" means other Legal Entities that control, are controlled by, or under common control with that Legal Entity. For the purposes of this definition, "control" means (i) the power, direct or indirect, to cause the direction or management of such Legal Entity, whether by contract or otherwise, (ii) ownership of fifty percent (50%) or more of the outstanding shares or securities which vote to elect the management or other persons who direct such Legal Entity or (iii) beneficial ownership of such entity.
 
 
-2. Grant of Rights
--------------------
+## 2. Grant of Rights
 
 ### 2.1 Copyright License
 
@@ -67,31 +65,27 @@ Any rights not expressly assigned or licensed under this section are expressly r
 We may use 3rd party libraries to create TiddlyWiki5 plugins. These libraries may have their own licenses. 3rd party software and licenses are not subject in this CLA, while TiddlyWiki5 plugins that use these libraries are. 3rd party libraries may be included everywhere, especially in the following directories and their subdirectories: `plugins/` and `editions/`.
 
 
-3. Agreement
-------------
+## 3. Agreement
 
 You confirm that:
 
 (a) You have the legal authority to enter into this Agreement.
 
-(b) You or Your Affiliates own the Copyright and patent claims covering the Contribution which are required to grant the rights under Section 2. 
+(b) You or Your Affiliates own the Copyright and patent claims covering the Contribution which are required to grant the rights under Section 2.
 
 (c) The grant of rights under Section 2 does not violate any grant of rights which You or Your Affiliates have made to third parties.
 
 (d) You have followed the instructions in `contributing.md`, if You do not own the Copyright in the entire work of authorship Submitted. The file can be found in the root directory of the project repository.
 
-4. Disclaimer
---------------
+## 4. Disclaimer
 
 EXCEPT FOR THE EXPRESS WARRANTIES IN SECTION 3, THE CONTRIBUTION IS PROVIDED "AS IS". MORE PARTICULARLY, ALL EXPRESS OR IMPLIED WARRANTIES INCLUDING, WITHOUT LIMITATION, ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT ARE EXPRESSLY DISCLAIMED BY YOU TO US AND BY US TO YOU. TO THE EXTENT THAT ANY SUCH WARRANTIES CANNOT BE DISCLAIMED, SUCH WARRANTY IS LIMITED IN DURATION TO THE MINIMUM PERIOD PERMITTED BY LAW.
 
-5. Consequential Damage Waiver
--------------------------------
+## 5. Consequential Damage Waiver
 
 TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL YOU OR US BE LIABLE FOR ANY LOSS OF PROFITS, LOSS OF ANTICIPATED SAVINGS, LOSS OF DATA, INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL AND EXEMPLARY DAMAGES ARISING OUT OF THIS AGREEMENT REGARDLESS OF THE LEGAL OR EQUITABLE THEORY (CONTRACT, TORT OR OTHERWISE) UPON WHICH THE CLAIM IS BASED.
 
-6. Miscellaneous
-----------------
+## 6. Miscellaneous
 
 6.1 This Agreement will be governed by and construed in accordance with the laws of the State of California and the United States excluding its conflicts of law provisions. Under certain circumstances, the governing law in this section might be superseded by the United Nations Convention on Contracts for the International Sale of Goods ("UN Convention") and the parties intend to avoid the application of the UN Convention to this Agreement and, thus, exclude the application of the UN Convention in its entirety to this Agreement.
 
@@ -110,8 +104,10 @@ The below-signed are contributors to a code repository that is part of the proje
 
 eg: Jeremy Ruston, @Jermolene for Federatial Limited, 2011/11/22
 
-Contributors
-------------
+## Contributors
 
 Jeremy Ruston, @Jermolene for Federatial Limited, 2011/11/22
+
 Google Inc, 2015/12/21
+
+Brooks Boyd, @MidnightLightning for MidnightDesign, LLC 2019/03/21

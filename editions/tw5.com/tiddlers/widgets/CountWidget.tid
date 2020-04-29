@@ -1,12 +1,12 @@
 title: CountWidget
 created: 201310241419
-modified: 201310300837
+modified: 20181231131
 tags: Widgets
 caption: count
 
 ! Introduction
 
-The count widget displays the number of matches to a specified [[filter expression|Filters]].
+The count widget displays the number of unique items in the output of specified [[filter expressions|Filters]].
 
 ! Content and Attributes
 
@@ -14,3 +14,6 @@ The content of the `<$count>` widget is ignored.
 
 |!Attribute |!Description |
 |filter |The filter expression to count |
+
+! Example
+<<wikitext-example-without-html """There are <$count filter="[tag[Examples]]"/> tiddlers tagged with Examples""">>

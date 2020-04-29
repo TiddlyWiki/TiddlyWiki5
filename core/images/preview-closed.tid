@@ -1,15 +1,4 @@
 title: $:/core/images/preview-closed
 tags: $:/tags/Image
 
-<svg class="tc-image-preview-closed tc-image-button" width="22pt" height="22pt" viewBox="0 0 128 128">
-    <g fill-rule="evenodd">
-        <path d="M0.0881363238,64 C-0.210292223,65.8846266 0.249135869,67.8634737 1.4664206,69.4579969 C16.2465319,88.8184886 39.1692554,100.414336 64,100.414336 C88.8307446,100.414336 111.753468,88.8184886 126.533579,69.4579969 C127.750864,67.8634737 128.210292,65.8846266 127.911864,64 C110.582357,78.4158332 88.3036732,87.0858436 64,87.0858436 C39.6963268,87.0858436 17.4176431,78.4158332 0.0881363238,64 Z"></path>
-        <rect x="62" y="96" width="4" height="16" rx="4"></rect>
-        <rect transform="translate(80.000000, 101.000000) rotate(-5.000000) translate(-80.000000, -101.000000) " x="78" y="93" width="4" height="16" rx="4"></rect>
-        <rect transform="translate(48.000000, 101.000000) rotate(-355.000000) translate(-48.000000, -101.000000) " x="46" y="93" width="4" height="16" rx="4"></rect>
-        <rect transform="translate(32.000000, 96.000000) rotate(-350.000000) translate(-32.000000, -96.000000) " x="30" y="88" width="4" height="16" rx="4"></rect>
-        <rect transform="translate(96.000000, 96.000000) rotate(-10.000000) translate(-96.000000, -96.000000) " x="94" y="88" width="4" height="16" rx="4"></rect>
-        <rect transform="translate(112.000000, 88.000000) rotate(-20.000000) translate(-112.000000, -88.000000) " x="110" y="80" width="4" height="16" rx="4"></rect>
-        <rect transform="translate(16.000000, 88.000000) rotate(-340.000000) translate(-16.000000, -88.000000) " x="14" y="80" width="4" height="16" rx="4"></rect>
-    </g>
-</svg>
+<svg width="22pt" height="22pt" class="tc-image-preview-closed tc-image-button" viewBox="0 0 128 128"><g fill-rule="evenodd"><path d="M.088 64a7.144 7.144 0 001.378 5.458C16.246 88.818 39.17 100.414 64 100.414c24.83 0 47.753-11.596 62.534-30.956A7.144 7.144 0 00127.912 64C110.582 78.416 88.304 87.086 64 87.086 39.696 87.086 17.418 78.416.088 64z"/><rect width="4" height="16" x="62" y="96" rx="4"/><rect width="4" height="16" x="78" y="93" rx="4" transform="rotate(-5 80 101)"/><rect width="4" height="16" x="46" y="93" rx="4" transform="rotate(5 48 101)"/><rect width="4" height="16" x="30" y="88" rx="4" transform="rotate(10 32 96)"/><rect width="4" height="16" x="94" y="88" rx="4" transform="rotate(-10 96 96)"/><rect width="4" height="16" x="110" y="80" rx="4" transform="rotate(-20 112 88)"/><rect width="4" height="16" x="14" y="80" rx="4" transform="rotate(20 16 88)"/></g></svg>

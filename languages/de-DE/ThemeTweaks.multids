@@ -12,6 +12,7 @@ Options/CodeWrapping: Lange Zeilen in "Code-Blöcken" umbrechen
 Settings: Einstellungen
 Settings/FontFamily: Schriftfamilie
 Settings/CodeFontFamily: "Code" Schriftfamilie
+Settings/EditorFontFamily: Editor Schriftfamilie
 Settings/BackgroundImage: Hintergrundbild für die Seite
 Settings/BackgroundImageAttachment: Hintergrundbild Anhang
 Settings/BackgroundImageAttachment/Scroll: Mit Inhalt "scrollen"

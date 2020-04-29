@@ -1,0 +1,8 @@
+created: 20190611125225770
+modified: 20190611125525466
+tags: [[add Operator]] [[Operator Examples]]
+title: add Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[23]add[19]]">>
+<<.operator-example 2 "=1 =2 =3 =4 +[add[4]]">>

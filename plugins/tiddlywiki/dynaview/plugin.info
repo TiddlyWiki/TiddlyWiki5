@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/dynaview",
+	"name": "Dynaview",
+	"description": "Dynamic scrolling and zooming effects",
+	"list": "readme docs examples config"
+}

@@ -46,6 +46,10 @@ tags: [[$:/tags/Stylesheet]]
 	outline: none;
 }
 
+textarea.tc-edit-texteditor {
+	font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
+}
+
 canvas.tc-edit-bitmapeditor  {
 	<<box-shadow "2px 2px 5px rgba(0, 0, 0, 0.5)">>
 }

@@ -1,5 +1,5 @@
 created: 20161229113910984
-modified: 20161229124226949
+modified: 20171113110222980
 title: Beaker Browser
 type: text/vnd.tiddlywiki
 
@@ -17,5 +17,5 @@ The main disadvantage is that mainstream browsers cannot use `dat://` sites.
 
 Most of the magic is accomplished by the underlying [[Dat protocol|https://datproject.org/]].
 
-<<.from-version "5.1.14">> TiddlyWiki incorporates a special saver module permitting changes to be saved directly from Beaker browser. See  [[TiddlyWiki on Beaker Browser]] for instructions.
+<<.from-version "5.1.14">> TiddlyWiki incorporates a special saver module permitting changes to be saved directly from Beaker browser. See  [[Saving on Beaker Browser]] for instructions.
 

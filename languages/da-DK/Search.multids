@@ -2,7 +2,7 @@ title: $:/language/Search/
 
 DefaultResults/Caption: Liste
 Filter/Caption: Filter
-Filter/Hint: Søg med et [[filterudtryk|http://tiddlywiki.com/static/Filters.html]]
+Filter/Hint: Søg med et [[filterudtryk|https://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small><<resultCount>> træffere</small>//
 Matches: //<small><<resultCount>> træffere</small>//
 Matches/All: Alle træffere:

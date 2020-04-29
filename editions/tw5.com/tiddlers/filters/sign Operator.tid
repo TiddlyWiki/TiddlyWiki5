@@ -1,0 +1,13 @@
+caption: sign
+created: 20190613084919354
+modified: 20190613085044655
+op-input: a [[selection of titles|Title Selection]]
+op-output: replaces each input number with -1, 0 or 1 according to whether the number is negative, zero, or positive
+op-purpose: return -1, 0 or 1 for a list of numbers according to whether each number is negative, zero, or positive
+tags: [[Unary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: sign Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">> See [[Mathematics Operators]] for an overview.
+
+<<.operator-examples "sign">>

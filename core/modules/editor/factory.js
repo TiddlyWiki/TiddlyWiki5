@@ -176,6 +176,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editMinHeight = this.getAttribute("minHeight",DEFAULT_MIN_TEXT_AREA_HEIGHT);
 		this.editFocusPopup = this.getAttribute("focusPopup");
 		this.editFocus = this.getAttribute("focus");
+		this.editTabIndex = this.getAttribute("tabindex");
 		// Get the default editor element tag and type
 		var tag,type;
 		if(this.editField === "text") {
@@ -192,13 +193,13 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			type = type || "text";
 		}
 		// Get the rest of our parameters
-		this.editTag = this.getAttribute("tag",tag);
+		this.editTag = this.getAttribute("tag",tag) || "input";
 		this.editType = this.getAttribute("type",type);
 		// Make the child widgets
 		this.makeChildWidgets();
 		// Determine whether to show the toolbar
 		this.editShowToolbar = this.wiki.getTiddlerText(ENABLE_TOOLBAR_TITLE,"yes");
-		this.editShowToolbar = (this.editShowToolbar === "yes") && !!(this.children && this.children.length > 0);
+		this.editShowToolbar = (this.editShowToolbar === "yes") && !!(this.children && this.children.length > 0) && (!this.document.isTiddlyWikiFakeDom);
 	};
 
 	/*
@@ -207,7 +208,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
+		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
 			this.refreshSelf();
 			return true;
 		} else if(changedTiddlers[this.editTitle]) {
@@ -216,7 +217,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		}
 		this.engine.fixHeight();
 		if(this.editShowToolbar) {
-			return this.refreshChildren(changedTiddlers);			
+			return this.refreshChildren(changedTiddlers);
 		} else {
 			return false;
 		}
@@ -266,7 +267,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 				    el.dispatchEvent(clickEvent);
 					event.preventDefault();
 					event.stopPropagation();
-					return true;			
+					return true;
 				}
 			}
 		}

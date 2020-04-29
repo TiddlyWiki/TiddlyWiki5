@@ -1,6 +1,7 @@
 title: $:/core/ui/ViewTemplate/title
 tags: $:/tags/ViewTemplate
 
+\whitespace trim
 \define title-styles()
 fill:$(foregroundColor)$;
 \end
@@ -10,13 +11,15 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 <div class="tc-tiddler-title">
 <div class="tc-titlebar">
 <span class="tc-tiddler-controls">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]]" variable="listItem"><$reveal type="nomatch" state=<<config-title>> text="hide"><$transclude tiddler=<<listItem>>/></$reveal></$list>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]]" variable="listItem"><$reveal type="nomatch" state=<<config-title>> text="hide"><$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]"><$transclude tiddler=<<listItem>>/></$set></$reveal></$list>
 </span>
 <$set name="tv-wikilinks" value={{$:/config/Tiddlers/TitleLinks}}>
 <$link>
 <$set name="foregroundColor" value={{!!color}}>
 <span class="tc-tiddler-title-icon" style=<<title-styles>>>
-<$transclude tiddler={{!!icon}}/>
+<$transclude tiddler={{!!icon}}>
+<$transclude tiddler={{$:/config/DefaultTiddlerIcon}}/>
+</$transclude>
 </span>
 </$set>
 <$list filter="[all[current]removeprefix[$:/]]">
@@ -35,7 +38,7 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 
 <$reveal type="nomatch" text="" default="" state=<<tiddlerInfoState>> class="tc-tiddler-info tc-popup-handle" animate="yes" retain="yes">
 
-<$transclude tiddler="$:/core/ui/TiddlerInfo"/>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TiddlerInfoSegment]!has[draft.of]] [[$:/core/ui/TiddlerInfo]]" variable="listItem"><$transclude tiddler=<<listItem>> mode="block"/></$list>
 
 </$reveal>
 </div>

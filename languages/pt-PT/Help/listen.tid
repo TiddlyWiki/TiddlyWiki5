@@ -1,0 +1,34 @@
+title: $:/language/Help/listen
+description: Fornece à TiddlyWiki um interface por servidor HTTP
+
+Serve uma wiki por HTTP.
+
+Os comandos de escuta utilizam NamedCommandParameters:
+
+```
+--listen [<name>=<value>]...
+```
+
+Todos os parâmetros são opcionais com predefinições seguras, e podem ser especificados por qualquer ordem. Parâmetros reconhecidos são:
+
+* ''host'' - nome do hospede opcional a partir do qual servir (por defeito "127.0.0.1" aka "localhost")
+* ''path-prefix'' - prefixo opcional para caminhos
+* ''port'' - número de porta onde escutar; valores não numéricos são interpretados como variáveis ambientais de sistema da qual o número da porta é extraído(por defeito "8080")
+* ''credentials'' - caminho para o ficheiro CSV das credenciais (relativo à pasta da wiki)
+* ''anon-username'' - o nome de utilizador para assinar edições para utilizadores anónimos
+* ''username'' - nome de utilizador optional para autenticação básica
+* ''password'' - palavra passe optional para autenticação básica
+* ''authenticated-user-header'' - nome do cabeçalho optional a ser utilizador para autenticação de confiança
+* ''readers'' - lista separada por vírgulas dos utilizadores com permissão para ler desta wiki
+* ''writers'' - lista separada por vírgulas dos utilizadores com permissão para escrever nesta wiki
+* ''csrf-disable'' - defina como "yes" para desactivar verificação CSRF (por defeito "no")
+* ''root-tiddler'' - o tiddler para servir como raiz (por defeito "$:/core/save/all")
+* ''root-render-type'' - o tipo de conteúdo para o qual o tiddler de raiz deve ser representado (por defeito "text/plain")
+* ''root-serve-type'' - o tipo de conteúdo com o qual o tiddler de raiz deve ser servido (por defeito "text/html")
+* ''tls-cert'' - caminho do ficheiro de certificado TLS (relativo à pasta da wiki)
+* ''tls-key'' - caminho do ficheiro da chave TLS (relativo à pasta da wiki)
+* ''debug-level'' - nível de depuração opcional; defina como "debug" para ver detalhes de pedidos (por defeito "none")
+* ''gzip'' - defina como "yes" para activar compressão gzip para alguns endpoints http (por defeito "no")
+
+Para obter informação sobre como abrir a sua instância à rede local inteira, e possíveis problemas com segurança, veja  o tiddler WebServer em TiddlyWiki.com.
+

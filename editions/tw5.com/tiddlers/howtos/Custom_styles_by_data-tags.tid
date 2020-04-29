@@ -1,0 +1,60 @@
+created: 20170124132500000
+modified: 201804111739
+tags: example-test [[How to apply custom styles]]
+title: Custom styles by data-tags
+type: text/vnd.tiddlywiki
+
+! Attribute: data-tags
+
+<<.from-version "5.1.16">>
+
+The ~TiddlyWiki core adds several `attributes` to the rendered content. These make it possible to apply custom styles to tiddlers. 
+
+For example this tiddler is tagged: <<tag "How to apply custom styles">> and <<tag "example-test">> so the attribute looks like this: 
+
+```
+data-tags="[[How to apply custom styles]] example-test"
+```
+
+''Important:'' Tiddler tags are ''not'' sorted so the order in the rendered output may be different!
+
+!! Examples
+
+The following CSS is defined in [[Custom data-styles]] and creates a pink border for all tiddlers (including this one) tagged with `example-test`.
+
+```
+[data-tags*="example-test"] {
+  border: 2px solid pink;
+}
+```
+
+!!! Styling Stylesheets
+
+So to display tiddlers tagged: `data-tags-styles` in a decent way we can use the following code. (I could have used: `$:/tags/Stylesheet`, but that would affect all stylesheets in this wiki, which is not intended. amt ;)
+
+''Important:'' Don't forget to also specify `.tc-tiddler-body` or the whole tiddler, including the title, will be changed! see: [[Custom data-styles]]
+
+```
+[data-tags*="data-tags-styles"] .tc-tiddler-body {
+  display: block;
+  padding: 14px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  word-break: normal;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  background-color: #f5f5f5;
+  border: 1px solid #cccccc;
+  padding: 0 3px 2px;
+  border-radius: 3px;
+  font-family: Monaco, Consolas, "Lucida Console", "DejaVu Sans Mono", monospace;
+}
+```
+
+!! Hard Linebreaks
+
+This mechanism may be handy for users who want to write prose text! See: [[Hard Linebreaks with CSS]]
+
+!! More Possibilities
+
+{{Attribute Selectors}}

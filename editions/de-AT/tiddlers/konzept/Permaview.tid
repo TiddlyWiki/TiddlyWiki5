@@ -16,18 +16,18 @@ Ein Permaview hat folgendes Fromat: `URL/#ZielTiddler:[[Liste mit mehreren]] Tid
 
 Beispiel:
 
-* http://tiddlywiki.com/languages/de-DE/#Permaview:%5b%5bInformationen%20weitergeben%5d%5d%20Permaview%20Permalink
+* https://tiddlywiki.com/languages/de-DE/#Permaview:%5b%5bInformationen%20weitergeben%5d%5d%20Permaview%20Permalink
 
 Wenn der Ziel-Tiddler in der Story-Liste nicht vorhanden ist, dann wird er automatisch als Erster aufgelistet. Ist er in der Liste vorhanden, wie zB oben "Permaview", dann wird die Story entsprechend der Liste angezeigt.
 
 Weitere Beispiele:
 
-* [[http://tiddlywiki.com/#Tiddlers:Tags TiddlerFields]]
-* [[http://tiddlywiki.com/#Tiddlers:Tiddlers Tags TiddlerFields]]
+* [[https://tiddlywiki.com/#Tiddlers:Tags TiddlerFields]]
+* [[https://tiddlywiki.com/#Tiddlers:Tiddlers Tags TiddlerFields]]
 
 Es ist ebenfalls möglich eine Story über eine Tag-Liste als Filter aufzurufen.
 
-* <a href="http://tiddlywiki.com/languages/de-DE/#:[tag[task]]">~http://tiddlywiki.com/languages/de-DE/#:[tag[task]]</a>
+* <a href="https://tiddlywiki.com/languages/de-DE/#:[tag[task]]">~https://tiddlywiki.com/languages/de-DE/#:[tag[task]]</a>
 
 !! Über URL Codierung
 

@@ -1,0 +1,29 @@
+caption: jsonstringify
+created: 20171029155051467
+from-version: 5.1.14
+modified: 20171029155143797
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input with JSON string encodings applied
+op-parameter: 
+op-parameter-name: 
+op-purpose: apply JSON string encoding to a string
+tags: [[Filter Operators]] [[String Operators]]
+title: jsonstringify Operator
+type: text/vnd.tiddlywiki
+
+The following substitutions are made:
+
+|!Character |!Replacement |
+|`\` |`\\` |
+|`"` |`\"` |
+|`\r` (carriage return) |`\\r` |
+|`\n` (line feed) |`\\n` |
+|`\x08` (backspace) |`\\b` |
+|`\x0c` (form field) |`\\f` |
+|`\t` (tab) |`\\t` |
+|Characters from 0x00 to 0x1f |`\\x##` where ## is two hex digits |
+|Characters from 0x80 to 0xffff |`\\u####` where #### is four hex digits |
+
+Also see the [[stringify Operator]].
+
+<<.operator-examples "jsonstringify">>

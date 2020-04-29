@@ -1,0 +1,5 @@
+title: $:/core/ui/Actions/new-tiddler
+tags: $:/tags/Actions
+description: create a new empty tiddler
+
+<$action-sendmessage $message="tm-new-tiddler" tags={{$:/config/NewTiddler/Tags!!tags}}/>

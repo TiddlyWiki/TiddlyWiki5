@@ -1,0 +1,30 @@
+title: $:/language/Docs/ModuleTypes/
+
+allfilteroperator: Podrejeni operator za ''all'' filter operator.
+animation: Animacije, ki se lahko uporabljajo z RevealWidget.
+bitmapeditoroperation: Operacija orodne vrstice urejevalnika bitnih slik.
+command: Ukazi, ki se lahko izvajajo pod Node.js.
+config: Podatki, ki se vstavijo v `$ tw.config`.
+filteroperator: Posamezne funkcije za filter operator.
+global: Globalni podatki, ki bodo vstavljeni v `$tw`.
+
+info: Objavlja sistemske informacije s psevdo-vtičnikom [[$:/temp/info-plugin]].
+
+isfilteroperator: Operand za ''is'' filter operator.
+library: Generični tip modula za splošne module JavaScript.
+macro: Makro definicije v JavaScriptu.
+parser: Razčlenjevalci za različne vrste vsebin.
+saver: "Savers" omogočajo različne načine za shranjevanje datotek iz brskalnika.
+startup: Zagonske funkcije.
+storyview: Pogledi zgodbe (Story view) prilagodijo animacijo in obnašanje seznamskih gradnikov (ListWidget), ki upravljajo glavni prikaz tiddlerjev.
+texteditoroperation: Operacija orodne vrstice urejevalnika besedil.
+tiddlerdeserializer: Pretvori različne vrste vsebin v tiddlerje.
+tiddlerfield: Določa vedenje posameznega polja tiddlerja.
+tiddlermethod: Doda metode v prototip `$tw.Tiddler`.
+
+upgrader: Izvaja posebne spremembe med nadgradnjo ali uvozom.
+utils: Doda metode v `$tw.utils`.
+utils-node: Doda metode, specifične za Node.js, v `$tw.utils`.
+widget: Gradniki prikažejo in osvežujejo prikaz v DOM.
+wikimethod: Doda metode v `$tw.Wiki`.
+wikirule: Posamezna razčlenjevalna pravila za glavni WikiText razčlenjevalnik.

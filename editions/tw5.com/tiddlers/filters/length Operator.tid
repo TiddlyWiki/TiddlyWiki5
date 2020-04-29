@@ -1,0 +1,13 @@
+caption: length
+created: 20190613153225735
+modified: 20190613153321546
+op-input: a [[selection of titles|Title Selection]]
+op-output: replaces each input title with its length as an integer
+op-purpose: returns the number of characters of each item in the list
+tags: [[Filter Operators]]
+title: length Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">>
+
+<<.operator-examples "length">>

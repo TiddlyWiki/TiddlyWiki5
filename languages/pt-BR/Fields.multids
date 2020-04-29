@@ -1,0 +1,34 @@
+title: $:/language/Docs/Fields/
+
+_canonical_uri: O URI completo dum tiddler de imagem externa
+bag: O nome do saco de onde veio o tiddler
+caption: O texto a exibir num separador ou botão
+color: O valor CSS da cor associada ao tiddler
+component: O nome do componente responsável por um [[tiddler alerta|AlertMechanism]]
+created: A data de criação do tiddler
+creator: O nome da pessoa que criou o tiddler
+current-tiddler: Utilizado para armazenar o primeiro tiddler numa [[lista de histórico|HistoryMechanism]]
+dependents: Para uma extensão, lista os títulos de extensões dependentes
+description: O texto descritivo de uma extensão, ou diálogo modal
+draft.of: Para tiddlers rascunho, contém o título do tiddler do qual este é rascunho
+draft.title: Para tiddlers rascunho, contém o título proposto para o novo tiddler
+footer: O texto de rodapé para um assistente
+icon: O título do tiddler que contém o ícone associado com determinado tiddler
+library: Se definido como "yes" indica que o tiddler deve ser gravado como uma biblioteca JavaScript
+list: Uma lista ordenada de títulos de tiddlers associados com um determinado tiddler
+list-after: Se definido, o título do tiddler a seguir ao qual este tiddler deve ser adicionado numa lista ordenada de títulos de tiddlers
+list-before: Se definido, o título do tiddler a antes do qual este tiddler deve ser adicionado numa lista ordenada de títulos de tiddlers, ou no início da lista se este campo estiver presente mas vazio
+modified: A data e hora da última modificação de um tiddler
+modifier: Título do tiddler associado à última pessoa que modificou o tiddler
+name: O nome humanamente legível associado a um tiddler extensão
+plugin-priority: Valor numérico indicador da prioridade de um tiddler extensão
+plugin-type: O tipo de extensão de um tiddler extensão
+released: Data de lançamento de uma versão da TiddlyWiki
+revision: A revisão do tiddler guardada no servidor
+source: O URL fonte associado a um tiddler
+subtitle: O texto do subtítulo de um assistente
+tags: Lista de assuntos associadas a um tiddler
+text: O texto do conteúdo de um tiddler
+title: O nome único de um tiddler
+type: O formato de arquivo de um tiddler
+version: Informação de versão de uma extensão

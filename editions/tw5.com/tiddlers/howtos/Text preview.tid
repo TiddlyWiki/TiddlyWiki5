@@ -1,0 +1,14 @@
+created: 20160817104110857
+modified: 20160817104802841
+tags: [[Editor toolbar]]
+title: Text preview
+
+Pressing the eye icon {{$:/core/ui/EditorToolbar/preview}} will open or close a preview window for your WikiText (The icon-eye will also open or close).
+
+Right to the eye there is another icon, {{$:/core/images/chevron-down}}, which when clicked, shows you a dropdown which gives you access to six different types of preview:
+
+* //output// shows you the text as you see it when you do not edit the tiddler.
+* //html// shows you the [[source code|https://www.w3schools.com/html/html_intro.asp]] of that output. Your web browser uses this source code to display webpages.
+* //parsetree// and //widgettree// show you the two object trees that ~TiddlyWiki internally generates from ~WikiText. The //parsetree// collects basic information about your ~WikiText. From the informations of the parsetree the //widgettree// then generates extended informations and finally the above html (and the widgettree also does other things).
+* //differences from current// shows you the differences since the tiddler was last saved. Deleted parts are <span style="color:red;">red</span>, added parts are <span style="color:green;">green</span>.
+* //differences from shadow (if any)// does the same, but this time it shows you the differences to the underlying [[shadow-tiddler|ShadowTiddlers]].

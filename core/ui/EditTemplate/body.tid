@@ -5,7 +5,7 @@ tags: $:/tags/EditTemplate
 \define config-visibility-title()
 $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 \end
-<$list filter="[is[current]has[_canonical_uri]]">
+<$list filter="[all[current]has[_canonical_uri]]">
 
 <div class="tc-message-box">
 
@@ -13,13 +13,13 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 
 <a href={{!!_canonical_uri}}><$text text={{!!_canonical_uri}}/></a>
 
-<$edit-text field="_canonical_uri" class="tc-edit-fields"></$edit-text>
+<$edit-text field="_canonical_uri" class="tc-edit-fields" tabindex={{$:/config/EditTabIndex}}></$edit-text>
 
 </div>
 
 </$list>
 
-<$list filter="[is[current]!has[_canonical_uri]]">
+<$list filter="[all[current]!has[_canonical_uri]]">
 
 <$reveal state="$:/state/showeditpreview" type="match" text="yes">
 

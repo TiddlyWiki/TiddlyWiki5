@@ -3,7 +3,7 @@ title: $:/core/modules/commands/load.js
 type: application/javascript
 module-type: command
 
-Command to load tiddlers from a file
+Command to load tiddlers from a file or directory
 
 \*/
 (function(){
@@ -30,9 +30,7 @@ Command.prototype.execute = function() {
 	if(this.params.length < 1) {
 		return "Missing filename";
 	}
-	var ext = path.extname(self.params[0]),
-		stat = fs.statSync(self.params[0]),
-		tiddlers = $tw.loadTiddlersFromPath(self.params[0]),
+	var tiddlers = $tw.loadTiddlersFromPath(self.params[0]),
 		count = 0;
 	$tw.utils.each(tiddlers,function(tiddlerInfo) {
 		$tw.utils.each(tiddlerInfo.tiddlers,function(tiddler) {
@@ -40,7 +38,7 @@ Command.prototype.execute = function() {
 			count++;
 		});
 	});
-	if(!count) {
+	if(!count && self.params[1] !== "noerror") {
 		self.callback("No tiddlers found in file \"" + self.params[0] + "\"");
 	} else {
 		self.callback(null);

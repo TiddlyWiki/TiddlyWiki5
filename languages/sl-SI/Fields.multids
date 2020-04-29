@@ -1,0 +1,34 @@
+title: $:/language/Docs/Fields/
+
+_canonical_uri: Celoten URI zunanjega slikovnega tiddlerja. URI = Enotni identifikator virov, identifikator za vire na internetu.
+bag: Ime ~TiddlyWeb "torbe", iz katere je prišel tiddler.
+caption: Besedilo, ki se prikaže na zavihku ali gumbu
+color: Barvna vrednost CSS, povezana s tiddlerjem
+component: Ime komponente, odgovorne za [[opozorilni tiddler|AlertMechanism]]
+created: Datum, ko je bil tiddler ustvarjen
+creator: Ime osebe, ki je ustvarila tiddler
+current-tiddler: Uporablja se za predpomnjenje vrhnjega tiddlerja na [[seznamu zgodovine|HistoryMechanism]]
+dependents: Navede odvisnosti za "vtičnike".
+description: Opisno besedilo za vtičnik ali modalni dialog
+draft.of: Osnutek od - vsebuje naslov tiddlerja, h kateremu spada ta osnutek
+draft.title: Za osnutek tiddlerja vsebuje predlagani novi naslov tiddlerja
+footer: Besedilo noge za čarovnika
+icon: Naslov tiddlerja, ki vsebuje ikono, povezano s tem tiddlerjem
+library: Če je nastavljeno na "da", bo tiddler shranjen kot knjižnica JavaScript
+list: Urejen seznam naslovov tiddlerjev, povezanih s tem tiddlerjem
+list-after: Če je nastavljen, pomeni naslov tiddlerja, za katerim se ta tiddler dodaja na urejeni seznam naslovov tiddlerjev
+list-before: Če je nastavljen, pomeni naslov tiddlerja, pred katerim se ta tiddler dodaja na urejeni seznam naslovov tiddlerjev, ali na začetek seznama, če je to polje prazno
+modified: Datum in čas, ko je bil tiddler nazadnje spremenjen
+modifier: Ime osebe, ki je nazadnje spremenila tiddler.
+name: Človeško berljivo ime za "vtičnik" tiddler.
+plugin-priority: Številčna vrednost, ki kaže prednost vtičnika
+plugin-type: Vrsta vtičnika
+released: Datum izdaje TiddlyWiki
+revision: Različica tiddlerja shranjena na strežniku
+source: Izvorni URL, povezan s tiddlerjem
+subtitle: Podnaslov za pogovorno okno čarovnika
+tags: Seznam oznak, povezanih s tiddlerjem
+text: Telo besedila tiddlerja
+title: Edinstveno ime tiddlerja.
+type: Vrsta vsebine tiddlerja
+version: Informacije o različici za vtičnik

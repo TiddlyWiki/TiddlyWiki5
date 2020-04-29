@@ -1,7 +1,7 @@
 title: $:/language/
 
 BinaryWarning/Prompt: Tento tiddler obsahuje binární data
-ClassicWarning/Hint: Tento tiddler používá formát textu z TiddlyWiki Classic, který není plně kompatibilní s TiddlyWiki verze 5. Na http://tiddlywiki.com/static/Upgrading.html zjistíte více. 
+ClassicWarning/Hint: Tento tiddler používá formát textu z TiddlyWiki Classic, který není plně kompatibilní s TiddlyWiki verze 5. Na https://tiddlywiki.com/static/Upgrading.html zjistíte více. 
 ClassicWarning/Upgrade/Caption: upgrade
 CloseAll/Button: zavřít vše
 ConfirmCancelTiddler: Chcete zrušit změny v tiddleru "<$text text=<<title>>/>"?

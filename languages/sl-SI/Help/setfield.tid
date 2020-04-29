@@ -1,0 +1,17 @@
+title: $:/language/Help/setfield
+description: Eksperimentalno - nastavi "polje" tiddlerja na določeno vrednost
+
+//Upoštevajte, da je ta ukaz poskusen in se lahko spremeni ali pa bo zamenjan, preden bo dokončan//
+
+Nastavi navedeno polje skupine tiddlerjev na rezultat "wikizacije" predloge tiddler, pri čemer je spremenljivka `currentTiddler` nastavljena na ustrezni tiddler.
+
+```
+--setfield <filter> <fieldname> <templatetitle> <rendertype>
+```
+
+Parametri so:
+
+* ''filter'' - filter, ki izbere tiddlerje za spremembo
+* ''fieldname'' - polje za spreminjanje (privzeto je "text")
+* ''templatetitle'' - tiddler predloga, ki se vnese v navedeno polje. Če je parameter prazen ali manjka, se podano polje izbriše
+* ''rendertype'' - tip besedila, ki ga želite prikazati (privzeto je "text/plain"; besedilo "html" se lahko uporablja za vključitev oznak HTML)

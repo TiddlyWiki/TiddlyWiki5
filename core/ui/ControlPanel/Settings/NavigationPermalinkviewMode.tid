@@ -1,0 +1,10 @@
+title: $:/core/ui/ControlPanel/Settings/NavigationPermalinkviewMode
+tags: $:/tags/ControlPanel/Settings
+caption: {{$:/language/ControlPanel/Settings/NavigationPermalinkviewMode/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Settings/NavigationPermalinkviewMode/
+<<lingo Hint>>
+
+<$checkbox tiddler="$:/config/Navigation/Permalinkview/CopyToClipboard" field="text" checked="yes" unchecked="no" default="yes"> <$link to="$:/config/Navigation/Permalinkview/CopyToClipboard"><<lingo CopyToClipboard/Description>></$link> </$checkbox>
+
+<$checkbox tiddler="$:/config/Navigation/Permalinkview/UpdateAddressBar" field="text" checked="yes" unchecked="no" default="yes"> <$link to="$:/config/Navigation/Permalinkview/UpdateAddressBar"><<lingo UpdateAddressBar/Description>></$link> </$checkbox>

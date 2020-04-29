@@ -1,0 +1,26 @@
+caption: port
+created: 20180630180552254
+modified: 20191219123751824
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: port
+type: text/vnd.tiddlywiki
+
+The [[web server configuration parameter|WebServer Parameters]] ''port'' specifies the TCP port on which the server will listen for connections. The default value is `8080`.
+
+The ''port'' parameter accepts two types of value:
+
+* Numerical values are interpreted as a decimal port number
+** The special value 0 (zero) causes the operating system to assign an available port
+* Non-numeric values are interpreted as an environment variable from which the port should be read
+
+This example configures the server to listen on port 8090:
+
+```
+tiddlywiki mywikifolder --listen port=8090
+```
+
+This example configures the server to listen on the port specified in the environment variable `THE_PORT`:
+
+```
+tiddlywiki mywikifolder --listen port=THE_PORT
+```

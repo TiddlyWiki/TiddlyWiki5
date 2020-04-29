@@ -1,5 +1,4 @@
 title: $:/plugins/tiddlywiki/d3/readme
-type: text/vnd.tiddlywiki
 
 The D3 plugin is a proof-of-concept demo of integration with the D3.js data visualisation framework (http://d3js.org).
 

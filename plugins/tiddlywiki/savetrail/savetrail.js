@@ -31,7 +31,8 @@ exports.startup = function() {
 		wiki: $tw.wiki,
 		syncadaptor: $tw.savetrail.syncadaptor,
 		titleSyncFilter: SYNC_DRAFTS_FILTER_TIDDLER_TITLE,
-		logging: false
+		logging: false,
+		disableUI: true
 	});
 	// Add hooks for trapping user actions
 	$tw.hooks.addHook("th-saving-tiddler",function(tiddler) {
@@ -126,7 +127,7 @@ function saveTiddlerFile(tiddler,options) {
 	options = options || {};
 	var reason = options.reason || "changed",
 		illegalFilenameCharacters = /<|>|\:|\"|\/|\\|\||\?|\*|\^|\s/g,
-		fixedTitle = tiddler.fields.title.replace(illegalFilenameCharacters,"_"),
+		fixedTitle = $tw.utils.transliterate(tiddler.fields.title).replace(illegalFilenameCharacters,"_"),
 		formattedDate = $tw.utils.stringifyDate(new Date()),
 		filename =  fixedTitle + "." + formattedDate + "." + reason + ".json",
 		fields = new Object();

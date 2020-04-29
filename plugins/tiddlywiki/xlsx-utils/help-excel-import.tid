@@ -1,6 +1,5 @@
 title: $:/language/Help/xlsx-import
 description: Import tiddlers from an XLSX spreadsheet file
-type: text/vnd.tiddlywiki
 
 Imports tiddlers from an XLSX spreadsheet file
 

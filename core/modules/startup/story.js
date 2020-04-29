@@ -27,10 +27,18 @@ var DEFAULT_TIDDLERS_TITLE = "$:/DefaultTiddlers";
 // Config
 var CONFIG_UPDATE_ADDRESS_BAR = "$:/config/Navigation/UpdateAddressBar"; // Can be "no", "permalink", "permaview"
 var CONFIG_UPDATE_HISTORY = "$:/config/Navigation/UpdateHistory"; // Can be "yes" or "no"
+var CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD = "$:/config/Navigation/Permalinkview/CopyToClipboard"; // Can be "yes" (default) or "no"
+var CONFIG_PERMALINKVIEW_UPDATE_ADDRESS_BAR = "$:/config/Navigation/Permalinkview/UpdateAddressBar"; // Can be "yes" (default) or "no"
+
+
+// Links to help, if there is no param
+var HELP_OPEN_EXTERNAL_WINDOW = "http://tiddlywiki.com/#WidgetMessage%3A%20tm-open-external-window";
 
 exports.startup = function() {
 	// Open startup tiddlers
-	openStartupTiddlers();
+	openStartupTiddlers({
+		disableHistory: $tw.boot.disableStartupNavigation
+	});
 	if($tw.browser) {
 		// Set up location hash update
 		$tw.wiki.addEventListener("change",function(changes) {
@@ -53,6 +61,14 @@ exports.startup = function() {
 		$tw.rootWidget.addEventListener("tm-browser-refresh",function(event) {
 			window.location.reload(true);
 		});
+		// Listen for tm-open-external-window message
+		$tw.rootWidget.addEventListener("tm-open-external-window",function(event) {
+			var paramObject = event.paramObject || {},
+				strUrl = event.param || HELP_OPEN_EXTERNAL_WINDOW,
+				strWindowName = paramObject.windowName,
+				strWindowFeatures = paramObject.windowFeatures;
+			window.open(strUrl, strWindowName, strWindowFeatures);
+		});
 		// Listen for the tm-print message
 		$tw.rootWidget.addEventListener("tm-print",function(event) {
 			(event.event.view || window).print();
@@ -66,30 +82,33 @@ exports.startup = function() {
 			storyList = $tw.hooks.invokeHook("th-opening-default-tiddlers-list",storyList);
 			$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
 			if(storyList[0]) {
-				$tw.wiki.addToHistory(storyList[0]);				
+				$tw.wiki.addToHistory(storyList[0]);
 			}
 		});
 		// Listen for the tm-permalink message
 		$tw.rootWidget.addEventListener("tm-permalink",function(event) {
 			updateLocationHash({
-				updateAddressBar: "permalink",
+				updateAddressBar: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_UPDATE_ADDRESS_BAR,"yes").trim() === "yes" ? "permalink" : "none",
 				updateHistory: $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim(),
-				targetTiddler: event.param || event.tiddlerTitle
+				targetTiddler: event.param || event.tiddlerTitle,
+				copyToClipboard: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD,"yes").trim() === "yes" ? "permalink" : "none"
 			});
 		});
 		// Listen for the tm-permaview message
 		$tw.rootWidget.addEventListener("tm-permaview",function(event) {
 			updateLocationHash({
-				updateAddressBar: "permaview",
+				updateAddressBar: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_UPDATE_ADDRESS_BAR,"yes").trim() === "yes" ? "permaview" : "none",
 				updateHistory: $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim(),
-				targetTiddler: event.param || event.tiddlerTitle
-			});
+				targetTiddler: event.param || event.tiddlerTitle,
+				copyToClipboard: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD,"yes").trim() === "yes" ? "permaview" : "none"
+			});				
 		});
 	}
 };
 
 /*
 Process the location hash to open the specified tiddlers. Options:
+disableHistory: if true $:/History is NOT updated
 defaultToCurrentStory: If true, the current story is retained as the default, instead of opening the default tiddlers
 */
 function openStartupTiddlers(options) {
@@ -130,15 +149,18 @@ function openStartupTiddlers(options) {
 	}
 	// Save the story list
 	$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
-	// If a target tiddler was specified add it to the history stack
-	if(target && target !== "") {
-		// The target tiddler doesn't need double square brackets, but we'll silently remove them if they're present
-		if(target.indexOf("[[") === 0 && target.substr(-2) === "]]") {
-			target = target.substr(2,target.length - 4);
-		}
-		$tw.wiki.addToHistory(target);
-	} else if(storyList.length > 0) {
-		$tw.wiki.addToHistory(storyList[0]);
+	// Update history
+	if(!options.disableHistory) {
+		// If a target tiddler was specified add it to the history stack
+		if(target && target !== "") {
+			// The target tiddler doesn't need double square brackets, but we'll silently remove them if they're present
+			if(target.indexOf("[[") === 0 && target.substr(-2) === "]]") {
+				target = target.substr(2,target.length - 4);
+			}
+			$tw.wiki.addToHistory(target);
+		} else if(storyList.length > 0) {
+			$tw.wiki.addToHistory(storyList[0]);
+		}		
 	}
 }
 
@@ -146,41 +168,52 @@ function openStartupTiddlers(options) {
 options: See below
 options.updateAddressBar: "permalink", "permaview" or "no" (defaults to "permaview")
 options.updateHistory: "yes" or "no" (defaults to "no")
+options.copyToClipboard: "permalink", "permaview" or "no" (defaults to "no")
 options.targetTiddler: optional title of target tiddler for permalink
 */
 function updateLocationHash(options) {
-	if(options.updateAddressBar !== "no") {
-		// Get the story and the history stack
-		var storyList = $tw.wiki.getTiddlerList(DEFAULT_STORY_TITLE),
-			historyList = $tw.wiki.getTiddlerData(DEFAULT_HISTORY_TITLE,[]),
+	// Get the story and the history stack
+	var storyList = $tw.wiki.getTiddlerList(DEFAULT_STORY_TITLE),
+		historyList = $tw.wiki.getTiddlerData(DEFAULT_HISTORY_TITLE,[]),
+		targetTiddler = "";
+	if(options.targetTiddler) {
+		targetTiddler = options.targetTiddler;
+	} else {
+		// The target tiddler is the one at the top of the stack
+		if(historyList.length > 0) {
+			targetTiddler = historyList[historyList.length-1].title;
+		}
+		// Blank the target tiddler if it isn't present in the story
+		if(storyList.indexOf(targetTiddler) === -1) {
 			targetTiddler = "";
-		if(options.targetTiddler) {
-			targetTiddler = options.targetTiddler;
-		} else {
-			// The target tiddler is the one at the top of the stack
-			if(historyList.length > 0) {
-				targetTiddler = historyList[historyList.length-1].title;
-			}
-			// Blank the target tiddler if it isn't present in the story
-			if(storyList.indexOf(targetTiddler) === -1) {
-				targetTiddler = "";
-			}
 		}
-		// Assemble the location hash
-		if(options.updateAddressBar === "permalink") {
+	}
+	// Assemble the location hash
+	switch(options.updateAddressBar) {
+		case "permalink":
 			$tw.locationHash = "#" + encodeURIComponent(targetTiddler);
-		} else {
+			break;
+		case "permaview":
 			$tw.locationHash = "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
-		}
-		// Only change the location hash if we must, thus avoiding unnecessary onhashchange events
-		if($tw.utils.getLocationHash() !== $tw.locationHash) {
-			if(options.updateHistory === "yes") {
-				// Assign the location hash so that history is updated
-				window.location.hash = $tw.locationHash;
-			} else {
-				// We use replace so that browser history isn't affected
-				window.location.replace(window.location.toString().split("#")[0] + $tw.locationHash);
-			}
+			break;
+	}
+	// Copy URL to the clipboard
+	switch(options.copyToClipboard) {
+		case "permalink":
+			$tw.utils.copyToClipboard($tw.utils.getLocationPath() + "#" + encodeURIComponent(targetTiddler));
+			break;
+		case "permaview":
+			$tw.utils.copyToClipboard($tw.utils.getLocationPath() + "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList)));
+			break;
+	}
+	// Only change the location hash if we must, thus avoiding unnecessary onhashchange events
+	if($tw.utils.getLocationHash() !== $tw.locationHash) {
+		if(options.updateHistory === "yes") {
+			// Assign the location hash so that history is updated
+			window.location.hash = $tw.locationHash;
+		} else {
+			// We use replace so that browser history isn't affected
+			window.location.replace(window.location.toString().split("#")[0] + $tw.locationHash);
 		}
 	}
 }

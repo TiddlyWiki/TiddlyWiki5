@@ -1,5 +1,6 @@
 title: $:/plugins/tiddlywiki/github-fork-ribbon/usage
-type: text/vnd.tiddlywiki
+
+Copy appropriate chunks on a new tiddler and tag it `$:/tags/PageControls`. Name of the new tiddler does not matter. Only the tag matters.
 
 ```
 <!-- TOP RIGHT RIBBON: START COPYING HERE -->

@@ -19,26 +19,26 @@ $:/config/Plugins/Disabled/$(currentTiddler)$
 \end
 
 \define plugin-table-body(type,disabledMessage,default-popup-state)
-<div class="tc-plugin-info-chunk tc-small-icon">
+<div class="tc-plugin-info-chunk tc-plugin-info-toggle">
 <$reveal type="nomatch" state=<<popup-state>> text="yes" default="""$default-popup-state$""">
 <$button class="tc-btn-invisible tc-btn-dropdown" set=<<popup-state>> setTo="yes">
-{{$:/core/images/right-arrow}}
+{{$:/core/images/chevron-right}}
 </$button>
 </$reveal>
 <$reveal type="match" state=<<popup-state>> text="yes" default="""$default-popup-state$""">
 <$button class="tc-btn-invisible tc-btn-dropdown" set=<<popup-state>> setTo="no">
-{{$:/core/images/down-arrow}}
+{{$:/core/images/chevron-down}}
 </$button>
 </$reveal>
 </div>
-<div class="tc-plugin-info-chunk">
+<div class="tc-plugin-info-chunk tc-plugin-info-icon">
 <$transclude tiddler=<<currentTiddler>> subtiddler=<<plugin-icon-title>>>
 <$transclude tiddler="$:/core/images/plugin-generic-$type$"/>
 </$transclude>
 </div>
-<div class="tc-plugin-info-chunk">
+<div class="tc-plugin-info-chunk tc-plugin-info-description">
 <h1>
-''<$view field="description"><$view field="title"/></$view>'' $disabledMessage$
+''<$text text={{{ [<currentTiddler>get[name]] ~[<currentTiddler>split[/]last[1]] }}}/>'': <$view field="description"><$view field="title"/></$view> $disabledMessage$
 </h1>
 <h2>
 <$view field="title"/>

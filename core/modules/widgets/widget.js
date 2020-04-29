@@ -22,15 +22,17 @@ Options include:
 	document: optional document object to use instead of global document
 */
 var Widget = function(parseTreeNode,options) {
-	if(arguments.length > 0) {
-		this.initialise(parseTreeNode,options);
-	}
+	this.initialise(parseTreeNode,options);
 };
 
 /*
 Initialise widget properties. These steps are pulled out of the constructor so that we can reuse them in subclasses
 */
 Widget.prototype.initialise = function(parseTreeNode,options) {
+	// Bail if parseTreeNode is undefined, meaning  that the widget constructor was called without any arguments so that it can be subclassed
+	if(parseTreeNode === undefined) {
+		return;
+	}
 	options = options || {};
 	// Save widget info
 	this.parseTreeNode = parseTreeNode;
@@ -46,7 +48,21 @@ Widget.prototype.initialise = function(parseTreeNode,options) {
 	this.eventListeners = {};
 	// Hashmap of the widget classes
 	if(!this.widgetClasses) {
+		// Get widget classes
 		Widget.prototype.widgetClasses = $tw.modules.applyMethods("widget");
+		// Process any subclasses
+		$tw.modules.forEachModuleOfType("widget-subclass",function(title,module) {
+			if(module.baseClass) {
+				var baseClass = Widget.prototype.widgetClasses[module.baseClass];
+				if(!baseClass) {
+					throw "Module '" + title + "' is attemping to extend a non-existent base class '" + module.baseClass + "'";
+				}
+				var subClass = module.constructor;
+				subClass.prototype = new baseClass();
+				$tw.utils.extend(subClass.prototype,module.prototype);
+				Widget.prototype.widgetClasses[module.name || module.baseClass] = subClass;
+			}
+		});
 	}
 };
 
@@ -71,9 +87,10 @@ Set the value of a context variable
 name: name of the variable
 value: value of the variable
 params: array of {name:, default:} for each parameter
+isMacroDefinition: true if the variable is set via a \define macro pragma (and hence should have variable substitution performed)
 */
-Widget.prototype.setVariable = function(name,value,params) {
-	this.variables[name] = {value: value, params: params};
+Widget.prototype.setVariable = function(name,value,params,isMacroDefinition) {
+	this.variables[name] = {value: value, params: params, isMacroDefinition: !!isMacroDefinition};
 };
 
 /*
@@ -83,52 +100,76 @@ options: see below
 Options include
 params: array of {name:, value:} for each parameter
 defaultValue: default value if the variable is not defined
+
+Returns an object with the following fields:
+
+params: array of {name:,value:} of parameters passed to wikitext variables
+text: text of variable, with parameters properly substituted
 */
-Widget.prototype.getVariable = function(name,options) {
+Widget.prototype.getVariableInfo = function(name,options) {
 	options = options || {};
 	var actualParams = options.params || [],
 		parentWidget = this.parentWidget;
 	// Check for the variable defined in the parent widget (or an ancestor in the prototype chain)
 	if(parentWidget && name in parentWidget.variables) {
 		var variable = parentWidget.variables[name],
-			value = variable.value;
+			value = variable.value,
+			params = this.resolveVariableParameters(variable.params,actualParams);
 		// Substitute any parameters specified in the definition
-		value = this.substituteVariableParameters(value,variable.params,actualParams);
-		value = this.substituteVariableReferences(value);
-		return value;
+		$tw.utils.each(params,function(param) {
+			value = $tw.utils.replaceString(value,new RegExp("\\$" + $tw.utils.escapeRegExp(param.name) + "\\$","mg"),param.value);
+		});
+		// Only substitute variable references if this variable was defined with the \define pragma
+		if(variable.isMacroDefinition) {
+			value = this.substituteVariableReferences(value);			
+		}
+		return {
+			text: value,
+			params: params
+		};
 	}
 	// If the variable doesn't exist in the parent widget then look for a macro module
-	return this.evaluateMacroModule(name,actualParams,options.defaultValue);
+	return {
+		text: this.evaluateMacroModule(name,actualParams,options.defaultValue)
+	};
 };
 
-Widget.prototype.substituteVariableParameters = function(text,formalParams,actualParams) {
-	if(formalParams) {
-		var nextAnonParameter = 0, // Next candidate anonymous parameter in macro call
-			paramInfo, paramValue;
-		// Step through each of the parameters in the macro definition
-		for(var p=0; p<formalParams.length; p++) {
-			// Check if we've got a macro call parameter with the same name
-			paramInfo = formalParams[p];
-			paramValue = undefined;
-			for(var m=0; m<actualParams.length; m++) {
-				if(actualParams[m].name === paramInfo.name) {
-					paramValue = actualParams[m].value;
-				}
+/*
+Simplified version of getVariableInfo() that just returns the text
+*/
+Widget.prototype.getVariable = function(name,options) {
+	return this.getVariableInfo(name,options).text;
+};
+
+Widget.prototype.resolveVariableParameters = function(formalParams,actualParams) {
+	formalParams = formalParams || [];
+	actualParams = actualParams || [];
+	var nextAnonParameter = 0, // Next candidate anonymous parameter in macro call
+		paramInfo, paramValue,
+		results = [];
+	// Step through each of the parameters in the macro definition
+	for(var p=0; p<formalParams.length; p++) {
+		// Check if we've got a macro call parameter with the same name
+		paramInfo = formalParams[p];
+		paramValue = undefined;
+		for(var m=0; m<actualParams.length; m++) {
+			if(actualParams[m].name === paramInfo.name) {
+				paramValue = actualParams[m].value;
 			}
-			// If not, use the next available anonymous macro call parameter
-			while(nextAnonParameter < actualParams.length && actualParams[nextAnonParameter].name) {
-				nextAnonParameter++;
-			}
-			if(paramValue === undefined && nextAnonParameter < actualParams.length) {
-				paramValue = actualParams[nextAnonParameter++].value;
-			}
-			// If we've still not got a value, use the default, if any
-			paramValue = paramValue || paramInfo["default"] || "";
-			// Replace any instances of this parameter
-			text = $tw.utils.replaceString(text,new RegExp("\\$" + $tw.utils.escapeRegExp(paramInfo.name) + "\\$","mg"),paramValue);
 		}
+		// If not, use the next available anonymous macro call parameter
+		while(nextAnonParameter < actualParams.length && actualParams[nextAnonParameter].name) {
+			nextAnonParameter++;
+		}
+		if(paramValue === undefined && nextAnonParameter < actualParams.length) {
+			paramValue = actualParams[nextAnonParameter++].value;
+		}
+		// If we've still not got a value, use the default, if any
+		paramValue = paramValue || paramInfo["default"] || "";
+		// Store the parameter name and value
+		results.push({name: paramInfo.name, value: paramValue});
 	}
-	return text;
+	return results;
 };
 
 Widget.prototype.substituteVariableReferences = function(text) {
@@ -344,9 +385,10 @@ Widget.prototype.previousSibling = function() {
 Render the children of this widget into the DOM
 */
 Widget.prototype.renderChildren = function(parent,nextSibling) {
-	$tw.utils.each(this.children,function(childWidget) {
-		childWidget.render(parent,nextSibling);
-	});
+	var children = this.children;
+	for(var i = 0; i < children.length; i++) {
+		children[i].render(parent,nextSibling);
+	};
 };
 
 /*
@@ -414,11 +456,11 @@ Widget.prototype.refreshSelf = function() {
 Refresh all the children of a widget
 */
 Widget.prototype.refreshChildren = function(changedTiddlers) {
-	var self = this,
+	var children = this.children,
 		refreshed = false;
-	$tw.utils.each(this.children,function(childWidget) {
-		refreshed = childWidget.refresh(changedTiddlers) || refreshed;
-	});
+	for (var i = 0; i < children.length; i++) {
+		refreshed = children[i].refresh(changedTiddlers) || refreshed;
+	}
 	return refreshed;
 };
 

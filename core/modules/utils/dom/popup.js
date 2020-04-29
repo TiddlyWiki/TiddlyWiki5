@@ -25,9 +25,11 @@ var Popup = function(options) {
 /*
 Trigger a popup open or closed. Parameters are in a hashmap:
 	title: title of the tiddler where the popup details are stored
-	domNode: dom node to which the popup will be positioned
+	domNode: dom node to which the popup will be positioned (one of domNode or domNodeRect is required)
+	domNodeRect: rectangle to which the popup will be positioned
 	wiki: wiki
 	force: if specified, forces the popup state to true or false (instead of toggling it)
+	floating: if true, skips registering the popup, meaning that it will need manually clearing
 */
 Popup.prototype.triggerPopup = function(options) {
 	// Check if this popup is already active
@@ -112,18 +114,35 @@ Popup.prototype.show = function(options) {
 	var info = this.popupInfo(options.domNode);
 	// Cancel any higher level popups
 	this.cancel(info.popupLevel);
+
 	// Store the popup details if not already there
-	if(this.findPopup(options.title) === -1) {
+	if(!options.floating && this.findPopup(options.title) === -1) {
 		this.popups.push({
 			title: options.title,
 			wiki: options.wiki,
-			domNode: options.domNode
+			domNode: options.domNode,
+			noStateReference: options.noStateReference
 		});
 	}
 	// Set the state tiddler
-	options.wiki.setTextReference(options.title,
-			"(" + options.domNode.offsetLeft + "," + options.domNode.offsetTop + "," + 
-				options.domNode.offsetWidth + "," + options.domNode.offsetHeight + ")");
+	var rect;
+	if(options.domNodeRect) {
+		rect = options.domNodeRect;
+	} else {
+		rect = {
+			left: options.domNode.offsetLeft,
+			top: options.domNode.offsetTop,
+			width: options.domNode.offsetWidth,
+			height: options.domNode.offsetHeight
+		};
+	}
+	var popupRect = "(" + rect.left + "," + rect.top + "," + 
+				rect.width + "," + rect.height + ")";
+	if(options.noStateReference) {
+		options.wiki.setText(options.title,"text",undefined,popupRect);
+	} else {
+		options.wiki.setTextReference(options.title,popupRect);
+	}
 	// Add the click handler if we have any popups
 	if(this.popups.length > 0) {
 		this.rootElement.addEventListener("click",this,true);		
@@ -140,7 +159,11 @@ Popup.prototype.cancel = function(level) {
 	for(var t=level; t<numPopups; t++) {
 		var popup = this.popups.pop();
 		if(popup.title) {
-			popup.wiki.deleteTiddler(popup.title);
+			if(popup.noStateReference) {
+				popup.wiki.deleteTiddler(popup.title);
+			} else {
+				popup.wiki.deleteTiddler($tw.utils.parseTextReference(popup.title).title);
+        		}
 		}
 	}
 	if(this.popups.length === 0) {

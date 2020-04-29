@@ -1,0 +1,122 @@
+created: 20180927082601825
+modified: 20180927083036494
+tags: $:/tags/RawMarkupWikified/TopBody
+title: $:/SplashScreen
+type: text/vnd.tiddlywiki
+
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+\rules only filteredtranscludeinline transcludeinline macrocallinline
+<div class="tc-remove-when-wiki-loaded">
+<style scoped>
+
+.tc-splash-text {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 16px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+	margin: 20px auto 0;
+	width: 200px;
+	text-align: center;
+	color: <<colour foreground>>;
+	fill: <<colour foreground>>;
+}
+
+.tc-splash-text img {
+	width: 150px;
+	<<box-shadow "2px 2px 10px rgba(0, 0, 0, 0.5)">>
+}
+
+html body.tc-body {
+	background: <<colour page-background>>;
+}
+
+/*
+Spinner from https://github.com/tobiasahlin/SpinKit/ by Tobias Ahlin
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Tobias Ahlin
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+.tc-splash-spinner {
+	margin: 20px auto 0;
+	width: 70px;
+	text-align: center;
+}
+
+.tc-splash-spinner > div {
+	width: 18px;
+	height: 18px;
+	border-radius: 100%;
+	display: inline-block;
+	-webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+	animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+	background-color: #f88;
+}
+
+.tc-splash-spinner .tc-splash-bounce-1 {
+	-webkit-animation-delay: -0.32s;
+	animation-delay: -0.32s;
+	background-color: #8f8;
+}
+
+.tc-splash-spinner .tc-splash-bounce-2 {
+	-webkit-animation-delay: -0.16s;
+	animation-delay: -0.16s;
+	background-color: #88f;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+	0%, 80%, 100% { -webkit-transform: scale(0) }
+	40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+	0%, 80%, 100% { 
+	-webkit-transform: scale(0);
+	transform: scale(0);
+	} 40% { 
+	-webkit-transform: scale(1.0);
+	transform: scale(1.0);
+	}
+}
+</style>
+
+<div class="tc-splash-spinner">
+  <div class="tc-splash-bounce-1"></div>
+  <div class="tc-splash-bounce-2"></div>
+  <div class="tc-splash-bounce-3"></div>
+</div>
+
+<div class="tc-splash-text">
+Please wait while {{$:/SiteTitle}} is loading
+</div>
+
+<!-- Demonstrating how to embed a bitmap graphic --> 
+<div class="tc-splash-text">
+<img src="data:image/jpeg;base64,{{New Release Banner||$:/core/templates/plain-text-tiddler}}" width="100"/>
+</div>
+
+<!-- Demonstrating how to embed a wikitext SVG graphic --> 
+<div class="tc-splash-text">
+{{$:/core/icon||$:/core/templates/plain-text-tiddler}}
+</div>
+
+</div>

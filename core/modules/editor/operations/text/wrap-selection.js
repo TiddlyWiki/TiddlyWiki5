@@ -16,14 +16,12 @@ exports["wrap-selection"] = function(event,operation) {
 	if(operation.selStart === operation.selEnd) {
 		// No selection; check if we're within the prefix/suffix
 		if(operation.text.substring(operation.selStart - event.paramObject.prefix.length,operation.selStart + event.paramObject.suffix.length) === event.paramObject.prefix + event.paramObject.suffix) {
-			// Remove the prefix and suffix unless they comprise the entire text
-			if(operation.selStart > event.paramObject.prefix.length || (operation.selEnd + event.paramObject.suffix.length) < operation.text.length ) {
-				operation.cutStart = operation.selStart - event.paramObject.prefix.length;
-				operation.cutEnd = operation.selEnd + event.paramObject.suffix.length;
-				operation.replacement = "";
-				operation.newSelStart = operation.cutStart;
-				operation.newSelEnd = operation.newSelStart;
-			}
+			// Remove the prefix and suffix
+			operation.cutStart = operation.selStart - event.paramObject.prefix.length;
+			operation.cutEnd = operation.selEnd + event.paramObject.suffix.length;
+			operation.replacement = "";
+			operation.newSelStart = operation.cutStart;
+			operation.newSelEnd = operation.newSelStart;
 		} else {
 			// Wrap the cursor instead
 			operation.cutStart = operation.selStart;

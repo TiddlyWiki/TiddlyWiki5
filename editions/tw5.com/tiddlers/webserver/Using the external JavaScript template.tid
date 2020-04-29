@@ -1,0 +1,19 @@
+created: 20180905075846391
+modified: 20180905080955513
+tags: [[WebServer Guides]]
+title: Using the external JavaScript template
+type: text/vnd.tiddlywiki
+
+Setting the [[root-tiddler|WebServer Parameter: root-tiddler]] parameter to `$:/core/save/all-external-js` switches to a special template that externalises TiddlyWiki's core JavaScript into a separate file. For example:
+
+```
+tiddlywiki editions/tw5.com-server/ --listen host=0.0.0.0 "root-tiddler=$:/core/save/all-external-js"
+```
+
+!! Background
+
+TiddlyWiki in the single file configuration ordinarily packs everything into a single file: your data, and the JavaScript, CSS and HTML comprising TiddlyWiki itself. This lack of dependencies is usually very convenient: it means that it is impossible for the parts of a TiddlyWiki to become separated, and enormously improves the chances of it still functioning in the future.
+
+However, there is some inefficiency in this arrangement because the core code is repeatedly loaded and saved every time the content of the wiki is saved. This inefficiency is partially ameliorated when working in the client server configuration because once the wiki is loaded by the browser the synchronisation process only transmits individual tiddlers back and forth to the server.
+
+The remaining inefficiency when working in the client server configuration is that the single page wiki that is initially loaded will contain a copy of the entire core code of TiddlyWiki, making it impossible for the browser to cache it.

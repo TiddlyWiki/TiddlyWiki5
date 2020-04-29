@@ -43,7 +43,7 @@ For example:
 		"tiddlywiki/filesystem"
 	],
 	"includeWikis": [
-		"../tw5.com"
+		{"path": "../tw5.com", "read-only": true}
 	],
 	"build": {
 		"index": [

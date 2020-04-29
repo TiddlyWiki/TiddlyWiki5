@@ -19,7 +19,12 @@ Export our filter functions
 exports.decodeuricomponent = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		results.push(decodeURIComponent(title));
+		var value = title;
+		try {
+			value = decodeURIComponent(title);
+		} catch(e) {
+		}
+		results.push(value);
 	});
 	return results;
 };
@@ -35,7 +40,12 @@ exports.encodeuricomponent = function(source,operator,options) {
 exports.decodeuri = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		results.push(decodeURI(title));
+		var value = title;
+		try {
+			value = decodeURI(title);
+		} catch(e) {
+		}
+		results.push(value);
 	});
 	return results;
 };
@@ -72,10 +82,27 @@ exports.stringify = function(source,operator,options) {
 	return results;
 };
 
+exports.jsonstringify = function(source,operator,options) {
+	var results = [];
+	source(function(tiddler,title) {
+		results.push($tw.utils.jsonStringify(title));
+	});
+	return results;
+};
+
 exports.escaperegexp = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
 		results.push($tw.utils.escapeRegExp(title));
+	});
+	return results;
+};
+
+exports.escapecss = function(source,operator,options) {
+	var results = [];
+	source(function(tiddler,title) {
+		// escape any character with a special meaning in CSS using CSS.escape()
+		results.push(CSS.escape(title));
 	});
 	return results;
 };

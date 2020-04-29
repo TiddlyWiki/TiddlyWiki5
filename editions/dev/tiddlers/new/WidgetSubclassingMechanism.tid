@@ -1,0 +1,54 @@
+created: 20190317121937335
+modified: 20190317121937335
+title: WidgetSubclassingMechanism
+
+!! Introduction
+
+The widget subclassing mechanism allows widgets to be subclassed with additional methods and properties. The subclassed widgets can either overwrite the existing definition of the baseclass widget, or it can be made available as a new widget
+
+Widget subclasses are defined in modules of module-type `widget-subclass`. They should export the following properties:
+
+* ''baseClass'': the name of the widget class being subclassed
+* ''name'': (optional) the name to be used for the subclassed widget (defaults to overwriting the baseclass widget)
+* ''constructor'': constructor function for creating the widget object
+* ''prototype'': object whose properties are added to the subclass
+
+!! Example
+
+Here is an example of a subclass of the checkbox widget that adds logging to the event handler:
+
+```
+/*\
+title: $:/my-customised-checkbox-widget.js
+type: application/javascript
+module-type: widget-subclass
+
+Widget base class
+
+\*/
+(function(){
+
+/*jslint node: true, browser: true */
+/*global $tw: false */
+"use strict";
+
+exports.baseClass = "checkbox"; // Extend the <$checkbox> widget
+
+// Specify a different name to make the subclass available as a new widget instead of overwriting the baseclass:
+// exports.name = "my-enhanced-checkbox";
+
+exports.constructor = function(parseTreeNode,options) {
+	this.initialise(parseTreeNode,options);
+};
+
+exports.prototype = {};
+
+exports.prototype.handleChangeEvent = function(event) {
+	// Call the base class handleChangeEvent function
+	Object.getPrototypeOf(Object.getPrototypeOf(this)).handleChangeEvent.call(this,event);
+	// Print our message
+	console.log("Checkbox status:",this.inputDomNode.checked);
+};
+
+})();
+```

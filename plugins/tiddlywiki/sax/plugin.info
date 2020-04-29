@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/sax",
+	"name": "sax js",
+	"description": "sax.js library",
+	"author": "Isaac Z. Schlueter",
+	"list": "readme license"
+}

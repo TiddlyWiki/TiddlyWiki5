@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/sax/readme
+
+This plugin packages [[sax.js|https://github.com/isaacs/sax-js]] for use by other plugins. It does not provide any end-user visible features.

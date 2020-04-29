@@ -3,7 +3,7 @@ tags: $:/tags/HelpPanel
 caption: Videos
 
 \define show-video-inner(embed)
-<iframe width="280" height="157" src="""http://www.youtube.com/embed/$embed$?autoplay=0&showinfo=0&theme=light&rel=0&modestbranding=1&autohide=1""" frameborder="0" allowfullscreen></iframe>
+<iframe width="280" height="157" src="""https://www.youtube.com/embed/$embed$?autoplay=0&showinfo=0&theme=light&rel=0&modestbranding=1&autohide=1""" frameborder="0" allowfullscreen></iframe>
 \end
 
 \define show-video(title)

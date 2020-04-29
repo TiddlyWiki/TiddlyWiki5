@@ -5,9 +5,7 @@ title: $:/core/ui/PluginInfo/Default/contents
 <ul>
 <$list filter="[all[current]plugintiddlers[]sort[title]]" emptyMessage=<<lingo Empty/Hint>>>
 <li>
-<$link to={{!!title}}>
-<$view field="title"/>
-</$link>
+<$link />
 </li>
 </$list>
 </ul>

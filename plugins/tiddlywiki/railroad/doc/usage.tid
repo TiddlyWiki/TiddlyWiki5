@@ -1,7 +1,6 @@
 created: 20150102163222184
 modified: 20150119231005000
 title: $:/plugins/tiddlywiki/railroad/usage
-type: text/vnd.tiddlywiki
 
 The content of the `<$railroad>` widget is ignored.
 

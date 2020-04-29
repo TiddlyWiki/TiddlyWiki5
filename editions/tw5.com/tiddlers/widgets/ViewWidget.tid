@@ -1,6 +1,6 @@
 caption: view
 created: 20131024141900000
-modified: 20160623152830060
+modified: 20180730201626985
 tags: Widgets
 title: ViewWidget
 type: text/vnd.tiddlywiki
@@ -18,25 +18,30 @@ The content of the `<$view>` widget is displayed if the field or property is mis
 |field |The name of the field to view (defaults to "text") |
 |index |The name of the index to view |
 |format |The format for displaying the field (see below) |
-|template |Optional template string used with certain formats such as dates |
+|template |Optional template string used when the `format` attribute is set to "date" |
 |subtiddler |Optional SubTiddler title when the target tiddler is a [[plugin|Plugins]] (see below) |
+|mode |<<.from-version "5.1.15">> Optional transclusion parsing mode for wikified formats. May be "inline" or "block" (the default) |
 
 !! Formats
 
 The following formats can be specified in the `format` attribute:
 
 |!Format |!Description |
-|''text'' |Plain text |
+|''text'' |Plain text (default) |
 |''htmlencoded'' |The field is displayed with HTML encoding |
 |''urlencoded'' |The field is displayed with URL encoding |
 |''doubleurlencoded'' |The field is displayed with double URL encoding |
-|''htmlwikified'' |The field is wikified and the resulting HTML returned as plain text (ie HTML elements will appear in plain text) |
-|''plainwikified'' |The field is wikified and the text content of the resulting HTML returned as plain text (ie HTML elements will be removed) |
-|''htmlencodedplainwikified'' |The field is wikified and the text content of the resulting HTML returned as HTML encoded plain text (ie HTML elements will be removed) |
+|''htmlwikified'' |The field is wikified according to the mode attribute and the resulting HTML returned as plain text (ie HTML elements will appear in plain text) |
+|''plainwikified'' |The field is wikified according to the mode attribute and the text content of the resulting HTML returned as plain text (ie HTML elements will be removed) |
+|''htmlencodedplainwikified'' |The field is wikified according to the mode attribute and the text content of the resulting HTML returned as HTML encoded plain text (ie HTML elements will be removed) |
 |''date'' |The field is interpreted as a UTC date and displayed according to the DateFormat specified in the `template` attribute |
 |''relativedate'' |The field is interpreted as a UTC date and displayed as the interval from the present instant |
 |''stripcomments'' |The field is interpreted as JavaScript source code and any lines beginning `\\#` are stripped |
 |''jsencoded'' |The field is displayed as a JavaScript encoded string |
+
+!! "WikiText format"
+
+To display the field content as regular WikiText, for example with working links, use the [[TranscludeWidget]] instead. 
 
 ! SubTiddler Access
 

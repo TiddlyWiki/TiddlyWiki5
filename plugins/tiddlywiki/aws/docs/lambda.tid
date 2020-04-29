@@ -1,0 +1,57 @@
+title: $:/plugins/tiddlywiki/aws/lambda
+
+! Template
+
+The template [[$:/plugins/tiddlywiki/aws/lambdas/main]] transcludes everything required to render a TiddlyWiki as an AWS Lambda function.
+
+The Lambda is build with this command:
+
+```
+tiddlywiki editions/aws --rendertiddler $:/plugins/tiddlywiki/aws/lambdas/main index.js text/plain
+```
+
+Or:
+
+```
+tiddlywiki editions/aws --build lambda
+```
+
+! Execution
+
+The Lambda boot code looks for an array of tiddlers to load in `event.tiddlers`, and an array of commands to execute in `event.commands`. For example:
+
+```
+{
+	"commands": [
+		"--aws","s3-rendertiddler","HelloThere","eu-west-2","my-bucket-name","rendered.html"
+	],
+	"tiddlers": [
+		{
+			"title": "HelloThere",
+			"text": "Hello from {{Platform}}."
+		},
+		{
+			"title": "Platform",
+			"text": "TiddlyWiki"
+		}
+	]
+}
+
+```
+
+The event data can optionally be compressed by passing a JSON object with a single property `compressed` that contains a base64 encoded GZIP compressed representation of the JSON payload data. For example:
+
+```
+var strPayload = JSON.stringify(payload);
+require("zlib").gzip(strPayload,function(err,buff) {
+	var compressedPayload = {compressed: new Buffer(buff).toString("base64")};
+	// Invoke lambda with compressed payload
+	...
+});
+```
+
+! Return data
+
+If the Lambda function successfully executes it returns an object with the following fields:
+
+* ''lambda-result'': An array of `{bucketname,key}` pairs for each file written to S3 within the lambda function

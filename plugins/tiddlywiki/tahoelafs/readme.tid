@@ -1,5 +1,4 @@
 title: $:/plugins/tiddlywiki/tahoelafs/readme
-type: text/vnd.tiddlywiki
 
 This plugin provides a ''saver'' module for saving changes under the [[Tahoe Least Authority File System|https://tahoe-lafs.org/]].
 

@@ -1,0 +1,12 @@
+created: 20180111122953142
+modified: 20181113084151268
+tags: OfficialPlugins
+title: Dynaview Plugin
+type: text/vnd.tiddlywiki
+
+The Dynaview Plugin makes it possible to build user interfaces that dynamically respond to changes in the browser viewport via scrolling or zooming:
+
+* CSS classes that allow rendering to be deferred until the output is scrolled into view
+* CSS classes that allow the opacity of DOM elements to vary according to the current zoom level
+
+See the demo at [ext[https://tiddlywiki.com/plugins/tiddlywiki/dynaview|plugins/tiddlywiki/dynaview]]

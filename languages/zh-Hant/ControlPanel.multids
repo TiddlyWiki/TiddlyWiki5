@@ -4,24 +4,27 @@ Advanced/Caption: 進階
 Advanced/Hint: 關於此 TiddlyWiki 的內部資訊
 Appearance/Caption: 視覺外觀
 Appearance/Hint: 自訂您的 TiddlyWiki 外觀。
-Basics/AnimDuration/Prompt: 動畫持續時間：
+Basics/AnimDuration/Prompt: 動畫持續時間
+Basics/AutoFocus/Prompt: 編輯條目時的預設自動停留欄位
 Basics/Caption: 基本
 Basics/DefaultTiddlers/BottomHint: 標題含空白時請使用 &#91;&#91;雙中括弧&#93;&#93;，或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留開啟中的條目順序</$button>
-Basics/DefaultTiddlers/Prompt: 首頁：
-Basics/DefaultTiddlers/TopHint: 預設開啟的條目：
+Basics/DefaultTiddlers/Prompt: 首頁
+Basics/DefaultTiddlers/TopHint: 預設開啟的條目
 Basics/Language/Prompt: 您好！當前的語言：
 Basics/NewJournal/Tags/Prompt: 新日誌條目的標籤
 Basics/NewJournal/Text/Prompt: 新日誌條目的內容
 Basics/NewJournal/Title/Prompt: 新日誌條目的名稱
-Basics/OverriddenShadowTiddlers/Prompt: 被覆寫的預設條目數量：
-Basics/ShadowTiddlers/Prompt: 預設條目數量：
-Basics/Subtitle/Prompt: 副標題：
-Basics/SystemTiddlers/Prompt: 系統條目數量：
-Basics/Tags/Prompt: 標籤數量：
-Basics/Tiddlers/Prompt: 一般條目數量：
-Basics/Title/Prompt: 標題：
-Basics/Username/Prompt: 編輯者署名：
-Basics/Version/Prompt: ~TiddlyWiki 版本：
+Basics/NewTiddler/Tags/Prompt: 新條目的標籤
+Basics/NewTiddler/Title/Prompt: 新條目的名稱
+Basics/OverriddenShadowTiddlers/Prompt: 被覆寫的預設條目數量
+Basics/ShadowTiddlers/Prompt: 預設條目數量
+Basics/Subtitle/Prompt: 副標題
+Basics/SystemTiddlers/Prompt: 系統條目數量
+Basics/Tags/Prompt: 標籤數量
+Basics/Tiddlers/Prompt: 一般條目數量
+Basics/Title/Prompt: 標題
+Basics/Username/Prompt: 編輯者署名
+Basics/Version/Prompt: ~TiddlyWiki 版本
 EditorTypes/Caption: 編輯器類型
 EditorTypes/Editor/Caption: 編輯器
 EditorTypes/Hint: 這些條目決定使用哪個編輯器來編輯特定條目類型。
@@ -46,6 +49,8 @@ LoadedModules/Hint: 這些是當前已載入的模組之源碼條目。斜體的
 Palette/Caption: 調色盤
 Palette/Editor/Clone/Caption: 複製
 Palette/Editor/Clone/Prompt: 建議您修改前先複製此預設調色盤
+Palette/Editor/Delete/Hint: 從當前調色盤中刪除此項
+Palette/Editor/Names/External/Show: 顯示不屬於當前調色盤的顏色名稱
 Palette/Editor/Prompt/Modified: 此預設調色盤已被修改過
 Palette/Editor/Prompt: 編輯
 Palette/Editor/Reset/Caption: 重置
@@ -55,10 +60,12 @@ Palette/ShowEditor/Caption: 顯示編輯器
 Plugins/Add/Hint: 從官方插件庫安裝插件
 Plugins/Add/Caption: 獲取更多插件
 Plugins/AlreadyInstalled/Hint: 此插件已經安裝版本 <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: 還需要：
 Plugins/Caption: 插件
 Plugins/Disable/Caption: 停用
 Plugins/Disable/Hint: 重新載入頁面時停用此插件
 Plugins/Disabled/Status: (已停用)
+Plugins/Downgrade/Caption: 降級
 Plugins/Empty/Hint: 無
 Plugins/Enable/Caption: 啟用
 Plugins/Enable/Hint: 重新載入頁面時啟用此插件
@@ -71,13 +78,19 @@ Plugins/NoInformation/Hint: 未提供資訊
 Plugins/NotInstalled/Hint: 尚未安裝此插件
 Plugins/OpenPluginLibrary: 開啟插件程式庫
 Plugins/ClosePluginLibrary: 關閉插件程式庫
+Plugins/PluginWillRequireReload: （需要重新載入）
 Plugins/Plugins/Caption: 插件
 Plugins/Plugins/Hint: 插件
 Plugins/Reinstall/Caption: 重新安裝
 Plugins/Themes/Caption: 佈景主題
 Plugins/Themes/Hint: 佈景主題插件
+Plugins/Update/Caption: 更新
+Plugins/Updates/Caption: 更新
+Plugins/Updates/Hint: 已安裝插件的可用更新
+Plugins/Updates/UpdateAll/Caption: 更新 <<update-count>> 個插件
+Plugins/SubPluginPrompt: 提供 <<count>> 個可用的附加插件
 Parsing/Caption: 解析
-Parsing/Hint: 在此您可以全域停用或啟用維基解析規則。要使更改生效，請儲存並重新載入您的維基。停用某些解析規則，會妨礙 <$text text="TiddlyWiki"/>  正常運作。可使用[[安全模式|http://tiddlywiki.com/#SafeMode]]恢復正常操作。
+Parsing/Hint: 在此您可以全域停用或啟用維基解析規則。要使更改生效，請儲存並重新載入您的維基。停用某些解析規則，會妨礙 <$text text="TiddlyWiki"/>  正常運作。可使用[[安全模式|https://tiddlywiki.com/#SafeMode]]恢復正常操作。
 Parsing/Block/Caption: 區塊解析規則
 Parsing/Inline/Caption: 行內解析規則
 Parsing/Pragma/Caption: 編譯指示解析規則
@@ -88,7 +101,21 @@ Saving/DownloadSaver/Caption: 下載儲存模組
 Saving/DownloadSaver/Hint: 這些設定適用於相容 HTML5 的下載儲存模組
 Saving/General/Caption: 通用
 Saving/General/Hint: 這些設定適用於所有已載入的儲存模組
-Saving/Hint: 用於通過儲存模組將整個 TiddlyWiki 保存為單個檔案的設定
+Saving/Hint: 用於通過儲存模組將整個 TiddlyWiki 儲存為單個檔案的設定
+Saving/GitService/Branch: 用於儲存的目標分支
+Saving/GitService/CommitMessage: 由 TiddlyWiki 儲存
+Saving/GitService/Description: 這些設定僅用於儲存至 <<service-name>>
+Saving/GitService/Filename: 目標檔案的檔案名稱 (例如，`index.html`)
+Saving/GitService/Path: 目標檔案的路徑 (例如，`/wiki/`)
+Saving/GitService/Repo: 目標存儲庫 (例如，`Jermolene/TiddlyWiki5`)
+Saving/GitService/ServerURL: 伺服器 API 網址
+Saving/GitService/UserName: 使用者名稱
+Saving/GitService/GitHub/Caption: ~GitHub 儲存模組
+Saving/GitService/GitHub/Password: 密碼、OAUTH 權杖，或個人存取權杖 (詳見 [[GitHub 說明頁面|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]])
+Saving/GitService/GitLab/Caption: ~GitLab 儲存模組
+Saving/GitService/GitLab/Password: 個人存取權杖的 API (詳見 [[GitLab 說明頁面|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]])
+Saving/GitService/Gitea/Caption: Gitea 儲存模組
+Saving/GitService/Gitea/Password: 個人存取權杖的 API (通過 Gitea 的 Web 介面：`設定 | 應用程式 | 產生新的權杖`)
 Saving/TiddlySpot/Advanced/Heading: 進階設定
 Saving/TiddlySpot/BackupDir: 備份資料夾
 Saving/TiddlySpot/Backups: 備份
@@ -111,6 +138,8 @@ Settings/CamelCase/Description: 啟用自動駝峰式鏈接
 Settings/Caption: 設定
 Settings/DefaultSidebarTab/Caption: 預設側邊欄頁籤
 Settings/DefaultSidebarTab/Hint: 指定預設顯示的側邊欄頁籤
+Settings/DefaultMoreSidebarTab/Caption: 更多側邊欄的預設頁籤
+Settings/DefaultMoreSidebarTab/Hint: 指定預設顯示的更多側欄頁籤
 Settings/EditorToolbar/Caption: 編輯器工具列
 Settings/EditorToolbar/Hint: 啟用或停用編輯器工具列︰
 Settings/EditorToolbar/Description: 顯示編輯器工具列
@@ -138,6 +167,10 @@ Settings/NavigationHistory/Caption: 歷史記錄導覽
 Settings/NavigationHistory/Hint: 當導覽到條目時，更新瀏覽器歷史記錄：
 Settings/NavigationHistory/No/Description: 不更新歷史記錄
 Settings/NavigationHistory/Yes/Description: 更新歷史記錄
+Settings/NavigationPermalinkviewMode/Caption: 引用連結/固定連結 模式
+Settings/NavigationPermalinkviewMode/Hint: 選擇 引用連結/固定連結 的處理方式：
+Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: 將 引用連結/固定連結 網址複製到剪貼簿
+Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: 以 引用連結/固定連結 更新網址列
 Settings/PerformanceInstrumentation/Caption: 效能檢測
 Settings/PerformanceInstrumentation/Hint: 在瀏覽器的開發人員主控台，顯示效能統計資訊。需要重新載入才能生效。
 Settings/PerformanceInstrumentation/Description: 啟用效能檢測
@@ -156,6 +189,10 @@ Settings/TitleLinks/No/Description: 不顯示條目標題為鏈接
 Settings/TitleLinks/Yes/Description: 顯示條目標題為鏈接
 StoryView/Caption: 檢視模式
 StoryView/Prompt: 當前的檢視模式：
+Stylesheets/Caption: 樣式表
+Stylesheets/Expand/Caption: 全部展開
+Stylesheets/Hint: 這是當前標籤為 <<tag "$:/tags/Stylesheet">> 的樣式表條目呈現的 CSS
+Stylesheets/Restore/Caption: 復原
 Theme/Caption: 佈景主題
 Theme/Prompt: 當前的佈景主題：
 TiddlerFields/Caption: 條目欄位

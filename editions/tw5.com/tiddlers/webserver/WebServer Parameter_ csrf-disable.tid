@@ -1,0 +1,12 @@
+caption: csrf-disable
+created: 20180630180340448
+modified: 20190419171355307
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: csrf-disable
+type: text/vnd.tiddlywiki
+
+The [[web server configuration parameter|WebServer Parameters]] ''csrf-disable'' causes the usual [[cross-site request forgery|https://en.wikipedia.org/wiki/Cross-site_request_forgery]] checks to be disabled. This might be necessary in unusual or experimental configurations.
+
+Setting ''csrf-disable'' to `yes` disables the CSRF checks; `no` (or any other value) enables them.
+
+The only currently implemented check is the use of a [[custom header|https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)_Prevention_Cheat_Sheet#Protecting_REST_Services:_Use_of_Custom_Request_Headers]] called `x-requested-with` that must contain the string `TiddlyWiki` in order for write requests to succeed.

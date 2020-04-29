@@ -1,6 +1,10 @@
+caption: Noteself
 created: 20141122093837330
-modified: 20170103222756776
-tags: Resources
+delivery: Web Service
+description: Free online service that you can also host yourself
+method: sync
+modified: 20171113132811794
+tags: Saving Resources Android Chrome Firefox InternetExplorer iOS Linux Mac Opera PHP Safari Windows
 title: "Noteself" by Danielo Rodríguez
 type: text/vnd.tiddlywiki
 url: https://noteself.github.io/
@@ -9,7 +13,7 @@ url: https://noteself.github.io/
 You want cloud? Fine! You don't? Fine too! It's all yours, It's your decision!
 Why not be a bit selfish?
 
-{{!!url}}
+https://noteself.github.io/
 
 <<<
 ~NoteSelf is the perfect place to store your ideas, notes, thoughts, tips, tricks, recipes... 

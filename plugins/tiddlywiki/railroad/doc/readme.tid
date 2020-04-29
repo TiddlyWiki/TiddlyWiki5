@@ -1,7 +1,6 @@
 created: 20150102163222184
 modified: 20150119231005000
 title: $:/plugins/tiddlywiki/railroad/readme
-type: text/vnd.tiddlywiki
 
 This plugin provides a `<$railroad>` widget for generating railroad diagrams as SVG images.
 

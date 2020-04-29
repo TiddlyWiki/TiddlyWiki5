@@ -25,7 +25,7 @@ var PAGE_TEMPLATE_TITLE = "$:/core/ui/PageTemplate";
 
 // Time (in ms) that we defer refreshing changes to draft tiddlers
 var DRAFT_TIDDLER_TIMEOUT_TITLE = "$:/config/Drafts/TypingTimeout";
-var DRAFT_TIDDLER_TIMEOUT = 400;
+var THROTTLE_REFRESH_TIMEOUT = 400;
 
 exports.startup = function() {
 	// Set up the title
@@ -57,23 +57,33 @@ exports.startup = function() {
 		$tw.utils.addClass($tw.pageContainer,"tc-page-container-wrapper");
 		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
 		$tw.pageWidgetNode.render($tw.pageContainer,null);
+   		$tw.hooks.invokeHook("th-page-refreshed");
 	})();
+	// Remove any splash screen elements
+	var removeList = document.querySelectorAll(".tc-remove-when-wiki-loaded");
+	$tw.utils.each(removeList,function(removeItem) {
+		if(removeItem.parentNode) {
+			removeItem.parentNode.removeChild(removeItem);
+		}
+	});
 	// Prepare refresh mechanism
 	var deferredChanges = Object.create(null),
 		timerId;
 	function refresh() {
 		// Process the refresh
+		$tw.hooks.invokeHook("th-page-refreshing");
 		$tw.pageWidgetNode.refresh(deferredChanges);
 		deferredChanges = Object.create(null);
+		$tw.hooks.invokeHook("th-page-refreshed");
 	}
 	// Add the change event handler
 	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
-		// Check if only drafts have changed
-		var onlyDraftsHaveChanged = true;
+		// Check if only tiddlers that are throttled have changed
+		var onlyThrottledTiddlersHaveChanged = true;
 		for(var title in changes) {
 			var tiddler = $tw.wiki.getTiddler(title);
-			if(!tiddler || !tiddler.hasField("draft.of")) {
-				onlyDraftsHaveChanged = false;
+			if(!tiddler || !(tiddler.hasField("draft.of") || tiddler.hasField("throttle.refresh"))) {
+				onlyThrottledTiddlersHaveChanged = false;
 			}
 		}
 		// Defer the change if only drafts have changed
@@ -81,10 +91,10 @@ exports.startup = function() {
 			clearTimeout(timerId);
 		}
 		timerId = null;
-		if(onlyDraftsHaveChanged) {
+		if(onlyThrottledTiddlersHaveChanged) {
 			var timeout = parseInt($tw.wiki.getTiddlerText(DRAFT_TIDDLER_TIMEOUT_TITLE,""),10);
 			if(isNaN(timeout)) {
-				timeout = DRAFT_TIDDLER_TIMEOUT;
+				timeout = THROTTLE_REFRESH_TIMEOUT;
 			}
 			timerId = setTimeout(refresh,timeout);
 			$tw.utils.extend(deferredChanges,changes);

@@ -52,7 +52,7 @@ Palette/HideEditor/Caption: skjul editor
 Palette/Prompt: Aktuel palette:
 Palette/ShowEditor/Caption: vis editor
 Parsing/Block/Caption: Blok Parse regler
-Parsing/Hint: Her kan du globalt slå individuelle wiki parser regler fra. Vær påpasselig, da det at slå nogle parser regler fra, kan hindre ~TiddlyWiki i at fungere korrekt (du kan genskabe  normal funktion med [[safe mode|http://tiddlywiki.com/#SafeMode]] )
+Parsing/Hint: Her kan du globalt slå individuelle wiki parser regler fra. Vær påpasselig, da det at slå nogle parser regler fra, kan hindre ~TiddlyWiki i at fungere korrekt (du kan genskabe  normal funktion med [[safe mode|https://tiddlywiki.com/#SafeMode]] )
 Parsing/Inline/Caption: Inline Parse regler
 Parsing/Pragma/Caption: Pragma Parse regler
 Plugins/Add/Caption: Få flere udvidelser

@@ -1,6 +1,7 @@
 {
 	"description": "Chinese (Simplified) edition",
 	"plugins": [
+		"tiddlywiki/internals"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

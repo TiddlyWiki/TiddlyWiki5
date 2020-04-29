@@ -1,0 +1,16 @@
+title: $:/ContributionBanner
+tags: $:/tags/EditTemplate
+list-after: $:/core/ui/EditTemplate/title
+
+\define base-github()
+https://github.com/Jermolene/TiddlyWiki5/edit/master/editions/dev/tiddlers/
+\end
+
+<$set name="draft-of" value={{{ [<currentTiddler>get[draft.of]] }}}>
+<$list filter="[[$:/config/OriginalTiddlerPaths]getindex<draft-of>]" variable="target" >
+<div class="tc-improvement-banner">
+{{$:/core/images/star-filled}} Can you help us improve this documentation? [ext[Find out how|https://tiddlywiki.com/#Improving%20TiddlyWiki%20Documentation]] to
+<a href={{{ [<target>addprefix<base-github>] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">edit this tiddler on ~GitHub</a>
+</div>
+</$list>
+</$set>

@@ -1,0 +1,4 @@
+title: $:/language/codemirror/
+
+autoCloseTags/hint: Auto-close tags
+autoCloseTags/info: Whether or not to automatically close tags

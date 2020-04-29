@@ -56,32 +56,39 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 RevealWidget.prototype.positionPopup = function(domNode) {
 	domNode.style.position = "absolute";
 	domNode.style.zIndex = "1000";
+	var left,top;
 	switch(this.position) {
 		case "left":
-			domNode.style.left = (this.popup.left - domNode.offsetWidth) + "px";
-			domNode.style.top = this.popup.top + "px";
+			left = this.popup.left - domNode.offsetWidth;
+			top = this.popup.top;
 			break;
 		case "above":
-			domNode.style.left = this.popup.left + "px";
-			domNode.style.top = (this.popup.top - domNode.offsetHeight) + "px";
+			left = this.popup.left;
+			top = this.popup.top - domNode.offsetHeight;
 			break;
 		case "aboveright":
-			domNode.style.left = (this.popup.left + this.popup.width) + "px";
-			domNode.style.top = (this.popup.top + this.popup.height - domNode.offsetHeight) + "px";
+			left = this.popup.left + this.popup.width;
+			top = this.popup.top + this.popup.height - domNode.offsetHeight;
 			break;
 		case "right":
-			domNode.style.left = (this.popup.left + this.popup.width) + "px";
-			domNode.style.top = this.popup.top + "px";
+			left = this.popup.left + this.popup.width;
+			top = this.popup.top;
 			break;
 		case "belowleft":
-			domNode.style.left = (this.popup.left + this.popup.width - domNode.offsetWidth) + "px";
-			domNode.style.top = (this.popup.top + this.popup.height) + "px";
+			left = this.popup.left + this.popup.width - domNode.offsetWidth;
+			top = this.popup.top + this.popup.height;
 			break;
 		default: // Below
-			domNode.style.left = this.popup.left + "px";
-			domNode.style.top = (this.popup.top + this.popup.height) + "px";
+			left = this.popup.left;
+			top = this.popup.top + this.popup.height;
 			break;
 	}
+	if(!this.positionAllowNegative) {
+		left = Math.max(0,left);
+		top = Math.max(0,top);
+	}
+	domNode.style.left = left + "px";
+	domNode.style.top = top + "px";
 };
 
 /*
@@ -94,6 +101,7 @@ RevealWidget.prototype.execute = function() {
 	this.type = this.getAttribute("type");
 	this.text = this.getAttribute("text");
 	this.position = this.getAttribute("position");
+	this.positionAllowNegative = this.getAttribute("positionAllowNegative") === "yes";
 	this["class"] = this.getAttribute("class","");
 	this.style = this.getAttribute("style","");
 	this["default"] = this.getAttribute("default","");
@@ -102,7 +110,10 @@ RevealWidget.prototype.execute = function() {
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
 	// Compute the title of the state tiddler and read it
-	this.stateTitle = this.state;
+	this.stateTiddlerTitle = this.state;
+	this.stateTitle = this.getAttribute("stateTitle");
+	this.stateField = this.getAttribute("stateField");
+	this.stateIndex = this.getAttribute("stateIndex");
 	this.readState();
 	// Construct the child widgets
 	var childNodes = this.isOpen ? this.parseTreeNode.children : [];
@@ -115,23 +126,52 @@ Read the state tiddler
 */
 RevealWidget.prototype.readState = function() {
 	// Read the information from the state tiddler
-	var state = this.stateTitle ? this.wiki.getTextReference(this.stateTitle,this["default"],this.getVariable("currentTiddler")) : this["default"];
+	var state,
+	    defaultState = this["default"];
+	if(this.stateTitle) {
+		var stateTitleTiddler = this.wiki.getTiddler(this.stateTitle);
+		if(this.stateField) {
+			state = stateTitleTiddler ? stateTitleTiddler.getFieldString(this.stateField) || defaultState : defaultState;
+		} else if(this.stateIndex) {
+			state = stateTitleTiddler ? this.wiki.extractTiddlerDataItem(this.stateTitle,this.stateIndex) || defaultState : defaultState;
+		} else if(stateTitleTiddler) {
+			state = this.wiki.getTiddlerText(this.stateTitle) || defaultState;
+		} else {
+			state = defaultState;
+		}
+	} else {
+		state = this.stateTiddlerTitle ? this.wiki.getTextReference(this.state,this["default"],this.getVariable("currentTiddler")) : this["default"];
+	}
+	if(state === null) {
+		state = this["default"];
+	}
 	switch(this.type) {
 		case "popup":
 			this.readPopupState(state);
 			break;
 		case "match":
-			this.readMatchState(state);
+			this.isOpen = this.text === state;
 			break;
 		case "nomatch":
-			this.readMatchState(state);
-			this.isOpen = !this.isOpen;
+			this.isOpen = this.text !== state;
+			break;
+		case "lt":
+			this.isOpen = !!(this.compareStateText(state) < 0);
+			break;
+		case "gt":
+			this.isOpen = !!(this.compareStateText(state) > 0);
+			break;
+		case "lteq":
+			this.isOpen = !(this.compareStateText(state) > 0);
+			break;
+		case "gteq":
+			this.isOpen = !(this.compareStateText(state) < 0);
 			break;
 	}
 };
 
-RevealWidget.prototype.readMatchState = function(state) {
-	this.isOpen = state === this.text;
+RevealWidget.prototype.compareStateText = function(state) {
+	return state.localeCompare(this.text,undefined,{numeric: true,sensitivity: "case"});
 };
 
 RevealWidget.prototype.readPopupState = function(state) {
@@ -159,22 +199,21 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RevealWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes["default"] || changedAttributes.animate) {
+	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes.positionAllowNegative || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex) {
 		this.refreshSelf();
 		return true;
 	} else {
-		var refreshed = false,
-			currentlyOpen = this.isOpen;
+		var currentlyOpen = this.isOpen;
 		this.readState();
 		if(this.isOpen !== currentlyOpen) {
 			if(this.retain === "yes") {
 				this.updateState();
 			} else {
 				this.refreshSelf();
-				refreshed = true;
+				return true;
 			}
 		}
-		return this.refreshChildren(changedTiddlers) || refreshed;
+		return this.refreshChildren(changedTiddlers);
 	}
 };
 
@@ -182,6 +221,7 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 Called by refresh() to dynamically show or hide the content
 */
 RevealWidget.prototype.updateState = function() {
+	var self = this;
 	// Read the current state
 	this.readState();
 	// Construct the child nodes if needed
@@ -202,8 +242,12 @@ RevealWidget.prototype.updateState = function() {
         $tw.anim.perform(this.openAnimation,domNode);
 	} else {
 		$tw.anim.perform(this.closeAnimation,domNode,{callback: function() {
-			domNode.setAttribute("hidden","true");
-        }});
+			//make sure that the state hasn't changed during the close animation
+			self.readState()
+			if(!self.isOpen) {
+				domNode.setAttribute("hidden","true");
+			}
+		}});
 	}
 };
 

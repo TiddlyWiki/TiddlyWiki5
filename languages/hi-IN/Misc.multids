@@ -1,7 +1,7 @@
 title: $:/language/
 
 BinaryWarning/Prompt: इस tiddler बाइनरी डेटा शामिल
-ClassicWarning/Hint: इस tiddler टिड्लीविकि संस्करण 5. देखने के साथ पूरी तरह से संगत नहीं है जो टिड्लीविकि क्लासिक विकी टेक्स्ट प्रारूप में लिखा है,http://tiddlywiki.com/static/Upgrading.html for more details. 
+ClassicWarning/Hint: इस tiddler टिड्लीविकि संस्करण 5. देखने के साथ पूरी तरह से संगत नहीं है जो टिड्लीविकि क्लासिक विकी टेक्स्ट प्रारूप में लिखा है,https://tiddlywiki.com/static/Upgrading.html for more details. 
 ClassicWarning/Upgrade/Caption: उन्नत करना
 CloseAll/Button: करीब सभी
 ConfirmCancelTiddler: क्या आप tiddler के लिए परिवर्तनों को छोड़ना चाहते हैं "<$text text=<<title>>/>"?

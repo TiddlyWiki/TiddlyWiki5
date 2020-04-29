@@ -7,9 +7,17 @@ Listing/Import/Caption: 导入
 Listing/Select/Caption: 选择
 Listing/Status/Caption: 状态
 Listing/Title/Caption: 条目
+Listing/Preview: 预览：
+Listing/Preview/Text: 文本
+Listing/Preview/TextRaw: 文本 (原始)
+Listing/Preview/Fields: 字段
+Listing/Preview/Diff: 差异
+Listing/Preview/DiffFields: 差异 (字段)
 Upgrader/Plugins/Suppressed/Incompatible: 封锁的不兼容或过时插件
 Upgrader/Plugins/Suppressed/Version: 封锁的插件 (由于传入的 <<incoming>> 较现有版本 <<existing>> 旧)
 Upgrader/Plugins/Upgraded: 升级插件，从 <<incoming>> 到 <<upgraded>>
 Upgrader/State/Suppressed: 封锁的暂存状态条目
 Upgrader/System/Suppressed: 封锁的系统条目
+Upgrader/System/Warning: 核心模块条目
+Upgrader/System/Alert: 您即将导入一个条目会覆盖一个核心模块条目。不建议这样做，因为可能会使系统不稳定。
 Upgrader/ThemeTweaks/Created: 从 <$text text=<<from>>/> 迁移布景主题

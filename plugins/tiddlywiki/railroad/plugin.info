@@ -1,7 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/railroad",
+	"name": "Railroad",
 	"description": "Railroad diagram generator",
-	"author": "AstridElocson",
-	"plugin-type": "plugin",
+	"author": "Astrid Elocson",
 	"list": "readme usage syntax example"
 }

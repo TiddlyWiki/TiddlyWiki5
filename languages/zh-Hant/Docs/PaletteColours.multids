@@ -29,6 +29,8 @@ external-link-foreground-hover: 懸停外部鏈結前景
 external-link-foreground-visited: 已造訪過的外部鏈結前景
 external-link-foreground: 外部鏈結前景
 foreground: 一般前景
+menubar-background: 選單列背景
+menubar-foreground: 選單列前景
 message-background: 訊息框背景
 message-border: 訊息邊框
 message-foreground: 訊息框前景
@@ -45,6 +47,8 @@ page-background: 頁面背景
 pre-background: pre 背景
 pre-border: pre 邊框
 primary: 主顏色
+select-tag-background: `<select>` 元素背景
+select-tag-foreground: `<select>` 元素文字
 sidebar-button-foreground: 側邊欄按鈕前景
 sidebar-controls-foreground-hover: 懸停側邊欄控制項前景
 sidebar-controls-foreground: 側邊欄控制項前景

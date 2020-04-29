@@ -7,6 +7,7 @@
 node ./tiddlywiki.js \
 	./editions/test \
 	--verbose \
+	--version \
 	--rendertiddler $:/core/save/all test.html text/plain \
 	|| exit 1
 

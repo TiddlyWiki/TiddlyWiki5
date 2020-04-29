@@ -3,7 +3,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/excise
 caption: {{$:/language/Buttons/Excise/Caption}}
 description: {{$:/language/Buttons/Excise/Hint}}
-condition: [<targetTiddler>!is[image]]
+condition: [<targetTiddler>type[]] [<targetTiddler>type[text/vnd.tiddlywiki]] +[first[]]
 shortcuts: ((excise))
 dropdown: $:/core/ui/EditorToolbar/excise-dropdown
 

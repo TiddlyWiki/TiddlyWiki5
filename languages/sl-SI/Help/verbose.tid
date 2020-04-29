@@ -1,0 +1,8 @@
+title: $:/language/Help/verbose
+description: Omogoči razširjen izhodni način
+
+Omogoči razširjen izpis, uporaben za odpravljanje napak
+
+```
+--verbose
+```

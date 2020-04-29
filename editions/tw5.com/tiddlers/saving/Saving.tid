@@ -1,9 +1,37 @@
 created: 20140912140651119
-modified: 20140912140736112
+list: [[Saving with the HTML5 fallback saver]] [[Installing TiddlyWiki on Node.js]] [[TiddlyServer by Arlen Beiler]] [[Saving on TiddlyDesktop]] [[Saving on Beaker Browser]] [[Saving on iPad/iPhone]] [["savetiddlers" Extension for Chrome and Firefox by buggyj]] [["file-backups" Extension for Firefox by pmario]] [["Noteself" by Danielo Rodríguez]] [[TiddlyDrive Add-on for Google Drive by Joshua Stubbs]] [[TiddlyWiki in the Sky for Dropbox]] [[Saving on a PHP Server]] [[Saving via WebDAV]] [[Saving on Android]] [[Saving with TiddlyFox]] [[Saving with TiddlyIE]] [[Windows HTA Hack]]
+modified: 20171113135847405
 tags: [[Working with TiddlyWiki]]
 title: Saving
 type: text/vnd.tiddlywiki
 
+\define filter-button(caption,filter)
+<$reveal type="nomatch" state="$:/SavingDetailsFilter" text="""$filter$""" tag="span">
+<$button class="tc-btn-invisible tc-btn-unpushed" set="$:/SavingDetailsFilter" setTo="""$filter$""">
+<$text text="""$caption$"""/>
+</$button>
+</$reveal>
+<$reveal type="match" state="$:/SavingDetailsFilter" text="""$filter$""" tag="span">
+<$button class="tc-btn-invisible tc-btn-pushed">
+<$text text="""$caption$"""/> {{$:/core/images/done-button}}
+</$button>
+</$reveal>
+\end
+
+\define filter-maker()
+[tag[Saving]tag[$(currentTiddler)$]]
+\end
+
 Available methods for saving changes with TiddlyWiki:
 
-<<list-links "[tag[Saving]]">>
+<div class="tc-thumbnail-tabs">
+<div style="font-size:0.9em;">
+PLATFORMS:
+<<filter-button caption:"All" filter:"[tag[Saving]]">>
+<$list filter="Android Chrome Firefox InternetExplorer iOS Linux Mac Opera PHP Safari Windows">
+<$macrocall $name="filter-button" caption=<<currentTiddler>> filter=<<filter-maker>>/>
+</$list>
+</div>
+<br/>
+<$macrocall $name="tabs" tabsList={{$:/SavingDetailsFilter}} template="$:/SavingDetailsTemplate" buttonTemplate="$:/SavingThumbnailsTemplate"/>
+</div>

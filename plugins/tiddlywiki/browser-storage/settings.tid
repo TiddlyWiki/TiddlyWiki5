@@ -1,0 +1,31 @@
+title: $:/plugins/tiddlywiki/browser-storage/settings
+
+! Disable
+
+You can disable the browser storage plugin:
+
+<$checkbox tiddler="$:/config/BrowserStorage/Enabled" field="text" checked="yes" unchecked="no" default="yes"> Use browser local storage</$checkbox>
+
+! Clear
+
+Click this button to clear browser storage and disable its use:
+
+<$button message="tm-clear-browser-storage">Clear browser storage</$button>
+
+! Save Filter
+
+This filter determines which tiddlers will be saved to local storage. By default, it contains `[prefix[$:/state/]] -[prefix[$:/state/popup/]]` to just save state tiddlers except popup state tiddlers, thus preserving selected tabs, and the open/closed status of table of contents entries. Other useful values include `[all[]]` meaning that it will attempt to save all tiddlers.
+
+<$link to="$:/config/BrowserStorage/SaveFilter">Browser Storage Save Filter</$link>: <$edit-text tiddler="$:/config/BrowserStorage/SaveFilter" default="" tag="input" size="50"/>
+
+! Custom Quota Exceeded Alert
+
+This setting allows a custom alert message to be displayed when an attempt to store a tiddler fails due to the storage quota being exceeded:
+
+<$link to="$:/config/BrowserStorage/QuotaExceededAlert">Quota Exceeded Alert</$link>: <$edit-text tiddler="$:/config/BrowserStorage/QuotaExceededAlert" default="" tag="input" size="50"/>
+
+! Startup Log
+
+The tiddler $:/temp/BrowserStorage/Log contains a log of the tiddlers that were loaded from local storage at startup:
+
+<<list-links "[enlist{$:/temp/BrowserStorage/Log}sort[]]">>

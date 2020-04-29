@@ -1,0 +1,11 @@
+created: 20180701175133376
+modified: 20181216181934282
+tags: [[WebServer Authentication]]
+title: WebServer Basic Authentication
+type: text/vnd.tiddlywiki
+
+[[Basic authentication|https://en.wikipedia.org/wiki/Basic_access_authentication]] is a standard [[mechanism|WebServer Authentication]] for servers to instruct browsers to prompt the user for credentials. It is recommended to use it in association with HTTPS due to the way that it passes unencrypted passwords over the network.
+
+Basic authentication is activated if credentials are specified via the [[username|WebServer Parameter: username]]/[[password|WebServer Parameter: password]] or [[credentials|WebServer Parameter: credentials]] parameters.
+
+If [[WebServer Authorization]] is configured to allow access by both anonymous and authenticated users then by default users will not be prompted for credentials, and will be given anonymous access. To force a password prompt visit the route `/login-basic` (for example, http://127.0.0.1:8080/login-basic).

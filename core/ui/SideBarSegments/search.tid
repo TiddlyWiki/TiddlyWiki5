@@ -1,0 +1,55 @@
+title: $:/core/ui/SideBarSegments/search
+tags: $:/tags/SideBarSegment
+
+\whitespace trim
+<div class="tc-sidebar-lists tc-sidebar-search">
+
+<$set name="searchTiddler" value="$:/temp/search">
+<div class="tc-search">
+<$edit-text tiddler="$:/temp/search" type="search" tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> class="tc-popup-handle"/>
+<$reveal state="$:/temp/search" type="nomatch" text="">
+<$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
+<$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
+<$action-setfield $tiddler="$:/temp/search" text=""/>
+<$action-navigate $to="$:/AdvancedSearch"/>
+{{$:/core/images/advanced-search-button}}
+</$button>
+<$button class="tc-btn-invisible">
+<$action-setfield $tiddler="$:/temp/search" text="" />
+{{$:/core/images/close-button}}
+</$button>
+<$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
+{{$:/core/images/down-arrow}}
+<$list filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
+<$set name="searchTerm" value={{{ [<searchTiddler>get[text]] }}}>
+<$set name="resultCount" value="""<$count filter="[!is[system]search<searchTerm>]"/>""">
+{{$:/language/Search/Matches}}
+</$set>
+</$set>
+</$list>
+</$button>
+</$reveal>
+<$reveal state="$:/temp/search" type="match" text="">
+<$button to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
+{{$:/core/images/advanced-search-button}}
+</$button>
+</$reveal>
+</div>
+
+<$reveal tag="div" class="tc-block-dropdown-wrapper" state="$:/temp/search" type="nomatch" text="">
+
+<$reveal tag="div" class="tc-block-dropdown tc-search-drop-down tc-popup-handle" state=<<qualify "$:/state/popup/search-dropdown">> type="nomatch" text="" default="">
+
+<$list filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+
+{{$:/core/ui/SearchResults}}
+
+</$list>
+
+</$reveal>
+
+</$reveal>
+
+</$set>
+
+</div>
