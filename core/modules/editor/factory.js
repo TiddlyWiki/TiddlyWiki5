@@ -140,14 +140,6 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 					};
 				updateFields[self.editField] = value;
 				self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getCreationFields(),tiddler,updateFields,self.wiki.getModificationFields()));
-				if(self.editStoreTitle) {
-					tiddler = self.wiki.getTiddler(self.editStoreTitle);
-					updateFields = {
-						title: self.editStoreTitle,
-						text: value
-					};
-					self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getCreationFields(),tiddler,updateFields,self.wiki.getModificationFields()));
-				}
 			};
 		}
 		if(this.editType) {
@@ -193,7 +185,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editFocusPopup = this.getAttribute("focusPopup");
 		this.editFocus = this.getAttribute("focus");
 		this.editTabIndex = this.getAttribute("tabindex");
-		this.editStoreTitle = this.getAttribute("storeTitle");
+		this.editInputActions = this.getAttribute("inputactions");
 		this.editRefreshTitle = this.getAttribute("refreshTitle");
 		// Get the default editor element tag and type
 		var tag,type;
@@ -226,7 +218,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.storeTitle || changedAttributes.refreshTitle || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
+		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.refreshTitle || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
 			this.refreshSelf();
 			return true;
 		} else if (changedTiddlers[this.editRefreshTitle]) {
