@@ -31,7 +31,7 @@ The content of the `<$edit-text>` widget is ignored.
 |autoHeight |Either "yes" or "no" to specify whether to automatically resize `textarea` editors to fit their content (defaults to "yes") |
 |minHeight |Minimum height for automatically resized `textarea` editors, specified in CSS length units such as "px", "em" or "%" |
 |rows |Sets the rows attribute of a generated textarea |
-|storeTitle |<<.from-version 5.1.22>> An optional tiddler title that is updated with the text content each time it is directly updated by the user |
+|inputactions |<<.from-version 5.1.22>> Optional actions that are triggered every time an input event occurs within the input field or textarea |
 |refreshTitle |<<.from-version 5.1.22>> An optional tiddler title that makes the input field update whenever the specified tiddler changes |
 
 ! Notes
