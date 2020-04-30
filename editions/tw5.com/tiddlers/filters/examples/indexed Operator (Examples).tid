@@ -1,7 +1,0 @@
-created: 20200313085714698
-modified: 20200313090819379
-title: indexed Operator (Examples)
-
-<<.operator-example 1 "[all[tiddlers]!is[system]limit[20]indexed[]]">>
-
-<<.operator-example 2 "[[Tag]] =[[Tag]] +[indexed[]]">>
