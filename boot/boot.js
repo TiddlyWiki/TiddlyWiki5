@@ -519,10 +519,10 @@ var polyfill =[
 ].join("\n");
 
 var globalCheck =[
-	"	if(Object.keys(globalThis).length){",
-	"		console.log(Object.keys(globalThis));",
-	"		throw \"Global assignment is not allowed within modules on node.\";",
-	"	}"
+	"  if(Object.keys(globalThis).length){",
+	"    console.log(Object.keys(globalThis));",
+	"    throw \"Global assignment is not allowed within modules on node.\";",
+	"  }"
 ].join('\n');
 
 /*
@@ -540,7 +540,7 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 	code = [
 		(!$tw.browser ? polyfill : ""),
 		"(function(" + contextNames.join(",") + ") {",
-		"  (function(){" + code + ";})();",
+		"  (function(){\n" + code + "\n;})();",
 		(!$tw.browser && sandbox && !allowGlobals) ? globalCheck : "",
 		"  return exports;\n",
 		"})"
@@ -552,6 +552,7 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 		fn = window["eval"](code + "\n\n//# sourceURL=" + filename);
 	} else {
 		if(sandbox){
+			console.log(code);
 			fn = vm.runInContext(code,sandbox,filename)
 		} else {
 			fn = vm.runInThisContext(code,filename);
