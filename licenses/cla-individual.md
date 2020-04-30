@@ -397,3 +397,5 @@ Mandar Vaze, @mandarvaze, 2020/04/08
 Lin Dongwu, @linonetwo, 2020/04/15
 
 Tobias Hermann, @idotobi, 2020/04/19 
+
+Nicolas Petton, @NicolasPetton, 2020/04/30
