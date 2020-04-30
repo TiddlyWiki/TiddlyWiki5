@@ -23,7 +23,12 @@ $tw.utils = $tw.utils || Object.create(null);
 
 /////////////////////////// Standard node.js libraries
 
-var fs, path, vm;
+/** @type {import{"fs"}} */
+var fs;
+/** @type {import{"path"}} */
+var path;
+/** @type {import{"vm"}} */
+var vm;
 if($tw.node) {
 	fs = require("fs");
 	path = require("path");
@@ -501,7 +506,7 @@ $tw.utils.getTypeEncoding = function(ext) {
 /*
 Run code globally with specified context variables in scope
 */
-$tw.utils.evalGlobal = function(code,context,filename) {
+$tw.utils.evalGlobal = function(code,context,filename,sandbox) {
 	var contextCopy = $tw.utils.extend(Object.create(null),context);
 	// Get the context variables as a pair of arrays of names and values
 	var contextNames = [], contextValues = [];
@@ -516,19 +521,21 @@ $tw.utils.evalGlobal = function(code,context,filename) {
 	if($tw.browser) {
 		fn = window["eval"](code + "\n\n//# sourceURL=" + filename);
 	} else {
-		fn = vm.runInThisContext(code,filename);
+		if(sandbox){
+			fn = vm.runInContext(code, sandbox, filename)
+		} else {
+			fn = vm.runInThisContext(code,filename);
+		}
 	}
 	// Call the function and return the exports
 	return fn.apply(null,contextValues);
 };
-
+var sandbox = vm.createContext(); 
 /*
 Run code in a sandbox with only the specified context variables in scope
 */
 $tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename) {
-	var sandbox = $tw.utils.extend(Object.create(null),context);
-	vm.runInNewContext(code,sandbox,filename);
-	return sandbox.exports;
+	return $tw.utils.evalGlobal(code, context, filename, sandbox);
 };
 
 /*
