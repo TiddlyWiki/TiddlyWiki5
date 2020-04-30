@@ -539,7 +539,7 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 	// Add the code prologue and epilogue
 	code = [
 		(!$tw.browser ? polyfill : ""),
-		"(function(" + contextNames.join(",") + " }) {",
+		"(function(" + contextNames.join(",") + ") {",
 		"  (function(){" + code + ";})();",
 		(!$tw.browser && sandbox && !allowGlobals) ? globalCheck : "",
 		"  return exports;\n",
