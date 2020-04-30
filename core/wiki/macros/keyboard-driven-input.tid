@@ -9,11 +9,11 @@ tags: $:/tags/Macro
 <$list filter="[<nextItem>minlength[1]]">
 <$action-setfield $tiddler=<<selectionTiddler>> text=<<nextItem>>/>
 <$list filter="[<__index__>match[]]">
-<$action-setfield $tiddler=<<__tiddler__>> $field=<<__field__>> $value={{{ [<nextItem>] +[splitregexp[(?:.(?!-))+$]] }}}/>
+<$action-setfield $tiddler=<<__tiddler__>> $field=<<__field__>> $value=<<nextItem>>/>
 <$action-setfield $tiddler=<<__refreshTitle__>> text="yes"/>
 </$list>
 <$list filter="[<__index__>!match[]]">
-<$action-setfield $tiddler=<<__tiddler__>> $index=<<__index__>> $value={{{ [<nextItem>] +[splitregexp[(?:.(?!-))+$]] }}}/>
+<$action-setfield $tiddler=<<__tiddler__>> $index=<<__index__>> $value=<<nextItem>>/>
 <$action-setfield $tiddler=<<__refreshTitle__>> text="yes"/>
 </$list>
 </$list>
