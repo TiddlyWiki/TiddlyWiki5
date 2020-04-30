@@ -503,6 +503,27 @@ $tw.utils.getTypeEncoding = function(ext) {
 	return typeInfo ? typeInfo.encoding : "utf8";
 };
 
+var polyfill = `
+// this polyfills the globalThis variable
+// using the this variable on a getter 
+// inserted into the prototype of globalThis
+(function() {
+	if (typeof globalThis === 'object') return;
+	// node.green says this is available since 0.10.48
+	Object.prototype.__defineGetter__('__wow__', function() {
+		return this;
+	});
+	__wow__.globalThis = __wow__; // lolwat
+	delete Object.prototype.__wow__;
+}());
+`;
+var globalCheck = `{
+	if(Object.keys(globalThis).length){
+		console.log(Object.keys(globalThis));
+		throw "Global assignment is not allowed within modules on node.";
+	}
+}`;
+
 /*
 Run code globally with specified context variables in scope
 */
@@ -515,17 +536,12 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 		contextValues.push(value);
 	});
 	// Add the code prologue and epilogue
-	// and the sandboxed global check
 	code = `
+	${!$tw.browser ? polyfill : ""}
+	//Now we run the module and check the output
 	(function(${contextNames.join(",") }) {
 		(function(){${code};})();
-		${(!$tw.browser && sandbox && !allowGlobals) ? `
-			let globe = typeof global !== "undefined" ? global : this;
-			if(Object.keys(globe).length){
-				console.log(globe);
-				throw "Global assignment is not allowed within server modules.";
-			}
-		` : ""}
+		${(!$tw.browser && sandbox && !allowGlobals) ? globalCheck : ""}
 		return exports;
 	})
 	`
@@ -544,13 +560,23 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 	// Call the function and return the exports
 	return fn.apply(null,contextValues);
 };
-var sandbox = !$tw.browser ? vm.createContext() : undefined; 
+$tw.utils.sandbox = !$tw.browser ? vm.createContext({}) : undefined; 
 /*
 Run code in a sandbox with only the specified context variables in scope
 */
 $tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename,allowGlobals) {
-	return $tw.utils.evalGlobal(code,context,filename,(allowGlobals ? vm.createContext() : sandbox),allowGlobals);
+	return $tw.utils.evalGlobal(code,context,filename,(allowGlobals ? vm.createContext({}) : $tw.utils.sandbox),allowGlobals);
 };
+
+// if(!$tw.browser) $tw.utils.evalSandboxed(`
+//   setInterval(function(){
+// 		console.log(globalThis)
+// 		if(Object.keys(globalThis).length){
+// 			console.log(globalThis);
+// 			throw "Global assignment is not allowed within modules on node.";
+// 		}
+// 	}, 1000);
+// `, { setInterval, exports: {}, console }, "$:/boot/boot.js-global-monitor");
 
 /*
 Creates a PasswordPrompt object
