@@ -503,26 +503,27 @@ $tw.utils.getTypeEncoding = function(ext) {
 	return typeInfo ? typeInfo.encoding : "utf8";
 };
 
-var polyfill = `
-// this polyfills the globalThis variable
-// using the this variable on a getter 
-// inserted into the prototype of globalThis
-(function() {
-	if (typeof globalThis === 'object') return;
-	// node.green says this is available since 0.10.48
-	Object.prototype.__defineGetter__('__wow__', function() {
-		return this;
-	});
-	__wow__.globalThis = __wow__; // lolwat
-	delete Object.prototype.__wow__;
-}());
-`;
-var globalCheck = `{
-	if(Object.keys(globalThis).length){
-		console.log(Object.keys(globalThis));
-		throw "Global assignment is not allowed within modules on node.";
-	}
-}`;
+var polyfill =[
+	"// this polyfills the globalThis variable",
+	"// using the this variable on a getter ",
+	"// inserted into the prototype of globalThis",
+	"(function() {",
+	"	if (typeof globalThis === 'object') return;",
+	"	// node.green says this is available since 0.10.48",
+	"	Object.prototype.__defineGetter__('__wow__', function() {",
+	"		return this;",
+	"	});",
+	"	__wow__.globalThis = __wow__; // lolwat",
+	"	delete Object.prototype.__wow__;",
+	"}());"
+].join("\n");
+
+var globalCheck =[
+	"	if(Object.keys(globalThis).length){",
+	"		console.log(Object.keys(globalThis));",
+	"		throw \"Global assignment is not allowed within modules on node.\";",
+	"	}"
+].join('\n');
 
 /*
 Run code globally with specified context variables in scope
@@ -536,15 +537,14 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 		contextValues.push(value);
 	});
 	// Add the code prologue and epilogue
-	code = `
-	${!$tw.browser ? polyfill : ""}
-	//Now we run the module and check the output
-	(function(${contextNames.join(",") }) {
-		(function(){${code};})();
-		${(!$tw.browser && sandbox && !allowGlobals) ? globalCheck : ""}
-		return exports;
-	})
-	`
+	code = [
+		(!$tw.browser ? polyfill : ""),
+		"(function(" + contextNames.join(",") + " }) {",
+		"  (function(){" + code + ";})();",
+		(!$tw.browser && sandbox && !allowGlobals) ? globalCheck : "",
+		"  return exports;\n",
+		"})"
+	].join("\n");
 	// code = "(function(" + contextNames.join(",") + ") {(function(){  \n" + code + "\n;})();\nreturn exports;\n})\n";
 	// Compile the code into a function
 	var fn;
