@@ -506,7 +506,7 @@ $tw.utils.getTypeEncoding = function(ext) {
 /*
 Run code globally with specified context variables in scope
 */
-$tw.utils.evalGlobal = function(code,context,filename,sandbox) {
+$tw.utils.evalGlobal = function(code,context,filename,sandbox, allowGlobals) {
 	var contextCopy = $tw.utils.extend(Object.create(null),context);
 	// Get the context variables as a pair of arrays of names and values
 	var contextNames = [], contextValues = [];
@@ -519,7 +519,7 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox) {
 	code = `
 	(function(${contextNames.join(",") }) {
 		(function(){${code};})();
-		${(!$tw.browser && sandbox) ? `
+		${(!$tw.browser && sandbox && !allowGlobals) ? `
 			let globe = typeof global !== "undefined" ? global : this;
 			if(Object.keys(globe).length){
 				console.log(globe);
@@ -536,7 +536,7 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox) {
 		fn = window["eval"](code + "\n\n//# sourceURL=" + filename);
 	} else {
 		if(sandbox){
-			fn = vm.runInContext(code, sandbox, filename)
+			fn = vm.runInContext(code,sandbox,filename)
 		} else {
 			fn = vm.runInThisContext(code,filename);
 		}
@@ -544,12 +544,12 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox) {
 	// Call the function and return the exports
 	return fn.apply(null,contextValues);
 };
-var sandbox = vm.createContext(); 
+var sandbox = !$tw.browser ? vm.createContext() : undefined; 
 /*
 Run code in a sandbox with only the specified context variables in scope
 */
-$tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename) {
-	return $tw.utils.evalGlobal(code, context, filename, sandbox);
+$tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename, allowGlobals) {
+	return $tw.utils.evalGlobal(code, context, filename, allowGlobals ? vm.createContext() : sandbox, allowGlobals);
 };
 
 /*
