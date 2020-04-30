@@ -506,7 +506,7 @@ $tw.utils.getTypeEncoding = function(ext) {
 /*
 Run code globally with specified context variables in scope
 */
-$tw.utils.evalGlobal = function(code,context,filename,sandbox, allowGlobals) {
+$tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 	var contextCopy = $tw.utils.extend(Object.create(null),context);
 	// Get the context variables as a pair of arrays of names and values
 	var contextNames = [], contextValues = [];
@@ -548,8 +548,8 @@ var sandbox = !$tw.browser ? vm.createContext() : undefined;
 /*
 Run code in a sandbox with only the specified context variables in scope
 */
-$tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename, allowGlobals) {
-	return $tw.utils.evalGlobal(code, context, filename, allowGlobals ? vm.createContext() : sandbox, allowGlobals);
+$tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename,allowGlobals) {
+	return $tw.utils.evalGlobal(code,context,filename,(allowGlobals ? vm.createContext() : sandbox),allowGlobals);
 };
 
 /*
