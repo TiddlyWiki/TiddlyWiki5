@@ -552,7 +552,6 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 		fn = window["eval"](code + "\n\n//# sourceURL=" + filename);
 	} else {
 		if(sandbox){
-			console.log(code);
 			fn = vm.runInContext(code,sandbox,filename)
 		} else {
 			fn = vm.runInThisContext(code,filename);
