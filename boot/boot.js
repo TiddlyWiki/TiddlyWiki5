@@ -515,7 +515,21 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox) {
 		contextValues.push(value);
 	});
 	// Add the code prologue and epilogue
-	code = "(function(" + contextNames.join(",") + ") {(function(){\n" + code + "\n;})();\nreturn exports;\n})\n";
+	// and the sandboxed global check
+	code = `
+	(function(${contextNames.join(",") }) {
+		(function(){${code};})();
+		${(!$tw.browser && sandbox) ? `
+			let globe = typeof global !== "undefined" ? global : this;
+			if(Object.keys(globe).length){
+				console.log(globe);
+				throw "Global assignment is not allowed within server modules.";
+			}
+		` : ""}
+		return exports;
+	})
+	`
+	// code = "(function(" + contextNames.join(",") + ") {(function(){  \n" + code + "\n;})();\nreturn exports;\n})\n";
 	// Compile the code into a function
 	var fn;
 	if($tw.browser) {
