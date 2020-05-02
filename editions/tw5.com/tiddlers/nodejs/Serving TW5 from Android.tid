@@ -8,7 +8,7 @@ tags: Saving [[TiddlyWiki on Node.js]] Android
 title: Serving TW5 from Android
 type: text/vnd.tiddlywiki
 
-[[Termux|https://termux.com/]] is and opensource android application providing limited unix environment enabling users to install [[Node.js]] and npm modules in android. Users can install and run [[TiddlyWiki on Node.js]] using [[Termux|https://termux.com/]].
+[[Termux|https://termux.com/]] is and open source android application providing limited Unix environment enabling users to install [[Node.js]] and npm modules in android. Users can install and run [[TiddlyWiki on Node.js]] using [[Termux|https://termux.com/]].
 
 !! Instructions 
 
