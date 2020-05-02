@@ -15,14 +15,14 @@ tags: $:/tags/SideBarSegment
 <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
 <$action-setfield $tiddler="$:/temp/search" text=""/>
 <$action-setfield $tiddler="$:/temp/search/input" text=""/>
-<$action-setfield $tiddler=<<selectionTiddler>> text=""/>
+<$action-setfield $tiddler=<<searchListState>> text=""/>
 <$action-navigate $to="$:/AdvancedSearch"/>
 {{$:/core/images/advanced-search-button}}
 </$button>
 <$button class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/search/input" text="" />
 <$action-setfield $tiddler="$:/temp/search" text="" />
-<$action-setfield $tiddler=<<selectionTiddler>> text=""/>
+<$action-setfield $tiddler=<<searchListState>> text=""/>
 {{$:/core/images/close-button}}
 </$button>
 <$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
