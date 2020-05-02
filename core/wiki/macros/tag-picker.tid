@@ -44,6 +44,7 @@ tags: $:/tags/Macro
 <$action-sendmessage $message="tm-add-tag" $param={{{ [<newTagNameTiddler>get[text]] }}}/>
 <$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
 <$action-deletetiddler $tiddler=<<storeTitle>>/>
+<$action-deletetiddler $tiddler=<<tagSelectionState>>/>
 {{$:/language/EditTemplate/Tags/Add/Button}}
 </$button>
 </$set>
