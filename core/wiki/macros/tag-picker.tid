@@ -23,7 +23,7 @@ tags: $:/tags/Macro
 
 \define clear-tags-actions()
 <$list filter="[<__storeTitle__>has[text]] [<__tiddler__>has[text]]" variable="ignore" emptyMessage="""<$action-deletetiddler $tiddler=<<__storeTitle__>>/><$action-deletetiddler $tiddler=<<__tiddler__>>/><$action-sendmessage $message="tm-cancel-tiddler"/>""">
-<$action-deletetiddler $tiddler=<<__storeTitle__>>/><$action-deletetiddler $tiddler=<<__tiddler__>>/><$action-deletetiddler $tiddler=<<__selectionTiddler__>>/>
+<$action-deletetiddler $filter="[<__storeTitle__>] [<__tiddler__>] [<__selectionTiddler__>]"/>
 </$list>
 \end
 
