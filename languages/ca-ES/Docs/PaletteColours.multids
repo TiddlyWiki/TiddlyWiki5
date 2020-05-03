@@ -29,6 +29,8 @@ external-link-foreground: Primer plà de l'enllaç extern
 external-link-foreground-hover: Primer plà de la bafarada de l'enllaç extern
 external-link-foreground-visited: Primer plà de l'enllaç extern visitat
 foreground: Primer plà general
+menubar-background: Fons de la barra de menús
+menubar-foreground: Primer plà de la barra de menús
 message-background: Fons de la capsa de text
 message-border: Vora de la capsa de text
 message-foreground: Primer plà de la capsa de text

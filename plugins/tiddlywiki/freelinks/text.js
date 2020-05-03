@@ -79,9 +79,10 @@ TextNodeWidget.prototype.execute = function() {
 					reparts.push("(\\b" + $tw.utils.escapeRegExp(title) + "\\b)");
 				}
 			});
+			var ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}).trim() === "yes";
 			return {
 				titles: titles,
-				regexp: new RegExp(reparts.join("|"),"")
+				regexp: new RegExp(reparts.join("|"),ignoreCase ? "i" : "")
 			};
 		});
 		// Repeatedly linkify
