@@ -68,8 +68,6 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 	}
 	else if(fileInfo && fileSystemPaths) {
 		// Otherwise (check for `FileSystemPaths`), we'll need to (re)generate it
-		options.title = title;
-		options.fileSystemPaths = fileSystemPaths;
 		options.fileInfo = {...fileInfo};
 		fileInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
 			directory: $tw.boot.wikiTiddlersPath,
@@ -77,7 +75,7 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 			wiki: this.wiki,
 			fileSystemPath: options.fileInfo.filepath
 		});
-		if(options.fileInfo && fileInfo.filepath == options.fileInfo.filepath) {
+		if(options.fileInfo && options.fileInfo.filepath == fileInfo.filepath) {
 			options = null;
 		}
 		else{
