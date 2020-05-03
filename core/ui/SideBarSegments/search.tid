@@ -10,9 +10,7 @@ tags: $:/tags/SideBarSegment
 <$reveal state="$:/temp/search/input" type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
-<$action-setfield $tiddler="$:/temp/search" text=""/>
-<$action-setfield $tiddler="$:/temp/search/input" text=""/>
-<$action-setfield $tiddler=<<searchListState>> text=""/>
+<$action-deletetiddler $filter="[[$:/temp/search]] [[$:/temp/search/input]] [<searchListState>]"/>
 <$action-navigate $to="$:/AdvancedSearch"/>
 {{$:/core/images/advanced-search-button}}
 </$button>
