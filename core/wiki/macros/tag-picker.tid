@@ -38,9 +38,7 @@ tags: $:/tags/Macro
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$button set=<<newTagNameTiddler>> setTo="" class="">
 <$action-sendmessage $message="tm-add-tag" $param={{{ [<newTagNameTiddler>get[text]] }}}/>
-<$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
-<$action-deletetiddler $tiddler=<<storeTitle>>/>
-<$action-deletetiddler $tiddler=<<tagSelectionState>>/>
+<$action-deletetiddler $filter="[<newTagNameTiddler>] [<storeTitle>] [<tagSelectionState>]"/>
 {{$:/language/EditTemplate/Tags/Add/Button}}
 </$button>
 </$set>
