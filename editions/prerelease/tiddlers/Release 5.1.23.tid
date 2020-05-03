@@ -16,6 +16,8 @@ type: text/vnd.tiddlywiki
 
 ! Plugin Improvements
 
+* JSZip Plugin
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6a0ff7db1807f45b73061ced82f5a85f1a529bbf]] ability to dynamically create Zip files, giving TiddlyWiki the ability to build static sites within the browser
 * Freelinks Plugin
 ** [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1f354a972e0217e034d1f59d31577c1fd6b186f3]] support for ignoring case when matching titles
 ** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/05e6c1bf62cd51df6aa025d0ad07f7959cde6fa0]] bug with autolinking within HTML `<a>` elements
