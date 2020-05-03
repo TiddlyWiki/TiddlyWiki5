@@ -246,7 +246,8 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 		extension: contentTypeInfo.extension,
 		directory: options.directory,
 		pathFilters: options.pathFilters,
-		wiki: options.wiki
+		wiki: options.wiki,
+		fileSystemPath: options.fileSystemPath
 	});
 	return fileInfo;
 };
@@ -258,6 +259,7 @@ Options include:
 	directory: absolute path of root directory to which we are saving
 	pathFilters: optional array of filters to be used to generate the base path
 	wiki: optional wiki for evaluating the pathFilters
+	fileSystemPath: if set, the exiting path we are checking against
 */
 exports.generateTiddlerFilepath = function(title,options) {
 	var self = this,
@@ -310,6 +312,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 		count = 0;
 	do {
 		fullPath = path.resolve(directory,filepath + (count ? "_" + count : "") + extension);
+		if(typeof(options.fileSystemPath) == "string" && options.fileSystemPath == fullPath) break;
 		count++;
 	} while(fs.existsSync(fullPath));
 	// Return the full path to the file
