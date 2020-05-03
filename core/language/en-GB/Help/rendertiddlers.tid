@@ -6,7 +6,7 @@ description: Render tiddlers matching a filter to a specified ContentType
 Render a set of tiddlers matching a filter to separate files of a specified ContentType (defaults to `text/html`) and extension (defaults to `.html`).
 
 ```
---rendertiddlers <filter> <template> <pathname> [<type>] [<extension>] ["noclean"]
+--rendertiddlers '<filter>' <template> <pathname> [<type>] [<extension>] ["noclean"]
 ```
 
 For example:
