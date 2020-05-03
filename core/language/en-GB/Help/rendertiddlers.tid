@@ -12,7 +12,7 @@ Render a set of tiddlers matching a filter to separate files of a specified Cont
 For example:
 
 ```
---rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+--rendertiddlers '[!is[system]]' $:/core/templates/static.tiddler.html ./static text/plain
 ```
 
 By default, the pathname is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.
