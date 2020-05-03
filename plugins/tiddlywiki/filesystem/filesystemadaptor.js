@@ -67,8 +67,12 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 		$tw.boot.files[title] = fileInfo;
 	}
 	else if(fileInfo && fileSystemPaths) {
-		// Otherwise (check for `FileSystemPaths`), we'll need to (re)generate it
-		options.fileInfo = {...fileInfo};
+		// IF `FileSystemPaths`, we'll need to store the old path and regenerate it
+		options.fileInfo = {
+			filepath: fileInfo.filepath,
+			type: fileInfo.type,
+			hasMetaFile: fileInfo.hasMetaFile
+		};
 		fileInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
 			directory: $tw.boot.wikiTiddlersPath,
 			pathFilters: this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n"),
@@ -76,10 +80,10 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 			fileSystemPath: options.fileInfo.filepath
 		});
 		if(options.fileInfo && options.fileInfo.filepath == fileInfo.filepath) {
-			options = null;
+			options = null; //if filepaths match, options not needed
 		}
 		else{
-			$tw.boot.files[title] = fileInfo;
+			$tw.boot.files[title] = fileInfo; //else, store new fileInfo
 		}
 	}
 	callback(null,fileInfo,options);
@@ -95,7 +99,8 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 		if(err) {
 			return callback(err);
 		}
-		if (options && options.fileInfo !== null) {
+		if (options !== null) {
+			//the file's location on disk has changed, call deleteTiddler via options
 			$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err) {
 				if(err) {
 					return callback(err);
