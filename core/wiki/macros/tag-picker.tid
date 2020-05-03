@@ -9,10 +9,8 @@ tags: $:/tags/Macro
 <$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
 </$list>
 </$set>
-<$action-deletetiddler $tiddler=<<__tiddler__>>/>
-<$action-deletetiddler $tiddler=<<__storeTitle__>>/>
+<$action-deletetiddler $filter="[<__tiddler__>] [<__storeTitle__>] [<selectionTiddler>]"/>
 <$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
-<$action-deletetiddler $tiddler=<<selectionTiddler>>/>
 \end
 
 \define tag-button(selectedClass)
