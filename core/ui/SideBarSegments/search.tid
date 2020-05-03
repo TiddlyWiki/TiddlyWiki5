@@ -15,9 +15,7 @@ tags: $:/tags/SideBarSegment
 {{$:/core/images/advanced-search-button}}
 </$button>
 <$button class="tc-btn-invisible">
-<$action-setfield $tiddler="$:/temp/search/input" text="" />
-<$action-setfield $tiddler="$:/temp/search" text="" />
-<$action-setfield $tiddler=<<searchListState>> text=""/>
+<$action-deletetiddler $filter="[[$:/temp/search]] [[$:/temp/search/input]] [<searchListState>]"/>
 {{$:/core/images/close-button}}
 </$button>
 <$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
