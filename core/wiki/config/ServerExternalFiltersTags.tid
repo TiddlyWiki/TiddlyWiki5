@@ -1,0 +1,2 @@
+title: $:/config/Server/ExternalFilters/[tags[]!is[system]sort[title]]
+text: yes
