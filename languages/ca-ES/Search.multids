@@ -2,7 +2,7 @@ title: $:/language/Search/
 
 DefaultResults/Caption: Llista
 Filter/Caption: Filtre
-Filter/Hint: Cerca amb una [[filter expression|https://tiddlywiki.com/static/Filters.html]]
+Filter/Hint: Cerca amb una [[expressió de filtre|https://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small><<resultCount>> coincidències</small>//
 Matches: //<small><<resultCount>> coincidències</small>//
 Matches/All: Totes les coincidències:

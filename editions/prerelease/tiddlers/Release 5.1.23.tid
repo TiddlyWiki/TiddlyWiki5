@@ -12,11 +12,14 @@ type: text/vnd.tiddlywiki
 
 ! Translation Improvements
 
-* 
+* Catalan
 
 ! Plugin Improvements
 
+* JSZip Plugin
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6a0ff7db1807f45b73061ced82f5a85f1a529bbf]] ability to dynamically create Zip files, giving TiddlyWiki the ability to build static sites within the browser
 * Freelinks Plugin
+** [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1f354a972e0217e034d1f59d31577c1fd6b186f3]] support for ignoring case when matching titles
 ** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/05e6c1bf62cd51df6aa025d0ad07f7959cde6fa0]] bug with autolinking within HTML `<a>` elements
 * Twitter Plugin
 ** [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3a20fb1e3a41a032574d227a8c770a11ae0a5d58]] warning if wiki needs to be saved and reloaded
@@ -30,6 +33,7 @@ type: text/vnd.tiddlywiki
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/pull/4590]] Vanilla theme to use palette colours for the [[browser selection outline|https://developer.mozilla.org/en-US/docs/Web/CSS/::selection]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1546a4a1895b93a47b79c9d37b94be039604443a]] warning message about using the online plugin library with the client-server configuration
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/4585]] Gruvbox palette readability of toolbar buttons
+* [[Changed|https://github.com/Jermolene/TiddlyWiki5/commit/9cd5415dfe54b47819920aa3cf6ac2d5e3a9188e]] favicon for the prerelease edition
 
 
 ! Hackability Improvements

@@ -10,7 +10,7 @@ RecentSystemTiddlers: Tiddlers que s'han modificat recentment, inclós els tiddl
 RecentTiddlers: Tiddlers que s'han modificat recentment
 SessionTiddlers: Tiddlers modificats des que es va carregar el wiki
 ShadowTiddlers: Tiddlers amb ombra predefinits
-StoryList: Tiddlers al riu de la història, a excepció de <$text text="$:/AdvancedSearch"/>
+StoryList: Els tiddlers de la cronologia, a excepció de <$text text="$:/AdvancedSearch"/>
 SystemTags: Etiquetes del sistema
 SystemTiddlers: Tiddlers del sistema
 TypedTiddlers: Tiddlers amb text que no és wiki

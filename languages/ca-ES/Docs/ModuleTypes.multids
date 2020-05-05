@@ -14,7 +14,7 @@ library: Tipus de mòdul genèric per a mòduls JavaScript de propòsit general.
 macro: Definicions de macros JavaScript.
 parser: Analitzadors sintàctics per a diferents tipus de continguts.
 route: Defineix com el servidor HTTP integrat gestiona els patrons d’URL individuals.
-saver: Gestionen diferents mètodes per a desar fitxers des del navegador.
+saver: Els gestors de baixades (saver) ofereixen diferents mètodes per a desar fitxers des del navegador.
 startup: Funcions de l'inici
 storyview: Les vistes de la cronologia personalitzen l'animació i el comportament dels widgets llista.
 texteditoroperation: Una operació de la barra d'eines de l'editor de text.

@@ -1,0 +1,24 @@
+title: $:/plugins/tiddlywiki/jszip/examples
+
+\define actions-render-static-site()
+<$action-sendmessage $message="tm-zip-create" $param="$:/temp/_ZipTiddler"/>
+<$list filter="[all[tiddlers]!is[system]limit[100]]">
+<$action-sendmessage $message="tm-zip-render-file" $param="$:/temp/_ZipTiddler" filename={{{ [<currentTiddler>encodeuricomponent[]addsuffix[.html]] }}} tiddler=<<currentTiddler>> template="$:/core/templates/static.tiddler.html"/>
+</$list>
+<$action-sendmessage $message="tm-zip-render-file" $param="$:/temp/_ZipTiddler" filename="static.css" template="$:/core/templates/static.template.css"/>
+<$action-sendmessage $message="tm-zip-download" $param="$:/temp/_ZipTiddler" filename="myzip.zip"/>
+\end
+
+! Rendering a Static Site to a Zip File
+
+The actions below create a ZIP file containing a static HTML rendering of the first 100 non-system tiddlers:
+
+<pre>
+<$text text=<<actions-render-static-site>>/>
+</pre>
+
+<$button actions=<<actions-render-static-site>>>
+Render site
+</$button>
+
+Temporary zip file: $:/temp/_ZipTiddler
