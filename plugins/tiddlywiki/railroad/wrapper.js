@@ -40,7 +40,7 @@ RailroadWidget.prototype.render = function(parent,nextSibling) {
 	var div = this.document.createElement("div");
 	try {
 		// Initialise options from the config tiddler or widget attributes
-		var config = $tw.wiki.getTiddlerData(RAILROAD_OPTIONS,{});
+		var config = this.wiki.getTiddlerData(RAILROAD_OPTIONS,{});
 		var options = {
 			arrow: this.getAttribute("arrow", config.arrow || "yes") === "yes",
 			debug: this.getAttribute("debug", config.debug || "no") === "yes",

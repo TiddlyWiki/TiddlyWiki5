@@ -37,13 +37,13 @@ exports.has = function(source,operator,options) {
 	else if(operator.suffix === "index") {
 		if(invert) {
 			source(function(tiddler,title) {
-				if(!tiddler || (tiddler && (!$tw.utils.hop($tw.wiki.getTiddlerDataCached(tiddler,Object.create(null)),operator.operand)))) {
+				if(!tiddler || (tiddler && (!$tw.utils.hop(options.wiki.getTiddlerDataCached(tiddler,Object.create(null)),operator.operand)))) {
 					results.push(title);
 				}
 			});
 		} else {
 			source(function(tiddler,title) {
-				if(tiddler && $tw.utils.hop($tw.wiki.getTiddlerDataCached(tiddler,Object.create(null)),operator.operand)) {
+				if(tiddler && $tw.utils.hop(options.wiki.getTiddlerDataCached(tiddler,Object.create(null)),operator.operand)) {
 					results.push(title);
 				}
 			});
