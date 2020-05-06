@@ -9,7 +9,7 @@ Freelinking is activated for runs of text that have the following variables set:
 * `tv-wikilinks` is NOT equal to `no`
 * `tv-freelinks` is set to `yes`
 
-Freelinks are case sensitive.
+Freelinks are case sensitive by default but can be configured to ignore case in the settings tab.
 
 Within view templates, the variable `tv-freelinks` is automatically set to the content of $:/config/Freelinks/Enable, which can be set via the settings panel of this plugin.
 
