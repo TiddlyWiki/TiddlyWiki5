@@ -1,9 +1,10 @@
-caption: WebDAV
+caption: ~WebDAV
+color: #f48fb1
 created: 20160216191710789
 delivery: Protocol
 description: Standard web protocol available on products such as Sharepoint
 method: save
-modified: 20171117171334181
+modified: 20200507110716964
 tags: Saving Android Chrome Firefox InternetExplorer iOS Linux Mac Opera PHP Safari Windows
 title: Saving via WebDAV
 type: text/vnd.tiddlywiki

@@ -1,9 +1,10 @@
 caption: HTA Hack
+color: #F06292
 created: 20131212223146250
 delivery: DIY
 description: Manual method to let Internet Explorer save changes directly
 method: save
-modified: 20171113160539299
+modified: 20200507110355115
 tags: Saving Windows
 title: Windows HTA Hack
 type: text/vnd.tiddlywiki

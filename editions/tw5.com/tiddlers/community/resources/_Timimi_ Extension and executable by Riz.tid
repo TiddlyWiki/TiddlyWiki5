@@ -1,9 +1,11 @@
 caption: Timimi
+color: #4db6ac
+community-author: Riz
 created: 20180830194141190
 delivery: Browser Extension & Native host
 description: Browser extension & native host for desktops
 method: save
-modified: 20200501092235061
+modified: 20200507105723087
 tags: Windows Linux Chrome Firefox Saving Resources plugins Mac Opera
 title: Timimi: WebExtension and Native Host by Riz
 type: text/vnd.tiddlywiki

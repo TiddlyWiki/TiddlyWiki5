@@ -1,9 +1,11 @@
 caption: Tiddloid and Tiddloid Lite
+color: #FF8A65
+community-author: donmor
 created: 20130825161400000
 delivery: App
 description: Android app for saving changes locally to device storage
 method: save
-modified: 20200501103500478
+modified: 20200507103926292
 tags: Saving Android
 title: Saving on Android
 type: text/vnd.tiddlywiki
