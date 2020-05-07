@@ -1,5 +1,8 @@
-title: $:/_tw5.com-styles
+created: 20200507002727378
+modified: 20200507044539775
 tags: $:/tags/Stylesheet
+title: $:/_tw5.com-styles
+type: text/vnd.tiddlywiki
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
@@ -74,3 +77,114 @@ tags: $:/tags/Stylesheet
 	width: 1em;
 	height: 1em;
 }
+
+
+
+.tc-wrapper-flex {
+	display: flex;
+}
+
+.tc-saving-sidebar {
+	margin: 0;
+	padding: 0;
+	min-width: 200px;
+	overflow: auto;
+}
+
+.tc-saving-sidebar a {
+	display: block;
+}
+
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+	.tc-wrapper-flex {
+		flex-direction: column;
+	}
+	.tc-saving-sidebar {
+		width: 100%;
+		height: auto;
+	}
+	.tc-saving-sidebar a {
+		float: left;
+	}
+}
+
+.tc-saving-sidebar-category {
+	margin-bottom: 10px;
+}
+
+.tc-saving-sidebar-category-title {
+	font-weight: bold;
+	margin-bottom: 5px;
+	font-size: 16px;
+}
+
+.tc-saving-sidebar-category-item {
+	margin-left: 10px;
+}
+
+.tc-card {
+	margin: 20px;
+	padding: 15px 30px;
+	border-radius: 10px;
+	border-top: 5px solid #45D3D3;
+	box-shadow: 0 8px 17px -8px #A3A5AE;
+	background-color: #FFF;
+	width: 300px;
+	transition: box-shadow 0.3s ease-in-out;
+	display: flex;
+	flex-direction: column;
+}
+
+.tc-card:hover {
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.tc-card-title {
+	text-align: center;
+	font-size: 1.2em;
+	margin-top: 15px;
+	margin-bottom: 10px;
+	font-weight: 600;
+}
+
+.tc-card-author {
+	text-align: right;
+}
+
+.tc-card p {
+	height: 110px;
+	overflow: hidden;
+}
+
+.tc-card a:last-child {
+	margin-top: auto;
+}
+
+div.content {
+	padding: 1px 16px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.tc-btn-download {
+	width: 250px;
+	padding: 10px;
+	border-radius: 5px;
+	background: #1462ff;
+	border-radius: 5px;
+        border: none;
+	box-shadow: 0 6px 30px -10px #4a74c9;
+	overflow: hidden;
+	transition: box-shadow 0.3s ease-in-out;
+	cursor: pointer;
+        font-size: 1.2em;
+        line-height: 1.4em;
+        color: #fff;
+        fill: #fff;
+}
+
+.tc-btn-download:hover {
+	background: #1475ff;
+	box-shadow: 0 9px 40px -7px #4a74c9;
+}
+
