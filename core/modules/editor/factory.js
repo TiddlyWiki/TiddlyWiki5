@@ -177,7 +177,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editFocusPopup = this.getAttribute("focusPopup");
 		this.editFocus = this.getAttribute("focus");
 		this.editTabIndex = this.getAttribute("tabindex");
-		this.editInputActions = this.getAttribute("inputactions");
+		this.editInputActions = this.getAttribute("inputActions");
 		this.editRefreshTitle = this.getAttribute("refreshTitle");
 		// Get the default editor element tag and type
 		var tag,type;
@@ -210,7 +210,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.inputactions || changedAttributes.refreshTitle || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
+		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.inputActions || changedAttributes.refreshTitle || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
 			this.refreshSelf();
 			return true;
 		} else if (changedTiddlers[this.editRefreshTitle]) {
