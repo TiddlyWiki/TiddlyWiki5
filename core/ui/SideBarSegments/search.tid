@@ -2,11 +2,20 @@ title: $:/core/ui/SideBarSegments/search
 tags: $:/tags/SideBarSegment
 
 \whitespace trim
+
+\define cancel-search-actions() <$action-deletetiddler $filter="[<__storeTitle__>] [<__tiddler__>] [<__selectionStateTitle__>]"/>
+
+\define input-actions() <$action-setfield $tiddler=<<__storeTitle__>> text={{{ [<__tiddler__>get[text]] }}}/>
+
+\define input-accept-actions() <$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/>
+
+\define input-accept-variant-actions() <$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/>
+
 <div class="tc-sidebar-lists tc-sidebar-search">
 
 <$vars searchTiddler="$:/temp/search/input" searchListState=<<qualify "$:/state/search-list/selected-item">> filter1="[!is[system]search:title<userInput>sort[title]limit[250]]" filter2="[!is[system]search<userInput>sort[title]limit[250]]">
 <div class="tc-search">
-<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/search" type="search" tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> class="tc-popup-handle" inputActions="""<$action-setfield $tiddler="$:/temp/search/input" text={{$:/temp/search}}/>""" storeTitle="$:/temp/search/input" filter1=<<filter1>> filter2=<<filter2>> inputCancelActions="""<$action-deletetiddler $filter="[[$:/temp/search]] [[$:/temp/search/input]] [<__selectionStateTitle__>]"/>""" inputAcceptActions="""<$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/>""" inputAcceptVariantActions="""<$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/>""" filterMinLength={{$:/config/Search/MinLength}} refreshTitle="$:/temp/search/refresh" selectionStateTitle=<<searchListState>>/>
+<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/search" storeTitle="$:/temp/search/input"  selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> class="tc-popup-handle" inputActions=<<input-actions>>  filter1=<<filter1>> filter2=<<filter2>>  filterMinLength={{$:/config/Search/MinLength}} inputCancelActions=<<cancel-search-actions>> inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> />
 <$reveal state="$:/temp/search/input" type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
