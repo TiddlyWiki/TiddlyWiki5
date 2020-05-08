@@ -78,7 +78,7 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 			wiki: this.wiki,
 			fileSystemPath: options.fileInfo.filepath
 		});
-		if(options.fileInfo && options.fileInfo.filepath == fileInfo.filepath) {
+		if(options.fileInfo && options.fileInfo.filepath === fileInfo.filepath) {
 			options = null; //if filepaths match, options not needed
 		} else {
 			$tw.boot.files[title] = fileInfo; //else, store new fileInfo
@@ -94,7 +94,7 @@ Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 	var self = this;
 	this.getTiddlerFileInfo(tiddler,function(err,fileInfo,options) {
-		if(err) {
+		if (err) {
 			return callback(err);
 		}
 		if (options !== null) {
