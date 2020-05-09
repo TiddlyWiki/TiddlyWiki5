@@ -421,6 +421,7 @@ Widget.prototype.addEventListener = function(type,handler) {
 Dispatch an event to a widget. If the widget doesn't handle the event then it is also dispatched to the parent widget
 */
 Widget.prototype.dispatchEvent = function(event) {
+	event.widget = event.widget || this;
 	// Dispatch the event if this widget handles it
 	var listener = this.eventListeners[event.type];
 	if(listener) {
