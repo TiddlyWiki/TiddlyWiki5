@@ -3,6 +3,31 @@ tags: $:/tags/SideBarSegment
 
 \whitespace trim
 
+\define count-popup-button()
+\whitespace trim
+<$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
+{{$:/core/images/down-arrow}}
+<$list filter="[{$(searchTiddler)$}minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
+<$set name="searchTerm" value={{{ [<searchTiddler>get[text]] }}}>
+<$set name="resultCount" value="""<$count filter="[!is[system]search<searchTerm>]"/>""">
+{{$:/language/Search/Matches}}
+</$set>
+</$set>
+</$list>
+</$button>
+\end
+
+\define search-results-list()
+\whitespace trim
+<$list filter="[{$(searchTiddler)$}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+
+{{$:/core/ui/SearchResults}}
+
+</$list>
+\end
+
+\define delete-state-tiddlers() <$action-deletetiddler $filter="[[$:/temp/search]] [<searchTiddler>] [<searchListState>]"/>
+
 \define cancel-search-actions() <$action-deletetiddler $filter="[<__storeTitle__>] [<__tiddler__>] [<__selectionStateTitle__>]"/>
 
 \define input-accept-actions() <$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/>
@@ -13,45 +38,32 @@ tags: $:/tags/SideBarSegment
 
 <$vars searchTiddler="$:/temp/search/input" searchListState=<<qualify "$:/state/search-list/selected-item">> titleSearchFilter="[!is[system]search:title<userInput>sort[title]limit[250]]" allSearchFilter="[!is[system]search<userInput>sort[title]limit[250]]">
 <div class="tc-search">
-<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/search" storeTitle="$:/temp/search/input"  selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> class="tc-popup-handle" filter1=<<titleSearchFilter>> filter2=<<allSearchFilter>> filterMinLength={{$:/config/Search/MinLength}} inputCancelActions=<<cancel-search-actions>> inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> />
+<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/search" storeTitle=<<searchTiddler>> selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> class="tc-popup-handle" filter1=<<titleSearchFilter>> filter2=<<allSearchFilter>> filterMinLength={{$:/config/Search/MinLength}} inputCancelActions=<<cancel-search-actions>> inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> />
 <$reveal state="$:/temp/search/input" type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
-<$action-deletetiddler $filter="[[$:/temp/search]] [[$:/temp/search/input]] [<searchListState>]"/>
+<<delete-state-tiddlers>>
 <$action-navigate $to="$:/AdvancedSearch"/>
 {{$:/core/images/advanced-search-button}}
 </$button>
 <$button class="tc-btn-invisible">
-<$action-deletetiddler $filter="[[$:/temp/search]] [[$:/temp/search/input]] [<searchListState>]"/>
+<<delete-state-tiddlers>>
 {{$:/core/images/close-button}}
 </$button>
-<$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
-{{$:/core/images/down-arrow}}
-<$list filter="[{$:/temp/search/input}minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
-<$set name="searchTerm" value={{{ [<searchTiddler>get[text]] }}}>
-<$set name="resultCount" value="""<$count filter="[!is[system]search<searchTerm>]"/>""">
-{{$:/language/Search/Matches}}
-</$set>
-</$set>
-</$list>
-</$button>
+<<count-popup-button>>
 </$reveal>
-<$reveal state="$:/temp/search/input" type="match" text="">
+<$reveal state=<<searchTiddler>> type="match" text="">
 <$button to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 {{$:/core/images/advanced-search-button}}
 </$button>
 </$reveal>
 </div>
 
-<$reveal tag="div" class="tc-block-dropdown-wrapper" state="$:/temp/search/input" type="nomatch" text="">
+<$reveal tag="div" class="tc-block-dropdown-wrapper" state=<<searchTiddler>> type="nomatch" text="">
 
 <$reveal tag="div" class="tc-block-dropdown tc-search-drop-down tc-popup-handle" state=<<qualify "$:/state/popup/search-dropdown">> type="nomatch" text="" default="">
 
-<$list filter="[{$:/temp/search/input}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
-
-{{$:/core/ui/SearchResults}}
-
-</$list>
+<<search-results-list>>
 
 </$reveal>
 
