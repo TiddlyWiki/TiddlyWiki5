@@ -1,6 +1,8 @@
 title: $:/core/macros/tag-picker
 tags: $:/tags/Macro
 
+\define delete-tag-state-tiddlers() <$action-deletetiddler $filter="[<newTagNameTiddler>] [<storeTitle>] [<tagSelectionState>]"/>
+
 \define add-tag-actions()
 <$set name="tag" value={{{ [<__tiddler__>get[text]] }}}>
 <$list filter="[<currentTiddler>!tag<tag>]" variable="ignore" emptyMessage="""
@@ -16,7 +18,7 @@ tags: $:/tags/Macro
 \define tag-button(selectedClass)
 <$button class="tc-btn-invisible $selectedClass$" tag="a" tooltip={{$:/language/EditTemplate/Tags/Add/Button/Hint}}>
 <$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
-<$action-deletetiddler $filter="[<newTagNameTiddler>] [<storeTitle>] [<tagSelectionState>]"/>
+<<delete-tag-state-tiddlers>>
 <$macrocall $name="tag-pill" tag=<<tag>>/>
 </$button>
 \end
@@ -37,7 +39,7 @@ tags: $:/tags/Macro
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$button set=<<newTagNameTiddler>> setTo="" class="">
 <$action-sendmessage $message="tm-add-tag" $param={{{ [<newTagNameTiddler>get[text]] }}}/>
-<$action-deletetiddler $filter="[<newTagNameTiddler>] [<storeTitle>] [<tagSelectionState>]"/>
+<<delete-tag-state-tiddlers>>
 {{$:/language/EditTemplate/Tags/Add/Button}}
 </$button>
 </$set>
