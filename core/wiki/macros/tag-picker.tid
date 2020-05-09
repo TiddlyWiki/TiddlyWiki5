@@ -27,7 +27,7 @@ tags: $:/tags/Macro
 </$list>
 \end
 
-\define input-actions() <$action-setfield $tiddler=<<storeTitle>> text={{{ [<newTagNameTiddler>get[text]] }}}/>
+\define input-actions() <$action-setfield $tiddler=<<__storeTitle__>> text={{{ [<newTagNameTiddler>get[text]] }}}/>
 
 \define tag-picker-inner()
 \whitespace trim
