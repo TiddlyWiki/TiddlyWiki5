@@ -1052,7 +1052,7 @@ exports.makeTranscludeWidget = function(title,options) {
 	if(options.children) {
 		parseTreeTransclude.children = options.children;
 	}
-	return $tw.wiki.makeWidget(parseTreeDiv,options);
+	return this.makeWidget(parseTreeDiv,options);
 };
 
 /*

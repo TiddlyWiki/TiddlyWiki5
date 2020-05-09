@@ -40,7 +40,8 @@ TextNodeWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 TextNodeWidget.prototype.execute = function() {
-	var self = this;
+	var self = this,
+		ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}).trim() === "yes";
 	// Get our parameters
 	var childParseTree = [{
 			type: "plain-text",
@@ -49,10 +50,8 @@ TextNodeWidget.prototype.execute = function() {
 	// Only process links if not disabled and we're not within a button or link widget
 	if(this.getVariable("tv-wikilinks",{defaultValue:"yes"}).trim() !== "no" && this.getVariable("tv-freelinks",{defaultValue:"no"}).trim() === "yes" && !this.isWithinButtonOrLink()) {
 		// Get the information about the current tiddler titles, and construct a regexp
-		this.tiddlerTitleInfo = this.wiki.getGlobalCache("tiddler-title-info",function() {
-			var titles = [],
-				reparts = [],
-				sortedTitles = self.wiki.allTitles().sort(function(a,b) {
+		this.tiddlerTitleInfo = this.wiki.getGlobalCache("tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive"),function() {
+			var sortedTitles = self.wiki.allTitles().sort(function(a,b) {
 					var lenA = a.length,
 						lenB = b.length;
 					// First sort by length, so longer titles are first
@@ -72,7 +71,9 @@ TextNodeWidget.prototype.execute = function() {
 							return 0;
 						}
 					}
-				});
+				}),
+				titles = [],
+				reparts = [];
 			$tw.utils.each(sortedTitles,function(title) {
 				if(title.substring(0,3) !== "$:/") {
 					titles.push(title);
@@ -81,7 +82,7 @@ TextNodeWidget.prototype.execute = function() {
 			});
 			return {
 				titles: titles,
-				regexp: new RegExp(reparts.join("|"),"")
+				regexp: new RegExp(reparts.join("|"),ignoreCase ? "i" : "")
 			};
 		});
 		// Repeatedly linkify
@@ -101,7 +102,7 @@ TextNodeWidget.prototype.execute = function() {
 					childParseTree[index] = {
 						type: "link",
 						attributes: {
-							to: {type: "string", value: match[0]},
+							to: {type: "string", value: ignoreCase ? this.tiddlerTitleInfo.titles[match.indexOf(match[0],1) - 1] : match[0]},
 							"class": {type: "string", value: "tc-freelink"}
 						},
 						children: [{
@@ -144,7 +145,7 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 		titlesHaveChanged = false;
 	$tw.utils.each(changedTiddlers,function(change,title) {
 		if(change.isDeleted) {
-			titlesHaveChanged = true
+			titlesHaveChanged = true;
 		} else {
 			titlesHaveChanged = titlesHaveChanged || !self.tiddlerTitleInfo || self.tiddlerTitleInfo.titles.indexOf(title) === -1;
 		}
