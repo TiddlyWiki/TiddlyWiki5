@@ -10,12 +10,11 @@ tags: $:/tags/Macro
 <$action-setfield $tiddler=<<__selectionStateTitle__>> text=<<nextItem>>/>
 <$list filter="[<__index__>match[]]">
 <$action-setfield $tiddler=<<__tiddler__>> $field=<<__field__>> $value={{{ [<nextItem>] +[splitregexp[(?:.(?!-))+$]] }}}/>
-<$action-setfield $tiddler=<<__refreshTitle__>> text="yes"/>
 </$list>
 <$list filter="[<__index__>!match[]]">
 <$action-setfield $tiddler=<<__tiddler__>> $index=<<__index__>> $value={{{ [<nextItem>] +[splitregexp[(?:.(?!-))+$]] }}}/>
-<$action-setfield $tiddler=<<__refreshTitle__>> text="yes"/>
 </$list>
+<$action-setfield $tiddler=<<__refreshTitle__>> text="yes"/>
 </$list>
 </$set>
 </$set>
