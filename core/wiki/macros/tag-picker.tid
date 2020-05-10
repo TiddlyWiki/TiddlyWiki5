@@ -3,8 +3,6 @@ tags: $:/tags/Macro
 
 \define delete-tag-state-tiddlers() <$action-deletetiddler $filter="[<newTagNameTiddler>] [<storeTitle>] [<tagSelectionState>]"/>
 
-\define delete-tag-state-tiddlers-inner() <$action-deletetiddler $filter="[<__tiddler__>] [<__storeTitle__>] [<__selectionStateTitle__>]"/>
-
 \define add-tag-actions()
 <$set name="tag" value={{{ [<__tiddler__>get[text]] }}}>
 <$list filter="[<currentTiddler>!tag<tag>]" variable="ignore" emptyMessage="""
@@ -13,7 +11,7 @@ tags: $:/tags/Macro
 <$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
 </$list>
 </$set>
-<<delete-tag-state-tiddlers-inner>>
+<<delete-tag-state-tiddlers>>
 <$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 \end
 
@@ -27,7 +25,7 @@ tags: $:/tags/Macro
 
 \define clear-tags-actions()
 <$list filter="[<__storeTitle__>has[text]] [<__tiddler__>has[text]]" variable="ignore" emptyMessage="""<$action-deletetiddler $filter="[<__storeTitle__>] [<__tiddler__>] [<__selectionStateTitle__>]"/><$action-sendmessage $message="tm-cancel-tiddler"/>""">
-<<delete-tag-state-tiddlers-inner>>
+<<delete-tag-state-tiddlers>>
 </$list>
 \end
 
