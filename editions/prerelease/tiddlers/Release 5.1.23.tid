@@ -45,6 +45,7 @@ type: text/vnd.tiddlywiki
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/77a929faa3a33768e52cf2a34ecbef9c554a6a7b]] ActionPopupWidget to allow popups to be dismissed
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/2a8f7a9c503c9a6e4ea1bcd116be31ab6e90cf52]] [[favicon mechanism|Setting a favicon]] to support ''_canonical_uri'' images
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/48dfadd85b8ebd788b44ed2c46108720742546df]] support for recording the startup timestamp in $:/info/startup-timestamp (see [[InfoMechanism]])
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bf6735420d2f8191f658c556910e7d73c681d5fe]] support for SVG favicons
 
 ! Bug Fixes
 
