@@ -34,11 +34,13 @@ tags: $:/tags/SideBarSegment
 
 \define input-accept-variant-actions() <$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/>
 
+\define input-actions() <$action-setfield $tiddler=<<__storeTitle__>> text={{{ [<__tiddler__>get[text]] }}}/>
+
 <div class="tc-sidebar-lists tc-sidebar-search">
 
 <$vars searchTiddler="$:/temp/search/input" searchListState=<<qualify "$:/state/search-list/selected-item">> titleSearchFilter="[!is[system]search:title<userInput>sort[title]limit[250]]" allSearchFilter="[!is[system]search<userInput>sort[title]limit[250]]">
 <div class="tc-search">
-<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/search" storeTitle=<<searchTiddler>> selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> class="tc-popup-handle" filter1=<<titleSearchFilter>> filter2=<<allSearchFilter>> filterMinLength={{$:/config/Search/MinLength}} inputCancelActions=<<cancel-search-actions>> inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> />
+<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/search" storeTitle=<<searchTiddler>> selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> class="tc-popup-handle" filter1=<<titleSearchFilter>> filter2=<<allSearchFilter>> filterMinLength={{$:/config/Search/MinLength}} inputActions=<<input-actions>> inputCancelActions=<<cancel-search-actions>> inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> />
 <$reveal state="$:/temp/search/input" type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
