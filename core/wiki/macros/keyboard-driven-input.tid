@@ -1,6 +1,15 @@
 title: $:/core/macros/keyboard-driven-input
 tags: $:/tags/Macro
 
+\define keyboard-input-actions()
+<$list filter="[<__index__>match[]]">
+<$action-setfield $tiddler=<<__storeTitle__>> text={{{ [<__tiddler__>get<__field__>] }}}/>
+</$list>
+<$list filter="[<__index__>!match[]]">
+<$action-setfield $tiddler=<<__storeTitle__>> text={{{ [<__tiddler__>getindex<__index__>] }}}/>
+</$list>
+\end
+
 \define keyboard-input-up-down-actions(reverse,afterOrBefore) <$macrocall $name="input-next-actions" filter1=<<__filter1__>> filter2=<<__filter2__>> refreshTitle=<<__refreshTitle__>> afterOrBefore="$afterOrBefore$" reverse="$reverse$" tiddler=<<__tiddler__>> storeTitle=<<__storeTitle__>> field=<<__field__>> index=<<__index__>> filterMinLength=<<__filterMinLength__>> selectionStateTitle=<<__selectionStateTitle__>>/>
 
 \define input-next-actions(afterOrBefore:"after",reverse:"",tiddler,storeTitle,field,index,filter1,filter2,refreshTitle,selectionStateTitle)
@@ -24,13 +33,13 @@ tags: $:/tags/Macro
 </$list>
 \end
 
-\define keyboard-driven-input(tiddler,storeTitle,field:"text",index:"",tag:"input",type,focus:"",inputActions,inputAcceptActions,inputAcceptVariantActions,inputCancelActions,placeholder:"",default:"",class,filter1,filter2,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0",refreshTitle,selectionStateTitle)
+\define keyboard-driven-input(tiddler,storeTitle,field:"text",index:"",tag:"input",type,focus:"",inputAcceptActions,inputAcceptVariantActions,inputCancelActions,placeholder:"",default:"",class,filter1,filter2,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0",refreshTitle,selectionStateTitle)
 <$keyboard key="((input-accept))" actions=<<__inputAcceptActions__>>>
 <$keyboard key="((input-accept-variant))" actions=<<__inputAcceptVariantActions__>>>
 <$keyboard key="((input-up))" actions=<<keyboard-input-up-down-actions "reverse[]" "before">>>
 <$keyboard key="((input-down))" actions=<<keyboard-input-up-down-actions "" "after">>>
 <$keyboard key="((input-cancel))" actions=<<__inputCancelActions__>>>
-<$edit-text tiddler=<<__tiddler__>> field=<<__field__>> index=<<__index__>> inputActions=<<__inputActions__>> tag=<<__tag__>> class=<<__class__>> placeholder=<<__placeholder__>> default=<<__default__>> focusPopup=<<__focusPopup__>> focus=<<__focus__>> type=<<__type__>> rows=<<__rows__>> minHeight=<<__minHeight__>>  tabindex=<<__tabindex__>> size=<<__size__>> autoHeight=<<__autoHeight__>> refreshTitle=<<__refreshTitle__>>/>
+<$edit-text tiddler=<<__tiddler__>> field=<<__field__>> index=<<__index__>> inputActions=<<keyboard-input-actions>> tag=<<__tag__>> class=<<__class__>> placeholder=<<__placeholder__>> default=<<__default__>> focusPopup=<<__focusPopup__>> focus=<<__focus__>> type=<<__type__>> rows=<<__rows__>> minHeight=<<__minHeight__>>  tabindex=<<__tabindex__>> size=<<__size__>> autoHeight=<<__autoHeight__>> refreshTitle=<<__refreshTitle__>>/>
 </$keyboard>
 </$keyboard>
 </$keyboard>
