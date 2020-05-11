@@ -24,7 +24,7 @@ tags: $:/tags/Macro
 \end
 
 \define clear-tags-actions()
-<$list filter="[<__storeTitle__>has[text]] [<__tiddler__>has[text]]" variable="ignore" emptyMessage="""<$action-deletetiddler $filter="[<__storeTitle__>] [<__tiddler__>] [<__selectionStateTitle__>]"/><$action-sendmessage $message="tm-cancel-tiddler"/>""">
+<$list filter="[<__storeTitle__>has[text]] [<__tiddler__>has[text]]" variable="ignore" emptyMessage="""<<delete-tag-state-tiddlers>><$action-sendmessage $message="tm-cancel-tiddler"/>""">
 <<delete-tag-state-tiddlers>>
 </$list>
 \end
