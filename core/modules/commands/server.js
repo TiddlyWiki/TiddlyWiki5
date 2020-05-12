@@ -27,8 +27,8 @@ var Command = function(params,commander,callback) {
 };
 
 Command.prototype.execute = function() {
-	if(!$tw.wiki.wikiTiddlersPath) {
-		$tw.utils.warning("Warning: Wiki folder '" + $tw.wiki.wikiPath + "' does not exist or is missing a tiddlywiki.info file");
+	if(!this.commander.wiki.wikiTiddlersPath) {
+		$tw.utils.warning("Warning: Wiki folder '" + this.commander.wiki.wikiPath + "' does not exist or is missing a tiddlywiki.info file");
 	}
 	// Set up server
 	this.server = new Server({

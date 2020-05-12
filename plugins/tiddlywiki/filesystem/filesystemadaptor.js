@@ -21,7 +21,7 @@ function FileSystemAdaptor(options) {
 	this.wiki = options.wiki;
 	this.logger = new $tw.utils.Logger("filesystem",{colour: "blue"});
 	// Create the <wiki>/tiddlers folder if it doesn't exist
-	$tw.utils.createDirectory($tw.wiki.wikiTiddlersPath);
+	$tw.utils.createDirectory(this.wiki.wikiTiddlersPath);
 }
 
 FileSystemAdaptor.prototype.name = "filesystem";
@@ -43,22 +43,22 @@ Return a fileInfo object for a tiddler, creating it if necessary:
   type: the type of the tiddler file (NOT the type of the tiddler -- see below)
   hasMetaFile: true if the file also has a companion .meta file
 
-The boot process populates $tw.wiki.files for each of the tiddler files that it loads. The type is found by looking up the extension in $tw.config.fileExtensionInfo (eg "application/x-tiddler" for ".tid" files).
+The boot process populates this.wiki.files for each of the tiddler files that it loads. The type is found by looking up the extension in $tw.config.fileExtensionInfo (eg "application/x-tiddler" for ".tid" files).
 
-It is the responsibility of the filesystem adaptor to update $tw.wiki.files for new files that are created.
+It is the responsibility of the filesystem adaptor to update this.wiki.files for new files that are created.
 */
 FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 	// See if we've already got information about this file
 	var title = tiddler.fields.title,
-		fileInfo = $tw.wiki.files[title];
+		fileInfo = this.wiki.files[title];
 	if(!fileInfo) {
 		// Otherwise, we'll need to generate it
 		fileInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
-			directory: $tw.wiki.wikiTiddlersPath,
+			directory: this.wiki.wikiTiddlersPath,
 			pathFilters: this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n"),
 			wiki: this.wiki
 		});
-		$tw.wiki.files[title] = fileInfo;
+		this.wiki.files[title] = fileInfo;
 	}
 	callback(null,fileInfo);
 };
@@ -91,7 +91,7 @@ Delete a tiddler and invoke the callback with (err)
 */
 FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 	var self = this,
-		fileInfo = $tw.wiki.files[title];
+		fileInfo = this.wiki.files[title];
 	// Only delete the tiddler if we have writable information for the file
 	if(fileInfo) {
 		// Delete the file
