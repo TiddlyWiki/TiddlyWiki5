@@ -22,7 +22,7 @@ $tw.boot = $tw.boot || Object.create(null);
 ['files', 'wikiInfo', 'wikiPath', 'wikiTiddlersPath'].forEach(function(e){
 	Object.defineProperty($tw.boot, e, { 
 		get: function() { 
-			console.log(new Error("$tw.boot." + e + " has been renamed $tw.wiki." + e).stack);
+			console.log(new Error("$tw.boot." + e + " has been renamed $tw.wiki." + e).stack.split('\n').slice(0,4).join('\n'));
 			return $tw.wiki[e];
 		},
 		set: function(v) { 
