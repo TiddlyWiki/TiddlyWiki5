@@ -112,15 +112,14 @@ Server.prototype.addAuthenticator = function(AuthenticatorClass) {
 };
 
 Server.prototype.findMatchingRoute = function(request,state) {
-	var pathprefix = this.get("path-prefix") || "";
 	for(var t=0; t<this.routes.length; t++) {
 		var potentialRoute = this.routes[t],
 			pathRegExp = potentialRoute.path,
 			pathname = state.urlInfo.pathname,
 			match;
-		if(pathprefix) {
-			if(pathname.substr(0,pathprefix.length) === pathprefix) {
-				pathname = pathname.substr(pathprefix.length) || "/";
+		if(state.pathPrefix) {
+			if(pathname.substr(0,state.pathPrefix.length) === state.pathPrefix) {
+				pathname = pathname.substr(state.pathPrefix.length) || "/";
 				match = potentialRoute.path.exec(pathname);
 			} else {
 				match = false;
@@ -156,14 +155,16 @@ Server.prototype.isAuthorized = function(authorizationType,username) {
 	return principals.indexOf("(anon)") !== -1 || (username && (principals.indexOf("(authenticated)") !== -1 || principals.indexOf(username) !== -1));
 }
 
-Server.prototype.requestHandler = function(request,response) {
+Server.prototype.requestHandler = function(request,response,options) {
+	options = options || Object.create(null);
 	// Compose the state object
 	var self = this;
 	var state = {};
-	state.wiki = self.wiki;
+	state.wiki = options.wiki || self.wiki;
 	state.server = self;
 	state.urlInfo = url.parse(request.url);
 	state.queryParameters = querystring.parse(state.urlInfo.query);
+	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
 	// Get the principals authorized to access this resource
 	var authorizationType = this.methodMappings[request.method] || "readers";
 	// Check for the CSRF header if this is a write
