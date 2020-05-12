@@ -803,7 +803,11 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 				moduleInfo.definition(moduleInfo,moduleInfo.exports,sandbox.require);
 			} else if(typeof moduleInfo.definition === "string") { // String
 				moduleInfo.exports = _exports;
-				$tw.utils.evalSandboxed(moduleInfo.definition,sandbox,tiddler.fields.title);
+				// let isShadow = $tw.wiki.isShadowTiddler(tiddler.fields.title);
+				// let source = isShadow ? $tw.wiki.getShadowSource(tiddler.fields.title) : tiddler.fields.title;
+				let filename = tiddler.fields.title;
+				// console.log(filename);
+				$tw.utils.evalSandboxed(moduleInfo.definition,sandbox,filename&&filename.startsWith("$:/")?filename.slice(3):filename);
 				if(sandbox.module.exports) {
 					moduleInfo.exports = sandbox.module.exports; //more codemirror workaround
 				}
@@ -2076,7 +2080,7 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 	$tw.utils.each($tw.loadTiddlersFromPath(resolvedWikiPath),function(tiddlerFile) {
 		if(!options.readOnly && tiddlerFile.filepath) {
 			$tw.utils.each(tiddlerFile.tiddlers,function(tiddler) {
-				$tw.boot.files[tiddler.title] = {
+				$tw.wiki.files[tiddler.title] = {
 					filepath: tiddlerFile.filepath,
 					type: tiddlerFile.type,
 					hasMetaFile: tiddlerFile.hasMetaFile
@@ -2089,8 +2093,8 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 	var config = wikiInfo.config || {};
 	if(config["retain-original-tiddler-path"]) {
 		var output = {}, relativePath;
-		for(var title in $tw.boot.files) {
-			relativePath = path.relative(resolvedWikiPath,$tw.boot.files[title].filepath);
+		for(var title in $tw.wiki.files) {
+			relativePath = path.relative(resolvedWikiPath,$tw.wiki.files[title].filepath);
 			output[title] =
 				path.sep === "/" ?
 				relativePath :
@@ -2099,7 +2103,7 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
 	}
 	// Save the path to the tiddlers folder for the filesystemadaptor
-	$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,config["default-tiddler-location"] || $tw.config.wikiTiddlersSubDir);
+	$tw.wiki.wikiTiddlersPath = path.resolve($tw.wiki.wikiPath,config["default-tiddler-location"] || $tw.config.wikiTiddlersSubDir);
 	// Load any plugins within the wiki folder
 	var wikiPluginsPath = path.resolve(wikiPath,$tw.config.wikiPluginsSubDir);
 	if(fs.existsSync(wikiPluginsPath)) {
@@ -2159,8 +2163,8 @@ $tw.loadTiddlersNode = function() {
 		}
 	});
 	// Load the tiddlers from the wiki directory
-	if($tw.boot.wikiPath) {
-		$tw.boot.wikiInfo = $tw.loadWikiTiddlers($tw.boot.wikiPath);
+	if($tw.wiki.wikiPath) {
+		$tw.wiki.wikiInfo = $tw.loadWikiTiddlers($tw.wiki.wikiPath);
 	}
 };
 
@@ -2211,9 +2215,11 @@ $tw.boot.startup = function(options) {
 		log: {}, // Log flags
 		unloadTasks: []
 	});
+	// Create the wiki store for the app
+	$tw.wiki = new $tw.Wiki();
 	if(!$tw.boot.tasks.readBrowserTiddlers) {
 		// For writable tiddler files, a hashmap of title to {filepath:,type:,hasMetaFile:}
-		$tw.boot.files = Object.create(null);
+		$tw.wiki.files = Object.create(null);
 		// System paths and filenames
 		$tw.boot.bootPath = options.bootPath || path.dirname(module.filename);
 		$tw.boot.corePath = path.resolve($tw.boot.bootPath,"../core");
@@ -2231,10 +2237,10 @@ $tw.boot.startup = function(options) {
 		// interpret it as the path to the wiki folder, which will otherwise default
 		// to the current folder
 		if($tw.boot.argv[0] && $tw.boot.argv[0].indexOf("--") !== 0) {
-			$tw.boot.wikiPath = $tw.boot.argv[0];
+			$tw.wiki.wikiPath = $tw.boot.argv[0];
 			$tw.boot.argv = $tw.boot.argv.slice(1);
 		} else {
-			$tw.boot.wikiPath = process.cwd();
+			$tw.wiki.wikiPath = process.cwd();
 		}
 		// Read package info
 		$tw.packageInfo = $tw.packageInfo || require("../package.json");
@@ -2285,8 +2291,6 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("application/x-bibtex","utf8",".bib");
 	$tw.utils.registerFileType("application/epub+zip","base64",".epub");
 	$tw.utils.registerFileType("application/octet-stream","base64",".octet-stream");
-	// Create the wiki store for the app
-	$tw.wiki = new $tw.Wiki();
 	// Install built in tiddler fields modules
 	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
 	// Install the tiddler deserializer modules

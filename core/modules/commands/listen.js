@@ -30,8 +30,8 @@ var Command = function(params,commander,callback) {
 
 Command.prototype.execute = function() {
 	var self = this;
-	if(!$tw.boot.wikiTiddlersPath) {
-		$tw.utils.warning("Warning: Wiki folder '" + $tw.boot.wikiPath + "' does not exist or is missing a tiddlywiki.info file");
+	if(!$tw.wiki.wikiTiddlersPath) {
+		$tw.utils.warning("Warning: Wiki folder '" + $tw.wiki.wikiPath + "' does not exist or is missing a tiddlywiki.info file");
 	}
 	// Set up server
 	this.server = new Server({

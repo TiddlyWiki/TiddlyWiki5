@@ -26,7 +26,7 @@ Command.prototype.execute = function() {
 	var fs = require("fs"),
 		path = require("path");
 	// Check that we don't already have a valid wiki folder
-	if($tw.boot.wikiTiddlersPath || ($tw.utils.isDirectory($tw.boot.wikiPath) && !$tw.utils.isDirectoryEmpty($tw.boot.wikiPath))) {
+	if($tw.wiki.wikiTiddlersPath || ($tw.utils.isDirectory($tw.wiki.wikiPath) && !$tw.utils.isDirectoryEmpty($tw.wiki.wikiPath))) {
 		return "Wiki folder is not empty";
 	}
 	// Loop through each of the specified editions
@@ -39,15 +39,15 @@ Command.prototype.execute = function() {
 			return "Edition '" + editionName + "' not found";
 		}
 		// Copy the edition content
-		var err = $tw.utils.copyDirectory(editionPath,$tw.boot.wikiPath);
+		var err = $tw.utils.copyDirectory(editionPath,$tw.wiki.wikiPath);
 		if(!err) {
-			this.commander.streams.output.write("Copied edition '" + editionName + "' to " + $tw.boot.wikiPath + "\n");
+			this.commander.streams.output.write("Copied edition '" + editionName + "' to " + $tw.wiki.wikiPath + "\n");
 		} else {
 			return err;
 		}
 	}
 	// Tweak the tiddlywiki.info to remove any included wikis
-	var packagePath = $tw.boot.wikiPath + "/tiddlywiki.info",
+	var packagePath = $tw.wiki.wikiPath + "/tiddlywiki.info",
 		packageJson = JSON.parse(fs.readFileSync(packagePath));
 	delete packageJson.includeWikis;
 	fs.writeFileSync(packagePath,JSON.stringify(packageJson,null,$tw.config.preferences.jsonSpaces));

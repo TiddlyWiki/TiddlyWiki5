@@ -19,6 +19,18 @@ var _bootprefix = (function($tw) {
 $tw = $tw || Object.create(null);
 $tw.boot = $tw.boot || Object.create(null);
 
+['files', 'wikiInfo', 'wikiPath', 'wikiTiddlersPath'].forEach(function(e){
+	Object.defineProperty($tw.boot, e, { 
+		get: function() { 
+			console.log(new Error("$tw.boot." + e + " has been renamed $tw.wiki." + e).stack);
+			return $tw.wiki[e];
+		},
+		set: function(v) { 
+			$tw.wiki[e] = v;
+		}
+	});
+});
+
 // Detect platforms
 if(!("browser" in $tw)) {
 	$tw.browser = typeof(window) !== "undefined" ? {} : null;
