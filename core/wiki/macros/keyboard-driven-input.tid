@@ -40,11 +40,11 @@ tags: $:/tags/Macro
 <$keyboard key="((input-down))" actions=<<keyboard-input-up-down-actions "" "after">>>
 <$keyboard key="((input-cancel))" actions=<<__inputCancelActions__>>>
 <$edit-text tiddler=<<__tiddler__>> field=<<__field__>> index=<<__index__>> 
-						inputActions=<<keyboard-input-actions>> tag=<<__tag__>> class=<<__class__>> 
-						placeholder=<<__placeholder__>> default=<<__default__>> focusPopup=<<__focusPopup__>> 
-						focus=<<__focus__>> type=<<__type__>> rows=<<__rows__>> minHeight=<<__minHeight__>> 
-						tabindex=<<__tabindex__>> size=<<__size__>> autoHeight=<<__autoHeight__>> 
-						refreshTitle=<<__refreshTitle__>>/>
+		inputActions=<<keyboard-input-actions>> tag=<<__tag__>> class=<<__class__>> 
+		placeholder=<<__placeholder__>> default=<<__default__>> focusPopup=<<__focusPopup__>> 
+		focus=<<__focus__>> type=<<__type__>> rows=<<__rows__>> minHeight=<<__minHeight__>> 
+		tabindex=<<__tabindex__>> size=<<__size__>> autoHeight=<<__autoHeight__>> 
+		refreshTitle=<<__refreshTitle__>>/>
 </$keyboard>
 </$keyboard>
 </$keyboard>
