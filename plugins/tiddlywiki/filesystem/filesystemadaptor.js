@@ -62,12 +62,14 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 		fileInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
 			directory: $tw.boot.wikiTiddlersPath,
 			pathFilters: this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n"),
+			extFilters: this.wiki.getTiddlerText("$:/config/FileSystemExtensions","").split("\n"),
 			wiki: this.wiki
 		});
 		$tw.boot.files[title] = fileInfo;
 	} else if(fileInfo && fileSystemPaths) {
-		// IF `FileSystemPaths`, we'll need to store the old path and regenerate it
+		// If `FileSystemPaths`, we'll need to store the old path and regenerate it
 		options.fileInfo = {
+			title: title,
 			filepath: fileInfo.filepath,
 			type: fileInfo.type,
 			hasMetaFile: fileInfo.hasMetaFile
@@ -75,11 +77,15 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 		fileInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
 			directory: $tw.boot.wikiTiddlersPath,
 			pathFilters: this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n"),
+			extFilters: this.wiki.getTiddlerText("$:/config/FileSystemExtensions","").split("\n"),
 			wiki: this.wiki,
 			fileSystemPath: options.fileInfo.filepath
 		});
-		if(options.fileInfo && options.fileInfo.filepath === fileInfo.filepath) {
-			options = null; //if filepaths match, options not needed
+		if(	options.fileInfo
+			&& options.fileInfo.filepath === fileInfo.filepath 
+			&& options.fileInfo.type === fileInfo.type
+			&& options.fileInfo.hasMetaFile === fileInfo.hasMetaFile) {
+			options = null; //if everything matches, options not needed
 		} else {
 			$tw.boot.files[title] = fileInfo; //else, store new fileInfo
 		}
@@ -97,13 +103,34 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 		if (err) {
 			return callback(err);
 		}
-		if (options !== null) {
-			//the file's location on disk has changed, call deleteTiddler via options
+		if (options && options.fileInfo !== null && typeof options.fileInfo !== "undefined") {
+			// The file's info (location, extension, hasMetaFile) has changed,
+			// call deleteTiddler via options
 			$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err) {
 				if(err) {
 					return callback(err);
 				}
-				self.deleteTiddler(null,callback,options);	
+				// Check if only the hasMetaFile value has changed
+				if( (fileInfo.filepath === options.fileInfo.filepath)
+					&& (fileInfo.hasMetaFile !== options.fileInfo.hasMetaFile)
+				) {
+					try {
+						if (fileInfo.hasMetaFile === false && options.fileInfo.hasMetaFile === true) {
+							fs.unlink(options.fileInfo.filepath + ".meta",function(err) {
+								if(err) {
+									return callback(err);
+								}
+								return $tw.utils.deleteEmptyDirs(path.dirname(options.fileInfo.filepath),callback);
+							});
+						} else {
+							return callback(null)
+						}						
+					} catch (error) {
+						return callback(error);
+					}
+				} else {
+					self.deleteTiddler(null,callback,options);
+				}	
 			});		
 		} else {
 			$tw.utils.saveTiddlerToFile(tiddler,fileInfo,callback);

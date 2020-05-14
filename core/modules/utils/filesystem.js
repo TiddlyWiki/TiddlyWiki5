@@ -212,7 +212,7 @@ Options include:
 	wiki: optional wiki for evaluating the pathFilters
 */
 exports.generateTiddlerFileInfo = function(tiddler,options) {
-	var fileInfo = {};
+	var fileInfo = {}, metaExt;
 	// Check if the tiddler has any unsafe fields that can't be expressed in a .tid or .meta file: containing control characters, or leading/trailing whitespace
 	var hasUnsafeFields = false;
 	$tw.utils.each(tiddler.getFieldStrings(),function(value,fieldName) {
@@ -238,18 +238,52 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 			fileInfo.type = tiddlerType;
 			fileInfo.hasMetaFile = true;
 		}
+		// Check for extension override on non-draft tiddlers
+		if (options.extFilters && !tiddler.fields["draft.of"]) {
+			metaExt = $tw.utils.generateTiddlerExtension(tiddler.fields.title,{
+				extFilters: options.extFilters,
+				wiki: options.wiki
+			});
+			if (metaExt) {
+				fileInfo.hasMetaFile = true;
+			}
+		}
 	}
 	// Take the file extension from the tiddler content type
 	var contentTypeInfo = $tw.config.contentTypeInfo[fileInfo.type] || {extension: ""};
 	// Generate the filepath
 	fileInfo.filepath = $tw.utils.generateTiddlerFilepath(tiddler.fields.title,{
-		extension: contentTypeInfo.extension,
+		extension: metaExt || contentTypeInfo.extension,
 		directory: options.directory,
 		pathFilters: options.pathFilters,
 		wiki: options.wiki,
 		fileSystemPath: options.fileSystemPath
 	});
 	return fileInfo;
+};
+
+/*
+Generate the file extension for saving a tiddler
+Options include:
+	extFilters: optional array of filters to be used to generate the extention
+	wiki: optional wiki for evaluating the extFilters
+*/
+exports.generateTiddlerExtension = function(title,options) {
+	var self = this,
+		extension;
+	// Check if any of the extFilters applies
+	if(options.extFilters && options.wiki) { 
+		$tw.utils.each(options.extFilters,function(filter) {
+			if(!extension) {
+				var source = options.wiki.makeTiddlerIterator([title]),
+					result = options.wiki.filterTiddlers(filter,null,source);
+				if(result.length > 0) {
+					extension = result[0];
+				}
+			}
+		});
+	}
+	return extension;
 };
 
 /*
