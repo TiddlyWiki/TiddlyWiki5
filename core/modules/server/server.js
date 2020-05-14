@@ -31,6 +31,7 @@ function Server(options) {
 	this.routes = options.routes || [];
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
+	this.boot = options.boot || $tw.boot;
 	this.servername = $tw.utils.transliterateToSafeASCII(this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
@@ -69,8 +70,8 @@ function Server(options) {
 		tlsCertFilepath = this.get("tls-cert");
 	if(tlsCertFilepath && tlsKeyFilepath) {
 		this.listenOptions = {
-			key: fs.readFileSync(path.resolve($tw.boot.wikiPath,tlsKeyFilepath),"utf8"),
-			cert: fs.readFileSync(path.resolve($tw.boot.wikiPath,tlsCertFilepath),"utf8")
+			key: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsKeyFilepath),"utf8"),
+			cert: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsCertFilepath),"utf8")
 		};
 		this.protocol = "https";
 	}
@@ -161,6 +162,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	var self = this;
 	var state = {};
 	state.wiki = options.wiki || self.wiki;
+	state.boot = options.boot || self.boot;
 	state.server = self;
 	state.urlInfo = url.parse(request.url);
 	state.queryParameters = querystring.parse(state.urlInfo.query);
