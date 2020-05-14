@@ -317,6 +317,8 @@ function runTests(wiki) {
 	it("should handle the has operator", function() {
 		expect(wiki.filterTiddlers("[has[modified]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne");
 		expect(wiki.filterTiddlers("[!has[modified]sort[title]]").join(",")).toBe("$:/ShadowPlugin,a fourth tiddler,filter regexp test,has filter,hasList,one");
+		expect(wiki.filterTiddlers("[has[tags]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[!has[tags]sort[title]]").join(",")).toBe("$:/ShadowPlugin,a fourth tiddler,filter regexp test,has filter,hasList,one");
 	});
 
 	it("should handle the has:field operator", function() {
