@@ -30,4 +30,5 @@ strikethrough: {{$:/language/Buttons/Strikethrough/Hint}}
 subscript: {{$:/language/Buttons/Subscript/Hint}}
 superscript: {{$:/language/Buttons/Superscript/Hint}}
 toggle-sidebar: {{$:/language/Buttons/ToggleSidebar/Hint}}
+transcludify: {{$:/language/Buttons/Transcludify/Hint}}
 underline: {{$:/language/Buttons/Underline/Hint}}
