@@ -396,5 +396,10 @@ Mandar Vaze, @mandarvaze, 2020/04/08
 
 Lin Dongwu, @linonetwo, 2020/04/15
 
-Jonas Passerini, @passuf, 2020/05/14
+Tobias Hermann, @idotobi, 2020/04/19 
 
+Nicolas Petton, @NicolasPetton, 2020/04/30
+
+Csaba Molnar, @mocsa, 2020/04/29
+
+Jonas Passerini, @passuf, 2020/05/14
