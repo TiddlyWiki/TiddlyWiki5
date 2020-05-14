@@ -159,11 +159,11 @@ Server.prototype.requestHandler = function(request,response,options) {
 	// Compose the state object
 	var self = this;
 	var state = {};
-	state.wiki = (options?options.wiki:false) || self.wiki;
+	state.wiki = (options ? options.wiki : false) || self.wiki;
 	state.server = self;
 	state.urlInfo = url.parse(request.url);
 	state.queryParameters = querystring.parse(state.urlInfo.query);
-	state.pathPrefix = (options?options.pathPrefix:false) || this.get("path-prefix") || "";
+	state.pathPrefix = (options ? options.pathPrefix : false) || this.get("path-prefix") || "";
 	// Get the principals authorized to access this resource
 	var authorizationType = this.methodMappings[request.method] || "readers";
 	// Check for the CSRF header if this is a write
