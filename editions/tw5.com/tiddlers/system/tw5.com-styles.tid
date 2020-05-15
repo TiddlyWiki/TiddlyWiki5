@@ -1,5 +1,5 @@
 created: 20200507002727378
-modified: 20200515005037404
+modified: 20200515024640489
 tags: $:/tags/Stylesheet
 title: $:/_tw5.com-styles
 type: text/vnd.tiddlywiki
@@ -124,15 +124,13 @@ type: text/vnd.tiddlywiki
 
 .tc-card {
 	margin: 15px;
-	padding: 10px 30px;
+	padding: 10px 20px;
 	border-radius: 10px;
 	border-top: 5px solid #45D3D3;
 	box-shadow: 0 8px 17px -8px #A3A5AE;
 	background-color: #FFF;
 	width: 200px;
 	transition: box-shadow 0.3s ease-in-out;
-	display: flex;
-	flex-direction: column;
 	font-size: 13px;
 	line-height: 18px;
 }
@@ -140,13 +138,17 @@ type: text/vnd.tiddlywiki
 .tc-card:hover {
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
+.tc-card:hover .tc-card-title {
+	color: #1462ff;
+}
 
 .tc-card-title {
 	text-align: center;
 	font-size: 1.2em;
-	margin-top: 15px;
+	margin-top: 10px;
 	margin-bottom: 10px;
 	font-weight: 600;
+	transition: color 0.2s ease-in-out;
 }
 
 .tc-card-author {
@@ -158,8 +160,16 @@ type: text/vnd.tiddlywiki
 	overflow: hidden;
 }
 
-.tc-card a:last-child {
-	margin-top: auto;
+.tc-card a {
+	color: #222;
+}
+
+.tc-card a:hover {
+	text-decoration:none;
+}
+
+.tc-card a:active, .tc-card a:focus, .tc-btn-download:active, .tc-btn-download:focus{
+        outline: none; 
 }
 
 div.content {
