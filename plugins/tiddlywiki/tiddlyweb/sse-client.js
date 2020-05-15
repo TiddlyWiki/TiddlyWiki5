@@ -24,10 +24,18 @@ exports.startup = function () {
   //make sure it ends with a slash (it usually does)
   if(!host.endsWith("/")) host += "/";
   //setup the event listener 
+  setupEvents(host);
+}
+function setupEvents(host){
   var events = new EventSource(host + "events/plugins/tiddlywiki/tiddlyweb");
   events.addEventListener("change", function () {
     $tw.syncer.syncFromServer();
   });
+  events.onerror = function() {
+    events.close();
+    setTimeout(function() { 
+      setupEvents(host); 
+    }, $tw.syncer.errorRetryInterval)
+  };
 }
-
 })();
