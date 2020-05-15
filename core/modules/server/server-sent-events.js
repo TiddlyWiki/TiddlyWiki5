@@ -51,8 +51,7 @@ var ServerSentEvents = /** @class */ (function () {
         'Connection': 'keep-alive'
       });
       this.handler(request, state, this.emit.bind(this, response), this.end.bind(this, response));
-    }
-    else {
+    } else {
       response.writeHead(406, "Not Acceptable", {});
       response.end();
     }
