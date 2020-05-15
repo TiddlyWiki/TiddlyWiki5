@@ -18,21 +18,25 @@ GET /events/plugins/tiddlywiki/tiddlyweb
  *   emit: (event: string, data: string) => void,
  *   end: () => void
  * }[]>} */
-var wikis = {};
+var wikis = [];
+var conns = [];
 /**
  * Setups up the array for this wiki and adds the change listener
  * 
  * @param {$tw.Wiki} wiki The wiki object to listen to changes on
  */
 function setupWiki(wiki) {
+  var index = wikis.length;
   // add a new array for this wiki (object references work as keys)
-  wikis[wiki] = [];
+  wikis.push(wiki);
+  conns.push([]);
   // add the change listener for this wiki
   wiki.addEventListener("change", function (changes) {
-    wikis[wiki].forEach(function (item) {
+    conns[index].forEach(function (item) {
       item.emit("change", JSON.stringify(changes));
     });
   });
+  return index;
 }
 /**
  * 
@@ -42,14 +46,15 @@ function setupWiki(wiki) {
  * @param {() => void} end 
  */
 function handleConnection(request, state, emit, end) {
+  var index = wikis.indexOf(state.wiki);
   // setup this particular wiki if we haven't seen it before
-  if (!wikis[state.wiki]) setupWiki(state.wiki);
+  if (index === -1) index = setupWiki(state.wiki);
   // add the connection to the list of connections for this wiki
   var item = { request: request, state: state, emit: emit, end: end };
-  wikis[state.wiki].push(item);
+  conns[index].push(item);
   // remove the connection when it closes
   request.on("close",function(){
-    wikis[state.wiki].splice(wikis[state.wiki].indexOf(item),1);
+    conns[index].splice(wikis[state.wiki].indexOf(item),1);
   });
 }
 // import the ServerSentEvents class
