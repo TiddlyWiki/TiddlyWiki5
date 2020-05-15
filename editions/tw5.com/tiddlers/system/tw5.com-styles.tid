@@ -145,10 +145,9 @@ type: text/vnd.tiddlywiki
 .tc-card-title {
 	text-align: center;
 	font-size: 1.2em;
-	margin-top: 10px;
-	margin-bottom: 10px;
 	font-weight: 600;
 	transition: color 0.2s ease-in-out;
+	padding: 10px 0;
 }
 
 .tc-card-author {
@@ -156,8 +155,10 @@ type: text/vnd.tiddlywiki
 }
 
 .tc-card p {
-	height: 54px;
+	height: 67px;
 	overflow: hidden;
+	margin: 0;
+	padding: 13px 0;
 }
 
 .tc-card a {
@@ -197,4 +198,3 @@ div.content {
 .tc-btn-download:active {
 	background: #1475ff;
 }
-
