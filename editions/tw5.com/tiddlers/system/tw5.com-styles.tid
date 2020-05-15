@@ -1,5 +1,5 @@
 created: 20200507002727378
-modified: 20200507044539775
+modified: 20200515005037404
 tags: $:/tags/Stylesheet
 title: $:/_tw5.com-styles
 type: text/vnd.tiddlywiki
@@ -123,16 +123,18 @@ type: text/vnd.tiddlywiki
 }
 
 .tc-card {
-	margin: 20px;
-	padding: 15px 30px;
+	margin: 15px;
+	padding: 10px 30px;
 	border-radius: 10px;
 	border-top: 5px solid #45D3D3;
 	box-shadow: 0 8px 17px -8px #A3A5AE;
 	background-color: #FFF;
-	width: 300px;
+	width: 200px;
 	transition: box-shadow 0.3s ease-in-out;
 	display: flex;
 	flex-direction: column;
+	font-size: 13px;
+	line-height: 18px;
 }
 
 .tc-card:hover {
@@ -152,7 +154,7 @@ type: text/vnd.tiddlywiki
 }
 
 .tc-card p {
-	height: 110px;
+	height: 54px;
 	overflow: hidden;
 }
 
@@ -173,9 +175,8 @@ div.content {
 	background: #1462ff;
 	border-radius: 5px;
         border: none;
-	box-shadow: 0 6px 30px -10px #4a74c9;
+	box-shadow: 0 2px 2px 0 #4a74c9;
 	overflow: hidden;
-	transition: box-shadow 0.3s ease-in-out;
 	cursor: pointer;
         font-size: 1.2em;
         line-height: 1.4em;
@@ -183,8 +184,7 @@ div.content {
         fill: #fff;
 }
 
-.tc-btn-download:hover {
+.tc-btn-download:active {
 	background: #1475ff;
-	box-shadow: 0 9px 40px -7px #4a74c9;
 }
 
