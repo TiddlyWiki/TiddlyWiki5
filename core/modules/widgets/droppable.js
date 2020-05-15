@@ -39,7 +39,7 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Create element and assign classes
 	var domNode = this.document.createElement(tag),
-		classes = (this["class"] || "").split(" ");
+		classes = (this.droppableClass || "").split(" ");
 	classes.push("tc-droppable");
 	domNode.className = classes.join(" ");
 	// Add event handlers

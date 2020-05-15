@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/static/filters/slugify.js
+title: $:/core/modules/filters/slugify.js
 type: application/javascript
 module-type: filteroperator
 
