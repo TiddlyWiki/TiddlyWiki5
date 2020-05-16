@@ -107,11 +107,18 @@ Set the text of the engine if it doesn't currently have focus
 FramedEngine.prototype.setText = function(text,type) {
 	if(!this.domNode.isTiddlyWikiFakeDom) {
 		if(this.domNode.value !== text) {
-			this.domNode.value = text;
+			this.updateDomNodeText(text);
 		}
 		// Fix the height if needed
 		this.fixHeight();
 	}
+};
+
+/*
+Update the DomNode with the new text
+*/
+FramedEngine.prototype.udpateDomNodeText = function(text) {
+	this.domNode.value = text;
 };
 
 /*
