@@ -147,7 +147,7 @@ CodeMirrorEngine.prototype.setText = function(text,type) {
 /*
 Update the DomNode with the new text
 */
-CodeMirrorEngine.prototype.udpateDomNodeText = function(text) {
+CodeMirrorEngine.prototype.updateDomNodeText = function(text) {
 	this.cm.setValue(text);
 };
 
