@@ -13,6 +13,7 @@ heading-5: {{$:/language/Buttons/Heading5/Hint}}
 heading-6: {{$:/language/Buttons/Heading6/Hint}}
 italic: {{$:/language/Buttons/Italic/Hint}}
 link: {{$:/language/Buttons/Link/Hint}}
+linkify: {{$:/language/Buttons/Linkify/Hint}}
 list-bullet: {{$:/language/Buttons/ListBullet/Hint}}
 list-number: {{$:/language/Buttons/ListNumber/Hint}}
 mono-block: {{$:/language/Buttons/MonoBlock/Hint}}
@@ -30,4 +31,5 @@ strikethrough: {{$:/language/Buttons/Strikethrough/Hint}}
 subscript: {{$:/language/Buttons/Subscript/Hint}}
 superscript: {{$:/language/Buttons/Superscript/Hint}}
 toggle-sidebar: {{$:/language/Buttons/ToggleSidebar/Hint}}
+transcludify: {{$:/language/Buttons/Transcludify/Hint}}
 underline: {{$:/language/Buttons/Underline/Hint}}
