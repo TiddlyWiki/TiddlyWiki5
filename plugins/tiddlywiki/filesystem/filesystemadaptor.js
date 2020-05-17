@@ -55,7 +55,7 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 	// See if we've already got information about this file
 	var title = tiddler.fields.title,
 		fileInfo = $tw.boot.files[title],
-		fileSystemPaths = this.wiki.tiddlerExists("$:/config/FileSystemPaths"),
+		fileSystemConfig = this.wiki.tiddlerExists("$:/config/FileSystemPaths") || this.wiki.tiddlerExists("$:/config/FileSystemExtensions"),
 		options = {};
 	if(!fileInfo) {
 		// Otherwise, we'll need to generate it
@@ -66,8 +66,8 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 			wiki: this.wiki
 		});
 		$tw.boot.files[title] = fileInfo;
-	} else if(fileInfo && fileSystemPaths) {
-		// If `FileSystemPaths`, we'll need to store the old path and regenerate it
+	} else if(fileInfo && fileSystemConfig) {
+		// If FileSystemPaths||FileSystemExtensions, store the old path and regenerate it
 		options.fileInfo = {
 			title: title,
 			filepath: fileInfo.filepath,
@@ -81,11 +81,8 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 			wiki: this.wiki,
 			fileSystemPath: options.fileInfo.filepath
 		});
-		if(	options.fileInfo
-			&& options.fileInfo.filepath === fileInfo.filepath 
-			&& options.fileInfo.type === fileInfo.type
-			&& options.fileInfo.hasMetaFile === fileInfo.hasMetaFile) {
-			options = null; //if everything matches, options not needed
+		if(	options.fileInfo && options.fileInfo.filepath === fileInfo.filepath ) {
+			options = null; //if filepath matches, options not needed
 		} else {
 			$tw.boot.files[title] = fileInfo; //else, store new fileInfo
 		}
