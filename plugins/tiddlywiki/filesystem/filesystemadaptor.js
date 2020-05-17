@@ -110,21 +110,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 				if(err) {
 					return callback(err);
 				}
-				// Check if only the hasMetaFile value has changed
-				if(fileInfo.filepath === options.fileInfo.filepath) {
-					if (fileInfo.hasMetaFile === false && options.fileInfo.hasMetaFile === true) {
-						fs.unlink(options.fileInfo.filepath + ".meta",function(err) {
-							if(err) {
-								return callback(err);
-							}
-							return $tw.utils.deleteEmptyDirs(path.dirname(options.fileInfo.filepath),callback);
-						});
-					} else {
-						return callback(null)
-					}						
-				} else {
-					self.deleteTiddler(null,callback,options);
-				}	
+				self.deleteTiddler(null,callback,options);	
 			});		
 		} else {
 			$tw.utils.saveTiddlerToFile(tiddler,fileInfo,callback);

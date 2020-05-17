@@ -245,7 +245,7 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 				wiki: options.wiki
 			});
 			if (metaExt) {
-				fileInfo.hasMetaFile = true;
+				fileInfo.hasMetaFile = (metaExt === ".tid") ? false : true;
 			}
 		}
 	}
