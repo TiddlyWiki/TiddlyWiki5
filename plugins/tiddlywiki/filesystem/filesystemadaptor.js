@@ -49,7 +49,7 @@ The type is found by looking up the extension in $tw.config.fileExtensionInfo (e
 
 It is the responsibility of the filesystem adaptor to update $tw.boot.files for new files that are created.
 
-If `$:/config/FileSystemPaths` exists, we need to test for a new path and delete the old file after saving.
+If $:/config/FileSystemPaths||$:/config/FileSystemPaths exists, we need to test for a new path and delete the old file after saving.
 */
 FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 	// See if we've already got information about this file
