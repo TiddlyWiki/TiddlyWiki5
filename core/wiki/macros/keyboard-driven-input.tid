@@ -10,9 +10,7 @@ tags: $:/tags/Macro
 </$list>
 \end
 
-\define keyboard-input-up-down-actions(reverse,afterOrBefore) <$macrocall $name="input-next-actions" filter1=<<__filter1__>> filter2=<<__filter2__>> refreshTitle=<<__refreshTitle__>> afterOrBefore="$afterOrBefore$" reverse="$reverse$" tiddler=<<__tiddler__>> storeTitle=<<__storeTitle__>> field=<<__field__>> index=<<__index__>> filterMinLength=<<__filterMinLength__>> selectionStateTitle=<<__selectionStateTitle__>>/>
-
-\define input-next-actions(afterOrBefore:"after",reverse:"",tiddler,storeTitle,field,index,filter1,filter2,refreshTitle,selectionStateTitle)
+\define input-next-actions(afterOrBefore:"after",reverse:"")
 <$list filter="[<__storeTitle__>get[text]minlength<__filterMinLength__>] [<__filterMinLength__>match[0]] +[limit[1]]" variable="ignore">
 <$vars userInput={{{ [<__storeTitle__>get[text]] }}} selectedItem={{{ [<__selectionStateTitle__>get[text]] }}}>
 <$set name="filteredList" filter="[subfilter<__filter1__>addsuffix[-list1]] =[subfilter<__filter2__>addsuffix[-list2]]">
@@ -36,8 +34,8 @@ tags: $:/tags/Macro
 \define keyboard-driven-input(tiddler,storeTitle,field:"text",index:"",tag:"input",type,focus:"",inputAcceptActions,inputAcceptVariantActions,inputCancelActions,placeholder:"",default:"",class,filter1,filter2,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0",refreshTitle,selectionStateTitle)
 <$keyboard key="((input-accept))" actions=<<__inputAcceptActions__>>>
 <$keyboard key="((input-accept-variant))" actions=<<__inputAcceptVariantActions__>>>
-<$keyboard key="((input-up))" actions=<<keyboard-input-up-down-actions "reverse[]" "before">>>
-<$keyboard key="((input-down))" actions=<<keyboard-input-up-down-actions "" "after">>>
+<$keyboard key="((input-up))" actions=<<input-next-actions "before" "reverse[]">>>
+<$keyboard key="((input-down))" actions=<<input-next-actions>>>
 <$keyboard key="((input-cancel))" actions=<<__inputCancelActions__>>>
 <$edit-text tiddler=<<__tiddler__>> field=<<__field__>> index=<<__index__>> 
 		inputActions=<<keyboard-input-actions>> tag=<<__tag__>> class=<<__class__>> 
