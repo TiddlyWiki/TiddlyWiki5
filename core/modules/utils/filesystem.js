@@ -244,8 +244,11 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 				extFilters: options.extFilters,
 				wiki: options.wiki
 			});
-			if (metaExt) {
-				fileInfo.hasMetaFile = (metaExt === ".tid") ? false : true;
+			if (metaExt === ".tid") {
+				fileInfo.type = "application/x-tiddler";
+				fileInfo.hasMetaFile = false;
+			} else if (metaExt) {
+				fileInfo.hasMetaFile = true;
 			}
 		}
 	}
