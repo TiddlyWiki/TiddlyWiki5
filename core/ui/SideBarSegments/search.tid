@@ -44,7 +44,7 @@ tags: $:/tags/SideBarSegment
 		class="tc-popup-handle" filter1=<<titleSearchFilter>> filter2=<<allSearchFilter>> 
 		filterMinLength={{$:/config/Search/MinLength}} inputCancelActions=<<cancel-search-actions>> 
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> />
-<$reveal state="$:/temp/search/input" type="nomatch" text="">
+<$reveal state=<<searchTiddler>> type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
 <<delete-state-tiddlers>>
