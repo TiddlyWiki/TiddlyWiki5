@@ -34,12 +34,12 @@ tags: $:/tags/Macro
 <$vars tagSelectionState=<<qualify "$:/state/selected-tag">> storeTitle=<<qualify "$:/temp/NewTagName/input">> refreshTitle=<<qualify "$:/temp/NewTagName/refresh">> nonSystemTagsFilter="[tags[]!is[system]search:title<userInput>sort[]]" systemTagsFilter="[tags[]is[system]search:title<userInput>sort[]]">
 <div class="tc-edit-add-tag">
 <span class="tc-add-tag-name">
-<$macrocall $name="keyboard-driven-input" tiddler=<<newTagNameTiddler>> tag="input" 
+<$macrocall $name="keyboard-driven-input" tiddler=<<newTagNameTiddler>> storeTitle=<<storeTitle>> refreshTitle=<<refreshTitle>>
+		selectionStateTitle=<<tagSelectionState>> filter1=<<nonSystemTagsFilter>> filter2=<<systemTagsFilter>> 
+		inputAcceptActions=<<add-tag-actions>> inputCancelActions=<<clear-tags-actions>> tag="input" 
 		placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> 
 		class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}} 
-		storeTitle=<<storeTitle>> filter1=<<nonSystemTagsFilter>> filter2=<<systemTagsFilter>> inputAcceptActions=<<add-tag-actions>> 
-		inputCancelActions=<<clear-tags-actions>> filterMinLength={{$:/config/Tags/MinLength}} refreshTitle=<<refreshTitle>> 
-		selectionStateTitle=<<tagSelectionState>>/>
+		filterMinLength={{$:/config/Tags/MinLength}} />
 </span>&nbsp;<$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>&nbsp;<span class="tc-add-tag-button">
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$button set=<<newTagNameTiddler>> setTo="" class="">
