@@ -12,13 +12,14 @@ GET /events/plugins/tiddlywiki/tiddlyweb
 /*global $tw: false */
 "use strict";
 
-/** @type {Record<any, {
+/** @type {any[]} */
+var wikis = [];
+/** @type {{
  *   request: import("http").IncomingMessage,
  *   state: {wiki,pathPrefix},
  *   emit: (event: string, data: string) => void,
  *   end: () => void
- * }[]>} */
-var wikis = [];
+ * }[][]} */
 var conns = [];
 /**
  * Setups up the array for this wiki and adds the change listener
@@ -54,7 +55,8 @@ function handleConnection(request, state, emit, end) {
   conns[index].push(item);
   // remove the connection when it closes
   request.on("close",function(){
-    conns[index].splice(wikis[state.wiki].indexOf(item),1);
+    var remIndex = wikis[index].indexOf(item);
+    if(remIndex > -1) conns[index].splice(remIndex,1);
   });
 }
 // import the ServerSentEvents class
