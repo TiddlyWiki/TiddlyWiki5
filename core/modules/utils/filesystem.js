@@ -248,6 +248,10 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 				fileInfo.type = "application/x-tiddler";
 				fileInfo.hasMetaFile = false;
 			} else if (metaExt) {
+				//If the new type matches a known extention, use that MIME type's encoding
+				extInfo = $tw.utils.getFileExtensionInfo(metaExt);
+				fileInfo.type = extInfo ? extInfo.type : null;
+				fileInfo.encoding = $tw.utils.getTypeEncoding(metaExt);
 				fileInfo.hasMetaFile = true;
 			}
 		}
@@ -367,6 +371,7 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 	if(fileInfo.hasMetaFile) {
 		// Save the tiddler as a separate body and meta file
 		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
+		if(fileInfo.encoding) typeInfo.encoding = fileInfo.encoding;
 		fs.writeFile(fileInfo.filepath,tiddler.fields.text,typeInfo.encoding,function(err) {
 			if(err) {
 				return callback(err);
@@ -394,6 +399,7 @@ exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 	if(fileInfo.hasMetaFile) {
 		// Save the tiddler as a separate body and meta file
 		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
+		if(fileInfo.encoding) typeInfo.encoding = fileInfo.encoding;
 		fs.writeFileSync(fileInfo.filepath,tiddler.fields.text,typeInfo.encoding);
 		fs.writeFileSync(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8");
 	} else {
