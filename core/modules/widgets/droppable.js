@@ -130,8 +130,13 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 
 DroppableWidget.prototype.performActions = function(title,event) {
 	if(this.droppableActions) {
-		var modifierKey = event.ctrlKey && ! event.shiftKey ? "ctrl" : event.shiftKey && !event.ctrlKey ? "shift" : 
-				event.ctrlKey && event.shiftKey ? "ctrl-shift" : "normal" ;
+		var modifierKey = event.ctrlKey && !event.shiftKey && !event.altKey ? "ctrl" : 
+				event.shiftKey && !event.ctrlKey && !event.altKey? "shift" : 
+                		event.ctrlKey && event.shiftKey && !event.altKey ? "ctrl-shift" : 
+				event.altKey && !event.shiftKey && !event.ctrlKey ? "alt" : 
+				event.altKey && event.shiftKey && !event.ctrlKey ? "alt-shift" : 
+				event.altKey && event.ctrlKey && !event.shiftKey ? "ctrl-alt" : 
+				event.altKey && event.shiftKey && event.ctrlKey ? "ctrl-alt-shift" : "normal";
 		this.invokeActionString(this.droppableActions,this,event,{actionTiddler: title, modifier: modifierKey});
 	}
 };
