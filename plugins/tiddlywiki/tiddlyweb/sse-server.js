@@ -28,12 +28,13 @@ var conns = [];
  */
 function setupWiki(wiki) {
   var index = wikis.length;
+  var connections = [];
   // add a new array for this wiki (object references work as keys)
   wikis.push(wiki);
-  conns.push([]);
+  conns.push(connections);
   // add the change listener for this wiki
   wiki.addEventListener("change", function (changes) {
-    conns[index].forEach(function (item) {
+    connections.forEach(function (item) {
       item.emit("change", JSON.stringify(changes));
     });
   });
@@ -55,7 +56,7 @@ function handleConnection(request, state, emit, end) {
   conns[index].push(item);
   // remove the connection when it closes
   request.on("close",function(){
-    var remIndex = wikis[index].indexOf(item);
+    var remIndex = conns[index].indexOf(item);
     if(remIndex > -1) conns[index].splice(remIndex,1);
   });
 }
