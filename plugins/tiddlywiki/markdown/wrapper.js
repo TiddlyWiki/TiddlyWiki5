@@ -144,7 +144,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				type: "image",
 				attributes: {
 					tooltip: { type: "string", value: currentNode.alt },
-					source: { type: "string", value: currentNode.src }
+					source: { type: "string", value: decodeURIComponent(currentNode.src) }
 				}
 			});
 		} else if (currentNode.type === "softbreak") {
