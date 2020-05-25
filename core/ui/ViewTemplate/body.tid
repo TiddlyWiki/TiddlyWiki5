@@ -1,13 +1,32 @@
 title: $:/core/ui/ViewTemplate/body
 tags: $:/tags/ViewTemplate
 
-<$reveal tag="div" class="tc-tiddler-body" type="nomatch" stateTitle=<<folded-state>> text="hide" retain="yes" animate="yes">
-
+\define tiddler-body-default()
 <$list filter="[all[current]!has[plugin-type]!field:hide-body[yes]]">
 
 <$transclude>
 
 <$transclude tiddler="$:/language/MissingTiddler/Hint"/>
+
+</$transclude>
+
+</$list>
+\end
+
+<$reveal tag="div" class="tc-tiddler-body" type="nomatch" stateTitle=<<folded-state>> text="hide" retain="yes" animate="yes">
+
+<$list variable="sectionTemplate" filter="[all[current]subfilter{$:/config/ui/ViewTemplate/Body}]" emptyMessage=<<tiddler-body-default>> >
+
+<$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
+<$transclude tiddler="$:/config/ui/Debug/Template"><$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> /></$set></$transclude></$list>
+
+<$transclude tiddler=<<sectionTemplate>> >
+
+<$tiddler tiddler=<<sectionTemplate>> >
+
+<$transclude tiddler="$:/language/MissingTiddler/Hint"/>
+
+</$tiddler>
 
 </$transclude>
 
