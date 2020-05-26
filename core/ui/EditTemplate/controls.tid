@@ -4,8 +4,26 @@ tags: $:/tags/EditTemplate
 \define config-title()
 $:/config/EditToolbarButtons/Visibility/$(listItem)$
 \end
+\define tiddler-controls-edit()
 <div class="tc-tiddler-title tc-tiddler-edit-title">
 <$view field="title"/>
 <span class="tc-tiddler-controls tc-titlebar"><$list filter="[all[shadows+tiddlers]tag[$:/tags/EditToolbar]!has[draft.of]]" variable="listItem"><$reveal type="nomatch" state=<<config-title>> text="hide"><$transclude tiddler=<<listItem>>/></$reveal></$list></span>
 <div style="clear: both;"></div>
 </div>
+\end
+<$list variable="sectionTemplate" filter="[all[current]subfilter{$:/config/ui/EditTemplate/controls}]" emptyMessage=<<tiddler-controls-edit>> >
+
+<$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
+<$transclude tiddler="$:/config/ui/Debug/Template"><$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> /></$set></$transclude></$list>
+
+<$transclude tiddler=<<sectionTemplate>> >
+
+<$tiddler tiddler=<<sectionTemplate>> >
+
+<$transclude tiddler="$:/language/MissingTiddler/Hint"/>
+
+</$tiddler>
+
+</$transclude>
+
+</$list>

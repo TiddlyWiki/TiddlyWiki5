@@ -7,7 +7,7 @@ tags: $:/tags/ViewTemplate
 <$view field="modified" format="date" template={{$:/language/Tiddler/DateFormat}}/>
 \end
 <$reveal type="nomatch" class="tc-subtitle" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
-<$list variable="sectionTemplate" filter="[all[current]subfilter{$:/config/ui/ViewTemplate/Subtitle}]" emptyMessage=<<tiddler-subtitle-default>> >
+<$list variable="sectionTemplate" filter="[all[current]subfilter{$:/config/ui/ViewTemplate/subtitle}]" emptyMessage=<<tiddler-subtitle-default>> >
 <$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
 <$transclude tiddler="$:/config/ui/Debug/Template"><$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> /></$set></$transclude></$list>
 <$transclude tiddler=<<sectionTemplate>> >

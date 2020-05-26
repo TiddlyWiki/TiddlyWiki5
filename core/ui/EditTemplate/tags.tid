@@ -24,7 +24,7 @@ color:$(foregroundColor)$;
 \define tag-body(colour,palette,icon)
 <$macrocall $name="tag-body-inner" colour="""$colour$""" fallbackTarget={{$palette$##tag-background}} colourA={{$palette$##foreground}} colourB={{$palette$##background}} icon="""$icon$"""/>
 \end
-
+\define tiddler-tags-edit()
 <div class="tc-edit-tags">
 <$fieldmangler>
 <$list filter="[all[current]tags[]sort[title]]" storyview="pop">
@@ -35,3 +35,20 @@ color:$(foregroundColor)$;
 </$set>
 </$fieldmangler>
 </div>
+\end
+<$list variable="sectionTemplate" filter="[all[current]subfilter{$:/config/ui/EditTemplate/tags}]" emptyMessage=<<tiddler-tags-edit>> >
+
+<$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
+<$transclude tiddler="$:/config/ui/Debug/Template"><$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> /></$set></$transclude></$list>
+
+<$transclude tiddler=<<sectionTemplate>> >
+
+<$tiddler tiddler=<<sectionTemplate>> >
+
+<$transclude tiddler="$:/language/MissingTiddler/Hint"/>
+
+</$tiddler>
+
+</$transclude>
+
+</$list>

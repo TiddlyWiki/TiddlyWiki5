@@ -1,6 +1,7 @@
 title: $:/core/ui/EditTemplate/title
 tags: $:/tags/EditTemplate
 
+\define tiddler-title-edit()
 <$edit-text field="draft.title" class="tc-titlebar tc-edit-texteditor" focus={{{ [{$:/config/AutoFocus}match[title]then[true]] ~[[false]] }}} tabindex={{$:/config/EditTabIndex}}/>
 
 <$vars pattern="""[\|\[\]{}]""" bad-chars="""`| [ ] { }`""">
@@ -63,3 +64,20 @@ tags: $:/tags/EditTemplate
 </$list>
 
 </$reveal>
+\end
+<$list variable="sectionTemplate" filter="[all[current]subfilter{$:/config/ui/EditTemplate/title}]" emptyMessage=<<tiddler-title-edit>> >
+
+<$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
+<$transclude tiddler="$:/config/ui/Debug/Template"><$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> /></$set></$transclude></$list>
+
+<$transclude tiddler=<<sectionTemplate>> >
+
+<$tiddler tiddler=<<sectionTemplate>> >
+
+<$transclude tiddler="$:/language/MissingTiddler/Hint"/>
+
+</$tiddler>
+
+</$transclude>
+
+</$list>

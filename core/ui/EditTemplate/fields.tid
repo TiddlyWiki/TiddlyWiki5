@@ -40,7 +40,7 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 </$reveal>
 </$vars>
 \end
-\whitespace trim
+\define tiddler-fields-edit()
 
 <div class="tc-edit-fields">
 <table class="tc-edit-fields">
@@ -113,3 +113,21 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 </span>
 </div>
 </$fieldmangler>
+\end
+\whitespace trim
+<$list variable="sectionTemplate" filter="[all[current]subfilter{$:/config/ui/EditTemplate/fields}]" emptyMessage=<<tiddler-fields-edit>> >
+
+<$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
+<$transclude tiddler="$:/config/ui/Debug/Template"><$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> /></$set></$transclude></$list>
+
+<$transclude tiddler=<<sectionTemplate>> >
+
+<$tiddler tiddler=<<sectionTemplate>> >
+
+<$transclude tiddler="$:/language/MissingTiddler/Hint"/>
+
+</$tiddler>
+
+</$transclude>
+
+</$list>

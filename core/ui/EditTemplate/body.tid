@@ -5,6 +5,7 @@ tags: $:/tags/EditTemplate
 \define config-visibility-title()
 $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 \end
+\define tiddler-body-edit()
 <$list filter="[all[current]has[_canonical_uri]]">
 
 <div class="tc-message-box">
@@ -46,5 +47,22 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 <$transclude tiddler="$:/core/ui/EditTemplate/body/editor" mode="inline"/>
 
 </$reveal>
+
+</$list>
+\end
+<$list variable="sectionTemplate" filter="[all[current]subfilter{$:/config/ui/EditTemplate/body}]" emptyMessage=<<tiddler-body-edit>> >
+
+<$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
+<$transclude tiddler="$:/config/ui/Debug/Template"><$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> /></$set></$transclude></$list>
+
+<$transclude tiddler=<<sectionTemplate>> >
+
+<$tiddler tiddler=<<sectionTemplate>> >
+
+<$transclude tiddler="$:/language/MissingTiddler/Hint"/>
+
+</$tiddler>
+
+</$transclude>
 
 </$list>

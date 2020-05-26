@@ -5,7 +5,7 @@ tags: $:/tags/ViewTemplate
 <$list filter="[all[current]tags[]sort[title]]" template="$:/core/ui/TagTemplate" storyview="pop"/>
 \end
 <$reveal type="nomatch" class="tc-tags-wrapper" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
-<$list variable="sectionTemplate" filter="[all[current]subfilter{$:/config/ui/ViewTemplate/Tags}]" emptyMessage=<<tiddler-tags-default>> >
+<$list variable="sectionTemplate" filter="[all[current]subfilter{$:/config/ui/ViewTemplate/tags}]" emptyMessage=<<tiddler-tags-default>> >
 <$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
 <$transclude tiddler="$:/config/ui/Debug/Template"><$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> /></$set></$transclude></$list>
 <$transclude tiddler=<<sectionTemplate>> >

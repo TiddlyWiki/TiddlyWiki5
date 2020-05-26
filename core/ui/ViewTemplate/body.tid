@@ -12,10 +12,9 @@ tags: $:/tags/ViewTemplate
 
 </$list>
 \end
-
 <$reveal tag="div" class="tc-tiddler-body" type="nomatch" stateTitle=<<folded-state>> text="hide" retain="yes" animate="yes">
 
-<$list variable="sectionTemplate" filter="[all[current]subfilter{$:/config/ui/ViewTemplate/Body}]" emptyMessage=<<tiddler-body-default>> >
+<$list variable="sectionTemplate" filter="[all[current]subfilter{$:/config/ui/ViewTemplate/body}]" emptyMessage=<<tiddler-body-default>> >
 
 <$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
 <$transclude tiddler="$:/config/ui/Debug/Template"><$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> /></$set></$transclude></$list>
