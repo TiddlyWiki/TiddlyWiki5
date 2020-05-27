@@ -64,7 +64,7 @@ function findTagWithType(nodes, startPoint, type, level) {
  */
 function convertNodes(remarkableTree, isStartOfInline) {
 	let out = [];
-
+	var accumulatedText = '';
 	function wrappedElement(elementTag, currentIndex, currentLevel, closingType, nodes) {
 		var j = findTagWithType(nodes, currentIndex + 1, closingType, currentLevel);
 		if (j === false) {
@@ -148,6 +148,15 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				}
 			});
 		} else if (currentNode.type === "softbreak") {
+			if (remarkableOpts.breaks) {
+				out.push({
+					type: "element",
+					tag: "br",
+				});
+			} else {
+				accumulatedText = accumulatedText + '\n';
+			}
+		} else if (currentNode.type === "hardbreak") {
 			out.push({
 				type: "element",
 				tag: "br",
@@ -168,38 +177,47 @@ function convertNodes(remarkableTree, isStartOfInline) {
 			} else {
 				// The Markdown compiler thinks this is just text.
 				// Hand off to the WikiText parser to see if there's more to render
-
-				// If we're inside a block element (div, p, td, h1), and this is the first child in the tree,
-				// handle as a block-level parse. Otherwise not.
-				var parseAsInline = !(isStartOfInline && i === 0);
-				var textToParse = currentNode.content;
-				if (pluginOpts.renderWikiTextPragma !== "") {
-					textToParse = pluginOpts.renderWikiTextPragma + "\n" + textToParse;
-				}
-				var wikiParser = $tw.wiki.parseText("text/vnd.tiddlywiki", textToParse, {
-					parseAsInline: parseAsInline
-				});
-				var rs = wikiParser.tree;
-
-				// If we parsed as a block, but the root element the WikiText parser gave is a paragraph,
-				// we should discard the paragraph, since the way Remarkable nests its nodes, this "inline"
-				// node is always inside something else that's a block-level element
-				if (!parseAsInline
-					&& rs.length === 1
-					&& rs[0].type === "element"
-					&& rs[0].tag === "p"
+				if (!remarkableOpts.breaks
+					&& (i+2) < remarkableTree.length
+					&& remarkableTree[i+1].type === "softbreak"
+					&& remarkableTree[i+2].type === "text"
 				) {
-					rs = rs[0].children;
-				}
+					// We need to merge this text block with the upcoming text block and parse it all together.
+					accumulatedText = accumulatedText + currentNode.content;
+				} else {
+					// If we're inside a block element (div, p, td, h1), and this is the first child in the tree,
+					// handle as a block-level parse. Otherwise not.
+					var parseAsInline = !(isStartOfInline && i === 0);
+					var textToParse = accumulatedText + currentNode.content;
+					accumulatedText = '';
+					if (pluginOpts.renderWikiTextPragma !== "") {
+						textToParse = pluginOpts.renderWikiTextPragma + "\n" + textToParse;
+					}
+					var wikiParser = $tw.wiki.parseText("text/vnd.tiddlywiki", textToParse, {
+						parseAsInline: parseAsInline
+					});
+					var rs = wikiParser.tree;
 
-				// If the original text element started with a space, add it back in
-				if (rs.length > 0
-					&& rs[0].type === "text"
-					&& currentNode.content[0] === " "
-				) {
-					rs[0].text = " " + rs[0].text;
+					// If we parsed as a block, but the root element the WikiText parser gave is a paragraph,
+					// we should discard the paragraph, since the way Remarkable nests its nodes, this "inline"
+					// node is always inside something else that's a block-level element
+					if (!parseAsInline
+						&& rs.length === 1
+						&& rs[0].type === "element"
+						&& rs[0].tag === "p"
+					) {
+						rs = rs[0].children;
+					}
+
+					// If the original text element started with a space, add it back in
+					if (rs.length > 0
+						&& rs[0].type === "text"
+						&& currentNode.content[0] === " "
+					) {
+						rs[0].text = " " + rs[0].text;
+					}
+					out = out.concat(rs);
 				}
-				out = out.concat(rs);
 			}
 		} else {
 			console.error("Unknown node type: " + currentNode.type, currentNode);
