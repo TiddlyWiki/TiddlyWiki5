@@ -689,7 +689,7 @@ button.tc-untagged-label {
 	width: 1em;
 	margin-right: 3px; 
 	margin-bottom: 1px;
-	vertical-align: text-bottom;
+	vertical-align: bottom;
 }
 
 .tc-edit-tags button.tc-remove-tag-button svg {
