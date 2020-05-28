@@ -21,6 +21,7 @@ $actions$
 \define tag-picker-inner(actions)
 \whitespace trim
 <div class="tc-edit-add-tag">
+<div>
 <span class="tc-add-tag-name">
 <$keyboard key="ENTER" actions="""<$macrocall $name="add-tag-actions" actions=<<__actions__>>/>""">
 <$edit-text tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}}/>
@@ -51,6 +52,7 @@ $actions$
 </$set>
 </div>
 </$reveal>
+</div>
 </div>
 \end
 \define tag-picker(actions)
