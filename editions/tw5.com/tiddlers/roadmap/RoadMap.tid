@@ -1,17 +1,10 @@
 created: 20130823203800000
-modified: 20160418123722695
+modified: 2020051619421803
 tags: About
 title: RoadMap
 type: text/vnd.tiddlywiki
 
-There are still some areas of TiddlyWiki that have not been fully developed beyond the experimental stage:
+TiddlyWiki 5 is now a mature, stable project that is relied upon by many people. Simultaneously, it is rapidly evolving in many directions thanks to the broad community of developers and users. This paradoxical situation is possible because the project strictly maintains backwards compatibility, adding new features alongside the existing ones.
 
-* Multiple users with the client-server configuration
-* Smartphone user experience
-* New tiddler manager, including bulk operations like search and replace
-* Federation that can run in the browser or under Node.js
-* Improved editions
-* Improved support for third party plugin libraries
-
-Also see the issues list on GitHub: https://github.com/Jermolene/TiddlyWiki5
+There is no formal roadmap, but quite a few areas that have yet to be fully implemented, such as search and replace, and rich text editing. Current work can be found on ~GitHub at https://github.com/Jermolene/TiddlyWiki5/
 
