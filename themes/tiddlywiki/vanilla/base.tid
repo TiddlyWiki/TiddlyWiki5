@@ -1299,7 +1299,11 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-type-selector .tc-edit-typeeditor {
-	width: 20%;
+	width: auto;
+}
+
+.tc-type-selector-wrapper {
+	display: inline-block;
 }
 
 .tc-edit-tags {
