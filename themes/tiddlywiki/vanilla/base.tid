@@ -1396,8 +1396,7 @@ html body.tc-body.tc-single-tiddler-window {
 	vertical-align: middle;
 }
 
-.tc-edit-field-add-name {
-	display: inline-block;
+.tc-edit-field-add-name-wrapper input.tc-edit-texteditor {
 	width: auto;
 }
 
