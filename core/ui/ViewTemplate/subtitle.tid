@@ -7,9 +7,17 @@ tags: $:/tags/ViewTemplate
 <$view field="modified" format="date" template={{$:/language/Tiddler/DateFormat}}/>
 \end
 <$reveal type="nomatch" class="tc-subtitle" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
-<$list variable="sectionTemplate" filter="[all[current]subfilter{$:/config/ui/ViewTemplate/subtitle}]" emptyMessage=<<tiddler-subtitle-default>> >
 <$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
-<$transclude tiddler="$:/config/ui/Debug/Template"><$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> /></$set></$transclude></$list>
+<span class="tc-tiddler-debug tc-debug-config">
+{{$:/core/images/warning}} <<tag "$:/config/ui/ViewTemplate/subtitle">>
+</span>
+</$list>
+<$list variable="sectionTemplate" filter="[all[current]subfilter:tag[$:/config/ui/ViewTemplate/subtitle]]" emptyMessage=<<tiddler-subtitle-default>> >
+<$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
+<span class="tc-tiddler-debug tc-debug-section">
+<$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> tooltip=<<sectionTemplate>> >{{$:/core/images/transcludify}} <<sectionTemplate>></$link></$set>
+</span>
+</$list>
 <$transclude tiddler=<<sectionTemplate>> >
 <$tiddler tiddler=<<sectionTemplate>> >
 <$transclude tiddler="$:/language/MissingTiddler/Hint"/>

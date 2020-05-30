@@ -16,7 +16,22 @@ Filter operator returning its operand evaluated as a filter
 Export our filter function
 */
 exports.subfilter = function(source,operator,options) {
-	var list = options.wiki.filterTiddlers(operator.operand,options.widget,source);
+	var list = [], tiddlers = [],
+	suffix = (operator.suffixes || [])[0] || [""];
+	if (suffix.includes("title")) {
+		tiddlers[0] = operator.operand;
+	} 
+	if (suffix.includes("tag")) {
+		tiddlers = tiddlers.concat(options.wiki.getTiddlersWithTag(operator.operand));
+	}
+	if (suffix.includes("title") || suffix.includes("tag")) {
+		tiddlers.forEach(function(title) {
+			var tiddler = options.wiki.getTiddler(title);
+			list = list.concat(options.wiki.filterTiddlers(tiddler.fields.text,options.widget,source));
+		});
+	} else {
+		list = options.wiki.filterTiddlers(operator.operand,options.widget,source);
+	}	
 	if(operator.prefix === "!") {
 		var results = [];
 		source(function(tiddler,title) {

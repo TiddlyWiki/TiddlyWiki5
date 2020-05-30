@@ -42,18 +42,34 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 <div class="tc-titlebar">
     <span class="tc-tiddler-controls"><<tiddler-controls-default>></span>
     <$set name="tv-wikilinks" value={{$:/config/Tiddlers/TitleLinks}}>
-    <$link><$list variable="sectionTemplate" filter="[all[current]subfilter{$:/config/ui/ViewTemplate/icon}]" emptyMessage=<<tiddler-icon-default>> >
     <$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
-    <$transclude tiddler="$:/config/ui/Debug/Template"><$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> /></$set></$transclude></$list>
+    <span class="tc-tiddler-debug tc-debug-config">
+    {{$:/core/images/warning}} <<tag "$:/config/ui/ViewTemplate/icon">>
+    </span>
+    </$list>
+    <$link><$list variable="sectionTemplate" filter="[all[current]subfilter:tag[$:/config/ui/ViewTemplate/icon]]" emptyMessage=<<tiddler-icon-default>> >
+    <$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
+    <span class="tc-tiddler-debug tc-debug-section">
+    <$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> tooltip=<<sectionTemplate>> >{{$:/core/images/transcludify}} <<sectionTemplate>></$link></$set>
+    </span>
+    </$list>
     <$transclude tiddler=<<sectionTemplate>> >
     <$tiddler tiddler=<<sectionTemplate>> >
     <$transclude tiddler="$:/language/MissingTiddler/Hint"/>
     </$tiddler>
     </$transclude>
     </$list>
-    <$list variable="sectionTemplate" filter="[all[current]subfilter{$:/config/ui/ViewTemplate/title}]" emptyMessage=<<tiddler-title-default>> >
     <$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
-<$transclude tiddler="$:/config/ui/Debug/Template"><$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> /></$set></$transclude></$list>
+    <span class="tc-tiddler-debug tc-debug-config">
+    {{$:/core/images/warning}} <<tag "$:/config/ui/ViewTemplate/title">>
+    </span>
+    </$list>
+    <$list variable="sectionTemplate" filter="[all[current]subfilter:tag[$:/config/ui/ViewTemplate/title]]" emptyMessage=<<tiddler-title-default>> >
+    <$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
+    <span class="tc-tiddler-debug tc-debug-section">
+    <$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> tooltip=<<sectionTemplate>> >{{$:/core/images/transcludify}} <<sectionTemplate>></$link></$set>
+    </span>
+    </$list>
     <$transclude tiddler=<<sectionTemplate>> >
     <$tiddler tiddler=<<sectionTemplate>> >
     <$transclude tiddler="$:/language/MissingTiddler/Hint"/>
@@ -64,9 +80,17 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 </div>
 \end
 <div class="tc-tiddler-title">
-<$list variable="sectionTemplate" filter="[all[current]subfilter{$:/config/ui/ViewTemplate/titlebar}]" emptyMessage=<<tiddler-titlebar-default>> >
 <$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
-<$transclude tiddler="$:/config/ui/Debug/Template"><$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> /></$set></$transclude></$list>
+<span class="tc-tiddler-debug tc-debug-config">
+{{$:/core/images/warning}} <<tag "$:/config/ui/ViewTemplate/titlebar">>
+</span>
+</$list>
+<$list variable="sectionTemplate" filter="[all[current]subfilter:tag[$:/config/ui/ViewTemplate/titlebar]]" emptyMessage=<<tiddler-titlebar-default>> >
+<$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
+<span class="tc-tiddler-debug tc-debug-section">
+<$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> tooltip=<<sectionTemplate>> >{{$:/core/images/transcludify}} <<sectionTemplate>></$link></$set>
+</span>
+</$list>
 <$transclude tiddler=<<sectionTemplate>> >
 <$tiddler tiddler=<<sectionTemplate>> >
 <$transclude tiddler="$:/language/MissingTiddler/Hint"/>

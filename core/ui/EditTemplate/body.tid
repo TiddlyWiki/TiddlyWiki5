@@ -50,10 +50,19 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 
 </$list>
 \end
-<$list variable="sectionTemplate" filter="[all[current]subfilter{$:/config/ui/EditTemplate/body}]" emptyMessage=<<tiddler-body-edit>> >
+<$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
+<span class="tc-tiddler-debug tc-debug-config">
+{{$:/core/images/warning}} <<tag "$:/config/ui/EditTemplate/body">>
+</span>
+</$list>
+
+<$list variable="sectionTemplate" filter="[all[current]subfilter:tag[$:/config/ui/EditTemplate/body]]" emptyMessage=<<tiddler-body-edit>> >
 
 <$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
-<$transclude tiddler="$:/config/ui/Debug/Template"><$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> /></$set></$transclude></$list>
+<span class="tc-tiddler-debug tc-debug-section">
+<$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> tooltip=<<sectionTemplate>> >{{$:/core/images/transcludify}} <<sectionTemplate>></$link></$set>
+</span>
+</$list>
 
 <$transclude tiddler=<<sectionTemplate>> >
 

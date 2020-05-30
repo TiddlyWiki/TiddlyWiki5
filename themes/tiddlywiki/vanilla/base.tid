@@ -2737,3 +2737,17 @@ select {
 .tc-fill-background {
 	fill: <<colour background>>;
 }
+
+/*
+** Utility classes for tiddler template debugging
+*/
+.tc-tiddler-debug {
+	font-size: 14pt;
+}
+
+.tc-tiddler-debug svg {
+	height: 1.8em;
+	widgth: 1.8em;
+    vertical-align: bottom;
+	fill: <<colour primary>>;
+}
