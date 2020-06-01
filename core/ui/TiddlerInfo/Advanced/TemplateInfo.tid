@@ -1,0 +1,110 @@
+title: $:/core/ui/TiddlerInfo/Advanced/TemplateInfo
+tags: $:/tags/TiddlerInfo/Advanced
+
+\define lingo-base() $:/language/TiddlerInfo/Advanced/TemplateInfo/
+\define view-base() $:/config/ui/ViewTemplate/
+\define edit-base() $:/config/ui/EditTemplate/
+\define view-sections() titlebar icon title controls subtitle tags body
+\define edit-sections() title controls tags body type fields
+\define debug-on-actions(input:"list")
+<$action-listops $tiddler="$:/config/ui/Debug/Templates" $field="$input$" $subfilter="+[append<currentTiddler>]"/>
+\end
+\define debug-off-actions(input:"list")
+<$action-listops $tiddler="$:/config/ui/Debug/Templates" $field="$input$" $subfilter="+[remove<currentTiddler>]"/>
+\end
+\define debug-empty-message()
+<p>
+<$button tag="div" class="tc-btn-invisible tc-tiddlylink" actions=<<debug-on-actions>> tooltip="Click to show transcludify icons for custom templates.">
+<span class="tc-debug-config tc-debug-config-off">
+{{$:/core/images/preview-closed}} {{$:/core/images/transcludify}} ''Debug Templates Off''
+</span>
+</$button>
+</p>
+\end
+\define countTemplates()
+<$set name="allTags" filter="[all[shadows+tiddlers]tags[]prefix[$:/config/ui/ViewTemplate/]] [all[shadows+tiddlers]tags[]prefix[$:/config/ui/ViewTemplate/]]">
+{{{ [enlist<allTags>tagging[]count[]] }}}
+</$set>
+\end
+''Custom Tiddler Templates''
+<div class="tc-tiddler-debug">
+
+<$list variable="customTemplateHelp" filter="[{$:/config/ui/Debug/Templates!!template-help}match<currentTiddler>]" emptyMessage="""
+<p><$button tag="div" class="tc-btn-invisible tc-tiddlylink tc-debug-config" setTitle="$:/config/ui/Debug/Templates" setField="template-help" setTo=<<currentTiddler>> tooltip="Open custom template help.">{{$:/core/images/chevron-down}} {{$:/core/images/help}} ''Template Help''</$button></p>
+""" >
+
+<$button tag="div" class="tc-btn-invisible tc-tiddlylink tc-debug-config" setTitle="$:/config/ui/Debug/Templates" setField="template-help" setTo="" tooltip="Open custom template help.">{{$:/core/images/chevron-up}} {{$:/core/images/help}} ''Template Help''</$button>
+
+There are ''<$macrocall $name="countTemplates" $output="text/plain"/>'' config tiddlers defined, but not all of them may apply to this tiddler.
+
+To define custom templates, tag a tiddler with one of the following tags. Click each tag to view or reorder the templates. Each tagged tiddlers' text is used in a `subfilter` operation using `currentTiddler` as input. The titles output by the filters will be transcluded as that section of the view or edit template, in the place of the default content. 
+
+The filter results, i.e. the active "custom templates" for the current tiddler are shown below each tag next to the transcludify icon. Use the Debug Icons button to display a link to each custom template before the tanscluded content. Note: when the [[$:/config/Tiddlers/TitleLinks]] tiddler's text equals `yes`, then the trascludify icon will not link to the template, but it will still have an accurate tooltip.
+
+Each template's default content can be rendered within your own custom templates by using a `tiddler-body-view` or `tiddler-body-edit` macro, replacing `body` with one of the section names below.
+
+View Sections: <code><<view-sections>></code>
+
+Edit Sections: <code><<edit-sections>></code>
+</$list>
+
+<$list variable="config" filter="[[$:/config/ui/Debug/Templates]contains<currentTiddler>]" emptyMessage=<<debug-empty-message>> >
+    <p>
+    <$button tag="div" class="tc-btn-invisible tc-tiddlylink" actions=<<debug-off-actions>> tooltip="Click to hide trascludify icons for custom templates.">
+    <span class="tc-debug-config tc-debug-config-on">
+    {{$:/core/images/preview-open}} {{$:/core/images/transcludify}} ''Debug Templates On''
+    </span>
+    </$button>
+    </p>
+</$list>
+
+<!-- ViewTemplate config -->
+
+<$list variable="customTemplateHelp" filter="[[$:/config/ui/Debug/Templates]contains:tags-view<currentTiddler>]" emptyMessage="""
+<p>
+<$button tag="div" class="tc-btn-invisible tc-tiddlylink tc-debug-config" actions=<<debug-on-actions input:"tags-view">> tooltip="Reveal view tags.">{{$:/core/images/chevron-down}} {{$:/core/images/transcludify}} ''View Templates''</$button>
+</p>""" >
+
+    <$button tag="div" class="tc-btn-invisible tc-tiddlylink tc-debug-config" actions=<<debug-off-actions input:"tags-view">> tooltip="Hide view tags.">{{$:/core/images/chevron-up}} {{$:/core/images/transcludify}} ''View Templates''</$button>
+
+    <$list variable="configTag" filter="[all[shadows+tiddlers]tags[]prefix[$:/config/ui/ViewTemplate/]] +[enlist<view-sections>addprefix<view-base>]">
+
+        <span class="tc-debug-tag">
+        <$set name="tv-wikilinks" value="yes"><$link to=<<configTag>> tooltip=<<configTag>> >{{$:/core/images/config}}</$link></$set> <$macrocall $name="tag" tag=<<configTag>> />
+        </span>
+
+        <ul class="tc-debug-template-list">
+        <$list variable="sectionTemplate" filter="[all[current]subfilter:tag<configTag>]">
+        <li><span class="tc-tiddler-debug tc-debug-template">
+        <$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> tooltip=<<sectionTemplate>> >{{$:/core/images/transcludify}} <<sectionTemplate>></$link></$set>
+        </span></li>
+        </$list>
+        </ul>
+    </$list>
+</$list>
+
+<!-- EditTemplate config -->
+
+<$list variable="customTemplateHelp" filter="[[$:/config/ui/Debug/Templates]contains:tags-edit<currentTiddler>]" emptyMessage="""
+<p>
+<$button tag="div" class="tc-btn-invisible tc-tiddlylink tc-debug-config" actions=<<debug-on-actions input:"tags-edit">> tooltip="Reveal edit tags.">{{$:/core/images/chevron-down}} {{$:/core/images/transcludify}} ''Edit Templates''</$button>
+</p>""" >
+
+    <$button tag="div" class="tc-btn-invisible tc-tiddlylink tc-debug-config" actions=<<debug-off-actions input:"tags-edit">> tooltip="Hide edit tags.">{{$:/core/images/chevron-up}} {{$:/core/images/transcludify}} ''Edit Templates''</$button>
+
+    <$list variable="configTag" filter="[all[shadows+tiddlers]tags[]prefix[$:/config/ui/EditTemplate/]]  +[enlist<edit-sections>addprefix<edit-base>]">
+
+        <span class="tc-debug-tag">
+        <$set name="tv-wikilinks" value="yes"><$link to=<<configTag>> tooltip=<<configTag>> >{{$:/core/images/config}}</$link></$set> <$macrocall $name="tag" tag=<<configTag>> />
+        </span>
+        <ul class="tc-debug-template-list">
+        <$list variable="sectionTemplate" filter="[all[current]subfilter:tag<configTag>]">
+        <li><span class="tc-tiddler-debug tc-debug-template">
+        <$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> tooltip=<<sectionTemplate>> >{{$:/core/images/transcludify}} <<sectionTemplate>></$link></$set>
+        </span></li>
+        </$list>
+        </ul>
+    </$list>
+</$list>
+
+</div>

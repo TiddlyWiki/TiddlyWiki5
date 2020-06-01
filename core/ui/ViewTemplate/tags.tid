@@ -1,17 +1,12 @@
 title: $:/core/ui/ViewTemplate/tags
 tags: $:/tags/ViewTemplate
 
-\define tiddler-tags-default()
+\define tiddler-tags-view()
 <$list filter="[all[current]tags[]sort[title]]" template="$:/core/ui/TagTemplate" storyview="pop"/>
 \end
 <$reveal type="nomatch" class="tc-tags-wrapper" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
-<$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
-<span class="tc-tiddler-debug tc-debug-config">
-{{$:/core/images/warning}} <<tag "$:/config/ui/ViewTemplate/tags">>
-</span>
-</$list>
-<$list variable="sectionTemplate" filter="[all[current]subfilter:tag[$:/config/ui/ViewTemplate/tags]]" emptyMessage=<<tiddler-tags-default>> >
-<$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
+<$list variable="sectionTemplate" filter="[all[current]subfilter:tag[$:/config/ui/ViewTemplate/tags]]" emptyMessage=<<tiddler-tags-view>> >
+<$list variable="debugTemplate" filter="[[$:/config/ui/Debug/Templates]contains<currentTiddler>]">
 <span class="tc-tiddler-debug tc-debug-section">
 <$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> tooltip=<<sectionTemplate>> >{{$:/core/images/transcludify}} <<sectionTemplate>></$link></$set>
 </span>

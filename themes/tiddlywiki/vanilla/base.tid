@@ -2741,13 +2741,44 @@ select {
 /*
 ** Utility classes for tiddler template debugging
 */
-.tc-tiddler-debug {
-	font-size: 14pt;
+
+.tc-tiddler-debug p{
+	margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
 }
 
-.tc-tiddler-debug svg {
-	height: 1.8em;
-	widgth: 1.8em;
-    vertical-align: bottom;
+.tc-tiddler-debug svg{
+	height: 1.5em;
+	width: 1.5em;
+    vertical-align: middle;
 	fill: <<colour primary>>;
+}
+
+.tc-debug-section svg {
+	max-height: 18pt;
+	max-width: 18pt;
+	fill: <<colour download-background>>;
+}
+
+.tc-debug-config svg.tc-image-button {
+	height: 1.5em;
+	width: 1.5em;
+    vertical-align: bottom;
+}
+
+.tc-debug-config-on svg.tc-image-button {
+	fill: <<colour download-background>>;
+}
+
+.tc-debug-config-off svg.tc-image-button {
+	fill: <<colour dirty-indicator>>;
+}
+
+.tc-tiddler-debug svg.tc-image-chevron-down, .tc-tiddler-debug svg.tc-image-chevron-up {
+	height:1.5em;
+	width: 1.5em;
+}
+
+ul.tc-debug-template-list {
+	list-style: none;
 }

@@ -2,18 +2,13 @@ title: $:/core/ui/ViewTemplate/subtitle
 tags: $:/tags/ViewTemplate
 
 \whitespace trim
-\define tiddler-subtitle-default()
+\define tiddler-subtitle-view()
 <$link to={{!!modifier}} />
 <$view field="modified" format="date" template={{$:/language/Tiddler/DateFormat}}/>
 \end
 <$reveal type="nomatch" class="tc-subtitle" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
-<$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
-<span class="tc-tiddler-debug tc-debug-config">
-{{$:/core/images/warning}} <<tag "$:/config/ui/ViewTemplate/subtitle">>
-</span>
-</$list>
-<$list variable="sectionTemplate" filter="[all[current]subfilter:tag[$:/config/ui/ViewTemplate/subtitle]]" emptyMessage=<<tiddler-subtitle-default>> >
-<$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
+<$list variable="sectionTemplate" filter="[all[current]subfilter:tag[$:/config/ui/ViewTemplate/subtitle]]" emptyMessage=<<tiddler-subtitle-view>> >
+<$list variable="debugTemplate" filter="[[$:/config/ui/Debug/Templates]contains<currentTiddler>]">
 <span class="tc-tiddler-debug tc-debug-section">
 <$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> tooltip=<<sectionTemplate>> >{{$:/core/images/transcludify}} <<sectionTemplate>></$link></$set>
 </span>

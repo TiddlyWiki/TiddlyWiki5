@@ -1,7 +1,7 @@
 title: $:/core/ui/ViewTemplate/body
 tags: $:/tags/ViewTemplate
 
-\define tiddler-body-default()
+\define tiddler-body-view()
 <$list filter="[all[current]!has[plugin-type]!field:hide-body[yes]]">
 
 <$transclude>
@@ -14,15 +14,9 @@ tags: $:/tags/ViewTemplate
 \end
 <$reveal tag="div" class="tc-tiddler-body" type="nomatch" stateTitle=<<folded-state>> text="hide" retain="yes" animate="yes">
 
-<$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
-<span class="tc-tiddler-debug tc-debug-config">
-{{$:/core/images/warning}} <<tag "$:/config/ui/ViewTemplate/body">>
-</span>
-</$list>
+<$list variable="sectionTemplate" filter="[all[current]subfilter:tag[$:/config/ui/ViewTemplate/body]]" emptyMessage=<<tiddler-body-view>> >
 
-<$list variable="sectionTemplate" filter="[all[current]subfilter:tag[$:/config/ui/ViewTemplate/body]]" emptyMessage=<<tiddler-body-default>> >
-
-<$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
+<$list variable="debugTemplate" filter="[[$:/config/ui/Debug/Templates]contains<currentTiddler>]">
 <span class="tc-tiddler-debug tc-debug-section">
 <$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> tooltip=<<sectionTemplate>> >{{$:/core/images/transcludify}} <<sectionTemplate>></$link></$set>
 </span>

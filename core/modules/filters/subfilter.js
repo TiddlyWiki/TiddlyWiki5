@@ -18,11 +18,16 @@ Export our filter function
 exports.subfilter = function(source,operator,options) {
 	var list = [], tiddlers = [],
 	suffix = (operator.suffixes || [])[0] || [""];
-	if (suffix.includes("title")) {
-		tiddlers[0] = operator.operand;
-	} 
 	if (suffix.includes("tag")) {
 		tiddlers = tiddlers.concat(options.wiki.getTiddlersWithTag(operator.operand));
+	}
+	if (suffix.includes("title")) {
+		if (suffix.includes("tag")) {
+			suffix.indexOf("title") > suffix.indexOf("tag") ?
+				tiddlers.push(operator.operand) : tiddlers.unshift(operator.operand);
+		} else {
+			tiddlers[0] = operator.operand;
+		}
 	}
 	if (suffix.includes("title") || suffix.includes("tag")) {
 		tiddlers.forEach(function(title) {
