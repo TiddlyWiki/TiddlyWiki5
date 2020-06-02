@@ -116,7 +116,7 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 \whitespace trim
 <$list variable="sectionTemplate" filter="[all[current]subfilter:tag[$:/config/ui/EditTemplate/fields]]" emptyMessage=<<tiddler-fields-edit>> >
 
-<$list variable="debugTemplate" filter="[[$:/config/ui/Debug/Templates]contains{!!draft.of}]">
+<$list variable="debugTemplate" filter="[[$:/config/ui/Debug/Templates]contains:list{!!draft.of}]">
 <span class="tc-tiddler-debug tc-debug-section">
 <$set name="tv-wikilinks" value="yes"><$link to=<<sectionTemplate>> tooltip=<<sectionTemplate>> >{{$:/core/images/transcludify}} <<sectionTemplate>></$link></$set>
 </span>
