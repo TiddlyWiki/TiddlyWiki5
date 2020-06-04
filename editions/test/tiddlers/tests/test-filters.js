@@ -94,6 +94,7 @@ function setupWiki(wikiOptions) {
 		tags: ["one"],
 		cost: "123",
 		value: "120",
+		slug: "tiddler-one",
 		authors: "Joe Bloggs",
 		modifier: "JoeBloggs",
 		modified: "201304152222"});
@@ -103,6 +104,7 @@ function setupWiki(wikiOptions) {
 		tags: ["two"],
 		cost: "42",
 		value: "190",
+		slug: "tiddler-two",
 		authors: "[[John Doe]]",
 		modifier: "John",
 		modified: "201304152211"});
@@ -315,6 +317,8 @@ function runTests(wiki) {
 	it("should handle the has operator", function() {
 		expect(wiki.filterTiddlers("[has[modified]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne");
 		expect(wiki.filterTiddlers("[!has[modified]sort[title]]").join(",")).toBe("$:/ShadowPlugin,a fourth tiddler,filter regexp test,has filter,hasList,one");
+		expect(wiki.filterTiddlers("[has[tags]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[!has[tags]sort[title]]").join(",")).toBe("$:/ShadowPlugin,a fourth tiddler,filter regexp test,has filter,hasList,one");
 	});
 
 	it("should handle the has:field operator", function() {
@@ -667,6 +671,14 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("b a b c +[sortby[]]").join(",")).toBe("a,b,c");
 		expect(wiki.filterTiddlers("b a b c +[sortby[a b b c]]").join(",")).toBe("a,b,c");
 		expect(wiki.filterTiddlers("b a b c +[sortby[b a c b]]").join(",")).toBe("b,a,c");
+	});
+
+	it("should handle the slugify operator", function() {
+		expect(wiki.filterTiddlers("[[Joe Bloggs]slugify[]]").join(",")).toBe("joe-bloggs");
+		expect(wiki.filterTiddlers("[[Joe Bloggs2]slugify[]]").join(",")).toBe("joe-bloggs2");
+		expect(wiki.filterTiddlers("[[@£$%^&*((]slugify[]]").join(",")).toBe("64-163-36-37-94-38-42-40-40");
+		expect(wiki.filterTiddlers("One one ONE O!N!E +[slugify[]]").join(",")).toBe("one,one,one,one");
+		expect(wiki.filterTiddlers("TiddlerOne $:/TiddlerTwo +[slugify[]]").join(",")).toBe("tiddler-one,tiddler-two");
 	});
 
 	it("should handle the sortsub operator", function() {

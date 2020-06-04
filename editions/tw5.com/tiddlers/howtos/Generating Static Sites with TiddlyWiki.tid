@@ -1,23 +1,25 @@
 created: 20130828190200000
-modified: 20160622111343603
+modified: 20200421003440463
 tags: [[TiddlyWiki on Node.js]]
 title: Generating Static Sites with TiddlyWiki
 type: text/vnd.tiddlywiki
 
 TiddlyWiki5 can be used to generate static HTML representations of a TiddlyWiki that doesn't need JavaScript.
+This process requires that TiddlyWiki be installed on Node.js on your local system. See [[Installing TiddlyWiki on Node.js]] for 
+details.
 
 There is much flexibility in how the static HTML is generated. The following scenarios are all illustrated on https://tiddlywiki.com.
 
 ! Wiki Snapshots and Tiddler Snapshots
 
-You can explore a static representation of this TiddlyWiki at [ext[static.html]]. That file is a static snapshot of the current DefaultTiddlers. Any tiddlers that it links to are referred to via URLs of the form `/static/HelloThere.html` that point to static snapshots of individual tiddlers. The tiddler HTML files reference a `static.css` stylesheet file.
+You can explore a static representation of the main TiddlyWiki site at https://tiddlywiki.com/static.html. That file is a static snapshot of the current DefaultTiddlers. Any tiddlers that it links to are referred to via URLs of the form `/static/HelloThere.html` that point to static snapshots of individual tiddlers. The tiddler HTML files reference a `static.css` stylesheet file.
 
 The following commands are used to generate the sample static version of the TiddlyWiki5 site:
 
 ```
---rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html static text/plain
---rendertiddler $:/core/templates/static.template.html static.html text/plain
---rendertiddler $:/core/templates/static.template.css static/static.css text/plain
+tiddlywiki wikipath --rendertiddlers '[!is[system]]' $:/core/templates/static.tiddler.html static text/plain
+tiddlywiki wikipath --rendertiddler $:/core/templates/static.template.html static.html text/plain
+tiddlywiki wikipath --rendertiddler $:/core/templates/static.template.css static/static.css text/plain
 ```
 
 The first RenderTiddlersCommand generates the HTML representations of individual tiddlers, the second RenderTiddlerCommand saves the static version of the DefaultTiddlers, and the final RenderTiddlerCommand saves the stylesheet. (All the files are placed in the `output` folder of the wiki folder).
@@ -26,7 +28,7 @@ The first RenderTiddlersCommand generates the HTML representations of individual
 
 It is also possible to produce a single HTML file that contains static representations of tiddlers, and uses standard HTML anchor links to jump between them.
 
-For example: [ext[alltiddlers.html]]
+For example: https://tiddlywiki.com/alltiddlers.html
 
 The example is built by the following commands:
 

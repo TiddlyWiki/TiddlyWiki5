@@ -36,8 +36,12 @@ Recursively (and synchronously) copy a directory and all its content
 */
 exports.copyDirectory = function(srcPath,dstPath) {
 	// Remove any trailing path separators
-	srcPath = $tw.utils.removeTrailingSeparator(srcPath);
-	dstPath = $tw.utils.removeTrailingSeparator(dstPath);
+	srcPath = path.resolve($tw.utils.removeTrailingSeparator(srcPath));
+	dstPath = path.resolve($tw.utils.removeTrailingSeparator(dstPath));
+	// Check that neither director is within the other
+	if(srcPath.substring(0,dstPath.length) === dstPath || dstPath.substring(0,srcPath.length) === srcPath) {
+		return "Cannot copy nested directories";
+	}
 	// Create the destination directory
 	var err = $tw.utils.createDirectory(dstPath);
 	if(err) {

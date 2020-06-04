@@ -1,9 +1,9 @@
 title: $:/language/Snippets/TableOfContents
 tags: $:/tags/TextEditor/Snippet
-caption: Taula de continguts
+caption: Índex
 
 <div class="tc-table-of-contents">
 
-<<toc-selective-expandable 'TableOfContents'>>
+<<toc-selective-expandable 'Índex'>>
 
 </div>

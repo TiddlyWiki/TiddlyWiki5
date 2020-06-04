@@ -18,7 +18,7 @@ Values of date fields are 17-character strings:
 * 2 digits for the second
 * 3 digits for the millisecond
 
-To avoid problems arising from differences of time zone, TiddlyWiki always uses [[UTC|http://en.wikipedia.org/wiki/Coordinated_Universal_Time]].
+To avoid problems arising from differences of time zone, TiddlyWiki always uses [[UTC|https://en.wikipedia.org/wiki/Coordinated_Universal_Time]].
 
 As an example, the <<.field created>> field of this tiddler has the value <<.value """<$view field="created"/>""">>.
 
