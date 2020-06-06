@@ -32,6 +32,10 @@ var remarkableOpts = {
 	quotes: $tw.wiki.getTiddlerText("$:/config/markdown/quotes"),
 	typographer: parseAsBoolean("$:/config/markdown/typographer")
 };
+var accumulatingTypes = {
+	"text": true,
+	"softbreak": true
+};
 
 var md = new Remarkable(remarkableOpts);
 
@@ -169,62 +173,65 @@ function convertNodes(remarkableTree, isStartOfInline) {
 		} else if (currentNode.type === "inline") {
 			out = out.concat(convertNodes(currentNode.children, true));
 		} else if (currentNode.type === "text") {
-			if (!pluginOpts.renderWikiText) {
-				out.push({
-					type: "text",
-					text: currentNode.content
-				});
-			} else {
-				// The Markdown compiler thinks this is just text.
-				// Hand off to the WikiText parser to see if there's more to render
-				if (!remarkableOpts.breaks
-					&& (i+2) < remarkableTree.length
-					&& remarkableTree[i+1].type === "softbreak"
-					&& remarkableTree[i+2].type === "text"
-				) {
-					// We need to merge this text block with the upcoming text block and parse it all together.
-					accumulatedText = accumulatedText + currentNode.content;
-				} else {
-					// If we're inside a block element (div, p, td, h1), and this is the first child in the tree,
-					// handle as a block-level parse. Otherwise not.
-					var parseAsInline = !(isStartOfInline && i === 0);
-					var textToParse = accumulatedText + currentNode.content;
-					accumulatedText = '';
-					if (pluginOpts.renderWikiTextPragma !== "") {
-						textToParse = pluginOpts.renderWikiTextPragma + "\n" + textToParse;
-					}
-					var wikiParser = $tw.wiki.parseText("text/vnd.tiddlywiki", textToParse, {
-						parseAsInline: parseAsInline
-					});
-					var rs = wikiParser.tree;
-
-					// If we parsed as a block, but the root element the WikiText parser gave is a paragraph,
-					// we should discard the paragraph, since the way Remarkable nests its nodes, this "inline"
-					// node is always inside something else that's a block-level element
-					if (!parseAsInline
-						&& rs.length === 1
-						&& rs[0].type === "element"
-						&& rs[0].tag === "p"
-					) {
-						rs = rs[0].children;
-					}
-
-					// If the original text element started with a space, add it back in
-					if (rs.length > 0
-						&& rs[0].type === "text"
-						&& currentNode.content[0] === " "
-					) {
-						rs[0].text = " " + rs[0].text;
-					}
-					out = out.concat(rs);
-				}
-			}
+			// We need to merge this text block with the upcoming text block and parse it all together.
+			accumulatedText = accumulatedText + currentNode.content;
 		} else {
 			console.error("Unknown node type: " + currentNode.type, currentNode);
 			out.push({
 				type: "text",
 				text: currentNode.content
 			});
+		}
+		// We test to see if we process the block now, or if there's
+		// more to accumulate first.
+		if (accumulatedText
+			&& (
+				remarkableOpts.breaks ||
+				(i+1) >= remarkableTree.length ||
+				!accumulatingTypes[remarkableTree[i+1].type]
+			)
+		) {
+			// The Markdown compiler thinks this is just text.
+			// Hand off to the WikiText parser to see if there's more to render
+			if (!pluginOpts.renderWikiText) {
+				out.push({
+					type: "text",
+					text: accumulatedText
+				});
+			} else {
+				// If we're inside a block element (div, p, td, h1), and this is the first child in the tree,
+				// handle as a block-level parse. Otherwise not.
+				var parseAsInline = !(isStartOfInline && i === 0);
+				var textToParse = accumulatedText;
+				if (pluginOpts.renderWikiTextPragma !== "") {
+					textToParse = pluginOpts.renderWikiTextPragma + "\n" + textToParse;
+				}
+				var wikiParser = $tw.wiki.parseText("text/vnd.tiddlywiki", textToParse, {
+					parseAsInline: parseAsInline
+				});
+				var rs = wikiParser.tree;
+
+				// If we parsed as a block, but the root element the WikiText parser gave is a paragraph,
+				// we should discard the paragraph, since the way Remarkable nests its nodes, this "inline"
+				// node is always inside something else that's a block-level element
+				if (!parseAsInline
+					&& rs.length === 1
+					&& rs[0].type === "element"
+					&& rs[0].tag === "p"
+				) {
+					rs = rs[0].children;
+				}
+
+				// If the original text element started with a space, add it back in
+				if (rs.length > 0
+					&& rs[0].type === "text"
+					&& accumulatedText[0] === " "
+				) {
+					rs[0].text = " " + rs[0].text;
+				}
+				out = out.concat(rs);
+			}
+			accumulatedText = '';
 		}
 	}
 	return out;
