@@ -258,7 +258,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				// If the original text element started with a space, add it back in
 				if (rs.length > 0
 					&& rs[0].type === "text"
-					&& accumulatedText[0] === " "
+					&& (accumulatedText[0] === " " || accumulatedText[0] === "\n")
 				) {
 					rs[0].text = " " + rs[0].text;
 				}
