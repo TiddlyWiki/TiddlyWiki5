@@ -225,7 +225,8 @@ function convertNodes(remarkableTree, isStartOfInline) {
 		) {
 			// The Markdown compiler thinks this is just text.
 			// Hand off to the WikiText parser to see if there's more to render
-			if (!pluginOpts.renderWikiText) {
+			// But only if it's configured to, and we have more than whitespace
+			if (!pluginOpts.renderWikiText || accumulatedText.match(/^\s*$/)) {
 				out.push({
 					type: "text",
 					text: accumulatedText
