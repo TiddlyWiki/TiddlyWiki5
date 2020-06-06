@@ -88,17 +88,28 @@ function convertNodes(remarkableTree, isStartOfInline) {
 
 	for (var i = 0; i < remarkableTree.length; i++) {
 		var currentNode = remarkableTree[i];
-		if (currentNode.type === "paragraph_open") {
+		switch (currentNode.type) {
+		case "paragraph_open":
 			i = wrappedElement("p", i, currentNode.level, "paragraph_close", remarkableTree);
-		} else if (currentNode.type === "heading_open") {
+			break;
+
+		case "heading_open":
 			i = wrappedElement("h" + currentNode.hLevel, i, currentNode.level, "heading_close", remarkableTree);
-		} else if (currentNode.type === "bullet_list_open") {
+			break;
+
+		case "bullet_list_open":
 			i = wrappedElement("ul", i, currentNode.level, "bullet_list_close", remarkableTree);
-		} else if (currentNode.type == 'ordered_list_open') {
+			break;
+
+		case "ordered_list_open":
 			i = wrappedElement('ol', i, currentNode.level,'ordered_list_close', remarkableTree);
-		} else if (currentNode.type === "list_item_open") {
+			break;
+
+		case "list_item_open":
 			i = wrappedElement("li", i, currentNode.level, "list_item_close", remarkableTree);
-		} else if (currentNode.type === "link_open") {
+			break;
+
+		case "link_open":
 			var j = findTagWithType(remarkableTree, i + 1, "link_close", currentNode.level);
 
 			if (currentNode.href[0] !== "#") {
@@ -126,16 +137,17 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				});
 			}
 			i = j;
-		} else if (currentNode.type.substr(currentNode.type.length - 5) === "_open") {
-			var tagName = currentNode.type.substr(0, currentNode.type.length - 5);
-			i = wrappedElement(tagName, i, currentNode.level, tagName + "_close", remarkableTree);
-		} else if (currentNode.type === "code") {
+			break;
+
+		case "code":
 			out.push({
 				type: "element",
 				tag: currentNode.block ? "pre" : "code",
 				children: [{ type: "text", text: currentNode.content }]
 			});
-		} else if (currentNode.type === "fence") {
+			break;
+
+		case "fence":
 			out.push({
 				type: "codeblock",
 				attributes: {
@@ -143,7 +155,9 @@ function convertNodes(remarkableTree, isStartOfInline) {
 					code: { type: "string", value: currentNode.content }
 				}
 			});
-		} else if (currentNode.type === "image") {
+			break;
+
+		case "image":
 			out.push({
 				type: "image",
 				attributes: {
@@ -151,7 +165,9 @@ function convertNodes(remarkableTree, isStartOfInline) {
 					source: { type: "string", value: currentNode.src }
 				}
 			});
-		} else if (currentNode.type === "softbreak") {
+			break;
+
+		case "softbreak":
 			if (remarkableOpts.breaks) {
 				out.push({
 					type: "element",
@@ -160,27 +176,43 @@ function convertNodes(remarkableTree, isStartOfInline) {
 			} else {
 				accumulatedText = accumulatedText + '\n';
 			}
-		} else if (currentNode.type === "hardbreak") {
+			break;
+
+		case "hardbreak":
 			out.push({
 				type: "element",
 				tag: "br",
 			});
-		} else if (currentNode.type == 'hr') {
+			break;
+
+		case "hr":
 			out.push({
 				type: 'element',
 				tag: 'hr',
 			});
-		} else if (currentNode.type === "inline") {
+			break;
+
+		case "inline":
 			out = out.concat(convertNodes(currentNode.children, true));
-		} else if (currentNode.type === "text") {
+			break;
+
+		case "text":
 			// We need to merge this text block with the upcoming text block and parse it all together.
 			accumulatedText = accumulatedText + currentNode.content;
-		} else {
-			console.error("Unknown node type: " + currentNode.type, currentNode);
-			out.push({
-				type: "text",
-				text: currentNode.content
-			});
+			break;
+
+		default:
+			if (currentNode.type.substr(currentNode.type.length - 5) === "_open") {
+				var tagName = currentNode.type.substr(0, currentNode.type.length - 5);
+				i = wrappedElement(tagName, i, currentNode.level, tagName + "_close", remarkableTree);
+			} else {
+				console.error("Unknown node type: " + currentNode.type, currentNode);
+				out.push({
+					type: "text",
+					text: currentNode.content
+				});
+			}
+			break;
 		}
 		// We test to see if we process the block now, or if there's
 		// more to accumulate first.
