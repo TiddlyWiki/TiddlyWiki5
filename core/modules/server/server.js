@@ -118,6 +118,9 @@ Server.prototype.findMatchingRoute = function(request,state) {
 			pathRegExp = potentialRoute.path,
 			pathname = state.urlInfo.pathname,
 			match;
+		if (request.method !== potentialRoute.method) {
+			continue;
+		}
 		if(pathprefix) {
 			if(pathname.substr(0,pathprefix.length) === pathprefix) {
 				pathname = pathname.substr(pathprefix.length) || "/";
@@ -181,14 +184,14 @@ Server.prototype.requestHandler = function(request,response) {
 			return;
 		}		
 	}
+	// Find the route that matches this path
+	var route = self.findMatchingRoute(request,state);
 	// Authorize with the authenticated username
-	if(!this.isAuthorized(authorizationType,state.authenticatedUsername)) {
+	if((!route || !route.isLoginPage) && !this.isAuthorized(authorizationType,state.authenticatedUsername)) {
 		response.writeHead(401,"'" + state.authenticatedUsername + "' is not authorized to access '" + this.servername + "'");
 		response.end();
 		return;
 	}
-	// Find the route that matches this path
-	var route = self.findMatchingRoute(request,state);
 	// Optionally output debug info
 	if(self.get("debug-level") !== "none") {
 		console.log("Request path:",JSON.stringify(state.urlInfo));

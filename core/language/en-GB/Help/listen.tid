@@ -29,6 +29,8 @@ All parameters are optional with safe defaults, and can be specified in any orde
 * ''tls-key'' - pathname of TLS key file (relative to wiki folder)
 * ''debug-level'' - optional debug level; set to "debug" to view request details (defaults to "none")
 * ''gzip'' - set to "yes" to enable gzip compression for some http endpoints (defaults to "no")
+* ''auth-type'' - set to 'hash' to enable hash based authentication.
+* ''secret-key'' - the server side secret key to be used to with hash based authentication.
 
 For information on opening up your instance to the entire local network, and possible security concerns, see the WebServer tiddler at TiddlyWiki.com.
 
