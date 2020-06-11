@@ -346,6 +346,10 @@ a.tc-tiddlylink-external:hover {
 	background-color: <<colour external-link-background-hover>>;
 }
 
+.tc-drop-down a.tc-tiddlylink:hover {
+	color: <<colour tiddler-link-background>>;
+}
+
 /*
 ** Drag and drop styles
 */
