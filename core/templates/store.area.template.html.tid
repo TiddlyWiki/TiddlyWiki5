@@ -1,5 +1,6 @@
 title: $:/core/templates/store.area.template.html
 
+<$reveal type="nomatch" state="$:/isCompressed" text="yes">
 <$reveal type="nomatch" state="$:/isEncrypted" text="yes">
 `<div id="storeArea" style="display:none;">`
 <$list filter=<<saveTiddlerFilter>> template="$:/core/templates/html-div-tiddler"/>
@@ -10,5 +11,12 @@ title: $:/core/templates/store.area.template.html
 `<!--~~ Encrypted tiddlers ~~-->`
 `<pre id="encryptedStoreArea" type="text/plain" style="display:none;">`
 <$encrypt filter=<<saveTiddlerFilter>>/>
+`</pre>`
+</$reveal>
+</$reveal>
+<$reveal type="match" state="$:/isCompressed" text="yes">
+`<!--~~ Compressed tiddlers ~~-->`
+`<pre id="compressedStoreArea" type="text/plain" style="display:none;">`
+<$compress filter=<<saveTiddlerFilter>>/>
 `</pre>`
 </$reveal>
