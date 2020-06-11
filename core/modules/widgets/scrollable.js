@@ -68,7 +68,8 @@ Scroll an element into view
 ScrollableWidget.prototype.scrollIntoView = function(element) {
 	var duration = $tw.utils.getAnimationDuration();
 	this.cancelScroll();
-	this.startTime = Date.now();
+	this.startTime = Date.now(),
+	srcWindow = element ? element.ownerDocument.defaultView : window;
 	var scrollPosition = {
 		x: this.outerDomNode.scrollLeft,
 		y: this.outerDomNode.scrollTop
@@ -122,7 +123,7 @@ ScrollableWidget.prototype.scrollIntoView = function(element) {
 			self.outerDomNode.scrollLeft = scrollPosition.x + (endX - scrollPosition.x) * t;
 			self.outerDomNode.scrollTop = scrollPosition.y + (endY - scrollPosition.y) * t;
 			if(t < 1) {
-				self.idRequestFrame = self.requestAnimationFrame.call(window,drawFrame);
+				self.idRequestFrame = self.requestAnimationFrame.call(srcWindow,drawFrame);
 			}
 		};
 		drawFrame();
