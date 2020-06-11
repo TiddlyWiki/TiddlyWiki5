@@ -71,9 +71,9 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 <em class="tc-edit">
 <<lingo Fields/Add/Prompt>>&nbsp;&nbsp;
 </em>
-<span class="tc-edit-field-add-name">
+<div class="tc-edit-field-add-name-wrapper">
 <$edit-text tiddler=<<newFieldNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}} focusPopup=<<qualify "$:/state/popup/field-dropdown">> class="tc-edit-texteditor tc-popup-handle" tabindex={{$:/config/EditTabIndex}} focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] ~[[false]] }}} cancelPopups="yes"/>
-</span>&nbsp;
+&nbsp;
 <$button popup=<<qualify "$:/state/popup/field-dropdown">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Field/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Field/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>&nbsp;
 <$reveal state=<<qualify "$:/state/popup/field-dropdown">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown tc-edit-type-dropdown">
@@ -101,6 +101,7 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 </$set>
 </div>
 </$reveal>
+</div>
 <span class="tc-edit-field-add-value">
 <$set name="currentTiddlerCSSescaped" value={{{ [<currentTiddler>escapecss[]] }}}>
 <$keyboard key="((add-field))" actions=<<new-field-actions>>>

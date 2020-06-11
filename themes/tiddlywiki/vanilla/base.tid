@@ -1404,9 +1404,12 @@ html body.tc-body.tc-single-tiddler-window {
 	vertical-align: middle;
 }
 
-.tc-edit-field-add-name {
+.tc-edit-field-add-name-wrapper input.tc-edit-texteditor {
+	width: auto;
+}
+
+.tc-edit-field-add-name-wrapper {
 	display: inline-block;
-	width: 15%;
 }
 
 .tc-edit-field-add-value {
