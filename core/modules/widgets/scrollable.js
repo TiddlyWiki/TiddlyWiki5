@@ -66,10 +66,10 @@ ScrollableWidget.prototype.handleScrollEvent = function(event) {
 Scroll an element into view
 */
 ScrollableWidget.prototype.scrollIntoView = function(element) {
-	var duration = $tw.utils.getAnimationDuration();
+	var duration = $tw.utils.getAnimationDuration(),
+	srcWindow = element ? element.ownerDocument.defaultView : window;
 	this.cancelScroll();
 	this.startTime = Date.now(),
-	srcWindow = element ? element.ownerDocument.defaultView : window;
 	var scrollPosition = {
 		x: this.outerDomNode.scrollLeft,
 		y: this.outerDomNode.scrollTop
