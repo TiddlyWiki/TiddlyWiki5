@@ -38,7 +38,7 @@ $actions$
 </div>
 <div class="tc-block-dropdown-wrapper">
 <$reveal state=<<qualify "$:/state/popup/tags-auto-complete">> type="nomatch" text="" default="">
-<div class="tc-block-dropdown">
+<div class="tc-block-dropdown tc-block-tags-dropdown">
 <$set name="newTagName" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$list filter="[<newTagName>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 <$list filter="[tags[]!is[system]search:title<newTagName>sort[]]" variable="tag">
