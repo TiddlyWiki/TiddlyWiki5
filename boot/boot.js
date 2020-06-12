@@ -1684,46 +1684,50 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
 
 if($tw.browser && !$tw.node) {
 
+$tw.boot.passwordPrompt = function(text, callback) {
+	var prompt = "Enter a password to decrypt this TiddlyWiki";
+	// Prompt for the password
+	if($tw.utils.hop($tw.boot,"encryptionPrompts")) {
+		prompt = $tw.boot.encryptionPrompts.decrypt;
+	}
+	$tw.passwordPrompt.createPrompt({
+		serviceName: prompt,
+		noUserName: true,
+		submitText: "Decrypt",
+		callback: function(data) {
+			// Attempt to decrypt the tiddlers
+			$tw.crypto.setPassword(data.password);
+			var decryptedText = $tw.crypto.decrypt(text);
+			if(decryptedText) {
+				callback(decryptedText);
+				// Exit and remove the password prompt
+				return true;
+			} else {
+				// We didn't decrypt everything, so continue to prompt for password
+				return false;
+			}
+		}
+	});
+}
+
 $tw.boot.inflateTiddlers = function(callback) {
 	var compressedArea = document.getElementById("compressedStoreArea");
+	var inflate = function(text) {
+		var inflated = $tw.compress.inflate(text);
+		var json = JSON.parse(inflated);
+		for(var title in json) {
+			$tw.preloadTiddler(json[title]);
+		}
+		callback();
+	}
 	if(compressedArea) {
 		var compressedText = compressedArea.innerHTML;
 		if(compressedText.startsWith('{"iv":"')) {
-			var prompt = "Enter a password to decrypt this TiddlyWiki";
-			// Prompt for the password
-			if($tw.utils.hop($tw.boot,"encryptionPrompts")) {
-				prompt = $tw.boot.encryptionPrompts.decrypt;
-			}
-			$tw.passwordPrompt.createPrompt({
-				serviceName: prompt,
-				noUserName: true,
-				submitText: "Decrypt",
-				callback: function(data) {
-					// Attempt to decrypt the tiddlers
-					$tw.crypto.setPassword(data.password);
-					var decryptedText = $tw.crypto.decrypt(compressedText);
-					if(decryptedText) {
-						var text = $tw.compress.inflate(decryptedText);
-						var json = JSON.parse(text);
-						for(var title in json) {
-							$tw.preloadTiddler(json[title]);
-						}
-						callback();
-						// Exit and remove the password prompt
-						return true;
-					} else {
-						// We didn't decrypt everything, so continue to prompt for password
-						return false;
-					}
-				}
+			$tw.boot.passwordPrompt(compressedText, function(decryptedText) {
+				inflate(decryptedText);
 			});
 		} else {
-			var text = $tw.compress.inflate(compressedText);
-			var json = JSON.parse(text);
-			for(var title in json) {
-				$tw.preloadTiddler(json[title]);
-			}
-			callback();
+			inflate(compressedText);
 		}
 	} else {
 		// Preload any encrypted tiddlers
@@ -1738,34 +1742,13 @@ Decrypt any tiddlers stored within the element with the ID "encryptedArea". The 
 $tw.boot.decryptEncryptedTiddlers = function(callback) {
 	var encryptedArea = document.getElementById("encryptedStoreArea");
 	if(encryptedArea) {
-		var encryptedText = encryptedArea.innerHTML,
-			prompt = "Enter a password to decrypt this TiddlyWiki";
-		// Prompt for the password
-		if($tw.utils.hop($tw.boot,"encryptionPrompts")) {
-			prompt = $tw.boot.encryptionPrompts.decrypt;
-		}
-		$tw.passwordPrompt.createPrompt({
-			serviceName: prompt,
-			noUserName: true,
-			submitText: "Decrypt",
-			callback: function(data) {
-				// Attempt to decrypt the tiddlers
-				$tw.crypto.setPassword(data.password);
-				var decryptedText = $tw.crypto.decrypt(encryptedText);
-				if(decryptedText) {
-					var json = JSON.parse(decryptedText);
-					for(var title in json) {
-						$tw.preloadTiddler(json[title]);
-					}
-					// Call the callback
-					callback();
-					// Exit and remove the password prompt
-					return true;
-				} else {
-					// We didn't decrypt everything, so continue to prompt for password
-					return false;
-				}
+		var encryptedText = encryptedArea.innerHTML
+		$tw.boot.passwordPrompt(encryptedText, function(decryptedText) {
+			var json = JSON.parse(decryptedText);
+			for(var title in json) {
+				$tw.preloadTiddler(json[title]);
 			}
+			callback();
 		});
 	} else {
 		// Just invoke the callback straight away if there weren't any encrypted tiddlers
