@@ -1,4 +1,6 @@
 title: $:/library/sjcl.js
 type: application/javascript
 library: yes
-version: 1.0.8
+_source_uri: https://cdn.jsdelivr.net/npm/sjcl@1.0.8/sjcl.min.js
+_project_uri: https://github.com/bitwiseshiftleft/sjcl
+_license_uri: https://github.com/bitwiseshiftleft/sjcl/blob/master/LICENSE.txt
