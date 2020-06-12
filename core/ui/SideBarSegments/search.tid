@@ -6,7 +6,7 @@ tags: $:/tags/SideBarSegment
 
 <$set name="searchTiddler" value="$:/temp/search">
 <div class="tc-search">
-<$edit-text tiddler="$:/temp/search" type="search" tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> class="tc-popup-handle"/>
+<$edit-text tiddler="$:/temp/search" type="search" tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> class="tc-popup-handle" cancelPopups="yes"/>
 <$reveal state="$:/temp/search" type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>

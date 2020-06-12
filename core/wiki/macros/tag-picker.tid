@@ -1,30 +1,35 @@
 title: $:/core/macros/tag-picker
 tags: $:/tags/Macro
 
-\define add-tag-actions()
-<$action-sendmessage $message="tm-add-tag" $param={{{ [<newTagNameTiddler>get[text]] }}}/>
+\define add-tag-actions(actions)
+<$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
+<$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
 <$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
+$actions$
+</$set>
 \end
 
-\define tag-button()
+\define tag-button(actions)
 <$button class="tc-btn-invisible" tag="a" tooltip={{$:/language/EditTemplate/Tags/Add/Button/Hint}}>
 <$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
 <$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
+$actions$
 <$macrocall $name="tag-pill" tag=<<tag>>/>
 </$button>
 \end
 
-\define tag-picker-inner()
+\define tag-picker-inner(actions)
 \whitespace trim
 <div class="tc-edit-add-tag">
+<div>
 <span class="tc-add-tag-name">
-<$keyboard key="ENTER" actions=<<add-tag-actions>>>
-<$edit-text tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}}/>
+<$keyboard key="ENTER" actions="""<$macrocall $name="add-tag-actions" actions=<<__actions__>>/>""">
+<$edit-text tiddler=<<newTagNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}} cancelPopups="yes"/>
 </$keyboard>
-</span>&nbsp;<$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>&nbsp;<span class="tc-add-tag-button">
+</span>&nbsp;<$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>&nbsp;<span class="tc-add-tag-button">
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$button set="$:/temp/NewTagName" setTo="" class="">
-<<add-tag-actions>>
+<$macrocall $name="add-tag-actions" actions=<<__actions__>>/>
 <$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
 {{$:/language/EditTemplate/Tags/Add/Button}}
 </$button>
@@ -37,23 +42,24 @@ tags: $:/tags/Macro
 <$set name="newTagName" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$list filter="[<newTagName>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 <$list filter="[tags[]!is[system]search:title<newTagName>sort[]]" variable="tag">
-<<tag-button>>
+<$macrocall $name="tag-button" actions=<<__actions__>>/>
 </$list></$list>
 <hr>
 <$list filter="[<newTagName>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 <$list filter="[tags[]is[system]search:title<newTagName>sort[]]" variable="tag">
-<<tag-button>>
+<$macrocall $name="tag-button" actions=<<__actions__>>/>
 </$list></$list>
 </$set>
 </div>
 </$reveal>
 </div>
+</div>
 \end
-\define tag-picker()
+\define tag-picker(actions)
 \whitespace trim
-<$list filter="[<newTagNameTiddler>match[]]" emptyMessage=<<tag-picker-inner>>>
+<$list filter="[<newTagNameTiddler>match[]]" emptyMessage="""<$macrocall $name="tag-picker-inner" actions=<<__actions__>>/>""">
 <$set name="newTagNameTiddler" value=<<qualify "$:/temp/NewTagName">>>
-<<tag-picker-inner>>
+<$macrocall $name="tag-picker-inner" actions=<<__actions__>>/>
 </$set>
 </$list>
 \end

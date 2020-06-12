@@ -346,6 +346,10 @@ a.tc-tiddlylink-external:hover {
 	background-color: <<colour external-link-background-hover>>;
 }
 
+.tc-drop-down a.tc-tiddlylink:hover {
+	color: <<colour tiddler-link-background>>;
+}
+
 /*
 ** Drag and drop styles
 */
@@ -689,7 +693,7 @@ button.tc-untagged-label {
 	width: 1em;
 	margin-right: 3px; 
 	margin-bottom: 1px;
-	vertical-align: text-bottom;
+	vertical-align: bottom;
 }
 
 .tc-edit-tags button.tc-remove-tag-button svg {
@@ -1299,7 +1303,11 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-type-selector .tc-edit-typeeditor {
-	width: 20%;
+	width: auto;
+}
+
+.tc-type-selector-wrapper {
+	display: inline-block;
 }
 
 .tc-edit-tags {
@@ -1396,9 +1404,12 @@ html body.tc-body.tc-single-tiddler-window {
 	vertical-align: middle;
 }
 
-.tc-edit-field-add-name {
+.tc-edit-field-add-name-wrapper input.tc-edit-texteditor {
+	width: auto;
+}
+
+.tc-edit-field-add-name-wrapper {
 	display: inline-block;
-	width: 15%;
 }
 
 .tc-edit-field-add-value {
