@@ -91,13 +91,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 			handled = true;
 		}
 		if(self.actions) {
-			var modifierKey = event.ctrlKey && !event.shiftKey && !event.altKey ? "ctrl" : 
-				event.shiftKey && !event.ctrlKey && !event.altKey? "shift" : 
-                		event.ctrlKey && event.shiftKey && !event.altKey ? "ctrl-shift" : 
-				event.altKey && !event.shiftKey && !event.ctrlKey ? "alt" : 
-				event.altKey && event.shiftKey && !event.ctrlKey ? "alt-shift" : 
-				event.altKey && event.ctrlKey && !event.shiftKey ? "ctrl-alt" : 
-				event.altKey && event.shiftKey && event.ctrlKey ? "ctrl-alt-shift" : "normal";
+			var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
 			self.invokeActionString(self.actions,self,event,{modifier: modifierKey});
 		}
 		if(handled) {
