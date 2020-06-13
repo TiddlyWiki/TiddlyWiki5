@@ -12,6 +12,14 @@
 		"empty": [
 			"--rendertiddler","$:/core/save/all","empty.html","text/plain",
 			"--rendertiddler","$:/core/save/all","empty.hta","text/plain"],
+		"empty-compressed": [
+			"--compress", "true",
+			"--rendertiddler","$:/core/save/all","empty-compressed.html","text/plain"],
+		"empty-compressed-and-encrypted": [
+			"--compress", "true",
+			"--password", "password",
+			"--rendertiddler", "$:/core/save/all", "empty-compressed-and-encrypted.html", "text/plain",
+			"--clearpassword"],
 		"externalimages": [
 			"--savetiddlers","[is[image]]","images",
 			"--setfield","[is[image]]","_canonical_uri","$:/core/templates/canonical-uri-external-image","text/plain",

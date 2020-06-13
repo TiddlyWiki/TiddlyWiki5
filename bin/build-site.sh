@@ -113,6 +113,21 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--build empty \
 	|| exit 1
 
+# /empty-compressed.html			Empty Compressed
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/empty \
+	--verbose \
+	--output $TW5_BUILD_OUTPUT \
+	--build empty-compressed \
+	|| exit 1
+
+# /empty-compressed-and-encrypted.html			Empty Compressed and Encrypted
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/empty \
+	--verbose \
+	--output $TW5_BUILD_OUTPUT \
+	--build empty-compressed-and-encrypted \
+	|| exit 1
 
 # /test.html			Test edition
 node $TW5_BUILD_TIDDLYWIKI \
@@ -152,6 +167,15 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
 	--build upgrade \
+	|| exit 1
+
+# /compressed-and-encrypted.html			Copy of the main file compressed and encrypted with the password "password"
+node $TW5_BUILD_TIDDLYWIKI \
+	$TW5_BUILD_MAIN_EDITION \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT \
+	--build compressed-and-encrypted \
 	|| exit 1
 
 # /encrypted.html			Copy of the main file encrypted with the password "password"
@@ -222,6 +246,33 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/editions/full/ \
 	--build index \
+	|| exit 1
+
+# /editions/full/index-compressed.html	Full edition
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/full \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT/editions/full/ \
+	--build index-compressed \
+	|| exit 1
+
+# /editions/full/index-encrypted.html	Full edition
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/full \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT/editions/full/ \
+	--build index-encrypted \
+	|| exit 1
+
+# /editions/full/index-compressed-and-encrypted.html	Full edition
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/full \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT/editions/full/ \
+	--build index-compressed-and-encrypted \
 	|| exit 1
 
 # /editions/tw5.com-docs/index.html	tiddlywiki.com docs edition
