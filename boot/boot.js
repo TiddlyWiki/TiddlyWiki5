@@ -732,20 +732,22 @@ $tw.utils.Compress = function() {
 		}
 	};
 	this.deflate = function(str) {
-		var start = new Date();
-		var ua = pako.deflate(str, { raw: false });
+		var tStart = new Date();
+		var ua = pako.deflate(str,{raw:false});
 		var b64 = this.btoa(ua);
-		var elapsed = new Date() - start;
-		var ratio = Math.floor(b64.length * 100 / str.length);
-		console.log(`Deflate: ${elapsed} ms, ratio: ${ratio}%`);
-		return b64;
+		var deflated = JSON.stringify({'pako':b64})
+		var tDeflate = new Date()-tStart;
+		var ratio = Math.floor(b64.length*100/str.length);
+		console.log(`Deflate: ${tDeflate} ms, Ratio: ${ratio}%`);
+		return deflated;
 	};
-	this.inflate = function(b64) {
-		var start = new Date();
-		var ua = this.atob(b64);
-		var str = pako.inflate(ua, { to: 'string' })
-		var elapsed = new Date() - start;
-		console.log(`Inflate: ${elapsed} ms`);
+	this.inflate = function(json) {
+		var tStart = new Date();
+		const inflated = JSON.parse(json);
+		var ua = this.atob(inflated.pako);
+		var str = pako.inflate(ua,{to:"string"})
+		var tInflate = new Date()-tStart;
+		console.log(`Inflate: ${tInflate} ms`);
 		return str;
 	};
 	this.btoa = function(ua) {
@@ -759,7 +761,7 @@ $tw.utils.Compress = function() {
 		try {
 			return this.Base64ToUint8Array(b64);
 		} catch (err) {
-			return Buffer.from(b64, "base64").toString();
+			return Buffer.from(b64,"base64").toString();
 		}
 	};
   this.Uint8ArrayToBase64 = function(uint8) {
@@ -1710,24 +1712,30 @@ $tw.boot.passwordPrompt = function(text, callback) {
 	});
 }
 
+$tw.boot.preloadTiddler = function(text, callback) {
+	var json = JSON.parse(text);
+	for(var title in json) {
+		$tw.preloadTiddler(json[title]);
+	}
+	callback();
+}
+
 $tw.boot.inflateTiddlers = function(callback) {
 	var compressedArea = document.getElementById("compressedStoreArea");
 	var inflate = function(text) {
-		var inflated = $tw.compress.inflate(text);
-		var json = JSON.parse(inflated);
-		for(var title in json) {
-			$tw.preloadTiddler(json[title]);
+		if(text.startsWith('{"pako":"')) {
+			text = $tw.compress.inflate(text);
 		}
-		callback();
+		$tw.boot.preloadTiddler(text, callback)
 	}
 	if(compressedArea) {
-		var compressedText = compressedArea.innerHTML;
-		if(compressedText.startsWith('{"iv":"')) {
-			$tw.boot.passwordPrompt(compressedText, function(decryptedText) {
-				inflate(decryptedText);
+		var text = compressedArea.innerHTML;
+		if(text.startsWith('{"iv":"')) {
+			$tw.boot.passwordPrompt(text, function(decrypted) {
+				inflate(decrypted);
 			});
 		} else {
-			inflate(compressedText);
+			inflate(text);
 		}
 	} else {
 		// Preload any encrypted tiddlers
@@ -1742,14 +1750,14 @@ Decrypt any tiddlers stored within the element with the ID "encryptedArea". The 
 $tw.boot.decryptEncryptedTiddlers = function(callback) {
 	var encryptedArea = document.getElementById("encryptedStoreArea");
 	if(encryptedArea) {
-		var encryptedText = encryptedArea.innerHTML
-		$tw.boot.passwordPrompt(encryptedText, function(decryptedText) {
-			var json = JSON.parse(decryptedText);
-			for(var title in json) {
-				$tw.preloadTiddler(json[title]);
-			}
-			callback();
-		});
+		var text = encryptedArea.innerHTML
+		if(text.startsWith('{"iv":"')) {
+			$tw.boot.passwordPrompt(text, function(decrypted) {
+				$tw.boot.preloadTiddler(decrypted, callback)
+			});
+		} else {
+			$tw.boot.preloadTiddler(text, callback)
+		}
 	} else {
 		// Just invoke the callback straight away if there weren't any encrypted tiddlers
 		callback();
