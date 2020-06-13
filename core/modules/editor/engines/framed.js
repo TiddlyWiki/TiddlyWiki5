@@ -80,7 +80,8 @@ function FramedEngine(options) {
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
-		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"}
+		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"},
+		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"},
 	]);
 	// Insert the element into the DOM
 	this.iframeDoc.body.appendChild(this.domNode);
@@ -150,6 +151,15 @@ FramedEngine.prototype.focus  = function() {
 	if(this.domNode.focus && this.domNode.select) {
 		this.domNode.focus();
 		this.domNode.select();
+	}
+};
+
+/*
+Handle a focus event
+*/
+FramedEngine.prototype.handleFocusEvent = function(event) {
+	if(this.widget.editCancelPopups) {
+		$tw.popup.cancel(0);	
 	}
 };
 
