@@ -39,7 +39,7 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Create element and assign classes
 	var domNode = this.document.createElement(tag),
-		classes = (this["class"] || "").split(" ");
+		classes = (this.droppableClass || "").split(" ");
 	classes.push("tc-droppable");
 	domNode.className = classes.join(" ");
 	// Add event handlers
@@ -75,7 +75,9 @@ DroppableWidget.prototype.leaveDrag = function(event) {
 	// Remove highlighting if we're leaving externally. The hacky second condition is to resolve a problem with Firefox whereby there is an erroneous dragenter event if the node being dragged is within the dropzone
 	if(this.currentlyEntered.length === 0 || (this.currentlyEntered.length === 1 && this.currentlyEntered[0] === $tw.dragInProgress)) {
 		this.currentlyEntered = [];
-		$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
+		if(this.domNodes[0]) {
+			$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
+		}
 	}
 };
 

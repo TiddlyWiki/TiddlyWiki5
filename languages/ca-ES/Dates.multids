@@ -1,36 +1,36 @@
 title: $:/language/
 
 Date/DaySuffix/1: r
-Date/DaySuffix/10: é
-Date/DaySuffix/11: é
-Date/DaySuffix/12: é
-Date/DaySuffix/13: é
-Date/DaySuffix/14: é
-Date/DaySuffix/15: é
-Date/DaySuffix/16: é
-Date/DaySuffix/17: é
-Date/DaySuffix/18: é
-Date/DaySuffix/19: é
-Date/DaySuffix/2: n
-Date/DaySuffix/20: é
-Date/DaySuffix/21: é
-Date/DaySuffix/22: é
-Date/DaySuffix/23: r
-Date/DaySuffix/24: é
-Date/DaySuffix/25: é
-Date/DaySuffix/26: é
-Date/DaySuffix/27: é
-Date/DaySuffix/28: é
-Date/DaySuffix/29: é
-Date/DaySuffix/3: r
-Date/DaySuffix/30: é
-Date/DaySuffix/31: é
-Date/DaySuffix/4: t
-Date/DaySuffix/5: é
-Date/DaySuffix/6: é
-Date/DaySuffix/7: é
-Date/DaySuffix/8: é
-Date/DaySuffix/9: é
+Date/DaySuffix/10: 
+Date/DaySuffix/11: 
+Date/DaySuffix/12: 
+Date/DaySuffix/13: 
+Date/DaySuffix/14: 
+Date/DaySuffix/15: 
+Date/DaySuffix/16: 
+Date/DaySuffix/17: 
+Date/DaySuffix/18: 
+Date/DaySuffix/19: 
+Date/DaySuffix/2: 
+Date/DaySuffix/20: 
+Date/DaySuffix/21: 
+Date/DaySuffix/22: 
+Date/DaySuffix/23: 
+Date/DaySuffix/24: 
+Date/DaySuffix/25: 
+Date/DaySuffix/26: 
+Date/DaySuffix/27: 
+Date/DaySuffix/28: 
+Date/DaySuffix/29: 
+Date/DaySuffix/3: 
+Date/DaySuffix/30: 
+Date/DaySuffix/31: 
+Date/DaySuffix/4: 
+Date/DaySuffix/5: 
+Date/DaySuffix/6: 
+Date/DaySuffix/7: 
+Date/DaySuffix/8: 
+Date/DaySuffix/9: 
 Date/Long/Day/0: Diumenge
 Date/Long/Day/1: Dilluns
 Date/Long/Day/2: Dimarts
@@ -39,16 +39,16 @@ Date/Long/Day/4: Dijous
 Date/Long/Day/5: Divendres
 Date/Long/Day/6: Dissabte
 Date/Long/Month/1: de gener de
-Date/Long/Month/10: d'octubre de
+Date/Long/Month/10: octubre de
 Date/Long/Month/11: de novembre de
 Date/Long/Month/12: de desembre de
 Date/Long/Month/2: de febrer de
 Date/Long/Month/3: de març de
-Date/Long/Month/4: d'abril de
+Date/Long/Month/4: abril de
 Date/Long/Month/5: de maig de
 Date/Long/Month/6: de juny de
 Date/Long/Month/7: de juliol de
-Date/Long/Month/8: d'agost de
+Date/Long/Month/8: agost de
 Date/Long/Month/9: de septembre de
 Date/Short/Day/0: Diu
 Date/Short/Day/1: Dil
@@ -62,8 +62,8 @@ Date/Short/Month/12: Des
 Date/Short/Month/4: Abr
 Date/Short/Month/5: Mai
 Date/Short/Month/8: Ago
-Date/Period/am: m.
-Date/Period/pm: t.
+Date/Period/am: del matí
+Date/Period/pm: de la tarda
 RelativeDate/Future/Days: <<period>> dies des d'ara
 RelativeDate/Future/Hours: <<period>> hores des d'ara
 RelativeDate/Future/Minutes: <<period>> minuts des d'ara

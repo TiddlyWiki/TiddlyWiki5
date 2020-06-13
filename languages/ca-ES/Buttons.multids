@@ -85,7 +85,7 @@ Info/Hint: Mostra la informació d'aquest tiddler
 Italic/Caption: cursiva
 Italic/Hint: Aplica el format de cursiva a la selecció
 Language/Caption: idioma
-Language/Hint: Trieu l'idioma de la interfície
+Language/Hint: Trieu l'idioma
 LineWidth/Caption: amplada de la línia
 LineWidth/Hint: Trieu l'amplada de la línia per pintar
 Link/Caption: enllaç
@@ -127,7 +127,7 @@ Palette/Hint: Trieu el color de la paleta
 Permalink/Caption: enllaç permanent
 Permalink/Hint: Fés que la barra d'adreces del navegador mostri un enllaç directe cap aquest tiddler
 Permaview/Caption: vista permanent
-Permaview/Hint: Fés que la barra d'adreces del navegador mostri un enllaç directe cap a tots els tiddlers d'aquesta història
+Permaview/Hint: Fés que la barra d'adreces del navegador mostri un enllaç directe cap a tots els tiddlers de la cronologia
 Picture/Caption: imatge
 Picture/Hint: Inserta una imatge
 Preview/Caption: previsualització
@@ -154,11 +154,11 @@ Size/Caption/Height: Alçada:
 Size/Caption/Resize: Mida de la  imatge
 Size/Caption/Width: Amplada:
 Size/Hint: Trieu la mida de la imatge
-Stamp/Caption: marca
-Stamp/Caption/New: Afegiu la vostra pròpia
-Stamp/Hint: Inserta un fragment de text
-Stamp/New/Text: Fragment de text. (Recordeu afegir un títol descriptiu al camp de la llegenda).
-Stamp/New/Title: Es mostra el nom al menú
+Stamp/Caption: Plantilla
+Stamp/Caption/New: Afegeix una nova plantilla
+Stamp/Hint: Inserta una plantilla de text
+Stamp/New/Text: Plantilla de text. (Recordeu afegir un text descriptiu al camp //caption//).
+Stamp/New/Title: Nom que es mostrarà al menú d'afegir una plantilla
 StoryView/Caption: visualització de la cronologia
 StoryView/Hint: Trieu la visualització de la cronologia
 Strikethrough/Caption: ratllat

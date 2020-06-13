@@ -20,8 +20,8 @@ exports.path = /^\/recipes\/default\/tiddlers.json$/;
 
 exports.handler = function(request,response,state) {
 	var filter = state.queryParameters.filter || DEFAULT_FILTER;
-	if($tw.wiki.getTiddlerText("$:/config/Server/AllowAllExternalFilters") !== "yes") {
-		if($tw.wiki.getTiddlerText("$:/config/Server/ExternalFilters/" + filter) !== "yes") {
+	if(state.wiki.getTiddlerText("$:/config/Server/AllowAllExternalFilters") !== "yes") {
+		if(state.wiki.getTiddlerText("$:/config/Server/ExternalFilters/" + filter) !== "yes") {
 			console.log("Blocked attempt to GET /recipes/default/tiddlers.json with filter: " + filter);
 			response.writeHead(403);
 			response.end();

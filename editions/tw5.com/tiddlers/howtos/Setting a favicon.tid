@@ -1,10 +1,10 @@
 created: 20131224074240979
-modified: 20200422163752597
+modified: 20200510115704738
 tags: [[Customise TiddlyWiki]]
 title: Setting a favicon
 type: text/vnd.tiddlywiki
 
-"favicons" are small icons that most browsers display to help users identify websites.
+"favicons" are small icons that most browsers display to help users identify websites. Note that all browsers support bitmap images, but only certain modern browsers support SVG format icons.
 
 ! favicons in the Browser
 

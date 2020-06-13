@@ -9,10 +9,11 @@ Basics/Caption: Bàsic
 Basics/DefaultTiddlers/BottomHint: Useu &#91;&#91;claudàtors dobles&#93;&#93; per als títols amb espais. O podeu triar <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">mantenir l'ordre de la cronologia</$button>
 Basics/DefaultTiddlers/Prompt: Tiddlers per omissió:
 Basics/DefaultTiddlers/TopHint: Trieu quins tiddlers s'han de mostrar a l'inici:
-Basics/Language/Prompt: Hola! Idioma actual:
+Basics/Language/Prompt: Bon dia! Trieu l'idioma:
 Basics/NewJournal/Tags/Prompt: Etiquetes per als nous tiddlers del diari
 Basics/NewJournal/Text/Prompt: Text dels nous tiddlers del diari
 Basics/NewJournal/Title/Prompt: Títol dels nous tiddlers del diari
+Basics/NewTiddler/Tags/Prompt: Etiquetes dels nous tiddlers
 Basics/NewTiddler/Title/Prompt: Títol dels nous tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Número de tiddlers ombra sobreescrits:
 Basics/ShadowTiddlers/Prompt: Número de tiddlers ombra:
@@ -45,7 +46,7 @@ KeyboardShortcuts/Remove/Hint: suprimeix la drecera del teclat
 LoadedModules/Caption: Mòduls carregats
 LoadedModules/Hint: Aquests són els mòduls tiddlers enllaçats als seus tiddlers font. Els mòduls indicats en cursiva no disposen de tiddler font, sovint per que s'han configurat a l'arrencada.
 Palette/Caption: Paleta
-Palette/Editor/Clone/Caption: clona paquets de connectors
+Palette/Editor/Clone/Caption: clona
 Palette/Editor/Clone/Prompt: Es recomana que cloneu aquesta paleta ombra abans d'editar-la
 Palette/Editor/Delete/Hint: suprimeix aquesta entrada de la paleta actual
 Palette/Editor/Names/External/Show: Mostra el noms dels colors que no formen part de la paleta actual
@@ -63,11 +64,13 @@ Parsing/Pragma/Caption: Regles d'anàlisi Pragma
 Plugins/Add/Caption: Obtingueu més connectors
 Plugins/Add/Hint: Instal·leu connectors de la biblioteca oficial
 Plugins/AlreadyInstalled/Hint: Aquest connector ja té instal·lada la versió <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: També necessita:
 Plugins/Caption: Connectors
 Plugins/ClosePluginLibrary: tanca la biblioteca de connectors
 Plugins/Disable/Caption: desactiva
 Plugins/Disable/Hint: Desactiva aquest connector quan la pàgina es torni a carregar
 Plugins/Disabled/Status: (desactivat)
+Plugins/Downgrade/Caption: seactualitza
 Plugins/Empty/Hint: Cap
 Plugins/Enable/Caption: activa
 Plugins/Enable/Hint: Activa aquest connector quan la pàgina es torni a carregar
@@ -80,9 +83,15 @@ Plugins/NotInstalled/Hint: Aquest connector no està instal·lat
 Plugins/OpenPluginLibrary: obre la biblioteca de connectors
 Plugins/Plugins/Caption: Connectors
 Plugins/Plugins/Hint: Connectors
+Plugins/PluginWillRequireReload: (cal tornar-ho a carregar)
 Plugins/Reinstall/Caption: torna a instal·lar
+Plugins/SubPluginPrompt: Amb <<count>> sub-connectors disponibles
 Plugins/Themes/Caption: Temes
 Plugins/Themes/Hint: Connectors del tema
+Plugins/Update/Caption: actualització
+Plugins/Updates/Caption: Actualitzacions
+Plugins/Updates/Hint: Actualitzacions disponibles dels connectors instal·lats
+Plugins/Updates/UpdateAll/Caption: Actualitza <<update-count>> connectors
 Saving/Caption: Desa
 Saving/DownloadSaver/AutoSave/Description: Permet que el gestor de baixades desi automàticament
 Saving/DownloadSaver/AutoSave/Hint: Activa el desat automàtic pel gestor de baixades
@@ -102,6 +111,8 @@ Saving/GitService/Branch: Branca destinació a on desar
 Saving/GitService/CommitMessage: Desat per TiddlyWiki
 Saving/GitService/Description: Aquests paràmetres només s'utilitzen quan es desa a <<service-name>>
 Saving/GitService/Filename: Nom del fitxer destinació (per exemple `index.html`)
+Saving/GitService/Gitea/Caption: Gestor de baixades Gitea
+Saving/GitService/Gitea/Password: Testimoni d'accès personal de l'API (via la interfície web de Gitea: `Paràmetres | Aplicacions | Genera un Nou Testimoni`)
 Saving/GitService/GitHub/Caption: Gestor de baixades de ~GitHub
 Saving/GitService/GitHub/Password: Contrasenya, clau OAUTH o clau d'accés personal (veieu els detalls a la [[pàgina d'ajuda del GitHub|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] )
 Saving/GitService/GitLab/Caption: Gestor de baixades de ~GitLab
@@ -128,13 +139,13 @@ Settings/AutoSave/Disabled/Description: No desis els canvis de forma automàtica
 Settings/AutoSave/Enabled/Description: Desa els canvis de forma automàtica
 Settings/AutoSave/Hint: Desa els canvis de forma automàtica mentre s'està editant
 Settings/CamelCase/Caption: Enllaços wiki tipus CamelCase
-Settings/CamelCase/Description: Activa l'enllaç automàtic de ~CamelCase
-Settings/CamelCase/Hint: Podeu desactivar l’enllaç automàtic de les frases ~CamelCase globalment. Cal que es torni a carregar per tenir efecte
+Settings/CamelCase/Description: Activa l'enllaç automàtic tipus ~CamelCase
+Settings/CamelCase/Hint: Podeu desactivar globalment l’enllaç automàtic de les frases ~CamelCase. Cal que es torni a carregar per tenir efecte
 Settings/Caption: Paràmetres
 Settings/DefaultMoreSidebarTab/Caption: Pestanya Més de la barra lateral per omissió
-Settings/DefaultMoreSidebarTab/Hint: Indiqueu quina pestanya Més de la barra lateral es mostra per omissió
+Settings/DefaultMoreSidebarTab/Hint: Indiqueu la pestanya Més de la barra lateral que es mostra per omissió
 Settings/DefaultSidebarTab/Caption: Pestanya de la barra lateral que es mostra per omissió
-Settings/DefaultSidebarTab/Hint: Indica quina pestanya de la barra lateral es mostra per omissió
+Settings/DefaultSidebarTab/Hint: Indiqueu la pestanya de la barra lateral que es mostra per omissió
 Settings/EditorToolbar/Caption: Barra d'eines de l'editor
 Settings/EditorToolbar/Description: Mostra la barra d'eines de l'editor
 Settings/EditorToolbar/Hint: Activa o desactiva la barra d'eines de l'editor:
@@ -144,12 +155,12 @@ Settings/InfoPanelMode/Hint: Controla quan es tanca el tauler d'informació del 
 Settings/InfoPanelMode/Popup/Description: El tauler d’informació del Tiddler es tanca automàticament
 Settings/InfoPanelMode/Sticky/Description: El tauler d’informació del Tiddler roman obert fins que es tanqui explícitament
 Settings/LinkToBehaviour/Caption: Comportament d'obertura del tiddler
-Settings/LinkToBehaviour/InsideRiver/Hint: Navegació des de //dins de// la cronologia
+Settings/LinkToBehaviour/InsideRiver/Hint: Navegació des de //dins// de la cronologia
 Settings/LinkToBehaviour/OpenAbove: Obre per sobre del tiddler actual
 Settings/LinkToBehaviour/OpenAtBottom: Obre a la part inferior de la cronologia
 Settings/LinkToBehaviour/OpenAtTop: Obre a la part superior de la cronologia
 Settings/LinkToBehaviour/OpenBelow: Obre per sota del tiddler actual
-Settings/LinkToBehaviour/OutsideRiver/Hint: Navegació des de //fora de//la cronologia
+Settings/LinkToBehaviour/OutsideRiver/Hint: Navegació des de //fora// de la cronologia
 Settings/MissingLinks/Caption: Enllaços Wiki
 Settings/MissingLinks/Description: Activa els enllaços als tiddlers que falten
 Settings/MissingLinks/Hint: Escolliu si voleu enllaçar els tiddlers que encara no existeixen
@@ -157,11 +168,11 @@ Settings/NavigationAddressBar/Caption: Barra d'adreces de navegació
 Settings/NavigationAddressBar/Hint: Comportament de la barra d'adreces en navegar cap a un tiddler:
 Settings/NavigationAddressBar/No/Description: No actualitzis la barra d'adreces
 Settings/NavigationAddressBar/Permalink/Description: Inclou el tiddler destinació
-Settings/NavigationAddressBar/Permaview/Description: Inclou el tiddler destinació i la seqùència actual
+Settings/NavigationAddressBar/Permaview/Description: Inclou el tiddler destinació i la cronologia actual
 Settings/NavigationHistory/Caption: Històrial de navegació
 Settings/NavigationHistory/Hint: Actualitza l'històrial del navegador en navegar cap a un tiddler:
-Settings/NavigationHistory/No/Description: No actualitzis la cronologia
-Settings/NavigationHistory/Yes/Description: Actualitza la cronologia
+Settings/NavigationHistory/No/Description: No actualitzis l'històrial
+Settings/NavigationHistory/Yes/Description: Actualitza l'històrial
 Settings/NavigationPermalinkviewMode/Caption: Mode enllaç permanent/vista permanent
 Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: Copia l’URL de l'enllaç permanent/vista permanent al portapapers
 Settings/NavigationPermalinkviewMode/Hint: Trieu com es gestiona l'enllaç permanent/vista permanent

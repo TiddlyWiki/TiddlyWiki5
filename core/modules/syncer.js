@@ -127,7 +127,7 @@ function Syncer(options) {
 		});
 	}
 	// Listen out for lazyLoad events
-	if(!this.disableUI && $tw.wiki.getTiddlerText(this.titleSyncDisableLazyLoading) !== "yes") {
+	if(!this.disableUI && this.wiki.getTiddlerText(this.titleSyncDisableLazyLoading) !== "yes") {
 		this.wiki.addEventListener("lazyLoad",function(title) {
 			self.handleLazyLoadEvent(title);
 		});		
@@ -204,7 +204,7 @@ Syncer.prototype.isDirty = function() {
 		if(this.wiki.tiddlerExists(title)) {
 			if(tiddlerInfo) {
 				// If the tiddler is known on the server and has been modified locally then it needs to be saved to the server
-				if($tw.wiki.getChangeCount(title) > tiddlerInfo.changeCount) {
+				if(this.wiki.getChangeCount(title) > tiddlerInfo.changeCount) {
 					return true;
 				}
 			} else {
@@ -526,7 +526,7 @@ Syncer.prototype.chooseNextTask = function() {
 			tiddlerInfo = this.tiddlerInfo[title];
 		if(tiddler) {
 			// If the tiddler is not known on the server, or has been modified locally no more recently than the threshold then it needs to be saved to the server
-			var hasChanged = !tiddlerInfo || $tw.wiki.getChangeCount(title) > tiddlerInfo.changeCount,
+			var hasChanged = !tiddlerInfo || this.wiki.getChangeCount(title) > tiddlerInfo.changeCount,
 				isReadyToSave = !tiddlerInfo || !tiddlerInfo.timestampLastSaved || tiddlerInfo.timestampLastSaved < thresholdLastSaved;
 			if(hasChanged) {
 				if(isReadyToSave) {

@@ -122,6 +122,9 @@ SimpleEngine.prototype.handleInputEvent = function(event) {
 Handle a dom "focus" event
 */
 SimpleEngine.prototype.handleFocusEvent = function(event) {
+	if(this.widget.editCancelPopups) {
+		$tw.popup.cancel(0);
+	}
 	if(this.widget.editFocusPopup) {
 		$tw.popup.triggerPopup({
 			domNode: this.domNode,
