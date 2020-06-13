@@ -41,13 +41,13 @@ $(currentTiddler)$!!popup-$(payloadTiddler)$
 <$checkbox field=<<selectionField>> checked="checked" unchecked="unchecked" default="checked"/>
 </td>
 <td>
-<$reveal type="nomatch" stateTitle=<<previewPopupState>> text="yes" tag="div">
-<$button class="tc-btn-invisible tc-btn-dropdown" setTitle=<<previewPopupState>> setTo="yes">
+<$reveal type="nomatch" state=<<previewPopupState>> text="yes" tag="div">
+<$button class="tc-btn-invisible tc-btn-dropdown" set=<<previewPopupState>> setTo="yes">
 {{$:/core/images/right-arrow}}&nbsp;<$text text=<<payloadTiddler>>/>
 </$button>
 </$reveal>
-<$reveal type="match" stateTitle=<<previewPopupState>> text="yes" tag="div">
-<$button class="tc-btn-invisible tc-btn-dropdown" setTitle=<<previewPopupState>> setTo="no">
+<$reveal type="match" state=<<previewPopupState>> text="yes" tag="div">
+<$button class="tc-btn-invisible tc-btn-dropdown" set=<<previewPopupState>> setTo="no">
 {{$:/core/images/down-arrow}}&nbsp;<$text text=<<payloadTiddler>>/>
 </$button>
 </$reveal>
@@ -58,7 +58,7 @@ $(currentTiddler)$!!popup-$(payloadTiddler)$
 </tr>
 <tr>
 <td colspan="3">
-<$reveal type="match" text="yes" stateTitle=<<previewPopupState>> tag="div">
+<$reveal type="match" text="yes" state=<<previewPopupState>> tag="div">
 <$list filter="[{$:/state/importpreviewtype}has[text]]" variable="listItem" emptyMessage={{$:/core/ui/ImportPreviews/Text}}>
 <$transclude tiddler={{$:/state/importpreviewtype}}/>
 </$list>
