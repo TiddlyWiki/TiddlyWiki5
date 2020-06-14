@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 
 The built-in `TiddlySpot `saver can also be used to save changes to a simple PHP script that you can run on most hosting providers.
 
-//These are preliminary instructions that need verification//
+//This code hasn't been updated in several years. If you have difficulty with it, consider using [[TW Receiver|Saving with TW Receiver]] instead//
 
 # Download a copy of `TiddlyHome_0.1.2.zip` from https://code.google.com/archive/p/bidix/downloads
 # Unzip. 
@@ -45,3 +45,4 @@ php_value post_max_size 6M
 !!! Note about possible error message
 
 If you get an error message regarding `split()`, you may need to change references  to `split` in ''store.php'' to function `explode` .
+
