@@ -93,15 +93,15 @@ function SaverHandler(options) {
 	}
 	// Install the save action handlers
 	if($tw.browser) {
-		$tw.rootWidget.addEventListener("tm-save-wiki",function(event) {
-			self.saveWiki({
+		$tw.rootWidget.addEventListener("tm-save-wiki",async function(event) {
+			await self.saveWiki({
 				template: event.param,
 				downloadType: "text/plain",
 				variables: event.paramObject
 			});
 		});
-		$tw.rootWidget.addEventListener("tm-download-file",function(event) {
-			self.saveWiki({
+		$tw.rootWidget.addEventListener("tm-download-file",async function(event) {
+			await self.saveWiki({
 				method: "download",
 				template: event.param,
 				downloadType: "text/plain",
@@ -125,15 +125,22 @@ SaverHandler.prototype.initSavers = function(moduleType) {
 	var self = this;
 	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
 		if(module.canSave(self)) {
-			self.savers.push(module.create(self.wiki));
+			self.savers.push({title:title,module:module.create(self.wiki)});
 		}
 	});
-	// Sort the savers into priority order
+	// Sort savers
+	this.sortSavers();
+};
+
+/*
+Sort the savers into priority order
+*/
+SaverHandler.prototype.sortSavers = function() {
 	this.savers.sort(function(a,b) {
-		if(a.info.priority < b.info.priority) {
+		if(a.module.info.priority < b.module.info.priority) {
 			return -1;
 		} else {
-			if(a.info.priority > b.info.priority) {
+			if(a.module.info.priority > b.module.info.priority) {
 				return +1;
 			} else {
 				return 0;
@@ -148,7 +155,7 @@ Save the wiki contents. Options are:
 	template: the tiddler containing the template to save
 	downloadType: the content type for the saved file
 */
-SaverHandler.prototype.saveWiki = function(options) {
+SaverHandler.prototype.saveWiki = async function(options) {
 	options = options || {};
 	var self = this,
 		method = options.method || "save";
@@ -172,18 +179,91 @@ SaverHandler.prototype.saveWiki = function(options) {
 				$tw.notifier.display(self.titleSavedNotification);
 				if(options.callback) {
 					options.callback();
-				}
-			}
-		};
-	// Call the highest priority saver that supports this method
-	for(var t=this.savers.length-1; t>=0; t--) {
-		var saver = this.savers[t];
-		if(saver.info.capabilities.indexOf(method) !== -1 && saver.save(text,method,callback,{variables: {filename: variables.filename}})) {
-			this.logger.log("Saving wiki with method",method,"through saver",saver.info.name);
-			return true;
-		}
-	}
-	return false;
+        }
+      }
+    };
+  // Process preferred if any
+  var ignorePreferred = null
+  var preferredSaver = $tw.wiki.getTiddler("$:/config/PreferredSaver")
+  if (preferredSaver !== null && preferredSaver !== undefined) {
+    var title = preferredSaver.getFieldString("text")
+    title =
+      title === undefined || title == null || title.trim() === ''
+        ? null
+        : title.trim()
+    if (title !== null) {
+      ignorePreferred = title
+      // Process preferred saver
+      if (
+        await this.save(
+          this.getSaver(title).module,
+          method,
+          variables,
+          text,
+          callback
+        )
+      ) {
+        return true
+      }
+    }
+  }
+  // Call the highest priority saver that supports this method
+  for (var t = this.savers.length - 1; t >= 0; t--) {
+    // Ignore failed preferred if any
+    if (this.savers[t].title === ignorePreferred) {
+      continue
+    }
+    // Process
+    if (
+      await this.save(
+        this.savers[t].module,
+        method,
+        variables,
+        text,
+        callback
+      )
+    ) {
+      return true
+    }
+  }
+  return false
+};
+
+SaverHandler.prototype.getSaver = function (title) {
+  // Locate saver
+  var saver = null
+  for (var i = 0; i < this.savers.length; i++) {
+    var current = this.savers[i]
+    if (current.title === title) {
+      saver = current
+      break
+    }
+  }
+  return saver
+};
+
+SaverHandler.prototype.save = async function (
+  saver,
+  method,
+  variables,
+  text,
+  callback
+) {
+  if (saver.info.capabilities.indexOf(method) !== -1) {
+    var saved = await saver.save(text, method, callback, {
+      variables: { filename: variables.filename }
+    })
+    if (saved) {
+      this.logger.log(
+        'Saved wiki with method',
+        method,
+        'through saver',
+        saver.info.name
+      )
+      return true
+    }
+  }
+  return false
 };
 
 /*

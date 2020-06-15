@@ -5,8 +5,19 @@ list-before:
 
 \define lingo-base() $:/language/ControlPanel/Settings/
 
+\define ipfs-saver()
+<$text text=<<ipfs-info-saver "$(currentTiddler)$">>/>
+\end
+
 {{$:/language/ControlPanel/Saving/General/Hint}}
 
+!! <$link to="$:/config/PreferredSaver"><<lingo PreferredSaver/Caption>></$link>
+
+<$select tiddler="$:/config/PreferredSaver">
+<$list filter="[savers[]]">
+<option value=<<currentTiddler>>><<ipfs-saver>></option>
+</$list>
+</$select>
 !! <$link to="$:/config/AutoSave"><<lingo AutoSave/Caption>></$link>
 
 <<lingo AutoSave/Hint>>
