@@ -55,7 +55,9 @@ Compress widget
     this.compressedText = $tw.compress.deflate(JSON.stringify(json));
     var tiddler = $tw.wiki.getTiddler("$:/isEncrypted");
     if(tiddler !== undefined && tiddler !== null && tiddler.fields.text === "yes") {
-      this.compressedText = $tw.crypto.encrypt(this.compressedText)
+      this.compressedText = $tw.utils.htmlEncode($tw.crypto.encrypt(this.compressedText))
+    } else {
+      this.compressedText = $tw.utils.htmlEncode(this.compressedText)
     }
   }
 
