@@ -29,9 +29,11 @@
 			"--setfield","[tag[external-text]]","_canonical_uri","$:/core/templates/canonical-uri-external-text","text/plain",
 			"--setfield","[tag[external-image]] [tag[external-text]]","text","","text/plain",
 			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
-		"empty": [
-			"--rendertiddler","$:/editions/tw5.com/download-empty","empty.html","text/plain",
-			"--rendertiddler","$:/editions/tw5.com/download-empty","empty.hta","text/plain"],
+		"compressed-and-encrypted": [
+			"--compress", "true",
+			"--password", "password",
+			"--rendertiddler", "$:/core/save/all", "compressed-and-encrypted.html", "text/plain",
+			"--clearpassword"],
 		"encrypted": [
 			"--password", "password",
 			"--rendertiddler", "$:/core/save/all", "encrypted.html", "text/plain",

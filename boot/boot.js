@@ -712,6 +712,81 @@ $tw.utils.Crypto = function() {
 	};
 };
 
+/*
+Compress helper object for compressed content.
+*/
+$tw.utils.Compress = function() {
+	var pako = $tw.node ? (global.pako || require("./pako.min.js")) : window.pako;
+	var currentState = null;
+	this.setState = function(state) {
+		currentState = state;
+		this.updateCompressStateTiddler();
+	};
+	this.updateCompressStateTiddler = function() {
+		if($tw.wiki) {
+			var state = currentState ? "yes" : "no";
+			var tiddler = $tw.wiki.getTiddler("$:/isCompressed");
+			if(!tiddler || tiddler.fields.text !== state) {
+				$tw.wiki.addTiddler(new $tw.Tiddler({title: "$:/isCompressed", text: state}));
+			}
+		}
+	};
+	this.deflate = function(str) {
+		var tStart = new Date();
+		var ua = pako.deflate(str,{raw:false});
+		var b64 = this.btoa(ua);
+		var deflated = JSON.stringify({'pako':b64})
+		var tDeflate = new Date()-tStart;
+		var ratio = Math.floor(b64.length*100/str.length);
+		console.log(`Deflate: ${tDeflate} ms, Ratio: ${ratio}%`);
+		return deflated;
+	};
+	this.inflate = function(json) {
+		var tStart = new Date();
+		const inflated = JSON.parse(json);
+		var ua = this.atob(inflated.pako);
+		var str = pako.inflate(ua,{to:"string"})
+		var tInflate = new Date()-tStart;
+		console.log(`Inflate: ${tInflate} ms`);
+		return str;
+	};
+	this.btoa = function(ua) {
+		try {
+			return this.Uint8ArrayToBase64(ua);
+		} catch (err) {
+			return Buffer.from(ua).toString("base64");
+		}
+	};
+	this.atob = function(b64) {
+		try {
+			return this.Base64ToUint8Array(b64);
+		} catch (err) {
+			return Buffer.from(b64,"base64").toString();
+		}
+	};
+  this.Uint8ArrayToBase64 = function(uint8) {
+    var CHUNK_SIZE = 0x8000;
+    var index = 0;
+    var length = uint8.length;
+    var str = '';
+    var slice;
+    while (index < length) {
+      slice = uint8.subarray(index, Math.min(index + CHUNK_SIZE, length));
+      str += String.fromCharCode.apply(null, slice);
+      index += CHUNK_SIZE;
+    }
+    return btoa(str);
+  };
+  this.Base64ToUint8Array = function(b64) {
+    var raw = atob(b64);
+    var ua = new Uint8Array(raw.length);
+    for (var i = 0; i < raw.length; i++) {
+      ua[i] = raw.charCodeAt(i);
+    };
+    return ua;
+	};
+};
+
 /////////////////////////// Module mechanism
 
 /*
@@ -1129,7 +1204,7 @@ $tw.Wiki = function(options) {
 				var index = tiddlerTitles.indexOf(title);
 				if(index !== -1) {
 					tiddlerTitles.splice(index,1);
-				}				
+				}
 			}
 			// Record the new tiddler state
 			updateDescriptor["new"] = {
@@ -1276,7 +1351,7 @@ $tw.Wiki = function(options) {
 				}
 			} else {
 				if(pluginInfo[title]) {
-					delete pluginInfo[title];					
+					delete pluginInfo[title];
 					results.deletedPlugins.push(title);
 				}
 			}
@@ -1611,6 +1686,63 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
 
 if($tw.browser && !$tw.node) {
 
+$tw.boot.passwordPrompt = function(text, callback) {
+	var prompt = "Enter a password to decrypt this TiddlyWiki";
+	// Prompt for the password
+	if($tw.utils.hop($tw.boot,"encryptionPrompts")) {
+		prompt = $tw.boot.encryptionPrompts.decrypt;
+	}
+	$tw.passwordPrompt.createPrompt({
+		serviceName: prompt,
+		noUserName: true,
+		submitText: "Decrypt",
+		callback: function(data) {
+			// Attempt to decrypt the tiddlers
+			$tw.crypto.setPassword(data.password);
+			var decryptedText = $tw.crypto.decrypt(text);
+			if(decryptedText) {
+				callback(decryptedText);
+				// Exit and remove the password prompt
+				return true;
+			} else {
+				// We didn't decrypt everything, so continue to prompt for password
+				return false;
+			}
+		}
+	});
+}
+
+$tw.boot.preloadTiddler = function(text, callback) {
+	var json = JSON.parse(text);
+	for(var title in json) {
+		$tw.preloadTiddler(json[title]);
+	}
+	callback();
+}
+
+$tw.boot.inflateTiddlers = function(callback) {
+	var compressedArea = document.getElementById("compressedStoreArea");
+	var inflate = function(text) {
+		if(text.startsWith('{"pako":"')) {
+			text = $tw.compress.inflate(text);
+		}
+		$tw.boot.preloadTiddler(text, callback)
+	}
+	if(compressedArea) {
+		var text = compressedArea.innerHTML;
+		if(text.startsWith('{"iv":"')) {
+			$tw.boot.passwordPrompt(text, function(decrypted) {
+				inflate(decrypted);
+			});
+		} else {
+			inflate(text);
+		}
+	} else {
+		// Preload any encrypted tiddlers
+		$tw.boot.decryptEncryptedTiddlers(callback);
+	}
+}
+
 /*
 Decrypt any tiddlers stored within the element with the ID "encryptedArea". The function is asynchronous to allow the user to be prompted for a password
 	callback: function to be called the decryption is complete
@@ -1618,35 +1750,14 @@ Decrypt any tiddlers stored within the element with the ID "encryptedArea". The 
 $tw.boot.decryptEncryptedTiddlers = function(callback) {
 	var encryptedArea = document.getElementById("encryptedStoreArea");
 	if(encryptedArea) {
-		var encryptedText = encryptedArea.innerHTML,
-			prompt = "Enter a password to decrypt this TiddlyWiki";
-		// Prompt for the password
-		if($tw.utils.hop($tw.boot,"encryptionPrompts")) {
-			prompt = $tw.boot.encryptionPrompts.decrypt;
+		var text = encryptedArea.innerHTML
+		if(text.startsWith('{"iv":"')) {
+			$tw.boot.passwordPrompt(text, function(decrypted) {
+				$tw.boot.preloadTiddler(decrypted, callback)
+			});
+		} else {
+			$tw.boot.preloadTiddler(text, callback)
 		}
-		$tw.passwordPrompt.createPrompt({
-			serviceName: prompt,
-			noUserName: true,
-			submitText: "Decrypt",
-			callback: function(data) {
-				// Attempt to decrypt the tiddlers
-				$tw.crypto.setPassword(data.password);
-				var decryptedText = $tw.crypto.decrypt(encryptedText);
-				if(decryptedText) {
-					var json = JSON.parse(decryptedText);
-					for(var title in json) {
-						$tw.preloadTiddler(json[title]);
-					}
-					// Call the callback
-					callback();
-					// Exit and remove the password prompt
-					return true;
-				} else {
-					// We didn't decrypt everything, so continue to prompt for password
-					return false;
-				}
-			}
-		});
 	} else {
 		// Just invoke the callback straight away if there weren't any encrypted tiddlers
 		callback();
@@ -1731,6 +1842,14 @@ $tw.loadTiddlersBrowser = function() {
 } else {
 
 /////////////////////////// Server definitions
+
+/*
+Get any compressed tiddlers
+*/
+$tw.boot.inflateTiddlers = function(callback) {
+	// Storing compressed tiddlers on the server isn't supported yet
+	callback();
+};
 
 /*
 Get any encrypted tiddlers
@@ -2155,7 +2274,7 @@ $tw.loadTiddlersNode = function() {
 				type = parts[0];
 			if(parts.length  === 3 && ["plugins","themes","languages"].indexOf(type) !== -1) {
 				$tw.loadPlugins([parts[1] + "/" + parts[2]],$tw.config[type + "Path"],$tw.config[type + "EnvVar"]);
-			}			
+			}
 		}
 	});
 	// Load the tiddlers from the wiki directory
@@ -2495,8 +2614,10 @@ $tw.boot.boot = function(callback) {
 	if($tw.browser && !$tw.node) {
 		$tw.passwordPrompt = new $tw.utils.PasswordPrompt();
 	}
-	// Preload any encrypted tiddlers
-	$tw.boot.decryptEncryptedTiddlers(function() {
+	// Initialise compress object
+	$tw.compress = new $tw.utils.Compress();
+	// Preload any compressed tiddlers
+	$tw.boot.inflateTiddlers(function() {
 		// Startup
 		$tw.boot.startup({callback: callback});
 	});

@@ -5,6 +5,7 @@ $:/boot/boot.css
 $:/boot/boot.js
 $:/boot/bootprefix.js
 $:/core
+$:/library/pako.min.js
 $:/library/sjcl.js
 $:/plugins/tiddlywiki/innerwiki
 $:/plugins/tiddlywiki/railroad
