@@ -31,8 +31,8 @@ EditorHeight/Hint: Trieu l'alçada de l'editor de text
 Encryption/Caption: encriptació
 Encryption/ClearPassword/Caption: neteja la contrasenya
 Encryption/ClearPassword/Hint: Suprimeix la contrasenya per desar aquest wiki sense encriptació
-Encryption/Hint: Estableix o suprimeix la contrasenya per desar aquest wiki
-Encryption/SetPassword/Caption: tria la contrasenya
+Encryption/Hint: Establiu o suprimiu la contrasenya per desar aquest wiki
+Encryption/SetPassword/Caption: trieu la contrasenya
 Encryption/SetPassword/Hint: Estableix una contrasenya per desar aquest wiki amb encriptació
 Excise/Caption: extirpa
 Excise/Caption/Excise: Executa l'extirpació
@@ -47,7 +47,7 @@ Excise/Hint: Extirpa el text seleccionat en un nou tiddler
 ExportPage/Caption: exporta-ho tot
 ExportPage/Hint: Exporta tots els tiddlers
 ExportTiddler/Caption: exporta el tiddler
-ExportTiddler/Hint: Exporta el tiddler
+ExportTiddler/Hint: Exporta aquest tiddler
 ExportTiddlers/Caption: exporta tiddlers
 ExportTiddlers/Hint: Exporta els tiddlers
 Fold/Caption: expandeix el tiddler
@@ -87,7 +87,7 @@ Italic/Hint: Aplica el format de cursiva a la selecció
 Language/Caption: idioma
 Language/Hint: Trieu l'idioma
 LineWidth/Caption: amplada de la línia
-LineWidth/Hint: Trieu l'amplada de la línia per pintar
+LineWidth/Hint: Trieu l'amplada de la línia
 Link/Caption: enllaç
 Link/Hint: Genera un enllaç de tipus wikitext
 Linkify/Caption: wikienllaç
@@ -107,11 +107,11 @@ More/Hint: Més accions
 NewHere/Caption: nou aquí
 NewHere/Hint: Obre un nou tiddler etiquetat amb aquest
 NewImage/Caption: nova imatge
-NewImage/Hint: Genera un nou tiddler d'imatge
+NewImage/Hint: Nova imatge
 NewJournal/Caption: nou diari
 NewJournal/Hint: Nou tiddler diari
 NewJournalHere/Caption: nou diari aquí
-NewJournalHere/Hint: Obre un nou tiddler diari etiquetat amb aquest
+NewJournalHere/Hint: Obre un nou tiddler de tipus diari etiquetat amb el títol d'aquest tiddler
 NewMarkdown/Caption: nou tiddler de Markdown
 NewMarkdown/Hint: Genera un nou tiddler de Markdown
 NewTiddler/Caption: nou tiddler
@@ -122,12 +122,12 @@ OpenWindow/Caption: obre en una nova finestra
 OpenWindow/Hint: Obre el tiddler en una nova finestra
 Paint/Caption: color de la tinta
 Paint/Hint: Trieu el color de la tinta
-Palette/Caption: paleta
+Palette/Caption: paleta de colors
 Palette/Hint: Trieu el color de la paleta
 Permalink/Caption: enllaç permanent
-Permalink/Hint: Fés que la barra d'adreces del navegador mostri un enllaç directe cap aquest tiddler
+Permalink/Hint: Mostra a la barra d'adreces, l'enllaç directe cap aquest tiddler
 Permaview/Caption: vista permanent
-Permaview/Hint: Fés que la barra d'adreces del navegador mostri un enllaç directe cap a tots els tiddlers de la cronologia
+Permaview/Hint: Mostra a la barra d'adreces, l'enllaç directe cap als tiddlers que ara es veuen
 Picture/Caption: imatge
 Picture/Hint: Inserta una imatge
 Preview/Caption: previsualització
@@ -142,7 +142,7 @@ Refresh/Caption: actualitza
 Refresh/Hint: Actualitza tot el wiki
 RotateLeft/Caption: gira a l'esquerra
 RotateLeft/Hint: Gira la imatge 90 graus a l'esquerra
-Save/Caption: D'acord
+Save/Caption: d'acord
 Save/Hint: Confirma els canvis d'aquest tiddler
 SaveWiki/Caption: desa els canvis
 SaveWiki/Hint: Desa els canvis
@@ -159,8 +159,8 @@ Stamp/Caption/New: Afegeix una nova plantilla
 Stamp/Hint: Inserta una plantilla de text
 Stamp/New/Text: Plantilla de text. (Recordeu afegir un text descriptiu al camp //caption//).
 Stamp/New/Title: Nom que es mostrarà al menú d'afegir una plantilla
-StoryView/Caption: visualització de la cronologia
-StoryView/Hint: Trieu la visualització de la cronologia
+StoryView/Caption: mode de visualització
+StoryView/Hint: mode de visualització
 Strikethrough/Caption: ratllat
 Strikethrough/Hint: Aplica el format de ratllat a la selecció
 Subscript/Caption: subíndex
@@ -170,13 +170,13 @@ Superscript/Hint: Aplica el format de superíndex a la selecció
 TagManager/Caption: gestor d'etiquetes
 TagManager/Hint: Obre el gestor d'etiquetes
 Theme/Caption: tema
-Theme/Hint: Tria el tema de l'aparença
+Theme/Hint: Trieu el tema
 Timestamp/Caption: marques del temps
-Timestamp/Hint: Indiqueu si les modificacions han d'actualitzar les marques del temps
-Timestamp/Off/Caption: sense marques del temps
-Timestamp/Off/Hint: Les modificacions no actualitzen les marques del temps
-Timestamp/On/Caption: amb marques del temps
-Timestamp/On/Hint: Les modificacions actualitzen les marques del temps
+Timestamp/Hint: Indiqueu si voleu que s'anoti l'hora de modificació dels tiddlers
+Timestamp/Off/Caption: no anotis l'hora de modificació
+Timestamp/Off/Hint: No s'anota l'hora de modificació dels tiddlers
+Timestamp/On/Caption: anota l'hora de modificació
+Timestamp/On/Hint: S'anota l'hora de modificació dels tiddlers
 ToggleSidebar/Hint: Commuta la visibilitat de la barra lateral
 Transcludify/Caption: transclusió
 Transcludify/Hint: Posa la selecció entre claus
