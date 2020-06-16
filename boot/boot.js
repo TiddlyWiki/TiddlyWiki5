@@ -735,17 +735,15 @@ $tw.utils.Compress = function() {
 		var tStart = new Date();
 		var ua = pako.deflate(str,{raw:false});
 		var b64 = this.btoa(ua);
-		var deflated = JSON.stringify({'pako':b64})
 		var tDeflate = new Date()-tStart;
 		var ratio = Math.floor(b64.length*100/str.length);
 		console.log(`Deflate: ${tDeflate} ms, Ratio: ${ratio}%`);
-		return deflated;
+		return b64;
 	};
-	this.inflate = function(json) {
+	this.inflate = function(b64) {
 		var tStart = new Date();
-		const inflated = JSON.parse(json);
-		var ua = this.atob(inflated.pako);
-		var str = pako.inflate(ua,{to:"string"})
+		var str = this.atob(b64);
+		str = pako.inflate(str,{to:"string"})
 		var tInflate = new Date()-tStart;
 		console.log(`Inflate: ${tInflate} ms`);
 		return str;
@@ -759,7 +757,7 @@ $tw.utils.Compress = function() {
 	};
 	this.atob = function(b64) {
 		try {
-			return this.Base64ToUint8Array(b64);
+			return atob(b64);
 		} catch (err) {
 			return Buffer.from(b64,"base64").toString();
 		}
@@ -776,14 +774,6 @@ $tw.utils.Compress = function() {
       index += CHUNK_SIZE;
     }
     return btoa(str);
-  };
-  this.Base64ToUint8Array = function(b64) {
-    var raw = atob(b64);
-    var ua = new Uint8Array(raw.length);
-    for (var i = 0; i < raw.length; i++) {
-      ua[i] = raw.charCodeAt(i);
-    };
-    return ua;
 	};
 };
 
@@ -1722,20 +1712,21 @@ $tw.boot.preloadTiddler = function(text, callback) {
 
 $tw.boot.inflateTiddlers = function(callback) {
 	var compressedArea = document.getElementById("compressedStoreArea");
-	var inflate = function(text) {
-		if(text.startsWith('{"pako":"')) {
-			text = $tw.compress.inflate(text);
-		}
-		$tw.boot.preloadTiddler(text, callback)
-	}
 	if(compressedArea) {
+		var inflate = function(str) {
+			var text = $tw.compress.inflate(str);
+			$tw.boot.preloadTiddler(text,callback)
+		}
 		var text = compressedArea.innerHTML;
-		if(text.startsWith('{"iv":"')) {
-			$tw.boot.passwordPrompt(text, function(decrypted) {
-				inflate(decrypted);
-			});
-		} else {
-			inflate(text);
+		if(text.startsWith('{"pako":"')) {
+			var json = JSON.parse(text);
+			if(json.pako.startsWith('{"iv":"')) {
+				$tw.boot.passwordPrompt(json.pako, function(decrypted) {
+					inflate(decrypted);
+				});
+			} else {
+				inflate(json.pako);
+			}
 		}
 	} else {
 		// Preload any encrypted tiddlers

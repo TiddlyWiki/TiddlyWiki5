@@ -52,13 +52,13 @@ Compress widget
       }
       json[title] = jsonTiddler;
     });
-    this.compressedText = $tw.compress.deflate(JSON.stringify(json));
+    var content = $tw.compress.deflate(JSON.stringify(json));
     var tiddler = $tw.wiki.getTiddler("$:/isEncrypted");
     if(tiddler !== undefined && tiddler !== null && tiddler.fields.text === "yes") {
-      this.compressedText = $tw.utils.htmlEncode($tw.crypto.encrypt(this.compressedText))
-    } else {
-      this.compressedText = $tw.utils.htmlEncode(this.compressedText)
+      content = $tw.crypto.encrypt(content)
     }
+    content = JSON.stringify({"pako":content})
+    this.compressedText = $tw.utils.htmlEncode(content)
   }
 
   /*
