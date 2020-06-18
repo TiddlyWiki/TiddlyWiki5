@@ -169,22 +169,31 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--build upgrade \
 	|| exit 1
 
-# /compressed-and-encrypted.html			Copy of the main file compressed and encrypted with the password "password"
+# /index-compressed.html			Copy of the main file compressed
 node $TW5_BUILD_TIDDLYWIKI \
 	$TW5_BUILD_MAIN_EDITION \
 	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--build compressed-and-encrypted \
+	--build index-compressed \
 	|| exit 1
 
-# /encrypted.html			Copy of the main file encrypted with the password "password"
+# /index-compressed-and-encrypted.html			Copy of the main file compressed and encrypted with the password "password"
 node $TW5_BUILD_TIDDLYWIKI \
 	$TW5_BUILD_MAIN_EDITION \
 	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--build encrypted \
+	--build index-compressed-and-encrypted \
+	|| exit 1
+
+# /index-encrypted.html			Copy of the main file encrypted with the password "password"
+node $TW5_BUILD_TIDDLYWIKI \
+	$TW5_BUILD_MAIN_EDITION \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT \
+	--build index-encrypted \
 	|| exit 1
 
 

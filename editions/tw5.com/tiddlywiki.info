@@ -29,14 +29,18 @@
 			"--setfield","[tag[external-text]]","_canonical_uri","$:/core/templates/canonical-uri-external-text","text/plain",
 			"--setfield","[tag[external-image]] [tag[external-text]]","text","","text/plain",
 			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
-		"compressed-and-encrypted": [
+		"index-compressed": [
+			"--compress", "true",
+			"--rendertiddler", "$:/core/save/all", "index-compressed.html", "text/plain",
+			"--clearpassword"],
+		"index-compressed-and-encrypted": [
 			"--compress", "true",
 			"--password", "password",
-			"--rendertiddler", "$:/core/save/all", "compressed-and-encrypted.html", "text/plain",
+			"--rendertiddler", "$:/core/save/all", "index-compressed-and-encrypted.html", "text/plain",
 			"--clearpassword"],
-		"encrypted": [
+		"index-encrypted": [
 			"--password", "password",
-			"--rendertiddler", "$:/core/save/all", "encrypted.html", "text/plain",
+			"--rendertiddler", "$:/core/save/all", "index-encrypted.html", "text/plain",
 			"--clearpassword"],
 		"favicon": [
 			"--savetiddler","$:/favicon.ico","favicon.ico",
