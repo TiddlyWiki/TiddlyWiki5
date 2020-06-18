@@ -1,10 +1,12 @@
 caption: Noteself
+color: #29B6F6
+community-author: Danielo Rodríguez
 created: 20141122093837330
 delivery: Web Service
 description: Free online service that you can also host yourself
 method: sync
-modified: 20171113132811794
-tags: Saving Resources Android Chrome Firefox InternetExplorer iOS Linux Mac Opera PHP Safari Windows
+modified: 20200507203026367
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Resources Safari Saving Windows iOS Edge
 title: "Noteself" by Danielo Rodríguez
 type: text/vnd.tiddlywiki
 url: https://noteself.github.io/

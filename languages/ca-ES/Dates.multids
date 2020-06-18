@@ -38,18 +38,18 @@ Date/Long/Day/3: Dimarts
 Date/Long/Day/4: Dijous
 Date/Long/Day/5: Divendres
 Date/Long/Day/6: Dissabte
-Date/Long/Month/1: de gener de
-Date/Long/Month/10: octubre de
-Date/Long/Month/11: de novembre de
-Date/Long/Month/12: de desembre de
-Date/Long/Month/2: de febrer de
-Date/Long/Month/3: de març de
-Date/Long/Month/4: abril de
-Date/Long/Month/5: de maig de
-Date/Long/Month/6: de juny de
-Date/Long/Month/7: de juliol de
-Date/Long/Month/8: agost de
-Date/Long/Month/9: de septembre de
+Date/Long/Month/1: de gener
+Date/Long/Month/10: d'octubre
+Date/Long/Month/11: de novembre
+Date/Long/Month/12: de desembre
+Date/Long/Month/2: de febrer
+Date/Long/Month/3: de març
+Date/Long/Month/4: d'abril de
+Date/Long/Month/5: de maig
+Date/Long/Month/6: de juny
+Date/Long/Month/7: de juliol
+Date/Long/Month/8: d'agost
+Date/Long/Month/9: de septembre
 Date/Short/Day/0: Diu
 Date/Short/Day/1: Dil
 Date/Short/Day/2: Dim

@@ -1,37 +1,68 @@
 created: 20140912140651119
-list: [[Saving with the HTML5 fallback saver]] [[Installing TiddlyWiki on Node.js]] [[TiddlyServer by Arlen Beiler]] [[Saving on TiddlyDesktop]] [[Saving on Beaker Browser]] [[Saving on iPad/iPhone]] [["savetiddlers" Extension for Chrome and Firefox by buggyj]] [["file-backups" Extension for Firefox by pmario]] [["Noteself" by Danielo Rodríguez]] [[TiddlyDrive Add-on for Google Drive by Joshua Stubbs]] [[TiddlyWiki in the Sky for Dropbox]] [[Saving on a PHP Server]] [[Saving via WebDAV]] [[Saving on Android]] [[Saving with TiddlyFox]] [[Saving with TiddlyIE]] [[Windows HTA Hack]]
-modified: 20171113135847405
+list: 
+modified: 20200507203641230
+saving-browser: Firefox Chrome Edge [[Internet Explorer]] Safari Opera
+saving-os: Windows Mac Linux Android iOS
 tags: [[Working with TiddlyWiki]]
 title: Saving
 type: text/vnd.tiddlywiki
 
-\define filter-button(caption,filter)
-<$reveal type="nomatch" state="$:/SavingDetailsFilter" text="""$filter$""" tag="span">
-<$button class="tc-btn-invisible tc-btn-unpushed" set="$:/SavingDetailsFilter" setTo="""$filter$""">
-<$text text="""$caption$"""/>
-</$button>
-</$reveal>
-<$reveal type="match" state="$:/SavingDetailsFilter" text="""$filter$""" tag="span">
-<$button class="tc-btn-invisible tc-btn-pushed">
-<$text text="""$caption$"""/> {{$:/core/images/done-button}}
-</$button>
-</$reveal>
+\define alltagsfilter()  
+<$vars tag1="tag[" tag2="]" lb="[" rb="tag[Saving]sort[delivery]]">
+<$set filter="[list[]addprefix<tag1>addsuffix<tag2>]+[join[]addprefix<lb>addsuffix<rb>]" name="alltags" select=0>
+<$text text=<<alltags>>/>
+</$set>
+</$vars>
 \end
 
-\define filter-maker()
-[tag[Saving]tag[$(currentTiddler)$]]
+\define saverssidebaritem(item:"Linux")
+<$checkbox tiddler=<<qualify $:/temp/$item$>> field="status" checked="selected" checkactions=<<checkactions "$item$">> uncheckactions=<<uncheckactions "$item$">> default="closed"> $item$</$checkbox><br/>
+\end
+
+\define saverssidebaritemlist(fieldname:"os")
+<$list filter="[enlist{!!$fieldname$}]" variable="currentItem">
+<$macrocall $name="saverssidebaritem" item=<<currentItem>>/>
+</$list>
+\end
+
+\define uncheckactions(item:"Linux")
+<$action-listops  $subfilter="-[[$item$]]"/>
+\end
+
+\define checkactions(item:"Linux")
+<$action-listops $subfilter="[[$item$]]"/>
+\end
+
+\define uncheckactions(item:"Linux")
+<$action-listops $subfilter="-[[$item$]]"/>
 \end
 
 Available methods for saving changes with TiddlyWiki:
 
-<div class="tc-thumbnail-tabs">
-<div style="font-size:0.9em;">
-PLATFORMS:
-<<filter-button caption:"All" filter:"[tag[Saving]]">>
-<$list filter="Android Chrome Firefox InternetExplorer iOS Linux Mac Opera PHP Safari Windows">
-<$macrocall $name="filter-button" caption=<<currentTiddler>> filter=<<filter-maker>>/>
-</$list>
+<div class="tc-wrapper-flex">
+<div class="tc-saving-sidebar">
+  <div class="tc-saving-sidebar-category">
+      <div class="tc-saving-sidebar-category-title">OS</div>
+     <div class="tc-saving-sidebar-category-item">
+                <<saverssidebaritemlist "saving-os">>
+      </div>
+   </div>
+   <div class="tc-saving-sidebar-category">
+       <div class="tc-saving-sidebar-category-title">Browser</div>
+        <div class="tc-saving-sidebar-category-item">
+               <<saverssidebaritemlist "saving-browser">>
+        </div>
+  </div>
+  
 </div>
-<br/>
-<$macrocall $name="tabs" tabsList={{$:/SavingDetailsFilter}} template="$:/SavingDetailsTemplate" buttonTemplate="$:/SavingThumbnailsTemplate"/>
+
+<!-- Page content -->
+<div class="content">
+<$wikify text=<<alltagsfilter>> name="alltagsfilterwikified">
+<$list filter=<<alltagsfilterwikified>>>
+{{||$:/_tw5.com-card-template}}
+</$list>
+</$wikify>
+
+</div>
 </div>
