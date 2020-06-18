@@ -1,9 +1,10 @@
 caption: Node.js on Termux
+color: #F06292
 created: 20200501120322327
 delivery: App with DIY steps
 description: Using Node.js to serve/create flatfile wikis
 method: sync
-modified: 20200501120801899
+modified: 20200507112915801
 tags: Saving [[TiddlyWiki on Node.js]] Android
 title: Serving TW5 from Android
 type: text/vnd.tiddlywiki
