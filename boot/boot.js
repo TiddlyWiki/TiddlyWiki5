@@ -821,20 +821,20 @@ $tw.utils.Compress = function() {
 			}
 			return input;
 		},
-		decode: function (input, arrayBuffer) {
+		decode: function (input, ab) {
 			//get last chars to see if are valid
 			input = this.removePaddingChars(input);
 			input = this.removePaddingChars(input);
 			var bytes = parseInt((input.length / 4) * 3, 10);
-			var uarray;
+			var ua;
 			var chr1, chr2, chr3;
 			var enc1, enc2, enc3, enc4;
 			var i = 0;
 			var j = 0;
-			if (arrayBuffer)
-				uarray = new Uint8Array(arrayBuffer);
+			if (ab)
+				ua = new Uint8Array(ab);
 			else
-				uarray = new Uint8Array(bytes);
+				ua = new Uint8Array(bytes);
 			input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
 			for (i=0; i<bytes; i+=3) {
 				//get the 3 octects in 4 ascii chars
@@ -845,11 +845,11 @@ $tw.utils.Compress = function() {
 				chr1 = (enc1 << 2) | (enc2 >> 4);
 				chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
 				chr3 = ((enc3 & 3) << 6) | enc4;
-				uarray[i] = chr1;
-				if (enc3 !== 64) uarray[i+1] = chr2;
-				if (enc4 !== 64) uarray[i+2] = chr3;
+				ua[i] = chr1;
+				if (enc3 !== 64) ua[i+1] = chr2;
+				if (enc4 !== 64) ua[i+2] = chr3;
 			}
-			return uarray;
+			return ua;
 		}
 	};
 };
