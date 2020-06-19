@@ -609,10 +609,13 @@ NavigatorWidget.prototype.handleUnfoldAllTiddlersEvent = function(event) {
 };
 
 NavigatorWidget.prototype.handleRenameTiddlerEvent = function(event) {
-	var paramObject = event.paramObject || {},
+	var options = {},
+		paramObject = event.paramObject || {},
 		from = paramObject.from || event.tiddlerTitle,
 		to = paramObject.to;
-	this.wiki.renameTiddler(from,to);
+	options.dontRenameInTags = (paramObject.dontRenameInTags === "true" || paramObject.dontRenameInTags === "yes") ? true : false;
+	options.dontRenameInLists = (paramObject.dontRenameInLists === "true" || paramObject.dontRenameInLists === "yes") ? true : false;
+	this.wiki.renameTiddler(from,to,options);
 };
 
 exports.navigator = NavigatorWidget;
