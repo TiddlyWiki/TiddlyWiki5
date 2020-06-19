@@ -10,27 +10,5 @@ The `tm-rename-tiddler` message renames a tiddler by deleting it and recreating 
 |!Name |!Description |
 |from |Current title of tiddler  |
 |to |New title of tiddler  |
-|dontRenameInTags |<<.from-version "5.1.23">> Optional value "yes" to disable renaming in tags fields of other tiddlers (defaults to "no") |
-|dontRenameInLists |<<.from-version "5.1.23">> Optional value "yes" to disable renaming in list fields of other tiddlers (defaults to "no") |
 
 The rename tiddler message is usually generated with the ButtonWidget and is handled by the NavigatorWidget.
-
-! Examples
-
-To rename a tiddler called Tiddler1 to Tiddler2 and also renaming Tiddler1 in tags and list fields of other tiddlers:
-
-```
-<$action-sendmessage $message="tm-rename-tiddler" from="Tiddler1" to="Tiddler2" />
-```
-
-To rename a tiddler called Tiddler1 to Tiddler2 and not rename Tiddler1 in tags and list fields of other tiddlers:
-
-```
-<$action-sendmessage $message="tm-rename-tiddler" from="Tiddler1" to="Tiddler2" dontRenameInTags="yes" dontRenameInLists="yes"/>
-```
-
-To rename a tiddler called Tiddler1 to Tiddler2 and respect the setting $:/config/RelinkOnRename for whether to rename Tiddler1 in tags and list fields of other tiddlers:
-
-```
-<$action-sendmessage $message="tm-rename-tiddler" from="Tiddler1" to="Tiddler2" dontRenameInTags={{$:/config/RelinkOnRename}} dontRenameInLists={{$:/config/RelinkOnRename}}/>
-```
