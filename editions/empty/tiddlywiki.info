@@ -20,6 +20,10 @@
 			"--password", "password",
 			"--rendertiddler", "$:/core/save/all", "empty-compressed-and-encrypted.html", "text/plain",
 			"--clearpassword"],
+		"empty-encrypted": [
+			"--password", "password",
+			"--rendertiddler", "$:/core/save/all", "empty-encrypted.html", "text/plain",
+			"--clearpassword"],
 		"externalimages": [
 			"--savetiddlers","[is[image]]","images",
 			"--setfield","[is[image]]","_canonical_uri","$:/core/templates/canonical-uri-external-image","text/plain",

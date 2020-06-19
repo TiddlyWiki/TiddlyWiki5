@@ -129,6 +129,14 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--build empty-compressed-and-encrypted \
 	|| exit 1
 
+# /empty-encrypted.html			Empty Encrypted
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/empty \
+	--verbose \
+	--output $TW5_BUILD_OUTPUT \
+	--build empty-encrypted \
+	|| exit 1
+
 # /test.html			Test edition
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/test \
