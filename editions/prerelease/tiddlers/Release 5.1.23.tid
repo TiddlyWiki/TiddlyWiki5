@@ -54,6 +54,8 @@ type: text/vnd.tiddlywiki
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/2a8f7a9c503c9a6e4ea1bcd116be31ab6e90cf52]] [[favicon mechanism|Setting a favicon]] to support ''_canonical_uri'' images
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/48dfadd85b8ebd788b44ed2c46108720742546df]] support for recording the startup timestamp in $:/info/startup-timestamp (see [[InfoMechanism]])
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bf6735420d2f8191f658c556910e7d73c681d5fe]] support for SVG favicons
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/f760a2fa796d57e61307a5ea5274d6cd0b6484c7]] `th-saving-tiddler` hook to include information about the draft tiddler (see https://tiddlywiki.com/dev/#Hook%3A%20th-saving-tiddler)
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4723]] [[WidgetMessage: tm-rename-tiddler]] to control whether relinking occurs
 
 ! Bug Fixes
 
