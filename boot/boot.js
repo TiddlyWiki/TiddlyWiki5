@@ -680,7 +680,11 @@ $tw.utils.Crypto = function() {
 			var outputText;
 			try {
 				if(password) {
+					var tStart = new Date();
 					outputText = sjcl[method](password,inputText);
+					var tStop = new Date()-tStart;
+					var ratio = Math.floor(outputText.length*100/inputText.length);
+					console.log(`${method}: ${tStop} ms, Ratio: ${ratio}%`);
 				}
 			} catch(ex) {
 				console.log("Crypto error:" + ex);
@@ -735,17 +739,18 @@ $tw.utils.Compress = function() {
 		var tStart = new Date();
 		var ua = pako.deflate(str,{raw:false});
 		var b64 = this.btoa(ua);
-		var tDeflate = new Date()-tStart;
+		var tStop = new Date()-tStart;
 		var ratio = Math.floor(b64.length*100/str.length);
-		console.log(`Deflate: ${tDeflate} ms, Ratio: ${ratio}%`);
+		console.log(`Deflate: ${tStop} ms, Ratio: ${ratio}%`);
 		return b64;
 	};
 	this.inflate = function(b64) {
 		var tStart = new Date();
 		var ua = this.decode(b64);
 		var str = pako.inflate(ua,{to:"string"});
-		var tInflate = new Date()-tStart;
-		console.log(`Inflate: ${tInflate} ms`);
+		var tStop = new Date()-tStart;
+		var ratio = Math.floor(str.length*100/b64.length);
+		console.log(`Inflate: ${tStop} ms, Ratio: ${ratio}%`);
 		return str;
 	};
 	this.decode = function(b64) {
