@@ -43,7 +43,7 @@ tags: $:/tags/SideBarSegment
 		tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> 
 		class="tc-popup-handle" filter1=<<titleSearchFilter>> filter2=<<allSearchFilter>> 
 		filterMinLength={{$:/config/Search/MinLength}} inputCancelActions=<<cancel-search-actions>> 
-		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> />
+		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> cancelPopups="yes" />
 <$reveal state=<<searchTiddler>> type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
