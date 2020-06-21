@@ -30,8 +30,8 @@ color:$(foregroundColor)$;
 <$list filter="[all[current]tags[]sort[title]]" storyview="pop">
 <$macrocall $name="tag-body" colour={{!!color}} palette={{$:/palette}} icon={{!!icon}}/>
 </$list>
-<$set name="tabIndex" value={{$:/config/EditTabIndex}}>
+<$vars tabIndex={{$:/config/EditTabIndex}} cancelPopups="yes">
 <$macrocall $name="tag-picker"/>
-</$set>
+</$vars>
 </$fieldmangler>
 </div>
