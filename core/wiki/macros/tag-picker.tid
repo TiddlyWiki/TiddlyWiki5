@@ -19,7 +19,6 @@ $actions$
 \define add-tag-actions-button(actions)
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
-<$action-deletetiddler $tiddler=<<newTagNameTiddler>>/>
 $actions$
 </$set>
 \end
