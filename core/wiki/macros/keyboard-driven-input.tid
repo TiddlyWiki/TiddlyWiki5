@@ -31,7 +31,7 @@ tags: $:/tags/Macro
 </$list>
 \end
 
-\define keyboard-driven-input(tiddler,storeTitle,field:"text",index:"",tag:"input",type,focus:"",inputAcceptActions,inputAcceptVariantActions,inputCancelActions,placeholder:"",default:"",class,filter1,filter2,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0",refreshTitle,selectionStateTitle)
+\define keyboard-driven-input(tiddler,storeTitle,field:"text",index:"",tag:"input",type,focus:"",inputAcceptActions,inputAcceptVariantActions,inputCancelActions,placeholder:"",default:"",class,filter1,filter2,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0",refreshTitle,selectionStateTitle,cancelPopups:"")
 <$keyboard key="((input-accept))" actions=<<__inputAcceptActions__>>>
 <$keyboard key="((input-accept-variant))" actions=<<__inputAcceptVariantActions__>>>
 <$keyboard key="((input-up))" actions=<<input-next-actions "before" "reverse[]">>>
@@ -42,7 +42,7 @@ tags: $:/tags/Macro
 		placeholder=<<__placeholder__>> default=<<__default__>> focusPopup=<<__focusPopup__>> 
 		focus=<<__focus__>> type=<<__type__>> rows=<<__rows__>> minHeight=<<__minHeight__>> 
 		tabindex=<<__tabindex__>> size=<<__size__>> autoHeight=<<__autoHeight__>> 
-		refreshTitle=<<__refreshTitle__>>/>
+		refreshTitle=<<__refreshTitle__>> cancelPopups=<<__cancelPopups__>>/>
 </$keyboard>
 </$keyboard>
 </$keyboard>
