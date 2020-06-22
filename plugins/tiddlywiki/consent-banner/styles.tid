@@ -1,0 +1,79 @@
+title: $:/plugins/tiddlywiki/consent-banner/styles
+tags: $:/tags/Stylesheet
+
+.tc-consent-backdrop {
+	z-index: 1999;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.2);
+}
+
+.tc-consent-banner-left {
+	z-index: 2000;
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	max-width: 500px;
+	overflow-y: auto;
+}
+
+.tc-consent-banner {
+	padding: 1em;
+	background: #009677;
+	color: #fff;
+	box-shadow: 0 0 20px rgba(0,0,0,.2);
+}
+
+.tc-consent-banner a.tc-tiddlylink-external {
+	text-decoration: underline;
+	color: #fff;
+	background-color: inherit;
+}
+
+.tc-consent-banner a.tc-tiddlylink-external:visited {
+	color: #fff;
+	background-color: inherit;
+}
+
+.tc-consent-banner hr {
+	clear: both;
+	padding: 0;
+	width: 100%;
+	overflow: hidden;
+	text-align: left;
+	border: 0 none;
+	margin: 24px 0;
+	height: 1px;
+	max-height: 1px;
+	background: rgba(255,255,255,.25);
+}
+
+.tc-consent-buttons {
+	
+}
+
+.tc-consent-button {
+	border: 1px solid #fff;
+	margin-right: 1em;
+	margin-top: 1em;
+	padding: 0.75em 1.5em;
+	color: #fff;
+	background: transparent;
+	font-weight: bold;
+}
+
+.tc-consent-button:hover {
+	color: #009577;
+	border-color: #fff;
+	background: #fff;
+	opacity: .6;
+}
+
+.tc-consent-button-default {
+	color: #009677;
+	background: #fff;
+}

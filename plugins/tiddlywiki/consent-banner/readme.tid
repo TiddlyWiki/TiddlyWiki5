@@ -1,0 +1,44 @@
+title: $:/plugins/tiddlywiki/consent-banner/readme
+
+! Introduction
+
+The ''consent-banner'' plugin helps make websites that are compliant with "cookie legislation" such as the [[EU General Data Protection Regulation|https://gdpr.eu/cookies/]].
+
+! Overview
+
+This plugin presents a banner inviting the user to accept or reject cookies, keeping track of their consent in local storage so that the banner can be hidden on subsequent visits. Consent status is also available via a configuration tiddler so that it is possible to construct content that behaves differently depending upon whether consent has been granted. As an example, a macro is provided for embedding ~YouTube videos that automatically uses the youtube-nocookie.com variant of video URLs unless the user has accepted cookies.
+
+If the same wiki is opened in multiple tabs then once the warning has been accepted or declined in one tab then the other tabs will autonatically follow suit.
+
+Consent is automatically granted if the user logged in (ie the tiddler [[$:/status/IsLoggedIn]] is set to `yes`).
+
+Please note that using this plugin does not guarantee compliance with any particular legislation. You will need to understand the technical issues specific to your situation, and if necessary seek legal advice.
+
+! ~YouTube macro
+
+A simple macro for embedding ~YouTube videos is provided to show how to adapt content according to whether consent has been granted. It works by checking the tiddler [[$:/state/consent-banner/accepted]] for the following values:
+
+* ''empty or missing'' - the user has yet to accept or decline to give their consent
+* `yes` - the user has granted consent
+* `no` - the user has declined consent
+
+! Customising banner buttons
+
+The [["accept"|$:/plugins/tiddlywiki/consent-banner/buttons/accept]] and [["decline"|$:/plugins/tiddlywiki/consent-banner/buttons/decline]] buttons in the banner are individual tiddlers with the tag [[$:/tags/ConsentBanner/Button]], allowing them to be customised and extended.
+
+A common use case is to add a "login" button allowing users to login directly to bypass the banner. This could be implemented as a tiddler tagged [[$:/tags/ConsentBanner/Button]] with the following text:
+
+```
+<$button message="tm-login" class="tc-consent-button tc-btn-invisible">
+Login
+</$button>
+```
+
+! Integration with other plugins
+
+Third party plugins that set cookies can configure themselves to defer setting cookies until the user grants consent. There are several parts to this mechanism:
+
+* The consent-banner plugin includes a shadow tiddler [[$:/config/cookie-consent-required]] with the text `yes`. The third-party plugin should inspect this tiddler at startup; if it is not set to "yes" then it can proceed to set tiddlers immediately
+* Otherwise, the third-party plugin should listen for changes to the tiddler [[$:/state/consent-banner/accepted]] and only start setting cookies when and if the value changes to "yes"
+
+The [[Google Analytics plugin|https://github.com/Jermolene/TiddlyWiki5/tree/master/plugins/tiddlywiki/googleanalytics]] shows an example of how this mechanism can be implemented.
