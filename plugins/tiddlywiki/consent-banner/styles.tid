@@ -8,7 +8,7 @@ tags: $:/tags/Stylesheet
 	right: 0;
 	top: 0;
 	bottom: 0;
-	background: rgba(0,0,0,0.2);
+	background: <<colour consent-banner-backdrop-background>>;
 }
 
 .tc-consent-banner-left {
@@ -23,19 +23,19 @@ tags: $:/tags/Stylesheet
 
 .tc-consent-banner {
 	padding: 1em;
-	background: #009677;
-	color: #fff;
+	background: <<colour consent-banner-background>>;
+	color: <<colour consent-banner-foreground>>;
 	box-shadow: 0 0 20px rgba(0,0,0,.2);
 }
 
 .tc-consent-banner a.tc-tiddlylink-external {
 	text-decoration: underline;
-	color: #fff;
+	color: <<colour consent-banner-link-foreground>>;
 	background-color: inherit;
 }
 
 .tc-consent-banner a.tc-tiddlylink-external:visited {
-	color: #fff;
+	color: <<colour consent-banner-link-foreground>>;
 	background-color: inherit;
 }
 
@@ -49,7 +49,7 @@ tags: $:/tags/Stylesheet
 	margin: 24px 0;
 	height: 1px;
 	max-height: 1px;
-	background: rgba(255,255,255,.25);
+	background: <<colour consent-banner-hr-background>>;
 }
 
 .tc-consent-buttons {
@@ -57,23 +57,23 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-consent-button {
-	border: 1px solid #fff;
+	border: 1px solid <<colour consent-banner-button-border>>;
 	margin-right: 1em;
 	margin-top: 1em;
 	padding: 0.75em 1.5em;
-	color: #fff;
-	background: transparent;
+	color: <<colour consent-banner-button-foreground>>;
+	background: <<colour consent-banner-button-background>>;
 	font-weight: bold;
 }
 
 .tc-consent-button:hover {
-	color: #009577;
-	border-color: #fff;
-	background: #fff;
+	color: <<colour consent-banner-button-hover-foreground>>;
+	border-color: <<colour consent-banner-button-hover-border>>;
+	background: <<colour consent-banner-button-hover-background>>;
 	opacity: .6;
 }
 
 .tc-consent-button-default {
-	color: #009677;
-	background: #fff;
+	color: <<colour consent-banner-button-default-foreground>>;
+	background: <<colour consent-banner-button-default-background>>;
 }

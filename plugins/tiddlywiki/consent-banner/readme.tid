@@ -14,6 +14,24 @@ Consent is automatically granted if the user logged in (ie the tiddler [[$:/stat
 
 Please note that using this plugin does not guarantee compliance with any particular legislation. You will need to understand the technical issues specific to your situation, and if necessary seek legal advice.
 
+! Consent Banner Palette Entries
+
+Add these entries to your current colour palette to change the colours used by the consent banner:
+
+* ''consent-banner-backdrop-background'' - the colour of the backdrop behind the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-backdrop-background}})
+* ''consent-banner-background'' - the background colour of the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-background}})
+* ''consent-banner-button-background'' - the background colour of buttons within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-button-background}})
+* ''consent-banner-button-border'' - the border colour of buttons within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-button-border}})
+* ''consent-banner-button-default-background'' - the background colour for the default button within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-button-default-background}})
+* ''consent-banner-button-default-foreground'' - the foreground colour for the default button within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-button-default-foreground}})
+* ''consent-banner-button-foreground'' - the foreground colour of buttons within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-button-foreground}})
+* ''consent-banner-button-hover-background'' - the background colour of hovered buttons within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-button-hover-background}})
+* ''consent-banner-button-hover-border'' - the border colour of hovered buttons within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-button-hover-border}})
+* ''consent-banner-button-hover-foreground'' - the foreground colour of hovered buttons within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-button-hover-foreground}})
+* ''consent-banner-foreground'' - the foreground colour of the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-foreground}})
+* ''consent-banner-hr-background'' - the background colour of horizontal rules within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-hr-background}})
+* ''consent-banner-link-foreground'' - the foreground colour of tiddler links within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-link-foreground}})
+
 ! ~YouTube macro
 
 A simple macro for embedding ~YouTube videos is provided to show how to adapt content according to whether consent has been granted. It works by checking the tiddler [[$:/state/consent-banner/accepted]] for the following values:
