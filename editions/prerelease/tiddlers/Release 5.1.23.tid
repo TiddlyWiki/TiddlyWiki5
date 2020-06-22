@@ -10,13 +10,10 @@ type: text/vnd.tiddlywiki
 ! Major Improvements
 
 
-! Translation Improvements
+! New and Improved Plugins
 
-* Catalan
-* Chinese
-
-! Plugin Improvements
-
+* Consent Banner Plugin
+** [[New|https://github.com/Jermolene/TiddlyWiki5/commit/4a84ed0018df7fd67000404bb5ef8a7ca50509c1]] plugin to help make websites compliant with cookie legislation by displaying a consent banner
 * JSZip Plugin
 ** [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6a0ff7db1807f45b73061ced82f5a85f1a529bbf]] ability to dynamically create Zip files, giving TiddlyWiki the ability to build static sites within the browser
 * Freelinks Plugin
@@ -31,6 +28,11 @@ type: text/vnd.tiddlywiki
 * [[Markdown Plugin]]
 ** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4680]] encoding of Markdown image files
 ** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/e01b354f7d9e137cb355f7090f5e68661a4ead41]] issue with whitespace and linebraks
+
+! Translation Improvements
+
+* Catalan
+* Chinese
 
 ! Performance Improvements
 
