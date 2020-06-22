@@ -120,6 +120,9 @@ function CodeMirrorEngine(options) {
 	// Set up a change event handler
 	this.cm.on("change",function() {
 		self.widget.saveChanges(self.getText());
+		if(self.widget.editInputActions) {
+			self.widget.invokeActionString(self.widget.editInputActions);
+		}
 	});
 	this.cm.on("drop",function(cm,event) {
 		event.stopPropagation(); // Otherwise TW's dropzone widget sees the drop event
@@ -142,8 +145,15 @@ CodeMirrorEngine.prototype.setText = function(text,type) {
 	var self = this;
 	self.cm.setOption("mode",type);
 	if(!this.cm.hasFocus()) {
-		this.cm.setValue(text);
+		this.updateDomNodeText(text);
 	}
+};
+
+/*
+Update the DomNode with the new text
+*/
+CodeMirrorEngine.prototype.updateDomNodeText = function(text) {
+	this.cm.setValue(text);
 };
 
 /*
