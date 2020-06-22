@@ -108,11 +108,18 @@ Set the text of the engine if it doesn't currently have focus
 FramedEngine.prototype.setText = function(text,type) {
 	if(!this.domNode.isTiddlyWikiFakeDom) {
 		if(this.domNode.ownerDocument.activeElement !== this.domNode) {
-			this.domNode.value = text;
+			this.updateDomNodeText(text);
 		}
 		// Fix the height if needed
 		this.fixHeight();
 	}
+};
+
+/*
+Update the DomNode with the new text
+*/
+FramedEngine.prototype.udpateDomNodeText = function(text) {
+	this.domNode.value = text;
 };
 
 /*
@@ -177,6 +184,9 @@ Handle a dom "input" event which occurs when the text has changed
 FramedEngine.prototype.handleInputEvent = function(event) {
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
+	if(this.widget.editInputActions) {
+		this.widget.invokeActionString(this.widget.editInputActions);
+	}
 	return true;
 };
 
