@@ -16,13 +16,6 @@ $actions$
 <$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 \end
 
-\define add-tag-actions-button(actions)
-<$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
-<$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
-$actions$
-</$set>
-\end
-
 \define tag-button(actions,selectedClass)
 <$button class="tc-btn-invisible $selectedClass$" tag="a" tooltip={{$:/language/EditTemplate/Tags/Add/Button/Hint}}>
 <$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
@@ -53,7 +46,8 @@ $actions$
 </span>&nbsp;<$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>&nbsp;<span class="tc-add-tag-button">
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$button set=<<newTagNameTiddler>> setTo="" class="">
-<$macrocall $name="add-tag-actions-button" actions=<<__actions__>>/>
+<$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
+$actions$
 <<delete-tag-state-tiddlers>>
 {{$:/language/EditTemplate/Tags/Add/Button}}
 </$button>
