@@ -10,13 +10,10 @@ type: text/vnd.tiddlywiki
 ! Major Improvements
 
 
-! Translation Improvements
+! New and Improved Plugins
 
-* Catalan
-* Chinese
-
-! Plugin Improvements
-
+* Consent Banner Plugin
+** [[New|https://github.com/Jermolene/TiddlyWiki5/commit/4a84ed0018df7fd67000404bb5ef8a7ca50509c1]] plugin to help make websites compliant with cookie legislation by displaying a consent banner
 * JSZip Plugin
 ** [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6a0ff7db1807f45b73061ced82f5a85f1a529bbf]] ability to dynamically create Zip files, giving TiddlyWiki the ability to build static sites within the browser
 * Freelinks Plugin
@@ -31,6 +28,11 @@ type: text/vnd.tiddlywiki
 * [[Markdown Plugin]]
 ** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4680]] encoding of Markdown image files
 ** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/e01b354f7d9e137cb355f7090f5e68661a4ead41]] issue with whitespace and linebraks
+
+! Translation Improvements
+
+* Catalan
+* Chinese
 
 ! Performance Improvements
 
@@ -54,6 +56,8 @@ type: text/vnd.tiddlywiki
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/2a8f7a9c503c9a6e4ea1bcd116be31ab6e90cf52]] [[favicon mechanism|Setting a favicon]] to support ''_canonical_uri'' images
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/48dfadd85b8ebd788b44ed2c46108720742546df]] support for recording the startup timestamp in $:/info/startup-timestamp (see [[InfoMechanism]])
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bf6735420d2f8191f658c556910e7d73c681d5fe]] support for SVG favicons
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/f760a2fa796d57e61307a5ea5274d6cd0b6484c7]] `th-saving-tiddler` hook to include information about the draft tiddler (see https://tiddlywiki.com/dev/#Hook%3A%20th-saving-tiddler)
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4723]] [[WidgetMessage: tm-rename-tiddler]] to control whether relinking occurs
 
 ! Bug Fixes
 
