@@ -1,0 +1,28 @@
+title: $:/plugins/tiddlywiki/consent-banner/banner
+tags: $:/tags/PageTemplate
+
+\whitespace trim
+
+<$reveal state="$:/state/consent-banner/accepted" type="match" text="" tag="div">
+
+<div class="tc-consent-backdrop">
+
+</div>
+
+<div class="tc-consent-banner tc-consent-banner-left">
+
+<$transclude tiddler="$:/config/plugins/tiddlywiki/consent-banner/greeting-message" mode="block"/>
+
+<div class="tc-consent-buttons">
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ConsentBanner/Button]]">
+
+<$transclude tiddler=<<currentTiddler>> mode="inline"/>
+
+</$list>
+
+</div>
+
+</div>
+
+</$reveal>

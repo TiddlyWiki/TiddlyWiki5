@@ -1,0 +1,79 @@
+title: $:/plugins/tiddlywiki/consent-banner/styles
+tags: $:/tags/Stylesheet
+
+.tc-consent-backdrop {
+	z-index: 1999;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: <<colour consent-banner-backdrop-background>>;
+}
+
+.tc-consent-banner-left {
+	z-index: 2000;
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	max-width: 500px;
+	overflow-y: auto;
+}
+
+.tc-consent-banner {
+	padding: 1em;
+	background: <<colour consent-banner-background>>;
+	color: <<colour consent-banner-foreground>>;
+	box-shadow: 0 0 20px rgba(0,0,0,.2);
+}
+
+.tc-consent-banner a.tc-tiddlylink-external {
+	text-decoration: underline;
+	color: <<colour consent-banner-link-foreground>>;
+	background-color: inherit;
+}
+
+.tc-consent-banner a.tc-tiddlylink-external:visited {
+	color: <<colour consent-banner-link-foreground>>;
+	background-color: inherit;
+}
+
+.tc-consent-banner hr {
+	clear: both;
+	padding: 0;
+	width: 100%;
+	overflow: hidden;
+	text-align: left;
+	border: 0 none;
+	margin: 24px 0;
+	height: 1px;
+	max-height: 1px;
+	background: <<colour consent-banner-hr-background>>;
+}
+
+.tc-consent-buttons {
+	
+}
+
+.tc-consent-button {
+	border: 1px solid <<colour consent-banner-button-border>>;
+	margin-right: 1em;
+	margin-top: 1em;
+	padding: 0.75em 1.5em;
+	color: <<colour consent-banner-button-foreground>>;
+	background: <<colour consent-banner-button-background>>;
+	font-weight: bold;
+}
+
+.tc-consent-button:hover {
+	color: <<colour consent-banner-button-hover-foreground>>;
+	border-color: <<colour consent-banner-button-hover-border>>;
+	background: <<colour consent-banner-button-hover-background>>;
+	opacity: .6;
+}
+
+.tc-consent-button-default {
+	color: <<colour consent-banner-button-default-foreground>>;
+	background: <<colour consent-banner-button-default-background>>;
+}
