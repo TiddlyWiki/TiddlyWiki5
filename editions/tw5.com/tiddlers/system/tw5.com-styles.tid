@@ -1,5 +1,5 @@
 created: 20200507002727378
-modified: 20200515024640489
+modified: 20200625170503460
 tags: $:/tags/Stylesheet
 title: $:/_tw5.com-styles
 type: text/vnd.tiddlywiki
@@ -78,50 +78,6 @@ type: text/vnd.tiddlywiki
 	height: 1em;
 }
 
-
-
-.tc-wrapper-flex {
-	display: flex;
-}
-
-.tc-saving-sidebar {
-	margin: 0;
-	padding: 0;
-	min-width: 200px;
-	overflow: auto;
-}
-
-.tc-saving-sidebar a {
-	display: block;
-}
-
-@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
-	.tc-wrapper-flex {
-		flex-direction: column;
-	}
-	.tc-saving-sidebar {
-		width: 100%;
-		height: auto;
-	}
-	.tc-saving-sidebar a {
-		float: left;
-	}
-}
-
-.tc-saving-sidebar-category {
-	margin-bottom: 10px;
-}
-
-.tc-saving-sidebar-category-title {
-	font-weight: bold;
-	margin-bottom: 5px;
-	font-size: 16px;
-}
-
-.tc-saving-sidebar-category-item {
-	margin-left: 10px;
-}
-
 .tc-card {
 	margin: 15px;
 	padding: 10px 20px;
@@ -173,11 +129,17 @@ type: text/vnd.tiddlywiki
         outline: none; 
 }
 
-div.content {
+div.tc-flex {
 	padding: 1px 16px;
 	display: flex;
 	flex-wrap: wrap;
 }
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+div.tc-flex {
+       justify-content: center;
+}
+}
+
 
 .tc-btn-download {
 	width: 250px;
@@ -197,4 +159,145 @@ div.content {
 
 .tc-btn-download:active {
 	background: #1475ff;
+}
+
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+   .tc-btn-download {
+        display: block;
+        margin: 10px auto;
+    }
+}
+
+.tc-radio-doc-big {
+	background-color: #fff;
+	display: block;
+	margin: 1% 20%;
+	position: relative;
+	box-shadow: 1px 1px 5px rgba(125, 125, 125, 0.3);
+	border-radius: 5px;
+}
+
+@media (max-width:700px) {
+.tc-radio-doc-big {
+	margin: 1%;
+}
+}
+.tc-radio-doc-big input {
+	width: 32px;
+	height: 32px;
+	-webkit-box-ordinal-group: 2;
+	order: 1;
+	z-index: 2;
+	position: absolute;
+	right: 30px;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	cursor: pointer;
+	visibility: hidden;
+}
+
+.tc-radio-doc-big span {
+	padding: 12px 30px;
+	width: 100%;
+	display: block;
+	text-align: left;
+	color: #3C454C;
+	cursor: pointer;
+	position: relative;
+	z-index: 2;
+	-webkit-transition: color 200ms ease-in;
+	transition: color 200ms ease-in;
+	overflow: hidden;
+}
+
+
+
+.tc-radio-doc-big span::after {
+	width: 30px;
+	height: 30px;
+	content: '';
+	border: 2px solid #D1D7DC;
+	background-color: #fff;
+	background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
+	background-repeat: no-repeat;
+	background-position: 2px 3px;
+	border-radius: 50%;
+	z-index: 2;
+	position: absolute;
+	right: 30px;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	cursor: pointer;
+	-webkit-transition: all 200ms ease-in;
+	transition: all 200ms ease-in;
+}
+
+.tc-radio-doc-big input:checked + span {
+	background-color: royalblue;
+	color: #fff;
+       border-radius: 5px;
+}
+
+.tc-radio-doc-big input:checked + span::after {
+	background-color: #54E0C7;
+	border-color: #54E0C7;
+}
+
+.doc-advice-block.doc-warning {
+	color: rgb(97, 26, 21);
+	background-color: rgb(253, 236, 234);
+	border-left: 4px #dd4e3e solid;
+}
+
+.doc-advice-block.doc-tip {
+	color: rgb(30, 70, 32);
+	background-color: rgb(237, 247, 237);
+    border-left: 4px #33c775 solid;
+}
+
+.doc-advice-block.doc-note {
+	color: rgb(13, 60, 97);
+	background-color: rgb(232, 244, 253);
+    border-left: 4px #3795d3 solid;
+}
+.doc-advice-block {
+	padding: 6px 16px;
+	font-size: 0.875rem;
+	font-weight: 400;
+	line-height: 1.43;
+	border-radius: 4px;
+	letter-spacing: 0.01071em;
+        margin: 15px 8px;
+}
+
+
+.doc-icon-block-header {
+	margin: 0;
+	font-weight: bold;
+}
+
+.doc-icon-block-text {
+	margin: 0;
+}
+
+.tc-btn-boxed.tc-btn-wizard {
+	font-size: inherit;
+	padding: 0.4em 0.8em;
+	border: 1px solid #5778d8;
+	color: #5778d8;
+}
+
+.tc-btn-boxed.tc-btn-wizard.tc-btn-wizard-next {
+ 	margin-left:auto;
+}
+.tc-btn-boxed.tc-btn-wizard:hover {
+	background-color: #5778d8;
+	color: white;
+	font-weight: bold;
+}
+
+.tc-doc-wizard-navigation {
+	display:flex;
 }

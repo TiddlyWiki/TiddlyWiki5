@@ -1,5 +1,5 @@
 created: 20150117152607000
-modified: 201804111739
+modified: 20200625170746855
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/doc-macros
 type: text/vnd.tiddlywiki
@@ -67,6 +67,10 @@ type: text/vnd.tiddlywiki
 
 \define .tip(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/tip}}</div> $_$</div>
 \define .warning(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/warning}}</div> $_$</div>
+\define .tipw(_) <div class="doc-advice-block doc-tip"><p class="doc-icon-block-header">Tip</p><p class="doc-icon-block-text">$_$</p></div>
+\define .warningw(_) <div class="doc-advice-block doc-warning"><p class="doc-icon-block-header">Warning</p><p class="doc-icon-block-text">$_$</p></div>
+\define .notew(_) <div class="doc-advice-block doc-note"><p class="doc-icon-block-header">Note</p><p class="doc-icon-block-text">$_$</p></div>
+
 
 \define .state-prefix() $:/state/editions/tw5.com/
 
