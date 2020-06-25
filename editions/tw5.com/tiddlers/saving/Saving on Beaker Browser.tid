@@ -1,10 +1,10 @@
 caption: Beaker Browser
 color: #FF8A65
 created: 20161229121316912
-delivery: App
-description: Powerful new browser for Mac, Windows and Linux
+delivery: Desktop App
+description: Desktop Browser. Available for Linux, Mac and WIndows
 method: save
-modified: 20200507104016915
+modified: 20200625180255808
 tags: Saving Windows Linux Mac
 title: Saving on Beaker Browser
 type: text/vnd.tiddlywiki

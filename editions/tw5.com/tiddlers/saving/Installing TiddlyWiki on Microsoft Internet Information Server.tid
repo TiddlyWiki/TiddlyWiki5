@@ -1,10 +1,10 @@
 caption: Internet Information Services
 color: #F06292
 created: 20180328120356008
-delivery: DIY
+delivery: Server
 description: Windows' built-in web server
 method: sync
-modified: 20200507105855400
+modified: 20200625180822372
 tags: Saving [[TiddlyWiki on Node.js]] Windows
 title: Installing TiddlyWiki on Microsoft Internet Information Server
 type: text/vnd.tiddlywiki

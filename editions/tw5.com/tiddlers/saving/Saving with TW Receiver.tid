@@ -1,9 +1,10 @@
 caption: TW Receiver
+color: #F06292
 created: 20200612233356021
-delivery: DIY
+delivery: Server
 description: DIY script you can install on your own server
 method: save
-modified: 20200612234312631
+modified: 20200625180822496
 tags: Saving PHP
 title: Saving with TW Receiver
 type: text/vnd.tiddlywiki

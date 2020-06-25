@@ -2,10 +2,10 @@ caption: ~TiddlyDesktop
 color: #FF8A65
 community-author: Jeremy Ruston
 created: 20171112085137764
-delivery: App
-description: Custom desktop application for working with TiddlyWiki
+delivery: Desktop App
+description: Custom TiddlyWiki App for Linux, Mac and Windows
 method: save
-modified: 20200507104332791
+modified: 20200625180306324
 tags: Saving Mac Windows Linux
 title: Saving on TiddlyDesktop
 type: text/vnd.tiddlywiki
