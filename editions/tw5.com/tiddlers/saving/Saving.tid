@@ -1,68 +1,58 @@
 created: 20140912140651119
 list: 
-modified: 20200507203641230
-saving-browser: Firefox Chrome Edge [[Internet Explorer]] Safari Opera
-saving-os: Windows Mac Linux Android iOS
+modified: 20200625034241367
+sortby-savers-browserextensions: [["file-backups" Extension for Firefox by pmario]] [["savetiddlers" Extension for Chrome and Firefox by buggyj]] [[Timimi: WebExtension and Native Host by Riz]] [[Saving with TiddlyFox]] [[Saving with TiddlyIE]]
+sortby-savers-cloud: [[Saving to a Git service]] [[Saving on TiddlySpot]] [[TiddlyDrive Add-on for Google Drive by Joshua Stubbs]] [[TiddlyWiki Cloud]] [[Noteself by Danielo Rodríguez]]
+sortby-savers-desktopapps: [[Saving on TiddlyDesktop]] [[Twexe: Single File Tiddlywiki5 executable]] [[Saving on Beaker Browser]]
 tags: [[Working with TiddlyWiki]]
 title: Saving
 type: text/vnd.tiddlywiki
 
-\define alltagsfilter()  
-<$vars tag1="tag[" tag2="]" lb="[" rb="tag[Saving]sort[delivery]]">
-<$set filter="[list[]addprefix<tag1>addsuffix<tag2>]+[join[]addprefix<lb>addsuffix<rb>]" name="alltags" select=0>
-<$text text=<<alltags>>/>
-</$set>
-</$vars>
-\end
 
-\define saverssidebaritem(item:"Linux")
-<$checkbox tiddler=<<qualify $:/temp/$item$>> field="status" checked="selected" checkactions=<<checkactions "$item$">> uncheckactions=<<uncheckactions "$item$">> default="closed"> $item$</$checkbox><br/>
-\end
-
-\define saverssidebaritemlist(fieldname:"os")
-<$list filter="[enlist{!!$fieldname$}]" variable="currentItem">
-<$macrocall $name="saverssidebaritem" item=<<currentItem>>/>
-</$list>
-\end
-
-\define uncheckactions(item:"Linux")
-<$action-listops  $subfilter="-[[$item$]]"/>
-\end
-
-\define checkactions(item:"Linux")
-<$action-listops $subfilter="[[$item$]]"/>
-\end
-
-\define uncheckactions(item:"Linux")
-<$action-listops $subfilter="-[[$item$]]"/>
-\end
 
 Available methods for saving changes with TiddlyWiki:
 
-<div class="tc-wrapper-flex">
-<div class="tc-saving-sidebar">
-  <div class="tc-saving-sidebar-category">
-      <div class="tc-saving-sidebar-category-title">OS</div>
-     <div class="tc-saving-sidebar-category-item">
-                <<saverssidebaritemlist "saving-os">>
-      </div>
-   </div>
-   <div class="tc-saving-sidebar-category">
-       <div class="tc-saving-sidebar-category-title">Browser</div>
-        <div class="tc-saving-sidebar-category-item">
-               <<saverssidebaritemlist "saving-browser">>
-        </div>
-  </div>
-  
-</div>
-
-<!-- Page content -->
-<div class="content">
-<$wikify text=<<alltagsfilter>> name="alltagsfilterwikified">
-<$list filter=<<alltagsfilterwikified>>>
+<div>
+<strong>Desktop Applications</strong>
+<div class="tc-flex">
+<$list filter="[delivery[Desktop App]sortby{!!sortby-savers-desktopapps}]">
 {{||$:/_tw5.com-card-template}}
 </$list>
-</$wikify>
-
+</div>
+<strong>Mobile Applications</strong>
+<div class="tc-flex">
+<$list filter="[delivery[Mobile App]]">
+{{||$:/_tw5.com-card-template}}
+</$list>
+</div>
+<strong>Browser extensions</strong>
+<div class="tc-flex">
+<$list filter="[delivery[Browser Extension]sortby{!!sortby-savers-browserextensions}]">
+{{||$:/_tw5.com-card-template}}
+</$list>
+</div>
+<strong>Cloud synchronisation</strong>
+<div class="tc-flex">
+<$list filter="[delivery[Web Service]sortby{!!sortby-savers-cloud}]">
+{{||$:/_tw5.com-card-template}}
+</$list>
+</div>
+<strong>Servers and Server protocols</strong>
+<div class="tc-flex">
+<$list filter="[delivery[Server]]">
+{{||$:/_tw5.com-card-template}}
+</$list>
+</div>
+<strong>In built</strong>
+<div class="tc-flex">
+<$list filter="[delivery[Saver]]">
+{{||$:/_tw5.com-card-template}}
+</$list>
+</div>
+<strong>Misc</strong>
+<div class="tc-flex">
+<$list filter="[delivery[DIY]]">
+{{||$:/_tw5.com-card-template}}
+</$list>
 </div>
 </div>
