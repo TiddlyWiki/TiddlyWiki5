@@ -98,10 +98,10 @@ Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 	var self = this;
 	this.getTiddlerFileInfo(tiddler,function(err,fileInfo,options) {
-		options = options || {};
 		if (err) {
 			return callback(err);
 		}
+		options = options || {};
 		if (options.fileInfo !== null && typeof options.fileInfo !== "undefined") {
 			// New fileInfo (location, extension, hasMetaFile), call deleteTiddler via options
 			$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err) {

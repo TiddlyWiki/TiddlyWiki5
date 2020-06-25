@@ -209,7 +209,9 @@ Create a fileInfo object for saving a tiddler:
 Options include:
 	directory: absolute path of root directory to which we are saving
 	pathFilters: optional array of filters to be used to generate the base path
+	extFilters: optional array of filters to be used to generate the file extension
 	wiki: optional wiki for evaluating the pathFilters
+	fileSystemPath: an existing file systemPath to check against
 */
 exports.generateTiddlerFileInfo = function(tiddler,options) {
 	var fileInfo = {}, metaExt;
@@ -249,7 +251,7 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 				fileInfo.hasMetaFile = false;
 			} else if (metaExt) {
 				//If the new type matches a known extention, use that MIME type's encoding
-				extInfo = $tw.utils.getFileExtensionInfo(metaExt);
+				var extInfo = $tw.utils.getFileExtensionInfo(metaExt);
 				fileInfo.type = extInfo ? extInfo.type : null;
 				fileInfo.encoding = $tw.utils.getTypeEncoding(metaExt);
 				fileInfo.hasMetaFile = true;
