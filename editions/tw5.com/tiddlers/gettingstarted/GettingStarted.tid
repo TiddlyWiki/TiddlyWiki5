@@ -1,13 +1,31 @@
 created: 20131129090249275
-modified: 20200507203622933
+modified: 20200625035558907
 tags: [[Working with TiddlyWiki]]
 title: GettingStarted
 type: text/vnd.tiddlywiki
 
-Click here to download an empty copy of TiddlyWiki: {{$:/editions/tw5.com/snippets/download-empty-button}}
+~TiddlyWiki comes in 2 major flavors
 
-The next step is to choose a method for saving changes. There's a wide variety of methods available, with different features and limitations. Click on the badge for a method to see more information about it. You can also click on one of the platform filters to restrict the listing to methods that work with that platform.
+* ''Single HTML file flavor'': All your notes/tiddlers are saved in a single HTML file. You can view, search and navigate your wiki using any web browser.
+* ''Node.js based flat file flavor'': All your notes/tiddlers are saved as separate text files. Node.js runtime is required to view your wiki in browser.
+<<.tipw "You can convert your wiki between the two flavors any time.">>
+<<.tipw "There are third-party community resources providing other back-ends like [[sqlite, boltdb, dynamodb |Widdly by Opennota]] and [[PouchDB|Noteself by Danielo Rodríguez]]. Please note that they are published and maintained independently of TW5">>
 
-<<.warning "Don't attempt to use the browser ''File''/''Save'' menu option to save changes (it doesn't work)">><br/><br/>
+Choose your flavor:  
 
+<$radio class="tc-radio-doc-big" tiddler="$:/state/GettingStarted" value="html"> Single HTML file flavor</$radio>
+<$radio class="tc-radio-doc-big" tiddler="$:/state/GettingStarted" value="nodejs"> Node.js based flat file flavor</$radio>
+<$radio class="tc-radio-doc-big" tiddler="$:/state/GettingStarted" value="wizard"> Help me to choose which is best for me</$radio>
+
+<$reveal type="match" state="$:/state/GettingStarted" text="nodejs">
+<$transclude tiddler="Installing TiddlyWiki on Node.js" mode="block"/>
+</$reveal>
+<$reveal type="match" state="$:/state/GettingStarted" text="html">
+<p>Click here to download an empty copy of TiddlyWiki: {{$:/editions/tw5.com/snippets/download-empty-button}}</p>
+<p>You can view, navigate and search your TiddlyWiki files using any modern browser without any additional software. The changes made to ~TiddlyWiki file can be saved using any one of these savers. In addition to saving, the savers may offer extra features like backups, uploading to online services etc. Click on the badge for a method to see more information about it.  </p>
 {{Saving}}
+</$reveal>
+
+<$reveal type="match" state="$:/state/GettingStarted" text="wizard" class="tc-doc-gswizard">
+{{GettingStarted - Wizard}}
+</$reveal>
