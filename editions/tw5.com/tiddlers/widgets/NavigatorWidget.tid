@@ -26,9 +26,7 @@ The following [[Messages]] are handled by the navigator widget:
 <ul>
 <$list filter="[tag[navigator-message]]">
 <li>
-<$link to={{!!title}}>
-<$view field="title"/>
-</$link>
+<$link/>
 </li>
 </$list>
 </ul>
