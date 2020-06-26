@@ -98,7 +98,7 @@ If the tiddler that contains the macro definition is known and - for example - t
 !!! Messages
 
 <$list filter="[tag[navigator-message]]">
-<$link to={{!!title}}><$view field="title"/></$link><br>
+<$link/><br>
 </$list>
 
 </$vars>
