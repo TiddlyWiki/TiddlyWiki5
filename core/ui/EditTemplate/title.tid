@@ -65,8 +65,6 @@ tags: $:/tags/EditTemplate
 
 </$reveal>
 \end
-<$list variable="debugTemplate" filter="[{$:/config/ui/DebugTemplates}match[yes]]">
-
 <$list variable="sectionTemplate" filter="[all[current]subfilter:tag[$:/config/ui/EditTemplate/title]]" emptyMessage=<<tiddler-title-edit>> >
 
 <$list variable="debugTemplate" filter="[[$:/config/ui/Debug/Templates]contains:list{!!draft.of}]">

@@ -7,10 +7,10 @@ tags: $:/tags/TiddlerInfo/Advanced
 \define view-sections() titlebar icon title controls subtitle tags body
 \define edit-sections() title controls tags body type fields
 \define debug-on-actions(input:"list")
-<$action-listops $tiddler="$:/config/ui/Debug/Templates" $field="$input$" $subfilter="+[append<currentTiddler>]"/>
+<$action-listops $tiddler="$:/config/ui/Debug/Templates" $field="$input$" $subfilter="[<currentTiddler>]"/>
 \end
 \define debug-off-actions(input:"list")
-<$action-listops $tiddler="$:/config/ui/Debug/Templates" $field="$input$" $subfilter="+[remove<currentTiddler>]"/>
+<$action-listops $tiddler="$:/config/ui/Debug/Templates" $field="$input$" $subfilter="-[<currentTiddler>]"/>
 \end
 \define debug-empty-message()
 <p>
