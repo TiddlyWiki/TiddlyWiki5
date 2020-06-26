@@ -494,10 +494,11 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	} catch(e) {
 	}
 	// Get the current $:/Import tiddler
-	var importTiddler = this.wiki.getTiddler(IMPORT_TITLE),
-		importData = this.wiki.getTiddlerData(IMPORT_TITLE,{}),
+	var importTitle = event.importTitle? event.importTitle : IMPORT_TITLE,
+		importTiddler = this.wiki.getTiddler(importTitle),
+		importData = this.wiki.getTiddlerData(importTitle,{}),
 		newFields = new Object({
-			title: IMPORT_TITLE,
+			title: importTitle,
 			type: "application/json",
 			"plugin-type": "import",
 			"status": "pending"
@@ -533,11 +534,11 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 		var storyList = this.getStoryList(),
 			history = [];
 		// Add it to the story
-		if(storyList && storyList.indexOf(IMPORT_TITLE) === -1) {
-			storyList.unshift(IMPORT_TITLE);
+		if(storyList && storyList.indexOf(importTitle) === -1) {
+			storyList.unshift(importTitle);
 		}
 		// And to history
-		history.push(IMPORT_TITLE);
+		history.push(importTitle);
 		// Save the updated story and history
 		this.saveStoryList(storyList);
 		this.addToHistory(history);
