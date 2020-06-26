@@ -113,7 +113,7 @@ DropZoneWidget.prototype.handleDragEndEvent = function(event) {
 DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	var self = this,
 		readFileCallback = function(tiddlerFieldsArray) {
-			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray), autoOpenOnImport: self.autoOpenOnImport});
+			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray), autoOpenOnImport: self.autoOpenOnImport, importTitle: self.importTitle});
 		};
 	this.leaveDrag(event);
 	// Check for being over a TEXTAREA or INPUT
@@ -149,7 +149,7 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 	var self = this,
 		readFileCallback = function(tiddlerFieldsArray) {
-			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray), autoOpenOnImport: self.autoOpenOnImport});
+			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray), autoOpenOnImport: self.autoOpenOnImport, importTitle: self.importTitle});
 		};
 	// Let the browser handle it if we're in a textarea or input box
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) == -1 && !event.target.isContentEditable) {
@@ -176,7 +176,7 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 					if($tw.log.IMPORT) {
 						console.log("Importing string '" + str + "', type: '" + type + "'");
 					}
-					self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify([tiddlerFields]), autoOpenOnImport: self.autoOpenOnImport});
+					self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify([tiddlerFields]), autoOpenOnImport: self.autoOpenOnImport, importTitle: self.importTitle});
 				});
 			}
 		}
@@ -194,6 +194,7 @@ DropZoneWidget.prototype.execute = function() {
 	this.dropzoneDeserializer = this.getAttribute("deserializer");
 	this.dropzoneEnable = (this.getAttribute("enable") || "yes") === "yes";
 	this.autoOpenOnImport = this.getAttribute("autoOpenOnImport");
+	this.importTitle = this.getAttribute("importTitle");
 	// Make child widgets
 	this.makeChildWidgets();
 };
@@ -203,7 +204,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DropZoneWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.enable) {
+	if(changedAttributes.enable || changedAttributes.autoOpenOnImport || changedAttributes.importTitle || changedAttributes.deserializer || changedAttributes.class) {
 		this.refreshSelf();
 		return true;
 	}
