@@ -494,7 +494,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	} catch(e) {
 	}
 	// Get the current $:/Import tiddler
-	var importTitle = event.importTitle? event.importTitle : IMPORT_TITLE,
+	var importTitle = event.importTitle ? event.importTitle : IMPORT_TITLE,
 		importTiddler = this.wiki.getTiddler(importTitle),
 		importData = this.wiki.getTiddlerData(importTitle,{}),
 		newFields = new Object({
