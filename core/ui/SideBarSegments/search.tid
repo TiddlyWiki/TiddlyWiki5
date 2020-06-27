@@ -41,7 +41,7 @@ tags: $:/tags/SideBarSegment
 <$macrocall $name="keyboard-driven-input" tiddler="$:/temp/search" storeTitle=<<searchTiddler>> 
 		selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" 
 		tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> 
-		class="tc-popup-handle" filter1=<<titleSearchFilter>> filter2=<<allSearchFilter>> 
+		class="tc-popup-handle" primaryListFilter=<<titleSearchFilter>> secondaryListFilter=<<allSearchFilter>> 
 		filterMinLength={{$:/config/Search/MinLength}} inputCancelActions=<<cancel-search-actions>> 
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> cancelPopups="yes" />
 <$reveal state=<<searchTiddler>> type="nomatch" text="">
