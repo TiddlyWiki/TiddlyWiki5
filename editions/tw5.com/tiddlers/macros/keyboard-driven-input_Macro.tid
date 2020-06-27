@@ -15,6 +15,6 @@ The additional parameters are:
 |inputAcceptActions |the actions that get processed when the user hits <kbd>{{$:/config/shortcuts/input-accept}}</kbd> |
 |inputAcceptVariantActions |the actions that get processed when the user hits <kbd>{{$:/config/shortcuts/input-accept-variant}}</kbd> |
 |inputCancelActions |the actions that get processed when the user hits <kbd>{{$:/config/shortcuts/input-cancel}}</kbd> |
-|filter1 |a filter that specifies the first item-list |
-|filter2 |a second filter that specifies a second item-list |
+|primaryListFilter |a filter that specifies the first item-list |
+|secondaryListFilter |a second filter that specifies a second item-list |
 
