@@ -38,7 +38,7 @@ $actions$
 <div>
 <span class="tc-add-tag-name">
 <$macrocall $name="keyboard-driven-input" tiddler=<<newTagNameTiddler>> storeTitle=<<storeTitle>> refreshTitle=<<refreshTitle>>
-		selectionStateTitle=<<tagSelectionState>> filter1=<<nonSystemTagsFilter>> filter2=<<systemTagsFilter>> 
+		selectionStateTitle=<<tagSelectionState>> primaryListFilter=<<nonSystemTagsFilter>> secondaryListFilter=<<systemTagsFilter>> 
 		inputAcceptActions="""<$macrocall $name="add-tag-actions" actions=<<__actions__>>/>""" inputCancelActions=<<clear-tags-actions>> tag="input" 
 		placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> 
 		class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}} 
@@ -60,14 +60,14 @@ $actions$
 <$set name="userInput" value={{{ [<storeTitle>get[text]] }}}>
 <$list filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 <$list filter=<<nonSystemTagsFilter>> variable="tag">
-<$list filter="[<tag>addsuffix[-list1]] -[<tagSelectionState>get[text]]" emptyMessage="""<$macrocall $name="tag-button" actions=<<__actions__>> selectedClass="tc-tag-button-selected"/>""">
+<$list filter="[<tag>addsuffix[-primaryList]] -[<tagSelectionState>get[text]]" emptyMessage="""<$macrocall $name="tag-button" actions=<<__actions__>> selectedClass="tc-tag-button-selected"/>""">
 <$macrocall $name="tag-button" actions=<<__actions__>>/>
 </$list>
 </$list></$list>
 <hr>
 <$list filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 <$list filter=<<systemTagsFilter>> variable="tag">
-<$list filter="[<tag>addsuffix[-list2]] -[<tagSelectionState>get[text]]" emptyMessage="""<$macrocall $name="tag-button" actions=<<__actions__>> selectedClass="tc-tag-button-selected"/>""">
+<$list filter="[<tag>addsuffix[-secondaryList]] -[<tagSelectionState>get[text]]" emptyMessage="""<$macrocall $name="tag-button" actions=<<__actions__>> selectedClass="tc-tag-button-selected"/>""">
 <$macrocall $name="tag-button" actions=<<__actions__>>/>
 </$list>
 </$list></$list>
