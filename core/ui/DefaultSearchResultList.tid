@@ -6,7 +6,7 @@ caption: {{$:/language/Search/DefaultResults/Caption}}
 //<small>{{$:/language/Search/Matches/Title}}</small>//
 
 <$list filter="[!is[system]search:title{$(searchTiddler)$}sort[title]limit[250]]">
-<span class={{{[<currentTiddler>addsuffix[-list1]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>
 </$list>
@@ -14,7 +14,7 @@ caption: {{$:/language/Search/DefaultResults/Caption}}
 //<small>{{$:/language/Search/Matches/All}}</small>//
 
 <$list filter="[!is[system]search{$(searchTiddler)$}sort[title]limit[250]]">
-<span class={{{[<currentTiddler>addsuffix[-list2]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<span class={{{[<currentTiddler>addsuffix[-secondaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>
 </$list>
