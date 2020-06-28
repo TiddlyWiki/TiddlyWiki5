@@ -118,7 +118,7 @@ FramedEngine.prototype.setText = function(text,type) {
 /*
 Update the DomNode with the new text
 */
-FramedEngine.prototype.udpateDomNodeText = function(text) {
+FramedEngine.prototype.updateDomNodeText = function(text) {
 	this.domNode.value = text;
 };
 
