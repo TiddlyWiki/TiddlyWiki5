@@ -24,6 +24,16 @@ Add these entries to your current colour palette to change the colours used by t
 * ''consent-banner-hr-background'' - the background colour of horizontal rules within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-hr-background}})
 * ''consent-banner-link-foreground'' - the foreground colour of tiddler links within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-link-foreground}})
 
+! Embedded Content Blocking
+
+Unless disabled via the config tab, content embedded via &lt;iframe>, &lt;embed> or &lt;object> is blocked until the user consents to accept cookies.
+
+!! Implementation Details
+
+Embedded content is blocked if the variable `tv-block-embedded-content` is set to `yes`. It is set to the current consent status by a [[global macro|$:/plugins/tiddlywiki/consent-banner/tv-block-embedded-content]]:
+
+<$codeblock code={{$:/plugins/tiddlywiki/consent-banner/tv-block-embedded-content}}/>
+
 ! ~YouTube macro
 
 A simple macro for embedding ~YouTube videos is provided to show how to adapt content according to whether consent has been granted. It works by checking the tiddler [[$:/state/consent-banner/accepted]] for the following values:
