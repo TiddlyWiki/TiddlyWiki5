@@ -54,16 +54,7 @@ EditWidget.prototype.execute = function() {
 	// Make the child widgets
 	this.makeChildWidgets([{
 		type: "edit-" + this.editorType,
-		attributes: {
-			tiddler: {type: "string", value: this.editTitle},
-			field: {type: "string", value: this.editField},
-			index: {type: "string", value: this.editIndex},
-			"class": {type: "string", value: this.editClass},
-			"placeholder": {type: "string", value: this.editPlaceholder},
-			"tabindex": {type: "string", value: this.editTabIndex},
-			"focus": {type: "string", value: this.editFocus},
-			"cancelPopups": {type: "string", value: this.editCancelPopups}
-		},
+		attributes: this.parseTreeNode.attributes,
 		children: this.parseTreeNode.children
 	}]);
 };
