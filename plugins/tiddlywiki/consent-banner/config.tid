@@ -40,3 +40,9 @@ Current status: {{$:/state/consent-banner/accepted}} (blank indicates that conse
 <$button message="tm-consent-clear" tooltip={{$:/config/plugins/tiddlywiki/consent-banner/buttons/clear/hint}}>
 {{$:/config/plugins/tiddlywiki/consent-banner/buttons/clear/caption}}
 </$button>
+
+! Embedded Content Blocking
+
+//Requires page reload//
+
+<$checkbox tiddler="$:/config/plugins/tiddlywiki/consent-banner/block-embedded-content" field="text" checked="yes" unchecked="no" default="no"> Block all embedded content such as &lt;iframe>, &lt;embed> and &lt;object> unless consent has been granted</$checkbox>

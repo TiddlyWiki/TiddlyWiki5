@@ -56,9 +56,12 @@ tags: $:/tags/Stylesheet
 	
 }
 
+.tc-consent-banner .tc-consent-button {
+	margin-right: 1em;
+}
+
 .tc-consent-button {
 	border: 1px solid <<colour consent-banner-button-border>>;
-	margin-right: 1em;
 	margin-top: 1em;
 	padding: 0.75em 1.5em;
 	color: <<colour consent-banner-button-foreground>>;
@@ -76,4 +79,33 @@ tags: $:/tags/Stylesheet
 .tc-consent-button-default {
 	color: <<colour consent-banner-button-default-foreground>>;
 	background: <<colour consent-banner-button-default-background>>;
+}
+
+.tc-blocked-embedded-content {
+	display: inline-block;
+	overflow: hidden;
+	color: <<colour background>>;
+	background: <<colour muted-foreground>>;
+	border: 1px solid <<colour foreground>>;
+	<<box-shadow "inset 0 0 8px rgba(0, 0, 0, 0.15)">>
+}
+
+.tc-blocked-embedded-content-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.tc-blocked-embedded-content-inner-inner {
+	display: inline-block;
+	text-align: center;
+}
+
+.tc-blocked-embedded-content-inner-inner hr {
+    background: <<colour foreground>>;
+    height: 1px;
+    width: 80%;
+    border: none;
 }
