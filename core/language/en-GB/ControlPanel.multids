@@ -70,6 +70,7 @@ Plugins/Caption: Plugins
 Plugins/Disable/Caption: disable
 Plugins/Disable/Hint: Disable this plugin when reloading page
 Plugins/Disabled/Status: (disabled)
+Plugins/Downgrade/Caption: downgrade
 Plugins/Empty/Hint: None
 Plugins/Enable/Caption: enable
 Plugins/Enable/Hint: Enable this plugin when reloading page
@@ -87,6 +88,11 @@ Plugins/Plugins/Hint: Plugins
 Plugins/Reinstall/Caption: reinstall
 Plugins/Themes/Caption: Themes
 Plugins/Themes/Hint: Theme plugins
+Plugins/Update/Caption: update
+Plugins/Updates/Caption: Updates
+Plugins/Updates/Hint: Available updates to installed plugins
+Plugins/Updates/UpdateAll/Caption: Update <<update-count>> plugins
+Plugins/SubPluginPrompt: With <<count>> sub-plugins available
 Saving/Caption: Saving
 Saving/DownloadSaver/AutoSave/Description: Permit automatic saving for the download saver
 Saving/DownloadSaver/AutoSave/Hint: Enable Autosave for Download Saver

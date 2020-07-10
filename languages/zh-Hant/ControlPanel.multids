@@ -65,6 +65,7 @@ Plugins/Caption: 插件
 Plugins/Disable/Caption: 停用
 Plugins/Disable/Hint: 重新載入頁面時停用此插件
 Plugins/Disabled/Status: (已停用)
+Plugins/Downgrade/Caption: 降級
 Plugins/Empty/Hint: 無
 Plugins/Enable/Caption: 啟用
 Plugins/Enable/Hint: 重新載入頁面時啟用此插件
@@ -83,6 +84,11 @@ Plugins/Plugins/Hint: 插件
 Plugins/Reinstall/Caption: 重新安裝
 Plugins/Themes/Caption: 佈景主題
 Plugins/Themes/Hint: 佈景主題插件
+Plugins/Update/Caption: 更新
+Plugins/Updates/Caption: 更新
+Plugins/Updates/Hint: 已安裝插件的可用更新
+Plugins/Updates/UpdateAll/Caption: 更新 <<update-count>> 個插件
+Plugins/SubPluginPrompt: 提供 <<count>> 個可用的附加插件
 Parsing/Caption: 解析
 Parsing/Hint: 在此您可以全域停用或啟用維基解析規則。要使更改生效，請儲存並重新載入您的維基。停用某些解析規則，會妨礙 <$text text="TiddlyWiki"/>  正常運作。可使用[[安全模式|https://tiddlywiki.com/#SafeMode]]恢復正常操作。
 Parsing/Block/Caption: 區塊解析規則

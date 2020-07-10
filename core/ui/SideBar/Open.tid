@@ -15,7 +15,7 @@ caption: {{$:/language/SideBar/Open/Caption}}
 
 \define droppable-item(button)
 \whitespace trim
-<$droppable actions=<<drop-actions>>>
+<$droppable actions=<<drop-actions>> enable=<<tv-allow-drag-and-drop>>>
 <<placeholder>>
 <div>
 $button$

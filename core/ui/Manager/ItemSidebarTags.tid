@@ -11,11 +11,6 @@ caption: {{$:/language/Manager/Item/Tags}}
 
 \define tag-picker-actions()
 <<tag-checkbox-actions>>
-<$action-listops
-	$tiddler=<<currentTiddler>>
-	$field="tags"
-	$subfilter="[<tag>] [all[current]tags[]]"
-/>
 \end
 
 <p>
@@ -28,5 +23,7 @@ caption: {{$:/language/Manager/Item/Tags}}
 </$list>
 </p>
 <p>
+<$fieldmangler>
 <$macrocall $name="tag-picker" actions=<<tag-picker-actions>>/>
+</$fieldmangler>
 </p>

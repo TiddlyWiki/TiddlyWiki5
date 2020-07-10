@@ -18,6 +18,7 @@ exports.getInfoTiddlerFields = function() {
 	// Basics
 	infoTiddlerFields.push({title: "$:/info/browser", text: mapBoolean(!!$tw.browser)});
 	infoTiddlerFields.push({title: "$:/info/node", text: mapBoolean(!!$tw.node)});
+	infoTiddlerFields.push({title: "$:/info/startup-timestamp", text: $tw.utils.stringifyDate(new Date())});
 	if($tw.browser) {
 		// Document location
 		var setLocationProperty = function(name,value) {

@@ -53,7 +53,7 @@ modal-border: #504945
 modal-footer-background: #3c3836
 modal-footer-border: #3c3836
 modal-header-border: #3c3836
-muted-foreground: #665c54
+muted-foreground: #d5c4a1
 notification-background: <<colour primary>>
 notification-border: <<colour primary>>
 page-background: #282828
@@ -95,7 +95,7 @@ tag-foreground: #282828
 tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>
 tiddler-controls-foreground-hover: #7c6f64
-tiddler-controls-foreground-selected: #7c6f64
+tiddler-controls-foreground-selected: <<colour primary>>
 tiddler-controls-foreground: #665c54
 tiddler-editor-background: #282828
 tiddler-editor-border-image: #282828
@@ -108,7 +108,7 @@ tiddler-info-tab-background: #ebdbb2
 tiddler-link-background: <<colour background>>
 tiddler-link-foreground: <<colour primary>>
 tiddler-subtitle-foreground: #7c6f64
-tiddler-title-foreground: #7c6f64
+tiddler-title-foreground: #a89984
 toolbar-new-button: 
 toolbar-options-button: 
 toolbar-save-button: 
@@ -119,4 +119,20 @@ toolbar-delete-button:
 toolbar-cancel-button: 
 toolbar-done-button: 
 untagged-background: #504945
-very-muted-foreground: #32302f
+very-muted-foreground: #bdae93
+wikilist-background: <<colour page-background>>
+wikilist-button-background: <<colour button-background>>
+wikilist-button-foreground: <<colour button-foreground>>
+wikilist-item: <<colour background>>
+wikilist-toolbar-background: <<colour background>>
+wikilist-toolbar-foreground: <<colour foreground>>
+wikilist-title: <<colour foreground>>
+wikilist-title-svg: <<colour wikilist-title>>
+wikilist-url: <<colour muted-foreground>>
+wikilist-button-open-hover: <<colour primary>>
+wikilist-button-open: <<colour dropzone-background>>
+wikilist-button-remove: <<colour dirty-indicator>>
+wikilist-button-remove-hover: <<colour alert-background>>
+wikilist-droplink-dragover: <<colour dropzone-background>>
+wikilist-button-reveal: <<colour sidebar-tiddler-link-foreground-hover>>
+wikilist-button-reveal-hover: <<colour message-background>>

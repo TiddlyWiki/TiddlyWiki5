@@ -1,6 +1,7 @@
 title: $:/language/Docs/Fields/
 
 _canonical_uri: De volledige URI van een externe afbeeldingstiddler
+_is_skinny: Indien aanwezig, geeft aan dat het tekstveld van de server geladen moet worden
 bag: De naam van de 'bag' waaruit de tiddler kwam
 caption: Tekst die op een tab of een knop getoond wordt
 color: De CSS-waarde van een kleur gekoppeld aan een tiddler
@@ -30,6 +31,7 @@ source: De URL gekoppeld aan de tiddler
 subtitle: De tekst van de ondertitel van een wizard
 tags: Een lijst van labels gekoppeld met een tiddler
 text: De tekst van een tiddler
+throttle.refresh: Indien aanwezig wordt verversen van deze tiddler verminderd
 title: De unieke naam van een tiddler
 toc-link: Als 'no' ingevuld is, is de tiddler geen link meer in de Inhoudsopgave
 type: Inhoudstype van een tiddler

@@ -13,7 +13,7 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 
 <a href={{!!_canonical_uri}}><$text text={{!!_canonical_uri}}/></a>
 
-<$edit-text field="_canonical_uri" class="tc-edit-fields" tabindex={{$:/config/EditTabIndex}}></$edit-text>
+<$edit-text field="_canonical_uri" class="tc-edit-fields" tabindex={{$:/config/EditTabIndex}} cancelPopups="yes"></$edit-text>
 
 </div>
 

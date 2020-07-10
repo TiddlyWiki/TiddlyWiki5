@@ -130,6 +130,11 @@ blockquote {
 	quotes: "\201C""\201D""\2018""\2019";
 }
 
+blockquote > div {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
 blockquote.tc-big-quote {
 	font-family: Georgia, serif;
 	position: relative;
@@ -218,6 +223,16 @@ kbd {
 	border-bottom-color: <<colour muted-foreground>>;
 	border-radius: 3px;
 	box-shadow: inset 0 -1px 0 <<colour muted-foreground>>;
+}
+
+::selection {
+	background-color: <<colour primary>>;
+	color: <<colour page-background>>;
+}
+
+::-moz-selection {
+	background-color: <<colour primary>>;
+	color: <<colour page-background>>;
 }
 
 /*
@@ -329,6 +344,10 @@ a.tc-tiddlylink-external:visited {
 a.tc-tiddlylink-external:hover {
 	color: <<colour external-link-foreground-hover>>;
 	background-color: <<colour external-link-background-hover>>;
+}
+
+.tc-drop-down a.tc-tiddlylink:hover {
+	color: <<colour tiddler-link-background>>;
 }
 
 /*
@@ -674,7 +693,7 @@ button.tc-untagged-label {
 	width: 1em;
 	margin-right: 3px; 
 	margin-bottom: 1px;
-	vertical-align: text-bottom;
+	vertical-align: bottom;
 }
 
 .tc-edit-tags button.tc-remove-tag-button svg {
@@ -965,6 +984,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-tiddler-title-icon {
 	vertical-align: middle;
+	margin-right: .1em;
 }
 
 .tc-system-title-prefix {
@@ -984,6 +1004,10 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	font-size: 0.9em;
 	color: <<colour tiddler-subtitle-foreground>>;
 	font-weight: 300;
+}
+
+.tc-subtitle .tc-tiddlylink {
+	margin-right: .3em;
 }
 
 .tc-tiddler-missing .tc-title {
@@ -1279,7 +1303,11 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-type-selector .tc-edit-typeeditor {
-	width: 20%;
+	width: auto;
+}
+
+.tc-type-selector-wrapper {
+	display: inline-block;
 }
 
 .tc-edit-tags {
@@ -1376,9 +1404,12 @@ html body.tc-body.tc-single-tiddler-window {
 	vertical-align: middle;
 }
 
-.tc-edit-field-add-name {
+.tc-edit-field-add-name-wrapper input.tc-edit-texteditor {
+	width: auto;
+}
+
+.tc-edit-field-add-name-wrapper {
 	display: inline-block;
-	width: 15%;
 }
 
 .tc-edit-field-add-value {
@@ -1394,6 +1425,10 @@ html body.tc-body.tc-single-tiddler-window {
 /*
 ** Storyview Classes
 */
+
+.tc-viewswitcher .tc-image-button {
+	margin-right: .3em;
+}
 
 .tc-storyview-zoomin-tiddler {
 	position: absolute;
@@ -1448,6 +1483,10 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-drop-down button.tc-btn-invisible:hover svg {
 	fill: <<colour foreground>>;
+}
+
+.tc-drop-down .tc-drop-down-info {
+	padding-left: 14px;
 }
 
 .tc-drop-down p {
@@ -1566,7 +1605,7 @@ html body.tc-body.tc-single-tiddler-window {
 	color: <<colour muted-foreground>>;
 }
 
-.tc-block-dropdown a:hover {
+.tc-block-dropdown a.tc-tiddlylink:hover {
 	color: <<colour tiddler-link-background>>;
 	background-color: <<colour tiddler-link-foreground>>;
 	text-decoration: none;
@@ -1978,24 +2017,26 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-alerts {
 	position: fixed;
-	top: 0;
+	top: 28px;
 	left: 0;
-	max-width: 500px;
+	right: 0;
+	max-width: 50%;
 	z-index: 20000;
 }
 
 .tc-alert {
 	position: relative;
-	margin: 28px;
-	padding: 14px 14px 14px 14px;
-	border: 2px solid <<colour alert-border>>;
+	margin: 14px;
+	padding: 7px;
+	border: 1px solid <<colour alert-border>>;
 	background-color: <<colour alert-background>>;
 }
 
 .tc-alert-toolbar {
 	position: absolute;
-	top: 14px;
-	right: 14px;
+	top: 7px;
+	right: 7px;
+    line-height: 0;
 }
 
 .tc-alert-toolbar svg {
@@ -2005,6 +2046,12 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-alert-subtitle {
 	color: <<colour alert-muted-foreground>>;
 	font-weight: bold;
+    font-size: 0.8em;
+    margin-bottom: 0.5em;
+}
+
+.tc-alert-body > p {
+	margin: 0;
 }
 
 .tc-alert-highlight {
@@ -2089,8 +2136,20 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-plugin-info-sub-plugins .tc-plugin-info {
-	margin: 0.5em 1em 0.5em 1em;
-	background: rgba(255,255,0,0.05);
+    margin: 0.5em;
+	background: <<colour background>>;
+}
+
+.tc-plugin-info-sub-plugin-indicator {
+	margin: -16px 1em 0 2em;
+}
+
+.tc-plugin-info-sub-plugin-indicator button {
+	color: <<colour background>>;
+	background: <<colour foreground>>;
+	border-radius: 8px;
+    padding: 2px 7px;
+    font-size: 0.75em;
 }
 
 .tc-plugin-info-sub-plugins .tc-plugin-info-dropdown {
@@ -2194,11 +2253,12 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 }
 
 .tc-plugin-info-sub-plugins {
-	padding-top: 0.5em;
-	background: <<colour message-background>>;
+	padding: 0.5em;
+    margin: 0 1em 1em 1em;
+	background: <<colour notification-background>>;
 }
 
-.tc-plugin-library-listing .tc-install-plugin {
+.tc-install-plugin {
 	font-weight: bold;
 	background: green;
 	color: white;
@@ -2207,10 +2267,17 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	padding: 3px;
 }
 
-.tc-plugin-library-listing .tc-install-plugin.tc-reinstall {
+.tc-install-plugin.tc-reinstall-downgrade {
+	background: red;
+}
+
+.tc-install-plugin.tc-reinstall {
 	background: blue;
 }
 
+.tc-install-plugin.tc-reinstall-upgrade {
+	background: orange;
+}
 
 .tc-check-list {
 	line-height: 2em;

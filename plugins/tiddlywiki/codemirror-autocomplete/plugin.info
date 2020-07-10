@@ -3,5 +3,6 @@
 	"name": "CodeMirror Autocomplete",
 	"description": "Autocompletion for CodeMirror",
 	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
+	"dependents": ["$:/plugins/tiddlywiki/codemirror-mode-css"],
 	"list": "readme"
 }

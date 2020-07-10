@@ -43,6 +43,10 @@ tags: [[$:/tags/Stylesheet]]
 		font-weight: 700;
 	}
 
+	html body.tc-body .tc-tiddler-frame .tc-subtitle .tc-tiddlylink {
+		margin-right: .3em;
+	}
+
 	html body.tc-body .tc-tiddler-frame .tc-tags-wrapper {
 		margin: 0;
 	}

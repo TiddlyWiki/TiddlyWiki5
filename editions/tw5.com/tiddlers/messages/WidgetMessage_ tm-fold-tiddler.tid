@@ -1,16 +1,24 @@
 caption: tm-fold-tiddler
 created: 20160424232749223
-modified: 20160424233102003
+modified: 20191028113537119
 tags: Messages
 title: WidgetMessage: tm-fold-tiddler
 type: text/vnd.tiddlywiki
 
-The `tm-fold-tiddler` message folds the tiddler specified in the `param` parameter. It does so by setting the text of a state tiddler to either "<<.value "show">>" or "<<.value "hide">>", according to the fold state.
+The `tm-fold-tiddler` message toggles the value of a state tiddler. It does so by setting the text of a state tiddler to either "<<.value "show">>" or "<<.value "hide">>", according to the fold state.
 
 |!Name |!Description |
-|param|Title of the tiddler that should be folded. If the tiddler is already folded, it will be unfolded instead. |
-|foldedStatePrefix |Prefix for the state tiddler in which the fold state is stored. If no state prefix is provided, `tm-fold-tiddler` will do nothing. |
+|param |ignored ... foldedState must be used |
+|foldedState |State tiddler in which the fold state is stored |
 
-<<.tip "The core uses a foldStatePrefix of '$:/state/folded/' to store the fold states for the default story view.">>
+<<.tip "The core uses a foldState prefix of `$:/state/folded/` + `tiddler title` to store the fold states for the default story view.">>
 
 The `tm-fold-tiddler` message is usually generated with the ButtonWidget and is handled by the surrounding NavigatorWidget.
+
+The core $:/core/ui/ViewTemplate defines a global variable `folded-state`, that is used with every tiddler. It's created like this: 
+
+```
+\define folded-state()
+$:/state/folded/$(currentTiddler)$
+\end
+```

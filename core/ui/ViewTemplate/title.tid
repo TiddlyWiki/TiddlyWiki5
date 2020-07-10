@@ -1,6 +1,7 @@
 title: $:/core/ui/ViewTemplate/title
 tags: $:/tags/ViewTemplate
 
+\whitespace trim
 \define title-styles()
 fill:$(foregroundColor)$;
 \end

@@ -22,6 +22,7 @@ A quick and dirty HTTP function; to be refactored later. Options are:
 */
 exports.httpRequest = function(options) {
 	var type = options.type || "GET",
+		url = options.url,
 		headers = options.headers || {accept: "application/json"},
 		returnProp = options.returnProp || "responseText",
 		request = new XMLHttpRequest(),
@@ -36,7 +37,11 @@ exports.httpRequest = function(options) {
 			$tw.utils.each(options.data,function(dataItem,dataItemTitle) {
 				results.push(dataItemTitle + "=" + encodeURIComponent(dataItem));
 			});
-			data = results.join("&");
+			if(type === "GET" || type === "HEAD") {
+				url += "?" + results.join("&");
+			} else {
+				data = results.join("&");
+			}
 		}
 	}
 	// Set up the state change handler
@@ -52,7 +57,7 @@ exports.httpRequest = function(options) {
 		}
 	};
 	// Make the request
-	request.open(type,options.url,true);
+	request.open(type,url,true);
 	if(headers) {
 		$tw.utils.each(headers,function(header,headerTitle,object) {
 			request.setRequestHeader(headerTitle,header);

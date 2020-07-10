@@ -9,7 +9,8 @@
 		"tiddlywiki/seamless",
 		"tiddlywiki/centralised",
 		"tiddlywiki/tight",
-		"tiddlywiki/readonly"
+		"tiddlywiki/readonly",
+		"tiddlywiki/internals"
 	],
 	"languages": [
 		"en-GB",

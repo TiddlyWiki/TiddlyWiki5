@@ -28,6 +28,7 @@ Error/Filter: Filter Fehler
 Error/FilterSyntax: Syntax Fehler im Filter-Ausdruck
 Error/IsFilterOperator: Filter Fehler: Unbekannter Operand für den 'is' Filter Operator
 Error/LoadingPluginLibrary: Fehler beim Laden der "plugin library"
+Error/NetworkErrorAlert: `<h2>''Netzwerk Fehler''</h2>Es scheint, die Verbindung zum Server ist ausgefallen. Das weist auf Probleme mit der Netzwerkverbindung hin. Bitte versuchen Sie die Verbingung wider herzustellen, bevor Sie weitermachen.<br><br>''Nicht gespeicherte Änderungen werden automatich synchronisiert, sobald die Verbindung wider hergestellt ist.
 Error/RecursiveTransclusion: Recursive Transclusion: Fehler im "transclude widget"
 Error/RetrievingSkinny: Fehler beim Empfangen einer "skinny" Tiddler Liste
 Error/SavingToTWEdit: Fehler beim Speichern mit "TWEdit"
@@ -59,13 +60,14 @@ MissingTiddler/Hint: Fehlender Tiddler "<$text text=<<currentTiddler>>/>" - klic
 No: Nein
 OfficialPluginLibrary: Offizielles ~TiddlyWiki Plugin-Verzeichnis
 OfficialPluginLibrary/Hint: Offizielles ~TiddlyWiki Plugin-Verzeichnis auf tiddlywiki.com. Plugin, Themes und Sprach Dateien werden vom "core team" gewartet.
-PluginReloadWarning: Das Wiki muss gespeichert {{$:/core/ui/Buttons/save-wiki}} und neu gladen {{$:/core/ui/Buttons/refresh}} werden, damit die Plugins ausgeführt werden.
+PluginReloadWarning: Das Wiki muss gespeichert {{$:/core/ui/Buttons/save-wiki}} und neu gladen {{$:/core/ui/Buttons/refresh}} werden, damit die ~JavaScript Plugins ausgeführt werden.
 RecentChanges/DateFormat: YYYY MMM DD
 SystemTiddler/Tooltip: Das ist ein System-Tiddler
 SystemTiddlers/Include/Prompt: System-Tiddler einschließen
 TagManager/Colour/Heading: Farbe
 TagManager/Count/Heading: Anzahl
 TagManager/Icon/Heading: Symbol
+TagManager/Icons/None: Keine
 TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
 Tiddler/DateFormat: DDth MMM YYYY um 0hh:0mm

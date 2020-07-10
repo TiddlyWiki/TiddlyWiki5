@@ -38,6 +38,8 @@ Compute the internal state of the widget
 */
 ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 	var widgetPointer = this;
+	// Got to flush all the accumulated variables
+	this.variables = new this.variablesConstructor();
 	// Get our parameters
 	this.filter = this.getAttribute("filter");
 	// Compute the filter
@@ -61,9 +63,23 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 					var widget = widgetPointer.makeChildWidget(node);
 					widget.computeAttributes();
 					widget.execute();
-					$tw.utils.extend(widgetPointer.variables,widget.variables);
+					// We SHALLOW copy over all variables
+					// in widget. We can't use
+					// $tw.utils.assign, because that copies
+					// up the prototype chain, which we
+					// don't want.
+					$tw.utils.each(Object.keys(widget.variables), function(key) {
+						widgetPointer.variables[key] = widget.variables[key];
+					});
 				} else {
-					widgetPointer.makeChildWidgets([node]);
+					widgetPointer.children = [widgetPointer.makeChildWidget(node)];
+					// No more regenerating children for
+					// this widget. If it needs to refresh,
+					// it'll do so along with the the whole
+					// importvariable tree.
+					if (widgetPointer != this) {
+						widgetPointer.makeChildWidgets = function(){};
+					}
 					widgetPointer = widgetPointer.children[0];
 				}
 				parseTreeNode = parseTreeNode.children && parseTreeNode.children[0];

@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The range widget displays an HTML `<input type="range">` that reflects a given tiddler field numeric value. Adjusting the radio button sets the tiddler field to the value.
+The range widget displays an HTML `<input type="range">` that reflects a given tiddler field numeric value. Adjusting the range slider sets the tiddler field to the value.
 
 ! Content and Attributes
 
@@ -15,13 +15,13 @@ The content of the `<$range>` widget is ignored.
 
 |!Attribute |!Description |
 |tiddler |Title of the tiddler to manipulate (defaults to the [[current tiddler|Current Tiddler]]) |
-|field |The field of the //tiddler// bound to the radio button |
+|field |The field of the //tiddler// bound to the range slider|
 |index|<<.from-version "5.1.22">> The index of the //tiddler//, a [[DataTiddler|DataTiddlers]], to which the radio button is bound<<.tip "be sure to set the //tiddler// correctly">> |
 |min |The minimum value to be able to be set by the `<$range>` widget |
 |max |The maximum value to be able to be set by the `<$range>` widget |
 |increment |The minimum amount by which a value may be changed.  Defaults to 1 |
-|default |The default value displayed if the field is missing or empty |
-|class |CSS classes to be assigned to the label around the radio button |
+|default |If the field is missing or empty this is the default position for the widget handle relative to the min and max values.|
+|class |CSS classes to be assigned to the label around the range slider |
 
 ! Examples
 

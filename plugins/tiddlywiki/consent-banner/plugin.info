@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/consent-banner",
+	"name": "Consent Banner",
+	"description": "Consent banner for GDPR etc",
+	"list": "readme docs youtube config"
+}

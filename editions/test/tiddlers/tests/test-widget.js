@@ -504,6 +504,55 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<p>Aval Bval Cval</p>");
 	});
 
+	it("can have more than one macroDef variable imported", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "ABC", text: "<$set name=A value=A>\n\n<$set name=B value=B>\n\n<$set name=C value=C>\n\ndummy text</$set></$set></$set>"},
+			{title: "D", text: "\\define D() D"}]);
+		// A and B shouldn't chew up C just cause it's a macroDef
+		var text = "\\import ABC D\n<<A>> <<B>> <<C>> <<D>>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>A B C D</p>");
+	});
+
+	it("import doesn't hold onto dead variables", function() {
+		var wiki = new  $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "ABC", text: "\\define A() A\n\\define B() B\n<$set name=C value=C>\n\n</$set>"},
+			{title: "DE", text: "\\define D() D\n\\define E() E"}]);
+		var text = "\\import ABC DE\ncontent";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		renderWidgetNode(widgetNode);
+		var childNode = widgetNode;
+		while (childNode.children.length > 0) {
+			childNode = childNode.children[0];
+		}
+		// First make sure A and B imported
+		expect(childNode.getVariable("A")).toBe("A");
+		expect(childNode.getVariable("B")).toBe("B");
+		expect(childNode.getVariable("C")).toBe("C");
+		expect(childNode.getVariable("D")).toBe("D");
+		expect(childNode.getVariable("E")).toBe("E");
+		// Then change A and remove B
+		wiki.addTiddler({title: "ABC", text: "\\define A() A2\n<$set name=C value=C2>\n\n</$set>"});
+		wiki.addTiddler({title: "DE", text: "\\define D() D2"});
+		widgetNode.refresh({"ABC": {modified: true}, "DE": {modified: true}});
+		var childNode = widgetNode;
+		while (childNode.children.length > 0) {
+			childNode = childNode.children[0];
+		}
+		// Make sure \import recognized changes and deletions
+		expect(childNode.getVariable("A")).toBe("A2");
+		expect(childNode.getVariable("B")).toBe(undefined);
+		expect(childNode.getVariable("C")).toBe("C2");
+		expect(childNode.getVariable("D")).toBe("D2");
+		expect(childNode.getVariable("E")).toBe(undefined);
+	});
+
 	/** Special case. <$importvariables> has different handling if
 	 *  it doesn't end up importing any variables. Make sure it
 	 *  doesn't forget its childrenNodes.
@@ -516,6 +565,38 @@ describe("Widget module", function() {
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
 		expect(wrapper.innerHTML).toBe("<p>Don't forget me.</p>");
+	});
+
+	/** This test reproduces issue #4504.
+	 *
+	 * The importvariable widget was creating redundant copies into
+	 * itself of variables in widgets higher up in the tree. Normally,
+	 * this caused no errors, but it would mess up qualify-macros.
+	 * They would find multiple instances of the same transclusion
+	 * variable if a transclusion occured higher up in the widget tree
+	 * than an importvariables AND that importvariables was importing
+	 * at least ONE variable.
+	 */
+	it("adding imported variables doesn't change qualifyers", function() {
+		var wiki = new $tw.Wiki();
+		function wikiparse(text) {
+			var tree = parseText(text,wiki);
+			var widgetNode = createWidgetNode(tree,wiki);
+			var wrapper = renderWidgetNode(widgetNode);
+			return wrapper.innerHTML;
+		};
+		wiki.addTiddlers([
+			{title: "body", text: "\\import A\n<<qualify this>>"},
+			{title: "A", text: "\\define unused() ignored"}
+		]);
+		// This transclude wraps "body", which has an
+		// importvariable widget in it.
+		var withA = wikiparse("{{body}}");
+		wiki.addTiddler({title: "A", text: ""});
+		var withoutA = wikiparse("{{body}}");
+		// Importing two different version of "A" shouldn't cause
+		// the <<qualify>> widget to spit out something different.
+		expect(withA).toBe(withoutA);
 	});
 });
 

@@ -69,7 +69,7 @@ Command.prototype.execute = function() {
 		// Collect the skinny list data
 		var pluginTiddlers = JSON.parse(tiddler.text),
 			readmeContent = (pluginTiddlers.tiddlers[title + "/readme"] || {}).text,
-			doesRequireReload = !!$tw.wiki.doesPluginInfoRequireReload(pluginTiddlers),
+			doesRequireReload = !!self.commander.wiki.doesPluginInfoRequireReload(pluginTiddlers),
 			iconTiddler = pluginTiddlers.tiddlers[title + "/icon"] || {},
 			iconType = iconTiddler.type,
 			iconText = iconTiddler.text,

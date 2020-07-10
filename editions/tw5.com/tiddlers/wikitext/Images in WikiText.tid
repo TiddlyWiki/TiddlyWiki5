@@ -51,3 +51,16 @@ Renders as:
 
 {{Motovun Jack.jpg}}
 
+! Images as Links
+```
+<$link to="HelloThere" tooltip="Custom tooltip">{{$:/core/icon}}</$link>
+```
+
+Renders as:
+
+<$link to="HelloThere" tooltip="Custom tooltip">{{$:/core/icon}}</$link>
+
+! Importing Images
+
+Use the <<.button import>> button (under the <<.sidebar-tab Tools>> tab in the sidebar), or drag and drop.
+See [[ImportingTiddlers]] for details.

@@ -5,6 +5,7 @@
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/railroad",
 		"tiddlywiki/evernote",
+		"tiddlywiki/internals",
 		"tiddlywiki/menubar"
 	],
 	"themes": [

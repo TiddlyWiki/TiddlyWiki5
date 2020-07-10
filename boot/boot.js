@@ -409,10 +409,10 @@ $tw.utils.resolvePath = function(sourcepath,rootpath) {
 };
 
 /*
-Parse a semantic version string into its constituent parts
+Parse a semantic version string into its constituent parts -- see https://semver.org
 */
 $tw.utils.parseVersion = function(version) {
-	var match = /^((\d+)\.(\d+)\.(\d+))(?:-([\dA-Za-z\-]+(?:\.[\dA-Za-z\-]+)*))?(?:\+([\dA-Za-z\-]+(?:\.[\dA-Za-z\-]+)*))?$/.exec(version);
+	var match = /^v?((\d+)\.(\d+)\.(\d+))(?:-([\dA-Za-z\-]+(?:\.[\dA-Za-z\-]+)*))?(?:\+([\dA-Za-z\-]+(?:\.[\dA-Za-z\-]+)*))?$/.exec(version);
 	if(match) {
 		return {
 			version: match[1],
@@ -428,24 +428,36 @@ $tw.utils.parseVersion = function(version) {
 };
 
 /*
+Returns +1 if the version string A is greater than the version string B, 0 if they are the same, and +1 if B is greater than A.
+Missing or malformed version strings are parsed as 0.0.0
+*/
+$tw.utils.compareVersions = function(versionStringA,versionStringB) {
+	var defaultVersion = {
+			major: 0,
+			minor: 0,
+			patch: 0
+		},
+		versionA = $tw.utils.parseVersion(versionStringA) || defaultVersion,
+		versionB = $tw.utils.parseVersion(versionStringB) || defaultVersion,
+		diff = [
+			versionA.major - versionB.major,
+			versionA.minor - versionB.minor,
+			versionA.patch - versionB.patch
+		];
+	if((diff[0] > 0) || (diff[0] === 0 && diff[1] > 0) || (diff[0] === 0 & diff[1] === 0 & diff[2] > 0)) {
+		return +1;
+	} else if((diff[0] < 0) || (diff[0] === 0 && diff[1] < 0) || (diff[0] === 0 & diff[1] === 0 & diff[2] < 0)) {
+		return -1;
+	} else {
+		return 0;
+	}
+};
+
+/*
 Returns true if the version string A is greater than the version string B. Returns true if the versions are the same
 */
 $tw.utils.checkVersions = function(versionStringA,versionStringB) {
-	var defaultVersion = {
-		major: 0,
-		minor: 0,
-		patch: 0
-	},
-	versionA = $tw.utils.parseVersion(versionStringA) || defaultVersion,
-	versionB = $tw.utils.parseVersion(versionStringB) || defaultVersion,
-	diff = [
-		versionA.major - versionB.major,
-		versionA.minor - versionB.minor,
-		versionA.patch - versionB.patch
-	];
-	return (diff[0] > 0) ||
-		(diff[0] === 0 && diff[1] > 0) ||
-		(diff[0] === 0 && diff[1] === 0 && diff[2] >= 0);
+	return $tw.utils.compareVersions(versionStringA,versionStringB) !== -1;
 };
 
 /*
@@ -2256,6 +2268,7 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("image/x-icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("application/font-woff","base64",".woff");
 	$tw.utils.registerFileType("application/x-font-ttf","base64",".woff");
+	$tw.utils.registerFileType("application/font-woff2","base64",".woff2");
 	$tw.utils.registerFileType("audio/ogg","base64",".ogg");
 	$tw.utils.registerFileType("video/ogg","base64",[".ogm",".ogv",".ogg"]);
 	$tw.utils.registerFileType("video/webm","base64",".webm");

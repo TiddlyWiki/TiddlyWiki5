@@ -5,7 +5,10 @@ Body/Placeholder: Entrez le texte ici
 Body/Preview/Type/Output: sortie
 Field/Remove/Caption: supprimer le champ
 Field/Remove/Hint: Supprime le champ
+Field/Dropdown/Caption: liste des champs
+Field/Dropdown/Hint: Montre la liste des champs
 Fields/Add/Button: ajouter
+Fields/Add/Button/Hint: Ajoute le nouveau champ au tiddler
 Fields/Add/Name/Placeholder: nom du champ
 Fields/Add/Prompt: Ajouter un nouveau champ :
 Fields/Add/Value/Placeholder: valeur du champ
@@ -14,6 +17,7 @@ Fields/Add/Dropdown/User: Champs utilisateur
 Shadow/OverriddenWarning: Ce tiddler est une version modifiée d'un tiddler « shadow ». Pour revenir à la version par défaut du plugin <<pluginLink>>, il vous suffit de supprimer ce tiddler.
 Shadow/Warning: Ceci est un tiddler « shadow ». Toute modification supplantera la version issue du plugin <<pluginLink>>
 Tags/Add/Button: ajouter
+Tags/Add/Button/Hint: ajoute un tag
 Tags/Add/Placeholder: nom du tag
 Tags/Dropdown/Caption: liste des tags
 Tags/Dropdown/Hint: Montre la liste des tags

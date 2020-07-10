@@ -114,9 +114,9 @@ exports.minall = makeNumericReducingOperator(
 function makeNumericBinaryOperator(fnCalc) {
 	return function(source,operator,options) {
 		var result = [],
-			numOperand = parseNumber(operator.operand);
+			numOperand = $tw.utils.parseNumber(operator.operand);
 		source(function(tiddler,title) {
-			result.push(stringifyNumber(fnCalc(parseNumber(title),numOperand)));
+			result.push($tw.utils.stringifyNumber(fnCalc($tw.utils.parseNumber(title),numOperand)));
 		});
 		return result;
 	};
@@ -129,18 +129,10 @@ function makeNumericReducingOperator(fnCalc,initialValue) {
 		source(function(tiddler,title) {
 			result.push(title);
 		});
-		return [stringifyNumber(result.reduce(function(accumulator,currentValue) {
-			return fnCalc(accumulator,parseNumber(currentValue));
+		return [$tw.utils.stringifyNumber(result.reduce(function(accumulator,currentValue) {
+			return fnCalc(accumulator,$tw.utils.parseNumber(currentValue));
 		},initialValue))];
 	};
-}
-
-function parseNumber(str) {
-	return parseFloat(str) || 0;
-}
-
-function stringifyNumber(num) {
-	return num + "";
 }
 
 })();

@@ -6,7 +6,7 @@ tags: $:/tags/PageTemplate
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]]">
 <$list filter="[<currentTiddler>addprefix[$:/config/plugins/menubar/MenuItems/Visibility/]get[text]] ~show +[match[show]]" variable="ignore">
 <$list filter="[[$size$]match[wide]] ~[<currentTiddler>get[show-when]match[$size$]] ~[{$:/state/popup/menubar/hamburger}match[yes]]" variable="ignore">
-<li style={{!!custom-menu-styles}} class={{{ [<currentTiddler>get[show-when]addprefix[tc-menubar-]] tc-menubar-item +[join[ ]] }}}>
+<li style={{!!custom-menu-styles-$size$}} class={{{ [<currentTiddler>get[show-when]addprefix[tc-menubar-]] tc-menubar-item +[join[ ]] }}}>
 <$list filter="[<currentTiddler>!is-dropdown[yes]]" variable="listItem" emptyMessage="""
 	<!-- Dropdown -->
 	<$set name="dropdown-state" value=<<qualify "$:/state/popup/topmenu/dropdown/">>>

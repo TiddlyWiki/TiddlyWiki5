@@ -8,7 +8,7 @@ tags: $:/tags/MenuBar
 
 <span style="margin: 0 0.5em;">
 
-<$edit-text tiddler=<<searchTiddler>> tag="input" type="search" focusPopup="$:/state/popup/menubar-search-dropdown" class="tc-popup-handle tc-menu-show-when-wide" placeholder="Search..." default=""/>
+<$edit-text tiddler=<<searchTiddler>> tag="input" type="search" focusPopup="$:/state/popup/menubar-search-dropdown" class="tc-popup-handle tc-menu-show-when-wide" placeholder="Search..." default="" cancelPopups="yes"/>
 
 </span>
 

@@ -25,6 +25,9 @@ The content of the `<$fields>` widget is ignored.
 |tiddler |Title of the tiddler from which the fields are to be displayed (defaults to the [[current tiddler|Current Tiddler]]) |
 |template |Text of the template (see above) |
 |exclude |Lists of fields to be excluded (defaults to "text") |
+|include |Lists of fields to be included, if the field exists. This parameter takes precedence over "exclude" |
+|sort |Sorts the fields by name (defaults to "yes"). Set to "no", if "include" order should be retained! |
+|sortReverse |Reverses the sort order|
 |stripTitlePrefix |If set to "yes" then curly bracketed prefixes are removed from titles (for example `{prefix}HelloThere` converts to `HelloThere`) |
 
 The `stripTitlePrefix` attribute is used when building TiddlyWiki Classic; see `editions/tw2` in the TiddlyWiki5 repo.

@@ -1,9 +1,0 @@
-created: 20200315143638556
-modified: 20200315143638556
-tags: [[Hidden Settings]]
-title: Hidden Setting: Disable Page Dropzone
-type: text/vnd.tiddlywiki
-
-To disable the main DropzoneWidget, set the following tiddler to "no":
-
-$:/config/PageDropzone/Enable

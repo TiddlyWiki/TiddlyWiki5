@@ -128,7 +128,7 @@ exports.startup = function() {
 	// Set up the syncer object if we've got a syncadaptor
 	if($tw.syncadaptor) {
 		$tw.syncer = new $tw.Syncer({wiki: $tw.wiki, syncadaptor: $tw.syncadaptor});
-	} 
+	}
 	// Setup the saver handler
 	$tw.saverHandler = new $tw.SaverHandler({
 		wiki: $tw.wiki,

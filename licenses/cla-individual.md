@@ -370,6 +370,36 @@ Stefan Schuster-Teupke, @StefanSTFG, 2019/08/26
 
 Nils-Hero Lindemann, @heronils, 2019/08/26
 
+Marica Odagaki, @ento, 2019/08/30
+
 Mark Stegeman, @markstegeman, 2019/08/31
 
+Mohammad Rahmani, @kookma, 2019/09/03
+
 Jan-Oliver Kaiser, @janno, 2019/09/06
+
+Xavier Maysonnave, @xmaysonnave, 2019/11/08
+
+Will Atwood Mitchell, @wam, 2019/12/11
+
+Stefan Krüger, @s-light, 2020/01/04
+
+Lee Sheng Long, @s-l-lee, 2020/01/25
+
+Scott Willeke, @activescott, 2020/02/01
+
+@lucible, 2020/02/05
+
+Matthias Bilger, @m42e, 2020/03/11
+
+Mandar Vaze, @mandarvaze, 2020/04/08
+
+Lin Dongwu, @linonetwo, 2020/04/15
+
+Tobias Hermann, @idotobi, 2020/04/19 
+
+Nicolas Petton, @NicolasPetton, 2020/04/30
+
+Csaba Molnar, @mocsa, 2020/04/29
+
+Jonas Passerini, @passuf, 2020/05/14
