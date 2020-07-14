@@ -5,7 +5,13 @@ background-color: $(swatchColour)$;
 \end
 \define swatch()
 <$set name="swatchColour" value={{##$(colour)$}}
-><div class="tc-swatch" style=<<swatchStyle>> title=<<colour>>/></$set>
+><$list filter="[<swatchColour>!prefix[<<colour ]!suffix[>>]]">
+<div class="tc-swatch" style=<<swatchStyle>> title=<<colour>>/>
+</$list>
+<$list filter="[<swatchColour>prefix[<<colour ]suffix[>>]removeprefix[<<colour ]removesuffix[>>]]" variable="colour">
+<<swatch>>
+</$list>
+</$set>
 \end
 <div class="tc-swatches-horiz"><$list filter="
 foreground
