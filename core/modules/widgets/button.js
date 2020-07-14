@@ -91,7 +91,8 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 			handled = true;
 		}
 		if(self.actions) {
-			self.invokeActionString(self.actions,self,event);
+			var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+			self.invokeActionString(self.actions,self,event,{modifier: modifierKey});
 		}
 		if(handled) {
 			event.preventDefault();
