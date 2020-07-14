@@ -32,6 +32,8 @@ The content of the `<$edit-text>` widget is ignored.
 |minHeight |Minimum height for automatically resized `textarea` editors, specified in CSS length units such as "px", "em" or "%" |
 |rows|Sets the rows attribute of a generated textarea |
 |cancelPopups |<<.from-version "5.1.23">> if set to "yes", cancels all popups when the input gets focus |
+|inputActions |<<.from-version 5.1.23>> Optional actions that are triggered every time an input event occurs within the input field or textarea |
+|refreshTitle |<<.from-version 5.1.23>> An optional tiddler title that makes the input field update whenever the specified tiddler changes |
 
 ! Notes
 

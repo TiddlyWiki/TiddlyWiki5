@@ -1,0 +1,19 @@
+title: $:/config/plugins/tiddlywiki/consent-banner/blocked-raw-message
+
+<div class="tc-blocked-embedded-content" style="width:100%;">
+
+<div class="tc-blocked-embedded-content-inner">
+
+<div class="tc-blocked-embedded-content-inner-inner">
+
+Blocked raw content
+
+<hr/>
+
+{{$:/plugins/tiddlywiki/consent-banner/buttons/accept}} cookies to unblock
+
+</div>
+
+</div>
+
+</div>
