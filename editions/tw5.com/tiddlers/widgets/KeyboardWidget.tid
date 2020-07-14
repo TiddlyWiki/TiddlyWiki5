@@ -25,6 +25,15 @@ The content of the `<$keyboard>` widget is rendered normally. The keyboard short
 
 Key strings are made up of one or more key specifiers separated by spaces. Each key specifier is zero or more of the modifiers <kbd>alt</kbd>, <kbd>shift</kbd>, <kbd>ctrl</kbd> or <kbd>meta</kbd> followed by the name of a key, all joined with "+" plus or "-" minus symbols. Key names are either the letter or digit printed on the key (eg "a" or "1"), or one of the special keys <kbd>backspace</kbd>, <kbd>tab</kbd>, <kbd>enter</kbd> or <kbd>escape</kbd>.
 
+<$railroad text="""
+[: {
+   ("alt" | "shift" | "ctrl" |: "meta" ) +("+" | "-") 
+	 }
+	 "+" 
+]
+( "<a-z,0-9>" | "backspace" |: "tab" | "enter" | "escape" )
+"""/>
+
 For example:
 
 ```

@@ -23,7 +23,7 @@ description: {{$:/language/Buttons/NewJournalHere/Hint}}
 </$button>
 \end
 <$set name="journalTitleTemplate" value={{$:/config/NewJournal/Title}}>
-<$set name="journalTags" value={{$:/config/NewJournal/Tags!!tags}}>
+<$set name="journalTags" value={{$:/config/NewJournal/Tags}}>
 <$set name="currentTiddlerTag" value=<<currentTiddler>>>
 <<journalButton>>
 </$set>

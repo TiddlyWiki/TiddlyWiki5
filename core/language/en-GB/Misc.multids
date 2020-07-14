@@ -62,6 +62,11 @@ OfficialPluginLibrary: Official ~TiddlyWiki Plugin Library
 OfficialPluginLibrary/Hint: The official ~TiddlyWiki plugin library at tiddlywiki.com. Plugins, themes and language packs are maintained by the core team.
 PluginReloadWarning: Please save {{$:/core/ui/Buttons/save-wiki}} and reload {{$:/core/ui/Buttons/refresh}} to allow changes to ~JavaScript plugins to take effect
 RecentChanges/DateFormat: DDth MMM YYYY
+Shortcuts/Input/Accept/Hint: Accept the selected item
+Shortcuts/Input/AcceptVariant/Hint: Accept the selected item (variant)
+Shortcuts/Input/Cancel/Hint: Clear the input field
+Shortcuts/Input/Down/Hint: Select the next item
+Shortcuts/Input/Up/Hint: Select the previous item
 SystemTiddler/Tooltip: This is a system tiddler
 SystemTiddlers/Include/Prompt: Include system tiddlers
 TagManager/Colour/Heading: Colour

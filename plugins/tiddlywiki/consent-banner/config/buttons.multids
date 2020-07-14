@@ -1,0 +1,8 @@
+title: $:/config/plugins/tiddlywiki/consent-banner/buttons/
+
+accept/caption: Accept
+accept/hint: Accept cookies
+clear/caption: Clear
+clear/hint: Clear cookies
+decline/caption: Decline
+decline/hint: Decline cookies
