@@ -24,7 +24,9 @@
     "wiki"
   ],
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "nexe": "^3.3.7"
+  },
   "bundleDependencies": [],
   "license": "BSD",
   "engines": {
