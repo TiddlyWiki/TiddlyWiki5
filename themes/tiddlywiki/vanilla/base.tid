@@ -198,6 +198,13 @@ input[type="checkbox"] {
   vertical-align: middle;
 }
 
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+	-webkit-appearance:none;
+}
+
 .tc-muted {
 	color: <<colour muted-foreground>>;
 }
@@ -658,6 +665,10 @@ button svg.tc-image-button, button .tc-image-button img {
 	vertical-align: baseline;
 }
 
+.tc-block-tags-dropdown > .tc-btn-invisible:hover {
+	background-color: <<colour primary>>;
+}
+
 button.tc-tag-label, span.tc-tag-label {
 	display: inline-block;
 	padding: 0.16em 0.7em;
@@ -711,6 +722,12 @@ button.tc-untagged-label {
 
 button.tc-btn-invisible.tc-remove-tag-button {
 	outline: none;
+}
+
+.tc-tag-button-selected,
+.tc-list-item-selected a.tc-tiddlylink {
+	background-color: <<colour primary>>;
+	color: <<colour tiddler-background>>;
 }
 
 /*
