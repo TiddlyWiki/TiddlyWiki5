@@ -665,6 +665,10 @@ button svg.tc-image-button, button .tc-image-button img {
 	vertical-align: baseline;
 }
 
+.tc-block-tags-dropdown > .tc-btn-invisible:hover {
+	background-color: <<colour primary>>;
+}
+
 button.tc-tag-label, span.tc-tag-label {
 	display: inline-block;
 	padding: 0.16em 0.7em;
