@@ -8,7 +8,7 @@ background-color: $(swatchColour)$;
 ><$list filter="[<swatchColour>!prefix[<<colour ]!suffix[>>]]">
 <div class="tc-swatch" style=<<swatchStyle>> title=<<colour>>/>
 </$list>
-<$list filter="[<swatchColour>prefix[<<colour ]suffix[>>]removeprefix[<<colour ]removesuffix[>>]]" variable="colour">
+<$list filter="[<swatchColour>prefix[<<colour ]suffix[>>]removeprefix[<<colour ]removesuffix[>>]trim[]]" variable="colour">
 <<swatch>>
 </$list>
 </$set>
