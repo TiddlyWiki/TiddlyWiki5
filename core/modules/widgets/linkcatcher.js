@@ -87,7 +87,8 @@ LinkCatcherWidget.prototype.handleNavigateEvent = function(event) {
 		}
 		if(this.catchActions) {
 			this.executingActions = true;
-			this.invokeActionString(this.catchActions,this,event,{navigateTo: event.navigateTo});
+			var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+			this.invokeActionString(this.catchActions,this,event,{navigateTo: event.navigateTo, modifier: modifierKey});
 			this.executingActions = false;
 		}
 	} else {
