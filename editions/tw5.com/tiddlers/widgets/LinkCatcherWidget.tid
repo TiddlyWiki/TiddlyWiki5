@@ -23,5 +23,5 @@ The content of the `<$linkcatcher>` widget is displayed normally.
 |message |Optional identifier for a [[widget message|Messages]] to be sent when a navigation is caught  |
 |set |Optional title of the tiddler to be set to a specified value when navigation occurs |
 |setTo |Value to be assigned by the `set` attribute |
-|actions |Actions to be performed when a link is caught. Within the action string, the variable "navigateTo" contains the title of the tiddler being navigated |
+|actions |Actions to be performed when a link is caught. Within the action string, the variable "navigateTo" contains the title of the tiddler being navigated. <<.from-version "5.1.23">> the <<.def "modifier">> variable lists the modifier keys that are pressed when the action is invoked. The possible modifiers are ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' and ''ctrl-alt-shift'' |
 
