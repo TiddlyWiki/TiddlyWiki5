@@ -1431,7 +1431,7 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-edit-field-add-value {
 	display: inline-block;
-	width: 40%;
+	width: 35%;
 }
 
 .tc-edit-field-add-button {
