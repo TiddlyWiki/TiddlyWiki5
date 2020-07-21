@@ -4,7 +4,7 @@ tags: Features
 title: InfoPanel
 type: text/vnd.tiddlywiki
 
-Each tiddler has a panel of additional information. To reveal it, click the {{$:/core/images/down-arrow}} button in the tiddler's toolbar and then choose {{$:/core/images/info-button}} ''info'' from the dropdown list.
+Each tiddler has a panel of additional information. To reveal it, click the <<.icon $:/core/images/down-arrow>> button in the tiddler's toolbar and then choose <<.icon $:/core/images/info-button>> ''info'' from the dropdown list.
 
 The info panel has the following tabs:
 

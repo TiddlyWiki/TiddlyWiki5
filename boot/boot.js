@@ -317,7 +317,7 @@ $tw.utils.stringifyList = function(value) {
 		var result = new Array(value.length);
 		for(var t=0, l=value.length; t<l; t++) {
 			var entry = value[t] || "";
-			if(entry.indexOf(" ") !== -1 || "+-~=".indexOf(entry[0]) !== -1) {
+			if(entry.indexOf(" ") !== -1) {
 				result[t] = "[[" + entry + "]]";
 			} else {
 				result[t] = entry;
@@ -409,10 +409,10 @@ $tw.utils.resolvePath = function(sourcepath,rootpath) {
 };
 
 /*
-Parse a semantic version string into its constituent parts
+Parse a semantic version string into its constituent parts -- see https://semver.org
 */
 $tw.utils.parseVersion = function(version) {
-	var match = /^((\d+)\.(\d+)\.(\d+))(?:-([\dA-Za-z\-]+(?:\.[\dA-Za-z\-]+)*))?(?:\+([\dA-Za-z\-]+(?:\.[\dA-Za-z\-]+)*))?$/.exec(version);
+	var match = /^v?((\d+)\.(\d+)\.(\d+))(?:-([\dA-Za-z\-]+(?:\.[\dA-Za-z\-]+)*))?(?:\+([\dA-Za-z\-]+(?:\.[\dA-Za-z\-]+)*))?$/.exec(version);
 	if(match) {
 		return {
 			version: match[1],
@@ -428,24 +428,36 @@ $tw.utils.parseVersion = function(version) {
 };
 
 /*
+Returns +1 if the version string A is greater than the version string B, 0 if they are the same, and +1 if B is greater than A.
+Missing or malformed version strings are parsed as 0.0.0
+*/
+$tw.utils.compareVersions = function(versionStringA,versionStringB) {
+	var defaultVersion = {
+			major: 0,
+			minor: 0,
+			patch: 0
+		},
+		versionA = $tw.utils.parseVersion(versionStringA) || defaultVersion,
+		versionB = $tw.utils.parseVersion(versionStringB) || defaultVersion,
+		diff = [
+			versionA.major - versionB.major,
+			versionA.minor - versionB.minor,
+			versionA.patch - versionB.patch
+		];
+	if((diff[0] > 0) || (diff[0] === 0 && diff[1] > 0) || (diff[0] === 0 & diff[1] === 0 & diff[2] > 0)) {
+		return +1;
+	} else if((diff[0] < 0) || (diff[0] === 0 && diff[1] < 0) || (diff[0] === 0 & diff[1] === 0 & diff[2] < 0)) {
+		return -1;
+	} else {
+		return 0;
+	}
+};
+
+/*
 Returns true if the version string A is greater than the version string B. Returns true if the versions are the same
 */
 $tw.utils.checkVersions = function(versionStringA,versionStringB) {
-	var defaultVersion = {
-		major: 0,
-		minor: 0,
-		patch: 0
-	},
-	versionA = $tw.utils.parseVersion(versionStringA) || defaultVersion,
-	versionB = $tw.utils.parseVersion(versionStringB) || defaultVersion,
-	diff = [
-		versionA.major - versionB.major,
-		versionA.minor - versionB.minor,
-		versionA.patch - versionB.patch
-	];
-	return (diff[0] > 0) ||
-		(diff[0] === 0 && diff[1] > 0) ||
-		(diff[0] === 0 && diff[1] === 0 && diff[2] >= 0);
+	return $tw.utils.compareVersions(versionStringA,versionStringB) !== -1;
 };
 
 /*
@@ -1237,15 +1249,39 @@ $tw.Wiki = function(options) {
 		return null;
 	};
 
-	// Read plugin info for all plugins
-	this.readPluginInfo = function() {
-		for(var title in tiddlers) {
-			var tiddler = tiddlers[title];
-			if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type")) {
-				pluginInfo[tiddler.fields.title] = JSON.parse(tiddler.fields.text);
+	// Get an array of all the currently recognised plugin types
+	this.getPluginTypes = function() {
+		var types = [];
+		$tw.utils.each(pluginTiddlers,function(pluginTiddler) {
+			var pluginType = pluginTiddler.fields["plugin-type"];
+			if(pluginType && types.indexOf(pluginType) === -1) {
+				types.push(pluginType);
 			}
+		});
+		return types;
+	};
 
-		}
+	// Read plugin info for all plugins, or just an array of titles. Returns the number of plugins updated or deleted
+	this.readPluginInfo = function(titles) {
+		var results = {
+			modifiedPlugins: [],
+			deletedPlugins: []
+		};
+		$tw.utils.each(titles || getTiddlerTitles(),function(title) {
+			var tiddler = tiddlers[title];
+			if(tiddler) {
+				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type")) {
+					pluginInfo[tiddler.fields.title] = JSON.parse(tiddler.fields.text);
+					results.modifiedPlugins.push(tiddler.fields.title);
+				}
+			} else {
+				if(pluginInfo[title]) {
+					delete pluginInfo[title];					
+					results.deletedPlugins.push(title);
+				}
+			}
+		});
+		return results;
 	};
 
 	// Get plugin info for a plugin
@@ -1253,14 +1289,15 @@ $tw.Wiki = function(options) {
 		return pluginInfo[title];
 	};
 
-	// Register the plugin tiddlers of a particular type, optionally restricting registration to an array of tiddler titles. Return the array of titles affected
+	// Register the plugin tiddlers of a particular type, or null/undefined for any type, optionally restricting registration to an array of tiddler titles. Return the array of titles affected
 	this.registerPluginTiddlers = function(pluginType,titles) {
 		var self = this,
 			registeredTitles = [],
 			checkTiddler = function(tiddler,title) {
-				if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] === pluginType) {
+				if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] && (!pluginType || tiddler.fields["plugin-type"] === pluginType)) {
 					var disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
 					if(title === "$:/core" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
+						self.unregisterPluginTiddlers(null,[title]); // Unregister the plugin if it's already registered
 						pluginTiddlers.push(tiddler);
 						registeredTitles.push(tiddler.fields.title);
 					}
@@ -1278,19 +1315,19 @@ $tw.Wiki = function(options) {
 		return registeredTitles;
 	};
 
-	// Unregister the plugin tiddlers of a particular type, returning an array of the titles affected
-	this.unregisterPluginTiddlers = function(pluginType) {
+	// Unregister the plugin tiddlers of a particular type, or null/undefined for any type, optionally restricting unregistering to an array of tiddler titles. Returns an array of the titles affected
+	this.unregisterPluginTiddlers = function(pluginType,titles) {
 		var self = this,
-			titles = [];
+			unregisteredTitles = [];
 		// Remove any previous registered plugins of this type
 		for(var t=pluginTiddlers.length-1; t>=0; t--) {
 			var tiddler = pluginTiddlers[t];
-			if(tiddler.fields["plugin-type"] === pluginType) {
-				titles.push(tiddler.fields.title);
+			if(tiddler.fields["plugin-type"] && (!pluginType || tiddler.fields["plugin-type"] === pluginType) && (!titles || titles.indexOf(tiddler.fields.title) !== -1)) {
+				unregisteredTitles.push(tiddler.fields.title);
 				pluginTiddlers.splice(t,1);
 			}
 		}
-		return titles;
+		return unregisteredTitles;
 	};
 
 	// Unpack the currently registered plugins, creating shadow tiddlers for their constituent tiddlers
@@ -2055,9 +2092,9 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		for(var title in $tw.boot.files) {
 			relativePath = path.relative(resolvedWikiPath,$tw.boot.files[title].filepath);
 			output[title] =
-				path.sep === path.posix.sep ?
+				path.sep === "/" ?
 				relativePath :
-				relativePath.split(path.sep).join(path.posix.sep);
+				relativePath.split(path.sep).join("/");
 		}
 		$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
 	}
@@ -2220,6 +2257,7 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("application/json","utf8",".json");
 	$tw.utils.registerFileType("application/pdf","base64",".pdf",{flags:["image"]});
 	$tw.utils.registerFileType("application/zip","base64",".zip");
+	$tw.utils.registerFileType("application/x-zip-compressed","base64",".zip");
 	$tw.utils.registerFileType("image/jpeg","base64",[".jpg",".jpeg"],{flags:["image"]});
 	$tw.utils.registerFileType("image/png","base64",".png",{flags:["image"]});
 	$tw.utils.registerFileType("image/gif","base64",".gif",{flags:["image"]});
@@ -2230,7 +2268,10 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("image/x-icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("application/font-woff","base64",".woff");
 	$tw.utils.registerFileType("application/x-font-ttf","base64",".woff");
+	$tw.utils.registerFileType("application/font-woff2","base64",".woff2");
 	$tw.utils.registerFileType("audio/ogg","base64",".ogg");
+	$tw.utils.registerFileType("video/ogg","base64",[".ogm",".ogv",".ogg"]);
+	$tw.utils.registerFileType("video/webm","base64",".webm");
 	$tw.utils.registerFileType("video/mp4","base64",".mp4");
 	$tw.utils.registerFileType("audio/mp3","base64",".mp3");
 	$tw.utils.registerFileType("audio/mp4","base64",[".mp4",".m4a"]);

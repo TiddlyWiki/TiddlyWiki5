@@ -25,7 +25,7 @@ Options/SidebarLayout: Esquema da barra lateral
 Options/SidebarLayout/Fixed-Fluid: Rol fixo, barra fluida
 Options/SidebarLayout/Fluid-Fixed: Rol fluido, barra lateral fixa
 Options/StickyTitles: Títulos persistentes
-Options/StickyTitles/Hint: Torna as barras de título dos tiddlers sempre visíveis como se ficassem coladas no topo da janela do navegador. Atenção, não funciona de todo com o Chrome, e pode causar problemas de apresentação no Firefox
+Options/StickyTitles/Hint: Torna as barras de título dos tiddlers sempre visíveis como se ficassem coladas no topo da janela do navegador.
 Settings: Definições
 Settings/BackgroundImage: Imagem de fundo da página
 Settings/BackgroundImageAttachment: Anexo de imagem de fundo da página
@@ -36,6 +36,7 @@ Settings/BackgroundImageSize/Auto: Automática
 Settings/BackgroundImageSize/Contain: Conter
 Settings/BackgroundImageSize/Cover: Cobrir
 Settings/CodeFontFamily: Família da fonte de código
+Settings/EditorFontFamily: Família da fonte do editor
 Settings/FontFamily: Família da fonte
 ThemeTweaks: Afinações dos Temas
 ThemeTweaks/Hint: Pode ajustar alguns parâmetros do tema ''Vanilla''.

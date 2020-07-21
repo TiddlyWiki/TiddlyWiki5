@@ -5,7 +5,7 @@ tags: WikiText
 title: Code Blocks in WikiText
 type: text/vnd.tiddlywiki
 
-You can use triple backticks <code>&#96;&#96;&#96;</code> to mark code blocks ({{$:/core/images/mono-block}}):
+You can use triple backticks <code>&#96;&#96;&#96;</code> to mark code blocks (<<.icon $:/core/images/mono-block>>):
 
 <pre>
 &#96;&#96;&#96;
@@ -40,5 +40,5 @@ This will be monospaced
 &#96;&#96;&#96;
 </pre>
 
-Note that some keyboard layouts treat the backtick as a [[dead key|http://en.wikipedia.org/wiki/Dead_key]], making it hard to type. The trick is to type three backticks followed by a space. Alternatively, type all six backticks in one go, then a space, and then move the cursor back three characters to type or paste the content.
+Note that some keyboard layouts treat the backtick as a [[dead key|https://en.wikipedia.org/wiki/Dead_key]], making it hard to type. The trick is to type three backticks followed by a space. Alternatively, type all six backticks in one go, then a space, and then move the cursor back three characters to type or paste the content.
 

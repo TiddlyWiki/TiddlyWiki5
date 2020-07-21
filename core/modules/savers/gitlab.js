@@ -25,7 +25,7 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 		username = this.wiki.getTiddlerText("$:/GitLab/Username"),
 		password = $tw.utils.getPassword("gitlab"),
 		repo = this.wiki.getTiddlerText("$:/GitLab/Repo"),
-		path = this.wiki.getTiddlerText("$:/GitLab/Path"),
+		path = this.wiki.getTiddlerText("$:/GitLab/Path",""),
 		filename = this.wiki.getTiddlerText("$:/GitLab/Filename"),
 		branch = this.wiki.getTiddlerText("$:/GitLab/Branch") || "master",
 		endpoint = this.wiki.getTiddlerText("$:/GitLab/ServerURL") || "https://gitlab.com/api/v4",
@@ -48,12 +48,9 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 	var uri = endpoint + "/projects/" + encodeURIComponent(repo) + "/repository/";
 	// Perform a get request to get the details (inc shas) of files in the same path as our file
 	$tw.utils.httpRequest({
-		url: uri + "tree/" + encodeURIComponent(path.replace(/^\/+|\/$/g, '')),
+		url: uri + "tree/?path=" + encodeURIComponent(path.replace(/^\/+|\/$/g, '')) + "&branch=" + encodeURIComponent(branch.replace(/^\/+|\/$/g, '')),
 		type: "GET",
 		headers: headers,
-		data: {
-			ref: branch
-		},
 		callback: function(err,getResponseDataJson,xhr) {
 			var getResponseData,sha = "";
 			if(err && xhr.status !== 404) {
@@ -71,7 +68,7 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 			}
 			var data = {
 				commit_message: $tw.language.getRawString("ControlPanel/Saving/GitService/CommitMessage"),
-				content: $tw.utils.base64Encode(text),
+				content: text,
 				branch: branch,
 				sha: sha
 			};

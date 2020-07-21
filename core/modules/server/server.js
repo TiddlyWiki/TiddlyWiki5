@@ -16,7 +16,8 @@ if($tw.node) {
 	var util = require("util"),
 		fs = require("fs"),
 		url = require("url"),
-		path = require("path");
+		path = require("path"),
+		querystring = require("querystring");
 }
 
 /*
@@ -30,6 +31,7 @@ function Server(options) {
 	this.routes = options.routes || [];
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
+	this.boot = options.boot || $tw.boot;
 	this.servername = $tw.utils.transliterateToSafeASCII(this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
@@ -68,8 +70,8 @@ function Server(options) {
 		tlsCertFilepath = this.get("tls-cert");
 	if(tlsCertFilepath && tlsKeyFilepath) {
 		this.listenOptions = {
-			key: fs.readFileSync(path.resolve($tw.boot.wikiPath,tlsKeyFilepath),"utf8"),
-			cert: fs.readFileSync(path.resolve($tw.boot.wikiPath,tlsCertFilepath),"utf8")
+			key: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsKeyFilepath),"utf8"),
+			cert: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsCertFilepath),"utf8")
 		};
 		this.protocol = "https";
 	}
@@ -111,15 +113,14 @@ Server.prototype.addAuthenticator = function(AuthenticatorClass) {
 };
 
 Server.prototype.findMatchingRoute = function(request,state) {
-	var pathprefix = this.get("path-prefix") || "";
 	for(var t=0; t<this.routes.length; t++) {
 		var potentialRoute = this.routes[t],
 			pathRegExp = potentialRoute.path,
 			pathname = state.urlInfo.pathname,
 			match;
-		if(pathprefix) {
-			if(pathname.substr(0,pathprefix.length) === pathprefix) {
-				pathname = pathname.substr(pathprefix.length) || "/";
+		if(state.pathPrefix) {
+			if(pathname.substr(0,state.pathPrefix.length) === state.pathPrefix) {
+				pathname = pathname.substr(state.pathPrefix.length) || "/";
 				match = potentialRoute.path.exec(pathname);
 			} else {
 				match = false;
@@ -155,13 +156,17 @@ Server.prototype.isAuthorized = function(authorizationType,username) {
 	return principals.indexOf("(anon)") !== -1 || (username && (principals.indexOf("(authenticated)") !== -1 || principals.indexOf(username) !== -1));
 }
 
-Server.prototype.requestHandler = function(request,response) {
+Server.prototype.requestHandler = function(request,response,options) {
+	options = options || {};
 	// Compose the state object
 	var self = this;
 	var state = {};
-	state.wiki = self.wiki;
+	state.wiki = options.wiki || self.wiki;
+	state.boot = options.boot || self.boot;
 	state.server = self;
 	state.urlInfo = url.parse(request.url);
+	state.queryParameters = querystring.parse(state.urlInfo.query);
+	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
 	// Get the principals authorized to access this resource
 	var authorizationType = this.methodMappings[request.method] || "readers";
 	// Check for the CSRF header if this is a write
@@ -236,6 +241,7 @@ host: optional host address (falls back to value of "host" variable)
 prefix: optional prefix (falls back to value of "path-prefix" variable)
 */
 Server.prototype.listen = function(port,host,prefix) {
+	var self = this;
 	// Handle defaults for port and host
 	port = port || this.get("port");
 	host = host || this.get("host");
@@ -244,19 +250,24 @@ Server.prototype.listen = function(port,host,prefix) {
 	if(parseInt(port,10).toString() !== port) {
 		port = process.env[port] || 8080;
 	}
-	$tw.utils.log("Serving on " + this.protocol + "://" + host + ":" + port + prefix,"brown/orange");
-	$tw.utils.log("(press ctrl-C to exit)","red");
 	// Warn if required plugins are missing
-	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
+	if(!this.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !this.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
 		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
 	}
-	// Listen
+	// Create the server
 	var server;
 	if(this.listenOptions) {
 		server = this.transport.createServer(this.listenOptions,this.requestHandler.bind(this));
 	} else {
 		server = this.transport.createServer(this.requestHandler.bind(this));
 	}
+	// Display the port number after we've started listening (the port number might have been specified as zero, in which case we will get an assigned port)
+	server.on("listening",function() {
+		var address = server.address();
+		$tw.utils.log("Serving on " + self.protocol + "://" + address.address + ":" + address.port + prefix,"brown/orange");
+		$tw.utils.log("(press ctrl-C to exit)","red");
+	});
+	// Listen
 	return server.listen(port,host);
 };
 

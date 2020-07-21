@@ -1,6 +1,7 @@
 title: $:/core/ui/ViewTemplate/title
 tags: $:/tags/ViewTemplate
 
+\whitespace trim
 \define title-styles()
 fill:$(foregroundColor)$;
 \end
@@ -16,7 +17,9 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 <$link>
 <$set name="foregroundColor" value={{!!color}}>
 <span class="tc-tiddler-title-icon" style=<<title-styles>>>
-<$transclude tiddler={{!!icon}}/>
+<$transclude tiddler={{!!icon}}>
+<$transclude tiddler={{$:/config/DefaultTiddlerIcon}}/>
+</$transclude>
 </span>
 </$set>
 <$list filter="[all[current]removeprefix[$:/]]">

@@ -3,6 +3,7 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/new-image-button}} {{$:/language/Buttons/NewImage/Caption}}
 description: {{$:/language/Buttons/NewImage/Hint}}
 
+\whitespace trim
 <$button tooltip={{$:/language/Buttons/NewImage/Hint}} aria-label={{$:/language/Buttons/NewImage/Caption}} class=<<tv-config-toolbar-class>> actions={{$:/core/ui/Actions/new-image}}>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/new-image-button}}

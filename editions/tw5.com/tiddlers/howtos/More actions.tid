@@ -3,4 +3,4 @@ modified: 20160817110101356
 tags: [[Editor toolbar]]
 title: More actions
 
-Pressing {{$:/core/images/down-arrow}} Gives you  a dropdown menu with more editing options.
+Pressing <<.icon $:/core/images/down-arrow>> Gives you  a dropdown menu with more editing options.

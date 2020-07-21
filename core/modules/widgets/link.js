@@ -60,7 +60,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		tag = "a";
 	}
 	// Create our element
-	var domNode = this.document.createElement(tag);
+	var namespace = this.getVariable("namespace",{defaultValue: "http://www.w3.org/1999/xhtml"}),
+		domNode = this.document.createElementNS(namespace,tag);
 	// Assign classes
 	var classes = [];
 	if(this.overrideClasses === undefined) {
@@ -102,7 +103,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	// Override with the value of tv-get-export-link if defined
 	wikiLinkText = this.getVariable("tv-get-export-link",{params: [{name: "to",value: this.to}],defaultValue: wikiLinkText});
 	if(tag === "a") {
-		domNode.setAttribute("href",wikiLinkText);
+		var namespaceHref = (namespace === "http://www.w3.org/2000/svg") ? "http://www.w3.org/1999/xlink" : undefined;
+		domNode.setAttributeNS(namespaceHref,"href",wikiLinkText);
 	}
 	// Set the tabindex
 	if(this.tabIndex) {

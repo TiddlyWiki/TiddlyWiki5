@@ -177,6 +177,9 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editFocusPopup = this.getAttribute("focusPopup");
 		this.editFocus = this.getAttribute("focus");
 		this.editTabIndex = this.getAttribute("tabindex");
+		this.editCancelPopups = this.getAttribute("cancelPopups","") === "yes";
+		this.editInputActions = this.getAttribute("inputActions");
+		this.editRefreshTitle = this.getAttribute("refreshTitle");
 		// Get the default editor element tag and type
 		var tag,type;
 		if(this.editField === "text") {
@@ -208,9 +211,11 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
+		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
 			this.refreshSelf();
 			return true;
+		} else if (changedTiddlers[this.editRefreshTitle]) {
+			this.engine.updateDomNodeText(this.getEditInfo().value);
 		} else if(changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
@@ -246,13 +251,6 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		if(text !== editInfo.value) {
 			editInfo.update(text);
 		}
-	};
-
-	/*
-	Cancel Popups
-	*/
-	EditTextWidget.prototype.cancelPopups = function() {
-		$tw.popup.cancel(0,this.engine.domNode);
 	};
 
 	/*

@@ -1,7 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/sax",
-	"description": "Wrapper for sax.js library by Isaac Z. Schlueter",
+	"name": "sax js",
+	"description": "sax.js library",
 	"author": "Isaac Z. Schlueter",
-	"core-version": ">=5.0.0",
 	"list": "readme license"
 }

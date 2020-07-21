@@ -32,8 +32,17 @@ describe("Utility tests", function() {
 		expect(str(["Tiddler8  "])).toEqual("[[Tiddler8  ]]");
 		expect(str(["A+B", "A-B", "A=B"])).toEqual("A+B A-B A=B");
 		expect(str(["A B"])).toEqual("[[A B]]");
-		expect(str(["+T", "-T", "~T", "=T", "$T"])).toEqual("[[+T]] [[-T]] [[~T]] [[=T]] $T");
+		// Starting special characters aren't treated specially,
+		// even though this makes a list incompatible with a filter parser.
+		expect(str(["+T", "-T", "~T", "=T", "$T"])).toEqual("+T -T ~T =T $T");
 		expect(str(["A", "", "B"])).toEqual("A  B");
+	});
+
+	it("stringifyList shouldn't interfere with setting variables to negative numbers", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddler({title: "test", text: "<$set name=X filter='\"-7\"'>{{{ [<X>add[2]] }}}</$set>"});
+		// X shouldn't be wrapped in brackets. If it is, math filters will treat it as zero.
+		expect(wiki.renderTiddler("text/plain","test")).toBe("-5");
 	});
 
 	it("should handle formatting a date string", function() {
@@ -96,6 +105,30 @@ describe("Utility tests", function() {
 			{ title : 'title', field : 'field##index' }
 		);
 
+	});
+
+	it("should compare versions", function() {
+		var cv = $tw.utils.compareVersions;
+		expect(cv("v0.0.0","v0.0.0")).toEqual(0);
+		expect(cv("0.0.0","v0.0.0")).toEqual(0);
+		expect(cv("v0.0.0","0.0.0")).toEqual(0);
+		expect(cv("v0.0.0","not a version")).toEqual(0);
+		expect(cv("v0.0.0",undefined)).toEqual(0);
+		expect(cv("not a version","v0.0.0")).toEqual(0);
+		expect(cv(undefined,"v0.0.0")).toEqual(0);
+		expect(cv("v1.0.0","v1.0.0")).toEqual(0);
+		expect(cv("v1.0.0","1.0.0")).toEqual(0);
+
+		expect(cv("v1.0.1",undefined)).toEqual(+1);
+		expect(cv("v1.0.1","v1.0.0")).toEqual(+1);
+		expect(cv("v1.1.1","v1.1.0")).toEqual(+1);
+		expect(cv("v1.1.2","v1.1.1")).toEqual(+1);
+		expect(cv("1.1.2","v1.1.1")).toEqual(+1);
+
+		expect(cv("v1.0.0","v1.0.1")).toEqual(-1);
+		expect(cv("v1.1.0","v1.1.1")).toEqual(-1);
+		expect(cv("v1.1.1","v1.1.2")).toEqual(-1);
+		expect(cv("1.1.1","1.1.2")).toEqual(-1);
 	});
 
 });

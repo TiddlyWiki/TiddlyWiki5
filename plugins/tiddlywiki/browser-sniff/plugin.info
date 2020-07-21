@@ -1,7 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/browser-sniff",
-	"description": "Browser sniffing",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
+	"name": "Browser Sniff",
+	"description": "Browser feature detection",
 	"list": "readme usage"
 }

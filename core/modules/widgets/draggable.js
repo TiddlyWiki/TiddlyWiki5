@@ -80,7 +80,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DraggableWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedTiddlers.tag || changedTiddlers["class"]) {
+	if(changedAttributes.tag || changedAttributes["class"]) {
 		this.refreshSelf();
 		return true;
 	}

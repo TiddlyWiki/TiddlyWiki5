@@ -5,7 +5,7 @@ description: {{$:/language/Buttons/NewHere/Hint}}
 
 \whitespace trim
 \define newHereActions()
-<$set name="tags" filter="[<currentTiddler>]">
+<$set name="tags" filter="[<currentTiddler>] [{$:/config/NewTiddler/Tags}]">
 <$action-sendmessage $message="tm-new-tiddler" tags=<<tags>>/>
 </$set>
 \end

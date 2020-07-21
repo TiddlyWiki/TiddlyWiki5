@@ -31,7 +31,7 @@ Click the link to the plugin tiddler to open it. Assuming it doesn't currently e
 |!Field |!Value |
 |''dependents'' |Space separated list of dependent plugins (use square brackets for titles containing spaces) |
 |''description'' |Plugin description |
-|''name'' |Plugin name (only needed for themes) |
+|''name'' |Plugin name |
 |''plugin-type'' |Either "plugin" for a regular plugin, "theme" for a theme, or "language" for a language pack |
 |''type'' |Set to "application/json" |
 |''version'' |Set to the version number of the plugin (eg "0.0.1") |

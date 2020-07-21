@@ -7,12 +7,12 @@ type: text/vnd.tiddlywiki
 When used as a single HTML file, TiddlyWiki5 allows content to be encrypted using the [[Stanford JavaScript Crypto Library]].
 
 # Switch to the ''Tools'' tab in the sidebar and look for the button with a padlock icon
-# If the button is labelled {{$:/core/images/unlocked-padlock}} ''set password'' then the current wiki is not encrypted. Clicking the button will prompt for a password that will be used to encrypt subsequent saves
-# If the button is labelled {{$:/core/images/locked-padlock}} ''clear password'' then the current wiki is already encrypted. Clicking the button will remove the password so that subsequent saves will be unencrypted
+# If the button is labelled <<.icon $:/core/images/unlocked-padlock>> ''set password'' then the current wiki is not encrypted. Clicking the button will prompt for a password that will be used to encrypt subsequent saves
+# If the button is labelled <<.icon $:/core/images/locked-padlock>> ''clear password'' then the current wiki is already encrypted. Clicking the button will remove the password so that subsequent saves will be unencrypted
 # Optionally, open the saved file in a text editor and verify that your data is encrypted
 # Open the file in your browser. You will be prompted for a password before the content is displayed
 
 Note that TiddlyWiki has two other unrelated features concerned with passwords/encryption:
 
-* The ability to set a password when saving to TiddlySpot. This is done in the "Saving" tab of ''control panel'' {{$:/core/images/options-button}}.
+* The ability to set a password when saving to TiddlySpot. This is done in the "Saving" tab of ''control panel'' <<.icon $:/core/images/options-button>>.
 * The ability to use standard HTTP basic authentication with the [[Node.js|TiddlyWiki on Node.js]] server configuration. This is done on the command line with the ServerCommand. Combined with SSL, this gives the same level of transit encryption as you'd get with online services like Google or Dropbox, but there is no encryption of data on disk

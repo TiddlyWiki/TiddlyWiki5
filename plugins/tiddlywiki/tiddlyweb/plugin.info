@@ -1,7 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/tiddlyweb",
-	"description": "TiddlyWeb and TiddlySpace components",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
+	"name": "TiddlyWeb",
+	"description": "Sync changes to TW5 server or TiddlyWeb server",
 	"list": "readme"
 }

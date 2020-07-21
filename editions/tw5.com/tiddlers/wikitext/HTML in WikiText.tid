@@ -85,6 +85,6 @@ Filtered attribute values are indicated with triple curly braces around a [[Filt
 This example shows how to add a prefix to a value:
 
 ```
-<$text text={{{ [<currentTiddler>]addPrefix[$:/myprefix/]] }}}>
+<$text text={{{ [<currentTiddler>addprefix[$:/myprefix/]] }}} />
 ```
 

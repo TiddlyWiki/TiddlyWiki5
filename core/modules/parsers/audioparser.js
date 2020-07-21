@@ -17,7 +17,8 @@ var AudioParser = function(type,text,options) {
 			type: "element",
 			tag: "audio",
 			attributes: {
-				controls: {type: "string", value: "controls"}
+				controls: {type: "string", value: "controls"},
+				style: {type: "string", value: "width: 100%; object-fit: contain"}
 			}
 		},
 		src;

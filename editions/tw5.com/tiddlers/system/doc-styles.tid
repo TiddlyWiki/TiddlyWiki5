@@ -145,6 +145,12 @@ tr.doc-table-subheading {
 	margin-top: 2em;
 }
 
+.doc-icon svg {
+	width: 1em;
+	height: 1em;
+    vertical-align: middle;
+}
+
 .doc-icon-block {
 	border-left: 2px solid <<colour code-border>>;
 	margin-left: 3em;

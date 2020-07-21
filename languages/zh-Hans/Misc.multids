@@ -8,8 +8,8 @@ CloseAll/Button: 全部关闭
 ColourPicker/Recent: 最近︰
 ConfirmCancelTiddler: 您确定要放弃对条目 "<$text text=<<title>>/>" 的更改？
 ConfirmDeleteTiddler: 您确定要删除条目 "<$text text=<<title>>/>"？
-ConfirmOverwriteTiddler: 您确定要覆写条目 "<$text text=<<title>>/>"？
-ConfirmEditShadowTiddler: 您即将要编辑默认条目，任何更改将会覆盖默认的系统，使未来的升级不寻常。您确定要编辑 "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: 您确定要复写条目 "<$text text=<<title>>/>"？
+ConfirmEditShadowTiddler: 您即将要编辑默认条目，任何更改将会复盖默认的系统，使未来的升级不寻常。您确定要编辑 "<$text text=<<title>>/>"?
 Count: 计数
 DefaultNewTiddlerTitle: 新条目
 Diffs/CountMessage: <<diff-count>> 个差异
@@ -28,6 +28,7 @@ Error/Filter: 筛选器错误
 Error/FilterSyntax: 筛选器运算式中的语法错误
 Error/IsFilterOperator: 筛选器错误︰'is' 筛选器运算符的未知操作数
 Error/LoadingPluginLibrary: 加载插件程式库时，发生错误
+Error/NetworkErrorAlert: `<h2>''网络错误''</h2>与服务器的连缐似乎已中断。这可能表示您的网络连缐有问题。请尝试恢复网路连缐才能继续。<br><br>''恢复连缐时，所有未保存的更改，将自动同步''。`
 Error/RecursiveTransclusion: 于 transclude 小部件中的递回嵌入错误
 Error/RetrievingSkinny: 简要条目清单撷取错误
 Error/SavingToTWEdit: 保存到 TWEdit 时，发生错误
@@ -59,13 +60,14 @@ MissingTiddler/Hint: 佚失条目 "<$text text=<<currentTiddler>>/>" - 点击 {{
 No: 否
 OfficialPluginLibrary: ~TiddlyWiki 官方插件程式库
 OfficialPluginLibrary/Hint: 此为在 tiddlywiki.com 的 ~TiddlyWiki 官方插件程式库。由核心团队维护的插件、主题和语言包。
-PluginReloadWarning: 请保存 {{$:/core/ui/Buttons/save-wiki}} 并刷新页面 {{$:/core/ui/Buttons/refresh}} 允许更改插件才能生效
+PluginReloadWarning: 请保存 {{$:/core/ui/Buttons/save-wiki}} 并刷新页面 {{$:/core/ui/Buttons/refresh}} ，使 ~JavaScript 插件的更改生效
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 SystemTiddler/Tooltip: 此为系统条目
 SystemTiddlers/Include/Prompt: 包括系统条目
 TagManager/Colour/Heading: 颜色
 TagManager/Count/Heading: 计数
 TagManager/Icon/Heading: 图标
+TagManager/Icons/None: 无
 TagManager/Info/Heading: 信息
 TagManager/Tag/Heading: 标签
 Tiddler/DateFormat: YYYY年0MM月0DD日 0hh:0mm

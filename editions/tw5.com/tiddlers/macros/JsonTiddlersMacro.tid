@@ -1,5 +1,5 @@
 created: 20150221152226000
-modified: 20150221154213000
+modified: 20200204135513721
 tags: Macros [[Core Macros]]
 title: jsontiddlers Macro
 type: text/vnd.tiddlywiki
@@ -13,3 +13,5 @@ An example can be seen in the [[template tiddler for JSON exports|$:/core/templa
 
 ;filter
 : A [[filter|Filters]] selecting which tiddlers to include
+;spaces
+: An optional number of spaces to use for formatting the JSON. Defaults to 4, with blank or zero resulting in packed JSON with no formatting spaces

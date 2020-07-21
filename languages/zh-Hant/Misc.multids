@@ -28,6 +28,7 @@ Error/Filter: 篩選器錯誤
 Error/FilterSyntax: 篩選器運算式中的語法錯誤
 Error/IsFilterOperator: 篩選器錯誤︰'is' 篩選器運算子的未知運算元
 Error/LoadingPluginLibrary: 載入插件程式庫時，發生錯誤
+Error/NetworkErrorAlert: `<h2>''網路錯誤''</h2>與伺服器的連線似乎已中斷。這可能表示您的網路連線有問題。請嘗試恢復網路連線才能繼續。<br><br>''恢復連線時，所有未儲存的變更，將自動同步''。`
 Error/RecursiveTransclusion: 於 transclude 小工具中的遞迴嵌入錯誤
 Error/RetrievingSkinny: 簡要條目清單擷取錯誤
 Error/SavingToTWEdit: 儲存到 TWEdit 時，發生錯誤
@@ -59,13 +60,14 @@ MissingTiddler/Hint: 佚失條目 "<$text text=<<currentTiddler>>/>" - 點擊 {{
 No: 否
 OfficialPluginLibrary: ~TiddlyWiki 官方插件程式庫
 OfficialPluginLibrary/Hint: 此為在 tiddlywiki.com 的 ~TiddlyWiki 官方插件程式庫。由核心團隊維護的插件、主題和語言包。
-PluginReloadWarning: 請儲存 {{$:/core/ui/Buttons/save-wiki}} 並刷新頁面 {{$:/core/ui/Buttons/refresh}} 允許更改插件才能生效
+PluginReloadWarning: 請儲存 {{$:/core/ui/Buttons/save-wiki}} 並刷新頁面 {{$:/core/ui/Buttons/refresh}} ，使 ~JavaScript 插件的更改生效
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 SystemTiddler/Tooltip: 此為系統條目
 SystemTiddlers/Include/Prompt: 包括系統條目
 TagManager/Colour/Heading: 顏色
 TagManager/Count/Heading: 計數
 TagManager/Icon/Heading: 圖示
+TagManager/Icons/None: 無
 TagManager/Info/Heading: 資訊
 TagManager/Tag/Heading: 標籤
 Tiddler/DateFormat: YYYY年0MM月0DD日 0hh:0mm

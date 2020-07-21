@@ -64,6 +64,10 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this["aria-label"]) {
 		domNode.setAttribute("aria-label",this["aria-label"]);
 	}
+	// Set the tabindex
+	if(this.tabIndex) {
+		domNode.setAttribute("tabindex",this.tabIndex);
+	}	
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
 		var handled = false;
@@ -87,7 +91,8 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 			handled = true;
 		}
 		if(self.actions) {
-			self.invokeActionString(self.actions,self,event);
+			var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+			self.invokeActionString(self.actions,self,event,{modifier: modifierKey});
 		}
 		if(handled) {
 			event.preventDefault();
@@ -205,6 +210,7 @@ ButtonWidget.prototype.execute = function() {
 	this.setField = this.getAttribute("setField");
 	this.setIndex = this.getAttribute("setIndex");
 	this.popupTitle = this.getAttribute("popupTitle");
+	this.tabIndex = this.getAttribute("tabindex");
 	// Make child widgets
 	this.makeChildWidgets();
 };
@@ -214,7 +220,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes["class"] || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle) {
+	if(changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes["class"] || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle) {
 		this.refreshSelf();
 		return true;
 	}

@@ -1,6 +1,6 @@
 caption: browse
 created: 20131024141900000
-modified: 20170718142410367
+modified: 20200421221304177
 tags: Widgets
 title: BrowseWidget
 type: text/vnd.tiddlywiki
@@ -17,7 +17,9 @@ The content of the `<$browse>` widget is ignored.
 |multiple |Set to "multiple" to select multiple file upload |
 |deserializer |<<.from-version "5.1.15">> Optional name of deserializer to be used (by default the deserializer is derived from the file extension or type) |
 |tooltip |Optional tooltip text |
-|message |Optional override of widget message to be generated. The parameter for the message will be the JavaScript object `event.target.files` |
+|accept |<<.from-version "5.1.23">> Optional comma delimited [[list of file accepted extensions|https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers]] and/or MIME types |
+|message |Optional override of widget message to be generated. The files will be passed in the JavaScript object `event.target.files` |
+|param |Optional parameter to be passed with the custom message |
 
 On iPhone/iPad choosing the multiple option will remove the ability to take photographs/videos directly into TiddlyWiki.
 

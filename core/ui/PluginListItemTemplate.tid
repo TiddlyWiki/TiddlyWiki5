@@ -1,9 +1,5 @@
 title: $:/core/ui/PluginListItemTemplate
 
 <div class="tc-menu-list-item">
-<$link to={{!!title}}>
-<$view field="description">
-<$view field="title"/>
-</$view>
-</$link>
+<$link to={{!!title}}><$view field="description"><$view field="title"/></$view></$link>
 </div>

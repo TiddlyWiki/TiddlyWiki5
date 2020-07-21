@@ -13,4 +13,4 @@ Para carregar tiddlers de um ficheiro TiddlyWiki encriptado deve primeiro especi
 tiddlywiki ./MyWiki --password pa55w0rd --load my_encrypted_wiki.html
 ```
 
-A TiddlyWiki não carregará uma versão anterior de um plugin já carregado.
+A TiddlyWiki não carregará uma versão anterior de uma extensão já carregada.

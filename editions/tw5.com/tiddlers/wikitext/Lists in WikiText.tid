@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Bulleted Lists
 
-You can create bulleted (unordered) lists with `*` characters ({{$:/core/images/list-bullet}}):
+You can create bulleted (unordered) lists with `*` characters (<<.icon $:/core/images/list-bullet>>):
 
 <<wikitext-example src:"* First list item
 * Second list item
@@ -17,7 +17,7 @@ You can create bulleted (unordered) lists with `*` characters ({{$:/core/images/
 
 ! Numbered Lists
 
-Numbered (ordered) lists use `#` instead of `*` ({{$:/core/images/list-number}}):
+Numbered (ordered) lists use `#` instead of `*` (<<.icon $:/core/images/list-number>>):
 
 # First item
 # Second item

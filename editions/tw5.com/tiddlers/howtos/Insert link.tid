@@ -5,6 +5,6 @@ title: Insert link
 
 This will give you a dialog to search for and pick existing tiddlers in the wiki. When you pick a tiddler it will be inserted as a WikiText link where the cursor is in the text field.
 
-Pressing {{$:/core/images/link}} will give you `[[Some link]]`
+Pressing <<.icon $:/core/images/link>> will give you `[[Some link]]`
 
 It wil ''not'' insert: external web links or [[picture|Insert picture]] links.

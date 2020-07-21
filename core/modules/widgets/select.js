@@ -96,11 +96,8 @@ SelectWidget.prototype.setSelectValue = function() {
 		var select = this.getSelectDomNode();
 		var values = Array.isArray(value) ? value : $tw.utils.parseStringArray(value);
 		for(var i=0; i < select.children.length; i++){
-			if(values.indexOf(select.children[i].value) != -1) {
-				select.children[i].selected = true;
-			}
+			select.children[i].selected = values.indexOf(select.children[i].value) !== -1
 		}
-		
 	} else {
 		var domNode = this.getSelectDomNode();
 		if(domNode.value !== value) {

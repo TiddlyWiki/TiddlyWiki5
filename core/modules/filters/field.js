@@ -53,7 +53,7 @@ exports.field = function(source,operator,options) {
 				}
 			});
 		} else {
-			if(source.byField) {
+			if(source.byField && operator.operand) {
 				indexedResults = source.byField(fieldname,operator.operand);
 				if(indexedResults) {
 					return indexedResults

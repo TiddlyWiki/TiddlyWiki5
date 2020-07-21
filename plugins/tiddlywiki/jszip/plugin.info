@@ -1,7 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/jszip",
-	"description": "Wrapper for JSZip by Stuart Knightley, David Duponchel, Franz Buchinger, António Afonso",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
-	"list": "readme license"
+	"name": "JSZip",
+	"description": "JSZip library",
+	"author": "Stuart Knightley, David Duponchel, Franz Buchinger, António Afonso",
+	"list": "readme docs examples license"
 }

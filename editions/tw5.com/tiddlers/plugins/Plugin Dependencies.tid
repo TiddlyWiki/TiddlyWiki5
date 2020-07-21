@@ -1,0 +1,13 @@
+created: 20190928081852771
+modified: 20190928082758674
+tags: PluginMechanism
+title: Plugin Dependencies
+type: text/vnd.tiddlywiki
+
+The simplest form of dependency between plugins is that one plugin can declare itself to be a sub-plugin of another plugin by specifying that plugin in the `parent-plugin` [[field|Plugin Fields]]. Sub-plugins are displayed in the control panel plugin chooser within the expandable area of their parent plugin. For example, the official plugin library includes the [[CodeMirror Plugin]] and also more than a dozen sub-plugins that extend the CodeMirror plugin with optional functionality. Note that sub-plugins cannot themselves have further sub-plugins.
+
+Plugins can also use their `dependents` [[field|Plugin Fields]] to list the titles of any other plugins that should also be installed. Note that the list is not resolved recursively: dependents of dependents will not be installed.
+
+When installing a plugin from the plugin library, both the `parent-plugin` and `dependents` fields are used to determine any additional plugins to be installed.
+
+Note that the `dependents` field is also used by the ThemeMechanism and the LanguageMechanism to switch in dependent theme/language plugins.

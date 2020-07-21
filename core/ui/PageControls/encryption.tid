@@ -3,6 +3,7 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/locked-padlock}} {{$:/language/Buttons/Encryption/Caption}}
 description: {{$:/language/Buttons/Encryption/Hint}}
 
+\whitespace trim
 <$reveal type="match" state="$:/isEncrypted" text="yes">
 <$button message="tm-clear-password" tooltip={{$:/language/Buttons/Encryption/ClearPassword/Hint}} aria-label={{$:/language/Buttons/Encryption/ClearPassword/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">

@@ -27,7 +27,7 @@ The content of the `<$view>` widget is displayed if the field or property is mis
 The following formats can be specified in the `format` attribute:
 
 |!Format |!Description |
-|''text'' |Plain text |
+|''text'' |Plain text (default) |
 |''htmlencoded'' |The field is displayed with HTML encoding |
 |''urlencoded'' |The field is displayed with URL encoding |
 |''doubleurlencoded'' |The field is displayed with double URL encoding |
@@ -38,6 +38,10 @@ The following formats can be specified in the `format` attribute:
 |''relativedate'' |The field is interpreted as a UTC date and displayed as the interval from the present instant |
 |''stripcomments'' |The field is interpreted as JavaScript source code and any lines beginning `\\#` are stripped |
 |''jsencoded'' |The field is displayed as a JavaScript encoded string |
+
+!! "WikiText format"
+
+To display the field content as regular WikiText, for example with working links, use the [[TranscludeWidget]] instead. 
 
 ! SubTiddler Access
 

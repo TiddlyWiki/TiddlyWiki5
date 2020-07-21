@@ -4,4 +4,4 @@ tags: Definitions
 title: URI
 type: text/vnd.tiddlywiki
 
-A <<.dlink-ex "URI" "http://en.wikipedia.org/wiki/Uniform_resource_identifier">> (also often known as a <<.def URL>>) is a string of characters used to specify the location of a resource such as a web page.
+A <<.dlink-ex "URI" "https://en.wikipedia.org/wiki/Uniform_resource_identifier">> (also often known as a <<.def URL>>) is a string of characters used to specify the location of a resource such as a web page.

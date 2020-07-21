@@ -7,6 +7,7 @@ Field/Dropdown/Hint: Toon veldenlijst
 Field/Remove/Caption: verwijder veld
 Field/Remove/Hint: Verwijder veld
 Fields/Add/Button: +
+Fields/Add/Button/Hint: Voeg het nieuwe veld aan de tiddler toe
 Fields/Add/Dropdown/System: Systeemvelden
 Fields/Add/Dropdown/User: Gebruikersvelden
 Fields/Add/Name/Placeholder: veldnaam
@@ -15,6 +16,7 @@ Fields/Add/Value/Placeholder: veldwaarde
 Shadow/OverriddenWarning: Dit is een aangepaste schaduwtiddler. Door deze tiddler te verwijderen wordt de standaard schaduwtiddler weer actief
 Shadow/Warning: Dit is een schaduwtiddler. Elke verandering overschrijft de standaardversie
 Tags/Add/Button: +
+Tags/Add/Button/Hint: voeg label toe
 Tags/Add/Placeholder: labelnaam
 Tags/Dropdown/Caption: labellijst
 Tags/Dropdown/Hint: Toon labellijst

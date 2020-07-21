@@ -1,0 +1,19 @@
+title: $:/language/Help/savewikifolder
+description: Slaat een wiki in een nieuwe wiki-folder op
+
+<<.from-version "5.1.20">> Slaat de wiki als een wiki-folder op inclusief tiddlers, plugins en configuratie:
+
+```
+--savewikifolder <wikifolderpath> [<filter>]
+```
+
+* De doel wiki folder moet leeg zijn of niet bestaan
+* Het filter geeft aan welke tiddlers opgeslagen worden. Het filter is optioneel; standaard is `[all[tiddlers]]`
+* Plugins uit de officiële plugin-bibliotheek worden vervangen door referenties naar deze plugins in het `tiddlywiki.info` bestand
+* Andere plugins worden uitgepakt in hun eigen folder
+
+Kan worden gebruikt om een TiddlyWiki HTML-bestand in een wiki-folder om te zetten:
+
+```
+tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder
+```

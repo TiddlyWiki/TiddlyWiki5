@@ -3,7 +3,7 @@ title: $:/language/Docs/PaletteColours/
 alert-background: Fundo de alertas
 alert-border: Margem de alertas
 alert-highlight: Realce de alertas
-alert-muted-foreground: Fundo de alertas silenciados
+alert-muted-foreground: Fundo de alertas suavizados
 background: Fundo geral
 blockquote-bar: Barra de citação
 button-background: Fundo de botão pré-definido
@@ -18,7 +18,7 @@ download-foreground: Primeiro plano do botão de transferências
 dragger-background: Fundo da zona de arrasto
 dragger-foreground: Primeiro plano da zona de arrasto
 dropdown-background: Fundo de menu suspenso
-dropdown-border: Margem de  menu suspenso
+dropdown-border: Margem de menu suspenso
 dropdown-tab-background: Fundo de separador suspenso
 dropdown-tab-background-selected: Fundo para separador suspenso seleccionado
 dropzone-background: Fundo de zona de largada
@@ -38,20 +38,22 @@ modal-border: Margem de modal
 modal-footer-background: Fundo do rodapé modal
 modal-footer-border: Margem do rodapé modal
 modal-header-border: Margem do cabeçalho modal
-muted-foreground: Primeiro plano silenciado geral
+muted-foreground: Primeiro plano suavizado geral
 notification-background: Fundo de notificação
 notification-border: Margem de notificação
 page-background: Fundo de página
 pre-background: Fundo de código pré formatado
 pre-border: Margem de código pré formatado
 primary: Primário geral
+select-tag-background: `<select>` element background
+select-tag-foreground: `<select>` element text
 sidebar-button-foreground: Fundo de botões da barra lateral
 sidebar-controls-foreground: Primeiro plano de controles da barra lateral
 sidebar-controls-foreground-hover: Primeiro plano de controles da barra lateral sob cursor
 sidebar-foreground: Primeiro plano da barra lateral
 sidebar-foreground-shadow: Sombra de primeiro plano da barra lateral
-sidebar-muted-foreground: Primeiro plano silenciado da barra lateral
-sidebar-muted-foreground-hover: Primeiro plano silenciado da barra lateral sob cursor
+sidebar-muted-foreground: Primeiro plano suavizado da barra lateral
+sidebar-muted-foreground-hover: Primeiro plano suavizado da barra lateral sob cursor
 sidebar-tab-background: Fundo de separador da barra lateral
 sidebar-tab-background-selected: Fundo de separador seleccionado da barra lateral
 sidebar-tab-border: Margem de separador da barra lateral
@@ -102,4 +104,4 @@ toolbar-new-button: Botão 'novo tiddler' da barra de ferramentas
 toolbar-options-button: Botão 'opções' da barra de ferramentas
 toolbar-save-button: Botão 'guardar' da barra de ferramentas
 untagged-background: Fundo de cápsula sem etiqueta
-very-muted-foreground: Fundo muito silenciado
+very-muted-foreground: Fundo muito suavizado

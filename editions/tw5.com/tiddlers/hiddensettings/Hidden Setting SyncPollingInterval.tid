@@ -1,0 +1,13 @@
+created: 20190903192324700
+modified: 20190903192324700
+tags: [[Hidden Settings]]
+title: Hidden Setting: Sync Polling Interval
+type: text/vnd.tiddlywiki
+
+Specifies the interval at which [[Syncadaptor|https://tiddlywiki.com/dev/#Syncadaptor]] synchronizes tiddlers between the server and the browser.
+
+Defaults to "60000" (60 * 1000 ms = 1 min).
+
+Changing needs restart to take effect.
+
+$:/config/SyncPollingInterval

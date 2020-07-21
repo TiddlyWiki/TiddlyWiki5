@@ -1,7 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/translators",
+	"name": "Translators",
 	"description": "Translation editing tools",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
 	"list": "readme"
 }

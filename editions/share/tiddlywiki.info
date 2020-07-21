@@ -1,0 +1,14 @@
+{
+	"description": "Sharing tiddlers via URLs",
+	"plugins": [
+		"tiddlywiki/share"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"build": {
+		"share": [
+			"--rendertiddler","$:/core/save/all","share.html","text/plain"]
+	}
+}

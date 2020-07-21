@@ -1,16 +1,24 @@
 title: $:/core/templates/single.tiddler.window
 
-<$set name="themeTitle" value={{$:/view}}>
+\whitespace trim
+\define containerClasses()
+tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
+\end
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
 
-<$set name="tempCurrentTiddler" value=<<currentTiddler>>>
+<$set name="tv-config-toolbar-icons" value={{$:/config/Toolbar/Icons}}>
 
-<$set name="currentTiddler" value={{$:/language}}>
+<$set name="tv-config-toolbar-text" value={{$:/config/Toolbar/Text}}>
 
-<$set name="languageTitle" value={{!!name}}>
+<$set name="tv-config-toolbar-class" value={{$:/config/Toolbar/ButtonClass}}>
 
-<$set name="currentTiddler" value=<<tempCurrentTiddler>>>
+<$set name="tv-show-missing-links" value={{$:/config/MissingLinks}}>
 
-<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
+<$set name="storyviewTitle" value={{$:/view}}>
+
+<$set name="languageTitle" value={{{ [{$:/language}get[name]] }}}>
+
+<div class=<<containerClasses>>>
 
 <$navigator story="$:/StoryList" history="$:/HistoryList">
 
@@ -18,7 +26,7 @@ title: $:/core/templates/single.tiddler.window
 
 </$navigator>
 
-</$importvariables>
+</div>
 
 </$set>
 
@@ -30,3 +38,4 @@ title: $:/core/templates/single.tiddler.window
 
 </$set>
 
+</$set>

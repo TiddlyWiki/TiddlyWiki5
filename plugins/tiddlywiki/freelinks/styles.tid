@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/freelinks/styles
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+button.tc-tiddlylink.tc-freelink, a.tc-tiddlylink.tc-freelink {
+	background-color: #5777d91c;
+}

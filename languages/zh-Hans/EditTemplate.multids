@@ -8,6 +8,7 @@ Field/Remove/Hint: 删除字段
 Field/Dropdown/Caption: 字段列表
 Field/Dropdown/Hint: 显示字段列表
 Fields/Add/Button: 添加
+Fields/Add/Button/Hint: 添加字段至条目
 Fields/Add/Dropdown/System: 系统字段
 Fields/Add/Dropdown/User: 使用者字段
 Fields/Add/Name/Placeholder: 字段名称
@@ -16,6 +17,7 @@ Fields/Add/Value/Placeholder: 字段内容
 Shadow/Warning: 这是一个默认条目。您做的任何更改将会覆盖来自 <<pluginLink>> 插件的默认版本。
 Shadow/OverriddenWarning: 这是一个修改过的默认条目。删除此条目可以还原为 <<pluginLink>> 插件中的默认版本。
 Tags/Add/Button: 添加
+Tags/Add/Button/Hint: 添加标签
 Tags/Add/Placeholder: 标签名称
 Tags/Dropdown/Caption: 标签清单
 Tags/Dropdown/Hint: 显示标签清单

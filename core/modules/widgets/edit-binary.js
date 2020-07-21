@@ -13,6 +13,7 @@ Edit-binary widget; placeholder for editing binary tiddlers
 "use strict";
 
 var BINARY_WARNING_MESSAGE = "$:/core/ui/BinaryWarning";
+var EXPORT_BUTTON_IMAGE = "$:/core/images/export-button";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
@@ -43,13 +44,55 @@ EditBinaryWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 EditBinaryWidget.prototype.execute = function() {
-	// Construct the child widgets
-	this.makeChildWidgets([{
-		type: "transclude",
+	// Get our parameters
+	var editTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
+	var tiddler = this.wiki.getTiddler(editTitle);
+	var type = tiddler.fields.type;
+	var text = tiddler.fields.text;
+	// Transclude the binary data tiddler warning message
+	var warn = {
+		type: "element",
+		tag: "p",
+		children: [{
+			type: "transclude",
+			attributes: {
+				tiddler: {type: "string", value: BINARY_WARNING_MESSAGE}
+			}
+		}]
+	};
+	// Create download link based on draft tiddler title
+	var link = {
+		type: "element",
+		tag: "a",
 		attributes: {
-			tiddler: {type: "string", value: BINARY_WARNING_MESSAGE}
-		}
-	}]);
+			title: {type: "indirect", textReference: "!!draft.title"},
+			download: {type: "indirect", textReference: "!!draft.title"}
+		},
+		children: [{
+		type: "transclude",
+			attributes: {
+				tiddler: {type: "string", value: EXPORT_BUTTON_IMAGE}
+			}
+		}]
+	};
+	// Set the link href to internal data URI (no external)
+	if(text) {
+		link.attributes.href = {
+			type: "string", 
+			value: "data:" + type + ";base64," + text
+		};
+	}
+	// Combine warning message and download link in a div
+	var element = {
+		type: "element",
+		tag: "div",
+		attributes: {
+			class: {type: "string", value: "tc-binary-warning"}
+		},
+		children: [warn, link]
+	}
+	// Construct the child widgets
+	this.makeChildWidgets([element]);
 };
 
 /*

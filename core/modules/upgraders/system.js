@@ -35,17 +35,17 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 			}
 			for(var t=0; t<WARN_IMPORT_PREFIX_LIST.length; t++) {
 				var prefix = WARN_IMPORT_PREFIX_LIST[t];
-				if(title.substr(0,prefix.length) === prefix) {
+				if(title.substr(0,prefix.length) === prefix && wiki.isShadowTiddler(title)) {
 					showAlert = true;
 					messages[title] = $tw.language.getString("Import/Upgrader/System/Warning");
 				}
 			}
 		}
-		if(showAlert) {
-			var logger = new $tw.utils.Logger("import");
-			logger.alert($tw.language.getString("Import/Upgrader/System/Alert"));
-		}
 	});
+	if(showAlert) {
+		var logger = new $tw.utils.Logger("import");
+		logger.alert($tw.language.getString("Import/Upgrader/System/Alert"));
+	}
 	return messages;
 };
 

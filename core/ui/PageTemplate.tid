@@ -12,6 +12,8 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 
 <$set name="tv-config-toolbar-class" value={{$:/config/Toolbar/ButtonClass}}>
 
+<$set name="tv-enable-drag-and-drop" value={{$:/config/DragAndDrop/Enable}}>
+
 <$set name="tv-show-missing-links" value={{$:/config/MissingLinks}}>
 
 <$set name="storyviewTitle" value={{$:/view}}>
@@ -22,7 +24,7 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 
 <$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
 
-<$dropzone>
+<$dropzone enable=<<tv-enable-drag-and-drop>>>
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/PageTemplate]!has[draft.of]]" variable="listItem">
 
@@ -35,6 +37,8 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 </$navigator>
 
 </div>
+
+</$set>
 
 </$set>
 

@@ -1,0 +1,105 @@
+caption: 5.1.23
+created: 20200713174339234
+modified: 20200713174339234
+tags: ReleaseNotes
+title: Release 5.1.23
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.22...master]]//
+
+! Major Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4725]] support for navigating the search and new tag dropdowns via the keyboard. The [[keyboard-driven-input Macro]] can be used to add this capability to other dropdowns.
+
+! New and Improved Plugins
+
+* Consent Banner Plugin
+** [[New|https://github.com/Jermolene/TiddlyWiki5/commit/4a84ed0018df7fd67000404bb5ef8a7ca50509c1]] plugin to help make websites compliant with cookie legislation by displaying a consent banner
+* JSZip Plugin
+** [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6a0ff7db1807f45b73061ced82f5a85f1a529bbf]] ability to dynamically create Zip files, giving TiddlyWiki the ability to build static sites within the browser
+* Freelinks Plugin
+** [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1f354a972e0217e034d1f59d31577c1fd6b186f3]] (and [[here|https://gitxhub.com/Jermolene/TiddlyWiki5/commit/c9692d7a508cfdb0446e67061201961dca64d8dd]]) support for ignoring case when matching titles
+** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/05e6c1bf62cd51df6aa025d0ad07f7959cde6fa0]] bug with autolinking within HTML `<a>` elements
+* Twitter Plugin
+** [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3a20fb1e3a41a032574d227a8c770a11ae0a5d58]] warning if wiki needs to be saved and reloaded
+* [[Dynaview Plugin]]
+** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/b0e40e86413c1769c8be8a84652b66ef6ac8b997]] examples
+* [[CodeMirror Plugin]]
+** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4662]] issue with `e.toggleComment` being undefined with CodeMirror Sublime keymap
+* [[Markdown Plugin]]
+** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4680]] encoding of Markdown image files
+** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/e01b354f7d9e137cb355f7090f5e68661a4ead41]] issue with whitespace and linebraks
+
+! Translation Improvements
+
+* Catalan
+* Chinese
+
+! Performance Improvements
+
+* 
+
+! Usability Improvements
+
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/pull/4590]] Vanilla theme to use palette colours for the [[browser selection outline|https://developer.mozilla.org/en-US/docs/Web/CSS/::selection]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1546a4a1895b93a47b79c9d37b94be039604443a]] warning message about using the online plugin library with the client-server configuration
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/4585]] Gruvbox palette readability of toolbar buttons
+* [[Changed|https://github.com/Jermolene/TiddlyWiki5/commit/9cd5415dfe54b47819920aa3cf6ac2d5e3a9188e]] favicon for the prerelease edition
+
+
+! Hackability Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/4966f6ab625c8ce2c9f0812a726ba928d68ea00b]] new [[slugify Operator]] and [[duplicateslugs Operator]] for generating human readable filenames/URLs
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/619c0752bd3c6e71d1fcdb74daa03cfe8257afe4]] new [[sortsub Operator]] for sorting by a user defined subfilter
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/e71a27ac2d71f2e48f9e4e9156b59bb3ecc2a105]] LinkWidget to work within SVG elements
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c86a621d5d205e1ae0ce999b90ebe09addc45a9f]] ''accept'' attribute to the BrowseWidget
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/77a929faa3a33768e52cf2a34ecbef9c554a6a7b]] ActionPopupWidget to allow popups to be dismissed
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/2a8f7a9c503c9a6e4ea1bcd116be31ab6e90cf52]] [[favicon mechanism|Setting a favicon]] to support ''_canonical_uri'' images
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/48dfadd85b8ebd788b44ed2c46108720742546df]] support for recording the startup timestamp in $:/info/startup-timestamp (see [[InfoMechanism]])
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bf6735420d2f8191f658c556910e7d73c681d5fe]] support for SVG favicons
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/f760a2fa796d57e61307a5ea5274d6cd0b6484c7]] `th-saving-tiddler` hook to include information about the draft tiddler (see https://tiddlywiki.com/dev/#Hook%3A%20th-saving-tiddler)
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4723]] [[WidgetMessage: tm-rename-tiddler]] to control whether relinking occurs
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4741]] [[WidgetMessage: tm-import-tiddlers]] to override the title $:/Import and to better control whether the import tiddler is opened automatically
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4740]] the EditWidget to pass all attributes through to the sub-widget
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/bd2cf5c46498222a32ebda92da3ae50bde33decb]] the internal `<$element>` widget to add a hook so that plugins can intercept DOM node creation
+
+! Bug Fixes
+
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4632]] hover effect for search dropdown items
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4584]] restored missing parameter to `saveTiddler()` method sync adaptors
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/678e25f510786fbc38f505f8b594f57f39e33a04]] MakeLibraryCommand to skip non-directories
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4601]] erroneous use of `$tw.wiki`
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4647]] ''class'' attribute of DroppableWidget
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/6570561d4ec31d9e64c3021bb69c20daec8c9eac]] [[has Operator]] when used with the ''tags'' field
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4634]] high CPU usage with animated syncing icon introduced in v5.1.22
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/4591]] $:/config/NewJournal/Tags appearing in tag dropdowns
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4658]] popups not being cancelled when clicking within a text editor
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4676]] issue with [[timeline Macro]] and invalid date values
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4682]] hover colours of tag dropdowns in the sidebar
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4683]] alignment of tag pill icons
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4696]] crash with droppable widget
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4674]] issue with adding tags in $:/Manager
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4686]] edit template "type" dropdown positioning
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4687]] edit template field dropdown positioning
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4704]] (with [[addendum|https://github.com/Jermolene/TiddlyWiki5/pull/4705]]) syntax error in ScrollableWidget
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4711]] extraneous system tiddlers created during import process
+
+! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* [[@Arlen22|https://github.com/Arlen22]]
+* [[@bimlas|https://github.com/bimlas]]
+* [[@BramChen|https://github.com/BramChen]]
+* [[@BurningTreeC|https://github.com/BurningTreeC]]
+* [[@danielo515|https://github.com/danielo515]]
+* [[@flibbles|https://github.com/flibbles]]
+* [[@ibnishak|https://github.com/ibnishak]]
+* [[@idotobi|https://github.com/idotobi]]
+* [[@Marxsal|https://github.com/Marxsal]]
+* [[@mocsa|https://github.com/mocsa]]
+* [[@NicolasPeton|https://github.com/NicolasPeton]]
+* [[@passuf|https://github.com/passuf]]
+* [[@pmario|https://github.com/pmario]]
+* [[@saqimtias|https://github.com/saqimtias]]
+* [[@twMat|https://github.com/twMat]]

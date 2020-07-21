@@ -1,15 +1,15 @@
 title: $:/plugins/tiddlywiki/markdown/usage
 
-! Markdown Dialects
+! Plugin Configuration
 
-By default the markdown parser recognises the original dialect of Markdown [[as described by John Gruber|http://daringfireball.net/projects/markdown/]]. An extended dialect called "Maruku" is also included that provides table support and other advanced features. The syntax extensions are modelled on those of [[PHP Markdown Extra|https://michelf.ca/projects/php-markdown/extra/]].
-
-The configuration tiddler [[$:/config/markdown/dialect]] determines which dialect is used:
-
-|!Dialect |!Description |
-|Gruber |Standard Markdown |
-|Maruku |Extended Maruku Markdown |
-
+|!Config |!Default |!Description |
+| <code>[[breaks|$:/config/markdown/breaks]]</code>| ``false``|Remarkable library config: Convert '\n' in paragraphs into ``<br>`` |
+| <code>[[linkify|$:/config/markdown/linkify]]</code>| ``false``|Remarkable library config: Autoconvert URL-like text to links |
+| <code>[[linkNewWindow|$:/config/markdown/linkNewWindow]]</code>| ``true``|For external links, should clicking on them open a new window/tab automatically? |
+| <code>[[quotes|$:/config/markdown/quotes]]</code>| ``“”‘’``|Remarkable library config: Double + single quotes replacement pairs, when ``typographer`` enabled |
+| <code>[[renderWikiText|$:/config/markdown/renderWikiText]]</code>| ``true``|After Markdown is parsed, should any text elements be handed off to the ~WikiText parser for further processing? |
+| <code>[[renderWikiTextPragma|$:/config/markdown/renderWikiTextPragma]]</code>| ``\rules only html image macrocallinline syslink transcludeinline wikilink filteredtranscludeblock macrocallblock transcludeblock``|When handing off to the ~WikiText parser, what pragma rules should it follow? |
+| <code>[[typographer|$:/config/markdown/typographer]]</code>| ``false``|Remarkable library config: Enable some language-neutral replacement + quotes beautification |
 
 ! Creating ~WikiLinks
 
@@ -17,6 +17,12 @@ Create wiki links with the usual Markdown link syntax targeting `#` and the targ
 
 ```
 [link text](#TiddlerTitle)
+```
+
+If the target tiddler has a space in its name, that name must be URL-escaped to be detected as a URL:
+
+```
+[link text](#Test%20Tiddler)
 ```
 
 ! Images

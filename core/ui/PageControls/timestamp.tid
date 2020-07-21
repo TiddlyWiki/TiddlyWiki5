@@ -3,6 +3,7 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/timestamp-on}} {{$:/language/Buttons/Timestamp/Caption}}
 description: {{$:/language/Buttons/Timestamp/Hint}}
 
+\whitespace trim
 <$reveal type="nomatch" state="$:/config/TimestampDisable" text="yes">
 <$button tooltip={{$:/language/Buttons/Timestamp/On/Hint}} aria-label={{$:/language/Buttons/Timestamp/On/Caption}} class=<<tv-config-toolbar-class>>>
 <$action-setfield $tiddler="$:/config/TimestampDisable" $value="yes"/>

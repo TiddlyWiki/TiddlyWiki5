@@ -13,7 +13,6 @@ description: Texte de description d'un plugin, ou d'une boîte de dialogue
 draft.of: Pour les tiddlers en cours d'édition, contient le titre du tiddler initial
 draft.title: Pour les tiddlers en cours d'édition, contient le nouveau titre prévu pour le tiddler
 footer: Texte de bas de page dans le cas d'un wizard
-hack-to-give-us-something-to-compare-against: Champ de stockage temporaire utilisé dans [[$:/core/templates/static.content]]
 icon: Titre du tiddler contenant l'icone associée à un tiddler
 library: Avec une valeur à <q>yes</q>,  indique qu'un tiddler doit être sauvegardé comme bibliothèque JavaScript
 list: Liste ordonnée de titres de tiddlers associée à un tiddler
@@ -30,7 +29,9 @@ source: URL source associée à ce tiddler
 subtitle: Texte du sous-titre pour un wizard
 tags: Liste des tags associés à un tiddler
 text: Texte du corps de ce tiddler
+throttle.refresh: Si présent, ralentit les rafraîchissements de ce tiddler
 title: Nom unique du tiddler
 toc-link: Une valeur à ''no'' supprime le lien vers le tiddler dans l'arborescences des tables des matières
 type: Type de contenu du tiddler
 version: S'il s'agit d'un plugin, l'information de version
+_is_skinny: Si présent, indique que le champ //text// du tiddler doit être chargé depuis le serveur

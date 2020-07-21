@@ -29,23 +29,23 @@ exports.removeChildren = function(node) {
 };
 
 exports.hasClass = function(el,className) {
-	return el && el.className && el.className.toString().split(" ").indexOf(className) !== -1;
+	return el && el.hasAttribute && el.hasAttribute("class") && el.getAttribute("class").split(" ").indexOf(className) !== -1;
 };
 
 exports.addClass = function(el,className) {
-	var c = el.className.split(" ");
+	var c = (el.getAttribute("class") || "").split(" ");
 	if(c.indexOf(className) === -1) {
 		c.push(className);
+		el.setAttribute("class",c.join(" "));
 	}
-	el.className = c.join(" ");
 };
 
 exports.removeClass = function(el,className) {
-	var c = el.className.split(" "),
+	var c = (el.getAttribute("class") || "").split(" "),
 		p = c.indexOf(className);
 	if(p !== -1) {
 		c.splice(p,1);
-		el.className = c.join(" ");
+		el.setAttribute("class",c.join(" "));
 	}
 };
 

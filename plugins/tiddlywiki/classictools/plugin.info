@@ -1,7 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/classictools",
-	"description": "TiddlyWiki Classic manipulation tools",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
+	"name": "Classic Tools",
+	"description": "TiddlyWiki Classic tools",
 	"list": "readme"
 }

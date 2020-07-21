@@ -1,30 +1,29 @@
 caption: Quine
+color: #FF8A65
+community-author: Chris Hunt
 created: 20131129101027725
 delivery: App
 description: iPad/iPhone app for working with TiddlyWiki
 method: save
-modified: 20171113105954683
+modified: 20200507104206754
 tags: Saving iOS
 title: Saving on iPad/iPhone
 type: text/vnd.tiddlywiki
 
-The iPad/iPhone app ''Quine'' makes it possible to edit and save changes to TiddlyWiki5, including working offline without a network connection. [[Download it here|https://itunes.apple.com/us/app/quine/id1228682923?mt=8]].
+The iPad/iPhone app ''Quine 2'' makes it possible to view, edit and then save changes to TiddlyWiki5 on iOS. [[Download it here|https://itunes.apple.com/us/app/quine/id1228682923?mt=8]].
 
 Instructions for use:
 
-# Open Quine
-# On iPad
-#* Touch the file button (<) or swipe from the left of the screen to open the file list
-# On iPhone
-#* The file list will show automatically unless a wiki is already open
-# Touch the new file button (+) in the file list window to create a new TiddlyWiki5 file
-# Swipe any file item from the right to see a list of additional "actions" possible for that file
-# Touch any listed file item or folder to open it - wikis will open in Quine's custom browser
-# When you have an open TiddlyWiki5:
-# Try creating a new tiddler using the ''new tiddler'' {{$:/core/images/new-button}} button in the sidebar
-# Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''ok'' button
-# Save your changes by clicking the {{$:/core/images/save-button}} ''save changes'' button in the sidebar
-#* A confirmation message should appear at the top right of the window
-# Touch "Done" when done editing a wiki
+# Open Quine 2
+# Tap the + toolbar button to create and open a new TiddlyWiki
+# From the file list tap an existing TiddlyWiki file to open it
+# Edit the TiddlyWiki as normal, and save as normal using either Autosave or the TiddlyWiki save button <<.icon $:/core/images/save-button>>
+# Tap the left hand "Documents" toolbar button to close an open TiddlyWiki
+
+*Quine 2 works natively in iOS with the local file system and the iCloud file system
+*Quine 2 also allows you to open, edit and save TiddlyWiki files stored with cloud file providers
+*Quine 2 allows you to follow embedded WikiText links and canonical links to external files for cloud-like file providers which support "folder level sharing". 
+**This includes the apps "Secure Shellfish" and "Working Copy". Most providers, though, do not allow apps like Quine 2 to access linked files this way.
+** If you wish to enable such links for "well behaved" file providers, toggle "on" the "Enable folder selection for out-of-sandbox links" setting in iOS Settings for Quine 2
 
 //Note that Quine is published independently of TiddlyWiki//
