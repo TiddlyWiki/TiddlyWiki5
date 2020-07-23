@@ -127,6 +127,27 @@ describe('Backlinks tests', function() {
 			expect(wiki.filterTiddlers('TestIncoming +[backlinks[]]').join(',')).toBe('');
 		});
 	});
+
+	describe('A tiddler that transcludes a tiddler', function() {
+		var wiki = new $tw.Wiki();
+
+		wiki.addTiddler({
+			title: 'TestTranscluded',
+			text: ''});
+
+		wiki.addTiddler({
+			title: 'TestTranscluder',
+			text: 'A transclusion of {{TestTranscluded}}'});
+
+		it('should be in the backlinks of the transcluded tiddler', function() {
+			expect(wiki.filterTiddlers('TestTranscluded +[backlinks[]]').join(',')).toBe('TestTranscluder');
+		});
+
+		it('should have the transcluded tiddler among its links', function() {
+			expect(wiki.filterTiddlers('TestTranscluder +[links[]]').join(',')).toBe('TestTranscluded');
+		});
+	});
+
 });
 
 })();
