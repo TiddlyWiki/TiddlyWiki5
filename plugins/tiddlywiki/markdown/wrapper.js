@@ -139,7 +139,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 						children: children
 					});
 				}
-			})
+			});
 			break;
 
 		case "code":
