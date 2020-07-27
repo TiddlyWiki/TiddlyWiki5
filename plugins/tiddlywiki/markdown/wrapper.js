@@ -115,7 +115,8 @@ function convertNodes(remarkableTree, isStartOfInline) {
 			if (currentNode.href[0] !== "#") {
 				// External link
 				var attributes = {
-					href: { type: "string", value: currentNode.href }
+					href: { type: "string", value: currentNode.href },
+					rel: { type: "string", value: "noopener noreferrer" }
 				};
 				if (pluginOpts.linkNewWindow) {
 					attributes.target = { type: "string", value: "_blank" };
