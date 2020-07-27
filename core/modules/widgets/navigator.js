@@ -273,7 +273,9 @@ NavigatorWidget.prototype.makeDraftTiddler = function(targetTitle) {
 	var tiddler = this.wiki.getTiddler(targetTitle);
 	// Save the initial value of the draft tiddler
 	draftTitle = this.generateDraftTitle(targetTitle);
-	var draftTiddler = new $tw.Tiddler(
+	var draftTiddler = new $tw.Tiddler({
+				text: "",
+			},
 			tiddler,
 			{
 				title: draftTitle,
