@@ -327,7 +327,6 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 				// If enabled, relink references to renamed tiddler
 				var shouldRelink = this.getAttribute("relinkOnRename","no").toLowerCase().trim() === "yes";
 				if(isRename && shouldRelink && this.wiki.tiddlerExists(draftOf)) {
-console.log("Relinking '" + draftOf + "' to '" + draftTitle + "'");
 					this.wiki.relinkTiddler(draftOf,draftTitle);
 				}
 				// Remove the draft tiddler
