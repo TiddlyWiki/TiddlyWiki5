@@ -188,6 +188,23 @@ function convertNodes(remarkableTree, isStartOfInline) {
 			});
 			break;
 
+		case "th_open":
+		case "td_open":
+			var elementTag = currentNode.type.slice(0, 2);
+			i = withChildren(i, currentNode.level, elementTag + "_close", remarkableTree, function(children) {
+				var attributes = {};
+				if (currentNode.align) {
+					attributes.style = { type: "string", value: "text-align:" + currentNode.align };
+				}
+				out.push({
+					type: "element",
+					tag: elementTag,
+					attributes: attributes,
+					children: children
+				});
+			});
+			break;
+
 		case "hr":
 			out.push({
 				type: 'element',
