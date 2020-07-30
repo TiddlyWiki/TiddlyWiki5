@@ -401,3 +401,5 @@ Tobias Hermann, @idotobi, 2020/04/19
 Nicolas Petton, @NicolasPetton, 2020/04/30
 
 Csaba Molnar, @mocsa, 2020/04/29
+
+Diep Pham, @favadi, 2020/07/30
