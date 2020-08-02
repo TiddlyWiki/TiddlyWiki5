@@ -5,9 +5,9 @@ node_js:
 stages:
   - name: test
   - name: build-prerelease
-    if: branch = "master"
+    if: branch = "master" AND type = push AND fork = false
   - name: build-tiddlywiki-com
-    if: branch = "tiddlywiki-com"
+    if: branch = "tiddlywiki-com" AND type = push AND fork = false
 
 jobs:  
   include:
