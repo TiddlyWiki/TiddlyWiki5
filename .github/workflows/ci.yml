@@ -31,7 +31,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "${{ env.NODE_VERSION }}"
-      - run: "./bin/travis-pre-build.sh"
+      - run: "./bin/ci-pre-build.sh"
       - name: "Set dynamic environment variables"
         run: |
           TRAVIS_BRANCH=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
@@ -39,7 +39,7 @@ jobs:
           echo ::set-env name=TW5_BUILD_VERSION::$(./bin/get-plugin-library-version-number)
           echo ::set-env name=TW5_BUILD_DETAILS::Prerelease built from branch \'$TRAVIS_BRANCH\' at commit $(git rev-parse HEAD) of $(git remote get-url origin) at $(date +'%F %T %Z')
       - run: "./bin/build-site.sh"
-      - run: "./bin/travis-push.sh"
+      - run: "./bin/ci-push.sh"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_PUSH_TOKEN }}
           TRAVIS_BUILD_NUMBER: ${{ github.run_number }}
@@ -56,7 +56,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "${{ env.NODE_VERSION }}"
-      - run: "./bin/travis-pre-build.sh"
+      - run: "./bin/ci-pre-build.sh"
       - name: "Set dynamic environment variables"
         run: |
           TRAVIS_BRANCH=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
@@ -64,7 +64,7 @@ jobs:
           echo ::set-env name=TW5_BUILD_VERSION::$(./bin/get-plugin-library-version-number)
           echo ::set-env name=TW5_BUILD_DETAILS::Built from branch \'$TRAVIS_BRANCH\' at commit $(git rev-parse HEAD) of $(git remote get-url origin) at $(date +'%F %T %Z')
       - run: "./bin/build-site.sh"
-      - run: "./bin/travis-push.sh"
+      - run: "./bin/ci-push.sh"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_PUSH_TOKEN }}
           TRAVIS_BUILD_NUMBER: ${{ github.run_number }}
