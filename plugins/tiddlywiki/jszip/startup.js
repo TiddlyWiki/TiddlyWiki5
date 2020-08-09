@@ -44,6 +44,7 @@ exports.startup = function() {
 				templateTitle = paramObject.template,
 				text = $tw.wiki.renderTiddler(outputType,templateTitle,{
 					parseAsInline: paramObject.mode === "inline",
+					parentWidget: event.widget,
 					variables: {
 						currentTiddler: paramObject.tiddler
 					}

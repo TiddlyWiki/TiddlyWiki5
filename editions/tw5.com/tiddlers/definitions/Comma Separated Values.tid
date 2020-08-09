@@ -4,7 +4,7 @@ tags: Definitions
 title: Comma-Separated Values
 type: text/vnd.tiddlywiki
 
-<<.dlink-ex CSV "http://en.wikipedia.org/wiki/Comma-separated_values">> is a standard plain-text format for storing a table of data.
+<<.dlink-ex CSV "https://en.wikipedia.org/wiki/Comma-separated_values">> is a standard plain-text format for storing a table of data.
 
 Each row of the table is called a <<.def record>> and occupies one line.
 

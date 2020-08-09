@@ -16,7 +16,7 @@ parser: Analitzadors sintàctics per a diferents tipus de continguts.
 route: Defineix com el servidor HTTP integrat gestiona els patrons d’URL individuals.
 saver: Els gestors de baixades (saver) ofereixen diferents mètodes per a desar fitxers des del navegador.
 startup: Funcions de l'inici
-storyview: Les vistes de la cronologia personalitzen l'animació i el comportament dels widgets llista.
+storyview: El mode de visualització permet personalizar l'animació i el comportament de les llistes
 texteditoroperation: Una operació de la barra d'eines de l'editor de text.
 tiddlerdeserializer: Converteix diferents tipus de contingut a tiddlers.
 tiddlerfield: Defineix el comportament d'un camp individual d'un tiddler.

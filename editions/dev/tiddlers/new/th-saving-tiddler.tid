@@ -1,5 +1,5 @@
 created: 20150908150314994
-modified: 20170209145506427
+modified: 20200618114855781
 tags: HookMechanism
 title: Hook: th-saving-tiddler
 type: text/vnd.tiddlywiki
@@ -8,7 +8,8 @@ This hook allows plugins to inspect or modify tiddlers before they are saved via
 
 Hook function parameters:
 
-* ''tiddler'': tiddler object about to be saved
+* ''newTiddler'': tiddler object about to be saved
+* ''oldTiddler'': tiddler object of draft tiddler that is being saved (from v5.1.23)
 
 Return value:
 

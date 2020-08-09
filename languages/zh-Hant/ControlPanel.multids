@@ -120,6 +120,7 @@ Saving/TiddlySpot/Advanced/Heading: 進階設定
 Saving/TiddlySpot/BackupDir: 備份資料夾
 Saving/TiddlySpot/Backups: 備份
 Saving/TiddlySpot/Caption: ~TiddlySpot 儲存模組
+Saving/TiddlySpot/ControlPanel: ~TiddlySpot 控制台
 Saving/TiddlySpot/Description: 這些設定只適用於儲存到 http://tiddlyspot.com 或相容的遠端伺服器時。
 Saving/TiddlySpot/Filename: 上傳檔名
 Saving/TiddlySpot/Heading: ~TiddlySpot

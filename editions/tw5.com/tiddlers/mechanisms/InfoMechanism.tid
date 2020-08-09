@@ -1,5 +1,5 @@
 created: 20140720164948099
-modified: 20190307175403915
+modified: 20200506110435897
 tags: Mechanisms
 title: InfoMechanism
 type: text/vnd.tiddlywiki
@@ -13,6 +13,7 @@ System tiddlers in the namespace `$:/info/` are used to expose information about
 ! Information Tiddlers
 
 |!Title |!Description |
+|[[$:/info/startup-timestamp]] |<<.from-version "5.1.23">> Startup timestamp in TiddlyWiki date format |
 |[[$:/info/browser]] |Running in the browser? ("yes" or "no") |
 |[[$:/info/browser/language]] |<<.from-version "5.1.20">> Language as reported by browser (note that some browsers report two character codes such as `en` while others report full codes such as `en-GB`) |
 |[[$:/info/browser/screen/width]] |Screen width in pixels |

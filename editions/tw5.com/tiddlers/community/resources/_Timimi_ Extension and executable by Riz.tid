@@ -1,16 +1,32 @@
 caption: Timimi
+color: #4db6ac
+community-author: Riz
 created: 20180830194141190
-delivery: Browser Extension & Executable
-description: Browser extension & executable for desktops
+delivery: Browser Extension & Native host
+description: Browser extension & native host for desktops
 method: save
-modified: 20181012165153986
-tags: Windows Linux Chrome Firefox Saving Resources plugins
-title: "Timimi" Extension and executable by Riz
+modified: 20200507202633529
+tags: Windows Linux Chrome Firefox Saving Resources plugins Mac Opera Edge
+title: Timimi: WebExtension and Native Host by Riz
 type: text/vnd.tiddlywiki
-url: https://github.com/ibnishak/Timimi
+url: https://ibnishak.github.io/Timimi/
 
-`Timimi` is a Web Extension and executable for Firefox, Chrome and Chromium that allows it to save standalone ~TiddlyWiki files.
+Timimi is a web-extension accompanied by a native host that allows you to save and backup your standalone HTML tiddlywiki files ''anywhere in your hard-drive''. Once installed, you can save the tiddlywiki files without any extra steps, like the original Tiddlyfox addon.
 
 {{!!url}}
 
-This is an addon using native messaging, essentially handing over the contents to a webextension host (executable) which does the actual saving. Once installed, you can save the standalone TW from anywhere in your hard drive without any more interactions, like the original Tiddlyfox addon.
+As of version 2.1, Timimi supports the following browsers   
+
+* Chrome/Chromium
+* Firefox
+* Opera
+* Microsoft Edge (Chromium)
+
+It is also reported to work seamlessly in chrome based browsers like Brave and Vivaldi.
+
+Timimi also provides users with 4 backup strategies, viz:
+
+* Create a backup Every n^^th^^ save
+* Create a backup every n^^th^^ minute
+* Customised Tower of Hanoi
+* First in First Out

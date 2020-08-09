@@ -80,7 +80,8 @@ function FramedEngine(options) {
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
-		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"}
+		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"},
+		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"}
 	]);
 	// Insert the element into the DOM
 	this.iframeDoc.body.appendChild(this.domNode);
@@ -107,11 +108,18 @@ Set the text of the engine if it doesn't currently have focus
 FramedEngine.prototype.setText = function(text,type) {
 	if(!this.domNode.isTiddlyWikiFakeDom) {
 		if(this.domNode.ownerDocument.activeElement !== this.domNode) {
-			this.domNode.value = text;
+			this.updateDomNodeText(text);
 		}
 		// Fix the height if needed
 		this.fixHeight();
 	}
+};
+
+/*
+Update the DomNode with the new text
+*/
+FramedEngine.prototype.updateDomNodeText = function(text) {
+	this.domNode.value = text;
 };
 
 /*
@@ -154,6 +162,15 @@ FramedEngine.prototype.focus  = function() {
 };
 
 /*
+Handle a focus event
+*/
+FramedEngine.prototype.handleFocusEvent = function(event) {
+	if(this.widget.editCancelPopups) {
+		$tw.popup.cancel(0);	
+	}
+};
+
+/*
 Handle a click
 */
 FramedEngine.prototype.handleClickEvent = function(event) {
@@ -167,6 +184,9 @@ Handle a dom "input" event which occurs when the text has changed
 FramedEngine.prototype.handleInputEvent = function(event) {
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
+	if(this.widget.editInputActions) {
+		this.widget.invokeActionString(this.widget.editInputActions);
+	}
 	return true;
 };
 

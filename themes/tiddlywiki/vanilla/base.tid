@@ -198,6 +198,13 @@ input[type="checkbox"] {
   vertical-align: middle;
 }
 
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+	-webkit-appearance:none;
+}
+
 .tc-muted {
 	color: <<colour muted-foreground>>;
 }
@@ -344,6 +351,10 @@ a.tc-tiddlylink-external:visited {
 a.tc-tiddlylink-external:hover {
 	color: <<colour external-link-foreground-hover>>;
 	background-color: <<colour external-link-background-hover>>;
+}
+
+.tc-drop-down a.tc-tiddlylink:hover {
+	color: <<colour tiddler-link-background>>;
 }
 
 /*
@@ -654,6 +665,10 @@ button svg.tc-image-button, button .tc-image-button img {
 	vertical-align: baseline;
 }
 
+.tc-block-tags-dropdown > .tc-btn-invisible:hover {
+	background-color: <<colour primary>>;
+}
+
 button.tc-tag-label, span.tc-tag-label {
 	display: inline-block;
 	padding: 0.16em 0.7em;
@@ -689,7 +704,7 @@ button.tc-untagged-label {
 	width: 1em;
 	margin-right: 3px; 
 	margin-bottom: 1px;
-	vertical-align: text-bottom;
+	vertical-align: bottom;
 }
 
 .tc-edit-tags button.tc-remove-tag-button svg {
@@ -707,6 +722,12 @@ button.tc-untagged-label {
 
 button.tc-btn-invisible.tc-remove-tag-button {
 	outline: none;
+}
+
+.tc-tag-button-selected,
+.tc-list-item-selected a.tc-tiddlylink {
+	background-color: <<colour primary>>;
+	color: <<colour tiddler-background>>;
 }
 
 /*
@@ -1299,7 +1320,11 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-type-selector .tc-edit-typeeditor {
-	width: 20%;
+	width: auto;
+}
+
+.tc-type-selector-wrapper {
+	display: inline-block;
 }
 
 .tc-edit-tags {
@@ -1396,14 +1421,17 @@ html body.tc-body.tc-single-tiddler-window {
 	vertical-align: middle;
 }
 
-.tc-edit-field-add-name {
+.tc-edit-field-add-name-wrapper input.tc-edit-texteditor {
+	width: auto;
+}
+
+.tc-edit-field-add-name-wrapper {
 	display: inline-block;
-	width: 15%;
 }
 
 .tc-edit-field-add-value {
 	display: inline-block;
-	width: 40%;
+	width: 35%;
 }
 
 .tc-edit-field-add-button {
@@ -1594,7 +1622,7 @@ html body.tc-body.tc-single-tiddler-window {
 	color: <<colour muted-foreground>>;
 }
 
-.tc-block-dropdown a:hover {
+.tc-block-dropdown a.tc-tiddlylink:hover {
 	color: <<colour tiddler-link-background>>;
 	background-color: <<colour tiddler-link-foreground>>;
 	text-decoration: none;

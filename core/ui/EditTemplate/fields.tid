@@ -11,7 +11,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 \end
 
 \define current-tiddler-new-field-selector()
-[data-tiddler-title="$(currentTiddlerCSSescaped)$"] .tc-edit-field-add-name input
+[data-tiddler-title="$(currentTiddlerCSSescaped)$"] .tc-edit-field-add-name-wrapper input
 \end
 
 \define new-field-actions()
@@ -51,7 +51,7 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 <td class="tc-edit-field-name">
 <$text text=<<currentField>>/>:</td>
 <td class="tc-edit-field-value">
-<$edit-text tiddler=<<currentTiddler>> field=<<currentField>> placeholder={{$:/language/EditTemplate/Fields/Add/Value/Placeholder}} tabindex={{$:/config/EditTabIndex}}/>
+<$edit-text tiddler=<<currentTiddler>> field=<<currentField>> placeholder={{$:/language/EditTemplate/Fields/Add/Value/Placeholder}} tabindex={{$:/config/EditTabIndex}} cancelPopups="yes"/>
 </td>
 <td class="tc-edit-field-remove">
 <$button class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Field/Remove/Hint}} aria-label={{$:/language/EditTemplate/Field/Remove/Caption}}>
@@ -71,9 +71,9 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 <em class="tc-edit">
 <<lingo Fields/Add/Prompt>>&nbsp;&nbsp;
 </em>
-<span class="tc-edit-field-add-name">
-<$edit-text tiddler=<<newFieldNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}} focusPopup=<<qualify "$:/state/popup/field-dropdown">> class="tc-edit-texteditor tc-popup-handle" tabindex={{$:/config/EditTabIndex}} focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] ~[[false]] }}}/>
-</span>&nbsp;
+<div class="tc-edit-field-add-name-wrapper">
+<$edit-text tiddler=<<newFieldNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}} focusPopup=<<qualify "$:/state/popup/field-dropdown">> class="tc-edit-texteditor tc-popup-handle" tabindex={{$:/config/EditTabIndex}} focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] ~[[false]] }}} cancelPopups="yes"/>
+&nbsp;
 <$button popup=<<qualify "$:/state/popup/field-dropdown">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Field/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Field/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>&nbsp;
 <$reveal state=<<qualify "$:/state/popup/field-dropdown">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown tc-edit-type-dropdown">
@@ -101,10 +101,11 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 </$set>
 </div>
 </$reveal>
+</div>
 <span class="tc-edit-field-add-value">
 <$set name="currentTiddlerCSSescaped" value={{{ [<currentTiddler>escapecss[]] }}}>
 <$keyboard key="((add-field))" actions=<<new-field-actions>>>
-<$edit-text tiddler=<<newFieldValueTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Value/Placeholder}} class="tc-edit-texteditor" tabindex={{$:/config/EditTabIndex}}/>
+<$edit-text tiddler=<<newFieldValueTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Value/Placeholder}} class="tc-edit-texteditor" tabindex={{$:/config/EditTabIndex}} cancelPopups="yes"/>
 </$keyboard>
 </$set>
 </span>&nbsp;

@@ -32,6 +32,10 @@ var remarkableOpts = {
 	quotes: $tw.wiki.getTiddlerText("$:/config/markdown/quotes"),
 	typographer: parseAsBoolean("$:/config/markdown/typographer")
 };
+var accumulatingTypes = {
+	"text": true,
+	"softbreak": true
+};
 
 var md = new Remarkable(remarkableOpts);
 
@@ -64,8 +68,8 @@ function findTagWithType(nodes, startPoint, type, level) {
  */
 function convertNodes(remarkableTree, isStartOfInline) {
 	let out = [];
-
-	function wrappedElement(elementTag, currentIndex, currentLevel, closingType, nodes) {
+	var accumulatedText = '';
+	function withChildren(currentIndex, currentLevel, closingType, nodes, callback) {
 		var j = findTagWithType(nodes, currentIndex + 1, closingType, currentLevel);
 		if (j === false) {
 			console.error("Failed to find a " + closingType + " node after position " + currentIndex);
@@ -73,65 +77,80 @@ function convertNodes(remarkableTree, isStartOfInline) {
 			return currentIndex + 1;
 		}
 		let children = convertNodes(nodes.slice(currentIndex + 1, j));
-
-		out.push({
-			type: "element",
-			tag: elementTag,
-			children: children
-		});
+		callback(children);
 		return j;
+	}
+	function wrappedElement(elementTag, currentIndex, currentLevel, closingType, nodes) {
+		return withChildren(currentIndex, currentLevel, closingType, nodes, function(children) {
+			out.push({
+				type: "element",
+				tag: elementTag,
+				children: children
+			});
+		});
 	}
 
 	for (var i = 0; i < remarkableTree.length; i++) {
 		var currentNode = remarkableTree[i];
-		if (currentNode.type === "paragraph_open") {
+		switch (currentNode.type) {
+		case "paragraph_open":
 			i = wrappedElement("p", i, currentNode.level, "paragraph_close", remarkableTree);
-		} else if (currentNode.type === "heading_open") {
-			i = wrappedElement("h" + currentNode.hLevel, i, currentNode.level, "heading_close", remarkableTree);
-		} else if (currentNode.type === "bullet_list_open") {
-			i = wrappedElement("ul", i, currentNode.level, "bullet_list_close", remarkableTree);
-		} else if (currentNode.type == 'ordered_list_open') {
-			i = wrappedElement('ol', i, currentNode.level,'ordered_list_close', remarkableTree);
-		} else if (currentNode.type === "list_item_open") {
-			i = wrappedElement("li", i, currentNode.level, "list_item_close", remarkableTree);
-		} else if (currentNode.type === "link_open") {
-			var j = findTagWithType(remarkableTree, i + 1, "link_close", currentNode.level);
+			break;
 
-			if (currentNode.href[0] !== "#") {
-				// External link
-				var attributes = {
-					href: { type: "string", value: currentNode.href }
-				};
-				if (pluginOpts.linkNewWindow) {
-					attributes.target = { type: "string", value: "_blank" };
+		case "heading_open":
+			i = wrappedElement("h" + currentNode.hLevel, i, currentNode.level, "heading_close", remarkableTree);
+			break;
+
+		case "bullet_list_open":
+			i = wrappedElement("ul", i, currentNode.level, "bullet_list_close", remarkableTree);
+			break;
+
+		case "ordered_list_open":
+			i = wrappedElement('ol', i, currentNode.level,'ordered_list_close', remarkableTree);
+			break;
+
+		case "list_item_open":
+			i = wrappedElement("li", i, currentNode.level, "list_item_close", remarkableTree);
+			break;
+
+		case "link_open":
+			i = withChildren(i, currentNode.level, "link_close", remarkableTree, function(children) {
+				if (currentNode.href[0] !== "#") {
+					// External link
+					var attributes = {
+						href: { type: "string", value: currentNode.href }
+					};
+					if (pluginOpts.linkNewWindow) {
+						attributes.target = { type: "string", value: "_blank" };
+					}
+					out.push({
+						type: "element",
+						tag: "a",
+						attributes: attributes,
+						children: children
+					});
+				} else {
+					// Internal link
+					out.push({
+						type: "link",
+						attributes: {
+							to: { type: "string", value: decodeURI(currentNode.href.substr(1)) }
+						},
+						children: children
+					});
 				}
-				out.push({
-					type: "element",
-					tag: "a",
-					attributes: attributes,
-					children: convertNodes(remarkableTree.slice(i + 1, j))
-				});
-			} else {
-				// Internal link
-				out.push({
-					type: "link",
-					attributes: {
-						to: { type: "string", value: decodeURI(currentNode.href.substr(1)) }
-					},
-					children: convertNodes(remarkableTree.slice(i + 1, j))
-				});
-			}
-			i = j;
-		} else if (currentNode.type.substr(currentNode.type.length - 5) === "_open") {
-			var tagName = currentNode.type.substr(0, currentNode.type.length - 5);
-			i = wrappedElement(tagName, i, currentNode.level, tagName + "_close", remarkableTree);
-		} else if (currentNode.type === "code") {
+			});
+			break;
+
+		case "code":
 			out.push({
 				type: "element",
 				tag: currentNode.block ? "pre" : "code",
 				children: [{ type: "text", text: currentNode.content }]
 			});
-		} else if (currentNode.type === "fence") {
+			break;
+
+		case "fence":
 			out.push({
 				type: "codeblock",
 				attributes: {
@@ -139,40 +158,104 @@ function convertNodes(remarkableTree, isStartOfInline) {
 					code: { type: "string", value: currentNode.content }
 				}
 			});
-		} else if (currentNode.type === "image") {
+			break;
+
+		case "image":
 			out.push({
 				type: "image",
 				attributes: {
 					tooltip: { type: "string", value: currentNode.alt },
-					source: { type: "string", value: currentNode.src }
+					source: { type: "string", value: decodeURIComponent(currentNode.src) }
 				}
 			});
-		} else if (currentNode.type === "softbreak") {
+			break;
+
+		case "softbreak":
+			if (remarkableOpts.breaks) {
+				out.push({
+					type: "element",
+					tag: "br",
+				});
+			} else {
+				accumulatedText = accumulatedText + '\n';
+			}
+			break;
+
+		case "hardbreak":
 			out.push({
 				type: "element",
 				tag: "br",
 			});
-		} else if (currentNode.type == 'hr') {
+			break;
+
+		case "th_open":
+		case "td_open":
+			var elementTag = currentNode.type.slice(0, 2);
+			i = withChildren(i, currentNode.level, elementTag + "_close", remarkableTree, function(children) {
+				var attributes = {};
+				if (currentNode.align) {
+					attributes.style = { type: "string", value: "text-align:" + currentNode.align };
+				}
+				out.push({
+					type: "element",
+					tag: elementTag,
+					attributes: attributes,
+					children: children
+				});
+			});
+			break;
+
+		case "hr":
 			out.push({
 				type: 'element',
 				tag: 'hr',
 			});
-		} else if (currentNode.type === "inline") {
+			break;
+
+		case "inline":
 			out = out.concat(convertNodes(currentNode.children, true));
-		} else if (currentNode.type === "text") {
-			if (!pluginOpts.renderWikiText) {
+			break;
+
+		case "text":
+			// We need to merge this text block with the upcoming text block and parse it all together.
+			accumulatedText = accumulatedText + currentNode.content;
+			break;
+
+		default:
+			if (currentNode.type.substr(currentNode.type.length - 5) === "_open") {
+				var tagName = currentNode.type.substr(0, currentNode.type.length - 5);
+				i = wrappedElement(tagName, i, currentNode.level, tagName + "_close", remarkableTree);
+			} else {
+				console.error("Unknown node type: " + currentNode.type, currentNode);
 				out.push({
 					type: "text",
 					text: currentNode.content
 				});
+			}
+			break;
+		}
+		// We test to see if we process the block now, or if there's
+		// more to accumulate first.
+		if (accumulatedText
+			&& (
+				remarkableOpts.breaks ||
+				(i+1) >= remarkableTree.length ||
+				!accumulatingTypes[remarkableTree[i+1].type]
+			)
+		) {
+			// The Markdown compiler thinks this is just text.
+			// Hand off to the WikiText parser to see if there's more to render
+			// But only if it's configured to, and we have more than whitespace
+			if (!pluginOpts.renderWikiText || accumulatedText.match(/^\s*$/)) {
+				out.push({
+					type: "text",
+					text: accumulatedText
+				});
 			} else {
-				// The Markdown compiler thinks this is just text.
-				// Hand off to the WikiText parser to see if there's more to render
-
 				// If we're inside a block element (div, p, td, h1), and this is the first child in the tree,
 				// handle as a block-level parse. Otherwise not.
 				var parseAsInline = !(isStartOfInline && i === 0);
-				var textToParse = currentNode.content;
+				var textToParse = accumulatedText;
 				if (pluginOpts.renderWikiTextPragma !== "") {
 					textToParse = pluginOpts.renderWikiTextPragma + "\n" + textToParse;
 				}
@@ -195,18 +278,13 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				// If the original text element started with a space, add it back in
 				if (rs.length > 0
 					&& rs[0].type === "text"
-					&& currentNode.content[0] === " "
+					&& (accumulatedText[0] === " " || accumulatedText[0] === "\n")
 				) {
 					rs[0].text = " " + rs[0].text;
 				}
 				out = out.concat(rs);
 			}
-		} else {
-			console.error("Unknown node type: " + currentNode.type, currentNode);
-			out.push({
-				type: "text",
-				text: currentNode.content
-			});
+			accumulatedText = '';
 		}
 	}
 	return out;

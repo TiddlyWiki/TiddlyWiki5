@@ -4,7 +4,7 @@ tags: Definitions
 title: JavaScript Object Notation
 type: text/vnd.tiddlywiki
 
-<<.dlink-ex JSON "http://en.wikipedia.org/wiki/JSON">> is a standard plain-text format used for modelling hierarchical structures of objects that contain named fields.
+<<.dlink-ex JSON "https://en.wikipedia.org/wiki/JSON">> is a standard plain-text format used for modelling hierarchical structures of objects that contain named fields.
 
 DataTiddlers can have JSON content.
 
