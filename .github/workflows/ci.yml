@@ -1,0 +1,70 @@
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - tiddlywiki-com
+env:
+  COMMIT_CONTEXT: "GitHub build"
+  COMMIT_EMAIL: "actions@github.com"
+  COMMIT_NAME: "GitHub Actions"
+  NODE_VERSION: "12"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "${{ env.NODE_VERSION }}"
+      - run: "./bin/test.sh"
+  build-prelease:
+    runs-on: ubuntu-latest
+    if: github.ref == "refs/heads/master"
+    needs: test
+    env:
+      TW5_BUILD_TIDDLYWIKI: "./tiddlywiki.js"
+      TW5_BUILD_MAIN_EDITION: "./editions/prerelease"
+      TW5_BUILD_OUTPUT: "./output/prerelease"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "${{ env.NODE_VERSION }}"
+      - run: "./bin/travis-pre-build.sh"
+      - name: "Set dynamic environment variables"
+        run: |
+          TRAVIS_BRANCH=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
+          echo ::set-env name=TRAVIS_BRANCH::${TRAVIS_BRANCH}
+          echo ::set-env name=TW5_BUILD_VERSION::$(./bin/get-plugin-library-version-number)
+          echo ::set-env name=TW5_BUILD_DETAILS::Prerelease built from branch \'$TRAVIS_BRANCH\' at commit $(git rev-parse HEAD) of $(git remote get-url origin) at $(date +'%F %T %Z')
+      - run: "./bin/build-site.sh"
+      - run: "./bin/travis-push.sh"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_PUSH_TOKEN }}
+          TRAVIS_BUILD_NUMBER: ${{ github.run_number }}
+  build-tiddlywiki-com:
+    runs-on: ubuntu-latest
+    if: github.ref == "refs/heads/tiddlywiki-com"
+    needs: test
+    env:
+      TW5_BUILD_TIDDLYWIKI: "./node_modules/tiddlywiki/tiddlywiki.js"
+      TW5_BUILD_MAIN_EDITION: "./editions/tw5.com"
+      TW5_BUILD_OUTPUT: "./output"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "${{ env.NODE_VERSION }}"
+      - run: "./bin/travis-pre-build.sh"
+      - name: "Set dynamic environment variables"
+        run: |
+          TRAVIS_BRANCH=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
+          echo ::set-env name=TRAVIS_BRANCH::${TRAVIS_BRANCH}
+          echo ::set-env name=TW5_BUILD_VERSION::$(./bin/get-plugin-library-version-number)
+          echo ::set-env name=TW5_BUILD_DETAILS::Built from branch \'$TRAVIS_BRANCH\' at commit $(git rev-parse HEAD) of $(git remote get-url origin) at $(date +'%F %T %Z')
+      - run: "./bin/build-site.sh"
+      - run: "./bin/travis-push.sh"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_PUSH_TOKEN }}
+          TRAVIS_BUILD_NUMBER: ${{ github.run_number }}
