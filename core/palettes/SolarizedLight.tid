@@ -62,10 +62,10 @@ sidebar-muted-foreground-hover: #586e75
 sidebar-tab-background: #fdf6e3
 sidebar-tab-background-selected: #eee8d5
 sidebar-tab-border: #eee8d5
-sidebar-tab-border-selected: #d33682
+sidebar-tab-border-selected: #657b83
 sidebar-tab-divider: #fdf6e3
 sidebar-tab-foreground: #839496
-sidebar-tab-foreground-selected: #d33682
+sidebar-tab-foreground-selected: #586e75
 sidebar-tiddler-link-foreground: #2aa198
 sidebar-tiddler-link-foreground-hover: #002b36
 site-title-foreground: #d33682
