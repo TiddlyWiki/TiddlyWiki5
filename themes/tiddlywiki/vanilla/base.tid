@@ -1323,7 +1323,7 @@ html body.tc-body.tc-single-tiddler-window {
 	width: auto;
 }
 
-.tc-type-selector-wrapper {
+.tc-type-selector-dropdown-wrapper {
 	display: inline-block;
 }
 

@@ -62,6 +62,11 @@ OfficialPluginLibrary: ~TiddlyWiki 官方插件程式库
 OfficialPluginLibrary/Hint: 此为在 tiddlywiki.com 的 ~TiddlyWiki 官方插件程式库。由核心团队维护的插件、主题和语言包。
 PluginReloadWarning: 请保存 {{$:/core/ui/Buttons/save-wiki}} 并刷新页面 {{$:/core/ui/Buttons/refresh}} ，使 ~JavaScript 插件的更改生效
 RecentChanges/DateFormat: YYYY年0MM月0DD日
+Shortcuts/Input/Accept/Hint: 接受选取的项目
+Shortcuts/Input/AcceptVariant/Hint: 接受选取项目 (变种)
+Shortcuts/Input/Cancel/Hint: 清除输入栏位
+Shortcuts/Input/Down/Hint: 选择下一个项目
+Shortcuts/Input/Up/Hint: 选择前一个项目
 SystemTiddler/Tooltip: 此为系统条目
 SystemTiddlers/Include/Prompt: 包括系统条目
 TagManager/Colour/Heading: 颜色

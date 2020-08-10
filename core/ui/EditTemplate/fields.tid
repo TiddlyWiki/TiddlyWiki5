@@ -11,7 +11,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 \end
 
 \define current-tiddler-new-field-selector()
-[data-tiddler-title="$(currentTiddlerCSSescaped)$"] .tc-edit-field-add-name input
+[data-tiddler-title="$(currentTiddlerCSSescaped)$"] .tc-edit-field-add-name-wrapper input
 \end
 
 \define new-field-actions()
