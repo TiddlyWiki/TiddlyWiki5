@@ -403,3 +403,5 @@ Nicolas Petton, @NicolasPetton, 2020/04/30
 Csaba Molnar, @mocsa, 2020/04/29
 
 Jonas Passerini, @passuf, 2020/05/14
+
+Adithya Badidey, @adithya-badidey, 2020/08/10
