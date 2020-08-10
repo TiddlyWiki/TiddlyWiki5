@@ -49,7 +49,7 @@ notification-border: #586e75
 page-background: #073642
 pre-background: inherit
 pre-border: #657b83
-primary: #002b36
+primary: #859900
 select-tag-background: #002b36
 select-tag-foreground: #839496
 sidebar-button-foreground: #93a1a1
@@ -67,7 +67,7 @@ sidebar-tab-divider: #002b36
 sidebar-tab-foreground: #657b83
 sidebar-tab-foreground-selected: #93a1a1
 sidebar-tiddler-link-foreground: #2aa198
-sidebar-tiddler-link-foreground-hover: #d33682
+sidebar-tiddler-link-foreground-hover: #eee8d5
 site-title-foreground: #d33682
 static-alert-foreground: #93a1a1
 tab-background: #073642
@@ -108,5 +108,5 @@ toolbar-info-button: #839496
 toolbar-new-button: #839496
 toolbar-options-button: #839496
 toolbar-save-button: inherit
-untagged-background: #073642
+untagged-background: #586e75
 very-muted-foreground: #586e75

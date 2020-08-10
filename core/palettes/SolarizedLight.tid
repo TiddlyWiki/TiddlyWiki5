@@ -49,7 +49,7 @@ notification-border: #93a1a1
 page-background: #eee8d5
 pre-background: #eee8d5
 pre-border: #839496
-primary: #fdf6e3
+primary: #859900
 select-tag-background: #fdf6e3
 select-tag-foreground: #657b83
 sidebar-button-foreground: #586e75
@@ -108,5 +108,5 @@ toolbar-info-button: #657b83
 toolbar-new-button: #657b83
 toolbar-options-button: #657b83
 toolbar-save-button: inherit
-untagged-background: #eee8d5
+untagged-background: #586e75
 very-muted-foreground: #93a1a1
