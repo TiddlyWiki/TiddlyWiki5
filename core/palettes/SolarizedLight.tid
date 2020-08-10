@@ -6,115 +6,107 @@ license: MIT, Ethan Schoonover, https://github.com/altercation/solarized/blob/ma
 name: SolarizedLight
 
 alert-background: #eee8d5
-alert-border: #073642
-alert-highlight: #cb4b16
-alert-muted-foreground: #586e75
-background: #fdf6e3
-blockquote-bar: <<colour muted-foreground>>
-button-background: #cb4b16
-button-foreground: #fdf6e3
-button-border: transparent
+alert-border: #586e75
+alert-highlight: #d33682
+alert-muted-foreground: #d33682
+background: #eee8d5
+blockquote-bar: #d33682
+button-background: #eee8d5
+button-border: #93a1a1
+button-foreground: #586e75
 code-background: #eee8d5
 code-border: #93a1a1
-code-foreground: #d33682
-diff-delete-background: #BF616A
-diff-delete-foreground: <<colour foreground>>
-diff-equal-background: 
-diff-equal-foreground: <<colour foreground>>
-diff-insert-background: #859900
-diff-insert-foreground: <<colour foreground>>
-diff-invisible-background: 
-diff-invisible-foreground: <<colour muted-foreground>>
-dirty-indicator: #D08770
+code-foreground: #586e75
+dirty-indicator: inherit
 download-background: #859900
-download-foreground: <<colour background>>
-dragger-background: <<colour foreground>>
-dragger-foreground: <<colour background>>
-dropdown-background: <<colour background>>
-dropdown-border: <<colour background>>
-dropdown-tab-background-selected: #fdf6e3
-dropdown-tab-background: #93a1a1
+download-foreground: #eee8d5
+dragger-background: #eee8d5
+dragger-foreground: #657b83
+dropdown-background: #eee8d5
+dropdown-border: #586e75
+dropdown-tab-background: #fdf6e3
+dropdown-tab-background-selected: #eee8d5
 dropzone-background: #859900
+external-link-background: inherit
 external-link-background-hover: inherit
 external-link-background-visited: inherit
-external-link-background: inherit
-external-link-foreground-hover: #d33682
-external-link-foreground-visited: #b58900
-external-link-foreground: #cb4b16
-foreground: #839496
-message-background: #586e75
-message-border: #586e75
-message-foreground: #eee8d5
-modal-backdrop: <<colour foreground>>
-modal-background: <<colour background>>
-modal-border: #eee8d5
+external-link-foreground: #268bd2
+external-link-foreground-hover: inherit
+external-link-foreground-visited: #268bd2
+foreground: #657b83
+message-background: #fdf6e3
+message-border: #93a1a1
+message-foreground: #657b83
+modal-backdrop: #839496
+modal-background: #fdf6e3
+modal-border: #93a1a1
 modal-footer-background: #eee8d5
-modal-footer-border: #eee8d5
-modal-header-border: #eee8d5
-muted-foreground: #93a1a1
-notification-background: #EBCB8B
-notification-border: #D08770
+modal-footer-border: #93a1a1
+modal-header-border: #93a1a1
+muted-foreground: #586e75
+notification-background: #fdf6e3
+notification-border: #93a1a1
 page-background: #eee8d5
 pre-background: #eee8d5
-pre-border: #93a1a1
-primary: #2aa198
-select-tag-background: #eee8d5
-select-tag-foreground: <<colour foreground>>
-sidebar-button-foreground: #eee8d5
-sidebar-controls-foreground-hover: #268bd2
+pre-border: #839496
+primary: #fdf6e3
+select-tag-background: #fdf6e3
+select-tag-foreground: #657b83
+sidebar-button-foreground: #586e75
 sidebar-controls-foreground: #586e75
+sidebar-controls-foreground-hover: #d33682
+sidebar-foreground: #586e75
 sidebar-foreground-shadow: transparent
-sidebar-foreground: #839496
-sidebar-muted-foreground-hover: #657b83
-sidebar-muted-foreground: #93a1a1
+sidebar-muted-foreground: #657b83
+sidebar-muted-foreground-hover: #586e75
+sidebar-tab-background: #fdf6e3
 sidebar-tab-background-selected: #eee8d5
-sidebar-tab-background: #839496
-sidebar-tab-border-selected: <<colour tab-border-selected>>
-sidebar-tab-border: #657b83
-sidebar-tab-divider: <<colour page-background>>
-sidebar-tab-foreground-selected: #839496
-sidebar-tab-foreground: <<colour tab-foreground>>
-sidebar-tiddler-link-foreground-hover: #859900
-sidebar-tiddler-link-foreground: #268bd2
-site-title-foreground: <<colour tiddler-title-foreground>>
-static-alert-foreground: #dc322f
+sidebar-tab-border: #eee8d5
+sidebar-tab-border-selected: #d33682
+sidebar-tab-divider: #fdf6e3
+sidebar-tab-foreground: #839496
+sidebar-tab-foreground-selected: #d33682
+sidebar-tiddler-link-foreground: #2aa198
+sidebar-tiddler-link-foreground-hover: #002b36
+site-title-foreground: #d33682
+static-alert-foreground: #586e75
+tab-background: #eee8d5
 tab-background-selected: #fdf6e3
-tab-background: #839496
-tab-border-selected: #93a1a1
 tab-border: #93a1a1
-tab-divider: #fdf6e3
-tab-foreground-selected: #839496
-tab-foreground: #eee8d5
-table-border: #657b83
-table-footer-background: #657b83
-table-header-background: #93a1a1
-tag-background: #6c71c4
-tag-foreground: #eee8d5
-tiddler-background: <<colour background>>
-tiddler-border: <<colour background>>
-tiddler-controls-foreground-hover: #b58900
-tiddler-controls-foreground-selected: #b58900
-tiddler-controls-foreground: #073642
-tiddler-editor-background: #eee8d5
-tiddler-editor-border-image: #eee8d5
+tab-border-selected: #586e75
+tab-divider: #586e75
+tab-foreground: #657b83
+tab-foreground-selected: #586e75
+table-border: #93a1a1
+table-footer-background: #eee8d5
+table-header-background: #eee8d5
+tag-background: #b58900
+tag-foreground: #fdf6e3
+tiddler-background: #fdf6e3
+tiddler-border: #93a1a1
+tiddler-controls-foreground: inherit
+tiddler-controls-foreground-hover: #d33682
+tiddler-controls-foreground-selected: #2aa198
+tiddler-editor-background: #fdf6e3
 tiddler-editor-border: #eee8d5
-tiddler-editor-fields-even: #eee8d5
-tiddler-editor-fields-odd: #fdf6e3
+tiddler-editor-border-image: #fdf6e3
+tiddler-editor-fields-even: #fdf6e3
+tiddler-editor-fields-odd: #eee8d5
 tiddler-info-background: #eee8d5
-tiddler-info-border: #eee8d5
-tiddler-info-tab-background: #586e75
-tiddler-link-background: <<colour background>>
-tiddler-link-foreground: <<colour primary>>
-tiddler-subtitle-foreground: #586e75
-tiddler-title-foreground: #073642
-toolbar-new-button: 
-toolbar-options-button: 
-toolbar-save-button: 
-toolbar-info-button: 
-toolbar-edit-button: 
-toolbar-close-button: 
-toolbar-delete-button: 
-toolbar-cancel-button: 
-toolbar-done-button: 
-untagged-background: #839496
+tiddler-info-border: #839496
+tiddler-info-tab-background: #fdf6e3
+tiddler-link-background: #fdf6e3
+tiddler-link-foreground: #2aa198
+tiddler-subtitle-foreground: #657b83
+tiddler-title-foreground: #d33682
+toolbar-cancel-button: #657b83
+toolbar-close-button: #657b83
+toolbar-delete-button: #dc322f
+toolbar-done-button: #657b83
+toolbar-edit-button: #657b83
+toolbar-info-button: #657b83
+toolbar-new-button: #657b83
+toolbar-options-button: #657b83
+toolbar-save-button: inherit
+untagged-background: #eee8d5
 very-muted-foreground: #93a1a1
