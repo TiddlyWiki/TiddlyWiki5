@@ -1499,7 +1499,7 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-drop-down button.tc-btn-invisible:hover svg {
-	fill: <<colour foreground>>;
+	fill: <<colour background>>;
 }
 
 .tc-drop-down .tc-drop-down-info {
