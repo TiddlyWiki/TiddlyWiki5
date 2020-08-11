@@ -1499,7 +1499,7 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-drop-down button.tc-btn-invisible:hover svg {
-	fill: <<colour foreground>>;
+	fill: <<colour background>>;
 }
 
 .tc-drop-down .tc-drop-down-info {
@@ -2191,8 +2191,8 @@ a.tc-tiddlylink.tc-plugin-info:hover {
 	fill: <<colour foreground>>;
 }
 
-a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > svg {
-	fill: <<colour foreground>>;
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
+	fill: <<colour background>>;
 }
 
 .tc-plugin-info-chunk {
