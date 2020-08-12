@@ -15,7 +15,7 @@ Startup initialisation
 // Export name and synchronous status
 exports.name = "browser-storage";
 exports.platforms = ["browser"];
-exports.after = ["load-modules"];
+exports.after = ["startup"];
 exports.synchronous = true;
 
 var ENABLED_TITLE = "$:/config/BrowserStorage/Enabled",
