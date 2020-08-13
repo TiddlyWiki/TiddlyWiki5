@@ -34,9 +34,35 @@ exports.titlecase = makeStringBinaryOperator(
 	function(a) {return [$tw.utils.toTitleCase(a)];}
 );
 
-exports.trim = makeStringBinaryOperator(
-	function(a) {return [$tw.utils.trim(a)];}
-);
+exports.trim = function(source,operator,options) {
+	var result = [],
+		suffix = operator.suffix || "",
+		operand = (operator.operand || ""),
+		fnCalc;
+	if (operand !== "") {
+		// Safely regexp-escape the operand
+		operand = operand.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
+	}
+	if (suffix === "prefix") {
+		fnCalc = function(a,b) {return [$tw.utils.trimPrefix(a,b)];}
+	} else if (suffix === "suffix") {
+		fnCalc = function(a,b) {return [$tw.utils.trimSuffix(a,b)];}
+	} else {
+		if (operand === "") {
+			fnCalc = function(a) {return [$tw.utils.trim(a)];}
+		} else {
+			fnCalc = function(a,b) {return [$tw.utils.trimSuffix($tw.utils.trimPrefix(a,b),b)];}
+		}
+	}
+	source(function(tiddler,title) {
+		Array.prototype.push.apply(result,fnCalc(title,operand));
+	});
+	return result;
+};
+
+// makeStringBinaryOperator(
+// 	function(a) {return [$tw.utils.trim(a)];}
+// );
 
 exports.split = makeStringBinaryOperator(
 	function(a,b) {return ("" + a).split(b);}

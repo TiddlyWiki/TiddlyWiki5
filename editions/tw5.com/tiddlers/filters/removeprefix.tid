@@ -12,4 +12,6 @@ op-output: those input titles that start with <<.place S>>, but with those chara
 
 <<.s-matching-is-case-sensitive>>
 
+<<.tip " This filters out input titles that do not start with S. For removing S without filtering out input titles that don't start with S, see [[trim|trim Operator]].">>
+
 <<.operator-examples "removeprefix">>

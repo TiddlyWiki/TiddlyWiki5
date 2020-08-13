@@ -94,6 +94,32 @@ exports.trim = function(str) {
 	}
 };
 
+exports.trimPrefix = function(str,unwanted) {
+	if(typeof str === "string" && typeof unwanted === "string") {
+		if (unwanted === "") {
+			return str.replace(/^\s\s*/, '');
+		} else {
+			var regex = new RegExp('^(' + unwanted + ')+');
+			return str.replace(regex, '');
+		}
+	} else {
+		return str;
+	}
+};
+
+exports.trimSuffix = function(str,unwanted) {
+	if(typeof str === "string" && typeof unwanted === "string") {
+		if (unwanted === "") {
+			return str.replace(/\s\s*$/, '');
+		} else {
+			var regex = new RegExp('(' + unwanted + ')+$');
+			return str.replace(regex, '');
+		}
+	} else {
+		return str;
+	}
+};
+
 /*
 Convert a string to sentence case (ie capitalise first letter)
 */
