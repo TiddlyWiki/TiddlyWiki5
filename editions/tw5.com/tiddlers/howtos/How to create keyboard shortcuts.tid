@@ -34,7 +34,7 @@ In the [[Keyboard Shortcuts Tab|$:/core/ui/ControlPanel/KeyboardShortcuts]] the 
 * $:/config/shortcuts-not-windows/`my-shortcut`
 * $:/config/shortcuts-not-linux/`my-shortcut`
 
-<<.tip """Note that those platform-specific tiddlers don't have to be created manually if the ''ShortcutInfo'' tiddler as mentioned above is created first and and the shortcut is configured in the ~ControlPanel""">>
+<<.tip """Note that those platform-specific tiddlers don't have to be created manually if the ''ShortcutInfo'' tiddler as mentioned above is created first and the shortcut is configured in the ~ControlPanel""">>
 
 <br>
 
