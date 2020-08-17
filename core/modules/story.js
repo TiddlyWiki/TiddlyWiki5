@@ -37,44 +37,48 @@ Story.prototype.getStoryList = function() {
 Story.prototype.addToStory = function(navigateTo,navigateFromTitle,options) {
 	options = options || {};
 	var storyList = this.getStoryList();
-	// See if the tiddler is already there
-	var slot = storyList.indexOf(navigateTo);
-	// Quit if it already exists in the story river
-	if(slot >= 0) {
-		return;
-	}
-	// First we try to find the position of the story element we navigated from
-	var fromIndex = storyList.indexOf(navigateFromTitle);
-	if(fromIndex >= 0) {
-		// The tiddler is added from inside the river
-		// Determine where to insert the tiddler; Fallback is "below"
-		switch(options.openLinkFromInsideRiver) {
-			case "top":
-				slot = 0;
-				break;
-			case "bottom":
-				slot = storyList.length;
-				break;
-			case "above":
-				slot = fromIndex;
-				break;
-			case "below": // Intentional fall-through
-			default:
-				slot = fromIndex + 1;
-				break;
-		}
+	if(options.singleTiddlerMode) {
+		storyList = [navigateTo];
 	} else {
-		// The tiddler is opened from outside the river. Determine where to insert the tiddler; default is "top"
-		if(options.openLinkFromOutsideRiver === "bottom") {
-			// Insert at bottom
-			slot = storyList.length;
-		} else {
-			// Insert at top
-			slot = 0;
+		// See if the tiddler is already there
+		var slot = storyList.indexOf(navigateTo);
+		// Quit if it already exists in the story river
+		if(slot >= 0) {
+			return;
 		}
+		// First we try to find the position of the story element we navigated from
+		var fromIndex = storyList.indexOf(navigateFromTitle);
+		if(fromIndex >= 0) {
+			// The tiddler is added from inside the river
+			// Determine where to insert the tiddler; Fallback is "below"
+			switch(options.openLinkFromInsideRiver) {
+				case "top":
+					slot = 0;
+					break;
+				case "bottom":
+					slot = storyList.length;
+					break;
+				case "above":
+					slot = fromIndex;
+					break;
+				case "below": // Intentional fall-through
+				default:
+					slot = fromIndex + 1;
+					break;
+			}
+		} else {
+			// The tiddler is opened from outside the river. Determine where to insert the tiddler; default is "top"
+			if(options.openLinkFromOutsideRiver === "bottom") {
+				// Insert at bottom
+				slot = storyList.length;
+			} else {
+				// Insert at top
+				slot = 0;
+			}
+		}
+		// Add the tiddler
+		storyList.splice(slot,0,navigateTo);
 	}
-	// Add the tiddler
-	storyList.splice(slot,0,navigateTo);
 	// Save the story
 	this.saveStoryList(storyList);
 };
@@ -93,11 +97,20 @@ Story.prototype.saveStoryList = function(storyList) {
 Story.prototype.addToHistory = function(navigateTo,navigateFromClientRect) {
 	var titles = $tw.utils.isArray(navigateTo) ? navigateTo : [navigateTo];
 	// Add a new record to the top of the history stack
-	var historyList = this.wiki.getTiddlerData(this.historyTitle,[]);
+	var historyList = this.wiki.getTiddlerData(this.historyTitle,[]),
+		historyTitles = this.wiki.getTiddlerList(this.historyTitle);
 	$tw.utils.each(titles,function(title) {
 		historyList.push({title: title, fromPageRect: navigateFromClientRect});
+		var p;
+		do {
+			p = historyTitles.indexOf(title);
+			if(p !== -1) {
+				historyTitles.splice(p,1);
+			}
+		} while(p !== -1);
+		historyTitles.unshift(title);
 	});
-	this.wiki.setTiddlerData(this.historyTitle,historyList,{"current-tiddler": titles[titles.length-1]});
+	this.wiki.setTiddlerData(this.historyTitle,historyList,{"current-tiddler": titles[titles.length-1], list: historyTitles});
 };
 
 Story.prototype.storyCloseTiddler = function(targetTitle) {

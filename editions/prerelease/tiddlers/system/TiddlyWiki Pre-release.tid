@@ -1,6 +1,25 @@
 title: TiddlyWiki Pre-release
 modified: 20150428204930183
 
+!! Experimental Single Tiddler Mode
+
+This build of the TiddlyWiki Pre-release is built from the "single-tiddler-mode" branch, and incorporates the work in progress from this pull request:
+
+https://github.com/Jermolene/TiddlyWiki5/pull/3412
+
+Essentially, "Single Tiddler Mode" means that the ''zoomin'' storyview no longer keeps previously navigated tiddlers hidden but open. Instead, there is only ever one tiddler open in the story river.
+
+This has some implications for familiar TiddlyWiki features:
+
+* The "close" button now navigates to the previous tiddler in the history stack
+* The "open" tab in the sidebar mutates into a more useful new "history" tab when "single tiddler mode" is engaged
+
+You can switch storyviews here to experiment with the effect:
+
+{{$:/snippets/viewswitcher}}
+
+---
+
 This is a pre-release build of TiddlyWiki, [[also available in empty form|https://tiddlywiki.com/prerelease/empty.html]]. It is provided for testing purposes. ''Please don't try to use it for anything important'' -- you should use the latest official release from https://tiddlywiki.com.
 
 <$list filter="[tag[ReleaseNotes]!has[released]!sort[created]]">

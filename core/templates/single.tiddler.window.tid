@@ -20,7 +20,7 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 
 <div class=<<containerClasses>>>
 
-<$navigator story="$:/StoryList" history="$:/HistoryList">
+<$navigator story="$:/StoryList" history="$:/HistoryList" singleTiddlerMode={{{ [<storyviewTitle>getstoryviewmode[singletiddlermode]] }}}>
 
 <$transclude mode="block"/>
 

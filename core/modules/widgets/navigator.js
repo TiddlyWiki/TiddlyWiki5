@@ -60,6 +60,10 @@ NavigatorWidget.prototype.execute = function() {
 	// Get our parameters
 	this.storyTitle = this.getAttribute("story");
 	this.historyTitle = this.getAttribute("history");
+	this.openLinkFromInsideRiver = this.getAttribute("openLinkFromInsideRiver","top");
+	this.openLinkFromOutsideRiver = this.getAttribute("openLinkFromOutsideRiver","top");
+	this.singleTiddlerMode = this.getAttribute("singleTiddlerMode","no") === "yes";
+	this.relinkOnRename = this.getAttribute("relinkOnRename","no").toLowerCase().trim() === "yes";
 	this.setVariable("tv-story-list",this.storyTitle);
 	this.setVariable("tv-history-list",this.historyTitle);
 	// Construct the child widgets
@@ -71,7 +75,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 NavigatorWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.story || changedAttributes.history) {
+	if(changedAttributes.story || changedAttributes.history || changedAttributes.openLinkFromInsideRiver || changedAttributes.openLinkFromOutsideRiver || changedAttributes.singleTiddlerMode || changedAttributes.relinkOnRename) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -122,12 +126,17 @@ NavigatorWidget.prototype.replaceFirstTitleInStory = function(storyList,oldTitle
 };
 
 NavigatorWidget.prototype.addToStory = function(title,fromTitle) {
-	if(this.storyTitle) {
-		this.wiki.addToStory(title,fromTitle,this.storyTitle,{
-			openLinkFromInsideRiver: this.getAttribute("openLinkFromInsideRiver","top"),
-			openLinkFromOutsideRiver: this.getAttribute("openLinkFromOutsideRiver","top")
-		});
-	}
+	this.wiki.addToStory(title,fromTitle,this.storyTitle,{
+		openLinkFromInsideRiver: this.openLinkFromInsideRiver,
+		openLinkFromOutsideRiver: this.openLinkFromOutsideRiver,
+		singleTiddlerMode: this.singleTiddlerMode
+	});
+};
+
+NavigatorWidget.prototype.removeFromStory = function(title) {
+	var storyList = this.getStoryList();
+	this.removeTitleFromStory(storyList,title);
+	this.saveStoryList(storyList);
 };
 
 /*
@@ -155,11 +164,34 @@ NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 
 // Close a specified tiddler
 NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
-	var title = event.param || event.tiddlerTitle,
-		storyList = this.getStoryList();
-	// Look for tiddlers with this title to close
-	this.removeTitleFromStory(storyList,title);
-	this.saveStoryList(storyList);
+	var title = event.param || event.tiddlerTitle;
+	if(this.singleTiddlerMode) {
+		// Get the history stack and find the topmost occurance of the current tiddler
+		var history = this.wiki.getTiddlerDataCached(this.historyTitle,[]),
+			currPos = history.findIndex(function(historyRecord) {
+				return historyRecord.title === title;
+			}),
+			newTitle;
+		// Skip over any duplicates
+		while(currPos > 0 && history[currPos - 1].title === title) {
+			currPos--;
+		}
+		// Get the new title
+		if(currPos > 0) {
+			newTitle = history[currPos - 1].title;
+		}
+		// Navigate to the new title if we've got one
+		if(newTitle) {
+			this.addToStory(newTitle);
+			this.addToHistory(newTitle);
+		} else {
+			// If there's nothing to navigate back to then we really do close the last tiddler
+			this.removeFromStory(title);
+		}
+	} else {
+		// Look for tiddlers with this title to close
+		this.removeFromStory(title);
+	}
 	return false;
 };
 
@@ -323,8 +355,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 				newTiddler = $tw.hooks.invokeHook("th-saving-tiddler",newTiddler,tiddler);
 				this.wiki.addTiddler(newTiddler);
 				// If enabled, relink references to renamed tiddler
-				var shouldRelink = this.getAttribute("relinkOnRename","no").toLowerCase().trim() === "yes";
-				if(isRename && shouldRelink && this.wiki.tiddlerExists(draftOf)) {
+				if(isRename && this.relinkOnRename && this.wiki.tiddlerExists(draftOf)) {
 console.log("Relinking '" + draftOf + "' to '" + draftTitle + "'");
 					this.wiki.relinkTiddler(draftOf,draftTitle);
 				}

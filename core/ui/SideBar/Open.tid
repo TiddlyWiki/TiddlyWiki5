@@ -1,6 +1,6 @@
 title: $:/core/ui/SideBar/Open
 tags: $:/tags/SideBar
-caption: {{$:/language/SideBar/Open/Caption}}
+caption: <$list filter="[<tv-storyview-single-tiddler-mode>prefix[yes]]" emptyMessage="{{$:/language/SideBar/Open/Caption}}">{{$:/language/SideBar/History/Caption}}</$list>
 
 \whitespace trim
 \define lingo-base() $:/language/CloseAll/
@@ -23,6 +23,7 @@ $button$
 </$droppable>
 \end
 
+\define open()
 <div class="tc-sidebar-tab-open">
 <$list filter="[list<tv-story-list>]" history=<<tv-history-list>> storyview="pop">
 <div class="tc-sidebar-tab-open-item">
@@ -34,4 +35,8 @@ $button$
 <$macrocall $name="droppable-item" button="""<$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini"><<lingo Button>></$button>"""/>
 </div>
 </$tiddler>
-</div>
+\end
+
+<$list filter="[<tv-storyview-single-tiddler-mode>prefix[yes]]" emptyMessage=<<open>>>
+<$list filter="[list[$:/HistoryList]limit[100]]" template="$:/core/ui/ListItemTemplate"/>
+</$list>
