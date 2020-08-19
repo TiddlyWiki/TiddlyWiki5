@@ -35,7 +35,9 @@ FileSystemAdaptor.prototype.isReady = function() {
 };
 
 FileSystemAdaptor.prototype.getTiddlerInfo = function(tiddler) {
-	return {};
+	//Returns the existing fileInfo for the tiddler. To regenerate, call getTiddlerFileInfo().
+	var title = tiddler.fields.title;
+	return this.boot.files[title];
 };
 
 /*
@@ -44,7 +46,8 @@ Return a fileInfo object for a tiddler, creating it if necessary:
   type: the type of the tiddler file (NOT the type of the tiddler -- see below)
   hasMetaFile: true if the file also has a companion .meta file
 
-The boot process populates this.boot.files for each of the tiddler files that it loads. The type is found by looking up the extension in $tw.config.fileExtensionInfo (eg "application/x-tiddler" for ".tid" files).
+The boot process populates this.boot.files for each of the tiddler files that it loads.
+The type is found by looking up the extension in $tw.config.fileExtensionInfo (eg "application/x-tiddler" for ".tid" files).
 
 It is the responsibility of the filesystem adaptor to update this.boot.files for new files that are created.
 */
@@ -52,15 +55,15 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 	// See if we've already got information about this file
 	var title = tiddler.fields.title,
 		fileInfo = this.boot.files[title];
-	if(!fileInfo) {
-		// Otherwise, we'll need to generate it
-		fileInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
-			directory: this.boot.wikiTiddlersPath,
-			pathFilters: this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n"),
-			wiki: this.wiki
-		});
-		this.boot.files[title] = fileInfo;
-	}
+	// Always generate a fileInfo object when this fuction is called
+	fileInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
+		directory: this.boot.wikiTiddlersPath,
+		pathFilters: this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n"),
+		extFilters: this.wiki.getTiddlerText("$:/config/FileSystemExtensions","").split("\n"),
+		wiki: this.wiki,
+		fileInfo: fileInfo
+	});
+	this.boot.files[title] = fileInfo;
 	callback(null,fileInfo);
 };
 
@@ -74,7 +77,23 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 		if(err) {
 			return callback(err);
 		}
-		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,callback);
+		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err) {
+			if(err) {
+				return callback(err);
+			}
+			// Cleanup duplicates if the file moved or changed extensions
+			var syncerInfo = $tw.syncer.tiddlerInfo[tiddler.fields.title];
+			if(syncerInfo && syncerInfo.adaptorInfo && syncerInfo.adaptorInfo.filepath !== self.boot.files[tiddler.fields.title].filepath) {
+				$tw.utils.deleteTiddlerFile(syncerInfo.adaptorInfo, function(err){
+					if(err) {
+						return callback(err);
+					}
+					callback(null, self.boot.files[tiddler.fields.title]);
+				});
+			} else {
+				callback(null, self.boot.files[tiddler.fields.title]);
+			}
+		});
 	});
 };
 
@@ -95,23 +114,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 		fileInfo = this.boot.files[title];
 	// Only delete the tiddler if we have writable information for the file
 	if(fileInfo) {
-		// Delete the file
-		fs.unlink(fileInfo.filepath,function(err) {
-			if(err) {
-				return callback(err);
-			}
-			// Delete the metafile if present
-			if(fileInfo.hasMetaFile) {
-				fs.unlink(fileInfo.filepath + ".meta",function(err) {
-					if(err) {
-						return callback(err);
-					}
-					return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),callback);
-				});
-			} else {
-				return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),callback);
-			}
-		});
+		$tw.utils.deleteTiddlerFile(fileInfo, callback);
 	} else {
 		callback(null);
 	}
