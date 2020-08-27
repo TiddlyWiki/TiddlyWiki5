@@ -273,7 +273,9 @@ NavigatorWidget.prototype.makeDraftTiddler = function(targetTitle) {
 	var tiddler = this.wiki.getTiddler(targetTitle);
 	// Save the initial value of the draft tiddler
 	draftTitle = this.generateDraftTitle(targetTitle);
-	var draftTiddler = new $tw.Tiddler(
+	var draftTiddler = new $tw.Tiddler({
+				text: "",
+			},
 			tiddler,
 			{
 				title: draftTitle,
@@ -325,7 +327,6 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 				// If enabled, relink references to renamed tiddler
 				var shouldRelink = this.getAttribute("relinkOnRename","no").toLowerCase().trim() === "yes";
 				if(isRename && shouldRelink && this.wiki.tiddlerExists(draftOf)) {
-console.log("Relinking '" + draftOf + "' to '" + draftTitle + "'");
 					this.wiki.relinkTiddler(draftOf,draftTitle);
 				}
 				// Remove the draft tiddler
