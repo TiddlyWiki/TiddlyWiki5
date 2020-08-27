@@ -29,12 +29,18 @@
 			"--setfield","[tag[external-text]]","_canonical_uri","$:/core/templates/canonical-uri-external-text","text/plain",
 			"--setfield","[tag[external-image]] [tag[external-text]]","text","","text/plain",
 			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
-		"empty": [
-			"--rendertiddler","$:/editions/tw5.com/download-empty","empty.html","text/plain",
-			"--rendertiddler","$:/editions/tw5.com/download-empty","empty.hta","text/plain"],
-		"encrypted": [
+		"index-compressed": [
+			"--compress", "true",
+			"--rendertiddler", "$:/core/save/all", "index-compressed.html", "text/plain",
+			"--clearpassword"],
+		"index-compressed-and-encrypted": [
+			"--compress", "true",
 			"--password", "password",
-			"--rendertiddler", "$:/core/save/all", "encrypted.html", "text/plain",
+			"--rendertiddler", "$:/core/save/all", "index-compressed-and-encrypted.html", "text/plain",
+			"--clearpassword"],
+		"index-encrypted": [
+			"--password", "password",
+			"--rendertiddler", "$:/core/save/all", "index-encrypted.html", "text/plain",
 			"--clearpassword"],
 		"favicon": [
 			"--savetiddler","$:/favicon.ico","favicon.ico",
