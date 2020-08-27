@@ -2,5 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/tiddlyweb",
 	"name": "TiddlyWeb",
 	"description": "Sync changes to TW5 server or TiddlyWeb server",
-	"list": "readme"
+	"list": "readme",
+	"plugin-priority": 10
 }

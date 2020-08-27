@@ -4,14 +4,14 @@ caption: {{$:/language/ControlPanel/Saving/TiddlySpot/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Saving/TiddlySpot/
 
-\define backupURL()
-http://$(userName)$.tiddlyspot.com/backup/
+\define siteURL(path)
+http://$(userName)$.tiddlyspot.com/$path$/
 \end
-\define backupLink()
+\define siteLink(path)
 <$reveal type="nomatch" state="$:/UploadName" text="">
 <$set name="userName" value={{$:/UploadName}}>
 <$reveal type="match" state="$:/UploadURL" text="">
-<<backupURL>>
+<<siteURL $path$>>
 </$reveal>
 <$reveal type="nomatch" state="$:/UploadURL" text="">
 <$macrocall $name=resolvePath source={{$:/UploadBackupDir}} root={{$:/UploadURL}}>>
@@ -24,7 +24,8 @@ http://$(userName)$.tiddlyspot.com/backup/
 
 |<<lingo UserName>> |<$edit-text tiddler="$:/UploadName" default="" tag="input"/> |
 |<<lingo Password>> |<$password name="upload"/> |
-|<<lingo Backups>> |<<backupLink>> |
+|<<lingo Backups>> |<<siteLink backup>> |
+|<<lingo ControlPanel>> |<<siteLink controlpanel>> |
 
 ''<<lingo Advanced/Heading>>''
 

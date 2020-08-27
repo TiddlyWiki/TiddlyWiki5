@@ -69,7 +69,7 @@ function findTagWithType(nodes, startPoint, type, level) {
 function convertNodes(remarkableTree, isStartOfInline) {
 	let out = [];
 	var accumulatedText = '';
-	function wrappedElement(elementTag, currentIndex, currentLevel, closingType, nodes) {
+	function withChildren(currentIndex, currentLevel, closingType, nodes, callback) {
 		var j = findTagWithType(nodes, currentIndex + 1, closingType, currentLevel);
 		if (j === false) {
 			console.error("Failed to find a " + closingType + " node after position " + currentIndex);
@@ -77,13 +77,17 @@ function convertNodes(remarkableTree, isStartOfInline) {
 			return currentIndex + 1;
 		}
 		let children = convertNodes(nodes.slice(currentIndex + 1, j));
-
-		out.push({
-			type: "element",
-			tag: elementTag,
-			children: children
-		});
+		callback(children);
 		return j;
+	}
+	function wrappedElement(elementTag, currentIndex, currentLevel, closingType, nodes) {
+		return withChildren(currentIndex, currentLevel, closingType, nodes, function(children) {
+			out.push({
+				type: "element",
+				tag: elementTag,
+				children: children
+			});
+		});
 	}
 
 	for (var i = 0; i < remarkableTree.length; i++) {
@@ -110,34 +114,33 @@ function convertNodes(remarkableTree, isStartOfInline) {
 			break;
 
 		case "link_open":
-			var j = findTagWithType(remarkableTree, i + 1, "link_close", currentNode.level);
-
-			if (currentNode.href[0] !== "#") {
-				// External link
-				var attributes = {
-					href: { type: "string", value: currentNode.href },
-					rel: { type: "string", value: "noopener noreferrer" }
-				};
-				if (pluginOpts.linkNewWindow) {
-					attributes.target = { type: "string", value: "_blank" };
+			i = withChildren(i, currentNode.level, "link_close", remarkableTree, function(children) {
+				if (currentNode.href[0] !== "#") {
+					// External link
+					var attributes = {
+						href: { type: "string", value: currentNode.href },
+						rel: { type: "string", value: "noopener noreferrer" }
+					};
+					if (pluginOpts.linkNewWindow) {
+						attributes.target = { type: "string", value: "_blank" };
+					}
+					out.push({
+						type: "element",
+						tag: "a",
+						attributes: attributes,
+						children: children
+					});
+				} else {
+					// Internal link
+					out.push({
+						type: "link",
+						attributes: {
+							to: { type: "string", value: decodeURI(currentNode.href.substr(1)) }
+						},
+						children: children
+					});
 				}
-				out.push({
-					type: "element",
-					tag: "a",
-					attributes: attributes,
-					children: convertNodes(remarkableTree.slice(i + 1, j))
-				});
-			} else {
-				// Internal link
-				out.push({
-					type: "link",
-					attributes: {
-						to: { type: "string", value: decodeURI(currentNode.href.substr(1)) }
-					},
-					children: convertNodes(remarkableTree.slice(i + 1, j))
-				});
-			}
-			i = j;
+			});
 			break;
 
 		case "code":
@@ -183,6 +186,23 @@ function convertNodes(remarkableTree, isStartOfInline) {
 			out.push({
 				type: "element",
 				tag: "br",
+			});
+			break;
+
+		case "th_open":
+		case "td_open":
+			var elementTag = currentNode.type.slice(0, 2);
+			i = withChildren(i, currentNode.level, elementTag + "_close", remarkableTree, function(children) {
+				var attributes = {};
+				if (currentNode.align) {
+					attributes.style = { type: "string", value: "text-align:" + currentNode.align };
+				}
+				out.push({
+					type: "element",
+					tag: elementTag,
+					attributes: attributes,
+					children: children
+				});
 			});
 			break;
 

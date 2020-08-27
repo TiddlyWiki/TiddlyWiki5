@@ -25,6 +25,19 @@ describe("Utility tests", function() {
 		expect(psa(" [[Tidd\u00a0ler8]] two ")).toEqual(["Tidd\u00a0ler8","two"]);
 	});
 
+	it("should handle base64 encoding emojis", function() {
+		var booksEmoji = "📚";
+		expect(booksEmoji).toBe(booksEmoji);
+		// 📚 is U+1F4DA BOOKS, which is represented by surrogate pair 0xD83D 0xDCDA in Javascript
+		expect(booksEmoji.length).toBe(2);
+		expect(booksEmoji.charCodeAt(0)).toBe(55357); // 0xD83D
+		expect(booksEmoji.charCodeAt(1)).toBe(56538); // 0xDCDA
+		expect($tw.utils.base64Encode(booksEmoji)).not.toBe("7aC97bOa", "if base64 is 7aC97bOa then surrogate pairs were incorrectly treated as codepoints");
+		expect($tw.utils.base64Encode(booksEmoji)).toBe("8J+Tmg==", "if surrogate pairs are correctly treated as a single code unit then base64 should be 8J+Tmg==");
+		expect($tw.utils.base64Decode("8J+Tmg==")).toBe(booksEmoji);
+		expect($tw.utils.base64Decode($tw.utils.base64Encode(booksEmoji))).toBe(booksEmoji, "should round-trip correctly");
+	});
+
 	it("should handle stringifying a string array", function() {
 		var str = $tw.utils.stringifyList;
 		expect(str([])).toEqual("");
