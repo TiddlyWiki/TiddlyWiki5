@@ -39,7 +39,6 @@ jobs:
       - run: "./bin/ci-push.sh"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_PUSH_TOKEN }}
-          TRAVIS_BUILD_NUMBER: ${{ github.run_number }}
   build-tiddlywiki-com:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/tiddlywiki-com'
@@ -64,4 +63,3 @@ jobs:
       - run: "./bin/ci-push.sh"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_PUSH_TOKEN }}
-          TRAVIS_BUILD_NUMBER: ${{ github.run_number }}
