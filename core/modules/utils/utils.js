@@ -96,7 +96,7 @@ exports.trim = function(str) {
 
 exports.trimPrefix = function(str,unwanted) {
 	if(typeof str === "string" && typeof unwanted === "string") {
-		if (unwanted === "") {
+		if(unwanted === "") {
 			return str.replace(/^\s\s*/, '');
 		} else {
 			var regex = new RegExp('^(' + unwanted + ')+');
@@ -109,7 +109,7 @@ exports.trimPrefix = function(str,unwanted) {
 
 exports.trimSuffix = function(str,unwanted) {
 	if(typeof str === "string" && typeof unwanted === "string") {
-		if (unwanted === "") {
+		if(unwanted === "") {
 			return str.replace(/\s\s*$/, '');
 		} else {
 			var regex = new RegExp('(' + unwanted + ')+$');
