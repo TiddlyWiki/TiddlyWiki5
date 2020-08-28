@@ -26,6 +26,6 @@ Now any tiddler you tag as "Locked" will have the edit button hidden. To get it 
 * Select all the tiddler text.
 * Click on the excise tool.
 * In the title box, type `$:/` and then paste the original title.
-* Use the defaults to excise and and leave a transclusion
+* Use the defaults to excise the text into a new tiddler and replace it with a transclusion
 
-Now you can view the contents of your original tiddler, but to edit them your will have to find the the tiddler with the `$:/` prefix.
+Now you can view the contents of your original tiddler, but to edit them you will have to find the the tiddler with the `$:/` prefix.

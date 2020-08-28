@@ -6,3 +6,4 @@ type: text/vnd.tiddlywiki
 
 <<.operator-example 1 "10.123456789 +[fixed[5]]">>
 <<.operator-example 2 "[[355]divide[113]fixed[7]]">>
+<<.operator-example 3 "[[1]divide[2]fixed[3]]">>
