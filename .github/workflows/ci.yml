@@ -20,7 +20,7 @@ jobs:
       - run: "./bin/test.sh"
   build-prerelease:
     runs-on: ubuntu-latest
-    if: github.ref == "refs/heads/master"
+    if: github.ref == 'refs/heads/master'
     needs: test
     env:
       TW5_BUILD_TIDDLYWIKI: "./tiddlywiki.js"
@@ -45,7 +45,7 @@ jobs:
           TRAVIS_BUILD_NUMBER: ${{ github.run_number }}
   build-tiddlywiki-com:
     runs-on: ubuntu-latest
-    if: github.ref == "refs/heads/tiddlywiki-com"
+    if: github.ref == 'refs/heads/tiddlywiki-com'
     needs: test
     env:
       TW5_BUILD_TIDDLYWIKI: "./node_modules/tiddlywiki/tiddlywiki.js"
