@@ -2172,8 +2172,7 @@ $tw.loadTiddlersNode = function() {
 /*
 Startup TiddlyWiki
 */
-$tw.boot.startup = function(options) {
-	options = options || {};
+$tw.boot.initStartup = function(options) {
 	// Get the URL hash and check for safe mode
 	$tw.locationHash = "#";
 	if($tw.browser && !$tw.node) {
@@ -2306,6 +2305,9 @@ $tw.boot.startup = function(options) {
 			return result;
 		}
 	}
+};
+$tw.boot.loadStartup = function(options){
+
 	// Load tiddlers
 	if($tw.boot.tasks.readBrowserTiddlers) {
 		$tw.loadTiddlersBrowser();
@@ -2318,6 +2320,8 @@ $tw.boot.startup = function(options) {
 	}
 	// Give hooks a chance to modify the store
 	$tw.hooks.invokeHook("th-boot-tiddlers-loaded");
+}
+$tw.boot.execStartup = function(options){
 	// Unpack plugin tiddlers
 	$tw.wiki.readPluginInfo();
 	$tw.wiki.registerPluginTiddlers("plugin",$tw.safeMode ? ["$:/core"] : undefined);
@@ -2346,6 +2350,16 @@ $tw.boot.startup = function(options) {
 	$tw.boot.disabledStartupModules = $tw.boot.disabledStartupModules || [];
 	// Repeatedly execute the next eligible task
 	$tw.boot.executeNextStartupTask(options.callback);
+}
+/*
+Startup TiddlyWiki
+*/
+$tw.boot.startup = function(options) {
+	options = options || {};
+	// Get the URL hash and check for safe mode
+	$tw.boot.initStartup(options);
+	$tw.boot.loadStartup(options);
+	$tw.boot.execStartup(options);
 };
 
 /*
