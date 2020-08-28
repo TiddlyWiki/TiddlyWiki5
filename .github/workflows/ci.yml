@@ -5,9 +5,6 @@ on:
       - master
       - tiddlywiki-com
 env:
-  COMMIT_CONTEXT: "GitHub build"
-  COMMIT_EMAIL: "actions@github.com"
-  COMMIT_NAME: "GitHub Actions"
   NODE_VERSION: "12"
 jobs:
   test:
