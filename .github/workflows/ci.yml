@@ -29,6 +29,13 @@ jobs:
         with:
           node-version: "${{ env.NODE_VERSION }}"
       - run: "./bin/ci-pre-build.sh"
+      # There's another near-duplicate "Set dynamic environment variables" step in
+      # the `build-tiddlywiki-com` job.
+      # These _could_ be extracted as a script (or moved into `ci-pre-build.sh`) to do away with the
+      # duplication, but, the visibility that comes from having these in the workflow file seems
+      # valuable. Environment variables are global variables and setting them at the top-level
+      # makes sense.
+      # Time to reconsider this decision might be when this setup turns out to be mistake-prone.
       - name: "Set dynamic environment variables"
         run: |
           TW5_BUILD_BRANCH=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
@@ -53,6 +60,8 @@ jobs:
         with:
           node-version: "${{ env.NODE_VERSION }}"
       - run: "./bin/ci-pre-build.sh"
+      # When making a change here, don't forget to see if it also applies to the step
+      # with the same name in the `build-prerelease` job.
       - name: "Set dynamic environment variables"
         run: |
           TW5_BUILD_BRANCH=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
