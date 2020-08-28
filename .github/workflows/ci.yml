@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: "${{ env.NODE_VERSION }}"
       - run: "./bin/test.sh"
-  build-prelease:
+  build-prerelease:
     runs-on: ubuntu-latest
     if: github.ref == "refs/heads/master"
     needs: test
