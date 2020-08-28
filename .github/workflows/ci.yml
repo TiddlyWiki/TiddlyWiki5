@@ -31,10 +31,10 @@ jobs:
       - run: "./bin/ci-pre-build.sh"
       - name: "Set dynamic environment variables"
         run: |
-          TRAVIS_BRANCH=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
-          echo ::set-env name=TRAVIS_BRANCH::${TRAVIS_BRANCH}
+          TW5_BUILD_BRANCH=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
+          echo ::set-env name=TW5_BUILD_BRANCH::${TW5_BUILD_BRANCH}
           echo ::set-env name=TW5_BUILD_VERSION::$(./bin/get-plugin-library-version-number)
-          echo ::set-env name=TW5_BUILD_DETAILS::Prerelease built from branch \'$TRAVIS_BRANCH\' at commit $(git rev-parse HEAD) of $(git remote get-url origin) at $(date +'%F %T %Z')
+          echo ::set-env name=TW5_BUILD_DETAILS::Prerelease built from branch \'$TW5_BUILD_BRANCH\' at commit $(git rev-parse HEAD) of $(git remote get-url origin) at $(date +'%F %T %Z')
       - run: "./bin/build-site.sh"
       - run: "./bin/ci-push.sh"
         env:
@@ -55,10 +55,10 @@ jobs:
       - run: "./bin/ci-pre-build.sh"
       - name: "Set dynamic environment variables"
         run: |
-          TRAVIS_BRANCH=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
-          echo ::set-env name=TRAVIS_BRANCH::${TRAVIS_BRANCH}
+          TW5_BUILD_BRANCH=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
+          echo ::set-env name=TW5_BUILD_BRANCH::${TW5_BUILD_BRANCH}
           echo ::set-env name=TW5_BUILD_VERSION::$(./bin/get-plugin-library-version-number)
-          echo ::set-env name=TW5_BUILD_DETAILS::Built from branch \'$TRAVIS_BRANCH\' at commit $(git rev-parse HEAD) of $(git remote get-url origin) at $(date +'%F %T %Z')
+          echo ::set-env name=TW5_BUILD_DETAILS::Built from branch \'$TW5_BUILD_BRANCH\' at commit $(git rev-parse HEAD) of $(git remote get-url origin) at $(date +'%F %T %Z')
       - run: "./bin/build-site.sh"
       - run: "./bin/ci-push.sh"
         env:
