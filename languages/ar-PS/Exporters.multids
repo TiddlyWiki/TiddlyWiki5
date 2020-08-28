@@ -1,0 +1,5 @@
+title: $:/language/Exporters/
+
+CsvFile: ملف CSV
+JsonFile: ملف JSON
+TidFile: ملف ".tid"
