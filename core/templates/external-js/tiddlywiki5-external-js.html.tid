@@ -37,5 +37,5 @@ title: $:/core/templates/tiddlywiki5-external-js.html
 <!--~~ Ordinary tiddlers ~~-->
 {{$:/core/templates/store.area.template.html}}
 </body>
-<script src="tiddlywiki.js" onerror="alert('Error: Cannot load tiddlywiki.js');"></script>
+<script src="external-core.js" onerror="alert('Error: Cannot load tiddlywiki.js');"></script>
 </html>
