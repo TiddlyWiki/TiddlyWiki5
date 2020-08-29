@@ -5,13 +5,13 @@
 
 cd output || exit 1
 
-git config --global user.email "${COMMIT_EMAIL:-travis@travis-ci.org}" || exit 1
+git config --global user.email "actions@github.com" || exit 1
 
-git config --global user.name "${COMMIT_NAME:-Travis CI}" || exit 1
+git config --global user.name "GitHub Actions" || exit 1
 
 git add -A . || exit 1
 
-git commit --message "${COMMIT_CONTEXT:-Travis build}: $TRAVIS_BUILD_NUMBER of $TRAVIS_BRANCH ($(date +'%F %T %Z'))" || exit 1
+git commit --message "GitHub build: $GITHUB_RUN_NUMBER of $TW5_BUILD_BRANCH ($(date +'%F %T %Z'))" || exit 1
 
 git remote add deploy "https://$GH_TOKEN@github.com/Jermolene/jermolene.github.io.git" &>/dev/null || exit 1
 
