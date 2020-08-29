@@ -62,6 +62,7 @@ type: text/vnd.tiddlywiki
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4741]] [[WidgetMessage: tm-import-tiddlers]] to override the title $:/Import and to better control whether the import tiddler is opened automatically
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4740]] the EditWidget to pass all attributes through to the sub-widget
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/bd2cf5c46498222a32ebda92da3ae50bde33decb]] the internal `<$element>` widget to add a hook so that plugins can intercept DOM node creation
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4811]] the [[trim Operator]] to optionally trim off a prefixing or suffixing string from input tiddler titles
 
 ! Bug Fixes
 
