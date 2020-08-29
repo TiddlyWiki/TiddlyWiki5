@@ -39,10 +39,6 @@ exports.trim = function(source,operator,options) {
 		suffix = operator.suffix || "",
 		operand = (operator.operand || ""),
 		fnCalc;
-	if(operand !== "") {
-		// Safely regexp-escape the operand
-		operand = operand.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
-	}
 	if(suffix === "prefix") {
 		fnCalc = function(a,b) {return [$tw.utils.trimPrefix(a,b)];}
 	} else if(suffix === "suffix") {

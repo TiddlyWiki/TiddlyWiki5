@@ -99,6 +99,8 @@ exports.trimPrefix = function(str,unwanted) {
 		if(unwanted === "") {
 			return str.replace(/^\s\s*/, '');
 		} else {
+			// Safely regexp-escape the unwanted text
+			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
 			var regex = new RegExp('^(' + unwanted + ')+');
 			return str.replace(regex, '');
 		}
@@ -112,6 +114,8 @@ exports.trimSuffix = function(str,unwanted) {
 		if(unwanted === "") {
 			return str.replace(/\s\s*$/, '');
 		} else {
+			// Safely regexp-escape the unwanted text
+			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
 			var regex = new RegExp('(' + unwanted + ')+$');
 			return str.replace(regex, '');
 		}
