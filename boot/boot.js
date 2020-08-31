@@ -510,11 +510,11 @@ var polyfill =[
 	"(function() {",
 	"	if (typeof globalThis === 'object') return;",
 	"	// node.green says this is available since 0.10.48",
-	"	Object.prototype.__defineGetter__('__wow__', function() {",
+	"	Object.prototype.__defineGetter__('__temp__', function() {",
 	"		return this;",
 	"	});",
-	"	__wow__.globalThis = __wow__; // lolwat",
-	"	delete Object.prototype.__wow__;",
+	"	__temp__.globalThis = __temp__;",
+	"	delete Object.prototype.__temp__;",
 	"}());"
 ].join("\n");
 
@@ -545,7 +545,7 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 		"  return exports;\n",
 		"})"
 	].join("\n");
-	// code = "(function(" + contextNames.join(",") + ") {(function(){  \n" + code + "\n;})();\nreturn exports;\n})\n";
+
 	// Compile the code into a function
 	var fn;
 	if($tw.browser) {
@@ -565,18 +565,12 @@ $tw.utils.sandbox = !$tw.browser ? vm.createContext({}) : undefined;
 Run code in a sandbox with only the specified context variables in scope
 */
 $tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename,allowGlobals) {
-	return $tw.utils.evalGlobal(code,context,filename,(allowGlobals ? vm.createContext({}) : $tw.utils.sandbox),allowGlobals);
+	return $tw.utils.evalGlobal(
+		code,context,filename,
+		allowGlobals ? vm.createContext({}) : $tw.utils.sandbox,
+		allowGlobals
+	);
 };
-
-// if(!$tw.browser) $tw.utils.evalSandboxed(`
-//   setInterval(function(){
-// 		console.log(globalThis)
-// 		if(Object.keys(globalThis).length){
-// 			console.log(globalThis);
-// 			throw "Global assignment is not allowed within modules on node.";
-// 		}
-// 	}, 1000);
-// `, { setInterval, exports: {}, console }, "$:/boot/boot.js-global-monitor");
 
 /*
 Creates a PasswordPrompt object
