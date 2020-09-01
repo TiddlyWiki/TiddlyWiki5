@@ -45,7 +45,7 @@ jobs:
       - run: "./bin/build-site.sh"
       - run: "./bin/ci-push.sh"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_PUSH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUBPUSHTOKEN }}
   build-tiddlywiki-com:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/tiddlywiki-com'
@@ -71,4 +71,4 @@ jobs:
       - run: "./bin/build-site.sh"
       - run: "./bin/ci-push.sh"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_PUSH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUBPUSHTOKEN }}
