@@ -15,7 +15,7 @@ Within view templates, the variable `tv-freelinks` is automatically set to the c
 
 !! Notes
 
-To change within which tiddlers freelinking occurs requires customising the shadow tiddler $:/plugins/tiddlywiki/freelinks/macros/view. This tiddler is tagged $:/tags/Macro/View  which means that it will be included as a local macro in each view template. By default, its content is:
+To change within which tiddlers freelinking occurs requires customising the shadow tiddler [[$:/plugins/tiddlywiki/freelinks/macros/view]]. This tiddler is tagged $:/tags/Macro/View  which means that it will be included as a local macro in each view template. By default, its content is:
 
 ```
 <$set name="tv-freelinks" value={{$:/config/Freelinks/Enable}}/>

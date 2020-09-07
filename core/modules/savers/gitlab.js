@@ -34,7 +34,7 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 			"Private-Token": password
 		};
 	// Bail if we don't have everything we need
-	if(!username || !password || !repo || !path || !filename) {
+	if(!username || !password || !repo || !filename) {
 		return false;
 	}
 	// Make sure the path start and ends with a slash
