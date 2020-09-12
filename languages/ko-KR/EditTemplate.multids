@@ -17,7 +17,6 @@ Tags/Add/Button: 추가
 Tags/Add/Placeholder: 태그 이름
 Tags/Dropdown/Caption: 태그 목록
 Tags/Dropdown/Hint: 태그 목록을 보여줍니다
-Title/BadCharacterWarning: 경고: 티들러 제목에 문자 <<bad-chars>> 의 사용은 피하십시오
 Type/Delete/Caption: 내용 형식 삭제
 Type/Delete/Hint: 내용 형식을 삭제합니다
 Type/Dropdown/Caption: 내용 형식 목록

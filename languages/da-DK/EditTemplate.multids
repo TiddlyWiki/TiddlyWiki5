@@ -16,7 +16,6 @@ Tags/Add/Button: tilføj
 Tags/Add/Placeholder: tagnavn
 Tags/Dropdown/Caption: tagliste
 Tags/Dropdown/Hint: Vis tagliste
-Title/BadCharacterWarning: Advarsel: undgå alle at bruge nogen af disse bogstaver <<bad-chars>> i tiddler titler
 Type/Delete/Caption: slet indholdstype
 Type/Delete/Hint: Slet indholdstype
 Type/Dropdown/Caption: indholdstypeliste

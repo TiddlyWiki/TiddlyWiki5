@@ -17,7 +17,6 @@ Tags/Add/Button: adicionar
 Tags/Add/Placeholder: nome do assunto
 Tags/Dropdown/Caption: lista de assuntos
 Tags/Dropdown/Hint: Mostrar a lista de assuntos
-Title/BadCharacterWarning: Atenção: Evite utilizar os caracteres <<bad-chars>> no título de tiddlers
 Title/Exists/Prompt: O Tiddler especificado já existe 
 Title/Relink/Prompt: Substituindo ''<$text text=<<fromTitle>>/>'' por ''<$text text=<<toTitle>>/>'' nas //lista//, //tags// e campos de outros tiddlers
 Type/Delete/Caption: apagar formato de arquivo

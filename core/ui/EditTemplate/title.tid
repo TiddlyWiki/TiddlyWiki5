@@ -3,20 +3,6 @@ tags: $:/tags/EditTemplate
 
 <$edit-text field="draft.title" class="tc-titlebar tc-edit-texteditor" focus={{{ [{$:/config/AutoFocus}match[title]then[true]] ~[[false]] }}} tabindex={{$:/config/EditTabIndex}} cancelPopups="yes"/>
 
-<$vars pattern="""[\|\[\]{}]""" bad-chars="""`| [ ] { }`""">
-
-<$list filter="[all[current]regexp:draft.title<pattern>]" variable="listItem">
-
-<div class="tc-message-box">
-
-{{$:/core/images/warning}} {{$:/language/EditTemplate/Title/BadCharacterWarning}}
-
-</div>
-
-</$list>
-
-</$vars>
-
 <$reveal state="!!draft.title" type="nomatch" text={{!!draft.of}} tag="div">
 
 <$list filter="[{!!draft.title}!is[missing]]" variable="listItem">

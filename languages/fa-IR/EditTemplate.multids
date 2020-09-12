@@ -18,7 +18,6 @@ Tags/Add/Button: اضافه کن
 Tags/Add/Placeholder: نام برچسب
 Tags/Dropdown/Caption: لیست برچسب
 Tags/Dropdown/Hint: نمایش لیست برچسب
-Title/BadCharacterWarning: اخطار: از استفاده از هر گونه از کاراکترهای <<bad-chars>> در عنوان تیدلرها خودداری کنید
 Title/Exists/Prompt: تیدلر مورد نظر از قبل وجود دارد
 Title/Relink/Prompt: برروز رسانی کنه ''<$text text=<<fromTitle>>/>'' به ''<$text text=<<toTitle>>/>'' در //برچسب// و //لیست// فضای خالی سایر تیدلرها
 Type/Delete/Caption: پاک کردن نوع محتوا

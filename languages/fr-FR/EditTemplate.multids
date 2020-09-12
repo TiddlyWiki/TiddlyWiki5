@@ -21,7 +21,6 @@ Tags/Add/Button/Hint: ajoute un tag
 Tags/Add/Placeholder: nom du tag
 Tags/Dropdown/Caption: liste des tags
 Tags/Dropdown/Hint: Montre la liste des tags
-Title/BadCharacterWarning: Attention : il est préférable d'éviter l'usage des caractères <<bad-chars>> dans les titres des tiddlers
 Title/Exists/Prompt: Le tiddler cible existe déjà
 Title/Relink/Prompt: Changer ''<$text text=<<fromTitle>>/>'' en ''<$text text=<<toTitle>>/>'' dans les //tags// et les champs //list// des autres tiddlers
 Title/References/Prompt: Les références suivantes à ce tiddler ne seront pas mises à jour automatiquement :

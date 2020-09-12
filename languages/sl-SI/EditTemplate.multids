@@ -17,7 +17,6 @@ Tags/Add/Button: dodaj
 Tags/Add/Placeholder: ime oznake
 Tags/Dropdown/Caption: seznam oznak
 Tags/Dropdown/Hint: Pokaži seznam oznak
-Title/BadCharacterWarning: Opozorilo: izogibajte se uporabi znakov <<bad-chars>> v naslovih tiddler
 Title/Exists/Prompt: Ciljni tiddler že obstaja
 Title/Relink/Prompt: Spremeni iz ''<$text text=<<fromTitle>>/>'' v ''<$text text=<<toTitle>>/>'' v //oznakah// in //seznamskih// poljih ostalih tiddlerjev
 Type/Delete/Caption: izbriši vrsto vsebine

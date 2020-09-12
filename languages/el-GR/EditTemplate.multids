@@ -17,7 +17,6 @@ Tags/Add/Button: προσθήκη
 Tags/Add/Placeholder: όνομα ετικέτας
 Tags/Dropdown/Caption: λίστα ετικετών
 Tags/Dropdown/Hint: Εμφανίζει την λίστα ετικετών
-Title/BadCharacterWarning: Προειδοποίηση: αποφύγετε την χρήση των χαρακτήρων <<bad-chars>> στους τίτλους των tiddler
 Title/Exists/Prompt: Το tiddler προορισμού υπάρχει ήδη
 Title/Relink/Prompt: Ενημερώνει το ''<$text text=<<fromTitle>>/>'' σε ''<$text text=<<toTitle>>/>'' στα πεδία //tags// και //list// των υπολοίπων tiddler
 Type/Delete/Caption: Διέγραψε τον τύπο περιεχομένου

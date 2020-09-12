@@ -20,7 +20,6 @@ Tags/Add/Button/Hint: voeg label toe
 Tags/Add/Placeholder: labelnaam
 Tags/Dropdown/Caption: labellijst
 Tags/Dropdown/Hint: Toon labellijst
-Title/BadCharacterWarning: Waarschuwing: vermijd elk karakter van <<bad-chars>> in tiddler titels
 Title/Exists/Prompt: Doeltiddler bestaat al
 Title/References/Prompt: De volgende referenties naar deze tiddler worden niet automatisch bijgewerkt:
 Title/Relink/Prompt: Werk ''<$text text=<<fromTitle>>/>'' naar ''<$text text=<<toTitle>>/>'' bij in de //label// en //lijst// velden van andere tiddlers

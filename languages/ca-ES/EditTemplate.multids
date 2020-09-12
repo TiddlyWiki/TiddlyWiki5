@@ -21,7 +21,6 @@ Tags/Add/Button/Hint: afegeix una etiqueta
 Tags/Add/Placeholder: nom de l'etiqueta
 Tags/Dropdown/Caption: llista d'etiquetes
 Tags/Dropdown/Hint: Mostra la llista d'etiquetes
-Title/BadCharacterWarning: Avís: eviteu qualsevol dels caràcters <<bad-chars>> al títol d'un tiddler
 Title/Exists/Prompt: El tiddler destinació ja existeix
 Title/References/Prompt: Les referències següents cap aquest tiddler no s'actualitzaran automàticament:
 Title/Relink/Prompt: Actualitza ''<$text text=<<fromTitle>>/>'' cap a ''<$text text=<<toTitle>>/>'' a les //etiquetes// i a la //lista// de camps d'altres tiddlers
