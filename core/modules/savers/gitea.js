@@ -31,7 +31,7 @@ GiteaSaver.prototype.save = function(text,method,callback) {
 		headers = {
 			"Accept": "application/json",
 			"Content-Type": "application/json;charset=UTF-8",
-			"Authorization": "Basic " + window.btoa(username + ":" + password)
+			"Authorization": "token " + password
 		};
 	// Bail if we don't have everything we need
 	if(!username || !password || !repo || !filename) {
