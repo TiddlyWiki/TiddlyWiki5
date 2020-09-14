@@ -90,6 +90,9 @@ function makeStringReducingOperator(fnCalc,initialValue) {
 		source(function(tiddler,title) {
 			result.push(title);
 		});
+		if(result.length === 0) {
+			return [];
+		}
 		return [result.reduce(function(accumulator,currentValue) {
 			return fnCalc(accumulator,currentValue,operator.operand || "");
 		},initialValue) || ""];
