@@ -32,12 +32,13 @@ type: text/vnd.tiddlywiki
 
 ! Translation Improvements
 
+* New Arabic (Palestine) translation
 * Catalan
 * Chinese
 
 ! Performance Improvements
 
-* 
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/pull/4659]] templates to use a single VarsWidget instead of several [[SetVariableWidgets|SetVariableWidget]], for improved performance and easier debugging
 
 ! Usability Improvements
 
@@ -67,6 +68,8 @@ type: text/vnd.tiddlywiki
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/bd2cf5c46498222a32ebda92da3ae50bde33decb]] the internal `<$element>` widget to add a hook so that plugins can intercept DOM node creation
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4811]] the [[trim Operator]] to optionally trim off a prefixing or suffixing string from input tiddler titles
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/95e30138f0b34135031d50c1606e8b0059ca6653]] LinkCatcherWidget to pass keyboard modifier status to actions
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4724]] original event to `tm-navigate` event
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4811]] the [[trim Operator]] to optionally trim a given string instead of whitespace, and trim from front, back, or both sides of input tiddlers
 
 ! Bug Fixes
 
@@ -89,8 +92,13 @@ type: text/vnd.tiddlywiki
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4704]] (with [[addendum|https://github.com/Jermolene/TiddlyWiki5/pull/4705]]) syntax error in ScrollableWidget
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4711]] extraneous system tiddlers created during import process
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4780]] problem with headers not being treated case insensitively
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/a2796d89ab3dbf4a15b63b0f4623387fdc6acd5b]] problem with `Content-Type` HTTP header sent as `Content-type`
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4776]] EntityWidget not refreshing correctly
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4774]] [[Markdown Plugin]] to honour alignment directives
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/f74c49f393da3213abadaa52dd09940d708ea635]] syncing issues with external JS template
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4813]] incorrect base64 encoding of astral plane Unicode text
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4770]] server error when saving a new tiddler created by following a tiddler link
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4751]] a `plugin-priority` field to the TiddlyWeb plugin so that language plugins can override its language strings
 
 ! Contributors
 
@@ -107,11 +115,14 @@ type: text/vnd.tiddlywiki
 * [[@flibbles|https://github.com/flibbles]]
 * [[@ibnishak|https://github.com/ibnishak]]
 * [[@idotobi|https://github.com/idotobi]]
+* [[@jdangerx|https://github.com/jdangerx]]
 * [[@jjduhamel|https://github.com/jjduhamel]]
+* [[@Kamal-Habash|https://github.com/Kamal-Habash]]
 * [[@Marxsal|https://github.com/Marxsal]]
 * [[@mocsa|https://github.com/mocsa]]
 * [[@NicolasPeton|https://github.com/NicolasPeton]]
 * [[@passuf|https://github.com/passuf]]
 * [[@pmario|https://github.com/pmario]]
+* [[@rmunn|https://github.com/rmunn]]
 * [[@saqimtias|https://github.com/saqimtias]]
 * [[@twMat|https://github.com/twMat]]
