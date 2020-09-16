@@ -5,9 +5,11 @@ module-type: command
 
 Command to save the subtiddlers of a bundle tiddler as a series of JSON files
 
---savelibrarytiddlers <tiddler> <pathname> <skinnylisting>
+--savelibrarytiddlers <tiddler> <tiddler-filter> <pathname> <skinnylisting>
 
 The tiddler identifies the bundle tiddler that contains the subtiddlers.
+
+The tiddler filter specifies the plugins to be included.
 
 The pathname specifies the pathname to the folder in which the JSON files should be saved. The filename is the URL encoded title of the subtiddler.
 
