@@ -1,6 +1,6 @@
 caption: 5.1.23
-created: 20200713174339235
-modified: 20200713174339235
+created: 20200912173852160
+modified: 20200912173852160
 tags: ReleaseNotes
 title: Release 5.1.23
 type: text/vnd.tiddlywiki
@@ -32,23 +32,27 @@ type: text/vnd.tiddlywiki
 
 ! Translation Improvements
 
+* New Arabic (Palestine) translation
 * Catalan
 * Chinese
 
 ! Performance Improvements
 
-* 
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/pull/4659]] templates to use a single VarsWidget instead of several [[SetVariableWidgets|SetVariableWidget]], for improved performance and easier debugging
 
 ! Usability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8cf458d3b3f1e38c14a2819529e08dca4a7e297c]] "Solarized Dark" palette
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/pull/4590]] Vanilla theme to use palette colours for the [[browser selection outline|https://developer.mozilla.org/en-US/docs/Web/CSS/::selection]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1546a4a1895b93a47b79c9d37b94be039604443a]] warning message about using the online plugin library with the client-server configuration
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/4585]] Gruvbox palette readability of toolbar buttons
 * [[Changed|https://github.com/Jermolene/TiddlyWiki5/commit/9cd5415dfe54b47819920aa3cf6ac2d5e3a9188e]] favicon for the prerelease edition
-
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/484c9e986fc6f323e30460a88f134da3a4e8a89e]] the $:/PaletteManager to show "indirect" colours (ie, colours defined by another `<<colour>>` macro)
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4791]] a 'tabIndex' property to the tiddler editor input area to make it easier to use the tab key to move between edit controls
 
 ! Hackability Improvements
 
+* [[Adedd|https://github.com/Jermolene/TiddlyWiki5/pull/4777]] new Hyperdrive saver for use with Beaker Browser v1.0
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/4966f6ab625c8ce2c9f0812a726ba928d68ea00b]] new [[slugify Operator]] and [[duplicateslugs Operator]] for generating human readable filenames/URLs
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/619c0752bd3c6e71d1fcdb74daa03cfe8257afe4]] new [[sortsub Operator]] for sorting by a user defined subfilter
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/e71a27ac2d71f2e48f9e4e9156b59bb3ecc2a105]] LinkWidget to work within SVG elements
@@ -63,6 +67,9 @@ type: text/vnd.tiddlywiki
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4740]] the EditWidget to pass all attributes through to the sub-widget
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/bd2cf5c46498222a32ebda92da3ae50bde33decb]] the internal `<$element>` widget to add a hook so that plugins can intercept DOM node creation
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4811]] the [[trim Operator]] to optionally trim off a prefixing or suffixing string from input tiddler titles
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/95e30138f0b34135031d50c1606e8b0059ca6653]] LinkCatcherWidget to pass keyboard modifier status to actions
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4724]] original event to `tm-navigate` event
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4811]] the [[trim Operator]] to optionally trim a given string instead of whitespace, and trim from front, back, or both sides of input tiddlers
 
 ! Bug Fixes
 
@@ -84,23 +91,38 @@ type: text/vnd.tiddlywiki
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4687]] edit template field dropdown positioning
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4704]] (with [[addendum|https://github.com/Jermolene/TiddlyWiki5/pull/4705]]) syntax error in ScrollableWidget
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4711]] extraneous system tiddlers created during import process
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4780]] problem with headers not being treated case insensitively
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/a2796d89ab3dbf4a15b63b0f4623387fdc6acd5b]] problem with `Content-Type` HTTP header sent as `Content-type`
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4776]] EntityWidget not refreshing correctly
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4774]] [[Markdown Plugin]] to honour alignment directives
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/f74c49f393da3213abadaa52dd09940d708ea635]] syncing issues with external JS template
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4813]] incorrect base64 encoding of astral plane Unicode text
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4770]] server error when saving a new tiddler created by following a tiddler link
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4751]] a `plugin-priority` field to the TiddlyWeb plugin so that language plugins can override its language strings
 
 ! Contributors
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
+* [[@adithya-badidey|https://github.com/adithya-badidey]]
 * [[@Arlen22|https://github.com/Arlen22]]
 * [[@bimlas|https://github.com/bimlas]]
 * [[@BramChen|https://github.com/BramChen]]
 * [[@BurningTreeC|https://github.com/BurningTreeC]]
 * [[@danielo515|https://github.com/danielo515]]
+* [[@ento|https://github.com/ento]]
+* [[@favadi|https://github.com/favadi]]
 * [[@flibbles|https://github.com/flibbles]]
 * [[@ibnishak|https://github.com/ibnishak]]
 * [[@idotobi|https://github.com/idotobi]]
+* [[@jdangerx|https://github.com/jdangerx]]
+* [[@jjduhamel|https://github.com/jjduhamel]]
+* [[@Kamal-Habash|https://github.com/Kamal-Habash]]
 * [[@Marxsal|https://github.com/Marxsal]]
 * [[@mocsa|https://github.com/mocsa]]
 * [[@NicolasPeton|https://github.com/NicolasPeton]]
 * [[@passuf|https://github.com/passuf]]
 * [[@pmario|https://github.com/pmario]]
+* [[@rmunn|https://github.com/rmunn]]
 * [[@saqimtias|https://github.com/saqimtias]]
 * [[@twMat|https://github.com/twMat]]
