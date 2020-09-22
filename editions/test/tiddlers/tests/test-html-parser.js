@@ -69,7 +69,7 @@ describe("HTML tag new parser tests", function() {
 			{ type : 'string', start : 2, value : '', end : 4 }
 		);
 		expect($tw.utils.parseStringLiteral('filter=""""a" "b"""" ',7)).toEqual(
-			{ type : 'string', start : 7, value : "\"a\" \"b\"", end : 21}
+			{ type : 'string', start : 7, value : "\"a\" \"b\"", end : 20}
 		);
 	});
 
@@ -129,7 +129,7 @@ describe("HTML tag new parser tests", function() {
 			{ type : 'macrocall', start : 0, params : [ { type : 'macro-parameter', start : 9, value : 'two', name : 'one', end : 17 }, { type : 'macro-parameter', start : 17, value : 'four and five', name : 'three', end : 39 } ], name : 'myMacro', end : 41 } 
 		);
 		expect($tw.utils.parseMacroInvocation('<<jsontiddlers filter:""""a" "b"""">>',0)).toEqual(
-			{type: "macrocall", start: 0, params: [{ type: "macro-parameter", start: 15, value: "\"a\" \"b\"", name: "filter", end: 35}],
+			{type: "macrocall", start: 0, params: [{ type: "macro-parameter", start: 14, value: "\"a\" \"b\"", name: "filter", end: 35}],
 				name: "jsontiddlers", end: 37 }
 		);
 	});
