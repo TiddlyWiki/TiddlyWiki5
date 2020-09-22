@@ -42,21 +42,6 @@ exports.split = makeStringBinaryOperator(
 	function(a,b) {return ("" + a).split(b);}
 );
 
-exports.asdate = makeStringBinaryOperator(
-	function(a,b,c) {
-		var value = $tw.utils.parseDate(a);
-		if(value && $tw.utils.isDate(value) && value.toString() !== "Invalid Date") {
-			if(c === "relative") {
-				return [$tw.utils.getRelativeDate((new Date()) - (new Date(value))).description];
-			} else {
-				return [$tw.utils.formatDateString(value,b || "YYYY MM DD 0hh:0mm")];
-			}
-		} else {
-			return [];
-		}
-	}
-);
-
 exports.join = makeStringReducingOperator(
 	function(accumulator,value,operand) {
 		if(accumulator === null) {
@@ -71,7 +56,7 @@ function makeStringBinaryOperator(fnCalc) {
 	return function(source,operator,options) {
 		var result = [];
 		source(function(tiddler,title) {
-			Array.prototype.push.apply(result,fnCalc(title,operator.operand || "",operator.suffix || ""));
+			Array.prototype.push.apply(result,fnCalc(title,operator.operand || ""));
 		});
 		return result;
 	};
