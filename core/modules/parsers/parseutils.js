@@ -109,7 +109,7 @@ exports.parseStringLiteral = function(source,pos) {
 		type: "string",
 		start: pos
 	};
-	var reString = /(?:"""([\s\S]*)"""|"([^"]*)")|(?:'([^']*)')/g;
+	var reString = /(?:"""([\s\S]*?"?)"""|"([^"]*)")|(?:'([^']*)')/g;
 	reString.lastIndex = pos;
 	var match = reString.exec(source);
 	if(match && match.index === pos) {
@@ -132,7 +132,7 @@ exports.parseMacroParameter = function(source,pos) {
 		start: pos
 	};
 	// Define our regexp
-	var reMacroParameter = /(?:([A-Za-z0-9\-_]+)\s*:)?(?:\s*(?:"""([\s\S]*)"""|"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^\s>"'=]+)))/g;
+	var reMacroParameter = /(?:([A-Za-z0-9\-_]+)\s*:)?(?:\s*(?:"""([\s\S]*?"?)"""|"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^\s>"'=]+)))/g;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for the parameter

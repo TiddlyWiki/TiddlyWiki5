@@ -95,7 +95,7 @@ describe("HTML tag new parser tests", function() {
 		expect($tw.utils.parseMacroParameter("myparam>",0)).toEqual(
 			{ type : 'macro-parameter', start : 0, value : 'myparam', end : 7 }
 		);
-		expect($tw.utils.parseMacroParameter('filter:""""a" "b""""',0)).toEqual(
+		expect($tw.utils.parseMacroParameter('filter:""""a" "b"""" test:""""c" "d"""" ',0)).toEqual(
 			{ type: 'macro-parameter', start: 0, value: "\"a\" \"b\"", name: 'filter', end: 20 }
 		);
 		expect($tw.utils.parseMacroParameter('filter:"""a" "b"""',0)).toEqual(
