@@ -107,11 +107,16 @@ describe("WikiText parser tests", function() {
 
 	it("should parse macro definitions", function() {
 		expect(parse("\\define myMacro()\nnothing\n\\end\n")).toEqual(
-
 			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isMacroDefinition : true } ]
-
 		);
 
+		expect(parse('\\define xx(filter:""""a" "b"""")\n')).toEqual(
+			[{type: "set", attributes: { name: { type: "string", value: "xx"}, value: { type: "string", value: ""}},
+					children: [],
+					params: [{ name: "filter", default: "\"a\" \"b\""}],
+					"isMacroDefinition": true
+			}]
+		);
 	});
 
 	it("should parse macro calls", function() {
