@@ -463,7 +463,7 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("John Paul George Ringo +[split[e]]").join(",")).toBe("John,Paul,G,org,,Ringo");
 		expect(wiki.filterTiddlers("John Paul George Ringo +[join[ ]split[e]join[ee]split[ ]]").join(",")).toBe("John,Paul,Geeorgee,Ringo");
 		// Ensure that join doesn't return null if passed empty list
-		expect(wiki.filterTiddlers("Test +[butlast[]join[ ]]")).toEqual([""]);
+		expect(wiki.filterTiddlers("Test +[butlast[]join[ ]]")).toEqual([]);
 		// Ensure that join correctly handles empty strings in source
 		expect(wiki.filterTiddlers("[[]] Paul +[join[-]]").join(",")).toBe("-Paul");
 		expect(wiki.filterTiddlers("[[ John ]] [[Paul ]] [[ George]] Ringo +[trim[]join[-]]").join(",")).toBe("John-Paul-George-Ringo");
