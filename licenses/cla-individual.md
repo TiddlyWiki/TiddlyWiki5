@@ -407,3 +407,5 @@ Dazhong Xia, @jdangerx, 2020/06/23
 Diep Pham, @favadi, 2020/07/30
 
 Kamal Habash, @Kamal-Habash, 2020/08/28
+
+Florian Kohrt, @fkohrt, 2020/09/10
