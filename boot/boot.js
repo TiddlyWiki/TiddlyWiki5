@@ -652,11 +652,13 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	var promptInfo = {
 		serviceName: options.serviceName,
 		callback: options.callback,
-		form: form
+		form: form,
+		owner: this
 	};
 	this.passwordPrompts.push(promptInfo);
 	// Make sure the wrapper is displayed
 	this.setWrapperDisplay();
+	return promptInfo;
 };
 
 $tw.utils.PasswordPrompt.prototype.removePrompt = function(promptInfo) {

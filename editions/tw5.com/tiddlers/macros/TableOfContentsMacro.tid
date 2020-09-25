@@ -1,5 +1,5 @@
 created: 20140919155729620
-modified: 20150221224034000
+modified: 20201017134038305
 tags: Macros [[Core Macros]]
 title: Table-of-Contents Macros
 type: text/vnd.tiddlywiki
@@ -33,6 +33,8 @@ At each level, the tiddlers can be [[ordered|Order of Tagged Tiddlers]] by means
 The tree displays the <<.field caption>> field of a tiddler if it has one, or the tiddler's title otherwise.
 
 Each tiddler in the tree is normally displayed as a link. To suppress this, give the tiddler a <<.field toc-link>> field with the the value <<.value no>>. In the [[examples|Table-of-Contents Macros (Examples)]], the SecondThree tiddler is set up like this. Clicking such a tiddler in the tree causes its branch to expand or collapse.
+
+<<.from-version "5.1.23">> By default, the links open the tiddlers making up the table of contents. Alternatively, if the tiddler contains a <<.field target>> field then its contents will be used as the target of the link.
 
 The table of contents is generated as an HTML ordered list. The `<ol>` elements always have the class `tc-toc`. Expandable trees have the additional class `tc-toc-expandable`. Selectively expandable trees (including those in the two-panel browser) have `tc-toc-selective-expandable`.
 

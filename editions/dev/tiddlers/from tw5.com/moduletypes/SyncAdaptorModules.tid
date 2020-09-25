@@ -1,5 +1,5 @@
 created: 20130825162100000
-modified: 20200113094126878
+modified: 20201014124049248
 tags: dev moduletypes
 title: SyncAdaptorModules
 type: text/vnd.tiddlywiki
@@ -79,6 +79,31 @@ Attempts to login to the server with specified credentials. This method is optio
 |username |Username |
 |password |Password |
 |callback |Callback function invoked with parameter `err` |
+
+!! `customiseLoginPrompt(promptInfo)`
+
+Provides an opportunity to customise the login prompt.
+
+|!Parameter |!Description |
+|promptInfo |The `promptInfo` object returned by `$tw.passwordPrompt.createPrompt()` |
+
+Here's an example of customising the login prompt to include a "forgotten password" button:
+
+```
+SyncAdaptor.prototype.customiseLoginPrompt = function(promptInfo) {
+	promptInfo.form.appendChild($tw.utils.domMaker("button",{
+		attributes: {type: "submit"},
+		text: "Forgot password",
+		eventListeners: [{
+				name: "click",
+				handlerFunction: function(event) {
+					promptInfo.owner.removePrompt(promptInfo);
+					alert("Forgot password");
+				}
+			}]
+	}));
+};
+```
 
 !! `logout(callback)`
 

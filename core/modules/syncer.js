@@ -400,7 +400,7 @@ Syncer.prototype.handleLoginEvent = function() {
 	var self = this;
 	this.getStatus(function(err,isLoggedIn,username) {
 		if(!err && !isLoggedIn) {
-			$tw.passwordPrompt.createPrompt({
+			var promptInfo = $tw.passwordPrompt.createPrompt({
 				serviceName: $tw.language.getString("LoginToTiddlySpace"),
 				callback: function(data) {
 					self.login(data.username,data.password,function(err,isLoggedIn) {
@@ -409,6 +409,10 @@ Syncer.prototype.handleLoginEvent = function() {
 					return true; // Get rid of the password prompt
 				}
 			});
+			// Let the sync adaptor adjust the prompt
+			if(self.syncadaptor && self.syncadaptor.customiseLoginPrompt) {
+				self.syncadaptor.customiseLoginPrompt(promptInfo);
+			}
 		}
 	});
 };
