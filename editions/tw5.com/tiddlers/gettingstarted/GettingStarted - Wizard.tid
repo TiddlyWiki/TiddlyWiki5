@@ -1,0 +1,127 @@
+created: 20200621165918319
+modified: 20200625033738411
+sortby-savers-browserextensions: [["file-backups" Extension for Firefox by pmario]] [["savetiddlers" Extension for Chrome and Firefox by buggyj]] [[Timimi: WebExtension and Native Host by Riz]] [[Saving with TiddlyFox]] [[Saving with TiddlyIE]]
+tags: 
+title: GettingStarted - Wizard
+type: text/vnd.tiddlywiki
+
+<!-- INTRO -->
+
+<$reveal type="match" state="$:/state/GettingStartedWizard" text="intro" default="intro">
+
+Hello there, again.
+
+<p>~TiddlyWiki is a note taking applications that is unlike most of the traditional alternatives you must have come across. If you have not yet downloaded a copy for yourself, go ahead and get one here.</p>
+{{$:/editions/tw5.com/snippets/download-empty-button}}
+<p>A few points to keep in mind before going further.</p>
+
+# You can view, navigate and search your ~TiddlyWiki files using any modern browser. You need to choose a saver only if you want to edit your ~TiddlyWiki files.
+
+# ~TiddlyWiki has a built-in mechanism that works by creating a modified copy of your ~TiddlyWiki file every time you save your changes. Depending on your [[browser settings|https://support.mozilla.org/en-US/kb/change-firefox-behavior-when-open-file]], you will be asked to select a location to save the modified copy or browser will save the file automatically to default download folder. Although this procedure uses the browser's standard download method, it does not require an internet connection.  You can update your original ~TiddlyWiki file by choosing to overwrite it with the modified copy. The saver methods listed below aims to simplify this workflow with the help of additional software. In addition to saving, the savers may offer extra features like backups, uploading to online services etc. 
+
+# You can keep multiple ~TiddlyWiki files. Each ~TiddlyWiki file is completely independent of each other. This is almost like being able to run separate instances of Evernote or ~OneNote in the same computer. You may choose to use a different saving method for different ~TiddlyWiki file.
+
+# Only one saver will remain active at a time. For eg: if you choose a saver that uploads to cloud service, your changes will not be reflected in local copy.
+
+<<.warningw "Do not use your browser's File/Save menu option to save changes. Your edits to tiddlywiki file will not be saved.">>
+
+<div class="tc-doc-wizard-navigation">
+<$button class="tc-btn-boxed tc-btn-wizard tc-btn-wizard-next" set="$:/state/GettingStartedWizard" setTo="multipledevice">Next</$button>
+</div>
+
+</$reveal>
+
+
+<!-- MULTIPLE DEVICE 1-->
+
+<$reveal type="match" state="$:/state/GettingStartedWizard" text="multipledevice">
+      <div class="tc-doc-gswizard-qn">Would you like to edit your ~TiddlyWiki files from multiple devices?</div>
+      <div style="margin: 15px 8px;">
+            <$radio class="tc-radio-doc-big" tiddler="$:/state/GettingStartedMultiDevice" value="yes">Yes</$radio>
+            <$radio class="tc-radio-doc-big" tiddler="$:/state/GettingStartedMultiDevice" value="no"> No</$radio>
+      </div>
+
+      <div class="tc-doc-wizard-navigation">
+            <$button class="tc-btn-boxed tc-btn-wizard" set="$:/state/GettingStartedWizard" setTo="intro">Previous</$button>
+            <$reveal style="margin-left:auto;" type="match" state="$:/state/GettingStartedMultiDevice" text="no">
+            <$button class="tc-btn-boxed tc-btn-wizard tc-btn-wizard-next" set="$:/state/GettingStartedWizard" setTo="dedicatedapp">Next</$button>
+            </$reveal>
+            <$reveal style="margin-left:auto;" type="match" state="$:/state/GettingStartedMultiDevice" text="yes">
+            <$button class="tc-btn-boxed tc-btn-wizard tc-btn-wizard-next" set="$:/state/GettingStartedWizard" setTo="webservice">Next</$button>
+            </$reveal>
+      </div>
+</$reveal>
+
+<!-- MULTIPLE DEVICE 2-->
+
+<$reveal type="match" state="$:/state/GettingStartedWizard" text="webservice">
+      <div class="tc-doc-gswizard-qn">Which of the following services would you like to use to sync your ~TiddlyWiki files between your devices?</div>
+      
+      <div style="margin: 15px 8px;">
+            <$radio class="tc-radio-doc-big" tiddler="$:/state/GettingStartedSyncService" value="Saving to a Git service"> Github/Gitlab</$radio>
+            <$radio class="tc-radio-doc-big" tiddler="$:/state/GettingStartedSyncService" value="TiddlyDrive Add-on for Google Drive by Joshua Stubbs"> Google Drive</$radio>
+            <$radio class="tc-radio-doc-big" tiddler="$:/state/GettingStartedSyncService" value="TiddlyWiki Cloud"> Dropbox</$radio>
+            <$radio class="tc-radio-doc-big" tiddler="$:/state/GettingStartedSyncService" value="Saving on TiddlySpot"> Tiddlyspot</$radio>
+      </div>
+
+      <$reveal tag="div" class="tc-flex" style="justify-content:center;" type="nomatch" state="$:/state/GettingStartedSyncService" text="">
+            <$set name="currentTiddler" tiddler="$:/state/GettingStartedSyncService">
+            {{||$:/_tw5.com-card-template}}
+            </$set>
+      </$reveal>
+
+      <div class="tc-doc-wizard-navigation">
+      <$button class="tc-btn-boxed tc-btn-wizard" set="$:/state/GettingStartedWizard" setTo="multipledevice">Previous</$button>
+      </div>
+</$reveal>
+
+<!-- DEDICATED APP -->
+
+<$reveal type="match" state="$:/state/GettingStartedWizard" text="dedicatedapp">
+      <div class="tc-doc-gswizard-qn">Would you like to install dedicated software to manage, save and backup your tiddlywiki files?</div>
+      <<.notew "You need to have permission/privileges to install software in your device">>
+      
+      <div style="margin: 15px 8px;">
+            <$radio class="tc-radio-doc-big" tiddler="$:/state/GettingStartedDedicatedApp" value="yes">Yes</$radio>
+            <$reveal type="match" state="$:/state/GettingStartedDedicatedApp" text="yes" default="">
+            <div class="tc-flex" style="justify-content: center;">
+            {{Saving on TiddlyDesktop||$:/_tw5.com-card-template}} {{Saving on iPad/iPhone||$:/_tw5.com-card-template}} {{Saving on Android||$:/_tw5.com-card-template}} 
+            </div>
+            </$reveal>
+            <$radio class="tc-radio-doc-big" tiddler="$:/state/GettingStartedDedicatedApp" value="no">No</$radio>
+      </div>
+
+      <div class="tc-doc-wizard-navigation">
+            <$button class="tc-btn-boxed tc-btn-wizard" set="$:/state/GettingStartedWizard" setTo="multipledevice">Previous</$button>
+            <$reveal style="margin-left:auto;"  type="match" state="$:/state/GettingStartedDedicatedApp" text="no">
+            <$button class="tc-btn-boxed tc-btn-wizard" set="$:/state/GettingStartedWizard" setTo="browserextension">Next</$button>
+            </$reveal>
+      </div>
+</$reveal>
+
+
+<!-- BROWSER EXTENSION -->
+
+<$reveal type="match" state="$:/state/GettingStartedWizard" text="browserextension">
+      <div class="tc-doc-gswizard-qn">Would you like to install browser extensions to save and backup your tiddlywiki files?</div>
+      <<.notew "You need to have permission/privileges to install browser extensions in your device">>
+      
+      <div style="margin: 15px 8px;">
+            <$radio class="tc-radio-doc-big" tiddler="$:/state/GettingStartedBrowserExtension" value="yes" default="">Yes</$radio>
+                  <$reveal type="match" state="$:/state/GettingStartedBrowserExtension" text="yes">
+                  <div class="tc-flex" style="justify-content: center;">
+                  <$list filter="[method[save]delivery[Browser Extension]sortby{Saving!!sortby-savers-browserextensions}]" template="$:/_tw5.com-card-template"/>
+                  </div>
+                  </$reveal>
+            <$radio class="tc-radio-doc-big" tiddler="$:/state/GettingStartedBrowserExtension" value="no"> No</$radio>
+                  <$reveal type="match" state="$:/state/GettingStartedBrowserExtension" text="no">
+                  <div class="tc-flex" style="justify-content: center;">
+                  {{Saving with the HTML5 fallback saver||$:/_tw5.com-card-template}}
+                  </div>
+                  </$reveal>
+      </div>
+
+      <div class="tc-doc-wizard-navigation">
+      <$button class="tc-btn-boxed tc-btn-wizard" set="$:/state/GettingStartedWizard" setTo="dedicatedapp">Previous</$button>
+      </div>
+</$reveal>

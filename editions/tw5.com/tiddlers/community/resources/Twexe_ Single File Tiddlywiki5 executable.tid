@@ -2,10 +2,10 @@ caption: Twexe
 color: #ff8a65
 community-author: ihm4u
 created: 20200507214737998
-delivery: App
-description: Single File Tiddlywiki5 executable
+delivery: Desktop App
+description: Portable app. Available for Linux and Windows.
 method: save
-modified: 20200507215529213
+modified: 20200625180327240
 tags: Firefox [[Internet Explorer]] Opera Resources Safari Saving Windows Edge Linux
 title: Twexe: Single File Tiddlywiki5 executable
 type: text/vnd.tiddlywiki

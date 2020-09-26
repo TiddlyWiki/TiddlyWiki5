@@ -1,11 +1,11 @@
-caption: file-backups
+caption: File-backups
 color: #4DB6AC
 community-author: Mario Pietsch
 created: 20171116165500000
 delivery: Browser Extension
 description: Browser extension for Firefox
 method: save
-modified: 20200507105159105
+modified: 20200625180435068
 tags: Firefox Saving Resources plugins
 title: "file-backups" Extension for Firefox by pmario
 type: text/vnd.tiddlywiki

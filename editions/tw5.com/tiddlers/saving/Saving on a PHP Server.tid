@@ -1,10 +1,10 @@
 caption: PHP
 color: #F06292
 created: 20140111091844267
-delivery: DIY
+delivery: Server
 description: DIY script you can install on your own server
 method: save
-modified: 20200507110314202
+modified: 20200625180822458
 tags: Saving PHP
 title: Saving on a PHP Server
 type: text/vnd.tiddlywiki

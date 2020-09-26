@@ -1,11 +1,11 @@
 caption: Ruby Server
-color: #78909C
+color: #F06292
 community-author: Jim Foltz
 created: 20180514011710789
-delivery: Server-side Script
+delivery: Server
 description: DIY script you can run as a server
 method: save
-modified: 20200507203129704
+modified: 20200625180822474
 tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows iOS Edge
 title: Saving via a Minimal Ruby Server
 type: text/vnd.tiddlywiki

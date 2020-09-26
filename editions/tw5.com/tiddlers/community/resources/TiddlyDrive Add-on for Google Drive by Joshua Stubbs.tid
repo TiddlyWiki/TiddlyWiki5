@@ -1,12 +1,12 @@
 caption: ~TiddlyDrive
-color: #FFEB3B
+color: #29B6F6
 community-author: Joshua Stubbs
 created: 20171109172705241
-delivery: Google Drive Add-on
+delivery: Web Service
 description: Google Drive add-on to save TiddlyWiki files
 method: save
-modified: 20200507202706013
-tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Resources Safari Saving Windows iOS plugins Edge
+modified: 20200625180613342
+tags: Resources Saving
 title: TiddlyDrive Add-on for Google Drive by Joshua Stubbs
 type: text/vnd.tiddlywiki
 url: https://lordratte.gitlab.io/tiddlydrive/#installation-guide
