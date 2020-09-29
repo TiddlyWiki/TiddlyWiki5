@@ -28,10 +28,9 @@ The advantages of the widget formulation are:
 
 * Macro parameters are specified as widget attributes, thus allowing indirection via `{{title!!field}}`, `<<macroname>>` or `{{{filter}}}`
 * The output format can be chosen from several options:
-** `text/html` wikifies the text of the macro
-** `text/plain` wikifies the text of the macro and then extracts the plain text characters (ie. ignoring HTML tags)
-** `text/raw` returns the plain text of the macro, without wikification
-
+** `text/html` wikifies the result of the macro
+** `text/plain` wikifies the result of the macro and then extracts the plain text characters (ie. ignoring HTML tags)
+** <<.from-version "5.1.23">> `text/raw` returns the result of the macro, without wikification
 
 You can see several examples of the macro call widget within the core:
 
