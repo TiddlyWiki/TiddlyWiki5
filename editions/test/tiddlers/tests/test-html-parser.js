@@ -68,6 +68,9 @@ describe("HTML tag new parser tests", function() {
 		expect($tw.utils.parseStringLiteral("p=\"\"  ",2)).toEqual(
 			{ type : 'string', start : 2, value : '', end : 4 }
 		);
+		expect($tw.utils.parseStringLiteral('filter=""""a" "b"""" ',7)).toEqual(
+			{ type : 'string', start : 7, value : "\"a\" \"b\"", end : 20}
+		);
 	});
 
 	it("should parse macro parameters", function() {
@@ -91,6 +94,18 @@ describe("HTML tag new parser tests", function() {
 		);
 		expect($tw.utils.parseMacroParameter("myparam>",0)).toEqual(
 			{ type : 'macro-parameter', start : 0, value : 'myparam', end : 7 }
+		);
+		expect($tw.utils.parseMacroParameter('filter:""""a" "b"""" test:""""c" "d"""" ',0)).toEqual(
+			{ type: 'macro-parameter', start: 0, value: "\"a\" \"b\"", name: 'filter', end: 20 }
+		);
+		expect($tw.utils.parseMacroParameter('filter:""""a" "b"""" test:""""c" "d"""" ',20)).toEqual(
+			{ type: 'macro-parameter', start: 20, value: '"c" "d"', name: 'test', end: 39 }
+		);
+		expect($tw.utils.parseMacroParameter('filter:"""a" "b"""',0)).toEqual(
+			{ type: 'macro-parameter', start: 0, value: "a\" \"b", name: 'filter', end: 18 }
+		);
+		expect($tw.utils.parseMacroParameter('filter:"""a " b"""',0)).toEqual(
+			{ type: 'macro-parameter', start: 0, value: "a \" b", name: 'filter', end: 18 }
 		);
 	});
 
@@ -116,7 +131,14 @@ describe("HTML tag new parser tests", function() {
 		expect($tw.utils.parseMacroInvocation("<<myMacro one:two three:'four and five'>>",0)).toEqual(
 			{ type : 'macrocall', start : 0, params : [ { type : 'macro-parameter', start : 9, value : 'two', name : 'one', end : 17 }, { type : 'macro-parameter', start : 17, value : 'four and five', name : 'three', end : 39 } ], name : 'myMacro', end : 41 } 
 		);
+		expect($tw.utils.parseMacroInvocation('<<jsontiddlers filter:""""a" "b"""" test:""""c" "d"""">>',0)).toEqual(
+			{ type: 'macrocall', start: 0, params: [ Object({ type: 'macro-parameter', start: 14, value: '"a" "b"',
+				 name: 'filter', end: 35 }), Object({ type: 'macro-parameter', start: 35, value: '"c" "d"', name: 'test', end: 54 }) ], 
+				 name: 'jsontiddlers', end: 56 }
+		);
 	});
+
+
 
 	it("should parse HTML attributes", function() {
 		expect($tw.utils.parseAttribute("p='blah'  ",1)).toEqual(
