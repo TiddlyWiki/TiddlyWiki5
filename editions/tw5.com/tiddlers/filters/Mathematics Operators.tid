@@ -35,7 +35,7 @@ Operators can be combined:
 
 Complex operations will sometimes need to be split up into separate filters. For example, to compute the average length of the text field of tiddlers tagged "~HelloThere":
 
-<$macrocall $name='wikitext-example-without-html'
+<$macrocall $name="wikitext-example-without-html"
 src="""<$set name="number-of-tiddlers" value={{{ [tag[HelloThere]count[]] }}}>
 Average length of <$text text=<<number-of-tiddlers>>/> tiddlers tagged <<tag "HelloThere">>: <$text text={{{ [tag[HelloThere]get[text]length[]sum[]divide<number-of-tiddlers>fixed[3]] }}}/>
 </$set>""" />

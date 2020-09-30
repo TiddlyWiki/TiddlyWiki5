@@ -11,7 +11,7 @@ The `module-type` field of a [[JavaScript module|Modules]] is a string that iden
 <dl>
 <$list filter="[moduletypes[]]">
 <dt>{{!!title}}</dt>
-<$set name=type value=<<currentTiddler>>>
+<$set name="type" value=<<currentTiddler>>>
 <dd><<describe>></dd>
 </$set>
 </$list>

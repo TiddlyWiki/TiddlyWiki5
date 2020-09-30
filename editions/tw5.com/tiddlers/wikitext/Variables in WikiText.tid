@@ -16,7 +16,7 @@ A variable's value can be used as a [[filter parameter|Filter Parameter]], or as
 !! Example: defining a variable
 
 <$macrocall $name=".example" n="1"
-eg="""<$set name=animal value=zebra>
+eg="""<$set name=animal value="zebra">
 <<animal>>
 </$set>"""/>
 
