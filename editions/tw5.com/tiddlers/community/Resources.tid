@@ -8,7 +8,7 @@ These are sites with resources created by the ~TiddlyWiki [[Community]] help you
 
 <div class="tc-link-info">
 
-<$list filter='[tag[Resources]!sort[modified]]'>
+<$list filter="[tag[Resources]!sort[modified]]">
 
 <div class="tc-link-info-item">
 

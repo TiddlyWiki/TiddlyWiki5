@@ -8,7 +8,7 @@ TiddlyWiki5 can be used to build older 2.x.x versions of TiddlyWikiClassic from 
 
 * The `tiddlywiki/classictools` plugin, containing a deserializer module which allows tiddlers to be loaded from TiddlyWiki 2.x.x `.recipe` files
 * The `stripcomments` format for the ViewWidget, which strips single line JavaScript comments starting `//#`
-* The `stripTitlePrefix='yes'` attribute of the FieldsWidget, which removes prefixes wrapped in curly braces from the `title` attribute
+* The `stripTitlePrefix="yes"` attribute of the FieldsWidget, which removes prefixes wrapped in curly braces from the `title` attribute
 ** For example, `{tiddler}HelloThere` would be transformed to `HelloThere`
 
 ! Usage
