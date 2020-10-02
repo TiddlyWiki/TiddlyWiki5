@@ -18,7 +18,7 @@ $baseFilename$$(extension)$
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/Exporter]]">
 <$set name="extension" value={{!!extension}}>
 <$button class="tc-btn-invisible">
-<$action-sendmessage $message="tm-download-file" $param=<<currentTiddler>> exportFilter="""$exportFilter$""" filename=<<exportButtonFilename """$baseFilename$""">>/>
+<$action-sendmessage $message="tm-download-file" $param=<<currentTiddler>> exportFilter=<<__exportFilter__>> filename=<<exportButtonFilename """$baseFilename$""">>/>
 <$action-deletetiddler $tiddler=<<qualify "$:/state/popup/export">>/>
 <$transclude field="description"/>
 </$button>

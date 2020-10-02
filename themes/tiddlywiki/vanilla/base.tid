@@ -100,7 +100,6 @@ h1, h2, h3, h4, h5, h6 {
 
 pre {
 	display: block;
-	padding: 14px;
 	margin-top: 1em;
 	margin-bottom: 1em;
 	word-break: normal;
@@ -233,13 +232,10 @@ kbd {
 }
 
 ::selection {
-	background-color: <<colour primary>>;
-	color: <<colour page-background>>;
-}
-
-::-moz-selection {
-	background-color: <<colour primary>>;
-	color: <<colour page-background>>;
+	background-color: Highlight;
+	color: HighlightText;
+	background-color: <<colour selection-background>>;
+	color: <<colour selection-foreground>>;
 }
 
 /*

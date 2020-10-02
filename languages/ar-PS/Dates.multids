@@ -1,0 +1,90 @@
+title: $:/language/
+
+Date/DaySuffix/1: 
+Date/DaySuffix/10: 
+Date/DaySuffix/11: 
+Date/DaySuffix/12: 
+Date/DaySuffix/13: 
+Date/DaySuffix/14: 
+Date/DaySuffix/15: 
+Date/DaySuffix/16: 
+Date/DaySuffix/17: 
+Date/DaySuffix/18: 
+Date/DaySuffix/19: 
+Date/DaySuffix/2: 
+Date/DaySuffix/20: 
+Date/DaySuffix/21: 
+Date/DaySuffix/22: 
+Date/DaySuffix/23: 
+Date/DaySuffix/24: 
+Date/DaySuffix/25: 
+Date/DaySuffix/26: 
+Date/DaySuffix/27: 
+Date/DaySuffix/28: 
+Date/DaySuffix/29: 
+Date/DaySuffix/3: 
+Date/DaySuffix/30: 
+Date/DaySuffix/31: 
+Date/DaySuffix/4: 
+Date/DaySuffix/5: 
+Date/DaySuffix/6: 
+Date/DaySuffix/7: 
+Date/DaySuffix/8: 
+Date/DaySuffix/9: 
+Date/Long/Day/0: الأحد
+Date/Long/Day/1: الإثنين
+Date/Long/Day/2: الثلاثاء
+Date/Long/Day/3: الأربعاء
+Date/Long/Day/4: الخميس
+Date/Long/Day/5: الجمعة
+Date/Long/Day/6: السبت
+Date/Long/Month/1: كانون الثاني
+Date/Long/Month/10: تشرين الأول
+Date/Long/Month/11: تشرين الثاني
+Date/Long/Month/12: كانون الأول
+Date/Long/Month/2: شباط
+Date/Long/Month/3: أذار
+Date/Long/Month/4: نيسان
+Date/Long/Month/5: أيار
+Date/Long/Month/6: حزيران
+Date/Long/Month/7: تموز
+Date/Long/Month/8: آب
+Date/Long/Month/9: أيلول
+Date/Period/am: ًصباحا
+Date/Period/pm:  مساءاً
+Date/Short/Day/0: الأحد
+Date/Short/Day/1: الإثنين
+Date/Short/Day/2: الثلاثاء
+Date/Short/Day/3: الأربعاء
+Date/Short/Day/4: الخميس
+Date/Short/Day/5: الجمعة
+Date/Short/Day/6: السبت
+Date/Short/Month/1: كانون الثاني
+Date/Short/Month/10: تشرين الأول
+Date/Short/Month/11: تشرين الثاني
+Date/Short/Month/12: كانون الأول
+Date/Short/Month/2: شباط
+Date/Short/Month/3: أذار
+Date/Short/Month/4: نيسان
+Date/Short/Month/5: أيار
+Date/Short/Month/6: حزيران
+Date/Short/Month/7: تموز
+Date/Short/Month/8: آب
+Date/Short/Month/9: أيلول
+RelativeDate/Future/Days: <<period>> بعد أيام من الآن
+
+RelativeDate/Future/Hours: <<period>> ساعات من الآن
+RelativeDate/Future/Minutes: <<period>> دقائق من الآن
+
+RelativeDate/Future/Months: <<period>> بعد أشهر من الآن
+RelativeDate/Future/Second: ثانية واحدة من الآن
+RelativeDate/Future/Seconds: <<period>> ثواني من الآن
+RelativeDate/Future/Years: <<period>> سنوات من الآن
+RelativeDate/Past/Days: <<period>> أيام مضت
+RelativeDate/Past/Hours: <<period>> منذ ساعات
+RelativeDate/Past/Minutes: <<period>> دقائق مضت
+RelativeDate/Past/Months: <<period>> منذ اشهر
+RelativeDate/Past/Second: منذ ثانية واحدة
+
+RelativeDate/Past/Seconds: <<period>> منذ ثوانى
+RelativeDate/Past/Years: <<period>> سنين مضت

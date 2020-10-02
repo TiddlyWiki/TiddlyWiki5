@@ -1,7 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/tiddlyweb",
 	"name": "TiddlyWeb",
-	"description": "Sync changes to TW5 server or TiddlyWeb server",
+	"description": "Sync changes from the browser to TW5 (node.js) or TiddlyWeb server",
 	"list": "readme",
 	"plugin-priority": 10
 }
