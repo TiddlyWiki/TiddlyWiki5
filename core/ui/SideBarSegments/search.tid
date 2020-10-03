@@ -45,12 +45,16 @@ tags: $:/tags/SideBarSegment
 <$vars configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}} searchTiddler="$:/temp/search/input" searchListState=<<qualify "$:/state/search-list/selected-item">>>
 <$vars titleSearchFilter={{{ [<configTiddler>get[first-search-filter]] }}} allSearchFilter={{{ [<configTiddler>get[second-search-filter]] }}}>
 <div class="tc-search">
+<$keyboard key="((input-tabs-right))" actions="""<$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="after" defaultState={{$:/config/SearchResults/Default}}/>""">
+<$keyboard key="((input-tabs-left))" actions="""<$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="before" defaultState={{$:/config/SearchResults/Default}}/>""">
 <$macrocall $name="keyboard-driven-input" tiddler="$:/temp/search" storeTitle=<<searchTiddler>> 
 		selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" 
 		tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> 
 		class="tc-popup-handle" primaryListFilter=<<titleSearchFilter>> secondaryListFilter=<<allSearchFilter>> 
 		filterMinLength={{$:/config/Search/MinLength}} inputCancelActions=<<cancel-search-actions>> 
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> cancelPopups="yes" />
+</$keyboard>
+</$keyboard>
 <$reveal state=<<searchTiddler>> type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
