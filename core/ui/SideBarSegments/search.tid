@@ -19,11 +19,17 @@ tags: $:/tags/SideBarSegment
 
 \define search-results-list()
 \whitespace trim
-<$list filter="[{$(searchTiddler)$}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$set name="userInput" value={{$(searchTiddler)$}}>
+<$list filter="[<userInput>minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+
+<$tiddler tiddler="$(configTiddler)$">
 
 {{$:/core/ui/SearchResults}}
 
+</$tiddler>
+
 </$list>
+</$set>
 \end
 
 \define delete-state-tiddlers() <$action-deletetiddler $filter="[[$:/temp/search]] [<searchTiddler>] [<searchListState>]"/>
@@ -36,7 +42,8 @@ tags: $:/tags/SideBarSegment
 
 <div class="tc-sidebar-lists tc-sidebar-search">
 
-<$vars searchTiddler="$:/temp/search/input" searchListState=<<qualify "$:/state/search-list/selected-item">> titleSearchFilter="[!is[system]search:title<userInput>sort[title]limit[250]]" allSearchFilter="[!is[system]search<userInput>sort[title]limit[250]]">
+<$vars configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}} searchTiddler="$:/temp/search/input" searchListState=<<qualify "$:/state/search-list/selected-item">>>
+<$vars titleSearchFilter={{{ [<configTiddler>get[first-search-filter]] }}} allSearchFilter={{{ [<configTiddler>get[second-search-filter]] }}}>
 <div class="tc-search">
 <$macrocall $name="keyboard-driven-input" tiddler="$:/temp/search" storeTitle=<<searchTiddler>> 
 		selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" 
@@ -73,6 +80,8 @@ tags: $:/tags/SideBarSegment
 </$reveal>
 
 </$reveal>
+
+</$vars>
 
 </$vars>
 
