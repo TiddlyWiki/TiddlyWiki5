@@ -40,13 +40,15 @@ tags: $:/tags/SideBarSegment
 
 \define input-accept-variant-actions() <$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/>
 
+\define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<nextTab>>/>"""/>
+
 <div class="tc-sidebar-lists tc-sidebar-search">
 
 <$vars configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}} searchTiddler="$:/temp/search/input" searchListState=<<qualify "$:/state/search-list/selected-item">>>
 <$vars titleSearchFilter={{{ [<configTiddler>get[first-search-filter]] }}} allSearchFilter={{{ [<configTiddler>get[second-search-filter]] }}}>
 <div class="tc-search">
-<$keyboard key="((input-tabs-right))" actions="""<$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="after" defaultState={{$:/config/SearchResults/Default}}/>""">
-<$keyboard key="((input-tabs-left))" actions="""<$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="before" defaultState={{$:/config/SearchResults/Default}}/>""">
+<$keyboard key="((input-tabs-right))" actions=<<set-next-input-tab>>>
+<$keyboard key="((input-tabs-left))" actions=<<set-next-input-tab "before">>>
 <$macrocall $name="keyboard-driven-input" tiddler="$:/temp/search" storeTitle=<<searchTiddler>> 
 		selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" 
 		tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> 
