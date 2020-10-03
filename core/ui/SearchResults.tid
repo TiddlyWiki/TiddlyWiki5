@@ -1,5 +1,3 @@
-title: $:/core/ui/SearchResults
-
 <div class="tc-search-results">
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]butfirst[]limit[1]]" emptyMessage="""
@@ -8,7 +6,7 @@ title: $:/core/ui/SearchResults
 </$list>
 """>
 
-<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]" default={{$:/config/SearchResults/Default}}/>
+<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]" default={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<currentTab>>/>""" />
 
 </$list>
 
