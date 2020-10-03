@@ -1,11 +1,12 @@
 title: $:/core/macros/keyboard-driven-input
 tags: $:/tags/Macro
 
-\define change-input-tab(stateTitle,tag,beforeafter,defaultState)
+\define change-input-tab(stateTitle,tag,beforeafter,defaultState,actions)
 <$set name="tabsList" filter="[all[shadows+tiddlers]tag<__tag__>!has[draft.of]]">
 <$vars currentState={{{ [<__stateTitle__>!is[missing]get[text]] ~[<__defaultState__>] }}} firstTab={{{ [enlist<tabsList>nth[1]] }}} lastTab={{{ [enlist<tabsList>last[]] }}}>
 <$set name="nextTab" value={{{ [all[shadows+tiddlers]tag<__tag__>!has[draft.of]$beforeafter$<currentState>] ~[[$beforeafter$]removeprefix[after]suffix[]addprefix<firstTab>] ~[[$beforeafter$]removeprefix[before]suffix[]addprefix<lastTab>] }}}>
 <$action-setfield $tiddler=<<__stateTitle__>> text=<<nextTab>>/>
+$actions$
 </$set>
 </$vars>
 </$set>
