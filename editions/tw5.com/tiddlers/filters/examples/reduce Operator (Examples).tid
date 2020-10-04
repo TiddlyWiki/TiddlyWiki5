@@ -1,0 +1,16 @@
+created: 20201004154413968
+modified: 20201004154413968
+tags: [[Operator Examples]] [[reduce Operator]]
+title: reduce Operator (Examples)
+type: text/vnd.tiddlywiki
+
+\define add-numbers() [get[text]length[]compare:integer:gteq[1000]]
+\define display-variable(name)
+''<$text text=<<__name__>>/>'': <code><$text text={{{ [<__name__>getvariable[]] }}}/></code>
+\end
+
+These examples use the following predefined variables:
+
+* <<display-variable add-numbers>>
+
+<<.operator-example 1 "[tag[HelloThere]filter<larger-than-1k>]">>
