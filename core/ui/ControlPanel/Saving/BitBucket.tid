@@ -1,0 +1,14 @@
+title: $:/core/ui/ControlPanel/Saving/BitBucket
+tags: $:/tags/ControlPanel/Saving
+caption: {{$:/language/ControlPanel/Saving/GitService/BitBucket/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Saving/GitService/
+\define service-name() ~BitBucket
+
+<<lingo BitBucket/Description>>
+
+|<<lingo UserName>> |<$edit-text tiddler="$:/BitBucket/Username" default="" tag="input"/> |
+|<<lingo BitBucket/Password>> |<$password name="bitbucket"/> |
+|<<lingo Repo>> |<$edit-text tiddler="$:/BitBucket/Repo" default="" tag="input"/> |
+|<<lingo Filename>> |<$edit-text tiddler="$:/BitBucket/Filename" default="" tag="input"/> |
+|<<lingo ServerURL>> |<$edit-text tiddler="$:/BitBucket/ServerURL" default="https://bitbucket.org" tag="input"/> |

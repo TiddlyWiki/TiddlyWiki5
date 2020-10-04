@@ -40,7 +40,13 @@ exports.httpRequest = function(options) {
 		f,results;
 	// Massage the data hashmap into a string
 	if(options.data) {
-		if(typeof options.data === "string") { // Already a string
+	    if(options.data instanceof FormData) {
+	        if(hasHeader("Content-Type")) {
+                delete headers["Content-Type"]; // this will be handled automatically by the browser
+            }
+            data = options.data;
+        }
+		else if(typeof options.data === "string") { // Already a string
 			data = options.data;
 		} else { // A hashmap of strings
 			results = [];
@@ -73,7 +79,7 @@ exports.httpRequest = function(options) {
 			request.setRequestHeader(headerTitle,header);
 		});
 	}
-	if(data && !hasHeader("Content-Type")) {
+	if(data && !hasHeader("Content-Type") && !(data instanceof FormData)) {
 		request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
 	}
 	if(!hasHeader("X-Requested-With")) {

@@ -115,6 +115,9 @@ Saving/GitService/GitLab/Caption: ~GitLab Saver
 Saving/GitService/GitLab/Password: Personal access token for API (see [[GitLab help page|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] for details)
 Saving/GitService/Gitea/Caption: Gitea Saver
 Saving/GitService/Gitea/Password: Personal access token for API (via Gitea’s web interface: `Settings | Applications | Generate New Token`)
+Saving/GitService/BitBucket/Caption: BitBucket
+Saving/GitService/BitBucket/Description: These settings are only used when saving to ~BitBucket. The file will be saved as a downloadable artifact and will be available in the "Downloads" section of the repo
+Saving/GitService/BitBucket/Password: Password or ~AppPassword for your ~BitBucket account
 Saving/TiddlySpot/Advanced/Heading: Advanced Settings
 Saving/TiddlySpot/BackupDir: Backup Directory
 Saving/TiddlySpot/ControlPanel: ~TiddlySpot Control Panel
