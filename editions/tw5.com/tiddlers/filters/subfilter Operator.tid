@@ -22,4 +22,6 @@ type: text/vnd.tiddlywiki
 ...
 ```
 
+<<.tip "Compare with the similar [[filter|filter Operator]] operator which runs a subfilter against each title, returning those titles that return a non-empty list (and discards the results of the subfilter)">>
+
 <<.operator-examples "subfilter">>

@@ -1,16 +1,34 @@
 created: 20201004154413968
-modified: 20201004154413968
+modified: 20201006181831622
 tags: [[Operator Examples]] [[reduce Operator]]
 title: reduce Operator (Examples)
 type: text/vnd.tiddlywiki
 
-\define add-numbers() [get[text]length[]compare:integer:gteq[1000]]
+\define add-price() [get[price]multiply{!!quantity}add<accumulator>]
+\define num-items() [get[quantity]add<accumulator>]
 \define display-variable(name)
 ''<$text text=<<__name__>>/>'': <code><$text text={{{ [<__name__>getvariable[]] }}}/></code>
 \end
 
 These examples use the following predefined variables:
 
-* <<display-variable add-numbers>>
+* <<display-variable add-price>>
+* <<display-variable num-items>>
 
-<<.operator-example 1 "[tag[HelloThere]filter<larger-than-1k>]">>
+They also use the following data tiddlers:
+
+<ul>
+<$list filter="[tag[shopping]!has[draft.of]]">
+<li>
+''<$link><$text text=<<currentTiddler>>/></$link>'' quantity: <$text text={{!!quantity}}/>,  price: <$text text={{!!price}}/>
+</li>
+</$list>
+</ul>
+
+Number of items: 
+
+<<.operator-example 1 "[tag[shopping]reduce<num-items>]">>
+
+Total price:
+
+<<.operator-example 2 "[tag[shopping]reduce<add-price>]">>
