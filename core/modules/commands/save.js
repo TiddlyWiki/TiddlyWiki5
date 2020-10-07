@@ -37,7 +37,7 @@ Command.prototype.execute = function() {
 	$tw.utils.each(tiddlers,function(title) {
 		var tiddler = self.commander.wiki.getTiddler(title),
 			type = tiddler.fields.type || "text/vnd.tiddlywiki",
-			contentTypeInfo = $tw.config.contentTypeInfo[type] || {encoding: "utf8"},
+			contentTypeInfo = $tw.utils.getContentTypeInfo(type) || {encoding: "utf8"},
 			filepath = path.resolve(self.commander.outputPath,wiki.filterTiddlers(filenameFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0]);
 		if(self.commander.verbose) {
 			console.log("Saving \"" + title + "\" to \"" + filepath + "\"");

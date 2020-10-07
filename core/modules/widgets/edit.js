@@ -70,10 +70,10 @@ EditWidget.prototype.getEditorType = function() {
 			type = tiddler.fields.type;
 		}
 	}
-	type = type || "text/vnd.tiddlywiki";
+	type = $tw.utils.parseContentType(type || "text/vnd.tiddlywiki")[0];
 	var editorType = this.wiki.getTiddlerText(EDITOR_MAPPING_PREFIX + type);
 	if(!editorType) {
-		var typeInfo = $tw.config.contentTypeInfo[type];
+		var typeInfo = $tw.utils.getContentTypeInfo(type);
 		if(typeInfo && typeInfo.encoding === "base64") {
 			editorType = "binary";
 		} else {

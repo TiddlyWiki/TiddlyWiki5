@@ -132,7 +132,7 @@ Command.prototype.processBody = function(body,type,options,url) {
 	// Collect the tiddlers in a wiki
 	var incomingWiki = new $tw.Wiki();
 	if(options.raw) {
-		var typeInfo = type ? $tw.config.contentTypeInfo[type] : null,
+		var typeInfo = type ? $tw.utils.getContentTypeInfo(type) : null,
 			encoding = typeInfo ? typeInfo.encoding : "utf8";
 		incomingWiki.addTiddler(new $tw.Tiddler({
 			title: url,

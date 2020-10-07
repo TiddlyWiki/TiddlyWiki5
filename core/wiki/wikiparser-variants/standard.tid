@@ -1,0 +1,11 @@
+title: $:/config/WikiParserVariant/standard
+type: application/json
+caption: Standard
+description: Standard modern TiddlyWiki 5 
+
+{
+	"whitespace": "trim",
+	"rules": {
+		"except": "wikilink"
+	}
+}

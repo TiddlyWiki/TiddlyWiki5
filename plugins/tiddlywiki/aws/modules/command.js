@@ -109,7 +109,7 @@ Command.prototype.subCommands["s3-rendertiddler"] = function() {
 	// Render the tiddler
 	var text = this.commander.wiki.renderTiddler(type,title,{variables: variables}),
 		type = "text/plain",
-		encoding = ($tw.config.contentTypeInfo[type] || {encoding: "utf8"}).encoding;
+		encoding = ($tw.utils.getContentTypeInfo(type) || {encoding: "utf8"}).encoding;
 	// Zip it if needed
 	if(zipfilename) {
 		var JSZip = require("$:/plugins/tiddlywiki/jszip/jszip.js"),
@@ -177,7 +177,7 @@ Command.prototype.subCommands["s3-savetiddler"] = function() {
 		tiddler = wiki.getTiddler(title),
 		text = tiddler.fields.text,
 		type = tiddler.fields.type,
-		encoding = ($tw.config.contentTypeInfo[type] || {encoding: "utf8"}).encoding;
+		encoding = ($tw.utils.getContentTypeInfo(type) || {encoding: "utf8"}).encoding;
 	// Check parameters
 	if(!title || !region || !bucket || !filename) {
 		throw "Missing parameters";

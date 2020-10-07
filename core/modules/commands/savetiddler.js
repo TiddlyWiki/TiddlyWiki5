@@ -35,7 +35,7 @@ Command.prototype.execute = function() {
 		tiddler = this.commander.wiki.getTiddler(title);
 	if(tiddler) {
 		var type = tiddler.fields.type || "text/vnd.tiddlywiki",
-			contentTypeInfo = $tw.config.contentTypeInfo[type] || {encoding: "utf8"};
+			contentTypeInfo = $tw.utils.getContentTypeInfo(type) || {encoding: "utf8"};
 		$tw.utils.createFileDirectories(filename);
 		fs.writeFile(filename,tiddler.fields.text,contentTypeInfo.encoding,function(err) {
 			self.callback(err);

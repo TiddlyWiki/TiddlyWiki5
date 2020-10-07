@@ -240,7 +240,7 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 		}
 	}
 	// Take the file extension from the tiddler content type
-	var contentTypeInfo = $tw.config.contentTypeInfo[fileInfo.type] || {extension: ""};
+	var contentTypeInfo = $tw.utils.getContentTypeInfo(fileInfo.type) || {extension: ""};
 	// Generate the filepath
 	fileInfo.filepath = $tw.utils.generateTiddlerFilepath(tiddler.fields.title,{
 		extension: contentTypeInfo.extension,
@@ -326,7 +326,7 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 	$tw.utils.createDirectory(path.dirname(fileInfo.filepath));
 	if(fileInfo.hasMetaFile) {
 		// Save the tiddler as a separate body and meta file
-		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
+		var typeInfo = $tw.utils.getContentTypeInfo(tiddler.fields.type || "text/plain") || {encoding: "utf8"};
 		fs.writeFile(fileInfo.filepath,tiddler.fields.text,typeInfo.encoding,function(err) {
 			if(err) {
 				return callback(err);
@@ -353,7 +353,7 @@ exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 	$tw.utils.createDirectory(path.dirname(fileInfo.filepath));
 	if(fileInfo.hasMetaFile) {
 		// Save the tiddler as a separate body and meta file
-		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
+		var typeInfo = $tw.utils.getContentTypeInfo(tiddler.fields.type || "text/plain") || {encoding: "utf8"};
 		fs.writeFileSync(fileInfo.filepath,tiddler.fields.text,typeInfo.encoding);
 		fs.writeFileSync(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8");
 	} else {

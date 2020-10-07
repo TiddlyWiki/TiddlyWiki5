@@ -55,7 +55,7 @@ function putFile(region,bucketName,title,text,type,callback) {
 		s3bucket = new AWS.S3({
 			region: region
 		}),
-		encoding = ($tw.config.contentTypeInfo[type] || {encoding: "utf8"}).encoding,
+		encoding = ($tw.utils.getContentTypeInfo(type) || {encoding: "utf8"}).encoding,
 		params = {
 			Bucket: bucketName,
 			Key: title,

@@ -480,6 +480,31 @@ $tw.utils.registerFileType = function(type,encoding,extension,options) {
 };
 
 /*
+Parses a content type of the form "type/subtype; attribute=value", as per https://www.w3.org/Protocols/rfc1341/4_Content-Type.html
+Returns an array of [type/subtype,attribute,value], with the last two entries being optional
+*/
+$tw.utils.parseContentType = function(contentType) {
+	contentType = contentType || "";
+	var parts = contentType.split(";"),
+		results = [(parts[0] || "").trim()];
+	if(parts[1]) {
+		parts = parts[1].split("=");
+		if(parts[0]) {
+			results[1] = (parts[0] || "").trim();
+			results[2] = (parts[1] || "").trim();
+		}
+	}
+	return results;
+};
+
+/*
+Returns the contentTypeInfo for a type
+*/
+$tw.utils.getContentTypeInfo = function(contentType) {
+	return $tw.config.contentTypeInfo[$tw.utils.parseContentType(contentType)[0]] || null;
+};
+
+/*
 Given an extension, always access the $tw.config.fileExtensionInfo
 using a lowercase extension only.
 */
@@ -1463,6 +1488,7 @@ $tw.Wiki.prototype.processSafeMode = function() {
 Extracts tiddlers from a typed block of text, specifying default field values
 */
 $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields,options) {
+	type = $tw.utils.parseContentType(type)[0];
 	srcFields = srcFields || Object.create(null);
 	options = options || {};
 	var deserializer = $tw.Wiki.tiddlerDeserializerModules[options.deserializer],

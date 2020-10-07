@@ -214,7 +214,7 @@ exports.isTemporaryTiddler = function(title) {
 exports.isImageTiddler = function(title) {
 	var tiddler = this.getTiddler(title);
 	if(tiddler) {		
-		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"];
+		var contentTypeInfo = $tw.utils.getContentTypeInfo(tiddler.fields.type || "text/vnd.tiddlywiki");
 		return !!contentTypeInfo && contentTypeInfo.flags.indexOf("image") !== -1;
 	} else {
 		return null;
@@ -224,7 +224,7 @@ exports.isImageTiddler = function(title) {
 exports.isBinaryTiddler = function(title) {
 	var tiddler = this.getTiddler(title);
 	if(tiddler) {		
-		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"];
+		var contentTypeInfo = $tw.utils.getContentTypeInfo(tiddler.fields.type || "text/vnd.tiddlywiki");
 		return !!contentTypeInfo && contentTypeInfo.encoding === "base64";
 	} else {
 		return null;
@@ -877,14 +877,17 @@ exports.initParsers = function(moduleType) {
 
 /*
 Parse a block of text of a specified MIME type
-	type: content type of text to be parsed
+	contentType: content type of text to be parsed
 	text: text
 	options: see below
 Options include:
 	parseAsInline: if true, the text of the tiddler will be parsed as an inline run
 	_canonical_uri: optional string of the canonical URI of this content
 */
-exports.parseText = function(type,text,options) {
+exports.parseText = function(contentType,text,options) {
+	// Parse the parameteter from the content type
+	var parsedContentType = $tw.utils.parseContentType(contentType),
+		type = parsedContentType[0];
 	text = text || "";
 	options = options || {};
 	// Select a parser
@@ -902,7 +905,9 @@ exports.parseText = function(type,text,options) {
 	return new Parser(type,text,{
 		parseAsInline: options.parseAsInline,
 		wiki: this,
-		_canonical_uri: options._canonical_uri
+		_canonical_uri: options._canonical_uri,
+		paramName: parsedContentType[1],
+		paramValue: parsedContentType[2]
 	});
 };
 
@@ -1181,7 +1186,7 @@ exports.search = function(text,options) {
 		if(!tiddler) {
 			tiddler = new $tw.Tiddler({title: title, text: "", type: "text/vnd.tiddlywiki"});
 		}
-		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type] || $tw.config.contentTypeInfo["text/vnd.tiddlywiki"],
+		var contentTypeInfo = $tw.utils.getContentTypeInfo(tiddler.fields.type) || $tw.utils.getContentTypeInfo("text/vnd.tiddlywiki"),
 			searchFields;
 		// Get the list of fields we're searching
 		if(options.excludeField) {
@@ -1335,7 +1340,7 @@ exports.readFile = function(file,options) {
 		}
 	}
 	// Figure out if we're reading a binary file
-	var contentTypeInfo = $tw.config.contentTypeInfo[type],
+	var contentTypeInfo = $tw.utils.getContentTypeInfo(type),
 		isBinary = contentTypeInfo ? contentTypeInfo.encoding === "base64" : false;
 	// Log some debugging information
 	if($tw.log.IMPORT) {

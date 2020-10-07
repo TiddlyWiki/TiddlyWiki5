@@ -48,6 +48,10 @@ var WikiParser = function(type,text,options) {
 	}
 	// Save the parse text
 	this.type = type || "text/vnd.tiddlywiki";
+	this.variant = null;
+	if(options.paramName === "variant" && options.paramValue) {
+		this.variant = options.paramValue;
+	}
 	this.source = text || "";
 	this.sourceLength = this.source.length;
 	// Flag for ignoring whitespace
@@ -59,6 +63,29 @@ var WikiParser = function(type,text,options) {
 	// Instantiate the parser block and inline rules
 	this.blockRules = this.instantiateRules(this.blockRuleClasses,"block",0);
 	this.inlineRules = this.instantiateRules(this.inlineRuleClasses,"inline",0);
+	// Setup the selected variant
+	if(this.variant) {
+		var variantData = this.wiki.getTiddlerDataCached("$:/config/WikiParserVariant/" + this.variant);
+		if(variantData) {
+			// Whitespace setting
+			switch(variantData.whitespace) {
+				case "notrim":
+					this.configTrimWhiteSpace = false;
+					break;
+				case "trim":
+					// Intentional fallthrough
+				default:
+					this.configTrimWhiteSpace = false;
+					break;
+			}
+			// Setup rules
+			if(variantData.rules && variantData.rules.only) {
+				this.amendRules("only",variantData.rules.only);
+			} else if(variantData.rules && variantData.rules.except) {
+				this.amendRules("except",variantData.rules.except);
+			}
+		}
+	}
 	// Parse any pragmas
 	this.tree = [];
 	var topBranch = this.parsePragmas();
@@ -386,22 +413,18 @@ Amend the rules used by this instance of the parser
 WikiParser.prototype.amendRules = function(type,names) {
 	names = names || [];
 	// Define the filter function
-	var keepFilter;
+	var target;
 	if(type === "only") {
-		keepFilter = function(name) {
-			return names.indexOf(name) !== -1;
-		};
+		target = true;
 	} else if(type === "except") {
-		keepFilter = function(name) {
-			return names.indexOf(name) === -1;
-		};
+		target = false;
 	} else {
 		return;
 	}
 	// Define a function to process each of our rule arrays
 	var processRuleArray = function(ruleArray) {
 		for(var t=ruleArray.length-1; t>=0; t--) {
-			if(!keepFilter(ruleArray[t].rule.name)) {
+			if((names.indexOf(ruleArray[t].rule.name) === -1) === target) {
 				ruleArray.splice(t,1);
 			}
 		}
