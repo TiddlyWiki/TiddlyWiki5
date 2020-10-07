@@ -409,3 +409,5 @@ Dazhong Xia, @jdangerx, 2020/06/23
 Diep Pham, @favadi, 2020/07/30
 
 Adithya Badidey, @adithya-badidey, 2020/08/10
+
+John Duhamel, @jjduhamel, 2020/08/10
