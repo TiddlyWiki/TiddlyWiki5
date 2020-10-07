@@ -43,7 +43,7 @@ type: text/vnd.tiddlywiki
 ! Usability Improvements
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8cf458d3b3f1e38c14a2819529e08dca4a7e297c]] "Solarized Dark" palette
-* [[Updated|https://github.com/Jermolene/TiddlyWiki5/pull/4590]] Vanilla theme to use palette colours for the [[browser selection outline|https://developer.mozilla.org/en-US/docs/Web/CSS/::selection]]
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/pull/4590]] (and [[here|ttps://github.com/Jermolene/TiddlyWiki5/commit/274a07b4fd2ca2d1b95c8ddf52fe055c44260d9b]]) the Vanilla theme to optionally use palette colours for the [[browser selection outline|https://developer.mozilla.org/en-US/docs/Web/CSS/::selection]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1546a4a1895b93a47b79c9d37b94be039604443a]] warning message about using the online plugin library with the client-server configuration
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/4585]] Gruvbox palette readability of toolbar buttons
 * [[Changed|https://github.com/Jermolene/TiddlyWiki5/commit/9cd5415dfe54b47819920aa3cf6ac2d5e3a9188e]] favicon for the prerelease edition
