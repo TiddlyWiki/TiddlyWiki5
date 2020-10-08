@@ -3,7 +3,7 @@ title: $:/core/modules/filters/reduce.js
 type: application/javascript
 module-type: filteroperator
 
-Filter operator evaluats a subfilter for each item, making the running total available in the variable `accumulator`, and the current index available in the variable `index`
+Filter operator evaluates a subfilter for each item, making the running total available in the variable `accumulator`, and the current index available in the variable `index`
 
 \*/
 (function(){
