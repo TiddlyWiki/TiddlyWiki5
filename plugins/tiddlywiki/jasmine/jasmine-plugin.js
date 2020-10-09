@@ -92,10 +92,10 @@ exports.startup = function() {
 		// 'jasmine/jasmine.js' references `process.exit`
 		context.process = process;
 
-		var JasmineNode = evalInContext("$:/plugins/tiddlywiki/jasmine/jasmine/jasmine.js");
-		var jasmineRunner = new JasmineNode({jasmineCore: jasmineCore});
-		jasmineRunner.configureDefaultReporter({});
-		jasmine = jasmineRunner.jasmine;
+		var NodeJasmine = evalInContext("$:/plugins/tiddlywiki/jasmine/jasmine/jasmine.js");
+		var nodeJasmineWrapper = new NodeJasmine({jasmineCore: jasmineCore});
+		nodeJasmineWrapper.configureDefaultReporter({});
+		jasmine = nodeJasmineWrapper.jasmine;
 	}
 	// Add Jasmine's DSL to our context
 	var env = jasmine.getEnv();
