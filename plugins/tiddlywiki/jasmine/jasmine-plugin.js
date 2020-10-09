@@ -16,6 +16,13 @@ var TEST_TIDDLER_FILTER = "[type[application/javascript]tag[$:/tags/test-spec]]"
 
 /*
 Startup function for running tests
+
+Below, paths like jasmine-core/jasmine.js refer to files in the 'jasmine-core' npm
+package, whose repository is https://github.com/jasmine/jasmine.
+Paths like jasmine/jasmine.js refer to files in the 'jasmine' npm package, whose
+repository is https://github.com/jasmine/jasmine-npm.
+
+They're all locally checked into the `./files` directory.
 */
 exports.startup = function() {
 	// Set up a shared context object.
