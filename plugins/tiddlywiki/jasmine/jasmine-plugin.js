@@ -65,7 +65,10 @@ exports.startup = function() {
 		return context.module.exports || contextExports;
 	}
 
-	// Get the core Jasmine exports
+	// Get the core Jasmine exports.
+	// We load 'jasmine-core/jasmine.js' here in order to start with a module
+	// that is shared between browser and Node.js environments. Browser-specific
+	// and Node-specific modules are loaded next.
 	var jasmineCore = evalInContext("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/jasmine.js");
 	// Get the Jasmine instance and configure reporters
 	var jasmine;
@@ -75,15 +78,26 @@ exports.startup = function() {
 		$tw.modules.execute("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/boot.js");
 		jasmine = window.jasmine;
 	} else {
-		// We load 'jasmine-core/jasmine.js' above instead of the
-		// main script 'jasmine-core/jasmine-core.js', which is what's loaded
-		// when you run `require('jasmine-core')` in a Node.js environment.
-		// We load 'jasmine-core/jasmine.js' because we want to factor out
-		// code paths that are common between browser and Node.js environments.
-		// As a result, the `jasmineCore` object is missing some properties that
-		// 'jasmine/jasmine.js' expects, so we manually populate what we need.
+		// Add missing properties to `jasmineCore` in order to call the Jasmine
+		// constructor in Node.js.
+		//
+		// The constructor loads the `jasmineCore` object automatically, if
+		// not explicitly specified, by calling `require('jasmine-core')`.
+		// What happens internally next is...
+		//
+		//   1. require('jasmine-core')
+		//      a. loads the package's main script, 'jasmine-core/jasmine-core.js'
+		//         i. requires 'jasmine-core/jasmine.js'
+		//         ii. reads some extra files and returns a `jasmineCore` object
+		//
+		// Because we're in TiddlyWiki land, we really don't need step 1.a.ii.
+		//
+		// Since the `jasmineCore` variable already holds the result of 1.a.i,
+		// we'll add a few properties necessary for calling the Jasmine constructor
+		// and pass it in explicitly. The consructor function can be seen here:
+		// https://github.com/jasmine/jasmine-npm/blob/v3.4.0/lib/jasmine.js#L10
 
-		// 'jasmine/jasmine.js' calls `.boot()`
+		// 'jasmine/jasmine.js' requires the `.boot()` function
 		jasmineCore.boot = evalInContext("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/node_boot.js");
 		// 'jasmine/jasmine.js' references `.files.path`
 		jasmineCore.files = {
