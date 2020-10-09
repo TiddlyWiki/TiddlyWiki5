@@ -70,8 +70,10 @@ exports.startup = function() {
 	// that is shared between browser and Node.js environments. Browser-specific
 	// and Node-specific modules are loaded next.
 	var jasmineCore = evalInContext("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/jasmine.js");
-	// Get the Jasmine instance and configure reporters
+	// The core Jasmine instance
 	var jasmine;
+	// Node.js wrapper for calling `.execute()`
+	var nodeJasmineWrapper;
 	if($tw.browser) {
 		window.jasmineRequire = jasmineCore;
 		$tw.modules.execute("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/jasmine-html.js");
@@ -107,7 +109,7 @@ exports.startup = function() {
 		context.process = process;
 
 		var NodeJasmine = evalInContext("$:/plugins/tiddlywiki/jasmine/jasmine/jasmine.js");
-		var nodeJasmineWrapper = new NodeJasmine({jasmineCore: jasmineCore});
+		nodeJasmineWrapper = new NodeJasmine({jasmineCore: jasmineCore});
 		nodeJasmineWrapper.configureDefaultReporter({});
 		jasmine = nodeJasmineWrapper.jasmine;
 	}
@@ -123,7 +125,7 @@ exports.startup = function() {
 	// In a browser environment, jasmine-core/boot.js calls `execute()` for us.
 	// In Node.js, we call it manually.
 	if(!$tw.browser) {
-		env.execute();
+		nodeJasmineWrapper.execute();
 	}
 };
 
