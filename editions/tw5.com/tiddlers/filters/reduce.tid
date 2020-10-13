@@ -1,0 +1,27 @@
+caption: reduce
+created: 20201004154131193
+modified: 20201006174749170
+op-input: a [[selection of titles|Title Selection]] passed as input to the filter
+op-output: the final result of running the subfilter <<.place S>>
+op-parameter: a [[filter expression|Filter Expression]]
+op-parameter-name: S
+op-purpose: apply a subfilter to each input title in turn, accumulating a single value
+op-suffix: Initial value for accumulator
+op-suffix-name: V
+tags: [[Filter Operators]]
+title: reduce Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.23">> The <<.op reduce>> operator runs a subfilter for each input title, passing the result of the previous subfilter run as a variable. The initial value of the accumulator can optionally be specified. It returns the result of the final subfilter run.
+
+The <<.op reduce>> operator is used to flatten a list of items down to a single item by repeatedly applying a formula. A typical use is to add up the values in a given field of a list of tiddlers.
+
+The following variables are available within the subfilter:
+
+* ''accumulator'' - the result of the previous subfilter run
+* ''currentTiddler'' - the input title
+* ''index'' - the numeric index of the current list item (with zero being the first item in the list)
+* ''revIndex'' - the reverse numeric index of the current list item (with zero being the last item in the list)
+* ''length'' - the total length of the input list
+
+<<.operator-examples "reduce">>

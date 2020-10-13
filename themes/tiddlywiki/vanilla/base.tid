@@ -232,11 +232,8 @@ kbd {
 }
 
 ::selection {
-	background-color: <<colour selection-background>>;
-	color: <<colour selection-foreground>>;
-}
-
-::-moz-selection {
+	background-color: Highlight;
+	color: HighlightText;
 	background-color: <<colour selection-background>>;
 	color: <<colour selection-foreground>>;
 }
