@@ -49,7 +49,12 @@ Handle an event
 */
 PageScroller.prototype.handleEvent = function(event) {
 	if(event.type === "tm-scroll") {
-		return this.scrollIntoView(event.target);
+		if(event.paramObject && event.paramObject.selector) {
+			this.scrollSelectorIntoView(null,event.paramObject.selector);
+		} else {
+			this.scrollIntoView(event.target);			
+		}
+		return false; // Event was handled
 	}
 	return true;
 };
@@ -115,6 +120,14 @@ PageScroller.prototype.scrollIntoView = function(element,callback) {
 			}
 		};
 	drawFrame();
+};
+
+PageScroller.prototype.scrollSelectorIntoView = function(baseElement,selector,callback) {
+	baseElement = baseElement || document.body;
+	var element = baseElement.querySelector(selector);
+	if(element) {
+		this.scrollIntoView(element,callback);		
+	}
 };
 
 exports.PageScroller = PageScroller;
