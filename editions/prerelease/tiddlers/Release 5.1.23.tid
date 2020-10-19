@@ -10,34 +10,16 @@ type: text/vnd.tiddlywiki
 ! Major Improvements
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4725]] support for navigating the search and new tag dropdowns via the keyboard. The [[keyboard-driven-input Macro]] can be used to add this capability to other dropdowns.
-
-! New and Improved Plugins
-
-* Consent Banner Plugin
-** [[New|https://github.com/Jermolene/TiddlyWiki5/commit/4a84ed0018df7fd67000404bb5ef8a7ca50509c1]] plugin to help make websites compliant with cookie legislation by displaying a consent banner
-* JSZip Plugin
-** [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6a0ff7db1807f45b73061ced82f5a85f1a529bbf]] ability to dynamically create Zip files, giving TiddlyWiki the ability to build static sites within the browser
-* Freelinks Plugin
-** [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1f354a972e0217e034d1f59d31577c1fd6b186f3]] (and [[here|https://gitxhub.com/Jermolene/TiddlyWiki5/commit/c9692d7a508cfdb0446e67061201961dca64d8dd]]) support for ignoring case when matching titles
-** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/05e6c1bf62cd51df6aa025d0ad07f7959cde6fa0]] bug with autolinking within HTML `<a>` elements
-* Twitter Plugin
-** [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3a20fb1e3a41a032574d227a8c770a11ae0a5d58]] warning if wiki needs to be saved and reloaded
-* [[Dynaview Plugin]]
-** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/b0e40e86413c1769c8be8a84652b66ef6ac8b997]] examples (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/f7fe47914e19ba7198b7768ca832ee03c289a2bc]])
-* [[CodeMirror Plugin]]
-** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4662]] issue with `e.toggleComment` being undefined with CodeMirror Sublime keymap
-* [[Markdown Plugin]]
-** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4680]] encoding of Markdown image files
-** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/e01b354f7d9e137cb355f7090f5e68661a4ead41]] issue with whitespace and linebraks
-** [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4862]] ''tc-tiddlylink-external'' class to external links
-* [[Amazon Web Services Plugin]]
-** [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0338f0fee23d176a94de9009492d2e43a916fbfa]] a new ''aws-encodeuricomponent'' filter that also encodes single quotes
+* [[New|https://github.com/Jermolene/TiddlyWiki5/commit/4a84ed0018df7fd67000404bb5ef8a7ca50509c1]] [[Consent Banner Plugin]] to help make websites compliant with cookie legislation by displaying a consent banner
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/6a0ff7db1807f45b73061ced82f5a85f1a529bbf]] [[JSZip Plugin]] ability to dynamically create Zip files, giving TiddlyWiki the ability to build static sites within the browser
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/14a28b77796461c9167898793ab9851e029e0354]] new [[filter|filter Operator]] and [[reduce|reduce Operator]] operators for processing lists of items
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/1446a1e44cd084b0905f3fdcd8b339f23edf2384]] the [[WidgetMessage: tm-scroll]] message to allow the target element to be specified by a CSS selector, making it possible to scroll to positions within a tiddler
 
 ! Translation Improvements
 
 * New Arabic (Palestine) translation
-* Catalan
-* Chinese
+* Improved Catalan translation
+* Improved Chinese translation
 
 ! Performance Improvements
 
@@ -53,16 +35,18 @@ type: text/vnd.tiddlywiki
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/484c9e986fc6f323e30460a88f134da3a4e8a89e]] the $:/PaletteManager to show "indirect" colours (ie, colours defined by another `<<colour>>` macro)
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4791]] a 'tabIndex' property to the tiddler editor input area to make it easier to use the tab key to move between edit controls
 
-! Hackability Improvements
+! Filter Improvements
 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/14a28b77796461c9167898793ab9851e029e0354]] new [[filter|filter Operator]] and [[reduce|reduce Operator]] operators for processing lists of items
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/1446a1e44cd084b0905f3fdcd8b339f23edf2384]] the [[WidgetMessage: tm-scroll]] message to allow the target element to be specified by a CSS selector
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/5af76c5ea10db2b59cc20f963a836c6a9faa8b10]] the [[Table-of-Contents Macros]] to support custom link targets
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/ae13a0fee118c50169b7835c950df1dade33788f]] the MacroCallWidget to be able to optionally render the raw text of the macro (previously the output was always wikified)
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4785]] new [[format Operator]] for formatting dates
-* [[Adedd|https://github.com/Jermolene/TiddlyWiki5/pull/4777]] new Hyperdrive saver for use with Beaker Browser v1.0
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/4966f6ab625c8ce2c9f0812a726ba928d68ea00b]] new [[slugify Operator]] and [[duplicateslugs Operator]] for generating human readable filenames/URLs
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/619c0752bd3c6e71d1fcdb74daa03cfe8257afe4]] new [[sortsub Operator]] for sorting by a user defined subfilter
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4785]] new [[format Operator]] for formatting dates
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4811]] the [[trim Operator]] to optionally trim a given string instead of whitespace, and trim from front, back, or both sides of input tiddlers
+
+! Hackability Improvements
+
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/5af76c5ea10db2b59cc20f963a836c6a9faa8b10]] the [[Table-of-Contents Macros]] to support custom link targets
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/ae13a0fee118c50169b7835c950df1dade33788f]] the MacroCallWidget to be able to optionally render the raw text of the macro (previously the output was always wikified)
+* [[Adedd|https://github.com/Jermolene/TiddlyWiki5/pull/4777]] new Hyperdrive saver for use with Beaker Browser v1.0
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/e71a27ac2d71f2e48f9e4e9156b59bb3ecc2a105]] LinkWidget to work within SVG elements
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c86a621d5d205e1ae0ce999b90ebe09addc45a9f]] ''accept'' attribute to the BrowseWidget
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/77a929faa3a33768e52cf2a34ecbef9c554a6a7b]] ActionPopupWidget to allow popups to be dismissed
@@ -76,7 +60,6 @@ type: text/vnd.tiddlywiki
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/bd2cf5c46498222a32ebda92da3ae50bde33decb]] the internal `<$element>` widget to add a hook so that plugins can intercept DOM node creation
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/95e30138f0b34135031d50c1606e8b0059ca6653]] LinkCatcherWidget to pass keyboard modifier status to actions
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4724]] original event to `tm-navigate` event
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4811]] the [[trim Operator]] to optionally trim a given string instead of whitespace, and trim from front, back, or both sides of input tiddlers
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/651fb777abd11c88e58b4bdfbced01d6db508852]] the password prompt to enable it to be customised
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/69c12618d963c711edd72a60427bd15ec4fa0e6e]] syncer to enable syncadaptors to customise the login prompt
 
@@ -110,6 +93,26 @@ type: text/vnd.tiddlywiki
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4751]] a `plugin-priority` field to the TiddlyWeb plugin so that language plugins can override its language strings
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4853]] bug whereby joining an empty list would not return an empty list
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/59f233cd46616646fa8889f65aa9cc7d704d8c9a]] bug exporting tiddlers with double quoted titles
+
+! Plugin Improvements
+
+* Freelinks Plugin
+** [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1f354a972e0217e034d1f59d31577c1fd6b186f3]] (and [[here|https://gitxhub.com/Jermolene/TiddlyWiki5/commit/c9692d7a508cfdb0446e67061201961dca64d8dd]]) support for ignoring case when matching titles
+** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/05e6c1bf62cd51df6aa025d0ad07f7959cde6fa0]] bug with autolinking within HTML `<a>` elements
+* Twitter Plugin
+** [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3a20fb1e3a41a032574d227a8c770a11ae0a5d58]] warning if wiki needs to be saved and reloaded
+* [[Dynaview Plugin]]
+** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/b0e40e86413c1769c8be8a84652b66ef6ac8b997]] examples (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/f7fe47914e19ba7198b7768ca832ee03c289a2bc]])
+* [[CodeMirror Plugin]]
+** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4662]] issue with `e.toggleComment` being undefined with CodeMirror Sublime keymap
+* [[Markdown Plugin]]
+** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4680]] encoding of Markdown image files
+** [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/e01b354f7d9e137cb355f7090f5e68661a4ead41]] issue with whitespace and linebraks
+** [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4862]] ''tc-tiddlylink-external'' class to external links
+* [[Amazon Web Services Plugin]]
+** [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0338f0fee23d176a94de9009492d2e43a916fbfa]] a new ''aws-encodeuricomponent'' filter that also encodes single quotes
+* ~BibTeX Plugin
+** [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/f863acf8ac716dbf892f2d63efa0a130aadfec6a]] to a later fork of the underlying third party ~BibTeX parsing library
 
 ! Contributors
 
