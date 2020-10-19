@@ -224,3 +224,4 @@ describe("HTML tag new parser tests", function() {
 });
 
 })();
+
