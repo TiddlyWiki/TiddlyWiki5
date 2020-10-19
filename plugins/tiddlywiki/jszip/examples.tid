@@ -23,8 +23,8 @@ The actions below create a ZIP file containing a static HTML rendering of the fi
 Render site
 </$button>
 
-'<$list filter="[!is[system]duplicateslugs[]limit[1]]" emptyMessage="(There are no duplicate slugs)">
-The following tiddlers have duplicate slugs:
+<$list filter="[!is[system]duplicateslugs[]limit[1]]" emptyMessage="''(There are no duplicate slugs)''">
+''The following tiddlers have duplicate slugs:''
 
 <ul>
 <$list filter="[all[tiddlers]!is[system]limit[25]duplicateslugs[]]">
