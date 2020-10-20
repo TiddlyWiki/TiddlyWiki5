@@ -989,7 +989,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 .tc-titlebar {
 	font-weight: 300;
 	font-size: 2.35em;
-	line-height: 1.2em;
+	line-height: 1.3em;
 	color: <<colour tiddler-title-foreground>>;
 	margin: 0;
 }
