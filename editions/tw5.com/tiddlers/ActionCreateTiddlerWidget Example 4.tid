@@ -1,5 +1,5 @@
 created: 20200131150229551
-modified: 20200131152051626
+modified: 20201020112544146
 tags: ActionCreateTiddlerWidget
 title: ActionCreateTiddlerWidget Example 4
 type: text/vnd.tiddlywiki
@@ -23,6 +23,6 @@ Create Tiddler
 ```
 
 <$button actions=<<testCreate>> >
-<$action-setfield $tiddler="$:/state/tab/sidebar-1206596165" text="$:/core/ui/SideBar/Recent"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
 Create Tiddler
 </$button> - Clicking this button, will also open the Right sidebar: Recent tab
