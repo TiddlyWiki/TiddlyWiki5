@@ -15,6 +15,8 @@ input-accept: {{$:/language/Shortcuts/Input/Accept/Hint}}
 input-accept-variant: {{$:/language/Shortcuts/Input/AcceptVariant/Hint}}
 input-cancel: {{$:/language/Shortcuts/Input/Cancel/Hint}}
 input-down: {{$:/language/Shortcuts/Input/Down/Hint}}
+input-tab-left: {{$:/language/Shortcuts/Input/Tab-Left/Hint}}
+input-tab-right: {{$:/language/Shortcuts/Input/Tab-Right/Hint}}
 input-up: {{$:/language/Shortcuts/Input/Up/Hint}}
 italic: {{$:/language/Buttons/Italic/Hint}}
 link: {{$:/language/Buttons/Link/Hint}}

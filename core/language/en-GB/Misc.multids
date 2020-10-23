@@ -67,6 +67,8 @@ Shortcuts/Input/Accept/Hint: Accept the selected item
 Shortcuts/Input/AcceptVariant/Hint: Accept the selected item (variant)
 Shortcuts/Input/Cancel/Hint: Clear the input field
 Shortcuts/Input/Down/Hint: Select the next item
+Shortcuts/Input/Tab-Left/Hint: Select the previous Tab
+Shortcuts/Input/Tab-Right/Hint: Select the next Tab
 Shortcuts/Input/Up/Hint: Select the previous item
 SystemTiddler/Tooltip: This is a system tiddler
 SystemTiddlers/Include/Prompt: Include system tiddlers
