@@ -1272,7 +1272,7 @@ $tw.Wiki = function(options) {
 		$tw.utils.each(titles || getTiddlerTitles(),function(title) {
 			var tiddler = tiddlers[title];
 			if(tiddler) {
-				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type")) {
+				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type") && tiddler.fields.text) {
 					pluginInfo[tiddler.fields.title] = JSON.parse(tiddler.fields.text);
 					results.modifiedPlugins.push(tiddler.fields.title);
 				}
