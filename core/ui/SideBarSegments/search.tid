@@ -47,8 +47,8 @@ tags: $:/tags/SideBarSegment
 <$vars configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}} searchTiddler="$:/temp/search/input" searchListState=<<qualify "$:/state/search-list/selected-item">>>
 <$vars titleSearchFilter={{{ [<configTiddler>get[first-search-filter]] }}} allSearchFilter={{{ [<configTiddler>get[second-search-filter]] }}}>
 <div class="tc-search">
-<$keyboard key="((input-tabs-right))" actions=<<set-next-input-tab>>>
-<$keyboard key="((input-tabs-left))" actions=<<set-next-input-tab "before">>>
+<$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
+<$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
 <$macrocall $name="keyboard-driven-input" tiddler="$:/temp/search" storeTitle=<<searchTiddler>> 
 		selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" 
 		tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> 
