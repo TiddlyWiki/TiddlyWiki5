@@ -15,4 +15,4 @@ The variable contains a string that identifies the keys:
 |alt+shift |alt-shift |
 |ctrl+alt |ctrl-alt |
 |ctrl+alt+shift |ctrl-alt-shift |
-|no modifier (normal drag) |normal |
+|no modifier (normal click / drag) |normal |
