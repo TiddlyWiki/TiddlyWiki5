@@ -67,6 +67,8 @@ Shortcuts/Input/Accept/Hint: 接受選取的項目
 Shortcuts/Input/AcceptVariant/Hint: 接受選取項目 (變種)
 Shortcuts/Input/Cancel/Hint: 清除輸入欄位
 Shortcuts/Input/Down/Hint: 選擇下一個項目
+Shortcuts/Input/Tab-Left/Hint: 選擇上一個頁籤
+Shortcuts/Input/Tab-Right/Hint: 選擇下一個頁籤
 Shortcuts/Input/Up/Hint: 選擇前一個項目
 SystemTiddler/Tooltip: 此為系統條目
 SystemTiddlers/Include/Prompt: 包括系統條目
