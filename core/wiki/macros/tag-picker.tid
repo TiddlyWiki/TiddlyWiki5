@@ -38,11 +38,11 @@ $actions$
 <div>
 <span class="tc-add-tag-name">
 <$macrocall $name="keyboard-driven-input" tiddler=<<newTagNameTiddler>> storeTitle=<<storeTitle>> refreshTitle=<<refreshTitle>>
-		selectionStateTitle=<<tagSelectionState>> primaryListFilter=<<nonSystemTagsFilter>> secondaryListFilter=<<systemTagsFilter>> 
-		inputAcceptActions="""<$macrocall $name="add-tag-actions" actions=<<__actions__>>/>""" inputCancelActions=<<clear-tags-actions>> tag="input" 
-		placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> 
-		class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}} 
-		filterMinLength={{$:/config/Tags/MinLength}} cancelPopups=<<cancelPopups>> />
+		selectionStateTitle=<<tagSelectionState>> inputAcceptActions="""<$macrocall $name="add-tag-actions" actions=<<__actions__>>/>"""
+		inputCancelActions=<<clear-tags-actions>> tag="input" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}}
+		focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> 
+		focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}} filterMinLength={{$:/config/Tags/MinLength}} 
+		cancelPopups=<<cancelPopups>> configTiddlerFilter="[[$:/core/macros/tag-picker]]"/>
 </span>&nbsp;<$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>&nbsp;<span class="tc-add-tag-button">
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$button set=<<newTagNameTiddler>> setTo="" class="">
