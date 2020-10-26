@@ -158,7 +158,8 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 		metaKey: event.metaKey,
 		ctrlKey: event.ctrlKey,
 		altKey: event.altKey,
-		shiftKey: event.shiftKey
+		shiftKey: event.shiftKey,
+		event: event
 	});
 	if(this.domNodes[0].hasAttribute("href")) {
 		event.preventDefault();

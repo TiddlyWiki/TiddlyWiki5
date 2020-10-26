@@ -2,7 +2,7 @@ title: $:/language/EditTemplate/
 
 Body/External/Hint: Aquest és un tiddler extern desat fora del fitxer del TiddlyWiki principal. Podeu editar les etiquetes i camps però no podeu editar directament el seu contingut
 Body/Placeholder: Escriviu el text per aquest tiddler
-Body/Preview/Type/Output: s
+Body/Preview/Type/Output: resultat
 Field/Dropdown/Caption: llista de camps
 Field/Dropdown/Hint: Mostra la llista de camps
 Field/Remove/Caption: suprimeix el camp

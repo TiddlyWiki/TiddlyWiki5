@@ -7,7 +7,7 @@ op-output: those input tiddlers in which the list field <<.place F>> contains th
 op-parameter: a possible value to be found in list field <<.place F>>
 op-parameter-name: S
 op-purpose: filter the input by searching list fields for a value
-op-suffix: the name of a [[field|TiddlerFields]]
+op-suffix: the name of a [[field|TiddlerFields]] (defaults to `list`)
 op-suffix-name: F
 tags: [[Filter Operators]] [[Field Operators]] [[Negatable Operators]]
 title: contains Operator

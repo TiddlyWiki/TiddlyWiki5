@@ -21,14 +21,32 @@ var bumpSequenceNumber = function(object) {
 	}
 };
 
+var TW_Node = function (){
+	throw TypeError("Illegal constructor");
+};
+
+Object.defineProperty(TW_Node.prototype, 'ELEMENT_NODE', {
+	get: function() {
+		return 1;
+	}
+});
+
+Object.defineProperty(TW_Node.prototype, 'TEXT_NODE', {
+	get: function() {
+		return 3;
+	}
+});
+
 var TW_TextNode = function(text) {
 	bumpSequenceNumber(this);
 	this.textContent = text + "";
 };
 
+TW_TextNode.prototype = Object.create(TW_Node.prototype);
+
 Object.defineProperty(TW_TextNode.prototype, "nodeType", {
 	get: function() {
-		return 3;
+		return this.TEXT_NODE;
 	}
 });
 
@@ -48,6 +66,8 @@ var TW_Element = function(tag,namespace) {
 	this._style = {};
 	this.namespaceURI = namespace || "http://www.w3.org/1999/xhtml";
 };
+
+TW_Element.prototype = Object.create(TW_Node.prototype);
 
 Object.defineProperty(TW_Element.prototype, "style", {
 	get: function() {
@@ -69,7 +89,7 @@ Object.defineProperty(TW_Element.prototype, "style", {
 
 Object.defineProperty(TW_Element.prototype, "nodeType", {
 	get: function() {
-		return 1;
+		return this.ELEMENT_NODE;
 	}
 });
 

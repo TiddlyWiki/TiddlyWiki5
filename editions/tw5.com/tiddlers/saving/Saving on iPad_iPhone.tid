@@ -1,14 +1,16 @@
 caption: Quine
+color: #FF8A65
+community-author: Chris Hunt
 created: 20131129101027725
 delivery: App
 description: iPad/iPhone app for working with TiddlyWiki
 method: save
-modified: 20200428224059031
+modified: 20201007205336209
 tags: Saving iOS
 title: Saving on iPad/iPhone
 type: text/vnd.tiddlywiki
 
-The iPad/iPhone app ''Quine 2'' makes it possible to view, edit and then save changes to TiddlyWiki5 on iOS. [[Download it here|https://itunes.apple.com/us/app/quine/id1228682923?mt=8]].
+The iPad/iPhone app ''Quine 2'' makes it possible to view, edit and then save changes to TiddlyWiki5 on iOS. [[Download it here|https://apps.apple.com/us/app/quine-2/id1450128957]].
 
 Instructions for use:
 

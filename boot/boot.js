@@ -652,11 +652,13 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	var promptInfo = {
 		serviceName: options.serviceName,
 		callback: options.callback,
-		form: form
+		form: form,
+		owner: this
 	};
 	this.passwordPrompts.push(promptInfo);
 	// Make sure the wrapper is displayed
 	this.setWrapperDisplay();
+	return promptInfo;
 };
 
 $tw.utils.PasswordPrompt.prototype.removePrompt = function(promptInfo) {
@@ -1270,7 +1272,7 @@ $tw.Wiki = function(options) {
 		$tw.utils.each(titles || getTiddlerTitles(),function(title) {
 			var tiddler = tiddlers[title];
 			if(tiddler) {
-				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type")) {
+				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type") && tiddler.fields.text) {
 					pluginInfo[tiddler.fields.title] = JSON.parse(tiddler.fields.text);
 					results.modifiedPlugins.push(tiddler.fields.title);
 				}
@@ -2172,8 +2174,7 @@ $tw.loadTiddlersNode = function() {
 /*
 Startup TiddlyWiki
 */
-$tw.boot.startup = function(options) {
-	options = options || {};
+$tw.boot.initStartup = function(options) {
 	// Get the URL hash and check for safe mode
 	$tw.locationHash = "#";
 	if($tw.browser && !$tw.node) {
@@ -2306,6 +2307,9 @@ $tw.boot.startup = function(options) {
 			return result;
 		}
 	}
+};
+$tw.boot.loadStartup = function(options){
+
 	// Load tiddlers
 	if($tw.boot.tasks.readBrowserTiddlers) {
 		$tw.loadTiddlersBrowser();
@@ -2318,6 +2322,8 @@ $tw.boot.startup = function(options) {
 	}
 	// Give hooks a chance to modify the store
 	$tw.hooks.invokeHook("th-boot-tiddlers-loaded");
+}
+$tw.boot.execStartup = function(options){
 	// Unpack plugin tiddlers
 	$tw.wiki.readPluginInfo();
 	$tw.wiki.registerPluginTiddlers("plugin",$tw.safeMode ? ["$:/core"] : undefined);
@@ -2346,6 +2352,16 @@ $tw.boot.startup = function(options) {
 	$tw.boot.disabledStartupModules = $tw.boot.disabledStartupModules || [];
 	// Repeatedly execute the next eligible task
 	$tw.boot.executeNextStartupTask(options.callback);
+}
+/*
+Startup TiddlyWiki
+*/
+$tw.boot.startup = function(options) {
+	options = options || {};
+	// Get the URL hash and check for safe mode
+	$tw.boot.initStartup(options);
+	$tw.boot.loadStartup(options);
+	$tw.boot.execStartup(options);
 };
 
 /*

@@ -1,0 +1,7 @@
+title: $:/config/plugins/tiddlywiki/consent-banner/blocked-embed-message
+
+Blocked embedded content from<br/><a href=<<url>> class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text=<<url>>/></a>
+
+<hr/>
+
+{{$:/plugins/tiddlywiki/consent-banner/buttons/accept}} cookies to unblock

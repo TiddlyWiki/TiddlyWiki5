@@ -24,7 +24,7 @@ The integrated actions are provided as a shortcut for invoking common actions. T
 The content of the `<$button>` widget is displayed within the button.
 
 |!Attribute |!Description |
-|actions |A string containing ActionWidgets to be triggered when the key combination is detected |
+|actions |A string containing ActionWidgets to be triggered when the key combination is detected. <<.from-version "5.1.23">> the <<.def "modifier">> variable lists the modifier keys that are pressed when the action is invoked. The possible modifiers are ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' and ''ctrl-alt-shift'' |
 |to |The title of the tiddler to navigate to |
 |message |The name of the [[widget message|Messages]] to send when the button is clicked |
 |param |The optional parameter to the message |

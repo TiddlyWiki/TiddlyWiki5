@@ -11,6 +11,13 @@ heading-3: ctrl-3
 heading-4: ctrl-4
 heading-5: ctrl-5
 heading-6: ctrl-6
+input-accept: Enter
+input-accept-variant: Alt-Enter
+input-cancel: Escape
+input-down: Down
+input-tab-left: alt-Left
+input-tab-right: alt-Right
+input-up: Up
 link: ctrl-L
 linkify: alt-shift-L
 list-bullet: ctrl-shift-L

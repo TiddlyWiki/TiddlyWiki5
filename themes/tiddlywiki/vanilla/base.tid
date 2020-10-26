@@ -100,7 +100,6 @@ h1, h2, h3, h4, h5, h6 {
 
 pre {
 	display: block;
-	padding: 14px;
 	margin-top: 1em;
 	margin-bottom: 1em;
 	word-break: normal;
@@ -198,6 +197,13 @@ input[type="checkbox"] {
   vertical-align: middle;
 }
 
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+	-webkit-appearance:none;
+}
+
 .tc-muted {
 	color: <<colour muted-foreground>>;
 }
@@ -226,13 +232,10 @@ kbd {
 }
 
 ::selection {
-	background-color: <<colour primary>>;
-	color: <<colour page-background>>;
-}
-
-::-moz-selection {
-	background-color: <<colour primary>>;
-	color: <<colour page-background>>;
+	background-color: Highlight;
+	color: HighlightText;
+	background-color: <<colour selection-background>>;
+	color: <<colour selection-foreground>>;
 }
 
 /*
@@ -658,6 +661,10 @@ button svg.tc-image-button, button .tc-image-button img {
 	vertical-align: baseline;
 }
 
+.tc-block-tags-dropdown > .tc-btn-invisible:hover {
+	background-color: <<colour primary>>;
+}
+
 button.tc-tag-label, span.tc-tag-label {
 	display: inline-block;
 	padding: 0.16em 0.7em;
@@ -711,6 +718,12 @@ button.tc-untagged-label {
 
 button.tc-btn-invisible.tc-remove-tag-button {
 	outline: none;
+}
+
+.tc-tag-button-selected,
+.tc-list-item-selected a.tc-tiddlylink {
+	background-color: <<colour primary>>;
+	color: <<colour tiddler-background>>;
 }
 
 /*
@@ -973,7 +986,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 .tc-titlebar {
 	font-weight: 300;
 	font-size: 2.35em;
-	line-height: 1.2em;
+	line-height: 1.3em;
 	color: <<colour tiddler-title-foreground>>;
 	margin: 0;
 }
@@ -1306,7 +1319,7 @@ html body.tc-body.tc-single-tiddler-window {
 	width: auto;
 }
 
-.tc-type-selector-wrapper {
+.tc-type-selector-dropdown-wrapper {
 	display: inline-block;
 }
 
@@ -1414,7 +1427,7 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-edit-field-add-value {
 	display: inline-block;
-	width: 40%;
+	width: 35%;
 }
 
 .tc-edit-field-add-button {
@@ -1482,7 +1495,7 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-drop-down button.tc-btn-invisible:hover svg {
-	fill: <<colour foreground>>;
+	fill: <<colour background>>;
 }
 
 .tc-drop-down .tc-drop-down-info {
@@ -2174,8 +2187,8 @@ a.tc-tiddlylink.tc-plugin-info:hover {
 	fill: <<colour foreground>>;
 }
 
-a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > svg {
-	fill: <<colour foreground>>;
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
+	fill: <<colour background>>;
 }
 
 .tc-plugin-info-chunk {

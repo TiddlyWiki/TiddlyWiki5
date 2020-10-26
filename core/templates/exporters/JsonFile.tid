@@ -3,7 +3,4 @@ tags: $:/tags/Exporter
 description: {{$:/language/Exporters/JsonFile}}
 extension: .json
 
-\define renderContent()
-<$text text=<<jsontiddlers filter:"""$(exportFilter)$""">>/>
-\end
-<<renderContent>>
+<$macrocall $name="jsontiddlers" filter=<<exportFilter>> $output="text/raw"/>
