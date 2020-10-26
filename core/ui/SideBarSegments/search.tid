@@ -19,17 +19,17 @@ tags: $:/tags/SideBarSegment
 
 \define search-results-list()
 \whitespace trim
-<$set name="userInput" value={{$(searchTiddler)$}}>
+<$vars userInput={{$(searchTiddler)$}} configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}}>
 <$list filter="[<userInput>minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 
-<$tiddler tiddler="$(configTiddler)$">
+<$tiddler tiddler=<<configTiddler>>>
 
 {{$:/core/ui/SearchResults}}
 
 </$tiddler>
 
 </$list>
-</$set>
+</$vars>
 \end
 
 \define delete-state-tiddlers() <$action-deletetiddler $filter="[[$:/temp/search]] [<searchTiddler>] [<searchListState>]"/>
@@ -44,17 +44,16 @@ tags: $:/tags/SideBarSegment
 
 <div class="tc-sidebar-lists tc-sidebar-search">
 
-<$vars configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}} searchTiddler="$:/temp/search/input" searchListState=<<qualify "$:/state/search-list/selected-item">>>
-<$vars titleSearchFilter={{{ [<configTiddler>get[first-search-filter]] }}} allSearchFilter={{{ [<configTiddler>get[second-search-filter]] }}}>
+<$vars searchTiddler="$:/temp/search/input" searchListState=<<qualify "$:/state/search-list/selected-item">>>
 <div class="tc-search">
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
 <$macrocall $name="keyboard-driven-input" tiddler="$:/temp/search" storeTitle=<<searchTiddler>> 
 		selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" 
 		tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> 
-		class="tc-popup-handle" primaryListFilter=<<titleSearchFilter>> secondaryListFilter=<<allSearchFilter>> 
-		filterMinLength={{$:/config/Search/MinLength}} inputCancelActions=<<cancel-search-actions>> 
-		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> cancelPopups="yes" />
+		class="tc-popup-handle" filterMinLength={{$:/config/Search/MinLength}} inputCancelActions=<<cancel-search-actions>> 
+		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> cancelPopups="yes" 
+		configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]"/>
 </$keyboard>
 </$keyboard>
 <$reveal state=<<searchTiddler>> type="nomatch" text="">
@@ -86,8 +85,6 @@ tags: $:/tags/SideBarSegment
 </$reveal>
 
 </$reveal>
-
-</$vars>
 
 </$vars>
 
