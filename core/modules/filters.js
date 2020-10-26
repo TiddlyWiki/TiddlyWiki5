@@ -119,7 +119,7 @@ exports.parseFilter = function(filterString) {
 		p = 0, // Current position in the filter string
 		match;
 	var whitespaceRegExp = /(\s+)/mg,
-		operandRegExp = /((?:\+|\-|~|=)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
+		operandRegExp = /((?:\+|\-|~|=|\:(\w+))?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
 	while(p < filterString.length) {
 		// Skip any whitespace
 		whitespaceRegExp.lastIndex = p;
@@ -140,16 +140,19 @@ exports.parseFilter = function(filterString) {
 			};
 			if(match[1]) {
 				operation.prefix = match[1];
-				p++;
+				p = p + operation.prefix.length;
+				if(match[2]) {
+					operation.namedPrefix = match[2];
+				}
 			}
-			if(match[2]) { // Opening square bracket
+			if(match[3]) { // Opening square bracket
 				p = parseFilterOperation(operation.operators,filterString,p);
 			} else {
 				p = match.index + match[0].length;
 			}
-			if(match[3] || match[4] || match[5]) { // Double quoted string, single quoted string or unquoted title
+			if(match[4] || match[5] || match[6]) { // Double quoted string, single quoted string or unquoted title
 				operation.operators.push(
-					{operator: "title", operand: match[3] || match[4] || match[5]}
+					{operator: "title", operand: match[4] || match[5] || match[6]}
 				);
 			}
 			results.push(operation);
@@ -165,6 +168,14 @@ exports.getFilterOperators = function() {
 	}
 	return this.filterOperators;
 };
+
+exports.getFilterPrefixes = function() {
+	if(!this.filterPrefixes) {
+		$tw.Wiki.prototype.filterPrefixes = {};
+		$tw.modules.applyMethods("filterprefix",this.filterPrefixes);
+	}
+	return this.filterPrefixes;
+}
 
 exports.filterTiddlers = function(filterString,widget,source) {
 	var fn = this.compileFilter(filterString);
@@ -241,6 +252,7 @@ exports.compileFilter = function(filterString) {
 				return resultArray;
 			}
 		};
+		var filterRunPrefixes = self.getFilterPrefixes();
 		// Wrap the operator functions in a wrapper function that depends on the prefix
 		operationFunctions.push((function() {
 			switch(operation.prefix || "") {
@@ -249,27 +261,21 @@ exports.compileFilter = function(filterString) {
 						$tw.utils.pushTop(results,operationSubFunction(source,widget));
 					};
 				case "=": // The results of the operation are pushed into the result without deduplication
-					return function(results,source,widget) {
-						Array.prototype.push.apply(results,operationSubFunction(source,widget));
-					};
+					return filterRunPrefixes["all"](operationSubFunction);
 				case "-": // The results of this operation are removed from the main result
-					return function(results,source,widget) {
-						$tw.utils.removeArrayEntries(results,operationSubFunction(source,widget));
-					};
+					return filterRunPrefixes["remove"](operationSubFunction);	
 				case "+": // This operation is applied to the main results so far
-					return function(results,source,widget) {
-						// This replaces all the elements of the array, but keeps the actual array so that references to it are preserved
-						source = self.makeTiddlerIterator(results);
-						results.splice(0,results.length);
-						$tw.utils.pushTop(results,operationSubFunction(source,widget));
-					};
+					return filterRunPrefixes["intersection"](operationSubFunction);
 				case "~": // This operation is unioned into the result only if the main result so far is empty
-					return function(results,source,widget) {
-						if(results.length === 0) {
-							// Main result so far is empty
+					return filterRunPrefixes["else"](operationSubFunction);
+				default: 
+					if(operation.namedPrefix && filterRunPrefixes[operation.namedPrefix]) {
+						return filterRunPrefixes[operation.namedPrefix](operationSubFunction);
+					} else {
+						return function(results,source,widget) {
 							$tw.utils.pushTop(results,operationSubFunction(source,widget));
-						}
-					};
+						};
+					}
 			}
 		})());
 	});
