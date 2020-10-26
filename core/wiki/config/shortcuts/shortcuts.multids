@@ -15,6 +15,8 @@ input-accept: Enter
 input-accept-variant: Alt-Enter
 input-cancel: Escape
 input-down: Down
+input-tab-left: alt-Left
+input-tab-right: alt-Right
 input-up: Up
 link: ctrl-L
 linkify: alt-shift-L

@@ -1,0 +1,16 @@
+created: 20201020102735123
+modified: 20201020104004306
+tags: [[Operator Examples]] [[format Operator]]
+title: format Operator (Examples)
+type: text/vnd.tiddlywiki
+
+These examples use the tiddler HelloThere.
+
+Created date with no format string specified:
+<<.operator-example 1 "[[HelloThere]get[created]format:date[]]">>
+
+Created date with a format string supplied as operator parameter:
+<<.operator-example 2 "[[HelloThere]get[created]format:date[DDth MMM YYYY]]">>
+
+Modified date shown as a relative date:
+<<.operator-example 3 "[[HelloThere]get[modified]format:relativedate[]]">>

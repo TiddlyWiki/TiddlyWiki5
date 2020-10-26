@@ -19,11 +19,17 @@ tags: $:/tags/SideBarSegment
 
 \define search-results-list()
 \whitespace trim
-<$list filter="[{$(searchTiddler)$}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$set name="userInput" value={{$(searchTiddler)$}}>
+<$list filter="[<userInput>minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+
+<$tiddler tiddler="$(configTiddler)$">
 
 {{$:/core/ui/SearchResults}}
 
+</$tiddler>
+
 </$list>
+</$set>
 \end
 
 \define delete-state-tiddlers() <$action-deletetiddler $filter="[[$:/temp/search]] [<searchTiddler>] [<searchListState>]"/>
@@ -34,16 +40,23 @@ tags: $:/tags/SideBarSegment
 
 \define input-accept-variant-actions() <$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/>
 
+\define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<nextTab>>/>"""/>
+
 <div class="tc-sidebar-lists tc-sidebar-search">
 
-<$vars searchTiddler="$:/temp/search/input" searchListState=<<qualify "$:/state/search-list/selected-item">> titleSearchFilter="[!is[system]search:title<userInput>sort[title]limit[250]]" allSearchFilter="[!is[system]search<userInput>sort[title]limit[250]]">
+<$vars configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}} searchTiddler="$:/temp/search/input" searchListState=<<qualify "$:/state/search-list/selected-item">>>
+<$vars titleSearchFilter={{{ [<configTiddler>get[first-search-filter]] }}} allSearchFilter={{{ [<configTiddler>get[second-search-filter]] }}}>
 <div class="tc-search">
+<$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
+<$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
 <$macrocall $name="keyboard-driven-input" tiddler="$:/temp/search" storeTitle=<<searchTiddler>> 
 		selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" 
 		tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> 
 		class="tc-popup-handle" primaryListFilter=<<titleSearchFilter>> secondaryListFilter=<<allSearchFilter>> 
 		filterMinLength={{$:/config/Search/MinLength}} inputCancelActions=<<cancel-search-actions>> 
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> cancelPopups="yes" />
+</$keyboard>
+</$keyboard>
 <$reveal state=<<searchTiddler>> type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
@@ -73,6 +86,8 @@ tags: $:/tags/SideBarSegment
 </$reveal>
 
 </$reveal>
+
+</$vars>
 
 </$vars>
 

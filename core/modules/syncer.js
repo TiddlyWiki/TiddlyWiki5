@@ -113,8 +113,16 @@ function Syncer(options) {
 			return confirmationMessage;
 		});
 		// Listen out for login/logout/refresh events in the browser
-		$tw.rootWidget.addEventListener("tm-login",function() {
-			self.handleLoginEvent();
+		$tw.rootWidget.addEventListener("tm-login",function(event) {
+			var username = event && event.paramObject && event.paramObject.username,
+				password = event && event.paramObject && event.paramObject.password;
+			if(username && password) {
+				// Login with username and password
+				self.login(username,password,function() {});
+			} else {
+				// No username and password, so we display a prompt
+				self.handleLoginEvent();				
+			}
 		});
 		$tw.rootWidget.addEventListener("tm-logout",function() {
 			self.handleLogoutEvent();
@@ -400,19 +408,27 @@ Syncer.prototype.handleLoginEvent = function() {
 	var self = this;
 	this.getStatus(function(err,isLoggedIn,username) {
 		if(!err && !isLoggedIn) {
-			var promptInfo = $tw.passwordPrompt.createPrompt({
-				serviceName: $tw.language.getString("LoginToTiddlySpace"),
-				callback: function(data) {
-					self.login(data.username,data.password,function(err,isLoggedIn) {
-						self.syncFromServer();
-					});
-					return true; // Get rid of the password prompt
-				}
-			});
-			// Let the sync adaptor adjust the prompt
-			if(self.syncadaptor && self.syncadaptor.customiseLoginPrompt) {
-				self.syncadaptor.customiseLoginPrompt(promptInfo);
+			if(self.syncadaptor && self.syncadaptor.displayLoginPrompt) {
+				self.syncadaptor.displayLoginPrompt(self);
+			} else {
+				self.displayLoginPrompt();
 			}
+		}
+	});
+};
+
+/*
+Dispay a password prompt
+*/
+Syncer.prototype.displayLoginPrompt = function() {
+	var self = this;
+	var promptInfo = $tw.passwordPrompt.createPrompt({
+		serviceName: $tw.language.getString("LoginToTiddlySpace"),
+		callback: function(data) {
+			self.login(data.username,data.password,function(err,isLoggedIn) {
+				self.syncFromServer();
+			});
+			return true; // Get rid of the password prompt
 		}
 	});
 };

@@ -1272,7 +1272,7 @@ $tw.Wiki = function(options) {
 		$tw.utils.each(titles || getTiddlerTitles(),function(title) {
 			var tiddler = tiddlers[title];
 			if(tiddler) {
-				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type")) {
+				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type") && tiddler.fields.text) {
 					pluginInfo[tiddler.fields.title] = JSON.parse(tiddler.fields.text);
 					results.modifiedPlugins.push(tiddler.fields.title);
 				}
@@ -1824,7 +1824,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 	// Read the specification
 	var filesInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
 	// Helper to process a file
-	var processFile = function(filename,isTiddlerFile,fields) {
+	var processFile = function(filename,isTiddlerFile,fields,isEditableFile) {
 		var extInfo = $tw.config.fileExtensionInfo[path.extname(filename)],
 			type = (extInfo || {}).type || fields.type || "text/plain",
 			typeInfo = $tw.config.contentTypeInfo[type] || {},
@@ -1877,7 +1877,11 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 				}
 			});
 		});
-		tiddlers.push({tiddlers: fileTiddlers});
+		if(isEditableFile) {
+			tiddlers.push({filepath: pathname, hasMetaFile: !!metadata && !isTiddlerFile, tiddlers: fileTiddlers});
+		} else {
+			tiddlers.push({tiddlers: fileTiddlers});
+		}
 	};
 	// Process the listed tiddlers
 	$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
@@ -1907,7 +1911,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			for(var t=0; t<files.length; t++) {
 				var filename = files[t];
 				if(filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename)) {
-					processFile(dirPath + path.sep + filename,dirSpec.isTiddlerFile,dirSpec.fields);
+					processFile(dirPath + path.sep + filename,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile);
 				}
 			}
 		}
@@ -2260,6 +2264,7 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("application/zip","base64",".zip");
 	$tw.utils.registerFileType("application/x-zip-compressed","base64",".zip");
 	$tw.utils.registerFileType("image/jpeg","base64",[".jpg",".jpeg"],{flags:["image"]});
+	$tw.utils.registerFileType("image/jpg","base64",[".jpg",".jpeg"],{flags:["image"]});
 	$tw.utils.registerFileType("image/png","base64",".png",{flags:["image"]});
 	$tw.utils.registerFileType("image/gif","base64",".gif",{flags:["image"]});
 	$tw.utils.registerFileType("image/webp","base64",".webp",{flags:["image"]});
