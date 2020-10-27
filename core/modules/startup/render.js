@@ -106,6 +106,8 @@ exports.startup = function() {
 	// Fix up the link between the root widget and the page container
 	$tw.rootWidget.domNodes = [$tw.pageContainer];
 	$tw.rootWidget.children = [$tw.pageWidgetNode];
+	// Run any post-render startup actions
+	$tw.rootWidget.executeStartupTiddlers("$:/tags/StartupAction/PostRender");
 };
 
 })();

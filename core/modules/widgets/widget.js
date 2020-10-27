@@ -571,6 +571,16 @@ Widget.prototype.invokeActionString = function(actions,triggeringWidget,event,va
 	return widgetNode.invokeActions(this,event);
 };
 
+/*
+Execute action tiddlers by tag
+*/
+Widget.prototype.executeStartupTiddlers = function(tag) {
+	var self = this;
+	$tw.utils.each(self.wiki.filterTiddlers("[all[shadows+tiddlers]tag[" + tag + "]!has[draft.of]]"),function(title) {
+		self.invokeActionString(self.wiki.getTiddlerText(title),self);
+	});
+};
+
 Widget.prototype.allowActionPropagation = function() {
 	return true;
 };

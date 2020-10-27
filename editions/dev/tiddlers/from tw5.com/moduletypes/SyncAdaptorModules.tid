@@ -1,5 +1,5 @@
 created: 20130825162100000
-modified: 20201014124049248
+modified: 20201025162413404
 tags: dev moduletypes
 title: SyncAdaptorModules
 type: text/vnd.tiddlywiki
@@ -80,30 +80,14 @@ Attempts to login to the server with specified credentials. This method is optio
 |password |Password |
 |callback |Callback function invoked with parameter `err` |
 
-!! `customiseLoginPrompt(promptInfo)`
+!! `displayLoginPrompt(syncer)`
 
-Provides an opportunity to customise the login prompt.
+Invoked by the syncer to display a custom login promopt. This method is optional.
 
 |!Parameter |!Description |
-|promptInfo |The `promptInfo` object returned by `$tw.passwordPrompt.createPrompt()` |
+|syncer |Reference to the syncer object making the call |
 
-Here's an example of customising the login prompt to include a "forgotten password" button:
-
-```
-SyncAdaptor.prototype.customiseLoginPrompt = function(promptInfo) {
-	promptInfo.form.appendChild($tw.utils.domMaker("button",{
-		attributes: {type: "submit"},
-		text: "Forgot password",
-		eventListeners: [{
-				name: "click",
-				handlerFunction: function(event) {
-					promptInfo.owner.removePrompt(promptInfo);
-					alert("Forgot password");
-				}
-			}]
-	}));
-};
-```
+The custom login prompt should send the widget message `tm-login` with the username and password in parameters ''username'' and ''password''.
 
 !! `logout(callback)`
 

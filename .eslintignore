@@ -1,0 +1,15 @@
+# Known minified files
+/boot/sjcl.js
+/core/modules/utils/base64-utf8/base64-utf8.module.min.js
+/core/modules/utils/diff-match-patch/diff_match_patch.js
+/plugins/tiddlywiki/async/files/async.min.v1.5.0.js
+/plugins/tiddlywiki/codemirror-autocomplete/files/addon/hint/anyword-hint.js
+/plugins/tiddlywiki/codemirror-autocomplete/files/addon/hint/css-hint.js
+/plugins/tiddlywiki/codemirror-autocomplete/files/addon/hint/html-hint.js
+/plugins/tiddlywiki/codemirror-autocomplete/files/addon/hint/javascript-hint.js
+/plugins/tiddlywiki/codemirror-autocomplete/files/addon/hint/show-hint.js
+/plugins/tiddlywiki/codemirror-autocomplete/files/addon/hint/xml-hint.js
+/plugins/tiddlywiki/codemirror-closebrackets/files/addon/edit/closebrackets.js
+/plugins/tiddlywiki/codemirror-closebrackets/files/addon/edit/matchbrackets.js
+/plugins/tiddlywiki/codemirror-closetag/files/addon/edit/closetag.js
+/plugins/tiddlywiki/codemirror-closetag/files/addon/fold/xml-fold.js
