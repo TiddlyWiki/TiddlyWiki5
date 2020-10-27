@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/filterprefixes/all.js
+title: $:/core/modules/filterrunprefixes/all.js
 type: application/javascript
-module-type: filterprefix
+module-type: filterrunprefix
 
 Union of sets without de-duplication.
 Equivalent to = filter run prefix.

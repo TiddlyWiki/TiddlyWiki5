@@ -169,12 +169,12 @@ exports.getFilterOperators = function() {
 	return this.filterOperators;
 };
 
-exports.getFilterPrefixes = function() {
+exports.getFilterRunPrefixes = function() {
 	if(!this.filterPrefixes) {
-		$tw.Wiki.prototype.filterPrefixes = {};
-		$tw.modules.applyMethods("filterprefix",this.filterPrefixes);
+		$tw.Wiki.prototype.filterRunPrefixes = {};
+		$tw.modules.applyMethods("filterrunprefix",this.filterRunPrefixes);
 	}
-	return this.filterPrefixes;
+	return this.filterRunPrefixes;
 }
 
 exports.filterTiddlers = function(filterString,widget,source) {
@@ -252,7 +252,7 @@ exports.compileFilter = function(filterString) {
 				return resultArray;
 			}
 		};
-		var filterRunPrefixes = self.getFilterPrefixes();
+		var filterRunPrefixes = self.getFilterRunPrefixes();
 		// Wrap the operator functions in a wrapper function that depends on the prefix
 		operationFunctions.push((function() {
 			switch(operation.prefix || "") {
@@ -263,9 +263,9 @@ exports.compileFilter = function(filterString) {
 				case "=": // The results of the operation are pushed into the result without deduplication
 					return filterRunPrefixes["all"](operationSubFunction);
 				case "-": // The results of this operation are removed from the main result
-					return filterRunPrefixes["remove"](operationSubFunction);	
+					return filterRunPrefixes["except"](operationSubFunction);	
 				case "+": // This operation is applied to the main results so far
-					return filterRunPrefixes["intersection"](operationSubFunction);
+					return filterRunPrefixes["and"](operationSubFunction);
 				case "~": // This operation is unioned into the result only if the main result so far is empty
 					return filterRunPrefixes["else"](operationSubFunction);
 				default: 

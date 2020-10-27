@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/filterprefixes/else.js
+title: $:/core/modules/filterrunprefixes/else.js
 type: application/javascript
-module-type: filterprefix
+module-type: filterrunprefix
 
 Equivalent to ~ filter run prefix.
 

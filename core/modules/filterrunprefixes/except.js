@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/filterprefixes/remove.js
+title: $:/core/modules/filterrunprefixes/except.js
 type: application/javascript
-module-type: filterprefix
+module-type: filterrunprefix
 
 Difference of sets.
 Equivalent to - filter run prefix.
@@ -16,8 +16,7 @@ Equivalent to - filter run prefix.
 /*
 Export our filter prefix function
 */
-
-exports.remove = function(operationSubFunction) {
+exports.except = function(operationSubFunction) {
 	return function(results,source,widget) {
 		$tw.utils.removeArrayEntries(results,operationSubFunction(source,widget));
 	};
