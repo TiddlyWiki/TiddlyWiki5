@@ -270,7 +270,10 @@ exports.compileFilter = function(filterString) {
 					if(operation.namedPrefix && filterRunPrefixes[operation.namedPrefix]) {
 						return filterRunPrefixes[operation.namedPrefix](operationSubFunction);
 					} else {
-						return filterRunPrefixes["or"](operationSubFunction);
+						return function(results,source,widget) {
+							results.splice(0,results.length);
+							results.push($tw.language.getString("Error/FilterRunPrefix"));
+						};
 					}
 			}
 		})());
