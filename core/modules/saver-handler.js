@@ -153,7 +153,7 @@ SaverHandler.prototype.saveWiki = function(options) {
 	var self = this,
 		method = options.method || "save";
 	// Ignore autosave if disabled
-	if(method === "autosave" && this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes") {
+	if(method === "autosave" && ($tw.config.disableAutoSave || this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes")) {
 		return false;
 	}
 	var	variables = options.variables || {},

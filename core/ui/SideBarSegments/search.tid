@@ -42,6 +42,8 @@ tags: $:/tags/SideBarSegment
 
 \define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<nextTab>>/>"""/>
 
+\define advanced-search-actions() <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search/input}}/><<delete-state-tiddlers>><$action-navigate $to="$:/AdvancedSearch"/>
+
 <div class="tc-sidebar-lists tc-sidebar-search">
 
 <$vars configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}} searchTiddler="$:/temp/search/input" searchListState=<<qualify "$:/state/search-list/selected-item">>>
@@ -49,6 +51,7 @@ tags: $:/tags/SideBarSegment
 <div class="tc-search">
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
+<$keyboard key="((advanced-search-sidebar))" actions=<<advanced-search-actions>>>
 <$macrocall $name="keyboard-driven-input" tiddler="$:/temp/search" storeTitle=<<searchTiddler>> 
 		selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" 
 		tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> 
@@ -57,11 +60,10 @@ tags: $:/tags/SideBarSegment
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> cancelPopups="yes" />
 </$keyboard>
 </$keyboard>
+</$keyboard>
 <$reveal state=<<searchTiddler>> type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
-<$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
-<<delete-state-tiddlers>>
-<$action-navigate $to="$:/AdvancedSearch"/>
+<<advanced-search-actions>>
 {{$:/core/images/advanced-search-button}}
 </$button>
 <$button class="tc-btn-invisible">

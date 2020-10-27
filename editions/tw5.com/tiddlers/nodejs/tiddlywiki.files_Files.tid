@@ -51,6 +51,7 @@ Directory specifications in the `directories` array may take the following forms
 ** ''path'' - (required) the absolute or relative path to the directory containing the tiddler files (relative paths are interpreted relative to the path of the `tiddlywiki.files` file). Note that the directory is not recursively searched; sub-directories are ignored
 ** ''filesRegExp'' - (optional) a [[regular expression|https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions]] that matches the filenames of the files that should be processed within the directory
 ** ''isTiddlerFile'' - (required) if `true`, the file will be treated as a [[tiddler file|TiddlerFiles]] and deserialised to extract the tiddlers. Otherwise, the raw content of the file is assigned to the `text` field without any parsing
+** ''isEditableFile'' - (optional) if `true`, changes to the tiddler be saved back to the original file. <<.from-version "5.1.23">>
 ** ''fields'' - (required) an object containing values that override or customise the fields provided in the tiddler file (see above)
 
 Fields can be overridden for particular files by creating a file with the same name plus the suffix `.meta` -- see TiddlerFiles.
