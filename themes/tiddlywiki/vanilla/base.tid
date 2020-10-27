@@ -2025,6 +2025,19 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 /*
+** Import table
+*/
+
+.tc-import-table {
+	width: 100%;
+}
+
+input.tc-import-rename {
+	width: 85%;
+	margin-right: 0.5em;
+}
+
+/*
 ** Alerts
 */
 
