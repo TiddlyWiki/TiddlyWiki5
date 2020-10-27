@@ -3,12 +3,17 @@ tags: $:/tags/AdvancedSearch
 caption: {{$:/language/Search/Standard/Caption}}
 
 \define lingo-base() $:/language/Search/
+\define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/advanced-search-results" tag="$:/tags/AdvancedSearch" beforeafter="$beforeafter$" defaultState="$:/core/ui/AdvancedSearch/System" actions="""<$action-setfield $tiddler="$:/state/advancedsearch/currentTab" text=<<nextTab>>/>"""/>
 <$linkcatcher to="$:/temp/advancedsearch">
 
 <<lingo Standard/Hint>>
 
 <div class="tc-search">
+<$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
+<$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
 <$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input" focus={{$:/config/Search/AutoFocus}}/>
+</$keyboard>
+</$keyboard>
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 <$button class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" $field="text" $value=""/>

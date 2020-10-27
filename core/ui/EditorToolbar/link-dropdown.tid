@@ -37,7 +37,11 @@ title: $:/core/ui/EditorToolbar/link-dropdown
 
 <$linkcatcher actions=<<add-link-actions>> to=<<linkTiddler>>>
 
+<$vars userInput={{{ [<searchTiddler>get[text]] }}} configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}}>
+
 {{$:/core/ui/SearchResults}}
+
+</$vars>
 
 </$linkcatcher>
 
