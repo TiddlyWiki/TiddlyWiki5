@@ -26,6 +26,7 @@ Error/Caption: Error
 Error/EditConflict: File changed on server
 Error/Filter: Filter error
 Error/FilterSyntax: Syntax error in filter expression
+Error/FilterRunPrefix: Filter Error: Unknown prefix for filter run
 Error/IsFilterOperator: Filter Error: Unknown operand for the 'is' filter operator
 Error/FormatFilterOperator: Filter Error: Unknown suffix for the 'format' filter operator
 Error/LoadingPluginLibrary: Error loading plugin library
