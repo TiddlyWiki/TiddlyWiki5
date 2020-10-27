@@ -721,7 +721,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-tag-button-selected,
-.tc-list-item-selected a.tc-tiddlylink {
+.tc-list-item-selected a.tc-tiddlylink, a.tc-list-item-selected {
 	background-color: <<colour primary>>;
 	color: <<colour tiddler-background>>;
 }
