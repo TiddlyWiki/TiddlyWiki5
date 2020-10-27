@@ -1,5 +1,7 @@
 title: $:/core/macros/tag-picker
 tags: $:/tags/Macro
+first-search-filter: [tags[]!is[system]search:title<userInput>sort[]]
+second-search-filter: [tags[]is[system]search:title<userInput>sort[]]
 
 \define delete-tag-state-tiddlers() <$action-deletetiddler $filter="[<newTagNameTiddler>] [<storeTitle>] [<tagSelectionState>]"/>
 
