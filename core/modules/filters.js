@@ -257,9 +257,7 @@ exports.compileFilter = function(filterString) {
 		operationFunctions.push((function() {
 			switch(operation.prefix || "") {
 				case "": // No prefix means that the operation is unioned into the result
-					return function(results,source,widget) {
-						$tw.utils.pushTop(results,operationSubFunction(source,widget));
-					};
+					return filterRunPrefixes["or"](operationSubFunction);
 				case "=": // The results of the operation are pushed into the result without deduplication
 					return filterRunPrefixes["all"](operationSubFunction);
 				case "-": // The results of this operation are removed from the main result
@@ -272,9 +270,7 @@ exports.compileFilter = function(filterString) {
 					if(operation.namedPrefix && filterRunPrefixes[operation.namedPrefix]) {
 						return filterRunPrefixes[operation.namedPrefix](operationSubFunction);
 					} else {
-						return function(results,source,widget) {
-							$tw.utils.pushTop(results,operationSubFunction(source,widget));
-						};
+						return filterRunPrefixes["or"](operationSubFunction);
 					}
 			}
 		})());
