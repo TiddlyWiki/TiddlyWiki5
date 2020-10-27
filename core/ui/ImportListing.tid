@@ -1,7 +1,7 @@
 title: $:/core/ui/ImportListing
 
 \define lingo-base() $:/language/Import/
- 
+
 \define messageField()
 message-$(payloadTiddler)$
 \end
@@ -32,7 +32,7 @@ $:/state/import-rename-$(payloadTiddler)$
 
 <table class="tc-import-table">
 <tbody>
-<tr> 
+<tr>
 <th align="left">
 <$checkbox tiddler="$:/state/import/select-all" field="text" checked="checked" unchecked="unchecked" default="checked" actions=<<select-all-actions>>>
 <<lingo Listing/Select/Caption>>
