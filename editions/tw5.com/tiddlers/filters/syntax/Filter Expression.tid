@@ -1,5 +1,5 @@
 created: 20150124182421000
-modified: 20190610165329062
+modified: 20201027134811701
 tags: [[Filter Syntax]]
 title: Filter Expression
 type: text/vnd.tiddlywiki
@@ -21,15 +21,16 @@ If a run has:
 * the prefix `-`, output titles are <<.em removed>> from the filter's output (if such tiddlers exist)
 * the prefix `+`, it receives the filter output so far as its input; its output then <<.em "replaces">> all filter ouput so far and forms the input for the next run
 * <<.from-version "5.1.18">> the prefix `~`, if the filter output so far is an empty list then the output titles of the run are [[dominantly appended|Dominant Append]] to the filter's output. If the filter output so far is not an empty list then the run is ignored
+* <<.from-version "5.1.23">> named prefixes for filter runs are available.
 
 In technical / logical terms:
 
-|!Run |!Interpretation |!Output |
-|`run` |de-duplicated union of sets |... OR run |
-|`=run` |union of sets without de-duplication |... OR run |
-|`+run` |intersection of sets |... AND run |
-|`-run` |difference of sets |... AND NOT run |
-|`~run` |else |... ELSE run |
+|!Run |!Equivalent named prefix |!Interpretation |!Output |
+|`run` |`:or[run]` |de-duplicated union of sets |... OR run |
+|`=run` |`:all[run]` |union of sets without de-duplication |... OR run |
+|`+run` |`:and[run]` |intersection of sets |... AND run |
+|`-run` |`:except[run]` |difference of sets |... AND NOT run |
+|`~run` |`:else[run]` |else |... ELSE run |
 
 The input of a run is normally a list of all the non-[[shadow|ShadowTiddlers]] tiddler titles in the wiki (in no particular order). But the `+` prefix can change this:
 
