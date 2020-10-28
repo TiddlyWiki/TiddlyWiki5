@@ -8,14 +8,20 @@ tags: $:/tags/MenuBar
 
 \define input-accept-actions() <$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/>
 
+\define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<nextTab>>/>"""/>
+
 \whitespace trim
-<$vars searchTiddler="$:/temp/menubarsearch/input" searchListState=<<qualify "$:/state/search-list/selected-item">> titleSearchFilter="[!is[system]search:title<userInput>sort[title]limit[250]]" allSearchFilter="[!is[system]search<userInput>sort[title]limit[250]]">
+<$vars searchTiddler="$:/temp/menubarsearch/input" searchListState=<<qualify "$:/state/search-list/selected-item">>>
 <span style="margin: 0 0.5em;">
+<$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
+<$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
 <$macrocall $name="keyboard-driven-input" tiddler="$:/temp/menubarsearch" storeTitle=<<searchTiddler>> selectionStateTitle=<<searchListState>> 
 		refreshTitle="$:/temp/menubarsearch/refresh" tag="input" type="search" focusPopup="$:/state/popup/menubar-search-dropdown" 
 		class="tc-popup-handle tc-menu-show-when-wide" placeholder="Search..." default="" cancelPopups="yes" 
-		primaryListFilter=<<titleSearchFilter>> secondaryListFilter=<<allSearchFilter>> inputAcceptActions=<<input-accept-actions>> 
-		inputCancelActions=<<cancel-search-actions>> filterMinLength={{$:/config/Search/MinLength}}/>
+		inputAcceptActions=<<input-accept-actions>> inputCancelActions=<<cancel-search-actions>> 
+		filterMinLength={{$:/config/Search/MinLength}} configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]" />
+</$keyboard>
+</$keyboard>
 </span>
 <$reveal tag="div" class="tc-block-dropdown-wrapper" state="$:/state/popup/menubar-search-dropdown" type="nomatch" text="" default="">
 
@@ -25,7 +31,11 @@ tags: $:/tags/MenuBar
 
 <$list filter="[<searchTiddler>get[text]minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 
+<$vars configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}} userInput={{{ [<searchTiddler>get[text]] }}}>
+
 {{$:/core/ui/SearchResults}}
+
+</$vars>
 
 </$list>
 
