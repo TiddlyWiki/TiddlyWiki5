@@ -1,0 +1,7 @@
+title: $:/core/ui/KeyboardShortcuts/save-wiki
+tags: $:/tags/KeyboardShortcut
+key: ((save-wiki))
+
+<$wikify name="site-title" text={{$:/config/SaveWikiButton/Filename}}>
+<$action-sendmessage $message="tm-save-wiki" $param={{$:/config/SaveWikiButton/Template}} filename=<<site-title>>/>
+</$wikify>

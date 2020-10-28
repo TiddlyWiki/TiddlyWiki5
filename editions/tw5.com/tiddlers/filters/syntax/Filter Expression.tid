@@ -1,5 +1,5 @@
 created: 20150124182421000
-modified: 20201027134811701
+modified: 20201027185638636
 tags: [[Filter Syntax]]
 title: Filter Expression
 type: text/vnd.tiddlywiki
@@ -19,9 +19,12 @@ If a run has:
 * no prefix, its output titles are [[dominantly appended|Dominant Append]] to the filter's output
 * <<.from-version "5.1.20">> the prefix `=`, output titles are appended to the filter's output without de-duplication
 * the prefix `-`, output titles are <<.em removed>> from the filter's output (if such tiddlers exist)
-* the prefix `+`, it receives the filter output so far as its input; its output then <<.em "replaces">> all filter ouput so far and forms the input for the next run
+* the prefix `+`, it receives the filter output so far as its input; its output then <<.em "replaces">> all filter output so far and forms the input for the next run
 * <<.from-version "5.1.18">> the prefix `~`, if the filter output so far is an empty list then the output titles of the run are [[dominantly appended|Dominant Append]] to the filter's output. If the filter output so far is not an empty list then the run is ignored
 * <<.from-version "5.1.23">> named prefixes for filter runs are available.
+* <<.from-version "5.1.23">> named prefix `:filter`, it receives the filter output so far as its input. The next run is evaluated for each title of the input, removing every input title for which the output is an empty list.
+
+<<.tip "Compare named filter run prefix `:filter` with [[filter Operator]] which applies a subfilter to every input title, removing the titles that return an empty result from the subfilter">>
 
 In technical / logical terms:
 

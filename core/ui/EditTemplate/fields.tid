@@ -68,13 +68,12 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 
 <$fieldmangler>
 <div class="tc-edit-field-add">
-<em class="tc-edit">
-<<lingo Fields/Add/Prompt>>&nbsp;&nbsp;
+<em class="tc-edit tc-big-gap-right">
+<<lingo Fields/Add/Prompt>>
 </em>
 <div class="tc-edit-field-add-name-wrapper">
 <$edit-text tiddler=<<newFieldNameTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}} focusPopup=<<qualify "$:/state/popup/field-dropdown">> class="tc-edit-texteditor tc-popup-handle" tabindex={{$:/config/EditTabIndex}} focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] ~[[false]] }}} cancelPopups="yes"/>
-&nbsp;
-<$button popup=<<qualify "$:/state/popup/field-dropdown">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Field/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Field/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>&nbsp;
+<$button popup=<<qualify "$:/state/popup/field-dropdown">> class="tc-btn-invisible tc-btn-dropdown tc-small-gap" tooltip={{$:/language/EditTemplate/Field/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Field/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>
 <$reveal state=<<qualify "$:/state/popup/field-dropdown">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown tc-edit-type-dropdown">
 <$set name="tv-show-missing-links" value="yes">
@@ -102,13 +101,13 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 </div>
 </$reveal>
 </div>
-<span class="tc-edit-field-add-value">
+<span class="tc-edit-field-add-value tc-small-gap-right">
 <$set name="currentTiddlerCSSescaped" value={{{ [<currentTiddler>escapecss[]] }}}>
 <$keyboard key="((add-field))" actions=<<new-field-actions>>>
 <$edit-text tiddler=<<newFieldValueTiddler>> tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Value/Placeholder}} class="tc-edit-texteditor" tabindex={{$:/config/EditTabIndex}} cancelPopups="yes"/>
 </$keyboard>
 </$set>
-</span>&nbsp;
+</span>
 <span class="tc-edit-field-add-button">
 <$macrocall $name="new-field"/>
 </span>
