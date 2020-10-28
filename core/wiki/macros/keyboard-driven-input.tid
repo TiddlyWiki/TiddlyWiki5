@@ -21,25 +21,41 @@ $actions$
 </$list>
 \end
 
-\define input-next-actions(afterOrBefore:"after",reverse:"")
-<$list filter="[<__storeTitle__>get[text]minlength<__filterMinLength__>] [<__filterMinLength__>match[0]] +[limit[1]]" variable="ignore">
-<$vars userInput={{{ [<__storeTitle__>get[text]] }}} selectedItem={{{ [<__selectionStateTitle__>get[text]] }}}>
-<$set name="configTiddler" value={{{ [subfilter<__configTiddlerFilter__>] }}}>
-<$vars primaryListFilter={{{ [<configTiddler>get[first-search-filter]] }}} secondaryListFilter={{{ [<configTiddler>get[second-search-filter]] }}}>
+\define input-next-actions-inner(afterOrBefore:"after",reverse:"")
 <$set name="filteredList" filter="[subfilter<primaryListFilter>addsuffix[-primaryList]] =[subfilter<secondaryListFilter>addsuffix[-secondaryList]]">
 <$set name="nextItem" value={{{ [enlist<filteredList>$afterOrBefore$<selectedItem>] ~[enlist<filteredList>$reverse$nth[1]] }}}>
-<$list filter="[<nextItem>minlength[1]]">
+<$list filter="[<nextItem>minlength[1]]" variable="ignore">
 <$action-setfield $tiddler=<<__selectionStateTitle__>> text=<<nextItem>>/>
-<$list filter="[<__index__>match[]]">
+<$list filter="[<__index__>match[]]" variable="ignore">
 <$action-setfield $tiddler=<<__tiddler__>> $field=<<__field__>> $value={{{ [<nextItem>] +[splitregexp[(?:.(?!-))+$]] }}}/>
 </$list>
-<$list filter="[<__index__>!match[]]">
+<$list filter="[<__index__>!match[]]" variable="ignore">
 <$action-setfield $tiddler=<<__tiddler__>> $index=<<__index__>> $value={{{ [<nextItem>] +[splitregexp[(?:.(?!-))+$]] }}}/>
 </$list>
 <$action-setfield $tiddler=<<__refreshTitle__>> text="yes"/>
 </$list>
 </$set>
 </$set>
+\end
+
+\define input-next-actions(afterOrBefore:"after",reverse:"")
+<$list filter="[<__storeTitle__>get[text]minlength<__filterMinLength__>] [<__filterMinLength__>match[0]] +[limit[1]]" variable="ignore">
+<$vars userInput={{{ [<__storeTitle__>get[text]] }}} selectedItem={{{ [<__selectionStateTitle__>get[text]] }}}>
+<$set name="configTiddler" value={{{ [subfilter<__configTiddlerFilter__>] }}}>
+<$vars primaryListFilter={{{ [<configTiddler>get[first-search-filter]] }}} secondaryListFilter={{{ [<configTiddler>get[second-search-filter]] }}}>
+<$list filter="[<primaryListFilter>prefix[{{]suffix[}}]] [<secondaryListFilter>prefix[{{]suffix[}}]] +[limit[1]]" variable="ignore" emptyMessage="<<input-next-actions-inner "$afterOrBefore$" "$reverse$">>">
+<$set name="configTiddler" value={{{ [<primaryListFilter>removeprefix[{{]removesuffix[}}]] }}}>
+<$set name="primaryListFilter" value={{{ [<configTiddler>get[text]] }}}>
+<$set name="configTiddler" value={{{ [<secondaryListFilter>removeprefix[{{]removesuffix[}}]] }}}>
+<$set name="secondaryListFilter" value={{{ [<configTiddler>get[text]] }}}>
+<<input-next-actions-inner "$afterOrBefore$" "$reverse$">>
+</$set>
+</$set>
+</$set>
+</$set>
+</$wikify>
+</$wikify>
+</$list>
 </$vars>
 </$set>
 </$vars>
