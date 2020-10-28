@@ -42,7 +42,7 @@ tags: $:/tags/SideBarSegment
 
 \define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<nextTab>>/>"""/>
 
-\define advanced-search-actions() <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search/input}}/><<delete-state-tiddlers>><$action-navigate $to="$:/AdvancedSearch"/>
+\define advanced-search-actions() <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search/input}}/><$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/search/input}}/><<delete-state-tiddlers>><$action-navigate $to="$:/AdvancedSearch"/>
 
 <div class="tc-sidebar-lists tc-sidebar-search">
 
