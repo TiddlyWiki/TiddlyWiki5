@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/savers/override.js
+title: $:/core/modules/savers/custom.js
 type: application/javascript
 module-type: saver
 
-Looks for `window.tiddlyWikiOverrides.saver` first on the current window, then
+Looks for `window.$tw.customSaver` first on the current window, then
 on the parent window (of an iframe). If present, the saver must define
 	save: function(text,method,callback) { ... }
 and the saver may define
@@ -17,27 +17,29 @@ and the saver may define
 
 var findSaver = function(window) {
 	try {
-		return window && window.tiddlyWikiOverrides && window.tiddlyWikiOverrides.saver;
+		return window && window.$tw && window.$tw.customSaver;
 	} catch (err) {
-		// Probably an iframe on a different domain than its parent.
-		console.log({ msg: "override saver is disabled", reason: err });
+		// Catching the exception is the most reliable way to detect cross-origin iframe errors.
+		// For example, instead of saying that `window.parent.$tw` is undefined, Firefox will throw
+		//   Uncaught DOMException: Permission denied to access property "$tw" on cross-origin object
+		console.log({ msg: "custom saver is disabled", reason: err });
 		return null;
 	}
 }
 var saver = findSaver(window) || findSaver(window.parent) || {};
 
-var OverrideSaver = function(wiki) {
+var CustomSaver = function(wiki) {
 };
 
-OverrideSaver.prototype.save = function(text,method,callback) {
+CustomSaver.prototype.save = function(text,method,callback) {
 	return saver.save(text, method, callback);
 };
 
 /*
 Information about this saver
 */
-OverrideSaver.prototype.info = {
-	name: "override",
+CustomSaver.prototype.info = {
+	name: "custom",
 	priority: saver.priority || 4000,
 	capabilities: ["save","autosave"]
 };
@@ -53,6 +55,6 @@ exports.canSave = function(wiki) {
 Create an instance of this saver
 */
 exports.create = function(wiki) {
-	return new OverrideSaver(wiki);
+	return new CustomSaver(wiki);
 };
 })();
