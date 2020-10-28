@@ -25,10 +25,10 @@ title: $:/PaletteManager
 <$set name="state" value={{{ [[$:/state/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>] }}}>
 <$wikify name="newColourName" text="""<$macrocall $name="resolve-colour" macrocall={{{ [<currentTiddler>getindex<colourName>] }}}/>""">
 <$reveal state=<<state>> type="nomatch" text="show">
-<$button tooltip=<<colour-tooltip show>> aria-label=<<colour-tooltip show>> class="tc-btn-invisible" set=<<state>> setTo="show">{{$:/core/images/down-arrow}}&nbsp;<$text text=<<newColourName>>/></$button><br>
+<$button tooltip=<<colour-tooltip show>> aria-label=<<colour-tooltip show>> class="tc-btn-invisible" set=<<state>> setTo="show">{{$:/core/images/down-arrow}}<$text text=<<newColourName>> class="tc-small-gap-left"/></$button><br>
 </$reveal>
 <$reveal state=<<state>> type="match" text="show">
-<$button tooltip=<<colour-tooltip hide>> aria-label=<<colour-tooltip show>> class="tc-btn-invisible" actions="""<$action-deletetiddler $tiddler=<<state>>/>""">{{$:/core/images/up-arrow}}&nbsp;<$text text=<<newColourName>>/></$button><br>
+<$button tooltip=<<colour-tooltip hide>> aria-label=<<colour-tooltip show>> class="tc-btn-invisible" actions="""<$action-deletetiddler $tiddler=<<state>>/>""">{{$:/core/images/up-arrow}}<$text text=<<newColourName>> class="tc-small-gap-left"/></$button><br>
 </$reveal>
 <$reveal state=<<state>> type="match" text="show">
 <$set name="colourName" value=<<newColourName>>>
@@ -88,6 +88,6 @@ title: $:/PaletteManager
 
 <$button message="tm-new-tiddler" param={{$:/palette}}><<lingo Clone/Caption>></$button>
 
-<$checkbox tiddler="$:/state/palettemanager/showexternal" field="text" checked="yes" unchecked="no">&nbsp;<<lingo Names/External/Show>></$checkbox>
+<$checkbox tiddler="$:/state/palettemanager/showexternal" field="text" checked="yes" unchecked="no"><span class="tc-small-gap-left"><<lingo Names/External/Show>></span></$checkbox>
 
 <<palette-manager-table>>
