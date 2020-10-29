@@ -44,11 +44,11 @@ ServerSentEvents.prototype.getExports = function() {
  * @param {*} state
  */
 ServerSentEvents.prototype.handleEventRequest = function(request, response, state) {
-  if (request.headers.accept && request.headers.accept.startsWith('text/event-stream')) {
+  if(request.headers.accept && request.headers.accept.startsWith("text/event-stream")) {
     response.writeHead(200, {
-      'Content-Type': 'text/event-stream',
-      'Cache-Control': 'no-cache',
-      'Connection': 'keep-alive'
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      "Connection": "keep-alive"
     });
     this.handler(request, state, this.emit.bind(this, response), this.end.bind(this, response));
   } else {
@@ -58,10 +58,12 @@ ServerSentEvents.prototype.handleEventRequest = function(request, response, stat
 };
 
 ServerSentEvents.prototype.emit = function(response, event, data) {
-  if (typeof event !== "string" || event.indexOf("\n") !== -1)
-    throw new Error("type must be a single-line string");
-  if (typeof data !== "string" || data.indexOf("\n") !== -1)
-    throw new Error("data must be a single-line string");
+  if(typeof event !== "string" || event.indexOf("\n") !== -1) {
+    throw new Error("Type must be a single-line string");
+  }
+  if(typeof data !== "string" || data.indexOf("\n") !== -1) {
+    throw new Error("Data must be a single-line string");
+  }
   response.write("event: " + event + "\ndata: " + data + "\n\n", "utf8");
 };
 
