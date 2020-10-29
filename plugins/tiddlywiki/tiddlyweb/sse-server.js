@@ -60,11 +60,11 @@ function handleConnection(request, state, emit, end) {
     if(remIndex > -1) conns[index].splice(remIndex,1);
   });
 }
-// import the ServerSentEvents class
+// Import the ServerSentEvents class
 var ServerSentEvents = require("$:/core/modules/server/server-sent-events.js").ServerSentEvents;
-// instantiate the class
+// Instantiate the class
 var events = new ServerSentEvents("plugins/tiddlywiki/tiddlyweb", handleConnection);
-// export the route definition for this server sent events instance
+// Export the route definition for this server sent events instance
 module.exports = events.getExports();
 
 })();
