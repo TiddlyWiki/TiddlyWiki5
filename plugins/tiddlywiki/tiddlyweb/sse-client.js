@@ -26,6 +26,7 @@ exports.startup = function() {
   // Setup the event listener 
   setupEvents(host);
 }
+
 function setupEvents(host){
   var events = new EventSource(host + "events/plugins/tiddlywiki/tiddlyweb");
   var timeout = null;
