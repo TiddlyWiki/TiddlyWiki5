@@ -17,13 +17,13 @@ exports.after = ["startup"];
 exports.synchronous = true;
 exports.platforms = ["browser"];
 exports.startup = function() {
-  //make sure we're actually being used
+  // Make sure we're actually being used
   if($tw.syncadaptor.name !== "tiddlyweb") return;
-  //get the mount point in case a path prefix is used
+  // Get the mount point in case a path prefix is used
   var host = $tw.syncadaptor.getHost();
-  //make sure it ends with a slash (it usually does)
+  // Make sure it ends with a slash (it usually does)
   if(host[host.length - 1] !== "/") host += "/";
-  //setup the event listener 
+  // Setup the event listener 
   setupEvents(host);
 }
 function setupEvents(host){
