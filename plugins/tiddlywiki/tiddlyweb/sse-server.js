@@ -33,8 +33,8 @@ function setupWiki(wiki) {
   wikis.push(wiki);
   conns.push(connections);
   // add the change listener for this wiki
-  wiki.addEventListener("change", function (changes) {
-    connections.forEach(function (item) {
+  wiki.addEventListener("change", function(changes) {
+    connections.forEach(function(item) {
       item.emit("change", JSON.stringify(changes));
     });
   });
