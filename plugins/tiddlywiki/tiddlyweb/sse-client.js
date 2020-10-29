@@ -22,7 +22,7 @@ exports.startup = function() {
   //get the mount point in case a path prefix is used
   var host = $tw.syncadaptor.getHost();
   //make sure it ends with a slash (it usually does)
-  if(!host.endsWith("/")) host += "/";
+  if(host[host.length - 1] !== "/") host += "/";
   //setup the event listener 
   setupEvents(host);
 }
