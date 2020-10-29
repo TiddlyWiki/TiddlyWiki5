@@ -5,7 +5,7 @@ caption: {{$:/language/Search/Filter/Caption}}
 \define lingo-base() $:/language/Search/
 \define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/advanced-search-results" tag="$:/tags/AdvancedSearch" beforeafter="$beforeafter$" defaultState="$:/core/ui/AdvancedSearch/System" actions="""<$action-setfield $tiddler="$:/state/advancedsearch/currentTab" text=<<nextTab>>/>"""/>
 
-\define cancel-search-actions() <$set name="userInput" value={{{ [<__storeTitle__>get[text]] }}}><$list filter="[<__tiddler__>get[text]match<userInput>]" emptyMessage="""<$action-setfield $tiddler=<<__tiddler__>> text=<<userInput>>/><$action-setfield $tiddler=<<__refreshTitle__>> text="yes"/><$action-setfield $tiddler="testtiddler" text=<<userInput>>/>"""><$action-deletetiddler $filter="[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]]" /></$list></$set>
+\define cancel-search-actions() <$set name="userInput" value={{{ [<__storeTitle__>get[text]] }}}><$list filter="[<__tiddler__>get[text]match<userInput>]" emptyMessage="""<$action-setfield $tiddler=<<__tiddler__>> text=<<userInput>>/><$action-setfield $tiddler=<<__refreshTitle__>> text="yes"/>"""><$action-deletetiddler $filter="[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]]" /></$list></$set>
 
 \define input-accept-actions() <$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/>
 
