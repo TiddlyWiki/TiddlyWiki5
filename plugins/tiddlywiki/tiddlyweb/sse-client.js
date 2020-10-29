@@ -16,7 +16,7 @@ exports.name = "/events/plugins/tiddlywiki/tiddlyweb";
 exports.after = ["startup"];
 exports.synchronous = true;
 exports.platforms = ["browser"];
-exports.startup = function () {
+exports.startup = function() {
   //make sure we're actually being used
   if($tw.syncadaptor.name !== "tiddlyweb") return;
   //get the mount point in case a path prefix is used
@@ -28,8 +28,12 @@ exports.startup = function () {
 }
 function setupEvents(host){
   var events = new EventSource(host + "events/plugins/tiddlywiki/tiddlyweb");
-  events.addEventListener("change", function () {
-    $tw.syncer.syncFromServer();
+  var timeout = null;
+  events.addEventListener("change", function() {
+    if(timeout) clearTimeout(timeout);
+    timeout = setTimeout(function(){
+      $tw.syncer.syncFromServer();
+    }, $tw.syncer.throttleInterval);
   });
   events.onerror = function() {
     events.close();
