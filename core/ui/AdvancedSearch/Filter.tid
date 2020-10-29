@@ -20,7 +20,7 @@ caption: {{$:/language/Search/Filter/Caption}}
 		refreshTitle="$:/temp/advancedsearch/refresh" selectionStateTitle="$:/temp/advancedsearch/selected-item" type="search" 
 		tag="input" focus={{$:/config/Search/AutoFocus}} configTiddlerFilter="[[$:/core/ui/AdvancedSearch/Filter]]" 
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> 
-		inputCancelActions=<<cancel-search-actions>>/>
+		inputCancelActions=<<cancel-search-actions>> filterMinLength="1"/>
 </$keyboard>
 </$keyboard>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch/FilterButton]!has[draft.of]]"><$transclude/></$list>
