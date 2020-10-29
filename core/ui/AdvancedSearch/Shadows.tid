@@ -22,7 +22,7 @@ first-search-filter: [all[shadows]search<userInput>sort[title]limit[250]] -[[$:/
 		refreshTitle="$:/temp/advancedsearch/refresh" selectionStateTitle="$:/temp/advancedsearch/selected-item" type="search"
 		tag="input" focus={{$:/config/Search/AutoFocus}} configTiddlerFilter="[[$:/core/ui/AdvancedSearch/Shadows]]"
 		inputCancelActions=<<cancel-search-actions>> inputAcceptActions=<<input-accept-actions>> 
-		inputAcceptVariantActions=<<input-accept-variant-actions>> />
+		inputAcceptVariantActions=<<input-accept-variant-actions>>  filterMinLength={{$:/config/Search/MinLength}}/>
 </$keyboard>
 </$keyboard>
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
