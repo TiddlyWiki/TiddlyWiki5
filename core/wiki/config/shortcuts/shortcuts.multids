@@ -29,6 +29,7 @@ picture: ctrl-shift-I
 preview: alt-P
 quote: ctrl-Q
 save-tiddler: ctrl+enter
+save-wiki: ctrl-S
 stamp: ctrl-S
 strikethrough: ctrl-T
 subscript: ctrl-shift-B
