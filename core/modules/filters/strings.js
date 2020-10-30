@@ -60,7 +60,7 @@ exports.split = makeStringBinaryOperator(
 	function(a,b) {return ("" + a).split(b);}
 );
 
-exports.titlelist = makeStringBinaryOperator(
+exports.aslist = makeStringBinaryOperator(
 	function(a) {return $tw.utils.parseStringArray("" + a);}
 );
 
