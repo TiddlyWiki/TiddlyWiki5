@@ -56,12 +56,12 @@ exports.trim = function(source,operator,options) {
 	return result;
 };
 
-// makeStringBinaryOperator(
-// 	function(a) {return [$tw.utils.trim(a)];}
-// );
-
 exports.split = makeStringBinaryOperator(
 	function(a,b) {return ("" + a).split(b);}
+);
+
+exports.titlelist = makeStringBinaryOperator(
+	function(a) {return $tw.utils.parseStringArray("" + a);}
 );
 
 exports.join = makeStringReducingOperator(
