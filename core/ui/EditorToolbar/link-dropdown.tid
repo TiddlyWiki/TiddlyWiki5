@@ -25,7 +25,7 @@ title: $:/core/ui/EditorToolbar/link-dropdown
 <$vars linkTiddler=<<searchTiddler>>>
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
-<$macrocall $name="keyboard-driven-input" tiddler=<<searchTiddler>> storeTitle=<<storeTitle>> 
+<$macrocall $name="keyboard-driven-input" tiddler=<<searchTiddler>> storeTitle=<<storeTitle>> filterMinLength={{$:/config/Search/MinLength}}
 		selectionStateTitle=<<searchListState>> refreshTitle=<<refreshTitle>> type="search" 
 		tag="input" focus="true" class="tc-popup-handle" inputCancelActions=<<cancel-search-actions>> 
 		inputAcceptActions=<<add-link-actions>> placeholder={{$:/language/Search/Search}} default="" 
