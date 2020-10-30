@@ -18,16 +18,16 @@ caption: {{$:/language/Search/Filter/Caption}}
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
 <$macrocall $name="keyboard-driven-input" tiddler="$:/temp/advancedsearch" storeTitle="$:/temp/advancedsearch/input" 
 		refreshTitle="$:/temp/advancedsearch/refresh" selectionStateTitle="$:/temp/advancedsearch/selected-item" type="search" 
-		tag="input" focus={{$:/config/Search/AutoFocus}} configTiddlerFilter="[[$:/core/ui/AdvancedSearch/Filter]]" 
+		tag="input" focus={{$:/config/Search/AutoFocus}} configTiddlerFilter="[[$:/temp/advancedsearch/input]]" firstSearchFilterField="text" 
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> 
-		inputCancelActions=<<cancel-search-actions>> filterMinLength="1"/>
+		inputCancelActions=<<cancel-search-actions>>/>
 </$keyboard>
 </$keyboard>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch/FilterButton]!has[draft.of]]"><$transclude/></$list>
 </div>
 
-<$reveal state="$:/temp/advancedsearch/input" type="nomatch" text="">
-<$set name="resultCount" value="""<$count filter={{$:/temp/advancedsearch/input}}/>""">
+<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
+<$set name="resultCount" value="""<$count filter={{$:/temp/advancedsearch}}/>""">
 <div class="tc-search-results">
 <<lingo Filter/Matches>>
 <$list filter={{$:/temp/advancedsearch/input}}>
