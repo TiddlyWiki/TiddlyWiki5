@@ -72,6 +72,7 @@ Shortcuts/Input/Down/Hint: Select the next item
 Shortcuts/Input/Tab-Left/Hint: Select the previous Tab
 Shortcuts/Input/Tab-Right/Hint: Select the next Tab
 Shortcuts/Input/Up/Hint: Select the previous item
+Shortcuts/SidebarLayout/Hint: Change the sidebar layout
 SystemTiddler/Tooltip: This is a system tiddler
 SystemTiddlers/Include/Prompt: Include system tiddlers
 TagManager/Colour/Heading: Colour
