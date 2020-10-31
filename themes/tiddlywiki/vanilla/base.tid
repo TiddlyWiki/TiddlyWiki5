@@ -1143,6 +1143,10 @@ canvas.tc-edit-bitmapeditor  {
 	overflow: hidden; /* https://github.com/Jermolene/TiddlyWiki5/issues/282 */
 }
 
+.tc-tiddler-title.tc-tiddler-edit-title {
+	line-height: 3em;
+}
+
 html body.tc-body.tc-single-tiddler-window {
 	margin: 1em;
 	background: <<colour tiddler-background>>;
