@@ -66,7 +66,7 @@ tags: $:/tags/SideBarSegment
 {{$:/core/images/advanced-search-button}}
 </$button>
 <$button class="tc-btn-invisible">
-<<delete-state-tiddlers>>
+<<delete-state-tiddlers>><$action-sendmessage $message="tm-focus-selector" $param=".tc-search input"/>
 {{$:/core/images/close-button}}
 </$button>
 <<count-popup-button>>
