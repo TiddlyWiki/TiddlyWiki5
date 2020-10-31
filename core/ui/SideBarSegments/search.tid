@@ -34,7 +34,7 @@ tags: $:/tags/SideBarSegment
 
 \define delete-state-tiddlers() <$action-deletetiddler $filter="[[$:/temp/search]] [<searchTiddler>] [<searchListState>]"/>
 
-\define cancel-search-actions() <$action-deletetiddler $filter="[<__storeTitle__>] [<__tiddler__>] [<__selectionStateTitle__>]"/><$action-sendmessage $message="tm-focus-selector" $param=".tc-search input"/>
+\define cancel-search-actions() <$action-deletetiddler $filter="[<__storeTitle__>] [<__tiddler__>] [<__selectionStateTitle__>]"/>
 
 \define input-accept-actions() <$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/>
 
