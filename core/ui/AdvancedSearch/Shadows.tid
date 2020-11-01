@@ -18,7 +18,7 @@ first-search-filter: [all[shadows]search<userInput>sort[title]limit[250]] -[[$:/
 <div class="tc-search">
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
-<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/advancedsearch" storeTitle="$:/temp/advancedsearch/input"
+<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/advancedsearch/input" storeTitle="$:/temp/advancedsearch"
 		refreshTitle="$:/temp/advancedsearch/refresh" selectionStateTitle="$:/temp/advancedsearch/selected-item" type="search"
 		tag="input" focus={{$:/config/Search/AutoFocus}} configTiddlerFilter="[[$:/core/ui/AdvancedSearch/Shadows]]"
 		inputCancelActions=<<cancel-search-actions>> inputAcceptActions=<<input-accept-actions>> 
@@ -33,17 +33,17 @@ first-search-filter: [all[shadows]search<userInput>sort[title]limit[250]] -[[$:/
 </$reveal>
 </div>
 
-<$reveal state="$:/temp/advancedsearch/input" type="nomatch" text="">
+<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 
-<$list filter="[{$:/temp/advancedsearch/input}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$list filter="[{$:/temp/advancedsearch}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 
-<$set name="resultCount" value="""<$count filter="[all[shadows]search{$:/temp/advancedsearch/input}] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]]"/>""">
+<$set name="resultCount" value="""<$count filter="[all[shadows]search{$:/temp/advancedsearch}] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]]"/>""">
 
 <div class="tc-search-results">
 
 <<lingo Shadows/Matches>>
 
-<$list filter="[all[shadows]search{$:/temp/advancedsearch/input}sort[title]limit[250]] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]]">
+<$list filter="[all[shadows]search{$:/temp/advancedsearch}sort[title]limit[250]] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]]">
 <span class={{{[<currentTiddler>addsuffix[-primaryList]] -[[$:/temp/advancedsearch/selected-item]get[text]] +[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>
@@ -57,6 +57,6 @@ first-search-filter: [all[shadows]search<userInput>sort[title]limit[250]] -[[$:/
 
 </$reveal>
 
-<$reveal state="$:/temp/advancedsearch/input" type="match" text="">
+<$reveal state="$:/temp/advancedsearch" type="match" text="">
 
 </$reveal>
