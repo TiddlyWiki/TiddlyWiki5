@@ -24,7 +24,8 @@ caption: {{$:/language/Search/Standard/Caption}}
 		refreshTitle="$:/temp/advancedsearch/refresh" selectionStateTitle="$:/temp/advancedsearch/selected-item" type="search"
 		tag="input" focus={{$:/config/Search/AutoFocus}} inputCancelActions=<<cancel-search-actions>> 
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> 
-		 configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]"/>
+		configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]"
+		filterMinLength={{$:/config/Search/MinLength}}/>
 </$keyboard>
 </$keyboard>
 </$keyboard>
