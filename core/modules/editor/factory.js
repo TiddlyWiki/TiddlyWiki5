@@ -71,7 +71,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		// Fix height
 		this.engine.fixHeight();
 		// Focus if required
-		if(this.editFocus === "true" || this.editFocus === "yes" || $tw.inputManager.shouldFocusAgain(this.editQualifiedID)) {
+		if(this.editFocus === "true" || this.editFocus === "yes" || (this.editInputManagement && $tw.inputManager.shouldFocusAgain(this.editQualifiedID))) {
 			this.engine.focus();
 		}
 		// Add widget message listeners
@@ -221,7 +221,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		} else if(changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
-			if($tw.inputManager.shouldFocusAgain(this.editQualifiedID)) {
+			if(this.editInputManagement && $tw.inputManager.shouldFocusAgain(this.editQualifiedID)) {
 				this.engine.focus();
 			}
 		}
