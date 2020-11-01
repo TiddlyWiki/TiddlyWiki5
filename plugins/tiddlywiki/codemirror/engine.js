@@ -191,7 +191,7 @@ Focus the engine node
 */
 CodeMirrorEngine.prototype.focus  = function() {
 	var selections = $tw.inputManager.getSelections(this.widget.editQualifiedID);
-	if(selections) {
+	if(selections && this.widget.editInputManagement) {
 		this.cm.focus();
 		this.cm.setSelection(this.cm.posFromIndex(selections.selectionStart),this.cm.posFromIndex(selections.selectionEnd));
 	} else {
