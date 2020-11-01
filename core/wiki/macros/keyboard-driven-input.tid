@@ -47,6 +47,7 @@ $actions$
 \end
 
 \define keyboard-driven-input(tiddler,storeTitle,field:"text",index:"",tag:"input",type,focus:"",inputAcceptActions,inputAcceptVariantActions,inputCancelActions,placeholder:"",default:"",class,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0",refreshTitle,selectionStateTitle,cancelPopups:"",configTiddlerFilter,firstSearchFilterField:"first-search-filter",secondSearchFilterField:"second-search-filter")
+\whitespace trim
 <$keyboard key="((input-accept))" actions=<<__inputAcceptActions__>>>
 <$keyboard key="((input-accept-variant))" actions=<<__inputAcceptVariantActions__>>>
 <$keyboard key="((input-up))" actions=<<input-next-actions "before" "reverse[]">>>
