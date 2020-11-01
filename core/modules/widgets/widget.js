@@ -421,6 +421,7 @@ Widget.prototype.addEventListener = function(type,handler) {
 Dispatch an event to a widget. If the widget doesn't handle the event then it is also dispatched to the parent widget
 */
 Widget.prototype.dispatchEvent = function(event) {
+	event.widget = event.widget || this;
 	// Dispatch the event if this widget handles it
 	var listener = this.eventListeners[event.type];
 	if(listener) {
@@ -568,6 +569,16 @@ Widget.prototype.invokeActionString = function(actions,triggeringWidget,event,va
 	var container = this.document.createElement("div");
 	widgetNode.render(container,null);
 	return widgetNode.invokeActions(this,event);
+};
+
+/*
+Execute action tiddlers by tag
+*/
+Widget.prototype.executeStartupTiddlers = function(tag) {
+	var self = this;
+	$tw.utils.each(self.wiki.filterTiddlers("[all[shadows+tiddlers]tag[" + tag + "]!has[draft.of]]"),function(title) {
+		self.invokeActionString(self.wiki.getTiddlerText(title),self);
+	});
 };
 
 Widget.prototype.allowActionPropagation = function() {

@@ -1,8 +1,4 @@
 title: $:/core/images/italic
 tags: $:/tags/Image
 
-<svg class="tc-image-italic tc-image-button" width="22pt" height="22pt" viewBox="0 0 128 128">
-    <g fill-rule="evenodd">
-         <polygon points="66.7114846 0 89.1204482 0 62.4089636 128 40 128"></polygon>
-    </g>
-</svg>
+<svg width="22pt" height="22pt" class="tc-image-italic tc-image-button" viewBox="0 0 128 128"><path fill-rule="evenodd" d="M66.711 0h22.41L62.408 128H40z"/></svg>

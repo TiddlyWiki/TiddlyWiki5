@@ -4,25 +4,27 @@ Advanced/Caption: Erweitert
 Advanced/Hint: Interne Informationen über dieses ~TiddlyWiki.
 Appearance/Caption: Design
 Appearance/Hint: Möglichkeiten um das Aussehen Ihres ~TiddlyWikis anzupassen.
-Basics/AnimDuration/Prompt: Dauer der Animation:
+Basics/AnimDuration/Prompt: Dauer der Animation
+Basics/AutoFocus/Prompt: Standard Fokus Feld für neue Tiddler
 Basics/Caption: Basis
 Basics/DefaultTiddlers/BottomHint: Verwenden Sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Leerzeichen oder wählen Sie <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Offene Tiddler beim Laden wiederherstellen.</$button>
-Basics/DefaultTiddlers/Prompt: Standard-Tiddler:
-Basics/DefaultTiddlers/TopHint: Tiddler, die beim Start geladen werden:
-Basics/Language/Prompt: Hallo! Aktuelle Sprache:
-Basics/NewJournal/Title/Prompt: Titel des neuen Journal-Tiddlers:
-Basics/NewJournal/Text/Prompt: Text des neuen Journal-Tiddlers:
-Basics/NewJournal/Tags/Prompt: Tags des neuen Journal-Tiddlers:
-Basics/NewTiddler/Title/Prompt: Titel des neuen Tiddlers:
-Basics/OverriddenShadowTiddlers/Prompt: Anzahl überschriebener Schatten-Tiddler:
-Basics/ShadowTiddlers/Prompt: Anzahl Schatten-Tiddler:
-Basics/Subtitle/Prompt: Untertitel:
-Basics/SystemTiddlers/Prompt: Anzahl System-Tiddler:
-Basics/Tags/Prompt: Anzahl Tags:
-Basics/Tiddlers/Prompt: Anzahl Tiddler:
-Basics/Title/Prompt: Titel dieses ~TiddlyWikis:
-Basics/Username/Prompt: Benutzersignatur zum Editieren:
-Basics/Version/Prompt: ~TiddlyWiki Version:
+Basics/DefaultTiddlers/Prompt: Standard-Tiddler
+Basics/DefaultTiddlers/TopHint: Tiddler, die beim Start geladen werden
+Basics/Language/Prompt: Hallo! Aktuelle Sprache
+Basics/NewJournal/Title/Prompt: Titel des neuen Journal-Tiddlers
+Basics/NewJournal/Text/Prompt: Text des neuen Journal-Tiddlers
+Basics/NewJournal/Tags/Prompt: Tags des neuen Journal-Tiddlers
+Basics/NewTiddler/Title/Prompt: Titel des neuen Tiddlers
+Basics/NewTiddler/Tags/Prompt: Tags des neuen Tiddlers
+Basics/OverriddenShadowTiddlers/Prompt: Anzahl überschriebener Schatten-Tiddler
+Basics/ShadowTiddlers/Prompt: Anzahl Schatten-Tiddler
+Basics/Subtitle/Prompt: Untertitel
+Basics/SystemTiddlers/Prompt: Anzahl System-Tiddler
+Basics/Tags/Prompt: Anzahl Tags
+Basics/Tiddlers/Prompt: Anzahl Tiddler
+Basics/Title/Prompt: Titel dieses ~TiddlyWikis
+Basics/Username/Prompt: Benutzersignatur zum Editieren
+Basics/Version/Prompt: ~TiddlyWiki Version
 EditorTypes/Caption: Editor Typen
 EditorTypes/Editor/Caption: Editor
 EditorTypes/Hint: Diese Tiddler definieren, welcher Editor für bestimmte Tiddler Typen (MIME-Type) verwendet werden soll.
@@ -47,6 +49,8 @@ LoadedModules/Hint: Hier werden die geladenen Module und ihre Quelltext-Komponen
 Palette/Caption: Palette
 Palette/Editor/Clone/Caption: Palette klonen
 Palette/Editor/Clone/Prompt: Es wird empfohlen, dass Sie diese Schatten-Palette klonen, bevor Sie sie bearbeiten. Der Name der Palette wird im Tiddler-Feld "description" eingestellt.
+Palette/Editor/Delete/Hint: Lösche diesen Eintrag von der Palette
+Palette/Editor/Names/External/Show: Zeige Farb-namen, die nicht Tiel der bestehenden Palette sind
 Palette/Editor/Prompt/Modified: Diese Schatten-Palette wurde bearbeitet.
 Palette/Editor/Prompt: Bearbeiten
 Palette/Editor/Reset/Caption: Palette zurücksetzen
@@ -61,6 +65,7 @@ Parsing/Pragma/Caption: Pragma Regeln
 Plugins/Add/Caption: Suche
 Plugins/Add/Hint: Suche und installiere neue Plugins
 Plugins/AlreadyInstalled/Hint: Dieses Plugin ist bereits installiert. Version: <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: Benötigt auch:
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: deaktivieren
 Plugins/Disable/Hint: Deaktivieren Sie dieses Plugin beim nächsten Laden der Seite.
@@ -76,6 +81,7 @@ Plugins/NoInfoFound/Hint: Kein ''"<$text text=<<currentTab>>/>"'' gefunden
 Plugins/NotInstalled/Hint: Dieses Plugin ist momentan nicht installiert
 Plugins/OpenPluginLibrary: Öffne das Plugin-Verzeichnis
 Plugins/ClosePluginLibrary: Schließe das Plugin-Verzeichnis
+Plugins/PluginWillRequireReload: ("reload" ist nötig)
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Erweiterungen
 Plugins/Reinstall/Caption: erneut installieren
@@ -89,15 +95,20 @@ Saving/DownloadSaver/Hint: Diese Einstellungen gelten für den HTML5-compatiblen
 Saving/General/Caption: Allgemein
 Saving/General/Hint: Diese Einstellungen gelten für alle Speichermechanismen
 Saving/Hint: Einstellungen zu den TiddlyWiki Speichermechanismen
-Saving/GitHub/Branch: Ziel "branch" zum Speichern (Standard: `master`)
-Saving/GitHub/Caption: ~GitHub Saver
-Saving/GitHub/Description: Diese Einstellungen werden nur zum Speichern auf GitHub verwendet
-Saving/GitHub/ServerURL: Server URL (Standard: `https://api.github.com`)
-Saving/GitHub/Filename: Dateiname für Zielpfad (zB: `index.html`)
-Saving/GitHub/Password: Password, OAUTH token, oder persönlicher "Zugriffs-Token"
-Saving/GitHub/Path: Pfad für Datei (zB: `/wiki/`)
-Saving/GitHub/Repo: Ziel "Repository" (zB: `Jermolene/TiddlyWiki5`)
-Saving/GitHub/UserName: Benuzername
+Saving/GitService/Branch: Ziel "branch" zum Speichern (Standard: `master`)
+Saving/GitService/CommitMessage: Gespeichert von TiddlyWiki
+Saving/GitService/Description: Diese Einstellungen werden nur zum Speichern auf <<service-name>> verwendet
+Saving/GitService/Filename: Dateiname für Zielpfad (zB: `index.html`)
+Saving/GitService/Path: Pfad für Datei (zB: `/wiki/`)
+Saving/GitService/Repo: Ziel "Repository" (zB: `Jermolene/TiddlyWiki5`)
+Saving/GitService/ServerURL: Server URL (Standard: `https://api.github.com`)
+Saving/GitService/UserName: Benuzername
+Saving/GitService/GitHub/Caption: ~GitHub Saver
+Saving/GitService/GitHub/Password: Password, "OAUTH token", oder persönlicher "Zugriffs-Token". Siehe: [[GitHub help page|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]]
+Saving/GitService/GitLab/Caption: ~GitLab Saver
+Saving/GitService/GitLab/Password: Persönlicher "Zugriffs-Token". Siehe: [[GitLab help page|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]]
+Saving/GitService/Gitea/Caption: Gitea Saver
+Saving/GitService/Gitea/Password: Persönlicher "Zugriffs-Token" (siehe: Gitea’s web Seite: `Settings | Applications | Generate New Token`)
 Saving/TiddlySpot/Advanced/Heading: Erweiterte Einstellungen
 Saving/TiddlySpot/BackupDir: Verzeichnis für das "Backup"
 Saving/TiddlySpot/Backups: "Backups"

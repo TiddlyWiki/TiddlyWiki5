@@ -1,0 +1,44 @@
+title: $:/plugins/tiddlywiki/tiddlyweb/styles
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+body.tc-dirty span.tc-dirty-indicator svg {
+	transition: fill 250ms ease-in-out;
+}
+
+body .tc-image-cloud-idle {
+	fill: <<colour background>>;
+	transition: opacity 250ms ease-in-out;
+	opacity: 1;
+	display: unset;
+}
+
+body.tc-dirty .tc-image-cloud-idle {
+	opacity: 0;
+	display: none;
+}
+
+body .tc-image-cloud-progress {
+	transition: opacity 250ms ease-in-out;
+	transform-origin: 50% 50%;
+	transform: rotate(359deg);
+	animation: animation-rotate-slow 2s infinite linear;
+	fill: <<colour background>>;
+	display: none;
+	opacity: 0;
+}
+
+body.tc-dirty .tc-image-cloud-progress {
+	opacity: 1;
+	display: unset;
+}
+
+@keyframes animation-rotate-slow {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: scale(359deg);
+	}
+}

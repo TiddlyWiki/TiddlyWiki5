@@ -27,6 +27,12 @@ function TiddlyWebAdaptor(options) {
 
 TiddlyWebAdaptor.prototype.name = "tiddlyweb";
 
+TiddlyWebAdaptor.prototype.supportsLazyLoading = true;
+
+TiddlyWebAdaptor.prototype.setLoggerSaveBuffer = function(loggerForSaving) {
+	this.logger.setSaveBuffer(loggerForSaving);
+};
+
 TiddlyWebAdaptor.prototype.isReady = function() {
 	return this.hasStatus;
 };
@@ -48,6 +54,11 @@ TiddlyWebAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 	return {
 		bag: tiddler.fields.bag
 	};
+};
+
+TiddlyWebAdaptor.prototype.getTiddlerRevision = function(title) {
+	var tiddler = this.wiki.getTiddler(title);
+	return tiddler.fields.revision;
 };
 
 /*
@@ -147,6 +158,9 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 	var self = this;
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + this.recipe + "/tiddlers.json",
+		data: {
+			filter: "[all[tiddlers]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[[$:/library/sjcl.js]] -[[$:/core]]"
+		},
 		callback: function(err,data) {
 			// Check for errors
 			if(err) {
@@ -220,7 +234,7 @@ TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 		return callback(null);
 	}
 	// If we don't have a bag it means that the tiddler hasn't been seen by the server, so we don't need to delete it
-	var bag = options.tiddlerInfo.adaptorInfo.bag;
+	var bag = options.tiddlerInfo.adaptorInfo && options.tiddlerInfo.adaptorInfo.bag;
 	if(!bag) {
 		return callback(null);
 	}

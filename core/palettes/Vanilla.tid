@@ -57,6 +57,8 @@ page-background: #f4f4f4
 pre-background: #f5f5f5
 pre-border: #cccccc
 primary: #5778d8
+selection-background:
+selection-foreground:
 select-tag-background:
 select-tag-foreground:
 sidebar-button-foreground: <<colour foreground>>
@@ -117,3 +119,20 @@ toolbar-cancel-button:
 toolbar-done-button:
 untagged-background: #999999
 very-muted-foreground: #888888
+wikilist-background: #e5e5e5
+wikilist-item: #fff
+wikilist-info: #000
+wikilist-title: #666
+wikilist-title-svg: <<colour wikilist-title>>
+wikilist-url: #aaa
+wikilist-button-open: #4fb82b
+wikilist-button-open-hover: green
+wikilist-button-reveal: #5778d8
+wikilist-button-reveal-hover: blue
+wikilist-button-remove: #d85778
+wikilist-button-remove-hover: red
+wikilist-toolbar-background: #d3d3d3
+wikilist-toolbar-foreground: #888
+wikilist-droplink-dragover: rgba(255,192,192,0.5)
+wikilist-button-background: #acacac
+wikilist-button-foreground: #000

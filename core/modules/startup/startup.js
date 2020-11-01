@@ -66,17 +66,12 @@ exports.startup = function() {
 		document: $tw.browser ? document : $tw.fakeDocument
 	});
 	// Execute any startup actions
-	var executeStartupTiddlers = function(tag) {
-		$tw.utils.each($tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[" + tag + "]!has[draft.of]]"),function(title) {
-			$tw.rootWidget.invokeActionString($tw.wiki.getTiddlerText(title),$tw.rootWidget);
-		});
-	};
-	executeStartupTiddlers("$:/tags/StartupAction");
+	$tw.rootWidget.executeStartupTiddlers("$:/tags/StartupAction");
 	if($tw.browser) {
-		executeStartupTiddlers("$:/tags/StartupAction/Browser");		
+		$tw.rootWidget.executeStartupTiddlers("$:/tags/StartupAction/Browser");		
 	}
 	if($tw.node) {
-		executeStartupTiddlers("$:/tags/StartupAction/Node");		
+		$tw.rootWidget.executeStartupTiddlers("$:/tags/StartupAction/Node");		
 	}
 	// Kick off the language manager and switcher
 	$tw.language = new $tw.Language();
@@ -130,7 +125,7 @@ exports.startup = function() {
 	// Set up the syncer object if we've got a syncadaptor
 	if($tw.syncadaptor) {
 		$tw.syncer = new $tw.Syncer({wiki: $tw.wiki, syncadaptor: $tw.syncadaptor});
-	} 
+	}
 	// Setup the saver handler
 	$tw.saverHandler = new $tw.SaverHandler({
 		wiki: $tw.wiki,

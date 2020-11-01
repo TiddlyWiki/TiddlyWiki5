@@ -73,6 +73,8 @@ MacroCallWidget.prototype.execute = function() {
 			attributes: attributes,
 			children: parseTreeNodes
 		}];
+	} else if(this.renderOutput === "text/raw") {
+		parseTreeNodes = [{type: "text", text: text}];
 	} else {
 		// Otherwise, we'll render the text
 		var plainText = this.wiki.renderText("text/plain",this.parseType,text,{parentWidget: this});

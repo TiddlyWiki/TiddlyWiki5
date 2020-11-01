@@ -18,3 +18,7 @@ The content of the `<$edit>` widget is ignored.
 |index |The index to edit |
 |class |A CSS class to be added the generated editing widget |
 |tabindex |Sets the `tabindex` attribute of the input or textarea to the given value |
+|cancelPopups |<<.from-version "5.1.23">> if set to "yes", cancels all popups when the input gets focus |
+|inputActions |<<.from-version 5.1.23>> Optional actions that are triggered every time an input event occurs within the input field or textarea |
+|refreshTitle |<<.from-version 5.1.23>> An optional tiddler title that makes the input field update whenever the specified tiddler changes |
+

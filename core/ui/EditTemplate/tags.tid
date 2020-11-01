@@ -15,7 +15,7 @@ color:$(foregroundColor)$;
 \whitespace trim
 <$vars foregroundColor=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">> backgroundColor="""$colour$""">
 <span style=<<tag-styles>> class="tc-tag-label tc-tag-list-item">
-<$transclude tiddler="""$icon$"""/>&nbsp;<$view field="title" format="text" />
+<$transclude tiddler="""$icon$"""/><$view field="title" format="text" />
 <$button message="tm-remove-tag" param={{!!title}} class="tc-btn-invisible tc-remove-tag-button">{{$:/core/images/close-button}}</$button>
 </span>
 </$vars>
@@ -30,8 +30,8 @@ color:$(foregroundColor)$;
 <$list filter="[all[current]tags[]sort[title]]" storyview="pop">
 <$macrocall $name="tag-body" colour={{!!color}} palette={{$:/palette}} icon={{!!icon}}/>
 </$list>
-<$set name="tabIndex" value={{$:/config/EditTabIndex}}>
+<$vars tabIndex={{$:/config/EditTabIndex}} cancelPopups="yes">
 <$macrocall $name="tag-picker"/>
-</$set>
+</$vars>
 </$fieldmangler>
 </div>

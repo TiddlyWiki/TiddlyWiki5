@@ -42,6 +42,8 @@ external-link-foreground-hover: inherit
 external-link-foreground-visited: #5E81AC
 external-link-foreground: #8FBCBB
 foreground: #d8dee9
+menubar-background: #2E3440
+menubar-foreground: #d8dee9
 message-background: #2E3440
 message-border: #2E3440
 message-foreground: #547599
@@ -61,8 +63,8 @@ primary: #5E81AC
 select-tag-background: #3b4252
 select-tag-foreground: <<colour foreground>>
 sidebar-button-foreground: <<colour foreground>>
-sidebar-controls-foreground-hover: #4C566A
-sidebar-controls-foreground: #3B4252
+sidebar-controls-foreground-hover: #D8DEE9
+sidebar-controls-foreground: #4C566A
 sidebar-foreground-shadow: transparent
 sidebar-foreground: #D8DEE9
 sidebar-muted-foreground-hover: #4C566A

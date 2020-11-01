@@ -18,6 +18,8 @@ CloseOthers/Caption: Fechar outros
 CloseOthers/Hint: Fechar os outros tiddlers
 ControlPanel/Caption: painel de controlo
 ControlPanel/Hint: Abrir o painel de controlo
+CopyToClipboard/Caption: copy to clipboard
+CopyToClipboard/Hint: Copy this text to the clipboard
 Delete/Caption: eliminar
 Delete/Hint: eliminar este tiddler
 Edit/Caption: editar
@@ -38,8 +40,9 @@ Excise/Caption/MacroName: Nome da Macro:
 Excise/Caption/NewTitle: Título do novo tiddler:
 Excise/Caption/Replace: Substituir texto separado por:
 Excise/Caption/Replace/Link: ligação
+Excise/Caption/Replace/Macro: macro
 Excise/Caption/Replace/Transclusion: transclusão
-Excise/Caption/Tag: Etiquetar novo tiddler com o título deste tiddler
+Excise/Caption/Tag: Etiquetar novo tiddler com o título deste tiddle
 Excise/Caption/TiddlerExists: Atenção: tiddler já existente
 Excise/Hint: Separar o texto seleccionado para um novo tiddler
 ExportPage/Caption: exportar tudo
@@ -88,6 +91,8 @@ LineWidth/Caption: espessura da linha
 LineWidth/Hint: Definir espessura de linha para desenhar
 Link/Caption: ligação
 Link/Hint: Criar ligação em wikitext
+Linkify/Caption: wikilink
+Linkify/Hint: Envolver selecção em parentesis rectos
 ListBullet/Caption: Lista com marcadores
 ListBullet/Hint: Aplicar formatação de lista com marcadores às linhas contendo selecção
 ListNumber/Caption: lista numerada
@@ -97,7 +102,7 @@ Manager/Hint: Abrir gestor de tiddlers
 MonoBlock/Caption: bloco mono-espaçado
 MonoBlock/Hint: Aplicar formatação de bloco mono-espaçado às linhas contendo selecção
 MonoLine/Caption: mono-espaçado
-MonoLine/Hint: Aplicar formatação mono-espaçado à selecção
+MonoLine/Hint: Aplicar formatação mono-espaçada à selecção
 More/Caption: mais
 More/Hint: Mais acções
 NewHere/Caption: derivar
@@ -131,17 +136,20 @@ Preview/Hint: Mostrar o painel de pré-visualização
 PreviewType/Caption: tipo de pré-visualização
 PreviewType/Hint: Escolher o tipo de pré-visualização
 Print/Caption: imprimir página
-Print/Hint: Imprimir página atual
+Print/Hint: Imprimir página actual
 Quote/Caption: citação
 Quote/Hint: Aplicar formatação de citação às linhas contendo selecção
 Refresh/Caption: actualizar
 Refresh/Hint: Recarregar totalmente a wiki actual
+RotateLeft/Caption: rodar para a esquerda
+RotateLeft/Hint: Rodar imagens para a esquerda 90 graus
 Save/Caption: guardar
 Save/Hint: Guardar este tiddler
 SaveWiki/Caption: guardar alterações
 SaveWiki/Hint: Guardar as alterações
 ShowSideBar/Caption: Mostrar barra lateral
 ShowSideBar/Hint: Mostrar a barra lateral
+SidebarSearch/Hint: Seleccionar o campo de pesquisa da barra lateral
 Size/Caption: tamanho da imagem
 Size/Caption/Height: Altura:
 Size/Caption/Resize: Redimensionar imagem
@@ -155,7 +163,7 @@ Stamp/New/Title: Nome a exibir no menu
 StoryView/Caption: Vista principal
 StoryView/Hint: Escolher a visualização principal
 Strikethrough/Caption: rasurado
-Strikethrough/Hint: Aplicar formatação rasurado à selecção
+Strikethrough/Hint: Aplicar formatação rasurada à selecção
 Subscript/Caption: subscrita
 Subscript/Hint: Aplicar formatação subscrita à selecção
 Superscript/Caption: sobrescrita
@@ -165,11 +173,14 @@ TagManager/Hint: Abrir o gestor de etiquetas
 Theme/Caption: tema
 Theme/Hint: Escolher o tema de exibição
 Timestamp/Caption: marcações de data/hora
-Timestamp/Hint: Escolha se as modificações atualizam as marcações de data/hora
+Timestamp/Hint: Escolha se as modificações actualizam as marcações de data/hora
 Timestamp/Off/Caption: Marcações de data/hora estão desligadas
-Timestamp/Off/Hint: Não atualizar as marcações de data/hora quando as tiddlers são modificadas
+Timestamp/Off/Hint: Não actualizar as marcações de data/hora quando as tiddlers são modificadas
 Timestamp/On/Caption: Marcações de data/hora estão ligadas
 Timestamp/On/Hint: Atualizar as marcações de data/hora quando as tiddlers são modificadas
+ToggleSidebar/Hint: Alternar visibilidade da Barra Lateral
+Transcludify/Caption: transclusão
+Transcludify/Hint: Envolver selecção em chavetas
 Underline/Caption: sublinhar
 Underline/Hint: Aplicar formatação sublinhada à selecção
 Unfold/Caption: desdobrar tiddler

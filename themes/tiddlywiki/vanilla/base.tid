@@ -100,7 +100,6 @@ h1, h2, h3, h4, h5, h6 {
 
 pre {
 	display: block;
-	padding: 14px;
 	margin-top: 1em;
 	margin-bottom: 1em;
 	word-break: normal;
@@ -128,6 +127,11 @@ blockquote {
 	margin-left: 25px;
 	padding-left: 10px;
 	quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote > div {
+	margin-top: 1em;
+	margin-bottom: 1em;
 }
 
 blockquote.tc-big-quote {
@@ -193,6 +197,13 @@ input[type="checkbox"] {
   vertical-align: middle;
 }
 
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+	-webkit-appearance:none;
+}
+
 .tc-muted {
 	color: <<colour muted-foreground>>;
 }
@@ -220,6 +231,13 @@ kbd {
 	box-shadow: inset 0 -1px 0 <<colour muted-foreground>>;
 }
 
+::selection {
+	background-color: Highlight;
+	color: HighlightText;
+	background-color: <<colour selection-background>>;
+	color: <<colour selection-foreground>>;
+}
+
 /*
 Markdown likes putting code elements inside pre elements
 */
@@ -237,6 +255,9 @@ table {
 	caption-side: bottom;
 	margin-top: 1em;
 	margin-bottom: 1em;
+	/* next 2 elements needed, since normalize 8.0.1 */
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
 table th, table td {
@@ -326,6 +347,10 @@ a.tc-tiddlylink-external:visited {
 a.tc-tiddlylink-external:hover {
 	color: <<colour external-link-foreground-hover>>;
 	background-color: <<colour external-link-background-hover>>;
+}
+
+.tc-drop-down a.tc-tiddlylink:hover {
+	color: <<colour tiddler-link-background>>;
 }
 
 /*
@@ -636,6 +661,10 @@ button svg.tc-image-button, button .tc-image-button img {
 	vertical-align: baseline;
 }
 
+.tc-block-tags-dropdown > .tc-btn-invisible:hover {
+	background-color: <<colour primary>>;
+}
+
 button.tc-tag-label, span.tc-tag-label {
 	display: inline-block;
 	padding: 0.16em 0.7em;
@@ -669,7 +698,9 @@ button.tc-untagged-label {
 .tc-tag-label svg, .tc-tag-label img {
 	height: 1em;
 	width: 1em;
-	vertical-align: text-bottom;
+	margin-right: 3px; 
+	margin-bottom: 1px;
+	vertical-align: bottom;
 }
 
 .tc-edit-tags button.tc-remove-tag-button svg {
@@ -687,6 +718,12 @@ button.tc-untagged-label {
 
 button.tc-btn-invisible.tc-remove-tag-button {
 	outline: none;
+}
+
+.tc-tag-button-selected,
+.tc-list-item-selected a.tc-tiddlylink, a.tc-list-item-selected {
+	background-color: <<colour primary>>;
+	color: <<colour tiddler-background>>;
 }
 
 /*
@@ -949,7 +986,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 .tc-titlebar {
 	font-weight: 300;
 	font-size: 2.35em;
-	line-height: 1.2em;
+	line-height: 1.3em;
 	color: <<colour tiddler-title-foreground>>;
 	margin: 0;
 }
@@ -960,6 +997,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-tiddler-title-icon {
 	vertical-align: middle;
+	margin-right: .1em;
 }
 
 .tc-system-title-prefix {
@@ -979,6 +1017,10 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	font-size: 0.9em;
 	color: <<colour tiddler-subtitle-foreground>>;
 	font-weight: 300;
+}
+
+.tc-subtitle .tc-tiddlylink {
+	margin-right: .3em;
 }
 
 .tc-tiddler-missing .tc-title {
@@ -1273,6 +1315,14 @@ html body.tc-body.tc-single-tiddler-window {
 	font-style: normal;
 }
 
+.tc-type-selector .tc-edit-typeeditor {
+	width: auto;
+}
+
+.tc-type-selector-dropdown-wrapper {
+	display: inline-block;
+}
+
 .tc-edit-tags {
 	border: 1px solid <<colour tiddler-editor-border>>;
 	padding: 4px 8px 4px 8px;
@@ -1367,14 +1417,17 @@ html body.tc-body.tc-single-tiddler-window {
 	vertical-align: middle;
 }
 
-.tc-edit-field-add-name {
+.tc-edit-field-add-name-wrapper input.tc-edit-texteditor {
+	width: auto;
+}
+
+.tc-edit-field-add-name-wrapper {
 	display: inline-block;
-	width: 15%;
 }
 
 .tc-edit-field-add-value {
 	display: inline-block;
-	width: 40%;
+	width: 35%;
 }
 
 .tc-edit-field-add-button {
@@ -1385,6 +1438,10 @@ html body.tc-body.tc-single-tiddler-window {
 /*
 ** Storyview Classes
 */
+
+.tc-viewswitcher .tc-image-button {
+	margin-right: .3em;
+}
 
 .tc-storyview-zoomin-tiddler {
 	position: absolute;
@@ -1438,7 +1495,11 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-drop-down button.tc-btn-invisible:hover svg {
-	fill: <<colour foreground>>;
+	fill: <<colour background>>;
+}
+
+.tc-drop-down .tc-drop-down-info {
+	padding-left: 14px;
 }
 
 .tc-drop-down p {
@@ -1557,7 +1618,7 @@ html body.tc-body.tc-single-tiddler-window {
 	color: <<colour muted-foreground>>;
 }
 
-.tc-block-dropdown a:hover {
+.tc-block-dropdown a.tc-tiddlylink:hover {
 	color: <<colour tiddler-link-background>>;
 	background-color: <<colour tiddler-link-foreground>>;
 	text-decoration: none;
@@ -1813,6 +1874,7 @@ html body.tc-body.tc-single-tiddler-window {
 	border-left: 1px solid <<colour tab-border>>;
 	-webkit-flex: 1 0 70%;
 	flex: 1 0 70%;
+	overflow: auto;
 }
 
 .tc-sidebar-lists .tc-tab-buttons {
@@ -1963,29 +2025,39 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 /*
+** Import table
+*/
+
+.tc-import-table {
+	width: 100%;
+}
+
+/*
 ** Alerts
 */
 
 .tc-alerts {
 	position: fixed;
-	top: 0;
+	top: 28px;
 	left: 0;
-	max-width: 500px;
+	right: 0;
+	max-width: 50%;
 	z-index: 20000;
 }
 
 .tc-alert {
 	position: relative;
-	margin: 28px;
-	padding: 14px 14px 14px 14px;
-	border: 2px solid <<colour alert-border>>;
+	margin: 14px;
+	padding: 7px;
+	border: 1px solid <<colour alert-border>>;
 	background-color: <<colour alert-background>>;
 }
 
 .tc-alert-toolbar {
 	position: absolute;
-	top: 14px;
-	right: 14px;
+	top: 7px;
+	right: 7px;
+    line-height: 0;
 }
 
 .tc-alert-toolbar svg {
@@ -1995,6 +2067,12 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-alert-subtitle {
 	color: <<colour alert-muted-foreground>>;
 	font-weight: bold;
+    font-size: 0.8em;
+    margin-bottom: 0.5em;
+}
+
+.tc-alert-body > p {
+	margin: 0;
 }
 
 .tc-alert-highlight {
@@ -2079,8 +2157,20 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-plugin-info-sub-plugins .tc-plugin-info {
-	margin: 0.5em 1em 0.5em 1em;
-	background: rgba(255,255,0,0.05);
+    margin: 0.5em;
+	background: <<colour background>>;
+}
+
+.tc-plugin-info-sub-plugin-indicator {
+	margin: -16px 1em 0 2em;
+}
+
+.tc-plugin-info-sub-plugin-indicator button {
+	color: <<colour background>>;
+	background: <<colour foreground>>;
+	border-radius: 8px;
+    padding: 2px 7px;
+    font-size: 0.75em;
 }
 
 .tc-plugin-info-sub-plugins .tc-plugin-info-dropdown {
@@ -2105,8 +2195,8 @@ a.tc-tiddlylink.tc-plugin-info:hover {
 	fill: <<colour foreground>>;
 }
 
-a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > svg {
-	fill: <<colour foreground>>;
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
+	fill: <<colour background>>;
 }
 
 .tc-plugin-info-chunk {
@@ -2184,11 +2274,12 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 }
 
 .tc-plugin-info-sub-plugins {
-	padding-top: 0.5em;
-	background: <<colour message-background>>;
+	padding: 0.5em;
+    margin: 0 1em 1em 1em;
+	background: <<colour notification-background>>;
 }
 
-.tc-plugin-library-listing .tc-install-plugin {
+.tc-install-plugin {
 	font-weight: bold;
 	background: green;
 	color: white;
@@ -2197,10 +2288,17 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	padding: 3px;
 }
 
-.tc-plugin-library-listing .tc-install-plugin.tc-reinstall {
+.tc-install-plugin.tc-reinstall-downgrade {
+	background: red;
+}
+
+.tc-install-plugin.tc-reinstall {
 	background: blue;
 }
 
+.tc-install-plugin.tc-reinstall-upgrade {
+	background: orange;
+}
 
 .tc-check-list {
 	line-height: 2em;
@@ -2664,3 +2762,65 @@ select {
         background: <<colour select-tag-background>>;
 }
 
+/*
+** Utility classes for SVG icons
+*/
+
+.tc-fill-background {
+	fill: <<colour background>>;
+}
+
+/*
+** Flexbox utility classes
+*/
+
+.tc-flex {
+	display: -webkit-flex;
+	display: flex;
+}
+
+.tc-flex-column {
+	flex-direction: column;
+}
+
+.tc-flex-row {
+	flex-direction: row;
+}
+
+.tc-flex-grow-1 {
+	flex-grow: 1;
+}
+
+.tc-flex-grow-2 {
+	flex-grow: 2;
+}
+
+/*
+** Other utility classes
+*/
+
+.tc-small-gap {
+	margin-left: .5em;
+	margin-right: .5em;
+}
+
+.tc-small-gap-left {
+	margin-left: .5em;
+}
+
+.tc-small-gap-right {
+	margin-right: .5em;
+}
+
+.tc-big-gap {
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+.tc-big-gap-left {
+	margin-left: 1em;
+}
+
+.tc-big-gap-right {
+	margin-right: 1em;
+}

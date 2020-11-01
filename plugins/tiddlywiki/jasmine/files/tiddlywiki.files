@@ -1,34 +1,57 @@
 {
-	"tiddlers": [
+	"directories": [
 		{
-			"file": "jasmine-html.js",
+			"path": "jasmine/lib",
+			"filesRegExp": "^.*\\.js$",
 			"fields": {
 				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/jasmine/jasmine-html.js",
-				"module-type": "library",
-				"global-module": "true"
+				"title": {"source": "filename", "prefix": "$:/plugins/tiddlywiki/jasmine/jasmine/"},
+				"module-type": "library"
 			}
-		},{
-			"file": "jasmine.css",
+		},
+		{
+			"path": "jasmine/lib/filters",
+			"filesRegExp": "^.*\\.js$",
+			"fields": {
+				"type": "application/javascript",
+				"title": {"source": "filename", "prefix": "$:/plugins/tiddlywiki/jasmine/jasmine/filters/"},
+				"module-type": "library"
+			}
+		},
+		{
+			"path": "jasmine/lib/reporters",
+			"filesRegExp": "^.*\\.js$",
+			"fields": {
+				"type": "application/javascript",
+				"title": {"source": "filename", "prefix": "$:/plugins/tiddlywiki/jasmine/jasmine/reporters/"},
+				"module-type": "library"
+			}
+		},
+		{
+			"path": "jasmine-core/lib",
+			"filesRegExp": "^.*\\.js$",
+			"fields": {
+				"type": "application/javascript",
+				"title": {"source": "filename", "prefix": "$:/plugins/tiddlywiki/jasmine/jasmine-core/"},
+				"module-type": "library"
+			}
+		},
+		{
+			"path": "jasmine-core/lib/jasmine-core",
+			"filesRegExp": "^.*\\.js$",
+			"fields": {
+				"type": "application/javascript",
+				"title": {"source": "filename", "prefix": "$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/"},
+				"module-type": "library"
+			}
+		},
+		{
+			"path": "jasmine-core/lib/jasmine-core",
+			"filesRegExp": "^.*\\.css$",
 			"fields": {
 				"type": "text/css",
-				"title": "$:/plugins/tiddlywiki/jasmine/jasmine.css",
+				"title": {"source": "filename", "prefix": "$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/"},
 				"tags": "[[$:/tags/Stylesheet]]"
-			}
-		},{
-			"file": "jasmine.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/jasmine/jasmine.js",
-				"module-type": "library"
-			},
-			"prefix": "var window = undefined; /* Prepended to the main jasmine source file to force it into commonjs mode */\n"
-		},{
-			"file": "reporter.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/jasmine/reporter.js",
-				"module-type": "library"
 			}
 		}
 	]

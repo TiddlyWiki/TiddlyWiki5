@@ -94,6 +94,36 @@ exports.trim = function(str) {
 	}
 };
 
+exports.trimPrefix = function(str,unwanted) {
+	if(typeof str === "string" && typeof unwanted === "string") {
+		if(unwanted === "") {
+			return str.replace(/^\s\s*/, '');
+		} else {
+			// Safely regexp-escape the unwanted text
+			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
+			var regex = new RegExp('^(' + unwanted + ')+');
+			return str.replace(regex, '');
+		}
+	} else {
+		return str;
+	}
+};
+
+exports.trimSuffix = function(str,unwanted) {
+	if(typeof str === "string" && typeof unwanted === "string") {
+		if(unwanted === "") {
+			return str.replace(/\s\s*$/, '');
+		} else {
+			// Safely regexp-escape the unwanted text
+			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
+			var regex = new RegExp('(' + unwanted + ')+$');
+			return str.replace(regex, '');
+		}
+	} else {
+		return str;
+	}
+};
+
 /*
 Convert a string to sentence case (ie capitalise first letter)
 */
@@ -280,7 +310,7 @@ exports.formatDateString = function(date,template) {
 				return $tw.utils.pad(date.getSeconds());
 			}],
 			[/^0XXX/, function() {
-				return $tw.utils.pad(date.getMilliseconds());
+				return $tw.utils.pad(date.getMilliseconds(),3);
 			}],
 			[/^0DD/, function() {
 				return $tw.utils.pad(date.getDate());
@@ -728,16 +758,20 @@ exports.timer = function(base) {
 /*
 Convert text and content type to a data URI
 */
-exports.makeDataUri = function(text,type) {
+exports.makeDataUri = function(text,type,_canonical_uri) {
 	type = type || "text/vnd.tiddlywiki";
 	var typeInfo = $tw.config.contentTypeInfo[type] || $tw.config.contentTypeInfo["text/plain"],
 		isBase64 = typeInfo.encoding === "base64",
 		parts = [];
-	parts.push("data:");
-	parts.push(type);
-	parts.push(isBase64 ? ";base64" : "");
-	parts.push(",");
-	parts.push(isBase64 ? text : encodeURIComponent(text));
+	if(_canonical_uri) {
+		parts.push(_canonical_uri);
+	} else {
+		parts.push("data:");
+		parts.push(type);
+		parts.push(isBase64 ? ";base64" : "");
+		parts.push(",");
+		parts.push(isBase64 ? text : encodeURIComponent(text));		
+	}
 	return parts.join("");
 };
 
@@ -777,6 +811,77 @@ exports.strEndsWith = function(str,ending,position) {
 		var lastIndex = str.indexOf(ending, position);
 		return lastIndex !== -1 && lastIndex === position;
 	}
+};
+
+/*
+Return system information useful for debugging
+*/
+exports.getSystemInfo = function(str,ending,position) {
+	var results = [],
+		save = function(desc,value) {
+			results.push(desc + ": " + value);
+		};
+	if($tw.browser) {
+		save("User Agent",navigator.userAgent);
+		save("Online Status",window.navigator.onLine);
+	}
+	if($tw.node) {
+		save("Node Version",process.version);
+	}
+	return results.join("\n");
+};
+
+exports.parseNumber = function(str) {
+	return parseFloat(str) || 0;
+};
+
+exports.parseInt = function(str) {
+	return parseInt(str,10) || 0;
+};
+
+exports.stringifyNumber = function(num) {
+	return num + "";
+};
+
+exports.makeCompareFunction = function(type,options) {
+	options = options || {};
+	var gt = options.invert ? -1 : +1,
+		lt = options.invert ? +1 : -1,
+		compare = function(a,b) {
+			if(a > b) {
+				return gt ;
+			} else if(a < b) {
+				return lt;
+			} else {
+				return 0;
+			}
+		},
+		types = {
+			"number": function(a,b) {
+				return compare($tw.utils.parseNumber(a),$tw.utils.parseNumber(b));
+			},
+			"integer": function(a,b) {
+				return compare($tw.utils.parseInt(a),$tw.utils.parseInt(b));
+			},
+			"string": function(a,b) {
+				return compare("" + a,"" +b);
+			},
+			"date": function(a,b) {
+				var dateA = $tw.utils.parseDate(a),
+					dateB = $tw.utils.parseDate(b);
+				if(!isFinite(dateA)) {
+					dateA = new Date(0);
+				}
+				if(!isFinite(dateB)) {
+					dateB = new Date(0);
+				}
+				return compare(dateA,dateB);
+			},
+			"version": function(a,b) {
+				return $tw.utils.compareVersions(a,b);
+			}
+		};
+	return (types[type] || types[options.defaultType] || types.number);
 };
 
 })();

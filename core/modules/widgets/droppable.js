@@ -39,16 +39,18 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Create element and assign classes
 	var domNode = this.document.createElement(tag),
-		classes = (this["class"] || "").split(" ");
+		classes = (this.droppableClass || "").split(" ");
 	classes.push("tc-droppable");
 	domNode.className = classes.join(" ");
 	// Add event handlers
-	$tw.utils.addEventListeners(domNode,[
-		{name: "dragenter", handlerObject: this, handlerMethod: "handleDragEnterEvent"},
-		{name: "dragover", handlerObject: this, handlerMethod: "handleDragOverEvent"},
-		{name: "dragleave", handlerObject: this, handlerMethod: "handleDragLeaveEvent"},
-		{name: "drop", handlerObject: this, handlerMethod: "handleDropEvent"}
-	]);
+	if(this.droppableEnable) {
+		$tw.utils.addEventListeners(domNode,[
+			{name: "dragenter", handlerObject: this, handlerMethod: "handleDragEnterEvent"},
+			{name: "dragover", handlerObject: this, handlerMethod: "handleDragOverEvent"},
+			{name: "dragleave", handlerObject: this, handlerMethod: "handleDragLeaveEvent"},
+			{name: "drop", handlerObject: this, handlerMethod: "handleDropEvent"}
+		]);		
+	}
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -73,7 +75,9 @@ DroppableWidget.prototype.leaveDrag = function(event) {
 	// Remove highlighting if we're leaving externally. The hacky second condition is to resolve a problem with Firefox whereby there is an erroneous dragenter event if the node being dragged is within the dropzone
 	if(this.currentlyEntered.length === 0 || (this.currentlyEntered.length === 1 && this.currentlyEntered[0] === $tw.dragInProgress)) {
 		this.currentlyEntered = [];
-		$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
+		if(this.domNodes[0]) {
+			$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
+		}
 	}
 };
 
@@ -128,8 +132,7 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 
 DroppableWidget.prototype.performActions = function(title,event) {
 	if(this.droppableActions) {
-		var modifierKey = event.ctrlKey && ! event.shiftKey ? "ctrl" : event.shiftKey && !event.ctrlKey ? "shift" : 
-				event.ctrlKey && event.shiftKey ? "ctrl-shift" : "normal" ;
+		var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
 		this.invokeActionString(this.droppableActions,this,event,{actionTiddler: title, modifier: modifierKey});
 	}
 };
@@ -142,6 +145,7 @@ DroppableWidget.prototype.execute = function() {
 	this.droppableEffect = this.getAttribute("effect","copy");
 	this.droppableTag = this.getAttribute("tag");
 	this.droppableClass = this.getAttribute("class");
+	this.droppableEnable = (this.getAttribute("enable") || "yes") === "yes";
 	// Make child widgets
 	this.makeChildWidgets();
 };
@@ -151,7 +155,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DroppableWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes["class"] || changedAttributes.tag) {
+	if(changedAttributes["class"] || changedAttributes.tag || changedAttributes.enable) {
 		this.refreshSelf();
 		return true;
 	}

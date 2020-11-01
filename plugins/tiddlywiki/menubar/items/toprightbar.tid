@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/menubar/items/toprightbar
+tags: $:/tags/MenuBar
+description: Items from $:/tags/TopRightBar
+caption: Legacy Top Right Bar
+custom-menu-content: <$transclude tiddler="$:/plugins/tiddlywiki/menubar/items/toprightbar" mode="inline"/>
+custom-menu-styles-wide: float: right;
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TopRightBar]!has[draft.of]reverse[]]" variable="listItem" storyview="pop">
+
+<$transclude tiddler=<<listItem>> mode="inline"/>
+
+</$list>

@@ -11,7 +11,9 @@ Basics/DefaultTiddlers/Prompt: Tiddlers pré definidos:
 Basics/DefaultTiddlers/TopHint: Escolha que tiddlers são exibidos ao iniciar:
 Basics/Language/Prompt: Olá! Linguagem actual:
 Basics/NewJournal/Tags/Prompt: Etiquetas para novos tiddlers-diário
+Basics/NewJournal/Text/Prompt: Texto para novos tiddlers-diário
 Basics/NewJournal/Title/Prompt: Título de novos tiddlers-diário
+Basics/NewTiddler/Title/Prompt: Título de novos tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Número de tiddlers-sombra sobrescritos:
 Basics/ShadowTiddlers/Prompt: Número de tiddlers-sombra:
 Basics/Subtitle/Prompt: Subtítulo:
@@ -45,6 +47,8 @@ LoadedModules/Hint: Estes são os módulos tiddler actualmente carregados conect
 Palette/Caption: Paleta
 Palette/Editor/Clone/Caption: clonar
 Palette/Editor/Clone/Prompt: Recomenda-se que clone esta paleta-sombra antes de a editar
+Palette/Editor/Delete/Hint: apagar esta entrada da paleta actual
+Palette/Editor/Names/External/Show: Mostrar nomes das cores que não fazem parte da paleta actual
 Palette/Editor/Prompt: Edição
 Palette/Editor/Prompt/Modified: Esta paleta-sombra foi modificada
 Palette/Editor/Reset/Caption: repor
@@ -53,13 +57,18 @@ Palette/Prompt: Paleta actual:
 Palette/ShowEditor/Caption: mostrar editor
 Parsing/Block/Caption: Regras de análise de blocos
 Parsing/Caption: Análise
-Parsing/Hint: Aqui pode desactivar globalmente regras individuais do analisador de wiki. Tenha em atenção que desactivar certas regras de análise pode impedir a ~TiddlyWiki de funcionar correctamente (pode repor o funcionamento normal com o [[modo de segurança|https://tiddlywiki.com/#SafeMode]] )
+Parsing/Hint: Aqui pode activar/desactivar globalmente regras individuais do analisador de wiki. para que as alterações tomem efeito tem de recarregar a wiki. Desactivar certas regras de análise pode impedir a <$text text="TiddlyWiki"/> de funcionar correctamente. Utilize o [[modo seguro|https://tiddlywiki.com/#SafeMode]] 
+ para repor o normal funcionamento.
+
+Here you can globally disable/enable wiki parser rules. For changes to take effect, save and reload your wiki. Disabling certain parser rules can prevent <$text text="TiddlyWiki"/> from functioning correctly. Use [[safe mode|https://tiddlywiki.com/#SafeMode]] to restore normal operation.
+
 Parsing/Inline/Caption: Regras de Análise em Linha
 Parsing/Pragma/Caption: Regras de Análise Pragma
 Plugins/Add/Caption: Obter mais extensões
 Plugins/Add/Hint: Instalar extensões da biblioteca de extensões oficial
 Plugins/AlreadyInstalled/Hint: Esta extensão já se encontra instalada com a versão<$text text=<<installedVersion>>/>
 Plugins/Caption: Extensões
+Plugins/ClosePluginLibrary: fechar biblioteca de extensões
 Plugins/Disable/Caption: desactivar
 Plugins/Disable/Hint: Desactivar esta extensão quando recarregar a página
 Plugins/Disabled/Status: (inactivo)
@@ -82,15 +91,35 @@ Plugins/Theme/Prompt: Temas
 Plugins/Themes/Caption: Temas
 Plugins/Themes/Hint: Extensões de Temas
 Saving/Caption: A gravar
+Saving/DownloadSaver/AutoSave/Description: Permitir gravação automática para módulo de gravação por transferência
+Saving/DownloadSaver/AutoSave/Hint: Activar Gravação automática para o Módulo de Gravação por Transferência
+Saving/DownloadSaver/Caption: Módulo de Gravação por Transferência
+Saving/DownloadSaver/Hint: Estas definições aplicam-se ao módulo de gravação por transferência compatível com HTML5
+Saving/General/Caption: Geral
+Saving/General/Hint: Estas definições aplicam-se a todos os módulos de gravação carregados
+Saving/GitService/Branch: Ramo alvo para gravação
+Saving/GitService/CommitMessage: Guardado por TiddlyWiki
+Saving/GitService/Description: Estas definições serão apenas utilizadas quando gravar para <<service-name>>
+Saving/GitService/Filename: Nome de ficheiro do ficheiro alvo (p.e. `index.html`)
+Saving/GitService/GitHub/Caption: Módulo de Gravação ~GitHub
+Saving/GitService/GitHub/Password: Palavra Passe, token OAUTH, ou token de acesso pessoal (ver [[GitHub help page|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] para mais detalhes)
+Saving/GitService/GitLab/Caption: Módulo de Gravação ~GitLab
+Saving/GitService/GitLab/Password: Token de acesso pessoal para a API (ver [[GitLab help page|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] para mais detalhes)
+Saving/GitService/Path: Caminho para o ficheiro alvo (p.e. `/wiki/`)
+Saving/GitService/Repo: Repositório Alvo (p.e. `Jermolene/TiddlyWiki5`)
+Saving/GitService/ServerURL: URL da API do Servidor
+Saving/GitService/UserName: Nome de Utilizador
 Saving/Heading: A gravar
+Saving/Hint: Definições utilizadas para guardar a TiddlyWiki inteira como um só ficheiro através de um módulo de gravação
 Saving/TiddlySpot/Advanced/Heading: Definições Avançadas
 Saving/TiddlySpot/BackupDir: Directoria de cópias de segurança
 Saving/TiddlySpot/Backups: Cópias de Segurança
+Saving/TiddlySpot/Caption: ~TiddlySpot Saver
 Saving/TiddlySpot/Description: Estas definições só serão utilizadas quando gravar para http://tiddlyspot.com ou um servidor remoto compatível
 Saving/TiddlySpot/Filename: Nome do ficheiro para envio
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //O URL por defeito será `http://<wikiname>.tiddlyspot.com/store.cgi` e pode ser alterado para utilizar um endereço de servidor personalizado//
-Saving/TiddlySpot/Password: Palavra passe
+Saving/TiddlySpot/Password: Palavra Passe
 Saving/TiddlySpot/ServerURL: URL do Servidor
 Saving/TiddlySpot/UploadDir: Directoria de Envio
 Saving/TiddlySpot/UserName: Nome da Wiki
@@ -102,6 +131,8 @@ Settings/CamelCase/Caption: Ligações Wiki em Camel Case
 Settings/CamelCase/Description: Activar ligações em frases ~CamelCase automaticamente
 Settings/CamelCase/Hint: Pode desactivar a criação automática de ligações em frases em ~CamelCase. Requer recarregar o texto para que tome efeito
 Settings/Caption: Definições
+Settings/DefaultMoreSidebarTab/Caption: Separador Mais da Barra Lateral pré Definido
+Settings/DefaultMoreSidebarTab/Hint: Especificar que separador Mais é exibido por defeito
 Settings/DefaultSidebarTab/Caption: Separador da barra lateral pré-definido
 Settings/DefaultSidebarTab/Hint: Definir que separador da barra lateral é exibido por defeito
 Settings/EditorToolbar/Caption: Barra de Ferramentas do Editor
@@ -131,9 +162,13 @@ Settings/NavigationHistory/Caption: Histórico de Navegação
 Settings/NavigationHistory/Hint: Actualizar o histórico do navegador quando navegar para um tiddler
 Settings/NavigationHistory/No/Description: Não actualizar o histórico
 Settings/NavigationHistory/Yes/Description: Actualizar o histórico
+Settings/NavigationPermalinkviewMode/Caption: Modo Permalink/permaview
+Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: Copiar URL permalink/permaview para a area de trabalho
+Settings/NavigationPermalinkviewMode/Hint: Escolher como a permalink/permaview é processada:
+Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Actualizar a barra de endereço com URL permalink/permaview
 Settings/PerformanceInstrumentation/Caption: Instrumentação de Performance
 Settings/PerformanceInstrumentation/Description: Activar instrumentação de performance
-Settings/PerformanceInstrumentation/Hint: Exibe estatísticas de performance na consola de desenvolvimento do navegador. Requer recarregamento para que tome efeito
+Settings/PerformanceInstrumentation/Hint: Exibe estatísticas de performance na consola de desenvolvimento do navegador. Requer recarregar para que tome efeito.
 Settings/TitleLinks/Caption: Títulos dos Tiddlers
 Settings/TitleLinks/Hint: Exibir opcionalmente títulos dos tiddlers como ligações
 Settings/TitleLinks/No/Description: Não exibir títulos dos tiddlers como ligações
@@ -149,13 +184,17 @@ Settings/ToolbarButtonStyle/Styles/Boxed: Caixa
 Settings/ToolbarButtonStyle/Styles/Rounded: Arredondados
 StoryView/Caption: Vista principal
 StoryView/Prompt: Vista actual:
+Stylesheets/Caption: Folhas de Estilos
+Stylesheets/Expand/Caption: Expandir Tudo
+Stylesheets/Hint: This is the rendered CSS of the current stylesheet tiddlers tagged with <<tag "$:/tags/Stylesheet">>
+Stylesheets/Restore/Caption: Restore
 Theme/Caption: Tema
 Theme/Prompt: Tema Actual
 TiddlerFields/Caption: Campos dos Tiddlers
 TiddlerFields/Hint: Esta é uma lista completa dos campos dos tiddlers em utilização nesta wiki (incluindo tiddlers de sistema mas excluindo tiddlers-sombra).
 Toolbars/Caption: Barras de Ferramentas
 Toolbars/EditorToolbar/Caption: Barra de Ferramentas do Editor
-Toolbars/EditorToolbar/Hint: Escolha que botões devem ser exibidos na barra de ferramentas do editor. Alguns botões só serão exibidos enquanto edita tiddlers de certo tipo
+Toolbars/EditorToolbar/Hint: Escolha que botões devem ser exibidos na barra de ferramentas do editor. Alguns botões só serão exibidos enquanto edita tiddlers de certo tipo. Arraste para mudar a ordem.
 Toolbars/EditToolbar/Caption: Barra de Ferramentas de Edição
 Toolbars/EditToolbar/Hint: Escolher que botões são exibidos para tiddlers em modo de edição
 Toolbars/Hint: Seleccionar que botões da barra de ferramentas são exibidos

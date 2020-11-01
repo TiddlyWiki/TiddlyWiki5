@@ -58,7 +58,11 @@ ScrollableWidget.prototype.handleScrollEvent = function(event) {
 	if(this.outerDomNode.scrollWidth <= this.outerDomNode.offsetWidth && this.outerDomNode.scrollHeight <= this.outerDomNode.offsetHeight && this.fallthrough === "yes") {
 		return true;
 	}
-	this.scrollIntoView(event.target);
+	if(event.paramObject && event.paramObject.selector) {
+		this.scrollSelectorIntoView(null,event.paramObject.selector);
+	} else {
+		this.scrollIntoView(event.target);			
+	}
 	return false; // Handled event
 };
 
@@ -66,7 +70,8 @@ ScrollableWidget.prototype.handleScrollEvent = function(event) {
 Scroll an element into view
 */
 ScrollableWidget.prototype.scrollIntoView = function(element) {
-	var duration = $tw.utils.getAnimationDuration();
+	var duration = $tw.utils.getAnimationDuration(),
+	srcWindow = element ? element.ownerDocument.defaultView : window;
 	this.cancelScroll();
 	this.startTime = Date.now();
 	var scrollPosition = {
@@ -122,10 +127,18 @@ ScrollableWidget.prototype.scrollIntoView = function(element) {
 			self.outerDomNode.scrollLeft = scrollPosition.x + (endX - scrollPosition.x) * t;
 			self.outerDomNode.scrollTop = scrollPosition.y + (endY - scrollPosition.y) * t;
 			if(t < 1) {
-				self.idRequestFrame = self.requestAnimationFrame.call(window,drawFrame);
+				self.idRequestFrame = self.requestAnimationFrame.call(srcWindow,drawFrame);
 			}
 		};
 		drawFrame();
+	}
+};
+
+ScrollableWidget.prototype.scrollSelectorIntoView = function(baseElement,selector,callback) {
+	baseElement = baseElement || document.body;
+	var element = baseElement.querySelector(selector);
+	if(element) {
+		this.scrollIntoView(element,callback);		
 	}
 };
 

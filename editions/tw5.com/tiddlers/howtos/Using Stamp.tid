@@ -13,8 +13,7 @@ You can insert preconfigured snippets of text to use stamp from toolbar. Click '
 # Type some text as snippet for the tiddler, add a caption for the name as shown in the menu
 # Click the <<.icon $:/core/images/done-button>> ''ok'' button
 
-<<.tip """''Tip:'' You can also create a snippet tiddler using the ''new tiddler'' <<.icon $:/core/images/new-button>> button in the sidebar, and add tag ''~$:/tags/TextEditor/Snippet''""">>
-
+<$macrocall $name=".tip" _="""''Tip:'' You can also create a snippet tiddler using the ''new tiddler'' <<.icon $:/core/images/new-button>> button in the sidebar, and add tag ''~$:/tags/TextEditor/Snippet''""" />
 
 !!<<.from-version "5.1.20">> Adding a prefix and/or suffix to a selection
 

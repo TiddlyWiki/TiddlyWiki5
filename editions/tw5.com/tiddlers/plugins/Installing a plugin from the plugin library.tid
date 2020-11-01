@@ -1,6 +1,6 @@
 created: 20160107222352710
-modified: 20190927205622498
-tags: Plugins
+modified: 20191022095637710
+tags: [[TiddlyWiki on Node.js]] Plugins
 title: Installing a plugin from the plugin library
 type: text/vnd.tiddlywiki
 
@@ -47,3 +47,5 @@ Follow these instructions when using TiddlyWiki under Node.js:
     ]
 }
 ```
+
+See also [[Installing custom plugins on Node.js]].

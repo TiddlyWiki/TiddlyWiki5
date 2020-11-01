@@ -5,6 +5,7 @@ Advanced/Hint: Informations internes sur ce ~TiddlyWiki
 Appearance/Caption: Apparence
 Appearance/Hint: Personnalisation de l'apparence de votre ~TiddlyWiki.
 Basics/AnimDuration/Prompt: Durée de l'animation
+Basics/AutoFocus/Prompt: Champ qui recevra le focus par défaut pour les nouveaux tiddlers
 Basics/Caption: Fondamentaux
 Basics/DefaultTiddlers/BottomHint: Utilisez les &#91;&#91;crochets doubles&#93;&#93; pour les titres contenant des espaces. Vous pouvez aussi décider de <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Conserver le déroulé actuel</$button>
 Basics/DefaultTiddlers/Prompt: Tiddlers par défaut
@@ -14,6 +15,7 @@ Basics/NewJournal/Title/Prompt: Modèle pour les titres des tiddlers journaux
 Basics/NewJournal/Text/Prompt: Texte pour les nouveaux tiddlers journaux
 Basics/NewJournal/Tags/Prompt: Tags pour les nouveaux tiddlers journaux
 Basics/NewTiddler/Title/Prompt: Modèle pour les titres des nouveaux tiddlers
+Basics/NewTiddler/Tags/Prompt: Tags pour les nouveaux tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Nombre de tiddlers //shadow// modifiés
 Basics/ShadowTiddlers/Prompt: Nombre de tiddlers //shadow//
 Basics/Subtitle/Prompt: Sous-titre
@@ -47,6 +49,8 @@ LoadedModules/Hint: Liste des modules chargés, liés à leurs tiddlers sources.
 Palette/Caption: Palette
 Palette/Editor/Clone/Caption: Cloner
 Palette/Editor/Clone/Prompt: Il est recommandé de cloner cette palette « shadow » avant de l'éditer
+Palette/Editor/Delete/Hint: supprime cette entrée dans la palette courante
+Palette/Editor/Names/External/Show: Montre les noms de couleur qui ne font pas partie de la palette courante
 Palette/Editor/Prompt/Modified: Cette palette « shadow » a été modifiée
 Palette/Editor/Prompt: Édition de
 Palette/Editor/Reset/Caption: Réinitialiser
@@ -61,10 +65,12 @@ Parsing/Pragma/Caption: Règles d'analyse Pragma
 Plugins/Add/Caption: Ajouter des plugins
 Plugins/Add/Hint: Installer des plugins à partir de la bibliothèque officielle
 Plugins/AlreadyInstalled/Hint: Ce plugin est déjà installé dans la version <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: Requiert également :
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: désactiver
 Plugins/Disable/Hint: Désactive ce plugin au prochain rechargement de la page
 Plugins/Disabled/Status: (désactivé)
+Plugins/Downgrade/Caption: version antérieure
 Plugins/Empty/Hint: Aucun
 Plugins/Enable/Caption: activer
 Plugins/Enable/Hint: Active ce plugin au prochain rechargement de la page
@@ -75,11 +81,18 @@ Plugins/Languages/Hint: Plugins de langue
 Plugins/NoInfoFound/Hint: ''"<$text text=<<currentTab>>/>"'' non trouvé
 Plugins/NotInstalled/Hint: Ce plugin n'est pas installé
 Plugins/OpenPluginLibrary: ouvre la bibliothèque de plugins
+Plugins/ClosePluginLibrary: ferme la bibliothèque des plugins
+Plugins/PluginWillRequireReload: (rechargement requis)
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins
 Plugins/Reinstall/Caption: réinstalle
 Plugins/Themes/Caption: Thèmes
 Plugins/Themes/Hint: Plugins de thème
+Plugins/Update/Caption: mise à jour
+Plugins/Updates/Caption: Mises à jour
+Plugins/Updates/Hint: Mises à jour disponibles pour les plugins installés
+Plugins/Updates/UpdateAll/Caption: Mettre à jour <<update-count>> plugins
+Plugins/SubPluginPrompt: Avec <<count>> sous-plugins disponibles
 Saving/Caption: Sauvegarde
 Saving/DownloadSaver/AutoSave/Description: Permet l'enregistrement automatique pour l'enregistreur de téléchargement
 Saving/DownloadSaver/AutoSave/Hint: Active l'auto-enregistrement pour l'enregistreur de téléchargement
@@ -93,13 +106,15 @@ Saving/GitService/CommitMessage: Enregistré depuis TiddlyWiki
 Saving/GitService/Description: Ces paramètres ne sont utilisés que pour l'enregistrement sur <<service-name>>
 Saving/GitService/Filename: Nom du fichier cible (par ex. `index.html`)
 Saving/GitService/Path: Chemin vers le fichier cible (par ex. `/wiki/`)
-Saving/GitService/Repo: //Repository// cible (par ex. `Jermolene/TiddlyWiki5`)
+Saving/GitService/Repo: //Dépôt// cible (par ex. `Jermolene/TiddlyWiki5`)
 Saving/GitService/ServerURL: URL du serveur d'API
 Saving/GitService/UserName: Nom d'utilisateur
 Saving/GitService/GitHub/Caption: Enregistreur ~GitHub
 Saving/GitService/GitHub/Password: Mot de passe, jeton OAUTH, ou //personal access token// (voir [[GitHub help page|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] pour de plus amples détails)
 Saving/GitService/GitLab/Caption: Enregistreur ~GitLab
 Saving/GitService/GitLab/Password: //Personal access token// pour cette API (voir [[GitLab help page|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] pour de plus amples details)
+Saving/GitService/Gitea/Caption: Enregistreur Gitea
+Saving/GitService/Gitea/Password: //Jeton d'accès// pour cette API (via l'interface web de Gitea : `Configuration | Applications | Générer le nouveau jeton`)
 Saving/TiddlySpot/Advanced/Heading: Paramètres avancés
 Saving/TiddlySpot/BackupDir: Dossier des //sauvegardes//
 Saving/TiddlySpot/Backups: Sauvegardes

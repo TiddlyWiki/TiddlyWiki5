@@ -39,10 +39,10 @@ Imaginons que vous ayez un tiddler squelette appelé 'Modèle Recette', et que v
 $param="TITLE DE VOTRE BOUTON SQUELETTE"
 title="New tiddler"
   tags=<<newHereButtonTags>> />
-<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{TITRE DE VOTRE TIDDLER IMAGE SVG}}
 </$list>
-<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
 <span class="tc-btn-text"><$text text="CAPTION DE VOTRE BOUTON"/></span>
 </$list>
 </$button>

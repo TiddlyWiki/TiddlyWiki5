@@ -4,4 +4,4 @@ tags: Learning
 title: TaskManagementExampleDraggableTemplate
 type: text/vnd.tiddlywiki
 
-<$checkbox tag="done"> <$link to={{!!title}}><$view field="title"/></$link></$checkbox>
+<$checkbox tag="done"> <$link/></$checkbox>

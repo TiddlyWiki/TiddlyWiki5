@@ -24,7 +24,7 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 		username = this.wiki.getTiddlerText("$:/GitHub/Username"),
 		password = $tw.utils.getPassword("github"),
 		repo = this.wiki.getTiddlerText("$:/GitHub/Repo"),
-		path = this.wiki.getTiddlerText("$:/GitHub/Path"),
+		path = this.wiki.getTiddlerText("$:/GitHub/Path",""),
 		filename = this.wiki.getTiddlerText("$:/GitHub/Filename"),
 		branch = this.wiki.getTiddlerText("$:/GitHub/Branch") || "master",
 		endpoint = this.wiki.getTiddlerText("$:/GitHub/ServerURL") || "https://api.github.com",
@@ -34,7 +34,7 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 			"Authorization": "Basic " + window.btoa(username + ":" + password)
 		};
 	// Bail if we don't have everything we need
-	if(!username || !password || !repo || !path || !filename) {
+	if(!username || !password || !repo || !filename) {
 		return false;
 	}
 	// Make sure the path start and ends with a slash

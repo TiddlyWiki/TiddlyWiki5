@@ -110,11 +110,18 @@ Set the text of the engine if it doesn't currently have focus
 FramedEngine.prototype.setText = function(text,type) {
 	if(!this.domNode.isTiddlyWikiFakeDom) {
 		if(this.domNode.ownerDocument.activeElement !== this.domNode) {
-			this.domNode.value = text;
+			this.updateDomNodeText(text);
 		}
 		// Fix the height if needed
 		this.fixHeight();
 	}
+};
+
+/*
+Update the DomNode with the new text
+*/
+FramedEngine.prototype.updateDomNodeText = function(text) {
+	this.domNode.value = text;
 };
 
 /*
@@ -173,6 +180,9 @@ Handle a focus event
 FramedEngine.prototype.handleFocusEvent = function(event) {
 	this.updateGlobalSelections();
 	$tw.inputManager.updateFocusInput(this.widget.editQualifiedID);
+  if(this.widget.editCancelPopups) {
+	  $tw.popup.cancel(0);	
+	}
 	return true;
 };
 
@@ -199,6 +209,9 @@ FramedEngine.prototype.handleInputEvent = function(event) {
 	this.updateGlobalSelections();
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
+	if(this.widget.editInputActions) {
+		this.widget.invokeActionString(this.widget.editInputActions);
+	}
 	return true;
 };
 

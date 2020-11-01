@@ -67,18 +67,16 @@ describe("Widget module", function() {
 		var widgetNode = createWidgetNode(parseTreeNode,wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
-		describe("should render", function() {
-			// Test the rendering
-			expect(wrapper.innerHTML).toBe("A text node<div class=\"myClass\" title=\"myTitle\"> and the content of a DIV<div> and an inner DIV</div> and back in the outer DIV</div>");
-			// Test the sequence numbers in the DOM
-			expect(wrapper.sequenceNumber).toBe(0);
-			expect(wrapper.children[0].sequenceNumber).toBe(1);
-			expect(wrapper.children[1].sequenceNumber).toBe(2);
-			expect(wrapper.children[1].children[0].sequenceNumber).toBe(3);
-			expect(wrapper.children[1].children[1].sequenceNumber).toBe(4);
-			expect(wrapper.children[1].children[1].children[0].sequenceNumber).toBe(5);
-			expect(wrapper.children[1].children[2].sequenceNumber).toBe(6);
-		});
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("A text node<div class=\"myClass\" title=\"myTitle\"> and the content of a DIV<div> and an inner DIV</div> and back in the outer DIV</div>");
+		// Test the sequence numbers in the DOM
+		expect(wrapper.sequenceNumber).toBe(0);
+		expect(wrapper.children[0].sequenceNumber).toBe(1);
+		expect(wrapper.children[1].sequenceNumber).toBe(2);
+		expect(wrapper.children[1].children[0].sequenceNumber).toBe(3);
+		expect(wrapper.children[1].children[1].sequenceNumber).toBe(4);
+		expect(wrapper.children[1].children[1].children[0].sequenceNumber).toBe(5);
+		expect(wrapper.children[1].children[2].sequenceNumber).toBe(6);
 	});
 
 	it("should deal with transclude widgets and indirect attributes", function() {
@@ -111,38 +109,34 @@ describe("Widget module", function() {
 		var widgetNode = createWidgetNode(parseTreeNode,wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
-		describe("should render", function() {
-			// Test the rendering
-			expect(wrapper.innerHTML).toBe("A text node<div class=\"myClass\" title=\"the quick brown fox\"> and the content of a DIV<div> and an inner DIV</div> and back in the outer DIVthe quick brown fox</div>the quick brown fox");
-			// Test the sequence numbers in the DOM
-			expect(wrapper.sequenceNumber).toBe(0);
-			expect(wrapper.children[0].sequenceNumber).toBe(1);
-			expect(wrapper.children[1].sequenceNumber).toBe(2);
-			expect(wrapper.children[1].children[0].sequenceNumber).toBe(3);
-			expect(wrapper.children[1].children[1].sequenceNumber).toBe(4);
-			expect(wrapper.children[1].children[1].children[0].sequenceNumber).toBe(5);
-			expect(wrapper.children[1].children[2].sequenceNumber).toBe(6);
-			expect(wrapper.children[1].children[3].sequenceNumber).toBe(7);
-			expect(wrapper.children[2].sequenceNumber).toBe(8);
-		});
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("A text node<div class=\"myClass\" title=\"the quick brown fox\"> and the content of a DIV<div> and an inner DIV</div> and back in the outer DIVthe quick brown fox</div>the quick brown fox");
+		// Test the sequence numbers in the DOM
+		expect(wrapper.sequenceNumber).toBe(0);
+		expect(wrapper.children[0].sequenceNumber).toBe(1);
+		expect(wrapper.children[1].sequenceNumber).toBe(2);
+		expect(wrapper.children[1].children[0].sequenceNumber).toBe(3);
+		expect(wrapper.children[1].children[1].sequenceNumber).toBe(4);
+		expect(wrapper.children[1].children[1].children[0].sequenceNumber).toBe(5);
+		expect(wrapper.children[1].children[2].sequenceNumber).toBe(6);
+		expect(wrapper.children[1].children[3].sequenceNumber).toBe(7);
+		expect(wrapper.children[2].sequenceNumber).toBe(8);
 		// Change the transcluded tiddler
 		wiki.addTiddler({title: "TiddlerOne", text: "jumps over the lazy dog"});
 		// Refresh
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerOne"]);
-		describe("should refresh", function() {
-			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("A text node<div class=\"myClass\" title=\"jumps over the lazy dog\"> and the content of a DIV<div> and an inner DIV</div> and back in the outer DIVjumps over the lazy dog</div>jumps over the lazy dog");
-			// Test the sequence numbers in the DOM
-			expect(wrapper.sequenceNumber).toBe(0);
-			expect(wrapper.children[0].sequenceNumber).toBe(1);
-			expect(wrapper.children[1].sequenceNumber).toBe(2);
-			expect(wrapper.children[1].children[0].sequenceNumber).toBe(3);
-			expect(wrapper.children[1].children[1].sequenceNumber).toBe(4);
-			expect(wrapper.children[1].children[1].children[0].sequenceNumber).toBe(5);
-			expect(wrapper.children[1].children[2].sequenceNumber).toBe(6);
-			expect(wrapper.children[1].children[3].sequenceNumber).toBe(9);
-			expect(wrapper.children[2].sequenceNumber).toBe(10);
-		});
+		// Test the refreshing
+		expect(wrapper.innerHTML).toBe("A text node<div class=\"myClass\" title=\"jumps over the lazy dog\"> and the content of a DIV<div> and an inner DIV</div> and back in the outer DIVjumps over the lazy dog</div>jumps over the lazy dog");
+		// Test the sequence numbers in the DOM
+		expect(wrapper.sequenceNumber).toBe(0);
+		expect(wrapper.children[0].sequenceNumber).toBe(1);
+		expect(wrapper.children[1].sequenceNumber).toBe(2);
+		expect(wrapper.children[1].children[0].sequenceNumber).toBe(3);
+		expect(wrapper.children[1].children[1].sequenceNumber).toBe(4);
+		expect(wrapper.children[1].children[1].children[0].sequenceNumber).toBe(5);
+		expect(wrapper.children[1].children[2].sequenceNumber).toBe(6);
+		expect(wrapper.children[1].children[3].sequenceNumber).toBe(9);
+		expect(wrapper.children[2].sequenceNumber).toBe(10);
 	});
 
 	it("should detect recursion of the transclude macro", function() {
@@ -161,11 +155,8 @@ describe("Widget module", function() {
 		var widgetNode = createWidgetNode(parseTreeNode,wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
-		describe("should detect the recursion", function() {
-			// Test the rendering
-			expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span>\n");
-		});
-
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span>\n");
 	});
 
 	it("should deal with SVG elements", function() {
@@ -218,14 +209,12 @@ describe("Widget module", function() {
 		wiki.addTiddler({title: "TiddlerOne", text: "World-wide Jelly"});
 		// Refresh
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerOne"]);
-		describe("should refresh", function() {
-			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>World-wide Jelly</p>");
-			// Test the sequence numbers in the DOM
-			expect(wrapper.sequenceNumber).toBe(0);
-			expect(wrapper.children[0].sequenceNumber).toBe(1);
-			expect(wrapper.children[0].children[0].sequenceNumber).toBe(3);
-		});
+		// Test the refreshing
+		expect(wrapper.innerHTML).toBe("<p>World-wide Jelly</p>");
+		// Test the sequence numbers in the DOM
+		expect(wrapper.sequenceNumber).toBe(0);
+		expect(wrapper.children[0].sequenceNumber).toBe(1);
+		expect(wrapper.children[0].children[0].sequenceNumber).toBe(3);
 	});
 
 	it("should deal with the set widget", function() {
@@ -248,16 +237,14 @@ describe("Widget module", function() {
 		wiki.addTiddler({title: "TiddlerFour", text: "TiddlerOne"});
 		// Refresh
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerFour"]);
-		describe("should refresh", function() {
-			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>My Jolly Old World is Jolly</p>");
-			// Test the sequence numbers in the DOM
-			expect(wrapper.sequenceNumber).toBe(0);
-			expect(wrapper.children[0].sequenceNumber).toBe(1);
-			expect(wrapper.children[0].children[0].sequenceNumber).toBe(2);
-			expect(wrapper.children[0].children[1].sequenceNumber).toBe(5);
-			expect(wrapper.children[0].children[2].sequenceNumber).toBe(4);
-		});
+		// Test the refreshing
+		expect(wrapper.innerHTML).toBe("<p>My Jolly Old World is Jolly</p>");
+		// Test the sequence numbers in the DOM
+		expect(wrapper.sequenceNumber).toBe(0);
+		expect(wrapper.children[0].sequenceNumber).toBe(1);
+		expect(wrapper.children[0].children[0].sequenceNumber).toBe(2);
+		expect(wrapper.children[0].children[1].sequenceNumber).toBe(5);
+		expect(wrapper.children[0].children[2].sequenceNumber).toBe(4);
 	});
 
 	it("should deal with attributes specified as macro invocations", function() {
@@ -286,6 +273,24 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<p><a href=\"data:text/vnd.tiddlywiki,Jolly%20Old%20World\">My linky link</a></p>");
 	});
 
+	/* This test reproduces issue #4693. */
+	it("should render the entity widget", function() {
+		var wiki = new $tw.Wiki();
+		// Construct the widget node
+		var text = "\n\n<$entity entity='&nbsp;' />\n\n<$entity entity='&#x2713;' />\n";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe(" ✓");
+		// Test the sequence numbers in the DOM
+		expect(wrapper.sequenceNumber).toBe(0);
+		expect(wrapper.children[0].sequenceNumber).toBe(1);
+		expect(wrapper.children[0].nodeType).toBe(wrapper.children[0].TEXT_NODE);
+		expect(wrapper.children[1].sequenceNumber).toBe(2);
+		expect(wrapper.children[1].nodeType).toBe(wrapper.children[1].TEXT_NODE);
+	});
+
 	it("should deal with the list widget", function() {
 		var wiki = new $tw.Wiki();
 		// Add some tiddlers
@@ -306,49 +311,43 @@ describe("Widget module", function() {
 		wiki.addTiddler({title: "TiddlerFive", text: "Jalapeno Peppers"});
 		// Refresh
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerFive"]);
-		describe("should refresh", function() {
-			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
-			// Test the sequence numbers in the DOM
-			expect(wrapper.sequenceNumber).toBe(0);
-			expect(wrapper.children[0].sequenceNumber).toBe(1);
-			expect(wrapper.children[0].children[0].sequenceNumber).toBe(6);
-			expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
-			expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
-			expect(wrapper.children[0].children[3].sequenceNumber).toBe(4);
-			expect(wrapper.children[0].children[4].sequenceNumber).toBe(5);
-		});
+		// Test the refreshing
+		expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
+		// Test the sequence numbers in the DOM
+		expect(wrapper.sequenceNumber).toBe(0);
+		expect(wrapper.children[0].sequenceNumber).toBe(1);
+		expect(wrapper.children[0].children[0].sequenceNumber).toBe(6);
+		expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
+		expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
+		expect(wrapper.children[0].children[3].sequenceNumber).toBe(4);
+		expect(wrapper.children[0].children[4].sequenceNumber).toBe(5);
 		// Remove a tiddler
 		wiki.deleteTiddler("TiddlerThree");
 		// Refresh
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerThree"]);
-		describe("should refresh", function() {
-			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerTwo</p>");
-			// Test the sequence numbers in the DOM
-			expect(wrapper.sequenceNumber).toBe(0);
-			expect(wrapper.children[0].sequenceNumber).toBe(1);
-			expect(wrapper.children[0].children[0].sequenceNumber).toBe(6);
-			expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
-			expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
-			expect(wrapper.children[0].children[3].sequenceNumber).toBe(5);
-		});
+		// Test the refreshing
+		expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerTwo</p>");
+		// Test the sequence numbers in the DOM
+		expect(wrapper.sequenceNumber).toBe(0);
+		expect(wrapper.children[0].sequenceNumber).toBe(1);
+		expect(wrapper.children[0].children[0].sequenceNumber).toBe(6);
+		expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
+		expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
+		expect(wrapper.children[0].children[3].sequenceNumber).toBe(5);
 		// Add it back a tiddler
 		wiki.addTiddler({title: "TiddlerThree", text: "Something"});
 		// Refresh
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerThree"]);
-		describe("should refresh", function() {
-			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
-			// Test the sequence numbers in the DOM
-			expect(wrapper.sequenceNumber).toBe(0);
-			expect(wrapper.children[0].sequenceNumber).toBe(1);
-			expect(wrapper.children[0].children[0].sequenceNumber).toBe(6);
-			expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
-			expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
-			expect(wrapper.children[0].children[3].sequenceNumber).toBe(7);
-			expect(wrapper.children[0].children[4].sequenceNumber).toBe(5);
-		});
+		// Test the refreshing
+		expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
+		// Test the sequence numbers in the DOM
+		expect(wrapper.sequenceNumber).toBe(0);
+		expect(wrapper.children[0].sequenceNumber).toBe(1);
+		expect(wrapper.children[0].children[0].sequenceNumber).toBe(6);
+		expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
+		expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
+		expect(wrapper.children[0].children[3].sequenceNumber).toBe(7);
+		expect(wrapper.children[0].children[4].sequenceNumber).toBe(5);
 	});
 
 	it("should deal with the list widget followed by other widgets", function() {
@@ -373,65 +372,57 @@ describe("Widget module", function() {
 		wiki.addTiddler({title: "TiddlerFive", text: "Jalapeno Peppers"});
 		// Refresh
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerFive"]);
-		describe("should refresh", function() {
-			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwoSomething</p>");
-			// Test the sequence numbers in the DOM
-			expect(wrapper.sequenceNumber).toBe(0);
-			expect(wrapper.children[0].sequenceNumber).toBe(1);
-			expect(wrapper.children[0].children[0].sequenceNumber).toBe(7);
-			expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
-			expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
-			expect(wrapper.children[0].children[3].sequenceNumber).toBe(4);
-			expect(wrapper.children[0].children[4].sequenceNumber).toBe(5);
-		});
+		// Test the refreshing
+		expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwoSomething</p>");
+		// Test the sequence numbers in the DOM
+		expect(wrapper.sequenceNumber).toBe(0);
+		expect(wrapper.children[0].sequenceNumber).toBe(1);
+		expect(wrapper.children[0].children[0].sequenceNumber).toBe(7);
+		expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
+		expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
+		expect(wrapper.children[0].children[3].sequenceNumber).toBe(4);
+		expect(wrapper.children[0].children[4].sequenceNumber).toBe(5);
 		// Remove a tiddler
 		wiki.deleteTiddler("TiddlerThree");
 		// Refresh
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerThree"]);
-		describe("should refresh", function() {
-			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerTwoSomething</p>");
-			// Test the sequence numbers in the DOM
-			expect(wrapper.sequenceNumber).toBe(0);
-			expect(wrapper.children[0].sequenceNumber).toBe(1);
-			expect(wrapper.children[0].children[0].sequenceNumber).toBe(7);
-			expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
-			expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
-			expect(wrapper.children[0].children[3].sequenceNumber).toBe(5);
-		});
+		// Test the refreshing
+		expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerTwoSomething</p>");
+		// Test the sequence numbers in the DOM
+		expect(wrapper.sequenceNumber).toBe(0);
+		expect(wrapper.children[0].sequenceNumber).toBe(1);
+		expect(wrapper.children[0].children[0].sequenceNumber).toBe(7);
+		expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
+		expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
+		expect(wrapper.children[0].children[3].sequenceNumber).toBe(5);
 		// Add it back a tiddler
 		wiki.addTiddler({title: "TiddlerThree", text: "Something"});
 		// Refresh
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerThree"]);
-		describe("should refresh", function() {
-			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwoSomething</p>");
-			// Test the sequence numbers in the DOM
-			expect(wrapper.sequenceNumber).toBe(0);
-			expect(wrapper.children[0].sequenceNumber).toBe(1);
-			expect(wrapper.children[0].children[0].sequenceNumber).toBe(7);
-			expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
-			expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
-			expect(wrapper.children[0].children[3].sequenceNumber).toBe(8);
-			expect(wrapper.children[0].children[4].sequenceNumber).toBe(5);
-		});
+		// Test the refreshing
+		expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwoSomething</p>");
+		// Test the sequence numbers in the DOM
+		expect(wrapper.sequenceNumber).toBe(0);
+		expect(wrapper.children[0].sequenceNumber).toBe(1);
+		expect(wrapper.children[0].children[0].sequenceNumber).toBe(7);
+		expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
+		expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
+		expect(wrapper.children[0].children[3].sequenceNumber).toBe(8);
+		expect(wrapper.children[0].children[4].sequenceNumber).toBe(5);
 		// Add another a tiddler to the end of the list
 		wiki.addTiddler({title: "YetAnotherTiddler", text: "Something"});
 		// Refresh
 		refreshWidgetNode(widgetNode,wrapper,["YetAnotherTiddler"]);
-		describe("should refresh", function() {
-			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwoYetAnotherTiddlerSomething</p>");
-			// Test the sequence numbers in the DOM
-			expect(wrapper.sequenceNumber).toBe(0);
-			expect(wrapper.children[0].sequenceNumber).toBe(1);
-			expect(wrapper.children[0].children[0].sequenceNumber).toBe(7);
-			expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
-			expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
-			expect(wrapper.children[0].children[3].sequenceNumber).toBe(8);
-			expect(wrapper.children[0].children[4].sequenceNumber).toBe(5);
-		});
+		// Test the refreshing
+		expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwoYetAnotherTiddlerSomething</p>");
+		// Test the sequence numbers in the DOM
+		expect(wrapper.sequenceNumber).toBe(0);
+		expect(wrapper.children[0].sequenceNumber).toBe(1);
+		expect(wrapper.children[0].children[0].sequenceNumber).toBe(7);
+		expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
+		expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
+		expect(wrapper.children[0].children[3].sequenceNumber).toBe(8);
+		expect(wrapper.children[0].children[4].sequenceNumber).toBe(5);
 	});
 
 	it("should deal with the list widget and external templates", function() {
@@ -488,12 +479,143 @@ describe("Widget module", function() {
 		wiki.deleteTiddler("TiddlerFour");
 		// Refresh
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerOne","TiddlerTwo","TiddlerThree","TiddlerFour"]);
-		describe("should refresh", function() {
-			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>nothing</p>");
-		});
+		// Test the refreshing
+		expect(wrapper.innerHTML).toBe("<p>nothing</p>");
 	});
 
+	/**This test confirms that imported set variables properly refresh
+	 * if they use transclusion for their value. This relates to PR #4108.
+	 */
+	it("should refresh imported <$set> widgets", function() {
+		var wiki = new $tw.Wiki();
+		// Add some tiddlers
+		wiki.addTiddlers([
+			{title: "Raw", text: "Initial value"},
+			{title: "Macro", text: "<$set name='test' value={{Raw}}>\n\ndummy text</$set>"},
+			{title: "Caller", text: text}
+		]);
+		var text = "\\import Macro\n<<test>>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>Initial value</p>");
+		wiki.addTiddler({title: "Raw", text: "New value"});
+		// Refresh
+		refreshWidgetNode(widgetNode,wrapper,["Raw"]);
+		expect(wrapper.innerHTML).toBe("<p>New value</p>");
+	});
+
+	it("should can mix setWidgets and macros when importing", function() {
+		var wiki = new $tw.Wiki();
+		// Add some tiddlers
+		wiki.addTiddlers([
+			{title: "A", text: "\\define A() Aval"},
+			{title: "B", text: "<$set name='B' value='Bval'>\n\ndummy text</$set>"},
+			{title: "C", text: "\\define C() Cval"}
+		]);
+		var text = "\\import A B C\n<<A>> <<B>> <<C>>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>Aval Bval Cval</p>");
+	});
+
+	it("can have more than one macroDef variable imported", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "ABC", text: "<$set name=A value=A>\n\n<$set name=B value=B>\n\n<$set name=C value=C>\n\ndummy text</$set></$set></$set>"},
+			{title: "D", text: "\\define D() D"}]);
+		// A and B shouldn't chew up C just cause it's a macroDef
+		var text = "\\import ABC D\n<<A>> <<B>> <<C>> <<D>>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>A B C D</p>");
+	});
+
+	it("import doesn't hold onto dead variables", function() {
+		var wiki = new  $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "ABC", text: "\\define A() A\n\\define B() B\n<$set name=C value=C>\n\n</$set>"},
+			{title: "DE", text: "\\define D() D\n\\define E() E"}]);
+		var text = "\\import ABC DE\ncontent";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		renderWidgetNode(widgetNode);
+		var childNode = widgetNode;
+		while (childNode.children.length > 0) {
+			childNode = childNode.children[0];
+		}
+		// First make sure A and B imported
+		expect(childNode.getVariable("A")).toBe("A");
+		expect(childNode.getVariable("B")).toBe("B");
+		expect(childNode.getVariable("C")).toBe("C");
+		expect(childNode.getVariable("D")).toBe("D");
+		expect(childNode.getVariable("E")).toBe("E");
+		// Then change A and remove B
+		wiki.addTiddler({title: "ABC", text: "\\define A() A2\n<$set name=C value=C2>\n\n</$set>"});
+		wiki.addTiddler({title: "DE", text: "\\define D() D2"});
+		widgetNode.refresh({"ABC": {modified: true}, "DE": {modified: true}});
+		var childNode = widgetNode;
+		while (childNode.children.length > 0) {
+			childNode = childNode.children[0];
+		}
+		// Make sure \import recognized changes and deletions
+		expect(childNode.getVariable("A")).toBe("A2");
+		expect(childNode.getVariable("B")).toBe(undefined);
+		expect(childNode.getVariable("C")).toBe("C2");
+		expect(childNode.getVariable("D")).toBe("D2");
+		expect(childNode.getVariable("E")).toBe(undefined);
+	});
+
+	/** Special case. <$importvariables> has different handling if
+	 *  it doesn't end up importing any variables. Make sure it
+	 *  doesn't forget its childrenNodes.
+	 */
+	it("should work when import widget imports nothing", function() {
+		var wiki = new $tw.Wiki();
+		var text = "\\import [prefix[XXX]]\nDon't forget me.";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>Don't forget me.</p>");
+	});
+
+	/** This test reproduces issue #4504.
+	 *
+	 * The importvariable widget was creating redundant copies into
+	 * itself of variables in widgets higher up in the tree. Normally,
+	 * this caused no errors, but it would mess up qualify-macros.
+	 * They would find multiple instances of the same transclusion
+	 * variable if a transclusion occured higher up in the widget tree
+	 * than an importvariables AND that importvariables was importing
+	 * at least ONE variable.
+	 */
+	it("adding imported variables doesn't change qualifyers", function() {
+		var wiki = new $tw.Wiki();
+		function wikiparse(text) {
+			var tree = parseText(text,wiki);
+			var widgetNode = createWidgetNode(tree,wiki);
+			var wrapper = renderWidgetNode(widgetNode);
+			return wrapper.innerHTML;
+		};
+		wiki.addTiddlers([
+			{title: "body", text: "\\import A\n<<qualify this>>"},
+			{title: "A", text: "\\define unused() ignored"}
+		]);
+		// This transclude wraps "body", which has an
+		// importvariable widget in it.
+		var withA = wikiparse("{{body}}");
+		wiki.addTiddler({title: "A", text: ""});
+		var withoutA = wikiparse("{{body}}");
+		// Importing two different version of "A" shouldn't cause
+		// the <<qualify>> widget to spit out something different.
+		expect(withA).toBe(withoutA);
+	});
 });
 
 })();

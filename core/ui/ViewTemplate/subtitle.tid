@@ -1,10 +1,10 @@
 title: $:/core/ui/ViewTemplate/subtitle
 tags: $:/tags/ViewTemplate
 
+\whitespace trim
 <$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
 <div class="tc-subtitle">
-<$link to={{!!modifier}}>
-<$view field="modifier"/>
-</$link> <$view field="modified" format="date" template={{$:/language/Tiddler/DateFormat}}/>
+<$link to={{!!modifier}} />
+<$view field="modified" format="date" template={{$:/language/Tiddler/DateFormat}}/>
 </div>
 </$reveal>

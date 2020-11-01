@@ -29,6 +29,8 @@ external-link-foreground: Voorgrond externe link
 external-link-foreground-hover: Voorgrond mouseover externe link
 external-link-foreground-visited: Voorgrond bezochte externe link
 foreground: Voorgrond algemeen
+menubar-background: Menu bar achtergrond
+menubar-foreground: Menu bar voorgrond
 message-background: Achtergrond berichtenpaneel
 message-border: Rand berichtenpaneel
 message-foreground: Voorgrond berichtenpaneel

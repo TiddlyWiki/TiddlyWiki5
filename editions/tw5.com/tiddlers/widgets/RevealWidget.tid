@@ -10,13 +10,13 @@ type: text/vnd.tiddlywiki
 
 The reveal widget hides or shows its content depending upon the value of a [[state tiddler|StateTiddlers]]. The type of the widget determines the condition for the content being displayed:
 
-* type=''match'': the content is displayed if the state tiddler matches a specified value
-* type=''nomatch'': the content is displayed if the state tiddler doesn't match a specified value
+* type=''match'': the content is displayed if the state tiddler matches the text attribute value
+* type=''nomatch'': the content is displayed if the state tiddler doesn't match the text attribute value
 * type=''popup'': the content is displayed as a popup as described in the PopupMechanism
-* type=''lt'': the content is displayed if the state tiddler contains an integer with a value ''less than'' a specified value
-* type=''gt'': the content is displayed if the state tiddler contains an integer with a value ''greater than'' a specified value
-* type=''lteq'': the content is displayed if the state tiddler contains an integer with a value ''less than or equal to'' a specified value
-* type=''gteq'': the content is displayed if the state tiddler contains an integer with a value ''greater than or equal to'' a specified value
+* type=''lt'': the content is displayed if the state tiddler contains an integer with a value ''less than'' the text attribute value
+* type=''gt'': the content is displayed if the state tiddler contains an integer with a value ''greater than'' the text attribute value
+* type=''lteq'': the content is displayed if the state tiddler contains an integer with a value ''less than or equal to'' the text attribute value
+* type=''gteq'': the content is displayed if the state tiddler contains an integer with a value ''greater than or equal to'' the text attribute value
 
 
 ! Content and Attributes

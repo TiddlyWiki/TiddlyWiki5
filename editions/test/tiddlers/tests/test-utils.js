@@ -25,6 +25,19 @@ describe("Utility tests", function() {
 		expect(psa(" [[Tidd\u00a0ler8]] two ")).toEqual(["Tidd\u00a0ler8","two"]);
 	});
 
+	it("should handle base64 encoding emojis", function() {
+		var booksEmoji = "📚";
+		expect(booksEmoji).toBe(booksEmoji);
+		// 📚 is U+1F4DA BOOKS, which is represented by surrogate pair 0xD83D 0xDCDA in Javascript
+		expect(booksEmoji.length).toBe(2);
+		expect(booksEmoji.charCodeAt(0)).toBe(55357); // 0xD83D
+		expect(booksEmoji.charCodeAt(1)).toBe(56538); // 0xDCDA
+		expect($tw.utils.base64Encode(booksEmoji)).not.toBe("7aC97bOa", "if base64 is 7aC97bOa then surrogate pairs were incorrectly treated as codepoints");
+		expect($tw.utils.base64Encode(booksEmoji)).toBe("8J+Tmg==", "if surrogate pairs are correctly treated as a single code unit then base64 should be 8J+Tmg==");
+		expect($tw.utils.base64Decode("8J+Tmg==")).toBe(booksEmoji);
+		expect($tw.utils.base64Decode($tw.utils.base64Encode(booksEmoji))).toBe(booksEmoji, "should round-trip correctly");
+	});
+
 	it("should handle stringifying a string array", function() {
 		var str = $tw.utils.stringifyList;
 		expect(str([])).toEqual("");
@@ -105,6 +118,30 @@ describe("Utility tests", function() {
 			{ title : 'title', field : 'field##index' }
 		);
 
+	});
+
+	it("should compare versions", function() {
+		var cv = $tw.utils.compareVersions;
+		expect(cv("v0.0.0","v0.0.0")).toEqual(0);
+		expect(cv("0.0.0","v0.0.0")).toEqual(0);
+		expect(cv("v0.0.0","0.0.0")).toEqual(0);
+		expect(cv("v0.0.0","not a version")).toEqual(0);
+		expect(cv("v0.0.0",undefined)).toEqual(0);
+		expect(cv("not a version","v0.0.0")).toEqual(0);
+		expect(cv(undefined,"v0.0.0")).toEqual(0);
+		expect(cv("v1.0.0","v1.0.0")).toEqual(0);
+		expect(cv("v1.0.0","1.0.0")).toEqual(0);
+
+		expect(cv("v1.0.1",undefined)).toEqual(+1);
+		expect(cv("v1.0.1","v1.0.0")).toEqual(+1);
+		expect(cv("v1.1.1","v1.1.0")).toEqual(+1);
+		expect(cv("v1.1.2","v1.1.1")).toEqual(+1);
+		expect(cv("1.1.2","v1.1.1")).toEqual(+1);
+
+		expect(cv("v1.0.0","v1.0.1")).toEqual(-1);
+		expect(cv("v1.1.0","v1.1.1")).toEqual(-1);
+		expect(cv("v1.1.1","v1.1.2")).toEqual(-1);
+		expect(cv("1.1.1","1.1.2")).toEqual(-1);
 	});
 
 });

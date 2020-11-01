@@ -25,7 +25,7 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 		username = this.wiki.getTiddlerText("$:/GitLab/Username"),
 		password = $tw.utils.getPassword("gitlab"),
 		repo = this.wiki.getTiddlerText("$:/GitLab/Repo"),
-		path = this.wiki.getTiddlerText("$:/GitLab/Path"),
+		path = this.wiki.getTiddlerText("$:/GitLab/Path",""),
 		filename = this.wiki.getTiddlerText("$:/GitLab/Filename"),
 		branch = this.wiki.getTiddlerText("$:/GitLab/Branch") || "master",
 		endpoint = this.wiki.getTiddlerText("$:/GitLab/ServerURL") || "https://gitlab.com/api/v4",
@@ -34,7 +34,7 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 			"Private-Token": password
 		};
 	// Bail if we don't have everything we need
-	if(!username || !password || !repo || !path || !filename) {
+	if(!username || !password || !repo || !filename) {
 		return false;
 	}
 	// Make sure the path start and ends with a slash

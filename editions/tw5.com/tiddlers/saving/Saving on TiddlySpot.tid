@@ -1,20 +1,22 @@
+caption: ~TiddlySpot
+color: #29B6F6
+community-author: Simon Baird and Daniel Baird
 created: 20130825213500000
-modified: 20160610082610879
-tags: Saving Android Chrome Firefox InternetExplorer iOS Linux Mac Opera PHP Safari Windows
+delivery: Service
+description: Free online service for hosting TiddlyWiki files
+method: save
+modified: 20200507202953380
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
 title: Saving on TiddlySpot
 type: text/vnd.tiddlywiki
-delivery: Service
-method: save
-caption: TiddlySpot
-description: Free online service for hosting TiddlyWiki files
 
 [[TiddlySpot|http://tiddlyspot.com]] is a free hosting service for TiddlyWiki documents from Simon Baird and Daniel Baird.
 
-! Setting up a TiddlyWiki on TiddlySpot
+! Setting up a TiddlyWiki on ~TiddlySpot
 To set up a [[TiddlyWiki Classic|TiddlyWikiClassic]], you merely create a new wiki at http://tiddlyspot.com
 
-!!TiddlyWiki5 on TiddlySpot
-~TiddlyWiki5 also functions well on ~TiddlySpot but this version is not offered directly in the TiddlySpot set-up.
+!!TiddlyWiki5 on ~TiddlySpot
+~TiddlyWiki5 also functions well on ~TiddlySpot but this version is not offered directly in the ~TiddlySpot set-up.
 
 The simplest way to create a new ~TiddlySpot with ~TiddlyWiki5 is probably through the community created site http://tiddlywiki5.tiddlyspot.com
 
@@ -22,11 +24,11 @@ Alternatively, you can upload an existing ~TiddlyWiki5 document from your local 
 
 # Sign up for a new wiki at http://tiddlyspot.com/, and remember the wiki name and password
 # Open your locally stored TiddlyWiki document in your browser
-# Fill in the TiddlySpot wikiname and password in ''Saving'' tab of the ''control panel'' <<.icon $:/core/images/options-button>>
+# Fill in the ~TiddlySpot wikiname and password in ''Saving'' tab of the ''control panel'' <<.icon $:/core/images/options-button>>
 # Click the <<.icon $:/core/images/save-button>> ''save changes'' button. You should get a confirmation notification at the top right saying ''Saved wiki''. Saving can take several seconds if you're on a slow connection or working with a large wiki.
-# Navigate to your TiddlySpot URL at http://{wikiname}.tiddlyspot.com/
+# Navigate to your ~TiddlySpot URL at http://{wikiname}.tiddlyspot.com/
 
-Note that your password is sent unencrypted when using TiddlySpot. From http://faq.tiddlyspot.com/:
+Note that your password is sent unencrypted when using ~TiddlySpot. From http://faq.tiddlyspot.com/:
 
 <<<
 ''Is Tiddlyspot secure?''
@@ -34,9 +36,9 @@ Note that your password is sent unencrypted when using TiddlySpot. From http://f
 No. Tiddlyspot does not use SSL/https. Your password is sent in clear text when uploading and when authenticating to access a private site. This means that your Tiddlyspot is vulnerable to packet sniffing and your password could be discovered by a malicious third party. Also your data is transmitted unencrypted when you view your site, even if it is a private site. For this reason please don't put sensitive information such as banking details in your Tiddlyspot and don't use a password that you use for other high security sites.
 <<<
 
-! Problems with saving on TiddlySpot
+! Problems with saving on ~TiddlySpot
 
-In case you run into this error when uploading a new or freshly upgraded local TiddlyWiki to TiddlySpot :
+In case you run into this error when uploading a new or freshly upgraded local TiddlyWiki to ~TiddlySpot :
 
 <<<
 Error while saving:
@@ -46,9 +48,9 @@ Error:NS_ERROR_DOM_BAD_URI: Access to restricted URI denied
 
 The upgrade operation falls foul of a security restriction in Firefox. Until this can be resolved, we suggest using Chrome.
 
-*# Use Chrome to open the local TiddlyWiki document you want to upload to TiddlySpot and follow the steps 1 through 5 described above
-*# Once you've checked the TiddlySpot-hosted TiddlyWiki loads properly in Chrome, you should be able to access, edit and [[save using TiddlyFox|Saving with TiddlyFox]] again
-* After you've uploaded your local document once, further editing and saving of the online version hosted on TiddlySpot should work with any modern browser of your choice.
-** Don't forget to fill in the TiddlySpot wikiname and password in your TiddlySpot TiddlyWiki control panel for any new browser you want to use for saving changes
+*# Use Chrome to open the local TiddlyWiki document you want to upload to ~TiddlySpot and follow the steps 1 through 5 described above
+*# Once you've checked the ~TiddlySpot-hosted TiddlyWiki loads properly in Chrome, you should be able to access, edit and [[save using TiddlyFox|Saving with TiddlyFox]] again
+* After you've uploaded your local document once, further editing and saving of the online version hosted on ~TiddlySpot should work with any modern browser of your choice.
+** Don't forget to fill in the ~TiddlySpot wikiname and password in your ~TiddlySpot TiddlyWiki control panel for any new browser you want to use for saving changes
 
 * //See also : [[Upgrading]]//

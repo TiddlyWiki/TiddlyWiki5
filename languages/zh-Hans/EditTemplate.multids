@@ -8,7 +8,7 @@ Field/Remove/Hint: 删除字段
 Field/Dropdown/Caption: 字段列表
 Field/Dropdown/Hint: 显示字段列表
 Fields/Add/Button: 添加
-Fields/Add/Button/Hint: 添加字段
+Fields/Add/Button/Hint: 添加字段至条目
 Fields/Add/Dropdown/System: 系统字段
 Fields/Add/Dropdown/User: 使用者字段
 Fields/Add/Name/Placeholder: 字段名称

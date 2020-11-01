@@ -26,7 +26,7 @@ tags: $:/tags/Macro
 <$vars targetTiddler="""$tiddler$""" targetField="""$field$""">
 <$type$ class="$class$">
 <$list filter="[list[$tiddler$!!$field$]]">
-<$droppable actions=<<list-links-draggable-drop-actions>> tag="""$subtype$""">
+<$droppable actions=<<list-links-draggable-drop-actions>> tag="""$subtype$""" enable=<<tv-enable-drag-and-drop>>>
 <div class="tc-droppable-placeholder"/>
 <div>
 <$transclude tiddler="""$itemTemplate$""">
@@ -41,9 +41,9 @@ tags: $:/tags/Macro
 </$list>
 </$type$>
 <$tiddler tiddler="">
-<$droppable actions=<<list-links-draggable-drop-actions>> tag="div">
+<$droppable actions=<<list-links-draggable-drop-actions>> tag="div" enable=<<tv-enable-drag-and-drop>>>
 <div class="tc-droppable-placeholder">
-&nbsp;
+{{$:/core/images/blank}}
 </div>
 <div style="height:0.5em;"/>
 </$droppable>
@@ -74,13 +74,13 @@ tags: $:/tags/Macro
 </$set>
 \end
 
-\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div")
+\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",storyview:"")
 \whitespace trim
 <span class="tc-tagged-draggable-list">
 <$set name="tag" value=<<__tag__>>>
-<$list filter="[<__tag__>tagging[]$subFilter$]" emptyMessage=<<__emptyMessage__>>>
+<$list filter="[<__tag__>tagging[]$subFilter$]" emptyMessage=<<__emptyMessage__>> storyview=<<__storyview__>>>
 <$elementTag$ class="tc-menu-list-item">
-<$droppable actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>""">
+<$droppable actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>""" enable=<<tv-enable-drag-and-drop>>>
 <$elementTag$ class="tc-droppable-placeholder"/>
 <$elementTag$>
 <$transclude tiddler="""$itemTemplate$""">
@@ -93,7 +93,7 @@ tags: $:/tags/Macro
 </$elementTag$>
 </$list>
 <$tiddler tiddler="">
-<$droppable actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>""">
+<$droppable actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>""" enable=<<tv-enable-drag-and-drop>>>
 <$elementTag$ class="tc-droppable-placeholder"/>
 <$elementTag$ style="height:0.5em;">
 </$elementTag$>

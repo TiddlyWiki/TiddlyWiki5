@@ -3,7 +3,7 @@ title: $:/core/modules/filters/has.js
 type: application/javascript
 module-type: filteroperator
 
-Filter operator for checking if a tiddler has the specified field
+Filter operator for checking if a tiddler has the specified field or index
 
 \*/
 (function(){
@@ -33,16 +33,32 @@ exports.has = function(source,operator,options) {
 				}
 			});
 		}
-	} else {
+	}
+	else if(operator.suffix === "index") {
 		if(invert) {
 			source(function(tiddler,title) {
-				if(!tiddler || !$tw.utils.hop(tiddler.fields,operator.operand) || (tiddler.fields[operator.operand] === "")) {
+				if(!tiddler || (tiddler && (!$tw.utils.hop(options.wiki.getTiddlerDataCached(tiddler,Object.create(null)),operator.operand)))) {
 					results.push(title);
 				}
 			});
 		} else {
 			source(function(tiddler,title) {
-				if(tiddler && $tw.utils.hop(tiddler.fields,operator.operand) && !(tiddler.fields[operator.operand] === "" || tiddler.fields[operator.operand].length === 0)) {
+				if(tiddler && $tw.utils.hop(options.wiki.getTiddlerDataCached(tiddler,Object.create(null)),operator.operand)) {
+					results.push(title);
+				}
+			});
+		}
+	}
+	else {
+		if(invert) {
+			source(function(tiddler,title) {
+				if(!tiddler || !$tw.utils.hop(tiddler.fields,operator.operand) || (tiddler.fields[operator.operand].length === 0)) {
+					results.push(title);
+				}
+			});
+		} else {
+			source(function(tiddler,title) {
+				if(tiddler && $tw.utils.hop(tiddler.fields,operator.operand) && (tiddler.fields[operator.operand].length !== 0)) {
 					results.push(title);
 				}
 			});				

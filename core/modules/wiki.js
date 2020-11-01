@@ -415,6 +415,30 @@ exports.forEachTiddler = function(/* [options,]callback */) {
 };
 
 /*
+Return an array of tiddler titles that are directly linked within the given parse tree
+ */
+exports.extractLinks = function(parseTreeRoot) {
+	// Count up the links
+	var links = [],
+		checkParseTree = function(parseTree) {
+			for(var t=0; t<parseTree.length; t++) {
+				var parseTreeNode = parseTree[t];
+				if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
+					var value = parseTreeNode.attributes.to.value;
+					if(links.indexOf(value) === -1) {
+						links.push(value);
+					}
+				}
+				if(parseTreeNode.children) {
+					checkParseTree(parseTreeNode.children);
+				}
+			}
+		};
+	checkParseTree(parseTreeRoot);
+	return links;
+};
+
+/*
 Return an array of tiddler titles that are directly linked from the specified tiddler
 */
 exports.getTiddlerLinks = function(title) {
@@ -423,26 +447,10 @@ exports.getTiddlerLinks = function(title) {
 	return this.getCacheForTiddler(title,"links",function() {
 		// Parse the tiddler
 		var parser = self.parseTiddler(title);
-		// Count up the links
-		var links = [],
-			checkParseTree = function(parseTree) {
-				for(var t=0; t<parseTree.length; t++) {
-					var parseTreeNode = parseTree[t];
-					if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
-						var value = parseTreeNode.attributes.to.value;
-						if(links.indexOf(value) === -1) {
-							links.push(value);
-						}
-					}
-					if(parseTreeNode.children) {
-						checkParseTree(parseTreeNode.children);
-					}
-				}
-			};
 		if(parser) {
-			checkParseTree(parser.tree);
+			return self.extractLinks(parser.tree);
 		}
-		return links;
+		return [];
 	});
 };
 
@@ -451,13 +459,18 @@ Return an array of tiddler titles that link to the specified tiddler
 */
 exports.getTiddlerBacklinks = function(targetTitle) {
 	var self = this,
+		backlinksIndexer = this.getIndexer("BacklinksIndexer"),
+		backlinks = backlinksIndexer && backlinksIndexer.lookup(targetTitle);
+
+	if(!backlinks) {
 		backlinks = [];
-	this.forEachTiddler(function(title,tiddler) {
-		var links = self.getTiddlerLinks(title);
-		if(links.indexOf(targetTitle) !== -1) {
-			backlinks.push(title);
-		}
-	});
+		this.forEachTiddler(function(title,tiddler) {
+			var links = self.getTiddlerLinks(title);
+			if(links.indexOf(targetTitle) !== -1) {
+				backlinks.push(title);
+			}
+		});
+	}
 	return backlinks;
 };
 
@@ -567,7 +580,9 @@ Sorts an array of tiddler titles according to an ordered list
 exports.sortByList = function(array,listTitle) {
 	var self = this,
 		replacedTitles = Object.create(null);
-	function replaceItem(title) {
+	// Given a title, this function will place it in the correct location
+	// within titles.
+	function moveItemInList(title) {
 		if(!$tw.utils.hop(replacedTitles, title)) {
 			replacedTitles[title] = true;
 			var newPos = -1,
@@ -580,26 +595,37 @@ exports.sortByList = function(array,listTitle) {
 				} else if(afterTitle === "") {
 					newPos = titles.length;
 				} else if(beforeTitle) {
-					replaceItem(beforeTitle);
+					// if this title is placed relative
+					// to another title, make sure that
+					// title is placed before we place
+					// this one.
+					moveItemInList(beforeTitle);
 					newPos = titles.indexOf(beforeTitle);
 				} else if(afterTitle) {
-					replaceItem(afterTitle);
+					// Same deal
+					moveItemInList(afterTitle);
 					newPos = titles.indexOf(afterTitle);
 					if(newPos >= 0) {
 						++newPos;
 					}
 				}
-				// We get the currPos //after// figuring out the newPos, because recursive replaceItem calls might alter title's currPos
-				var currPos = titles.indexOf(title);
-				if(newPos === -1) {
-					newPos = currPos;
-				}
-				if(currPos >= 0 && newPos !== currPos) {
-					titles.splice(currPos,1);
-					if(newPos >= currPos) {
-						newPos--;
+				// If a new position is specified, let's move it
+				if (newPos !== -1) {
+					// get its current Pos, and make sure
+					// sure that it's _actually_ in the list
+					// and that it would _actually_ move
+					// (#4275) We don't bother calling
+					//         indexOf unless we have a new
+					//         position to work with
+					var currPos = titles.indexOf(title);
+					if(currPos >= 0 && newPos !== currPos) {
+						// move it!
+						titles.splice(currPos,1);
+						if(newPos >= currPos) {
+							newPos--;
+						}
+						titles.splice(newPos,0,title);
 					}
-					titles.splice(newPos,0,title);
 				}
 			}
 		}
@@ -627,7 +653,7 @@ exports.sortByList = function(array,listTitle) {
 		var sortedTitles = titles.slice(0);
 		for(t=0; t<sortedTitles.length; t++) {
 			title = sortedTitles[t];
-			replaceItem(title);
+			moveItemInList(title);
 		}
 		return titles;
 	}
@@ -660,8 +686,9 @@ exports.getTiddlerAsJson = function(title) {
 	}
 };
 
-exports.getTiddlersAsJson = function(filter) {
+exports.getTiddlersAsJson = function(filter,spaces) {
 	var tiddlers = this.filterTiddlers(filter),
+		spaces = (spaces === undefined) ? $tw.config.preferences.jsonSpaces : spaces,
 		data = [];
 	for(var t=0;t<tiddlers.length; t++) {
 		var tiddler = this.getTiddler(tiddlers[t]);
@@ -673,7 +700,7 @@ exports.getTiddlersAsJson = function(filter) {
 			data.push(fields);
 		}
 	}
-	return JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
+	return JSON.stringify(data,null,spaces);
 };
 
 /*
@@ -1025,7 +1052,7 @@ exports.makeTranscludeWidget = function(title,options) {
 	if(options.children) {
 		parseTreeTransclude.children = options.children;
 	}
-	return $tw.wiki.makeWidget(parseTreeDiv,options);
+	return this.makeWidget(parseTreeDiv,options);
 };
 
 /*
@@ -1232,9 +1259,9 @@ exports.getTiddlerText = function(title,defaultText) {
 	if(!tiddler) {
 		return defaultText;
 	}
-	if(tiddler.fields.text !== undefined) {
+	if(!tiddler.hasField("_is_skinny")) {
 		// Just return the text if we've got it
-		return tiddler.fields.text;
+		return tiddler.fields.text || "";
 	} else {
 		// Tell any listeners about the need to lazily load this tiddler
 		this.dispatchEvent("lazyLoad",title);
@@ -1398,10 +1425,8 @@ fromPageRect: page coordinates of the origin of the navigation
 historyTitle: title of history tiddler (defaults to $:/HistoryList)
 */
 exports.addToHistory = function(title,fromPageRect,historyTitle) {
-	if(historyTitle) {
-		var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
-		story.addToHistory(title,fromPageRect);		
-	}
+	var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
+	story.addToHistory(title,fromPageRect);		
 };
 
 /*
@@ -1412,10 +1437,8 @@ storyTitle: title of story tiddler (defaults to $:/StoryList)
 options: see story.js
 */
 exports.addToStory = function(title,fromTitle,storyTitle,options) {
-	if(storyTitle) {
-		var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
-		story.addToStory(title,fromTitle,options);		
-	}
+	var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
+	story.addToStory(title,fromTitle,options);		
 };
 
 /*
@@ -1478,6 +1501,31 @@ exports.doesPluginInfoRequireReload = function(pluginInfo) {
 	} else {
 		return null;
 	}
+};
+
+exports.slugify = function(title,options) {
+	var tiddler = this.getTiddler(title),
+		slug;
+	if(tiddler && tiddler.fields.slug) {
+		slug = tiddler.fields.slug;
+	} else {
+		slug = $tw.utils.transliterate(title.toString().toLowerCase()) // Replace diacritics with basic lowercase ASCII
+			.replace(/\s+/g,"-")                                       // Replace spaces with -
+			.replace(/[^\w\-\.]+/g,"")                                 // Remove all non-word chars except dash and dot
+			.replace(/\-\-+/g,"-")                                     // Replace multiple - with single -
+			.replace(/^-+/,"")                                         // Trim - from start of text
+			.replace(/-+$/,"");                                        // Trim - from end of text
+	}
+	// If the resulting slug is blank (eg because the title is just punctuation characters)
+	if(!slug) {
+		// ...then just use the character codes of the title
+		var result = [];
+		$tw.utils.each(title.split(""),function(char) {
+			result.push(char.charCodeAt(0).toString());
+		});
+		slug = result.join("-");
+	}
+	return slug;
 };
 
 })();

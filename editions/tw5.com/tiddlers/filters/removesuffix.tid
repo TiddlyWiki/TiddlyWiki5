@@ -12,4 +12,6 @@ op-output: those input titles that end with <<.place S>>, but with those charact
 
 <<.s-matching-is-case-sensitive>>
 
+<<.tip " This filters out input titles that do not end with S. For removing S without filtering out input titles that don't end with S, see [[trim|trim Operator]].">>
+
 <<.operator-examples "removesuffix">>
