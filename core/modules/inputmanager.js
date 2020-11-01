@@ -35,7 +35,8 @@ Returns either UNDEFINED or an "inputInfo" object of the form
 	id: "a unique id",
 	selectionStart: selectionStart,
 	selectionEnd: selectionEnd,
-	shouldFocusAgain:boolean
+	shouldFocusAgain:boolean,
+	widget: the editor widget
 }
 */
 InputManager.prototype.findInputById = function(identifier) {
@@ -117,7 +118,8 @@ InputManager.prototype.getSelections = function(identifier) {
 /*
 Updates all inputInfo objects within the inputs array so that only the input with
 the given identifier has "shouldFocusAgain" set to true.
-Further - if it has changed - updates $:/state/current-focus with the unique id of the currently focused input
+Further - if it has changed - updates $:/state/current-focus with the unique id of the currently focused input...
+... and its "focused-tiddler" field with the name of the current storyTiddler
 */
 InputManager.prototype.updateFocusInput = function(identifier) {
 	var currentInputInfo;
