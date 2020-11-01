@@ -79,6 +79,20 @@ InputManager.prototype.setValue = function(identifier,name,value) {
 };
 
 /*
+Tests if a stored input has a given name / value pair
+*/
+InputManager.prototype.hasValue = function(identifier,name,value) {
+	var inputInfo = this.findInputById(identifier);
+	if(inputInfo) {
+		if(inputInfo[name] === value) {
+			return true;
+		}
+	} else {
+		return false;
+	}
+};
+
+/*
 Returns either UNDEFINED or an object of the form
 {
 	selectionStart: selectionStart,
