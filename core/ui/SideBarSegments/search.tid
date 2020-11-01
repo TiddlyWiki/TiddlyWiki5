@@ -38,7 +38,7 @@ tags: $:/tags/SideBarSegment
 
 \define input-accept-actions() <$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/>
 
-\define input-accept-variant-actions() <$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/>
+\define input-accept-variant-actions() <$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list>
 
 \define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<nextTab>>/>"""/>
 
