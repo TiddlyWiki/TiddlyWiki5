@@ -263,7 +263,9 @@ CodeMirrorEngine.prototype.executeTextOperation = function(operation) {
 		this.cm.setSelection(this.cm.posFromIndex(operation.newSelStart),this.cm.posFromIndex(operation.newSelEnd));
 		newText = operation.text.substring(0,operation.cutStart) + operation.replacement + operation.text.substring(operation.cutEnd);
 	}
-	this.updateGlobalSelections();
+	if(this.widget.editInputManagement) {
+		this.updateGlobalSelections();
+	}
 	this.cm.focus();
 	return newText;
 };
