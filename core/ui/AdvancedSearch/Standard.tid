@@ -7,7 +7,7 @@ caption: {{$:/language/Search/Standard/Caption}}
 
 \define next-search-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/advancedsearch" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/advancedsearch/standard/currentTab" text=<<nextTab>>/>"""/>
 
-\define cancel-search-actions() <$action-deletetiddler $filter="[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]]" />
+\define cancel-search-actions() <$action-deletetiddler $filter="[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]]" /><$action-sendmessage $message="tm-focus-selector" $param=""".tc-advanced-search input"""/>
 
 \define input-accept-actions() <$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/>
 
@@ -20,16 +20,16 @@ caption: {{$:/language/Search/Standard/Caption}}
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
 <$keyboard key="shift-alt-Right" actions=<<next-search-tab>>>
 <$keyboard key="shift-alt-Left" actions=<<next-search-tab "before">>>
-<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/advancedsearch" storeTitle="$:/temp/advancedsearch/input"
+<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/advancedsearch/input" storeTitle="$:/temp/advancedsearch"
 		refreshTitle="$:/temp/advancedsearch/refresh" selectionStateTitle="$:/temp/advancedsearch/selected-item" type="search"
 		tag="input" focus={{$:/config/Search/AutoFocus}} inputCancelActions=<<cancel-search-actions>> 
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> 
-		 configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]"/>
+		configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]"/>
 </$keyboard>
 </$keyboard>
 </$keyboard>
 </$keyboard>
-<$reveal state="$:/temp/advancedsearch/input" type="nomatch" text="">
+<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 <$button class="tc-btn-invisible">
 <<cancel-search-actions>>
 {{$:/core/images/close-button}}
@@ -37,9 +37,9 @@ caption: {{$:/language/Search/Standard/Caption}}
 </$reveal>
 </div>
 
-<$reveal state="$:/temp/advancedsearch/input" type="nomatch" text="">
-<$list filter="[{$:/temp/advancedsearch/input}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
-<$vars userInput={{{ [[$:/temp/advancedsearch/input]get[text]] }}} configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}} searchListState="$:/temp/advancedsearch/selected-item">
+<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
+<$list filter="[{$:/temp/advancedsearch}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$vars userInput={{{ [[$:/temp/advancedsearch]get[text]] }}} configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}} searchListState="$:/temp/advancedsearch/selected-item">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]butfirst[]limit[1]]" emptyMessage="""
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]">
 <$transclude/>
