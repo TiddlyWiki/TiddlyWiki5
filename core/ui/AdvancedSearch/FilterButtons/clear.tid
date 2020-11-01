@@ -4,7 +4,7 @@ tags: $:/tags/AdvancedSearch/FilterButton
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 <$button class="tc-btn-invisible">
 <$action-deletetiddler $filter="[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]]" />
-<$action-sendmessage $message="tm-focus-selector" $param="""[data-tiddler-title="$:/AdvancedSearch"] .tc-search input""" />
+<$action-sendmessage $message="tm-focus-selector" $param=""".tc-advanced-search input""" />
 {{$:/core/images/close-button}}
 </$button>
 </$reveal>
