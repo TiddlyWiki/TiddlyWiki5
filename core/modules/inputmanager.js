@@ -2,13 +2,15 @@
 title: $:/core/modules/inputmanager.js
 type: application/javascript
 module-type: global
+
 global inputManager module $tw.inputManager
 stores information about input and textarea fields in objects of the form
 {
 	id: "a unique id",
 	selectionStart: selectionStart,
 	selectionEnd: selectionEnd,
-	shouldFocusAgain:boolean
+	shouldFocusAgain:boolean,
+	widget: the editor widget
 }
 \*/
 (function(){
