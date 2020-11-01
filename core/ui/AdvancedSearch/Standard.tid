@@ -7,7 +7,7 @@ caption: {{$:/language/Search/Standard/Caption}}
 
 \define next-search-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/advancedsearch" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/advancedsearch/standard/currentTab" text=<<nextTab>>/>"""/>
 
-\define cancel-search-actions() <$action-deletetiddler $filter="[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]]" /><$action-sendmessage $message="tm-focus-selector" $param=""".tc-advanced-search input"""/>
+\define cancel-search-actions() <$list filter="[{$:/temp/advancedsearch}!match{$:/temp/advancedsearch/input}]" emptyMessage="""<$action-deletetiddler $filter="[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]]" />"""><$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/advancedsearch}}/><$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/></$list><$action-sendmessage $message="tm-focus-selector" $param=""".tc-advanced-search input"""/>
 
 \define input-accept-actions() <$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/>
 
