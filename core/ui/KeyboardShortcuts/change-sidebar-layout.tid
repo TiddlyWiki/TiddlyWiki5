@@ -1,0 +1,8 @@
+title: $:/core/ui/KeyboardShortcuts/change-sidebar-layout
+tags: $:/tags/KeyboardShortcut
+key: ((change-sidebar-layout))
+
+<$list filter="[{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]]" 
+emptyMessage="""<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" text="fixed-fluid"/>""">
+<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" text="fluid-fixed"/>
+</$list>

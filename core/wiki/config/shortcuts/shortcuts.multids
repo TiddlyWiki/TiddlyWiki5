@@ -4,6 +4,7 @@ add-field: enter
 advanced-search: ctrl-shift-A
 advanced-search-sidebar: alt-Enter
 cancel-edit-tiddler: escape
+change-sidebar-layout: shift-alt-Down
 excise: ctrl-E
 sidebar-search: ctrl-shift-F
 heading-1: ctrl-1
