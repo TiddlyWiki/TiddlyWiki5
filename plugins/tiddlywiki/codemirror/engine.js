@@ -128,7 +128,7 @@ function CodeMirrorEngine(options) {
 		self.updateGlobalSelections();
 	});
 	this.cm.on("blur",function() {
-		self.updateGlobalSelections();	
+		self.updateGlobalSelections();
 	});
 	this.cm.on("drop",function(cm,event) {
 		event.stopPropagation(); // Otherwise TW's dropzone widget sees the drop event
@@ -139,11 +139,6 @@ function CodeMirrorEngine(options) {
 	});
 	this.cm.on("keydown",function(cm,event) {
 		return self.widget.handleKeydownEvent.call(self.widget,event);
-	});
-	this.cm.on("focus",function(cm,event) {
-		if(self.widget.editCancelPopups) {
-			$tw.popup.cancel(0);	
-		}
 	});
 }
 
@@ -206,15 +201,21 @@ CodeMirrorEngine.prototype.updateGlobalSelections = function() {
 	var selections = this.cm.listSelections(),
 	    anchorPos,
 	    headPos;
-	if(selections.length > 0) {
-		anchorPos = this.cm.indexFromPos(selections[0].anchor),
-		headPos = this.cm.indexFromPos(selections[0].head);
-	} else {
-		anchorPos = headPos = this.cm.indexFromPos(this.cm.getCursor());
+	if(this.widget.editInputManagement) {
+		if(selections.length > 0) {
+			anchorPos = this.cm.indexFromPos(selections[0].anchor),
+			headPos = this.cm.indexFromPos(selections[0].head);
+		} else {
+			anchorPos = headPos = this.cm.indexFromPos(this.cm.getCursor());
+		}
 	}
-	$tw.inputManager.setValue(this.widget.editQualifiedID,"widget",this.widget);
-	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",anchorPos);
-	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",headPos);
+	if(!$tw.inputManager.hasValue(this.widget.editQualifiedID,"widget",this.widget)) {
+		$tw.inputManager.setValue(this.widget.editQualifiedID,"widget",this.widget);
+	}
+	if(this.widget.editInputManagement) {
+		$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",anchorPos);
+		$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",headPos);
+	}
 };
 
 /*
@@ -223,6 +224,9 @@ Handle a focus event
 CodeMirrorEngine.prototype.handleFocusEvent = function() {
 	this.updateGlobalSelections();
 	$tw.inputManager.updateFocusInput(this.widget.editQualifiedID);
+	if(this.widget.editCancelPopups) {
+		$tw.popup.cancel(0);	
+	}
 };
 
 /*
