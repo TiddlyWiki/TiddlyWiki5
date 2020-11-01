@@ -91,7 +91,9 @@ ListWidget.prototype.getEmptyMessage = function() {
 		emptyMessage = this.getAttribute("emptyMessage","");
 	// this.wiki.parseText() calls 
 	// new Parser(..), which should only be done, if needed, because it's heavy!
-	if (emptyMessage === "") return []; 
+	if (emptyMessage === "") {
+		return [];
+	}
 	parser = this.wiki.parseText("text/vnd.tiddlywiki",emptyMessage,{parseAsInline: true});
 	if(parser) {
 		return parser.tree;
