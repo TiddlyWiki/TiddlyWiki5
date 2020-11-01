@@ -165,6 +165,7 @@ SimpleEngine.prototype.handleFocusEvent = function(event) {
 Update the globally stored selections of the input
 */
 SimpleEngine.prototype.updateGlobalSelections = function(event) {
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"widget",this.widget);
 	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
 	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
 };
