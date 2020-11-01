@@ -32,9 +32,7 @@ tags: $:/tags/SideBarSegment
 </$vars>
 \end
 
-\define delete-state-tiddlers() <$action-deletetiddler $filter="[[$:/temp/search]] [<searchTiddler>] [<searchListState>]"/>
-
-\define cancel-search-actions() <$action-deletetiddler $filter="[<__storeTitle__>] [<__tiddler__>] [<__selectionStateTitle__>]"/>
+\define cancel-search-actions() <$list filter="[<searchTiddler>get[text]!match{$:/temp/search}]" emptyMessage="""<$action-deletetiddler $filter="[[$:/temp/search]] [<searchTiddler>] [<searchListState>]"/>"""><$action-setfield $tiddler="$:/temp/search" text={{{ [<searchTiddler>get[text]] }}}/><$action-setfield $tiddler="$:/temp/search/refresh" text="yes"/></$list>
 
 \define input-accept-actions() <$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/>
 
@@ -66,7 +64,7 @@ tags: $:/tags/SideBarSegment
 {{$:/core/images/advanced-search-button}}
 </$button>
 <$button class="tc-btn-invisible">
-<<delete-state-tiddlers>><$action-sendmessage $message="tm-focus-selector" $param=".tc-search input"/>
+<<cancel-search-actions>><$action-sendmessage $message="tm-focus-selector" $param=".tc-search input"/>
 {{$:/core/images/close-button}}
 </$button>
 <<count-popup-button>>
