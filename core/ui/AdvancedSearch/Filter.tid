@@ -18,7 +18,7 @@ caption: {{$:/language/Search/Filter/Caption}}
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
 <$macrocall $name="keyboard-driven-input" tiddler="$:/temp/advancedsearch/input" storeTitle="$:/temp/advancedsearch" 
 		refreshTitle="$:/temp/advancedsearch/refresh" selectionStateTitle="$:/temp/advancedsearch/selected-item" type="search" 
-		tag="input" focus={{$:/config/Search/AutoFocus}} configTiddlerFilter="[[$:/temp/advancedsearch/input]]" firstSearchFilterField="text" 
+		tag="input" focus={{$:/config/Search/AutoFocus}} configTiddlerFilter="[[$:/temp/advancedsearch]]" firstSearchFilterField="text" 
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> 
 		inputCancelActions=<<cancel-search-actions>>/>
 </$keyboard>
