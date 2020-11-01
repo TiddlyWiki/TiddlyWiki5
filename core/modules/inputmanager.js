@@ -17,7 +17,7 @@ stores information about input and textarea fields in objects of the form
 /*global $tw: false */
 "use strict";
 
-var STATE_CURRENT_FOCUS = "$:/state/current-focus";
+var STATE_CURRENT_FOCUS = "$:/temp/current-focus";
 
 function InputManager(options) {
 	options = options || {};
@@ -104,16 +104,23 @@ the given identifier has "shouldFocusAgain" set to true.
 Further - if it has changed - updates $:/state/current-focus with the unique id of the currently focused input
 */
 InputManager.prototype.updateFocusInput = function(identifier) {
+	var currentInputInfo;
 	for(var i=0; i<this.inputs.length; i++) {
 		var inputInfo = this.inputs[i];
 		if(inputInfo["id"] === identifier) {
 			inputInfo.shouldFocusAgain = true;
+			currentInputInfo = inputInfo;
 		} else {
 			inputInfo.shouldFocusAgain = false;
 		}
 	}
 	if(identifier !== this.wiki.getTiddlerText(STATE_CURRENT_FOCUS)) {
 		this.wiki.setText(STATE_CURRENT_FOCUS,"text",undefined,identifier);
+		var tiddler = this.wiki.getTiddler(STATE_CURRENT_FOCUS);
+		var storyTiddler = currentInputInfo["widget"].getVariable("storyTiddler");
+		if(storyTiddler !== tiddler.fields["focus-tiddler"]) {
+			this.wiki.setText(STATE_CURRENT_FOCUS,"focused-tiddler",undefined,storyTiddler);
+		}
 		this.focusedInput = identifier;
 	}
 };
