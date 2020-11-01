@@ -190,9 +190,13 @@ FramedEngine.prototype.handleFocusEvent = function(event) {
 Update the globally stored selections of the textarea
 */
 FramedEngine.prototype.updateGlobalSelections = function() {
-	$tw.inputManager.setValue(this.widget.editQualifiedID,"widget",this.widget);
-	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
-	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
+	if(!$tw.inputManager.hasValue(this.widget.editQualifiedID,"widget",this.widget) {
+		$tw.inputManager.setValue(this.widget.editQualifiedID,"widget",this.widget);
+	}
+	if(this.widget.editInputManagement) {
+		$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
+		$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
+	}
 };
 
 /*
@@ -207,7 +211,9 @@ FramedEngine.prototype.handleClickEvent = function(event) {
 Handle a dom "input" event which occurs when the text has changed
 */
 FramedEngine.prototype.handleInputEvent = function(event) {
-	this.updateGlobalSelections();
+	if(this.widget.editInputManagement) {
+		this.updateGlobalSelections();
+	}
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
 	if(this.widget.editInputActions) {
