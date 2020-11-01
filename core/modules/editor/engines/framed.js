@@ -190,6 +190,7 @@ FramedEngine.prototype.handleFocusEvent = function(event) {
 Update the globally stored selections of the textarea
 */
 FramedEngine.prototype.updateGlobalSelections = function() {
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"widget",this.widget);
 	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",this.domNode.selectionStart);
 	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",this.domNode.selectionEnd);
 };
