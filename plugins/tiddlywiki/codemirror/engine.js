@@ -212,6 +212,7 @@ CodeMirrorEngine.prototype.updateGlobalSelections = function() {
 	} else {
 		anchorPos = headPos = this.cm.indexFromPos(this.cm.getCursor());
 	}
+	$tw.inputManager.setValue(this.widget.editQualifiedID,"widget",this.widget);
 	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionStart",anchorPos);
 	$tw.inputManager.setValue(this.widget.editQualifiedID,"selectionEnd",headPos);
 };
