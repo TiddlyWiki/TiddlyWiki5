@@ -160,6 +160,13 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("[enlist[one two three]addsuffix[!]]").join(",")).toBe("one!,two!,three!");
 	});
 	
+	it("should handle the enlist-input operator", function() {
+		expect(wiki.filterTiddlers("[[one two three]enlist-input[]]").join(",")).toBe("one,two,three");
+		expect(wiki.filterTiddlers("[[one two three]] [[four five six]] +[enlist-input[]]").join(",")).toBe("one,two,three,four,five,six");
+		expect(wiki.filterTiddlers("[[one two three]] [[four five six]] [[seven eight]] +[enlist-input[]]").join(",")).toBe("one,two,three,four,five,six,seven,eight");
+		expect(wiki.filterTiddlers("[[]] +[enlist-input[]]").join(",")).toBe("");
+	});
+	
 	it("should handle the then and else operators", function() {
 		expect(wiki.filterTiddlers("[modifier[JoeBloggs]then[Susi]]").join(",")).toBe("Susi");
 		expect(wiki.filterTiddlers("[!modifier[JoeBloggs]then[Susi]]").join(",")).toBe("Susi,Susi,Susi,Susi,Susi,Susi,Susi,Susi");
