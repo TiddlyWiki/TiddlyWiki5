@@ -263,7 +263,9 @@ FramedEngine.prototype.executeTextOperation = function(operation) {
 		this.domNode.focus();
 		this.domNode.setSelectionRange(operation.newSelStart,operation.newSelEnd);
 	}
-	this.updateGlobalSelections();
+	if(this.widget.editInputManagement) {
+		this.updateGlobalSelections();
+	}
 	this.domNode.focus();
 	return newText;
 };
