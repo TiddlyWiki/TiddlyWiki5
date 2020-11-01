@@ -16,7 +16,7 @@ caption: {{$:/language/Search/Filter/Caption}}
 <div class="tc-search tc-advanced-search">
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
-<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/advancedsearch" storeTitle="$:/temp/advancedsearch/input" 
+<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/advancedsearch/input" storeTitle="$:/temp/advancedsearch" 
 		refreshTitle="$:/temp/advancedsearch/refresh" selectionStateTitle="$:/temp/advancedsearch/selected-item" type="search" 
 		tag="input" focus={{$:/config/Search/AutoFocus}} configTiddlerFilter="[[$:/temp/advancedsearch/input]]" firstSearchFilterField="text" 
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> 
@@ -30,7 +30,7 @@ caption: {{$:/language/Search/Filter/Caption}}
 <$set name="resultCount" value="""<$count filter={{$:/temp/advancedsearch}}/>""">
 <div class="tc-search-results">
 <<lingo Filter/Matches>>
-<$list filter={{$:/temp/advancedsearch/input}}>
+<$list filter={{$:/temp/advancedsearch}}>
 <span class={{{[<currentTiddler>addsuffix[-primaryList]] -[[$:/temp/advancedsearch/selected-item]get[text]] +[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>
