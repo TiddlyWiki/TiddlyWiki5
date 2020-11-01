@@ -11,7 +11,7 @@ caption: {{$:/language/Search/Standard/Caption}}
 
 \define input-accept-actions() <$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/>
 
-\define input-accept-variant-actions() <$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/>
+\define input-accept-variant-actions() <$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list>
 
 <<lingo Standard/Hint>>
 
@@ -24,7 +24,8 @@ caption: {{$:/language/Search/Standard/Caption}}
 		refreshTitle="$:/temp/advancedsearch/refresh" selectionStateTitle="$:/temp/advancedsearch/selected-item" type="search"
 		tag="input" focus={{$:/config/Search/AutoFocus}} inputCancelActions=<<cancel-search-actions>> 
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> 
-		configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]"/>
+		configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]"
+		filterMinLength={{$:/config/Search/MinLength}}/>
 </$keyboard>
 </$keyboard>
 </$keyboard>

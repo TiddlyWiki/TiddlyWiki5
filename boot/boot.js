@@ -267,8 +267,16 @@ $tw.utils.htmlDecode = function(s) {
 Get the browser location.hash. We don't use location.hash because of the way that Firefox auto-urldecodes it (see http://stackoverflow.com/questions/1703552/encoding-of-window-location-hash)
 */
 $tw.utils.getLocationHash = function() {
-	var parts = window.location.href.split('#');
-	return "#" + (parts.length > 1 ? parts[1] : "");
+	var href = window.location.href;
+	var idx = href.indexOf('#');
+	if(idx === -1) {
+		return "#";
+	} else if(idx < href.length-1 && href[idx+1] === '#') {
+		// Special case: ignore location hash if it itself starts with a #
+		return "#";
+	} else {
+		return href.substring(idx);
+	}
 };
 
 /*
