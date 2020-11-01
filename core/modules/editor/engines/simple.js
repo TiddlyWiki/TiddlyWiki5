@@ -113,7 +113,7 @@ Focus the engine node
 SimpleEngine.prototype.focus  = function() {
 	if(this.domNode.focus && this.domNode.select) {
 		var selections = $tw.inputManager.getSelections(this.widget.editQualifiedID);
-		if(selections) {
+		if(selections && this.widget.editInputManagement) {
 			//when the domNode gets focus, the selections need already to be up to date,
 			//otherwise they get overwritten by default selections.
 			//after focusing, set selection range, which moves cursor into view (if outside)
