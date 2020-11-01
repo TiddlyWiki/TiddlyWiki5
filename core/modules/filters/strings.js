@@ -60,7 +60,7 @@ exports.split = makeStringBinaryOperator(
 	function(a,b) {return ("" + a).split(b);}
 );
 
-exports.aslist = makeStringBinaryOperator(
+exports["enlist-input"] = makeStringBinaryOperator(
 	function(a) {return $tw.utils.parseStringArray("" + a);}
 );
 
