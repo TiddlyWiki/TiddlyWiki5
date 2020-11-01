@@ -118,7 +118,7 @@ InputManager.prototype.updateFocusInput = function(identifier) {
 		this.wiki.setText(STATE_CURRENT_FOCUS,"text",undefined,identifier);
 		var tiddler = this.wiki.getTiddler(STATE_CURRENT_FOCUS);
 		var storyTiddler = currentInputInfo["widget"].getVariable("storyTiddler");
-		if(storyTiddler !== tiddler.fields["focus-tiddler"]) {
+		if(storyTiddler !== tiddler.fields["focused-tiddler"]) {
 			this.wiki.setText(STATE_CURRENT_FOCUS,"focused-tiddler",undefined,storyTiddler);
 		}
 		this.focusedInput = identifier;
