@@ -6,6 +6,10 @@ title: $:/core/ui/ImportListing
 message-$(payloadTiddler)$
 \end
 
+\define overWriteWarning()
+<$text text={{{[<currentTiddler>get<renameField>minlength[1]else<payloadTiddler>!is[tiddler]then[]] ~[<lingo-base>addsuffix[Listing/Rename/OverwriteWarning]get[text]]}}}/>
+\end
+
 \define selectionField()
 selection-$(payloadTiddler)$
 \end
@@ -70,6 +74,7 @@ $(currentTiddler)$!!state-rename-$(payloadTiddler)$
 </td>
 <td>
 <$view field=<<messageField>>/>
+<<overWriteWarning>>
 </td>
 </tr>
 <$reveal type="match" state=<<renameFieldState>> text="yes" tag="tr">
@@ -91,4 +96,3 @@ $(currentTiddler)$!!state-rename-$(payloadTiddler)$
 </$list>
 </tbody>
 </table>
-
