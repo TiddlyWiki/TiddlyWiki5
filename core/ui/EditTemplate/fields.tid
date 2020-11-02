@@ -23,10 +23,18 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 
 \define delete-state-tiddlers() <$action-deletetiddler $filter="[<newFieldNameTiddler>] [<storeTitle>] [<searchListState>]"/>
 
-\define cancel-search-actions()
-<$list filter="[<__storeTitle__>has[text]] [<__tiddler__>has[text]]" variable="ignore" emptyMessage="""<<delete-state-tiddlers>><$action-sendmessage $message="tm-cancel-tiddler"/>""">
+\define cancel-search-actions-inner()
+<$list filter="[<storeTitle>has[text]] [<newFieldNameTiddler>has[text]]" variable="ignore" emptyMessage="""<<delete-state-tiddlers>><$action-sendmessage $message="tm-cancel-tiddler"/>""">
 <<delete-state-tiddlers>>
 </$list>
+\end
+
+\define cancel-search-actions()
+<$set name="userInput" value={{{ [<storeTitle>get[text]] }}}>
+<$list filter="[<newFieldNameTiddler>get[text]!match<userInput>]" emptyMessage="""<<cancel-search-actions-inner>>""">
+<$action-setfield $tiddler=<<newFieldNameTiddler>> text=<<userInput>>/><$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
+</$list>
+</$set>
 \end
 
 \define new-field()
