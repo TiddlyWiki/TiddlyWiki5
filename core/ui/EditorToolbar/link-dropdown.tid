@@ -4,10 +4,10 @@ title: $:/core/ui/EditorToolbar/link-dropdown
 
 \define add-link-actions()
 <$action-sendmessage $message="tm-edit-text-operation" $param="make-link" text={{$(linkTiddler)$}} />
-<$action-deletetiddler $tiddler=<<dropdown-state>> />
-<$action-deletetiddler $tiddler=<<searchTiddler>> />
-<$action-deletetiddler $tiddler=<<linkTiddler>> />
+<$action-deletetiddler $filter="[<dropdown-state>] [<searchTiddler>] [<linkTiddler>] [<storeTitle>] [<searchListState>]"/>
 \end
+
+\define cancel-search-actions() <$action-deletetiddler $filter="[<searchTiddler>] [<linkTiddler>] [<storeTitle>] [<searchListState>]"/>
 
 \define external-link()
 <$button class="tc-btn-invisible" style="width: auto; display: inline-block; background-colour: inherit;" actions=<<add-link-actions>>>
@@ -15,29 +15,41 @@ title: $:/core/ui/EditorToolbar/link-dropdown
 </$button>
 \end
 
+\define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<nextTab>>/>"""/>
+
 \define body(config-title)
 ''<<lingo Hint>>''
 
-<$vars searchTiddler="""$config-title$/search""" linkTiddler="""$config-title$/link""" linktext="" >
+<$vars searchTiddler="""$config-title$/search""" linkTiddler="""$config-title$/link""" linktext="" searchListState=<<qualify "$:/temp/link-search/selected-item">> refreshTitle=<<qualify "$:/temp/link-search/refresh">> storeTitle=<<qualify "$:/temp/link-search/input">>>
 
 <$vars linkTiddler=<<searchTiddler>>>
-<$keyboard key="ENTER" actions=<<add-link-actions>>>
-<$edit-text tiddler=<<searchTiddler>> type="search" tag="input" focus="true" placeholder={{$:/language/Search/Search}} default=""/>
-<$reveal tag="span" state=<<searchTiddler>> type="nomatch" text="">
+<$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
+<$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
+<$macrocall $name="keyboard-driven-input" tiddler=<<searchTiddler>> storeTitle=<<storeTitle>> filterMinLength={{$:/config/Search/MinLength}}
+		selectionStateTitle=<<searchListState>> refreshTitle=<<refreshTitle>> type="search" 
+		tag="input" focus="true" class="tc-popup-handle" inputCancelActions=<<cancel-search-actions>> 
+		inputAcceptActions=<<add-link-actions>> placeholder={{$:/language/Search/Search}} default="" 
+		configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]" />
+</$keyboard>
+</$keyboard>
+<$reveal tag="span" state=<<storeTitle>> type="nomatch" text="">
 <<external-link>>
 <$button class="tc-btn-invisible" style="width: auto; display: inline-block; background-colour: inherit;">
 <$action-setfield $tiddler=<<searchTiddler>> text="" />
 {{$:/core/images/close-button}}
 </$button>
 </$reveal>
-</$keyboard>
 </$vars>
 
-<$reveal tag="div" state=<<searchTiddler>> type="nomatch" text="">
+<$reveal tag="div" state=<<storeTitle>> type="nomatch" text="">
 
 <$linkcatcher actions=<<add-link-actions>> to=<<linkTiddler>>>
 
+<$vars userInput={{{ [<storeTitle>get[text]] }}} configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}}>
+
 {{$:/core/ui/SearchResults}}
+
+</$vars>
 
 </$linkcatcher>
 

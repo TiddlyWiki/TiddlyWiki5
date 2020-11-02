@@ -26,6 +26,7 @@ Error/Caption: Error
 Error/EditConflict: File changed on server
 Error/Filter: Filter error
 Error/FilterSyntax: Syntax error in filter expression
+Error/FilterRunPrefix: Filter Error: Unknown prefix for filter run
 Error/IsFilterOperator: Filter Error: Unknown operand for the 'is' filter operator
 Error/FormatFilterOperator: Filter Error: Unknown suffix for the 'format' filter operator
 Error/LoadingPluginLibrary: Error loading plugin library
@@ -63,6 +64,7 @@ OfficialPluginLibrary: Official ~TiddlyWiki Plugin Library
 OfficialPluginLibrary/Hint: The official ~TiddlyWiki plugin library at tiddlywiki.com. Plugins, themes and language packs are maintained by the core team.
 PluginReloadWarning: Please save {{$:/core/ui/Buttons/save-wiki}} and reload {{$:/core/ui/Buttons/refresh}} to allow changes to ~JavaScript plugins to take effect
 RecentChanges/DateFormat: DDth MMM YYYY
+Shortcuts/Input/AdvancedSearch/Hint: Open the ~AdvancedSearch panel from within the sidebar search field
 Shortcuts/Input/Accept/Hint: Accept the selected item
 Shortcuts/Input/AcceptVariant/Hint: Accept the selected item (variant)
 Shortcuts/Input/Cancel/Hint: Clear the input field
@@ -70,6 +72,7 @@ Shortcuts/Input/Down/Hint: Select the next item
 Shortcuts/Input/Tab-Left/Hint: Select the previous Tab
 Shortcuts/Input/Tab-Right/Hint: Select the next Tab
 Shortcuts/Input/Up/Hint: Select the previous item
+Shortcuts/SidebarLayout/Hint: Change the sidebar layout
 SystemTiddler/Tooltip: This is a system tiddler
 SystemTiddlers/Include/Prompt: Include system tiddlers
 TagManager/Colour/Heading: Colour

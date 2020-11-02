@@ -2,8 +2,10 @@ title: $:/config/ShortcutInfo/
 
 add-field: {{$:/language/EditTemplate/Fields/Add/Button/Hint}}
 advanced-search: {{$:/language/Buttons/AdvancedSearch/Hint}}
+advanced-search-sidebar: {{$:/language/Shortcuts/Input/AdvancedSearch/Hint}}
 bold: {{$:/language/Buttons/Bold/Hint}}
 cancel-edit-tiddler: {{$:/language/Buttons/Cancel/Hint}}
+change-sidebar-layout: {{$:/language/Shortcuts/SidebarLayout/Hint}}
 excise: {{$:/language/Buttons/Excise/Hint}}
 heading-1: {{$:/language/Buttons/Heading1/Hint}}
 heading-2: {{$:/language/Buttons/Heading2/Hint}}
@@ -32,6 +34,7 @@ picture: {{$:/language/Buttons/Picture/Hint}}
 preview: {{$:/language/Buttons/Preview/Hint}}
 quote: {{$:/language/Buttons/Quote/Hint}}
 save-tiddler: {{$:/language/Buttons/Save/Hint}}
+save-wiki: {{$:/language/Buttons/SaveWiki/Hint}}
 sidebar-search: {{$:/language/Buttons/SidebarSearch/Hint}}
 stamp: {{$:/language/Buttons/Stamp/Hint}}
 strikethrough: {{$:/language/Buttons/Strikethrough/Hint}}

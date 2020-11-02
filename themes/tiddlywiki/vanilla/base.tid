@@ -721,7 +721,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-tag-button-selected,
-.tc-list-item-selected a.tc-tiddlylink {
+.tc-list-item-selected a.tc-tiddlylink, a.tc-list-item-selected {
 	background-color: <<colour primary>>;
 	color: <<colour tiddler-background>>;
 }
@@ -1141,6 +1141,10 @@ canvas.tc-edit-bitmapeditor  {
 
 .tc-titlebar, .tc-tiddler-edit-title {
 	overflow: hidden; /* https://github.com/Jermolene/TiddlyWiki5/issues/282 */
+}
+
+.tc-tiddler-title.tc-tiddler-edit-title {
+	line-height: 3em;
 }
 
 html body.tc-body.tc-single-tiddler-window {
@@ -2025,6 +2029,14 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 /*
+** Import table
+*/
+
+.tc-import-table {
+	width: 100%;
+}
+
+/*
 ** Alerts
 */
 
@@ -2760,4 +2772,59 @@ select {
 
 .tc-fill-background {
 	fill: <<colour background>>;
+}
+
+/*
+** Flexbox utility classes
+*/
+
+.tc-flex {
+	display: -webkit-flex;
+	display: flex;
+}
+
+.tc-flex-column {
+	flex-direction: column;
+}
+
+.tc-flex-row {
+	flex-direction: row;
+}
+
+.tc-flex-grow-1 {
+	flex-grow: 1;
+}
+
+.tc-flex-grow-2 {
+	flex-grow: 2;
+}
+
+/*
+** Other utility classes
+*/
+
+.tc-small-gap {
+	margin-left: .5em;
+	margin-right: .5em;
+}
+
+.tc-small-gap-left {
+	margin-left: .5em;
+}
+
+.tc-small-gap-right {
+	margin-right: .5em;
+}
+
+.tc-big-gap {
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+.tc-big-gap-left {
+	margin-left: 1em;
+}
+
+.tc-big-gap-right {
+	margin-right: 1em;
 }

@@ -1,6 +1,6 @@
 caption: filter
 created: 20200929174420821
-modified: 20201006173606828
+modified: 20201027185144953
 op-input: a [[selection of titles|Title Selection]] passed as input to the filter
 op-neg-input: a [[selection of titles|Title Selection]] passed as input to the filter
 op-neg-output: those input titles that <<.em "do not">> pass the filter  <<.place S>>
@@ -29,5 +29,19 @@ Simple filter operations can be concatenated together directly (eg `[tag[HelloTh
 ```
 
 <<.tip "Compare with the similar [[subfilter|subfilter Operator]] operator which runs a subfilter and directly returns the results">>
+
+<<.tip "Compare with the analagous named filter run prefix `:filter`">>
+
+```
+\define larger-than-1k() [get[text]length[]compare:integer:gteq[1000]]
+
+{{{ [tag[HelloThere]filter<larger-than-1k>] }}}
+```
+
+is equivalent to:
+
+```
+{{{ [tag[HelloThere]] :filter[get[text]length[]compare:integer:gteq[1000]] }}}
+```
 
 <<.operator-examples "filter">>
