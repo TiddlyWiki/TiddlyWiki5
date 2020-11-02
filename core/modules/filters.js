@@ -67,7 +67,6 @@ function parseFilterOperation(operators,filterString,p) {
 			var operand = {};
 			switch (bracketType) {
 				case "{": // Curly brackets
-					operator.indirect = true;
 					operand.indirect = true;
 					nextBracketPos = filterString.indexOf("}",p);
 					break;
@@ -75,7 +74,6 @@ function parseFilterOperation(operators,filterString,p) {
 					nextBracketPos = filterString.indexOf("]",p);
 					break;
 				case "<": // Angle brackets
-					operator.variable = true;
 					operand.variable = true;
 					nextBracketPos = filterString.indexOf(">",p);
 					break;
@@ -98,13 +96,8 @@ function parseFilterOperation(operators,filterString,p) {
 				throw "Missing closing bracket in filter expression";
 			}
 			if(!operator.regexp) {
-				if(!operator.operand) {
-					operator.operand = filterString.substring(p,nextBracketPos);
-				}
 				operand.text = filterString.substring(p,nextBracketPos);
 				operator.operands.push(operand);
-				//operator.operands.push(filterString.substring(p,nextBracketPos));
-				
 			}
 			p = nextBracketPos + 1;
 		}
@@ -122,16 +115,6 @@ function parseFilterOperation(operators,filterString,p) {
 			} else {
 				throw "Missing [ in filter expression";
 			}
-			/*
-			var nextBracketPos = filterString.substring(p).search(/[\[\{<\/]/);
-			if(nextBracketPos !==  0) {
-				throw "Missing [ in filter expression";
-			} else {
-				nextBracketPos = p;
-				p++;
-				parseOperand(filterString.charAt(nextBracketPos));
-			}
-			*/
 		}
 		
 		// Push this operator
@@ -187,7 +170,7 @@ exports.parseFilter = function(filterString) {
 			}
 			if(match[4] || match[5] || match[6]) { // Double quoted string, single quoted string or unquoted title
 				operation.operators.push(
-					{operator: "title", operand: match[4] || match[5] || match[6], operands: [{text:match[4] || match[5] || match[6]}]}
+					{operator: "title", operands: [{text:match[4] || match[5] || match[6]}]}
 				);
 			}
 			results.push(operation);
@@ -244,7 +227,7 @@ exports.compileFilter = function(filterString) {
 				results = [],
 				currTiddlerTitle = widget && widget.getVariable("currentTiddler");
 			$tw.utils.each(operation.operators,function(operator) {
-				var operands = [], // = operator.operand,
+				var operands = [],
 					operatorFunction;
 				if(!operator.operator) {
 					operatorFunction = filterOperators.title;
@@ -253,17 +236,6 @@ exports.compileFilter = function(filterString) {
 				} else {
 					operatorFunction = filterOperators[operator.operator];
 				}
-				
-				/*
-				if(operator.indirect) {
-					operand = self.getTextReference(operator.operand,"",currTiddlerTitle);
-				}
-				if(operator.variable) {
-					operand = widget.getVariable(operator.operand,{defaultValue: ""});
-				}
-				*/
-				
-				//var operands = [];
 				
 				$tw.utils.each(operator.operands,function(operand) {
 					if(operand.indirect) {
@@ -275,18 +247,11 @@ exports.compileFilter = function(filterString) {
 					}
 					operands.push(operand.value);
 				});
-				/*
-				if(operand != operands[0]) {
-					//console.log(operand == operands[0] ? "yes" : "no");
-					console.log(operand,operands);
-				}
-				*/
+
 				// Invoke the appropriate filteroperator module
 				results = operatorFunction(accumulator,{
 							operator: operator.operator,
-							//operand: operand,
 							operand: operands.length > 0 ? operands[0] : undefined,
-							//operand: operands[0],
 							operands: operands,
 							prefix: operator.prefix,
 							suffix: operator.suffix,
