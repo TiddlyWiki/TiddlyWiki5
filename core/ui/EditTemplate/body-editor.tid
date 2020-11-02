@@ -8,6 +8,7 @@ title: $:/core/ui/EditTemplate/body/editor
   tabindex={{$:/config/EditTabIndex}}
   focus={{{ [{$:/config/AutoFocus}match[text]then[true]] ~[[false]] }}}
   cancelPopups="yes"
+  inputManagement="yes"
 
 ><$set
 
