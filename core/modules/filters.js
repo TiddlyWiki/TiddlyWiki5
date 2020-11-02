@@ -64,10 +64,11 @@ function parseFilterOperation(operators,filterString,p) {
 		}
 		operator.operands = [];
 		function parseOperand(bracketType){
-		
+			var operand = {};
 			switch (bracketType) {
 				case "{": // Curly brackets
 					operator.indirect = true;
+					operand.indirect = true;
 					nextBracketPos = filterString.indexOf("}",p);
 					break;
 				case "[": // Square brackets
@@ -75,6 +76,7 @@ function parseFilterOperation(operators,filterString,p) {
 					break;
 				case "<": // Angle brackets
 					operator.variable = true;
+					operand.variable = true;
 					nextBracketPos = filterString.indexOf(">",p);
 					break;
 				case "/": // regexp brackets
@@ -99,7 +101,9 @@ function parseFilterOperation(operators,filterString,p) {
 				if(!operator.operand) {
 					operator.operand = filterString.substring(p,nextBracketPos);
 				}
-				operator.operands.push(filterString.substring(p,nextBracketPos));
+				operand.text = filterString.substring(p,nextBracketPos);
+				operator.operands.push(operand);
+				//operator.operands.push(filterString.substring(p,nextBracketPos));
 				
 			}
 			p = nextBracketPos + 1;
@@ -183,7 +187,7 @@ exports.parseFilter = function(filterString) {
 			}
 			if(match[4] || match[5] || match[6]) { // Double quoted string, single quoted string or unquoted title
 				operation.operators.push(
-					{operator: "title", operand: match[4] || match[5] || match[6]}
+					{operator: "title", operand: match[4] || match[5] || match[6], operands: [{text:match[4] || match[5] || match[6]}]}
 				);
 			}
 			results.push(operation);
@@ -240,7 +244,7 @@ exports.compileFilter = function(filterString) {
 				results = [],
 				currTiddlerTitle = widget && widget.getVariable("currentTiddler");
 			$tw.utils.each(operation.operators,function(operator) {
-				var operand = operator.operand,
+				var operands = [], // = operator.operand,
 					operatorFunction;
 				if(!operator.operator) {
 					operatorFunction = filterOperators.title;
@@ -249,16 +253,41 @@ exports.compileFilter = function(filterString) {
 				} else {
 					operatorFunction = filterOperators[operator.operator];
 				}
+				
+				/*
 				if(operator.indirect) {
 					operand = self.getTextReference(operator.operand,"",currTiddlerTitle);
 				}
 				if(operator.variable) {
 					operand = widget.getVariable(operator.operand,{defaultValue: ""});
 				}
+				*/
+				
+				//var operands = [];
+				
+				$tw.utils.each(operator.operands,function(operand) {
+					if(operand.indirect) {
+						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
+					} else if(operand.variable) {
+						operand.value = widget.getVariable(operand.text,{defaultValue: ""});
+					} else {
+						operand.value = operand.text;
+					}
+					operands.push(operand.value);
+				});
+				/*
+				if(operand != operands[0]) {
+					//console.log(operand == operands[0] ? "yes" : "no");
+					console.log(operand,operands);
+				}
+				*/
 				// Invoke the appropriate filteroperator module
 				results = operatorFunction(accumulator,{
 							operator: operator.operator,
-							operand: operand,
+							//operand: operand,
+							operand: operands.length > 0 ? operands[0] : undefined,
+							//operand: operands[0],
+							operands: operands,
 							prefix: operator.prefix,
 							suffix: operator.suffix,
 							suffixes: operator.suffixes,

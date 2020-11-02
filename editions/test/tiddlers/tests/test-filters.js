@@ -19,35 +19,35 @@ describe("Filter tests", function() {
 	// Test filter parsing
 	it("should parse new-style rich operator suffixes", function() {
 		expect($tw.wiki.parseFilter("[search:: four, , five,, six [operand]]")).toEqual(
-			[ { prefix : '', operators : [ { operator : 'search', suffix : ': four, , five,, six ', suffixes : [ [  ], [ 'four', 'five', 'six' ] ], operand : 'operand', operands: ['operand'] } ] } ]
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ': four, , five,, six ', suffixes : [ [  ], [ 'four', 'five', 'six' ] ], operand : 'operand', operands: [ { text:'operand' } ] } ] } ]
 		);
 		expect($tw.wiki.parseFilter("[search: one, two ,three :[operand]]")).toEqual(
-			[ { prefix : '', operators : [ { operator : 'search', suffix : ' one, two ,three :', suffixes : [ [ 'one', 'two', 'three' ], [  ] ], operand : 'operand', operands: ['operand'] } ] } ]
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ' one, two ,three :', suffixes : [ [ 'one', 'two', 'three' ], [  ] ], operand : 'operand', operands: [ { text:'operand' } ] } ] } ]
 		);
 		expect($tw.wiki.parseFilter("[search: one, two ,three :[operand]]")).toEqual(
-			[ { prefix : '', operators : [ { operator : 'search', suffix : ' one, two ,three :', suffixes : [ [ 'one', 'two', 'three' ], [  ] ], operand : 'operand', operands: ['operand'] } ] } ]
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ' one, two ,three :', suffixes : [ [ 'one', 'two', 'three' ], [  ] ], operand : 'operand', operands: [ { text:'operand' } ] } ] } ]
 		);
 		expect($tw.wiki.parseFilter("[search: one, two ,three : four, , five,, six [operand]]")).toEqual(
-			[ { prefix : '', operators : [ { operator : 'search', suffix : ' one, two ,three : four, , five,, six ', suffixes : [ [ 'one', 'two', 'three' ], [ 'four', 'five', 'six' ] ], operand : 'operand', operands: ['operand'] } ] } ]
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ' one, two ,three : four, , five,, six ', suffixes : [ [ 'one', 'two', 'three' ], [ 'four', 'five', 'six' ] ], operand : 'operand', operands: [ { text:'operand' } ] } ] } ]
 		);
 		expect($tw.wiki.parseFilter("[search: , : [operand]]")).toEqual(
-			[ { prefix : '', operators : [ { operator : 'search', suffix : ' , : ', suffixes : [ [  ], [  ] ], operand : 'operand', operands: ['operand'] } ] } ]
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ' , : ', suffixes : [ [  ], [  ] ], operand : 'operand', operands: [ { text:'operand' } ] } ] } ]
 		);
 	});
 	
 	
 	it("should parse multiple operands for operators", function() {
 		expect($tw.wiki.parseFilter("[search: , : [operand],[operand2]]")).toEqual(
-			[ { prefix : '', operators : [ { operator : 'search', suffix : ' , : ', suffixes : [ [  ], [  ] ], operand : 'operand', operands: ['operand','operand2'] } ] } ]
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ' , : ', suffixes : [ [  ], [  ] ], operand : 'operand', operands: [ { text:'operand' }, { text:'operand2' } ] } ] } ]
 		);
 		expect($tw.wiki.parseFilter("[[GettingStarted]replace:[operand],[operand2]]")).toEqual(
-			[ { prefix : '', operators : [ { operator : 'title', operand : 'GettingStarted', operands: ['GettingStarted'] },  { operator : 'replace', suffix : '', suffixes : [[]], operand : 'operand', operands: ['operand','operand2'] } ] } ]
+			[ { prefix : '', operators : [ { operator : 'title', operand : 'GettingStarted', operands: [ { text:'GettingStarted' } ] },  { operator : 'replace', suffix : '', suffixes : [[]], operand : 'operand', operands: [ { text:'operand' }, { text:'operand2' }  ] } ] } ]
 		);
 		expect($tw.wiki.parseFilter("[[GettingStarted]replace[operand],[operand2]split[-]]")).toEqual(
-			[ { prefix : '', operators : [ { operator : 'title', operand : 'GettingStarted', operands: ['GettingStarted'] },  { operator : 'replace', operand : 'operand', operands: ['operand','operand2'] }, { operator : 'split', operand : '-', operands: ['-'] } ] } ]
+			[ { prefix : '', operators : [ { operator : 'title', operand : 'GettingStarted', operands: [{ text:'GettingStarted' }] },  { operator : 'replace', operand : 'operand', operands: [{ text:'operand' }, { text:'operand2' }] }, { operator : 'split', operand : '-', operands: [ { text:'-' } ] } ] } ]
 		);
 		expect($tw.wiki.parseFilter("[[GettingStarted]replace[operand],[operand2]split[-]split2[a],[b]]")).toEqual(
-			[ { prefix : '', operators : [ { operator : 'title', operand : 'GettingStarted', operands: ['GettingStarted'] },  { operator : 'replace', operand : 'operand', operands: ['operand','operand2'] }, { operator : 'split', operand : '-', operands: ['-'] }, { operator : 'split2', operand : 'a', operands: ['a','b'] } ] } ]
+			[ { prefix : '', operators : [ { operator : 'title', operand : 'GettingStarted', operands: [{ text:'GettingStarted' }] },  { operator : 'replace', operand : 'operand', operands: [ { text:'operand' }, { text:'operand2' } ] }, { operator : 'split', operand : '-', operands: [ {text:'-'} ] }, { operator : 'split2', operand : 'a', operands: [ { text:'a' }, { text: 'b' }] } ] } ]
 		);
 	});
 
