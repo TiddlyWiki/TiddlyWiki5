@@ -232,6 +232,9 @@ Widget.prototype.hasVariable = function(name,value) {
 	return false;
 };
 
+/*
+Find the widget, walking up the widget-tree, that has a different transclusion variable than the current widget
+*/
 Widget.prototype.findParentTransclusionWidget = function() {
 	var node = this;
 	var transclusionVariable = this.getVariable("transclusion");
@@ -241,6 +244,9 @@ Widget.prototype.findParentTransclusionWidget = function() {
 	return node !== this ? node : null;
 };
 
+/*
+Generate the "transclusion-footprint" of the current widget in the widget-tree up to the next widget that changes the transclusion variable
+*/
 Widget.prototype.generateTransclusionFootprint = function() {
 	var parentTransclusionWidget = this.findParentTransclusionWidget(),
 	    node = this,
