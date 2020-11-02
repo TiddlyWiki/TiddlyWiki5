@@ -3,6 +3,8 @@ tags: $:/tags/Macro
 first-search-filter: [tags[]!is[system]search:title<userInput>sort[]]
 second-search-filter: [tags[]is[system]search:title<userInput>sort[]]
 
+\define get-tagpicker-focus-selector() [data-tiddler-title="$(currentTiddlerCSSEscaped)$"] .tc-add-tag-name input
+
 \define delete-tag-state-tiddlers() <$action-deletetiddler $filter="[<newTagNameTiddler>] [<storeTitle>] [<tagSelectionState>]"/>
 
 \define add-tag-actions(actions)
@@ -27,10 +29,18 @@ $actions$
 </$button>
 \end
 
-\define clear-tags-actions()
-<$list filter="[<__storeTitle__>has[text]] [<__tiddler__>has[text]]" variable="ignore" emptyMessage="""<<delete-tag-state-tiddlers>><$action-sendmessage $message="tm-cancel-tiddler"/>""">
+\define clear-tags-actions-inner()
+<$list filter="[<storeTitle>has[text]] [<newTagNameTiddler>has[text]]" variable="ignore" emptyMessage="""<<delete-tag-state-tiddlers>><$action-sendmessage $message="tm-cancel-tiddler"/>""">
 <<delete-tag-state-tiddlers>>
 </$list>
+\end
+
+\define clear-tags-actions()
+<$set name="userInput" value={{{ [<storeTitle>get[text]] }}}>
+<$list filter="[<newTagNameTiddler>get[text]!match<userInput>]" emptyMessage="""<<clear-tags-actions-inner>>""">
+<$action-setfield $tiddler=<<newTagNameTiddler>> text=<<userInput>>/><$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
+</$list>
+</$set>
 \end
 
 \define tag-picker-inner(actions)
@@ -50,7 +60,9 @@ $actions$
 <$button set=<<newTagNameTiddler>> setTo="" class="">
 <$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
 $actions$
-<<delete-tag-state-tiddlers>>
+<$set name="currentTiddlerCSSEscaped" value={{{ [<currentTiddler>escapecss[]] }}}>
+<<delete-tag-state-tiddlers>><$action-sendmessage $message="tm-focus-selector" $param=<<get-tagpicker-focus-selector>>/>
+</$set>
 {{$:/language/EditTemplate/Tags/Add/Button}}
 </$button>
 </$set>

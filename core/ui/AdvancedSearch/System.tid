@@ -6,7 +6,7 @@ first-search-filter: [is[system]search<userInput>sort[title]limit[250]] -[[$:/te
 \define lingo-base() $:/language/Search/
 \define set-next-input-tab(beforeafter:"after",stateTitle,tag,defaultState,currentTabTiddler) <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/advanced-search-results" tag="$:/tags/AdvancedSearch" beforeafter="$beforeafter$" defaultState="$:/core/ui/AdvancedSearch/System" actions="""<$action-setfield $tiddler="$:/state/advancedsearch/currentTab" text=<<nextTab>>/>"""/>
 
-\define cancel-search-actions() <$action-deletetiddler $filter="[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]]" />
+\define cancel-search-actions() <$list filter="[{$:/temp/advancedsearch}!match{$:/temp/advancedsearch/input}]" emptyMessage="""<$action-deletetiddler $filter="[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]]" />"""><$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/advancedsearch}}/><$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/></$list><$action-sendmessage $message="tm-focus-selector" $param=""".tc-advanced-search input"""/>
 
 \define input-accept-actions() <$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/>
 
@@ -17,11 +17,11 @@ first-search-filter: [is[system]search<userInput>sort[title]limit[250]] -[[$:/te
 <div class="tc-search">
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
-<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/advancedsearch" storeTitle="$:/temp/advancedsearch/input"
+<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/advancedsearch/input" storeTitle="$:/temp/advancedsearch"
 		refreshTitle="$:/temp/advancedsearch/refresh" selectionStateTitle="$:/temp/advancedsearch/selected-item"
 		type="search" tag="input" focus={{$:/config/Search/AutoFocus}} configTiddlerFilter="[[$:/core/ui/AdvancedSearch/System]]"
 		inputCancelActions=<<cancel-search-actions>> inputAcceptActions=<<input-accept-actions>> 
-		inputAcceptVariantActions=<<input-accept-variant-actions>>/>
+		inputAcceptVariantActions=<<input-accept-variant-actions>> filterMinLength={{$:/config/Search/MinLength}}/>
 </$keyboard>
 </$keyboard>
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
@@ -32,17 +32,17 @@ first-search-filter: [is[system]search<userInput>sort[title]limit[250]] -[[$:/te
 </$reveal>
 </div>
 
-<$reveal state="$:/temp/advancedsearch/input" type="nomatch" text="">
+<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 
-<$list filter="[{$:/temp/advancedsearch/input}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$list filter="[{$:/temp/advancedsearch}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 
-<$set name="resultCount" value="""<$count filter="[is[system]search{$:/temp/advancedsearch/input}] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]] -[[$:/temp/advancedsearch/selected-item]]"/>""">
+<$set name="resultCount" value="""<$count filter="[is[system]search{$:/temp/advancedsearch}] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]] -[[$:/temp/advancedsearch/selected-item]]"/>""">
 
 <div class="tc-search-results">
 
 <<lingo System/Matches>>
 
-<$list filter="[is[system]search{$:/temp/advancedsearch/input}sort[title]limit[250]] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]] -[[$:/temp/advancedsearch/selected-item]]">
+<$list filter="[is[system]search{$:/temp/advancedsearch}sort[title]limit[250]] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]] -[[$:/temp/advancedsearch/selected-item]]">
 <span class={{{[<currentTiddler>addsuffix[-primaryList]] -[[$:/temp/advancedsearch/selected-item]get[text]] +[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>

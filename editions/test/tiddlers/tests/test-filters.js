@@ -160,6 +160,13 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("[enlist[one two three]addsuffix[!]]").join(",")).toBe("one!,two!,three!");
 	});
 	
+	it("should handle the enlist-input operator", function() {
+		expect(wiki.filterTiddlers("[[one two three]enlist-input[]]").join(",")).toBe("one,two,three");
+		expect(wiki.filterTiddlers("[[one two three]] [[four five six]] +[enlist-input[]]").join(",")).toBe("one,two,three,four,five,six");
+		expect(wiki.filterTiddlers("[[one two three]] [[four five six]] [[seven eight]] +[enlist-input[]]").join(",")).toBe("one,two,three,four,five,six,seven,eight");
+		expect(wiki.filterTiddlers("[[]] +[enlist-input[]]").join(",")).toBe("");
+	});
+	
 	it("should handle the then and else operators", function() {
 		expect(wiki.filterTiddlers("[modifier[JoeBloggs]then[Susi]]").join(",")).toBe("Susi");
 		expect(wiki.filterTiddlers("[!modifier[JoeBloggs]then[Susi]]").join(",")).toBe("Susi,Susi,Susi,Susi,Susi,Susi,Susi,Susi");
@@ -683,6 +690,17 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("b a b c +[sortby[]]").join(",")).toBe("a,b,c");
 		expect(wiki.filterTiddlers("b a b c +[sortby[a b b c]]").join(",")).toBe("a,b,c");
 		expect(wiki.filterTiddlers("b a b c +[sortby[b a c b]]").join(",")).toBe("b,a,c");
+	});
+
+	it("should handle the sortan operator", function() {
+		expect(wiki.filterTiddlers("b a c +[sortan[]]").join(",")).toBe("a,b,c");
+		expect(wiki.filterTiddlers("b2 a3 a1 b1 c2 a2 c3 b3 c1 +[sortan[]]").join(",")).toBe("a1,a2,a3,b1,b2,b3,c1,c2,c3");
+		expect(wiki.filterTiddlers("b2 a10 c10 a1 b1 c2 a2 b10 c1 +[sortan[]]").join(",")).toBe("a1,a2,a10,b1,b2,b10,c1,c2,c10");
+		expect(wiki.filterTiddlers("TiddlerOne $:/TiddlerTwo [[Tiddler Three]] +[sortan[]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne");
+	});
+
+	it("should handle the sortan operator sorting on date fields", function() {
+		expect(wiki.filterTiddlers("TiddlerOne $:/TiddlerTwo [[Tiddler Three]] +[sortan[modified]]").join(",")).toBe("$:/TiddlerTwo,TiddlerOne,Tiddler Three");
 	});
 
 	it("should handle the slugify operator", function() {
