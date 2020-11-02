@@ -1426,7 +1426,8 @@ historyTitle: title of history tiddler (defaults to $:/HistoryList)
 */
 exports.addToHistory = function(title,fromPageRect,historyTitle) {
 	var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
-	story.addToHistory(title,fromPageRect);		
+	story.addToHistory(title,fromPageRect);	
+	console.log("$tw.wiki.addToHistory() is deprecated since V5.1.23! Use the this.story.addToHistory() from the story-object!")
 };
 
 /*
@@ -1438,7 +1439,8 @@ options: see story.js
 */
 exports.addToStory = function(title,fromTitle,storyTitle,options) {
 	var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
-	story.addToStory(title,fromTitle,options);		
+	story.addToStory(title,fromTitle,options);
+	console.log("$tw.wiki.addToStory() is deprecated since V5.1.23! Use the this.story.addToStory() from the story-object!")
 };
 
 /*
