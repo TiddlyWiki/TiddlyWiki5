@@ -105,14 +105,20 @@ function parseFilterOperation(operators,filterString,p) {
 			p = nextBracketPos + 1;
 		}
 		
-		p = nextBracketPos + 1;		
+		p = nextBracketPos + 1;
 		
 		parseOperand(bracket);
 		
 		while(filterString.charAt(p) === ",") {
 			p++;
-			//var match = /^,([\[\{<\/]).*/.exec(filterString.substring(p));
-			//if(match && 
+			if(/^[\[\{<\/]/.test(filterString.substring(p))) {
+				nextBracketPos = p;
+				p++;
+				parseOperand(filterString.charAt(nextBracketPos));
+			} else {
+				throw "Missing [ in filter expression";
+			}
+			/*
 			var nextBracketPos = filterString.substring(p).search(/[\[\{<\/]/);
 			if(nextBracketPos !==  0) {
 				throw "Missing [ in filter expression";
@@ -121,6 +127,7 @@ function parseFilterOperation(operators,filterString,p) {
 				p++;
 				parseOperand(filterString.charAt(nextBracketPos));
 			}
+			*/
 		}
 		
 		// Push this operator

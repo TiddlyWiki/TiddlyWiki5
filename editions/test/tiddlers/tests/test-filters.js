@@ -33,8 +33,21 @@ describe("Filter tests", function() {
 		expect($tw.wiki.parseFilter("[search: , : [operand]]")).toEqual(
 			[ { prefix : '', operators : [ { operator : 'search', suffix : ' , : ', suffixes : [ [  ], [  ] ], operand : 'operand', operands: ['operand'] } ] } ]
 		);
+	});
+	
+	
+	it("should parse multiple operands for operators", function() {
 		expect($tw.wiki.parseFilter("[search: , : [operand],[operand2]]")).toEqual(
 			[ { prefix : '', operators : [ { operator : 'search', suffix : ' , : ', suffixes : [ [  ], [  ] ], operand : 'operand', operands: ['operand','operand2'] } ] } ]
+		);
+		expect($tw.wiki.parseFilter("[[GettingStarted]replace:[operand],[operand2]]")).toEqual(
+			[ { prefix : '', operators : [ { operator : 'title', operand : 'GettingStarted', operands: ['GettingStarted'] },  { operator : 'replace', suffix : '', suffixes : [[]], operand : 'operand', operands: ['operand','operand2'] } ] } ]
+		);
+		expect($tw.wiki.parseFilter("[[GettingStarted]replace[operand],[operand2]split[-]]")).toEqual(
+			[ { prefix : '', operators : [ { operator : 'title', operand : 'GettingStarted', operands: ['GettingStarted'] },  { operator : 'replace', operand : 'operand', operands: ['operand','operand2'] }, { operator : 'split', operand : '-', operands: ['-'] } ] } ]
+		);
+		expect($tw.wiki.parseFilter("[[GettingStarted]replace[operand],[operand2]split[-]split2[a],[b]]")).toEqual(
+			[ { prefix : '', operators : [ { operator : 'title', operand : 'GettingStarted', operands: ['GettingStarted'] },  { operator : 'replace', operand : 'operand', operands: ['operand','operand2'] }, { operator : 'split', operand : '-', operands: ['-'] }, { operator : 'split2', operand : 'a', operands: ['a','b'] } ] } ]
 		);
 	});
 
