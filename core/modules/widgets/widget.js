@@ -232,10 +232,34 @@ Widget.prototype.hasVariable = function(name,value) {
 	return false;
 };
 
+Widget.prototype.findParentTransclusionWidget = function() {
+	var node = this;
+	var transclusionVariable = this.getVariable("transclusion");
+	while(node.getVariable("transclusion") === transclusionVariable) {
+		node = node.parentWidget;
+	}
+	return node !== this ? node : null;
+};
+
+Widget.prototype.generateTransclusionFootprint = function() {
+	var parentTransclusionWidget = this.findParentTransclusionWidget(),
+	    node = this,
+	    footprint = node.parentWidget.children.indexOf(node);
+	while(node) {
+		node = node.parentWidget;
+		if(node === parentTransclusionWidget) {
+			break;
+		} else if(node.parentWidget && node.parentWidget.children) {
+			footprint = footprint + "-" + node.parentWidget.children.indexOf(node);
+		}
+	}
+	return footprint;
+};
+
 /*
 Construct a qualifying string based on a hash of concatenating the values of a given variable in the parent chain
 */
-Widget.prototype.getStateQualifier = function(name) {
+Widget.prototype.getStateQualifier = function(name,generateTransclusionFootprint) {
 	this.qualifiers = this.qualifiers || Object.create(null);
 	name = name || "transclusion";
 	if(this.qualifiers[name]) {
@@ -249,7 +273,12 @@ Widget.prototype.getStateQualifier = function(name) {
 			}
 			node = node.parentWidget;
 		}
-		var value = $tw.utils.hashString(output.join(""));
+		var value;
+		if(generateTransclusionFootprint) {
+			value = $tw.utils.hashString(output.join("")) + "_" + this.generateTransclusionFootprint();
+		} else {
+			value = $tw.utils.hashString(output.join(""));
+		}
 		this.qualifiers[name] = value;
 		return value;
 	}
