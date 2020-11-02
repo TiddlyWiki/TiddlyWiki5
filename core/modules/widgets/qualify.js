@@ -40,9 +40,10 @@ QualifyWidget.prototype.execute = function() {
 	// Get our parameters
 	this.qualifyName = this.getAttribute("name");
 	this.qualifyTitle = this.getAttribute("title");
+	this.qualifyTransclusionFootprint = this.getAttribute("footprint") === "yes"
 	// Set context variable
 	if(this.qualifyName) {
-		this.setVariable(this.qualifyName,this.qualifyTitle + "-" + this.getStateQualifier());
+		this.setVariable(this.qualifyName,this.qualifyTitle + "-" + this.getStateQualifier(undefined,this.qualifyTransclusionFootprint));
 	}
 	// Construct the child widgets
 	this.makeChildWidgets();
@@ -53,7 +54,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 QualifyWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.name || changedAttributes.title) {
+	if(changedAttributes.name || changedAttributes.title || changedAttributes.footprint) {
 		this.refreshSelf();
 		return true;
 	} else {
