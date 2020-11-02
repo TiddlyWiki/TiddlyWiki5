@@ -62,43 +62,67 @@ function parseFilterOperation(operators,filterString,p) {
 		else if(operator.operator === "") {
 			operator.operator = "title";
 		}
+		operator.operands = [];
+		function parseOperand(bracketType){
+		
+			switch (bracketType) {
+				case "{": // Curly brackets
+					operator.indirect = true;
+					nextBracketPos = filterString.indexOf("}",p);
+					break;
+				case "[": // Square brackets
+					nextBracketPos = filterString.indexOf("]",p);
+					break;
+				case "<": // Angle brackets
+					operator.variable = true;
+					nextBracketPos = filterString.indexOf(">",p);
+					break;
+				case "/": // regexp brackets
+					var rex = /^((?:[^\\\/]*|\\.)*)\/(?:\(([mygi]+)\))?/g,
+						rexMatch = rex.exec(filterString.substring(p));
+					if(rexMatch) {
+						operator.regexp = new RegExp(rexMatch[1], rexMatch[2]);
+	// DEPRECATION WARNING
+	console.log("WARNING: Filter",operator.operator,"has a deprecated regexp operand",operator.regexp);
+						nextBracketPos = p + rex.lastIndex - 1;
+					}
+					else {
+						throw "Unterminated regular expression in filter expression";
+					}
+					break;
+			}
 
-		p = nextBracketPos + 1;
-		switch (bracket) {
-			case "{": // Curly brackets
-				operator.indirect = true;
-				nextBracketPos = filterString.indexOf("}",p);
-				break;
-			case "[": // Square brackets
-				nextBracketPos = filterString.indexOf("]",p);
-				break;
-			case "<": // Angle brackets
-				operator.variable = true;
-				nextBracketPos = filterString.indexOf(">",p);
-				break;
-			case "/": // regexp brackets
-				var rex = /^((?:[^\\\/]*|\\.)*)\/(?:\(([mygi]+)\))?/g,
-					rexMatch = rex.exec(filterString.substring(p));
-				if(rexMatch) {
-					operator.regexp = new RegExp(rexMatch[1], rexMatch[2]);
-// DEPRECATION WARNING
-console.log("WARNING: Filter",operator.operator,"has a deprecated regexp operand",operator.regexp);
-					nextBracketPos = p + rex.lastIndex - 1;
+			if(nextBracketPos === -1) {
+				throw "Missing closing bracket in filter expression";
+			}
+			if(!operator.regexp) {
+				if(!operator.operand) {
+					operator.operand = filterString.substring(p,nextBracketPos);
 				}
-				else {
-					throw "Unterminated regular expression in filter expression";
-				}
-				break;
+				operator.operands.push(filterString.substring(p,nextBracketPos));
+				
+			}
+			p = nextBracketPos + 1;
 		}
-
-		if(nextBracketPos === -1) {
-			throw "Missing closing bracket in filter expression";
+		
+		p = nextBracketPos + 1;		
+		
+		parseOperand(bracket);
+		
+		while(filterString.charAt(p) === ",") {
+			p++;
+			//var match = /^,([\[\{<\/]).*/.exec(filterString.substring(p));
+			//if(match && 
+			var nextBracketPos = filterString.substring(p).search(/[\[\{<\/]/);
+			if(nextBracketPos !==  0) {
+				throw "Missing [ in filter expression";
+			} else {
+				nextBracketPos = p;
+				p++;
+				parseOperand(filterString.charAt(nextBracketPos));
+			}
 		}
-		if(!operator.regexp) {
-			operator.operand = filterString.substring(p,nextBracketPos);
-		}
-		p = nextBracketPos + 1;
-
+		
 		// Push this operator
 		operators.push(operator);
 	} while(filterString.charAt(p) !== "]");
