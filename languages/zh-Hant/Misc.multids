@@ -72,6 +72,7 @@ Shortcuts/Input/Down/Hint: 選擇下一個項目
 Shortcuts/Input/Tab-Left/Hint: 選擇上一個頁籤
 Shortcuts/Input/Tab-Right/Hint: 選擇下一個頁籤
 Shortcuts/Input/Up/Hint: 選擇前一個項目
+Shortcuts/SidebarLayout/Hint: 更改側邊欄版面
 SystemTiddler/Tooltip: 此為系統條目
 SystemTiddlers/Include/Prompt: 包括系統條目
 TagManager/Colour/Heading: 顏色
