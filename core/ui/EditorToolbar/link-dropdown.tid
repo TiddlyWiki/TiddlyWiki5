@@ -34,8 +34,8 @@ title: $:/core/ui/EditorToolbar/link-dropdown
 <$macrocall $name="keyboard-driven-input" tiddler=<<searchTiddler>> storeTitle=<<storeTitle>>
 		selectionStateTitle=<<searchListState>> refreshTitle=<<refreshTitle>> type="search" filterMinLength="1"
 		tag="input" focus="true" class="tc-popup-handle" inputCancelActions=<<cancel-search-actions>> 
-		inputAcceptActions=<<add-link-actions>> placeholder={{$:/language/Search/Search}} default="" 
-		configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]" />
+		inputAcceptActions=<<add-link-actions>> placeholder={{$:/language/Search/Search}} inputAcceptVariantActions=<<save-tiddler-actions>>
+		default="" configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]" />
 </$keyboard>
 </$keyboard>
 <$reveal tag="span" state=<<storeTitle>> type="nomatch" text="">
