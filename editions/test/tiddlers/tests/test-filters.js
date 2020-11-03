@@ -40,6 +40,9 @@ describe("Filter tests", function() {
 		expect($tw.wiki.parseFilter("[search: , : [operand],[operand2]]")).toEqual(
 			[ { prefix : '', operators : [ { operator : 'search', suffix : ' , : ', suffixes : [ [  ], [  ] ], operands: [ { text:'operand' }, { text:'operand2' } ] } ] } ]
 		);
+		expect($tw.wiki.parseFilter("[search: , : [oper,and],[operand2]]")).toEqual(
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ' , : ', suffixes : [ [  ], [  ] ], operands: [ { text:'oper,and' }, { text:'operand2' } ] } ] } ]
+		);
 		expect($tw.wiki.parseFilter("[[GettingStarted]replace:[operand],[operand2]]")).toEqual(
 			[ { prefix : '', operators : [ { operator : 'title', operands: [ { text:'GettingStarted' } ] },  { operator : 'replace', suffix : '', suffixes : [[]], operands: [ { text:'operand' }, { text:'operand2' }  ] } ] } ]
 		);
