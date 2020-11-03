@@ -51,7 +51,7 @@ $actions$
 <span class="tc-add-tag-name tc-small-gap-right">
 <$macrocall $name="keyboard-driven-input" tiddler=<<newTagNameTiddler>> storeTitle=<<storeTitle>> refreshTitle=<<refreshTitle>>
 		selectionStateTitle=<<tagSelectionState>> inputAcceptActions="""<$macrocall $name="add-tag-actions" actions=<<__actions__>>/>"""
-		inputCancelActions=<<clear-tags-actions>> tag="input" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}}
+		inputCancelActions=<<clear-tags-actions>> inputAcceptVariantActions=<<save-tiddler-actions>> tag="input" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}}
 		focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> 
 		focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}} filterMinLength={{$:/config/Tags/MinLength}} 
 		cancelPopups=<<cancelPopups>> configTiddlerFilter="[[$:/core/macros/tag-picker]]"/>
