@@ -51,8 +51,10 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 				self.invokeActionString(self.actions,self,event);
 			}
 			self.dispatchMessage(event);
-			event.preventDefault();
-			event.stopPropagation();
+			if(self.actions) {
+				event.preventDefault();
+				event.stopPropagation();
+			}
 			return true;
 		}
 		return false;
