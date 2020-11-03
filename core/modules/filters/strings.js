@@ -128,7 +128,11 @@ exports["search-replace"] = function(source,operator,options) {
 		if(title && (operator.operands.length > 1)) {
 			//Escape regexp characters if the operand is not a regular expression
 			searchTerm = isRegExp ? operator.operand : $tw.utils.escapeRegExp(operator.operand);
-			regExp = new RegExp(searchTerm,flags);
+			try {
+				regExp = new RegExp(searchTerm,flags);
+			} catch(ex) {
+				return ["RegExp error: " + ex];
+			}
 			results.push(
 				title.replace(regExp,operator.operands[1])
 			);
