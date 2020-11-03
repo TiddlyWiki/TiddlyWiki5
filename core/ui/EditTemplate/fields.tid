@@ -92,7 +92,7 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 <$macrocall $name="keyboard-driven-input" tiddler=<<newFieldNameTiddler>> storeTitle=<<storeTitle>> refreshTitle=<<refreshTitle>>
 		selectionStateTitle=<<searchListState>> tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}}
 		focusPopup=<<qualify "$:/state/popup/field-dropdown">> class="tc-edit-texteditor tc-popup-handle" tabindex={{$:/config/EditTabIndex}}
-		focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] ~[[false]] }}} cancelPopups="yes"
+		focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] ~[[false]] }}} cancelPopups="yes" inputAcceptVariantActions=<<save-tiddler-actions>>
 		configTiddlerFilter="[[$:/config/EditMode/fieldname-filter]]" inputCancelActions=<<cancel-search-actions>> />
 <$button popup=<<qualify "$:/state/popup/field-dropdown">> class="tc-btn-invisible tc-btn-dropdown tc-small-gap" tooltip={{$:/language/EditTemplate/Field/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Field/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>
 <$reveal state=<<qualify "$:/state/popup/field-dropdown">> type="nomatch" text="" default="">
