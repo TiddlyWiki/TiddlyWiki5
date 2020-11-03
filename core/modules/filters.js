@@ -63,7 +63,7 @@ function parseFilterOperation(operators,filterString,p) {
 			operator.operator = "title";
 		}
 		operator.operands = [];
-		function parseOperand(bracketType){
+		function parseOperand(bracketType) {
 			var operand = {};
 			switch (bracketType) {
 				case "{": // Curly brackets
@@ -103,9 +103,9 @@ function parseFilterOperation(operators,filterString,p) {
 		}
 		
 		p = nextBracketPos + 1;
-		
 		parseOperand(bracket);
 		
+		// Check for multiple operands
 		while(filterString.charAt(p) === ",") {
 			p++;
 			if(/^[\[\{<\/]/.test(filterString.substring(p))) {
@@ -170,7 +170,7 @@ exports.parseFilter = function(filterString) {
 			}
 			if(match[4] || match[5] || match[6]) { // Double quoted string, single quoted string or unquoted title
 				operation.operators.push(
-					{operator: "title", operands: [{text:match[4] || match[5] || match[6]}]}
+					{operator: "title", operands: [{text: match[4] || match[5] || match[6]}]}
 				);
 			}
 			results.push(operation);

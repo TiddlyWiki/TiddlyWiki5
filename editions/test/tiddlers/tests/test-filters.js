@@ -731,19 +731,6 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("[!sortsub:string<sort2>]",anchorWidget).join(",")).toBe("filter regexp test,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,$:/ShadowPlugin,has filter,hasList,TiddlerOne,one");
 		expect(wiki.filterTiddlers("[[TiddlerOne]] [[$:/TiddlerTwo]] [[Tiddler Three]] [[a fourth tiddler]] +[!sortsub:number<sort3>]",anchorWidget).join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne,a fourth tiddler");
 	});
-
-	it("should handle multiple operands for string-replace", function() {
-		var widget = require("$:/core/modules/widgets/widget.js");
-		var rootWidget = new widget.widget({ type:"widget", children:[ {type:"widget", children:[]} ] },
-										   { wiki:wiki, document:$tw.document});
-		rootWidget.makeChildWidgets();
-		var anchorWidget = rootWidget.children[0];
-		rootWidget.setVariable("var1","different");		
-		expect(wiki.filterTiddlers("[[Welcome to TiddlyWiki, a unique non-linear webpage.]string-replace[webpage],[notebook]]").join(",")).toBe("Welcome to TiddlyWiki, a unique non-linear notebook.");
-		expect(wiki.filterTiddlers("[[Welcome to TiddlyWiki, a unique non-linear notebook.]string-replace[unique],<var1>]",anchorWidget).join(",")).toBe("Welcome to TiddlyWiki, a different non-linear notebook.");
-		expect(wiki.filterTiddlers("[[Welcome to TiddlyWiki, a unique non-linear notebook.]string-replace[TiddlyWiki],{one}]",anchorWidget).join(",")).toBe("Welcome to This is the text of tiddler [[one]], a unique non-linear notebook.");
-	});
-
 }
 
 });
