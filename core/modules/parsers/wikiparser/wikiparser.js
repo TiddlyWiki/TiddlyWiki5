@@ -165,6 +165,17 @@ WikiParser.prototype.findNextMatch = function(rules,startPos) {
 	return matchingRule;
 };
 
+WikiParser.prototype.parseRule = function(rule) {
+	var start = this.pos;
+	var blocks = rule.parse();
+	for(var i=0; i<blocks.length; i++) {
+		var block = blocks[i];
+		if (block.start !== undefined) block.start = start;
+		if (block.end !== undefined) block.end = this.pos;
+	}
+	return blocks;
+};
+
 /*
 Parse any pragmas at the beginning of a block of parse text
 */
@@ -184,7 +195,7 @@ WikiParser.prototype.parsePragmas = function() {
 			break;
 		}
 		// Process the pragma rule
-		var subTree = nextMatch.rule.parse();
+		var subTree = this.parseRule(nextMatch.rule);
 		if(subTree.length > 0) {
 			// Quick hack; we only cope with a single parse tree node being returned, which is true at the moment
 			currentTreeBranch.push.apply(currentTreeBranch,subTree);
@@ -208,10 +219,13 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 	// Look for a block rule that applies at the current position
 	var nextMatch = this.findNextMatch(this.blockRules,this.pos);
 	if(nextMatch && nextMatch.matchIndex === this.pos) {
-		return nextMatch.rule.parse();
+		return this.parseRule(nextMatch.rule);
 	}
 	// Treat it as a paragraph if we didn't find a block rule
-	return [{type: "element", tag: "p", children: this.parseInlineRun(terminatorRegExp)}];
+	var start = this.pos;
+	var children = this.parseInlineRun(terminatorRegExp);
+	var end = this.pos;
+	return [{type: "element", tag: "p", children, start, end }];
 };
 
 /*
@@ -287,17 +301,17 @@ WikiParser.prototype.parseInlineRunUnterminated = function(options) {
 	while(this.pos < this.sourceLength && nextMatch) {
 		// Process the text preceding the run rule
 		if(nextMatch.matchIndex > this.pos) {
-			this.pushTextWidget(tree,this.source.substring(this.pos,nextMatch.matchIndex));
+			this.pushTextWidget(tree,this.source.substring(this.pos,nextMatch.matchIndex),this.pos,nextMatch.matchIndex);
 			this.pos = nextMatch.matchIndex;
 		}
 		// Process the run rule
-		tree.push.apply(tree,nextMatch.rule.parse());
+		tree.push.apply(tree,this.parseRule(nextMatch.rule));
 		// Look for the next run rule
 		nextMatch = this.findNextMatch(this.inlineRules,this.pos);
 	}
 	// Process the remaining text
 	if(this.pos < this.sourceLength) {
-		this.pushTextWidget(tree,this.source.substr(this.pos));
+		this.pushTextWidget(tree,this.source.substr(this.pos),this.pos,this.sourceLength);
 	}
 	this.pos = this.sourceLength;
 	return tree;
@@ -317,7 +331,7 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 		if(terminatorMatch) {
 			if(!inlineRuleMatch || inlineRuleMatch.matchIndex >= terminatorMatch.index) {
 				if(terminatorMatch.index > this.pos) {
-					this.pushTextWidget(tree,this.source.substring(this.pos,terminatorMatch.index));
+					this.pushTextWidget(tree,this.source.substring(this.pos,terminatorMatch.index),this.pos,terminatorMatch.index);
 				}
 				this.pos = terminatorMatch.index;
 				if(options.eatTerminator) {
@@ -330,11 +344,11 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 		if(inlineRuleMatch) {
 			// Preceding text
 			if(inlineRuleMatch.matchIndex > this.pos) {
-				this.pushTextWidget(tree,this.source.substring(this.pos,inlineRuleMatch.matchIndex));
+				this.pushTextWidget(tree,this.source.substring(this.pos,inlineRuleMatch.matchIndex),this.pos,inlineRuleMatch.matchIndex);
 				this.pos = inlineRuleMatch.matchIndex;
 			}
 			// Process the inline rule
-			tree.push.apply(tree,inlineRuleMatch.rule.parse());
+			tree.push.apply(tree,this.parseRule(inlineRuleMatch.rule));
 			// Look for the next inline rule
 			inlineRuleMatch = this.findNextMatch(this.inlineRules,this.pos);
 			// Look for the next terminator match
@@ -344,7 +358,7 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 	}
 	// Process the remaining text
 	if(this.pos < this.sourceLength) {
-		this.pushTextWidget(tree,this.source.substr(this.pos));
+		this.pushTextWidget(tree,this.source.substr(this.pos),this.pos,this.sourceLength);
 	}
 	this.pos = this.sourceLength;
 	return tree;
@@ -353,12 +367,12 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 /*
 Push a text widget onto an array, respecting the configTrimWhiteSpace setting
 */
-WikiParser.prototype.pushTextWidget = function(array,text) {
+WikiParser.prototype.pushTextWidget = function(array,text,start,end) {
 	if(this.configTrimWhiteSpace) {
 		text = $tw.utils.trim(text);
 	}
 	if(text) {
-		array.push({type: "text", text: text});		
+		array.push({type: "text", text: text, start: start, end: end});		
 	}
 };
 
