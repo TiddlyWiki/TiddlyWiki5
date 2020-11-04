@@ -6,7 +6,7 @@ title: $:/core/ui/EditTemplate
 <$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 <$action-deletetiddler $tiddler=<<newFieldNameTiddler>>/>
 <$action-deletetiddler $tiddler=<<newFieldValueTiddler>>/>
-<$action-sendmessage $message="tm-save-tiddler"/>
+<$action-sendmessage $message="tm-save-tiddler" $param=<<storyTiddler>>/>
 \end
 <div data-tiddler-title=<<currentTiddler>> data-tags={{!!tags}} class={{{ tc-tiddler-frame tc-tiddler-edit-frame [<currentTiddler>is[tiddler]then[tc-tiddler-exists]] [<currentTiddler>is[missing]!is[shadow]then[tc-tiddler-missing]] [<currentTiddler>is[shadow]then[tc-tiddler-exists tc-tiddler-shadow]] [<currentTiddler>is[system]then[tc-tiddler-system]] [{!!class}] [<currentTiddler>tags[]encodeuricomponent[]addprefix[tc-tagged-]] +[join[ ]] }}}>
 <$fieldmangler>
