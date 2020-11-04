@@ -1002,6 +1002,7 @@ exports.makeWidget = function(parser,options) {
 Make a widget tree for transclusion
 title: target tiddler title
 options: as for wiki.makeWidget() plus:
+options.textReference : flag to indicate whether title is a text reference
 options.field: optional field to transclude (defaults to "text")
 options.mode: transclusion mode "inline" or "block"
 options.children: optional array of children for the transclude widget
@@ -1026,12 +1027,24 @@ exports.makeTranscludeWidget = function(title,options) {
 			children: []},
 		parseTreeTransclude = {
 			type: "transclude",
-			attributes: {
-				tiddler: {
-					name: "tiddler",
-					type: "string",
-					value: title}},
-			isBlock: !options.parseAsInline};
+			attributes: {},
+			isBlock: !options.parseAsInline},
+			parseTreeTiddler;
+			
+	if(options.textReference) {
+		parseTreeTiddler = {
+			name: "tiddler",
+			type: "indirect",
+			textReference: title
+		}
+	} else {
+		parseTreeTiddler = {
+			name: "tiddler",
+			type: "string",
+			value: title
+		}
+	}
+	parseTreeTransclude.attributes.tiddler = parseTreeTiddler;
 	if(options.importVariables || options.importPageMacros) {
 		if(options.importVariables) {
 			parseTreeImportVariables.attributes.filter.value = options.importVariables;
