@@ -194,6 +194,17 @@ nav.tc-menubar .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 
 	<<set-sidebar-scrollable-top-if-hamburger>>
+	
+	<<if-no-sidebar """
+
+		.tc-sidebar-header {
+			min-height: 0;
+			padding-top: 0;
+			padding-bottom: 0;
+			transition: min-height {{$:/config/AnimationDuration}}ms ease-in-out, padding-top {{$:/config/AnimationDuration}}ms ease-in-out, padding-bottom {{$:/config/AnimationDuration}}ms ease-in-out;
+		}
+
+	""">>
 
 }
 
