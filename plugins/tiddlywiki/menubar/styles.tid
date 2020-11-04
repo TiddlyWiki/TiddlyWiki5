@@ -9,7 +9,7 @@ tags: [[$:/tags/Stylesheet]]
 <$reveal state="$:/config/plugins/menubar/MenuItems/Visibility/$:/plugins/tiddlywiki/menubar/items/hamburger" type="nomatch" text="hide">
 
 	.tc-sidebar-scrollable {
-		margin-top: 1.735em;
+		margin-top: 2em;
 	}
 
 </$reveal>
@@ -18,10 +18,10 @@ tags: [[$:/tags/Stylesheet]]
 \define set-sidebar-scrollable-top()
 <$reveal state="$:/state/popup/menubar/hamburger" type="match" text="yes">
 
-	<$set name="itemCount" value={{{ [all[tiddlers+shadows]tag[$:/tags/MenuBar]] -[all[tiddlers+shadows]prefix[$:/config/plugins/menubar/MenuItems/Visibility/]regexp:text[hide]removeprefix[$:/config/plugins/menubar/MenuItems/Visibility/]] +[count[]] }}}>
+	<$set name="itemCount" value={{{ [all[tiddlers+shadows]tag[$:/tags/MenuBar]] -[all[tiddlers+shadows]prefix[$:/config/plugins/menubar/MenuItems/Visibility/]regexp:text[hide]removeprefix[$:/config/plugins/menubar/MenuItems/Visibility/]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]] -[all[tiddlers+shadows]tag[$:/tags/TopRightBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/toprightbar]] +[count[]] }}}>
 
 		.tc-sidebar-scrollable {
-			margin-top: calc(<<itemCount>> * 1.735em);
+			margin-top: calc(<<itemCount>> * 2em);
 		}
 
 	</$set>
