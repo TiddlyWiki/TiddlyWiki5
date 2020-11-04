@@ -1,0 +1,20 @@
+{
+	"tiddlers": [
+		{
+			"file": "flexsearch.node.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/search/flexsearch.js",
+				"module-type": "library"
+			},
+			"prefix": "(function() {\n",
+			"suffix": "\n}).call(module);\n"
+		},{
+			"file": "LICENSE",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/search/flexsearch/license"
+			}
+		}
+	]
+}

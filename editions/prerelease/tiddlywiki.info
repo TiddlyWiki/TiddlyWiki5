@@ -16,7 +16,8 @@
 		"tiddlywiki/codemirror",
 		"tiddlywiki/comments",
 		"tiddlywiki/menubar",
-		"tiddlywiki/jszip"
+		"tiddlywiki/jszip",
+		"tiddlywiki/search"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
