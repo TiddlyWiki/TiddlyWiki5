@@ -180,6 +180,10 @@ nav.tc-menubar .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
 		display: none;
 	}
 
+	nav.tc-menubar .tc-menubar-item .tc-show-sidebar-btn svg.tc-image-chevron-left, nav.tc-menubar .tc-menubar-item .tc-hide-sidebar-btn svg.tc-image-chevron-right {
+		transform: rotate(-90deg);
+	}
+
 }
 
 @media (min-width: <<breakpoint-plus-one>>) {
