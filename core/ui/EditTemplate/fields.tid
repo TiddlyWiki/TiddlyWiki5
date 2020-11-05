@@ -67,7 +67,9 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 <td class="tc-edit-field-name">
 <$text text=<<currentField>>/>:</td>
 <td class="tc-edit-field-value">
+<$keyboard key="((delete-field))" actions="""<$action-deletefield $field=<<currentField>>/><$set name="currentTiddlerCSSescaped" value={{{ [<currentTiddler>escapecss[]] }}}><$action-sendmessage $message="tm-focus-selector" $param=<<current-tiddler-new-field-selector>>/></$set>""">
 <$edit-text tiddler=<<currentTiddler>> field=<<currentField>> placeholder={{$:/language/EditTemplate/Fields/Add/Value/Placeholder}} tabindex={{$:/config/EditTabIndex}} cancelPopups="yes"/>
+</$keyboard>
 </td>
 <td class="tc-edit-field-remove">
 <$button class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Field/Remove/Hint}} aria-label={{$:/language/EditTemplate/Field/Remove/Caption}}>
