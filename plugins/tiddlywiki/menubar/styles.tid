@@ -5,6 +5,10 @@ tags: [[$:/tags/Stylesheet]]
 <$text text={{{ [{$:/config/plugins/menubar/breakpoint}removesuffix[px]add[1]addsuffix[px]] }}} />
 \end
 
+\define sidebarbreakpoint-minus-one()
+<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] }}} />
+\end
+
 \define set-sidebar-scrollable-top-if-hamburger()
 <$reveal state="$:/config/plugins/menubar/MenuItems/Visibility/$:/plugins/tiddlywiki/menubar/items/hamburger" type="nomatch" text="hide">
 
@@ -195,7 +199,7 @@ nav.tc-menubar .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
 
 }
 
-@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
 	<<set-sidebar-scrollable-top-if-hamburger>>
 	
