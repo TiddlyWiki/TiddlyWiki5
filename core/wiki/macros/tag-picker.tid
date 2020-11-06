@@ -23,6 +23,9 @@ $actions$
 \define tag-button(actions,selectedClass)
 <$button class="tc-btn-invisible $selectedClass$" tag="a" tooltip={{$:/language/EditTemplate/Tags/Add/Button/Hint}}>
 <$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
+<$set name="currentTiddlerCSSEscaped" value={{{ [<storyTiddler>escapecss[]] }}}>
+<$action-sendmessage $message="tm-focus-selector" $param=<<get-tagpicker-focus-selector>> preventScroll="true"/>
+</$set>
 <<delete-tag-state-tiddlers>>
 $actions$
 <$macrocall $name="tag-pill" tag=<<tag>>/>
