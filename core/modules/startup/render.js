@@ -21,7 +21,7 @@ exports.synchronous = true;
 // Default story and history lists
 var PAGE_TITLE_TITLE = "$:/core/wiki/title";
 var PAGE_STYLESHEET_TITLE = "$:/core/ui/PageStylesheet";
-var PAGE_TEMPLATE_TITLE = "$:/core/ui/PageTemplate";
+var PAGE_TEMPLATE_TITLE = "$:/core/ui/RootTemplate";
 
 // Time (in ms) that we defer refreshing changes to draft tiddlers
 var DRAFT_TIDDLER_TIMEOUT_TITLE = "$:/config/Drafts/TypingTimeout";
@@ -52,7 +52,7 @@ exports.startup = function() {
 	}));
 	// Display the $:/core/ui/PageTemplate tiddler to kick off the display
 	$tw.perf.report("mainRender",function() {
-		$tw.pageWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TEMPLATE_TITLE,{document: document, parentWidget: $tw.rootWidget});
+		$tw.pageWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TEMPLATE_TITLE,{document: document, parentWidget: $tw.rootWidget, recursionMarker: "no"});
 		$tw.pageContainer = document.createElement("div");
 		$tw.utils.addClass($tw.pageContainer,"tc-page-container-wrapper");
 		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
