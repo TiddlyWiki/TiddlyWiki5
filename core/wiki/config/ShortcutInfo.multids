@@ -6,6 +6,7 @@ advanced-search-sidebar: {{$:/language/Shortcuts/Input/AdvancedSearch/Hint}}
 bold: {{$:/language/Buttons/Bold/Hint}}
 cancel-edit-tiddler: {{$:/language/Buttons/Cancel/Hint}}
 change-sidebar-layout: {{$:/language/Shortcuts/SidebarLayout/Hint}}
+delete-field: {{$:/language/EditTemplate/Field/Remove/Hint}}
 excise: {{$:/language/Buttons/Excise/Hint}}
 heading-1: {{$:/language/Buttons/Heading1/Hint}}
 heading-2: {{$:/language/Buttons/Heading2/Hint}}
