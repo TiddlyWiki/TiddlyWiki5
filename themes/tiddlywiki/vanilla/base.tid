@@ -53,6 +53,10 @@ $else$
 	-webkit-box-sizing: border-box;
 }
 
+input[type="search"] {
+  outline-offset: initial;
+}
+
 html button {
 	line-height: 1.2;
 	color: <<colour button-foreground>>;
