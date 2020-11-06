@@ -10,4 +10,4 @@ title: $:/core/ui/TiddlerInfo
 </div>
 </div>
 
-<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/TiddlerInfo]!has[draft.of]]" default={{$:/config/TiddlerInfo/Default}} explicitState={{{ [[$:/state/tab/tiddler-info/]addsuffix<currentTiddler>] }}}/>
+<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/TiddlerInfo]!has[draft.of]]" default={{$:/config/TiddlerInfo/Default}}/>
