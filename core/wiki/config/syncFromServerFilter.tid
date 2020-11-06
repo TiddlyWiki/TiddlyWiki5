@@ -1,0 +1,7 @@
+created: 20201106181249087
+modified: 20201106181653589
+tags: 
+title: $:/config/syncFromServerFilter
+type: text/vnd.tiddlywiki
+
+[is[tiddler]] -[prefix[$:/StoryList]]
