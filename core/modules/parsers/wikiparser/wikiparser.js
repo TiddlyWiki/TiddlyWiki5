@@ -166,12 +166,16 @@ WikiParser.prototype.findNextMatch = function(rules,startPos) {
 };
 
 WikiParser.prototype.parseRule = function(rule) {
-	var start = this.pos;
-	var blocks = rule.parse();
+	var start = this.pos,
+		blocks = rule.parse();
 	for(var i=0; i<blocks.length; i++) {
 		var block = blocks[i];
-		if (block.start !== undefined) block.start = start;
-		if (block.end !== undefined) block.end = this.pos;
+		if(block.start !== undefined) {
+			block.start = start;
+		}
+		if(block.end !== undefined) {
+			block.end = this.pos;
+		}
 	}
 	return blocks;
 };
