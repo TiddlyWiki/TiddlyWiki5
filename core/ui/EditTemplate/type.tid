@@ -3,7 +3,7 @@ tags: $:/tags/EditTemplate
 first-search-filter: [all[shadows+tiddlers]prefix[$:/language/Docs/Types/]sort[description]sort[group-sort]removeprefix[$:/language/Docs/Types/]search<userInput>]
 
 \define lingo-base() $:/language/EditTemplate/
-\define input-cancel-actions() <$list filter="[<storeTitle>get[text]]" emptyMessage="""<$action-sendmessage $message="tm-cancel-tiddler"/>"""><$action-deletetiddler $filter="[<storeTitle>] [<refreshTitle>] [<selectionStateTitle>]"/></$list>
+\define input-cancel-actions() <$list filter="[<storeTitle>get[text]]" emptyMessage="""<$action-sendmessage $message="tm-cancel-tiddler"/>"""><$action-sendmessage $message="tm-remove-field" $param="type"/><$action-deletetiddler $filter="[<storeTitle>] [<refreshTitle>] [<selectionStateTitle>]"/></$list>
 \whitespace trim
 <$vars storeTitle=<<qualify "$:/temp/type-search/input">> refreshTitle=<<qualify "$:/temp/type-search/refresh">> selectionStateTitle=<<qualify "$:/temp/type-search/selected-item">>>
 <div class="tc-edit-type-selector-wrapper">
