@@ -61,8 +61,8 @@ TranscludeWidget.prototype.execute = function() {
 						}),
 		parseTreeNodes = parser ? parser.tree : this.parseTreeNode.children;
 	// Set context variables for recursion detection
+	var recursionMarker = this.makeRecursionMarker();
 	if(this.recursionMarker === "yes") {
-		var recursionMarker = this.makeRecursionMarker();
 		this.setVariable("transclusion",recursionMarker);
 	}
 	// Check for recursion
