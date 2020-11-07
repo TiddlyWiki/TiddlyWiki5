@@ -1,5 +1,6 @@
 title: $:/core/ui/ControlPanel/Layout
 tags: $:/tags/ControlPanel/Appearance
+caption: {{$:/language/ControlPanel/Layout/Caption}}
 
 <$linkcatcher to="$:/layout">
 <div class="tc-chooser">
