@@ -1,0 +1,20 @@
+created: 20201107154352695
+modified: 20201107155030228
+title: toggle Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 """[list[Days of the Week]] +[toggle[Wednesday]]""">>
+
+To toggle a tag in a tiddler:
+
+```
+<$action-listops  $tiddler="target" $tags="+[toggle[done]]" />
+```
+
+To toggle a title in a field:
+
+```
+<$action-listops $tiddler="target" $field="my-field" $subfilter="+[toggle[done]]" />
+```
