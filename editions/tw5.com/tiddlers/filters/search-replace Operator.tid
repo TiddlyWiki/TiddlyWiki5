@@ -1,0 +1,28 @@
+caption: search-replace
+created: 20201107111139011
+modified: 20201107122008854
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input titles with the search string replaced with the replacement string
+op-parameter: the <<.op search-replace>> operator requires 2 parameters, see below for details
+op-purpose: returns each item in the list, replacing within each title the string specified by the first parameter with the second parameter
+op-suffix: the <<.op search-replace>> operator uses a rich suffix, see below for details
+tags: [[Filter Operators]] [[String Operators]]
+title: search-replace Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.23">>
+
+The <<.op search-replace>> operator uses an extended syntax that allows for multiple suffixes and parameters to be passed:
+
+```
+[search-replace:<flag list>:<regexp-mode>[<search-term>],[<replacement>]]
+```
+
+* ''flag-list'': ''g'' for global mode to replace all matches, ''i'' for case-insensitive mode, "gi" for both. (optional)
+* ''regexp-mode'': ''regexp'' to treat the first parameter as a regular expression (optional).
+* ''search-term'': string or regular expression that should be replaced
+* ''replacement'': string that should replace the search-term
+
+<<.tip "Either [[parameter|Filter Parameter]] can be a string, a text reference or a variable">>
+
+<<.operator-examples "search-replace">>
