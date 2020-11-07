@@ -1004,7 +1004,7 @@ title: target tiddler title
 options: as for wiki.makeWidget() plus:
 options.field: optional field to transclude (defaults to "text")
 options.mode: transclusion mode "inline" or "block"
-options.recursionMarker : optional flag to set a recursion marker, defaults to "no"
+options.recursionMarker : optional flag to set a recursion marker, defaults to "yes"
 options.children: optional array of children for the transclude widget
 options.importVariables: optional importvariables filter string for macros to be included
 options.importPageMacros: optional boolean; if true, equivalent to passing "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]" to options.importVariables
@@ -1031,7 +1031,7 @@ exports.makeTranscludeWidget = function(title,options) {
 				recursionMarker: {
 					name: "recursionMarker",
 					type: "string",
-					value: options.recursionMarker
+					value: options.recursionMarker || "yes"
 					},
 				tiddler: {
 					name: "tiddler",
