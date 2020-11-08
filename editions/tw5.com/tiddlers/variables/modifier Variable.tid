@@ -24,3 +24,11 @@ The variable contains a string that identifies the keys:
 |ctrl+alt+shift |ctrl-alt-shift |
 |meta+ctrl+alt+shift |meta-ctrl-alt-shift |
 |no modifier (normal click / drag) |normal |
+
+<<.tip """Some operating systems may intercept the ''meta'' key so it is never detected""">>
+
+<$button actions="""<$action-setfield $tiddler="$:/temp/test-modifier-keys" text=<<modifier>>/>""">Test modifier keys here</$button>
+
+!!! Modifier keys held while clicking the button above:
+
+{{$:/temp/test-modifier-keys}}
