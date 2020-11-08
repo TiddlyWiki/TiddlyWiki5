@@ -5,6 +5,41 @@ tags: [[$:/tags/Stylesheet]]
 <$text text={{{ [{$:/config/plugins/menubar/breakpoint}removesuffix[px]add[1]addsuffix[px]] }}} />
 \end
 
+\define sidebarbreakpoint-minus-one()
+<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] }}} />
+\end
+
+\define set-sidebar-scrollable-top-if-hamburger()
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/MenuBar]] -[all[tiddlers+shadows]prefix[$:/config/plugins/menubar/MenuItems/Visibility/]regexp:text[hide]removeprefix[$:/config/plugins/menubar/MenuItems/Visibility/]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]] -[all[tiddlers+shadows]tag[$:/tags/TopRightBar]limit[1]then[$:/plugins/tiddlywiki/menubar/items/toprightbar]] -$:/plugins/tiddlywiki/menubar/items/hamburger +[limit[1]]">
+
+	.tc-sidebar-scrollable {
+		margin-top: 2em;
+	}
+
+</$list>
+\end
+
+\define set-sidebar-scrollable-top()
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/MenuBar]] -[all[tiddlers+shadows]prefix[$:/config/plugins/menubar/MenuItems/Visibility/]regexp:text[hide]removeprefix[$:/config/plugins/menubar/MenuItems/Visibility/]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]] -[all[tiddlers+shadows]tag[$:/tags/TopRightBar]limit[1]then[$:/plugins/tiddlywiki/menubar/items/toprightbar]] +[limit[1]]">
+
+	.tc-sidebar-scrollable {
+		margin-top: 2em;
+	}
+
+</$list>
+<$reveal state="$:/state/popup/menubar/hamburger" type="match" text="yes">
+
+	<$set name="itemCount" value={{{ [all[tiddlers+shadows]tag[$:/tags/MenuBar]] -[all[tiddlers+shadows]prefix[$:/config/plugins/menubar/MenuItems/Visibility/]regexp:text[hide]removeprefix[$:/config/plugins/menubar/MenuItems/Visibility/]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]] -[all[tiddlers+shadows]tag[$:/tags/TopRightBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/toprightbar]] +[count[]] }}}>
+
+		.tc-sidebar-scrollable {
+			margin-top: calc(<<itemCount>> * 2em);
+		}
+
+	</$set>
+
+</$reveal>
+\end
+
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
 nav.tc-menubar {
@@ -156,6 +191,10 @@ nav.tc-menubar .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
 		display: none;
 	}
 
+	nav.tc-menubar .tc-menubar-item .tc-show-sidebar-btn svg.tc-image-chevron-left, nav.tc-menubar .tc-menubar-item .tc-hide-sidebar-btn svg.tc-image-chevron-right {
+		transform: rotate(-90deg);
+	}
+
 }
 
 @media (min-width: <<breakpoint-plus-one>>) {
@@ -167,4 +206,25 @@ nav.tc-menubar .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
 
 }
 
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
+	<<set-sidebar-scrollable-top-if-hamburger>>
+	
+	<<if-no-sidebar """
+
+		.tc-sidebar-header {
+			min-height: 0;
+			padding-top: 0;
+			padding-bottom: 0;
+			transition: min-height {{$:/config/AnimationDuration}}ms ease-in-out, padding-top {{$:/config/AnimationDuration}}ms ease-in-out, padding-bottom {{$:/config/AnimationDuration}}ms ease-in-out;
+		}
+
+	""">>
+
+}
+
+@media (max-width: {{$:/config/plugins/menubar/breakpoint}}) {
+
+	<<set-sidebar-scrollable-top>>
+
+}

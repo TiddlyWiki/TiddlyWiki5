@@ -25,6 +25,7 @@ Encryption/SetPassword: 设定密码
 Error/Caption: 错误
 Error/EditConflict: 服务器上的文件已更改
 Error/Filter: 筛选器错误
+Error/FilterRunPrefix: 筛选器错误：筛选器 run 的未知首码
 Error/FilterSyntax: 筛选器运算式中的语法错误
 Error/FormatFilterOperator: 筛选器错误：`format` 筛选器运算符的未知尾码
 Error/IsFilterOperator: 筛选器错误︰'is' 筛选器运算符的未知操作数
@@ -65,11 +66,13 @@ PluginReloadWarning: 请保存 {{$:/core/ui/Buttons/save-wiki}} 并刷新页面 
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 Shortcuts/Input/Accept/Hint: 接受选取的项目
 Shortcuts/Input/AcceptVariant/Hint: 接受选取项目 (变种)
+Shortcuts/Input/AdvancedSearch/Hint: 从侧边栏搜寻字段内打开[[进阶搜寻|$:/AdvancedSearch]]面板
 Shortcuts/Input/Cancel/Hint: 清除输入字段
 Shortcuts/Input/Down/Hint: 选择下一个项目
 Shortcuts/Input/Tab-Left/Hint: 选择上一个页签
 Shortcuts/Input/Tab-Right/Hint: 选择下一个页签
 Shortcuts/Input/Up/Hint: 选择前一个项目
+Shortcuts/SidebarLayout/Hint: 更改侧边栏布局
 SystemTiddler/Tooltip: 此为系统条目
 SystemTiddlers/Include/Prompt: 包括系统条目
 TagManager/Colour/Heading: 颜色

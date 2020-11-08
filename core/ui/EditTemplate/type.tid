@@ -1,13 +1,16 @@
 title: $:/core/ui/EditTemplate/type
 tags: $:/tags/EditTemplate
+first-search-filter: [all[shadows+tiddlers]prefix[$:/language/Docs/Types/]sort[description]sort[group-sort]removeprefix[$:/language/Docs/Types/]search<userInput>]
 
 \define lingo-base() $:/language/EditTemplate/
+\define input-cancel-actions() <$list filter="[<storeTitle>get[text]] [<currentTiddler>get[type]] +[limit[1]]" emptyMessage="""<$action-sendmessage $message="tm-cancel-tiddler"/>"""><$action-sendmessage $message="tm-remove-field" $param="type"/><$action-deletetiddler $filter="[<storeTitle>] [<refreshTitle>] [<selectionStateTitle>]"/></$list>
 \whitespace trim
+<$vars storeTitle=<<qualify "$:/temp/type-search/input">> refreshTitle=<<qualify "$:/temp/type-search/refresh">> selectionStateTitle=<<qualify "$:/temp/type-search/selected-item">>>
 <div class="tc-edit-type-selector-wrapper">
-<em class="tc-edit"><<lingo Type/Prompt>></em>&nbsp;&nbsp;
+<em class="tc-edit tc-big-gap-right"><<lingo Type/Prompt>></em>
 <div class="tc-type-selector-dropdown-wrapper">
 <div class="tc-type-selector"><$fieldmangler>
-<$edit-text field="type" tag="input" default="" placeholder={{$:/language/EditTemplate/Type/Placeholder}} focusPopup=<<qualify "$:/state/popup/type-dropdown">> class="tc-edit-typeeditor tc-edit-texteditor tc-popup-handle" tabindex={{$:/config/EditTabIndex}} focus={{{ [{$:/config/AutoFocus}match[type]then[true]] ~[[false]] }}} cancelPopups="yes"/>&nbsp;<$button popup=<<qualify "$:/state/popup/type-dropdown">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Type/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Type/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>&nbsp;<$button message="tm-remove-field" param="type" class="tc-btn-invisible tc-btn-icon" tooltip={{$:/language/EditTemplate/Type/Delete/Hint}} aria-label={{$:/language/EditTemplate/Type/Delete/Caption}}>{{$:/core/images/delete-button}}</$button>
+<$macrocall $name="keyboard-driven-input" tiddler=<<currentTiddler>> storeTitle=<<storeTitle>> refreshTitle=<<refreshTitle>> selectionStateTitle=<<selectionStateTitle>> field="type" tag="input" default="" placeholder={{$:/language/EditTemplate/Type/Placeholder}} focusPopup=<<qualify "$:/state/popup/type-dropdown">> class="tc-edit-typeeditor tc-edit-texteditor tc-popup-handle" tabindex={{$:/config/EditTabIndex}} focus={{{ [{$:/config/AutoFocus}match[type]then[true]] ~[[false]] }}} cancelPopups="yes" configTiddlerFilter="[[$:/core/ui/EditTemplate/type]]" inputCancelActions=<<input-cancel-actions>>/><$button popup=<<qualify "$:/state/popup/type-dropdown">> class="tc-btn-invisible tc-btn-dropdown tc-small-gap" tooltip={{$:/language/EditTemplate/Type/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Type/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button><$button message="tm-remove-field" param="type" class="tc-btn-invisible tc-btn-icon" tooltip={{$:/language/EditTemplate/Type/Delete/Hint}} aria-label={{$:/language/EditTemplate/Type/Delete/Caption}}>{{$:/core/images/delete-button}}<$action-deletetiddler $filter="[<storeTitle>] [<refreshTitle>] [<selectionStateTitle>]"/></$button>
 </$fieldmangler></div>
 
 <div class="tc-block-dropdown-wrapper">
@@ -19,8 +22,10 @@ tags: $:/tags/EditTemplate
 <div class="tc-dropdown-item">
 <$text text={{!!group}}/>
 </div>
-<$list filter="[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]group{!!group}] +[sort[description]]"><$link to={{!!name}}><$view field="description"/> (<$view field="name"/>)</$link>
+<$set name="userInput" value={{{ [<storeTitle>get[text]] }}}>
+<$list filter="[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]group{!!group}] +[sort[description]] +[removeprefix[$:/language/Docs/Types/]] +[search<userInput>]"><span class={{{ [<currentTiddler>addsuffix[-primaryList]] -[<selectionStateTitle>get[text]] +[then[]else[tc-list-item-selected]] }}}><$link to={{{ [<currentTiddler>addprefix[$:/language/Docs/Types/]get[name]] }}}><$view tiddler={{{ [<currentTiddler>addprefix[$:/language/Docs/Types/]] }}} field="description"/> (<$view tiddler={{{ [<currentTiddler>addprefix[$:/language/Docs/Types/]] }}} field="name"/>)</$link></span>
 </$list>
+</$set>
 </$list>
 </$linkcatcher>
 </div>
@@ -29,3 +34,4 @@ tags: $:/tags/EditTemplate
 </div>
 </div>
 </div>
+</$vars>

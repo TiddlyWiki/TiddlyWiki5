@@ -25,6 +25,7 @@ Encryption/SetPassword: 設定密碼
 Error/Caption: 錯誤
 Error/EditConflict: 伺服器上的檔案已更改
 Error/Filter: 篩選器錯誤
+Error/FilterRunPrefix: 篩選器錯誤：篩選器 run 的未知首碼
 Error/FilterSyntax: 篩選器運算式中的語法錯誤
 Error/FormatFilterOperator: 篩選器錯誤：`format` 篩選器運算子的未知尾碼
 Error/IsFilterOperator: 篩選器錯誤︰'is' 篩選器運算子的未知運算元
@@ -65,11 +66,13 @@ PluginReloadWarning: 請儲存 {{$:/core/ui/Buttons/save-wiki}} 並刷新頁面 
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 Shortcuts/Input/Accept/Hint: 接受選取的項目
 Shortcuts/Input/AcceptVariant/Hint: 接受選取項目 (變種)
+Shortcuts/Input/AdvancedSearch/Hint: 從側邊欄搜尋欄位內開啟[[進階搜尋|$:/AdvancedSearch]]面板
 Shortcuts/Input/Cancel/Hint: 清除輸入欄位
 Shortcuts/Input/Down/Hint: 選擇下一個項目
 Shortcuts/Input/Tab-Left/Hint: 選擇上一個頁籤
 Shortcuts/Input/Tab-Right/Hint: 選擇下一個頁籤
 Shortcuts/Input/Up/Hint: 選擇前一個項目
+Shortcuts/SidebarLayout/Hint: 更改側邊欄版面
 SystemTiddler/Tooltip: 此為系統條目
 SystemTiddlers/Include/Prompt: 包括系統條目
 TagManager/Colour/Heading: 顏色

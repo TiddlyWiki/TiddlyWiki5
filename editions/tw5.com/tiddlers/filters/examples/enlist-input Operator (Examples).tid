@@ -1,0 +1,10 @@
+created: 20201102220519567
+modified: 20201103090622475
+tags: [[enlist-input Operator]] [[Operator Examples]]
+title: enlist-input Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[Days of the Week]get[list]enlist-input[]]">>
+Contrast with: <<.operator-example 2 "[[Days of the Week]get[list]]">>
+<<.operator-example 3 "'HelloThere GettingStarted [[Customise TiddlyWiki]]' +[enlist-input[]]">>
+Contrast with: <<.operator-example 4 "'HelloThere GettingStarted [[Customise TiddlyWiki]]'">>

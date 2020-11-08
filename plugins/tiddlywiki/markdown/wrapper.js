@@ -119,7 +119,8 @@ function convertNodes(remarkableTree, isStartOfInline) {
 					// External link
 					var attributes = {
 						class: { type: "string", value: "tc-tiddlylink-external" },
-						href: { type: "string", value: currentNode.href }
+						href: { type: "string", value: currentNode.href },
+						rel: { type: "string", value: "noopener noreferrer" }
 					};
 					if (pluginOpts.linkNewWindow) {
 						attributes.target = { type: "string", value: "_blank" };

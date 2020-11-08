@@ -1,0 +1,13 @@
+caption: toggle
+created: 20201107153758990
+modified: 20201107154300086
+op-input: a list of items
+op-output: the input list with the title  <<.place R>> toggled
+op-parameter: an item to toggle in the input list
+op-parameter-name: R
+op-purpose: toggle the title specified in the operand in the input
+tags: [[Filter Operators]] [[Listops Operators]] [[Order Operators]]
+title: toggle Operator
+type: text/vnd.tiddlywiki
+
+<<.operator-examples "toggle">>

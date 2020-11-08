@@ -62,6 +62,11 @@ NavigatorWidget.prototype.execute = function() {
 	this.historyTitle = this.getAttribute("history");
 	this.setVariable("tv-story-list",this.storyTitle);
 	this.setVariable("tv-history-list",this.historyTitle);
+	this.story = new $tw.Story({
+		wiki: this.wiki,
+		storyTitle: this.storyTitle,
+		historyTitle: this.historyTitle
+	});
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
@@ -123,7 +128,7 @@ NavigatorWidget.prototype.replaceFirstTitleInStory = function(storyList,oldTitle
 
 NavigatorWidget.prototype.addToStory = function(title,fromTitle) {
 	if(this.storyTitle) {
-		this.wiki.addToStory(title,fromTitle,this.storyTitle,{
+		this.story.addToStory(title,fromTitle,this.storyTitle,{
 			openLinkFromInsideRiver: this.getAttribute("openLinkFromInsideRiver","top"),
 			openLinkFromOutsideRiver: this.getAttribute("openLinkFromOutsideRiver","top")
 		});
@@ -136,7 +141,7 @@ title: a title string or an array of title strings
 fromPageRect: page coordinates of the origin of the navigation
 */
 NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
-	this.wiki.addToHistory(title,fromPageRect,this.historyTitle);
+	this.story.addToHistory(title,fromPageRect,this.historyTitle);
 };
 
 /*
@@ -558,10 +563,14 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	$tw.utils.each(importData.tiddlers,function(tiddlerFields) {
 		var title = tiddlerFields.title;
 		if(title && importTiddler && importTiddler.fields["selection-" + title] !== "unchecked") {
-			var tiddler = new $tw.Tiddler(tiddlerFields);
+			if($tw.utils.hop(importTiddler.fields,["rename-" + title])) {
+				var tiddler = new $tw.Tiddler(tiddlerFields,{title : importTiddler.fields["rename-" + title]});
+			} else {
+				var tiddler = new $tw.Tiddler(tiddlerFields);
+			}
 			tiddler = $tw.hooks.invokeHook("th-importing-tiddler",tiddler);
 			self.wiki.addTiddler(tiddler);
-			importReport.push("# [[" + tiddlerFields.title + "]]");
+			importReport.push("# [[" + tiddler.fields.title + "]]");
 		}
 	});
 	// Replace the $:/Import tiddler with an import report

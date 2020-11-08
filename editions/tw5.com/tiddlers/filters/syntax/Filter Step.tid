@@ -1,5 +1,5 @@
 created: 20150124182127000
-modified: 20150124191051000
+modified: 20201103111044922
 tags: [[Filter Syntax]]
 title: Filter Step
 type: text/vnd.tiddlywiki
@@ -18,4 +18,6 @@ The step's <<.def operator>> is drawn from a list of [[predefined keywords|Filte
 
 The <<.def suffix>> is additional text, often the name of a [[field|TiddlerFields]], that extends the meaning of certain operators.
 
-Many steps require an explicit <<.def parameter>> value, also known as an <<.def operand>>, that further defines what the step is to do.
+Many steps require an explicit <<.def parameter>> value, also known as an <<.def operand>>, that further defines what the step is to do. 
+
+<<.from-version "5.1.23">> Some steps accept multiple parameters which are separated by a ` , ` character.

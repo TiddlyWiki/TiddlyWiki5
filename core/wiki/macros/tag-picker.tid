@@ -3,6 +3,8 @@ tags: $:/tags/Macro
 first-search-filter: [tags[]!is[system]search:title<userInput>sort[]]
 second-search-filter: [tags[]is[system]search:title<userInput>sort[]]
 
+\define get-tagpicker-focus-selector() [data-tiddler-title="$(currentTiddlerCSSEscaped)$"] .tc-add-tag-name input
+
 \define delete-tag-state-tiddlers() <$action-deletetiddler $filter="[<newTagNameTiddler>] [<storeTitle>] [<tagSelectionState>]"/>
 
 \define add-tag-actions(actions)
@@ -21,16 +23,27 @@ $actions$
 \define tag-button(actions,selectedClass)
 <$button class="tc-btn-invisible $selectedClass$" tag="a" tooltip={{$:/language/EditTemplate/Tags/Add/Button/Hint}}>
 <$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
+<$set name="currentTiddlerCSSEscaped" value={{{ [<storyTiddler>escapecss[]] }}}>
+<$action-sendmessage $message="tm-focus-selector" $param=<<get-tagpicker-focus-selector>> preventScroll="true"/>
+</$set>
 <<delete-tag-state-tiddlers>>
 $actions$
 <$macrocall $name="tag-pill" tag=<<tag>>/>
 </$button>
 \end
 
-\define clear-tags-actions()
-<$list filter="[<__storeTitle__>has[text]] [<__tiddler__>has[text]]" variable="ignore" emptyMessage="""<<delete-tag-state-tiddlers>><$action-sendmessage $message="tm-cancel-tiddler"/>""">
+\define clear-tags-actions-inner()
+<$list filter="[<storeTitle>has[text]] [<newTagNameTiddler>has[text]]" variable="ignore" emptyMessage="""<<delete-tag-state-tiddlers>><$action-sendmessage $message="tm-cancel-tiddler"/>""">
 <<delete-tag-state-tiddlers>>
 </$list>
+\end
+
+\define clear-tags-actions()
+<$set name="userInput" value={{{ [<storeTitle>get[text]] }}}>
+<$list filter="[<newTagNameTiddler>get[text]!match<userInput>]" emptyMessage="""<<clear-tags-actions-inner>>""">
+<$action-setfield $tiddler=<<newTagNameTiddler>> text=<<userInput>>/><$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
+</$list>
+</$set>
 \end
 
 \define tag-picker-inner(actions)
@@ -38,19 +51,21 @@ $actions$
 <$vars tagSelectionState=<<qualify "$:/state/selected-tag">> storeTitle=<<qualify "$:/temp/NewTagName/input">> refreshTitle=<<qualify "$:/temp/NewTagName/refresh">> nonSystemTagsFilter="[tags[]!is[system]search:title<userInput>sort[]]" systemTagsFilter="[tags[]is[system]search:title<userInput>sort[]]">
 <div class="tc-edit-add-tag">
 <div>
-<span class="tc-add-tag-name">
+<span class="tc-add-tag-name tc-small-gap-right">
 <$macrocall $name="keyboard-driven-input" tiddler=<<newTagNameTiddler>> storeTitle=<<storeTitle>> refreshTitle=<<refreshTitle>>
 		selectionStateTitle=<<tagSelectionState>> inputAcceptActions="""<$macrocall $name="add-tag-actions" actions=<<__actions__>>/>"""
 		inputCancelActions=<<clear-tags-actions>> tag="input" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}}
 		focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> 
 		focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}} filterMinLength={{$:/config/Tags/MinLength}} 
 		cancelPopups=<<cancelPopups>> configTiddlerFilter="[[$:/core/macros/tag-picker]]"/>
-</span>&nbsp;<$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>&nbsp;<span class="tc-add-tag-button">
+</span><$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button><span class="tc-add-tag-button tc-small-gap-left">
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$button set=<<newTagNameTiddler>> setTo="" class="">
 <$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
 $actions$
-<<delete-tag-state-tiddlers>>
+<$set name="currentTiddlerCSSEscaped" value={{{ [<currentTiddler>escapecss[]] }}}>
+<<delete-tag-state-tiddlers>><$action-sendmessage $message="tm-focus-selector" $param=<<get-tagpicker-focus-selector>>/>
+</$set>
 {{$:/language/EditTemplate/Tags/Add/Button}}
 </$button>
 </$set>

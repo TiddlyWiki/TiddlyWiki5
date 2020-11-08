@@ -12,6 +12,10 @@ tags: [[Filter Operators]]
 title: reduce Operator
 type: text/vnd.tiddlywiki
 
+\define reduce-tip()
+The <<.op reduce>> operator will always produce output, even if its input was empty. If its input is empty, the output of <<.op reduce>> will be the initial value of the accumulator, i.e. the value of the suffix. One result of this fact is that the <<.op else>> operator will never be triggered if it follows a <<.op reduce>>. The "Empty input" examples show what happens when <<.op reduce>> receives no input.
+\end
+
 <<.from-version "5.1.23">> The <<.op reduce>> operator runs a subfilter for each input title, passing the result of the previous subfilter run as a variable. The initial value of the accumulator can optionally be specified. It returns the result of the final subfilter run.
 
 The <<.op reduce>> operator is used to flatten a list of items down to a single item by repeatedly applying a formula. A typical use is to add up the values in a given field of a list of tiddlers.
@@ -23,5 +27,7 @@ The following variables are available within the subfilter:
 * ''index'' - the numeric index of the current list item (with zero being the first item in the list)
 * ''revIndex'' - the reverse numeric index of the current list item (with zero being the last item in the list)
 * ''length'' - the total length of the input list
+
+<$macrocall $name=".tip" _=<<reduce-tip>> />
 
 <<.operator-examples "reduce">>

@@ -34,6 +34,7 @@ type: text/vnd.tiddlywiki
 * [[Changed|https://github.com/Jermolene/TiddlyWiki5/commit/9cd5415dfe54b47819920aa3cf6ac2d5e3a9188e]] favicon for the prerelease edition
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/484c9e986fc6f323e30460a88f134da3a4e8a89e]] the $:/PaletteManager to show "indirect" colours (ie, colours defined by another `<<colour>>` macro)
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4791]] a 'tabIndex' property to the tiddler editor input area to make it easier to use the tab key to move between edit controls
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4937]] the Import UI to allow renaming tiddlers and to warn about tiddlers that already exist.
 
 ! Filter Improvements
 
@@ -41,6 +42,13 @@ type: text/vnd.tiddlywiki
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/619c0752bd3c6e71d1fcdb74daa03cfe8257afe4]] new [[sortsub Operator]] for sorting by a user defined subfilter
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4785]] new [[format Operator]] for formatting dates
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4811]] the [[trim Operator]] to optionally trim a given string instead of whitespace, and trim from front, back, or both sides of input tiddlers
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4991]] new [[draft Operator|is Operator]] to check if a tiddler is a draft of another tiddler.
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4973]] new [[search-replace Operator]] to search and replace in strings.
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4948]] new [[enlist-input Operator]] to parse its input titles as a title lists.
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/14a28b77796461c9167898793ab9851e029e0354]] new [[reduce Operator]] to apply a subfilter to each input title in turn, accumulating a single value .
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/14a28b77796461c9167898793ab9851e029e0354]] new [[filter Operator]] to apply a subfilter to each input title and return the titles that return a non-empty result from the subfilter.
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4959]] new [[:intersection filter run prefix|Filter Expression]] to get the intersection of two filter runs.
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4918]] new [[:filter filter run prefix|Filter Expression]] which is analagous to the new [[filter Operator]] but applies to a filter run.
 
 ! Hackability Improvements
 
@@ -62,6 +70,7 @@ type: text/vnd.tiddlywiki
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4724]] original event to `tm-navigate` event
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/651fb777abd11c88e58b4bdfbced01d6db508852]] the password prompt to enable it to be customised
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/69c12618d963c711edd72a60427bd15ec4fa0e6e]] syncer to enable syncadaptors to customise the login prompt
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4979]] support for switching page templates.
 
 ! Bug Fixes
 
