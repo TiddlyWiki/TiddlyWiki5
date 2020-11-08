@@ -2,11 +2,11 @@ title: $:/plugins/tiddlywiki/menubar/styles
 tags: [[$:/tags/Stylesheet]]
 
 \define breakpoint-plus-one()
-<$text text={{{ [{$:/config/plugins/menubar/breakpoint}removesuffix[px]add[1]addsuffix[px]] }}} />
+<$text text={{{ [{$:/config/plugins/menubar/breakpoint}removesuffix[px]add[1]addsuffix[px]] ~[{$:/config/plugins/menubar/breakpoint}] }}} />
 \end
 
 \define sidebarbreakpoint-minus-one()
-<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] }}} />
+<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}} />
 \end
 
 \define set-sidebar-scrollable-top-if-hamburger()
