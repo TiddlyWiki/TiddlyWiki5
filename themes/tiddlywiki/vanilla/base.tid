@@ -2055,6 +2055,18 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 100%;
 }
 
+.tc-import-table svg.tc-image-edit-button {
+	max-width: unset;
+}
+
+.tc-import-table th:first-of-type {
+	width: 10%;
+}
+
+.tc-import-table th:last-of-type {
+	width: 30%;
+}
+
 /*
 ** Alerts
 */
@@ -2846,4 +2858,8 @@ select {
 
 .tc-big-gap-right {
 	margin-right: 1em;
+}
+
+.tc-word-break {
+	word-break: break-all;
 }
