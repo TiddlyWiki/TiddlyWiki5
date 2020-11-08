@@ -12,7 +12,9 @@ tags: $:/tags/MenuBar
 </$set>
 \end
 
-\define input-accept-actions() <$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/>
+\define input-accept-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<__tiddler__>get[text]!is[missing]]"><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>"""><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>
+
+\define input-accept-variant-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<__tiddler__>get[text]!is[missing]]"><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>"""><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>
 
 \define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<nextTab>>/>"""/>
 
@@ -24,7 +26,7 @@ tags: $:/tags/MenuBar
 <$macrocall $name="keyboard-driven-input" tiddler="$:/temp/menubarsearch" storeTitle=<<searchTiddler>> selectionStateTitle=<<searchListState>> 
 		refreshTitle="$:/temp/menubarsearch/refresh" tag="input" type="search" focusPopup="$:/state/popup/menubar-search-dropdown" 
 		class="tc-popup-handle tc-menu-show-when-wide" placeholder="Search..." default="" cancelPopups="yes" 
-		inputAcceptActions=<<input-accept-actions>> inputCancelActions=<<cancel-search-actions>> 
+		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> inputCancelActions=<<cancel-search-actions>> 
 		filterMinLength={{$:/config/Search/MinLength}} configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]" />
 </$keyboard>
 </$keyboard>
