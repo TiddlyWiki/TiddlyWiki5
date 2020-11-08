@@ -1,4 +1,4 @@
 title: $:/core/ui/LayoutSwitcher
 subtitle: {{$:/language/LayoutSwitcher/SubTitle}}
 
-<<tabs "[tag[$:/tags/LayoutSwitcher]]" "$:/core/ui/LayoutSwitcher/Layout">>
+<<tabs "[tag[$:/tags/LayoutSwitcher]!is[draft]!sort[]]" "$:/core/ui/LayoutSwitcher/Layout">>
