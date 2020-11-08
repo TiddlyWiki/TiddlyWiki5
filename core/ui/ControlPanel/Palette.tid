@@ -1,5 +1,5 @@
 title: $:/core/ui/ControlPanel/Palette
-tags: $:/tags/ControlPanel/Appearance
+tags: $:/tags/ControlPanel/Appearance $:/tags/LayoutSwitcher
 caption: {{$:/language/ControlPanel/Palette/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Palette/
