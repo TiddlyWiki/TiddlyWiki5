@@ -16,5 +16,7 @@ caption: {{$:/language/LayoutSwitcher/Hint}}
 </div>
 </$linkcatcher>
 
+<$list filter="[[$:/core/ui/RootTemplate]!is[missing]]">
 <br>
 <$button>{{$:/language/RootTemplate/Reset}}<$action-deletetiddler $tiddler="$:/core/ui/RootTemplate"/></$button>
+</$list>
