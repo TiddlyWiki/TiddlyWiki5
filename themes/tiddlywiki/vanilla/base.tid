@@ -2044,6 +2044,10 @@ html body.tc-body.tc-single-tiddler-window {
 	max-width: unset;
 }
 
+.tc-import-table th:first-of-type {
+	width: 10%;
+}
+
 .tc-import-table th:last-of-type {
 	width: 30%;
 }

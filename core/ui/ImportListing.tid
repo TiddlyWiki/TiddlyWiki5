@@ -29,7 +29,7 @@ title: $:/core/ui/ImportListing
 <table class="tc-import-table">
 <tbody>
 <tr>
-<th align="left" style="width:10%">
+<th align="left">
 <$checkbox tiddler="$:/state/import/select-all" field="text" checked="checked" unchecked="unchecked" default="checked" actions=<<select-all-actions>>>
 <<lingo Listing/Select/Caption>>
 </$checkbox>
