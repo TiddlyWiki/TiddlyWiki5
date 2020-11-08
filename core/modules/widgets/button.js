@@ -67,7 +67,10 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	// Set the tabindex
 	if(this.tabIndex) {
 		domNode.setAttribute("tabindex",this.tabIndex);
-	}	
+	}
+	if(this.isDisabled === "yes") {
+		domNode.setAttribute("disabled",true);
+	}
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
 		var handled = false;
@@ -211,6 +214,7 @@ ButtonWidget.prototype.execute = function() {
 	this.setIndex = this.getAttribute("setIndex");
 	this.popupTitle = this.getAttribute("popupTitle");
 	this.tabIndex = this.getAttribute("tabindex");
+	this.isDisabled = this.getAttribute("disabled","no");
 	// Make child widgets
 	this.makeChildWidgets();
 };
@@ -220,7 +224,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes["class"] || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle) {
+	if(changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes["class"] || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled) {
 		this.refreshSelf();
 		return true;
 	}
