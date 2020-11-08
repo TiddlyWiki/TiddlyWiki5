@@ -21,6 +21,10 @@ background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`
 </$set>
 \end
 
+\define sidebarbreakpoint-plus-one()
+<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]add[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
+\end
+
 \define if-fluid-fixed(text,hiddenSidebarText)
 <$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="fluid-fixed">
 $text$
@@ -1437,7 +1441,7 @@ html body.tc-body.tc-single-tiddler-window {
 	display: inline-block;
 }
 
-@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (min-width: <<sidebarbreakpoint-plus-one>>) {
 
 	.tc-edit-field-add-value {
 		width: 35%;
