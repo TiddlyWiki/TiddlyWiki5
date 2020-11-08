@@ -61,7 +61,7 @@ nav.tc-menubar ul.tc-menubar-list {
 	<<box-shadow "1px 1px 5px rgba(0, 0, 0, 0.3)">>
 }
 
-@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
 	html nav.tc-menubar ul.tc-menubar-list {
 		padding: 0 0 0 8px;
