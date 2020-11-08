@@ -1,4 +1,6 @@
 title: $:/snippets/languageswitcher
+tags: $:/tags/LayoutSwitcher
+caption: {{$:/language/Snippets/LanguageSwitcher/Hint}}
 
 \define flag-title()
 $(languagePluginTitle)$/icon
