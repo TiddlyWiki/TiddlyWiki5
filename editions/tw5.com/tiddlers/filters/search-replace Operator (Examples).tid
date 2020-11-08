@@ -1,0 +1,25 @@
+created: 20201107112846692
+modified: 20201107113536230
+tags: [[Operator Examples]] [[search-replace Operator]]
+title: search-replace Operator (Examples)
+type: text/vnd.tiddlywiki
+
+\define myregexp() e|o
+
+\define names() (\w+)\s(\w+)
+
+Replace one string with another:
+<<.operator-example 1 """[[The quick brown fox jumps over the lazy dog]search-replace[dog],[cat]]""">>
+
+Replace all matches of a regular expression:
+
+`\define myregexp() e|o`
+<<.operator-example 2 """[[Hello There]search-replace:g:regexp<myregexp>,[]]""">>
+
+Replace all matches of a string irrespective of case:
+<<.operator-example 3 """[[Hello There]search-replace:gi[H],[]]""">>
+
+You can also use regular expression capture groups in the replacement string:
+
+`\define names() (\w+)\s(\w+)`
+<<.operator-example 4 """[[John Smith]search-replace::regexp<names>,[$2,$1]]""" >>
