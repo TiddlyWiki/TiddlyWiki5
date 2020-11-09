@@ -769,6 +769,14 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	fill: <<colour foreground>>;
 }
 
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+
+	.tc-show-sidebar-btn svg.tc-image-chevron-left, .tc-hide-sidebar-btn svg.tc-image-chevron-right {
+		transform: rotate(-90deg);
+	}
+
+}
+
 .tc-sidebar-header {
 	color: <<colour sidebar-foreground>>;
 	fill: <<colour sidebar-foreground>>;
