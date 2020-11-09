@@ -1,6 +1,6 @@
 caption: radio
 created: 20131212195353929
-modified: 20170115095809695
+modified: 20201109091807432
 tags: Widgets
 title: RadioWidget
 type: text/vnd.tiddlywiki
@@ -19,6 +19,8 @@ The content of the `<$radio>` widget is displayed within an HTML `<label>` eleme
 |index|<<.from-version "5.1.14">> The index of the //tiddler// being [[DataTiddler|DataTiddlers]] bound to the radio button<<.tip "takes precedence over //field//">>|
 |value |The value for the //field// or //index// of the //tiddler//|
 |class |The CSS classes assigned to the label around the radio button<$macrocall $name=".tip" _="""<<.from-version "5.1.14">> `tc-radio` is always applied by default, as well as `tc-radio-selected` when selected"""/>|
+|disabled|<<.from-version "5.1.23">> Optional, disables the radio input if set to "yes". Defaults to "no"|
+
 
 !! Field Mode
 
