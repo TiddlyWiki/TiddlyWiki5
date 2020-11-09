@@ -848,7 +848,18 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		padding: 14px;
 		min-height: 32px;
 		margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
+		transition:  min-height {{$:/config/AnimationDuration}}ms ease-in-out, padding-top {{$:/config/AnimationDuration}}ms ease-in-out, padding-bottom {{$:/config/AnimationDuration}}ms ease-in-out;
 	}
+	
+	<<if-no-sidebar """
+
+		.tc-sidebar-header {
+			min-height: 0;
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+
+	""">>
 
 	.tc-story-river {
 		position: relative;
