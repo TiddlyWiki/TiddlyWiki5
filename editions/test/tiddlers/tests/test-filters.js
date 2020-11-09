@@ -759,6 +759,23 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("[[Tiddler Three]tags[]] +[toggle[three],[four]]").join(",")).toBe("one,two,three");
 		expect(wiki.filterTiddlers("[[Tiddler Three]tags[]] [[three]] +[toggle[three],[four]]").join(",")).toBe("one,two,four");
 	});
+
+	it("should handle multiple operands for search-replace", function() {
+		var widget = require("$:/core/modules/widgets/widget.js");
+		var rootWidget = new widget.widget({ type:"widget", children:[ {type:"widget", children:[]} ] },
+										   { wiki:wiki, document:$tw.document});
+		rootWidget.makeChildWidgets();
+		var anchorWidget = rootWidget.children[0];
+		rootWidget.setVariable("var1","different");
+		rootWidget.setVariable("myregexp","e|o");
+		rootWidget.setVariable("name","(\w+)\s(\w+)");
+		expect(wiki.filterTiddlers("[[Welcome to TiddlyWiki, a unique non-linear webpage.]search-replace[webpage],[notebook]]").join(",")).toBe("Welcome to TiddlyWiki, a unique non-linear notebook.");
+		expect(wiki.filterTiddlers("[[Welcome to TiddlyWiki, a unique non-linear notebook.]search-replace[unique],<var1>]",anchorWidget).join(",")).toBe("Welcome to TiddlyWiki, a different non-linear notebook.");
+		expect(wiki.filterTiddlers("[[Welcome to TiddlyWiki, a unique non-linear notebook.]search-replace[TiddlyWiki],{one}]",anchorWidget).join(",")).toBe("Welcome to This is the text of tiddler [[one]], a unique non-linear notebook.");
+		expect(wiki.filterTiddlers("[[Hello There]search-replace:g:regexp<myregexp>,[]]",anchorWidget).join(",")).toBe("Hll Thr");
+		expect(wiki.filterTiddlers("[[Hello There]search-replace::regexp<myregexp>,[]]",anchorWidget).join(",")).toBe("Hllo There");
+		expect(wiki.filterTiddlers("[[Hello There]search-replace:gi[H],[]]",anchorWidget).join(",")).toBe("ello Tere");	
+	});
 }
 
 });

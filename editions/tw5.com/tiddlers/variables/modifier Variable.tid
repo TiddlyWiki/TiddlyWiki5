@@ -3,16 +3,32 @@ title: modifier Variable
 type: text/vnd.tiddlywiki
 
 Within the ''action'' string of the DroppableWidget, the ''action'' string of the ButtonWidget and the ''action'' string of the LinkCatcherWidget, the <<.def modifier>> [[variable|Variables]] contains the modifier key(s) held during the drag-process.
-The possible keys are ''ctrl'', ''shift'', ''alt'', ''ctrl'' and ''shift'', ''alt'' and ''shift'', ''ctrl'' and ''alt'', ''ctrl'' and ''alt'' and ''shift''
+The possible keys are ''meta'', ''ctrl'', ''shift'', ''alt'', ''meta'' and ''ctrl'', ''meta'' and ''shift'', ''meta'' and ''alt'', ''ctrl'' and ''shift'', ''alt'' and ''shift'', ''ctrl'' and ''alt'', ''ctrl'' and ''alt'' and ''shift'', ''meta'' and ''alt'' and ''shift'', ''meta'' and ''ctrl'' and ''shift'', ''meta'' and ''ctrl'' and ''alt'', ''meta'' and ''ctrl'' and ''alt'' and ''shift''
 
 The variable contains a string that identifies the keys:
 
 |Modifier Key |Variable Content |h
+|meta |meta |
 |ctrl |ctrl |
 |alt |alt |
 |shift |shift |
+|meta+shift |meta-shift |
+|meta+ctrl |meta-ctrl |
+|meta+alt |meta-alt |
 |ctrl+shift |ctrl-shift |
 |alt+shift |alt-shift |
 |ctrl+alt |ctrl-alt |
+|meta+ctrl+shift |meta-ctrl-shift |
+|meta+ctrl+alt |meta-ctrl-alt |
+|meta+alt+shift |meta-alt-shift |
 |ctrl+alt+shift |ctrl-alt-shift |
+|meta+ctrl+alt+shift |meta-ctrl-alt-shift |
 |no modifier (normal click / drag) |normal |
+
+<<.tip """Some operating systems may intercept the ''meta'' key so it is never detected""">>
+
+<$button actions="""<$action-setfield $tiddler="$:/temp/test-modifier-keys" text=<<modifier>>/>""">Test modifier keys here</$button>
+
+!!! Modifier keys held while clicking the button above:
+
+{{$:/temp/test-modifier-keys}}
