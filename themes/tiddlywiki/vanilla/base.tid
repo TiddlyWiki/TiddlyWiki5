@@ -97,6 +97,11 @@ body.tc-body {
 	fill: <<colour foreground>>;
 }
 
+body.tc-body > .tc-page-container-wrapper > div > p {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
 <<if-background-attachment """
 
 body.tc-body {
