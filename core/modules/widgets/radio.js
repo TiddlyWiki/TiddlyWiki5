@@ -44,6 +44,9 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	if(isChecked) {
 		this.inputDomNode.setAttribute("checked","true");
 	}
+	if(this.isDisabled === "yes") {
+		this.inputDomNode.setAttribute("disabled",true);
+	}
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");
 	this.labelDomNode.appendChild(this.spanDomNode);
@@ -95,6 +98,7 @@ RadioWidget.prototype.execute = function() {
 	this.radioIndex = this.getAttribute("index");
 	this.radioValue = this.getAttribute("value");
 	this.radioClass = this.getAttribute("class","");
+	this.isDisabled = this.getAttribute("disabled","no");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -104,7 +108,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RadioWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.value || changedAttributes["class"]) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.value || changedAttributes["class"] || changedAttributes.disabled) {
 		this.refreshSelf();
 		return true;
 	} else {
