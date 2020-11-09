@@ -41,6 +41,9 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	if(this.getValue()) {
 		this.inputDomNode.setAttribute("checked","true");
 	}
+	if(this.isDisabled === "yes") {
+		this.inputDomNode.setAttribute("disabled",true);
+	}
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");
 	this.labelDomNode.appendChild(this.spanDomNode);
@@ -181,6 +184,7 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxDefault = this.getAttribute("default");
 	this.checkboxClass = this.getAttribute("class","");
 	this.checkboxInvertTag = this.getAttribute("invertTag","");
+	this.isDisabled = this.getAttribute("disabled","no");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -190,7 +194,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.invertTag || changedAttributes.field || changedAttributes.index || changedAttributes.checked || changedAttributes.unchecked || changedAttributes["default"] || changedAttributes["class"]) {
+	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.invertTag || changedAttributes.field || changedAttributes.index || changedAttributes.checked || changedAttributes.unchecked || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.disabled) {
 		this.refreshSelf();
 		return true;
 	} else {
