@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 
 <<.from-version "5.1.23">>
 
-The <<.op search-replace>> operator requires at least one parameter and can accept a second optional parameter:
+The <<.op toggle>> operator requires at least one parameter and can accept a second optional parameter:
 
 ```
 [toggle[<title1>],[<title2>]]
