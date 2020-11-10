@@ -196,14 +196,16 @@ Extended filter operators to manipulate the current list.
 			index = results.indexOf(operator.operand),
 			pairIndex = (operator.operands[1] ? results.indexOf(operator.operands[1]) : -1);
 		if(index === -1) {
-			results.push(operator.operand);
 			if(pairIndex !== -1) {
-				results.splice(pairIndex,1);
+				results.splice(pairIndex,1,operator.operand);
+			} else {
+				results.push(operator.operand);
 			}
 		} else {
-			results.splice(index,1);
 			if(operator.operands[1]) {
-				results.push(operator.operands[1]);
+				results.splice(index,1,operator.operands[1]);
+			} else {
+				results.splice(index,1);
 			}
 		}
 		return results;
