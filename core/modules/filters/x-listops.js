@@ -17,10 +17,10 @@ Extended filter operators to manipulate the current list.
     */
     var prepare_results = function (source) {
 		var results = [];
-        source(function (tiddler, title) {
-            results.push(title);
-        });
-        return results;
+		source(function (tiddler, title) {
+			results.push(title);
+		});
+		return results;
     };
 
     /*
@@ -221,7 +221,7 @@ Extended filter operators to manipulate the current list.
 
 	exports.cycle = function(source,operator) {
 		var results = prepare_results(source),
-			operands = $tw.utils.parseStringArray(operator.operand, "true");
+			operands = (operator.operand.length ? $tw.utils.parseStringArray(operator.operand, "true") : [""]);
 		if(operator.suffix === "reverse") {
 			operands.reverse();
 		}
