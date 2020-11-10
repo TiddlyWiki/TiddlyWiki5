@@ -16,11 +16,11 @@ Extended filter operators to manipulate the current list.
     Fetch titles from the current list
     */
     var prepare_results = function (source) {
-		var results = [];
-		source(function (tiddler, title) {
-			results.push(title);
-		});
-		return results;
+    var results = [];
+        source(function (tiddler, title) {
+            results.push(title);
+        });
+        return results;
     };
 
     /*
@@ -194,11 +194,11 @@ Extended filter operators to manipulate the current list.
 			nextOperandIndex;		
 		for(i; i < operands.length; i++) {
 			resultsIndex = results.indexOf(operands[i]);
-			if(resultsIndex != -1) {
+			if(resultsIndex !== -1) {
 				break;
 			}
 		}
-		if(resultsIndex != -1) {
+		if(resultsIndex !== -1) {
 			i++;
 			nextOperandIndex = (i === operands.length ? 0 : i);
 			if(operands.length > 1) {
