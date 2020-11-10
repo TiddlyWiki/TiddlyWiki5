@@ -16,7 +16,7 @@ Extended filter operators to manipulate the current list.
     Fetch titles from the current list
     */
     var prepare_results = function (source) {
-    var results = [];
+		var results = [];
         source(function (tiddler, title) {
             results.push(title);
         });
@@ -187,26 +187,45 @@ Extended filter operators to manipulate the current list.
         }, []);
         return set;
     };
-	
-	/*
-	Toggles an item in the current list.
-	*/
-	exports.toggle = function(source, operator) {
-		var results = prepare_results(source),
-			index = results.indexOf(operator.operand),
-			pairIndex = (operator.operands[1] ? results.indexOf(operator.operands[1]) : -1);
-		if(index === -1) {
-			results.push(operator.operand);
-			if(pairIndex !== -1) {
-				results.splice(pairIndex,1);
-			}
-		} else {
-			results.splice(index,1);
-			if(operator.operands[1]) {
-				results.push(operator.operands[1]);
+
+	var cycleValueInArray = function(results,operands) {
+		var resultsIndex,
+			i = 0,
+			nextOperandIndex;		
+		for(i; i < operands.length; i++) {
+			resultsIndex = results.indexOf(operands[i]);
+			if(resultsIndex != -1) {
+				break;
 			}
 		}
-		return results;
-	};
+		if(resultsIndex != -1) {
+			i++;
+			nextOperandIndex = (i === operands.length ? 0 : i);
+			if(operands.length > 1) {
+				results.splice(resultsIndex,1,operands[nextOperandIndex]);
+			} else {
+				results.splice(resultsIndex,1,);
+			}
+		} else {
+			results.push(operands[0]);
+		}
+		return results;		
+	}
+
+	/*
+	Toggles an item in the current list.
+	*/	
+	exports.toggle = function(source,operator) {
+		return cycleValueInArray(prepare_results(source),operator.operands);
+	}
+
+	exports.cycle = function(source,operator) {
+		var results = prepare_results(source),
+			operands = $tw.utils.parseStringArray(operator.operand, "true");
+		if(operator.suffix === "reverse") {
+			operands.reverse();
+		}
+		return cycleValueInArray(results,operands);
+	}
 	
 })();
