@@ -13,7 +13,7 @@ Modal message mechanism
 "use strict";
 
 var widget = require("$:/core/modules/widgets/widget.js");
-var nav = require("$:/core/modules/widgets/navigator.js");
+var navigator = require("$:/core/modules/widgets/navigator.js");
 
 var Modal = function(wiki) {
 	this.wiki = wiki;
@@ -99,7 +99,7 @@ Modal.prototype.display = function(title,options) {
 		"isBlock": true,
 		"children": []
 	};
-	var navigatorWidgetNode = new nav.navigator(navigatorTree, {
+	var navigatorWidgetNode = new navigator.navigator(navigatorTree, {
 		wiki: this.wiki,
 		document : this.srcDocument,
 		parentWidget: $tw.rootWidget
@@ -122,7 +122,6 @@ Modal.prototype.display = function(title,options) {
 		variables: variables,
 		importPageMacros: true
 	});
-	headerWidgetNode.children.push(bodyWidgetNode);
 	headerWidgetNode.render(headerTitle,null);
 	// Render the body of the message
 	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{
@@ -131,7 +130,6 @@ Modal.prototype.display = function(title,options) {
 		variables: variables,
 		importPageMacros: true
 	});
-	navigatorWidgetNode.children.push(bodyWidgetNode);
 
 	bodyWidgetNode.render(modalBody,null);
 	// Setup the link if present
@@ -174,7 +172,6 @@ Modal.prototype.display = function(title,options) {
 		variables: variables,
 		importPageMacros: true
 	});
-	navigatorWidgetNode.children.push(footerWidgetNode);
 	footerWidgetNode.render(modalFooterButtons,null);
 	// Set up the refresh handler
 	refreshHandler = function(changes) {
