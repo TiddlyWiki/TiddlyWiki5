@@ -23,10 +23,7 @@ exports.startup = function() {
 	// Install the modal message mechanism
 	$tw.modal = new $tw.utils.Modal($tw.wiki);
 	$tw.rootWidget.addEventListener("tm-modal",function(event) {
-		var paramObject = (event.paramObject || {});
-		paramObject["tv-story-list"] = paramObject["tv-story-list"] || event.widget.getVariable("tv-story-list");
-		paramObject["tv-history-list"] = paramObject["tv-history-list"] || event.widget.getVariable("tv-history-list");
-		$tw.modal.display(event.param,{variables: paramObject, event: event});
+		$tw.modal.display(event.param,{variables: event.paramObject, event: event});
 	});
 	// Install the notification  mechanism
 	$tw.notifier = new $tw.utils.Notifier($tw.wiki);

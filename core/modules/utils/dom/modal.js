@@ -42,7 +42,10 @@ Modal.prototype.display = function(title,options) {
 		return;
 	}
 	// Create the variables
-	var variables = $tw.utils.extend({currentTiddler: title},options.variables);
+	var variables = $tw.utils.extend({currentTiddler: title},options.variables),
+		storyList = (options.event && options.event.widget ? options.event.widget.getVariable("tv-story-list") : ""),
+		historyList = (options.event && options.event.widget ? options.event.widget.getVariable("tv-history-list") : "");
+
 	// Create the wrapper divs
 	var wrapper = this.srcDocument.createElement("div"),
 		modalBackdrop = this.srcDocument.createElement("div"),
@@ -82,12 +85,12 @@ Modal.prototype.display = function(title,options) {
 			"story": {
 				"name": "story",
 				"type": "string",
-				"value": options.variables["tv-story-list"]
+				"value": storyList
 			},
 			"history": {
 				"name": "history",
 				"type": "string",
-				"value": options.variables["tv-history-list"]
+				"value": historyList
 			}
 		},
 		"tag": "$navigator",
