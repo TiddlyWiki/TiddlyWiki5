@@ -13,6 +13,7 @@ Modal message mechanism
 "use strict";
 
 var widget = require("$:/core/modules/widgets/widget.js");
+var nav = require("$:/core/modules/widgets/navigator.js");
 
 var Modal = function(wiki) {
 	this.wiki = wiki;
@@ -75,6 +76,31 @@ Modal.prototype.display = function(title,options) {
 	modalFooter.appendChild(modalFooterHelp);
 	modalFooter.appendChild(modalFooterButtons);
 	modalWrapper.appendChild(modalFooter);
+	var navigatorTree = {
+		"type": "navigator",
+		"attributes": {
+			"story": {
+				"name": "story",
+				"type": "string",
+				"value": options.variables["tv-story-list"]
+			},
+			"history": {
+				"name": "history",
+				"type": "string",
+				"value": options.variables["tv-history-list"]
+			}
+		},
+		"tag": "$navigator",
+		"isBlock": true,
+		"children": []
+	};
+
+	var navigatorWidgetNode = new nav.navigator(navigatorTree, {
+		wiki: this.wiki,
+		document : this.srcDocument,
+		parentWidget: $tw.rootWidget
+	});
+	navigatorWidgetNode.render(modalBody,null);
 	// Render the title of the message
 	var headerWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		field: "subtitle",
@@ -86,19 +112,22 @@ Modal.prototype.display = function(title,options) {
 					type: "string",
 					value: title
 		}}}],
-		parentWidget: $tw.rootWidget,
+		parentWidget: navigatorWidgetNode,
 		document: this.srcDocument,
 		variables: variables,
 		importPageMacros: true
 	});
+	headerWidgetNode.children.push(bodyWidgetNode);
 	headerWidgetNode.render(headerTitle,null);
 	// Render the body of the message
 	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{
-		parentWidget: $tw.rootWidget,
+		parentWidget: navigatorWidgetNode,
 		document: this.srcDocument,
 		variables: variables,
 		importPageMacros: true
 	});
+	navigatorWidgetNode.children.push(bodyWidgetNode);
+
 	bodyWidgetNode.render(modalBody,null);
 	// Setup the link if present
 	if(options.downloadLink) {
@@ -135,11 +164,12 @@ Modal.prototype.display = function(title,options) {
 						value: $tw.language.getString("Buttons/Close/Caption")
 			}}}
 		]}],
-		parentWidget: $tw.rootWidget,
+		parentWidget: navigatorWidgetNode,
 		document: this.srcDocument,
 		variables: variables,
 		importPageMacros: true
 	});
+	navigatorWidgetNode.children.push(footerWidgetNode);
 	footerWidgetNode.render(modalFooterButtons,null);
 	// Set up the refresh handler
 	refreshHandler = function(changes) {
