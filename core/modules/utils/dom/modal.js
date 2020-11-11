@@ -42,9 +42,11 @@ Modal.prototype.display = function(title,options) {
 		return;
 	}
 	// Create the variables
-	var variables = $tw.utils.extend({currentTiddler: title},options.variables),
-		storyList = (options.event && options.event.widget ? options.event.widget.getVariable("tv-story-list") : ""),
-		historyList = (options.event && options.event.widget ? options.event.widget.getVariable("tv-history-list") : "");
+	var variables = $tw.utils.extend({
+			currentTiddler: title,
+			"tv-story-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-story-list") : ""),
+			"tv-history-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-history-list") : "")
+		},options.variables);
 
 	// Create the wrapper divs
 	var wrapper = this.srcDocument.createElement("div"),
@@ -85,25 +87,25 @@ Modal.prototype.display = function(title,options) {
 			"story": {
 				"name": "story",
 				"type": "string",
-				"value": storyList
+				"value": variables["tv-story-list"]
 			},
 			"history": {
 				"name": "history",
 				"type": "string",
-				"value": historyList
+				"value": variables["tv-history-list"]
 			}
 		},
 		"tag": "$navigator",
 		"isBlock": true,
 		"children": []
 	};
-
 	var navigatorWidgetNode = new nav.navigator(navigatorTree, {
 		wiki: this.wiki,
 		document : this.srcDocument,
 		parentWidget: $tw.rootWidget
 	});
 	navigatorWidgetNode.render(modalBody,null);
+	
 	// Render the title of the message
 	var headerWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		field: "subtitle",
