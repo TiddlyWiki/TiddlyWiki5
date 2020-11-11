@@ -21,6 +21,14 @@ background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`
 </$set>
 \end
 
+\define sidebarbreakpoint()
+<$text text={{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}/>
+\end
+
+\define sidebarbreakpoint-minus-one()
+<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
+\end
+
 \define if-fluid-fixed(text,hiddenSidebarText)
 <$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="fluid-fixed">
 $text$
@@ -626,7 +634,7 @@ button svg.tc-image-button, button .tc-image-button img {
 	background: <<colour tiddler-info-background>>;
 }
 
-@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
 	.tc-unfold-banner {
 		position: static;
@@ -761,6 +769,14 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	fill: <<colour foreground>>;
 }
 
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+
+	.tc-show-sidebar-btn svg.tc-image-chevron-left, .tc-hide-sidebar-btn svg.tc-image-chevron-right {
+		transform: rotate(-90deg);
+	}
+
+}
+
 .tc-sidebar-header {
 	color: <<colour sidebar-foreground>>;
 	fill: <<colour sidebar-foreground>>;
@@ -834,13 +850,24 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	position: relative;
 }
 
-@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
 	.tc-sidebar-header {
 		padding: 14px;
 		min-height: 32px;
 		margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
+		transition:  min-height {{$:/config/AnimationDuration}}ms ease-in-out, padding-top {{$:/config/AnimationDuration}}ms ease-in-out, padding-bottom {{$:/config/AnimationDuration}}ms ease-in-out;
 	}
+	
+	<<if-no-sidebar """
+
+		.tc-sidebar-header {
+			min-height: 0;
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+
+	""">>
 
 	.tc-story-river {
 		position: relative;
@@ -848,7 +875,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	}
 }
 
-@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (min-width: <<sidebarbreakpoint>>) {
 
 	.tc-message-box {
 		margin: 21px -21px 21px -21px;
@@ -956,7 +983,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 .tc-view-field-value {
 }
 
-@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 	.tc-tiddler-frame {
 		padding: 14px 14px 14px 14px;
 	}
@@ -966,7 +993,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	}
 }
 
-@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (min-width: <<sidebarbreakpoint>>) {
 	.tc-tiddler-frame {
 		padding: 28px 42px 42px 42px;
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
@@ -1225,7 +1252,7 @@ html body.tc-body.tc-single-tiddler-window {
 ** Adjustments for fluid-fixed mode
 */
 
-@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (min-width: <<sidebarbreakpoint>>) {
 
 <<if-fluid-fixed text:"""
 
@@ -1435,7 +1462,14 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-edit-field-add-value {
 	display: inline-block;
-	width: 35%;
+}
+
+@media (min-width: <<sidebarbreakpoint>>) {
+
+	.tc-edit-field-add-value {
+		width: 35%;
+	}
+
 }
 
 .tc-edit-field-add-button {
@@ -1457,7 +1491,7 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 100%;
 }
 
-@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (min-width: <<sidebarbreakpoint>>) {
 
 	.tc-storyview-zoomin-tiddler {
 		width: calc(100% - 84px);
@@ -2040,6 +2074,18 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 100%;
 }
 
+.tc-import-table svg.tc-image-edit-button {
+	max-width: unset;
+}
+
+.tc-import-table th:first-of-type {
+	width: 10%;
+}
+
+.tc-import-table th:last-of-type {
+	width: 30%;
+}
+
 /*
 ** Alerts
 */
@@ -2087,7 +2133,7 @@ html body.tc-body.tc-single-tiddler-window {
 	color: <<colour alert-highlight>>;
 }
 
-@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (min-width: <<sidebarbreakpoint>>) {
 
 	.tc-static-alert {
 		position: relative;
@@ -2831,4 +2877,8 @@ select {
 
 .tc-big-gap-right {
 	margin-right: 1em;
+}
+
+.tc-word-break {
+	word-break: break-all;
 }

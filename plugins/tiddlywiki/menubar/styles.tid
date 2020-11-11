@@ -2,11 +2,11 @@ title: $:/plugins/tiddlywiki/menubar/styles
 tags: [[$:/tags/Stylesheet]]
 
 \define breakpoint-plus-one()
-<$text text={{{ [{$:/config/plugins/menubar/breakpoint}removesuffix[px]add[1]addsuffix[px]] }}} />
+<$text text={{{ [{$:/config/plugins/menubar/breakpoint}removesuffix[px]add[1]addsuffix[px]] ~[{$:/config/plugins/menubar/breakpoint}] }}} />
 \end
 
 \define sidebarbreakpoint-minus-one()
-<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] }}} />
+<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}} />
 \end
 
 \define set-sidebar-scrollable-top-if-hamburger()
@@ -61,7 +61,7 @@ nav.tc-menubar ul.tc-menubar-list {
 	<<box-shadow "1px 1px 5px rgba(0, 0, 0, 0.3)">>
 }
 
-@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
 	html nav.tc-menubar ul.tc-menubar-list {
 		padding: 0 0 0 8px;
@@ -191,10 +191,6 @@ nav.tc-menubar .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
 		display: none;
 	}
 
-	nav.tc-menubar .tc-menubar-item .tc-show-sidebar-btn svg.tc-image-chevron-left, nav.tc-menubar .tc-menubar-item .tc-hide-sidebar-btn svg.tc-image-chevron-right {
-		transform: rotate(-90deg);
-	}
-
 }
 
 @media (min-width: <<breakpoint-plus-one>>) {
@@ -209,17 +205,6 @@ nav.tc-menubar .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
 	<<set-sidebar-scrollable-top-if-hamburger>>
-	
-	<<if-no-sidebar """
-
-		.tc-sidebar-header {
-			min-height: 0;
-			padding-top: 0;
-			padding-bottom: 0;
-			transition: min-height {{$:/config/AnimationDuration}}ms ease-in-out, padding-top {{$:/config/AnimationDuration}}ms ease-in-out, padding-bottom {{$:/config/AnimationDuration}}ms ease-in-out;
-		}
-
-	""">>
 
 }
 

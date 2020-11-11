@@ -1,6 +1,6 @@
 caption: range
 created: 20171102134825376
-modified: 20191104185454972
+modified: 20201109091723430
 tags: Widgets
 title: RangeWidget
 type: text/vnd.tiddlywiki
@@ -22,6 +22,7 @@ The content of the `<$range>` widget is ignored.
 |increment |The minimum amount by which a value may be changed.  Defaults to 1 |
 |default |If the field is missing or empty this is the default position for the widget handle relative to the min and max values.|
 |class |CSS classes to be assigned to the label around the range slider |
+|disabled|<<.from-version "5.1.23">> Optional, disables the range input if set to "yes". Defaults to "no"|
 
 ! Examples
 
