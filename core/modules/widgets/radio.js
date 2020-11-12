@@ -83,10 +83,21 @@ RadioWidget.prototype.setValue = function() {
 };
 
 RadioWidget.prototype.handleChangeEvent = function(event) {
+	var self=this;
+
 	if(this.inputDomNode.checked) {
 		this.setValue();
 	}
-};
+	// Trigger actions
+	if(this.radioActions) {
+		$tw.utils.each(this.attributes,function(val,key) {
+			if(key.charAt(0) !== "$") {
+				self.setVariable("__" + key + "__",val);
+			}
+		});
+		// Widget.prototype.invokeActionString = function(actions,triggeringWidget,event,variables) {
+		this.invokeActionString(this.radioActions,this,event);
+	}};
 
 /*
 Compute the internal state of the widget
@@ -99,6 +110,7 @@ RadioWidget.prototype.execute = function() {
 	this.radioValue = this.getAttribute("value");
 	this.radioClass = this.getAttribute("class","");
 	this.isDisabled = this.getAttribute("disabled","no");
+	this.radioActions = this.getAttribute("actions","");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
