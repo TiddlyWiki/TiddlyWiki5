@@ -37,8 +37,8 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	// Create our elements
 	this.labelDomNode = this.document.createElement("label");
 	this.labelDomNode.setAttribute("class",
-   		"tc-radio " + this.radioClass + (isChecked ? " tc-radio-selected" : "")
-  	);
+		"tc-radio " + this.radioClass + (isChecked ? " tc-radio-selected" : "")
+	);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","radio");
 	if(isChecked) {
@@ -87,8 +87,11 @@ RadioWidget.prototype.handleChangeEvent = function(event) {
 	if(this.inputDomNode.checked) {
 		this.setValue();
 	}
-	// Trigger actions and make parameters available as variables-hashmap
+	// Trigger actions and make all important parameters available as variables-hashmap
 	if(this.radioActions) {
+		// Set params, that may be missing as attributes
+		this.setVariable("__tiddler__", this.radioTitle);
+		this.setVariable("__field__", this.radioField);
 		$tw.utils.each(this.attributes,function(val,key) {
 			// we don't need "actions", but all the other params
 			if((key !== "actions") && (key.charAt(0) !== "$")) {
