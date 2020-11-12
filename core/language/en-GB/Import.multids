@@ -13,6 +13,11 @@ Listing/Preview/TextRaw: Text (Raw)
 Listing/Preview/Fields: Fields
 Listing/Preview/Diff: Diff
 Listing/Preview/DiffFields: Diff (Fields)
+Listing/Rename/Tooltip: Rename tiddler before importing
+Listing/Rename/Prompt: Rename to:
+Listing/Rename/ConfirmRename: Rename tiddler
+Listing/Rename/CancelRename: Cancel
+Listing/Rename/OverwriteWarning: A tiddler with this title already exists.
 Upgrader/Plugins/Suppressed/Incompatible: Blocked incompatible or obsolete plugin
 Upgrader/Plugins/Suppressed/Version: Blocked plugin (due to incoming <<incoming>> being older than existing <<existing>>)
 Upgrader/Plugins/Upgraded: Upgraded plugin from <<incoming>> to <<upgraded>>

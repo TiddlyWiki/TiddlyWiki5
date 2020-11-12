@@ -1,0 +1,23 @@
+caption: toggle
+created: 20201107153758990
+modified: 20201109104654310
+op-input: a list of items
+op-output: the input list with the title specified in the parameter toggled
+op-parameter: the <<.op toggle>> operator accepts 1 or 2 parameters, see below for details
+op-purpose: toggle the title specified in the operand in the input
+tags: [[Filter Operators]] [[Listops Operators]] [[Order Operators]]
+title: toggle Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.23">>
+
+The <<.op toggle>> operator requires at least one parameter and can accept a second optional parameter:
+
+```
+[toggle[<title1>],[<title2>]]
+```
+* ''title1'' : a title to toggle in the input list. If it is already present, it is removed. Otherwise, it is added.
+* ''title2'': (optional). When the second parameter is provided, the operator toggles between the two values in the input list. If neither is present, the first parameter takes precedence is added to the list.
+
+
+<<.operator-examples "toggle">>

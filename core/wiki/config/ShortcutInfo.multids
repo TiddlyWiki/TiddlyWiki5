@@ -2,8 +2,11 @@ title: $:/config/ShortcutInfo/
 
 add-field: {{$:/language/EditTemplate/Fields/Add/Button/Hint}}
 advanced-search: {{$:/language/Buttons/AdvancedSearch/Hint}}
+advanced-search-sidebar: {{$:/language/Shortcuts/Input/AdvancedSearch/Hint}}
 bold: {{$:/language/Buttons/Bold/Hint}}
 cancel-edit-tiddler: {{$:/language/Buttons/Cancel/Hint}}
+change-sidebar-layout: {{$:/language/Shortcuts/SidebarLayout/Hint}}
+delete-field: {{$:/language/EditTemplate/Field/Remove/Hint}}
 excise: {{$:/language/Buttons/Excise/Hint}}
 heading-1: {{$:/language/Buttons/Heading1/Hint}}
 heading-2: {{$:/language/Buttons/Heading2/Hint}}
@@ -15,6 +18,8 @@ input-accept: {{$:/language/Shortcuts/Input/Accept/Hint}}
 input-accept-variant: {{$:/language/Shortcuts/Input/AcceptVariant/Hint}}
 input-cancel: {{$:/language/Shortcuts/Input/Cancel/Hint}}
 input-down: {{$:/language/Shortcuts/Input/Down/Hint}}
+input-tab-left: {{$:/language/Shortcuts/Input/Tab-Left/Hint}}
+input-tab-right: {{$:/language/Shortcuts/Input/Tab-Right/Hint}}
 input-up: {{$:/language/Shortcuts/Input/Up/Hint}}
 italic: {{$:/language/Buttons/Italic/Hint}}
 link: {{$:/language/Buttons/Link/Hint}}
@@ -30,6 +35,7 @@ picture: {{$:/language/Buttons/Picture/Hint}}
 preview: {{$:/language/Buttons/Preview/Hint}}
 quote: {{$:/language/Buttons/Quote/Hint}}
 save-tiddler: {{$:/language/Buttons/Save/Hint}}
+save-wiki: {{$:/language/Buttons/SaveWiki/Hint}}
 sidebar-search: {{$:/language/Buttons/SidebarSearch/Hint}}
 stamp: {{$:/language/Buttons/Stamp/Hint}}
 strikethrough: {{$:/language/Buttons/Strikethrough/Hint}}

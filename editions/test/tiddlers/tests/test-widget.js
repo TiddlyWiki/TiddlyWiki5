@@ -273,6 +273,24 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<p><a href=\"data:text/vnd.tiddlywiki,Jolly%20Old%20World\">My linky link</a></p>");
 	});
 
+	/* This test reproduces issue #4693. */
+	it("should render the entity widget", function() {
+		var wiki = new $tw.Wiki();
+		// Construct the widget node
+		var text = "\n\n<$entity entity='&nbsp;' />\n\n<$entity entity='&#x2713;' />\n";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe(" ✓");
+		// Test the sequence numbers in the DOM
+		expect(wrapper.sequenceNumber).toBe(0);
+		expect(wrapper.children[0].sequenceNumber).toBe(1);
+		expect(wrapper.children[0].nodeType).toBe(wrapper.children[0].TEXT_NODE);
+		expect(wrapper.children[1].sequenceNumber).toBe(2);
+		expect(wrapper.children[1].nodeType).toBe(wrapper.children[1].TEXT_NODE);
+	});
+
 	it("should deal with the list widget", function() {
 		var wiki = new $tw.Wiki();
 		// Add some tiddlers

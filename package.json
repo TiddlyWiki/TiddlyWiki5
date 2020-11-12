@@ -24,7 +24,9 @@
     "wiki"
   ],
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^7.10.0"
+  },
   "bundleDependencies": [],
   "license": "BSD",
   "engines": {

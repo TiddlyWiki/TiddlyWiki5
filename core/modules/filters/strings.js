@@ -34,12 +34,34 @@ exports.titlecase = makeStringBinaryOperator(
 	function(a) {return [$tw.utils.toTitleCase(a)];}
 );
 
-exports.trim = makeStringBinaryOperator(
-	function(a) {return [$tw.utils.trim(a)];}
-);
+exports.trim = function(source,operator,options) {
+	var result = [],
+		suffix = operator.suffix || "",
+		operand = (operator.operand || ""),
+		fnCalc;
+	if(suffix === "prefix") {
+		fnCalc = function(a,b) {return [$tw.utils.trimPrefix(a,b)];}
+	} else if(suffix === "suffix") {
+		fnCalc = function(a,b) {return [$tw.utils.trimSuffix(a,b)];}
+	} else {
+		if(operand === "") {
+			fnCalc = function(a) {return [$tw.utils.trim(a)];}
+		} else {
+			fnCalc = function(a,b) {return [$tw.utils.trimSuffix($tw.utils.trimPrefix(a,b),b)];}
+		}
+	}
+	source(function(tiddler,title) {
+		Array.prototype.push.apply(result,fnCalc(title,operand));
+	});
+	return result;
+};
 
 exports.split = makeStringBinaryOperator(
 	function(a,b) {return ("" + a).split(b);}
+);
+
+exports["enlist-input"] = makeStringBinaryOperator(
+	function(a) {return $tw.utils.parseStringArray("" + a);}
 );
 
 exports.join = makeStringReducingOperator(
@@ -68,6 +90,9 @@ function makeStringReducingOperator(fnCalc,initialValue) {
 		source(function(tiddler,title) {
 			result.push(title);
 		});
+		if(result.length === 0) {
+			return [];
+		}
 		return [result.reduce(function(accumulator,currentValue) {
 			return fnCalc(accumulator,currentValue,operator.operand || "");
 		},initialValue) || ""];
@@ -88,6 +113,34 @@ exports.splitregexp = function(source,operator,options) {
 		Array.prototype.push.apply(result,title.split(regExp));
 	});		
 	return result;
+};
+
+exports["search-replace"] = function(source,operator,options) {
+	var results = [],
+		suffixes = operator.suffixes || [],
+		flagSuffix = (suffixes[0] ? (suffixes[0][0] || "") : ""),
+		flags = (flagSuffix.indexOf("g") !== -1 ? "g" : "") + (flagSuffix.indexOf("i") !== -1 ? "i" : ""),
+		isRegExp = (suffixes[1] && suffixes[1][0] === "regexp") ? true : false,
+		searchTerm,
+		regExp;
+	
+	source(function(tiddler,title) {
+		if(title && (operator.operands.length > 1)) {
+			//Escape regexp characters if the operand is not a regular expression
+			searchTerm = isRegExp ? operator.operand : $tw.utils.escapeRegExp(operator.operand);
+			try {
+				regExp = new RegExp(searchTerm,flags);
+			} catch(ex) {
+				return ["RegExp error: " + ex];
+			}
+			results.push(
+				title.replace(regExp,operator.operands[1])
+			);
+		} else {
+			results.push(title);
+		}
+	});
+	return results;
 };
 
 })();

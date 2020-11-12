@@ -403,3 +403,17 @@ Nicolas Petton, @NicolasPetton, 2020/04/30
 Csaba Molnar, @mocsa, 2020/04/29
 
 Jonas Passerini, @passuf, 2020/05/14
+
+Dazhong Xia, @jdangerx, 2020/06/23
+
+Diep Pham, @favadi, 2020/07/30
+
+Adithya Badidey, @adithya-badidey, 2020/08/10
+
+Kamal Habash, @Kamal-Habash, 2020/08/28
+
+Florian Kohrt, @fkohrt, 2020/09/10
+
+Gerald Liu, @gera2ld, 2020/09/25
+
+Ryan Kramer, @default-kramer, 2020/10/24

@@ -13,6 +13,11 @@ Listing/Preview/TextRaw: 文本 (原始)
 Listing/Preview/Fields: 字段
 Listing/Preview/Diff: 差异
 Listing/Preview/DiffFields: 差异 (字段)
+Listing/Rename/Prompt: 重新命名为：
+Listing/Rename/Tooltip: 导入前重新命名条目
+Listing/Rename/ConfirmRename: 重新命名条目
+Listing/Rename/CancelRename: 取消
+Listing/Rename/OverwriteWarning: 具有此标题的条目已存在。
 Upgrader/Plugins/Suppressed/Incompatible: 封锁的不兼容或过时插件
 Upgrader/Plugins/Suppressed/Version: 封锁的插件 (由于传入的 <<incoming>> 较现有版本 <<existing>> 旧)
 Upgrader/Plugins/Upgraded: 升级插件，从 <<incoming>> 到 <<upgraded>>

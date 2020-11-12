@@ -1,6 +1,6 @@
 caption: edit-text
 created: 20131024141900000
-modified: 20151224143914772
+modified: 20201109093034856
 tags: Widgets
 title: EditTextWidget
 type: text/vnd.tiddlywiki
@@ -34,6 +34,7 @@ The content of the `<$edit-text>` widget is ignored.
 |cancelPopups |<<.from-version "5.1.23">> if set to "yes", cancels all popups when the input gets focus |
 |inputActions |<<.from-version 5.1.23>> Optional actions that are triggered every time an input event occurs within the input field or textarea |
 |refreshTitle |<<.from-version 5.1.23>> An optional tiddler title that makes the input field update whenever the specified tiddler changes |
+|disabled|<<.from-version "5.1.23">> Optional, disables the text input if set to "yes". Defaults to "no"|
 
 ! Notes
 

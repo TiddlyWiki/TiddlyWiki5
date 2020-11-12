@@ -187,4 +187,26 @@ Extended filter operators to manipulate the current list.
         }, []);
         return set;
     };
+	
+	/*
+	Toggles an item in the current list.
+	*/
+	exports.toggle = function(source, operator) {
+		var results = prepare_results(source),
+			index = results.indexOf(operator.operand),
+			pairIndex = (operator.operands[1] ? results.indexOf(operator.operands[1]) : -1);
+		if(index === -1) {
+			results.push(operator.operand);
+			if(pairIndex !== -1) {
+				results.splice(pairIndex,1);
+			}
+		} else {
+			results.splice(index,1);
+			if(operator.operands[1]) {
+				results.push(operator.operands[1]);
+			}
+		}
+		return results;
+	};
+	
 })();

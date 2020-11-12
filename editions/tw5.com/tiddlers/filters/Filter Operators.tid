@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 \define .operator-rows(filter)
 <$list filter="$filter$"><tr>
-<td><$link to={{!!title}}>{{!!caption}}</$link></td>
+<td><$link>{{!!caption}}</$link></td>
 <td>{{!!op-purpose}}</td>
 <td align="center"><$list filter="[all[current]tag[Common Operators]]">✓</$list></td>
 <td align="center"><$list filter="[all[current]tag[Negatable Operators]]">`!`</$list></td>

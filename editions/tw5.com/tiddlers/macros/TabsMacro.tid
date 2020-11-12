@@ -27,6 +27,10 @@ By default the tabs are arranged horizontally above the content. To get vertical
 : Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the content of the button for the selected tab
 ;retain
 : Optionally, "yes" specifies that the content of the tabs should be retained when switching to another tab, avoiding re-rendering it (this can be useful to avoid video or audio sources unexpectedly resetting)
+;actions
+: Optionally, actions can be specified that are triggered when changing a tab
+;explicitState
+: Optionally, an explicit state title can be specified. It will be preferred over the internally computed (qualified) state title
 
 Within the template, the title of the selected tab is available in the <<.var currentTab>> variable.
 

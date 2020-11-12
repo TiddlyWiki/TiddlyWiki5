@@ -46,6 +46,9 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 	if(this.increment){
 		this.inputDomNode.setAttribute("step", this.increment);
 	}
+	if(this.isDisabled === "yes") {
+		this.inputDomNode.setAttribute("disabled",true);
+	}
 	this.inputDomNode.value = this.getValue();
 	// Add a click event handler
 	$tw.utils.addEventListeners(this.inputDomNode,[
@@ -98,6 +101,7 @@ RangeWidget.prototype.execute = function() {
 	this.increment = this.getAttribute("increment");
 	this.defaultValue = this.getAttribute("default");
 	this.elementClass = this.getAttribute("class","");
+	this.isDisabled = this.getAttribute("disabled","no");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -107,7 +111,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RangeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes['min'] || changedAttributes['max'] || changedAttributes['increment'] || changedAttributes["default"] || changedAttributes["class"]) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes['min'] || changedAttributes['max'] || changedAttributes['increment'] || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.disabled) {
 		this.refreshSelf();
 		return true;
 	} else {

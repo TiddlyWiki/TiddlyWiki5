@@ -62,43 +62,61 @@ function parseFilterOperation(operators,filterString,p) {
 		else if(operator.operator === "") {
 			operator.operator = "title";
 		}
+		operator.operands = [];
+		function parseOperand(bracketType) {
+			var operand = {};
+			switch (bracketType) {
+				case "{": // Curly brackets
+					operand.indirect = true;
+					nextBracketPos = filterString.indexOf("}",p);
+					break;
+				case "[": // Square brackets
+					nextBracketPos = filterString.indexOf("]",p);
+					break;
+				case "<": // Angle brackets
+					operand.variable = true;
+					nextBracketPos = filterString.indexOf(">",p);
+					break;
+				case "/": // regexp brackets
+					var rex = /^((?:[^\\\/]*|\\.)*)\/(?:\(([mygi]+)\))?/g,
+						rexMatch = rex.exec(filterString.substring(p));
+					if(rexMatch) {
+						operator.regexp = new RegExp(rexMatch[1], rexMatch[2]);
+	// DEPRECATION WARNING
+	console.log("WARNING: Filter",operator.operator,"has a deprecated regexp operand",operator.regexp);
+						nextBracketPos = p + rex.lastIndex - 1;
+					}
+					else {
+						throw "Unterminated regular expression in filter expression";
+					}
+					break;
+			}
 
+			if(nextBracketPos === -1) {
+				throw "Missing closing bracket in filter expression";
+			}
+			if(!operator.regexp) {
+				operand.text = filterString.substring(p,nextBracketPos);
+				operator.operands.push(operand);
+			}
+			p = nextBracketPos + 1;
+		}
+		
 		p = nextBracketPos + 1;
-		switch (bracket) {
-			case "{": // Curly brackets
-				operator.indirect = true;
-				nextBracketPos = filterString.indexOf("}",p);
-				break;
-			case "[": // Square brackets
-				nextBracketPos = filterString.indexOf("]",p);
-				break;
-			case "<": // Angle brackets
-				operator.variable = true;
-				nextBracketPos = filterString.indexOf(">",p);
-				break;
-			case "/": // regexp brackets
-				var rex = /^((?:[^\\\/]*|\\.)*)\/(?:\(([mygi]+)\))?/g,
-					rexMatch = rex.exec(filterString.substring(p));
-				if(rexMatch) {
-					operator.regexp = new RegExp(rexMatch[1], rexMatch[2]);
-// DEPRECATION WARNING
-console.log("WARNING: Filter",operator.operator,"has a deprecated regexp operand",operator.regexp);
-					nextBracketPos = p + rex.lastIndex - 1;
-				}
-				else {
-					throw "Unterminated regular expression in filter expression";
-				}
-				break;
+		parseOperand(bracket);
+		
+		// Check for multiple operands
+		while(filterString.charAt(p) === ",") {
+			p++;
+			if(/^[\[\{<\/]/.test(filterString.substring(p))) {
+				nextBracketPos = p;
+				p++;
+				parseOperand(filterString.charAt(nextBracketPos));
+			} else {
+				throw "Missing [ in filter expression";
+			}
 		}
-
-		if(nextBracketPos === -1) {
-			throw "Missing closing bracket in filter expression";
-		}
-		if(!operator.regexp) {
-			operator.operand = filterString.substring(p,nextBracketPos);
-		}
-		p = nextBracketPos + 1;
-
+		
 		// Push this operator
 		operators.push(operator);
 	} while(filterString.charAt(p) !== "]");
@@ -119,7 +137,7 @@ exports.parseFilter = function(filterString) {
 		p = 0, // Current position in the filter string
 		match;
 	var whitespaceRegExp = /(\s+)/mg,
-		operandRegExp = /((?:\+|\-|~|=)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
+		operandRegExp = /((?:\+|\-|~|=|\:(\w+))?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
 	while(p < filterString.length) {
 		// Skip any whitespace
 		whitespaceRegExp.lastIndex = p;
@@ -140,16 +158,19 @@ exports.parseFilter = function(filterString) {
 			};
 			if(match[1]) {
 				operation.prefix = match[1];
-				p++;
+				p = p + operation.prefix.length;
+				if(match[2]) {
+					operation.namedPrefix = match[2];
+				}
 			}
-			if(match[2]) { // Opening square bracket
+			if(match[3]) { // Opening square bracket
 				p = parseFilterOperation(operation.operators,filterString,p);
 			} else {
 				p = match.index + match[0].length;
 			}
-			if(match[3] || match[4] || match[5]) { // Double quoted string, single quoted string or unquoted title
+			if(match[4] || match[5] || match[6]) { // Double quoted string, single quoted string or unquoted title
 				operation.operators.push(
-					{operator: "title", operand: match[3] || match[4] || match[5]}
+					{operator: "title", operands: [{text: match[4] || match[5] || match[6]}]}
 				);
 			}
 			results.push(operation);
@@ -165,6 +186,14 @@ exports.getFilterOperators = function() {
 	}
 	return this.filterOperators;
 };
+
+exports.getFilterRunPrefixes = function() {
+	if(!this.filterPrefixes) {
+		$tw.Wiki.prototype.filterRunPrefixes = {};
+		$tw.modules.applyMethods("filterrunprefix",this.filterRunPrefixes);
+	}
+	return this.filterRunPrefixes;
+}
 
 exports.filterTiddlers = function(filterString,widget,source) {
 	var fn = this.compileFilter(filterString);
@@ -198,7 +227,7 @@ exports.compileFilter = function(filterString) {
 				results = [],
 				currTiddlerTitle = widget && widget.getVariable("currentTiddler");
 			$tw.utils.each(operation.operators,function(operator) {
-				var operand = operator.operand,
+				var operands = [],
 					operatorFunction;
 				if(!operator.operator) {
 					operatorFunction = filterOperators.title;
@@ -207,16 +236,23 @@ exports.compileFilter = function(filterString) {
 				} else {
 					operatorFunction = filterOperators[operator.operator];
 				}
-				if(operator.indirect) {
-					operand = self.getTextReference(operator.operand,"",currTiddlerTitle);
-				}
-				if(operator.variable) {
-					operand = widget.getVariable(operator.operand,{defaultValue: ""});
-				}
+				
+				$tw.utils.each(operator.operands,function(operand) {
+					if(operand.indirect) {
+						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
+					} else if(operand.variable) {
+						operand.value = widget.getVariable(operand.text,{defaultValue: ""});
+					} else {
+						operand.value = operand.text;
+					}
+					operands.push(operand.value);
+				});
+
 				// Invoke the appropriate filteroperator module
 				results = operatorFunction(accumulator,{
 							operator: operator.operator,
-							operand: operand,
+							operand: operands.length > 0 ? operands[0] : undefined,
+							operands: operands,
 							prefix: operator.prefix,
 							suffix: operator.suffix,
 							suffixes: operator.suffixes,
@@ -241,35 +277,29 @@ exports.compileFilter = function(filterString) {
 				return resultArray;
 			}
 		};
+		var filterRunPrefixes = self.getFilterRunPrefixes();
 		// Wrap the operator functions in a wrapper function that depends on the prefix
 		operationFunctions.push((function() {
 			switch(operation.prefix || "") {
 				case "": // No prefix means that the operation is unioned into the result
-					return function(results,source,widget) {
-						$tw.utils.pushTop(results,operationSubFunction(source,widget));
-					};
+					return filterRunPrefixes["or"](operationSubFunction);
 				case "=": // The results of the operation are pushed into the result without deduplication
-					return function(results,source,widget) {
-						Array.prototype.push.apply(results,operationSubFunction(source,widget));
-					};
+					return filterRunPrefixes["all"](operationSubFunction);
 				case "-": // The results of this operation are removed from the main result
-					return function(results,source,widget) {
-						$tw.utils.removeArrayEntries(results,operationSubFunction(source,widget));
-					};
+					return filterRunPrefixes["except"](operationSubFunction);	
 				case "+": // This operation is applied to the main results so far
-					return function(results,source,widget) {
-						// This replaces all the elements of the array, but keeps the actual array so that references to it are preserved
-						source = self.makeTiddlerIterator(results);
-						results.splice(0,results.length);
-						$tw.utils.pushTop(results,operationSubFunction(source,widget));
-					};
+					return filterRunPrefixes["and"](operationSubFunction);
 				case "~": // This operation is unioned into the result only if the main result so far is empty
-					return function(results,source,widget) {
-						if(results.length === 0) {
-							// Main result so far is empty
-							$tw.utils.pushTop(results,operationSubFunction(source,widget));
-						}
-					};
+					return filterRunPrefixes["else"](operationSubFunction);
+				default: 
+					if(operation.namedPrefix && filterRunPrefixes[operation.namedPrefix]) {
+						return filterRunPrefixes[operation.namedPrefix](operationSubFunction);
+					} else {
+						return function(results,source,widget) {
+							results.splice(0,results.length);
+							results.push($tw.language.getString("Error/FilterRunPrefix"));
+						};
+					}
 			}
 		})());
 	});

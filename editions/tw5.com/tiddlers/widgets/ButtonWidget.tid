@@ -1,6 +1,6 @@
 caption: button
 created: 20131024141900000
-modified: 20200131171028279
+modified: 20201108183908170
 tags: Widgets
 title: ButtonWidget
 type: text/vnd.tiddlywiki
@@ -45,6 +45,7 @@ The content of the `<$button>` widget is displayed within the button.
 |dragTiddler |An optional tiddler title making the button draggable and identifying the payload tiddler. See DraggableWidget for details |
 |dragFilter |An optional filter making the button draggable and identifying the list of payload tiddlers. See DraggableWidget for details |
 |tabindex |Sets the `tabindex` attribute of the button to the given value |
+|disabled|<<.from-version "5.1.23">> Optional, disables the button if set to "yes". Defaults to "no"|
 
 ''Note:'' In almost all other cases where a TextReference is used as a widget attribute, it will be placed between curly brackets, to [[transclude|Transclusion in WikiText]] the value currently stored there. However, when we use a TextReference as the value of a button widget's <<.attr set>> attribute, we are referencing //the storage location itself//, rather than the value stored there, so we do ''not'' use curly brackets there. //Example:// we could code a button widget that sets the `caption` field of TiddlerA to be the same as that of TiddlerB as:
 

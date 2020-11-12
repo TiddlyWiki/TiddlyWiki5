@@ -5,5 +5,5 @@ caption: {{$:/language/ControlPanel/Info/Caption}}
 {{$:/language/ControlPanel/Info/Hint}}
 
 <div class="tc-control-panel">
-<<tabs "[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Info]!has[draft.of]]" "$:/core/ui/ControlPanel/Basics">>
+<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Info]!has[draft.of]]" default="$:/core/ui/ControlPanel/Basics" explicitState="$:/state/tab--2112689675"/>
 </div>
