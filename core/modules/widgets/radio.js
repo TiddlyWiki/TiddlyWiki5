@@ -84,20 +84,21 @@ RadioWidget.prototype.setValue = function() {
 
 RadioWidget.prototype.handleChangeEvent = function(event) {
 	var self=this;
-
 	if(this.inputDomNode.checked) {
 		this.setValue();
 	}
-	// Trigger actions
+	// Trigger actions and make parameters available as variables-hashmap
 	if(this.radioActions) {
 		$tw.utils.each(this.attributes,function(val,key) {
-			if(key.charAt(0) !== "$") {
+			// we don't need "actions", but all the other params
+			if((key !== "actions") && (key.charAt(0) !== "$")) {
 				self.setVariable("__" + key + "__",val);
 			}
 		});
 		// Widget.prototype.invokeActionString = function(actions,triggeringWidget,event,variables) {
 		this.invokeActionString(this.radioActions,this,event);
-	}};
+	}
+};
 
 /*
 Compute the internal state of the widget
