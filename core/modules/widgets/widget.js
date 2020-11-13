@@ -554,6 +554,7 @@ Widget.prototype.invokeActions = function(triggeringWidget,event) {
 
 /*
 Invoke the action widgets defined in a string
+variables needs to be an object eg: {key:value, key:value}
 */
 Widget.prototype.invokeActionString = function(actions,triggeringWidget,event,variables) {
 	actions = actions || "";

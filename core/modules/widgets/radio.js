@@ -83,23 +83,15 @@ RadioWidget.prototype.setValue = function() {
 };
 
 RadioWidget.prototype.handleChangeEvent = function(event) {
-	var self=this;
+	var variables; 
 	if(this.inputDomNode.checked) {
 		this.setValue();
 	}
-	// Trigger actions and make all important parameters available as variables-hashmap
+	// Trigger actions. Use variables = {key:value, key:value ...}
 	if(this.radioActions) {
-		// Set params, that may be missing as attributes
-		this.setVariable("__tiddler__", this.radioTitle);
-		this.setVariable("__field__", this.radioField);
-		$tw.utils.each(this.attributes,function(val,key) {
-			// we don't need "actions", but all the other params
-			if((key !== "actions") && (key.charAt(0) !== "$")) {
-				self.setVariable("__" + key + "__",val);
-			}
-		});
-		// Widget.prototype.invokeActionString = function(actions,triggeringWidget,event,variables) {
-		this.invokeActionString(this.radioActions,this,event);
+		// "tiddler" parameter may be missing. See .execute() below
+		variables = $tw.utils.extend(Object.create(null), this.attributes, {tiddler: this.radioTitle});
+		this.invokeActionString(this.radioActions,this,event,variables);
 	}
 };
 
