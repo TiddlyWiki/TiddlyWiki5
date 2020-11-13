@@ -19,6 +19,8 @@ Shadow/OverriddenWarning: This is a modified shadow tiddler. You can revert to t
 Tags/Add/Button: add
 Tags/Add/Button/Hint: add tag
 Tags/Add/Placeholder: tag name
+Tags/ClearInput/Caption: clear input
+Tags/ClearInput/Hint: Clear tag input
 Tags/Dropdown/Caption: tag list
 Tags/Dropdown/Hint: Show tag list
 Title/BadCharacterWarning: Warning: avoid using any of the characters <<bad-chars>> in tiddler titles
