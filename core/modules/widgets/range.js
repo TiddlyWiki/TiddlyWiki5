@@ -52,8 +52,10 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 	this.inputDomNode.value = this.getValue();
 	// Add a click event handler
 	$tw.utils.addEventListeners(this.inputDomNode,[
+		{name: "mousedown",handlerObject: this,handlerMethod: "handleMouseDownEvent"},
+		{name: "mouseup",handlerObject: this,handlerMethod: "handleMouseUpEvent"},
+		{name: "change", handlerObject: this, handlerMethod: "handleChangeEvent"},
 		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"},
-		{name: "change", handlerObject: this, handlerMethod: "handleInputEvent"}		
 	]);
 	// Insert the label into the DOM and render any children
 	parent.insertBefore(this.inputDomNode,nextSibling);
@@ -78,6 +80,30 @@ RangeWidget.prototype.getValue = function() {
 	return value;
 };
 
+RangeWidget.prototype.handleMouseDownEvent = function(event) {
+	this.handleInputEvent(event);
+	// Trigger actions
+	if(this.actionsMouseDown) {
+		this.invokeActionString(this.actionsMouseDown,this,event);
+	}
+}
+
+RangeWidget.prototype.handleMouseUpEvent = function(event) {
+	this.handleInputEvent(event);
+	// Trigger actions
+	if(this.actionsMouseUp {
+		this.invokeActionString(this.actionsMouseUp,this,event);
+	}
+}
+
+RangeWidget.prototype.handleChangeEvent = function(event) {
+	this.handleInputEvent(event);
+	// Trigger actions
+	if(this.actionsChange) {
+		this.invokeActionString(this.actionsChange,this,event);
+	}
+};
+
 RangeWidget.prototype.handleInputEvent = function(event) {
 	if(this.getValue() !== this.inputDomNode.value) {
 		if(this.tiddlerIndex) {
@@ -85,6 +111,10 @@ RangeWidget.prototype.handleInputEvent = function(event) {
 		} else {
 			this.wiki.setText(this.tiddlerTitle,this.tiddlerField,null,this.inputDomNode.value);
 		}
+	}
+	// Trigger actions
+	if(this.actionsInput) {
+		this.invokeActionString(this.actionsInput,this,event);
 	}
 };
 
@@ -102,6 +132,14 @@ RangeWidget.prototype.execute = function() {
 	this.defaultValue = this.getAttribute("default");
 	this.elementClass = this.getAttribute("class","");
 	this.isDisabled = this.getAttribute("disabled","no");
+	// Actions since 5.1.23
+	// Next 3 only fire once!
+	this.actionsMouseDown = this.getAttribute("actionsMouseDown");
+	this.actionsMouseUp = this.getAttribute("actionsMouseUp");
+	// Change only fires, if start-value is different to end-value
+	this.actionsChange = this.getAttribute("actionsChange");
+	// input fires very often!!
+	this.actionsInput = this.getAttribute("actionsInput");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -119,7 +157,7 @@ RangeWidget.prototype.refresh = function(changedTiddlers) {
 		if(changedTiddlers[this.tiddlerTitle]) {
 			var value = this.getValue();
 			if(this.inputDomNode.value !== value) {
-				this.inputDomNode.value = value;				
+				this.inputDomNode.value = value;
 			}
 			refreshed = true;
 		}
