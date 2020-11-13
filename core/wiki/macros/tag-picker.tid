@@ -16,7 +16,7 @@ second-search-filter: [tags[]is[system]search:title<userInput>sort[]]
 $actions$
 </$list>
 </$set>
-<<delete-tag-state-tiddlers>>
+<$action-deletetiddler $tiddler=<<tagSelectionState>>/><$action-setfield $tiddler=<<newTagNameTiddler>> text={{{ [<storeTitle>get[text]] }}}/>
 <$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 \end
 
@@ -26,7 +26,8 @@ $actions$
 <$set name="currentTiddlerCSSEscaped" value={{{ [<storyTiddler>escapecss[]] }}}>
 <$action-sendmessage $message="tm-focus-selector" $param=<<get-tagpicker-focus-selector>> preventScroll="true"/>
 </$set>
-<<delete-tag-state-tiddlers>>
+<$action-deletetiddler $tiddler=<<tagSelectionState>>/><$action-setfield $tiddler=<<newTagNameTiddler>> text={{{ [<storeTitle>get[text]] }}}/>
+<$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 $actions$
 <$macrocall $name="tag-pill" tag=<<tag>>/>
 </$button>
@@ -58,7 +59,7 @@ $actions$
 		focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> 
 		focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}} filterMinLength={{$:/config/Tags/MinLength}} 
 		cancelPopups=<<cancelPopups>> configTiddlerFilter="[[$:/core/macros/tag-picker]]"/>
-</span><$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button><span class="tc-add-tag-button tc-small-gap-left">
+</span><$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button><$reveal state=<<storeTitle>> type="nomatch" text=""><$button class="tc-btn-invisible tc-small-gap tc-btn-dropdown">{{$:/core/images/close-button}}<<delete-tag-state-tiddlers>></$button></$reveal><span class="tc-add-tag-button tc-small-gap-left">
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$button set=<<newTagNameTiddler>> setTo="" class="">
 <$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
