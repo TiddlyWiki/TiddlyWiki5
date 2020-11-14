@@ -81,30 +81,78 @@ RangeWidget.prototype.getValue = function() {
 };
 
 RangeWidget.prototype.handleMouseDownEvent = function(event) {
-	this.handleInputEvent(event);
+	var variables; 
+	this.mouseDown = true;
+
+console.log("mouse down",event);
+
+	this.handleEvent(event);
 	// Trigger actions
 	if(this.actionsMouseDown) {
-		this.invokeActionString(this.actionsMouseDown,this,event);
+		// "tiddler" parameter may be missing. See .execute() below
+		variables = $tw.utils.extend(Object.create(null), this.attributes, {tiddler: this.tiddlerTitle});
+		this.invokeActionString(this.actionsMouseDown,this,event,variables);
+	}
+	// TODO remove this once IE is gone!
+	if (this.isIE) {
+		this.oldValue = this.inputDomNode.value;
 	}
 }
 
 RangeWidget.prototype.handleMouseUpEvent = function(event) {
-	this.handleInputEvent(event);
+	var variables; 
+	this.mouseDown = false;
+
+console.log("mouse up",event);
+
+	this.handleEvent(event);
 	// Trigger actions
-	if(this.actionsMouseUp {
-		this.invokeActionString(this.actionsMouseUp,this,event);
+	if(this.actionsMouseUp) {
+		variables = $tw.utils.extend(Object.create(null), this.attributes, {tiddler: this.tiddlerTitle});
+		this.invokeActionString(this.actionsMouseUp,this,event,variables);
+	}
+	// TODO remove this once IE is gone!
+	if (this.isIE) {
+		if (this.oldValue !== this.inputDomNode.value) {
+			this.handleChangeEvent(event);
+			this.oldValue = this.inputDomNode.value;
+		}
 	}
 }
 
 RangeWidget.prototype.handleChangeEvent = function(event) {
-	this.handleInputEvent(event);
-	// Trigger actions
-	if(this.actionsChange) {
-		this.invokeActionString(this.actionsChange,this,event);
+	var variables; 
+	if (this.mouseDown) {
+		this.handleInputEvent(event);
+	} else {
+
+console.log("change",event);
+
+		this.handleEvent(event);
+		// Trigger actions
+		if(this.actionsChange) {
+			// "tiddler" parameter may be missing. See .execute() below
+			variables = $tw.utils.extend(Object.create(null), this.attributes, {tiddler: this.tiddlerTitle});
+			this.invokeActionString(this.actionsChange,this,event,variables);
+		}
 	}
 };
 
 RangeWidget.prototype.handleInputEvent = function(event) {
+	var variables; 
+
+console.log("input",event);
+
+	this.handleEvent(event);
+	// Trigger actions
+	if(this.actionsInput) {
+		// "tiddler" parameter may be missing. See .execute() below
+		variables = $tw.utils.extend(Object.create(null), this.attributes, {tiddler: this.tiddlerTitle});
+		this.invokeActionString(this.actionsInput,this,event,variables);
+	}
+};
+
+RangeWidget.prototype.handleEvent = function(event) {
 	if(this.getValue() !== this.inputDomNode.value) {
 		if(this.tiddlerIndex) {
 			this.wiki.setText(this.tiddlerTitle,"",this.tiddlerIndex,this.inputDomNode.value);
@@ -112,16 +160,18 @@ RangeWidget.prototype.handleInputEvent = function(event) {
 			this.wiki.setText(this.tiddlerTitle,this.tiddlerField,null,this.inputDomNode.value);
 		}
 	}
-	// Trigger actions
-	if(this.actionsInput) {
-		this.invokeActionString(this.actionsInput,this,event);
-	}
 };
 
 /*
 Compute the internal state of the widget
 */
 RangeWidget.prototype.execute = function() {
+	this.mouseUp = true; // Needed for IE10
+
+	// TODO remove the next 2 lines once IE is gone!
+	this.isIE = (/msie|trident/i.test(window.navigator.userAgent)) ? true : false;
+	console.log("isIE: ", this.isIE)
+
 	// Get the parameters from the attributes
 	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.tiddlerField = this.getAttribute("field");
@@ -134,12 +184,12 @@ RangeWidget.prototype.execute = function() {
 	this.isDisabled = this.getAttribute("disabled","no");
 	// Actions since 5.1.23
 	// Next 3 only fire once!
-	this.actionsMouseDown = this.getAttribute("actionsMouseDown");
-	this.actionsMouseUp = this.getAttribute("actionsMouseUp");
+	this.actionsMouseDown = this.getAttribute("actionsMouseDown","");
+	this.actionsMouseUp = this.getAttribute("actionsMouseUp","");
 	// Change only fires, if start-value is different to end-value
-	this.actionsChange = this.getAttribute("actionsChange");
+	this.actionsChange = this.getAttribute("actionsChange","");
 	// input fires very often!!
-	this.actionsInput = this.getAttribute("actionsInput");
+	this.actionsInput = this.getAttribute("actionsInput","");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
