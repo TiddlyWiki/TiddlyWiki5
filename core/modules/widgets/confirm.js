@@ -57,14 +57,15 @@ ConfirmWidget.prototype.refresh = function(changedTiddlers) {
 Invoke the action associated with this widget
 */
 ConfirmWidget.prototype.invokeAction = function(triggeringWidget,event) {
-	var invokeActions = true;
+	var invokeActions = true,
+		handled = true;
 	if(this.message && this.prompt) {
 		invokeActions = confirm(this.message);
 	}
 	if(invokeActions) {
-		this.invokeActions(triggeringWidget,event);
-		return true;
+		handled = this.invokeActions(triggeringWidget,event);
 	}
+	return handled;
 };
 
 ConfirmWidget.prototype.allowActionPropagation = function() {
