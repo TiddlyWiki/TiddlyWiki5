@@ -46,7 +46,7 @@ Refresh the widget by ensuring our attributes are up to date
 */
 ConfirmWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes["$message"]) {
+	if(changedAttributes["$message"] || changedAttributes["$prompt"]) {
 		this.refreshSelf();
 		return true;
 	}
