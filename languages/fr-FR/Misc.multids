@@ -62,6 +62,15 @@ OfficialPluginLibrary: Bibliothèque officielle des plugins ~TiddlyWiki
 OfficialPluginLibrary/Hint: La bibliothèque officielle des plugins ~TiddlyWiki sur tiddlywiki.com. Plugins, thèmes et packs pour les différentes langues sont maintenus par l'équipe responsable du noyau.
 PluginReloadWarning: Merci d'enregistrer {{$:/core/ui/Buttons/save-wiki}} et de recharger {{$:/core/ui/Buttons/refresh}} pour que les changements apportés aux plugins ~JavaScript prennent effet
 RecentChanges/DateFormat: DD MMM YYYY
+Shortcuts/Input/AdvancedSearch/Hint: Ouvre le panneau Recherche Avancée depuis le champ de recherche de la barre latérale
+Shortcuts/Input/Accept/Hint: Accepte l'élément sélectionné
+Shortcuts/Input/AcceptVariant/Hint: Accepte l'élément sélectionné (variante)
+Shortcuts/Input/Cancel/Hint: Efface le champ d'entrée
+Shortcuts/Input/Down/Hint: Sélectionne l'élément suivant
+Shortcuts/Input/Tab-Left/Hint: Sélectionne l'onglet précédent
+Shortcuts/Input/Tab-Right/Hint: Sélectionne l'onglet suivant
+Shortcuts/Input/Up/Hint: Sélectionne l'élément précédent
+Shortcuts/SidebarLayout/Hint: Change la mise en forme de la barre latérale
 SystemTiddler/Tooltip: Ceci est un tiddler système
 SystemTiddlers/Include/Prompt: Inclure les tiddlers système
 TagManager/Colour/Heading: Couleur
