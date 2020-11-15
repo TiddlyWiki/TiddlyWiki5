@@ -16,7 +16,7 @@ second-search-filter: [tags[]is[system]search:title<userInput>sort[]]
 $actions$
 </$list>
 </$set>
-<$action-deletetiddler $tiddler=<<tagSelectionState>>/><$action-setfield $tiddler=<<newTagNameTiddler>> text={{{ [<storeTitle>get[text]] }}}/>
+<<delete-tag-state-tiddlers>>
 <$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 \end
 
@@ -26,7 +26,7 @@ $actions$
 <$set name="currentTiddlerCSSEscaped" value={{{ [<storyTiddler>escapecss[]] }}}>
 <$action-sendmessage $message="tm-focus-selector" $param=<<get-tagpicker-focus-selector>> preventScroll="true"/>
 </$set>
-<$action-deletetiddler $tiddler=<<tagSelectionState>>/><$action-setfield $tiddler=<<newTagNameTiddler>> text={{{ [<storeTitle>get[text]] }}}/>
+<<delete-tag-state-tiddlers>>
 <$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 $actions$
 <$macrocall $name="tag-pill" tag=<<tag>>/>
