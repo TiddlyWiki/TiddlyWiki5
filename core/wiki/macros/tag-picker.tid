@@ -34,7 +34,7 @@ $actions$
 \end
 
 \define clear-tags-actions-inner()
-<$list filter="[<storeTitle>has[text]] [<newTagNameTiddler>has[text]]" variable="ignore" emptyMessage="""<<delete-tag-state-tiddlers>><$action-sendmessage $message="tm-cancel-tiddler"/>""">
+<$list filter="[<storeTitle>has[text]] [<newTagNameTiddler>has[text]]" variable="ignore" emptyMessage="""<<cancel-delete-tiddler-actions "cancel">>""">
 <<delete-tag-state-tiddlers>>
 </$list>
 \end
