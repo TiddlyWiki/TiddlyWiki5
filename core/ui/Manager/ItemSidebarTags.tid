@@ -2,6 +2,7 @@ title: $:/Manager/ItemSidebar/Tags
 tags: $:/tags/Manager/ItemSidebar
 caption: {{$:/language/Manager/Item/Tags}}
 
+\whitespace trim
 \define tag-checkbox-actions()
 <$action-listops
 	$tiddler="$:/config/Manager/RecentTags"
@@ -14,7 +15,7 @@ caption: {{$:/language/Manager/Item/Tags}}
 \end
 
 <p>
-<$list filter="[all[current]tags[]] [list[$:/config/Manager/RecentTags]] +[sort[title]] " variable="tag">
+<$list filter="[all[current]tags[]] [list[$:/config/Manager/RecentTags]] +[sort[title]] " variable="tag" storyview="pop">
 <div>
 <$checkbox tiddler=<<currentTiddler>> tag=<<tag>> actions=<<tag-checkbox-actions>>>
 <$macrocall $name="tag-pill" tag=<<tag>>/>

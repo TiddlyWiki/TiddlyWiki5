@@ -3,6 +3,6 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/erase
 caption: {{$:/language/Buttons/Clear/Caption}}
 description: {{$:/language/Buttons/Clear/Hint}}
-condition: [<targetTiddler>is[image]]
+condition: [<targetTiddler>is[image]] -[<targetTiddler>type[image/svg+xml]]
 dropdown: $:/core/ui/EditorToolbar/clear-dropdown
 
