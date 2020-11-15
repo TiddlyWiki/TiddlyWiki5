@@ -13,7 +13,6 @@ Set a field or index at a given tiddler via radio buttons
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
-
 var RadioWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
@@ -83,14 +82,19 @@ RadioWidget.prototype.setValue = function() {
 };
 
 RadioWidget.prototype.handleChangeEvent = function(event) {
-	var variables; 
+	var variables = Object.create(null);
 	if(this.inputDomNode.checked) {
 		this.setValue();
 	}
 	// Trigger actions. Use variables = {key:value, key:value ...}
 	if(this.radioActions) {
-		// "tiddler" parameter may be missing. See .execute() below
-		variables = $tw.utils.extend(Object.create(null), this.attributes, {tiddler: this.radioTitle});
+		$tw.utils.each(this.attributes,function(val,key) {
+			if(key.charAt(0) !== "$") {
+				variables["attr-" + key] = val;
+			}
+		});
+		// "tiddler" and/or "field" parameter may be missing in the widget call. See .execute() below
+		variables = $tw.utils.extend(variables, {"attr-tiddler": this.radioTitle, "attr-field": this.radioField});
 		this.invokeActionString(this.radioActions,this,event,variables);
 	}
 };
@@ -116,7 +120,8 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RadioWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.value || changedAttributes["class"] || changedAttributes.disabled) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.value ||
+		changedAttributes["class"] || changedAttributes.disabled || changedAttributes.actions ) {
 		this.refreshSelf();
 		return true;
 	} else {
