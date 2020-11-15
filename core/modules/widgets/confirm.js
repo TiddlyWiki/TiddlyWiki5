@@ -36,8 +36,8 @@ ConfirmWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 ConfirmWidget.prototype.execute = function() {
-	this.message = this.getAttribute("$message");
-	this.prompt = (this.getAttribute("$prompt","yes") == "yes" ? true : false);
+	this.message = this.getAttribute("$message",$tw.language.getString("ConfirmAction"));
+	this.prompt = (this.getAttribute("$prompt","yes") == "no" ? false : true);
 	this.makeChildWidgets();
 };
 
@@ -59,7 +59,7 @@ Invoke the action associated with this widget
 ConfirmWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var invokeActions = true,
 		handled = true;
-	if(this.message && this.prompt) {
+	if(this.prompt) {
 		invokeActions = confirm(this.message);
 	}
 	if(invokeActions) {
