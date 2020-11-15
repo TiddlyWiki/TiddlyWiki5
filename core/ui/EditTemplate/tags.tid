@@ -28,14 +28,12 @@ color:$(foregroundColor)$;
 \define edit-tags-template(tagField:"tags")
 \whitespace trim
 <div class="tc-edit-tags">
-<$fieldmangler>
 <$list filter="[list[!!$tagField$]sort[title]]" storyview="pop">
 <$macrocall $name="tag-body" colour={{!!color}} palette={{$:/palette}} icon={{!!icon}} tagField=<<__tagField__>>/>
 </$list>
 <$vars tabIndex={{$:/config/EditTabIndex}} cancelPopups="yes">
 <$macrocall $name="tag-picker" tagField=<<__tagField__>>/>
 </$vars>
-</$fieldmangler>
 </div>
 \end
 <$set name="saveTiddler" value=<<currentTiddler>>>
