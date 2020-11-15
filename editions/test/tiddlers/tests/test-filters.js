@@ -758,6 +758,7 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("[[Tiddler Three]tags[]] -[[one]] +[toggle[one]]").join(",")).toBe("two,one");
 		expect(wiki.filterTiddlers("[[Tiddler Three]tags[]] +[toggle[three],[four]]").join(",")).toBe("one,two,three");
 		expect(wiki.filterTiddlers("[[Tiddler Three]tags[]] [[three]] +[toggle[three],[four]]").join(",")).toBe("one,two,four");
+		expect(wiki.filterTiddlers("[[Tiddler Three]tags[]] [[three]] [[four]] +[toggle[three],[five]]").join(",")).toBe("one,two,five,four");
 	});
 
 	it("should handle multiple operands for search-replace", function() {
