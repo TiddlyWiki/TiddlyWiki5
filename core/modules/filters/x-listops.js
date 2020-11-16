@@ -188,27 +188,44 @@ Extended filter operators to manipulate the current list.
 		return set;
 	};
 
-	/*
-	Toggles an item in the current list.
-	*/
-	exports.toggle = function(source, operator) {
-		var results = prepare_results(source),
-			index = results.indexOf(operator.operand),
-			pairIndex = (operator.operands[1] ? results.indexOf(operator.operands[1]) : -1);
-		if(index === -1) {
-			if(pairIndex !== -1) {
-				results.splice(pairIndex,1,operator.operand);
-			} else {
-				results.push(operator.operand);
-			}
-		} else {
-			if(operator.operands[1]) {
-				results.splice(index,1,operator.operands[1]);
-			} else {
-				results.splice(index,1);
+	var cycleValueInArray = function(results,operands) {
+		var resultsIndex,
+			i = 0,
+			nextOperandIndex;		
+		for(i; i < operands.length; i++) {
+			resultsIndex = results.indexOf(operands[i]);
+			if(resultsIndex !== -1) {
+				break;
 			}
 		}
-		return results;
-	};
+		if(resultsIndex !== -1) {
+			i++;
+			nextOperandIndex = (i === operands.length ? 0 : i);
+			if(operands.length > 1) {
+				results.splice(resultsIndex,1,operands[nextOperandIndex]);
+			} else {
+				results.splice(resultsIndex,1,);
+			}
+		} else {
+			results.push(operands[0]);
+		}
+		return results;		
+	}
 
+	/*
+	Toggles an item in the current list.
+	*/	
+	exports.toggle = function(source,operator) {
+		return cycleValueInArray(prepare_results(source),operator.operands);
+	}
+
+	exports.cycle = function(source,operator) {
+		var results = prepare_results(source),
+			operands = (operator.operand.length ? $tw.utils.parseStringArray(operator.operand, "true") : [""]);
+		if(operator.suffix === "reverse") {
+			operands.reverse();
+		}
+		return cycleValueInArray(results,operands);
+	}
+	
 })();

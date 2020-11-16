@@ -34,7 +34,7 @@ $actions$
 \end
 
 \define clear-tags-actions-inner()
-<$list filter="[<storeTitle>has[text]] [<newTagNameTiddler>has[text]]" variable="ignore" emptyMessage="""<<delete-tag-state-tiddlers>><$action-sendmessage $message="tm-cancel-tiddler"/>""">
+<$list filter="[<storeTitle>has[text]] [<newTagNameTiddler>has[text]]" variable="ignore" emptyMessage="""<<cancel-delete-tiddler-actions "cancel">>""">
 <<delete-tag-state-tiddlers>>
 </$list>
 \end
@@ -49,7 +49,9 @@ $actions$
 
 \define tag-picker-inner(actions,tagField:"tags")
 \whitespace trim
-<$vars tagSelectionState=<<qualify "$:/state/selected-tag">> storeTitle=<<qualify "$:/temp/NewTagName/input">> refreshTitle=<<qualify "$:/temp/NewTagName/refresh">> nonSystemTagsFilter="[tags[]!is[system]search:title<userInput>sort[]]" systemTagsFilter="[tags[]is[system]search:title<userInput>sort[]]">
+<$vars newTagNameInputTiddlerQualified=<<qualify "$:/temp/NewTagName/input">> newTagNameSelectionTiddlerQualified=<<qualify "$:/temp/NewTagName/selected-item">>>
+<$vars storeTitle={{{ [<newTagNameInputTiddler>!match[]] ~[<newTagNameInputTiddlerQualified>] }}} tagSelectionState={{{ [<newTagNameSelectionTiddler>!match[]] ~[<newTagNameSelectionTiddlerQualified>] }}}>
+<$vars refreshTitle=<<qualify "$:/temp/NewTagName/refresh">> nonSystemTagsFilter="[tags[]!is[system]search:title<userInput>sort[]]" systemTagsFilter="[tags[]is[system]search:title<userInput>sort[]]">
 <div class="tc-edit-add-tag">
 <div>
 <span class="tc-add-tag-name tc-small-gap-right">
@@ -94,6 +96,8 @@ $actions$
 </$reveal>
 </div>
 </div>
+</$vars>
+</$vars>
 </$vars>
 \end
 \define tag-picker(actions,tagField:"tags")
