@@ -28,6 +28,7 @@ exports.handler = function(request,response,state) {
 			return;
 		}
 	}
+	filter = filter + "-[subfilter{$:/config/Server/GlobalExclusionFilter}]";
 	var excludeFields = (state.queryParameters.exclude || "text").split(","),
 		titles = state.wiki.filterTiddlers(filter);
 	response.writeHead(200, {"Content-Type": "application/json"});
