@@ -94,7 +94,10 @@ RadioWidget.prototype.handleChangeEvent = function(event) {
 			}
 		});
 		// "tiddler" and/or "field" parameter may be missing in the widget call. See .execute() below
-		variables = $tw.utils.extend(variables, {"attr-tiddler": this.radioTitle, "attr-field": this.radioField});
+		variables = $tw.utils.extend(variables, {"actionValue": this.radioValue,
+			"attr-tiddler": this.radioTitle,
+			"attr-field": this.radioField
+			});
 		this.invokeActionString(this.radioActions,this,event,variables);
 	}
 };
