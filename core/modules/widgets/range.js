@@ -123,7 +123,7 @@ console.log("mouse up",event);
 		this.invokeActionString(this.actionsMouseUp,this,event,variables);
 	}
 	// TODO remove the following if() once IE is gone!
-	if (this.isIE) {
+	if ($tw.browser.isIE) {
 		if (this.oldValue !== this.inputDomNode.value) {
 			this.handleChangeEvent(event);
 			this.oldValue = this.inputDomNode.value;
@@ -175,10 +175,6 @@ Compute the internal state of the widget
 RangeWidget.prototype.execute = function() {
 	// TODO remove the next 2 lines once IE is gone!
 	this.mouseUp = true; // Needed for IE10
-	this.isIE = (/msie|trident/i.test(window.navigator.userAgent)) ? true : false;
-
-console.log("isIE: ", this.isIE)
-
 	// Get the parameters from the attributes
 	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.tiddlerField = this.getAttribute("field","text");
@@ -193,9 +189,9 @@ console.log("isIE: ", this.isIE)
 	// Next 3 only fire once!
 	this.actionsMouseDown = this.getAttribute("actionsMouseDown","");
 	this.actionsMouseUp = this.getAttribute("actionsMouseUp","");
-	// Change only fires, if start-value is different to end-value
+	// Change only fires if start-value is different to end-value
 	this.actionsChange = this.getAttribute("actionsChange","");
-	// input fires very often!!
+	// Input fires very often!
 	this.actionsInput = this.getAttribute("actionsInput","");
 	// Make the child widgets
 	this.makeChildWidgets();
@@ -206,9 +202,9 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RangeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(	changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes['min'] || changedAttributes['max'] ||
-		changedAttributes['increment'] || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.disabled ||
-		changedAttributes.actionsMouseDown || changedAttributes.actionsMouseUp || changedAttributes.actionsChange || changedAttributes.actionsInput) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes['min'] || changedAttributes['max'] ||
+	   changedAttributes['increment'] || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.disabled ||
+	   changedAttributes.actionsMouseDown || changedAttributes.actionsMouseUp || changedAttributes.actionsChange || changedAttributes.actionsInput) {
 		this.refreshSelf();
 		return true;
 	} else {
