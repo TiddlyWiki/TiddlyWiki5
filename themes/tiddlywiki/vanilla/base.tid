@@ -47,23 +47,6 @@ $else$
 </$reveal>
 \end
 
-\define set-small-fields-table-margin()
-[data-tiddler-title="$(cssEscapedTitle)$"] .tc-edit-fields table {
-	margin-top: 0.5em;
-	margin-bottom: 0;
-}
-\end
-
-\define set-fields-table-margin()
-<$list filter="[list[$:/StoryList]is[draft]]">
-<$vars fieldCount={{{ [<currentTiddler>fields[]] -[[title]] -[[tags]] -[[text]] -[[type]] -[[created]] -[[creator]] -[[modified]] -[[modifier]] -[[draft.of]] -[[draft.title]] +[count[]] }}} cssEscapedTitle={{{ [<currentTiddler>escapecss[]] }}}>
-<$list filter="[<fieldCount>match[0]]">
-<<set-small-fields-table-margin>>
-</$list>
-</$vars>
-</$list>
-\end
-
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
 /*
@@ -1437,8 +1420,9 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 100%;
 }
 
-.tc-edit-fields table {
-	transition: margin-top {{$:/config/AnimationDuration}}ms ease-in-out, margin-bottom {{$:/config/AnimationDuration}} ease-in-out;
+.tc-edit-fields.tc-edit-fields-small {
+	margin-top: .5em;
+	margin-bottom: 0;
 }
 
 .tc-edit-fields table, .tc-edit-fields tr, .tc-edit-fields td {
@@ -1453,8 +1437,6 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-edit-fields > tbody > .tc-edit-field:nth-child(even) {
 	background-color: <<colour tiddler-editor-fields-even>>;
 }
-
-<<set-fields-table-margin>>
 
 .tc-edit-field-name {
 	text-align: right;
