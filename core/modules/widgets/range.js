@@ -90,10 +90,10 @@ RangeWidget.prototype.prepareAttributes = function() {
 	});
 	// "tiddler" parameter may be missing in the widget call. See .execute() below
 	// the "value" is needed.
-	variables = $tw.utils.extend(variables, 
-			{"attr-tiddler": this.tiddlerTitle,
-			"attr-field": this.tiddlerField, 
-			"attr-value": this.inputDomNode.value});
+	variables = $tw.utils.extend(variables, {"actionValue": this.inputDomNode.value,
+			"attr-tiddler": this.tiddlerTitle,
+			"attr-field": this.tiddlerField
+/*			"attr-value": this.inputDomNode.value*/   });
 	return variables;
 }
 
