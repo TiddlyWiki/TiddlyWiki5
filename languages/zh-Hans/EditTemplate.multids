@@ -19,6 +19,8 @@ Shadow/OverriddenWarning: 这是一个修改过的默认条目。删除此条目
 Tags/Add/Button: 添加
 Tags/Add/Button/Hint: 添加标签
 Tags/Add/Placeholder: 标签名称
+Tags/ClearInput/Caption: 清除输入
+Tags/ClearInput/Hint: 清除标签输入
 Tags/Dropdown/Caption: 标签清单
 Tags/Dropdown/Hint: 显示标签清单
 Title/BadCharacterWarning: 请注意，避免在条目名称中使用这些字符：<<bad-chars>>

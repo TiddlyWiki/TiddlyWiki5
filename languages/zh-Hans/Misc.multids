@@ -10,6 +10,7 @@ ConfirmCancelTiddler: 您确定要放弃对条目 "<$text text=<<title>>/>" 的�
 ConfirmDeleteTiddler: 您确定要删除条目 "<$text text=<<title>>/>"？
 ConfirmOverwriteTiddler: 您确定要复写条目 "<$text text=<<title>>/>"？
 ConfirmEditShadowTiddler: 您即将要编辑默认条目，任何更改将会复盖默认的系统，使未来的升级不寻常。您确定要编辑 "<$text text=<<title>>/>"?
+ConfirmAction: 是否要继续？
 Count: 计数
 DefaultNewTiddlerTitle: 新条目
 Diffs/CountMessage: <<diff-count>> 个差异

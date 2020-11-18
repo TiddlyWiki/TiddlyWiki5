@@ -1,16 +1,18 @@
 title: $:/language/Help/rendertiddlers
 description: Exécute le contenu d'un ensemble de tiddlers sélectionnés par un filtre, pour le type de contenu (ContentType) spécifié
 
+(À noter : la commande `--rendertiddlers` est dépréciée. Il est préférable d'utiliser la nouvelle commande `--render`, plus souple)
+
 Enregistre vers le chemin indiqué et avec l'extension indiquée — par défaut `.html`, le résultat de l'exécution d'un ensemble de tiddlers (sélectionnés par un filtre). Le résultat de l'exécution est rendu selon le type de contenu (ContentType) spécifié — par défaut `text/html` :
 
 ```
---rendertiddlers <filtre> <modèle> <chemindurépertoire> [<type>] [<extension>] ["noclean"]
+--rendertiddlers '<filtre>' <modèle> <chemindurépertoire> [<type>] [<extension>] ["noclean"]
 ```
 
 Par exemple :
 
 ```
---rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+--rendertiddlers '[!is[system]]' $:/core/templates/static.tiddler.html ./static text/plain
 ```
 
 Par défaut, le nom de fichier est résolu relativement au sous-répertoire `output` du répertoire de l'édition. La commande `--output` peut servir à rediriger la sortie vers un répertoire différent.

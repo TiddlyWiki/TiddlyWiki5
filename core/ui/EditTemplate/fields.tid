@@ -16,15 +16,14 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 
 \define new-field-actions()
 <$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
-<$action-deletetiddler $tiddler=<<newFieldNameTiddler>>/>
-<$action-deletetiddler $tiddler=<<newFieldValueTiddler>>/>
+<$action-deletetiddler $filter="[<newFieldNameTiddler>] [<newFieldValueTiddler>] [<storeTitle>] [<searchListState>]"/>
 <$action-sendmessage $message="tm-focus-selector" $param=<<current-tiddler-new-field-selector>>/>
 \end
 
 \define delete-state-tiddlers() <$action-deletetiddler $filter="[<newFieldNameTiddler>] [<storeTitle>] [<searchListState>]"/>
 
 \define cancel-search-actions-inner()
-<$list filter="[<storeTitle>has[text]] [<newFieldNameTiddler>has[text]]" variable="ignore" emptyMessage="""<<delete-state-tiddlers>><$action-sendmessage $message="tm-cancel-tiddler"/>""">
+<$list filter="[<storeTitle>has[text]] [<newFieldNameTiddler>has[text]]" variable="ignore" emptyMessage="""<<cancel-delete-tiddler-actions "cancel">>""">
 <<delete-state-tiddlers>>
 </$list>
 \end
@@ -44,8 +43,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 <$action-sendmessage $message="tm-add-field"
 $name=<<name>>
 $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
-<$action-deletetiddler $tiddler=<<newFieldNameTiddler>>/>
-<$action-deletetiddler $tiddler=<<newFieldValueTiddler>>/>
+<$action-deletetiddler $filter="[<newFieldNameTiddler>] [<newFieldValueTiddler>] [<storeTitle>] [<searchListState>]"/>
 <<lingo Fields/Add/Button>>
 </$button>
 </$reveal>
@@ -89,8 +87,8 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 <em class="tc-edit tc-big-gap-right">
 <<lingo Fields/Add/Prompt>>
 </em>
+<$vars refreshTitle=<<qualify "$:/temp/fieldname/refresh">> storeTitle=<<newFieldNameInputTiddler>> searchListState=<<newFieldNameSelectionTiddler>>>
 <div class="tc-edit-field-add-name-wrapper">
-<$vars refreshTitle=<<qualify "$:/temp/fieldname/refresh">> storeTitle=<<qualify "$:/temp/fieldname/input">> searchListState=<<qualify "$:/temp/fieldname/selected-item">>>
 <$macrocall $name="keyboard-driven-input" tiddler=<<newFieldNameTiddler>> storeTitle=<<storeTitle>> refreshTitle=<<refreshTitle>>
 		selectionStateTitle=<<searchListState>> tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}}
 		focusPopup=<<qualify "$:/state/popup/field-dropdown">> class="tc-edit-texteditor tc-popup-handle" tabindex={{$:/config/EditTabIndex}}
@@ -127,7 +125,6 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 </$set>
 </div>
 </$reveal>
-</$vars>
 </div>
 <span class="tc-edit-field-add-value tc-small-gap-right">
 <$set name="currentTiddlerCSSescaped" value={{{ [<currentTiddler>escapecss[]] }}}>
@@ -139,5 +136,6 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 <span class="tc-edit-field-add-button">
 <$macrocall $name="new-field"/>
 </span>
+</$vars>
 </div>
 </$fieldmangler>
