@@ -18,6 +18,8 @@ Shadow/Warning: Dit is een schaduwtiddler. Elke verandering overschrijft de stan
 Tags/Add/Button: +
 Tags/Add/Button/Hint: voeg label toe
 Tags/Add/Placeholder: labelnaam
+Tags/ClearInput/Caption: verwijde ingave
+Tags/ClearInput/Hint: Verwijder labelingave
 Tags/Dropdown/Caption: labellijst
 Tags/Dropdown/Hint: Toon labellijst
 Title/BadCharacterWarning: Waarschuwing: vermijd elk karakter van <<bad-chars>> in tiddler titels
