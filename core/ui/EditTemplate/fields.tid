@@ -57,8 +57,7 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 \whitespace trim
 
 <div class="tc-edit-fields">
-<$set name="excludeList" filter="[all[tiddlers+shadows]prefix[$:/config/EditTemplateFields/Visibility/]contains:text[hide]removeprefix[$:/config/EditTemplateFields/Visibility/]]">
-<table class={{{ [all[current]fields[]] -[enlist<excludeList>] +[count[]] +[!match[0]] +[then[tc-edit-fields]] ~[[tc-edit-fields tc-edit-fields-small]] }}}>
+<table class={{{ [all[current]fields[]] :filter[lookup[$:/config/EditTemplateFields/Visibility/]!match[hide]] +[count[]!match[0]] +[then[tc-edit-fields]] ~[[tc-edit-fields tc-edit-fields-small]] }}}>
 <tbody>
 <$list filter="[all[current]fields[]] +[sort[title]]" variable="currentField" storyview="pop">
 <$list filter=<<config-filter>> variable="temp">
@@ -81,7 +80,6 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 </$list>
 </tbody>
 </table>
-</$set>
 </div>
 
 <$fieldmangler>
