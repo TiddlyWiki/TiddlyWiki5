@@ -5,6 +5,7 @@ description: create a new image tiddler
 \define get-type()
 image/$(imageType)$
 \end
-<$vars imageType={{$:/config/NewImageType}}>
-<$action-sendmessage $message="tm-new-tiddler" type=<<get-type>> tags={{$:/config/NewTiddler/Tags}}/>
+\define get-tags() $(textFieldTags)$ $(tagsFieldTags)$
+<$vars imageType={{$:/config/NewImageType}} textFieldTags={{$:/config/NewJournal/Tags}} tagsFieldTags={{$:/config/NewJournal/Tags!!tags}}>
+<$action-sendmessage $message="tm-new-tiddler" type=<<get-type>> tags=<<get-tags>>/>
 </$vars>

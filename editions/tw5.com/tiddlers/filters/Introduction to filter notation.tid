@@ -1,5 +1,5 @@
 created: 20140410101941871
-modified: 20150228104558000
+modified: 20201103111438568
 tags: Learning Filters
 title: Introduction to filter notation
 type: text/vnd.tiddlywiki
@@ -85,3 +85,10 @@ In this simplest form the TextReference will take the full content of the tiddle
 > `[search<currentTiddler>]`
 
 Note that these special brackets cannot be nested. It is not possible for example to write `[search{<currentTiddler>}]`.
+
+!Multiple parameters
+
+<<.from-version "5.1.23">> Some steps accept multiple parameters which are separated by a ` , ` character.
+
+> Example: `[param1],[param2]` or `<param1>,{param2}`
+

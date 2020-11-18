@@ -1,6 +1,10 @@
 title: $:/themes/tiddlywiki/snowwhite/base
 tags: [[$:/tags/Stylesheet]]
 
+\define sidebarbreakpoint-minus-one()
+<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
+\end
+
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
 .tc-sidebar-header {
@@ -17,7 +21,7 @@ tags: [[$:/tags/Stylesheet]]
 	}
 }
 
-@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 	.tc-tiddler-frame {
 		<<box-shadow none>>
 	}

@@ -74,6 +74,9 @@ function FramedEngine(options) {
 	if(this.widget.editTabIndex) {
 		this.iframeNode.setAttribute("tabindex",this.widget.editTabIndex);
 	}
+	if(this.widget.isDisabled === "yes") {
+		this.domNode.setAttribute("disabled",true);
+	}	
 	// Copy the styles from the dummy textarea
 	this.copyStyles();
 	// Add event listeners

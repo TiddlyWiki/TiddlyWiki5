@@ -285,13 +285,17 @@ KeyboardManager.prototype.checkKeyDescriptors = function(event,keyInfoArray) {
 };
 
 KeyboardManager.prototype.getEventModifierKeyDescriptor = function(event) {
-	return event.ctrlKey && !event.shiftKey && !event.altKey ? "ctrl" : 
-		event.shiftKey && !event.ctrlKey && !event.altKey? "shift" : 
-		event.ctrlKey && event.shiftKey && !event.altKey ? "ctrl-shift" : 
-		event.altKey && !event.shiftKey && !event.ctrlKey ? "alt" : 
-		event.altKey && event.shiftKey && !event.ctrlKey ? "alt-shift" : 
-		event.altKey && event.ctrlKey && !event.shiftKey ? "ctrl-alt" : 
-		event.altKey && event.shiftKey && event.ctrlKey ? "ctrl-alt-shift" : "normal";
+	return event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey ? "ctrl" : 
+		event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey ? "shift" : 
+		event.ctrlKey && event.shiftKey && !event.altKey && !event.metaKey ? "ctrl-shift" : 
+		event.altKey && !event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt" : 
+		event.altKey && event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt-shift" : 
+		event.altKey && event.ctrlKey && !event.shiftKey && !event.metaKey ? "ctrl-alt" : 
+		event.altKey && event.shiftKey && event.ctrlKey && !event.metaKey ? "ctrl-alt-shift" : 
+		event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey ? "meta" : 
+		event.metaKey && event.ctrlKey && !event.shiftKey && !event.altKey ? "meta-ctrl" :
+		event.metaKey && event.ctrlKey && event.shiftKey && !event.altKey ? "meta-ctrl-shift" :
+		event.metaKey && event.ctrlKey & event.shiftKey && event.altKey ? "meta-ctrl-alt-shift" : "normal";
 };
 
 KeyboardManager.prototype.getShortcutTiddlerList = function() {

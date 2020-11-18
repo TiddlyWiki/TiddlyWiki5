@@ -7,8 +7,11 @@ caption: {{$:/language/ControlPanel/Basics/Caption}}
 \define show-filter-count(filter)
 <$button class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" $value="""$filter$"""/>
+<$action-setfield $tiddler="$:/temp/advancedsearch/input" $value="""$filter$"""/>
+<$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/>
 <$action-setfield $tiddler="$:/state/tab--1498284803" $value="$:/core/ui/AdvancedSearch/Filter"/>
 <$action-navigate $to="$:/AdvancedSearch"/>
+<$action-sendmessage $message="tm-focus-selector" $param=".tc-advanced-search input"/>
 ''<$count filter="""$filter$"""/>''
 {{$:/core/images/advanced-search-button}}
 </$button>
@@ -23,8 +26,8 @@ caption: {{$:/language/ControlPanel/Basics/Caption}}
 |<$link to="$:/language/DefaultNewTiddlerTitle"><<lingo NewTiddler/Title/Prompt>></$link> |<$edit-text tiddler="$:/language/DefaultNewTiddlerTitle" default="" tag="input"/> |
 |<$link to="$:/config/NewJournal/Title"><<lingo NewJournal/Title/Prompt>></$link> |<$edit-text tiddler="$:/config/NewJournal/Title" default="" tag="input"/> |
 |<$link to="$:/config/NewJournal/Text"><<lingo NewJournal/Text/Prompt>></$link> |<$edit tiddler="$:/config/NewJournal/Text" tag="textarea" class="tc-edit-texteditor" default=""/> |
-|<$link to="$:/config/NewTiddler/Tags"><<lingo NewTiddler/Tags/Prompt>></$link> |<$edit-text tiddler="$:/config/NewTiddler/Tags" tag="input" default=""/> |
-|<$link to="$:/config/NewJournal/Tags"><<lingo NewJournal/Tags/Prompt>></$link> |<$edit-text tiddler="$:/config/NewJournal/Tags" tag="input" default=""/> |
+|<$link to="$:/config/NewTiddler/Tags"><<lingo NewTiddler/Tags/Prompt>></$link> |<$vars currentTiddler="$:/config/NewTiddler/Tags" tagField="text">{{||$:/core/ui/EditTemplate/tags}}</$vars> |
+|<$link to="$:/config/NewJournal/Tags"><<lingo NewJournal/Tags/Prompt>></$link> |<$vars currentTiddler="$:/config/NewJournal/Tags" tagField="text">{{||$:/core/ui/EditTemplate/tags}}</$vars> |
 |<$link to="$:/config/AutoFocus"><<lingo AutoFocus/Prompt>></$link> |{{$:/snippets/minifocusswitcher}} |
 |<<lingo Language/Prompt>> |{{$:/snippets/minilanguageswitcher}} |
 |<<lingo Tiddlers/Prompt>> |<<show-filter-count "[!is[system]sort[title]]">> |

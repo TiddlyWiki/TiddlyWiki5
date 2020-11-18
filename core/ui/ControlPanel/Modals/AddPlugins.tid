@@ -148,7 +148,7 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 
 <$set name="transclusion" value=<<connectionTiddler>>>
 
-<<tabs "[[$:/core/ui/ControlPanel/Plugins/Add/Updates]] [[$:/core/ui/ControlPanel/Plugins/Add/Plugins]] [[$:/core/ui/ControlPanel/Plugins/Add/Themes]] [[$:/core/ui/ControlPanel/Plugins/Add/Languages]]" "$:/core/ui/ControlPanel/Plugins/Add/Plugins">>
+<$macrocall $name="tabs" tabsList="[[$:/core/ui/ControlPanel/Plugins/Add/Updates]] [[$:/core/ui/ControlPanel/Plugins/Add/Plugins]] [[$:/core/ui/ControlPanel/Plugins/Add/Themes]] [[$:/core/ui/ControlPanel/Plugins/Add/Languages]]" default="$:/core/ui/ControlPanel/Plugins/Add/Plugins" explicitState="$:/state/addplugins/tab-1342078386"/>
 
 </$set>
 

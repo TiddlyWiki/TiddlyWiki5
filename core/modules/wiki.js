@@ -378,10 +378,10 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 		y = Number(b);
 		if(isNumeric && (!isNaN(x) || !isNaN(y))) {
 			return compareNumbers(x,y);
-		} else if(isAlphaNumeric) {
-			return isDescending ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
 		} else if($tw.utils.isDate(a) && $tw.utils.isDate(b)) {
 			return isDescending ? b - a : a - b;
+		} else if(isAlphaNumeric) {
+			return isDescending ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
 		} else {
 			a = String(a);
 			b = String(b);
@@ -1004,6 +1004,7 @@ title: target tiddler title
 options: as for wiki.makeWidget() plus:
 options.field: optional field to transclude (defaults to "text")
 options.mode: transclusion mode "inline" or "block"
+options.recursionMarker : optional flag to set a recursion marker, defaults to "yes"
 options.children: optional array of children for the transclude widget
 options.importVariables: optional importvariables filter string for macros to be included
 options.importPageMacros: optional boolean; if true, equivalent to passing "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]" to options.importVariables
@@ -1027,10 +1028,17 @@ exports.makeTranscludeWidget = function(title,options) {
 		parseTreeTransclude = {
 			type: "transclude",
 			attributes: {
+				recursionMarker: {
+					name: "recursionMarker",
+					type: "string",
+					value: options.recursionMarker || "yes"
+					},
 				tiddler: {
 					name: "tiddler",
 					type: "string",
-					value: title}},
+					value: title
+				}
+			},
 			isBlock: !options.parseAsInline};
 	if(options.importVariables || options.importPageMacros) {
 		if(options.importVariables) {
@@ -1362,7 +1370,7 @@ exports.readFileContent = function(file,type,isBinary,deserializer,callback) {
 	// Onload
 	reader.onload = function(event) {
 		var text = event.target.result,
-			tiddlerFields = {title: file.name || "Untitled", type: type};
+			tiddlerFields = {title: file.name || "Untitled"};
 		if(isBinary) {
 			var commaPos = text.indexOf(",");
 			if(commaPos !== -1) {
@@ -1426,7 +1434,8 @@ historyTitle: title of history tiddler (defaults to $:/HistoryList)
 */
 exports.addToHistory = function(title,fromPageRect,historyTitle) {
 	var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
-	story.addToHistory(title,fromPageRect);		
+	story.addToHistory(title,fromPageRect);	
+	console.log("$tw.wiki.addToHistory() is deprecated since V5.1.23! Use the this.story.addToHistory() from the story-object!")
 };
 
 /*
@@ -1438,7 +1447,8 @@ options: see story.js
 */
 exports.addToStory = function(title,fromTitle,storyTitle,options) {
 	var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
-	story.addToStory(title,fromTitle,options);		
+	story.addToStory(title,fromTitle,options);
+	console.log("$tw.wiki.addToStory() is deprecated since V5.1.23! Use the this.story.addToStory() from the story-object!")
 };
 
 /*
