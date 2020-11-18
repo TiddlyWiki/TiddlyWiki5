@@ -1420,6 +1420,10 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 100%;
 }
 
+.tc-edit-fields.tc-edit-fields-small {
+	margin-top: 0;
+	margin-bottom: 0;
+}
 
 .tc-edit-fields table, .tc-edit-fields tr, .tc-edit-fields td {
 	border: none;
