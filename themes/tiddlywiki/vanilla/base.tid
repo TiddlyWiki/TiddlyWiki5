@@ -1421,7 +1421,7 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-edit-fields.tc-edit-fields-small {
-	margin-top: .5em;
+	margin-top: 0;
 	margin-bottom: 0;
 }
 
