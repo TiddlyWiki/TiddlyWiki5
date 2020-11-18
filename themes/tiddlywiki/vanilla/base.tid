@@ -2086,6 +2086,15 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 30%;
 }
 
+.tc-import-table .tc-row-disabled {
+	background: <<colour very-muted-foreground>>10;
+	opacity: 0.8;
+}
+
+.tc-import-table .tc-row-warning {
+	background: <<colour diff-delete-background>>50;
+}
+
 /*
 ** Alerts
 */

@@ -46,7 +46,7 @@ title: $:/core/ui/ImportListing
 </th>
 </tr>
 <$list filter="[all[current]plugintiddlers[]sort[title]]" variable="payloadTiddler">
-<tr>
+<tr class={{{[<currentTiddler>has<suppressedField>then[tc-row-disabled]] ~[subfilter<payloadTitleFilter>is[tiddler]then[tc-row-warning]] }}}>
 <td>
 <$checkbox field=<<selectionField>> checked="checked" unchecked="unchecked" default="checked" disabled={{{[<currentTiddler>has<suppressedField>then[yes]else[no]]}}}/>
 </td>
