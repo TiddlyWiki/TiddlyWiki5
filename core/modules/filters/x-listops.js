@@ -188,19 +188,21 @@ Extended filter operators to manipulate the current list.
 		return set;
 	};
 
-	var cycleValueInArray = function(results,operands) {
+	var cycleValueInArray = function(results,operands,stepSize) {
 		var resultsIndex,
+			step = stepSize || 1,
 			i = 0,
+			opLength = operands.length,
 			nextOperandIndex;		
-		for(i; i < operands.length; i++) {
+		for(i; i < opLength; i++) {
 			resultsIndex = results.indexOf(operands[i]);
 			if(resultsIndex !== -1) {
 				break;
 			}
 		}
 		if(resultsIndex !== -1) {
-			i++;
-			nextOperandIndex = (i === operands.length ? 0 : i);
+			i = i + step;
+			nextOperandIndex = (i < opLength ? i : i - opLength);
 			if(operands.length > 1) {
 				results.splice(resultsIndex,1,operands[nextOperandIndex]);
 			} else {
@@ -221,11 +223,13 @@ Extended filter operators to manipulate the current list.
 
 	exports.cycle = function(source,operator) {
 		var results = prepare_results(source),
-			operands = (operator.operand.length ? $tw.utils.parseStringArray(operator.operand, "true") : [""]);
-		if(operator.suffix === "reverse") {
+			operands = (operator.operand.length ? $tw.utils.parseStringArray(operator.operand, "true") : [""]),
+			step = $tw.utils.getInt(operator.operands[1]||"",1);
+		if(step < 0) {
 			operands.reverse();
-		}
-		return cycleValueInArray(results,operands);
+			step = Math.abs(step);
+		}	
+		return cycleValueInArray(results,operands,step);
 	}
 	
 })();
