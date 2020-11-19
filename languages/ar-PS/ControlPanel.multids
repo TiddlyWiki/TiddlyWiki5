@@ -1,6 +1,5 @@
 title: $:/language/ControlPanel/
 
-<$button set="$: DefaultTiddlers" setTo="[list[$:/StoryList]]">
 Advanced/Caption: متقدم
 Advanced/Hint: معلومات داخلية عن هذا الوكي
 Appearance/Caption: مظهر خارجي
@@ -9,10 +8,7 @@ Appearance/Hint: طرق لتخصيص مظهر وكي خاص بك.
 Basics/AnimDuration/Prompt: مدة الرسوم المتحركة
 Basics/AutoFocus/Prompt: موقع مؤشر الماوس الإفتراضي للتدلرز الجددة
 Basics/Caption: أساسيات
-Basics/DefaultTiddlers/BottomHint: إستخدم &#91;&#91;أقواس مربعة مزدوجة&#93;&#93; للعناوين مع مسافات. أو بإمكانك إختيار
-<$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">
-الإحتفاظ بترتيب القصة
-</$button>
+Basics/DefaultTiddlers/BottomHint: إستخدم &#91;&#91;أقواس مربعة مزدوجة&#93;&#93; للعناوين مع مسافات. أو بإمكانك إختيار<$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">الإحتفاظ بترتيب القصة</$button>
 Basics/DefaultTiddlers/Prompt: تدلرز مفترضة
 Basics/DefaultTiddlers/TopHint: أي تدلرز ستظهر عند التشغيل 
 Basics/Language/Prompt: مرحبا! اللغة الحالية:
