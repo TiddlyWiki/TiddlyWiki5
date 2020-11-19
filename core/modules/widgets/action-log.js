@@ -14,37 +14,81 @@ Action widget to log debug messages
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var LogWidget = function(parseTreeNode,options) {
+var ActionLogWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
 /*
 Inherit from the base widget class
 */
-LogWidget.prototype = new Widget();
+ActionLogWidget.prototype = new Widget();
 
 /*
 Render this widget into the DOM
 */
-LogWidget.prototype.render = function(parent,nextSibling) {
+ActionLogWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
+	this.execute();
 };
+
+ActionLogWidget.prototype.execute = function(){
+	this.message = this.getAttribute("$$message","debug");
+	this.logAll = this.getAttribute("$$all","no") === "yes" ? true : false;
+	this.filter = this.getAttribute("$$filter");
+}
 
 /*
 Refresh the widget by ensuring our attributes are up to date
 */
-LogWidget.prototype.refresh = function(changedTiddlers) {
-	return this.refreshChildren(changedTiddlers);
+ActionLogWidget.prototype.refresh = function(changedTiddlers) {
+	this.refreshSelf();
+	return true;
 };
 
 /*
 Invoke the action associated with this widget
 */
-LogWidget.prototype.invokeAction = function(triggeringWidget,event) {
-	$tw.utils.logTable(this.attributes,["attribute name","value"]);
+ActionLogWidget.prototype.invokeAction = function(triggeringWidget,event) {
+	this.log();
 	return true; // Action was invoked
 };
 
-exports["action-log"] = LogWidget;
+ActionLogWidget.prototype.log = function() {
+	var data = {},
+		dataCount,
+		allVars = {},
+		filteredVariables,
+		self = this;
+
+	$tw.utils.each(this.attributes,function(attribute,name) {
+		if(name.substring(0,2) !== "$$") {
+			data[name] = attribute;
+		}		
+	});
+
+	for(var v in this.variables) {
+		allVars[v] = this.getVariable(v,{defaultValue:""});
+	}	
+	if(this.filter) {
+		filteredVariables = this.wiki.compileFilter(this.filter).call(this.wiki,this.wiki.makeTiddlerIterator(allVars));
+		$tw.utils.each(filteredVariables,function(name) {
+			data[name] = allVars[name];
+		});		
+	}
+	dataCount = $tw.utils.count(data);
+
+	console.group(this.message);
+	if(dataCount > 0) {
+		$tw.utils.logTable(data,["name","value"]);
+	}
+	if(this.logAll || !dataCount) {
+		console.groupCollapsed("All variables");
+		$tw.utils.logTable(allVars,["name","value"]);
+		console.groupEnd();
+	}
+	console.groupEnd();
+}
+
+exports["action-log"] = ActionLogWidget;
 
 })();
