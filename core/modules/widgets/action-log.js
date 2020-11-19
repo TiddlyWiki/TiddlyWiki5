@@ -14,24 +14,24 @@ Action widget to log debug messages
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var ActionLogWidget = function(parseTreeNode,options) {
+var LogWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
 /*
 Inherit from the base widget class
 */
-ActionLogWidget.prototype = new Widget();
+LogWidget.prototype = new Widget();
 
 /*
 Render this widget into the DOM
 */
-ActionLogWidget.prototype.render = function(parent,nextSibling) {
+LogWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 };
 
-ActionLogWidget.prototype.execute = function(){
+LogWidget.prototype.execute = function(){
 	this.message = this.getAttribute("$$message","debug");
 	this.logAll = this.getAttribute("$$all","no") === "yes" ? true : false;
 	this.filter = this.getAttribute("$$filter");
@@ -40,7 +40,7 @@ ActionLogWidget.prototype.execute = function(){
 /*
 Refresh the widget by ensuring our attributes are up to date
 */
-ActionLogWidget.prototype.refresh = function(changedTiddlers) {
+LogWidget.prototype.refresh = function(changedTiddlers) {
 	this.refreshSelf();
 	return true;
 };
@@ -48,16 +48,16 @@ ActionLogWidget.prototype.refresh = function(changedTiddlers) {
 /*
 Invoke the action associated with this widget
 */
-ActionLogWidget.prototype.invokeAction = function(triggeringWidget,event) {
+LogWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	this.log();
 	return true; // Action was invoked
 };
 
-ActionLogWidget.prototype.log = function() {
+LogWidget.prototype.log = function() {
 	var data = {},
 		dataCount,
 		allVars = {},
-		filteredVariables,
+		filteredVars,
 		self = this;
 
 	$tw.utils.each(this.attributes,function(attribute,name) {
@@ -70,8 +70,8 @@ ActionLogWidget.prototype.log = function() {
 		allVars[v] = this.getVariable(v,{defaultValue:""});
 	}	
 	if(this.filter) {
-		filteredVariables = this.wiki.compileFilter(this.filter).call(this.wiki,this.wiki.makeTiddlerIterator(allVars));
-		$tw.utils.each(filteredVariables,function(name) {
+		filteredVars = this.wiki.compileFilter(this.filter).call(this.wiki,this.wiki.makeTiddlerIterator(allVars));
+		$tw.utils.each(filteredVars,function(name) {
 			data[name] = allVars[name];
 		});		
 	}
@@ -89,6 +89,6 @@ ActionLogWidget.prototype.log = function() {
 	console.groupEnd();
 }
 
-exports["action-log"] = ActionLogWidget;
+exports["action-log"] = LogWidget;
 
 })();
