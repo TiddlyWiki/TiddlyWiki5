@@ -364,8 +364,7 @@ Syncer.prototype.syncFromServer = function() {
 				}
 			}
 			// Delete any tiddlers that were previously reported but missing this time
-			var missingTitles = self.wiki.filterTiddlers($tw.wiki.getTiddlerText("$:/config/syncFromServerFilter",""),$tw.rootWidget,self.wiki.makeTiddlerIterator(previousTitles)); 
-			$tw.utils.each(missingTitles,function(title) {
+			$tw.utils.each(previousTitles,function(title) {
 				delete self.tiddlerInfo[title];
 				self.logger.log("Deleting tiddler missing from server:",title);
 				self.wiki.deleteTiddler(title);
