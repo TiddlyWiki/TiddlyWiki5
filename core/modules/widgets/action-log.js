@@ -57,8 +57,7 @@ LogWidget.prototype.log = function() {
 	var data = {},
 		dataCount,
 		allVars = {},
-		filteredVars,
-		self = this;
+		filteredVars;
 
 	$tw.utils.each(this.attributes,function(attribute,name) {
 		if(name.substring(0,2) !== "$$") {
