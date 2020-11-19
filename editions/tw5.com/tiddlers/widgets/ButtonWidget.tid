@@ -29,7 +29,7 @@ The content of the `<$button>` widget is displayed within the button.
 |message |The name of the [[widget message|Messages]] to send when the button is clicked |
 |param |The optional parameter to the message |
 |set |A TextReference to which a new value will be assigned |
-|setTitle |A title to which a new value will be assigned, ''without'' TextReference. Gets preferred over <<.attr state>> |
+|setTitle |A title to which a new value will be assigned, ''without'' TextReference. Gets preferred over <<.attr set>> |
 |setField |A ''field name'' to which the new value will be assigned, if the attribute <<.attr setTitle>> is present. Defaults to the ''text'' field |
 |setIndex |An ''index'' to which the new value will be assigned, if the attribute <<.attr setTitle>> is present |
 |setTo |The new value to assign to the TextReference identified in the `set` attribute or the text field / the field specified through <<.attr setField>> / the index specified through <<.attr setIndex>> of the title given through <<.attr setTitle>> |

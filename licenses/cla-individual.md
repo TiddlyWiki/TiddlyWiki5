@@ -417,3 +417,5 @@ Florian Kohrt, @fkohrt, 2020/09/10
 Gerald Liu, @gera2ld, 2020/09/25
 
 Ryan Kramer, @default-kramer, 2020/10/24
+
+Miha Lunar, @SmilyOrg, 2020/11/04

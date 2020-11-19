@@ -1,0 +1,18 @@
+created: 20201117162655614
+modified: 20201117162926714
+tags: Resources Plugings
+title: Slider by Mohammad
+type: text/vnd.tiddlywiki
+url: https://kookma.github.io/slider/
+
+Slider is a plugin to create an ordered set of tiddlers also called Trail.
+
+{{!!url}}
+
+A trail can be used to create a sequence of selected contents like step by step tutorial, guided help, lessons and similar.
+
+The slider plugin user interface contains three sections
+
+* A sidebar tab called Trails to manage trails
+* A dashboard for each trail (where trail structure is managed)
+* Tiddlers in a trail, also called slides

@@ -23,3 +23,5 @@ You can also use [[filter expressions|Filter Expression]] to open more than one 
 will open all tiddlers tagged as <<tag HelloThere>>. 
 
 You can also use this technique to [[preserve open tiddlers at startup|Preserving open tiddlers at startup]]
+
+See also [[StartupActions]] for controlling more advanced startup behaviours.
