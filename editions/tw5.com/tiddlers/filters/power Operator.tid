@@ -1,0 +1,15 @@
+caption: power
+created: 20201120040720190
+modified: 20201120040852980
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input as numbers, but with each one raised to the power of <<.place N>>
+op-parameter: a number
+op-parameter-name: N
+op-purpose: treating each input title as a number, raise it to the power of the numeric value of the operand
+tags: [[Filter Operators]] [[Mathematics Operators]] [[Binary Mathematics Operators]]
+title: power Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.23">>
+
+<<.operator-examples "power">>
