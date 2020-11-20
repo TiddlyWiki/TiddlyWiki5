@@ -80,7 +80,9 @@ RangeWidget.prototype.getValue = function() {
 	return value;
 };
 
-RangeWidget.prototype.prepareAttributes = function() {
+RangeWidget.prototype.prepareAttributes = function(options) {
+	options = options || {};
+	var hasChanged = (this.startValue !== this.inputDomNode.value) ? "yes" : "no";
 	var variables = Object.create(null);
 	// Trigger actions. Use variables = {key:value, key:value ...}
 	$tw.utils.each(this.attributes,function(val,key) {
@@ -90,17 +92,20 @@ RangeWidget.prototype.prepareAttributes = function() {
 	});
 	// "tiddler" parameter may be missing in the widget call. See .execute() below
 	// the "value" is needed.
-	variables = $tw.utils.extend(variables, {"actionValue": this.inputDomNode.value,
+	variables = $tw.utils.extend(variables, {"actionValue": this.inputDomNode.value, 
+			"actionValueHasChanged": hasChanged, 
 			"attr-tiddler": this.tiddlerTitle,
 			"attr-field": this.tiddlerField
-/*			"attr-value": this.inputDomNode.value*/   });
+/*			"attr-value": this.inputDomNode.value*/   }, options);
 	return variables;
 }
 
+// actionsStart
 RangeWidget.prototype.handleMouseDownEvent = function(event) {
 	this.mouseDown = true; // TODO remove once IE is gone.
+	this.startValue = this.inputDomNode.value; // TODO remove this line once IE is gone!
 
-console.log("mouse down",event);
+console.log("actionsStart",event);
 
 	this.handleEvent(event);
 	// Trigger actions
@@ -108,53 +113,56 @@ console.log("mouse down",event);
 		var variables = this.prepareAttributes() // TODO this line will go into the function call below.
 		this.invokeActionString(this.actionsMouseDown,this,event,variables);
 	}
-	this.oldValue = this.inputDomNode.value; // TODO remove this line once IE is gone!
 }
 
+// actionsStop
 RangeWidget.prototype.handleMouseUpEvent = function(event) {
 	this.mouseDown = false; // TODO remove once IE is gone.
 
-console.log("mouse up",event);
+
+console.log("actionsStop",event);
 
 	this.handleEvent(event);
 	// Trigger actions
 	if(this.actionsMouseUp) {
-		var variables = this.prepareAttributes() // TODO this line will go into the function call below.
+		var variables = this.prepareAttributes()
 		this.invokeActionString(this.actionsMouseUp,this,event,variables);
 	}
 	// TODO remove the following if() once IE is gone!
 	if ($tw.browser.isIE) {
-		if (this.oldValue !== this.inputDomNode.value) {
+		if (this.startValue !== this.inputDomNode.value) {
 			this.handleChangeEvent(event);
-			this.oldValue = this.inputDomNode.value;
+			this.startValue = this.inputDomNode.value;
 		}
 	}
 }
 
 RangeWidget.prototype.handleChangeEvent = function(event) {
 	if (this.mouseDown) {  // TODO refactor this function once IE is gone.
+
+console.log("actions IE",event);
+
 		this.handleInputEvent(event);
-	} else {
-
-console.log("change",event);
-
-		this.handleEvent(event);
-		// Trigger actions
-		if(this.actionsChange) {
-			var variables = this.prepareAttributes() // TODO this line will go into the function call below.
-			this.invokeActionString(this.actionsChange,this,event,variables);
-		}
 	}
+// 	} else {
+
+// console.log("actions",event);
+
+// 		this.handleEvent(event);
+// 		// Trigger actions
+// 		if(this.actionsChange) {
+// 			var variables = this.prepareAttributes() // TODO this line will go into the function call below.
+// 			this.invokeActionString(this.actionsChange,this,event,variables);
+// 		}
+// 	}
 };
 
 RangeWidget.prototype.handleInputEvent = function(event) {
-console.log("input",event);
-
 	this.handleEvent(event);
 	// Trigger actions
 	if(this.actionsInput) {
 		// "tiddler" parameter may be missing. See .execute() below
-		var variables = this.prepareAttributes() // TODO this line will go into the function call below.
+		var variables = this.prepareAttributes({"actionValueHasChanged": "yes"}) // TODO this line will go into the function call below.
 		this.invokeActionString(this.actionsInput,this,event,variables);
 	}
 };
@@ -186,13 +194,17 @@ RangeWidget.prototype.execute = function() {
 	this.elementClass = this.getAttribute("class","");
 	this.isDisabled = this.getAttribute("disabled","no");
 	// Actions since 5.1.23
-	// Next 3 only fire once!
-	this.actionsMouseDown = this.getAttribute("actionsMouseDown","");
-	this.actionsMouseUp = this.getAttribute("actionsMouseUp","");
+
+	// Next 2 only fire once!
+//	this.actionsMouseDown = this.getAttribute("actionsMouseDown","");
+//	this.actionsMouseUp = this.getAttribute("actionsMouseUp","");
+	this.actionsMouseDown = this.getAttribute("actionsStart","");
+	this.actionsMouseUp = this.getAttribute("actionsStop","");
+
 	// Change only fires if start-value is different to end-value
-	this.actionsChange = this.getAttribute("actionsChange","");
+//	this.actionsChange = this.getAttribute("actionsChange","");
 	// Input fires very often!
-	this.actionsInput = this.getAttribute("actionsInput","");
+	this.actionsInput = this.getAttribute("actions","");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -202,10 +214,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RangeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes['min'] || changedAttributes['max'] ||
-	   changedAttributes['increment'] || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.disabled ||
-	   changedAttributes.actionsMouseDown || changedAttributes.actionsMouseUp || changedAttributes.actionsChange || changedAttributes.actionsInput) {
-		this.refreshSelf();
+	if($tw.utils.count(changedAttributes) > 0) {		this.refreshSelf();
 		return true;
 	} else {
 		var refreshed = false;
