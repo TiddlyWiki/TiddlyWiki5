@@ -757,6 +757,14 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	right: 29px;
 }
 
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+
+	.tc-topbar-right {
+		right: 10px;
+	}
+
+}
+
 .tc-topbar button {
 	padding: 8px;
 }
@@ -969,6 +977,14 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	border-bottom: 1px solid <<colour tiddler-info-tab-background>>;
 }
 
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+
+	.tc-tiddler-info {
+		padding: 14px 14px 14px 14px;
+	}
+
+}
+
 .tc-view-field-table {
 	width: 100%;
 }
@@ -986,6 +1002,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 	.tc-tiddler-frame {
 		padding: 14px 14px 14px 14px;
+		margin-bottom: .5em;
 	}
 
 	.tc-tiddler-info {
