@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/event.js
+title: $:/core/modules/widgets/eventcatcher.js
 type: application/javascript
 module-type: widget
 
@@ -35,10 +35,13 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create element
 	var tag = this.parseTreeNode.isBlock ? "div" : "span";
+	if(this.elementTag && $tw.config.htmlUnsafeElements.indexOf(this.elementTag) === -1) {
+		tag = this.elementTag;
+	}	
 	var domNode = this.document.createElement(tag);
 	// Assign classes
 	var classes = (this["class"] || "").split(" ");
-	classes.push("tc-event");
+	classes.push("tc-eventcatcher");
 	domNode.className = classes.join(" ");
 	// Add our event handler
 	domNode.addEventListener(this.type,function(event) {
@@ -62,6 +65,14 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 		}
 		// Execute our actions with the variables
 		if(actions) {
+			variables.modifier = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+			if(event.button === 0) {
+				variables["event-mousebutton"] = "left";
+			} else if(event.button === 1) {
+				variables["event-mousebutton"] = "middle";
+			} else if(event.button === 2) {
+				variables["event-mousebutton"] = "right";
+			}
 			self.invokeActionString(actions,self,event,variables);
 			event.preventDefault();
 			event.stopPropagation();
@@ -82,6 +93,8 @@ EventWidget.prototype.execute = function() {
 	var self = this;
 	// Get attributes that require a refresh on change
 	this.type = this.getAttribute("type");
+	this["class"] = this.getAttribute("class");
+	this.elementTag = this.getAttribute("tag");
 	// Make child widgets
 	this.makeChildWidgets();
 };
@@ -91,13 +104,13 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 EventWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.type) {
+	if(changedAttributes.type || changedAttributes["class"]) {
 		this.refreshSelf();
 		return true;
 	}
 	return this.refreshChildren(changedTiddlers);
 };
 
-exports.event = EventWidget;
+exports.eventcatcher = EventWidget;
 
 })();
