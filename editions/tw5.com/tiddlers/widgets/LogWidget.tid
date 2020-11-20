@@ -1,0 +1,45 @@
+created: 20201120152706842
+modified: 20201120154927696
+tags: Widgets [[Debugging Widgets]]
+title: LogWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+<<.from-version "5.1.23">> The ''log'' widget can be used to output debugging information to the [[JavaScript console|Web Developer Tools]] supported by most browsers. 
+
+<<.tip """ For use with ActionWidgets see [[ActionLogWidget]] which uses identical parameters""">>
+
+! Content and Attributes
+
+The ''log'' widget is invisible. Any content within it is ignored. Note that the widget will log to the console both when it is first rendered and also every time it refreshes.
+
+When the widget is rendered, the names and values of all attributes are logged to the JavaScript console.
+In addition there are optional attributes that can be used:
+
+|!Optional Attribute |!Description |
+|$$filter|All variables matching this filter will also be logged. |
+|$$message |A message to display as the title of the information logged. Useful when several `log` widgets are used in sequence. |
+|$$all |Set to "yes" to log all variables in a collapsed table. Note that if there is nothing specified to log, all variables are always logged instead.|
+
+
+! Example
+
+Here is an example of logging two variables:
+
+```
+<$log myVar=<<myVar>> otherVar=<<otherVar>>/>
+```
+
+To log all variables:
+
+```
+<$log />
+```
+
+
+To log two variables as well as all core variables (which start with `tv-`):
+
+```
+<$log myVar=<<myVar>> other={{!!status}} $$filter="[prefix[tv-]]"/>
+```
