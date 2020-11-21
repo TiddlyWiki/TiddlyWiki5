@@ -25,7 +25,7 @@ exports.startup = function() {
 	$tw.wiki.setText(DARK_MODE_FIELD,"text",undefined,window.matchMedia('(prefers-color-scheme: dark)').matches.toString(),{suppressTimestamp: true});
 
 	window.matchMedia('(prefers-color-scheme: dark)')
-				.addEventListener('change',function(event) {
+	.addEventListener('change',function(event) {
 		$tw.wiki.setText(DARK_MODE_FIELD,"text",undefined,event.matches.toString(),{suppressTimestamp: true});
 	});
 
