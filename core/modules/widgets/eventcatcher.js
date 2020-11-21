@@ -60,7 +60,6 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 				});
 				//Add a variable with a popup coordinate string for the selected node
 				variables["tv-popup-coords"] = "(" + selectedNode.offsetLeft + "," + selectedNode.offsetTop +"," + selectedNode.offsetWidth + "," + selectedNode.offsetHeight + ")";
-				
 			} else {
 				return false;
 			}
@@ -116,7 +115,7 @@ EventWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.type) {
 		this.refreshSelf();
 		return true;
-	} else if(changedAttributes["class"]) {
+	} else if(changedAttributes["class"] || changedAttributes["tag"]) {
 		this.assignDomNodeClasses();
 	}
 	return this.refreshChildren(changedTiddlers);
