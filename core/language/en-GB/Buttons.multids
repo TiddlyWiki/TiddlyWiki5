@@ -57,6 +57,8 @@ Home/Caption: home
 Home/Hint: Open the default tiddlers
 Language/Caption: language
 Language/Hint: Choose the user interface language
+LightDark/Caption: light/dark palette
+LightDark/Hint: Switch between light and dark palettes
 Manager/Caption: tiddler manager
 Manager/Hint: Open tiddler manager
 More/Caption: more
