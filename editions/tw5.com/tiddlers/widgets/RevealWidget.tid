@@ -1,7 +1,7 @@
 caption: reveal
 created: 20131024141900000
 jeremy: tiddlywiki
-modified: 20190910150520583
+modified: 20201121100908827
 tags: Widgets
 title: RevealWidget
 type: text/vnd.tiddlywiki
@@ -33,11 +33,12 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 |text |The text to match when the type is ''match'', ''nomatch'', ''lt'', ''gt'', ''lteq'' or ''gteq'' |
 |class |An optional CSS class name to be assigned to the HTML element<br/>&raquo; Set to `tc-popup-keep` to make a popup "sticky", so it won't close when you click inside of it|
 |style |An optional CSS style attribute to be assigned to the HTML element |
-|position |The position used for the popup when the type is ''popup''. Can be ''left'', ''above'', ''aboveright'', ''right'', ''belowleft'' or ''below'' |
+|position |The position used for the popup when the type is ''popup''. Can be ''left'', ''above'', ''aboveleft'', ''aboveright'', ''right'', ''belowleft'', ''belowright'' or ''below'' |
 |positionAllowNegative |Set to "yes" to prevent computed popup positions from being clamped to be above zero |
 |default |Default value to use when the state tiddler is missing |
 |animate |Set to "yes" to animate opening and closure (defaults to "no"; requires "retain" to be set to "yes") |
 |retain |Set to "yes" to force the content to be retained even when hidden (defaults to "no") |
+|updatePopupPosition|<<.from-version "5.1.23">>Set to "yes" to update the popup position when the state tiddler is updated (defaults to "no")|
 
 <<.tip """<$macrocall $name=".from-version" version="5.1.18"/> <$macrocall $name=".attr" _="stateTitle"/>, <$macrocall $name=".attr" _="stateField"/> and <$macrocall $name=".attr" _="stateIndex"/> attributes allow specifying Tiddler states ''directly'', without interpreting them as [[TextReferences|TextReference]].
 This is useful for edge-cases where titles may contain characters that are used to denote Tiddler fields or indices (`!!`, `##`)""">>
