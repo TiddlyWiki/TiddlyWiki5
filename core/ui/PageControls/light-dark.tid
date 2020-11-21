@@ -1,0 +1,16 @@
+title: $:/core/ui/Buttons/light-dark
+tags: $:/tags/PageControls
+caption: {{$:/core/images/tip}} {{$:/language/Buttons/LightDark/Caption}}
+description: {{$:/language/Buttons/LightDark/Hint}}
+
+\whitespace trim
+<$button class=<<tv-config-toolbar-class>> tooltip="switch between dark and light palettes">
+<$action-listops $tiddler="$:/config/DarkMode" $field="text" $subfilter="+[toggle[yes],[no]]"/>
+<$action-listops $tiddler="$:/state/dark-mode" $field="text" $subfilter="+[toggle[true],[false]]"/>
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{$:/core/images/tip}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text">dark/light palette</span>
+</$list>
+</$button>
