@@ -42,7 +42,6 @@ function FramedEngine(options) {
 	this.iframeNode.style.border = "none";
 	this.iframeNode.style.padding = "0";
 	this.iframeNode.style.resize = "none";
-	this.iframeNode.style["background-color"] = this.widget.wiki.extractTiddlerDataItem(this.widget.wiki.getTiddlerText("$:/palette"),"tiddler-editor-background");
 	this.iframeDoc.body.style.margin = "0";
 	this.iframeDoc.body.style.padding = "0";
 	this.widget.domNodes.push(this.iframeNode);
@@ -100,7 +99,6 @@ FramedEngine.prototype.copyStyles = function() {
 	this.domNode.style.display = "block";
 	this.domNode.style.width = "100%";
 	this.domNode.style.margin = "0";
-	this.domNode.style["background-color"] = this.widget.wiki.extractTiddlerDataItem(this.widget.wiki.getTiddlerText("$:/palette"),"tiddler-editor-background");
 	// In Chrome setting -webkit-text-fill-color overrides the placeholder text colour
 	this.domNode.style["-webkit-text-fill-color"] = "currentcolor";
 };
