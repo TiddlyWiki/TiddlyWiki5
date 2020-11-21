@@ -69,12 +69,14 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 			// Add a variable for the modifier key
 			variables.modifier = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
 			// Add a variable for the mouse button
-			if(event.button === 0) {
-				variables["event-mousebutton"] = "left";
-			} else if(event.button === 1) {
-				variables["event-mousebutton"] = "middle";
-			} else if(event.button === 2) {
-				variables["event-mousebutton"] = "right";
+			if("button" in event) {
+				if(event.button === 0) {
+					variables["event-mousebutton"] = "left";
+				} else if(event.button === 1) {
+					variables["event-mousebutton"] = "middle";
+				} else if(event.button === 2) {
+					variables["event-mousebutton"] = "right";
+				}
 			}
 			self.invokeActionString(actions,self,event,variables);
 			event.preventDefault();
@@ -86,7 +88,7 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
-	this.domNodes.push(domNode);	
+	this.domNodes.push(domNode);
 };
 
 /*
