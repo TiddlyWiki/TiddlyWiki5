@@ -11,6 +11,7 @@ core/ui/Buttons/refresh: hide
 core/ui/Buttons/import: hide
 core/ui/Buttons/language: hide
 core/ui/Buttons/tag-manager: hide
+core/ui/Buttons/light-dark: hide
 core/ui/Buttons/manager: hide
 core/ui/Buttons/more-page-actions: hide
 core/ui/Buttons/new-journal: hide
