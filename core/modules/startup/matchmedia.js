@@ -28,6 +28,12 @@ exports.startup = function() {
 	.addEventListener('change',function(event) {
 		$tw.wiki.setText(DARK_MODE_FIELD,"text",undefined,event.matches.toString(),{suppressTimestamp: true});
 	});
+	
+	$tw.wiki.addEventListener('change',function(changes) {
+		if(changes["$:/config/AutoDarkMode"]) {
+			$tw.wiki.setText(DARK_MODE_FIELD,"text",undefined,window.matchMedia('(prefers-color-scheme: dark)').matches.toString(),{suppressTimestamp: true});
+		}
+	});
 
 };
 
