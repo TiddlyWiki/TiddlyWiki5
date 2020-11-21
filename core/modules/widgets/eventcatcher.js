@@ -114,10 +114,10 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 EventWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.type) {
+	if(changedAttributes.type  || changedAttributes["tag"]) {
 		this.refreshSelf();
 		return true;
-	} else if(changedAttributes["class"] || changedAttributes["tag"]) {
+	} else if(changedAttributes["class"]) {
 		this.assignDomNodeClasses();
 	}
 	return this.refreshChildren(changedTiddlers);
