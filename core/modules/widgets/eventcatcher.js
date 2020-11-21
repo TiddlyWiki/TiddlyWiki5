@@ -39,10 +39,9 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 		tag = this.elementTag;
 	}	
 	var domNode = this.document.createElement(tag);
+	this.domNode = domNode;
 	// Assign classes
-	var classes = (this["class"] || "").split(" ");
-	classes.push("tc-eventcatcher");
-	domNode.className = classes.join(" ");
+	this.assignDomNodeClasses();	
 	// Add our event handler
 	domNode.addEventListener(this.type,function(event) {
 		var selector = self.getAttribute("selector"),
@@ -59,13 +58,18 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 				$tw.utils.each(selectedNode.attributes,function(attribute) {
 					variables["dom-" + attribute.name] = attribute.value;
 				});
+				//Add a variable with a popup coordinate string for the selected node
+				variables["tv-popup-coords"] = "(" + selectedNode.offsetLeft + "," + selectedNode.offsetTop +"," + selectedNode.offsetWidth + "," + selectedNode.offsetHeight + ")";
+				
 			} else {
 				return false;
 			}
 		}
 		// Execute our actions with the variables
 		if(actions) {
+			// Add a variable for the modifier key
 			variables.modifier = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+			// Add a variable for the mouse button
 			if(event.button === 0) {
 				variables["event-mousebutton"] = "left";
 			} else if(event.button === 1) {
@@ -83,7 +87,7 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
-	this.domNodes.push(domNode);
+	this.domNodes.push(domNode);	
 };
 
 /*
@@ -93,10 +97,15 @@ EventWidget.prototype.execute = function() {
 	var self = this;
 	// Get attributes that require a refresh on change
 	this.type = this.getAttribute("type");
-	this["class"] = this.getAttribute("class");
 	this.elementTag = this.getAttribute("tag");
 	// Make child widgets
 	this.makeChildWidgets();
+};
+
+EventWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" ");
+	classes.push("tc-eventcatcher");
+	this.domNode.className = classes.join(" ");	
 };
 
 /*
@@ -104,9 +113,11 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 EventWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.type || changedAttributes["class"]) {
+	if(changedAttributes.type) {
 		this.refreshSelf();
 		return true;
+	} else if(changedAttributes["class"]) {
+		this.assignDomNodeClasses();
 	}
 	return this.refreshChildren(changedTiddlers);
 };
