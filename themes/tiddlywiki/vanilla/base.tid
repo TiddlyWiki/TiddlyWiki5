@@ -1385,7 +1385,7 @@ html body.tc-body.tc-single-tiddler-window {
 	display: inline-block;
 }
 
-<<set-type-input-min-width>>
+<<set-type-selector-min-width>>
 
 .tc-edit-tags {
 	border: 1px solid <<colour tiddler-editor-border>>;
