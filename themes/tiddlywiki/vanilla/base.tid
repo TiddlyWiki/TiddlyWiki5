@@ -1824,6 +1824,18 @@ html body.tc-body.tc-single-tiddler-window {
 	border-top: 1px solid <<colour modal-footer-border>>;
 }
 
+
+/*
+** Centered modals
+*/
+.tc-modal-centered .tc-modal {
+	width: auto;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) !important;
+	transition: transform 10ms ease !important;
+}
+
 /*
 ** Notifications
 */
