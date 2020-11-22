@@ -49,9 +49,9 @@ message-foreground: #5f6e7d
 modal-backdrop: <<colour foreground>>
 modal-background: <<colour background>>
 modal-border: #8A8885
-modal-footer-background: #F9F6EF
+modal-footer-background: #CDC2A6
 modal-footer-border: #9D998E
-modal-header-border: #F0E9D7
+modal-header-border: #9D998E
 muted-foreground: #9D998E
 notification-background: #F0E9D7
 notification-border: #939189
