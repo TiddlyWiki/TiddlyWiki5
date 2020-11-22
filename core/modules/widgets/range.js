@@ -95,8 +95,7 @@ RangeWidget.prototype.prepareAttributes = function(options) {
 	variables = $tw.utils.extend(variables, {"actionValue": this.inputDomNode.value, 
 			"actionValueHasChanged": hasChanged, 
 			"attr-tiddler": this.tiddlerTitle,
-			"attr-field": this.tiddlerField
-/*			"attr-value": this.inputDomNode.value*/   }, options);
+			"attr-field": this.tiddlerField}, options);
 	return variables;
 }
 
@@ -104,9 +103,6 @@ RangeWidget.prototype.prepareAttributes = function(options) {
 RangeWidget.prototype.handleMouseDownEvent = function(event) {
 	this.mouseDown = true; // TODO remove once IE is gone.
 	this.startValue = this.inputDomNode.value; // TODO remove this line once IE is gone!
-
-console.log("actionsStart",event);
-
 	this.handleEvent(event);
 	// Trigger actions
 	if(this.actionsMouseDown) {
@@ -118,10 +114,6 @@ console.log("actionsStart",event);
 // actionsStop
 RangeWidget.prototype.handleMouseUpEvent = function(event) {
 	this.mouseDown = false; // TODO remove once IE is gone.
-
-
-console.log("actionsStop",event);
-
 	this.handleEvent(event);
 	// Trigger actions
 	if(this.actionsMouseUp) {
@@ -139,22 +131,8 @@ console.log("actionsStop",event);
 
 RangeWidget.prototype.handleChangeEvent = function(event) {
 	if (this.mouseDown) {  // TODO refactor this function once IE is gone.
-
-console.log("actions IE",event);
-
 		this.handleInputEvent(event);
 	}
-// 	} else {
-
-// console.log("actions",event);
-
-// 		this.handleEvent(event);
-// 		// Trigger actions
-// 		if(this.actionsChange) {
-// 			var variables = this.prepareAttributes() // TODO this line will go into the function call below.
-// 			this.invokeActionString(this.actionsChange,this,event,variables);
-// 		}
-// 	}
 };
 
 RangeWidget.prototype.handleInputEvent = function(event) {
@@ -194,15 +172,9 @@ RangeWidget.prototype.execute = function() {
 	this.elementClass = this.getAttribute("class","");
 	this.isDisabled = this.getAttribute("disabled","no");
 	// Actions since 5.1.23
-
 	// Next 2 only fire once!
-//	this.actionsMouseDown = this.getAttribute("actionsMouseDown","");
-//	this.actionsMouseUp = this.getAttribute("actionsMouseUp","");
 	this.actionsMouseDown = this.getAttribute("actionsStart","");
 	this.actionsMouseUp = this.getAttribute("actionsStop","");
-
-	// Change only fires if start-value is different to end-value
-//	this.actionsChange = this.getAttribute("actionsChange","");
 	// Input fires very often!
 	this.actionsInput = this.getAttribute("actions","");
 	// Make the child widgets
@@ -214,7 +186,8 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RangeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if($tw.utils.count(changedAttributes) > 0) {		this.refreshSelf();
+	if($tw.utils.count(changedAttributes) > 0) {
+		this.refreshSelf();
 		return true;
 	} else {
 		var refreshed = false;
