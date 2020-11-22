@@ -1,4 +1,6 @@
 title: $:/core/ui/PageTemplate
+name: {{$:/language/PageTemplate/Name}}
+description: {{$:/language/PageTemplate/Description}}
 
 \whitespace trim
 \define containerClasses()
