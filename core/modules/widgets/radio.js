@@ -123,14 +123,10 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RadioWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if($tw.utils.count(changedAttributes) > 0) {
+	if(($tw.utils.count(changedAttributes) > 0) || changedTiddlers[this.radioTitle]) {
 		this.refreshSelf();
 		return true;
 	} else {
-		if(changedTiddlers[this.radioTitle]) {
-			this.refreshSelf();
-			return true;
-		}
 		return this.refreshChildren(changedTiddlers);
 	}
 };
