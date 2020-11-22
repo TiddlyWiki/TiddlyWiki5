@@ -5,8 +5,12 @@ description: {{$:/language/Buttons/LightDark/Hint}}
 
 \whitespace trim
 <$button class=<<tv-config-toolbar-class>> tooltip={{$:/language/Buttons/LightDark/Hint}}>
+<$list filter="[{$:/config/AutoDarkMode}!match[yes]]">
 <$action-listops $tiddler="$:/config/DarkMode" $field="text" $subfilter="+[toggle[yes],[no]]"/>
+</$list>
+<$list filter="[{$:/config/AutoDarkMode}match[yes]]">
 <$action-listops $tiddler="$:/state/dark-mode" $field="text" $subfilter="+[toggle[true],[false]]"/>
+</$list>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 <$list filter="[{$:/config/AutoDarkMode}!match[yes]then{$:/config/DarkMode}match[yes]] ~[{$:/config/AutoDarkMode}match[yes]then{$:/state/dark-mode}match[true]]" emptyMessage="""{{$:/core/images/tip}}""">
 {{$:/core/images/tip}}
