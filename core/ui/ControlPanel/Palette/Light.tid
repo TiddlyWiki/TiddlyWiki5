@@ -1,0 +1,23 @@
+title: $:/core/ui/ControlPanel/Palette/Light
+caption: {{$:/language/ControlPanel/Palette/Light/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Palette/
+
+<$vars currPaletteTiddler="$:/palette" state=<<qualify "$:/state/ShowPaletteEditor">>>
+
+{{$:/snippets/paletteswitcher}}
+
+<$reveal type="nomatch" state=<<state>> text="yes">
+
+<$button set=<<state>> setTo="yes"><<lingo ShowEditor/Caption>></$button>
+
+</$reveal>
+
+<$reveal type="match" state=<<state>> text="yes">
+
+<$button set=<<state>> setTo="no"><<lingo HideEditor/Caption>></$button>
+{{$:/PaletteManager}}
+
+</$reveal>
+
+</$vars>
