@@ -4,18 +4,7 @@ caption: {{$:/language/ControlPanel/Palette/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Palette/
 
-{{$:/snippets/paletteswitcher}}
+<$checkbox tiddler="$:/config/AutoDarkMode" field="text" checked="yes" unchecked="no" default="no"> <<lingo AutoDarkMode/Hint>></$checkbox>
 
-<$reveal type="nomatch" state="$:/state/ShowPaletteEditor" text="yes">
-
-<$button set="$:/state/ShowPaletteEditor" setTo="yes"><<lingo ShowEditor/Caption>></$button>
-
-</$reveal>
-
-<$reveal type="match" state="$:/state/ShowPaletteEditor" text="yes">
-
-<$button set="$:/state/ShowPaletteEditor" setTo="no"><<lingo HideEditor/Caption>></$button>
-{{$:/PaletteManager}}
-
-</$reveal>
+<<tabs "$:/core/ui/ControlPanel/Palette/Light $:/core/ui/ControlPanel/Palette/Dark" "$:/core/ui/ControlPanel/Palette/Light">>
 
