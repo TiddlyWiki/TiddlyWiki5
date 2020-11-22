@@ -47,6 +47,20 @@ $else$
 </$reveal>
 \end
 
+\define set-type-selector-min-width()
+<$set name="typeLength" value={{{ [all[shadows+tiddlers]prefix[$:/language/Docs/Types/]get[name]length[]maxall[]] }}}>
+
+	.tc-type-selector-dropdown-wrapper {
+		min-width: calc(<<typeLength>>ch + 4em);
+	}
+
+	.tc-type-selector-dropdown-wrapper input.tc-edit-typeeditor {
+		min-width: <<typeLength>>ch;
+	}
+
+</$set>
+\end
+
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
 /*
@@ -1370,6 +1384,8 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-type-selector-dropdown-wrapper {
 	display: inline-block;
 }
+
+<<set-type-selector-min-width>>
 
 .tc-edit-tags {
 	border: 1px solid <<colour tiddler-editor-border>>;
