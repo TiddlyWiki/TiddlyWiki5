@@ -48,7 +48,7 @@ $else$
 \end
 
 \define set-type-selector-min-width()
-<$list filter="[all[shadows+tiddlers]removeprefix[$:/language/Docs/Types/]length[]] +[nsort[]] +[last[]]" variable="typeLength">
+<$set name="typeLength" value={{{ [all[shadows+tiddlers]prefix[$:/language/Docs/Types/]get[name]length[]maxall[]] }}}>
 
 	.tc-type-selector-dropdown-wrapper {
 		min-width: calc(<<typeLength>>ch + 4em);
@@ -58,7 +58,7 @@ $else$
 		min-width: <<typeLength>>ch;
 	}
 
-</$list>
+</$set>
 \end
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
