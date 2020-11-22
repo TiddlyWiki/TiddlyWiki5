@@ -73,20 +73,20 @@ title: $:/PaletteManager
 </tbody>
 </table>
 \end
-<$set name="currentTiddler" value={{$:/palette}}>
+<$set name="currentTiddler" value={{{ [<currPaletteTiddler>get[text]] }}}>
 
-<<lingo Prompt>> <$link to={{$:/palette}}><$macrocall $name="currentTiddler" $output="text/plain"/></$link>
+<<lingo Prompt>> <$link to={{{ [<currPaletteTiddler>get[text]] }}}><$macrocall $name="currentTiddler" $output="text/plain"/></$link>
 
 <$list filter="[all[current]is[shadow]is[tiddler]]" variable="listItem">
 <<lingo Prompt/Modified>>
-<$button message="tm-delete-tiddler" param={{$:/palette}}><<lingo Reset/Caption>></$button>
+<$button message="tm-delete-tiddler" param={{{ [<currPaletteTiddler>get[text]] }}}><<lingo Reset/Caption>></$button>
 </$list>
 
 <$list filter="[all[current]is[shadow]!is[tiddler]]" variable="listItem">
 <<lingo Clone/Prompt>>
 </$list>
 
-<$button message="tm-new-tiddler" param={{$:/palette}}><<lingo Clone/Caption>></$button>
+<$button message="tm-new-tiddler" param={{{ [<currPaletteTiddler>get[text]] }}}><<lingo Clone/Caption>></$button>
 
 <$checkbox tiddler="$:/state/palettemanager/showexternal" field="text" checked="yes" unchecked="no"><span class="tc-small-gap-left"><<lingo Names/External/Show>></span></$checkbox>
 
