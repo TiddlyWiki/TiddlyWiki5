@@ -1,8 +1,10 @@
 title: $:/snippets/paletteswitcher
 
-<$linkcatcher to="$:/palette">
-<div class="tc-chooser"><$list filter="[all[shadows+tiddlers]tag[$:/tags/Palette]sort[name]]"><$set name="cls" filter="[all[current]prefix{$:/palette}]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item"><div class=<<cls>>><$link to={{!!title}}>''<$view field="name" format="text"/>'' - <$view field="description" format="text"/>{{||$:/snippets/currpalettepreview}}</$link>
+<$linkcatcher to=<<currPaletteTiddler>>>
+<$set name="currPalette" value={{{ [<currPaletteTiddler>get[text]] }}}>
+<div class="tc-chooser"><$list filter="[all[shadows+tiddlers]tag[$:/tags/Palette]sort[name]]"><$set name="cls" filter="[all[current]prefix<currPalette>]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item"><div class=<<cls>>><$link to={{!!title}}>''<$view field="name" format="text"/>'' - <$view field="description" format="text"/>{{||$:/snippets/currpalettepreview}}</$link>
 </div></$set>
 </$list>
 </div>
+</$set>
 </$linkcatcher>
