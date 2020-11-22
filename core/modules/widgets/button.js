@@ -192,6 +192,7 @@ ButtonWidget.prototype.execute = function() {
 	this["aria-label"] = this.getAttribute("aria-label");
 	this.tooltip = this.getAttribute("tooltip");
 	this.style = this.getAttribute("style");
+	// Class attribute is handled in assignDomNodeClasses()
 	this.selectedClass = this.getAttribute("selectedClass");
 	this.defaultSetValue = this.getAttribute("default","");
 	this.buttonTag = this.getAttribute("tag");
