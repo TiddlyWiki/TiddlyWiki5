@@ -1833,7 +1833,6 @@ html body.tc-body.tc-single-tiddler-window {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%) !important;
-	transition: transform 10ms ease !important;
 }
 
 /*
