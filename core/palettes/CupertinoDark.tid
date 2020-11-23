@@ -4,9 +4,9 @@ name: Cupertino Dark
 description: A macOS inspired dark palette
 type: application/x-tiddler-dictionary
 
-alert-background: <<colour background>>
-alert-border: <<colour very-muted-foreground>>
-alert-highlight: <<colour very-muted-foreground>>
+alert-background: #FF453A
+alert-border: #FF453A
+alert-highlight: #FFD60A
 alert-muted-foreground: <<colour muted-foreground>>
 background: #282828
 blockquote-bar: <<colour page-background>>
@@ -25,7 +25,7 @@ dropdown-background: #464646
 dropdown-border: <<colour dropdown-background>>
 dropdown-tab-background-selected: #3F638B
 dropdown-tab-background: #323232
-dropzone-background: <<colour tag-background>>
+dropzone-background: #30D158
 external-link-background-hover: transparent
 external-link-background-visited: transparent
 external-link-background: transparent
