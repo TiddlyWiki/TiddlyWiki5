@@ -53,7 +53,7 @@ select-tag-background: <<colour background>>
 select-tag-foreground: <<colour foreground>>
 sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: #FF9F0A
-sidebar-controls-foreground: #464646
+sidebar-controls-foreground: #8E8E93
 sidebar-foreground-shadow: transparent
 sidebar-foreground: rgba(255, 255, 255, 0.54)
 sidebar-muted-foreground-hover: rgba(255, 255, 255, 0.54)
