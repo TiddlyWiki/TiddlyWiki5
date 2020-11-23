@@ -1,5 +1,6 @@
 title: $:/snippets/LayoutSwitcher
 tags: $:/tags/ControlPanel/Appearance
+caption: {{$:/language/ControlPanel/LayoutSwitcher/Caption}}
 
 <$linkcatcher to="$:/layout">
 <div class="tc-chooser">
