@@ -85,7 +85,7 @@ tiddler-background: <<colour background>>
 tiddler-border: transparent
 tiddler-controls-foreground-hover: <<colour sidebar-controls-foreground-hover>>
 tiddler-controls-foreground-selected: <<colour sidebar-controls-foreground-hover>>
-tiddler-controls-foreground: <<colour sidebar-controls-foreground>>
+tiddler-controls-foreground: #48484A
 tiddler-editor-background: transparent
 tiddler-editor-border-image: 
 tiddler-editor-border: rgba(255, 255, 255, 0.08)
