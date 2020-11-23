@@ -59,8 +59,8 @@ page-background: #e0d3af
 pre-background: #D6CBAA
 pre-border: #CDC2A6
 primary: #5B6F55
-selection-background: <<colour foreground>>
-selection-foreground: <<colour background>>
+selection-background: #9D947B
+selection-foreground: <<colour foreground>>
 select-tag-background: #F0E9D7
 select-tag-foreground: #2D2A23
 sidebar-button-foreground: <<colour foreground>>
@@ -70,7 +70,7 @@ sidebar-foreground-shadow: transparent
 sidebar-foreground: #867F69
 sidebar-muted-foreground-hover: #706A58
 sidebar-muted-foreground: #B3A98C
-sidebar-tab-background-selected: #C3BAA1
+sidebar-tab-background-selected: #e0d3af
 sidebar-tab-background: #A6A193
 sidebar-tab-border-selected: #C3BAA1
 sidebar-tab-border: #C3BAA1
@@ -98,7 +98,7 @@ tiddler-border: <<colour background>>
 tiddler-controls-foreground-hover: #9D947B
 tiddler-controls-foreground-selected: #706A58
 tiddler-controls-foreground: #C3BAA1
-tiddler-editor-background: #C3BAA1
+tiddler-editor-background: #E9E0C7
 tiddler-editor-border-image: #A6A193
 tiddler-editor-border: #A6A193
 tiddler-editor-fields-even: #D6CBAA
