@@ -70,7 +70,7 @@ sidebar-foreground-shadow: transparent
 sidebar-foreground: #867F69
 sidebar-muted-foreground-hover: #706A58
 sidebar-muted-foreground: #B3A98C
-sidebar-tab-background-selected: #C3BAA1
+sidebar-tab-background-selected: #e0d3af
 sidebar-tab-background: #A6A193
 sidebar-tab-border-selected: #C3BAA1
 sidebar-tab-border: #C3BAA1
