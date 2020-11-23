@@ -1,6 +1,8 @@
-title: $:/palettes/MacOSDark
-tags: $:/tags/palette
-description: A MacOS inspired dark palette
+title: $:/palettes/CupertinoDark
+tags: $:/tags/Palette
+name: Cupertino Dark
+description: A macOS inspired dark palette
+type: application/x-tiddler-dictionary
 
 alert-background: <<colour background>>
 alert-border: <<colour very-muted-foreground>>
