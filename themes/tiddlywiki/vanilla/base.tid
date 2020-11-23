@@ -937,6 +937,11 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 ">>
 
+	.tc-story-river.tc-static-story-river {
+		margin-right: 0;
+		padding-right: 42px;
+	}
+
 }
 
 @media print {
