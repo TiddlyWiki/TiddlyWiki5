@@ -21,7 +21,7 @@ $actions$<$transclude tiddler="""$icon$"""/><$view tiddler=<<__tag__>> field="ti
 
 \define tag-pill(tag,element-tag:"span",element-attributes:"",actions:"")
 <span class="tc-tag-list-item">
-<$macrocall $name="tag-pill-body" tag=<<__tag__>> icon={{{ [<__tag__>get[icon]] }}} colour={{{ [<__tag__>get[color]] }}} palette={{{ [{$:/config/AutoDarkMode}!match[yes]then{$:/config/DarkMode}match[yes]then{$:/config/Palette/DarkMode}] ~[{$:/config/AutoDarkMode}match[yes]then{$:/state/dark-mode}match[true]then{$:/config/Palette/DarkMode}] ~[{$:/palette}] }}} element-tag="""$element-tag$""" element-attributes="""$element-attributes$""" actions="""$actions$"""/>
+<$macrocall $name="tag-pill-body" tag=<<__tag__>> icon={{{ [<__tag__>get[icon]] }}} colour={{{ [<__tag__>get[color]] }}} palette={{{ [{$:/config/AutoDarkMode}!match[yes]then{$:/config/DarkMode}match[yes]then{$:/paletteDark}] ~[{$:/config/AutoDarkMode}match[yes]then{$:/info/darkmode}match[true]then{$:/paletteDark}] ~[{$:/palette}] }}} element-tag="""$element-tag$""" element-attributes="""$element-attributes$""" actions="""$actions$"""/>
 </span>
 \end
 
