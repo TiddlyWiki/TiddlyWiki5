@@ -38,6 +38,17 @@ exports.getInfoTiddlerFields = function() {
 		infoTiddlerFields.push({title: "$:/info/browser/screen/height", text: window.screen.height.toString()});
 		// Language
 		infoTiddlerFields.push({title: "$:/info/browser/language", text: navigator.language || ""});
+		// Dark mode
+		var mqList = window.matchMedia('(prefers-color-scheme: dark)');
+		infoTiddlerFields.push({title: "$:/info/os/darkmode", text: mqList.matches.toString()});
+		mqList.addEventListener('change', function(event) {
+			$tw.wiki.setText("$:/info/os/darkmode","text",undefined,event.matches.toString(),{suppressTimestamp: true});
+		});
+		$tw.wiki.addEventListener('change', function(changes) {
+			if(changes["$:/config/AutoDarkMode"]) {
+				$tw.wiki.setText("$:/info/os/darkmode","text",undefined,window.matchMedia('(prefers-color-scheme: dark)').matches.toString(),{suppressTimestamp: true});	
+			}
+		});
 	}
 	return infoTiddlerFields;
 };
