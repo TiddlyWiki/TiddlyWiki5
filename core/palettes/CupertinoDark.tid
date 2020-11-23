@@ -2,6 +2,7 @@ title: $:/palettes/CupertinoDark
 tags: $:/tags/palette
 name: Cupertino Dark
 description: A Cupertino-inspired dark palette
+type: application/x-tiddler-dictionary
 
 alert-background: <<colour background>>
 alert-border: <<colour very-muted-foreground>>
