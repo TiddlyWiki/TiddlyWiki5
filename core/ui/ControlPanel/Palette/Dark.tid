@@ -3,7 +3,7 @@ caption: {{$:/language/ControlPanel/Palette/Dark/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Palette/
 
-<$vars currPaletteTiddler="$:/palette" state=<<qualify "$:/state/ShowPaletteEditor">>>
+<$vars currPaletteTiddler="$:/paletteDark" state=<<qualify "$:/state/ShowPaletteEditor">>>
 
 {{$:/snippets/paletteswitcher}}
 
