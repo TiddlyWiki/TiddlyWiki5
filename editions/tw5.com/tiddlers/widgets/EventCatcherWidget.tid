@@ -1,11 +1,12 @@
 created: 20201123113532200
-modified: 20201123143104394
+modified: 20201123172753436
 tags: Widgets
 title: EventCatcherWidget
 type: text/vnd.tiddlywiki
 
 ! Introduction
 
+<<.from-version "5.1.23">>
 The event catcher widget traps JavaScript events dispatched within its child content, and allows invoking a series of ActionWidgets in response to the events. 
 
 In order for the events to be trapped they must:
