@@ -26,7 +26,7 @@ exports.startup = function() {
 		$tw.modal.display(event.param,{variables: event.paramObject, event: event});
 	});
 	$tw.rootWidget.addEventListener("tm-show-switcher",function(event) {
-		$tw.modal.display("$:/core/ui/Switcher",{variables: event.paramObject, event: event});
+		$tw.modal.display("$:/core/ui/SwitcherModal",{variables: event.paramObject, event: event});
 	});	
 	// Install the notification  mechanism
 	$tw.notifier = new $tw.utils.Notifier($tw.wiki);

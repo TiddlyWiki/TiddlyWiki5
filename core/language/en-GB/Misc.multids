@@ -64,7 +64,7 @@ MissingTiddler/Hint: Missing tiddler "<$text text=<<currentTiddler>>/>" -- click
 No: No
 OfficialPluginLibrary: Official ~TiddlyWiki Plugin Library
 OfficialPluginLibrary/Hint: The official ~TiddlyWiki plugin library at tiddlywiki.com. Plugins, themes and language packs are maintained by the core team.
-PageTemplate/Description: the default tiddlywiki layout
+PageTemplate/Description: the default ~TiddlyWiki layout
 PageTemplate/Name: Default ~PageTemplate
 PluginReloadWarning: Please save {{$:/core/ui/Buttons/save-wiki}} and reload {{$:/core/ui/Buttons/refresh}} to allow changes to ~JavaScript plugins to take effect
 RecentChanges/DateFormat: DDth MMM YYYY
@@ -77,10 +77,10 @@ Shortcuts/Input/Tab-Left/Hint: Select the previous Tab
 Shortcuts/Input/Tab-Right/Hint: Select the next Tab
 Shortcuts/Input/Up/Hint: Select the previous item
 Shortcuts/SidebarLayout/Hint: Change the sidebar layout
-Switcher/Subtitle/theme: Switch themes
-Switcher/Subtitle/layout: Switch layouts
-Switcher/Subtitle/language: Switch languages
-Switcher/Subtitle/palette: Switch palettes
+Switcher/Subtitle/theme: Switch Theme
+Switcher/Subtitle/layout: Switch Layout
+Switcher/Subtitle/language: Switch Language
+Switcher/Subtitle/palette: Switch Palette
 SystemTiddler/Tooltip: This is a system tiddler
 SystemTiddlers/Include/Prompt: Include system tiddlers
 TagManager/Colour/Heading: Colour
