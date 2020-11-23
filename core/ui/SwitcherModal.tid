@@ -1,0 +1,11 @@
+title: $:/core/ui/SwitcherModal
+subtitle: <$text text={{{[<switch>lookup[$:/language/Switcher/Subtitle/]]}}}/>
+class: tc-modal-centered
+
+<$tiddler tiddler={{{[<switch>lookup[$:/config/SwitcherTargets/]]}}}>
+
+
+<$transclude/>
+
+
+</$tiddler>

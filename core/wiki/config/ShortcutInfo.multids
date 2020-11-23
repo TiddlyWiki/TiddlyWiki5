@@ -22,6 +22,7 @@ input-tab-left: {{$:/language/Shortcuts/Input/Tab-Left/Hint}}
 input-tab-right: {{$:/language/Shortcuts/Input/Tab-Right/Hint}}
 input-up: {{$:/language/Shortcuts/Input/Up/Hint}}
 italic: {{$:/language/Buttons/Italic/Hint}}
+layout-switcher: {{$:/language/LayoutSwitcher/Description}}
 link: {{$:/language/Buttons/Link/Hint}}
 linkify: {{$:/language/Buttons/Linkify/Hint}}
 list-bullet: {{$:/language/Buttons/ListBullet/Hint}}
