@@ -27,33 +27,22 @@ ButtonWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 ButtonWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
+	var self = this,
+		tag = "button",
+		domNode;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
 	// Create element
-	var tag = "button";
 	if(this.buttonTag && $tw.config.htmlUnsafeElements.indexOf(this.buttonTag) === -1) {
 		tag = this.buttonTag;
 	}
-	var domNode = this.document.createElement(tag);
+	domNode = this.document.createElement(tag);
+	this.domNode = domNode;
 	// Assign classes
-	var classes = this["class"].split(" ") || [],
-		isPoppedUp = (this.popup || this.popupTitle) && this.isPoppedUp();
-	if(this.selectedClass) {
-		if((this.set || this.setTitle) && this.setTo && this.isSelected()) {
-			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
-		}
-		if(isPoppedUp) {
-			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
-		}
-	}
-	if(isPoppedUp) {
-		$tw.utils.pushTop(classes,"tc-popup-handle");
-	}
-	domNode.className = classes.join(" ");
+	this.assignDomNodeClasses();
 	// Assign other attributes
 	if(this.style) {
 		domNode.setAttribute("style",this.style);
@@ -200,10 +189,10 @@ ButtonWidget.prototype.execute = function() {
 	this.setTo = this.getAttribute("setTo");
 	this.popup = this.getAttribute("popup");
 	this.hover = this.getAttribute("hover");
-	this["class"] = this.getAttribute("class","");
 	this["aria-label"] = this.getAttribute("aria-label");
 	this.tooltip = this.getAttribute("tooltip");
 	this.style = this.getAttribute("style");
+	// Class attribute is handled in assignDomNodeClasses()
 	this.selectedClass = this.getAttribute("selectedClass");
 	this.defaultSetValue = this.getAttribute("default","");
 	this.buttonTag = this.getAttribute("tag");
@@ -219,14 +208,33 @@ ButtonWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
+ButtonWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" "),
+		isPoppedUp = (this.popup || this.popupTitle) && this.isPoppedUp();
+	if(this.selectedClass) {
+		if((this.set || this.setTitle) && this.setTo && this.isSelected()) {
+			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
+		}
+		if(isPoppedUp) {
+			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
+		}
+	}
+	if(isPoppedUp) {
+		$tw.utils.pushTop(classes,"tc-popup-handle");
+	}
+	this.domNode.className = classes.join(" ");
+}
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes["class"] || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled) {
+	if(changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled) {
 		this.refreshSelf();
 		return true;
+	} else if(changedAttributes["class"]) {
+		this.assignDomNodeClasses();
 	}
 	return this.refreshChildren(changedTiddlers);
 };

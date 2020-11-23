@@ -1,0 +1,140 @@
+title: $:/palettes/DesertSand
+tags: $:/tags/Palette
+name: Desert Sand
+description: A desert sand palette
+type: application/x-tiddler-dictionary
+
+alert-background: #ffe476
+alert-border: #b99e2f
+alert-highlight: #881122
+alert-muted-foreground: #b99e2f
+background: #E9E0C7
+blockquote-bar: <<colour muted-foreground>>
+button-background: #BAB29C
+button-foreground: <<colour foreground>>
+button-border: transparent
+code-background: #F3EDDF
+code-border: #C3BAA1
+code-foreground: #ab3250
+diff-delete-background: #bd8b8b
+diff-delete-foreground: <<colour foreground>>
+diff-equal-background: 
+diff-equal-foreground: <<colour foreground>>
+diff-insert-background: #91c093
+diff-insert-foreground: <<colour foreground>>
+diff-invisible-background: 
+diff-invisible-foreground: <<colour muted-foreground>>
+dirty-indicator: #ad3434
+download-background: #6ca16c
+download-foreground: <<colour background>>
+dragger-background: <<colour foreground>>
+dragger-foreground: <<colour background>>
+dropdown-background: <<colour background>>
+dropdown-border: <<colour muted-foreground>>
+dropdown-tab-background-selected: #E9E0C7
+dropdown-tab-background: #BAB29C
+dropzone-background: rgba(0,200,0,0.7)
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: inherit
+external-link-foreground-visited: #313163
+external-link-foreground: #555592
+foreground: #2D2A23
+menubar-background: #CDC2A6
+menubar-foreground: #5A5446
+message-background: #ECE5CF
+message-border: #D6CBAA
+message-foreground: #5f6e7d
+modal-backdrop: <<colour foreground>>
+modal-background: <<colour background>>
+modal-border: #8A8885
+modal-footer-background: #CDC2A6
+modal-footer-border: #9D998E
+modal-header-border: #9D998E
+muted-foreground: #9D998E
+notification-background: #F0E9D7
+notification-border: #939189
+page-background: #e0d3af
+pre-background: #D6CBAA
+pre-border: #CDC2A6
+primary: #5B6F55
+selection-background: <<colour foreground>>
+selection-foreground: <<colour background>>
+select-tag-background: #F0E9D7
+select-tag-foreground: #2D2A23
+sidebar-button-foreground: <<colour foreground>>
+sidebar-controls-foreground-hover: #2D2A23
+sidebar-controls-foreground: #867F69
+sidebar-foreground-shadow: transparent
+sidebar-foreground: #867F69
+sidebar-muted-foreground-hover: #706A58
+sidebar-muted-foreground: #B3A98C
+sidebar-tab-background-selected: #C3BAA1
+sidebar-tab-background: #A6A193
+sidebar-tab-border-selected: #C3BAA1
+sidebar-tab-border: #C3BAA1
+sidebar-tab-divider: #CDC2A6
+sidebar-tab-foreground-selected: 
+sidebar-tab-foreground: #2D2A23
+sidebar-tiddler-link-foreground-hover: #433F35
+sidebar-tiddler-link-foreground: #706A58
+site-title-foreground: <<colour tiddler-title-foreground>>
+static-alert-foreground: #A6A193
+tab-background-selected: #E9E0C7
+tab-background: #A6A193
+tab-border-selected: #C3BAA1
+tab-border: #C3BAA1
+tab-divider: #CDC2A6
+tab-foreground-selected: <<colour tab-foreground>>
+tab-foreground: #2D2A23
+table-border: #9D998E
+table-footer-background: #8A8885
+table-header-background: #B0AA98
+tag-background: #706A58
+tag-foreground: #E3D7B7
+tiddler-background: <<colour background>>
+tiddler-border: <<colour background>>
+tiddler-controls-foreground-hover: #9D947B
+tiddler-controls-foreground-selected: #706A58
+tiddler-controls-foreground: #C3BAA1
+tiddler-editor-background: #C3BAA1
+tiddler-editor-border-image: #A6A193
+tiddler-editor-border: #A6A193
+tiddler-editor-fields-even: #D6CBAA
+tiddler-editor-fields-odd: #C3BAA1
+tiddler-info-background: #E3D7B7
+tiddler-info-border: #BAB29C
+tiddler-info-tab-background: #E9E0C7
+tiddler-link-background: <<colour background>>
+tiddler-link-foreground: <<colour primary>>
+tiddler-subtitle-foreground: #867F69
+tiddler-title-foreground: #374464
+toolbar-new-button: 
+toolbar-options-button: 
+toolbar-save-button: 
+toolbar-info-button: 
+toolbar-edit-button: 
+toolbar-close-button: 
+toolbar-delete-button: 
+toolbar-cancel-button: 
+toolbar-done-button: 
+untagged-background: #8A8885
+very-muted-foreground: #CDC2A6
+wikilist-background: <<colour page-background>>
+wikilist-item: #CDC2A6
+wikilist-info: #161512
+wikilist-title: #433F35
+wikilist-title-svg: <<colour wikilist-title>>
+wikilist-url: #706A58
+wikilist-button-open: #7db66a
+wikilist-button-open-hover: #56a556
+wikilist-button-reveal: #5a6c9e
+wikilist-button-reveal-hover: #454591
+wikilist-button-remove: #bc5972
+wikilist-button-remove-hover: #814040
+wikilist-toolbar-background: #CDC2A6
+wikilist-toolbar-foreground: #2D2A23
+wikilist-droplink-dragover: rgba(255,192,192,0.5)
+wikilist-button-background: #A6A193
+wikilist-button-foreground: #161512

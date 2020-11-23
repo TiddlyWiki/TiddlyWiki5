@@ -4,6 +4,7 @@ caption: {{$:/core/images/done-button}} {{$:/language/Buttons/Save/Caption}}
 description: {{$:/language/Buttons/Save/Hint}}
 
 \define save-tiddler-button()
+\whitespace trim
 <$fieldmangler><$button tooltip={{$:/language/Buttons/Save/Hint}} aria-label={{$:/language/Buttons/Save/Caption}} class=<<tv-config-toolbar-class>>>
 <<save-tiddler-actions>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">

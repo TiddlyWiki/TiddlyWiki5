@@ -529,6 +529,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	$tw.utils.each(importData.tiddlers,function(tiddler,title) {
 		if($tw.utils.count(tiddler) === 0) {
 			newFields["selection-" + title] = "unchecked";
+			newFields["suppressed-" + title] = "yes";
 		}
 	});
 	// Save the $:/Import tiddler

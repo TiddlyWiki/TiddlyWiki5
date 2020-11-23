@@ -57,7 +57,7 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 					// Reject the incoming plugin by blanking all its fields
 					if($tw.utils.checkVersions(existingTiddler.fields.version,incomingTiddler.version)) {
 						tiddlers[title] = Object.create(null);
-						messages[title] = requiresReload + $tw.language.getString("Import/Upgrader/Plugins/Suppressed/Version",{variables: {incoming: incomingTiddler.version, existing: existingTiddler.fields.version}});
+						messages[title] = $tw.language.getString("Import/Upgrader/Plugins/Suppressed/Version",{variables: {incoming: incomingTiddler.version, existing: existingTiddler.fields.version}});
 						return;
 					}
 				}

@@ -47,6 +47,20 @@ $else$
 </$reveal>
 \end
 
+\define set-type-selector-min-width()
+<$set name="typeLength" value={{{ [all[shadows+tiddlers]prefix[$:/language/Docs/Types/]get[name]length[]maxall[]] }}}>
+
+	.tc-type-selector-dropdown-wrapper {
+		min-width: calc(<<typeLength>>ch + 4em);
+	}
+
+	.tc-type-selector-dropdown-wrapper input.tc-edit-typeeditor {
+		min-width: <<typeLength>>ch;
+	}
+
+</$set>
+\end
+
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
 /*
@@ -757,6 +771,14 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	right: 29px;
 }
 
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+
+	.tc-topbar-right {
+		right: 10px;
+	}
+
+}
+
 .tc-topbar button {
 	padding: 8px;
 }
@@ -834,7 +856,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	fill: <<colour sidebar-controls-foreground-hover>>;
 }
 
-.tc-menu-list-item {
+.tc-sidebar-lists .tc-menu-list-item {
 	white-space: nowrap;
 }
 
@@ -969,6 +991,14 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	border-bottom: 1px solid <<colour tiddler-info-tab-background>>;
 }
 
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+
+	.tc-tiddler-info {
+		padding: 14px 14px 14px 14px;
+	}
+
+}
+
 .tc-view-field-table {
 	width: 100%;
 }
@@ -986,6 +1016,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 	.tc-tiddler-frame {
 		padding: 14px 14px 14px 14px;
+		margin-bottom: .5em;
 	}
 
 	.tc-tiddler-info {
@@ -1174,10 +1205,6 @@ canvas.tc-edit-bitmapeditor  {
 	overflow: hidden; /* https://github.com/Jermolene/TiddlyWiki5/issues/282 */
 }
 
-.tc-tiddler-title.tc-tiddler-edit-title {
-	line-height: 3em;
-}
-
 html body.tc-body.tc-single-tiddler-window {
 	margin: 1em;
 	background: <<colour tiddler-background>>;
@@ -1358,6 +1385,8 @@ html body.tc-body.tc-single-tiddler-window {
 	display: inline-block;
 }
 
+<<set-type-selector-min-width>>
+
 .tc-edit-tags {
 	border: 1px solid <<colour tiddler-editor-border>>;
 	padding: 4px 8px 4px 8px;
@@ -1420,6 +1449,10 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 100%;
 }
 
+.tc-edit-fields.tc-edit-fields-small {
+	margin-top: 0;
+	margin-bottom: 0;
+}
 
 .tc-edit-fields table, .tc-edit-fields tr, .tc-edit-fields td {
 	border: none;
@@ -2084,6 +2117,15 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-import-table th:last-of-type {
 	width: 30%;
+}
+
+.tc-import-table .tc-row-disabled {
+	background: <<colour very-muted-foreground>>10;
+	opacity: 0.8;
+}
+
+.tc-import-table .tc-row-warning {
+	background: <<colour diff-delete-background>>50;
 }
 
 /*

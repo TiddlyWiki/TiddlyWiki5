@@ -4,6 +4,6 @@ tags: $:/tags/SyncerDropdown
 <$reveal state="$:/status/IsLoggedIn" type="match" text="yes">
 <$button tooltip="Get latest changes from the server" aria-label="Refresh from server" class="tc-btn-invisible">
 <$action-sendmessage $message="tm-server-refresh"/>
-{{$:/core/images/refresh-button}} <span clas]s="tc-btn-text"><$text text="Get latest changes from the server"/></span>
+{{$:/core/images/refresh-button}} <span class="tc-btn-text"><$text text="Get latest changes from the server"/></span>
 </$button>
 </$reveal>

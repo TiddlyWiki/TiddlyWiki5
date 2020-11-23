@@ -207,7 +207,7 @@ function runTests(wiki) {
 
 	it("should handle the lookup operator", function() {
 		expect(wiki.filterTiddlers("Six Seventh 8 +[lookup[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,,Tidd");
-		expect(wiki.filterTiddlers("Six Seventh 8 +[lookup:8[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,Tidd,Tidd");
+		expect(wiki.filterTiddlers("Six Seventh 8 +[lookup:8[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,8,Tidd");
 	});
 
 	it("should retrieve shadow tiddlers", function() {
@@ -758,6 +758,7 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("[[Tiddler Three]tags[]] -[[one]] +[toggle[one]]").join(",")).toBe("two,one");
 		expect(wiki.filterTiddlers("[[Tiddler Three]tags[]] +[toggle[three],[four]]").join(",")).toBe("one,two,three");
 		expect(wiki.filterTiddlers("[[Tiddler Three]tags[]] [[three]] +[toggle[three],[four]]").join(",")).toBe("one,two,four");
+		expect(wiki.filterTiddlers("[[Tiddler Three]tags[]] [[three]] [[four]] +[toggle[three],[five]]").join(",")).toBe("one,two,five,four");
 	});
 
 	it("should handle multiple operands for search-replace", function() {

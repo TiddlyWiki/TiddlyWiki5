@@ -3,7 +3,8 @@ tags: $:/tags/EditToolbar $:/tags/ViewToolbar
 caption: {{$:/core/images/delete-button}} {{$:/language/Buttons/Delete/Caption}}
 description: {{$:/language/Buttons/Delete/Hint}}
 
-<$button message="tm-delete-tiddler" tooltip={{$:/language/Buttons/Delete/Hint}} aria-label={{$:/language/Buttons/Delete/Caption}} class=<<tv-config-toolbar-class>>>
+\whitespace trim
+<$button actions=<<cancel-delete-tiddler-actions "delete">> tooltip={{$:/language/Buttons/Delete/Hint}} aria-label={{$:/language/Buttons/Delete/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/delete-button}}
 </$list>

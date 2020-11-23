@@ -54,6 +54,19 @@ exports.warning = function(text) {
 };
 
 /*
+Log a table of name: value pairs
+*/
+exports.logTable = function(data,columnNames) {
+	if(console.table) {
+		console.table(data,columnNames);
+	} else {
+		$tw.utils.each(data,function(value,name) {
+			console.log(name + ": " + value);
+		});
+	}
+}
+
+/*
 Return the integer represented by the str (string).
 Return the dflt (default) parameter if str is not a base-10 number.
 */

@@ -1370,7 +1370,7 @@ exports.readFileContent = function(file,type,isBinary,deserializer,callback) {
 	// Onload
 	reader.onload = function(event) {
 		var text = event.target.result,
-			tiddlerFields = {title: file.name || "Untitled", type: type};
+			tiddlerFields = {title: file.name || "Untitled"};
 		if(isBinary) {
 			var commaPos = text.indexOf(",");
 			if(commaPos !== -1) {
