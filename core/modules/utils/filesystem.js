@@ -216,7 +216,9 @@ Options include:
 */
 exports.generateTiddlerFileInfo = function(tiddler,options) {
 	var fileInfo = {}, metaExt;
-	if (!!options.fileInfo) fileInfo.basepath = options.fileInfo.basepath;
+	if(!!options.fileInfo) {
+		fileInfo.basepath = options.fileInfo.basepath;	
+	}
 	// Check if the tiddler has any unsafe fields that can't be expressed in a .tid or .meta file: containing control characters, or leading/trailing whitespace
 	var hasUnsafeFields = false;
 	$tw.utils.each(tiddler.getFieldStrings(),function(value,fieldName) {
@@ -242,13 +244,13 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 			fileInfo.type = tiddlerType;
 			fileInfo.hasMetaFile = true;
 		}
-		if (options.extFilters) {
+		if(options.extFilters) {
 			// Check for extension override
 			metaExt = $tw.utils.generateTiddlerExtension(tiddler.fields.title,{
 				extFilters: options.extFilters,
 				wiki: options.wiki
 			});
-			if (metaExt === ".tid") {
+			if(metaExt === ".tid") {
 				// Overriding to the .tid extension needs special handling
 				fileInfo.type = "application/x-tiddler";
 				fileInfo.hasMetaFile = false;
@@ -318,25 +320,26 @@ exports.generateTiddlerFilepath = function(title,options) {
 		extension = options.extension || "",
 		filepath,
 		isEditableFile;
-	// Always check for an "isEditableFile" basepath
+
+	// Check if any of the pathFilters applies
+	if(options.pathFilters && options.wiki && !options.draft) {
+		$tw.utils.each(options.pathFilters,function(filter) {
+			if(!filepath) {
+				var source = options.wiki.makeTiddlerIterator([title]),
+					result = options.wiki.filterTiddlers(filter,null,source);
+				if(result.length > 0) {
+					filepath = result[0];
+				}
+			}
+		});
+	}
+	// Check for an "isEditableFile" basepath if no pathFilter matches
 	isEditableFile = options.fileInfo ? !!options.fileInfo.basepath : false;
-	if(isEditableFile) {
+	if(!filepath && isEditableFile) {
 		var parsed = path.parse(options.fileInfo.basepath);
 		filepath = path.join(parsed.dir, parsed.name);
 	} else {
-		// Check if any of the pathFilters applies
-		if(options.pathFilters && options.wiki && !options.draft) {
-			$tw.utils.each(options.pathFilters,function(filter) {
-				if(!filepath) {
-					var source = options.wiki.makeTiddlerIterator([title]),
-						result = options.wiki.filterTiddlers(filter,null,source);
-					if(result.length > 0) {
-						filepath = result[0];
-					}
-				}
-			});
-		}
-		if (!filepath) {
+		if(!filepath) {
 			filepath = title;
 			// If the filepath already ends in the extension then remove it
 			if(filepath.substring(filepath.length - extension.length) === extension) {
@@ -344,7 +347,9 @@ exports.generateTiddlerFilepath = function(title,options) {
 			}
 			// Remove any forward or backward slashes so we don't create directories
 			filepath = filepath.replace(/\/|\\/g,"_");
-			if(options.draft) filepath = "drafts/"+filepath;
+			if(options.draft) {
+				filepath = "drafts/"+filepath;
+			}
 		}
 		// Don't let the filename start with a dot because such files are invisible on *nix
 		filepath = filepath.replace(/^\./g,"_");
@@ -371,7 +376,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 		count = 0;
 	do {
 		fullPath = path.resolve(directory,filepath + (count ? "_" + count : "") + extension);
-		if(oldPath && oldPath == fullPath) break;
+		if(oldPath && oldPath == fullPath) {break;}
 		count++;
 	} while(fs.existsSync(fullPath));
 	// Return the full path to the file
