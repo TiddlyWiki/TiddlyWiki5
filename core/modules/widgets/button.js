@@ -42,7 +42,20 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	domNode = this.document.createElement(tag);
 	this.domNode = domNode;
 	// Assign classes
-	this.assignDomNodeClasses();
+	var classes = this["class"].split(" ") || [],
+		isPoppedUp = (this.popup || this.popupTitle) && this.isPoppedUp();
+	if(this.selectedClass) {
+		if((this.set || this.setTitle) && this.setTo && this.isSelected()) {
+			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
+		}
+		if(isPoppedUp) {
+			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
+		}
+	}
+	if(isPoppedUp) {
+		$tw.utils.pushTop(classes,"tc-popup-handle");
+	}
+	domNode.className = classes.join(" ");
 	// Assign other attributes
 	if(this.style) {
 		domNode.setAttribute("style",this.style);
@@ -192,7 +205,7 @@ ButtonWidget.prototype.execute = function() {
 	this["aria-label"] = this.getAttribute("aria-label");
 	this.tooltip = this.getAttribute("tooltip");
 	this.style = this.getAttribute("style");
-	// Class attribute is handled in assignDomNodeClasses()
+	this["class"] = this.getAttribute("class","");
 	this.selectedClass = this.getAttribute("selectedClass");
 	this.defaultSetValue = this.getAttribute("default","");
 	this.buttonTag = this.getAttribute("tag");
@@ -208,21 +221,22 @@ ButtonWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-ButtonWidget.prototype.assignDomNodeClasses = function() {
-	var classes = this.getAttribute("class","").split(" "),
-		isPoppedUp = (this.popup || this.popupTitle) && this.isPoppedUp();
-	if(this.selectedClass) {
-		if((this.set || this.setTitle) && this.setTo && this.isSelected()) {
-			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
+ButtonWidget.prototype.updateDomNodeClasses = function() {
+	var domNodeClasses = this.domNode.className.split(" "),
+		oldClasses = this.class.split(" "),
+		newClasses;	
+	this["class"] = this.getAttribute("class","");
+	newClasses = this.class.split(" ");
+	//Remove classes assigned from the old value of class attribute
+	$tw.utils.each(oldClasses,function(oldClass){
+		var i = domNodeClasses.indexOf(oldClass);
+		if(i !== -1) {
+			domNodeClasses.splice(i,1);
 		}
-		if(isPoppedUp) {
-			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
-		}
-	}
-	if(isPoppedUp) {
-		$tw.utils.pushTop(classes,"tc-popup-handle");
-	}
-	this.domNode.className = classes.join(" ");
+	});
+	//Add new classes from updated class attribute.
+	$tw.utils.pushTop(domNodeClasses,newClasses);
+	this.domNode.className = domNodeClasses.join(" ");
 }
 
 /*
@@ -234,7 +248,7 @@ ButtonWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else if(changedAttributes["class"]) {
-		this.assignDomNodeClasses();
+		this.updateDomNodeClasses();
 	}
 	return this.refreshChildren(changedTiddlers);
 };
