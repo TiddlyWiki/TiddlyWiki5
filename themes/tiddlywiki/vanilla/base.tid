@@ -90,7 +90,7 @@ html button {
 ** Basic element styles
 */
 
-html {
+html, body {
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/fontfamily}};
 	text-rendering: optimizeLegibility; /* Enables kerning and ligatures etc. */
 	-webkit-font-smoothing: antialiased;
