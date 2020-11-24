@@ -44,6 +44,7 @@ KeyboardShortcuts/Platform/Linux: 仅 Linux 平台
 KeyboardShortcuts/Platform/NonLinux: 仅非 Linux 平台
 KeyboardShortcuts/Platform/Windows: 仅 Windows 平台
 KeyboardShortcuts/Platform/NonWindows: 仅非 Windows 平台
+LayoutSwitcher/Caption: 布局
 LoadedModules/Caption: 已加载的模块
 LoadedModules/Hint: 这些是当前已加载的模块之源码条目。斜体的模块则无源码条目，通常是因为它们是在引导过程中设置。
 Palette/Caption: 调色板
