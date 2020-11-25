@@ -8,11 +8,8 @@ description: {{$:/language/Buttons/LightDark/Hint}}
 <$list filter="[{$:/config/AutoDarkMode}!match[yes]]">
 <$action-listops $tiddler="$:/config/DarkMode" $field="text" $subfilter="+[toggle[yes],[no]]"/>
 </$list>
-<$list filter="[{$:/config/AutoDarkMode}match[yes]]">
-<$action-listops $tiddler="$:/info/darkmode" $field="text" $subfilter="+[toggle[true],[false]]"/>
-</$list>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
-<$list filter="[{$:/config/AutoDarkMode}!match[yes]then{$:/config/DarkMode}match[yes]] ~[{$:/config/AutoDarkMode}match[yes]then{$:/info/darkmode}match[true]]" emptyMessage="""{{$:/core/images/tip}}""">
+<$list filter="[{$:/config/AutoDarkMode}!match[yes]then{$:/config/DarkModeSetting}match[yes]] ~[{$:/config/AutoDarkMode}match[yes]then{$:/info/darkmode}match[yes]]" emptyMessage="""{{$:/core/images/tip}}""">
 {{$:/core/images/tip}}
 </$list>
 </$list>
