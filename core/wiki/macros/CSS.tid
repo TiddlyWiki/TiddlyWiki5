@@ -2,7 +2,7 @@ title: $:/core/macros/CSS
 tags: $:/tags/Macro
 
 \define colour(name)
-<$transclude tiddler={{{ [{$:/config/AutoDarkMode}!match[yes]then{$:/config/DarkMode}match[yes]then{$:/paletteDark}] ~[{$:/config/AutoDarkMode}match[yes]then{$:/info/darkmode}match[true]then{$:/paletteDark}] ~[{$:/palette}] }}} index="$name$"><$transclude tiddler="$:/palettes/Vanilla" index="$name$"><$transclude tiddler="$:/config/DefaultColourMappings/$name$"/></$transclude></$transclude>
+<$transclude tiddler={{{ [{$:/config/AutoDarkMode}!match[yes]then{$:/config/DarkModeSetting}match[yes]then{$:/paletteDark}] ~[{$:/config/AutoDarkMode}match[yes]then{$:/info/darkmode}match[yes]then{$:/paletteDark}] ~[{$:/palette}] }}} index="$name$"><$transclude tiddler="$:/palettes/Vanilla" index="$name$"><$transclude tiddler="$:/config/DefaultColourMappings/$name$"/></$transclude></$transclude>
 \end
 
 \define color(name)
