@@ -1,5 +1,7 @@
 title: $:/plugins/tiddlywiki/codemirror/styles
 tags: [[$:/tags/Stylesheet]]
+module-type: codemirror-theme
+name: tiddlywiki
 
 /* Make the editor resize to fit its content */
 
@@ -15,3 +17,32 @@ tags: [[$:/tags/Stylesheet]]
 	overflow-x: auto;
 	overflow-y: hidden;	
 }
+
+.cm-s-tiddlywiki.CodeMirror, .cm-s-tiddlywiki .CodeMirror-gutters { background-color: <<colour cm-background>>; color: <<colour cm-foreground>>; }
+.cm-s-tiddlywiki .CodeMirror-gutters {background: <<colour cm-gutters-background>>; border-right: 0px;}
+.cm-s-tiddlywiki .CodeMirror-linenumber {color: <<colour cm-linenumber>>;}
+.cm-s-tiddlywiki .CodeMirror-cursor { border-left: 1px solid <<colour cm-cursor>>; }
+.cm-s-tiddlywiki div.CodeMirror-selected { background: <<colour cm-selected>>; }
+.cm-s-tiddlywiki span.cm-meta { color: <<colour cm-meta>>; }
+
+.cm-s-tiddlywiki span.cm-comment { color: <<colour cm-comment>>; }
+.cm-s-tiddlywiki span.cm-number, span.cm-atom { color: <<colour cm-number>>; }
+.cm-s-tiddlywiki span.cm-keyword { color: <<colour cm-keyword>>; }
+
+.cm-s-tiddlywiki span.cm-variable { color: <<colour cm-variable>>; }
+.cm-s-tiddlywiki span.cm-variable-2 { color: <<colour cm-variable-2>>; }
+.cm-s-tiddlywiki span.cm-variable-3, .cm-s-tiddlywiki span.cm-type { color: <<colour cm-variable-3>>; }
+.cm-s-tiddlywiki span.cm-operator { color: <<colour cm-operator>>; }
+.cm-s-tiddlywiki span.cm-callee { color: <<colour cm-callee>>; }
+.cm-s-tiddlywiki span.cm-def { color: <<colour cm-def>>; }
+.cm-s-tiddlywiki span.cm-property { color: <<colour cm-property>>; }
+.cm-s-tiddlywiki span.cm-string { color: <<colour cm-string>>; }
+.cm-s-tiddlywiki span.cm-string-2 { color: <<colour cm-string-2>>; }
+.cm-s-tiddlywiki span.cm-qualifier { color: <<colour cm-qualifier>>; }
+.cm-s-tiddlywiki span.cm-attribute { color: <<colour cm-attribute>>; }
+
+.cm-s-tiddlywiki .CodeMirror-activeline-background { background: <<colour cm-activeline-background>>; }
+.cm-s-tiddlywiki .CodeMirror-matchingbracket { background: <<colour cm-matchingbracket-background>>; color:<<colour cm-matchingbracket-foreground>> !important; }
+
+.cm-s-tiddlywiki span.cm-builtin { color: <<colour cm-builtin>>; }
+.cm-s-tiddlywiki span.cm-tag { color: <<colour cm-tag>>; }
