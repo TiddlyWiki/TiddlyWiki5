@@ -23,6 +23,8 @@ name: tiddlywiki
 .cm-s-tiddlywiki .CodeMirror-linenumber {color: <<colour cm-linenumber>>;}
 .cm-s-tiddlywiki .CodeMirror-cursor { border-left: 1px solid <<colour cm-cursor>>; }
 .cm-s-tiddlywiki div.CodeMirror-selected { background: <<colour cm-selected>>; }
+.cm-s-tiddlywiki .CodeMirror-line::selection, .cm-s-tiddlywiki .CodeMirror-line > span::selection, .cm-s-tiddlywiki .CodeMirror-line > span > span::selection { background: <<colour cm-selected>>; }
+.cm-s-tiddlywiki .CodeMirror-line::-moz-selection, .cm-s-tiddlywiki .CodeMirror-line > span::-moz-selection, .cm-s-tiddlywiki .CodeMirror-line > span > span::-moz-selection { background: <<colour cm-selected>>; }
 .cm-s-tiddlywiki span.cm-meta { color: <<colour cm-meta>>; }
 
 .cm-s-tiddlywiki span.cm-comment { color: <<colour cm-comment>>; }
