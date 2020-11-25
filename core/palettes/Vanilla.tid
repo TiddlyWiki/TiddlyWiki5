@@ -13,6 +13,32 @@ blockquote-bar: <<colour muted-foreground>>
 button-background:
 button-foreground:
 button-border:
+cm-activeline-background: <<colour sidebar-tab-background>>
+cm-attribute: #7dc188
+cm-background: <<colour background>>
+cm-builtin: <<colour cm-tag>>
+cm-callee: <<colour foreground>>
+cm-cursor: <<colour foreground>>
+cm-comment: <<colour muted-foreground>>
+cm-def: <<colour foreground>>
+cm-foreground: <<colour foreground>>
+cm-gutters-background: <<colour page-background>>
+cm-keyword: #FF453A
+cm-linenumbers: <<colour foreground>>
+cm-matchingbracket-background: #30D158
+cm-matchingbracket-foreground: <<colour foreground>>
+cm-meta: #3e809b
+cm-number: #b4455b
+cm-operator: <<colour foreground>>
+cm-property: <<colour foreground>>
+cm-qualifier: <<colour primary>>
+cm-selected: <<colour selection-background>>
+cm-string: #FF9F0A
+cm-string-2: #59b470
+cm-tag: #FF9F0A
+cm-variable: <<colour foreground>>
+cm-variable-2: <<colour foreground>>
+cm-variable-3: #FFD60A
 code-background: #f7f7f9
 code-border: #e1e1e8
 code-foreground: #dd1144
