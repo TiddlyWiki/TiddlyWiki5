@@ -11,7 +11,7 @@ alert-muted-foreground: <<colour muted-foreground>>
 background: #282828
 blockquote-bar: <<colour page-background>>
 button-background: #3F638B
-button-foreground: inherit
+button-foreground: <<colour foreground>>
 button-border: transparent
 code-background: <<colour pre-background>>
 code-border: <<colour pre-border>>
@@ -33,6 +33,8 @@ external-link-foreground-hover:
 external-link-foreground-visited: #BF5AF2
 external-link-foreground: #32D74B
 foreground: #FFFFFF
+menubar-background: #464646
+menubar-foreground: #ffffff
 message-background: <<colour background>>
 message-border: <<colour very-muted-foreground>>
 message-foreground: rgba(255, 255, 255, 0.54)
@@ -42,7 +44,7 @@ modal-border: <<colour very-muted-foreground>>
 modal-footer-background: <<colour background>>
 modal-footer-border: <<colour background>>
 modal-header-border: <<colour very-muted-foreground>>
-muted-foreground: rgba(255, 255, 255, 0.54)
+muted-foreground: #464646
 notification-background: <<colour dropdown-background>>
 notification-border: <<colour dropdown-background>>
 page-background: #323232
@@ -108,8 +110,22 @@ toolbar-delete-button:
 toolbar-cancel-button: 
 toolbar-done-button: 
 untagged-background: <<colour very-muted-foreground>>
-very-muted-foreground: rgba(255, 255, 255, 0.12)
+very-muted-foreground: #464646
 selection-background: #3F638B
 selection-foreground: #ffffff
-menubar-background: #464646
-menubar-foreground: #ffffff
+wikilist-background: <<colour page-background>>
+wikilist-button-background: <<colour button-background>>
+wikilist-button-foreground: <<colour foreground>>
+wikilist-button-open: #32D74B
+wikilist-button-open-hover: #32D74B
+wikilist-button-reveal: #0A84FF
+wikilist-button-reveal-hover: #0A84FF
+wikilist-button-remove: #FF453A
+wikilist-button-remove-hover: #FF453A
+wikilist-droplink-dragover: #32D74B
+wikilist-item: <<colour background>>
+wikilist-toolbar-background: <<colour background>>
+wikilist-title: <<colour foreground>>
+wikilist-title-svg: <<colour foreground>>
+wikilist-toolbar-foreground: <<colour foreground>>
+wikilist-url: <<colour muted-foreground>>

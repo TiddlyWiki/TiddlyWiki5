@@ -40,6 +40,7 @@ Error/XMLHttpRequest: XMLHttpRequest 錯誤代碼
 InternalJavaScriptError/Title: 內部的 JavaScript 錯誤
 InternalJavaScriptError/Hint: 喔，真是令人尷尬。建議刷新您的瀏覽器，重新啟動 TiddlyWiki
 InvalidFieldName: 欄位名稱 "<$text text=<<fieldName>>/>" 包含無效字元，欄位名稱只能包含小寫字母、數字、底線 (`_`)、 連接號 (`-`) 和小數點 (`.`)
+LayoutSwitcher/Description: 開啟版面切換器
 LazyLoadingWarning: <p>正在從 ''<$text text={{!!_canonical_uri}}/>'' 載入外部內容 ...</p><p>如果此訊息未消失，可能是條目內容類型與外部內容的類型不匹配，或是您可能正在使用的瀏覽器，不支援單檔式維基的外部內容。請參閱 https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: 登入 TiddlySpace
 Manager/Controls/FilterByTag/None: (無)
@@ -63,6 +64,8 @@ MissingTiddler/Hint: 佚失條目 "<$text text=<<currentTiddler>>/>" - 點擊 {{
 No: 否
 OfficialPluginLibrary: ~TiddlyWiki 官方插件程式庫
 OfficialPluginLibrary/Hint: 此為在 tiddlywiki.com 的 ~TiddlyWiki 官方插件程式庫。由核心團隊維護的插件、主題和語言包。
+PageTemplate/Description: 預設的 ~Tiddlywiki 佈局
+PageTemplate/Name: 預設的 ~PageTemplate
 PluginReloadWarning: 請儲存 {{$:/core/ui/Buttons/save-wiki}} 並刷新頁面 {{$:/core/ui/Buttons/refresh}} ，使 ~JavaScript 插件的更改生效
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 Shortcuts/Input/Accept/Hint: 接受選取的項目
@@ -74,6 +77,10 @@ Shortcuts/Input/Tab-Left/Hint: 選擇上一個頁籤
 Shortcuts/Input/Tab-Right/Hint: 選擇下一個頁籤
 Shortcuts/Input/Up/Hint: 選擇前一個項目
 Shortcuts/SidebarLayout/Hint: 更改側邊欄版面
+Switcher/Subtitle/theme: 切換佈景主題
+Switcher/Subtitle/layout: 切換版面
+Switcher/Subtitle/language: 切換語言
+Switcher/Subtitle/palette: 切換調色盤
 SystemTiddler/Tooltip: 此為系統條目
 SystemTiddlers/Include/Prompt: 包括系統條目
 TagManager/Colour/Heading: 顏色
