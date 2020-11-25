@@ -29,7 +29,7 @@ color:$(foregroundColor)$;
 \whitespace trim
 <div class="tc-edit-tags">
 <$list filter="[list[!!$tagField$]sort[title]]" storyview="pop">
-<$macrocall $name="tag-body" colour={{!!color}} palette={{{ [{$:/config/AutoDarkMode}!match[yes]then{$:/config/DarkMode}match[yes]then{$:/paletteDark}] ~[{$:/config/AutoDarkMode}match[yes]then{$:/info/darkmode}match[true]then{$:/paletteDark}] ~[{$:/palette}] }}} icon={{!!icon}} tagField=<<__tagField__>>/>
+<$macrocall $name="tag-body" colour={{!!color}} palette={{{ [{$:/config/AutoDarkMode}!match[yes]then{$:/config/DarkModeSetting}match[yes]then{$:/paletteDark}] ~[{$:/config/AutoDarkMode}match[yes]then{$:/info/darkmode}match[yes]then{$:/paletteDark}] ~[{$:/palette}] }}} icon={{!!icon}} tagField=<<__tagField__>>/>
 </$list>
 <$vars tabIndex={{$:/config/EditTabIndex}} cancelPopups="yes">
 <$macrocall $name="tag-picker" tagField=<<__tagField__>>/>
