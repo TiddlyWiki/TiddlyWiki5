@@ -15,27 +15,37 @@ name: tiddlywiki
 
 .CodeMirror-scroll {
 	overflow-x: auto;
-	overflow-y: hidden;	
+	overflow-y: hidden;
 }
 
 .cm-s-tiddlywiki.CodeMirror, .cm-s-tiddlywiki .CodeMirror-gutters { background-color: <<colour cm-background>>; color: <<colour cm-foreground>>; }
 .cm-s-tiddlywiki .CodeMirror-gutters {background: <<colour cm-gutters-background>>; border-right: 0px;}
 .cm-s-tiddlywiki .CodeMirror-linenumber {color: <<colour cm-linenumber>>;}
-.cm-s-tiddlywiki .CodeMirror-cursor { border-left: 1px solid <<colour cm-cursor>>; }
+.cm-s-tiddlywiki .CodeMirror-cursor { border-left: 2px solid <<colour cm-cursor>>; }
 .cm-s-tiddlywiki div.CodeMirror-selected { background: <<colour cm-selected>>; }
-.cm-s-tiddlywiki .CodeMirror-line::selection, .cm-s-tiddlywiki .CodeMirror-line > span::selection, .cm-s-tiddlywiki .CodeMirror-line > span > span::selection { background: <<colour cm-selected>>; }
-.cm-s-tiddlywiki .CodeMirror-line::-moz-selection, .cm-s-tiddlywiki .CodeMirror-line > span::-moz-selection, .cm-s-tiddlywiki .CodeMirror-line > span > span::-moz-selection { background: <<colour cm-selected>>; }
-.cm-s-tiddlywiki span.cm-meta { color: <<colour cm-meta>>; }
+.cm-s-tiddlywiki .CodeMirror-selectedtext,
+.cm-s-tiddlywiki .CodeMirror-selected,
+.cm-s-tiddlywiki .CodeMirror-line::selection,
+.cm-s-tiddlywiki .CodeMirror-line > span::selection,
+.cm-s-tiddlywiki .CodeMirror-line > span > span::selection,
+.cm-s-tiddlywiki .CodeMirror-line::-moz-selection,
+.cm-s-tiddlywiki .CodeMirror-line > span::-moz-selection,
+.cm-s-tiddlywiki .CodeMirror-line > span > span::-moz-selection { background: <<colour cm-selected>>; }
+.cm-s-tiddlywiki span.cm-meta { color: <<colour cm-meta>>; background: inherit; }
 
-.cm-s-tiddlywiki span.cm-comment { color: <<colour cm-comment>>; }
-.cm-s-tiddlywiki span.cm-number, span.cm-atom { color: <<colour cm-number>>; }
+.cm-s-tiddlywiki span.cm-comment { color: <<colour cm-comment>>; font-style:italic; font-weight:normal; }
+.cm-s-tiddlywiki span.cm-number { color: <<colour cm-number>>; }
+.cm-s-tiddlywiki span.cm-atom { color: <<colour cm-atom>>; }
 .cm-s-tiddlywiki span.cm-keyword { color: <<colour cm-keyword>>; }
 
-.cm-s-tiddlywiki span.cm-variable { color: <<colour cm-variable>>; }
-.cm-s-tiddlywiki span.cm-variable-2 { color: <<colour cm-variable-2>>; }
-.cm-s-tiddlywiki span.cm-variable-3, .cm-s-tiddlywiki span.cm-type { color: <<colour cm-variable-3>>; }
+.cm-s-tiddlywiki span.cm-variable { color: <<colour cm-variable>>; font-style: italic; }
+.cm-s-tiddlywiki span.cm-variable-2 { color: <<colour cm-variable-2>>; font-style: italic; }
+.cm-s-tiddlywiki span.cm-variable-3 { color: <<colour cm-variable-3>>; }
+.cm-s-tiddlywiki span.cm-type { color: <<colour cm-type>>; }
+.cm-s-tiddlywiki .cm-type.cm-def { color: <<colour cm-type-def>>; font-style: normal; text-decoration: underline; }
+.cm-s-tiddlywiki .cm-property.cm-def { color: <<colour cm-property-def>>; font-style: normal; }
 .cm-s-tiddlywiki span.cm-operator { color: <<colour cm-operator>>; }
-.cm-s-tiddlywiki span.cm-callee { color: <<colour cm-callee>>; }
+.cm-s-tiddlywiki span.cm-callee { color: <<colour cm-callee>>; font-style: normal; }
 .cm-s-tiddlywiki span.cm-def { color: <<colour cm-def>>; }
 .cm-s-tiddlywiki span.cm-property { color: <<colour cm-property>>; }
 .cm-s-tiddlywiki span.cm-string { color: <<colour cm-string>>; }
@@ -43,8 +53,17 @@ name: tiddlywiki
 .cm-s-tiddlywiki span.cm-qualifier { color: <<colour cm-qualifier>>; }
 .cm-s-tiddlywiki span.cm-attribute { color: <<colour cm-attribute>>; }
 
-.cm-s-tiddlywiki .CodeMirror-activeline-background { background: <<colour cm-activeline-background>>; }
+.cm-s-tiddlywiki .CodeMirror-activeline-background, .cm-s-tiddlywiki .CodeMirror-activeline-gutter .CodeMirror-linenumber { background: <<colour cm-activeline-background>>; }
+.cm-s-tiddlywiki .CodeMirror-activeline .CodeMirror-linenumber.CodeMirror-gutter-elt { background: <<colour cm-activeline-background>>; color: <<colour cm-activeline-foreground>>; }
 .cm-s-tiddlywiki .CodeMirror-matchingbracket { background: <<colour cm-matchingbracket-background>>; color:<<colour cm-matchingbracket-foreground>> !important; }
 
 .cm-s-tiddlywiki span.cm-builtin { color: <<colour cm-builtin>>; }
 .cm-s-tiddlywiki span.cm-tag { color: <<colour cm-tag>>; }
+.cm-s-tiddlywiki .cm-tag.cm-bracket { color: <<colour cm-tag-bracket>>; }
+.cm-s-tiddlywiki .cm-hr { color: <<colour cm-hr>>; }
+.cm-s-tiddlywiki span.cm-link { color: <<colour cm-link>>; font-style:italic; text-decoration:none; }
+.cm-s-tiddlywiki span.cm-error { border-bottom: 1px solid <<colour cm-error>>; }
+.cm-s-tiddlywiki span.cm-special { color: <<colour cm-special>>; }
+.cm-s-tiddlywiki span.cm-header { color: <<colour cm-header>>; }
+.cm-s-tiddlywiki span.cm-matchhighlight { color: <<colour cm-matchhighlight-foreground>>; background-color: <<colour cm-matchhighlight-background>>; font-weight: normal;}
+.cm-s-tiddlywiki span.cm-searching { color: <<colour cm-searching-foreground>>; background-color: <<colour cm-searching-background>>; font-weight: normal;}
