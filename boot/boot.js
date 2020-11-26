@@ -1912,15 +1912,21 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			}
 		} else {
 			// Process directory specifier
-			var dirPath = path.resolve(filepath,dirSpec.path),
-				files = fs.readdirSync(dirPath),
-				fileRegExp = new RegExp(dirSpec.filesRegExp || "^.*$"),
-				metaRegExp = /^.*\.meta$/;
-			for(var t=0; t<files.length; t++) {
-				var filename = files[t];
-				if(filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename)) {
-					processFile(dirPath + path.sep + filename,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile);
+			var dirPath = path.resolve(filepath,dirSpec.path);
+			if(fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
+				var	files = fs.readdirSync(dirPath),
+					fileRegExp = new RegExp(dirSpec.filesRegExp || "^.*$"),
+					metaRegExp = /^.*\.meta$/;
+				for(var t=0; t<files.length; t++) {
+					var filename = files[t];
+					if(filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename)) {
+						processFile(dirPath + path.sep + filename,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile);
+					}
 				}
+			} else {
+				console.log("Warning: a directory in a tiddlywiki.files file does not exist.");
+				console.log("dirPath: " + dirPath);	
+				console.log("tiddlywiki.files location: " + filepath);
 			}
 		}
 	});
