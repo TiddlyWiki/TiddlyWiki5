@@ -635,7 +635,7 @@ DeleteTiddlerTask.prototype.run = function(callback) {
 		delete self.syncer.tiddlerInfo[self.title];
 		if($tw.boot.files){
 			// Remove the tiddler from $tw.boot.files
-			delete self.boot.files[self.title];
+			delete $tw.boot.files[self.title];
 		}
 		// Invoke the callback
 		callback(null);
