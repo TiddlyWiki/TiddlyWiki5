@@ -64,12 +64,12 @@ exports.startup = function() {
 		document: $tw.browser ? document : $tw.fakeDocument
 	});
 	// Execute any startup actions
-	$tw.rootWidget.executeStartupTiddlers("$:/tags/StartupAction");
+	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction");
 	if($tw.browser) {
-		$tw.rootWidget.executeStartupTiddlers("$:/tags/StartupAction/Browser");		
+		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Browser");		
 	}
 	if($tw.node) {
-		$tw.rootWidget.executeStartupTiddlers("$:/tags/StartupAction/Node");		
+		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Node");		
 	}
 	// Kick off the language manager and switcher
 	$tw.language = new $tw.Language();

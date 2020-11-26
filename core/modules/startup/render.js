@@ -107,7 +107,7 @@ exports.startup = function() {
 	$tw.rootWidget.domNodes = [$tw.pageContainer];
 	$tw.rootWidget.children = [$tw.pageWidgetNode];
 	// Run any post-render startup actions
-	$tw.rootWidget.executeStartupTiddlers("$:/tags/StartupAction/PostRender");
+	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/PostRender");
 };
 
 })();
