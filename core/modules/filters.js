@@ -188,7 +188,7 @@ exports.getFilterOperators = function() {
 };
 
 exports.getFilterRunPrefixes = function() {
-	if(!this.filterPrefixes) {
+	if(!this.filterRunPrefixes) {
 		$tw.Wiki.prototype.filterRunPrefixes = {};
 		$tw.modules.applyMethods("filterrunprefix",this.filterRunPrefixes);
 	}

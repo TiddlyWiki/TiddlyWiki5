@@ -40,7 +40,7 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
  		var mqList = window.matchMedia("(prefers-color-scheme: dark)"),
  			getDarkModeTiddler = function() {return {title: "$:/info/darkmode", text: mqList.matches ? "yes" : "no"};};
  		infoTiddlerFields.push(getDarkModeTiddler());
- 		mqList.addEventListener("change", function(event) {
+ 		mqList.addListener(function(event) {
  			updateInfoTiddlersCallback([getDarkModeTiddler()]);
  		});
 		// Language

@@ -58,26 +58,26 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 			// If we found one, copy the attributes as variables, otherwise exit
 			if(selectedNode.matches(selector)) {
 				$tw.utils.each(selectedNode.attributes,function(attribute) {
-					variables["dom-" + attribute.name] = attribute.value;
+					variables["dom-" + attribute.name] = attribute.value.toString();
 				});
 				//Add a variable with a popup coordinate string for the selected node
 				variables["tv-popup-coords"] = "(" + selectedNode.offsetLeft + "," + selectedNode.offsetTop +"," + selectedNode.offsetWidth + "," + selectedNode.offsetHeight + ")";
 				
 				//Add variables for offset of selected node
-				variables["tv-selectednode-posx"] = selectedNode.offsetLeft;
-				variables["tv-selectednode-posy"] = selectedNode.offsetTop;
-				variables["tv-selectednode-width"] = selectedNode.offsetWidth;
-				variables["tv-selectednode-height"] = selectedNode.offsetHeight;				
+				variables["tv-selectednode-posx"] = selectedNode.offsetLeft.toString();
+				variables["tv-selectednode-posy"] = selectedNode.offsetTop.toString();
+				variables["tv-selectednode-width"] = selectedNode.offsetWidth.toString();
+				variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
 
 				//Add variables for event X and Y position relative to selected node
 				selectedNodeRect = selectedNode.getBoundingClientRect();				
-				variables["event-fromselected-posx"] = event.clientX - selectedNodeRect.left;
-				variables["event-fromselected-posy"] = event.clientY - selectedNodeRect.top;
+				variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
+				variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
 
 				//Add variables for event X and Y position relative to event catcher node
 				catcherNodeRect = self.domNode.getBoundingClientRect();
-				variables["event-fromcatcher-posx"] = event.clientX - catcherNodeRect.left;
-				variables["event-fromcatcher-posy"] = event.clientY - catcherNodeRect.top;
+				variables["event-fromcatcher-posx"] = (event.clientX - catcherNodeRect.left).toString();
+				variables["event-fromcatcher-posy"] = (event.clientY - catcherNodeRect.top).toString();
 			} else {
 				return false;
 			}
