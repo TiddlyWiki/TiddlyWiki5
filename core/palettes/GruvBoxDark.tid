@@ -14,6 +14,49 @@ blockquote-bar: <<colour muted-foreground>>
 button-background: #504945
 button-foreground: #fbf1c7
 button-border: transparent
+cm-activeline-background: #3c3836
+cm-activeline-foreground: <<colour sidebar-controls-foreground-hover>>
+cm-atom: #d3869b
+cm-attribute: #8ec07c
+cm-background: #282828
+cm-builtin: #fe8019
+cm-bracket: #81A1C1
+cm-callee: #ebdbb2
+cm-cursor: #ebdbb2
+cm-comment: #928374
+cm-comment-attribute: #97b757
+cm-comment-tag: #bc6283
+cm-def: #ebdbb2
+cm-error: #bf616a
+cm-foreground: #bdae93
+cm-gutters-background: #282828
+cm-header: #b48ead
+cm-hr: #98E342
+cm-keyword: #f84934
+cm-linenumbers: #7c6f64
+cm-link: #b48ead
+cm-matchhighlight-background: <<colour sidebar-controls-foreground-hover>>
+cm-matchhighlight-foreground: <<colour foreground>>
+cm-matchingbracket-background: #928374
+cm-matchingbracket-foreground: #282828
+cm-meta: #83a598
+cm-number: #d3869b
+cm-operator: #ebdbb2
+cm-property: #ebdbb2
+cm-property-def: #FC4384
+cm-qualifier: #8ec07c
+cm-searching-foreground: <<colour foreground>>
+cm-searching-background: <<colour primary>>
+cm-selected: #928374
+cm-string: #b8bb26
+cm-string-2: #8ec07c
+cm-tag: #fe8019
+cm-tag-bracket: #D4D4D4
+cm-type: #fabd2f
+cm-type-def: #fabd2f
+cm-variable: #ebdbb2
+cm-variable-2: #ebdbb2
+cm-variable-3: #fabd2f
 code-background: #504945
 code-border: #504945
 code-foreground: #fb4934
