@@ -426,12 +426,16 @@ exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 /*
 Delete a file described by the fileInfo if it exits
 */
-exports.deleteTiddlerFile = function(fileInfo, callback) {
+exports.deleteTiddlerFile = function(fileInfo, title, callback) {
+	//Only attempt to delete files that exist on disk
+	if(!fs.existsSync(fileInfo.filepath )) {
+		return callback(null);
+	}
 	// Delete the file
 	fs.unlink(fileInfo.filepath,function(err) {
 		if(err) {
 			return callback(err);
-		}			
+		}	
 		// Delete the metafile if present
 		if(fileInfo.hasMetaFile && fs.existsSync(fileInfo.filepath + ".meta")) {
 			fs.unlink(fileInfo.filepath + ".meta",function(err) {
