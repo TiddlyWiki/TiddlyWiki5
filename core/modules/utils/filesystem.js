@@ -426,7 +426,7 @@ exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 /*
 Delete a file described by the fileInfo if it exits
 */
-exports.deleteTiddlerFile = function(fileInfo, title, callback) {
+exports.deleteTiddlerFile = function(fileInfo, callback) {
 	//Only attempt to delete files that exist on disk
 	if(!fs.existsSync(fileInfo.filepath )) {
 		return callback(null);

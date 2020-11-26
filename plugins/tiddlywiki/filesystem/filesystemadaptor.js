@@ -84,7 +84,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 			// Cleanup duplicates if the file moved or changed extensions
 			var syncerInfo = $tw.syncer.tiddlerInfo[tiddler.fields.title];
 			if(syncerInfo && syncerInfo.adaptorInfo && syncerInfo.adaptorInfo.filepath !== self.boot.files[tiddler.fields.title].filepath) {
-				$tw.utils.deleteTiddlerFile(syncerInfo.adaptorInfo, tiddler.fields.title, function(err){
+				$tw.utils.deleteTiddlerFile(syncerInfo.adaptorInfo, function(err){
 					if(err) {
 						return callback(err);
 					}
@@ -114,14 +114,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 		fileInfo = this.boot.files[title];
 	// Only delete the tiddler if we have writable information for the file
 	if(fileInfo) {
-		$tw.utils.deleteTiddlerFile(fileInfo, title, function(err, title, callback){
-			if(err) {
-				return callback(err);
-			}
-			// Remove the tiddler from $tw.boot.files
-			delete $tw.boot.files[title];
-			callback(null)
-		});
+		$tw.utils.deleteTiddlerFile(fileInfo, callback);
 	} else {
 		callback(null);
 	}
