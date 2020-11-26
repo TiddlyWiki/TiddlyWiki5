@@ -17,6 +17,8 @@ description: {{$:/language/Buttons/Palette/Hint}}
 </span>
 <$reveal state=<<qualify "$:/state/popup/palette">> type="popup" position="below" animate="yes">
 <div class="tc-drop-down" style="font-size:0.7em;">
+<$set name="currPaletteTiddler" value={{{ [{$:/config/DarkModeSetting}match[yes]then[$:/paletteDark]] ~[[$:/palette]] }}}>
 {{$:/snippets/paletteswitcher}}
+</$set>
 </div>
 </$reveal>
