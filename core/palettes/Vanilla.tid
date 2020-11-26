@@ -13,7 +13,7 @@ blockquote-bar: <<colour muted-foreground>>
 button-background:
 button-foreground:
 button-border:
-cm-activeline-background: <<colour tiddler-info-background>>
+cm-activeline-background: <<colour message-background>>
 cm-activeline-foreground: <<colour sidebar-controls-foreground-hover>>
 cm-atom: #219
 cm-attribute: #00c
