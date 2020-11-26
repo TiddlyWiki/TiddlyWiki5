@@ -14,6 +14,50 @@ blockquote-bar: #d33682
 button-background: #eee8d5
 button-border: #93a1a1
 button-foreground: #586e75
+cm-activeline-background: <<colour message-background>>
+cm-activeline-foreground: <<colour sidebar-controls-foreground-hover>>
+cm-atom: #219
+cm-attribute: #00c
+cm-background: <<colour background>>
+cm-builtin: #30a
+cm-bracket: #997
+cm-callee: #FC4384
+cm-cursor: <<colour foreground>>
+cm-comment: #a50
+cm-comment-attribute: #D4D4D4
+cm-comment-tag: #FC4384
+cm-def: #00f
+cm-error: #f00
+cm-foreground: <<colour foreground>>
+cm-gutters-background: <<colour page-background>>
+cm-header: <<colour primary>>
+cm-hr: #999
+cm-keyword: #708
+cm-linenumbers: <<colour foreground>>
+cm-link: #00c
+cm-matchhighlight-background: <<colour sidebar-controls-foreground-hover>>
+cm-matchhighlight-foreground: <<colour foreground>>
+cm-matchingbracket-background: #6A9FB5
+cm-matchingbracket-foreground: #f5f5f5
+cm-meta: #555
+cm-number: #164
+cm-operator: 
+cm-property: 
+cm-property-def: #FC4384
+cm-qualifier: #555
+cm-quote: #090
+cm-searching-foreground: <<colour foreground>>
+cm-searching-background: <<colour primary>>
+cm-selected: rgba(63, 99, 139, 0.5)
+cm-string: #a11
+cm-string-2: #f50
+cm-tag: #170
+cm-tag-bracket: #D4D4D4
+cm-type: #085
+cm-type-def: #FC4384
+cm-variable: 
+cm-variable-2: #05a
+cm-variable-3: #085
 code-background: #eee8d5
 code-border: #93a1a1
 code-foreground: #586e75
