@@ -1,4 +1,4 @@
-*\
+/*\
 title: $:/plugins/tiddlywiki/filesystem/filesystemadaptor.js
 type: application/javascript
 module-type: syncadaptor
