@@ -204,7 +204,6 @@ exports.deleteEmptyDirs = function(dirpath,callback) {
 /*
 Create a fileInfo object for saving a tiddler:
 	filepath: the absolute path to the file containing the tiddler
-	basepath: (optional) the base path of editable files loaded via `tiddlywiki.files`
 	type: the type of the tiddler file on disk (NOT the type of the tiddler)
 	hasMetaFile: true if the file also has a companion .meta file
 Options include:
@@ -216,9 +215,6 @@ Options include:
 */
 exports.generateTiddlerFileInfo = function(tiddler,options) {
 	var fileInfo = {}, metaExt;
-	if(!!options.fileInfo) {
-		fileInfo.basepath = options.fileInfo.basepath;	
-	}
 	// Check if the tiddler has any unsafe fields that can't be expressed in a .tid or .meta file: containing control characters, or leading/trailing whitespace
 	var hasUnsafeFields = false;
 	$tw.utils.each(tiddler.getFieldStrings(),function(value,fieldName) {
@@ -318,8 +314,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 	var self = this,
 		directory = options.directory || "",
 		extension = options.extension || "",
-		filepath,
-		isEditableFile;
+		filepath;
 
 	// Check if any of the pathFilters applies
 	if(options.pathFilters && options.wiki && !options.draft) {
@@ -333,50 +328,45 @@ exports.generateTiddlerFilepath = function(title,options) {
 			}
 		});
 	}
-	// Check for an "isEditableFile" basepath if no pathFilter matches
-	isEditableFile = options.fileInfo ? !!options.fileInfo.basepath : false;
-	if(!filepath && isEditableFile) {
-		var parsed = path.parse(options.fileInfo.basepath);
-		filepath = path.join(parsed.dir, parsed.name);
-	} else {
-		if(!filepath) {
-			filepath = title;
-			// If the filepath already ends in the extension then remove it
-			if(filepath.substring(filepath.length - extension.length) === extension) {
-				filepath = filepath.substring(0,filepath.length - extension.length);
+	if(!filepath) {
+		filepath = title;
+		// If the filepath already ends in the extension then remove it
+		if(filepath.substring(filepath.length - extension.length) === extension) {
+			filepath = filepath.substring(0,filepath.length - extension.length);
+		}
+		// Remove any forward or backward slashes so we don't create directories
+		filepath = filepath.replace(/\/|\\/g,"_");
+		if(options.draft) {
+			filepath = "drafts/"+filepath;
+		}
+	}
+	// Don't let the filename start with a dot because such files are invisible on *nix
+	filepath = filepath.replace(/^\./g,"_");
+	// Remove any characters that can't be used in cross-platform filenames
+	filepath = $tw.utils.transliterate(filepath.replace(/<|>|\:|\"|\||\?|\*|\^/g,"_"));
+	// Truncate the filename if it is too long
+	if(filepath.length > 200) {
+		filepath = filepath.substr(0,200);
+	}
+	// If the resulting filename is blank (eg because the title is just punctuation characters)
+	if(!filepath) {
+		// ...then just use the character codes of the title
+		filepath = "";	
+		$tw.utils.each(title.split(""),function(char) {
+			if(filepath) {
+				filepath += "-";
 			}
-			// Remove any forward or backward slashes so we don't create directories
-			filepath = filepath.replace(/\/|\\/g,"_");
-			if(options.draft) {
-				filepath = "drafts/"+filepath;
-			}
-		}
-		// Don't let the filename start with a dot because such files are invisible on *nix
-		filepath = filepath.replace(/^\./g,"_");
-		// Remove any characters that can't be used in cross-platform filenames
-		filepath = $tw.utils.transliterate(filepath.replace(/<|>|\:|\"|\||\?|\*|\^/g,"_"));
-		// Truncate the filename if it is too long
-		if(filepath.length > 200) {
-			filepath = filepath.substr(0,200);
-		}
-		// If the resulting filename is blank (eg because the title is just punctuation characters)
-		if(!filepath) {
-			// ...then just use the character codes of the title
-			filepath = "";	
-			$tw.utils.each(title.split(""),function(char) {
-				if(filepath) {
-					filepath += "-";
-				}
-				filepath += char.charCodeAt(0).toString();
-			});
-		}
+			filepath += char.charCodeAt(0).toString();
+		});
 	}
 	// Add a uniquifier if the file already exists
 	var fullPath, oldPath = (options.fileInfo) ? options.fileInfo.filepath : undefined,
 		count = 0;
 	do {
 		fullPath = path.resolve(directory,filepath + (count ? "_" + count : "") + extension);
-		if(oldPath && oldPath == fullPath) {break;}
+		if(oldPath && oldPath == fullPath) {
+			break;
+		}
 		count++;
 	} while(fs.existsSync(fullPath));
 	// Return the full path to the file

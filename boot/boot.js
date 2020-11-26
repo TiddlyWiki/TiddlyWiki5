@@ -1886,7 +1886,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			});
 		});
 		if(isEditableFile) {
-			tiddlers.push({filepath: pathname, hasMetaFile: !!metadata && !isTiddlerFile, basepath: pathname, tiddlers: fileTiddlers});
+			tiddlers.push({filepath: pathname, hasMetaFile: !!metadata && !isTiddlerFile, tiddlers: fileTiddlers});
 		} else {
 			tiddlers.push({tiddlers: fileTiddlers});
 		}
@@ -2092,7 +2092,6 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 			$tw.utils.each(tiddlerFile.tiddlers,function(tiddler) {
 				$tw.boot.files[tiddler.title] = {
 					filepath: tiddlerFile.filepath,
-					basepath: tiddlerFile.basepath,
 					type: tiddlerFile.type,
 					hasMetaFile: tiddlerFile.hasMetaFile
 				};
