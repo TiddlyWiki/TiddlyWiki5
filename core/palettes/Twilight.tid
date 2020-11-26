@@ -14,6 +14,47 @@ blockquote-bar: rgba(240, 196, 117, 0.7)
 button-background: rgb(63, 63, 63)
 button-border: rgb(127, 127, 127)
 button-foreground: rgb(179, 179, 179)
+cm-activeline-background: <<colour tiddler-info-background>>
+cm-activeline-foreground: <<colour sidebar-controls-foreground-hover>>
+cm-atom: #F39B35
+cm-attribute: #A06FCA
+cm-background: <<colour background>>
+cm-builtin: #FC4384
+cm-callee: #FC4384
+cm-cursor: <<colour foreground>>
+cm-comment: #D4D4D4
+cm-comment-attribute: #D4D4D4
+cm-comment-tag: #FC4384
+cm-def: #98E342
+cm-error: #C42412
+cm-foreground: <<colour foreground>>
+cm-gutters-background: <<colour page-background>>
+cm-header: #da7dae
+cm-hr: #98E342
+cm-keyword: #00A7AA
+cm-linenumbers: <<colour foreground>>
+cm-matchhighlight-background: <<colour sidebar-controls-foreground-hover>>
+cm-matchhighlight-foreground: <<colour foreground>>
+cm-matchingbracket-background: #30D158
+cm-matchingbracket-foreground: <<colour foreground>>
+cm-meta: #D4D4D4
+cm-number: #A06FCA
+cm-operator: #FC4384
+cm-property: #D4D4D4
+cm-property-def: #FC4384
+cm-qualifier: #FC4384
+cm-searching-foreground: <<colour foreground>>
+cm-searching-background: <<colour primary>>
+cm-selected: rgba(63, 99, 139, 0.5)
+cm-string: #E6DB74
+cm-string-2: #F39B35
+cm-tag: #FC4384
+cm-tag-bracket: #D4D4D4
+cm-type: 
+cm-type-def: #FC4384
+cm-variable: #D4D4D4
+cm-variable-2: #da7dae
+cm-variable-3: #A06FCA
 code-background: rgba(0,0,0,0.03)
 code-border: rgba(0,0,0,0.08)
 code-foreground: rgb(255, 94, 94)
