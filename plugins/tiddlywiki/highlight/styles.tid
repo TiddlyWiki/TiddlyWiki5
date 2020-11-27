@@ -1,4 +1,196 @@
 title: $:/plugins/tiddlywiki/highlight/styles
 tags: [[$:/tags/Stylesheet]]
 
-.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8;-webkit-text-size-adjust:none}.hljs-comment,.diff .hljs-header,.hljs-javadoc{color:#998;font-style:italic}.hljs-keyword,.css .rule .hljs-keyword,.hljs-winutils,.nginx .hljs-title,.hljs-subst,.hljs-request,.hljs-status{color:#333;font-weight:bold}.hljs-number,.hljs-hexcolor,.ruby .hljs-constant{color:teal}.hljs-string,.hljs-tag .hljs-value,.hljs-phpdoc,.hljs-dartdoc,.tex .hljs-formula{color:#d14}.hljs-title,.hljs-id,.scss .hljs-preprocessor{color:#900;font-weight:bold}.hljs-list .hljs-keyword,.hljs-subst{font-weight:normal}.hljs-class .hljs-title,.hljs-type,.vhdl .hljs-literal,.tex .hljs-command{color:#458;font-weight:bold}.hljs-tag,.hljs-tag .hljs-title,.hljs-rule .hljs-property,.django .hljs-tag .hljs-keyword{color:navy;font-weight:normal}.hljs-attribute,.hljs-variable,.lisp .hljs-body,.hljs-name{color:teal}.hljs-regexp{color:#009926}.hljs-symbol,.ruby .hljs-symbol .hljs-string,.lisp .hljs-keyword,.clojure .hljs-keyword,.scheme .hljs-keyword,.tex .hljs-special,.hljs-prompt{color:#990073}.hljs-built_in{color:#0086b3}.hljs-preprocessor,.hljs-pragma,.hljs-pi,.hljs-doctype,.hljs-shebang,.hljs-cdata{color:#999;font-weight:bold}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.diff .hljs-change{background:#0086b3}.hljs-chunk{color:#aaa}
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: <<colour hljs-background>>;
+  -webkit-text-size-adjust:none
+}
+
+.hljs,
+.hljs-subst {
+  color: <<colour hljs-foreground>>;
+}
+
+.hljs-selector-tag {
+  color: <<colour hljs-selector-tag>>;
+}
+
+.hljs-selector-id {
+  color: <<colour hljs-selector-id>>;
+  font-weight: bold;
+}
+
+.hljs-selector-class {
+  color: <<colour hljs-selector-class>>;
+}
+
+.hljs-selector-attr {
+  color: <<colour hljs-selector-attr>>;
+}
+
+.hljs-selector-pseudo {
+  color: <<colour hljs-selector-pseudo>>;
+}
+
+.hljs-addition {
+  background-color: <<colour hljs-addition>>;
+}
+
+.hljs-deletion {
+  background-color: <<colour hljs-deletion>>;
+}
+
+.hljs-built_in,
+.hljs-type {
+  color: <<colour hljs-type>>;
+}
+
+.hljs-class {
+  color: <<colour hljs-class>>;
+}
+
+.hljs-function {
+  color: <<colour hljs-function>>;
+}
+
+.hljs-function > .hljs-title {
+  color: <<colour hljs-function-title>>;
+}
+
+.hljs-keyword,
+.hljs-literal,
+.hljs-symbol {
+  color: <<colour hljs-keyword>>;
+}
+
+.hljs-number {
+  color: <<colour hljs-number>>;
+}
+
+.hljs-regexp {
+  color: <<colour hljs-regexp>>;
+}
+
+.hljs-string {
+  color: <<colour hljs-string>>;
+}
+
+.hljs-title {
+  color: <<colour hljs-title>>;
+}
+
+.hljs-params {
+  color: <<colour hljs-params>>;
+}
+
+.hljs-bullet {
+  color: <<colour hljs-bullet>>;
+}
+
+.hljs-code {
+  color: <<colour hljs-code>>;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-formula {
+  color: <<colour hljs-formula>>;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link:hover {
+  text-decoration: underline;
+}
+
+.hljs-quote {
+  color: <<colour hljs-quote>>;
+}
+
+.hljs-comment {
+  color: <<colour hljs-comment>>;
+}
+
+.hljs-doctag {
+  color: <<colour hljs-doctag>>;
+}
+
+.hljs-meta,
+.hljs-meta-keyword {
+  color: <<colour hljs-meta>>;
+}
+
+.hljs-meta-string {
+  color: <<colour hljs-meta-string>>;
+}
+
+.hljs-attr {
+  color: <<colour hljs-attr>>;
+}
+
+.hljs-attribute {
+  color: <<colour hljs-attribute>>;
+}
+
+.hljs-builtin-name {
+  color: <<colour hljs-builtin-name>>;
+}
+
+.hljs-name {
+  color: <<colour hljs-name>>;
+}
+
+.hljs-section {
+  color: <<colour hljs-section>>;
+}
+
+.hljs-tag {
+  color: <<colour hljs-tag>>;
+}
+
+.hljs-variable {
+  color: <<colour hljs-variable>>;
+}
+
+.hljs-template-variable {
+  color: <<colour hljs-template-variable>>;
+}
+
+.hljs-template-tag {
+  color: <<colour hljs-template-tag>>;
+}
+
+.hljs-link {
+	color: <<colour hljs-link>>;
+}
+
+.hljs-emphasis {
+	color: <<colour hljs-emphasis>>;
+}
+
+.hljs-strong {
+	color: <<colour hljs-strong>>;
+}
+
+.hljs-link_label {
+	color: <<colour hljs-link-label>>;
+}
+
+.hljs-function .hljs-keyword {
+	color: <<colour hljs-function-keyword>>;
+}
+
+.hljs-class .hljs-title {
+	color: <<colour hljs-class-title>>;
+}
+
+.hljs-meta .hljs-keyword {
+	color: <<colour hljs-meta-keyword>>;
+}
