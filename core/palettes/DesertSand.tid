@@ -47,7 +47,7 @@ cm-qualifier: #555
 cm-quote: #090
 cm-searching-foreground: <<colour foreground>>
 cm-searching-background: <<colour primary>>
-cm-selected: rgba(63, 99, 139, 0.5)
+cm-selected: <<colour selection-background>>
 cm-string: #a11
 cm-string-2: #f50
 cm-tag: #170
