@@ -8,55 +8,52 @@ alert-background: #f00
 alert-border: <<colour background>>
 alert-highlight: <<colour foreground>>
 alert-muted-foreground: #800
-background: #fff
+background: #000
 blockquote-bar: <<colour muted-foreground>>
 button-background: <<colour background>>
 button-foreground: <<colour foreground>>
 button-border: <<colour foreground>>
-cm-activeline-background: #f4f4f4
-cm-activeline-foreground: <<colour sidebar-controls-foreground-hover>>
-cm-atom: #219
-cm-attribute: #00c
+cm-activeline-background: <<colour background>>
+cm-activeline-foreground: <<colour foreground>>
+cm-atom: #F39B35
+cm-attribute: #A06FCA
 cm-background: <<colour background>>
-cm-builtin: #30a
-cm-bracket: #997
+cm-builtin: #FC4384
 cm-callee: #FC4384
 cm-cursor: <<colour foreground>>
-cm-comment: #a50
+cm-comment: #D4D4D4
 cm-comment-attribute: #D4D4D4
 cm-comment-tag: #FC4384
-cm-def: #00f
-cm-error: #f00
+cm-def: #98E342
+cm-error: #C42412
 cm-foreground: <<colour foreground>>
 cm-gutters-background: <<colour page-background>>
-cm-header: <<colour primary>>
-cm-hr: #999
-cm-keyword: #708
+cm-header: #da7dae
+cm-hr: #98E342
+cm-keyword: #00A7AA
 cm-linenumbers: <<colour foreground>>
-cm-link: #00c
 cm-matchhighlight-background: <<colour sidebar-controls-foreground-hover>>
 cm-matchhighlight-foreground: <<colour foreground>>
-cm-matchingbracket-background: #6A9FB5
-cm-matchingbracket-foreground: #f5f5f5
-cm-meta: #555
-cm-number: #164
-cm-operator: 
-cm-property: 
+cm-matchingbracket-background: #30D158
+cm-matchingbracket-foreground: <<colour foreground>>
+cm-meta: #D4D4D4
+cm-number: #A06FCA
+cm-operator: #FC4384
+cm-property: #D4D4D4
 cm-property-def: #FC4384
-cm-qualifier: #555
-cm-quote: #090
+cm-qualifier: #FC4384
 cm-searching-foreground: <<colour foreground>>
 cm-searching-background: <<colour primary>>
 cm-selected: rgba(63, 99, 139, 0.5)
-cm-string: #a11
-cm-string-2: #f50
-cm-tag: #170
+cm-string: #E6DB74
+cm-string-2: #F39B35
+cm-tag: #FC4384
 cm-tag-bracket: #D4D4D4
-cm-type: #085
+cm-type: 
 cm-type-def: #FC4384
-cm-variable: 
-cm-variable-2: #05a
-cm-variable-3: #085
+cm-variable: #D4D4D4
+cm-variable-2: #da7dae
+cm-variable-3: #A06FCA
 code-background: <<colour background>>
 code-border: <<colour foreground>>
 code-foreground: <<colour foreground>>
@@ -76,7 +73,39 @@ external-link-background: inherit
 external-link-foreground-hover: inherit
 external-link-foreground-visited: #00a
 external-link-foreground: #00e
-foreground: #000
+foreground: #fff
+hljs-background: <<colour page-background>>
+hljs-foreground: <<colour foreground>>
+hljs-comment: #586e75
+hljs-quote: #586e75
+hljs-keyword: #859900
+hljs-selector-tag: #859900
+hljs-addition: #859900
+hljs-number: #2aa198
+hljs-string: #2aa198
+hljs-regexp: #2aa198
+hljs-meta-string: #2aa198
+hljs-doctag: #2aa198
+hljs-title: #268bd2
+hljs-section: #268bd2
+hljs-name: #268bd2
+hljs-selector-id: #268bd2
+hljs-selector-class: #268bd2
+hljs-attribute: #b58900
+hljs-attr: #b58900
+hljs-class-title: #b58900
+hljs-template-variable: #b58900
+hljs-type: #b58900
+hljs-variable: #b58900
+hljs-bullet: #cb4b16
+hljs-meta: #cb4b16
+hljs-meta-keyword: #cb4b16
+hljs-selector-attr: #cb4b16
+hljs-selector-pseudo: #cb4b16
+hljs-link: #cb4b16
+hljs-builtin: #dc322f
+hljs-deletion: #dc322f
+hljs-formula: #073642
 message-background: <<colour foreground>>
 message-border: <<colour background>>
 message-foreground: <<colour background>>
@@ -123,8 +152,8 @@ tab-foreground: <<colour background>>
 table-border: #dddddd
 table-footer-background: #a8a8a8
 table-header-background: #f0f0f0
-tag-background: #000
-tag-foreground: #fff
+tag-background: #fff
+tag-foreground: #000
 tiddler-background: <<colour background>>
 tiddler-border: <<colour foreground>>
 tiddler-controls-foreground-hover: #ddd
