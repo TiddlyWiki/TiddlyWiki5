@@ -21,7 +21,6 @@ cm-attribute: #8FBCBB
 cm-background: #2e3440
 cm-builtin: #81A1C1
 cm-bracket: #81A1C1
-cm-callee: #FC4384
 cm-cursor: #f8f8f0
 cm-comment: #4c566a
 cm-comment-attribute: #97b757
@@ -41,10 +40,7 @@ cm-matchingbracket-background: #30D158
 cm-matchingbracket-foreground: white
 cm-meta: #D4D4D4
 cm-number: #b48ead
-cm-operator: #FC4384
 cm-property: #8FBCBB
-cm-property-def: #FC4384
-cm-qualifier: #FC4384
 cm-searching-foreground: <<colour foreground>>
 cm-searching-background: <<colour primary>>
 cm-selected: #434c5e
@@ -53,7 +49,6 @@ cm-string-2: #F39B35
 cm-tag: #bf616a
 cm-tag-bracket: #D4D4D4
 cm-type: #d8dee9
-cm-type-def: #FC4384
 cm-variable: #d8dee9
 cm-variable-2: #d8dee9
 cm-variable-3: #d8dee9
