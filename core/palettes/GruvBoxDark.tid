@@ -179,3 +179,44 @@ wikilist-button-remove-hover: <<colour alert-background>>
 wikilist-droplink-dragover: <<colour dropzone-background>>
 wikilist-button-reveal: <<colour sidebar-tiddler-link-foreground-hover>>
 wikilist-button-reveal-hover: <<colour message-background>>
+hljs-background: #282828
+hljs-foreground: #ebdbb2
+hljs-deletion: #fb4934
+hljs-formula: #fb4934
+hljs-keyword: #fb4934
+hljs-link: #fb4934
+hljs-emphasis: #83a598
+hljs-strong: #83a598
+hljs-function-keyword: #8ec07c
+hljs-link-label: #d3869b
+hljs-selector-tag: #fb4934
+hljs-builtin: #83a598
+hljs-name: #83a598
+hljs-quote: #83a598
+hljs-title: #83a598
+hljs-variable: #83a598
+hljs-attr: #fabd2f
+hljs-params: #fabd2f
+hljs-template-tag: #fabd2f
+hljs-type: #fabd2f
+hljs-builtin-name: #8f3f71
+hljs-doctag: #8f3f71
+hljs-number: #8f3f71
+hljs-code: #fe8019
+hljs-meta: #fe8019
+hljs-regexp: #fe8019
+hljs-selector-id: #fe8019
+hljs-template-variable: #fe8019
+hljs-addition: #b8bb26
+hljs-meta-string: #b8bb26
+hljs-section: #b8bb26
+hljs-selector-attr: #b8bb26
+hljs-selector-class: #b8bb26
+hljs-string: #b8bb26
+hljs-attribute: #8ec07c
+hljs-bullet: #8ec07c
+hljs-class: #8ec07c
+hljs-function: #8ec07c
+hljs-selector-pseudo: #8ec07c
+hljs-tag: #8ec07c
+hljs-comment: #928374
