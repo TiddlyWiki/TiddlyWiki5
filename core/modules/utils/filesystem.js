@@ -317,7 +317,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 		filepath;
 
 	// Check if any of the pathFilters applies
-	if(options.pathFilters && options.wiki && !options.draft) {
+	if(options.pathFilters && options.wiki) {
 		$tw.utils.each(options.pathFilters,function(filter) {
 			if(!filepath) {
 				var source = options.wiki.makeTiddlerIterator([title]),
@@ -336,9 +336,6 @@ exports.generateTiddlerFilepath = function(title,options) {
 		}
 		// Remove any forward or backward slashes so we don't create directories
 		filepath = filepath.replace(/\/|\\/g,"_");
-		if(options.draft) {
-			filepath = "drafts/"+filepath;
-		}
 	}
 	// Don't let the filename start with a dot because such files are invisible on *nix
 	filepath = filepath.replace(/^\./g,"_");
