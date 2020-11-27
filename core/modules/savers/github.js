@@ -31,7 +31,8 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 		headers = {
 			"Accept": "application/vnd.github.v3+json",
 			"Content-Type": "application/json;charset=UTF-8",
-			"Authorization": "Basic " + window.btoa(username + ":" + password)
+			"Authorization": "Basic " + window.btoa(username + ":" + password),
+			"If-None-Match": ""
 		};
 	// Bail if we don't have everything we need
 	if(!username || !password || !repo || !filename) {
