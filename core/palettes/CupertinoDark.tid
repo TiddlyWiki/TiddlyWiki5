@@ -21,7 +21,7 @@ download-background: <<colour primary>>
 download-foreground: <<colour foreground>>
 dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
-dropdown-background: #464646
+dropdown-background: <<colour tiddler-info-background>>
 dropdown-border: <<colour dropdown-background>>
 dropdown-tab-background-selected: #3F638B
 dropdown-tab-background: #323232
