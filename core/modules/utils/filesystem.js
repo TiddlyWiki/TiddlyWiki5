@@ -267,7 +267,6 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 	var contentTypeInfo = $tw.config.contentTypeInfo[fileInfo.type] || {extension: ""};
 	// Generate the filepath
 	fileInfo.filepath = $tw.utils.generateTiddlerFilepath(tiddler.fields.title,{
-		draft: !!tiddler.fields["draft.of"],
 		extension: metaExt || contentTypeInfo.extension,
 		directory: options.directory,
 		pathFilters: options.pathFilters,
