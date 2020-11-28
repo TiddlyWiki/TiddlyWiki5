@@ -1164,10 +1164,18 @@ button.tc-btn-invisible.tc-remove-tag-button {
 .tc-tiddler-frame iframe.tc-edit-texteditor {
 	padding: 3px 3px 3px 3px;
 	border: 1px solid <<colour tiddler-editor-border>>;
-	background-color: <<colour tiddler-editor-background>>;
 	line-height: 1.3em;
 	-webkit-appearance: none;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
+}
+
+.tc-tiddler-frame input.tc-edit-texteditor,
+.tc-tiddler-frame textarea.tc-edit-texteditor {
+	background-color: <<colour tiddler-editor-background>>;
+}
+
+.tc-tiddler-frame iframe.tc-edit-texteditor {
+	background-color: <<colour background>>;
 }
 
 .tc-tiddler-frame .tc-binary-warning {
