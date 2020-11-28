@@ -199,6 +199,9 @@ Update the document body with the class "tc-dirty" if the wiki has unsaved/unsyn
 SaverHandler.prototype.updateDirtyStatus = function() {
 	if($tw.browser) {
 		$tw.utils.toggleClass(document.body,"tc-dirty",this.isDirty());
+		$tw.utils.each($tw.windows,function(win) {
+			$tw.utils.toggleClass(win.document.body,"tc-dirty",this.isDirty());
+		});
 	}
 };
 
