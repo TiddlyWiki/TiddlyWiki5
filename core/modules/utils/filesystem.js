@@ -315,7 +315,6 @@ exports.generateTiddlerFilepath = function(title,options) {
 		directory = options.directory || "",
 		extension = options.extension || "",
 		filepath;
-
 	// Check if any of the pathFilters applies
 	if(options.pathFilters && options.wiki) {
 		$tw.utils.each(options.pathFilters,function(filter) {
