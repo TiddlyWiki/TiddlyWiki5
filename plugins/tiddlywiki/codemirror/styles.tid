@@ -1,5 +1,7 @@
 title: $:/plugins/tiddlywiki/codemirror/styles
 tags: [[$:/tags/Stylesheet]]
+module-type: codemirror-theme
+name: tiddlywiki
 
 /* Make the editor resize to fit its content */
 
@@ -13,5 +15,81 @@ tags: [[$:/tags/Stylesheet]]
 
 .CodeMirror-scroll {
 	overflow-x: auto;
-	overflow-y: hidden;	
+	overflow-y: hidden;
+}
+
+.cm-s-tiddlywiki {
+  color-profile: sRGB;
+  rendering-intent: auto;
+}
+
+.cm-s-tiddlywiki.CodeMirror, .cm-s-tiddlywiki .CodeMirror-gutters { background-color: <<colour tiddler-editor-background>>; color: <<colour foreground>>; }
+.cm-s-tiddlywiki .CodeMirror-gutters {background: <<colour tiddler-editor-background>>; border-right: 0px;}
+.cm-s-tiddlywiki .CodeMirror-linenumber {color: <<colour primary>>;}
+.cm-s-tiddlywiki .CodeMirror-cursor { border-left: 2px solid <<colour foreground>>; }
+.cm-s-tiddlywiki div.CodeMirror-selected { background: <<colour selection-background>>; }
+.cm-s-tiddlywiki .CodeMirror-selectedtext,
+.cm-s-tiddlywiki .CodeMirror-selected,
+.cm-s-tiddlywiki .CodeMirror-line::selection,
+.cm-s-tiddlywiki .CodeMirror-line > span::selection,
+.cm-s-tiddlywiki .CodeMirror-line > span > span::selection,
+.cm-s-tiddlywiki .CodeMirror-line::-moz-selection,
+.cm-s-tiddlywiki .CodeMirror-line > span::-moz-selection,
+.cm-s-tiddlywiki .CodeMirror-line > span > span::-moz-selection { background: <<colour selection-background>>; }
+.cm-s-tiddlywiki span.cm-comment { color: <<colour muted-foreground>>; font-style:italic; font-weight:normal; }
+.cm-s-tiddlywiki .CodeMirror-activeline-background, .cm-s-tiddlywiki .CodeMirror-activeline-gutter .CodeMirror-linenumber { background: <<colour background>>; }
+.cm-s-tiddlywiki .CodeMirror-activeline .CodeMirror-linenumber.CodeMirror-gutter-elt { background: <<colour background>>; color: <<colour foreground>>; }
+.cm-s-tiddlywiki .CodeMirror-matchingbracket { background: <<colour primary>>; color:<<colour foreground>> !important; }
+.cm-s-tiddlywiki span.cm-matchhighlight { color: <<colour foreground>>; background-color: <<colour primary>>; font-weight: normal;}
+.cm-s-tiddlywiki span.cm-searching { color: <<colour foreground>>; background-color: <<colour primary>>; font-weight: normal;}
+
+
+.cm-s-tiddlywiki .CodeMirror-widget {
+  text-shadow: none;
+}
+
+.cm-s-tiddlywiki .cm-header { color: #586e75; }
+.cm-s-tiddlywiki .cm-quote { color: #93a1a1; }
+
+.cm-s-tiddlywiki .cm-keyword { color: #cb4b16; }
+.cm-s-tiddlywiki .cm-atom { color: #d33682; }
+.cm-s-tiddlywiki .cm-number { color: #d33682; }
+.cm-s-tiddlywiki .cm-def { color: #2aa198; }
+
+.cm-s-tiddlywiki .cm-variable { color: #839496; }
+.cm-s-tiddlywiki .cm-variable-2 { color: #b58900; }
+.cm-s-tiddlywiki .cm-variable-3, .cm-s-tiddlywiki .cm-type { color: #6c71c4; }
+
+.cm-s-tiddlywiki .cm-property { color: #2aa198; }
+.cm-s-tiddlywiki .cm-operator { color: #6c71c4; }
+
+.cm-s-tiddlywiki .cm-comment { color: #586e75; font-style:italic; }
+
+.cm-s-tiddlywiki .cm-string { color: #859900; }
+.cm-s-tiddlywiki .cm-string-2 { color: #b58900; }
+
+.cm-s-tiddlywiki .cm-meta { color: #859900; }
+.cm-s-tiddlywiki .cm-qualifier { color: #b58900; }
+.cm-s-tiddlywiki .cm-builtin { color: #d33682; }
+.cm-s-tiddlywiki .cm-bracket { color: #cb4b16; }
+.cm-s-tiddlywiki .CodeMirror-matchingbracket { color: #859900; }
+.cm-s-tiddlywiki .CodeMirror-nonmatchingbracket { color: #dc322f; }
+.cm-s-tiddlywiki .cm-tag { color: #93a1a1; }
+.cm-s-tiddlywiki .cm-attribute { color: #2aa198; }
+.cm-s-tiddlywiki .cm-hr {
+  color: transparent;
+  border-top: 1px solid #586e75;
+  display: block;
+}
+.cm-s-tiddlywiki .cm-link { color: #93a1a1; cursor: pointer; }
+.cm-s-tiddlywiki .cm-special { color: #6c71c4; }
+.cm-s-tiddlywiki .cm-em {
+  color: #999;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+.cm-s-tiddlywiki .cm-error,
+.cm-s-tiddlywiki .cm-invalidchar {
+  color: #586e75;
+  border-bottom: 1px dotted #dc322f;
 }
