@@ -84,11 +84,8 @@ exports.startup = function() {
 			name: "keydown",
 			handlerObject: $tw.keyboardManager,
 			handlerMethod: "handleKeydownEvent"
-		},{
-			name: "click",
-			handlerObject: $tw.popup,
-			handlerMethod: "handleEvent"
 		}]);
+		srcWindow.document.documentElement.addEventListener("click",$tw.popup,true);
 		srcWindow.haveInitialisedWindow = true;
 	});
 	// Close open windows when unloading main window
