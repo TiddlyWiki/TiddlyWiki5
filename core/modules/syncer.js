@@ -305,7 +305,8 @@ Syncer.prototype.syncFromServer = function() {
 				self.pollTimerId = null;
 				self.syncFromServer.call(self);
 			},self.pollTimerInterval);
-		};
+		},
+		syncSystemFromServer = (self.wiki.getTiddlerText("$:/config/SyncSystemTiddlersFromServer") === "yes" ? true : false);
 	if(this.syncadaptor && this.syncadaptor.getUpdatedTiddlers) {
 		this.logger.log("Retrieving updated tiddler list");
 		cancelNextSync();
@@ -320,9 +321,11 @@ Syncer.prototype.syncFromServer = function() {
 					self.titlesToBeLoaded[title] = true;
 				});
 				$tw.utils.each(updates.deletions,function(title) {
-					delete self.tiddlerInfo[title];
-					self.logger.log("Deleting tiddler missing from server:",title);
-					self.wiki.deleteTiddler(title);
+					if(syncSystemFromServer || !self.wiki.isSystemTiddler(title)) {
+						delete self.tiddlerInfo[title];
+						self.logger.log("Deleting tiddler missing from server:",title);
+						self.wiki.deleteTiddler(title);
+					}
 				});
 				if(updates.modifications.length > 0 || updates.deletions.length > 0) {
 					self.processTaskQueue();
@@ -365,9 +368,11 @@ Syncer.prototype.syncFromServer = function() {
 			}
 			// Delete any tiddlers that were previously reported but missing this time
 			$tw.utils.each(previousTitles,function(title) {
-				delete self.tiddlerInfo[title];
-				self.logger.log("Deleting tiddler missing from server:",title);
-				self.wiki.deleteTiddler(title);
+				if(syncSystemFromServer || !self.wiki.isSystemTiddler(title)) {
+					delete self.tiddlerInfo[title];
+					self.logger.log("Deleting tiddler missing from server:",title);
+					self.wiki.deleteTiddler(title);
+				}
 			});
 			self.processTaskQueue();
 		});

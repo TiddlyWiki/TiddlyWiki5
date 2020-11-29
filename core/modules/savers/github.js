@@ -26,12 +26,13 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 		repo = this.wiki.getTiddlerText("$:/GitHub/Repo"),
 		path = this.wiki.getTiddlerText("$:/GitHub/Path",""),
 		filename = this.wiki.getTiddlerText("$:/GitHub/Filename"),
-		branch = this.wiki.getTiddlerText("$:/GitHub/Branch") || "master",
+		branch = this.wiki.getTiddlerText("$:/GitHub/Branch") || "main",
 		endpoint = this.wiki.getTiddlerText("$:/GitHub/ServerURL") || "https://api.github.com",
 		headers = {
 			"Accept": "application/vnd.github.v3+json",
 			"Content-Type": "application/json;charset=UTF-8",
-			"Authorization": "Basic " + window.btoa(username + ":" + password)
+			"Authorization": "Basic " + window.btoa(username + ":" + password),
+			"If-None-Match": ""
 		};
 	// Bail if we don't have everything we need
 	if(!username || !password || !repo || !filename) {

@@ -3,7 +3,7 @@ tags: $:/tags/PageTemplate
 
 \define menubar-inner(size)
 <ul class="tc-menubar-list">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]]">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]] -[all[tiddlers+shadows]tag[$:/tags/TopRightBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/toprightbar]]">
 <$list filter="[<currentTiddler>addprefix[$:/config/plugins/menubar/MenuItems/Visibility/]get[text]] ~show +[match[show]]" variable="ignore">
 <$list filter="[[$size$]match[wide]] ~[<currentTiddler>get[show-when]match[$size$]] ~[{$:/state/popup/menubar/hamburger}match[yes]]" variable="ignore">
 <li style={{!!custom-menu-styles-$size$}} class={{{ [<currentTiddler>get[show-when]addprefix[tc-menubar-]] tc-menubar-item +[join[ ]] }}}>
@@ -42,7 +42,7 @@ tags: $:/tags/PageTemplate
 </ul>
 \end
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]limit[1]]" variable="listItem">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]] -[all[tiddlers+shadows]tag[$:/tags/TopRightBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/toprightbar]] +[limit[1]]" variable="listItem">
 <nav class="tc-menubar tc-adjust-top-of-scroll">
 <div class="tc-menubar-narrow">
 <<menubar-inner narrow>>

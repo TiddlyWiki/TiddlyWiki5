@@ -19,19 +19,41 @@ describe("Filter tests", function() {
 	// Test filter parsing
 	it("should parse new-style rich operator suffixes", function() {
 		expect($tw.wiki.parseFilter("[search:: four, , five,, six [operand]]")).toEqual(
-			[ { prefix : '', operators : [ { operator : 'search', suffix : ': four, , five,, six ', suffixes : [ [  ], [ 'four', 'five', 'six' ] ], operand : 'operand' } ] } ]
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ': four, , five,, six ', suffixes : [ [  ], [ 'four', 'five', 'six' ] ], operands: [ { text:'operand' } ] } ] } ]
 		);
 		expect($tw.wiki.parseFilter("[search: one, two ,three :[operand]]")).toEqual(
-			[ { prefix : '', operators : [ { operator : 'search', suffix : ' one, two ,three :', suffixes : [ [ 'one', 'two', 'three' ], [  ] ], operand : 'operand' } ] } ]
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ' one, two ,three :', suffixes : [ [ 'one', 'two', 'three' ], [  ] ], operands: [ { text:'operand' } ] } ] } ]
 		);
 		expect($tw.wiki.parseFilter("[search: one, two ,three :[operand]]")).toEqual(
-			[ { prefix : '', operators : [ { operator : 'search', suffix : ' one, two ,three :', suffixes : [ [ 'one', 'two', 'three' ], [  ] ], operand : 'operand' } ] } ]
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ' one, two ,three :', suffixes : [ [ 'one', 'two', 'three' ], [  ] ], operands: [ { text:'operand' } ] } ] } ]
 		);
 		expect($tw.wiki.parseFilter("[search: one, two ,three : four, , five,, six [operand]]")).toEqual(
-			[ { prefix : '', operators : [ { operator : 'search', suffix : ' one, two ,three : four, , five,, six ', suffixes : [ [ 'one', 'two', 'three' ], [ 'four', 'five', 'six' ] ], operand : 'operand' } ] } ]
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ' one, two ,three : four, , five,, six ', suffixes : [ [ 'one', 'two', 'three' ], [ 'four', 'five', 'six' ] ], operands: [ { text:'operand' } ] } ] } ]
 		);
 		expect($tw.wiki.parseFilter("[search: , : [operand]]")).toEqual(
-			[ { prefix : '', operators : [ { operator : 'search', suffix : ' , : ', suffixes : [ [  ], [  ] ], operand : 'operand' } ] } ]
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ' , : ', suffixes : [ [  ], [  ] ], operands: [ { text:'operand' } ] } ] } ]
+		);
+	});
+	
+	
+	it("should parse multiple operands for operators", function() {
+		expect($tw.wiki.parseFilter("[search: , : [operand],[operand2]]")).toEqual(
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ' , : ', suffixes : [ [  ], [  ] ], operands: [ { text:'operand' }, { text:'operand2' } ] } ] } ]
+		);
+		expect($tw.wiki.parseFilter("[search: , : [oper,and],[operand2]]")).toEqual(
+			[ { prefix : '', operators : [ { operator : 'search', suffix : ' , : ', suffixes : [ [  ], [  ] ], operands: [ { text:'oper,and' }, { text:'operand2' } ] } ] } ]
+		);
+		expect($tw.wiki.parseFilter("[[GettingStarted]replace:[operand],[operand2]]")).toEqual(
+			[ { prefix : '', operators : [ { operator : 'title', operands: [ { text:'GettingStarted' } ] },  { operator : 'replace', suffix : '', suffixes : [[]], operands: [ { text:'operand' }, { text:'operand2' }  ] } ] } ]
+		);
+		expect($tw.wiki.parseFilter("[[GettingStarted]replace[operand],[operand2]split[-]]")).toEqual(
+			[ { prefix : '', operators : [ { operator : 'title', operands: [{ text:'GettingStarted' }] },  { operator : 'replace', operands: [{ text:'operand' }, { text:'operand2' }] }, { operator : 'split', operands: [ { text:'-' } ] } ] } ]
+		);
+		expect($tw.wiki.parseFilter("[[GettingStarted]replace[operand],[operand2]split[-]split2[a],[b]]")).toEqual(
+			[ { prefix : '', operators : [ { operator : 'title', operands: [{ text:'GettingStarted' }] },  { operator : 'replace',  operands: [ { text:'operand' }, { text:'operand2' } ] }, { operator : 'split', operands: [ {text:'-'} ] }, { operator : 'split2', operands: [ { text:'a' }, { text: 'b' }] } ] } ]
+		);
+		expect($tw.wiki.parseFilter("[[GettingStarted]replace[operand],[operand2]split[-]split2[a],<b>,{c}]")).toEqual(
+			[ { prefix : '', operators : [ { operator : 'title', operands: [{ text:'GettingStarted' }] },  { operator : 'replace',  operands: [ { text:'operand' }, { text:'operand2' } ] }, { operator : 'split', operands: [ {text:'-'} ] }, { operator : 'split2', operands: [ { text:'a' }, { variable: true, text: 'b' }, { indirect: true, text: 'c' }] } ] } ]
 		);
 	});
 
@@ -185,7 +207,7 @@ function runTests(wiki) {
 
 	it("should handle the lookup operator", function() {
 		expect(wiki.filterTiddlers("Six Seventh 8 +[lookup[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,,Tidd");
-		expect(wiki.filterTiddlers("Six Seventh 8 +[lookup:8[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,Tidd,Tidd");
+		expect(wiki.filterTiddlers("Six Seventh 8 +[lookup:8[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,8,Tidd");
 	});
 
 	it("should retrieve shadow tiddlers", function() {
@@ -730,7 +752,31 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("[!sortsub:string<sort2>]",anchorWidget).join(",")).toBe("filter regexp test,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,$:/ShadowPlugin,has filter,hasList,TiddlerOne,one");
 		expect(wiki.filterTiddlers("[[TiddlerOne]] [[$:/TiddlerTwo]] [[Tiddler Three]] [[a fourth tiddler]] +[!sortsub:number<sort3>]",anchorWidget).join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne,a fourth tiddler");
 	});
+	
+	it("should handle the toggle operator", function() {
+		expect(wiki.filterTiddlers("[[Tiddler Three]tags[]] +[toggle[one]]").join(",")).toBe("two");
+		expect(wiki.filterTiddlers("[[Tiddler Three]tags[]] -[[one]] +[toggle[one]]").join(",")).toBe("two,one");
+		expect(wiki.filterTiddlers("[[Tiddler Three]tags[]] +[toggle[three],[four]]").join(",")).toBe("one,two,three");
+		expect(wiki.filterTiddlers("[[Tiddler Three]tags[]] [[three]] +[toggle[three],[four]]").join(",")).toBe("one,two,four");
+		expect(wiki.filterTiddlers("[[Tiddler Three]tags[]] [[three]] [[four]] +[toggle[three],[five]]").join(",")).toBe("one,two,five,four");
+	});
 
+	it("should handle multiple operands for search-replace", function() {
+		var widget = require("$:/core/modules/widgets/widget.js");
+		var rootWidget = new widget.widget({ type:"widget", children:[ {type:"widget", children:[]} ] },
+										   { wiki:wiki, document:$tw.document});
+		rootWidget.makeChildWidgets();
+		var anchorWidget = rootWidget.children[0];
+		rootWidget.setVariable("var1","different");
+		rootWidget.setVariable("myregexp","e|o");
+		rootWidget.setVariable("name","(\w+)\s(\w+)");
+		expect(wiki.filterTiddlers("[[Welcome to TiddlyWiki, a unique non-linear webpage.]search-replace[webpage],[notebook]]").join(",")).toBe("Welcome to TiddlyWiki, a unique non-linear notebook.");
+		expect(wiki.filterTiddlers("[[Welcome to TiddlyWiki, a unique non-linear notebook.]search-replace[unique],<var1>]",anchorWidget).join(",")).toBe("Welcome to TiddlyWiki, a different non-linear notebook.");
+		expect(wiki.filterTiddlers("[[Welcome to TiddlyWiki, a unique non-linear notebook.]search-replace[TiddlyWiki],{one}]",anchorWidget).join(",")).toBe("Welcome to This is the text of tiddler [[one]], a unique non-linear notebook.");
+		expect(wiki.filterTiddlers("[[Hello There]search-replace:g:regexp<myregexp>,[]]",anchorWidget).join(",")).toBe("Hll Thr");
+		expect(wiki.filterTiddlers("[[Hello There]search-replace::regexp<myregexp>,[]]",anchorWidget).join(",")).toBe("Hllo There");
+		expect(wiki.filterTiddlers("[[Hello There]search-replace:gi[H],[]]",anchorWidget).join(",")).toBe("ello Tere");	
+	});
 }
 
 });

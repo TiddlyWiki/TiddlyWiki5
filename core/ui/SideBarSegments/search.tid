@@ -8,11 +8,13 @@ tags: $:/tags/SideBarSegment
 <$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
 {{$:/core/images/down-arrow}}
 <$list filter="[{$(searchTiddler)$}minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
-<$set name="searchTerm" value={{{ [<searchTiddler>get[text]] }}}>
-<$set name="resultCount" value="""<$count filter="[!is[system]search<searchTerm>]"/>""">
+<$vars userInput={{{ [<searchTiddler>get[text]] }}} configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}}>
+<$vars primaryListFilter={{{ [<configTiddler>get[first-search-filter]] }}} secondaryListFilter={{{ [<configTiddler>get[second-search-filter]] }}}>
+<$set name="resultCount" value="""<$count filter="[subfilter<primaryListFilter>] =[subfilter<secondaryListFilter>]"/>""">
 {{$:/language/Search/Matches}}
 </$set>
-</$set>
+</$vars>
+</$vars>
 </$list>
 </$button>
 \end
@@ -32,17 +34,15 @@ tags: $:/tags/SideBarSegment
 </$vars>
 \end
 
-\define delete-state-tiddlers() <$action-deletetiddler $filter="[[$:/temp/search]] [<searchTiddler>] [<searchListState>]"/>
+\define cancel-search-actions() <$list filter="[<searchTiddler>get[text]!match{$:/temp/search}]" emptyMessage="""<$action-deletetiddler $filter="[[$:/temp/search]] [<searchTiddler>] [<searchListState>]"/>"""><$action-setfield $tiddler="$:/temp/search" text={{{ [<searchTiddler>get[text]] }}}/><$action-setfield $tiddler="$:/temp/search/refresh" text="yes"/></$list>
 
-\define cancel-search-actions() <$action-deletetiddler $filter="[<__storeTitle__>] [<__tiddler__>] [<__selectionStateTitle__>]"/>
+\define input-accept-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]"><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>"""><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>
 
-\define input-accept-actions() <$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/>
-
-\define input-accept-variant-actions() <$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list>
+\define input-accept-variant-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]"><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>"""><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>
 
 \define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<nextTab>>/>"""/>
 
-\define advanced-search-actions() <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search/input}}/><$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/search/input}}/><<delete-state-tiddlers>><$action-navigate $to="$:/AdvancedSearch"/><$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/><$action-sendmessage $message="tm-focus-selector" $param="""[data-tiddler-title="$:/AdvancedSearch"] .tc-search input""" preventScroll="true"/>
+\define advanced-search-actions() <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search/input}}/><$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/search/input}}/><<delete-state-tiddlers>><$action-navigate $to="$:/AdvancedSearch"/><$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/><$action-sendmessage $message="tm-focus-selector" $param="""[data-tiddler-title="$:/AdvancedSearch"] .tc-search input""" preventScroll="true"/><$action-deletetiddler $filter="$:/temp/search $:/temp/search/input $:/temp/search/refresh [<searchListState>]"/>
 
 <div class="tc-sidebar-lists tc-sidebar-search">
 
@@ -66,7 +66,7 @@ tags: $:/tags/SideBarSegment
 {{$:/core/images/advanced-search-button}}
 </$button>
 <$button class="tc-btn-invisible">
-<<delete-state-tiddlers>><$action-sendmessage $message="tm-focus-selector" $param=".tc-search input"/>
+<<cancel-search-actions>><$action-sendmessage $message="tm-focus-selector" $param=".tc-search input"/>
 {{$:/core/images/close-button}}
 </$button>
 <<count-popup-button>>

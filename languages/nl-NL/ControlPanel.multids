@@ -88,6 +88,7 @@ Plugins/Reinstall/Caption: herinstalleer
 Plugins/Theme/Prompt: Thema's
 Plugins/Themes/Caption: Thema's
 Plugins/Themes/Hint: Thema plugins
+Plugins/Updates/Hint: Beschikbare updates voor geïnstalleerde plugins
 Saving/Caption: Opslaan
 Saving/DownloadSaver/AutoSave/Description: Sta automatisch opslaan toe voor de opslagmodule
 Saving/DownloadSaver/AutoSave/Hint: Sla automatisch op voor de opslagmodule
@@ -108,7 +109,9 @@ Saving/GitService/Branch: Doeltak (branch) voor opslaan
 Saving/GitService/CommitMessage: Opgeslagen door TiddlyWiki
 Saving/GitService/Description: Deze instellingen worden alleen gebruikt bij opslaan naar <<service-name>>
 Saving/GitService/Filename: Bestandsnaam van doelbestand (b.v. `index.html`)
+Saving/GitService/Gitea/Caption: Gitea opslagmodule
 Saving/GitService/Gitea/Password: Persoonlijk toegangs-token voor API (via Gitea’s web interface: `Settings | Applications | Generate New Token`)
+Saving/GitService/GitHub/Caption: ~GitHub opslagmodule
 Saving/GitService/GitHub/Password: Wachtwoord, OAUTH token, of persoonlijk toegangs-token (zie [[GitHub help-pagina|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] voor details)
 Saving/GitService/GitLab/Caption: ~GitLab opslagmodule
 Saving/GitService/GitLab/Password: Persoonlijk toegangs-token voor API (zie [[GitLab help-pagina|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] voor details)
@@ -120,6 +123,8 @@ Saving/Hint: Instellingen voor opslaan van de gehele TiddlyWiki als één bestan
 Saving/TiddlySpot/Advanced/Heading: Geavanceerde instellingen
 Saving/TiddlySpot/BackupDir: Backup folder
 Saving/TiddlySpot/Backups: Backups
+Saving/TiddlySpot/Caption: ~TiddlySpot opslagmodule
+Saving/TiddlySpot/ControlPanel: ~TiddlySpot bedieningspaneel
 Saving/TiddlySpot/Description: Deze instellingen worden alleen gebruikt bij http://tiddlyspot.com of een vergelijkbare server
 Saving/TiddlySpot/Filename: Upload bestandsnaam
 Saving/TiddlySpot/Heading: ~TiddlySpot

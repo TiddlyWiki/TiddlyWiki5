@@ -3,5 +3,5 @@ icon: $:/core/images/options-button
 color: #bbb
 
 <div class="tc-control-panel">
-<<tabs "[all[shadows+tiddlers]tag[$:/tags/ControlPanel]!has[draft.of]]" "$:/core/ui/ControlPanel/Info">>
+<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/ControlPanel]!has[draft.of]]" default="$:/core/ui/ControlPanel/Info" explicitState="$:/state/tab-1749438307"/>
 </div>

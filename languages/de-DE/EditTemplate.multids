@@ -19,6 +19,8 @@ Shadow/OverriddenWarning: Dies ist ein veränderter Tiddler. Um zur Standardvers
 Tags/Add/Button: ok
 Tags/Add/Button/Hint: Erzeuge einen neuen Tag
 Tags/Add/Placeholder: Neuer Tag
+Tags/ClearInput/Caption: lösche Eingabefeld
+Tags/ClearInput/Hint: Lösche Tag Eingabefeld
 Tags/Dropdown/Caption: Tag Liste
 Tags/Dropdown/Hint: Tag Liste anzeigen
 Title/BadCharacterWarning: Warnung: Folgende Zeichen im Titel können zu Problemen führen: <<bad-chars>>

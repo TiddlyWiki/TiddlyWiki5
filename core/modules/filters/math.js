@@ -91,6 +91,20 @@ exports.exponential = makeNumericBinaryOperator(
 	function(a,b) {return Number.prototype.toExponential.call(a,Math.min(Math.max(b,0),100));}
 );
 
+exports.power = makeNumericBinaryOperator(
+	function(a,b) {return Math.pow(a,b);}
+);
+
+exports.log = makeNumericBinaryOperator(
+	function(a,b) {
+		if(b) {
+			return Math.log(a)/Math.log(b);
+		} else {
+			return Math.log(a);
+		}
+	}
+);
+
 exports.sum = makeNumericReducingOperator(
 	function(accumulator,value) {return accumulator + value},
 	0 // Initial value

@@ -70,6 +70,7 @@ Plugins/Caption: Plugins
 Plugins/Disable/Caption: deaktivieren
 Plugins/Disable/Hint: Deaktivieren Sie dieses Plugin beim nächsten Laden der Seite.
 Plugins/Disabled/Status: (deaktiviert)
+Plugins/Downgrade/Caption: herabstufen
 Plugins/Empty/Hint: keine
 Plugins/Enable/Caption: aktivieren
 Plugins/Enable/Hint: Aktivieren Sie dieses Plugin beim nächsten Laden der Seite.
@@ -87,6 +88,11 @@ Plugins/Plugins/Hint: Erweiterungen
 Plugins/Reinstall/Caption: erneut installieren
 Plugins/Themes/Caption: Themes
 Plugins/Themes/Hint: Theme Erweiterungen
+Plugins/Update/Caption: aktualisieren
+Plugins/Updates/Caption: Aktualisieren
+Plugins/Updates/Hint: Verfügbare Erweiterungen zu bereits installierten "Plugins"
+Plugins/Updates/UpdateAll/Caption: Aktualisiere <<update-count>> "Plugins"
+Plugins/SubPluginPrompt: Mit <<count>> "sub-plugins" verfügbar
 Saving/Caption: Speichern
 Saving/DownloadSaver/AutoSave/Description: Erlaube automatisches Speichern für den "Download Saver"
 Saving/DownloadSaver/AutoSave/Hint: Erlaube automatisches Speichern für den "Download Saver"
@@ -111,6 +117,7 @@ Saving/GitService/Gitea/Caption: Gitea Saver
 Saving/GitService/Gitea/Password: Persönlicher "Zugriffs-Token" (siehe: Gitea’s web Seite: `Settings | Applications | Generate New Token`)
 Saving/TiddlySpot/Advanced/Heading: Erweiterte Einstellungen
 Saving/TiddlySpot/BackupDir: Verzeichnis für das "Backup"
+Saving/TiddlySpot/ControlPanel: ~TiddlySpot Control Panel
 Saving/TiddlySpot/Backups: "Backups"
 Saving/TiddlySpot/Caption: Speichern auf ~TiddlySpot
 Saving/TiddlySpot/Description: Diese Einstellungen sind nur für http://tiddlyspot.com und kompatible Server aktiv!

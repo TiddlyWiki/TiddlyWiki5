@@ -1,0 +1,8 @@
+created: 20201120040913073
+modified: 20201120041513726
+tags: [[Operator Examples]] [[power Operator]]
+title: power Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[3]power[3]]">>
+<<.operator-example 2 "9 +[power[2]]">>

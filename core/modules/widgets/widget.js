@@ -574,10 +574,10 @@ Widget.prototype.invokeActionString = function(actions,triggeringWidget,event,va
 /*
 Execute action tiddlers by tag
 */
-Widget.prototype.executeStartupTiddlers = function(tag) {
+Widget.prototype.invokeActionsByTag = function(tag,event,variables) {
 	var self = this;
 	$tw.utils.each(self.wiki.filterTiddlers("[all[shadows+tiddlers]tag[" + tag + "]!has[draft.of]]"),function(title) {
-		self.invokeActionString(self.wiki.getTiddlerText(title),self);
+		self.invokeActionString(self.wiki.getTiddlerText(title),self,event,variables);
 	});
 };
 

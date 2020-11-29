@@ -1,0 +1,6 @@
+title: $:/config/SwitcherTargets/
+
+layout: $:/snippets/LayoutSwitcher
+language: $:/snippets/languageswitcher
+palette: $:/core/ui/ControlPanel/Palette
+theme: $:/core/ui/ControlPanel/Theme

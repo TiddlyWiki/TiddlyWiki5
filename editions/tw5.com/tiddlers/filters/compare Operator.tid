@@ -30,7 +30,7 @@ The ''type'' can be:
 The ''mode'' can be:
 
 * "eq" - equal to
-* "ne" - not equal ot
+* "ne" - not equal to
 * "gteq" - greater than or equal to
 * "gt" - greater than
 * "lteq" - less than or equal to

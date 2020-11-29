@@ -386,22 +386,18 @@ Amend the rules used by this instance of the parser
 WikiParser.prototype.amendRules = function(type,names) {
 	names = names || [];
 	// Define the filter function
-	var keepFilter;
+	var target;
 	if(type === "only") {
-		keepFilter = function(name) {
-			return names.indexOf(name) !== -1;
-		};
+		target = true;
 	} else if(type === "except") {
-		keepFilter = function(name) {
-			return names.indexOf(name) === -1;
-		};
+		target = false;
 	} else {
 		return;
 	}
 	// Define a function to process each of our rule arrays
 	var processRuleArray = function(ruleArray) {
 		for(var t=ruleArray.length-1; t>=0; t--) {
-			if(!keepFilter(ruleArray[t].rule.name)) {
+			if((names.indexOf(ruleArray[t].rule.name) === -1) === target) {
 				ruleArray.splice(t,1);
 			}
 		}

@@ -9,13 +9,13 @@ description: Gefilterte Ausgabe von Tiddlern, in einem spezifizierten Format.
 Gefilterte Ausgabe mehrerer Tiddler, in ein angegebenes Dateiformat (standard: `text/html`) mit spezifischer Erweiterung (Standard: `.html`).
 
 ```
---rendertiddlers <filter> <template> <pathname> [<type>] [<extension>] ["noclean"]
+--rendertiddlers '<filter>' <template> <pathname> [<type>] [<extension>] ["noclean"]
 ```
 
 Beispiel:
 
 ```
---rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+--rendertiddlers '[!is[system]]' $:/core/templates/static.tiddler.html ./static text/plain
 ```
 
 Standardmäßig ist das `output` Verzeichnis ein Unterverzeichnis im `edition` Verzeichnis. Der `--output` Befehl kann verwendet werden, um ein anderes Verzeichnis auszuwählen.

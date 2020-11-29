@@ -115,4 +115,32 @@ exports.splitregexp = function(source,operator,options) {
 	return result;
 };
 
+exports["search-replace"] = function(source,operator,options) {
+	var results = [],
+		suffixes = operator.suffixes || [],
+		flagSuffix = (suffixes[0] ? (suffixes[0][0] || "") : ""),
+		flags = (flagSuffix.indexOf("g") !== -1 ? "g" : "") + (flagSuffix.indexOf("i") !== -1 ? "i" : ""),
+		isRegExp = (suffixes[1] && suffixes[1][0] === "regexp") ? true : false,
+		searchTerm,
+		regExp;
+	
+	source(function(tiddler,title) {
+		if(title && (operator.operands.length > 1)) {
+			//Escape regexp characters if the operand is not a regular expression
+			searchTerm = isRegExp ? operator.operand : $tw.utils.escapeRegExp(operator.operand);
+			try {
+				regExp = new RegExp(searchTerm,flags);
+			} catch(ex) {
+				return ["RegExp error: " + ex];
+			}
+			results.push(
+				title.replace(regExp,operator.operands[1])
+			);
+		} else {
+			results.push(title);
+		}
+	});
+	return results;
+};
+
 })();
