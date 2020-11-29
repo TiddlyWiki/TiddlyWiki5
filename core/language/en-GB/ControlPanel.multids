@@ -17,7 +17,7 @@ Basics/NewJournal/Tags/Prompt: Tags for new journal tiddlers
 Basics/NewTiddler/Title/Prompt: Title of new tiddlers
 Basics/NewTiddler/Tags/Prompt: Tags for new tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Number of overridden shadow tiddlers
-Basics/RemoveTags: Sanitize tags
+Basics/RemoveTags: Update to current format
 Basics/RemoveTags/Hint: Remove the tags from the tiddler and add them to the text field
 Basics/ShadowTiddlers/Prompt: Number of shadow tiddlers
 Basics/Subtitle/Prompt: Subtitle
