@@ -13,7 +13,6 @@ Set a field or index at a given tiddler via radio buttons
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
-
 var RadioWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
@@ -37,8 +36,8 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	// Create our elements
 	this.labelDomNode = this.document.createElement("label");
 	this.labelDomNode.setAttribute("class",
-   		"tc-radio " + this.radioClass + (isChecked ? " tc-radio-selected" : "")
-  	);
+		"tc-radio " + this.radioClass + (isChecked ? " tc-radio-selected" : "")
+	);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","radio");
 	if(isChecked) {
@@ -83,14 +82,33 @@ RadioWidget.prototype.setValue = function() {
 };
 
 RadioWidget.prototype.handleChangeEvent = function(event) {
+	var variables = Object.create(null);
 	if(this.inputDomNode.checked) {
 		this.setValue();
+	}
+	// Trigger actions. Use variables = {key:value, key:value ...}
+	if(this.radioActions) {
+		$tw.utils.each(this.attributes,function(val,key) {
+			if(WIDGET_ATTRIBUTES.indexOf(key) !== -1 ){
+				variables["var-" + key] = "" + val;
+			} else if ( key.substring(0,4) === "var-") {
+				variables[key] = "" + val;
+			}
+		});
+		// "tiddler" and/or "field" parameter may be missing in the widget call. See .execute() below
+		variables = $tw.utils.extend(variables, {"actionValue": this.radioValue,
+			"var-tiddler": this.radioTitle,
+			"var-field": this.radioField
+			});
+		this.invokeActionString(this.radioActions,this,event,variables);
 	}
 };
 
 /*
 Compute the internal state of the widget
+WIDGET_ATTRIBUTES has to be updated, if the .execute() function gets more parameters!
 */
+var WIDGET_ATTRIBUTES = ["tiddler","field","index","value","class","disabled","actions"];
 RadioWidget.prototype.execute = function() {
 	// Get the parameters from the attributes
 	this.radioTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
@@ -99,6 +117,7 @@ RadioWidget.prototype.execute = function() {
 	this.radioValue = this.getAttribute("value");
 	this.radioClass = this.getAttribute("class","");
 	this.isDisabled = this.getAttribute("disabled","no");
+	this.radioActions = this.getAttribute("actions","");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -108,16 +127,11 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RadioWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.value || changedAttributes["class"] || changedAttributes.disabled) {
+	if(($tw.utils.count(changedAttributes) > 0) || changedTiddlers[this.radioTitle]) {
 		this.refreshSelf();
 		return true;
 	} else {
-		var refreshed = false;
-		if(changedTiddlers[this.radioTitle]) {
-			this.inputDomNode.checked = this.getValue() === this.radioValue;
-			refreshed = true;
-		}
-		return this.refreshChildren(changedTiddlers) || refreshed;
+		return this.refreshChildren(changedTiddlers);
 	}
 };
 
