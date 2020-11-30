@@ -128,7 +128,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 			if(err) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the file on disk, should fail gracefully
-					$tw.syncer.displayError("Server desynchronized. Error deleting file for tiddler: "+title, err);
+					$tw.syncer.displayError("Server desynchronized. Error deleting file for deleted tiddler: "+title, err);
 					return callback(null);
 				} else {
 					return callback(err);
