@@ -10,9 +10,7 @@ alert-highlight: #881122
 alert-muted-foreground: #b99e2f
 background: #E9E0C7
 blockquote-bar: <<colour muted-foreground>>
-button-background: #BAB29C
 button-foreground: <<colour foreground>>
-button-border: transparent
 code-background: #F3EDDF
 code-border: #C3BAA1
 code-foreground: #ab3250
