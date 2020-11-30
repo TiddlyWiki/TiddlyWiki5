@@ -17,6 +17,8 @@ Basics/NewJournal/Title/Prompt: 新日志条目的名称
 Basics/NewTiddler/Tags/Prompt: 新条目的标签
 Basics/NewTiddler/Title/Prompt: 新条目的名称
 Basics/OverriddenShadowTiddlers/Prompt: 被覆盖的默认条目数量
+Basics/RemoveTags: 更新到当前格式
+Basics/RemoveTags/Hint: 将标签配置更新为最新格式
 Basics/ShadowTiddlers/Prompt: 默认条目数量
 Basics/Subtitle/Prompt: 副标题
 Basics/SystemTiddlers/Prompt: 系统条目数量
