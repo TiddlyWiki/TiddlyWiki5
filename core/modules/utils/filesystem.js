@@ -455,11 +455,25 @@ exports.deleteTiddlerFile = function(fileInfo, callback) {
 };
 
 /*
-Delete a file described by the fileInfo if it exits
+Cleanup old files on disk, by comparing the options values:
+	adaptorInfo from $tw.syncer.tiddlerInfo
+	bootInfo from $tw.boot.files
 */
-exports.cleanupTiddlerFiles = function(adaptorInfo, bootInfo, callback) {
+exports.cleanupTiddlerFiles = function(options, callback) {
+	var adaptorInfo = options.adaptorInfo || {},
+	bootInfo = options.bootInfo || {},
+	title = options.title || "undefined";
 	if(adaptorInfo.filepath && bootInfo.filepath && adaptorInfo.filepath !== bootInfo.filepath) {
-		$tw.utils.deleteTiddlerFile(adaptorInfo, function(err){
+		return $tw.utils.deleteTiddlerFile(adaptorInfo, function(err){
+			if(err) {
+				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
+					// Error deleting the previous file on disk, should fail gracefully
+					$tw.syncer.displayError("Server desynchronized. Error cleaning up previous file for tiddler: "+title, err);
+					return callback(null);
+				} else {
+					return callback(err);
+				}
+			}
 			return callback(null);
 		});
 	} else {

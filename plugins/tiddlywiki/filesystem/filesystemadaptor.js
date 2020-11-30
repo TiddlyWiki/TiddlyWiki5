@@ -54,17 +54,17 @@ It is the responsibility of the filesystem adaptor to update this.boot.files for
 FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 	// See if we've already got information about this file
 	var title = tiddler.fields.title,
-		fileInfo = this.boot.files[title];
+		newInfo, fileInfo = this.boot.files[title];
 	// Always generate a fileInfo object when this fuction is called
-	fileInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
+	newInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
 		directory: this.boot.wikiTiddlersPath,
 		pathFilters: this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n"),
 		extFilters: this.wiki.getTiddlerText("$:/config/FileSystemExtensions","").split("\n"),
 		wiki: this.wiki,
 		fileInfo: fileInfo
 	});
-	this.boot.files[title] = fileInfo;
-	callback(null,fileInfo);
+	this.boot.files[title] = newInfo;
+	callback(null,newInfo);
 };
 
 
@@ -79,27 +79,25 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 		}
 		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err) {
 			if(err) {
-				if (err.code == "EPERM" || err.code == "EACCES") {
-					bootInfo = self.boot.files[tiddler.fields.title];
+				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
+					var bootInfo = self.boot.files[tiddler.fields.title];
 					bootInfo.writeError = true;
 					self.boot.files[tiddler.fields.title] = bootInfo;
+					$tw.syncer.displayError("Write error for tiddler: "+tiddler.fields.title+"\nWrite will be retried with encoded filepath", encodeURIComponent(bootInfo.filepath));
 					return callback(err);
 				} else {
 					return callback(err);
 				}
 			}
 			// Cleanup duplicates if the file moved or changed extensions
-			var adaptorInfo = ($tw.syncer.tiddlerInfo[tiddler.fields.title] || {adaptorInfo: {} }).adaptorInfo,
-				bootInfo = self.boot.files[tiddler.fields.title] || {};
-			$tw.utils.cleanupTiddlerFiles(adaptorInfo, bootInfo, function(err){
+			var options = {
+				adaptorInfo: ($tw.syncer.tiddlerInfo[tiddler.fields.title] || {adaptorInfo: {} }).adaptorInfo,
+				bootInfo: self.boot.files[tiddler.fields.title] || {},
+				title: tiddler.fields.title
+			};
+			$tw.utils.cleanupTiddlerFiles(options, function(err){
 				if(err) {
-					if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
-						// Error deleting the previous file on disk, should fail gracefully
-						$tw.syncer.displayError("Server desynchronized. Error cleaning up previous file for tiddler: "+tiddler.fields.title, err);
-						return callback(null);
-					} else {
-						return callback(err);
-					}
+					return callback(err);
 				}
 				return callback(null, self.boot.files[tiddler.fields.title]);
 			});
