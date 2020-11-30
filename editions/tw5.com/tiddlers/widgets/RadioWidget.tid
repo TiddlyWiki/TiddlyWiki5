@@ -1,6 +1,6 @@
 caption: radio
 created: 20131212195353929
-modified: 20201109091807432
+modified: 20201130184330254
 tags: Widgets
 title: RadioWidget
 type: text/vnd.tiddlywiki
@@ -19,6 +19,7 @@ The content of the `<$radio>` widget is displayed within an HTML `<label>` eleme
 |index|<<.from-version "5.1.14">> The index of the //tiddler// being [[DataTiddler|DataTiddlers]] bound to the radio button<<.tip "takes precedence over //field//">>|
 |value |The value for the //field// or //index// of the //tiddler//|
 |class |The CSS classes assigned to the label around the radio button<$macrocall $name=".tip" _="""<<.from-version "5.1.14">> `tc-radio` is always applied by default, as well as `tc-radio-selected` when selected"""/>|
+|actions|<<.from-version "5.1.23">> Optional, A string containing ActionWidgets to be triggered when the value changes. <br>The variable: ''actionValue'' is available for the actions.  |
 |disabled|<<.from-version "5.1.23">> Optional, disables the radio input if set to "yes". Defaults to "no"|
 
 
@@ -39,3 +40,5 @@ This example sets the `Tree Frog` index in the tiddler AnimalColours:
 <$radio index="Tree Frog" value="green"> green</$radio>
 <$radio index="Tree Frog" value="brown"> brown</$radio>
 </$tiddler>"""/>
+
+{{RadioWidget Example}}
