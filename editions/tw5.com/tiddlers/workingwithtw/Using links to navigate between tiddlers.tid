@@ -1,5 +1,5 @@
 created: 20140908093600000
-modified: 20171219170302268
+modified: 20201129183020567
 tags: [[Working with TiddlyWiki]]
 title: Using links to navigate between tiddlers
 type: text/vnd.tiddlywiki
@@ -12,7 +12,7 @@ You can use links (normally displayed as blue text) to navigate from one tiddler
 
 * The ''InfoPanel'' of each tiddler gives you access to four tabs containing additional lists of related tiddlers:
 
-** The ''References'' tab lists all the tiddlers that link //to// the current tiddler.
+** The ''Backlinks'' tab lists all the tiddlers that link //to// the current tiddler.
 
 ** The ''Tagging'' tab lists all the tiddlers that have been tagged with the current tiddler's title.
 
