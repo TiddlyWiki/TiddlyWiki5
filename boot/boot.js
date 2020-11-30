@@ -305,13 +305,16 @@ $tw.utils.stringifyDate = function(value) {
 // Parse a date from a UTC YYYYMMDDHHMMSSmmm format string
 $tw.utils.parseDate = function(value) {
 	if(typeof value === "string") {
-		return new Date(Date.UTC(parseInt(value.substr(0,4),10),
+		var year = parseInt(value.substr(0,4),10),
+			d = new Date(Date.UTC(year,
 				parseInt(value.substr(4,2),10)-1,
 				parseInt(value.substr(6,2),10),
 				parseInt(value.substr(8,2)||"00",10),
 				parseInt(value.substr(10,2)||"00",10),
 				parseInt(value.substr(12,2)||"00",10),
 				parseInt(value.substr(14,3)||"000",10)));
+		  d.setUTCFullYear(year); // See https://stackoverflow.com/a/5870822
+		  return d;
 	} else if($tw.utils.isDate(value)) {
 		return value;
 	} else {
