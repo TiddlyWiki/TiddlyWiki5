@@ -82,24 +82,15 @@ RadioWidget.prototype.setValue = function() {
 };
 
 RadioWidget.prototype.handleChangeEvent = function(event) {
-	var variables = Object.create(null);
+	var variables = {};
 	if(this.inputDomNode.checked) {
 		this.setValue();
 	}
 	// Trigger actions. Use variables = {key:value, key:value ...}
 	if(this.radioActions) {
-		$tw.utils.each(this.attributes,function(val,key) {
-			if(WIDGET_ATTRIBUTES.indexOf(key) !== -1 ){
-				variables["var-" + key] = "" + val;
-			} else if ( key.substring(0,4) === "var-") {
-				variables[key] = "" + val;
-			}
-		});
+		variables = $tw.hooks.invokeHook("th-radio-actions",this);
 		// "tiddler" and/or "field" parameter may be missing in the widget call. See .execute() below
-		variables = $tw.utils.extend(variables, {"actionValue": this.radioValue,
-			"var-tiddler": this.radioTitle,
-			"var-field": this.radioField
-			});
+		variables = $tw.utils.extend(variables, {"actionValue": this.radioValue}, variables);
 		this.invokeActionString(this.radioActions,this,event,variables);
 	}
 };
