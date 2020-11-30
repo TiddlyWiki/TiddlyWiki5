@@ -83,7 +83,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 					var bootInfo = self.boot.files[tiddler.fields.title];
 					bootInfo.writeError = true;
 					self.boot.files[tiddler.fields.title] = bootInfo;
-					$tw.syncer.displayError("Write error for tiddler: "+tiddler.fields.title+"\nWrite will be retried with encoded filepath", encodeURIComponent(bootInfo.filepath));
+					$tw.syncer.displayError("Sync for tiddler [["+tiddler.fields.title+"]] will be retried with encoded filepath", encodeURIComponent(bootInfo.filepath));
 					return callback(err);
 				} else {
 					return callback(err);
