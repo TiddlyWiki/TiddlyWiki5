@@ -777,6 +777,17 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("[[Hello There]search-replace::regexp<myregexp>,[]]",anchorWidget).join(",")).toBe("Hllo There");
 		expect(wiki.filterTiddlers("[[Hello There]search-replace:gi[H],[]]",anchorWidget).join(",")).toBe("ello Tere");	
 	});
+	
+	it("should handle the pad operator", function() {
+	expect(wiki.filterTiddlers("[[2]pad[]]").join(",")).toBe("2");
+	expect(wiki.filterTiddlers("[[2]pad[0]]").join(",")).toBe("2");
+	expect(wiki.filterTiddlers("[[2]pad[1]]").join(",")).toBe("2");
+	expect(wiki.filterTiddlers("2 20 +[pad[3]]").join(",")).toBe("002,020");
+	expect(wiki.filterTiddlers("[[2]pad[9]]").join(",")).toBe("000000002");
+	expect(wiki.filterTiddlers("[[2]pad[9],[a]]").join(",")).toBe("aaaaaaaa2");
+	expect(wiki.filterTiddlers("[[12]pad[9],[abc]]").join(",")).toBe("abcabca12");
+	expect(wiki.filterTiddlers("[[12]pad:suffix[9],[abc]]").join(",")).toBe("12abcabca");
+	});
 }
 
 });
