@@ -82,15 +82,12 @@ RadioWidget.prototype.setValue = function() {
 };
 
 RadioWidget.prototype.handleChangeEvent = function(event) {
-	var variables = {};
 	if(this.inputDomNode.checked) {
 		this.setValue();
 	}
 	// Trigger actions
 	if(this.radioActions) {
-		// The hook needs to return: variables = {key:value, key:value ...}
-		variables = $tw.hooks.invokeHook("th-radio-variables",{"actionValue": this.radioValue},this);
-		this.invokeActionString(this.radioActions,this,event,variables);
+		this.invokeActionString(this.radioActions,this,event,{"actionValue": this.radioValue});
 	}
 };
 
