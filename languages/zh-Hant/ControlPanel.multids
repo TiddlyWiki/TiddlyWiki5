@@ -17,6 +17,8 @@ Basics/NewJournal/Title/Prompt: 新日誌條目的名稱
 Basics/NewTiddler/Tags/Prompt: 新條目的標籤
 Basics/NewTiddler/Title/Prompt: 新條目的名稱
 Basics/OverriddenShadowTiddlers/Prompt: 被覆寫的預設條目數量
+Basics/RemoveTags: 更新到當前格式
+Basics/RemoveTags/Hint: 將標籤設定更新為最新格式
 Basics/ShadowTiddlers/Prompt: 預設條目數量
 Basics/Subtitle/Prompt: 副標題
 Basics/SystemTiddlers/Prompt: 系統條目數量
