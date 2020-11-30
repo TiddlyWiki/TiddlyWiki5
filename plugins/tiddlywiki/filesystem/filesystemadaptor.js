@@ -79,20 +79,30 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 		}
 		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err) {
 			if(err) {
-				return callback(err);
+				if (err.code == "EPERM" || err.code == "EACCES") {
+					bootInfo = self.boot.files[tiddler.fields.title];
+					bootInfo.writeError = true;
+					self.boot.files[tiddler.fields.title] = bootInfo;
+					return callback(err);
+				} else {
+					return callback(err);
+				}
 			}
 			// Cleanup duplicates if the file moved or changed extensions
-			var syncerInfo = $tw.syncer.tiddlerInfo[tiddler.fields.title];
-			if(syncerInfo && syncerInfo.adaptorInfo && syncerInfo.adaptorInfo.filepath !== self.boot.files[tiddler.fields.title].filepath) {
-				$tw.utils.deleteTiddlerFile(syncerInfo.adaptorInfo, function(err){
-					if(err) {
+			var adaptorInfo = ($tw.syncer.tiddlerInfo[tiddler.fields.title] || {adaptorInfo: {} }).adaptorInfo,
+				bootInfo = self.boot.files[tiddler.fields.title] || {};
+			$tw.utils.cleanupTiddlerFiles(adaptorInfo, bootInfo, function(err){
+				if(err) {
+					if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
+						// Error deleting the previous file on disk, should fail gracefully
+						$tw.syncer.displayError("Server desynchronized. Error cleaning up previous file for tiddler: "+tiddler.fields.title, err);
+						return callback(null);
+					} else {
 						return callback(err);
 					}
-					callback(null, self.boot.files[tiddler.fields.title]);
-				});
-			} else {
-				callback(null, self.boot.files[tiddler.fields.title]);
-			}
+				}
+				return callback(null, self.boot.files[tiddler.fields.title]);
+			});
 		});
 	});
 };
@@ -114,7 +124,18 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 		fileInfo = this.boot.files[title];
 	// Only delete the tiddler if we have writable information for the file
 	if(fileInfo) {
-		$tw.utils.deleteTiddlerFile(fileInfo, callback);
+		$tw.utils.deleteTiddlerFile(fileInfo, function(err){
+			if(err) {
+				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
+					// Error deleting the file on disk, should fail gracefully
+					$tw.syncer.displayError("Server desynchronized. Error deleting file for tiddler: "+title, err);
+					return callback(null);
+				} else {
+					return callback(err);
+				}
+			}
+			return callback(null);
+		});
 	} else {
 		callback(null);
 	}
