@@ -367,6 +367,8 @@ exports.generateTiddlerFilepath = function(title,options) {
 		}
 		count++;
 	} while(fs.existsSync(fullPath));
+	// Only return full paths that start with the Wiki's directory
+	fullPath = (fullPath.indexOf(directory) == 0) ? fullPath: path.resolve(directory, path.normalize(fullPath).encodeURIComponent());
 	// Return the full path to the file
 	return fullPath;
 };
