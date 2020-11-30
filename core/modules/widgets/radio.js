@@ -86,20 +86,17 @@ RadioWidget.prototype.handleChangeEvent = function(event) {
 	if(this.inputDomNode.checked) {
 		this.setValue();
 	}
-	// Trigger actions. Use variables = {key:value, key:value ...}
+	// Trigger actions
 	if(this.radioActions) {
-		variables = $tw.hooks.invokeHook("th-radio-actions",this);
-		// "tiddler" and/or "field" parameter may be missing in the widget call. See .execute() below
-		variables = $tw.utils.extend(variables, {"actionValue": this.radioValue}, variables);
+		// The hook needs to return: variables = {key:value, key:value ...}
+		variables = $tw.hooks.invokeHook("th-radio-variables",{"actionValue": this.radioValue},this);
 		this.invokeActionString(this.radioActions,this,event,variables);
 	}
 };
 
 /*
 Compute the internal state of the widget
-WIDGET_ATTRIBUTES has to be updated, if the .execute() function gets more parameters!
 */
-var WIDGET_ATTRIBUTES = ["tiddler","field","index","value","class","disabled","actions"];
 RadioWidget.prototype.execute = function() {
 	// Get the parameters from the attributes
 	this.radioTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
