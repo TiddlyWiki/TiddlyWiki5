@@ -313,7 +313,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 	var self = this,
 		directory = options.directory || "",
 		extension = options.extension || "",
-		filepath;
+		filepath;	
 	// Check if any of the pathFilters applies
 	if(options.pathFilters && options.wiki) {
 		$tw.utils.each(options.pathFilters,function(filter) {
@@ -367,8 +367,12 @@ exports.generateTiddlerFilepath = function(title,options) {
 		}
 		count++;
 	} while(fs.existsSync(fullPath));
-	// Only return full paths that start with the Wiki's directory
-	fullPath = (fullPath.indexOf($tw.boot.wikiPath) == 0) ? fullPath: path.resolve(directory, encodeURIComponent(fullPath));
+	//If the path does not start with the wiki directory, or if the last write failed
+	var encode = fullPath.indexOf($tw.boot.wikiPath) !== 0 || ((options.fileInfo || {writeError: false}).writeError == true);
+	if(encode){
+		//encodeURIComponent() and then resolve to tiddler directory
+		fullPath = path.resolve(directory, encodeURIComponent(fullPath));
+	}
 	// Return the full path to the file
 	return fullPath;
 };
@@ -448,6 +452,19 @@ exports.deleteTiddlerFile = function(fileInfo, callback) {
 			return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),callback);
 		}
 	});
+};
+
+/*
+Delete a file described by the fileInfo if it exits
+*/
+exports.cleanupTiddlerFiles = function(adaptorInfo, bootInfo, callback) {
+	if(adaptorInfo.filepath && bootInfo.filepath && adaptorInfo.filepath !== bootInfo.filepath) {
+		$tw.utils.deleteTiddlerFile(adaptorInfo, function(err){
+			return callback(null);
+		});
+	} else {
+		return callback(null);
+	}
 };
 
 })();
