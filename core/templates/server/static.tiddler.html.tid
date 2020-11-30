@@ -19,7 +19,7 @@ title: $:/core/templates/server/static.tiddler.html
 </head>
 <body class="tc-body">
 <$transclude tiddler="$:/core/templates/server/static.sidebar.wikitext" mode="inline"/>
-<section class="tc-story-river">
+<section class="tc-story-river tc-static-story-river">
 <div class="tc-tiddler-frame">
 <$transclude tiddler="$:/core/templates/server/static.tiddler.wikitext" mode="inline"/>
 </div>
