@@ -25,7 +25,7 @@ name: tiddlywiki
 
 .cm-s-tiddlywiki.CodeMirror, .cm-s-tiddlywiki .CodeMirror-gutters { background-color: <<colour tiddler-editor-background>>; color: <<colour foreground>>; }
 .cm-s-tiddlywiki .CodeMirror-gutters {background: <<colour tiddler-editor-background>>; border-right: 0px;}
-.cm-s-tiddlywiki .CodeMirror-linenumber {color: <<colour primary>>;}
+.cm-s-tiddlywiki .CodeMirror-linenumber {color: <<colour foreground>>;}
 .cm-s-tiddlywiki .CodeMirror-cursor { border-left: 2px solid <<colour foreground>>; }
 .cm-s-tiddlywiki div.CodeMirror-selected { background: <<colour selection-background>>; }
 .cm-s-tiddlywiki .CodeMirror-selectedtext,
@@ -38,7 +38,7 @@ name: tiddlywiki
 .cm-s-tiddlywiki .CodeMirror-line > span > span::-moz-selection { background: <<colour selection-background>>; }
 .cm-s-tiddlywiki span.cm-comment { color: <<colour muted-foreground>>; font-style:italic; font-weight:normal; }
 .cm-s-tiddlywiki .CodeMirror-activeline-background, .cm-s-tiddlywiki .CodeMirror-activeline-gutter .CodeMirror-linenumber { background: <<colour background>>; }
-.cm-s-tiddlywiki .CodeMirror-activeline .CodeMirror-linenumber.CodeMirror-gutter-elt { background: <<colour background>>; color: <<colour foreground>>; }
+.cm-s-tiddlywiki .CodeMirror-activeline .CodeMirror-linenumber.CodeMirror-gutter-elt { background: <<colour primary>>; color: <<colour foreground>>; }
 .cm-s-tiddlywiki .CodeMirror-matchingbracket { background: <<colour primary>>; color:<<colour foreground>> !important; }
 .cm-s-tiddlywiki span.cm-matchhighlight { color: <<colour foreground>>; background-color: <<colour primary>>; font-weight: normal;}
 .cm-s-tiddlywiki span.cm-searching { color: <<colour foreground>>; background-color: <<colour primary>>; font-weight: normal;}
