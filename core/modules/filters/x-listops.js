@@ -206,7 +206,7 @@ Extended filter operators to manipulate the current list.
 			if(operands.length > 1) {
 				results.splice(resultsIndex,1,operands[nextOperandIndex]);
 			} else {
-				results.splice(resultsIndex,1,);
+				results.splice(resultsIndex,1);
 			}
 		} else {
 			results.push(operands[0]);
