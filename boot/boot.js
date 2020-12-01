@@ -305,7 +305,12 @@ $tw.utils.stringifyDate = function(value) {
 // Parse a date from a UTC YYYYMMDDHHMMSSmmm format string
 $tw.utils.parseDate = function(value) {
 	if(typeof value === "string") {
-		var year = parseInt(value.substr(0,4),10),
+		var negative = 1;
+		if(value.charAt(0) === "-") {
+			negative = -1;
+			value = value.substr(1);
+		}
+		var year = parseInt(value.substr(0,4),10) * negative,
 			d = new Date(Date.UTC(year,
 				parseInt(value.substr(4,2),10)-1,
 				parseInt(value.substr(6,2),10),
