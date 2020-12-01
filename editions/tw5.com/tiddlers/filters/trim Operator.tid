@@ -6,7 +6,7 @@ op-input: a [[selection of titles|Title Selection]]
 op-parameter: <<.from-version "5.1.23">> a string of characters
 op-parameter-name: S
 op-output: the input titles with <<.place S>>, or whitespace if <<.place S>> is not specified, trimmed from the start and/or end
-op-suffix: `prefix` to trim from the start only, `suffix` to trim from the end only. If omitted (default), trim from both start and end
+op-suffix: <<.from-version "5.1.23">> `prefix` to trim from the start only, `suffix` to trim from the end only. If omitted (default), trim from both start and end
 op-suffix-name: T
 tags: [[Filter Operators]] [[String Operators]]
 title: trim Operator
