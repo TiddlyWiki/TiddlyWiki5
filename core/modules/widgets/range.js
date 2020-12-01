@@ -52,8 +52,10 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 	this.inputDomNode.value = this.getValue();
 	// Add a click event handler
 	$tw.utils.addEventListeners(this.inputDomNode,[
-		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"},
-		{name: "change", handlerObject: this, handlerMethod: "handleInputEvent"}		
+		{name:"mousedown", handlerObject:this, handlerMethod:"handleMouseDownEvent"},
+		{name:"mouseup",   handlerObject:this, handlerMethod:"handleMouseUpEvent"},
+		{name:"change",    handlerObject:this, handlerMethod:"handleChangeEvent"},
+		{name:"input",     handlerObject:this, handlerMethod:"handleInputEvent"},
 	]);
 	// Insert the label into the DOM and render any children
 	parent.insertBefore(this.inputDomNode,nextSibling);
@@ -62,23 +64,77 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 
 RangeWidget.prototype.getValue = function() {
 	var tiddler = this.wiki.getTiddler(this.tiddlerTitle),
-		fieldName = this.tiddlerField || "text",
-		value   = this.defaultValue;
+		fieldName = this.tiddlerField,
+		value = this.defaultValue;
 	if(tiddler) {
 		if(this.tiddlerIndex) {
-			value = this.wiki.extractTiddlerDataItem(tiddler,this.tiddlerIndex,this.defaultValue || "");
+			value = this.wiki.extractTiddlerDataItem(tiddler,this.tiddlerIndex,this.defaultValue);
 		} else {
 			if($tw.utils.hop(tiddler.fields,fieldName)) {
 				value = tiddler.fields[fieldName] || "";
 			} else {
-				value = this.defaultValue || "";
+				value = this.defaultValue;
 			}
 		}
 	}
 	return value;
 };
 
+RangeWidget.prototype.getActionVariables = function(options) {
+	options = options || {};
+	var hasChanged = (this.startValue !== this.inputDomNode.value) ? "yes" : "no";
+	// Trigger actions. Use variables = {key:value, key:value ...}
+	// the "value" is needed.
+	return $tw.utils.extend({"actionValue": this.inputDomNode.value, "actionValueHasChanged": hasChanged}, options);
+}
+
+// actionsStart
+RangeWidget.prototype.handleMouseDownEvent = function(event) {
+	this.mouseDown = true; // TODO remove once IE is gone.
+	this.startValue = this.inputDomNode.value; // TODO remove this line once IE is gone!
+	this.handleEvent(event);
+	// Trigger actions
+	if(this.actionsMouseDown) {
+		var variables = this.getActionVariables() // TODO this line will go into the function call below.
+		this.invokeActionString(this.actionsMouseDown,this,event,variables);
+	}
+}
+
+// actionsStop
+RangeWidget.prototype.handleMouseUpEvent = function(event) {
+	this.mouseDown = false; // TODO remove once IE is gone.
+	this.handleEvent(event);
+	// Trigger actions
+	if(this.actionsMouseUp) {
+		var variables = this.getActionVariables()
+		this.invokeActionString(this.actionsMouseUp,this,event,variables);
+	}
+	// TODO remove the following if() once IE is gone!
+	if ($tw.browser.isIE) {
+		if (this.startValue !== this.inputDomNode.value) {
+			this.handleChangeEvent(event);
+			this.startValue = this.inputDomNode.value;
+		}
+	}
+}
+
+RangeWidget.prototype.handleChangeEvent = function(event) {
+	if (this.mouseDown) {  // TODO refactor this function once IE is gone.
+		this.handleInputEvent(event);
+	}
+};
+
 RangeWidget.prototype.handleInputEvent = function(event) {
+	this.handleEvent(event);
+	// Trigger actions
+	if(this.actionsInput) {
+		// "tiddler" parameter may be missing. See .execute() below
+		var variables = this.getActionVariables({"actionValueHasChanged": "yes"}) // TODO this line will go into the function call below.
+		this.invokeActionString(this.actionsInput,this,event,variables);
+	}
+};
+
+RangeWidget.prototype.handleEvent = function(event) {
 	if(this.getValue() !== this.inputDomNode.value) {
 		if(this.tiddlerIndex) {
 			this.wiki.setText(this.tiddlerTitle,"",this.tiddlerIndex,this.inputDomNode.value);
@@ -92,16 +148,24 @@ RangeWidget.prototype.handleInputEvent = function(event) {
 Compute the internal state of the widget
 */
 RangeWidget.prototype.execute = function() {
+	// TODO remove the next 1 lines once IE is gone!
+	this.mouseUp = true; // Needed for IE10
 	// Get the parameters from the attributes
 	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
-	this.tiddlerField = this.getAttribute("field");
+	this.tiddlerField = this.getAttribute("field","text");
 	this.tiddlerIndex = this.getAttribute("index");
 	this.minValue = this.getAttribute("min");
 	this.maxValue = this.getAttribute("max");
 	this.increment = this.getAttribute("increment");
-	this.defaultValue = this.getAttribute("default");
+	this.defaultValue = this.getAttribute("default","");
 	this.elementClass = this.getAttribute("class","");
 	this.isDisabled = this.getAttribute("disabled","no");
+	// Actions since 5.1.23
+	// Next 2 only fire once!
+	this.actionsMouseDown = this.getAttribute("actionsStart","");
+	this.actionsMouseUp = this.getAttribute("actionsStop","");
+	// Input fires very often!
+	this.actionsInput = this.getAttribute("actions","");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -111,7 +175,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RangeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes['min'] || changedAttributes['max'] || changedAttributes['increment'] || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.disabled) {
+	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -119,7 +183,7 @@ RangeWidget.prototype.refresh = function(changedTiddlers) {
 		if(changedTiddlers[this.tiddlerTitle]) {
 			var value = this.getValue();
 			if(this.inputDomNode.value !== value) {
-				this.inputDomNode.value = value;				
+				this.inputDomNode.value = value;
 			}
 			refreshed = true;
 		}
