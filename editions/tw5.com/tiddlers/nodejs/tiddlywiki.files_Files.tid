@@ -94,7 +94,7 @@ This example retrieves all the files with the extension `.pdf` from a folder spe
     ]
 }
 ```
-!! Importing a folder of text files as
+!! Importing a folder of text files
 
 This example retrieves all the files with the extension `.txt` from a folder specified by a relative path. This folder is within the wiki's base directory, and the current config file is in a directory within the wiki's "tiddlers/" directory. So, in this case the path starts with "../../" to traverse upwards two directory levels, and then down into the "externalnotes/" directory. Each tiddler is set up with the following fields:
 
