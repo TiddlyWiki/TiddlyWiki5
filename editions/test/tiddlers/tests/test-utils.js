@@ -27,12 +27,12 @@ describe("Utility tests", function() {
 
 	it("should handle parsing a date", function() {
 		var pd = function(v) {
-			return $tw.utils.parseDate(v).toString();
+			return $tw.utils.parseDate(v).toUTCString();
 		};
-		expect(pd("20150428204930183")).toEqual("Tue Apr 28 2015 21:49:30 GMT+0100 (British Summer Time)");
-		expect(pd("-20150428204930183")).toEqual("Sun Apr 28 -2015 20:48:15 GMT-0001 (British Summer Time)");
-		expect(pd("00730428204930183")).toEqual("Fri Apr 28 0073 20:48:15 GMT-0001 (British Summer Time)");
-		expect(pd("-00730428204930183")).toEqual("Thu Apr 28 -0073 20:48:15 GMT-0001 (British Summer Time)");
+		expect(pd("20150428204930183")).toEqual("Tue, 28 Apr 2015 20:49:30 GMT");
+		expect(pd("-20150428204930183")).toEqual("Sun, 28 Apr -2015 20:49:30 GMT");
+		expect(pd("00730428204930183")).toEqual("Fri, 28 Apr 0073 20:49:30 GMT");
+		expect(pd("-00730428204930183")).toEqual("Thu, 28 Apr -0073 20:49:30 GMT");
 	});
 
 	it("should handle base64 encoding emojis", function() {
