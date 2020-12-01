@@ -1,0 +1,29 @@
+created: 20150117190213631
+modified: 20201201154211507
+tags: Concepts
+title: Date Fields
+type: text/vnd.tiddlywiki
+
+Certain [[fields|TiddlerFields]] of a tiddler are used to store dates and times. TiddlyWiki supports dates from the year -9999 to the year 9999.
+
+The two standard date fields are <<.field created>> and <<.field modified>>.
+
+Values of date fields are 17 or 18-character strings:
+
+* <<.from-version "5.1.23">> an optional minus sign `-` to indicate a negative year
+* 4 digits for the year
+* 2 digits for the month
+* 2 digits for the day
+* 2 digits for the hour
+* 2 digits for the minute
+* 2 digits for the second
+* 3 digits for the millisecond
+
+To avoid problems arising from differences of time zone, TiddlyWiki always uses [[UTC|https://en.wikipedia.org/wiki/Coordinated_Universal_Time]].
+
+As an example, the <<.field created>> field of this tiddler has the value <<.value """<$view field="created"/>""">>.
+
+Dates can be [[converted to other formats|DateFormat]] for display:
+
+<$macrocall $name="wikitext-example-without-html"
+src="""<$view field="created" format="date" template="DDD DDth MMM YYYY"/>""">
