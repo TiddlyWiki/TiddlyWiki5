@@ -42,7 +42,7 @@ modal-border: <<colour very-muted-foreground>>
 modal-footer-background: <<colour background>>
 modal-footer-border: <<colour background>>
 modal-header-border: <<colour very-muted-foreground>>
-muted-foreground: #464646
+muted-foreground: #98989D
 notification-background: <<colour dropdown-background>>
 notification-border: <<colour dropdown-background>>
 page-background: #323232
