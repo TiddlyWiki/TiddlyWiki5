@@ -96,7 +96,7 @@ This example retrieves all the files with the extension `.pdf` from a folder spe
 ```
 !! Importing a folder of text files as
 
-This example retrieves all the files with the extension `.txt` from a folder specified by a relative path. This folder is within the wiki's base directory, and the current config file is in a folder withing the wiki's "tiddlers/" directory. So, in this case the path starts with "../../". Each tiddler is set up with the following fields:
+This example retrieves all the files with the extension `.txt` from a folder specified by a relative path. This folder is within the wiki's base directory, and the current config file is in a directory within the wiki's "tiddlers/" directory. So, in this case the path starts with "../../" to traverse upwards two directory levels, and then down into the "externalnotes/" directory. Each tiddler is set up with the following fields:
 
 * ''title'' - set to the URI decoded base filename of the text file. [[URI decoding|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent]] allows characters like "/" to be included in titles by URI encoding them as "%2F"
 * ''created'' - set to the creation date/time of the text file
@@ -125,7 +125,7 @@ This example retrieves all the files with the extension `.txt` from a folder spe
 }
 ```
 
-This will load all text files in the `<wikiBase>/externalnotes` directory into the wiki as individual tiddlers. These can be a collection of snippets in various markup-languages. Then, the `type` field of each of these tiddlers can be changed to match their languages, "text/vnd.tiddlywiki" for wikitext, or "text/markdown" for markdown files. Then, the following lines in the config tiddlers will cause any changes to these tiddlers to be saved back to the directory they started from, as "*.txt" files with accompanying "*.txt.meta" files. These meta files will over-ride any fields from the config `tiddlywiki.files` file (such as the tiddler's `type` field) when the server is next retarted.
+This will load all text files in the `<wikiBase>/externalnotes/` directory into the wiki as individual tiddlers. These can be a collection of snippets in various markup-languages. Then, the `type` field of each of these tiddlers can be changed to match their languages For example, "text/vnd.tiddlywiki" for wikitext, or "text/markdown" for markdown files. Then, using $:/config/FileSystemPaths and $:/config/FileSystemExtentions tiddlers with the following lines we can cause any changes to these tiddlers to be saved back to the directory they started from, and as "*.txt" files with accompanying "*.txt.meta" files. These meta files will then over-ride any fields generated from the config `tiddlywiki.files` file (such as the tiddler's `type` field) when the server is restarted.
 
 From the examples in [[Customising Tiddler File Naming]] we see that the `[tag[externalnote]addprefix[../externalnotes/]]` filter in the $:/config/FileSystemPaths tiddler catches all tiddlers tagged with `externalnotes` (that have not matched an earlier filter). These tiddlers have "../externalnotes/" appended to their titles to render the final logical path. As this path starts in the wiki's "tiddlers/" folder by default (one folder above the folder holding the above config file) it differes by one set of "../".
 

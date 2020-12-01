@@ -30,7 +30,7 @@ This will store newly created system tiddlers that are not drafts of other tiddl
 
 Because there was a filter match, any `/` or `\` in the tiddler title is mapped to a path separator. With the above filters, the non-system, non-draft tiddler `some/thing/entirely/new` (with no tags) will be saved to `<wikiFolder>/tiddlers/wiki/some/thing/entirely/new.tid` (ie, the file `new.tid` in a directory called `entirely/`). Thus, $:/config/FileSystemPaths itself will end up in `tiddlers/_system/config/FileSystemPaths.tid` or `tiddlers\_system\config\FileSystemPaths.tid`, depending on the platform.
 
-! File System Extension
+! File System Extensions
 
 Normally, the file system extension of a tiddler on disk is determined by the existance of bad fields (multi-line fields other than the text field, fields that can be trimmed of spaces from the fron or back, etc), in which case the single-file ".json" tiddler-file format is used. If the tiddler does not have bad fields, then the `type` field is referenced to find a matching file-type. Tiddlywiki's boot engine defines a set of these tiddler-type to file-type relationships in the [[$:/boot/boot.js]] tiddler. Search for `// Add file extension information` to find the section of code that defines these relationships.
 
