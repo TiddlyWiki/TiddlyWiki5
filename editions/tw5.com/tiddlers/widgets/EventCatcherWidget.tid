@@ -1,5 +1,5 @@
 created: 20201123113532200
-modified: 20201123172753436
+modified: 20201202200719126
 tags: Widgets
 title: EventCatcherWidget
 type: text/vnd.tiddlywiki
@@ -11,10 +11,10 @@ The event catcher widget traps JavaScript events dispatched within its child con
 
 In order for the events to be trapped they must:
 
-* be of the type specified as a parameter to the event catcher widget.
+* be of one of the types specified as a parameter to the event catcher widget.
 * arise within a DOM node matching the selector specified as a parameter to the widget.
 
-Use of the event catcher widget is useful when using large numbers of other trigger widgets such as the ButtonWidget is causing performance problems. The workflow it enables is akin to what is referred to as "event delegation" in JavaScript parlance. 
+Use of the event catcher widget is beneficial when using large numbers of other trigger widgets such as the ButtonWidget is causing performance problems. The workflow it enables is akin to what is referred to as "event delegation" in JavaScript parlance. 
 
 //This is an advanced widget intended to be used by those familiar with HTML, CSS and JavaScript.//
 
@@ -23,9 +23,9 @@ Use of the event catcher widget is useful when using large numbers of other trig
 The content of the `<$eventcatcher>` widget is displayed normally.
 
 |!Attribute |!Description |
-|type |The JavaScript event type to be trapped, for example "click", or "dblclick" |
+|events |Space separated list of JavaScript events to be trapped, for example "click" or "click dblclick" |
 |selector |A CSS selector. Only events originating inside a DOM node with this selector will be trapped. |
-|actions |Action strings to be invoked when a matching event is trapped |
+|actions-* |Action strings to be invoked when a matching event is trapped. Each event is mapped to an action attribute name of the form `actions-"event"` where `event` represents the type of the event. For example: `actions-click` or `actions-dblclick` |
 |class |An optional CSS class name to be assigned to the HTML element |
 |tag |Optional. The html element the widget creates to capture the events, defaults to:<br>» `span` when parsed in inline-mode<br>» `div` when parsed in block-mode |
 
@@ -37,6 +37,8 @@ The following variables are made available to the actions:
 |`dom-*` |All DOM attributes of the node matching the given selector are made available as variables, with the prefix `dom-` |
 |`modifier` |The [[modifier Variable]] contains the Modifier Key held during the event (can be "normal", "ctrl", "shift", "alt" or combinations thereof) |
 |`event-mousebutton`|The mouse button (if any) used to trigger the event (can be "left", "right" or "middle"). Note that not all event types support the mousebutton property |
+|`event-type`|The type property of the JavaScript event |
+|`event-detail-*`|Any properties in the detail attribute of the event are made available with the prefix `event-detail-` |
 |`tv-popup-coords`|A co-ordinate string that can be used with the ActionPopupWidget to trigger a popup at the DOM node matching the selector where the event originated |
 |`tv-selectednode-posx`|`x` offset position of the selected DOM node |
 |`tv-selectednode-posy`|`y` offset position of the selected DOM node  |
@@ -52,11 +54,15 @@ The following variables are made available to the actions:
 This example uses the ActionLogWidget and will log the `data-item-id` attribute of the clicked DOM node to the browser's JavaScript [[console|Web Developer Tools]]
 
 ```
-\define myactions()
-<$action-log item=<<dom-data-item-id>>/>
+\define clickactions()
+<$action-log item=<<dom-data-item-id>> event=<<event-type>>/>
 \end
 
-<$eventcatcher type="click" selector=".item" actions=<<myactions>> tag="div">
+\define contextmenu-actions()
+<$action-log item=<<dom-data-item-id>> event=<<event-type>>/>
+\end
+
+<$eventcatcher events="click contextmenu" selector=".item" actions-click=<<clickactions>> actions-contextmenu=<<contextmenu-actions>> tag="div">
 
 <div class="item" data-item-id="item1">
 Click events here will be trapped
@@ -74,6 +80,6 @@ Not here
 And here
 </div>
 
-</$eventcatcher>"""
+</$eventcatcher>
 ```
 

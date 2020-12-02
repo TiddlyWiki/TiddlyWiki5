@@ -46,7 +46,7 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 	$tw.utils.each(this.types,function(type) {
 		domNode.addEventListener(type,function(event) {
 			var selector = self.getAttribute("selector"),
-				actions = self.getAttribute("actions"+type),
+				actions = self.getAttribute("actions-"+type),
 				selectedNode = event.target,
 				selectedNodeRect,
 				catcherNodeRect,
@@ -97,6 +97,14 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 						variables["event-mousebutton"] = "right";
 					}
 				}
+				variables["event-type"] = event.type;
+				if(typeof event.detail === "object" && !!event.detail) {
+					$tw.utils.each(event.detail,function(detailValue,detail) {
+						variables["event-detail-" + detail] = detailValue;
+					});
+				} else if(!!event.detail) {
+					variables["event-detail"] = event.detail;
+				}
 				self.invokeActionString(actions,self,event,variables);
 				event.preventDefault();
 				event.stopPropagation();
@@ -117,7 +125,7 @@ Compute the internal state of the widget
 EventWidget.prototype.execute = function() {
 	var self = this;
 	// Get attributes that require a refresh on change
-	this.types = this.getAttribute("types","").split(" ");
+	this.types = this.getAttribute("events","").split(" ");
 	this.elementTag = this.getAttribute("tag");
 	// Make child widgets
 	this.makeChildWidgets();
