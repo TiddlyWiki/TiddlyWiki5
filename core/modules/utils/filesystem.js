@@ -313,6 +313,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 	var self = this,
 		directory = options.directory || "",
 		extension = options.extension || "",
+		originalpath = options.wiki.extractTiddlerDataItem("$:/config/OriginalTiddlerPaths",title, ""),
 		filepath;	
 	// Check if any of the pathFilters applies
 	if(options.pathFilters && options.wiki) {
@@ -326,7 +327,11 @@ exports.generateTiddlerFilepath = function(title,options) {
 			}
 		});
 	}
-	if(!filepath) {
+	if(!filepath && originalpath !== "") {
+		//Use the originalpath without the extension
+		var ext = path.extname(originalpath);
+		filepath = originalpath.substring(0,originalpath.length - ext.length);;
+	} else if(!filepath) {
 		filepath = title;
 		// If the filepath already ends in the extension then remove it
 		if(filepath.substring(filepath.length - extension.length) === extension) {
@@ -367,8 +372,8 @@ exports.generateTiddlerFilepath = function(title,options) {
 		}
 		count++;
 	} while(fs.existsSync(fullPath));
-	//If the path does not start with the wiki directory, or if the last write failed
-	var encode = fullPath.indexOf($tw.boot.wikiPath) !== 0 || ((options.fileInfo || {writeError: false}).writeError == true);
+	//If the path does not start with the wikiPath directory or the wikiTiddlersPath directory, or if the last write failed
+	var encode = !(fullPath.indexOf($tw.boot.wikiPath) == 0 || fullPath.indexOf($tw.boot.wikiTiddlersPath) == 0) || ((options.fileInfo || {writeError: false}).writeError == true);
 	if(encode){
 		//encodeURIComponent() and then resolve to tiddler directory
 		fullPath = path.resolve(directory, encodeURIComponent(fullPath));

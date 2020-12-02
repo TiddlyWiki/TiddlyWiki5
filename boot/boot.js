@@ -1889,7 +1889,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			});
 		});
 		if(isEditableFile) {
-			tiddlers.push({filepath: pathname, hasMetaFile: !!metadata && !isTiddlerFile, tiddlers: fileTiddlers});
+			tiddlers.push({filepath: pathname, hasMetaFile: !!metadata && !isTiddlerFile, isEditableFile: true, tiddlers: fileTiddlers});
 		} else {
 			tiddlers.push({tiddlers: fileTiddlers});
 		}
@@ -2109,16 +2109,19 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
 	});
 	// Save the original tiddler file locations if requested
-	var config = wikiInfo.config || {};
-	if(config["retain-original-tiddler-path"]) {
-		var output = {}, relativePath;
+	var config = wikiInfo.config || {},
+		output = {}, relativePath, fileInfo;
 		for(var title in $tw.boot.files) {
-			relativePath = path.relative(resolvedWikiPath,$tw.boot.files[title].filepath);
-			output[title] =
-				path.sep === "/" ?
-				relativePath :
-				relativePath.split(path.sep).join("/");
+			fileInfo = $tw.boot.files[title];
+			if(fileInfo.isEditableFile || config["retain-original-tiddler-path"]) {
+				relativePath = path.relative(resolvedWikiPath,fileInfo.filepath);
+				output[title] =
+					path.sep === "/" ?
+					relativePath :
+					relativePath.split(path.sep).join("/");
+			}
 		}
+	if(Object.keys(output).length > 0){
 		$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
 	}
 	// Save the path to the tiddlers folder for the filesystemadaptor
