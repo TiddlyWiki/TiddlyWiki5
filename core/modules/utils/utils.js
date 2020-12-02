@@ -302,7 +302,7 @@ exports.formatDateString = function(date,template) {
 				return $tw.utils.pad($tw.utils.getHours12(date));
 			}],
 			[/^wYYYY/, function() {
-				return $tw.utils.getYearForWeekNo(date);
+				return $tw.utils.pad($tw.utils.getYearForWeekNo(date),4);
 			}],
 			[/^hh12/, function() {
 				return $tw.utils.getHours12(date);
@@ -311,7 +311,14 @@ exports.formatDateString = function(date,template) {
 				return date.getDate() + $tw.utils.getDaySuffix(date);
 			}],
 			[/^YYYY/, function() {
-				return date.getFullYear();
+				return $tw.utils.pad(date.getFullYear(),4);
+			}],
+			[/^aYYYY/, function() {
+				return $tw.utils.pad(Math.abs(date.getFullYear()),4);
+			}],
+			[/^\{era:([^,\|}]*)\|([^}\|]*)\|([^}]*)\}/, function(match) {
+				var year = date.getFullYear();
+				return year === 0 ? match[2] : (year < 0 ? match[1] : match[3]);
 			}],
 			[/^0hh/, function() {
 				return $tw.utils.pad(date.getHours());
@@ -400,7 +407,7 @@ exports.formatDateString = function(date,template) {
 		$tw.utils.each(matches, function(m) {
 			var match = m[0].exec(t);
 			if(match) {
-				matchString = m[1].call();
+				matchString = m[1].call(null,match);
 				t = t.substr(match[0].length);
 				return false;
 			}

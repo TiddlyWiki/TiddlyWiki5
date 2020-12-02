@@ -1,15 +1,16 @@
 created: 20150117190213631
-modified: 20150124214537000
+modified: 20201201154211507
 tags: Concepts
 title: Date Fields
 type: text/vnd.tiddlywiki
 
-Certain [[fields|TiddlerFields]] of a tiddler are used to store dates and times.
+Certain [[fields|TiddlerFields]] of a tiddler are used to store dates and times. TiddlyWiki supports dates from the year -9999 to the year 9999.
 
 The two standard date fields are <<.field created>> and <<.field modified>>.
 
-Values of date fields are 17-character strings:
+Values of date fields are 17 or 18-character strings:
 
+* <<.from-version "5.1.23">> an optional minus sign `-` to indicate a negative year
 * 4 digits for the year
 * 2 digits for the month
 * 2 digits for the day
