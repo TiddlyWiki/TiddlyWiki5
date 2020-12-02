@@ -51,7 +51,7 @@ Directory specifications in the `directories` array may take the following forms
 ** ''path'' - (required) the absolute or relative path to the directory containing the tiddler files (relative paths are interpreted relative to the path of the `tiddlywiki.files` file). Note that the directory is not recursively searched; sub-directories are ignored
 ** ''filesRegExp'' - (optional) a [[regular expression|https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions]] that matches the filenames of the files that should be processed within the directory
 ** ''isTiddlerFile'' - (required) if `true`, the file will be treated as a [[tiddler file|TiddlerFiles]] and deserialised to extract the tiddlers. Otherwise, the raw content of the file is assigned to the `text` field without any parsing
-** ''isEditableFile'' - (optional) if `true`, changes to the tiddler be saved back to the original file. The ''path'' of the current directory being read must be within the wiki's base directory, and a $:/config/FileSystemPath filter is required to add the correct logical path to the tiddler's title (see second **Example**). <<.from-version "5.1.23">>
+** ''isEditableFile'' - (optional) if `true`, changes to the tiddler be saved back to the original file. The tiddler will be saved back to the original filepath as long as it does not generate a result from the $:/config/FileSystemPath filters, which will override the final filepath generated if a result is returned from a filter. <<.from-version "5.1.23">>
 ** ''fields'' - (required) an object containing values that override or customise the fields provided in the tiddler file (see above)
 
 Fields can be overridden for particular files by creating a file with the same name plus the suffix `.meta` -- see TiddlerFiles.
@@ -102,7 +102,7 @@ This example retrieves all the files with the extension `.txt` from a folder spe
 * ''created'' - set to the creation date/time of the text file
 * ''modified'' - set to the modification date/time of the text file
 * ''type'' - set to `text/plain`
-* ''tags'' - set to `[[note]] [[externalnote]]` (using array notation)
+* ''tags'' - set to `[[note]] [[externalnote]] [[.txt]]` (using array notation)
 * ''text'' - not set, thus the content of the file is loaded as the text field
 
 ```
@@ -125,8 +125,8 @@ This example retrieves all the files with the extension `.txt` from a folder spe
 }
 ```
 
-This will load all text files in the `<wikiBase>/externalnotes/` directory into the wiki as individual tiddlers. These can be a collection of snippets in various markup-languages. Then, the `type` field of each of these tiddlers can be changed to match their languages For example, "text/vnd.tiddlywiki" for wikitext, or "text/markdown" for markdown files. Then, using $:/config/FileSystemPaths and $:/config/FileSystemExtentions tiddlers with the following lines we can cause any changes to these tiddlers to be saved back to the directory they started from, and as "*.txt" files with accompanying "*.txt.meta" files. These meta files will then over-ride any fields generated from the config `tiddlywiki.files` file (such as the tiddler's `type` field) when the server is restarted.
+This will load all text files in the `../../externalnotes/` directory into the wiki as individual tiddlers. These can be a collection of snippets in various markup-languages. Then, the `type` field of each of these tiddlers can be changed to match their languages For example, "text/vnd.tiddlywiki" for wikitext, or "text/markdown" for markdown files. Then, using $:/config/FileSystemPaths and $:/config/FileSystemExtentions tiddlers with the following lines we can cause any changes to these tiddlers to be saved back to the directory they started from, and also as "*.txt" files with accompanying "*.txt.meta" files. These meta files will be generated as required, and will then over-ride any fields generated from the config `tiddlywiki.files` file (such as the tiddler's `type` field) when the server is restarted.
 
-From the examples in [[Customising Tiddler File Naming]] we see that the `[tag[externalnote]addprefix[../externalnotes/]]` filter in the $:/config/FileSystemPaths tiddler catches all tiddlers tagged with `externalnotes` (that have not matched an earlier filter). These tiddlers have "../externalnotes/" appended to their titles to render the final logical path. As this path starts in the wiki's "tiddlers/" folder by default (one folder above the folder holding the above config file) it differes by one set of "../".
+From the examples in [[Customising Tiddler File Naming]] we see that the final `[!tag[externalnote]addprefix[wiki/]]` filter in the $:/config/FileSystemPaths tiddler excludes all tiddlers tagged with `externalnotes` (that have not matched an earlier filter). These tiddlers have their filepath retrieved from the $:/config/OriginalTiddlerPaths generated upon boot startup.
 
-Then, the `[tag[.txt]then[.txt]]` filter in the $:/config/FileSystemExtensions tiddler forces all these text files (which start with tag ".txt") to be saved back to disk as *.txt and accompanying *.txt.meta files (overriding the normal tiddler-type to file-type mapping). In this case, allowing the snippets of Tiddlywiki wikitext or markdown-text to be saved back to "text" *.txt files.
+Then, the `[tag[.txt]then[.txt]]` filter in the $:/config/FileSystemExtensions tiddler forces all these tiddlers to be saved back to disk as *.txt and accompanying *.txt.meta files (overriding the normal tiddler-type to file-type mapping). In this case, allowing the snippets of Tiddlywiki wikitext or markdown-text to be saved back to "text" *.txt files.

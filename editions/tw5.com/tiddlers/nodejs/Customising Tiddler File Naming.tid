@@ -4,13 +4,15 @@ tags: [[TiddlyWiki on Node.js]]
 title: Customising Tiddler File Naming
 type: text/vnd.tiddlywiki
 
-By default, a [[TiddlyWiki on Node.js]] instance using a [[wiki folder|TiddlyWikiFolders]] will create new tiddler files by using the sanitised and disambiguated title as filename and write them to the wiki folder's `tiddlers/` directory. The default file extension of `.tid` is used for tiddlers that are missing the `type` field, or for tiddlers of type "text/vnd.tiddlywiki". Tidders of other types are saved according to their IMIE types (defined at boot startup). Both the logical path (directory and file name) and the file extension can be customized independently by creating optional tiddlers: [[$:/config/FileSystemPaths]] and [[$:/config/FileSystemExtensions]].
+By default, a [[TiddlyWiki on Node.js]] instance using a [[wiki folder|TiddlyWikiFolders]] will create new tiddler files by using the sanitised and disambiguated title as filename and write them to the wiki folder's `tiddlers/` directory. This can be overridden by mapping a path in the wiki's tiddlywiki.info file, using a `default-tiddler-location` property in the `config` object. All filepath operations are relative to this `$tw.boot.wikiTiddlersPath` internal javacript variable.
+
+The default file extension of `.tid` is used for tiddlers that are missing the `type` field, or for tiddlers of type "text/vnd.tiddlywiki". Tidders of other types are saved according to their IMIE types (defined at boot startup). Both the logical path (directory and file name) and the file extension can be customized independently by creating optional tiddlers: [[$:/config/FileSystemPaths]] and [[$:/config/FileSystemExtensions]].
 
 ! File System Paths
 
 The logical path can be customised by creating a tiddler [[$:/config/FileSystemPaths]] containing one or more [[filter expressions|Filter Syntax]], each on a line of its own. Newly created tiddlers are matched to each filter in turn, and the first output of the first filter to produce any output is taken as a logical path to be used for the tiddler file. Tiddlers are also tested against the [[$:/config/FileSystemPaths]] on every save to disk, and if the logical path has changed a new file is created and the old file deleted.
 
-Tiddlers are limited to being written to the [[wiki folder|TiddlyWikiFolders]]. Any error saving a tiddler to disk, with a logical path that does not start with the wiki folder's path the most common error, causes the filepath to be encoded via Javascript's `encodeURIComponent()` method and the tiddler is saved as this file in the wiki folder's `tiddlers/` directory.
+Tiddlers are limited to being written to the [[wiki folder|TiddlyWikiFolders]]. Any error saving a tiddler to disk, with a logical path that does not start with the wiki folder's path the most common error, causes the filepath to be encoded via Javascript's `encodeURIComponent()` method and the tiddler is saved as this file in the wiki folder's `$tw.boot.wikiTiddlersPath` directory.
 
 Logical paths do not include the file-on-disk's extension (see below), and they can use `/` or `\` as directory separator (when generating the physical path, this is replaced by the correct separator for the platform ~TiddlyWiki is running on). If none of the filters matches, the logical path is simply the title with all occurences of `/` replaced by `_` (for backwards compatibility).
 
@@ -22,13 +24,12 @@ In both cases, the characters `<>~:"\|?*^` are replaced by `_` in order to guara
 [is[system]!has[draft.of]removeprefix[$:/]addprefix[_system/]]
 [is[draft]search-replace:g:regexp[/|\\],[_]addprefix[drafts/]]
 [tag[task]addprefix[mytasks/]]
-[tag[externalnote]addprefix[../externalnotes/]]
-[addprefix[wiki/]]
+[!tag[externalnote]addprefix[wiki/]]
 ```
 
-This will store newly created system tiddlers that are not drafts of other tiddlers in `tiddlers/_system` (after stripping the `$:/` prefix). Next, all drafts have the path seperator characters in their titles replaced by "_" and are stored in `tiddlers/drafts/`. Then tiddlers tagged [[task]] are stored in a subdirectory `tiddlers/mytasks/`. Next, all tiddlers tagged "externalnote" will be written to `<wikiFolder>/tiddlers/../externalnotes/`, which resolves to `<wikiFolder>/externalnotes/` and places these tiddlers outside of the tiddler folder. Use [[tiddlywiki.files Files|tiddlywiki.files_Files]] to reimport these tiddlers when the wiki server is restarted. Finally, all tidders will match the final `[addprefix[wiki/]]` storing these in `<wikiFolder>/tiddlers/wiki/`.
+This will store newly created system tiddlers that are not drafts of other tiddlers in `tiddlers/_system` (after stripping the `$:/` prefix). Next, all drafts have the path seperator characters in their titles replaced by "_" and are stored in `tiddlers/drafts/`. Then tiddlers tagged [[task]] are stored in a subdirectory `tiddlers/mytasks/`. Finally, all tidders not tagged with "externalnote" will match the final `[!tag[externalnote]addprefix[wiki/]]` storing these in `/wiki/`. In this example, tiddlers tagged with "externalnote" have been imported using [[tiddlywiki.files Files|tiddlywiki.files_Files]] with an "isEditableFile" flag set to true, causing the server to remember their original file path.
 
-Because there was a filter match, any `/` or `\` in the tiddler title is mapped to a path separator. With the above filters, the non-system, non-draft tiddler `some/thing/entirely/new` (with no tags) will be saved to `<wikiFolder>/tiddlers/wiki/some/thing/entirely/new.tid` (ie, the file `new.tid` in a directory called `entirely/`). Thus, $:/config/FileSystemPaths itself will end up in `tiddlers/_system/config/FileSystemPaths.tid` or `tiddlers\_system\config\FileSystemPaths.tid`, depending on the platform.
+Whenever a tiddler generates a $:/config/FileSystemPaths filter match, any `/` or `\` in the tiddler title is mapped to a path separator. With the above filters, the non-system, non-draft tiddler `some/thing/entirely/new` (with no tags) will be saved to `<wikiFolder>/tiddlers/wiki/some/thing/entirely/new.tid` (ie, the file `new.tid` in a directory called `entirely/`). Thus, $:/config/FileSystemPaths itself will end up in `tiddlers/_system/config/FileSystemPaths.tid` or `tiddlers\_system\config\FileSystemPaths.tid`, depending on the platform.
 
 ! File System Extensions
 

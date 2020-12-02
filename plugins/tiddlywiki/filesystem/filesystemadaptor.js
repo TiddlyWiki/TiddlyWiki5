@@ -52,16 +52,15 @@ The type is found by looking up the extension in $tw.config.fileExtensionInfo (e
 It is the responsibility of the filesystem adaptor to update this.boot.files for new files that are created.
 */
 FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
-	// See if we've already got information about this file
-	var title = tiddler.fields.title,
-		newInfo, fileInfo = this.boot.files[title];
 	// Always generate a fileInfo object when this fuction is called
+	var title = tiddler.fields.title, newInfo;
 	newInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
 		directory: this.boot.wikiTiddlersPath,
 		pathFilters: this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n"),
 		extFilters: this.wiki.getTiddlerText("$:/config/FileSystemExtensions","").split("\n"),
 		wiki: this.wiki,
-		fileInfo: fileInfo
+		fileInfo: this.boot.files[title],
+		originalpath: this.wiki.extractTiddlerDataItem("$:/config/OriginalTiddlerPaths",title, "")
 	});
 	this.boot.files[title] = newInfo;
 	callback(null,newInfo);
