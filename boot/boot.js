@@ -2119,6 +2119,23 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		}
 		$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
 	});
+	if ($tw.boot.wikiPath == wikiPath) {
+		// Save the original tiddler file locations if requested
+		var output = {}, relativePath, fileInfo;
+		for(var title in $tw.boot.files) {
+			fileInfo = $tw.boot.files[title];
+			if(fileInfo.isEditableFile) {
+				relativePath = path.relative($tw.boot.wikiTiddlersPath,fileInfo.filepath);
+				output[title] =
+					path.sep === "/" ?
+					relativePath :
+					relativePath.split(path.sep).join("/");
+			}
+		}
+		if(Object.keys(output).length > 0){
+			$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
+		}
+	}
 	// Load any plugins within the wiki folder
 	var wikiPluginsPath = path.resolve(wikiPath,$tw.config.wikiPluginsSubDir);
 	if(fs.existsSync(wikiPluginsPath)) {
@@ -2152,23 +2169,6 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 			}
 		}
 	}
-	if ($tw.boot.wikiPath == wikiPath) {
-		// Save the original tiddler file locations if requested
-		var output = {}, relativePath, fileInfo;
-		for(var title in $tw.boot.files) {
-			fileInfo = $tw.boot.files[title];
-			if(fileInfo.isEditableFile) {
-				relativePath = path.relative($tw.boot.wikiTiddlersPath,fileInfo.filepath);
-				output[title] =
-					path.sep === "/" ?
-					relativePath :
-					relativePath.split(path.sep).join("/");
-			}
-		}
-		if(Object.keys(output).length > 0){
-			$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
-		}
-	}
 	return wikiInfo;
 };
 
@@ -2182,7 +2182,7 @@ $tw.loadTiddlersNode = function() {
 	// Load any extra plugins
 	$tw.utils.each($tw.boot.extraPlugins,function(name) {
 		if(name.charAt(0) === "+") { // Relative path to plugin
-			var pluginFields = $tw.loadPluginFolder(name.substring(1));;
+			var pluginFields = $tw.loadPluginFolder(name.substring(1));
 			if(pluginFields) {
 				$tw.wiki.addTiddler(pluginFields);
 			}
