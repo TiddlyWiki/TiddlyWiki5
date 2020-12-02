@@ -38,7 +38,7 @@ name: tiddlywiki
 .cm-s-tiddlywiki .CodeMirror-line > span > span::-moz-selection { background: <<colour selection-background>>; }
 .cm-s-tiddlywiki span.cm-comment { color: <<colour muted-foreground>>; font-style:italic; font-weight:normal; }
 .cm-s-tiddlywiki .CodeMirror-activeline-background, .cm-s-tiddlywiki .CodeMirror-activeline-gutter .CodeMirror-linenumber { background: <<colour background>>; }
-.cm-s-tiddlywiki .CodeMirror-activeline .CodeMirror-linenumber.CodeMirror-gutter-elt { background: <<colour primary>>; color: <<colour foreground>>; }
+.cm-s-tiddlywiki .CodeMirror-activeline .CodeMirror-linenumber.CodeMirror-gutter-elt { background: <<colour primary>>; color: <<colour background>>; }
 .cm-s-tiddlywiki .CodeMirror-matchingbracket { background: <<colour primary>>; color:<<colour foreground>> !important; }
 .cm-s-tiddlywiki span.cm-matchhighlight { color: <<colour foreground>>; background-color: <<colour primary>>; font-weight: normal;}
 .cm-s-tiddlywiki span.cm-searching { color: <<colour foreground>>; background-color: <<colour primary>>; font-weight: normal;}
