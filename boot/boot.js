@@ -1894,7 +1894,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			});
 		});
 		if(isEditableFile) {
-			tiddlers.push({filepath: pathname, hasMetaFile: !!metadata && !isTiddlerFile, tiddlers: fileTiddlers});
+			tiddlers.push({filepath: pathname, hasMetaFile: !!metadata && !isTiddlerFile, isEditableFile: true, tiddlers: fileTiddlers});
 		} else {
 			tiddlers.push({tiddlers: fileTiddlers});
 		}
@@ -2074,6 +2074,11 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 	} else {
 		return null;
 	}
+	// Save the path to the tiddlers folder for the filesystemadaptor
+	var config = wikiInfo.config || {};
+	if($tw.boot.wikiPath == wikiPath) {
+		$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,config["default-tiddler-location"] || $tw.config.wikiTiddlersSubDir);
+	}
 	// Load any parent wikis
 	if(wikiInfo.includeWikis) {
 		parentPaths = parentPaths.slice(0);
@@ -2107,30 +2112,13 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 				$tw.boot.files[tiddler.title] = {
 					filepath: tiddlerFile.filepath,
 					type: tiddlerFile.type,
-					hasMetaFile: tiddlerFile.hasMetaFile
+					hasMetaFile: tiddlerFile.hasMetaFile,
+					isEditableFile: config["retain-original-tiddler-path"] || tiddlerFile.isEditableFile || tiddlerFile.filepath.indexOf($tw.boot.wikiTiddlersPath) !== 0
 				};
 			});
 		}
 		$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
 	});
-	// Save the original tiddler file locations if requested
-	var config = wikiInfo.config || {},
-		output = {}, relativePath, fileInfo;
-		for(var title in $tw.boot.files) {
-			fileInfo = $tw.boot.files[title];
-			if(fileInfo.filepath.indexOf(resolvedWikiPath) !== 0 || config["retain-original-tiddler-path"]) {
-				relativePath = path.relative(resolvedWikiPath,fileInfo.filepath);
-				output[title] =
-					path.sep === "/" ?
-					relativePath :
-					relativePath.split(path.sep).join("/");
-			}
-		}
-	if(Object.keys(output).length > 0){
-		$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
-	}
-	// Save the path to the tiddlers folder for the filesystemadaptor
-	$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,config["default-tiddler-location"] || $tw.config.wikiTiddlersSubDir);
 	// Load any plugins within the wiki folder
 	var wikiPluginsPath = path.resolve(wikiPath,$tw.config.wikiPluginsSubDir);
 	if(fs.existsSync(wikiPluginsPath)) {
@@ -2162,6 +2150,23 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 			if(pluginFields) {
 				$tw.wiki.addTiddler(pluginFields);
 			}
+		}
+	}
+	if ($tw.boot.wikiPath == wikiPath) {
+		// Save the original tiddler file locations if requested
+		var output = {}, relativePath, fileInfo;
+		for(var title in $tw.boot.files) {
+			fileInfo = $tw.boot.files[title];
+			if(fileInfo.isEditableFile) {
+				relativePath = path.relative($tw.boot.wikiTiddlersPath,fileInfo.filepath);
+				output[title] =
+					path.sep === "/" ?
+					relativePath :
+					relativePath.split(path.sep).join("/");
+			}
+		}
+		if(Object.keys(output).length > 0){
+			$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
 		}
 	}
 	return wikiInfo;
