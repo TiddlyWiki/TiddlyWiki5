@@ -113,7 +113,7 @@ selection-background: #3F638B
 selection-foreground: #ffffff
 wikilist-background: <<colour page-background>>
 wikilist-button-background: <<colour button-background>>
-wikilist-button-foreground: <<colour foreground>>
+wikilist-button-foreground: <<colour background>>
 wikilist-button-open: #32D74B
 wikilist-button-open-hover: #32D74B
 wikilist-button-reveal: #0A84FF
