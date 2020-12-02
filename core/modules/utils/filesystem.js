@@ -206,12 +206,14 @@ Create a fileInfo object for saving a tiddler:
 	filepath: the absolute path to the file containing the tiddler
 	type: the type of the tiddler file on disk (NOT the type of the tiddler)
 	hasMetaFile: true if the file also has a companion .meta file
+	isEditableFile: true if the tiddler was loaded via non-standard options & marked editable
 Options include:
 	directory: absolute path of root directory to which we are saving
 	pathFilters: optional array of filters to be used to generate the base path
 	extFilters: optional array of filters to be used to generate the base path
 	wiki: optional wiki for evaluating the pathFilters,
 	fileInfo: an existing fileInfo to check against
+	originalpath: a preferred filepath if no pathFilters match
 */
 exports.generateTiddlerFileInfo = function(tiddler,options) {
 	var fileInfo = {}, metaExt;
@@ -271,8 +273,13 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 		directory: options.directory,
 		pathFilters: options.pathFilters,
 		wiki: options.wiki,
-		fileInfo: options.fileInfo
+		fileInfo: options.fileInfo,
+		originalpath: options.originalpath
 	});
+	// Propigate the isEditableFile flag
+	if(options.fileInfo) {
+		fileInfo.isEditableFile = options.fileInfo.isEditableFile || false;
+	}
 	return fileInfo;
 };
 
@@ -313,7 +320,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 	var self = this,
 		directory = options.directory || "",
 		extension = options.extension || "",
-		originalpath = options.wiki.extractTiddlerDataItem("$:/config/OriginalTiddlerPaths",title, ""),
+		originalpath = options.originalpath || "",
 		filepath;	
 	// Check if any of the pathFilters applies
 	if(options.pathFilters && options.wiki) {
