@@ -97,13 +97,13 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 						variables["event-mousebutton"] = "right";
 					}
 				}
-				variables["event-type"] = event.type;
+				variables["event-type"] = event.type.toString();
 				if(typeof event.detail === "object" && !!event.detail) {
 					$tw.utils.each(event.detail,function(detailValue,detail) {
-						variables["event-detail-" + detail] = detailValue;
+						variables["event-detail-" + detail] = detailValue.toString();
 					});
 				} else if(!!event.detail) {
-					variables["event-detail"] = event.detail;
+					variables["event-detail"] = event.detail.toString();
 				}
 				self.invokeActionString(actions,self,event,variables);
 				event.preventDefault();
