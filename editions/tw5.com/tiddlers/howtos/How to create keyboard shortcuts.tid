@@ -2,9 +2,7 @@ tags: [[Customise TiddlyWiki]] Learning
 title: How to create keyboard shortcuts
 type: text/vnd.tiddlywiki
 
-<br>
 <<.tip """[[TiddlyWiki]] distinguishes two types of keyboard shortcuts. Those that are limited to work within <$macrocall $name=".tag" _="input"/> fields or <$macrocall $name=".tag" _="textareas"/> which are handled by the <$macrocall $name=".wlink" to="KeyboardWidget"/> widget and keyboard shortcuts that work globally - which means that only the page needs to have focus in order for them to be accessible. The latter are handled by a mechanism that starts to work when a wiki is loaded""">>
-
 
 !! The configuration mechanism is the same for both shortcut-types
 
@@ -36,8 +34,6 @@ In the [[Keyboard Shortcuts Tab|$:/core/ui/ControlPanel/KeyboardShortcuts]] the 
 
 <<.tip """Note that those platform-specific tiddlers don't have to be created manually if the ''ShortcutInfo'' tiddler as mentioned above is created first and the shortcut is configured in the ~ControlPanel""">>
 
-<br>
-
 !! At this point the shortcut is defined and its ''actions'' can be configured
 
 !! Using the [[Keyboard Widget|KeyboardWidget]]
@@ -62,8 +58,6 @@ In the [[Keyboard Shortcuts Tab|$:/core/ui/ControlPanel/KeyboardShortcuts]] the 
 
 > If actions are defined , the <<.wlink KeyboardWidget>> widget will invoke the actions defined in its <<.attr actions>> attribute when it detects the key-combination defined in its <<.attr key>> attribute being pressed in any <<.tag input>> or <<.tag textarea>> field within its scope
 
-<br>
-
 !! Using global Keyboard Shortcuts
 
 > The actions for ''global'' keyboard shortcuts are stored in the ''text'' field of tiddlers tagged with <<tag $:/tags/KeyboardShortcut>>
@@ -74,7 +68,6 @@ In the [[Keyboard Shortcuts Tab|$:/core/ui/ControlPanel/KeyboardShortcuts]] the 
 
 > If the tiddler has the tag <<tag $:/tags/KeyboardShortcut>>, the field ''key'' with the [[Keyboard Shortcut Descriptor]] as its value and some actions in its text field, the actions will be triggered when the mechanism detects the configured key-combination
 
-<br>
 <$macrocall $name=".tip" _="""''Macros'' defined ''outside'' a global keyboard-shortcut (through a tiddler tagged `$:/tags/Macro`) need to be ''imported'' in order to be accessible.
 The [[import pragma|Pragma]] can be used for that"""/>
 
@@ -88,7 +81,6 @@ If the tiddler that contains the macro definition is known and - for example - t
 \import [[my-macro-tiddler]]
 </pre>
 
-<br>
 <$macrocall $name=".tip" _="""Some actions require to be wrapped within a <<.wlink NavigatorWidget>> widget. That is necessary for the following list of widgets and messages in order to work if used within global keyboard shortcuts"""/>
 
 !!! Widgets
