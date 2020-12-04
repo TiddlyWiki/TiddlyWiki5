@@ -15,6 +15,17 @@ name: tiddlywiki
 \define set-fat-cursor-background()
 <$macrocall $name="set-fat-cursor-background-colours" palette={{$:/palette}}/>
 \end
+\define set-selection-background-css(colour,colourA,colourB)
+<$set name="backgroundColour" value=<<contrastcolour target:"""$colour$""" fallbackTarget:"""""" colourA:"""$colourA$""" colourB:"""$colourB$""">>>
+.cm-s-tiddlywiki div.CodeMirror-selected, .cm-s-tiddlywiki .CodeMirror-selectedtext, .cm-s-tiddlywiki .CodeMirror-selected, .cm-s-tiddlywiki .CodeMirror-line::selection, .cm-s-tiddlywiki .CodeMirror-line > span::selection, .cm-s-tiddlywiki .CodeMirror-line > span > span::selection, .cm-s-tiddlywiki .CodeMirror-line::-moz-selection, .cm-s-tiddlywiki .CodeMirror-line > span::-moz-selection, .cm-s-tiddlywiki .CodeMirror-line > span > span::-moz-selection { background: <<backgroundColour>> ; }
+</$set>
+\end
+\define set-selection-background-colours(palette)
+<$macrocall $name="set-selection-background-css" colour={{$palette$##foreground}} colourA="#073642" colourB="#eee8d5"/>
+\end
+\define set-selection-background()
+<$macrocall $name="set-selection-background-colours" palette={{$:/palette}}/>
+\end
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
@@ -42,15 +53,6 @@ name: tiddlywiki
 .cm-s-tiddlywiki .CodeMirror-gutters {background: <<colour tiddler-editor-background>>; border-right: 0px;}
 .cm-s-tiddlywiki .CodeMirror-linenumber {color: <<colour foreground>>;}
 .cm-s-tiddlywiki .CodeMirror-cursor { border-left: 2px solid <<colour foreground>>; }
-.cm-s-tiddlywiki div.CodeMirror-selected { background: <<colour selection-background>>; }
-.cm-s-tiddlywiki .CodeMirror-selectedtext,
-.cm-s-tiddlywiki .CodeMirror-selected,
-.cm-s-tiddlywiki .CodeMirror-line::selection,
-.cm-s-tiddlywiki .CodeMirror-line > span::selection,
-.cm-s-tiddlywiki .CodeMirror-line > span > span::selection,
-.cm-s-tiddlywiki .CodeMirror-line::-moz-selection,
-.cm-s-tiddlywiki .CodeMirror-line > span::-moz-selection,
-.cm-s-tiddlywiki .CodeMirror-line > span > span::-moz-selection { background: <<colour selection-background>>; }
 .cm-s-tiddlywiki span.cm-comment { color: <<colour muted-foreground>>; font-style:italic; font-weight:normal; }
 .cm-s-tiddlywiki .CodeMirror-activeline-background, .cm-s-tiddlywiki .CodeMirror-activeline-gutter .CodeMirror-linenumber { background: rgba(127,127,127,0.2); }
 .cm-s-tiddlywiki span.cm-matchhighlight { color: <<colour background>>; background-color: <<colour primary>>; font-weight: normal;}
@@ -100,3 +102,4 @@ name: tiddlywiki
 .cm-s-tiddlywiki .CodeMirror-nonmatchingbracket { color: #dc322f; }
 .cm-s-tiddlywiki .cm-searching { background: rgba(243, 155, 53, .3); outline: 1px solid #F39B35; }
 <<set-fat-cursor-background>>
+<<set-selection-background>>
