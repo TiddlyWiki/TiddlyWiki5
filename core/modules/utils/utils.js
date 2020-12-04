@@ -564,7 +564,7 @@ exports.escape = function(ch) {
 
 // Turns a string into a legal JavaScript string
 // Copied from peg.js, thanks to David Majda
-exports.stringify = function(s) {
+exports.stringify = function(s, rawUnicode) {
 	/*
 	* ECMA-262, 5th ed., 7.8.4: All characters may appear literally in a string
 	* literal except for the closing quote character, backslash, carriage return,
@@ -573,19 +573,21 @@ exports.stringify = function(s) {
 	*
 	* For portability, we also escape all non-ASCII characters.
 	*/
+	var regex = rawUnicode ? /[\x00-\x1f]/g : /[\x00-\x1f\x80-\uFFFF]/g;
 	return (s || "")
 		.replace(/\\/g, '\\\\')            // backslash
 		.replace(/"/g, '\\"')              // double quote character
 		.replace(/'/g, "\\'")              // single quote character
 		.replace(/\r/g, '\\r')             // carriage return
 		.replace(/\n/g, '\\n')             // line feed
-		.replace(/[\x00-\x1f\x80-\uFFFF]/g, exports.escape); // non-ASCII characters
+		.replace(regex, exports.escape);   // non-ASCII characters
 };
 
 // Turns a string into a legal JSON string
 // Derived from peg.js, thanks to David Majda
-exports.jsonStringify = function(s) {
+exports.jsonStringify = function(s, rawUnicode) {
 	// See http://www.json.org/
+	var regex = rawUnicode ? /[\x00-\x1f]/g : /[\x00-\x1f\x80-\uFFFF]/g;
 	return (s || "")
 		.replace(/\\/g, '\\\\')            // backslash
 		.replace(/"/g, '\\"')              // double quote character
@@ -594,7 +596,7 @@ exports.jsonStringify = function(s) {
 		.replace(/\x08/g, '\\b')           // backspace
 		.replace(/\x0c/g, '\\f')           // formfeed
 		.replace(/\t/g, '\\t')             // tab
-		.replace(/[\x00-\x1f\x80-\uFFFF]/g,function(s) {
+		.replace(regex,function(s) {
 			return '\\u' + $tw.utils.pad(s.charCodeAt(0).toString(16).toUpperCase(),4);
 		}); // non-ASCII characters
 };
