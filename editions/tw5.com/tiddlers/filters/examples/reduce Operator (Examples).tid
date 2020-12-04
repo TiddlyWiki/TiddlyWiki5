@@ -1,5 +1,5 @@
 created: 20201004154413968
-modified: 20201204123859254
+modified: 20201204131137081
 tags: [[Operator Examples]] [[reduce Operator]]
 title: reduce Operator (Examples)
 type: text/vnd.tiddlywiki
@@ -42,7 +42,7 @@ Using `<index>` to act differently on the first item than the rest:
 
 <<.operator-example 3 "[tag[shopping]reduce<join-with-commas>]">>
 
-Empty input, no suffix:
+Empty input, no second parameter:
 
 <<.operator-example 4 "[tag[non-existent]reduce<add-price>]">>
 
