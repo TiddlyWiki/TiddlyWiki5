@@ -1,0 +1,17 @@
+title: $:/core/ui/TagPickerTagTemplate
+
+\whitespace trim
+<$button class=<<button-classes>> tag="a" tooltip={{$:/language/EditTemplate/Tags/Add/Button/Hint}}>
+<$list filter="[<saveTiddler>minlength[1]]">
+<$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter="[<tag>]"/>
+</$list>
+<$set name="currentTiddlerCSSEscaped" value={{{ [<saveTiddler>escapecss[]] }}}>
+<$action-sendmessage $message="tm-focus-selector" $param=<<get-tagpicker-focus-selector>> preventScroll="true"/>
+</$set>
+<<delete-tag-state-tiddlers>>
+<$list filter="[<refreshTitle>minlength[1]]">
+<$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
+</$list>
+<<actions>>
+<$macrocall $name="tag-pill-inner" tag=<<currentTiddler>> icon={{{ [<tag>get[icon]] }}} colour={{{ [<tag>get[color]] }}} fallbackTarget=<<fallbackTarget>> colourA=<<colourA>> colourB=<<colourB>> element-tag="span" element-attributes="" actions=<<actions>>/>
+</$button>
