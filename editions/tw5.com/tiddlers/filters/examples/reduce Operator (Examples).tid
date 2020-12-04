@@ -1,5 +1,5 @@
 created: 20201004154413968
-modified: 20201006181831622
+modified: 20201204131137081
 tags: [[Operator Examples]] [[reduce Operator]]
 title: reduce Operator (Examples)
 type: text/vnd.tiddlywiki
@@ -42,7 +42,7 @@ Using `<index>` to act differently on the first item than the rest:
 
 <<.operator-example 3 "[tag[shopping]reduce<join-with-commas>]">>
 
-Empty input, no suffix:
+Empty input, no second parameter:
 
 <<.operator-example 4 "[tag[non-existent]reduce<add-price>]">>
 
@@ -50,12 +50,12 @@ Note how the output contains a single item with no text. This is not "empty outp
 
 <$macrocall $name=".tip" _=<<reduce-tip>> />
 
-Empty input, no suffix, followed by <<.op else>>:
+Empty input, no second parameter, followed by <<.op else>>:
 
 <<.operator-example 5 "[tag[non-existent]reduce<add-price>else[0]]">>
 
-Note how the output still contains a single item with no text: <<.op else>> did not trigger. If you want the value to be 0 when <<.op reduce>> has no items to process, you need to specify 0 as the initial value by passing it as a suffix to <<.op reduce>>.
+Note how the output still contains a single item with no text: <<.op else>> did not trigger. If you want the value to be 0 when <<.op reduce>> has no items to process, you need to specify 0 as the initial value by passing it as a second parameter to <<.op reduce>>.
 
-Empty input, suffix provided:
+Empty input, second parameter provided:
 
-<<.operator-example 6 "[tag[non-existent]reduce:0<add-price>]">>
+<<.operator-example 6 "[tag[non-existent]reduce<add-price>,[0]]">>
