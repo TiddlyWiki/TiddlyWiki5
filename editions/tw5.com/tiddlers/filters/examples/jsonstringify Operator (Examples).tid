@@ -5,3 +5,5 @@ title: jsonstringify Operator (Examples)
 type: text/vnd.tiddlywiki
 
 <<.operator-example 1 """[[Title with "double quotes" and single ' and \backslash]] +[jsonstringify[]]""">>
+<<.operator-example 2 """[[Accents and emojis -> äñøßπ ⌛🎄🍪🍓 without suffix]] +[jsonstringify[]]""">>
+<<.operator-example 3 """[[Accents and emojis -> äñøßπ ⌛🎄🍪🍓 with rawunicode suffix]] +[jsonstringify:rawunicode[]]""">>
