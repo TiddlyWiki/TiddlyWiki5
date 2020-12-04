@@ -19,7 +19,7 @@ Export our filter prefix function
 exports.and = function(operationSubFunction) {
 	return function(results,source,widget) {
 		// This replaces all the elements of the array, but keeps the actual array so that references to it are preserved
-		source = $tw.wiki.makeTiddlerIterator(results);
+		source = widget.wiki.makeTiddlerIterator(results);
 		results.splice(0,results.length);
 		$tw.utils.pushTop(results,operationSubFunction(source,widget));
 	};
