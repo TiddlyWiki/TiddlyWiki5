@@ -3,22 +3,24 @@ module-type: utils
 title: $:/core/modules/utils/linkedlist.js
 type: application/javascript
 
-\*/
+This is a doubly-linked indexed list intended for manipulation, particularly
+pushTop, which it does with significantly better performance than an array.
 
-exports.LinkedList = function() {
+\*/
+(function(){
+
+function LinkedList() {
 	this.clear();
 };
 
-var Lp = exports.LinkedList.prototype;
-
-Lp.clear = function() {
+LinkedList.prototype.clear = function() {
 	this.index = Object.create(null);
 	this.next = this;
 	this.prev = this;
 	this.length = 0;
 };
 
-Lp.remove = function(value) {
+LinkedList.prototype.remove = function(value) {
 	if ($tw.utils.isArray(value)) {
 		for (var t=0; t<value.length; t++) {
 			this._removeOne(value[t]);
@@ -28,19 +30,20 @@ Lp.remove = function(value) {
 	}
 };
 
-Lp._removeOne = function(value) {
+LinkedList.prototype._removeOne = function(value) {
 	var node = this.index[value];
 	if (node) {
 		node.prev.next = node.next;
 		node.next.prev = node.prev;
 		this.length -= 1;
-		// Point the index to the next copy of the value, maybe nothing.
+		// Point index to the next instance of the same value, maybe nothing.
 		this.index[value] = node.copy;
 	}
 	return node;
 };
 
-Lp._linkToEnd = function(node) {
+LinkedList.prototype._linkToEnd = function(node) {
+	// Sticks the given node onto the end of the list.
 	this.prev.next = node;
 	node.prev = this.prev;
 	this.prev = node;
@@ -48,7 +51,7 @@ Lp._linkToEnd = function(node) {
 	this.length += 1;
 };
 
-Lp.push = function(/* values */) {
+LinkedList.prototype.push = function(/* values */) {
 	for (var i = 0; i < arguments.length; i++) {
 		var value = arguments[i];
 		var node = {value: value};
@@ -68,7 +71,7 @@ Lp.push = function(/* values */) {
 	}
 };
 
-Lp.pushTop = function(value) {
+LinkedList.prototype.pushTop = function(value) {
 	if ($tw.utils.isArray(value)) {
 		for (var t=0; t<value.length; t++) {
 			this._removeOne(value[t]);
@@ -84,18 +87,20 @@ Lp.pushTop = function(value) {
 	}
 };
 
-Lp.each = function(callback) {
-	var ptr = this.next;
-	while (ptr !== this) {
+LinkedList.prototype.each = function(callback) {
+	for (var ptr = this.next; ptr !== this; ptr = ptr.next) {
 		callback(ptr.value);
-		ptr = ptr.next;
 	}
 };
 
-Lp.toArray = function() {
+LinkedList.prototype.toArray = function() {
 	var output = [];
 	for (var ptr = this.next; ptr !== this; ptr = ptr.next) {
 		output.push(ptr.value);
 	}
 	return output;
 };
+
+exports.LinkedList = LinkedList;
+
+})();
