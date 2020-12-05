@@ -11,9 +11,7 @@ alert-highlight: #B48EAD
 alert-muted-foreground: #4C566A
 background: #3b4252
 blockquote-bar: <<colour muted-foreground>>
-button-background: #4C566A
-button-foreground: #D8DEE9
-button-border: transparent
+button-foreground: <<colour page-background>>
 code-background: #2E3440
 code-border: #2E3440
 code-foreground: #BF616A
@@ -62,7 +60,9 @@ pre-border: #2E3440
 primary: #5E81AC
 select-tag-background: #3b4252
 select-tag-foreground: <<colour foreground>>
-sidebar-button-foreground: <<colour foreground>>
+selection-background: #5E81AC
+selection-foreground: <<colour foreground>>
+sidebar-button-foreground: <<colour page-background>>
 sidebar-controls-foreground-hover: #D8DEE9
 sidebar-controls-foreground: #4C566A
 sidebar-foreground-shadow: transparent
