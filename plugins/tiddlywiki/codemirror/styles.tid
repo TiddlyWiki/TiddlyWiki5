@@ -21,7 +21,7 @@ name: tiddlywiki
 </$set>
 \end
 \define set-selection-background-colours(palette)
-<$macrocall $name="set-selection-background-css" colour={{$palette$##foreground}} colourA="#073642" colourB="#eee8d5"/>
+<$macrocall $name="set-selection-background-css" colour={{$palette$##foreground}} colourA={{{ [{$palette$##selection-background}!match[]!prefix[<<]!suffix[>>]] ~#073642 }}} colourB={{{ [{$palette$##selection-background}!match[]!prefix[<<]!suffix[>>]] ~#eee8d5 }}}/>
 \end
 \define set-selection-background()
 <$macrocall $name="set-selection-background-colours" palette={{$:/palette}}/>
