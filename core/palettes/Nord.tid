@@ -62,8 +62,8 @@ pre-border: #2E3440
 primary: #5E81AC
 select-tag-background: #3b4252
 select-tag-foreground: <<colour foreground>>
-selection-background: #A3BE8C
-selection-foreground: <<colour background>>
+selection-background: <<colour primary>>
+selection-foreground: <<colour foreground>>
 sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: #D8DEE9
 sidebar-controls-foreground: #4C566A
