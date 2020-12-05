@@ -13,12 +13,12 @@ module-type: filterrunprefix
 /*
 Export our filter function
 */
-exports.filter = function(operationSubFunction) {
+exports.filter = function(operationSubFunction,options) {
 	return function(results,source,widget) {
 		if(results.length > 0) {
 			var resultsToRemove = [];
 			results.each(function(result) {
-				var filtered = operationSubFunction($tw.wiki.makeTiddlerIterator([result]),widget);
+				var filtered = operationSubFunction(options.wiki.makeTiddlerIterator([result]),widget);
 				if(filtered.length === 0) {
 					resultsToRemove.push(result);
 				}
