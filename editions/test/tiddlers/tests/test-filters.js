@@ -459,7 +459,7 @@ function runTests(wiki) {
 	it("should handle indirect operands", function() {
 		expect(wiki.filterTiddlers("[prefix{Tiddler8}] +[sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 		expect(wiki.filterTiddlers("[modifier{Tiddler8!!test-field}] +[sort[title]]").join(",")).toBe("TiddlerOne");
-		var fakeWidget = {getVariable: function() {return "Tiddler Three";}};
+		var fakeWidget = {wiki: wiki, getVariable: function() {return "Tiddler Three";}};
 		expect(wiki.filterTiddlers("[modifier{!!modifier}] +[sort[title]]",fakeWidget).join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three");
 	});
 
