@@ -18,20 +18,6 @@ Lp.clear = function() {
 	this.length = 0;
 };
 
-Lp.pushOne = function(value) {
-	var node = this.index[value];
-	if (node) {
-		// If it already exists, pluck it out.
-		node.prev.next = node.next;
-		node.next.prev = node.prev;
-		this.length -= 1;
-	} else {
-		node = {value: value};
-		this.index[value] = node;
-	}
-	this._linkToEnd(node);
-};
-
 Lp.remove = function(value) {
 	if ($tw.utils.isArray(value)) {
 		for (var t=0; t<value.length; t++) {
@@ -45,11 +31,13 @@ Lp.remove = function(value) {
 Lp._removeOne = function(value) {
 	var node = this.index[value];
 	if (node) {
-		this.index[value] = undefined;
 		node.prev.next = node.next;
 		node.next.prev = node.prev;
 		this.length -= 1;
+		// Point the index to the next copy of the value, maybe nothing.
+		this.index[value] = node.copy;
 	}
+	return node;
 };
 
 Lp._linkToEnd = function(node) {
@@ -64,12 +52,18 @@ Lp.push = function(/* values */) {
 	for (var i = 0; i < arguments.length; i++) {
 		var value = arguments[i];
 		var node = {value: value};
+		var preexistingNode = this.index[value];
 		this._linkToEnd(node);
-		if (!this.index[value]) {
-			this.index[value] = node;
-		} else {
+		if (preexistingNode) {
 			// We want to keep pointing to the first instance, but we want
-			// to have that instance point to the new one.
+			// to have that instance (or chain of instances) point to the
+			// new one.
+			while (preexistingNode.copy) {
+				preexistingNode = preexistingNode.copy;
+			}
+			preexistingNode.copy = node;
+		} else {
+			this.index[value] = node;
 		}
 	}
 };
@@ -81,7 +75,12 @@ Lp.pushTop = function(value) {
 		}
 		this.push.apply(this, value);
 	} else {
-		this.pushOne(value);
+		var node = this._removeOne(value);
+		if (!node) {
+			node = {value: value};
+			this.index[value] = node;
+		}
+		this._linkToEnd(node);
 	}
 };
 
