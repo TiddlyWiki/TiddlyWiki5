@@ -15,14 +15,15 @@ function LinkedList() {
 
 LinkedList.prototype.clear = function() {
 	this.index = Object.create(null);
+	// LinkedList performs the duty of both the head and tail node
 	this.next = this;
 	this.prev = this;
 	this.length = 0;
 };
 
 LinkedList.prototype.remove = function(value) {
-	if ($tw.utils.isArray(value)) {
-		for (var t=0; t<value.length; t++) {
+	if($tw.utils.isArray(value)) {
+		for(var t=0; t<value.length; t++) {
 			this._removeOne(value[t]);
 		}
 	} else {
@@ -32,7 +33,7 @@ LinkedList.prototype.remove = function(value) {
 
 LinkedList.prototype._removeOne = function(value) {
 	var node = this.index[value];
-	if (node) {
+	if(node) {
 		node.prev.next = node.next;
 		node.next.prev = node.prev;
 		this.length -= 1;
@@ -52,12 +53,12 @@ LinkedList.prototype._linkToEnd = function(node) {
 };
 
 LinkedList.prototype.push = function(/* values */) {
-	for (var i = 0; i < arguments.length; i++) {
+	for(var i = 0; i < arguments.length; i++) {
 		var value = arguments[i];
 		var node = {value: value};
 		var preexistingNode = this.index[value];
 		this._linkToEnd(node);
-		if (preexistingNode) {
+		if(preexistingNode) {
 			// We want to keep pointing to the first instance, but we want
 			// to have that instance (or chain of instances) point to the
 			// new one.
@@ -72,14 +73,14 @@ LinkedList.prototype.push = function(/* values */) {
 };
 
 LinkedList.prototype.pushTop = function(value) {
-	if ($tw.utils.isArray(value)) {
-		for (var t=0; t<value.length; t++) {
+	if($tw.utils.isArray(value)) {
+		for(var t=0; t<value.length; t++) {
 			this._removeOne(value[t]);
 		}
 		this.push.apply(this, value);
 	} else {
 		var node = this._removeOne(value);
-		if (!node) {
+		if(!node) {
 			node = {value: value};
 			this.index[value] = node;
 		}
@@ -88,14 +89,14 @@ LinkedList.prototype.pushTop = function(value) {
 };
 
 LinkedList.prototype.each = function(callback) {
-	for (var ptr = this.next; ptr !== this; ptr = ptr.next) {
+	for(var ptr = this.next; ptr !== this; ptr = ptr.next) {
 		callback(ptr.value);
 	}
 };
 
 LinkedList.prototype.toArray = function() {
 	var output = [];
-	for (var ptr = this.next; ptr !== this; ptr = ptr.next) {
+	for(var ptr = this.next; ptr !== this; ptr = ptr.next) {
 		output.push(ptr.value);
 	}
 	return output;
