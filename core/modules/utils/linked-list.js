@@ -83,6 +83,17 @@ LinkedList.prototype.pushTop = function(value) {
 		if(!node) {
 			node = {value: value};
 			this.index[value] = node;
+		} else {
+			// Put this node at the end of the copy chain.
+			var preexistingNode = node;
+			while(preexistingNode.copy) {
+				preexistingNode = preexistingNode.copy;
+			}
+			// The order of these three statements is important,
+			// because sometimes preexistingNode == node.
+			preexistingNode.copy = node;
+			this.index[value] = node.copy;
+			node.copy = undefined;
 		}
 		this._linkToEnd(node);
 	}

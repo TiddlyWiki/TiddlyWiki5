@@ -51,6 +51,20 @@ describe("LinkedList class tests", function() {
 		expect(list.length).toBe(7);
 	});
 
+	it("can handle particularly nasty pushTop pitfall", function() {
+		var list = new $tw.utils.LinkedList();
+		list.push('A', 'B', 'A', 'C');
+		list.pushTop('A'); // BACA
+		list.pushTop('X'); // BACAX
+		list.remove('A');  // BCAX
+		list.pushTop('A'); // BCXA
+		list.remove('A');  // BCX
+		// But! The way I initially coded the copy chains, a mystery A could
+		// hang around.
+		expect(list.toArray()).toEqual(['B', 'C', 'X']);
+		expect(list.length).toBe(3);
+	});
+
 	it("can push", function() {
 		var list = new $tw.utils.LinkedList();
 		list.push('A', 'B', 'C');
