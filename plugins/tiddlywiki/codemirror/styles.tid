@@ -53,7 +53,7 @@ name: tiddlywiki
 .cm-s-tiddlywiki .CodeMirror-gutters {background: <<colour tiddler-editor-background>>; border-right: 0px;}
 .cm-s-tiddlywiki .CodeMirror-linenumber {color: <<colour foreground>>;}
 .cm-s-tiddlywiki .CodeMirror-cursor { border-left: 2px solid <<colour foreground>>; }
-.cm-s-tiddlywiki span.cm-comment { color: <<colour muted-foreground>>; font-style:italic; font-weight:normal; }
+.cm-s-tiddlywiki span.cm-comment { color: #586e75; font-style:italic; font-weight:normal; }
 .cm-s-tiddlywiki .CodeMirror-activeline-background, .cm-s-tiddlywiki .CodeMirror-activeline-gutter .CodeMirror-linenumber { background: rgba(127,127,127,0.2); }
 .cm-s-tiddlywiki span.cm-matchhighlight { color: <<colour background>>; background-color: <<colour primary>>; font-weight: normal;}
 .cm-s-tiddlywiki .CodeMirror-widget {
