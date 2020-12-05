@@ -12,13 +12,13 @@ module-type: filterrunprefix
 /*
 Export our filter prefix function
 */
-exports.reduce = function(operationSubFunction) {
+exports.reduce = function(operationSubFunction,options) {
 	return function(results,source,widget) {
 		if(results.length > 0) {
 			var accumulator = "";
 			for(var index=0; index<results.length; index++) {
 				var title = results[index],
-					list = operationSubFunction($tw.wiki.makeTiddlerIterator([title]),{
+					list = operationSubFunction(options.wiki.makeTiddlerIterator([title]),{
 						getVariable: function(name) {
 							switch(name) {
 								case "currentTiddler":
