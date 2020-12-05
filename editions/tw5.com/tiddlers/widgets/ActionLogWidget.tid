@@ -1,21 +1,29 @@
 caption: action-log
 created: 20201114113318785
-modified: 20201114125859948
-tags: Widgets ActionWidgets
+modified: 20201120155202652
+tags: Widgets ActionWidgets [[Debugging Widgets]]
 title: ActionLogWidget
 type: text/vnd.tiddlywiki
 
 ! Introduction
 
-<<.from-version "5.1.23">> The ''action-log'' widget is an [[action widget|ActionWidgets]] that can be used to output debugging information to the JavaScript console supported by most browsers. This can be useful because otherwise it is difficult to observe what is going on within a sequence of actions.
+<<.from-version "5.1.23">> The ''action-log'' widget is an [[action widget|ActionWidgets]] that can be used to output debugging information to the [[JavaScript console|Web Developer Tools]] supported by most browsers. This can be useful because otherwise it is difficult to observe what is going on within a sequence of actions.
 
 ActionWidgets are used within triggering widgets such as the ButtonWidget.
+
+<<.tip """ For debugging outside of actions see [[LogWidget]]""">>
 
 ! Content and Attributes
 
 The ''action-log'' widget is invisible. Any content within it is ignored.
 
 When the actions are invoked, the names and values of all attributes are logged to the JavaScript console.
+In addition there are optional attributes that can be used:
+
+|!Optional Attribute |!Description |
+|$$filter|All variables matching this filter will also be logged. |
+|$$message |A message to display as the title of the information logged. Useful when several `action-log` widgets are used in sequence. |
+|$$all |Set to "yes" to log all variables in a collapsed table. Note that if there is nothing specified to log, all variables are always logged instead.|
 
 
 <<.tip """A handy tip if an action widget is not behaving as expected is to temporarily change it to an `<$action-log>` widget so that the attributes can be observed.""">>
@@ -28,3 +36,15 @@ Here is an example of logging two variables:
 <$action-log myVar=<<myVar>> otherVar=<<otherVar>>/>
 ```
 
+To log all variables:
+
+```
+<$action-log />
+```
+
+
+To log two variables as well as all core variables (which start with `tv-`):
+
+```
+<$action-log myVar=<<myVar>> other={{!!status}} $$filter="[prefix[tv-]]"/>
+```

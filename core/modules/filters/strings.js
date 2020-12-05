@@ -61,7 +61,7 @@ exports.split = makeStringBinaryOperator(
 );
 
 exports["enlist-input"] = makeStringBinaryOperator(
-	function(a) {return $tw.utils.parseStringArray("" + a);}
+	function(a,o,s) {return $tw.utils.parseStringArray("" + a,(s === "raw"));}
 );
 
 exports.join = makeStringReducingOperator(
@@ -78,7 +78,7 @@ function makeStringBinaryOperator(fnCalc) {
 	return function(source,operator,options) {
 		var result = [];
 		source(function(tiddler,title) {
-			Array.prototype.push.apply(result,fnCalc(title,operator.operand || ""));
+			Array.prototype.push.apply(result,fnCalc(title,operator.operand || "",operator.suffix || ""));
 		});
 		return result;
 	};
@@ -142,5 +142,34 @@ exports["search-replace"] = function(source,operator,options) {
 	});
 	return results;
 };
+
+exports.pad = function(source,operator,options) {
+	var results = [],
+		targetLength = operator.operand ? parseInt(operator.operand) : 0,
+		fill = operator.operands[1] || "0";
+
+	source(function(tiddler,title) {
+		if(title && title.length) {
+			if(title.length >= targetLength) {
+				results.push(title);
+			} else {
+				var padString = "",
+					padStringLength = targetLength - title.length;
+				while (padStringLength > padString.length) {
+					padString += fill;					
+				}
+				//make sure we do not exceed the specified length
+				padString = padString.slice(0,padStringLength);
+				if(operator.suffix && (operator.suffix === "suffix")) {
+					title = title + padString;
+				} else {
+					title = padString + title;
+				}
+				results.push(title);
+			}
+		}
+	});
+	return results;
+}
 
 })();

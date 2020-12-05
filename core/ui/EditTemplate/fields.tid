@@ -57,7 +57,7 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 \whitespace trim
 
 <div class="tc-edit-fields">
-<table class="tc-edit-fields">
+<table class={{{ [all[current]fields[]] :filter[lookup[$:/config/EditTemplateFields/Visibility/]!match[hide]] +[count[]!match[0]] +[then[tc-edit-fields]] ~[[tc-edit-fields tc-edit-fields-small]] }}}>
 <tbody>
 <$list filter="[all[current]fields[]] +[sort[title]]" variable="currentField" storyview="pop">
 <$list filter=<<config-filter>> variable="temp">

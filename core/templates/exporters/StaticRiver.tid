@@ -26,7 +26,7 @@ extension: .html
 </head>
 <body class="tc-body">
 {{$:/StaticBanner||$:/core/templates/html-tiddler}}
-<section class="tc-story-river">
+<section class="tc-story-river tc-static-story-river">
 {{$:/core/templates/exporters/StaticRiver/Content||$:/core/templates/html-tiddler}}
 </section>
 </body>

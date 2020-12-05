@@ -18,11 +18,11 @@ Listing/Rename/Tooltip: 導入前重新命名條目
 Listing/Rename/ConfirmRename: 重新命名條目
 Listing/Rename/CancelRename: 取消
 Listing/Rename/OverwriteWarning: 具有此標題的條目已存在。
-Upgrader/Plugins/Suppressed/Incompatible: 封鎖的不相容或過時插件
-Upgrader/Plugins/Suppressed/Version: 封鎖的插件 (由於傳入的 <<incoming>> 較現有版本 <<existing>> 舊)
-Upgrader/Plugins/Upgraded: 升級插件，從 <<incoming>> 到 <<upgraded>>
-Upgrader/State/Suppressed: 封鎖的暫存狀態條目
-Upgrader/System/Suppressed: 封鎖的系統條目
-Upgrader/System/Warning: 核心模組條目
+Upgrader/Plugins/Suppressed/Incompatible: 封鎖的不相容或過時插件。
+Upgrader/Plugins/Suppressed/Version: 封鎖的插件 (由於傳入的 <<incoming>> 不比現有版本 <<existing>> 新)。
+Upgrader/Plugins/Upgraded: 升級插件，從 <<incoming>> 到 <<upgraded>>。
+Upgrader/State/Suppressed: 封鎖的暫存狀態條目。
+Upgrader/System/Suppressed: 封鎖的系統條目。
+Upgrader/System/Warning: 核心模組條目。
 Upgrader/System/Alert: 您即將導入一個條目會覆蓋一個核心模組條目。不建議這樣做，因為可能會使系統不穩定。
-Upgrader/ThemeTweaks/Created: 從 <$text text=<<from>>/> 遷移佈景主題
+Upgrader/ThemeTweaks/Created: 從 <$text text=<<from>>/> 遷移佈景主題。

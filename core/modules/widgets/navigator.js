@@ -128,7 +128,7 @@ NavigatorWidget.prototype.replaceFirstTitleInStory = function(storyList,oldTitle
 
 NavigatorWidget.prototype.addToStory = function(title,fromTitle) {
 	if(this.storyTitle) {
-		this.story.addToStory(title,fromTitle,this.storyTitle,{
+		this.story.addToStory(title,fromTitle,{
 			openLinkFromInsideRiver: this.getAttribute("openLinkFromInsideRiver","top"),
 			openLinkFromOutsideRiver: this.getAttribute("openLinkFromOutsideRiver","top")
 		});
@@ -529,6 +529,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	$tw.utils.each(importData.tiddlers,function(tiddler,title) {
 		if($tw.utils.count(tiddler) === 0) {
 			newFields["selection-" + title] = "unchecked";
+			newFields["suppressed-" + title] = "yes";
 		}
 	});
 	// Save the $:/Import tiddler

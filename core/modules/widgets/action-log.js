@@ -28,22 +28,65 @@ Render this widget into the DOM
 */
 LogWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
+	this.execute();
 };
+
+LogWidget.prototype.execute = function(){
+	this.message = this.getAttribute("$$message","debug");
+	this.logAll = this.getAttribute("$$all","no") === "yes" ? true : false;
+	this.filter = this.getAttribute("$$filter");
+}
 
 /*
 Refresh the widget by ensuring our attributes are up to date
 */
 LogWidget.prototype.refresh = function(changedTiddlers) {
-	return this.refreshChildren(changedTiddlers);
+	this.refreshSelf();
+	return true;
 };
 
 /*
 Invoke the action associated with this widget
 */
 LogWidget.prototype.invokeAction = function(triggeringWidget,event) {
-	$tw.utils.logTable(this.attributes,["attribute name","value"]);
+	this.log();
 	return true; // Action was invoked
 };
+
+LogWidget.prototype.log = function() {
+	var data = {},
+		dataCount,
+		allVars = {},
+		filteredVars;
+
+	$tw.utils.each(this.attributes,function(attribute,name) {
+		if(name.substring(0,2) !== "$$") {
+			data[name] = attribute;
+		}		
+	});
+
+	for(var v in this.variables) {
+		allVars[v] = this.getVariable(v,{defaultValue:""});
+	}	
+	if(this.filter) {
+		filteredVars = this.wiki.compileFilter(this.filter).call(this.wiki,this.wiki.makeTiddlerIterator(allVars));
+		$tw.utils.each(filteredVars,function(name) {
+			data[name] = allVars[name];
+		});		
+	}
+	dataCount = $tw.utils.count(data);
+
+	console.group(this.message);
+	if(dataCount > 0) {
+		$tw.utils.logTable(data,["name","value"]);
+	}
+	if(this.logAll || !dataCount) {
+		console.groupCollapsed("All variables");
+		$tw.utils.logTable(allVars,["name","value"]);
+		console.groupEnd();
+	}
+	console.groupEnd();
+}
 
 exports["action-log"] = LogWidget;
 

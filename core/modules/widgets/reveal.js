@@ -70,6 +70,10 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 			left = this.popup.left + this.popup.width;
 			top = this.popup.top + this.popup.height - domNode.offsetHeight;
 			break;
+		case "belowright":
+			left = this.popup.left + this.popup.width;
+			top = this.popup.top + this.popup.height;
+			break;			
 		case "right":
 			left = this.popup.left + this.popup.width;
 			top = this.popup.top;
@@ -78,6 +82,10 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 			left = this.popup.left + this.popup.width - domNode.offsetWidth;
 			top = this.popup.top + this.popup.height;
 			break;
+		case "aboveleft":
+			left = this.popup.left - domNode.offsetWidth;
+			top = this.popup.top - domNode.offsetHeight;
+			break;			
 		default: // Below
 			left = this.popup.left;
 			top = this.popup.top + this.popup.height;
@@ -109,6 +117,7 @@ RevealWidget.prototype.execute = function() {
 	this.retain = this.getAttribute("retain","no");
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
+	this.updatePopupPosition = this.getAttribute("updatePopupPosition","no") === "yes";
 	// Compute the title of the state tiddler and read it
 	this.stateTiddlerTitle = this.state;
 	this.stateTitle = this.getAttribute("stateTitle");
@@ -212,6 +221,8 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 				this.refreshSelf();
 				return true;
 			}
+		} else if(this.type === "popup" && this.updatePopupPosition && (changedTiddlers[this.state] || changedTiddlers[this.stateTitle])) {
+			this.positionPopup(this.domNodes[0]);
 		}
 		return this.refreshChildren(changedTiddlers);
 	}

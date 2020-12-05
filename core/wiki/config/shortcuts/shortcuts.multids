@@ -21,6 +21,7 @@ input-down: Down
 input-tab-left: alt-Left
 input-tab-right: alt-Right
 input-up: Up
+layout-switcher: ctrl-shift-L
 link: ctrl-L
 linkify: alt-shift-L
 list-bullet: ctrl-shift-L

@@ -1,19 +1,17 @@
 caption: reduce
 created: 20201004154131193
-modified: 20201006174749170
+modified: 20201204130601564
 op-input: a [[selection of titles|Title Selection]] passed as input to the filter
 op-output: the final result of running the subfilter <<.place S>>
-op-parameter: a [[filter expression|Filter Expression]]
+op-parameter: a [[filter expression|Filter Expression]]. Optional second parameter for initial value for accumulator
 op-parameter-name: S
 op-purpose: apply a subfilter to each input title in turn, accumulating a single value
-op-suffix: Initial value for accumulator
-op-suffix-name: V
 tags: [[Filter Operators]]
 title: reduce Operator
 type: text/vnd.tiddlywiki
 
 \define reduce-tip()
-The <<.op reduce>> operator will always produce output, even if its input was empty. If its input is empty, the output of <<.op reduce>> will be the initial value of the accumulator, i.e. the value of the suffix. One result of this fact is that the <<.op else>> operator will never be triggered if it follows a <<.op reduce>>. The "Empty input" examples show what happens when <<.op reduce>> receives no input.
+The <<.op reduce>> operator will always produce output, even if its input was empty. If its input is empty, the output of <<.op reduce>> will be the initial value of the accumulator, i.e. the value of the second parameter. One result of this fact is that the <<.op else>> operator will never be triggered if it follows a <<.op reduce>>. The "Empty input" examples show what happens when <<.op reduce>> receives no input.
 \end
 
 <<.from-version "5.1.23">> The <<.op reduce>> operator runs a subfilter for each input title, passing the result of the previous subfilter run as a variable. The initial value of the accumulator can optionally be specified. It returns the result of the final subfilter run.

@@ -8,11 +8,13 @@ tags: $:/tags/SideBarSegment
 <$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
 {{$:/core/images/down-arrow}}
 <$list filter="[{$(searchTiddler)$}minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
-<$set name="searchTerm" value={{{ [<searchTiddler>get[text]] }}}>
-<$set name="resultCount" value="""<$count filter="[!is[system]search<searchTerm>]"/>""">
+<$vars userInput={{{ [<searchTiddler>get[text]] }}} configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}} replaceRegexp="limit\[\d+\]">
+<$vars primaryListFilter={{{ [<configTiddler>get[first-search-filter]search-replace:g:regexp<replaceRegexp>,[]] }}} secondaryListFilter={{{ [<configTiddler>get[second-search-filter]search-replace:g:regexp<replaceRegexp>,[]] }}}>
+<$set name="resultCount" value="""<$count filter="[subfilter<primaryListFilter>] [subfilter<secondaryListFilter>]"/>""">
 {{$:/language/Search/Matches}}
 </$set>
-</$set>
+</$vars>
+</$vars>
 </$list>
 </$button>
 \end

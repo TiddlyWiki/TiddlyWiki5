@@ -17,6 +17,8 @@ Basics/NewJournal/Tags/Prompt: Tags for new journal tiddlers
 Basics/NewTiddler/Title/Prompt: Title of new tiddlers
 Basics/NewTiddler/Tags/Prompt: Tags for new tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Number of overridden shadow tiddlers
+Basics/RemoveTags: Update to current format
+Basics/RemoveTags/Hint: Update the tags configuration to the latest format
 Basics/ShadowTiddlers/Prompt: Number of shadow tiddlers
 Basics/Subtitle/Prompt: Subtitle
 Basics/SystemTiddlers/Prompt: Number of system tiddlers
@@ -44,6 +46,7 @@ KeyboardShortcuts/Platform/Linux: Linux platform only
 KeyboardShortcuts/Platform/NonLinux: Non-Linux platforms only
 KeyboardShortcuts/Platform/Windows: Windows platform only
 KeyboardShortcuts/Platform/NonWindows: Non-Windows platforms only
+LayoutSwitcher/Caption: Layout
 LoadedModules/Caption: Loaded Modules
 LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
 Palette/Caption: Palette
@@ -125,6 +128,7 @@ Saving/TiddlySpot/Filename: Upload Filename
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address, e.g. `http://example.com/store.php`.//
 Saving/TiddlySpot/Password: Password
+Saving/TiddlySpot/ReadOnly: ~TiddlySpot service may currently be available as read only. Please see http://tiddlyspot.com/ for details
 Saving/TiddlySpot/ServerURL: Server URL
 Saving/TiddlySpot/UploadDir: Upload Directory
 Saving/TiddlySpot/UserName: Wiki Name

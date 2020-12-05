@@ -13,11 +13,16 @@ Listing/Preview/TextRaw: Text - roh
 Listing/Preview/Fields: Felder
 Listing/Preview/Diff: Diff - Text
 Listing/Preview/DiffFields: Diff - Felder
-Upgrader/Plugins/Suppressed/Incompatible: Unterdrückte, inkompatible oder veraltete "plugins"
+Listing/Rename/Tooltip: Tiddler vorm Importieren umbenennen
+Listing/Rename/Prompt: Umbenennen in:
+Listing/Rename/ConfirmRename : Tiddler umbenennen
+Listing/Rename/CancelRename : Abbrechen
+Listing/Rename/OverwriteWarning: Ein Tiddler mit diesem Titel existiert bereits.
+Upgrader/Plugins/Suppressed/Incompatible: Unterdrückte, inkompatible oder veraltete "plugins".
 Upgrader/Plugins/Suppressed/Version: Einige "plugins" weden unterdrückt! Importierte plugins: <<incoming>> sind älter als existierende: <<existing>>.
-Upgrader/Plugins/Upgraded:  Aktualisieren der plugins von: <<incoming>> nach: <<upgraded>>
-Upgrader/State/Suppressed: Unterdrückte temporäre Status Tiddler
-Upgrader/System/Suppressed: Unterdrückte "System Tiddler"
-Upgrader/System/Warning: "Core Modul Tiddler"
-Upgrader/System/Alert: Sie sind dabei einen Tiddler zu importieren, der einen "Core Tiddler" überschreibt. Diese Aktion wird nicht empfohlen! Das System kann instabil werden
-Upgrader/ThemeTweaks/Created: Migrieren der "theme tweaks" von: <$text text=<<from>>/>
+Upgrader/Plugins/Upgraded:  Aktualisieren der plugins von: <<incoming>> nach: <<upgraded>>.
+Upgrader/State/Suppressed: Unterdrückte temporäre Status Tiddler.
+Upgrader/System/Suppressed: Unterdrückte "System Tiddler".
+Upgrader/System/Warning: "Core Modul Tiddler".
+Upgrader/System/Alert: Sie sind dabei einen Tiddler zu importieren, der einen "Core Tiddler" überschreibt. Diese Aktion wird nicht empfohlen! Das System kann instabil werden.
+Upgrader/ThemeTweaks/Created: Migrieren der "theme tweaks" von: <$text text=<<from>>/>.
