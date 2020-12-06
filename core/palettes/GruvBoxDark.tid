@@ -121,7 +121,7 @@ toolbar-done-button:
 untagged-background: #504945
 very-muted-foreground: #bdae93
 wikilist-background: <<colour page-background>>
-wikilist-button-background: <<colour button-background>>
+wikilist-button-background: #acacac
 wikilist-button-foreground: <<colour button-foreground>>
 wikilist-item: <<colour background>>
 wikilist-toolbar-background: <<colour background>>
