@@ -32,6 +32,8 @@ name: tiddlywiki
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
+/* Make the editor resize to fit its content */
+
 .CodeMirror {
 	height: auto;
 	border: 1px solid <<colour tiddler-editor-border>>;
