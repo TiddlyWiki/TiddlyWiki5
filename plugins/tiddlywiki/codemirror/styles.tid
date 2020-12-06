@@ -59,9 +59,8 @@ name: tiddlywiki
 .cm-s-tiddlywiki span.cm-comment { color: #586e75; font-style:italic; font-weight:normal; }
 .cm-s-tiddlywiki .CodeMirror-activeline-background, .cm-s-tiddlywiki .CodeMirror-activeline-gutter .CodeMirror-linenumber { background: rgba(127,127,127,0.2); }
 .cm-s-tiddlywiki span.cm-matchhighlight { color: <<colour background>>; background-color: <<colour primary>>; font-weight: normal;}
-.cm-s-tiddlywiki .CodeMirror-widget {
-  text-shadow: none;
-}
+.cm-s-tiddlywiki .CodeMirror-widget { text-shadow: none; }
+.cm-s-tiddlywiki .CodeMirror-dialog { background: <<colour tiddler-background>>; }
 .cm-s-tiddlywiki .cm-header { color: #586e75; }
 .cm-s-tiddlywiki .cm-quote { color: #93a1a1; }
 .cm-s-tiddlywiki .cm-keyword { color: #cb4b16; }
@@ -84,23 +83,12 @@ name: tiddlywiki
 .cm-s-tiddlywiki .CodeMirror-nonmatchingbracket { color: #dc322f; }
 .cm-s-tiddlywiki .cm-tag { color: #93a1a1; }
 .cm-s-tiddlywiki .cm-attribute { color: #2aa198; }
-.cm-s-tiddlywiki .cm-hr {
-  color: transparent;
-  border-top: 1px solid #586e75;
-  display: block;
-}
+.cm-s-tiddlywiki .cm-hr { color: transparent; border-top: 1px solid #586e75; display: block; }
 .cm-s-tiddlywiki .cm-link { color: #93a1a1; cursor: pointer; }
 .cm-s-tiddlywiki .cm-special { color: #6c71c4; }
-.cm-s-tiddlywiki .cm-em {
-  color: #999;
-  text-decoration: underline;
-  text-decoration-style: dotted;
-}
+.cm-s-tiddlywiki .cm-em { color: #999; text-decoration: underline; text-decoration-style: dotted; }
 .cm-s-tiddlywiki .cm-error,
-.cm-s-tiddlywiki .cm-invalidchar {
-  color: #586e75;
-  border-bottom: 1px dotted #dc322f;
-}
+.cm-s-tiddlywiki .cm-invalidchar { color: #586e75; border-bottom: 1px dotted #dc322f; }
 .cm-s-tiddlywiki .CodeMirror-matchingbracket { color: #859900; }
 .cm-s-tiddlywiki .CodeMirror-nonmatchingbracket { color: #dc322f; }
 .cm-s-tiddlywiki .cm-searching { background: rgba(243, 155, 53, .3); outline: 1px solid #F39B35; }
