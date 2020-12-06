@@ -217,7 +217,7 @@ Options include:
 */
 exports.generateTiddlerFileInfo = function(tiddler,options) {
 	var fileInfo = {}, metaExt;
-	// Propigate the isEditableFile flag
+	// Propagate the isEditableFile flag
 	if(options.fileInfo) {
 		fileInfo.isEditableFile = options.fileInfo.isEditableFile || false;
 	}
