@@ -217,6 +217,10 @@ Options include:
 */
 exports.generateTiddlerFileInfo = function(tiddler,options) {
 	var fileInfo = {}, metaExt;
+	// Propigate the isEditableFile flag
+	if(options.fileInfo) {
+		fileInfo.isEditableFile = options.fileInfo.isEditableFile || false;
+	}
 	// Check if the tiddler has any unsafe fields that can't be expressed in a .tid or .meta file: containing control characters, or leading/trailing whitespace
 	var hasUnsafeFields = false;
 	$tw.utils.each(tiddler.getFieldStrings(),function(value,fieldName) {
@@ -248,20 +252,22 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 				extFilters: options.extFilters,
 				wiki: options.wiki
 			});
-			if(metaExt === ".tid") {
-				// Overriding to the .tid extension needs special handling
-				fileInfo.type = "application/x-tiddler";
-				fileInfo.hasMetaFile = false;
-			} else if (metaExt === ".json") {
-				// Overriding to the .json extension needs special handling
-				fileInfo.type = "application/json";
-				fileInfo.hasMetaFile = false;
-			} else if (metaExt) {
-				//If the new type matches a known extention, use that MIME type's encoding
-				var extInfo = $tw.utils.getFileExtensionInfo(metaExt);
-				fileInfo.type = extInfo ? extInfo.type : null;
-				fileInfo.encoding = $tw.utils.getTypeEncoding(metaExt);
-				fileInfo.hasMetaFile = true;
+			if(metaExt){
+				if(metaExt === ".tid") {
+					// Overriding to the .tid extension needs special handling
+					fileInfo.type = "application/x-tiddler";
+					fileInfo.hasMetaFile = false;
+				} else if (metaExt === ".json") {
+					// Overriding to the .json extension needs special handling
+					fileInfo.type = "application/json";
+					fileInfo.hasMetaFile = false;
+				} else {
+					//If the new type matches a known extention, use that MIME type's encoding
+					var extInfo = $tw.utils.getFileExtensionInfo(metaExt);
+					fileInfo.type = extInfo ? extInfo.type : null;
+					fileInfo.encoding = $tw.utils.getTypeEncoding(metaExt);
+					fileInfo.hasMetaFile = true;
+				}
 			}
 		}
 	}
@@ -276,10 +282,6 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 		fileInfo: options.fileInfo,
 		originalpath: options.originalpath
 	});
-	// Propigate the isEditableFile flag
-	if(options.fileInfo) {
-		fileInfo.isEditableFile = options.fileInfo.isEditableFile || false;
-	}
 	return fileInfo;
 };
 
@@ -380,7 +382,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 		count++;
 	} while(fs.existsSync(fullPath));
 	//If the path does not start with the wikiPath directory or the wikiTiddlersPath directory, or if the last write failed
-	var encode = !(fullPath.indexOf($tw.boot.wikiPath) == 0 || fullPath.indexOf($tw.boot.wikiTiddlersPath) == 0) || ((options.fileInfo || {writeError: false}).writeError == true);
+	var encode = !(fullPath.indexOf(path.resolve($tw.boot.wikiPath)) == 0 || fullPath.indexOf($tw.boot.wikiTiddlersPath) == 0) || ((options.fileInfo || {writeError: false}).writeError == true);
 	if(encode){
 		//encodeURIComponent() and then resolve to tiddler directory
 		fullPath = path.resolve(directory, encodeURIComponent(fullPath));
