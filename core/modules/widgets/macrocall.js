@@ -63,7 +63,7 @@ MacroCallWidget.prototype.execute = function() {
 			parser = this.wiki.parseText(this.parseType,text,
 								{parseAsInline: !this.parseTreeNode.isBlock});
 			if(variableInfo.isCacheable && variableInfo.srcVariable) {
-				// variableInfo.srcVariable.parser = parser;
+				variableInfo.srcVariable.parser = parser;
 			}
 		}
 		var parseTreeNodes = parser ? parser.tree : [];
