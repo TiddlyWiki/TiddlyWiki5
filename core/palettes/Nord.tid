@@ -99,7 +99,7 @@ tiddler-controls-foreground-selected: #EBCB8B
 tiddler-controls-foreground: #4C566A
 tiddler-editor-background: #2e3440
 tiddler-editor-border-image: #2e3440
-tiddler-editor-border: #2e3440
+tiddler-editor-border: #3b4252
 tiddler-editor-fields-even: #2e3440
 tiddler-editor-fields-odd: #2e3440
 tiddler-info-background: #2e3440
