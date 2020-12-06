@@ -17,7 +17,10 @@ name: tiddlywiki
 \end
 \define set-selection-background-css(colour,colourA,colourB)
 <$set name="backgroundColour" value=<<contrastcolour target:"""$colour$""" fallbackTarget:"""""" colourA:"""$colourA$""" colourB:"""$colourB$""">>>
-.cm-s-tiddlywiki div.CodeMirror-selected, .cm-s-tiddlywiki .CodeMirror-selectedtext, .cm-s-tiddlywiki .CodeMirror-selected, .cm-s-tiddlywiki .CodeMirror-line::selection, .cm-s-tiddlywiki .CodeMirror-line > span::selection, .cm-s-tiddlywiki .CodeMirror-line > span > span::selection, .cm-s-tiddlywiki .CodeMirror-line::-moz-selection, .cm-s-tiddlywiki .CodeMirror-line > span::-moz-selection, .cm-s-tiddlywiki .CodeMirror-line > span > span::-moz-selection { background: <<backgroundColour>> ; }
+.cm-s-tiddlywiki div.CodeMirror-selected { background: <<backgroundColour>>; }
+.cm-s-tiddlywiki.CodeMirror ::selection { background: <<backgroundColour>>; }
+.cm-s-tiddlywiki .CodeMirror-line::-moz-selection,  .CodeMirror-line > span::-moz-selection,  .CodeMirror-line > span > span::-moz-selection { background: <<backgroundColour>>; }
+.cm-s-tiddlywiki .CodeMirror-line::selection,  .CodeMirror-line > span::selection,  .CodeMirror-line > span > span::selection { background: <<backgroundColour>>; }
 </$set>
 \end
 \define set-selection-background-colours(palette)
@@ -28,8 +31,6 @@ name: tiddlywiki
 \end
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
-
-/* Make the editor resize to fit its content */
 
 .CodeMirror {
 	height: auto;
