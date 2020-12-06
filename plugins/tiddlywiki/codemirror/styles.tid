@@ -50,7 +50,7 @@ name: tiddlywiki
 }
 
 .cm-s-tiddlywiki.CodeMirror, .cm-s-tiddlywiki .CodeMirror-gutters { background-color: <<colour tiddler-editor-background>>; color: <<colour foreground>>; }
-.cm-s-tiddlywiki .CodeMirror-gutters {background: <<colour tiddler-editor-background>>; border-right: 0px;}
+.cm-s-tiddlywiki .CodeMirror-gutters {background: <<colour tiddler-editor-background>>; border-right: 1px solid <<colour tiddler-editor-border>>;}
 .cm-s-tiddlywiki .CodeMirror-linenumber {color: <<colour foreground>>;}
 .cm-s-tiddlywiki .CodeMirror-cursor { border-left: 2px solid <<colour foreground>>; }
 .cm-s-tiddlywiki span.cm-comment { color: #586e75; font-style:italic; font-weight:normal; }
