@@ -16,9 +16,9 @@ exports.reduce = function(operationSubFunction,options) {
 	return function(results,source,widget) {
 		if(results.length > 0) {
 			var accumulator = "";
-			for(var index=0; index<results.length; index++) {
-				var title = results[index],
-					list = operationSubFunction(options.wiki.makeTiddlerIterator([title]),{
+			var index = 0;
+			results.each(function(title) {
+				var list = operationSubFunction(options.wiki.makeTiddlerIterator([title]),{
 						getVariable: function(name) {
 							switch(name) {
 								case "currentTiddler":
@@ -39,8 +39,9 @@ exports.reduce = function(operationSubFunction,options) {
 				if(list.length > 0) {
 					accumulator = "" + list[0];
 				}
-			}
-			results.splice(0,results.length);
+				++index;
+			});
+			results.clear();
 			results.push(accumulator);	
 		}
 	}

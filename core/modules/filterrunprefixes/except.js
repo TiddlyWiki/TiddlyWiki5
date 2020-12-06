@@ -18,7 +18,7 @@ Export our filter prefix function
 */
 exports.except = function(operationSubFunction) {
 	return function(results,source,widget) {
-		$tw.utils.removeArrayEntries(results,operationSubFunction(source,widget));
+		results.remove(operationSubFunction(source,widget));
 	};
 };
 
