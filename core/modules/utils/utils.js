@@ -56,9 +56,9 @@ exports.warning = function(text) {
 /*
 Log a table of name: value pairs
 */
-exports.logTable = function(data,columnNames) {
+exports.logTable = function(data) {
 	if(console.table) {
-		console.table(data,columnNames);
+		console.table(data);
 	} else {
 		$tw.utils.each(data,function(value,name) {
 			console.log(name + ": " + value);
