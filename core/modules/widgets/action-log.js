@@ -82,7 +82,7 @@ LogWidget.prototype.log = function() {
 	}
 	if(this.logAll || !dataCount) {
 		console.groupCollapsed("All variables");
-		$tw.utils.logTable(allVars,["name","value"]);
+		$tw.utils.logTable(allVars);
 		console.groupEnd();
 	}
 	console.groupEnd();

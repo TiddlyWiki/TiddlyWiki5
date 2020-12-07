@@ -58,7 +58,7 @@ Log a table of name: value pairs
 */
 exports.logTable = function(data,columnNames) {
 	if(console.table) {
-		console.table(data,columnNames);
+		console.table(data);
 	} else {
 		$tw.utils.each(data,function(value,name) {
 			console.log(name + ": " + value);
