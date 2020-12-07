@@ -4,6 +4,21 @@ tags: $:/tags/Stylesheet
 title: $:/_tw5.com-styles
 type: text/vnd.tiddlywiki
 
+\define set-improvement-banner-color-css(colour,colourA,colourB)
+<$set name="color" value=<<contrastcolour target:"""$colour$""" fallbackTarget:"""""" colourA:"""$colourA$""" colourB:"""$colourB$""">>>
+.tc-improvement-banner {
+	color: <<color>>;
+	fill: <<color>>;
+}
+</$set>
+\end
+\define set-improvement-banner-color-colours(palette)
+<$macrocall $name="set-improvement-banner-color-css" colour="#ffcccc" colourA={{$palette$##foreground}} colourB={{$palette$##background}}/>
+\end
+\define set-improvement-banner-color()
+<$macrocall $name="set-improvement-banner-color-colours" palette={{$:/palette}}/>
+\end
+
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
 .tc-double-spaced-list li {
@@ -42,6 +57,8 @@ type: text/vnd.tiddlywiki
 	margin-bottom: 12px;
 	<<box-shadow "2px 2px 2px rgba(0,0,0,0.4)">>
 }
+
+<<set-improvement-banner-color>>
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 	
