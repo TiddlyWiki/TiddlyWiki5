@@ -78,7 +78,7 @@ LogWidget.prototype.log = function() {
 
 	console.group(this.message);
 	if(dataCount > 0) {
-		$tw.utils.logTable(data,["name","value"]);
+		$tw.utils.logTable(data);
 	}
 	if(this.logAll || !dataCount) {
 		console.groupCollapsed("All variables");

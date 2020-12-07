@@ -56,7 +56,7 @@ exports.warning = function(text) {
 /*
 Log a table of name: value pairs
 */
-exports.logTable = function(data,columnNames) {
+exports.logTable = function(data) {
 	if(console.table) {
 		console.table(data);
 	} else {
