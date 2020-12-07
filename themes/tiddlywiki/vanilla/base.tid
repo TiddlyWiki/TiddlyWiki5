@@ -598,6 +598,10 @@ html body.tc-body .tc-btn-rounded:hover svg {
 	color: <<colour sidebar-muted-foreground-hover>>;
 }
 
+.tc-sidebar-lists button small {
+	color: <<colour foreground>>;
+}
+
 button svg.tc-image-button, button .tc-image-button img {
 	height: 1em;
 	width: 1em;
