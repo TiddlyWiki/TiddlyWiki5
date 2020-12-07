@@ -311,11 +311,11 @@ exports.compileFilter = function(filterString) {
 		} else if(typeof source === "object") { // Array or hashmap
 			source = self.makeTiddlerIterator(source);
 		}
-		var results = [];
+		var results = new $tw.utils.LinkedList();
 		$tw.utils.each(operationFunctions,function(operationFunction) {
 			operationFunction(results,source,widget);
 		});
-		return results;
+		return results.toArray();
 	});
 };
 

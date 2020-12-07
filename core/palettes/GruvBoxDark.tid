@@ -97,7 +97,7 @@ tiddler-border: <<colour background>>
 tiddler-controls-foreground-hover: #7c6f64
 tiddler-controls-foreground-selected: <<colour primary>>
 tiddler-controls-foreground: #665c54
-tiddler-editor-background: #282828
+tiddler-editor-background: #32302f
 tiddler-editor-border-image: #282828
 tiddler-editor-border: #282828
 tiddler-editor-fields-even: #504945
@@ -121,7 +121,7 @@ toolbar-done-button:
 untagged-background: #504945
 very-muted-foreground: #bdae93
 wikilist-background: <<colour page-background>>
-wikilist-button-background: <<colour button-background>>
+wikilist-button-background: #acacac
 wikilist-button-foreground: <<colour button-foreground>>
 wikilist-item: <<colour background>>
 wikilist-toolbar-background: <<colour background>>

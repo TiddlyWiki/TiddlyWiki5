@@ -53,11 +53,17 @@ It is the responsibility of the filesystem adaptor to update this.boot.files for
 */
 FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 	// Always generate a fileInfo object when this fuction is called
-	var title = tiddler.fields.title, newInfo;
+	var title = tiddler.fields.title, newInfo, pathFilters, extFilters;
+	if(this.wiki.tiddlerExists("$:/config/FileSystemPaths")){
+		pathFilters = this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n");
+	}
+	if(this.wiki.tiddlerExists("$:/config/FileSystemExtensions")){
+		extFilters = this.wiki.getTiddlerText("$:/config/FileSystemExtensions","").split("\n");
+	}
 	newInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
 		directory: this.boot.wikiTiddlersPath,
-		pathFilters: this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n"),
-		extFilters: this.wiki.getTiddlerText("$:/config/FileSystemExtensions","").split("\n"),
+		pathFilters: pathFilters,
+		extFilters: extFilters,
 		wiki: this.wiki,
 		fileInfo: this.boot.files[title],
 		originalpath: this.wiki.extractTiddlerDataItem("$:/config/OriginalTiddlerPaths",title, "")

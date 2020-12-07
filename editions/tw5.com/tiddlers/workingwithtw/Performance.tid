@@ -1,5 +1,5 @@
 created: 20150330155120127
-modified: 20191014091943444
+modified: 20201205104857625
 tags: [[Working with TiddlyWiki]]
 title: Performance
 type: text/vnd.tiddlywiki
@@ -28,4 +28,6 @@ TiddlyWiki ships with defaults that are designed to get the best out of modern d
 ** Note that the field indexer currently defaults to indexing field values of less than 128 characters; longer values can still be searched for, but no index will be constructed
 ** Also note that the “field” operator is also used when the operator name is a fieldname, so, for example, `[all[shadows+tiddlers]caption[x]...` is optimised.
 * Use the [[throttling|RefreshThrottling]] feature of the RefreshMechanism judiciously
-
+* Keep in mind that ''transcluding separate tiddlers is more performant than heavy use of macros'' and the difference can be significant in some situations. The result of parsing each tiddler is cached and reused the next time if the tiddler has not changed. The same technique cannot be used for macros and they have to be re-parsed every time, as they are not global but local to the widget tree.
+** <<.from-version "5.1.23">> Parse trees are now cached for macros that do ''not'' perform any text substitution either via parameters or variables (i.e. `$parameter$` or `$(variable)$`).
+* Where possible ''use the SetWidget or VarsWidget with filters instead of the WikifyWidget'' for declaring variables and string concatenation. The performance of the wikify mechanism is relatively poor as there is no opportunity to cache the parse tree or widget tree.

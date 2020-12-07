@@ -17,7 +17,8 @@ exports.intersection = function(operationSubFunction) {
 	return function(results,source,widget) {
 		if(results.length !== 0) {
 			var secondRunResults = operationSubFunction(source,widget);
-			var firstRunResults = results.splice(0);
+			var firstRunResults = results.toArray();
+			results.clear();
 			$tw.utils.each(firstRunResults,function(title) {
 				if(secondRunResults.indexOf(title) !== -1) {
 					results.push(title);

@@ -13,17 +13,17 @@ module-type: filterrunprefix
 /*
 Export our filter function
 */
-exports.filter = function(operationSubFunction) {
+exports.filter = function(operationSubFunction,options) {
 	return function(results,source,widget) {
 		if(results.length > 0) {
 			var resultsToRemove = [];
-			$tw.utils.each(results,function(result) {
-				var filtered = operationSubFunction($tw.wiki.makeTiddlerIterator([result]),widget);
+			results.each(function(result) {
+				var filtered = operationSubFunction(options.wiki.makeTiddlerIterator([result]),widget);
 				if(filtered.length === 0) {
 					resultsToRemove.push(result);
 				}
 			});
-			$tw.utils.removeArrayEntries(results,resultsToRemove);
+			results.remove(resultsToRemove);
 		}
 	}
 };

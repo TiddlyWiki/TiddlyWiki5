@@ -19,9 +19,9 @@ Export our filter prefix function
 exports.and = function(operationSubFunction,options) {
 	return function(results,source,widget) {
 		// This replaces all the elements of the array, but keeps the actual array so that references to it are preserved
-		source = options.wiki.makeTiddlerIterator(results);
-		results.splice(0,results.length);
-		$tw.utils.pushTop(results,operationSubFunction(source,widget));
+		source = options.wiki.makeTiddlerIterator(results.toArray());
+		results.clear();
+		results.pushTop(operationSubFunction(source,widget));
 	};
 };
 

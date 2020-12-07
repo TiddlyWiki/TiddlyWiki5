@@ -17,7 +17,7 @@ Export our filter prefix function
 */
 exports.or = function(operationSubFunction) {
 	return function(results,source,widget) {
-		$tw.utils.pushTop(results,operationSubFunction(source,widget));
+		results.pushTop(operationSubFunction(source,widget));
 	};
 };
 
