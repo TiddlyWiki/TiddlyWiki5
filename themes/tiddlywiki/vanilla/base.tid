@@ -2710,6 +2710,10 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	display: inline-block;
 }
 
+::-webkit-file-upload-button {
+	cursor:pointer;
+}
+
 /*
 ** Thumbnail macros
 */
