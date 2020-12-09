@@ -20,19 +20,6 @@ $actions$
 <$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 \end
 
-\define tag-button(actions,selectedClass,tagField:"tags")
-<$button class="tc-btn-invisible $selectedClass$" tag="a" tooltip={{$:/language/EditTemplate/Tags/Add/Button/Hint}}>
-<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="[<tag>]"/>
-<$set name="currentTiddlerCSSEscaped" value={{{ [<saveTiddler>escapecss[]] }}}>
-<$action-sendmessage $message="tm-focus-selector" $param=<<get-tagpicker-focus-selector>> preventScroll="true"/>
-</$set>
-<<delete-tag-state-tiddlers>>
-<$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
-$actions$
-<$macrocall $name="tag-pill" tag=<<tag>>/>
-</$button>
-\end
-
 \define clear-tags-actions-inner()
 <$list filter="[<storeTitle>has[text]] [<newTagNameTiddler>has[text]]" variable="ignore" emptyMessage="""<<cancel-delete-tiddler-actions "cancel">>""">
 <<delete-tag-state-tiddlers>>
@@ -49,7 +36,7 @@ $actions$
 
 \define tag-picker-inner(actions,tagField:"tags")
 \whitespace trim
-<$vars newTagNameInputTiddlerQualified=<<qualify "$:/temp/NewTagName/input">> newTagNameSelectionTiddlerQualified=<<qualify "$:/temp/NewTagName/selected-item">>>
+<$vars newTagNameInputTiddlerQualified=<<qualify "$:/temp/NewTagName/input">> newTagNameSelectionTiddlerQualified=<<qualify "$:/temp/NewTagName/selected-item">> fallbackTarget={{$(palette)$##tag-background}} colourA={{$(palette)$##foreground}} colourB={{$(palette)$##background}}>
 <$vars storeTitle={{{ [<newTagNameInputTiddler>!match[]] ~[<newTagNameInputTiddlerQualified>] }}} tagSelectionState={{{ [<newTagNameSelectionTiddler>!match[]] ~[<newTagNameSelectionTiddlerQualified>] }}}>
 <$vars refreshTitle=<<qualify "$:/temp/NewTagName/refresh">> nonSystemTagsFilter="[tags[]!is[system]search:title<userInput>sort[]]" systemTagsFilter="[tags[]is[system]search:title<userInput>sort[]]">
 <div class="tc-edit-add-tag">
@@ -80,15 +67,15 @@ $actions$
 <$set name="userInput" value={{{ [<storeTitle>get[text]] }}}>
 <$list filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 <$list filter=<<nonSystemTagsFilter>> variable="tag">
-<$list filter="[<tag>addsuffix[-primaryList]] -[<tagSelectionState>get[text]]" emptyMessage="""<$macrocall $name="tag-button" actions=<<__actions__>> selectedClass="tc-tag-button-selected"/>""">
-<$macrocall $name="tag-button" actions=<<__actions__>> tagField=<<__tagField__>>/>
+<$list filter="[<tag>addsuffix[-primaryList]] -[<tagSelectionState>get[text]]" emptyMessage="""<$vars button-classes="tc-btn-invisible tc-tag-button-selected" actions=<<__actions__>> tagField=<<__tagField__>> currentTiddler=<<tag>>>{{||$:/core/ui/TagPickerTagTemplate}}</$vars>""">
+<$vars button-classes="tc-btn-invisible" actions=<<__actions__>> tagField=<<__tagField__>> currentTiddler=<<tag>>>{{||$:/core/ui/TagPickerTagTemplate}}</$vars>
 </$list>
 </$list></$list>
 <hr>
 <$list filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 <$list filter=<<systemTagsFilter>> variable="tag">
-<$list filter="[<tag>addsuffix[-secondaryList]] -[<tagSelectionState>get[text]]" emptyMessage="""<$macrocall $name="tag-button" actions=<<__actions__>> selectedClass="tc-tag-button-selected"/>""">
-<$macrocall $name="tag-button" actions=<<__actions__>> tagField=<<__tagField__>>/>
+<$list filter="[<tag>addsuffix[-secondaryList]] -[<tagSelectionState>get[text]]" emptyMessage="""<$vars button-classes="tc-btn-invisible tc-tag-button-selected" actions=<<__actions__>> tagField=<<__tagField__>> currentTiddler=<<tag>>>{{||$:/core/ui/TagPickerTagTemplate}}</$vars>""">
+<$vars button-classes="tc-btn-invisible" actions=<<__actions__>> tagField=<<__tagField__>> currentTiddler=<<tag>>>{{||$:/core/ui/TagPickerTagTemplate}}</$vars>
 </$list>
 </$list></$list>
 </$set>
@@ -102,11 +89,11 @@ $actions$
 \end
 \define tag-picker(actions,tagField:"tags")
 \whitespace trim
-<$set name="saveTiddler" value=<<currentTiddler>>>
+<$vars saveTiddler=<<currentTiddler>> palette={{$:/palette}}>
 <$list filter="[<newTagNameTiddler>match[]]" emptyMessage="""<$macrocall $name="tag-picker-inner" actions=<<__actions__>> tagField=<<__tagField__>>/>""">
 <$set name="newTagNameTiddler" value=<<qualify "$:/temp/NewTagName">>>
 <$macrocall $name="tag-picker-inner" actions=<<__actions__>> tagField=<<__tagField__>>/>
 </$set>
 </$list>
-</$set>
+</$vars>
 \end

@@ -10,9 +10,7 @@ alert-highlight: #FFD60A
 alert-muted-foreground: <<colour muted-foreground>>
 background: #282828
 blockquote-bar: <<colour page-background>>
-button-background: #3F638B
-button-foreground: <<colour foreground>>
-button-border: transparent
+button-foreground: <<colour background>>
 code-background: <<colour pre-background>>
 code-border: <<colour pre-border>>
 code-foreground: rgba(255, 255, 255, 0.54)
@@ -44,7 +42,7 @@ modal-border: <<colour very-muted-foreground>>
 modal-footer-background: <<colour background>>
 modal-footer-border: <<colour background>>
 modal-header-border: <<colour very-muted-foreground>>
-muted-foreground: #464646
+muted-foreground: #98989D
 notification-background: <<colour dropdown-background>>
 notification-border: <<colour dropdown-background>>
 page-background: #323232
@@ -53,7 +51,7 @@ pre-border: transparent
 primary: #0A84FF
 select-tag-background: <<colour background>>
 select-tag-foreground: <<colour foreground>>
-sidebar-button-foreground: <<colour foreground>>
+sidebar-button-foreground: <<colour background>>
 sidebar-controls-foreground-hover: #FF9F0A
 sidebar-controls-foreground: #8E8E93
 sidebar-foreground-shadow: transparent
@@ -114,7 +112,7 @@ very-muted-foreground: #464646
 selection-background: #3F638B
 selection-foreground: #ffffff
 wikilist-background: <<colour page-background>>
-wikilist-button-background: <<colour button-background>>
+wikilist-button-background: #3F638B
 wikilist-button-foreground: <<colour foreground>>
 wikilist-button-open: #32D74B
 wikilist-button-open-hover: #32D74B

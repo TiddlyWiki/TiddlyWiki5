@@ -280,20 +280,21 @@ exports.compileFilter = function(filterString) {
 		var filterRunPrefixes = self.getFilterRunPrefixes();
 		// Wrap the operator functions in a wrapper function that depends on the prefix
 		operationFunctions.push((function() {
+			var options = {wiki: self};
 			switch(operation.prefix || "") {
 				case "": // No prefix means that the operation is unioned into the result
-					return filterRunPrefixes["or"](operationSubFunction);
+					return filterRunPrefixes["or"](operationSubFunction, options);
 				case "=": // The results of the operation are pushed into the result without deduplication
-					return filterRunPrefixes["all"](operationSubFunction);
+					return filterRunPrefixes["all"](operationSubFunction, options);
 				case "-": // The results of this operation are removed from the main result
-					return filterRunPrefixes["except"](operationSubFunction);	
+					return filterRunPrefixes["except"](operationSubFunction, options);
 				case "+": // This operation is applied to the main results so far
-					return filterRunPrefixes["and"](operationSubFunction);
+					return filterRunPrefixes["and"](operationSubFunction, options);
 				case "~": // This operation is unioned into the result only if the main result so far is empty
-					return filterRunPrefixes["else"](operationSubFunction);
+					return filterRunPrefixes["else"](operationSubFunction, options);
 				default: 
 					if(operation.namedPrefix && filterRunPrefixes[operation.namedPrefix]) {
-						return filterRunPrefixes[operation.namedPrefix](operationSubFunction);
+						return filterRunPrefixes[operation.namedPrefix](operationSubFunction, options);
 					} else {
 						return function(results,source,widget) {
 							results.splice(0,results.length);
@@ -310,11 +311,11 @@ exports.compileFilter = function(filterString) {
 		} else if(typeof source === "object") { // Array or hashmap
 			source = self.makeTiddlerIterator(source);
 		}
-		var results = [];
+		var results = new $tw.utils.LinkedList();
 		$tw.utils.each(operationFunctions,function(operationFunction) {
 			operationFunction(results,source,widget);
 		});
-		return results;
+		return results.toArray();
 	});
 };
 

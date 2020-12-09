@@ -55,9 +55,19 @@ MacroCallWidget.prototype.execute = function() {
 	// Are we rendering to HTML?
 	if(this.renderOutput === "text/html") {
 		// If so we'll return the parsed macro
-		var parser = this.wiki.parseText(this.parseType,text,
-							{parseAsInline: !this.parseTreeNode.isBlock});
-		parseTreeNodes = parser ? parser.tree : [];
+		// Check if we've already cached parsing this macro
+		var mode = this.parseTreeNode.isBlock ? "blockParser" : "inlineParser",
+			parser;
+		if(variableInfo.srcVariable && variableInfo.srcVariable[mode]) {
+			parser = variableInfo.srcVariable[mode];
+		} else {
+			parser = this.wiki.parseText(this.parseType,text,
+								{parseAsInline: !this.parseTreeNode.isBlock});
+			if(variableInfo.isCacheable && variableInfo.srcVariable) {
+				variableInfo.srcVariable[mode] = parser;
+			}
+		}
+		var parseTreeNodes = parser ? parser.tree : [];
 		// Wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
 		var attributes = {};
 		$tw.utils.each(variableInfo.params,function(param) {

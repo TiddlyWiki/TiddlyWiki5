@@ -15,7 +15,9 @@ $baseFilename$$(extension)$
 </$list>
 </$button></span><$reveal state=<<qualify "$:/state/popup/export">> type="popup" position="below" animate="yes">
 <div class="tc-drop-down">
+<$set name="count" value={{{ [subfilter<__exportFilter__>count[]] }}}>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/Exporter]]">
+<$list filter="[<currentTiddler>has[condition]subfilter{!!condition}limit[1]] ~[<currentTiddler>!has[condition]then[true]]" variable="ignore">
 <$set name="extension" value={{!!extension}}>
 <$button class="tc-btn-invisible">
 <$action-sendmessage $message="tm-download-file" $param=<<currentTiddler>> exportFilter=<<__exportFilter__>> filename=<<exportButtonFilename """$baseFilename$""">>/>
@@ -24,6 +26,8 @@ $baseFilename$$(extension)$
 </$button>
 </$set>
 </$list>
+</$list>
+</$set>
 </div>
 </$reveal>
 \end

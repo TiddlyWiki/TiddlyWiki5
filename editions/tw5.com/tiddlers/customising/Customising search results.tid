@@ -29,3 +29,21 @@ Here is an example of an alternative visualisation that displays results in reve
 <<searchResults>>
 ```
 
+<<.from-version 5.1.23>> The sidebar search introduces a more sophisticated search-mechanism which makes it possible to navigate the search results using the keyboard shortcuts <kbd><<displayshortcuts ((input-down))>></kbd> and <kbd><<displayshortcuts ((input-up))>></kbd>. To add that mechanism to your own custom search results follow these simple steps:
+
+# Your tiddler tagged <<tag-pill "$:/tags/SearchResults">>is accessible through the <<.var configTiddler>> variable
+# The user-input in the search field is accessible through the <<.var userInput>> variable
+# Use the fields <<.field first-search-filter>> and <<.field second-search-filter>> to store the filters used for your search results. See the tiddler $:/core/ui/DefaultSearchResultList for details
+# Use the following form so that navigated search-results are highlighted, modify it to match your needs:
+
+```
+<$list filter="[<userInput>minlength[1]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
+<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
+</$list>
+```
+
+<$macrocall $name=".tip" _="Note that the <<.var searchTiddler>> variable still contains the name of the tiddler that is used for sorting the search results. The <<.var editTiddler>> variable contains the name of the tiddler that is being edited."/>

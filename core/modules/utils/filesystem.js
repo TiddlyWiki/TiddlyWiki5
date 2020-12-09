@@ -204,15 +204,23 @@ exports.deleteEmptyDirs = function(dirpath,callback) {
 /*
 Create a fileInfo object for saving a tiddler:
 	filepath: the absolute path to the file containing the tiddler
-	type: the type of the tiddler file (NOT the type of the tiddler)
+	type: the type of the tiddler file on disk (NOT the type of the tiddler)
 	hasMetaFile: true if the file also has a companion .meta file
+	isEditableFile: true if the tiddler was loaded via non-standard options & marked editable
 Options include:
 	directory: absolute path of root directory to which we are saving
 	pathFilters: optional array of filters to be used to generate the base path
-	wiki: optional wiki for evaluating the pathFilters
+	extFilters: optional array of filters to be used to generate the base path
+	wiki: optional wiki for evaluating the pathFilters,
+	fileInfo: an existing fileInfo to check against
+	originalpath: a preferred filepath if no pathFilters match
 */
 exports.generateTiddlerFileInfo = function(tiddler,options) {
-	var fileInfo = {};
+	var fileInfo = {}, metaExt;
+	// Propagate the isEditableFile flag
+	if(options.fileInfo) {
+		fileInfo.isEditableFile = options.fileInfo.isEditableFile || false;
+	}
 	// Check if the tiddler has any unsafe fields that can't be expressed in a .tid or .meta file: containing control characters, or leading/trailing whitespace
 	var hasUnsafeFields = false;
 	$tw.utils.each(tiddler.getFieldStrings(),function(value,fieldName) {
@@ -238,17 +246,67 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 			fileInfo.type = tiddlerType;
 			fileInfo.hasMetaFile = true;
 		}
+		if(options.extFilters) {
+			// Check for extension override
+			metaExt = $tw.utils.generateTiddlerExtension(tiddler.fields.title,{
+				extFilters: options.extFilters,
+				wiki: options.wiki
+			});
+			if(metaExt){
+				if(metaExt === ".tid") {
+					// Overriding to the .tid extension needs special handling
+					fileInfo.type = "application/x-tiddler";
+					fileInfo.hasMetaFile = false;
+				} else if (metaExt === ".json") {
+					// Overriding to the .json extension needs special handling
+					fileInfo.type = "application/json";
+					fileInfo.hasMetaFile = false;
+				} else {
+					//If the new type matches a known extention, use that MIME type's encoding
+					var extInfo = $tw.utils.getFileExtensionInfo(metaExt);
+					fileInfo.type = extInfo ? extInfo.type : null;
+					fileInfo.encoding = $tw.utils.getTypeEncoding(metaExt);
+					fileInfo.hasMetaFile = true;
+				}
+			}
+		}
 	}
-	// Take the file extension from the tiddler content type
+	// Take the file extension from the tiddler content type or metaExt
 	var contentTypeInfo = $tw.config.contentTypeInfo[fileInfo.type] || {extension: ""};
 	// Generate the filepath
 	fileInfo.filepath = $tw.utils.generateTiddlerFilepath(tiddler.fields.title,{
-		extension: contentTypeInfo.extension,
+		extension: metaExt || contentTypeInfo.extension,
 		directory: options.directory,
 		pathFilters: options.pathFilters,
-		wiki: options.wiki
+		wiki: options.wiki,
+		fileInfo: options.fileInfo,
+		originalpath: options.originalpath
 	});
 	return fileInfo;
+};
+
+/*
+Generate the file extension for saving a tiddler
+Options include:
+	extFilters: optional array of filters to be used to generate the extention
+	wiki: optional wiki for evaluating the extFilters
+*/
+exports.generateTiddlerExtension = function(title,options) {
+	var self = this,
+		extension;
+	// Check if any of the extFilters applies
+	if(options.extFilters && options.wiki) { 
+		$tw.utils.each(options.extFilters,function(filter) {
+			if(!extension) {
+				var source = options.wiki.makeTiddlerIterator([title]),
+					result = options.wiki.filterTiddlers(filter,null,source);
+				if(result.length > 0) {
+					extension = result[0];
+				}
+			}
+		});
+	}
+	return extension;
 };
 
 /*
@@ -258,12 +316,14 @@ Options include:
 	directory: absolute path of root directory to which we are saving
 	pathFilters: optional array of filters to be used to generate the base path
 	wiki: optional wiki for evaluating the pathFilters
+	fileInfo: an existing fileInfo object to check against
 */
 exports.generateTiddlerFilepath = function(title,options) {
 	var self = this,
 		directory = options.directory || "",
 		extension = options.extension || "",
-		filepath;
+		originalpath = options.originalpath || "",
+		filepath;	
 	// Check if any of the pathFilters applies
 	if(options.pathFilters && options.wiki) {
 		$tw.utils.each(options.pathFilters,function(filter) {
@@ -276,8 +336,11 @@ exports.generateTiddlerFilepath = function(title,options) {
 			}
 		});
 	}
-	// If not, generate a base pathname
-	if(!filepath) {
+	if(!filepath && originalpath !== "") {
+		//Use the originalpath without the extension
+		var ext = path.extname(originalpath);
+		filepath = originalpath.substring(0,originalpath.length - ext.length);;
+	} else if(!filepath) {
 		filepath = title;
 		// If the filepath already ends in the extension then remove it
 		if(filepath.substring(filepath.length - extension.length) === extension) {
@@ -286,10 +349,13 @@ exports.generateTiddlerFilepath = function(title,options) {
 		// Remove any forward or backward slashes so we don't create directories
 		filepath = filepath.replace(/\/|\\/g,"_");
 	}
-	// Don't let the filename start with a dot because such files are invisible on *nix
-	filepath = filepath.replace(/^\./g,"_");
+	//If the path does not start with "." or ".." and a path seperator, then
+	if(!/^\.{1,2}[/\\]/g.test(filepath)) {
+		// Don't let the filename start with any dots because such files are invisible on *nix
+		filepath = filepath.replace(/^\.+/g,"_");
+	}
 	// Remove any characters that can't be used in cross-platform filenames
-	filepath = $tw.utils.transliterate(filepath.replace(/<|>|\:|\"|\||\?|\*|\^/g,"_"));
+	filepath = $tw.utils.transliterate(filepath.replace(/<|>|~|\:|\"|\||\?|\*|\^/g,"_"));
 	// Truncate the filename if it is too long
 	if(filepath.length > 200) {
 		filepath = filepath.substr(0,200);
@@ -306,12 +372,21 @@ exports.generateTiddlerFilepath = function(title,options) {
 		});
 	}
 	// Add a uniquifier if the file already exists
-	var fullPath,
+	var fullPath, oldPath = (options.fileInfo) ? options.fileInfo.filepath : undefined,
 		count = 0;
 	do {
 		fullPath = path.resolve(directory,filepath + (count ? "_" + count : "") + extension);
+		if(oldPath && oldPath == fullPath) {
+			break;
+		}
 		count++;
 	} while(fs.existsSync(fullPath));
+	//If the path does not start with the wikiPath directory or the wikiTiddlersPath directory, or if the last write failed
+	var encode = !(fullPath.indexOf(path.resolve($tw.boot.wikiPath)) == 0 || fullPath.indexOf($tw.boot.wikiTiddlersPath) == 0) || ((options.fileInfo || {writeError: false}).writeError == true);
+	if(encode){
+		//encodeURIComponent() and then resolve to tiddler directory
+		fullPath = path.resolve(directory, encodeURIComponent(fullPath));
+	}
 	// Return the full path to the file
 	return fullPath;
 };
@@ -363,6 +438,60 @@ exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 		} else {
 			fs.writeFileSync(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8");
 		}
+	}
+};
+
+/*
+Delete a file described by the fileInfo if it exits
+*/
+exports.deleteTiddlerFile = function(fileInfo, callback) {
+	//Only attempt to delete files that exist on disk
+	if(!fileInfo.filepath || !fs.existsSync(fileInfo.filepath)) {
+		return callback(null);
+	}
+	// Delete the file
+	fs.unlink(fileInfo.filepath,function(err) {
+		if(err) {
+			return callback(err);
+		}	
+		// Delete the metafile if present
+		if(fileInfo.hasMetaFile && fs.existsSync(fileInfo.filepath + ".meta")) {
+			fs.unlink(fileInfo.filepath + ".meta",function(err) {
+				if(err) {
+					return callback(err);
+				}
+				return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),callback);
+			});
+		} else {
+			return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),callback);
+		}
+	});
+};
+
+/*
+Cleanup old files on disk, by comparing the options values:
+	adaptorInfo from $tw.syncer.tiddlerInfo
+	bootInfo from $tw.boot.files
+*/
+exports.cleanupTiddlerFiles = function(options, callback) {
+	var adaptorInfo = options.adaptorInfo || {},
+	bootInfo = options.bootInfo || {},
+	title = options.title || "undefined";
+	if(adaptorInfo.filepath && bootInfo.filepath && adaptorInfo.filepath !== bootInfo.filepath) {
+		return $tw.utils.deleteTiddlerFile(adaptorInfo, function(err){
+			if(err) {
+				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
+					// Error deleting the previous file on disk, should fail gracefully
+					$tw.syncer.displayError("Server desynchronized. Error cleaning up previous file for tiddler: "+title, err);
+					return callback(null);
+				} else {
+					return callback(err);
+				}
+			}
+			return callback(null);
+		});
+	} else {
+		return callback(null);
 	}
 };
 

@@ -1,6 +1,6 @@
 caption: HTML
 created: 20131205160816081
-modified: 20161021102422842
+modified: 20201125094415933
 tags: WikiText
 title: HTML in WikiText
 type: text/vnd.tiddlywiki
@@ -21,6 +21,14 @@ This is my nice and simple block of text. HelloThere
 To get the content of an HTML element to be parsed in block mode, the opening tag must be followed by two linebreaks.
 
 Without the two linebreaks, the tag content will be parsed in inline mode which means that block mode formatting such as wikitext tables, lists and headings is not recognised.
+
+! Self closing elements
+
+The following tags are treated as 'void'. This means that `<tag>` is treated as if it were `<tag/>`, and that  no terminating `</tag>` is needed (if one is provided it will be ignored and treated as plain text).
+
+* `<area>`, `<base>`, `<br>`, `<col>`, `<command>`, `<embed>`, `<hr>`, `<img>`, `<input>`, `<keygen>`, `<link>`, `<meta>`, `<param>`, `<source>`, `<track>`, `<wbr>`
+
+If you don’t close any other tag then it will behave as if the missing closing tag were at the end of the tiddler.
 
 ! Attributes
 

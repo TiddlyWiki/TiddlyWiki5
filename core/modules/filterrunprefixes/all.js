@@ -18,7 +18,7 @@ Export our filter prefix function
 */
 exports.all = function(operationSubFunction) {
 	return function(results,source,widget) {
-		Array.prototype.push.apply(results,operationSubFunction(source,widget));
+		results.push.apply(results, operationSubFunction(source,widget));
 	};
 };
 

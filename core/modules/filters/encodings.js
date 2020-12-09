@@ -77,7 +77,7 @@ exports.encodehtml = function(source,operator,options) {
 exports.stringify = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		results.push($tw.utils.stringify(title));
+		results.push($tw.utils.stringify(title,(operator.suffix === "rawunicode")));
 	});
 	return results;
 };
@@ -85,7 +85,7 @@ exports.stringify = function(source,operator,options) {
 exports.jsonstringify = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		results.push($tw.utils.jsonStringify(title));
+		results.push($tw.utils.jsonStringify(title,(operator.suffix === "rawunicode")));
 	});
 	return results;
 };

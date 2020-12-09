@@ -4,6 +4,8 @@ modified: 20201102221854719
 op-input: a [[selection of titles|Title Selection]]
 op-output: the titles stored as a [[title list|Title List]] in each input title
 op-purpose: select titles by interpreting each input title as a [[title list|Title List]]
+op-suffix: `dedupe` (the default) to remove duplicates, `raw` to leave duplicates untouched
+op-suffix-name: D
 tags: [[Filter Operators]] [[String Operators]] [[Selection Constructors]]
 title: enlist-input Operator
 type: text/vnd.tiddlywiki

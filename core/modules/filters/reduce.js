@@ -23,7 +23,7 @@ exports.reduce = function(source,operator,options) {
 	});
 	// Run the filter over each item
 	var filterFn = options.wiki.compileFilter(operator.operand),
-		accumulator = operator.suffix || "";
+		accumulator = operator.operands[1] || "";
 	for(var index=0; index<results.length; index++) {
 		var title = results[index],
 			list = filterFn.call(options.wiki,options.wiki.makeTiddlerIterator([title]),{

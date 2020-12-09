@@ -17,6 +17,8 @@ Basics/NewJournal/Title/Prompt: 新日誌條目的名稱
 Basics/NewTiddler/Tags/Prompt: 新條目的標籤
 Basics/NewTiddler/Title/Prompt: 新條目的名稱
 Basics/OverriddenShadowTiddlers/Prompt: 被覆寫的預設條目數量
+Basics/RemoveTags: 更新到當前格式
+Basics/RemoveTags/Hint: 將標籤設定更新為最新格式
 Basics/ShadowTiddlers/Prompt: 預設條目數量
 Basics/Subtitle/Prompt: 副標題
 Basics/SystemTiddlers/Prompt: 系統條目數量
@@ -127,6 +129,7 @@ Saving/TiddlySpot/Filename: 上傳檔名
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //預設之伺服器網址 `http://<wikiname>.tiddlyspot.com/store.cgi`，可改為自訂之伺服器網址，例如 `http://example.com/store.php`。//
 Saving/TiddlySpot/Password: 密碼
+Saving/TiddlySpot/ReadOnly: ~TiddlySpot 服務目前可能僅提供唯讀。詳見 http://tiddlyspot.com/
 Saving/TiddlySpot/ServerURL: 伺服器網址
 Saving/TiddlySpot/UploadDir: 上傳資料夾
 Saving/TiddlySpot/UserName: 帳號

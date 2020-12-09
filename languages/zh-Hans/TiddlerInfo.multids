@@ -14,7 +14,7 @@ List/Caption: 列表
 List/Empty: 此条目无指定列表
 Listed/Caption: 被列于
 Listed/Empty: 此条目未出现于其他条目的列表中
-References/Caption: 参照
+References/Caption: 反向链接
 References/Empty: 无条目链接至此
 Tagging/Caption: 子条目
 Tagging/Empty: 无任何条目以此条目之标题为标签

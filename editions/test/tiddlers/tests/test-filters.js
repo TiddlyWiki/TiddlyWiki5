@@ -184,6 +184,9 @@ function runTests(wiki) {
 	
 	it("should handle the enlist-input operator", function() {
 		expect(wiki.filterTiddlers("[[one two three]enlist-input[]]").join(",")).toBe("one,two,three");
+		expect(wiki.filterTiddlers("[[one two two three]enlist-input[]]").join(",")).toBe("one,two,three");
+		expect(wiki.filterTiddlers("[[one two two three]enlist-input:dedupe[]]").join(",")).toBe("one,two,three");
+		expect(wiki.filterTiddlers("[[one two two three]enlist-input:raw[]]").join(",")).toBe("one,two,two,three");
 		expect(wiki.filterTiddlers("[[one two three]] [[four five six]] +[enlist-input[]]").join(",")).toBe("one,two,three,four,five,six");
 		expect(wiki.filterTiddlers("[[one two three]] [[four five six]] [[seven eight]] +[enlist-input[]]").join(",")).toBe("one,two,three,four,five,six,seven,eight");
 		expect(wiki.filterTiddlers("[[]] +[enlist-input[]]").join(",")).toBe("");
@@ -456,7 +459,7 @@ function runTests(wiki) {
 	it("should handle indirect operands", function() {
 		expect(wiki.filterTiddlers("[prefix{Tiddler8}] +[sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 		expect(wiki.filterTiddlers("[modifier{Tiddler8!!test-field}] +[sort[title]]").join(",")).toBe("TiddlerOne");
-		var fakeWidget = {getVariable: function() {return "Tiddler Three";}};
+		var fakeWidget = {wiki: wiki, getVariable: function() {return "Tiddler Three";}};
 		expect(wiki.filterTiddlers("[modifier{!!modifier}] +[sort[title]]",fakeWidget).join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three");
 	});
 
@@ -776,6 +779,17 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("[[Hello There]search-replace:g:regexp<myregexp>,[]]",anchorWidget).join(",")).toBe("Hll Thr");
 		expect(wiki.filterTiddlers("[[Hello There]search-replace::regexp<myregexp>,[]]",anchorWidget).join(",")).toBe("Hllo There");
 		expect(wiki.filterTiddlers("[[Hello There]search-replace:gi[H],[]]",anchorWidget).join(",")).toBe("ello Tere");	
+	});
+	
+	it("should handle the pad operator", function() {
+	expect(wiki.filterTiddlers("[[2]pad[]]").join(",")).toBe("2");
+	expect(wiki.filterTiddlers("[[2]pad[0]]").join(",")).toBe("2");
+	expect(wiki.filterTiddlers("[[2]pad[1]]").join(",")).toBe("2");
+	expect(wiki.filterTiddlers("2 20 +[pad[3]]").join(",")).toBe("002,020");
+	expect(wiki.filterTiddlers("[[2]pad[9]]").join(",")).toBe("000000002");
+	expect(wiki.filterTiddlers("[[2]pad[9],[a]]").join(",")).toBe("aaaaaaaa2");
+	expect(wiki.filterTiddlers("[[12]pad[9],[abc]]").join(",")).toBe("abcabca12");
+	expect(wiki.filterTiddlers("[[12]pad:suffix[9],[abc]]").join(",")).toBe("12abcabca");
 	});
 }
 

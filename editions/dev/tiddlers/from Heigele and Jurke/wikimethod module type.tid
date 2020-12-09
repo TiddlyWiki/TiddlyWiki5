@@ -1,5 +1,6 @@
 created: 20140710185051844
-modified: 20140710185339032
+modified: 20201002010124844
 title: wikimethod module type
+tags: moduletypes
 
 The startup module [[$:/core/modules/startup/load-modules.js]]  in the TiddlyWiki core plug-in loads all modules of type``wikimethod`` and puts their exported functions into the wiki store.

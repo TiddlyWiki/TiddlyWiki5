@@ -14,6 +14,15 @@ The main module of the Jasmine test plugin for TiddlyWiki5
 
 var TEST_TIDDLER_FILTER = "[type[application/javascript]tag[$:/tags/test-spec]]";
 
+// Ensure this startup module is executed in the right order.
+// Jasmine calls `process.exit()` with a non-zero exit code if there's
+// any failed tests. Because of that, we want to make sure all critical
+// startup modules are run before this one.
+// * The "commands" module handles the --rendertiddler command-line flag,
+//   which is typically given to export an HTML file that can be opened with
+//   a browser to run tests.
+exports.after = ["commands"];
+
 /*
 Startup function for running tests
 

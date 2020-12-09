@@ -7,22 +7,29 @@ op-output: the input with JSON string encodings applied
 op-parameter: 
 op-parameter-name: 
 op-purpose: apply JSON string encoding to a string
+op-suffix: <<.from-version "5.1.23">> optionally, the keyword `rawunicode`
+op-suffix-name: R
 tags: [[Filter Operators]] [[String Operators]]
 title: jsonstringify Operator
 type: text/vnd.tiddlywiki
 
 The following substitutions are made:
 
-|!Character |!Replacement |
-|`\` |`\\` |
-|`"` |`\"` |
-|`\r` (carriage return) |`\\r` |
-|`\n` (line feed) |`\\n` |
-|`\x08` (backspace) |`\\b` |
-|`\x0c` (form field) |`\\f` |
-|`\t` (tab) |`\\t` |
-|Characters from 0x00 to 0x1f |`\\x##` where ## is two hex digits |
-|Characters from 0x80 to 0xffff |`\\u####` where #### is four hex digits |
+|!Character |!Replacement |!Condition |
+|`\` |`\\` |Always |
+|`"` |`\"` |Always |
+|Carriage return (0x0d) |`\\r` |Always |
+|Line feed (0x0a) |`\\n` |Always |
+|Backspace (0x08) |`\\b` |Always |
+|Form field (0x0c) |`\\f` |Always |
+|Tab (0x09) |`\\t` |Always |
+|Characters from 0x00 to 0x1f |`\\u####` where #### is four hex digits |Always |
+|Characters from 0x80 to 0xffff|`\\u####` where #### is four hex digits |If `rawunicode` suffix is not present (default) |
+|Characters from 0x80 to 0xffff|Unchanged |If `rawunicode` suffix is present <<.from-version "5.1.23">> |
+
+<<.from-version "5.1.23">> If the suffix `rawunicode` is present, Unicode characters above 0x80 (such as ß, ä, ñ or 🎄) will be passed through unchanged. Without the suffix, they will be substituted with `\\u` codes, which was the default behavior before 5.1.23.
+
+<<.note """Technical note: Characters outside the Basic Multilingual Plane, such as 🎄 and other emojis, will be encoded as a UTF-16 surrogate pair, i.e. with two `\u` sequences.""">>
 
 Also see the [[stringify Operator]].
 

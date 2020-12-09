@@ -8,9 +8,9 @@ tags: $:/tags/SideBarSegment
 <$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
 {{$:/core/images/down-arrow}}
 <$list filter="[{$(searchTiddler)$}minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
-<$vars userInput={{{ [<searchTiddler>get[text]] }}} configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}}>
-<$vars primaryListFilter={{{ [<configTiddler>get[first-search-filter]] }}} secondaryListFilter={{{ [<configTiddler>get[second-search-filter]] }}}>
-<$set name="resultCount" value="""<$count filter="[subfilter<primaryListFilter>] =[subfilter<secondaryListFilter>]"/>""">
+<$vars userInput={{{ [<searchTiddler>get[text]] }}} configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}} replaceRegexp="limit\[\d+\]">
+<$vars primaryListFilter={{{ [<configTiddler>get[first-search-filter]search-replace:g:regexp<replaceRegexp>,[]] }}} secondaryListFilter={{{ [<configTiddler>get[second-search-filter]search-replace:g:regexp<replaceRegexp>,[]] }}}>
+<$set name="resultCount" value="""<$count filter="[subfilter<primaryListFilter>] [subfilter<secondaryListFilter>]"/>""">
 {{$:/language/Search/Matches}}
 </$set>
 </$vars>
@@ -46,12 +46,12 @@ tags: $:/tags/SideBarSegment
 
 <div class="tc-sidebar-lists tc-sidebar-search">
 
-<$vars searchTiddler="$:/temp/search/input" searchListState=<<qualify "$:/state/search-list/selected-item">>>
+<$vars editTiddler="$:/temp/search" searchTiddler="$:/temp/search/input" searchListState=<<qualify "$:/state/search-list/selected-item">>>
 <div class="tc-search">
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
 <$keyboard key="((advanced-search-sidebar))" actions=<<advanced-search-actions>>>
-<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/search" storeTitle=<<searchTiddler>> 
+<$macrocall $name="keyboard-driven-input" tiddler=<<editTiddler>> storeTitle=<<searchTiddler>> 
 		selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" 
 		tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> 
 		class="tc-popup-handle" filterMinLength={{$:/config/Search/MinLength}} inputCancelActions=<<cancel-search-actions>> 
