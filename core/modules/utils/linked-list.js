@@ -24,32 +24,11 @@ LinkedList.prototype.clear = function() {
 LinkedList.prototype.remove = function(value) {
 	if($tw.utils.isArray(value)) {
 		for(var t=0; t<value.length; t++) {
-			this._removeOne(value[t]);
+			_removeOne(this,value[t]);
 		}
 	} else {
-		this._removeOne(value);
+		_removeOne(this,value);
 	}
-};
-
-LinkedList.prototype._removeOne = function(value) {
-	var node = this.index[value];
-	if(node) {
-		node.prev.next = node.next;
-		node.next.prev = node.prev;
-		this.length -= 1;
-		// Point index to the next instance of the same value, maybe nothing.
-		this.index[value] = node.copy;
-	}
-	return node;
-};
-
-LinkedList.prototype._linkToEnd = function(node) {
-	// Sticks the given node onto the end of the list.
-	this.prev.next = node;
-	node.prev = this.prev;
-	this.prev = node;
-	node.next = this;
-	this.length += 1;
 };
 
 LinkedList.prototype.push = function(/* values */) {
@@ -57,7 +36,7 @@ LinkedList.prototype.push = function(/* values */) {
 		var value = arguments[i];
 		var node = {value: value};
 		var preexistingNode = this.index[value];
-		this._linkToEnd(node);
+		_linkToEnd(this,node);
 		if(preexistingNode) {
 			// We want to keep pointing to the first instance, but we want
 			// to have that instance (or chain of instances) point to the
@@ -75,11 +54,11 @@ LinkedList.prototype.push = function(/* values */) {
 LinkedList.prototype.pushTop = function(value) {
 	if($tw.utils.isArray(value)) {
 		for(var t=0; t<value.length; t++) {
-			this._removeOne(value[t]);
+			_removeOne(this,value[t]);
 		}
-		this.push.apply(this, value);
+		this.push.apply(this,value);
 	} else {
-		var node = this._removeOne(value);
+		var node = _removeOne(this,value);
 		if(!node) {
 			node = {value: value};
 			this.index[value] = node;
@@ -95,7 +74,7 @@ LinkedList.prototype.pushTop = function(value) {
 			this.index[value] = node.copy;
 			node.copy = undefined;
 		}
-		this._linkToEnd(node);
+		_linkToEnd(this,node);
 	}
 };
 
@@ -111,6 +90,27 @@ LinkedList.prototype.toArray = function() {
 		output.push(ptr.value);
 	}
 	return output;
+};
+
+function _removeOne(list,value) {
+	var node = list.index[value];
+	if(node) {
+		node.prev.next = node.next;
+		node.next.prev = node.prev;
+		list.length -= 1;
+		// Point index to the next instance of the same value, maybe nothing.
+		list.index[value] = node.copy;
+	}
+	return node;
+};
+
+function _linkToEnd(list,node) {
+	// Sticks the given node onto the end of the list.
+	list.prev.next = node;
+	node.prev = list.prev;
+	list.prev = node;
+	node.next = list;
+	list.length += 1;
 };
 
 exports.LinkedList = LinkedList;
