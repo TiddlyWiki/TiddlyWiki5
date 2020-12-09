@@ -2,6 +2,7 @@ title: $:/core/templates/exporters/TidFile
 tags: $:/tags/Exporter
 description: {{$:/language/Exporters/TidFile}}
 extension: .tid
+condition: [<count>compare:lte[1]]
 
 \define renderContent()
 {{{ $(exportFilter)$ +[limit[1]] ||$:/core/templates/tid-tiddler}}}

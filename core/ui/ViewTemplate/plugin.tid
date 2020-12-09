@@ -1,6 +1,8 @@
 title: $:/core/ui/ViewTemplate/plugin
 tags: $:/tags/ViewTemplate
 
+<$reveal tag="div" class="tc-tiddler-plugin-info" type="nomatch" stateTitle=<<folded-state>> text="hide" retain="yes" animate="yes">
+
 <$list filter="[all[current]has[plugin-type]] -[all[current]field:plugin-type[import]]">
 <$set name="plugin-type" value={{!!plugin-type}}>
 <$set name="default-popup-state" value="yes">
@@ -10,3 +12,4 @@ tags: $:/tags/ViewTemplate
 </$set>
 </$set>
 </$list>
+</$reveal>
