@@ -1,0 +1,19 @@
+created: 20201117164024930
+modified: 20201117164308641
+tags: Resources
+title: RegExp in Tiddlywiki by Mohammad
+type: text/vnd.tiddlywiki
+url: http://tw-regexp.tiddlyspot.com/
+
+~RegExp in Tiddlywiki contains practical use cases of reular expression in Tiddlywiki. 
+
+{{!!url}}
+
+The regular expression is a way to describe complex search patterns using sequences of characters .
+
+~RegExp in Tiddlywiki has four main parts
+
+* Using regular expression to match a pattern in tiddler title
+* Using regular expression to match a pattern in tiddler fields excluding tiddler text (body)
+* Using regular expression to match a pattern in tiddler body (text field)
+* Using regular expression for validation like username, password, etc.

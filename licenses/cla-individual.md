@@ -413,3 +413,5 @@ Florian Kohrt, @fkohrt, 2020/09/10
 Gerald Liu, @gera2ld, 2020/09/25
 
 Stefano Stoduto, @OmbraDiFenice, 2020/10/03
+
+Miha Lunar, @SmilyOrg, 2020/11/04
