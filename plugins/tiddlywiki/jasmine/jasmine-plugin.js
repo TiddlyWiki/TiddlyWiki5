@@ -14,6 +14,7 @@ The main module of the Jasmine test plugin for TiddlyWiki5
 
 var TEST_TIDDLER_FILTER = "[type[application/javascript]tag[$:/tags/test-spec]]";
 
+exports.name = "jasmine";
 // Ensure this startup module is executed in the right order.
 // In Node.js, Jasmine calls `process.exit()` with a non-zero exit code if there's
 // any failed tests. Because of that, we want to make sure all critical
