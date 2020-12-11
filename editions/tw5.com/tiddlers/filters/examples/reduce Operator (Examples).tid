@@ -7,11 +7,9 @@ type: text/vnd.tiddlywiki
 \define add-price() [get[price]multiply{!!quantity}add<accumulator>]
 \define num-items() [get[quantity]add<accumulator>]
 \define join-with-commas() [<index>compare:number:gt[0]then<accumulator>addsuffix[, ]addsuffix<currentTiddler>else<currentTiddler>]
+\define multiply-input() [multiply<accumulator>]
 \define display-variable(name)
 ''<$text text=<<__name__>>/>'': <code><$text text={{{ [<__name__>getvariable[]] }}}/></code>
-\end
-\define reduce-tip()
-Remember that <<.op reduce>> always produces output, so <<.op else>> will never trigger after <<.op reduce>>.
 \end
 
 These examples use the following predefined variables:
@@ -19,6 +17,7 @@ These examples use the following predefined variables:
 * <<display-variable add-price>>
 * <<display-variable num-items>>
 * <<display-variable join-with-commas>>
+* <<display-variable multiply-input>>
 
 They also use the following data tiddlers:
 
@@ -30,32 +29,10 @@ They also use the following data tiddlers:
 </$list>
 </ul>
 
-Number of items: 
-
 <<.operator-example 1 "[tag[shopping]reduce<num-items>]">>
-
-Total price:
-
 <<.operator-example 2 "[tag[shopping]reduce<add-price>]">>
-
-Using `<index>` to act differently on the first item than the rest:
-
-<<.operator-example 3 "[tag[shopping]reduce<join-with-commas>]">>
-
-Empty input, no second parameter:
-
-<<.operator-example 4 "[tag[non-existent]reduce<add-price>]">>
-
-Note how the output contains a single item with no text. This is not "empty output" for the purposes of the <<.op else>> operator.
-
-<$macrocall $name=".tip" _=<<reduce-tip>> />
-
-Empty input, no second parameter, followed by <<.op else>>:
-
-<<.operator-example 5 "[tag[non-existent]reduce<add-price>else[0]]">>
-
-Note how the output still contains a single item with no text: <<.op else>> did not trigger. If you want the value to be 0 when <<.op reduce>> has no items to process, you need to specify 0 as the initial value by passing it as a second parameter to <<.op reduce>>.
-
-Empty input, second parameter provided:
-
-<<.operator-example 6 "[tag[non-existent]reduce<add-price>,[0]]">>
+<<.operator-example 3 "[tag[shopping]reduce<join-with-commas>]" "Uses `<index>` to act differently on the first item than the rest">>
+<<.operator-example 4 "[tag[non-existent]reduce<add-price>]" "Empty input produces empty output">>
+<<.operator-example 5 "[tag[non-existent]reduce<add-price>else[0]]" "Use `else` to ensure output if input was empty">>
+<<.operator-example 6 "=1 =2 =3 +[reduce<multiply-input>]" "Empty initial value is treated as 0 by mathematical operators">>
+<<.operator-example 7 "=1 =2 =3 +[reduce<multiply-input>,[1]]" "Setting initial value is sometimes necessary for correct results">>
