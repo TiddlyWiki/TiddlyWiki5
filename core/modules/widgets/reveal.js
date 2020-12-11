@@ -216,12 +216,7 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes.positionAllowNegative || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex) {
 		this.refreshSelf();
 		return true;
-	} else if(changedAttributes.style) {
-		this.domNode.style = this.getAttribute("style");
-	} else if(changedAttributes["class"]) {
-		this.assignDomNodeClasses();
-	}
-	else {
+	} else {
 		var currentlyOpen = this.isOpen;
 		this.readState();
 		if(this.isOpen !== currentlyOpen) {
@@ -234,6 +229,12 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 		} else if(this.type === "popup" && this.updatePopupPosition && (changedTiddlers[this.state] || changedTiddlers[this.stateTitle])) {
 			this.positionPopup(this.domNode);
 		}
+		if(changedAttributes.style) {
+			this.domNode.style = this.getAttribute("style");
+		}
+		if(changedAttributes["class"]) {
+			this.assignDomNodeClasses();
+		}		
 		return this.refreshChildren(changedTiddlers);
 	}
 };
