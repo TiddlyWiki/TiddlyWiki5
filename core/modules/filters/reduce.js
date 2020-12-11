@@ -48,7 +48,11 @@ exports.reduce = function(source,operator,options) {
 			accumulator = "" +  list[0];
 		}
 	}
-	return [accumulator];
+	if(results.length > 0) {
+		return [accumulator];
+	} else {
+		return [];
+	}
 };
 
 })();
