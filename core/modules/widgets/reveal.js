@@ -230,7 +230,7 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 			this.positionPopup(this.domNode);
 		}
 		if(changedAttributes.style) {
-			this.domNode.style = this.getAttribute("style");
+			this.domNode.style = this.getAttribute("style","");
 		}
 		if(changedAttributes["class"]) {
 			this.assignDomNodeClasses();
