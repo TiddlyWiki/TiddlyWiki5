@@ -17,10 +17,10 @@ name: tiddlywiki
 \end
 \define set-selection-background-css(colour,colourA,colourB)
 <$set name="backgroundColour" value=<<contrastcolour target:"""$colour$""" fallbackTarget:"""""" colourA:"""$colourA$""" colourB:"""$colourB$""">>>
-.cm-s-tiddlywiki div.CodeMirror-selected { background: <<backgroundColour>>; }
-.cm-s-tiddlywiki.CodeMirror ::selection { background: <<backgroundColour>>; }
-.cm-s-tiddlywiki .CodeMirror-line::-moz-selection,  .CodeMirror-line > span::-moz-selection,  .CodeMirror-line > span > span::-moz-selection { background: <<backgroundColour>>; }
-.cm-s-tiddlywiki .CodeMirror-line::selection,  .CodeMirror-line > span::selection,  .CodeMirror-line > span > span::selection { background: <<backgroundColour>>; }
+.cm-s-tiddlywiki div.CodeMirror-selected { background: <<backgroundColour>>; color: <<colour foreground>>; }
+.cm-s-tiddlywiki.CodeMirror ::selection { background: <<backgroundColour>>; color: <<colour foreground>>; }
+.cm-s-tiddlywiki .CodeMirror-line::-moz-selection,  .CodeMirror-line > span::-moz-selection,  .CodeMirror-line > span > span::-moz-selection { background: <<backgroundColour>>; color: <<colour foreground>>; }
+.cm-s-tiddlywiki .CodeMirror-line::selection,  .CodeMirror-line > span::selection,  .CodeMirror-line > span > span::selection { background: <<backgroundColour>>; color: <<colour foreground>>; }
 </$set>
 \end
 \define set-selection-background-colours(palette)
