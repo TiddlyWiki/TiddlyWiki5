@@ -1899,6 +1899,19 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			tiddlers.push({tiddlers: fileTiddlers});
 		}
 	};
+	// Helper to recursively search subdirectories
+	var getAllFiles = function(dirPath, arrayOfFiles) {
+		files = fs.readdirSync(dirPath)	;
+		arrayOfFiles = arrayOfFiles || [];	  
+		files.forEach(function(file) {
+		  if (fs.statSync(dirPath + path.sep + file).isDirectory()) {
+			arrayOfFiles = getAllFiles(dirPath + path.sep + file, arrayOfFiles)
+		  } else {
+			arrayOfFiles.push(path.join(dirPath, path.sep, file))
+		  }
+		})	  
+		return arrayOfFiles
+	  }
 	// Process the listed tiddlers
 	$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
 		if(tidInfo.prefix && tidInfo.suffix) {
@@ -1922,7 +1935,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			// Process directory specifier
 			var dirPath = path.resolve(filepath,dirSpec.path);
 			if(fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
-				var	files = fs.readdirSync(dirPath),
+				var	files = (dirSpec.searchSubdirectories)? getAllFiles(dirPath): fs.readdirSync(dirPath),
 					fileRegExp = new RegExp(dirSpec.filesRegExp || "^.*$"),
 					metaRegExp = /^.*\.meta$/;
 				for(var t=0; t<files.length; t++) {
