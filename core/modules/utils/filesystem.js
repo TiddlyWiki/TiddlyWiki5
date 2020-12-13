@@ -382,15 +382,15 @@ exports.generateTiddlerFilepath = function(title,options) {
 		count++;
 	} while(fs.existsSync(fullPath));
 	//If the path does not start with the wikiPath directory or the wikiTiddlersPath directory, or if the last write failed
-	var newPath;
+	var newPath = fullPath;
 	var encode = !(fullPath.indexOf($tw.boot.wikiPath) == 0 || fullPath.indexOf($tw.boot.wikiTiddlersPath) == 0) || ((options.fileInfo || {writeError: false}).writeError == true);
 	if(encode){
 		//encodeURIComponent() and then resolve to tiddler directory
 		newPath = path.resolve(directory, encodeURIComponent(fullPath));
 	}
-	var alternatePath = $tw.hooks.invokeHook("th-make-tiddler-path", null, fullPath);
+	fullPath = $tw.hooks.invokeHook("th-make-tiddler-path", newPath, fullPath);
 	// Return the full path to the file
-	return alternatePath || newPath || fullPath;
+	return fullPath;
 };
 
 /*
