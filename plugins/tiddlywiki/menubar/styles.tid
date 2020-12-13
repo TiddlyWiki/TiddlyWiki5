@@ -213,3 +213,10 @@ nav.tc-menubar .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
 	<<set-sidebar-scrollable-top>>
 
 }
+@media print {
+
+	nav.tc-menubar {
+		display: none;
+	}
+
+}
