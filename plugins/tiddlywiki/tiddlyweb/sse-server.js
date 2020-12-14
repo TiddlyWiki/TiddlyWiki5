@@ -12,53 +12,67 @@ GET /events/plugins/tiddlywiki/tiddlyweb
 /*global $tw: false */
 "use strict";
 
-/** @type {any[]} */
 var wikis = [];
-/** @type {{
- *   request: import("http").IncomingMessage,
- *   state: {wiki,pathPrefix},
- *   emit: (event: string, data: string) => void,
- *   end: () => void
- * }[][]} */
-var conns = [];
-/**
- * Setups up the array for this wiki and adds the change listener
- * 
- * @param {$tw.Wiki} wiki The wiki object to listen to changes on
- */
+var connections = [];
+
+/*
+Setup up the array for this wiki and add the change listener
+*/
 function setupWiki(wiki) {
-  var index = wikis.length;
-  var connections = [];
-  // Add a new array for this wiki (object references work as keys)
-  wikis.push(wiki);
-  conns.push(connections);
-  // Add the change listener for this wiki
-  wiki.addEventListener("change", function(changes) {
-    connections.forEach(function(item) {
-      item.emit("change", JSON.stringify(changes));
-    });
-  });
-  return index;
+	var index = wikis.length;
+	// Add a new array for this wiki (object references work as keys)
+	wikis.push(wiki);
+	connections.push([]);
+	// Listen to change events for this wiki
+	wiki.addEventListener("change",function(changes) {
+		var jsonChanges = JSON.stringify(changes);
+		getWikiConnections(wiki).forEach(function(item) {
+			item.emit("change",jsonChanges);
+		});
+	});
+	return index;
 }
 
-/**
- * 
- * @param {import("http").IncomingMessage} request 
- * @param {{wiki,pathPrefix}} state 
- * @param {(event: string, data: string) => void} emit 
- * @param {() => void} end 
- */
-function handleConnection(request, state, emit, end) {
-  var index = wikis.indexOf(state.wiki);
-  // Setup this particular wiki if we haven't seen it before
-  if (index === -1) index = setupWiki(state.wiki);
-  // Add the connection to the list of connections for this wiki
-  var item = { request: request, state: state, emit: emit, end: end };
-  conns[index].push(item);
-  // Remove the connection when it closes
-  request.on("close",function(){
-    var remIndex = conns[index].indexOf(item);
-    if(remIndex > -1) conns[index].splice(remIndex,1);
+/*
+Setup this particular wiki if we haven't seen it before
+*/
+function ensureWikiSetup(wiki) {
+	if(wikis.indexOf(wiki) === -1) {
+		setupWiki(wiki);
+	}
+}
+
+/*
+Return the array of connections for a particular wiki
+*/
+function getWikiConnections(wiki) {
+	return connections[wikis.indexOf(wiki)];
+}
+
+function addWikiConnection(wiki,connection) {
+	getWikiConnections(wiki).push(connection);
+}
+
+function removeWikiConnection(wiki,connection) {
+	var wikiConnections = getWikiConnections(wiki);
+	var index = wikiConnections.indexOf(connection);
+	if(index !== -1) {
+		wikiConnections.splice(index,1);
+	}
+}
+
+function handleConnection(request,state,emit,end) {
+	ensureWikiSetup(state.wiki);
+	// Add the connection to the list of connections for this wiki
+	var connection = {
+		request: request,
+		state: state,
+		emit: emit,
+		end: end
+	};
+	addWikiConnection(state.wiki,connection);
+	request.on("close",function() {
+		removeWikiConnection(state.wiki,connection);
   });
 }
 
