@@ -15,16 +15,20 @@ name: tiddlywiki
 \define set-fat-cursor-background()
 <$macrocall $name="set-fat-cursor-background-colours" palette={{$:/palette}}/>
 \end
-\define set-selection-background-css(colour,colourA,colourB)
+\define set-selection-background-css(colour,colourA,colourB,tiddlerEditorBackground)
+<$wikify name="tiddlerEditorBackground" text={{{ [[$tiddlerEditorBackground$]lowercase[]] }}}>
 <$set name="backgroundColour" value=<<contrastcolour target:"""$colour$""" fallbackTarget:"""""" colourA:"""$colourA$""" colourB:"""$colourB$""">>>
-.cm-s-tiddlywiki div.CodeMirror-selected { background: <<backgroundColour>>; }
-.cm-s-tiddlywiki.CodeMirror ::selection { background: <<backgroundColour>>; }
-.cm-s-tiddlywiki .CodeMirror-line::-moz-selection,  .CodeMirror-line > span::-moz-selection,  .CodeMirror-line > span > span::-moz-selection { background: <<backgroundColour>>; }
-.cm-s-tiddlywiki .CodeMirror-line::selection,  .CodeMirror-line > span::selection,  .CodeMirror-line > span > span::selection { background: <<backgroundColour>>; }
+<$set name="backgroundColour" value={{{ [<backgroundColour>lowercase[]match<tiddlerEditorBackground>then[]] ~[<backgroundColour>] }}}>
+.cm-s-tiddlywiki div.CodeMirror-selected { background: <<backgroundColour>>; color: <<colour foreground>>; }
+.cm-s-tiddlywiki.CodeMirror ::selection { background: <<backgroundColour>>; color: <<colour foreground>>; }
+.cm-s-tiddlywiki .CodeMirror-line::-moz-selection,  .CodeMirror-line > span::-moz-selection,  .CodeMirror-line > span > span::-moz-selection { background: <<backgroundColour>>; color: <<colour foreground>>; }
+.cm-s-tiddlywiki .CodeMirror-line::selection,  .CodeMirror-line > span::selection,  .CodeMirror-line > span > span::selection { background: <<backgroundColour>>; color: <<colour foreground>>; }
 </$set>
+</$set>
+</$wikify>
 \end
 \define set-selection-background-colours(palette)
-<$macrocall $name="set-selection-background-css" colour={{$palette$##foreground}} colourA={{{ [{$palette$##selection-background}!match[]!prefix[<<]!suffix[>>]] ~#073642 }}} colourB={{{ [{$palette$##selection-background}!match[]!prefix[<<]!suffix[>>]] ~#eee8d5 }}}/>
+<$macrocall $name="set-selection-background-css" colour={{$palette$##foreground}} colourA={{{ [{$palette$##selection-background}!match[]!prefix[<<]!suffix[>>]] ~#073642 }}} colourB={{{ [{$palette$##selection-background}!match[]!prefix[<<]!suffix[>>]] ~#eee8d5 }}} tiddlerEditorBackground={{$palette$##tiddler-editor-background}}/>
 \end
 \define set-selection-background()
 <$macrocall $name="set-selection-background-colours" palette={{$:/palette}}/>

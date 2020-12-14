@@ -35,9 +35,8 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 		tag = this.revealTag;
 	}
 	var domNode = this.document.createElement(tag);
-	var classes = this["class"].split(" ") || [];
-	classes.push("tc-reveal");
-	domNode.className = classes.join(" ");
+	this.domNode = domNode;
+	this.assignDomNodeClasses();
 	if(this.style) {
 		domNode.setAttribute("style",this.style);
 	}
@@ -110,7 +109,7 @@ RevealWidget.prototype.execute = function() {
 	this.text = this.getAttribute("text");
 	this.position = this.getAttribute("position");
 	this.positionAllowNegative = this.getAttribute("positionAllowNegative") === "yes";
-	this["class"] = this.getAttribute("class","");
+	// class attribute handled in assignDomNodeClasses()
 	this.style = this.getAttribute("style","");
 	this["default"] = this.getAttribute("default","");
 	this.animate = this.getAttribute("animate","no");
@@ -203,6 +202,12 @@ RevealWidget.prototype.readPopupState = function(state) {
 	}
 };
 
+RevealWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" ");
+	classes.push("tc-reveal");
+	this.domNode.className = classes.join(" ");
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
@@ -222,8 +227,14 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 				return true;
 			}
 		} else if(this.type === "popup" && this.updatePopupPosition && (changedTiddlers[this.state] || changedTiddlers[this.stateTitle])) {
-			this.positionPopup(this.domNodes[0]);
+			this.positionPopup(this.domNode);
 		}
+		if(changedAttributes.style) {
+			this.domNode.style = this.getAttribute("style","");
+		}
+		if(changedAttributes["class"]) {
+			this.assignDomNodeClasses();
+		}		
 		return this.refreshChildren(changedTiddlers);
 	}
 };

@@ -9,19 +9,20 @@ The main module of the Jasmine test plugin for TiddlyWiki5
 (function(){
 
 /*jslint node: true, browser: true */
-/*global $tw: false */
+/*global $tw: true */
 "use strict";
 
 var TEST_TIDDLER_FILTER = "[type[application/javascript]tag[$:/tags/test-spec]]";
 
+exports.name = "jasmine";
 // Ensure this startup module is executed in the right order.
-// Jasmine calls `process.exit()` with a non-zero exit code if there's
+// In Node.js, Jasmine calls `process.exit()` with a non-zero exit code if there's
 // any failed tests. Because of that, we want to make sure all critical
 // startup modules are run before this one.
 // * The "commands" module handles the --rendertiddler command-line flag,
-//   which is typically given to export an HTML file that can be opened with
+//   which is typically given in order to export an HTML file that can be opened with
 //   a browser to run tests.
-exports.after = ["commands"];
+exports.after = $tw.node ? ["commands"] : [];
 
 /*
 Startup function for running tests
