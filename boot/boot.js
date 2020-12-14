@@ -1900,18 +1900,19 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 		}
 	};
 	// Helper to recursively search subdirectories
-	var getAllFiles = function(dirPath, arrayOfFiles) {
-		files = fs.readdirSync(dirPath)	;
-		arrayOfFiles = arrayOfFiles || [];	  
+	var getAllFiles = function(dirPath, recurse, arrayOfFiles) {
+		recurse = recurse || false;
+		arrayOfFiles = arrayOfFiles || [];
+		var files = fs.readdirSync(dirPath);
 		files.forEach(function(file) {
-		  if (fs.statSync(dirPath + path.sep + file).isDirectory()) {
-			arrayOfFiles = getAllFiles(dirPath + path.sep + file, arrayOfFiles)
-		  } else {
-			arrayOfFiles.push(path.join(dirPath, path.sep, file))
-		  }
-		})	  
-		return arrayOfFiles
-	  }
+			if (recurse && fs.statSync(dirPath + path.sep + file).isDirectory()) {
+				arrayOfFiles = getAllFiles(dirPath + path.sep + file, recurse, arrayOfFiles);
+			} else if(fs.statSync(dirPath + path.sep + file).isFile()){
+				arrayOfFiles.push(path.join(dirPath, path.sep, file));
+			}
+		});
+		return arrayOfFiles;
+	}
 	// Process the listed tiddlers
 	$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
 		if(tidInfo.prefix && tidInfo.suffix) {
@@ -1935,13 +1936,14 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			// Process directory specifier
 			var dirPath = path.resolve(filepath,dirSpec.path);
 			if(fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
-				var	files = (dirSpec.searchSubdirectories)? getAllFiles(dirPath): fs.readdirSync(dirPath),
+				var	files = getAllFiles(dirPath, dirSpec.searchSubdirectories),
 					fileRegExp = new RegExp(dirSpec.filesRegExp || "^.*$"),
 					metaRegExp = /^.*\.meta$/;
 				for(var t=0; t<files.length; t++) {
-					var filename = files[t];
+					var thisPath = path.relative(filepath, files[t]),
+					filename = path.basename(thisPath);
 					if(filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename)) {
-						processFile(dirPath + path.sep + filename,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile);
+						processFile(thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile);
 					}
 				}
 			} else {
