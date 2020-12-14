@@ -31,15 +31,18 @@ exports.startup = function() {
 	setupEvents(host);
 };
 
+function debounce(callback) {
+	var timeout = null;
+	return function() {
+		clearTimeout(timeout);
+		timeout = setTimeout(callback,$tw.syncer.throttleInterval);
+	};
+}
+
 function setupEvents(host) {
 	var events = new EventSource(host + "events/plugins/tiddlywiki/tiddlyweb");
-	var timeout = null;
-	events.addEventListener("change",function() {
-		if(timeout) clearTimeout(timeout);
-		timeout = setTimeout(function(){
-			$tw.syncer.syncFromServer();
-		},$tw.syncer.throttleInterval);
-	});
+	var debouncedSync = debounce($tw.syncer.syncFromServer.bind($tw.syncer));
+	events.addEventListener("change",debouncedSync);
 	events.onerror = function() {
 		events.close();
 		setTimeout(function() {

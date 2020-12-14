@@ -19,31 +19,31 @@ parameters:
 */
 
 var ServerSentEvents = function ServerSentEvents(prefix, handler) {
-  this.handler = handler;
-  this.prefix = prefix;
+	this.handler = handler;
+	this.prefix = prefix;
 };
 
 ServerSentEvents.prototype.getExports = function() {
-  return {
-    bodyFormat: "stream",
-    method: "GET",
-    path: new RegExp("^/events/" + this.prefix + "$"),
-    handler: this.handleEventRequest.bind(this)
-  };
+	return {
+		bodyFormat: "stream",
+		method: "GET",
+		path: new RegExp("^/events/" + this.prefix + "$"),
+		handler: this.handleEventRequest.bind(this)
+	};
 };
 
 ServerSentEvents.prototype.handleEventRequest = function(request,response,state) {
-  if(request.headers.accept && request.headers.accept.startsWith("text/event-stream")) {
-    response.writeHead(200, {
-      "Content-Type": "text/event-stream",
-      "Cache-Control": "no-cache",
-      "Connection": "keep-alive"
-    });
-    this.handler(request,state,this.emit.bind(this,response),this.end.bind(this,response));
-  } else {
-    response.writeHead(406,"Not Acceptable",{});
-    response.end();
-  }
+	if(request.headers.accept && request.headers.accept.startsWith("text/event-stream")) {
+		response.writeHead(200, {
+			"Content-Type": "text/event-stream",
+			"Cache-Control": "no-cache",
+			"Connection": "keep-alive"
+		});
+		this.handler(request,state,this.emit.bind(this,response),this.end.bind(this,response));
+	} else {
+		response.writeHead(406,"Not Acceptable",{});
+		response.end();
+	}
 };
 
 ServerSentEvents.prototype.isEventStreamRequest = function(request) {
@@ -52,17 +52,17 @@ ServerSentEvents.prototype.isEventStreamRequest = function(request) {
 };
 
 ServerSentEvents.prototype.emit = function(response,event,data) {
-  if(typeof event !== "string" || event.indexOf("\n") !== -1) {
-    throw new Error("Type must be a single-line string");
-  }
-  if(typeof data !== "string" || data.indexOf("\n") !== -1) {
-    throw new Error("Data must be a single-line string");
-  }
-  response.write("event: " + event + "\ndata: " + data + "\n\n", "utf8");
+	if(typeof event !== "string" || event.indexOf("\n") !== -1) {
+		throw new Error("Type must be a single-line string");
+	}
+	if(typeof data !== "string" || data.indexOf("\n") !== -1) {
+		throw new Error("Data must be a single-line string");
+	}
+	response.write("event: " + event + "\ndata: " + data + "\n\n", "utf8");
 };
 
 ServerSentEvents.prototype.end = function(response) {
-  response.end();
+	response.end();
 };
 
 exports.ServerSentEvents = ServerSentEvents;
