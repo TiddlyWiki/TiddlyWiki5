@@ -1,5 +1,5 @@
 created: 20150124182421000
-modified: 20201208185257875
+modified: 20201214053032397
 tags: [[Filter Syntax]]
 title: Filter Expression
 type: text/vnd.tiddlywiki
@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 <$railroad text="""
 [{:
   [: [[whitespace|"Filter Whitespace"]] ]
-  ("+"|"~"|:-|"-"|"=")
+  ("+"|"~"|:-|"-"|"="|":"[[named-prefix|"Named Filter Run Prefix"]])
   [[run|"Filter Run"]]
 }]
 """/>
