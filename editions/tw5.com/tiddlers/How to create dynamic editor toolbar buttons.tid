@@ -123,12 +123,4 @@ If you don't need the config tiddlers anymore you can
 ><$button actions=<<remove-shortcuts>>>Remove the Shortcut Configuration</$button>
 
 
-
-
-
-
-
-
-
-
 </$vars><!-- needed don't remove! -->
