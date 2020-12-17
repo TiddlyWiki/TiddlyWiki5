@@ -11,33 +11,33 @@ tags: $:/tags/Macro
 
 \define box-shadow(shadow)
 ``
-  -webkit-box-shadow: $shadow$;
-     -moz-box-shadow: $shadow$;
-          box-shadow: $shadow$;
+-webkit-box-shadow: $shadow$;
+-moz-box-shadow: $shadow$;
+box-shadow: $shadow$;
 ``
 \end
 
 \define filter(filter)
 ``
-  -webkit-filter: $filter$;
-     -moz-filter: $filter$;
-          filter: $filter$;
+-webkit-filter: $filter$;
+-moz-filter: $filter$;
+filter: $filter$;
 ``
 \end
 
 \define transition(transition)
 ``
-  -webkit-transition: $transition$;
-     -moz-transition: $transition$;
-          transition: $transition$;
+-webkit-transition: $transition$;
+-moz-transition: $transition$;
+transition: $transition$;
 ``
 \end
 
 \define transform-origin(origin)
 ``
-  -webkit-transform-origin: $origin$;
-     -moz-transform-origin: $origin$;
-          transform-origin: $origin$;
+-webkit-transform-origin: $origin$;
+-moz-transform-origin: $origin$;
+transform-origin: $origin$;
 ``
 \end
 
@@ -73,4 +73,11 @@ column-count: $columns$;
 
 \define if-background-attachment(text)
 <$reveal state="$:/themes/tiddlywiki/vanilla/settings/backgroundimage" type="nomatch" text="">$text$</$reveal>
+\end
+
+\define tab-size(size)
+``
+-moz-tab-size: $size$;
+tab-size: $size$;
+``
 \end

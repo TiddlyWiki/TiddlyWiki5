@@ -273,6 +273,7 @@ pre > code {
 	border: none;
 	background-color: inherit;
 	color: inherit;
+	<<tab-size 4>>
 }
 
 table {
