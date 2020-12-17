@@ -76,7 +76,7 @@ $else$
 }
 
 input[type="search"] {
-  outline-offset: initial;
+	outline-offset: initial;
 }
 
 html button {
@@ -85,6 +85,10 @@ html button {
 	fill: <<colour button-foreground>>;
 	background: <<colour button-background>>;
 	border-color: <<colour button-border>>;
+}
+
+button:disabled svg {
+	fill: <<colour muted-foreground>>;
 }
 
 /*
@@ -221,7 +225,7 @@ input:not([type]) {
 }
 
 input[type="checkbox"] {
-  vertical-align: middle;
+	vertical-align: middle;
 }
 
 input[type="search"]::-webkit-search-decoration,
@@ -483,7 +487,7 @@ button svg, button img, label svg, label img {
 	margin: 0;
 	background: none;
 	border: none;
-    	cursor: pointer;
+	cursor: pointer;
 	color: <<colour foreground>>;
 }
 
@@ -579,7 +583,7 @@ html body.tc-body .tc-btn-rounded:hover svg {
 }
 
 .tc-primary-btn {
- 	background: <<colour primary>>;
+	background: <<colour primary>>;
 }
 
 .tc-sidebar-lists input {
@@ -838,7 +842,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-page-controls .tc-drop-down {
-  font-size: 1rem;
+	font-size: 1rem;
 }
 
 .tc-page-controls button {
@@ -1096,8 +1100,8 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-tiddler-missing .tc-title {
-  font-style: italic;
-  font-weight: normal;
+	font-style: italic;
+	font-weight: normal;
 }
 
 .tc-tiddler-frame .tc-tiddler-controls {
@@ -1347,39 +1351,39 @@ html body.tc-body.tc-single-tiddler-window {
 */
 
 .tc-page-controls svg.tc-image-new-button {
-  fill: <<colour toolbar-new-button>>;
+	fill: <<colour toolbar-new-button>>;
 }
 
 .tc-page-controls svg.tc-image-options-button {
-  fill: <<colour toolbar-options-button>>;
+	fill: <<colour toolbar-options-button>>;
 }
 
 .tc-page-controls svg.tc-image-save-button {
-  fill: <<colour toolbar-save-button>>;
+	fill: <<colour toolbar-save-button>>;
 }
 
 .tc-tiddler-controls button svg.tc-image-info-button {
-  fill: <<colour toolbar-info-button>>;
+	fill: <<colour toolbar-info-button>>;
 }
 
 .tc-tiddler-controls button svg.tc-image-edit-button {
-  fill: <<colour toolbar-edit-button>>;
+	fill: <<colour toolbar-edit-button>>;
 }
 
 .tc-tiddler-controls button svg.tc-image-close-button {
-  fill: <<colour toolbar-close-button>>;
+	fill: <<colour toolbar-close-button>>;
 }
 
 .tc-tiddler-controls button svg.tc-image-delete-button {
-  fill: <<colour toolbar-delete-button>>;
+	fill: <<colour toolbar-delete-button>>;
 }
 
 .tc-tiddler-controls button svg.tc-image-cancel-button {
-  fill: <<colour toolbar-cancel-button>>;
+	fill: <<colour toolbar-cancel-button>>;
 }
 
 .tc-tiddler-controls button svg.tc-image-done-button {
-  fill: <<colour toolbar-done-button>>;
+	fill: <<colour toolbar-done-button>>;
 }
 
 /*
@@ -1585,6 +1589,10 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-drop-down button svg, .tc-drop-down a svg  {
 	fill: <<colour foreground>>;
+}
+
+.tc-drop-down button:disabled svg {
+	fill: <<colour muted-foreground>>;
 }
 
 .tc-drop-down button.tc-btn-invisible:hover svg {
@@ -2855,35 +2863,35 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 */
 
 .tc-tree div {
-    	padding-left: 14px;
+	padding-left: 14px;
 }
 
 .tc-tree ol {
-    	list-style-type: none;
-    	padding-left: 0;
-    	margin-top: 0;
+	list-style-type: none;
+	padding-left: 0;
+	margin-top: 0;
 }
 
 .tc-tree ol ol {
-    	padding-left: 1em;    
+	padding-left: 1em;    
 }
 
 .tc-tree button { 
-    	color: #acacac;
+	color: #acacac;
 }
 
 .tc-tree svg {
-     	fill: #acacac;
+	fill: #acacac;
 }
 
 .tc-tree span svg {
-    	width: 1em;
-    	height: 1em;
-    	vertical-align: baseline;
+	width: 1em;
+	height: 1em;
+	vertical-align: baseline;
 }
 
 .tc-tree li span {
-    	color: lightgray;
+	color: lightgray;
 }
 
 select {
