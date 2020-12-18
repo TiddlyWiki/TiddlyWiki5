@@ -44,7 +44,7 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
 
 ><span
 
-  data-tw-keyboard-shortcut={{{ [<disabled>compare:string:eq[yes]else{!!shortcuts}] +[trim[yes]] }}}
+  data-tw-keyboard-shortcut={{{ [<disabled>match[yes]then[]else{!!shortcuts}] }}}
 
 /><<toolbar-button-icon>><$transclude
 
@@ -72,7 +72,7 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
 
 ><span
 
-  data-tw-keyboard-shortcut={{{ [<disabled>compare:string:eq[yes]else{!!shortcuts}] +[trim[yes]] }}}
+  data-tw-keyboard-shortcut={{{ [<disabled>match[yes]then[]else{!!shortcuts}] }}}
 
 /><<toolbar-button-icon>><$transclude
 
