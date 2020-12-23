@@ -14,6 +14,15 @@ The "currentTiddler" variable is set to the title of the modal tiddler, but can 
 
 The modal message is usually generated with the ButtonWidget. The modal message is handled by the TiddlyWiki core.
 
+! The Modal Tiddler
+Within the Modal tiddler itself;
+
+*The field named "subtitle" will be used as the title of the Modal Window
+**This can contain macros, widgets and transcludions as well
+*The field named "footer" will be used as the footer of the Modal Window
+**The most common footer may be `<$button message="tm-close-tiddler">Close</$button>` Which allows closure of the modal
+*Parameters provided in the action widget such as yourName and yourMessage are accessible within the Modal Tiddler as variable names, for example `<<yourName>>` and `<<yourMessage>>`
+
 ! Example
 
 Here is an example of displaying a modal and passing parameters to it:
