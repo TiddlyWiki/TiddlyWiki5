@@ -5,6 +5,10 @@ tags: ReleaseNotes
 title: Release 5.1.23
 type: text/vnd.tiddlywiki
 
+\define contributor(username)
+<a href="https://github.com/$username$" style="text-decoration:none;font-size:24px;" class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><img src="https://github.com/$username$.png?size=32" width="32" height="32"/> @<$text text=<<__username__>>/></a>
+\end
+
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.22...master]]//
 
 <div class="doc-plain-list">
@@ -254,40 +258,39 @@ Please note that using this plugin does not guarantee compliance with any partic
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5129">> `tc-dirty` class not appearing on external windows
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5148">> `static.tiddler.html` template to make rendered tiddlers full-width
 
-</div>
-
 ! Contributors
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
-* [[@adithya-badidey|https://github.com/adithya-badidey]]
-* [[@Arlen22|https://github.com/Arlen22]]
-* [[@bimlas|https://github.com/bimlas]]
-* [[@BramChen|https://github.com/BramChen]]
-* [[@BurningTreeC|https://github.com/BurningTreeC]]
-* [[@danielo515|https://github.com/danielo515]]
-* [[@default-kramer|https://github.com/default-kramer]]
-* [[@ento|https://github.com/ento]]
-* [[@favadi|https://github.com/favadi]]
-* [[@fkohrt|https://github.com/fkohrt]]
-* [[@flibbles|https://github.com/flibbles]]
-* [[@gera2ld|https://github.com/gera2ld]]
-* [[@ibnishak|https://github.com/ibnishak]]
-* [[@idotobi|https://github.com/idotobi]]
-* [[@jdangerx|https://github.com/jdangerx]]
-* [[@jjduhamel|https://github.com/jjduhamel]]
-* [[@joshuafontany|https://github.com/joshuafontany]]
-* [[@kookma|https://github.com/kookma]]
-* [[@Kamal-Habash|https://github.com/Kamal-Habash]]
-* [[@Marxsal|https://github.com/Marxsal]]
-* [[@mocsa|https://github.com/mocsa]]
-* [[@NicolasPetton|https://github.com/NicolasPetton]]
-* [[@OmbraDiFenice|https://github.com/OmbraDiFenice]]
-* [[@passuf|https://github.com/passuf]]
-* [[@pmario|https://github.com/pmario]]
-* [[@rmunn|https://github.com/rmunn]]
-* [[@SmilyOrg|https://github.com/SmilyOrg]]
-* [[@saqimtiaz|https://github.com/saqimtiaz]]
-* [[@twMat|https://github.com/twMat]]
-* [[@xcazin|https://github.com/xcazin]]
+* <<contributor adithya-badidey>>
+* <<contributor Arlen22>>
+* <<contributor bimlas>>
+* <<contributor BramChen>>
+* <<contributor BurningTreeC>>
+* <<contributor danielo515>>
+* <<contributor default-kramer>>
+* <<contributor ento>>
+* <<contributor favadi>>
+* <<contributor fkohrt>>
+* <<contributor flibbles>>
+* <<contributor gera2ld>>
+* <<contributor ibnishak>>
+* <<contributor idotobi>>
+* <<contributor jdangerx>>
+* <<contributor jjduhamel>>
+* <<contributor joshuafontany>>
+* <<contributor kookma>>
+* <<contributor Kamal-Habash>>
+* <<contributor Marxsal>>
+* <<contributor mocsa>>
+* <<contributor NicolasPetton>>
+* <<contributor OmbraDiFenice>>
+* <<contributor passuf>>
+* <<contributor pmario>>
+* <<contributor rmunn>>
+* <<contributor SmilyOrg>>
+* <<contributor saqimtiaz>>
+* <<contributor twMat>>
+* <<contributor xcazin>>
 
+</div>
