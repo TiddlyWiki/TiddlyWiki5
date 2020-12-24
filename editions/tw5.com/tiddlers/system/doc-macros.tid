@@ -121,7 +121,7 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 \define .link-badge-added(link,colour:#ffe246) <<.link-badge "added" """$link$""" """$colour$""">>
 \define .link-badge-addendum(link,colour:#fcc84a) <<.link-badge "addendum" """$link$""" """$colour$""">>
 \define .link-badge-extended(link,colour:#f9a344) <<.link-badge "extended" """$link$""" """$colour$""">>
-\define .link-badge-fixed(link,colour:#f88b40) <<.link-badge "fixed" """$link$""" """$colour$""">>
+\define .link-badge-fixed(link,colour:#ffa86d) <<.link-badge "fixed" """$link$""" """$colour$""">>
 \define .link-badge-here(link,colour:#d88e63) <<.link-badge "here" """$link$""" """$colour$""">>
 \define .link-badge-hide(link,colour:#9d959f) <<.link-badge "hide" """$link$""" """$colour$""">>
 \define .link-badge-improved(link,colour:#7593c7) <<.link-badge "improved" """$link$""" """$colour$""">>
