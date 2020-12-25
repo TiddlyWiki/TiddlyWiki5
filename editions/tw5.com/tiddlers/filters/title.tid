@@ -12,7 +12,7 @@ op-parameter-name: T
 op-output: a selection containing only <<.place T>>
 op-neg-output: the input, but with tiddler <<.place T>> filtered out if it exists in the wiki
 
-`[title[An Example]]` can be shortened to `[[An Example]]`, because <<.op title>> is the default filter operator.
+`[title[An Example]]` can be shortened to `[[An Example]]`, because <<.op title>> is the default filter operator. Consequentially, `[!title[An Example]]` can be shortened to `[![An Example]]`.
 
 <<.op title>> is a [[constructor|Selection Constructors]] (except in the form `!title`), but <<.olink2 "field:title" field>> is a [[modifier|Selection Constructors]].
 

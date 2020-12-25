@@ -128,7 +128,7 @@ Saving/TiddlySpot/Filename: Upload Filename
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address, e.g. `http://example.com/store.php`.//
 Saving/TiddlySpot/Password: Password
-Saving/TiddlySpot/ReadOnly: ~TiddlySpot service may currently be available as read only. Please see http://tiddlyspot.com/ for details
+Saving/TiddlySpot/ReadOnly: The ~TiddlySpot service is currently only available in read-only form. Please see http://tiddlyspot.com/ for the latest details. The ~TiddlySpot saver can still be used to save to compatible servers.
 Saving/TiddlySpot/ServerURL: Server URL
 Saving/TiddlySpot/UploadDir: Upload Directory
 Saving/TiddlySpot/UserName: Wiki Name

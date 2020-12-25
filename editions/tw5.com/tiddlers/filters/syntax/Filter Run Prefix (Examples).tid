@@ -1,7 +1,8 @@
 created: 20201117073343969
-modified: 20201117074106350
+modified: 20201208185546667
 tags: [[Filter Syntax]]
 title: Filter Run Prefix (Examples)
+type: text/vnd.tiddlywiki
 
 !! Difference between `+` and `:intersection`
 
@@ -23,3 +24,23 @@ The following examples use the [[field Operator]] and [[compare Operator]] tiddl
 <<.operator-example 3 "[[field Operator]tags[]] +[[compare Operator]tags[]]" """The "field Operator" tiddler's tags are lost, so only the "compare Operator" tiddler's tags are returned""">>
 
 <<.operator-example 4 "[[field Operator]tags[]] :intersection[[compare Operator]tags[]]" """Returns the tags that both tiddlers have in common""">>
+
+!! `:reduce` examples
+
+```
+[tag[shopping]] :reduce[get[quantity]add<accumulator>]
+```
+
+is equivalent to:
+
+```
+\define num-items() [get[quantity]add<accumulator>]
+
+[tag[shopping]reduce<num-items>]
+```
+
+Specifying a default value when input is empty:
+
+`[tag[non-existent]] :reduce[get[price]multiply{!!quantity}add<accumulator>] :else[[0]]`
+
+<$macrocall $name=".tip" _="""Unlike the [[reduce Operator]], the `:reduce` prefix cannot specify an initial value for the accumulator, so its initial value will always be empty (which is treated as 0 by mathematical operators). So `=1 =2 =3 :reduce[multiply<accumulator>]` will produce 0, not 6. If you need to specify an initial accumulator value, use the [[reduce Operator]]."""/>

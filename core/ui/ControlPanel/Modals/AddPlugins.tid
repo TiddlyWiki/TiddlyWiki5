@@ -5,7 +5,7 @@ subtitle: {{$:/core/images/download-button}} {{$:/language/ControlPanel/Plugins/
 <$action-sendmessage $message="tm-load-plugin-from-library" url={{!!url}} title={{$(assetInfo)$!!original-title}}/>
 <$set name="url" value={{!!url}}>
 <$set name="currentTiddler" value=<<assetInfo>>>
-<$list filter="[enlist{!!dependents}] [{!!parent-plugin}] +[sort[title]]" variable="dependency">
+<$list filter="[enlist{!!dependents}] [{!!parent-plugin}] +[sort[name]]" variable="dependency">
 <$action-sendmessage $message="tm-load-plugin-from-library" url=<<url>> title=<<dependency>>/>
 </$list>
 </$set>
@@ -84,7 +84,7 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 <$list filter="[enlist{!!dependents}] [<currentTiddler>get[parent-plugin]] +[limit[1]]" variable="ignore">
 <div>
 {{$:/language/ControlPanel/Plugins/AlsoRequires}}
-<$list filter="[enlist{!!dependents}] [{!!parent-plugin}] +[sort[title]]" variable="dependency">
+<$list filter="[enlist{!!dependents}] [{!!parent-plugin}] +[sort[name]]" variable="dependency">
 <$text text=<<dependency>>/>
 </$list>
 </div>
@@ -97,7 +97,7 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 </div>
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>limit[1]]" variable="ignore">
 <div class="tc-plugin-info-sub-plugins">
-<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>sort[title]]" variable="assetInfo">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>sort[name]]" variable="assetInfo">
 <<display-plugin-info "$type$">>
 </$list>
 </div>
@@ -135,7 +135,7 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 </$button>
 </$reveal>
 <div class="tc-plugin-library-listing">
-<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]search:author,description,original-title,readme,title{$:/temp/RemoteAssetSearch/$(currentTiddler)$}sort[title]]" variable="assetInfo">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]search:author,description,original-title,readme,title{$:/temp/RemoteAssetSearch/$(currentTiddler)$}sort[name]]" variable="assetInfo">
 <$list filter="[[$:/temp/RemoteAssetSearch/$(currentTiddler)$]has[text]] ~[<assetInfo>!has[parent-plugin]]" variable="ignore"><!-- Hide sub-plugins if we're not searching -->
 <<display-plugin-info "$type$">>
 </$list>
@@ -148,7 +148,7 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 
 <$set name="transclusion" value=<<connectionTiddler>>>
 
-<$macrocall $name="tabs" tabsList="[[$:/core/ui/ControlPanel/Plugins/Add/Updates]] [[$:/core/ui/ControlPanel/Plugins/Add/Plugins]] [[$:/core/ui/ControlPanel/Plugins/Add/Themes]] [[$:/core/ui/ControlPanel/Plugins/Add/Languages]]" default="$:/core/ui/ControlPanel/Plugins/Add/Plugins" explicitState="$:/state/addplugins/tab-1342078386"/>
+<<tabs "[[$:/core/ui/ControlPanel/Plugins/Add/Updates]] [[$:/core/ui/ControlPanel/Plugins/Add/Plugins]] [[$:/core/ui/ControlPanel/Plugins/Add/Themes]] [[$:/core/ui/ControlPanel/Plugins/Add/Languages]]" "$:/core/ui/ControlPanel/Plugins/Add/Plugins">>
 
 </$set>
 

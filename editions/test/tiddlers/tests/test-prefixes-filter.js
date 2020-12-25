@@ -12,6 +12,14 @@ Tests the reduce prefix and filter.
 /* global $tw, require */
 "use strict";
 
+describe("general filter prefix tests", function() {
+	it("should handle nonexistent prefixes gracefully", function() {
+		var wiki = new $tw.Wiki();
+		var results = wiki.filterTiddlers("[tag[A]] :nonexistent[tag[B]]");
+		expect(results).toEqual(["Filter Error: Unknown prefix for filter run"]);
+	});
+});
+
 describe("'reduce' and 'intersection' filter prefix tests", function() {
 
 	var wiki = new $tw.Wiki();
@@ -69,6 +77,8 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(wiki.filterTiddlers("[tag[shopping]] :reduce[get[quantity]add<accumulator>]").join(",")).toBe("22");
 		expect(wiki.filterTiddlers("[tag[shopping]] :reduce[get[price]multiply{!!quantity}add<accumulator>]").join(",")).toBe("27.75");
 		expect(wiki.filterTiddlers("[tag[shopping]] :reduce[<index>compare:number:gt[0]then<accumulator>addsuffix[, ]addsuffix<currentTiddler>else<currentTiddler>]").join(",")).toBe("Brownies, Chick Peas, Milk, Rice Pudding");
+		// Empty input should become empty output
+		expect(wiki.filterTiddlers("[tag[non-existent]] :reduce[get[price]multiply{!!quantity}add<accumulator>]").length).toBe(0);
 		expect(wiki.filterTiddlers("[tag[non-existent]] :reduce[get[price]multiply{!!quantity}add<accumulator>] :else[[0]]").join(",")).toBe("0");
 	});
 
@@ -85,7 +95,10 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(wiki.filterTiddlers("[tag[shopping]reduce<num-items>]",anchorWidget).join(",")).toBe("22");
 		expect(wiki.filterTiddlers("[tag[shopping]reduce<add-price>]",anchorWidget).join(",")).toBe("27.75");
 		expect(wiki.filterTiddlers("[tag[shopping]reduce<join-with-commas>]",anchorWidget).join(",")).toBe("Brownies, Chick Peas, Milk, Rice Pudding");
-		expect(wiki.filterTiddlers("[tag[non-existent]reduce<add-price>,[0]]",anchorWidget).join(",")).toBe("0");
+		// Empty input should become empty output
+		expect(wiki.filterTiddlers("[tag[non-existent]reduce<add-price>,[0]]",anchorWidget).join(",")).not.toBe("0");
+		expect(wiki.filterTiddlers("[tag[non-existent]reduce<add-price>,[0]]",anchorWidget).length).toBe(0);
+		expect(wiki.filterTiddlers("[tag[non-existent]reduce<add-price>else[0]]",anchorWidget).join(",")).toBe("0");
 	});
 
 	it("should handle the :intersection prefix", function() {

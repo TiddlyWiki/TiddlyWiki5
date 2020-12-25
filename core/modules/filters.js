@@ -297,7 +297,7 @@ exports.compileFilter = function(filterString) {
 						return filterRunPrefixes[operation.namedPrefix](operationSubFunction, options);
 					} else {
 						return function(results,source,widget) {
-							results.splice(0,results.length);
+							results.clear();
 							results.push($tw.language.getString("Error/FilterRunPrefix"));
 						};
 					}
