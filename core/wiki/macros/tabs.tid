@@ -14,7 +14,7 @@ tags: $:/tags/Macro
 <$macrocall $name="currentTab" $type="text/plain" $output="text/plain"/>
 </$transclude>
 </$transclude>
-</$set></$tiddler>$actions$</$button></$tiddler></$set></$list>
+</$set>$actions$</$tiddler></$button></$tiddler></$set></$list>
 </div>
 <div class="tc-tab-divider $class$"/>
 <div class="tc-tab-content $class$">
