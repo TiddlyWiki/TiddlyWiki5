@@ -360,6 +360,10 @@ exports.generateTiddlerFilepath = function(title,options) {
 	if(filepath.length > 200) {
 		filepath = filepath.substr(0,200);
 	}
+	// Truncate the extension if it is too long
+	if(extension.length > 32) {
+		extension = extension.substr(0,32);
+	}
 	// If the resulting filename is blank (eg because the title is just punctuation characters)
 	if(!filepath) {
 		// ...then just use the character codes of the title
