@@ -423,3 +423,5 @@ Ryan Kramer, @default-kramer, 2020/10/24
 Miha Lunar, @SmilyOrg, 2020/11/04
 
 Odin Jorna, @OdinJorna, 2020/12/31
+
+Joe Bordes, @joebordes, 2021/01/02
