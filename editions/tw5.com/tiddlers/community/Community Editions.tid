@@ -1,0 +1,24 @@
+created: 20210101150806938
+modified: 20210101151808491
+tags: Community
+title: Community Editions
+
+These are prepackaged editions created by the ~TiddlyWiki [[Community]]. These are TiddlyWikis with added plugins and configurations to facilitate a certain use-case. These are great starting points if you want to quickly jump into TiddlyWiki and start using it without spending too much time configuring yourself.
+
+<div class="tc-link-info">
+
+<$list filter='[tag[Community Editions]!sort[modified]]'>
+
+<div class="tc-link-info-item">
+
+! <$link><$view field="title"/></$link>
+
+<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+
+<$transclude/>
+
+</div>
+
+</$list>
+
+</div>
