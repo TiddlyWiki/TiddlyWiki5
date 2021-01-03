@@ -342,10 +342,6 @@ exports.generateTiddlerFilepath = function(title,options) {
 		filepath = originalpath.substring(0,originalpath.length - ext.length);
 	} else if(!filepath) {
 		filepath = title;
-		// If the filepath already ends in the extension then remove it
-		if(filepath.substring(filepath.length - extension.length) === extension) {
-			filepath = filepath.substring(0,filepath.length - extension.length);
-		}
 		// Remove any forward or backward slashes so we don't create directories
 		filepath = filepath.replace(/\/|\\/g,"_");
 	}
@@ -354,11 +350,19 @@ exports.generateTiddlerFilepath = function(title,options) {
 		// Don't let the filename start with any dots because such files are invisible on *nix
 		filepath = filepath.replace(/^\.+/g,"_");
 	}
+	// If the filepath already ends in the extension then remove it
+	if(filepath.substring(filepath.length - extension.length) === extension) {
+		filepath = filepath.substring(0,filepath.length - extension.length);
+	}
 	// Remove any characters that can't be used in cross-platform filenames
 	filepath = $tw.utils.transliterate(filepath.replace(/<|>|~|\:|\"|\||\?|\*|\^/g,"_"));
 	// Truncate the filename if it is too long
 	if(filepath.length > 200) {
 		filepath = filepath.substr(0,200);
+	}
+	// Truncate the extension if it is too long
+	if(extension.length > 32) {
+		extension = extension.substr(0,32);
 	}
 	// If the resulting filename is blank (eg because the title is just punctuation characters)
 	if(!filepath) {
