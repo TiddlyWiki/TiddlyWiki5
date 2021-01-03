@@ -190,15 +190,15 @@ exports.getChangeCount = function(title) {
 
 /*
 Generate an unused title from the specified base
+options.prefix must be a string
 */
 exports.generateNewTitle = function(baseTitle,options) {
 	options = options || {};
+	options.prefix = (typeof(options.prefix) === "string") ? options.prefix : " ";
 	var c = 0,
 		title = baseTitle;
 	while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
-		title = baseTitle + 
-			(options.prefix || " ") + 
-			(++c);
+		title = baseTitle + options.prefix + (++c);
 	}
 	return title;
 };
