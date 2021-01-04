@@ -496,15 +496,15 @@ exports.cleanupTiddlerFiles = function(options, callback) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the previous file on disk, should fail gracefully
 					$tw.syncer.displayError("Server desynchronized. Error cleaning up previous file for tiddler: "+title, err);
-					return callback(null);
+					return callback(null, bootInfo);
 				} else {
 					return callback(err);
 				}
 			}
-			return callback(null);
+			return callback(null, bootInfo);
 		});
 	} else {
-		return callback(null);
+		return callback(null, bootInfo);
 	}
 };
 
