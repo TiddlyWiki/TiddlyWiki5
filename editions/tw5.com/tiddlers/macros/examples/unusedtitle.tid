@@ -1,7 +1,11 @@
+created: 20210104143940715
+modified: 20210104144457235
 tags: [[unusedtitle Macro]] [[Macro Examples]]
 title: unusedtitle Macro (Examples)
 type: text/vnd.tiddlywiki
 
 <$macrocall $name=".example" n="1" eg="""<<unusedtitle>>"""/>
-<$macrocall $name=".example" n="2" eg="""<<unusedtitle AnotherBase>>"""/>
-<$macrocall $name=".example" n="3" eg="""<<unusedtitle TiddlyWiki>>"""/>
+''Before you try the next example, open a new tiddler in edit mode.''
+<$macrocall $name=".example" n="2" eg="""<<unusedtitle prefix:"-">>"""/>
+<$macrocall $name=".example" n="3" eg="""<<unusedtitle AnotherBase>>"""/>
+<$macrocall $name=".example" n="4" eg="""<<unusedtitle TiddlyWiki>>"""/>
