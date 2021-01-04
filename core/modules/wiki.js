@@ -194,11 +194,11 @@ options.prefix must be a string
 */
 exports.generateNewTitle = function(baseTitle,options) {
 	options = options || {};
-	options.prefix = (typeof(options.prefix) === "string") ? options.prefix : " ";
 	var c = 0,
-		title = baseTitle;
+		title = baseTitle,
+		prefix = (typeof(options.prefix) === "string") ? options.prefix : " ";
 	while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
-		title = baseTitle + options.prefix + (++c);
+		title = baseTitle + prefix + (++c);
 	}
 	return title;
 };

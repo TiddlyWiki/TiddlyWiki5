@@ -26,7 +26,7 @@ exports.run = function(baseName, prefix) {
 	if(!baseName) {
 		baseName = $tw.language.getString("DefaultNewTiddlerTitle");
 	}
-	return this.wiki.generateNewTitle(baseName, {"prefix":prefix});
+	return this.wiki.generateNewTitle(baseName, {"prefix": prefix});
 };
 
 })();
