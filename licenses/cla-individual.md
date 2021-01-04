@@ -431,3 +431,6 @@ Odin Jorna, @OdinJorna, 2020/12/31
 Joe Bordes, @joebordes, 2021/01/02
 
 Glenn Dixon, @dixonge, 2021/01/03
+
+Russ Thomas, @codacodr, 2021/01/03
+
