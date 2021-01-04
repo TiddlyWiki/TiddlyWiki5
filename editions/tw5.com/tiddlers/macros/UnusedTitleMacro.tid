@@ -1,6 +1,6 @@
 caption: unusedtitle
 created: 20210104143546885
-modified: 20210104144554913
+modified: 20210104144900428
 tags: Macros [[Core Macros]]
 title: unusedtitle Macro
 type: text/vnd.tiddlywiki
@@ -15,6 +15,6 @@ It uses the same method as the create new tiddler button, a number is appended t
 : A string specifying the desired base name, defaulting to `New Tiddler`
 
 ; prefix
-: A string specifying the separator between baseName and the unique number. eg: `prefix:"-"`. The macro is ''does not allow'' an ''empty'' string!
+: A string specifying the separator between baseName and the unique number. eg: `prefix:"-"`. The macro is ''does not allow'' an ''empty'' string!  <<.from-version "5.1.24">>
 
 <<.macro-examples "unusedtitle">>
