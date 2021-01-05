@@ -122,7 +122,7 @@ FileSystemAdaptor.prototype.loadTiddler = function(title,callback) {
 /*
 Delete a tiddler and invoke the callback with (err)
 */
-FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
+FileSystemAdaptor.prototype.deleteTiddler = function(title,callback) {
 	var self = this,
 		fileInfo = this.boot.files[title];
 	// Only delete the tiddler if we have writable information for the file
@@ -132,15 +132,15 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the file on disk, should fail gracefully
 					$tw.syncer.displayError("Server desynchronized. Error deleting file for deleted tiddler: "+title, err);
-					return callback(null);
+					return callback(null, fileInfo);
 				} else {
 					return callback(err);
 				}
 			}
-			return callback(null);
+			return callback(null, fileInfo);
 		});
 	} else {
-		callback(null);
+		callback(null, fileInfo);
 	}
 };
 

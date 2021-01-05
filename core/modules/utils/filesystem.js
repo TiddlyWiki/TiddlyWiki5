@@ -419,14 +419,29 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 			if(err) {
 				return callback(err);
 			}
-			fs.writeFile(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8",callback);
+			fs.writeFile(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8", function(err){
+				if(err){
+					callback(err);
+				}
+				callback(null, fileInfo);
+			});
 		});
 	} else {
 		// Save the tiddler as a self contained templated file
 		if(fileInfo.type === "application/x-tiddler") {
-			fs.writeFile(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8",callback);
+			fs.writeFile(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8",function(err){
+				if(err){
+					callback(err);
+				}
+				callback(null, fileInfo);
+			});
 		} else {
-			fs.writeFile(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8",callback);
+			fs.writeFile(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8",function(err){
+				if(err){
+					callback(err);
+				}
+				callback(null, fileInfo);
+			});
 		}
 	}
 };
@@ -473,10 +488,20 @@ exports.deleteTiddlerFile = function(fileInfo, callback) {
 				if(err) {
 					return callback(err);
 				}
-				return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),callback);
+				return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),function(err){
+					if(err){
+						callback(err);
+					}
+					callback(null, fileInfo);
+				});
 			});
 		} else {
-			return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),callback);
+			return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),function(err){
+				if(err){
+					callback(err);
+				}
+				callback(null, fileInfo);
+			});
 		}
 	});
 };
