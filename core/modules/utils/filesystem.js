@@ -388,7 +388,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 	// If the last write failed with an error, or if path does not start with:
 	//	the resolved options.directory, the resolved wikiPath directory, or the wikiTiddlersPath directory, 
 	//	then encodeURIComponent() and resolve to tiddler directory
-	var newPath = fullPath,
+	var writePath = fullPath,
 		encode = (options.fileInfo || {writeError: false}).writeError == true;
 	if(!encode){
 		encode = !(fullPath.indexOf(path.resolve(directory)) == 0 ||
@@ -396,12 +396,12 @@ exports.generateTiddlerFilepath = function(title,options) {
 			fullPath.indexOf($tw.boot.wikiTiddlersPath) == 0);
 		}
 	if(encode){
-		fullPath = path.resolve(directory, encodeURIComponent(fullPath));
+		writePath = path.resolve(directory, encodeURIComponent(fullPath));
 	}
 	// Call hook to allow plugins to modify the final path
-	fullPath = $tw.hooks.invokeHook("th-make-tiddler-path", newPath, fullPath);
+	writePath = $tw.hooks.invokeHook("th-make-tiddler-path",writePath,fullPath);
 	// Return the full path to the file
-	return fullPath;
+	return writePath;
 };
 
 /*
@@ -421,9 +421,9 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 			}
 			fs.writeFile(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8", function(err){
 				if(err){
-					callback(err);
+					return callback(err);
 				}
-				callback(null, fileInfo);
+				return callback(null, fileInfo);
 			});
 		});
 	} else {
@@ -431,16 +431,16 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 		if(fileInfo.type === "application/x-tiddler") {
 			fs.writeFile(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8",function(err){
 				if(err){
-					callback(err);
+					return callback(err);
 				}
-				callback(null, fileInfo);
+				return callback(null, fileInfo);
 			});
 		} else {
 			fs.writeFile(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8",function(err){
 				if(err){
-					callback(err);
+					return callback(err);
 				}
-				callback(null, fileInfo);
+				return callback(null, fileInfo);
 			});
 		}
 	}
@@ -454,18 +454,23 @@ Save a tiddler to a file described by the fileInfo:
 */
 exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 	$tw.utils.createDirectory(path.dirname(fileInfo.filepath));
-	if(fileInfo.hasMetaFile) {
-		// Save the tiddler as a separate body and meta file
-		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
-		fs.writeFileSync(fileInfo.filepath,tiddler.fields.text || "",typeInfo.encoding);
-		fs.writeFileSync(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8");
-	} else {
-		// Save the tiddler as a self contained templated file
-		if(fileInfo.type === "application/x-tiddler") {
-			fs.writeFileSync(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8");
+	try {
+		if(fileInfo.hasMetaFile) {
+			// Save the tiddler as a separate body and meta file
+			var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
+			fs.writeFileSync(fileInfo.filepath,tiddler.fields.text || "",typeInfo.encoding);
+			fs.writeFileSync(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8");
 		} else {
-			fs.writeFileSync(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8");
+			// Save the tiddler as a self contained templated file
+			if(fileInfo.type === "application/x-tiddler") {
+				fs.writeFileSync(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8");
+			} else {
+				fs.writeFileSync(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8");
+			}
 		}
+		return fileInfo;
+	} catch (err) {
+		return err;
 	}
 };
 
@@ -474,9 +479,11 @@ Delete a file described by the fileInfo if it exits
 */
 exports.deleteTiddlerFile = function(fileInfo, callback) {
 	//Only attempt to delete files that exist on disk
-	if(!fileInfo.filepath || !fs.existsSync(fileInfo.filepath)) {
-		//For some reason, the tiddler is only in memory
-		$tw.syncer.displayError("Server deleteTiddlerFile task - no filepath found or the path doesn't exist on disk: "+fileInfo.filepath);
+	debugger;
+	var invalid = !fileInfo.filepath || !fs.existsSync(fileInfo.filepath);
+	if(invalid) {
+		//For some reason, the tiddler is only in memory or we can't modify the file at this path
+		$tw.syncer.displayError("Server deleteTiddlerFile task failed for filepath: "+fileInfo.filepath);
 		return callback(null, fileInfo);
 	}
 	// Delete the file
@@ -492,17 +499,17 @@ exports.deleteTiddlerFile = function(fileInfo, callback) {
 				}
 				return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),function(err){
 					if(err){
-						callback(err);
+						return callback(err);
 					}
-					callback(null, fileInfo);
+					return callback(null, fileInfo);
 				});
 			});
 		} else {
 			return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),function(err){
 				if(err){
-					callback(err);
+					return callback(err);
 				}
-				callback(null, fileInfo);
+				return callback(null, fileInfo);
 			});
 		}
 	});
@@ -522,7 +529,7 @@ exports.cleanupTiddlerFiles = function(options, callback) {
 			if(err) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the previous file on disk, should fail gracefully
-					$tw.syncer.displayError("Server desynchronized. Error cleaning up previous file for tiddler: "+title, err);
+					$tw.syncer.displayError("Server desynchronized. Error cleaning up previous file for '"+title+"'", err);
 					return callback(null, bootInfo);
 				} else {
 					return callback(err);

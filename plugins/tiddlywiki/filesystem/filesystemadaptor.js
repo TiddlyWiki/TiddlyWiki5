@@ -88,7 +88,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 					fileInfo = fileInfo || self.boot.files[tiddler.fields.title];
 					fileInfo.writeError = true;
 					self.boot.files[tiddler.fields.title] = fileInfo;
-					$tw.syncer.displayError("Sync for tiddler [["+tiddler.fields.title+"]] will be retried with encoded filepath", encodeURIComponent(bootInfo.filepath));
+					$tw.syncer.logger.log("Sync failed for '"+tiddler.fields.title+"' and will be retried with encoded filepath", encodeURIComponent(fileInfo.filepath));
 					return callback(err);
 				} else {
 					return callback(err);
@@ -100,7 +100,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 				bootInfo: fileInfo || {},
 				title: tiddler.fields.title
 			};
-			$tw.utils.cleanupTiddlerFiles(options, callback);
+			return $tw.utils.cleanupTiddlerFiles(options, callback);
 		});
 	});
 };

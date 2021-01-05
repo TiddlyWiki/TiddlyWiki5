@@ -593,7 +593,7 @@ SaveTiddlerTask.prototype.run = function(callback) {
 		changeCount = this.syncer.wiki.getChangeCount(this.title),
 		tiddler = this.syncer.wiki.tiddlerExists(this.title) && this.syncer.wiki.getTiddler(this.title);
 	this.syncer.logger.log("Dispatching 'save' task:",this.title);
-	if(tiddler) { debugger;
+	if(tiddler) {
 		this.syncer.syncadaptor.saveTiddler(tiddler,function(err,adaptorInfo,revision) {
 			debugger;// If there's an error, exit without changing any internal state
 			if(err) {
