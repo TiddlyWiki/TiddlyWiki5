@@ -479,7 +479,6 @@ Delete a file described by the fileInfo if it exits
 */
 exports.deleteTiddlerFile = function(fileInfo, callback) {
 	//Only attempt to delete files that exist on disk
-	debugger;
 	var invalid = !fileInfo.filepath || !fs.existsSync(fileInfo.filepath);
 	if(invalid) {
 		//For some reason, the tiddler is only in memory or we can't modify the file at this path

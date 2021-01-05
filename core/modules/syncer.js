@@ -595,7 +595,7 @@ SaveTiddlerTask.prototype.run = function(callback) {
 	this.syncer.logger.log("Dispatching 'save' task:",this.title);
 	if(tiddler) {
 		this.syncer.syncadaptor.saveTiddler(tiddler,function(err,adaptorInfo,revision) {
-			debugger;// If there's an error, exit without changing any internal state
+			// If there's an error, exit without changing any internal state
 			if(err) {
 				return callback(err);
 			}
@@ -627,7 +627,7 @@ DeleteTiddlerTask.prototype.run = function(callback) {
 	var self = this;
 	this.syncer.logger.log("Dispatching 'delete' task:",this.title);
 	this.syncer.syncadaptor.deleteTiddler(this.title,function(err,adaptorInfo) {
-		debugger; // If there's an error, exit without changing any internal state
+		// If there's an error, exit without changing any internal state
 		if(err) {
 			return callback(err);
 		}
