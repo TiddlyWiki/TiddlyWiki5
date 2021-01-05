@@ -100,12 +100,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 				bootInfo: fileInfo || {},
 				title: tiddler.fields.title
 			};
-			$tw.utils.cleanupTiddlerFiles(options, function(err, fileInfo){
-				if(err) {
-					return callback(err);
-				}
-				return callback(null, fileInfo);
-			});
+			$tw.utils.cleanupTiddlerFiles(options, callback);
 		});
 	});
 };

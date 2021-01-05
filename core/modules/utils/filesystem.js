@@ -415,7 +415,7 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 	if(fileInfo.hasMetaFile) {
 		// Save the tiddler as a separate body and meta file
 		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
-		fs.writeFile(fileInfo.filepath,tiddler.fields.text,typeInfo.encoding,function(err) {
+		fs.writeFile(fileInfo.filepath,tiddler.fields.text || "",typeInfo.encoding,function(err) {
 			if(err) {
 				return callback(err);
 			}
@@ -457,7 +457,7 @@ exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 	if(fileInfo.hasMetaFile) {
 		// Save the tiddler as a separate body and meta file
 		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
-		fs.writeFileSync(fileInfo.filepath,tiddler.fields.text,typeInfo.encoding);
+		fs.writeFileSync(fileInfo.filepath,tiddler.fields.text || "",typeInfo.encoding);
 		fs.writeFileSync(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8");
 	} else {
 		// Save the tiddler as a self contained templated file
@@ -475,7 +475,9 @@ Delete a file described by the fileInfo if it exits
 exports.deleteTiddlerFile = function(fileInfo, callback) {
 	//Only attempt to delete files that exist on disk
 	if(!fileInfo.filepath || !fs.existsSync(fileInfo.filepath)) {
-		return callback(null);
+		//For some reason, the tiddler is only in memory
+		$tw.syncer.displayError("Server deleteTiddlerFile task - no filepath found or the path doesn't exist on disk: "+fileInfo.filepath);
+		return callback(null, fileInfo);
 	}
 	// Delete the file
 	fs.unlink(fileInfo.filepath,function(err) {
