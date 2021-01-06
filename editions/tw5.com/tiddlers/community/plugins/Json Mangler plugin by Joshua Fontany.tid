@@ -1,7 +1,8 @@
 created: 20190308041321498
-modified: 20210101191843666
+modified: 20210106151027480
 tags: [[Community Plugins]]
 title: Json Mangler plugin by Joshua Fontany
+type: text/vnd.tiddlywiki
 
 Extend tiddlywiki to parse complex ("nested") json data tiddlers.
 
