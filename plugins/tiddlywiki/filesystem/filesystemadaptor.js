@@ -68,7 +68,6 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 		fileInfo: this.boot.files[title],
 		originalpath: this.wiki.extractTiddlerDataItem("$:/config/OriginalTiddlerPaths",title, "")
 	});
-	this.boot.files[title] = newInfo;
 	callback(null,newInfo);
 };
 
@@ -94,6 +93,8 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 					return callback(err);
 				}
 			}
+			// Store new boot info only after successful writes
+			self.boot.files[tiddler.fields.title] = fileInfo;
 			// Cleanup duplicates if the file moved or changed extensions
 			var options = {
 				adaptorInfo: ($tw.syncer.tiddlerInfo[tiddler.fields.title] || {adaptorInfo: {} }).adaptorInfo,
