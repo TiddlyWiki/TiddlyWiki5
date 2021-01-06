@@ -1,3 +1,6 @@
 title: $:/core/wiki/title
 
-{{$:/SiteTitle}} --- {{$:/SiteSubtitle}}
+{{$:/SiteTitle}}
+<$list filter="[{$:/SiteSubtitle}trim[]minlength[1]]" variable="ignore">
+--- {{$:/SiteSubtitle}}
+</$list>
