@@ -656,7 +656,6 @@ function LoadTiddlerTask(syncer,title) {
 
 LoadTiddlerTask.prototype.run = function(callback) {
 	var self = this,
-	changeCount = this.syncer.wiki.getChangeCount(this.title);
 	this.syncer.logger.log("Dispatching 'load' task:",this.title);
 	this.syncer.syncadaptor.loadTiddler(this.title,
 		{
@@ -670,13 +669,6 @@ LoadTiddlerTask.prototype.run = function(callback) {
 			// Update the info stored about this tiddler
 			if(tiddlerFields) {
 				self.syncer.storeTiddler(tiddlerFields);
-				// Adjust the info stored about this tiddler
-				self.syncer.tiddlerInfo[self.title] = {
-					changeCount: changeCount,
-					adaptorInfo: adaptorInfo,
-					revision: revision,
-					timestampLastSaved: new Date()
-				};
 			}
 			// Invoke the callback
 			callback(null);
