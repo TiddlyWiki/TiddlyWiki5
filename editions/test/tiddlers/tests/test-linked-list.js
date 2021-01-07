@@ -32,20 +32,20 @@ describe("LinkedList class tests", function() {
 
 	// pushTops a value or array of values into both the array and linked list.
 	function pushTop(pair, valueOrValues) {
-		$tw.utils.pushTop(pair.array, valueOrValues);
 		pair.list.pushTop(valueOrValues);
+		$tw.utils.pushTop(pair.array, valueOrValues);
 	};
 
 	// pushes values into both the array and the linked list.
 	function push(pair, values) {
-		pair.array.push.apply(pair.array, values);
 		pair.list.push.apply(pair.list, values);
+		pair.array.push.apply(pair.array, values);
 	};
 
 	// operates a remove action on an array and a linked list in parallel.
 	function remove(pair, valueOrValues) {
-		$tw.utils.removeArrayEntries(pair.array, valueOrValues);
 		pair.list.remove(valueOrValues);
+		$tw.utils.removeArrayEntries(pair.array, valueOrValues);
 	};
 
 	// compares an array and a linked list to make sure they match up
@@ -153,13 +153,31 @@ describe("LinkedList class tests", function() {
 		compare(pair); // '' '' A ''
 	});
 
-/*
-	it('can handle undefined', function() {
-		var pair = newPair();
-		pushTop(pair, [undefined]);
-		compare(pair); // ''
+	it('will throw if told to push non-strings', function() {
+		var message = "Linked List only accepts string values, not ";
+		var list = new $tw.utils.LinkedList();
+		expect(() => list.push(undefined)).toThrow(message + "undefined");
+		expect(() => list.pushTop(undefined)).toThrow(message + "undefined");
+		expect(() => list.pushTop(['c', undefined])).toThrow(message + "undefined");
+		expect(() => list.pushTop(5)).toThrow(message + "5");
+		expect(() => list.pushTop(null)).toThrow(message + "null");
+
+		// now lets do a quick test to make sure this exception
+		// doesn't leave any side-effects
+		// A.K.A Strong guarantee
+		var pair = newPair(['A', '5', 'B', 'C']);
+		expect(() => pushTop(pair, 5)).toThrow(message + "5");
+		compare(pair);
+		expect(() => push(pair, ['D', 7])).toThrow(message + "7");
+		compare(pair);
+		expect(() => remove(pair, 5)).toThrow(message + "5");
+		compare(pair);
+		// This is the tricky one. 'A' and 'B' should not be removed or pushed.
+		expect(() => pushTop(pair, ['A', 'B', null])).toThrow(message + "null");
+		compare(pair);
+		expect(() => remove(pair, ['A', 'B', null])).toThrow(message + "null");
+		compare(pair);
 	});
-*/
 
 	it("can clear", function() {
 		var list = new $tw.utils.LinkedList();

@@ -25,27 +25,39 @@ LinkedList.prototype.clear = function() {
 LinkedList.prototype.remove = function(value) {
 	if($tw.utils.isArray(value)) {
 		for(var t=0; t<value.length; t++) {
+			_assertString(value[t]);
+		}
+		for(var t=0; t<value.length; t++) {
 			_removeOne(this,value[t]);
 		}
 	} else {
+		_assertString(value);
 		_removeOne(this,value);
 	}
 };
 
 LinkedList.prototype.push = function(/* values */) {
 	for(var i = 0; i < arguments.length; i++) {
-		var value = arguments[i];
-		_linkToEnd(this,value);
+		_assertString(arguments[i]);
+	}
+	for(var i = 0; i < arguments.length; i++) {
+		_linkToEnd(this,arguments[i]);
 	}
 };
 
 LinkedList.prototype.pushTop = function(value) {
 	if($tw.utils.isArray(value)) {
+		for (var t=0; t<value.length; t++) {
+			_assertString(value[t]);
+		}
 		for(var t=0; t<value.length; t++) {
 			_removeOne(this,value[t]);
 		}
-		this.push.apply(this,value);
+		for(var t=0; t<value.length; t++) {
+			_linkToEnd(this,value[t]);
+		}
 	} else {
+		_assertString(value);
 		_removeOne(this,value);
 		_linkToEnd(this,value);
 	}
@@ -106,16 +118,9 @@ function _removeOne(list,value) {
 	}
 	// We either remove value, or if there were multiples, set the next value
 	// up as the first.
-	if (typeof next === 'object') {
-		if (list.prev[value].length <= 1) {
-			// It's a single value list-item again
-			// TODO: Do I need to convert arrays of 1 back into strings?
-			delete list.next[value];
-			delete list.prev[value];
-		} else {
-			list.next[value].shift();
-			list.prev[value].shift();
-		}
+	if (typeof next === 'object' && (list.next[value].length >= 1 || list.prev[value].length > 1)) {
+		list.next[value].shift();
+		list.prev[value].shift();
 	} else {
 		delete list.next[value];
 		delete list.prev[value];
@@ -155,6 +160,12 @@ function _linkToEnd(list,value) {
 	}
 	list.last = value;
 	list.length += 1;
+};
+
+function _assertString(value) {
+	if (typeof value !== 'string') {
+		throw "Linked List only accepts string values, not " + value;
+	}
 };
 
 exports.LinkedList = LinkedList;
