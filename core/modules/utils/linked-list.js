@@ -14,10 +14,11 @@ function LinkedList() {
 };
 
 LinkedList.prototype.clear = function() {
-	this.index = Object.create(null);
 	// LinkedList performs the duty of both the head and tail node
-	this.next = this;
-	this.prev = this;
+	this.next = Object.create(null);
+	this.prev = Object.create(null);
+	this.first = undefined;
+	this.last = undefined;
 	this.length = 0;
 };
 
@@ -34,20 +35,7 @@ LinkedList.prototype.remove = function(value) {
 LinkedList.prototype.push = function(/* values */) {
 	for(var i = 0; i < arguments.length; i++) {
 		var value = arguments[i];
-		var node = {value: value};
-		var preexistingNode = this.index[value];
-		_linkToEnd(this,node);
-		if(preexistingNode) {
-			// We want to keep pointing to the first instance, but we want
-			// to have that instance (or chain of instances) point to the
-			// new one.
-			while (preexistingNode.copy) {
-				preexistingNode = preexistingNode.copy;
-			}
-			preexistingNode.copy = node;
-		} else {
-			this.index[value] = node;
-		}
+		_linkToEnd(this,value);
 	}
 };
 
@@ -58,58 +46,114 @@ LinkedList.prototype.pushTop = function(value) {
 		}
 		this.push.apply(this,value);
 	} else {
-		var node = _removeOne(this,value);
-		if(!node) {
-			node = {value: value};
-			this.index[value] = node;
-		} else {
-			// Put this node at the end of the copy chain.
-			var preexistingNode = node;
-			while(preexistingNode.copy) {
-				preexistingNode = preexistingNode.copy;
-			}
-			// The order of these three statements is important,
-			// because sometimes preexistingNode == node.
-			preexistingNode.copy = node;
-			this.index[value] = node.copy;
-			node.copy = undefined;
-		}
-		_linkToEnd(this,node);
+		_removeOne(this,value);
+		_linkToEnd(this,value);
 	}
 };
 
 LinkedList.prototype.each = function(callback) {
-	for(var ptr = this.next; ptr !== this; ptr = ptr.next) {
-		callback(ptr.value);
+	var visits = Object.create(null),
+		value = this.first;
+	while (value !== undefined) {
+		callback(value);
+		var next = this.next[value];
+		if (typeof next === "object") {
+			var i = visits[value] || 0;
+			visits[value] = i+1;
+			value = next[i];
+		} else {
+			value = next;
+		}
 	}
 };
 
 LinkedList.prototype.toArray = function() {
 	var output = [];
-	for(var ptr = this.next; ptr !== this; ptr = ptr.next) {
-		output.push(ptr.value);
-	}
+	this.each(function(value) { output.push(value); });
 	return output;
 };
 
 function _removeOne(list,value) {
-	var node = list.index[value];
-	if(node) {
-		node.prev.next = node.next;
-		node.next.prev = node.prev;
-		list.length -= 1;
-		// Point index to the next instance of the same value, maybe nothing.
-		list.index[value] = node.copy;
+	var prev = list.prev[value],
+		next = list.next[value],
+		oldPrev = prev,
+		newNext = next;
+	if (typeof next === 'object') {
+		newNext = next[0];
+		oldPrev = prev[0];
 	}
-	return node;
+	if (list.first === value) {
+		list.first = newNext
+	} else if (oldPrev) {
+		if (typeof list.next[oldPrev] === 'object') {
+			var i = list.next[oldPrev].indexOf(value);
+			list.next[oldPrev][i] = newNext;
+		} else {
+			list.next[oldPrev] = newNext;
+		}
+	} else {
+		return;
+	}
+	if (next !== undefined) {
+		if (typeof list.prev[newNext] === 'object') {
+			var i = list.prev[newNext].indexOf(value);
+			list.prev[newNext][i] = oldPrev;
+		} else {
+			list.prev[newNext] = oldPrev;
+		}
+	} else {
+		list.last = prev;
+	}
+	// We either remove value, or if there were multiples, set the next value
+	// up as the first.
+	if (typeof next === 'object') {
+		if (list.prev[value].length <= 1) {
+			// It's a single value list-item again
+			// TODO: Do I need to convert arrays of 1 back into strings?
+			delete list.next[value];
+			delete list.prev[value];
+		} else {
+			list.next[value].shift();
+			list.prev[value].shift();
+		}
+	} else {
+		delete list.next[value];
+		delete list.prev[value];
+	}
+	list.length -= 1;
 };
 
-function _linkToEnd(list,node) {
-	// Sticks the given node onto the end of the list.
-	list.prev.next = node;
-	node.prev = list.prev;
-	list.prev = node;
-	node.next = list;
+// Sticks the given node onto the end of the list.
+function _linkToEnd(list,value) {
+	if (list.first === undefined) {
+		list.first = value;
+	} else {
+		// Does it already exists?
+		if (list.first === value || list.prev[value]) {
+			if (typeof list.next[value] === 'string') {
+				list.next[value] = [list.next[value]];
+				list.prev[value] = [list.prev[value]];
+			} else if (typeof list.next[value] === 'undefined') {
+				// special case. The list already contains exacly 1 "value".
+				list.next[value] = [];
+				list.prev[value] = [list.prev[value]];
+			}
+			list.prev[value].push(list.last);
+			// We do NOT append a new value onto this list. It is implied
+			// given that we'll now reference this value more times than this
+			// has references to something else.
+			// It's new "next" points to nothing
+		} else {
+			list.prev[value] = list.last;
+		}
+		// Make the old last point to this new one.
+		if (typeof list.next[list.last] === 'object') {
+			list.next[list.last].push(value);
+		} else {
+			list.next[list.last] = value;
+		}
+	}
+	list.last = value;
 	list.length += 1;
 };
 

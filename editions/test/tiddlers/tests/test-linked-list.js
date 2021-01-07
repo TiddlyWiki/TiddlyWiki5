@@ -8,8 +8,8 @@ Tests the utils.LinkedList class.
 LinkedList was built to behave exactly as $tw.utils.pushTop and
 Array.prototype.push would behave with an array.
 
-Many of these tests function by performing operations on a LinkedList while
-performing the equivalent actions on an array with the old utility methods.
+Many of these tests function by performing operations on a paired set of
+an array and LinkedList. It uses equivalent actions on both.
 Then we confirm that the two come out functionally identical.
 
 \*/
@@ -21,89 +21,145 @@ Then we confirm that the two come out functionally identical.
 
 describe("LinkedList class tests", function() {
 
+	// creates and initializes a new {array, list} pair for testing
+	function newPair(initialArray) {
+		var pair = {array: [], list: new $tw.utils.LinkedList()};
+		if (initialArray) {
+			push(pair, initialArray);
+		}
+		return pair;
+	};
+
 	// pushTops a value or array of values into both the array and linked list.
-	function pushTop(array, linkedList, valueOrValues) {
-		$tw.utils.pushTop(array, valueOrValues);
-		linkedList.pushTop(valueOrValues);
+	function pushTop(pair, valueOrValues) {
+		$tw.utils.pushTop(pair.array, valueOrValues);
+		pair.list.pushTop(valueOrValues);
 	};
 
 	// pushes values into both the array and the linked list.
-	function push(array, linkedList/*, other values */) {
-		var values = Array.prototype.slice(arguments, 2);
-		array.push.apply(array, values);
-		linkedList.push.apply(linkedList, values);
+	function push(pair, values) {
+		pair.array.push.apply(pair.array, values);
+		pair.list.push.apply(pair.list, values);
 	};
 
 	// operates a remove action on an array and a linked list in parallel.
-	function remove(array, linkedList, valueOrValues) {
-		$tw.utils.removeArrayEntries(array, valueOrValues);
-		linkedList.remove(valueOrValues);
+	function remove(pair, valueOrValues) {
+		$tw.utils.removeArrayEntries(pair.array, valueOrValues);
+		pair.list.remove(valueOrValues);
 	};
 
 	// compares an array and a linked list to make sure they match up
-	function compare(array, linkedList) {
-		expect(linkedList.toArray()).toEqual(array);
-		expect(linkedList.length).toBe(array.length);
+	function compare(pair) {
+		expect(pair.list.toArray()).toEqual(pair.array);
+		expect(pair.list.length).toBe(pair.array.length);
 	};
 
 	it("can pushTop", function() {
-		var array = [];
-		var list = new $tw.utils.LinkedList();
-		push(array, list, 'A', 'B', 'C');
+		var pair = newPair(['A', 'B', 'C']);
 		// singles
-		pushTop(array, list, 'X');
-		pushTop(array, list, 'B');
-		compare(array, list); // A C X B
+		pushTop(pair, 'X');
+		pushTop(pair, 'B');
+		compare(pair); // A C X B
 		//arrays
-		pushTop(array, list, ['X', 'A', 'G', 'A']);
+		pushTop(pair, ['X', 'A', 'G', 'A']);
 		// If the pushedTopped list has duplicates, they go in unempeded.
-		compare(array, list); // C B X A G A
+		compare(pair); // C B X A G A
 	});
 
 	it("can pushTop with tricky duplicates", function() {
-		var array = [];
-		var list = new $tw.utils.LinkedList();
-		push(array, list, 'A', 'B', 'A', 'C', 'A', 'end');
+		var pair = newPair(['A', 'B', 'A', 'C', 'A', 'end']);
 		// If the original list contains duplicates, only one instance is cut
-		pushTop(array, list, 'A');
-		compare(array, list); // B A C A end A
+		pushTop(pair, 'A');
+		compare(pair); // B A C A end A
 
 		// And the Llist properly knows the next 'A' to cut if pushed again
-		pushTop(array, list, ['X', 'A']);
-		compare(array, list); // B C A end A X A
+		pushTop(pair, ['X', 'A']);
+		compare(pair); // B C A end A X A
 
 		// One last time, to make sure we maintain the linked chain of copies
-		pushTop(array, list, 'A');
-		compare(array, list); // B C end A X A A
+		pushTop(pair, 'A');
+		compare(pair); // B C end A X A A
+	});
+
+	it("can pushTop a single-value list with itself", function() {
+		var pair = newPair(['A']);
+		pushTop(pair, 'A');
+		compare(pair); // A
+	});
+
+	it("can remove all instances of a multi-instance value", function() {
+		var pair = newPair(['A', 'A']);
+		remove(pair, ['A', 'A']);
+		compare(pair); //
+
+		// Again, but this time with other values mixed in
+		pair = newPair(['B', 'A', 'A', 'C']);
+		remove(pair, ['A', 'A']);
+		compare(pair); // B C
+
+		// And again, but this time with value inbetween too.
+		pair = newPair(['B', 'A', 'X', 'Y', 'Z', 'A', 'C']);
+		remove(pair, ['A', 'A']);
+		compare(pair); // B X Y Z C
+	});
+
+	it("can pushTop value linked to by a repeat item", function() {
+		var pair = newPair(['A', 'B', 'A', 'C', 'A', 'C', 'D']);
+		// This is tricky because that 'C' is referenced by a second 'A'
+		// It WAS a crash before
+		pushTop(pair, 'C');
+		compare(pair); // A B A A C D C
 	});
 
 	it("can handle particularly nasty pushTop pitfall", function() {
-		var array = [];
-		var list = new $tw.utils.LinkedList();
-		push(array, list, 'A', 'B', 'A', 'C');
-		pushTop(array, list, 'A'); // BACA
-		pushTop(array, list, 'X'); // BACAX
-		remove(array, list, 'A');  // BCAX
-		pushTop(array, list, 'A'); // BCXA
-		remove(array, list, 'A');  // BCX
+		var pair = newPair(['A', 'B', 'A', 'C']);
+		pushTop(pair, 'A'); // BACA
+		pushTop(pair, 'X'); // BACAX
+		remove(pair, 'A');  // BCAX
+		pushTop(pair, 'A'); // BCXA
+		remove(pair, 'A');  // BCX
 
 		// But! The way I initially coded the copy chains, a mystery A could
 		// hang around.
-		compare(array, list); // B C X
+		compare(pair); // B C X
+	});
+
+	it('can handle past-duplicate items when pushing', function() {
+		var pair = newPair(['X', 'Y', 'A', 'C', 'A']);
+		// Removing an item, when it has a duplicat at the list's end
+		remove(pair, 'A');
+		compare(pair); // XYCA
+		// This actually caused an infinite loop once. So important test here.
+		push(pair, ['A']);
+		compare(pair); // XYCAA
 	});
 
 	it("can push", function() {
-		var array = [];
-		var list = new $tw.utils.LinkedList();
-		push(array, list, 'A', 'B', 'C');
+		var pair = newPair(['A', 'B', 'C']);
 		// singles
-		push(array, list, 'B');
-		compare(array, list); // A B C B
+		push(pair, ['B']);
+		compare(pair); // A B C B
 
 		// multiple args
-		push(array, list, 'A', 'B', 'C');
-		compare(array, list); // A B C B A B C
+		push(pair, ['A', 'B', 'C']);
+		compare(pair); // A B C B A B C
 	});
+
+	it('can handle empty string', function() {
+		var pair = newPair(['', '', '']);
+		compare(pair); // '' '' ''
+
+		pushTop(pair, ['A', '']);
+		compare(pair); // '' '' A ''
+	});
+
+/*
+	it('can handle undefined', function() {
+		var pair = newPair();
+		pushTop(pair, [undefined]);
+		compare(pair); // ''
+	});
+*/
 
 	it("can clear", function() {
 		var list = new $tw.utils.LinkedList();
@@ -114,29 +170,25 @@ describe("LinkedList class tests", function() {
 	});
 
 	it("can remove", function() {
-		var array = [];
-		var list = new $tw.utils.LinkedList();
-		push(array, list, 'A', 'x', 'C', 'x', 'D', 'x', 'E', 'x');
+		var pair = newPair(['A', 'x', 'C', 'x', 'D', 'x', 'E', 'x']);
 		// single
-		remove(array, list, 'x');
-		compare(array, list); // A C x D x E x
+		remove(pair, 'x');
+		compare(pair); // A C x D x E x
 
 		// arrays
-		remove(array, list, ['x', 'A', 'x']);
-		compare(array, list); // C D E x
+		remove(pair, ['x', 'A', 'x']);
+		compare(pair); // C D E x
 	});
 
 	it('can ignore removal of nonexistent items', function() {
-		var array = [];
-		var list = new $tw.utils.LinkedList();
-		push(array, list, 'A', 'B', 'C', 'D');
+		var pair = newPair(['A', 'B', 'C', 'D']);
 		// single
-		remove(array, list, 'Z');
-		compare(array, list); // A B C D
+		remove(pair, 'Z');
+		compare(pair); // A B C D
 
 		// array
-		remove(array, list, ['Z', 'B', 'X']);
-		compare(array, list); // A C D
+		remove(pair, ['Z', 'B', 'X']);
+		compare(pair); // A C D
 	});
 
 	it('can iterate with each', function() {
@@ -148,6 +200,11 @@ describe("LinkedList class tests", function() {
 			counter = counter + 1;
 		});
 		expect(counter).toBe(4);
+	});
+
+	it('can iterate a list of the same item', function() {
+		var pair = newPair(['A', 'A']);
+		compare(pair);
 	});
 });
 
