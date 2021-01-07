@@ -655,7 +655,7 @@ function LoadTiddlerTask(syncer,title) {
 }
 
 LoadTiddlerTask.prototype.run = function(callback) {
-	var self = this,
+	var self = this;
 	this.syncer.logger.log("Dispatching 'load' task:",this.title);
 	this.syncer.syncadaptor.loadTiddler(this.title,
 		{
