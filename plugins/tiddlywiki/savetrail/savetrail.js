@@ -99,7 +99,14 @@ SaveTrailSyncAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 /*
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
-SaveTrailSyncAdaptor.prototype.saveTiddler = function(tiddler,callback) {
+SaveTrailSyncAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
+	if(!!callback && typeof callback !== "function"){
+		var optionsArg = callback;
+	}
+	if(typeof options === "function"){
+		callback = options;
+		options = optionsArg || {};
+	}
 	if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
 		var isDraft = $tw.utils.hop(tiddler.fields,"draft.of");
 		if(!isDraft || $tw.wiki.checkTiddlerText(ENABLE_DRAFTS_TIDDLER_TITLE,"yes")) {
@@ -112,14 +119,28 @@ SaveTrailSyncAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 /*
 Load a tiddler and invoke the callback with (err,tiddlerFields)
 */
-SaveTrailSyncAdaptor.prototype.loadTiddler = function(title,callback) {
+SaveTrailSyncAdaptor.prototype.loadTiddler = function(title,options,callback) {
+	if(!!callback && typeof callback !== "function"){
+		var optionsArg = callback;
+	}
+	if(typeof options === "function"){
+		callback = options;
+		options = optionsArg || {};
+	}
 	callback(null,null);
 };
 
 /*
 Delete a tiddler and invoke the callback with (err)
 */
-SaveTrailSyncAdaptor.prototype.deleteTiddler = function(title,callback,options) {
+SaveTrailSyncAdaptor.prototype.deleteTiddler = function(title,options,callback) {
+	if(!!callback && typeof callback !== "function"){
+		var optionsArg = callback;
+	}
+	if(typeof options === "function"){
+		callback = options;
+		options = optionsArg || {};
+	}
 	callback(null);
 };
 
