@@ -16,11 +16,11 @@ Filter operator for returning all the links from a tiddler
 Export our filter function
 */
 exports.links = function(source,operator,options) {
-	var results = [];
+	var results = new $tw.utils.LinkedList();
 	source(function(tiddler,title) {
-		$tw.utils.pushTop(results,options.wiki.getTiddlerLinks(title));
+		results.pushTop(options.wiki.getTiddlerLinks(title));
 	});
-	return results;
+	return results.toArray();
 };
 
 })();

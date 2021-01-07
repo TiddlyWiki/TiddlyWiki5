@@ -197,11 +197,16 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 				return callback(err);
 			}
 			// Save the details of the new revision of the tiddler
-			var etagInfo = self.parseEtag(request.getResponseHeader("Etag"));
-			// Invoke the callback
-			callback(null,{
-				bag: etagInfo.bag
-			}, etagInfo.revision);
+			var etag = request.getResponseHeader("Etag");
+			if(!etag) {
+				callback("Response from server is missing required `etag` header");
+			} else {
+				var etagInfo = self.parseEtag(etag);
+				// Invoke the callback
+				callback(null,{
+					bag: etagInfo.bag
+				}, etagInfo.revision);				
+			}
 		}
 	});
 };
