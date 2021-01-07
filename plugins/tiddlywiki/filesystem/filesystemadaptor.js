@@ -75,7 +75,14 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 /*
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
-FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
+FileSystemAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
+	if(!!callback && typeof callback !== "function"){
+		var optionsArg = callback;
+	}
+	if(typeof options === "function"){
+		callback = options;
+		options = optionsArg || {};
+	}
 	var self = this;
 	this.getTiddlerFileInfo(tiddler,function(err,fileInfo) {
 		if(err) {
@@ -111,16 +118,30 @@ Load a tiddler and invoke the callback with (err,tiddlerFields)
 
 We don't need to implement loading for the file system adaptor, because all the tiddler files will have been loaded during the boot process.
 */
-FileSystemAdaptor.prototype.loadTiddler = function(title,callback) {
+FileSystemAdaptor.prototype.loadTiddler = function(title,options,callback) {
+	if(!!callback && typeof callback !== "function"){
+		var optionsArg = callback;
+	}
+	if(typeof options === "function"){
+		callback = options;
+		options = optionsArg || {};
+	}
 	callback(null,null);
 };
 
 /*
 Delete a tiddler and invoke the callback with (err)
 */
-FileSystemAdaptor.prototype.deleteTiddler = function(title,callback) {
+FileSystemAdaptor.prototype.deleteTiddler = function(title,options,callback) {
+	if(!!callback && typeof callback !== "function"){
+		var optionsArg = callback;
+	}
+	if(typeof options === "function"){
+		callback = options;
+		options = optionsArg || {};
+	}
 	var self = this,
-		fileInfo = this.boot.files[title];
+	fileInfo = this.boot.files[title];
 	// Only delete the tiddler if we have writable information for the file
 	if(fileInfo) {
 		$tw.utils.deleteTiddlerFile(fileInfo, function(err){

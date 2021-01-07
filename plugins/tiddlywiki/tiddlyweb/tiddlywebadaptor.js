@@ -180,7 +180,14 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 /*
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
-TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback) {
+TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
+	if(!!callback && typeof callback !== "function"){
+		var optionsArg = callback;
+	}
+	if(typeof options === "function"){
+		callback = options;
+		options = optionsArg || {};
+	}
 	var self = this;
 	if(this.isReadOnly) {
 		return callback(null);
@@ -214,7 +221,14 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 /*
 Load a tiddler and invoke the callback with (err,tiddlerFields)
 */
-TiddlyWebAdaptor.prototype.loadTiddler = function(title,callback) {
+TiddlyWebAdaptor.prototype.loadTiddler = function(title,options,callback) {
+	if(!!callback && typeof callback !== "function"){
+		var optionsArg = callback;
+	}
+	if(typeof options === "function"){
+		callback = options;
+		options = optionsArg || {};
+	}
 	var self = this;
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(title),
@@ -233,7 +247,14 @@ Delete a tiddler and invoke the callback with (err)
 options include:
 tiddlerInfo: the syncer's tiddlerInfo for this tiddler
 */
-TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
+TiddlyWebAdaptor.prototype.deleteTiddler = function(title,options,callback) {
+	if(!!callback && typeof callback !== "function"){
+		var optionsArg = callback;
+	}
+	if(typeof options === "function"){
+		callback = options;
+		options = optionsArg || {};
+	}
 	var self = this;
 	if(this.isReadOnly) {
 		return callback(null);
@@ -241,7 +262,7 @@ TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 	// If we don't have a bag it means that the tiddler hasn't been seen by the server, so we don't need to delete it
 	var bag = options.tiddlerInfo.adaptorInfo && options.tiddlerInfo.adaptorInfo.bag;
 	if(!bag) {
-		return callback(null);
+		return callback(null, options);
 	}
 	// Issue HTTP request to delete the tiddler
 	$tw.utils.httpRequest({
