@@ -95,52 +95,55 @@ LinkedList.prototype.toArray = function() {
 };
 
 function _removeOne(list,value) {
-	var prev = list.prev[value],
-		next = list.next[value],
-		oldPrev = prev,
-		newNext = next;
-	if(typeof next === 'object') {
-		newNext = next[0];
-		oldPrev = prev[0];
+	var prevEntry = list.prev[value],
+		nextEntry = list.next[value],
+		prev = prevEntry,
+		next = nextEntry;
+	if(typeof nextEntry === 'object') {
+		next = nextEntry[0];
+		prev = prevEntry[0];
 	}
+	// Relink preceding element.
 	if(list.first === value) {
-		list.first = newNext
-	} else if(oldPrev !== undefined) {
-		if(typeof list.next[oldPrev] === 'object') {
-			if(newNext === undefined) {
-				// Must have been first, and 'i' would be last element.
+		list.first = next
+	} else if(prev !== undefined) {
+		if(typeof list.next[prev] === 'object') {
+			if(next === undefined) {
+				// Must have been last, and 'i' would be last element.
 				// Just pop instead
-				list.next[oldPrev].pop();
+				list.next[prev].pop();
 			} else {
-				var i = list.next[oldPrev].indexOf(value);
-				list.next[oldPrev][i] = newNext;
+				var i = list.next[prev].indexOf(value);
+				list.next[prev][i] = next;
 			}
 		} else {
-			list.next[oldPrev] = newNext;
+			list.next[prev] = next;
 		}
 	} else {
 		return;
 	}
-	if(newNext !== undefined) {
-		if(typeof list.prev[newNext] === 'object') {
-			if(oldPrev === undefined) {
+	// Now relink following element
+	// Check "next !== undefined" rather than "list.last === value" because
+	// we need to know if the FIRST value is the last in the list, not the last.
+	if(next !== undefined) {
+		if(typeof list.prev[next] === 'object') {
+			if(prev === undefined) {
 				// Must have been first, and 'i' would be 0. Just shift instead
-				list.prev[newNext].shift();
+				list.prev[next].shift();
 			} else {
-				var i = list.prev[newNext].indexOf(value);
-				list.prev[newNext][i] = oldPrev;
+				var i = list.prev[next].indexOf(value);
+				list.prev[next][i] = prev;
 			}
 		} else {
-			list.prev[newNext] = oldPrev;
+			list.prev[next] = prev;
 		}
 	} else {
-		list.last = oldPrev;
+		list.last = prev;
 	}
-	// We either remove value, or if there were multiples, set the next value
-	// up as the first.
-	if(typeof next === 'object' && (list.next[value].length >= 1 || list.prev[value].length > 1)) {
-		list.next[value].shift();
-		list.prev[value].shift();
+	// Delink actual value. If it uses arrays, just remove first entries.
+	if(typeof nextEntry === 'object') {
+		nextEntry.shift();
+		prevEntry.shift();
 	} else {
 		list.next[value] = undefined;
 		list.prev[value] = undefined;
@@ -164,10 +167,8 @@ function _linkToEnd(list,value) {
 				list.prev[value] = [list.prev[value]];
 			}
 			list.prev[value].push(list.last);
-			// We do NOT append a new value onto this list. It is implied
-			// given that we'll now reference this value more times than this
-			// has references to something else.
-			// It's new "next" points to nothing
+			// We do NOT append a new value onto "next" list. Iteration will
+			// figure out it must point to End-of-List on its own.
 		} else {
 			list.prev[value] = list.last;
 		}

@@ -39,7 +39,7 @@ describe("LinkedList class tests", function() {
 
 	// pushes values into both the array and the linked list.
 	function push(pair, values) {
-		pair.list.push.apply(pair.list, values);
+		pair.list.push(values);
 		pair.array.push.apply(pair.array, values);
 		return pair;
 	};
@@ -55,6 +55,7 @@ describe("LinkedList class tests", function() {
 	function compare(pair) {
 		expect(pair.list.toArray()).toEqual(pair.array);
 		expect(pair.list.length).toBe(pair.array.length);
+		return pair;
 	};
 
 	it("can pushTop", function() {
@@ -62,44 +63,46 @@ describe("LinkedList class tests", function() {
 		// singles
 		pushTop(pair, 'X');
 		pushTop(pair, 'B');
-		compare(pair); // A C X B
+		compare(pair); // ACXB
 		//arrays
 		pushTop(pair, ['X', 'A', 'G', 'A']);
 		// If the pushedTopped list has duplicates, they go in unempeded.
-		compare(pair); // C B X A G A
+		compare(pair); // CBXAGA
 	});
 
 	it("can pushTop with tricky duplicates", function() {
-		var pair = newPair(['A', 'B', 'A', 'C', 'A', 'end']);
+		var pair = newPair(['A', 'B', 'A', 'C', 'A', 'e']);
 		// If the original list contains duplicates, only one instance is cut
-		pushTop(pair, 'A');
-		compare(pair); // B A C A end A
+		compare(pushTop(pair, 'A')); // BACAeA
 
 		// And the Llist properly knows the next 'A' to cut if pushed again
-		pushTop(pair, ['X', 'A']);
-		compare(pair); // B C A end A X A
+		compare(pushTop(pair, ['X', 'A'])); // BCAeAXA
 
 		// One last time, to make sure we maintain the linked chain of copies
-		pushTop(pair, 'A');
-		compare(pair); // B C end A X A A
+		compare(pushTop(pair, 'A')); // BCeAXAA
 	});
 
 	it("can pushTop a single-value list with itself", function() {
-		var pair = newPair(['A']);
-		pushTop(pair, 'A');
-		compare(pair); // A
+		// This simple case actually requires special handling in LinkedList.
+		compare(pushTop(newPair(['A']), 'A')); // A
 	});
 
 	it("can remove all instances of a multi-instance value", function() {
-		compare(remove(newPair(['A', 'A']), ['A', 'A'])); //
+		var pair = compare(remove(newPair(['A', 'A']), ['A', 'A'])); //
+		// Now add 'A' back in, since internally it might be using arrays,
+		// even though those arrays must be empty.
+		compare(pushTop(pair, 'A')); // A
+		// Same idea, but push something else before readding 'A'
+		compare(pushTop(remove(newPair(['A', 'A']), ['A', 'A']), ['B', 'A'])); // BA
+
 		// Again, but this time with other values mixed in
 		compare(remove(newPair(['B', 'A', 'A', 'C']), ['A', 'A'])) // BC;
 		// And again, but this time with value inbetween too.
 		compare(remove(newPair(['B', 'A', 'X', 'Y', 'Z', 'A', 'C']), ['A', 'A'])); // BXYZC
+
 		// One last test, where removing a pair from the end could corrupt
 		// list.last.
-		var pair = newPair(['D', 'C', 'A', 'A']);
-		remove(pair, ['A', 'A']);
+		pair = remove(newPair(['D', 'C', 'A', 'A']), ['A', 'A']);
 		// But I can't figure out another way to test this. It's wrong
 		// for list.last to be anything other than a string, but I
 		// can't figure out how to make that corruption manifest a problem.
@@ -112,7 +115,7 @@ describe("LinkedList class tests", function() {
 		// This is tricky because that 'C' is referenced by a second 'A'
 		// It WAS a crash before
 		pushTop(pair, 'C');
-		compare(pair); // A B A A C D C
+		compare(pair); // ABAACDC
 	});
 
 	it("can pushTop last value after pair", function() {
@@ -221,25 +224,22 @@ describe("LinkedList class tests", function() {
 	});
 
 	it("can remove", function() {
-		var pair = newPair(['A', 'x', 'C', 'x', 'D', 'x', 'E', 'x']);
+		var list = new $tw.utils.LinkedList();
+		list.push(['A', 'x', 'C', 'x', 'D', 'x', 'E', 'x']);
 		// single
-		remove(pair, 'x');
-		compare(pair); // A C x D x E x
-
+		list.remove('x');
 		// arrays
-		remove(pair, ['x', 'A', 'x']);
-		compare(pair); // C D E x
+		list.remove(['x', 'A', 'XXX', 'x']);
+		expect(list.toArray()).toEqual(['C', 'D', 'E', 'x']);
 	});
 
 	it('can ignore removal of nonexistent items', function() {
 		var pair = newPair(['A', 'B', 'C', 'D']);
 		// single
-		remove(pair, 'Z');
-		compare(pair); // A B C D
+		compare(remove(pair, 'Z')); // ABCD
 
 		// array
-		remove(pair, ['Z', 'B', 'X']);
-		compare(pair); // A C D
+		compare(remove(pair, ['Z', 'B', 'X'])); // ACD
 	});
 
 	it('can iterate with each', function() {
@@ -254,8 +254,8 @@ describe("LinkedList class tests", function() {
 	});
 
 	it('can iterate a list of the same item', function() {
-		var pair = newPair(['A', 'A']);
-		compare(pair);
+		// Seems simple. Caused an infinite loop during development.
+		compare(newPair(['A', 'A']));
 	});
 });
 
