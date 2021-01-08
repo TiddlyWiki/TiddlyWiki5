@@ -96,25 +96,36 @@ function _removeOne(list,value) {
 	}
 	if (list.first === value) {
 		list.first = newNext
-	} else if (oldPrev) {
+	} else if (oldPrev !== undefined) {
 		if (typeof list.next[oldPrev] === 'object') {
-			var i = list.next[oldPrev].indexOf(value);
-			list.next[oldPrev][i] = newNext;
+			if (newNext === undefined) {
+				// Must have been first, and 'i' would be last element.
+				// Just pop instead
+				list.next[oldPrev].pop();
+			} else {
+				var i = list.next[oldPrev].indexOf(value);
+				list.next[oldPrev][i] = newNext;
+			}
 		} else {
 			list.next[oldPrev] = newNext;
 		}
 	} else {
 		return;
 	}
-	if (next !== undefined) {
+	if (newNext !== undefined) {
 		if (typeof list.prev[newNext] === 'object') {
-			var i = list.prev[newNext].indexOf(value);
-			list.prev[newNext][i] = oldPrev;
+			if (oldPrev === undefined) {
+				// Must have been first, and 'i' would be 0. Just shift instead
+				list.prev[newNext].shift();
+			} else {
+				var i = list.prev[newNext].indexOf(value);
+				list.prev[newNext][i] = oldPrev;
+			}
 		} else {
 			list.prev[newNext] = oldPrev;
 		}
 	} else {
-		list.last = prev;
+		list.last = oldPrev;
 	}
 	// We either remove value, or if there were multiples, set the next value
 	// up as the first.
@@ -122,8 +133,8 @@ function _removeOne(list,value) {
 		list.next[value].shift();
 		list.prev[value].shift();
 	} else {
-		delete list.next[value];
-		delete list.prev[value];
+		list.next[value] = undefined;
+		list.prev[value] = undefined;
 	}
 	list.length -= 1;
 };
@@ -134,7 +145,7 @@ function _linkToEnd(list,value) {
 		list.first = value;
 	} else {
 		// Does it already exists?
-		if (list.first === value || list.prev[value]) {
+		if (list.first === value || list.prev[value] !== undefined) {
 			if (typeof list.next[value] === 'string') {
 				list.next[value] = [list.next[value]];
 				list.prev[value] = [list.prev[value]];

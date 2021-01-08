@@ -34,18 +34,21 @@ describe("LinkedList class tests", function() {
 	function pushTop(pair, valueOrValues) {
 		pair.list.pushTop(valueOrValues);
 		$tw.utils.pushTop(pair.array, valueOrValues);
+		return pair;
 	};
 
 	// pushes values into both the array and the linked list.
 	function push(pair, values) {
 		pair.list.push.apply(pair.list, values);
 		pair.array.push.apply(pair.array, values);
+		return pair;
 	};
 
 	// operates a remove action on an array and a linked list in parallel.
 	function remove(pair, valueOrValues) {
 		pair.list.remove(valueOrValues);
 		$tw.utils.removeArrayEntries(pair.array, valueOrValues);
+		return pair;
 	};
 
 	// compares an array and a linked list to make sure they match up
@@ -88,19 +91,20 @@ describe("LinkedList class tests", function() {
 	});
 
 	it("can remove all instances of a multi-instance value", function() {
-		var pair = newPair(['A', 'A']);
-		remove(pair, ['A', 'A']);
-		compare(pair); //
-
+		compare(remove(newPair(['A', 'A']), ['A', 'A'])); //
 		// Again, but this time with other values mixed in
-		pair = newPair(['B', 'A', 'A', 'C']);
-		remove(pair, ['A', 'A']);
-		compare(pair); // B C
-
+		compare(remove(newPair(['B', 'A', 'A', 'C']), ['A', 'A'])) // BC;
 		// And again, but this time with value inbetween too.
-		pair = newPair(['B', 'A', 'X', 'Y', 'Z', 'A', 'C']);
+		compare(remove(newPair(['B', 'A', 'X', 'Y', 'Z', 'A', 'C']), ['A', 'A'])); // BXYZC
+		// One last test, where removing a pair from the end could corrupt
+		// list.last.
+		var pair = newPair(['D', 'C', 'A', 'A']);
 		remove(pair, ['A', 'A']);
-		compare(pair); // B X Y Z C
+		// But I can't figure out another way to test this. It's wrong
+		// for list.last to be anything other than a string, but I
+		// can't figure out how to make that corruption manifest a problem.
+		// So I dig into its private members. Bleh...
+		expect(typeof pair.list.last).toBe('string');
 	});
 
 	it("can pushTop value linked to by a repeat item", function() {
@@ -109,6 +113,17 @@ describe("LinkedList class tests", function() {
 		// It WAS a crash before
 		pushTop(pair, 'C');
 		compare(pair); // A B A A C D C
+	});
+
+	it("can pushTop last value after pair", function() {
+		// The 'next' ptrs for A would be polluted with an extraneous
+		// undefined after the pop, which would make pushing the 'X'
+		// back on problematic.
+		compare(pushTop(newPair(['A', 'A', 'X']), 'X')); // AACX
+		// And lets try a few other manipulations around pairs
+		compare(pushTop(newPair(['A', 'A', 'X', 'C']), 'X')); // AACX
+		compare(pushTop(newPair(['X', 'A', 'A']), 'X')); // AAX
+		compare(pushTop(newPair(['C', 'X', 'A', 'A']), 'X')); // CAAX
 	});
 
 	it("can handle particularly nasty pushTop pitfall", function() {
@@ -121,7 +136,7 @@ describe("LinkedList class tests", function() {
 
 		// But! The way I initially coded the copy chains, a mystery A could
 		// hang around.
-		compare(pair); // B C X
+		compare(pair); // BCX
 	});
 
 	it('can handle past-duplicate items when pushing', function() {
@@ -132,25 +147,40 @@ describe("LinkedList class tests", function() {
 		// This actually caused an infinite loop once. So important test here.
 		push(pair, ['A']);
 		compare(pair); // XYCAA
+		pushTop(pair, 'A') // switch those last As
+		compare(pair); // XYCAA
+		remove(pair, ['A', 'A']); // Remove all As, then add them back
+		pushTop(pair, ['A', 'A'])
+		compare(pair); // XYCAA
 	});
 
 	it("can push", function() {
 		var pair = newPair(['A', 'B', 'C']);
 		// singles
 		push(pair, ['B']);
-		compare(pair); // A B C B
+		compare(pair); // ABCB
 
 		// multiple args
 		push(pair, ['A', 'B', 'C']);
-		compare(pair); // A B C B A B C
+		compare(pair); // ABCBABC
 	});
 
 	it('can handle empty string', function() {
-		var pair = newPair(['', '', '']);
-		compare(pair); // '' '' ''
+		compare(newPair(['', '', ''])); // ___
+		compare(push(newPair(['']), [''])); // __
+		compare(pushTop(newPair(['', '', '']), ['A', ''])); // __A_
+		compare(remove(newPair(['', 'A']), 'A')); // _
+		compare(push(newPair(['', 'A']), ['A'])); // _AA
+		compare(remove(newPair(['A', '']), 'A')); // _
+		compare(push(newPair(['A', '']), ['A'])); // A_A
 
-		pushTop(pair, ['A', '']);
-		compare(pair); // '' '' A ''
+		// This one is tricky but precise. Remove 'B', and 'A' might mistake
+		// it as being first in the list since it's before ''. 'C' would get
+		// blasted from A's prev reference array.
+		compare(remove(newPair(['C', 'A', '', 'B', 'A']), ['B', 'A'])); // C_A
+		// Same idea, but with A mistaking B for being at the list's end, and
+		// thus removing C from its 'next' reference array.
+		compare(remove(newPair(['A', 'B', '', 'A', 'C']), ['B', 'A'])); // _AC
 	});
 
 	it('will throw if told to push non-strings', function() {
