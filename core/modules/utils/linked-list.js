@@ -36,13 +36,22 @@ LinkedList.prototype.remove = function(value) {
 	}
 };
 
+/*
+Push behaves like array.push and accepts multiple string arguments. But it also
+accepts a single array argument too, to be consistent with its other methods.
+*/
 LinkedList.prototype.push = function(/* values */) {
-	for(var i = 0; i < arguments.length; i++) {
-		_assertString(arguments[i]);
+	var values = arguments;
+	if($tw.utils.isArray(values[0])) {
+		values = values[0];
 	}
-	for(var i = 0; i < arguments.length; i++) {
-		_linkToEnd(this,arguments[i]);
+	for(var i = 0; i < values.length; i++) {
+		_assertString(values[i]);
 	}
+	for(var i = 0; i < values.length; i++) {
+		_linkToEnd(this,values[i]);
+	}
+	return this.length;
 };
 
 LinkedList.prototype.pushTop = function(value) {
@@ -66,10 +75,10 @@ LinkedList.prototype.pushTop = function(value) {
 LinkedList.prototype.each = function(callback) {
 	var visits = Object.create(null),
 		value = this.first;
-	while (value !== undefined) {
+	while(value !== undefined) {
 		callback(value);
 		var next = this.next[value];
-		if (typeof next === "object") {
+		if(typeof next === "object") {
 			var i = visits[value] || 0;
 			visits[value] = i+1;
 			value = next[i];
@@ -90,15 +99,15 @@ function _removeOne(list,value) {
 		next = list.next[value],
 		oldPrev = prev,
 		newNext = next;
-	if (typeof next === 'object') {
+	if(typeof next === 'object') {
 		newNext = next[0];
 		oldPrev = prev[0];
 	}
-	if (list.first === value) {
+	if(list.first === value) {
 		list.first = newNext
-	} else if (oldPrev !== undefined) {
-		if (typeof list.next[oldPrev] === 'object') {
-			if (newNext === undefined) {
+	} else if(oldPrev !== undefined) {
+		if(typeof list.next[oldPrev] === 'object') {
+			if(newNext === undefined) {
 				// Must have been first, and 'i' would be last element.
 				// Just pop instead
 				list.next[oldPrev].pop();
@@ -112,9 +121,9 @@ function _removeOne(list,value) {
 	} else {
 		return;
 	}
-	if (newNext !== undefined) {
-		if (typeof list.prev[newNext] === 'object') {
-			if (oldPrev === undefined) {
+	if(newNext !== undefined) {
+		if(typeof list.prev[newNext] === 'object') {
+			if(oldPrev === undefined) {
 				// Must have been first, and 'i' would be 0. Just shift instead
 				list.prev[newNext].shift();
 			} else {
@@ -129,7 +138,7 @@ function _removeOne(list,value) {
 	}
 	// We either remove value, or if there were multiples, set the next value
 	// up as the first.
-	if (typeof next === 'object' && (list.next[value].length >= 1 || list.prev[value].length > 1)) {
+	if(typeof next === 'object' && (list.next[value].length >= 1 || list.prev[value].length > 1)) {
 		list.next[value].shift();
 		list.prev[value].shift();
 	} else {
@@ -141,15 +150,15 @@ function _removeOne(list,value) {
 
 // Sticks the given node onto the end of the list.
 function _linkToEnd(list,value) {
-	if (list.first === undefined) {
+	if(list.first === undefined) {
 		list.first = value;
 	} else {
 		// Does it already exists?
-		if (list.first === value || list.prev[value] !== undefined) {
-			if (typeof list.next[value] === 'string') {
+		if(list.first === value || list.prev[value] !== undefined) {
+			if(typeof list.next[value] === 'string') {
 				list.next[value] = [list.next[value]];
 				list.prev[value] = [list.prev[value]];
-			} else if (typeof list.next[value] === 'undefined') {
+			} else if(typeof list.next[value] === 'undefined') {
 				// special case. The list already contains exacly 1 "value".
 				list.next[value] = [];
 				list.prev[value] = [list.prev[value]];
@@ -163,7 +172,7 @@ function _linkToEnd(list,value) {
 			list.prev[value] = list.last;
 		}
 		// Make the old last point to this new one.
-		if (typeof list.next[list.last] === 'object') {
+		if(typeof list.next[list.last] === 'object') {
 			list.next[list.last].push(value);
 		} else {
 			list.next[list.last] = value;
@@ -174,7 +183,7 @@ function _linkToEnd(list,value) {
 };
 
 function _assertString(value) {
-	if (typeof value !== 'string') {
+	if(typeof value !== 'string') {
 		throw "Linked List only accepts string values, not " + value;
 	}
 };

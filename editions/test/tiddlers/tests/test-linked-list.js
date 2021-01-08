@@ -155,14 +155,17 @@ describe("LinkedList class tests", function() {
 	});
 
 	it("can push", function() {
-		var pair = newPair(['A', 'B', 'C']);
+		var list = new $tw.utils.LinkedList();
 		// singles
-		push(pair, ['B']);
-		compare(pair); // ABCB
-
+		expect(list.push('A')).toBe(1);
+		expect(list.push('B')).toBe(2);
 		// multiple args
-		push(pair, ['A', 'B', 'C']);
-		compare(pair); // ABCBABC
+		expect(list.push('C', 'D', 'E')).toBe(5);
+		// array arg allowed
+		expect(list.push(['F', 'G'])).toBe(7);
+		// No-op
+		expect(list.push()).toBe(7);
+		expect(list.toArray()).toEqual(['A', 'B', 'C', 'D', 'E', 'F', 'G']);
 	});
 
 	it('can handle empty string', function() {
