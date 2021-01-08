@@ -12,6 +12,14 @@ Many of these tests function by performing operations on a paired set of
 an array and LinkedList. It uses equivalent actions on both.
 Then we confirm that the two come out functionally identical.
 
+NOTE TO FURTHER LINKED LIST DEVELOPERS:
+
+	If you want to add new functionality, like 'shift' or 'unshift', you'll
+	probably need to deal with the fact that Linked List will insert undefined
+	as a first entry into an item's 'prev' array when it's at the front of
+	the list, but it doesn't do the same for the 'next' array when it's at
+	the end. I think you'll probably be better off preventing 'prev' from ever
+	adding undefined.
 \*/
 (function(){
 

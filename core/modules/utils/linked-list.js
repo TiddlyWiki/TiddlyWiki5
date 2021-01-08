@@ -110,7 +110,6 @@ function _removeOne(list,value) {
 		if(typeof list.next[prev] === 'object') {
 			if(next === undefined) {
 				// Must have been last, and 'i' would be last element.
-				// Just pop instead
 				list.next[prev].pop();
 			} else {
 				var i = list.next[prev].indexOf(value);
@@ -128,7 +127,7 @@ function _removeOne(list,value) {
 	if(next !== undefined) {
 		if(typeof list.prev[next] === 'object') {
 			if(prev === undefined) {
-				// Must have been first, and 'i' would be 0. Just shift instead
+				// Must have been first, and 'i' would be 0.
 				list.prev[next].shift();
 			} else {
 				var i = list.prev[next].indexOf(value);
@@ -162,7 +161,8 @@ function _linkToEnd(list,value) {
 				list.next[value] = [list.next[value]];
 				list.prev[value] = [list.prev[value]];
 			} else if(typeof list.next[value] === 'undefined') {
-				// special case. The list already contains exacly 1 "value".
+				// list.next[value] must be undefined.
+				// Special case. List already has 1 value. It's at the end.
 				list.next[value] = [];
 				list.prev[value] = [list.prev[value]];
 			}
