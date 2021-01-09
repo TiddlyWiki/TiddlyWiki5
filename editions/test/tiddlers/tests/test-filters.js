@@ -20,7 +20,7 @@ function collectLog(block) {
 	var messages = [];
 	var oldLog = console.log;
 	console.log = function(a) {
-		messages.push(Array.prototype.join.call(arguments, ' '));
+		messages.push(Array.prototype.join.call(arguments, " "));
 	}
 	try {
 		block();
