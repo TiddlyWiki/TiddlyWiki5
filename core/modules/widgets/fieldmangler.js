@@ -27,15 +27,15 @@ FieldManglerWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 FieldManglerWidget.prototype.render = function(parent,nextSibling) {
-	this.parentDomNode = parent;
-	this.computeAttributes();
-	this.execute();
 	this.addEventListeners([
 		{type: "tm-remove-field", handler: "handleRemoveFieldEvent"},
 		{type: "tm-add-field", handler: "handleAddFieldEvent"},
 		{type: "tm-remove-tag", handler: "handleRemoveTagEvent"},
 		{type: "tm-add-tag", handler: "handleAddTagEvent"}
 	]);
+	this.parentDomNode = parent;
+	this.computeAttributes();
+	this.execute();
 	this.renderChildren(parent,nextSibling);
 };
 
