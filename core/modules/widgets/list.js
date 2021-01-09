@@ -32,14 +32,14 @@ ListWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 ListWidget.prototype.render = function(parent,nextSibling) {
-	this.parentDomNode = parent;
-	this.computeAttributes();
-	this.execute();
 	// Initialise the storyviews if they've not been done already
 	if(!this.storyViews) {
 		ListWidget.prototype.storyViews = {};
 		$tw.modules.applyMethods("storyview",this.storyViews);
 	}
+	this.parentDomNode = parent;
+	this.computeAttributes();
+	this.execute();
 	this.renderChildren(parent,nextSibling);
 	// Construct the storyview
 	var StoryView = this.storyViews[this.storyViewName];
