@@ -27,12 +27,12 @@ LinkCatcherWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 LinkCatcherWidget.prototype.render = function(parent,nextSibling) {
-	this.parentDomNode = parent;
-	this.computeAttributes();
-	this.execute();
 	this.addEventListeners([
 		{type: "tm-navigate", handler: "handleNavigateEvent"}
 	]);
+	this.parentDomNode = parent;
+	this.computeAttributes();
+	this.execute();
 	this.renderChildren(parent,nextSibling);
 };
 
