@@ -82,7 +82,7 @@ Attempts to login to the server with specified credentials. This method is optio
 
 !! `displayLoginPrompt(syncer)`
 
-Invoked by the syncer to display a custom login promopt. This method is optional.
+Invoked by the syncer to display a custom login prompt. This method is optional.
 
 |!Parameter |!Description |
 |syncer |Reference to the syncer object making the call |

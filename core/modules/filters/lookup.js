@@ -23,7 +23,7 @@ exports.lookup = function(source,operator,options) {
 	var results = [];
 	if(operator.operands.length == 1) {
 		source(function(tiddler,title) {
-			results.push(options.wiki.getTiddlerText(operator.operand + title) || operator.suffix);
+			results.push(options.wiki.getTiddlerText(operator.operand + title) || operator.suffix || '');
 		});
 	} else if (operator.operands.length == 2){
 		var reference = operator.operands[1];
@@ -31,8 +31,8 @@ exports.lookup = function(source,operator,options) {
 			reference = "!!" + reference;
 		}
 		source(function(tiddler,title) {
-			var text = options.wiki.getTextReference(operator.operands[0] + title + reference, "");
-			results.push(text !== "" ? text : operator.suffix);
+			var text = options.wiki.getTextReference(operator.operands[0] + title + reference, '');
+			results.push(text !== '' ? text : operator.suffix || '');
 		});
 	}
 	return results;

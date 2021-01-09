@@ -31,7 +31,7 @@ exports.all = function(source,operator,options) {
 	// Get our suboperators
 	var allFilterOperators = getAllFilterOperators();
 	// Cycle through the suboperators accumulating their results
-	var results = [],
+	var results = new $tw.utils.LinkedList(),
 		subops = operator.operand.split("+");
 	// Check for common optimisations
 	if(subops.length === 1 && subops[0] === "") {
@@ -49,10 +49,10 @@ exports.all = function(source,operator,options) {
 	for(var t=0; t<subops.length; t++) {
 		var subop = allFilterOperators[subops[t]];
 		if(subop) {
-			$tw.utils.pushTop(results,subop(source,operator.prefix,options));
+			results.pushTop(subop(source,operator.prefix,options));
 		}
 	}
-	return results;
+	return results.toArray();
 };
 
 })();
