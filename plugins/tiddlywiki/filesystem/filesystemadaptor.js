@@ -154,6 +154,8 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,options,callback) {
 					return callback(err);
 				}
 			}
+			// Remove the tiddler from $tw.boot.files
+			delete $tw.boot.files[self.title];
 			return callback(null, fileInfo);
 		});
 	} else {
