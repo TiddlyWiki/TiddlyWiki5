@@ -127,11 +127,6 @@ Render this widget into the DOM
 */
 ScrollableWidget.prototype.render = function(parent,nextSibling) {
 	var self = this;
-	// Remember parent
-	this.parentDomNode = parent;
-	// Compute attributes and execute state
-	this.computeAttributes();
-	this.execute();
 	this.scaleFactor = 1;
 	this.addEventListeners([
 		{type: "tm-scroll", handler: "handleScrollEvent"}
@@ -152,6 +147,11 @@ ScrollableWidget.prototype.render = function(parent,nextSibling) {
 				window.clearTimeout(id);
 			};
 	}
+	// Remember parent
+	this.parentDomNode = parent;
+	// Compute attributes and execute state
+	this.computeAttributes();
+	this.execute();
 	// Create elements
 	this.outerDomNode = this.document.createElement("div");
 	$tw.utils.setStyle(this.outerDomNode,[
