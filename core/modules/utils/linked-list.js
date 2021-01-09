@@ -99,7 +99,7 @@ function _removeOne(list,value) {
 		nextEntry = list.next[value],
 		prev = prevEntry,
 		next = nextEntry;
-	if(typeof nextEntry === 'object') {
+	if(typeof nextEntry === "object") {
 		next = nextEntry[0];
 		prev = prevEntry[0];
 	}
@@ -107,7 +107,7 @@ function _removeOne(list,value) {
 	if(list.first === value) {
 		list.first = next
 	} else if(prev !== undefined) {
-		if(typeof list.next[prev] === 'object') {
+		if(typeof list.next[prev] === "object") {
 			if(next === undefined) {
 				// Must have been last, and 'i' would be last element.
 				list.next[prev].pop();
@@ -125,7 +125,7 @@ function _removeOne(list,value) {
 	// Check "next !== undefined" rather than "list.last === value" because
 	// we need to know if the FIRST value is the last in the list, not the last.
 	if(next !== undefined) {
-		if(typeof list.prev[next] === 'object') {
+		if(typeof list.prev[next] === "object") {
 			if(prev === undefined) {
 				// Must have been first, and 'i' would be 0.
 				list.prev[next].shift();
@@ -140,7 +140,7 @@ function _removeOne(list,value) {
 		list.last = prev;
 	}
 	// Delink actual value. If it uses arrays, just remove first entries.
-	if(typeof nextEntry === 'object') {
+	if(typeof nextEntry === "object") {
 		nextEntry.shift();
 		prevEntry.shift();
 	} else {
@@ -157,10 +157,10 @@ function _linkToEnd(list,value) {
 	} else {
 		// Does it already exists?
 		if(list.first === value || list.prev[value] !== undefined) {
-			if(typeof list.next[value] === 'string') {
+			if(typeof list.next[value] === "string") {
 				list.next[value] = [list.next[value]];
 				list.prev[value] = [list.prev[value]];
-			} else if(typeof list.next[value] === 'undefined') {
+			} else if(typeof list.next[value] === "undefined") {
 				// list.next[value] must be undefined.
 				// Special case. List already has 1 value. It's at the end.
 				list.next[value] = [];
@@ -173,7 +173,7 @@ function _linkToEnd(list,value) {
 			list.prev[value] = list.last;
 		}
 		// Make the old last point to this new one.
-		if(typeof list.next[list.last] === 'object') {
+		if(typeof list.next[list.last] === "object") {
 			list.next[list.last].push(value);
 		} else {
 			list.next[list.last] = value;
@@ -184,7 +184,7 @@ function _linkToEnd(list,value) {
 };
 
 function _assertString(value) {
-	if(typeof value !== 'string') {
+	if(typeof value !== "string") {
 		throw "Linked List only accepts string values, not " + value;
 	}
 };
