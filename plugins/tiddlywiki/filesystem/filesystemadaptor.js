@@ -18,11 +18,11 @@ var fs = $tw.node ? require("fs") : null,
 
 function FileSystemAdaptor(options) {
 	var self = this;
-	this.wiki = options.wiki;
-	this.boot = options.boot || $tw.boot;
-	this.logger = new $tw.utils.Logger("filesystem",{colour: "blue"});
+	self.wiki = options.wiki;
+	self.boot = options.boot || $tw.boot;
+	self.logger = new $tw.utils.Logger("filesystem",{colour: "blue"});
 	// Create the <wiki>/tiddlers folder if it doesn't exist
-	$tw.utils.createDirectory(this.boot.wikiTiddlersPath);
+	$tw.utils.createDirectory(self.boot.wikiTiddlersPath);
 }
 
 FileSystemAdaptor.prototype.name = "filesystem";
@@ -36,8 +36,9 @@ FileSystemAdaptor.prototype.isReady = function() {
 
 FileSystemAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 	//Returns the existing fileInfo for the tiddler. To regenerate, call getTiddlerFileInfo().
+	var self = this;
 	var title = tiddler.fields.title;
-	return this.boot.files[title];
+	return self.boot.files[title];
 };
 
 /*
@@ -46,27 +47,28 @@ Return a fileInfo object for a tiddler, creating it if necessary:
   type: the type of the tiddler file (NOT the type of the tiddler -- see below)
   hasMetaFile: true if the file also has a companion .meta file
 
-The boot process populates this.boot.files for each of the tiddler files that it loads.
+The boot process populates self.boot.files for each of the tiddler files that it loads.
 The type is found by looking up the extension in $tw.config.fileExtensionInfo (eg "application/x-tiddler" for ".tid" files).
 
-It is the responsibility of the filesystem adaptor to update this.boot.files for new files that are created.
+It is the responsibility of the filesystem adaptor to update self.boot.files for new files that are created.
 */
 FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
+	var self = this;
 	// Always generate a fileInfo object when this fuction is called
 	var title = tiddler.fields.title, newInfo, pathFilters, extFilters;
-	if(this.wiki.tiddlerExists("$:/config/FileSystemPaths")){
-		pathFilters = this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n");
+	if(self.wiki.tiddlerExists("$:/config/FileSystemPaths")){
+		pathFilters = self.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n");
 	}
-	if(this.wiki.tiddlerExists("$:/config/FileSystemExtensions")){
-		extFilters = this.wiki.getTiddlerText("$:/config/FileSystemExtensions","").split("\n");
+	if(self.wiki.tiddlerExists("$:/config/FileSystemExtensions")){
+		extFilters = self.wiki.getTiddlerText("$:/config/FileSystemExtensions","").split("\n");
 	}
 	newInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
-		directory: this.boot.wikiTiddlersPath,
+		directory: self.boot.wikiTiddlersPath,
 		pathFilters: pathFilters,
 		extFilters: extFilters,
-		wiki: this.wiki,
-		fileInfo: this.boot.files[title],
-		originalpath: this.wiki.extractTiddlerDataItem("$:/config/OriginalTiddlerPaths",title, "")
+		wiki: self.wiki,
+		fileInfo: self.boot.files[title],
+		originalpath: self.wiki.extractTiddlerDataItem("$:/config/OriginalTiddlerPaths",title, "")
 	});
 	callback(null,newInfo);
 };
@@ -85,7 +87,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
 	}
 	var self = this;
 	var syncerInfo = options.tiddlerInfo || {};
-	this.getTiddlerFileInfo(tiddler,function(err,fileInfo) {
+	self.getTiddlerFileInfo(tiddler,function(err,fileInfo) {
 		if(err) {
 			return callback(err);
 		}
@@ -142,7 +144,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,options,callback) {
 		options = optionsArg || {};
 	}
 	var self = this,
-	fileInfo = this.boot.files[title];
+	fileInfo = self.boot.files[title];
 	// Only delete the tiddler if we have writable information for the file
 	if(fileInfo) {
 		$tw.utils.deleteTiddlerFile(fileInfo, function(err){
@@ -155,8 +157,8 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,options,callback) {
 					return callback(err);
 				}
 			}
-			// Remove the tiddler from $tw.boot.files
-			delete $tw.boot.files[self.title];
+			// Remove the tiddler from self.boot.files
+			delete self.boot.files[self.title];
 			return callback(null, fileInfo);
 		});
 	} else {
