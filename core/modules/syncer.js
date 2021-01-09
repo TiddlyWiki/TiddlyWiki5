@@ -597,7 +597,7 @@ SaveTiddlerTask.prototype.run = function(callback) {
 		this.syncer.syncadaptor.saveTiddler(tiddler,
 			{
 				tiddlerInfo: self.syncer.tiddlerInfo[self.title],
-				wiki: this.syncer.wiki
+				wiki: self.syncer.wiki
 			},
 			function(err,adaptorInfo,revision) {
 				// If there's an error, exit without changing any internal state
@@ -632,7 +632,7 @@ DeleteTiddlerTask.prototype.run = function(callback) {
 	this.syncer.syncadaptor.deleteTiddler(this.title,
 		{
 			tiddlerInfo: self.syncer.tiddlerInfo[this.title],
-			wiki: this.syncer.wiki
+			wiki: self.syncer.wiki
 		},
 		function(err,adaptorInfo) {
 			// If there's an error, exit without changing any internal state
@@ -658,7 +658,7 @@ LoadTiddlerTask.prototype.run = function(callback) {
 	this.syncer.syncadaptor.loadTiddler(this.title,
 		{
 			tiddlerInfo: self.syncer.tiddlerInfo[self.title],
-			wiki: this.syncer.wiki
+			wiki: self.syncer.wiki
 		},
 		function(err,tiddlerFields,adaptorInfo) {
 			// If there's an error, exit without changing any internal state
