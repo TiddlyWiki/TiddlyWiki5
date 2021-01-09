@@ -56,19 +56,19 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 	var self = this;
 	// Always generate a fileInfo object when this fuction is called
 	var title = tiddler.fields.title, newInfo, pathFilters, extFilters;
-	if(self.wiki.tiddlerExists("$:/config/FileSystemPaths")){
-		pathFilters = self.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n");
+	if(this.wiki.tiddlerExists("$:/config/FileSystemPaths")){
+		pathFilters = this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n");
 	}
-	if(self.wiki.tiddlerExists("$:/config/FileSystemExtensions")){
-		extFilters = self.wiki.getTiddlerText("$:/config/FileSystemExtensions","").split("\n");
+	if(this.wiki.tiddlerExists("$:/config/FileSystemExtensions")){
+		extFilters = this.wiki.getTiddlerText("$:/config/FileSystemExtensions","").split("\n");
 	}
 	newInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
-		directory: self.boot.wikiTiddlersPath,
+		directory: this.boot.wikiTiddlersPath,
 		pathFilters: pathFilters,
 		extFilters: extFilters,
-		wiki: self.wiki,
-		fileInfo: self.boot.files[title],
-		originalpath: self.wiki.extractTiddlerDataItem("$:/config/OriginalTiddlerPaths",title, "")
+		wiki: globalThis.wiki,
+		fileInfo: this.boot.files[title],
+		originalpath: this.wiki.extractTiddlerDataItem("$:/config/OriginalTiddlerPaths",title, "")
 	});
 	callback(null,newInfo);
 };
