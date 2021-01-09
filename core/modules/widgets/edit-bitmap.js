@@ -38,17 +38,17 @@ Render this widget into the DOM
 */
 EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 	var self = this;
+	// Initialise the editor operations if they've not been done already
+	if(!this.editorOperations) {
+		EditBitmapWidget.prototype.editorOperations = {};
+		$tw.modules.applyMethods("bitmapeditoroperation",this.editorOperations);
+	}
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
 	this.computeAttributes();
 	// Execute our logic
 	this.execute();
-	// Initialise the editor operations if they've not been done already
-	if(!this.editorOperations) {
-		EditBitmapWidget.prototype.editorOperations = {};
-		$tw.modules.applyMethods("bitmapeditoroperation",this.editorOperations);
-	}
 	// Create the wrapper for the toolbar and render its content
 	this.toolbarNode = this.document.createElement("div");
 	this.toolbarNode.className = "tc-editor-toolbar";
