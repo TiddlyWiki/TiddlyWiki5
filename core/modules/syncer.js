@@ -171,7 +171,7 @@ Return an array of the tiddler titles that are subjected to syncing
 */
 Syncer.prototype.getTiddlerRevision = function(title) {
 	if(this.syncadaptor && this.syncadaptor.getTiddlerRevision) {
-		return this.syncadaptor.getTiddlerRevision(title);
+		return this.syncadaptor.getTiddlerRevision(title, {wiki: this.wiki});
 	} else {
 		return this.wiki.getTiddler(title).fields.revision;	
 	} 
@@ -192,7 +192,7 @@ Syncer.prototype.readTiddlerInfo = function() {
 		if(tiddler) {
 			self.tiddlerInfo[title] = {
 				revision: self.getTiddlerRevision(title),
-				adaptorInfo: self.syncadaptor && self.syncadaptor.getTiddlerInfo(tiddler),
+				adaptorInfo: self.syncadaptor && self.syncadaptor.getTiddlerInfo(tiddler, {wiki: this.wiki}),
 				changeCount: self.wiki.getChangeCount(title)
 			};
 		}
@@ -255,7 +255,7 @@ Syncer.prototype.storeTiddler = function(tiddlerFields) {
 	// Save the tiddler revision and changeCount details
 	this.tiddlerInfo[tiddlerFields.title] = {
 		revision: this.getTiddlerRevision(tiddlerFields.title),
-		adaptorInfo: this.syncadaptor && this.syncadaptor.getTiddlerInfo(tiddler),
+		adaptorInfo: this.syncadaptor && this.syncadaptor.getTiddlerInfo(tiddler, {wiki: this.wiki}),
 		changeCount: this.wiki.getChangeCount(tiddlerFields.title)
 	};
 };

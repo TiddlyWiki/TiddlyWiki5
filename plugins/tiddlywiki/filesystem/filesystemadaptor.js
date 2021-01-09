@@ -18,11 +18,11 @@ var fs = $tw.node ? require("fs") : null,
 
 function FileSystemAdaptor(options) {
 	var self = this;
-	self.wiki = options.wiki;
-	self.boot = options.boot || $tw.boot;
-	self.logger = new $tw.utils.Logger("filesystem",{colour: "blue"});
+	this.wiki = options.wiki;
+	this.boot = options.boot || $tw.boot;
+	this.logger = new $tw.utils.Logger("filesystem",{colour: "blue"});
 	// Create the <wiki>/tiddlers folder if it doesn't exist
-	$tw.utils.createDirectory(self.boot.wikiTiddlersPath);
+	$tw.utils.createDirectory(this.boot.wikiTiddlersPath);
 }
 
 FileSystemAdaptor.prototype.name = "filesystem";
