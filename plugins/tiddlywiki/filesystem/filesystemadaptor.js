@@ -84,6 +84,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
 		options = optionsArg || {};
 	}
 	var self = this;
+	var syncerInfo = options.tiddlerInfo || {};
 	this.getTiddlerFileInfo(tiddler,function(err,fileInfo) {
 		if(err) {
 			return callback(err);
@@ -104,7 +105,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
 			self.boot.files[tiddler.fields.title] = fileInfo;
 			// Cleanup duplicates if the file moved or changed extensions
 			var options = {
-				adaptorInfo: ($tw.syncer.tiddlerInfo[tiddler.fields.title] || {adaptorInfo: {} }).adaptorInfo,
+				adaptorInfo: syncerInfo.adaptorInfo || {},
 				bootInfo: fileInfo || {},
 				title: tiddler.fields.title
 			};
