@@ -25,11 +25,6 @@ var LINE_WIDTH_TITLE = "$:/config/BitmapEditor/LineWidth",
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var EditBitmapWidget = function(parseTreeNode,options) {
-	// Initialise the editor operations if they've not been done already
-	if(!this.editorOperations) {
-		EditBitmapWidget.prototype.editorOperations = {};
-		$tw.modules.applyMethods("bitmapeditoroperation",this.editorOperations);
-	}
 	this.initialise(parseTreeNode,options);
 };
 
@@ -49,6 +44,11 @@ EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	// Execute our logic
 	this.execute();
+	// Initialise the editor operations if they've not been done already
+	if(!this.editorOperations) {
+		EditBitmapWidget.prototype.editorOperations = {};
+		$tw.modules.applyMethods("bitmapeditoroperation",this.editorOperations);
+	}
 	// Create the wrapper for the toolbar and render its content
 	this.toolbarNode = this.document.createElement("div");
 	this.toolbarNode.className = "tc-editor-toolbar";
