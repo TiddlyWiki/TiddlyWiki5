@@ -16,9 +16,6 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var LinkCatcherWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
-	this.addEventListeners([
-		{type: "tm-navigate", handler: "handleNavigateEvent"}
-	]);
 };
 
 /*
@@ -33,6 +30,9 @@ LinkCatcherWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
+	this.addEventListeners([
+		{type: "tm-navigate", handler: "handleNavigateEvent"}
+	]);
 	this.renderChildren(parent,nextSibling);
 };
 
