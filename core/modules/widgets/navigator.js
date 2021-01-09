@@ -29,9 +29,6 @@ NavigatorWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 NavigatorWidget.prototype.render = function(parent,nextSibling) {
-	this.parentDomNode = parent;
-	this.computeAttributes();
-	this.execute();
 	this.addEventListeners([
 		{type: "tm-navigate", handler: "handleNavigateEvent"},
 		{type: "tm-edit-tiddler", handler: "handleEditTiddlerEvent"},
@@ -50,6 +47,9 @@ NavigatorWidget.prototype.render = function(parent,nextSibling) {
 		{type: "tm-unfold-all-tiddlers", handler: "handleUnfoldAllTiddlersEvent"},
 		{type: "tm-rename-tiddler", handler: "handleRenameTiddlerEvent"}
 	]);
+	this.parentDomNode = parent;
+	this.computeAttributes();
+	this.execute();
 	this.renderChildren(parent,nextSibling);
 };
 
