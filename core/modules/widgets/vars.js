@@ -35,11 +35,11 @@ VarsWidget.prototype = Object.create(Widget.prototype);
 Render this widget into the DOM
 */
 VarsWidget.prototype.render = function(parent,nextSibling) {
+	// Call the constructor
+	Widget.call(this);
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	// Call the constructor
-	Widget.call(this);
 	this.renderChildren(parent,nextSibling);
 };
 
