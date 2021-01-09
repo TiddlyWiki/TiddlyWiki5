@@ -16,12 +16,6 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var FieldManglerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
-	this.addEventListeners([
-		{type: "tm-remove-field", handler: "handleRemoveFieldEvent"},
-		{type: "tm-add-field", handler: "handleAddFieldEvent"},
-		{type: "tm-remove-tag", handler: "handleRemoveTagEvent"},
-		{type: "tm-add-tag", handler: "handleAddTagEvent"}
-	]);
 };
 
 /*
@@ -33,6 +27,12 @@ FieldManglerWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 FieldManglerWidget.prototype.render = function(parent,nextSibling) {
+	this.addEventListeners([
+		{type: "tm-remove-field", handler: "handleRemoveFieldEvent"},
+		{type: "tm-add-field", handler: "handleAddFieldEvent"},
+		{type: "tm-remove-tag", handler: "handleRemoveTagEvent"},
+		{type: "tm-add-tag", handler: "handleAddTagEvent"}
+	]);
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();

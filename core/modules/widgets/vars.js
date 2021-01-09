@@ -22,8 +22,6 @@ This widget allows multiple variables to be set in one go:
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var VarsWidget = function(parseTreeNode,options) {
-	// Call the constructor
-	Widget.call(this);
 	// Initialise	
 	this.initialise(parseTreeNode,options);
 };
@@ -37,6 +35,8 @@ VarsWidget.prototype = Object.create(Widget.prototype);
 Render this widget into the DOM
 */
 VarsWidget.prototype.render = function(parent,nextSibling) {
+	// Call the constructor
+	Widget.call(this);
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
