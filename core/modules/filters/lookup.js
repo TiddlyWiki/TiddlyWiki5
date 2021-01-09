@@ -31,8 +31,7 @@ exports.lookup = function(source,operator,options) {
 			reference = "!!" + reference;
 		}
 		source(function(tiddler,title) {
-			var text = options.wiki.getTextReference(operator.operands[0] + title + reference, '');
-			results.push(text !== '' ? text : operator.suffix || '');
+			results.push(options.wiki.getTextReference(operator.operands[0] + title + reference) || operator.suffix || '');
 		});
 	}
 	return results;
