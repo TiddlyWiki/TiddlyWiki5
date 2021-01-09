@@ -54,7 +54,6 @@ It is the responsibility of the filesystem adaptor to update self.boot.files for
 */
 FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 	var self = this;
-	debugger;
 	// Always generate a fileInfo object when this fuction is called
 	var title = tiddler.fields.title, newInfo, pathFilters, extFilters;
 	if(this.wiki.tiddlerExists("$:/config/FileSystemPaths")){
