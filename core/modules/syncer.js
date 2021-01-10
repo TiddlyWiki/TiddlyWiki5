@@ -19,7 +19,8 @@ Syncer.prototype.titleIsLoggedIn = "$:/status/IsLoggedIn";
 Syncer.prototype.titleIsAnonymous = "$:/status/IsAnonymous";
 Syncer.prototype.titleIsReadOnly = "$:/status/IsReadOnly";
 Syncer.prototype.titleUserName = "$:/status/UserName";
-Syncer.prototype.titleSyncFilter = "$:/config/SyncFilter";
+Syncer.prototype.titleSyncServerFilter = "$:/config/SyncServerFilter";
+Syncer.prototype.titleSyncClientFilter = "$:/config/SyncClientFilter";
 Syncer.prototype.titleSyncPollingInterval = "$:/config/SyncPollingInterval";
 Syncer.prototype.titleSyncDisableLazyLoading = "$:/config/SyncDisableLazyLoading";
 Syncer.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
@@ -43,7 +44,8 @@ function Syncer(options) {
 	this.disableUI = !!options.disableUI;
 	this.titleIsLoggedIn = options.titleIsLoggedIn || this.titleIsLoggedIn;
 	this.titleUserName = options.titleUserName || this.titleUserName;
-	this.titleSyncFilter = options.titleSyncFilter || this.titleSyncFilter;
+	this.titleSyncServerFilter = options.titleSyncServerFilter || this.titleSyncServerFilter;
+	this.titleSyncClientFilter = options.titleSyncClientFilter || this.titleSyncClientFilter;
 	this.titleSavedNotification = options.titleSavedNotification || this.titleSavedNotification;
 	this.taskTimerInterval = options.taskTimerInterval || this.taskTimerInterval;
 	this.throttleInterval = options.throttleInterval || parseInt(this.wiki.getTiddlerText(this.titleSyncThrottleInterval,""),10) || this.throttleInterval;
@@ -67,7 +69,10 @@ function Syncer(options) {
 		this.syncadaptor.setLoggerSaveBuffer(this.logger);
 	}
 	// Compile the dirty tiddler filter
-	this.filterFn = this.wiki.compileFilter(this.wiki.getTiddlerText(this.titleSyncFilter));
+	var serverFilterText = this.wiki.getTiddlerText(this.titleSyncServerFilter);
+	var clientFilterText = this.wiki.getTiddlerText(this.titleSyncClientFilter)
+	this.serverFilterFn = this.wiki.compileFilter(serverFilterText);
+	this.clientFilterFn = this.wiki.compileFilter(serverFilterText + " " + clientFilterText);
 	// Record information for known tiddlers
 	this.readTiddlerInfo();
 	this.titlesToBeLoaded = {}; // Hashmap of titles of tiddlers that need loading from the server
@@ -80,7 +85,7 @@ function Syncer(options) {
 	// Listen out for changes to tiddlers
 	this.wiki.addEventListener("change",function(changes) {
 		// Filter the changes to just include ones that are being synced
-		var filteredChanges = self.getSyncedTiddlers(function(callback) {
+		var filteredChanges = self.getTiddlersSyncedFromClient(function(callback) {
 			$tw.utils.each(changes,function(change,title) {
 				var tiddler = self.wiki.tiddlerExists(title) && self.wiki.getTiddler(title);
 				callback(tiddler,title);
@@ -160,12 +165,28 @@ Syncer.prototype.displayError = function(msg,err) {
 };
 
 /*
-Return an array of the tiddler titles that are subjected to syncing
+Return an array of the tiddler titles that the client can save
 */
-Syncer.prototype.getSyncedTiddlers = function(source) {
-	return this.filterFn.call(this.wiki,source);
+Syncer.prototype.getTiddlersSyncedFromClient = function(source) {
+	return this.clientFilterFn.call(this.wiki,source);
 };
 
+/*
+Return an array of the tiddler titles that the server will send
+*/
+Syncer.prototype.getTiddlersSyncedFromServer = function(source) {
+	return this.serverFilterFn.call(this.wiki,source);
+};
+
+/*
+Return an array of the tiddler titles that the server will send
+*/
+Syncer.prototype.isTiddlerSyncedFromServer = function(title) {
+	function source(callback){
+		callback(null, title);
+	}
+	return this.serverFilterFn.call(this.wiki,source).length === 1;
+};
 /*
 Return an array of the tiddler titles that are subjected to syncing
 */
@@ -186,7 +207,7 @@ Syncer.prototype.readTiddlerInfo = function() {
 	this.tiddlerInfo = {};
 	// Record information for known tiddlers
 	var self = this,
-		tiddlers = this.getSyncedTiddlers();
+		tiddlers = this.getTiddlersSyncedFromClient();
 	$tw.utils.each(tiddlers,function(title) {
 		var tiddler = self.wiki.getTiddler(title);
 		if(tiddler) {
@@ -205,7 +226,7 @@ Checks whether the wiki is dirty (ie the window shouldn't be closed)
 Syncer.prototype.isDirty = function() {
 	this.logger.log("Checking dirty status");
 	// Check tiddlers that are in the store and included in the filter function
-	var titles = this.getSyncedTiddlers();
+	var titles = this.getTiddlersSyncedFromClient();
 	for(var index=0; index<titles.length; index++) {
 		var title = titles[index],
 			tiddlerInfo = this.tiddlerInfo[title];
@@ -398,7 +419,7 @@ Syncer.prototype.handleLazyLoadEvent = function(title) {
 	// Don't lazy load the same tiddler twice
 	if(!this.titlesHaveBeenLazyLoaded[title]) {
 		// Don't lazy load if the tiddler isn't included in the sync filter
-		if(this.getSyncedTiddlers().indexOf(title) !== -1) {
+		if(this.isTiddlerSyncedFromServer(title)) {
 			// Mark the tiddler as needing loading, and having already been lazily loaded
 			this.titlesToBeLoaded[title] = true;
 			this.titlesHaveBeenLazyLoaded[title] = true;
@@ -544,7 +565,7 @@ Syncer.prototype.chooseNextTask = function() {
 	var thresholdLastSaved = (new Date()) - this.throttleInterval,
 		havePending = null;
 	// First we look for tiddlers that have been modified locally and need saving back to the server
-	var titles = this.getSyncedTiddlers();
+	var titles = this.getTiddlersSyncedFromClient();
 	for(var index=0; index<titles.length; index++) {
 		var title = titles[index],
 			tiddler = this.wiki.tiddlerExists(title) && this.wiki.getTiddler(title),
