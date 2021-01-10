@@ -147,7 +147,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,options,callback) {
 	fileInfo = self.boot.files[title];
 	// Only delete the tiddler if we have writable information for the file
 	if(fileInfo) {
-		$tw.utils.deleteTiddlerFile(fileInfo, function(err){
+		$tw.utils.deleteTiddlerFile(fileInfo, function(err, fileInfo){
 			if(err) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the file on disk, should fail gracefully
@@ -162,7 +162,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,options,callback) {
 			return callback(null, fileInfo);
 		});
 	} else {
-		callback(null, fileInfo);
+		callback(null, null);
 	}
 };
 
