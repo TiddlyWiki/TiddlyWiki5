@@ -8,4 +8,8 @@ ShadowTiddlers can be overridden with an ordinary tiddler of the same name. If t
 
 The current shadow tiddlers are:
 
+<div style="overflow:auto; max-height:50vh">
+
 <$list filter="[all[shadows]sort[title]]"/>
+
+</div>
