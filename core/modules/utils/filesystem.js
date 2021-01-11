@@ -496,7 +496,7 @@ exports.deleteTiddlerFile = function(fileInfo, callback) {
 				if(err) {
 					return callback(err);
 				}
-				return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),function(err){
+				$tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),function(err){
 					if(err){
 						return callback(err);
 					}
@@ -504,7 +504,7 @@ exports.deleteTiddlerFile = function(fileInfo, callback) {
 				});
 			});
 		} else {
-			return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),function(err){
+			$tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),function(err){
 				if(err){
 					return callback(err);
 				}
