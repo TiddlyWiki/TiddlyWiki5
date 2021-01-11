@@ -14,7 +14,7 @@ A sync adaptor module for synchronising with TiddlyWeb compatible servers
 
 TiddlyWebAdaptor.prototype.CONFIG_HOST_TIDDLER = "$:/config/tiddlyweb/host";
 TiddlyWebAdaptor.prototype.DEFAULT_HOST_TIDDLER = "$protocol$//$host$/";
-TiddlyWebAdaptor.prototype.titleSyncServerFilter = "$:/config/SyncServerFilter";
+TiddlyWebAdaptor.prototype.titleSyncServerFilter = "$:/config/SyncFilter";
 TiddlyWebAdaptor.prototype.titleSyncClientFilter = "$:/config/SyncClientFilter";
 
 function TiddlyWebAdaptor(options) {
