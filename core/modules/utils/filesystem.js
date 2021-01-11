@@ -524,7 +524,7 @@ exports.cleanupTiddlerFiles = function(options, callback) {
 	bootInfo = options.bootInfo || {},
 	title = options.title || "undefined";
 	if(adaptorInfo.filepath && bootInfo.filepath && adaptorInfo.filepath !== bootInfo.filepath) {
-		return $tw.utils.deleteTiddlerFile(adaptorInfo, function(err){
+		$tw.utils.deleteTiddlerFile(adaptorInfo, function(err){
 			if(err) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the previous file on disk, should fail gracefully
