@@ -596,6 +596,7 @@ SaveTiddlerTask.prototype.run = function(callback) {
 	if(tiddler) {
 		this.syncer.syncadaptor.saveTiddler(tiddler,
 			{
+				changeCount: changeCount,
 				tiddlerInfo: self.syncer.tiddlerInfo[self.title],
 				wiki: self.syncer.wiki
 			},
