@@ -33,7 +33,7 @@ ServerSentEvents.prototype.getExports = function() {
 };
 
 ServerSentEvents.prototype.handleEventRequest = function(request,response,state) {
-	if(request.headers.accept && request.headers.accept.startsWith("text/event-stream")) {
+	if(ServerSentEvents.prototype.isEventStreamRequest(request)) {
 		response.writeHead(200, {
 			"Content-Type": "text/event-stream",
 			"Cache-Control": "no-cache",
