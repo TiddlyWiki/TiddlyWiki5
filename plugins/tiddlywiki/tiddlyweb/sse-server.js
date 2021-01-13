@@ -62,6 +62,10 @@ function removeWikiConnection(wiki,connection) {
 }
 
 function handleConnection(request,state,emit,end) {
+	if(isDisabled(state)) {
+		return;
+	}
+
 	ensureWikiSetup(state.wiki);
 	// Add the connection to the list of connections for this wiki
 	var connection = {
@@ -73,7 +77,11 @@ function handleConnection(request,state,emit,end) {
 	addWikiConnection(state.wiki,connection);
 	request.on("close",function() {
 		removeWikiConnection(state.wiki,connection);
-  });
+	});
+}
+
+function isDisabled(state) {
+	return state.server.get("sse-enabled") !== "yes";
 }
 
 // Import the ServerSentEvents class
