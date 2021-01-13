@@ -20,6 +20,7 @@ Syncer.prototype.titleIsAnonymous = "$:/status/IsAnonymous";
 Syncer.prototype.titleIsReadOnly = "$:/status/IsReadOnly";
 Syncer.prototype.titleUserName = "$:/status/UserName";
 Syncer.prototype.titleSyncFilter = "$:/config/SyncFilter";
+Syncer.prototype.titleSyncDisablePolling = "$:/config/SyncDisablePolling";
 Syncer.prototype.titleSyncPollingInterval = "$:/config/SyncPollingInterval";
 Syncer.prototype.titleSyncDisableLazyLoading = "$:/config/SyncDisableLazyLoading";
 Syncer.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
@@ -267,7 +268,7 @@ Syncer.prototype.getStatus = function(callback) {
 		// Mark us as not logged in
 		this.wiki.addTiddler({title: this.titleIsLoggedIn,text: "no"});
 		// Get login status
-		this.syncadaptor.getStatus(function(err,isLoggedIn,username,isReadOnly,isAnonymous) {
+		this.syncadaptor.getStatus(function(err,isLoggedIn,username,isReadOnly,isAnonymous,isPollingDisabled) {
 			if(err) {
 				self.logger.alert(err);
 			} else {
@@ -277,6 +278,9 @@ Syncer.prototype.getStatus = function(callback) {
 				self.wiki.addTiddler({title: self.titleIsLoggedIn,text: isLoggedIn ? "yes" : "no"});
 				if(isLoggedIn) {
 					self.wiki.addTiddler({title: self.titleUserName,text: username || ""});
+				}
+				if(isPollingDisabled) {
+					self.wiki.addTiddler({title: self.titleSyncDisablePolling, text: "yes"});
 				}
 			}
 			// Invoke the callback
@@ -301,12 +305,15 @@ Syncer.prototype.syncFromServer = function() {
 			}
 		},
 		triggerNextSync = function() {
-			self.pollTimerId = setTimeout(function() {
-				self.pollTimerId = null;
-				self.syncFromServer.call(self);
-			},self.pollTimerInterval);
+			if(pollingEnabled) {
+				self.pollTimerId = setTimeout(function() {
+					self.pollTimerId = null;
+					self.syncFromServer.call(self);
+				},self.pollTimerInterval);
+			}
 		},
-		syncSystemFromServer = (self.wiki.getTiddlerText("$:/config/SyncSystemTiddlersFromServer") === "yes" ? true : false);
+		syncSystemFromServer = (self.wiki.getTiddlerText("$:/config/SyncSystemTiddlersFromServer") === "yes" ? true : false),
+		pollingEnabled = (self.wiki.getTiddlerText(self.titleSyncDisablePolling) === "yes" ? false : true);
 	if(this.syncadaptor && this.syncadaptor.getUpdatedTiddlers) {
 		this.logger.log("Retrieving updated tiddler list");
 		cancelNextSync();
