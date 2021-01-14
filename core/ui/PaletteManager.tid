@@ -46,7 +46,7 @@ title: $:/PaletteManager
 <tr>
 <td>
 <span style="float:right;">
-<$button tooltip={{$:/language/ControlPanel/Palette/Editor/Delete/Hint}} aria-label=<<lingo Delete/Hint>> class="tc-btn-invisible" actions=<<delete-colour-index-actions>>>
+<$button tooltip={{$:/language/ControlPanel/Palette/Editor/Delete/Hint}} aria-label={{$:/language/ControlPanel/Palette/Editor/Delete/Hint}} class="tc-btn-invisible" actions=<<delete-colour-index-actions>>>
 {{$:/core/images/delete-button}}</$button>
 </span>
 ''<$macrocall $name="describePaletteColour" colour=<<colourName>>/>''<br/>
