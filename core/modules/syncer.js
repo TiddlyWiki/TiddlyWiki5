@@ -90,7 +90,7 @@ function Syncer(options) {
 		if(filteredChanges.length > 0) {
 			self.processTaskQueue();
 		} else {
-			// Look for deletions of tiddlers we're already syncing	
+			// Look for deletions of tiddlers we're already syncing
 			var outstandingDeletion = false
 			$tw.utils.each(changes,function(change,title,object) {
 				if(change.deleted && $tw.utils.hop(self.tiddlerInfo,title)) {
@@ -122,7 +122,7 @@ function Syncer(options) {
 				self.login(username,password,function() {});
 			} else {
 				// No username and password, so we display a prompt
-				self.handleLoginEvent();				
+				self.handleLoginEvent();
 			}
 		});
 		$tw.rootWidget.addEventListener("tm-logout",function() {
@@ -139,7 +139,7 @@ function Syncer(options) {
 	if(!this.disableUI && this.wiki.getTiddlerText(this.titleSyncDisableLazyLoading) !== "yes") {
 		this.wiki.addEventListener("lazyLoad",function(title) {
 			self.handleLazyLoadEvent(title);
-		});		
+		});
 	}
 	// Get the login status
 	this.getStatus(function(err,isLoggedIn) {
@@ -174,8 +174,8 @@ Syncer.prototype.getTiddlerRevision = function(title) {
 	if(this.syncadaptor && this.syncadaptor.getTiddlerRevision) {
 		return this.syncadaptor.getTiddlerRevision(title);
 	} else {
-		return this.wiki.getTiddler(title).fields.revision;	
-	} 
+		return this.wiki.getTiddler(title).fields.revision;
+	}
 };
 
 /*
@@ -336,7 +336,7 @@ Syncer.prototype.syncFromServer = function() {
 				});
 				if(updates.modifications.length > 0 || updates.deletions.length > 0) {
 					self.processTaskQueue();
-				}				
+				}
 			}
 		});
 	} else if(this.syncadaptor && this.syncadaptor.getSkinnyTiddlers) {
@@ -516,7 +516,7 @@ Syncer.prototype.processTaskQueue = function() {
 				} else {
 					self.updateDirtyStatus();
 					// Process the next task
-					self.processTaskQueue.call(self);					
+					self.processTaskQueue.call(self);
 				}
 			});
 		} else {
@@ -524,11 +524,11 @@ Syncer.prototype.processTaskQueue = function() {
 			this.updateDirtyStatus();
 			// And trigger a timeout if there is a pending task
 			if(task === true) {
-				this.triggerTimeout();				
+				this.triggerTimeout();
 			}
 		}
 	} else {
-		this.updateDirtyStatus();		
+		this.updateDirtyStatus();
 	}
 };
 
@@ -562,7 +562,7 @@ Syncer.prototype.chooseNextTask = function() {
 				isReadyToSave = !tiddlerInfo || !tiddlerInfo.timestampLastSaved || tiddlerInfo.timestampLastSaved < thresholdLastSaved;
 			if(hasChanged) {
 				if(isReadyToSave) {
-					return new SaveTiddlerTask(this,title); 					
+					return new SaveTiddlerTask(this,title);
 				} else {
 					havePending = true;
 				}
