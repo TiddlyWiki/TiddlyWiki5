@@ -1,0 +1,8 @@
+caption: {{$:/language/ControlPanel/Plugins/Languages/Caption}} xx (<$count filter="[!has[draft.of]plugin-type[language-addon]]"/>)
+created: 20210114181735291
+modified: 20210114181925517
+tags: 
+title: $:/core/ui/ControlPanel/Plugins/Installed/Languages 1
+type: text/vnd.tiddlywiki
+
+<<plugin-table "language-addon">>

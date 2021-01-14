@@ -1,0 +1,10 @@
+{
+	"title": "$:/languages/de-AT/hugo",
+	"name": "de-AT-hugo",
+	"plugin-type": "language-addon",
+	"description": "Mehr texte - Deutsch (Österreich)",
+	"author": "MarioPietsch aka pmario",
+	"core-version": ">=5.0.0",
+	"dependents": [],
+	"plugin-priority": 110
+}

@@ -91,6 +91,14 @@ exports.startup = function() {
 			}
 		}
 	});
+	$tw.languageAddonSwitcher = new $tw.PluginSwitcher({
+		wiki: $tw.wiki,
+		pluginType: "language-addon",
+		controllerTitle: "$:/language",
+		defaultPlugins: [
+			"$:/languages/en-GB"
+		]
+	});
 	// Kick off the theme manager
 	$tw.themeManager = new $tw.PluginSwitcher({
 		wiki: $tw.wiki,

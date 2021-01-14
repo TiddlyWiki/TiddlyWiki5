@@ -47,7 +47,21 @@ PluginSwitcher.prototype.switchPlugins = function() {
 	}
 	// Accumulate the titles of the plugins that we need to load
 	var plugins = [],
+		unregisteredTiddlers = [],
+		registeredTiddlers = [],
 		self = this,
+		accumulateLanguageAddOn = function(title) {
+			var tiddler = self.wiki.getTiddler(title);
+			if(tiddler && tiddler.isPlugin() && tiddler.fields && 
+				tiddler.fields["plugin-type"] === "language-addon" && plugins.indexOf(title) === -1) {
+					plugins.push(title);
+					var pluginInfo = JSON.parse(self.wiki.getTiddlerText(title)),
+						dependents = $tw.utils.parseStringArray(tiddler.fields.dependents || "");
+					$tw.utils.each(dependents,function(title) {
+						accumulateLanguageAddOn(title);
+					});
+				}
+		},
 		accumulatePlugin = function(title) {
 			var tiddler = self.wiki.getTiddler(title);
 			if(tiddler && tiddler.isPlugin() && plugins.indexOf(title) === -1) {
@@ -56,6 +70,13 @@ PluginSwitcher.prototype.switchPlugins = function() {
 					dependents = $tw.utils.parseStringArray(tiddler.fields.dependents || "");
 				$tw.utils.each(dependents,function(title) {
 					accumulatePlugin(title);
+				});
+			}
+			if(tiddler && tiddler.fields && tiddler.fields["plugin-type"] === "language") {
+				// var addOns = self.wiki.filterTiddlers("[all[shadows+tiddlers]prefix["+title+"]]")
+				var addOns = self.wiki.filterTiddlers("[prefix["+title+"]]")
+				$tw.utils.each(addOns,function(title) {
+					accumulateLanguageAddOn(title);
 				});
 			}
 		};
