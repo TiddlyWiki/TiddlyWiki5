@@ -312,8 +312,8 @@ Syncer.prototype.syncFromServer = function() {
 				},self.pollTimerInterval);
 			}
 		},
-		syncSystemFromServer = (self.wiki.getTiddlerText("$:/config/SyncSystemTiddlersFromServer") === "yes" ? true : false),
-		pollingEnabled = (self.wiki.getTiddlerText(self.titleSyncDisablePolling) === "yes" ? false : true);
+		syncSystemFromServer = (self.wiki.getTiddlerText("$:/config/SyncSystemTiddlersFromServer") === "yes"),
+		pollingEnabled = (self.wiki.getTiddlerText(self.titleSyncDisablePolling) !== "yes");
 	if(this.syncadaptor && this.syncadaptor.getUpdatedTiddlers) {
 		this.logger.log("Retrieving updated tiddler list");
 		cancelNextSync();
