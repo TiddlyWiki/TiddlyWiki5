@@ -66,15 +66,69 @@ exports.startup = function() {
 			removeItem.parentNode.removeChild(removeItem);
 		}
 	});
+	var focusedDomNodeIndex;
+	// Find the child widget containing the event target
+	var findWidgetOwningDomNode = function(widget,domNode) {
+		for(var domNodeIndex=0; domNodeIndex<widget.domNodes.length; domNodeIndex++) {
+			if(widget.domNodes[domNodeIndex] === domNode) {
+				focusedDomNodeIndex = domNodeIndex;
+				return widget;
+			}
+		}
+		for(var childIndex=0; childIndex<widget.children.length; childIndex++) {
+			var result = findWidgetOwningDomNode(widget.children[childIndex],domNode);
+			if(result) {
+				return result;
+			}
+		}
+		return null;
+	};
+	// Generate the render-tree-footprint for a widget
+	var generateRenderTreeFootprint = function(widget) {
+		var node = widget,
+			footprint = [];
+		while(node) {
+			if(node.parentWidget && node.parentWidget.children) {
+				footprint.push(node.parentWidget.children.indexOf(node));
+			}
+			node = node.parentWidget;
+		}
+		return footprint.reverse();
+	};
+	// Find a widget by its render-tree-footprint
+	var findWidgetByFootprint = function(footprint) {
+		var index,
+			count = 0,
+			widget = $tw.rootWidget;
+		while(count < footprint.length) {
+			index = footprint[count];
+			if(widget && widget.children && widget.children[index]) {
+				widget = widget.children[index];
+			}
+			count++;
+		}
+		return widget;
+	};
 	// Prepare refresh mechanism
 	var deferredChanges = Object.create(null),
 		timerId;
 	function refresh() {
 		// Process the refresh
 		$tw.hooks.invokeHook("th-page-refreshing");
+		var focusWidget = findWidgetOwningDomNode($tw.rootWidget,document.activeElement);
+		var renderTreeFootprint;
+		if(focusWidget) {
+			renderTreeFootprint = generateRenderTreeFootprint(focusWidget);
+		}
 		$tw.pageWidgetNode.refresh(deferredChanges);
 		deferredChanges = Object.create(null);
 		$tw.hooks.invokeHook("th-page-refreshed");
+		if(renderTreeFootprint) {
+			focusWidget = findWidgetByFootprint(renderTreeFootprint);
+		}
+		if(focusWidget && focusWidget.domNodes[focusedDomNodeIndex] && focusWidget.domNodes[focusedDomNodeIndex].focus) {
+			focusWidget.domNodes[focusedDomNodeIndex].focus();
+		}
 	}
 	// Add the change event handler
 	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
