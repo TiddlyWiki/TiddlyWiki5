@@ -6,5 +6,5 @@
 	"author": "MarioPietsch aka pmario",
 	"core-version": ">=5.0.0",
 	"dependents": [],
-	"plugin-priority": 110
+	"plugin-priority": 200
 }

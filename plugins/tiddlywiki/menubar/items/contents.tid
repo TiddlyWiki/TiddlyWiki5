@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/menubar/items/contents
-caption: Contents
-description: Table of Contents
+caption: {{$:/language/tiddlywiki/menubar/items/contents/caption}}
+description: {{$:/language/tiddlywiki/menubar/items/contents/description}} 
 is-dropdown: yes
 tags: $:/tags/MenuBar
 

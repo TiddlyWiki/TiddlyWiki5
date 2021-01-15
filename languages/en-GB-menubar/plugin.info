@@ -1,8 +1,8 @@
 {
-	"title": "$:/languages/en-GB/hugo",
-	"name": "en-GB-hugo",
+	"title": "$:/language/en-GB/tiddlywiki/menubar",
+	"name": "en-GB-menubar",
 	"plugin-type": "language-addon",
-	"description": "More test texts English (GB)",
+	"description": "Menubar Plugin English Texts (GB)",
 	"author": "MarioPietsch aka pmario",
 	"core-version": ">=5.0.0",
 	"dependents": [],
