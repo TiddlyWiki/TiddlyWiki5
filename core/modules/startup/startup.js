@@ -23,7 +23,6 @@ var PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE = "$:/config/Performance/Instrument
 var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
-	var modules,n,m,f;
 	// Minimal browser detection
 	if($tw.browser) {
 		$tw.browser.isIE = (/msie|trident/i.test(navigator.userAgent));
@@ -66,10 +65,10 @@ exports.startup = function() {
 	// Execute any startup actions
 	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction");
 	if($tw.browser) {
-		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Browser");		
+		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Browser");
 	}
 	if($tw.node) {
-		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Node");		
+		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Node");
 	}
 	// Kick off the language manager and switcher
 	$tw.language = new $tw.Language();
