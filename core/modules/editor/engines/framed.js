@@ -117,6 +117,14 @@ FramedEngine.prototype.getSelectionRange = function() {
 };
 
 /*
+Set the selection-range
+*/
+FramedEngine.prototype.setSelectionRange = function(selectionStart,selectionEnd) {
+	this.domNode.selectionStart = selectionStart;
+	this.domNode.selectionEnd = selectionEnd;
+};
+
+/*
 Set the text of the engine if it doesn't currently have focus
 */
 FramedEngine.prototype.setText = function(text,type) {
