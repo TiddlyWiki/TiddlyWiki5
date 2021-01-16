@@ -81,6 +81,8 @@ Plugins/Install/Caption: install
 Plugins/Installed/Hint: Currently installed plugins:
 Plugins/Languages/Caption: Languages
 Plugins/Languages/Hint: Language pack plugins
+Plugins/LanguagesAddOns/Caption: Language AddOns
+Plugins/LanguagesAddOns/Hint: Language AddOn pack plugins
 Plugins/NoInfoFound/Hint: No ''"<$text text=<<currentTab>>/>"'' found
 Plugins/NotInstalled/Hint: This plugin is not currently installed
 Plugins/OpenPluginLibrary: open plugin library
