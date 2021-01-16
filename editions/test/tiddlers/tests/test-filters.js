@@ -14,6 +14,22 @@ Tests the filtering mechanism.
 /* global $tw, require */
 "use strict";
 
+// This wrapper method is used to collect warnings which should be emitted
+// by certain deprecated tests.
+function collectLog(block) {
+	var messages = [];
+	var oldLog = console.log;
+	console.log = function(a) {
+		messages.push(Array.prototype.join.call(arguments, " "));
+	}
+	try {
+		block();
+	} finally {
+		console.log = oldLog;
+	}
+	return messages;
+};
+
 describe("Filter tests", function() {
 
 	// Test filter parsing
@@ -249,8 +265,14 @@ function runTests(wiki) {
 	// The following 2 tests should write a log -> WARNING: Filter modifier has a deprecated regexp operand XXXX
 	// The test should pass anyway.
 	it("should handle the field operator with a regular expression operand", function() {
-		expect(wiki.filterTiddlers("[modifier/JoeBloggs/]").join(",")).toBe("TiddlerOne");
-		expect(wiki.filterTiddlers("[modifier/Jo/]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
+		var warnings = collectLog(function() {
+			expect(wiki.filterTiddlers("[modifier/JoeBloggs/]").join(",")).toBe("TiddlerOne");
+		});
+		expect(warnings).toEqual(["WARNING: Filter modifier has a deprecated regexp operand /JoeBloggs/"]);
+		warnings = collectLog(function() {
+			expect(wiki.filterTiddlers("[modifier/Jo/]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
+		});
+		expect(warnings).toEqual(["WARNING: Filter modifier has a deprecated regexp operand /Jo/"]);
 	});
 
 	it("should handle the prefix operator", function() {
@@ -306,6 +328,7 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("[all[shadows+tiddlers]]").join(",")).toBe("$:/TiddlerFive,TiddlerSix,TiddlerSeventh,Tiddler8,$:/ShadowPlugin,TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one,hasList,has filter,filter regexp test");
 		expect(wiki.filterTiddlers("[all[tiddlers+shadows]]").join(",")).toBe("$:/ShadowPlugin,TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one,hasList,has filter,filter regexp test,$:/TiddlerFive,TiddlerSix,TiddlerSeventh,Tiddler8");
 		expect(wiki.filterTiddlers("[all[tiddlers]tag[two]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three");
+		expect(wiki.filterTiddlers("[all[orphans+tiddlers+tags]]").join(",")).toBe("$:/ShadowPlugin,TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,hasList,has filter,filter regexp test,two,one");
 	});
 
 	it("should handle the tags operator", function() {

@@ -113,4 +113,21 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 </$list>
 \end
 
+\define .link-badge(text,link,colour)
+<a href=<<__link__>> class="doc-link-badge" style="background-color:$colour$;" target="_blank" rel="noopener noreferrer"><$text text=<<__text__>>/></a>
+\end
+
+
+\define .link-badge-added(link,colour:#ffe246) <<.link-badge "added" """$link$""" """$colour$""">>
+\define .link-badge-addendum(link,colour:#fcc84a) <<.link-badge "addendum" """$link$""" """$colour$""">>
+\define .link-badge-extended(link,colour:#f9a344) <<.link-badge "extended" """$link$""" """$colour$""">>
+\define .link-badge-fixed(link,colour:#ffa86d) <<.link-badge "fixed" """$link$""" """$colour$""">>
+\define .link-badge-here(link,colour:#d88e63) <<.link-badge "here" """$link$""" """$colour$""">>
+\define .link-badge-hide(link,colour:#9d959f) <<.link-badge "hide" """$link$""" """$colour$""">>
+\define .link-badge-improved(link,colour:#7593c7) <<.link-badge "improved" """$link$""" """$colour$""">>
+\define .link-badge-modified(link,colour:#7f99c9) <<.link-badge "modified" """$link$""" """$colour$""">>
+\define .link-badge-removed(link,colour:#a9aabc) <<.link-badge "removed" """$link$""" """$colour$""">>
+\define .link-badge-renamed(link,colour:#b4b995) <<.link-badge "renamed" """$link$""" """$colour$""">>
+\define .link-badge-updated(link,colour:#91ba66) <<.link-badge "updated" """$link$""" """$colour$""">>
+
 <pre><$view field="text"/></pre>

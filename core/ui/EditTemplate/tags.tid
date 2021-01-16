@@ -16,7 +16,7 @@ color:$(foregroundColor)$;
 <$vars foregroundColor=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">> backgroundColor="""$colour$""">
 <span style=<<tag-styles>> class="tc-tag-label tc-tag-list-item">
 <$transclude tiddler="""$icon$"""/><$view field="title" format="text" />
-<$button class="tc-btn-invisible tc-remove-tag-button"><$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="-[{!!title}]"/>{{$:/core/images/close-button}}</$button>
+<$button class="tc-btn-invisible tc-remove-tag-button" style=<<tag-styles>>><$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="-[{!!title}]"/>{{$:/core/images/close-button}}</$button>
 </span>
 </$vars>
 \end

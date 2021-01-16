@@ -339,13 +339,9 @@ exports.generateTiddlerFilepath = function(title,options) {
 	if(!filepath && originalpath !== "") {
 		//Use the originalpath without the extension
 		var ext = path.extname(originalpath);
-		filepath = originalpath.substring(0,originalpath.length - ext.length);;
+		filepath = originalpath.substring(0,originalpath.length - ext.length);
 	} else if(!filepath) {
 		filepath = title;
-		// If the filepath already ends in the extension then remove it
-		if(filepath.substring(filepath.length - extension.length) === extension) {
-			filepath = filepath.substring(0,filepath.length - extension.length);
-		}
 		// Remove any forward or backward slashes so we don't create directories
 		filepath = filepath.replace(/\/|\\/g,"_");
 	}
@@ -354,11 +350,19 @@ exports.generateTiddlerFilepath = function(title,options) {
 		// Don't let the filename start with any dots because such files are invisible on *nix
 		filepath = filepath.replace(/^\.+/g,"_");
 	}
+	// If the filepath already ends in the extension then remove it
+	if(filepath.substring(filepath.length - extension.length) === extension) {
+		filepath = filepath.substring(0,filepath.length - extension.length);
+	}
 	// Remove any characters that can't be used in cross-platform filenames
 	filepath = $tw.utils.transliterate(filepath.replace(/<|>|~|\:|\"|\||\?|\*|\^/g,"_"));
 	// Truncate the filename if it is too long
 	if(filepath.length > 200) {
 		filepath = filepath.substr(0,200);
+	}
+	// Truncate the extension if it is too long
+	if(extension.length > 32) {
+		extension = extension.substr(0,32);
 	}
 	// If the resulting filename is blank (eg because the title is just punctuation characters)
 	if(!filepath) {
@@ -381,12 +385,21 @@ exports.generateTiddlerFilepath = function(title,options) {
 		}
 		count++;
 	} while(fs.existsSync(fullPath));
-	//If the path does not start with the wikiPath directory or the wikiTiddlersPath directory, or if the last write failed
-	var encode = !(fullPath.indexOf(path.resolve($tw.boot.wikiPath)) == 0 || fullPath.indexOf($tw.boot.wikiTiddlersPath) == 0) || ((options.fileInfo || {writeError: false}).writeError == true);
+	// If the last write failed with an error, or if path does not start with:
+	//	the resolved options.directory, the resolved wikiPath directory, or the wikiTiddlersPath directory, 
+	//	then encodeURIComponent() and resolve to tiddler directory
+	var newPath = fullPath,
+		encode = (options.fileInfo || {writeError: false}).writeError == true;
+	if(!encode){
+		encode = !(fullPath.indexOf(path.resolve(directory)) == 0 ||
+			fullPath.indexOf(path.resolve($tw.boot.wikiPath)) == 0 ||
+			fullPath.indexOf($tw.boot.wikiTiddlersPath) == 0);
+		}
 	if(encode){
-		//encodeURIComponent() and then resolve to tiddler directory
 		fullPath = path.resolve(directory, encodeURIComponent(fullPath));
 	}
+	// Call hook to allow plugins to modify the final path
+	fullPath = $tw.hooks.invokeHook("th-make-tiddler-path", newPath, fullPath);
 	// Return the full path to the file
 	return fullPath;
 };
