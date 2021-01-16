@@ -70,8 +70,8 @@ FocusManager.prototype.restoreFocus = function(widget,widgetInfo) {
 	if(widget && widget.domNodes[widgetInfo.index] && widget.domNodes[widgetInfo.index].focus) {
 		widget.domNodes[widgetInfo.index].focus();
 		if(widgetInfo.selectionStart && widgetInfo.selectionEnd) {
-			if(widgetInfo.widget.engine && widgetInfo.widget.engine.setSelectionRange) {
-				widgetInfo.widget.engine.setSelectionRange(widgetInfo.selectionStart,widgetInfo.selectionEnd);
+			if(widget.engine && widget.engine.setSelectionRange) {
+				widget.engine.setSelectionRange(widgetInfo.selectionStart,widgetInfo.selectionEnd);
 			}
 		}
 	}
