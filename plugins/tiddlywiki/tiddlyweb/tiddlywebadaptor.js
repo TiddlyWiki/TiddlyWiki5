@@ -264,7 +264,7 @@ TiddlyWebAdaptor.prototype.deleteTiddler = function(title,options,callback) {
 	// If we don't have a bag it means that the tiddler hasn't been seen by the server, so we don't need to delete it
 	var bag = options.tiddlerInfo.adaptorInfo && options.tiddlerInfo.adaptorInfo.bag;
 	if(!bag) {
-		return callback(null, options);
+		return callback(null, options.tiddlerInfo.adaptorInfo);
 	}
 	// Issue HTTP request to delete the tiddler
 	$tw.utils.httpRequest({
@@ -275,7 +275,7 @@ TiddlyWebAdaptor.prototype.deleteTiddler = function(title,options,callback) {
 				return callback(err);
 			}
 			// Invoke the callback
-			callback(null);
+			callback(null, options.tiddlerInfo.adaptorInfo);
 		}
 	});
 };
