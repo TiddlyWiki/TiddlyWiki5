@@ -110,6 +110,8 @@ exports.startup = function() {
 			handlerMethod: "handleKeydownEvent"
 		}]);
 	}
+	// Kick off the focus manager
+	$tw.focusManager = new $tw.FocusManager();
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
 	// Find a working syncadaptor
