@@ -17,7 +17,7 @@ function FocusManager(options) {
 }
 
 FocusManager.prototype.findWidgetOwningDomNode = function(widget,domNode) {
-  for(var domNodeIndex=0; domNodeIndex<widget.domNodes.length; domNodeIndex++) {
+	for(var domNodeIndex=0; domNodeIndex<widget.domNodes.length; domNodeIndex++) {
 		if(widget.domNodes[domNodeIndex] === domNode) {
 			var widgetInfo = {
 				widget: widget,
