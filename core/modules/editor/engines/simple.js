@@ -79,6 +79,14 @@ SimpleEngine.prototype.getSelectionRange = function() {
 };
 
 /*
+Set the selection-range
+*/
+SimpleEngine.prototype.setSelectionRange = function(selectionStart,selectionEnd) {
+	this.domNode.selectionStart = selectionStart;
+	this.domNode.selectionEnd = selectionEnd;
+};
+
+/*
 Set the text of the engine if it doesn't currently have focus
 */
 SimpleEngine.prototype.setText = function(text,type) {
