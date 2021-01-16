@@ -21,7 +21,8 @@ listen 命令使用[[命名的命令參數|NamedCommandParameters]]：
 * ''authenticated-user-header'' - 可選的標頭名稱，用於受信任身份驗證
 * ''readers'' - 允許讀取此維基的主體，以逗號分隔的清單
 * ''writers'' - 允許寫入此維基的主體，以逗號分隔的清單
-* ''csrf-disable'' - 設置為 "yes" 以禁用 CSRF 檢查 (預設為 "no")
+* ''csrf-disable'' - 設定為 "yes" 以停用 CSRF 檢查 (預設為 "no")
+* ''sse-enabled'' - 設定為 "yes" 以啟用伺服器傳送的事件 (預設為 "no")
 * ''root-tiddler'' - 服務的基本條目 (預設為 "$:/core/save/all")
 * ''root-render-type'' - 呈現的基本條目的內容類型 (預設為 "text/plain")
 * ''root-serve-type'' - 服務的基本條目的內容類型 (預設為 "text/html")
