@@ -1,0 +1,17 @@
+{
+	"description": "Content for the TW plugin-library",
+	"plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem",
+		"tiddlywiki/internals"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"languages": [
+	],
+	"includeWikis": [
+		"../pluginlibrary"
+	]
+}

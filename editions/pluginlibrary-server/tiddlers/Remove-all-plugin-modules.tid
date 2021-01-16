@@ -1,0 +1,11 @@
+created: 20200315083221031
+modified: 20210115210019400
+tags: 
+title: Remove-all-plugin-modules
+type: text/vnd.tiddlywiki
+
+<$button>
+<$action-deletetiddler $filter="[prefix[$:/plugins/]] -[[$:/plugins/tiddlywiki/filesystem]] -[[$:/plugins/tiddlywiki/internals]] -[[$:/plugins/tiddlywiki/pluginlibrary]] -[[$:/plugins/tiddlywiki/tiddlyweb]]"/>
+<$action-deletetiddler $filter="[prefix[$:/languages/]]"/>
+Delete all "plugin modules"
+</$button>
