@@ -23,7 +23,7 @@ FocusManager.prototype.findWidgetOwningDomNode = function(widget,domNode) {
 				widget: widget,
 				index: domNodeIndex
 			};
-			if(widget.engine) {
+			if(widget.engine && widget.engine.getSelectionRange) {
 				var selections = widget.engine.getSelectionRange();
 				widgetInfo.selectionStart = selections.selectionStart,
 				widgetInfo.selectionEnd = selections.selectionEnd;
