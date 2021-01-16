@@ -107,6 +107,16 @@ FramedEngine.prototype.copyStyles = function() {
 };
 
 /*
+Get an object containing the selectionStart and selectionEnd values
+*/
+FramedEngine.prototype.getSelectionRange = function() {
+	return {
+		selectionStart: this.domNode.selectionStart,
+		selectionEnd: this.domNode.selectionEnd
+	}
+};
+
+/*
 Set the text of the engine if it doesn't currently have focus
 */
 FramedEngine.prototype.setText = function(text,type) {
