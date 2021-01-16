@@ -71,10 +71,20 @@ exports.startup = function() {
 		timerId;
 	function refresh() {
 		// Process the refresh
+		var focusWidgetInfo = $tw.focusManager.findWidgetOwningDomNode($tw.rootWidget,document.activeElement);
+		var renderTreeFootprint;
+		if(focusWidgetInfo) {
+			renderTreeFootprint = $tw.focusManager.generateRenderTreeFootprint(focusWidgetInfo.widget);
+		}
 		$tw.hooks.invokeHook("th-page-refreshing");
 		$tw.pageWidgetNode.refresh(deferredChanges);
 		deferredChanges = Object.create(null);
 		$tw.hooks.invokeHook("th-page-refreshed");
+		var focusWidget;
+		if(renderTreeFootprint) {
+			focusWidget = $tw.focusManager.findWidgetByFootprint(renderTreeFootprint,$tw.rootWidget);
+		}
+		$tw.focusManager.restoreFocus(focusWidget,focusWidgetInfo);
 	}
 	// Add the change event handler
 	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
