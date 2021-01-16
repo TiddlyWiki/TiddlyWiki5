@@ -64,20 +64,23 @@ PluginSwitcher.prototype.switchPlugins = function() {
 		},
 		accumulatePlugin = function(title) {
 			var tiddler = self.wiki.getTiddler(title);
-			if(tiddler && tiddler.isPlugin() && plugins.indexOf(title) === -1) {
-				plugins.push(title);
-				var pluginInfo = JSON.parse(self.wiki.getTiddlerText(title)),
-					dependents = $tw.utils.parseStringArray(tiddler.fields.dependents || "");
-				$tw.utils.each(dependents,function(title) {
-					accumulatePlugin(title);
-				});
-			}
-			if(tiddler && tiddler.fields && tiddler.fields["plugin-type"] === "language") {
-				// var addOns = self.wiki.filterTiddlers("[all[shadows+tiddlers]prefix["+title+"]]")
-				var addOns = self.wiki.filterTiddlers("[prefix["+title+"]]")
-				$tw.utils.each(addOns,function(title) {
-					accumulateLanguageAddOn(title);
-				});
+			if (self.pluginType !== "language-addon") {
+				if(tiddler && tiddler.isPlugin() && plugins.indexOf(title) === -1) {
+					plugins.push(title);
+					var pluginInfo = JSON.parse(self.wiki.getTiddlerText(title)),
+						dependents = $tw.utils.parseStringArray(tiddler.fields.dependents || "");
+					$tw.utils.each(dependents,function(title) {
+						accumulatePlugin(title);
+					});
+				}
+			} else {
+				if(tiddler && tiddler.fields && tiddler.fields["plugin-type"] === "language") {
+					// var addOns = self.wiki.filterTiddlers("[all[shadows+tiddlers]prefix["+title+"]]")
+					var addOns = self.wiki.filterTiddlers("[prefix["+title+"/]]")
+					$tw.utils.each(addOns,function(title) {
+						accumulateLanguageAddOn(title);
+					});
+				}
 			}
 		};
 	accumulatePlugin(selectedPluginTitle);
