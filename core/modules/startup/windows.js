@@ -73,10 +73,20 @@ exports.startup = function() {
 		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
+			var focusWidgetInfo = $tw.focusManager.findWidgetOwningDomNode(widgetNode,srcDocument.activeElement),
+				renderTreeFootprint;
+			if(focusWidgetInfo) {
+				renderTreeFootprint = $tw.focusManager.generateRenderTreeFootprint(focusWidgetInfo.widget);
+			}
 			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
 				styleElement.innerHTML = styleContainer.textContent;
 			}
 			widgetNode.refresh(changes);
+			var focusWidget;
+			if(renderTreeFootprint) {
+				focusWidget = $tw.focusManager.findWidgetByFootprint(renderTreeFootprint,widgetNode);
+			}
+			$tw.focusManager.restoreFocus(focusWidget,focusWidgetInfo);
 		};
 		$tw.wiki.addEventListener("change",refreshHandler);
 		// Listen for keyboard shortcuts
