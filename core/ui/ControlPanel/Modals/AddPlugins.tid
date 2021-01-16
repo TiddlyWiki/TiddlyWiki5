@@ -59,11 +59,11 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 </$reveal>
 \end
 
-\define sub-plugin-indicator(type)
+\define sub-plugin-indicator()
 \whitespace trim
-<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>limit[1]]" variable="ignore">
+<$list filter="[enlist<assets>has[parent-plugin]parent-plugin<original-title>limit[1]]" variable="ignore">
 	<$reveal type="nomatch" text="yes" state=<<popup-state>> tag="div" class="tc-plugin-info-sub-plugin-indicator">
-		<$wikify name="count" text="""<$count filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>]"/>""">
+		<$wikify name="count" text="""<$count filter="[enlist<assets>has[parent-plugin]parent-plugin<original-title>]"/>""">
 			<$button class="tc-btn-invisible" set=<<popup-state>> setTo="yes">
 				{{$:/language/ControlPanel/Plugins/SubPluginPrompt}}
 			</$button>
@@ -122,15 +122,15 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 			<div class="tc-plugin-info-dropdown-body">
 				<$transclude tiddler=<<assetInfo>> field="readme" mode="block"/>
 			</div>
-			<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>limit[1]]" variable="ignore">
+			<$list filter="[enlist<assets>has[parent-plugin]parent-plugin<original-title>limit[1]]" variable="ignore">
 				<div class="tc-plugin-info-sub-plugins">
-					<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>sort[name]]" variable="assetInfo">
+					<$list filter="[enlist<assets>has[parent-plugin]parent-plugin<original-title>sort[name]]" variable="assetInfo">
 						<<display-plugin-info "$type$">>
 					</$list>
 				</div>
 			</$list>
 		</$reveal>
-		<<sub-plugin-indicator """$type$""">>
+		<<sub-plugin-indicator>>
 	</$set>
 </$set>
 \end
@@ -155,15 +155,17 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 </$reveal>
 \end
 
-\define display-server-assets(type,subType)
+\define display-server-assets(type,addonType)
 \whitespace trim
 <span class="tc-small-gap-right">{{$:/language/Search/Search}}:</span> <$edit-text tiddler="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" default="" type="search" tag="input"/> <<clear-search-button>>
 <div class="tc-plugin-library-listing">
-	<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]search:author,description,original-title,readme,title{$:/temp/RemoteAssetSearch/$(currentTiddler)$}sort[name]]" variable="assetInfo">
+<$set name="assets" filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]]">
+	<$list filter="[enlist<assets>search:author,description,original-title,readme,title{$:/temp/RemoteAssetSearch/$(currentTiddler)$}sort[name]]" variable="assetInfo">
 		<$list filter="[[$:/temp/RemoteAssetSearch/$(currentTiddler)$]has[text]] ~[<assetInfo>!has[parent-plugin]]" variable="ignore"><!-- Hide sub-plugins if we're not searching -->
 			<<display-plugin-info "$type$">>
 		</$list>
 	</$list>
+</$set>
 </div>
 \end
 
