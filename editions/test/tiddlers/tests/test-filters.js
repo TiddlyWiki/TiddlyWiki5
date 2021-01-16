@@ -127,6 +127,14 @@ function setupWiki(wikiOptions) {
 		type: "application/json"});
 	// Add a few  tiddlers
 	wiki.addTiddler({
+		title: "TiddlerJson",
+		text: '{"0":"Zero","1":"One","2":"Two"}',
+		type: "application/json"});
+	wiki.addTiddler({
+		title: "TiddlerJson2",
+		text: '{"0":"Three","1":"Four","2":"Five"}',
+		type: "application/json"});
+	wiki.addTiddler({
 		title: "TiddlerOne",
 		text: "The quick brown fox in $:/TiddlerTwo",
 		tags: ["one"],
@@ -227,6 +235,10 @@ function runTests(wiki) {
 	it("should handle the lookup operator", function() {
 		expect(wiki.filterTiddlers("Six Seventh 8 +[lookup[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,,Tidd");
 		expect(wiki.filterTiddlers("Six Seventh 8 +[lookup:8[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,8,Tidd");
+		expect(wiki.filterTiddlers("Six Seventh 8 +[lookup::field[Tiddler],[text]]").join(",")).toBe("Missing inaction from TiddlerOne,,Tidd");
+		expect(wiki.filterTiddlers("Six Seventh 8 +[lookup:8:field[Tiddler],[text]]").join(",")).toBe("Missing inaction from TiddlerOne,8,Tidd");
+		expect(wiki.filterTiddlers("Json MissingJson Json2 +[lookup::index[Tiddler],[2]]").join(",")).toBe("Two,,Five");
+		expect(wiki.filterTiddlers("Json MissingJson Json2 +[lookup:Default:index[Tiddler],[0]]").join(",")).toBe("Zero,Default,Three");
 	});
 
 	it("should retrieve shadow tiddlers", function() {
