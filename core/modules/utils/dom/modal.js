@@ -175,9 +175,19 @@ Modal.prototype.display = function(title,options) {
 	footerWidgetNode.render(modalFooterButtons,null);
 	// Set up the refresh handler
 	refreshHandler = function(changes) {
+		var focusWidgetInfo = $tw.focusManager.findWidgetOwningDomNode(bodyWidgetNode,self.srcDocument.activeElement);
+		var renderTreeFootprint;
+		if(focusWidgetInfo) {
+			renderTreeFootprint = $tw.focusManager.generateRenderTreeFootprint(focusWidgetInfo.widget);
+		}
 		headerWidgetNode.refresh(changes,modalHeader,null);
 		bodyWidgetNode.refresh(changes,modalBody,null);
 		footerWidgetNode.refresh(changes,modalFooterButtons,null);
+		var focusWidget;
+		if(renderTreeFootprint) {
+			focusWidget = $tw.focusManager.findWidgetByFootprint(renderTreeFootprint,bodyWidgetNode);
+		}
+		$tw.focusManager.restoreFocus(focusWidget,focusWidgetInfo);
 	};
 	this.wiki.addEventListener("change",refreshHandler);
 	// Add the close event handler
