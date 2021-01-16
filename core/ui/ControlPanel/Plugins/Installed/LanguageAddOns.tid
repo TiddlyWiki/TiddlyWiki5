@@ -1,0 +1,4 @@
+title: $:/core/ui/ControlPanel/Plugins/Installed/LanguagesAddOns
+caption: {{$:/language/ControlPanel/Plugins/LanguagesAddOns/Caption}} (<$count filter="[!has[draft.of]plugin-type[language-addon]]"/>)
+
+<<plugin-table "language-addon">>

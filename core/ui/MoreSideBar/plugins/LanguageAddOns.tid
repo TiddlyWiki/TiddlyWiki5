@@ -1,0 +1,5 @@
+title: $:/core/ui/MoreSideBar/Plugins/LanguagesAddOns
+tags: $:/tags/MoreSideBar/Plugins
+caption: {{$:/language/ControlPanel/Plugins/LanguagesAddOns/Caption}}
+
+<$list filter="[!has[draft.of]plugin-type[language-addon]sort[description]]" template="$:/core/ui/PluginListItemTemplate" emptyMessage={{$:/language/ControlPanel/Plugins/Empty/Hint}}/>
