@@ -158,6 +158,13 @@ CodeMirrorEngine.prototype.getSelectionRange = function() {
 };
 
 /*
+Set the selection-range
+*/
+CodeMirrorEngine.prototype.setSelectionRange = function(selectionStart,selectionEnd) {
+	this.cm.setSelection(this.cm.posFromIndex(selectionStart),this.cm.posFromIndex(selectionEnd));
+};
+
+/*
 Set the text of the engine if it doesn't currently have focus
 */
 CodeMirrorEngine.prototype.setText = function(text,type) {
