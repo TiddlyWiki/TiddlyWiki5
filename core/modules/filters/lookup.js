@@ -34,25 +34,20 @@ exports.lookup = function(source,operator,options) {
 	}
 	if(indexSuffix) {
 		source(function(tiddler,title) {
-			title = operator.operands[0] + title;
-			data = options.wiki.extractTiddlerDataItem(title,target);
-			if(data) {
-				results.push(data);
-			} else {
-				results.push(defaultSuffix);
-			}
+			var targetTitle = operator.operands[0] + title;
+			var data = options.wiki.extractTiddlerDataItem(targetTitle,target,defaultSuffix);
+			results.push(data);
 		});
 	} else {
 		source(function(tiddler,title) {
-			title = operator.operands[0] + title;
-			tiddler = options.wiki.getTiddler(title);
-			if(tiddler) {
-				var value = tiddler.getFieldString(target, defaultSuffix);
-				if(value) {
-					results.push(value);
-				} else {
-					results.push(defaultSuffix);
+			var targetTitle = operator.operands[0] + title;
+			var targetTiddler = options.wiki.getTiddler(targetTitle);
+			if(targetTiddler) {
+				var value = targetTiddler.getFieldString(target);
+				if(value == "" && defaultSuffix !== "") {
+					value = defaultSuffix;
 				}
+				results.push(value);
 			}
 		});
 	}
