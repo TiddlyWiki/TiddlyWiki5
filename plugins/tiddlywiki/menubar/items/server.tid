@@ -1,14 +1,15 @@
 title: $:/plugins/tiddlywiki/menubar/items/server
 tags: $:/tags/MenuBar
-description: Server options
-caption: Server
+caption: {{$:/language/tiddlywiki/menubar/items/server/caption}}
+description: {{$:/language/tiddlywiki/menubar/items/server/description}}
 custom-menu-content: <$transclude tiddler="$:/plugins/tiddlywiki/menubar/items/server" mode="inline"/>
 
+\define lingo-base() $:/language/tiddlywiki/menubar/items/
 <$list filter="[[$:/status/IsLoggedIn]get[text]else[no]match[yes]]" variable="ignore">
 <$transclude tiddler="$:/core/ui/Buttons/save-wiki" mode="inline"/>
 </$list>
 <$list filter="[[$:/status/IsLoggedIn]get[text]else[no]match[no]]" variable="ignore">
 <$button message="tm-login">
-Login
+<<lingo "server/login/text">>
 </$button>
 </$list>

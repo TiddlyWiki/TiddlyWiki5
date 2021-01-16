@@ -1,7 +1,8 @@
 title: $:/plugins/tiddlywiki/menubar/items/topleftbar
 tags: $:/tags/MenuBar
-description: Items from $:/tags/TopLeftBar
-caption: Legacy Top Left Bar
+caption: {{$:/language/tiddlywiki/menubar/items/topleftbar/caption}}
+description: {{$:/language/tiddlywiki/menubar/items/topleftbar/description}}
+
 custom-menu-content: <$transclude tiddler="$:/plugins/tiddlywiki/menubar/items/topleftbar" mode="inline"/>
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/TopLeftBar]!has[draft.of]]" variable="listItem" storyview="pop">

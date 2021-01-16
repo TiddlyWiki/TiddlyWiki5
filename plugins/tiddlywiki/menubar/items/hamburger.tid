@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/menubar/items/hamburger
 tags: $:/tags/MenuBar
-caption: Hamburger
-description: Show the full menu bar on a narrow screen
+caption: {{$:/language/tiddlywiki/menubar/items/hamburger/caption}}
+description: {{$:/language/tiddlywiki/menubar/items/hamburger/description}}
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/hamburger}}
 show-when: narrow
 

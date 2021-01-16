@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/menubar/items/pagecontrols
 tags: $:/tags/MenuBar
-description: Page controls from the sidebar
-caption: Page controls
+caption: {{$:/language/tiddlywiki/menubar/items/pagecontrols/caption}}
+description: {{$:/language/tiddlywiki/menubar/items/pagecontrols/description}}
 custom-menu-content: <$transclude tiddler="$:/plugins/tiddlywiki/menubar/items/pagecontrols" mode="inline"/>
 
 \whitespace trim

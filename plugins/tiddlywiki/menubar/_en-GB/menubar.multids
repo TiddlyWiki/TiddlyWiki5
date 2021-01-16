@@ -1,0 +1,20 @@
+title: $:/language/tiddlywiki/menubar/
+
+items/contents/caption: Contents
+items/contents/description: Table of Contents
+items/hamburger/caption: Hamburger
+items/hamburger/description: Show the full menu bar on a narrow screen
+items/pagecontrols/caption: Page controls
+items/pagecontrols/description: Page controls from the sidebar
+items/search/caption: Search
+items/search/description: Search
+items/server/caption: Server
+items/server/description: Server
+items/server/login/text: Login
+items/sidebar/caption: Sidebar
+items/sidebar/description: Sidebar
+items/topleftbar/caption: Legacy Top Left Bar
+items/topleftbar/description: Items from $:/tags/TopLeftBar
+items/toprightbar/caption: Legacy Top Right Bar
+items/toprightbar/description: Items from $:/tags/TopRightBar
+

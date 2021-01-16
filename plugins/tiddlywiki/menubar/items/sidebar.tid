@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/menubar/items/sidebar
-caption: Sidebar
-description: Sidebar
+caption: {{$:/language/tiddlywiki/menubar/items/sidebar/caption}}
+description: {{$:/language/tiddlywiki/menubar/items/sidebar/description}}
 is-dropdown: yes
 tags: $:/tags/MenuBar
 
