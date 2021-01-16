@@ -4,10 +4,19 @@
 		"tiddlywiki/pluginlibrary"
 	],
 	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
 	],
 	"includeWikis": [
 	],
 	"build": {
+		"index": [
+			"--savetiddlers","[tag[external-image]]","images",
+			"--rendertiddlers","[tag[external-text]]","$:/core/templates/tid-tiddler","text","text/plain",".tid",
+			"--setfield","[tag[external-image]]","_canonical_uri","$:/core/templates/canonical-uri-external-image","text/plain",
+			"--setfield","[tag[external-text]]","_canonical_uri","$:/core/templates/canonical-uri-external-text","text/plain",
+			"--setfield","[tag[external-image]] [tag[external-text]]","text","","text/plain",
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
 		"library": [
 			"--makelibrary","$:/UpgradeLibrary",
    			"--savelibrarytiddlers","$:/UpgradeLibrary","[prefix[$:/]] -[[$:/plugins/tiddlywiki/upgrade]] -[[$:/plugins/tiddlywiki/translators]] -[[$:/plugins/tiddlywiki/pluginlibrary]] -[[$:/plugins/tiddlywiki/jasmine]]","recipes/library/tiddlers/","$:/UpgradeLibrary/List",
