@@ -42,8 +42,7 @@ exports.handler = function(request,response,state) {
 			text = zlib.gzipSync(text);
 		}
 	}
-	response.writeHead(200,responseHeaders);
-	response.end(text);
+	state.sendResponse(200,responseHeaders,text);
 };
 
 }());
