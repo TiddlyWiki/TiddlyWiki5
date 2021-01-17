@@ -72,6 +72,28 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 </$list>
 \end
 
+\define switchToAddons()
+<$action-setfield $tiddler="$:/state/tab-728163000" text="$:/core/ui/ControlPanel/Plugins/Add/LanguagesAddOns" />
+<$action-setfield $tiddler=<<remoteAssetSearchTiddler>> text={{{[<currentTiddler>split[/]last[2]join[/]]}}} />
+\end
+
+\define language-indicator()
+\whitespace trim
+<$list filter="[enlist<assets>has[addons]get[addons]enlist-input[]]" variable="pluginType">
+	<$list filter="[enlist<allAssets>original-plugin-type<pluginType>split[/]last[2]join[/]addprefix[$:/plugins/]]">
+		<$list filter="[<currentTiddler>match<original-title>]" variable="ignore">
+			<$reveal type="nomatch" text="yes" state=<<popup-state>> tag="div" class="tc-plugin-info-sub-language-indicator">
+				<$wikify name="count" text="""<$count filter="[enlist<assets>has[addons]enlist[addons]limit[1]]"/>""">
+					<$button class="tc-btn-invisible" actions=<<switchToAddons>>>
+						{{$:/language/ControlPanel/Plugins/SubLanguagePrompt}}
+					</$button>
+				</$wikify>
+			</$reveal>
+		</$list>
+	</$list>
+</$list>
+\end
+
 \define display-plugin-info(type)
 \whitespace trim
 <$set name="popup-state" value=<<popup-state-macro>>>
@@ -130,7 +152,7 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 				</div>
 			</$list>
 		</$reveal>
-		<<sub-plugin-indicator>>
+		<<sub-plugin-indicator>><<language-indicator>>
 	</$set>
 </$set>
 \end
@@ -147,26 +169,30 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 
 \define clear-search-button()
 \whitespace trim
-<$reveal tag="span" class="tc-small-gap-left" state="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" type="nomatch" text="">
+<$reveal tag="span" class="tc-small-gap-left" state=<<remoteAssetSearchTiddler>> type="nomatch" text="">
 	<$button class="tc-btn-invisible">
-		<$action-setfield $tiddler="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" $field="text" $value=""/>
+		<$action-setfield $tiddler=<<remoteAssetSearchTiddler>> $field="text" $value=""/>
 		{{$:/core/images/close-button}}
 	</$button>
 </$reveal>
 \end
 
-\define display-server-assets(type,addonType)
+\define display-server-assets(type)
 \whitespace trim
-<span class="tc-small-gap-right">{{$:/language/Search/Search}}:</span> <$edit-text tiddler="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" default="" type="search" tag="input"/> <<clear-search-button>>
-<div class="tc-plugin-library-listing">
-<$set name="assets" filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]]">
-	<$list filter="[enlist<assets>search:author,description,original-title,readme,title{$:/temp/RemoteAssetSearch/$(currentTiddler)$}sort[name]]" variable="assetInfo">
-		<$list filter="[[$:/temp/RemoteAssetSearch/$(currentTiddler)$]has[text]] ~[<assetInfo>!has[parent-plugin]]" variable="ignore"><!-- Hide sub-plugins if we're not searching -->
-			<<display-plugin-info "$type$">>
-		</$list>
-	</$list>
-</$set>
+<$set name="remoteAssetSearchTiddler" value="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""">
+	<span class="tc-small-gap-right">{{$:/language/Search/Search}}:</span> <$edit-text tiddler=<<remoteAssetSearchTiddler>> default="" type="search" tag="input"/> <<clear-search-button>>
+	<div class="tc-plugin-library-listing">
+	<$set name="allAssets" filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}]">
+		<$set name="assets" filter="[enlist<allAssets>original-plugin-type[$type$]]">
+			<$list filter="[enlist<assets>search:author,description,original-title,readme,title{$:/temp/RemoteAssetSearch/$(currentTiddler)$}sort[name]]" variable="assetInfo">
+				<$list filter="[[$:/temp/RemoteAssetSearch/$(currentTiddler)$]has[text]] ~[<assetInfo>!has[parent-plugin]]" variable="ignore"><!-- Hide sub-plugins if we're not searching -->
+					<<display-plugin-info "$type$">>
+				</$list>
+			</$list>
+		</$set>
+	</$set>
 </div>
+</$set>
 \end
 
 \define display-server-connection()
