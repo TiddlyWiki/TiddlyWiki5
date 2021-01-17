@@ -2296,16 +2296,22 @@ html body.tc-body.tc-single-tiddler-window {
 	background: <<colour background>>;
 }
 
+.tc-plugin-info-sub-language-indicator,
 .tc-plugin-info-sub-plugin-indicator {
 	margin: -16px 1em 0 2em;
 }
 
+.tc-plugin-info-sub-language-indicator button,
 .tc-plugin-info-sub-plugin-indicator button {
 	color: <<colour background>>;
 	background: <<colour foreground>>;
 	border-radius: 8px;
     padding: 2px 7px;
     font-size: 0.75em;
+}
+
+.tc-plugin-info-sub-language-indicator button {
+	background: green;
 }
 
 .tc-plugin-info-sub-plugins .tc-plugin-info-dropdown {
