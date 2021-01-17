@@ -45,7 +45,7 @@ Compute the internal state of the widget
 */
 ViewWidget.prototype.execute = function() {
 	var formats = getViewWidgetFormats(),
-		formatMethod;
+		formatMethods;
 	// Get parameters from our attributes
 	this.viewTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.viewSubtiddler = this.getAttribute("subtiddler");
@@ -55,12 +55,14 @@ ViewWidget.prototype.execute = function() {
 	this.viewTemplate = this.getAttribute("template","");
 	this.viewMode = this.getAttribute("mode","block");
 
-	formatMethod = formats[this.viewFormat];
-	if(!formatMethod) {
-		// Default to "text"
-		formatMethod = formats.text;
+	formatMethods = (this.viewFormat || "").split("+");
+	this.text = this.getValue({asString: true});
+	for (var i = 0; i < formatMethods.length; i++) {
+		var method = formats[formatMethods[i]];
+		if(method) {
+			this.text = method(this.text,this,this.viewMode,this.viewTemplate);
+		}
 	}
-	this.text = formatMethod(this,this.viewMode,this.viewTemplate);
 };
 
 /*
