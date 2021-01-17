@@ -97,6 +97,7 @@ Plugins/Update/Caption: update
 Plugins/Updates/Caption: Updates
 Plugins/Updates/Hint: Available updates to installed plugins
 Plugins/Updates/UpdateAll/Caption: Update <<update-count>> plugins
+Plugins/SubLanguagePrompt: With <<count>> language addons available
 Plugins/SubPluginPrompt: With <<count>> sub-plugins available
 Saving/Caption: Saving
 Saving/DownloadSaver/AutoSave/Description: Permit automatic saving for the download saver
