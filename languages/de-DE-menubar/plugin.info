@@ -1,9 +1,8 @@
 {
 	"title": "$:/languages/de-DE/tiddlywiki/menubar",
-	"name": "de-DE/menubar",
+	"name": "Menü Toolbar/de-DE",
 	"plugin-type": "language-addon",
 	"description": "Top Menü Plugin",
 	"author": "MarioPietsch aka pmario",
-	"parent-plugin": "$:/plugins/tiddlywiki/menubar",
 	"core-version": ">=5.0.0"
 }
