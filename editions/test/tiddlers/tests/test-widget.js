@@ -217,6 +217,71 @@ describe("Widget module", function() {
 		expect(wrapper.children[0].children[0].sequenceNumber).toBe(3);
 	});
 
+	it("should render block and inline modes", function() {
+		var wiki = new $tw.Wiki();
+		function test(input, format, attributeString) {
+			wiki.addTiddler( {title: "TiddlerOne", text: input} );
+			// Construct the widget node
+			var text = "<$view tiddler='TiddlerOne' format='"+format+"' "+attributeString+"/>";
+			var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+			// Render the widget node to the DOM
+			var wrapper = renderWidgetNode(widgetNode);
+			// Test the rendering
+			return wrapper.innerHTML;
+		};
+		// default, block, and inline htmlwikified
+		expect(test("!!title","htmlwikified","")).toContain("h2");
+		expect(test("!!title","htmlwikified","mode='block'")).toContain("h2");
+		expect(test("!!title","htmlwikified","mode='inline'")).toContain("!!");
+		expect(test("!!title","plainwikified","")).not.toContain("!!");
+		expect(test("!!title","plainwikified","mode='block'")).not.toContain("!!");
+		expect(test("!!title","plainwikified","mode='inline'")).toContain("!!");
+	});
+
+	it("should render the view widget with various formats", function() {
+		var wiki = new $tw.Wiki();
+		// Test a view widget with a given input and format
+		function test(input,format,expected) {
+			var formatStr = format? "format='"+format+"' ": '';
+			if(input !== undefined) {
+				wiki.addTiddler( {title: "TiddlerOne", text: input} );
+			} else {
+				wiki.deleteTiddler("TiddlerOne");
+			}
+			// Construct the widget node
+			var text = "<$view tiddler='TiddlerOne' "+formatStr+"/>";
+			var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+			// Render the widget node to the DOM
+			var wrapper = renderWidgetNode(widgetNode);
+			// Test the rendering
+			expect(wrapper.innerHTML)
+				.withContext("format '"+format+"' rendered incorrectly")
+				.toBe("<p>"+expected+"</p>");
+		};
+		test("!! <$text text='Dogs > cats' />","",
+			"!! &lt;$text text='Dogs &gt; cats' /&gt;");
+		test("!! <$text text='Dogs > cats' />", "htmlwikified",
+			"&lt;h2 class=&quot;&quot;&gt;Dogs &amp;gt; cats&lt;/h2&gt;");
+		test("!! <$text text='Dogs > cats' />","plainwikified",
+			"Dogs &gt; cats");
+		test("!! <$text text='Dogs > cats' />","htmlencodedplainwikified",
+			"Dogs &amp;gt; cats");
+		test("!! <$text text='Dogs > cats' />","htmlencoded",
+			"!! &amp;lt;$text text='Dogs &amp;gt; cats' /&amp;gt;");
+		test("!! <$text text='Dogs > cats' />","urlencoded",
+			"!!%20%3C%24text%20text%3D'Dogs%20%3E%20cats'%20%2F%3E");
+		test("!! <$text text='Dogs > cats' />","doubleurlencoded",
+			"!!%2520%253C%2524text%2520text%253D'Dogs%2520%253E%2520cats'%2520%252F%253E");
+		test("!! <$text text='Dogs > cats' />","jsencoded",
+			"!! &lt;$text text=\\'Dogs &gt; cats\\' /&gt;");
+
+		test("20210117181603357","date","2021 1 17 13:16");
+		test("","date","");
+		test(undefined,"date","");
+		test("this is not a date","date","");
+		test("//# comment\nkey: value\nkey2: value2","stripcomments","key: value\nkey2: value2");
+	});
+
 	it("should deal with the set widget", function() {
 		var wiki = new $tw.Wiki();
 		// Add some tiddlers
