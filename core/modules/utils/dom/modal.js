@@ -173,9 +173,10 @@ Modal.prototype.display = function(title,options) {
 		importPageMacros: true
 	});
 	footerWidgetNode.render(modalFooterButtons,null);
+	navigatorWidgetNode.children = [headerWidgetNode,bodyWidgetNode,footerWidgetNode];
 	// Set up the refresh handler
 	refreshHandler = function(changes) {
-		var focusWidgetInfo = $tw.focusManager.findWidgetOwningDomNode(bodyWidgetNode,self.srcDocument.activeElement);
+		var focusWidgetInfo = $tw.focusManager.findWidgetOwningDomNode(navigatorWidgetNode,self.srcDocument.activeElement);
 		var renderTreeFootprint;
 		if(focusWidgetInfo) {
 			renderTreeFootprint = $tw.focusManager.generateRenderTreeFootprint(focusWidgetInfo.widget);
@@ -185,7 +186,7 @@ Modal.prototype.display = function(title,options) {
 		footerWidgetNode.refresh(changes,modalFooterButtons,null);
 		var focusWidget;
 		if(renderTreeFootprint) {
-			focusWidget = $tw.focusManager.findWidgetByFootprint(renderTreeFootprint,bodyWidgetNode);
+			focusWidget = $tw.focusManager.findWidgetByFootprint(renderTreeFootprint,navigatorWidgetNode);
 		}
 		$tw.focusManager.restoreFocus(focusWidget,focusWidgetInfo);
 	};
