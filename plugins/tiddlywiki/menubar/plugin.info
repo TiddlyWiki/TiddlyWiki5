@@ -3,5 +3,6 @@
 	"name": "Menu Bar",
 	"description": "Menu Bar",
 	"list": "readme config license",
-	"plugin-priority": "99999"
+	"plugin-priority": "99999",
+	"addons": ["language-addon"]
 }
