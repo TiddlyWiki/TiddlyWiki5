@@ -1290,10 +1290,10 @@ $tw.Wiki = function(options) {
 			if(tiddler) {
 				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type") && tiddler.fields.text) {
 					var info = JSON.parse(tiddler.fields.text);
-					if (info.tiddlers) {
+					if(info.tiddlers) {
 						// Put the title in just in case it was omitted for
 						// brevity's sake.
-						for (var title in info.tiddlers) {
+						for(var title in info.tiddlers) {
 							info.tiddlers[title].title = title;
 						}
 					}
