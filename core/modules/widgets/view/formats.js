@@ -16,16 +16,16 @@ exports.text = function(text) {
 	return text;
 };
 
-exports.htmlwikified = function(text,widget,mode,template) {
+exports.htmlwikified = function(text,widget) {
 	return widget.wiki.renderText("text/html","text/vnd.tiddlywiki",text,{
-		parseAsInline: mode !== "block",
+		parseAsInline: widget.viewMode !== "block",
 		parentWidget: widget
 	});
 };
 
-exports.plainwikified = function(text,widget,mode,template) {
+exports.plainwikified = function(text,widget) {
 	return widget.wiki.renderText("text/plain","text/vnd.tiddlywiki",text,{
-		parseAsInline: mode !== "block",
+		parseAsInline: widget.viewMode !== "block",
 		parentWidget: widget
 	});
 };
@@ -34,8 +34,8 @@ exports.htmlencoded = $tw.utils.htmlEncode;
 
 exports.urlencoded = encodeURIComponent;
 
-exports.date = function(text,widget,mode,format) {
-	format = format || "YYYY MM DD 0hh:0mm";
+exports.date = function(text,widget) {
+	var format = widget.viewTemplate || "YYYY MM DD 0hh:0mm";
 	var value = $tw.utils.parseDate(text);
 	if(value && $tw.utils.isDate(value) && value.toString() !== "Invalid Date") {
 		return $tw.utils.formatDateString(value,format);
@@ -70,7 +70,7 @@ exports.jsencoded = function(text) {
 };
 
 // Deprecated
-exports.htmlencodedplainwikified = function(text,widget,mode,template) {
+exports.htmlencodedplainwikified = function(/* arguments */) {
 	return exports.htmlencoded(exports.plainwikified.apply(this,arguments));
 };
 

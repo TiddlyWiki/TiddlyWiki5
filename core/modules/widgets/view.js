@@ -60,7 +60,7 @@ ViewWidget.prototype.execute = function() {
 	for (var i = 0; i < formatMethods.length; i++) {
 		var method = formats[formatMethods[i]];
 		if(method) {
-			this.text = method(this.text,this,this.viewMode,this.viewTemplate);
+			this.text = method(this.text,this);
 		}
 	}
 };
