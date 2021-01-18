@@ -1,0 +1,12 @@
+author: MarioPietsch aka pmario
+core-version: >=5.0.0
+created: 20210115210436408
+dependents: 
+description: Deutsch (Deutschland)
+modified: 20210115210436408
+name: de-DE
+plugin-priority: 100
+plugin-type: language
+title: $:/languages/de-DE
+type: application/json
+version: 5.1.24-prerelease

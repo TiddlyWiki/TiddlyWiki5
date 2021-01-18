@@ -1,0 +1,49 @@
+{
+    "tiddlers": {
+        "$:/core/macros/tabs": {
+            "title": "$:/core/macros/tabs",
+            "tags": "$:/tags/Macro",
+            "text": "\\define tabs(tabsList,default,state:\"$:/state/tab\",class,template,buttonTemplate,retain,actions,explicitState)\n<$set name=\"qualifiedState\" value=<<qualify \"$state$\">>>\n<$set name=\"tabsState\" filter=\"[<__explicitState__>minlength[1]] ~[<qualifiedState>]\">\n<div class=\"tc-tab-set $class$\">\n<div class=\"tc-tab-buttons $class$\">\n<$list filter=\"$tabsList$\" variable=\"currentTab\" storyview=\"pop\"><$set name=\"save-currentTiddler\" value=<<currentTiddler>>><$tiddler tiddler=<<currentTab>>><$button set=<<tabsState>> setTo=<<currentTab>> default=\"$default$\" selectedClass=\"tc-tab-selected\" tooltip={{!!tooltip}}>\n<$tiddler tiddler=<<save-currentTiddler>>>\n<$set name=\"tv-wikilinks\" value=\"no\">\n<$transclude tiddler=\"$buttonTemplate$\" mode=\"inline\">\n<$transclude tiddler=<<currentTab>> field=\"caption\">\n<$macrocall $name=\"currentTab\" $type=\"text/plain\" $output=\"text/plain\"/>\n</$transclude>\n</$transclude>\n</$set></$tiddler>$actions$</$button><span class=\"wltc-link-to-tab\"><$link overrideClass=\"\" to=<<currentTiddler>> >{{$:/core/images/link}}</$link></span></$tiddler></$set></$list>\n</div>\n<div class=\"tc-tab-divider $class$\"/>\n<div class=\"tc-tab-content $class$\">\n<$list filter=\"$tabsList$\" variable=\"currentTab\">\n\n<$reveal type=\"match\" state=<<tabsState>> text=<<currentTab>> default=\"$default$\" retain=\"\"\"$retain$\"\"\">\n\n<$transclude tiddler=\"$template$\" mode=\"block\">\n\n<$transclude tiddler=<<currentTab>> mode=\"block\"/>\n\n</$transclude>\n\n</$reveal>\n\n</$list>\n</div>\n</div>\n</$set>\n</$set>\n\\end\n"
+        },
+        "$:/core/ui/ControlPanel/Settings/link-to-tabs": {
+            "title": "$:/core/ui/ControlPanel/Settings/link-to-tabs",
+            "caption": "Link-to-Tabs plugin",
+            "created": "20190712133607244",
+            "modified": "20190714104631250",
+            "tags": "$:/tags/ControlPanel/Settings",
+            "type": "text/vnd.tiddlywiki",
+            "text": "<$checkbox tiddler=\"$:/plugins/wikilabs/link-to-tabs/config\" field=\"show-all-links\" checked=\"inline-block\" unchecked=\"none\" default=\"none\"> Show internal tab link for ''all tabs''</$checkbox>\n\n<$checkbox tiddler=\"$:/plugins/wikilabs/link-to-tabs/config\" field=\"show-single-link\" checked=\"inline-block\" unchecked=\"none\" default=\"inline-block\"> Show internal tab link for ''selected tabs''</$checkbox>\n\n<$checkbox tiddler=\"$:/plugins/wikilabs/link-to-tabs/config\" field=\"initial-opacity\" checked=\"0\" unchecked=\"0.7\" default=\"0.7\"> Tab links are initially hidden and need mouse hover to become visible.</$checkbox> The transition time in seconds is: <$edit-text tiddler=\"$:/plugins/wikilabs/link-to-tabs/config\" field=\"transition\" default=\"0.3\"/>\n\n<$button message=\"tm-delete-tiddler\" param=\"$:/plugins/wikilabs/link-to-tabs/config\">\nReset to Default!\n</$button>"
+        },
+        "$:/plugins/wikilabs/link-to-tabs/config": {
+            "title": "$:/plugins/wikilabs/link-to-tabs/config",
+            "created": "20190712133008077",
+            "initial-opacity": "0.7",
+            "modified": "20190714104541701",
+            "show-all-links": "none",
+            "show-single-link": "inline-block",
+            "transition": "0.3",
+            "type": "text/vnd.tiddlywiki",
+            "text": "This tiddler is used to configure the \"Link-to-tabs\" plugin behaviour. \n\nThere are 4 fields, which are used by [[$:/plugins/wikilabs/link-to-tabs/styles]] enable and disable the internal links. \n\n* show-all-links: {{!!show-all-links}}\n* show-single-link: {{!!show-single-link}}\n* initial-opacity: {{!!initial-opacity}}\n* transition time in seconds: {{!!transition}}\n"
+        },
+        "$:/plugins/wikilabs/link-to-tabs/history": {
+            "title": "$:/plugins/wikilabs/link-to-tabs/history",
+            "text": "V 2.0.1 - 2020-12-25\n\n* update license\n\nV 2.0.0 - 2020.12.05\n\n* Update $:/core/macros/tabs to V5.1.23\n\nV 1.1.1 - 2020.01.19\n\n* Update license link/text\n\nV 1.1.0 - 2019.07.14\n\n* Add new option: Initially hide link\n** Transition time from hidden to visible is adjustable\n* Added: \"Reset to Default\" button\n\nV 1.0.1 - 2019.02.18\n\n* link-to-tabs works in drop-down elements now.\n\nV 1.0.0 - 2019.02.14\n\n* Use core tabs-macro from TW 5.1.19\n\nV <1.0.0\n\n* Use core tabs-macro from TW 5.1.15\n"
+        },
+        "$:/plugins/wikilabs/link-to-tabs/license": {
+            "title": "$:/plugins/wikilabs/link-to-tabs/license",
+            "text": "[[Link-to-Tabs-Macro|https://wikilabs.github.io/#link-to-tabs]] (c) Mario Pietsch - 2016-2021\n\nhttps://opensource.org/licenses/BSD-3-Clause\n"
+        },
+        "$:/plugins/wikilabs/link-to-tabs/styles": {
+            "title": "$:/plugins/wikilabs/link-to-tabs/styles",
+            "created": "20190712133348541",
+            "modified": "20190714104306483",
+            "tags": "$:/tags/Stylesheet",
+            "type": "text/vnd.tiddlywiki",
+            "text": "<pre>\n\n.wltc-link-to-tab {\n  display: {{$:/plugins/wikilabs/link-to-tabs/config!!show-all-links}};\n  position: relative;\n  top: -1em;\n  left: -1.3em;\n  font-size: 0.7em;\n  opacity: {{$:/plugins/wikilabs/link-to-tabs/config!!initial-opacity}};\n  margin-right: -1em;\n}\n\n.wltc-link-to-tab svg{\n  width: 1.4em;\n  height: 1.4em;\n}\n\n.wltc-link-to-tab:hover {\n  opacity: 1;\n  transition:opacity {{$:/plugins/wikilabs/link-to-tabs/config!!transition}}s;\n  transition-timing-function: cubic-bezier(1,-0.06,.39,.89);\n}\n\n.tc-tab-selected + .wltc-link-to-tab {\n  display: {{$:/plugins/wikilabs/link-to-tabs/config!!show-single-link}};\n}\n\n.tc-vertical > .wltc-link-to-tab {\n  top: -1.9em;\n  left: 0;\n  height: 0;\n  float: right;\n}\n\n.tc-search-results .wltc-link-to-tab a {\n  display: contents;\n  padding: 0;\n}\n\n</pre>"
+        },
+        "$:/plugins/wikilabs/link-to-tabs/readme": {
+            "title": "$:/plugins/wikilabs/link-to-tabs/readme",
+            "text": "This plugin adds a little link icon to every tab.\n\n''Important:'' This plugin changes the core tabs macro.\n\n! Lint-to-Tabs Settings\n\n{{$:/core/ui/ControlPanel/Settings/link-to-tabs}}"
+        }
+    }
+}
