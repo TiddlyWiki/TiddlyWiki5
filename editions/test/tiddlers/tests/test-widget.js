@@ -266,14 +266,28 @@ describe("Widget module", function() {
 			"Dogs &gt; cats");
 		test("!! <$text text='Dogs > cats' />","htmlencodedplainwikified",
 			"Dogs &amp;gt; cats");
+		test("!! <$text text='Dogs > cats' />","plainwikified+htmlencoded",
+			"Dogs &amp;gt; cats");
+		// This combination would mostly be useless, but still possible
+		test("!! <$text text='Dogs > cats' />","htmlencoded+plainwikified",
+			"&lt;$text text='Dogs &gt; cats' /&gt;");
 		test("!! <$text text='Dogs > cats' />","htmlencoded",
 			"!! &amp;lt;$text text='Dogs &amp;gt; cats' /&amp;gt;");
 		test("!! <$text text='Dogs > cats' />","urlencoded",
 			"!!%20%3C%24text%20text%3D'Dogs%20%3E%20cats'%20%2F%3E");
 		test("!! <$text text='Dogs > cats' />","doubleurlencoded",
 			"!!%2520%253C%2524text%2520text%253D'Dogs%2520%253E%2520cats'%2520%252F%253E");
+		test("!! <$text text='Dogs > cats' />","urlencoded+urlencoded",
+			"!!%2520%253C%2524text%2520text%253D'Dogs%2520%253E%2520cats'%2520%252F%253E");
 		test("!! <$text text='Dogs > cats' />","jsencoded",
 			"!! &lt;$text text=\\'Dogs &gt; cats\\' /&gt;");
+		// Non-existent or erroneous formats default to text
+		test("!! <$text text='Dogs > cats' />","text",
+			"!! &lt;$text text='Dogs &gt; cats' /&gt;");
+		test("!! <$text text='Dogs > cats' />","somethingencoded",
+			"!! &lt;$text text='Dogs &gt; cats' /&gt;");
+		test("!! <$text text='Dogs > cats' />","plainwikified+nonexistent",
+			"Dogs &gt; cats");
 
 		test("20210117181603357","date","2021 1 17 13:16");
 		test("","date","");

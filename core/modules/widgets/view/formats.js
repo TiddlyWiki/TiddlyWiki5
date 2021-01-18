@@ -30,20 +30,9 @@ exports.plainwikified = function(text,widget,mode,template) {
 	});
 };
 
-exports.htmlencodedplainwikified = function(text,widget,mode,template) {
-	return $tw.utils.htmlEncode(widget.wiki.renderText("text/plain","text/vnd.tiddlywiki",text,{
-		parseAsInline: mode !== "block",
-		parentWidget: widget
-	}));
-};
-
 exports.htmlencoded = $tw.utils.htmlEncode;
 
 exports.urlencoded = encodeURIComponent;
-
-exports.doubleurlencoded = function(text) {
-	return encodeURIComponent(encodeURIComponent(text));
-};
 
 exports.date = function(text,widget,mode,format) {
 	format = format || "YYYY MM DD 0hh:0mm";
@@ -78,6 +67,16 @@ exports.stripcomments = function(text) {
 
 exports.jsencoded = function(text) {
 	return $tw.utils.stringify(text);
+};
+
+// Deprecated
+exports.htmlencodedplainwikified = function(text,widget,mode,template) {
+	return exports.htmlencoded(exports.plainwikified.apply(this,arguments));
+};
+
+// Deprecated
+exports.doubleurlencoded = function(text) {
+	return exports.urlencoded(exports.urlencoded(text));
 };
 
 })();
