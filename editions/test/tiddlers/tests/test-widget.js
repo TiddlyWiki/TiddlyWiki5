@@ -289,11 +289,29 @@ describe("Widget module", function() {
 		test("!! <$text text='Dogs > cats' />","plainwikified+nonexistent",
 			"Dogs &gt; cats");
 
-		test("20210117181603357","date","2021 1 17 13:16");
-		test("","date","");
-		test(undefined,"date","");
-		test("this is not a date","date","");
 		test("//# comment\nkey: value\nkey2: value2","stripcomments","key: value\nkey2: value2");
+	});
+
+	it("should render dates with the view widget", function() {
+		var wiki = new $tw.Wiki();
+		function test(input) {
+			if(input !== undefined) {
+				wiki.addTiddler( {title: "TiddlerOne", text: input} );
+			} else {
+				wiki.deleteTiddler("TiddlerOne");
+			}
+			// Construct the widget node
+			var text = "<$view tiddler='TiddlerOne' format='date'/>";
+			var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+			// Render the widget node to the DOM
+			return renderWidgetNode(widgetNode).innerHTML;
+		};
+
+		// The result might change depending on your computer's time zone
+		expect(test("20210117181603357")).toContain("2021 1 ");
+		expect(test("")).toBe("<p></p>");
+		expect(test(undefined)).toBe("<p></p>");
+		expect(test("this is not a date")).toBe("<p></p>");
 	});
 
 	it("should deal with the set widget", function() {
