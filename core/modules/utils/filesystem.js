@@ -479,8 +479,7 @@ Delete a file described by the fileInfo if it exits
 */
 exports.deleteTiddlerFile = function(fileInfo, callback) {
 	//Only attempt to delete files that exist on disk
-	var invalid = !fileInfo.filepath || !fs.existsSync(fileInfo.filepath);
-	if(invalid) {
+	if(!fileInfo.filepath || !fs.existsSync(fileInfo.filepath)) {
 		//For some reason, the tiddler is only in memory or we can't modify the file at this path
 		$tw.syncer.displayError("Server deleteTiddlerFile task failed for filepath: "+fileInfo.filepath);
 		return callback(null, fileInfo);
@@ -528,7 +527,7 @@ exports.cleanupTiddlerFiles = function(options, callback) {
 			if(err) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the previous file on disk, should fail gracefully
-					$tw.syncer.displayError("Server desynchronized. Error cleaning up previous file for '"+title+"'", err);
+					$tw.syncer.displayError("Server desynchronized. Error cleaning up previous file for \""+title+"\"", err);
 					return callback(null, bootInfo);
 				} else {
 					return callback(err);

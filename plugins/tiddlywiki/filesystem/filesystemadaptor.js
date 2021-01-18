@@ -36,9 +36,8 @@ FileSystemAdaptor.prototype.isReady = function() {
 
 FileSystemAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 	//Returns the existing fileInfo for the tiddler. To regenerate, call getTiddlerFileInfo().
-	var self = this;
 	var title = tiddler.fields.title;
-	return self.boot.files[title];
+	return this.boot.files[title];
 };
 
 /*
@@ -53,7 +52,6 @@ The type is found by looking up the extension in $tw.config.fileExtensionInfo (e
 It is the responsibility of the filesystem adaptor to update self.boot.files for new files that are created.
 */
 FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
-	var self = this;
 	// Always generate a fileInfo object when this fuction is called
 	var title = tiddler.fields.title, newInfo, pathFilters, extFilters;
 	if(this.wiki.tiddlerExists("$:/config/FileSystemPaths")){
@@ -63,12 +61,12 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 		extFilters = this.wiki.getTiddlerText("$:/config/FileSystemExtensions","").split("\n");
 	}
 	newInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
-		directory: self.boot.wikiTiddlersPath,
+		directory: this.boot.wikiTiddlersPath,
 		pathFilters: pathFilters,
 		extFilters: extFilters,
-		wiki: self.wiki,
-		fileInfo: self.boot.files[title],
-		originalpath: self.wiki.extractTiddlerDataItem("$:/config/OriginalTiddlerPaths",title, "")
+		wiki: this.wiki,
+		fileInfo: this.boot.files[title],
+		originalpath: this.wiki.extractTiddlerDataItem("$:/config/OriginalTiddlerPaths",title, "")
 	});
 	callback(null,newInfo);
 };
@@ -78,10 +76,14 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
 FileSystemAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
+	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// standard of callback as last argument. This catches the previous signature:
 	if(!!callback && typeof callback !== "function"){
+		// First, stash any non-function third argument
 		var optionsArg = callback;
 	}
 	if(typeof options === "function"){
+		// If the second argument is a function, assign it to callback & assign or create options
 		callback = options;
 		options = optionsArg || {};
 	}
@@ -97,7 +99,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
 					fileInfo = fileInfo || self.boot.files[tiddler.fields.title];
 					fileInfo.writeError = true;
 					self.boot.files[tiddler.fields.title] = fileInfo;
-					$tw.syncer.logger.log("Sync failed for '"+tiddler.fields.title+"' and will be retried with encoded filepath", encodeURIComponent(fileInfo.filepath));
+					$tw.syncer.logger.log("Sync failed for \""+tiddler.fields.title+"\" and will be retried with encoded filepath", encodeURIComponent(fileInfo.filepath));
 					return callback(err);
 				} else {
 					return callback(err);
@@ -122,13 +124,17 @@ Load a tiddler and invoke the callback with (err,tiddlerFields)
 We don't need to implement loading for the file system adaptor, because all the tiddler files will have been loaded during the boot process.
 */
 FileSystemAdaptor.prototype.loadTiddler = function(title,options,callback) {
-	if(!!callback && typeof callback !== "function"){
+	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// standard of callback as last argument. This catches the previous signature:
+	/*if(!!callback && typeof callback !== "function"){
+		// First, stash any non-function third argument
 		var optionsArg = callback;
 	}
 	if(typeof options === "function"){
+		// If the second argument is a function, assign it to callback & assign or create options
 		callback = options;
 		options = optionsArg || {};
-	}
+	}*/
 	callback(null,null);
 };
 
@@ -136,10 +142,14 @@ FileSystemAdaptor.prototype.loadTiddler = function(title,options,callback) {
 Delete a tiddler and invoke the callback with (err)
 */
 FileSystemAdaptor.prototype.deleteTiddler = function(title,options,callback) {
+	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// standard of callback as last argument. This catches the previous signature:
 	if(!!callback && typeof callback !== "function"){
+		// First, stash any non-function third argument
 		var optionsArg = callback;
 	}
 	if(typeof options === "function"){
+		// If the second argument is a function, assign it to callback & assign or create options
 		callback = options;
 		options = optionsArg || {};
 	}

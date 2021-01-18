@@ -183,10 +183,14 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
 TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
+	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// standard of callback as last argument. This catches the previous signature:
 	if(!!callback && typeof callback !== "function"){
+		// First, stash any non-function third argument
 		var optionsArg = callback;
 	}
 	if(typeof options === "function"){
+		// If the second argument is a function, assign it to callback & assign or create options
 		callback = options;
 		options = optionsArg || {};
 	}
@@ -224,10 +228,14 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
 Load a tiddler and invoke the callback with (err,tiddlerFields)
 */
 TiddlyWebAdaptor.prototype.loadTiddler = function(title,options,callback) {
+	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// standard of callback as last argument. This catches the previous signature:
 	if(!!callback && typeof callback !== "function"){
+		// First, stash any non-function third argument
 		var optionsArg = callback;
 	}
 	if(typeof options === "function"){
+		// If the second argument is a function, assign it to callback & assign or create options
 		callback = options;
 		options = optionsArg || {};
 	}
@@ -250,14 +258,17 @@ options include:
 tiddlerInfo: the syncer's tiddlerInfo for this tiddler
 */
 TiddlyWebAdaptor.prototype.deleteTiddler = function(title,options,callback) {
+	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// standard of callback as last argument. This catches the previous signature:
 	if(!!callback && typeof callback !== "function"){
+		// First, stash any non-function third argument
 		var optionsArg = callback;
 	}
 	if(typeof options === "function"){
+		// If the second argument is a function, assign it to callback & assign or create options
 		callback = options;
 		options = optionsArg || {};
 	}
-	var self = this;
 	if(this.isReadOnly) {
 		return callback(null);
 	}
