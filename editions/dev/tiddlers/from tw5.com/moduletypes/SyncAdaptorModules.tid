@@ -160,7 +160,9 @@ Delete a tiddler from the server.
 
 <<.from-version "5.1.24">> The signature of syncadaptor functions that accept callbacks has been changed so that the callback is always the last argument. A check for the old order of arguments means that this change should be backwards compatible. The new order should be prefered when updating or writing new plugins.
 
-The options parameter contains the following properties:
+The options parameter may contain the following properties, depending on the method called.
 
 |!Property |!Description |
+|changeCount |The //new// changeCount value for this tiddler |
 |tiddlerInfo |The tiddlerInfo maintained by the syncer for this tiddler |
+|wiki |The wiki object the syncer is actiong on |
