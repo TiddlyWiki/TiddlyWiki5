@@ -388,7 +388,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 	// If the last write failed with an error, or if path does not start with:
 	//	the resolved options.directory, the resolved wikiPath directory, or the wikiTiddlersPath directory, 
 	//	then encodeURIComponent() and resolve to tiddler directory
-	var writePath = fullPath,
+	var writePath = $tw.hooks.invokeHook("th-make-tiddler-path",fullPath),
 		encode = (options.fileInfo || {writeError: false}).writeError == true;
 	if(!encode){
 		encode = !(fullPath.indexOf(path.resolve(directory)) == 0 ||
@@ -399,7 +399,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 		writePath = path.resolve(directory, encodeURIComponent(fullPath));
 	}
 	// Call hook to allow plugins to modify the final path
-	writePath = $tw.hooks.invokeHook("th-make-tiddler-path",writePath,fullPath);
+	
 	// Return the full path to the file
 	return writePath;
 };
