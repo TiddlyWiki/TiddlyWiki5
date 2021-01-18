@@ -398,8 +398,6 @@ exports.generateTiddlerFilepath = function(title,options) {
 	if(encode){
 		writePath = path.resolve(directory, encodeURIComponent(fullPath));
 	}
-	// Call hook to allow plugins to modify the final path
-	
 	// Return the full path to the file
 	return writePath;
 };
