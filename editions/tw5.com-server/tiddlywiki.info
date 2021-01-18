@@ -11,13 +11,6 @@
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
 	],
-	"languages": [
-		"en-GB",
-		"de-AT",
-		"de-DE",
-		"de-AT-hugo",
-		"en-GB-hugo"
-	],
 	"includeWikis": [
 		"../tw5.com"
 	],
