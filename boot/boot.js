@@ -1289,7 +1289,15 @@ $tw.Wiki = function(options) {
 			var tiddler = tiddlers[title];
 			if(tiddler) {
 				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type") && tiddler.fields.text) {
-					pluginInfo[tiddler.fields.title] = JSON.parse(tiddler.fields.text);
+					var info = JSON.parse(tiddler.fields.text);
+					if (info.tiddlers) {
+						// Put the title in just in case it was omitted for
+						// brevity's sake.
+						for (var title in info.tiddlers) {
+							info.tiddlers[title].title = title;
+						}
+					}
+					pluginInfo[tiddler.fields.title] = info;
 					results.modifiedPlugins.push(tiddler.fields.title);
 				}
 			} else {
@@ -1962,8 +1970,17 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			var tiddlers = pluginFiles[f].tiddlers;
 			for(var t=0; t<tiddlers.length; t++) {
 				var tiddler= tiddlers[t];
+				var abridgedFields = Object.create(null);
 				if(tiddler.title) {
-					pluginInfo.tiddlers[tiddler.title] = tiddler;
+					// We copy the fields to abridged fields without the title>
+					// keeping title in pluginInfo would be redundant, since
+					// the object keys are the titles.
+					for(var field in tiddler) {
+						if(field !== 'title') {
+							abridgedFields[field] = tiddler[field];
+						}
+					}
+					pluginInfo.tiddlers[tiddler.title] = abridgedFields;
 				}
 			}
 		}
