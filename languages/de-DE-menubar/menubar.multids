@@ -2,3 +2,18 @@ title: $:/language/tiddlywiki/menubar/
 
 items/contents/caption: Inhalt
 items/contents/description: Inhaltsverzeichnis
+items/hamburger/caption: Manü-Icon
+items/hamburger/description: Zeige ein Menü-Icon statt Volltext bei schmalen Anzeigen
+items/pagecontrols/caption: Seiten Toolbar
+items/pagecontrols/description: Elemente des Seiten-"Toolbars" anzeigen
+items/search/caption: Suchen
+items/search/description: Such-Eingabefeld anzeigen
+items/server/caption: Server
+items/server/description: Server Icon anzeigen
+items/server/login/text: Einloggen
+items/sidebar/caption: Seitenleiste
+items/sidebar/description: Tabellen aus der rechten Seitenleiste zeigen
+items/topleftbar/caption: Bestand - "Top Left Bar"
+items/topleftbar/description: Elemente aus bestehendem $:/tags/TopLeftBar zeigen
+items/toprightbar/caption: Bestand - "Top Right Bar"
+items/toprightbar/description: Elemente aus bestehendem $:/tags/TopRightBar zeigen
