@@ -3,8 +3,6 @@
 	"plugins": [
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",
-		"tiddlywiki/highlight",
-		"tiddlywiki/mobiledragdrop",
 		"tiddlywiki/internals"
 	],
 	"themes": [
@@ -15,6 +13,5 @@
 		"../tw5.com"
 	],
 	"config": {
-		"default-tiddler-location": "../tw5.com/tiddlers"
 	}
 }

@@ -1,5 +1,5 @@
-created: 20210118123442530
-list: $:/AdvancedSearch $:/language Remove-all-plugin-modules $:/ControlPanel config $:/core/ui/ControlPanel/Modals/AddPlugins
-modified: 20210118130020601
+created: 20210118133016825
+list: $:/core/ui/ControlPanel/Modals/AddPlugins
+modified: 20210118133016825
 title: $:/StoryList
 type: text/vnd.tiddlywiki
