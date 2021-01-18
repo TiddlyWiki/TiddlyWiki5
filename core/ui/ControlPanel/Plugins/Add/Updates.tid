@@ -1,5 +1,5 @@
 title: $:/core/ui/ControlPanel/Plugins/Add/Updates
-caption: <$importvariables filter="$:/core/ui/ControlPanel/Plugins/Add/Updates">{{$:/language/ControlPanel/Plugins/Updates/Caption}} (<<update-count>>)</$importvariables>
+caption: <$importvariables filter="$:/core/ui/ControlPanel/Plugins/Add/Updates">{{$:/language/ControlPanel/Plugins/Updates/Caption}} <<update-count>></$importvariables>
 
 \define each-updateable-plugin(body)
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}sort[title]]" variable="assetInfo">
@@ -22,7 +22,11 @@ $body$
 \end
 
 \define update-count()
-<$wikify name="count-filter" text=<<each-updateable-plugin "&#91;&#91;<$text text=<<assetInfo>>/>]]">>><$count filter=<<count-filter>>/></$wikify>
+\whitespace trim
+<$wikify name="count-filter" text=<<each-updateable-plugin "&#91;&#91;<$text text=<<assetInfo>>/>]]">>>
+<$set name="isDirty" filter="[enlist<count-filter>count[]match[0]else:[tc-dirty-indicator]]">
+<span class=<<isDirty>> >(<$count filter=<<count-filter>> />)</span>
+</$set></$wikify>
 \end
 
 <$button actions=<<update-all-actions>> class="tc-btn-invisible tc-install-plugin tc-reinstall-upgrade">
