@@ -78,6 +78,7 @@ Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 FileSystemAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
 	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
 	// standard of callback as last argument. This catches the previous signature:
+	options = options || {};
 	if(!!callback && typeof callback !== "function"){
 		// First, stash any non-function third argument
 		var optionsArg = callback;
@@ -126,7 +127,8 @@ We don't need to implement loading for the file system adaptor, because all the 
 FileSystemAdaptor.prototype.loadTiddler = function(title,options,callback) {
 	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
 	// standard of callback as last argument. This catches the previous signature:
-	/*if(!!callback && typeof callback !== "function"){
+	/*options = options || {};
+	if(!!callback && typeof callback !== "function"){
 		// First, stash any non-function third argument
 		var optionsArg = callback;
 	}
@@ -144,6 +146,7 @@ Delete a tiddler and invoke the callback with (err)
 FileSystemAdaptor.prototype.deleteTiddler = function(title,options,callback) {
 	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
 	// standard of callback as last argument. This catches the previous signature:
+	options = options || {};
 	if(!!callback && typeof callback !== "function"){
 		// First, stash any non-function third argument
 		var optionsArg = callback;
