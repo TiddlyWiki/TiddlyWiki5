@@ -673,6 +673,7 @@ LoadTiddlerTask.prototype.run = function(callback) {
 			if(err) {
 				return callback(err);
 			}
+			self.syncer.tiddlerInfo[self.title].adaptorInfo = adaptorInfo;
 			// Update the info stored about this tiddler
 			if(tiddlerFields) {
 				self.syncer.storeTiddler(tiddlerFields);
