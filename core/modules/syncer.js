@@ -249,14 +249,14 @@ Syncer.prototype.updateDirtyStatus = function() {
 /*
 Save an incoming tiddler in the store, and updates the associated tiddlerInfo
 */
-Syncer.prototype.storeTiddler = function(tiddlerFields) {
+Syncer.prototype.storeTiddler = function(tiddlerFields, adaptorInfo) {
 	// Save the tiddler
 	var tiddler = new $tw.Tiddler(tiddlerFields);
 	this.wiki.addTiddler(tiddler);
 	// Save the tiddler revision and changeCount details
 	this.tiddlerInfo[tiddlerFields.title] = {
 		revision: this.getTiddlerRevision(tiddlerFields.title),
-		adaptorInfo: this.syncadaptor && this.syncadaptor.getTiddlerInfo(tiddler, {wiki: this.wiki}),
+		adaptorInfo: adaptorInfo || this.syncadaptor && this.syncadaptor.getTiddlerInfo(tiddler, {wiki: this.wiki}),
 		changeCount: this.wiki.getChangeCount(tiddlerFields.title)
 	};
 };
@@ -673,10 +673,9 @@ LoadTiddlerTask.prototype.run = function(callback) {
 			if(err) {
 				return callback(err);
 			}
-			self.syncer.tiddlerInfo[self.title].adaptorInfo = adaptorInfo;
 			// Update the info stored about this tiddler
 			if(tiddlerFields) {
-				self.syncer.storeTiddler(tiddlerFields);
+				self.syncer.storeTiddler(tiddlerFields, adaptorInfo);
 			}
 			// Invoke the callback
 			callback(null);
