@@ -1,4 +1,12 @@
 title: $:/core/ui/ControlPanel/Plugins/Add/LanguagesAddOns
-caption: {{$:/language/ControlPanel/Plugins/LanguagesAddOns/Caption}} (<$count filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[language-addon]]"/>)
+caption: <$importvariables filter="$:/core/ui/ControlPanel/Plugins/Add/LanguagesAddOns">{{$:/language/ControlPanel/Plugins/LanguagesAddOns/Caption}} (<<filtered-count>>/<<update-count>>)</$importvariables>
+
+\define filtered-count()
+<$count filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[language-addon]search:author,description,original-title,readme,title{$:/temp/RemoteAssetSearch/$(currentTiddler)$}sort[name]]"/>
+\end
+
+\define update-count()
+<$count filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[language-addon]]"/>
+\end
 
 <<display-server-assets "language-addon">>

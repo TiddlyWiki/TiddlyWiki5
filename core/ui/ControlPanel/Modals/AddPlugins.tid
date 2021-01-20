@@ -74,6 +74,7 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 
 \define switchToAddons()
 <$action-setfield $tiddler="$:/state/tab-728163000" text="$:/core/ui/ControlPanel/Plugins/Add/LanguagesAddOns" />
+<$action-setfield $tiddler="$:/state/tab--56871691" text="$:/core/ui/ControlPanel/Plugins/Add/LanguagesAddOns" />
 <$action-setfield $tiddler=<<remoteAssetSearchTiddler>> text={{{[<currentTiddler>split[/]last[2]join[/]]}}} />
 \end
 
@@ -107,7 +108,7 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 			</$list>
 		</div>
 		<div class="tc-plugin-info-chunk tc-plugin-info-description">
-			<h1><strong><$text text={{{ [<assetInfo>get[name]] ~[<assetInfo>get[original-title]split[/]last[1]] }}}/></strong>: <$view tiddler=<<assetInfo>> field="description"/></h1>
+			<h1><strong class="tc-small-gap-right"><$text text={{{ [<assetInfo>get[name]] ~[<assetInfo>get[original-title]split[/]last[1]] }}}/>:</strong><$view tiddler=<<assetInfo>> field="description"/></h1>
 			<h2><$view tiddler=<<assetInfo>> field="original-title"/></h2>
 			<div>
 				<em><$view tiddler=<<assetInfo>> field="version"/></em>
@@ -162,7 +163,7 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 <$list filter="[<currentTiddler>get[enabled]else[yes]match[yes]]" variable="ignore">
 	<$button class="tc-btn-big-green">
 		<$action-sendmessage $message="tm-load-plugin-library" url={{!!url}} infoTitlePrefix="$:/temp/RemoteAssetInfo/"/>
-		{{$:/core/images/chevron-right}} {{$:/language/ControlPanel/Plugins/OpenPluginLibrary}}
+		{{$:/core/images/chevron-right}}<span class="tc-tiny-gap-left">{{$:/language/ControlPanel/Plugins/OpenPluginLibrary}}</span>
 	</$button>
 </$list>
 \end
@@ -177,18 +178,32 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 </$reveal>
 \end
 
+\define getAuthor() \$:/plugins/(.*)/(.*)
+
+\define pluginSelector()
+\whitespace trim
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]original-plugin-type[plugin]get[original-title]search-replace::regexp<getAuthor>,[$1]] +[each:value[]]">
+		<$radio tiddler=<<remoteAssetSearchTiddler>> field=text value=<<currentTiddler>> class="tc-small-gap">
+			<span class="tc-tiny-gap-left"><$text text=<<currentTiddler>>/></span>
+		</$radio>
+	</$list>
+\end
+
 \define display-server-assets(type)
 \whitespace trim
 <$set name="remoteAssetSearchTiddler" value="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""">
 	<span class="tc-small-gap-right">{{$:/language/Search/Search}}:</span> <$edit-text tiddler=<<remoteAssetSearchTiddler>> default="" type="search" tag="input"/> <<clear-search-button>>
+	<<pluginSelector>>
 	<div class="tc-plugin-library-listing">
 	<$set name="allAssets" filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}]">
 		<$set name="assets" filter="[enlist<allAssets>original-plugin-type[$type$]]">
-			<$list filter="[enlist<assets>search:author,description,original-title,readme,title{$:/temp/RemoteAssetSearch/$(currentTiddler)$}sort[name]]" variable="assetInfo">
+		<$set name="filteredAssets" filter="[enlist<assets>search:author,description,original-title,readme,title{$:/temp/RemoteAssetSearch/$(currentTiddler)$}sort[name]]">
+			<$list filter="[enlist<filteredAssets>]" variable="assetInfo">
 				<$list filter="[[$:/temp/RemoteAssetSearch/$(currentTiddler)$]has[text]] ~[<assetInfo>!has[parent-plugin]]" variable="ignore"><!-- Hide sub-plugins if we're not searching -->
 					<<display-plugin-info "$type$">>
 				</$list>
 			</$list>
+		</$set>
 		</$set>
 	</$set>
 </div>
@@ -213,7 +228,7 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 	<$button class='tc-btn-big-green'>
 		<$action-sendmessage $message="tm-unload-plugin-library" url={{!!url}}/>
 		<$action-deletetiddler $filter="[prefix[$:/temp/ServerConnection/$(PluginLibraryURL)$]][prefix[$:/temp/RemoteAssetInfo/$(PluginLibraryURL)$]]"/>
-		{{$:/core/images/chevron-left}} {{$:/language/ControlPanel/Plugins/ClosePluginLibrary}}
+		{{$:/core/images/chevron-left}}<span class="tc-tiny-gap-left">{{$:/language/ControlPanel/Plugins/ClosePluginLibrary}}</span>
 	</$button>
 </$reveal>
 \end
