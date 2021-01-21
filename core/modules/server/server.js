@@ -18,7 +18,8 @@ if($tw.node) {
 		url = require("url"),
 		path = require("path"),
 		querystring = require("querystring"),
-		crypto = require("crypto");
+		crypto = require("crypto"),
+		zlib = require("zlib");
 }
 
 /*
@@ -122,6 +123,23 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 				response.end();
 				return;
 			}
+		}
+	}
+	/*
+	If the gzip=yes is set, check if the user agent permits compression. If so,
+	compress our response if the raw data is bigger than 2k. Compressing less
+	data is inefficient. Note that we use the synchronous functions from zlib
+	to stay in the imperative style. The current `Server` doesn't depend on
+	this, and we may just as well use the async versions.
+	*/
+	if(this.enableGzip && (data.length > 2048)) {
+		var acceptEncoding = request.headers["accept-encoding"] || "";
+		if(/\bdeflate\b/.test(acceptEncoding)) {
+			headers["Content-Encoding"] = "deflate";
+			data = zlib.deflateSync(data);
+		} else if(/\bgzip\b/.test(acceptEncoding)) {
+			headers["Content-Encoding"] = "gzip";
+			data = zlib.gzipSync(data);
 		}
 	}
 
