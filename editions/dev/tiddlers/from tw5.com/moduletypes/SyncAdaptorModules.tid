@@ -46,7 +46,7 @@ Options include:
 
 * ''options.wiki'': reference to wiki to use with this syncadaptor
 
-!! `getTiddlerInfo(tiddler)`
+!! `getTiddlerInfo(tiddler, options)`
 
 Gets the supplemental information that the adaptor needs to keep track of for a particular tiddler. For example, the TiddlyWeb adaptor includes a `bag` field indicating the original bag of the tiddler.
 
@@ -69,7 +69,7 @@ Returns a revision ID.
 Retrieves status information from the server. This method is optional.
 
 |!Parameter |!Description |
-|callback |Callback function invoked with parameters `err,isLoggedIn,username,isReadOnly` |
+|callback |Callback function invoked with parameters `err,isLoggedIn,username,isReadOnly,isAnonymous,isPollingDisabled` |
 
 !! `login(username,password,callback)`
 
@@ -165,4 +165,4 @@ The options parameter may contain the following properties, depending on the met
 |!Property |!Description |
 |changeCount |The //new// changeCount value for this tiddler |
 |tiddlerInfo |The tiddlerInfo maintained by the syncer for this tiddler |
-|wiki |The wiki object the syncer is actiong on |
+|wiki |The wiki object the syncer is acting on |
