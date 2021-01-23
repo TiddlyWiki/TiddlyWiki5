@@ -186,7 +186,7 @@ Modal.prototype.display = function(title,options) {
 		footerWidgetNode.refresh(changes,modalFooterButtons,null);
 		var focusWidget;
 		if(renderTreeFootprint) {
-			focusWidget = $tw.focusManager.findWidgetByFootprint(renderTreeFootprint,navigatorWidgetNode);
+			focusWidget = $tw.focusManager.findWidgetByFootprint(renderTreeFootprint,navigatorWidgetNode,focusWidgetInfo);
 		}
 		$tw.focusManager.restoreFocus(focusWidget,focusWidgetInfo);
 	};
