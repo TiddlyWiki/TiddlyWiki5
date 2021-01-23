@@ -84,7 +84,7 @@ exports.startup = function() {
 			widgetNode.refresh(changes);
 			var focusWidget;
 			if(renderTreeFootprint) {
-				focusWidget = $tw.focusManager.findWidgetByFootprint(renderTreeFootprint,widgetNode);
+				focusWidget = $tw.focusManager.findWidgetByFootprint(renderTreeFootprint,widgetNode,focusWidgetInfo);
 			}
 			$tw.focusManager.restoreFocus(focusWidget,focusWidgetInfo);
 		};
