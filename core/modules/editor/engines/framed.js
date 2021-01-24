@@ -90,6 +90,7 @@ function FramedEngine(options) {
 	]);
 	// Insert the element into the DOM
 	this.iframeDoc.body.appendChild(this.domNode);
+	this.widget.domNodes.push(this.domNode);
 }
 
 /*
