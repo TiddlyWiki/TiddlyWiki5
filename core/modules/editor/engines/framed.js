@@ -86,7 +86,8 @@ function FramedEngine(options) {
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
 		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"},
-		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"}
+		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"},
+		{name: "blur",handlerObject: this,handlerMethod: "handleBlurEvent"}
 	]);
 	// Insert the element into the DOM
 	this.iframeDoc.body.appendChild(this.domNode);
@@ -191,6 +192,16 @@ FramedEngine.prototype.handleFocusEvent = function(event) {
 	if(this.widget.editCancelPopups) {
 		$tw.popup.cancel(0);	
 	}
+	var currentTiddler = this.widget.document.querySelector('[data-tiddler-title="' + CSS.escape(this.widget.editTitle) + '"].tc-tiddler-frame');
+	$tw.utils.addClass(currentTiddler,"tc-focused");
+};
+
+/*
+Handle a blur event
+*/
+FramedEngine.prototype.handleBlurEvent = function(event) {
+	var currentTiddler = this.widget.document.querySelector('[data-tiddler-title="' + CSS.escape(this.widget.editTitle) + '"].tc-tiddler-frame');
+	$tw.utils.removeClass(currentTiddler,"tc-focused");
 };
 
 /*
