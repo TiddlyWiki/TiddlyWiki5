@@ -193,7 +193,9 @@ FramedEngine.prototype.handleFocusEvent = function(event) {
 		$tw.popup.cancel(0);	
 	}
 	var currentTiddler = this.widget.document.querySelector('[data-tiddler-title="' + CSS.escape(this.widget.editTitle) + '"].tc-tiddler-frame');
-	$tw.utils.addClass(currentTiddler,"tc-focused");
+	if(currentTiddler) {
+		$tw.utils.addClass(currentTiddler,"tc-focused");
+	}
 };
 
 /*
@@ -201,7 +203,9 @@ Handle a blur event
 */
 FramedEngine.prototype.handleBlurEvent = function(event) {
 	var currentTiddler = this.widget.document.querySelector('[data-tiddler-title="' + CSS.escape(this.widget.editTitle) + '"].tc-tiddler-frame');
-	$tw.utils.removeClass(currentTiddler,"tc-focused");
+	if(currentTiddler) {
+		$tw.utils.removeClass(currentTiddler,"tc-focused");
+	}
 };
 
 /*
