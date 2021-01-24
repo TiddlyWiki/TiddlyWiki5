@@ -71,7 +71,12 @@ exports.startup = function() {
 		timerId;
 	function refresh() {
 		// Process the refresh
-		var focusWidgetInfo = $tw.focusManager.findWidgetOwningDomNode($tw.rootWidget,document.activeElement);
+		var focusWidgetInfo;
+		if(document.activeElement.tagName === "IFRAME") {
+			focusWidgetInfo = $tw.focusManager.findWidgetOwningDomNode($tw.rootWidget,document.activeElement.contentWindow.document.activeElement);
+		} else {
+			focusWidgetInfo = $tw.focusManager.findWidgetOwningDomNode($tw.rootWidget,document.activeElement);
+		}
 		var renderTreeFootprint;
 		if(focusWidgetInfo) {
 			renderTreeFootprint = $tw.focusManager.generateRenderTreeFootprint(focusWidgetInfo.widget);
