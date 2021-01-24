@@ -3,8 +3,29 @@ title: $:/core/ui/ViewTemplate
 \define folded-state()
 $:/state/folded/$(currentTiddler)$
 \end
+\define get-focus-selector() [data-tiddler-title="$(cssEscapedTitle)$"].tc-tiddler-frame
+\define focus-tiddler-actions(afterOrBefore)
+<$set name="nextTiddler" value={{{ [list<tv-story-list>$afterOrBefore$<currentTiddler>] }}}>
+<$set name="cssEscapedTitle" value={{{ [<nextTiddler>escapecss[]] }}}>
+<$action-navigate $to=<<nextTiddler>>/>
+<$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>> preventScroll="true"/>
+</$set>
+</$set>
+\end
 \define cancel-delete-tiddler-actions(message) <$action-sendmessage $message="tm-$message$-tiddler"/>
 \import [all[shadows+tiddlers]tag[$:/tags/Macro/View]!has[draft.of]]
-<$vars storyTiddler=<<currentTiddler>> tiddlerInfoState=<<qualify "$:/state/popup/tiddler-info">>><div data-tiddler-title=<<currentTiddler>> data-tags={{!!tags}} class={{{ tc-tiddler-frame tc-tiddler-view-frame [<currentTiddler>is[tiddler]then[tc-tiddler-exists]] [<currentTiddler>is[missing]!is[shadow]then[tc-tiddler-missing]] [<currentTiddler>is[shadow]then[tc-tiddler-exists tc-tiddler-shadow]] [<currentTiddler>is[shadow]is[tiddler]then[tc-tiddler-overridden-shadow]] [<currentTiddler>is[system]then[tc-tiddler-system]] [{!!class}] [<currentTiddler>tags[]encodeuricomponent[]addprefix[tc-tagged-]] +[join[ ]] }}}><$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewTemplate]!has[draft.of]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
+<$keyboard key="((focus-next-tiddler))" actions=<<focus-tiddler-actions "after">>>
+<$keyboard key="((focus-previous-tiddler))" actions=<<focus-tiddler-actions "before">>>
+<$keyboard key="((edit-focus-tiddler))" actions="""<$action-sendmessage $message="tm-edit-tiddler"/>""">
+<$keyboard key="((close-focus-tiddler))" actions="""<$action-sendmessage $message="tm-close-tiddler"/>""">
+<$vars storyTiddler=<<currentTiddler>> tiddlerInfoState=<<qualify "$:/state/popup/tiddler-info">>>
+<div data-tiddler-title=<<currentTiddler>> data-tags={{!!tags}} class={{{ tc-tiddler-frame tc-tiddler-view-frame [<currentTiddler>is[tiddler]then[tc-tiddler-exists]] [<currentTiddler>is[missing]!is[shadow]then[tc-tiddler-missing]] [<currentTiddler>is[shadow]then[tc-tiddler-exists tc-tiddler-shadow]] [<currentTiddler>is[shadow]is[tiddler]then[tc-tiddler-overridden-shadow]] [<currentTiddler>is[system]then[tc-tiddler-system]] [{!!class}] [<currentTiddler>tags[]encodeuricomponent[]addprefix[tc-tagged-]] +[join[ ]] }}} tabindex={{$:/config/EditTabIndex}}>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewTemplate]!has[draft.of]]" variable="listItem">
+<$transclude tiddler=<<listItem>>/>
+</$list>
 </div>
 </$vars>
+</$keyboard>
+</$keyboard>
+</$keyboard>
+</$keyboard>
