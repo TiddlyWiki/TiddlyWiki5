@@ -77,6 +77,9 @@ Command.prototype.execute = function() {
 			iconText = iconTiddler.text,
 			iconContent;
 		if(iconType && iconText) {
+			if (iconType === "image/svg+xml") {
+				iconText = iconText.replace("<svg ", "<svg xmlns=\"http://www.w3.org/2000/svg\" ")
+			}
 			iconContent = $tw.utils.makeDataUri(iconText,iconType);
 		}
 		skinnyList.push($tw.utils.extend({},tiddler,{

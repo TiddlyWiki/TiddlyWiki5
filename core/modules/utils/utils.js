@@ -792,7 +792,7 @@ exports.makeDataUri = function(text,type,_canonical_uri) {
 		parts.push(type);
 		parts.push(isBase64 ? ";base64" : "");
 		parts.push(",");
-		parts.push(isBase64 ? text : encodeURIComponent(text));		
+		parts.push(isBase64 ? text : encodeURIComponent(text));
 	}
 	return parts.join("");
 };
