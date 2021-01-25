@@ -1,0 +1,45 @@
+title: $:/core/macros/toolbar
+tags: $:/tags/Macro
+
+\define toolbar-filter-display(tag, prefix:"")
+<$set name="config" filter="[[$prefix$]match[]]" 
+		value="[all[shadows+tiddlers]tag[$tag$]!has[draft.of]]" 
+		emptyValue="[all[shadows+tiddlers]tag[$tag$]!has[draft.of]] :filter[lookup:show[$prefix$]!match[hide]]">
+	<<config>>
+</$set>
+\end
+
+\define toolbar-filter-drop-down(tag, prefix)
+[all[shadows+tiddlers]tag[$tag$]!has[draft.of]] -[all[current]] :filter[lookup:show[$prefix$]match[hide]]
+\end
+
+\define toolbar-drop-down-list(tag, prefix, template:"")
+<$set name="template_transclusion" 
+		filter="[[$template$]!match[]]"
+		value="""<$transclude tiddler="$template$" />""" 
+		emptyValue="""<$transclude />""" >
+	<$vars tv-config-toolbar-icons="yes" 
+			tv-config-toolbar-text="yes" 
+			tv-config-toolbar-class="tc-btn-invisible">
+		<$list filter=<<toolbar-filter-drop-down "$tag$" "$prefix$">> variable="listItem">
+			<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] ">
+				<<template_transclusion>>
+			</$set>
+		</$list>
+	</$vars>
+</$set>
+\end
+
+\define toolbar(tag, prefix:"", template:"")
+\whitespace trim
+<$set name="template_transclusion" 
+		filter="[[$template$]!match[]]"
+		value="""<$transclude tiddler="$template$" />""" 
+		emptyValue="""<$transclude />""" >
+	<$list filter=<<toolbar-filter-display "$tag$" "$prefix$">> >
+		<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
+			<<template_transclusion>>
+		</$set>
+	</$list>
+</$set>
+\end
