@@ -439,3 +439,5 @@ Peter Neumark, @neumark, 2021/01/15
 @leehawk787, 2021/01/21
 
 Yoonchae Lee, @BlueGreenMagick, 2021/01/21
+
+Álvaro González Rincón, @Alzacon, 2021/01/25
