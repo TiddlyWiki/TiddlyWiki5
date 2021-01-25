@@ -421,3 +421,21 @@ Stefano Stoduto, @OmbraDiFenice, 2020/10/03
 Ryan Kramer, @default-kramer, 2020/10/24
 
 Miha Lunar, @SmilyOrg, 2020/11/04
+
+Maki Lam, @makiaea, 2020/12/27
+
+Chris Nicoll, @clutterstack, 2020/12/28
+
+Odin Jorna, @OdinJorna, 2020/12/31
+
+Joe Bordes, @joebordes, 2021/01/02
+
+Glenn Dixon, @dixonge, 2021/01/03
+
+Russ Thomas, @codacodr, 2021/01/03
+
+Peter Neumark, @neumark, 2021/01/15
+
+@leehawk787, 2021/01/21
+
+Yoonchae Lee, @BlueGreenMagick, 2021/01/21

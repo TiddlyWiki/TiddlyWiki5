@@ -1,0 +1,12 @@
+created: 20201228143125000
+modified: 20201228143125000
+tags: OfficialPlugins
+title: Share Plugin
+type: text/vnd.tiddlywiki
+
+<div class="tc-message-box">Do not install this plugin unless you understand exactly what it does</div>
+
+This experimental plugin provides tools to share tiddlers via URLs, comprising:
+
+* The ability to load a group of tiddlers from the browser location hash at startup
+* Wizard and templates to create URLs from group of tiddlers
