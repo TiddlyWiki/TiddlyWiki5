@@ -28,17 +28,11 @@ exports.findNextMatch = function(startPos) {
 	while((nextStart = this.parser.source.indexOf("<<",nextStart)) >= 0) {
 		var nextCall = $tw.utils.parseMacroInvocation(this.parser.source,nextStart);
 		if(nextCall) {
+			var c = this.parser.source.charAt(nextCall.end);
 			// If we didn't need to support IE, we'd just use /(?:\r?\n|$)/ym
-			switch(this.parser.source.charAt(nextCall.end)) {
-				case "\r":
-					if (this.parser.source.charAt(nextCall.end+1) !== "\n") {
-						break;
-					}
-					// no break;
-				case "\n":
-				case "":
-					this.nextCall = nextCall;
-					return nextStart;
+			if ((c === "") || (c === "\n") || ((c === "\r") && this.parser.source.charAt(nextCall.end+1) === "\n")) {
+				this.nextCall = nextCall;
+				return nextStart;
 			}
 		}
 		nextStart += 2;

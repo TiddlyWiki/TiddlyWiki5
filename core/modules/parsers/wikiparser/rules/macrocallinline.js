@@ -25,9 +25,9 @@ exports.init = function(parser) {
 
 exports.findNextMatch = function(startPos) {
 	var nextStart = startPos;
-	while ((nextStart = this.parser.source.indexOf("<<",nextStart)) >= 0) {
+	while((nextStart = this.parser.source.indexOf("<<",nextStart)) >= 0) {
 		this.nextCall = $tw.utils.parseMacroInvocation(this.parser.source,nextStart);
-		if (this.nextCall) {
+		if(this.nextCall) {
 			// Can't this just be "nextStart"?
 			return nextStart;
 		}
