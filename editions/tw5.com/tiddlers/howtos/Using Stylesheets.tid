@@ -1,5 +1,5 @@
 created: 20140305091244145
-modified: 201804111739
+modified: 20210104090402829
 tags: [[Customise TiddlyWiki]]
 title: Using Stylesheets
 type: text/vnd.tiddlywiki
@@ -29,6 +29,8 @@ body.tc-body {
 	background: red;
 }
 ```
+
+You can then use your own [[styles and classes in WikiText|Styles and Classes in WikiText]].
 
 !! Additional Resrouces
 

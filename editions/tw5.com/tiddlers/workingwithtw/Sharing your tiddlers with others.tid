@@ -1,5 +1,5 @@
 created: 20140908163900000
-modified: 20170328142732658
+modified: 20201228143412000
 tags: Learning
 title: Sharing your tiddlers with others
 type: text/vnd.tiddlywiki
@@ -14,3 +14,4 @@ There are a number of ways that you can share [[tiddlers|Tiddlers]] or your whol
 * You can [[share a Dropbox link to your TiddlyWiki|Sharing a TiddlyWiki on Dropbox]]
 * You can [[export tiddlers|How to export tiddlers]] (<<.icon $:/core/images/export-button>>) in a variety of formats including text, static HTML and comma separated values (ie spreadsheet compatible)
 *You can also share tiddlers merely by making your ~TiddlyWiki accessible to others, for example by publishing it online, so that they can [[import tiddlers|Importing Tiddlers]] from it
+* There is an experimental [[sharing plugin|Share Plugin]] that you can use to share tiddlers via the URL location hash.

@@ -7,27 +7,29 @@ type: text/vnd.tiddlywiki
 ! Introduction
 
 <<.from-version "5.1.23">>
-The event catcher widget traps JavaScript events dispatched within its child content, and allows invoking a series of ActionWidgets in response to the events. 
+
+//This is an advanced widget intended for use by those familiar with HTML, CSS and JavaScript handling of DOM events.//
+
+The event catcher widget traps DOM-initiated Javascript events dispatched within its child content, and allows invoking a series of ActionWidgets in response to those events. 
 
 In order for the events to be trapped they must:
 
-* be of one of the types specified as a parameter to the event catcher widget.
-* arise within a DOM node matching the selector specified as a parameter to the widget.
+* be of one of the events specified in the event catcher widget's `events` attribute.
+* arise within a DOM node specified by the widget's `selector` attribute.
+* support event bubbling.
 
-Use of the event catcher widget is beneficial when using large numbers of other trigger widgets such as the ButtonWidget is causing performance problems. The workflow it enables is akin to what is referred to as "event delegation" in JavaScript parlance. 
-
-//This is an advanced widget intended to be used by those familiar with HTML, CSS and JavaScript.//
+Use of the event catcher widget is beneficial when using large numbers of other trigger widgets such as the ButtonWidget is causing performance problems. The workflow it enables is akin to what is referred to as "event delegation" in JavaScript parlance.
 
 ! Content and Attributes
 
 The content of the `<$eventcatcher>` widget is displayed normally.
 
 |!Attribute |!Description |
-|events |Space separated list of JavaScript events to be trapped, for example "click" or "click dblclick" |
+|events |Space separated list of JavaScript events to be trapped, for example "click" or "click dblclick". |
 |selector |A CSS selector. Only events originating inside a DOM node with this selector will be trapped. |
-|actions-* |Action strings to be invoked when a matching event is trapped. Each event is mapped to an action attribute name of the form `actions-"event"` where `event` represents the type of the event. For example: `actions-click` or `actions-dblclick` |
-|class |An optional CSS class name to be assigned to the HTML element |
-|tag |Optional. The html element the widget creates to capture the events, defaults to:<br>» `span` when parsed in inline-mode<br>» `div` when parsed in block-mode |
+|actions-* |Action strings to be invoked when a matching event is trapped. Each event is mapped to an action attribute name of the form <code>actions-<em>event</em></code> where <code><em>event</em></code> represents the type of the event. For example: `actions-click` or `actions-dblclick` |
+|tag |Optional. The HTML element the widget creates to capture the events, defaults to:<br>» `span` when parsed in inline-mode<br>» `div` when parsed in block-mode |
+|class |Optional. A CSS class name (or names) to be assigned to the widget HTML element. |
 
 ! Variables
 
