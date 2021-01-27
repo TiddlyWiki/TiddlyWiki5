@@ -25,10 +25,10 @@ exports.init = function(parser) {
 
 exports.findNextMatch = function(startPos) {
 	var nextStart = startPos;
+	// Try parsing at all possible macrocall openers until we match
 	while((nextStart = this.parser.source.indexOf("<<",nextStart)) >= 0) {
 		this.nextCall = $tw.utils.parseMacroInvocation(this.parser.source,nextStart);
 		if(this.nextCall) {
-			// Can't this just be "nextStart"?
 			return nextStart;
 		}
 		nextStart += 2;
