@@ -54,17 +54,14 @@ exports.parse = function() {
 	// Parse the body if we need to
 	if(!tag.isSelfClosing && $tw.config.htmlVoidElements.indexOf(tag.tag) === -1) {
 			var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">",
-				reEnd = new RegExp("(" + reEndString + ")","mg");
+				reEnd = new RegExp("(" + reEndString + ")","mg"),
+				options = {eatTerminator: true};
 		if(hasLineBreak) {
-			tag.children = this.parser.parseBlocks(reEndString);
+			tag.children = this.parser.parseBlocks(reEndString,options);
 		} else {
-			tag.children = this.parser.parseInlineRun(reEnd);
+			tag.children = this.parser.parseInlineRun(reEnd,options);
 		}
 		reEnd.lastIndex = this.parser.pos;
-		var endMatch = reEnd.exec(this.parser.source);
-		if(endMatch && endMatch.index === this.parser.pos) {
-			this.parser.pos = endMatch.index + endMatch[0].length;
-		}
 	}
 	// Return the tag
 	return [tag];

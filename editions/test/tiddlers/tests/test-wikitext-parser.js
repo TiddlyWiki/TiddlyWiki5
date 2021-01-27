@@ -103,6 +103,12 @@ describe("WikiText parser tests", function() {
 			[ { type : 'element', tag : 'p', children : [ { type : 'element', start : 0, attributes : {  }, tag : 'div', end : 5, isBlock : false, children : [ { type : 'element', start : 5, attributes : { attribute : { start : 9, name : 'attribute', type : 'indirect', textReference : 'TiddlerTitle!!field', end : 43 } }, tag : 'div', end : 44, isBlock : false, children : [ { type : 'text', text : '\n!some heading' } ] } ] } ] } ]
 
 		);
+		// Regression test for issue (#3306)
+		expect(parse("<div><span><span>\n\nSome text</span></span></div>")).toEqual(
+
+			[ { type : 'element', tag : 'p', children : [ { type : 'element', start : 0, attributes : {  }, tag : 'div', end : 5, isBlock : false, children : [ { type : 'element', start : 5, attributes : {  }, tag : 'span', end : 11, isBlock : false, children : [ { type : 'element', start : 11, attributes : {  }, tag : 'span', end : 17, isBlock : true, children : [ { type : 'element', tag : 'p', children : [ { type : 'text', text : 'Some text' } ] } ] } ] } ] } ] } ]
+
+		);
 	});
 
 	it("should parse macro definitions", function() {
