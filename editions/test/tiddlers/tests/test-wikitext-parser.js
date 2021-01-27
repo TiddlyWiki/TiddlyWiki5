@@ -192,6 +192,25 @@ describe("WikiText parser tests", function() {
 		);
 	});
 
+	it("should parse macrocall parameters with '>'", function() {
+		expect(parse("<<john pa>am>>")).toEqual(
+
+			[ { type: 'macrocall', start: 0, params: [ { type: 'macro-parameter', start: 6, value: 'pa>am', end: 12 } ], name: 'john', end: 14, isBlock: true } ]
+
+		);
+		expect(parse("<<john param> >>")).toEqual(
+
+			[ { type: 'macrocall', start: 0, params: [ { type: 'macro-parameter', start: 6, value: 'param>', end: 13 } ], name: 'john', end: 16, isBlock: true } ]
+
+		);
+		expect(parse("<<john param>>>")).toEqual(
+
+			[ { type: 'element', tag: 'p', children: [ { type: 'macrocall', start: 0, params: [ { type: 'macro-parameter', start: 6, value: 'param', end: 12 } ], name: 'john', end: 14 }, { type: 'text', text: '>' } ] } ]
+
+		);
+
+	});
+
 	it("should parse horizontal rules", function() {
 		expect(parse("---Not a rule\n\n----\n\nBetween\n\n---")).toEqual(
 
