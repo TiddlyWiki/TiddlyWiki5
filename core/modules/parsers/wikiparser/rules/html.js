@@ -54,14 +54,13 @@ exports.parse = function() {
 	// Parse the body if we need to
 	if(!tag.isSelfClosing && $tw.config.htmlVoidElements.indexOf(tag.tag) === -1) {
 			var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">",
-				reEnd = new RegExp("(" + reEndString + ")","mg"),
 				options = {eatTerminator: true};
 		if(hasLineBreak) {
 			tag.children = this.parser.parseBlocks(reEndString,options);
 		} else {
+			var reEnd = new RegExp("(" + reEndString + ")","mg");
 			tag.children = this.parser.parseInlineRun(reEnd,options);
 		}
-		reEnd.lastIndex = this.parser.pos;
 	}
 	// Return the tag
 	return [tag];
