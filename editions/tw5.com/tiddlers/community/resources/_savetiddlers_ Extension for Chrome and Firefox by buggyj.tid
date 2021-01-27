@@ -5,8 +5,8 @@ created: 20171109171935039
 delivery: Browser Extension
 description: Browser extension for Chrome and Firefox
 method: save
-modified: 20200507105459753
-tags: Chrome Firefox Saving Resources plugins
+modified: 20210106151027189
+tags: Chrome Firefox Saving [[Other Resources]] plugins
 title: "savetiddlers" Extension for Chrome and Firefox by buggyj
 type: text/vnd.tiddlywiki
 url: https://github.com/buggyj/savetiddlers

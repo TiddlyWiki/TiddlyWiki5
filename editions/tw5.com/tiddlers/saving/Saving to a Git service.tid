@@ -15,7 +15,7 @@ Saving to a Git service is configured in the [[$:/ControlPanel]] in the ''Git Se
 
 * ''Type'' - (mandatory) the type of the service (e.g. GitHub, GitLab)
 * ''Username'' - (mandatory) the username for the Git service account used for saving changes
-* ''Password'' - (mandatory) the password, OAUTH token or personal access token for the specified account. Note that GitHub permits [[several different mechanisms|https://developer.github.com/v3/#authentication]] for authentication
+* ''Password'' - (mandatory) the OAUTH token or personal access token for the specified account. Note that GitHub deprecated password authetication, permitted authentication methods are shown in the[[API documentation|https://developer.github.com/v3/#authentication]].
 * ''Repository'' - (mandatory) the name of the Git repository. Both the owner name and the repository name must be specified. For example `Jermolene/TiddlyWiki5`
 * ''Branch'' - (optional) the name of the branch to be used within the Git repository. Defaults to `main` (~GitHub) or `master` (~GitLab)"
 * ''Path'' - (optional) the path to the target file. Defaults to `/`
@@ -23,4 +23,4 @@ Saving to a Git service is configured in the [[$:/ControlPanel]] in the ''Git Se
 
 Notes
 
-* The Git service password is stored persistently in browser local storage. Be sure to clear the password if using a shared machine. Using a [[personal access token|]] for authentication offers an extra layer of security: if the access token is accidentally exposed it can be revoked without needing to reset the account password
+* The Git service token or password is stored persistently in browser local storage. Be sure to clear the password if using a shared machine. Using a personal access token for authentication offers an extra layer of security: if the access token is accidentally exposed it can be revoked without needing to reset the account password
