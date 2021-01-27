@@ -53,13 +53,12 @@ exports.parse = function() {
 	tag.isBlock = this.is.block || hasLineBreak;
 	// Parse the body if we need to
 	if(!tag.isSelfClosing && $tw.config.htmlVoidElements.indexOf(tag.tag) === -1) {
-			var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">",
-				options = {eatTerminator: true};
+		var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">";
 		if(hasLineBreak) {
-			tag.children = this.parser.parseBlocks(reEndString,options);
+			tag.children = this.parser.parseBlocks(reEndString);
 		} else {
 			var reEnd = new RegExp("(" + reEndString + ")","mg");
-			tag.children = this.parser.parseInlineRun(reEnd,options);
+			tag.children = this.parser.parseInlineRun(reEnd,{eatTerminator: true});
 		}
 	}
 	// Return the tag
