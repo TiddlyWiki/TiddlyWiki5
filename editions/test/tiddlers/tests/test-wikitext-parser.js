@@ -192,7 +192,7 @@ describe("WikiText parser tests", function() {
 		);
 	});
 
-	it("should parse macrocall parameters with '>'", function() {
+	it("should parse tricky macrocall parameters", function() {
 		expect(parse("<<john pa>am>>")).toEqual(
 
 			[ { type: 'macrocall', start: 0, params: [ { type: 'macro-parameter', start: 6, value: 'pa>am', end: 12 } ], name: 'john', end: 14, isBlock: true } ]
@@ -206,6 +206,12 @@ describe("WikiText parser tests", function() {
 		expect(parse("<<john param>>>")).toEqual(
 
 			[ { type: 'element', tag: 'p', children: [ { type: 'macrocall', start: 0, params: [ { type: 'macro-parameter', start: 6, value: 'param', end: 12 } ], name: 'john', end: 14 }, { type: 'text', text: '>' } ] } ]
+
+		);
+		// equals signs should be allowed
+		expect(parse("<<john var>=4 >>")).toEqual(
+
+			[ { type: 'macrocall', start: 0, params: [ { type: 'macro-parameter', start: 6, value: 'var>=4', end: 13 } ], name: 'john', end: 16, isBlock: true } ]
 
 		);
 
