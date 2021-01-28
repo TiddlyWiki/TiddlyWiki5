@@ -117,7 +117,7 @@ FocusManager.prototype.findChildWidgetWithDomNodes = function(widget,index) {
 	return null;
 };
 
-FocusManager.prototype.findWidgetByFootprint = function(footprint,startingWidget,widgetInfo) {
+FocusManager.prototype.findWidgetByRenderTreeFootprint = function(footprint,startingWidget) {
 	var index,
 		count = 0,
 		widget = startingWidget,
@@ -133,11 +133,18 @@ FocusManager.prototype.findWidgetByFootprint = function(footprint,startingWidget
 		}
 		count++;
 	}
-	if(widget === undefined) {
-		widget = this.findWidgetByQualifier(widgetInfo.qualifier,startingWidget);
+	if(widget) {
+		return widget;
+	} else if(lastFoundWidget) {
+		return lastFoundWidget;
 	}
+	return null;
+}
+
+FocusManager.prototype.findWidgetByFootprint = function(footprint,startingWidget,widgetInfo) {
+	var widget = this.findWidgetByQualifier(widgetInfo.qualifier,startingWidget);
 	if(!widget) {
-		widget = lastFoundWidget;
+		widget = this.findWidgetByRenderTreeFootprint(footprint,startingWidget);
 	}
 	if(widget && (widget.domNodes.length === 0 || (widget.domNodes[widgetInfo.index] && widget.domNodes[widgetInfo.index].nodeType === Node.TEXT_NODE) ||
 		(widget.domNodes[widgetInfo.index] && widget.domNodes[widgetInfo.index].getAttribute("hidden") === "true"))) {
