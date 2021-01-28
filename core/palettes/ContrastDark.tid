@@ -4,11 +4,11 @@ description: High contrast and unambiguous (light version)
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 
-alert-background: #f00
+alert-background: #ff0000
 alert-border: <<colour background>>
 alert-highlight: <<colour foreground>>
-alert-muted-foreground: #800
-background: #fff
+alert-muted-foreground: #880000
+background: #ffffff
 blockquote-bar: <<colour muted-foreground>>
 button-background: <<colour background>>
 button-foreground: <<colour foreground>>
@@ -16,8 +16,8 @@ button-border: <<colour foreground>>
 code-background: <<colour background>>
 code-border: <<colour foreground>>
 code-foreground: <<colour foreground>>
-dirty-indicator: #f00
-download-background: #080
+dirty-indicator: #ff0000
+download-background: #008800
 download-foreground: <<colour background>>
 dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
@@ -30,9 +30,9 @@ external-link-background-hover: inherit
 external-link-background-visited: inherit
 external-link-background: inherit
 external-link-foreground-hover: inherit
-external-link-foreground-visited: #00a
-external-link-foreground: #00e
-foreground: #000
+external-link-foreground-visited: #0000aa
+external-link-foreground: #0000ee
+foreground: #000000
 message-background: <<colour foreground>>
 message-border: <<colour background>>
 message-foreground: <<colour background>>
@@ -48,7 +48,7 @@ notification-border: <<colour foreground>>
 page-background: <<colour background>>
 pre-background: <<colour background>>
 pre-border: <<colour foreground>>
-primary: #00f
+primary: #0000ff
 select-tag-background:
 select-tag-foreground:
 sidebar-button-foreground: <<colour foreground>>
@@ -79,12 +79,12 @@ tab-foreground: <<colour background>>
 table-border: #dddddd
 table-footer-background: #a8a8a8
 table-header-background: #f0f0f0
-tag-background: #000
-tag-foreground: #fff
+tag-background: #000000
+tag-foreground: #ffffff
 tiddler-background: <<colour background>>
 tiddler-border: <<colour foreground>>
-tiddler-controls-foreground-hover: #ddd
-tiddler-controls-foreground-selected: #fdd
+tiddler-controls-foreground-hover: #dddddd
+tiddler-controls-foreground-selected: #ffdddd
 tiddler-controls-foreground: <<colour foreground>>
 tiddler-editor-background: <<colour background>>
 tiddler-editor-border-image: <<colour foreground>>
@@ -98,14 +98,14 @@ tiddler-link-background: <<colour background>>
 tiddler-link-foreground: <<colour primary>>
 tiddler-subtitle-foreground: <<colour foreground>>
 tiddler-title-foreground: <<colour foreground>>
-toolbar-new-button: 
-toolbar-options-button: 
-toolbar-save-button: 
-toolbar-info-button: 
-toolbar-edit-button: 
-toolbar-close-button: 
-toolbar-delete-button: 
-toolbar-cancel-button: 
-toolbar-done-button: 
+toolbar-new-button:
+toolbar-options-button:
+toolbar-save-button:
+toolbar-info-button:
+toolbar-edit-button:
+toolbar-close-button:
+toolbar-delete-button:
+toolbar-cancel-button:
+toolbar-done-button:
 untagged-background: <<colour foreground>>
 very-muted-foreground: #888888

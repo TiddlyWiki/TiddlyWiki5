@@ -12,9 +12,9 @@ alert-highlight: #881122
 alert-muted-foreground: #b99e2f
 background: #ffffff
 blockquote-bar: <<colour muted-foreground>>
-button-background: 
-button-foreground: 
-button-border: 
+button-background:
+button-foreground:
+button-border:
 code-background: #f7f7f9
 code-border: #e1e1e8
 code-foreground: #dd1144
@@ -25,7 +25,7 @@ dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
 dropdown-background: <<colour background>>
 dropdown-border: <<colour muted-foreground>>
-dropdown-tab-background-selected: #fff
+dropdown-tab-background-selected: #ffffff
 dropdown-tab-background: #ececec
 dropzone-background: rgba(0,200,0,0.7)
 external-link-background-hover: inherit
@@ -44,7 +44,7 @@ modal-border: #999999
 modal-footer-background: #f5f5f5
 modal-footer-border: #dddddd
 modal-header-border: #eeeeee
-muted-foreground: #ddd
+muted-foreground: #dddddd
 notification-background: #ffffdd
 notification-border: #999999
 page-background: #336438
@@ -81,7 +81,7 @@ tab-foreground: #666666
 table-border: #dddddd
 table-footer-background: #a8a8a8
 table-header-background: #f0f0f0
-tag-background: #ec6
+tag-background: #eecc66
 tag-foreground: #ffffff
 tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>
@@ -100,14 +100,14 @@ tiddler-link-background: <<colour background>>
 tiddler-link-foreground: <<colour primary>>
 tiddler-subtitle-foreground: #c0c0c0
 tiddler-title-foreground: #182955
-toolbar-new-button: 
-toolbar-options-button: 
-toolbar-save-button: 
-toolbar-info-button: 
-toolbar-edit-button: 
-toolbar-close-button: 
-toolbar-delete-button: 
-toolbar-cancel-button: 
-toolbar-done-button: 
+toolbar-new-button:
+toolbar-options-button:
+toolbar-save-button:
+toolbar-info-button:
+toolbar-edit-button:
+toolbar-close-button:
+toolbar-delete-button:
+toolbar-cancel-button:
+toolbar-done-button:
 untagged-background: #999999
 very-muted-foreground: #888888

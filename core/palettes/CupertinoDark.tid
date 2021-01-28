@@ -98,15 +98,15 @@ tiddler-link-background: <<colour background>>
 tiddler-link-foreground: <<colour primary>>
 tiddler-subtitle-foreground: <<colour muted-foreground>>
 tiddler-title-foreground: #FFFFFF
-toolbar-new-button: 
-toolbar-options-button: 
-toolbar-save-button: 
-toolbar-info-button: 
-toolbar-edit-button: 
-toolbar-close-button: 
-toolbar-delete-button: 
-toolbar-cancel-button: 
-toolbar-done-button: 
+toolbar-new-button:
+toolbar-options-button:
+toolbar-save-button:
+toolbar-info-button:
+toolbar-edit-button:
+toolbar-close-button:
+toolbar-delete-button:
+toolbar-cancel-button:
+toolbar-done-button:
 untagged-background: <<colour very-muted-foreground>>
 very-muted-foreground: #464646
 selection-background: #3F638B

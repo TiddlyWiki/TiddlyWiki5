@@ -15,7 +15,7 @@ button-foreground: inherit
 button-border: <<colour tag-background>>
 code-background: #ececec
 code-border: #ececec
-code-foreground: 
+code-foreground:
 dirty-indicator: #c80000
 download-background: <<colour primary>>
 download-foreground: <<colour background>>
@@ -31,7 +31,7 @@ external-link-background-visited: transparent
 external-link-background: transparent
 external-link-foreground-hover: 
 external-link-foreground-visited: 
-external-link-foreground: 
+external-link-foreground:
 foreground: rgba(0, 0, 0, 0.87)
 message-background: <<colour background>>
 message-border: <<colour very-muted-foreground>>
@@ -98,14 +98,14 @@ tiddler-link-background: <<colour background>>
 tiddler-link-foreground: <<colour primary>>
 tiddler-subtitle-foreground: <<colour muted-foreground>>
 tiddler-title-foreground: #000000
-toolbar-new-button: 
-toolbar-options-button: 
-toolbar-save-button: 
-toolbar-info-button: 
-toolbar-edit-button: 
-toolbar-close-button: 
-toolbar-delete-button: 
-toolbar-cancel-button: 
-toolbar-done-button: 
+toolbar-new-button:
+toolbar-options-button:
+toolbar-save-button:
+toolbar-info-button:
+toolbar-edit-button:
+toolbar-close-button:
+toolbar-delete-button:
+toolbar-cancel-button:
+toolbar-done-button:
 untagged-background: <<colour very-muted-foreground>>
 very-muted-foreground: rgba(0, 0, 0, 0.12)

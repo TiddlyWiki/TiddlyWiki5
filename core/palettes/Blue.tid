@@ -8,7 +8,7 @@ alert-background: #ffe476
 alert-border: #b99e2f
 alert-highlight: #881122
 alert-muted-foreground: #b99e2f
-background: #fff
+background: #ffffff
 blockquote-bar: <<colour muted-foreground>>
 button-background:
 button-foreground:
@@ -23,7 +23,7 @@ dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
 dropdown-background: <<colour background>>
 dropdown-border: <<colour muted-foreground>>
-dropdown-tab-background-selected: #fff
+dropdown-tab-background-selected: #ffffff
 dropdown-tab-background: #ececec
 dropzone-background: rgba(0,200,0,0.7)
 external-link-background-hover: inherit
@@ -80,7 +80,7 @@ table-border: #dddddd
 table-footer-background: #a8a8a8
 table-header-background: #f0f0f0
 tag-background: #eeeeff
-tag-foreground: #000
+tag-foreground: #000000
 tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>
 tiddler-controls-foreground-hover: #666666

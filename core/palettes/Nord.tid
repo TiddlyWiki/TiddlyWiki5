@@ -17,11 +17,11 @@ code-border: #2E3440
 code-foreground: #BF616A
 diff-delete-background: #BF616A
 diff-delete-foreground: <<colour foreground>>
-diff-equal-background: 
+diff-equal-background:
 diff-equal-foreground: <<colour foreground>>
 diff-insert-background: #A3BE8C
 diff-insert-foreground: <<colour foreground>>
-diff-invisible-background: 
+diff-invisible-background:
 diff-invisible-foreground: <<colour muted-foreground>>
 dirty-indicator: #BF616A
 download-background: #A3BE8C
@@ -94,7 +94,7 @@ tag-background: #A3BE8C
 tag-foreground: #4C566A
 tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>
-tiddler-controls-foreground-hover: 
+tiddler-controls-foreground-hover:
 tiddler-controls-foreground-selected: #EBCB8B
 tiddler-controls-foreground: #4C566A
 tiddler-editor-background: #2e3440
@@ -109,15 +109,15 @@ tiddler-link-background: <<colour background>>
 tiddler-link-foreground: <<colour primary>>
 tiddler-subtitle-foreground: #4C566A
 tiddler-title-foreground: #81A1C1
-toolbar-new-button: 
-toolbar-options-button: 
-toolbar-save-button: 
-toolbar-info-button: 
-toolbar-edit-button: 
-toolbar-close-button: 
-toolbar-delete-button: 
-toolbar-cancel-button: 
-toolbar-done-button: 
+toolbar-new-button:
+toolbar-options-button:
+toolbar-save-button:
+toolbar-info-button:
+toolbar-edit-button:
+toolbar-close-button:
+toolbar-delete-button:
+toolbar-cancel-button:
+toolbar-done-button:
 untagged-background: #2d3038
 very-muted-foreground: #2d3038
 wikilist-background: <<colour page-background>>

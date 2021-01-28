@@ -107,14 +107,14 @@ tiddler-link-background: rgb(38, 38, 38)
 tiddler-link-foreground: rgb(204, 204, 255)
 tiddler-subtitle-foreground: rgb(255, 255, 255)
 tiddler-title-foreground: rgb(255, 192, 76)
-toolbar-cancel-button: 
-toolbar-close-button: 
-toolbar-delete-button: 
-toolbar-done-button: 
-toolbar-edit-button: 
-toolbar-info-button: 
-toolbar-new-button: 
-toolbar-options-button: 
-toolbar-save-button: 
+toolbar-cancel-button:
+toolbar-close-button:
+toolbar-delete-button:
+toolbar-done-button:
+toolbar-edit-button:
+toolbar-info-button:
+toolbar-new-button:
+toolbar-options-button:
+toolbar-save-button:
 untagged-background: rgb(255, 255, 255)
 very-muted-foreground: rgba(240, 196, 117, 0.7)

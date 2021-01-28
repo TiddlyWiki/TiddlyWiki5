@@ -18,11 +18,11 @@ code-border: #e1e1e8
 code-foreground: #dd1144
 diff-delete-background: #ffc9c9
 diff-delete-foreground: <<colour foreground>>
-diff-equal-background: 
+diff-equal-background:
 diff-equal-foreground: <<colour foreground>>
 diff-insert-background: #aaefad
 diff-insert-foreground: <<colour foreground>>
-diff-invisible-background: 
+diff-invisible-background:
 diff-invisible-foreground: <<colour muted-foreground>>
 dirty-indicator: #ff0000
 download-background: #34c734
@@ -31,7 +31,7 @@ dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
 dropdown-background: <<colour background>>
 dropdown-border: <<colour muted-foreground>>
-dropdown-tab-background-selected: #fff
+dropdown-tab-background-selected: #ffffff
 dropdown-tab-background: #ececec
 dropzone-background: rgba(0,200,0,0.7)
 external-link-background-hover: inherit
@@ -50,7 +50,7 @@ modal-border: #999999
 modal-footer-background: #f5f5f5
 modal-footer-border: #dddddd
 modal-header-border: #eeeeee
-muted-foreground: #bbb
+muted-foreground: #bbbbbb
 notification-background: #ffffdd
 notification-border: #999999
 page-background: #f4f4f4
@@ -89,7 +89,7 @@ tab-foreground: #666666
 table-border: #dddddd
 table-footer-background: #a8a8a8
 table-header-background: #f0f0f0
-tag-background: #ec6
+tag-background: #eecc66
 tag-foreground: #ffffff
 tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>
@@ -120,19 +120,19 @@ toolbar-done-button:
 untagged-background: #999999
 very-muted-foreground: #888888
 wikilist-background: #e5e5e5
-wikilist-item: #fff
-wikilist-info: #000
-wikilist-title: #666
+wikilist-item: #ffffff
+wikilist-info: #000000
+wikilist-title: #666666
 wikilist-title-svg: <<colour wikilist-title>>
-wikilist-url: #aaa
+wikilist-url: #aaaaaa
 wikilist-button-open: #4fb82b
-wikilist-button-open-hover: green
+wikilist-button-open-hover: #008000
 wikilist-button-reveal: #5778d8
-wikilist-button-reveal-hover: blue
+wikilist-button-reveal-hover: #0000ff
 wikilist-button-remove: #d85778
-wikilist-button-remove-hover: red
+wikilist-button-remove-hover: #ff0000
 wikilist-toolbar-background: #d3d3d3
-wikilist-toolbar-foreground: #888
+wikilist-toolbar-foreground: #888888
 wikilist-droplink-dragover: rgba(255,192,192,0.5)
 wikilist-button-background: #acacac
-wikilist-button-foreground: #000
+wikilist-button-foreground: #000000
