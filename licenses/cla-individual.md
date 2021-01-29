@@ -442,4 +442,6 @@ Daniel Goß, @FlashSystems, 2021/01/19
 
 Yoonchae Lee, @BlueGreenMagick, 2021/01/21
 
+Dyllon Gagnier, @slaymaker1907, 2021/01/24
+
 J. Wilhelm, @jeremyredhead, 2021/01/27
