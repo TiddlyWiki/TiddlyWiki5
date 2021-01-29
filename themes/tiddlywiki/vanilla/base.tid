@@ -420,6 +420,10 @@ a.tc-tiddlylink-external:hover {
 	background-color: <<colour page-background>>;
 }
 
+.tc-page-container > .tc-dropzone {
+	min-height: 100vh;
+}
+
 .tc-dropzone {
 	position: relative;
 }
