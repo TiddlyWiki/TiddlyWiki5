@@ -150,10 +150,10 @@ FocusManager.prototype.findWidgetByFootprint = function(footprint,startingWidget
 		(widget.domNodes[widgetInfo.index] && widget.domNodes[widgetInfo.index].getAttribute("hidden") === "true"))) {
 		widget = this.findParentWidgetWithDomNodes(widget,widgetInfo.index);
 	}
-	while(widget && widget.domNodes[widgetInfo.index] && (widget.domNodes[widgetInfo.index].classList.contains("tc-reveal") || widget.domNodes[widgetInfo.index].classList.contains("tc-keyboard"))) {
+	while(widget && widget.domNodes[widgetInfo.index] && widget.domNodes[widgetInfo.index].classList && (widget.domNodes[widgetInfo.index].classList.contains("tc-reveal") || widget.domNodes[widgetInfo.index].classList.contains("tc-keyboard"))) {
 		widget = this.findChildWidgetWithDomNodes(widget,widgetInfo.widgetIndex);
 	}
-	while(widget && !widget.domNodes[widgetInfo.index] && widget.domNodes[0] && (widget.domNodes[0].classList.contains("tc-reveal") || widget.domNodes[0].classList.contains("tc-keyboard"))) {
+	while(widget && !widget.domNodes[widgetInfo.index] && widget.domNodes[0] && widget.domNodes[0].classList && (widget.domNodes[0].classList.contains("tc-reveal") || widget.domNodes[0].classList.contains("tc-keyboard"))) {
 		widget = this.findChildWidgetWithDomNodes(widget,widgetInfo.widgetIndex);
 	}
 	return widget;
