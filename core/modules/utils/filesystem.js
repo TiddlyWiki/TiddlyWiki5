@@ -451,8 +451,8 @@ Save a tiddler to a file described by the fileInfo:
 	hasMetaFile: true if the file also has a companion .meta file
 */
 exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
-	$tw.utils.createDirectory(path.dirname(fileInfo.filepath));
 	try {
+		$tw.utils.createDirectory(path.dirname(fileInfo.filepath));
 		if(fileInfo.hasMetaFile) {
 			// Save the tiddler as a separate body and meta file
 			var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
