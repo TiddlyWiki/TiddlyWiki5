@@ -28,10 +28,22 @@ UploadSaver.prototype.save = function(text,method,callback) {
 		password = $tw.utils.getPassword("upload"),
 		uploadDir = this.wiki.getTextReference("$:/UploadDir") || ".",
 		uploadFilename = this.wiki.getTextReference("$:/UploadFilename") || "index.html",
+		uploadWithUrlOnly = this.wiki.getTextReference("$:/UploadWithUrlOnly") || "no",
 		url = this.wiki.getTextReference("$:/UploadURL");
 	// Bail out if we don't have the bits we need
-	if(!username || username.toString().trim() === "" || !password || password.toString().trim() === "") {
-		return false;
+	if (uploadWithUrlOnly === "yes") {
+		// The url is good enough. No need for a username and password.
+		// Assume the server uses some other kind of auth mechanism.
+		if(!url || url.toString().trim() === "") {
+			return false;
+		}
+	}
+	else {
+		// Require username and password to be present.
+		// Assume the server uses the standard UploadPlugin username/password.
+		if(!username || username.toString().trim() === "" || !password || password.toString().trim() === "") {
+			return false;
+		}
 	}
 	// Construct the url if not provided
 	if(!url) {
