@@ -90,7 +90,7 @@ describe("HTML tag new parser tests", function() {
 			{ type : 'macro-parameter', start : 0, value : 'one two three', end : 17 }
 		);
 		expect($tw.utils.parseMacroParameter("myparam>",0)).toEqual(
-			{ type : 'macro-parameter', start : 0, value : 'myparam', end : 7 }
+			{ type : 'macro-parameter', start : 0, value : 'myparam>', end : 8 }
 		);
 	});
 

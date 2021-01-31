@@ -1,9 +1,10 @@
 created: 20161226165024380
 creator: Thomas Elmiger
-modified: 20161226193911129
+modified: 20210106151027097
 modifier: Thomas Elmiger
-tags: Resources
+tags: [[Other Resources]]
 title: "Hacks" by Thomas Elmiger
+type: text/vnd.tiddlywiki
 url: http://tid.li/tw5/hacks.html
 
 A collection of helpers by Thomas Elmiger, among them a ''tweet button'' macro, a ''text-stretch'' solution, a ''snippet extraction'' macro and a tiddler that installs a ''scroll-to-top button'' via drag-and-drop.
