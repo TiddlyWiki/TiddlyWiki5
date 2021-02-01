@@ -20,7 +20,7 @@ dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
 dropdown-background: <<colour background>>
 dropdown-border: <<colour muted-foreground>>
-dropdown-tab-background-selected: #fff
+dropdown-tab-background-selected: #ffffff
 dropdown-tab-background: #ececec
 dropzone-background: rgba(0,200,0,0.7)
 external-link-background-hover: inherit
@@ -39,7 +39,7 @@ modal-border: #999999
 modal-footer-background: #f5f5f5
 modal-footer-border: #dddddd
 modal-header-border: #eeeeee
-muted-foreground: #bbb
+muted-foreground: #bbbbbb
 notification-background: #ffffdd
 notification-border: #999999
 page-background: #b9ceb8
@@ -92,14 +92,14 @@ tiddler-link-background: <<colour background>>
 tiddler-link-foreground: <<colour primary>>
 tiddler-subtitle-foreground: #c0c0c0
 tiddler-title-foreground: #182955
-toolbar-new-button: 
-toolbar-options-button: 
-toolbar-save-button: 
-toolbar-info-button: 
-toolbar-edit-button: 
-toolbar-close-button: 
-toolbar-delete-button: 
-toolbar-cancel-button: 
-toolbar-done-button: 
+toolbar-new-button:
+toolbar-options-button:
+toolbar-save-button:
+toolbar-info-button:
+toolbar-edit-button:
+toolbar-close-button:
+toolbar-delete-button:
+toolbar-cancel-button:
+toolbar-done-button:
 untagged-background: #999999
 very-muted-foreground: #888888
