@@ -104,7 +104,9 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 		</div>
 		<div class="tc-plugin-info-chunk tc-plugin-info-icon">
 			<$list filter="[<assetInfo>has[icon]]" emptyMessage="""<$transclude tiddler="$:/core/images/plugin-generic-$type$"/>""">
-				<img src={{$(assetInfo)$!!icon}}/>
+				<$list filter="[<assetInfo>get[icon-type]match[text/vnd.tiddlywiki]]" emptyMessage="""<img src={{$(assetInfo)$!!icon}}/>""" variable="ignore">
+					{{$(assetInfo)$!!icon}}
+				</$list>
 			</$list>
 		</div>
 		<div class="tc-plugin-info-chunk tc-plugin-info-description">

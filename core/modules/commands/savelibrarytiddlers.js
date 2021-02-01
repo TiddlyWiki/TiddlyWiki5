@@ -73,20 +73,22 @@ Command.prototype.execute = function() {
 			readmeContent = (pluginTiddlers.tiddlers[title + "/readme"] || {}).text,
 			doesRequireReload = !!self.commander.wiki.doesPluginInfoRequireReload(pluginTiddlers),
 			iconTiddler = pluginTiddlers.tiddlers[title + "/icon"] || {},
-			iconType = iconTiddler.type,
+			iconType = iconTiddler.type || "text/vnd.tiddlywiki",
 			iconText = iconTiddler.text,
 			iconContent;
-		if(iconType && iconText) {
-			if (iconType === "image/svg+xml") {
-				iconText = iconText.replace("<svg ", "<svg xmlns=\"http://www.w3.org/2000/svg\" ")
-			}
+		if (iconType === "text/vnd.tiddlywiki") {
+			// It can be transcluded
+			iconContent = iconText;
+		}
+		else if(iconType && iconText) {
 			iconContent = $tw.utils.makeDataUri(iconText,iconType);
 		}
 		skinnyList.push($tw.utils.extend({},tiddler,{
 			text: undefined,
 			readme: readmeContent,
 			"requires-reload": doesRequireReload ? "yes" : "no",
-			icon: iconContent
+			icon: iconContent,
+			"icon-type": iconType
 		}));
 	});
 	// Save the catalogue tiddler
