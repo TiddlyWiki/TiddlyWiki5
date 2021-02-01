@@ -3,5 +3,5 @@
 	"name": "KaTeX",
 	"description": "KaTeX library for mathematical typography",
 	"list": "readme usage",
-	"library-version": "v0.10.2"
+	"library-version": "v0.12.0"
 }
