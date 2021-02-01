@@ -172,7 +172,7 @@ Return an array of the tiddler titles that are subjected to syncing
 */
 Syncer.prototype.getTiddlerRevision = function(title) {
 	if(this.syncadaptor && this.syncadaptor.getTiddlerRevision) {
-		return this.syncadaptor.getTiddlerRevision(title, {wiki: this.wiki});
+		return this.syncadaptor.getTiddlerRevision(title);
 	} else {
 		return this.wiki.getTiddler(title).fields.revision;
 	}
@@ -257,7 +257,7 @@ Syncer.prototype.storeTiddler = function(tiddlerFields, options) {
 	// Save the tiddler revision and changeCount details
 	this.tiddlerInfo[tiddlerFields.title] = {
 		revision: this.getTiddlerRevision(tiddlerFields.title),
-		adaptorInfo: options.adaptorInfo || this.syncadaptor && this.syncadaptor.getTiddlerInfo(tiddler, {wiki: this.wiki}),
+		adaptorInfo: options.adaptorInfo || this.syncadaptor && this.syncadaptor.getTiddlerInfo(tiddler),
 		changeCount: this.wiki.getChangeCount(tiddlerFields.title)
 	};
 };
