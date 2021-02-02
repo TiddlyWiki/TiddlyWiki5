@@ -75,7 +75,7 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 /*
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
-FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
+FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 	var self = this;
 	var syncerInfo = options.tiddlerInfo || {};
 	this.getTiddlerFileInfo(tiddler,function(err,fileInfo) {
