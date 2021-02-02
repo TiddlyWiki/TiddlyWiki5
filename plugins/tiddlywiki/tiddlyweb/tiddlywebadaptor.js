@@ -207,7 +207,7 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 				// Invoke the callback
 				callback(null,{
 					bag: etagInfo.bag
-				}, etagInfo.revision);				
+				},etagInfo.revision);				
 			}
 		}
 	});
