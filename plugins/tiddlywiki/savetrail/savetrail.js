@@ -115,7 +115,7 @@ SaveTrailSyncAdaptor.prototype.saveTiddler = function(tiddler,options,callback) 
 			saveTiddlerFile(tiddler,{reason: "modified"});
 		}
 	}
-	callback(null);
+	callback(null,null);
 };
 
 /*
@@ -147,7 +147,7 @@ SaveTrailSyncAdaptor.prototype.deleteTiddler = function(title,options,callback) 
 		options = optionsArg;
 	}
 	options = options || {};
-	callback(null);
+	callback(null,null);
 };
 
 function saveTiddlerFile(tiddler,options) {
