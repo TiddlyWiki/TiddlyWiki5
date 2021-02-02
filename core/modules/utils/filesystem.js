@@ -415,7 +415,7 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 	if(fileInfo.hasMetaFile) {
 		// Save the tiddler as a separate body and meta file
 		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
-		fs.writeFile(fileInfo.filepath,tiddler.fields.text,typeInfo.encoding,function(err) {
+		fs.writeFile(fileInfo.filepath,tiddler.fields.text || "",typeInfo.encoding,function(err) {
 			if(err) {
 				return callback(err);
 			}
@@ -438,19 +438,24 @@ Save a tiddler to a file described by the fileInfo:
 	hasMetaFile: true if the file also has a companion .meta file
 */
 exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
-	$tw.utils.createDirectory(path.dirname(fileInfo.filepath));
-	if(fileInfo.hasMetaFile) {
-		// Save the tiddler as a separate body and meta file
-		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
-		fs.writeFileSync(fileInfo.filepath,tiddler.fields.text,typeInfo.encoding);
-		fs.writeFileSync(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8");
-	} else {
-		// Save the tiddler as a self contained templated file
-		if(fileInfo.type === "application/x-tiddler") {
-			fs.writeFileSync(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8");
+	try {
+		$tw.utils.createDirectory(path.dirname(fileInfo.filepath));
+		if(fileInfo.hasMetaFile) {
+			// Save the tiddler as a separate body and meta file
+			var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
+			fs.writeFileSync(fileInfo.filepath,tiddler.fields.text || "",typeInfo.encoding);
+			fs.writeFileSync(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8");
 		} else {
-			fs.writeFileSync(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8");
+			// Save the tiddler as a self contained templated file
+			if(fileInfo.type === "application/x-tiddler") {
+				fs.writeFileSync(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8");
+			} else {
+				fs.writeFileSync(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8");
+			}
 		}
+		return fileInfo;
+	} catch (err) {
+		throw err;
 	}
 };
 
