@@ -144,7 +144,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 			return callback(null,null);
 		});
 	} else {
-		callback(null,fileInfo);
+		callback(null,null);
 	}
 };
 
