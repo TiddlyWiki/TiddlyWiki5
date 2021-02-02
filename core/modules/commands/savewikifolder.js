@@ -162,7 +162,12 @@ WikiFolderMaker.prototype.saveTiddler = function(directory,tiddler) {
 		directory: path.resolve(this.wikiFolderPath,directory),
 		wiki: this.wiki
 	});
-	$tw.utils.saveTiddlerToFileSync(tiddler,fileInfo);
+	try {
+		$tw.utils.saveTiddlerToFileSync(tiddler,fileInfo);
+	} catch (err) {
+		console.log("SaveWikiFolder: Error saving file '" + fileInfo.filepath + "', tiddler: '" + tiddler.fields.title);
+		console.error(err);
+	}
 };
 
 WikiFolderMaker.prototype.saveJSONFile = function(filename,json) {
