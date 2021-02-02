@@ -182,7 +182,16 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 /*
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
-TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
+TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
+	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// standard of callback as last argument. This catches the previous signature:
+	if(typeof callback !== "function" && typeof options === "function"){
+		// First stash any non-function third argument, then swap
+		var optionsArg = callback;
+		callback = options;
+		options = optionsArg;
+	}
+	options = options || {};
 	var self = this;
 	if(this.isReadOnly) {
 		return callback(null,options.tiddlerInfo.adaptorInfo);
@@ -216,7 +225,16 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 /*
 Load a tiddler and invoke the callback with (err,tiddlerFields)
 */
-TiddlyWebAdaptor.prototype.loadTiddler = function(title,callback) {
+TiddlyWebAdaptor.prototype.loadTiddler = function(title,options,callback) {
+	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// standard of callback as last argument. This catches the previous signature:
+	if(typeof callback !== "function" && typeof options === "function"){
+		// First stash any non-function third argument, then swap
+		var optionsArg = callback;
+		callback = options;
+		options = optionsArg;
+	}
+	options = options || {};
 	var self = this;
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(title),
@@ -235,7 +253,16 @@ Delete a tiddler and invoke the callback with (err)
 options include:
 tiddlerInfo: the syncer's tiddlerInfo for this tiddler
 */
-TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
+TiddlyWebAdaptor.prototype.deleteTiddler = function(title,options,callback) {
+	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// standard of callback as last argument. This catches the previous signature:
+	if(typeof callback !== "function" && typeof options === "function"){
+		// First stash any non-function third argument, then swap
+		var optionsArg = callback;
+		callback = options;
+		options = optionsArg;
+	}
+	options = options || {};
 	var self = this;
 	if(this.isReadOnly) {
 		return callback(null,options.tiddlerInfo.adaptorInfo);

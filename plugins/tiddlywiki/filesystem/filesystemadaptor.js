@@ -75,7 +75,16 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 /*
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
-FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
+FileSystemAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
+	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// standard of callback as last argument. This catches the previous signature:
+	if(typeof callback !== "function" && typeof options === "function"){
+		// First stash any non-function third argument, then swap
+		var optionsArg = callback;
+		callback = options;
+		options = optionsArg;
+	}
+	options = options || {};
 	var self = this;
 	var syncerInfo = options.tiddlerInfo || {};
 	this.getTiddlerFileInfo(tiddler,function(err,fileInfo) {
@@ -117,14 +126,32 @@ Load a tiddler and invoke the callback with (err,tiddlerFields)
 
 We don't need to implement loading for the file system adaptor, because all the tiddler files will have been loaded during the boot process.
 */
-FileSystemAdaptor.prototype.loadTiddler = function(title,callback) {
+FileSystemAdaptor.prototype.loadTiddler = function(title,options,callback) {
+	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// standard of callback as last argument. This catches the previous signature:
+	if(typeof callback !== "function" && typeof options === "function"){
+		// First stash any non-function third argument, then swap
+		var optionsArg = callback;
+		callback = options;
+		options = optionsArg;
+	}
+	options = options || {};
 	callback(null,null);
 };
 
 /*
 Delete a tiddler and invoke the callback with (err)
 */
-FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
+FileSystemAdaptor.prototype.deleteTiddler = function(title,options,callback) {
+	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// standard of callback as last argument. This catches the previous signature:
+	if(typeof callback !== "function" && typeof options === "function"){
+		// First stash any non-function third argument, then swap
+		var optionsArg = callback;
+		callback = options;
+		options = optionsArg;
+	}
+	options = options || {};
 	var self = this,
 		fileInfo = this.boot.files[title];
 	// Only delete the tiddler if we have writable information for the file
