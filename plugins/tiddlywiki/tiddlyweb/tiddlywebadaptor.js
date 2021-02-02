@@ -262,6 +262,7 @@ TiddlyWebAdaptor.prototype.deleteTiddler = function(title,options,callback) {
 		callback = options;
 		options = optionsArg;
 	}
+	options = options || {};
 	var self = this;
 	if(this.isReadOnly) {
 		return callback(null);

@@ -85,6 +85,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
 		callback = options;
 		options = optionsArg;
 	}
+	options = options || {};
 	var self = this;
 	this.getTiddlerFileInfo(tiddler,function(err,fileInfo) {
 		if(err) {
@@ -132,6 +133,7 @@ FileSystemAdaptor.prototype.loadTiddler = function(title,options,callback) {
 		callback = options;
 		options = optionsArg;
 	}
+	options = options || {};
 	callback(null,null);
 };
 
@@ -147,6 +149,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,options,callback) {
 		callback = options;
 		options = optionsArg;
 	}
+	options = options || {};
 	var self = this,
 		fileInfo = this.boot.files[title];
 	// Only delete the tiddler if we have writable information for the file
