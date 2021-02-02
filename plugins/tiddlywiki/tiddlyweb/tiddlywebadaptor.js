@@ -253,8 +253,8 @@ TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 			if(err) {
 				return callback(err);
 			}
-			// Invoke the callback
-			callback(null,options.tiddlerInfo.adaptorInfo);
+			// Invoke the callback & return null adaptorInfo
+			callback(null,null);
 		}
 	});
 };
