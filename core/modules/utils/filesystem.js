@@ -396,7 +396,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 			fullPath.indexOf($tw.boot.wikiTiddlersPath) == 0);
 		}
 	if(encode){
-		writePath = path.resolve(directory, encodeURIComponent(fullPath));
+		writePath = path.resolve(directory,encodeURIComponent(fullPath));
 	}
 	// Return the full path to the file
 	return writePath;
@@ -421,7 +421,7 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 				if(err){
 					return callback(err);
 				}
-				return callback(null, fileInfo);
+				return callback(null,fileInfo);
 			});
 		});
 	} else {
@@ -431,14 +431,14 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 				if(err){
 					return callback(err);
 				}
-				return callback(null, fileInfo);
+				return callback(null,fileInfo);
 			});
 		} else {
 			fs.writeFile(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8",function(err){
 				if(err){
 					return callback(err);
 				}
-				return callback(null, fileInfo);
+				return callback(null,fileInfo);
 			});
 		}
 	}
@@ -470,12 +470,12 @@ exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 /*
 Delete a file described by the fileInfo if it exits
 */
-exports.deleteTiddlerFile = function(fileInfo, callback) {
+exports.deleteTiddlerFile = function(fileInfo,callback) {
 	//Only attempt to delete files that exist on disk
 	if(!fileInfo.filepath || !fs.existsSync(fileInfo.filepath)) {
 		//For some reason, the tiddler is only in memory or we can't modify the file at this path
 		$tw.syncer.displayError("Server deleteTiddlerFile task failed for filepath: "+fileInfo.filepath);
-		return callback(null, fileInfo);
+		return callback(null,fileInfo);
 	}
 	// Delete the file
 	fs.unlink(fileInfo.filepath,function(err) {
@@ -492,7 +492,7 @@ exports.deleteTiddlerFile = function(fileInfo, callback) {
 					if(err){
 						return callback(err);
 					}
-					return callback(null, fileInfo);
+					return callback(null,fileInfo);
 				});
 			});
 		} else {
@@ -500,7 +500,7 @@ exports.deleteTiddlerFile = function(fileInfo, callback) {
 				if(err){
 					return callback(err);
 				}
-				return callback(null, fileInfo);
+				return callback(null,fileInfo);
 			});
 		}
 	});
@@ -511,25 +511,25 @@ Cleanup old files on disk, by comparing the options values:
 	adaptorInfo from $tw.syncer.tiddlerInfo
 	bootInfo from $tw.boot.files
 */
-exports.cleanupTiddlerFiles = function(options, callback) {
+exports.cleanupTiddlerFiles = function(options,callback) {
 	var adaptorInfo = options.adaptorInfo || {},
 	bootInfo = options.bootInfo || {},
 	title = options.title || "undefined";
 	if(adaptorInfo.filepath && bootInfo.filepath && adaptorInfo.filepath !== bootInfo.filepath) {
-		$tw.utils.deleteTiddlerFile(adaptorInfo, function(err){
+		$tw.utils.deleteTiddlerFile(adaptorInfo,function(err){
 			if(err) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the previous file on disk, should fail gracefully
-					$tw.syncer.displayError("Server desynchronized. Error cleaning up previous file for tiddler: \""+title+"\"", err);
-					return callback(null, bootInfo);
+					$tw.syncer.displayError("Server desynchronized. Error cleaning up previous file for tiddler: \""+title+"\"",err);
+					return callback(null,bootInfo);
 				} else {
 					return callback(err);
 				}
 			}
-			return callback(null, bootInfo);
+			return callback(null,bootInfo);
 		});
 	} else {
-		return callback(null, bootInfo);
+		return callback(null,bootInfo);
 	}
 };
 
