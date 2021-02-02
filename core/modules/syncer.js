@@ -640,10 +640,6 @@ DeleteTiddlerTask.prototype.run = function(callback) {
 		}
 		// Remove the info stored about this tiddler
 		delete self.syncer.tiddlerInfo[self.title];
-		if($tw.boot.files){
-			// Remove the tiddler from $tw.boot.files
-			delete $tw.boot.files[self.title];
-		}
 		// Invoke the callback
 		callback(null);
 	},{

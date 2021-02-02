@@ -139,6 +139,8 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 					return callback(err);
 				}
 			}
+			// Remove the tiddler from self.boot.files
+			delete self.boot.files[title];
 			return callback(null,fileInfo);
 		});
 	} else {
