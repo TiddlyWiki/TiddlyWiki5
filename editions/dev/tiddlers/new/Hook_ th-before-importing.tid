@@ -1,5 +1,5 @@
 created: 20210203184649726
-modified: 20210203191622629
+modified: 20210203205410246
 tags: HookMechanism
 title: Hook: th-before-importing
 type: text/vnd.tiddlywiki
@@ -20,7 +20,7 @@ Return value:
 
 The original importTiddler object can be returned unmodified by the hook, which is probably the case for most use-cases.
 
-If you want to manipulate the tiddlers, that should be imported use: [[Hook: th-importing-tiddler]] instead.
+If you want to manipulate the tiddlers that should be imported use: [[Hook: th-importing-tiddler]] instead.
 
 
 ''Example code how to implement a hook in your project''
