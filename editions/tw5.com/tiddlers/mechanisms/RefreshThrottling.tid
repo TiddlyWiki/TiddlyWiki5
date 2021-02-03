@@ -1,5 +1,5 @@
 created: 20191013095916159
-modified: 20191014093837558
+modified: 20210203231820284
 tags: RefreshMechanism
 title: RefreshThrottling
 type: text/vnd.tiddlywiki
@@ -11,6 +11,7 @@ The rules governing refresh throttling are:
 * When a change notification occurs, throttling will only take place if all of the modified tiddlers meet at least one of these criteria:
 ** Has the field `draft.of`
 ** Has the field `throttle.refresh`
+** Has a title prefixed with `$:/temp/volatile/`
 * If the refresh cycle is to be throttled, a timer is set for the internal specified in [[$:/config/Drafts/TypingTimeout|Hidden Setting: Typing Refresh Delay]] (cancelling any preciously set timer)
 ** When the timer fires, the refresh cycle is triggered, passing the aggregated titles of all the deferred refresh cycles
 
