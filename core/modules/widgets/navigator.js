@@ -527,6 +527,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	});
 	// Deselect any suppressed tiddlers
 	$tw.utils.each(importData.tiddlers,function(tiddler,title) {
+		// count the keys in the tiddler object
 		if($tw.utils.count(tiddler) === 0) {
 			newFields["selection-" + title] = "unchecked";
 			newFields["suppressed-" + title] = "yes";
