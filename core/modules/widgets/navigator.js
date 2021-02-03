@@ -561,7 +561,7 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 		importReport = [];
 	// Add the tiddlers to the store
 	importReport.push($tw.language.getString("Import/Imported/Hint") + "\n");
-	// Let the loggers do their work. 
+	// Let the loggers do their work
 	importTiddler = $tw.hooks.invokeHook("th-before-importing",importTiddler);
 	$tw.utils.each(importData.tiddlers,function(tiddlerFields) {
 		var title = tiddlerFields.title;

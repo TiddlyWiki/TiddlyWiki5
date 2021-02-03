@@ -1,0 +1,62 @@
+created: 20210203184649726
+modified: 20210203191622629
+tags: HookMechanism
+title: Hook: th-before-importing
+type: text/vnd.tiddlywiki
+
+This hook allows plugins to inspect or modify the `importTiddler` object ''before'' any tiddlers are imported. It is invoked when the final "Import" button is clicked, but ''before'' the selected tiddlers are being imported into the store.
+
+It's part of the `NavigatorWidget.prototype.handlePerformImportEvent` function.
+
+Use this hook if you want to eg: create a customized "log-tiddler" that should contain a heading, that should only be written once.
+
+Hook function parameters:
+
+* ''importTiddler'': an object, that contains information about "selected / unselected" tiddlers and more. 
+
+Return value:
+
+* ''importTiddler'': object
+
+The original importTiddler object can be returned unmodified by the hook, which is probably the case for most use-cases.
+
+If you want to manipulate the tiddlers, that should be imported use: [[Hook: th-importing-tiddler]] instead.
+
+
+''Example code how to implement a hook in your project''
+
+```
+/*\
+title: $:/plugins/<author>/<plugin>/th-before-importing.js
+type: application/javascript
+module-type: startup
+
+YOUR DISCRCRIPTION COMES HERE!
+
+\*/
+(function(){
+
+/*jslint node: true, browser: true */
+/*global $tw: false, exports: true */
+"use strict";
+
+// Export name and synchronous status
+exports.name = "<yournamecomesherewithoutspaces>";
+exports.platforms = ["browser"];
+exports.after = ["startup"];
+exports.synchronous = true;
+
+// Define your variables here!
+
+exports.startup = function() {
+	$tw.hooks.addHook("th-before-importing",function(importTiddler) {
+
+// YOUR CODE !
+
+		return importTiddler;
+	});
+};
+
+})();
+
+```
