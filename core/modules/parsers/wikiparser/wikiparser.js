@@ -25,6 +25,14 @@ Attributes are stored as hashmaps of the following objects:
 /*global $tw: false */
 "use strict";
 
+/*
+type: content type of text
+text: text to be parsed
+options: see below:
+	parseAsInline: true to parse text as inline instead of block
+	wiki: reference to wiki to use
+	_canonical_uri: optional URI of content if text is missing or empty
+*/
 var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
 	var self = this;
@@ -32,19 +40,6 @@ var WikiParser = function(type,text,options) {
 	if($tw.browser && (text || "") === "" && options._canonical_uri) {
 		this.loadRemoteTiddler(options._canonical_uri);
 		text = $tw.language.getRawString("LazyLoadingWarning");
-	}
-	// Initialise the classes if we don't have them already
-	if(!this.pragmaRuleClasses) {
-		WikiParser.prototype.pragmaRuleClasses = $tw.modules.createClassesFromModules("wikirule","pragma",$tw.WikiRuleBase);
-		this.setupRules(WikiParser.prototype.pragmaRuleClasses,"$:/config/WikiParserRules/Pragmas/");
-	}
-	if(!this.blockRuleClasses) {
-		WikiParser.prototype.blockRuleClasses = $tw.modules.createClassesFromModules("wikirule","block",$tw.WikiRuleBase);
-		this.setupRules(WikiParser.prototype.blockRuleClasses,"$:/config/WikiParserRules/Block/");
-	}
-	if(!this.inlineRuleClasses) {
-		WikiParser.prototype.inlineRuleClasses = $tw.modules.createClassesFromModules("wikirule","inline",$tw.WikiRuleBase);
-		this.setupRules(WikiParser.prototype.inlineRuleClasses,"$:/config/WikiParserRules/Inline/");
 	}
 	// Save the parse text
 	this.type = type || "text/vnd.tiddlywiki";
@@ -54,13 +49,38 @@ var WikiParser = function(type,text,options) {
 	this.configTrimWhiteSpace = false;
 	// Set current parse position
 	this.pos = 0;
-	// Instantiate the pragma parse rules
-	this.pragmaRules = this.instantiateRules(this.pragmaRuleClasses,"pragma",0);
-	// Instantiate the parser block and inline rules
-	this.blockRules = this.instantiateRules(this.blockRuleClasses,"block",0);
-	this.inlineRules = this.instantiateRules(this.inlineRuleClasses,"inline",0);
-	// Parse any pragmas
+	// Start with empty output
 	this.tree = [];
+	// Assemble the rule classes we're going to use
+	var pragmaRuleClasses, blockRuleClasses, inlineRuleClasses;
+	if(options.rules) {
+		pragmaRuleClasses = options.rules.pragma;
+		blockRuleClasses = options.rules.block;
+		inlineRuleClasses = options.rules.inline;
+	} else {
+		// Setup the rule classes if we don't have them already
+		if(!this.pragmaRuleClasses) {
+			WikiParser.prototype.pragmaRuleClasses = $tw.modules.createClassesFromModules("wikirule","pragma",$tw.WikiRuleBase);
+			this.setupRules(WikiParser.prototype.pragmaRuleClasses,"$:/config/WikiParserRules/Pragmas/");
+		}
+		pragmaRuleClasses = this.pragmaRuleClasses;
+		if(!this.blockRuleClasses) {
+			WikiParser.prototype.blockRuleClasses = $tw.modules.createClassesFromModules("wikirule","block",$tw.WikiRuleBase);
+			this.setupRules(WikiParser.prototype.blockRuleClasses,"$:/config/WikiParserRules/Block/");
+		}
+		blockRuleClasses = this.blockRuleClasses;
+		if(!this.inlineRuleClasses) {
+			WikiParser.prototype.inlineRuleClasses = $tw.modules.createClassesFromModules("wikirule","inline",$tw.WikiRuleBase);
+			this.setupRules(WikiParser.prototype.inlineRuleClasses,"$:/config/WikiParserRules/Inline/");
+		}
+		inlineRuleClasses = this.inlineRuleClasses;
+	}
+	// Instantiate the pragma parse rules
+	this.pragmaRules = this.instantiateRules(pragmaRuleClasses,"pragma",0);
+	// Instantiate the parser block and inline rules
+	this.blockRules = this.instantiateRules(blockRuleClasses,"block",0);
+	this.inlineRules = this.instantiateRules(inlineRuleClasses,"inline",0);
+	// Parse any pragmas
 	var topBranch = this.parsePragmas();
 	// Parse the text into inline runs or blocks
 	if(options.parseAsInline) {

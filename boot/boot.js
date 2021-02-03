@@ -893,19 +893,26 @@ $tw.modules.applyMethods = function(moduleType,targetObject) {
 };
 
 /*
+Return a class created from a modules. The module should export the properties to be added to those of the optional base class
+*/
+$tw.modules.createClassFromModule = function(moduleExports,baseClass) {
+	var newClass = function() {};
+	if(baseClass) {
+		newClass.prototype = new baseClass();
+		newClass.prototype.constructor = baseClass;
+	}
+	$tw.utils.extend(newClass.prototype,moduleExports);
+	return newClass;
+};
+
+/*
 Return an array of classes created from the modules of a specified type. Each module should export the properties to be added to those of the optional base class
 */
 $tw.modules.createClassesFromModules = function(moduleType,subType,baseClass) {
 	var classes = Object.create(null);
 	$tw.modules.forEachModuleOfType(moduleType,function(title,moduleExports) {
 		if(!subType || moduleExports.types[subType]) {
-			var newClass = function() {};
-			if(baseClass) {
-				newClass.prototype = new baseClass();
-				newClass.prototype.constructor = baseClass;
-			}
-			$tw.utils.extend(newClass.prototype,moduleExports);
-			classes[moduleExports.name] = newClass;
+			classes[moduleExports.name] = $tw.modules.createClassFromModule(moduleExports,baseClass);
 		}
 	});
 	return classes;
