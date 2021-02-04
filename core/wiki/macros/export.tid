@@ -6,6 +6,7 @@ $baseFilename$$(extension)$
 \end
 
 \define exportButton(exportFilter:"[!is[system]sort[title]]",lingoBase,baseFilename:"tiddlers")
+\whitespace trim
 <span class="tc-popup-keep"><$button popup=<<qualify "$:/state/popup/export">> tooltip={{$lingoBase$Hint}} aria-label={{$lingoBase$Caption}} class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/export-button}}

@@ -12,7 +12,6 @@ description: {{$:/language/Buttons/Fold/Hint}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
 <span class="tc-btn-text">
-<$text text=" "/>
 <$text text={{$:/language/Buttons/Fold/Caption}}/>
 </span>
 </$list>
@@ -26,7 +25,6 @@ description: {{$:/language/Buttons/Fold/Hint}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
 <span class="tc-btn-text">
-<$text text=" "/>
 <$text text={{$:/language/Buttons/Unfold/Caption}}/>
 </span>
 </$list>

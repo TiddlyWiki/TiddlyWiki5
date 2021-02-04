@@ -555,6 +555,10 @@ html body.tc-body .tc-btn-rounded:hover svg {
 	fill: <<colour muted-foreground>>;
 }
 
+svg + .tc-btn-text{
+	margin-left: 0.3em;
+}
+
 .tc-btn-text {
 	padding: 0;
 	margin: 0;
