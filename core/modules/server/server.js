@@ -32,7 +32,7 @@ function Server(options) {
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
-	this.servername = $tw.utils.transliterateToSafeASCII(this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
+	this.servername = $tw.utils.transliterateToSafeASCII(options.servername || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
 	if(options.variables) {
@@ -89,7 +89,11 @@ Server.prototype.defaultVariables = {
 	"system-tiddler-render-type": "text/plain",
 	"system-tiddler-render-template": "$:/core/templates/wikified-tiddler",
 	"debug-level": "none",
-	"gzip": "no"
+	"gzip": "no",
+	"required-plugins": [
+		"tiddlywiki/filesystem",
+		"tiddlywiki/tiddlyweb"
+	]
 };
 
 Server.prototype.get = function(name) {
@@ -251,8 +255,16 @@ Server.prototype.listen = function(port,host,prefix) {
 		port = process.env[port] || 8080;
 	}
 	// Warn if required plugins are missing
-	if(!this.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !this.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
-		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
+	var missing = [];
+	for (let index = 0; index < this.variables["required-plugins"].length; index++) {
+		const r = this.variables["required-plugins"][index];
+		if (!this.wiki.getTiddler("$:/plugins/"+r)) {
+			missing.push(r);
+		}
+	}
+	if(missing.length > 0) {
+		var warning = "Warning: Plugin(s) required for client-server operation are missing from tiddlywiki.info file: \"" + missing.join("\", \"") + "\"";
+		$tw.utils.warning(warning);
 	}
 	// Create the server
 	var server;
