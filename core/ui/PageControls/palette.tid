@@ -9,7 +9,6 @@ description: {{$:/language/Buttons/Palette/Hint}}
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/palette}}
 </$list>
-<$text text=" "/>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
 <span class="tc-btn-text"><$text text={{$:/language/Buttons/Palette/Caption}}/></span>
 </$list>

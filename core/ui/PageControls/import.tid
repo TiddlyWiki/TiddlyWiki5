@@ -3,13 +3,16 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/import-button}} {{$:/language/Buttons/Import/Caption}}
 description: {{$:/language/Buttons/Import/Hint}}
 
+\whitespace trim
 <div class="tc-file-input-wrapper">
 <$button tooltip={{$:/language/Buttons/Import/Hint}} aria-label={{$:/language/Buttons/Import/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/import-button}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/Import/Caption}}/></span>
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/Import/Caption}}/>
+</span>
 </$list>
 </$button>
 <$browse tooltip={{$:/language/Buttons/Import/Hint}}/>
