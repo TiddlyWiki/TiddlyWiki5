@@ -252,7 +252,7 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 				extFilters: options.extFilters,
 				wiki: options.wiki
 			});
-			if(metaExt){
+			if(metaExt) {
 				if(metaExt === ".tid") {
 					// Overriding to the .tid extension needs special handling
 					fileInfo.type = "application/x-tiddler";
@@ -390,12 +390,12 @@ exports.generateTiddlerFilepath = function(title,options) {
 	//	then encodeURIComponent() and resolve to tiddler directory
 	var writePath = $tw.hooks.invokeHook("th-make-tiddler-path",fullPath),
 		encode = (options.fileInfo || {writeError: false}).writeError == true;
-	if(!encode){
+	if(!encode) {
 		encode = !(fullPath.indexOf(path.resolve(directory)) == 0 ||
 			fullPath.indexOf(path.resolve($tw.boot.wikiPath)) == 0 ||
 			fullPath.indexOf($tw.boot.wikiTiddlersPath) == 0);
 		}
-	if(encode){
+	if(encode) {
 		writePath = path.resolve(directory,encodeURIComponent(fullPath));
 	}
 	// Return the full path to the file
@@ -417,8 +417,8 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 			if(err) {
 				return callback(err);
 			}
-			fs.writeFile(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8",function(err){
-				if(err){
+			fs.writeFile(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8",function(err) {
+				if(err) {
 					return callback(err);
 				}
 				return callback(null,fileInfo);
@@ -427,15 +427,15 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 	} else {
 		// Save the tiddler as a self contained templated file
 		if(fileInfo.type === "application/x-tiddler") {
-			fs.writeFile(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8",function(err){
-				if(err){
+			fs.writeFile(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8",function(err) {
+				if(err) {
 					return callback(err);
 				}
 				return callback(null,fileInfo);
 			});
 		} else {
-			fs.writeFile(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8",function(err){
-				if(err){
+			fs.writeFile(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8",function(err) {
+				if(err) {
 					return callback(err);
 				}
 				return callback(null,fileInfo);
@@ -493,16 +493,16 @@ exports.deleteTiddlerFile = function(fileInfo,callback) {
 				if(err) {
 					return callback(err);
 				}
-				return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),function(err){
-					if(err){
+				return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),function(err) {
+					if(err) {
 						return callback(err);
 					}
 					return callback(null,fileInfo);
 				});
 			});
 		} else {
-			return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),function(err){
-				if(err){
+			return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),function(err) {
+				if(err) {
 					return callback(err);
 				}
 				return callback(null,fileInfo);
@@ -521,7 +521,7 @@ exports.cleanupTiddlerFiles = function(options,callback) {
 	bootInfo = options.bootInfo || {},
 	title = options.title || "undefined";
 	if(adaptorInfo.filepath && bootInfo.filepath && adaptorInfo.filepath !== bootInfo.filepath) {
-		$tw.utils.deleteTiddlerFile(adaptorInfo,function(err){
+		$tw.utils.deleteTiddlerFile(adaptorInfo,function(err) {
 			if(err) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the previous file on disk, should fail gracefully
