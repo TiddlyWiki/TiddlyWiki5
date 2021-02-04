@@ -54,10 +54,10 @@ It is the responsibility of the filesystem adaptor to update this.boot.files for
 FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 	// Always generate a fileInfo object when this fuction is called
 	var title = tiddler.fields.title, newInfo, pathFilters, extFilters;
-	if(this.wiki.tiddlerExists("$:/config/FileSystemPaths")){
+	if(this.wiki.tiddlerExists("$:/config/FileSystemPaths")) {
 		pathFilters = this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n");
 	}
-	if(this.wiki.tiddlerExists("$:/config/FileSystemExtensions")){
+	if(this.wiki.tiddlerExists("$:/config/FileSystemExtensions")) {
 		extFilters = this.wiki.getTiddlerText("$:/config/FileSystemExtensions","").split("\n");
 	}
 	newInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
@@ -102,7 +102,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 				bootInfo: fileInfo || {},
 				title: tiddler.fields.title
 			};
-			$tw.utils.cleanupTiddlerFiles(options,function(err,fileInfo){
+			$tw.utils.cleanupTiddlerFiles(options,function(err,fileInfo) {
 				if(err) {
 					return callback(err);
 				}
@@ -129,7 +129,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 		fileInfo = this.boot.files[title];
 	// Only delete the tiddler if we have writable information for the file
 	if(fileInfo) {
-		$tw.utils.deleteTiddlerFile(fileInfo,function(err,fileInfo){
+		$tw.utils.deleteTiddlerFile(fileInfo,function(err,fileInfo) {
 			if(err) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the file on disk, should fail gracefully
