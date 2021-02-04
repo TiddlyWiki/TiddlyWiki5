@@ -101,7 +101,7 @@ Thanks to Steven Levithan, http://blog.stevenlevithan.com/archives/faster-trim-j
 */
 exports.trim = function(str) {
 	if(typeof str === "string") {
-		return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+		return str.replace(/^\s+/, '').replace(/\s+$/, '');
 	} else {
 		return str;
 	}
@@ -110,7 +110,7 @@ exports.trim = function(str) {
 exports.trimPrefix = function(str,unwanted) {
 	if(typeof str === "string" && typeof unwanted === "string") {
 		if(unwanted === "") {
-			return str.replace(/^\s\s*/, '');
+			return str.replace(/^\s+/, '');
 		} else {
 			// Safely regexp-escape the unwanted text
 			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -125,7 +125,7 @@ exports.trimPrefix = function(str,unwanted) {
 exports.trimSuffix = function(str,unwanted) {
 	if(typeof str === "string" && typeof unwanted === "string") {
 		if(unwanted === "") {
-			return str.replace(/\s\s*$/, '');
+			return str.replace(/\s+$/, '');
 		} else {
 			// Safely regexp-escape the unwanted text
 			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
