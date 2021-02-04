@@ -25,7 +25,7 @@ title: $:/core/ui/ImportListing
 \define renameFieldState() $(currentTiddler)$!!state-rename-$(payloadTiddler)$
 
 \define select-all-actions()
-<$list filter="[all[current]plugintiddlers[]sort[title]]" variable="payloadTiddler">
+<$list filter="[all[current]plugintiddlers[]sort[title]] +[search:title{$:/temp/import-search}]" variable="payloadTiddler">
 <$action-setfield $field={{{ [<payloadTiddler>addprefix[selection-]] }}} $value={{$:/state/import/select-all}}/>
 </$list>
 \end
@@ -45,7 +45,7 @@ title: $:/core/ui/ImportListing
 <<lingo Listing/Status/Caption>>
 </th>
 </tr>
-<$list filter="[all[current]plugintiddlers[]sort[title]]" variable="payloadTiddler">
+<$list filter="[all[current]plugintiddlers[]sort[title]] +[search:title{$:/temp/import-search}]" variable="payloadTiddler">
 <tr class={{{[<currentTiddler>has<suppressedField>then[tc-row-disabled]] ~[subfilter<payloadTitleFilter>is[tiddler]then[tc-row-warning]] }}}>
 <td>
 <$checkbox field=<<selectionField>> checked="checked" unchecked="unchecked" default="checked" disabled={{{[<currentTiddler>has<suppressedField>then[yes]else[no]]}}}/>
