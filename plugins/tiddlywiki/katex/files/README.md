@@ -1,135 +1,86 @@
-# [<img src="https://khan.github.io/KaTeX/katex-logo.svg" width="130" alt="KaTeX">](https://khan.github.io/KaTeX/)
-[![Build Status](https://travis-ci.org/Khan/KaTeX.svg?branch=master)](https://travis-ci.org/Khan/KaTeX)
-[![codecov](https://codecov.io/gh/Khan/KaTeX/branch/master/graph/badge.svg)](https://codecov.io/gh/Khan/KaTeX)
-[![Join the chat at https://gitter.im/Khan/KaTeX](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Khan/KaTeX?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# [<img src="https://katex.org/img/katex-logo-black.svg" width="130" alt="KaTeX">](https://katex.org/)
+[![npm](https://img.shields.io/npm/v/katex.svg)](https://www.npmjs.com/package/katex)
+[![CircleCI](https://circleci.com/gh/KaTeX/KaTeX.svg?style=shield)](https://circleci.com/gh/KaTeX/KaTeX)
+[![codecov](https://codecov.io/gh/KaTeX/KaTeX/branch/master/graph/badge.svg)](https://codecov.io/gh/KaTeX/KaTeX)
+[![Join the chat at https://gitter.im/KaTeX/KaTeX](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/KaTeX/KaTeX?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=KaTeX/KaTeX)](https://dependabot.com)
+[![jsDelivr](https://data.jsdelivr.com/v1/package/npm/katex/badge?style=rounded)](https://www.jsdelivr.com/package/npm/katex)
+![](https://img.badgesize.io/KaTeX/KaTeX/v0.12.0/dist/katex.min.js?compression=gzip)
 
 KaTeX is a fast, easy-to-use JavaScript library for TeX math rendering on the web.
 
  * **Fast:** KaTeX renders its math synchronously and doesn't need to reflow the page. See how it compares to a competitor in [this speed test](http://www.intmath.com/cg5/katex-mathjax-comparison.php).
- * **Print quality:** KaTeX’s layout is based on Donald Knuth’s TeX, the gold standard for math typesetting.
+ * **Print quality:** KaTeX's layout is based on Donald Knuth's TeX, the gold standard for math typesetting.
  * **Self contained:** KaTeX has no dependencies and can easily be bundled with your website resources.
  * **Server side rendering:** KaTeX produces the same output regardless of browser or environment, so you can pre-render expressions using Node.js and send them as plain HTML.
 
-KaTeX supports all major browsers, including Chrome, Safari, Firefox, Opera, Edge, and IE 9 - IE 11. More information can be found on the [list of supported commands](https://khan.github.io/KaTeX/function-support.html) and on the [wiki](https://github.com/khan/katex/wiki).
+KaTeX is compatible with all major browsers, including Chrome, Safari, Firefox, Opera, Edge, and IE 11.
 
-## Usage
+KaTeX supports much (but not all) of LaTeX and many LaTeX packages. See the [list of supported functions](https://katex.org/docs/supported.html).
 
-You can [download KaTeX](https://github.com/khan/katex/releases) and host it on your server or include the `katex.min.js` and `katex.min.css` files on your page directly from a CDN:
+Try out KaTeX [on the demo page](https://katex.org/#demo)!
+
+## Getting started
+
+### Starter template
 
 ```html
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-VEnyslhHLHiYPca9KFkBB3CMeslnM9CzwjxsEbZTeA21JBm7tdLwKoZmCt3cZTYD" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-O4hpKqcplNCe+jLuBVEXC10Rn1QEqAmX98lKAIFBEDxZI0a+6Z2w2n8AEtQbR4CD" crossorigin="anonymous"></script>
+<!DOCTYPE html>
+<!-- KaTeX requires the use of the HTML5 doctype. Without it, KaTeX may not render properly -->
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  </head>
+  ...
+</html>
 ```
 
-#### In-browser rendering
+You can also [download KaTeX](https://github.com/KaTeX/KaTeX/releases) and host it yourself.
 
-Call `katex.render` with a TeX expression and a DOM element to render into:
+For details on how to configure auto-render extension, refer to [the documentation](https://katex.org/docs/autorender.html).
 
-```js
-katex.render("c = \\pm\\sqrt{a^2 + b^2}", element);
-```
+### API
 
-If KaTeX can't parse the expression, it throws a `katex.ParseError` error.
-
-#### Server side rendering or rendering to a string
-
-To generate HTML on the server or to generate an HTML string of the rendered math, you can use `katex.renderToString`:
-
-```js
-var html = katex.renderToString("c = \\pm\\sqrt{a^2 + b^2}");
-// '<span class="katex">...</span>'
-```
-
-Make sure to include the CSS and font files, but there is no need to include the JavaScript. Like `render`, `renderToString` throws if it can't parse the expression.
-
-#### Security
-
-Any HTML generated by KaTeX *should* be safe from `<script>` or other code
-injection attacks.
-(See `maxSize` below for preventing large width/height visual affronts.)
-Of course, it is always a good idea to sanitize the HTML, though you will need
-a rather generous whitelist (including some of SVG and MathML) to support 
-all of KaTeX.
-
-#### Handling errors
-
-If KaTeX encounters an error (invalid or unsupported LaTeX), then it will
-throw an exception of type `katex.ParseError`.  The message in this error
-includes some of the LaTeX source code, so needs to be escaped if you want
-to render it to HTML.  In particular, you should convert `&`, `<`, `>`
-characters to `&amp;`, `&lt;`, `&gt;` (e.g., using `_.escape`)
-before including either LaTeX source code or exception messages in your
-HTML/DOM.  (Failure to escape in this way makes a `<script>` injection
-attack possible if your LaTeX source is untrusted.)
-
-#### Rendering options
-
-You can provide an object of options as the last argument to `katex.render` and `katex.renderToString`. Available options are:
-
-- `displayMode`: `boolean`. If `true` the math will be rendered in display mode, which will put the math in display style (so `\int` and `\sum` are large, for example), and will center the math on the page on its own line. If `false` the math will be rendered in inline mode. (default: `false`)
-- `throwOnError`: `boolean`. If `true`, KaTeX will throw a `ParseError` when it encounters an unsupported command. If `false`, KaTeX will render the unsupported command as text in the color given by `errorColor`. (default: `true`)
-- `errorColor`: `string`. A color string given in the format `"#XXX"` or `"#XXXXXX"`. This option determines the color which unsupported commands are rendered in. (default: `#cc0000`)
-- `macros`: `object`. A collection of custom macros. Each macro is a property with a name like `\name` (written `"\\name"` in JavaScript) which maps to a string that describes the expansion of the macro. Single-character keys can also be included in which case the character will be redefined as the given macro (similar to TeX active characters).
-- `colorIsTextColor`: `boolean`. If `true`, `\color` will work like LaTeX's `\textcolor`, and take two arguments (e.g., `\color{blue}{hello}`), which restores the old behavior of KaTeX (pre-0.8.0). If `false` (the default), `\color` will work like LaTeX's `\color`, and take one argument (e.g., `\color{blue}hello`).  In both cases, `\textcolor` works as in LaTeX (e.g., `\textcolor{blue}{hello}`).
-- `maxSize`: `number`. If non-zero, all user-specified sizes, e.g. in `\rule{500em}{500em}`, will be capped to `maxSize` ems. Otherwise, users can make elements and spaces arbitrarily large (the default behavior).
-
+Call `katex.render` to render a TeX expression directly into a DOM element.
 For example:
 
 ```js
-katex.render("c = \\pm\\sqrt{a^2 + b^2}\\in\\RR", element, {
-  displayMode: true,
-  macros: {
-    "\\RR": "\\mathbb{R}"
-  }
+katex.render("c = \\pm\\sqrt{a^2 + b^2}", element, {
+    throwOnError: false
 });
 ```
 
-#### Automatic rendering of math on a page
+Call `katex.renderToString` to generate an HTML string of the rendered math,
+e.g., for server-side rendering.  For example:
 
-Math on the page can be automatically rendered using the auto-render extension. See [the Auto-render README](contrib/auto-render/README.md) for more information.
-
-#### Font size and lengths
-
-By default, KaTeX math is rendered in a 1.21× larger font than the surrounding
-context, which makes super- and subscripts easier to read. You can control
-this using CSS, for example:
-
-```css
-.katex { font-size: 1.1em; }
+```js
+var html = katex.renderToString("c = \\pm\\sqrt{a^2 + b^2}", {
+    throwOnError: false
+});
+// '<span class="katex">...</span>'
 ```
 
-KaTeX supports all TeX units, including absolute units like `cm` and `in`.
-Absolute units are currently scaled relative to the default TeX font size of
-10pt, so that `\kern1cm` produces the same results as `\kern2.845275em`.
-As a result, relative and absolute units are both uniformly scaled relative
-to LaTeX with a 10pt font; for example, the rectangle `\rule{1cm}{1em}` has
-the same aspect ratio in KaTeX as in LaTeX.  However, because most browsers
-default to a larger font size, this typically means that a 1cm kern in KaTeX
-will appear larger than 1cm in browser units.
+Make sure to include the CSS and font files in both cases.
+If you are doing all rendering on the server, there is no need to include the
+JavaScript on the client.
 
-### Common Issues
-- Many Markdown preprocessors, such as the one that Jekyll and GitHub Pages use,
-  have a "smart quotes" feature.  This changes `'` to `’` which is an issue for
-  math containing primes, e.g. `f'`.  This can be worked around by defining a
-  single character macro which changes them back, e.g. `{"’", "'"}`.
-- KaTeX follows LaTeX's rendering of `aligned` and `matrix` environments unlike
-  MathJax.  When displaying fractions one above another in these vertical
-  layouts there may not be enough space between rows for people who are used to
-  MathJax's rendering.  The distance between rows can be adjusted by using
-  `\\[0.1em]` instead of the standard line separator distance.
-- KaTeX does not support the `align` environment because LaTeX doesn't support
-  `align` in math mode.  The `aligned` environment offers the same functionality
-  but in math mode, so use that instead or define a macro that maps `align` to
-  `aligned`.
+The examples above use the `throwOnError: false` option, which renders invalid
+inputs as the TeX source code in red (by default), with the error message as
+hover text.  For other available options, see the
+[API documentation](https://katex.org/docs/api.html),
+[options documentation](https://katex.org/docs/options.html), and
+[handling errors documentation](https://katex.org/docs/error.html).
 
-## Libraries
+## Demo and Documentation
 
-### Angular2+
-- [ng-katex](https://github.com/garciparedes/ng-katex) Angular module to write beautiful math expressions with TeX syntax boosted by KaTeX library
-
-### Ruby
-
-- [katex-ruby](https://github.com/glebm/katex-ruby) Provides server-side rendering and integration with popular Ruby web frameworks (Rails, Hanami, and anything that uses Sprockets).
+Learn more about using KaTeX [on the website](https://katex.org)!
 
 ## Contributing
 

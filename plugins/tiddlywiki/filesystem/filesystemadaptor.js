@@ -54,10 +54,10 @@ It is the responsibility of the filesystem adaptor to update this.boot.files for
 FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 	// Always generate a fileInfo object when this fuction is called
 	var title = tiddler.fields.title, newInfo, pathFilters, extFilters;
-	if(this.wiki.tiddlerExists("$:/config/FileSystemPaths")){
+	if(this.wiki.tiddlerExists("$:/config/FileSystemPaths")) {
 		pathFilters = this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n");
 	}
-	if(this.wiki.tiddlerExists("$:/config/FileSystemExtensions")){
+	if(this.wiki.tiddlerExists("$:/config/FileSystemExtensions")) {
 		extFilters = this.wiki.getTiddlerText("$:/config/FileSystemExtensions","").split("\n");
 	}
 	newInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
@@ -66,9 +66,8 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 		extFilters: extFilters,
 		wiki: this.wiki,
 		fileInfo: this.boot.files[title],
-		originalpath: this.wiki.extractTiddlerDataItem("$:/config/OriginalTiddlerPaths",title, "")
+		originalpath: this.wiki.extractTiddlerDataItem("$:/config/OriginalTiddlerPaths",title,"")
 	});
-	this.boot.files[title] = newInfo;
 	callback(null,newInfo);
 };
 
@@ -76,35 +75,38 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 /*
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
-FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
+FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 	var self = this;
+	var syncerInfo = options.tiddlerInfo || {};
 	this.getTiddlerFileInfo(tiddler,function(err,fileInfo) {
 		if(err) {
 			return callback(err);
 		}
-		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err) {
+		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err,fileInfo) {
 			if(err) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
-					var bootInfo = self.boot.files[tiddler.fields.title];
-					bootInfo.writeError = true;
-					self.boot.files[tiddler.fields.title] = bootInfo;
-					$tw.syncer.displayError("Sync for tiddler [["+tiddler.fields.title+"]] will be retried with encoded filepath", encodeURIComponent(bootInfo.filepath));
+					fileInfo = fileInfo || self.boot.files[tiddler.fields.title];
+					fileInfo.writeError = true;
+					self.boot.files[tiddler.fields.title] = fileInfo;
+					$tw.syncer.logger.log("Sync failed for \""+tiddler.fields.title+"\" and will be retried with encoded filepath",encodeURIComponent(fileInfo.filepath));
 					return callback(err);
 				} else {
 					return callback(err);
 				}
 			}
+			// Store new boot info only after successful writes
+			self.boot.files[tiddler.fields.title] = fileInfo;
 			// Cleanup duplicates if the file moved or changed extensions
 			var options = {
-				adaptorInfo: ($tw.syncer.tiddlerInfo[tiddler.fields.title] || {adaptorInfo: {} }).adaptorInfo,
-				bootInfo: self.boot.files[tiddler.fields.title] || {},
+				adaptorInfo: syncerInfo.adaptorInfo || {},
+				bootInfo: fileInfo || {},
 				title: tiddler.fields.title
 			};
-			$tw.utils.cleanupTiddlerFiles(options, function(err){
+			$tw.utils.cleanupTiddlerFiles(options,function(err,fileInfo) {
 				if(err) {
 					return callback(err);
 				}
-				return callback(null, self.boot.files[tiddler.fields.title]);
+				return callback(null,fileInfo);
 			});
 		});
 	});
@@ -127,20 +129,22 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 		fileInfo = this.boot.files[title];
 	// Only delete the tiddler if we have writable information for the file
 	if(fileInfo) {
-		$tw.utils.deleteTiddlerFile(fileInfo, function(err){
+		$tw.utils.deleteTiddlerFile(fileInfo,function(err,fileInfo) {
 			if(err) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the file on disk, should fail gracefully
-					$tw.syncer.displayError("Server desynchronized. Error deleting file for deleted tiddler: "+title, err);
-					return callback(null);
+					$tw.syncer.displayError("Server desynchronized. Error deleting file for deleted tiddler \"" + title + "\"",err);
+					return callback(null,fileInfo);
 				} else {
 					return callback(err);
 				}
 			}
-			return callback(null);
+			// Remove the tiddler from self.boot.files & return null adaptorInfo
+			delete self.boot.files[title];
+			return callback(null,null);
 		});
 	} else {
-		callback(null);
+		callback(null,null);
 	}
 };
 
