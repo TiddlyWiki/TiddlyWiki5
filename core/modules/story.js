@@ -100,35 +100,35 @@ Story.prototype.addToHistory = function(navigateTo,navigateFromClientRect) {
 	this.wiki.setTiddlerData(this.historyTitle,historyList,{"current-tiddler": titles[titles.length-1]});
 };
 
-Story.prototype.storyCloseTiddler = function(targetTitle) {
+Story.prototype.closeTiddler = function(targetTitle) {
 // TBD
 };
 
-Story.prototype.storyCloseAllTiddlers = function() {
+Story.prototype.closeAllTiddler = function() {
 // TBD
 };
 
-Story.prototype.storyCloseOtherTiddlers = function(targetTitle) {
+Story.prototype.CloseOtherTiddlers = function(targetTitle) {
 // TBD
 };
 
-Story.prototype.storyEditTiddler = function(targetTitle) {
+Story.prototype.EditTiddler = function(targetTitle) {
 // TBD
 };
 
-Story.prototype.storyDeleteTiddler = function(targetTitle) {
+Story.prototype.DeleteTiddler = function(targetTitle) {
 // TBD
 };
 
-Story.prototype.storySaveTiddler = function(targetTitle) {
+Story.prototype.SaveTiddler = function(targetTitle) {
 // TBD
 };
 
-Story.prototype.storyCancelTiddler = function(targetTitle) {
+Story.prototype.CancelTiddler = function(targetTitle) {
 // TBD
 };
 
-Story.prototype.storyNewTiddler = function(targetTitle) {
+Story.prototype.NewTiddler = function(targetTitle) {
 // TBD
 };
 
