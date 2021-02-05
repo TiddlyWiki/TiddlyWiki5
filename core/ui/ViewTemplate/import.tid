@@ -1,6 +1,7 @@
 title: $:/core/ui/ViewTemplate/import
 tags: $:/tags/ViewTemplate
 
+\whitespace trim
 \define lingo-base() $:/language/Import/
 \define import-search() $:/temp/import-search
 \define clearSearch() 
@@ -9,15 +10,21 @@ tags: $:/tags/ViewTemplate
 \define buttons()
 <$button message="tm-delete-tiddler" param=<<currentTiddler>> actions=<<clearSearch>>><<lingo Listing/Cancel/Caption>></$button>
 <$button message="tm-perform-import" param=<<currentTiddler>> actions=<<clearSearch>>><<lingo Listing/Import/Caption>></$button>
-<<lingo Listing/Preview>> <$select tiddler="$:/state/importpreviewtype" default="$:/core/ui/ImportPreviews/Text">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/ImportPreview]!has[draft.of]]">
-<option value=<<currentTiddler>>>{{!!caption}}</option>
-</$list>
+\end
+\define topBar()
+\whitespace trim
+<<lingo Listing/Preview>> <$select tiddler="$:/state/importpreviewtype" default="$:/core/ui/ImportPreviews/Text" class="tc-small-gap">
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/ImportPreview]!has[draft.of]]">
+		<option value=<<currentTiddler>>>{{!!caption}}</option>
+	</$list>
 </$select>
-<<lingo Listing/Filter/Prompt>> <$edit-text tiddler=<<import-search>> field="text" tag="input" default=""/> <$reveal state=<<import-search>> type="nomatch" text=""><$button class="tc-btn-invisible">
-<$action-setfield $tiddler=<<import-search>> $field=text $value=""/>
-{{$:/core/images/close-button}}
-</$button>
+<<lingo Listing/Filter/Prompt>>
+<$edit-text tiddler=<<import-search>> field="text" tag="input" default="" class="tc-small-gap-left"/>
+<$reveal state=<<import-search>> type="nomatch" text="" class="tc-small-gap-left">
+	<$button class="tc-btn-invisible">
+		<$action-setfield $tiddler=<<import-search>> $field=text $value=""/>
+		{{$:/core/images/close-button}}
+	</$button>
 </$reveal>
 \end
 
@@ -27,7 +34,7 @@ tags: $:/tags/ViewTemplate
 
 <<lingo Listing/Hint>>
 
-<<buttons>>
+<<topBar>>
 
 <$reveal state=<<import-search>> type="nomatch" text="">
 <<lingo Listing/Filtered/Hint>>
