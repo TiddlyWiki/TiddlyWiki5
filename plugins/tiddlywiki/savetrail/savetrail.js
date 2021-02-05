@@ -166,8 +166,8 @@ function saveTiddlerFile(tiddler,options) {
 	link.setAttribute("target","_blank");
 	link.setAttribute("rel","noopener noreferrer");
 	if(Blob !== undefined) {
-		var blob = new Blob([text], {type: "text/plain"});
-		link.setAttribute("href", URL.createObjectURL(blob));
+		var blob = new Blob([text],{type: "text/plain"});
+		link.setAttribute("href",URL.createObjectURL(blob));
 	} else {
 		link.setAttribute("href","data:text/plain," + encodeURIComponent(text));
 	}

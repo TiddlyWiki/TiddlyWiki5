@@ -158,11 +158,25 @@ WikiFolderMaker.prototype.saveCustomPlugin = function(pluginTiddler) {
 };
 
 WikiFolderMaker.prototype.saveTiddler = function(directory,tiddler) {
+	var title = tiddler.fields.title, fileInfo, pathFilters, extFilters;
+	if(this.wiki.tiddlerExists("$:/config/FileSystemPaths")) {
+		pathFilters = this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n");
+	}
+	if(this.wiki.tiddlerExists("$:/config/FileSystemExtensions")) {
+		extFilters = this.wiki.getTiddlerText("$:/config/FileSystemExtensions","").split("\n");
+	}
 	var fileInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
 		directory: path.resolve(this.wikiFolderPath,directory),
-		wiki: this.wiki
+		wiki: this.wiki,
+		pathFilters: pathFilters,
+		extFilters: extFilters,
+		originalpath: this.wiki.extractTiddlerDataItem("$:/config/OriginalTiddlerPaths",title, "")
 	});
-	$tw.utils.saveTiddlerToFileSync(tiddler,fileInfo);
+	try {
+		$tw.utils.saveTiddlerToFileSync(tiddler,fileInfo);
+	} catch (err) {
+		console.log("SaveWikiFolder: Error saving file '" + fileInfo.filepath + "', tiddler: '" + tiddler.fields.title);
+	}
 };
 
 WikiFolderMaker.prototype.saveJSONFile = function(filename,json) {
