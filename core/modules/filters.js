@@ -78,7 +78,7 @@ function parseFilterOperation(operators,filterString,p) {
 					nextBracketPos = filterString.indexOf(">",p);
 					break;
 				case "/": // regexp brackets
-					var rex = /^((?:[^\\\/]*|\\.)*)\/(?:\(([mygi]+)\))?/g,
+					var rex = /^((?:[^\\\/]|\\.)*)\/(?:\(([mygi]+)\))?/g,
 						rexMatch = rex.exec(filterString.substring(p));
 					if(rexMatch) {
 						operator.regexp = new RegExp(rexMatch[1], rexMatch[2]);

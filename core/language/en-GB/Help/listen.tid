@@ -22,6 +22,7 @@ All parameters are optional with safe defaults, and can be specified in any orde
 * ''readers'' - comma separated list of principals allowed to read from this wiki
 * ''writers'' - comma separated list of principals allowed to write to this wiki
 * ''csrf-disable'' - set to "yes" to disable CSRF checks (defaults to "no")
+* ''sse-enabled'' - set to "yes" to enable Server-sent events (defaults to "no")
 * ''root-tiddler'' - the tiddler to serve at the root (defaults to "$:/core/save/all")
 * ''root-render-type'' - the content type to which the root tiddler should be rendered (defaults to "text/plain")
 * ''root-serve-type'' - the content type with which the root tiddler should be served (defaults to "text/html")
