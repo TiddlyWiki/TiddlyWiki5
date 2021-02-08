@@ -1,20 +1,21 @@
 created: 20210203184649726
-modified: 20210208144521939
+modified: 20210208152038746
 tags: HookMechanism
 title: Hook: th-before-importing
 type: text/vnd.tiddlywiki
 
 This hook allows plugins to inspect or modify the `importTiddler` object ''before'' any tiddlers are imported. It is invoked after the final "Import" button is clicked, but ''before'' the selected tiddlers are being imported into the store.
 
-''Usecases'':
+''Intended Usecases'':
 
 * Manipulate the import "selection state"
 * Eg: create a customized "log-tiddler" that contains a heading, that should only be written once
 
 ''Important'': 
 
-* This hook ''can not'' be used to manpulate the `importTiddler.fields.text` element!
-* If you need to manipulate the imported tiddler content at this stage of the process, you need to use: [[Hook: th-importing-tiddler]]
+* This hook ''should not'' be used to manpulate the `importTiddler.fields.text` element!
+* If you want to give the users a possibility to verify the imported data, use ùpgraders like: `$:/core/modules/upgraders/` instead
+* If you need to manipulate the imported tiddler content, without default user interaction, consider: [[Hook: th-importing-tiddler]] instead
 
 The hook is part of the `NavigatorWidget.prototype.handlePerformImportEvent` function.
 
