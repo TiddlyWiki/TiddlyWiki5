@@ -1,27 +1,32 @@
 created: 20210203184649726
-modified: 20210203205410246
+modified: 20210208144521939
 tags: HookMechanism
 title: Hook: th-before-importing
 type: text/vnd.tiddlywiki
 
-This hook allows plugins to inspect or modify the `importTiddler` object ''before'' any tiddlers are imported. It is invoked when the final "Import" button is clicked, but ''before'' the selected tiddlers are being imported into the store.
+This hook allows plugins to inspect or modify the `importTiddler` object ''before'' any tiddlers are imported. It is invoked after the final "Import" button is clicked, but ''before'' the selected tiddlers are being imported into the store.
 
-It's part of the `NavigatorWidget.prototype.handlePerformImportEvent` function.
+''Usecases'':
 
-Use this hook if you want to eg: create a customized "log-tiddler" that should contain a heading, that should only be written once.
+* Manipulate the import "selection state"
+* Eg: create a customized "log-tiddler" that contains a heading, that should only be written once
+
+''Important'': 
+
+* This hook ''can not'' be used to manpulate the `importTiddler.fields.text` element!
+* If you need to manipulate the imported tiddler content at this stage of the process, you need to use: [[Hook: th-importing-tiddler]]
+
+The hook is part of the `NavigatorWidget.prototype.handlePerformImportEvent` function.
 
 Hook function parameters:
 
-* ''importTiddler'': an object, that contains information about "selected / unselected" tiddlers and more. 
+* ''importTiddler'': an object, that contains information about "selected / unselected" tiddlers and more
 
 Return value:
 
 * ''importTiddler'': object
 
-The original importTiddler object can be returned unmodified by the hook, which is probably the case for most use-cases.
-
-If you want to manipulate the tiddlers that should be imported use: [[Hook: th-importing-tiddler]] instead.
-
+The hook must return the `importTiddler` object. For many usecases the object will be returned unmodified.
 
 ''Example code how to implement a hook in your project''
 

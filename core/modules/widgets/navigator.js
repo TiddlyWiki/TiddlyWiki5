@@ -560,9 +560,10 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 		importTiddler = this.wiki.getTiddler(event.param),
 		importData = this.wiki.getTiddlerDataCached(event.param,{tiddlers: {}}),
 		importReport = [];
-	// Add the tiddlers to the store
+
 	importReport.push($tw.language.getString("Import/Imported/Hint") + "\n");
-	// Let the loggers do their work
+	// th-before-importing _can not_ manipulate the importTiddler.fields.text element!
+	// Use th-importing-tiddler later in the process
 	importTiddler = $tw.hooks.invokeHook("th-before-importing",importTiddler);
 	$tw.utils.each(importData.tiddlers,function(tiddlerFields) {
 		var title = tiddlerFields.title;
@@ -572,7 +573,10 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 			} else {
 				var tiddler = new $tw.Tiddler(tiddlerFields);
 			}
+			// th-importing-tiddler doesn't allow user interaction by default
+			// If you want to use the core UI. Use: $:/core/modules/upgraders/ instead
 			tiddler = $tw.hooks.invokeHook("th-importing-tiddler",tiddler);
+			// Add the tiddlers to the store
 			self.wiki.addTiddler(tiddler);
 			importReport.push("# [[" + tiddler.fields.title + "]]");
 		}
