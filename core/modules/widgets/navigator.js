@@ -523,7 +523,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	// Give the active upgrader modules a chance to process the incoming tiddlers
 	var messages = this.wiki.invokeUpgraders(incomingTiddlers,importData.tiddlers);
 	// Deselect any disabled, but _not_ suppressed tiddlers
-	var systemMessage = $tw.language.getString("Import/Upgrader/System/Disabled");
+	var systemMessage = $tw.language.getString("Import/Upgrader/Disabled/Tiddler");
 	$tw.utils.each(messages,function(message,title) {
 		newFields["message-" + title] = message;
 		if (message.indexOf(systemMessage) !== -1) {
