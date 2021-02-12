@@ -526,7 +526,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	var systemMessage = $tw.language.getString("Import/Upgrader/System/Disabled");
 	$tw.utils.each(messages,function(message,title) {
 		newFields["message-" + title] = message;
-		if (message === systemMessage) {
+		if (message.indexOf(systemMessage) !== -1) {
 			newFields["selection-" + title] = "unchecked";
 		}
 	});
