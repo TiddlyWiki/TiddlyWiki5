@@ -12,6 +12,8 @@ An override of the core text widget that automatically linkifies the text
 /*global $tw: false */
 "use strict";
 
+var TITLE_TARGET_FILTER = "$:/config/Freelinks/TargetFilter";
+
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
 	LinkWidget = require("$:/core/modules/widgets/link.js").link,
 	ButtonWidget = require("$:/core/modules/widgets/button.js").button,
@@ -51,7 +53,9 @@ TextNodeWidget.prototype.execute = function() {
 	if(this.getVariable("tv-wikilinks",{defaultValue:"yes"}).trim() !== "no" && this.getVariable("tv-freelinks",{defaultValue:"no"}).trim() === "yes" && !this.isWithinButtonOrLink()) {
 		// Get the information about the current tiddler titles, and construct a regexp
 		this.tiddlerTitleInfo = this.wiki.getGlobalCache("tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive"),function() {
-			var sortedTitles = self.wiki.allTitles().sort(function(a,b) {
+			var targetFilterText = self.wiki.getTiddlerText(TITLE_TARGET_FILTER),
+				titles = !!targetFilterText ? self.wiki.filterTiddlers(targetFilterText,$tw.rootWidget) : self.wiki.allTitles(),
+				sortedTitles = titles.sort(function(a,b) {
 					var lenA = a.length,
 						lenB = b.length;
 					// First sort by length, so longer titles are first
