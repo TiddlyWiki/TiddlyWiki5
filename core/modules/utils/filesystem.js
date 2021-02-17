@@ -282,6 +282,10 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 		fileInfo: options.fileInfo,
 		originalpath: options.originalpath
 	});
+	if(fileInfo.isEditableFile && path.dirname(fileInfo.filepath) !== path.dirname(options.originalpath)) {
+		// The filepath has changed, remove the isEditableFile flag
+		fileInfo.isEditableFile = false;
+	}
 	return fileInfo;
 };
 
@@ -292,8 +296,7 @@ Options include:
 	wiki: optional wiki for evaluating the extFilters
 */
 exports.generateTiddlerExtension = function(title,options) {
-	var self = this,
-		extension;
+	var extension;
 	// Check if any of the extFilters applies
 	if(options.extFilters && options.wiki) { 
 		$tw.utils.each(options.extFilters,function(filter) {
@@ -385,14 +388,15 @@ exports.generateTiddlerFilepath = function(title,options) {
 		count++;
 	} while(fs.existsSync(fullPath));
 	// If the last write failed with an error, or if path does not start with:
-	//	the resolved options.directory, the resolved wikiPath directory, or the wikiTiddlersPath directory, 
-	//	then encodeURIComponent() and resolve to tiddler directory
+	//	the resolved options.directory, the resolved wikiPath directory, the wikiTiddlersPath directory, 
+	//	or the 'originalpath' directory, then encodeURIComponent() and resolve to tiddler directory.
 	var writePath = $tw.hooks.invokeHook("th-make-tiddler-path",fullPath),
 		encode = (options.fileInfo || {writeError: false}).writeError == true;
 	if(!encode) {
-		encode = !(fullPath.indexOf(path.resolve(directory)) == 0 ||
+		encode = !( fullPath.indexOf(path.resolve(directory)) == 0 ||
 			fullPath.indexOf(path.resolve($tw.boot.wikiPath)) == 0 ||
-			fullPath.indexOf($tw.boot.wikiTiddlersPath) == 0);
+			fullPath.indexOf($tw.boot.wikiTiddlersPath) == 0 ||
+			path.dirname(fullPath) === path.dirname(originalpath) );
 		}
 	if(encode) {
 		writePath = path.resolve(directory,encodeURIComponent(fullPath));
