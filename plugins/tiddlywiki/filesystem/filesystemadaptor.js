@@ -66,8 +66,7 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 		pathFilters: pathFilters,
 		extFilters: extFilters,
 		wiki: this.wiki,
-		fileInfo: fileInfo,
-		originalpath: fileInfo.isEditableFile && fileInfo.filepath
+		fileInfo: fileInfo
 	});
 	callback(null,newInfo);
 };

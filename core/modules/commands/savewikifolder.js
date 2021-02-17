@@ -167,10 +167,10 @@ WikiFolderMaker.prototype.saveTiddler = function(directory,tiddler) {
 	}
 	var fileInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
 		directory: path.resolve(this.wikiFolderPath,directory),
-		wiki: this.wiki,
 		pathFilters: pathFilters,
 		extFilters: extFilters,
-		originalpath: fileInfo.isEditableFile && fileInfo.filepath
+		wiki: this.wiki,
+		fileInfo: fileInfo
 	});
 	try {
 		$tw.utils.saveTiddlerToFileSync(tiddler,fileInfo);

@@ -2133,6 +2133,7 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 			fileInfo = $tw.boot.files[title];
 			if(fileInfo.isEditableFile) {
 				relativePath = path.relative($tw.boot.wikiTiddlersPath,fileInfo.filepath);
+				fileInfo.originalpath = relativePath;
 				output[title] =
 					path.sep === "/" ?
 					relativePath :

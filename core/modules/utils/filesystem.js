@@ -213,13 +213,13 @@ Options include:
 	extFilters: optional array of filters to be used to generate the base path
 	wiki: optional wiki for evaluating the pathFilters,
 	fileInfo: an existing fileInfo to check against
-	originalpath: a preferred filepath if no pathFilters match
 */
 exports.generateTiddlerFileInfo = function(tiddler,options) {
 	var fileInfo = {}, metaExt;
 	// Propagate the isEditableFile flag
-	if(options.fileInfo) {
-		fileInfo.isEditableFile = options.fileInfo.isEditableFile || false;
+	if(options.fileInfo && options.fileInfo.isEditableFile) {
+		fileInfo.isEditableFile = true;
+		fileInfo.originalpath = options.fileInfo.originalpath;
 	}
 	// Check if the tiddler has any unsafe fields that can't be expressed in a .tid or .meta file: containing control characters, or leading/trailing whitespace
 	var hasUnsafeFields = false;
@@ -279,13 +279,8 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 		directory: options.directory,
 		pathFilters: options.pathFilters,
 		wiki: options.wiki,
-		fileInfo: options.fileInfo,
-		originalpath: options.originalpath
+		fileInfo: options.fileInfo
 	});
-	if(fileInfo.isEditableFile && path.dirname(fileInfo.filepath) !== path.dirname(options.originalpath)) {
-		// The filepath has changed, remove the isEditableFile flag
-		fileInfo.isEditableFile = false;
-	}
 	return fileInfo;
 };
 
@@ -321,10 +316,10 @@ Options include:
 	wiki: optional wiki for evaluating the pathFilters
 	fileInfo: an existing fileInfo object to check against
 */
-exports.generateTiddlerFilepath = function(title,options) {
+exports.generateTiddlerFilepath = function(title,options) {debugger;
 	var directory = options.directory || "",
 		extension = options.extension || "",
-		originalpath = options.originalpath || "",
+		originalpath = (options.fileInfo && options.fileInfo.originalpath) ? options.fileInfo.originalpath : "",
 		filepath;
 	// Check if any of the pathFilters applies
 	if(options.pathFilters && options.wiki) {
@@ -338,7 +333,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 			}
 		});
 	}
-	if(!filepath && originalpath !== "") {
+	if(!filepath && !!originalpath) {
 		//Use the originalpath without the extension
 		var ext = path.extname(originalpath);
 		filepath = originalpath.substring(0,originalpath.length - ext.length);
@@ -390,13 +385,13 @@ exports.generateTiddlerFilepath = function(title,options) {
 	// If the last write failed with an error, or if path does not start with:
 	//	the resolved options.directory, the resolved wikiPath directory, the wikiTiddlersPath directory, 
 	//	or the 'originalpath' directory, then encodeURIComponent() and resolve to tiddler directory.
-	var writePath = $tw.hooks.invokeHook("th-make-tiddler-path",fullPath),
+	var writePath = $tw.hooks.invokeHook("th-make-tiddler-path",fullPath,fullPath),
 		encode = (options.fileInfo || {writeError: false}).writeError == true;
 	if(!encode) {
-		encode = !( fullPath.indexOf(path.resolve(directory)) == 0 ||
-			fullPath.indexOf(path.resolve($tw.boot.wikiPath)) == 0 ||
-			fullPath.indexOf($tw.boot.wikiTiddlersPath) == 0 ||
-			path.dirname(fullPath) === path.dirname(originalpath) );
+		encode = !( writePath.indexOf(path.resolve(originalpath)) ||
+			writePath.indexOf(path.resolve(directory)) == 0 ||
+			writePath.indexOf(path.resolve($tw.boot.wikiPath)) == 0 ||
+			writePath.indexOf($tw.boot.wikiTiddlersPath) == 0 );
 		}
 	if(encode) {
 		writePath = path.resolve(directory,encodeURIComponent(fullPath));
