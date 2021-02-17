@@ -246,16 +246,12 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 			fileInfo.type = tiddlerType;
 			fileInfo.hasMetaFile = true;
 		}
-		if(fileInfo.isEditableFile || options.extFilters) {
+		if(options.extFilters) {
 			// Check for extension overrides
-			if(fileInfo.isEditableFile) {
-				metaExt	= path.extname(options.originalpath);
-			} else {
-				metaExt = $tw.utils.generateTiddlerExtension(tiddler.fields.title,{
-					extFilters: options.extFilters,
-					wiki: options.wiki
-				});
-			}
+			metaExt = $tw.utils.generateTiddlerExtension(tiddler.fields.title,{
+				extFilters: options.extFilters,
+				wiki: options.wiki
+			});
 			if(metaExt) {
 				if(metaExt === ".tid") {
 					// Overriding to the .tid extension needs special handling
@@ -327,12 +323,8 @@ exports.generateTiddlerFilepath = function(title,options) {
 		extension = options.extension || "",
 		originalpath = options.originalpath || "",
 		filepath;
-	if(originalpath !== "") {
-		//Use the originalpath
-		filepath = originalpath;
-	}
 	// Check if any of the pathFilters applies
-	if(!filepath && options.pathFilters && options.wiki) {
+	if(options.pathFilters && options.wiki) {
 		$tw.utils.each(options.pathFilters,function(filter) {
 			if(!filepath) {
 				var source = options.wiki.makeTiddlerIterator([title]),
@@ -343,7 +335,11 @@ exports.generateTiddlerFilepath = function(title,options) {
 			}
 		});
 	}
-	if(!filepath) {
+	if(!filepath && originalpath !== "") {
+		//Use the originalpath without the extension
+		var ext = path.extname(originalpath);
+		filepath = originalpath.substring(0,originalpath.length - ext.length);
+	} else if(!filepath) {
 		filepath = title;
 		// Remove any forward or backward slashes so we don't create directories
 		filepath = filepath.replace(/\/|\\/g,"_");
