@@ -316,7 +316,7 @@ Options include:
 	wiki: optional wiki for evaluating the pathFilters
 	fileInfo: an existing fileInfo object to check against
 */
-exports.generateTiddlerFilepath = function(title,options) {debugger;
+exports.generateTiddlerFilepath = function(title,options) {
 	var directory = options.directory || "",
 		extension = options.extension || "",
 		originalpath = (options.fileInfo && options.fileInfo.originalpath) ? options.fileInfo.originalpath : "",
@@ -387,11 +387,10 @@ exports.generateTiddlerFilepath = function(title,options) {debugger;
 	//	or the 'originalpath' directory, then encodeURIComponent() and resolve to tiddler directory.
 	var writePath = $tw.hooks.invokeHook("th-make-tiddler-path",fullPath,fullPath),
 		encode = (options.fileInfo || {writeError: false}).writeError == true;
-	if(!encode) {
-		encode = !( writePath.indexOf(path.resolve(originalpath)) ||
-			writePath.indexOf(path.resolve(directory)) == 0 ||
+	if(!encode) {debugger;
+		encode = !( writePath.indexOf(path.resolve(directory)) == 0 ||
 			writePath.indexOf(path.resolve($tw.boot.wikiPath)) == 0 ||
-			writePath.indexOf($tw.boot.wikiTiddlersPath) == 0 );
+			writePath.indexOf(path.resolve($tw.boot.wikiTiddlersPath,originalpath)) == 0 );
 		}
 	if(encode) {
 		writePath = path.resolve(directory,encodeURIComponent(fullPath));
