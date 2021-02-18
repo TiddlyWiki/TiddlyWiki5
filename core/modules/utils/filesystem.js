@@ -388,7 +388,8 @@ exports.generateTiddlerFilepath = function(title,options) {
 	var writePath = $tw.hooks.invokeHook("th-make-tiddler-path",fullPath,fullPath),
 		encode = (options.fileInfo || {writeError: false}).writeError == true;
 	if(!encode) {
-		encode = !( writePath.indexOf(path.resolve(directory)) == 0 ||
+		encode = !(writePath.indexOf($tw.boot.wikiTiddlersPath) == 0 ||
+			writePath.indexOf(path.resolve(directory)) == 0 ||
 			writePath.indexOf(path.resolve($tw.boot.wikiPath)) == 0 ||
 			writePath.indexOf(path.resolve($tw.boot.wikiTiddlersPath,originalpath)) == 0 );
 		}
