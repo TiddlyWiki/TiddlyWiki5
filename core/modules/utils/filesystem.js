@@ -217,7 +217,7 @@ Options include:
 exports.generateTiddlerFileInfo = function(tiddler,options) {
 	var fileInfo = {}, metaExt;
 	// Propagate the isEditableFile flag
-	if(options.fileInfo && options.fileInfo.isEditableFile) {
+	if(options.fileInfo && !!options.fileInfo.isEditableFile) {
 		fileInfo.isEditableFile = true;
 		fileInfo.originalpath = options.fileInfo.originalpath;
 	}
@@ -387,7 +387,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 	//	or the 'originalpath' directory, then encodeURIComponent() and resolve to tiddler directory.
 	var writePath = $tw.hooks.invokeHook("th-make-tiddler-path",fullPath,fullPath),
 		encode = (options.fileInfo || {writeError: false}).writeError == true;
-	if(!encode) {debugger;
+	if(!encode) {
 		encode = !( writePath.indexOf(path.resolve(directory)) == 0 ||
 			writePath.indexOf(path.resolve($tw.boot.wikiPath)) == 0 ||
 			writePath.indexOf(path.resolve($tw.boot.wikiTiddlersPath,originalpath)) == 0 );
