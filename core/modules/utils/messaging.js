@@ -22,7 +22,7 @@ Class to handle subscribing to publishers
 target: Target window (eg iframe.contentWindow)
 type: String indicating type of item for which subscriptions are being provided (eg "SAVING")
 onsubscribe: Function to be invoked with err parameter when the subscription is established, or there is a timeout
-onmessage: Function to be invoked when a new message arrives. Returns the results to be replied
+onmessage: Function to be invoked when a new message arrives, invoked with (data,callback). The callback is invoked with the argument (response)
 */
 function BrowserMessagingSubscriber(options) {
 	var self = this;
@@ -42,10 +42,11 @@ function BrowserMessagingSubscriber(options) {
 				self.hasConfirmed = true;
 				self.onsubscribe(null);
 			} else if(event.data.verb === self.type) {
-				var response = self.onmessage(event.data);
-				// Send the response back on the supplied port, and then close it
-				event.ports[0].postMessage(response);
-				event.ports[0].close();
+				self.onmessage(event.data,function(response) {
+					// Send the response back on the supplied port, and then close it
+					event.ports[0].postMessage(response);
+					event.ports[0].close();
+				});
 			}
 		}
 	});
