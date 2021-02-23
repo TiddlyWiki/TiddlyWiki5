@@ -23,7 +23,8 @@ tiddlerfield: 定义个别条目栏位的行为。
 tiddlermethod: 添加方法至 `$tw.Tiddler` 原型。
 upgrader: 于升级/导入过程中，套用升级处理至条目。
 utils: 添加方法至 `$tw.utils`。
-utils-node: 将特定于 Node.js 的方法添加到 '$tw.utils'。
+utils-browser: 将特定于浏览器的方法添加到 `$tw.utils`。
+utils-node: 将特定于 Node.js 的方法添加到 `$tw.utils`。
 widget: 封装 DOM 渲染和刷新的小部件。
 wikimethod: 添加方法至 `$tw.Wiki`。
 wikirule: WikiText 解析器的个别的语法规则。
