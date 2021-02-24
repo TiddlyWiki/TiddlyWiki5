@@ -32,11 +32,11 @@ exports.startup = function() {
 	$tw.titleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TITLE_TITLE,{document: $tw.fakeDocument, parseAsInline: true});
 	$tw.titleContainer = $tw.fakeDocument.createElement("div");
 	$tw.titleWidgetNode.render($tw.titleContainer,null);
-	$tw.titlePublisher = new $tw.utils.BrowserMessagingPublisher({type: "PAGETITLE", onsubscribe: publishTitle});
 	var publishTitle = function() {
 		$tw.titlePublisher.send({verb: "PAGETITLE",body: document.title});
 		document.title = $tw.titleContainer.textContent;
 	};
+	$tw.titlePublisher = new $tw.utils.BrowserMessagingPublisher({type: "PAGETITLE", onsubscribe: publishTitle});
 	publishTitle();
 	$tw.wiki.addEventListener("change",function(changes) {
 		if($tw.titleWidgetNode.refresh(changes,$tw.titleContainer,null)) {
