@@ -15,18 +15,20 @@ exports.name = "unusedtitle";
 
 exports.params = [
 	{name: "baseName"},
-	{name: "prefix"}
+	{name: "separator"}
 ];
 
 /*
 Run the macro
 */
-exports.run = function(baseName, prefix) {
-	prefix = prefix || " ";
+exports.run = function(baseName, separator) {
+	separator = separator || " ";
 	if(!baseName) {
 		baseName = $tw.language.getString("DefaultNewTiddlerTitle");
 	}
-	return this.wiki.generateNewTitle(baseName, {"prefix": prefix});
+	// $tw.wiki.generateNewTitle = function(baseTitle,options)
+	// options.prefix must be a string! 
+	return this.wiki.generateNewTitle(baseName, {"prefix": separator});
 };
 
 })();
