@@ -196,9 +196,19 @@ exports.generateNewTitle = function(baseTitle,options) {
 	options = options || {};
 	var c = 0,
 		title = baseTitle,
+		template = options.template,
 		prefix = (typeof(options.prefix) === "string") ? options.prefix : " ";
-	while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
-		title = baseTitle + prefix + (++c);
+	if (template) {
+		// CNT is important to avoid an endless loop in while(...)!!
+		template = (template.indexOf("$CNT") === -1) ? template + "$CNT$" : template;
+		title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":c});
+		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
+			title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":(++c)});
+		}
+	} else {
+		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
+			title = baseTitle + prefix + (++c);
+		}
 	}
 	return title;
 };

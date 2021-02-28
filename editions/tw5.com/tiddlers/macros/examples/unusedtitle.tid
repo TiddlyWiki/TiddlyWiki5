@@ -1,5 +1,5 @@
 created: 20210104143940715
-modified: 20210226165257588
+modified: 20210228141241657
 tags: [[unusedtitle Macro]] [[Macro Examples]]
 title: unusedtitle Macro (Examples)
 type: text/vnd.tiddlywiki
@@ -9,3 +9,8 @@ type: text/vnd.tiddlywiki
 <$macrocall $name=".example" n="2" eg="""<<unusedtitle separator:"-">>"""/>
 <$macrocall $name=".example" n="3" eg="""<<unusedtitle baseName:"anotherBase">>"""/>
 <$macrocall $name=".example" n="4" eg="""<<unusedtitle baseName:"About" separator:"-">>"""/>
+<$macrocall $name=".example" n="5" eg="""<<unusedtitle template:"$CNT:2$-test">>"""/>
+
+---
+
+Working buttons can be found at: [[unusedtitle Macro (Examples 1)]]. You'll have to examine the code to see, what's going on.
