@@ -263,8 +263,8 @@ Server.prototype.listen = function(port,host,prefix) {
 		}
 	}
 	if(missing.length > 0) {
-		var warning = "Warning: Plugin(s) required for client-server operation are missing from tiddlywiki.info file: \"" + missing.join("\", \"") + "\"";
-		$tw.utils.warning(warning);
+		var error = "Error: Plugin(s) required for client-server operation are missing from the command line or the tiddlywiki.info file: \"" + missing.join("\", \"") + "\"";
+		$tw.utils.error(error);
 	}
 	// Create the server
 	var server;
