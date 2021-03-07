@@ -1,5 +1,5 @@
 created: 20201130191618831
-modified: 20201130194441670
+modified: 20210307102027763
 tags: RangeWidget
 title: RangeWidget Example
 type: text/vnd.tiddlywiki
@@ -48,7 +48,6 @@ type: text/vnd.tiddlywiki
 
 ---
 
-<details>
-    <summary>Show the code [[RangeWidget Example]]</summary>
-    <pre><code><$view mode=text&><pre><code>
-</details>
+The wikitext of this example is shown below:
+
+<$codeblock code={{RangeWidget Example!!text}}/>
