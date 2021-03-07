@@ -436,6 +436,12 @@ Russ Thomas, @codacodr, 2021/01/03
 
 Peter Neumark, @neumark, 2021/01/15
 
+Daniel Goß, @FlashSystems, 2021/01/19
+
 @leehawk787, 2021/01/21
 
 Yoonchae Lee, @BlueGreenMagick, 2021/01/21
+
+Dyllon Gagnier, @slaymaker1907, 2021/01/24
+
+J. Wilhelm, @jeremyredhead, 2021/01/27
