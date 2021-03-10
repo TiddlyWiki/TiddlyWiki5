@@ -52,14 +52,21 @@ function Server(options) {
 	// Initialize browser-caching
 	this.enableBrowserCache = this.get("use-browser-cache") === "yes";
 	// Initialise authorization
-	var authorizedUserName = (this.get("username") && this.get("password")) ? this.get("username") : "(anon)";
+	var authorizedUserName;
+	if(this.get("username") && this.get("password")) {
+		authorizedUserName = this.get("username");
+	} else if(this.get("credentials")) {
+		authorizedUserName = "(authenticated)";
+	} else {
+		authorizedUserName = "(anon)";
+	}
 	this.authorizationPrincipals = {
 		readers: (this.get("readers") || authorizedUserName).split(",").map($tw.utils.trim),
 		writers: (this.get("writers") || authorizedUserName).split(",").map($tw.utils.trim)
 	}
 	// Load and initialise authenticators
 	$tw.modules.forEachModuleOfType("authenticator", function(title,authenticatorDefinition) {
-		// console.log("Loading server route " + title);
+		// console.log("Loading authenticator " + title);
 		self.addAuthenticator(authenticatorDefinition.AuthenticatorClass);
 	});
 	// Load route handlers
