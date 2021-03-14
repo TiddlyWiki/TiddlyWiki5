@@ -63,7 +63,7 @@ function parseFilterOperation(operators,filterString,p) {
 			operator.operator = "title";
 		}
 		operator.operands = [];
-		function parseOperand(bracketType) {
+		var parseOperand = function(bracketType) {
 			var operand = {};
 			switch (bracketType) {
 				case "{": // Curly brackets
