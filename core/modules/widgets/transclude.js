@@ -43,6 +43,7 @@ TranscludeWidget.prototype.execute = function() {
 	this.transcludeField = this.getAttribute("field");
 	this.transcludeIndex = this.getAttribute("index");
 	this.transcludeMode = this.getAttribute("mode");
+	this.recursionMarker = this.getAttribute("recursionMarker","yes");
 	// Parse the text reference
 	var parseAsInline = !this.parseTreeNode.isBlock;
 	if(this.transcludeMode === "inline") {
@@ -61,7 +62,9 @@ TranscludeWidget.prototype.execute = function() {
 		parseTreeNodes = parser ? parser.tree : this.parseTreeNode.children;
 	// Set context variables for recursion detection
 	var recursionMarker = this.makeRecursionMarker();
-	this.setVariable("transclusion",recursionMarker);
+	if(this.recursionMarker === "yes") {
+		this.setVariable("transclusion",recursionMarker);
+	}
 	// Check for recursion
 	if(parser) {
 		if(this.parentWidget && this.parentWidget.hasVariable("transclusion",recursionMarker)) {

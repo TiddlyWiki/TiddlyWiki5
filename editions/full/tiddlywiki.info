@@ -30,6 +30,7 @@
 		"tiddlywiki/xmldom"
 	],
 	"languages": [
+		"ar-PS",
 		"ca-ES",
 		"cs-CZ",
 		"da-DK",

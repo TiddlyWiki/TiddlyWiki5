@@ -1,6 +1,8 @@
 title: $:/language/Help/savetiddlers
 description: Enregistre un groupe de tiddlers vers un répertoire
 
+(À noter : la commande `--savetiddlers` est dépréciée. Il est préférable d'utiliser la nouvelle commande `--save`, plus souple)
+
 Enregistre un groupe de tiddlers vers le chemin spécifié, sous leur forme brute, texte ou binaire. 
 
 ```

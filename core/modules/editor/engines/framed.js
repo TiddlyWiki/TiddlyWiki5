@@ -42,7 +42,6 @@ function FramedEngine(options) {
 	this.iframeNode.style.border = "none";
 	this.iframeNode.style.padding = "0";
 	this.iframeNode.style.resize = "none";
-	this.iframeNode.style["background-color"] = this.widget.wiki.extractTiddlerDataItem(this.widget.wiki.getTiddlerText("$:/palette"),"tiddler-editor-background");
 	this.iframeDoc.body.style.margin = "0";
 	this.iframeDoc.body.style.padding = "0";
 	this.widget.domNodes.push(this.iframeNode);
@@ -74,6 +73,12 @@ function FramedEngine(options) {
 	if(this.widget.editTabIndex) {
 		this.iframeNode.setAttribute("tabindex",this.widget.editTabIndex);
 	}
+	if(this.widget.editAutoComplete) {
+		this.domNode.setAttribute("autocomplete",this.widget.editAutoComplete);
+	}
+	if(this.widget.isDisabled === "yes") {
+		this.domNode.setAttribute("disabled",true);
+	}	
 	// Copy the styles from the dummy textarea
 	this.copyStyles();
 	// Add event listeners
@@ -81,7 +86,7 @@ function FramedEngine(options) {
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
 		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"},
-		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"},
+		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"}
 	]);
 	// Insert the element into the DOM
 	this.iframeDoc.body.appendChild(this.domNode);
@@ -97,7 +102,6 @@ FramedEngine.prototype.copyStyles = function() {
 	this.domNode.style.display = "block";
 	this.domNode.style.width = "100%";
 	this.domNode.style.margin = "0";
-	this.domNode.style["background-color"] = this.widget.wiki.extractTiddlerDataItem(this.widget.wiki.getTiddlerText("$:/palette"),"tiddler-editor-background");
 	// In Chrome setting -webkit-text-fill-color overrides the placeholder text colour
 	this.domNode.style["-webkit-text-fill-color"] = "currentcolor";
 };
@@ -108,11 +112,18 @@ Set the text of the engine if it doesn't currently have focus
 FramedEngine.prototype.setText = function(text,type) {
 	if(!this.domNode.isTiddlyWikiFakeDom) {
 		if(this.domNode.ownerDocument.activeElement !== this.domNode) {
-			this.domNode.value = text;
+			this.updateDomNodeText(text);
 		}
 		// Fix the height if needed
 		this.fixHeight();
 	}
+};
+
+/*
+Update the DomNode with the new text
+*/
+FramedEngine.prototype.updateDomNodeText = function(text) {
+	this.domNode.value = text;
 };
 
 /*
@@ -177,6 +188,9 @@ Handle a dom "input" event which occurs when the text has changed
 FramedEngine.prototype.handleInputEvent = function(event) {
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
+	if(this.widget.editInputActions) {
+		this.widget.invokeActionString(this.widget.editInputActions);
+	}
 	return true;
 };
 

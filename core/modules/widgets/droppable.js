@@ -27,21 +27,21 @@ DroppableWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 DroppableWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
+	var self = this,
+		tag = this.parseTreeNode.isBlock ? "div" : "span",
+		domNode;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
-	var tag = this.parseTreeNode.isBlock ? "div" : "span";
 	if(this.droppableTag && $tw.config.htmlUnsafeElements.indexOf(this.droppableTag) === -1) {
 		tag = this.droppableTag;
 	}
 	// Create element and assign classes
-	var domNode = this.document.createElement(tag),
-		classes = (this.droppableClass || "").split(" ");
-	classes.push("tc-droppable");
-	domNode.className = classes.join(" ");
+	domNode = this.document.createElement(tag);
+	this.domNode = domNode;
+	this.assignDomNodeClasses();
 	// Add event handlers
 	if(this.droppableEnable) {
 		$tw.utils.addEventListeners(domNode,[
@@ -50,6 +50,8 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 			{name: "dragleave", handlerObject: this, handlerMethod: "handleDragLeaveEvent"},
 			{name: "drop", handlerObject: this, handlerMethod: "handleDropEvent"}
 		]);		
+	} else {
+		$tw.utils.addClass(this.domNode,this.disabledClass);
 	}
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
@@ -132,8 +134,7 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 
 DroppableWidget.prototype.performActions = function(title,event) {
 	if(this.droppableActions) {
-		var modifierKey = event.ctrlKey && ! event.shiftKey ? "ctrl" : event.shiftKey && !event.ctrlKey ? "shift" : 
-				event.ctrlKey && event.shiftKey ? "ctrl-shift" : "normal" ;
+		var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
 		this.invokeActionString(this.droppableActions,this,event,{actionTiddler: title, modifier: modifierKey});
 	}
 };
@@ -145,10 +146,16 @@ DroppableWidget.prototype.execute = function() {
 	this.droppableActions = this.getAttribute("actions");
 	this.droppableEffect = this.getAttribute("effect","copy");
 	this.droppableTag = this.getAttribute("tag");
-	this.droppableClass = this.getAttribute("class");
 	this.droppableEnable = (this.getAttribute("enable") || "yes") === "yes";
+	this.disabledClass = this.getAttribute("disabledClass","");
 	// Make child widgets
 	this.makeChildWidgets();
+};
+
+DroppableWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" ");
+	classes.push("tc-droppable");
+	this.domNode.className = classes.join(" ");	
 };
 
 /*
@@ -156,9 +163,11 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DroppableWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes["class"] || changedAttributes.tag || changedAttributes.enable) {
+	if(changedAttributes.tag || changedAttributes.enable || changedAttributes.disabledClass || changedAttributes.actions || changedAttributes.effect) {
 		this.refreshSelf();
 		return true;
+	} else if(changedAttributes["class"]) {
+		this.assignDomNodeClasses();
 	}
 	return this.refreshChildren(changedTiddlers);
 };

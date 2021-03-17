@@ -1,12 +1,14 @@
+caption: ~TiddlySpot
+color: #29B6F6
+community-author: Simon Baird and Daniel Baird
 created: 20130825213500000
-modified: 20160610082610879
-tags: Saving Android Chrome Firefox InternetExplorer iOS Linux Mac Opera PHP Safari Windows
+delivery: Service
+description: Free online service for hosting TiddlyWiki files
+method: save
+modified: 20200507202953380
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
 title: Saving on TiddlySpot
 type: text/vnd.tiddlywiki
-delivery: Service
-method: save
-caption: TiddlySpot
-description: Free online service for hosting TiddlyWiki files
 
 [[TiddlySpot|http://tiddlyspot.com]] is a free hosting service for TiddlyWiki documents from Simon Baird and Daniel Baird.
 

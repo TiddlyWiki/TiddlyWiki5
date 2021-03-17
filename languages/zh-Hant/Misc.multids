@@ -10,6 +10,7 @@ ConfirmCancelTiddler: 您確定要放棄對條目 "<$text text=<<title>>/>" 的�
 ConfirmDeleteTiddler: 您確定要刪除條目 "<$text text=<<title>>/>"？
 ConfirmOverwriteTiddler: 您確定要覆寫條目 "<$text text=<<title>>/>"？
 ConfirmEditShadowTiddler: 您即將要編輯預設條目，任何更改將會覆蓋預設的系統，使未來的升級不尋常。您確定要編輯 "<$text text=<<title>>/>"?
+ConfirmAction: 是否要繼續？
 Count: 計數
 DefaultNewTiddlerTitle: 新條目
 Diffs/CountMessage: <<diff-count>> 個差異
@@ -25,7 +26,9 @@ Encryption/SetPassword: 設定密碼
 Error/Caption: 錯誤
 Error/EditConflict: 伺服器上的檔案已更改
 Error/Filter: 篩選器錯誤
+Error/FilterRunPrefix: 篩選器錯誤：篩選器 run 的未知首碼
 Error/FilterSyntax: 篩選器運算式中的語法錯誤
+Error/FormatFilterOperator: 篩選器錯誤：`format` 篩選器運算子的未知尾碼
 Error/IsFilterOperator: 篩選器錯誤︰'is' 篩選器運算子的未知運算元
 Error/LoadingPluginLibrary: 載入插件程式庫時，發生錯誤
 Error/NetworkErrorAlert: `<h2>''網路錯誤''</h2>與伺服器的連線似乎已中斷。這可能表示您的網路連線有問題。請嘗試恢復網路連線才能繼續。<br><br>''恢復連線時，所有未儲存的變更，將自動同步''。`
@@ -37,6 +40,7 @@ Error/XMLHttpRequest: XMLHttpRequest 錯誤代碼
 InternalJavaScriptError/Title: 內部的 JavaScript 錯誤
 InternalJavaScriptError/Hint: 喔，真是令人尷尬。建議刷新您的瀏覽器，重新啟動 TiddlyWiki
 InvalidFieldName: 欄位名稱 "<$text text=<<fieldName>>/>" 包含無效字元，欄位名稱只能包含小寫字母、數字、底線 (`_`)、 連接號 (`-`) 和小數點 (`.`)
+LayoutSwitcher/Description: 開啟版面切換器
 LazyLoadingWarning: <p>正在從 ''<$text text={{!!_canonical_uri}}/>'' 載入外部內容 ...</p><p>如果此訊息未消失，可能是條目內容類型與外部內容的類型不匹配，或是您可能正在使用的瀏覽器，不支援單檔式維基的外部內容。請參閱 https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: 登入 TiddlySpace
 Manager/Controls/FilterByTag/None: (無)
@@ -60,8 +64,23 @@ MissingTiddler/Hint: 佚失條目 "<$text text=<<currentTiddler>>/>" - 點擊 {{
 No: 否
 OfficialPluginLibrary: ~TiddlyWiki 官方插件程式庫
 OfficialPluginLibrary/Hint: 此為在 tiddlywiki.com 的 ~TiddlyWiki 官方插件程式庫。由核心團隊維護的插件、主題和語言包。
+PageTemplate/Description: 預設的 ~Tiddlywiki 佈局
+PageTemplate/Name: 預設的 ~PageTemplate
 PluginReloadWarning: 請儲存 {{$:/core/ui/Buttons/save-wiki}} 並刷新頁面 {{$:/core/ui/Buttons/refresh}} ，使 ~JavaScript 插件的更改生效
 RecentChanges/DateFormat: YYYY年0MM月0DD日
+Shortcuts/Input/Accept/Hint: 接受選取的項目
+Shortcuts/Input/AcceptVariant/Hint: 接受選取項目 (變種)
+Shortcuts/Input/AdvancedSearch/Hint: 從側邊欄搜尋欄位內開啟[[進階搜尋|$:/AdvancedSearch]]面板
+Shortcuts/Input/Cancel/Hint: 清除輸入欄位
+Shortcuts/Input/Down/Hint: 選擇下一個項目
+Shortcuts/Input/Tab-Left/Hint: 選擇上一個頁籤
+Shortcuts/Input/Tab-Right/Hint: 選擇下一個頁籤
+Shortcuts/Input/Up/Hint: 選擇前一個項目
+Shortcuts/SidebarLayout/Hint: 更改側邊欄版面
+Switcher/Subtitle/theme: 切換佈景主題
+Switcher/Subtitle/layout: 切換版面
+Switcher/Subtitle/language: 切換語言
+Switcher/Subtitle/palette: 切換調色盤
 SystemTiddler/Tooltip: 此為系統條目
 SystemTiddlers/Include/Prompt: 包括系統條目
 TagManager/Colour/Heading: 顏色

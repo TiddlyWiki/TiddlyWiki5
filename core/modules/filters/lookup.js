@@ -22,7 +22,7 @@ Export our filter function
 exports.lookup = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		results.push(options.wiki.getTiddlerText(operator.operand + title) || options.wiki.getTiddlerText(operator.operand + operator.suffix));
+		results.push(options.wiki.getTiddlerText(operator.operand + title) || operator.suffix);
 	});
 	return results;
 };

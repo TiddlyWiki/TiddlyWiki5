@@ -1,12 +1,13 @@
+caption: Git Service Saver
+color: #29B6F6
 created: 20190408173002622
-modified: 20190408173002622
-tags: Saving Android Chrome Firefox InternetExplorer iOS Linux Mac Opera Safari Windows
+delivery: Service
+description: Save changes directly to a Git repository (on GitHub, GitLab)
+method: save
+modified: 20200507203007684
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows iOS Edge
 title: Saving to a Git service
 type: text/vnd.tiddlywiki
-delivery: Service
-method: save
-caption: Git Service Saver
-description: Save changes directly to a Git repository (on GitHub, GitLab)
 
 TiddlyWiki can save changes directly to a GitHub repository in the single file configuration.
 
@@ -16,7 +17,7 @@ Saving to a Git service is configured in the [[$:/ControlPanel]] in the ''Git Se
 * ''Username'' - (mandatory) the username for the Git service account used for saving changes
 * ''Password'' - (mandatory) the password, OAUTH token or personal access token for the specified account. Note that GitHub permits [[several different mechanisms|https://developer.github.com/v3/#authentication]] for authentication
 * ''Repository'' - (mandatory) the name of the Git repository. Both the owner name and the repository name must be specified. For example `Jermolene/TiddlyWiki5`
-* ''Branch'' - (optional) the name of the branch to be used within the Git repository. Defaults to `master`
+* ''Branch'' - (optional) the name of the branch to be used within the Git repository. Defaults to `main` (~GitHub) or `master` (~GitLab)"
 * ''Path'' - (optional) the path to the target file. Defaults to `/`
 * ''Filename'' - (mandatory) the filename of the target file
 

@@ -1,0 +1,3 @@
+title: $:/config/EditMode/fieldname-filter
+first-search-filter: [!is[shadow]!is[system]fields[]search:title<userInput>sort[]] -created -creator -draft.of -draft.title -modified -modifier -tags -text -title -type
+second-search-filter: [fields[]search:title<userInput>sort[]] -[!is[shadow]!is[system]fields[]]

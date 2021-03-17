@@ -1,6 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/filesystem",
 	"name": "Filesystem",
-	"description": "Synchronise changes to the local filesystem",
+	"description": "Synchronize changes from the node.js server to the local filesystem",
 	"list": "readme"
 }

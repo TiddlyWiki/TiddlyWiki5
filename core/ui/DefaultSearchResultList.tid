@@ -1,15 +1,29 @@
 title: $:/core/ui/DefaultSearchResultList
 tags: $:/tags/SearchResults
 caption: {{$:/language/Search/DefaultResults/Caption}}
+first-search-filter: [!is[system]search:title<userInput>sort[title]limit[250]]
+second-search-filter: [!is[system]search<userInput>sort[title]limit[250]]
 
 \define searchResultList()
 //<small>{{$:/language/Search/Matches/Title}}</small>//
 
-<$list filter="[!is[system]search:title{$(searchTiddler)$}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+<$list filter="[<userInput>minlength[1]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
+<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
+</$list>
 
 //<small>{{$:/language/Search/Matches/All}}</small>//
 
-<$list filter="[!is[system]search{$(searchTiddler)$}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+<$list filter="[<userInput>minlength[1]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>
+<span class={{{[<currentTiddler>addsuffix[-secondaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
+</$list>
 
 \end
 <<searchResultList>>

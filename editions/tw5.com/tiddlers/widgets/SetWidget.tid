@@ -24,6 +24,8 @@ The content of the `<$set>` widget is the scope for the value assigned to the va
 |select |<<.from-version "5.1.14">> An optional zero-based index of the item to return from the filter output (see below) |
 |emptyValue |The value to assign to the variable if the specified value is missing or empty (see below) |
 
+<<.tip """If the value of your variable is enclosed in double square brackets this might indicate that you are returning a list of values from the filter. To use a single title from the filter output without the double square brackets see ''Filtered Item Variable Assignment'' below.""">>
+
 !! Simple Variable Assignment
 
 The simplest way of using set variable widget assigns a string to a variable. The following example assigns a literal string

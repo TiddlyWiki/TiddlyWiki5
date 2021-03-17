@@ -1,6 +1,6 @@
 caption: edit-text
 created: 20131024141900000
-modified: 20151224143914772
+modified: 20201130184701532
 tags: Widgets
 title: EditTextWidget
 type: text/vnd.tiddlywiki
@@ -25,6 +25,7 @@ The content of the `<$edit-text>` widget is ignored.
 |focusPopup |Title of a state tiddler for a popup that is displayed when the editing element has focus  |
 |focus |Set to "yes" or "true" to automatically focus the editor after creation |
 |tabindex |Sets the `tabindex` attribute of the input or textarea to the given value |
+|autocomplete |<<.from-version 5.1.23>> An optional string to provide a hint to the browser how to handle autocomplete for this input |
 |tag |Overrides the generated HTML editing element tag. For a multi-line editor use `tag=textarea`. For a single-line editor use `tag=input` |
 |type |Overrides the generated HTML editing element `type` attribute |
 |size |The size of the input field (in characters) |
@@ -32,6 +33,9 @@ The content of the `<$edit-text>` widget is ignored.
 |minHeight |Minimum height for automatically resized `textarea` editors, specified in CSS length units such as "px", "em" or "%" |
 |rows|Sets the rows attribute of a generated textarea |
 |cancelPopups |<<.from-version "5.1.23">> if set to "yes", cancels all popups when the input gets focus |
+|inputActions |<<.from-version 5.1.23>> Optional actions that are triggered every time an input event occurs within the input field or textarea |
+|refreshTitle |<<.from-version 5.1.23>> An optional tiddler title that makes the input field update whenever the specified tiddler changes |
+|disabled|<<.from-version "5.1.23">> Optional, disables the text input if set to "yes". Defaults to "no"|
 
 ! Notes
 

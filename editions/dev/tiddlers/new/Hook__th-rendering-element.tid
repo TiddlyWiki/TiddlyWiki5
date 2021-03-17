@@ -1,0 +1,35 @@
+created: 20200630121235997
+modified: 20200630121235997
+tags: HookMechanism
+title: Hook: th-rendering-element
+
+This hook provides a notification that a DOM element is about to be rendered by the "element" widget. The hook can optionally provide an alternate parse tree that will be rendered in place of the intended element.
+
+Note the element widget only renders those HTML elements that were parsed as plain HTML elements within wikitext (i.e. using the `<tagname>` syntax). This means that this hook is not invoked for elements created by other widgets.
+
+Hook function parameters:
+
+* ''newParseTreeNodes'': optional parse tree nodes provided by a previously called hook
+* ''widget'': instance of the element widget invoking the hook
+
+Return value:
+
+* ''newParseTreeNodes'': optionally new parse tree nodes to replace the intended element, or a falsey value to leave the element untouched
+
+Here is an example of a handler for this hook:
+
+```js
+$tw.hooks.addHook("th-rendering-element",function(parseTreeNodes,widget) {
+	// Return the previous mapping if there is one
+	if(parseTreeNodes) {
+		return parseTreeNodes;
+	}
+	// Detect the elements we're interested in
+	if(someCondition()) {
+		// Replace them with a parse tree
+		return generateParseTreeNodes();
+	}
+	// Otherwise do nothing
+	return null;
+});
+```

@@ -1,0 +1,32 @@
+created: 20201130181015815
+modified: 20201130183426619
+tags: RadioWidget
+title: RadioWidget Example
+type: text/vnd.tiddlywiki
+
+\define newText() value: $(actionValue)$
+
+\define radioActions()
+<$action-sendmessage $message="tm-notify" $param="RadioWidget ExampleTemplate" value=<<actionValue>> current=<<currentTiddler>> />
+<$action-createtiddler $basetitle="$:/temp/test/value" $overwrite="yes" text=<<newText>>/>
+<$action-navigate $to="$:/temp/test/value"/>
+\end
+
+!! Using Actions
+
+If you select an option, the value is written to $:/temp/test/value and the ''id'' field of tiddler: $:/temp/test will be updated. 
+
+A notification showing the ''actionValue'' will be shown.
+
+<$tiddler tiddler="$:/temp/test">
+	<$radio field="id" value="a" actions=<<radioActions>> > Option a </$radio>|
+	<$radio field="id" value="b" actions=<<radioActions>> > Option b </$radio>|
+	<$radio field="id" value="c" actions=<<radioActions>> > Option c </$radio>|
+</$tiddler>
+
+---
+
+<details>
+    <summary>Show the code [[RadioWidget Example]]</summary>
+    <pre><code><$view mode=text&><pre><code>
+</details>

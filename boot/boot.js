@@ -267,8 +267,16 @@ $tw.utils.htmlDecode = function(s) {
 Get the browser location.hash. We don't use location.hash because of the way that Firefox auto-urldecodes it (see http://stackoverflow.com/questions/1703552/encoding-of-window-location-hash)
 */
 $tw.utils.getLocationHash = function() {
-	var parts = window.location.href.split('#');
-	return "#" + (parts.length > 1 ? parts[1] : "");
+	var href = window.location.href;
+	var idx = href.indexOf('#');
+	if(idx === -1) {
+		return "#";
+	} else if(idx < href.length-1 && href[idx+1] === '#') {
+		// Special case: ignore location hash if it itself starts with a #
+		return "#";
+	} else {
+		return href.substring(idx);
+	}
 };
 
 /*
@@ -297,13 +305,21 @@ $tw.utils.stringifyDate = function(value) {
 // Parse a date from a UTC YYYYMMDDHHMMSSmmm format string
 $tw.utils.parseDate = function(value) {
 	if(typeof value === "string") {
-		return new Date(Date.UTC(parseInt(value.substr(0,4),10),
+		var negative = 1;
+		if(value.charAt(0) === "-") {
+			negative = -1;
+			value = value.substr(1);
+		}
+		var year = parseInt(value.substr(0,4),10) * negative,
+			d = new Date(Date.UTC(year,
 				parseInt(value.substr(4,2),10)-1,
 				parseInt(value.substr(6,2),10),
 				parseInt(value.substr(8,2)||"00",10),
 				parseInt(value.substr(10,2)||"00",10),
 				parseInt(value.substr(12,2)||"00",10),
 				parseInt(value.substr(14,3)||"000",10)));
+		  d.setUTCFullYear(year); // See https://stackoverflow.com/a/5870822
+		  return d;
 	} else if($tw.utils.isDate(value)) {
 		return value;
 	} else {
@@ -652,11 +668,13 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	var promptInfo = {
 		serviceName: options.serviceName,
 		callback: options.callback,
-		form: form
+		form: form,
+		owner: this
 	};
 	this.passwordPrompts.push(promptInfo);
 	// Make sure the wrapper is displayed
 	this.setWrapperDisplay();
+	return promptInfo;
 };
 
 $tw.utils.PasswordPrompt.prototype.removePrompt = function(promptInfo) {
@@ -1270,7 +1288,7 @@ $tw.Wiki = function(options) {
 		$tw.utils.each(titles || getTiddlerTitles(),function(title) {
 			var tiddler = tiddlers[title];
 			if(tiddler) {
-				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type")) {
+				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type") && tiddler.fields.text) {
 					pluginInfo[tiddler.fields.title] = JSON.parse(tiddler.fields.text);
 					results.modifiedPlugins.push(tiddler.fields.title);
 				}
@@ -1822,7 +1840,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 	// Read the specification
 	var filesInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
 	// Helper to process a file
-	var processFile = function(filename,isTiddlerFile,fields) {
+	var processFile = function(filename,isTiddlerFile,fields,isEditableFile) {
 		var extInfo = $tw.config.fileExtensionInfo[path.extname(filename)],
 			type = (extInfo || {}).type || fields.type || "text/plain",
 			typeInfo = $tw.config.contentTypeInfo[type] || {},
@@ -1875,7 +1893,11 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 				}
 			});
 		});
-		tiddlers.push({tiddlers: fileTiddlers});
+		if(isEditableFile) {
+			tiddlers.push({filepath: pathname, hasMetaFile: !!metadata && !isTiddlerFile, isEditableFile: true, tiddlers: fileTiddlers});
+		} else {
+			tiddlers.push({tiddlers: fileTiddlers});
+		}
 	};
 	// Process the listed tiddlers
 	$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
@@ -1898,15 +1920,21 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			}
 		} else {
 			// Process directory specifier
-			var dirPath = path.resolve(filepath,dirSpec.path),
-				files = fs.readdirSync(dirPath),
-				fileRegExp = new RegExp(dirSpec.filesRegExp || "^.*$"),
-				metaRegExp = /^.*\.meta$/;
-			for(var t=0; t<files.length; t++) {
-				var filename = files[t];
-				if(filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename)) {
-					processFile(dirPath + path.sep + filename,dirSpec.isTiddlerFile,dirSpec.fields);
+			var dirPath = path.resolve(filepath,dirSpec.path);
+			if(fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
+				var	files = fs.readdirSync(dirPath),
+					fileRegExp = new RegExp(dirSpec.filesRegExp || "^.*$"),
+					metaRegExp = /^.*\.meta$/;
+				for(var t=0; t<files.length; t++) {
+					var filename = files[t];
+					if(filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename)) {
+						processFile(dirPath + path.sep + filename,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile);
+					}
 				}
+			} else {
+				console.log("Warning: a directory in a tiddlywiki.files file does not exist.");
+				console.log("dirPath: " + dirPath);	
+				console.log("tiddlywiki.files location: " + filepath);
 			}
 		}
 	});
@@ -2046,6 +2074,11 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 	} else {
 		return null;
 	}
+	// Save the path to the tiddlers folder for the filesystemadaptor
+	var config = wikiInfo.config || {};
+	if($tw.boot.wikiPath == wikiPath) {
+		$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,config["default-tiddler-location"] || $tw.config.wikiTiddlersSubDir);
+	}
 	// Load any parent wikis
 	if(wikiInfo.includeWikis) {
 		parentPaths = parentPaths.slice(0);
@@ -2079,27 +2112,30 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 				$tw.boot.files[tiddler.title] = {
 					filepath: tiddlerFile.filepath,
 					type: tiddlerFile.type,
-					hasMetaFile: tiddlerFile.hasMetaFile
+					hasMetaFile: tiddlerFile.hasMetaFile,
+					isEditableFile: config["retain-original-tiddler-path"] || tiddlerFile.isEditableFile || tiddlerFile.filepath.indexOf($tw.boot.wikiTiddlersPath) !== 0
 				};
 			});
 		}
 		$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
 	});
-	// Save the original tiddler file locations if requested
-	var config = wikiInfo.config || {};
-	if(config["retain-original-tiddler-path"]) {
-		var output = {}, relativePath;
+	if ($tw.boot.wikiPath == wikiPath) {
+		// Save the original tiddler file locations if requested
+		var output = {}, relativePath, fileInfo;
 		for(var title in $tw.boot.files) {
-			relativePath = path.relative(resolvedWikiPath,$tw.boot.files[title].filepath);
-			output[title] =
-				path.sep === "/" ?
-				relativePath :
-				relativePath.split(path.sep).join("/");
+			fileInfo = $tw.boot.files[title];
+			if(fileInfo.isEditableFile) {
+				relativePath = path.relative($tw.boot.wikiTiddlersPath,fileInfo.filepath);
+				output[title] =
+					path.sep === "/" ?
+					relativePath :
+					relativePath.split(path.sep).join("/");
+			}
 		}
-		$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
+		if(Object.keys(output).length > 0){
+			$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
+		}
 	}
-	// Save the path to the tiddlers folder for the filesystemadaptor
-	$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,config["default-tiddler-location"] || $tw.config.wikiTiddlersSubDir);
 	// Load any plugins within the wiki folder
 	var wikiPluginsPath = path.resolve(wikiPath,$tw.config.wikiPluginsSubDir);
 	if(fs.existsSync(wikiPluginsPath)) {
@@ -2146,7 +2182,7 @@ $tw.loadTiddlersNode = function() {
 	// Load any extra plugins
 	$tw.utils.each($tw.boot.extraPlugins,function(name) {
 		if(name.charAt(0) === "+") { // Relative path to plugin
-			var pluginFields = $tw.loadPluginFolder(name.substring(1));;
+			var pluginFields = $tw.loadPluginFolder(name.substring(1));
 			if(pluginFields) {
 				$tw.wiki.addTiddler(pluginFields);
 			}
@@ -2172,8 +2208,7 @@ $tw.loadTiddlersNode = function() {
 /*
 Startup TiddlyWiki
 */
-$tw.boot.startup = function(options) {
-	options = options || {};
+$tw.boot.initStartup = function(options) {
 	// Get the URL hash and check for safe mode
 	$tw.locationHash = "#";
 	if($tw.browser && !$tw.node) {
@@ -2259,6 +2294,7 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("application/zip","base64",".zip");
 	$tw.utils.registerFileType("application/x-zip-compressed","base64",".zip");
 	$tw.utils.registerFileType("image/jpeg","base64",[".jpg",".jpeg"],{flags:["image"]});
+	$tw.utils.registerFileType("image/jpg","base64",[".jpg",".jpeg"],{flags:["image"]});
 	$tw.utils.registerFileType("image/png","base64",".png",{flags:["image"]});
 	$tw.utils.registerFileType("image/gif","base64",".gif",{flags:["image"]});
 	$tw.utils.registerFileType("image/webp","base64",".webp",{flags:["image"]});
@@ -2306,6 +2342,9 @@ $tw.boot.startup = function(options) {
 			return result;
 		}
 	}
+};
+$tw.boot.loadStartup = function(options){
+
 	// Load tiddlers
 	if($tw.boot.tasks.readBrowserTiddlers) {
 		$tw.loadTiddlersBrowser();
@@ -2318,6 +2357,8 @@ $tw.boot.startup = function(options) {
 	}
 	// Give hooks a chance to modify the store
 	$tw.hooks.invokeHook("th-boot-tiddlers-loaded");
+}
+$tw.boot.execStartup = function(options){
 	// Unpack plugin tiddlers
 	$tw.wiki.readPluginInfo();
 	$tw.wiki.registerPluginTiddlers("plugin",$tw.safeMode ? ["$:/core"] : undefined);
@@ -2346,6 +2387,16 @@ $tw.boot.startup = function(options) {
 	$tw.boot.disabledStartupModules = $tw.boot.disabledStartupModules || [];
 	// Repeatedly execute the next eligible task
 	$tw.boot.executeNextStartupTask(options.callback);
+}
+/*
+Startup TiddlyWiki
+*/
+$tw.boot.startup = function(options) {
+	options = options || {};
+	// Get the URL hash and check for safe mode
+	$tw.boot.initStartup(options);
+	$tw.boot.loadStartup(options);
+	$tw.boot.execStartup(options);
 };
 
 /*

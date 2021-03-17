@@ -1,0 +1,16 @@
+created: 20201117160944367
+modified: 20201117162735263
+tags: Resources Plugings
+title: Tiddlyshow by Mohammad
+type: text/vnd.tiddlywiki
+url: https://kookma.github.io/Tiddlyshow/
+
+Tiddlyshow  is a small application of Tiddlywiki for presentation and slideshow. It can also be used as a plugin.
+
+{{!!url}}
+
+Tiddlyshow contains the following features
+
+* Tools for preparing slides
+* Shortcut keys for navigation (forward and backward)
+* Themes to colorify and customize the slideshow

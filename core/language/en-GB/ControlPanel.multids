@@ -17,6 +17,8 @@ Basics/NewJournal/Tags/Prompt: Tags for new journal tiddlers
 Basics/NewTiddler/Title/Prompt: Title of new tiddlers
 Basics/NewTiddler/Tags/Prompt: Tags for new tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Number of overridden shadow tiddlers
+Basics/RemoveTags: Update to current format
+Basics/RemoveTags/Hint: Update the tags configuration to the latest format
 Basics/ShadowTiddlers/Prompt: Number of shadow tiddlers
 Basics/Subtitle/Prompt: Subtitle
 Basics/SystemTiddlers/Prompt: Number of system tiddlers
@@ -44,6 +46,7 @@ KeyboardShortcuts/Platform/Linux: Linux platform only
 KeyboardShortcuts/Platform/NonLinux: Non-Linux platforms only
 KeyboardShortcuts/Platform/Windows: Windows platform only
 KeyboardShortcuts/Platform/NonWindows: Non-Windows platforms only
+LayoutSwitcher/Caption: Layout
 LoadedModules/Caption: Loaded Modules
 LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
 Palette/Caption: Palette
@@ -117,6 +120,7 @@ Saving/GitService/Gitea/Caption: Gitea Saver
 Saving/GitService/Gitea/Password: Personal access token for API (via Gitea’s web interface: `Settings | Applications | Generate New Token`)
 Saving/TiddlySpot/Advanced/Heading: Advanced Settings
 Saving/TiddlySpot/BackupDir: Backup Directory
+Saving/TiddlySpot/ControlPanel: ~TiddlySpot Control Panel
 Saving/TiddlySpot/Backups: Backups
 Saving/TiddlySpot/Caption: ~TiddlySpot Saver
 Saving/TiddlySpot/Description: These settings are only used when saving to http://tiddlyspot.com or a compatible remote server
@@ -124,6 +128,7 @@ Saving/TiddlySpot/Filename: Upload Filename
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address, e.g. `http://example.com/store.php`.//
 Saving/TiddlySpot/Password: Password
+Saving/TiddlySpot/ReadOnly: The ~TiddlySpot service is currently only available in read-only form. Please see http://tiddlyspot.com/ for the latest details. The ~TiddlySpot saver can still be used to save to compatible servers.
 Saving/TiddlySpot/ServerURL: Server URL
 Saving/TiddlySpot/UploadDir: Upload Directory
 Saving/TiddlySpot/UserName: Wiki Name

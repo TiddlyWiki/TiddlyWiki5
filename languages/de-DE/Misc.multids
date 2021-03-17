@@ -10,6 +10,7 @@ ConfirmCancelTiddler: Wollen Sie die Änderungen im Tiddler: "<$text text=<<titl
 ConfirmDeleteTiddler: Wollen Sie den Tiddler: "<$text text=<<title>>/>" löschen?
 ConfirmOverwriteTiddler: Tiddler: "<$text text=<<title>>/>" existiert! OK überschreibt den tiddler!
 ConfirmEditShadowTiddler: Sie sind dabei, einen Schatten-Tiddler zu verändern. Zukünftige, automatische Anpassungen werden dadurch unterdrückt. Sie können Ihre Änderungen rückgängig machen, indem Sie diesen Tiddler wieder löschen. Wollen Sie den Tiddler: "<$text text=<<title>>/>" ändern?
+ConfirmAction: Möchten Sie weitermachen? 
 Count: Anzahl
 DefaultNewTiddlerTitle: Neuer Tiddler
 Diffs/CountMessage: <<diff-count>> Unterschied(e)
@@ -26,7 +27,9 @@ Error/Caption: Fehler
 Error/EditConflict: Datei auf Server verändert
 Error/Filter: Filter Fehler
 Error/FilterSyntax: Syntax Fehler im Filter-Ausdruck
+Error/FilterRunPrefix: Filter Fehler: Unbekanntes Prefix für Filter lauf
 Error/IsFilterOperator: Filter Fehler: Unbekannter Operand für den 'is' Filter Operator
+Error/FormatFilterOperator: Filter Fehler: Unbekannter Operand für den 'format' Filter Operator
 Error/LoadingPluginLibrary: Fehler beim Laden der "plugin library"
 Error/NetworkErrorAlert: `<h2>''Netzwerk Fehler''</h2>Es scheint, die Verbindung zum Server ist ausgefallen. Das weist auf Probleme mit der Netzwerkverbindung hin. Bitte versuchen Sie die Verbingung wider herzustellen, bevor Sie weitermachen.<br><br>''Nicht gespeicherte Änderungen werden automatich synchronisiert, sobald die Verbindung wider hergestellt ist.
 Error/RecursiveTransclusion: Recursive Transclusion: Fehler im "transclude widget"
@@ -62,6 +65,15 @@ OfficialPluginLibrary: Offizielles ~TiddlyWiki Plugin-Verzeichnis
 OfficialPluginLibrary/Hint: Offizielles ~TiddlyWiki Plugin-Verzeichnis auf tiddlywiki.com. Plugin, Themes und Sprach Dateien werden vom "core team" gewartet.
 PluginReloadWarning: Das Wiki muss gespeichert {{$:/core/ui/Buttons/save-wiki}} und neu gladen {{$:/core/ui/Buttons/refresh}} werden, damit die ~JavaScript Plugins ausgeführt werden.
 RecentChanges/DateFormat: YYYY MMM DD
+Shortcuts/Input/AdvancedSearch/Hint: Öffne den ~AdvancedSearch Tiddler vom "Suchmenü" aus
+Shortcuts/Input/Accept/Hint: Wähle das selektierte Element
+Shortcuts/Input/AcceptVariant/Hint: Wähle das selektierte Element (Variante)
+Shortcuts/Input/Cancel/Hint: Lösche das Eingabefeld
+Shortcuts/Input/Down/Hint: Gehe zum nächsten Element
+Shortcuts/Input/Up/Hint: Gehe zum vorherigen Element
+Shortcuts/Input/Tab-Left/Hint: Gehe zum vorherigen Tab 
+Shortcuts/Input/Tab-Right/Hint: Gehe zum nächsten Tab
+Shortcuts/SidebarLayout/Hint: Das Layout des rechten Menüs ändern
 SystemTiddler/Tooltip: Das ist ein System-Tiddler
 SystemTiddlers/Include/Prompt: System-Tiddler einschließen
 TagManager/Colour/Heading: Farbe
@@ -71,5 +83,5 @@ TagManager/Icons/None: Keine
 TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
 Tiddler/DateFormat: DDth MMM YYYY um 0hh:0mm
-UnsavedChangesWarning: TiddlyWiki wurde geändert, aber noch nicht gespeichert!
+UnsavedChangesWarning: ~TiddlyWiki wurde geändert, aber noch nicht gespeichert!
 Yes: Ja

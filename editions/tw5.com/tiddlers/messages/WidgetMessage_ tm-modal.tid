@@ -1,22 +1,25 @@
+caption: tm-modal
 created: 20140811112133701
-modified: 20141107142803042
+modified: 20201117081247738
 tags: Messages
 title: WidgetMessage: tm-modal
 type: text/vnd.tiddlywiki
-caption: tm-modal
 
 |!Name |!Description |
 |param |Title of the tiddler to be displayed |
-|paramObject |Hashmap of variables to be provided to the modal |
+|paramObject |Hashmap of variables to be provided to the modal, contains all extra parameters passed to the widget sending the message. |
 |rootwindow |<<.from-version 5.1.18>> ''yes'' or ''true'' will always display a modal in the wiki-root-window |
 
 The "currentTiddler" variable is set to the title of the modal tiddler, but can be overridden by specifying a different value in `paramObject`.
 
 The modal message is usually generated with the ButtonWidget. The modal message is handled by the TiddlyWiki core.
 
+[[Fields within the tiddler|Modals]] being displayed in the modal can be used to customize its appearance.
+
 ! Example
 
 Here is an example of displaying a modal and passing parameters to it:
+(Note how all parameters to `action-sendmessage` other than `$param` and `$message` are available as variables within the modal.)
 
 <$macrocall $name='wikitext-example-without-html'
 src='Your name: <$edit-text tiddler="$:/temp/yourName" tag="input" default="Your name"/>
@@ -29,5 +32,9 @@ Your message:
 Click me!
 </$button>'/>
 
+
 <<.tip """<$macrocall $name=".from-version" version="5.1.18"/> if triggered from within a ''new window'', the above examples will be displayed within that window. The <$macrocall $name=".attr" _="rootwindow"/> attribute can be set to ''yes'' or ''true'' to inherit this behavior and to display the Modal within the ''root'' window""">>
 
+<<.tip """<$macrocall $name=".from-version" version="5.1.23"/> Links to tiddlers within a modal will open in the same story as the widget that sent the `tm-modal` message. You can override this by specifying values for the variables `tv-story-list` and `tv-history-list` when sending the `tm-modal` message.
+
+""">>

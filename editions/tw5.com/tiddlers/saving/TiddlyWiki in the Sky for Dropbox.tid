@@ -1,10 +1,11 @@
 caption: ~TiddlyWiki Cloud Connectors
+color: #29B6F6
 created: 20171113135053055
 delivery: Web Service
 description: Online service for editing TiddlyWiki documents in Dropbox
 method: save
-modified: 20180410115910048
-tags: Saving Android Chrome Firefox InternetExplorer iOS Linux Mac Opera PHP Safari Windows
+modified: 20200507202922556
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
 title: TiddlyWiki Cloud
 type: text/vnd.tiddlywiki
 url: https://twcloud.github.io/tw5-dropbox/

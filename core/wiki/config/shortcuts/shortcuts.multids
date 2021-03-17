@@ -2,7 +2,10 @@ title: $:/config/shortcuts/
 
 add-field: enter
 advanced-search: ctrl-shift-A
+advanced-search-sidebar: alt-Enter
 cancel-edit-tiddler: escape
+change-sidebar-layout: shift-alt-Down
+delete-field: shift-alt-D
 excise: ctrl-E
 sidebar-search: ctrl-shift-F
 heading-1: ctrl-1
@@ -11,6 +14,14 @@ heading-3: ctrl-3
 heading-4: ctrl-4
 heading-5: ctrl-5
 heading-6: ctrl-6
+input-accept: Enter
+input-accept-variant: ctrl-Enter
+input-cancel: Escape
+input-down: Down
+input-tab-left: alt-Left
+input-tab-right: alt-Right
+input-up: Up
+layout-switcher: ctrl-shift-L
 link: ctrl-L
 linkify: alt-shift-L
 list-bullet: ctrl-shift-L
@@ -21,6 +32,7 @@ picture: ctrl-shift-I
 preview: alt-P
 quote: ctrl-Q
 save-tiddler: ctrl+enter
+save-wiki: ctrl-S
 stamp: ctrl-S
 strikethrough: ctrl-T
 subscript: ctrl-shift-B

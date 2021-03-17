@@ -9,13 +9,30 @@ The main module of the Jasmine test plugin for TiddlyWiki5
 (function(){
 
 /*jslint node: true, browser: true */
-/*global $tw: false */
+/*global $tw: true */
 "use strict";
 
 var TEST_TIDDLER_FILTER = "[type[application/javascript]tag[$:/tags/test-spec]]";
 
+exports.name = "jasmine";
+// Ensure this startup module is executed in the right order.
+// In Node.js, Jasmine calls `process.exit()` with a non-zero exit code if there's
+// any failed tests. Because of that, we want to make sure all critical
+// startup modules are run before this one.
+// * The "commands" module handles the --rendertiddler command-line flag,
+//   which is typically given in order to export an HTML file that can be opened with
+//   a browser to run tests.
+exports.after = $tw.node ? ["commands"] : [];
+
 /*
 Startup function for running tests
+
+Below, paths like jasmine-core/jasmine.js refer to files in the 'jasmine-core' npm
+package, whose repository is https://github.com/jasmine/jasmine.
+Paths like jasmine/jasmine.js refer to files in the 'jasmine' npm package, whose
+repository is https://github.com/jasmine/jasmine-npm.
+
+They're all locally checked into the `./files` directory.
 */
 exports.startup = function() {
 	// Set up a shared context object.
@@ -65,37 +82,52 @@ exports.startup = function() {
 		return context.module.exports || contextExports;
 	}
 
-	// Get the core Jasmine exports
+	// Get the core Jasmine exports.
+	// We load 'jasmine-core/jasmine.js' here in order to start with a module
+	// that is shared between browser and Node.js environments. Browser-specific
+	// and Node-specific modules are loaded next.
 	var jasmineCore = evalInContext("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/jasmine.js");
-	// Get the Jasmine instance and configure reporters
+	// The core Jasmine instance
 	var jasmine;
+	// Node.js wrapper for calling `.execute()`
+	var nodeJasmineWrapper;
 	if($tw.browser) {
 		window.jasmineRequire = jasmineCore;
 		$tw.modules.execute("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/jasmine-html.js");
 		$tw.modules.execute("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/boot.js");
 		jasmine = window.jasmine;
 	} else {
-		// We load 'jasmine-core/jasmine.js' above instead of the
-		// main script 'jasmine-core/jasmine-core.js', which is what's loaded
-		// when you run `require('jasmine-core')` in a Node.js environment.
-		// We load 'jasmine-core/jasmine.js' because we want to factor out
-		// code paths that are common between browser and Node.js environments.
-		// As a result, the `jasmineCore` object is missing some properties that
-		// 'jasmine/jasmine.js' expects, so we manually populate what we need.
+		// Add missing properties to `jasmineCore` in order to call the Jasmine
+		// constructor in Node.js.
+		//
+		// The constructor loads the `jasmineCore` object automatically, if
+		// not explicitly specified, by calling `require('jasmine-core')`.
+		// What happens internally next is...
+		//
+		//   1. require('jasmine-core')
+		//      a. loads the package's main script, 'jasmine-core/jasmine-core.js'
+		//         i. requires 'jasmine-core/jasmine.js'
+		//         ii. reads some extra files and returns a `jasmineCore` object
+		//
+		// Because we're in TiddlyWiki land, we really don't need step 1.a.ii.
+		//
+		// Since the `jasmineCore` variable already holds the result of 1.a.i,
+		// we'll add a few properties necessary for calling the Jasmine constructor
+		// and pass it in explicitly. The consructor function can be seen here:
+		// https://github.com/jasmine/jasmine-npm/blob/v3.4.0/lib/jasmine.js#L10
 
-		// 'jasmine/jasmine.js' calls `.boot()`
+		// 'jasmine/jasmine.js' requires the `.boot()` function
 		jasmineCore.boot = evalInContext("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/node_boot.js");
 		// 'jasmine/jasmine.js' references `.files.path`
 		jasmineCore.files = {
 			path: "$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core"
 		};
-		// 'jasmine/jasmine.js' references `process.exit`
+		// 'jasmine/jasmine.js' references `process.exit`, among other properties
 		context.process = process;
 
-		var JasmineNode = evalInContext("$:/plugins/tiddlywiki/jasmine/jasmine/jasmine.js");
-		var jasmineRunner = new JasmineNode({jasmineCore: jasmineCore});
-		jasmineRunner.configureDefaultReporter({});
-		jasmine = jasmineRunner.jasmine;
+		var NodeJasmine = evalInContext("$:/plugins/tiddlywiki/jasmine/jasmine/jasmine.js");
+		nodeJasmineWrapper = new NodeJasmine({jasmineCore: jasmineCore});
+		jasmine = nodeJasmineWrapper.jasmine;
 	}
 	// Add Jasmine's DSL to our context
 	var env = jasmine.getEnv();
@@ -109,7 +141,7 @@ exports.startup = function() {
 	// In a browser environment, jasmine-core/boot.js calls `execute()` for us.
 	// In Node.js, we call it manually.
 	if(!$tw.browser) {
-		env.execute();
+		nodeJasmineWrapper.execute();
 	}
 };
 

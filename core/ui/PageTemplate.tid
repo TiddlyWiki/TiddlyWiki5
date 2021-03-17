@@ -1,4 +1,6 @@
 title: $:/core/ui/PageTemplate
+name: {{$:/language/PageTemplate/Name}}
+description: {{$:/language/PageTemplate/Description}}
 
 \whitespace trim
 \define containerClasses()
@@ -6,19 +8,14 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 \end
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
 
-<$set name="tv-config-toolbar-icons" value={{$:/config/Toolbar/Icons}}>
-
-<$set name="tv-config-toolbar-text" value={{$:/config/Toolbar/Text}}>
-
-<$set name="tv-config-toolbar-class" value={{$:/config/Toolbar/ButtonClass}}>
-
-<$set name="tv-enable-drag-and-drop" value={{$:/config/DragAndDrop/Enable}}>
-
-<$set name="tv-show-missing-links" value={{$:/config/MissingLinks}}>
-
-<$set name="storyviewTitle" value={{$:/view}}>
-
-<$set name="languageTitle" value={{{ [{$:/language}get[name]] }}}>
+<$vars
+	tv-config-toolbar-icons={{$:/config/Toolbar/Icons}}
+	tv-config-toolbar-text={{$:/config/Toolbar/Text}}
+	tv-config-toolbar-class={{$:/config/Toolbar/ButtonClass}}
+	tv-enable-drag-and-drop={{$:/config/DragAndDrop/Enable}}
+	tv-show-missing-links={{$:/config/MissingLinks}}
+	storyviewTitle={{$:/view}}
+	languageTitle={{{ [{$:/language}get[name]] }}}>
 
 <div class=<<containerClasses>>>
 
@@ -38,16 +35,4 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 
 </div>
 
-</$set>
-
-</$set>
-
-</$set>
-
-</$set>
-
-</$set>
-
-</$set>
-
-</$set>
+</$vars>

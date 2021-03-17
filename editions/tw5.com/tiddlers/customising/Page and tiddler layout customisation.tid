@@ -1,7 +1,8 @@
-title: Page and tiddler layout customisation
+created: 20141120125300000
+modified: 20201123173002935
 tags: [[Customise TiddlyWiki]]
-created: 201411201253
-modified: 201411201253
+title: Page and tiddler layout customisation
+type: text/vnd.tiddlywiki
 
 One major feature of TiddlyWiki that many new users are unaware of is the degree to which TiddlyWiki can be customised, just by adding or removing SystemTags in key shadow tiddlers or in your own custom tiddlers. 
 
@@ -10,6 +11,8 @@ One major feature of TiddlyWiki that many new users are unaware of is the degree
 * You can also rearrange the order in which these features are displayed (perhaps you would like tags above tiddler titles, or the subtitle of your TiddlyWiki below the page control buttons)
 
 Once you know what you are doing, all of these things are actually pretty easy to do.
+
+<<.from-version "5.1.23">> You can also create [[alternative page layouts|Alternative page layouts]] and switch between them.
 
 ! Adding custom-made tiddlers to the user interface
 

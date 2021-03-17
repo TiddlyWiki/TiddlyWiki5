@@ -1,6 +1,6 @@
 caption: checkbox
 created: 20131024141900000
-modified: 20190714134002652
+modified: 20201109090732190
 tags: Widgets
 title: CheckboxWidget
 type: text/vnd.tiddlywiki
@@ -29,6 +29,7 @@ The content of the `<$checkbox>` widget is displayed within an HTML `<label>` el
 |actions |<<.from-version "5.1.14">> A string containing ActionWidgets to be triggered when the status of the checkbox changes (whether it is checked or unchecked) |
 |uncheckactions |<<.from-version "5.1.16">> A string containing ActionWidgets to be triggered when the checkbox is unchecked |
 |checkactions |<<.from-version "5.1.20">> A string containing ActionWidgets to be triggered when the checkbox is checked |
+|disabled|<<.from-version "5.1.23">> Optional, disables the checkbox if set to "yes". Defaults to "no"|
 
 !! Tag Mode
 

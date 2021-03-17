@@ -1,8 +1,9 @@
-title: Customise TiddlyWiki
+created: 20140904101600000
+list: [[Adding a table of contents to the sidebar]] [[Configuring startup tiddlers]] [[Configuring the default TiddlerInfo tab]] [[Creating a custom export format]] [[Creating a splash screen]] [[Customising search results]] [[Hidden Settings]] [[How to add a new tab to the sidebar]] [[How to apply custom styles]] [[How to create keyboard shortcuts]] [[How to turn off camel case linking]] [[How to widen tiddlers (aka storyriver)]] [[Making a custom journal button]] [[Page and tiddler layout customisation]] [[Alternative page layouts]] [[Preserving open tiddlers at startup]] [[Setting a favicon]] [[Setting a page background image]] [[Using Stylesheets]]
+modified: 20201123173044437
 tags: TableOfContents
-created: 201409041016
-modified: 201409041016
-list: [[Initial customisation]]
+title: Customise TiddlyWiki
+type: text/vnd.tiddlywiki
 
 Information about customising TiddlyWiki
 

@@ -3,7 +3,7 @@ description: Importiert mehrere Tiddler aus einer Datei
 
 Dieser Befehl importiert / extrahiert Tiddler aus folgenden Dateien: 
 
-* TiddlyWiki `*.html`
+* ~TiddlyWiki `*.html`
 * `*.tiddler`
 * `*.tid`
 * `*.json`

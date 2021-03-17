@@ -1,5 +1,5 @@
 created: 20130825162100000
-modified: 20200113094126878
+modified: 20201025162413404
 tags: dev moduletypes
 title: SyncAdaptorModules
 type: text/vnd.tiddlywiki
@@ -79,6 +79,15 @@ Attempts to login to the server with specified credentials. This method is optio
 |username |Username |
 |password |Password |
 |callback |Callback function invoked with parameter `err` |
+
+!! `displayLoginPrompt(syncer)`
+
+Invoked by the syncer to display a custom login promopt. This method is optional.
+
+|!Parameter |!Description |
+|syncer |Reference to the syncer object making the call |
+
+The custom login prompt should send the widget message `tm-login` with the username and password in parameters ''username'' and ''password''.
 
 !! `logout(callback)`
 

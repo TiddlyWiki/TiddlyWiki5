@@ -284,6 +284,20 @@ KeyboardManager.prototype.checkKeyDescriptors = function(event,keyInfoArray) {
 	return false;
 };
 
+KeyboardManager.prototype.getEventModifierKeyDescriptor = function(event) {
+	return event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey ? "ctrl" : 
+		event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey ? "shift" : 
+		event.ctrlKey && event.shiftKey && !event.altKey && !event.metaKey ? "ctrl-shift" : 
+		event.altKey && !event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt" : 
+		event.altKey && event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt-shift" : 
+		event.altKey && event.ctrlKey && !event.shiftKey && !event.metaKey ? "ctrl-alt" : 
+		event.altKey && event.shiftKey && event.ctrlKey && !event.metaKey ? "ctrl-alt-shift" : 
+		event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey ? "meta" : 
+		event.metaKey && event.ctrlKey && !event.shiftKey && !event.altKey ? "meta-ctrl" :
+		event.metaKey && event.ctrlKey && event.shiftKey && !event.altKey ? "meta-ctrl-shift" :
+		event.metaKey && event.ctrlKey & event.shiftKey && event.altKey ? "meta-ctrl-alt-shift" : "normal";
+};
+
 KeyboardManager.prototype.getShortcutTiddlerList = function() {
 	return $tw.wiki.getTiddlersWithTag("$:/tags/KeyboardShortcut");
 };

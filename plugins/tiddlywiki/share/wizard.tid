@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/share/wizard
 
 \define generate-json()
-<$text text=<<jsontiddlers filter:"""$(share-filter)$""" spaces:"">>/>
+<$macrocall $name="jsontiddlers" filter=<<share-filter>> spaces="" $output="text/vnd.tiddlywiki"/>
 \end
 
 \define inner-share-actions()

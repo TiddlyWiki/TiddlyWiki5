@@ -24,6 +24,16 @@ exports.httpRequest = function(options) {
 	var type = options.type || "GET",
 		url = options.url,
 		headers = options.headers || {accept: "application/json"},
+		hasHeader = function(targetHeader) {
+			targetHeader = targetHeader.toLowerCase();
+			var result = false;
+			$tw.utils.each(headers,function(header,headerTitle,object) {
+				if(headerTitle.toLowerCase() === targetHeader) {
+					result = true;
+				}
+			});
+			return result;
+		},
 		returnProp = options.returnProp || "responseText",
 		request = new XMLHttpRequest(),
 		data = "",
@@ -63,10 +73,10 @@ exports.httpRequest = function(options) {
 			request.setRequestHeader(headerTitle,header);
 		});
 	}
-	if(data && !$tw.utils.hop(headers,"Content-type")) {
-		request.setRequestHeader("Content-type","application/x-www-form-urlencoded; charset=UTF-8");
+	if(data && !hasHeader("Content-Type")) {
+		request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
 	}
-	if(!$tw.utils.hop(headers,"X-Requested-With")) {
+	if(!hasHeader("X-Requested-With")) {
 		request.setRequestHeader("X-Requested-With","TiddlyWiki");
 	}
 	try {

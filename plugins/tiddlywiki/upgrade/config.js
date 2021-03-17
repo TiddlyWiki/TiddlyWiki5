@@ -20,6 +20,7 @@ exports.synchronous = true;
 exports.startup = function() {
 	// See $tw.utils.decryptStoreAreaInteractive() in $:/core/modules/utils/crypto.js
 	$tw.config.usePasswordVault = true;
+	$tw.config.disableAutoSave = true;
 };
 
 })();
