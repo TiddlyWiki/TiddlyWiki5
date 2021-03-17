@@ -14,22 +14,6 @@ Tests the filtering mechanism.
 /* global $tw, require */
 "use strict";
 
-// This wrapper method is used to collect warnings which should be emitted
-// by certain deprecated tests.
-function collectLog(block) {
-	var messages = [];
-	var oldLog = console.log;
-	console.log = function(a) {
-		messages.push(Array.prototype.join.call(arguments, " "));
-	}
-	try {
-		block();
-	} finally {
-		console.log = oldLog;
-	}
-	return messages;
-};
-
 describe("Filter tests", function() {
 
 	// Test filter parsing
@@ -265,14 +249,12 @@ function runTests(wiki) {
 	// The following 2 tests should write a log -> WARNING: Filter modifier has a deprecated regexp operand XXXX
 	// The test should pass anyway.
 	it("should handle the field operator with a regular expression operand", function() {
-		var warnings = collectLog(function() {
-			expect(wiki.filterTiddlers("[modifier/JoeBloggs/]").join(",")).toBe("TiddlerOne");
-		});
-		expect(warnings).toEqual(["WARNING: Filter modifier has a deprecated regexp operand /JoeBloggs/"]);
-		warnings = collectLog(function() {
-			expect(wiki.filterTiddlers("[modifier/Jo/]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
-		});
-		expect(warnings).toEqual(["WARNING: Filter modifier has a deprecated regexp operand /Jo/"]);
+		spyOn(console, 'log');
+		expect(wiki.filterTiddlers("[modifier/JoeBloggs/]").join(",")).toBe("TiddlerOne");
+		expect(console.log).toHaveBeenCalledWith("WARNING: Filter", "modifier", "has a deprecated regexp operand", /JoeBloggs/);
+		console.log.calls.reset();
+		expect(wiki.filterTiddlers("[modifier/Jo/]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
+		expect(console.log).toHaveBeenCalledWith("WARNING: Filter", "modifier", "has a deprecated regexp operand", /Jo/);
 	});
 
 	it("should handle the prefix operator", function() {
