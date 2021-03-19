@@ -333,9 +333,22 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 /*
 Make child widgets correspondng to specified parseTreeNodes
 */
-Widget.prototype.makeChildWidgets = function(parseTreeNodes) {
+Widget.prototype.makeChildWidgets = function(parseTreeNodes,options) {
+	options = options || {};
 	this.children = [];
 	var self = this;
+	// Create set variable widgets for each variable
+	$tw.utils.each(options.variables,function(value,name) {
+		var setVariableWidget = {
+			type: "set",
+			attributes: {
+				name: {type: "string", value: name},
+				value: {type: "string", value: value}
+			},
+			children: parseTreeNodes
+		};
+		parseTreeNodes = [setVariableWidget];
+	});
 	$tw.utils.each(parseTreeNodes || (this.parseTreeNode && this.parseTreeNode.children),function(childNode) {
 		self.children.push(self.makeChildWidget(childNode));
 	});
@@ -343,16 +356,32 @@ Widget.prototype.makeChildWidgets = function(parseTreeNodes) {
 
 /*
 Construct the widget object for a parse tree node
+options include:
+	variables: optional hashmap of variables to wrap around the widget
 */
-Widget.prototype.makeChildWidget = function(parseTreeNode) {
+Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
+	options = options || {};
 	var WidgetClass = this.widgetClasses[parseTreeNode.type];
 	if(!WidgetClass) {
 		WidgetClass = this.widgetClasses.text;
 		parseTreeNode = {type: "text", text: "Undefined widget '" + parseTreeNode.type + "'"};
 	}
+	// Create set variable widgets for each variable
+	$tw.utils.each(options.variables,function(value,name) {
+		var setVariableWidget = {
+			type: "set",
+			attributes: {
+				name: {type: "string", value: name},
+				value: {type: "string", value: value}
+			},
+			children: [
+				parseTreeNode
+			]
+		};
+		parseTreeNode = setVariableWidget;
+	});
 	return new WidgetClass(parseTreeNode,{
 		wiki: this.wiki,
-		variables: {},
 		parentWidget: this,
 		document: this.document
 	});

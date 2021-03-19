@@ -75,8 +75,17 @@ TranscludeWidget.prototype.execute = function() {
 			]}];
 		}
 	}
+	// Assign any variables set via attributes starting with $
+	var variables = Object.create(null);
+	$tw.utils.each(this.attributes,function(attribute,name) {
+		if(name.charAt(0) === "$") {
+			variables[name.substr(1)] = attribute;
+		}
+	});
 	// Construct the child widgets
-	this.makeChildWidgets(parseTreeNodes);
+	this.makeChildWidgets(parseTreeNodes,{
+		variables: variables
+	});
 };
 
 /*
