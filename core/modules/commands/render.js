@@ -38,15 +38,15 @@ Command.prototype.execute = function() {
 		type = this.params[2] || "text/html",
 		template = this.params[3],
 		variableList = this.params.slice(4),
-		tiddlers = wiki.filterTiddlers(tiddlerFilter);
-	$tw.utils.each(tiddlers,function(title) {
-		var parser = wiki.parseTiddler(template || title),
-			variables = {currentTiddler: title};
+		tiddlers = wiki.filterTiddlers(tiddlerFilter),
+		variables =  Object.create(null);
 		while(variableList.length >= 2) {
 			variables[variableList[0]] = variableList[1];
 			variableList = variableList.slice(2);
 		}
-		var widgetNode = wiki.makeWidget(parser,{variables: variables}),
+	$tw.utils.each(tiddlers,function(title) {
+		var parser = wiki.parseTiddler(template || title);
+		var widgetNode = wiki.makeWidget(parser,{variables: $tw.utils.extend({},variables,{currentTiddler: title})}),
 			container = $tw.fakeDocument.createElement("div");
 		widgetNode.render(container,null);
 		var text = type === "text/html" ? container.innerHTML : container.textContent,
