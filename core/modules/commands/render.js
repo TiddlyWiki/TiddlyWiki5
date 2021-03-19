@@ -37,14 +37,14 @@ Command.prototype.execute = function() {
 		filenameFilter = this.params[1] || "[is[tiddler]addsuffix[.html]]",
 		type = this.params[2] || "text/html",
 		template = this.params[3],
-		varName = this.params[4],
-		varValue = this.params[5],
+		variableList = this.params.slice(4),
 		tiddlers = wiki.filterTiddlers(tiddlerFilter);
 	$tw.utils.each(tiddlers,function(title) {
 		var parser = wiki.parseTiddler(template || title),
 			variables = {currentTiddler: title};
-		if(varName) {
-			variables[varName] = varValue || "";
+		while(variableList.length >= 2) {
+			variables[variableList[0]] = variableList[1];
+			variableList = variableList.slice(2);
 		}
 		var widgetNode = wiki.makeWidget(parser,{variables: variables}),
 			container = $tw.fakeDocument.createElement("div");
