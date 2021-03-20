@@ -53,6 +53,17 @@ This example sets the title of the current wiki [[$:/SiteTitle]] to one of a lis
 <option>The Dice Man</option>
 </$select>"/>
 
+!!! Simple List with Placeholder Value
+
+To display a default value that is also disabled, effectively functioning as a placeholder, this form can be used:
+
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler="$:/SiteTitle" default="Choose a new site title">
+<option disabled>Choose a new site title</option>
+<option>A Tale of Two Cities</option>
+<option>A New Kind of Science</option>
+<option>The Dice Man</option>
+</$select>"/>
+
 !! Value lists
 
 In this example the `value` attribute has been used to specify the text that should be used as the value of the entry instead of the display text.
