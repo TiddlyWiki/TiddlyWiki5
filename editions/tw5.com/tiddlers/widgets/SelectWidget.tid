@@ -55,10 +55,10 @@ This example sets the title of the current wiki [[$:/SiteTitle]] to one of a lis
 
 !!! Simple List with Placeholder Value
 
-To display a default value that is also disabled, effectively functioning as a placeholder, this form can be used:
+To display a default value that is also disabled, effectively functioning as a placeholder, the following form can be used. Note that the targeted field must be empty, or not exist, for the placeholder to show in the widget:
 
-<$macrocall $name="wikitext-example-without-html" src="<$select tiddler="$:/SiteTitle" default="Choose a new site title">
-<option disabled>Choose a new site title</option>
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='New Tiddler' field='text' default='Choose a new text'>
+<option disabled>Choose a new text</option>
 <option>A Tale of Two Cities</option>
 <option>A New Kind of Science</option>
 <option>The Dice Man</option>
