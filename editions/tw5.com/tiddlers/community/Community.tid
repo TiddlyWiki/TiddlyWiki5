@@ -1,9 +1,11 @@
 created: 20130909151600000
-modified: 20210106151027426
+modified: 20210322152237662
 tags: TableOfContents
 title: Community
 type: text/vnd.tiddlywiki
 
-Here we gather the latest and most useful material from the TiddlyWiki community.
+<<.tip "The latest and most useful links are now being gathered in the [[Community Links Aggregator]].">>
+
+Once all the relevant links have been transferred over these entries will be removed from the main tiddlywiki.com site.
 
 <<tabs "Forums Latest Tutorials [[Community Editions]] [[Community Plugins]] [[Community Themes]] [[Community Palettes]] [[Other Resources]] Examples Articles Meetups" "Latest">>
