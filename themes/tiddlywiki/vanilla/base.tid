@@ -2910,6 +2910,70 @@ select {
 }
 
 /*
+Publishing UI
+*/
+
+.tc-publishing-job-listing {
+	margin: 0.25em;
+	padding: 0.25em;
+	border: 1px solid black;
+	background-color: #ddffff;
+}
+
+.tc-publishing-job {
+	margin: 0.25em;
+	padding: 0.25em;
+	border: 1px solid black;
+	background-color: #ffddff;
+}
+
+.tc-publishing-job-publisher {
+	margin: 0.25em;
+	padding: 0.25em;
+	border: 1px solid black;
+	background-color: #ffdddd;
+}
+
+.tc-publishing-job-routes {
+	margin: 0.25em;
+	padding: 0.25em;
+	border: 1px solid black;
+	background-color: #ffffdd;
+}
+
+.tc-publishing-route {
+	margin: 0.25em;
+	padding: 0.25em;
+	border: 1px solid black;
+	background-color: #ddffdd;
+}
+
+/*
+Progress bar
+*/
+
+.tc-progress-bar-wrapper {
+	position: fixed;
+	width: 50%;
+	height: 50px;
+	top: 50%;
+	left: 50%;
+	margin-top: -25px;
+	margin-left: -25%;
+	background: #ffffee;
+}
+
+.tc-progress-bar-text,
+.tc-progress-bar-percent {
+	text-align: center;
+}
+
+.tc-progress-bar {
+	height: 10px;
+	background: red;
+}
+
+/*
 ** Utility classes for SVG icons
 */
 

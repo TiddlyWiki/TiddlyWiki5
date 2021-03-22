@@ -72,6 +72,11 @@ exports.startup = function() {
 			}
 		});
 	}
+	// Install the publisher handler
+	$tw.publisherHandler = new $tw.PublisherHandler({
+		wiki: $tw.wiki,
+		widget: $tw.rootWidget
+	});
 	// If we're being viewed on a data: URI then give instructions for how to save
 	if(document.location.protocol === "data:") {
 		$tw.rootWidget.dispatchEvent({

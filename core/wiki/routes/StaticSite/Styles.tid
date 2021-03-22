@@ -1,0 +1,6 @@
+title: $:/core/publishing-jobs/Static/Styles
+caption: Styles
+tags: $:/core/publishing-jobs/Static/Job
+job-type: render
+path: static/static.css
+template: $:/core/templates/static.template.css

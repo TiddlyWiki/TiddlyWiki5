@@ -757,7 +757,12 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 		tiddler = $tw.wiki.getTiddler(name),
 		_exports = {},
 		sandbox = {
-			module: {exports: _exports},
+			module: {
+				exports: _exports,
+				setStringHandler: function(handler) {
+					moduleInfo.stringHandler = handler;
+				}
+			},
 			//moduleInfo: moduleInfo,
 			exports: _exports,
 			console: console,
@@ -821,7 +826,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 				moduleInfo.definition(moduleInfo,moduleInfo.exports,sandbox.require);
 			} else if(typeof moduleInfo.definition === "string") { // String
 				moduleInfo.exports = _exports;
-				$tw.utils.evalSandboxed(moduleInfo.definition,sandbox,tiddler.fields.title);
+				$tw.utils.evalSandboxed(moduleInfo.definition,sandbox,name);
 				if(sandbox.module.exports) {
 					moduleInfo.exports = sandbox.module.exports; //more codemirror workaround
 				}
@@ -916,6 +921,20 @@ $tw.modules.createClassesFromModules = function(moduleType,subType,baseClass) {
 		}
 	});
 	return classes;
+};
+
+/*
+Return a specified module string for a module, null if the module or string is missing
+*/
+$tw.modules.getModuleString = function(moduleName,stringName,language) {
+	if(moduleName in $tw.modules.titles) {
+		$tw.modules.execute(moduleName);
+		var stringHandler = $tw.modules.titles[moduleName].stringHandler;
+		if(stringHandler) {
+			return stringHandler(stringName,language);
+		}
+	}
+	return null;
 };
 
 /////////////////////////// Barebones tiddler object

@@ -1,0 +1,6 @@
+title: $:/core/publishing-jobs/Static/Images
+caption: Images
+tags: $:/core/publishing-jobs/Static/Job
+job-type: save
+path: images/$title_slugify$.$type_extension$
+filter: [is[image]]

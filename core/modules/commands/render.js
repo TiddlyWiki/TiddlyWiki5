@@ -40,10 +40,10 @@ Command.prototype.execute = function() {
 		variableList = this.params.slice(4),
 		tiddlers = wiki.filterTiddlers(tiddlerFilter),
 		variables =  Object.create(null);
-		while(variableList.length >= 2) {
-			variables[variableList[0]] = variableList[1];
-			variableList = variableList.slice(2);
-		}
+	while(variableList.length >= 2) {
+		variables[variableList[0]] = variableList[1];
+		variableList = variableList.slice(2);
+	}
 	$tw.utils.each(tiddlers,function(title) {
 		var parser = wiki.parseTiddler(template || title);
 		var widgetNode = wiki.makeWidget(parser,{variables: $tw.utils.extend({},variables,{currentTiddler: title})}),

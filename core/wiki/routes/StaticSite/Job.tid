@@ -1,0 +1,6 @@
+title: $:/core/publishing-jobs/Static/Job
+tags: $:/tags/Publish/Jobs
+caption: Demo Static Site
+publisher: jszip
+jszip-output-filename: myzipfile.zip
+baseurl: https://example.com

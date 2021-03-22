@@ -1,0 +1,34 @@
+created: 20210315092524275
+modified: 20210315093103563
+tags: [[Working with TiddlyWiki]]
+title: Publishing
+
+You can publish extracts from a wiki as a collection of interconnected static files that can be hosted on the Internet independently from TiddlyWiki.
+
+!! Terminology
+
+TiddlyWiki has pluggable ''publisher modules'' that provide the means to publish to specific platforms:
+
+* The JSZip publisher packs the output files in a ZIP file which is automatically downloaded by the browser
+* The GitHub publisher uploads the output files to a GitHub repository suitable for GitHub Pages
+
+A ''job'' defines a self-contained group of files to be published, and specifies the ''publisher module'' to be used along with any parameters.
+
+Jobs consist of one or more ''routes'' which each define a related set of files that are to be treated in the same way.
+
+Routes consist of the following information:
+
+* A filter defining the tiddlers included in the route
+* A ''parameterised path'' defining how the ''output path'' is derived from the field values of a particular tiddler
+* A ''route type'' which can be set to "save" or "render":
+** ''"save"'' indicates that the raw tiddler is to be saved, without any rendering
+** ''"render"'' indicates that the tiddler is to be rendered through a specified ''template''
+
+Parameterised paths are strings which may contain optional tokens of the format `fieldname_functionname`. These tokens are replaced by the value of the specified field passed through the specified encoding function. The available encoding functions are:
+
+* ''encoded'' -- applies URI encoding to the value
+* ''doubleencoded'' -- applies double URI encoding to the value
+* ''slugify'' -- applies the [[slugify Operator]] to the value
+* ''extension'' -- interprets the value as a content type and returns the associated file extension
+
+For backwards compatibility, the field "uri" is accepted as a synonym for "title".

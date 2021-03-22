@@ -1,0 +1,6 @@
+title: $:/core/publishing-jobs/Static/Index
+caption: Index
+tags: $:/core/publishing-jobs/Static/Job
+job-type: render
+path: index.html
+template: $:/core/save/all
