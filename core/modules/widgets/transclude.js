@@ -112,7 +112,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 TranscludeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(Object.keys(changedAttributes).length || changedTiddlers[this.transcludeTitle]) {
+	if($tw.utils.count(changedAttributes) || changedTiddlers[this.transcludeTitle]) {
 		this.refreshSelf();
 		return true;
 	} else {
