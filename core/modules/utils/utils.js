@@ -618,7 +618,7 @@ exports.nextTick = function(fn) {
 /*global window: false */
 	if(typeof process === "undefined") {
 		// Apparently it would be faster to use postMessage - http://dbaron.org/log/20100309-faster-timeouts
-		window.setTimeout(fn,4);
+		window.setTimeout(fn,0);
 	} else {
 		process.nextTick(fn);
 	}

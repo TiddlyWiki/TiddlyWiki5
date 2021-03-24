@@ -8,7 +8,7 @@ description: 呈現個別條目到檔案
 也可以選擇性地指定附加變數的名稱和值。
 
 ```
---render <tiddler-filter> [<filename-filter>] [<render-type>] [<template>] [<name>] [<value>]
+--render <tiddler-filter> [<filename-filter>] [<render-type>] [<template>] [ [<name>] [<value>] ]*
 ```
 
 * ''tiddler-filter'': 標識要呈現的條目的篩選器

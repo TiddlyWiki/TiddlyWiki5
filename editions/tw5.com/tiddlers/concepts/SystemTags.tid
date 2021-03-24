@@ -28,11 +28,11 @@ These are the system tags defined by the ~TiddlyWiki core:
 
 !! System tags defined by ~TiddlyWiki plugins
 
-|<<tag "$:/tags/HelpPanel>> |can be seen at: [[tiddlywiki prerelease|https://tiddlywiki.com/prerelease/]] see: top left page control bubble|
-|<<tag "$:/tags/HelpPanel/Videos>> |help panel "videos" tab|
-|<<tag "$:/tags/MakeQR>> |can be seen at: [[tiddlywiki prerelease|https://tiddlywiki.com/prerelease/]]. see: Tiddler toolbar |
-|<<tag "$:/tags/TranslationGroup>> |used by the [[translators edition|https://tiddlywiki.com/editions/translators/]] |
-|<<tag "$:/tags/TwitterUsage>> |twitter plugin |
-|<<tag "$:/tags/ViewToolbarButton/QRcode>> |see: [[tiddlywiki prerelease|https://tiddlywiki.com/prerelease/]] |
-|<<tag "$:/tags/test-spec>> |tiddlywiki test suite |
+|<<tag "$:/tags/HelpPanel">> |can be seen at: [[tiddlywiki prerelease|https://tiddlywiki.com/prerelease/]] see: top left page control bubble|
+|<<tag "$:/tags/HelpPanel/Videos">> |help panel "videos" tab|
+|<<tag "$:/tags/MakeQR">> |can be seen at: [[tiddlywiki prerelease|https://tiddlywiki.com/prerelease/]]. see: Tiddler toolbar |
+|<<tag "$:/tags/TranslationGroup">> |used by the [[translators edition|https://tiddlywiki.com/editions/translators/]] |
+|<<tag "$:/tags/TwitterUsage">> |twitter plugin |
+|<<tag "$:/tags/ViewToolbarButton/QRcode">> |see: [[tiddlywiki prerelease|https://tiddlywiki.com/prerelease/]] |
+|<<tag "$:/tags/test-spec">> |tiddlywiki test suite |
 
