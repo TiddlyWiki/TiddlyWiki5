@@ -357,13 +357,13 @@ exports.generateTiddlerFilepath = function(title,options) {
 	filepath = filepath.replace(/[\x00-\x1f\x80-\x9f]/g,"_");
 	// Replace any Windows control codes
 	filepath = filepath.replace(/^(con|prn|aux|nul|com[0-9]|lpt[0-9])$/i,"_");
-	// Replace any leading spaces
-	filepath = filepath.replace(/^[ ]+/,"_")
+	// Replace any leading spaces with the same number of underscores
+	filepath = filepath.replace(/^ +/, function (u) { return u.replace(/ /g, "_")});
 	// Truncate the filename if it is too long
 	if(filepath.length > 200) {
 		filepath = filepath.substr(0,200);
 	}
-	// Replace any dots or spaces at the end of the extension
+	// Replace any dots or spaces at the end of the extension with a single underscore
 	extension = extension.replace(/[\. ]+$/,"_")
 	// Truncate the extension if it is too long
 	if(extension.length > 32) {
