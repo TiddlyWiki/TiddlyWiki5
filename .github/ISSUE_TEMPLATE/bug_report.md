@@ -23,6 +23,11 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
+**TiddlyWiki Configuration (please complete the following information):**
+ - Version [e.g. v5.1.24]
+ - Saving mechanism [e.g. Node.js, TiddlyDesktop, TiddlyHost etc]
+ - Plugins installed [e.g. Freelinks, TiddlyMap]
+ 
 **Desktop (please complete the following information):**
  - OS: [e.g. iOS]
  - Browser [e.g. chrome, safari]

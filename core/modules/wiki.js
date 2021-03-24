@@ -1242,7 +1242,7 @@ exports.search = function(text,options) {
 	var results = [],
 		source = options.source || this.each;
 	source(function(tiddler,title) {
-		if(searchTiddler(title) !== options.invert) {
+		if(searchTiddler(title) !== invert) {
 			results.push(title);
 		}
 	});

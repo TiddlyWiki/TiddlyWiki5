@@ -14,7 +14,9 @@ $src$
 
 That renders as:
 
+$$$text/vnd.tiddlywiki
 $src$
+$$$
 
 ... and the underlying HTML is:
 
@@ -35,7 +37,9 @@ $src$
 
 That renders as:
 
+$$$text/vnd.tiddlywiki
 $src$
+$$$
 </div>
 \end
 
