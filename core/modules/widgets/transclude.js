@@ -75,8 +75,17 @@ TranscludeWidget.prototype.execute = function() {
 			]}];
 		}
 	}
+	// Assign any variables set via attributes starting with $
+	var variables = Object.create(null);
+	$tw.utils.each(this.attributes,function(attribute,name) {
+		if(name.charAt(0) === "$") {
+			variables[name.substr(1)] = attribute;
+		}
+	});
 	// Construct the child widgets
-	this.makeChildWidgets(parseTreeNodes);
+	this.makeChildWidgets(parseTreeNodes,{
+		variables: variables
+	});
 };
 
 /*
@@ -103,7 +112,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 TranscludeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedTiddlers[this.transcludeTitle]) {
+	if($tw.utils.count(changedAttributes) || changedTiddlers[this.transcludeTitle]) {
 		this.refreshSelf();
 		return true;
 	} else {

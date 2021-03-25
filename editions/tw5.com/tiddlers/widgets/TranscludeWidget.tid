@@ -1,5 +1,5 @@
 created: 20130824142500000
-modified: 20140717175900970
+modified: 20210319150601867
 tags: Widgets
 title: TranscludeWidget
 type: text/vnd.tiddlywiki
@@ -17,6 +17,7 @@ The TranscludeWidget dynamically imports content from another tiddler.
 |index |The index of a property in a [[DataTiddler|DataTiddlers]] |
 |subtiddler |Optional SubTiddler title when the target tiddler is a [[plugin|Plugins]] (see below) |
 |mode |Override the default parsing mode for the transcluded text to "block" or "inline" |
+|//(attributes starting with $)// |<<.from-version "5.1.24">> The $ is removed from each attribute name to specify a variable name that is assigned the specified value for the scope of the transclusion |
 
 The TranscludeWidget treats any contained content as a fallback if the target of the transclusion is not defined (ie a missing tiddler or a missing field).
 
