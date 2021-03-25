@@ -342,20 +342,20 @@ exports.generateTiddlerFilepath = function(title,options) {
 		// Remove any forward or backward slashes so we don't create directories
 		filepath = filepath.replace(/\/|\\/g,"_");
 	}
+	// Replace any Windows control codes
+	filepath = filepath.replace(/^(con|prn|aux|nul|com[0-9]|lpt[0-9])$/i,"_$1_");
+	// Replace any leading spaces with the same number of underscores
+	filepath = filepath.replace(/^ +/,function (u) { return u.replace(/ /g, "_")});
 	//If the path does not start with "." or ".." && a path seperator, then
 	if(!/^\.{1,2}[/\\]/g.test(filepath)) {
 		// Don't let the filename start with any dots because such files are invisible on *nix
-		filepath = filepath.replace(/^\.+/g,function (u) { return u.replace(/ /g, "_")});
+		filepath = filepath.replace(/^\.+/g,function (u) { return u.replace(/\./g, "_")});
 	}
-	// Replace any leading spaces with the same number of underscores
-	filepath = filepath.replace(/^ +/,function (u) { return u.replace(/ /g, "_")});
-	// Replace any Windows control codes
-	filepath = filepath.replace(/^(con|prn|aux|nul|com[0-9]|lpt[0-9])$/i,"_");
 	// Replace any Unicode control codes
 	filepath = filepath.replace(/[\x00-\x1f\x80-\x9f]/g,"_");
 	// Replace any characters that can't be used in cross-platform filenames
 	filepath = $tw.utils.transliterate(filepath.replace(/<|>|~|\:|\"|\||\?|\*|\^/g,"_"));
-	// Replace any dots or spaces at the end of the extension with a single underscore
+	// Replace any dots or spaces at the end of the extension with the same number of underscores
 	extension = extension.replace(/[\. ]+$/, function (u) { return u.replace(/[\. ]/g, "_")});
 	// Truncate the extension if it is too long
 	if(extension.length > 32) {
@@ -370,7 +370,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 		filepath = filepath.substr(0,200);
 	}
 	// If the resulting filename is blank (eg because the title is just punctuation)
-	if(!filepath) {
+	if(!filepath || /^_+$/g.test(filepath)) {
 		// ...then just use the character codes of the title
 		filepath = "";	
 		$tw.utils.each(title.split(""),function(char) {
