@@ -364,7 +364,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 		filepath = filepath.substr(0,200);
 	}
 	// Replace any dots or spaces at the end of the extension with a single underscore
-	extension = extension.replace(/[\. ]+$/,"_")
+	extension = extension.replace(/[\. ]+$/, function (u) { return u.replace(/[\. ]/g, "_")});
 	// Truncate the extension if it is too long
 	if(extension.length > 32) {
 		extension = extension.substr(0,32);
