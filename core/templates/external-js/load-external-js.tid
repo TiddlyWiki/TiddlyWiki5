@@ -1,0 +1,3 @@
+title: $:/core/templates/load-external-js
+
+&lt;script src="<<coreURL>>" onerror="alert('Error: Cannot load tiddlywiki5.js');">&lt;/script>

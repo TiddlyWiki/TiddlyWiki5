@@ -1,0 +1,54 @@
+title: $:/language/Snippets/GetTiddlyWikiJS
+
+To obtain "tiddlywiki5.js" for your offline external-js ~TiddlyWiki, use one of the following methods:
+<ul>
+
+<$reveal state="$:/plugins/tiddlywiki/tiddlyweb!!plugin-type" type="match" text="plugin">
+
+<li>
+If you are running ~TiddlyWiki on node.js, you can download <a class="tc-tiddlylink" href="%24%3A%2Fcore%2Ftemplates%2Ftiddlywiki5.js" download="tiddlywiki5.js">tiddlywiki5.js</a> from your server.
+</li>
+
+</$reveal>
+<$set name=isButtonOff filter="[[$:/boot/boot.js]is[missing]then[yes]else[no]]">
+<$set name=cssState filter="""[[$:/boot/boot.js]is[missing]then[background-color:#a9a9a9]]""" select="0">
+
+<li>
+
+If this wiki's ~TiddlyWiki core has not been externalized, you can click the following button to export "tiddlywiki5.js" from your own wiki:
+<div><$button style=<<cssState>> class="tc-btn-big-green" disabled=<<isButtonOff>> >
+<$wikify name="site-title" text={{$:/config/SaveWikiButton/Filename}}>
+<$action-sendmessage $message="tm-download-file" $param="$:/core/templates/tiddlywiki5.js" filename="tiddlywiki5.js"/>
+</$wikify>
+{{$:/core/images/download-button}} Export tiddlywiki5.js
+</$button></div>
+
+</li>
+
+</$set></$set>
+
+<li>
+
+If you have created your wiki from the "server-external-js" edition, then you can run the command:
+
+```
+tiddllywiki <your-wiki-folder> --build tiddlywiki5.js
+```
+
+File "tiddlywiki5.js" will be saved in the`output` folder within your wiki-folder.
+
+</li>
+<li>
+
+From the command line, run:
+
+```
+tiddlywiki <your-wiki-folder> \
+    --rendertiddler '$:/core/templates/tiddlywiki5.js' \
+    tiddlywiki5.js text/plain
+```
+
+File "tiddlywiki5.js" will be saved in the`output` folder within your wiki-folder.
+
+</li>
+</ul>
