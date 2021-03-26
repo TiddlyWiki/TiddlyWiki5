@@ -419,7 +419,7 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 	if(fileInfo.hasMetaFile) {
 		// Save the tiddler as a separate body and meta file
 		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
-		fs.writeFile(fileInfo.filepath,tiddler.fields.text,typeInfo.encoding,function(err) {
+		fs.writeFile(fileInfo.filepath,tiddler.fields.text || "",typeInfo.encoding,function(err) {
 			if(err) {
 				return callback(err);
 			}
@@ -461,7 +461,7 @@ exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 	if(fileInfo.hasMetaFile) {
 		// Save the tiddler as a separate body and meta file
 		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
-		fs.writeFileSync(fileInfo.filepath,tiddler.fields.text,typeInfo.encoding);
+		fs.writeFileSync(fileInfo.filepath,tiddler.fields.text || "",typeInfo.encoding);
 		fs.writeFileSync(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8");
 	} else {
 		// Save the tiddler as a self contained templated file
@@ -471,6 +471,7 @@ exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 			fs.writeFileSync(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8");
 		}
 	}
+	return fileInfo;
 };
 
 /*
