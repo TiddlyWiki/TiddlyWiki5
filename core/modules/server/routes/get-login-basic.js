@@ -25,8 +25,9 @@ exports.handler = function(request,response,state) {
 		response.end();		
 	} else {
 		// Redirect to the root wiki if login worked
+		var location = ($tw.syncadaptor && $tw.syncadaptor.host)? $tw.syncadaptor.host: "/";
 		response.writeHead(302,{
-			Location: "/"
+			Location: location
 		});
 		response.end();
 	}
