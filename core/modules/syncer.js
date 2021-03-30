@@ -135,6 +135,7 @@ function Syncer(options) {
 			if(self.syncadaptor && self.syncadaptor.executeJob) {
 				self.syncadaptor.executeJob(event);
 			}
+		});
 		$tw.rootWidget.addEventListener("tm-copy-syncer-logs-to-clipboard",function() {
 			$tw.utils.copyToClipboard($tw.utils.getSystemInfo() + "\n\nLog:\n" + self.logger.getBuffer());
 		});
