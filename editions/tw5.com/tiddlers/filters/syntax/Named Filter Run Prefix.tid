@@ -1,0 +1,10 @@
+created: 20201214044413473
+modified: 20201214053018350
+tags: 
+title: Named Filter Run Prefix
+
+<$set name="prefixlist" filter="""[all[shadows+tiddlers]has[module-type]module-type[filterrunprefix]trim:prefix[$:/core/modules/filterrunprefixes/]trim:suffix[.js]addprefix["]addsuffix["]join[|]addprefix[(]addsuffix[)]]""">
+<$railroad text=<<prefixlist>>/>
+</$set>
+
+A named filter run prefix can precede any [[run|Filter Run]] of a [[filter expression|Filter Expression]] in place of a single-character prefix (`+`, `-` and so on). To create a new filter run prefix, create a [[Javascript module|Modules]] with a [[module-type|ModuleType]] of `filerrunprefix`.

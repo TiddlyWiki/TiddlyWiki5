@@ -1,25 +1,40 @@
 title: $:/core/ui/ControlPanel/Modals/AddPlugins
 subtitle: {{$:/core/images/download-button}} {{$:/language/ControlPanel/Plugins/Add/Caption}}
 
-\define install-plugin-button()
-<div>
-<$button class={{{ [<assetInfo>get[original-title]get[version]then[tc-reinstall]] tc-btn-invisible tc-install-plugin +[join[ ]] }}}>
+\define install-plugin-actions()
 <$action-sendmessage $message="tm-load-plugin-from-library" url={{!!url}} title={{$(assetInfo)$!!original-title}}/>
 <$set name="url" value={{!!url}}>
 <$set name="currentTiddler" value=<<assetInfo>>>
-<$list filter="[enlist{!!dependents}] [{!!parent-plugin}] +[sort[title]]" variable="dependency">
+<$list filter="[enlist{!!dependents}] [{!!parent-plugin}] +[sort[name]]" variable="dependency">
 <$action-sendmessage $message="tm-load-plugin-from-library" url=<<url>> title=<<dependency>>/>
 </$list>
 </$set>
 </$set>
+\end
+
+\define install-plugin-button()
+<div>
+<$set name="libraryVersion" value={{{ [<assetInfo>get[version]] }}}>
+<$set name="installedVersion" value={{{ [<assetInfo>get[original-title]get[version]] }}}>
+<$set name="reinstall-type" value={{{ [<libraryVersion>compare:version:eq<installedVersion>then[tc-reinstall]] [<libraryVersion>compare:version:gt<installedVersion>then[tc-reinstall-upgrade]] [<libraryVersion>compare:version:lt<installedVersion>then[tc-reinstall-downgrade]] }}}>
+<$button actions=<<install-plugin-actions>> class={{{ [<assetInfo>get[original-title]has[version]then<reinstall-type>] tc-btn-invisible tc-install-plugin +[join[ ]] }}}>
 {{$:/core/images/download-button}}
-<$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion" emptyMessage="""{{$:/language/ControlPanel/Plugins/Install/Caption}}""">
-{{$:/language/ControlPanel/Plugins/Reinstall/Caption}}
+<$list filter="[<assetInfo>get[original-title]get[version]]" variable="ignore" emptyMessage="{{$:/language/ControlPanel/Plugins/Install/Caption}}">
+<$list filter="[<libraryVersion>compare:version:gt<installedVersion>]" variable="ignore" emptyMessage="""
+<$list filter="[<libraryVersion>compare:version:lt<installedVersion>]" variable="ignore" emptyMessage="{{$:/language/ControlPanel/Plugins/Reinstall/Caption}}">
+{{$:/language/ControlPanel/Plugins/Downgrade/Caption}}
+</$list>
+""">
+{{$:/language/ControlPanel/Plugins/Update/Caption}}
+</$list>
 </$list>
 </$button>
 <div>
 </div>
 <$reveal stateTitle=<<assetInfo>> stateField="requires-reload" type="match" text="yes">{{$:/language/ControlPanel/Plugins/PluginWillRequireReload}}</$reveal>
+</$set>
+</$set>
+</$set>
 </div>
 \end
 
@@ -51,52 +66,64 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 <h1><strong><$text text={{{ [<assetInfo>get[name]] ~[<assetInfo>get[original-title]split[/]last[1]] }}}/></strong>: <$view tiddler=<<assetInfo>> field="description"/></h1>
 <h2><$view tiddler=<<assetInfo>> field="original-title"/></h2>
 <div><em><$view tiddler=<<assetInfo>> field="version"/></em></div>
+<$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion"><div><em>{{$:/language/ControlPanel/Plugins/AlreadyInstalled/Hint}}</em></div></$list>
 </div>
 <div class="tc-plugin-info-chunk tc-plugin-info-buttons">
 <<install-plugin-button>>
 </div>
 </div>
+<$set name="original-title" value={{{ [<assetInfo>get[original-title]] }}}>
 <$reveal type="match" text="yes" state=<<popup-state>>>
 <div class="tc-plugin-info-dropdown">
+<$list filter="[enlist{!!dependents}] [<currentTiddler>get[parent-plugin]] +[limit[1]] ~[<assetInfo>get[original-title]!is[tiddler]]" variable="ignore">
 <div class="tc-plugin-info-dropdown-message">
-<$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion" emptyMessage="""{{$:/language/ControlPanel/Plugins/NotInstalled/Hint}}""">
-<em>
-{{$:/language/ControlPanel/Plugins/AlreadyInstalled/Hint}}
-</em>
+<$list filter="[<assetInfo>get[original-title]!is[tiddler]]">
+{{$:/language/ControlPanel/Plugins/NotInstalled/Hint}}
 </$list>
 <$set name="currentTiddler" value=<<assetInfo>>>
 <$list filter="[enlist{!!dependents}] [<currentTiddler>get[parent-plugin]] +[limit[1]]" variable="ignore">
 <div>
 {{$:/language/ControlPanel/Plugins/AlsoRequires}}
-<$list filter="[enlist{!!dependents}] [{!!parent-plugin}] +[sort[title]]" variable="dependency">
+<$list filter="[enlist{!!dependents}] [{!!parent-plugin}] +[sort[name]]" variable="dependency">
 <$text text=<<dependency>>/>
 </$list>
 </div>
 </$list>
 </$set>
 </div>
+</$list>
 <div class="tc-plugin-info-dropdown-body">
 <$transclude tiddler=<<assetInfo>> field="readme" mode="block"/>
 </div>
-<$set name="original-title" value={{{ [<assetInfo>get[original-title]] }}}>
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>limit[1]]" variable="ignore">
 <div class="tc-plugin-info-sub-plugins">
-<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>sort[title]sort[name]]" variable="assetInfo">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>sort[name]]" variable="assetInfo">
 <<display-plugin-info "$type$">>
 </$list>
 </div>
 </$list>
-</$set>
 </div>
 </$reveal>
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>limit[1]]" variable="ignore">
+<$reveal type="nomatch" text="yes" state=<<popup-state>> tag="div" class="tc-plugin-info-sub-plugin-indicator">
+<$wikify name="count" text="""<$count filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]has[parent-plugin]parent-plugin<original-title>]"/>""">
+<$button class="tc-btn-invisible" set=<<popup-state>> setTo="yes">
+{{$:/language/ControlPanel/Plugins/SubPluginPrompt}}
+</$button>
+</$wikify>
+</$reveal>
+</$list>
+</$set>
 </$set>
 \end
 
 \define load-plugin-library-button()
+<$list filter="[<currentTiddler>get[enabled]else[yes]match[yes]]" variable="ignore">
 <$button class="tc-btn-big-green">
 <$action-sendmessage $message="tm-load-plugin-library" url={{!!url}} infoTitlePrefix="$:/temp/RemoteAssetInfo/"/>
 {{$:/core/images/chevron-right}} {{$:/language/ControlPanel/Plugins/OpenPluginLibrary}}
 </$button>
+</$list>
 \end
 
 \define display-server-assets(type)
@@ -108,7 +135,7 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 </$button>
 </$reveal>
 <div class="tc-plugin-library-listing">
-<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]search:author,description,original-title,readme,title{$:/temp/RemoteAssetSearch/$(currentTiddler)$}sort[title]sort[name]]" variable="assetInfo">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[$type$]search:author,description,original-title,readme,title{$:/temp/RemoteAssetSearch/$(currentTiddler)$}sort[name]]" variable="assetInfo">
 <$list filter="[[$:/temp/RemoteAssetSearch/$(currentTiddler)$]has[text]] ~[<assetInfo>!has[parent-plugin]]" variable="ignore"><!-- Hide sub-plugins if we're not searching -->
 <<display-plugin-info "$type$">>
 </$list>
@@ -119,7 +146,11 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 \define display-server-connection()
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/ServerConnection]suffix{!!url}]" variable="connectionTiddler" emptyMessage=<<load-plugin-library-button>>>
 
-<<tabs "[[$:/core/ui/ControlPanel/Plugins/Add/Plugins]] [[$:/core/ui/ControlPanel/Plugins/Add/Themes]] [[$:/core/ui/ControlPanel/Plugins/Add/Languages]]" "$:/core/ui/ControlPanel/Plugins/Add/Plugins">>
+<$set name="transclusion" value=<<connectionTiddler>>>
+
+<<tabs "[[$:/core/ui/ControlPanel/Plugins/Add/Updates]] [[$:/core/ui/ControlPanel/Plugins/Add/Plugins]] [[$:/core/ui/ControlPanel/Plugins/Add/Themes]] [[$:/core/ui/ControlPanel/Plugins/Add/Languages]]" "$:/core/ui/ControlPanel/Plugins/Add/Plugins">>
+
+</$set>
 
 </$list>
 \end
@@ -135,22 +166,33 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 \end
 
 \define plugin-library-listing()
+<div class="tc-tab-set">
+<$set name="defaultTab" value={{{ [all[tiddlers+shadows]tag[$:/tags/PluginLibrary]] }}}>
+<div class="tc-tab-buttons">
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/PluginLibrary]]">
-<div class="tc-plugin-library">
-
-!! <$link><$transclude field="caption"><$view field="title"/></$transclude></$link>
-
+<$button set=<<qualify "$:/state/addplugins/tab">> setTo=<<currentTiddler>> default=<<defaultTab>> selectedClass="tc-tab-selected">
+<$set name="tv-wikilinks" value="no">
+<$transclude field="caption"/>
+</$set>
+</$button>
+</$list>
+</div>
+<div class="tc-tab-divider"/>
+<div class="tc-tab-content">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/PluginLibrary]]">
+<$reveal type="match" state=<<qualify "$:/state/addplugins/tab">> text=<<currentTiddler>> default=<<defaultTab>>>
+<h2><$link><$transclude field="caption"><$view field="title"/></$transclude></$link></h2>
 //<$view field="url"/>//
-
-<$transclude/>
-
+<$transclude mode="block"/>
 <$set name=PluginLibraryURL value={{!!url}}>
 <<close-library-button>>
 </$set>
-
 <<display-server-connection>>
-</div>
+</$reveal>
 </$list>
+</div>
+</$set>
+</div>
 \end
 
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]

@@ -1,35 +1,53 @@
 title: $:/core/ui/AdvancedSearch/Shadows
 tags: $:/tags/AdvancedSearch
 caption: {{$:/language/Search/Shadows/Caption}}
+first-search-filter: [all[shadows]search<userInput>sort[title]limit[250]] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]]
 
 \define lingo-base() $:/language/Search/
-<$linkcatcher to="$:/temp/advancedsearch">
+
+\define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab--1498284803" tag="$:/tags/AdvancedSearch" beforeafter="$beforeafter$" defaultState="$:/core/ui/AdvancedSearch/System" actions="""<$action-setfield $tiddler="$:/state/advancedsearch/currentTab" text=<<nextTab>>/>"""/>
+
+\define cancel-search-actions() <$list filter="[{$:/temp/advancedsearch}!match{$:/temp/advancedsearch/input}]" emptyMessage="""<$action-deletetiddler $filter="[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]]" />"""><$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/advancedsearch}}/><$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/></$list><$action-sendmessage $message="tm-focus-selector" $param=""".tc-advanced-search input"""/>
+
+\define input-accept-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]"><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>"""><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>
+
+\define input-accept-variant-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]"><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>"""><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>
 
 <<lingo Shadows/Hint>>
 
 <div class="tc-search">
-<$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input" focus={{$:/config/Search/AutoFocus}}/>
+<$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
+<$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
+<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/advancedsearch/input" storeTitle="$:/temp/advancedsearch"
+		refreshTitle="$:/temp/advancedsearch/refresh" selectionStateTitle="$:/temp/advancedsearch/selected-item" type="search"
+		tag="input" focus={{$:/config/Search/AutoFocus}} configTiddlerFilter="[[$:/core/ui/AdvancedSearch/Shadows]]"
+		inputCancelActions=<<cancel-search-actions>> inputAcceptActions=<<input-accept-actions>> 
+		inputAcceptVariantActions=<<input-accept-variant-actions>>  filterMinLength={{$:/config/Search/MinLength}}/>
+</$keyboard>
+</$keyboard>
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 <$button class="tc-btn-invisible">
-<$action-setfield $tiddler="$:/temp/advancedsearch" $field="text" $value=""/>
+<<cancel-search-actions>>
 {{$:/core/images/close-button}}
 </$button>
 </$reveal>
 </div>
 
-</$linkcatcher>
-
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 
 <$list filter="[{$:/temp/advancedsearch}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 
-<$set name="resultCount" value="""<$count filter="[all[shadows]search{$:/temp/advancedsearch}] -[[$:/temp/advancedsearch]]"/>""">
+<$set name="resultCount" value="""<$count filter="[all[shadows]search{$:/temp/advancedsearch}] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]]"/>""">
 
 <div class="tc-search-results">
 
 <<lingo Shadows/Matches>>
 
-<$list filter="[all[shadows]search{$:/temp/advancedsearch}sort[title]limit[250]] -[[$:/temp/advancedsearch]]" template="$:/core/ui/ListItemTemplate"/>
+<$list filter="[all[shadows]search{$:/temp/advancedsearch}sort[title]limit[250]] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]]">
+<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[[$:/temp/advancedsearch/selected-item]get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
 
 </div>
 

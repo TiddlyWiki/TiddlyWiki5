@@ -1,8 +1,10 @@
 title: $:/language/EditTemplate/
 
-Body/External/Hint: Este é um tiddler armazenado fora do ficheiro principal da Tiddlywiki. Pode mudar as etiquetas mas não pode editar o seu conteúdo
+Body/External/Hint: Este é um tiddler armazenado fora do ficheiro principal da TiddlyWiki. Pode mudar as etiquetas mas não pode editar o seu conteúdo
 Body/Placeholder: Escreva o texto para este tiddler
 Body/Preview/Type/Output: resultado
+Field/Dropdown/Caption: lista de campos
+Field/Dropdown/Hint: Mostrar lista de campos
 Field/Remove/Caption: remover campo
 Field/Remove/Hint: Remover campo
 Fields/Add/Button: adicionar
@@ -18,6 +20,9 @@ Tags/Add/Placeholder: nome da etiqueta
 Tags/Dropdown/Caption: lista de etiquetas
 Tags/Dropdown/Hint: Mostrar a lista de etiquetas
 Title/BadCharacterWarning: Atenção: Evite utilizar os caracteres <<bad-chars>> no título de tiddlers
+Title/Exists/Prompt: Tiddler alvo já existente
+Title/References/Prompt: As seguintes referências a este tiddler não serão automaticamente actualizadas:
+Title/Relink/Prompt: Actualizar ''<$text text=<<fromTitle>>/>'' para ''<$text text=<<toTitle>>/>'' nas //etiquetas// e nos campos //list// de outros tiddlers
 Type/Delete/Caption: apagar tipo de conteúdo
 Type/Delete/Hint: Apagar tipo de conteúdo
 Type/Dropdown/Caption: Lista de tipo de conteúdo

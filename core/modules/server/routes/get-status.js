@@ -22,6 +22,7 @@ exports.handler = function(request,response,state) {
 		username: state.authenticatedUsername || state.server.get("anon-username") || "",
 		anonymous: !state.authenticatedUsername,
 		read_only: !state.server.isAuthorized("writers",state.authenticatedUsername),
+		sse_enabled: state.server.get("sse-enabled") === "yes",
 		space: {
 			recipe: "default"
 		},

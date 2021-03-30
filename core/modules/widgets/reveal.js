@@ -35,9 +35,8 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 		tag = this.revealTag;
 	}
 	var domNode = this.document.createElement(tag);
-	var classes = this["class"].split(" ") || [];
-	classes.push("tc-reveal");
-	domNode.className = classes.join(" ");
+	this.domNode = domNode;
+	this.assignDomNodeClasses();
 	if(this.style) {
 		domNode.setAttribute("style",this.style);
 	}
@@ -70,6 +69,10 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 			left = this.popup.left + this.popup.width;
 			top = this.popup.top + this.popup.height - domNode.offsetHeight;
 			break;
+		case "belowright":
+			left = this.popup.left + this.popup.width;
+			top = this.popup.top + this.popup.height;
+			break;			
 		case "right":
 			left = this.popup.left + this.popup.width;
 			top = this.popup.top;
@@ -78,6 +81,10 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 			left = this.popup.left + this.popup.width - domNode.offsetWidth;
 			top = this.popup.top + this.popup.height;
 			break;
+		case "aboveleft":
+			left = this.popup.left - domNode.offsetWidth;
+			top = this.popup.top - domNode.offsetHeight;
+			break;			
 		default: // Below
 			left = this.popup.left;
 			top = this.popup.top + this.popup.height;
@@ -102,13 +109,14 @@ RevealWidget.prototype.execute = function() {
 	this.text = this.getAttribute("text");
 	this.position = this.getAttribute("position");
 	this.positionAllowNegative = this.getAttribute("positionAllowNegative") === "yes";
-	this["class"] = this.getAttribute("class","");
+	// class attribute handled in assignDomNodeClasses()
 	this.style = this.getAttribute("style","");
 	this["default"] = this.getAttribute("default","");
 	this.animate = this.getAttribute("animate","no");
 	this.retain = this.getAttribute("retain","no");
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
+	this.updatePopupPosition = this.getAttribute("updatePopupPosition","no") === "yes";
 	// Compute the title of the state tiddler and read it
 	this.stateTiddlerTitle = this.state;
 	this.stateTitle = this.getAttribute("stateTitle");
@@ -194,6 +202,12 @@ RevealWidget.prototype.readPopupState = function(state) {
 	}
 };
 
+RevealWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" ");
+	classes.push("tc-reveal");
+	this.domNode.className = classes.join(" ");
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
@@ -212,7 +226,15 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 				this.refreshSelf();
 				return true;
 			}
+		} else if(this.type === "popup" && this.updatePopupPosition && (changedTiddlers[this.state] || changedTiddlers[this.stateTitle])) {
+			this.positionPopup(this.domNode);
 		}
+		if(changedAttributes.style) {
+			this.domNode.style = this.getAttribute("style","");
+		}
+		if(changedAttributes["class"]) {
+			this.assignDomNodeClasses();
+		}		
 		return this.refreshChildren(changedTiddlers);
 	}
 };

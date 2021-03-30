@@ -4,7 +4,7 @@ tags: Learning
 title: TaskManagementExample (Draggable)
 type: text/vnd.tiddlywiki
 
-This is a version of the TaskManagementDemo enhanced with the ability to drag and drop the task list to re-order them.
+This is a version of the TaskManagementExample enhanced with the ability to drag and drop the task list to re-order them.
 
 ! Outstanding tasks
 
@@ -18,6 +18,6 @@ This is a version of the TaskManagementDemo enhanced with the ability to drag an
 
 <$list filter="[!has[draft.of]tag[task]tag[done]sort[created]]">
 <div>
-<$checkbox tag="done"> ~~<$link to={{!!title}}><$view field="title"/></$link>~~</$checkbox>
+<$checkbox tag="done"> ~~<$link/>~~</$checkbox>
 </div>
 </$list>

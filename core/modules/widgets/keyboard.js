@@ -46,13 +46,15 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	// Add a keyboard event handler
 	domNode.addEventListener("keydown",function (event) {
 		if($tw.keyboardManager.checkKeyDescriptors(event,self.keyInfoArray)) {
-			self.invokeActions(self,event);
+			var handled = self.invokeActions(self,event);
 			if(self.actions) {
 				self.invokeActionString(self.actions,self,event);
 			}
 			self.dispatchMessage(event);
-			event.preventDefault();
-			event.stopPropagation();
+			if(handled || self.actions || self.message) {
+				event.preventDefault();
+				event.stopPropagation();
+			}
 			return true;
 		}
 		return false;

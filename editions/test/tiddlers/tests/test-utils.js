@@ -25,6 +25,29 @@ describe("Utility tests", function() {
 		expect(psa(" [[Tidd\u00a0ler8]] two ")).toEqual(["Tidd\u00a0ler8","two"]);
 	});
 
+	it("should handle parsing a date", function() {
+		var pd = function(v) {
+			return $tw.utils.parseDate(v).toUTCString();
+		};
+		expect(pd("20150428204930183")).toEqual("Tue, 28 Apr 2015 20:49:30 GMT");
+		expect(pd("-20150428204930183")).toEqual("Sun, 28 Apr -2015 20:49:30 GMT");
+		expect(pd("00730428204930183")).toEqual("Fri, 28 Apr 0073 20:49:30 GMT");
+		expect(pd("-00730428204930183")).toEqual("Thu, 28 Apr -0073 20:49:30 GMT");
+	});
+
+	it("should handle base64 encoding emojis", function() {
+		var booksEmoji = "📚";
+		expect(booksEmoji).toBe(booksEmoji);
+		// 📚 is U+1F4DA BOOKS, which is represented by surrogate pair 0xD83D 0xDCDA in Javascript
+		expect(booksEmoji.length).toBe(2);
+		expect(booksEmoji.charCodeAt(0)).toBe(55357); // 0xD83D
+		expect(booksEmoji.charCodeAt(1)).toBe(56538); // 0xDCDA
+		expect($tw.utils.base64Encode(booksEmoji)).not.toBe("7aC97bOa", "if base64 is 7aC97bOa then surrogate pairs were incorrectly treated as codepoints");
+		expect($tw.utils.base64Encode(booksEmoji)).toBe("8J+Tmg==", "if surrogate pairs are correctly treated as a single code unit then base64 should be 8J+Tmg==");
+		expect($tw.utils.base64Decode("8J+Tmg==")).toBe(booksEmoji);
+		expect($tw.utils.base64Decode($tw.utils.base64Encode(booksEmoji))).toBe(booksEmoji, "should round-trip correctly");
+	});
+
 	it("should handle stringifying a string array", function() {
 		var str = $tw.utils.stringifyList;
 		expect(str([])).toEqual("");
@@ -49,6 +72,8 @@ describe("Utility tests", function() {
 		var fds = $tw.utils.formatDateString,
 			// nov is month: 10!
 			d = new Date(2014,10,9,17,41,28,542);
+		expect(fds(d,"{era:bce||ce}")).toBe("ce");
+		expect(fds(d,"YYYY")).toBe("2014");
 		expect(fds(d,"DDD DD MMM YYYY")).toBe("Sunday 9 November 2014");
 		expect(fds(d,"ddd hh mm ssss")).toBe("Sun 17 41 2828");
 		expect(fds(d,"MM0DD")).toBe("1109");
@@ -79,6 +104,19 @@ describe("Utility tests", function() {
 		d = new Date(2014,11,29,23,59,59);
 		expect(fds(d,"WW")).toBe("1");
 		expect(fds(d,"wYYYY")).toBe("2015");
+
+		// Negative years
+		d = new Date(-2014,10,9,17,41,28,542);
+		expect(fds(d,"YYYY")).toBe("-2014");
+		expect(fds(d,"aYYYY")).toBe("2014");
+		expect(fds(d,"{era:bce||ce}")).toBe("bce");
+
+		// Zero years
+		d = new Date(0,10,9,17,41,28,542);
+		d.setUTCFullYear(0); // See https://stackoverflow.com/a/5870822
+		expect(fds(d,"YYYY")).toBe("0000");
+		expect(fds(d,"aYYYY")).toBe("0000");
+		expect(fds(d,"{era:bce|z|ce}")).toBe("z");
 	});
 
 	it("should parse text references", function() {
@@ -105,6 +143,30 @@ describe("Utility tests", function() {
 			{ title : 'title', field : 'field##index' }
 		);
 
+	});
+
+	it("should compare versions", function() {
+		var cv = $tw.utils.compareVersions;
+		expect(cv("v0.0.0","v0.0.0")).toEqual(0);
+		expect(cv("0.0.0","v0.0.0")).toEqual(0);
+		expect(cv("v0.0.0","0.0.0")).toEqual(0);
+		expect(cv("v0.0.0","not a version")).toEqual(0);
+		expect(cv("v0.0.0",undefined)).toEqual(0);
+		expect(cv("not a version","v0.0.0")).toEqual(0);
+		expect(cv(undefined,"v0.0.0")).toEqual(0);
+		expect(cv("v1.0.0","v1.0.0")).toEqual(0);
+		expect(cv("v1.0.0","1.0.0")).toEqual(0);
+
+		expect(cv("v1.0.1",undefined)).toEqual(+1);
+		expect(cv("v1.0.1","v1.0.0")).toEqual(+1);
+		expect(cv("v1.1.1","v1.1.0")).toEqual(+1);
+		expect(cv("v1.1.2","v1.1.1")).toEqual(+1);
+		expect(cv("1.1.2","v1.1.1")).toEqual(+1);
+
+		expect(cv("v1.0.0","v1.0.1")).toEqual(-1);
+		expect(cv("v1.1.0","v1.1.1")).toEqual(-1);
+		expect(cv("v1.1.1","v1.1.2")).toEqual(-1);
+		expect(cv("1.1.1","1.1.2")).toEqual(-1);
 	});
 
 });

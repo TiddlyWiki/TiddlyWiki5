@@ -41,7 +41,7 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 		// Check if we're dealing with a plugin
 		if(incomingTiddler && incomingTiddler["plugin-type"]) {
 			// Check whether the plugin contains JS modules
-			var requiresReload = $tw.wiki.doesPluginInfoRequireReload(JSON.parse(incomingTiddler.text)) ? ($tw.wiki.getTiddlerText("$:/language/ControlPanel/Plugins/PluginWillRequireReload") + " ") : "";
+			var requiresReload = wiki.doesPluginInfoRequireReload(JSON.parse(incomingTiddler.text)) ? (wiki.getTiddlerText("$:/language/ControlPanel/Plugins/PluginWillRequireReload") + " ") : "";
 			messages[title] = requiresReload;
 			if(incomingTiddler.version) {
 				// Upgrade the incoming plugin if it is in the upgrade library
@@ -57,7 +57,7 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 					// Reject the incoming plugin by blanking all its fields
 					if($tw.utils.checkVersions(existingTiddler.fields.version,incomingTiddler.version)) {
 						tiddlers[title] = Object.create(null);
-						messages[title] = requiresReload + $tw.language.getString("Import/Upgrader/Plugins/Suppressed/Version",{variables: {incoming: incomingTiddler.version, existing: existingTiddler.fields.version}});
+						messages[title] = $tw.language.getString("Import/Upgrader/Plugins/Suppressed/Version",{variables: {incoming: incomingTiddler.version, existing: existingTiddler.fields.version}});
 						return;
 					}
 				}

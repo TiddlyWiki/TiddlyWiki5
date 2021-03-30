@@ -38,7 +38,7 @@ $:/config/Plugins/Disabled/$(currentTiddler)$
 </div>
 <div class="tc-plugin-info-chunk tc-plugin-info-description">
 <h1>
-''<$view field="description"><$view field="title"/></$view>'' $disabledMessage$
+''<$text text={{{ [<currentTiddler>get[name]] ~[<currentTiddler>split[/]last[1]] }}}/>'': <$view field="description"><$view field="title"/></$view> $disabledMessage$
 </h1>
 <h2>
 <$view field="title"/>

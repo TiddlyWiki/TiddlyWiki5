@@ -4,27 +4,29 @@ Advanced/Caption: 進階
 Advanced/Hint: 關於此 TiddlyWiki 的內部資訊
 Appearance/Caption: 視覺外觀
 Appearance/Hint: 自訂您的 TiddlyWiki 外觀。
-Basics/AnimDuration/Prompt: 動畫持續時間：
-Basics/AutoFocus/Prompt: 預設自動停留的欄位：
+Basics/AnimDuration/Prompt: 動畫持續時間
+Basics/AutoFocus/Prompt: 編輯條目時的預設自動停留欄位
 Basics/Caption: 基本
 Basics/DefaultTiddlers/BottomHint: 標題含空白時請使用 &#91;&#91;雙中括弧&#93;&#93;，或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留開啟中的條目順序</$button>
-Basics/DefaultTiddlers/Prompt: 首頁：
-Basics/DefaultTiddlers/TopHint: 預設開啟的條目：
+Basics/DefaultTiddlers/Prompt: 首頁
+Basics/DefaultTiddlers/TopHint: 預設開啟的條目
 Basics/Language/Prompt: 您好！當前的語言：
 Basics/NewJournal/Tags/Prompt: 新日誌條目的標籤
 Basics/NewJournal/Text/Prompt: 新日誌條目的內容
 Basics/NewJournal/Title/Prompt: 新日誌條目的名稱
 Basics/NewTiddler/Tags/Prompt: 新條目的標籤
 Basics/NewTiddler/Title/Prompt: 新條目的名稱
-Basics/OverriddenShadowTiddlers/Prompt: 被覆寫的預設條目數量：
-Basics/ShadowTiddlers/Prompt: 預設條目數量：
-Basics/Subtitle/Prompt: 副標題：
-Basics/SystemTiddlers/Prompt: 系統條目數量：
-Basics/Tags/Prompt: 標籤數量：
-Basics/Tiddlers/Prompt: 一般條目數量：
-Basics/Title/Prompt: 標題：
-Basics/Username/Prompt: 編輯者署名：
-Basics/Version/Prompt: ~TiddlyWiki 版本：
+Basics/OverriddenShadowTiddlers/Prompt: 被覆寫的預設條目數量
+Basics/RemoveTags: 更新到當前格式
+Basics/RemoveTags/Hint: 將標籤設定更新為最新格式
+Basics/ShadowTiddlers/Prompt: 預設條目數量
+Basics/Subtitle/Prompt: 副標題
+Basics/SystemTiddlers/Prompt: 系統條目數量
+Basics/Tags/Prompt: 標籤數量
+Basics/Tiddlers/Prompt: 一般條目數量
+Basics/Title/Prompt: 標題
+Basics/Username/Prompt: 編輯者署名
+Basics/Version/Prompt: ~TiddlyWiki 版本
 EditorTypes/Caption: 編輯器類型
 EditorTypes/Editor/Caption: 編輯器
 EditorTypes/Hint: 這些條目決定使用哪個編輯器來編輯特定條目類型。
@@ -44,6 +46,7 @@ KeyboardShortcuts/Platform/Linux: 僅 Linux 平臺
 KeyboardShortcuts/Platform/NonLinux: 僅非 Linux 平臺
 KeyboardShortcuts/Platform/Windows: 僅 Windows 平臺
 KeyboardShortcuts/Platform/NonWindows: 僅非 Windows 平臺
+LayoutSwitcher/Caption: 版面
 LoadedModules/Caption: 已載入的模組
 LoadedModules/Hint: 這些是當前已載入的模組之源碼條目。斜體的模組則無源碼條目，通常是因為它們是在引導過程中設置。
 Palette/Caption: 調色盤
@@ -65,6 +68,7 @@ Plugins/Caption: 插件
 Plugins/Disable/Caption: 停用
 Plugins/Disable/Hint: 重新載入頁面時停用此插件
 Plugins/Disabled/Status: (已停用)
+Plugins/Downgrade/Caption: 降級
 Plugins/Empty/Hint: 無
 Plugins/Enable/Caption: 啟用
 Plugins/Enable/Hint: 重新載入頁面時啟用此插件
@@ -83,6 +87,11 @@ Plugins/Plugins/Hint: 插件
 Plugins/Reinstall/Caption: 重新安裝
 Plugins/Themes/Caption: 佈景主題
 Plugins/Themes/Hint: 佈景主題插件
+Plugins/Update/Caption: 更新
+Plugins/Updates/Caption: 更新
+Plugins/Updates/Hint: 已安裝插件的可用更新
+Plugins/Updates/UpdateAll/Caption: 更新 <<update-count>> 個插件
+Plugins/SubPluginPrompt: 提供 <<count>> 個可用的附加插件
 Parsing/Caption: 解析
 Parsing/Hint: 在此您可以全域停用或啟用維基解析規則。要使更改生效，請儲存並重新載入您的維基。停用某些解析規則，會妨礙 <$text text="TiddlyWiki"/>  正常運作。可使用[[安全模式|https://tiddlywiki.com/#SafeMode]]恢復正常操作。
 Parsing/Block/Caption: 區塊解析規則
@@ -105,18 +114,22 @@ Saving/GitService/Repo: 目標存儲庫 (例如，`Jermolene/TiddlyWiki5`)
 Saving/GitService/ServerURL: 伺服器 API 網址
 Saving/GitService/UserName: 使用者名稱
 Saving/GitService/GitHub/Caption: ~GitHub 儲存模組
-Saving/GitService/GitHub/Password: 密碼、OAUTH 令牌，或個人存取令牌 (詳見 [[GitHub 說明頁面|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]])
+Saving/GitService/GitHub/Password: 密碼、OAUTH 權杖，或個人存取權杖 (詳見 [[GitHub 說明頁面|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]])
 Saving/GitService/GitLab/Caption: ~GitLab 儲存模組
-Saving/GitService/GitLab/Password: 個人存取令牌的 API (詳見 [[GitLab 說明頁面|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]])
+Saving/GitService/GitLab/Password: 個人存取權杖的 API (詳見 [[GitLab 說明頁面|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]])
+Saving/GitService/Gitea/Caption: Gitea 儲存模組
+Saving/GitService/Gitea/Password: 個人存取權杖的 API (通過 Gitea 的 Web 介面：`設定 | 應用程式 | 產生新的權杖`)
 Saving/TiddlySpot/Advanced/Heading: 進階設定
 Saving/TiddlySpot/BackupDir: 備份資料夾
 Saving/TiddlySpot/Backups: 備份
 Saving/TiddlySpot/Caption: ~TiddlySpot 儲存模組
+Saving/TiddlySpot/ControlPanel: ~TiddlySpot 控制台
 Saving/TiddlySpot/Description: 這些設定只適用於儲存到 http://tiddlyspot.com 或相容的遠端伺服器時。
 Saving/TiddlySpot/Filename: 上傳檔名
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //預設之伺服器網址 `http://<wikiname>.tiddlyspot.com/store.cgi`，可改為自訂之伺服器網址，例如 `http://example.com/store.php`。//
 Saving/TiddlySpot/Password: 密碼
+Saving/TiddlySpot/ReadOnly: ~TiddlySpot 服務目前僅以唯讀形式提供。相關最新詳細資訊，請參閱 http://tiddlyspot.com/ 。~TiddlySpot 儲存模組仍可用於儲存到相容的伺服器。
 Saving/TiddlySpot/ServerURL: 伺服器網址
 Saving/TiddlySpot/UploadDir: 上傳資料夾
 Saving/TiddlySpot/UserName: 帳號

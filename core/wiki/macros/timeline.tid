@@ -4,6 +4,7 @@ tags: $:/tags/Macro
 title: $:/core/macros/timeline
 
 \define timeline-title()
+\whitespace trim
 <!-- Override this macro with a global macro 
      of the same name if you need to change 
      how titles are displayed on the timeline 
@@ -17,9 +18,7 @@ title: $:/core/macros/timeline
 <$view field="$dateField$" format="date" template="$format$"/>
 <$list filter="[sameday:$dateField${!!$dateField$}!is[system]$subfilter$!sort[$dateField$]]">
 <div class="tc-menu-list-subitem">
-<$link to={{!!title}}>
-<<timeline-title>>
-</$link>
+<$link to={{!!title}}><<timeline-title>></$link>
 </div>
 </$list>
 </div>

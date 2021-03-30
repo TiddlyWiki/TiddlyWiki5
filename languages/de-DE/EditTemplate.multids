@@ -5,7 +5,10 @@ Body/Placeholder: Geben Sie den Text für diesen Tiddler ein.
 Body/Preview/Type/Output: Anzeige
 Field/Remove/Caption: Lösche Feld
 Field/Remove/Hint: Lösche Feld
+Field/Dropdown/Caption: Feld Liste
+Field/Dropdown/Hint: Zeige Feld Liste
 Fields/Add/Button: ok
+Fields/Add/Button/Hint: Erzeuge ein neues Feld für diesen Tiddler
 Fields/Add/Name/Placeholder: Feld Name
 Fields/Add/Prompt: Feld einfügen:
 Fields/Add/Value/Placeholder: Feld Text / Wert
@@ -14,7 +17,10 @@ Fields/Add/Dropdown/User: Anwender Felder
 Shadow/Warning: Dies ist ein Schatten-Tiddler. Jede Änderung, die Sie machen, überschreibt die Standardversion des Plugins: <<pluginLink>>
 Shadow/OverriddenWarning: Dies ist ein veränderter Tiddler. Um zur Standardversion zurückzukehren, löschen Sie diesen Tiddler. Plugin: <<pluginLink>>
 Tags/Add/Button: ok
-Tags/Add/Placeholder: neuer Tag
+Tags/Add/Button/Hint: Erzeuge einen neuen Tag
+Tags/Add/Placeholder: Neuer Tag
+Tags/ClearInput/Caption: lösche Eingabefeld
+Tags/ClearInput/Hint: Lösche Tag Eingabefeld
 Tags/Dropdown/Caption: Tag Liste
 Tags/Dropdown/Hint: Tag Liste anzeigen
 Title/BadCharacterWarning: Warnung: Folgende Zeichen im Titel können zu Problemen führen: <<bad-chars>>

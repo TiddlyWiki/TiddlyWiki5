@@ -91,6 +91,20 @@ exports.exponential = makeNumericBinaryOperator(
 	function(a,b) {return Number.prototype.toExponential.call(a,Math.min(Math.max(b,0),100));}
 );
 
+exports.power = makeNumericBinaryOperator(
+	function(a,b) {return Math.pow(a,b);}
+);
+
+exports.log = makeNumericBinaryOperator(
+	function(a,b) {
+		if(b) {
+			return Math.log(a)/Math.log(b);
+		} else {
+			return Math.log(a);
+		}
+	}
+);
+
 exports.sum = makeNumericReducingOperator(
 	function(accumulator,value) {return accumulator + value},
 	0 // Initial value
@@ -114,9 +128,9 @@ exports.minall = makeNumericReducingOperator(
 function makeNumericBinaryOperator(fnCalc) {
 	return function(source,operator,options) {
 		var result = [],
-			numOperand = parseNumber(operator.operand);
+			numOperand = $tw.utils.parseNumber(operator.operand);
 		source(function(tiddler,title) {
-			result.push(stringifyNumber(fnCalc(parseNumber(title),numOperand)));
+			result.push($tw.utils.stringifyNumber(fnCalc($tw.utils.parseNumber(title),numOperand)));
 		});
 		return result;
 	};
@@ -129,18 +143,10 @@ function makeNumericReducingOperator(fnCalc,initialValue) {
 		source(function(tiddler,title) {
 			result.push(title);
 		});
-		return [stringifyNumber(result.reduce(function(accumulator,currentValue) {
-			return fnCalc(accumulator,parseNumber(currentValue));
+		return [$tw.utils.stringifyNumber(result.reduce(function(accumulator,currentValue) {
+			return fnCalc(accumulator,$tw.utils.parseNumber(currentValue));
 		},initialValue))];
 	};
-}
-
-function parseNumber(str) {
-	return parseFloat(str) || 0;
-}
-
-function stringifyNumber(num) {
-	return num + "";
 }
 
 })();

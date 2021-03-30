@@ -8,8 +8,8 @@ type: text/vnd.tiddlywiki
 <span class="doc-from-version">{{$:/core/images/warning}} New in: $version$</span>
 \end
 
-\define .deprecated-since(version, superseeded:"TODO-Link")
-<$button to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">{{$:/core/images/warning}} Deprecated since: $version$ </$button> use [[$superseeded$]] instead!
+\define .deprecated-since(version, superseded:"TODO-Link")
+<$button to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">{{$:/core/images/warning}} Deprecated since: $version$ </$button>. Use [[$superseded$]] instead
 \end
 
 <pre><$view field="text"/></pre>

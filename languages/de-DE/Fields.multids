@@ -13,7 +13,6 @@ description: Die Beschreibung für ein "plugin" oder einen "modalen" Dialog.
 draft.of: Entwurf von - enthält den Titel des Tiddlers, zu dem dieser Entwurf-Tiddler gehört.
 draft.title: Entwurf Titel - enthält den neuen Titel, wenn der Entwurf-Tiddler gespeichert wird. 
 footer: Der Fußnoten Text bei einem "~Wizard-Dialog"
-hack-to-give-us-something-to-compare-against: Ein temporäres Feld, verwendet in [[$:/core/templates/static.content]]
 hide-body: Der Textbereich eines Tiddlers wird verborgen, wenn dieses Feld auf ''"yes"'' gesetzt wird
 icon: Der Titel eines ~Icon-Tiddlers, der mit diesem Tiddler verbunden ist.
 library: Wenn dieses Feld="yes" ist, dann soll der Tiddler als JavaScript Bibliothek gespeichert werden.
@@ -31,7 +30,9 @@ source: Eine Quelltext URL, verbunden mit diesem Tiddler.
 subtitle: Der Untertitel für einen "~Wizard-Dialog".
 tags: Eine Liste von "Tags" für diesen Tiddler.
 text: Der Haupttext eines Tiddlers.
+throttle.refresh: Wenn es existiert, dann wird der "refresh" Zyklus des Tiddlers verzögert.
 title: Ein individueller einmaliger Name eines Tiddlers.
 toc-link: Unterdrückt die Anzeige als Link, wenn der Wert auf ''"no"'' gesetzt wird
 type: Legt den Typ eines Tiddlers fest (aka MIME-type).
 version: Versions-Information eines "plugins".
+_is_skinny: Wenn es existiert, zeigt diese Feld an, dass das "Text-Feld" dynamisch vom Server geladen wird.

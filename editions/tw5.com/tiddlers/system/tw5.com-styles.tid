@@ -1,5 +1,8 @@
-title: $:/_tw5.com-styles
+created: 20200507002727378
+modified: 20200515024640489
 tags: $:/tags/Stylesheet
+title: $:/_tw5.com-styles
+type: text/vnd.tiddlywiki
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
@@ -12,7 +15,7 @@ tags: $:/tags/Stylesheet
     border: 1px solid #ebefcd;
     padding: 5px 10px;
     margin-bottom: 10px;
-    background: #fcfdf3;
+    background: <<colour code-background>>;
     font-size: 0.8em;
     line-height: 1.2;
 }
@@ -73,4 +76,125 @@ tags: $:/tags/Stylesheet
 .tc-improvement-banner svg {
 	width: 1em;
 	height: 1em;
+}
+
+
+
+.tc-wrapper-flex {
+	display: flex;
+}
+
+.tc-saving-sidebar {
+	margin: 0;
+	padding: 0;
+	min-width: 200px;
+	overflow: auto;
+}
+
+.tc-saving-sidebar a {
+	display: block;
+}
+
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+	.tc-wrapper-flex {
+		flex-direction: column;
+	}
+	.tc-saving-sidebar {
+		width: 100%;
+		height: auto;
+	}
+	.tc-saving-sidebar a {
+		float: left;
+	}
+}
+
+.tc-saving-sidebar-category {
+	margin-bottom: 10px;
+}
+
+.tc-saving-sidebar-category-title {
+	font-weight: bold;
+	margin-bottom: 5px;
+	font-size: 16px;
+}
+
+.tc-saving-sidebar-category-item {
+	margin-left: 10px;
+}
+
+.tc-card {
+	margin: 15px;
+	padding: 10px 20px;
+	border-radius: 10px;
+	border-top: 5px solid #45D3D3;
+	box-shadow: 0 8px 17px -8px #A3A5AE;
+	background-color: #FFF;
+	width: 200px;
+	transition: box-shadow 0.3s ease-in-out;
+	font-size: 13px;
+	line-height: 18px;
+}
+
+.tc-card:hover {
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.tc-card:hover .tc-card-title {
+	color: #1462ff;
+}
+
+.tc-card-title {
+	text-align: center;
+	font-size: 1.2em;
+	font-weight: 600;
+	transition: color 0.2s ease-in-out;
+	padding: 10px 0;
+}
+
+.tc-card-author {
+	text-align: right;
+}
+
+.tc-card p {
+	height: 67px;
+	overflow: hidden;
+	margin: 0;
+	padding: 13px 0;
+}
+
+.tc-card a {
+	color: #222;
+}
+
+.tc-card a:hover {
+	text-decoration:none;
+}
+
+.tc-card a:active, .tc-card a:focus, .tc-btn-download:active, .tc-btn-download:focus{
+        outline: none; 
+}
+
+div.content {
+	padding: 1px 16px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.tc-btn-download {
+	width: 250px;
+	padding: 10px;
+	border-radius: 5px;
+	background: #1462ff;
+	border-radius: 5px;
+        border: none;
+	box-shadow: 0 2px 2px 0 #4a74c9;
+	overflow: hidden;
+	cursor: pointer;
+        font-size: 1.2em;
+        line-height: 1.4em;
+        color: #fff;
+        fill: #fff;
+}
+
+.tc-btn-download:active {
+	background: #1475ff;
 }

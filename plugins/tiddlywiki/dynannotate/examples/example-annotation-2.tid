@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/dynannotate/example-annotation-2
+annotate-tiddler: $:/plugins/tiddlywiki/dynannotate/example-text-3
+annotate-text: It needs a name, and to coin one at random, "memex" will do
+annotate-colour: rgba(255,0,255,0.45)
+annotate-blend-mode: multiply

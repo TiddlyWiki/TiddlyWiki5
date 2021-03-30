@@ -1,10 +1,11 @@
 caption: Download Saver
+color: #7986CB
 created: 20131129092604900
 delivery: Saver
 description: Slightly awkward but universal technique that works on almost every browser
 method: save
-modified: 20171113110022987
-tags: Saving Chrome Safari Firefox Opera InternetExplorer
+modified: 20200507202835577
+tags: Chrome Firefox [[Internet Explorer]] Opera Safari Saving Edge
 title: Saving with the HTML5 fallback saver
 type: text/vnd.tiddlywiki
 

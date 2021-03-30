@@ -29,11 +29,11 @@ suffix={{{ [[$(snippetTitle)$]addsuffix[/suffix]get[text]] }}}
 	$tiddler=<<dropdown-state>>
 />
 
-<$view tiddler=<<snippetTitle>> field="caption" mode="inline">
+<$transclude tiddler=<<snippetTitle>> field="caption" mode="inline">
 
-<$view tiddler=<<snippetTitle>> field="title" mode="inline"/>
+<$view tiddler=<<snippetTitle>> field="title" />
 
-</$view>
+</$transclude>
 
 </$button>
 \end

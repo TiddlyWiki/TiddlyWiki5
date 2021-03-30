@@ -203,3 +203,23 @@ tr.doc-table-subheading {
 	height: 1em;
     vertical-align: text-bottom;
 }
+
+.doc-link-badge {
+    text-decoration: none;
+    background-color: #7eba4c;
+    color: <<colour foreground>>;
+    padding: 3px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.75em;
+}
+
+.doc-link-badge:hover {
+    text-decoration: underline;
+}
+
+.doc-plain-list ul,
+.doc-plain-list ol {
+	list-style: none;
+	padding-left: 0;
+}

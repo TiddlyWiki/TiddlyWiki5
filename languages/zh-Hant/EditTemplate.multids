@@ -8,7 +8,7 @@ Field/Remove/Hint: 刪除欄位
 Field/Dropdown/Caption: 欄位列表
 Field/Dropdown/Hint: 顯示欄位列表
 Fields/Add/Button: 新增
-Fields/Add/Button/Hint: 新增欄位
+Fields/Add/Button/Hint: 新增欄位至條目
 Fields/Add/Dropdown/System: 系統欄位
 Fields/Add/Dropdown/User: 使用者欄位
 Fields/Add/Name/Placeholder: 欄位名稱
@@ -19,6 +19,8 @@ Shadow/OverriddenWarning: 這是一個修改過的預設條目。刪除此條目
 Tags/Add/Button: 新增
 Tags/Add/Button/Hint: 新增標籤
 Tags/Add/Placeholder: 標籤名稱
+Tags/ClearInput/Caption: 清除輸入
+Tags/ClearInput/Hint: 清除標籤輸入
 Tags/Dropdown/Caption: 標籤清單
 Tags/Dropdown/Hint: 顯示標籤清單
 Title/BadCharacterWarning: 請注意，避免在條目名稱中使用這些字元：<<bad-chars>>

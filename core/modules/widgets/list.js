@@ -19,11 +19,6 @@ The list widget creates list element sub-widgets that reach back into the list w
 */
 
 var ListWidget = function(parseTreeNode,options) {
-	// Initialise the storyviews if they've not been done already
-	if(!this.storyViews) {
-		ListWidget.prototype.storyViews = {};
-		$tw.modules.applyMethods("storyview",this.storyViews);
-	}
 	// Main initialisation inherited from widget.js
 	this.initialise(parseTreeNode,options);
 };
@@ -37,6 +32,11 @@ ListWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 ListWidget.prototype.render = function(parent,nextSibling) {
+	// Initialise the storyviews if they've not been done already
+	if(!this.storyViews) {
+		ListWidget.prototype.storyViews = {};
+		$tw.modules.applyMethods("storyview",this.storyViews);
+	}
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
@@ -87,8 +87,14 @@ ListWidget.prototype.getTiddlerList = function() {
 };
 
 ListWidget.prototype.getEmptyMessage = function() {
-	var emptyMessage = this.getAttribute("emptyMessage",""),
-		parser = this.wiki.parseText("text/vnd.tiddlywiki",emptyMessage,{parseAsInline: true});
+	var parser,
+		emptyMessage = this.getAttribute("emptyMessage","");
+	// this.wiki.parseText() calls 
+	// new Parser(..), which should only be done, if needed, because it's heavy!
+	if (emptyMessage === "") {
+		return [];
+	}
+	parser = this.wiki.parseText("text/vnd.tiddlywiki",emptyMessage,{parseAsInline: true});
 	if(parser) {
 		return parser.tree;
 	} else {

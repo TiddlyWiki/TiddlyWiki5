@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/dynannotate/example-annotation-3
+annotate-tiddler: $:/plugins/tiddlywiki/dynannotate/example-text-5
+annotate-text: it would take him hundreds of years to fill the repository
+annotate-colour: #fff
+annotate-blend-mode: difference

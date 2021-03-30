@@ -1,0 +1,222 @@
+title: $:/plugins/tiddlywiki/menubar/styles
+tags: [[$:/tags/Stylesheet]]
+
+\define breakpoint-plus-one()
+<$text text={{{ [{$:/config/plugins/menubar/breakpoint}removesuffix[px]add[1]addsuffix[px]] ~[{$:/config/plugins/menubar/breakpoint}] }}} />
+\end
+
+\define sidebarbreakpoint-minus-one()
+<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}} />
+\end
+
+\define set-sidebar-scrollable-top-if-hamburger()
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/MenuBar]] -[all[tiddlers+shadows]prefix[$:/config/plugins/menubar/MenuItems/Visibility/]regexp:text[hide]removeprefix[$:/config/plugins/menubar/MenuItems/Visibility/]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]] -[all[tiddlers+shadows]tag[$:/tags/TopRightBar]limit[1]then[$:/plugins/tiddlywiki/menubar/items/toprightbar]] -$:/plugins/tiddlywiki/menubar/items/hamburger +[limit[1]]">
+
+	.tc-sidebar-scrollable {
+		margin-top: 2em;
+	}
+
+</$list>
+\end
+
+\define set-sidebar-scrollable-top()
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/MenuBar]] -[all[tiddlers+shadows]prefix[$:/config/plugins/menubar/MenuItems/Visibility/]regexp:text[hide]removeprefix[$:/config/plugins/menubar/MenuItems/Visibility/]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]] -[all[tiddlers+shadows]tag[$:/tags/TopRightBar]limit[1]then[$:/plugins/tiddlywiki/menubar/items/toprightbar]] +[limit[1]]">
+
+	.tc-sidebar-scrollable {
+		margin-top: 2em;
+	}
+
+</$list>
+<$reveal state="$:/state/popup/menubar/hamburger" type="match" text="yes">
+
+	<$set name="itemCount" value={{{ [all[tiddlers+shadows]tag[$:/tags/MenuBar]] -[all[tiddlers+shadows]prefix[$:/config/plugins/menubar/MenuItems/Visibility/]regexp:text[hide]removeprefix[$:/config/plugins/menubar/MenuItems/Visibility/]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]] -[all[tiddlers+shadows]tag[$:/tags/TopRightBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/toprightbar]] +[count[]] }}}>
+
+		.tc-sidebar-scrollable {
+			margin-top: calc(<<itemCount>> * 2em);
+		}
+
+	</$set>
+
+</$reveal>
+\end
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+nav.tc-menubar {
+	position: fixed;
+	z-index: 850;
+	display: inline-block;
+	top: 0;
+	right: 0;
+	left: 0;
+}
+
+nav.tc-menubar ul.tc-menubar-list {
+	position: relative;
+	list-style-type: none;
+	margin: 0;
+	padding: 0 0 0 42px;
+	background: <<colour background>>;
+	background: <<colour menubar-background>>;
+	<<box-shadow "1px 1px 5px rgba(0, 0, 0, 0.3)">>
+}
+
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+
+	html nav.tc-menubar ul.tc-menubar-list {
+		padding: 0 0 0 8px;
+	}
+
+}
+
+nav.tc-menubar li.tc-menubar-item {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+
+nav.tc-menubar .tc-menubar-narrow li.tc-menubar-item {
+	display: block;
+}
+
+nav.tc-menubar li.tc-menubar-item > a,
+nav.tc-menubar li.tc-menubar-item > button {
+	display: inline-block;
+/*	text-transform: uppercase; */
+	line-height: 1;
+	font-weight: 700;
+	color: <<colour foreground>>;
+	color: <<colour menubar-foreground>>;
+	fill: <<colour foreground>>;
+	fill: <<colour menubar-foreground>>;
+	text-decoration: none;
+	padding: 0.5em;
+	margin: 0;
+	background: none;
+	border: none;
+	cursor: pointer;
+	border-radius: 0;
+	text-decoration: none;
+}
+
+nav.tc-menubar li.tc-menubar-item > a.tc-selected,
+nav.tc-menubar li.tc-menubar-item > button.tc-selected {
+	background: <<colour foreground>>;
+	background: <<colour menubar-foreground>>;
+	color: <<colour background>>;
+	color: <<colour menubar-background>>;
+	fill: <<colour background>>;
+	fill: <<colour menubar-background>>;
+}
+
+nav.tc-menubar li.tc-menubar-item svg {
+	transition: none;
+	width: 1em;
+	height: 1em;
+	fill: <<colour foreground>>;
+	fill: <<colour menubar-foreground>>;
+}
+
+nav.tc-menubar li.tc-menubar-item .tc-menubar-dropdown-arrow svg {
+	width: 0.5em;
+	height: 0.5em;
+}
+
+nav.tc-menubar li.tc-menubar-item > a.tc-selected svg,
+nav.tc-menubar li.tc-menubar-item > button.tc-selected svg {
+	fill: <<colour background>>;
+	fill: <<colour menubar-background>>;
+}
+
+nav.tc-menubar li.tc-menubar-item > a:hover,
+nav.tc-menubar li.tc-menubar-item > button:hover svg,
+nav.tc-menubar li.tc-menubar-item > button:hover {
+	background: <<colour foreground>>;
+	background: <<colour menubar-foreground>>;
+	color: <<colour background>>;
+	color: <<colour menubar-background>>;
+	fill: <<colour background>>;
+	fill: <<colour menubar-background>>;
+	border-radius: 0;
+	text-decoration: none;
+}
+
+nav.tc-menubar li.tc-menubar-item > a:active,
+nav.tc-menubar li.tc-menubar-item > button:active svg,
+nav.tc-menubar li.tc-menubar-item > button:active {
+	background: <<colour foreground>>;
+	background: <<colour menubar-foreground>>;
+	color: <<colour background>>;
+	color: <<colour menubar-background>>;
+	fill: <<colour background>>;
+	fill: <<colour menubar-background>>;
+	border-radius: 0;
+	text-decoration: none;
+}
+
+nav.tc-menubar .tc-drop-down,
+nav.tc-menubar .tc-block-dropdown {
+	max-width: 70vw;
+	max-height: 70vh;
+	overflow: auto;
+}
+
+nav.tc-menubar .tc-drop-down a {
+	text-decoration: none;
+}
+
+nav.tc-menubar .tc-drop-down .tc-table-of-contents button {
+	display: inline-block;
+	width: auto;
+}
+
+nav.tc-menubar .tc-drop-down ol {
+	margin: 0;
+}
+
+nav.tc-menubar .tc-drop-down .tc-menubar-dropdown-sidebar a,
+nav.tc-menubar .tc-drop-down .tc-menubar-dropdown-sidebar button {
+	display: inline;
+	width: auto;
+}
+
+nav.tc-menubar .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
+	display: block;
+	width: 100%;
+}
+
+@media (max-width: {{$:/config/plugins/menubar/breakpoint}}) {
+
+	.tc-menubar-wide {
+		display: none;
+	}
+
+}
+
+@media (min-width: <<breakpoint-plus-one>>) {
+
+	nav.tc-menubar li.tc-menubar-item.tc-menubar-narrow,
+	.tc-menubar-narrow {
+		display: none;
+	}
+
+}
+
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+
+	<<set-sidebar-scrollable-top-if-hamburger>>
+
+}
+
+@media (max-width: {{$:/config/plugins/menubar/breakpoint}}) {
+
+	<<set-sidebar-scrollable-top>>
+
+}
+@media print {
+
+	nav.tc-menubar {
+		display: none;
+	}
+
+}

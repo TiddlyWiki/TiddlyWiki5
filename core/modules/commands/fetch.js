@@ -71,7 +71,7 @@ Command.prototype.fetchFiles = function(options) {
 	if(options.url) {
 		urls = [options.url]
 	} else if(options.urlFilter) {
-		urls = $tw.wiki.filterTiddlers(options.urlFilter);
+		urls = this.commander.wiki.filterTiddlers(options.urlFilter);
 	} else {
 		return "Missing URL";
 	}

@@ -90,7 +90,7 @@ describe("HTML tag new parser tests", function() {
 			{ type : 'macro-parameter', start : 0, value : 'one two three', end : 17 }
 		);
 		expect($tw.utils.parseMacroParameter("myparam>",0)).toEqual(
-			{ type : 'macro-parameter', start : 0, value : 'myparam', end : 7 }
+			{ type : 'macro-parameter', start : 0, value : 'myparam>', end : 8 }
 		);
 	});
 
@@ -156,7 +156,7 @@ describe("HTML tag new parser tests", function() {
 			null
 		);
 		expect(parser.parseTag("<mytag>",0)).toEqual(
-			{ type : 'element', start : 0, attributes : [  ], tag : 'mytag', end : 7 }
+			{ type : 'element', start : 0, attributes : { }, tag : 'mytag', end : 7 }
 		);
 		expect(parser.parseTag("<mytag attrib1>",0)).toEqual(
 			{ type : 'element', start : 0, attributes : { attrib1 : { type : 'string', value : 'true', start : 6, name : 'attrib1', end : 14 } }, tag : 'mytag', end : 15 }

@@ -1,0 +1,47 @@
+<div class="startup-warning-wrapper">
+<h1>
+Warning: This site is designed to share untrusted content
+</h1>
+<h2>
+Please do not proceed unless you are certain you understand the warnings below
+</h2>
+<p>
+This is a special site that allows users to share content for <a href="https://tiddlywiki.com/" target="_blank" rel="noopener noreferrer">TiddlyWiki</a> without needing conventional hosting. Instead, the content is encoded in the URL used to access the site. This means that there are no controls or protections on the content that is shared, and as such it may contain malicious links or any kind of content.
+</p>
+<p>
+Viewing links to this site in the browser is generally safe because web pages are designed to run in a sandbox that prevents them from accessing or harming your data. However, please exercise caution before downloading content to your own computer, or importing content into your own TiddlyWiki.
+</p>
+
+<details>
+<summary>
+Click here to see the tiddlers that are being shared
+</summary>
+<ul id="startup-warning-preview">
+</ul>
+</details>
+
+<p>
+<strong><em>Only continue if you understand the risks</em></strong>
+</p>
+
+<p>
+<button id="startup-warning-proceed">
+Proceed
+</button>
+<button id="startup-warning-cancel">
+Cancel
+</button>
+</p>
+
+<h2>
+Technical details
+</h2>
+
+<p>
+This web page is a <a href="https://tiddlywiki.com/" target="_blank" rel="noopener noreferrer">TiddlyWiki</a> loaded with the <a href="https://github.com/Jermolene/TiddlyWiki5/tree/master/plugins/tiddlywiki/share" target="_blank" rel="noopener noreferrer">Share plugin</a>. It has the special capability that at startup it can load raw tiddlers from a block of JSON encoded into the location hash part of the URL (ie the part after the # character).
+</p>
+<p>
+This is useful because it enables people to share working examples of TiddlyWikis without needing to arrange special hosting. The only restriction is that browsers and other Internet infrastructure frequently limit the length of URLs to a few tens of kilobytes.
+</p>
+
+</div>

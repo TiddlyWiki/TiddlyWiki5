@@ -43,6 +43,7 @@ TranscludeWidget.prototype.execute = function() {
 	this.transcludeField = this.getAttribute("field");
 	this.transcludeIndex = this.getAttribute("index");
 	this.transcludeMode = this.getAttribute("mode");
+	this.recursionMarker = this.getAttribute("recursionMarker","yes");
 	// Parse the text reference
 	var parseAsInline = !this.parseTreeNode.isBlock;
 	if(this.transcludeMode === "inline") {
@@ -61,7 +62,9 @@ TranscludeWidget.prototype.execute = function() {
 		parseTreeNodes = parser ? parser.tree : this.parseTreeNode.children;
 	// Set context variables for recursion detection
 	var recursionMarker = this.makeRecursionMarker();
-	this.setVariable("transclusion",recursionMarker);
+	if(this.recursionMarker === "yes") {
+		this.setVariable("transclusion",recursionMarker);
+	}
 	// Check for recursion
 	if(parser) {
 		if(this.parentWidget && this.parentWidget.hasVariable("transclusion",recursionMarker)) {
@@ -72,8 +75,17 @@ TranscludeWidget.prototype.execute = function() {
 			]}];
 		}
 	}
+	// Assign any variables set via attributes starting with $
+	var variables = Object.create(null);
+	$tw.utils.each(this.attributes,function(attribute,name) {
+		if(name.charAt(0) === "$") {
+			variables[name.substr(1)] = attribute;
+		}
+	});
 	// Construct the child widgets
-	this.makeChildWidgets(parseTreeNodes);
+	this.makeChildWidgets(parseTreeNodes,{
+		variables: variables
+	});
 };
 
 /*
@@ -100,7 +112,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 TranscludeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedTiddlers[this.transcludeTitle]) {
+	if($tw.utils.count(changedAttributes) || changedTiddlers[this.transcludeTitle]) {
 		this.refreshSelf();
 		return true;
 	} else {

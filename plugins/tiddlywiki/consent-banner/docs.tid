@@ -1,0 +1,64 @@
+title: $:/plugins/tiddlywiki/consent-banner/docs
+
+! Features
+
+If the same wiki is opened in multiple tabs then once the warning has been accepted or declined in one tab then the other tabs will autonatically follow suit.
+
+Consent is automatically granted if the user logged in (ie the tiddler [[$:/status/IsLoggedIn]] is set to `yes`).
+
+! Consent Banner Palette Entries
+
+Add these entries to your current colour palette to change the colours used by the consent banner:
+
+* ''consent-banner-backdrop-background'' - the colour of the backdrop behind the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-backdrop-background}})
+* ''consent-banner-background'' - the background colour of the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-background}})
+* ''consent-banner-button-background'' - the background colour of buttons within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-button-background}})
+* ''consent-banner-button-border'' - the border colour of buttons within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-button-border}})
+* ''consent-banner-button-default-background'' - the background colour for the default button within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-button-default-background}})
+* ''consent-banner-button-default-foreground'' - the foreground colour for the default button within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-button-default-foreground}})
+* ''consent-banner-button-foreground'' - the foreground colour of buttons within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-button-foreground}})
+* ''consent-banner-button-hover-background'' - the background colour of hovered buttons within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-button-hover-background}})
+* ''consent-banner-button-hover-border'' - the border colour of hovered buttons within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-button-hover-border}})
+* ''consent-banner-button-hover-foreground'' - the foreground colour of hovered buttons within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-button-hover-foreground}})
+* ''consent-banner-foreground'' - the foreground colour of the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-foreground}})
+* ''consent-banner-hr-background'' - the background colour of horizontal rules within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-hr-background}})
+* ''consent-banner-link-foreground'' - the foreground colour of tiddler links within the consent banner (defaults to {{$:/config/DefaultColourMappings/consent-banner-link-foreground}})
+
+! Embedded Content Blocking
+
+Unless disabled via the config tab, content embedded via &lt;iframe>, &lt;embed> or &lt;object> is blocked until the user consents to accept cookies.
+
+!! Implementation Details
+
+Embedded content is blocked if the variable `tv-block-embedded-content` is set to `yes`. It is set to the current consent status by a [[global macro|$:/plugins/tiddlywiki/consent-banner/tv-block-embedded-content]]:
+
+<$codeblock code={{$:/plugins/tiddlywiki/consent-banner/tv-block-embedded-content}}/>
+
+! ~YouTube macro
+
+A simple macro for embedding ~YouTube videos is provided to show how to adapt content according to whether consent has been granted. It works by checking the tiddler [[$:/state/consent-banner/accepted]] for the following values:
+
+* ''empty or missing'' - the user has yet to accept or decline to give their consent
+* `yes` - the user has granted consent
+* `no` - the user has declined consent
+
+! Customising banner buttons
+
+The [["accept"|$:/plugins/tiddlywiki/consent-banner/buttons/accept]] and [["decline"|$:/plugins/tiddlywiki/consent-banner/buttons/decline]] buttons in the banner are individual tiddlers with the tag [[$:/tags/ConsentBanner/Button]], allowing them to be customised and extended.
+
+A common use case is to add a "login" button allowing users to login directly to bypass the banner. This could be implemented as a tiddler tagged [[$:/tags/ConsentBanner/Button]] with the following text:
+
+```
+<$button message="tm-login" class="tc-consent-button tc-btn-invisible">
+Login
+</$button>
+```
+
+! Integration with other plugins
+
+Third party plugins that set cookies can configure themselves to defer setting cookies until the user grants consent. There are several parts to this mechanism:
+
+* The consent-banner plugin includes a shadow tiddler [[$:/config/cookie-consent-required]] with the text `yes`. The third-party plugin should inspect this tiddler at startup; if it is not set to "yes" then it can proceed to set tiddlers immediately
+* Otherwise, the third-party plugin should listen for changes to the tiddler [[$:/state/consent-banner/accepted]] and only start setting cookies when and if the value changes to "yes"
+
+The [[Google Analytics plugin|https://github.com/Jermolene/TiddlyWiki5/tree/master/plugins/tiddlywiki/googleanalytics]] shows an example of how this mechanism can be implemented.

@@ -18,6 +18,17 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var NavigatorWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
+};
+
+/*
+Inherit from the base widget class
+*/
+NavigatorWidget.prototype = new Widget();
+
+/*
+Render this widget into the DOM
+*/
+NavigatorWidget.prototype.render = function(parent,nextSibling) {
 	this.addEventListeners([
 		{type: "tm-navigate", handler: "handleNavigateEvent"},
 		{type: "tm-edit-tiddler", handler: "handleEditTiddlerEvent"},
@@ -36,17 +47,6 @@ var NavigatorWidget = function(parseTreeNode,options) {
 		{type: "tm-unfold-all-tiddlers", handler: "handleUnfoldAllTiddlersEvent"},
 		{type: "tm-rename-tiddler", handler: "handleRenameTiddlerEvent"}
 	]);
-};
-
-/*
-Inherit from the base widget class
-*/
-NavigatorWidget.prototype = new Widget();
-
-/*
-Render this widget into the DOM
-*/
-NavigatorWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
@@ -62,6 +62,11 @@ NavigatorWidget.prototype.execute = function() {
 	this.historyTitle = this.getAttribute("history");
 	this.setVariable("tv-story-list",this.storyTitle);
 	this.setVariable("tv-history-list",this.historyTitle);
+	this.story = new $tw.Story({
+		wiki: this.wiki,
+		storyTitle: this.storyTitle,
+		historyTitle: this.historyTitle
+	});
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
@@ -123,7 +128,7 @@ NavigatorWidget.prototype.replaceFirstTitleInStory = function(storyList,oldTitle
 
 NavigatorWidget.prototype.addToStory = function(title,fromTitle) {
 	if(this.storyTitle) {
-		this.wiki.addToStory(title,fromTitle,this.storyTitle,{
+		this.story.addToStory(title,fromTitle,{
 			openLinkFromInsideRiver: this.getAttribute("openLinkFromInsideRiver","top"),
 			openLinkFromOutsideRiver: this.getAttribute("openLinkFromOutsideRiver","top")
 		});
@@ -136,7 +141,7 @@ title: a title string or an array of title strings
 fromPageRect: page coordinates of the origin of the navigation
 */
 NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
-	this.wiki.addToHistory(title,fromPageRect,this.historyTitle);
+	this.story.addToHistory(title,fromPageRect,this.historyTitle);
 };
 
 /*
@@ -273,7 +278,9 @@ NavigatorWidget.prototype.makeDraftTiddler = function(targetTitle) {
 	var tiddler = this.wiki.getTiddler(targetTitle);
 	// Save the initial value of the draft tiddler
 	draftTitle = this.generateDraftTitle(targetTitle);
-	var draftTiddler = new $tw.Tiddler(
+	var draftTiddler = new $tw.Tiddler({
+				text: "",
+			},
 			tiddler,
 			{
 				title: draftTitle,
@@ -320,12 +327,11 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 					"draft.title": undefined,
 					"draft.of": undefined
 				},this.wiki.getModificationFields());
-				newTiddler = $tw.hooks.invokeHook("th-saving-tiddler",newTiddler);
+				newTiddler = $tw.hooks.invokeHook("th-saving-tiddler",newTiddler,tiddler);
 				this.wiki.addTiddler(newTiddler);
 				// If enabled, relink references to renamed tiddler
 				var shouldRelink = this.getAttribute("relinkOnRename","no").toLowerCase().trim() === "yes";
 				if(isRename && shouldRelink && this.wiki.tiddlerExists(draftOf)) {
-console.log("Relinking '" + draftOf + "' to '" + draftTitle + "'");
 					this.wiki.relinkTiddler(draftOf,draftTitle);
 				}
 				// Remove the draft tiddler
@@ -494,10 +500,11 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	} catch(e) {
 	}
 	// Get the current $:/Import tiddler
-	var importTiddler = this.wiki.getTiddler(IMPORT_TITLE),
-		importData = this.wiki.getTiddlerData(IMPORT_TITLE,{}),
+	var importTitle = event.importTitle ? event.importTitle : IMPORT_TITLE,
+		importTiddler = this.wiki.getTiddler(importTitle),
+		importData = this.wiki.getTiddlerData(importTitle,{}),
 		newFields = new Object({
-			title: IMPORT_TITLE,
+			title: importTitle,
 			type: "application/json",
 			"plugin-type": "import",
 			"status": "pending"
@@ -522,21 +529,23 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	$tw.utils.each(importData.tiddlers,function(tiddler,title) {
 		if($tw.utils.count(tiddler) === 0) {
 			newFields["selection-" + title] = "unchecked";
+			newFields["suppressed-" + title] = "yes";
 		}
 	});
 	// Save the $:/Import tiddler
 	newFields.text = JSON.stringify(importData,null,$tw.config.preferences.jsonSpaces);
 	this.wiki.addTiddler(new $tw.Tiddler(importTiddler,newFields));
 	// Update the story and history details
-	if(this.getVariable("tv-auto-open-on-import") !== "no") {
+	var autoOpenOnImport = event.autoOpenOnImport ? event.autoOpenOnImport : this.getVariable("tv-auto-open-on-import");  
+	if(autoOpenOnImport !== "no") {
 		var storyList = this.getStoryList(),
 			history = [];
 		// Add it to the story
-		if(storyList && storyList.indexOf(IMPORT_TITLE) === -1) {
-			storyList.unshift(IMPORT_TITLE);
+		if(storyList && storyList.indexOf(importTitle) === -1) {
+			storyList.unshift(importTitle);
 		}
 		// And to history
-		history.push(IMPORT_TITLE);
+		history.push(importTitle);
 		// Save the updated story and history
 		this.saveStoryList(storyList);
 		this.addToHistory(history);
@@ -555,10 +564,14 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	$tw.utils.each(importData.tiddlers,function(tiddlerFields) {
 		var title = tiddlerFields.title;
 		if(title && importTiddler && importTiddler.fields["selection-" + title] !== "unchecked") {
-			var tiddler = new $tw.Tiddler(tiddlerFields);
+			if($tw.utils.hop(importTiddler.fields,["rename-" + title])) {
+				var tiddler = new $tw.Tiddler(tiddlerFields,{title : importTiddler.fields["rename-" + title]});
+			} else {
+				var tiddler = new $tw.Tiddler(tiddlerFields);
+			}
 			tiddler = $tw.hooks.invokeHook("th-importing-tiddler",tiddler);
 			self.wiki.addTiddler(tiddler);
-			importReport.push("# [[" + tiddlerFields.title + "]]");
+			importReport.push("# [[" + tiddler.fields.title + "]]");
 		}
 	});
 	// Replace the $:/Import tiddler with an import report
@@ -609,10 +622,13 @@ NavigatorWidget.prototype.handleUnfoldAllTiddlersEvent = function(event) {
 };
 
 NavigatorWidget.prototype.handleRenameTiddlerEvent = function(event) {
-	var paramObject = event.paramObject || {},
+	var options = {},
+		paramObject = event.paramObject || {},
 		from = paramObject.from || event.tiddlerTitle,
 		to = paramObject.to;
-	$tw.wiki.renameTiddler(from,to);
+	options.dontRenameInTags = (paramObject.renameInTags === "false" || paramObject.renameInTags === "no") ? true : false;
+	options.dontRenameInLists = (paramObject.renameInLists === "false" || paramObject.renameInLists === "no") ? true : false;
+	this.wiki.renameTiddler(from,to,options);
 };
 
 exports.navigator = NavigatorWidget;

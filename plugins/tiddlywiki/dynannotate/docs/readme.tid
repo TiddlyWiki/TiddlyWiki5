@@ -1,0 +1,108 @@
+title: $:/plugins/tiddlywiki/dynannotate/readme
+
+The ''Dynannotate'' plugin allows annotations on textual content to be created and displayed. It has three components:
+
+* The dynannotate widget overlays clickable textual annotations, search highlights and search snippets on the content that it contains
+* The selection tracker displays a popup that tracks the selection, and keeps track of the selected text. It also tracks a prefix and suffix that can be used to disambiguate the selected text within the container
+* The `<$action-popup>` widget is used for some specialised popup switching in the demo
+
+''Note that the TiddlyWiki core plugin __Dynaview__ is required for correct operation of __Dynannotate__''
+
+!! Dynannotate Widget
+
+The attributes of the `<$dynannotate>` widget describe annotations to be overlaid over the text contained within its child widgets. A single annotation can be directly applied using the attributes or multiple annotations can be applied by providing a filter identifying the "annotation tiddlers" that specify each annotation.
+
+The content of the  `<$dynannotate>` widget should not contain HTML `<input>` or `<textarea>` text editing elements (and therefore should not contain TiddlyWiki's `<$edit-text>` widget)
+
+The `<$dynannotate>` widget uses the selection tracker to support a popup that dynamically tracks selected text within it.
+
+!!! Attributes
+
+|!Attribute |!Description |
+|target |Optional text to be annotated |
+|targetPrefix |Optional prefix text to disambiguate the target |
+|targetSuffix |Optional suffix text to disambiguate the target |
+|filter |Filter identifying the annotation tiddlers applying to this content (see below) |
+|actions |Action string to be executed when an annotation is clicked. The variable `annotationTiddler` contains the title of the tiddler corresponding to the annotation that was clicked, and the variable `modifierKey` contains "ctrl", "shift", "ctrl-shift", "normal" according to which modifier keys were pressed |
+|popup |Popup state tiddler to be used to trigger a popup when an annotation is clicked |
+|search |Search text to be highlighted within the widget |
+|searchDisplay |"overlay" or "snippet" (see below) |
+|searchMode |"normal" (default), "regexp" or "whitespace" (see below) |
+|searchMinLength |Optional minimum length of search string |
+|searchCaseSensitive |"no" (default) for a case insensitive search, or "yes" for a case sensitive search |
+|searchClass |Optional CSS class to be added to search overlays |
+|snippetContextLength |Optional length of search result contextual prefix/suffix |
+|selection |Tiddler to which the currently selected text should be dynamically saved |
+|selectionPrefix |Tiddler to which up to 50 characters preceding the currently selected text should be dynamically saved |
+|selectionSuffix |Tiddler to which up to 50 characters succeeding the currently selected text should be dynamically saved |
+|selectionPopup |Popup state tiddler to be used to trigger a popup when text is selected |
+
+The values supported by the `searchDisplay` attribute are:
+
+* `overlay` - display search results as overlays over the contained text
+* `snippet` - display search results as a sequence of highlighted snippets, and the original text is hidden. Selecting this option therefore disables the annotation functionality
+
+The search modes supported by the `searchMode` attribute are:
+
+* `normal` - a literal string of plain text to match
+* `regexp` - a JavaScript-style regular expression (without the quoting backslashes and flags)
+* `whitespace` - a literal string to match while normalising runs of whitespace. This allows `a. b` to match `a.  b`
+
+When the selection popup is triggered, the currently selected text can be found in the tiddler named in the `selection` attribute, with the disambiguating prefix and suffix in the tiddlers named in the `selectionPrefix` and `selectionPopup` tiddlers. Note that the selection text will be an empty string if the selection popup was triggered in response to a click (ie zero width selection).
+
+Here's a simple example that highlights the first occurrence of the word "ut" within the text contained within it:
+
+```
+<$dynannotate target="ut">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+</$dynannotate>
+```
+
+A prefix and/or suffix can be specified to disambiguate the annotation. For example, here we target the second occurrence of the word "ut":
+
+```
+<$dynannotate target="ut" targetPrefix="ullamco laboris nisi " targetSuffix=" aliquip ex ea commodo consequat">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+</$dynannotate>
+```
+
+The widget works by scanning the rendered text of its content, so it works even if the text is built dynamically:
+
+```
+<$dynannotate target="HelloThere">
+<<list-links "[tag[Work]]">>
+</$dynannotate>
+```
+
+!!! Annotation Tiddlers
+
+An annotation tiddler is a tiddler describing an annotation to be overlaid over another tiddler. Their fields are used as follows:
+
+|!Field |!Description |
+|title |By convention the prefix `$:/annotations/<username>/` is used, but any title can be used |
+|text |The text of the annotation |
+|created, creator, modified, modifier |As per TiddlyWiki normal behaviour |
+|annotate-tiddler |The title of the target tiddler being annotated (optional, see below) |
+|annotate-text |The text being annotated in the target tiddler |
+|annotate-prefix |Optional prefix to disambiguate the target annotation |
+|annotate-suffix |Optional suffix to disambiguate the target annotation |
+|annotate-colour |CSS colour for the annotation (defaults to `rgba(255,255,0,0.3)`) |
+|annotate-blend-mode |CSS [[mix blend mode|https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode]] for the annotation (defaults to `multiply`) |
+
+Note that using the `annotate-tiddler` field to associate an annotation with the annotated tiddler is a lightweight convention employed by the examples; it isn't actually required by any of the JavaScript code. Thus authors can experiment with other techniques for recording the association.
+
+!! Selection Tracker
+
+The selection tracker is incorporated within the `<$dynannotate>` widget, but it can be used independently for specialised applications.
+
+Each selection container is marked with the class `tc-dynannotate-selection-container`, and should contain the following attributes:
+
+* `data-annotation-selection-save`: title of tiddler to which the selected text should be saved
+* `data-annotation-selection-prefix-save`: title of tiddler to which up to 50 characters preceding the currently selected text should be dynamically saved
+* `data-annotation-selection-suffix-save`: title of tiddler to which up to 50 characters succeeding the currently selected text should be dynamically saved
+* `data-annotation-selection-popup`: title of state tiddler used to trigger the selection popup
+
+Notes:
+
+* The selection popup will disappear if the selection is cancelled; this will happen if the user clicks on any other element apart than a button. Thus it is not possible to have any interactive controls within the popup apart from buttons
+
