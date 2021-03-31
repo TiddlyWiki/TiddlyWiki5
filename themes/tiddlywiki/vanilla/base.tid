@@ -2946,6 +2946,19 @@ select {
 ** Other utility classes
 */
 
+.tc-tiny-gap {
+	margin-left: .25em;
+	margin-right: .25em;
+}
+
+.tc-tiny-gap-left {
+	margin-left: .25em;
+}
+
+.tc-tiny-gap-right {
+	margin-right: .25em;
+}
+
 .tc-small-gap {
 	margin-left: .5em;
 	margin-right: .5em;
