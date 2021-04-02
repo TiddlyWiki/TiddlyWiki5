@@ -15,15 +15,31 @@ PRs must meet these minimum requirements before they can be considered for mergi
 ** The material must be licensed under a license compatible with TiddlyWiki's BSD license
 * The author must sign the Contributors License Agreement (see below)
 * Each PR should only make a single feature change
+* The title of the PR should be 50 characters or less
+* The title of the PR should be capitalised, and should not end with a period
+* The title of the PR should be written in the imperative mood. See below
+* Adequate explanation in the body of the PR for the motivation and implementation of the change. Focus on the //why// and //what//, rather than the //how//
 * PRs must be self-contained. Although they can link to material elsewhere, everything needed to understand the intention of the PR should be included
-* Adequate narrative to explain the motivation and implementation of the change
 * Documentation as appropriate for end-users or developers
 * Observe the coding style
 * Read the developers documentation
+* Please open a consultation issue prior to investing time in making a large PR
 
-Finally, please open a consultation issue prior to investing time in making a large PR.
+The "imperative mood" means written as if giving a command or instruction. See [[this excellent post|https://chris.beams.io/posts/git-commit/#imperative]] for more details, but the gist is that the title of the PR should make sense when used to complete the sentence "If applied, this commit will...". So for example, these are good PR titles:
 
+* If applied, this commit will //update the contributing guidelines//
+* If applied, this commit will //change css-escape-polyfill to a $tw.utils method//
+* If applied, this commit will //make it easier to subclass the wikitext parser with a custom rule set//
 
+These a poorly worded PR titles:
+
+* ~~If applied, this commit will //edit text widgets should use default text for missing fields//~~
+* ~~If applied, this commit will //signing the CLA//~~
+* ~~If applied, this commit will //don't crash if options.event is missing//~~
+
+PR titles may also include a short prefix to indicate the subsystem to which they apply. For example:
+
+* //Menu plugin: Include menu text in aerial rotator//
 
 ! Contributor License Agreement
 
