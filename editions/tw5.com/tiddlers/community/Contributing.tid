@@ -25,7 +25,9 @@ PRs must meet these minimum requirements before they can be considered for mergi
 * Read the developers documentation
 * Please open a consultation issue prior to investing time in making a large PR
 
-The "imperative mood" means written as if giving a command or instruction. See [[this excellent post|https://chris.beams.io/posts/git-commit/#imperative]] for more details, but the gist is that the title of the PR should make sense when used to complete the sentence "If applied, this commit will...". So for example, these are good PR titles:
+!! Imperative Mood for PR Titles
+
+The "imperative mood" means written as if giving a command or instruction. See [[this post|https://chris.beams.io/posts/git-commit/#imperative]] for more details, but the gist is that the title of the PR should make sense when used to complete the sentence "If applied, this commit will...". So for example, these are good PR titles:
 
 * If applied, this commit will //update the contributing guidelines//
 * If applied, this commit will //change css-escape-polyfill to a $tw.utils method//
@@ -40,6 +42,18 @@ These a poorly worded PR titles:
 PR titles may also include a short prefix to indicate the subsystem to which they apply. For example:
 
 * //Menu plugin: Include menu text in aerial rotator//
+
+! Commenting on Pull Requests
+
+One of the principles of open source is that many pairs of eyes on the code can improve quality. So, we welcome comments and critiques of pending PRs. [[Conventional Comments|https://conventionalcomments.org]] has some techcniques to help make comments as constructive and actionable as possible. Notably, they recommend prefixing a comment with a label to clarify the intention:
+
+|praise |Praises highlight something positive. Try to leave at least one of these comments per review. Do not leave false praise (which can actually be damaging). Do look for something to sincerely praise |
+|nitpick |Nitpicks are small, trivial, but necessary changes. Distinguishing nitpick comments significantly helps direct the reader's attention to comments requiring more involvement |
+|suggestion |Suggestions are specific requests to improve the subject under review. It is assumed that we all want to do what's best, so these comments are never dismissed as “mere suggestions”, but are taken seriously |
+|issue |Issues represent user-facing problems. If possible, it's great to follow this kind of comment with a suggestion |
+|question |Questions are appropriate if you have a potential concern but are not quite sure if it's relevant or not. Asking the author for clarification or investigation can lead to a quick resolution |
+|thought |Thoughts represent an idea that popped up from reviewing. These comments are non-blocking by nature, but they are extremely valuable and can lead to more focused initiatives and mentoring opportunities |
+|chore |Chores are simple tasks that must be done before the subject can be “officially” accepted. Usually, these comments reference some common process. Try to leave a link to the process description so that the reader knows how to resolve the chore |
 
 ! Contributor License Agreement
 
