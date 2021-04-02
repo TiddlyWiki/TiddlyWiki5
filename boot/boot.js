@@ -2467,16 +2467,29 @@ $tw.boot.executeNextStartupTask = function(callback) {
 };
 
 /*
-Returns true if we are running on one platforms specified in a task modules `platforms` array
+Returns true if we are running on one of the platforms specified in taskModule's
+`platforms` array; or if `platforms` property is not defined.
 */
 $tw.boot.doesTaskMatchPlatform = function(taskModule) {
 	var platforms = taskModule.platforms;
 	if(platforms) {
 		for(var t=0; t<platforms.length; t++) {
-			if((platforms[t] === "browser" && !$tw.browser) || (platforms[t] === "node" && !$tw.node)) {
-				return false;
+			switch (platforms[t]) {
+				case "browser":
+					if ($tw.browser) {
+						return true;
+					}
+					break;
+				case "node":
+					if ($tw.node) {
+						return true;
+					}
+					break;
+				default:
+					$tw.utils.error("Module " + taskModule.name + ": '" + platforms[t] + "' in export.platforms invalid");
 			}
 		}
+		return false;
 	}
 	return true;
 };
