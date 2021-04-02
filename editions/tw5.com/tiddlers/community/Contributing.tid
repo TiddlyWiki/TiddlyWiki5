@@ -1,17 +1,29 @@
 created: 20131101111400000
-modified: 20190115165616599
+modified: 20210402095728684
 tags: Community
 title: Contributing
 type: text/vnd.tiddlywiki
 
-We welcome contributions to the code and documentation of TiddlyWiki in several ways:
+Here we focus on contributions via GitHub Pull Requests but there are many other ways that anyone can help the TiddlyWiki project, such as [[reporting bugs|ReportingBugs]] or helping to [[improve our documentation|Improving TiddlyWiki Documentation]].
 
-* ReportingBugs
-* Helping to [[improve our documentation|Improving TiddlyWiki Documentation]]
-* Contributing to the code via [[GitHub|https://github.com/Jermolene/TiddlyWiki5]]
-** See https://tiddlywiki.com/dev for more details
+! Rules for Pull Requests
 
-There are other ways to [[help TiddlyWiki|HelpingTiddlyWiki]] too.
+PRs must meet these minimum requirements before they can be considered for merging:
+
+* The material in the PR must be free of licensing restrictions. Which means that either:
+** The author must hold the copyright in all of the material themselves
+** The material must be licensed under a license compatible with TiddlyWiki's BSD license
+* The author must sign the Contributors License Agreement (see below)
+* Each PR should only make a single feature change
+* PRs must be self-contained. Although they can link to material elsewhere, everything needed to understand the intention of the PR should be included
+* Adequate narrative to explain the motivation and implementation of the change
+* Documentation as appropriate for end-users or developers
+* Observe the coding style
+* Read the developers documentation
+
+Finally, please open a consultation issue prior to investing time in making a large PR.
+
+
 
 ! Contributor License Agreement
 
@@ -24,9 +36,3 @@ There are other ways to [[help TiddlyWiki|HelpingTiddlyWiki]] too.
 ---
 
 //The CLA documents used for this project were created using [[Harmony Project Templates|http://www.harmonyagreements.org]]. "HA-CLA-I-LIST Version 1.0" for "CLA-individual" and "HA-CLA-E-LIST Version 1.0" for "CLA-entity".//
-
-!! Remarks
-
-''If you do not own the copyright in the entire work of authorship'':
-
-In this case, please clearly state so and provide links and any additional information that clarify under which license the rest of the code is distributed.
