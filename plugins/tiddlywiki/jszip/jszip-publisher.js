@@ -30,7 +30,7 @@ exports.create = function(params) {
 	return new JSZipPublisher(params);
 };
 
-function JSZipPublisher(params) {
+function JSZipPublisher(params,publisherHandler,publishingJob,) {
 	this.params = params;
 	this.zip =  new JSZip();
 	console.log("JSZipPublisher",params);
@@ -38,12 +38,13 @@ function JSZipPublisher(params) {
 
 JSZipPublisher.prototype.publishStart = function(callback) {
 	console.log("publishStart");
+	// Returns a list of the previously published files, but always "none" for ZIP files
 	callback([]);
 };
 
 JSZipPublisher.prototype.publishFile = function(item,callback) {
-	this.zip.file(item.path,item.text);
-	callback();
+	this.zip.file(item.path,item.text,{base64: item.isBase64});
+	callback(null);
 };
 
 JSZipPublisher.prototype.publishEnd = function(callback) {
@@ -54,7 +55,7 @@ JSZipPublisher.prototype.publishEnd = function(callback) {
 	document.body.appendChild(link);
 	link.click();
 	document.body.removeChild(link);
-	callback();
+	callback(null);
 };
 
 })();

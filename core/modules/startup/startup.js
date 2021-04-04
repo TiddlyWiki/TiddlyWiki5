@@ -129,6 +129,10 @@ exports.startup = function() {
 		dirtyTracking: !$tw.syncadaptor,
 		preloadDirty: $tw.boot.preloadDirty || []
 	});
+	// Install the publisher handler
+	$tw.publisherHandler = new $tw.PublisherHandler({
+		wiki: $tw.wiki
+	});
 	// Host-specific startup
 	if($tw.browser) {
 		// Install the popup manager

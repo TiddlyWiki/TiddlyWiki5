@@ -1,6 +1,6 @@
-title: $:/core/publishing-jobs/Static/Index
+title: $:/core/routes/StaticSite/Index
 caption: Index
-tags: $:/core/publishing-jobs/Static/Job
-job-type: render
-path: index.html
-template: $:/core/save/all
+tags: $:/tags/Route
+route-type: render
+route-path-filter: index.html
+route-template: $:/core/save/all

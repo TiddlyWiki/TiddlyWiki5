@@ -4,20 +4,8 @@ caption: {{$:/core/images/publish}} {{$:/language/Buttons/Publish/Caption}}
 description: {{$:/language/Buttons/Publish/Hint}}
 
 \define publish-actions()
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/Publish/Jobs]]" variable="job">
-	<$set name="publisher-name" value={{{ [<job>get[publisher]] }}}>
-		<$action-sendmessage $message="tm-publish-start" publisher-name=<<publisher-name>> publish-params-title=<<job>>/>
-		<$list filter="[all[shadows+tiddlers]tag<job>]" variable="route">
-		<$action-sendmessage $message="tm-publish-route"
-				caption={{{ [<route>get[caption]] }}}
-				route-type={{{ [<route>get[job-type]] }}}
-				path={{{ [<route>get[path]] }}}
-				filter={{{ [<route>get[filter]] }}}
-				template={{{ [<route>get[template]] }}}
-			/>
-		</$list>
-		<$action-sendmessage $message="tm-publish-end"/>
-	</$set>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/PublishingJob]has[enabled]field:enabled[yes]]" variable="job">
+	<$action-sendmessage $message="tm-publish" job=<<job>>/>
 </$list>
 \end
 

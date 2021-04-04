@@ -1,0 +1,7 @@
+title: $:/core/sitemaps/StaticSite
+caption: Static site map
+description: The original TiddlyWiki 5 static file layout
+tags: $:/tags/SiteMap
+list: $:/core/routes/StaticSite/Index $:/core/routes/StaticSite/HTML $:/core/routes/StaticSite/Images $:/core/routes/StaticSite/Styles
+var-tv-wikilink-template-filter: [slugify[]addsuffix[.html]]
+var-tv-image-template-filter: [slugify[]addprefix[../images/]addsuffix<extension>]

@@ -12,23 +12,38 @@ TiddlyWiki has pluggable ''publisher modules'' that provide the means to publish
 * The JSZip publisher packs the output files in a ZIP file which is automatically downloaded by the browser
 * The GitHub publisher uploads the output files to a GitHub repository suitable for GitHub Pages
 
-A ''job'' defines a self-contained group of files to be published, and specifies the ''publisher module'' to be used along with any parameters.
+A ''publishing job'' describes a self-contained publishing operation. Jobs are defined as configuration tiddlers with the following fields:
 
-Jobs consist of one or more ''routes'' which each define a related set of files that are to be treated in the same way.
+* ''title'' -- by convention, prefixed with `$:/config/PublishingJobs/`
+* ''caption'' -- human readable short name for the publishing job
+* ''tags'' -- `$:/tags/PublishingJob`
+* ''enabled'' -- must be set to `yes` for the publishing job to be recognised
+* ''export-filter'' -- a filter defining which tiddlers are to be exported
+* ''publisher'' -- the name of the publisher module to be used
+* ''&lt;publisher-name&gt;-&lt;parameter-name&gt;'' -- parameters required by the publisher module
+* ''sitemap'' -- title of the site map tiddler to be used
+* ''var-&lt;variable-name&gt;'' -- custom variables to be provided to the output templates
 
-Routes consist of the following information:
+A ''site map'' describes the layout and types of files in a publishing job. Site maps are defined as configuration tiddlers with the following fields:
 
-* A filter defining the tiddlers included in the route
-* A ''parameterised path'' defining how the ''output path'' is derived from the field values of a particular tiddler
-* A ''route type'' which can be set to "save" or "render":
+* ''title'' -- by convention, the prefix `$:/core/sitemaps/` is used for sitemaps defined in the core, `$:/plugins/<publisher-name>/<plugin-name>/sitemaps/` is used for sitemaps defined in other plugins, and `$:/config/sitemaps/` for user defined sitemaps
+* ''caption'' -- human readable short name for the sitemap
+* ''description'' -- longer human readable description for the sitemap
+* ''tags'' -- `$:/tags/SiteMap`
+* ''list'' -- list of titles of routes making up this sitemap
+* ''var-&lt;variable-name&gt;'' -- custom variables to be provided to the output templates
+
+A ''route'' describes how a group of one or more files is to be created during the export. Routes are defined as configuration tiddlers with the following fields:
+
+* ''title'' -- by convention, the prefix `$:/core/routes/` is used for sitemaps defined in the core, `$:/plugins/<publisher-name>/<plugin-name>/routes/` is used for sitemaps defined in other plugins, and `$:/config/routes/` for user defined sitemaps
+* ''caption'' -- human readable short name for the route
+* ''tags'' -- `$:/tags/Route`
+* ''route-tiddler-filter'' -- a filter defining the tiddlers included in the route
+* ''route-path-filter'' - a filter defining how the ''output path'' is derived from the field values of a particular tiddler
+* ''route-template'' -- optional title of a tiddler used as a template for "render" route types
+* ''route-type'' which can be set to "save" or "render":
 ** ''"save"'' indicates that the raw tiddler is to be saved, without any rendering
-** ''"render"'' indicates that the tiddler is to be rendered through a specified ''template''
+** ''"render"'' indicates that the tiddler is to be rendered through a specified template
+* ''var-&lt;variable-name&gt;'' -- custom variables to be provided to the output template
 
-Parameterised paths are strings which may contain optional tokens of the format `fieldname_functionname`. These tokens are replaced by the value of the specified field passed through the specified encoding function. The available encoding functions are:
-
-* ''encoded'' -- applies URI encoding to the value
-* ''doubleencoded'' -- applies double URI encoding to the value
-* ''slugify'' -- applies the [[slugify Operator]] to the value
-* ''extension'' -- interprets the value as a content type and returns the associated file extension
-
-For backwards compatibility, the field "uri" is accepted as a synonym for "title".
+The route tiddler filter is passed the tiddlers resulting from the job export filter. In order to respect the restrictions of the job export filter, route filters must be carefully constructed to ensure they pull their titles from the incoming list.

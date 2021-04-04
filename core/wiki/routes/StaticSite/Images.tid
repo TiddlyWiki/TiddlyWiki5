@@ -1,6 +1,6 @@
-title: $:/core/publishing-jobs/Static/Images
+title: $:/core/routes/StaticSite/Images
 caption: Images
-tags: $:/core/publishing-jobs/Static/Job
-job-type: save
-path: images/$title_slugify$.$type_extension$
-filter: [is[image]]
+tags: $:/tags/Route
+route-type: save
+route-path-filter: [slugify[]addprefix[images/]addsuffix<extension>]
+route-tiddler-filter: [is[image]]

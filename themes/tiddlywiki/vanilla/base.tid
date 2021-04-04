@@ -1819,6 +1819,20 @@ html body.tc-body.tc-single-tiddler-window {
 	border: 1px solid <<colour modal-border>>;
 }
 
+.tc-modal-progress {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.tc-modal-progress-percent {
+	text-align: center;
+}
+
+.tc-modal-progress-bar {
+	height: 10px;
+	background: red;
+}
+
 @media (max-width: 55em) {
 	.tc-modal {
 		position: fixed;
@@ -2934,7 +2948,7 @@ Publishing UI
 	background-color: #ffdddd;
 }
 
-.tc-publishing-job-routes {
+.tc-publishing-sitemap {
 	margin: 0.25em;
 	padding: 0.25em;
 	border: 1px solid black;
@@ -2946,31 +2960,6 @@ Publishing UI
 	padding: 0.25em;
 	border: 1px solid black;
 	background-color: #ddffdd;
-}
-
-/*
-Progress bar
-*/
-
-.tc-progress-bar-wrapper {
-	position: fixed;
-	width: 50%;
-	height: 50px;
-	top: 50%;
-	left: 50%;
-	margin-top: -25px;
-	margin-left: -25%;
-	background: #ffffee;
-}
-
-.tc-progress-bar-text,
-.tc-progress-bar-percent {
-	text-align: center;
-}
-
-.tc-progress-bar {
-	height: 10px;
-	background: red;
 }
 
 /*

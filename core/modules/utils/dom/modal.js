@@ -12,8 +12,9 @@ Modal message mechanism
 /*global $tw: false */
 "use strict";
 
-var widget = require("$:/core/modules/widgets/widget.js");
-var navigator = require("$:/core/modules/widgets/navigator.js");
+var widget = require("$:/core/modules/widgets/widget.js"),
+	navigator = require("$:/core/modules/widgets/navigator.js"),
+	dm = $tw.utils.domMaker;
 
 var Modal = function(wiki) {
 	this.wiki = wiki;
@@ -26,6 +27,10 @@ Display a modal dialogue
 	options: see below
 Options include:
 	downloadLink: Text of a big download link to include
+	variables: variables to be passed to the modal
+	event: optional DOM event that initiated the modal
+	progress: set to true to add a progress bar
+	onclose: callback for when the modal is closed
 */
 Modal.prototype.display = function(title,options) {
 	options = options || {};
@@ -47,7 +52,6 @@ Modal.prototype.display = function(title,options) {
 			"tv-story-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-story-list") : ""),
 			"tv-history-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-history-list") : "")
 		},options.variables);
-
 	// Create the wrapper divs
 	var wrapper = this.srcDocument.createElement("div"),
 		modalBackdrop = this.srcDocument.createElement("div"),
@@ -55,6 +59,7 @@ Modal.prototype.display = function(title,options) {
 		modalHeader = this.srcDocument.createElement("div"),
 		headerTitle = this.srcDocument.createElement("h3"),
 		modalBody = this.srcDocument.createElement("div"),
+		modalProgress = this.srcDocument.createElement("div"),
 		modalLink = this.srcDocument.createElement("a"),
 		modalFooter = this.srcDocument.createElement("div"),
 		modalFooterHelp = this.srcDocument.createElement("span"),
@@ -71,6 +76,7 @@ Modal.prototype.display = function(title,options) {
 	$tw.utils.addClass(modalWrapper,"tc-modal");
 	$tw.utils.addClass(modalHeader,"tc-modal-header");
 	$tw.utils.addClass(modalBody,"tc-modal-body");
+	$tw.utils.addClass(modalProgress,"tc-modal-progress");
 	$tw.utils.addClass(modalFooter,"tc-modal-footer");
 	// Join them together
 	wrapper.appendChild(modalBackdrop);
@@ -78,6 +84,15 @@ Modal.prototype.display = function(title,options) {
 	modalHeader.appendChild(headerTitle);
 	modalWrapper.appendChild(modalHeader);
 	modalWrapper.appendChild(modalBody);
+	if(options.progress) {
+		var modalProgressBar = this.srcDocument.createElement("div");
+		modalProgressBar.className = "tc-modal-progress-bar";
+		modalProgress.appendChild(modalProgressBar);
+		var modalProgressPercent = this.srcDocument.createElement("div");
+		modalProgressPercent.className = "tc-modal-progress-percent";
+		modalProgress.appendChild(modalProgressPercent);
+		modalWrapper.appendChild(modalProgress);
+	}
 	modalFooter.appendChild(modalFooterHelp);
 	modalFooter.appendChild(modalFooterButtons);
 	modalWrapper.appendChild(modalFooter);
@@ -105,7 +120,6 @@ Modal.prototype.display = function(title,options) {
 		parentWidget: $tw.rootWidget
 	});
 	navigatorWidgetNode.render(modalBody,null);
-	
 	// Render the title of the message
 	var headerWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		field: "subtitle",
@@ -182,6 +196,10 @@ Modal.prototype.display = function(title,options) {
 	this.wiki.addEventListener("change",refreshHandler);
 	// Add the close event handler
 	var closeHandler = function(event) {
+		// Call the onclose handler
+		if(options.onclose) {
+			options.onclose(event);
+		}
 		// Remove our refresh handler
 		self.wiki.removeEventListener("change",refreshHandler);
 		// Decrease the modal count and adjust the body class
@@ -236,6 +254,22 @@ Modal.prototype.display = function(title,options) {
 	$tw.utils.setStyle(modalWrapper,[
 		{transform: "translateY(0px)"}
 	]);
+	// Return the wrapper node
+	return {
+		domNode: wrapper,
+		closeHandler: closeHandler,
+		setProgress: function(numerator,denominator) {
+			// Remove old progress
+			while(modalProgressPercent.hasChildNodes()) {
+				modalProgressPercent.removeChild(modalProgressPercent.firstChild);
+			}
+			// Set new text
+			var percent = (numerator * 100 /denominator).toFixed(2) + "%";
+			modalProgressPercent.appendChild(self.srcDocument.createTextNode(percent));
+			// Set bar width
+			modalProgressBar.style.width = percent;
+		}
+	};
 };
 
 Modal.prototype.adjustPageClass = function() {

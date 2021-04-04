@@ -43,6 +43,7 @@ ImageWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 ImageWidget.prototype.render = function(parent,nextSibling) {
+	var self = this;
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
@@ -58,9 +59,24 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 		if(this.wiki.isImageTiddler(this.imageSource)) {
 			var type = tiddler.fields.type,
 				text = tiddler.fields.text,
-				_canonical_uri = tiddler.fields._canonical_uri;
+				_canonical_uri = tiddler.fields._canonical_uri,
+				imageTemplateFilter = this.getVariable("tv-image-template-filter");
+			// If present, use var-tv-image-template-filter to generate a URL;
+			if(imageTemplateFilter) {
+				src = this.wiki.filterTiddlers(imageTemplateFilter,{
+					getVariable: function(name) {
+						switch(name) {
+							case "currentTiddler":
+								return "" + this.imageSource;
+							case "extension":
+								return "" + ($tw.config.contentTypeInfo[type] || {extension: ""}).extension;
+							default:
+								return self.getVariable(name);
+						}
+					}
+				},this.wiki.makeTiddlerIterator([this.imageSource]))[0];
 			// If the tiddler has body text then it doesn't need to be lazily loaded
-			if(text) {
+			} else if(text) {
 				// Render the appropriate element for the image type
 				switch(type) {
 					case "application/pdf":

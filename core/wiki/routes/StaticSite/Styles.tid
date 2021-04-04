@@ -1,6 +1,6 @@
-title: $:/core/publishing-jobs/Static/Styles
+title: $:/core/routes/StaticSite/Styles
 caption: Styles
-tags: $:/core/publishing-jobs/Static/Job
-job-type: render
-path: static/static.css
-template: $:/core/templates/static.template.css
+tags: $:/tags/Route
+route-type: render
+route-path-filter: static/static.css
+route-template: $:/core/templates/static.template.css

@@ -12,223 +12,266 @@ The publisher manages publishing extracts of wikis as external files
 /*global $tw: false */
 "use strict";
 
+var PUBLISHING_MODAL_TITLE = "$:/language/Publishing/Modal";
+
 /*
 Instantiate the publisher manager with the following options
-widget: optional widget for attaching event handlers
+wiki: wiki object to be used
+commander: commander object to be used for output
 */
 function PublisherHandler(options) {
-	this.widget = options.widget;
 	this.wiki = options.wiki;
-	this.reset();
-	if(this.widget) {
-		this.widget.addEventListener("tm-publish-start",this.onPublishStart.bind(this));
-		this.widget.addEventListener("tm-publish-route",this.onPublishRoute.bind(this));
-		this.widget.addEventListener("tm-publish-end",this.onPublishEnd.bind(this));		
-	}
+	this.commander = options.commander;
 }
 
-PublisherHandler.prototype.onPublishStart = function(event) {
-	var publisherName = event.paramObject["publisher-name"],
-		publisherParamsTitle = event.paramObject["publish-params-title"],
-		publisherParamsTiddler = publisherParamsTitle && this.wiki.getTiddler(publisherParamsTitle);
-	if(publisherName && publisherParamsTiddler) {
-		this.publisherName = publisherName;
-		this.publisherParamsTitle = publisherParamsTitle;
-		this.publisherParams = publisherParamsTiddler.fields;
-		this.routes = [];
+/*
+Publish a job
+
+jobTitle: title of tiddler containing details of the job
+callback: completion callback invoked callback(err)
+options: Include:
+
+commander: commander object associated with publishing under Node.js
+variables: hashmap of variables to be passed to renderings
+*/
+PublisherHandler.prototype.publish = function(jobTitle,callback,options) {
+	if(jobTitle) {
+		var job = new PublishingJob(jobTitle,this,options);
+		job.publish(callback);
 	}
 };
 
-PublisherHandler.prototype.onPublishEnd = function(event) {
-	if(this.publisherName && this.publisherParams && this.routes) {
-		this.publish();
-	}
-};
+function PublishingJob(jobTitle,publisherHandler,options) {
+	options = options || {};
+	// Save params
+	this.jobTitle = jobTitle;
+	this.publisherHandler = publisherHandler;
+	this.commander = options.commander;
+	this.publishVariables = options.variables || Object.create(null);
+}
 
-PublisherHandler.prototype.onPublishRoute = function(event) {
-	if(this.publisherName && this.publisherParams && this.routes) {
-		this.routes.push(event.paramObject);
+/*
+Start publishing
+*/
+PublishingJob.prototype.publish = function(callback) {
+	var self = this;
+	// Get the job tiddler and check it is enabled
+	this.jobTiddler = this.publisherHandler.wiki.getTiddler(this.jobTitle);
+	if(this.jobTiddler && this.jobTiddler.fields.enabled === "yes") {
+		// Get the list of tiddlers to be exported, defaulting to all non-system tiddlers
+		this.exportList = this.publisherHandler.wiki.filterTiddlers(this.jobTiddler.fields["export-filter"] || "[!is[system]]");
+		// Get the job variables
+		this.jobVariables = this.extractVariables(this.jobTiddler);
+		// Get publisher
+		this.publisher = this.getPublisher(this.jobTiddler.fields.publisher);
+		if(this.publisher) {
+			// Get the sitemap
+			this.sitemap = this.publisherHandler.wiki.getTiddler(this.jobTiddler.fields.sitemap);
+			if(this.sitemap) {
+				// Get the sitemap variables
+				this.sitemapVariables = this.extractVariables(this.sitemap);
+				// Collect the operations from each route
+				this.operations = [];
+				$tw.utils.each(this.sitemap.fields.list,function(routeTitle) {
+					var routeTiddler = self.publisherHandler.wiki.getTiddler(routeTitle);
+					if(routeTiddler) {
+						Array.prototype.push.apply(self.operations,self.getOperationsForRoute(routeTiddler));
+					}
+				});
+				// Display the progress modal
+				if($tw.modal) {
+					self.progressModal = $tw.modal.display(PUBLISHING_MODAL_TITLE,{
+						progress: true,
+						variables: {
+							currentTiddler: this.jobTitle,
+							totalFiles: this.operations.length + ""
+						},
+						onclose: function(event) {
+							if(event !== self) {
+								// The modal was closed other than by us programmatically
+								self.isCancelled = true;
+							}
+						}
+					});
+				}
+				// Send the operations to the publisher
+				this.executeOperations(function(err) {
+					if(self.progressModal) {
+						self.progressModal.closeHandler(self);
+					}
+					callback(err);
+				});
+			} else {
+				return callback("Missing sitemap");
+			}
+		} else {
+			return callback("Unrecognised publisher");
+		}
+	} else {
+		return callback("Missing or disabled job tiddler");
 	}
 };
 
 /*
 Instantiate the required publisher object
 */
-PublisherHandler.prototype.getPublisher = function() {
-	var self = this,
-		publisher;
+PublishingJob.prototype.getPublisher = function(publisherName) {
+	var publisher;
 	$tw.modules.forEachModuleOfType("publisher",function(title,module) {
-		if(module.name === self.publisherName) {
+		if(module.name === publisherName) {
 			publisher = module;
 		}
 	});
-	return publisher && publisher.create(this.publisherParams);
+	return publisher && publisher.create(this.jobTiddler.fields,this.publisherHandler,this);
 };
 
 /*
-Expand publish routes to separate commands
+Extract the variables from tiddler fields prefixed "var-"
 */
-PublisherHandler.prototype.expandRoutes = function(routes) {
+PublishingJob.prototype.extractVariables = function(tiddler) {
+	var variables = {};
+	$tw.utils.each(tiddler.getFieldStrings(),function(value,name) {
+		if(name.substring(0,4) === "var-") {
+			variables[name.substring(4)] = value;
+		}
+	});
+	return variables;
+};
+
+/*
+Expand publish routes to separate operations
+*/
+PublishingJob.prototype.getOperationsForRoute = function(routeTiddler) {
 	var self = this,
-		commands = [];
-	$tw.utils.each(routes,function(route) {
-		var filter = route.filter || "DUMMY_RESULT"; // If no filter is provided, use a dummy filter that returns a single result
-		switch(route["route-type"]) {
+		operations = [],
+		routeFilter = routeTiddler.fields["route-tiddler-filter"] || "DUMMY_RESULT", // If no filter is provided, use a dummy filter that returns a single result
+		tiddlers = self.publisherHandler.wiki.filterTiddlers(routeFilter,null,self.publisherHandler.wiki.makeTiddlerIterator(this.exportList));
+	if(routeFilter) {
+		switch(routeTiddler.fields["route-type"]) {
 			case "save":
-				if(filter && route.path) {
-					$tw.utils.each(self.wiki.filterTiddlers(filter),function(title) {
-						commands.push({
+				if(routeTiddler.fields["route-path-filter"]) {
+					$tw.utils.each(tiddlers,function(title) {
+						operations.push({
 							"route-type": "save",
-							path: self.resolveParameterisedPath(route.path,title),
+							path: self.resolvePathFilter(routeTiddler.fields["route-path-filter"],title),
 							title: title
 						});
 					});
 				}
 				break;
 			case "render":
-				if(filter && route.path && route.template) {
-					$tw.utils.each(self.wiki.filterTiddlers(filter),function(title) {
-						commands.push({
+				if(routeTiddler.fields["route-path-filter"] && routeTiddler.fields["route-template"]) {
+					var routeVariables = $tw.utils.extend({},this.publishVariables,this.jobVariables,this.sitemapVariables,this.extractVariables(routeTiddler));
+					$tw.utils.each(tiddlers,function(title) {
+						operations.push({
 							"route-type": "render",
-							path: self.resolveParameterisedPath(route.path,title),
+							path: self.resolvePathFilter(routeTiddler.fields["route-path-filter"],title),
 							title: title,
-							template: route.template
+							template: routeTiddler.fields["route-template"],
+							variables: routeVariables
 						});
 					});
 				}
 				break;
 		}
-	});
-	return commands;
+	}
+	return operations;
 };
 
 /*
-Apply a tiddler to a parameterised path to create a usable path
+Apply a tiddler to a filter to create a usable path
 */
-PublisherHandler.prototype.resolveParameterisedPath = function(route,title) {
-	var self = this;
-	// Split the route on $$ markers
-	var tiddler = this.wiki.getTiddler(title),
-		output = [];
-	$tw.utils.each(route.split(/(\$[a-z_]+\$)/),function(part) {
-		var match = part.match(/\$([a-z]+)_([a-z]+)\$/);
-		if(match) {
-			var value;
-			// Get the base value
-			switch(match[1]) {
-				case "uri":
-				case "title":
-					value = title;
-					break;
-				case "type":
-					value = tiddler.fields.type || "text/vnd.tiddlywiki";
-					break;
-			}
-			// Apply the encoding function
-			switch(match[2]) {
-				case "encoded":
-					value = encodeURIComponent(value);
-					break;
-				case "doubleencoded":
-					value = encodeURIComponent(encodeURIComponent(value));
-					break;
-				case "slugify":
-					value = self.wiki.slugify(value);
-					break;
+PublishingJob.prototype.resolvePathFilter = function(pathFilter,title) {
+	var tiddler = this.publisherHandler.wiki.getTiddler(title);
+	return this.publisherHandler.wiki.filterTiddlers(pathFilter,{
+		getVariable: function(name) {
+			switch(name) {
+				case "currentTiddler":
+					return "" + this.imageSource;
 				case "extension":
-					value = ($tw.config.contentTypeInfo[value] || {extension: "."}).extension.slice(1);
-					break;
+					return "" + ($tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"] || {extension: ""}).extension;
+				default:
+					return $tw.rootWidget.getVariable(name);
 			}
-			output.push(value);
-		} else {
-			output.push(part);
 		}
-	});
-	return output.join("");
+	},this.publisherHandler.wiki.makeTiddlerIterator([title]))[0];
 };
 
 /*
-Publish the routes in this.routes[]
+Execute the operations for this job
 */
-PublisherHandler.prototype.publish = function(callback) {
+PublishingJob.prototype.executeOperations = function(callback) {
 	var self = this,
 		report = {overwrites: []},
-		commands = this.expandRoutes(this.routes),
-		nextCommand = 0,
-		publisher = this.getPublisher(),
-		performNextCommand = function() {
-			// Set progress
-			self.setProgress(nextCommand,commands.length);
+		nextOperation = 0,
+		performNextOperation = function() {
+			// Check for having been cancelled
+			if(self.isCancelled) {
+				if(self.publisher.publishCancel) {
+					self.publisher.publishCancel();
+				}
+				return callback("CANCELLED");
+			}
+			// Update progress
+			if(self.progressModal) {
+				self.progressModal.setProgress(nextOperation,self.operations.length);
+			}
 			// Check for having finished
-			if(nextCommand >= commands.length) {
-				publisher.publishEnd(function() {
-					self.saveReport(report);
-					self.reset();
-					self.hideProgress();
-					if(callback) {
-						$tw.utils.nextTick(callback);
-					}
+			if(nextOperation >= self.operations.length) {
+				$tw.utils.nextTick(function() {
+					self.publisher.publishEnd(callback);					
 				});
 			} else {
-				// Execute this command
-				var fileDetails = self.prepareCommand(commands[nextCommand]);
-				nextCommand += 1;
-				publisher.publishFile(fileDetails,function() {
-					$tw.utils.nextTick(performNextCommand);
+				// Execute this operation
+				var fileDetails = self.prepareOperation(self.operations[nextOperation]);
+				nextOperation += 1;
+				self.publisher.publishFile(fileDetails,function() {
+					$tw.utils.nextTick(performNextOperation);
 				});
 			}
 		};
-	// Fail if we didn't get a publisher
-	if(!publisher) {
-		alert("Publisher " + this.publisherName + " not found");
-		return;
-	}
-	this.displayProgress("Publishing");
 	// Tell the publisher to start, and get back an array of the existing paths
-	publisher.publishStart(function(existingPaths) {
+	self.publisher.publishStart(function(existingPaths) {
 		var paths = {};
-		$tw.utils.each(commands,function(command) {
-			if(command.path in paths) {
-				report.overwrites.push(command.path);
+		$tw.utils.each(self.operations,function(operation) {
+			if(operation.path in paths) {
+				report.overwrites.push(operation.path);
 			}
-			paths[command.path] = true;
+			paths[operation.path] = true;
 		});
-		// Run the commands
-		$tw.utils.nextTick(performNextCommand);
+		// Run the operations
+		performNextOperation();
 	});
 };
 
 /*
-Construct a file details object from a command object
+Construct a file details object from an operation object
 */
-PublisherHandler.prototype.prepareCommand = function(command) {
-	var tiddler = this.wiki.getTiddler(command.title),
+PublishingJob.prototype.prepareOperation = function(operation) {
+	var tiddler = this.publisherHandler.wiki.getTiddler(operation.title),
 		fileDetails = {
-		path: command.path
-	};
-	switch(command["route-type"]) {
+			path: operation.path
+		};
+	switch(operation["route-type"]) {
 		case "save":
 			fileDetails.text = tiddler.fields.text || "";
 			fileDetails.type = tiddler.fields.type || "";
+			fileDetails.isBase64 = ($tw.config.contentTypeInfo[tiddler.fields.type] || {}).encoding  === "base64";
 			break;
 		case "render":
-			fileDetails.text = this.wiki.renderTiddler("text/plain",command.template,{variables: {currentTiddler: command.title}});
+			fileDetails.text = this.publisherHandler.wiki.renderTiddler("text/plain",operation.template,{
+				variables: $tw.utils.extend(
+					{currentTiddler: operation.title},
+					operation.variables
+				)
+			});
 			fileDetails.type = "text/html";
 			break;
 	}
 	return fileDetails;
 };
 
-/*
-*/
-PublisherHandler.prototype.reset = function() {
-	this.publisherName = null;
-	this.publisherParams = null;
-	this.routes = null;
-};
-
-
-PublisherHandler.prototype.saveReport = function(report) {
+PublishingJob.prototype.saveReport = function(report) {
 	// Create the report tiddler
 	var reportTitle = this.wiki.generateNewTitle("$:/temp/publish-report");
 	$tw.wiki.addTiddler({
@@ -240,45 +283,6 @@ PublisherHandler.prototype.saveReport = function(report) {
 		list = (paramsTiddler.fields.list || []).slice(0);
 	list.unshift(reportTitle);
 	$tw.wiki.addTiddler(new $tw.Tiddler(paramsTiddler,{list: list}));
-};
-
-PublisherHandler.prototype.displayProgress = function(message) {
-	if($tw.browser) {
-		this.progressWrapper = document.createElement("div");
-		this.progressWrapper.className = "tc-progress-bar-wrapper";
-		this.progressText = document.createElement("div");
-		this.progressText.className = "tc-progress-bar-text";
-		this.progressText.appendChild(document.createTextNode(message));
-		this.progressWrapper.appendChild(this.progressText);
-		this.progressBar = document.createElement("div");
-		this.progressBar.className = "tc-progress-bar";
-		this.progressWrapper.appendChild(this.progressBar);
-		this.progressPercent = document.createElement("div");
-		this.progressPercent.className = "tc-progress-bar-percent";
-		this.progressWrapper.appendChild(this.progressPercent);
-		document.body.appendChild(this.progressWrapper);
-	}
-};
-
-PublisherHandler.prototype.hideProgress = function() {
-	if($tw.browser && this.progressWrapper) {
-		this.progressWrapper.parentNode.removeChild(this.progressWrapper);
-		this.progressWrapper = null;
-	}
-};
-
-PublisherHandler.prototype.setProgress = function(numerator,denominator) {
-	if($tw.browser && this.progressWrapper) {
-		// Remove old progress
-		while(this.progressPercent.hasChildNodes()) {
-			this.progressPercent.removeChild(this.progressPercent.firstChild);
-		}
-		// Set new text
-		var percent = (numerator * 100 /denominator).toFixed(2) + "%";
-		this.progressPercent.appendChild(document.createTextNode(percent));
-		// Set bar width
-		this.progressBar.style.width = percent;
-	}
 };
 
 exports.PublisherHandler = PublisherHandler;

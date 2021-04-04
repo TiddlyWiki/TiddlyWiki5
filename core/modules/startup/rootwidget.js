@@ -72,10 +72,11 @@ exports.startup = function() {
 			}
 		});
 	}
-	// Install the publisher handler
-	$tw.publisherHandler = new $tw.PublisherHandler({
-		wiki: $tw.wiki,
-		widget: $tw.rootWidget
+	// Hook up events for the publisher handler
+	$tw.rootWidget.addEventListener("tm-publish",function(event) {
+		$tw.publisherHandler.publish(event.paramObject.job,function(err) {
+			console.log("Finished publishing with result:",err);
+		});
 	});
 	// If we're being viewed on a data: URI then give instructions for how to save
 	if(document.location.protocol === "data:") {

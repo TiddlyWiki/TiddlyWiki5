@@ -1,9 +1,0 @@
-title: $:/core/publishing-jobs/Static/StaticHTML
-caption: Static HTML
-tags: $:/core/publishing-jobs/Static/Job
-job-type: render
-path: static/$title_slugify$.html
-filter: [!is[system]!is[image]]
-template: $:/core/templates/static.tiddler.html
-tv-wikilink-template: $title_slugify$.html
-tv-image-template: images/$title_slugify$.$type_extension$

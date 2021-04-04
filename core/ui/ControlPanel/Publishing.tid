@@ -6,7 +6,7 @@ caption: {{$:/language/ControlPanel/Publishing/Caption}}
 
 <div class="tc-publishing-job-listing">
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/Publish/Jobs]]" variable="job">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/PublishingJob]]" variable="job">
 
 <div class="tc-publishing-job">
 
@@ -42,27 +42,33 @@ Logs: <$view tiddler=<<job>> field="list"/>
 
 </div>
 
-<div class="tc-publishing-job-routes">
+<$vars sitemap={{{ [<job>get[sitemap]] }}}>
 
-<$list filter="[all[shadows+tiddlers]tag<job>]" variable="route">
+<div class="tc-publishing-sitemap">
+
+<h2>Sitemap: <$link to=<<sitemap>>><$view tiddler=<<sitemap>> field="caption"><$text text=<<sitemap>>/></$view></$link></h2>
+
+<$list filter="[<sitemap>get[list]enlist-input[]]" variable="route">
 
 <div class="tc-publishing-route">
 
-<h2>Route: <$link to=<<route>>><$view tiddler=<<route>> field="caption"/></$link></h2>
+<h2>Route: <$link to=<<route>>><$view tiddler=<<route>> field="caption"><$text text=<<route>>/></$view></$link></h2>
 
-job-type: <$view tiddler=<<route>> field="job-type"/>
+job-type: <$view tiddler=<<route>> field="route-type"/>
 
-path: <$edit-text tiddler=<<route>> size="50" field="path"/>
+path: <$edit-text tiddler=<<route>> size="50" field="route-path-filter"/>
 
-filter: <$edit-text tiddler=<<route>> size="50" field="filter"/>
+filter: <$edit-text tiddler=<<route>> size="50" field="route-tiddler-filter"/>
 
-template: <$edit-text tiddler=<<route>> size="50" field="template"/>
+template: <$edit-text tiddler=<<route>> size="50" field="route-template"/>
 
 </div>
 
 </$list>
 
 </div>
+
+</$vars>
 
 </$set>
 
