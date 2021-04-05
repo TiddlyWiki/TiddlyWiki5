@@ -515,6 +515,15 @@ exports.htmlEncode = function(s) {
 	}
 };
 
+// Converts like htmlEncode, but forgets the double quote for brevity
+exports.htmlTextEncode = function(s) {
+	if(s) {
+		return s.toString().replace(/&/mg,"&amp;").replace(/</mg,"&lt;").replace(/>/mg,"&gt;");
+	} else {
+		return "";
+	}
+};
+
 // Converts all HTML entities to their character equivalents
 exports.entityDecode = function(s) {
 	var converter = String.fromCodePoint || String.fromCharCode,
@@ -618,7 +627,7 @@ exports.nextTick = function(fn) {
 /*global window: false */
 	if(typeof process === "undefined") {
 		// Apparently it would be faster to use postMessage - http://dbaron.org/log/20100309-faster-timeouts
-		window.setTimeout(fn,4);
+		window.setTimeout(fn,0);
 	} else {
 		process.nextTick(fn);
 	}

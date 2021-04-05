@@ -1,0 +1,42 @@
+created: 20210309133636211
+modified: 20210309133636211
+tags: Widgets
+title: MessageCatcherWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+<<.from-version "5.1.24">>
+
+The message catcher widget traps [[messages|Messages]] dispatched within its child content, and allows invoking a series of ActionWidgets in response to those messages.
+
+! Content and Attributes
+
+The content of the `<$messagecatcher>` widget is displayed normally.
+
+|!Attribute |!Description |
+|type |Name of the message be trapped, for example "tm-scroll" or "tm-navigate" |
+|actions |Action string to be invoked when a matching message is trapped |
+
+! Variables
+
+The message catcher widget
+
+|!Variables |!Description |
+|`event-*` |All string-based properties of the `event` object, with the names prefixed with `event-` |
+|`event-paramObject-*` |All string-based properties of the `event.paramObject` object, with the names prefixed with `event-paramObject-` |
+|`modifier` |For messages that originated with browser events, the modifier keys that were pressed when the event was fired. The possible modifiers are ''norma'' (no modifiers), ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' and ''ctrl-alt-shift'' |
+
+! Example
+
+<$macrocall $name="wikitext-example-without-html" src="""
+\define actions()
+<$action-log/>
+\end
+
+<$messagecatcher type="tm-navigate" actions=<<actions>>>
+
+Click on [[this link]] to fire an action. See the browser JavaScript console for the output
+
+</$messagecatcher>
+"""/>

@@ -1,33 +1,28 @@
 /*\
-title: $:/core/modules/startup/CSSescape.js
+title: $:/core/modules/utils/escapecss.js
 type: application/javascript
-module-type: startup
+module-type: utils
 
-Polyfill for CSS.escape()
+Provides CSS.escape() functionality.
 
 \*/
-(function(root,factory){
+(function(){
+
 /*jslint node: true, browser: true */
-/*global $tw: false */
+/*global $tw: false, window: false */
 "use strict";
 
-// Export name and synchronous status
-exports.name = "css-escape";
-exports.platforms = ["browser"];
-exports.after = ["startup"];
-exports.synchronous = true;
-
-/*! https://mths.be/cssescape v1.5.1 by @mathias | MIT license */
-// https://github.com/umdjs/umd/blob/master/returnExports.js
-exports.startup = factory(root);
-}(typeof global != 'undefined' ? global : this, function(root) {
-
-	if (root.CSS && root.CSS.escape) {
-		return;
+exports.escapeCSS = (function() {
+	// use browser's native CSS.escape() function if available
+	if ($tw.browser && window.CSS && window.CSS.escape) {
+		return window.CSS.escape;
 	}
 
-	// https://drafts.csswg.org/cssom/#serialize-an-identifier
-	var cssEscape = function(value) {
+	// otherwise, a utility method is provided
+	// see also https://drafts.csswg.org/cssom/#serialize-an-identifier
+
+	/*! https://mths.be/cssescape v1.5.1 by @mathias | MIT license */
+	return function(value) {
 		if (arguments.length == 0) {
 			throw new TypeError('`CSS.escape` requires an argument.');
 		}
@@ -104,11 +99,6 @@ exports.startup = factory(root);
 		}
 		return result;
 	};
+})();
 
-	if (!root.CSS) {
-		root.CSS = {};
-	}
-
-	root.CSS.escape = cssEscape;
-
-}));
+})();
