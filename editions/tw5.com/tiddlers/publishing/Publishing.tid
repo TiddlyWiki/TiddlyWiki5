@@ -5,12 +5,21 @@ title: Publishing
 
 You can publish extracts from a wiki as a collection of interconnected static files that can be hosted on the Internet independently from TiddlyWiki.
 
+!! Usage
+
+In the browser, publishing jobs are configured in [[$:/ControlPanel]]. Clicking the ''publish'' button in the sidebar initiates publishing of all enabled publishing jobs.
+
+Under Node.js, the PublishCommand is used to initiate publishing.
+
 !! Terminology
 
-TiddlyWiki has pluggable ''publisher modules'' that provide the means to publish to specific platforms:
+TiddlyWiki has pluggable ''publisher modules'' that provide the means to publish to specific platforms, referred to by a short name:
 
-* The JSZip publisher packs the output files in a ZIP file which is automatically downloaded by the browser
-* The GitHub publisher uploads the output files to a GitHub repository suitable for GitHub Pages
+* ''jszip'': The JSZip publisher packs the output files in a ZIP file which is automatically downloaded by the browser
+* ''filesystem'': The filesystem publisher saves the output files directly to the file system (it is only available under Node.js)
+* ''github'': The GitHub publisher uploads the output files to a GitHub repository suitable for GitHub Pages
+
+Publisher modules can optionally present a configuration user interface. For example, the JSZip publisher requires the name of the zip file to be configured.
 
 A ''publishing job'' describes a self-contained publishing operation. Jobs are defined as configuration tiddlers with the following fields:
 
