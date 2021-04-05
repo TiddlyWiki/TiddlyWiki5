@@ -5,6 +5,8 @@ title: Publishing
 
 You can publish extracts from a wiki as a collection of interconnected static files that can be hosted on the Internet independently from TiddlyWiki.
 
+This is a work in progress: see the Pull Request for more details: https://github.com/Jermolene/TiddlyWiki5/pull/5559
+
 !! Usage
 
 In the browser, publishing jobs are configured in [[$:/ControlPanel]]. Clicking the ''publish'' button in the sidebar initiates publishing of all enabled publishing jobs.
