@@ -796,6 +796,17 @@ function runTests(wiki) {
 	expect(wiki.filterTiddlers("[[12]pad[9],[abc]]").join(",")).toBe("abcabca12");
 	expect(wiki.filterTiddlers("[[12]pad:suffix[9],[abc]]").join(",")).toBe("12abcabca");
 	});
+
+	it("should handle the escapecss operator", function() {
+	expect(wiki.filterTiddlers("[[Hello There]escapecss[]]").join(",")).toBe("Hello\\ There");
+	expect(wiki.filterTiddlers('\'"Reveal.js" by Devin Weaver[1]\' +[escapecss[]]').join(",")).toBe('\\"Reveal\\.js\\"\\ by\\ Devin\\ Weaver\\[1\\]');
+	expect(wiki.filterTiddlers(".foo#bar (){} '--a' 0 \0 +[escapecss[]]").join(",")).toBe("\\.foo\\#bar,\\(\\)\\{\\},--a,\\30 ,\ufffd");
+	expect(wiki.filterTiddlers("'' +[escapecss[]]").join(",")).toBe("");
+	expect(wiki.filterTiddlers("1234 +[escapecss[]]").join(",")).toBe("\\31 234");
+	expect(wiki.filterTiddlers("'-25' +[escapecss[]]").join(",")).toBe("-\\32 5");
+	expect(wiki.filterTiddlers("'-' +[escapecss[]]").join(",")).toBe("\\-");
+	});
+
 }
 
 });

@@ -103,7 +103,11 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			var tiddler = this.wiki.getTiddler(this.editTitle);
 			if(tiddler) {
 				// If we've got a tiddler, the value to display is the field string value
-				value = tiddler.getFieldString(this.editField);
+				if(tiddler.hasField(this.editField)) {
+					value = tiddler.getFieldString(this.editField);
+				} else {
+					value = this.editDefault || "";
+				}
 				if(this.editField === "text") {
 					type = tiddler.fields.type || "text/vnd.tiddlywiki";
 				}
