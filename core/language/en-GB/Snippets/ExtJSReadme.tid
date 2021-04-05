@@ -1,15 +1,19 @@
 title: $:/language/Snippets/ExtJSReadme
 
-Additions to ~TiddlyWiki documentation [[Using the external JavaScript template|https://tiddlywiki.com/#Using%20the%20external%20JavaScript%20template]]:
+This is an addendum to the ~TiddlyWiki documentation&mdash;[[Using the external JavaScript template|https://tiddlywiki.com/#Using%20the%20external%20JavaScript%20template]]:
 
-To ensure that the "save snapshot for offline use" button saves a working wiki, it is also necessary to set the tiddler $:/config/SaveWikiButton/Template to contain <code>~$:/core/save/<b>offline-external-js</b></code>. You must also save a copy of  "tiddlywiki5.js" in the same folder as your offline wiki file. See [[How to obtain tiddlywiki5.js|$:/language/Snippets/GetTiddlyWikiJS]] for details.
+...
+
+To properly save your snapshot for offline use, it is necessary to set the text of the tiddler $:/config/SaveWikiButton/Template to <code>~$:/core/save/<b>offline-external-js</b></code>. You must also save a copy of  <code>twcore-TIDDLYWIKI_VERSION.js</code> in the same folder as your HTML file. From your own wiki, open the tiddler [[$:/language/Snippets/GetTiddlyWikiJS]]. It will show you how to acquire ~TiddlyWiki's core ~JavaScript.
+
+The provided edition "server-external-js" contains all the configuration necessary to use the external ~JavaScript template.
 
 !! Upgrading
 
-Upgrading an offline wiki with an external-js template will be a three-step process:
+Before you proceed, backup your wiki first! Upgrading a single-file wiki with the external-js template will be a three-step process:
 
-# Follow the standalone file ~TiddlyWiki Upgrading process. Your wiki will be converted to a full standalone version.
+# Follow the standalone file ~TiddlyWiki [[Upgrading]] process. Your wiki will be converted to a full standalone HTML.
 
-# Open $:/language/Snippets/GetTiddlyWikiJS tiddler from your newly upgraded wiki and click the "Export tiddlywiki5.js" button.
+# From the upgraded wiki, open the tiddler [[$:/language/Snippets/GetTiddlyWikiJS]]. Click on the "Export ~TiddlyWiki Core" button to obtain the new release of ~TiddlyWiki's core ~JavaScript.
 
-# Verify that $:/config/SaveWikiButton/Template still contains `$:/core/save/offline-external-js`. Save your wiki again and the wiki will be converted to using the external-js template.
+# Verify that $:/config/SaveWikiButton/Template still contains `$:/core/save/offline-external-js`. Save your wiki again. It is now converted to using the external core.
