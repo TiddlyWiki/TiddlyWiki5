@@ -21,6 +21,12 @@ Basics/Tiddlers/Prompt: 티들러 수:
 Basics/Title/Prompt: 이 티들리위키의 제목:
 Basics/Username/Prompt: 편집에 서명하기 위한 사용자 이름:
 Basics/Version/Prompt: 티들리위키 버전:
+Client/Caption: 클라이언트 비틀기
+Client/Hint: 여기에서 클라이언트의 모양을 사용자 지정할 수 있습니다.
+Client/Tiddloid/Caption: Tiddloid
+Client/Tiddloid/Hint: 이러한 설정은 Tiddloid 클라이언트에 적용됩니다.
+Client/Tiddloid/ApplyTheme/Description: 시스템 표시 줄에 테마 색상 적용
+Client/Tiddloid/HideToolbar/Description: 로딩 완료시 툴바 숨기기
 EditorTypes/Caption: 편집기 형식
 EditorTypes/Editor/Caption: 편집기
 EditorTypes/Hint: 이 티들러는 특정 티들러 형식을 편집하는 데 사용하는 편집기를 결정합니다.
