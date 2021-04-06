@@ -114,6 +114,9 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	var self = this,
 		readFileCallback = function(tiddlerFieldsArray) {
 			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray), autoOpenOnImport: self.autoOpenOnImport, importTitle: self.importTitle});
+			if(self.actions) {
+				self.invokeActionString(self.actions,self,event,{importTitle: self.importTitle});
+			}
 		};
 	this.leaveDrag(event);
 	// Check for being over a TEXTAREA or INPUT
@@ -150,6 +153,9 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 	var self = this,
 		readFileCallback = function(tiddlerFieldsArray) {
 			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray), autoOpenOnImport: self.autoOpenOnImport, importTitle: self.importTitle});
+			if(self.actions) {
+				self.invokeActionString(self.actions,self,event,{importTitle: self.importTitle});
+			}
 		};
 	// Let the browser handle it if we're in a textarea or input box
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) == -1 && !event.target.isContentEditable) {
@@ -194,7 +200,8 @@ DropZoneWidget.prototype.execute = function() {
 	this.dropzoneDeserializer = this.getAttribute("deserializer");
 	this.dropzoneEnable = (this.getAttribute("enable") || "yes") === "yes";
 	this.autoOpenOnImport = this.getAttribute("autoOpenOnImport");
-	this.importTitle = this.getAttribute("importTitle");
+	this.importTitle = this.getAttribute("importTitle","$:/Import");
+	this.actions = this.getAttribute("actions");
 	// Make child widgets
 	this.makeChildWidgets();
 };
