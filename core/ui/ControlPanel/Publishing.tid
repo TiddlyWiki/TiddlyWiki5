@@ -56,7 +56,7 @@ Logs: <$view tiddler=<<job>> field="list"/>
 
 job-type: <$view tiddler=<<route>> field="route-type"/>
 
-path: <$edit-text tiddler=<<route>> size="50" field="route-path-filter"/>
+path: <$edit-text tiddler=<<route>> size="50" field="route-path"/>
 
 filter: <$edit-text tiddler=<<route>> size="50" field="route-tiddler-filter"/>
 

@@ -149,23 +149,23 @@ PublishingJob.prototype.getOperationsForRoute = function(routeTiddler) {
 	if(routeFilter) {
 		switch(routeTiddler.fields["route-type"]) {
 			case "save":
-				if(routeTiddler.fields["route-path-filter"]) {
+				if(routeTiddler.fields["route-path"]) {
 					$tw.utils.each(tiddlers,function(title) {
 						operations.push({
 							"route-type": "save",
-							path: self.resolvePathFilter(routeTiddler.fields["route-path-filter"],title),
+							path: self.resolveParameterisedPath(routeTiddler.fields["route-path"],title),
 							title: title
 						});
 					});
 				}
 				break;
 			case "render":
-				if(routeTiddler.fields["route-path-filter"] && routeTiddler.fields["route-template"]) {
+				if(routeTiddler.fields["route-path"] && routeTiddler.fields["route-template"]) {
 					var routeVariables = $tw.utils.extend({},this.publishVariables,this.jobVariables,this.sitemapVariables,this.extractVariables(routeTiddler));
 					$tw.utils.each(tiddlers,function(title) {
 						operations.push({
 							"route-type": "render",
-							path: self.resolvePathFilter(routeTiddler.fields["route-path-filter"],title),
+							path: self.resolveParameterisedPath(routeTiddler.fields["route-path"],title),
 							title: title,
 							template: routeTiddler.fields["route-template"],
 							variables: routeVariables
@@ -179,22 +179,48 @@ PublishingJob.prototype.getOperationsForRoute = function(routeTiddler) {
 };
 
 /*
-Apply a tiddler to a filter to create a usable path
+Apply a tiddler to a parameterised path to create a usable path
 */
-PublishingJob.prototype.resolvePathFilter = function(pathFilter,title) {
-	var tiddler = this.publisherHandler.wiki.getTiddler(title);
-	return this.publisherHandler.wiki.filterTiddlers(pathFilter,{
-		getVariable: function(name) {
-			switch(name) {
-				case "currentTiddler":
-					return "" + this.imageSource;
-				case "extension":
-					return "" + ($tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"] || {extension: ""}).extension;
-				default:
-					return $tw.rootWidget.getVariable(name);
+PublishingJob.prototype.resolveParameterisedPath = function(route,title) {
+	var self = this;
+	// Split the route on $$ markers
+	var tiddler = this.publisherHandler.wiki.getTiddler(title),
+		output = [];
+	$tw.utils.each(route.split(/(\$[a-z_]+\$)/),function(part) {
+		var match = part.match(/\$([a-z]+)_([a-z]+)\$/);
+		if(match) {
+			var value;
+			// Get the base value
+			switch(match[1]) {
+				case "uri":
+				case "title":
+					value = title;
+					break;
+				case "type":
+					value = tiddler.fields.type || "text/vnd.tiddlywiki";
+					break;
 			}
+			// Apply the encoding function
+			switch(match[2]) {
+				case "encoded":
+					value = encodeURIComponent(value);
+					break;
+				case "doubleencoded":
+					value = encodeURIComponent(encodeURIComponent(value));
+					break;
+				case "slugify":
+					value = self.publisherHandler.wiki.slugify(value);
+					break;
+				case "extension":
+					value = ($tw.config.contentTypeInfo[value] || {extension: "."}).extension.slice(1);
+					break;
+			}
+			output.push(value);
+		} else {
+			output.push(part);
 		}
-	},this.publisherHandler.wiki.makeTiddlerIterator([title]))[0];
+	});
+	return output.join("");
 };
 
 /*

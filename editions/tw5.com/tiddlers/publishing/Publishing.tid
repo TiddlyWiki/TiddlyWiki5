@@ -50,7 +50,7 @@ A ''route'' describes how a group of one or more files is to be created during t
 * ''caption'' -- human readable short name for the route
 * ''tags'' -- `$:/tags/Route`
 * ''route-tiddler-filter'' -- a filter defining the tiddlers included in the route
-* ''route-path-filter'' - a filter defining how the ''output path'' is derived from the field values of a particular tiddler
+* ''route-path'' - a parameterised path defining how the ''output path'' is derived from the field values of a particular tiddler
 * ''route-template'' -- optional title of a tiddler used as a template for "render" route types
 * ''route-type'' which can be set to "save" or "render":
 ** ''"save"'' indicates that the raw tiddler is to be saved, without any rendering
@@ -58,3 +58,12 @@ A ''route'' describes how a group of one or more files is to be created during t
 * ''var-&lt;variable-name&gt;'' -- custom variables to be provided to the output template
 
 The route tiddler filter is passed the tiddlers resulting from the job export filter. In order to respect the restrictions of the job export filter, route filters must be carefully constructed to ensure they pull their titles from the incoming list.
+
+Parameterised paths are strings which may contain optional tokens of the format `fieldname_functionname`. These tokens are replaced by the value of the specified field passed through the specified encoding function. The available encoding functions are:
+
+* ''encoded'' -- applies URI encoding to the value
+* ''doubleencoded'' -- applies double URI encoding to the value
+* ''slugify'' -- applies the [[slugify Operator]] to the value
+* ''extension'' -- interprets the value as a content type and returns the associated file extension
+
+For backwards compatibility, the field "uri" is accepted as a synonym for "title".

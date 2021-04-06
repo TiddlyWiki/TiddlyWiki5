@@ -2,5 +2,5 @@ title: $:/core/routes/StaticSite/Styles
 caption: Styles
 tags: $:/tags/Route
 route-type: render
-route-path-filter: static/static.css
+route-path: static/static.css
 route-template: $:/core/templates/static.template.css

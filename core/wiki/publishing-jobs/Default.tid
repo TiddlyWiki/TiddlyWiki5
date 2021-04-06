@@ -1,7 +1,7 @@
 title: $:/config/PublishingJobs/Default
 tags: $:/tags/PublishingJob
 caption: Demo static site
-publisher: jszip
+publisher: filesystem
 sitemap: $:/core/sitemaps/StaticSite
 jszip-output-filename: myzipfile.zip
 baseurl: https://example.com

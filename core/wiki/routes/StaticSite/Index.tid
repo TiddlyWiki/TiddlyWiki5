@@ -2,5 +2,5 @@ title: $:/core/routes/StaticSite/Index
 caption: Index
 tags: $:/tags/Route
 route-type: render
-route-path-filter: index.html
+route-path: index.html
 route-template: $:/core/save/all
