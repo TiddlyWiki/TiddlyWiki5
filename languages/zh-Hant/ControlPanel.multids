@@ -27,6 +27,12 @@ Basics/Tiddlers/Prompt: 一般條目數量
 Basics/Title/Prompt: 標題
 Basics/Username/Prompt: 編輯者署名
 Basics/Version/Prompt: ~TiddlyWiki 版本
+Client/Caption: 客戶端調整
+Client/Hint: 您可以在此處自定義客戶端的外觀。
+Client/Tiddloid/Caption: Tiddloid
+Client/Tiddloid/Hint: 這些設置適用於Tiddloid客戶端。
+Client/Tiddloid/ApplyTheme/Description: 將主題顏色應用於系統欄
+Client/Tiddloid/HideToolbar/Description: 加載完成後隱藏工具欄
 EditorTypes/Caption: 編輯器類型
 EditorTypes/Editor/Caption: 編輯器
 EditorTypes/Hint: 這些條目決定使用哪個編輯器來編輯特定條目類型。
