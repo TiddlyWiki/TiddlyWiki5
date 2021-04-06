@@ -27,6 +27,12 @@ Basics/Tiddlers/Prompt: Number of tiddlers
 Basics/Title/Prompt: Title of this ~TiddlyWiki
 Basics/Username/Prompt: Username for signing edits
 Basics/Version/Prompt: ~TiddlyWiki version
+Client/Caption: Client Tweaks
+Client/Hint: Here you can customize the appearance of your client.
+Client/Tiddloid/Caption: Tiddloid
+Client/Tiddloid/Hint: These settings apply to the Tiddloid client.
+Client/Tiddloid/ApplyTheme/Description: Apply theme color to system bars
+Client/Tiddloid/HideToolbar/Description: Hide toolbar on loading complete
 EditorTypes/Caption: Editor Types
 EditorTypes/Editor/Caption: Editor
 EditorTypes/Hint: These tiddlers determine which editor is used to edit specific tiddler types.
