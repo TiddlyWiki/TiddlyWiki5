@@ -27,6 +27,12 @@ Basics/Tiddlers/Prompt: 一般条目数量
 Basics/Title/Prompt: 标题
 Basics/Username/Prompt: 编辑者署名
 Basics/Version/Prompt: ~TiddlyWiki 版本
+Client/Caption: 客户端设置
+Client/Hint: 设置客户端程序的外观。
+Client/Tiddloid/Caption: Tiddloid
+Client/Tiddloid/Hint: 这此设置适用于Android Tiddloid客户端。
+Client/Tiddloid/ApplyTheme/Description: 应用主题色到系统栏
+Client/Tiddloid/HideToolbar/Description: 加载完成后隐藏标题栏
 EditorTypes/Caption: 编辑器类型
 EditorTypes/Editor/Caption: 编辑器
 EditorTypes/Hint: 这些条目决定使用哪个编辑器来编辑特定条目类型。
