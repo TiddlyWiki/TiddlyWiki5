@@ -1,0 +1,8 @@
+caption: sitemap
+created: 20210407121456100
+modified: 20210407121456100
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: sitemap
+type: text/vnd.tiddlywiki
+
+The optional [[web server configuration parameter|WebServer Parameters]] ''sitemap'' specifies the sitemap that determines how tiddlers are mapped to URLs. See [[Publishing]] for more details.

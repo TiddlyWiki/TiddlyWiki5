@@ -1538,5 +1538,24 @@ exports.slugify = function(title,options) {
 	return slug;
 };
 
+/*
+Return an array of the titles that would generate a specified slug, if any. Options include:
+*/
+exports.unslugify = function(slug) {
+	var self = this,
+		slugToTitle = this.getGlobalCache("slugs",function() {
+			var map = {};
+			$tw.utils.each($tw.wiki.allTitles(),function(title) {
+				var slug = self.slugify(title);
+				if(!(slug in map)) {
+					map[slug] = [];
+				}
+				map[slug].push(title);
+			});
+			return map;
+		});
+	return slugToTitle[slug];
+};
+
 })();
 

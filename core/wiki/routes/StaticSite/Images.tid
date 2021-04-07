@@ -1,6 +1,6 @@
 title: $:/core/routes/StaticSite/Images
 caption: Images
 tags: $:/tags/Route
-route-type: save
+route-type: raw
 route-path: images/$title_slugify$.$type_extension$
 route-tiddler-filter: [is[image]]

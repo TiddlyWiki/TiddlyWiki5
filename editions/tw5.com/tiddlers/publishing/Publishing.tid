@@ -52,8 +52,8 @@ A ''route'' describes how a group of one or more files is to be created during t
 * ''route-tiddler-filter'' -- a filter defining the tiddlers included in the route
 * ''route-path'' - a parameterised path defining how the ''output path'' is derived from the field values of a particular tiddler
 * ''route-template'' -- optional title of a tiddler used as a template for "render" route types
-* ''route-type'' which can be set to "save" or "render":
-** ''"save"'' indicates that the raw tiddler is to be saved, without any rendering
+* ''route-type'' which can be set to "raw" or "render":
+** ''"raw"'' indicates that the raw tiddler is to be saved, without any rendering
 ** ''"render"'' indicates that the tiddler is to be rendered through a specified template
 * ''var-&lt;variable-name&gt;'' -- custom variables to be provided to the output template
 

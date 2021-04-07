@@ -58,11 +58,19 @@ function Server(options) {
 		// console.log("Loading server route " + title);
 		self.addAuthenticator(authenticatorDefinition.AuthenticatorClass);
 	});
-	// Load route handlers
-	$tw.modules.forEachModuleOfType("route", function(title,routeDefinition) {
-		// console.log("Loading server route " + title);
-		self.addRoute(routeDefinition);
-	});
+	// Load route handlers from sitemap if present, or just load all route modules
+	if(this.variables.sitemap) {
+		this.sitemap = new $tw.Sitemap({
+			wiki: this.wiki,
+			variables: {}
+		});
+		this.sitemap.load(this.variables.sitemap);
+		this.addRoutes(this.sitemap.getServerRoutes());
+	} else {
+		$tw.modules.forEachModuleOfType("route", function(title,routeDefinition) {
+			self.addRoute(routeDefinition);
+		});
+	}
 	// Initialise the http vs https
 	this.listenOptions = null;
 	this.protocol = "http";
@@ -94,6 +102,13 @@ Server.prototype.defaultVariables = {
 
 Server.prototype.get = function(name) {
 	return this.variables[name];
+};
+
+Server.prototype.addRoutes = function(routes) {
+	var self = this;
+	$tw.utils.each(routes,function(route) {
+		self.addRoute(route);
+	});
 };
 
 Server.prototype.addRoute = function(route) {

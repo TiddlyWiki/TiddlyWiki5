@@ -54,15 +54,27 @@ exports.getFieldList = function(field) {
 /*
 Get all the fields as a hashmap of strings. Options:
 	exclude: an array of field names to exclude
+	prefix: an optional field name prefix. Only fields with the prefix are included, and the prefix is stripped from the name
 */
 exports.getFieldStrings = function(options) {
 	options = options || {};
-	var exclude = options.exclude || [];
-	var fields = {};
-	for(var field in this.fields) {
-		if($tw.utils.hop(this.fields,field)) {
-			if(exclude.indexOf(field) === -1) {
-				fields[field] = this.getFieldString(field);
+	var exclude = options.exclude || [],
+		fields = {},
+		field;
+	if(options.prefix) {
+		for(field in this.fields) {
+			if($tw.utils.hop(this.fields,field)) {
+				if(exclude.indexOf(field) === -1 && field.substring(0,options.prefix.length) === options.prefix) {
+					fields[field.substring(options.prefix.length)] = this.getFieldString(field);
+				}
+			}
+		}
+	} else {
+		for(field in this.fields) {
+			if($tw.utils.hop(this.fields,field)) {
+				if(exclude.indexOf(field) === -1) {
+					fields[field] = this.getFieldString(field);
+				}
 			}
 		}
 	}

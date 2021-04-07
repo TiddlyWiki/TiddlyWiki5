@@ -61,49 +61,41 @@ PublishingJob.prototype.publish = function(callback) {
 		// Get the list of tiddlers to be exported, defaulting to all non-system tiddlers
 		this.exportList = this.publisherHandler.wiki.filterTiddlers(this.jobTiddler.fields["export-filter"] || "[!is[system]]");
 		// Get the job variables
-		this.jobVariables = this.extractVariables(this.jobTiddler);
+		this.jobVariables = this.jobTiddler.getFieldStrings({prefix: "var-"});
 		// Get publisher
 		this.publisher = this.getPublisher(this.jobTiddler.fields.publisher);
 		if(this.publisher) {
 			// Get the sitemap
-			this.sitemap = this.publisherHandler.wiki.getTiddler(this.jobTiddler.fields.sitemap);
-			if(this.sitemap) {
-				// Get the sitemap variables
-				this.sitemapVariables = this.extractVariables(this.sitemap);
-				// Collect the operations from each route
-				this.operations = [];
-				$tw.utils.each(this.sitemap.fields.list,function(routeTitle) {
-					var routeTiddler = self.publisherHandler.wiki.getTiddler(routeTitle);
-					if(routeTiddler) {
-						Array.prototype.push.apply(self.operations,self.getOperationsForRoute(routeTiddler));
-					}
-				});
-				// Display the progress modal
-				if($tw.modal) {
-					self.progressModal = $tw.modal.display(PUBLISHING_MODAL_TITLE,{
-						progress: true,
-						variables: {
-							currentTiddler: this.jobTitle,
-							totalFiles: this.operations.length + ""
-						},
-						onclose: function(event) {
-							if(event !== self) {
-								// The modal was closed other than by us programmatically
-								self.isCancelled = true;
-							}
+			this.sitemap = new $tw.Sitemap({
+				wiki: this.publisherHandler.wiki,
+				variables: this.publishVariables
+			});
+			this.sitemap.load(this.jobTiddler.fields.sitemap);
+			// Get the output operations
+			this.operations = this.sitemap.getAllFileDetails(this.exportList);
+			// Display the progress modal
+			if($tw.modal) {
+				this.progressModal = $tw.modal.display(PUBLISHING_MODAL_TITLE,{
+					progress: true,
+					variables: {
+						currentTiddler: this.jobTitle,
+						totalFiles: this.operations.length + ""
+					},
+					onclose: function(event) {
+						if(event !== self) {
+							// The modal was closed other than by us programmatically
+							self.isCancelled = true;
 						}
-					});
-				}
-				// Send the operations to the publisher
-				this.executeOperations(function(err) {
-					if(self.progressModal) {
-						self.progressModal.closeHandler(self);
 					}
-					callback(err);
 				});
-			} else {
-				return callback("Missing sitemap");
 			}
+			// Send the operations to the publisher
+			this.executeOperations(function(err) {
+				if(self.progressModal) {
+					self.progressModal.closeHandler(self);
+				}
+				callback(err);
+			});
 		} else {
 			return callback("Unrecognised publisher");
 		}
@@ -123,104 +115,6 @@ PublishingJob.prototype.getPublisher = function(publisherName) {
 		}
 	});
 	return publisher && publisher.create(this.jobTiddler.fields,this.publisherHandler,this);
-};
-
-/*
-Extract the variables from tiddler fields prefixed "var-"
-*/
-PublishingJob.prototype.extractVariables = function(tiddler) {
-	var variables = {};
-	$tw.utils.each(tiddler.getFieldStrings(),function(value,name) {
-		if(name.substring(0,4) === "var-") {
-			variables[name.substring(4)] = value;
-		}
-	});
-	return variables;
-};
-
-/*
-Expand publish routes to separate operations
-*/
-PublishingJob.prototype.getOperationsForRoute = function(routeTiddler) {
-	var self = this,
-		operations = [],
-		routeFilter = routeTiddler.fields["route-tiddler-filter"] || "DUMMY_RESULT", // If no filter is provided, use a dummy filter that returns a single result
-		tiddlers = self.publisherHandler.wiki.filterTiddlers(routeFilter,null,self.publisherHandler.wiki.makeTiddlerIterator(this.exportList));
-	if(routeFilter) {
-		switch(routeTiddler.fields["route-type"]) {
-			case "save":
-				if(routeTiddler.fields["route-path"]) {
-					$tw.utils.each(tiddlers,function(title) {
-						operations.push({
-							"route-type": "save",
-							path: self.resolveParameterisedPath(routeTiddler.fields["route-path"],title),
-							title: title
-						});
-					});
-				}
-				break;
-			case "render":
-				if(routeTiddler.fields["route-path"] && routeTiddler.fields["route-template"]) {
-					var routeVariables = $tw.utils.extend({},this.publishVariables,this.jobVariables,this.sitemapVariables,this.extractVariables(routeTiddler));
-					$tw.utils.each(tiddlers,function(title) {
-						operations.push({
-							"route-type": "render",
-							path: self.resolveParameterisedPath(routeTiddler.fields["route-path"],title),
-							title: title,
-							template: routeTiddler.fields["route-template"],
-							variables: routeVariables
-						});
-					});
-				}
-				break;
-		}
-	}
-	return operations;
-};
-
-/*
-Apply a tiddler to a parameterised path to create a usable path
-*/
-PublishingJob.prototype.resolveParameterisedPath = function(route,title) {
-	var self = this;
-	// Split the route on $$ markers
-	var tiddler = this.publisherHandler.wiki.getTiddler(title),
-		output = [];
-	$tw.utils.each(route.split(/(\$[a-z_]+\$)/),function(part) {
-		var match = part.match(/\$([a-z]+)_([a-z]+)\$/);
-		if(match) {
-			var value;
-			// Get the base value
-			switch(match[1]) {
-				case "uri":
-				case "title":
-					value = title;
-					break;
-				case "type":
-					value = tiddler.fields.type || "text/vnd.tiddlywiki";
-					break;
-			}
-			// Apply the encoding function
-			switch(match[2]) {
-				case "encoded":
-					value = encodeURIComponent(value);
-					break;
-				case "doubleencoded":
-					value = encodeURIComponent(encodeURIComponent(value));
-					break;
-				case "slugify":
-					value = self.publisherHandler.wiki.slugify(value);
-					break;
-				case "extension":
-					value = ($tw.config.contentTypeInfo[value] || {extension: "."}).extension.slice(1);
-					break;
-			}
-			output.push(value);
-		} else {
-			output.push(part);
-		}
-	});
-	return output.join("");
 };
 
 /*
@@ -249,7 +143,7 @@ PublishingJob.prototype.executeOperations = function(callback) {
 				});
 			} else {
 				// Execute this operation
-				var fileDetails = self.prepareOperation(self.operations[nextOperation]);
+				var fileDetails = self.operations[nextOperation]();
 				nextOperation += 1;
 				self.publisher.publishFile(fileDetails,function() {
 					$tw.utils.nextTick(performNextOperation);
@@ -268,33 +162,6 @@ PublishingJob.prototype.executeOperations = function(callback) {
 		// Run the operations
 		performNextOperation();
 	});
-};
-
-/*
-Construct a file details object from an operation object
-*/
-PublishingJob.prototype.prepareOperation = function(operation) {
-	var tiddler = this.publisherHandler.wiki.getTiddler(operation.title),
-		fileDetails = {
-			path: operation.path
-		};
-	switch(operation["route-type"]) {
-		case "save":
-			fileDetails.text = tiddler.fields.text || "";
-			fileDetails.type = tiddler.fields.type || "";
-			fileDetails.isBase64 = ($tw.config.contentTypeInfo[tiddler.fields.type] || {}).encoding  === "base64";
-			break;
-		case "render":
-			fileDetails.text = this.publisherHandler.wiki.renderTiddler("text/plain",operation.template,{
-				variables: $tw.utils.extend(
-					{currentTiddler: operation.title},
-					operation.variables
-				)
-			});
-			fileDetails.type = "text/html";
-			break;
-	}
-	return fileDetails;
 };
 
 PublishingJob.prototype.saveReport = function(report) {
