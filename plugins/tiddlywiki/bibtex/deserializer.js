@@ -28,7 +28,8 @@ exports["application/x-bibtex"] = function(text,fields) {
 	}
 	if(typeof data === "string") {
 		return [{
-			title: "BibTeX import error: " + data,
+			title: "BibTeX import error",
+			text: data
 		}];
 	}
 	// Convert each entry

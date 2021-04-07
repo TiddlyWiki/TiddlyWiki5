@@ -515,6 +515,15 @@ exports.htmlEncode = function(s) {
 	}
 };
 
+// Converts like htmlEncode, but forgets the double quote for brevity
+exports.htmlTextEncode = function(s) {
+	if(s) {
+		return s.toString().replace(/&/mg,"&amp;").replace(/</mg,"&lt;").replace(/>/mg,"&gt;");
+	} else {
+		return "";
+	}
+};
+
 // Converts all HTML entities to their character equivalents
 exports.entityDecode = function(s) {
 	var converter = String.fromCodePoint || String.fromCharCode,

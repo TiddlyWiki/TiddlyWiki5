@@ -65,6 +65,9 @@ ViewWidget.prototype.execute = function() {
 		case "htmlencoded":
 			this.text = this.getValueAsHtmlEncoded();
 			break;
+		case "htmltextencoded":
+			this.text = this.getValueAsHtmlTextEncoded();
+			break;
 		case "urlencoded":
 			this.text = this.getValueAsUrlEncoded();
 			break;
@@ -158,6 +161,10 @@ ViewWidget.prototype.getValueAsHtmlEncodedPlainWikified = function(mode) {
 
 ViewWidget.prototype.getValueAsHtmlEncoded = function() {
 	return $tw.utils.htmlEncode(this.getValueAsText());
+};
+
+ViewWidget.prototype.getValueAsHtmlTextEncoded = function() {
+	return $tw.utils.htmlTextEncode(this.getValueAsText());
 };
 
 ViewWidget.prototype.getValueAsUrlEncoded = function() {
