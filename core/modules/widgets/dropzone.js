@@ -113,28 +113,24 @@ DropZoneWidget.prototype.handleDragEndEvent = function(event) {
 };
 
 DropZoneWidget.prototype.filterByMimeTypes = function(tiddlerFieldsArray) {
-	var filterFn,
-		filtered = [],
-		self = this,
-		checkMimeType = function(mimeType) {
-			return (self.mimeTypes.indexOf(mimeType) !== -1);
-		},
-		checkMimeTypePrefix = function(mimeType) {
-			return (mimeType.indexOf(self.mimeTypesPrefix) === 0);
-		};
+	var filteredTypes,
+		filtered =[],
+		types = [];
+	$tw.utils.each(tiddlerFieldsArray,function(tiddlerFields) {
+		types.push(tiddlerFields.type);
+	});
 
-	filterFn = this.mimeTypes.length ? checkMimeType : checkMimeTypePrefix;
-
-	for(var i=0; i<tiddlerFieldsArray.length; i++) {
-		if(filterFn(tiddlerFieldsArray[i].type)) {
-			filtered.push(tiddlerFieldsArray[i]);
+	filteredTypes = this.wiki.filterTiddlers(this.mimeTypesFilter,this,this.wiki.makeTiddlerIterator(types));
+	$tw.utils.each(tiddlerFieldsArray,function(tiddlerFields) {
+		if(filteredTypes.indexOf(tiddlerFields.type) !== -1) {
+			filtered.push(tiddlerFields);
 		}
-	}
+	});
 	return filtered;
 };
 
 DropZoneWidget.prototype.readFileCallback = function(tiddlerFieldsArray) {
-	if(this.mimeTypes.length || this.mimeTypesPrefix) {
+	if(this.mimeTypesFilter) {
 		tiddlerFieldsArray = this.filterByMimeTypes(tiddlerFieldsArray);
 	}
 	if(tiddlerFieldsArray.length) {
@@ -231,9 +227,7 @@ DropZoneWidget.prototype.execute = function() {
 	this.autoOpenOnImport = this.getAttribute("autoOpenOnImport");
 	this.importTitle = this.getAttribute("importTitle",IMPORT_TITLE);
 	this.actions = this.getAttribute("actions");
-	var mimeTypes = this.getAttribute("mimeTypes");
-	this.mimeTypes = mimeTypes ? mimeTypes.split(" ") : [];
-	this.mimeTypesPrefix = this.getAttribute("mimeTypesPrefix");
+	this.mimeTypesFilter = this.getAttribute("mimeTypesFilter");
 	// Make child widgets
 	this.makeChildWidgets();
 };
