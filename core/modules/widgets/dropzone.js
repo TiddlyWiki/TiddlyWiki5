@@ -237,7 +237,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DropZoneWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.enable || changedAttributes.autoOpenOnImport || changedAttributes.importTitle || changedAttributes.deserializer || changedAttributes.class) {
+	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
 		return true;
 	}
