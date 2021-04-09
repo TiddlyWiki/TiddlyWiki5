@@ -12,6 +12,8 @@ Dropzone widget
 /*global $tw: false */
 "use strict";
 
+var IMPORT_TITLE = "$:/Import";
+
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var DropZoneWidget = function(parseTreeNode,options) {
@@ -110,13 +112,43 @@ DropZoneWidget.prototype.handleDragEndEvent = function(event) {
 	$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
 };
 
+DropZoneWidget.prototype.filterByMimeTypes = function(tiddlerFieldsArray) {
+	var filterFn,
+		filtered = [],
+		self = this,
+		checkMimeType = function(mimeType) {
+			return (self.mimeTypes.indexOf(mimeType) !== -1);
+		},
+		checkMimeTypePrefix = function(mimeType) {
+			return (mimeType.indexOf(self.mimeTypesPrefix) === 0);
+		};
+
+	filterFn = this.mimeTypes.length ? checkMimeType : checkMimeTypePrefix;
+
+	for(var i=0; i<tiddlerFieldsArray.length; i++) {
+		if(filterFn(tiddlerFieldsArray[i].type)) {
+			filtered.push(tiddlerFieldsArray[i]);
+		}
+	}
+	return filtered;
+};
+
+DropZoneWidget.prototype.readFileCallback = function(tiddlerFieldsArray) {
+	if(this.mimeTypes.length || this.mimeTypesPrefix) {
+		tiddlerFieldsArray = this.filterByMimeTypes(tiddlerFieldsArray);
+	}
+	if(tiddlerFieldsArray.length) {
+		this.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray), autoOpenOnImport: this.autoOpenOnImport, importTitle: this.importTitle});
+		if(this.actions) {
+			this.invokeActionString(this.actions,this,event,{importTitle: this.importTitle});
+		}
+	}
+};
+
 DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	var self = this,
 		readFileCallback = function(tiddlerFieldsArray) {
-			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray), autoOpenOnImport: self.autoOpenOnImport, importTitle: self.importTitle});
-			if(self.actions) {
-				self.invokeActionString(self.actions,self,event,{importTitle: self.importTitle});
-			}
+			self.readFileCallback(tiddlerFieldsArray);
 		};
 	this.leaveDrag(event);
 	// Check for being over a TEXTAREA or INPUT
@@ -152,10 +184,7 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 	var self = this,
 		readFileCallback = function(tiddlerFieldsArray) {
-			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray), autoOpenOnImport: self.autoOpenOnImport, importTitle: self.importTitle});
-			if(self.actions) {
-				self.invokeActionString(self.actions,self,event,{importTitle: self.importTitle});
-			}
+			self.readFileCallback(tiddlerFieldsArray);
 		};
 	// Let the browser handle it if we're in a textarea or input box
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) == -1 && !event.target.isContentEditable) {
@@ -182,7 +211,7 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 					if($tw.log.IMPORT) {
 						console.log("Importing string '" + str + "', type: '" + type + "'");
 					}
-					self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify([tiddlerFields]), autoOpenOnImport: self.autoOpenOnImport, importTitle: self.importTitle});
+					readFileCallback([tiddlerFields]);
 				});
 			}
 		}
@@ -200,8 +229,11 @@ DropZoneWidget.prototype.execute = function() {
 	this.dropzoneDeserializer = this.getAttribute("deserializer");
 	this.dropzoneEnable = (this.getAttribute("enable") || "yes") === "yes";
 	this.autoOpenOnImport = this.getAttribute("autoOpenOnImport");
-	this.importTitle = this.getAttribute("importTitle","$:/Import");
+	this.importTitle = this.getAttribute("importTitle",IMPORT_TITLE);
 	this.actions = this.getAttribute("actions");
+	var mimeTypes = this.getAttribute("mimeTypes");
+	this.mimeTypes = mimeTypes ? mimeTypes.split(" ") : [];
+	this.mimeTypesPrefix = this.getAttribute("mimeTypesPrefix");
 	// Make child widgets
 	this.makeChildWidgets();
 };
