@@ -1,6 +1,6 @@
 caption: dropzone
 created: 20131024141900000
-modified: 20200403103224328
+modified: 20210410062410660
 tags: Widgets
 title: DropzoneWidget
 type: text/vnd.tiddlywiki
@@ -16,9 +16,13 @@ It sends a [[WidgetMessage: tm-import-tiddlers]] carrying a JSON representation 
 |!Attribute |!Description |
 |deserializer |<<.from-version "5.1.15">> Optional name of deserializer to be used (by default the deserializer is derived from the file extension) |
 |enable |<<.from-version "5.1.22">> Optional value "no" to disable the dropzone functionality (defaults to "yes") |
-|class |<<.from-version "5.1.22">> Optional CSS class to be assigned to the dropzone (defaults to "tc-drag-over") |
+|class |<<.from-version "5.1.22">> Optional CSS class to be assigned to the DOM node created by the dropzone (defaults to "tc-dropzone") |
 |autoOpenOnImport |<<.from-version "5.1.23">> Optional value "no" or "yes" that can override tv-auto-open-on-import |
-|importTitle|<<.from-version "5.1.23">> optional tiddler title to use for import process instead of ~$:/Import |
+|importTitle|<<.from-version "5.1.23">> Optional tiddler title to use for import process instead of ~$:/Import |
+|actions|<<.from-version "5.1.24">> Optional actions string to be invoked after the `tm-import-tiddlers` message has been sent. The variable `importTitle` provides the title of the tiddler used for the import process. |
+|contentTypesFilter |<<.from-version "5.1.24">> Optional filter that specifies the [[content types|ContentType]] accepted by the dropzone. |
+
+<<.tip """Use the `prefix` filter operator to easily accept multiple related content types. For example this filter will accept all image content types: `[prefix[image/]]`""">>
 
 The list of available deserializers can be inspected by executing `Object.keys($tw.Wiki.tiddlerDeserializerModules).sort().join("\n")` in the browser JavaScript console.
 

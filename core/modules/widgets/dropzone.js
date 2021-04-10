@@ -112,14 +112,14 @@ DropZoneWidget.prototype.handleDragEndEvent = function(event) {
 	$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
 };
 
-DropZoneWidget.prototype.filterByMimeTypes = function(tiddlerFieldsArray) {
+DropZoneWidget.prototype.filterByContentTypes = function(tiddlerFieldsArray) {
 	var filteredTypes,
 		filtered = [],
 		types = [];
 	$tw.utils.each(tiddlerFieldsArray,function(tiddlerFields) {
 		types.push(tiddlerFields.type);
 	});
-	filteredTypes = this.wiki.filterTiddlers(this.mimeTypesFilter,this,this.wiki.makeTiddlerIterator(types));
+	filteredTypes = this.wiki.filterTiddlers(this.contentTypesFilter,this,this.wiki.makeTiddlerIterator(types));
 	$tw.utils.each(tiddlerFieldsArray,function(tiddlerFields) {
 		if(filteredTypes.indexOf(tiddlerFields.type) !== -1) {
 			filtered.push(tiddlerFields);
@@ -129,8 +129,8 @@ DropZoneWidget.prototype.filterByMimeTypes = function(tiddlerFieldsArray) {
 };
 
 DropZoneWidget.prototype.readFileCallback = function(tiddlerFieldsArray) {
-	if(this.mimeTypesFilter) {
-		tiddlerFieldsArray = this.filterByMimeTypes(tiddlerFieldsArray);
+	if(this.contentTypesFilter) {
+		tiddlerFieldsArray = this.filterByContentTypes(tiddlerFieldsArray);
 	}
 	if(tiddlerFieldsArray.length) {
 		this.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray), autoOpenOnImport: this.autoOpenOnImport, importTitle: this.importTitle});
@@ -226,7 +226,7 @@ DropZoneWidget.prototype.execute = function() {
 	this.autoOpenOnImport = this.getAttribute("autoOpenOnImport");
 	this.importTitle = this.getAttribute("importTitle",IMPORT_TITLE);
 	this.actions = this.getAttribute("actions");
-	this.mimeTypesFilter = this.getAttribute("mimeTypesFilter");
+	this.contentTypesFilter = this.getAttribute("contentTypesFilter");
 	// Make child widgets
 	this.makeChildWidgets();
 };
