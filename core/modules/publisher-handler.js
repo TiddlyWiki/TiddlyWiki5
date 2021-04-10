@@ -60,17 +60,15 @@ PublishingJob.prototype.publish = function(callback) {
 	if(this.jobTiddler && this.jobTiddler.fields.enabled === "yes") {
 		// Get the list of tiddlers to be exported, defaulting to all non-system tiddlers
 		this.exportList = this.publisherHandler.wiki.filterTiddlers(this.jobTiddler.fields["export-filter"] || "[!is[system]]");
-		// Get the job variables
-		this.jobVariables = this.jobTiddler.getFieldStrings({prefix: "var-"});
 		// Get publisher
 		this.publisher = this.getPublisher(this.jobTiddler.fields.publisher);
 		if(this.publisher) {
 			// Get the sitemap
-			this.sitemap = new $tw.Sitemap({
+			this.sitemap = new $tw.Sitemap(this.jobTiddler.fields.sitemap,{
 				wiki: this.publisherHandler.wiki,
 				variables: this.publishVariables
 			});
-			this.sitemap.load(this.jobTiddler.fields.sitemap);
+			this.sitemap.load();
 			// Get the output operations
 			this.operations = this.sitemap.getAllFileDetails(this.exportList);
 			// Display the progress modal

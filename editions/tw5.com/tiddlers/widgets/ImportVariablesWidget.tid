@@ -1,6 +1,6 @@
 caption: importvariables
 created: 20140612142500000
-modified: 20180928150043777
+modified: 20210410110618869
 tags: Widgets
 title: ImportVariablesWidget
 type: text/vnd.tiddlywiki
@@ -21,6 +21,7 @@ The content of the importvariables widget is the scope within which the imported
 
 |!Attribute |!Description |
 |filter |[[Tiddler filter|Filters]] defining the tiddlers from which macro definitions will be imported |
+|tiddler |<<.from-version "5.1.24">> Optional title of a single tiddler from which macro definitions will be imported (only used if the ''filter'' attribute is missing or blank) |
 
 ! Global Macros
 

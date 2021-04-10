@@ -33,7 +33,7 @@ A ''publishing job'' describes a self-contained publishing operation. Jobs are d
 * ''publisher'' -- the name of the publisher module to be used
 * ''&lt;publisher-name&gt;-&lt;parameter-name&gt;'' -- parameters required by the publisher module
 * ''sitemap'' -- title of the site map tiddler to be used
-* ''var-&lt;variable-name&gt;'' -- custom variables to be provided to the output templates
+* ''text'' -- optional variable/macro definitions as sequential `\define` pragmas or nested `<$set>` widgets (the same format as global macros)
 
 A ''site map'' describes the layout and types of files in a publishing job. Site maps are defined as configuration tiddlers with the following fields:
 
@@ -42,7 +42,7 @@ A ''site map'' describes the layout and types of files in a publishing job. Site
 * ''description'' -- longer human readable description for the sitemap
 * ''tags'' -- `$:/tags/SiteMap`
 * ''list'' -- list of titles of routes making up this sitemap
-* ''var-&lt;variable-name&gt;'' -- custom variables to be provided to the output templates
+* ''text'' -- optional variable/macro definitions as sequential `\define` pragmas or nested `<$set>` widgets (the same format as global macros)
 
 A ''route'' describes how a group of one or more files is to be created during the export. Routes are defined as configuration tiddlers with the following fields:
 
@@ -55,7 +55,7 @@ A ''route'' describes how a group of one or more files is to be created during t
 * ''route-type'' which can be set to "raw" or "render":
 ** ''"raw"'' indicates that the raw tiddler is to be saved, without any rendering
 ** ''"render"'' indicates that the tiddler is to be rendered through a specified template
-* ''var-&lt;variable-name&gt;'' -- custom variables to be provided to the output template
+* ''text'' -- optional variable/macro definitions as sequential `\define` pragmas or nested `<$set>` widgets (the same format as global macros)
 
 The route tiddler filter is passed the tiddlers resulting from the job export filter. In order to respect the restrictions of the job export filter, route filters must be carefully constructed to ensure they pull their titles from the incoming list.
 

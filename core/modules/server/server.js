@@ -58,34 +58,8 @@ function Server(options) {
 		// console.log("Loading server route " + title);
 		self.addAuthenticator(authenticatorDefinition.AuthenticatorClass);
 	});
-	// Load route handlers from sitemap if present, or just load all route modules
-	if(this.variables.sitemap) {
-		this.sitemap = new $tw.Sitemap({
-			wiki: this.wiki,
-			variables: {}
-		});
-		this.sitemap.load(this.variables.sitemap);
-		$tw.utils.each(this.sitemap.getServerRoutes(),function(routeInfo) {
-			self.addRoute({
-				method: "GET",
-				path: routeInfo.regexp,
-				handler: function(request,response,state) {
-					var fileDetails = routeInfo.handler(state.params);
-					if(fileDetails) {
-						response.writeHead(200, {"Content-Type": fileDetails.type});
-						response.end(fileDetails.text,fileDetails.isBase64 ? "base64" : "utf8");
-					} else {
-						response.writeHead(404);
-						response.end();
-					}
-				}
-			});
-		});
-	} else {
-		$tw.modules.forEachModuleOfType("route",function(title,routeDefinition) {
-			self.addRoute(routeDefinition);
-		});
-	}
+	// Load route handlers
+	this.addRouteHandlers();
 	// Initialise the http vs https
 	this.listenOptions = null;
 	this.protocol = "http";
@@ -132,6 +106,38 @@ Server.prototype.addAuthenticator = function(AuthenticatorClass) {
 	} else if(result) {
 		// Only use the authenticator if it initialised successfully
 		this.authenticators.push(authenticator);
+	}
+};
+
+Server.prototype.addRouteHandlers = function() {
+	var self = this;
+	// Load route handlers from sitemap if present, or just load all route modules
+	if(this.variables.sitemap) {
+		this.sitemap = new $tw.Sitemap(this.variables.sitemap,{
+			wiki: this.wiki,
+			variables: {}
+		});
+		this.sitemap.load();
+		$tw.utils.each(this.sitemap.getServerRoutes(),function(routeInfo) {
+			self.addRoute({
+				method: "GET",
+				path: routeInfo.regexp,
+				handler: function(request,response,state) {
+					var fileDetails = routeInfo.handler(state.params);
+					if(fileDetails) {
+						response.writeHead(200, {"Content-Type": fileDetails.type});
+						response.end(fileDetails.text,fileDetails.isBase64 ? "base64" : "utf8");
+					} else {
+						response.writeHead(404);
+						response.end();
+					}
+				}
+			});
+		});
+	} else {
+		$tw.modules.forEachModuleOfType("route",function(title,routeDefinition) {
+			self.addRoute(routeDefinition);
+		});
 	}
 };
 

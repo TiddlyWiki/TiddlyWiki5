@@ -12,8 +12,9 @@ Sitemaps are used for static publishing and web serving
 /*global $tw: false */
 "use strict";
 
-function Sitemap(options) {
+function Sitemap(sitemapTitle,options) {
     options = options || {};
+    this.sitemapTitle = sitemapTitle;
     this.wiki = options.wiki;
     this.routes = [];
     this.variables = $tw.utils.extend({},options.variables);
@@ -22,11 +23,8 @@ function Sitemap(options) {
 Sitemap.prototype.load = function(sitemapTitle) {
     var self = this;
     // Get the sitemap
-    var sitemapTiddler = this.wiki.getTiddler(sitemapTitle);
+    var sitemapTiddler = this.wiki.getTiddler(this.sitemapTitle);
     if(sitemapTiddler) {
-        // Get the sitemap variables
-        $tw.utils.extend(this.variables,sitemapTiddler.getFieldStrings({prefix: "var-"}));
-        console.log("sitemap variables",this.variables)
         // Collect each route
         $tw.utils.each(sitemapTiddler.fields.list,function(routeTitle) {
             var routeTiddler = self.wiki.getTiddler(routeTitle);
@@ -34,6 +32,7 @@ Sitemap.prototype.load = function(sitemapTitle) {
                 // Convert the path into a regexp and an array of {field:,function:} for each capture group
                 var regexpurgatedParameterisedPath = self.regexpurgateParameterisedPath(routeTiddler.fields["route-path"]);
                 self.routes.push({
+                    title: routeTitle,
                     params: routeTiddler.getFieldStrings({prefix: "route-"}),
                     variables: routeTiddler.getFieldStrings({prefix: "var-"}),
                     regexp: regexpurgatedParameterisedPath.regexp,
@@ -42,7 +41,6 @@ Sitemap.prototype.load = function(sitemapTitle) {
             }
         });
     }
-    console.log("routes",self.routes)
 };
 
 Sitemap.prototype.renderRoute = function(title,route) {
@@ -57,12 +55,45 @@ Sitemap.prototype.renderRoute = function(title,route) {
             };
             break;
         case "render":
-            var text = this.wiki.renderTiddler("text/plain",route.params.template,{
-                    variables: $tw.utils.extend({},this.variables,route.variables,{currentTiddler: title})
-                });
+            var parser = {
+                    tree: [
+                        {
+                            "type": "importvariables",
+                            "attributes": {
+                                "tiddler": {
+                                    "name": "tiddler",
+                                    "type": "string",
+                                    "value": this.sitemapTitle,
+                                }
+                            },
+                            "tag": "$importvariables",
+                            "isBlock": false,
+                            "children": [
+                                {
+                                    "type": "importvariables",
+                                    "attributes": {
+                                        "tiddler": {
+                                            "name": "tiddler",
+                                            "type": "string",
+                                            "value": route.title,
+                                        }
+                                    },
+                                    "tag": "$importvariables",
+                                    "isBlock": false,
+                                    "children": this.wiki.parseTiddler(route.params.template,{parseAsInline: true}).tree
+                                }
+                            ]
+                        }
+                    ]
+                },
+                widgetNode = this.wiki.makeWidget(parser,{
+                    variables: $tw.utils.extend({},this.variables,{currentTiddler: title})
+                }),
+                container = $tw.fakeDocument.createElement("div");
+            widgetNode.render(container,null);
             return {
                 path: this.resolveParameterisedPath(route.params.path,title),
-                text: text,
+                text: container.textContent,
                 type: route.params["output-type"] || "text/html"
             };
             break;
@@ -112,6 +143,16 @@ Sitemap.prototype.getServerRoutes = function() {
                         }
                     }
                 })
+                // Check that the tiddler passes the route filter
+                if(route.params["tiddler-filter"]) {
+                    if(!title) {
+                        return null;
+                    }
+                    var routeTiddlers = self.wiki.filterTiddlers(route.params["tiddler-filter"],null,self.wiki.makeTiddlerIterator([title]));
+                    if(routeTiddlers.indexOf(title) === -1) {
+                        return null;
+                    }
+                }
                 // Return the rendering or raw tiddler
                 return self.renderRoute(title,route);
             }
