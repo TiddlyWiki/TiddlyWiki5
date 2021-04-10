@@ -16,7 +16,7 @@ var zlib = require("zlib");
 
 exports.method = "GET";
 
-exports.path = /^\/$/;
+exports.path = /^\/index.html$/;
 
 exports.handler = function(request,response,state) {
 	var acceptEncoding = request.headers["accept-encoding"];

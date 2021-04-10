@@ -127,11 +127,11 @@ Server.prototype.addAuthenticator = function(AuthenticatorClass) {
 	}
 };
 
-Server.prototype.findMatchingRoute = function(request,state) {
+Server.prototype.findMatchingRoute = function(request,state,options) {
+	options = options || {};
 	for(var t=0; t<this.routes.length; t++) {
 		var potentialRoute = this.routes[t],
-			pathRegExp = potentialRoute.path,
-			pathname = state.urlInfo.pathname,
+			pathname = options.pathname || state.urlInfo.pathname,
 			match;
 		if(state.pathPrefix) {
 			if(pathname.substr(0,state.pathPrefix.length) === state.pathPrefix) {
@@ -207,6 +207,15 @@ Server.prototype.requestHandler = function(request,response,options) {
 	}
 	// Find the route that matches this path
 	var route = self.findMatchingRoute(request,state);
+	if(!route) {
+		// Try with the default document
+		var defaultDocumentPathname = state.urlInfo.pathname;
+		if(defaultDocumentPathname.substr(-1) !== "/") {
+			defaultDocumentPathname = defaultDocumentPathname + "/";
+		}
+		defaultDocumentPathname = defaultDocumentPathname + "index.html";
+		route = self.findMatchingRoute(request,state,{pathname: defaultDocumentPathname});
+	}
 	// Optionally output debug info
 	if(self.get("debug-level") !== "none") {
 		console.log("Request path:",JSON.stringify(state.urlInfo));
