@@ -26,6 +26,7 @@ Sitemap.prototype.load = function(sitemapTitle) {
     if(sitemapTiddler) {
         // Get the sitemap variables
         $tw.utils.extend(this.variables,sitemapTiddler.getFieldStrings({prefix: "var-"}));
+        console.log("sitemap variables",this.variables)
         // Collect each route
         $tw.utils.each(sitemapTiddler.fields.list,function(routeTitle) {
             var routeTiddler = self.wiki.getTiddler(routeTitle);
@@ -34,7 +35,7 @@ Sitemap.prototype.load = function(sitemapTitle) {
                 var regexpurgatedParameterisedPath = self.regexpurgateParameterisedPath(routeTiddler.fields["route-path"]);
                 self.routes.push({
                     params: routeTiddler.getFieldStrings({prefix: "route-"}),
-                    variables: $tw.utils.extend({},self.variables,routeTiddler.getFieldStrings({prefix: "var-"})),
+                    variables: routeTiddler.getFieldStrings({prefix: "var-"}),
                     regexp: regexpurgatedParameterisedPath.regexp,
                     captureGroups: regexpurgatedParameterisedPath.captureGroups
                 });
@@ -42,6 +43,30 @@ Sitemap.prototype.load = function(sitemapTitle) {
         });
     }
     console.log("routes",self.routes)
+};
+
+Sitemap.prototype.renderRoute = function(title,route) {
+    var tiddler = this.wiki.getTiddler(title);
+    switch(route.params.type) {
+        case "raw":
+            return {
+                path: this.resolveParameterisedPath(route.params.path,title),
+                text: tiddler.fields.text || "",
+                type: tiddler.fields.type || "",
+                isBase64: ($tw.config.contentTypeInfo[tiddler.fields.type] || {}).encoding  === "base64"
+            };
+            break;
+        case "render":
+            var text = this.wiki.renderTiddler("text/plain",route.params.template,{
+                    variables: $tw.utils.extend({},this.variables,route.variables,{currentTiddler: title})
+                });
+            return {
+                path: this.resolveParameterisedPath(route.params.path,title),
+                text: text,
+                type: route.params["output-type"] || "text/html"
+            };
+            break;
+    }
 };
 
 /*
@@ -53,40 +78,9 @@ Sitemap.prototype.getAllFileDetails = function(exportTiddlers) {
     $tw.utils.each(this.routes,function(route) {
         var routeFilter = route.params["tiddler-filter"] || "DUMMY_RESULT", // If no filter is provided, use a dummy  filter that returns a single result
             routeTiddlers = self.wiki.filterTiddlers(routeFilter,null,self.wiki.makeTiddlerIterator(exportTiddlers));
-        switch(route.params.type) {
-            case "raw":
-                $tw.utils.each(routeTiddlers,function(title) {
-                    output.push(function() {
-                        var tiddler = self.wiki.getTiddler(title);
-                        return {
-                            path: self.resolveParameterisedPath(route.params.path,title),
-                            text: tiddler.fields.text || "",
-                            type: tiddler.fields.type || "",
-                            isBase64: ($tw.config.contentTypeInfo[tiddler.fields.type] || {}).encoding  === "base64"
-                        };
-                    });
-                });
-                break;
-            case "render":
-                $tw.utils.each(routeTiddlers,function(title) {
-                    output.push(function() {
-                        var tiddler = self.wiki.getTiddler(title),
-                            text = self.wiki.renderTiddler("text/plain",route.params.template,{
-                                variables: $tw.utils.extend(
-                                    {currentTiddler: title},
-                                    $tw.utils.extend({},self.variables,route.variables)
-                                )
-                            });
-                        return {
-                            path: self.resolveParameterisedPath(route.params.path,title),
-                            text: text,
-                            type: route.params["output-type"] || "text/html",
-                            isBase64: tiddler && (($tw.config.contentTypeInfo[tiddler.fields.type] || {}).encoding  === "base64")
-                        };
-                    });
-                });
-                break;
-        }
+        $tw.utils.each(routeTiddlers,function(title) {
+            output.push(self.renderRoute.bind(self,title,route));
+        });
     });
     return output;
 };
@@ -124,7 +118,7 @@ Sitemap.prototype.getServerRoutes = function() {
                     case "render":
                         response.writeHead(200,{"Content-Type": route.params["output-type"] || "text/html"});
                         response.end(self.wiki.renderTiddler("text/plain",route.params.template,{
-                            variables: {currentTiddler: title}
+                            variables: $tw.utils.extend({},self.variables,route.variables,{currentTiddler: title})
                         }));
                         break;
                     case "raw":
