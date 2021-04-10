@@ -114,12 +114,11 @@ DropZoneWidget.prototype.handleDragEndEvent = function(event) {
 
 DropZoneWidget.prototype.filterByMimeTypes = function(tiddlerFieldsArray) {
 	var filteredTypes,
-		filtered =[],
+		filtered = [],
 		types = [];
 	$tw.utils.each(tiddlerFieldsArray,function(tiddlerFields) {
 		types.push(tiddlerFields.type);
 	});
-
 	filteredTypes = this.wiki.filterTiddlers(this.mimeTypesFilter,this,this.wiki.makeTiddlerIterator(types));
 	$tw.utils.each(tiddlerFieldsArray,function(tiddlerFields) {
 		if(filteredTypes.indexOf(tiddlerFields.type) !== -1) {
