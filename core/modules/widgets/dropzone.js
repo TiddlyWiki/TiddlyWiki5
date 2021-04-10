@@ -12,6 +12,8 @@ Dropzone widget
 /*global $tw: false */
 "use strict";
 
+var IMPORT_TITLE = "$:/Import";
+
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var DropZoneWidget = function(parseTreeNode,options) {
@@ -110,10 +112,38 @@ DropZoneWidget.prototype.handleDragEndEvent = function(event) {
 	$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
 };
 
+DropZoneWidget.prototype.filterByContentTypes = function(tiddlerFieldsArray) {
+	var filteredTypes,
+		filtered = [],
+		types = [];
+	$tw.utils.each(tiddlerFieldsArray,function(tiddlerFields) {
+		types.push(tiddlerFields.type);
+	});
+	filteredTypes = this.wiki.filterTiddlers(this.contentTypesFilter,this,this.wiki.makeTiddlerIterator(types));
+	$tw.utils.each(tiddlerFieldsArray,function(tiddlerFields) {
+		if(filteredTypes.indexOf(tiddlerFields.type) !== -1) {
+			filtered.push(tiddlerFields);
+		}
+	});
+	return filtered;
+};
+
+DropZoneWidget.prototype.readFileCallback = function(tiddlerFieldsArray) {
+	if(this.contentTypesFilter) {
+		tiddlerFieldsArray = this.filterByContentTypes(tiddlerFieldsArray);
+	}
+	if(tiddlerFieldsArray.length) {
+		this.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray), autoOpenOnImport: this.autoOpenOnImport, importTitle: this.importTitle});
+		if(this.actions) {
+			this.invokeActionString(this.actions,this,event,{importTitle: this.importTitle});
+		}
+	}
+};
+
 DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	var self = this,
 		readFileCallback = function(tiddlerFieldsArray) {
-			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray), autoOpenOnImport: self.autoOpenOnImport, importTitle: self.importTitle});
+			self.readFileCallback(tiddlerFieldsArray);
 		};
 	this.leaveDrag(event);
 	// Check for being over a TEXTAREA or INPUT
@@ -149,7 +179,7 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 	var self = this,
 		readFileCallback = function(tiddlerFieldsArray) {
-			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray), autoOpenOnImport: self.autoOpenOnImport, importTitle: self.importTitle});
+			self.readFileCallback(tiddlerFieldsArray);
 		};
 	// Let the browser handle it if we're in a textarea or input box
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) == -1 && !event.target.isContentEditable) {
@@ -176,7 +206,7 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 					if($tw.log.IMPORT) {
 						console.log("Importing string '" + str + "', type: '" + type + "'");
 					}
-					self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify([tiddlerFields]), autoOpenOnImport: self.autoOpenOnImport, importTitle: self.importTitle});
+					readFileCallback([tiddlerFields]);
 				});
 			}
 		}
@@ -194,7 +224,9 @@ DropZoneWidget.prototype.execute = function() {
 	this.dropzoneDeserializer = this.getAttribute("deserializer");
 	this.dropzoneEnable = (this.getAttribute("enable") || "yes") === "yes";
 	this.autoOpenOnImport = this.getAttribute("autoOpenOnImport");
-	this.importTitle = this.getAttribute("importTitle");
+	this.importTitle = this.getAttribute("importTitle",IMPORT_TITLE);
+	this.actions = this.getAttribute("actions");
+	this.contentTypesFilter = this.getAttribute("contentTypesFilter");
 	// Make child widgets
 	this.makeChildWidgets();
 };
@@ -204,7 +236,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DropZoneWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.enable || changedAttributes.autoOpenOnImport || changedAttributes.importTitle || changedAttributes.deserializer || changedAttributes.class) {
+	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
 		return true;
 	}
