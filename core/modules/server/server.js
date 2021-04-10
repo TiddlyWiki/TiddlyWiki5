@@ -65,9 +65,24 @@ function Server(options) {
 			variables: {}
 		});
 		this.sitemap.load(this.variables.sitemap);
-		this.addRoutes(this.sitemap.getServerRoutes());
+		$tw.utils.each(this.sitemap.getServerRoutes(),function(routeInfo) {
+			self.addRoute({
+				method: "GET",
+				path: routeInfo.regexp,
+				handler: function(request,response,state) {
+					var fileDetails = routeInfo.handler(state.params);
+					if(fileDetails) {
+						response.writeHead(200, {"Content-Type": fileDetails.type});
+						response.end(fileDetails.text,fileDetails.isBase64 ? "base64" : "utf8");
+					} else {
+						response.writeHead(404);
+						response.end();
+					}
+				}
+			});
+		});
 	} else {
-		$tw.modules.forEachModuleOfType("route", function(title,routeDefinition) {
+		$tw.modules.forEachModuleOfType("route",function(title,routeDefinition) {
 			self.addRoute(routeDefinition);
 		});
 	}
@@ -102,13 +117,6 @@ Server.prototype.defaultVariables = {
 
 Server.prototype.get = function(name) {
 	return this.variables[name];
-};
-
-Server.prototype.addRoutes = function(routes) {
-	var self = this;
-	$tw.utils.each(routes,function(route) {
-		self.addRoute(route);
-	});
 };
 
 Server.prototype.addRoute = function(route) {

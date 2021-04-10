@@ -87,21 +87,20 @@ Sitemap.prototype.getAllFileDetails = function(exportTiddlers) {
 
 
 /*
-Returns an array of server routes {method:, path:, handler:}
+Returns an array of server routes {regexp:, handler:}
 */
 Sitemap.prototype.getServerRoutes = function() {
     var self = this,
         output = [];
     $tw.utils.each(this.routes,function(route) {
         output.push({
-            method: "GET",
-            path: route.regexp,
-            handler: function(request,response,state) {
+            regexp: route.regexp,
+            handler: function(params) {
                 // Locate the tiddler identified by the capture groups, if any
                 var title = null,
                     nextParam = 0;
                 $tw.utils.each(route.captureGroups,function(captureGroup) {
-                    var param = state.params[nextParam++];
+                    var param = params[nextParam++];
                     if(captureGroup.field === "title") {
                         switch(captureGroup.function) {
                             case "slugify":
@@ -114,24 +113,7 @@ Sitemap.prototype.getServerRoutes = function() {
                     }
                 })
                 // Return the rendering or raw tiddler
-                switch(route.params.type) {
-                    case "render":
-                        response.writeHead(200,{"Content-Type": route.params["output-type"] || "text/html"});
-                        response.end(self.wiki.renderTiddler("text/plain",route.params.template,{
-                            variables: $tw.utils.extend({},self.variables,route.variables,{currentTiddler: title})
-                        }));
-                        break;
-                    case "raw":
-                        var tiddler = title && self.wiki.getTiddler(title);
-                        if(tiddler) {
-                            response.writeHead(200, {"Content-Type": tiddler.fields.type || "text/vnd.tiddlywiki"});
-                            response.end(self.wiki.getTiddlerText(title),($tw.config.contentTypeInfo[tiddler.fields.type] || {encoding: "utf8"}).encoding);
-                        } else {
-                            response.writeHead(404);
-                            response.end();
-                        }
-                        break;
-                }
+                return self.renderRoute(title,route);
             }
         });
     });
