@@ -1,0 +1,13 @@
+created: 20210411100148461
+modified: 20210411100148461
+tags: [[Hidden Settings]]
+title: Hidden Setting: HTML Parser Sandbox
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.24">> By default, tiddlers with the type `text/html` are displayed in an iframe with the [[sandbox attribute|https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-sandbox]] set to the empty string. This causes all security restrictions to be applied, disabling many features such as JavaScript, downloads and external file references. This is the safest setting.
+
+To globally disable the sandbox, set the tiddler $:/config/HtmlParser/DisableSandbox to `yes`. This will mean that the code in the iframe has full access to TiddlyWiki's internals, which means that a malicious HTML page could exfiltrate data from a private wiki.
+
+To keep the sandbox but control which restrictions are applied, ensure that $:/config/HtmlParser/DisableSandbox is not set to `yes`, and then set $:/config/HtmlParser/SandboxTokens to the desired list of tokens [[from the MDN documentation|https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-sandbox]].
+
+Note that these are global settings. To control the sandboxing on an individual tiddler basis will require a custom `<iframe>` to be used.
