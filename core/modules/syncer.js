@@ -141,11 +141,6 @@ function Syncer(options) {
 			self.handleLazyLoadEvent(title);
 		});
 	}
-	// Get the login status
-	this.getStatus(function(err,isLoggedIn) {
-		// Do a sync from the server
-		self.syncFromServer();
-	});
 }
 
 /*

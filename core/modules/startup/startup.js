@@ -122,6 +122,11 @@ exports.startup = function() {
 	// Set up the syncer object if we've got a syncadaptor
 	if($tw.syncadaptor) {
 		$tw.syncer = new $tw.Syncer({wiki: $tw.wiki, syncadaptor: $tw.syncadaptor});
+		// Get the login status
+		$tw.syncer.getStatus(function(err,isLoggedIn) {
+			// Do a sync from the server
+			$tw.syncer.syncFromServer();
+		});
 	}
 	// Setup the saver handler
 	$tw.saverHandler = new $tw.SaverHandler({
