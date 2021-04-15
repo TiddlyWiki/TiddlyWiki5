@@ -77,9 +77,10 @@ TextNodeWidget.prototype.execute = function() {
 					}
 				}),
 				titles = [],
-				reparts = [];
+				reparts = [],
+				isCC = new RegExp("^" + $tw.config.textPrimitives.unWikiLink + "?" + $tw.config.textPrimitives.wikiLink,"mg");
 			$tw.utils.each(sortedTitles,function(title) {
-				if(title.substring(0,3) !== "$:/") {
+				if ((title.substring(0,3) !== "$:/") && (title.match(isCC) === null)) {
 					titles.push(title);
 					reparts.push("(\\b" + $tw.utils.escapeRegExp(title) + "\\b)");
 				}
@@ -120,10 +121,10 @@ TextNodeWidget.prototype.execute = function() {
 						childParseTree[index] = {
 							type: "plain-text",
 							text: text.substring(matchEnd)
-						};					
+						};
 					}
 				}
-			} while(match && childParseTree[childParseTree.length - 1].type === "plain-text");			
+			} while(match && childParseTree[childParseTree.length - 1].type === "plain-text");
 		}
 	}
 	// Make the child widgets
@@ -158,7 +159,7 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return false;	
+		return false;
 	}
 };
 
