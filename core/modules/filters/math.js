@@ -125,6 +125,14 @@ exports.minall = makeNumericReducingOperator(
 	Infinity // Initial value
 );
 
+exports.average = makeNumericReducingOperator(
+	function(accumulator,value) {return accumulator + value},
+	0, // Initial value
+	function(finalValue,numberOfValues) {
+		return finalValue/numberOfValues;
+	}
+);
+
 function makeNumericBinaryOperator(fnCalc) {
 	return function(source,operator,options) {
 		var result = [],
@@ -136,16 +144,20 @@ function makeNumericBinaryOperator(fnCalc) {
 	};
 }
 
-function makeNumericReducingOperator(fnCalc,initialValue) {
+function makeNumericReducingOperator(fnCalc,initialValue,fnFinal) {
 	initialValue = initialValue || 0;
 	return function(source,operator,options) {
 		var result = [];
 		source(function(tiddler,title) {
 			result.push(title);
 		});
-		return [$tw.utils.stringifyNumber(result.reduce(function(accumulator,currentValue) {
-			return fnCalc(accumulator,$tw.utils.parseNumber(currentValue));
-		},initialValue))];
+		var value = result.reduce(function(accumulator,currentValue) {
+				return fnCalc(accumulator,$tw.utils.parseNumber(currentValue));
+			},initialValue);
+		if(fnFinal) {
+			value = fnFinal(value,result.length);
+		}
+		return [$tw.utils.stringifyNumber(value)];
 	};
 }
 
