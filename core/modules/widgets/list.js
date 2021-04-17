@@ -230,6 +230,10 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 					}
 					this.insertListItem(t,this.list[t]);
 					hasRefreshed = true;
+				} else {
+					// Refresh the item we're reusing
+					var refreshed = this.children[t].refresh(changedTiddlers);
+					hasRefreshed = hasRefreshed || refreshed;
 				}
 			}
 		} else {
