@@ -11,9 +11,13 @@ Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93
 Basics/DefaultTiddlers/Prompt: Default tiddlers
 Basics/DefaultTiddlers/TopHint: Choose which tiddlers are displayed at startup
 Basics/Language/Prompt: Hello! Current language:
+Basics/NewJournal/Navigate/Prompt: Navigate to new journal without editing
+Basics/NewJournal/Navigate/Hint: By default a new journal tiddler will be opened in edit-mode
 Basics/NewJournal/Title/Prompt: Title of new journal tiddlers
 Basics/NewJournal/Text/Prompt: Text for new journal tiddlers
 Basics/NewJournal/Tags/Prompt: Tags for new journal tiddlers
+Basics/NewJournalHere/Title/Prompt: Title for "new journal here" tiddlers
+Basics/NewJournalHere/Tags/Prompt: Tags for "new journal here" tiddlers
 Basics/NewTiddler/Title/Prompt: Title of new tiddlers
 Basics/NewTiddler/Tags/Prompt: Tags for new tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Number of overridden shadow tiddlers

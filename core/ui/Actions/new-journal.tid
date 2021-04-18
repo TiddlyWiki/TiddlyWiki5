@@ -3,13 +3,20 @@ tags: $:/tags/Actions
 description: create a new journal tiddler
 
 \define get-tags() $(textFieldTags)$ $(tagsFieldTags)$
+\whitespace trim
 <$vars journalTitleTemplate={{$:/config/NewJournal/Title}} textFieldTags={{$:/config/NewJournal/Tags}} tagsFieldTags={{$:/config/NewJournal/Tags!!tags}} journalText={{$:/config/NewJournal/Text}}>
-<$wikify name="journalTitle" text="""<$macrocall $name="now" format=<<journalTitleTemplate>>/>""">
-<$reveal type="nomatch" state=<<journalTitle>> text="">
-<$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<get-tags>> text={{{ [<journalTitle>get[]] }}}/>
-</$reveal>
-<$reveal type="match" state=<<journalTitle>> text="">
-<$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<get-tags>> text=<<journalText>>/>
-</$reveal>
-</$wikify>
+	<$wikify name="journalTitle" text="""<$macrocall $name="now" format=<<journalTitleTemplate>>/>""">
+		<$reveal type="match" state="$:/config/NewJournal/Navigate" text="yes">
+			<$action-navigate $to=<<journalTitle>>/>
+		</$reveal>
+		<$reveal type="nomatch" state="$:/config/NewJournal/Navigate" text="yes">
+			<$reveal type="nomatch" state=<<journalTitle>> text="">
+				<! -- $action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<get-tags>> text={{{ [<journalTitle>get[]] }}}/ -->
+				<$action-sendmessage $message="tm-edit-tiddler" $param=<<journalTitle>> />
+			</$reveal>
+			<$reveal type="match" state=<<journalTitle>> text="">
+				<$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<get-tags>> text=<<journalText>>/>
+			</$reveal>
+		</$reveal>
+	</$wikify>
 </$vars>
