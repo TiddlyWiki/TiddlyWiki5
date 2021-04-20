@@ -80,7 +80,7 @@ type: text/vnd.tiddlywiki
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5401">> runaway regexp when parsing filters
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5440">> right margin of tag pill when used outside of the tags wrapper
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5455">> upload saver to optionally work without a username or password
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/5e4430dbf9ff66d9a18fbdf3005abcd716efc07d">> RadioWidget to refresh selectively, and to use the ''checked'' attirubte correctly
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/5e4430dbf9ff66d9a18fbdf3005abcd716efc07d">> RadioWidget to refresh selectively, and to use the ''checked'' attribute correctly
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5542">> "invert" option of `wiki.search()` method
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/e157d16b724172f752da0ff714847e0c0ca9664d">> ''data-tag-title'' attribute to tag pills
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/7b1a0c6e6a8bd2d3badf8766af0cd3f5f7ac5ec8">> ES5 compatibility issue 
