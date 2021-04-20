@@ -133,6 +133,21 @@ exports.average = makeNumericReducingOperator(
 	}
 );
 
+exports.median = makeNumericArrayOperator(
+	function(values) {
+		var len = values.length, median;
+		values.sort();
+		if(len % 2) { 
+			// Odd, return the middle number
+			median = values[(len - 1) / 2];
+		} else {
+			// Even, return average of two middle numbers
+			median = (values[len / 2 - 1] + values[len / 2]) / 2;
+		}
+		return [median];
+	}
+);
+
 function makeNumericBinaryOperator(fnCalc) {
 	return function(source,operator,options) {
 		var result = [],
@@ -158,6 +173,20 @@ function makeNumericReducingOperator(fnCalc,initialValue,fnFinal) {
 			value = fnFinal(value,result.length);
 		}
 		return [$tw.utils.stringifyNumber(value)];
+	};
+}
+
+function makeNumericArrayOperator(fnCalc) {
+	return function(source,operator,options) {
+		var results = [];
+		source(function(tiddler,title) {
+			results.push($tw.utils.parseNumber(title));
+		});
+		results = fnCalc(results);
+		$tw.utils.each(results,function(value,index) {
+			results[index] = $tw.utils.stringifyNumber(value);
+		});
+		return results;
 	};
 }
 

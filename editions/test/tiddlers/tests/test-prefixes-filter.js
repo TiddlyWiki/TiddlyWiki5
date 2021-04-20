@@ -106,6 +106,11 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(parseFloat(wiki.filterTiddlers("[tag[food]get[price]average[]]").join(","))).toBeCloseTo(3.155);
 	});
 
+	it("should handle the median operator", function() {
+		expect(parseFloat(wiki.filterTiddlers("[tag[shopping]get[price]median[]]").join(","))).toBeCloseTo(1.99);
+		expect(parseFloat(wiki.filterTiddlers("[tag[food]get[price]median[]]").join(","))).toBeCloseTo(3.155);
+	});
+
 	it("should handle the :intersection prefix", function() {
 		expect(wiki.filterTiddlers("[[Sparkling water]tags[]] :intersection[[Red wine]tags[]]").join(",")).toBe("drinks,textexample");
 		expect(wiki.filterTiddlers("[[Brownies]tags[]] :intersection[[Chocolate Cake]tags[]]").join(",")).toBe("food");
