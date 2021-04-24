@@ -26,7 +26,7 @@ Note that your password is sent unencrypted when using ~TiddlySpot. From the [[F
 <<<
 ''Is Tiddlyspot secure?''
 
-No. Tiddlyspot does not use SSL/https, so all ~Tiddlyspot web traffic is vulnerable to packet sniffing. This means your password and site data could be intercepted by a malicious third party. For this reason, please don't keep sensitive information in your ~TiddlySpot site, and don't use a password that you use for other web sites.
+No. Tiddlyspot does not use SSL/https, so all ~TiddlySpot web traffic is vulnerable to packet sniffing. This means your password and site data could be intercepted by a malicious third party. For this reason, please don't keep sensitive information in your ~TiddlySpot site, and don't use a password that you use for other web sites.
 <<<
 
 !! Problems with saving on ~TiddlySpot
