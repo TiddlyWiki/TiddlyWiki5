@@ -168,6 +168,7 @@ WikiParser.prototype.findNextMatch = function(rules,startPos) {
 WikiParser.prototype.parseRule = function(rule) {
 	var start = this.pos,
 		blocks = rule.parse();
+	// Use fallback parent range for blocks that don't define their own
 	for(var i=0; i<blocks.length; i++) {
 		var block = blocks[i];
 		if(block.start !== undefined) {
@@ -229,7 +230,7 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 	var start = this.pos;
 	var children = this.parseInlineRun(terminatorRegExp);
 	var end = this.pos;
-	return [{type: "element", tag: "p", children, start, end }];
+	return [{type: "element", tag: "p", children: children, start: start, end: end }];
 };
 
 /*
