@@ -292,7 +292,7 @@ exports.compileFilter = function(filterString) {
 		var filterRunPrefixes = self.getFilterRunPrefixes();
 		// Wrap the operator functions in a wrapper function that depends on the prefix
 		operationFunctions.push((function() {
-			var options = {wiki: self, suffix: operation.suffix || ""};
+			var options = {wiki: self, suffixes: operation.suffixes || []};
 			switch(operation.prefix || "") {
 				case "": // No prefix means that the operation is unioned into the result
 					return filterRunPrefixes["or"](operationSubFunction, options);
