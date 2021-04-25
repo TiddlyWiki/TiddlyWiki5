@@ -910,6 +910,9 @@ exports.makeCompareFunction = function(type,options) {
 			},
 			"version": function(a,b) {
 				return $tw.utils.compareVersions(a,b);
+			},
+			"alphanumeric": function(a,b) {
+				return options.invert ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
 			}
 		};
 	return (types[type] || types[options.defaultType] || types.number);
