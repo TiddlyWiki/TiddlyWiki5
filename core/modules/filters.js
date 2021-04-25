@@ -173,15 +173,6 @@ exports.parseFilter = function(filterString) {
 							}
 						});
 					 });
-					
-					/*
-					var colon: match[3].indexOf(":");
-					if(colon > -1) {
-						
-					} else {
-						operation.suffix = match[3];
-					}
-					*/
 				}
 			}
 			if(match[4]) { // Opening square bracket
