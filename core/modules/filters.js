@@ -137,7 +137,7 @@ exports.parseFilter = function(filterString) {
 		p = 0, // Current position in the filter string
 		match;
 	var whitespaceRegExp = /(\s+)/mg,
-		operandRegExp = /((?:\+|\-|~|=|\:(\w+)(?:\:(\w+))?)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
+		operandRegExp = /((?:\+|\-|~|=|\:(\w+)(?:\:([\w\:, ]*))?)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
 	while(p < filterString.length) {
 		// Skip any whitespace
 		whitespaceRegExp.lastIndex = p;
@@ -163,7 +163,25 @@ exports.parseFilter = function(filterString) {
 					operation.namedPrefix = match[2];
 				}
 				if(match[3]) {
-					operation.suffix = match[3];
+					operation.suffixes = [];
+					 $tw.utils.each(match[3].split(":"),function(subsuffix) {
+						operation.suffixes.push([]);
+						$tw.utils.each(subsuffix.split(","),function(entry) {
+							entry = $tw.utils.trim(entry);
+							if(entry) {
+								operation.suffixes[operation.suffixes.length -1].push(entry);
+							}
+						});
+					 });
+					
+					/*
+					var colon: match[3].indexOf(":");
+					if(colon > -1) {
+						
+					} else {
+						operation.suffix = match[3];
+					}
+					*/
 				}
 			}
 			if(match[4]) { // Opening square bracket

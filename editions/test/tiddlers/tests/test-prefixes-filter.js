@@ -18,6 +18,199 @@ describe("general filter prefix tests", function() {
 		var results = wiki.filterTiddlers("[tag[A]] :nonexistent[tag[B]]");
 		expect(results).toEqual(["Filter Error: Unknown prefix for filter run"]);
 	});
+
+	// Test filter run prefix parsing
+	it("should parse filter run prefix suffixes", function() {
+
+		// two runs, one with a named prefix but no suffix
+		expect($tw.wiki.parseFilter("[[Sparkling water]tags[]] :intersection[[Red wine]tags[]]")).toEqual(
+			[
+				{
+					"prefix": "",
+					"operators": [
+						{
+							"operator": "title",
+							"operands": [
+								{
+									"text": "Sparkling water"
+								}
+							]
+						},
+						{
+							"operator": "tags",
+							"operands": [
+								{
+									"text": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"prefix": ":intersection",
+					"operators": [
+						{
+							"operator": "title",
+							"operands": [
+								{
+									"text": "Red wine"
+								}
+							]
+						},
+						{
+							"operator": "tags",
+							"operands": [
+								{
+									"text": ""
+								}
+							]
+						}
+					],
+					"namedPrefix": "intersection"
+				}
+			]
+		);
+
+		// named prefix with no suffix
+		expect($tw.wiki.parseFilter(":reduce[multiply<accumulator>]")).toEqual(
+			[
+				{
+					"prefix": ":reduce",
+					"operators": [
+						{
+							"operator": "multiply",
+							"operands": [
+								{
+									"variable": true,
+									"text": "accumulator"
+								}
+							]
+						}
+					],
+					"namedPrefix": "reduce"
+				}
+			]
+		);
+
+		//named prefix with one simple suffix
+		expect($tw.wiki.parseFilter(":reduce:1[multiply<accumulator>]")).toEqual(
+			[
+				{
+					"prefix": ":reduce:1",
+					"operators": [
+						{
+							"operator": "multiply",
+							"operands": [
+								{
+									"variable": true,
+									"text": "accumulator"
+								}
+							]
+						}
+					],
+					"namedPrefix": "reduce",
+					"suffixes": [
+						[
+							"1"
+						]
+					]
+				}
+			]
+		);
+
+		//named prefix with two simple suffixes
+		expect($tw.wiki.parseFilter(":reduce:1:hello[multiply<accumulator>]")).toEqual(
+			[
+				{
+					"prefix": ":reduce:1:hello",
+					"operators": [
+						{
+							"operator": "multiply",
+							"operands": [
+								{
+									"variable": true,
+									"text": "accumulator"
+								}
+							]
+						}
+					],
+					"namedPrefix": "reduce",
+					"suffixes": [
+						[
+							"1"
+						],
+						[
+							"hello",
+						]
+					]
+				}
+			]
+		);
+
+		//named prefix with two rich (comma separated) suffixes
+		expect($tw.wiki.parseFilter(":reduce:1,one:hello,there[multiply<accumulator>]")).toEqual(
+			[
+				{
+					"prefix": ":reduce:1,one:hello,there",
+					"operators": [
+						{
+							"operator": "multiply",
+							"operands": [
+								{
+									"variable": true,
+									"text": "accumulator"
+								}
+							]
+						}
+					],
+					"namedPrefix": "reduce",
+					"suffixes": [
+						[
+							"1",
+							"one"
+						],
+						[
+							"hello",
+							"there"
+						]
+					]
+				}
+			]
+		);
+		
+		// suffixes with spaces
+		expect($tw.wiki.parseFilter(":reduce: 1, one:hello, there [multiply<accumulator>]")).toEqual(
+			[
+				{
+					"prefix": ":reduce: 1, one:hello, there ",
+					"operators": [
+						{
+							"operator": "multiply",
+							"operands": [
+								{
+									"variable": true,
+									"text": "accumulator"
+								}
+							]
+						}
+					],
+					"namedPrefix": "reduce",
+					"suffixes": [
+						[
+							"1",
+							"one"
+						],
+						[
+							"hello",
+							"there"
+						]
+					]
+				}
+			]
+		);
+
+	});	
+
 });
 
 describe("'reduce' and 'intersection' filter prefix tests", function() {
@@ -80,6 +273,10 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		// Empty input should become empty output
 		expect(wiki.filterTiddlers("[tag[non-existent]] :reduce[get[price]multiply{!!quantity}add<accumulator>]").length).toBe(0);
 		expect(wiki.filterTiddlers("[tag[non-existent]] :reduce[get[price]multiply{!!quantity}add<accumulator>] :else[[0]]").join(",")).toBe("0");
+		
+		expect(wiki.filterTiddlers("[tag[non-existent]] :reduce:11,22[get[price]multiply{!!quantity}add<accumulator>] :else[[0]]").join(",")).toBe("0");
+
+		expect(wiki.filterTiddlers("[tag[non-existent]] :reduce:11[get[price]multiply{!!quantity}add<accumulator>] :else[[0]]").join(",")).toBe("0");
 	});
 
 	it("should handle the reduce operator", function() {
