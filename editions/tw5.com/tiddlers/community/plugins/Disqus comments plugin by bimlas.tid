@@ -1,0 +1,12 @@
+created: 20190219201946994
+modified: 20210106151027439
+tags: [[Community Plugins]]
+title: Disqus comments plugin by bimlas
+type: text/vnd.tiddlywiki
+url: https://bimlas.gitlab.io/tw5-disqus/
+
+Use this plugin to give your visitors the opportunity to comment on your tiddlers without changing the wiki itself.
+
+[[Disqus|https://disqus.com/]] is a networked community platform used by hundreds of thousands of sites all over the web. With Disqus, your website gains a feature-rich comment system complete with social network integration, advanced administration and moderation options, and other extensive community functions.
+
+{{!!url}}

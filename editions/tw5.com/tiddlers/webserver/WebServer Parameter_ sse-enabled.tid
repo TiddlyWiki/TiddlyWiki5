@@ -1,0 +1,11 @@
+caption: sse-enabled
+created: 20210113204602693
+modified: 20210115120126953
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: sse-enabled
+type: text/vnd.tiddlywiki
+
+The [[web server configuration parameter|WebServer Parameters]] ''sse-enabled'' enables [[Server sent events|https://en.wikipedia.org/wiki/Server-sent_events]], allowing changes to be propagated in almost real time to all browser windows or tabs.
+
+Setting ''sse-enabled'' to `yes` enables Server-sent events; `no`, or any other value, disables them.
+

@@ -124,12 +124,12 @@ Saving/TiddlySpot/BackupDir: 備份資料夾
 Saving/TiddlySpot/Backups: 備份
 Saving/TiddlySpot/Caption: ~TiddlySpot 儲存模組
 Saving/TiddlySpot/ControlPanel: ~TiddlySpot 控制台
-Saving/TiddlySpot/Description: 這些設定只適用於儲存到 http://tiddlyspot.com 或相容的遠端伺服器時。
+Saving/TiddlySpot/Description: 這些設定只適用於儲存到 [[TiddlySpot|http://tiddlyspot.com]]、[[TiddlyHost|https://tiddlyhost.com]]，或相容的遠端伺服器。有關 ~TiddlySpot 和 ~TiddlyHost 的儲存設定資訊，請參閱[[此處|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]]。
 Saving/TiddlySpot/Filename: 上傳檔名
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //預設之伺服器網址 `http://<wikiname>.tiddlyspot.com/store.cgi`，可改為自訂之伺服器網址，例如 `http://example.com/store.php`。//
 Saving/TiddlySpot/Password: 密碼
-Saving/TiddlySpot/ReadOnly: ~TiddlySpot 服務目前僅以唯讀形式提供。相關最新詳細資訊，請參閱 http://tiddlyspot.com/ 。~TiddlySpot 儲存模組仍可用於儲存到相容的伺服器。
+Saving/TiddlySpot/ReadOnly: 請注意，[[TiddlySpot|http://tiddlyspot.com]] 不再允許建立新網站。對於新網站，您可以使用 [[TiddlyHost|https://tiddlyhost.com]]，一個新的取代 ~TiddlySpot 的託管服務 。
 Saving/TiddlySpot/ServerURL: 伺服器網址
 Saving/TiddlySpot/UploadDir: 上傳資料夾
 Saving/TiddlySpot/UserName: 帳號

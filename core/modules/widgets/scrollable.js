@@ -16,26 +16,6 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var ScrollableWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
-	this.scaleFactor = 1;
-	this.addEventListeners([
-		{type: "tm-scroll", handler: "handleScrollEvent"}
-	]);
-	if($tw.browser) {
-		this.requestAnimationFrame = window.requestAnimationFrame ||
-			window.webkitRequestAnimationFrame ||
-			window.mozRequestAnimationFrame ||
-			function(callback) {
-				return window.setTimeout(callback, 1000/60);
-			};
-		this.cancelAnimationFrame = window.cancelAnimationFrame ||
-			window.webkitCancelAnimationFrame ||
-			window.webkitCancelRequestAnimationFrame ||
-			window.mozCancelAnimationFrame ||
-			window.mozCancelRequestAnimationFrame ||
-			function(id) {
-				window.clearTimeout(id);
-			};
-	}
 };
 
 /*
@@ -147,6 +127,26 @@ Render this widget into the DOM
 */
 ScrollableWidget.prototype.render = function(parent,nextSibling) {
 	var self = this;
+	this.scaleFactor = 1;
+	this.addEventListeners([
+		{type: "tm-scroll", handler: "handleScrollEvent"}
+	]);
+	if($tw.browser) {
+		this.requestAnimationFrame = window.requestAnimationFrame ||
+			window.webkitRequestAnimationFrame ||
+			window.mozRequestAnimationFrame ||
+			function(callback) {
+				return window.setTimeout(callback, 1000/60);
+			};
+		this.cancelAnimationFrame = window.cancelAnimationFrame ||
+			window.webkitCancelAnimationFrame ||
+			window.webkitCancelRequestAnimationFrame ||
+			window.mozCancelAnimationFrame ||
+			window.mozCancelRequestAnimationFrame ||
+			function(id) {
+				window.clearTimeout(id);
+			};
+	}
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state

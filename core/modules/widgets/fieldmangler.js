@@ -16,12 +16,6 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var FieldManglerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
-	this.addEventListeners([
-		{type: "tm-remove-field", handler: "handleRemoveFieldEvent"},
-		{type: "tm-add-field", handler: "handleAddFieldEvent"},
-		{type: "tm-remove-tag", handler: "handleRemoveTagEvent"},
-		{type: "tm-add-tag", handler: "handleAddTagEvent"}
-	]);
 };
 
 /*
@@ -33,6 +27,12 @@ FieldManglerWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 FieldManglerWidget.prototype.render = function(parent,nextSibling) {
+	this.addEventListeners([
+		{type: "tm-remove-field", handler: "handleRemoveFieldEvent"},
+		{type: "tm-add-field", handler: "handleAddFieldEvent"},
+		{type: "tm-remove-tag", handler: "handleRemoveTagEvent"},
+		{type: "tm-add-tag", handler: "handleAddTagEvent"}
+	]);
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
@@ -67,7 +67,7 @@ FieldManglerWidget.prototype.handleRemoveFieldEvent = function(event) {
 		deletion = {};
 	deletion[event.param] = undefined;
 	this.wiki.addTiddler(new $tw.Tiddler(tiddler,deletion));
-	return true;
+	return false;
 };
 
 FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
@@ -105,7 +105,7 @@ FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
 		}
 	}
 	this.wiki.addTiddler(new $tw.Tiddler(tiddler,addition));
-	return true;
+	return false;
 };
 
 FieldManglerWidget.prototype.handleRemoveTagEvent = function(event) {
@@ -122,7 +122,7 @@ FieldManglerWidget.prototype.handleRemoveTagEvent = function(event) {
 			this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));
 		}
 	}
-	return true;
+	return false;
 };
 
 FieldManglerWidget.prototype.handleAddTagEvent = function(event) {
@@ -140,7 +140,7 @@ FieldManglerWidget.prototype.handleAddTagEvent = function(event) {
 		tag.push(event.param.trim());
 		this.wiki.addTiddler(new $tw.Tiddler({title: this.mangleTitle, tags: tag},modification));
 	}
-	return true;
+	return false;
 };
 
 exports.fieldmangler = FieldManglerWidget;

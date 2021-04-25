@@ -12,8 +12,6 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.22...v5.1.23]]//
 
-<div class="doc-plain-list">
-
 ! Performance Improvements
 
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5206">> filter execution to use a more efficient linked list structure for intermediate results
@@ -293,5 +291,3 @@ Please note that using this plugin does not guarantee compliance with any partic
 * <<contributor saqimtiaz>>
 * <<contributor twMat>>
 * <<contributor xcazin>>
-
-</div>
