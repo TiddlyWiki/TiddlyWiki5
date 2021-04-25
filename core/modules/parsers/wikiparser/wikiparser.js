@@ -187,19 +187,33 @@ WikiParser.prototype.findNextMatch = function(rules,startPos) {
 
 WikiParser.prototype.parseRule = function(rule) {
 	var start = this.pos,
-		blocks = rule.parse();
-	// Use fallback parent range for blocks that don't define their own
+		blocks = rule.parse(),
+		pending = [];
+	// Estimate start/end ranges for blocks that don't define their own based on
+	// sibling and parent ranges
 	for(var i=0; i<blocks.length; i++) {
 		var block = blocks[i];
-		if(block.start !== undefined) {
+		if(block.start === undefined) {
 			block.start = start;
+		} else {
+			this.applyRangeEnd(pending,block.start);
+			pending.length = 0;
 		}
-		if(block.end !== undefined) {
-			block.end = this.pos;
+		if(block.end === undefined) {
+			pending.push(block);
+		} else {
+			start = block.end;
 		}
 	}
+	this.applyRangeEnd(pending,this.pos);
 	return blocks;
 };
+
+WikiParser.prototype.applyRangeEnd = function(blocks,end) {
+	for(var i=0; i<blocks.length; i++) {
+		blocks[i].end = end;
+	}
+}
 
 /*
 Parse any pragmas at the beginning of a block of parse text
