@@ -313,9 +313,12 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		rootWidget.makeChildWidgets();
 		var anchorWidget = rootWidget.children[0];
 		rootWidget.setVariable("larger-than-18","[get[text]length[]compare:integer:gteq[18]]");
+		rootWidget.setVariable("nr","18");
+		rootWidget.setVariable("larger-than-18-with-var","[get[text]length[]compare:integer:gteq<nr>]");
 		expect(wiki.filterTiddlers("[tag[textexample]] :filter[get[text]length[]compare:integer:gteq[18]]",anchorWidget).join(",")).toBe("Red wine,Cheesecake,Chocolate Cake");
 		expect(wiki.filterTiddlers("[tag[textexample]]",anchorWidget).join(",")).toBe("Sparkling water,Red wine,Cheesecake,Chocolate Cake");
 		expect(wiki.filterTiddlers("[tag[textexample]filter<larger-than-18>]",anchorWidget).join(",")).toBe("Red wine,Cheesecake,Chocolate Cake");
+		expect(wiki.filterTiddlers("[tag[textexample]filter<larger-than-18-with-var>]",anchorWidget).join(",")).toBe("Red wine,Cheesecake,Chocolate Cake");
 	})
 
 });
