@@ -124,12 +124,12 @@ Saving/TiddlySpot/BackupDir: 备份文件夹
 Saving/TiddlySpot/Backups: 备份
 Saving/TiddlySpot/Caption: ~TiddlySpot 保存模块
 Saving/TiddlySpot/ControlPanel: ~TiddlySpot 控制台
-Saving/TiddlySpot/Description: 这些设置只适用于保存到 http://tiddlyspot.com 或兼容的远程服务器时。
+Saving/TiddlySpot/Description: 这些设置只适用于保存到 [[TiddlySpot|http://tiddlyspot.com]]、[[TiddlyHost|https://tiddlyhost.com]]，或兼容的远程服务器。有关 ~TiddlySpot 和 ~TiddlyHost 的保存设置信息，请参阅[[此处|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]]。
 Saving/TiddlySpot/Filename: 上传文件名
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //默认之服务器网址 `http://<wikiname>.tiddlyspot.com/store.cgi`，可改为定制之服务器网址，例如 `http://example.com/store.php`。//
 Saving/TiddlySpot/Password: 密码
-Saving/TiddlySpot/ReadOnly: ~TiddlySpot 服务目前仅以唯读形式提供。相关最新详细信息，请参阅 http://tiddlyspot.com/ 。~TiddlySpot 保存模块仍可用于保存到兼容的服务器。
+Saving/TiddlySpot/ReadOnly: 请注意，[[TiddlySpot|http://tiddlyspot.com]] 不再允许创建新网站。对于新网站，您可以使用 [[TiddlyHost|https://tiddlyhost.com]]，一个新的取代 ~TiddlySpot 的讬管服务 。
 Saving/TiddlySpot/ServerURL: 服务器网址
 Saving/TiddlySpot/UploadDir: 上传文件夹
 Saving/TiddlySpot/UserName: 用户
