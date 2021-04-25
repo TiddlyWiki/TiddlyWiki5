@@ -1,0 +1,23 @@
+caption: pad
+created: 20201129174215674
+modified: 20201129175301148
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input titles padded to the specified length
+op-parameter: the <<.op pad>> operator accepts 1 or more parameters, see below for details
+op-purpose: returns each item in the list padded to the specified length
+op-suffix: (optional). Whether to pad by adding a "suffix" or "prefix". Defaults to "prefix".
+tags: [[Filter Operators]] [[String Operators]]
+title: pad Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.23">>
+
+The <<.op pad>> operator requires at least one parameter which specifies the desired length of the input titles. A second optional parameter can be used to specify the string to pad with (defaults to "0").
+
+```
+[pad[<length>],[<padding-string>]]
+```
+* ''length'' : the desired final length of the input titles.
+* ''padding-string'': (optional). The string to use to pad to the desired length. Defaults to "0".
+
+<<.operator-examples "pad">>

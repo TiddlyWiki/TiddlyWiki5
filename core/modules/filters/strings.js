@@ -56,12 +56,12 @@ exports.trim = function(source,operator,options) {
 	return result;
 };
 
-// makeStringBinaryOperator(
-// 	function(a) {return [$tw.utils.trim(a)];}
-// );
-
 exports.split = makeStringBinaryOperator(
 	function(a,b) {return ("" + a).split(b);}
+);
+
+exports["enlist-input"] = makeStringBinaryOperator(
+	function(a,o,s) {return $tw.utils.parseStringArray("" + a,(s === "raw"));}
 );
 
 exports.join = makeStringReducingOperator(
@@ -78,7 +78,7 @@ function makeStringBinaryOperator(fnCalc) {
 	return function(source,operator,options) {
 		var result = [];
 		source(function(tiddler,title) {
-			Array.prototype.push.apply(result,fnCalc(title,operator.operand || ""));
+			Array.prototype.push.apply(result,fnCalc(title,operator.operand || "",operator.suffix || ""));
 		});
 		return result;
 	};
@@ -114,5 +114,62 @@ exports.splitregexp = function(source,operator,options) {
 	});		
 	return result;
 };
+
+exports["search-replace"] = function(source,operator,options) {
+	var results = [],
+		suffixes = operator.suffixes || [],
+		flagSuffix = (suffixes[0] ? (suffixes[0][0] || "") : ""),
+		flags = (flagSuffix.indexOf("g") !== -1 ? "g" : "") + (flagSuffix.indexOf("i") !== -1 ? "i" : ""),
+		isRegExp = (suffixes[1] && suffixes[1][0] === "regexp") ? true : false,
+		searchTerm,
+		regExp;
+	
+	source(function(tiddler,title) {
+		if(title && (operator.operands.length > 1)) {
+			//Escape regexp characters if the operand is not a regular expression
+			searchTerm = isRegExp ? operator.operand : $tw.utils.escapeRegExp(operator.operand);
+			try {
+				regExp = new RegExp(searchTerm,flags);
+			} catch(ex) {
+				return ["RegExp error: " + ex];
+			}
+			results.push(
+				title.replace(regExp,operator.operands[1])
+			);
+		} else {
+			results.push(title);
+		}
+	});
+	return results;
+};
+
+exports.pad = function(source,operator,options) {
+	var results = [],
+		targetLength = operator.operand ? parseInt(operator.operand) : 0,
+		fill = operator.operands[1] || "0";
+
+	source(function(tiddler,title) {
+		if(title && title.length) {
+			if(title.length >= targetLength) {
+				results.push(title);
+			} else {
+				var padString = "",
+					padStringLength = targetLength - title.length;
+				while (padStringLength > padString.length) {
+					padString += fill;					
+				}
+				//make sure we do not exceed the specified length
+				padString = padString.slice(0,padStringLength);
+				if(operator.suffix && (operator.suffix === "suffix")) {
+					title = title + padString;
+				} else {
+					title = padString + title;
+				}
+				results.push(title);
+			}
+		}
+	});
+	return results;
+}
 
 })();

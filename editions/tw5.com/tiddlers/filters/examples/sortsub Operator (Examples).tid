@@ -1,5 +1,5 @@
 created: 20200425110427700
-modified: 20200425110427700
+modified: 20201118103327392
 tags: [[sortsub Operator]] [[Operator Examples]]
 title: sortsub Operator (Examples)
 type: text/vnd.tiddlywiki
@@ -28,5 +28,7 @@ These examples make use of the following variables:
 <<.operator-example 3 "[sortsub:number<compare-by-text-length>limit[10]]">>
 <<.operator-example 4 "[!sortsub:number<compare-by-text-length>limit[10]]">>
 <<.operator-example 5 "[tag[Field Operators]sortsub:date<compare-by-newest-of-modified-and-created-dates>]">>
+
+{{How to remove stop words}}
 
 </$vars>

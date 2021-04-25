@@ -20,7 +20,8 @@ exports["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"] = f
 	var results = [],
 		XLSXImporter = require("$:/plugins/tiddlywiki/xlsx-utils/importer.js").XLSXImporter,
 		importer = new XLSXImporter({
-			text: text
+			text: text,
+			wiki: $tw.wiki
 		});
 	// Return the output tiddlers
 	return importer.getResults();

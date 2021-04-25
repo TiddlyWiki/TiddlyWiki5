@@ -1,5 +1,5 @@
 created: 20150220152540000
-modified: 20150220152540000
+modified: 20201103110920722
 tags: [[Filter Syntax]]
 title: Filter Parameter
 type: text/vnd.tiddlywiki
@@ -25,3 +25,7 @@ The parameter to a [[filter operator|Filter Operators]] can be:
 : <<.def variable>>
 :: `<like this>`
 :: The parameter is the current value of the [[variable|Variables]] whose name appears between the angle brackets. Macro parameters are <<.em not>> supported.
+
+<<.from-version "5.1.23">> Filter operators support multiple parameters which are separated by a ` , ` character.
+
+For example: `[param1],[param2]` or `<param1>,{param2}`

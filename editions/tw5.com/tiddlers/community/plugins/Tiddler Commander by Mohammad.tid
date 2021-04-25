@@ -1,0 +1,25 @@
+created: 20201116203717105
+modified: 20201116204652385
+tags: [[Community Plugins]]
+title: Tiddler Commander by Mohammad
+type: text/vnd.tiddlywiki
+url: https://kookma.github.io/TW-Commander/
+
+Tiddler Commander plugin, in short ''Commander'' is a unique tool for batch operations on tiddlers.
+
+{{!!url}}
+
+Commander has many features including:
+
+* Bulk tiddler creation/deletion
+* Selective operation
+* Combo search to filter and select tiddlers
+* Title operation: add, remove prefixes and suffixes, also remove cahras form begining and end of title (on renaming tiddlers, [[relink|https://flibbles.github.io/tw5-relink/]] can be used to update title in other tiddlers)
+* Tag operation: add, remove, replace
+* Field operation: add, remove, rename, and set field value
+* ~SnR, search and replace in all fields including text, tags, //title//, and common fields
+* Inspect, to review and inspect tiddlers in one place, scroll among them and edit all fields (including common fields), tags, text (title is an exception!)
+* Log, create logs of all operations
+* Search, //save and load// any combination of filter search
+
+

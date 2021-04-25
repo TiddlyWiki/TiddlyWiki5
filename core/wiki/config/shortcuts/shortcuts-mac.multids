@@ -1,8 +1,11 @@
 title: $:/config/shortcuts-mac/
 
 bold: meta-B
+input-tab-left: ctrl-Left
+input-tab-right: ctrl-Right
 italic: meta-I
 underline: meta-U
 new-image: ctrl-I
 new-journal: ctrl-J
 new-tiddler: ctrl-N
+save-wiki: meta-S

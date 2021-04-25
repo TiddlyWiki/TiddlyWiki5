@@ -52,6 +52,12 @@ function SimpleEngine(options) {
 	if(this.widget.editTabIndex) {
 		this.domNode.setAttribute("tabindex",this.widget.editTabIndex);
 	}
+	if(this.widget.editAutoComplete) {
+		this.domNode.setAttribute("autocomplete",this.widget.editAutoComplete);
+	}
+	if(this.widget.isDisabled === "yes") {
+		this.domNode.setAttribute("disabled",true);
+	}
 	// Add an input event handler
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},

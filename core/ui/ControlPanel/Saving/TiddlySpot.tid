@@ -20,12 +20,16 @@ http://$(userName)$.tiddlyspot.com/$path$/
 </$reveal>
 \end
 
+<div class="tc-message-box">
+
+<<lingo ReadOnly>>
+
+</div>
+
 <<lingo Description>>
 
 |<<lingo UserName>> |<$edit-text tiddler="$:/UploadName" default="" tag="input"/> |
 |<<lingo Password>> |<$password name="upload"/> |
-|<<lingo Backups>> |<<siteLink backup>> |
-|<<lingo ControlPanel>> |<<siteLink controlpanel>> |
 
 ''<<lingo Advanced/Heading>>''
 

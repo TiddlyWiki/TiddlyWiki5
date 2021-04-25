@@ -12,7 +12,7 @@ Initialise basic platform $:/info/ tiddlers
 /*global $tw: false */
 "use strict";
 
-exports.getInfoTiddlerFields = function() {
+exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 	var mapBoolean = function(value) {return value ? "yes" : "no";},
 		infoTiddlerFields = [];
 	// Basics
@@ -36,6 +36,13 @@ exports.getInfoTiddlerFields = function() {
 		// Screen size
 		infoTiddlerFields.push({title: "$:/info/browser/screen/width", text: window.screen.width.toString()});
 		infoTiddlerFields.push({title: "$:/info/browser/screen/height", text: window.screen.height.toString()});
+ 		// Dark mode through event listener on MediaQueryList
+ 		var mqList = window.matchMedia("(prefers-color-scheme: dark)"),
+ 			getDarkModeTiddler = function() {return {title: "$:/info/darkmode", text: mqList.matches ? "yes" : "no"};};
+ 		infoTiddlerFields.push(getDarkModeTiddler());
+ 		mqList.addListener(function(event) {
+ 			updateInfoTiddlersCallback([getDarkModeTiddler()]);
+ 		});
 		// Language
 		infoTiddlerFields.push({title: "$:/info/browser/language", text: navigator.language || ""});
 	}

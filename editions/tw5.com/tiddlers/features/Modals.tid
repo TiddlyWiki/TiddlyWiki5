@@ -1,5 +1,5 @@
 created: 20160107225427489
-modified: 20200312172056083
+modified: 20201117081054556
 tags: Features
 title: Modals
 type: text/vnd.tiddlywiki
@@ -10,8 +10,10 @@ The tiddler to be displayed can contain the following optional fields that are u
 
 |!Field |!Description |
 |footer|The footer text for the modal|
-|subtitle|The subtitle text for a modal|
+|subtitle|The subtitle text for a modal, displayed in a `h3` html tag|
 |class|An additional class to apply to the modal wrapper|
+
+Note that the footer and subtitle fields are not limited to plain text, and wiki text features such as widgets and transclusions can be used as well.
 
 Modals are displayed with the [[WidgetMessage: tm-modal]].
 

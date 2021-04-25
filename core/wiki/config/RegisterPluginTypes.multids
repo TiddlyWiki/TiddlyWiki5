@@ -3,5 +3,5 @@ title: $:/config/RegisterPluginType/
 plugin: yes
 theme: no
 language: no
-info: no
+info: yes
 import: no

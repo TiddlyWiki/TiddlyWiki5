@@ -1,17 +1,30 @@
 created: 20141122200310516
-modified: 20170209130807520
+modified: 20201213161842776
 title: HookMechanism
 type: text/vnd.tiddlywiki
 
 The hook mechanism provides a way for plugins to intercept and modify default functionality. Hooks are added as follows:
 
 ```js
+/*
+name: name of hook function (by convention prefixed with `th-`)
+handler: function to be called when hook is invoked
+*/
 $tw.hooks.addHook(name,handler);
 ```
 
+The handler function will be called with parameters that depend on the specific hook in question, but they always follow the pattern `handler(value,params...)`
+
+* ''value'': an optional value that is to be transformed by the hook function
+* ''params'': one or more optional parameters that are passed to the hook function
+
+If required by the hook in question, the handler function must return the modified ''value''.
+
 Multiple handlers can be assigned to the same name using repeated calls. When a hook is invoked by name all registered functions will be called sequentially in their order of addition.
 
-Though not essential care should be taken to ensure that hooks are added before they are invoked. For example: [[Hook: tc-opening-default-tiddlers-list]] should ideally be added before the story startup module is invoked otherwise any hook specified additions to the default tiddlers will not be seen on the initial loading of the page, though will be visible if the user clicks the home button.
+Note that the ''value'' passed to the subsequent hook function will be the return value of the previous hook function.
+
+Though not essential care should be taken to ensure that hooks are added before they are invoked. For example: [[Hook: th-opening-default-tiddlers-list]] should ideally be added before the story startup module is invoked otherwise any hook specified additions to the default tiddlers will not be seen on the initial loading of the page, though will be visible if the user clicks the home button.
 
 !! Example
 

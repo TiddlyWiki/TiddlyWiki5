@@ -21,6 +21,14 @@ background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`
 </$set>
 \end
 
+\define sidebarbreakpoint()
+<$text text={{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}/>
+\end
+
+\define sidebarbreakpoint-minus-one()
+<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
+\end
+
 \define if-fluid-fixed(text,hiddenSidebarText)
 <$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="fluid-fixed">
 $text$
@@ -39,6 +47,20 @@ $else$
 </$reveal>
 \end
 
+\define set-type-selector-min-width()
+<$set name="typeLength" value={{{ [all[shadows+tiddlers]prefix[$:/language/Docs/Types/]get[name]length[]maxall[]] }}}>
+
+	.tc-type-selector-dropdown-wrapper {
+		min-width: calc(<<typeLength>>ch + 4em);
+	}
+
+	.tc-type-selector-dropdown-wrapper input.tc-edit-typeeditor {
+		min-width: <<typeLength>>ch;
+	}
+
+</$set>
+\end
+
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
 /*
@@ -53,9 +75,14 @@ $else$
 	-webkit-box-sizing: border-box;
 }
 
+input[type="search"] {
+  outline-offset: initial;
+}
+
 html button {
 	line-height: 1.2;
 	color: <<colour button-foreground>>;
+	fill: <<colour button-foreground>>;
 	background: <<colour button-background>>;
 	border-color: <<colour button-border>>;
 }
@@ -64,7 +91,7 @@ html button {
 ** Basic element styles
 */
 
-html {
+html, body {
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/fontfamily}};
 	text-rendering: optimizeLegibility; /* Enables kerning and ligatures etc. */
 	-webkit-font-smoothing: antialiased;
@@ -92,6 +119,15 @@ body.tc-body {
 }
 
 """>>
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+	font-size: 2em;
+}
 
 h1, h2, h3, h4, h5, h6 {
 	line-height: 1.2;
@@ -384,6 +420,10 @@ a.tc-tiddlylink-external:hover {
 	background-color: <<colour page-background>>;
 }
 
+.tc-page-container > .tc-dropzone {
+	min-height: 100vh;
+}
+
 .tc-dropzone {
 	position: relative;
 }
@@ -456,8 +496,9 @@ button svg, button img, label svg, label img {
 	margin: 0;
 	background: none;
 	border: none;
-    	cursor: pointer;
+	cursor: pointer;
 	color: <<colour foreground>>;
+	fill: <<colour foreground>>;
 }
 
 .tc-btn-boxed {
@@ -572,6 +613,10 @@ html body.tc-body .tc-btn-rounded:hover svg {
 	color: <<colour sidebar-muted-foreground-hover>>;
 }
 
+.tc-sidebar-lists button small {
+	color: <<colour foreground>>;
+}
+
 button svg.tc-image-button, button .tc-image-button img {
 	height: 1em;
 	width: 1em;
@@ -622,7 +667,7 @@ button svg.tc-image-button, button .tc-image-button img {
 	background: <<colour tiddler-info-background>>;
 }
 
-@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
 	.tc-unfold-banner {
 		position: static;
@@ -644,11 +689,14 @@ button svg.tc-image-button, button .tc-image-button img {
 .tc-tag-list-item {
 	position: relative;
 	display: inline-block;
-	margin-right: 7px;
 }
 
 .tc-tags-wrapper {
 	margin: 4px 0 14px 0;
+}
+
+.tc-tags-wrapper .tc-tag-list-item {
+	margin-right: 7px;
 }
 
 .tc-missing-tiddler-label {
@@ -721,7 +769,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-tag-button-selected,
-.tc-list-item-selected a.tc-tiddlylink {
+.tc-list-item-selected a.tc-tiddlylink, a.tc-list-item-selected {
 	background-color: <<colour primary>>;
 	color: <<colour tiddler-background>>;
 }
@@ -745,6 +793,14 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	right: 29px;
 }
 
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+
+	.tc-topbar-right {
+		right: 10px;
+	}
+
+}
+
 .tc-topbar button {
 	padding: 8px;
 }
@@ -755,6 +811,14 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-topbar button:hover svg {
 	fill: <<colour foreground>>;
+}
+
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+
+	.tc-show-sidebar-btn svg.tc-image-chevron-left, .tc-hide-sidebar-btn svg.tc-image-chevron-right {
+		transform: rotate(-90deg);
+	}
+
 }
 
 .tc-sidebar-header {
@@ -814,7 +878,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	fill: <<colour sidebar-controls-foreground-hover>>;
 }
 
-.tc-menu-list-item {
+.tc-sidebar-lists .tc-menu-list-item {
 	white-space: nowrap;
 }
 
@@ -830,13 +894,24 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	position: relative;
 }
 
-@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
 	.tc-sidebar-header {
 		padding: 14px;
 		min-height: 32px;
 		margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
+		transition:  min-height {{$:/config/AnimationDuration}}ms ease-in-out, padding-top {{$:/config/AnimationDuration}}ms ease-in-out, padding-bottom {{$:/config/AnimationDuration}}ms ease-in-out;
 	}
+	
+	<<if-no-sidebar """
+
+		.tc-sidebar-header {
+			min-height: 0;
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+
+	""">>
 
 	.tc-story-river {
 		position: relative;
@@ -844,7 +919,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	}
 }
 
-@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (min-width: <<sidebarbreakpoint>>) {
 
 	.tc-message-box {
 		margin: 21px -21px 21px -21px;
@@ -884,6 +959,11 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 ">>
 
+	.tc-story-river.tc-static-story-river {
+		margin-right: 0;
+		padding-right: 42px;
+	}
+
 }
 
 @media print {
@@ -922,6 +1002,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 {{$:/themes/tiddlywiki/vanilla/sticky}}
 
 .tc-tiddler-info {
+	overflow: hidden;
 	padding: 14px 42px 14px 42px;
 	background-color: <<colour tiddler-info-background>>;
 	border-top: 1px solid <<colour tiddler-info-border>>;
@@ -938,6 +1019,14 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	border-bottom: 1px solid <<colour tiddler-info-tab-background>>;
 }
 
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+
+	.tc-tiddler-info {
+		padding: 14px 14px 14px 14px;
+	}
+
+}
+
 .tc-view-field-table {
 	width: 100%;
 }
@@ -952,9 +1041,10 @@ button.tc-btn-invisible.tc-remove-tag-button {
 .tc-view-field-value {
 }
 
-@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 	.tc-tiddler-frame {
 		padding: 14px 14px 14px 14px;
+		margin-bottom: .5em;
 	}
 
 	.tc-tiddler-info {
@@ -962,7 +1052,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	}
 }
 
-@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (min-width: <<sidebarbreakpoint>>) {
 	.tc-tiddler-frame {
 		padding: 28px 42px 42px 42px;
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
@@ -986,7 +1076,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 .tc-titlebar {
 	font-weight: 300;
 	font-size: 2.35em;
-	line-height: 1.3em;
+	line-height: 1.35em;
 	color: <<colour tiddler-title-foreground>>;
 	margin: 0;
 }
@@ -1097,10 +1187,18 @@ button.tc-btn-invisible.tc-remove-tag-button {
 .tc-tiddler-frame iframe.tc-edit-texteditor {
 	padding: 3px 3px 3px 3px;
 	border: 1px solid <<colour tiddler-editor-border>>;
-	background-color: <<colour tiddler-editor-background>>;
 	line-height: 1.3em;
 	-webkit-appearance: none;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
+}
+
+.tc-tiddler-frame input.tc-edit-texteditor,
+.tc-tiddler-frame textarea.tc-edit-texteditor {
+	background-color: <<colour tiddler-editor-background>>;
+}
+
+.tc-tiddler-frame iframe.tc-edit-texteditor {
+	background-color: <<colour tiddler-background>>;
 }
 
 .tc-tiddler-frame .tc-binary-warning {
@@ -1217,7 +1315,7 @@ html body.tc-body.tc-single-tiddler-window {
 ** Adjustments for fluid-fixed mode
 */
 
-@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (min-width: <<sidebarbreakpoint>>) {
 
 <<if-fluid-fixed text:"""
 
@@ -1323,6 +1421,8 @@ html body.tc-body.tc-single-tiddler-window {
 	display: inline-block;
 }
 
+<<set-type-selector-min-width>>
+
 .tc-edit-tags {
 	border: 1px solid <<colour tiddler-editor-border>>;
 	padding: 4px 8px 4px 8px;
@@ -1385,6 +1485,10 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 100%;
 }
 
+.tc-edit-fields.tc-edit-fields-small {
+	margin-top: 0;
+	margin-bottom: 0;
+}
 
 .tc-edit-fields table, .tc-edit-fields tr, .tc-edit-fields td {
 	border: none;
@@ -1427,7 +1531,14 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-edit-field-add-value {
 	display: inline-block;
-	width: 35%;
+}
+
+@media (min-width: <<sidebarbreakpoint>>) {
+
+	.tc-edit-field-add-value {
+		width: 35%;
+	}
+
 }
 
 .tc-edit-field-add-button {
@@ -1449,7 +1560,7 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 100%;
 }
 
-@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (min-width: <<sidebarbreakpoint>>) {
 
 	.tc-storyview-zoomin-tiddler {
 		width: calc(100% - 84px);
@@ -1765,6 +1876,17 @@ html body.tc-body.tc-single-tiddler-window {
 	border-top: 1px solid <<colour modal-footer-border>>;
 }
 
+
+/*
+** Centered modals
+*/
+.tc-modal-centered .tc-modal {
+	width: auto;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) !important;
+}
+
 /*
 ** Notifications
 */
@@ -2025,6 +2147,35 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 /*
+** Import table
+*/
+
+.tc-import-table {
+	width: 100%;
+}
+
+.tc-import-table svg.tc-image-edit-button {
+	max-width: unset;
+}
+
+.tc-import-table th:first-of-type {
+	width: 10%;
+}
+
+.tc-import-table th:last-of-type {
+	width: 30%;
+}
+
+.tc-import-table .tc-row-disabled {
+	background: <<colour very-muted-foreground>>10;
+	opacity: 0.8;
+}
+
+.tc-import-table .tc-row-warning {
+	background: <<colour diff-delete-background>>50;
+}
+
+/*
 ** Alerts
 */
 
@@ -2071,7 +2222,7 @@ html body.tc-body.tc-single-tiddler-window {
 	color: <<colour alert-highlight>>;
 }
 
-@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (min-width: <<sidebarbreakpoint>>) {
 
 	.tc-static-alert {
 		position: relative;
@@ -2578,6 +2729,10 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	display: inline-block;
 }
 
+::-webkit-file-upload-button {
+	cursor:pointer;
+}
+
 /*
 ** Thumbnail macros
 */
@@ -2760,4 +2915,76 @@ select {
 
 .tc-fill-background {
 	fill: <<colour background>>;
+}
+
+/*
+** Flexbox utility classes
+*/
+
+.tc-flex {
+	display: -webkit-flex;
+	display: flex;
+}
+
+.tc-flex-column {
+	flex-direction: column;
+}
+
+.tc-flex-row {
+	flex-direction: row;
+}
+
+.tc-flex-grow-1 {
+	flex-grow: 1;
+}
+
+.tc-flex-grow-2 {
+	flex-grow: 2;
+}
+
+/*
+** Other utility classes
+*/
+
+.tc-tiny-gap {
+	margin-left: .25em;
+	margin-right: .25em;
+}
+
+.tc-tiny-gap-left {
+	margin-left: .25em;
+}
+
+.tc-tiny-gap-right {
+	margin-right: .25em;
+}
+
+.tc-small-gap {
+	margin-left: .5em;
+	margin-right: .5em;
+}
+
+.tc-small-gap-left {
+	margin-left: .5em;
+}
+
+.tc-small-gap-right {
+	margin-right: .5em;
+}
+
+.tc-big-gap {
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+.tc-big-gap-left {
+	margin-left: 1em;
+}
+
+.tc-big-gap-right {
+	margin-right: 1em;
+}
+
+.tc-word-break {
+	word-break: break-all;
 }

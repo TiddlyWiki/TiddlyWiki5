@@ -39,15 +39,15 @@ tags: $:/tags/Macro
 </div>
 </$droppable>
 </$list>
-</$type$>
 <$tiddler tiddler="">
 <$droppable actions=<<list-links-draggable-drop-actions>> tag="div" enable=<<tv-enable-drag-and-drop>>>
 <div class="tc-droppable-placeholder">
-&nbsp;
+{{$:/core/images/blank}}
 </div>
 <div style="height:0.5em;"/>
 </$droppable>
 </$tiddler>
+</$type$>
 </$vars>
 </span>
 \end

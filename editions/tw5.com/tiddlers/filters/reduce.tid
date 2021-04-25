@@ -1,13 +1,11 @@
 caption: reduce
 created: 20201004154131193
-modified: 20201006174749170
+modified: 20201208185109549
 op-input: a [[selection of titles|Title Selection]] passed as input to the filter
 op-output: the final result of running the subfilter <<.place S>>
-op-parameter: a [[filter expression|Filter Expression]]
+op-parameter: a [[filter expression|Filter Expression]]. Optional second parameter for initial value for accumulator
 op-parameter-name: S
 op-purpose: apply a subfilter to each input title in turn, accumulating a single value
-op-suffix: Initial value for accumulator
-op-suffix-name: V
 tags: [[Filter Operators]]
 title: reduce Operator
 type: text/vnd.tiddlywiki
@@ -23,5 +21,31 @@ The following variables are available within the subfilter:
 * ''index'' - the numeric index of the current list item (with zero being the first item in the list)
 * ''revIndex'' - the reverse numeric index of the current list item (with zero being the last item in the list)
 * ''length'' - the total length of the input list
+
+If the <<.op reduce>> operator receives no input, its output will be empty. The [[else Operator]] can be useful in such cases.
+
+<<.tip "Literal filter operands cannot contain square brackets but you can work around the issue by using a variable:">>
+
+```
+<$set name="sum-input" value="[add<accumulator>]">
+{{{ =1 =2 =3 +[reduce<sum-input>] }}}
+</$set>
+```
+
+<<.tip "Compare with the analagous named [[filter run prefix|Filter Expression]] `:reduce`">>
+
+```
+\define num-items() [get[quantity]add<accumulator>]
+
+[tag[shopping]reduce<num-items>]
+```
+
+is equivalent to:
+
+```
+[tag[shopping]] :reduce[get[quantity]add<accumulator>]
+```
+
+<$macrocall $name=".tip" _="""If the optional second parameter is not given, the initial accumulator value will be empty. Numerical operators treat empty input as if it was the number 0. See the multiply-input examples for how this can affect the result of <<.op reduce>> in some cases."""/>
 
 <<.operator-examples "reduce">>

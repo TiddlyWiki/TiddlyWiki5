@@ -5,6 +5,7 @@ BinaryWarning/Prompt: Deze tiddler bevat binaire data
 ClassicWarning/Hint: Deze tiddler is in TiddlyWiki Classic wiki tekstformaat geschreven dat niet geheel compatibel is met TiddlyWiki versie 5. Zie https://tiddlywiki.com/static/Upgrading.html voor meer details.
 ClassicWarning/Upgrade/Caption: upgrade
 CloseAll/Button: sluit alle
+ConfirmAction: Wil je doorgaan?
 ConfirmCancelTiddler: Wil je gemaakte wijzigingen aan de tiddler "<$text text=<<title>>/>" annuleren?
 ConfirmDeleteTiddler: Wil je de tiddler "<$text text=<<title>>/>" verwijderen?
 ConfirmEditShadowTiddler: Je staat op het punt een schaduwtiddler te wijzigen. Toekomstige automatische veranderingen (upgrades) zijn dan niet mogelijk. Wil je "<$text text=<<title>>/>" wijzigen?
@@ -24,7 +25,9 @@ Encryption/Username: Gebruikersnaam
 Error/Caption: Fout
 Error/EditConflict: Bestand gewijzigd op server
 Error/Filter: Filterfout
+Error/FilterRunPrefix: Filterfout: Onbekend voorvoegsel voor filter 'run'
 Error/FilterSyntax: Syntaxfout in filter expressie
+Error/FormatFilterOperator: Filterfout: Onbekend achtervoegsel voor de 'format' filter operator
 Error/IsFilterOperator: Filterfout: Onbekende operand voor het 'is' filter
 Error/LoadingPluginLibrary: Fout bij laden van de pluginbibliotheek
 Error/NetworkErrorAlert: `<h2>''Network fout''</h2>De verbinding met de server lijkt verbroken. Mogelijk een probleem met de netwerkverbinding. Herstel de netwerkverbinding voordat verder wordt gegaan.<br><br>''Niet opgeslagen veranderingen worden gesynchroniseerd als de verbinding hersteld is''.`
@@ -60,6 +63,15 @@ OfficialPluginLibrary: Officiële ~TiddlyWiki pluginbibliotheek
 OfficialPluginLibrary/Hint: De officiële ~TiddlyWiki pluginbibliotheek op tiddlywiki.com. Plugins, thema's en taalpaketten worden door het core team onderhouden.
 PluginReloadWarning: Sla op {{$:/core/ui/Buttons/save-wiki}} en ververs {{$:/core/ui/Buttons/refresh}} om wijzigingen aan plugins door te voeren
 RecentChanges/DateFormat: DD MMM YYYY
+Shortcuts/Input/Accept/Hint: Accepteer het geselecteerde item
+Shortcuts/Input/AcceptVariant/Hint: Accepteer het geselecteerde item (variant)
+Shortcuts/Input/AdvancedSearch/Hint: Open geavanceerd zoeken vanuit het zoekveld in het zijpaneel
+Shortcuts/Input/Cancel/Hint: Wis het input veld
+Shortcuts/Input/Down/Hint: Selecteer het volgende item
+Shortcuts/Input/Tab-Left/Hint: Selecteer de voorgaande tab
+Shortcuts/Input/Tab-Right/Hint: Selecteer de volgende tab
+Shortcuts/Input/Up/Hint: Selecteer het voorgaande item
+Shortcuts/SidebarLayout/Hint: Verander de layout van het zijpaneel
 SystemTiddler/Tooltip: Dit is een systeem tiddler
 SystemTiddlers/Include/Prompt: Inclusief systeem tiddlers
 TagManager/Colour/Heading: Kleur

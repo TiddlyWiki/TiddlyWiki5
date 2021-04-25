@@ -11,9 +11,7 @@ alert-highlight: #d79921
 alert-muted-foreground: #504945
 background: #3c3836
 blockquote-bar: <<colour muted-foreground>>
-button-background: #504945
-button-foreground: #fbf1c7
-button-border: transparent
+button-foreground: <<colour page-background>>
 code-background: #504945
 code-border: #504945
 code-foreground: #fb4934
@@ -62,7 +60,9 @@ pre-border: #504945
 primary: #d79921
 select-tag-background: #665c54
 select-tag-foreground: <<colour foreground>>
-sidebar-button-foreground: <<colour foreground>>
+selection-background: #458588
+selection-foreground: <<colour foreground>>
+sidebar-button-foreground: <<colour page-background>>
 sidebar-controls-foreground-hover: #7c6f64
 sidebar-controls-foreground: #504945
 sidebar-foreground-shadow: transparent
@@ -97,7 +97,7 @@ tiddler-border: <<colour background>>
 tiddler-controls-foreground-hover: #7c6f64
 tiddler-controls-foreground-selected: <<colour primary>>
 tiddler-controls-foreground: #665c54
-tiddler-editor-background: #282828
+tiddler-editor-background: #32302f
 tiddler-editor-border-image: #282828
 tiddler-editor-border: #282828
 tiddler-editor-fields-even: #504945
@@ -121,7 +121,7 @@ toolbar-done-button:
 untagged-background: #504945
 very-muted-foreground: #bdae93
 wikilist-background: <<colour page-background>>
-wikilist-button-background: <<colour button-background>>
+wikilist-button-background: #acacac
 wikilist-button-foreground: <<colour button-foreground>>
 wikilist-item: <<colour background>>
 wikilist-toolbar-background: <<colour background>>

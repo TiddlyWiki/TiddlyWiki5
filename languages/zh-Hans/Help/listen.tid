@@ -22,6 +22,7 @@ listen 命令使用[[命名的命令参数|NamedCommandParameters]]：
 * ''readers'' - 允许读取此维基的主体，以逗号分隔的清单
 * ''writers'' - 允许写入此维基的主体，以逗号分隔的清单
 * ''csrf-disable'' - 设置为 "yes" 以禁用 CSRF 检查 (默认为 "no")
+* ''sse-enabled'' - 设置为 "yes" 以启用服务器传送的事件 (默认为 "no")
 * ''root-tiddler'' - 服务的基本条目 (默认为 "$:/core/save/all")
 * ''root-render-type'' - 呈现的基本条目的内容类型 (默认为 "text/plain")
 * ''root-serve-type'' - 服务的基本条目的内容类型 (默认为 "text/html")

@@ -21,12 +21,8 @@ $actions$
 </$list>
 \end
 
-\define input-next-actions(afterOrBefore:"after",reverse:"")
-<$list filter="[<__storeTitle__>get[text]minlength<__filterMinLength__>] [<__filterMinLength__>match[0]] +[limit[1]]" variable="ignore">
-<$vars userInput={{{ [<__storeTitle__>get[text]] }}} selectedItem={{{ [<__selectionStateTitle__>get[text]] }}}>
-<$set name="filteredList" filter="[subfilter<__primaryListFilter__>addsuffix[-primaryList]] =[subfilter<__secondaryListFilter__>addsuffix[-secondaryList]]">
-<$set name="nextItem" value={{{ [enlist<filteredList>$afterOrBefore$<selectedItem>] ~[enlist<filteredList>$reverse$nth[1]] }}}>
-<$list filter="[<nextItem>minlength[1]]">
+\define input-next-actions-inner()
+<$list filter="[<nextItem>minlength[1]]" variable="ignore">
 <$action-setfield $tiddler=<<__selectionStateTitle__>> text=<<nextItem>>/>
 <$list filter="[<__index__>match[]]">
 <$action-setfield $tiddler=<<__tiddler__>> $field=<<__field__>> $value={{{ [<nextItem>] +[splitregexp[(?:.(?!-))+$]] }}}/>
@@ -36,13 +32,43 @@ $actions$
 </$list>
 <$action-setfield $tiddler=<<__refreshTitle__>> text="yes"/>
 </$list>
+\end
+
+\define input-next-actions(afterOrBefore:"after",reverse:"")
+<$list filter="[<__storeTitle__>get[text]minlength<__filterMinLength__>] [<__filterMinLength__>match[0]] +[limit[1]]" variable="ignore">
+<$vars userInput={{{ [<__storeTitle__>get[text]] }}} selectedItem={{{ [<__selectionStateTitle__>get[text]] }}}>
+<$set name="configTiddler" value={{{ [subfilter<__configTiddlerFilter__>] }}}>
+<$vars primaryListFilter={{{ [<configTiddler>get<__firstSearchFilterField__>] }}} secondaryListFilter={{{ [<configTiddler>get<__secondSearchFilterField__>] }}}>
+<$set name="filteredList" filter="[subfilter<primaryListFilter>addsuffix[-primaryList]] =[subfilter<secondaryListFilter>addsuffix[-secondaryList]]">
+<$vars nextItem={{{ [enlist<filteredList>$afterOrBefore$<selectedItem>] ~[enlist<filteredList>$reverse$nth[1]] }}} firstItem={{{ [enlist<filteredList>nth[1]] }}} lastItem={{{ [enlist<filteredList>last[]] }}}>
+<$list filter="[<selectedItem>match<firstItem>!match<lastItem>]" variable="ignore">
+<$set name="nextItem" value={{{ [[$afterOrBefore$]match[before]then<userInput>addsuffix[-userInput]] ~[<nextItem>] }}}>
+<<input-next-actions-inner>>
 </$set>
+</$list>
+<$list filter="[<selectedItem>match<lastItem>!match<firstItem>]" variable="ignore">
+<$set name="nextItem" value={{{ [[$afterOrBefore$]match[after]then<userInput>addsuffix[-userInput]] ~[<nextItem>] }}}>
+<<input-next-actions-inner>>
+</$set>
+</$list>
+<$list filter="[<selectedItem>match<firstItem>match<lastItem>]" variable="ignore">
+<$set name="nextItem" value={{{ [<userInput>addsuffix[-userInput]] }}}>
+<<input-next-actions-inner>>
+</$set>
+</$list>
+<$list filter="[<selectedItem>!match<firstItem>!match<lastItem>]" variable="ignore">
+<<input-next-actions-inner>>
+</$list>
+</$vars>
+</$set>
+</$vars>
 </$set>
 </$vars>
 </$list>
 \end
 
-\define keyboard-driven-input(tiddler,storeTitle,field:"text",index:"",tag:"input",type,focus:"",inputAcceptActions,inputAcceptVariantActions,inputCancelActions,placeholder:"",default:"",class,primaryListFilter,secondaryListFilter,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0",refreshTitle,selectionStateTitle,cancelPopups:"")
+\define keyboard-driven-input(tiddler,storeTitle,field:"text",index:"",tag:"input",type,focus:"",inputAcceptActions,inputAcceptVariantActions,inputCancelActions,placeholder:"",default:"",class,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0",refreshTitle,selectionStateTitle,cancelPopups:"",configTiddlerFilter,firstSearchFilterField:"first-search-filter",secondSearchFilterField:"second-search-filter")
+\whitespace trim
 <$keyboard key="((input-accept))" actions=<<__inputAcceptActions__>>>
 <$keyboard key="((input-accept-variant))" actions=<<__inputAcceptVariantActions__>>>
 <$keyboard key="((input-up))" actions=<<input-next-actions "before" "reverse[]">>>

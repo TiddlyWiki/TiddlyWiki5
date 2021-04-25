@@ -1,0 +1,24 @@
+caption: cycle
+created: 20201118172906835
+modified: 20201118192136472
+op-input: a list of items
+op-output: the input list with the titles specified in the parameter toggled in a cyclical manner
+op-parameter: the <<.op cycle>> operator accepts 1 or 2 parameters, see below for details
+op-purpose: toggle in the input, the titles specified in the first operand in a cyclical manner
+tags: [[Filter Operators]] [[Listops Operators]] [[Order Operators]]
+title: cycle Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.23">>
+
+The <<.op cycle>> operator requires at least one parameter.
+
+```
+[cycle[<titles>],[step-size]]
+```
+* ''titles'' : a title list to toggle in the input list cyclically. If no title from the parameter is present in the input, the first title is added. If a title from the parameter is present in the input, it is replaced with the next title from the parameter. Note that all titles specified in this parameter should be unique.
+* ''step-size'': (optional). Defaults to 1. Specifies the number of steps in the parameter list to move each time. Can be a negative number.
+
+<$macrocall $name=".tip" _="While the <<.op cycle>> operator interprets its first parameter as a list of titles to cycle through, the [[toggle Operator]] accepts an unlimited number of distinct parameters and offers similar functionality."/>
+
+<<.operator-examples "cycle">>

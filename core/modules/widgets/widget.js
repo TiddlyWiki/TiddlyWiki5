@@ -113,7 +113,8 @@ Widget.prototype.getVariableInfo = function(name,options) {
 	// Check for the variable defined in the parent widget (or an ancestor in the prototype chain)
 	if(parentWidget && name in parentWidget.variables) {
 		var variable = parentWidget.variables[name],
-			value = variable.value,
+			originalValue = variable.value,
+			value = originalValue,
 			params = this.resolveVariableParameters(variable.params,actualParams);
 		// Substitute any parameters specified in the definition
 		$tw.utils.each(params,function(param) {
@@ -125,7 +126,9 @@ Widget.prototype.getVariableInfo = function(name,options) {
 		}
 		return {
 			text: value,
-			params: params
+			params: params,
+			srcVariable: variable,
+			isCacheable: originalValue === value
 		};
 	}
 	// If the variable doesn't exist in the parent widget then look for a macro module
@@ -330,9 +333,22 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 /*
 Make child widgets correspondng to specified parseTreeNodes
 */
-Widget.prototype.makeChildWidgets = function(parseTreeNodes) {
+Widget.prototype.makeChildWidgets = function(parseTreeNodes,options) {
+	options = options || {};
 	this.children = [];
 	var self = this;
+	// Create set variable widgets for each variable
+	$tw.utils.each(options.variables,function(value,name) {
+		var setVariableWidget = {
+			type: "set",
+			attributes: {
+				name: {type: "string", value: name},
+				value: {type: "string", value: value}
+			},
+			children: parseTreeNodes
+		};
+		parseTreeNodes = [setVariableWidget];
+	});
 	$tw.utils.each(parseTreeNodes || (this.parseTreeNode && this.parseTreeNode.children),function(childNode) {
 		self.children.push(self.makeChildWidget(childNode));
 	});
@@ -340,16 +356,32 @@ Widget.prototype.makeChildWidgets = function(parseTreeNodes) {
 
 /*
 Construct the widget object for a parse tree node
+options include:
+	variables: optional hashmap of variables to wrap around the widget
 */
-Widget.prototype.makeChildWidget = function(parseTreeNode) {
+Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
+	options = options || {};
 	var WidgetClass = this.widgetClasses[parseTreeNode.type];
 	if(!WidgetClass) {
 		WidgetClass = this.widgetClasses.text;
 		parseTreeNode = {type: "text", text: "Undefined widget '" + parseTreeNode.type + "'"};
 	}
+	// Create set variable widgets for each variable
+	$tw.utils.each(options.variables,function(value,name) {
+		var setVariableWidget = {
+			type: "set",
+			attributes: {
+				name: {type: "string", value: name},
+				value: {type: "string", value: value}
+			},
+			children: [
+				parseTreeNode
+			]
+		};
+		parseTreeNode = setVariableWidget;
+	});
 	return new WidgetClass(parseTreeNode,{
 		wiki: this.wiki,
-		variables: {},
 		parentWidget: this,
 		document: this.document
 	});
@@ -574,10 +606,10 @@ Widget.prototype.invokeActionString = function(actions,triggeringWidget,event,va
 /*
 Execute action tiddlers by tag
 */
-Widget.prototype.executeStartupTiddlers = function(tag) {
+Widget.prototype.invokeActionsByTag = function(tag,event,variables) {
 	var self = this;
 	$tw.utils.each(self.wiki.filterTiddlers("[all[shadows+tiddlers]tag[" + tag + "]!has[draft.of]]"),function(title) {
-		self.invokeActionString(self.wiki.getTiddlerText(title),self);
+		self.invokeActionString(self.wiki.getTiddlerText(title),self,event,variables);
 	});
 };
 

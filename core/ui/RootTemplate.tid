@@ -1,0 +1,4 @@
+title: $:/core/ui/RootTemplate
+
+<$transclude tiddler={{{ [{$:/layout}has[text]] ~[[$:/core/ui/PageTemplate]] }}} mode="inline"/>
+
