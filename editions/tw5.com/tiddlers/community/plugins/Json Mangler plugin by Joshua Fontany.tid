@@ -1,0 +1,13 @@
+created: 20190308041321498
+modified: 20210106151027480
+tags: [[Community Plugins]]
+title: Json Mangler plugin by Joshua Fontany
+type: text/vnd.tiddlywiki
+
+Extend tiddlywiki to parse complex ("nested") json data tiddlers.
+
+Json Mangler introduces a new path syntax for indexes of json data tiddlers , and includes many supporting tools, filters, widgets, etc.
+
+Example Wiki: https://joshuafontany.github.io/TW5-JsonMangler/
+
+Source: https://github.com/joshuafontany/TW5-JsonMangler

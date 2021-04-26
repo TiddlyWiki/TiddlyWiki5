@@ -1,0 +1,16 @@
+created: 20140908103900000
+modified: 20210106151027444
+tags: [[Community Plugins]]
+title: Eucaly's Tiddly World
+type: text/vnd.tiddlywiki
+url: http://eucaly-tw5.tiddlyspot.com/
+
+I collect my tw5 creations on-line as http://eucaly-tw5.tiddlyspot.com/
+
+Available Plugins :
+
+*TitleMe - Return in-place tiddler title, to link / show / edit the source tiddler
+*QuickJump - Quick jump to tiddlers in story list
+*FlexWidth - Flexibly tweak sidebar width for TiddlyWiki 5 (Inspired by TW5 tristate Sidebar)
+*MatchFilter - returns matching text instead of a list of the tiddlers from FieldFilter
+*PopupTagger - TagBar / TagTable with popup list of tags (Inspired by MonkeyTaggerMacro for TiddlyWiki classic)

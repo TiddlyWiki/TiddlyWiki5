@@ -87,6 +87,10 @@ html button {
 	border-color: <<colour button-border>>;
 }
 
+button:disabled svg {
+	fill: <<colour muted-foreground>>;
+}
+
 /*
 ** Basic element styles
 */
@@ -420,6 +424,10 @@ a.tc-tiddlylink-external:hover {
 	background-color: <<colour page-background>>;
 }
 
+.tc-page-container > .tc-dropzone {
+	min-height: 100vh;
+}
+
 .tc-dropzone {
 	position: relative;
 }
@@ -685,11 +693,14 @@ button svg.tc-image-button, button .tc-image-button img {
 .tc-tag-list-item {
 	position: relative;
 	display: inline-block;
-	margin-right: 7px;
 }
 
 .tc-tags-wrapper {
 	margin: 4px 0 14px 0;
+}
+
+.tc-tags-wrapper .tc-tag-list-item {
+	margin-right: 7px;
 }
 
 .tc-missing-tiddler-label {
@@ -995,6 +1006,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 {{$:/themes/tiddlywiki/vanilla/sticky}}
 
 .tc-tiddler-info {
+	overflow: hidden;
 	padding: 14px 42px 14px 42px;
 	background-color: <<colour tiddler-info-background>>;
 	border-top: 1px solid <<colour tiddler-info-border>>;
@@ -1595,6 +1607,10 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-drop-down button svg, .tc-drop-down a svg  {
 	fill: <<colour foreground>>;
+}
+
+.tc-drop-down button:disabled svg {
+	fill: <<colour muted-foreground>>;
 }
 
 .tc-drop-down button.tc-btn-invisible:hover svg {
@@ -2937,6 +2953,19 @@ select {
 /*
 ** Other utility classes
 */
+
+.tc-tiny-gap {
+	margin-left: .25em;
+	margin-right: .25em;
+}
+
+.tc-tiny-gap-left {
+	margin-left: .25em;
+}
+
+.tc-tiny-gap-right {
+	margin-right: .25em;
+}
 
 .tc-small-gap {
 	margin-left: .5em;

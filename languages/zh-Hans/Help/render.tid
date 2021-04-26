@@ -8,7 +8,7 @@ description: 呈现个别条目到文件
 也可以选择性地指定附加变量的名称和值。
 
 ```
---render <tiddler-filter> [<filename-filter>] [<render-type>] [<template>] [<name>] [<value>]
+--render <tiddler-filter> [<filename-filter>] [<render-type>] [<template>] [ [<name>] [<value>] ]*
 ```
 
 * ''tiddler-filter'': 标识要呈现的条目的筛选器

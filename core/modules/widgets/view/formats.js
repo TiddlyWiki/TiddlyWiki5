@@ -32,6 +32,8 @@ exports.plainwikified = function(text,widget) {
 
 exports.htmlencoded = $tw.utils.htmlEncode;
 
+exports.htmltextencoded = $tw.utils.htmlTextEncode;
+
 exports.urlencoded = encodeURIComponent;
 
 exports.date = function(text,widget) {

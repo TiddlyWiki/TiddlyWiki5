@@ -1,0 +1,22 @@
+created: 20210101163650901
+modified: 20210101163652263 
+tags: [[Community Palettes]]
+title: "Dracula - a dark palette for TiddlyWiki" by SlyBouhafs & zenorocha
+url: https://draculatheme.com/tiddlywiki
+
+A dark palette for TiddlyWiki.
+
+{{!!url}}
+
+<<<
+!!! Install manually
+
+Open the Control Panel > Appereance > Palette, scroll down and clone a platte, rename it to Dracula and copy the code from the website.
+
+!!! Activating theme
+
+* Open the Control Panel > Appereance > Palette
+* Scroll down and select Dracula
+* Boom! It's working
+
+<<<

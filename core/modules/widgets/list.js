@@ -61,6 +61,7 @@ ListWidget.prototype.execute = function() {
 	this.template = this.getAttribute("template");
 	this.editTemplate = this.getAttribute("editTemplate");
 	this.variableName = this.getAttribute("variable","currentTiddler");
+	this.indexName = this.getAttribute("index");
 	this.storyViewName = this.getAttribute("storyview");
 	this.historyTitle = this.getAttribute("history");
 	// Compose the list elements
@@ -72,7 +73,7 @@ ListWidget.prototype.execute = function() {
 		members = this.getEmptyMessage();
 	} else {
 		$tw.utils.each(this.list,function(title,index) {
-			members.push(self.makeItemTemplate(title));
+			members.push(self.makeItemTemplate(title,index));
 		});
 	}
 	// Construct the child widgets
@@ -105,7 +106,7 @@ ListWidget.prototype.getEmptyMessage = function() {
 /*
 Compose the template for a list item
 */
-ListWidget.prototype.makeItemTemplate = function(title) {
+ListWidget.prototype.makeItemTemplate = function(title,index) {
 	// Check if the tiddler is a draft
 	var tiddler = this.wiki.getTiddler(title),
 		isDraft = tiddler && tiddler.hasField("draft.of"),
@@ -128,7 +129,14 @@ ListWidget.prototype.makeItemTemplate = function(title) {
 		}
 	}
 	// Return the list item
-	return {type: "listitem", itemTitle: title, variableName: this.variableName, children: templateTree};
+	var parseTreeNode = {type: "listitem", itemTitle: title, variableName: this.variableName, children: templateTree};
+	if(this.indexName) {
+		parseTreeNode.index = index.toString();
+		parseTreeNode.indexName = this.indexName;
+		parseTreeNode.isFirst = index === 0;
+		parseTreeNode.isLast = index === this.list.length - 1;
+	}
+	return parseTreeNode;
 };
 
 /*
@@ -142,7 +150,7 @@ ListWidget.prototype.refresh = function(changedTiddlers) {
 		this.storyview.refreshStart(changedTiddlers,changedAttributes);
 	}
 	// Completely refresh if any of our attributes have changed
-	if(changedAttributes.filter || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.emptyMessage || changedAttributes.storyview || changedAttributes.history) {
+	if(changedAttributes.filter || changedAttributes.variable || changedAttributes.index || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.emptyMessage || changedAttributes.storyview || changedAttributes.history) {
 		this.refreshSelf();
 		result = true;
 	} else {
@@ -211,23 +219,41 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 			this.removeChildDomNodes();
 			this.children = [];
 		}
-		// Cycle through the list, inserting and removing list items as needed
-		var hasRefreshed = false;
-		for(var t=0; t<this.list.length; t++) {
-			var index = this.findListItem(t,this.list[t]);
-			if(index === undefined) {
-				// The list item must be inserted
-				this.insertListItem(t,this.list[t]);
-				hasRefreshed = true;
-			} else {
-				// There are intervening list items that must be removed
-				for(var n=index-1; n>=t; n--) {
-					this.removeListItem(n);
+		// If we are providing an index variable then we must refresh the items, otherwise we can rearrange them
+		var hasRefreshed = false,t;
+		if(this.indexName) {
+			// Cycle through the list and remove and re-insert the first item that has changed, and all the remaining items
+			for(t=0; t<this.list.length; t++) {
+				if(hasRefreshed || !this.children[t] || this.children[t].parseTreeNode.itemTitle !== this.list[t]) {
+					if(this.children[t]) {
+						this.removeListItem(t);
+					}
+					this.insertListItem(t,this.list[t]);
 					hasRefreshed = true;
+				} else {
+					// Refresh the item we're reusing
+					var refreshed = this.children[t].refresh(changedTiddlers);
+					hasRefreshed = hasRefreshed || refreshed;
 				}
-				// Refresh the item we're reusing
-				var refreshed = this.children[t].refresh(changedTiddlers);
-				hasRefreshed = hasRefreshed || refreshed;
+			}
+		} else {
+			// Cycle through the list, inserting and removing list items as needed
+			for(t=0; t<this.list.length; t++) {
+				var index = this.findListItem(t,this.list[t]);
+				if(index === undefined) {
+					// The list item must be inserted
+					this.insertListItem(t,this.list[t]);
+					hasRefreshed = true;
+				} else {
+					// There are intervening list items that must be removed
+					for(var n=index-1; n>=t; n--) {
+						this.removeListItem(n);
+						hasRefreshed = true;
+					}
+					// Refresh the item we're reusing
+					var refreshed = this.children[t].refresh(changedTiddlers);
+					hasRefreshed = hasRefreshed || refreshed;
+				}
 			}
 		}
 		// Remove any left over items
@@ -257,7 +283,7 @@ Insert a new list item at the specified index
 */
 ListWidget.prototype.insertListItem = function(index,title) {
 	// Create, insert and render the new child widgets
-	var widget = this.makeChildWidget(this.makeItemTemplate(title));
+	var widget = this.makeChildWidget(this.makeItemTemplate(title,index));
 	widget.parentDomNode = this.parentDomNode; // Hack to enable findNextSiblingDomNode() to work
 	this.children.splice(index,0,widget);
 	var nextSibling = widget.findNextSiblingDomNode();
@@ -311,6 +337,11 @@ Compute the internal state of the widget
 ListItemWidget.prototype.execute = function() {
 	// Set the current list item title
 	this.setVariable(this.parseTreeNode.variableName,this.parseTreeNode.itemTitle);
+	if(this.parseTreeNode.indexName) {
+		this.setVariable(this.parseTreeNode.indexName,this.parseTreeNode.index);
+		this.setVariable(this.parseTreeNode.indexName + "-first",this.parseTreeNode.isFirst ? "yes" : "no");
+		this.setVariable(this.parseTreeNode.indexName + "-last",this.parseTreeNode.isLast ? "yes" : "no");
+	}
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
