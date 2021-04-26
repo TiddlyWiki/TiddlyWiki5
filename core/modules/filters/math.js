@@ -125,14 +125,6 @@ exports.minall = makeNumericReducingOperator(
 	Infinity // Initial value
 );
 
-exports.average = makeNumericReducingOperator(
-	function(accumulator,value) {return accumulator + value},
-	0, // Initial value
-	function(finalValue,numberOfValues) {
-		return finalValue/numberOfValues;
-	}
-);
-
 exports.median = makeNumericArrayOperator(
 	function(values) {
 		var len = values.length, median;
@@ -148,6 +140,39 @@ exports.median = makeNumericArrayOperator(
 	}
 );
 
+exports.average = makeNumericReducingOperator(
+	function(accumulator,value) {return accumulator + value},
+	0, // Initial value
+	function(finalValue,numberOfValues) {
+		return finalValue/numberOfValues;
+	}
+);
+
+exports.variance = makeNumericReducingOperator(
+	function(accumulator,value) {return accumulator + value},
+	0,
+	function(finalValue,numberOfValues,originalValues) {
+		return getVarianceFromArray(originalValues,finalValue/numberOfValues);
+	}
+);
+
+exports["standard-deviation"] = makeNumericReducingOperator(
+	function(accumulator,value) {return accumulator + value},
+	0,
+	function(finalValue,numberOfValues,originalValues) {
+		var variance = getVarianceFromArray(originalValues,finalValue/numberOfValues);
+		return Math.sqrt(variance);
+	}
+);
+
+//Calculate the variance of a population of numbers in an array given its mean
+function getVarianceFromArray(values,mean) {
+	var deviationTotal = values.reduce(function(accumulator,value) {
+		return accumulator + Math.pow(value - mean, 2);
+	},0);
+	return deviationTotal/values.length;
+};
+
 function makeNumericBinaryOperator(fnCalc) {
 	return function(source,operator,options) {
 		var result = [],
@@ -157,24 +182,24 @@ function makeNumericBinaryOperator(fnCalc) {
 		});
 		return result;
 	};
-}
+};
 
 function makeNumericReducingOperator(fnCalc,initialValue,fnFinal) {
 	initialValue = initialValue || 0;
 	return function(source,operator,options) {
 		var result = [];
 		source(function(tiddler,title) {
-			result.push(title);
+			result.push($tw.utils.parseNumber(title));
 		});
 		var value = result.reduce(function(accumulator,currentValue) {
-				return fnCalc(accumulator,$tw.utils.parseNumber(currentValue));
+				return fnCalc(accumulator,currentValue);
 			},initialValue);
 		if(fnFinal) {
-			value = fnFinal(value,result.length);
+			value = fnFinal(value,result.length,result);
 		}
 		return [$tw.utils.stringifyNumber(value)];
 	};
-}
+};
 
 function makeNumericArrayOperator(fnCalc) {
 	return function(source,operator,options) {
@@ -188,6 +213,6 @@ function makeNumericArrayOperator(fnCalc) {
 		});
 		return results;
 	};
-}
+};
 
 })();

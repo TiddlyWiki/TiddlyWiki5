@@ -1,6 +1,6 @@
-caption: 20210417090137714
+caption: median
 created: 20210417090137714
-modified: 20210417090137714
+modified: 20210426131553507
 op-input: a [[selection of titles|Title Selection]]
 op-output: the median of the input numbers
 op-purpose: treating each input title as a number, compute their median value
