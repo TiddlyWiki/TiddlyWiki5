@@ -1,6 +1,6 @@
-caption: 20210417090137714
+caption: average
 created: 20210417090137714
-modified: 20210417090137714
+modified: 20210426131553482
 op-input: a [[selection of titles|Title Selection]]
 op-output: the arithmetic mean of the input as numbers
 op-purpose: treating each input title as a number, compute their arithmetic mean
