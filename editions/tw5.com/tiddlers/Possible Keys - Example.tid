@@ -1,0 +1,58 @@
+created: 20210427130002905
+modified: 20210427131850337
+tags: KeyboardWidget
+title: Possible Keys - Example
+type: text/vnd.tiddlywiki
+
+\define getText() 
+<$vars tv-wikilinks="no">
+
+* key: ''$(key)$''
+* code: ''$(code)$''
+* modifierKey: ''$(modifierKey)$''
+</$vars>
+\end
+
+\define actionKey()
+<$action-setfield $tiddler="$:/temp/key-test/action" text=<<getText>> />
+\end
+
+\define keys()
+1 2 3
+shift+1 shift+2 shift+3
+a s d
+f1 f2 f3
+\end
+
+! Results In
+
+{{$:/temp/key-test/action}}
+
+! Input Area
+
+''Info: Depending on your OS and browser keyboard settings, some combinations may be "eaten" by the OS, or the browser!''
+
+<$list filter="[[$:/temp/key-test]!has[title]]" >
+  <$button>Play with me!
+    <$action-setfield $tiddler="$:/temp/key-test" text=""/>
+    <$action-setfield $tiddler="$:/temp/key-test/action" text=<<getText>>/>
+  </$button>
+</$list>
+<$list filter="[[$:/temp/key-test]has[title]]" >
+  <$button>Close
+    <$action-deletetiddler $tiddler="$:/temp/key-test"/>
+    <$action-deletetiddler $tiddler="$:/temp/key-test/action"/>
+  </$button>
+
+  <$keyboard key={{{ [enlist<keys>join[ ]] }}} actions=<<actionKey>> >
+	<$edit-text tiddler="$:/temp/key-test" placeholder="- hit key from list below -" tag=input focus />
+  </$keyboard>
+</$list>
+
+! Test Configuration
+
+<pre><code><<keys>></code></pre>
+
+All possible keys can be found at: [[Possible Keys]]
+
+A more advanced example can be found at: [[Possible Keys - Example 1]]

@@ -1,0 +1,101 @@
+created: 20210427092418146
+modified: 20210427131251135
+tags: KeyboardWidget
+title: Possible Keys - Example 1
+type: text/vnd.tiddlywiki
+
+\define getText() 
+<$vars tv-wikilinks="no">
+
+* key: ''$(key)$''
+* code: ''$(code)$''
+* modifierKey: ''$(modifierKey)$''
+</$vars>
+\end
+
+\define actionKey()
+<$action-setfield $tiddler="$:/temp/key-test/action" text=<<getText>> />
+\end
+
+\define keys()
+backspace tab clear return enter pause escape space 
+page_up page_down end home printscreen insert delete
+
+left up right down                          results in: ArrowLeft ArrowUp ArrowRight ArrowDown
+
+      0       1       2       3
+shift+0 shift+1 shift+2 shift+3             results in: = ! "     with modifierKey: shift
+ ctrl+0  ctrl+1  ctrl+2  ctrl+3
+  alt+0   alt+1   alt+2   alt+3
+
+      ctrl+alt+0       ctrl+alt+1       ctrl+alt+2       ctrl+alt+3
+     alt+shift+0      alt+shift+1      alt+shift+2      alt+shift+3
+    ctrl+shift+0     ctrl+shift+1     ctrl+shift+2     ctrl+shift+3        INFO: ctrl-shift-0  is eaten by windows!!
+ctrl+alt+shift+0 ctrl+alt+shift+1 ctrl+alt+shift+2 ctrl+alt+shift+3
+
+               a                s                d
+         shift+a          shift+s          shift+d 
+          ctrl+a           ctrl+s           ctrl+d
+           alt+a            alt+s            alt+d
+
+    ctrl+shift+a     ctrl+shift+s     ctrl+shift+d
+     alt+shift+a      alt+shift+s      alt+shift+d
+      ctrl+alt+a       ctrl+alt+s       ctrl+alt+d
+ctrl+alt+shift+a ctrl+alt+shift+s ctrl+alt+shift+d
+
+numpad0 numpad1 numpad2 numpad3
+
+multiply add separator subtract decimal divide
+
+f1  f2  f3  
+
+semicolon equals comma dash period slash backquote openbracket backslash closebracket quote
+\end
+
+! Results In
+
+{{$:/temp/key-test/action}}
+
+! Input Area
+
+''Info: Depending on your OS and browser keyboard settings, some combinations may be "eaten" by the OS, or the browser!''
+
+<$list filter="[[$:/temp/key-test]!has[title]]" >
+  <$button>Play with me!
+    <$action-setfield $tiddler="$:/temp/key-test" text=""/>
+    <$action-setfield $tiddler="$:/temp/key-test/action" text=<<getText>>/>
+  </$button>
+</$list>
+<$list filter="[[$:/temp/key-test]has[title]]" >
+  <$button>Close
+    <$action-deletetiddler $tiddler="$:/temp/key-test"/>
+    <$action-deletetiddler $tiddler="$:/temp/key-test/action"/>
+  </$button>
+
+  <$keyboard key={{{ [enlist<keys>join[ ]] }}} actions=<<actionKey>> >
+	<$edit-text tiddler="$:/temp/key-test" placeholder="- hit key from list below -" tag=input focus />
+  </$keyboard>
+</$list>
+
+! Test Configuration
+
+All possible keys can be found at: [[Possible Keys]]
+
+<pre><code><$vars tv-wikilinks="no"><<keys>></$vars></code></pre>
+
+! Example Code
+
+<$reveal type="nomatch" state="$:/state/key-code" text="show">
+
+<$button set="$:/state/key-code" setTo="show">Show the code</$button>
+
+</$reveal>
+<$reveal type="match" state="$:/state/key-code" text="show">
+
+<$button set="$:/state/key-code" setTo="hide">Hide the code</$button>
+
+<pre><code><$view /></code></pre>
+
+<$button set="$:/state/key-code" setTo="hide">Hide the code</$button>
+
+</$reveal>

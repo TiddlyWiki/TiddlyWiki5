@@ -1,6 +1,6 @@
 caption: keyboard
 created: 20140302192136805
-modified: 20161003114634019
+modified: 20210427121758368
 tags: Widgets
 title: KeyboardWidget
 type: text/vnd.tiddlywiki
@@ -14,7 +14,7 @@ The keyboard widget allows ActionWidgets to be triggered by specific key combina
 The content of the `<$keyboard>` widget is rendered normally. The keyboard shortcuts only take effect when the focus is within the contained content.
 
 |!Attribute |!Description |
-|actions |A string containing ActionWidgets to be triggered when the key combination is detected |
+|actions |A string containing ActionWidgets to be triggered when the key combination is detected<br><<.from-version "5.1.24">> The variables: ''key'', ''code'' and ''modifierKey'' are available for the actions |
 |message |The title of the [[WidgetMessage|Messages]] to generate |
 |param |The parameter to be passed with the [[WidgetMessage|Messages]] |
 |key |Key string identifying the key(s) to be trapped (see below) |
@@ -43,3 +43,7 @@ shift+escape
 ctrl+enter
 ctrl+shift+alt+A
 ```
+
+! Possible Keys
+
+Find more at: [[Possible Keys]]
