@@ -1,6 +1,6 @@
 caption: unusedtitle
 created: 20210104143546885
-modified: 20210228140649448
+modified: 20210427184035684
 tags: Macros [[Core Macros]]
 title: unusedtitle Macro
 type: text/vnd.tiddlywiki
@@ -22,18 +22,19 @@ It uses the same method as the create new tiddler button, a number is appended t
 
 !! Template String
 
-; `$baseName$`
+; `$basename$`
 : This variable will be replaced by the content of the ''baseName'' parameter
 
-; `$SEP$`
+; `$separator$`
 : This variable will be replaced by the ''separator'' parameter
 
-;`$CNT$`
+;`$count$`
 : This variable will be createad automatically and is a counter starting with 0
 
-;`$CNT:4$`
+;`$count:4$`
 : This variable will be createad automatically and starts at 0000
 : `:4` represents the number of digits
 
+!! Examples
 
-<<.macro-examples "unusedtitle">>
+<<list-links "[prefix[unusedtitle Macro (E]!sort[]]">>

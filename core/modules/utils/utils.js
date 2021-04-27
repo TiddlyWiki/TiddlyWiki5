@@ -301,16 +301,16 @@ exports.formatTitleString = function(template,options) {
 	var result = "",
 		t = template,
 		matches = [
-			[/^\$baseName\$/, function() {
+			[/^\$basename\$/i, function() {
 				return base;
 			}],
-			[/^\$CNT:(\d+)\$/, function(match) {
+			[/^\$count:(\d+)\$/i, function(match) {
 				return $tw.utils.pad(counter,match[1]);
 			}],
-			[/^\$SEP\$/, function() {
+			[/^\$separator\$/i, function() {
 				return separator;
 			}],
-			[/^\$CNT\$/, function() {
+			[/^\$count\$/i, function() {
 				return counter + "";
 			}]
 		];

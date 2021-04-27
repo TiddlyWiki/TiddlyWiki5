@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 <$macrocall $name=".example" n="2" eg="""<<unusedtitle separator:"-">>"""/>
 <$macrocall $name=".example" n="3" eg="""<<unusedtitle baseName:"anotherBase">>"""/>
 <$macrocall $name=".example" n="4" eg="""<<unusedtitle baseName:"About" separator:"-">>"""/>
-<$macrocall $name=".example" n="5" eg="""<<unusedtitle template:"$CNT:2$-test">>"""/>
+<$macrocall $name=".example" n="5" eg="""<<unusedtitle template:"$count:2$-test">>"""/>
 
 ---
 

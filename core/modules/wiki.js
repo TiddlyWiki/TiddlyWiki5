@@ -199,8 +199,8 @@ exports.generateNewTitle = function(baseTitle,options) {
 		template = options.template,
 		prefix = (typeof(options.prefix) === "string") ? options.prefix : " ";
 	if (template) {
-		// CNT is important to avoid an endless loop in while(...)!!
-		template = (template.indexOf("$CNT") === -1) ? template + "$CNT$" : template;
+		// "count" is important to avoid an endless loop in while(...)!!
+		template = (/\$count:?(\d+)?\$/i.test(template)) ? template : template + "$count$";
 		title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":c});
 		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
 			title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":(++c)});
