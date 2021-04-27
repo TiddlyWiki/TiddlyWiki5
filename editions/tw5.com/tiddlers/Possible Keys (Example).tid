@@ -1,7 +1,7 @@
 created: 20210427130002905
-modified: 20210427131850337
+modified: 20210427185234174
 tags: KeyboardWidget
-title: Possible Keys - Example
+title: Possible Keys (Example)
 type: text/vnd.tiddlywiki
 
 \define getText() 
@@ -55,4 +55,4 @@ f1 f2 f3
 
 All possible keys can be found at: [[Possible Keys]]
 
-A more advanced example can be found at: [[Possible Keys - Example 1]]
+A more advanced example can be found at: [[Possible Keys (Example 1)]]

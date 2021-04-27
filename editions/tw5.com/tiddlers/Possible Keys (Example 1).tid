@@ -1,7 +1,7 @@
 created: 20210427092418146
-modified: 20210427131251135
+modified: 20210427185152614
 tags: KeyboardWidget
-title: Possible Keys - Example 1
+title: Possible Keys (Example 1)
 type: text/vnd.tiddlywiki
 
 \define getText() 
