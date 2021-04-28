@@ -168,7 +168,23 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	}
 	// Try to import the various data types we understand
 	if(numFiles === 0) {
-		$tw.utils.importDataTransfer(dataTransfer,this.wiki.generateNewTitle("Untitled"),readFileCallback);
+		var fallbackTitle = self.wiki.generateNewTitle("Untitled");
+		//Use the deserializer specified if any
+		if(this.dropzoneDeserializer) {
+			for(var t= 0; t<dataTransfer.items.length; t++) {
+				var item = dataTransfer.items[t];
+				if(item.kind === "string") {
+					item.getAsString(function(str){
+						var tiddlerFields = self.wiki.deserializeTiddlers(null,str,{title: fallbackTitle},{deserializer:self.dropzoneDeserializer});
+						if(tiddlerFields && tiddlerFields.length) {
+							readFileCallback(tiddlerFields);
+						}
+					})
+				}
+			}
+		} else {
+			$tw.utils.importDataTransfer(dataTransfer,fallbackTitle,readFileCallback);
+		}
 	}
 	// Tell the browser that we handled the drop
 	event.preventDefault();
@@ -196,17 +212,26 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 				});
 			} else if(item.kind === "string") {
 				// Create tiddlers from string items
-				var type = item.type;
+				var tiddlerFields,
+					type = item.type;
 				item.getAsString(function(str) {
-					var tiddlerFields = {
-						title: self.wiki.generateNewTitle("Untitled"),
-						text: str,
-						type: type
-					};
-					if($tw.log.IMPORT) {
-						console.log("Importing string '" + str + "', type: '" + type + "'");
+					// Use the deserializer specified if any
+					if(self.dropzoneDeserializer) {
+						tiddlerFields = self.wiki.deserializeTiddlers(null,str,{title: self.wiki.generateNewTitle("Untitled")},{deserializer:self.dropzoneDeserializer});
+						if(tiddlerFields && tiddlerFields.length) {
+							readFileCallback(tiddlerFields);
+						}
+					} else {
+						tiddlerFields = {
+							title: self.wiki.generateNewTitle("Untitled"),
+							text: str,
+							type: type
+						};
+						if($tw.log.IMPORT) {
+							console.log("Importing string '" + str + "', type: '" + type + "'");
+						}
+						readFileCallback([tiddlerFields]);
 					}
-					readFileCallback([tiddlerFields]);
 				});
 			}
 		}

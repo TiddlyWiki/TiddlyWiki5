@@ -1,5 +1,5 @@
 created: 20190206140446821
-modified: 20190611155838557
+modified: 20210417090408263
 tags: Filters
 title: Mathematics Operators
 type: text/vnd.tiddlywiki
@@ -26,6 +26,7 @@ The mathematics operators take three different forms:
 * ''Reducing operators'' apply an operation to all of the numbers in the input list, returning a single result (e.g. sum, product)
 ** <<.inline-operator-example "=1 =2 =3 =4 +[sum[]]">>
 ** <<.inline-operator-example "=1 =2 =3 =4 +[product[]]">>
+** <<.inline-operator-example "=1 =2 =3 =4 +[average[]]">>
 
 Operators can be combined:
 

@@ -23,11 +23,11 @@ Encryption/RepeatPassword: Repetir palavra passe
 Encryption/SetPassword: Definir palavra passe
 Encryption/Username: Nome de utilizador
 Error/Caption: Erro
-Error/EditConflict: File changed on server
 Error/Filter: Erro de filtro
 Error/FilterSyntax: Erro de sintaxe na expressão do filtro
 Error/IsFilterOperator: Erro de Filtro: Operando desconhecido para o operador de filtro 'is'
 Error/LoadingPluginLibrary: Erro ao carregar a biblioteca de extensões
+Error/PutEditConflict: File changed on server
 Error/RecursiveTransclusion: Erro de transclusão recursiva na widget de transclusão
 Error/RetrievingSkinny: Erro ao obter a lista simples de tiddlers
 Error/SavingToTWEdit: Erro ao gravar em TWEdit
