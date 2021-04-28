@@ -22,11 +22,11 @@ Encryption/RepeatPassword: تکرار رمز
 Encryption/SetPassword: تعیین رمز
 Encryption/Username: نام کاربری
 Error/Caption: خطا
-Error/EditConflict: فایل در سرور عوض شد
 Error/Filter: خطای فیلتر
 Error/FilterSyntax: در نحوه‌ی بیان فیلتر خطای نحوی وجود داشت
 Error/IsFilterOperator: خطای فیلتر: عملکرد ناشناخته‌ای برای عملگر 'is' مشخص شده
 Error/LoadingPluginLibrary: خطا در بارگزاری کتاب‌خانه افزونه
+Error/PutEditConflict: فایل در سرور عوض شد
 Error/RecursiveTransclusion: Recursive transclusion error in transclude widget
 Error/RetrievingSkinny: طا در دریافت لیست‌های تیدلر لاغر
 Error/SavingToTWEdit: خطا در ذخیره در TWEdit

@@ -25,7 +25,7 @@ The message catcher widget
 |!Variables |!Description |
 |`event-*` |All string-based properties of the `event` object, with the names prefixed with `event-` |
 |`event-paramObject-*` |All string-based properties of the `event.paramObject` object, with the names prefixed with `event-paramObject-` |
-|`modifier` |For messages that originated with browser events, the modifier keys that were pressed when the event was fired. The possible modifiers are ''norma'' (no modifiers), ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' and ''ctrl-alt-shift'' |
+|`modifier` |For messages that originated with browser events, the modifier keys that were pressed when the event was fired. The possible modifiers are ''normal'' (no modifiers), ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' and ''ctrl-alt-shift'' |
 
 ! Example
 

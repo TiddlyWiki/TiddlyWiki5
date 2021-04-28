@@ -87,6 +87,10 @@ html button {
 	border-color: <<colour button-border>>;
 }
 
+button:disabled svg {
+	fill: <<colour muted-foreground>>;
+}
+
 /*
 ** Basic element styles
 */
@@ -1603,6 +1607,10 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-drop-down button svg, .tc-drop-down a svg  {
 	fill: <<colour foreground>>;
+}
+
+.tc-drop-down button:disabled svg {
+	fill: <<colour muted-foreground>>;
 }
 
 .tc-drop-down button.tc-btn-invisible:hover svg {

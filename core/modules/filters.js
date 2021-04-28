@@ -137,7 +137,7 @@ exports.parseFilter = function(filterString) {
 		p = 0, // Current position in the filter string
 		match;
 	var whitespaceRegExp = /(\s+)/mg,
-		operandRegExp = /((?:\+|\-|~|=|\:(\w+))?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
+		operandRegExp = /((?:\+|\-|~|=|\:(\w+)(?:\:([\w\:, ]*))?)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
 	while(p < filterString.length) {
 		// Skip any whitespace
 		whitespaceRegExp.lastIndex = p;
@@ -162,15 +162,27 @@ exports.parseFilter = function(filterString) {
 				if(match[2]) {
 					operation.namedPrefix = match[2];
 				}
+				if(match[3]) {
+					operation.suffixes = [];
+					 $tw.utils.each(match[3].split(":"),function(subsuffix) {
+						operation.suffixes.push([]);
+						$tw.utils.each(subsuffix.split(","),function(entry) {
+							entry = $tw.utils.trim(entry);
+							if(entry) {
+								operation.suffixes[operation.suffixes.length -1].push(entry);
+							}
+						});
+					 });
+				}
 			}
-			if(match[3]) { // Opening square bracket
+			if(match[4]) { // Opening square bracket
 				p = parseFilterOperation(operation.operators,filterString,p);
 			} else {
 				p = match.index + match[0].length;
 			}
-			if(match[4] || match[5] || match[6]) { // Double quoted string, single quoted string or unquoted title
+			if(match[5] || match[6] || match[7]) { // Double quoted string, single quoted string or unquoted title
 				operation.operators.push(
-					{operator: "title", operands: [{text: match[4] || match[5] || match[6]}]}
+					{operator: "title", operands: [{text: match[5] || match[6] || match[7]}]}
 				);
 			}
 			results.push(operation);
@@ -280,7 +292,7 @@ exports.compileFilter = function(filterString) {
 		var filterRunPrefixes = self.getFilterRunPrefixes();
 		// Wrap the operator functions in a wrapper function that depends on the prefix
 		operationFunctions.push((function() {
-			var options = {wiki: self};
+			var options = {wiki: self, suffixes: operation.suffixes || []};
 			switch(operation.prefix || "") {
 				case "": // No prefix means that the operation is unioned into the result
 					return filterRunPrefixes["or"](operationSubFunction, options);
