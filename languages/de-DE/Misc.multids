@@ -24,7 +24,6 @@ Encryption/RepeatPassword: Passwort wiederholen
 Encryption/PasswordNoMatch: Passwörter stimmen nicht überein
 Encryption/SetPassword: Passwort setzen
 Error/Caption: Fehler
-Error/EditConflict: Datei auf Server verändert
 Error/Filter: Filter Fehler
 Error/FilterSyntax: Syntax Fehler im Filter-Ausdruck
 Error/FilterRunPrefix: Filter Fehler: Unbekanntes Prefix für Filter lauf
@@ -32,6 +31,7 @@ Error/IsFilterOperator: Filter Fehler: Unbekannter Operand für den 'is' Filter 
 Error/FormatFilterOperator: Filter Fehler: Unbekannter Operand für den 'format' Filter Operator
 Error/LoadingPluginLibrary: Fehler beim Laden der "plugin library"
 Error/NetworkErrorAlert: `<h2>''Netzwerk Fehler''</h2>Es scheint, die Verbindung zum Server ist ausgefallen. Das weist auf Probleme mit der Netzwerkverbindung hin. Bitte versuchen Sie die Verbingung wider herzustellen, bevor Sie weitermachen.<br><br>''Nicht gespeicherte Änderungen werden automatich synchronisiert, sobald die Verbindung wider hergestellt ist.
+Error/PutEditConflict: Datei auf Server verändert
 Error/RecursiveTransclusion: Recursive Transclusion: Fehler im "transclude widget"
 Error/RetrievingSkinny: Fehler beim Empfangen einer "skinny" Tiddler Liste
 Error/SavingToTWEdit: Fehler beim Speichern mit "TWEdit"

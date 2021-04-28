@@ -89,9 +89,12 @@ PutSaver.prototype.save = function(text,method,callback) {
 			if(err) {
 				// response is textual: "XMLHttpRequest error code: 412"
 				var status = Number(err.substring(err.indexOf(':') + 2, err.length))
-				if(status === 412) { // edit conflict
-					var message = $tw.language.getString("Error/EditConflict");
-					callback(message);
+				if(status === 412) { // file changed on server
+					callback($tw.language.getString("Error/PutEditConflict"));
+				} else if(status === 401) { // authentication required
+					callback($tw.language.getString("Error/PutUnauthorized"));
+				} else if(status === 403) { // permission denied
+					callback($tw.language.getString("Error/PutForbidden"));
 				} else {
 					callback(err); // fail
 				}

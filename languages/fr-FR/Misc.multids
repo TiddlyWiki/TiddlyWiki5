@@ -23,7 +23,6 @@ Encryption/RepeatPassword: Répéter le mot de passe
 Encryption/PasswordNoMatch: Les mots de passe ne correspondent pas
 Encryption/SetPassword: Définir ce mot de passe 
 Error/Caption: Erreur
-Error/EditConflict: Le fichier a changé sur le serveur
 Error/Filter: Erreur de filtre
 Error/FilterSyntax: Erreur de syntaxe dans l'expression du filtre
 Error/FilterRunPrefix: Erreur de filtre : Préfixe de run inconnu pour le filtre
@@ -31,6 +30,7 @@ Error/IsFilterOperator: Erreur de filtre : Opérande inconnu pour l'opérateur d
 Error/FormatFilterOperator: Erreur de filtre : Suffixe inconnu pour l'opérateur de filtre 'format'
 Error/LoadingPluginLibrary: Erreur lors du chargement de la bibliothèque de plugins
 Error/NetworkErrorAlert: `<h2>''Erreur Réseau''</h2>Il semble que la connexion au serveur soit perdue. Cela peut indiquer un problème avec votre connexion réseau. Essayez de rétablir la connectivité du réseau avant de continuer.<br><br>''Toute modification non enregistrée sera automatiquement synchronisée lorsque la connectivité sera rétablie''.`
+Error/PutEditConflict: Le fichier a changé sur le serveur
 Error/RecursiveTransclusion: Erreur dans le widget //transclude// : transclusion récursive
 Error/RetrievingSkinny: Erreur pendant la récupération de la liste des tiddlers partiels
 Error/SavingToTWEdit: Erreur lors de l'enregistrement vers TWEdit

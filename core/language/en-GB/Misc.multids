@@ -24,7 +24,6 @@ Encryption/RepeatPassword: Repeat password
 Encryption/PasswordNoMatch: Passwords do not match
 Encryption/SetPassword: Set password
 Error/Caption: Error
-Error/EditConflict: File changed on server
 Error/Filter: Filter error
 Error/FilterSyntax: Syntax error in filter expression
 Error/FilterRunPrefix: Filter Error: Unknown prefix for filter run
@@ -32,6 +31,9 @@ Error/IsFilterOperator: Filter Error: Unknown operand for the 'is' filter operat
 Error/FormatFilterOperator: Filter Error: Unknown suffix for the 'format' filter operator
 Error/LoadingPluginLibrary: Error loading plugin library
 Error/NetworkErrorAlert: `<h2>''Network Error''</h2>It looks like the connection to the server has been lost. This may indicate a problem with your network connection. Please attempt to restore network connectivity before continuing.<br><br>''Any unsaved changes will be automatically synchronised when connectivity is restored''.`
+Error/PutEditConflict: File changed on server
+Error/PutForbidden: Permission denied
+Error/PutUnauthorized: Authentication required
 Error/RecursiveTransclusion: Recursive transclusion error in transclude widget
 Error/RetrievingSkinny: Error retrieving skinny tiddler list
 Error/SavingToTWEdit: Error saving to TWEdit
