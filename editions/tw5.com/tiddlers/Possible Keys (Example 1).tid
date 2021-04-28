@@ -1,5 +1,5 @@
 created: 20210427092418146
-modified: 20210427185152614
+modified: 20210427233345237
 tags: KeyboardWidget
 title: Possible Keys (Example 1)
 type: text/vnd.tiddlywiki
@@ -7,9 +7,9 @@ type: text/vnd.tiddlywiki
 \define getText() 
 <$vars tv-wikilinks="no">
 
-* key: ''$(key)$''
-* code: ''$(code)$''
-* modifierKey: ''$(modifierKey)$''
+* event-key: ''$(event-key)$''
+* event-code: ''$(event-code)$''
+* modifier: ''$(modifier)$''
 </$vars>
 \end
 
