@@ -1,7 +1,7 @@
-created: 20210427130002905
-modified: 20210427233325795
+created: 20210427232123044
+modified: 20210427233252582
 tags: KeyboardWidget
-title: Possible Keys (Example)
+title: Possible Keys (Example 2)
 type: text/vnd.tiddlywiki
 
 \define getText() 
@@ -18,10 +18,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define keys()
-1 2 3
-shift+1 shift+2 shift+3
-a s d
-f1 f2 f3
+((my-1)) ((my-2)) ((my-3))
 \end
 
 ! Results In
