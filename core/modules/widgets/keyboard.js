@@ -58,9 +58,9 @@ KeyboardWidget.prototype.handleChangeEvent = function(event) {
 		var handled = this.invokeActions(this,event);
 		if(this.actions) {
 			var variables = {
-					"key": event.key,
-					"code": event.code,
-					"modifierKey": $tw.keyboardManager.getEventModifierKeyDescriptor(event)
+					"event-key": event.key,
+					"event-code": event.code,
+					"modifier": $tw.keyboardManager.getEventModifierKeyDescriptor(event)
 				};
 			this.invokeActionString(this.actions,this,event,variables);
 		}
