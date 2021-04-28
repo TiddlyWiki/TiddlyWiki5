@@ -27,4 +27,6 @@ The `:sort` filter run prefix uses an extended syntax that allows for multiple s
 ** ''casesensitive'' or ''caseinsensitive'' (required for types `string` and `alphanumeric`).
 ** ''reverse'' to invert the order of the filter run (optional).
 
+Note that filter runs used with the `:sort` prefix should return the same number of items that they are passed. Any missing entries will be treated as zero or the empty string. In particular, when retrieving the value of a field with the [[get Operator]] it is helpful to guard against a missing field value using the [[else Operator]]. For example `[get[myfield]else[default-value]...`.
+
 [[Examples|Sort Filter Run Prefix (Examples)]]
