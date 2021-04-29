@@ -1,0 +1,44 @@
+created: 20210429084127864
+modified: 20210429090539639
+tags: 
+title: Possible Keys (Macros)
+type: text/vnd.tiddlywiki
+
+\define key-test-prefix() $:/temp/key-test
+
+\define getText() 
+<$vars tv-wikilinks="no">
+
+* event-key: ''$(event-key)$''
+* event-code: ''$(event-code)$''
+* modifier: ''$(modifier)$''
+</$vars>
+\end
+
+\define showActions()
+  <$action-setfield $tiddler=<<key-test>> text=""/>
+  <$action-setfield $tiddler="$:/temp/key-test/action" text=<<getText>> />
+  <$list filter="[prefix<key-test-prefix>]">
+    <$action-deletetiddler $tiddler=<<currentTiddler>>/>
+  </$list>
+\end
+
+\define closeActions()
+    <$action-deletetiddler $tiddler=<<key-test>>/>
+    <$action-deletetiddler $tiddler="$:/temp/key-test/action"/>
+\end
+
+\define toggleFocusInput()
+<$list filter="[<key-test>!has[title]]" >
+  <$button actions=<<showActions>> >Play with me!</$button>
+</$list>
+<$list filter="[<key-test>has[title]]" >
+  <$button actions=<<closeActions>> >Close</$button>
+</$list>
+\end
+
+\define actionKey()
+<$action-setfield $tiddler="$:/temp/key-test/action" text=<<getText>> />
+\end
+
+<pre><code><$view /></code></pre>

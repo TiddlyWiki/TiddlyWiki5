@@ -1,5 +1,5 @@
 created: 20210427090945829
-modified: 20210427185322185
+modified: 20210429092655553
 tags: KeyboardWidget
 title: Possible Keys
 type: text/vnd.tiddlywiki
@@ -29,4 +29,4 @@ semicolon, equals, comma, dash, period, slash, backquote, openbracket, backslash
 
 ! Examples
 
-<<list-links "[prefix[Possible Keys (Example]!sort[]]">>
+<<list-links "[tag[KeyboardWidget]prefix[Possible Keys (Example]]">>

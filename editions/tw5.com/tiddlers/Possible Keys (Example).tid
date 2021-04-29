@@ -1,21 +1,12 @@
 created: 20210427130002905
-modified: 20210427233325795
+modified: 20210429092947716
 tags: KeyboardWidget
 title: Possible Keys (Example)
 type: text/vnd.tiddlywiki
 
-\define getText() 
-<$vars tv-wikilinks="no">
+\define key-test() $:/temp/key-test
 
-* event-key: ''$(event-key)$''
-* event-code: ''$(event-code)$''
-* modifier: ''$(modifier)$''
-</$vars>
-\end
-
-\define actionKey()
-<$action-setfield $tiddler="$:/temp/key-test/action" text=<<getText>> />
-\end
+\import [[Possible Keys (Macros)]]
 
 \define keys()
 1 2 3
@@ -32,20 +23,11 @@ f1 f2 f3
 
 ''Info: Depending on your OS and browser keyboard settings, some combinations may be "eaten" by the OS, or the browser!''
 
-<$list filter="[[$:/temp/key-test]!has[title]]" >
-  <$button>Play with me!
-    <$action-setfield $tiddler="$:/temp/key-test" text=""/>
-    <$action-setfield $tiddler="$:/temp/key-test/action" text=<<getText>>/>
-  </$button>
-</$list>
-<$list filter="[[$:/temp/key-test]has[title]]" >
-  <$button>Close
-    <$action-deletetiddler $tiddler="$:/temp/key-test"/>
-    <$action-deletetiddler $tiddler="$:/temp/key-test/action"/>
-  </$button>
+<<toggleFocusInput>>
 
+<$list filter="[<key-test>has[title]]" >
   <$keyboard key={{{ [enlist<keys>join[ ]] }}} actions=<<actionKey>> >
-	<$edit-text tiddler="$:/temp/key-test" placeholder="- hit key from list below -" tag=input focus />
+	<$edit-text tiddler=<<key-test>> placeholder="- hit key from list below -" tag=input focus />
   </$keyboard>
 </$list>
 

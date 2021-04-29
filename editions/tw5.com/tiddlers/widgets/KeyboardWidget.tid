@@ -1,6 +1,7 @@
 caption: keyboard
 created: 20140302192136805
-modified: 20210428120815547
+list: [[Possible Keys]] [[Possible Keys (Example)]] [[Possible Keys (Example 1)]] [[Possible Keys (Example 2)]]
+modified: 20210429092817159
 tags: Widgets
 title: KeyboardWidget
 type: text/vnd.tiddlywiki
@@ -29,7 +30,7 @@ The following variables are made available to the actions:
 |!Variables |!Description |
 |`event-key` |The <<.var event-key>> variable contains the character, if possible. eg: `1`. You can experiment with some settings at: [[Possible Keys (Example)]] |
 |`event-code` |The <<.var event-code>> variable contains a character description. eg:  `Digit1` instead of `1`. Or `Space` instead of an empty string ` `, which is hard to see|
-|`modifier` |The [[modifier Variable]] contains the Modifier Key held during the event (can be "normal", "ctrl", "shift", "alt" or combinations thereof) |
+|`modifier` |The [[modifier Variable]] contains the Modifier Key held during the event (can be <kbd>normal</kbd>, <kbd>ctrl</kbd>, <kbd>shift</kbd>, <kbd>alt</kbd> or combinations thereof) |
 
 ! Key Strings
 
@@ -54,6 +55,6 @@ ctrl+enter
 ctrl+shift+alt+A
 ```
 
-! Possible Keys
+! More Info
 
-Find more at: [[Possible Keys]]
+<<list-links "[tag[KeyboardWidget]]">>

@@ -1,21 +1,12 @@
 created: 20210427092418146
-modified: 20210427233345237
+modified: 20210429090619771
 tags: KeyboardWidget
 title: Possible Keys (Example 1)
 type: text/vnd.tiddlywiki
 
-\define getText() 
-<$vars tv-wikilinks="no">
+\define key-test() $:/temp/key-test/1
 
-* event-key: ''$(event-key)$''
-* event-code: ''$(event-code)$''
-* modifier: ''$(modifier)$''
-</$vars>
-\end
-
-\define actionKey()
-<$action-setfield $tiddler="$:/temp/key-test/action" text=<<getText>> />
-\end
+\import [[Possible Keys (Macros)]]
 
 \define keys()
 backspace tab clear return enter pause escape space 
@@ -60,20 +51,11 @@ semicolon equals comma dash period slash backquote openbracket backslash closebr
 
 ''Info: Depending on your OS and browser keyboard settings, some combinations may be "eaten" by the OS, or the browser!''
 
-<$list filter="[[$:/temp/key-test]!has[title]]" >
-  <$button>Play with me!
-    <$action-setfield $tiddler="$:/temp/key-test" text=""/>
-    <$action-setfield $tiddler="$:/temp/key-test/action" text=<<getText>>/>
-  </$button>
-</$list>
-<$list filter="[[$:/temp/key-test]has[title]]" >
-  <$button>Close
-    <$action-deletetiddler $tiddler="$:/temp/key-test"/>
-    <$action-deletetiddler $tiddler="$:/temp/key-test/action"/>
-  </$button>
+<<toggleFocusInput>>
 
+<$list filter="[<key-test>has[title]]" >
   <$keyboard key={{{ [enlist<keys>join[ ]] }}} actions=<<actionKey>> >
-	<$edit-text tiddler="$:/temp/key-test" placeholder="- hit key from list below -" tag=input focus />
+	<$edit-text tiddler=<<key-test>> placeholder="- hit key from list below -" tag=input focus />
   </$keyboard>
 </$list>
 
@@ -85,17 +67,8 @@ All possible keys can be found at: [[Possible Keys]]
 
 ! Example Code
 
-<$reveal type="nomatch" state="$:/state/key-code" text="show">
-
-<$button set="$:/state/key-code" setTo="show">Show the code</$button>
-
-</$reveal>
-<$reveal type="match" state="$:/state/key-code" text="show">
-
-<$button set="$:/state/key-code" setTo="hide">Hide the code</$button>
+<details><summary>Show this code!</summary>
 
 <pre><code><$view /></code></pre>
 
-<$button set="$:/state/key-code" setTo="hide">Hide the code</$button>
-
-</$reveal>
+</details>
