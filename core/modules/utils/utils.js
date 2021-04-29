@@ -877,7 +877,7 @@ exports.stringifyNumber = function(num) {
 exports.makeCompareFunction = function(type,options) {
 	options = options || {};
 	// set isCaseSensitive to true if not defined in options
-	var isCaseSensitive = (options.isCaseSensitive && options.isCaseSensitive === false) ? false : true,
+	var isCaseSensitive = (options.isCaseSensitive === false) ? false : true,
 		gt = options.invert ? -1 : +1,
 		lt = options.invert ? +1 : -1,
 		compare = function(a,b) {
