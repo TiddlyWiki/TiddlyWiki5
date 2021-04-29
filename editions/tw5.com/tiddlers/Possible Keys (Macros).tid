@@ -1,5 +1,5 @@
 created: 20210429084127864
-modified: 20210429090539639
+modified: 20210429094714709
 tags: 
 title: Possible Keys (Macros)
 type: text/vnd.tiddlywiki
@@ -39,6 +39,12 @@ type: text/vnd.tiddlywiki
 
 \define actionKey()
 <$action-setfield $tiddler="$:/temp/key-test/action" text=<<getText>> />
+\end
+
+\define showCode()
+<details><summary>Show this code!</summary>
+<pre><code><$view /></code></pre>
+</details>
 \end
 
 <pre><code><$view /></code></pre>

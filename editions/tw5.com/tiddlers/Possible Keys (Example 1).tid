@@ -1,5 +1,5 @@
 created: 20210427092418146
-modified: 20210429090619771
+modified: 20210429094755894
 tags: KeyboardWidget
 title: Possible Keys (Example 1)
 type: text/vnd.tiddlywiki
@@ -67,8 +67,4 @@ All possible keys can be found at: [[Possible Keys]]
 
 ! Example Code
 
-<details><summary>Show this code!</summary>
-
-<pre><code><$view /></code></pre>
-
-</details>
+<<showCode>>

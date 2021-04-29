@@ -1,5 +1,5 @@
 created: 20210427130002905
-modified: 20210429092947716
+modified: 20210429094825075
 tags: KeyboardWidget
 title: Possible Keys (Example)
 type: text/vnd.tiddlywiki
@@ -38,3 +38,7 @@ f1 f2 f3
 All possible keys can be found at: [[Possible Keys]]
 
 A more advanced example can be found at: [[Possible Keys (Example 1)]]
+
+! Code
+
+<<showCode>>
