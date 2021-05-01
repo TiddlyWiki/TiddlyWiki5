@@ -61,7 +61,7 @@ ListWidget.prototype.execute = function() {
 	this.template = this.getAttribute("template");
 	this.editTemplate = this.getAttribute("editTemplate");
 	this.variableName = this.getAttribute("variable","currentTiddler");
-	this.indexName = this.getAttribute("index");
+	this.counterName = this.getAttribute("counter");
 	this.storyViewName = this.getAttribute("storyview");
 	this.historyTitle = this.getAttribute("history");
 	// Compose the list elements
@@ -130,9 +130,9 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 	}
 	// Return the list item
 	var parseTreeNode = {type: "listitem", itemTitle: title, variableName: this.variableName, children: templateTree};
-	if(this.indexName) {
-		parseTreeNode.index = index.toString();
-		parseTreeNode.indexName = this.indexName;
+	if(this.counterName) {
+		parseTreeNode.counter = (index + 1).toString();
+		parseTreeNode.counterName = this.counterName;
 		parseTreeNode.isFirst = index === 0;
 		parseTreeNode.isLast = index === this.list.length - 1;
 	}
@@ -150,7 +150,7 @@ ListWidget.prototype.refresh = function(changedTiddlers) {
 		this.storyview.refreshStart(changedTiddlers,changedAttributes);
 	}
 	// Completely refresh if any of our attributes have changed
-	if(changedAttributes.filter || changedAttributes.variable || changedAttributes.index || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.emptyMessage || changedAttributes.storyview || changedAttributes.history) {
+	if(changedAttributes.filter || changedAttributes.variable || changedAttributes.counter || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.emptyMessage || changedAttributes.storyview || changedAttributes.history) {
 		this.refreshSelf();
 		result = true;
 	} else {
@@ -219,9 +219,9 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 			this.removeChildDomNodes();
 			this.children = [];
 		}
-		// If we are providing an index variable then we must refresh the items, otherwise we can rearrange them
+		// If we are providing an counter variable then we must refresh the items, otherwise we can rearrange them
 		var hasRefreshed = false,t;
-		if(this.indexName) {
+		if(this.counterName) {
 			// Cycle through the list and remove and re-insert the first item that has changed, and all the remaining items
 			for(t=0; t<this.list.length; t++) {
 				if(hasRefreshed || !this.children[t] || this.children[t].parseTreeNode.itemTitle !== this.list[t]) {
@@ -337,10 +337,10 @@ Compute the internal state of the widget
 ListItemWidget.prototype.execute = function() {
 	// Set the current list item title
 	this.setVariable(this.parseTreeNode.variableName,this.parseTreeNode.itemTitle);
-	if(this.parseTreeNode.indexName) {
-		this.setVariable(this.parseTreeNode.indexName,this.parseTreeNode.index);
-		this.setVariable(this.parseTreeNode.indexName + "-first",this.parseTreeNode.isFirst ? "yes" : "no");
-		this.setVariable(this.parseTreeNode.indexName + "-last",this.parseTreeNode.isLast ? "yes" : "no");
+	if(this.parseTreeNode.counterName) {
+		this.setVariable(this.parseTreeNode.counterName,this.parseTreeNode.counter);
+		this.setVariable(this.parseTreeNode.counterName + "-first",this.parseTreeNode.isFirst ? "yes" : "no");
+		this.setVariable(this.parseTreeNode.counterName + "-last",this.parseTreeNode.isLast ? "yes" : "no");
 	}
 	// Construct the child widgets
 	this.makeChildWidgets();

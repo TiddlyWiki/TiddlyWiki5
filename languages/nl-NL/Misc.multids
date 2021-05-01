@@ -23,7 +23,6 @@ Encryption/RepeatPassword: Herhaal wachtwoord
 Encryption/SetPassword: Vul wachtwoord in
 Encryption/Username: Gebruikersnaam
 Error/Caption: Fout
-Error/EditConflict: Bestand gewijzigd op server
 Error/Filter: Filterfout
 Error/FilterRunPrefix: Filterfout: Onbekend voorvoegsel voor filter 'run'
 Error/FilterSyntax: Syntaxfout in filter expressie
@@ -31,6 +30,7 @@ Error/FormatFilterOperator: Filterfout: Onbekend achtervoegsel voor de 'format' 
 Error/IsFilterOperator: Filterfout: Onbekende operand voor het 'is' filter
 Error/LoadingPluginLibrary: Fout bij laden van de pluginbibliotheek
 Error/NetworkErrorAlert: `<h2>''Network fout''</h2>De verbinding met de server lijkt verbroken. Mogelijk een probleem met de netwerkverbinding. Herstel de netwerkverbinding voordat verder wordt gegaan.<br><br>''Niet opgeslagen veranderingen worden gesynchroniseerd als de verbinding hersteld is''.`
+Error/PutEditConflict: Bestand gewijzigd op server
 Error/RecursiveTransclusion: Recursieve transclusiefout in 'transclude' widget
 Error/RetrievingSkinny: Fout bij ophalen van de 'skinny' tiddlerlijst
 Error/SavingToTWEdit: Fout bij opslaan naar TWEdit

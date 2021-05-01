@@ -351,7 +351,7 @@ describe("Widget module", function() {
 	});
 
 
-	it("should deal with the list widget using an index variable", function() {
+	it("should deal with the list widget using a counter variable", function() {
 		var wiki = new $tw.Wiki();
 		// Add some tiddlers
 		wiki.addTiddlers([
@@ -361,12 +361,12 @@ describe("Widget module", function() {
 			{title: "TiddlerFour", text: "Lemon Squash"}
 		]);
 		// Construct the widget node
-		var text = "<$list index='index'><$view field='text'/><$text text=<<index>>/><$text text=<<index-first>>/><$text text=<<index-last>>/></$list>";
+		var text = "<$list counter='index'><$view field='text'/><$text text=<<index>>/><$text text=<<index-first>>/><$text text=<<index-last>>/></$list>";
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<p>Lemon Squash0yesnoJolly Old World1nonoGolly Gosh2nonoWorldly Old Jelly3noyes</p>");
+		expect(wrapper.innerHTML).toBe("<p>Lemon Squash1yesnoJolly Old World2nonoGolly Gosh3nonoWorldly Old Jelly4noyes</p>");
 		// Test the sequence numbers in the DOM
 		expect(wrapper.sequenceNumber).toBe(0);
 		expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -391,7 +391,7 @@ describe("Widget module", function() {
 		// Refresh
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerFive"]);
 		// Test the refreshing
-		expect(wrapper.innerHTML).toBe("<p>Jalapeno Peppers0yesnoLemon Squash1nonoJolly Old World2nonoGolly Gosh3nonoWorldly Old Jelly4noyes</p>");
+		expect(wrapper.innerHTML).toBe("<p>Jalapeno Peppers1yesnoLemon Squash2nonoJolly Old World3nonoGolly Gosh4nonoWorldly Old Jelly5noyes</p>");
 		// Test the sequence numbers in the DOM
 		expect(wrapper.sequenceNumber).toBe(0);
 		expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -420,7 +420,7 @@ describe("Widget module", function() {
 		// Refresh
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerThree"]);
 		// Test the refreshing
-		expect(wrapper.innerHTML).toBe("<p>Jalapeno Peppers0yesnoLemon Squash1nonoJolly Old World2nonoWorldly Old Jelly3noyes</p>");
+		expect(wrapper.innerHTML).toBe("<p>Jalapeno Peppers1yesnoLemon Squash2nonoJolly Old World3nonoWorldly Old Jelly4noyes</p>");
 		// Test the sequence numbers in the DOM
 		expect(wrapper.sequenceNumber).toBe(0);
 		expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -445,7 +445,7 @@ describe("Widget module", function() {
 		// Refresh
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerThree"]);
 		// Test the refreshing
-		expect(wrapper.innerHTML).toBe("<p>Jalapeno Peppers0yesnoLemon Squash1nonoJolly Old World2nonoSomething3nonoWorldly Old Jelly4noyes</p>");
+		expect(wrapper.innerHTML).toBe("<p>Jalapeno Peppers1yesnoLemon Squash2nonoJolly Old World3nonoSomething4nonoWorldly Old Jelly5noyes</p>");
 		// Test the sequence numbers in the DOM
 		expect(wrapper.sequenceNumber).toBe(0);
 		expect(wrapper.children[0].sequenceNumber).toBe(1);
