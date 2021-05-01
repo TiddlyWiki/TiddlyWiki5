@@ -876,7 +876,9 @@ exports.stringifyNumber = function(num) {
 
 exports.makeCompareFunction = function(type,options) {
 	options = options || {};
-	var gt = options.invert ? -1 : +1,
+	// set isCaseSensitive to true if not defined in options
+	var isCaseSensitive = (options.isCaseSensitive === false) ? false : true,
+		gt = options.invert ? -1 : +1,
 		lt = options.invert ? +1 : -1,
 		compare = function(a,b) {
 			if(a > b) {
@@ -895,7 +897,11 @@ exports.makeCompareFunction = function(type,options) {
 				return compare($tw.utils.parseInt(a),$tw.utils.parseInt(b));
 			},
 			"string": function(a,b) {
-				return compare("" + a,"" +b);
+				if(!isCaseSensitive) {
+					a = a.toLowerCase();
+					b = b.toLowerCase();
+				}
+				return compare("" + a,"" + b);
 			},
 			"date": function(a,b) {
 				var dateA = $tw.utils.parseDate(a),
@@ -910,6 +916,13 @@ exports.makeCompareFunction = function(type,options) {
 			},
 			"version": function(a,b) {
 				return $tw.utils.compareVersions(a,b);
+			},
+			"alphanumeric": function(a,b) {
+				if(!isCaseSensitive) {
+					a = a.toLowerCase();
+					b = b.toLowerCase();
+				}
+				return options.invert ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
 			}
 		};
 	return (types[type] || types[options.defaultType] || types.number);

@@ -1,0 +1,32 @@
+created: 20210428083929749
+modified: 20210428140713422
+tags: [[Filter Syntax]] [[Filter Run Prefix]]
+title: Sort Filter Run Prefix
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.24">>
+
+|''purpose'' |sort the input titles by the result of evaluating this filter run for each item |
+|''input'' |all titles from previous filter runs |
+|''suffix'' |the `:sort` filter run prefix uses a rich suffix, see below for details |
+|''output''|the sorted result of previous filter runs |
+
+Each input title from previous runs is passed to this run in turn. The filter run transforms the input titles into the form needed for sorting. For example, the filter run `[length[]]` transforms each input title in to the number representing its length, and thus sorts the input titles according to their length.
+
+Note that within the filter run, the "currentTiddler" variable is set to the title of the tiddler being processed. This permits filter runs like `:sort:number[{!!value}divide{!!cost}]` to be used for computation.
+
+The `:sort` filter run prefix uses an extended syntax that allows for multiple suffixes, some of which are required:
+
+```
+:sort:<type>:<flaglist>[...filter run...]
+
+```
+
+* ''type'': Required. Determines how the items are compared and can be any of: ''string'', ''alphanumeric'', ''number'', ''integer'', ''version'' or ''date''.
+* ''flaglist'': comma separated list of the following flags:
+** ''casesensitive'' or ''caseinsensitive'' (required for types `string` and `alphanumeric`).
+** ''reverse'' to invert the order of the filter run (optional).
+
+Note that filter runs used with the `:sort` prefix should return the same number of items that they are passed. Any missing entries will be treated as zero or the empty string. In particular, when retrieving the value of a field with the [[get Operator]] it is helpful to guard against a missing field value using the [[else Operator]]. For example `[get[myfield]else[default-value]...`.
+
+[[Examples|Sort Filter Run Prefix (Examples)]]
