@@ -294,6 +294,47 @@ exports.slowInSlowOut = function(t) {
 	return (1 - ((Math.cos(t * Math.PI) + 1) / 2));
 };
 
+exports.formatTitleString = function(template,options) {
+	var base = options.base || "",
+		separator = options.separator || "",
+		counter = options.counter || "";
+	var result = "",
+		t = template,
+		matches = [
+			[/^\$basename\$/i, function() {
+				return base;
+			}],
+			[/^\$count:(\d+)\$/i, function(match) {
+				return $tw.utils.pad(counter,match[1]);
+			}],
+			[/^\$separator\$/i, function() {
+				return separator;
+			}],
+			[/^\$count\$/i, function() {
+				return counter + "";
+			}]
+		];
+	while(t.length){
+		var matchString = "";
+		$tw.utils.each(matches, function(m) {
+			var match = m[0].exec(t);
+			if(match) {
+				matchString = m[1].call(null,match);
+				t = t.substr(match[0].length);
+				return false;
+			}
+		});
+		if(matchString) {
+			result += matchString;
+		} else {
+			result += t.charAt(0);
+			t = t.substr(1);
+		}
+	}
+	result = result.replace(/\\(.)/g,"$1");
+	return result;
+};
+
 exports.formatDateString = function(date,template) {
 	var result = "",
 		t = template,
