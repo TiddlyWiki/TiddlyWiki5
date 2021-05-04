@@ -37,6 +37,7 @@ Compute the internal state of the widget
 ActionPopupWidget.prototype.execute = function() {
 	this.actionState = this.getAttribute("$state");
 	this.actionCoords = this.getAttribute("$coords");
+	this.floating = this.getAttribute("$floating","no") === "yes";
 };
 
 /*
@@ -68,7 +69,8 @@ ActionPopupWidget.prototype.invokeAction = function(triggeringWidget,event) {
 				height: parseFloat(match[4])
 			},
 			title: this.actionState,
-			wiki: this.wiki
+			wiki: this.wiki,
+			floating: this.floating
 		});
 	} else {
 		$tw.popup.cancel(0);
