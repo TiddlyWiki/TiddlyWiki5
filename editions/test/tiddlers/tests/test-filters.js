@@ -516,6 +516,9 @@ function runTests(wiki) {
 		// Trim doesn't hiccup on regexp special characters
 		expect(wiki.filterTiddlers("[[.*abacus.*]] [[.+baobab.+]] +[trim[.*]]").join(",")).toBe("abacus,.+baobab.+");
 		expect(wiki.filterTiddlers("[[.*abacus.*]] [[.+baobab.+]] +[trim[.+]]").join(",")).toBe(".*abacus.*,baobab");
+		expect(wiki.filterTiddlers("[[Hello There]] [[GettingStarted]] +[quotify[]]").join(" ")).toBe("[[Hello There]] GettingStarted");
+		expect(wiki.filterTiddlers("[title[Hello There]] +[quotify[]]").join(" ")).toBe("[[Hello There]]");
+		expect(wiki.filterTiddlers("[title[HelloThere]] +[quotify[]]").join(" ")).toBe("HelloThere");
 	});
 
 	it("should handle the mathematics operators", function() {

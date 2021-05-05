@@ -1,0 +1,19 @@
+created: 20210505105442042
+modified: 20210505110348954
+tags: [[Operator Examples]] [[quotify Operator]]
+title: quotify Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 """[[Hello There]quotify[]]""">>
+
+
+<<.operator-example 2 """[tag[TableOfContents]quotify[]]""">>
+
+<<.tip "To create a string to save a [[title list|Title List]] into a list field, use `quotify[]` with the [[join operator|join Operator]]">>
+<<.operator-example 3 """[tag[TableOfContents]quotify[]join[ ]]""">>
+For example, to save titles tagged `TableOfContents` to the titles field of the tiddler [[quotify test]]:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button> test
+<$action-setfield $tiddler="quotify test" titles={{{ [tag[TableOfContents]quotify[]join[ ]] }}}/>
+</$button>'/>

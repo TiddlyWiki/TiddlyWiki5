@@ -170,6 +170,16 @@ exports.pad = function(source,operator,options) {
 		}
 	});
 	return results;
-}
+};
+
+exports.quotify = function(source,operator,options) {
+	var results = [];
+	source(function(tiddler,title) {
+		if(title && title.length) {
+			results.push($tw.utils.stringifyList([title]));
+		}
+	});
+	return results;
+};
 
 })();
