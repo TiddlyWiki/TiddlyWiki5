@@ -25,13 +25,12 @@ type: text/vnd.tiddlywiki
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5370">> page title so that the separating em-dash is only used if the site subtitle is present
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5397">> broken aria-label in $:/PaletteManager
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5451">> macro calls to use the same parser as that used for widget attributes
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/89546b3357b0696a7047e6915bd6cd137b589de6">> a hidden setting to the `HTMLparser.js` to control HTML sandboxing
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/89546b3357b0696a7047e6915bd6cd137b589de6">> a hidden setting to control sandboxing of tiddlers of type `text/html`
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/commit/caec6bc3fea9155eb2b0aae64d577c565dd7b088">> SVG optimiser script
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/c325380231a8c592a6e51d4498c1e6c3a241b539">> plus/minus SVG icons
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/c325380231a8c592a6e51d4498c1e6c3a241b539">> plus/minus SVG icons: <<.icon $:/core/images/plus-button>> and <<.icon $:/core/images/minus-button>>
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5294">> support for [[dynamic toolbar buttons|How to create dynamic editor toolbar buttons]]
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5612">> "average" filter operator for arithmetic mean
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/3f986861538a3cc5c3c6da578b45d0d9138a6b2b">> <-popup> to create floating popups that must be manually cleared
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/cf56a17f28f1e44dcb62c5e161be4ac29e27c3f2">> nusedtitle macro to use the prefix parameter and fix wiki.generateNewTitle() 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5612">> [[average Operator]] for calculating the arithmetic mean of a list of numbers
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/cf56a17f28f1e44dcb62c5e161be4ac29e27c3f2">> unusedtitle macro to use the prefix parameter
 
 
 ! Hackability Improvements
@@ -42,14 +41,14 @@ type: text/vnd.tiddlywiki
 ! Widget Improvements
 * <<.link-badge-modified "https://github.com/Jermolene/TiddlyWiki5/commit/b9647b2c48152dac069a1099a0822b32375a66cf">> [[FieldManglerWidget]] to ensure it doesn't propogate events that it traps
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5597">> [[DropzoneWidget]] to optionally invoke actions after the `tm-import-tiddlers` message has been sent, and to specify an optional `contentTypesFilter` which determines which content types are accepted by the dropzone.
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5611">> [[ListWidget]] with `index` attribute
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5611">> [[ListWidget]] with `index` attribute and here (and [[here| https://github.com/Jermolene/TiddlyWiki5/commit/4a99e0cc7d4a6b9e7071c0b2a9a0f63c3c7d2492]])
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5635">> [[SelectWidget]] refreshing 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5252">> support for suffixes to filter run prefixes
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5653">> :sort filter run prefix
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5644">> [[ActionListopsWidget]] bug by avoiding stitching together filter expressions for the original list values
-* <<.link-badge-modified "https://github.com/Jermolene/TiddlyWiki5/commit/4a99e0cc7d4a6b9e7071c0b2a9a0f63c3c7d2492">> "index" attribute of [[ListWidget]] to "counter", and use 1-based counting
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/07caa16e8714afe9a64eb202375e4a2f95da1508">> dropzone to also use the specified deserializer for strings either dropped or pasted on to the dropzone
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/07caa16e8714afe9a64eb202375e4a2f95da1508">> [[DropzoneWidget]] to also use the specified deserializer for strings either dropped or pasted on to the dropzone
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/44df6fe52f79bee88357afb4fc3d6f4800aa6dde">> issue with widget not being available to filter operator
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/3f986861538a3cc5c3c6da578b45d0d9138a6b2b">> [[ActionPopupWidget]] to create floating popups that must be manually cleared
 
 ! Client-server Improvements
 
@@ -61,8 +60,8 @@ type: text/vnd.tiddlywiki
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5465">> several consistency issues with the filesystem plugin
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/5483">> issue with encoding of $:/config/OriginalTiddlerPaths outside the wiki folder
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/5628">> the TiddlySpot Saver settings form
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5638">> 401 and 403 error messages for put saver
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/d8ac00a10856b1b64311b8e0496344d5b0c1b987">> TiddlyWebAdaptor: Avoid crashing if server sent events not available
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5638">> 401 and 403 error messages for PUT saver
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/d8ac00a10856b1b64311b8e0496344d5b0c1b987">> fixed crash if browser doesn't support Server Sent Events
 
 ! Plugin Improvements
 
@@ -97,8 +96,7 @@ type: text/vnd.tiddlywiki
 
 ! Translation improvements
 
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5633">> Chinese translation for TiddlySpot saver
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5650">> Chinese translation for error messages for put saver
+* <<.link-badge-improved>> Chinese translations
 
 
 ! Other Bug Fixes
