@@ -1,0 +1,13 @@
+caption: deserializers
+created: 20210506115203172
+modified: 20210506115607392
+op-input: ignored
+op-output: the title of each available deserializer
+op-parameter: none
+tags: [[Filter Operators]] [[Special Operators]]
+title: deserializers Operator
+type: text/vnd.tiddlywiki
+
+<<.tip "You can specify a specific deserializer for a DropzoneWidget to use">>
+
+<<.operator-examples "deserializers">>

@@ -1,0 +1,7 @@
+created: 20210506115345021
+modified: 20210506115402052
+tags: [[Operator Examples]] [[deserializer Operator]]
+title: deserializers Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[deserializers[]]">>

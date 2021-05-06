@@ -1,6 +1,6 @@
 caption: dropzone
 created: 20131024141900000
-modified: 20210410062410660
+modified: 20210506115809131
 tags: Widgets
 title: DropzoneWidget
 type: text/vnd.tiddlywiki
@@ -24,7 +24,7 @@ It sends a [[WidgetMessage: tm-import-tiddlers]] carrying a JSON representation 
 
 <<.tip """Use the `prefix` filter operator to easily accept multiple related content types. For example this filter will accept all image content types: `[prefix[image/]]`""">>
 
-The list of available deserializers can be inspected by executing `Object.keys($tw.Wiki.tiddlerDeserializerModules).sort().join("\n")` in the browser JavaScript console.
+<<.tip "The list of available deserializers can be seen by using the filter `[deserializers[]]` in the Filter tab in [[Advanced Search|$:/AdvancedSearch]].">>
 
 The dropzone widget displays any contained content within the dropzone.
 
