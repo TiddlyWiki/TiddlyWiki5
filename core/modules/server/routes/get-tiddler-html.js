@@ -32,9 +32,9 @@ exports.handler = function(request,response,state) {
 			renderTemplate = renderTemplate || state.server.get("tiddler-render-template");
 		}
 		var text = state.wiki.renderTiddler(renderType,renderTemplate,{parseAsInline: true, variables: {currentTiddler: title}});
+
 		// Naughty not to set a content-type, but it's the easiest way to ensure the browser will see HTML pages as HTML, and accept plain text tiddlers as CSS or JS
-		response.writeHead(200);
-		response.end(text,"utf8");
+		state.sendResponse(200,{},text,"utf8");
 	} else {
 		response.writeHead(404);
 		response.end();

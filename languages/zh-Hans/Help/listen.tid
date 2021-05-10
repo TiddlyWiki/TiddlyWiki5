@@ -30,5 +30,6 @@ listen 命令使用[[命名的命令参数|NamedCommandParameters]]：
 * ''tls-key'' - TLS 密钥文件的路径名（相对于维基文件夹）
 * ''debug-level'' - 可选的调试级别；设置为 "debug" 来查看请求的详细信息；(默认为 "none")
 * ''gzip'' - 设为 "yes" 以启用某些 http 端点的 gzip 压缩 (默认为 "no")
+* ''use-browser-cache'' - 设置为 "yes" 允许浏览器缓存响应，以节省带宽（默认为 "no")
 
 有关向整个本地网络开启实例的信息，以及可能的安全问题，请参阅 TiddlyWiki.com 的 WebServer 条目。
