@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/tiddloid-tweaks/language/ControlPanel/
+
+TiddloidTweaks/Caption: Tiddloid
+TiddloidTweaks/Hint: 這些設置適用於Tiddloid客戶端。
+TiddloidTweaks/ApplyTheme/Description: 將主題顏色應用於系統欄
+TiddloidTweaks/HideToolbar/Description: 加載完成後隱藏工具欄
