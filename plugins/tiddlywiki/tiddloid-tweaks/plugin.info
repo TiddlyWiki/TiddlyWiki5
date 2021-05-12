@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/tiddloid-tweaks",
+	"name": "Tiddloid Tweaks",
+	"description": "Apply appearance tweaks to Tiddloid client",
+	"list": "readme config"
+}
