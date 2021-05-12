@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/tiddloid-tweaks/language/ControlPanel/
+
+TiddloidTweaks/Caption: Tiddloid
+TiddloidTweaks/Hint: 这此设置适用于Android Tiddloid客户端。
+TiddloidTweaks/ApplyTheme/Description: 应用主题色到系统栏
+TiddloidTweaks/HideToolbar/Description: 加载完成后隐藏标题栏
