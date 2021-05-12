@@ -1,5 +1,0 @@
-title: $:/plugins/tiddlywiki/tiddloid-tweaks/language/ControlPanel/
-
-TiddloidTweaks/Hint: 이러한 설정은 Tiddloid 클라이언트에 적용됩니다.
-TiddloidTweaks/ApplyTheme/Description: 시스템 표시 줄에 테마 색상 적용
-TiddloidTweaks/HideToolbar/Description: 로딩 완료시 툴바 숨기기
