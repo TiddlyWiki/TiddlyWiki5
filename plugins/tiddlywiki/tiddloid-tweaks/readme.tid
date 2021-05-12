@@ -2,7 +2,7 @@ title: $:/plugins/tiddlywiki/tiddloid-tweaks/readme
 
 This plugin applies appearance tweaks to Tiddloid client. Currently it have these features:
 
-* Hiding the toolbar when the file is fully loaded (Thanks for jdjdjdjdjdjd's [[idea|https://github.com/donmor/Tiddloid/issues/7]])
+* Hiding the toolbar when the file is fully loaded (Thanks to jdjdjdjdjdjd's [[idea|https://github.com/donmor/Tiddloid/issues/7]])
 * Making the toolbar (as well as system status bar and navigation bar) the same color to the page background
 
 Here's a screenshot during the testing:
