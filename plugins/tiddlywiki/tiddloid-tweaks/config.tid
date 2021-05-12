@@ -1,0 +1,11 @@
+caption: {{$:/plugins/tiddlywiki/tiddloid-tweaks/language/ControlPanel/TiddloidTweaks/Caption}}
+title: $:/plugins/tiddlywiki/tiddloid-tweaks/config
+tags: $:/tags/ControlPanel/Appearance
+
+\define lingo-base() $:/plugins/tiddlywiki/tiddloid-tweaks/language/ControlPanel/TiddloidTweaks/
+
+<<lingo Hint>>
+
+<$checkbox tiddler="$:/config/Tiddloid/HideToolbar" field="text" checked="yes" unchecked="no" default="no"> <<lingo HideToolbar/Description>> </$checkbox>
+
+<$checkbox tiddler="$:/config/Tiddloid/ApplyTheme" field="text" checked="yes" unchecked="no" default="no"> <<lingo ApplyTheme/Description>> </$checkbox>
