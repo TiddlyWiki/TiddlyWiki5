@@ -1,11 +1,9 @@
-caption: {{$:/plugins/tiddlywiki/tiddloid-tweaks/language/ControlPanel/TiddloidTweaks/Caption}}
+caption: Tiddloid Tweaks
 title: $:/plugins/tiddlywiki/tiddloid-tweaks/config
 tags: $:/tags/ControlPanel/Appearance
 
-\define lingo-base() $:/plugins/tiddlywiki/tiddloid-tweaks/language/ControlPanel/TiddloidTweaks/
+These settings apply to the Tiddloid client.
 
-<<lingo Hint>>
+<$checkbox tiddler="$:/config/Tiddloid/HideToolbar" field="text" checked="yes" unchecked="no" default="no"> Apply theme color to system bars </$checkbox>
 
-<$checkbox tiddler="$:/config/Tiddloid/HideToolbar" field="text" checked="yes" unchecked="no" default="no"> <<lingo HideToolbar/Description>> </$checkbox>
-
-<$checkbox tiddler="$:/config/Tiddloid/ApplyTheme" field="text" checked="yes" unchecked="no" default="no"> <<lingo ApplyTheme/Description>> </$checkbox>
+<$checkbox tiddler="$:/config/Tiddloid/ApplyTheme" field="text" checked="yes" unchecked="no" default="yes"> Hide toolbar on loading complete </$checkbox>
