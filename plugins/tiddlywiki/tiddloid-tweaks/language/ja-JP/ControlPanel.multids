@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/tiddloid-tweaks/language/ControlPanel/
+
+TiddloidTweaks/Caption: Tiddloid
+TiddloidTweaks/Hint: これらの設定はTiddloidクライアントに適用されます。
+TiddloidTweaks/ApplyTheme/Description: システムバーにテーマカラーを適用する
+TiddloidTweaks/HideToolbar/Description: 読み込み完了時にツールバーを非表示
