@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/tiddloid-tweaks/language/ControlPanel/
+
+TiddloidTweaks/Hint: Diese Einstellungen gelten für den Tiddloid-Client.
+TiddloidTweaks/ApplyTheme/Description: Wenden Sie die Themenfarbe auf die Systemleisten an
+TiddloidTweaks/HideToolbar/Description: Ausblenden Symbolleiste auf der Ladevorgang abgeschlossen
