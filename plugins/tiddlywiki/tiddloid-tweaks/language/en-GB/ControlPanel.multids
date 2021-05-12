@@ -1,6 +1,0 @@
-title: $:/plugins/tiddlywiki/tiddloid-tweaks/language/ControlPanel/
-
-TiddloidTweaks/Caption: Tiddloid Tweaks
-TiddloidTweaks/Hint: These settings apply to the Tiddloid client.
-TiddloidTweaks/ApplyTheme/Description: Apply theme color to system bars
-TiddloidTweaks/HideToolbar/Description: Hide toolbar on loading complete
