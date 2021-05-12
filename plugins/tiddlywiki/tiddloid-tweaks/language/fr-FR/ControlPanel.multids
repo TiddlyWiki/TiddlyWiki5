@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/tiddloid-tweaks/language/ControlPanel/
+
+TiddloidTweaks/Hint: Ces paramètres s'appliquent au client Tiddloid.
+TiddloidTweaks/ApplyTheme/Description: Appliquer la couleur du thème aux barres système
+TiddloidTweaks/HideToolbar/Description: Masquer la barre d'outils une fois le chargement terminé
