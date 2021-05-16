@@ -1,7 +1,4 @@
-created: 20210412164430778
-modified: 20210412164851262
-tags: 
 title: $:/config/Editor/EnableImportFilter
 type: text/vnd.tiddlywiki
 
-[all[current]type[text/vnd.tiddlywiki]]
+[all[current]type[text/vnd.tiddlywiki]] [all[current]!has[type]]

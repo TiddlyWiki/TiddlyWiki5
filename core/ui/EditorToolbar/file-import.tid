@@ -5,12 +5,7 @@ condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]
 \define lingo-base() $:/language/Import/
 
 \define closePopupActions()
-<$action-deletetiddler $tiddler=<<importState>>/>
-\end
-
-\define cancelImportActions()
-<$action-deletetiddler $tiddler=<<importTitle>>/>
-<<closePopupActions>>
+<$action-deletetiddler $filter="[title<importState>] [title<importTitle>]"/>
 \end
 
 \define replacement-text-image() [img[$title$]]
@@ -29,7 +24,7 @@ condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]
 \end
 
 \define buttons()
-<$button class="tc-btn-invisible" actions=<<cancelImportActions>> ><<lingo Listing/Cancel/Caption>></$button>
+<$button class="tc-btn-invisible" actions=<<closePopupActions>> ><<lingo Listing/Cancel/Caption>></$button>
 <$button class="tc-btn-invisible" message="tm-perform-import" param=<<importTitle>> actions=<<postImportActions>> ><<lingo Listing/Import/Caption>></$button>
 \end
 
