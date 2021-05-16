@@ -352,7 +352,6 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	};
 
 	EditTextWidget.prototype.handleDragOverEvent = function(event) {
-
 		if($tw.utils.dragEventContainsFiles(event)) {
 			// Call preventDefault() in browsers that default to not allowing drop events on textarea
 			if($tw.browser.isFirefox || $tw.browser.isIE) {
