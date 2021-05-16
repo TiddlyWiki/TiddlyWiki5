@@ -70,7 +70,7 @@ DropZoneWidget.prototype.handleEvent = function(event) {
 		}
 	} else if(event.type === "dragleave") {
 		// Check if drag left the window
-		if (event.relatedTarget === null || event.relatedTarget.nodeName === "HTML") {
+		if (event.relatedTarget === null || (event.relatedTarget && event.relatedTarget.nodeName === "HTML")) {
 			this.resetState();
 		}
 	}
