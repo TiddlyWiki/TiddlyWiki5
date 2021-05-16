@@ -86,7 +86,7 @@ function FramedEngine(options) {
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
 		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"},
-		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"},
+		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"}
 	
 	]);
 	// Add drag and drop event listeners if fileDrop is enabled
