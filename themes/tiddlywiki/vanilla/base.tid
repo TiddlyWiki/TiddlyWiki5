@@ -1569,14 +1569,14 @@ html body.tc-body.tc-single-tiddler-window {
 	content: "<<lingo DropMessage>>";
 	pointer-events: none;
 	position: absolute;
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 	justify-content: center;
-    background-color: <<color background>>;
-    border: 4px dashed <<color modal-border>>;
-    font-weight: 600;
-    font-size: 150%;
-    opacity: 0.8;
+	background-color: <<color background>>;
+	border: 4px dashed <<color modal-border>>;
+	font-weight: 600;
+	font-size: 150%;
+	opacity: 0.8;
 	color: <<color foreground>>;
 }
 

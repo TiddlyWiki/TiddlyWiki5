@@ -378,7 +378,6 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	};
 	
 	EditTextWidget.prototype.handleClickEvent = function(event) {
-		//this.engine.fixHeight();
 		return !this.dispatchDOMEvent(this.cloneEvent(event));
 	};
 

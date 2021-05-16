@@ -10,10 +10,6 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 <$action-popup $state=<<importState>> $coords="(0,0,0,0)" $floating="yes"/>
 \end
 
-\define dummyActions()
-hello
-\end
-
 <$list filter="[all[current]has[_canonical_uri]]">
 
 <div class="tc-message-box">
@@ -30,7 +26,7 @@ hello
 
 <$list filter="[all[current]!has[_canonical_uri]]">
 <$vars importTitle=<<qualify $:/ImportImage>> importState=<<qualify $:/state/ImportImage>> >
-<$dropzone importTitle=<<importTitle>> autoOpenOnImport="no" contentTypesFilter={{$:/config/Editor/ImportContentTypesFilter}} class="tc-dropzone-editor" enable={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}} filesOnly="yes" actions=<<importFileActions>> ><div><$reveal state="$:/state/showeditpreview" type="match" text="yes">
+<$dropzone importTitle=<<importTitle>> autoOpenOnImport="no" contentTypesFilter={{$:/config/Editor/ImportContentTypesFilter}} class="tc-dropzone-editor" enable={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}} filesOnly="yes" actions=<<importFileActions>> ><$reveal state="$:/state/showeditpreview" type="match" text="yes">
 <div class="tc-tiddler-preview">
 
 <$transclude tiddler="$:/core/ui/EditTemplate/body/editor" mode="inline"/>
@@ -53,6 +49,6 @@ hello
 <$transclude tiddler="$:/core/ui/EditTemplate/body/editor" mode="inline"/>
 
 </$reveal>
-</div></$dropzone>
+</$dropzone>
 </$vars>
 </$list>

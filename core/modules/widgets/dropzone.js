@@ -136,7 +136,7 @@ DropZoneWidget.prototype.handleDragOverEvent  = function(event) {
 	}
 	// Tell the browser that we're still interested in the drop
 	event.preventDefault();
-	// Check if this is a propagated event, IE does not allow accessing dropEffect outside of original event handler
+	// Check if this is a synthetic event, IE does not allow accessing dropEffect outside of original event handler
 	if(event.isTrusted) {
 		event.dataTransfer.dropEffect = "copy"; // Explicitly show this is a copy
 	}
