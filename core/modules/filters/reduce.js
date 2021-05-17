@@ -31,6 +31,8 @@ exports.reduce = function(source,operator,options) {
 					switch(name) {
 						case "currentTiddler":
 							return "" + title;
+						case "outerCurrentTiddler":
+							return options.widget.getVariable("currentTiddler");
 						case "accumulator":
 							return "" + accumulator;
 						case "index":
