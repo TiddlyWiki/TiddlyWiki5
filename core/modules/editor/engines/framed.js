@@ -86,10 +86,12 @@ function FramedEngine(options) {
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
 		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"},
-		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"}
+		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"},
+		{name: "blur",handlerObject: this, handlerMethod: "handleBlurEvent"}
 	]);
 	// Insert the element into the DOM
 	this.iframeDoc.body.appendChild(this.domNode);
+	this.widget.domNodes.push(this.domNode);
 }
 
 /*
@@ -105,6 +107,25 @@ FramedEngine.prototype.copyStyles = function() {
 	// In Chrome setting -webkit-text-fill-color overrides the placeholder text colour
 	this.domNode.style["-webkit-text-fill-color"] = "currentcolor";
 };
+
+/*
+Get an object containing the selectionStart and selectionEnd values
+*/
+FramedEngine.prototype.getSelectionRange = function() {
+	return {
+		selectionStart: this.domNode.selectionStart,
+		selectionEnd: this.domNode.selectionEnd
+	}
+};
+
+/*
+Set the selection-range
+*/
+FramedEngine.prototype.setSelectionRange = function(selectionStart,selectionEnd) {
+	this.domNode.selectionStart = selectionStart;
+	this.domNode.selectionEnd = selectionEnd;
+};
+
 
 /*
 Set the text of the engine if it doesn't currently have focus
@@ -171,6 +192,20 @@ Handle a focus event
 FramedEngine.prototype.handleFocusEvent = function(event) {
 	if(this.widget.editCancelPopups) {
 		$tw.popup.cancel(0);	
+	}
+	var currentTiddler = this.widget.document.querySelector('[data-tiddler-title="' + CSS.escape(this.widget.editTitle) + '"].tc-tiddler-frame');
+	if(currentTiddler) {
+		$tw.utils.addClass(currentTiddler,"tc-focused");
+	}
+};
+
+/*
+Handle a blur event
+*/
+FramedEngine.prototype.handleBlurEvent = function(event) {
+	var currentTiddler = this.widget.document.querySelector('[data-tiddler-title="' + CSS.escape(this.widget.editTitle) + '"].tc-tiddler-frame');
+	if(currentTiddler) {
+		$tw.utils.removeClass(currentTiddler,"tc-focused");
 	}
 };
 
