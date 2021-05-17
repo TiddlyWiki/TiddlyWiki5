@@ -7,7 +7,8 @@ caption: {{$:/language/ControlPanel/Plugins/Caption}}
 \define plugin-table(type)
 <$set name="plugin-type" value="""$type$""">
 <$set name="qualified-state" value=<<qualify "$:/state/plugin-info">>>
-<$list filter="[!has[draft.of]plugin-type[$type$]sort[name]]" emptyMessage=<<lingo "Empty/Hint">> template="$:/core/ui/Components/plugin-info"/>
+<$list filter="[<__type__>match[plugin]then[$:/core]]" template="$:/core/ui/Components/plugin-info"/>
+<$list filter="[!has[draft.of]plugin-type[$type$]prefix[$:/$type$s/tiddlywiki]sort[name]] [!has[draft.of]plugin-type[$type$]!prefix[$:/$type$s/tiddlywiki]!title[$:/core]sort[name]]" emptyMessage=<<lingo "Empty/Hint">> template="$:/core/ui/Components/plugin-info"/>
 </$set>
 </$set>
 \end
