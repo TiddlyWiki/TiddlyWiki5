@@ -173,11 +173,39 @@ Modal.prototype.display = function(title,options) {
 		importPageMacros: true
 	});
 	footerWidgetNode.render(modalFooterButtons,null);
+	navigatorWidgetNode.children = [headerWidgetNode,bodyWidgetNode,footerWidgetNode];
 	// Set up the refresh handler
 	refreshHandler = function(changes) {
+		// Detect the currently focused domNode
+		var currentlyFocusedDomNode = this.srcDocument.activeElement.tagName !== "IFRAME" ? this.srcDocument.activeElement : this.srcDocument.activeElement.contentWindow.document.activeElement;
+		// Find the widget owning the currently focused domNode
+		var focusWidget = $tw.focusManager.findWidgetOwningDomNode(navigatorWidgetNode,currentlyFocusedDomNode);
+		var renderTreeFootprint;
+		if(focusWidget) {
+			renderTreeFootprint = $tw.focusManager.generateRenderTreeFootprint(focusWidget,currentlyFocusedDomNode);
+		}
+		var widgetTreeFootprint,
+			widgetQualifier,
+			widgetInfo = {};
+		if(focusWidget) {
+			widgetTreeFootprint = $tw.focusManager.generateWidgetTreeFootprint(focusWidget);
+			widgetQualifier = focusWidget.getStateQualifier() + "_" + focusWidget.generateWidgetTreeFootprint();
+			if(focusWidget.engine && focusWidget.engine.getSelectionRange) {
+				var selections = focusWidget.engine.getSelectionRange();
+				widgetInfo.selectionStart = selections.selectionStart,
+				widgetInfo.selectionEnd = selections.selectionEnd;
+			}
+		}
 		headerWidgetNode.refresh(changes,modalHeader,null);
 		bodyWidgetNode.refresh(changes,modalBody,null);
 		footerWidgetNode.refresh(changes,modalFooterButtons,null);
+		var refreshedWidget;
+		if(widgetTreeFootprint) {
+			refreshedWidget = $tw.focusManager.findWidgetByFootprint(widgetTreeFootprint,navigatorWidgetNode,widgetQualifier);
+		}
+		if(refreshedWidget) {
+			$tw.focusManager.focusWidget(refreshedWidget,renderTreeFootprint,widgetInfo);
+		}
 	};
 	this.wiki.addEventListener("change",refreshHandler);
 	// Add the close event handler
