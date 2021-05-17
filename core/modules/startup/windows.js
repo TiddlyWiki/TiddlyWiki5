@@ -73,10 +73,37 @@ exports.startup = function() {
 		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
+			// Detect the currently focused domNode
+			var currentlyFocusedDomNode = srcDocument.activeElement.tagName !== "IFRAME" ? srcDocument.activeElement : srcDocument.activeElement.contentWindow.document.activeElement;
+			// Find the widget owning the currently focused domNode
+			var focusWidget = $tw.focusManager.findWidgetOwningDomNode(widgetNode,currentlyFocusedDomNode);
+			var renderTreeFootprint;
+			if(focusWidget) {
+				renderTreeFootprint = $tw.focusManager.generateRenderTreeFootprint(focusWidget,currentlyFocusedDomNode);
+			}
+			var widgetTreeFootprint,
+				widgetQualifier,
+				widgetInfo = {};
+			if(focusWidget) {
+				widgetTreeFootprint = $tw.focusManager.generateWidgetTreeFootprint(focusWidget);
+				widgetQualifier = focusWidget.getStateQualifier() + "_" + focusWidget.generateWidgetTreeFootprint();
+				if(focusWidget.engine && focusWidget.engine.getSelectionRange) {
+					var selections = focusWidget.engine.getSelectionRange();
+					widgetInfo.selectionStart = selections.selectionStart,
+					widgetInfo.selectionEnd = selections.selectionEnd;
+				}
+			}
 			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
 				styleElement.innerHTML = styleContainer.textContent;
 			}
 			widgetNode.refresh(changes);
+			var refreshedWidget;
+			if(widgetTreeFootprint) {
+				refreshedWidget = $tw.focusManager.findWidgetByFootprint(widgetTreeFootprint,widgetNode,widgetQualifier);
+			}
+			if(refreshedWidget) {
+				$tw.focusManager.focusWidget(refreshedWidget,renderTreeFootprint,widgetInfo);
+			}
 		};
 		$tw.wiki.addEventListener("change",refreshHandler);
 		// Listen for keyboard shortcuts
