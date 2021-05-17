@@ -22,7 +22,7 @@ title: $:/core/ui/EditTemplate
 <<delete-edittemplate-state-tiddlers>>
 <$action-sendmessage $message="tm-$message$-tiddler"/>
 \end
-<$keyboard key="((focus-next-tiddler))" actions=<<focus-tiddler-actions "after">>>
+<$keyboard key="((focus-next-tiddler))" actions=<<focus-tiddler-actions "after">> tag="div">
 <$keyboard key="((focus-previous-tiddler))" actions=<<focus-tiddler-actions "before">>>
 <$keyboard key="((cancel-edit-tiddler))" actions=<<cancel-delete-tiddler-actions "cancel">>>
 <$keyboard key="((save-tiddler))" actions=<<save-tiddler-actions>>>
