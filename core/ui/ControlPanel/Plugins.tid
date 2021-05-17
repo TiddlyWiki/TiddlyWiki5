@@ -16,4 +16,4 @@ caption: {{$:/language/ControlPanel/Plugins/Caption}}
 
 <<lingo Installed/Hint>>
 
-<$macrocall $name="tabs" tabsList="[[$:/core/ui/ControlPanel/Plugins/Installed/Plugins]] [[$:/core/ui/ControlPanel/Plugins/Installed/Themes]] [[$:/core/ui/ControlPanel/Plugins/Installed/Languages]]" default="$:/core/ui/ControlPanel/Plugins/Installed/Plugins" explicitState="$:/state/tab--86143343"/>
+<$macrocall $name="tabs" tabsList="[all[tiddlers+shadows]tag[$:/tags/ControlPanel/Plugins]!has[draft.of]]" default="$:/core/ui/ControlPanel/Plugins/Installed/Plugins" explicitState="$:/state/tab--86143343"/>
