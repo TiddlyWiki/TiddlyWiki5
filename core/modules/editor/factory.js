@@ -72,6 +72,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.engine.fixHeight();
 		// Focus if required
 		if(this.editFocus === "true" || this.editFocus === "yes") {
+			$tw.focusManager.interceptFocusPreservation = true;
 			this.engine.focus();
 		}
 		// Add widget message listeners
