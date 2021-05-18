@@ -17,9 +17,6 @@ title: $:/core/ui/EditTemplate
 <$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 <<delete-edittemplate-state-tiddlers>>
 <$action-sendmessage $message="tm-save-tiddler"/>
-<$set name="cssEscapedTitle" value={{{ [<currentTiddler>get[draft.title]] }}}>
-<$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>>/>
-</$set>
 \end
 \define cancel-delete-tiddler-actions(message)
 <<delete-edittemplate-state-tiddlers>>
