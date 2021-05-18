@@ -153,6 +153,9 @@ FocusManager.prototype.focusWidget = function(widget,footprint,widgetInfo) {
 		if((savedDomNode && savedDomNode.getAttribute && savedDomNode.getAttribute("hidden") === "true") || (savedDomNode === undefined)) {
 			savedDomNode = this.findParentWidgetWithDomNodes(widget);
 		}
+		if(savedDomNode && (savedDomNode.nodeType === Node.TEXT_NODE)) {
+			savedDomNode = savedDomNode.parentNode;
+		}
 		if(savedDomNode && savedDomNode.focus) {
 			savedDomNode.focus({preventScroll: true});
 		}
