@@ -235,7 +235,7 @@ Widget.prototype.hasVariable = function(name,value) {
 	return false;
 };
 	
-	/*
+/*
 Find the widget, walking up the widget-tree, that has a different transclusion variable than the current widget
 */
 Widget.prototype.findParentTransclusionWidget = function() {
