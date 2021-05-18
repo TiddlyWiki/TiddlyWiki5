@@ -147,6 +147,9 @@ FocusManager.prototype.focusWidget = function(widget,footprint,widgetInfo) {
 			savedDomNode = domNode;
 			domNode = domNode.childNodes[footprint[counter]];
 		}
+		if(savedDomNode && (savedDomNode.nodeType === Node.TEXT_NODE)) {
+			savedDomNode = savedDomNode.parentNode;
+		}
 		if((savedDomNode && savedDomNode.getAttribute && savedDomNode.getAttribute("hidden") === "true") || (savedDomNode === undefined)) {
 			savedDomNode = this.findParentWidgetWithDomNodes(widget);
 		}
@@ -160,7 +163,6 @@ FocusManager.prototype.focusWidget = function(widget,footprint,widgetInfo) {
 		this.interceptFocusPreservation = false;
 	}
 };
-
 exports.FocusManager = FocusManager;
 
 })();
