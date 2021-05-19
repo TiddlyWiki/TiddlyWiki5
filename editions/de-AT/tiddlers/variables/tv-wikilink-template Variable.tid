@@ -1,0 +1,25 @@
+created: 20201026204228437
+creator: FBB
+modified: 20210519132102280
+modifier: FBB
+tags: [[Core Variablen]] [[Konfigurations Variablen]] Variablen
+title: tv-wikilink-template Variable
+type: text/vnd.tiddlywiki
+
+Die Variable <<.var "tv-wikilink-template">> steuert den Wert des <<.attr href>>-Attributs auf dem [[HTML|HyperText Markup Language]] `a`-Element, das vom <<.wid Link>>-Widget generiert wird. Die Variable <<.vlink "tv-filter-export-link">> hat, falls definiert, Vorrang vor der <<.var "tv-wikilink-template">> Variable.
+
+<<.hinweisMacro "Diese Variable hat keine nützliche Wirkung, wenn ~TiddlyWiki in einem Browser ausgeführt wird, da das `href`-Attribut dort ignoriert wird - Links zwischen Tiddlern werden stattdessen von [[JavaScript]] ausgeführt. Die Variable kommt ins Spiel, wenn man die [[Node.js Konfiguration|TiddlyWiki mit Node.js]] verwendet, um eine statische Version des Wikis zu erzeugen.
+" "" "note">>
+
+Die Variable wird behandelt, als wäre sie ein [[Makro]] mit den folgenden Parametern:
+
+;uri_encoded
+: Ein Link mit dem Titel des Ziel-Tiddlers, aber als [[prozent-kodierte|URL-Encoding]] Zeichen.
+; uri_doubleencoded
+: Der Wert des Parameters <<.param "uri_encoded">>, aber erneut prozentual codiert, d.h. mit seinen `%`-Zeichen weiter konvertiert in <<.value "%25">>.
+
+> `\define tv-wikilink-template() ../tiddlers/$uri_encoded$.html`
+
+Die Voreinstellung für die Variable ist: `#$uri_encoded$`
+
+Siehe auch die Variable <<.vlink tv-get-export-link>>, die gegenüber dieser dominiert. 

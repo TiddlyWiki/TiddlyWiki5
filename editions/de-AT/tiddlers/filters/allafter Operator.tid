@@ -1,0 +1,14 @@
+caption: allafter
+created: 20151017145021839
+creator: FBB
+modified: 20210519165650179
+modifier: FBB
+op-input: eine Liste von Elementen
+op-output: alle Elemente nach der Markierung
+op-parameter: das als Markierung zu verwendende Listenelement
+op-parameter-name: marker
+op-purpose: alle Elemente außer denen nach der Markierung verwerfen
+op-suffix: Die Angabe eines Suffixes ("include") schließt die Markierung in die Ausgabe ein
+tags: Listen-Filter-Operator Sortier-Operator Filter-Operator
+title: allafter Operator
+type: text/vnd.tiddlywiki

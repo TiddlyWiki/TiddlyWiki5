@@ -1,0 +1,46 @@
+created: 20200813214751285
+creator: FBB
+modified: 20210519132102320
+modifier: FBB
+tags: WikiText
+title: Variablen in WikiText
+type: text/vnd.tiddlywiki
+
+Siehe dazu auch die [[Einführung in das Konzept der Variablen|Variablen]].
+
+Um den Wert einer Variablen zu transkludieren, verwendedie Syntax zum [[Aufruf eines Makros|Makro-Aufrufe in WikiText]] ohne Parameter. Du kannst auch das ''[[$macrocall|MacroCallWidget]]''-Widget verwenden.
+
+Ein [[Makro-Snippet|Makros]] kann `$(name)$` als [[Platzhalter|Makros in WikiText]] enthalten, der durch den Wert der Variable mit dem Namen <<.value name>> ersetzt wird.
+
+Der Wert einer Variablen kann als [[Filter-Parameter]] oder als [[Widget-Attribut|Widgets in WikiText]] verwendet werden.
+
+!! Beispiel: Definition einer Variablen
+
+```
+<$set name=animal value=zebra>
+   <<animal>>
+</$set>
+```
+
+!! Beispiel: Definition eines Makros
+
+Das `\define` Pragma unten definiert ein Makro namens <<.var tags-of-current-tiddler>>. Das Makro gibt den Wert des <<.field tag>>-Feldes des Tiddlers zurück und kann von überall sonst im selben Tiddler (oder in jedem Tiddler, der ihn [[importiert|ImportVariablesWidget]]) aufgerufen werden.
+
+```
+\define tags-of-current-tiddler() {{!!tags}}
+```
+
+```
+The tags are: <<tags-of-current-tiddler>>
+```
+
+!! Beispiel: Verwendung einer Variablen als Filter-Parameter.
+
+In diesem Beispiel wird der [[backlinks Operator]] verwendet, um alle Tiddler aufzulisten, die auf diesen Link verweisen.
+
+```
+<<list-links filter:"[<currentTiddler>backlinks[]]">>
+```
+
+<<.hr>>
+siehe auch: [ext[https://tiddlywiki.com/#Variables in WikiText]]

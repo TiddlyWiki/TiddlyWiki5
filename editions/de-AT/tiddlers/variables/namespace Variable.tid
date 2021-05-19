@@ -1,0 +1,11 @@
+created: 20200901195128030
+creator: FBB
+modified: 20210519132101698
+modifier: FBB
+tags: [[Core Variablen]] Variablen
+title: namespace Variable
+type: text/vnd.tiddlywiki
+
+Die <<.var namespace>> [[Variable|Variablen]] wird intern von [[HTML|HyperText Markup Language]]-Widgets verwendet, um den korrekten Namensraum für die erzeugten DOM-Elemente zu ermitteln.
+
+Ein `svg`- oder `math`-Element liefert einen eindeutigen Namensraum für sich selbst und alle darin enthaltenen untergeordneten Elemente. 

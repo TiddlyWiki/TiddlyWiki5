@@ -1,0 +1,67 @@
+author: FBB
+created: 20200428211253535
+creator: <<author>> FBB
+description: mlink - spezielles Makro für Links
+modified: 20210519132100920
+modifier: FBB
+tags: $:/tags/Macro $:/_fbb/Macro
+title: $:/_fbb/Macro/doc
+type: text/vnd.tiddlywiki
+
+\define .tid(_) <code class="doc-tiddler">$_$</code>
+\define .tag(_) <span class="doc-tag">{{$_$||$:/core/ui/TagTemplate}}</span>
+\define .field(_) <code class="doc-field">$_$</code>
+\define .value(_) <code class="doc-value">$_$</code>
+\define .op(_) <code class="doc-operator">$_$</code>
+\define .var(_) <b><var class="doc-var">$_$</var></b>
+\define .vlink(_) <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#$_$ Variable"><code class="doc-var">$_$</code></a>
+\define .mlink(_) <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#$_$ Makro"><code class="doc-var">$_$</code></a>
+\define .wid(_) <a href="#$_$Widget" class="doc-widget" >$$_$</a>
+\define .wid2(_1, _2) <a href="#$_1$Widget" class="doc-widget">$$_2$</a>
+\define .attr(_) <code class="doc-attr">$_$</code>
+\define .param(_) <b class="doc-param" style="color:darkslategray;"><i>$_$</i></b>
+\define .def(_) <b style="color:darkslategray;">$_$</b>
+
+\define .mark(_) <mark>$_$</mark>
+\define .bmark(_) <mark class="bmark">$_$</mark>
+\define .hr() <br/><hr style="border:solid #acacac 1px;" />
+
+\define .mtitle(_) $_$ Macro
+\define .otitle(_) $_$ Operator
+\define .vtitle(_) $_$ Variable
+
+\define .icon(_) <span class="doc-icon">{{$_$}}</span>
+\define .button(_) <span class="doc-button">{{$:/core/ui/Buttons/$_$!!caption}}</span>
+\define .tip(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/tip}}</div> $_$</div><br/>
+\define .tip2(_,_2) <div class="doc-icon-block"><div><b>$_2$</b></div><div class="doc-block-icon">{{$:/core/images/tip}}</div> $_$</div><br/>
+\define .warning(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/warning}}</div> $_$</div><br/>
+
+```
+\define .tid(_) <code class="doc-tiddler">$_$</code>
+\define .tag(_) <span class="doc-tag">{{$_$||$:/core/ui/TagTemplate}}</span>
+\define .field(_) <code class="doc-field">$_$</code>
+\define .value(_) <code class="doc-value">$_$</code>
+\define .op(_) <code class="doc-operator">$_$</code>
+\define .var(_) <b><var class="doc-var">$_$</var></b>
+\define .vlink(_) <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#$_$"><code class="doc-var">$_$</code></a>
+\define .mlink(_) <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#$_$ Makro"><code class="doc-var">$_$</code></a>
+\define .wid(_) <a href="#$_$Widget" class="doc-widget" >$$_$</a>
+\define .wid2(_1, _2) <a href="#$_1$Widget" class="doc-widget">$$_2$</a>
+\define .attr(_) <code class="doc-attr">$_$</code>
+\define .param(_) <b class="doc-param" style="color:darkslategray;"><i>$_$</i></b>
+
+\define .mark(_) <mark>$_$</mark>
+\define .bmark(_) <mark class="bmark">$_$</mark>
+\define .hr() <br/><hr style="border:solid #acacac 1px;" />
+
+\define .mtitle(_) $_$ Macro
+\define .otitle(_) $_$ Operator
+\define .vtitle(_) $_$ Variable
+
+\define .icon(_) <span class="doc-icon">{{$_$}}</span>
+\define .button(_) <span class="doc-button">{{$:/core/ui/Buttons/$_$!!caption}}</span>
+\define .tip(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/tip}}</div> $_$</div><br/>
+\define .tip2(_,_2) <div class="doc-icon-block"><div><b>$_2$</b></div><div class="doc-block-icon">{{$:/core/images/tip}}</div> $_$</div><br/>
+\define .warning(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/warning}}</div> $_$</div><br/>
+
+```

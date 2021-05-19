@@ -1,0 +1,11 @@
+caption: $:/tags/Image
+created: 20201104221842754
+creator: FBB
+description: markiert Bilder (aus dem TiddlyWiki-Core)
+modified: 20210519132102057
+modifier: FBB
+tags: SystemTags
+title: System: $:/tags/Image
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field "{{!!caption}}">> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.

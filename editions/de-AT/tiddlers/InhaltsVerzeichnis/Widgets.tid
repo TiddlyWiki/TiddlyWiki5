@@ -1,0 +1,12 @@
+created: 20140918095112165
+creator: pmario
+list: ActionListopsWidget CheckboxWidget DraggableWidget DroppableWidget FieldsWidget ImageWidget ImportVariablesWidget LinkCatcherWidget LinkWidget ListWidget MacroCallWidget RevealWidget SetWidget TranscludeWidget ViewWidget
+modified: 20210519132100796
+modifier: FBB
+tags: InhaltsVerzeichnis
+title: Widgets
+type: text/vnd.tiddlywiki
+
+Es gibt momentan ca. 30 Widgets. Siehe: https://tiddlywiki.com/#Widgets
+
+<<list-links "[tag[Widgets]]" >>

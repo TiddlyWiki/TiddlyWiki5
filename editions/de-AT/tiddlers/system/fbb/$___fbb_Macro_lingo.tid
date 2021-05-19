@@ -1,0 +1,28 @@
+\define .lingo( name:"title" )
+<span>{{$:/language/Docs/Fields/$name$}}</span>
+\end
+
+Dieses Macro dient dazu, die Beschreibungstexte der [[Tiddler-Felder]] auszugeben.
+
+! Definition
+
+```
+\define .lingo( name:"title" )
+<span>{{$:/language/Docs/Fields/$name$}}</span>
+\end
+```
+
+! Parameter
+
+|Name|Beschreibung |h
+|name |Name des Feldes |
+
+! Beispiel
+
+`<<.lingo "">>`
+
+! Ausgabe
+
+<<.lingo "">>
+
+

@@ -1,0 +1,17 @@
+caption: multiply
+created: 20200629125247540
+creator: FBB
+modified: 20210519165430785
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: die Eingabe als Zahlen, aber jeweils mit ''//{{!!op-parameter-name}}//'' multipliziert
+op-parameter: eine Nummer
+op-parameter-name: N
+op-purpose: jede Eingabe als eine Zahl behandeln, multiplizieren jede mit dem numerischen Wert des Operanden
+tags: Filter-Operator Mathematik-Operator [[Binäre Mathematik-Operatoren]]
+title: multiply Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">>: Einen Überblick gibt es dazu auch in [ext[Mathematik-Operatoren|https://tiddlywiki.com/#Mathematics%20Operators]] //(englisch)//.
+
+Vergleiche auch mit dem [[product Operator]].

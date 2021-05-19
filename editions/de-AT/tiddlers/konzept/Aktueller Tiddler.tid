@@ -1,0 +1,20 @@
+created: 20200609184832838
+creator: FBB
+modified: 20210519132101065
+modifier: FBB
+tags: Konzept
+title: Aktueller Tiddler
+type: text/vnd.tiddlywiki
+
+Der aktuelle Tiddler liefert den Kontext, in dem mehrere Merkmale von WikiText ausgewertet werden.
+
+So bezeichnet z.B. `{{!!title}}` den Wert des Titel-Felds von dem gerade aktuellem Tiddler. Diese Technik kann zur Erstellung von universellen [[Vorlagen-Tiddlern|Vorlagen-Tiddler]] verwendet werden.
+
+Der Titel des aktuellen Tiddlers ist immer in der Variablen [[currentTiddler|currentTiddler Variable]] zu finden.
+
+Die beiden geläufigsten Möglichkeiten, mit denen der derzeitige Tiddler geändert werden kann sind:
+
+* das [[$tiddler|TiddlerWidget]]-Widget
+* das [[$list|ListWidget]]-Widget
+
+Der aktuelle Tiddler ist daher oft nicht derselbe wie der Tiddler, der gerade angesehen oder bearbeitet wird (siehe: [[storyTiddler Variable]]). 

@@ -1,7 +1,7 @@
 caption: Listen
 created: 20131205160257619
 creator: pmario
-modified: 20140923173928536
+modified: 20210519132100358
 modifier: pmario
 tags: WikiText
 title: Listen in WikiText
@@ -30,14 +30,14 @@ Ungeordnete und geordnete Listen können gemischt werden:
 <<wikitext-example src:"* Heute zu erledigen
 *# Essen
 * Arbeit abschieben :)
-*# Dieses und 
-*# Jenes 
+*# Dieses und
+*# Jenes
 *## und das auch noch
 ">>
 
 ! Listen und Zitate mischen
 
-Hinweis: [[Zitate|Zitate in WikiText]] und Listen lassen sich hervorragend gemeinsam einsetzen: 
+Hinweis: [[Zitate|Zitate in WikiText]] und Listen lassen sich hervorragend gemeinsam einsetzen:
 
 <<wikitext-example src:"* Element Eins
 ** Element Zwei

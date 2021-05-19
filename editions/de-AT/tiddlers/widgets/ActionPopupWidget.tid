@@ -1,0 +1,31 @@
+created: 20210421204736552
+creator: FBB
+modified: 20210519132101040
+modifier: FBB
+tags: Widgets
+title: ActionPopupWidget
+type: text/vnd.tiddlywiki
+
+Das <<.wid2 "ActionPopup" "Action-Popup">>-Widget ist ein Aktions-Widget, das die Anzeige eines über einen Status-Tiddler definierten Popup auslöst oder alle angezeigten Popups löscht. [[ActionWidgets|ActionWidget]] werden innerhalb von auslösenden Widgets wie z. B. dem <<.wid Button>>-Widget verwendet.
+
+! Inhalte und Attribute
+
+|!Attribute |!Bescheibung |
+|$state |Der Titel des Status-Tiddlers für das Popup |
+|$coords |Optionale Koordinaten für den Punkt, auf den das Popup positioniert wird. Wird im Format `(x,y,w,h)` übergeben. |
+
+<<.fromVersion "5.1.23">> Wenn das Attribut <<.param "$coords">> fehlt oder leer ist, werden alle Popups abgebrochen.
+
+! Beispiele
+
+Hier ist ein Beispiel für eine Schaltfläche, welche die "Mehr"-Schaltfläche im Seitenleisten-Tab  "Tools" auslöst. Die angeklickte Schaltfläche ist ganz unten, man muss also nach ganz nach unten scrollen, um das Popup zu sehen.
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" $value="$:/core/ui/SideBar/Tools"/>
+<$action-popup $state="$:/state/popup/more-2053862905" $coords="(0,20,0,0)"/>
+Für mehr klicken.
+</$button>'/>
+
+
+Siehe: <<wikidokulink "~ActionPopupWidget" >> (englisch)

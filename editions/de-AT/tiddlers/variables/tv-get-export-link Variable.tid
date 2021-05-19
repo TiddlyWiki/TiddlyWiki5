@@ -1,0 +1,19 @@
+created: 20201006210804723
+creator: FBB
+modified: 20210519132102255
+modifier: FBB
+tags: [[Core Variablen]] Variablen [[Konfigurations Variablen]]
+title: tv-get-export-link Variable
+type: text/vnd.tiddlywiki
+
+Die Variable <<.var tv-get-export-link>> steuert den Wert des <<.attr href>>-Attributs auf dem [[HTML|HyperText Markup Language]] `a`-Element, das vom <<.wid Link>>-Widget generiert wird. Falls definiert, hat sie Vorrang vor der [[tv-wikilink-Template-Variable]].
+
+<<.hinweisMacro "Diese Variable hat keine nützliche Wirkung, wenn ~TiddlyWiki in einem Browser ausgeführt wird, da das `href`-Attribut dort ignoriert wird - Links zwischen Tiddlern werden stattdessen von [[JavaScript]] ausgeführt. Die Variable kommt ins Spiel, wenn man die [[Node.js Konfiguration|TiddlyWiki mit Node.js]] verwendet, um eine statische Version des Wikis zu erzeugen.
+" "" "note">>
+
+Die Variable wird behandelt, als wäre sie ein [[Makro]] mit den folgenden Parametern:
+
+;to
+: Der Titel des Ziel-Tiddlers, auf welchen der Link abzielt (ohne Anführungszeichen).
+
+Siehe auch <<.vlink tv-wikilink-template>> . Wenn beide Variablen existieren, dominiert die Variable <<.var tv-get-export-link>>.

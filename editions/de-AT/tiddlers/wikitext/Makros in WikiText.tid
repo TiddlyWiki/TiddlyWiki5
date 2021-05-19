@@ -1,7 +1,6 @@
-caption: Makros
 created: 20131205160746466
 creator: pmario
-modified: 20140922124415476
+modified: 20210519132100374
 modifier: ChrisK
 tags: WikiText
 title: Makros in WikiText
@@ -45,11 +44,11 @@ Die erste Zeile der Definition startet mit: `\define` und enthält:
 * Die Parameter Namen: `name` und `adresse`
 * Die Standard Werte: `Bugs Bunny` und `Rabbit Hole Hill`
 
-Parameter sollten immer sinnvolle Standard Werte haben, da es die Verwendung erleichtert. 
+Parameter sollten immer sinnvolle Standard Werte haben, da es die Verwendung erleichtert.
 
 Die letzte Zeile des Makros ist `\end` und markiert das Ende eines Makros :)
 
-Der Bereich zwischen `\define` und `\end` wird als Makro Code bezeichnet. In diesem Bereich können die Makro Parameter mit `$name$` bzw `$adresse$` als Platzhalter verwendet werden. 
+Der Bereich zwischen `\define` und `\end` wird als Makro Code bezeichnet. In diesem Bereich können die Makro Parameter mit `$name$` bzw `$adresse$` als Platzhalter verwendet werden.
 
 Wie im Beispiel ersichtlich: `Hallo, Ich bin $name$ und lebe in $adresse$`
 
@@ -72,7 +71,7 @@ Für einzeilige Makros kann die `\end` Markierung entfallen!
 
 * Globale Makros können in Tiddlern definiert werden, die mit dem System Tag: [[$:/tags/Macro]] getaggt sind. Diese Makros sind in jedem Tiddler sichtbar.
 
-* [[JavaScript Macros]] sind global sichtbar und haben Zugriff auf die TW Kern Funktionen. 
+* [[JavaScript Macros]] sind global sichtbar und haben Zugriff auf die TW Kern Funktionen.
 
 * Makros können mit dem ImportVariablesWidget importiert werden. (Für geübte Anwender)
 

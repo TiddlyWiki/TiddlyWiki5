@@ -1,0 +1,12 @@
+caption: $:/tags/ViewToolbar
+created: 20201124223832643
+creator: FBB
+description: markiert System-Tiddler der Tiddler-Symbolleiste im Ansichtsmodus
+modified: 20210519132102156
+modifier: FBB
+tags: SystemTags
+title: SystemTag: $:/tags/ViewToolbar
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field  {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.
+

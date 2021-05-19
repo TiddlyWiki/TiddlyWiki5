@@ -1,0 +1,176 @@
+created: 20200831204539858
+creator: FBB
+jeremy: tiddlywiki
+modified: 20210519132101923
+modifier: FBB
+tags: Widgets
+title: RevealWidget
+type: text/vnd.tiddlywiki
+
+! Einführung
+
+Das <<.wid "reveal">>-Widget verbirgt oder zeigt seinen Inhalt je nach dem Wert eines [[Zustands-Tiddlers|Status-Mechanismus]]. Der Typ des Widgets bestimmt die Bedingung für den anzuzeigenden Inhalt:
+
+
+* type=''match'': der Inhalt wird angezeigt, wenn der Status-Tiddler mit dem Wert des Textattributs übereinstimmt
+* type=''nomatch'': der Inhalt wird angezeigt, wenn der Status-Tiddler nicht mit dem Wert des Textattributs übereinstimmt
+* type=''popup'': der Inhalt wird als Popup angezeigt, wie im [[Popup-Mechanismus]] beschrieben
+* type=''lt'': der Inhalt wird angezeigt, wenn der Status-Tiddler eine ganze Zahl mit einem Wert ''kleiner als'' der Wert des Textattributs enthält
+* type=''gt'': der Inhalt wird angezeigt, wenn der Zustand-Tiddler eine ganze Zahl mit einem Wert ''größer als'' der Wert des Textattributs enthält
+* type=''lteq'': der Inhalt wird angezeigt, wenn der Status-Tiddler eine ganze Zahl mit einem Wert ''kleiner oder gleich'' dem Textattributwert enthält
+* type=''gteq'': der Inhalt wird angezeigt, wenn der Status-Tiddler eine ganze Zahl mit einem Wert ''größer oder gleich'' dem Wert des Textattributs enthält
+
+! Inhalt und Attribute
+
+Der Inhalt des <<.wid "reveal">>-Widgets wird nach den oben angegebenen Regeln angezeigt.
+
+|Attribute |Beschreibung |h
+|state |Eine Text-Referenz, welche den Status enthält |
+|stateTitle |Ein Titel, der den Status enthält, ''ohne'' Text-Referenz. Wird gegenüber dem Attribut <<.attr state>> bevorzugt. |
+|stateField |Ein ''Feldname'', der zur Suche nach dem Zustand verwendet wird, wenn das Attribut <<.attr stateTitle>> vorhanden ist |
+|stateIndex |Ein ''Index'', der zur Suche nach dem Zustand verwendet wird, wenn das Attribut <<.attr stateTitle>> vorhanden ist |
+|tag |Übersteuert den Standard-[[HTML|HyperText Markup Language]]-Element-Tag (`<div>` im Blockmodus oder `<span>` im Inline-Modus) |
+|type |Die Art des durchgeführten Abgleichs: ''match'', ''nomatch'', ''popup'', ''lt'', ''gt'', ''lteq'' oder ''gteq'' |
+|text |Der Text, der übereinstimmen muss, wenn der Typ ''match'', ''nomatch'', ''lt'', ''gt'', ''lteq'' oder ''gteq'' ist |
+|class |Ein optionaler [[CSS-Klassenname|CSS Klassen]], der dem HTML-Element zugewiesen werden kann <br/>&raquo; Setze ihn auf <<.value tc-popup-keep>>, um ein Popup "klebrig" zu machen, so dass es sich nicht schließt, wenn man hineinklickt |
+|style |Ein optionales CSS-Style-Attribut, das dem HTML-Element zugewiesen wird |
+|position |Die Position, die für das Popup verwendet wird, wenn der Typ ''popup'' ist. Kann ''left'', ''top'', ''top right'', ''right'', ''belowleft'' oder ''below'' sein. |
+|positionAllowNegative |Auf <<.value yes>> setzen, um zu verhindern, dass berechnete Popup-Positionen so fixiert werden, dass sie über Null liegen |
+|default |Standardwert, der verwendet wird, wenn der Status-Tiddler fehlt |
+|animate |Auf <<.value yes>> setzen, um das Öffnen und Schließen zu animieren (Standardeinstellung ist <<.value no>>; erfordert, dass <<.attr retain>> auf <<.value yes>> gesetzt wird) |
+|retain |Setzen Sie diese Option auf <<.value yes>>, um zu erzwingen, dass der Inhalt beibehalten wird, auch wenn er versteckt ist (Standardeinstellung <<.value no>>) |
+
+|,{{note-image.svg}}&nbsp; Hinweis |h
+|<<.fromVersion 5.1.18>> <<.attr stateTitle>>-, <<.attr stateField>>- und <<.attr stateIndex>>-Attribute ermöglichen es, Tiddler-Zustände direkt zu spezifizieren, ohne sie als Text-Referenzen zu interpretieren. <br/>&nbsp;  |
+
+|,{{note-image.svg}}&nbsp; Hinweis |h
+|Die Beibehaltung des Inhalts im ausgeblendeten Zustand kann zu einer schlechten Leistung führen, da der ausgeblendete Inhalt eine Aktualisierungsverarbeitung erfordert, obwohl er nicht angezeigt wird. Auf der anderen Seite kann der Inhalt viel schneller aufgezeigt werden. Beachten Sie, dass die Einstellung ''animate="yes"'' auch ''retain="yes"'' erfordert. <br/>&nbsp;  |
+
+!Beispiele
+
+!! Einfachen Inhalt anzeigen
+
+```
+<$button set="$:/state/SampleReveal1" setTo="show">Anzeigen</$button>
+<$button set="$:/state/SampleReveal1" setTo="hide">Ausblenden</$button>
+<$reveal type="match" state="$:/state/SampleReveal1" text="show">
+
+! @@color:red;Dies ist der angezeigte Inhalt@@
+Und dies ist ein Text
+
+</$reveal>
+```
+
+!!! Wird angezeigt als:
+
+<$button set="$:/state/SampleReveal1" setTo="show">Anzeigen</$button>
+<$button set="$:/state/SampleReveal1" setTo="hide">Ausblenden</$button>
+<$reveal type="match" state="$:/state/SampleReveal1" text="show">
+
+! @@color:red;Dies ist der angezeigte Inhalt@@
+Und dies ist ein Text
+
+</$reveal>
+
+<<.hr>>
+
+
+!! Akkordeon oder Slider
+
+Ein "Akkordeon" oder " Slider" ist eine Schaltfläche, mit der die Anzeige des zugehörigen Inhalts umgeschaltet werden kann.
+
+```
+<$reveal type="nomatch" state="$:/state/SampleReveal2" text="show">
+<$button set="$:/state/SampleReveal2" setTo="show">Einblenden</$button>
+</$reveal>
+<$reveal type="match" state="$:/state/SampleReveal2" text="show">
+
+<$button set="$:/state/SampleReveal2" setTo="hide">Ausblenden</$button>
+
+! @@color:green;Dies ist der angezeigte Inhalt@@
+Und dies ist ein ''Text''
+
+</$reveal>
+```
+
+!!! Wird angezeigt als:
+
+<$reveal type="nomatch" state="$:/state/SampleReveal2" text="show">
+<$button set="$:/state/SampleReveal2" setTo="show">Einblenden</$button>
+</$reveal>
+<$reveal type="match" state="$:/state/SampleReveal2" text="show">
+
+<$button set="$:/state/SampleReveal2" setTo="hide">Ausblenden</$button>
+
+! @@color:green;Dies ist der angezeigte Inhalt@@
+Und dies ist ein ''Text''
+
+</$reveal>
+
+<<.hr>>
+
+!! Popup-Fenster
+
+Hier ist ein einfaches Beispiel für ein Popup, das mit dem ~RevealWidget erstellt wurde:
+
+```
+<$button popup="$:/SamplePopupState">Pop me up!</$button>
+
+<$reveal type="popup" state="$:/SamplePopupState">
+<div class="tc-drop-down">
+
+! Das ist ein Popup
+...und irgendein Text
+
+</div>
+</$reveal>
+```
+
+!!! Wird angezeigt als:
+
+<$button popup="$:/SamplePopupState">Pop me up!</$button>
+
+<$reveal type="popup" state="$:/SamplePopupState">
+<div class="tc-drop-down">
+
+! Das ist ein Popup
+...und irgendein Text...
+
+</div>
+</$reveal>
+
+<<.hr>>
+
+!! Wie man Textreferenzen mit Feldinhalt verwendet
+
+Hier ist ein einfaches Beispiel, wie Textreferenzen mit Feldinhalt zur Steuerung des <<.wid Reveal>>-Widget verwendet werden können. Wenn ein Feld mit Namen <<.field jeremy>> mit dem  Text <<.value tiddlywiki>> gefüllt ist, wird eine Meldung angezeigt. Sonst nicht.
+
+```
+<$reveal type="match" state="!!jeremy" text="tiddlywiki">
+
+!! Meldung
+@@border-color:red;
+<<<
+~TiddlyWiki!
+<<<
+@@
+
+</$reveal>
+```
+
+<$reveal type="match" state="!!jeremy" text="tiddlywiki">
+
+!!! Wird angezeigt als:
+
+!! Meldung
+@@border-color:red;
+<<<
+~TiddlyWiki!
+<<<
+@@
+
+</$reveal>
+
+<<.hr>>
+
+siehe: [ext[https://tiddlywiki.com/#RevealWidget]]

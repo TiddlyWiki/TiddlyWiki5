@@ -1,0 +1,11 @@
+caption: $:/tags/SideBar
+created: 20201105223840094
+creator: FBB
+description: markiert die Tabs aus der Seitenleiste (z.B. das [[Inhaltsverzeichnis|InhaltsVerzeichnis]])
+modified: 20210519132102089
+modifier: FBB
+tags: SystemTags
+title: System: $:/tags/SideBar
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.

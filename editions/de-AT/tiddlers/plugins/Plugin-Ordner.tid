@@ -1,0 +1,31 @@
+created: 20200526203838882
+creator: FBB
+modified: 20210519132101764
+modifier: FBB
+tags: Plugin-Mechanismus
+title: Plugin-Ordner
+type: text/vnd.tiddlywiki
+
+Auf dem Server können [[Plugins]] als gewöhnliche JSON-[[Tiddler]] gespeichert werden. Aber es ist oft bequemer, sie als separate Tiddler-Dateien in Ordnern zu speichern. Der Ordner `plugins` muss eine Datei `plugin.info` enthalten, in der die Metadaten für das Plugin enthalten sind. Sie kann optional auch Dateien außerhalb des Plugin-Ordners bestimmen, die als Tiddler geladen werden sollen.
+
+Die Datei `pugin.info` enthält die folgende JSON-Struktur:
+
+```
+{
+   "title": "$:/plugins/publisher/name",
+   "name": "name",
+   "description": "An exemplary plugin for demonstration purposes",
+   "author": "JeremyRuston",
+   "version": "1.2.3-alpha3",
+   "core-version": ">=5.0.0",
+   "source": "https://tiddlywiki.com/MyPlugin",
+   "plugin-type": "plugin",
+   "list": "readme license history"
+}
+```
+
+Der Konvention folgend, wird den Titeln der einzelnen Tiddler der Titel des enthaltenden Plugins vorangestellt, aber es gibt keine Beschränkung darauf.
+
+Wenn das Feld `Version` in der Datei `plugin.info` beim Packen des Plugin-Ordners weggelassen wird, wird es automatisch vom Core mit der aktuellste Core-Versionsnummer ersetzt.
+
+Damit soll sichergestellt werden, dass alle Core-Plugins die richtige Versionsnummer tragen. Im Allgemeinen wollen Plugin-Autoren sicherstellen, dass explizit eine Versionsnummer angeben wird. 

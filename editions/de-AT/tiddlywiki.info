@@ -1,7 +1,9 @@
 {
 	"description": "Deutsch (Österreich) Edition",
 	"plugins": [
-		"tiddlywiki/browser-sniff"],
+		"tiddlywiki/browser-sniff",
+		"tiddlywiki/railroad"
+		],
 	"themes": [
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite",

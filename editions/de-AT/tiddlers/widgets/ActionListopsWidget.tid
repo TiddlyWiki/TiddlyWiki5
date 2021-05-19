@@ -1,0 +1,58 @@
+created: 20200609182355891
+creator: FBB
+modified: 20210519132101031
+modifier: FBB
+myfield: 
+tags: Widgets ActionWidget
+title: ActionListopsWidget
+type: text/vnd.tiddlywiki
+
+\define .operator-rows(filter)
+<$list filter="$filter$"><tr>
+<td><$link to={{!!title}}>{{!!caption}}</$link></td>
+<td>{{!!op-purpose}} <$list filter="[all[current]tag[Common Operators]]">{{$:/core/images/done-button}}</$list></td>
+<td align="center"><$list filter="[all[current]tag[Negatable Operators]]">`!`</$list></td>
+</tr></$list>
+\end
+
+\define .group-heading(_)
+<tr class="doc-table-subheading"><th colspan="3" align="center">$_$</th></tr>
+\end
+
+! Einleitung
+
+Das <<.wid2 "ActionListops" "Action-Listops">>-Widget ist ein [[Aktions-Widget|ActionWidget]], das Benutzerlisten in einem beliebigen Feld oder einem Datenindex manipuliert. Aktions-Widgets werden innerhalb auslösender Widgets wie dem [[Button-Widget|ButtonWidget]] verwendet.
+
+! Inhalt und Attribute
+
+Das Action-Listops Widget ist unsichtbar. Jeglicher Inhalt zwischen der öffnenden und schließenden eckigen Klammer wird ignoriert.
+
+|!Attribute |!Beschreibung |
+|$tiddler |Der Titel des Tiddlers, dessen Listen modifiziert werden sollen (falls nicht angegeben, wird standardmäßig [[aktueller Tiddler|Aktueller Tiddler]] verwendet) |
+|$field |Der Name eines Feldes, das als Liste manipuliert werden soll (Standardwert ist 'list') |
+|$index |Optionaler Index einer Eigenschaft in einem [[Daten-Tiddler]], der als Liste manipuliert werden soll. |
+|$filter |Ein optionaler Filterausdruck, dessen Ausgabe in dem zu ändernden Feld/Index gespeichert wird. |
+|$subfilter |Ein optionaler Subfilter-Ausdruck, der die zu manipulierende Liste als Eingabe übernimmt und die modifizierte Liste zurück im zu ändernden Feld/Index speichert. |
+|$tags |Ein optionaler Subfilter-Ausdruck, der das 'tag'-Feld des Ziel-Tiddlers als Eingabe nimmt und die modifizierte Liste der Tags zurück in das 'tag'-Feld speichert. |
+
+! Erweiterte Filter-Operatoren
+
+Für die Manipulation von Listen sind eine Reihe von [[erweiterten Filter-Operatoren|Erweiterte Listen-Filter-Operatoren]] notwendig. Diese Operatoren wurden in erster Linie für die Verwendung in Subfilter-Ausdrücken konzipiert, wobei die modifizierte Liste anstelle der bestehenden Liste zurückgegeben wird.
+
+<table>
+<<.group-heading "Listen-Filter">>
+<tr>
+<th align="left">Operator</th>
+<th align="left">Verwendung</th>
+<th></th>
+</tr>
+<<.operator-rows "[tag[Filter-Operator]tag[Listen-Filter-Operator]tag[Sortier-Operator]sort[]]">>
+</table>
+
+! Beispiele
+
+*[[ActionListopsWidget (Beispiel)]]
+
+<<.hr>>
+
+Siehe: <<wikidokulink "ActionListopsWidget">> (englisch)

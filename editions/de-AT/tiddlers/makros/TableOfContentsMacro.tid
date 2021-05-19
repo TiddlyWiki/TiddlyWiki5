@@ -1,7 +1,7 @@
 caption: toc-Inhaltsverzeichnis
 created: 20140919155729620
 creator: pmario
-modified: 20140923235926478
+modified: 20210519132100616
 modifier: pmario
 tags: Makros
 title: TableOfContentsMacro
@@ -19,7 +19,7 @@ Es gibt mehrere Varianten des "toc" Makros:
 
 * `<<toc>>` erstellt eine hierarchische Liste mit Links.
 * `<<toc-expandable>>` erstellt einen erweiterbaren Baum mit Links.
-* `<<toc-selective-expandable>>` erstellt einen erweiterbaren Baum, bei dem der "erweitern" Button nur dann vorhanden ist, wenn der Zweig weitere Elemente hat. 
+* `<<toc-selective-expandable>>` erstellt einen erweiterbaren Baum, bei dem der "erweitern" Button nur dann vorhanden ist, wenn der Zweig weitere Elemente hat.
 
 Die Makros erzeugen HTML `<ol>` Elemente (geordnete Listen):
 

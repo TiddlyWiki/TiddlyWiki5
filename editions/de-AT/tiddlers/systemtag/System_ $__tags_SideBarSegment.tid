@@ -1,0 +1,11 @@
+caption: $:/tags/SideBarSegment
+created: 20201125223801269
+creator: FBB
+description: markiert die Segmente aus der Seitenleiste (z.B. der [[Seiten-Titel|$:/core/ui/SideBarSegments/site-title]])
+modified: 20210519132102093
+modifier: FBB
+tags: SystemTags
+title: System: $:/tags/SideBarSegment
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.

@@ -1,17 +1,19 @@
 caption: version
 created: 20131228162448664
 creator: pmario
-modified: 20140923225859656
-modifier: pmario
+modified: 20210519132100774
+modifier: FBB
 tags: Makros
 title: VersionMacro
 type: text/vnd.tiddlywiki
 
-Das `version` Makro gibt die aktuelle Kern Versionsnummer aus.
+Das `version` Makro gibt die aktuelle Versionsnummer des ~TiddlyWiki-Core aus.
+
+!! Parameter
+
+Das Makro benötigt keine Parameter.
 
 !! Beispiel
-
-Das `version` Makro benötigt keine Parameter.
 
 ```
 Versionsnummer: <<version>>

@@ -1,0 +1,19 @@
+created: 20140908132950428
+creator: pmario
+modified: 20210519132100684
+modifier: FBB
+tags: Lexikon Konzept
+title: TiddlyWiki
+type: text/vnd.tiddlywiki
+
+~TiddlyWiki ist ein vielseitiges, interaktives Werkzeug zur Verwaltung komplexer und strukturierter Daten. Herkömmliche Anwendungen wie Tabellenkalkulationen oder Textverarbeitungsprogramme können solche Daten selten so wiedergeben, dass die vorhandenen Verbindungen und Strukturen zwischen den Informationen ersichtlich sind.
+
+TiddlyWiki ist so konzipiert, dass es sich dem Denken anpasst und hilft, mit den Dingen umzugehen, die nicht zueinander passen wollen.
+
+Der [[Grundgedanke|Philosophy von Tiddlern]] ist, dass Informationen nützlicher und wiederverwendbarer sind, wenn wir sie in die kleinsten semantisch bedeutungsvollen Brocken - [[Tiddler]] - zerlegen und ihnen Titel geben, so dass sie mit [[Links|Verknüpfungen in WikiText]], [[Tags]], [[Listen|Listen in WikiText]] und [[Makros]] strukturiert werden können.
+
+~TiddlyWiki ist eine Wiki-Software, die komplett ohne Server auskommt - die gesamte Programmlogik befindet sich als ~JavaScript-Programm in der HTML-Seite (schau ruhig einmal in den Quelltext dieser Seite).
+
+~TiddlyWiki ist OpenSource und wird von einem Team um JeremyRuston entwickelt und gepflegt. Das Team ist organisiert unter der Organisation UnaMesa, einer Non-Profit-Organisation zur Entwicklung und Pflege von elektronischen Lernsystemen.
+
+Nähere Informationen und auch die jeweils aktuellste Fassung von ~TiddlyWiki ist unter https://tiddlywiki.com/ zu finden.

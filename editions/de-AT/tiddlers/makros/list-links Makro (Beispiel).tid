@@ -1,0 +1,55 @@
+caption: list-links Makro (Beispiel)
+created: 20140923193202449
+creator: ChrisK
+modified: 20210519132101605
+modifier: FBB
+tags: [[list-links Makro]] [[Macro Examples]]
+title: list-links Makro (Beispiel)
+type: text/vnd.tiddlywiki
+
+!! Code
+
+```
+<<list-links filter:"[tag[Was kann TiddlyWiki]]">>
+```
+
+
+!! Beispiel
+
+<<list-links filter:"[tag[Was kann TiddlyWiki]]">>
+
+---
+
+"""
+
+"""
+
+!! Code 2
+
+```
+<<list-links filter:"[tag[Makros]!sort[title]]" type:"ol">>
+
+```
+
+
+!! Beispiel 2
+
+<<list-links filter:"[tag[Makros]!sort[title]]" type:"ol">>
+
+---
+
+"""
+
+"""
+
+!! Code 3
+
+```
+<<list-links filter:"[!is[system]modifier[UserXYZ]sort[modified]]" "ul" "li" "list" "- Nothing listed -">>
+
+```
+
+
+!! Beispiel 3
+
+<<list-links filter:"[!is[system]modifier[UserXYZ]sort[modified]]" "ul" "li" "list" "- Nothing listed -">>

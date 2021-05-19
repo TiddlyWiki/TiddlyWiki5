@@ -1,7 +1,7 @@
 caption: Zitate
 created: 20131206154636572
 creator: pmario
-modified: 20140921170704585
+modified: 20210519132100833
 modifier: pmario
 tags: WikiText
 title: Zitate in WikiText
@@ -46,7 +46,7 @@ Zitate können "verschachtelt" werden:
 > Zitat 2
 ```
 
-Dargestellt als: 
+Dargestellt als:
 
 > Zitat 1
 >> Zitat 1.1
@@ -63,7 +63,7 @@ Sie können Zitate mit Listenelementen mischen. zB:
 
 !! CSS Klassen
 
-[[CSS Klassen]], um eine Formatierung direkt zu ändern, können in ''Ausnahmefällen'' direkt angegeben werden. Diese Option ist nur für geübte Benutzer gedacht. 
+[[CSS Klassen]], um eine Formatierung direkt zu ändern, können in ''Ausnahmefällen'' direkt angegeben werden. Diese Option ist nur für geübte Benutzer gedacht.
 
 <<wikitext-example src:"<<<.myClass.another-class
 Operating systems are like a brick wall for our minds

@@ -1,0 +1,52 @@
+created: 20200429194218793
+creator: FBB
+modified: 20210519132101598
+modifier: FBB
+tags: Makros [[Core Makros]]
+title: list-links Makro
+type: text/vnd.tiddlywiki
+
+Das "list" Makro erstellt Link-Listen von Tiddlern, die über einen [[Filter]] ausgewählt werden.
+
+!! Definition
+
+Dieses System-Makro wird im Tiddle $:/core/macros/list gespeichert. Im gleichen Tiddler sind noch weitere Listen-Makros gespeichert. Hier wird aber nur die einfachste Version behandelt.
+
+```
+\define list-links(filter,type:"ul",subtype:"li",class:"",emptyMessage)
+\whitespace trim
+<$type$ class="$class$">
+<$list filter="$filter$" emptyMessage=<<__emptyMessage__>>>
+<$subtype$>
+<$link to={{!!title}}>
+<$transclude field="caption">
+<$view field="title"/>
+</$transclude>
+</$link>
+</$subtype$>
+</$list>
+</$type$>
+\end
+
+```
+
+!! Einbindung
+
+`<<list-links filter:"[tag[Makros]]">>`
+
+: oder
+
+`<<list-links filter:"[tag[Bilder]sort[title]]" type:"ol">>`
+
+!! Parameter
+
+|Position |Name |Beschreibung |Standard |h
+|1 |filter |Filter Ausdruck | |
+|2 |type |Das Element-Tag zur Verwendung für die Listenumhüllung (ul,ol,dl) |"ul" |
+|3 |subtype |Das für die Listenelemente zu verwendende Element-Tag (li,dd,dt) |"li" |
+|4 |class |Das Listen Element `<ul>`, `<ol>` und `<dl>` bekommt eine CSS Klasse zugewiesen zB: `<ul class="three-columns">` | |
+|5 |message |Meldung falls nichts gefunden wurde. | |
+
+!! Beispiel
+
+* [[list-links Makro (Beispiel)]]

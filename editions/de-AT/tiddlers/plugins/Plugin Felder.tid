@@ -1,0 +1,24 @@
+created: 20200602220454166
+creator: FBB
+modified: 20210519132101748
+modifier: FBB
+tags: Plugin-Mechanismus
+title: Plugin Felder
+type: text/vnd.tiddlywiki
+
+Plugins werden als Tiddler mit den folgenden Feldern gespeichert:
+
+|Feld |Beschreibung |h
+|author |//(optional)// Autor des Plugins |
+|dependents |Liste der Abhängigkeiten: Andere Plugins, die installiert werden müssen, damit dieses Plugin funktioniert. |
+|description |Beschreibung des Plugins |
+|list |Name der Pugins aus den Plugin-Informations-Tiddlern (siehe unten) |
+|name |Kurzname des Plugins |
+|plugin-priority |//(optional)// Numerische Priorität (höhere Zahlen werden später installiert, das Core-Plugin hat eine Priorität von Null. |
+|plugin-type |Allgemein ''Plugin'', ''Sprache'' oder ''Thema''; siehe [[Plugin Typen]] für Details |
+|parent-plugin |//(optional)// <''neu in Version "5.1.22"''>Titel des Plugins, unter dem dieses Plugin als Sub-Plugin in der Plugin-Auswahl des [[Control-Panels|$:/ControlPanel]] angezeigt werden soll. |
+|source |//(optional)// Quell-URL des Plugins |
+|text |Eine in JSON geschriebene Liste des Tiddlers, welche das Plugin beinhaltet. |
+|title |Title des Plugins |
+|type |Der Typ muss ''application/json'' sein. |
+|version |//(optional)// Versionsangabe als &lt;String&gt; (sollte der [ext[SemanticVersioning|http://semver.org/]]-Konvention entsprechen) |

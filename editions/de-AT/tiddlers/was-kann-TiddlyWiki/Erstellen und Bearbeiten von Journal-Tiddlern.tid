@@ -1,0 +1,50 @@
+created: 20201126204805318
+creator: FBB
+modified: 20210519132101220
+modifier: FBB
+tags: [[Was kann TiddlyWiki]]
+title: Erstellen und Bearbeiten von Journal-Tiddlern
+type: text/vnd.tiddlywiki
+
+! Einführung
+
+[[Journale|Journal]] sind [[Tiddler]], die ein Datum und/oder eine Uhrzeit als Titel verwenden. Sie werden typischerweise als schnelle Möglichkeit verwendet, um Informationen mit Zeitstempel aufzuzeichnen.
+
+Man kann zusätzliche Tags für ein Journal-Tiddler verwenden, um diesen mit anderen Tiddlern zu verknüpfen. Das hilft dabei, Beziehungen zwischen den einzelnen Informationen herzustellen.
+
+! Erstellen eines Journals
+
+Der einfachste Weg, einen Journal-Tiddler zu erstellen, ist die <<.icon $:/core/images/new-journal-button>> ''Neues Journal'' Schaltfläche in der Registerkarte ''Tools'' in der Seitenleiste. Wenn man die Schaltfläche häufig verwenden will, klickt man auf das Kontrollkästchen daneben, damit die Schaltfläche direkt über dem Suchfeld verfügbar ist.
+
+Die Schaltfläche <<.icon $:/core/images/new-journal-button>> ''Neues Journal'' erstellt einen Journaleintrag als leeren Tiddler mit dem Tag "Journal" und einem aus dem aktuellen Datum abgeleiteten Titel. Wenn bereits ein Journal-Tiddler mit diesem Titel existiert, wird dieser zur Bearbeitung geöffnet.
+
+!! Erstellen eines getaggten Journals
+
+Eine übliche Abfolge von Aktionen ist es, den heutigen Journaleintrag zu erstellen (oder wieder zu öffnen) und ihn mit dem Titel eines anderen Tiddlers zu verschlagworten, also mit einem Tag zu markieren. Dies kann mit der Schaltfläche <<.icon $:/core/images/new-journal-button>> ''Neues Journal hier'' in der Symbolleiste des gewünschten Tiddlers erfolgen. Diese findet sich auch auf der Registerkarte Tools im ~InfoPanel des Tiddlers.
+
+Wenn man die Schaltfläche häufig verwenden will, klickt man auf das Kontrollkästchen daneben, damit die Schaltfläche direkt in der Symbolleiste des Tiddlers sichtbar wird. Alternativ findet sich der Eintrag auch unter der <<.icon $:/core/images/down-arrow>> ''Mehr'' Schaltfläche.
+
+
+!! Benutzerdefinierte Journale
+
+
+Um zu konfigurieren, wie neue Journaleinträge erstellt werden, öffne im [[Control Panel|$:/ControlPanel]] <<.icon $:/core/images/options-button>> die Registerkarte ''Info'' und die darunter liegende Registerkarte ''Basis'':
+
+* "Titel des neuen Journal-Tiddlers" gibt an, wie diese Tiddler benannt werden sollen, als [[Datumsformat-String|Datumsformat]]. Die Voreinstellung `YYYY MMM 0DD` bewirkt, dass neue Einträge Titel der Form "2020 November 26" haben.
+* "Tags des neuen Journal-Tiddlers" legt einen oder mehrere [[spezielle Tags|Titellisten]] fest, die automatisch bei neuen Journaleinträgen eingefügt werden. Beispielsweise: `Journal [[Sommerurlaub]]`
+
+;Tipp:
+:Tipp: Wenn du jedes Mal, wenn du auf "Neues Journal" klickst, einen separaten Journal-Tiddler erstellen möchtest (auch wenn du dies mehrmals am selben Tag tust), kannst du die Uhrzeit in das Titelformat aufnehmen. Gib als Datumsformat etwa `0DD.0MM.YYYY um 0hh:0mm:0ss` ein.
+
+;Tipp 2:
+: Ein weiterer nützlicher Trick ist es, `<<currentTiddler>>` irgendwo im Titelformat einzufügen. Das bedeutet, dass, wenn Sie bei mehreren verschiedenen Tiddlern auf "Neues Journal hier" klicken, wird der Titel jedes dieser Tiddler Teil des Namens der resultierenden Journaleinträge sein.
+
+
+
+! Bearbeiten eines Journals
+
+Um einen [[vorhandenen Journal-Tiddler|Journal: 2020 November 26]] zu bearbeiten, klicke auf die Schaltfläche <<.icon $:/core/images/edit-button>> oben rechts im Tiddler. Da ein Journal ein Tiddler ist ist dieses auch so bearbeitbar. Siehe dazu: [[Erstellen und Bearbeiten von Tiddlern]]
+
+<<.hr>>
+
+Siehe: <<wikidokulink "Creating and editing tiddlers">> (englisch)

@@ -1,0 +1,15 @@
+created: 20201005203422750
+creator: FBB
+modified: 20210519132102232
+modifier: FBB
+tags: [[Core Variablen]] [[Konfigurations Variablen]] Variablen
+title: tv-config-toolbar-class Variable
+type: text/vnd.tiddlywiki
+
+Die Variable <<.var tv-config-toolbar-class>> steuert den Wert des <<.param class>>-Attributes eines [[HTML|HyperText Markup Language]]-Elementes für eine Schaltfläche in der Symbolleiste.
+
+Die Variable kann vor dem Überschreiben einer solchen Schaltfläche gesetzt werden. In den meisten Umgebungen ist sie standardmäßig auf die [[CSS|CSS Klassen]]-Klasse <<.var tc-btn-invisible>> gesetzt, wodurch die Hintergrundfarbe und der Rand der Schaltfläche entfernt werden.
+
+<<.hr>>
+
+siehe Beispiel: [ext[https://tiddlywiki.com/#tv-config-toolbar-class Variable (Examples)]]

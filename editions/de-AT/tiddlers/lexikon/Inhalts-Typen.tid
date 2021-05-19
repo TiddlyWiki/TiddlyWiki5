@@ -1,0 +1,31 @@
+created: 20201103203632729
+creator: FBB
+modified: 20210519132101501
+modifier: FBB
+tags: Lexikon
+title: Inhalts-Typen
+type: text/vnd.tiddlywiki
+
+Ein ''~ContentType'' wird in Internet-Protokollen verwendet, um den Typ anzugeben, der zur Interpretation des Inhalts einer Web-Ressource verwendet werden soll.
+
+In ~TiddlyWiki gibt das <<.field type>>-Feld den Inhaltstyp an, der auf das Haupttextfeld angewendet werden soll.
+
+!! Liste der gängigen Inhaltstypen
+
+|!Gruppe |!Typ |!Inhalt des `type` Feldes |
+|^''Developer'' |Data dictionary |application/x-tiddler-dictionary|
+|~|~JavaScript code |application/javascript|
+|~|JSON data |application/json|
+|~|Static stylesheet |text/css|
+|^''Image''|GIF image |image/gif|
+|~|ICO format icon file |image/x-icon|
+|~|JPEG image |image/jpeg|
+|~|PDF image |application/pdf|
+|~|PNG image |image/png|
+|~|Structured Vector Graphics image |image/svg+xml|
+|^''Text''|HTML markup |text/html|
+|~|[[CSS|CSS Klassen]] stylesheet |text/css|
+|~|[[Comma-separated values|CSV-Format]] |text/csv|
+|~|Plain text |text/plain|
+|~|~TiddlyWiki 5 |text/vnd.tiddlywiki|
+|~|~TiddlyWiki Classic |text/x-tiddlywiki|

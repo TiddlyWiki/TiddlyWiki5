@@ -1,0 +1,13 @@
+caption: last
+created: 20200630201816051
+creator: FBB
+modified: 20210519165821882
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: die letzten ''//{{!!op-parameter-name}}//'' Eingabe-Titel
+op-parameter: eine ganze Zahl (integer), Defaultwert ist 1
+op-parameter-name: N
+op-purpose: wählt die letzten N Eingabe-Titel aus
+tags: Sortier-Operator Filter-Operator
+title: last Operator
+type: text/vnd.tiddlywiki

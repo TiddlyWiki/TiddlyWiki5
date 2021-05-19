@@ -1,3 +1,8 @@
+created: 20210519133249908
+creator: FBB
+modified: 20210519133255501
+modifier: FBB
 title: $:/StaticBanner
+type: text/vnd.tiddlywiki
 
-<div class="tc-static-alert"><div class="tc-static-alert-inner">Diese Seite ist Teil der "reinen" HTML Version von ~TiddlyWiki auf https://tiddlywiki.com/languages/de-AT</div></div>
+<div class="tc-static-alert"><div class="tc-static-alert-inner">Diese Seite ist Teil der "reinen" HTML Version von ~TiddlyWiki auf https://tiddlywiki.com/languages/de-DE</div></div>

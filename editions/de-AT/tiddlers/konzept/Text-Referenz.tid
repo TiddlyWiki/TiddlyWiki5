@@ -1,0 +1,34 @@
+created: 20200826190151593
+creator: FBB
+modified: 20210519132102180
+modifier: FBB
+tags: Konzept Lexikon
+title: Text-Referenz
+type: text/vnd.tiddlywiki
+
+Eine Text-Referenz ist eine allgemein anwendbare Methode, um ein Textfragment entweder aus dem Feld eines Tiddlers oder von einem Index aus einem [[Daten-Tiddler]] zu erzeugen.
+
+In verschiedenen Situationen können solche Textverweise dazu verwendet werden, um Werte auszulesen oder um einen Wert anzugeben, welcher geändert werden soll.
+
+Eine Text-Referenz besteht aus mehreren Bestandteilen:
+
+* Der Titel des Ziel-Tiddlers. Wird dieser weggelassen, wird standardmäßig der [[aktuelle Tiddler|Aktueller Tiddler]] verwendet.
+* Eines von folgenden zwei Bestandteilen:
+** Der Name eines Feldes (markiert mit `!!feldname`)
+** Der Name eines Index innerhalb eines [[Daten-Tiddlers|Daten-Tiddler]] (markiert mit `##feldname`)
+* Werden Feld und Index weggelassen, wird das Feld <<.field text >> als Standard verwendet.
+
+Textverweise können an mehreren Stellen verwendet werden:
+
+* Als [[indirekte Parameter|Filter-Parameter]] innerhalb von [[Filtern|Filter]] (z.B. `<$list filter="[tag{MyTag!!name}]"/>`)
+* Als [[indirekte Attribute|HTML in WikiText]] eines Elements oder [[Widgets]] (z.B, `<$widget attrib={{Title!!description}}/>`)
+* Als Operand einer einfachen [[Transklusion]] (z.B. `{{MyTiddler!!title}}`)
+* Als <<.attr state>> Attribut vom RevealWidget und dem LinkCatcherWidget
+
+<<.hinweisMacro "Beachten Sie die Unterscheidung zwischen einer Textreferenz wie ''foo!!bar'' und einer Tranklusion einer Textreferenz wie `{{foo!!bar}}`" "" note"">>
+
+
+<<.hr>>
+
+siehe: [ext[https://tiddlywiki.com/#TextReference]]
+

@@ -1,0 +1,14 @@
+caption: ARIA
+created: 20210426204511095
+creator: FBB
+modified: 20210519132101027
+modifier: FBB
+tags: Lexikon
+title: Accessible Rich Internet Applications
+type: text/vnd.tiddlywiki
+
+<<<
+''WAI-ARIA'' (''W''eb ''A''ccessibility ''I''nitiative – ''A''ccessible ''R''ich ''I''nternet ''A''pplications) ist eine Initiative zur Verbesserung von Webseiten und Webanwendungen, um sie für Menschen mit Behinderungen besser zugänglich zu machen, insbesondere für blinde Anwender, die Vorleseprogramme verwenden.
+
+''ARIA'' ist eine technische Spezifikation, die von Mitgliedern der Web Accessibility Initiative entwickelt wurde. Seit März 2014 ist ARIA ein empfohlener Webstandard des World Wide Web Consortium (W3C).
+<<< Quelle: https://de.wikipedia.org/wiki/Accessible_Rich_Internet_Applications

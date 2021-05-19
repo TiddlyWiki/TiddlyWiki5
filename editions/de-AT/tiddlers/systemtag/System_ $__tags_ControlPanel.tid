@@ -1,0 +1,12 @@
+caption: $:/tags/ControlPanel
+created: 20201110214001544
+creator: FBB
+description: markiert die Tabs der [[Einstellungsseite|$:/ControlPanel]]
+modified: 20210519132102036
+modifier: FBB
+tags: SystemTags
+title: System: $:/tags/ControlPanel
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field  {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.
+

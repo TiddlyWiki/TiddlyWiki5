@@ -1,0 +1,13 @@
+created: 20200615210358559
+creator: FBB
+modified: 20210519132101565
+modifier: FBB
+tags: Filter-Syntax
+title: Leerzeichen Filter
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+{( "space" | "tab" | "linefeed" | "return" | "vertical tab" | "formfeed" )}
+"""/>
+
+Zwischen den einzelnen [[Durchläufen|Filter-Durchlauf]] eines [[Filterausdrucks|Filter-Ausdruck]] können Leerzeichen erscheinen.

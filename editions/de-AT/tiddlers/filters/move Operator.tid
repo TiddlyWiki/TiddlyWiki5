@@ -1,0 +1,14 @@
+caption: move
+created: 20200610123906240
+creator: FBB
+modified: 20210519165605607
+modifier: FBB
+op-input: eine Liste von Elementen
+op-output: neu geordnete Liste von Elementen
+op-parameter: das als Markierung zu verwendende Listenelement
+op-parameter-name: marker
+op-purpose: Markierung um N Stellen in der Liste verschieben
+op-suffix: eine ganze Zahl N, Standardwert ist 1
+tags: Listen-Filter-Operator Sortier-Operator Filter-Operator
+title: move Operator
+type: text/vnd.tiddlywiki

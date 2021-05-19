@@ -1,0 +1,77 @@
+created: 20200514194751926
+creator: FBB
+modified: 20210519132102202
+modifier: FBB
+tags: Widgets
+title: TranscludeWidget
+type: text/vnd.tiddlywiki
+
+! Einleitung
+
+Das ~TranscludeWidget importiert dynamisch Inhalte aus einem anderen [[Tiddler]].
+
+
+! Attribute
+
+|!Attribute |!Beschreibung |
+|tiddler |Der Titel des einzuschließenden Tiddlers (Default ist der aktuelle Tiddler) |
+|field |Der Feldname des aktuellen Tiddlers (Default ist "text"; falls vorhanden hat es Vorrang vor dem index-Attribut) |
+|index |Der Index einer Eigenschaft in einem [[Daten-Tiddler]]  |
+|subtiddler |Optionaler ~SubTiddler-Titel, wenn der Ziel-Tiddler ein [[Plugin|Plugins]] ist (siehe unten) |
+|mode |Überschreiben des Standard-Parsing-Modus für den transkludierten Text in "''block''" oder "''inline''". |
+
+! Parser-Modi
+
+TiddlyWiki interpretiert Text in zwei Modi:
+
+* Der ''inline''-Modus erkennt Zeichenformatierungen wie Hervorhebung und Verweise
+* Der ''block''-Modus erkennt die sämtliche Inline-Formatierungen und fügt Blockformatierungen wie Tabellen, Überschriften und Listen hinzu.
+
+Normalerweise wird der Modus dadurch bestimmt, ob das ~TranscludeWidget selbst im ''block''- oder ''inline''-Modus geparst wurde. Dies kann mit dem ''mode''-Attribut überschrieben werden.
+
+Als Beispiel betrachte Tiddler "A" mit diesem Inhalt:
+
+```
+# Item one
+# <$transclude tiddler="B"/>
+# Item two
+```
+
+Und Tiddler "B" mit diesem Inhalt:
+
+```
+# Item one - a
+# Item one - b
+```
+
+Das Ergebnis (Tiddler "A") wird im Standard (''inline'') so aussehen:
+
+# Item eins
+# Item drei # Item Eins - a # Item Eins - b
+# Item drei
+
+Wird in Tiddler "A" der Parser-Modi mit `modus="block"` geändert, sieht das Ergebnis so aus:
+
+# Item eins
+# Item drei
+## Item Eins - a
+## Item Eins - b
+# Item drei
+
+! ~SubTiddler Zugang
+
+Das ~TranscludeWidget erlaubt den Zugriff auf einzelnen Tiddler, die in einem [[Plugin|Plugins]] gespeichert sind.
+
+Das folgende Beispiel schließt die Core-Version des Tiddlers [[$:/DefaultTiddlers]] ein, auch wenn dieser überschrieben wurde:
+
+
+<<wikitext-example-without-html '<$transclude tiddler="$:/core" subtiddler="$:/DefaultTiddlers"/> '>>
+
+"""
+
+"""
+
+!! Beispiel:
+
+* [[TranscludeWidget (Beispiel)]]
+

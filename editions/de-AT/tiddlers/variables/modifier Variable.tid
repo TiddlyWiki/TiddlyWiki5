@@ -1,0 +1,44 @@
+created: 20200909200040209
+creator: FBB
+modified: 20210519132101664
+modifier: FBB
+tags: [[Core Variablen]] Variablen
+title: modifier Variable
+type: text/vnd.tiddlywiki
+
+Innerhalb der Aktions-Zeichenfolge des DroppableWidget, des ButtonWidget, des LinkCatcherWidget und des EventCatcherWidget enthält die <<.var modifier>>-Variable den Kenner der Modifikator-Taste(n), welche während des Drück- oder Zieh-Prozesses gehalten wurde. Die möglichen Tasten dafür sind ''Meta'', ''Strg'', ''Umschalt'' oder ''Strg + Umschalt''.
+
+Die Variable enthält eine Zeichenfolge, anhand dieser werden die Tasten identifiziert:
+
+|Modifikator-Taste |Zeichenfolge der Variable|h
+|Meta |meta |
+|Strg |ctrl |
+|Alt |alt |
+|Umschalt |shift |
+|Meta+Umschalt |meta-shift |
+|Meta+Strg |meta-ctrl |
+|Meta+Alt |meta-alt |
+|Strg + Umschalt |ctrl-shift |
+|Alt+Umschalt |alt-shift |
+|Strg + Alt |ctrl-alt |
+|Meta+Strg+Umschalt |meta-ctrl-shift |
+|Meta+Strg+Alt |meta-ctrl-alt |
+|Meta+Alt+Umschalt |meta-alt-shift |
+|Strg+Alt+Umschalt |ctrl-alt-shift |
+|Meta+Strg+Alt+Umschalt |meta-ctrl-alt-shift |
+|keine (normales Klicken/Ziehen) |normal |
+
+<br/>
+
+<<.tipMacro "Einige Betriebssysteme können das Event der ''Meta''-Taste abfangen, so dass diese nie erkannt werden kann." "Hinweis" "" "#ccaaff">>
+
+Mit diesem Button kannst du die Tasten ausprobieren:
+
+<$button actions="""<$action-setfield $tiddler="$:/temp/test-modifier-keys" text=<<modifier>>/>""">Klick mich mit einer anderen Taste</$button>
+
+|>|Ausgabe |h
+|<<.var "modifier Variable">> | {{$:/temp/test-modifier-keys}} |
+
+<<.hr>>
+
+Siehe: <<wikidokulink "modifier Variable">> (englisch)

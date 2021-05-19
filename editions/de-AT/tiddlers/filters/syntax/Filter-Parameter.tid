@@ -1,0 +1,33 @@
+created: 20200615210720043
+creator: FBB
+modified: 20210519161407008
+modifier: FBB
+tags: Filter-Syntax
+title: Filter-Parameter
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+( "[" [:{/"alles andere als...]"/} ] "]"
+  |
+  "{" [:{/"alles andere als...}"/}] "}"
+  |
+  "<" [:{/"alles andere als...>"/}] ">"
+)
+"""/>
+
+Der Parameter zu einem Filter-Operator kann sein:
+
+;hard
+: `[like this]`
+: Der Parameter zwischen den eckigen Klammern ist der genaue Text mit dem der [[Filter-Operator]] seine Abfrage durchführt.
+
+;soft
+: <def>''indirect''</def>
+
+:: `{like this}`
+:: Der Parameter zwischen den geschweiften Klammern verweist auf ein Feld eines angegebenen Tiddlers oder den Wert einer Eigenschaft eines angegebenen Daten-Tiddlers. Der [[Filter-Operator]] arbeitet dann mit dem [[referenziertem Wert|Text-Referenz]].
+
+
+: <def>''variable''</def>
+:: `<like this>`
+:: Der Parameter zwischen den spitzen Klammern ist der aktuelle Wert einer [[Variable|Variablen]] oder der [[Parameters eines Makros|Makro-Aufrufe in WikiText]].

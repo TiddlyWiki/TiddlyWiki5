@@ -1,0 +1,14 @@
+[
+    {
+        "created": "20201125202746972",
+        "title": "SystemTag: $:/tags/EditPreview",
+        "text": "Dieser Tag <<.field  {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.\n\n",
+        "creator": "FBB",
+        "modified": "20210519132102114",
+        "modifier": "FBB",
+        "tags": "SystemTags",
+        "type": "text/vnd.tiddlywiki",
+        "caption": "$:/tags/EditPreview",
+        "description": "markiert Tiddler für das benutzerdefinierte Editor-Vorschaufenster "
+    }
+]

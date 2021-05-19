@@ -1,0 +1,15 @@
+caption: append
+created: 20200609222928479
+creator: FBB
+modified: 20210519165636317
+modifier: FBB
+op-input: eine Liste von Elementen
+op-neg-output: eine Liste mit Elementen die am Ende des Arrays stehen
+op-output: eine Liste mit Elementen die am Anfang des Arrays stehen
+op-parameter: Liste der Elemente, die am Ende der Liste angehängt werden sollen.
+op-parameter-name: list
+op-purpose: eine Reihe von Elementen aus einem Array an die Liste anhängen
+op-suffix: eine ganze Zahl N, als Vorgabe für alle
+tags: Listen-Filter-Operator Sortier-Operator Filter-Operator
+title: append Operator
+type: text/vnd.tiddlywiki

@@ -1,0 +1,14 @@
+caption: putfirst
+created: 20200610132437253
+creator: FBB
+modified: 20210519165542286
+modifier: FBB
+op-input: eine Liste von Elementen
+op-output: neu geordnete Liste von Elementen
+op-parameter: wird ignoriert
+op-parameter-name: ""
+op-purpose: Elemente nach N an den Anfang der Liste verschieben
+op-suffix: eine ganze Zahl N, Standardwert ist 1
+tags: Listen-Filter-Operator Sortier-Operator Filter-Operator
+title: putfirst Operator
+type: text/vnd.tiddlywiki

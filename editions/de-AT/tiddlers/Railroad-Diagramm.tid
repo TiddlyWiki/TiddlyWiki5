@@ -1,0 +1,21 @@
+created: 20210502201434774
+creator: FBB
+modified: 20210519132101894
+modifier: FBB
+title: Railroad-Diagramm
+type: text/vnd.tiddlywiki
+
+Mit einem ''Railroad-Diagramm'', manchmal auch ''Syntaxdiagramm'' genannt, kann visuell die Syntaxregeln einer Computersprache darstellen. Ein solches Diagramm liest sich wie eine Karte des öffentlichen Nahverkehrs.
+
+Jedes Diagramm beginnt links und endet rechts. Man folgt einfach einer beliebigen Linie vom linken Startpunkt bist zum rechten Endpunkt. Alle alternativen Linien sind gleichermaßen gültig.  Eine Zeile springt manchmal über ein optionales Element oder läuft in einer Schleife zurück.
+Damit wird angezeigt, dass ein Element wiederholt werden kann.
+
+<$railroad text="""
+Start [:optional] {wiederholen +" ; "} Ende
+"""/>
+
+Im obigen Beispiel steht zwischen jedem Vorkommen des Elements <<.bmark "wiederholen">> ein Semikolon <<.value ";">>. Der Pfad des Semikolons läuft von rechts nach links und wird erst durchgeführt wenn es einmal durch das Element <<.bmark "wiederholen">> gelaufen ist.7
+
+Zeichen in runden Formen sind wörtlich zu verstehen, d. h. sie bezeichnen sich selbst. Ein Name in einem rechteckigen Kästchen bezeichnet ein weiteres Element im Bahndiagramm.
+
+Näheres zur Syntax findet sich in der [[Diagrammnotation|$:/plugins/tiddlywiki/railroad/syntax]] (englisch) des [[Railroad Plugin]].

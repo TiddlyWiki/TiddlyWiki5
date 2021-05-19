@@ -1,0 +1,33 @@
+created: 20210331214915693
+creator: FBB
+modified: 20210519132101938
+modifier: FBB
+tags: Konzept
+title: SafeMode
+type: text/vnd.tiddlywiki
+
+Der ''~SafeMode'' (abgesicherte Modus) bietet eine Möglichkeit, die meisten Anpassungen in ~TiddlyWiki zu deaktivieren. Das ist dann sinnvoll wenn man verhindern will, dass ~TiddlyWiki durch Nutzer "verkonfiguriert" und damit unbrauchbar wird.
+
+Ein besonderes Problem ist, dass einige Anpassungen kaputt gehen, wenn auf eine neuere Core-Version von ~TiddlyWiki aktualisiert wird (insbesondere während der Beta-Phase).
+
+<<.tipMacro "Der abgesicherte Modus sollte nur mit der Einzeldateikonfiguration von TiddlyWiki verwendet werden, und dann auch nur mit Speichermechanismen, die keine automatische Speicherung durchführen. Die Verwendung des ~SafeMode in der Client-Server-Konfiguration kann zu Datenverlusten führen." "Warnung" "" "darkred">>
+
+! ~SafeMode einschalten
+
+Der sichere Modus wird im Browser aktiviert, indem TiddlyWiki mit der URL-Hash Zeichenkette `#:safe` aufgerufen wird. Zum Beispiel:
+
+: https://tiddlywiki.com/#:safe
+
+! So funktioniert der ~SafeMode
+
+Der abgesicherte Modus löst zwei Änderungen aus:
+
+* Alle [[Plugins]] sind vorübergehend deaktiviert. Du kannst das <<.icon $:/core/images/options-button>>[[ControlPanel|$:/ControlPanel]]  verwenden, um einzelne Plugins zu deaktivieren.
+* Alle Tiddler, die Shadow-Tiddler überschreiben, werden umbenannt. Ihnen wird die Zeichenfolge `SAFE:` vorrangestellt, wodurch der zugrunde liegende Shadow-Tiddler wiederhergestellt wird.
+* Bestimmte Konfigurationseinstellungen werden ignoriert, und stattdessen werden die Standardeinstellungen verwendet.
+
+Beim Start wird ein Report-Tiddler angezeigt, mit dem die Tiddler, welche umbenannt wurden, überprüft werden können.
+
+<<.hr>>
+
+Siehe: <<wikidokulink "~SafeMode">>  (englisch) 

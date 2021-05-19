@@ -1,0 +1,12 @@
+caption: $:/tags/Filter
+created: 20201104220916918
+creator: FBB
+description: markiert [[Filter]] in der Dropdown-Liste für erweiterte Filterkriterien
+modified: 20210519132102051
+modifier: FBB
+tags: SystemTags
+title: System: $:/tags/Filter
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field  {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.
+

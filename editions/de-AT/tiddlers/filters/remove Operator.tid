@@ -1,0 +1,15 @@
+caption: remove
+created: 20200610133055284
+creator: FBB
+modified: 20210519165530578
+modifier: FBB
+op-input: eine Liste von Elementen
+op-neg-output: aus der aktuellen Liste entfernte Elemente, die am Ende des Array stehen.
+op-output: aus der aktuellen Liste entfernte Elemente, die am Anfang des Array stehen.
+op-parameter: Liste der Elemente, die aus der Ursprungs-Liste entfernt werden sollen
+op-parameter-name: array
+op-purpose: eine Liste (Array) mit benannten Titel aus der Ursprungs-Liste entfernen
+op-suffix: eine ganze Zahl N, als Vorgabe für alle
+tags: Listen-Filter-Operator Sortier-Operator Filter-Operator
+title: remove Operator
+type: text/vnd.tiddlywiki

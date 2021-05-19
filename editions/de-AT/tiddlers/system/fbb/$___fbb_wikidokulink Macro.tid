@@ -1,0 +1,24 @@
+\define wikidokulink(_:"HelloThere")
+<$wikify name="link" text="{{$:/_fbb/wikidokulink}}#$_$">
+<a href=<<link>> target="_blank">$_$ <span class="doc-icon">{{$:/core/images/open-window}}</span></a>
+</$wikify>
+\end
+
+!! Code
+
+```
+\define wikidokulink(_:"HelloThere")
+<$wikify name="link" text="{{$:/_fbb/wikidokulink}}#$_$">
+<a href=<<link>> target="_blank">$_$ <span class="doc-icon">{{$:/core/images/open-window}}</span></a>
+</$wikify>
+\end
+```
+
+!! Aufruf
+
+`<<wikidokulink "Tiddler-Name">>`
+
+;Angezeigt als:
+:<<wikidokulink "Tiddler-Name">>
+
+

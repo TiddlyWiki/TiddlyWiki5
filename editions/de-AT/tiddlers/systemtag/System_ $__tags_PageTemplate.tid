@@ -1,0 +1,12 @@
+caption: $:/tags/PageTemplate
+created: 20201125223113712
+creator: FBB
+description: markiert die Vorlagen-Tiddler welche für die Anzeige der Seiten verwendet werden
+modified: 20210519132102075
+modifier: FBB
+tags: SystemTags
+title: System: $:/tags/PageTemplate
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field  {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.
+

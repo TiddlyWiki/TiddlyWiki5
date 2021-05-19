@@ -1,0 +1,64 @@
+created: 20210413193435671
+creator: FBB
+modified: 20210519132101132
+modifier: FBB
+status: offen
+tags: Widgets
+title: CheckboxWidget
+type: text/vnd.tiddlywiki
+
+Das <<.wid "Checkbox">>-Widget zeigt ein HTML `<input type="checkbox">`-Element an. Dieses Element wird dynamisch an eine der folgende Eigenschaften gebunden:
+
+* Die An- oder Abwesenheit der angegebenen Tags bei dem angegebenen Tiddler.
+* Den Wert des angegebenen Feldes beim angegebenen Tiddler.
+
+! Attribute und Inhalte
+
+Der Inhalt des <<.wid2 "CheckBox" "checkbox">>-Widgets wird innerhalb eines HTML `<label>`-Elements unmittelbar nach dem eigentlichen Kontrollkästchen angezeigt. Das bedeutet, dass ein Klick auf den Inhalt das Kontrollkästchen umschaltet.
+
+|Attribut | Inhalt |h
+|tiddler |TTitel des zu manipulierenden Tiddlers (Standardwert ist der [[aktuelle Tiddler|Aktueller Tiddler]]) |
+|tag |Der Name des Tags, an den das Kontrollkästchen gebunden ist. Ist der Tag vorhanden, ist das Kontrollkästchen aktiv. |
+|invertTag |Wenn auf <<.value "yes">> gesetzt, wird die Tag-Bindungslogik umgedreht. Das Fehlen des Tags aktiviert jetzt das Kontrollkästchen.  |
+|field |Der Name des Feldes, an das das Kontrollkästchen gebunden ist.  |
+|index|<<.from-version "5.1.14">> Der Index eines [[Daten-Tiddlers|Daten-Tiddler]], an den das Kontrollkästchen gebunden ist.<<.tipMacro "Den Tiddler //korrekt// einstellen!" " ">>|
+|checked |Der Wert des Feldes, das dem aktivierten Kontrollkästchen entspricht. |
+|unchecked |Der Wert des Feldes, das dem __nicht__ aktivierten Kontrollkästchen entspricht |
+|default |Der Standardwert wenn das Feld nicht definiert ist. |
+|class |Die Klasse, welche dem Label-Element zugewiesen wird |
+|actions |<<.from-version "5.1.14">> Ein String, der <<.wid Action>>-Widgets enthält. Die Widgets werden ausgelöst, wenn sich der Status des Kontrollkästchens ändert (markiert oder nicht markiert) |
+|uncheckactions |<<.from-version "5.1.16">> Ein String, der <<.wid Action>>-Widgets enthält. Die Widgets werden ausgelöst, wenn der Status des Kontrollkästchens sich auf ''unchecked'' ändert. |
+|checkactions |<<.from-version "5.1.20">> Ein String, der <<.wid Action>>-Widgets enthält. Die Widgets werden ausgelöst, wenn der Status des Kontrollkästchens sich auf ''checked'' ändert |
+|disabled|<<.from-version "5.1.23">> Optional, deaktiviert das Kontrollkästchen, wenn es auf <<.value "yes">> gesetzt ist. Standardmäßig ist <<.value "no">> eingestellt. |
+
+!! Tag Modus
+
+Die Verwendung des <<.wid2 "CheckBox" "checkbox">>-Widgets im Tag Modus erfordert das <<.attr Tag>>-Attribut, um den Namen des Tags anzugeben. Das <<.attr tiddler>>-Attribut gibt den Ziel-Tiddler an. Standardmäßig wird der aktuelle Tiddler verwendet, wenn <<.attr tiddler>> nicht angegeben wird.
+
+<<wikitext-example-without-html """<$checkbox tag="done"> Ist das erledigt?</$checkbox>""">>
+
+Wird das Kontrollkästen aktviert erhält dieser Tiddler (<<currentTiddler>>)  zusätzlich den Tag <<.tag done>>. 
+
+
+!! Feld Modus
+
+Die Verwendung des <<.wid2 "CheckBox" "checkbox">>-Widgets im Feld Modus benötigt das Attribut <<.attr field>>, um den Namen des Feldes anzugeben. Die Attribute <<.attr checked>> und <<.attr unchecked>> geben die Werte an, die dem Feld zugewiesen werden sollen, um seinem aktiven bzw. nicht aktiven Zustand zu entsprechen. Das Standardattribut <<.attr default>> wird als Fallback-Wert verwendet, wenn das Feld nicht definiert ist.
+
+In folgenden Beispiel wird ein Kontrollkästchen erstellt, welches aktiviert ist, wenn das Status-Feld den Wert ''offen'' hat, und deaktiviert, wenn der Status <<.att beendet>> ist. Wenn der Feldwert undefiniert ist, ist der Status standardmäßig <<.att beendet>>, d. h., das Kontrollkästchen ist nicht markiert, wenn das Statusfeld fehlt.
+
+<<wikitext-example-without-html """<$checkbox field="status" checked="beendet" unchecked="offen" default="offen"> Status ist</$checkbox>&nbsp;__{{!!status}}__""">>
+
+
+!! Index Modus
+
+Um das <<.wid2 "CheckBox" "checkbox">>-Widget im Index-Modus zu verwenden, muss das Attribut <<.attr index>> auf den Index eines Daten-Tiddlers gesetzt werden. Die Attribute <<.attr "checked">> und <<.attr "unchecked">> geben die Werte an, die dem Index zugewiesen werden sollen, und entsprechen dem Status "aktiv" bzw. "nicht aktiv". Das Standardattribut <<.attr default>> wird als Fallback-Wert verwendet, wenn das Feld nicht definiert ist.
+
+In folgenden Beispiel wird ein Kontrollkästchen erzeugt das, sobald es aktiviert wird, einen Daten-Tiddler mit dem Namen ''~BeispielDatenTiddler'' erstellt. Darin findet sich die Eigenschaft <<.attr "Checkbox">> mit dem Wert <<.value "markiert">>. Wird das Kästchen wieder deaktiviert ändert sich der Wert auf <<.value "unmarkiert">>. Für den Defaultwert ist eine leere Zeichenkette angegeben, d. h. das Kontrollkästchen ist nicht markiert, wenn der Index oder der Tiddler fehlt. 
+
+<$macrocall $name="wikitext-example-without-html" src="""<$checkbox tiddler="BeispielDatenTiddler" index="Checkbox" checked="markiert" unchecked="unmarkiert" default=""> Markiert?</$checkbox> &nbsp; Das Ergebnis ist in [[BeispielDatenTiddler]] zu sehen."""/>
+
+Der umgedrehte Weg funktioniert auch. Wenn du den [[BeispielDatenTiddler]] bearbeitest und den Wert der Eigenschaft <<.attr "Checkbox">> z.B. von ''markiert'' auf ''unmarkiert'' änderst oder den Tiddler löscht, ändert sich der Status des Kontrollkästchens.
+
+<<.hr>>
+
+Siehe: <<wikidokulink "~CheckboxWidget" >> (englisch)

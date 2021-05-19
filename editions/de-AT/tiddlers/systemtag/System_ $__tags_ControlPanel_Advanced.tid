@@ -1,0 +1,12 @@
+caption: $:/tags/ControlPanel/Advanced
+created: 20201110215149533
+creator: FBB
+description: markiert die erweiterten Tabs der [[Einstellungsseite|$:/ControlPanel]]
+modified: 20210519132102043
+modifier: FBB
+tags: SystemTags
+title: System: $:/tags/ControlPanel/Advanced
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field  {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.
+

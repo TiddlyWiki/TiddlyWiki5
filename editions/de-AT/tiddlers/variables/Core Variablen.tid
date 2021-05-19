@@ -1,0 +1,16 @@
+created: 20200609191845606
+creator: FBB
+list: [[Konfigurations Variablen]]
+modified: 20210519132101148
+modifier: FBB
+tags: 
+title: Core Variablen
+type: text/vnd.tiddlywiki
+
+Die folgenden [[Variablen|Variablen]] sind in den Kern von ~TiddlyWiki integriert:
+
+<<list-links "[tag[Core Variablen]sort[title]]-[tag[Konfigurations Variablen]]">>
+
+<br/>
+
+{{Konfigurations Variablen}}

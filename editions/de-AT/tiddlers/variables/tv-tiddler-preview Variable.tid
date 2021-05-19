@@ -1,0 +1,11 @@
+created: 20200928192826606
+creator: FBB
+modified: 20210519132102276
+modifier: FBB
+tags: [[Core Variablen]] Variablen
+title: tv-tiddler-preview Variable
+type: text/vnd.tiddlywiki
+
+Die Variable <<.var tv-tiddler-preview>> zeigt an, ob der Inhalt in einem Tiddler-Vorschaufenster gerendert wird.
+
+Der Wert ist innerhalb des Vorschau-Panels `yes`, an anderer Stelle undefiniert.

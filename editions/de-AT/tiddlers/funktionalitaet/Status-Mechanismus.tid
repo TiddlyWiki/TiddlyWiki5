@@ -1,0 +1,48 @@
+created: 20201029201552872
+creator: FBB
+modified: 20210519132101987
+modifier: FBB
+tags: Funktionalität
+title: Status-Mechanismus
+type: text/vnd.tiddlywiki
+
+Durch die Verwendung von [[Status-Tiddlern|Status Tiddler]], können in TiddlyWiki komplexe Benutzeroberflächen aus WikiText gebaut werden
+
+Im Browser wird die Darstellung durch dynamisches Rendern des Tiddlers $:/core/ui/PageTemplate erzeugt. Durch verschiedene [[Transklusionen|Transklusion]] und andere [[Widgets]] stellt es die gesamte Benutzeroberfläche dar. Das dynamische Rendering wird durch einen Mechanismus erreicht, der "binding" genannt wird: Jede Änderung an den Tiddlern im Speicher wird dynamisch im Browser dargestellt.
+
+Der Stapel von Vorlagen, aus denen die ~TiddlyWiki-Anzeige besteht, ist sehr komplex, aber wir werden uns auf die Zeile konzentrieren, die die Hauptstory-Spalte anzeigt:
+
+```
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/core/ui/ViewTemplate" editTemplate="$:/core/ui/EditTemplate" storyview={{$:/view}} />
+```
+
+Aufschlüsselung der Attribute, welche auf das <<.wid List>>-Widget angewendet werden:
+
+|!Attribut |!Beschreibung |
+|''filter'' |Wählt die Liste der Tiddler im Listenfeld des Tiddlers $:/StoryList aus. Wenn ein Tiddler aus dieser Liste hinzugefügt oder entfernt wird, wird dies automatisch in der angezeigten Liste berücksichtigt|
+|''history'' |Referenziert den Tiddler, der zum Speichern des History-Stapels verwendet werden soll (siehe [[Navigations-Mechanismus]]) |
+|''template'' |Identifiziert einen Template-Tiddler, der für das Rendern jedes Tiddlers in der Liste verwendet wird |
+|''editTemplate'' |Identifiziert einen abweichenden Vorlagen-Tiddler, der für das Rendern von Tiddlern verwendet wird, die sich im [[Entwurfsmodus|Entwurfs-Mechanismus]] befinden |
+|''storyview'' |Gibt die zu verwendende Story-Ansicht an (z. B. klassisch oder zoomin) |
+
+Der Tiddler $:/StoryList ist ein Beispiel für einen State-Tiddler, der verwendet wird, um den Zustand der Benutzeroberfläche zu speichern. Änderungen an der Benutzeroberfläche werden indirekt vorgenommen, indem die zugrundeliegenden Status-Tiddler geändert werden und ~TiddlyWiki die Änderungen über die Benutzeroberfläche ausgibt.
+
+Durch diesen Ansatz ist eine offene Registerkarte in der Seitenleiste sehr einfach zu implementieren. Es handelt sich nur um ein weiteres <<.wid List>>-Widget, das auf denselben Status-Tiddler verweist, aber diesmal mit einer anderen Vorlage:
+
+```
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
+<$button message="tm-close-tiddler" class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link/>
+</$list>
+```
+
+Betrachten wir nun die Implementierung des Info-Panels innerhalb der Tiddler-Vorlage. Wir möchten in der Lage sein, das Info-Panel zu öffnen und zu schließen, was bedeutet, dass wir seinen aktuellen Zustand in einem Tiddler überprüfen müssen.
+
+Allerdings können wir den Zustand in einem "theoretischen" Tiddler $:/InfoPanelState nicht nachverfolgen, jeder Tiddler würde den gleichen Status teilen; eine Änderung des Wertes im Tiddler würde sich auf alle in der Story angezeigten Tiddler auswirken.
+
+Die Lösung besteht darin, dynamisch einen eindeutigen Titel für jeden Status-Tiddler zu erzeugen, den wir benötigen. Wir müssen sicherstellen, dass jedes Mal, wenn ein Element der Benutzeroberfläche gerendert wird, der gleiche Status-Tiddler-Titel erzeugt wird. Dazu hängen wir Token aneinander, die jeden der Stapel von Transklusionen repräsentieren, die zur aktuellen Rendering-Position geführt haben. Dann wird diese Zeichenfolge zu einem einfachen numerischen Wert gehasht.
+
+Der Prozess für die Erzeugung eines Status-Tiddler-Titels ist im [[qualify Makro]] gekapselt.
+
+<<.hr>>
+
+Siehe: <<wikidokulink ~StateMechanism>> (englisch)

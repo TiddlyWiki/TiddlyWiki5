@@ -1,0 +1,11 @@
+created: 20200929212807773
+creator: FBB
+modified: 20210519132101114
+modifier: FBB
+tags: 
+title: Bild Test mit ImageWidget
+type: text/vnd.tiddlywiki
+
+<div>
+<$image source="BillardBall.svg" width="200px" height="200px" />
+</div>

@@ -1,0 +1,11 @@
+caption: $:/tags/TopRightBar
+created: 20201119210823811
+creator: FBB
+description: markiert Tiddler für die Darstellung der Menüleiste oben rechts.
+modified: 20210519132102106
+modifier: FBB
+tags: SystemTags
+title: System: $:/tags/TopRightBar
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field  {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.

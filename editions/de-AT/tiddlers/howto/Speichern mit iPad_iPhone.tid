@@ -1,6 +1,6 @@
 created: 20131129101027725
 creator: pmario
-modified: 20140922125314742
+modified: 20210519132100492
 modifier: ChrisK
 tags: howto
 title: Speichern mit iPad/iPhone
@@ -20,6 +20,6 @@ Verwendung von TWEdit:
 # Geben Sie den neuen Dateinamen ein. Die Endung `.html` nicht vergessen!
 # Bearbeiten Sie Ihr ~TiddlyWiki wie gewohnt.
 # Um Änderungen zu speichern, tippen Sie wieder den ''save'' Button.
-#* Eine Bestätigungs Information sollte oben rechts auftauchen. 
+#* Eine Bestätigungs Information sollte oben rechts auftauchen.
 
 //HINWEIS: TWEdit steht in keiner Beziehung zu TiddlyWiki//

@@ -1,0 +1,47 @@
+created: 20201120211042728
+creator: FBB
+modified: 20210519132101224
+modifier: FBB
+tags: [[Was kann TiddlyWiki]]
+title: Erstellen und Bearbeiten von Tiddlern
+type: text/vnd.tiddlywiki
+
+! Erstellen von Tiddlern
+
+Zum erstellen von Tiddlern gibt es mehrere Möglichkeiten:
+
+# Auf das Plus-Zeichen <<.icon $:/core/images/new-button>> in der Seitenleiste klicken
+# Auf einen Link für einen [[fehlenden Tiddler|<fehlt>]] klicken und anschließend auf das Bearbeitungs-Symbol <<.icon "$:/core/images/edit-button">> rechts oben in der Tiddler-Leiste klicken.
+# Bei einem bestehenden Tiddlen rechts oben in der Tiddler-Leiste den Pfeil nach unten <<.icon "$:/core/images/down-arrow">> und dann den Eintrag "''Neu hier''" wählen. Der neu zu erstellende Tiddler wird dann auch gleich mit dem Titel des ursprünglichen Tiddlers [[getaggt|Tags]].
+# Bei einem bestehenden Tiddlen rechts oben in der Tiddler-Leiste den Pfeil nach unten <<.icon "$:/core/images/down-arrow">> und dann den Eintrag "''Klone''" wählen. Der neu zu erstellende Tiddler ist eine Kopie des ursprünglichen Tiddlers mit all seinen [[Feldern|Tiddler-Felder]], Tags und Inhalten.
+
+: Eine zusätzliche Möglichkeit ist die Erstellung von [[Journal-Tiddlern|Erstellen und Bearbeiten von Journal-Tiddlern]].
+
+! Bearbeiten von Tiddlern
+
+Jeden bestehenden Tiddler kann man bearbeiten, indem auf das Bearbeitungs-Symbol <<.icon "$:/core/images/edit-button">> rechts oben in der Tiddler-Leiste geklickt wird.
+
+Bei so genannten [[Schatten-Tiddler|ShadowTiddler]] erscheint, wenn man diesen bearbeiten möchte, eine Warnmeldung. Normalerweise ist es keine gute Idee diese Art von Tiddlern zu bearbeiten.
+
+!! Bearbeitungsmodus
+
+Wenn du einen neuen Tiddler erstellst oder einen bestehenden bearbeitest, geht der Tiddler in den Entwurfsmodus über. Dies stellt einen Abschnitt mit Kontrollelementen bereit, mit dem der Tiddler auf verschiedene Arten modifiziert werden kann.
+
+Von oben nach unten werden folgende Elemente angezeigt:
+
+; <<.field Titel>>-Feld
+: Hier kann der Titel des Tiddlers geändert werden. Das Einfügen von bestimmten Sonderzeichen `| [ ] { }` kann zu Problemen bei der Funktionalität von ~TiddlWiki führen.
+; <<.field Tag>>-Feld
+: In diesem Feld können Tags hinzugefügt oder entfernt werden. Wenn Du im Feld einen Tag-Namen eingibst, zeigt Dir eine Dropdown-Liste alle vorhandenen Tags an, die damit übereinstimmen. Du kannst aus der Liste einen bestehenden Tag auswählen. Oder man erstellt einen völlig neuen Tag in dem man in das Feld einen beliebigen Text schreibt und dann entweder die ''ENTER''-Taste oder auf den ''OK''-Button drücken.
+; <<.field Text>>-Feld
+: In dieses Textarea-Feld wird für den eigentlichen Inhalt benutzt. Wenn man eine Vorschau auf den fertig gerenderten WikiText sehen möchte, kann das mit dem entsprechenden Symol (<<.icon $:/core/images/preview-closed>> / <<.icon $:/core/images/preview-open>>) ein-/ausschalten
+; <<.field "Typ">>-Feld
+: Verwende dies, wenn ein Tiddler auf eine besondere Art und Weise dargestellt werden muss, z.B. als Bild. Siehe [[Inhalts-Typen]] für eine Liste der optionalen Werte. Die Voreinstellung ist <<.value "text/vnd.tiddlywiki>>, was bedeutet, dass der Tiddler WikiText enthält
+; <<.field "Field">>-Selector
+: Verwende dies, um Felder dem Tiddler hinzuzufügen oder zu entfernen. Wenn man zum Beispiel einen Tiddler bearbeit kann man z.B. ein Feld <<.field chapter>> hinzufügen, um im <<.wid List>>-Widget über [[Filter|Filter-Operator]] danach zu sortieren.
+
+! Speichern, abbrechen oder löschen
+
+* Wenn die Bearbeitung abgeschlossen ist, klickt man oben linkt auf das ''Ok'' Symbol (<<.icon $:/core/images/done-button>>). Das speichert die Änderungen und schliesst den Bearbeitungsmodus. Wenn das Wiki auf [[Automatisch speichern]] konfiguriert ist, werden die Änderungen dauerhaft gespeichert. Andernfalls wird es nur vorübergehend im Webbrowser gespeichert. ''Achtung'', indiesem Fall sind alle Änderung verloren wenn der Browser geschlossen wird. Vor dem Schließen des Browsers mus deshalb noch das rot markierte Symbol "''Das Wiki speichern''" (@@color:red;fill:red;<<.icon $:/core/images/save-button>>@@) in der Seitenleiste betätigt werden.
+* Das Abbrechen-Symbol (<<.icon $:/core/images/cancel-button>>) verwirft die Änderungen (nach einem Betätigungsdialog) und verlässt den Entwurfsmodus.
+* Das Löschen-Symbol (<<.icon $:/core/images/delete-button>>) löscht den Tiddler, nach einem Betätigungsdialog.

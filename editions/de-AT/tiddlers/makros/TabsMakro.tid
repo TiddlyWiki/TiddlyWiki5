@@ -2,13 +2,13 @@ caption: tabs-Reiter
 created: 20131228162203521
 creator: ChrisK
 list: ReiterEins ReiterZwei ReiterDrei
-modified: 20140923234958679
+modified: 20210519132100620
 modifier: pmario
 tags: Makros
 title: TabsMakro
 type: text/vnd.tiddlywiki
 
-Das `<<tabs>>` Makro stellt eine Liste von Tiddlern als "Reiter" dar. Der Anwender kann zwischen den Reitern wechseln, indem er sie anklickt. 
+Das `<<tabs>>` Makro stellt eine Liste von Tiddlern als "Reiter" dar. Der Anwender kann zwischen den Reitern wechseln, indem er sie anklickt.
 
 Als Reiter Text wird der Tiddler Titel verwendet. Außer es ist ein Feld mit dem Namen: `caption` im Tiddler enthalten, dann wird der `caption` Text angezeigt.
 

@@ -1,0 +1,19 @@
+caption: HTML
+created: 20200901195501133
+creator: FBB
+modified: 20210519132101491
+modifier: FBB
+tags: Lexikon
+title: HyperText Markup Language
+type: text/vnd.tiddlywiki
+
+<<<
+<<.def HTML >> ist ein Standard-Klartextformat, das zur Definition des Inhalts einer Webseite verwendet wird.
+
+Sie besteht aus einem Baum von Elementen, die durch ein System von speziellen Tags in spitzen Klammern ausgedrückt werden.
+
+Fast das gesamte HTML kann unverändert im WikiText eines Tiddlers verwendet werden.
+
+Wikipedia: [ext[https://de.wikipedia.org/wiki/Hypertext_Markup_Language]]
+
+<<<

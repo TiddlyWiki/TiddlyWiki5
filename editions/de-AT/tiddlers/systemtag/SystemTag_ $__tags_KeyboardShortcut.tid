@@ -1,0 +1,12 @@
+caption: $:/tags/KeyboardShortcut
+created: 20201125212215055
+creator: FBB
+description: markiert Tiddler deren Text als Tastaturkürzel-Aktionen verwendet werden
+modified: 20210519132102131
+modifier: FBB
+tags: SystemTags
+title: SystemTag: $:/tags/KeyboardShortcut
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field  {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.
+

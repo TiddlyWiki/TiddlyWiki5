@@ -1,0 +1,16 @@
+caption: My Todo
+chapter: 2
+created: 20200528213614443
+creator: FBB
+modified: 20210519132100956
+modifier: FBB
+title: $:/_fbb/My_ToDo
+type: text/vnd.tiddlywiki
+
+!!! Fehlender Inhalt bzw. mit Kennzeichnung [[$fehlt]]
+<<list-links filter:"[search[$fehlt]!title[$fehlt]!title[$:/HistoryList]!title[$:/_fbb/My_ToDo]]" >>
+
+!!! Manuell erfasst von  {{FBB||$:/core/ui/TagTemplate}}
+*[[Farbpaletten]]
+
+

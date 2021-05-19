@@ -1,0 +1,16 @@
+caption: prefix
+created: 20200619204002863
+creator: FBB
+modified: 20210519165510465
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-neg-output: alle Eingabe-Titel, die ''nicht'' mit ''//{{!!op-parameter-name}}//'' beginnen
+op-output: alle Eingabe-Titel, die mit ''//{{!!op-parameter-name}}//'' beginnen
+op-parameter: eine Zeichenkette
+op-parameter-name: S
+op-purpose: die Eingabe-Titel danach filtern, wie sie beginnen
+tags: Filter-Operator Negierbarer-Operator String-Operator
+title: prefix Operator
+type: text/vnd.tiddlywiki
+
+Bei der Suche nach Übereinstimmungen für ''//{{!!op-parameter-name}}//'' wird Groß- und Kleinschreibung unterschieden.

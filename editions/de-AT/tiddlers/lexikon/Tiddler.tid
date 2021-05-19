@@ -1,6 +1,6 @@
 created: 20140908131438258
 creator: pmario
-modified: 20140913185153858
+modified: 20210519132100652
 modifier: pmario
 tags: Lexikon
 title: Tiddler
@@ -16,6 +16,6 @@ Die Bezeichnung Tiddler mag etwas verwirrend sein, ist aber verwirrend ''unverke
 
 ''Für Entwickler:''
 
-Intern ist ein tiddler ein Verzeichnis von unveränderbaren "name:value" Paaren, die als "fields" (Felder) bezeichnet werden. Das einzige Feld, das vorhanden sein ''muss'' ist das "text" Feld. 
+Intern ist ein tiddler ein Verzeichnis von unveränderbaren "name:value" Paaren, die als "fields" (Felder) bezeichnet werden. Das einzige Feld, das vorhanden sein ''muss'' ist das "text" Feld.
 
 Weitere Informationen finden Sie unter: https://tiddlywiki.com/#TiddlerFields 

@@ -1,0 +1,17 @@
+caption: add
+created: 20200629123352082
+creator: FBB
+modified: 20210519165455159
+modifier: pmario
+op-input: eine [[Titelselektion]]
+op-output: die Eingabe als Zahlen, aber mit jeweils ''//{{!!op-parameter-name}}//'' addiert
+op-parameter: eine Nummer
+op-parameter-name: N
+op-purpose: jede Eingabe als Zahl behandeln, zu jedem den numerischen Wert des Operanden hinzufügen
+tags: Filter-Operator Mathematik-Operator [[Binäre Mathematik-Operatoren]]
+title: add Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">>: Einen Überblick gibt es unter: [ext[Mathematik-Operatoren|https://tiddlywiki.com/#Mathematics%20Operators]].
+
+<<.operator-examples "add">>

@@ -1,0 +1,16 @@
+created: 20201026210814878
+creator: FBB
+modified: 20210519132102312
+modifier: FBB
+tags: Lexikon
+title: URL-Encoding
+type: text/vnd.tiddlywiki
+
+<<<
+''URL-Encoding'' (URL-Kodierung, auch Prozentkodierung genannt) ist ein Mechanismus, der dazu dient, Informationen in einer [[URL]] unter bestimmten Gegebenheiten zu kodieren. Ohne diese Kodierung wären einige Informationen nicht in einer URL darstellbar. Zur Kodierung werden nur bestimmte Zeichen des ASCII-Zeichensatzes verwendet.
+
+Kodierte Zeichen werden als Prozentzeichen `%` gefolgt von zwei weiteren Zeichen dargestellt. Zum Beispiel wird das Leerzeichen als <<.value "%20">> dargestellt. Das Prozentzeichen "%" wird als <<.value "%25">> dargestellt
+
+Wikipedia: [ext[https://de.wikipedia.org/wiki/URL-Encoding]]
+
+<<<

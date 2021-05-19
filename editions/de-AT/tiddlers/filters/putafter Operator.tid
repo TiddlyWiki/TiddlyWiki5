@@ -1,0 +1,14 @@
+caption: putafter
+created: 20200610125117924
+creator: FBB
+modified: 20210519165553934
+modifier: FBB
+op-input: eine Liste von Elementen
+op-output: neu geordnete Liste von Elementen
+op-parameter: das als Markierung zu verwendende Listenelement
+op-parameter-name: marker
+op-purpose: ein Elemente N-Stellen hinter die Markierung verschieben
+op-suffix: eine ganze Zahl N, Standardwert ist 1
+tags: Listen-Filter-Operator Sortier-Operator Filter-Operator
+title: putafter Operator
+type: text/vnd.tiddlywiki

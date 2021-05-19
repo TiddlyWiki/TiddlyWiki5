@@ -1,8 +1,16 @@
 created: 20140923232836852
 creator: pmario
-modified: 20140923232900909
-modifier: pmario
+modified: 20210519132100109
+modifier: FBB
 tags: tocEins
 title: EinsA
 type: text/vnd.tiddlywiki
+
+<<<
+@@background-color:honeydew;
+Dieser ist der Tiddler {{!!title}} zum Testen. Er wird in mehreren Beispielen verwendet z.B. bei der Erklärung des [[Inhaltsverzeichnisses|Inhaltsverzeichnis-Selektiv-Erweiterbar]] bzw. des TableOfContentsMacro oder von [[Transklusion]].
+@@
+<<<
+
+
 

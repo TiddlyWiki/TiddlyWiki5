@@ -1,0 +1,15 @@
+caption: product
+created: 20200629130122762
+creator: FBB
+modified: 20210519165418372
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: das Ergebnis der Multiplikation der Eingabe als Zahlen
+op-purpose: das Produkt der eingegebenen Zahlen erzeugen
+tags: Filter-Operator Mathematik-Operator [[Reduzierte Mathematik-Operatoren]]
+title: product Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">>: Einen Überblick gibt es dazu auch in [ext[Mathematik-Operatoren|https://tiddlywiki.com/#Mathematics%20Operators]] //(englisch)//.
+
+Vergleiche auch mit dem [[multiply Operator]].

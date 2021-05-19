@@ -1,7 +1,7 @@
 caption: Bilder
 created: 20131205160221762
 creator: pmario
-modified: 20140921170652909
+modified: 20210519132100056
 modifier: pmario
 tags: WikiText
 title: Bilder in WikiText
@@ -16,14 +16,14 @@ Bilder können in WikiText mit folgender Syntax verwendet werden:
 ```
 [img[Motovun Jack.jpg]]
 
-oder 
+oder
 
 ```
 [img[https://tiddlywiki.com/favicon.ico]]  Dieses verlinkte Bild wird eventuell nicht angezeigt, wenn Sie offline sind!
 ```
 [img[https://tiddlywiki.com/favicon.ico]]
 
-Wenn die Bildquelle der Titel eines existierenden Tiddlers ist, dann wird dieser direkt angezeigt. Ansonsten wird die Quelle als URL angesehen und ein HTML `<img>` Element wird erzeugt. Das `src` Attribut wird auf die [[URL]] gesetzt. 
+Wenn die Bildquelle der Titel eines existierenden Tiddlers ist, dann wird dieser direkt angezeigt. Ansonsten wird die Quelle als URL angesehen und ein HTML `<img>` Element wird erzeugt. Das `src` Attribut wird auf die [[URL]] gesetzt.
 
 Ein [[Tooltip]] kann ebenfalls angegeben werden:
 
@@ -33,7 +33,7 @@ Ein [[Tooltip]] kann ebenfalls angegeben werden:
 
 [img width=100 [Ich bin der Tooltip text|Motovun Jack.jpg]]
 
-Attribute wie zB: CSS Klassen oder die Höhe und Breite können ebenfalls angegeben werden. 
+Attribute wie zB: CSS Klassen oder die Höhe und Breite können ebenfalls angegeben werden.
 
 ```
 [img width=64 [Motovun Jack.jpg]]
@@ -52,7 +52,7 @@ Die "Bilder Syntax" ist eine Vereinfachung für die Verwendung des "ImageWidget"
 
 !! Anzeige von Bildern mit Transklusion
 
-Sie können ein Bild, das als Tiddler gespeichert ist direkt anzeigen. Nachteil dieser Methode ist, dass die Größe des Bildes nicht direkt beeinflusst werden kann. 
+Sie können ein Bild, das als Tiddler gespeichert ist direkt anzeigen. Nachteil dieser Methode ist, dass die Größe des Bildes nicht direkt beeinflusst werden kann.
 
 ```
 {{Motovun Jack.jpg}}

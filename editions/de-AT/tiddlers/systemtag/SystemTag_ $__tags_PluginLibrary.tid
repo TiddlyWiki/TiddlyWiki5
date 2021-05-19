@@ -1,0 +1,11 @@
+caption: $:/tags/PluginLibrary
+created: 20201125211851091
+creator: FBB
+description: markiert Plugin Bibliotheken
+modified: 20210519132102144
+modifier: FBB
+tags: SystemTags
+title: SystemTag: $:/tags/PluginLibrary
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field  {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.

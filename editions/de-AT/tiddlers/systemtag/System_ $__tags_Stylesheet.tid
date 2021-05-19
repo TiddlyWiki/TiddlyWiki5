@@ -1,0 +1,17 @@
+caption: $:/tags/Stylesheet
+created: 20140923180325727
+creator: pmario
+description: markiert Tiddler mit den eigenen Stylesheets
+modified: 20210519132102097
+modifier: FBB
+tags: SystemTags
+title: System: $:/tags/Stylesheet
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.
+
+ Er wird verwendet um Benutzer definierte [[Stylesheets|Stylesheet]] zu aktivieren.
+
+Benutzer Stylesheets in diesem Wiki:
+
+<<list-links "[tag[$:/tags/Stylesheet]]">>

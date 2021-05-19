@@ -1,0 +1,37 @@
+caption: is
+created: 20200615184053587
+creator: FBB
+modified: 20210519165018727
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-neg-output: die Eingabe-Tiddler, die ''nicht'' zur Kategorie //''{{!!op-parameter-name}}''//  gehören
+op-output: die Eingabe-Tiddler, die zur Kategorie //''{{!!op-parameter-name}}''//  gehören
+op-parameter: eine Kategorie
+op-parameter-name: C
+op-purpose: die Eingabe nach grundlegenden Kategorien filtern
+tags: Filter-Operator Negierbarer-Operator Common-Operator
+title: is Operator
+type: text/vnd.tiddlywiki
+
+Der Parameter ''//{{!!op-parameter-name}}//'' entspricht einer der folgenden Basiskategorien:
+
+|!Kategorie |!Passt zu jedem Tiddler-Titel, der... |
+|^`current` |der [[aktueller Tiddler|Aktueller Tiddler]] ist. |
+|^`image` |den ContentType ''image'' hat|
+|^`binary` |einen binären ContentType hat |
+|^`missing` |nicht existiert (außer möglicherweise als Schatten-Tiddler), unabhängig davon, ob es irgendwelche Verbindungen zu ihm gibt. |
+|^`orphan` |keine [[harten Links|Hard- und Soft-Links]] zu diesem Thema hat. |
+|^`shadow` |ein [[Schatten-Tiddler]] ist, unabhängig davon, ob er mit einem Nicht-Schatten-Tiddler überschrieben wurde |
+|^`system` |ist ein [[System-Tiddler]], d.h. sein Titel beginnt mit `$:/` |
+|^`tag` |ist als Tag in Verwendung |
+|^`tiddler` |existiert als Nicht-Schatten-Tiddler |
+|^`variable` |<<.fromVersion "5.1.20">> existiert als Variable (unabhängig davon, ob diese Variable einen nicht-leeren Wert hat oder nicht) |
+|^`blank` |<<.fromVersion "5.1.20">> ist leer (d.h. ist eine Zeichenkette der Länge Null) |
+
+Wenn ''//{{!!op-parameter-name}}//'' etwas anderes ist, wird eine Fehlermeldung zurückgegeben. <<.fromVersion "5.1.14">> wenn ''//{{!!op-parameter-name}}//'' leer ist, wird die Ausgabe unverändert durchgereicht (in früheren Versionen wurde eine Fehlermeldung zurückgegeben).
+
+`!is[tiddler]` ist ein Synonym für `is[missing]`, und umgekehrt.
+
+Wenn `is[missing]` der erste Operator in einem [[Lauf|Filter-Lauf]] ist, ist seine Ausgabe immer leer. Und wenn `is[shadow]` an erster Stelle steht, werden nur die Schatten-Tiddler ausgegeben, die überschrieben worden sind. Das liegt daran, dass die [[initiale Eingabe zu einem Lauf|Filter-Ausdruck]] nur Nicht-Schatten-Tiddler enthält.
+
+Der [[all Operator]] ist ähnlich, aber sein Anwendungsbereich bezieht sich auf das gesamte Wiki.

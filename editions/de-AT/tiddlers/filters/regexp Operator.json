@@ -1,0 +1,21 @@
+[
+    {
+        "created": "20200629161404415",
+        "text": "\"Reguläre Ausdrücke\" sind einfache Zeichenfolgen, die Textmuster bezeichnen, nach denen gesucht werden soll. Das in ~TiddlyWiki verwendete Format ist in dieser [[Mozilla-Referenz|https://developer.mozilla.org/de/docs/Web/JavaScript/Guide/Regular_Expressions]] vollständig definiert.\n\nDie [[Filter-Syntax]] macht es unmöglich, einen regulären Ausdruck, der eckige Klammern enthält, direkt anzugeben. Die Lösung besteht darin, den Ausdruck in einer Variablen zu speichern.\n\nHier ein Beispiel um den Ausdruck in einer [[Variablen|Variable]] zu speichern:\n\n```\n<$set name=\"digit-pattern\" value=\"[0-9]{2}\">\n<<list-links \"[regexp:title<digit-pattern>]\">>\n</$set>\n```\n\nDer Parameter //''X''// kann optional mit einer Kette von Flags beginnen oder enden:\n\n\n<$railroad text=\"\"\" \"(?\" { (\"i\"|\"m\"|:\"g\") } \")\" \"\"\"/>\n\nBesonders das Flag `i` ist hilfreich: Es sorgt dafür, dass der Unterschied zwischen Groß- und Kleinbuchstaben ignoriert wird.\n\nWenn Parameter //''X''//  leer ist, wird regexp mit allen Eingabe-Tiddlern übereinstimmen.",
+        "type": "text/vnd.tiddlywiki",
+        "title": "regexp Operator",
+        "tags": "Filter-Operator Feld-Operator Negierbarer-Operator",
+        "modifier": "FBB",
+        "modified": "20210519164938699",
+        "creator": "FBB",
+        "op-suffix-name": "F",
+        "op-suffix": " der Name eines Feldes, standardmäßig der Titel",
+        "op-purpose": "die Eingabe nach übereinstimmenden Mustern filtern",
+        "op-parameter-name": "X",
+        "op-parameter": "ein regulärer Ausdruck",
+        "op-output": "die Eingabe-Tiddler, bei denen Feld //''{{!!op-suffix-name}}''// mit Ausdruck //''{{!!op-parameter-name}}''// übereinstimmt",
+        "op-neg-output": "die Eingabe-Tiddler, bei denen Feld //''{{!!op-suffix-name}}''// mit Ausdruck //''{{!!op-parameter-name}}''// ''nicht'' übereinstimm",
+        "op-input": "eine [[Titelselektion]]",
+        "caption": "regexp"
+    }
+]

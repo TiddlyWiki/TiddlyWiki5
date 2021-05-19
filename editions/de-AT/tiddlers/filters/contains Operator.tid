@@ -1,0 +1,16 @@
+caption: contains
+created: 20200629141157935
+creator: FBB
+modified: 20210519165147210
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-neg-output: die Eingabe-Tiddler, in denen Feld //''{{!!op-suffix-name}}''// ''nicht'' den Wert //''{{!!op-parameter-name}}''// beinhaltet
+op-output: die Eingabe-Tiddler, in denen Feld //''{{!!op-suffix-name}}''// den Wert //''{{!!op-parameter-name}}''// enthält
+op-parameter: einen möglichen Wert, der im Listenfeld //''{{!!op-suffix-name}}''// zu suchen ist
+op-parameter-name: S
+op-purpose: die Eingabe filtern, indem Listenfelder nach einem Wert durchsucht werden
+op-suffix: der Name eines Feldes
+op-suffix-name: F
+tags: Filter-Operator Feld-Operator Negierbarer-Operator
+title: contains Operator
+type: text/vnd.tiddlywiki

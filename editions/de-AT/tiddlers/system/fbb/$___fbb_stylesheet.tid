@@ -1,0 +1,118 @@
+created: 20201124210132107
+creator: FBB
+modified: 20210519132100964
+modifier: FBB
+tags: $:/tags/Stylesheet
+title: $:/_fbb/stylesheet
+type: text/vnd.tiddlywiki
+
+a.bigwikilink{
+font-weight:bold;
+text-decoration: none;
+}
+
+mark.bmark{
+background-color:rgba(223, 223, 247,1);
+color:#012baa;
+padding: 0 3px 2px;;
+}
+
+code.doc-value{
+color: darkred;
+}
+
+.doc-attr,
+.doc-param {
+	background-color: #eee;
+	border: none;
+	color: #6a6a6a;
+	font-weight: bold;
+	padding: 2px;
+}
+
+a .doc-attr {
+	color: #6a6a6a;
+}
+
+a.doc-widget{
+text-decoration: none;
+font-weight: 501;
+color: darkblue;
+text-transform: lowercase;
+-webkit-user-select: inherit;
+}
+
+a.doc-var:not(code.doc-var){
+font-weight: 501;
+font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
+text-transform: lowercase;
+}
+
+a code.doc-var{
+color: #5778d8;
+background-color:#fff;
+font-weight:bold;
+border: none;
+padding: 0;
+}
+
+.doc-button svg { height: 1em; }
+
+.doc-icon svg, .doc-icon img{
+width: 1em; 
+height: 1em; 
+vertical-align: middle; 
+}
+
+.doc-icon-block{ 
+border-left: 2px solid #e1e1e8; 
+margin-left: 3em; 
+padding-left: 0.6em; 
+position: relative; 
+} 
+.doc-block-icon{ 
+position: absolute; 
+left: -3em; top: 0.2em; 
+} 
+.doc-block-icon .tc-image-tip{ 
+fill: #5778d8; 
+} 
+.doc-block-icon .tc-image-warning{
+fill: #881122;
+}
+
+.doc-from-version_neu{
+display: inline-block; 
+border-radius: 1em; 
+background: #cccccc; 
+color: #ffffff; 
+fill: #ffffff; 
+padding: 0 0.4em; 
+font-size: 0.7em; 
+text-transform: uppercase; 
+font-weight: bold; 
+line-height: 1.5; 
+vertical-align: text-bottom;
+}
+
+.doc-from-version{
+color: #fff;
+fill: #ffffff; 
+border: solid 1px #fff;
+border-radius:20px; 
+background-color:#a8a6a6;
+padding: 0px 5px;
+font-size: 0.8em
+}
+
+.doc-deprecated-version svg, .doc-from-version svg{
+width: 1em;
+height: 1em;
+vertical-align: middle;
+margin-bottom: 2px;
+}
+
+a.tc-tiddlylink-external::after{
+color: #0000ff;
+content: "\0020\2398";
+}

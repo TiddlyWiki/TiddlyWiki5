@@ -1,0 +1,25 @@
+created: 20200907214301010
+creator: FBB
+modified: 20210519132101212
+modifier: FBB
+tags: Funktionalität
+title: Entwurfs-Mechanismus
+type: text/vnd.tiddlywiki
+
+So lange ein Tiddler bearbeitet wird, erhält dieser ein Feld <<.field draft.of>> mit dem Titel des bearbeiteten Tiddlers.
+
+Tiddler im Entwurfs-Modus haben auch ein Feld <<.field draft.title>>, das den Titel angibt, der dem Tiddler beim Speichern zugewiesen wird. Dieses Feld wird durch die bearbeitbare Titel-Eingabezeile repräsentiert.
+
+Mehrere Funktionen arbeiten zusammen, um das gewünschte Verhalten für die Tiddler im Entwurfsmodus zu erreichen:
+
+* Das <<.wid List>>-Widget kann optional Entwürfe von Tiddlern über eine andere Vorlage darstellen
+* Das <<.wid Navigator>>-Widget enthält Handler für die folgenden Ereignisse:
+** `tm-new-tiddler` zum Erstellen eines neuen Tiddlers im Entwurfsmodus
+** `tm-edit-tiddler` zum Editieren eines Tiddlers in den Entwurfsmodus
+** `tm-cancel-tiddler` zum Abbrechen des Entwurfsmodus
+** `tm-save-tiddler` zum Speichern eines im Entwurf befindlichen Tiddlers
+*Tiddler im Entwurfsmodus werden automatisch von Suchvorgängen ausgeschlossen.
+
+<<.hr>>
+
+siehe: [ext[https://tiddlywiki.com/#DraftMechanism]]

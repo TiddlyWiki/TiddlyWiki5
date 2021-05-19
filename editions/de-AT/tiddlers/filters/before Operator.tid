@@ -1,0 +1,15 @@
+caption: before
+created: 20200630194851579
+creator: FBB
+modified: 20210519165841741
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: der Titel, der in der Eingabe unmittelbar vor ''//{{!!op-parameter-name}}//'' steht
+op-parameter: einen dieser Titel
+op-parameter-name: T
+op-purpose: Suchen, welcher Eingabe-Titel vor einem angegeben Titel steht
+tags: Sortier-Operator Filter-Operator
+title: before Operator
+type: text/vnd.tiddlywiki
+
+Wenn ''//{{!!op-parameter-name}}//'' in der Eingabe nicht vorhanden ist oder dort der letzte Titel ist, dann bleibt die Ausgabe leer.

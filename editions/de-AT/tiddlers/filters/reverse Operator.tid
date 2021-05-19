@@ -1,0 +1,13 @@
+caption: reverse
+created: 20200630195332058
+creator: FBB
+modified: 20210519165719940
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: die Liste der Eingabe-Tiddler aber in umgekehrter Reihenfolge
+op-parameter: keiner
+op-parameter-name: 
+op-purpose: die Liste der Eingabe-Titel umkehren
+tags: Sortier-Operator Filter-Operator
+title: reverse Operator
+type: text/vnd.tiddlywiki

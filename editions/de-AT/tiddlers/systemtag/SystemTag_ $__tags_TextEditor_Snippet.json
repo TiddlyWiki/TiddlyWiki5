@@ -1,0 +1,14 @@
+[
+    {
+        "created": "20201124222834183",
+        "title": "SystemTag: $:/tags/TextEditor/Snippet",
+        "text": "Dieser Tag <<.field  {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.\n\n",
+        "creator": "FBB",
+        "modified": "20210519132102148",
+        "modifier": "FBB",
+        "tags": "SystemTags",
+        "type": "text/vnd.tiddlywiki",
+        "caption": "$:/tags/TextEditor/Snippet",
+        "description": "markiert [[Text-Snippets|Makros]] "
+    }
+]

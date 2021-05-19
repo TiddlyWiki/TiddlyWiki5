@@ -1,0 +1,15 @@
+created: 20200928201713769
+creator: FBB
+modified: 20210519132102224
+modifier: FBB
+tags: [[Core Variablen]] Variablen [[Konfigurations Variablen]]
+title: tv-adjust-heading-level Variable
+type: text/vnd.tiddlywiki
+
+Die Variable <<.var tv-adjust-heading-level>> ermöglicht es, die Größe der [[Überschriften|Überschriften in WikiText]] anzupassen. Sie wird als positive oder negative Zahl (z.B. "2" oder "-3") interpretiert. Dieser Wert wird zu der Größe der Überschriftenebene hinzuaddiert.
+
+Beachten Sie, wenn die resultierende Überschriftenebene kleiner als 1 ist, wird stattdessen Ebene 1 verwendet. Dies bedeutet, dass die Angabe eines großen negativen Anpassungsfaktors alle Überschriften auf die Anzeige als Stufe 1 zurücksetzt. In ähnlicher Weise werden Überschriftenebenen, die größer als 6 sind, auf die maximale [[HTML|HyperText Markup Language]]-Überschriftenebene von 6 festgelegt.
+
+<<.hr>>
+
+siehe Beispiel: [ext[https://tiddlywiki.com/#tv-adjust-heading-level Variable (Examples)]]

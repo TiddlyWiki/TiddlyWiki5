@@ -1,13 +1,13 @@
 created: 20140918110713554
 creator: pmario
-modified: 20140918111046621
+modified: 20210519132100362
 modifier: pmario
-tags: Referenz
+tags: Referenz [[Über TiddlyWiki]]
 title: Lizenzen
 type: text/vnd.tiddlywiki
 
 * ~TiddlyWiki Kern
-** https://github.com/Jermolene/TiddlyWiki5/blob/master/licenses/copyright.md
-* ~TiddlyWiki Editionen 
+** [ext[https://github.com/Jermolene/TiddlyWiki5/blob/master/contributing.md|https://github.com/Jermolene/TiddlyWiki5/blob/master/contributing.md#contributor-license-agreement]]
+* ~TiddlyWiki Editionen
 ** https://github.com/Jermolene/TiddlyWiki5/blob/master/licenses/cla-individual.md
 ** https://github.com/Jermolene/TiddlyWiki5/blob/master/licenses/cla-entity.md

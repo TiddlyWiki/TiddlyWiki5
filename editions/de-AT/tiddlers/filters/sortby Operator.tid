@@ -1,0 +1,13 @@
+caption: sortby
+created: 20200610140227136
+creator: FBB
+modified: 20210519165516894
+modifier: FBB
+op-input: eine Liste von Elementen
+op-output: neu geordnete Liste, alle Elemente nach Referenzliste sortiert
+op-parameter: eine Liste, die die Reihenfolge angibt, in der die aktuelle Liste sortiert werden soll
+op-parameter-name: order
+op-purpose: die aktuelle Liste in der Reihenfolge der Liste sortieren, auf die im Parameter verwiesen wird
+tags: Listen-Filter-Operator Sortier-Operator Filter-Operator
+title: sortby Operator
+type: text/vnd.tiddlywiki

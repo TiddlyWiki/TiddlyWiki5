@@ -1,0 +1,11 @@
+caption: $:/tags/Palette
+created: 20201104214118579
+creator: pmario
+description: markiert Farbpaletten
+modified: 20210519132102080
+modifier: FBB
+tags: SystemTags
+title: System: $:/tags/Palette
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.

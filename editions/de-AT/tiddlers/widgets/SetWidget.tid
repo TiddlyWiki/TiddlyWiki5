@@ -1,0 +1,85 @@
+created: 20200901192626425
+creator: FBB
+modified: 20210519132101957
+modifier: FBB
+tags: Widgets
+title: SetWidget
+type: text/vnd.tiddlywiki
+
+! Einleitung
+
+Das Set-Widget weist einer angegebenen Variablen einen Wert zu. Der neue Wert der Variable ist für den Inhalt innerhalb des gesetzten Variablen-Widgets verfügbar.
+
+! Inhalt und Attribute
+
+Der Inhalt des Set-Widgets ist der Bereich für den Wert, der zugewiesen Variable.
+
+|!Attribute |!Beschreibung |
+|name |Der Name der Variablen, die zugewiesen werden soll (Standardwert ist [[currentTiddler |currentTiddler Variable]]) |
+|value |Der Wert, welcher der Variablen zugewiesen werden soll, wenn der Filter fehlt oder nicht leer ist. |
+|tiddler |<<.fromVersion "5.1.15">> Optionaler Titel des Tiddlers, von dem der Wert abgelesen werden soll |
+|subtiddler |<<.fromVersion "5.1.16">> Gibt optional den Titel eines Subtiddlers innerhalb eines Plugin-Tiddlers an, der durch das <<.param tiddler>>-Attribut identifiziert wird |
+|field |<<.fromVersion "5.1.15">> Optionales Feld des Tiddlers, aus dem der Wert abgelesen werden soll (nur verwendet, wenn <<.param tiddler>> verwendet wird) |
+|index |<<.fromVersion "5.1.15">> Optionaler Index des Tiddlers, von dem der Wert gelesen werden soll (wird nur verwendet, wenn <<.param tiddler>> verwendet wird) |
+|filter |Ein optionaler Filter, der ausgewertet und der Variablen zugewiesen werden kann (siehe unten  'Variablenzuweisung in gefilterter Liste') |
+|select |<<.fromVersion "5.1.14">> Ein optionaler nullbasierter Index des von der Filterausgabe zurückzugebenden Elements (siehe unten 'Zuweisung transkludierter Variablen') |
+|emptyValue |Der Wert, der der Variablen zugewiesen werden soll, wenn der angegebene Wert fehlt oder leer ist (siehe unten 'Bedingte Variablenzuweisung') |
+
+! Einfache Variablenzuweisung
+
+Die einfachste Art das Set-Widget zu verwenden ist, einer Variablen eine Zeichenfolge zuzuweisen. Das folgende Beispiel weist eine literale Zeichenfolge zu:
+
+```
+<$set name="myVariable" value="ein Text">
+<$text text=<<myVariable>>/>
+</$set>
+```
+Sowohl die Namens- als auch die Wertattribute können transkribiert werden. Zum Beispiel:
+
+```
+<$set name=<<anotherVariable>> value={{template!!text}}>
+<$text text=<<myVariable>>/>
+</$set>
+```
+
+! Bedingte Variablenzuweisung
+
+Diese Form des Set-Widgets wählt einen von zwei angegebenen Werten aus. Je nachdem ob ein Filter eine leere Liste auswertet. Hier ist ein Beispiel, das eine Variable danach setzt, ob der aktuelle Tiddler "myMagicTitle" heißt:
+
+```
+<$set name="myVariable" filter="[all[current]field:title[myMagicTitle]]" value="Das ist Magie!" emptyValue="Nicht magisch.">
+<$text text=<<myVariable>>/>
+</$set>
+```
+
+! Variablenzuweisung für gefilterter Listen
+
+Diese Form des Set-Variablen-Widgets wertet den Filter aus und weist das Ergebnis der Variable als eine durch Leerzeichen getrennte Liste zu (bei Titeln mit Leerzeichen werden doppelte eckige Klammern verwendet).
+
+```
+<$set name="myVariable" filter="[tag[HelloThere]]">
+<$text text=<<myVariable>>/>
+</$set>
+```
+
+! Variablenzuweisung für gefilterte Elemente
+
+<<.fromVersion 5.1.14 >> Diese Form des Set-Widgets wertet den Filter aus und weist das angegebene Ergebnis der Variable als einzelnes Element zu (d.h. keine Verwendung von doppelten eckigen Klammern für Titel, die Leerzeichen enthalten).
+
+! Zuweisung transkludierter Variablen
+
+<<.fromVersion 5.1.15 >> Diese Form des Set-Widgets erhält den der Variable zuzuweisenden Wert aus einem Tiddler-Feld oder Index. Zum Beispiel:
+
+```
+<$set name="myVariable" tiddler="TiddlyWiki" field="text">
+<$text text=<<myVariable>>/>
+</$set>
+```
+
+Das obige Beispiel könnte auch geschrieben werden als `<$set name="myVariable" value={{TiddlyWiki!!text}}>`. Die Verwendung des Tiddler-Attributs hat den Vorteil, dass der Tiddler-Titel und das Feld oder der Index selbst berechnet werden können. Zum Beispiel:
+
+```
+<$set name="myVariable" tiddler=<<myTiddler>> field={{$:/currentField}}>
+<$text text=<<myVariable>>/>
+</$set>
+```

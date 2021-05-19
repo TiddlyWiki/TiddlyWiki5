@@ -1,0 +1,12 @@
+caption: $:/tags/Manager/ItemMain
+created: 20201125214206771
+creator: FBB
+description: markiert Tiddler die im [[Tiddler Manager|$:/Manager]] für die aufklappbare Detailansicht verwendet werden.
+modified: 20210519132102135
+modifier: FBB
+tags: SystemTags
+title: SystemTag: $:/tags/Manager/ItemMain
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field  {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.
+

@@ -1,0 +1,35 @@
+created: 20210518204507234
+creator: FBB
+modified: 20210519132101044
+modifier: FBB
+tags: ActionWidget Widgets
+title: ActionSendMessageWidget
+type: text/vnd.tiddlywiki
+
+Das <<.wid2 "ActionSendMessage" "action-sendmessage">>-Widget ist ein ActionWidget, das eine Nachricht zurück an den Widget-Baum [[meldet|Widget-Meldungen]]. Dieses Aktions-Widget wird in anderen auslösenden Widgets verwendet wie z. B. das <<.wid Button>>-Widget.
+
+! Inhalte und Attribute
+
+|!Attribute |!Beschreibung |
+|$message |Die zu sendene Nachricht (z.B. die [[Widget-Meldung|Widget-Meldungen]]: [[tm-new-tiddler]]) |
+|$param |Optionaler Parameter: Eine Zeichenkette, deren Bedeutung von der gesendeten Nachricht abhängt |
+|$name |Optional: Name des zusätzlichen Parameters |
+|$value |Optional: Wert für optionalen Parameter, dessen Name in <<.attr "$name">> angegeben ist |
+|//{alle Attribute, die nicht mit $ beginnen}// |Mehrere zusätzliche, optionale aber benannte Parameter, die an die Message angehängt werden. |
+
+! Beispiel
+
+Hier ist ein Beispiel für eine Schaltfläche, die sowohl eine Benachrichtigung als auch einen Meldungsdialog anzeigt und einen neuen Tiddler mit Tags und Text erstellt:
+
+
+<$macrocall $name="wikitext-example-without-html" src="""<$button>
+<$action-sendmessage $message="tm-modal" $param="BeispielMeldung"/>
+<$action-sendmessage $message="tm-notify" $param="BeispielMeldung2"/>
+<$action-sendmessage $message="tm-new-tiddler" title="Das ist ein neuer Tiddler" tags="EinTag [[oder dieser Tag]]" text= "<<now Heute ist der DD.MMM YYYY>>"/>
+Klick mich mal an!
+</$button>
+"""/>
+
+<<.hr>>
+
+Siehe: <<wikidokulink "~ActionSendMessageWidget">> (englisch)

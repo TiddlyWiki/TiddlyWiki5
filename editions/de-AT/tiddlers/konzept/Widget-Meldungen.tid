@@ -1,0 +1,18 @@
+caption: Meldungen
+created: 20210415204721004
+creator: FBB
+list: tm-add-field tm-add-tag tm-auto-save-wiki tm-browser-refresh tm-cancel-tiddler tm-clear-password tm-close-all-tiddlers tm-close-other-tiddlers tm-close-tiddler tm-copy-to-clipboard tm-delete-tiddler tm-download-file tm-edit-bitmap-operation tm-edit-text-operation tm-edit-tiddler tm-focus-selector tm-fold-all-tiddlers tm-fold-other-tiddlers tm-fold-tiddler tm-full-screen tm-home tm-import-tiddlers tm-load-plugin-from-library tm-load-plugin-library tm-login tm-logout tm-modal tm-navigate tm-new-tiddler tm-notify tm-open-external-window tm-open-window tm-perform-import tm-permalink tm-permaview tm-print tm-remove-field tm-remove-tag tm-rename-tiddler tm-save-tiddler tm-save-wiki tm-scroll tm-server-refresh tm-set-password tm-unfold-all-tiddlers tm-unload-plugin-library
+modified: 20210519132102342
+modifier: FBB
+tags: Konzept Referenz
+title: Widget-Meldungen
+type: text/vnd.tiddlywiki
+
+Widget-Meldungen werden von Widgets als Reaktion auf Benutzeraktionen erzeugt. Sie laufen den Widget-Baum hinauf, bis sie von einem übergeordneten Widget behandelt werden.
+
+Die folgenden Widget-Meldungen werden vom Core implementiert:
+
+<<list-links "[list[Widget-Meldungen]]">>
+
+<<.hr>>
+Siehe: <<wikidokulink "Messages">> (englisch)

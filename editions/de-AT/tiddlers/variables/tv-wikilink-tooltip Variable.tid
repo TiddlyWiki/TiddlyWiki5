@@ -1,0 +1,15 @@
+created: 20201005205904484
+creator: FBB
+modified: 20210519132102285
+modifier: FBB
+tags: Variablen [[Core Variablen]] [[Konfigurations Variablen]]
+title: tv-wikilink-tooltip Variable
+type: text/vnd.tiddlywiki
+
+Die Variable <<.var tv-wikilink-tooltip>> gibt den Standardwert für das Tooltip-Attribut des <<.wid Link >>-Widgets an.
+
+Er wird oft als [[Makro|Makros]] definiert und sein Wert als Inline-[[WikiText]] geparst.
+
+<<.hr>>
+
+siehe Beispiel: [ext[https://tiddlywiki.com/#tv-wikilink-tooltip Variable (Examples)]]

@@ -1,0 +1,15 @@
+caption: subtract
+created: 20200629124652302
+creator: FBB
+modified: 20210519165405936
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: die Eingabe als Zahlen, aber mit jeweils ''//{{!!op-parameter-name}}//'' von jeder subtrahiert
+op-parameter: eine Nummer
+op-parameter-name: N
+op-purpose: jede Eingabe als Zahl behandeln, von jedem den numerischen Wert des Operanden abziehen
+tags: Filter-Operator Mathematik-Operator [[Binäre Mathematik-Operatoren]]
+title: subtract Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">>: Einen Überblick gibt es dazu auch in [ext[Mathematik-Operatoren|https://tiddlywiki.com/#Mathematics%20Operators]].

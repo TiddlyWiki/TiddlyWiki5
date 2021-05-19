@@ -1,0 +1,15 @@
+created: 20200526195151258
+creator: FBB
+modified: 20210519132101511
+modifier: FBB
+tags: [[TiddlyWiki mit Node.js]]
+title: Installieren benutzerdefinierter Plugins unter Node.js
+type: text/vnd.tiddlywiki
+
+Bei der Verwendung von TiddlyWiki unter [[Node.js]] gibt es mehrere Möglichkeiten eigene, benutzerdefinierte [[Plugins]] ohne Verwendung der Plugin-Bibliothek zu installieren. (siehe auch: [[Installieren eines Plugins aus der Plugin-Bibliothek]])
+
+* Lege den [[Plugin-Ordner]], welcher die Plugins enthält, an einem geeigneten gemeinsamen Ort an und benutze dann [[Umgebungsvariablen|Umgebungsvariablen für Node.js]], um ~TiddlyWiki anzuweisen, diese Ordner zu durchsuchen. Die Plugins können in `tiddlywiki.info` über ihren Namen (z.B. ''tiddlytools/magic'') referenziert werden.
+* Erstelle den Plugin-Ordner, welcher die Plugins beinhaltet, in einem Unterordner `plugins` innerhalb des Wiki-Ordners
+* Je nachdem, wie ~TiddlyWiki selbst installiert wurde, können Plugins auch durch Kopieren der Plugin-Ordner in den `plugins`-Ordner des Repositorys installiert werden. Dies wird nur empfohlen, wenn man mit einer abgespaltenen Kopie des Repository arbeitet. Es wird nicht empfohlen, wenn ~TiddlyWiki mit //npm// installiert wurde, da //npm// die Installation bei einem Update überschreiben kann.
+
+Beachte, dass die Einbindung eines Plugins als gewöhnlicher [[Tiddler]] (z.B. durch Ziehen und Ablegen eines Plugins in den Browser) dazu führt, dass das Plugin nur im Browser aktiv ist und nicht unter Node.js verfügbar ist.

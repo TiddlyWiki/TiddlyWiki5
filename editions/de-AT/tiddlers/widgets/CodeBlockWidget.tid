@@ -1,0 +1,39 @@
+created: 20210428174720056
+creator: FBB
+modified: 20210519132101136
+modifier: FBB
+tags: Widgets
+title: CodeBlockWidget
+type: text/vnd.tiddlywiki
+
+Das <<.wid2 "~CodeBlock" "codeblock">>-Widget rendert Text in `<pre>` und `<code>`-Blöcken, so dass er in Monospace dargestellt wird. Eine Sprache kann optional über das Attribut <<.attr language>> angegeben werden, allerdings wird die Syntaxhervorhebung nur verwendet, wenn das [[Highlight Plugin]] installiert ist.
+
+! Inhalt und Attribute
+
+Alles zwischen den Tags des <<.wid2 "~CodeBlock" "codeblock">>-Widgets wird ignoriert.
+
+|!Attribute |!Beschriebung |
+|code |Text der als Code gerendert werden soll. |
+|language |Angabe der Programmiersprache für die Syntaxhervorhebung |
+
+Das Attribut <<.attr "language">> aktzeptiert einen der folgenden Werte:
+
+* einen Highlight.js-Sprachcode (z.B. <<.value "language-css">>, <<.value "language-markdown">> usw.)
+** siehe [ext[https://highlightjs.org/static/demo/]]
+* Einen MIME Typ (z.B, <<.value "text/html>> oder <<.value "image/svg+xml">>)
+
+! Beispiele
+
+Nachfolgend ein Beispiel für das Einbetten eines Tiddlers als Codeblock:
+
+<$macrocall $name='wikitext-example-without-html' src='<$codeblock code={{$:/_fbb/Macro/halloWelt}} />' />
+
+Hier ein weiteres Beispiel mit einer angegebenen Sprache:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$codeblock code="SELECT * FROM users WHERE deleted = false" language="sql" />' />
+
+
+<<.tipMacro """Das Plugin [[Highlight Plugin]] ist nicht installiert und kann deshalb die Syntax nicht hervorheben.""" "Hinweis" >>
+
+Siehe: <<wikidokulink "CodeBlockWidget">> (englisch)

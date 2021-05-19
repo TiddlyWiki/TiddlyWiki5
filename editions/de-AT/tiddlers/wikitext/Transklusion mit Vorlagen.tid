@@ -1,0 +1,64 @@
+chapter: 4
+created: 20200826202144196
+creator: FBB
+modified: 20210519132102220
+modifier: FBB
+tags: [[Transklusion in WikiText]]
+title: Transklusion mit Vorlagen
+type: text/vnd.tiddlywiki
+
+In [[Transklusion - grundlegende Verwendung]] wurde gezeigt wie Inhalte aus Tiddler EinsA in einen Anderen (z.B. EinsA1) eingebunden werden.
+
+```
+@@background-color:honeydew;
+Dieser ist der Tiddler {{!!title}} zum Testen...
+@@
+```
+
+Dadurch würde der Titel von EinsA mit einem gelben Hintergrund angezeigt (siehe [[Stil und CSS Klassen in WikiText]], um mehr über [[CSS Klassen]] zu erfahren). Jetzt kann man das, wie üblich per `{{EinsA}}` in den Tiddler ~EinsA1 einbinden. Folgendes ist dann in Tiddler EinsA1 zu sehen:
+
+
+<<<
+@@background-color:honeydew;
+Dieser ist der Tiddler {{EinsA!!title}} zum Testen....
+@@
+<<<
+
+Der Inhalt und der Stil wird erwartungsgemäß übernommen. Aber der Titel ist falsch!
+Wir wollten, dass `{{!!title}}` auf den Ziel-Tiddler ~EinsA1 verweist, und nicht auf den Quell-Tiddler ~EinsA.
+
+Die Lösung ist die Verwendung einer Vorlage, eines Templates. In diesem Fall wird der Quell-Tiddler ~EinsA als Template-Tiddler bezeichnet und mit der Notation `{{||EinsA}}` z.B. in dem Tiddler [[ZweiA]] angewendet:
+
+<<<
+@@background-color:honeydew;
+Dieser ist der Tiddler {{ZweiA!!title}} zum Testen....
+@@
+<<<
+
+! Verwendung
+
+Das Transkodieren über eine Vorlage ist wie das Anwenden einer vorgefertigten Maske: Angenommen, der Quell-Tiddler enthält allgemeine Referenzen (z.B. Name, Telefonnnummer, Mail), dann werden diese durch Feld-Werte aus dem Ziel-Tiddlers ersetzt. Vorrausgesetzt der Ziel-Tiddler enthält die in der Vorlage definierten Referenzen.
+
+Eine Vorlage kann auch auf einen anderen Tiddler als den aktuellen angewendet werden. Dazu muss die vollständige Schreibweise `{{<Ziel>||<Template>}}` verwendet werden.  
+
+Das Standard-`<Ziel>` ist der [[aktuelle Tiddler|Aktueller Tiddler]], deshalb kann die Angabe vor `||` weggelassen werden, wenn der Wert aus dem aktuellen Tiddler stammt.
+
+
+! Beispiel
+
+Eine vordefinierte Vorlage, um Tags ansprechend darzustellen.
+
+Du kannst die Systemvorlage `$:/core/ui/TagTemplate` auf ein Tag anwenden, um es als [[TiddlyWiki-Tag|Tags]] mit einem Dropdown-Menü zu sehen:
+
+`wird dargestellt als:  {{Transklusion in WikiText||$:/core/ui/TagTemplate}}`
+
+wird dargestellt als:  {{Transklusion in WikiText||$:/core/ui/TagTemplate}}
+
+Siehe auch:
+
+<<list-links filter:"[!is[system]regexp:title[Transklusion]!title[Transklusion mit Vorlagen]sortan[chapter]]" >>
+
+
+<<.hr>>
+
+Siehe <<wikidokulink "Transclusion with Templates">> (englisch)

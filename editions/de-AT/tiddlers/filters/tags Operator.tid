@@ -1,0 +1,15 @@
+caption: tags
+created: 20200611221630398
+creator: FBB
+modified: 20210519165330598
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: alle Tags, die in den Eingabe-Tiddlern enthalten sind
+op-parameter: keiner
+op-parameter-name: 
+op-purpose: alle Tags der Eingabe-Tiddler auswählen
+tags: Filter-Operator Tag-Operator
+title: tags Operator
+type: text/vnd.tiddlywiki
+
+Jeder eingegebene Titel wird der Reihe nach verarbeitet. Die entsprechenden Tiddler-Tags werden abgerufen (in der Reihenfolge ihres Erscheinens im Tags-Feld) und dann vorrangig an die Ausgabe des Operators angehängt.

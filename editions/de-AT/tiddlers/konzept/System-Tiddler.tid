@@ -1,0 +1,15 @@
+created: 20201029194819751
+creator: FBB
+modified: 20210519132102015
+modifier: FBB
+tags: Konzept
+title: System-Tiddler
+type: text/vnd.tiddlywiki
+
+Tiddler werden als System-Tiddler klassifiziert, wenn ihr Titel mit der speziellen Zeichenfolge `$:/` beginnt. Der einzige Unterschied zu gewöhnlichen Tiddlern besteht darin, dass sie vor den meisten Suchvorgängen und Listen in der Seitenleiste verborgen sind. Sie werden aber in der Seitenleiste unter dem Tab "[[Mehr/System|$:/core/ui/MoreSideBar/System]]" aufgelistet.
+
+System-Tiddler bieten eine einfache Möglichkeit, die internen Komponenten von TiddlyWiki zu verstecken, so dass sie nicht alles durcheinander bringen und den Inhalten der Benutzer im Weg stehen.
+
+Viele der System-Tiddler folgen der Konvention, weitere Schrägstriche zur Abgrenzung der Bestandteile des Titels zu verwenden. Das ist auch beim [[Controll-Panel|$:/ControlPanel]] und seinen Unterseiten so z.B. `$:/tags/ControlPanel/Advanced`
+
+Man braucht keine eigenen System-Tiddlers zu erstellen, aber es kann beim Anpassen von ~TiddlyWiki sehr nützlich sein. Wenn man zum Beispiel eine benutzerdefinierte Palette erstellt, könnte man sie `$:/_MyPalette` nennen, so dass sie vor Suchvorgängen und Listen verborgen ist. Ein Unterstrich `_` nach `$:/`, hat den Vorteil, dass der Tiddler in der System-Tiddler-Liste ganz oben angezeigt wird. In der Community wird sich diese Konvention wahrscheinlich für "Benutzerdefinierte  System-Tiddler" durchsetzen.

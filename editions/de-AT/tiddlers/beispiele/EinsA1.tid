@@ -1,8 +1,11 @@
 created: 20140923233101666
 creator: pmario
-modified: 20140923233117394
-modifier: pmario
+modified: 20210519132100115
+modifier: FBB
 tags: EinsA
 title: EinsA1
 type: text/vnd.tiddlywiki
 
+Hier wird der Tiddler EinsA [[transkludiert|Transklusion in WikiText]]
+
+{{EinsA}}

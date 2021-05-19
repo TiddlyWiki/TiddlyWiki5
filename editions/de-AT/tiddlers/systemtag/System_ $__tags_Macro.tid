@@ -1,0 +1,11 @@
+caption: $:/tags/Macro
+created: 20201104221411339
+creator: FBB
+description: markiert globale Makros
+modified: 20210519132102061
+modifier: FBB
+tags: SystemTags
+title: System: $:/tags/Macro
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.

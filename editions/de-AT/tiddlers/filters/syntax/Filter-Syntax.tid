@@ -1,0 +1,22 @@
+created: 20200615204616385
+creator: FBB
+list: Filter-Ausdruck Filter-Parameter Filter-Schritt Leerzeichen-Filter Filter-Durchlauf
+modified: 20210519132101310
+modifier: FBB
+tags: Filter
+title: Filter-Syntax
+type: text/vnd.tiddlywiki
+
+|Die [[Filter]] folgen einer speziellen Grammatik. Für alle die eine formale [[Syntaxbeschreibung|Einführung in die Filternotation]] hilfreich finden, werden diese auch anhand von [[Railroad-Diagrammen|Railroad-Diagramm]] dargestellt. |
+
+Jedoch kann jeder lernen, Filter zu schreiben, ohne diese Art von Tiddlern verstehen zu müssen.
+
+Ein ''Filter'' ist eine Pipeline zur Umwandlung einer ''Eingabe'' (//input//) in eine ''Ausgabe'' (//output//). Sowohl die Eingabe als auch die Ausgabe sind geordnete Mengen von Titeln von Objekten wie Tiddler und Felder.
+
+Filter sind [[Ausdrücke|Filter-Ausdruck]], die aus kleineren Bausteinen, sogenannten [[Läufen|Filter-Durchlauf]] und [[Schritten|Filter-Schritt]], aufgebaut sind, von denen jeder auch eine Eingabe in eine Ausgabe transformiert.
+
+Ein Filter beginnt mit einer leeren Ausgabe. Seine Durchläufe werden von links nach rechts abgearbeitet, wobei die Ausgabe nach und nach modifiziert wird.
+
+Hier finden Sie Einzelheiten zu den verschiedenen Bausteinen:
+
+<<list-links "[tag[Filter-Syntax]]">>

@@ -1,0 +1,20 @@
+caption: untagged
+created: 20200619202913862
+creator: FBB
+modified: 20210519165321679
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-neg-output: all Eingabe-Tiddlers, die mindestens ein Tag haben
+op-output: alle Eingabe-Tiddler, die keine Tags haben
+op-parameter: keiner
+op-parameter-name: 
+op-purpose: alle Eingabe-Tiddler verwerfen, die Tags haben
+tags: Filter-Operator Tag-Operator Negierbarer-Operator
+title: untagged Operator
+type: text/vnd.tiddlywiki
+
+Ein Tiddler gilt als nicht getaggt, wenn:
+
+* er nicht existiert.
+* er kein `tags` Feld hat.
+* das `tags` Feld leer ist.

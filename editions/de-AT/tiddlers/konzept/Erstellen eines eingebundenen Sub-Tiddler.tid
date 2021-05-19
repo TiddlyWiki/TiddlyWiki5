@@ -1,0 +1,49 @@
+created: 20200813202250521
+creator: FBB
+modified: 20210519132101216
+modifier: FBB
+tags: Konzept
+title: Erstellen eines eingebundenen Sub-Tiddler
+type: text/vnd.tiddlywiki
+
+Dieses Beispiel zeigt, wie man einen vom Inhalt des Tiddlers unabhängigen Sub-Tiddler erstellt. Dieser Sub-Tiddler wird erst eingebunden wenn man auf einen entsprechenden Link klickt. Der Inhalt lässt sich auch wieder ausblenden.
+
+Der transkludierte Tiddler benötigt keine Schlagwörter oder Tags, da dieser immer mit dem Haupt-Tiddler angezeigt wird.
+
+!!! Beispielcode
+
+```
+<$navigator story="MySubStoryList" history="MySubHistoryList">
+
+  Klicke auf diesen [[Link|HelloThere]], um den Sub-Tiddler "[[Wilkommen (HelloThere)|HelloThere]]" anzuzeigen.
+
+  <$list filter="[list[MySubStoryList]]" history="MySubHistoryList">
+  <hr/>
+   <div >
+    <$button message="tm-close-tiddler" class="tc-btn-invisible" >
+       {{$:/core/images/close-button}}
+    </$button> <$view field="title"/>
+    <$transclude/>
+  </div>
+</$list>
+
+</$navigator>
+```
+
+!!! Beispiel aus obigen Code
+
+<$navigator story="MySubStoryList" history="MySubHistoryList">
+
+Klicke auf diesen [[Link|HelloThere]], um den Sub-Tiddler "[[Wilkommen (HelloThere)|HelloThere]]" anzuzeigen.
+
+<$list filter="[list[MySubStoryList]]" history="MySubHistoryList">
+<hr/>
+<div >
+
+!! <$button message="tm-close-tiddler" class="tc-btn-invisible" >{{$:/core/images/close-button}}</$button> <$view field="title"/>
+
+<$transclude/>
+</div>
+</$list>
+
+</$navigator>

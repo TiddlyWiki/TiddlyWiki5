@@ -1,0 +1,17 @@
+created: 20201111203912889
+creator: FBB
+keywords: Geschichtenfluss, Story-Liste, Story, Story River, Hauptstory
+list: [[storyTiddler Variable]] tv-story-list tv-history-list
+modified: 20210519132101991
+modifier: FBB
+tags: Lexikon
+title: Story River
+type: text/vnd.tiddlywiki
+
+Mit dem englischen Begriff ''Story River'' (manchmal abgekürzt als "Story") wird die Abfolge von [[Tiddlern|Tiddler]] in der Hauptspalte der TiddlyWiki-Seite bezeichnet.
+
+!!! siehe auch:
+
+<<list-links-draggable tiddler:"Story River">>
+
+<p>@@display:none;{{!!keywords}}@@</p>

@@ -1,0 +1,14 @@
+created: 20201120224545704
+creator: FBB
+modified: 20210519132101948
+modifier: FBB
+tags: Lexikon
+title: Scalable Vector Graphics
+type: text/vnd.tiddlywiki
+
+<<<
+Scalable Vector Graphics (kurz auch SVG), englisch für skalierbare Vektorgrafik, ist die vom World Wide Web Consortium (W3C) empfohlene Spezifikation zur Beschreibung zweidimensionaler Vektorgrafiken.
+
+Der [[MIME-Typ|MIME-Type]] ist `image/svg+xml`
+
+<<< Quelle: [ext[https://de.wikipedia.org/wiki/Scalable_Vector_Graphics]]

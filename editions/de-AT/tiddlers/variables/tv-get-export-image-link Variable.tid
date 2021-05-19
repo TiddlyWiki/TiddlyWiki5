@@ -1,0 +1,19 @@
+created: 20201028211320926
+creator: FBB
+modified: 20210519132102250
+modifier: FBB
+tags: [[Core Variablen]] [[Konfigurations Variablen]] Variablen
+title: tv-get-export-image-link Variable
+type: text/vnd.tiddlywiki
+
+Die Variable <<.var tv-get-export-image-link>> steuert den Wert des <<.attr src>>-Attributs auf dem [[HTML|HyperText Markup Language]] `img`-Element, das vom <<.wid Image>>-Widget generiert wird, wenn der Wert seines <<.attr source>>-Attributs nicht der Titel eines Tiddlers ist.
+
+Die Variable wird behandelt, als wäre sie ein [[Makro]] mit den folgenden Parametern:
+
+; src
+: Der Wert des <<.attr source>>-Attributes -- entspricht dem in der [[Kurzschrift-Syntax|Bilder in WikiText]] angegebenen Bildnamen `[[img[source]]`
+
+Die Möglichkeit, Bild-URIs auf diese Weise zu überschreiben, kann nützlich sein, wenn man die [[Konfiguration Node.js|TiddlyWiki mit Node.js]] verwendet, um eine statische Version eines Wikis zu exportieren.
+
+<<.hr>>
+siehe Beispiel: [ext[https://tiddlywiki.com/#tv-get-export-image-link Variable (Examples)]]

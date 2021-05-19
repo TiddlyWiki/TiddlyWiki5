@@ -1,0 +1,11 @@
+caption: $:/tags/MoreSideBar
+created: 20201125215501416
+creator: FBB
+description: markiert die Tabs im Seitenleisten-Tab <$button style="padding:0px 0px;line-height: 0.8;"><$action-navigate $to="$:/core/ui/SideBar/More"/>Mehr</$button>
+modified: 20210519132102065
+modifier: FBB
+tags: SystemTags
+title: System: $:/tags/MoreSideBar
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.

@@ -1,9 +1,38 @@
 created: 20140913185748692
 creator: pmario
-modified: 20140913185818163
-modifier: pmario
+modified: 20210519132100275
+modifier: FBB
 tags: Widgets
 title: ImageWidget
 type: text/vnd.tiddlywiki
 
-Siehe: https://tiddlywiki.com/#ImageWidget
+!! Einleitung
+
+Das <<.wid Image>>-Widget kann Bilder anzeigen. Dazu kann entweder eine externe [[URL]] angegeben werden oder ein Tiddler-Titel welcher das Bild enthält.
+
+!! Inhalte und Attribute
+
+Alle Inhalte außer das <<.wid Image>>-Widget wird ignoriert.
+
+|Attribute |Beschreibung |h
+|source |Die [[URL]] des Bildes oder der Titel eines Bild-Tiddlers. |
+|width |Die Breite des Bildes |
+|height |Die Höhe des Bildes |
+|tooltip |Der Tooltipp für das Bild (bei mouseover) |
+|alt |Alternativer Text, falls das Bild nicht angezeigt werden kann. |
+|class |Der Name der [[CSS|Stylesheet]]-Klasse für das `<img>` Element |
+
+Die Breite und die Höhe können als Pixelwerte (z.B. "23" oder "23px") oder Prozentwerte (z.B. "23%") angegeben werden. Beide Angaben sind optional. Wenn sie nicht angegeben werden, verwendet der Browser die Standard CSS-Regeln für die Größe des Bildes.
+
+!! Externe Bilder und das <<.var _canonical_uri>>-Feld
+
+Wenn das <<.wid Image>>-Widget zur Anzeige von Tiddler-basierten Bildern verwendet wird, arbeitet es in zwei verschiedenen Modi:
+
+* Wenn das <<.var _canonical_uri>>-Feld vorhanden ist, wird es als <<.var src>>-Attribut des generierten <<.attr img>>-Elements verwendet und das Textfeld wird ignoriert.
+* Ohne das <<.var _canonical_uri>>-Feld erzeugt das Bildwidget ein <<.attr img>>-Element, das die Bilddaten direkt über die <<.attr data:>>-URI einbettet.
+
+Siehe [[Externe Bilder]] für weitere Details.
+
+<<.hr>>
+
+Siehe: <<wikidokulink "~ImageWidget">> (englisch)

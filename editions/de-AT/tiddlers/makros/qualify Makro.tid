@@ -1,0 +1,24 @@
+created: 20200906205420037
+creator: FBB
+modified: 20210519132101884
+modifier: FBB
+tags: [[Core Makros]] Makros
+title: qualify Makro
+type: text/vnd.tiddlywiki
+
+Das Makro qualify ist ein wichtiger Bestandteil des [[Status-Mechanismus]]. Es gibt eine eindeutige Zeichenkette zurück, die seine Position innerhalb der transkludierten Tiddler (Transklusionsstapel) enthält.
+
+Für die Implementierung wird die Variable  <<.vlink transclusion>> verwendet.
+
+!! Parameter
+
+|Attribut |Beschreibung |h
+|''title'' |Das Präfix für die zurückgegebene Zeichenkette, normalerweise ein Tiddler-Titel. |
+
+!! Beispiel
+
+* [[qualify Macro (Beispiel)]]
+
+<<.hr>>
+
+Link: <<wikidokulink "qualify Macro">> (englisch)

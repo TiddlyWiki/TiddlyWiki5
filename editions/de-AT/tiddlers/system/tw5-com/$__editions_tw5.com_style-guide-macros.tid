@@ -1,0 +1,24 @@
+created: 20210519154802862
+creator: pmario
+modified: 20210519154826621
+modifier: pmario
+tags: $:/tags/Macro
+title: $:/editions/tw5.com/style-guide-macros
+type: text/vnd.tiddlywiki
+
+\define style-guide(good,bad)
+<table>
+<tbody>
+<tr>
+<th>Good</th>
+<td>``$good$``</td>
+</tr>
+<tr>
+<th>Bad</th>
+<td>``$bad$``</td>
+</tr>
+</tbody>
+</table>
+\end
+
+<pre><code><$view /></code></pre>

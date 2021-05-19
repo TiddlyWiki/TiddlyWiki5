@@ -1,0 +1,15 @@
+caption: links
+created: 20200615203031074
+creator: FBB
+modified: 20210519165011176
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: die Titel, zu denen die Eingabe-Tiddler [[Hard-Links|Hard- und Soft-Links]] enthalten
+op-parameter: keiner
+op-parameter-name: 
+op-purpose: die Titel finden, auf welche die einzelnen Eingabe-Titel verweisen
+tags: Filter-Operator Common-Operator
+title: links Operator
+type: text/vnd.tiddlywiki
+
+Jeder eingegebene Titel wird der Reihe nach verarbeitet. Die entsprechende Tiddler-Liste der Links wird in der Reihenfolge, in der sie im Text des Tiddlers erscheinen, generiert und vorrangig an die Gesamtausgabe des Operators angehängt.

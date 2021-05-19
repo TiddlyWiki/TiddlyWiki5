@@ -1,0 +1,25 @@
+created: 20200928210050014
+creator: FBB
+modified: 20210519132102237
+modifier: FBB
+tags: Variablen [[Core Variablen]] [[Konfigurations Variablen]]
+title: tv-config-toolbar-icons Variable
+type: text/vnd.tiddlywiki
+
+Die Variable <<.var tv-config-toolbar-icons>> steuert, ob die Schaltflächen in der Symbolleiste Symbole anzeigen.
+
+
+Sie kann auf <<.value yes>> oder <<.value no>> gesetzt werden, //bevor// eine solche Schaltfläche betätigt wird.
+
+!!! Beispiel:
+```
+<$set name="tv-config-toolbar-icons" value="yes">
+   {{$:/core/ui/Buttons/new-tiddler}}
+</$set>
+```
+
+Die Standardseitenvorlage setzt sie auf den Wert, der in [[$:/config/Toolbar/Icons]] zu finden ist, mit dem Ergebnis, dass dies der Standard für die gesamte Seite wird. Der Benutzer kann diesen Standard anpassen, indem er ein Ankreuzfeld im [[$:/ControlPanel]] auf der Registerkarte Einstellungen im Abschnitt [[Toolbar Buttons|$:/core/ui/ControlPanel/Settings/ToolbarButtons]] wählt.
+
+<<.hr>>
+
+siehe auch; [[tv-config-toolbar-text|tv-config-toolbar-text Variable]]

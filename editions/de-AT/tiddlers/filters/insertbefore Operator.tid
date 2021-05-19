@@ -1,0 +1,16 @@
+caption: insertbefore
+created: 20200609224834788
+creator: FBB
+modified: 20210519165630713
+modifier: FBB
+op-input: selektierte Titel
+op-output: die eingegebene Tiddler-Liste mit dem neu eingefügten Eintrag
+op-parameter: der Titel des einzufügenden Tiddlers
+op-parameter-name: A
+op-purpose: eine Element A in eine Liste unmittelbar vor einem Element B einfügen
+op-suffix: ''//B//'' = der Name der Variablen, die den Titel des Tiddlers enthält, vor dem dieser eingefügt werden soll
+tags: Listen-Filter-Operator Sortier-Operator Filter-Operator
+title: insertbefore Operator
+type: text/vnd.tiddlywiki
+
+Wenn das Element B nicht in der Eingabeliste vorhanden ist, wird das neue Element am Ende der Liste eingefügt.

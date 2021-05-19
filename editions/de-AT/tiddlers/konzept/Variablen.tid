@@ -1,0 +1,27 @@
+created: 20200813212746586
+creator: FBB
+modified: 20210519132102316
+modifier: FBB
+tags: Konzept Referenz
+title: Variablen
+type: text/vnd.tiddlywiki
+
+Eine Variable ist ein Code-Abschnitt, auf den innerhalb eines bestimmten Zweiges des Widget-Baums über den Namen zugegriffen werden kann. Das Einbinden des Variablennamen in einen Text oder Makro gibt an dieser Stelle den Wert der Variable zurück.
+
+Eine neue Variable wird mit Hilfe eines <<.wid Set >> definiert und steht dann allen Kindern dieses Widgets zur Verfügung, einschließlich des übertragenen Inhalts.
+
+Ein <<.wid Set>> kann einen bestehenden Namen wiederverwenden und so für die Dauer der Kinder des Widgets ein anderes Element an diesen Namen binden.
+
+Das <<.wid List>> setzt auch eine bestimmte Variable (standardmäßig [[currentTiddler|currentTiddler Variable]]) nacheinander auf jeden aufgelisteten Titel.
+
+Einen Überblick über die Verwendung von Variablen liefert [[Variablen in WikiText]].
+
+Trotz des Begriffs "Variable" ist jedes Snippet eine konstante Zeichenfolge. Die scheinbare Variabilität ist in Wirklichkeit das Ergebnis des Vorhandenseins mehrerer Variablen mit demselben Namen in verschiedenen Teilen des Widget-Baums.
+
+[[Makros]] sind eine spezielle Form von Variablen, deren Wert Platzhalter enthalten kann, die immer dann mit Parametern ausgefüllt werden, wenn das Makro verwendet wird.
+
+Das Snippet selbst wird nicht als WikiText geparst. Eine Variablenreferenz schließt jedoch ein Snippet in einen Kontext ein, in dem das parsen von ~WikiText stattfinden kann. Innerhalb eines Snippets wird nur die Markierung `$name$` für eine Makroparameter-Transklusion und `$(name)$` für eine Variablen-Transklusion erkannt.
+
+Das [[dumpvariables Makro]] listet alle Variablen (einschließlich Makros) auf, die an dieser Stelle im Widgetbaum verfügbar sind.
+
+In TiddlyWiki sind im Core bereits [[mehrere Variablen|Core Variablen]] integriert.

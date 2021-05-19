@@ -1,0 +1,43 @@
+author: FBB
+created: 20200428191050680
+creator: FBB
+modified: 20210519132100370
+modifier: FBB
+tags: InhaltsVerzeichnis
+title: Makros
+type: text/vnd.tiddlywiki
+
+Ein [[Makro]] ist eine zusammengefasste Folge von Anweisungen oder Deklarationen. [[Makros]] in
+WikiText können den Namen als Kurzform für die Einbindung solch eines Snippets verwenden.
+
+Solche Snippets werden als Makroaufrufe bezeichnet, und bei jedem Aufruf kann ein anderen Satz von Parametern übergeben werden, die durch spezielle Platzhalter innerhalb des Snippets ersetzt werden.
+
+Für die Syntax siehe [[Makros in WikiText]].
+
+Die meisten Makros sind in Wirklichkeit nur parametrisierte [[Variablen]]
+
+Sie werden mit dem `\define` [[Pragma]] erstellt. (Hinter den Kulissen wird dieses in ein [[$set|SetWidget]] umgewandelt, d.h. Makros und Variablen sind zwei Seiten derselben Medaille)..
+
+Das Snippet und seine eingehenden Parameterwerte werden als einfache Zeichenketten ohne WikiText-Bedeutung behandelt, zumindest solange, bis die Platzhalter ausgefüllt sind und der Makroaufruf ausgeführt wurde.
+
+Das bedeutet, dass ein Makro die vollständige Syntax einer WikiText-Komponente, wie z.B. eines Links, zusammensetzen und zurückgeben kann. (Siehe [[Transklusion in WikiText]] für weitere Infos).
+
+Die von einem Makroaufruf zurückgegebene Zeichenfolge wird getrennt von allen umgebenden WikiText-Komponenten geparst. Ein sicherer Weg, eine spezielle Zeichenfolge (wie `[[` oder `<`) einzufügen, ohne ihre normale WikiText-Bedeutung auszulösen, besteht also darin, sie in einem Makro zu verpacken.
+
+Innerhalb eines Snippets selbst ist das einzige erkannte Markup `$name$` (ein Platzhalter für einen Makroparameter) und `$(name)$` (ein Platzhalter für eine Variable).
+
+Das Makro @@color:blue;font-weight:bold;&lt;<[[dumpvariables|dumpvariables Makro]]>>@@ listet alle Variablen (einschließlich Makros) auf, die an dieser Stelle im Widgetbaum verfügbar sind.
+
+Ein @@color:blue;''$importvariables-Widget''@@ kann verwendet werden, um Makrodefinitionen in einen anderen Zweig des Widgetbaums zu kopieren. TiddlyWiki verwendet diese Technik intern, um globale Makros zu implementieren - nämlich alle Makros, die in Tiddlers mit dem `$:/tags/Macro` definiert sind. (Das Tag `$:/tags/Macro/View` wird verwendet, um Makros zu definieren, die nur innerhalb der Hauptansichtsvorlage und des Vorschau-Panels verfügbar sein sollen).
+
+Für maximale Flexibilität können Makros auch als [[JavaScript-Module|https://tiddlywiki.com/dev/index.html#JavaScript%20Macros]] geschrieben werden.
+
+Ein ähnlicher Effekt wie ein parametrisierter Makroaufruf kann durch das Setzen von [[Variablen]] um eine [[Transklusion]] herum erzeugt werden.
+
+Der Kern von TiddlyWiki hat mehrere Makros integriert.
+
+Hier werden die globalen Makros aufgelistet, die in diesem Wiki beschrieben werden.
+
+<<list-links "[tag[Makros]]" >>
+
+Weitere Makros siehe: https://tiddlywiki.com/#Macros

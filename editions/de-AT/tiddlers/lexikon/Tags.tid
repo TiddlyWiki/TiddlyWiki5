@@ -1,6 +1,6 @@
 created: 20140908130640417
 creator: pmario
-modified: 20140921170557820
+modified: 20210519132100625
 modifier: pmario
 tags: Lexikon
 title: Tags
@@ -10,7 +10,7 @@ Als Tags werden Markierungen bezeichnet, die verwendet werden können um einzeln
 
 Zum Beispiel ist dieser Tiddler mit ''Lexikon'' "getaggt". Es gibt <$count filter="[tag[Lexikon]]"/> weitere Tiddler mit diesem Tag.
 
-Eine gekürzte Liste wird hier angezeigt mit: 
+Eine gekürzte Liste wird hier angezeigt mit:
 
 ```
 <<list-links filter:"[tag[Lexikon]limit[4]]">>

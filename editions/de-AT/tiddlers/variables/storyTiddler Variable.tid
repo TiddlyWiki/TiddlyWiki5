@@ -1,0 +1,17 @@
+created: 20200831211201818
+creator: FBB
+modified: 20210519132101996
+modifier: FBB
+tags: Variablen [[Core Variablen]]
+title: storyTiddler Variable
+type: text/vnd.tiddlywiki
+
+Wenn ein Tiddler angezeigt oder bearbeitet wird, dann enthält die [[Variable|Variablen]] <<.def storyTiddler >> in seinem Zweig des [[Widget-Baums|Widgets]] den Titel dieses Tiddlers.
+
+Das standardmäßige [[Ansichts-Template|$:/core/ui/ViewTemplate]] und das [[Bearbeitungs-Template|$:/core/ui/EditTemplate]] initialisieren die Variable <<.var storyTiddler>> mit dem Wert der Variablen <<.var currentTiddler>>. Dies wiederum wird vom <<.wid List>> Widget im entsprechenden [[Teil des Seiten-Templates|$:/core/ui/PageTemplate/story]] festgelegt.
+
+<<.var storyTiddler>> ist außerhalb der Story undefiniert, z.B. in der Seitenleiste.
+
+<<.hr>>
+
+siehe Beispiel: [ext[https://tiddlywiki.com/#storyTiddler Variable (Examples)]]

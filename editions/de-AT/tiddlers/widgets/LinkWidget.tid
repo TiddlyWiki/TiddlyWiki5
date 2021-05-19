@@ -1,9 +1,88 @@
 created: 20140913133329379
 creator: pmario
-modified: 20140913133404164
-modifier: pmario
-tags: Lexikon
+modified: 20210519132100330
+modifier: FBB
+tags: Widgets
 title: LinkWidget
 type: text/vnd.tiddlywiki
 
-Siehe: https://tiddlywiki.com/#LinkWidget
+Das <<.wid Link>>-Widget erzeugt Links zu Tiddlern. (Verwende das HTML `<a>`-Element, um externe Links zu erzeugen).
+
+! Inhalt und Attribute
+
+Der Inhalt des <<.wid Link>>-Widgets wird innerhalb des `<a>`-Tags gerendert, welches den Link darstellt. Wenn der Inhalt leer ist, wird als Standard der Titel des Ziel-Tiddlers gerendert, zum Beispiel:
+
+* `<$link/>` ist das gleiche wie `<$link to=<<currentTiddler>>><$view field="title"/></$link>`
+* ``<$link to="HelloThere"/>`` ist das gleiche wie ``<$link to="HelloThere">HelloThere</$link>``
+
+|!Attribute |!Beschreibung |
+|to |Der Titel des Ziel-Tiddlers für den Link (Standardwert ist der [[aktuelle Tiddler|Aktueller Tiddler]]) |
+|aria-label |Optionales Barrierefreiheits-Label |
+|tooltip |Optionaler WikiText Tooltip |
+|tabindex |Optionaler numerischer [[Tabindex|https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex]] |
+|draggable |"yes", damit der Link verschiebbar ist (Standardwert ist "yes") |
+|tag |Optionales Tag zum Überschreiben des Standardelements "a". |
+|class|Optionale [[CSS Klassen]] //zusätzlich zu// den Standardklassen (siehe unten) |
+|overrideClass|<<.fromVersion "5.1.16">> Optionale CSS Klassen //anstelle der// Standardklassen |
+
+Die Draggable-Funktionalität ist äquivalent zur Verwendung des <<.wid Draggable>>-Widget mit dem Tiddler-Attribut, das auf das Link-Ziel gesetzt ist.
+
+Der Standardwert des Tooltip-Attributs wird von der Variable <<.vlink tv-wikilink-tooltip>> geliefert.
+
+Das bedeutet, dass Sie den Text eines Link-Tooltips auf mehrere Arten steuern können:
+
+<<wikitext-example-without-html """* <$link to="HelloThere" tooltip="Benutzerdefinierter Tooltip">Link 1 (Quikinfo Benutzerdefiniert)</$link>
+
+* <$link to="HelloThere" tooltip="andere Quickinfo">{{$:/core/icon}}</$link>
+
+* <$set name="tv-wikilink-tooltip" value="Ein Link zu {{!!title}}">
+  <$link to="WikiText">Link 2 (Quickinfo mit Zielname)</$link>
+  </$set>
+""">>
+
+Beachte, dass der Tooltip mit dem aktuellen Tiddler gerendert wird, welcher auf das Ziel des Links eingestellt ist.
+
+Eine sinnvolle Vorgehensweise ist es, den Tooltip wie folgt zu setzen:
+
+```
+\define tv-wikilink-tooltip()
+<$transclude field="tooltip"><$transclude field="title"/></$transclude>
+\end
+```
+
+Dies bewirkt, dass der ''Tooltip'' das Tooltip-Feld des Ziel-Tiddlers ist. Wenn das Feld nicht vorhanden ist, dann wird stattdessen der Titel verwendet.
+
+! CSS Klassen
+
+Das <<.wlink $~LinkCatcher>>-Widget bestimmt automatisch die folgenden Klassen und wendet sie auf Links an:
+
+ * `tc-tiddlylink` - wird auf alle Links angewendet
+ * `tc-tiddlylink-external` - wird auf externe Links angewendet, auf Nicht-Tiddler-Links
+ * `tc-tiddlylink-internal` - wird auf Tiddler-Links angewendet
+ * `tc-tiddlylink-missing` - wird angewendet auf Tiddler-Links, bei denen der Ziel-Tiddler nicht existiert
+ * `tc-tiddlylink-resolves` - wird angewendet auf Tiddler-Links, bei denen der Ziel-Tiddler vorhanden ist
+
+Verwende das Attribut <<.attr 'claas'>>, um zusätzliche CSS-Klassen anzugeben, oder `overrideClass`, um mit dieser die Standardwerte zu überschreiben. Im folgenden Beispiel wird das bei der Verwendung im <$link to="LinkCatcherWidget" overrideClass="doc-widget">$linkcatcher</$link>-Widget ersichtlich:
+
+<<wikitext-example-without-html """*<$link class="example">Hier</$link> wurde eine Klasse `example`  hinzugefügt.
+*<$link overrideClass="doc-var">Hier</$link> werden alle vorhandenen Klassen mit `doc-var` überschrieben.
+*<$link overrideClass="">Hier</$link> wurde __keine__ Klasse angegeben.
+""">>
+
+! `href` Erzeugung
+
+Der folgende Prozess wird benutzt, um das `href`-Attribut des generierten HTML `<a>`-Elements zu erstellen:
+
+# Wenn die Variable <<.vlink tv-get-export-link>> definiert ist, wird sie aufgerufen, um den Titel des Ziel-Tiddlers in das `href`-Attribut umzuwandeln
+#* In der Praxis wird nur ein [[JavaScript-Makro|Makros]] verwendet
+# <<.fromVersion "5.1.15">> Wenn die Variable <<.vlink tv-filter-export-link>> definiert ist, wird diese als Filter interpretiert, welcher den Ziel-Tiddler-Titel in das `href`-Attribut umwandelt.
+# Wenn <<.vlink tv-wikilink-template>> definiert ist, wird es als ein besonderes Makro behandelt, das eine begrenzte Konvertierung des Ziel-Tiddler-Titels in das `href`-Attribut durchführt.
+#Andernfalls wird der Titel des Ziel-Tiddlers URI-kodiert, um das `href`-Attribut zu erzeugen.
+
+! Konfigurations Variablen
+
+<<list-links "[tag[Konfigurations Variablen]search[link]sort[title]]">>
+
+<<.hr>>
+
+Siehe: <<wikidokulink "~LinkWidget">> (englisch)

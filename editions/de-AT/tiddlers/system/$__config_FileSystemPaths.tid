@@ -1,0 +1,14 @@
+created: 20210519182110915
+modified: 20210519183152081
+title: $:/config/FileSystemPaths
+type: text/vnd.tiddlywiki
+
+[tag[WikiText]addprefix[wikitext/]]
+[tag[Makros]addprefix[makros/]]
+[tag[maintainer]addprefix[maintainer/]]
+[tag[Funktionalität]addprefix[funktionalitaet/]]
+[tag[Konzept]addprefix[konzept/]]
+[tag[InhaltsVerzeichnis]addprefix[InhaltsVerzeichnis/]]
+[tag[Widgets]addprefix[widgets/]]
+[tag[Was kann TiddlyWiki]addprefix[was-kann-TiddlyWiki/]]
+

@@ -1,0 +1,18 @@
+created: 20200915201741894
+creator: FBB
+list: $:/_fbb/Macro/bildMacro
+modified: 20210519134431356
+modifier: FBB
+tags: TODO
+title: Beispiel bildMacro
+type: text/vnd.tiddlywiki
+
+<div>
+<<.bildMacro "Danboo0070.png" "./MediaZuWiki/Doku/" "" "200px">>
+</div>
+
+[[» Danboo0070.png|$:/fbb/Danboo0070.png]]
+
+-------
+
+TODO: I did remove the image, because it links to a 3rd party URL, which is problematic in several ways. .. We can host an example image from GitHub subdirectory if we want.

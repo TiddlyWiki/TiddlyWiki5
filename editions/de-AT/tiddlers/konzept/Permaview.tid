@@ -1,18 +1,18 @@
 created: 20150518133536781
-modified: 20150518141004463
+modified: 20210519132100426
 tags: Konzept
 title: Permaview
 type: text/vnd.tiddlywiki
 
-Sollen mehrere Tiddler mit einem Link geöffnet werden, dann wird dieses Konzept in TW als Permaview bezeichnet. 
+Sollen mehrere Tiddler mit einem Link geöffnet werden, dann wird dieses Konzept in TW als Permaview bezeichnet.
 
-Ein Permaview hat folgendes Fromat: `URL/#ZielTiddler:[[Liste mit mehreren]] Tiddlern` 
+Ein Permaview hat folgendes Fromat: `URL/#ZielTiddler:[[Liste mit mehreren]] Tiddlern`
 
  * URL/
  * `#`
  * ~ZielTiddler Titel
  * `:`
- * Liste mit Story (weitere Tiddler) 
+ * Liste mit Story (weitere Tiddler)
 
 Beispiel:
 
@@ -33,6 +33,6 @@ Es ist ebenfalls möglich eine Story über eine Tag-Liste als Filter aufzurufen.
 
 Bei der Anzeige / Verwendung von URLs gibt es ein paar technische Einschränkungen. Manche Browser können zB Leerzeichen nicht verarbeiten. Deshalb werden diese als `%20` dargestellt. Siehe erstes Beispiel.
 
-Eben so sind eckige Klammern nicht vorgesehen. Diese werden in `%5b` für `[` und `%5d` für `]` umgewandelt. Aber keine Sorge. Wenn sie eine URL mit "copy/paste" aus dem Browser einfügen, dann werden diese Änderungen automatisch vorgenommen. Die Permalink und Permaview Buttons im Tiddler Menü erzeugen auch kompatible links. 
+Eben so sind eckige Klammern nicht vorgesehen. Diese werden in `%5b` für `[` und `%5d` für `]` umgewandelt. Aber keine Sorge. Wenn sie eine URL mit "copy/paste" aus dem Browser einfügen, dann werden diese Änderungen automatisch vorgenommen. Die Permalink und Permaview Buttons im Tiddler Menü erzeugen auch kompatible links.
 
 Beide, der Ziel-Tiddler und die Story-Tiddler sollten URL-codiert sein. Diese Links sind zwar nicht unbedingt schön, aber nötig, um die Funktion zu gewährleisten. Aktuelle Browser zeigen in der Adressleiste dann wieder "schöne" Link an.

@@ -1,0 +1,16 @@
+created: 20201026215232564
+creator: FBB
+modified: 20210519132102259
+modifier: FBB
+tags: [[Core Variablen]] Variablen [[Konfigurations Variablen]]
+title: tv-get-export-path Variable
+type: text/vnd.tiddlywiki
+
+Die [[Variable]] <<.var "tv-get-export-path">> gibt den vollständigen Pfadnamen des Ordners an, in den der [[Node.js]] Befehl `--rendertiddlers` jeden Tiddler schreibt.
+
+Die Variable muss als [[JavaScript]]-Makro mit dem folgenden Parameter implementiert werden:
+
+; title
+: Der Titel des Tiddlers
+
+Wenn kein solches Makro vorhanden ist, werden die Tiddlers in Dateien geschrieben, deren Namen [[prozentual kodiert|URL-Encoding]] sind, und zwar im Ausgabeordner des Befehls. 

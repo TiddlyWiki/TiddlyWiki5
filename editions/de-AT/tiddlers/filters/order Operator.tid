@@ -1,0 +1,15 @@
+caption: order
+created: 20200611215505819
+creator: FBB
+modified: 20210519165744352
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: die Eingabe, wobei die Reihenfolge umgekehrt wird, wenn Parameter ''//{{!!op-parameter-name}}//'' der spezielle Wert `reverse` ist
+op-parameter: Entweder die Zeichenfolge `reverse` oder ein anderer Wert
+op-parameter-name: F
+op-purpose: selektive Umkehrung der Eingabeliste
+tags: Sortier-Operator Filter-Operator Feld-Operator Common-Operator
+title: order Operator
+type: text/vnd.tiddlywiki
+
+Die Reihenfolge der Eingabeliste wird entweder umgekehrt oder beibehalten, je nachdem, ob es sich bei dem Parameter um den speziellen Wert `reverse` handelt oder nicht.

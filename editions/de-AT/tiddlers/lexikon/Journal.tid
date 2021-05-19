@@ -1,0 +1,13 @@
+color: #ffffff
+created: 20201126200658992
+creator: FBB
+icon: $:/core/images/new-journal-button
+modified: 20210519132101531
+modifier: FBB
+tags: Lexikon
+title: Journal
+type: text/vnd.tiddlywiki
+
+Ein Journal ist quasi ein [[Tiddler]] als Tagebucheintrag. Beim [[Erstellen eines Journaleintrages|Erstellen und Bearbeiten von Journal-Tiddlern]] wird der Titel automatisch mit einem definiertem Text und dem aktuellem Zeitstempel befüllt (z.B. ''{{$:/config/NewJournal/Title}}''). Zusätzlich kann auch immer ein vordefineirter Tag (z.B. ''{{!!title}}'') automatisch gesetzt werden.
+
+Die vorgegebene Titelzeile, der vordefinierte Tag und der Standardtext kann im [[ControlPanel|$:/ControlPanel]] angepasst werden.

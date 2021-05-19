@@ -1,0 +1,32 @@
+caption: all
+created: 20200610200353602
+creator: FBB
+modified: 20210519165208822
+modifier: FBB
+op-input: wird ignoriert, es sei denn, der Parameter ist leer
+op-output: die Titel, die zu allen angegebenen Kategorien gehören
+op-parameter: Keine oder mehrere Kategorien
+op-purpose: alle Titel einer grundlegenden Kategorie finden
+tags: Filter-Operator Common-Operator Auswahl-Konstruktor
+title: all Operator
+type: text/vnd.tiddlywiki
+
+Der Parameter gibt keine oder mehrere grundlegende Kategorien mit der folgenden Syntax an:
+
+<$railroad text="""
+[{: ("current" | "missing" |: "orphans" | "shadows" | "tags" | "tiddlers" ) +"+" }]
+"""/>
+
+|!Kategorie |!Mitglied von |!Sortiert |
+|^`current` |nur der [[Aktueller Tiddler]] |^-- |
+|^`missing` |alle nicht existierenden Tiddlers, zu denen es mindestens einen [[Hard Link|Hard- und Soft-Links]] gibt |^nein |
+|^`orphans` |alle Tiddlers, zu denen es <em>KEINE</em> harten Links gibt |^nach Titel |
+|^`shadows` |alle [[Schatten-Tiddler]], die es gibt. Einschließlich derer, die mit Nicht-Schatten-Tiddlern überschrieben wurden. |^nein |
+|^`tags` |alle Tags, die bei Nicht-Schatten-Tiddlern verwendet werden |nein |
+|^`tiddlers` |alle Nicht-Schatten-Tiddlers, die es gibt |nein |
+
+Wenn der Parameter mehr als eine Kategorie angibt, werden sie von links nach rechts abgearbeitet. Die Gesamtausgabe ist zunächst leer, und die Ausgabe jeder Kategorie wird der Reihe nach vorrangig an sie angehängt. Nicht erkannte Kategorien tragen nichts zur Ausgabe bei.
+
+Als Sonderfall, wenn der Parameter leer ist, ist die Ausgabe einfach eine Kopie der Eingabe. Dies kann nützlich sein, wenn der Parameter [[weich|Filter-Parameter]] ist.
+
+Der [[is Operator]] ist ähnlich, aber sein Anwendungsbereich ist auf den Input beschränkt.

@@ -1,0 +1,19 @@
+created: 20200525184141053
+creator: FBB
+modified: 20210519132101772
+modifier: FBB
+tags: Konzept InhaltsVerzeichnis
+title: Plugins
+type: text/vnd.tiddlywiki
+
+Plugins in ~TiddlyWiki5 können verwendet werden, um zusätzliche Komponenten zu verwenden, mit denen ~TiddlyWiki angepasst und erweitert werden kann. Diese lassen sich aus der offiziellen Plugin-Bibliothek oder von Community-Seiten installieren.
+
+{{$:/core/ui/ControlPanel/Plugins/AddPlugins}}
+
+Intern sind Plugins ein Bündel von Tiddlern, die zu einem einzigen Tiddler gebündelt sind und als Einheit installiert, kopiert oder gelöscht werden können. Die einzelnen Tiddlers innerhalb eines Plugins erscheinen als ShadowTiddler. Lese den Abschnitt zum [[Plugin-Mechanismus]], um mehr darüber zu erfahren, wie Plugins intern implementiert werden.
+
+Plugins können JavaScript-Module, Stylesheets und Vorlagen enthalten. Plugins können auch verwendet werden, um gewöhnlichen Text, Bilder oder andere Inhalte einzubinden.
+
+<<.hinweisMacro "Es gibt ein Plugin namens $:/core, das den Kerncode (Core) von ~TiddlyWiki enthält. Es ist immer vorhanden, und es ist die Quelle der Standard-[[ShadowTiddler]]. Man kann die Details dazu auf dem Control-Panel auf der Unter-Registerkarte Plugins sehen." "Hinweis" "note">>
+
+<<list-links "[tag[Plugins]]">>

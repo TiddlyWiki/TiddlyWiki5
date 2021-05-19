@@ -1,0 +1,11 @@
+caption: $:/tags/TiddlerInfo
+created: 20201119205826633
+creator: FBB
+description: markiert alle Tiddler die für die Darstellung des Infopanel aller Tiddler verantwortlich sind.
+modified: 20210519132102101
+modifier: FBB
+tags: SystemTags
+title: System: $:/tags/TiddlerInfo
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field  {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.

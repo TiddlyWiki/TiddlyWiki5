@@ -1,0 +1,45 @@
+created: 20200906203346323
+creator: FBB
+modified: 20210519132102212
+modifier: FBB
+tags: Variablen [[Core Variablen]]
+title: transclusion Variable
+type: text/vnd.tiddlywiki
+
+Die [[Variable|Variablen]] <<.var transclusion>> wird durch das <<.wid Transclude>>-Widget auf eine Zeichenfolge gesetzt, welche die Position dieses [[Widgets]] innerhalb des Widget-Baums identifiziert.
+
+Der Kern-Code von TiddlyWiki verwendet sie, um rekursive Tranklusion zu erkennen. Er wird auch verwendet, um das [[qualify Makro|qualify Makro]] zu implementieren.
+
+Die Zeichenfolge hat folgende Syntax:
+
+<$railroad text="""
+"{" a "|" b "|" c "|" d "|" e "|" "}"
+"""/>
+
+<ol style="list-style-type: lower-alpha;">
+<li>der Titel des [[aktueller Tiddlers|Aktueller Tiddler]]
+</li>
+<li>der Titel des Tiddlers, der transkludiert wird
+</li>
+<li>der Titel des Feldes, welches transkludiert wird
+</li>
+<li>der Name der Eigenschaft oder des Indexeintrages welcher transkludiert wird
+</li>
+<li>der Name des Subtiddlers, der von einem Plugin übernommen wird
+</li>
+</ol>
+
+Manche der fünf Punkte sind dabei häufig leer.
+
+In der Seitenleiste ist der Wert von <<.var transclusion>>:
+
+> `{|$:/core/ui/PageTemplate/sidebar|||}`
+
+Wenn der Tiddler <<.tid HelloThere>> in der Story angezeigt wird, ist der Wert von <<.var transclusion>>:
+
+> `{HelloThere|HelloThere|||}`
+
+
+<<.hr>>
+
+Siehe Beispiel: <<wikidokulink "transclusion Variable (Examples)">> (englisch)

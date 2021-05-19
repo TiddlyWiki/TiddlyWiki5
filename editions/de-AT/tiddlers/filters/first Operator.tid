@@ -1,0 +1,13 @@
+caption: first
+created: 20200630201221804
+creator: FBB
+modified: 20210519165828451
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: die ersten ''//{{!!op-parameter-name}}//'' Eingabe-Titel
+op-parameter: eine ganze Zahl (integer), Defaultwert ist 1
+op-parameter-name: N
+op-purpose: wählt die ersten N Eingabe-Titel aus
+tags: Sortier-Operator Filter-Operator
+title: first Operator
+type: text/vnd.tiddlywiki

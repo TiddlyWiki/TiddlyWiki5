@@ -1,0 +1,14 @@
+created: 20210423200424744
+creator: FBB
+modified: 20210519132101781
+modifier: FBB
+tags: Funktionalität
+title: Popup-Mechanismus
+type: text/vnd.tiddlywiki
+
+Der Popup-Mechanismus ermöglicht die selektive Anzeige und Positionierung von Inhaltsblöcken in Bezug auf einen Anker. Er besteht aus mehreren Teilen:
+
+* [[Status-Tiddler|Status Tiddler]] zur Protokollierung, ob ein Popup gerade angezeigt wird oder nicht
+* Das <<.wid Reveal>>-Widget zur selektiven Anzeige des Popup-Inhalts
+** Für "bleibende" Popups -- solche, die sich nicht schließen, wenn man darauf klickt -- setzt das Attribut <<.var class>> auf <<.attr tc-popup-keep>>
+* Das <<.wid Button>>-Widget zum Auslösen der Anzeige des Popups durch entsprechendes Setzen des Status-Tiddlers.

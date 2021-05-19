@@ -1,13 +1,13 @@
 caption: Verknüpfungen
 created: 20131205155230596
 creator: pmario
-modified: 20140922132221424
+modified: 20210519132100770
 modifier: ChrisK
 tags: WikiText Hyperlinks
 title: Verknüpfungen in WikiText
 type: text/vnd.tiddlywiki
 
-Eine Schlüssel Fähigkeit von WikiText ist die einfache Möglichkeit, Verknüpfungen zu anderen Tiddlern oder externen Seiten herzustellen. 
+Eine Schlüssel Fähigkeit von WikiText ist die einfache Möglichkeit, Verknüpfungen zu anderen Tiddlern oder externen Seiten herzustellen.
 
 !! Manuelle Verknüpfungen
 
@@ -26,13 +26,13 @@ Eine Schlüssel Fähigkeit von WikiText ist die einfache Möglichkeit, Verknüpf
 
 !! ~CamelCase Verknüpfungen
 
-Für Tiddler, für die die "Camel Case" Richtlinien gelten, ist es nicht nötig, die "doppelten eckigen Klammen" zu verwenden. "Camel Case" Verknüpfungen werden automatisch erstellt. 
+Für Tiddler, für die die "Camel Case" Richtlinien gelten, ist es nicht nötig, die "doppelten eckigen Klammen" zu verwenden. "Camel Case" Verknüpfungen werden automatisch erstellt.
 
 ```
 * HelloThere ist eine Verknüpfung
 * http://google.com/ ist eine Verknüpfung"
 ```
-Dargestellt als: 
+Dargestellt als:
 
 * HelloThere ist eine Verknüpfung
 * http://google.com/ ist eine Verknüpfung"
@@ -46,7 +46,7 @@ Diese Regel kann mit einem Tilde `~` Zeichen unterdrückt werden. (Bei manchen T
 * ~http://google.com/ ist keine Verknüpfung"
 ```
 
-Dargestellt als: 
+Dargestellt als:
 
 * ~HelloThere ist keine Verknüpfung
 * ~http://google.com/ ist keine Verknüpfung"
@@ -60,12 +60,12 @@ Um zu externen Seiten zu verknüpfen muss die volle URL verwendet werden:
 * [[TW5|https://tiddlywiki.com/]]
 ```
 
-Dargestellt als: 
+Dargestellt als:
 
 * https://tiddlywiki.com/
 * [[TW5|https://tiddlywiki.com/]]
 
-Die automatische Erkennung von externen Verknüpfungen hat einige Schwächen. Deshalb ist es möglich eine externe Verknüpfung zu definieren: 
+Die automatische Erkennung von externen Verknüpfungen hat einige Schwächen. Deshalb ist es möglich eine externe Verknüpfung zu definieren:
 
 ```
 [ext[tiddlywiki.com]]

@@ -1,0 +1,23 @@
+created: 20210419203351630
+creator: FBB
+modified: 20210519132101144
+modifier: pmario
+tags: [[Über TiddlyWiki]]
+title: Copyright
+type: text/vnd.tiddlywiki
+
+TiddlyWiki wird unter einer freizügigen [ext[BSD 3-Klausel-Lizenz|https://opensource.org/licenses/BSD-3-Clause]] veröffentlicht, die innerhalb des ~TiddlyWiki-Core als ShadowTiddler unter $:/core/copyright.txt gespeichert ist:
+
+<div style="font-size: 0.7em;line-height:1.4;">
+
+{{$:/core/copyright.txt}}
+
+</div>
+
+Laienhaft ausgedrückt besagt die Lizenz, dass man ~TiddlyWiki nehmen und damit machen kann, was man will. Man kann es nutzen und ändern ohne eine Lizenzgebühr zu entrichten zu müssen. Auch andere rechtliche Verpflichtung gegenüber den Entwicklern, Autoren oder irgendjemand anderem gibt es nicht.
+
+Die Kehrseite der Medaille ist, dass es bei [[Open-Source|OpenSource]]-Projekten wie ~TiddlyWiki keine Garantie oder Gewährleistung gibt. Man kann die Mitwirkenden von ~TiddlyWiki nicht für Verluste oder Schäden verklagen, die durch die Nutzung von ~TiddlyWiki entstehen. Selbst wenn Daten, die mit ~TiddlyWiki gepflegt werden, durch eine tragische Verkettung von Umständen verloren gehen.
+
+Jeder der ~TiddlyWiki verwendet wird gebeten eine Referenz auf das Projekt anzugeben, aber es gibt keine Verpflichtung dazu.
+
+Zur Vermeidung von Zweifeln: Alle Informationen, die du in deiner eigenen Kopie von ~TiddlyWiki speicherst, bleiben deine. Die Verwendung von ~TiddlyWiki, um Inhalte zu veröffentlichen, ändert nichts an den Rechten, die du möglicherweise an diesen Inhalten hast.

@@ -1,0 +1,29 @@
+created: 20200519201531710
+creator: FBB
+modified: 20210519132102298
+modifier: FBB
+tags: [[TiddlyWiki mit Node.js]]
+title: Umgebungsvariablen für Node.js
+type: text/vnd.tiddlywiki
+
+TiddlyWiki unter Node.js unterstützt die folgenden Umgebungsvariablen zur Angabe einer begrenzten Liste von Pfaden für die Suche nach Plugins und Editionen:
+
+* `TIDDLYWIKI_PLUGIN_PATH` - Suchpfad für normale [[Plugins|]]
+* `TIDDLYWIKI_THEME_PATH` - Suchpfad für Design-Themes
+* `TIDDLYWIKI_LANGUAGE_PATH` - Suchpfad für [[Sprachen]]
+* `TIDDLYWIKI_EDITION_PATH` - Suchpfad für Editionen (wird verwendet von  InitCommand)
+
+<<.hinweisMacro "Das Trennzeichen kann je nach Betriebssystem variieren! <br/>Während unter Windows ein Semikolon `;` verwendet wird, nutzt Linux einen Doppelpunkt `:`." "Hinweis" "note">>
+
+Die zusätzlichen Pfade sollten jeweils auf Ordner verweisen, die so strukturiert sind wie die Verzeichnisse im ~TiddlyWiki5 GitHub-Repository:
+
+* Die Plugin-, Themen- und Sprachverzeichnisse enthalten `publisher/pluginname/<files>`
+* Die Editions-Verzeichnisse enthalten `editionname/<files>`
+
+Ein Beispiel:
+
+```
+TIDDLYWIKI_PLUGIN_PATH=~/MyPluginStore
+tiddlywiki mywiki --build index
+```
+

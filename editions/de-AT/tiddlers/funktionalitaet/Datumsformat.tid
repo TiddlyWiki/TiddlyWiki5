@@ -1,0 +1,64 @@
+chapter: 20210201200507181
+created: 20210119214351492
+creator: FBB
+modified: 20210519132101170
+modifier: FBB
+tags: Funktionalität
+title: Datumsformat
+type: text/vnd.tiddlywiki
+
+Wenn das <<.wid "View">>-Widget zur Anzeige von Datumswerten verwendet wird (mit dem <<.attr Format>>-Attribut auf ''date'' gesetzt), akzeptiert es ein <<.attr "Template">>-Attribut, mit dem das Format der Datumswerte festgelegt werden kann. Nachfolgende Tabelle listet die verfügbaren Format-Codes auf, als Beispiel-Datum wird <<.param "01.02.2021 21:05:07">> verwendet:
+
+|!Format-Code |!Ausgegebenes Datumsformat |
+|`DDD` |Wochentag ausgeschrieben (z.B. ''Montag'') |
+|`ddd` |Abkürzung Wochentag (z.B. ''Mon'') |
+|`DD` |Tag des Monats (z.B. ''1'') |
+|`0DD` |Tag des Monats mit führender Null (z.B. ''01'') |
+|`DDth` |Tag des Monats mit einem Punkt dcreatedanach (z.B. ''1.'') |
+|`WW` |Kalenderwoche nach ISO-8601 (z.B. ''5'') |
+|`0WW` |Kalenderwoche mit führender Null  (z.B. ''05'') |
+|`MMM` |Monatsname lang  (z.B. ''Februar'') |
+|`mmm` |Monatsname kurz  (z.B. ''Feb'')  |
+|`MM` |Monatsnummer  (z.B. ''2'')  |
+|`0MM` |Monatsnummer mit führender Null  (z.B. ''02'')  |
+|`YYYY` |Jahr lang  (z.B. ''2021'') |
+|`YY` |Jahr kurz  (z.B. ''21'') |
+|`wYYYY` |Jahr lang, in Relation zur Kalenderwoche |
+|`aYYYY` |<<.fromVersion "5.1.23">> Jahr lang, aber negative Daten werden als positiv angezeigt |
+|`wYY` |Jahr kurz, in Relation zur Kalenderwoche |
+|`{era:BCE||CE}` |<<.fromVersion "5.1.23">> Zeigt eine andere Zeichenfolge für Jahre an, welche negativ, null oder positiv ist (siehe unten) |
+|`hh` |Stunde (z.B. ''9'') |
+|`0hh` |Stunde mit führender Null  (z.B. ''21'') |
+|`hh12` |Stunden im 12 Uhr Format (z.B. ''9'') |
+|`0hh12` |Stunden im 12 Uhr Format und führender Null (z.B. ''09'') |
+|`mm` |Minuten (z.B. ''5'') |
+|`0mm` |Minuten mit führender Null (z.B. ''05'') |
+|`ss` |Sekunden (z.B. ''7'') |
+|`0ss` |Sekunden mit führender Null (z.B. ''07'') |
+|`XXX` |Millisekunden |
+|`0XXX` |Millisekunden mit führender Null |
+|`am` or `pm` |AM/PM-Anzeige in Kleinbuchstaben |
+|`AM` or `PM` |AM/PM-Anzeige in Großbuchstaben |
+|`TZD` |Offset der Zeitzone (z.B. ''+01:00'') |
+|`\x` |Wird verwendet um ein Zeichen (x) zu maskieren, welches sonst eine besondere Bedeutung hätte. |
+|`[UTC]`|Zeitversatz des dargestellten Datums nach UTC. Muss ganz am Anfang des Formatstrings stehen! |
+
+Beachte, dass anderer Text unverändert durchgereicht wird, so können Kommas, Doppelpunkte oder andere Trennzeichen verwendet werden.
+
+Die Notation `{era:BCE||CE}` kann verschiedene Zeichenketten für Jahre angeben, die negativ, null oder positiv sind. Zum Beispiel würde `{era:BC|Z|AD}` <<.param BC>> für negative Jahre, <<.param AD>> für positive Jahre und <<.param Z>> für das Jahr Null anzeigen.
+
+!! Beispiele
+
+;Aufruf
+: `<$view field="created" format="date" template="0DD.0MM.YYYY"/>`
+
+<br/>
+
+|!Template Code |!Ausgabe |
+|`DDth MMM YYYY` |<$view field="chapter" format="date" template="DDth MMM YYYY"/> |
+|`DDth MMM \M\X\X\D YYYY` |<$view field="chapter" format="date" template="DDth MMM \M\X\X\D YYYY"/> |
+|`DDth mmm YYYY 0hh:0mm:0ss` |<$view field="chapter" format="date" template="DDth mmm YYYY 0hh:0mm:0ss"/> |
+
+<<.hr>>
+
+Siehe: <<wikidokulink "~DateFormat">> (englisch)

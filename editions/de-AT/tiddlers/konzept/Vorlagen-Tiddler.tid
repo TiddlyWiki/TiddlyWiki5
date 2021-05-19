@@ -1,0 +1,20 @@
+created: 20200826190127973
+creator: FBB
+modified: 20210519132102333
+modifier: FBB
+tags: Konzept
+title: Vorlagen-Tiddler
+type: text/vnd.tiddlywiki
+
+Ein Vorlage-Tiddler ist nicht wirklich eine Tiddler-Art. Es ist vielmehr eine Variante wie ein Tiddler verwendet werden kann.
+
+Vorlagen sind eine Möglichkeit um Teile eines [[WikiTextes|WikiText]] wiederzuverwenden.
+
+Das Verwenden einer Vorlage erweitert die Grundfunktionalität der [[Transklusion]] durch die Kombination zweier Tiddler:
+
+* Ein Vorlagen-Tiddler, der den anzuzeigenden WikiText enthält. Er kann Tranklusionen enthalten, die sich auf Felder im aktuellen Tiddler beziehen.
+* Ein Ziel-Tiddler, der identifiziert, welcher Tiddler beim Auflösen von Verweisen auf Felder als aktuell zu behandeln ist
+
+Das beste Beispiel für die Verwendung von Templates ist die Hauptstory im TiddlyWiki. Jeder Tiddler in der Story wird durch ein ~ViewTemplate gerendert, das angibt, wie jedes Feld gerendert werden soll.
+
+Einzelheiten sind unter [[Transklusion mit Vorlagen]] zu finden. 

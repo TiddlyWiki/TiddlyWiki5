@@ -1,0 +1,34 @@
+created: 20200615212600087
+creator: FBB
+modified: 20210519132101259
+modifier: FBB
+tags: Filter-Syntax
+title: Filter-Durchlauf
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+( "[" { [[Schritt|"Filter-Schritt"]] } "]"
+  |
+  [:{/" alles außer [ ] oder Leerzeichen "/}]
+  |
+  '"' [:{/' alles außer "'/}] '"'
+  |
+  "'" [:{/" alles außer '"/}] "'"
+)
+"""/>
+
+Ein ''Durchlauf'' besteht aus steps ([[Filter-Schritten|Filter-Schritt]]), und es wird eine [[Selektion|Titelselektion]] ausgegeben, die zu einem größeren [[Filter-Ausdruck]] beiträgt.
+
+Die Schritte werden von links nach rechts abgearbeitet. Die Eingabe für den ersten Schritt entspricht der Eingabe für den Durchlauf. Für jeden nachfolgenden Schritt ist die Eingabe die Ausgabe des vorhergehenden Schritts.
+
+{{Auswahl-Konstruktor}}
+
+Die unteren drei Optionen im Diagramm entsprechen einer Syntax wie  `HelloThere`, `"HelloThere"`, `'HelloThere'` und `"Filter-Operator"`. Sie stehen kurz für `[title[...]]`.
+
+Die zitierten Optionen existieren zur Unterstützung von Titeln, die eckige Klammern enthalten. Wie zum Beispiel bei: `"Ein [[[[ungewöhnlicher]]]] Tiddler"`.
+
+<br/>
+
+---
+
+Link: [ext[https://tiddlywiki.com/#Filter Run]]

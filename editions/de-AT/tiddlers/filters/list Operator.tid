@@ -1,0 +1,20 @@
+caption: list
+created: 20200619195612420
+creator: FBB
+modified: 20210519164959078
+modifier: FBB
+op-input: ingnoriert
+op-neg-input: eine [[Titelselektion]]
+op-neg-output: diejenigen Eingabetitel, die unter ''//{{!!op-parameter-name}}//'' nicht erwähnt werden
+op-output: die als Titelliste unter ''//{{!!op-parameter-name}}//'' gespeicherten Titel
+op-parameter: einen [[Verweis|TextReferenz]] auf ein [[Feld]] oder eine [[Eigenschaft|Daten-Tiddler]] eines speziellen Tiddlers
+op-parameter-name: R
+op-purpose: Titel über das Tiddler-Feld `list` auswählen
+tags: Filter-Operator Feld-Operator Negierbarer-Operator Auswahl-Konstruktor
+title: list Operator
+type: text/vnd.tiddlywiki
+
+''//{{!!op-parameter-name}}//''  kann entweder auf ein Feld oder eine Eigenschaft verweisen. Siehe Text-Referenz für die Syntax.
+
+* Wenn keines von beiden angegeben wird, wird standardmäßig das Feld `list` verwendet. So gibt `[list[T]]` die in der Liste von Tiddler 'T' aufgeführten Titel aus.
+* Wenn ''//{{!!op-parameter-name}}//'' nur aus einem Feld oder einer Eigenschaft besteht, wird der Tiddler-Teil des Verweises standardmäßig auf den aktuellen Tiddler gesetzt. So gibt `[list[!!tags]]` die im Tags-Feld des aktuellen Tiddlers aufgelisteten Titel aus.

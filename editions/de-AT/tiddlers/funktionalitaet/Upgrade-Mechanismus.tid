@@ -1,0 +1,74 @@
+created: 20210331202955861
+creator: FBB
+modified: 20210519132102308
+modifier: FBB
+tags: Funktionalität howto
+title: Upgrade-Mechanismus
+type: text/vnd.tiddlywiki
+
+Es gibt regelmäßige Releases von ~TiddlyWiki mit Fehlerkorrekturen und Verbesserungen. Es ist immer eine gute Idee, auf dem Laufenden zu bleiben, indem ~TiddlyWiki regelmäßig auf die neueste Version aktualisiert wird.
+
+! Einführung
+
+Der hier beschriebene Prozess ist für das Upgrade von eigenständigen TiddlyWiki-Dateien. Für das Upgrade von [[TiddlyWiki mit Node.js]] gibt es ein anderes Verfahren.
+
+Wenn Du ein Upgrade durchführst, erinnere Dich bitte an die erste Regel bei der Benutzung von ~TiddlyWiki:
+
+<<<
+Du bist selbst für die Pflege deiner Daten verantwortlich. Mache regelmäßig Backups, besonders wenn du den Core von ~TiddlyWiki aktualisierst.
+<<<
+
+! Online Upgrade
+
+Dieser Vorgang funktioniert bei den meisten Desktop-Browsern. Bei diesem Vorgang verlassen keine persönlichen Daten den Browser.
+
+* Öffne den Speicherort des Wikis auf mit dem Dateimanager des Betriebssystems
+* Öffne folgende Webseite im Browser [ext[https://tiddlywiki.com/upgrade.html]]
+* Ziehen deine alte TiddlyWiki-HTML-Datei über das geöffnete Browserfenster
+** Wenn die Datei verschlüsselt ist, wirst du nach dem Passwort gefragt.
+* Überprüfe die Liste der Tiddler, die aktualisiert werden sollen.
+* Klicke auf den Button mit der Beschriftung ''Upgrade''
+* Speiche die Änderungen als neue Version  (<<.icon $:/core/images/save-button>>)
+
+Dadurch wird eine Datei namens ''upgrade.html'' heruntergeladen. Diese Datei ist das Upgrade der alten Datei.
+
+* Den Download-Ordner öffnen.
+* Die heruntergeladene Datei so umbenennen wie die ursprüngliche Datei benannt ist.
+* Diese neue Datei an den ursprünglichen Speicherort verschieben und die "alte" Datei überschreiben.
+
+! Offline Upgrade
+
+Du kannst <a href="https://tiddlywiki.com/upgrade.html" target="_top" download="upgrade.html">https://tiddlywiki.com/upgrade.html</a> auch lokal herunterladen und den gleichen Vorgang per Drag-and-Drop durchführen, um deine Dateien zu aktualisieren.
+
+! Probleme mit Upgrades
+!! Firefox Sicherheitseinschränkungen
+
+Der folgende Fehler könnte auftreten, wenn das Online-Upgrade-Verfahren mit Firefox durchgeführt wird:
+
+@@border-left-color:darkred;background-color:rgb(200,0,0,0.1);
+<<<
+
+    Error while saving:
+
+    Error:NS_ERROR_DOM_BAD_URI: Access to restricted URI denied
+
+<<<
+@@
+
+:Der Upgrade-Vorgang stößt auf eine Sicherheitseinschränkung in Firefox. Bis dieses Problem behoben ist, empfehlen wir, entweder den Offline-Upgrader zu verwenden oder die Aktualisierung mit Chrome durchzuführen:
+
+!! Inkompatible Anpassungen
+
+Es ist möglich, dass eine Anpassung, die in einer früheren Version angewendet wurde, beim Upgrade auf die neueste Version nicht mehr funktioniert. Es gibt zwei Techniken, die man verwenden kann, um Probleme aufzuspüren:
+
+# Versuche das Upgrade zu wiederholen, nachdem selektiv Tiddler deaktiviert wurden, die möglicherweise Anpassungen an TiddlyWiki vornehmen.
+# Verwende SafeMode, um alle Anpassungen von Schatten-Tiddlern zu deaktivieren
+
+Du kannst auf der Registerkarte "Filter" der erweiterten Suche sehen, welche Shadow Tiddler überschrieben wurden. Wähle im Dropdown-Menü "Überschriebene Shadow Tiddler".
+
+
+<<.hr>>
+
+Siehe: <<wikidokulink "~UpgradeMechanism">> und <<wikidokulink "Upgrading">>  (englisch)
+
+<<.keywords 'update,upgrade,neue Version,Aktualisierung' >>

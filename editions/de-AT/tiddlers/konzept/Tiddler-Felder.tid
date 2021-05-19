@@ -1,0 +1,52 @@
+created: 20201126205349213
+creator: FBB
+modified: 20210519132102184
+modifier: FBB
+tags: Konzept
+title: Tiddler-Felder
+type: text/vnd.tiddlywiki
+
+Tiddler-Felder sind ''Name:Wert''-Paare, aus denen ein Tiddler besteht. Die Feldnamen müssen aus Kleinbuchstaben, Ziffern oder den Zeichen `-` (Bindestrich), `-` (Unterstrich) und `.` (Punkt) bestehen.
+
+!! Standard-Felder
+
+|!Feld Name |!Beschreibung |
+|`title` |<<.lingo title>> |
+|`text` |<<.lingo text>> |
+|`modified` |<<.lingo modified>> |
+|`modifier` |<<.lingo modifier>> |
+|`created` |<<.lingo created>> |
+|`creator` |<<.lingo creator>> |
+|`tags` |<<.lingo tags>> |
+|`type` |<<.lingo type>> |
+|`list` |<<.lingo list>> -- siehe [[Listenfeld]] |
+|`caption` |<<.lingo caption>> |
+
+!! Weitere Felder aus dem ~TiddlyWiki-Core
+
+|!Feld Name |!Beschreibung |
+|`class` |<<.lingo class>> |
+|`color` |<<.lingo color>> |
+|`description` |<<.lingo description>> |
+|`draft.of` |<<.lingo draft.of>> |
+|`draft.title` |<<.lingo draft.title>> |
+|`footer` |<<.lingo footer>> |
+|`hide-body`|<<.lingo hide-body>>|
+|`icon` |<<.lingo icon>> |
+|`library` |<<.lingo library>> |
+|`list-after` |<<.lingo list-after>> |
+|`list-before` |<<.lingo list-before>> |
+|`name` |<<.lingo name>> |
+|`plugin-priority` |<<.lingo plugin-priority>> |
+|`plugin-type` |<<.lingo plugin-type>> |
+|`source` |<<.lingo source>> |
+|`subtitle` |<<.lingo subtitle>> |
+|`throttle.refresh` |<<.lingo throttle.refresh>> |
+|`toc-link`|<<.lingo toc-link>>|
+|`_canonical_uri`|<<.lingo _canonical_uri>>|
+
+Weitere Details zu den Feldern findest du im [[Control Panel|$:/ControlPanel]] {{$:/core/ui/Buttons/control-panel}} unter ''Info-Tab'' » ''Erweitert'' » ''Tiddler-Felder''.
+
+<<.hr>>
+
+Siehe: <<wikidokulink "~TiddlerFields">> (englisch)

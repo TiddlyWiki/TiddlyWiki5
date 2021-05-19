@@ -1,0 +1,44 @@
+created: 20200428200034378
+creator: FBB
+modified: 20210519132101203
+modifier: FBB
+tags: Makros [[Core Makros]]
+title: dumpvariables Makro
+type: text/vnd.tiddlywiki
+
+Das Makro dumpvariables gibt eine Tabelle mit den Werten aller Variablen und Makros zurück, die an dieser Position im Widgetbaum vorhanden sind.
+
+Es ist nützlich für das Debugging und die Untersuchung der Interna von TiddlyWiki.
+
+Platzhalter werden auf normale Weise durch Werte ersetzt, aber unter Verwendung der Standardwerte für alle Makroparameter.
+
+!! Definition
+
+Dieses System-Makro wird im Tiddle [[$:/core/macros/dumpvariables]] gespeichert und hat diese Form.
+
+```
+\define dumpvariables()
+<ul>
+<$list filter="[variables[]]" variable="varname">
+<li>
+<strong><code><$text text=<<varname>>/></code></strong>:<br/>
+<$codeblock code={{{ [<varname>getvariable[]] }}}/>
+</li>
+</$list>
+</ul>
+\end
+
+```
+
+!! Einbindung:
+
+`<<dumpvariables>>`
+
+
+!! Parameter:
+
+(keine)
+
+!! Beispiel:
+
+[[dumpvariables Makro (Beispiel)]]

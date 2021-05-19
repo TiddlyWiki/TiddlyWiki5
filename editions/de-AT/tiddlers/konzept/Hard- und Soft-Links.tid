@@ -1,0 +1,17 @@
+created: 20200615191530135
+creator: FBB
+modified: 20210519132101378
+modifier: FBB
+tags: Konzept
+title: Hard- und Soft-Links
+type: text/vnd.tiddlywiki
+
+Ein harter Link ist eine [[Verknüpfungen|Verknüpfungen in WikiText]], die durch eine flüchtige Untersuchung von WikiText erkannt werden kann. Zum Beispiel ist `[[WikiText]]` solch ein Hard-Link.
+
+Eine Verknüpfung ist ''soft'' wenn:
+
+* er in Text enthalten ist, welcher aus einem anderen Text [[trankludiert|Transklusion]] wurde.
+* der Link über ein [[Makro]] oder eine [[Variable]] eingebunden wird.
+* er von einem [[LinkWidget]] erzeugt wird, dessen Attribut eine Transklusion, ein Makro oder eine Variable ist.
+
+<<.hinweisMacro "Soft-Links werden von auf den Link bezogenen [[Filteroperatoren|Filter-Operator]] wie [[backlinks|backlinks Operator]], [[link|links Operator]], [[all|all Operator]] und [[is|is Operator]] nicht erkannt." "" "note">>

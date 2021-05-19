@@ -1,0 +1,18 @@
+[
+    {
+        "created": "20200619202122115",
+        "text": "Jeder eingegebene Titel wird der Reihe nach verarbeitet. Die Liste der Tiddler, die dieses Tag enthalten, wird generiert, sortiert und dann vorrangig an die Gesamtausgabe des Operators angehängt.\n",
+        "type": "text/vnd.tiddlywiki",
+        "title": "tagging Operator",
+        "tags": "Filter-Operator Tag-Operator",
+        "modifier": "FBB",
+        "modified": "20210519165339523",
+        "creator": "FBB",
+        "op-purpose": "die Tiddler finden, welche über die eingegebenen Tags verfügen",
+        "op-parameter-name": "",
+        "op-parameter": "keiner",
+        "op-output": "die Titel aller Tiddler, die die Eingabe-Tags enthalten.",
+        "op-input": "eine [[Selektion|Titelselektion]] von [[Tags]] ",
+        "caption": "tagging"
+    }
+]

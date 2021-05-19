@@ -1,0 +1,24 @@
+created: 20140923194250500
+creator: ChrisK
+modified: 20210519132100175
+modifier: FBB
+tags: Lexikon Referenz Konzept
+title: Filter
+type: text/vnd.tiddlywiki
+
+TiddlyWiki kann man sich als eine Datenbank vorstellen, in der die Datensätze einzelne Tiddler sind.  Eine Datenbank bietet normalerweise eine Möglichkeit, herauszufinden, welche Datensätze einem bestimmten Muster entsprechen, und in ~TiddlyWiki geschieht dies mit Hilfe von Filtern.
+
+Ein Filter ist eine präzise Notation zur [[Auswahl einer bestimmten Menge von Tiddlern|Titelselektion]], das Ergebnis wird als Ausgabe bezeichnet. Wann immer ~TiddlyWiki auf einen Filter trifft, berechnet es die Ausgabe. Dann kann man mit genau mit den gefundenen Tiddlern weiterarbeiten, z.B. diese [[zählen|CountWidget]] oder [[auflisten|ListWidget]].
+
+Das folgende Beispiel übergibt einen Filter an das [[Makro list-links|list-links Makro]], um eine Liste aller Tiddler anzuzeigen, deren Titel mit dem Buchstaben H beginnen:
+
+> `<<list-links "[prefix[H]]">>`
+
+Die Ausgabe eines Filters kann sich ändern, wenn Tiddler im Wiki hinzugefügt und gelöscht werden. ~TiddlyWiki rechnet "on the fly" neu und aktualisiert automatisch auch alle filter-basierten Zählungen oder Listen.
+
+Die [[erweiterte Suche|$:/AdvancedSearch]] verfügt über eine Registerkarte ''//Filter//'', mit der man ganz einfach mit solchen Filtern experimentieren kann.
+
+<br/>
+<hr/>
+
+Siehe auch: https://tiddlywiki.com/#Filters

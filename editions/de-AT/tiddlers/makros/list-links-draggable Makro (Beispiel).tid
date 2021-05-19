@@ -1,0 +1,12 @@
+created: 20200630190256534
+creator: FBB
+modified: 20210519132101614
+modifier: FBB
+title: list-links-draggable Makro (Beispiel)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name='wikitext-example-without-html' src='<<list-links-draggable Wochentage>>' />
+
+<<.hr>>
+
+Siehe: <<wikidokulink "list-links-draggable Macro (Examples)">> (englisch)

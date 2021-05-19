@@ -1,0 +1,15 @@
+caption: rest
+created: 20200630202449488
+creator: FBB
+modified: 20210519165728192
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: alle bis auf die ersten ''//{{!!op-parameter-name}}//'' Eingabe-Titel
+op-parameter: eine ganze Zahl (integer), Defaultwert ist 1
+op-parameter-name: N
+op-purpose: die ersten N Eingabe-Titel auslassen
+tags: Sortier-Operator Filter-Operator
+title: rest Operator
+type: text/vnd.tiddlywiki
+
+Die Operatoren <<.def bf >> und <<.def butfirst >> sind Synonyme für den ''rest Operator''

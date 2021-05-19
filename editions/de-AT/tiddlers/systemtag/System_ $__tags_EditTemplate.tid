@@ -1,0 +1,11 @@
+caption: $:/tags/EditTemplate
+created: 20201120204834471
+creator: FBB
+description: markiert alle Tiddler die eine Vorlage für die Darstellung des Editorfensters sind.
+modified: 20210519132102047
+modifier: FBB
+tags: SystemTags
+title: System: $:/tags/EditTemplate
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field  {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.

@@ -1,0 +1,54 @@
+caption: Daten-Tiddler
+created: 20140913190813353
+creator: pmario
+modified: 20210519132101166
+modifier: FBB
+tags: Lexikon Konzept
+title: Daten-Tiddler
+type: text/vnd.tiddlywiki
+
+Ein Daten-Tiddler ist eine Miniaturdatenbank, gespeichert in einem Tiddler.
+
+Es gibt zwei Standardformate:
+
+* [[Wörterbuch-Tiddler]] (~DictionaryTiddlers)
+* [[JSON-Tiddler]] (JSONTiddlers))
+
+Auch andere Tiddler-Formate können geparst werden, um Datensätze zu erhalten, welche sich wie Daten-Tiddler verhalten.
+
+Mit einer [[Text-Referenz]] kann der Wert einer benannten Eigenschaft aus dem Daten-Tiddler ausgelesen werden.
+
+''Ein Beispiel'':
+
+Wenn ein Wörterbuch-Tiddler ein Feld mit dem Namen `MonthDays` enthält:
+
+```
+Okt:31
+Nov:30
+Dez:31
+```
+... wird der Aufruf `{{MonthDays##Nov}}` den Wert `30` zurückgeben.
+
+Dasselbe gilt, wenn `MonthDays` ein JSON-Tiddler mit folgendem Inhalt ist:
+
+```
+{"Okt":31,"Nov":30,"Dez":31}
+```
+Der Aufruf `{{MonthDays##Nov}}` ebenfalls den Wert `31` zurückgeben.
+
+<<hinweisMacro
+"Es ist derzeit nur möglich, Daten aus den unmittelbaren Eigenschaften des ''Wurzelobjekts'' eines JSON-Tiddlers abzurufen.
+Das heißt eine verschachtelte Struktur ist nicht möglich."
+ >>
+
+Die Widgets ActionSetField-Widget und ActionListops-Widget können benannte Eigenschaften von Daten-Tiddlern manipulieren, indem sie den Namen der Eigenschaft im $index-Attribut angeben. Um eine benannte Eigenschaft mit dem ActionSetField-Widget zu erstellen oder zu ändern, muss ein $value-Attribut übergeben werden. Um eine benannte Eigenschaft mit ActionSetField-Widget zu löschen, lässt man das $value-Attribut weg. Das ActionListops-Widget weist der benannten Eigenschaft eine Liste zu, die mit den Attributen $filter und $subfilter erstellt wird.
+
+<br/>
+
+---
+
+Siehe auch:
+
+* https://tiddlywiki.com/#DataTiddlers
+** https://tiddlywiki.com/#DictionaryTiddlers
+** https://tiddlywiki.com/#JSONTiddlers

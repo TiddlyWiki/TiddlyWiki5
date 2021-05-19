@@ -1,0 +1,12 @@
+caption: $:/tags/ViewTemplate
+created: 20201124223740800
+creator: FBB
+description: markiert die Ansichtsvorlagen
+modified: 20210519132102152
+modifier: FBB
+tags: SystemTags
+title: SystemTag: $:/tags/ViewTemplate
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field  {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.
+

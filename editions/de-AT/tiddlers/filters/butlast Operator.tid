@@ -1,0 +1,13 @@
+caption: butlast
+created: 20200630201938698
+creator: FBB
+modified: 20210519165835088
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: alle aus der Eingabe ohne die letzten ''//{{!!op-parameter-name}}//'' Tiddler
+op-parameter: eine ganze Zahl (integer), Defaultwert ist 1
+op-parameter-name: N
+op-purpose: die letzten N Eingabe-Titel verwerfen
+tags: Sortier-Operator Filter-Operator
+title: butlast Operator
+type: text/vnd.tiddlywiki

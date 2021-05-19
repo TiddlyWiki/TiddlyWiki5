@@ -1,0 +1,16 @@
+caption: Schatten-Tiddler
+created: 20200602213400091
+creator: FBB
+modified: 20210519132101961
+modifier: FBB
+tags: Konzept
+title: ShadowTiddler
+type: text/vnd.tiddlywiki
+
+''~ShadowTiddler'' (//Schatten-Tiddler//) sind [[Tiddler]], die aus [[Plugins]] heraus geladen werden. Im Gegensatz zu gewöhnlichen Tiddlern erscheinen sie nicht in den meisten Listen.
+
+~ShadowTiddler können mit einem normalen Tiddler mit dem gleichen Namen überschrieben werden. Wird dieser geänderte Tiddler wieder gelöscht, wird der ursprüngliche ~ShadowTiddler automatisch wiederhergestellt.
+
+Die derzeitigen ~ShadowTiddler werden hier aufgelistet:
+
+<<list-links filter:"[all[shadows]sort[title]]" >>

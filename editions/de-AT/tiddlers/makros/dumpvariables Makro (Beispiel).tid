@@ -1,0 +1,34 @@
+author: FBB
+created: 20200428200220667
+creator: FBB
+modified: 20210519132101208
+modifier: FBB
+tags: [[Macro Examples]] [[dumpvariables Makro]]
+title: dumpvariables Makro (Beispiel)
+type: text/vnd.tiddlywiki
+
+!! Code:
+
+```
+<$set name="EXAMPLE" value="123..789">
+<$set name="EXAMPLE2" value="456">
+
+<<dumpvariables>>
+
+</$set>
+</$set>
+
+```
+ <br/>
+
+!! Beispiel:
+
+---
+
+<$set name="EXAMPLE" value="123..789">
+<$set name="EXAMPLE2" value="456">
+
+<<dumpvariables>>
+
+</$set>
+</$set>

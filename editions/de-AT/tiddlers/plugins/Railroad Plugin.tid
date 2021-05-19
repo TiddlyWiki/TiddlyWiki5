@@ -1,0 +1,15 @@
+created: 20201119201556364
+creator: FBB
+modified: 20210519132101888
+modifier: FBB
+tags: [[Offizielle Plugins]]
+title: Railroad Plugin
+type: text/vnd.tiddlywiki
+
+Dieses Plugin erzeugt ein ''@@color:darkblue;$railroad@@''-Widget zur Erstellung von [[Syntaxdiagrammen|Syntaxdiagramm]] als [[SVG-Bilder|Scalable Vector Graphics]].
+
+Alternativ kann die [[Diagrammnotation|$:/plugins/tiddlywiki/railroad/syntax]] in einem speziellen Tiddler gespeichert werden, dessen Feld <<.field typ>> auf <<.value "text/vnd.tiddlywiki.railroad">> gesetzt ist. Dieser Tiddler kann dann einfach überall dort [[transkludiert|Transklusion]] werden, wo er benötigt wird.
+
+Das Plugin basiert auf einer Bibliothek von [[Tab Atkins|https://github.com/tabatkins]] und wurde erweitert, um es flexibler zu gestalten. So können Komponenten eines Diagramms als Links fungieren oder von anderen Tiddlern übernommen werden.
+
+siehe Plugin-Tiddler: [[$:/plugins/tiddlywiki/railroad]]

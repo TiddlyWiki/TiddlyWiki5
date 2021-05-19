@@ -1,0 +1,15 @@
+caption: .. ein weiterer Dialog
+created: 20210518212612277
+creator: FBB
+footer: <$button message="tm-close-tiddler">Schliessen</$button>
+modified: 20210519132101110
+modifier: FBB
+tags: 
+title: BeispielMeldung2
+type: text/vnd.tiddlywiki
+
+Das hier ist ein weiterer modaler Dialog, gespeichert im Tiddler ''~BeispielMeldung2''
+
+
+: {{$:/core/images/done-button}} 
+Dies ist auch eine Benachrichtigung 

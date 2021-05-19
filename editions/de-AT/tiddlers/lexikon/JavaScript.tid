@@ -1,0 +1,29 @@
+created: 20200518203132900
+creator: FBB
+modified: 20210519132101525
+modifier: FBB
+tags: Lexikon
+title: JavaScript
+type: text/vnd.tiddlywiki
+
+~JavaScript ist eine Skriptsprache, die ursprünglich 1995 von Netscape für dynamisches HTML in Webbrowsern entwickelt wurde, um Benutzerinteraktionen auszuwerten bzw. die Inhalte der Webseiten zu verändern. Heute findet ~JavaScript auch außerhalb von Browsern Anwendung, so etwa auf Servern (z.B. [[Node.js]]) und in Microcontrollern.
+
+Hier ist zum Beispiel das beliebte "Hallo Welt" :
+
+```
+alert("Hallo Welt");
+```
+
+oder die Definition einer Funktion "circleArea":
+
+```
+function circleArea(radius) {
+	return radius * 2 * 3.141592653;
+}
+```
+
+<br/>
+
+---
+
+siehe auch: [ext[https://wiki.selfhtml.org/wiki/JavaScript]]

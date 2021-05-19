@@ -1,0 +1,18 @@
+caption: get
+created: 20200629133727452
+creator: FBB
+modified: 20210519165056244
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: die Werte von Feld ''//{{!!op-parameter-name}}//'' in jedem der Eingabe-Titel.
+op-parameter: der Name eines Feldes
+op-parameter-name: F
+op-purpose: alle Werte eines Feldes in den Eingabe-Titeln selektieren.
+tags: Filter-Operator Feld-Operator
+title: get Operator
+type: text/vnd.tiddlywiki
+
+Jeder Eingabetitel wird der Reihe nach verarbeitet. Wenn der entsprechende Tiddler das Feld  ''//{{!!op-parameter-name}}//'' enthält und der Wert dieses Feldes nicht leer ist, dann wird sein Wert an die Ausgabe angehängt.
+
+Im Gegensatz zu den meisten anderen [[Filter-Operatoren|Filter-Operator]] kann die von ''get'' ausgegebene Auswahl Duplikate enthalten. Um Duplikate zu vermeiden, verwende `each[F]get[F]`.
+

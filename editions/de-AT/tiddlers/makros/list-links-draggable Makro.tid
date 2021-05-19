@@ -1,0 +1,67 @@
+created: 20200429211422830
+creator: FBB
+modified: 20210519132101610
+modifier: FBB
+tags: Makros [[Core Makros]]
+title: list-links-draggable Makro
+type: text/vnd.tiddlywiki
+
+Das Makro "list-links-draggable" stellt das Listen-Feld `list` eines Tiddlers als eine Liste von Links dar, die durch Ziehen und Ablegen neu geordnet/verschoben werden können.
+
+!! Definition
+
+Dieses System-Makro wird im Tiddle $:/core/macros/list gespeichert. Im gleichen Tiddler sind noch weitere Listen-Makros gespeichert. Hier wird aber nur die Version mit verschiebbaren Einträgen behandelt.
+
+```
+\define list-links-draggable-drop-actions()
+<$action-listops $tiddler=<<targetTiddler>> $field=<<targetField>> $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
+\end
+
+\define list-links-draggable(tiddler,field:"list",type:"ul",subtype:"li",class:"",itemTemplate)
+\whitespace trim
+<span class="tc-links-draggable-list">
+<$vars targetTiddler="""$tiddler$""" targetField="""$field$""">
+<$type$ class="$class$">
+<$list filter="[list[$tiddler$!!$field$]]">
+<$droppable actions=<<list-links-draggable-drop-actions>> tag="""$subtype$""" enable=<<tv-enable-drag-and-drop>>>
+<div class="tc-droppable-placeholder"/>
+<div>
+<$transclude tiddler="""$itemTemplate$""">
+<$link to={{!!title}}>
+<$transclude field="caption">
+<$view field="title"/>
+</$transclude>
+</$link>
+</$transclude>
+</div>
+</$droppable>
+</$list>
+</$type$>
+<$tiddler tiddler="">
+<$droppable actions=<<list-links-draggable-drop-actions>> tag="div" enable=<<tv-enable-drag-and-drop>>>
+<div class="tc-droppable-placeholder">
+&nbsp;
+</div>
+<div style="height:0.5em;"/>
+</$droppable>
+</$tiddler>
+</$vars>
+</span>
+\end
+```
+
+!! Parameter
+
+|Position |Name |Beschreibung |Standard |h
+|1|Tiddler |Der Titel des Kiddlers, der die Liste enthält | - |
+|2|Feld  |Der Name des Feldes, das die Liste enthält  | list |
+|3|Typ |Das Element-Tag zur Verwendung für die Listenumhüllung (ul,ol,dl) | ul |
+|4|Subtyp |Das für die Listenelemente zu verwendende Element-Tag (li,dd,dt)| li |
+|5|Class |Optionale, durch Leerzeichen getrennte Klassen, zum Hinzufügen zum Wrapper-Element| |
+|6|Item-Template |Optionaler Titel eines Tiddlers, der als Vorlage für die Darstellung von Listenelementen verwendet werden kann. | |
+
+Wenn der Item-Template-Parameter nicht angegeben ist, werden die Listenelemente als einfache Links dargestellt. Innerhalb des Item-Templates verweist die Variable [[currentTiddler|currentTiddler Variable]] auf das aktuelle Listenelement.
+
+!! Beispiel
+
+* [[list-links-draggable Makro (Beispiel)]]

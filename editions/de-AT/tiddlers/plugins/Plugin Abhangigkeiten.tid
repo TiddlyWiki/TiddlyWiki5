@@ -1,0 +1,13 @@
+created: 20200602223716485
+creator: FBB
+modified: 20210519132101744
+modifier: FBB
+tags: Plugin-Mechanismus
+title: Plugin Abhängigkeiten
+type: text/vnd.tiddlywiki
+
+Die einfachste Form der Abhängigkeit zwischen [[Plugins]] besteht darin, dass ein Plugin sich selbst als Unter-Plugin eines anderen Plugins deklarieren kann. Dieses Plugin muss im Feld `parent-plugin` angegeben werden. Sub-Plugins werden in der Plugin-Auswahl des [[Control-Panels|$:/ControlPanel]] innerhalb des erweiterbaren Bereichs ihres übergeordneten Plugins angezeigt. Zum Beispiel enthält die offizielle Plugin-Bibliothek das CodeMirror-Plugin und auch mehr als ein Dutzend Sub-Plugins, die das ~CodeMirror-Plugin um optionale Funktionalität erweitern. Beachte, dass Sub-Plugins selbst keine weiteren Sub-Plugins haben können.
+
+Plugins können auch ihre `dependents` [[Felder|Plugin Felder]] verwenden, um die Titel aller anderen Plugins aufzulisten, die ebenfalls installiert werden sollen.
+
+Beachte, dass das Feld `dependents` auch vom [[Theme-Mechanismus]] und vom [[Sprach-Mechanismus]] verwendet wird, um abhängige Theme-/Sprach-Plugins einzubinden.

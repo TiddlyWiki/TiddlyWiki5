@@ -1,0 +1,12 @@
+created: 20200924193116157
+creator: FBB
+modified: 20210519162316966
+modifier: FBB
+tags: Variablen [[Core Variablen]]
+title: actionTiddler Variable
+type: text/vnd.tiddlywiki
+
+Die Variable <<.var actionTiddler>> wird von mehreren Widgets auf leicht unterschiedliche Weise verwendet:
+
+* Innerhalb der <<.param actions>> Zeichenfolge des DroppableWidget enthält die [[Variable|Variablen]] <<.var actionTiddler>> den Titel des gedroppten Tiddlers.
+* Innerhalb der Zeichenfolge für <<.param startactions>> und <<.param endactions>> des <<.wid Draggable>>-Widget enthält die [[Variable|Variablen]] <<.var actionTiddler>> eine Titelliste aller Titel (in eckigen Klammern`[[]]`), die gerade verschoben werden.

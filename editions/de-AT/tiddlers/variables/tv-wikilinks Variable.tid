@@ -1,0 +1,21 @@
+created: 20200907192839495
+creator: FBB
+modified: 20210519132102290
+modifier: FBB
+tags: [[Core Variablen]] Variablen [[Konfigurations Variablen]]
+title: tv-wikilinks Variable
+type: text/vnd.tiddlywiki
+
+Die Variable <<.var tv-wikilinks>> steuert das Verhalten des <<.wid Link>>-Widgets.
+
+Das Widget erzeugt normalerweise einen Link zu einem Tiddler. Wenn diese Variable jedoch den Wert <<.value no>> hat, unterdrückt das Widget den Link der sonst erzeugt wurde und zeigt stattdessen einfach den Text an.
+
+Man kann Links für einen ganzen Tiddler unterdrücken, indem man die folgende Zeile an den Anfang des Tiddlers setzt:
+
+> `\define tv-wikilinks() no`
+
+Diese Variable hat keinen Einfluss auf externe Links, da diese nicht das ''$link''-Widget verwenden.
+
+<br/>
+
+siehe Beispiel: [ext[https://tiddlywiki.com#tv-wikilinks Variable (Examples)]]

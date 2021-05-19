@@ -1,0 +1,33 @@
+\define .fromVersion(version)
+<!-- alte FBB Variante, nicht mehr nutzen //-->
+<span class="doc-from-version">{{$:/core/images/warning}} Neu ab: <b>$version$</b></span>
+\end
+
+\define .from-version(version)
+<span class="doc-from-version">{{$:/core/images/warning}} Neu ab: <b>$version$</b></span>
+\end
+
+\define .deprecated-since(version, superseded:"TODO-Link")
+<span  class="doc-deprecated-version ">{{$:/core/images/warning}} Als Deprecated markiert seit $version$ </span>. Use [[$superseded$]] instead
+\end
+
+Dieses Macro dient dazu, um für die Beschreibung von bestimmten Features von TiddlyWiki welche erst ab einer bestimmten Version verfügbar sind einen deutlich sichtbaren Tag einzubinden.
+
+! Definition
+
+```
+\define .from-version(version)
+<span class="doc-from-version">{{$:/core/images/warning}} Neu ab: <b>$version$</b></span>
+\end
+```
+
+! Parameter
+
+|Position |Name|Beschreibung |h
+|1 |version |Versionsnummer ab der das Feature verfügbar ist|
+
+! Beispiel
+
+`<<.from-version "5.1.23">> ist Funktion ''X'' verfügbar.`
+
+<<.from-version "5.1.23">> ist Funktion ''X'' verfügbar.

@@ -1,24 +1,35 @@
-caption: Transklusion
+chapter: 2
 created: 20131205160146648
 creator: pmario
-modified: 20140923191923647
-modifier: pmario
+modified: 20210519132100738
+modifier: FBB
 tags: WikiText
 title: Transklusion in WikiText
 type: text/vnd.tiddlywiki
 
-Sie können mit dem [[Transklusions Mechanismus|Transklusion]] den Inhalt eines Tiddlers in einen anderen Tiddler einbinden:
+Man kann mit dem [[Transklusions Mechanismus|Transklusion]] den Inhalt eines Tiddlers in einen anderen Tiddler einbinden:
+
+{{Transklusion}}
+
+! Anwendung
+
+Mit Hilfe der Transklusion-Notation wird der Inhalt eines Tiddlers in einen anderen eingebunden:
 
 * `{{MeinTiddler}}` transkludiert einen einzelnen Tiddler.
-* `{{MeinTiddler||VorlageTitel}}` zeigt den Tiddler mit Hilfe eines [[VorlagenTiddlers]] an.
-* `{{||VorlageTitel}}` benutzt einen Vorlagen Tiddler, ohne die interne Variable "[[current tiddler|WidgetVariable: currentTiddler]]" zu verändern.
+* `{{MeinTiddler||VorlageTitel}}` zeigt den Tiddler mit Hilfe eines [[Vorlagen-Tiddlers|Vorlagen-Tiddler]] an.
+* `{{||VorlageTitel}}` benutzt einen Vorlagen Tiddler, ohne die interne Variable "[[currentTiddler|currentTiddler Variable]]" zu verändern.
 
-Statt den Tiddler Titel direkt anzugeben kann eine sogenannte TextReferenz verwendet werden:
+!! Transkludierende Textreferenzen
+
+Statt den Tiddler Titel direkt anzugeben, kann eine sogenannte Text-Referenz verwendet werden:
 
 * `{{MeinTiddler!!feldName}}` transkludiert den Inhalt eines Tiddler Feldes.
 * `{{!!feldName}}` transkludiert das Feld des Tiddlers, der in der "current tiddler" Variable definiert ist.
-* `{{MyTiddler##index}}` transkludiert ein spezifisches Feld aus einem so genannten: DataTiddlers
-* `{{##index}}` transkludiert das angegebene Feld des "current DataTiddlers"
+* `{{MyTiddler##index}}` transkludiert ein spezifisches Feld aus einem so genannten: [[DataTiddlers|Daten-Tiddler]]
+* `{{##index}}` transkludiert das angegebene Feld des "current ~DataTiddlers"
+
+
+!! Gefilterte Transklusion
 
 Eine ähnliche Syntax kann verwendet werden, um eine Liste von Tiddlern mit einem Filter einzubinden:
 
@@ -30,3 +41,18 @@ Eine ähnliche Syntax kann verwendet werden, um eine Liste von Tiddlern mit eine
 !! Beispiel Transklusion
 
 <<list-links filter:"[tag[Transklusion in WikiText]]">>
+
+! Generierte Widgets
+
+Die WikiText Transclusion-Syntax erzeugt ein [[Tiddler-Widget|Widgets in WikiText]], das in ein TranscludeWidget eingebettet ist. Zum Beispiel erzeugt {{MyTiddler||MyTemplate!!myField}} das folgende Paar von Widgets:
+
+```
+<$tiddler tiddler="MyTiddler">
+<$transclude tiddler="MyTemplate" field="myField"/>
+</$tiddler>
+```
+
+<<.hr>>
+
+Siehe auch:
+<<list-links filter:"[!is[system]regexp:title[Transklusion]!title[Transklusion in WikiText]sortan[chapter]]" >>

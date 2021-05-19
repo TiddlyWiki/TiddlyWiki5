@@ -1,0 +1,26 @@
+created: 20200605211209568
+creator: FBB
+modified: 20210519132101643
+modifier: FBB
+tags: WikiText
+title: Makro-Aufrufe in WikiText
+type: text/vnd.tiddlywiki
+
+Um ein [[Makro|Makros]] aufzurufen, setze `<<` doppelte spitze Klammern `>>` um den Namen und etwaige Parameterwerte.
+
+Standardmäßig werden die Parameter in der gleichen Reihenfolge wie in der Definition des Makros aufgeführt. Ein Parameter kann mit seinem Namen beschriftet werden, entweder aus Gründen der Übersichtlichkeit oder um die Reihenfolge zu ändern.
+
+Wenn für einen Parameter kein Wert angegeben wird, wird stattdessen der für diesen Parameter in der Definition des Makros angegebene Standardwert verwendet. (Wenn kein Standardwert definiert wurde, ist der Parameter einfach leer).
+
+Jeder Parameterwert kann in `'`einfache Anführungszeichen`'`, `"`doppelte Anführungszeichen`"`, `"""`dreifache doppelte Anführungszeichen `"""` oder `[[`doppelte eckige Klammern `]]` eingeschlossen werden. Durch dreifache doppelte Anführungszeichen kann ein Wert fast alles enthalten. Wenn ein Wert keine Leerzeichen oder einfache oder doppelte Anführungszeichen enthält, benötigt er keine Trennzeichen.
+
+Es ist auch eine ausführlichere Darstellung dieser Syntax verfügbar: [ext[https://tiddlywiki.com/#Macro Call Syntax|https://tiddlywiki.com/#Macro%20Call%20Syntax]]
+
+Die Syntax ist eigentlich eine Kurzform für das [[MacroCallWidget]]. Das Widget selbst bietet größere Flexibilität, einschließlich der Möglichkeit, Parameterwerte zu transkludieren oder über zusätzliche Makros zu generieren.
+
+Da Makros einfach parametrisierte [[Variablen]] sind, kann der Wert einer Variablen mit den gleichen Techniken eingefügt werden.
+
+!! Benannte vs. unbenannte Parameter
+
+In der Wikitext-Notation ist die Verwendung benannter Parameter immer die sicherere Wahl im Vergleich zur ausschließlichen Definition von Werten. Die Nicht-Benennung von Parametern kann verwirrende Nebenwirkungen haben.  Angenommen, der erste Parameter eines Makros spezifiziert einen [[Status-Tiddler|Status-Funktionen]], während der zweite Parameter für einen [[Vorlagen-Tiddler|Transclusion mit Templates]] bestimmt ist. Sollte man vergessen haben, den ersten Parameter zu definieren oder über die Reihenfolge im Unklaren sein, könnte bei der nächsten Ausführung des Makros, möglicherweise bereits beim Einbinden in der Vorschau, ungewollt der Template-Tiddler mit dem Wert für den Status-Tiddler überschrieben werden.
+

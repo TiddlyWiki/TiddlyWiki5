@@ -1,0 +1,14 @@
+caption: replace
+created: 20200610135707620
+creator: FBB
+modified: 20210519165523595
+modifier: FBB
+op-input: eine Liste von Elementen
+op-output: neu geordnete Liste von Elementen
+op-parameter: das als Markierung zu verwendende Listenelement
+op-parameter-name: marker
+op-purpose: Markierung durch N Elemente ersetzen
+op-suffix: eine ganze Zahl N, Standardwert ist 1
+tags: Listen-Filter-Operator Sortier-Operator Filter-Operator
+title: replace Operator
+type: text/vnd.tiddlywiki

@@ -1,9 +1,67 @@
 created: 20140909115316467
 creator: pmario
-modified: 20140910095059058
-modifier: pmario
-tags: howto
+modified: 20210519132100310
+modifier: FBB
+tags: [[TiddlyWiki mit Node.js]]
 title: Installation von TiddlyWiki mit Node.js
 type: text/vnd.tiddlywiki
 
-Siehe: [ext[https://tiddlywiki.com/#GettingStarted - Node.js]]
+!! 1. Installiere Node.js
+
+Über den bevorzugten Anwendungsmanager.
+
+Oder die Dateien direkt von [ext[http://nodejs.org]] laden und den dortigen Dokumentationen folgen.
+
+!!! Linux
+Typischerweise mit: `$ sudo apt install nodejs`
+
+ In den meisten Fällen solltest Du auch den Node.js Paketmanager //npm// installieren: `$ sudo apt install  npm`
+
+!!! iOS (Mac)
+
+Auf einem Mac wird Node.js mit `brew install node` installiert
+
+
+!! 2. Installieren von ~TiddlyWiki
+
+Öffne eine Kommandozeile und tippe:
+
+: `npm install -g tiddlywiki`
+
+<<<
+Diese Aktion muss mit Administratorrechten ausgeführt werden.<br/>
+Unter Linux/iOS genügt ein vorranstehendes `sudo` dafür.
+<<<
+
+Das `-g` Flag bewirkt, dass ~TiddlyWiki global installiert wird. Ohne dieses Flag ist ~TiddlyWiki nur in dem Verzeichnis verfügbar, in dem es installiert wurde.
+
+
+Die Installation kann mit folgendem Befehl überprüft werden:
+
+: `tiddlywiki --version`
+
+Als Antwort wird die aktuelle Version von ~TiddlyWiki gemeldet (z.B. "5.1.22", es werden möglicherweise noch weitere Informationen angezeigt.)
+
+!! 3. Ausprobieren
+
+# ` tiddlywiki mynewwiki --init server` erstellt einen Ordner für ein neues Wiki, welches die serverseitigen Komponenten enthält.
+# `tiddlywiki mynewwiki --listen` startet das TiddlyWiki.
+# Starte deinen Browser und öffne die Adresse [ext[http://localhost/8080]] oder [ext[http://127.0.0.1/8080]].
+# Editiere und erstelle [[Tiddler]]
+
+!! 4. Optional offline
+
+Optional kannst du eine Offline-Kopie erstellen:
+
+* Klicke den Speicher-Button in der Sidebar, oder
+* in der Kommandozeile mit: `tiddlywiki mynewwiki --build index`
+
+
+!! Hinweise
+
+Bei Debian oder Debian-basierten Linuxen kann es zur folgenden Fehlermeldung kommen: `command not found`, obwohl das Paket node.js installiert ist. Dann muss möglicherweise eine symbolische Verbindung zwischen `nodejs` und `node` erstellt werden. Wie mann eine solche anlegt, findet sich in der Dokumentation der Distribution. Siehe dazu auch [ext[github issue 1434|http://github.com/Jermolene/TiddlyWiki5/issues/1434]].
+
+---
+
+
+Siehe auch: [ext[https://tiddlywiki.com/#GettingStarted - Node.js]]

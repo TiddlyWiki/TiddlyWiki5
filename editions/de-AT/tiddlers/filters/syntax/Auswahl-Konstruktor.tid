@@ -1,0 +1,14 @@
+created: 20200629201641154
+creator: FBB
+modified: 20210519135010497
+modifier: FBB
+tags: Filter
+title: Auswahl-Konstruktor
+type: text/vnd.tiddlywiki
+
+Die Ausgabe eines [[Filter-Schrittes|Filter-Schritt]] hängt von seinem [[Operator|Filter-Operator]] ab:
+
+* Die meisten Operatoren leiten ihren "Output" von ihrem "Input" ab. Viele von ihnen geben z.B. eine Teilmenge ihres "Inputs" aus und werden so dem Namen "Filter" wirklich gerecht. So schränken sie das Gesamtergebnis des beinhaltenden Durchlaufs ein. Diese Operatoren werden als ''Auswahl-Modifizierer'' bezeichnet.
+* Einige wenige Operatoren ignorieren ihren Input und erzeugen stattdessen einen unabhängigen Output. Solche Operatoren werden als ''Auswahl-Konstruktor'' bezeichnet: Damit wird eine völlig neue Auswahl erzeugt.
+
+Ein gutes Beispiel für einen Konstruktor ist der [[title Operator]]. Die Ausgabe von `[title[A]title[B]]` ist einfach <<.def B>>. Aber der [[field Operator]] ist ein Modifikator, so dass `[title[A]field:title[B]` überhaupt nichts ausgibt. 

@@ -1,0 +1,16 @@
+caption: previous
+created: 20200630210110726
+creator: FBB
+modified: 20210519165735430
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: Alle Einträge aus dem Feld `list` des Eingabe-Tiddlers die vor dem Eintrag ''//{{!!op-parameter-name}}//'' stehen
+op-parameter: der Titel eines Tiddlers
+op-parameter-name: T
+op-purpose: findet die Titel in einem Listenfeld, welch vor dem eingegebenen Titel stehen
+tags: Sortier-Operator Filter-Operator Feld-Operator
+title: previous Operator
+type: text/vnd.tiddlywiki
+
+Jeder Eingabe-Titel wird der Reihe nach verarbeitet. Befindet er sich im `list`-Feld, wird er an die Ausgabe angehängt. Wenn ein Titel nicht im `list`-Feld aufgeführt ist oder dort an erster Stelle steht, trägt er nichts zur Ausgabe bei.
+

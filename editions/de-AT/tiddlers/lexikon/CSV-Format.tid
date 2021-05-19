@@ -1,0 +1,37 @@
+created: 20201103212914227
+creator: FBB
+modified: 20210519132101156
+modifier: FBB
+tags: Lexikon
+title: CSV-Format
+type: text/vnd.tiddlywiki
+
+''[ext[CSV|https://de.wikipedia.org/wiki/CSV_(Dateiformat)]]'' (//Comma-Separated Values//) ist ein Standard-Klartextformat zum Speichern einer Datentabelle. Ein allgemeiner Standard für das Dateiformat CSV existiert nicht, jedoch wird es im IETF&nbsp;Standard﻿&nbsp;[ext[RFC 4180|https://tools.ietf.org/html/rfc4180]] grundlegend beschrieben. Die zu verwendende Zeichenkodierung ist ebenso nicht festgelegt.
+
+Jede Zeile der Tabelle wird als ''Datensatz'' bezeichnet und belegt eine Zeile.
+
+Die Spalten werden als ''Felder'' bezeichnet. Jedes Feld einer Zeile ist durch ein Komma `,`, Semikolon `;`, Doppelpunkt `:`, Leerzeichen oder Tabstop vom nächsten Feld getrennt.
+
+Text innerhalb des Feldes kann auch durch Anführungszeichen `"` eingeschlossen werden.
+
+!!! Beispiel
+
+Eine Tabelle die wie folgt aussieht:
+
+| ID |Zahlenwert |Beschreibung | Preis |h
+|1 |4711 |Köllnisch Wasser |6,95€ |
+|2 |42 |Ergebnis der Weltformel |unbezahlbar |
+|3 |3,141592654 |Kreiszahl Pi |rund 3,14€ |
+
+... sieht im CSV-Format so aus:
+
+```
+ID;Zahlenwert;Beschreibung;Preis
+1;4711;"Köllnisch Wasser";"6,95€"
+2;42;"Ergebnis der Weltformel";"unbezahlbar"
+3;3,141592654;"Kreiszahl Pi";"rund 3,14€"
+```
+<br/>
+
+Das Makro <<.mlink csvtiddlers>> gibt den Tiddler-Inhalt im CSV-Format zurück.
+

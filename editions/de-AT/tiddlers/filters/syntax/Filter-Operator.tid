@@ -1,0 +1,62 @@
+caption: Filter-Operatoren
+created: 20200610182136337
+creator: FBB
+modified: 20210519164441299
+modifier: FBB
+tags: Filter
+title: Filter-Operator
+type: text/vnd.tiddlywiki
+
+\define .operator-rows(filter)
+<$list filter="$filter$"><tr>
+<td><$link to={{!!title}}>{{!!caption}}</$link></td>
+<td>{{!!op-purpose}}</td>
+<td align="center"><$list filter="[all[current]tag[Common-Operator]]">✓</$list></td>
+<td align="center"><$list filter="[all[current]tag[Negierbarer-Operator]]">`!`</$list></td>
+</tr></$list>
+\end
+
+\define .group-heading(_)
+<tr class="doc-table-subheading"><th colspan="4" align="center">$_$</th></tr>
+\end
+
+
+Ein Filter-Operator ist ein vordefiniertes Schlüsselwort, das an einen einzelnen [[Schritt|Filter-Schritt]] eines [[Filters|Filter]] angehängt ist. Er definiert die jeweilige Aktion dieses Schrittes.
+
+Wichtig: Jeder erste Schritt eines Filterdurchlaufs, dem keine Titel übergeben wurden, erhält die Ausgabe von `[all[tiddlers]]` als Eingabe.
+
+Die folgende Tabelle listet Core-Operatoren auf, wobei die gebräuchlichsten mit ✓ gekennzeichnet sind. Die letzte Spalte gibt an, ob ein Operator die Negation mit dem Präfix `!` erlaubt. Das Symbol weist somit auf Besonderheiten bezüglich der ''negierten'' Ausgabe jedes Operators hin.
+
+---
+
+Da aktuell noch nicht alle aufgelistet sind, ist hier die komplette Auflistung in englisch zu finden:
+
+* [ext[https://tiddlywiki.com/#Filter Operators|https://tiddlywiki.com/#Filter%20Operators]]
+
+<table>
+<tr>
+<th align="left">Operator</th>
+<th align="left">Verwendung</th>
+<th align="center">✓</th>
+<th align="center">`!`</th>
+</tr>
+<<.operator-rows "[tag[Filter-Operator]!tag[Sortier-Operator]!tag[Mathematik-Operator]!tag[String-Operator]!tag[Tag-Operator]!tag[Spezial-Operator]sort[]]">>
+<<.group-heading "Sortier-Operator">>
+<<.operator-rows "[tag[Filter-Operator]tag[Sortier-Operator]!tag[Listen-Filter-Operator]!tag[Mathematik-Operator]!tag[String-Operator]!tag[Tag-Operator]!tag[Spezial-Operator]sort[]]">>
+<<.group-heading "Listen-Filter-Operator">>
+<<.operator-rows "[tag[Filter-Operator]tag[Listen-Filter-Operator]tag[Sortier-Operator]!tag[Mathematik-Operator]!tag[String-Operator]!tag[Tag-Operator]!tag[Spezial-Operator]sort[]]">>
+<<.group-heading "String-Operator">>
+<<.operator-rows "[tag[Filter-Operator]!tag[Sortier-Operator]!tag[Mathematik-Operator]tag[String-Operator]!tag[Tag-Operator]!tag[Spezial-Operator]sort[]]">>
+<<.group-heading "Mathematik-Operator">>
+<<.operator-rows "[tag[Filter-Operator]!tag[Sortier-Operator]tag[Mathematik-Operator]!tag[String-Operator]!tag[Tag-Operator]!tag[Spezial-Operator]sort[]]">>
+<<.group-heading "Tag-Operator">>
+<<.operator-rows "[tag[Filter-Operator]!tag[Sortier-Operator]!tag[Mathematik-Operator]!tag[String-Operator]tag[Tag-Operator]!tag[Spezial-Operator]sort[]]">>
+<<.group-heading "Spezial-Operator">>
+<<.operator-rows "[tag[Filter-Operator]!tag[Sortier-Operator]!tag[Mathematik-Operator]!tag[String-Operator]!tag[Tag-Operator]tag[Spezial-Operator]sort[]]">>
+</table>
+
+---
+
+Da aktuell noch nicht alle aufgelistet sind, ist hier die komplette Auflistung in englisch zu finden:
+
+* [ext[https://tiddlywiki.com/#Filter Operators|https://tiddlywiki.com/#Filter%20Operators]]

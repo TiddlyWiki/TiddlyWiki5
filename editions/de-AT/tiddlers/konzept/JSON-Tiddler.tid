@@ -1,0 +1,13 @@
+created: 20200528211739591
+creator: FBB
+modified: 20210519132101542
+modifier: FBB
+tags: Konzept Lexikon
+title: JSON-Tiddler
+type: text/vnd.tiddlywiki
+
+Ein JSON-Tiddler ist ein Daten-Tiddler, der eine JSON-Struktur in seinem Textfeld enthält.
+
+Der Typ des Tiddlers (~ContentType) ist `application/json`.
+
+Die $:/HistoryList ist ein gutes Beispiel für einen JSON-Tiddler.

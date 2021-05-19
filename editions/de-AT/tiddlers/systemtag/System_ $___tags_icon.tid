@@ -1,0 +1,14 @@
+caption: $:/_tags/icon
+created: 20201105203419851
+creator: FBB
+description: benutzerdefinierter System-Tag, für eigene Icons
+modified: 20210519132102025
+modifier: FBB
+tags: SystemTags
+title: System: $:/_tags/icon
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.
+
+
+<<list-links filter:"[tag{!!title}]">>

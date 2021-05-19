@@ -1,0 +1,11 @@
+caption: $:/tags/SearchResults
+created: 20201125223552531
+creator: FBB
+description: markiert Tiddler für die Darstellung der Such-Ergebnisliste
+modified: 20210519132102084
+modifier: FBB
+tags: SystemTags
+title: System: $:/tags/SearchResults
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field  {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.

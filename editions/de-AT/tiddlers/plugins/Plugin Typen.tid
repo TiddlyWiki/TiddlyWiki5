@@ -1,0 +1,26 @@
+created: 20200602220128785
+creator: FBB
+modified: 20210519132101756
+modifier: FBB
+tags: 
+title: Plugin Typen
+type: text/vnd.tiddlywiki
+
+Die Verarbeitung von Plugins wird durch ein Plugin-Typ-Feld bestimmt. Die folgenden Werte werden standardmäßig definiert:
+
+* `plugin` -- ein normales Plugin
+* ` theme` -- ein Theme-Plugin (siehe [[Theme-Mechanismus]]). Nur das Theme-Plugin, das im Tiddler $:/theme benannt ist, wird zur Laufzeit aktiviert (zusammen mit allen abhängigen Theme-Plugins)
+* `language` -- ein Sprach-Plugin (siehe [[Übersetzungs-Mechanismus]]). Nur das Sprach-Plugin, das im Tiddler $:/language genannt ist, wird zur Laufzeit aktiviert (zusammen mit allen abhängigen Sprach-Plugins)
+
+Die folgenden Plugin-Typen werden intern vom Core-Code verwendet:
+
+* `import` -- für das spezielle $:/Import -Plugin, das beim Importieren erstellt wird.
+* `info` -- für den speziellen $:/temp/info-plugin Tiddler, erstellt vom [[Info-Mechanismus]].
+
+Obwohl von der Plugin-Bibliothek nicht unterstützt, ist es auch möglich, benutzerdefinierte Plugin-Typen zu verwenden, um ein pluginartiges Verhalten mit einer benutzerdefinierten Benutzerschnittstelle zu erzeugen. Plugins mit einem benutzerdefinierten Typ erhalten automatisch das gleiche Verhalten wie einfache Plugins, können aber eine benutzerdefinierte Benutzerschnittstelle unter Verwendung eines geeigneten Ansichts-Template-Segments anzeigen.
+
+Standardmäßig werden Tiddler innerhalb von Plugins mit benutzerdefinierten Plugin-Typen nicht als Shadow-Tiddler registriert. Die einzelnen Tiddler können weiterhin über das Transclude-Widget, View-Widget oder den Plugin-Tiddler-Operator als Unter-Tiddler angesprochen werden. 
+
+<<.hr>>
+
+Siehe <<wikidokulink "Plugin Types">> (englisch)

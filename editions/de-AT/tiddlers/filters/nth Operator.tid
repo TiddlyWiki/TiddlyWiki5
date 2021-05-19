@@ -1,0 +1,15 @@
+caption: nth
+created: 20200630200103936
+creator: FBB
+modified: 20210519165752523
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: der ''//{{!!op-parameter-name}}//''-te Eingabe-Titel
+op-parameter: eine ganze Zahl (integer), Defaultwert ist 1
+op-parameter-name: N
+op-purpose: wählt den N-ten aller Eingabe-Titel aus
+tags: Sortier-Operator Filter-Operator
+title: nth Operator
+type: text/vnd.tiddlywiki
+
+Die Liste der Eingabe-Tiddler ist eins-basiert. Mit anderen Worten, `nth[1]` ist gleichbedeutend mit dem [[first Operator]].

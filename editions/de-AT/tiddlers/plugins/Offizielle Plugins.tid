@@ -1,0 +1,33 @@
+caption: Offizelle Plugins
+created: 20200525183911418
+creator: FBB
+modified: 20210519132101726
+modifier: FBB
+tags: Plugins
+title: Offizielle Plugins
+type: text/vnd.tiddlywiki
+
+Die offizielle [[TiddlyWiki-Plugin-Bibliothek|Installieren eines Plugins aus der Plugin-Bibliothek]] enthält die [[Plugins]], die Teil des GitHub Haupt-Repository von ~TiddlyWiki5 sind. Installiere diese aus der Plugin-Bibliothek. Plugins aus der offiziellen Plugin-Bibliothek werden als Teil des Upgrade-Prozesses automatisch aktualisiert.
+
+<!-- <<list-links "[tag[OfficialPlugins]]">>//-->
+
+* Amazon Web Services Plugin
+* ~BrowserStorage Plugin
+* [[Browser Sniff|$:/plugins/tiddlywiki/browser-sniff]]
+* ~CodeMirror Plugin
+* D3 Plugin
+* Dynaview Plugin
+* External Attachments Plugin
+* [[Highlight Plugin]]
+* Innerwiki Plugin
+* ~KaTeX Plugin
+* Markdown Plugin
+* [ext[Mobile Drag And Drop Shim Plugin|https://tiddlywiki.com/#Mobile Drag And Drop Shim Plugin]]
+* [[Railroad Plugin]]
+* ~SaveTrail Plugin
+* TW2Parser Plugin
+* Twitter Plugin
+
+<<.hr>>
+
+Siehe auch: <<wikidokulink "~OfficialPlugins">> (englisch)

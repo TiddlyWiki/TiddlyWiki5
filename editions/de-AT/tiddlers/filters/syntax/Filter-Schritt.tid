@@ -1,0 +1,27 @@
+created: 20200615212630208
+creator: FBB
+modified: 20210519132101305
+modifier: FBB
+tags: Filter-Syntax
+title: Filter-Schritt
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+[:"!"]
+[: [[operator|"Filter-Operator"]] [:":" suffix] ]
+[[parameter|"Filter-Parameter"]]
+"""/>
+
+Ein <<.def Filter-Schritt>> stellt eine einzelne Operation innerhalb der [[Filter-Syntax]] dar. Programmtechnisch gleicht es einem Funktionsaufruf, an den die Eingabe des Schrittes als impliziter Parameter übergeben wird. Die Ausgabe eines Schrittes ist eine [[Selektion|Titelselektion]], die zu einem [[Durchlauf|Filter-Durchlauf]] beiträgt und damit zum gesamten [[Filter-Ausdruck]].
+
+Der Operator des Schrittes wird aus einer Liste von [[vordefinierten Schlüsselwörtern|Filter-Operator]] gebildet, die sich durch Plugins erweitert lassen. Jeder nicht erkannte Operator wird so behandelt, als ob er das Suffix des [[field Operator]] wäre. Wenn der Operator eines Schrittes ganz weggelassen wird, wird standardmäßig `title` vorgegeben.
+
+Das ''Suffix'' ist zusätzlicher Text, oft der Name eines [[Feldes|Tiddler-Feld]], der die Bedeutung bestimmter Operatoren erweitert.
+
+Viele Schritte erfordern einen expliziten ''Parameter'', der auch als ''Operand'' bezeichnet wird und der weiter definiert, was der Schritt tun soll.
+
+<br/>
+
+---
+
+Link: [ext[https://tiddlywiki.com/#Filter Step]]

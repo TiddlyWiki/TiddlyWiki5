@@ -1,9 +1,19 @@
 created: 20140908134245442
 creator: pmario
-modified: 20140908134252042
-modifier: pmario
+modified: 20210519132100405
+modifier: FBB
 tags: Lexikon
 title: Node.js
 type: text/vnd.tiddlywiki
 
-Siehe: https://tiddlywiki.com/#Node.js
+Node.js ist eine serverseitige, eventbasierte JavaScript-Laufzeitumgebung. Diese basiert auf der JavaScript-Laufzeitumgebung "V8", welche für den Browser Google Chrome entwickelt wurde. Ursprünglich für skalierbare Netzwerkanwendungen und Webserver-Programmierung entwickelt, können mit Note.js auch Anwendungen für PC, Mac oder Linux-Computer erstellt werden.
+
+Im Gegensatz zu "normalem", im Browser ausgeführtem JavaScript-Code hat Node.js vollen Zugriff auf das Dateisystem und andere Ressourcen des Computers, so dass er die Funktionen ausführen kann, welche traditionell Sprachen wie Java, PHP und Python vorbehalten waren. Siehe http://nodejs.org für weitere Einzelheiten.
+
+Für TiddlyWiki bedeutet Node.js, dass wir eine einzige Code-Basis haben, der Code kann sowohl im Browser als auch auf dem Server ausgeführt werden. Dadurch ergibt sich eine größere Flexibilität bei der Verwendung.
+
+Siehe [[TiddlyWiki mit Node.js]] für weitere Einzelheiten.
+
+---
+
+Siehe auch: <<wikidokulink "Node.js">> (englisch)

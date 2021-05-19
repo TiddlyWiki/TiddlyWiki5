@@ -1,0 +1,13 @@
+color: #9fa3cb
+created: 20200602214911115
+creator: FBB
+modified: 20210519132101360
+modifier: FBB
+tags: Referenz
+title: Funktionalität
+toc-link: yes
+type: text/vnd.tiddlywiki
+
+Dies sind die internen Funktionen und Mechanismen, welche zusammengenommen das TiddlyWiki ausmachen.
+
+<<list-links "[tag[Funktionalität]]">>

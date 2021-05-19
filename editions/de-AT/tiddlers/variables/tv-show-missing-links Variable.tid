@@ -1,0 +1,15 @@
+created: 20200928190558137
+creator: FBB
+modified: 20210519132102267
+modifier: FBB
+tags: [[Core Variablen]] Variablen [[Konfigurations Variablen]]
+title: tv-show-missing-links Variable
+type: text/vnd.tiddlywiki
+
+Die Variable <<.var tv-show-missing-links>> definiert, ob ''fehlende Links'' innerhalb des Geltungsbereichs der Variable als [[Links|Hyperlinks]] dargestellt werden oder nicht.
+
+Global wird die Variable innerhalb des PageTemplates gesetzt und kann im [[$:/ControlPanel]] unter "Einstellungen - [[Wiki-Links|$:/core/ui/ControlPanel/Settings/MissingLinks]] - Aktiviere Links zu fehlenden Tiddlern" geändert werden.
+
+Wenn <<.var tv-show-missing-links>> auf `no` gesetzt ist, werden fehlende Links als Klartext dargestellt
+
+Wenn <<.var tv-show-missing-links>> auf `yes` gesetzt ist, werden fehlende Links als [[Wiki-Link|Verknüpfungen in WikiText]] dargestellt

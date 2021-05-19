@@ -1,0 +1,21 @@
+[
+    {
+        "created": "20200611105419273",
+        "text": "",
+        "type": "text/vnd.tiddlywiki",
+        "title": "has Operator",
+        "tags": "Filter-Operator Feld-Operator Negierbarer-Operator Common-Operator",
+        "modifier": "FBB",
+        "modified": "20210519165035037",
+        "creator": "FBB",
+        "op-suffix-name": "S",
+        "op-suffix": "<<.fromVersion \"5.1.14\">> optional das Schlüsselwort `field` oder <<.fromVersion \"5.1.22\">> optional das Schlüsselwort `index` ",
+        "op-purpose": "die Eingabe nach der Existenz des Feldes filtern",
+        "op-parameter-name": "F",
+        "op-parameter": "den Namen eines [[Feldes|Tiddler Felder]] oder, optional, eines [[Indexes|TextReferenz]]",
+        "op-output": "''ohne suffix'' <br/>»  diejenigen Eingabe-Tiddler, in denen Feld F einen nicht leeren Wert hat<br/>''suffix'' `field`<br/>» diejenigen Eingabe-Tiddler, in denen Feld F existiert",
+        "op-neg-output": "''ohne suffix'' <br/>»  diejenigen Eingabe-Tiddler, in denen Feld F ''//nicht//'' existiert oder einen leeren Wert hat<br/>''suffix'' `field`<br/>» diejenigen Eingabe-Tiddler, in denen Feld F ''//nicht//'' existiert<br/>''suffix'' `index`<br/>» diejenigen Eingabe-Tiddler, in denen Index F ''//nicht//'' existiert",
+        "op-input": "eine [[Titelselektion]]",
+        "caption": "has"
+    }
+]

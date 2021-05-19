@@ -1,0 +1,15 @@
+created: 20200610161925210
+creator: FBB
+modified: 20210519132102193
+modifier: FBB
+tags: Konzept
+title: Titelselektion
+type: text/vnd.tiddlywiki
+
+Eine ''Titelselektion'' ist ein geordnetes Set von Tiddler-Titeln (oder ähnlichen Zeichenfolgen), in dem kein Titel mehr als einmal vorkommt.
+
+Titelselektionen sind bei der Verwendung von [[Filtern|Filter]] wichtig.
+
+Die einfachste Methode für eine Titelselektion ist eine Titelliste.
+
+<<list-links "[tag[Konzept]regexp[Wiki]]" >>

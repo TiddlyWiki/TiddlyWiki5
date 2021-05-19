@@ -1,0 +1,20 @@
+[
+    {
+        "created": "20200629142835397",
+        "text": "<<.from-version \"5.1.18\">>: Der Suchfilteroperator wurde in 5.1.18 signifikant verbessert. Frühere Versionen unterstützen die erweiterte Syntax nicht und erlauben daher weder die Suche in mehreren Feldern, noch die ''literal'' oder ''case-sensitive'' Optionen.\n\nDer Suchoperator verwendet eine erweiterte Syntax, die es erlaubt, mehrere Felder und Flags zu übergeben:\n\n\n```\n[search:<field list>:<flag list>[<operand>]]\n```\n\n* ''field list'': eine kommagetrennte Liste von Feldnamen zur Einschränkung der Suche\n** Standardwerte für  die Felder `tags`, `text` und `title`, wenn diese leer sind\n** ein Sternchen `*` anstelle der Feldliste bewirkt, dass die Suche über alle Felder durchgeführt wird, welche bei jedem Tiddler vorhanden ist.\n** ein Minuszeichen  `-`  vor der Liste kehrt die Reihenfolge um, so dass die Suche in allen Feldern mit Ausnahme der aufgelisteten Felder durchgeführt wird\n* ''flag list'': eine komma-separierte Liste von Flags (Defaultwert ist `words`, falls diese leer sind)\n* ''operand'': der [[Filter Operator|Filter-Operator]]\n\n\n```\n[search:title,caption:literal,casesensitive[The first]]\n```\n\nDie verfügbaren Flags sind:\n\n* Suchmodus - das erste der folgenden Flags bestimmt die Art der Suche, die durchgeführt wird:\n** ''literal'': betrachtet die Suchzeichenfolge als eine literale Zeichenfolge und erfordert eine exakte Übereinstimmung\n** ''whitespace'': betrachtet die Suchzeichenfolge als eine literale Zeichenfolge, betrachtet jedoch alle aufeinanderfolgende Leerzeichen als ein einziges Leerzeichen. Somit stimmt `AB` mit `A  B` überein.\n** ''regexp'': behandelt die Suchzeichenfolge als regulären Ausdruck. Beachte, dass die Option ''regexp'' die Verwendung des älteren [[regexp Operator]] überflüssig macht.\n** ''words'': (der Standardwert) behandelt die Suchzeichenfolge als eine Liste von durch Leerzeichen getrennten Token und findet Treffer, wenn alle Token in der Zeichenfolge vorkommen (unabhängig von der Reihenfolge und davon, ob sich dazwischen anderer Text befindet)\n* ''casesensitive'': Falls vorhanden, erzwingt dieses Flag eine Übereinstimmung unter Berücksichtigung der Groß- und Kleinschreibung. Wobei Groß- und Kleinbuchstaben, beim Setzen des Flags, unterschieden werden. Standardmäßig wird Groß- und Kleinbuchstaben als identisch betrachtet.\n* ''anchored'': <<.fromVersion \"5.1.20\">> verankert die Suche am Anfang der Zeichenkette (gilt für die Modi @@color:red;''whitespace'', ''literale''@@ und @@color:red;''words''@@)",
+        "type": "text/vnd.tiddlywiki",
+        "title": "search Operator",
+        "tags": "Filter-Operator Feld-Operator Negierbarer-Operator Common-Operator",
+        "modifier": "FBB",
+        "modified": "20210519164913138",
+        "creator": "FBB",
+        "op-suffix": "der Suchoperator verwendet ein umfassendes Suffix-Vokabular, siehe unten für Details",
+        "op-purpose": "Filtern der Eingabe durch Suche im Inhalt des Tiddlers",
+        "op-parameter-name": "F",
+        "op-parameter": "einen oder mehrere durch Leerzeichen getrennte Suchbegriffe oder eine literale Suchzeichenfolge",
+        "op-output": "die Eingabe-Tiddler, in denen alle Suchbegriffe im Wert des Feldes //''F''// gefunden werden können ",
+        "op-neg-output": "die Eingabe-Tiddler, in denen ''nicht'' alle Suchbegriffe gefunden werden können",
+        "op-input": "eine [[Titelselektion]]",
+        "caption": "search"
+    }
+]

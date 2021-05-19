@@ -1,0 +1,16 @@
+caption: limit
+created: 20200611220342504
+creator: FBB
+modified: 20210519165815532
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-neg-output: die letzten ''//N//'' angegebenen Titel
+op-output: die ersten ''//N//'' angegebenen Titel
+op-parameter: eine ganze Zahl, default ist 0
+op-parameter-name: N
+op-purpose: den ersten oder letzten N Eingabetitel auswählen
+tags: Sortier-Operator Filter-Operator Negierbarer-Operator Common-Operator
+title: limit Operator
+type: text/vnd.tiddlywiki
+
+Die Angabe `limit[N]` und `!limit[N]` sind Synonyme für das `first[N]` bzw. `last[N]`.

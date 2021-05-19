@@ -1,0 +1,17 @@
+created: 20200629183644396
+creator: FBB
+modified: 20210519132101187
+modifier: FBB
+tags: Filter-Syntax
+title: Dominantes Anhängen
+type: text/vnd.tiddlywiki
+
+[[Filter]] manipulieren [[Titelgruppen|Titelselektion]], in denen kein Titel mehr als einmal vorkommen darf. Außerdem müssen sie oft eine solche Menge an eine andere anhängen.
+
+Dies geschieht in der Weise, dass im Falle der Duplizierung eines Titels die frühere Kopie dieses Titels verworfen wird. Die angehängten Titel sind dominant.
+
+Wenn eine Auswahl beispielsweise `Andrew, Becky, Clara, Daniel` enthält und dann `Andrew, Barney, Clara, Daisy` angehängt wird, lautet das Ergebnis `Becky, Daniel, Andrew, Barney, Clara, Daisy`.
+
+Dieses Verhalten kann bei der Arbeit mit [[Mathematik-Operatoren]] zu unerwarteten Ergebnissen führen.  Beispielsweise wird `1 2 3 +[sum[]]` erwartungsgemäß mit ''6'' berechnet. Aber bei `1 1 1 1 +[sum[]]` wird ''1'' zurückgegeben. Wenn man `+[sum[]]` aus jedem Filter entfernt, wird das Problem deutlich: `1 2 3` wird zur Liste ''1, 2, 3'' konvertiert, während `1 1 1` aufgrund einer Deduplizierung zum Element ''1'' konvertiert wird.
+
+In solchen Situationen kann das Präfix `=` verwendet werden, um die Deduplizierung zu deaktivieren. Ein Beispiel: aus `=1 =1 =1 =1 +[sum[]]` wird erwartungsgemäß ''3'' errechnet. Alternativ kann der [[split-Operator]] verwendet werden: `[[1,1,1]split[,]sum[]]`. 

@@ -1,6 +1,6 @@
 created: 20131221085742684
 creator: pmario
-modified: 20150615130547291
+modified: 20210519132100505
 modifier: pmario
 tags: howto TiddlyFox
 title: Speichern mit TiddlyFox
@@ -24,9 +24,9 @@ Wenn Sie "Firefox for Android" verwenden, dann beachten sie: [[Speichern mit Tid
 # Öffnen Sie die Datei mit Firefox.
 # Beim Öffnen der Datei erscheint ein Dialog, mit der Frage, ob der direkte Dateizugriff für TiddlyFox erlaubt werden soll.
 #* ''Klicken Sie hier unbedingt "OK" '':
-# Erstellen Sie einen neuen Tiddler mit dem {{$:/core/images/new-button}} ''plus'' im rechten Menü. 
+# Erstellen Sie einen neuen Tiddler mit dem {{$:/core/images/new-button}} ''plus'' im rechten Menü.
 # Geben Sie den Text ein und bestätigen die Eingabe mit dem {{$:/core/images/done-button}} ''OK''.
 # Speichern Sie die Änderungen mit: {{$:/core/images/save-button}} ''speichern'' im rechten Menü
 # Rechts oben sollte ein gelber Nachrichten-Dialog mit "Wiki gespeichert!" auftauchen.
 #* Ist dies nicht der Fall, dann überprüfen sie, ob TiddlyFox im Firefox: ~AddOn Menü richtig geladen wurde.
-# Laden Sie die Seite neu, um zu überprüfen, ob die Datei korrekt gespeichert wurde. 
+# Laden Sie die Seite neu, um zu überprüfen, ob die Datei korrekt gespeichert wurde.

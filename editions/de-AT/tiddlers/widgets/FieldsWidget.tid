@@ -1,0 +1,39 @@
+created: 20200603205129987
+creator: FBB
+modified: 20210519132101250
+modifier: FBB
+tags: Widgets
+title: FieldsWidget
+type: text/vnd.tiddlywiki
+
+! Einführung
+
+Das <<.wid Fields>>-Widget stellt jedes Feld eines bestimmten Tiddlers über eine einfache Textvorlage dar. Eine Liste der auszuschließenden Felder kann bereitgestellt werden. Es wird intern von ~TiddlyWiki5 verwendet, insbesondere von der Dateispeicherfunktion.
+
+! Template Handhabung
+
+Die bereitgestellte Vorlage wird mit den folgenden speziellen Ersetzungen gerendert:
+
+|Symbol|Ersetzung|h
+|$name$|Feldname |
+|$value$|Feldwert  |
+|$encoded_value$|HTML-kodierte Form des Feldwertes |
+
+! Inhalte und Attribute
+
+Der Inhalt des Widgets `<$fields>` wird ignoriert.
+
+|Attribute|Beschreibung|h
+|tiddler |Titel des Tiddlers, von dem aus die Felder angezeigt werden sollen (Standardeinstellung: [[aktueller Tiddler|Aktueller Tiddler]]) |
+|template |Text der Vorlage (siehe oben) |
+|exclude |Listen der auszuschließenden Felder (Standardwert ist "text") |
+|include |Listen der Felder, die einbezogen werden sollen, falls das Feld vorhanden ist. Dieser Parameter hat Vorrang vor "exclude". |
+|sort |Sortiert die Felder nach Namen (Standardeinstellung "yes"). Auf "no" setzen, wenn die "enthaltene" Reihenfolge beibehalten werden soll! |
+|sortReverse |kehrt die Sortierung um |
+|stripTitlePrefix |Wenn auf "yes" gesetzt, werden die Präfixe in geschweiften Klammern aus den Titeln entfernt (z.B. `{Präfix}HelloThere` wird zu `HelloThere`) |
+
+Das Attribut `stripTitlePrefix` wird beim Erstellen von ~TiddlyWiki Classic verwendet; siehe `editions/tw2` im ~TiddlyWiki5 Repo.
+
+<<.hr>>
+
+Siehe: <<wikidokulink "~FieldsWidget">> (englisch)

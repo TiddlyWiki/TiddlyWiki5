@@ -1,0 +1,16 @@
+caption: {{$:/language/SideBar/Contents/Caption}}
+created: 20140918100037381
+creator: pmario
+list: HelloThere Einführung WikiText [[Was kann TiddlyWiki]] Konzept Lexikon Makros Bilder howto Plugins Widgets Referenz TiddlyFox TWclassic Video [[Über TiddlyWiki]]
+list-before: $:/core/ui/SideBar/Open
+modified: 20210519163257508
+modifier: pmario
+tags: $:/tags/SideBar
+title: InhaltsVerzeichnis
+type: text/vnd.tiddlywiki
+
+<div class="tc-table-of-contents">
+
+<<toc-selective-expandable 'InhaltsVerzeichnis' >>
+
+</div>

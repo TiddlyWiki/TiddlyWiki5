@@ -1,0 +1,18 @@
+caption: nsortcs
+created: 20200630205359151
+creator: FBB
+modified: 20210519165800109
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-neg-output: die Eingabe, sortiert in ''absteigender'' Reihenfolge nach dem Feld ''//{{!!op-parameter-name}}//''. Die Feldwerte werden als Zahl behandelt.
+op-output: die Eingabe, sortiert in aufsteigender Reihenfolge nach dem Feld ''//{{!!op-parameter-name}}//''. Die Feldwerte werden als Zahl behandelt.
+op-parameter: der Name eines [[Feldes|Tiddler Felder]], standardmäßig das Titel-Feld des Tiddlers <<.field title>>
+op-parameter-name: F
+op-purpose: Eingabe-Titel nach einem numerischen Feld sortieren und Groß- und Kleinschreibung unterschiedlich behandeln
+tags: Sortier-Operator Filter-Operator Feld-Operator Negierbarer-Operator
+title: nsortcs Operator
+type: text/vnd.tiddlywiki
+
+Nicht-numerische Werte werden so behandelt, als hätten sie einen höheren Wert als jede Zahl, und der Unterschied zwischen Groß- und Kleinbuchstaben wird beachtet.
+
+Vergleiche dazu den [[nsort Operator]].

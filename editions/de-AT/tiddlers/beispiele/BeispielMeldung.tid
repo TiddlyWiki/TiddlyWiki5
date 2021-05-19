@@ -1,0 +1,15 @@
+caption: Ein Beispiel für eine modale Meldung
+created: 20210518212350207
+creator: FBB
+footer: <$button message="tm-close-tiddler">Schliessen</$button>
+modified: 20210519132101106
+modifier: FBB
+tags: 
+title: BeispielMeldung
+type: text/vnd.tiddlywiki
+
+Dies ist ein modaler Dialog, gespeichert im Tiddler ''~BeispielMeldung''
+
+{{Motovun Jack.jpg}}
+
+Hier für die zweite Meldung <$button message="tm-modal" param="BeispielMeldung2">klicken</$button>

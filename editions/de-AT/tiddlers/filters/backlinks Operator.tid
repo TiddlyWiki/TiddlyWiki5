@@ -1,0 +1,17 @@
+caption: backlinks
+created: 20201028223242657
+creator: FBB
+modified: 20210519165156155
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: alle Nicht-[[System|System-Tiddler]]-Titel, die [[harte Links|Hard- und Soft-Links]] zu den Eingabetiteln enthalten
+op-parameter: keiner
+op-parameter-name: 
+op-purpose: die Titel finden, die auf jeden Eingabe-Titel verweisen
+tags: Filter-Operator
+title: backlinks Operator
+type: text/vnd.tiddlywiki
+
+Jeder Eingabetitel wird der Reihe nach bearbeitet. Die entsprechende Tiddler's-Liste der Backlinks wird generiert, alphabetisch nach Titel sortiert und dann vorrangig an die Gesamtausgabe des Operators angehängt.
+
+Siehe Beispiele in [ext[backlinks Operator (Examples)|https://tiddlywiki.com/#backlinks Operator (Examples)]]

@@ -1,0 +1,14 @@
+caption: putbefore
+created: 20200610131325178
+creator: FBB
+modified: 20210519165548236
+modifier: FBB
+op-input: selektierte Titel
+op-output: erste Stelle ''//N//'' des eingegebene Titels
+op-parameter: eine ganze Zahl N, Standardwert ist 1
+op-parameter-name: marker
+op-purpose: ein Elemente N-Stellen vor die Markierung verschieben
+op-suffix: eine ganze Zahl N, Standardwert ist 1
+tags: Listen-Filter-Operator Sortier-Operator Filter-Operator
+title: putbefore Operator
+type: text/vnd.tiddlywiki

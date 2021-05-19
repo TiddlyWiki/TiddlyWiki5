@@ -1,0 +1,66 @@
+caption: SystemTags
+created: 20201104194218414
+creator: FBB
+description: Auflistung der SystemTags
+list: SystemTag
+modified: 20210519132102162
+modifier: FBB
+tags: Referenz Konzept
+title: SystemTags
+type: text/vnd.tiddlywiki
+
+Ein [[System-Tag|SystemTag]] wird verwendet, um Tiddlern ein besonderes Verhalten zu verleihen.
+
+~SystemTags sollen für den Endanwender unsichtbar bleiben. Die Kennung für einen System-Tag ist `$:/`. Der Rest des Tags ist nur eine Namenskonvention, die je nach Anwendungsfall unterschiedlich sein kann.
+
+Ein Unterstrich `_` vor dem Wort `tags/`, hat den Vorteil, dass der Tag in Listen ganz oben angezeigt wird. In der Community wird sich diese Konvention wahrscheinlich für "Benutzerdefinierte ~SystemTags" durchsetzen.
+
+Hier werden einige System-Tags und benutzerdefinierte System-Tags aufgelistet.
+<div style="max-width:878px;overflow:hidden;">
+
+<table>
+<thead>
+<tr>
+     <th>Tag</th>
+     <th>Beschreibung</th>
+    <th>Link</th>
+</tr>
+</thead>
+<tbody>
+<$list filter="[tag[SystemTags]sort[caption]]">
+<tr>
+<td>
+<$macrocall $name="tag" tag={{!!caption}}/>
+</td>
+<td>
+{{!!description}}
+</td>
+<td>
+<$link to={{!!title}}>
+<$image source="link-image.svg" width="20px" height="20px" />
+</$link>
+</td>
+</tr>
+</$list>
+</tbody>
+</table>
+
+</div>
+
+!! ~SystemTags die in ~TiddlyWiki plugins definiert werden
+
+Auch Plugins enthalten ~SystemTags, hier werden einige aufgeführt.
+<div style="max-width:878px;overflow:hidden;">
+
+|Tag |Beschreibung |h
+|<<tag "$:/tags/HelpPanel>> |Zu finden im [[TiddlyWiki Prerelease|https://tiddlywiki.com/prerelease/]]. Zu sehen oben rechts in der Sidebar, <span>die Sprechblase mit dem Fragezeichen. </span>|
+|<<tag "$:/tags/MakeQR>> |Zu finden im [[TiddlyWiki Prerelease|https://tiddlywiki.com/prerelease/]]. Siehe: Tiddler Toolbar |
+|<<tag "$:/tags/TranslationGroup>> |Wird von der [[Übersetzungs Edition|https://tiddlywiki.com/editions/translators/]] von ~TiddlyWiki genutzt. |
+|<<tag "$:/tags/TwitterUsage>> |Wird genutzt vom Twitter Plugin |
+|<<tag "$:/tags/test-spec>> |~TiddlyWiki Test Suite |
+
+</div>
+
+<<.hr>>
+
+siehe: <<wikidokulink "~SystemTags" >> (english)

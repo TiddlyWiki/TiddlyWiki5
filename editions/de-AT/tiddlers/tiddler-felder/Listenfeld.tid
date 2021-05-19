@@ -1,0 +1,17 @@
+created: 20210430204338063
+creator: FBB
+modified: 20210519132101627
+modifier: FBB
+tags: Tiddler-Felder
+title: Listenfeld
+type: text/vnd.tiddlywiki
+
+Das Listenfeld eines Tiddlers <<.field list>> bietet eine optionale Funktion, die zur Strukturierung der Inhalte verwendet werden kann. MIt der Eingabe einer Liste von [[Tiddler-Titeln|Titellisten]] kann das Feld auf verschiedene Arten verwendet werden:
+
+* Das <<.field list>>-Feld eines Tiddlers, welchen als Tag verwendet wird, bestimmt die Reihenfolge der Tiddler, die dieses Tag tragen - siehe [[Tagging]] für weitere Details
+* Der [[list Operator]] kann Titel über das <<.field list>>-Feld auswählen
+* Der [[listed Operator]] finden die Tiddler, die das <<.field list>>-Feld auflistet.
+* Das NavigatorWidget manipuliert einen [[StoryList|storyTiddler Variable]]-Tiddler, der das <<.field list>>-Feld mit Namen von Tiddlern enthält, welche im [[Story River]] angezeigt werden.
+
+
+

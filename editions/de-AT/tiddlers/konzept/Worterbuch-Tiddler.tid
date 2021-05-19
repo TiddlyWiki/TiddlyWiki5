@@ -1,0 +1,16 @@
+created: 20200528212757051
+creator: FBB
+modified: 20210519132102350
+modifier: FBB
+tags: Lexikon Konzept
+title: Wörterbuch-Tiddler
+type: text/vnd.tiddlywiki
+
+Ein Wörterbuch-Tiddler ist ein Daten-Tiddler, der eine einfache Liste von Wertepaaren (z.B. `name:wert`) enthält.
+
+Der Typ des Tiddlers (~ContentType) ist `application/x-tiddler-dictionary.`.
+
+Das Textfeld besteht aus einer oder mehreren Zeilen im Format `Name:Wert`.
+
+[[Farbpaletten]], wie z.B. die Standard [[Vanilla-Palette|$:/palettes/Vanilla]], sind Lexikon-Tiddlers.
+

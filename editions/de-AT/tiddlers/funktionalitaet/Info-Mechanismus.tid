@@ -1,0 +1,31 @@
+created: 20200605192949984
+creator: FBB
+modified: 20210519132101495
+modifier: FBB
+tags: Funktionalität
+title: Info-Mechanismus
+type: text/vnd.tiddlywiki
+
+System-Tiddler im Namensraum `$:/info/` werden verwendet, um Informationen über das System (einschließlich des aktuellen Browsers) offenzulegen. So kann sich die WikiText-Anwendung an die verfügbaren Funktionen anpassen.
+
+!Informations Tiddler
+
+|!Titel |!Besschreibung |
+|[[$:/info/browser]] |Läuft im Browser (<<.value yes>> oder <<.value no>>) |
+|[[$:/info/browser/language]] |<<.from-version "5.1.20" >> Sprache wie vom Browser übermittelt (beachte, dass einige Browser zwei Zeichen als Code melden wie `de`. Während andere Browser vollständige Codes wie `de-DE` melden) |
+|[[$:/info/browser/screen/width]] |Bildschirmbreite in Pixel |
+|[[$:/info/browser/screen/height]] |Bildschirmhöhe in Pixel |
+|[[$:/info/node]] |Läuft unter [[Node.js]] (<<.value yes>> oder <<.value no>>) |
+|[[$:/info/url/full]] |<<.from-version "5.1.14" >> Vollständige URL des Wikis (z.B., ''https://tiddlywiki.com/'') |
+|[[$:/info/url/host]] |<<.from-version "5.1.14" >> Host-Teil der URL des Wikis (z.B., ''tiddlywiki.com'') |
+|[[$:/info/url/hostname]] |<<.from-version "5.1.14" >> Hostnamen-Teil der URL des Wikis (z.B., ''tiddlywiki.com'') |
+|[[$:/info/url/origin]] |<<.from-version "5.1.14" >>  Ursprungsteil der URL des Wikis (eg, ''https://tiddlywiki.com/'') |
+|[[$:/info/url/pathname]] |<<.from-version "5.1.14" >>  Pfadnamen-Teil der URL des Wikis (z.B. ''/'') |
+|[[$:/info/url/port]] |<<.from-version "5.1.14" >>  Port-Teil der URL des Wikis (z.B. ''8080'') |
+|[[$:/info/url/protocol]] |<<.from-version "5.1.14" >>  Protokollteil der URL des Wikis (z.B, ''https:'') |
+|[[$:/info/url/search]] |<<.from-version "5.1.14" >>  Suchteil der URL des Wikis (z.B,  ''?search=Suchtext'') |
+|[[$:/info/darkmode]] |<<.from-version "5.1.23">> Dark-Modus aktiviert  (<<.value yes>> oder <<.value no>>)  |
+
+<<.hr>>
+
+Siehe: <<wikidokulink "~InfoMechanism">> (englisch)

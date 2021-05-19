@@ -1,0 +1,14 @@
+caption: allbefore
+created: 20200609222403878
+creator: FBB
+modified: 20210519165643827
+modifier: FBB
+op-input: eine Liste von Elementen
+op-output: alle Elemente nach der Markierung
+op-parameter: das als Markierung zu verwendende Listenelement
+op-parameter-name: marker
+op-purpose: alle Elemente außer denen vor der Markierung verwerfen
+op-suffix: Die Angabe eines Suffixes ("include") schließt die Markierung in die Ausgabe ein
+tags: Listen-Filter-Operator Sortier-Operator Filter-Operator
+title: allbefore Operator
+type: text/vnd.tiddlywiki

@@ -1,0 +1,12 @@
+caption: $:/tags/Manager/ItemSidebar
+created: 20201125215334261
+creator: FBB
+description: markiert Tiddler die im [[Tiddler Manager|$:/Manager]] verwendet werden.
+modified: 20210519132102140
+modifier: FBB
+tags: SystemTags
+title: SystemTag: $:/tags/Manager/ItemSidebar
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field  {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.
+

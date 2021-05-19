@@ -1,0 +1,16 @@
+created: 20200610154910623
+creator: FBB
+list: Montag Dienstag Mitwoch Donnerstag Freitag Samstag Sonntag
+modified: 20210519132102346
+modifier: FBB
+short: Mo, Di, Mi, Do, Fr, Sa, So
+tags: 
+title: Wochentage
+type: text/vnd.tiddlywiki
+
+Dieses Beispiel-Tiddler wird verwendet, um einige der [[Filter-Operatoren|Filter-Operator]] zu veranschaulichen.
+
+Dieser Tiddler hat ein Listenfeld `list`, das die folgenden Elemente enthält:
+
+: <<list-links "[list[]]" "ol">>
+

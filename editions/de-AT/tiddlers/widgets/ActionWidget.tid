@@ -1,0 +1,46 @@
+created: 20210415211854634
+creator: FBB
+modified: 20210519132101053
+modifier: FBB
+tags: Widgets
+title: ActionWidget
+type: text/vnd.tiddlywiki
+
+\define my-actions()
+<$action-sendmessage $message="tm-home"/>
+<$action-sendmessage $message="tm-full-screen"/>
+\end
+
+''Aktions-Widgets'' sind eine spezielle Art von [[Widget|Widgets]], die kein visuelles Erscheinungsbild haben, aber eine Aktion ausführen, wenn sie ausgelöst werden (z. B. das Senden einer Nachricht, das Navigieren zu einem Tiddler oder das Ändern des Wertes eines Tiddlers). Aktions-Widgets werden in Verbindung mit anderen Widgets verwendet, die diese Aktionen auslösen (z. B. das <<.wid Button>>-Widget).
+
+Es gibt momentan ca. 10 Aktion-Widgets (Die vollständige Liste ist in englischer Sprache unter [ext[https://tiddlywiki.com/#ActionWidgets]] zu finden):
+
+<<list-links "[tag[ActionWidget]]">>
+
+Es gibt zwei Möglichkeiten, Aktions-Widgets zu verwenden:
+
+* Verwendung des <<.attr actions>>-Attributs des auslösende Widgets (dies ist die bevorzugte Variante).
+* Einbetten der Aktionen in das auslösende Widget
+** Diese Variante wurde als veraltet (deprecated) markiert und wird deshalb hier nicht weiter behandelt.
+
+!! Zuweisen von Aktions-Widgets mit dem Attribut <<.attr actions>>
+
+Der Name des Aktions-Widget wird als String im <<.attr actions>>-Attribut an das auslösenden Widgets übergeben. Normalerweise ist es bequemer, ein Makro zu verwenden, um mehrere Aktions-Widgets einer Variablen zuzuweisen.
+
+Im folgenden Beispiel wird eine Schaltfläche erzeugt, die zwei verschiedene Events auslöst:
+
+```
+\define my-actions()
+<$action-sendmessage $message="tm-home"/>
+<$action-sendmessage $message="tm-full-screen"/>
+\end
+
+<$button actions=<<my-actions>>>
+Klick mich an
+</$button>
+```
+
+<$button actions=<<my-actions>>>Klick mich an</$button>
+
+<<.hr>>
+Siehe: <<wikidokulink "~ActionWidgets">> (englisch)

@@ -1,0 +1,120 @@
+created: 20200831210534312
+creator: FBB
+modified: 20210519132101631
+modifier: FBB
+tags: Widgets
+title: ListWidget
+type: text/vnd.tiddlywiki
+
+! Einleitung
+
+Das <<.wid List>>-Widget zeigt eine Reihe von Tiddlern an, die einem Tiddler-Filter entsprechen. Es kann für viele Zwecke verwendet werden:
+
+* Anzeige von benutzerdefinierten Linklisten, wie in der Seitenleiste von ~TiddlyWiki
+* Benutzerdefinierte Listen, wie z.B. "alle Tiddler, die mit 'Aufgabe' markiert sind und nicht mit 'erledigt' markiert sind".
+* Auflistung jedes Tags mit dem eine Tiddler markiert ist
+* Umgang mit der Story-Liste
+
+Die Tiddler werden angezeigt, indem sie nacheinander durch ein Template transkribiert werden. Es gibt mehrere Möglichkeiten, das Template festzulegen und das Verhalten der Liste zu steuern.
+
+! Beispiele
+
+''Einfache Liste''
+
+```
+<$list filter="[tag[Video]sort[title]]"/>
+```
+
+Wird angezeigt als:
+
+<<<
+<$list filter="[tag[Video]sort[title]]"/>
+
+<<<
+
+''Ausgabe benutzerdefinierter Elemente''
+
+```
+<$list filter="[tag[ListWidget]sort[title]]">
+<<currentTiddler>>
+{{||$:/core/ui/ViewTemplate/tags}}
+</$list>
+```
+
+Wird angezeigt als:
+
+<<<
+<$list filter="[tag[Video]sort[title]]">
+<<currentTiddler>>
+{{||$:/core/ui/ViewTemplate/tags}}
+</$list>
+
+<<<
+
+''Benutzerdefinierter Template-Elemente''
+
+
+```
+<$list filter="[tag[Video]sort[title]]" template="$:/core/ui/ViewTemplate/subtitle"/>
+
+```
+
+Wird angezeigt als:
+
+<<<
+<$list filter="[tag[Video]sort[title]]" template="$:/core/ui/ViewTemplate/subtitle"/>
+
+<<<
+
+Unter [[gruppierte Listen]] erfährst du, wie man mit dem <<.wid List>>-Widget verschachtelte und gruppierte Listen erzeugen kann.
+
+! Inhalt und Attribute
+
+Der Inhalt des <<.wid List>>Widgets ist eine optionale Vorlage, die für die Darstellung jedes Tiddlers in der Liste verwendet werden kann.
+
+Die Aktion des Listen-Widgets hängt von den Ergebnissen des Filters kombiniert mit mehreren Optionen zur Angabe des Templates ab:
+
+* Wenn der Filter eine leere Liste auswertet, wird der Text des <<.attr emptyMessage>>-Attributs wiedergegeben, und alle anderen Vorlagen werden ignoriert
+* Andernfalls, wenn das <<.attr template>>-Attribut angegeben ist, wird es als Titel des Tiddlers verwendet, der als Vorlage für die Darstellung jedes Elements der Liste dient.
+* Ist der Inhalt des Listen-Widgets nicht leer, wird er als Template für die Darstellung jedes Elements der Liste verwendet.
+* Andernfalls wird ein Standard-Template verwendet, welches aus einem `<span>`- oder `<div>`-Element besteht, in das der Link auf das Element eingebettet wird.
+
+
+|!Attribute |!Beschreibung |
+|filter |Der Tiddler-[[Filter]] für die Anzeige |
+|template |Der Titel eines Template-Tiddlers für die Transkription jedes Tiddlers in der Liste. Wenn keine Vorlage angegeben ist, dient der Textteil des ListWidget als Elementvorlage. Ohne Inhalt wird ein einfacher Link auf den Tiddler zurückgegeben. |
+|editTemplate |Eine alternative Vorlage zur Verwendung für den Entwurfs-Tiddler im Bearbeitungsmodus. |
+|variable |Der Name für eine Variable, in welcher der Titel jedes aufgelisteten Tiddlers gespeichert ist. Standardeinstellung ist <<.var currentTiddler>>. |
+|emptyMessage |Nachricht, die angezeigt wird, wenn die Liste leer ist. |
+|storyview |Optionaler Name des für die Erstellung/Bearbeitung der Liste verantwortlichen Moduls |
+|history |Der Titel des Tiddlers, der die Navigationshistorie enthält |
+
+!! Bearbeitungsmodus
+
+Das <<.wid List>>-Widget kann optional den Entwurf von Tiddlern durch eine andere Vorlage rendern, um die Bearbeitung zu handhaben, siehe [[Entwurfs-Mechanismus]].
+
+!! <<.param storyview>> Attribut
+
+Das <<.param storyview>>-Attribut gibt den Namen eines optionalen Moduls an, das Änderungen an der Liste (einschließlich der Navigation) animieren kann. Der TiddlyWiki-Core wird mit den folgenden storyview-Modulen ausgeliefert:
+
+* `classic` : Stellt die Liste als geordnete Folge von Tiddlern dar
+* `zoomin` : Zeigt nur den aktuellen Tiddler aus der Liste an. Zusätzlich mit einer Zoom-Animation zur Navigation zwischen den Tiddlern.
+* `pop` : an ihren Platz
+
+Damit die Storyviews korrekt animiert werden, sollte jeder Eintrag in der Liste ein einzelnes DOM-Blockelement sein.
+
+!! History und Navigation
+
+Das optionale Attribut <<.param history>> gibt den Namen eines Tiddlers an, der verwendet wird, um den aktuellen Tiddler zu Navigationszwecken zu erfassen. Wenn der History-Tiddler die Listenansicht ändert, reagiert die Listenansicht, indem sie der Listenansicht signalisiert, die Navigation zu dem neuen Tiddler zu übernehmen.
+
+Wenn der History-Tiddler die Listenansicht ändert, wird damit signalisiert das die Listenansicht die Naviagation zum neuen Tiddler übernimmt. Siehe dazu: [[History-Mechanismus]].
+
+!! Zusätzliche Anmerkungen und Soderfälle
+
+* Wenn das Attribut <<.param filter>> nicht vorhanden ist, wird die Voreinstellung `[!is[system]sort[title]]]` verwendet.
+* Wenn das Listen-Widget vollständig leer ist (d.h. nur Leerraum zwischen dem öffnenden und dem schließenden Tag), dann verhält es sich so, als ob der Inhalt ein ''DIV''- oder ein ''SPAN''-Element wäre, der einen Link zum aktuellen Tiddler enthält (//es ist ein ''DIV'', wenn das Listen-Widget im Block-Modus ist, oder ein ''SPAN'', wenn es im Inline-Modus ist//)
+* Wenn das Attribut <<.param template>> nicht vorhanden ist, wird der Inhalt des Listen-Widgets als Vorlage verwendet, es sei denn, das Widget ist vollständig leer. In diesem Fall wird eine Standardvorlage verwendet.
+
+<<.hr>>
+
+Siehe: <<wikidokulink "~ListWidget">> (englisch)

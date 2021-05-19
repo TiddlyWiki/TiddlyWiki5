@@ -1,9 +1,11 @@
 created: 20140913100555549
 creator: pmario
-modified: 20140913100608938
-modifier: pmario
+modified: 20210519132100075
+modifier: FBB
 tags: Lexikon
 title: CSS Klassen
 type: text/vnd.tiddlywiki
 
 Siehe: http://de.wikipedia.org/wiki/Cascading_Style_Sheets
+
+Siehe auch: [[Stil und CSS Klassen in WikiText]]

@@ -1,0 +1,68 @@
+created: 20210421204448428
+creator: FBB
+modified: 20210519132101127
+modifier: FBB
+tags: Widgets
+title: ButtonWidget
+type: text/vnd.tiddlywiki
+
+Das <<.wid Button>>-Widget zeigt ein HTML `<button>`-Element an, das beim Anklicken eine Kombination von mehreren optionalen Aktionen ausführen kann:
+
+* Ausführen von beliebigen [[ActionWidgets|ActionWidget]], die im Attribut <<.attr actions>> übergeben werden
+* Ausführen von beliebigen ~ActionWidgets, die unmittelbare Nachfolger des Schaltflächen-Widgets sind
+* Ausführen aller integrierten Aktionen:
+** Zum angegebenen Tiddler navigieren
+** Absetzen einer benutzerdefinierten [[Widget-Meldung|Widget-Meldungen]]
+** Auslösen eines benutzerdefinierten [[Popup|Popup-Mechanismus]]
+* Einem angegebenen Tiddler einen neuen Text zuweisen
+
+Die integrierten Aktionen werden als Verknüpfung zum Aufrufen allgemeiner Aktionen bereitgestellt. Die gleiche Funktionalität ist über [[ActionWidgets|ActionWidget]] verfügbar, mit Ausnahme der Unterstützung für das Hervorheben selektierter Popups.
+
+! Attribute und Inhalte
+
+Alles zwischen den Tags des <<.wid Button>>-Widgets wird als Beschriftung auf dem Button angezeigt.
+
+|!Attribut |!Beschreibung |
+|actions |Eine Zeichenkette mit einem oder mehreren [[ActionWidget]]s, die bei der Erkennung des Tasten-Events ausgelöst werden sollen. <br/><<.fromVersion 5.23.1>> Die [[modifier Variable]] listet die Modifier-Keys auf, welche betätigt werden, wenn die Aktion aufgerufen wird. Mögliche Modifier-Keys sind ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' und ''ctrl-alt-shift'' |
+|to |Der Titel des Tiddlers, zu dem navigiert werden soll |
+|message |Der Name der [[Widget-Meldung|Widget-Meldungen]], die gesendet werden soll, wenn der Button angeklickt 5.1.23wird |
+|param |Ein optionaler Parameter für die Widget-Meldung |
+|set |Eine [[Text-Referenz]], der ein neuer Wert zugewiesen werden soll |
+|setTitle |Der Titel, dem ein neuer Wert zugewiesen werden soll (''ohne'' Text-Referenz).  Wird gegenüber der Methode mit <<.attr set>> bevorzugt. |
+|setField |Feldname, dem ein neuer Wert zugewiesen werden soll, wenn das Attribut <<.attr setTitle>> vorhanden ist. Standardmäßig wird dazu das Feld <<.field text>> verwendet |
+|setIndex |Ein ''index'', dem der neue Wert zugewiesen wird, wenn das Attribut <<.attr setTitle>> vorhanden ist |
+|setTo |Der neue Wert, der der im Attribut <<.attr set>> identifizierten Text-Referenz oder dem Textfeld / oder dem durch <<.attr setField>> angegebenen Feld / oder dem durch <<.attr setIndex>> angegebenen Index des durch <<.attr setTitle>> angegebenen Titels zugewiesen wird. |
+|selectedClass |Optionale zusätzliche [[CSS-Klasse|CSS Klassen]]. Diese wird zugewiesen, wenn das Popup ausgelöst wird oder der in <<.attr set>> angegebene Tiddler bereits den in <<.attr setTo>> angegebenen Wert hat  |
+|default |Standardwert, wenn der Tiddler aus <<.attr set>> zum Testen gegen den Wert aus <<.attr setTo>> fehlt, um <<.attr selectedClass>> zu bestimmen |
+|popup |Titel eines [[Zustands-Tiddlers|Status-Mechanismus]] für ein Popup. Dieses wird umgeschaltet, wenn der Button angeklickt wird. Siehe auch [[Popup-Mechanismus]] für weitere Details |
+|popupTitle |Titel eines Zustands-Tiddlers für ein Popup. Dieses wird umgeschaltet, wenn die Schaltfläche angeklickt wird. Im Unterschied zum Attribut <<.attr popup>> wird ''keine'' Text-Referenz verwendet. Siehe [[Popup-Mechanismus]] für weitere Details. |
+|aria-label |Optionales [[aria|Accessible Rich Internet Applications]]-Label |
+|tooltip |Optionaler Tooltip |
+|class |Ein optionaler CSS-Klassenname, der dem HTML-Element zugewiesen wird |
+|style |Ein optionales CSS-Style-Attribut, das dem HTML-Element zugewiesen wird |
+|tag |Ein optionales HTML-Tag, das anstelle des Standard-Tags `<button>` verwendet wird |
+|dragTiddler |Ein optionaler Tiddler-Titel, den Button verschiebbar macht und den Payload-Tiddler identifiziert. Siehe [[DraggableWidget]] für weitere Details |
+|dragFilter |Ein optionaler Filter, den Button verschiebbar macht und die Liste der Payload-Tiddler identifiziert. Siehe [[DraggableWidget]] für weitere Details |
+|tabindex |Das Attribut <<.attr tabindex>> des Buttons wird auf den angegebenen Wert geändert |
+|disabled|<<.fromVersion "5.1.23">> Optional. Angabe ''yes'' deaktiviert den Button. Standardwert ist ''no'' |
+
+''Hinweis'': In fast allen Fällen, in denen eine Text-Referenz als Widget-Attribut verwendet wird, wird diese zwischen geschweiften Klammern platziert, um den aktuell dort gespeicherten Wert zu [[transkludieren|Transklusion in WikiText]].
+
+Wenn man jedoch beim <<.wid Button>>-Widget eine Text-Referenz als Wert des <<.attr Set>>-Attributs verwendet, wird auf den Speicherort selbst verwiesen und nicht auf den dort gespeicherten Wert, weshalb dort keine geschweiften Klammern verwendet werden müssen. Beispielsweise lässt sich ein <<.wid Button>>-Widget schreiben welches das Beschriftungsfeld von TiddlerA so einstellt, dass es mit dem von TiddlerB übereinstimmt:
+
+<<wikitext-example-without-html """<$button set="Test-Tiddler!!text" setTo={{Releases!!text}} >
+   Klick mich!
+</$button>""">>
+
+<br/>
+
+<<.tip2 """<$macrocall $name=".from-version" version="5.1.18"/> <$macrocall $name=".attr" _="setTitle"/>, <$macrocall $name=".attr" _="setField"/> and <$macrocall $name=".attr" _="setIndex"/>-Attribute erlauben es, Tiddler-Zustände direkt zu spezifizieren, ohne sie als Text-Referenzen zu interpretieren. Dies ist nützlich für Grenzfälle, in denen Titel Zeichen enthalten können, die zur Kennzeichnung von Tiddler-Feldern oder -Indizes verwendet werden (`!!`, `##`)
+""" "Tipp">>
+
+<<.tip2 """
+Setze das Attribut <$macrocall $name=".attr" _="class"/> auf <$macrocall $name=".value" _="tc-btn-invisible tc-tiddlylink"/>, um eine Schaltfläche wie einen internen Link aussehen zu lassen.
+""" "Tipp">>
+
+<<.hr>>
+
+Siehe: <<wikidokulink "~ButtonWidget" >> (englisch)

@@ -1,7 +1,7 @@
 caption: Tabellen
 created: 20130914132100000
 creator: pmario
-modified: 20140922130746459
+modified: 20210519132100611
 modifier: ChrisK
 tags: WikiText
 title: Tabellen in WikiText
@@ -30,7 +30,7 @@ Alternativ können einzelne Zellen mit einem Rufzeichen `!` hervorgehoben werden
 
 !! Horizontale Ausrichtung der Zellen
 
-Die Zellausrichtung kann mit Leerzeichen vor oder nach dem "Pipe" Zeichen definiert werden: 
+Die Zellausrichtung kann mit Leerzeichen vor oder nach dem "Pipe" Zeichen definiert werden:
 
 ```
 |Text ist links ausgerichtet |
@@ -74,7 +74,7 @@ Wenn Sie die Zeichen `^` und `,` als erste Zeichen benötigen, dann können Sie 
 
 Mit `~`, `<` und `>` können Zellen zusammengefügt werden.
 
-* Um eine Zelle mit der darüber liegenden zu vereinen verwenden sie: `~` 
+* Um eine Zelle mit der darüber liegenden zu vereinen verwenden sie: `~`
 * Um eine Zelle mit der links liegenden zu vereinen verwenden sie: `<`
 * Um eine Zelle mit der rechts liegenden zu vereinen verwenden sie: `>`
 

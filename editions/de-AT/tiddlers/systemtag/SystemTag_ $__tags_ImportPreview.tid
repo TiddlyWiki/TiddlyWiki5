@@ -1,0 +1,12 @@
+caption: $:/tags/ImportPreview
+created: 20201125203745635
+creator: FBB
+description: markiert Tiddler die für das importieren von Daten zuständig sind
+modified: 20210519132102127
+modifier: FBB
+tags: SystemTags
+title: SystemTag: $:/tags/ImportPreview
+type: text/vnd.tiddlywiki
+
+Dieser Tag <<.field  {{!!caption}}>> ist ein [[SystemTag]]. Dieser Tag {{!!description}}.
+

@@ -1,0 +1,16 @@
+caption: sort
+created: 20200611203419527
+creator: FBB
+modified: 20210519165713836
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-neg-output: die Eingabe, sortiert in ''absteigender'' Reihenfolge nach dem Feld ''//{{!!op-parameter-name}}//''. Die Feldwerte werden als Text behandelt.
+op-output: die Eingabe, sortiert in aufsteigender Reihenfolge nach dem Feld ''//{{!!op-parameter-name}}//''. Die Feldwerte werden als Text behandelt.
+op-parameter: der Name eines [[Feldes|Tiddler Felder]], standardmäßig das Titel-Feld des Tiddlers <<.field title>>
+op-parameter-name: F
+op-purpose: die Eingabe nach einem bestimmten Textfeld sortieren
+tags: Sortier-Operator Filter-Operator Feld-Operator Negierbarer-Operator Common-Operator
+title: sort Operator
+type: text/vnd.tiddlywiki
+
+Der Unterschied zwischen Groß- und Kleinschreibweise wird ignoriert. Vergleiche dazu den  [[sortcs Operator]].

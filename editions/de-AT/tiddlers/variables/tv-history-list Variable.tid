@@ -1,0 +1,11 @@
+created: 20200928185139082
+creator: FBB
+modified: 20210519132102263
+modifier: FBB
+tags: Variablen [[Core Variablen]]
+title: tv-history-list Variable
+type: text/vnd.tiddlywiki
+
+Die Variable <<.var tv-history-list>> wird vom <<.wid Navigator>>-Widget zugewiesen, um den Titel des Tiddlers zu enthalten, welcher die aktuelle History-Liste enthält.
+
+Vergleiche dazu <<.vlink tv-story-list >> Variable.

@@ -1,0 +1,15 @@
+caption: prepend
+created: 20200610124436771
+creator: FBB
+modified: 20210519165559727
+modifier: FBB
+op-input: eine Liste von Elementen
+op-neg-output: eine Liste mit Elementen die am Ende des Arrays stehen
+op-output: eine Liste mit Elementen die am Anfang des Arrays stehen
+op-parameter: Liste der Elemente, die am Anfang der Liste eingefügt werden
+op-parameter-name: list
+op-purpose: eine Reihe von Elementen aus einem Array der Liste voranstellen
+op-suffix: eine ganze Zahl N, als Vorgabe für alle
+tags: Listen-Filter-Operator Sortier-Operator Filter-Operator
+title: prepend Operator
+type: text/vnd.tiddlywiki

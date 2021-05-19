@@ -1,0 +1,55 @@
+created: 20200529103807770
+creator: FBB
+modified: 20210519132102207
+modifier: FBB
+myfield: &nbsp;
+tags: TranscludeWidget
+title: TranscludeWidget (Beispiel)
+type: text/vnd.tiddlywiki
+
+Ein Beispiel mit TranscludeWidget und ActionListopsWidget.
+
+Das ~TranscludeWidget wird hier verwendet um ein Feld, welches mit dem ~ActionListopsWidget geändert wird, darzustellen.
+
+
+Die Button für das ~ActionListopsWidget werden so definiert:
+
+```
+<$button><$action-listops $field="myfield" $filter="!" $subfilter="Deutsch"/>Schreibe 'Deutsch'</$button>
+```
+
+und so der zweite aber ohne //subfilter//:
+
+```
+<$button><$action-listops $field="myfield" $filter="Englisch"/>Schreibe 'Englisch'</$button>
+```
+
+Auch zum löschen des Feldes gibt es einen Button:
+
+```
+<$button><$action-listops $field="myfield" $filter="&nbsp;"/>Lösche 'myfield'</$button>
+```
+
+Nun braucht es noch das ~TranscludeWidget:
+
+```
+<$transclude tiddler=<<currentTiddler>> field=myfield />
+```
+
+Unten kann das Ergebnis getestet werden.
+
+<br/>
+
+---
+
+
+<$transclude tiddler=<<currentTiddler>> field=myfield />
+
+:
+
+<hr/>
+
+<$button><$action-listops $field="myfield" $filter="!" $subfilter="Deutsch"/>Schreibe 'Deutsch'</$button> <$button><$action-listops $field="myfield" $filter="Englisch"/>Schreibe 'Englisch'</$button>
+
+
+<$button><$action-listops $field="myfield" $filter="&nbsp;"/>Lösche 'myfield'</$button>

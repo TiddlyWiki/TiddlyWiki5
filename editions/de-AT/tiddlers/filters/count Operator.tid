@@ -1,0 +1,15 @@
+caption: count
+created: 20200629142030426
+creator: FBB
+modified: 20210519165138365
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: eine neue Liste, die die Anzahl der Elemente in der Eingabeliste als Dezimalzeichenfolge enthält
+op-parameter: keiner
+op-parameter-name: 
+op-purpose: die Anzahl der Einträge in einer Liste zählen
+tags: Filter-Operator Gruppen-Operator
+title: count Operator
+type: text/vnd.tiddlywiki
+
+Die Anzahl der Einträge in der Eingabeliste wird gezählt und eine Dezimaldarstellung als einzelne Zeichenfolge zurückgegeben.

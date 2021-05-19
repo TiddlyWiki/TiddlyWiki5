@@ -1,0 +1,10 @@
+created: 20200907195649550
+creator: FBB
+modified: 20210519132101546
+modifier: FBB
+title: Konfigurations Variablen
+type: text/vnd.tiddlywiki
+
+Der ~TiddlyWiki-Core kann auch verschiedene Konfigurations-Variablen und Makros verwenden, wenn diese definiert sind:
+
+<<list-links "[tag[Konfigurations Variablen]sort[title]]">>

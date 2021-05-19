@@ -1,0 +1,19 @@
+caption: title
+created: 20200630190808499
+creator: FBB
+modified: 20210519164844361
+modifier: FBB
+op-input: ingnoriert
+op-neg-input: eine [[Titelselektion]]
+op-neg-output: alle Eingabe-Tiddler aber ohne den Tiddler der dem Parameter <<.param {{!!op-parameter-name}}>> entspricht
+op-output: nur der Tiddler der dem Parameter <<.param {{!!op-parameter-name}}>> entspricht
+op-parameter: der Titel eines Tiddlers
+op-parameter-name: T
+op-purpose: selektiert einen einzigen Titel
+tags: Filter-Operator Negierbarer-Operator Auswahl-Konstruktor Common-Operator
+title: title Operator
+type: text/vnd.tiddlywiki
+
+`[title[Beispiel]]` kann einfach so `[[Beispiel]]`, geschrieben werden, weil <<.def title>> der Standard-Oprerator ist.
+
+Der Operator <<.def title>> ist ein Konstruktor (außer in der Form `!title`), aber [[field:title|field Operator]] ist ein [[Modifizierer|Auswahl-Konstruktor]].

@@ -1,6 +1,10 @@
+caption: Details der letzten Versionen von ~TiddlyWiki5
 created: 20150518080410254
-modified: 20150518080417093
+creator: FBB
+modified: 20210519132100459
+modifier: FBB
+tags: [[Über TiddlyWiki]]
 title: Releases
 type: text/vnd.tiddlywiki
 
-Siehe: https://tiddlywiki.com/prerelease/#Releases
+Siehe: <<wikidokulink "~TiddlyWiki Releases">> (englisch)

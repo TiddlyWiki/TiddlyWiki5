@@ -1,0 +1,25 @@
+created: 20200609192627481
+creator: FBB
+modified: 20210519132101162
+modifier: FBB
+tags: [[Core Variablen]] Variablen
+title: currentTiddler Variable
+type: text/vnd.tiddlywiki
+
+Die Variable ''currentTiddler'' enthält den Titel des [[aktuellen Tiddlers|Aktueller Tiddler]].
+
+Mehrere Merkmale von WikiText verwenden diesen Tiddler als ihren Kontext. Infolgedessen besteht innerhalb eines <<.wid List >>-Widgets oder eines [[Vorlagen-Tiddlers|Vorlagen-Tiddler]] oft keine Notwendigkeit, einen Tiddler-Titel explizit anzugeben.
+
+Vergleiche dazu [[storyTiddler Variable]]
+
+!! Beispiel
+
+```
+<$view tiddler=<<currentTiddler>> field=title/>
+```
+
+Dargestellt als: ''<$view tiddler=<<currentTiddler>> field=title/>''
+
+<br/>
+
+siehe Beispiel: [ext[https://tiddlywiki.com/#currentTiddler Variable (Examples)]]

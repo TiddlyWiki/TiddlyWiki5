@@ -1,0 +1,17 @@
+caption: listed
+created: 20200807215341409
+creator: FBB
+modified: 20210519164949364
+modifier: FBB
+op-input: eine [[Titelselektion]]
+op-output: die Titel, in denen in Feld ''//{{!!op-parameter-name}}//'' einer der Eingabetitel erwähnt wird
+op-parameter: den Namen eines Feldes, Standardwert ist `list`
+op-parameter-name: F
+op-purpose: Die Titel finden, die die Eingabetitel auflisten.
+tags: Filter-Operator Feld-Operator
+title: listed Operator
+type: text/vnd.tiddlywiki
+
+''//{{!!op-parameter-name}}//'' wird als Titelliste angenommen.
+
+Jeder Eingabetitel wird der Reihe nach verarbeitet. Eine Liste von Tiddlern, deren ''//{{!!op-parameter-name}}//''-Feld diesen erwähnt, wird generiert (in keiner bestimmten Reihenfolge) und vorrangig an die Gesamtausgabe des Operators angehängt.
