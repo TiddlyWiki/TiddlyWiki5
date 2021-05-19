@@ -124,8 +124,11 @@ function CodeMirrorEngine(options) {
 			self.widget.invokeActionString(self.widget.editInputActions);
 		}
 	});
+	
 	this.cm.on("drop",function(cm,event) {
-		event.stopPropagation(); // Otherwise TW's dropzone widget sees the drop event
+		if(!self.widget.isFileDropEnabled) {
+			event.stopPropagation(); // Otherwise TW's dropzone widget sees the drop event
+		}
 		return false;
 	});
 	this.cm.on("keydown",function(cm,event) {
@@ -136,6 +139,32 @@ function CodeMirrorEngine(options) {
 			$tw.popup.cancel(0);	
 		}
 	});
+	// Add drag and drop event listeners if fileDrop is enabled
+	if(this.widget.isFileDropEnabled) {
+		// If the drag event contains Files, prevent the default CodeMirror handling
+		this.cm.on("dragenter",function(cm,event) {
+			if($tw.utils.dragEventContainsFiles(event)) {
+				event.preventDefault();
+			}
+			return true;
+		});
+		this.cm.on("dragleave",function(cm,event) {
+			event.preventDefault();
+		});
+		this.cm.on("dragover",function(cm,event) {
+			if($tw.utils.dragEventContainsFiles(event)) {
+				event.preventDefault();
+			}
+		});
+		this.cm.on("drop",function(cm,event) {
+			if($tw.utils.dragEventContainsFiles(event)) {
+				event.preventDefault();
+			}
+		});
+		this.cm.on("paste",function(cm,event) {
+			self.widget.handlePasteEvent.call(self.widget,event);
+		});
+	}
 }
 
 /*
