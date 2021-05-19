@@ -1,10 +1,10 @@
 created: 20200315143638556
-modified: 20200315143638556
+modified: 20210519155433742
 tags: [[Hidden Settings]]
 title: Hidden Setting: Disable Drag and Drop
 type: text/vnd.tiddlywiki
 
-<.from-version "5.1.22">> To disable all the drag and drop operations that are built into the core, set the following tiddler to "no":
+<<.from-version "5.1.22">> To disable all the drag and drop operations that are built into the core, set the following tiddler to "no":
 
 $:/config/DragAndDrop/Enable
 

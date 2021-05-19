@@ -1598,6 +1598,10 @@ html body.tc-body.tc-single-tiddler-window {
 	text-align:center;
 }
 
+.tc-editor-import img {
+	max-height: 500px;
+}
+
 /*
 ** Storyview Classes
 */
