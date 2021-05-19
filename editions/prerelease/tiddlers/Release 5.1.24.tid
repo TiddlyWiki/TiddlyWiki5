@@ -29,7 +29,7 @@ type: text/vnd.tiddlywiki
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/commit/caec6bc3fea9155eb2b0aae64d577c565dd7b088">> SVG optimiser script
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/c325380231a8c592a6e51d4498c1e6c3a241b539">> plus/minus SVG icons: <<.icon $:/core/images/plus-button>> and <<.icon $:/core/images/minus-button>>
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5294">> support for [[dynamic toolbar buttons|How to create dynamic editor toolbar buttons]]
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5612">> [[average Operator]] for calculating the arithmetic mean of a list of numbers
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5612">> [[average Operator]], [[median Operator]], [[variance Operator]] and [[standard-deviation Operator]] for calculating the arithmetic mean of a list of numbers
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/cf56a17f28f1e44dcb62c5e161be4ac29e27c3f2">> unusedtitle macro to use the prefix parameter
 
 
