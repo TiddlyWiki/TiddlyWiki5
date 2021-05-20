@@ -20,14 +20,19 @@ exports.name = "jsontiddlers";
 
 exports.params = [
 	{name: "filter"},
-	{name: "spaces"}
+	{name: "spaces"},
+	{name: "escapeUnsafeScriptCharacters"}
 ];
 
 /*
 Run the macro
 */
-exports.run = function(filter,spaces) {
-	return this.wiki.getTiddlersAsJson(filter,$tw.utils.parseInt(spaces));
+exports.run = function(filter,spaces,escapeUnsafeScriptCharacters) {
+	var json = this.wiki.getTiddlersAsJson(filter,{
+		spaces: $tw.utils.parseInt(spaces),
+		escapeUnsafeScriptCharacters: escapeUnsafeScriptCharacters === "yes"
+	});
+	return json;
 };
 
 })();

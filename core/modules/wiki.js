@@ -696,21 +696,44 @@ exports.getTiddlerAsJson = function(title) {
 	}
 };
 
-exports.getTiddlersAsJson = function(filter,spaces) {
+/*
+Options:
+spaces: number of spaces
+escapeUnsafeScriptCharacters: true to force escaping of characters that cannot be embedded in HTML
+*/
+exports.getTiddlersAsJson = function(filter,options) {
+	options = options || {};
+	if(typeof options === "string") {
+		options = {spaces: options};
+	}
 	var tiddlers = this.filterTiddlers(filter),
-		spaces = (spaces === undefined) ? $tw.config.preferences.jsonSpaces : spaces,
-		data = [];
-	for(var t=0;t<tiddlers.length; t++) {
-		var tiddler = this.getTiddler(tiddlers[t]);
+		spaces = (options.spaces === undefined) ? $tw.config.preferences.jsonSpaces : options.spaces,
+		data = [],
+		t,fields,tiddler;
+	for(t=0;t<tiddlers.length; t++) {
+		tiddler = this.getTiddler(tiddlers[t]);
 		if(tiddler) {
-			var fields = new Object();
+			fields = new Object();
 			for(var field in tiddler.fields) {
 				fields[field] = tiddler.getFieldString(field);
 			}
 			data.push(fields);
 		}
 	}
-	return JSON.stringify(data,null,spaces);
+	var json = JSON.stringify(data,null,spaces);
+	if(options.escapeUnsafeScriptCharacters) {
+		function escapeUnsafeChars(unsafeChar) {
+			return {
+				"<":      "\\u003C",
+				">":      "\\u003E",
+				"/":      "\\u002F",
+				"\u2028": "\\u2028",
+				"\u2029": "\\u2029"
+			}[unsafeChar];
+		}
+		json = json.replace(/</g,escapeUnsafeChars);
+	}
+	return json;
 };
 
 /*
