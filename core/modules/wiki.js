@@ -374,12 +374,12 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 			var tiddlerA = self.getTiddler(a),
 				tiddlerB = self.getTiddler(b);
 			if(tiddlerA) {
-				a = tiddlerA.fields[sortField] || "";
+				a = tiddlerA.getFieldString(sortField) || "";
 			} else {
 				a = "";
 			}
 			if(tiddlerB) {
-				b = tiddlerB.fields[sortField] || "";
+				b = tiddlerB.getFieldString(sortField) || "";
 			} else {
 				b = "";
 			}

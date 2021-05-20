@@ -8,6 +8,7 @@ title: $:/core/ui/EditTemplate/body/editor
   tabindex={{$:/config/EditTabIndex}}
   focus={{{ [{$:/config/AutoFocus}match[text]then[true]] ~[[false]] }}}
   cancelPopups="yes"
+  fileDrop={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}}
 
 ><$set
 
@@ -30,4 +31,12 @@ title: $:/core/ui/EditTemplate/body/editor
   tiddler="$:/core/ui/EditTemplate/body/toolbar/button"
   mode="inline"
 
-/></$reveal></$list></$set></$edit>
+/></$reveal></$list><$list
+
+  filter="[all[shadows+tiddlers]tag[$:/tags/EditorTools]!has[draft.of]]"
+
+><$list
+	filter={{!!condition}}
+	variable="list-condition"
+><$transclude/>
+</$list></$list></$set></$edit>
