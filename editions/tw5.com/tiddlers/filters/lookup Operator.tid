@@ -12,11 +12,25 @@ tags: [[Filter Operators]]
 title: lookup Operator
 type: text/vnd.tiddlywiki
 
+<<.from-version "5.1.15">>
+
+The action of this operator is as follows with 1 parameter:
+
+* Apply the specified prefix to each input tiddler title, yielding a new list of tiddler titles
+* Transclude the value of the `text` field each of those tiddlers
+** Substitute the default value for missing or empty values
+* Return the list of values
+
 <<.from-version "5.1.24">>
 
-The action of this operator is as follows from version 5.1.24 forward:
+The action of this operator is as follows with 2 parameters:
 
-If there is only one parameter given, the filter checks for a second suffix equal to "index". If this suffix is found, the default target index is "0". In all other cases, the default target field is "text". If there are two parameters provided, use the second parameter as the target field or index. Then:
+If there are two parameters provided, use the second parameter as the target field or index.
+
+<<.note """If there is only one parameter given, the filter checks for a second suffix equal to "index". If this suffix is found, the default target index is "0".
+In all other cases, the default target field is "text".""">>
+
+Then:
 
 * Apply the specified prefix to each input tiddler title, yielding a new list of tiddler titles
 * Transclude the value of the target field or index
