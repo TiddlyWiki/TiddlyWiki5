@@ -1,7 +1,16 @@
+created: 20210104143940715
+modified: 20210228141241657
 tags: [[unusedtitle Macro]] [[Macro Examples]]
 title: unusedtitle Macro (Examples)
 type: text/vnd.tiddlywiki
 
 <$macrocall $name=".example" n="1" eg="""<<unusedtitle>>"""/>
-<$macrocall $name=".example" n="2" eg="""<<unusedtitle AnotherBase>>"""/>
-<$macrocall $name=".example" n="3" eg="""<<unusedtitle TiddlyWiki>>"""/>
+''The following example works best if there is an open tiddler in draft mode, or there is a tiddler named "New Tiddler".'' So you can see the automatic numbering.
+<$macrocall $name=".example" n="2" eg="""<<unusedtitle separator:"-">>"""/>
+<$macrocall $name=".example" n="3" eg="""<<unusedtitle baseName:"anotherBase">>"""/>
+<$macrocall $name=".example" n="4" eg="""<<unusedtitle baseName:"About" separator:"-">>"""/>
+<$macrocall $name=".example" n="5" eg="""<<unusedtitle template:"$count:2$-test">>"""/>
+
+---
+
+Working buttons can be found at: [[unusedtitle Macro (Examples 1)]]. You'll have to examine the code to see, what's going on.

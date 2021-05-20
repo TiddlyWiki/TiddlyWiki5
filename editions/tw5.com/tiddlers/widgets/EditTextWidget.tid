@@ -1,6 +1,6 @@
 caption: edit-text
 created: 20131024141900000
-modified: 20201130184701532
+modified: 20210519154352055
 tags: Widgets
 title: EditTextWidget
 type: text/vnd.tiddlywiki
@@ -36,6 +36,7 @@ The content of the `<$edit-text>` widget is ignored.
 |inputActions |<<.from-version 5.1.23>> Optional actions that are triggered every time an input event occurs within the input field or textarea |
 |refreshTitle |<<.from-version 5.1.23>> An optional tiddler title that makes the input field update whenever the specified tiddler changes |
 |disabled|<<.from-version "5.1.23">> Optional, disables the text input if set to "yes". Defaults to "no"|
+|fileDrop|<<.from-version "5.1.24">> Optional. When set to "yes" allows dropping or pasting images into the editor to import them. Defaults to "no"|
 
 ! Notes
 

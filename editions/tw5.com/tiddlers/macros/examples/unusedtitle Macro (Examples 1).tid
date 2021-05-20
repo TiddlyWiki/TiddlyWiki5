@@ -1,0 +1,51 @@
+created: 20210227212730299
+modified: 20210427184057456
+tags: 
+title: unusedtitle Macro (Examples 1)
+type: text/vnd.tiddlywiki
+
+\define testCreate()
+<$action-createtiddler $basetitle=<<unusedtitle template:"$count:2$-new">>/>
+\end
+
+\define testCreate1()
+<$action-createtiddler $basetitle=<<unusedtitle baseName:"new" separator:"-" template:"$count:2$$separator$$basename$">>/>
+\end
+
+\define testNew()
+<$action-sendmessage $message="tm-new-tiddler" title=<<unusedtitle baseName:"new" template:"$count:2$-$basename$">> />
+\end
+
+```
+<<unusedtitle template:"$count:2$-new">>
+```
+
+<$button actions=<<testCreate>> >
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
+Create Tiddler
+</$button>
+
+```
+<<unusedtitle baseName:"new" template:"$count:2$-$basename$">>
+```
+
+<$button actions=<<testNew>>>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
+New Tiddler
+</$button>
+
+```
+<<unusedtitle baseName:"new" separator:"-" template:"$count:2$$separator$$basename$">>
+```
+
+<$button actions=<<testCreate1>>>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
+Create Tiddler
+</$button>
+
+---
+
+<details>
+    <summary>Show the code</summary>
+    <pre><code><$view><pre><code>
+</details>

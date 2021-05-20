@@ -1,6 +1,6 @@
 created: 20201117073343969
-modified: 20201208185546667
-tags: [[Filter Syntax]]
+modified: 20210428084013109
+tags: [[Filter Syntax]] [[Filter Run Prefix Examples]]
 title: Filter Run Prefix (Examples)
 type: text/vnd.tiddlywiki
 
@@ -44,3 +44,7 @@ Specifying a default value when input is empty:
 `[tag[non-existent]] :reduce[get[price]multiply{!!quantity}add<accumulator>] :else[[0]]`
 
 <$macrocall $name=".tip" _="""Unlike the [[reduce Operator]], the `:reduce` prefix cannot specify an initial value for the accumulator, so its initial value will always be empty (which is treated as 0 by mathematical operators). So `=1 =2 =3 :reduce[multiply<accumulator>]` will produce 0, not 6. If you need to specify an initial accumulator value, use the [[reduce Operator]]."""/>
+
+!! `:sort` examples
+
+See [[Sort Filter Run Prefix (Examples)]]

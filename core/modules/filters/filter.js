@@ -20,7 +20,7 @@ exports.filter = function(source,operator,options) {
 		results = [],
 		target = operator.prefix !== "!";
 	source(function(tiddler,title) {
-		var list = filterFn.call(options.wiki,options.wiki.makeTiddlerIterator([title]));
+		var list = filterFn.call(options.wiki,options.wiki.makeTiddlerIterator([title]),options.widget);
 		if((list.length > 0) === target) {
 			results.push(title);
 		}

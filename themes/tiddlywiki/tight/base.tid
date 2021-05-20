@@ -82,17 +82,17 @@ tags: [[$:/tags/Stylesheet]]
 	}
 
 	html body.tc-body .tc-tiddler-frame .tc-tiddler-info {
-	    margin: 0 -13px 0 -13px;
+		margin: 0 -13px 0 -13px;
 	}
 
 	html body.tc-body .tc-tiddler-frame .tc-fold-banner {
-	    width: 13px;
-	    margin-left: -15px;
+		width: 13px;
+		margin-left: -15px;
 	}
 
 	html body.tc-body .tc-tiddler-frame .tc-unfold-banner {
-	    margin-left: -13px;
-	    margin-top: -4px;
+		margin-left: -13px;
+		margin-top: -4px;
 	}
 
 }
