@@ -1,0 +1,23 @@
+created: 20201117163027900
+modified: 20210106151027459
+tags: Tutorials
+title: GitHub Saver Tutorial by Mohammad
+type: text/vnd.tiddlywiki
+url: https://kookma.github.io/TW5-GitHub-Saver/
+
+GitHub Saver is a step by step tutorial shows how to integrate Tiddlywiki 5 and GitHub Pages to create websites hosted on https://github.com/.
+
+{{!!url}}
+
+This instruction is based on Tiddlywiki single html file model, while it can use subfolder for extra materials like images, audios, videos, pdfs,... in separate folders.
+
+!! Other tutorials
+
+;Tiddlywiki, Travis-CI and GitHub Pages
+:https://kookma.github.io/Tiddlywiki-Travis-CI/
+:This wiki shows how to set up websites hosted on [[GitHub Pages|https://pages.github.com/]] using [[Travis-CI|https://travis-ci.org]] and [[Tiddlywiki 5|https://tiddlywiki.com]] on Node.js.
+
+
+;Tiddlywiki and GitHub Pages
+:https://kookma.github.io/Tiddlywiki-and-GitHub-Pages/
+:This instruction is based on local edit, save and push to GitHub. It does NOT use the new GitHub Saver mechanism (requires TW 5.1.20+) which lets edit and save directly from Tiddlywiki!

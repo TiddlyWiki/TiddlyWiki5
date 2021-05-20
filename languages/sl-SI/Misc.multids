@@ -22,11 +22,11 @@ Encryption/RepeatPassword: Ponovite geslo
 Encryption/SetPassword: Nastavite geslo
 Encryption/Username: Uporabniško ime
 Error/Caption: Napaka
-Error/EditConflict: Datoteka je spremenjena na strežniku
 Error/Filter: Filter napaka
 Error/FilterSyntax: Sintaktična napaka v izrazu filtra
 Error/IsFilterOperator: Filter napaka: neznan operand za 'is' operator filtra
 Error/LoadingPluginLibrary: Napaka pri nalaganju knjižnice vtičnikov
+Error/PutEditConflict: Datoteka je spremenjena na strežniku
 Error/RecursiveTransclusion: Rekurzivna napaka transkluzije v "transclude widget"
 Error/RetrievingSkinny: Napaka pri pridobivanju "skinny" seznama tiddlerjev
 Error/SavingToTWEdit: Napaka pri shranjevanju v TWEdit

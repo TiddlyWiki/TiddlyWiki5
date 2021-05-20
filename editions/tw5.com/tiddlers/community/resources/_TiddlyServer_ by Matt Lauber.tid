@@ -1,8 +1,9 @@
 created: 20161226165024380
 creator: Matt Lauber
-modified: 20161226193911129
-tags: Resources
+modified: 20210106151027226
+tags: [[Other resources]]
 title: "TiddlyServer" by Matt Lauber
+type: text/vnd.tiddlywiki
 url: https://github.com/mklauber/TiddlyServer/releases/
 
 TiddlyServer is a special purpose Desktop app, designed to facilitate managing multiple instances of TiddlyWiki running as a server.  It does not require internet acess to access the wikis.

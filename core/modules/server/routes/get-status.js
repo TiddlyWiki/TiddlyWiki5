@@ -17,7 +17,6 @@ exports.method = "GET";
 exports.path = /^\/status$/;
 
 exports.handler = function(request,response,state) {
-	response.writeHead(200, {"Content-Type": "application/json"});
 	var text = JSON.stringify({
 		username: state.authenticatedUsername || state.server.get("anon-username") || "",
 		anonymous: !state.authenticatedUsername,
@@ -28,7 +27,7 @@ exports.handler = function(request,response,state) {
 		},
 		tiddlywiki_version: $tw.version
 	});
-	response.end(text,"utf8");
+	state.sendResponse(200,{"Content-Type": "application/json"},text,"utf8");
 };
 
 }());

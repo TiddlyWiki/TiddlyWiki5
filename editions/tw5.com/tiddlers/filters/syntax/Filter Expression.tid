@@ -1,5 +1,5 @@
 created: 20150124182421000
-modified: 20201214053032397
+modified: 20210428084144231
 tags: [[Filter Syntax]]
 title: Filter Expression
 type: text/vnd.tiddlywiki
@@ -26,6 +26,8 @@ If a run has:
 * named prefix `:intersection` replaces all filter output so far with titles that are present in the output of this run, as well as the output from previous runs. Forms the input for the next run. <<.from-version "5.1.23">>
 * named prefix `:reduce` replaces all filter output so far with a single item by repeatedly applying a formula to each input title. A typical use is to add up the values in a given field of each input title. <<.from-version "5.1.23">>
 ** [[Examples|Filter Run Prefix (Examples)]]
+* named prefix `:sort` sorts all filter output so far by applying this run to each input title and sorting according to that output. <<.from-version "5.1.24">>
+** See [[Sort Filter Run Prefix]].
 
 <<.tip "Compare named filter run prefix `:filter` with [[filter Operator]] which applies a subfilter to every input title, removing the titles that return an empty result from the subfilter">>
 
@@ -47,7 +49,7 @@ The input of a run is normally a list of all the non-[[shadow|ShadowTiddlers]] t
 
 |Prefix|Input|h
 |`-`, `~`, `=`, `:intersection` or none| <$link to="all Operator">`[all[]]`</$link> tiddler titles, unless otherwise determined by the first [[filter operator|Filter Operators]]|
-|`+`, `:filter`, `:reduce`|the filter output of all previous runs so far|
+|`+`, `:filter`, `:reduce`,`:sort`|the filter output of all previous runs so far|
 
 Precisely because of varying inputs, be aware that both prefixes `-` and `+` do not behave inverse to one another!
 

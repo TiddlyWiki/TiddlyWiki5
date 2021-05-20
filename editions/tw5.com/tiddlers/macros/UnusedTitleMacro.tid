@@ -1,5 +1,6 @@
-
 caption: unusedtitle
+created: 20210104143546885
+modified: 20210427184035684
 tags: Macros [[Core Macros]]
 title: unusedtitle Macro
 type: text/vnd.tiddlywiki
@@ -10,7 +11,30 @@ It uses the same method as the create new tiddler button, a number is appended t
 
 !! Parameters
 
-;baseName
-: A string specifying the desired base name, defaulting to `New Tiddler`
+; baseName
+: A string specifying the desired base name, defaulting to `New Tiddler`. <br>The default setting can be adjusted in the $:/ControlPanel '': Info : Basics - tab.''
 
-<<.macro-examples "unusedtitle">>
+; separator
+: <<.from-version "5.1.24">> An ''optional'' string specifying the separator between baseName and the unique number. eg: `separator:"-"`. Defaults to a space: `" "`. If you need an empty separator use the ''template''!
+
+; template
+: <<.from-version "5.1.24">> A ''optional'' template string can be used to allow you maximum flexibility. If the template string is used, there will always be a counter value. 
+
+!! Template String
+
+; `$basename$`
+: This variable will be replaced by the content of the ''baseName'' parameter
+
+; `$separator$`
+: This variable will be replaced by the ''separator'' parameter
+
+;`$count$`
+: This variable will be createad automatically and is a counter starting with 0
+
+;`$count:4$`
+: This variable will be createad automatically and starts at 0000
+: `:4` represents the number of digits
+
+!! Examples
+
+<<list-links "[prefix[unusedtitle Macro (E]!sort[]]">>

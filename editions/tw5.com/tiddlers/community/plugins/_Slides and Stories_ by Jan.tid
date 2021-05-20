@@ -1,0 +1,25 @@
+created: 20141122093837330
+modified: 20210106151027205
+tags: [[Community Plugins]]
+title: "Slides and Stories" by Jan
+type: text/vnd.tiddlywiki
+url: http://slidesnstories.tiddlyspot.com
+
+Slides and Stories is a repository of the tools to optimize TW for scientific research and for presenting and publishing results.
+
+{{!!url}}
+
+<<<
+!~SlidesnStories 
+...is a tool to save and reload sets of Tiddlers. This is already working, The aim is to develop a mechanism to transform these into instant slideshows.
+
+!~MetaTabs 
+is a tool which gives you the possibility to attach and show specific information in tabs at the bottom of each Tiddler: ideas, notes, tasks, stories and presentations, comments, annotations and footnotes. <br>
+It is inspired by ~MagicTabs and Tiddlyscholar by Alberto Molina Pérez, which are very elaborated tools that alas do not seem to be in active development any more.
+I wanted to change the behaviour in some ways. For example I wanted show tabs only if they have content. 
+
+!...furthermore there is 
+* an export-plugin,
+* a footnote-plugin,
+* and a plugin to rearrange Tiddlers in the ~StoryRiver
+<<<

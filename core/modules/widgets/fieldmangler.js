@@ -67,7 +67,7 @@ FieldManglerWidget.prototype.handleRemoveFieldEvent = function(event) {
 		deletion = {};
 	deletion[event.param] = undefined;
 	this.wiki.addTiddler(new $tw.Tiddler(tiddler,deletion));
-	return true;
+	return false;
 };
 
 FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
@@ -105,7 +105,7 @@ FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
 		}
 	}
 	this.wiki.addTiddler(new $tw.Tiddler(tiddler,addition));
-	return true;
+	return false;
 };
 
 FieldManglerWidget.prototype.handleRemoveTagEvent = function(event) {
@@ -122,7 +122,7 @@ FieldManglerWidget.prototype.handleRemoveTagEvent = function(event) {
 			this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));
 		}
 	}
-	return true;
+	return false;
 };
 
 FieldManglerWidget.prototype.handleAddTagEvent = function(event) {
@@ -140,7 +140,7 @@ FieldManglerWidget.prototype.handleAddTagEvent = function(event) {
 		tag.push(event.param.trim());
 		this.wiki.addTiddler(new $tw.Tiddler({title: this.mangleTitle, tags: tag},modification));
 	}
-	return true;
+	return false;
 };
 
 exports.fieldmangler = FieldManglerWidget;
