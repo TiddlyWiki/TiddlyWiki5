@@ -34,10 +34,7 @@ exports.handler = function(request,response,state) {
 			content = content;
 			type = ($tw.config.fileExtensionInfo[extension] ? $tw.config.fileExtensionInfo[extension].type : "application/octet-stream");
 		}
-		response.writeHead(status,{
-			"Content-Type": type
-		});
-		response.end(content);
+		state.sendResponse(status,{"Content-Type": type},content);
 	});
 };
 

@@ -22,6 +22,9 @@ exports.startup = function() {
 	if($tw.node) {
 		$tw.modules.applyMethods("utils-node",$tw.utils);
 	}
+	if($tw.browser) {
+		$tw.modules.applyMethods("utils-browser",$tw.utils);
+	}
 	$tw.modules.applyMethods("global",$tw);
 	$tw.modules.applyMethods("config",$tw.config);
 	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");

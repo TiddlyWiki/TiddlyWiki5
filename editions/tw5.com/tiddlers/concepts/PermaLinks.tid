@@ -1,5 +1,5 @@
 created: 20140502213500000
-modified: 20160622111355787
+modified: 20210406131243532
 tags: Features Concepts
 title: PermaLinks
 type: text/vnd.tiddlywiki
@@ -32,7 +32,7 @@ If the target tiddler isn't present in the story list then it is automatically i
 
 It is also possible to specify a story filter without specifying a target tiddler for navigation:
 
-<a href="https://tiddlywiki.com/#:[tags[task]]" rel="noopener noreferrer">~https://tiddlywiki.com/#:[tags[task]]</a>
+<a href="https://tiddlywiki.com/#:[tag[task]]" rel="noopener noreferrer">~https://tiddlywiki.com/#:[tag[task]]</a>
 
 ! About URL encoding
 

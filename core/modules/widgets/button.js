@@ -66,6 +66,9 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this["aria-label"]) {
 		domNode.setAttribute("aria-label",this["aria-label"]);
 	}
+	if(this.popup || this.popupTitle) {
+		domNode.setAttribute("aria-expanded",isPoppedUp ? "true" : "false");
+	}
 	// Set the tabindex
 	if(this.tabIndex) {
 		domNode.setAttribute("tabindex",this.tabIndex);
