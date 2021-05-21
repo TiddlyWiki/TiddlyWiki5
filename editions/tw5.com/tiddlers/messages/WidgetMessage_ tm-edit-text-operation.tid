@@ -136,6 +136,7 @@ At this point the following text operations have been implemented:
 |<<.def "wrap-selection">>|<<wrapSelectionDescription>> |
 |<<.def "save-selection">>|<<saveSelectionDescription>> |
 |<<.def "make-link">>|<<makeLinkDescription>> |
+|<<.def "insert-text">>|<<insertTextDescription>>|
 
 
 !Example
