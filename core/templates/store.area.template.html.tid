@@ -5,7 +5,7 @@ title: $:/core/templates/store.area.template.html
 <$list filter="[[$:/isEncrypted]get[text]else[no]match[no]]">
     <$list filter="[[storeAreaFormat]is[variable]getvariable[]else[json]match[json]]">
         <!-- New-style JSON store area, with an old-style store area for compatibility with v5.1.x tooling -->
-        `<script class="tiddlywiki-tiddler-store" type="application/json" data-tiddlywiki-tiddler-store-format="json">`
+        `<script class="tiddlywiki-tiddler-store" type="application/json">`
             <$macrocall $name="jsontiddlers" filter=<<saveTiddlerFilter>> escapeUnsafeScriptCharacters="yes" $output="text/raw"/>
         `</script>`
         `<div id="storeArea" style="display:none;">`

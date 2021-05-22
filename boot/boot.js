@@ -1724,21 +1724,18 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/dom","tiddlerdeserializer",{
 			},
 			t,result = [];
 		if(node) {
-			var format = (node.getAttribute && node.getAttribute("data-tiddlywiki-tiddler-store-format")) || "div";
-			switch(format) {
-				case "div":
-					for(t = 0; t < node.childNodes.length; t++) {
-						var childNode = node.childNodes[t],
-							tiddlers = extractTextTiddlers(childNode);
-						tiddlers = tiddlers || extractModuleTiddlers(childNode);
-						if(tiddlers) {
-							result.push.apply(result,tiddlers);
-						}
+			var type = (node.getAttribute && node.getAttribute("type")) || null;
+			if(type) {
+				result = $tw.wiki.deserializeTiddlers(type,node.textContent);
+			} else {
+				for(t = 0; t < node.childNodes.length; t++) {
+					var childNode = node.childNodes[t],
+						tiddlers = extractTextTiddlers(childNode);
+					tiddlers = tiddlers || extractModuleTiddlers(childNode);
+					if(tiddlers) {
+						result.push.apply(result,tiddlers);
 					}
-					break;
-				case "json":
-					result = JSON.parse(node.textContent);
-					break;
+				}
 			}
 		}
 		return result;
