@@ -30,7 +30,7 @@ exports.sort = function(operationSubFunction,options) {
 						switch(name) {
 							case "currentTiddler":
 								return "" + title;
-							case "outerCurrentTiddler":
+							case "..currentTiddler":
 								return widget.getVariable("currentTiddler");
 							default:
 								return widget.getVariable(name);

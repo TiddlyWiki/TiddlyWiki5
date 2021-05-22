@@ -23,7 +23,7 @@ exports.reduce = function(operationSubFunction,options) {
 						switch(name) {
 							case "currentTiddler":
 								return "" + title;
-							case "outerCurrentTiddler":
+							case "..currentTiddler":
 								return widget.getVariable("currentTiddler");
 							case "accumulator":
 								return "" + accumulator;

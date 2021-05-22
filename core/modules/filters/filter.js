@@ -25,7 +25,7 @@ exports.filter = function(source,operator,options) {
 					switch(name) {
 						case "currentTiddler":
 							return "" + title;
-						case "outerCurrentTiddler":
+						case "..currentTiddler":
 							return options.widget.getVariable("currentTiddler");
 						default:
 							return options.widget.getVariable(name);
