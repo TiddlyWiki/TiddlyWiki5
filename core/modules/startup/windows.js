@@ -73,6 +73,9 @@ exports.startup = function() {
 		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
+			// Save the scroll position
+			var scrollX = srcWindow.scrollX,
+			    scrollY = srcWindow.scrollY;
 			// Detect the currently focused domNode
 			var currentlyFocusedDomNode = srcDocument.activeElement.tagName !== "IFRAME" ? srcDocument.activeElement : srcDocument.activeElement.contentWindow.document.activeElement;
 			// Find the widget owning the currently focused domNode
@@ -104,6 +107,8 @@ exports.startup = function() {
 			if(refreshedWidget) {
 				$tw.focusManager.focusWidget(refreshedWidget,renderTreeFootprint,widgetInfo);
 			}
+			// Restore the scroll position
+			srcWindow.scroll(scrollX,scrollY);
 		};
 		$tw.wiki.addEventListener("change",refreshHandler);
 		// Listen for keyboard shortcuts
