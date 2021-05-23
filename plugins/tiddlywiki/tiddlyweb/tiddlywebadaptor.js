@@ -183,10 +183,8 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
 TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
-	// Starting with 5.2.0, all syncadptor method signatures follow the node.js
-	// standard of callback as last argument. This catches the previous signature:
+	// Check for pre v5.2.0 method signature:
 	if(typeof callback !== "function" && typeof options === "function"){
-		// First stash any non-function third argument, then swap
 		var optionsArg = callback;
 		callback = options;
 		options = optionsArg;
@@ -226,10 +224,8 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
 Load a tiddler and invoke the callback with (err,tiddlerFields)
 */
 TiddlyWebAdaptor.prototype.loadTiddler = function(title,options,callback) {
-	// Starting with 5.2.0, all syncadptor method signatures follow the node.js
-	// standard of callback as last argument. This catches the previous signature:
+	// Check for pre v5.2.0 method signature:
 	if(typeof callback !== "function" && typeof options === "function"){
-		// First stash any non-function third argument, then swap
 		var optionsArg = callback;
 		callback = options;
 		options = optionsArg;
@@ -254,10 +250,8 @@ options include:
 tiddlerInfo: the syncer's tiddlerInfo for this tiddler
 */
 TiddlyWebAdaptor.prototype.deleteTiddler = function(title,options,callback) {
-	// Starting with 5.2.0, all syncadptor method signatures follow the node.js
-	// standard of callback as last argument. This catches the previous signature:
+	// Check for pre v5.2.0 method signature:
 	if(typeof callback !== "function" && typeof options === "function"){
-		// First stash any non-function third argument, then swap
 		var optionsArg = callback;
 		callback = options;
 		options = optionsArg;
