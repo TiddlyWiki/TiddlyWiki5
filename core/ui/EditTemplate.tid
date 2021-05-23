@@ -1,13 +1,11 @@
 title: $:/core/ui/EditTemplate
 
-\define get-focus-selector()
-[data-tiddler-title="$(cssEscapedTitle)$"].tc-tiddler-frame
-\end
+\whitespace trim
 \define focus-tiddler-actions(afterOrBefore)
 <$set name="nextTiddler" value={{{ [list<tv-story-list>$afterOrBefore$<currentTiddler>] }}}>
 <$set name="cssEscapedTitle" value={{{ [<nextTiddler>escapecss[]] }}}>
-<$action-navigate $to=<<nextTiddler>>/>
 <$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>> preventScroll="true"/>
+<$action-navigate $to=<<nextTiddler>>/>
 </$set>
 </$set>
 \end
@@ -17,11 +15,23 @@ title: $:/core/ui/EditTemplate
 <$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 <<delete-edittemplate-state-tiddlers>>
 <$action-sendmessage $message="tm-save-tiddler"/>
+<$set name="cssEscapedTitle" value={{{ [<currentTiddler>get[draft.title]] }}}>
+<$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>>/>
+</$set>
 \end
 \define cancel-delete-tiddler-actions(message)
+<$list filter="[[$message$]match[cancel]]" variable="ignore">
+<$list filter="[<currentTiddler>get[draft.of]!is[shadow]is[missing]]" variable="ignore">
+<<if-last-tiddler-actions>>
+</$list>
+</$list>
+<$list filter="[[$message$]match[delete]]" variable="ignore">
+<<if-last-tiddler-actions>>
+</$list>
 <<delete-edittemplate-state-tiddlers>>
 <$action-sendmessage $message="tm-$message$-tiddler"/>
 \end
+\whitespace trim
 <$keyboard key="((focus-next-tiddler))" actions=<<focus-tiddler-actions "after">> tag="div">
 <$keyboard key="((focus-previous-tiddler))" actions=<<focus-tiddler-actions "before">>>
 <$keyboard key="((cancel-edit-tiddler))" actions=<<cancel-delete-tiddler-actions "cancel">>>
