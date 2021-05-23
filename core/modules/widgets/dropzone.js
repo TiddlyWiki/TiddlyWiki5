@@ -115,6 +115,9 @@ DropZoneWidget.prototype.handleDragEnterEvent  = function(event) {
 	if($tw.dragInProgress) {
 		return false;
 	}
+	if(this.filesOnly && !$tw.utils.dragEventContainsFiles(event)) {
+		return false;
+	}
 	this.enterDrag(event);
 	// Tell the browser that we're ready to handle the drop
 	event.preventDefault();
@@ -133,7 +136,10 @@ DropZoneWidget.prototype.handleDragOverEvent  = function(event) {
 	}
 	// Tell the browser that we're still interested in the drop
 	event.preventDefault();
-	event.dataTransfer.dropEffect = "copy"; // Explicitly show this is a copy
+	// Check if this is a synthetic event, IE does not allow accessing dropEffect outside of original event handler
+	if(event.isTrusted) {
+		event.dataTransfer.dropEffect = "copy"; // Explicitly show this is a copy
+	}
 };
 
 DropZoneWidget.prototype.handleDragLeaveEvent  = function(event) {
@@ -284,6 +290,7 @@ DropZoneWidget.prototype.execute = function() {
 	this.importTitle = this.getAttribute("importTitle",IMPORT_TITLE);
 	this.actions = this.getAttribute("actions");
 	this.contentTypesFilter = this.getAttribute("contentTypesFilter");
+	this.filesOnly = this.getAttribute("filesOnly","no") === "yes";
 	// Make child widgets
 	this.makeChildWidgets();
 };

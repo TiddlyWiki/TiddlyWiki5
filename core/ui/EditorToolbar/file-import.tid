@@ -1,0 +1,41 @@
+title: $:/core/ui/EditorToolbar/file-import
+tags: $:/tags/EditorTools
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+
+\define lingo-base() $:/language/Import/
+
+\define closePopupActions()
+<$action-deletetiddler $filter="[title<importState>] [title<importTitle>]"/>
+\end
+
+\define replacement-text-image() [img[$title$]]
+
+\define replacement-text-file() [[$title$]]
+
+\define postImportActions()
+<$list filter="[<importTitle>links[]] :reduce[get[type]prefix[image]then<replacement-text-image>else<replacement-text-file>search-replace[$title$],<currentTiddler>addprefix<accumulator>]" variable="imageTitle">
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="insert-text"
+	text=<<imageTitle>>
+/>
+</$list>
+<<closePopupActions>>
+\end
+
+\define buttons()
+<$button class="tc-btn-invisible" actions=<<closePopupActions>> ><<lingo Listing/Cancel/Caption>></$button>
+<$button class="tc-btn-invisible" message="tm-perform-import" param=<<importTitle>> actions=<<postImportActions>> ><<lingo Listing/Import/Caption>></$button>
+\end
+
+<$reveal type="popup" state=<<importState>> tag="div" class="tc-editor-importpopup">
+<div class="tc-editor-import">
+<$list filter="[<importTitle>field:plugin-type[import]]">
+<h2><<lingo Editor/Import/Heading>></h2>
+<$tiddler tiddler=<<importTitle>>>
+{{||$:/core/ui/ImportListing}}
+<<buttons>>
+</$tiddler>
+</$list>
+</div>
+</$reveal>

@@ -89,6 +89,18 @@ function FramedEngine(options) {
 		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"},
 		{name: "blur",handlerObject: this, handlerMethod: "handleBlurEvent"}
 	]);
+	// Add drag and drop event listeners if fileDrop is enabled
+	if(this.widget.isFileDropEnabled) {
+		$tw.utils.addEventListeners(this.domNode,[
+			{name: "dragenter",handlerObject: this.widget,handlerMethod: "handleDragEnterEvent"},
+			{name: "dragover",handlerObject: this.widget,handlerMethod: "handleDragOverEvent"},
+			{name: "dragleave",handlerObject: this.widget,handlerMethod: "handleDragLeaveEvent"},
+			{name: "dragend",handlerObject: this.widget,handlerMethod: "handleDragEndEvent"},
+			{name: "drop", handlerObject: this.widget,handlerMethod: "handleDropEvent"},
+			{name: "paste", handlerObject: this.widget,handlerMethod: "handlePasteEvent"},
+			{name: "click",handlerObject: this.widget,handlerMethod: "handleClickEvent"}
+		]);
+	}
 	// Insert the element into the DOM
 	this.iframeDoc.body.appendChild(this.domNode);
 	this.widget.domNodes.push(this.domNode);

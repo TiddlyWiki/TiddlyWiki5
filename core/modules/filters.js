@@ -323,6 +323,9 @@ exports.compileFilter = function(filterString) {
 		} else if(typeof source === "object") { // Array or hashmap
 			source = self.makeTiddlerIterator(source);
 		}
+		if(!widget) {
+			widget = $tw.rootWidget;
+		}
 		var results = new $tw.utils.LinkedList();
 		$tw.utils.each(operationFunctions,function(operationFunction) {
 			operationFunction(results,source,widget);

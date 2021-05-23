@@ -221,6 +221,10 @@ exports.isTemporaryTiddler = function(title) {
 	return title && title.indexOf("$:/temp/") === 0;
 };
 
+exports.isVolatileTiddler = function(title) {
+	return title && title.indexOf("$:/temp/volatile/") === 0;
+};
+
 exports.isImageTiddler = function(title) {
 	var tiddler = this.getTiddler(title);
 	if(tiddler) {		
@@ -374,12 +378,12 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 			var tiddlerA = self.getTiddler(a),
 				tiddlerB = self.getTiddler(b);
 			if(tiddlerA) {
-				a = tiddlerA.fields[sortField] || "";
+				a = tiddlerA.getFieldString(sortField) || "";
 			} else {
 				a = "";
 			}
 			if(tiddlerB) {
-				b = tiddlerB.fields[sortField] || "";
+				b = tiddlerB.getFieldString(sortField) || "";
 			} else {
 				b = "";
 			}
@@ -1549,4 +1553,3 @@ exports.slugify = function(title,options) {
 };
 
 })();
-

@@ -1,6 +1,6 @@
 caption: dropzone
 created: 20131024141900000
-modified: 20210410062410660
+modified: 20210506115809131
 tags: Widgets
 title: DropzoneWidget
 type: text/vnd.tiddlywiki
@@ -21,16 +21,17 @@ It sends a [[WidgetMessage: tm-import-tiddlers]] carrying a JSON representation 
 |importTitle|<<.from-version "5.1.23">> Optional tiddler title to use for import process instead of ~$:/Import |
 |actions|<<.from-version "5.1.24">> Optional actions string to be invoked after the `tm-import-tiddlers` message has been sent. The variable `importTitle` provides the title of the tiddler used for the import process. |
 |contentTypesFilter |<<.from-version "5.1.24">> Optional filter that specifies the [[content types|ContentType]] accepted by the dropzone. |
+|filesOnly|<<.from-version "5.1.24">> Optional. When set to "yes", the dropzone only accepts files and not string data. Defaults to "no" |
 
 <<.tip """Use the `prefix` filter operator to easily accept multiple related content types. For example this filter will accept all image content types: `[prefix[image/]]`""">>
 
-The list of available deserializers can be inspected by executing `Object.keys($tw.Wiki.tiddlerDeserializerModules).sort().join("\n")` in the browser JavaScript console.
+<<.tip "The list of available deserializers can be seen by using the filter `[deserializers[]]` in the Filter tab in [[Advanced Search|$:/AdvancedSearch]].">>
 
 The dropzone widget displays any contained content within the dropzone.
 
 ! Display
 
-The dropzone widget creates an HTML `<div class="tc-dropzone">` to contain its content. During a drag operation the class `tc-dragover` is added. CSS is used to provide user feedback.
+The dropzone widget creates an HTML `<div class="tc-dropzone">` to contain its content. During a drag operation the class `tc-dragover` is added. CSS is used to provide user feedback. For custom styling of this state where a drag is in progress, specify a custom class name with the `class` attribute and use CSS with the selector `.myclass.tc-dragover`.
 
 ! Data types supported
 
