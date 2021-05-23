@@ -55,15 +55,7 @@ exports["text/html"] = function(text,fields) {
 		match = storeAreaMarkerRegExp.exec(text);
 	if(match) {
 		// If so, it's either a classic TiddlyWiki file or an unencrypted TW5 file
-		// First read the normal tiddlers
-		var results = deserializeStoreArea(text,storeAreaMarkerRegExp.lastIndex,!!match[1],fields);
-		// Then any system tiddlers
-		var systemAreaMarkerRegExp = /<div id=["']?systemArea['"]?( style=["']?display:none;["']?)?>/gi,
-			sysMatch = systemAreaMarkerRegExp.exec(text);
-		if(sysMatch) {
-			results.push.apply(results,deserializeStoreArea(text,systemAreaMarkerRegExp.lastIndex,!!sysMatch[1],fields));
-		}
-		return results;
+		return deserializeStoreArea(text,storeAreaMarkerRegExp.lastIndex,!!match[1],fields);
 	} else {
 		// Check whether we've got an encrypted file
 		var encryptedStoreArea = $tw.utils.extractEncryptedStoreArea(text);
