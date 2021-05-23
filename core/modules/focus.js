@@ -135,10 +135,12 @@ FocusManager.prototype.findParentWidgetWithDomNodes = function(widget) {
 			return widget.domNodes[0].childNodes[0];
 		}
 	}
+	return null;
 };
 
 FocusManager.prototype.focusWidget = function(widget,footprint,widgetInfo) {
 	if(!this.interceptFocusPreservation) {
+		// Find the DomNode corresponding to the widget
 		var counter = 0,
 			savedDomNode,
 			domNode = widget.domNodes[footprint[0]];
@@ -147,25 +149,41 @@ FocusManager.prototype.focusWidget = function(widget,footprint,widgetInfo) {
 			savedDomNode = domNode;
 			domNode = domNode.childNodes[footprint[counter]];
 		}
-		if(savedDomNode && (savedDomNode.nodeType === Node.TEXT_NODE)) {
-			savedDomNode = savedDomNode.parentNode;
-		}
-		if((savedDomNode && savedDomNode.getAttribute && savedDomNode.getAttribute("hidden") === "true") || (savedDomNode === undefined)) {
+		// If we haven't found a DomNode
+		if(savedDomNode === undefined) {
 			savedDomNode = this.findParentWidgetWithDomNodes(widget);
 		}
+		// If the DomNode is hidden
+		if(savedDomNode && savedDomNode.getAttribute && savedDomNode.getAttribute("hidden") === "true") {
+			while(savedDomNode && savedDomNode.getAttribute && savedDomNode.getAttribute("hidden") === "true") {
+				savedDomNode = this.findParentWidgetWithDomNodes(widget);
+			}
+		}
+		// If the DomNode is a Text Node, use the parent DomNode
 		if(savedDomNode && (savedDomNode.nodeType === Node.TEXT_NODE)) {
 			savedDomNode = savedDomNode.parentNode;
 		}
+		// If the DomNode doesn't have the tabindex attribute set,
+		// detect if it's a focusable DomNode
+		if(savedDomNode && savedDomNode.getAttribute && savedDomNode.getAttribute("tabindex") === null) {
+			var validTagNames = ["BUTTON","A","INPUT","TEXTAREA"];
+			while((savedDomNode.getAttribute && savedDomNode.getAttribute("tabindex") === null) && validTagNames.indexOf(savedDomNode.tagName.toUpperCase()) === -1) {
+				savedDomNode = savedDomNode.parentNode;
+			}
+		}
+		// Set an eventual selection-range
+		if(widget.engine && widget.engine.setSelectionRange) {
+			widget.engine.setSelectionRange(widgetInfo.selectionStart,widgetInfo.selectionEnd);
+		}
+		// Now focus the DomNode
 		if(savedDomNode && savedDomNode.focus) {
 			savedDomNode.focus({preventScroll: true});
-		}
-		if(widgetInfo.selectionStart && widgetInfo.selectionEnd && widget.engine && widget.engine.setSelectionRange) {
-			widget.engine.setSelectionRange(widgetInfo.selectionStart,widgetInfo.selectionEnd);
 		}
 	} else {
 		this.interceptFocusPreservation = false;
 	}
 };
+
 exports.FocusManager = FocusManager;
 
 })();
