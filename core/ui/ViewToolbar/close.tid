@@ -4,7 +4,7 @@ caption: {{$:/core/images/close-button}} {{$:/language/Buttons/Close/Caption}}
 description: {{$:/language/Buttons/Close/Hint}}
 
 \whitespace trim
-<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class=<<tv-config-toolbar-class>>>
+<$button actions=<<close-tiddler-actions>> tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/close-button}}
 </$list>
