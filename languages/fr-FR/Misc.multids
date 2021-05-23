@@ -31,6 +31,8 @@ Error/FormatFilterOperator: Erreur de filtre : Suffixe inconnu pour l'opérateur
 Error/LoadingPluginLibrary: Erreur lors du chargement de la bibliothèque de plugins
 Error/NetworkErrorAlert: `<h2>''Erreur Réseau''</h2>Il semble que la connexion au serveur soit perdue. Cela peut indiquer un problème avec votre connexion réseau. Essayez de rétablir la connectivité du réseau avant de continuer.<br><br>''Toute modification non enregistrée sera automatiquement synchronisée lorsque la connectivité sera rétablie''.`
 Error/PutEditConflict: Le fichier a changé sur le serveur
+Error/PutForbidden: Permission refusée
+Error/PutUnauthorized: Authentification nécessaire
 Error/RecursiveTransclusion: Erreur dans le widget //transclude// : transclusion récursive
 Error/RetrievingSkinny: Erreur pendant la récupération de la liste des tiddlers partiels
 Error/SavingToTWEdit: Erreur lors de l'enregistrement vers TWEdit
