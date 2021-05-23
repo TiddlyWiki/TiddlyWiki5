@@ -29,6 +29,7 @@ Options include:
 */
 Modal.prototype.display = function(title,options) {
 	options = options || {};
+	var self = this;
 	this.srcDocument = options.variables && (options.variables.rootwindow === "true" ||
 				options.variables.rootwindow === "yes") ? document :
 				(options.event && options.event.event && options.event.event.target ? options.event.event.target.ownerDocument : document);
@@ -176,8 +177,11 @@ Modal.prototype.display = function(title,options) {
 	navigatorWidgetNode.children = [headerWidgetNode,bodyWidgetNode,footerWidgetNode];
 	// Set up the refresh handler
 	refreshHandler = function(changes) {
+		// Save the current scroll position
+		var scrollX = modalBody.scrollLeft,
+		    scrollY = modalBody.scrollTop;
 		// Detect the currently focused domNode
-		var currentlyFocusedDomNode = this.srcDocument.activeElement.tagName !== "IFRAME" ? this.srcDocument.activeElement : this.srcDocument.activeElement.contentWindow.document.activeElement;
+		var currentlyFocusedDomNode = self.srcDocument.activeElement.tagName !== "IFRAME" ? self.srcDocument.activeElement : self.srcDocument.activeElement.contentWindow.document.activeElement;
 		// Find the widget owning the currently focused domNode
 		var focusWidget = $tw.focusManager.findWidgetOwningDomNode(navigatorWidgetNode,currentlyFocusedDomNode);
 		var renderTreeFootprint;
@@ -206,6 +210,9 @@ Modal.prototype.display = function(title,options) {
 		if(refreshedWidget) {
 			$tw.focusManager.focusWidget(refreshedWidget,renderTreeFootprint,widgetInfo);
 		}
+		// Restore the scroll position
+		modalBody.scrollLeft = scrollX;
+		modalBody.scrollTop = scrollY;
 	};
 	this.wiki.addEventListener("change",refreshHandler);
 	// Add the close event handler
