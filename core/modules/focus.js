@@ -169,8 +169,12 @@ FocusManager.prototype.focusWidget = function(widget,footprint,widgetInfo) {
 		// detect if it's a focusable DomNode
 		if(savedDomNode && savedDomNode.getAttribute && savedDomNode.getAttribute("tabindex") === null) {
 			var validTagNames = ["BUTTON","A","INPUT","TEXTAREA"];
-			while((savedDomNode.getAttribute && savedDomNode.getAttribute("tabindex") === null) && validTagNames.indexOf(savedDomNode.tagName.toUpperCase()) === -1) {
-				savedDomNode = savedDomNode.parentNode;
+			while((savedDomNode.getAttribute && savedDomNode.getAttribute("tabindex") === null) && (savedDomNode && savedDomNode.tagName && validTagNames.indexOf(savedDomNode.tagName.toUpperCase()) === -1)) {
+				if(savedDomNode.childNodes[0]) {
+					savedDomNode = savedDomNode.childNodes[0];
+				} else {
+					savedDomNode = savedDomNode.parentNode;
+				}
 			}
 		}
 		// Set an eventual selection-range
