@@ -893,19 +893,26 @@ $tw.modules.applyMethods = function(moduleType,targetObject) {
 };
 
 /*
+Return a class created from a modules. The module should export the properties to be added to those of the optional base class
+*/
+$tw.modules.createClassFromModule = function(moduleExports,baseClass) {
+	var newClass = function() {};
+	if(baseClass) {
+		newClass.prototype = new baseClass();
+		newClass.prototype.constructor = baseClass;
+	}
+	$tw.utils.extend(newClass.prototype,moduleExports);
+	return newClass;
+};
+
+/*
 Return an array of classes created from the modules of a specified type. Each module should export the properties to be added to those of the optional base class
 */
 $tw.modules.createClassesFromModules = function(moduleType,subType,baseClass) {
 	var classes = Object.create(null);
 	$tw.modules.forEachModuleOfType(moduleType,function(title,moduleExports) {
 		if(!subType || moduleExports.types[subType]) {
-			var newClass = function() {};
-			if(baseClass) {
-				newClass.prototype = new baseClass();
-				newClass.prototype.constructor = baseClass;
-			}
-			$tw.utils.extend(newClass.prototype,moduleExports);
-			classes[moduleExports.name] = newClass;
+			classes[moduleExports.name] = $tw.modules.createClassFromModule(moduleExports,baseClass);
 		}
 	});
 	return classes;
@@ -2141,6 +2148,7 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 			fileInfo = $tw.boot.files[title];
 			if(fileInfo.isEditableFile) {
 				relativePath = path.relative($tw.boot.wikiTiddlersPath,fileInfo.filepath);
+				fileInfo.originalpath = relativePath;
 				output[title] =
 					path.sep === "/" ?
 					relativePath :
@@ -2316,6 +2324,7 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("image/heic","base64",".heic",{flags:["image"]});
 	$tw.utils.registerFileType("image/heif","base64",".heif",{flags:["image"]});
 	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",{flags:["image"]});
+	$tw.utils.registerFileType("image/vnd.microsoft.icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("image/x-icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("application/font-woff","base64",".woff");
 	$tw.utils.registerFileType("application/x-font-ttf","base64",".woff");
@@ -2473,16 +2482,29 @@ $tw.boot.executeNextStartupTask = function(callback) {
 };
 
 /*
-Returns true if we are running on one platforms specified in a task modules `platforms` array
+Returns true if we are running on one of the platforms specified in taskModule's
+`platforms` array; or if `platforms` property is not defined.
 */
 $tw.boot.doesTaskMatchPlatform = function(taskModule) {
 	var platforms = taskModule.platforms;
 	if(platforms) {
 		for(var t=0; t<platforms.length; t++) {
-			if((platforms[t] === "browser" && !$tw.browser) || (platforms[t] === "node" && !$tw.node)) {
-				return false;
+			switch (platforms[t]) {
+				case "browser":
+					if ($tw.browser) {
+						return true;
+					}
+					break;
+				case "node":
+					if ($tw.node) {
+						return true;
+					}
+					break;
+				default:
+					$tw.utils.error("Module " + taskModule.name + ": '" + platforms[t] + "' in export.platforms invalid");
 			}
 		}
+		return false;
 	}
 	return true;
 };

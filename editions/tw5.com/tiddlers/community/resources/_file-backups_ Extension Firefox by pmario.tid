@@ -5,8 +5,8 @@ created: 20171116165500000
 delivery: Browser Extension
 description: Browser extension for Firefox
 method: save
-modified: 20200507105159105
-tags: Firefox Saving Resources plugins
+modified: 20210106151027036
+tags: Firefox Saving [[Other Resources]] plugins Windows Linux Mac
 title: "file-backups" Extension for Firefox by pmario
 type: text/vnd.tiddlywiki
 url: https://github.com/pmario/file-backups

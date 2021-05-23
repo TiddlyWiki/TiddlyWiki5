@@ -1,0 +1,24 @@
+created: 20210101152520906
+modified: 20210101152533358
+tags: Community
+title: Community Themes
+
+This is a list of themes made by members of the ~TiddlyWiki [[Community]]. Themes change the look and feel of TiddlyWiki, allowing for another degree of customisation. Installing themes works [[the same as plugins.|Manually installing a plugin]]
+
+<div class="tc-link-info">
+
+<$list filter='[tag[Community Themes]!sort[modified]]'>
+
+<div class="tc-link-info-item">
+
+! <$link><$view field="title"/></$link>
+
+<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+
+<$transclude/>
+
+</div>
+
+</$list>
+
+</div>

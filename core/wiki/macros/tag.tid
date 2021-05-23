@@ -20,7 +20,7 @@ $actions$<$transclude tiddler="""$icon$"""/><$view tiddler=<<__tag__>> field="ti
 \end
 
 \define tag-pill(tag,element-tag:"span",element-attributes:"",actions:"")
-<span class="tc-tag-list-item">
+<span class="tc-tag-list-item" data-tag-title=<<__tag__>>>
 <$macrocall $name="tag-pill-body" tag=<<__tag__>> icon={{{ [<__tag__>get[icon]] }}} colour={{{ [<__tag__>get[color]] }}} palette={{$:/palette}} element-tag="""$element-tag$""" element-attributes="""$element-attributes$""" actions="""$actions$"""/>
 </span>
 \end

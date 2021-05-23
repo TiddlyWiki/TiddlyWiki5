@@ -1,5 +1,6 @@
 title: $:/language/Import/
 
+Editor/Import/Heading: Import images and insert into the editor.
 Imported/Hint: The following tiddlers were imported:
 Listing/Cancel/Caption: Cancel
 Listing/Hint: These tiddlers are ready to import:

@@ -1,5 +1,5 @@
 created: 20201130181015815
-modified: 20201130183426619
+modified: 20210307102027763
 tags: RadioWidget
 title: RadioWidget Example
 type: text/vnd.tiddlywiki
@@ -14,19 +14,22 @@ type: text/vnd.tiddlywiki
 
 !! Using Actions
 
-If you select an option, the value is written to $:/temp/test/value and the ''id'' field of tiddler: $:/temp/test will be updated. 
+When you select an option below the following acitons will occur:
 
-A notification showing the ''actionValue'' will be shown.
+* the value is written to $:/temp/test/value
+* the ''id'' field of tiddler: $:/temp/test will be updated
+* a notification showing the ''actionValue'' will be shown
 
 <$tiddler tiddler="$:/temp/test">
-	<$radio field="id" value="a" actions=<<radioActions>> > Option a </$radio>|
-	<$radio field="id" value="b" actions=<<radioActions>> > Option b </$radio>|
-	<$radio field="id" value="c" actions=<<radioActions>> > Option c </$radio>|
+
+<$radio field="id" value="a" actions=<<radioActions>> > Option a </$radio>
+
+<$radio field="id" value="b" actions=<<radioActions>> > Option b </$radio>
+
+<$radio field="id" value="c" actions=<<radioActions>> > Option c </$radio>
+
 </$tiddler>
 
----
+The wikitext of this example is shown below:
 
-<details>
-    <summary>Show the code [[RadioWidget Example]]</summary>
-    <pre><code><$view mode=text&><pre><code>
-</details>
+<$codeblock code={{RadioWidget Example!!text}}/>

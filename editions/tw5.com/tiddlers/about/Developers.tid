@@ -1,5 +1,5 @@
 created: 20150412191004348
-modified: 20160710150754023
+modified: 20201222114745463
 tags: Community Reference
 title: Developers
 type: text/vnd.tiddlywiki
@@ -7,5 +7,10 @@ type: text/vnd.tiddlywiki
 There are several resources for developers to learn more about TiddlyWiki and to discuss and contribute to its development.
 
 * [[tiddlywiki.com/dev|https://tiddlywiki.com/dev]] is the official developer documentation
-* [[TiddlyWikiDev group|https://groups.google.com/group/TiddlyWikiDev]] for discussions about TiddlyWiki development
-* https://github.com/Jermolene/TiddlyWiki5 for the source code and development activity
+* Get involved in the [[development on GitHub|https://github.com/Jermolene/TiddlyWiki5]]
+** [[Discussions|https://github.com/Jermolene/TiddlyWiki5/discussions]] are for Q&A and open-ended discussion
+** [[Issues|https://github.com/Jermolene/TiddlyWiki5/issues]] are for raising bug reports and proposing specific, actionable new ideas
+* The older ~TiddlyWikiDev Google Group is now closed in favour of [[GitHub Discussions|https://github.com/Jermolene/TiddlyWiki5/discussions]] but remains a useful archive: https://groups.google.com/group/TiddlyWikiDev
+** An enhanced group search facility is available on [[mail-archive.com|https://www.mail-archive.com/tiddlywikidev@googlegroups.com/]]
+* Follow [[@TiddlyWiki on Twitter|http://twitter.com/#!/TiddlyWiki]] for the latest news
+* Chat at https://gitter.im/TiddlyWiki/public (development room coming soon)

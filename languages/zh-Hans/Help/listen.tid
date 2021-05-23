@@ -22,6 +22,7 @@ listen 命令使用[[命名的命令参数|NamedCommandParameters]]：
 * ''readers'' - 允许读取此维基的主体，以逗号分隔的清单
 * ''writers'' - 允许写入此维基的主体，以逗号分隔的清单
 * ''csrf-disable'' - 设置为 "yes" 以禁用 CSRF 检查 (默认为 "no")
+* ''sse-enabled'' - 设置为 "yes" 以启用服务器传送的事件 (默认为 "no")
 * ''root-tiddler'' - 服务的基本条目 (默认为 "$:/core/save/all")
 * ''root-render-type'' - 呈现的基本条目的内容类型 (默认为 "text/plain")
 * ''root-serve-type'' - 服务的基本条目的内容类型 (默认为 "text/html")
@@ -29,5 +30,6 @@ listen 命令使用[[命名的命令参数|NamedCommandParameters]]：
 * ''tls-key'' - TLS 密钥文件的路径名（相对于维基文件夹）
 * ''debug-level'' - 可选的调试级别；设置为 "debug" 来查看请求的详细信息；(默认为 "none")
 * ''gzip'' - 设为 "yes" 以启用某些 http 端点的 gzip 压缩 (默认为 "no")
+* ''use-browser-cache'' - 设置为 "yes" 允许浏览器缓存响应，以节省带宽（默认为 "no")
 
 有关向整个本地网络开启实例的信息，以及可能的安全问题，请参阅 TiddlyWiki.com 的 WebServer 条目。

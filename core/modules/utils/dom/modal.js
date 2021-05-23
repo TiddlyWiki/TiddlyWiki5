@@ -31,7 +31,7 @@ Modal.prototype.display = function(title,options) {
 	options = options || {};
 	this.srcDocument = options.variables && (options.variables.rootwindow === "true" ||
 				options.variables.rootwindow === "yes") ? document :
-				(options.event.event && options.event.event.target ? options.event.event.target.ownerDocument : document);
+				(options.event && options.event.event && options.event.event.target ? options.event.event.target.ownerDocument : document);
 	this.srcWindow = this.srcDocument.defaultView;
 	var self = this,
 		refreshHandler,

@@ -44,9 +44,7 @@ ActionListopsWidget.prototype.execute = function() {
  */
 ActionListopsWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.$tiddler || changedAttributes.$filter ||
-		changedAttributes.$subfilter || changedAttributes.$field ||
-		changedAttributes.$index || changedAttributes.$tags) {
+	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
 		return true;
 	}
@@ -60,12 +58,10 @@ ActionListopsWidget.prototype.invokeAction = function(triggeringWidget,
 	//Apply the specified filters to the lists
 	var field = this.listField,
 		index,
-		type = "!!",
 		list = this.listField;
 	if(this.listIndex) {
 		field = undefined;
 		index = this.listIndex;
-		type = "##";
 		list = this.listIndex;
 	}
 	if(this.filter) {
@@ -74,15 +70,14 @@ ActionListopsWidget.prototype.invokeAction = function(triggeringWidget,
 			.filterTiddlers(this.filter, this)));
 	}
 	if(this.subfilter) {
-		var subfilter = "[list[" + this.target + type + list + "]] " + this.subfilter;
-		this.wiki.setText(this.target, field, index, $tw.utils.stringifyList(
-			this.wiki
-			.filterTiddlers(subfilter, this)));
+		var inputList = this.wiki.getTiddlerList(this.target,field,index),
+			subfilter = $tw.utils.stringifyList(inputList) + " " + this.subfilter;
+		this.wiki.setText(this.target, field, index, $tw.utils.stringifyList(this.wiki.filterTiddlers(subfilter,this)));
 	}
 	if(this.filtertags) {
 		var tiddler = this.wiki.getTiddler(this.target),
 			oldtags = tiddler ? (tiddler.fields.tags || []).slice(0) : [],
-			tagfilter = "[list[" + this.target + "!!tags]] " + this.filtertags,
+			tagfilter = $tw.utils.stringifyList(oldtags) + " " + this.filtertags,
 			newtags = this.wiki.filterTiddlers(tagfilter,this);
 		if($tw.utils.stringifyList(oldtags.sort()) !== $tw.utils.stringifyList(newtags.sort())) {
 			this.wiki.setText(this.target,"tags",undefined,$tw.utils.stringifyList(newtags));			
