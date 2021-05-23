@@ -17,6 +17,8 @@ Basics/NewJournal/Tags/Prompt: Tags pour les nouveaux tiddlers journaux
 Basics/NewTiddler/Title/Prompt: Modèle pour les titres des nouveaux tiddlers
 Basics/NewTiddler/Tags/Prompt: Tags pour les nouveaux tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Nombre de tiddlers //shadow// modifiés
+Basics/RemoveTags: Mettre à jour vers le format courant
+Basics/RemoveTags/Hint: Met à jour la configuration des tags vers le format le plus récent
 Basics/ShadowTiddlers/Prompt: Nombre de tiddlers //shadow//
 Basics/Subtitle/Prompt: Sous-titre
 Basics/SystemTiddlers/Prompt: Nombre de tiddlers système :
