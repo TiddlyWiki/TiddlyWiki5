@@ -131,7 +131,7 @@ FocusManager.prototype.findParentWidgetWithDomNodes = function(widget) {
 	while(widget) {
 		widget = widget.parentWidget;
 		if(widget.domNodes.length > 0 && widget.domNodes[0].childNodes[0] &&
-			widget.domNodes[0].childNodes[0].getAttribute("hidden") !== "true" &&
+			widget.domNodes[0].childNodes[0].getAttribute && widget.domNodes[0].childNodes[0].getAttribute("hidden") !== "true" &&
 			widget.domNodes[0].childNodes[0].nodeType !== Node.TEXT_NODE &&
 			widget.domNodes[0].childNodes[0].focus) {
 			return widget.domNodes[0].childNodes[0];
