@@ -46,6 +46,7 @@ KeyboardShortcuts/Platform/Linux: Plate-forme Linux seulement
 KeyboardShortcuts/Platform/NonLinux: Plate-formes non-Linux seulement
 KeyboardShortcuts/Platform/Windows: Plate-forme Windows seulement
 KeyboardShortcuts/Platform/NonWindows: Plates-formes non-Windows seulement
+LayoutSwitcher/Caption: Mise en page
 LoadedModules/Caption: Modules chargés
 LoadedModules/Hint: Liste des modules chargés, liés à leurs tiddlers sources. Les italiques indiquent que les tiddlers sources n'existent pas, le plus souvent parce que le module a été créé lors du processus d'amorçage.
 Palette/Caption: Palette
