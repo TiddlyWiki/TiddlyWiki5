@@ -1,0 +1,19 @@
+title: dezerializer test data case 4
+type: text/html
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Test Data</title>
+</head>
+<body>
+
+<!--~~ Ordinary tiddlers ~~-->
+<div id="storeArea" style="display:none;"><div title="Hello &quot;There&quot;" type="text/vnd.tiddlywiki">
+<pre>Abacus</pre>
+</div>
+</div>
+<script class="tiddlywiki-tiddler-store" type="application/json">[{"title":"Hello \"There\"","text":"Calculator"}]</script>
+</body>
+</html>

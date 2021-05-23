@@ -50,22 +50,34 @@ Parse an HTML file into tiddlers. There are three possibilities:
 # An ordinary HTML file
 */
 exports["text/html"] = function(text,fields) {
-	// Check if we've got a store area
+	var results = [];
+	// Check if we've got an old-style store area
 	var storeAreaMarkerRegExp = /<div id=["']?storeArea['"]?( style=["']?display:none;["']?)?>/gi,
-		match = storeAreaMarkerRegExp.exec(text);
-	if(match) {
-		// If so, it's either a classic TiddlyWiki file or an unencrypted TW5 file
-		return deserializeStoreArea(text,storeAreaMarkerRegExp.lastIndex,!!match[1],fields);
+		storeAreaMatch = storeAreaMarkerRegExp.exec(text);
+	if(storeAreaMatch) {
+		// If so, we've got tiddlers in classic TiddlyWiki format or unencrypted old-style TW5 format
+		results.push.apply(results,deserializeStoreArea(text,storeAreaMarkerRegExp.lastIndex,!!storeAreaMatch[1],fields));
+	}
+	// Check for new-style store areas
+	var newStoreAreaMarkerRegExp = /<script class="tiddlywiki-tiddler-store" type="([^"]*)">/gi,
+		newStoreAreaMatch = newStoreAreaMarkerRegExp.exec(text),
+		haveHadNewStoreArea = !!newStoreAreaMatch;
+	while(newStoreAreaMatch) {
+		results.push.apply(results,deserializeNewStoreArea(text,newStoreAreaMarkerRegExp.lastIndex,newStoreAreaMatch[1],fields));
+		newStoreAreaMatch = newStoreAreaMarkerRegExp.exec(text);
+	}
+	// Return if we had either an old-style or a new-style store area
+	if(storeAreaMatch || haveHadNewStoreArea) {
+		return results;
+	}
+	// Otherwise, check whether we've got an encrypted file
+	var encryptedStoreArea = $tw.utils.extractEncryptedStoreArea(text);
+	if(encryptedStoreArea) {
+		// If so, attempt to decrypt it using the current password
+		return $tw.utils.decryptStoreArea(encryptedStoreArea);
 	} else {
-		// Check whether we've got an encrypted file
-		var encryptedStoreArea = $tw.utils.extractEncryptedStoreArea(text);
-		if(encryptedStoreArea) {
-			// If so, attempt to decrypt it using the current password
-			return $tw.utils.decryptStoreArea(encryptedStoreArea);
-		} else {
-			// It's not a TiddlyWiki so we'll return the entire HTML file as a tiddler
-			return deserializeHtmlFile(text,fields);
-		}
+		// It's not a TiddlyWiki so we'll return the entire HTML file as a tiddler
+		return deserializeHtmlFile(text,fields);
 	}
 };
 
@@ -77,6 +89,18 @@ function deserializeHtmlFile(text,fields) {
 	result.text = text;
 	result.type = "text/html";
 	return [result];
+}
+
+function deserializeNewStoreArea(text,storeAreaEnd,type,fields) {
+	var endOfScriptRegExp = /<\/script>/gi;
+	endOfScriptRegExp.lastIndex = storeAreaEnd;
+	var match = endOfScriptRegExp.exec(text);
+	if(match) {
+		var scriptContent = text.substring(storeAreaEnd,match.index);
+		return $tw.wiki.deserializeTiddlers(type,scriptContent);
+	} else {
+		return [];
+	}
 }
 
 function deserializeStoreArea(text,storeAreaEnd,isTiddlyWiki5,fields) {
