@@ -170,7 +170,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 SelectWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// If we're using a different tiddler/field/index then completely refresh ourselves
-	if(changedAttributes.selectTitle || changedAttributes.selectField || changedAttributes.selectIndex || changedAttributes.selectTooltip) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.tooltip) {
 		this.refreshSelf();
 		return true;
 	// If the target tiddler value has changed, just update setting and refresh the children

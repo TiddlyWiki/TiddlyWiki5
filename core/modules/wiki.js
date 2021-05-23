@@ -190,15 +190,25 @@ exports.getChangeCount = function(title) {
 
 /*
 Generate an unused title from the specified base
+options.prefix must be a string
 */
 exports.generateNewTitle = function(baseTitle,options) {
 	options = options || {};
 	var c = 0,
-		title = baseTitle;
-	while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
-		title = baseTitle + 
-			(options.prefix || " ") + 
-			(++c);
+		title = baseTitle,
+		template = options.template,
+		prefix = (typeof(options.prefix) === "string") ? options.prefix : " ";
+	if (template) {
+		// "count" is important to avoid an endless loop in while(...)!!
+		template = (/\$count:?(\d+)?\$/i.test(template)) ? template : template + "$count$";
+		title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":c});
+		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
+			title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":(++c)});
+		}
+	} else {
+		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
+			title = baseTitle + prefix + (++c);
+		}
 	}
 	return title;
 };
@@ -209,6 +219,10 @@ exports.isSystemTiddler = function(title) {
 
 exports.isTemporaryTiddler = function(title) {
 	return title && title.indexOf("$:/temp/") === 0;
+};
+
+exports.isVolatileTiddler = function(title) {
+	return title && title.indexOf("$:/temp/volatile/") === 0;
 };
 
 exports.isImageTiddler = function(title) {
@@ -364,12 +378,12 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 			var tiddlerA = self.getTiddler(a),
 				tiddlerB = self.getTiddler(b);
 			if(tiddlerA) {
-				a = tiddlerA.fields[sortField] || "";
+				a = tiddlerA.getFieldString(sortField) || "";
 			} else {
 				a = "";
 			}
 			if(tiddlerB) {
-				b = tiddlerB.fields[sortField] || "";
+				b = tiddlerB.getFieldString(sortField) || "";
 			} else {
 				b = "";
 			}
@@ -1495,6 +1509,13 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 
 // Determine whether a plugin by title is dynamically loadable
 exports.doesPluginRequireReload = function(title) {
+	var tiddler = this.getTiddler(title);
+	if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"]) {
+		if(tiddler.fields["plugin-type"] === "import") {
+			// The import plugin never requires reloading
+			return false;
+		}
+	}
 	return this.doesPluginInfoRequireReload(this.getPluginInfo(title) || this.getTiddlerDataCached(title));
 };
 
@@ -1539,4 +1560,3 @@ exports.slugify = function(title,options) {
 };
 
 })();
-
