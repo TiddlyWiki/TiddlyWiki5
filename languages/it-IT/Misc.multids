@@ -19,7 +19,6 @@ Encryption/PromptSetPassword: Imposta una nuova pasword per questo ~TiddlyWiki
 Encryption/RepeatPassword: Ripeti password
 Encryption/SetPassword: Imposta password
 Encryption/Username: NomeUtente
-InvalidFieldName: Caratteri non consentiti nel campo nome "<$text text=<<fieldName>>/>". I campi nome possono solo contenere lettere minuscole, numeri ed i caratteri sottolineato (`_`), meno (`-`) e punto (`.`)
 MissingTiddler/Hint: Frammento mancante "<$text text=<<currentTiddler>>/>" - clicca {{||$:/core/ui/Buttons/edit}} per crearlo
 OfficialPluginLibrary: Libreria ufficiale plugin ~TiddlyWiki
 PluginReloadWarning: Salva {{$:/core/ui/Buttons/save-wiki}} e ricarica {{$:/core/ui/Buttons/refresh}} per consentire alle modifiche ai plugin di avere effetto

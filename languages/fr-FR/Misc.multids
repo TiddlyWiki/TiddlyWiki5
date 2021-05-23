@@ -41,7 +41,6 @@ Error/WhileSaving: Erreur lors de l'enregistrement
 Error/XMLHttpRequest: Code d'erreur XMLHttpRequest
 InternalJavaScriptError/Title: Erreur interne JavaScript
 InternalJavaScriptError/Hint: C'est assez embarrassant. Il est recommandé de rafraîchir l'affichage de votre navigateur
-InvalidFieldName: Caractères illicites dans le nom du champ « <$text text=<<fieldName>>/> ». Les champs ne peuvent contenir que des lettres minuscules non accentuées et les caractères souligné (`_`), tiret (`-`) et point (`.`)
 LayoutSwitcher/Description: Ouvre le commutateur de mise en page
 LazyLoadingWarning: <p>Tentative de chargement d'un contenu externe ''<$text text={{!!_canonical_uri}}/>''</p><p>Si ce message ne disparaît pas, il est possible que vous deviez ajuster le type de contenu du tiddler en fonction du type de votre contenu externe, ou vous utilisez peut-être un navigateur qui n'accepte pas les contenus externes dans cette configuration. Voir https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Identification sur TiddlySpace
