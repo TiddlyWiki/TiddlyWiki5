@@ -29,6 +29,7 @@ Tous les paramètres sont optionnels avec des valeurs par défaut sûres, et peu
 * ''tls-key'' - nom de chemin du fichier de clé TLS (relativement au dossier du wiki)
 * ''debug-level'' - niveau de débogage optionnel ; mettre à "debug" pour voir le détail des requêtes (par défaut à "none")
 * ''gzip'' - donner la valeur "yes" pour activer la compression gzip pour certaines interactions http (par défaut à "no")
+* ''use-browser-cache'' - une valeur "yes" autorise le navigateur à mettre en cache les réponses pour économiser de la bande passante ("no" par défaut)
 
 Pour plus d'informations sur la manière de donner accès à votre instance de serveur à l'ensemble de votre réseau local, ainsi que sur les risques éventuels en matière de sécurité, voir le tiddler [[WebServer sur tiddlywiki.com|https://tiddlywiki.com/#WebServer]].
 
