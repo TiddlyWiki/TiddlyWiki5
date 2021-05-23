@@ -10,6 +10,7 @@ ConfirmCancelTiddler: Souhaitez-vous annuler les modifications apportées au tid
 ConfirmDeleteTiddler: Souhaitez-vous supprimer le tiddler « <$text text=<<title>>/> » ?
 ConfirmOverwriteTiddler: Souhaitez-vous supplanter le tiddler « <$text text=<<title>>/> » ?
 ConfirmEditShadowTiddler: Vous êtes sur le point d'éditer un ShadowTiddler. Toute modification supplantera la version par défaut du système, rendant les prochaines mises à jour non-triviales. Êtes-vous sûr(e) de vouloir éditer "<$text text=<<title>>/>"?
+ConfirmAction: Souhaitez-vous poursuivre ?
 Count: total 
 DefaultNewTiddlerTitle: Nouveau tiddler
 Diffs/CountMessage: <<diff-count>> différences
@@ -31,6 +32,8 @@ Error/FormatFilterOperator: Erreur de filtre : Suffixe inconnu pour l'opérateur
 Error/LoadingPluginLibrary: Erreur lors du chargement de la bibliothèque de plugins
 Error/NetworkErrorAlert: `<h2>''Erreur Réseau''</h2>Il semble que la connexion au serveur soit perdue. Cela peut indiquer un problème avec votre connexion réseau. Essayez de rétablir la connectivité du réseau avant de continuer.<br><br>''Toute modification non enregistrée sera automatiquement synchronisée lorsque la connectivité sera rétablie''.`
 Error/PutEditConflict: Le fichier a changé sur le serveur
+Error/PutForbidden: Permission refusée
+Error/PutUnauthorized: Authentification nécessaire
 Error/RecursiveTransclusion: Erreur dans le widget //transclude// : transclusion récursive
 Error/RetrievingSkinny: Erreur pendant la récupération de la liste des tiddlers partiels
 Error/SavingToTWEdit: Erreur lors de l'enregistrement vers TWEdit
@@ -39,6 +42,7 @@ Error/XMLHttpRequest: Code d'erreur XMLHttpRequest
 InternalJavaScriptError/Title: Erreur interne JavaScript
 InternalJavaScriptError/Hint: C'est assez embarrassant. Il est recommandé de rafraîchir l'affichage de votre navigateur
 InvalidFieldName: Caractères illicites dans le nom du champ « <$text text=<<fieldName>>/> ». Les champs ne peuvent contenir que des lettres minuscules non accentuées et les caractères souligné (`_`), tiret (`-`) et point (`.`)
+LayoutSwitcher/Description: Ouvre le commutateur de mise en page
 LazyLoadingWarning: <p>Tentative de chargement d'un contenu externe ''<$text text={{!!_canonical_uri}}/>''</p><p>Si ce message ne disparaît pas, il est possible que vous deviez ajuster le type de contenu du tiddler en fonction du type de votre contenu externe, ou vous utilisez peut-être un navigateur qui n'accepte pas les contenus externes dans cette configuration. Voir https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Identification sur TiddlySpace
 Manager/Controls/FilterByTag/None: (aucun)
@@ -62,6 +66,8 @@ MissingTiddler/Hint: Le tiddler « <$text text=<<currentTiddler>>/> » est manqu
 No: Non
 OfficialPluginLibrary: Bibliothèque officielle des plugins ~TiddlyWiki
 OfficialPluginLibrary/Hint: La bibliothèque officielle des plugins ~TiddlyWiki sur tiddlywiki.com. Plugins, thèmes et packs pour les différentes langues sont maintenus par l'équipe responsable du noyau.
+PageTemplate/Description: la mise en page par défaut de ~TiddlyWiki
+PageTemplate/Name: ~PageTemplate par défaut
 PluginReloadWarning: Merci d'enregistrer {{$:/core/ui/Buttons/save-wiki}} et de recharger {{$:/core/ui/Buttons/refresh}} pour que les changements apportés aux plugins ~JavaScript prennent effet
 RecentChanges/DateFormat: DD MMM YYYY
 Shortcuts/Input/AdvancedSearch/Hint: Ouvre le panneau Recherche Avancée depuis le champ de recherche de la barre latérale
@@ -73,6 +79,10 @@ Shortcuts/Input/Tab-Left/Hint: Sélectionne l'onglet précédent
 Shortcuts/Input/Tab-Right/Hint: Sélectionne l'onglet suivant
 Shortcuts/Input/Up/Hint: Sélectionne l'élément précédent
 Shortcuts/SidebarLayout/Hint: Change la mise en forme de la barre latérale
+Switcher/Subtitle/theme: Change de Thème
+Switcher/Subtitle/layout: Change de Mise en page
+Switcher/Subtitle/language: Change de Langue
+Switcher/Subtitle/palette: Change de Palette
 SystemTiddler/Tooltip: Ceci est un tiddler système
 SystemTiddlers/Include/Prompt: Inclure les tiddlers système
 TagManager/Colour/Heading: Couleur
