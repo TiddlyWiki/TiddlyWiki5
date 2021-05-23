@@ -19,23 +19,25 @@ exports.reduce = function(operationSubFunction,options) {
 			var index = 0;
 			results.each(function(title) {
 				var list = operationSubFunction(options.wiki.makeTiddlerIterator([title]),{
-						getVariable: function(name) {
-							switch(name) {
-								case "currentTiddler":
-									return "" + title;
-								case "accumulator":
-									return "" + accumulator;
-								case "index":
-									return "" + index;
-								case "revIndex":
-									return "" +  (results.length - 1 - index);
-								case "length":
-									return "" + results.length;
-								default:
-									return widget.getVariable(name);
-							}
+					getVariable: function(name) {
+						switch(name) {
+							case "currentTiddler":
+								return "" + title;
+							case "..currentTiddler":
+								return widget.getVariable("currentTiddler");
+							case "accumulator":
+								return "" + accumulator;
+							case "index":
+								return "" + index;
+							case "revIndex":
+								return "" +  (results.length - 1 - index);
+							case "length":
+								return "" + results.length;
+							default:
+								return widget.getVariable(name);
 						}
-					});
+					}
+				});
 				if(list.length > 0) {
 					accumulator = "" + list[0];
 				}

@@ -22,6 +22,10 @@ exports.domContains = function(a,b) {
 		!!(a.compareDocumentPosition(b) & 16);
 };
 
+exports.domMatchesSelector = function(node,selector) {
+	return node.matches ? node.matches(selector) : node.msMatchesSelector(selector);
+};
+
 exports.removeChildren = function(node) {
 	while(node.hasChildNodes()) {
 		node.removeChild(node.firstChild);

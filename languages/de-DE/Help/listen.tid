@@ -31,5 +31,6 @@ Mögliche Parameter:
 * ''tls-key'' - Pfad zur "TLS key" Datei (relativ zum Wiki Verzeichnis)
 * ''debug-level'' - "debug" bewikt eine detailierte Anzeige der HTTP Anfrage-Parameter. (Standard: "none")
 * ''gzip'' - Wenn auf "yes" gesetzt, dann wird gzip Kompression aktiviert. (Standard: "no")
+* ''use-browser-cache'' - Ist dieser Parameter auf "yes" gesetzt kann der Browser Inhalte zwischenspeichern um Übertragungsbandbreite zu sparen. (Standard: "no")
 
 Für weitere Sicherheitshinweise und Informationen für die Verwendung in lokalen Netzwerken siehe: WebServer auf TiddlyWiki.com

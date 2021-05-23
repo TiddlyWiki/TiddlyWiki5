@@ -24,7 +24,6 @@ Encryption/RepeatPassword: كرر/ي كلمة السر
 Encryption/SetPassword: ضبط كلمة السر
 Encryption/Username: اسم المستخدم
 Error/Caption: خطأ
-Error/EditConflict: تم تغيير الملف على الخادم
 Error/Filter: خطأ في التصفية
 Error/FilterSyntax: خطأ في بناء الجملة في تعبير عامل التصفية
 Error/IsFilterOperator: خطأ في التصفية: معامل غير معروف لعامل التصفية 'is'
@@ -32,6 +31,7 @@ Error/IsFilterOperator: خطأ في التصفية: معامل غير معروف
 Error/LoadingPluginLibrary: خطأ في تحميل مكتبة المكونات الإضافية
 
 Error/NetworkErrorAlert: `<h2>''خطأ في الشبكة''</h2> يبدو أن الاتصال بالخادم قد انقطع. قد يشير هذا إلى وجود مشكلة في اتصال الشبكة. يرجى محاولة استعادة اتصال الشبكة قبل المتابعة. <br> <br> '' ستتم مزامنة أي تغييرات غير محفوظة تلقائيًا عند استعادة الاتصال ''.
+Error/PutEditConflict: تم تغيير الملف على الخادم
 Error/WhileSaving: حدث خطأ أثناء الحفظ
 
 InternalJavaScriptError/Hint: حسنا، هذا أمر محرج. من المستحسن إعادة تشغيل تدلي ويكي عن طريق إنعاش المتصفح الخاص بك

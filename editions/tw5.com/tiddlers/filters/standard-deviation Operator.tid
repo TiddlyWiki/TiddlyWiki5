@@ -1,0 +1,15 @@
+caption: standard-deviation
+created: 20210426130150358
+modified: 20210426131553530
+op-input: a [[selection of titles|Title Selection]]
+op-output: the standard-deviation of the input as numbers
+op-purpose: treating each input title as a number, compute their standard-deviation
+tags: [[Reducing Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: standard-deviation Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.24">> See [[Mathematics Operators]] for an overview.
+
+<<.tip """ The `standard-deviation` operator treats the input as a complete population and not a sample""">>
+
+<<.operator-examples "standard-deviation">>

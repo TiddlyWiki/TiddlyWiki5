@@ -1,6 +1,6 @@
 caption: tm-edit-text-operation
 created: 20160424211339792
-modified: 20180630073432471
+modified: 20210520053923011
 tags: Messages
 title: WidgetMessage: tm-edit-text-operation
 type: text/vnd.tiddlywiki
@@ -93,6 +93,27 @@ Saves the text of the current //selection// into the provided <<.param "tiddler"
 </div>
 \end
 
+\define makeLinkDescription()
+<div>
+
+Creates a wiki text link to the tiddler specified in <<.param "text">>. If there is a selection, it is used as the text of the link. 
+
+|!Name |!Description |
+|text |Tiddler title to which the link will be created |
+
+</div>
+\end
+
+\define insertTextDescription()
+<div>
+
+Inserts the text specified in <<.param "text">> at the caret position. If there is a selection, it is replaced. 
+
+|!Name |!Description |
+|text |Text to be inserted |
+
+</div>
+\end
 
 A `tm-edit-text-operation` invokes one of the available operations on a __surrounding__ text editor. Therefore the message has to be dispatched within the editor in order for it to catch it. The following properties on the `event` object are required:
 
@@ -114,6 +135,8 @@ At this point the following text operations have been implemented:
 |<<.def "wrap-lines">>|<<wrapLinesDescription>> |
 |<<.def "wrap-selection">>|<<wrapSelectionDescription>> |
 |<<.def "save-selection">>|<<saveSelectionDescription>> |
+|<<.def "make-link">>|<<makeLinkDescription>> |
+|<<.def "insert-text">>|<<insertTextDescription>>|
 
 
 !Example

@@ -40,14 +40,17 @@ function debounce(callback) {
 }
 
 function setupEvents(host) {
-	var events = new EventSource(host + "events/plugins/tiddlywiki/tiddlyweb");
-	var debouncedSync = debounce($tw.syncer.syncFromServer.bind($tw.syncer));
-	events.addEventListener("change",debouncedSync);
-	events.onerror = function() {
-		events.close();
-		setTimeout(function() {
-			setupEvents(host);
-		},$tw.syncer.errorRetryInterval);
-	};
+	if(window.EventSource) {
+		var events = new EventSource(host + "events/plugins/tiddlywiki/tiddlyweb");
+		var debouncedSync = debounce($tw.syncer.syncFromServer.bind($tw.syncer));
+		events.addEventListener("change",debouncedSync);
+		events.onerror = function() {
+			events.close();
+			setTimeout(function() {
+				setupEvents(host);
+			},$tw.syncer.errorRetryInterval);
+		};
+	}
 }
+
 })();

@@ -84,7 +84,7 @@ $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 
 <$fieldmangler>
 <div class="tc-edit-field-add">
-<em class="tc-edit tc-big-gap-right">
+<em class="tc-edit tc-small-gap-right">
 <<lingo Fields/Add/Prompt>>
 </em>
 <$vars refreshTitle=<<qualify "$:/temp/fieldname/refresh">> storeTitle=<<newFieldNameInputTiddler>> searchListState=<<newFieldNameSelectionTiddler>>>

@@ -100,7 +100,7 @@ SaveTrailSyncAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
 SaveTrailSyncAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
-	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// Starting with 5.2.0, all syncadptor method signatures follow the node.js
 	// standard of callback as last argument. This catches the previous signature:
 	if(typeof callback !== "function" && typeof options === "function"){
 		// First stash any non-function third argument, then swap
@@ -122,7 +122,7 @@ SaveTrailSyncAdaptor.prototype.saveTiddler = function(tiddler,options,callback) 
 Load a tiddler and invoke the callback with (err,tiddlerFields)
 */
 SaveTrailSyncAdaptor.prototype.loadTiddler = function(title,options,callback) {
-	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// Starting with 5.2.0, all syncadptor method signatures follow the node.js
 	// standard of callback as last argument. This catches the previous signature:
 	if(typeof callback !== "function" && typeof options === "function"){
 		// First stash any non-function third argument, then swap
@@ -138,7 +138,7 @@ SaveTrailSyncAdaptor.prototype.loadTiddler = function(title,options,callback) {
 Delete a tiddler and invoke the callback with (err)
 */
 SaveTrailSyncAdaptor.prototype.deleteTiddler = function(title,options,callback) {
-	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// Starting with 5.2.0, all syncadptor method signatures follow the node.js
 	// standard of callback as last argument. This catches the previous signature:
 	if(typeof callback !== "function" && typeof options === "function"){
 		// First stash any non-function third argument, then swap
@@ -166,8 +166,8 @@ function saveTiddlerFile(tiddler,options) {
 	link.setAttribute("target","_blank");
 	link.setAttribute("rel","noopener noreferrer");
 	if(Blob !== undefined) {
-		var blob = new Blob([text], {type: "text/plain"});
-		link.setAttribute("href", URL.createObjectURL(blob));
+		var blob = new Blob([text],{type: "text/plain"});
+		link.setAttribute("href",URL.createObjectURL(blob));
 	} else {
 		link.setAttribute("href","data:text/plain," + encodeURIComponent(text));
 	}

@@ -183,7 +183,7 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
 TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
-	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// Starting with 5.2.0, all syncadptor method signatures follow the node.js
 	// standard of callback as last argument. This catches the previous signature:
 	if(typeof callback !== "function" && typeof options === "function"){
 		// First stash any non-function third argument, then swap
@@ -194,7 +194,7 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
 	options = options || {};
 	var self = this;
 	if(this.isReadOnly) {
-		return callback(null);
+		return callback(null,options.tiddlerInfo.adaptorInfo);
 	}
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(tiddler.fields.title),
@@ -216,7 +216,7 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
 				// Invoke the callback
 				callback(null,{
 					bag: etagInfo.bag
-				}, etagInfo.revision);				
+				},etagInfo.revision);				
 			}
 		}
 	});
@@ -226,7 +226,7 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
 Load a tiddler and invoke the callback with (err,tiddlerFields)
 */
 TiddlyWebAdaptor.prototype.loadTiddler = function(title,options,callback) {
-	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// Starting with 5.2.0, all syncadptor method signatures follow the node.js
 	// standard of callback as last argument. This catches the previous signature:
 	if(typeof callback !== "function" && typeof options === "function"){
 		// First stash any non-function third argument, then swap
@@ -254,7 +254,7 @@ options include:
 tiddlerInfo: the syncer's tiddlerInfo for this tiddler
 */
 TiddlyWebAdaptor.prototype.deleteTiddler = function(title,options,callback) {
-	// Starting with 5.1.24, all syncadptor method signatures follow the node.js
+	// Starting with 5.2.0, all syncadptor method signatures follow the node.js
 	// standard of callback as last argument. This catches the previous signature:
 	if(typeof callback !== "function" && typeof options === "function"){
 		// First stash any non-function third argument, then swap
@@ -265,12 +265,12 @@ TiddlyWebAdaptor.prototype.deleteTiddler = function(title,options,callback) {
 	options = options || {};
 	var self = this;
 	if(this.isReadOnly) {
-		return callback(null);
+		return callback(null,options.tiddlerInfo.adaptorInfo);
 	}
 	// If we don't have a bag it means that the tiddler hasn't been seen by the server, so we don't need to delete it
 	var bag = options.tiddlerInfo.adaptorInfo && options.tiddlerInfo.adaptorInfo.bag;
 	if(!bag) {
-		return callback(null);
+		return callback(null,options.tiddlerInfo.adaptorInfo);
 	}
 	// Issue HTTP request to delete the tiddler
 	$tw.utils.httpRequest({
@@ -280,8 +280,8 @@ TiddlyWebAdaptor.prototype.deleteTiddler = function(title,options,callback) {
 			if(err) {
 				return callback(err);
 			}
-			// Invoke the callback
-			callback(null);
+			// Invoke the callback & return null adaptorInfo
+			callback(null,null);
 		}
 	});
 };
