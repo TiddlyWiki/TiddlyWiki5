@@ -70,6 +70,9 @@ exports.startup = function() {
 	var deferredChanges = Object.create(null),
 		timerId;
 	function refresh() {
+		// Save the current scroll position
+		var scrollX = window.scrollX,
+		    scrollY = window.scrollY;
 		// Detect the currently focused domNode
 		var currentlyFocusedDomNode = document.activeElement.tagName !== "IFRAME" ? document.activeElement : document.activeElement.contentWindow.document.activeElement;
 		// Find the widget owning the currently focused domNode
@@ -102,6 +105,8 @@ exports.startup = function() {
 		if(refreshedWidget) {
 			$tw.focusManager.focusWidget(refreshedWidget,renderTreeFootprint,widgetInfo);
 		}
+		// Restore the scroll position
+		window.scroll(scrollX,scrollY);
 	}
 	// Add the change event handler
 	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
