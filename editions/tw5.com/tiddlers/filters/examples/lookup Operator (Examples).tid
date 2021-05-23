@@ -1,7 +1,10 @@
 created: 20170907144257037
-modified: 20170907144559822
+modified: 20201224034837935
 title: lookup Operator (Examples)
 type: text/vnd.tiddlywiki
 
 <<.operator-example 1 "[all[shadows+tiddlers]tag[$:/tags/PageControls]lookup[$:/config/PageControlButtons/Visibility/]]" "Retrieve the visibility status of each page control button">>
 <<.operator-example 2 "[all[shadows+tiddlers]tag[$:/tags/PageControls]lookup:show[$:/config/PageControlButtons/Visibility/]]" "Retrieve the visibility status of each page control button, this time with a default value">>
+<<.operator-example 3 "[all[tiddlers]has[plugin-type]removeprefix[$:/plugins/tiddlywiki/]lookup:missing-description:field[$:/plugins/tiddlywiki/],[description]]" "Retrieve the description of all plugin-tiddlers that are in the `$:/plugins/tiddlywiki/` namespace.">>
+<<.operator-example 4 "OriginalTiddlerPaths +[lookup:missing-index:index[$:/config/],[HelloThere]]" "Lookup the original tiddler path on disk for the [[Hello There]] tiddler.">>
+<<.operator-example 5 "OriginalTiddlerPaths +[lookup:missing-index:index[$:/config/],[MissingTiddler]]" "Lookup the original tiddler path on disk for the [[MissingTiddler]] tiddler.">>

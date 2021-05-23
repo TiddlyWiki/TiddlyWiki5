@@ -20,7 +20,18 @@ exports.filter = function(source,operator,options) {
 		results = [],
 		target = operator.prefix !== "!";
 	source(function(tiddler,title) {
-		var list = filterFn.call(options.wiki,options.wiki.makeTiddlerIterator([title]),options.widget);
+		var list = filterFn.call(options.wiki,options.wiki.makeTiddlerIterator([title]),{
+				getVariable: function(name) {
+					switch(name) {
+						case "currentTiddler":
+							return "" + title;
+						case "..currentTiddler":
+							return options.widget.getVariable("currentTiddler");
+						default:
+							return options.widget.getVariable(name);
+					}
+				}
+			});
 		if((list.length > 0) === target) {
 			results.push(title);
 		}
