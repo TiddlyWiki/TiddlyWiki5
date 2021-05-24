@@ -170,6 +170,6 @@ exports.pad = function(source,operator,options) {
 		}
 	});
 	return results;
-};
+}
 
 })();
