@@ -21,6 +21,15 @@ title: $:/core/ui/ImportListing
 </$set>
 \end
 
+\define libraryInfo()
+\whitespace trim
+<$set name="escUnselected" value={{{[{$:/language/Import/Upgrader/Tiddler/Unselected}escaperegexp[]addprefix[(?g)]]}}}>
+	<$list filter="[all[current]get<messageField>!regexp<escUnselected>]" variable="ignore">
+		<$text text={{{[all[current]get<messageField>]}}}/>
+	</$list>
+</$set>
+\end
+
 \define selectionField() selection-$(payloadTiddler)$
 
 \define renameField() rename-$(payloadTiddler)$
@@ -79,6 +88,7 @@ title: $:/core/ui/ImportListing
 </td>
 <td>
 <<selectionInfo>>
+<<libraryInfo>>
 <<overWriteWarning>>
 </td>
 </tr>
