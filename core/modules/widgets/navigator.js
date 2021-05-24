@@ -560,7 +560,7 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 		importData,
 		importReport = [];
 	importReport.push($tw.language.getString("Import/Imported/Hint") + "\n");
-	// If you need to modify the import tiddler payload, consider th-importing-tiddler instead!
+	// If you need to modify the import tiddler payload then consider th-importing-tiddler instead!
 	importTiddler = $tw.hooks.invokeHook("th-before-importing",importTiddler);
 	importData = this.wiki.getTiddlerDataCached(event.param,{tiddlers: {}}),
 	$tw.utils.each(importData.tiddlers,function(tiddlerFields) {
