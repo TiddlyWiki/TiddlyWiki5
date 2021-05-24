@@ -1,5 +1,5 @@
 created: 20180905075846391
-modified: 20200814110131083
+modified: 20210523210131083
 tags: [[WebServer Guides]]
 title: Using the external JavaScript template
 type: text/vnd.tiddlywiki
@@ -10,9 +10,23 @@ Setting the [[root-tiddler|WebServer Parameter: root-tiddler]] parameter to `$:/
 tiddlywiki editions/tw5.com-server/ --listen host=0.0.0.0 "root-tiddler=$:/core/save/all-external-js"
 ```
 
-To ensure that the "save changes" button saves a full, standalone wiki, it is also necessary to set the tiddler $:/config/SaveWikiButton/Template to contain `$:/core/save/all-external-js`.
+To properly save your snapshot for offline use, it is necessary to set the tiddler $:/config/SaveWikiButton/Template to contain `$:/core/save/offline-external-js`. You must also save a copy of  `twcore-TIDDLYWIKI_VERSION.js` in the same folder as your HTML file. From your own wiki, open the tiddler [[$:/language/Snippets/GetTiddlyWikiJS]]. It will show you how to acquire ~TiddlyWiki's core ~JavaScript.
 
 The provided edition `server-external-js` contains all the configuration necessary to use the external ~JavaScript template.
+
+!! Upgrading Your Snapshots
+
+Before you proceed, backup your wiki first! Follow the steps below to upgrade a single-file wiki with the external-js template:
+
+# Proceed with the [[upgrade process for standalone TiddlyWikis|Upgrading]]. Your wiki will be converted to a full standalone HTML.
+
+# Open your upgraded wiki in the browser. If you'd like to revert to using the regular template, restore the original shadow tiddler $:/config/SaveWikiButton/Template by deleting any custom copy and you are done. 
+
+# Otherwise, from your wiki, open the tiddler [[$:/language/Snippets/GetTiddlyWikiJS]]. Click on the ''Export ~TiddlyWiki Core'' button to obtain the new release of ~TiddlyWiki's core ~JavaScript.
+
+# Verify that $:/config/SaveWikiButton/Template still contains `$:/core/save/offline-external-js`. Modify if necessary.
+
+# Save your wiki again. Your wiki is now converted to using the external core.
 
 !! Background
 
