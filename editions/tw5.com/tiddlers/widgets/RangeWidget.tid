@@ -16,14 +16,14 @@ The content of the `<$range>` widget is ignored.
 |!Attribute |!Description |
 |tiddler |Title of the tiddler to manipulate (defaults to the [[current tiddler|Current Tiddler]]) |
 |field |The field of the //tiddler// bound to the range slider|
-|index|<<.from-version "5.1.22">> The index of the //tiddler//, a [[DataTiddler|DataTiddlers]], to which the radio button is bound<<.tip "be sure to set the //tiddler// correctly">> |
+|index|<<.from-version "5.1.22">> The index of the //tiddler//, a [[DataTiddler|DataTiddlers]], to which the radio button is bound |
 |min |The minimum value to be able to be set by the `<$range>` widget |
 |max |The maximum value to be able to be set by the `<$range>` widget |
 |increment |The minimum amount by which a value may be changed.  Defaults to 1 |
-|default |If the field is missing or empty this is the default position for the widget handle relative to the min and max values.|
+|default |If the field is missing or empty this is the default position for the widget handle relative to the min and max values|
 |class |CSS classes to be assigned to the label around the range slider |
 |actions|<<.from-version "5.1.23">> Optional, A string containing ActionWidgets to be triggered when the value changes. <br>The variable: ''actionValue'' is available for ''all'' actions.<br>The variable: ''actionValueHasChanged'' is always `yes` here.|
-|actionsStart|<<.from-version "5.1.23">> Optional, A string containing ~ActionWidgets to be triggered when the "handle" is ''clicked''. <br>The variable: ''actionValueHasChanged'' is always `no` here.|
+|actionsStart|<<.from-version "5.1.23">> Optional, A string containing ~ActionWidgets to be triggered when the "handle" is ''clicked''. <br>The variable: ''actionValueHasChanged'' is always `no` here|
 |actionsStop|<<.from-version "5.1.23">> Optional, A string containing ~ActionWidgets to be triggered when the "handle" is ''released''. <br>The variable: ''actionValueHasChanged'' is `yes`, ''if'' the new-value is different to the start-value |
 |disabled|<<.from-version "5.1.23">> Optional, disables the range input if set to "yes". Defaults to "no"|
 

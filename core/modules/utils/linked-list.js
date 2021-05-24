@@ -89,8 +89,9 @@ LinkedList.prototype.each = function(callback) {
 };
 
 LinkedList.prototype.toArray = function() {
-	var output = [];
-	this.each(function(value) { output.push(value); });
+	var output = new Array(this.length),
+		index = 0;
+	this.each(function(value) { output[index++] = value; });
 	return output;
 };
 

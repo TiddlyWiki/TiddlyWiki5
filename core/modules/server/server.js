@@ -17,7 +17,9 @@ if($tw.node) {
 		fs = require("fs"),
 		url = require("url"),
 		path = require("path"),
-		querystring = require("querystring");
+		querystring = require("querystring"),
+		crypto = require("crypto"),
+		zlib = require("zlib");
 }
 
 /*
@@ -47,6 +49,8 @@ function Server(options) {
 	this.csrfDisable = this.get("csrf-disable") === "yes";
 	// Initialize Gzip compression
 	this.enableGzip = this.get("gzip") === "yes";
+	// Initialize browser-caching
+	this.enableBrowserCache = this.get("use-browser-cache") === "yes";
 	// Initialise authorization
 	var authorizedUserName = (this.get("username") && this.get("password")) ? this.get("username") : "(anon)";
 	this.authorizationPrincipals = {
@@ -78,6 +82,71 @@ function Server(options) {
 	this.transport = require(this.protocol);
 }
 
+/*
+Send a response to the client. This method checks if the response must be sent
+or if the client alrady has the data cached. If that's the case only a 304
+response will be transmitted and the browser will use the cached data.
+Only requests with status code 200 are considdered for caching.
+request: request instance passed to the handler
+response: response instance passed to the handler
+statusCode: stauts code to send to the browser
+headers: response headers (they will be augmented with an `Etag` header)
+data: the data to send (passed to the end method of the response instance)
+encoding: the encoding of the data to send (passed to the end method of the response instance)
+*/
+function sendResponse(request,response,statusCode,headers,data,encoding) {
+	if(this.enableBrowserCache && (statusCode == 200)) {
+		var hash = crypto.createHash('md5');
+		// Put everything into the hash that could change and invalidate the data that
+		// the browser already stored. The headers the data and the encoding.
+		hash.update(data);
+		hash.update(JSON.stringify(headers));
+		if(encoding) {
+			hash.update(encoding);
+		}
+		var contentDigest = hash.digest("hex");
+		// RFC 7232 section 2.3 mandates for the etag to be enclosed in quotes
+		headers["Etag"] = '"' + contentDigest + '"';
+		headers["Cache-Control"] = "max-age=0, must-revalidate";
+		// Check if any of the hashes contained within the if-none-match header
+		// matches the current hash.
+		// If one matches, do not send the data but tell the browser to use the
+		// cached data.
+		// We do not implement "*" as it makes no sense here.
+		var ifNoneMatch = request.headers["if-none-match"];
+		if(ifNoneMatch) {
+			var matchParts = ifNoneMatch.split(",").map(function(etag) {
+				return etag.replace(/^[ "]+|[ "]+$/g, "");
+			});
+			if(matchParts.indexOf(contentDigest) != -1) {
+				response.writeHead(304,headers);
+				response.end();
+				return;
+			}
+		}
+	}
+	/*
+	If the gzip=yes is set, check if the user agent permits compression. If so,
+	compress our response if the raw data is bigger than 2k. Compressing less
+	data is inefficient. Note that we use the synchronous functions from zlib
+	to stay in the imperative style. The current `Server` doesn't depend on
+	this, and we may just as well use the async versions.
+	*/
+	if(this.enableGzip && (data.length > 2048)) {
+		var acceptEncoding = request.headers["accept-encoding"] || "";
+		if(/\bdeflate\b/.test(acceptEncoding)) {
+			headers["Content-Encoding"] = "deflate";
+			data = zlib.deflateSync(data);
+		} else if(/\bgzip\b/.test(acceptEncoding)) {
+			headers["Content-Encoding"] = "gzip";
+			data = zlib.gzipSync(data);
+		}
+	}
+
+	response.writeHead(statusCode,headers);
+	response.end(data,encoding);
+}
+
 Server.prototype.defaultVariables = {
 	port: "8080",
 	host: "127.0.0.1",
@@ -89,7 +158,8 @@ Server.prototype.defaultVariables = {
 	"system-tiddler-render-type": "text/plain",
 	"system-tiddler-render-template": "$:/core/templates/wikified-tiddler",
 	"debug-level": "none",
-	"gzip": "no"
+	"gzip": "no",
+	"use-browser-cache": "no"
 };
 
 Server.prototype.get = function(name) {
@@ -167,6 +237,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.urlInfo = url.parse(request.url);
 	state.queryParameters = querystring.parse(state.urlInfo.query);
 	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
+	state.sendResponse = sendResponse.bind(self,request,response);
 	// Get the principals authorized to access this resource
 	var authorizationType = this.methodMappings[request.method] || "readers";
 	// Check for the CSRF header if this is a write

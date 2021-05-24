@@ -1,24 +1,40 @@
 caption: lookup
 created: 20170907103639431
-modified: 20170907144703051
+modified: 20210116081305739
 op-input: a [[selection of titles|Title Selection]]
-op-output: the lookup values corresponding to each input title
-op-parameter: prefix applied to input titles to yield title of lookup tiddler from which value is retrieved
-op-parameter-name: P
-op-purpose: applies a prefix to each input title to yield the title of a tiddler from which the final value is retrieved
-op-suffix: the default value to be used for missing lookups
-op-suffix-name: D
+op-output: the lookup values corresponding to each lookup tiddler
+op-parameter: prefix applied to input titles to yield title of lookup tiddler from which value is retrieved. Now accepts 1 or 2 parameters, see below for details
+op-parameter-name: P, T
+op-purpose: applies a prefix to each input title to yield the title of a tiddler from which the final value is retrieved. With a single parameter, the default field is "text" and the default index is "0". If a second parameter is provided, that becomes the target field or index.
+op-suffix: the default value to be used for missing lookups. This operator can now accept a second suffix, see below for details
+op-suffix-name: D, I
 tags: [[Filter Operators]]
 title: lookup Operator
 type: text/vnd.tiddlywiki
 
 <<.from-version "5.1.15">>
 
-The action of this operator is as follows:
+The action of this operator is as follows with 1 parameter:
 
 * Apply the specified prefix to each input tiddler title, yielding a new list of tiddler titles
-* Transclude the value of each of those tiddlers
-** Substitute the default value for missing or empty tiddlers
+* Transclude the value of the `text` field each of those tiddlers
+** Substitute the default value for missing or empty values
+* Return the list of values
+
+<<.from-version "5.1.24">>
+
+The action of this operator is as follows with 2 parameters:
+
+If there are two parameters provided, use the second parameter as the target field or index.
+
+<<.note """If there is only one parameter given, the filter checks for a second suffix equal to "index". If this suffix is found, the default target index is "0".
+In all other cases, the default target field is "text".""">>
+
+Then:
+
+* Apply the specified prefix to each input tiddler title, yielding a new list of tiddler titles
+* Transclude the value of the target field or index
+** Substitute the default value for missing or empty values
 * Return the list of values
 
 <<.operator-examples "lookup">>

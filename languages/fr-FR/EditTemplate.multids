@@ -19,6 +19,8 @@ Shadow/Warning: Ceci est un tiddler « shadow ». Toute modification supplantera
 Tags/Add/Button: ajouter
 Tags/Add/Button/Hint: ajoute un tag
 Tags/Add/Placeholder: nom du tag
+Tags/ClearInput/Caption: supprime l'entrée
+Tags/ClearInput/Hint: Supprime le tag entré
 Tags/Dropdown/Caption: liste des tags
 Tags/Dropdown/Hint: Montre la liste des tags
 Title/BadCharacterWarning: Attention : il est préférable d'éviter l'usage des caractères <<bad-chars>> dans les titres des tiddlers

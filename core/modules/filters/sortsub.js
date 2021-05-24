@@ -27,10 +27,13 @@ exports.sortsub = function(source,operator,options) {
 			iterator(options.wiki.getTiddler(title),title);
 		},{
 			getVariable: function(name) {
-				if(name === "currentTiddler") {
-					return title;
-				} else {
-					return options.widget.getVariable(name);
+				switch(name) {
+					case "currentTiddler":
+						return "" + title;
+					case "..currentTiddler":
+						return options.widget.getVariable("currentTiddler");
+					default:
+						return options.widget.getVariable(name);
 				}
 			}
 		});

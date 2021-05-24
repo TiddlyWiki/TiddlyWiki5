@@ -23,7 +23,7 @@ tags: $:/tags/EditTemplate
 
 <div class="tc-message-box">
 
-{{$:/core/images/warning}} {{$:/language/EditTemplate/Title/Exists/Prompt}}
+{{$:/core/images/warning}} {{$:/language/EditTemplate/Title/Exists/Prompt}}: <$link to={{!!draft.title}} />
 
 </div>
 
