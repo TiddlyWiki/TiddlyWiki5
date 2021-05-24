@@ -516,9 +516,6 @@ function runTests(wiki) {
 		// Trim doesn't hiccup on regexp special characters
 		expect(wiki.filterTiddlers("[[.*abacus.*]] [[.+baobab.+]] +[trim[.*]]").join(",")).toBe("abacus,.+baobab.+");
 		expect(wiki.filterTiddlers("[[.*abacus.*]] [[.+baobab.+]] +[trim[.+]]").join(",")).toBe(".*abacus.*,baobab");
-		expect(wiki.filterTiddlers("[[Hello There]] [[GettingStarted]] +[quotify[]]").join(" ")).toBe("[[Hello There]] GettingStarted");
-		expect(wiki.filterTiddlers("[title[Hello There]] +[quotify[]]").join(" ")).toBe("[[Hello There]]");
-		expect(wiki.filterTiddlers("[title[HelloThere]] +[quotify[]]").join(" ")).toBe("HelloThere");
 	});
 
 	it("should handle the mathematics operators", function() {
@@ -810,6 +807,12 @@ function runTests(wiki) {
 	expect(wiki.filterTiddlers("1234 +[escapecss[]]").join(",")).toBe("\\31 234");
 	expect(wiki.filterTiddlers("'-25' +[escapecss[]]").join(",")).toBe("-\\32 5");
 	expect(wiki.filterTiddlers("'-' +[escapecss[]]").join(",")).toBe("\\-");
+	});
+	
+	it("should handle the format operator", function() {
+		expect(wiki.filterTiddlers("[[Hello There]] [[GettingStarted]] +[format:titlelist[]]").join(" ")).toBe("[[Hello There]] GettingStarted");
+		expect(wiki.filterTiddlers("[title[Hello There]] +[format:titlelist[]]").join(" ")).toBe("[[Hello There]]");
+		expect(wiki.filterTiddlers("[title[HelloThere]] +[format:titlelist[]]").join(" ")).toBe("HelloThere");		
 	});
 
 }
