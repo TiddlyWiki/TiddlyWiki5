@@ -1,5 +1,6 @@
 title: $:/palettes/ContrastLight
 name: Contrast (Light)
+color-scheme: light
 description: High contrast and unambiguous (light version)
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
