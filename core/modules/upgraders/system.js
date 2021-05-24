@@ -13,7 +13,7 @@ Upgrader module that suppresses certain system tiddlers that shouldn't be import
 "use strict";
 
 var DONT_IMPORT_LIST = ["$:/Import"],
-	DISABLE_PREFIX_LIST = ["$:/temp/","$:/state/","$:/StoryList","$:/HistoryList"],
+	UNSELECT_PREFIX_LIST = ["$:/temp/","$:/state/","$:/StoryList","$:/HistoryList"],
 	WARN_IMPORT_PREFIX_LIST = ["$:/core/modules/"];
 
 exports.upgrade = function(wiki,titles,tiddlers) {
@@ -26,10 +26,10 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 			tiddlers[title] = Object.create(null);
 			messages[title] = $tw.language.getString("Import/Upgrader/System/Suppressed");
 		} else {
-			for(var t=0; t<DISABLE_PREFIX_LIST.length; t++) {
-				var prefix = DISABLE_PREFIX_LIST[t];
+			for(var t=0; t<UNSELECT_PREFIX_LIST.length; t++) {
+				var prefix = UNSELECT_PREFIX_LIST[t];
 				if(title.substr(0,prefix.length) === prefix) {
-					messages[title] = $tw.language.getString("Import/Upgrader/Disabled/Tiddler");
+					messages[title] = $tw.language.getString("Import/Upgrader/Tiddler/Unselected");
 				}
 			}
 			for(var t=0; t<WARN_IMPORT_PREFIX_LIST.length; t++) {
