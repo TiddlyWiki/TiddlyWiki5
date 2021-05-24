@@ -1,6 +1,12 @@
 title: $:/themes/tiddlywiki/vanilla/base
 tags: [[$:/tags/Stylesheet]]
 
+\define if-darkmode(text)
+<$reveal state={{{ [{$:/palette}get[color-scheme]match[dark]] }}}>
+$text$
+</$reveal>
+\end
+
 \define custom-background-datauri()
 <$set name="background" value={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}}>
 <$list filter="[<background>is[image]]">
@@ -332,6 +338,14 @@ table tfoot tr td {
 	width: 100%;
 	height: 600px;
 }
+
+<<if-darkmode """
+
+:root {
+	color-scheme: dark;
+}
+
+""">>
 
 /*
 ** Links
