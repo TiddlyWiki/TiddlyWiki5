@@ -808,6 +808,12 @@ function runTests(wiki) {
 	expect(wiki.filterTiddlers("'-25' +[escapecss[]]").join(",")).toBe("-\\32 5");
 	expect(wiki.filterTiddlers("'-' +[escapecss[]]").join(",")).toBe("\\-");
 	});
+	
+	it("should handle the format operator", function() {
+		expect(wiki.filterTiddlers("[[Hello There]] [[GettingStarted]] +[format:titlelist[]]").join(" ")).toBe("[[Hello There]] GettingStarted");
+		expect(wiki.filterTiddlers("[title[Hello There]] +[format:titlelist[]]").join(" ")).toBe("[[Hello There]]");
+		expect(wiki.filterTiddlers("[title[HelloThere]] +[format:titlelist[]]").join(" ")).toBe("HelloThere");		
+	});
 
 	it("should handle the deserializers operator", function() {
 	expect(wiki.filterTiddlers("[deserializers[]]").join(",")).toBe("application/javascript,application/json,application/x-tiddler,application/x-tiddler-html-div,application/x-tiddlers,text/css,text/html,text/plain");
