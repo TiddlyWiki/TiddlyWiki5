@@ -505,6 +505,11 @@ button svg, button img, label svg, label img {
 	fill: <<colour foreground>>;
 }
 
+button:disabled.tc-btn-invisible  {
+	cursor: default; 
+	color: <<colour muted-foreground>>;
+}
+
 .tc-btn-boxed {
 	font-size: 0.6em;
 	padding: 0.2em;

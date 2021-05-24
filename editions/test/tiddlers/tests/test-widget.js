@@ -702,6 +702,19 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<p>Don't forget me.</p>");
 	});
 
+	/** Special case. \import should parse correctly, even if it's
+	 *  the only line in the tiddler. Technically doesn't cause a
+	 *  visual difference, but may affect plugins if it doesn't.
+	 */
+	it("should work when import pragma is standalone", function() {
+		var wiki = new $tw.Wiki();
+		var text = "\\import [prefix[XXX]]";
+		var parseTreeNode = parseText(text,wiki);
+		// Test the resulting parse tree node, since there is no
+		// rendering which may expose a problem.
+		expect(parseTreeNode.children[0].attributes.filter.value).toBe('[prefix[XXX]]');
+	});
+
 	/** This test reproduces issue #4504.
 	 *
 	 * The importvariable widget was creating redundant copies into

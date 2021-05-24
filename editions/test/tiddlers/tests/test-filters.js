@@ -809,6 +809,10 @@ function runTests(wiki) {
 	expect(wiki.filterTiddlers("'-' +[escapecss[]]").join(",")).toBe("\\-");
 	});
 
+	it("should handle the deserializers operator", function() {
+	expect(wiki.filterTiddlers("[deserializers[]]").join(",")).toBe("application/javascript,application/json,application/x-tiddler,application/x-tiddler-html-div,application/x-tiddlers,text/css,text/html,text/plain");
+	});
+
 }
 
 });
