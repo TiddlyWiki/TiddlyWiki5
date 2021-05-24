@@ -78,7 +78,6 @@ title: $:/core/ui/ImportListing
 </$reveal>
 </td>
 <td>
-<!-- $view field=<<messageField>>/ -->
 <<selectionInfo>>
 <<overWriteWarning>>
 </td>
