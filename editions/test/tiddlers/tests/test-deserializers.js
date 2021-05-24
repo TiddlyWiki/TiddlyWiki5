@@ -30,6 +30,8 @@ Tests various core deserializers
 		executeTestCase("dezerializer test data case 3",[ { title: 'Hello "There"', text: 'Abacus', type: 'text/vnd.tiddlywiki' } ]);
 
 		executeTestCase("dezerializer test data case 4",[ { title: 'Hello "There"', text: 'Abacus', type: 'text/vnd.tiddlywiki' }, { title: 'Hello "There"', text: 'Calculator'}  ]);
+
+		executeTestCase("dezerializer test data case 5",[ { title: 'Hello "There"', text: 'Abacus', type: 'text/vnd.tiddlywiki' }, { title: 'Hello "There"', text: 'Calculator'} , { title: 'Hello "There"', text: 'Protractor'}  ]);
 		
 	});
 	
