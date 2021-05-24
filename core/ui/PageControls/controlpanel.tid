@@ -5,6 +5,7 @@ description: {{$:/language/Buttons/ControlPanel/Hint}}
 
 \whitespace trim
 \define control-panel-button(class)
+\whitespace trim
 <$button to="$:/ControlPanel" tooltip={{$:/language/Buttons/ControlPanel/Hint}} aria-label={{$:/language/Buttons/ControlPanel/Caption}} class="""$(tv-config-toolbar-class)$ $class$""">
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/options-button}}

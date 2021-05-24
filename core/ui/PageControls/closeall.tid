@@ -3,11 +3,14 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/close-all-button}} {{$:/language/Buttons/CloseAll/Caption}}
 description: {{$:/language/Buttons/CloseAll/Hint}}
 
+\whitespace trim
 <$button message="tm-close-all-tiddlers" tooltip={{$:/language/Buttons/CloseAll/Hint}} aria-label={{$:/language/Buttons/CloseAll/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/close-all-button}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/CloseAll/Caption}}/></span>
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/CloseAll/Caption}}/>
+</span>
 </$list>
 </$button>
