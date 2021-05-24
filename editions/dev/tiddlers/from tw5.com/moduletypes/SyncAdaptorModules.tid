@@ -158,7 +158,7 @@ Delete a tiddler from the server.
 
 !!! Options
 
-<<.from-version "5.1.24">> The signature of syncadaptor functions that accept callbacks has been changed so that the callback is always the last argument. A check for the old order of arguments means that this change is backwards compatible. The new order should be prefered when updating or writing new plugins.
+<<.from-version "5.2.0">> The signature of syncadaptor functions that accept callbacks has been changed so that the callback is always the last argument. A check for the old order of arguments means that this change is backwards compatible. The new order should be prefered when updating or writing new plugins.
 
 The options parameter may contain the following properties, depending on the method called.
 
