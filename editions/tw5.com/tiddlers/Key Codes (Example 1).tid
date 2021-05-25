@@ -1,5 +1,5 @@
 created: 20210427092418146
-modified: 20210525104600967
+modified: 20210525130708186
 tags: KeyboardWidget
 title: Key Codes (Example 1)
 type: text/vnd.tiddlywiki
@@ -55,7 +55,7 @@ Depending on your OS and browser keyboard settings, some combinations may be "ea
 	<$edit-text tiddler=<<key-test>> placeholder="- Click here. Try keys from list below -" tag=input focus />
 </$keyboard> <--
 
-!! Configuration List
+!! Keys to be used
 
 <pre><code><$vars tv-wikilinks="no"><<keys>></$vars></code></pre>
 

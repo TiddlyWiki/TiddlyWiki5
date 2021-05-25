@@ -1,5 +1,5 @@
 created: 20210429084127864
-modified: 20210525125226812
+modified: 20210525130830934
 tags: 
 title: Keyboard Codes (Macros)
 type: text/vnd.tiddlywiki
@@ -40,7 +40,7 @@ type: text/vnd.tiddlywiki
 
 \define showCode()
 
-''<<toggleDetails """Toggle this tiddler code!""">>''
+''<<toggleDetails """Toggle this tiddler code""">>''
 
 <$list filter="[<codeState>has[title]]" variable=ignore>
 <pre><code><$view /></code></pre>
