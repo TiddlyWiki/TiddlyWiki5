@@ -572,7 +572,7 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 				var tiddler = new $tw.Tiddler(tiddlerFields);
 			}
 			// th-importing-tiddler doesn't allow user interaction by default
-			// If you want to use the default UI, use: $:/core/modules/upgraders/ instead
+			// If you want to use the default UI then use: $:/core/modules/upgraders/ instead
 			tiddler = $tw.hooks.invokeHook("th-importing-tiddler",tiddler);
 			// Add the tiddlers to the store
 			self.wiki.addTiddler(tiddler);
