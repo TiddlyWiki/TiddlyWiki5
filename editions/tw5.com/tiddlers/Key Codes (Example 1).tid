@@ -1,12 +1,12 @@
 created: 20210427092418146
-modified: 20210429094755894
+modified: 20210525104600967
 tags: KeyboardWidget
-title: Possible Keys (Example 1)
+title: Key Codes (Example 1)
 type: text/vnd.tiddlywiki
 
-\define key-test() $:/temp/key-test/1
+\define key-test() $:/key-test
 
-\import [[Possible Keys (Macros)]]
+\import [[Keyboard Codes (Macros)]]
 
 \define keys()
 backspace tab clear return enter pause escape space 
@@ -43,27 +43,23 @@ f1  f2  f3
 semicolon equals comma dash period slash backquote openbracket backslash closebracket quote
 \end
 
-! Results In
+! Key Codes
 
-{{$:/temp/key-test/action}}
+{{$:/key-test/action}}
 
 ! Input Area
 
-''Info: Depending on your OS and browser keyboard settings, some combinations may be "eaten" by the OS, or the browser!''
+Depending on your OS and browser keyboard settings, some combinations may be "eaten" by the OS, or the browser!
 
-<<toggleFocusInput>>
+--> <$keyboard key={{{ [enlist<keys>join[ ]] }}} actions=<<actionKey>> >
+	<$edit-text tiddler=<<key-test>> placeholder="- Click here. Try keys from list below -" tag=input focus />
+</$keyboard> <--
 
-<$list filter="[<key-test>has[title]]" >
-  <$keyboard key={{{ [enlist<keys>join[ ]] }}} actions=<<actionKey>> >
-	<$edit-text tiddler=<<key-test>> placeholder="- hit key from list below -" tag=input focus />
-  </$keyboard>
-</$list>
-
-! Test Configuration
-
-All possible keys can be found at: [[Possible Keys]]
+!! Configuration List
 
 <pre><code><$vars tv-wikilinks="no"><<keys>></$vars></code></pre>
+
+All possible keys can be found at: [[Keyboard Codes]]
 
 ! Example Code
 
