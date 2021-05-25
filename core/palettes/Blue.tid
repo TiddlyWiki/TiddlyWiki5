@@ -1,5 +1,6 @@
 title: $:/palettes/Blue
 name: Blue
+color-scheme: light
 description: A blue theme
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary

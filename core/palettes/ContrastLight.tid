@@ -1,5 +1,6 @@
 title: $:/palettes/ContrastDark
 name: Contrast (Dark)
+color-scheme: dark
 description: High contrast and unambiguous (dark version)
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
