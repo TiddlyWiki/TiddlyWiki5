@@ -1,10 +1,9 @@
 caption: tabs
 created: 20131228162203521
-modified: 20180408084453861
+modified: 20210525204556911
 tags: Macros [[Core Macros]]
 title: tabs Macro
 type: text/vnd.tiddlywiki
-
 The <<.def tabs>> [[macro|Macros]] presents a [[selection of tiddlers|Title Selection]] as a set of tabs that the user can switch between.
 
 The tabs display the <<.field caption>> field of a tiddler if it has one, or the tiddler's title otherwise. If specified, the tabs display the <<.field tooltip>> field of a tiddler as the respective button tooltip.
@@ -28,7 +27,7 @@ By default the tabs are arranged horizontally above the content. To get vertical
 ;retain
 : Optionally, "yes" specifies that the content of the tabs should be retained when switching to another tab, avoiding re-rendering it (this can be useful to avoid video or audio sources unexpectedly resetting)
 ;actions
-: Optionally, actions can be specified that are triggered when changing a tab
+: Optionally, actions can be specified that are triggered when changing a tab. Within the actions, the title of the selected tab is available in the <<.var currentTab>> variable and the `currentTiddler` variable from outside the tabs macro is available in the <<.var save-currentTiddler>>
 ;explicitState
 : Optionally, an explicit state title can be specified. It will be preferred over the internally computed (qualified) state title
 
