@@ -601,7 +601,10 @@ SaveTiddlerTask.prototype.run = function(callback) {
 		tiddler = this.syncer.wiki.tiddlerExists(this.title) && this.syncer.wiki.getTiddler(this.title);
 	this.syncer.logger.log("Dispatching 'save' task:",this.title);
 	if(tiddler) {
-		this.syncer.syncadaptor.saveTiddler(tiddler,function(err,adaptorInfo,revision) {
+		this.syncer.syncadaptor.saveTiddler(tiddler,{
+			changeCount: changeCount,
+			tiddlerInfo: self.syncer.tiddlerInfo[self.title]
+		},function(err,adaptorInfo,revision) {
 			// If there's an error, exit without changing any internal state
 			if(err) {
 				return callback(err);
@@ -615,8 +618,6 @@ SaveTiddlerTask.prototype.run = function(callback) {
 			};
 			// Invoke the callback
 			callback(null);
-		},{
-			tiddlerInfo: self.syncer.tiddlerInfo[self.title]
 		});
 	} else {
 		this.syncer.logger.log(" Not Dispatching 'save' task:",this.title,"tiddler does not exist");
@@ -633,7 +634,9 @@ function DeleteTiddlerTask(syncer,title) {
 DeleteTiddlerTask.prototype.run = function(callback) {
 	var self = this;
 	this.syncer.logger.log("Dispatching 'delete' task:",this.title);
-	this.syncer.syncadaptor.deleteTiddler(this.title,function(err) {
+	this.syncer.syncadaptor.deleteTiddler(this.title,{
+		tiddlerInfo: self.syncer.tiddlerInfo[this.title]
+	},function(err,adaptorInfo) {
 		// If there's an error, exit without changing any internal state
 		if(err) {
 			return callback(err);
@@ -642,8 +645,6 @@ DeleteTiddlerTask.prototype.run = function(callback) {
 		delete self.syncer.tiddlerInfo[self.title];
 		// Invoke the callback
 		callback(null);
-	},{
-		tiddlerInfo: self.syncer.tiddlerInfo[this.title]
 	});
 };
 

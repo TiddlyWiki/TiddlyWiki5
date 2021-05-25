@@ -44,26 +44,35 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	classes.push("tc-keyboard");
 	domNode.className = classes.join(" ");
 	// Add a keyboard event handler
-	domNode.addEventListener("keydown",function (event) {
-		if($tw.keyboardManager.checkKeyDescriptors(event,self.keyInfoArray)) {
-			var handled = self.invokeActions(self,event);
-			if(self.actions) {
-				self.invokeActionString(self.actions,self,event);
-			}
-			self.dispatchMessage(event);
-			if(handled || self.actions || self.message) {
-				event.preventDefault();
-				event.stopPropagation();
-			}
-			return true;
-		}
-		return false;
-	},false);
+	$tw.utils.addEventListeners(domNode,[
+		{name: "keydown", handlerObject: this, handlerMethod: "handleChangeEvent"}
+	]);
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
 };
+
+KeyboardWidget.prototype.handleChangeEvent = function(event) {
+	if($tw.keyboardManager.checkKeyDescriptors(event,this.keyInfoArray)) {
+		var handled = this.invokeActions(this,event);
+		if(this.actions) {
+			var variables = {
+					"event-key": event.key,
+					"event-code": event.code,
+					"modifier": $tw.keyboardManager.getEventModifierKeyDescriptor(event)
+				};
+			this.invokeActionString(this.actions,this,event,variables);
+		}
+		this.dispatchMessage(event);
+		if(handled || this.actions || this.message) {
+			event.preventDefault();
+			event.stopPropagation();
+		}
+		return true;
+	}
+	return false;
+}
 
 KeyboardWidget.prototype.dispatchMessage = function(event) {
 	this.dispatchEvent({type: this.message, param: this.param, tiddlerTitle: this.getVariable("currentTiddler")});

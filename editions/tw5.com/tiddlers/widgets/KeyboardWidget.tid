@@ -1,6 +1,7 @@
 caption: keyboard
 created: 20140302192136805
-modified: 20161003114634019
+list: [[Keyboard Codes]] [[Key Codes (Example)]] [[Key Codes (Example 1)]] [[Possible Keys (Example 2)]]
+modified: 20210525102143381
 tags: Widgets
 title: KeyboardWidget
 type: text/vnd.tiddlywiki
@@ -14,12 +15,22 @@ The keyboard widget allows ActionWidgets to be triggered by specific key combina
 The content of the `<$keyboard>` widget is rendered normally. The keyboard shortcuts only take effect when the focus is within the contained content.
 
 |!Attribute |!Description |
-|actions |A string containing ActionWidgets to be triggered when the key combination is detected |
+|actions |A string containing ActionWidgets to be triggered when the key combination is detected<br><<.from-version "5.2.0">> The variables: ''event-key'', ''event-code'' and ''modifier'' are available for the actions |
 |message |The title of the [[WidgetMessage|Messages]] to generate |
 |param |The parameter to be passed with the [[WidgetMessage|Messages]] |
 |key |Key string identifying the key(s) to be trapped (see below) |
 |class |A CSS class to be assigned to the generated HTML DIV element |
 |tag|<<.from-version "5.1.14">> The html element the widget creates to capture the keyboard event, defaults to:<br>» `span` when parsed in inline-mode<br>» `div` when parsed in block-mode|
+
+! Variables
+
+<<.from-version "5.2.0">> The following variables are made available to the actions:
+
+|column-1-20 |k
+|!Variables |!Description |
+|`event-key` |The <<.var event-key>> variable contains the character, if possible. eg: `1`. You can experiment with some settings at: [[Key Codes (Example)]] |
+|`event-code` |The <<.var event-code>> variable contains a character description. eg:  `Digit1` instead of `1`. Or `Space` instead of an empty string ` `, which is hard to see|
+|`modifier` |The [[modifier Variable]] contains the Modifier Key held during the event (can be <kbd>normal</kbd>, <kbd>ctrl</kbd>, <kbd>shift</kbd>, <kbd>alt</kbd> or combinations thereof) |
 
 ! Key Strings
 
@@ -43,3 +54,7 @@ shift+escape
 ctrl+enter
 ctrl+shift+alt+A
 ```
+
+! More Info
+
+<<list-links "[tag[KeyboardWidget]]">>

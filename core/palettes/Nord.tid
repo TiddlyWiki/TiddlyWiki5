@@ -1,5 +1,6 @@
 title: $:/palettes/Nord
 name: Nord
+color-scheme: dark
 description: An arctic, north-bluish color palette.
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary

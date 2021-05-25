@@ -1,5 +1,6 @@
 title: $:/palettes/GruvboxDark
 name: Gruvbox Dark
+color-scheme: dark
 description: Retro groove color scheme
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary

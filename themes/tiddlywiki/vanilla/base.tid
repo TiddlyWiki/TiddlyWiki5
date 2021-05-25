@@ -333,6 +333,10 @@ table tfoot tr td {
 	height: 600px;
 }
 
+:root {
+	color-scheme: {{{ [{$:/palette}get[color-scheme]] }}};
+}
+
 /*
 ** Links
 */
@@ -564,9 +568,9 @@ html body.tc-body .tc-btn-rounded:hover svg {
 	fill: <<colour muted-foreground>>;
 }
 
+
 .tc-btn-text {
-	padding: 0;
-	margin: 0;
+	margin-left: 7px;
 }
 
 /* used for documentation "fake" buttons */
