@@ -557,10 +557,12 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	var self = this,
 		importTiddler = this.wiki.getTiddler(event.param),
-		importData = this.wiki.getTiddlerDataCached(event.param,{tiddlers: {}}),
+		importData,
 		importReport = [];
-	// Add the tiddlers to the store
 	importReport.push($tw.language.getString("Import/Imported/Hint") + "\n");
+	// If you need to modify the import tiddler payload then consider th-importing-tiddler instead
+	importTiddler = $tw.hooks.invokeHook("th-before-importing",importTiddler);
+	importData = this.wiki.getTiddlerDataCached(event.param,{tiddlers: {}}),
 	$tw.utils.each(importData.tiddlers,function(tiddlerFields) {
 		var title = tiddlerFields.title;
 		if(title && importTiddler && importTiddler.fields["selection-" + title] !== "unchecked") {
@@ -569,7 +571,10 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 			} else {
 				var tiddler = new $tw.Tiddler(tiddlerFields);
 			}
+			// th-importing-tiddler doesn't allow user interaction by default
+			// If you want to use the default UI then use: $:/core/modules/upgraders/ instead
 			tiddler = $tw.hooks.invokeHook("th-importing-tiddler",tiddler);
+			// Add the tiddlers to the store
 			self.wiki.addTiddler(tiddler);
 			importReport.push("# [[" + tiddler.fields.title + "]]");
 		}
