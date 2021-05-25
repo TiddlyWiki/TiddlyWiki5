@@ -1,6 +1,6 @@
 caption: set
 created: 20131115182700000
-modified: 20180315165405442
+modified: 20210505095640228
 tags: Widgets
 title: SetWidget
 type: text/vnd.tiddlywiki
@@ -15,79 +15,106 @@ The content of the `<$set>` widget is the scope for the value assigned to the va
 
 |!Attribute |!Description |
 |name |The name of the variable to assign (defaults to "currentTiddler") |
-|value |The value to assign to the variable if the filter is missing or not empty |
+|value |The value to assign to the variable if the <<.attr filter>> attribute is missing or not empty |
 |tiddler |<<.from-version "5.1.15">> Optional title of the tiddler from which to read the value |
 |subtiddler |<<.from-version "5.1.16">> Optionally specifies the title of a subtiddler within a plugin tiddler identified by the ''tiddler'' attribute |
 |field |<<.from-version "5.1.15">> Optional field of the tiddler from which to read the value (only used if ''tiddler'' is used) |
 |index |<<.from-version "5.1.15">> Optional index of the tiddler from which to read the value (only used if ''tiddler'' is used) |
-|filter |An optional filter to be evaluated and assigned to the variable (see below) |
+|filter |An optional filter to be evaluated and assigned to the variable (see "Filtered List Variable Assignment" below). The variable can be used with the <<.olink enlist>> operator |
 |select |<<.from-version "5.1.14">> An optional zero-based index of the item to return from the filter output (see below) |
 |emptyValue |The value to assign to the variable if the specified value is missing or empty (see below) |
 
 <<.tip """If the value of your variable is enclosed in double square brackets this might indicate that you are returning a list of values from the filter. To use a single title from the filter output without the double square brackets see ''Filtered Item Variable Assignment'' below.""">>
 
+! Examples
+
 !! Simple Variable Assignment
 
 The simplest way of using set variable widget assigns a string to a variable. The following example assigns a literal string
 
-```
-<$set name="myVariable" value="Some text">
+<<<
+
+<$macrocall $name='wikitext-example-without-html' 
+src='<$set name="myVariable" value="Some text">
 <$text text=<<myVariable>>/>
-</$set>
-```
+</$set>' />
+
+<<<
 
 Both the name and value attributes can be transcluded. For example:
 
-```
-<$set name=<<anotherVariable>> value={{template!!text}}>
-<$text text=<<myVariable>>/>
-</$set>
-```
+<<<
+
+<$macrocall $name='wikitext-example-without-html' 
+src='<$set name=anotherVariable value="myVariable">
+  <$set name=<<anotherVariable>> value={{$:/language/DefaultNewTiddlerTitle}}>
+    <$text text=<<myVariable>>/>
+  </$set>
+</$set>' />
+
+<<<
 
 !! Conditional Variable Assignment
 
 This form of the set variable widget chooses one of two specified values according to whether a filter evaluates to an empty list. Here's an example that sets a variable according to whether the current tiddler is called "myMagicTitle":
 
-```
-<$set name="myVariable" filter="[all[current]field:title[myMagicTitle]]" value="It's magic" emptyValue="It's not magic">
+<<<
+
+<$macrocall $name='wikitext-example-without-html' 
+src="""<$set name="myVariable" filter="[all[current]field:title[myMagicTitle]]" value="It's magic" emptyValue="It's not magic">
 <$text text=<<myVariable>>/>
-</$set>
-```
+</$set>""" />
+
+<<<
 
 !! Filtered List Variable Assignment
 
 This form of the set variable widget evaluates the filter and assigns the result to the variable as a space-separated list (using double square brackets for titles containing spaces).
 
-```
-<$set name="myVariable" filter="[tag[HelloThere]]">
-<$text text=<<myVariable>>/>
-</$set>
-```
+<<<
 
-!! Filtered Item Variable Assignment
+<$macrocall $name='wikitext-example-without-html' 
+src='<$set name="myVariable" filter="[tag[HelloThere]]">
+<$text text=<<myVariable>>/>
+</$set>' />
+
+<<<
+
+!! Filtered Item Variable Assignment Single Element
 
 <<.from-version "5.1.14">> This form of the set variable widget evaluates the filter and assigns the specified result to the variable as a single item (ie, not using double square brackets for titles containing spaces).
 
-```
-<$set name="myVariable" filter="[tag[HelloThere]]" select="0">
+<<<
+
+<$macrocall $name='wikitext-example-without-html' 
+src='<$set name="myVariable" filter="[tag[HelloThere]]" select="0">
 <$text text=<<myVariable>>/>
-</$set>
-```
+</$set>'/>
+
+<<<
 
 !! Transcluded Variable Assignment
 
 <<.from-version "5.1.15">> This form of the set variable widget obtains the value to assign to the variable from a value in a tiddler field or index. For example:
 
-```
-<$set name="myVariable" tiddler="HelloThere" field="text">
-<$text text=<<myVariable>>/>
-</$set>
-```
+<<<
 
-The example above could also be written as `<$set name="myVariable" value={{HelloThere!!text}}>`. The advantage of using the ''tiddler'' attribute is that the tiddler title and field or index can themselves be computed. For example:
-
-```
-<$set name="myVariable" tiddler=<<myTiddler>> field={{$:/currentField}}>
+<$macrocall $name='wikitext-example-without-html' 
+src='<$set name="myVariable" tiddler="HelloThere" field="list">
 <$text text=<<myVariable>>/>
-</$set>
-```
+</$set>'/>
+
+<<<
+
+The example above could also be written as `<$set name="myVariable" value={{HelloThere!!list}}>`. The advantage of using the ''tiddler'' attribute is that the tiddler title and field or index can themselves be computed. For example:
+
+<<<
+
+<$macrocall $name='wikitext-example-without-html' 
+src='<$set name="myTiddler" value="HelloThere">
+  <$set name="myVariable" tiddler=<<myTiddler>> field={{$:/docs/anyField!!field}}>
+    <$text text=<<myVariable>>/>
+  </$set>
+</$set>'/>
+
+<<<
