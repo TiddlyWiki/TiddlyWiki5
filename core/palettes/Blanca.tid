@@ -1,5 +1,6 @@
 title: $:/palettes/Blanca
 name: Blanca
+color-scheme: light
 description: A clean white palette to let you focus
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
