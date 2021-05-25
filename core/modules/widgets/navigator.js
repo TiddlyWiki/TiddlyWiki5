@@ -522,10 +522,15 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	});
 	// Give the active upgrader modules a chance to process the incoming tiddlers
 	var messages = this.wiki.invokeUpgraders(incomingTiddlers,importData.tiddlers);
+	// Deselect any disabled, but _not_ suppressed tiddlers
+	var systemMessage = $tw.language.getString("Import/Upgrader/Tiddler/Unselected");
 	$tw.utils.each(messages,function(message,title) {
 		newFields["message-" + title] = message;
+		if (message.indexOf(systemMessage) !== -1) {
+			newFields["selection-" + title] = "unchecked";
+		}
 	});
-	// Deselect any suppressed tiddlers
+	// Deselect suppressed tiddlers ... they have been removed and can't be selected anymore
 	$tw.utils.each(importData.tiddlers,function(tiddler,title) {
 		if($tw.utils.count(tiddler) === 0) {
 			newFields["selection-" + title] = "unchecked";
