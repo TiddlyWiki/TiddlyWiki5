@@ -14,7 +14,7 @@ tags: [[Filter Operators]] [[Field Operators]] [[Selection Constructors]] [[Nega
 title: enlist Operator
 type: text/vnd.tiddlywiki
 
-<<.tip """Literal filter operands cannot contain square brackets but you can work around the issue by using a variable. ''Learn more at:'' [[SetWidget]] "Filtered List Variable Assignment" """>>
+<<.tip """Literal filter operands cannot contain square brackets but you can work around the issue by using a variable. ''Learn more at:'' [[SetWidget]] documentation under the heading "Filtered List Variable Assignment" """>>
 
 ```
 <$set name="myList" value="first [[second with a space]] third">

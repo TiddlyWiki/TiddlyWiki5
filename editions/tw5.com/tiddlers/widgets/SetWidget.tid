@@ -20,7 +20,7 @@ The content of the `<$set>` widget is the scope for the value assigned to the va
 |subtiddler |<<.from-version "5.1.16">> Optionally specifies the title of a subtiddler within a plugin tiddler identified by the ''tiddler'' attribute |
 |field |<<.from-version "5.1.15">> Optional field of the tiddler from which to read the value (only used if ''tiddler'' is used) |
 |index |<<.from-version "5.1.15">> Optional index of the tiddler from which to read the value (only used if ''tiddler'' is used) |
-|filter |An optional filter to be evaluated and assigned to the variable (see "Filtered List Variable Assignment" below). The variable can be use with the <<.olink enlist>> operator |
+|filter |An optional filter to be evaluated and assigned to the variable (see "Filtered List Variable Assignment" below). The variable can be used with the <<.olink enlist>> operator |
 |select |<<.from-version "5.1.14">> An optional zero-based index of the item to return from the filter output (see below) |
 |emptyValue |The value to assign to the variable if the specified value is missing or empty (see below) |
 
