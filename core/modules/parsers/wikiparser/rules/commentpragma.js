@@ -12,7 +12,7 @@ For example:
 
 ```
 <!-- This is a comment in the "pragma" area -->
-\defien xx()
+\define xx()
 some text
 \end
 
