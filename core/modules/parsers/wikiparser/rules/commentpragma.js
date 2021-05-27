@@ -3,10 +3,10 @@ title: $:/core/modules/parsers/wikiparser/rules/commentpragma.js
 type: application/javascript
 module-type: wikirule
 
-This rule has ben "cloned" from title: $:/core/modules/parsers/wikiparser/rules/commentblock.js
+This rule has been "cloned" from rule: $:/core/modules/parsers/wikiparser/rules/commentblock.js
 
 Wiki text block rule for HTML comments in the tiddler pragma area. 
-Only BLOCK rule is needed, since "inline" is the same as wikitext inline -- but slower
+Only BLOCK rule is needed, since "inline" is the same as wikitext inline
 
 For example:
 
