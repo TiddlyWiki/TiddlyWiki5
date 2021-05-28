@@ -34,21 +34,17 @@ exports.lookup = function(source,operator,options) {
 	}
 	if(indexSuffix) {
 		source(function(tiddler,title) {
-			var targetTitle = operator.operands[0] + title;
-			var data = options.wiki.extractTiddlerDataItem(targetTitle,target,defaultSuffix);
+			var data = options.wiki.extractTiddlerDataItem(operator.operands[0]+title,target,defaultSuffix);
 			results.push(data);
 		});
 	} else {
 		source(function(tiddler,title) {
-			var targetTitle = operator.operands[0] + title;
-			var targetTiddler = options.wiki.getTiddler(targetTitle);
-			if(targetTiddler) {
-				var value = targetTiddler.getFieldString(target);
-				if(value == "" && defaultSuffix !== "") {
-					value = defaultSuffix;
-				}
-				results.push(value);
+			var value = defaultSuffix;
+			var targetTiddler = options.wiki.getTiddler(operator.operands[0]+title);
+			if(targetTiddler && targetTiddler.getFieldString(target)) {
+				value = targetTiddler.getFieldString(target);
 			}
+			results.push(value);
 		});
 	}
 	return results;
