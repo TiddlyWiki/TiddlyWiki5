@@ -135,22 +135,23 @@ function parseCSSColor(css_str) {
   // Color keywords (and transparent) lookup.
   if (str in kCSSColorTable) return kCSSColorTable[str].slice();  // dup.
 
-  // #abc and #abc123 syntax.
+  // #RGB[A] and #RRGGBB[AA] syntax.
   if (str[0] === '#') {
-    if (str.length === 4) {
-      var iv = parseInt(str.substr(1), 16);  // TODO(deanm): Stricter parsing.
-      if (!(iv >= 0 && iv <= 0xfff)) return null;  // Covers NaN.
-      return [((iv & 0xf00) >> 4) | ((iv & 0xf00) >> 8),
+    if (isNaN("0x"+str.slice(1))) {
+      return null;
+    }
+    if (str.length === 4 || str.length === 5) {
+      var iv = parseInt((str+"f").slice(1,5), 16);
+      return [((iv & 0xf000) >> 8) | ((iv & 0xf000) >> 12),
+              (iv & 0xf00) >> 4| ((iv & 0xf00) >> 8),
               (iv & 0xf0) | ((iv & 0xf0) >> 4),
-              (iv & 0xf) | ((iv & 0xf) << 4),
-              1];
-    } else if (str.length === 7) {
-      var iv = parseInt(str.substr(1), 16);  // TODO(deanm): Stricter parsing.
-      if (!(iv >= 0 && iv <= 0xffffff)) return null;  // Covers NaN.
-      return [(iv & 0xff0000) >> 16,
+              ((iv & 0xf) | ((iv & 0xf) << 4)) / 255];
+    } else if (str.length === 7 || str.length === 9) {
+      var iv = parseInt((str+"ff").slice(1,9), 16);
+      return [(iv & 0xff000000) >>> 24,
+              (iv & 0xff0000) >> 16,
               (iv & 0xff00) >> 8,
-              iv & 0xff,
-              1];
+              (iv & 0xff) / 255];
     }
 
     return null;
@@ -158,8 +159,8 @@ function parseCSSColor(css_str) {
 
   var op = str.indexOf('('), ep = str.indexOf(')');
   if (op !== -1 && ep + 1 === str.length) {
-    var fname = str.substr(0, op);
-    var params = str.substr(op+1, ep-(op+1)).split(',');
+    var fname = str.slice(0, op);
+    var params = str.slice(op+1, ep).split(',');
     var alpha = 1;  // To allow case fallthrough.
     switch (fname) {
       case 'rgba':
