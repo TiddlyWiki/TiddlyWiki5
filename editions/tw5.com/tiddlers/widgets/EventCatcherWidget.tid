@@ -1,5 +1,5 @@
 created: 20201123113532200
-modified: 20201202200719126
+modified: 20210520162813234
 tags: Widgets
 title: EventCatcherWidget
 type: text/vnd.tiddlywiki
@@ -30,6 +30,7 @@ The content of the `<$eventcatcher>` widget is displayed normally.
 |actions-* |Action strings to be invoked when a matching event is trapped. Each event is mapped to an action attribute name of the form <code>actions-<em>event</em></code> where <code><em>event</em></code> represents the type of the event. For example: `actions-click` or `actions-dblclick` |
 |tag |Optional. The HTML element the widget creates to capture the events, defaults to:<br>» `span` when parsed in inline-mode<br>» `div` when parsed in block-mode |
 |class |Optional. A CSS class name (or names) to be assigned to the widget HTML element |
+|stopPropagation |<<.from-version "5.1.24">> Optional. Set to "always" to always stop event propagation even if there are no corresponding actions to invoke, "never" to never stop event propagation, or the default value "onaction" with which event propagation is only stopped if there are corresponding actions that are invoked. |
 
 ! Variables
 

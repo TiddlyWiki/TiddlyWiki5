@@ -1,5 +1,6 @@
 title: $:/palettes/CupertinoDark
 tags: $:/tags/Palette
+color-scheme: dark
 name: Cupertino Dark
 description: A macOS inspired dark palette
 type: application/x-tiddler-dictionary

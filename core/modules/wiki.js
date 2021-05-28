@@ -221,6 +221,10 @@ exports.isTemporaryTiddler = function(title) {
 	return title && title.indexOf("$:/temp/") === 0;
 };
 
+exports.isVolatileTiddler = function(title) {
+	return title && title.indexOf("$:/temp/volatile/") === 0;
+};
+
 exports.isImageTiddler = function(title) {
 	var tiddler = this.getTiddler(title);
 	if(tiddler) {		
@@ -1505,6 +1509,13 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 
 // Determine whether a plugin by title is dynamically loadable
 exports.doesPluginRequireReload = function(title) {
+	var tiddler = this.getTiddler(title);
+	if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"]) {
+		if(tiddler.fields["plugin-type"] === "import") {
+			// The import plugin never requires reloading
+			return false;
+		}
+	}
 	return this.doesPluginInfoRequireReload(this.getPluginInfo(title) || this.getTiddlerDataCached(title));
 };
 
@@ -1549,4 +1560,3 @@ exports.slugify = function(title,options) {
 };
 
 })();
-

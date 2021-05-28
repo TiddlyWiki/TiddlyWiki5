@@ -5,6 +5,7 @@ description: {{$:/language/Buttons/Info/Hint}}
 
 \whitespace trim
 \define button-content()
+\whitespace trim
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/info-button}}
 </$list>

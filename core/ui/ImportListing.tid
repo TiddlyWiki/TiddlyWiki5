@@ -12,6 +12,24 @@ title: $:/core/ui/ImportListing
 </$list>
 \end
 
+\define selectionInfo()
+\whitespace trim
+<$set name="escUnselected" value={{{[{$:/language/Import/Upgrader/Tiddler/Unselected}escaperegexp[]addprefix[(?g)]]}}}>
+	<$list filter="[all[current]get<messageField>regexp<escUnselected>]" variable="ignore">
+		<$text text={{{[all[current]get<selectionField>match[checked]then{$:/language/Import/Upgrader/Tiddler/Selected}else[]]}}}/>
+	</$list>
+</$set>
+\end
+
+\define libraryInfo()
+\whitespace trim
+<$set name="escUnselected" value={{{[{$:/language/Import/Upgrader/Tiddler/Unselected}escaperegexp[]addprefix[(?g)]]}}}>
+	<$list filter="[all[current]get<messageField>!regexp<escUnselected>]" variable="ignore">
+		<$text text={{{[all[current]get<messageField>]}}}/>
+	</$list>
+</$set>
+\end
+
 \define selectionField() selection-$(payloadTiddler)$
 
 \define renameField() rename-$(payloadTiddler)$
@@ -69,7 +87,8 @@ title: $:/core/ui/ImportListing
 </$reveal>
 </td>
 <td>
-<$view field=<<messageField>>/>
+<<selectionInfo>>
+<<libraryInfo>>
 <<overWriteWarning>>
 </td>
 </tr>

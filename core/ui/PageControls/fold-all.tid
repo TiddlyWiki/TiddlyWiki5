@@ -3,12 +3,15 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/fold-all-button}} {{$:/language/Buttons/FoldAll/Caption}}
 description: {{$:/language/Buttons/FoldAll/Hint}}
 
+\whitespace trim
 <$button tooltip={{$:/language/Buttons/FoldAll/Hint}} aria-label={{$:/language/Buttons/FoldAll/Caption}} class=<<tv-config-toolbar-class>>>
 <$action-sendmessage $message="tm-fold-all-tiddlers" $param=<<currentTiddler>> foldedStatePrefix="$:/state/folded/"/>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]" variable="listItem">
 {{$:/core/images/fold-all-button}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/FoldAll/Caption}}/></span>
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/FoldAll/Caption}}/>
+</span>
 </$list>
 </$button>
