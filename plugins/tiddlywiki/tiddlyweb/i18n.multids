@@ -1,0 +1,4 @@
+title: $:/config/plugins/tiddlywiki/tiddlyweb/language/
+
+ServerStatus: Server status
+ServerStatus/Description: Status of synchronisation with server
