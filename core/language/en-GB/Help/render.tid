@@ -24,7 +24,7 @@ Notes:
 
 * The output directory is not cleared of any existing files
 * Any missing directories in the path to the filename are automatically created.
-* When referring to a tiddler with spaces in its title, take care to use both the quotes required by your shell and also TiddlyWiki's double square brackets : `--render "[[Motovun Jack.jpg]]"`
+* When referring to a tiddler with spaces in its title, take care to use both the quotes required by your shell and also TiddlyWiki's double square brackets: `--render "[[Motovun Jack.jpg]]"`
 * The filename filter is evaluated with the selected items being set to the title of the tiddler currently being rendered, allowing the title to be used as the basis for computing the filename. For example `[encodeuricomponent[]addprefix[static/]]` applies URI encoding to each title, and then adds the prefix `static/`
 * Multiple ''name''/''value'' pairs can be used to pass more than one variable
 * The `--render` command is a more flexible replacement for both the `--rendertiddler` and `--rendertiddlers` commands, which are deprecated
