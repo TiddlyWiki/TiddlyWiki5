@@ -185,36 +185,6 @@ WikiParser.prototype.findNextMatch = function(rules,startPos) {
 	return matchingRule;
 };
 
-WikiParser.prototype.parseRule = function(rule) {
-	var start = this.pos,
-		blocks = rule.parse(),
-		pending = [];
-	// Estimate start/end ranges for blocks that don't define their own based on
-	// sibling and parent ranges
-	for(var i=0; i<blocks.length; i++) {
-		var block = blocks[i];
-		if(block.start === undefined) {
-			block.start = start;
-		} else {
-			this.applyRangeEnd(pending,block.start);
-			pending.length = 0;
-		}
-		if(block.end === undefined) {
-			pending.push(block);
-		} else {
-			start = block.end;
-		}
-	}
-	this.applyRangeEnd(pending,this.pos);
-	return blocks;
-};
-
-WikiParser.prototype.applyRangeEnd = function(blocks,end) {
-	for(var i=0; i<blocks.length; i++) {
-		blocks[i].end = end;
-	}
-}
-
 /*
 Parse any pragmas at the beginning of a block of parse text
 */
@@ -234,7 +204,7 @@ WikiParser.prototype.parsePragmas = function() {
 			break;
 		}
 		// Process the pragma rule
-		var subTree = this.parseRule(nextMatch.rule);
+		var subTree = nextMatch.rule.parse();
 		if(subTree.length > 0) {
 			// Quick hack; we only cope with a single parse tree node being returned, which is true at the moment
 			currentTreeBranch.push.apply(currentTreeBranch,subTree);
@@ -258,7 +228,7 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 	// Look for a block rule that applies at the current position
 	var nextMatch = this.findNextMatch(this.blockRules,this.pos);
 	if(nextMatch && nextMatch.matchIndex === this.pos) {
-		return this.parseRule(nextMatch.rule);
+		return nextMatch.rule.parse();
 	}
 	// Treat it as a paragraph if we didn't find a block rule
 	var start = this.pos;
@@ -344,7 +314,7 @@ WikiParser.prototype.parseInlineRunUnterminated = function(options) {
 			this.pos = nextMatch.matchIndex;
 		}
 		// Process the run rule
-		tree.push.apply(tree,this.parseRule(nextMatch.rule));
+		tree.push.apply(tree,nextMatch.rule.parse());
 		// Look for the next run rule
 		nextMatch = this.findNextMatch(this.inlineRules,this.pos);
 	}
@@ -387,7 +357,7 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 				this.pos = inlineRuleMatch.matchIndex;
 			}
 			// Process the inline rule
-			tree.push.apply(tree,this.parseRule(inlineRuleMatch.rule));
+			tree.push.apply(tree,inlineRuleMatch.rule.parse());
 			// Look for the next inline rule
 			inlineRuleMatch = this.findNextMatch(this.inlineRules,this.pos);
 			// Look for the next terminator match

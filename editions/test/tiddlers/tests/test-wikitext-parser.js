@@ -95,7 +95,7 @@ describe("WikiText parser tests", function() {
 		);
 		expect(parse("<div><div attribute={{TiddlerTitle!!field}}>\n\n!some heading</div></div>")).toEqual(
 
-			[ { type : 'element', tag : 'p', start: 0, end: 71, children : [ { type : 'element', start : 0, attributes : {  }, tag : 'div', end : 5, isBlock : false, children : [ { type : 'element', start : 5, attributes : { attribute : { start : 9, name : 'attribute', type : 'indirect', textReference : 'TiddlerTitle!!field', end : 43 } }, tag : 'div', end : 44, isBlock : true, children : [ { type : 'element', tag : 'h1', start : 46, end : 71, attributes : { class : { type : 'string', value : '' } }, children : [ { type : 'text', text : 'some heading</div></div>', start : 47, end : 71 } ] } ] } ] } ] } ]
+			[ { type : 'element', tag : 'p', start: 0, end: 71, children : [ { type : 'element', start : 0, attributes : {  }, tag : 'div', end : 5, isBlock : false, children : [ { type : 'element', start : 5, attributes : { attribute : { start : 9, name : 'attribute', type : 'indirect', textReference : 'TiddlerTitle!!field', end : 43 } }, tag : 'div', end : 44, isBlock : true, children : [ { type : 'element', tag : 'h1', attributes : { class : { type : 'string', value : '' } }, children : [ { type : 'text', text : 'some heading</div></div>', start : 47, end : 71 } ] } ] } ] } ] } ]
 
 		);
 		expect(parse("<div><div attribute={{TiddlerTitle!!field}}>\n!some heading</div></div>")).toEqual(
@@ -114,7 +114,7 @@ describe("WikiText parser tests", function() {
 	it("should parse macro definitions", function() {
 		expect(parse("\\define myMacro()\nnothing\n\\end\n")).toEqual(
 
-			[ { type : 'set', start : 0, end : 30, attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isMacroDefinition : true } ]
+			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isMacroDefinition : true } ]
 
 		);
 
@@ -226,7 +226,7 @@ describe("WikiText parser tests", function() {
 	it("should parse horizontal rules", function() {
 		expect(parse("---Not a rule\n\n----\n\nBetween\n\n---")).toEqual(
 
-			[ { type : 'element', tag : 'p', start : 0, end : 13, children : [ { type : 'entity', entity : '&mdash;', start : 0, end : 3 }, { type : 'text', text : 'Not a rule', start : 3, end : 13 } ] }, { type : 'element', tag : 'hr', start : 15, end : 20 }, { type : 'element', tag : 'p', start : 21, end : 28, children : [ { type : 'text', text : 'Between', start : 21, end : 28 } ] }, { type : 'element', tag : 'hr', start : 30, end : 33 } ]
+			[ { type : 'element', tag : 'p', start : 0, end : 13, children : [ { type : 'entity', entity : '&mdash;' }, { type : 'text', text : 'Not a rule', start : 3, end : 13 } ] }, { type : 'element', tag : 'hr' }, { type : 'element', tag : 'p', start : 21, end : 28, children : [ { type : 'text', text : 'Between', start : 21, end : 28 } ] }, { type : 'element', tag : 'hr' } ]
 
 		);
 
@@ -235,7 +235,7 @@ describe("WikiText parser tests", function() {
 	it("should parse hard linebreak areas", function() {
 		expect(parse("\"\"\"Something\nin the\nway she moves\n\"\"\"\n\n")).toEqual(
 
-			[ { type : 'element', tag : 'p', children : [ { type : 'text', text : 'Something', start : 3, end : 12 }, { type : 'element', tag : 'br', start : 12, end : 13 }, { type : 'text', text : 'in the', start : 13, end : 19 }, { type : 'element', tag : 'br', start : 19, end : 20 }, { type : 'text', text : 'way she moves', start : 20, end : 33 }, { type : 'element', tag : 'br', start: 33, end: 37 } ], start : 0, end : 37 } ]
+			[ { type : 'element', tag : 'p', children : [ { type : 'text', text : 'Something', start : 3, end : 12 }, { type : 'element', tag : 'br' }, { type : 'text', text : 'in the', start : 13, end : 19 }, { type : 'element', tag : 'br' }, { type : 'text', text : 'way she moves', start : 20, end : 33 }, { type : 'element', tag : 'br' } ], start : 0, end : 37 } ]
 
 		);
 
