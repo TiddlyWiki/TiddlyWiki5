@@ -372,7 +372,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 	// If the resulting filename is blank (eg because the title is just punctuation)
 	if(!filepath || /^_+$/g.test(filepath)) {
 		// ...then just use the character codes of the title
-		filepath = "";	
+		filepath = "";
 		$tw.utils.each(title.split(""),function(char) {
 			if(filepath) {
 				filepath += "-";
@@ -488,7 +488,7 @@ exports.deleteTiddlerFile = function(fileInfo,callback) {
 	fs.unlink(fileInfo.filepath,function(err) {
 		if(err) {
 			return callback(err);
-		}	
+		}
 		// Delete the metafile if present
 		if(fileInfo.hasMetaFile && fs.existsSync(fileInfo.filepath + ".meta")) {
 			fs.unlink(fileInfo.filepath + ".meta",function(err) {

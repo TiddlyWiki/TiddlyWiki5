@@ -52,7 +52,7 @@ PageScroller.prototype.handleEvent = function(event) {
 		if(event.paramObject && event.paramObject.selector) {
 			this.scrollSelectorIntoView(null,event.paramObject.selector);
 		} else {
-			this.scrollIntoView(event.target);			
+			this.scrollIntoView(event.target);
 		}
 		return false; // Event was handled
 	}
@@ -103,7 +103,7 @@ PageScroller.prototype.scrollIntoView = function(element,callback) {
 			if(duration <= 0) {
 				t = 1;
 			} else {
-				t = ((Date.now()) - self.startTime) / duration;	
+				t = ((Date.now()) - self.startTime) / duration;
 			}
 			if(t >= 1) {
 				self.cancelScroll(srcWindow);
@@ -126,7 +126,7 @@ PageScroller.prototype.scrollSelectorIntoView = function(baseElement,selector,ca
 	baseElement = baseElement || document.body;
 	var element = baseElement.querySelector(selector);
 	if(element) {
-		this.scrollIntoView(element,callback);		
+		this.scrollIntoView(element,callback);
 	}
 };
 
