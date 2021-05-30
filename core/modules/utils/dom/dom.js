@@ -69,7 +69,7 @@ Get the first parent element that has scrollbars or use the body as fallback.
 */
 exports.getScrollContainer = function(el) {
 	var doc = el.ownerDocument;
-	while(el.parentNode) {	
+	while(el.parentNode) {
 		el = el.parentNode;
 		if(el.scrollTop) {
 			return el;
@@ -208,7 +208,7 @@ exports.addEventListeners = function(domNode,events) {
 			if(eventInfo.handlerMethod) {
 				handler = function(event) {
 					eventInfo.handlerObject[eventInfo.handlerMethod].call(eventInfo.handlerObject,event);
-				};	
+				};
 			} else {
 				handler = eventInfo.handlerObject;
 			}

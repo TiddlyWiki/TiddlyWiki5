@@ -36,7 +36,7 @@ Command.prototype.execute = function() {
 		filter = this.params[0],
 		template = this.params[1],
 		outputPath = this.commander.outputPath,
-		pathname = path.resolve(outputPath,this.params[2]),		
+		pathname = path.resolve(outputPath,this.params[2]),
 		type = this.params[3] || "text/html",
 		extension = this.params[4] || ".html",
 		deleteDirectory = (this.params[5] || "").toLowerCase() !== "noclean",

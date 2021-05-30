@@ -97,7 +97,7 @@ WikiFolderMaker.prototype.save = function() {
 						// A custom plugin
 						self.log("Processing custom plugin: " + title);
 						self.saveCustomPlugin(tiddler);
-					}				
+					}
 				} else {
 					// Ordinary tiddler
 					self.saveTiddler("tiddlers",tiddler);

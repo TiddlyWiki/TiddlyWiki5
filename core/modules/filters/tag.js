@@ -50,7 +50,7 @@ exports.tag = function(source,operator,options) {
 				});
 				results = options.wiki.sortByList(results,operator.operand);
 			}
-		}		
+		}
 	}
 	return results;
 };
