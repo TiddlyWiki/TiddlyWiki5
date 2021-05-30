@@ -5,14 +5,20 @@ Advanced/Hint: Información interna de TiddlyWiki
 Appearance/Caption: Aspecto
 Appearance/Hint: Personaliza la apariencia de TiddlyWiki
 Basics/AnimDuration/Prompt: Duración de la animación
+Basics/AutoFocus/Prompt: Campo de enfoque predeterminado para nuevos tiddlers
 Basics/Caption: Básico
 Basics/DefaultTiddlers/BottomHint: Usa &#91;&#91;corchetes dobles&#93;&#93; para títulos con espacios. También puedes mostrarlos ordenados <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">de más reciente a más antiguo</$button>
 Basics/DefaultTiddlers/Prompt: Tiddlers por defecto
 Basics/DefaultTiddlers/TopHint: Escoge qué tiddlers se muestran al inicio
 Basics/Language/Prompt: ¡Hola! Selecciona idioma actual
 Basics/NewJournal/Tags/Prompt: Etiqueta para las nuevas entradas de diario
+Basics/NewJournal/Text/Prompt: Texto para las nuevas entradas de diario
 Basics/NewJournal/Title/Prompt: Formato de título para las nuevas entradas de diario
+Basics/NewTiddler/Title/Prompt: Título de nuevos tiddlers
+Basics/NewTiddler/Tags/Prompt: Etiquetas de nuevos tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Número de tiddlers ocultos anulados
+Basics/RemoveTags: Actualizar al formato actual
+Basics/RemoveTags/Hint: Actualizar la configuración de las etiquetas al formato más reciente
 Basics/ShadowTiddlers/Prompt: Número de tiddlers ocultos
 Basics/Subtitle/Prompt: Subtítulo
 Basics/SystemTiddlers/Prompt: Número de tiddlers de sistema
@@ -32,6 +38,7 @@ KeyboardShortcuts/Add/Prompt: Escribe el atajo
 KeyboardShortcuts/Caption: Atajos de teclado
 KeyboardShortcuts/Hint: Administra la asignación de atajos de teclado
 KeyboardShortcuts/NoShortcuts/Caption: No hay atajo asignado
+KeyboardShortcuts/Remove/Hint: Eliminar atajo
 KeyboardShortcuts/Platform/All: Cualquier plataforma
 KeyboardShortcuts/Platform/Linux: Sólo Linux
 KeyboardShortcuts/Platform/Mac: Sólo Macintosh
@@ -39,56 +46,89 @@ KeyboardShortcuts/Platform/NonLinux: Todas menos Linux
 KeyboardShortcuts/Platform/NonMac: Todas menos Macintosh
 KeyboardShortcuts/Platform/NonWindows: Todas menos Windows
 KeyboardShortcuts/Platform/Windows: Sólo windows
-KeyboardShortcuts/Remove/Hint: Eliminar atajo
+LayoutSwitcher/Caption: Disposición
 LoadedModules/Caption: Módulos cargados
 LoadedModules/Hint: Modulos cargados en este momento, enlazados con sus tiddlers de origen. Los módulos en itálica carecen de origen, debido normalmente a que se configuraron durante el inicio. 
 Palette/Caption: Paleta
 Palette/Editor/Clone/Caption: Clonar
 Palette/Editor/Clone/Prompt: Se recomienda clonar esta paleta antes de editarla. 
+Palette/Editor/Delete/Hint: eliminar esta entrada de la paleta actual
+Palette/Editor/Names/External/Show: Mostrar nombres de colores que no forman parte de la paleta actual
+Palette/Editor/Prompt/Modified: Esta paleta de sombras ha sido modificada
 Palette/Editor/Prompt: Editando
-Palette/Editor/Prompt/Modified: Si te has perdido, no desesperes
 Palette/Editor/Reset/Caption: Restaura la paleta
 Palette/HideEditor/Caption: Cerrar el editor
 Palette/Prompt: Paleta actual
 Palette/ShowEditor/Caption: Abrir el editor
-Parsing/Block/Caption: Bloquear reglas sintácticas
 Parsing/Caption: Interpretación sintáctica
-Parsing/Hint: Aquí se pueden deshabilitar globalmente reglas de interpretación sintáctica del wiki. Ten cuidado: deshabilitar ciertas reglas puede hacer que ~TiddlyWiki deje de funcionar correctamente.
-En tal caso, puedes recuperar su normal funcionamiento en [[modo seguro|https://tiddlywiki.com/#SafeMode]].
+Parsing/Hint: Aquí se pueden deshabilitar globalmente reglas de interpretación sintáctica del wiki. Ten cuidado: deshabilitar ciertas reglas puede hacer que ~TiddlyWiki deje de funcionar correctamente. En tal caso, puedes recuperar su normal funcionamiento en [[modo seguro|https://tiddlywiki.com/#SafeMode]].
+Parsing/Block/Caption: Bloquear reglas sintácticas
 Parsing/Inline/Caption: Reglas sintácticas de texto
 Parsing/Pragma/Caption: Reglas sintácticas del compilador
 Plugins/Add/Caption: Obten complementos y extensiones
 Plugins/Add/Hint: Instala plugins desde la librería oficial
-Plugins/Caption: Plugins
+Plugins/AlreadyInstalled/Hint: Este complemento ya está instalado en la versión <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: También requiere:
+Plugins/Caption: Complementos
 Plugins/Disable/Caption: Desactivar
 Plugins/Disable/Hint: Desactiva el plugin al actualizar la página
 Plugins/Disabled/Status: (Desactivado)
+Plugins/Downgrade/Caption: bajar de versión
 Plugins/Empty/Hint: No se han instalado
 Plugins/Enable/Caption: Activar
 Plugins/Enable/Hint: Activa este plugin al actualizar la página
 Plugins/Install/Caption: Instalar
-Plugins/Installed/Hint: Plugins instalados actualmente
-Plugins/Language/Prompt: Idiomas
+Plugins/Installed/Hint: Complementos instalados actualmente
 Plugins/Languages/Caption: Idiomas
 Plugins/Languages/Hint: Extensiones de idioma
+Plugins/NoInfoFound/Hint: No se ha encontrado ''"<$text text=<<currentTab>>/>"''
+Plugins/NotInstalled/Hint: Este complemento no está instalado actualmente
 Plugins/OpenPluginLibrary: Abrir biblioteca de complementos y extensiones
-Plugins/Plugin/Prompt: Plugins
-Plugins/Plugins/Caption: Plugins
+Plugins/ClosePluginLibrary: cerrar biblioteca de complementos y extensiones
+Plugins/PluginWillRequireReload: (requiere recarga)
+Plugins/Plugins/Caption: Complementos
 Plugins/Plugins/Hint: Complementos y extensiones
 Plugins/Reinstall/Caption: Reinstalar
-Plugins/Theme/Prompt: Temas
 Plugins/Themes/Caption: Temas
 Plugins/Themes/Hint: Extensiones de tema
-Saving/Caption: Servidor
-Saving/Heading: Servidor
+Plugins/Update/Caption: actualizar
+Plugins/Updates/Caption: Actualizaciones
+Plugins/Updates/Hint: Actualizaciones disponibles para complementos instalados
+Plugins/Updates/UpdateAll/Caption: Actualizar <<update-count>> complementos
+Plugins/SubPluginPrompt: Con <<count>> sub-complementos disponibles
+Saving/Caption: Guardando
+Saving/DownloadSaver/AutoSave/Description: Permitir guardado automático para el almacenamiento de descargas
+Saving/DownloadSaver/AutoSave/Hint: Habilitar guardado automático para el almacenamiento de descargas
+Saving/DownloadSaver/Caption: Almacenamiento de descargas
+Saving/DownloadSaver/Hint: Esta configuración se aplica al almacenamiento de descarga compatible con HTML5
+Saving/General/Caption: General
+Saving/General/Hint: Esta configuración se aplica a todos los sistemas de almacenamiento cargados
+Saving/Hint: Configuración utilizada para guardar todo el TiddlyWiki como un solo archivo a través de un módulo de almacenamiento
+Saving/GitService/Branch: Rama de destino para guardar
+Saving/GitService/CommitMessage: Guardado por TiddlyWiki
+Saving/GitService/Description: Esta configuración solo se usa cuando se guarda en <<service-name>>
+Saving/GitService/Filename: Nombre del archivo de destino (e.g. `index.html`)
+Saving/GitService/Path: Directorio del archivo de destino (e.g. `/wiki/`)
+Saving/GitService/Repo: Repositorio de destino (e.g. `Jermolene/TiddlyWiki5`)
+Saving/GitService/ServerURL: URL de la API del servidor
+Saving/GitService/UserName: Nombre de usuario
+Saving/GitService/GitHub/Caption: ~GitHub Saver
+Saving/GitService/GitHub/Password: Contraseña, token OAUTH o token de acceso personal (consulta [[Página de ayuda de GitHub|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] para más detalles)
+Saving/GitService/GitLab/Caption: ~GitLab Saver
+Saving/GitService/GitLab/Password: Token de acceso personal para API (consulta [[página de ayuda de GitLab|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] para más detalles)
+Saving/GitService/Gitea/Caption: Gitea Saver
+Saving/GitService/Gitea/Password: Token de acceso personal para API (a través de la interfaz web de Gitea: `Configuración | Aplicaciones | Generar token nuevo`)
 Saving/TiddlySpot/Advanced/Heading: Configuración Avanzada
 Saving/TiddlySpot/BackupDir: Directorio de copias de seguridad
+Saving/TiddlySpot/ControlPanel: ~TiddlySpot Control Panel
 Saving/TiddlySpot/Backups: Copias de seguridad
+Saving/TiddlySpot/Caption: ~TiddlySpot Saver
 Saving/TiddlySpot/Description: Esta configuración sólo se usa para guardar el wiki en http://tiddlyspot.com o en otro servidor compatible
 Saving/TiddlySpot/Filename: Nombre del archivo
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //La dirección (URL) por defecto de// TiddlySpot //es `http://<wikiname>.tiddlyspot.com/store.cgi` aunque puede cambiarse a voluntad para usar otro servidor//
 Saving/TiddlySpot/Password: Contraseña
+Saving/TiddlySpot/ReadOnly: Ten en cuenta que [[TiddlySpot|http://tiddlyspot.com]] ya no permite la creación de nuevos sitios. Para sitios nuevos, puede usa [[TiddlyHost|https://tiddlyhost.com]], un nuevo servicio de alojamiento que reemplaza a ~TiddlySpot.
 Saving/TiddlySpot/ServerURL: Dirección (URL) del servidor
 Saving/TiddlySpot/UploadDir: Directorio de almacenamiento
 Saving/TiddlySpot/UserName: Nombre del Wiki
@@ -97,20 +137,17 @@ Settings/AutoSave/Disabled/Description: No guardar cambios automáticamente
 Settings/AutoSave/Enabled/Description: Guardar cambios automáticamente
 Settings/AutoSave/Hint: Guarda automáticamente los cambios durante la edición
 Settings/CamelCase/Caption: Enlaces wiki mediante ~CamelCase
+Settings/CamelCase/Hint: Desactiva globalmente la opción de enlace automático mediante CamelCase <br> Requiere recargar la página para que surta efecto
 Settings/CamelCase/Description: Activar enlaces automáticos mediante ~CamelCase
-Settings/CamelCase/Hint: Desactiva globalmente la opción de enlace automático mediante CamelCase <br>
-Requiere recargar la página para que surta efecto
 Settings/Caption: Configuración
-Settings/DefaultSidebarTab/Caption: Pestaña por defecto de la barra lateral
-Settings/DefaultSidebarTab/Hint: Indica qué pestaña de la barra lateral se muestra por defecto al inicio
+Settings/EditorToolbar/Caption: Barra de herramientas del editor
+Settings/EditorToolbar/Hint: Activa o desactiva la barra de herramientas del editor:
+Settings/EditorToolbar/Description: Mostrar la barra de herramientas del editor
+Settings/InfoPanelMode/Caption: Modo de panel de información de Tiddler
+Settings/InfoPanelMode/Hint: Controla cuándo se cierra el panel de información de tiddler:
+Settings/InfoPanelMode/Popup/Description: El panel de información de Tiddler se cierra automáticamente
+Settings/InfoPanelMode/Sticky/Description: El panel de información de Tiddler permanece abierto hasta que se cierra explícitamente
 Settings/Hint: La configuración de estos ajustes te permite personalizar el comportamiento de TiddlyWiki.
-Settings/LinkToBehaviour/Caption: Comportamiento al abrir tiddlers...
-Settings/LinkToBehaviour/InsideRiver/Hint: ...dentro del StoryRiver
-Settings/LinkToBehaviour/OpenAbove: Abrirlo por encima del tiddler actual
-Settings/LinkToBehaviour/OpenAtBottom: Abrirlo al final del StoryRiver
-Settings/LinkToBehaviour/OpenAtTop: Abrirlo al principio del StoryRiver
-Settings/LinkToBehaviour/OpenBelow: Abrirlo por debajo del tiddler actual
-Settings/LinkToBehaviour/OutsideRiver/Hint: ...desde fuera del StoryRiver
 Settings/NavigationAddressBar/Caption: Barra de direcciones
 Settings/NavigationAddressBar/Hint: Comportamiento de la barra de dirección del navegador cuando se abre un tiddler
 Settings/NavigationAddressBar/No/Description: No actualizar la barra de dirección
@@ -120,25 +157,46 @@ Settings/NavigationHistory/Caption: Historial de navegación
 Settings/NavigationHistory/Hint: Actualiza el historial de navegación al abrir un tiddler
 Settings/NavigationHistory/No/Description: No actualizar el historial
 Settings/NavigationHistory/Yes/Description: Actualizar el historial
-Settings/PerformanceInstrumentation/Caption: //Performance Instrumentation//
-Settings/PerformanceInstrumentation/Description: Activar //performance instrumentation//
-Settings/PerformanceInstrumentation/Hint: Muestra estadísticas de las prestaciones de la página en la consola de desarrollo <br>
-Requiere recargar la página para que surta efecto
-Settings/TitleLinks/Caption: Títulos de tiddler
-Settings/TitleLinks/Hint: Los títulos de los tiddlers se mostrarán y se comportarán como enlaces
-Settings/TitleLinks/No/Description: No mostrar como enlaces
-Settings/TitleLinks/Yes/Description: Mostrar como enlaces
-Settings/ToolbarButtons/Caption: Botones de la barra de herramientas
-Settings/ToolbarButtons/Hint: Aspecto por defecto de los botones de la barra de herramientas
-Settings/ToolbarButtons/Icons/Description: Mostrar icono
-Settings/ToolbarButtons/Text/Description: Mostrar texto
+Settings/NavigationPermalinkviewMode/Caption: Modo Permalink/permaview
+Settings/NavigationPermalinkviewMode/Hint: Elige cómo se comporta permalink/permaview:
+Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: Copiar permalink/permaview en el portapapeles
+Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Actualizar la barra de direcciones con permalink/permaview
+Settings/PerformanceInstrumentation/Caption: //Estadísticas de rendimiento//
+Settings/PerformanceInstrumentation/Hint: Muestra estadísticas de las prestaciones de la página en la consola de desarrollo <br>Requiere recargar la página para que surta efecto
+Settings/PerformanceInstrumentation/Description: Activar //estadísticas de rendimiento//
 Settings/ToolbarButtonStyle/Caption: Estilo de botón
 Settings/ToolbarButtonStyle/Hint: Selecciona el estilo de los botones de la barra de herramientas
 Settings/ToolbarButtonStyle/Styles/Borderless: Sin borde
 Settings/ToolbarButtonStyle/Styles/Boxed: Cuadrado
 Settings/ToolbarButtonStyle/Styles/Rounded: Redondo
+Settings/ToolbarButtons/Caption: Botones de la barra de herramientas
+Settings/ToolbarButtons/Hint: Aspecto por defecto de los botones de la barra de herramientas
+Settings/ToolbarButtons/Icons/Description: Mostrar icono
+Settings/ToolbarButtons/Text/Description: Mostrar texto
+Settings/DefaultSidebarTab/Caption: Pestaña por defecto de la barra lateral
+Settings/DefaultSidebarTab/Hint: Indica qué pestaña de la barra lateral se muestra por defecto al inicio
+Settings/DefaultMoreSidebarTab/Caption: Pestaña predeterminada Más de la barra lateral
+Settings/DefaultMoreSidebarTab/Hint: Especifica qué pestaña de la barra lateral Más se muestra de forma predeterminada
+Settings/LinkToBehaviour/Caption: Comportamiento al abrir tiddlers...
+Settings/LinkToBehaviour/InsideRiver/Hint: ...dentro del Visor
+Settings/LinkToBehaviour/OutsideRiver/Hint: ...desde fuera del Visor
+Settings/LinkToBehaviour/OpenAbove: Abrirlo por encima del tiddler actual
+Settings/LinkToBehaviour/OpenBelow: Abrirlo por debajo del tiddler actual
+Settings/LinkToBehaviour/OpenAtTop: Abrirlo al principio del Visor
+Settings/LinkToBehaviour/OpenAtBottom: Abrirlo al final del Visor
+Settings/TitleLinks/Caption: Títulos de tiddler
+Settings/TitleLinks/Hint: Los títulos de los tiddlers se mostrarán y se comportarán como enlaces
+Settings/TitleLinks/No/Description: No mostrar como enlaces
+Settings/TitleLinks/Yes/Description: Mostrar como enlaces
+Settings/MissingLinks/Caption: Enlaces Wiki
+Settings/MissingLinks/Hint: Elige si quieres vincular a tiddlers que aún no existen
+Settings/MissingLinks/Description: Habilitar enlaces a tiddlers inexistentes
 StoryView/Caption: Vista
 StoryView/Prompt: Vista actual
+Stylesheets/Caption: Hojas de estilo
+Stylesheets/Expand/Caption: Expandir todo
+Stylesheets/Hint: Este es el CSS renderizado de los tiddlers CSS etiquetados con <<tag "$:/tags/Stylesheet">>
+Stylesheets/Restore/Caption: Restaurar
 Theme/Caption: Tema
 Theme/Prompt: Tema actual
 TiddlerFields/Caption: Campos de tiddler
@@ -149,6 +207,8 @@ Toolbars/EditToolbar/Hint: Selecciona qué botones mostrar en modo de edición
 Toolbars/Hint: Selecciona qué botones mostrar en las diferentes barras de herramientas
 Toolbars/PageControls/Caption: Barra de página
 Toolbars/PageControls/Hint: Selecciona qué botones mostrar en la barra de página
+Toolbars/EditorToolbar/Caption: Barra de herramientas del editor
+Toolbars/EditorToolbar/Hint: Elige qué botones se muestran en la barra de herramientas del editor. Ten en cuenta que algunos botones solo aparecerán al editar tiddlers de cierto tipo. Arrastra y suelta para cambiar el orden
 Toolbars/ViewToolbar/Caption: Barra de visualización
 Toolbars/ViewToolbar/Hint: Selecciona qué botones mostrar en modo de visualización
 Tools/Download/Full/Caption: Descargar el wiki completo

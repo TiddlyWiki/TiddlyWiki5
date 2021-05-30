@@ -3,6 +3,6 @@
 	"name": "es-ES",
 	"plugin-type": "language",
 	"description": "Castellano. (Spain)",
-	"author": "Pau DeLuca",
-	"core-version": ">=5.0.0"
+	"author": "Pau DeLuca,Joe Bordes",
+	"core-version": ">=5.1.23"
 }
