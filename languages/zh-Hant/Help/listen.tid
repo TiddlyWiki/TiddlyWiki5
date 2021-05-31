@@ -19,8 +19,8 @@ listen 命令使用[[命名的命令參數|NamedCommandParameters]]：
 * ''username'' - 可選的基本驗證使用者名稱
 * ''password'' - 可選的基本驗證密碼
 * ''authenticated-user-header'' - 可選的標頭名稱，用於受信任身份驗證
-* ''readers'' - 允許讀取此維基的主體，以逗號分隔的清單
-* ''writers'' - 允許寫入此維基的主體，以逗號分隔的清單
+* ''readers'' - 允許讀取此維基，以逗號分隔的使用者名稱的清單
+* ''writers'' - 允許寫入此維基，以逗號分隔的使用者名稱的清單
 * ''csrf-disable'' - 設定為 "yes" 以停用 CSRF 檢查 (預設為 "no")
 * ''sse-enabled'' - 設定為 "yes" 以啟用伺服器傳送的事件 (預設為 "no")
 * ''root-tiddler'' - 服務的基本條目 (預設為 "$:/core/save/all")
