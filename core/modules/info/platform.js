@@ -22,7 +22,7 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 	if($tw.browser) {
 		// Document location
 		var setLocationProperty = function(name,value) {
-				infoTiddlerFields.push({title: "$:/info/url/" + name, text: value});			
+				infoTiddlerFields.push({title: "$:/info/url/" + name, text: value});
 			},
 			location = document.location;
 		setLocationProperty("full", (location.toString()).split("#")[0]);

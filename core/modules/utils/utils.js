@@ -150,7 +150,7 @@ Convert a string to title case (ie capitalise each initial letter)
 exports.toTitleCase = function(str) {
 	return (str || "").replace(/(^|\s)\S/g, function(c) {return c.toUpperCase();});
 }
-	
+
 /*
 Find the line break preceding a given position in a string
 Returns position immediately after that line break, or the start of the string
@@ -842,7 +842,7 @@ exports.makeDataUri = function(text,type,_canonical_uri) {
 		parts.push(type);
 		parts.push(isBase64 ? ";base64" : "");
 		parts.push(",");
-		parts.push(isBase64 ? text : encodeURIComponent(text));		
+		parts.push(isBase64 ? text : encodeURIComponent(text));
 	}
 	return parts.join("");
 };

@@ -82,7 +82,7 @@ DropZoneWidget.prototype.resetState = function() {
 	this.currentlyEntered = [];
 	this.document.body.removeEventListener("click",this,true);
 	this.document.body.removeEventListener("dragenter",this,true);
-	this.document.body.removeEventListener("dragleave",this,true);	
+	this.document.body.removeEventListener("dragleave",this,true);
 	this.dragInProgress = false;
 };
 
@@ -93,7 +93,7 @@ DropZoneWidget.prototype.enterDrag = function(event) {
 	if(!this.dragInProgress) {
 		this.dragInProgress = true;
 		// If we're entering for the first time we need to apply highlighting
-		$tw.utils.addClass(this.domNodes[0],"tc-dragover");	
+		$tw.utils.addClass(this.domNodes[0],"tc-dragover");
 		this.document.body.addEventListener("click",this,true);
 		this.document.body.addEventListener("dragenter",this,true);
 		this.document.body.addEventListener("dragleave",this,true);

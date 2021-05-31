@@ -73,7 +73,7 @@ DeleteFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 			}
 		});
 		if(hasChanged) {
-			this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,removeFields,this.wiki.getModificationFields()));			
+			this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,removeFields,this.wiki.getModificationFields()));
 		}
 	}
 	return true; // Action was invoked

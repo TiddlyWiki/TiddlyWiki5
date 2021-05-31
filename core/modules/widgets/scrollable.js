@@ -41,7 +41,7 @@ ScrollableWidget.prototype.handleScrollEvent = function(event) {
 	if(event.paramObject && event.paramObject.selector) {
 		this.scrollSelectorIntoView(null,event.paramObject.selector);
 	} else {
-		this.scrollIntoView(event.target);			
+		this.scrollIntoView(event.target);
 	}
 	return false; // Handled event
 };
@@ -97,7 +97,7 @@ ScrollableWidget.prototype.scrollIntoView = function(element) {
 			if(duration <= 0) {
 				t = 1;
 			} else {
-				t = ((Date.now()) - self.startTime) / duration;	
+				t = ((Date.now()) - self.startTime) / duration;
 			}
 			if(t >= 1) {
 				self.cancelScroll();
@@ -118,7 +118,7 @@ ScrollableWidget.prototype.scrollSelectorIntoView = function(baseElement,selecto
 	baseElement = baseElement || document.body;
 	var element = baseElement.querySelector(selector);
 	if(element) {
-		this.scrollIntoView(element,callback);		
+		this.scrollIntoView(element,callback);
 	}
 };
 

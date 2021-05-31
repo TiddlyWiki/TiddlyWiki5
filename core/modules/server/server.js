@@ -42,7 +42,7 @@ function Server(options) {
 			if(options.variables[variable]) {
 				this.variables[variable] = options.variables[variable];
 			}
-		}		
+		}
 	}
 	$tw.utils.extend({},this.defaultVariables,options.variables);
 	// Initialise CSRF
@@ -244,7 +244,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	if(!this.csrfDisable && authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
 		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
 		response.end();
-		return;		
+		return;
 	}
 	// Check whether anonymous access is granted
 	state.allowAnon = this.isAuthorized(authorizationType,null);
@@ -253,7 +253,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 		if(!this.authenticators[0].authenticateRequest(request,response,state)) {
 			// Bail if we failed (the authenticator will have sent the response)
 			return;
-		}		
+		}
 	}
 	// Authorize with the authenticated username
 	if(!this.isAuthorized(authorizationType,state.authenticatedUsername)) {

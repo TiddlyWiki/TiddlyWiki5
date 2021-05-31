@@ -1,28 +1,35 @@
 title: $:/language/EditTemplate/
 
-Body/External/Hint: Este es un tiddler externo, es decir, guardado fuera del archivo TiddlyWiki principal <br>
-Puedes editar sus etiquetas y campos, pero no se puede editar directamente el contenido
+Body/External/Hint: Este es un tiddler externo, es decir, guardado fuera del archivo TiddlyWiki principal <br> Puedes editar sus etiquetas y campos, pero no se puede editar directamente el contenido
 Body/Placeholder: Escribe el texto aquí
-Body/Preview/Type/Output: Output
+Body/Preview/Type/Output: Visible
 Field/Remove/Caption: Eliminar campo
 Field/Remove/Hint: Elimina el campo y su valor
+Field/Dropdown/Caption: lista de campos
+Field/Dropdown/Hint: Mostrar lista de campos
 Fields/Add/Button: Añadir campo
-Fields/Add/Dropdown/System: Campos de sistema
-Fields/Add/Dropdown/User: Campos de usuario
+Fields/Add/Button/Hint: Añade el nuevo campo al tiddler
 Fields/Add/Name/Placeholder: Nombre
 Fields/Add/Prompt: Añadir
 Fields/Add/Value/Placeholder: Valor
-Shadow/OverriddenWarning: Este es un tiddler oculto modificado<br>
-Puedes restituirlo a su versión original eliminando este tiddler
-Shadow/Warning: Este es un tiddler oculto<br>
-Cualquier cambio que hagas reemplazará la versión original
+Fields/Add/Dropdown/System: Campos de sistema
+Fields/Add/Dropdown/User: Campos de usuario
+Shadow/Warning: Este es un tiddler oculto<br> Cualquier cambio que hagas reemplazará la versión original
+Shadow/OverriddenWarning: Este es un tiddler oculto modificado<br> Puedes restituirlo a su versión original eliminando este tiddler
 Tags/Add/Button: Añadir
+Tags/Add/Button/Hint: añadir etiqueta
 Tags/Add/Placeholder: Nombre
+Tags/ClearInput/Caption: vaciar campo
+Tags/ClearInput/Hint: Vacia campo etiqueta
 Tags/Dropdown/Caption: Etiquetas
 Tags/Dropdown/Hint: Muestra la lista de etiquetas existentes
-Type/Delete/Caption: Borrar
-Type/Delete/Hint: Borra el tipo de contenido
+Title/BadCharacterWarning: Advertencia: evita usar cualquiera de los caracteres <<bad-chars>> en los títulos de tiddler
+Title/Exists/Prompt: El tiddler de destino ya existe
+Title/Relink/Prompt: Actualizar ''<$text text=<<fromTitle>>/>'' a ''<$text text=<<toTitle>>/>'' en los campos //tags// y //list// de otros tiddlers
+Title/References/Prompt: Las siguientes referencias a este tiddler no se actualizarán automáticamente:
 Type/Dropdown/Caption: Tipos de contenido
 Type/Dropdown/Hint: Muestra la lista de tipos disponibles
+Type/Delete/Caption: Borrar
+Type/Delete/Hint: Borra el tipo de contenido
 Type/Placeholder: Nuevo tipo
 Type/Prompt: Tipo:

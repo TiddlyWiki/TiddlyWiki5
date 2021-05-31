@@ -1,20 +1,20 @@
 title: $:/language/Help/rendertiddlers
 description: Genera tiddlers coincidentes con un determinado ContentType
 
+(Nota: el comando `--rendertiddlers` está obsoleto en favor del nuevo y más flexible comando` --render`)
+
 Genera un conjunto de tiddlers de un determinado ContentType (por defecto `text/html`) y extensión de archivo (por defecto, `.html`), coincidentes con el argumento de un filtro
 
 ```
---rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
+--rendertiddlers '<filter>' <template> <pathname> [<type>] [<extension>] ["noclean"]
 ```
 
 Por ejemplo:
 
 ```
---rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+--rendertiddlers '[!is[system]]' $:/core/templates/static.tiddler.html ./static text/plain
 ```
 
-Por defecto, la ruta es relativa al subdirectorio `output` del directorio del wiki<br>
-Puede usarse con el comando `--output` para dirigir la salida a un directorio diferente
+Por defecto, la ruta es relativa al subdirectorio `output` del directorio del wiki. Puede usarse con el comando `--output` para dirigir la salida a un directorio diferente
 
-Cualquier archivo existente en el directorio de destino será borrado<br>
-Los directorios no existentes en la ruta del nombre de archivo se crean automáticamente.
+Cualquier archivo existente en el directorio de destino será borrado a no ser que se especifique el comando ''noclean''. Los directorios no existentes en la ruta del nombre de archivo se crean automáticamente.

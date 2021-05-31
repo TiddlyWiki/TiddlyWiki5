@@ -105,7 +105,7 @@ Modal.prototype.display = function(title,options) {
 		parentWidget: $tw.rootWidget
 	});
 	navigatorWidgetNode.render(modalBody,null);
-	
+
 	// Render the title of the message
 	var headerWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		field: "subtitle",
