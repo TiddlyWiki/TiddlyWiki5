@@ -44,7 +44,7 @@ exports.reduce = function(operationSubFunction,options) {
 				++index;
 			});
 			results.clear();
-			results.push(accumulator);	
+			results.push(accumulator);
 		}
 	}
 };

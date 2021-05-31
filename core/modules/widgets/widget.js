@@ -122,7 +122,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 		});
 		// Only substitute variable references if this variable was defined with the \define pragma
 		if(variable.isMacroDefinition) {
-			value = this.substituteVariableReferences(value);			
+			value = this.substituteVariableReferences(value);
 		}
 		return {
 			text: value,

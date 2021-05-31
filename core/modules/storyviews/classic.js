@@ -32,7 +32,7 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 	}
 	if(duration) {
 		// Scroll the node into view
-		this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});	
+		this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});
 	} else {
 		targetElement.scrollIntoView();
 	}
