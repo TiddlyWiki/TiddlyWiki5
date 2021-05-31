@@ -23,7 +23,7 @@ exports.sort = function(operationSubFunction,options) {
 				inputTitles = results.toArray(),
 				sortKeys = [],
 				indexes = new Array(inputTitles.length),
-				compareFn;	
+				compareFn;
 			results.each(function(title) {
 				var key = operationSubFunction(options.wiki.makeTiddlerIterator([title]),{
 					getVariable: function(name) {

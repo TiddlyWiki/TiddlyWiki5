@@ -27,7 +27,7 @@ exports.makeDraggable = function(options) {
 		domNode = options.domNode;
 	// Make the dom node draggable (not necessary for anchor tags)
 	if((domNode.tagName || "").toLowerCase() !== "a") {
-		domNode.setAttribute("draggable","true");		
+		domNode.setAttribute("draggable","true");
 	}
 	// Add event handlers
 	$tw.utils.addEventListeners(domNode,[
@@ -80,7 +80,7 @@ exports.makeDraggable = function(options) {
 				}
 				// Set up the data transfer
 				if(dataTransfer.clearData) {
-					dataTransfer.clearData();					
+					dataTransfer.clearData();
 				}
 				var jsonData = [];
 				if(titles.length > 1) {

@@ -63,7 +63,7 @@ SetWidget.prototype.getValue = function() {
 		if(this.setSubTiddler) {
 			tiddler = this.wiki.getSubTiddler(this.setTiddler,this.setSubTiddler);
 		} else {
-			tiddler = this.wiki.getTiddler(this.setTiddler);			
+			tiddler = this.wiki.getTiddler(this.setTiddler);
 		}
 		if(!tiddler) {
 			value = this.setEmptyValue;
@@ -84,7 +84,7 @@ SetWidget.prototype.getValue = function() {
 			if(select !== undefined) {
 				value = results[select] || "";
 			} else {
-				value = $tw.utils.stringifyList(results);			
+				value = $tw.utils.stringifyList(results);
 			}
 		}
 		if(results.length === 0 && this.setEmptyValue !== undefined) {

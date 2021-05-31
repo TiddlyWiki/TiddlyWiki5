@@ -95,7 +95,7 @@ NavigatorWidget.prototype.saveStoryList = function(storyList) {
 			{title: this.storyTitle},
 			storyTiddler,
 			{list: storyList}
-		));		
+		));
 	}
 };
 
@@ -105,7 +105,7 @@ NavigatorWidget.prototype.removeTitleFromStory = function(storyList,title) {
 		while(p !== -1) {
 			storyList.splice(p,1);
 			p = storyList.indexOf(title);
-		}		
+		}
 	}
 };
 
@@ -122,7 +122,7 @@ NavigatorWidget.prototype.replaceFirstTitleInStory = function(storyList,oldTitle
 			} while(pos !== -1);
 		} else {
 			storyList.splice(0,0,newTitle);
-		}		
+		}
 	}
 };
 

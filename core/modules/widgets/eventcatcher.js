@@ -37,11 +37,11 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 	var tag = this.parseTreeNode.isBlock ? "div" : "span";
 	if(this.elementTag && $tw.config.htmlUnsafeElements.indexOf(this.elementTag) === -1) {
 		tag = this.elementTag;
-	}	
+	}
 	var domNode = this.document.createElement(tag);
 	this.domNode = domNode;
 	// Assign classes
-	this.assignDomNodeClasses();	
+	this.assignDomNodeClasses();
 	// Add our event handler
 	$tw.utils.each(this.types,function(type) {
 		domNode.addEventListener(type,function(event) {
@@ -144,7 +144,7 @@ EventWidget.prototype.execute = function() {
 EventWidget.prototype.assignDomNodeClasses = function() {
 	var classes = this.getAttribute("class","").split(" ");
 	classes.push("tc-eventcatcher");
-	this.domNode.className = classes.join(" ");	
+	this.domNode.className = classes.join(" ");
 };
 
 /*

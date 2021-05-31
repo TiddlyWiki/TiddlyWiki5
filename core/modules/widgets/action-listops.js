@@ -80,7 +80,7 @@ ActionListopsWidget.prototype.invokeAction = function(triggeringWidget,
 			tagfilter = $tw.utils.stringifyList(oldtags) + " " + this.filtertags,
 			newtags = this.wiki.filterTiddlers(tagfilter,this);
 		if($tw.utils.stringifyList(oldtags.sort()) !== $tw.utils.stringifyList(newtags.sort())) {
-			this.wiki.setText(this.target,"tags",undefined,$tw.utils.stringifyList(newtags));			
+			this.wiki.setText(this.target,"tags",undefined,$tw.utils.stringifyList(newtags));
 		}
 	}
 	return true; // Action was invoked

@@ -108,7 +108,7 @@ ViewWidget.prototype.getValue = function(options) {
 	} else {
 		var tiddler;
 		if(this.viewSubtiddler) {
-			tiddler = this.wiki.getSubTiddler(this.viewTitle,this.viewSubtiddler);	
+			tiddler = this.wiki.getSubTiddler(this.viewTitle,this.viewSubtiddler);
 		} else {
 			tiddler = this.wiki.getTiddler(this.viewTitle);
 		}
@@ -121,7 +121,7 @@ ViewWidget.prototype.getValue = function(options) {
 					if(options.asString) {
 						value = tiddler.getFieldString(this.viewField);
 					} else {
-						value = tiddler.fields[this.viewField];				
+						value = tiddler.fields[this.viewField];
 					}
 				}
 			}
@@ -219,7 +219,7 @@ ViewWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return false;	
+		return false;
 	}
 };
 
