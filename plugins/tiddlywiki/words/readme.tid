@@ -1,0 +1,14 @@
+title: $:/plugins/tiddlywiki/words/readme
+
+!! Dictionary
+
+!! Filter Operators
+
+!!! `anagrams` operator
+
+The anagrams operator takes as input a list of words and returns a list of English anagrams of those words. Any input items that are not English words (eg because they contain whitespace or non-Latin characters) will not return any anagrams.
+
+The following special characters are recognised:
+
+* `?` stands for any letter
+

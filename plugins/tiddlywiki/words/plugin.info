@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/words",
+	"name": "Words",
+	"description": "Word lists for games and inspiration",
+	"list": "readme examples"
+}
