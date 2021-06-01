@@ -68,6 +68,10 @@ function SimpleEngine(options) {
 	this.widget.domNodes.push(this.domNode);
 }
 
+SimpleEngine.prototype.getScrollLeft = function() {
+	return this.domNode.scrollLeft;
+};
+
 /*
 Get an object containing the selectionStart and selectionEnd values
 */
