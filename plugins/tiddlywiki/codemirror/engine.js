@@ -167,6 +167,10 @@ function CodeMirrorEngine(options) {
 	}
 }
 
+CodeMirrorEngine.prototype.getScrollLeft = function() {
+	return this.domNode.lastChild.scrollLeft;
+};
+
 /*
 Get an object containing the selectionStart and selectionEnd values
 */
