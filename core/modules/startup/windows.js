@@ -73,10 +73,15 @@ exports.startup = function() {
 		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
+			// Save the scroll position
+			var scrollX = srcWindow.scrollX,
+				scrollY = srcWindow.scrollY;
 			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
 				styleElement.innerHTML = styleContainer.textContent;
 			}
 			widgetNode.refresh(changes);
+			// Restore the scroll position
+			srcWindow.scroll(scrollX,scrollY);
 		};
 		$tw.wiki.addEventListener("change",refreshHandler);
 		// Listen for keyboard shortcuts
