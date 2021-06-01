@@ -120,6 +120,10 @@ FramedEngine.prototype.copyStyles = function() {
 	this.domNode.style["-webkit-text-fill-color"] = "currentcolor";
 };
 
+FramedEngine.prototype.getScrollLeft = function() {
+	return this.domNode.scrollLeft;
+};
+
 /*
 Get an object containing the selectionStart and selectionEnd values
 */
