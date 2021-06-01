@@ -570,8 +570,8 @@ Widget.prototype.invokeActions = function(triggeringWidget,event) {
 	for(var t=0; t<this.children.length; t++) {
 		var child = this.children[t];
 		// Invoke the child if it is an action widget
+		child.refreshSelf();
 		if(child.invokeAction) {
-			child.refreshSelf();
 			if(child.invokeAction(triggeringWidget,event)) {
 				handled = true;
 			}
