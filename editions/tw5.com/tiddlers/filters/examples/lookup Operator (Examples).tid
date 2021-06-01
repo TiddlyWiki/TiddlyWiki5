@@ -1,5 +1,5 @@
 created: 20170907144257037
-modified: 20201224034837935
+modified: 20210601003133643
 title: lookup Operator (Examples)
 type: text/vnd.tiddlywiki
 
@@ -8,3 +8,5 @@ type: text/vnd.tiddlywiki
 <<.operator-example 3 "[all[tiddlers]has[plugin-type]removeprefix[$:/plugins/tiddlywiki/]lookup:missing-description:field[$:/plugins/tiddlywiki/],[description]]" "Retrieve the description of all plugin-tiddlers that are in the `$:/plugins/tiddlywiki/` namespace.">>
 <<.operator-example 4 "OriginalTiddlerPaths +[lookup:missing-index:index[$:/config/],[HelloThere]]" "Lookup the original tiddler path on disk for the [[Hello There]] tiddler.">>
 <<.operator-example 5 "OriginalTiddlerPaths +[lookup:missing-index:index[$:/config/],[MissingTiddler]]" "Lookup the original tiddler path on disk for the [[MissingTiddler]] tiddler.">>
+<<.operator-example 6 "HistoryList MissingHistoryList +[lookup:missing-0:index[$:/]]" "Retrieve index `0` from the `$:/config/HistoryList` and `$:/config/MissingHistoryList`.">>
+<<.operator-example 7 "OriginalTiddlerPaths MissingTiddlerPaths +[lookup:missing-tiddler:index[$:/config/],[$:/key-test]]" "Retrieve index `$:/key-test` from `$:/config/OriginalTiddlerPaths` and `$:/config/MissingTiddlerPaths`.">>
