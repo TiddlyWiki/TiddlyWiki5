@@ -50,7 +50,7 @@ UploadSaver.prototype.save = function(text,method,callback) {
 		url = "http://" + username + ".tiddlyspot.com/store.cgi";
 	}
 	// Assemble the header
-	var boundary = "---------------------------" + "AaB03x";	
+	var boundary = "---------------------------" + "AaB03x";
 	var uploadFormName = "UploadPlugin";
 	var head = [];
 	head.push("--" + boundary + "\r\nContent-disposition: form-data; name=\"UploadPlugin\"\r\n");

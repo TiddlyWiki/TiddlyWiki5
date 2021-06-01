@@ -1173,7 +1173,7 @@ $tw.Wiki = function(options) {
 				var index = tiddlerTitles.indexOf(title);
 				if(index !== -1) {
 					tiddlerTitles.splice(index,1);
-				}				
+				}
 			}
 			// Record the new tiddler state
 			updateDescriptor["new"] = {
@@ -1320,7 +1320,7 @@ $tw.Wiki = function(options) {
 				}
 			} else {
 				if(pluginInfo[title]) {
-					delete pluginInfo[title];					
+					delete pluginInfo[title];
 					results.deletedPlugins.push(title);
 				}
 			}
@@ -1959,7 +1959,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 				}
 			} else {
 				console.log("Warning: a directory in a tiddlywiki.files file does not exist.");
-				console.log("dirPath: " + dirPath);	
+				console.log("dirPath: " + dirPath);
 				console.log("tiddlywiki.files location: " + filepath);
 			}
 		}
@@ -2218,7 +2218,7 @@ $tw.loadTiddlersNode = function() {
 				type = parts[0];
 			if(parts.length  === 3 && ["plugins","themes","languages"].indexOf(type) !== -1) {
 				$tw.loadPlugins([parts[1] + "/" + parts[2]],$tw.config[type + "Path"],$tw.config[type + "EnvVar"]);
-			}			
+			}
 		}
 	});
 	// Load the tiddlers from the wiki directory

@@ -122,7 +122,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 		});
 		// Only substitute variable references if this variable was defined with the \define pragma
 		if(variable.isMacroDefinition) {
-			value = this.substituteVariableReferences(value);			
+			value = this.substituteVariableReferences(value);
 		}
 		return {
 			text: value,
@@ -569,9 +569,10 @@ Widget.prototype.invokeActions = function(triggeringWidget,event) {
 	// For each child widget
 	for(var t=0; t<this.children.length; t++) {
 		var child = this.children[t];
+		// Rerender the child to ensure the attribute values are up to date
+		child.refreshSelf();
 		// Invoke the child if it is an action widget
 		if(child.invokeAction) {
-			child.refreshSelf();
 			if(child.invokeAction(triggeringWidget,event)) {
 				handled = true;
 			}

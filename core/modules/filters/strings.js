@@ -105,13 +105,13 @@ exports.splitregexp = function(source,operator,options) {
 		flags = (suffix.indexOf("m") !== -1 ? "m" : "") + (suffix.indexOf("i") !== -1 ? "i" : ""),
 		regExp;
 	try {
-		regExp = new RegExp(operator.operand || "",flags);		
+		regExp = new RegExp(operator.operand || "",flags);
 	} catch(ex) {
 		return ["RegExp error: " + ex];
 	}
 	source(function(tiddler,title) {
 		Array.prototype.push.apply(result,title.split(regExp));
-	});		
+	});
 	return result;
 };
 
@@ -123,7 +123,7 @@ exports["search-replace"] = function(source,operator,options) {
 		isRegExp = (suffixes[1] && suffixes[1][0] === "regexp") ? true : false,
 		searchTerm,
 		regExp;
-	
+
 	source(function(tiddler,title) {
 		if(title && (operator.operands.length > 1)) {
 			//Escape regexp characters if the operand is not a regular expression
@@ -156,7 +156,7 @@ exports.pad = function(source,operator,options) {
 				var padString = "",
 					padStringLength = targetLength - title.length;
 				while (padStringLength > padString.length) {
-					padString += fill;					
+					padString += fill;
 				}
 				//make sure we do not exceed the specified length
 				padString = padString.slice(0,padStringLength);

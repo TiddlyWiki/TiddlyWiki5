@@ -313,7 +313,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		});
 		return newEvent;
 	};
-	
+
 	EditTextWidget.prototype.dispatchDOMEvent = function(newEvent) {
 		var dispatchNode = this.engine.iframeNode || this.engine.parentNode;
 		return dispatchNode.dispatchEvent(newEvent);
@@ -358,7 +358,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 				event.preventDefault();
 			}
 			event.dataTransfer.dropEffect = "copy";
-			return this.dispatchDOMEvent(this.cloneEvent(event,["dataTransfer"]));			
+			return this.dispatchDOMEvent(this.cloneEvent(event,["dataTransfer"]));
 		}
 		return true;
 	};
@@ -375,13 +375,12 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.handleDragEndEvent = function(event) {
 		this.dispatchDOMEvent(this.cloneEvent(event));
 	};
-	
+
 	EditTextWidget.prototype.handleClickEvent = function(event) {
 		return !this.dispatchDOMEvent(this.cloneEvent(event));
 	};
 
 	return EditTextWidget;
-
 }
 
 exports.editTextWidgetFactory = editTextWidgetFactory;

@@ -1,0 +1,43 @@
+created: 20210427130002905
+modified: 20210525130748774
+tags: KeyboardWidget
+title: Key Codes (Example)
+type: text/vnd.tiddlywiki
+
+\define key-test() $:/key-test
+
+\import [[Keyboard Codes (Macros)]]
+
+\define keys()
+1 2 3 
+shift+1 shift+2 shift+3
+a s d
+f1 f2 f3
+\end
+
+! Key Codes
+
+{{$:/key-test/action}}
+
+! Input Area
+
+Depending on your OS and browser keyboard settings, some combinations may be "eaten" by the OS, or the browser
+
+--> <$keyboard key={{{ [enlist<keys>join[ ]] }}} actions=<<actionKey>> >
+	<$edit-text tiddler=<<key-test>> placeholder="- Click here to try keys -" tag=input />
+</$keyboard> <--
+
+
+!! Keys to be tested
+
+<$list filter="[enlist<keys>]"><kbd><<currentTiddler>></kbd>, </$list>
+
+-----
+
+All usable keys can be found at: [[Keyboard Codes]]
+
+A more advanced example can be found at: [[Key Codes (Example 1)]]
+
+! Code
+
+<<showCode>>

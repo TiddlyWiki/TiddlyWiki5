@@ -69,7 +69,7 @@ Returns a revision ID.
 Retrieves status information from the server. This method is optional.
 
 |!Parameter |!Description |
-|callback |Callback function invoked with parameters `err,isLoggedIn,username,isReadOnly` |
+|callback |Callback function invoked with parameters `err,isLoggedIn,username,isReadOnly,isAnonymous,isPollingDisabled` |
 
 !! `login(username,password,callback)`
 
@@ -128,33 +128,40 @@ The syncer will use the `getUpdatedTiddlers()` method in preference to the `getS
 |!Parameter |!Description |
 |callback |Callback function invoked with parameter `err,tiddlers`, where `tiddlers` is an array of tiddler field objects |
 
-!! `saveTiddler(tiddler,callback)`
+!! `saveTiddler(tiddler,options,callback)`
 
 Saves a tiddler to the server.
 
 |!Parameter |!Description |
 |tiddler |Tiddler to be saved |
+|options |See below |
 |callback |Callback function invoked with parameter `err,adaptorInfo,revision` |
 |tiddlerInfo |The tiddlerInfo maintained by the syncer for this tiddler |
 
-!! `loadTiddler(title,callback)`
+!! `loadTiddler(title,options,callback)`
 
 Loads a tiddler from the server.
 
 |!Parameter |!Description |
 |title |Title of tiddler to be retrieved |
+|options |See below |
 |callback |Callback function invoked with parameter `err,tiddlerFields` |
 
-!! `deleteTiddler(title,callback,options)`
+!! `deleteTiddler(title,options,callback)`
 
 Delete a tiddler from the server.
 
 |!Parameter |!Description |
 |title |Title of tiddler to be deleted |
-|callback |Callback function invoked with parameter `err` |
 |options |See below |
+|callback |Callback function invoked with parameter `err` |
 
-The options parameter contains the following properties:
+!!! Options
+
+<<.from-version "5.2.0">> The signature of syncadaptor functions that accept callbacks has been changed so that the callback is always the last argument. A check for the old order of arguments means that this change is backwards compatible. The new order should be prefered when updating or writing new plugins.
+
+The options parameter may contain the following properties, depending on the method called.
 
 |!Property |!Description |
+|changeCount |The //new// changeCount value for this tiddler |
 |tiddlerInfo |The tiddlerInfo maintained by the syncer for this tiddler |

@@ -123,7 +123,7 @@ ImportVariablesWidget.prototype.refresh = function(changedTiddlers) {
 		this.renderChildren(this.parentDomNode,this.findNextSiblingDomNode());
 		return true;
 	} else {
-		return this.refreshChildren(changedTiddlers);		
+		return this.refreshChildren(changedTiddlers);
 	}
 };
 

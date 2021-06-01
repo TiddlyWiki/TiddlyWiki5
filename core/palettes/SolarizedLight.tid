@@ -4,6 +4,7 @@ type: application/x-tiddler-dictionary
 description: Precision colors for machines and people
 license: MIT, Ethan Schoonover, https://github.com/altercation/solarized/blob/master/LICENSE
 name: SolarizedLight
+color-scheme: light
 
 alert-background: #eee8d5
 alert-border: #586e75

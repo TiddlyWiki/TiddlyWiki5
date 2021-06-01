@@ -111,7 +111,7 @@ exports.deleteTextReference = function(textRef,currTiddlerTitle) {
 exports.addEventListener = function(type,listener) {
 	this.eventListeners = this.eventListeners || {};
 	this.eventListeners[type] = this.eventListeners[type]  || [];
-	this.eventListeners[type].push(listener);	
+	this.eventListeners[type].push(listener);
 };
 
 exports.removeEventListener = function(type,listener) {
@@ -221,9 +221,13 @@ exports.isTemporaryTiddler = function(title) {
 	return title && title.indexOf("$:/temp/") === 0;
 };
 
+exports.isVolatileTiddler = function(title) {
+	return title && title.indexOf("$:/temp/volatile/") === 0;
+};
+
 exports.isImageTiddler = function(title) {
 	var tiddler = this.getTiddler(title);
-	if(tiddler) {		
+	if(tiddler) {
 		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"];
 		return !!contentTypeInfo && contentTypeInfo.flags.indexOf("image") !== -1;
 	} else {
@@ -233,7 +237,7 @@ exports.isImageTiddler = function(title) {
 
 exports.isBinaryTiddler = function(title) {
 	var tiddler = this.getTiddler(title);
-	if(tiddler) {		
+	if(tiddler) {
 		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"];
 		return !!contentTypeInfo && contentTypeInfo.encoding === "base64";
 	} else {
@@ -730,7 +734,7 @@ exports.getTiddlerDataCached = function(titleOrTiddler,defaultData) {
 	var self = this,
 		tiddler = titleOrTiddler;
 	if(!(tiddler instanceof $tw.Tiddler)) {
-		tiddler = this.getTiddler(tiddler);	
+		tiddler = this.getTiddler(tiddler);
 	}
 	if(tiddler) {
 		return this.getCacheForTiddler(tiddler.fields.title,"data",function() {
@@ -751,7 +755,7 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 	var tiddler = titleOrTiddler,
 		data;
 	if(!(tiddler instanceof $tw.Tiddler)) {
-		tiddler = this.getTiddler(tiddler);	
+		tiddler = this.getTiddler(tiddler);
 	}
 	if(tiddler && tiddler.fields.text) {
 		switch(tiddler.fields.type) {
@@ -881,7 +885,7 @@ exports.initParsers = function(moduleType) {
 			if(!$tw.utils.hop($tw.Wiki.parsers,type) && $tw.config.contentTypeInfo[type].encoding === "base64") {
 				$tw.Wiki.parsers[type] = $tw.Wiki.parsers["application/octet-stream"];
 			}
-		});		
+		});
 	}
 };
 
@@ -945,7 +949,7 @@ exports.parseTextReference = function(title,field,index,options) {
 	}
 	if(field === "text" || (!field && !index)) {
 		if(tiddler && tiddler.fields) {
-			return this.parseText(tiddler.fields.type,tiddler.fields.text,options);			
+			return this.parseText(tiddler.fields.type,tiddler.fields.text,options);
 		} else {
 			return null;
 		}
@@ -1153,7 +1157,7 @@ exports.search = function(text,options) {
 		searchTermsRegExps = [new RegExp("(" + anchor + terms.join("\\s+") + ")",flags)];
 	} else if(options.regexp) {
 		try {
-			searchTermsRegExps = [new RegExp("(" + text + ")",flags)];			
+			searchTermsRegExps = [new RegExp("(" + text + ")",flags)];
 		} catch(e) {
 			searchTermsRegExps = null;
 			console.log("Regexp error parsing /(" + text + ")/" + flags + ": ",e);
@@ -1175,7 +1179,7 @@ exports.search = function(text,options) {
 		if($tw.utils.isArray(options.field)) {
 			$tw.utils.each(options.field,function(fieldName) {
 				if(fieldName) {
-					fields.push(fieldName);					
+					fields.push(fieldName);
 				}
 			});
 		} else {
@@ -1444,7 +1448,7 @@ historyTitle: title of history tiddler (defaults to $:/HistoryList)
 */
 exports.addToHistory = function(title,fromPageRect,historyTitle) {
 	var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
-	story.addToHistory(title,fromPageRect);	
+	story.addToHistory(title,fromPageRect);
 	console.log("$tw.wiki.addToHistory() is deprecated since V5.1.23! Use the this.story.addToHistory() from the story-object!")
 };
 
@@ -1505,6 +1509,13 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 
 // Determine whether a plugin by title is dynamically loadable
 exports.doesPluginRequireReload = function(title) {
+	var tiddler = this.getTiddler(title);
+	if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"]) {
+		if(tiddler.fields["plugin-type"] === "import") {
+			// The import plugin never requires reloading
+			return false;
+		}
+	}
 	return this.doesPluginInfoRequireReload(this.getPluginInfo(title) || this.getTiddlerDataCached(title));
 };
 
@@ -1568,4 +1579,3 @@ exports.unslugify = function(slug) {
 };
 
 })();
-

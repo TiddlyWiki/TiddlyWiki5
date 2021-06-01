@@ -8,6 +8,7 @@ Matches: //<small><<resultCount>> coincidencias </small>//
 Matches/All: Cualquier coincidencia
 Matches/Title: En título
 Search: Búsqueda
+Search/TooShort: Texto de búsqueda demasiado corto
 Shadows/Caption: Ocultos
 Shadows/Hint: Busca en los tiddlers ocultos
 Shadows/Matches: //<small><<resultCount>> coincidencias </small>//

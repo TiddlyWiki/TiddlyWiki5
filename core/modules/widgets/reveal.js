@@ -72,7 +72,7 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 		case "belowright":
 			left = this.popup.left + this.popup.width;
 			top = this.popup.top + this.popup.height;
-			break;			
+			break;
 		case "right":
 			left = this.popup.left + this.popup.width;
 			top = this.popup.top;
@@ -84,7 +84,7 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 		case "aboveleft":
 			left = this.popup.left - domNode.offsetWidth;
 			top = this.popup.top - domNode.offsetHeight;
-			break;			
+			break;
 		default: // Below
 			left = this.popup.left;
 			top = this.popup.top + this.popup.height;
@@ -234,7 +234,7 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 		}
 		if(changedAttributes["class"]) {
 			this.assignDomNodeClasses();
-		}		
+		}
 		return this.refreshChildren(changedTiddlers);
 	}
 };

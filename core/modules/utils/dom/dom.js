@@ -22,6 +22,10 @@ exports.domContains = function(a,b) {
 		!!(a.compareDocumentPosition(b) & 16);
 };
 
+exports.domMatchesSelector = function(node,selector) {
+	return node.matches ? node.matches(selector) : node.msMatchesSelector(selector);
+};
+
 exports.removeChildren = function(node) {
 	while(node.hasChildNodes()) {
 		node.removeChild(node.firstChild);
@@ -65,7 +69,7 @@ Get the first parent element that has scrollbars or use the body as fallback.
 */
 exports.getScrollContainer = function(el) {
 	var doc = el.ownerDocument;
-	while(el.parentNode) {	
+	while(el.parentNode) {
 		el = el.parentNode;
 		if(el.scrollTop) {
 			return el;
@@ -204,7 +208,7 @@ exports.addEventListeners = function(domNode,events) {
 			if(eventInfo.handlerMethod) {
 				handler = function(event) {
 					eventInfo.handlerObject[eventInfo.handlerMethod].call(eventInfo.handlerObject,event);
-				};	
+				};
 			} else {
 				handler = eventInfo.handlerObject;
 			}
