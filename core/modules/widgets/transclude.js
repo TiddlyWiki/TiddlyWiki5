@@ -60,6 +60,8 @@ TranscludeWidget.prototype.execute = function() {
 							subTiddler: this.transcludeSubTiddler
 						}),
 		parseTreeNodes = parser ? parser.tree : this.parseTreeNode.children;
+	this.sourceText = parser ? parser.source : null;
+	this.parserType = parser? parser.type : null;
 	// Set context variables for recursion detection
 	var recursionMarker = this.makeRecursionMarker();
 	if(this.recursionMarker === "yes") {
@@ -98,12 +100,60 @@ TranscludeWidget.prototype.makeRecursionMarker = function() {
 	return output.join("");
 };
 
+TranscludeWidget.prototype.parserNeedsRefresh = function() {
+	var parserInfo = this.getParserInfo();
+	return (parserInfo.sourceText === undefined || parserInfo.sourceText !== this.sourceText || parserInfo.parserType !== this.parserType)
+};
+
+/*
+Returns the same source and parserType for the widget to be transcluded as wiki.parseTextReference
+*/
+TranscludeWidget.prototype.getParserInfo = function() {
+	var tiddler,
+		field = this.transcludeField,
+		parserInfo = {
+			sourceText : null,
+			parserType : "text/vnd.tiddlywiki"
+		};
+	// Always trigger a refresh for parsers that don't have a source attribute by returning undefined for sourceText
+	if(this.sourceText === undefined) {
+		parserInfo.sourceText = undefined;
+		parserInfo.parserType = undefined;
+		return parserInfo;
+	}
+	if(this.transcludeSubTiddler) {
+		tiddler = this.wiki.getSubTiddler(this.transcludeTitle,this.transcludeSubTiddler);
+	} else {
+		tiddler = this.wiki.getTiddler(this.transcludeTitle);
+	}
+	if(field === "text" || (!field && !this.transcludeIndex)) {
+		if(tiddler && tiddler.fields) {
+			parserInfo.sourceText = tiddler.fields.text || "";
+			if(tiddler.fields.type) {
+				parserInfo.parserType = tiddler.fields.type;
+			}
+		}
+	} else if(field) {
+		if(field === "title") {
+			parserInfo.sourceText = this.transcludeTitle;
+		} else if(tiddler && tiddler.fields) {
+			parserInfo.sourceText = tiddler.fields[field] ? tiddler.fields[field].toString() : null;
+		}
+	} else if(this.transcludeIndex) {
+		parserInfo.sourceText = this.wiki.extractTiddlerDataItem(tiddler,this.transcludeIndex,null);
+	}
+	if(parserInfo.sourceText === null) {
+		parserInfo.parserType = null;
+	}
+	return parserInfo;
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 TranscludeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedTiddlers[this.transcludeTitle]) {
+	if(($tw.utils.count(changedAttributes) > 0) || (changedTiddlers[this.transcludeTitle] && this.parserNeedsRefresh())) {
 		this.refreshSelf();
 		return true;
 	} else {
