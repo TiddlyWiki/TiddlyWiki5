@@ -937,41 +937,57 @@ exports.parseTiddler = function(title,options) {
 };
 
 exports.parseTextReference = function(title,field,index,options) {
-	var tiddler,text;
-	if(options.subTiddler) {
-		tiddler = this.getSubTiddler(title,options.subTiddler);
-	} else {
+	var tiddler,
+		text,
+		parserInfo;
+	if(!options.subTiddler) {
 		tiddler = this.getTiddler(title);
 		if(field === "text" || (!field && !index)) {
 			this.getTiddlerText(title); // Force the tiddler to be lazily loaded
 			return this.parseTiddler(title,options);
 		}
+	} 
+	parserInfo = this.getTextReferenceParserInfo(title,field,index,options);
+	if(parserInfo.sourceText !== null) {
+		return this.parseText(parserInfo.parserType,parserInfo.sourceText,options);
+	} else {
+		return null;
+	}
+};
+
+exports.getTextReferenceParserInfo = function(title,field,index,options) {
+	var tiddler,
+		parserInfo = {
+			sourceText : null,
+			parserType : "text/vnd.tiddlywiki"
+		};
+	if(options.subTiddler) {
+		tiddler = this.getSubTiddler(title,options.subTiddler);
+	} else {
+		tiddler = this.getTiddler(title);
 	}
 	if(field === "text" || (!field && !index)) {
 		if(tiddler && tiddler.fields) {
-			return this.parseText(tiddler.fields.type,tiddler.fields.text,options);
-		} else {
-			return null;
+			parserInfo.sourceText = tiddler.fields.text || "";
+			if(tiddler.fields.type) {
+				parserInfo.parserType = tiddler.fields.type;
+			}
 		}
 	} else if(field) {
 		if(field === "title") {
-			text = title;
-		} else {
-			if(!tiddler || !tiddler.hasField(field)) {
-				return null;
-			}
-			text = tiddler.fields[field];
+			parserInfo.sourceText = title;
+		} else if(tiddler && tiddler.fields) {
+			parserInfo.sourceText = tiddler.fields[field] ? tiddler.fields[field].toString() : null;
 		}
-		return this.parseText("text/vnd.tiddlywiki",text.toString(),options);
 	} else if(index) {
 		this.getTiddlerText(title); // Force the tiddler to be lazily loaded
-		text = this.extractTiddlerDataItem(tiddler,index,undefined);
-		if(text === undefined) {
-			return null;
-		}
-		return this.parseText("text/vnd.tiddlywiki",text,options);
+		parserInfo.sourceText = this.extractTiddlerDataItem(tiddler,index,null);
 	}
-};
+	if(parserInfo.sourceText === null) {
+		parserInfo.parserType = null;
+	}
+	return parserInfo;
+}
 
 /*
 Make a widget tree for a parse tree
