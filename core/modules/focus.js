@@ -15,6 +15,7 @@ Focus handling utilities
 function FocusManager(options) {
 	var options = options || "";
 	this.interceptFocusPreservation = false;
+	this.focusWidgetAnyway = false;
 }
 
 FocusManager.prototype.findChildDomNode = function(startingDomNode,domNode) {
@@ -141,7 +142,7 @@ FocusManager.prototype.findParentWidgetWithDomNodes = function(widget) {
 };
 
 FocusManager.prototype.focusWidget = function(widget,footprint,widgetInfo) {
-	if(!this.interceptFocusPreservation) {
+	if(!this.interceptFocusPreservation || this.focusWidgetAnyway === true) {
 		// Find the DomNode corresponding to the widget
 		var counter = 0,
 			savedDomNode,
@@ -186,6 +187,7 @@ FocusManager.prototype.focusWidget = function(widget,footprint,widgetInfo) {
 		if(savedDomNode && savedDomNode.focus) {
 			savedDomNode.focus({preventScroll: true});
 		}
+		this.focusWidgetAnyway = false;
 	} else {
 		this.interceptFocusPreservation = false;
 	}
