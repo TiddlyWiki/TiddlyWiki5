@@ -936,6 +936,25 @@ exports.parseTiddler = function(title,options) {
 		}) : null;
 };
 
+exports.parseTextReference = function(title,field,index,options) {
+	var tiddler,
+		text,
+		parserInfo;
+	if(!options.subTiddler) {
+		tiddler = this.getTiddler(title);
+		if(field === "text" || (!field && !index)) {
+			this.getTiddlerText(title); // Force the tiddler to be lazily loaded
+			return this.parseTiddler(title,options);
+		}
+	} 
+	parserInfo = this.getTextReferenceParserInfo(title,field,index,options);
+	if(parserInfo.sourceText !== null) {
+		return this.parseText(parserInfo.parserType,parserInfo.sourceText,options);
+	} else {
+		return null;
+	}
+};
+
 exports.getTextReferenceParserInfo = function(title,field,index,options) {
 	var tiddler,
 		parserInfo = {
@@ -969,25 +988,6 @@ exports.getTextReferenceParserInfo = function(title,field,index,options) {
 	}
 	return parserInfo;
 }
-
-exports.parseTextReference = function(title,field,index,options) {
-	var tiddler,
-		text,
-		parserInfo;
-	if(!options.subTiddler) {
-		tiddler = this.getTiddler(title);
-		if(field === "text" || (!field && !index)) {
-			this.getTiddlerText(title); // Force the tiddler to be lazily loaded
-			return this.parseTiddler(title,options);
-		}
-	} 
-	parserInfo = this.getTextReferenceParserInfo(title,field,index,options);
-	if(parserInfo.sourceText !== null) {
-		return this.parseText(parserInfo.parserType,parserInfo.sourceText,options);
-	} else {
-		return null;
-	}
-};
 
 /*
 Make a widget tree for a parse tree
