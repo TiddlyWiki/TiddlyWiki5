@@ -936,40 +936,56 @@ exports.parseTiddler = function(title,options) {
 		}) : null;
 };
 
-exports.parseTextReference = function(title,field,index,options) {
-	var tiddler,text;
+exports.getTextReferenceParserInfo = function(title,field,index,options) {
+	var tiddler,
+		parserInfo = {
+			sourceText : null,
+			parserType : "text/vnd.tiddlywiki"
+		};
 	if(options.subTiddler) {
 		tiddler = this.getSubTiddler(title,options.subTiddler);
 	} else {
+		tiddler = this.getTiddler(title);
+	}
+	if(field === "text" || (!field && !index)) {
+		if(tiddler && tiddler.fields) {
+			parserInfo.sourceText = tiddler.fields.text || "";
+			if(tiddler.fields.type) {
+				parserInfo.parserType = tiddler.fields.type;
+			}
+		}
+	} else if(field) {
+		if(field === "title") {
+			parserInfo.sourceText = title;
+		} else if(tiddler && tiddler.fields) {
+			parserInfo.sourceText = tiddler.fields[field] ? tiddler.fields[field].toString() : null;
+		}
+	} else if(index) {
+		this.getTiddlerText(title); // Force the tiddler to be lazily loaded
+		parserInfo.sourceText = this.extractTiddlerDataItem(tiddler,index,null);
+	}
+	if(parserInfo.sourceText === null) {
+		parserInfo.parserType = null;
+	}
+	return parserInfo;
+}
+
+exports.parseTextReference = function(title,field,index,options) {
+	var tiddler,
+		text,
+		parserInfo;
+	if(!options.subTiddler) {
 		tiddler = this.getTiddler(title);
 		if(field === "text" || (!field && !index)) {
 			this.getTiddlerText(title); // Force the tiddler to be lazily loaded
 			return this.parseTiddler(title,options);
 		}
-	}
-	if(field === "text" || (!field && !index)) {
-		if(tiddler && tiddler.fields) {
-			return this.parseText(tiddler.fields.type,tiddler.fields.text,options);
-		} else {
-			return null;
-		}
-	} else if(field) {
-		if(field === "title") {
-			text = title;
-		} else {
-			if(!tiddler || !tiddler.hasField(field)) {
-				return null;
-			}
-			text = tiddler.fields[field];
-		}
-		return this.parseText("text/vnd.tiddlywiki",text.toString(),options);
-	} else if(index) {
-		this.getTiddlerText(title); // Force the tiddler to be lazily loaded
-		text = this.extractTiddlerDataItem(tiddler,index,undefined);
-		if(text === undefined) {
-			return null;
-		}
-		return this.parseText("text/vnd.tiddlywiki",text,options);
+	} 
+	parserInfo = this.getTextReferenceParserInfo(title,field,index,options);
+	if(parserInfo.sourceText !== null) {
+		return this.parseText(parserInfo.parserType,parserInfo.sourceText,options);
+	} else {
+		return null;
 	}
 };
 

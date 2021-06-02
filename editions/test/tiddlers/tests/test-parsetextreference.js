@@ -3,7 +3,7 @@ title: test-parsetextreference.js
 type: application/javascript
 tags: [[$:/tags/test-spec]]
 
-Tests for equivalency between source attribute in parser returned from wiki.parseTextReference and TranscludeWidget.prototype.getParserInfo
+Tests for source attribute in parser returned from wiki.parseTextReference
 
 \*/
 (function(){
@@ -116,55 +116,6 @@ describe("Wiki.parseTextReference tests", function() {
 		expect(parseAndGetSource("$:/ShadowPlugin","text",null,"MyMissingTiddler")).toEqual(null);
 		// Plain text tiddler
 		expect(parseAndGetSource("TiddlerNine")).toEqual(undefined);
-	});
-
-	var widget = require("$:/core/modules/widgets/widget.js");
-	
-	function createWidgetNode(parseTreeNode,wiki) {
-		return new widget.widget(parseTreeNode,{
-			wiki: wiki,
-			document: $tw.fakeDocument
-		});
-	}
-
-	function renderWidgetNode(widgetNode) {
-		$tw.fakeDocument.setSequenceNumber(0);
-		var wrapper = $tw.fakeDocument.createElement("div");
-		widgetNode.render(wrapper,null);
-		return wrapper;
-	}
-
-	function createTranscludeWidget(tiddler,field,index,subTiddler) {
-		var parseTreeNode = {type: "widget", children: [
-								{type: "transclude", attributes: {
-										"tiddler": {type: "string", value: tiddler},
-										"field": {type: "string", value: field},
-										"index": {type: "string", value: index},
-										"subtiddler": {type: "string", value: subTiddler}
-									}}
-							]};
-		var widgetNode = createWidgetNode(parseTreeNode,wiki);
-		var wrapper = renderWidgetNode(widgetNode);
-		return widgetNode.children[0];		
-	}
-
-	// Compare source attribute from wiki.parseTextReference to source attribute from TranscludeWidget.getParserInfo()
-	function compareSource(tiddler,field,index,subTiddler) {
-		expect(createTranscludeWidget(tiddler,field,index,subTiddler).getParserInfo().sourceText).toEqual(parseAndGetSource(tiddler,field,index,subTiddler));
-	}
-	
-	it("should return same source from wiki.parseTextReference and TranscludeWidget.getParserInfo()",function(){
-		compareSource("TiddlerOne"),
-		compareSource("TiddlerOne","text");
-		compareSource("$:/TiddlerTwo");
-		compareSource("TiddlerOne","authors");
-		compareSource("MissingTiddler");
-		compareSource("MissingTiddler","missing-field");
-		compareSource("Tiddler One","missing-field");
-		compareSource("Tiddler Three",null,"oct");
-		compareSource("TiddlerFour");
-		compareSource("$:/ShadowPlugin","text",null,"Tiddler8");
-		compareSource("TiddlerNine");
 	});
 
 });
