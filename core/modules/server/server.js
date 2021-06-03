@@ -327,14 +327,16 @@ Server.prototype.listen = function(port,host,prefix) {
 	}
 	// Warn if required plugins are missing
 	var missing = [];
-	for (let index = 0; index < this.variables["required-plugins"].length; index++) {
-		const r = this.variables["required-plugins"][index];
-		if (!this.wiki.getTiddler("$:/plugins/"+r)) {
-			missing.push(r);
+	for (var index=0; index<this.variables["required-plugins"].length; index++) {
+		var name = this.variables["required-plugins"][index];
+		if (!this.wiki.getTiddler("$:/plugins/"+name)) {
+			missing.push(name);
 		}
 	}
 	if(missing.length > 0) {
-		var error = "Error: Plugin(s) required for client-server operation are missing from the command line or the tiddlywiki.info file: \"" + missing.join("\", \"") + "\"";
+		var error = "Error: Plugin(s) required for client-server operation are missing.\n"+
+			"Include the following plugins from the command line or in the tiddlywiki.info file:\n"+
+			"\""+ missing.join("\", \"")+"\"";
 		$tw.utils.error(error);
 	}
 	// Create the server
