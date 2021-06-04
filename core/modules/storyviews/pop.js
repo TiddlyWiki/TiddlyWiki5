@@ -35,7 +35,7 @@ PopStoryView.prototype.insert = function(widget) {
 	var targetElement = widget.findFirstDomNode(),
 		duration = $tw.utils.getAnimationDuration();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
-	if(!(targetElement instanceof Element)) {
+	if(targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
 	// Reset once the transition is over
@@ -77,7 +77,7 @@ PopStoryView.prototype.remove = function(widget) {
 			}
 		};
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
-	if(!(targetElement instanceof Element)) {
+	if(targetElement.nodeType === Node.TEXT_NODE) {
 		removeElement();
 		return;
 	}
