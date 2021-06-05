@@ -111,7 +111,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 KeyboardWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.message || changedAttributes.param || changedAttributes.key || changedAttributes["class"] || changedAttributes.tag) {
+	if(changedAttributes.message || changedAttributes.param || changedAttributes.key || changedAttributes.tag) {
 		this.refreshSelf();
 		return true;
 	} else if(changedAttributes["class"]) {
