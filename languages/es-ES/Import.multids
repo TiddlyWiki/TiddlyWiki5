@@ -1,15 +1,33 @@
 title: $:/language/Import/
 
-Imported/Hint:  Se importaron los siguientes tiddlers
+Editor/Import/Heading: Importar imágenes e insertarlas en el editor.
+Imported/Hint: Se importaron los siguientes tiddlers
 Listing/Cancel/Caption: Cancelar
 Listing/Hint: Tiddlers listos para importar
 Listing/Import/Caption: Importar
 Listing/Select/Caption: Seleccionar
 Listing/Status/Caption: Estado
 Listing/Title/Caption: Título
-Upgrader/Plugins/Suppressed/Incompatible: Plugin bloqueado, incompatible u obsoleto
-Upgrader/Plugins/Suppressed/Version: Plugin bloqueado debido a que <<incoming>> es más antiguo que el <<existing>>
-Upgrader/Plugins/Upgraded: Plugin actualizado de <<incoming>> a <<upgraded>>
+Listing/Preview: Vista previa:
+Listing/Preview/Text: Texto
+Listing/Preview/TextRaw: Texto (crudo)
+Listing/Preview/Fields: Campos
+Listing/Preview/Diff: Diff
+Listing/Preview/DiffFields: Diff (Campos)
+Listing/Rename/Tooltip: Renombra tiddler antes de importar
+Listing/Rename/Prompt: Renombrar a:
+Listing/Rename/ConfirmRename: Renombrar tiddler
+Listing/Rename/CancelRename: Cancelar
+Listing/Rename/OverwriteWarning: Ya existe un tiddler con este título.
+Upgrader/Plugins/Suppressed/Incompatible: Complemento bloqueado, incompatible u obsoleto
+Upgrader/Plugins/Suppressed/Version: Complemento bloqueado debido a que <<incoming>> es más antiguo que el <<existing>>
+Upgrader/Plugins/Upgraded: Complemento actualizado de <<incoming>> a <<upgraded>>
 Upgrader/State/Suppressed: Tiddler temporal bloqueado
+Upgrader/System/Disabled: Tiddler del sistema deshabilitado.
 Upgrader/System/Suppressed: Tiddler de sistema bloqueado
+Upgrader/System/Warning: tiddler del sistema principal.
+Upgrader/System/Alert: Estás a punto de importar un tiddler que sobrescribirá un tiddler del sistema principal. Esto no se recomienda ya que puede hacer que el sistema sea inestable.
 Upgrader/ThemeTweaks/Created: Ajuste de tema migrado de <$text text=<<from>>/>
+Upgrader/Tiddler/Disabled: Tiddler deshabilitado.
+Upgrader/Tiddler/Selected: Usuario seleccionado.
+Upgrader/Tiddler/Unselected: Tiddler no seleccionado.

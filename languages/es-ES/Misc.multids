@@ -1,49 +1,96 @@
 title: $:/language/
 
-AboveStory/ClassicPlugin/Warning: Parece que quieres cargar un plugin diseñado para ~TiddlyWiki Classic. <br>
-Ten en cuenta que [[estos plugins no funcionan en TiddlyWiki version 5.x.x|https://tiddlywiki.com/#TiddlyWikiClassic]]<br>
-Plugins de ~TiddlyWiki Classic detectados
+AboveStory/ClassicPlugin/Warning: Parece que quieres cargar un plugin diseñado para ~TiddlyWiki Classic. <br> Ten en cuenta que [[estos plugins no funcionan en TiddlyWiki version 5.x.x|https://tiddlywiki.com/#TiddlyWikiClassic]]<br> Plugins de ~TiddlyWiki Classic detectados
 BinaryWarning/Prompt: Este tiddler contiene datos binarios
-ClassicWarning/Hint: Este tiddler está escrito en formato de texto de una versión de TiddlyWiki Classic que no es totalmente compatible con la versión 5 de TiddlyWiki<br>
-Visite https://tiddlywiki.com/static/Upgrading.html para más información
+ClassicWarning/Hint: Este tiddler está escrito en formato de texto de una versión de TiddlyWiki Classic que no es totalmente compatible con la versión 5 de TiddlyWiki<br> Visite https://tiddlywiki.com/static/Upgrading.html para más información
 ClassicWarning/Upgrade/Caption: Actualizar
 CloseAll/Button: Cerrar todo
 ColourPicker/Recent: Recientes:
 ConfirmCancelTiddler: ¿Deseas descartar los cambios efectuados en "<$text text=<<title>>/>"?
 ConfirmDeleteTiddler: ¿Deseas borrar "<$text text=<<title>>/>"?
-ConfirmEditShadowTiddler: Estás a punto de editar un tiddler oculto<br>
-Todo cambio en él afectará al sistema por defecto y pondrá en riesgo futuras actualizaciones del sistema<br>
-¿Estás seguro de querer editar "<$text text=<<title>>/>"?
-ConfirmOverwriteTiddler: ¿Deseas sobreescribir "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: ¿Deseas sobrescribir "<$text text=<<title>>/>"?
+ConfirmEditShadowTiddler: Estás a punto de editar un tiddler oculto<br> Todo cambio en él afectará al sistema por defecto y pondrá en riesgo futuras actualizaciones del sistema<br> ¿Estás seguro de querer editar "<$text text=<<title>>/>"?
+ConfirmAction: ¿Desea continuar?
 Count: Número
 DefaultNewTiddlerTitle: Nuevo Tiddler
+Diffs/CountMessage: <<diff-count>> diferencias
 DropMessage: Suéltalo aquí o pulsa ''ESC'' para cancelar
 Encryption/Cancel: Cancelar
-Encryption/ConfirmClearPassword: ¿Deseas borrar la contraseña? <br>
-Revocarás el cifrado que se aplica para guardar este wiki
-Encryption/Password: Contraseña
-Encryption/PasswordNoMatch: Las contraseñas no coinciden
+Encryption/ConfirmClearPassword: ¿Deseas borrar la contraseña? <br> Revocarás el cifrado que se aplica para guardar este wiki
 Encryption/PromptSetPassword: Especifica nueva contraseña para este TiddlyWiki
-Encryption/RepeatPassword: Repite la contraseña
-Encryption/SetPassword: Establecer contraseña
 Encryption/Username: Usuario
-InternalJavaScriptError/Hint: Tenemos un problema. Se recomienda que reinicies TiddlyWiki
+Encryption/Password: Contraseña
+Encryption/RepeatPassword: Repite la contraseña
+Encryption/PasswordNoMatch: Las contraseñas no coinciden
+Encryption/SetPassword: Establecer contraseña
+Error/Caption: Error
+Error/Filter: Error de filtro
+Error/FilterSyntax: Error de sintaxis en la expresión de filtro
+Error/FilterRunPrefix: Error en Filtro: Prefijo desconocido para la ejecución del filtro
+Error/IsFilterOperator: Error en Filtro: Operando desconocido para el operador de filtro 'is'
+Error/FormatFilterOperator: Error en Filtro: Sufijo desconocido para el operador de filtro 'format'
+Error/LoadingPluginLibrary: Error al cargar la biblioteca de complementos
+Error/NetworkErrorAlert: `<h2>''Error de Red''</h2>Parece que se perdió la conexión con el servidor. Esto puede indicar un problema con tu conexión de red. Intenta restaurar la conectividad de red antes de continuar.<br><br>''Cualquier cambio no guardado se sincronizará automáticamente cuando se restaure la conectividad''.`
+Error/PutEditConflict: Archivo cambiado en el servidor
+Error/PutForbidden: Permiso denegado
+Error/PutUnauthorized: Se requiere autenticación
+Error/RecursiveTransclusion: Error de transclusión recursiva en el widget de transclusión
+Error/RetrievingSkinny: Error al recuperar la lista resumida de tiddlers
+Error/SavingToTWEdit: Error al guardar en TWEdit
+Error/WhileSaving: Error al guardar
+Error/XMLHttpRequest: Código de error XMLHttpRequest
+InternalJavaScriptError/Hint: Hay un problema. Se recomienda que reinicies TiddlyWiki
 InternalJavaScriptError/Title: Error interno de JavaScript
-InvalidFieldName: Caracteres ilegales en el campo "<$text text=<<fieldName>>/>"<br>
-Los campos sólo pueden contener letras en minúscula, dígitos y los caracteres guión bajo (`_`), guión corto (`-`) y punto (`.`)
-LazyLoadingWarning: <p>Cargando texto externo desde ''<$text text={{!!_canonical_uri}}/>''</p><p>Si este mensaje no desaparece, puede que se deba a que estás usando un navegador que con esta configuración no permite texto externo</br>
-Vea https://tiddlywiki.com/#ExternalText</p>
+InvalidFieldName: Caracteres ilegales en el campo "<$text text=<<fieldName>>/>"<br> Los campos sólo pueden contener letras en minúscula, dígitos y los caracteres guión bajo (`_`), guión corto (`-`) y punto (`.`)
+LayoutSwitcher/Description: Abre el selector de diseño
+LazyLoadingWarning: <p>Cargando texto externo desde ''<$text text={{!!_canonical_uri}}/>''</p><p>Si este mensaje no desaparece, puede que se deba a que estás usando un navegador que con esta configuración no permite texto externo</br> Vea https://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: Inicia sesión en TiddlySpace
+Manager/Controls/FilterByTag/None: (ninguno)
+Manager/Controls/FilterByTag/Prompt: Filtrar por etiqueta:
+Manager/Controls/Order/Prompt: Orden inverso
+Manager/Controls/Search/Placeholder: Buscar
+Manager/Controls/Search/Prompt: Buscar:
+Manager/Controls/Show/Option/Tags: etiquetas
+Manager/Controls/Show/Option/Tiddlers: tiddlers
+Manager/Controls/Show/Prompt: Mostrar:
+Manager/Controls/Sort/Prompt: Ordenar por:
+Manager/Item/Colour: Color
+Manager/Item/Fields: Campos
+Manager/Item/Icon/None: (ninguno)
+Manager/Item/Icon: Icono
+Manager/Item/RawText: Texto sin procesar
+Manager/Item/Tags: Etiquetas
+Manager/Item/Tools: Herramientas
+Manager/Item/WikifiedText: Texto Wikified
 MissingTiddler/Hint: El tiddler "<$text text=<<currentTiddler>>/>" no existe - haz clic en {{||$:/core/ui/Buttons/edit}} para crearlo
-OfficialPluginLibrary: Librería de plugins oficiales de ~TiddlyWiki
-OfficialPluginLibrary/Hint: Librería de plugins oficiales de ~TiddlyWiki en tiddlywiki.com<br>
-Plugins, temas y paquetes de idioma que mantiene el equipo de TiddlyWiki
+No: No
+OfficialPluginLibrary: Librería de complementos oficiales de ~TiddlyWiki
+OfficialPluginLibrary/Hint: Librería de complementos oficiales de ~TiddlyWiki en tiddlywiki.com<br> Plugins, temas y paquetes de idioma que mantiene el equipo de TiddlyWiki
+PageTemplate/Description: la disposición por defecto de ~TiddlyWiki
+PageTemplate/Name: ~PageTemplate por defecto
 PluginReloadWarning: Guarda {{$:/core/ui/Buttons/save-wiki}} y recarga {{$:/core/ui/Buttons/refresh}} para que los cambios surtan efecto.
 RecentChanges/DateFormat: DD MMM YYYY
+Shortcuts/Input/AdvancedSearch/Hint: Abre el panel ~AdvancedSearch desde el campo de búsqueda de la barra lateral
+Shortcuts/Input/Accept/Hint: Acepta el elemento seleccionado
+Shortcuts/Input/AcceptVariant/Hint: Acepta el elemento seleccionado (variante)
+Shortcuts/Input/Cancel/Hint: Vacía el campo de entrada
+Shortcuts/Input/Down/Hint: Selecciona el siguiente elemento
+Shortcuts/Input/Tab-Left/Hint: Selecciona la Pestaña anterior
+Shortcuts/Input/Tab-Right/Hint: Selecciona la siguiente Pestaña
+Shortcuts/Input/Up/Hint: Selecciona el elemento anterior
+Shortcuts/SidebarLayout/Hint: Cambiar disposición barra lateral
+Switcher/Subtitle/theme: Cambiar tema
+Switcher/Subtitle/layout: Cambiar disposición
+Switcher/Subtitle/language: Cambiar idioma
+Switcher/Subtitle/palette: Cambiar paleta
 SystemTiddler/Tooltip: Este es un tiddler de sistema
+SystemTiddlers/Include/Prompt: Incluir tiddlers del sistema
 TagManager/Colour/Heading: Color
 TagManager/Count/Heading: Número
 TagManager/Icon/Heading: Icono
+TagManager/Icons/None: Ninguno
 TagManager/Info/Heading: Información
 TagManager/Tag/Heading: Etiqueta
 Tiddler/DateFormat: DD MMM YYYY a las hh:0mm
 UnsavedChangesWarning: Tienes cambios sin guardar en TiddlyWiki
+Yes: Yes

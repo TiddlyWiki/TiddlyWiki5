@@ -22,7 +22,7 @@ This widget allows multiple variables to be set in one go:
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var VarsWidget = function(parseTreeNode,options) {
-	// Initialise	
+	// Initialise
 	this.initialise(parseTreeNode,options);
 };
 

@@ -23,18 +23,20 @@ exports.sort = function(operationSubFunction,options) {
 				inputTitles = results.toArray(),
 				sortKeys = [],
 				indexes = new Array(inputTitles.length),
-				compareFn;	
+				compareFn;
 			results.each(function(title) {
 				var key = operationSubFunction(options.wiki.makeTiddlerIterator([title]),{
-						getVariable: function(name) {
-							switch(name) {
-								case "currentTiddler":
-									return "" + title;
-								default:
-									return widget.getVariable(name);
-							}
+					getVariable: function(name) {
+						switch(name) {
+							case "currentTiddler":
+								return "" + title;
+							case "..currentTiddler":
+								return widget.getVariable("currentTiddler");
+							default:
+								return widget.getVariable(name);
 						}
-					});
+					}
+				});
 				sortKeys.push(key[0] || "");
 			});
 			results.clear();

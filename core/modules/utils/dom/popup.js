@@ -145,7 +145,7 @@ Popup.prototype.show = function(options) {
 	}
 	// Add the click handler if we have any popups
 	if(this.popups.length > 0) {
-		this.rootElement.addEventListener("click",this,true);		
+		this.rootElement.addEventListener("click",this,true);
 	}
 };
 

@@ -3,6 +3,7 @@ name: Vanilla
 description: Pale and unobtrusive
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
+color-scheme: light
 
 alert-background: #ffe476
 alert-border: #b99e2f

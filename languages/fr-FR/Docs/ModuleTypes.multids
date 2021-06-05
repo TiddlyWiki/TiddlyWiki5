@@ -23,7 +23,8 @@ tiddlerfield: Définit le comportement d'un champ de tiddler.
 tiddlermethod: Ajoute des méthodes au prototype `$tw.Tiddler`.
 upgrader: Applique une procédure de mise à jour aux tiddlers lors de l'opération de mise à jour/importation.
 utils: Ajoute des méthodes dans `$tw.utils`.
-utils-node: Ajoute des méthodes spécifiques à Node.js dans `$tw.utils`.
+utils-browser: Ajoute des méthodes spécifiques au mode browser dans `$tw.utils`.
+utils-node: Ajoute des méthodes spécifiques au mode Node.js dans `$tw.utils`.
 widget: Les widgets encapsulent les méthodes de rendu et de rafraichissement du DOM.
 wikimethod: Ajoute des méthodes à `$tw.Wiki`.
 wikirule: Règles d'analyse pour le parseur WikiText principal.

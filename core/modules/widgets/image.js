@@ -86,7 +86,7 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 					default:
 						src = _canonical_uri;
 						break;
-				}	
+				}
 			} else {
 				// Just trigger loading of the tiddler
 				this.wiki.getTiddlerText(this.imageSource);
@@ -97,7 +97,7 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	var domNode = this.document.createElement(tag);
 	domNode.setAttribute("src",src);
 	if(this.imageClass) {
-		domNode.setAttribute("class",this.imageClass);		
+		domNode.setAttribute("class",this.imageClass);
 	}
 	if(this.imageWidth) {
 		domNode.setAttribute("width",this.imageWidth);
@@ -106,10 +106,10 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 		domNode.setAttribute("height",this.imageHeight);
 	}
 	if(this.imageTooltip) {
-		domNode.setAttribute("title",this.imageTooltip);		
+		domNode.setAttribute("title",this.imageTooltip);
 	}
 	if(this.imageAlt) {
-		domNode.setAttribute("alt",this.imageAlt);		
+		domNode.setAttribute("alt",this.imageAlt);
 	}
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
@@ -138,7 +138,7 @@ ImageWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return false;		
+		return false;
 	}
 };
 

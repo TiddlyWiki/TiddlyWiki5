@@ -1,6 +1,6 @@
 caption: sortsub
 created: 20200424160155182
-modified: 20210428152533501
+modified: 20210522162521222
 op-input: a [[selection of titles|Title Selection]]
 op-neg-output: the input, sorted into reverse order by the result of evaluating subfilter <<.param S>>
 op-output: the input, sorted into ascending order by the result of evaluating subfilter <<.param S>>
@@ -15,7 +15,9 @@ type: text/vnd.tiddlywiki
 
 Each item in the list of input titles is passed to the subfilter in turn. The subfilter transforms the input titles into the form needed for sorting. For example, the subfilter `[length[]]` transforms each input title in the number representing its length, and thus sorts the input titles according to their length.
 
-Note that within the subfilter, the "currentTiddler" variable is set to the title of the tiddler being processed. This permits subfilters like `[{!!value}divide{!!cost}]` to be used for computation.
+Note that within the subfilter, the "currentTiddler" variable is set to the title of the tiddler being processed. This permits subfilters like `[{!!value}divide{!!cost}]` to be used for computation. 
+
+The value of currentTiddler outside the subfilter is available in the variable "..currentTiddler". <<.from-version "5.1.24">>
 
 The suffix <<.place T>> determines how the items are compared and can be:
 
