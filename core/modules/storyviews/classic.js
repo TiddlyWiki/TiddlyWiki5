@@ -27,7 +27,7 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
-	if(!(targetElement instanceof Element)) {
+	if(targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
 	if(duration) {
