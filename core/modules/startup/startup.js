@@ -110,6 +110,12 @@ exports.startup = function() {
 			handlerMethod: "handleKeydownEvent"
 		}]);
 	}
+	// Kick off the tiddler-change manager
+	$tw.tiddlerChangeManager = new $tw.TiddlerChangeManager();
+	// Listen for changed tiddlers
+	$tw.wiki.addEventListener("change",function(changes) {
+		$tw.tiddlerChangeManager.handleChangedTiddlerEvent(changes);
+	});
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
 	// Find a working syncadaptor
