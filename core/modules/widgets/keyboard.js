@@ -40,9 +40,8 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	// Create element
 	var domNode = this.document.createElement(tag);
 	// Assign classes
-	var classes = (this["class"] || "").split(" ");
-	classes.push("tc-keyboard");
-	domNode.className = classes.join(" ");
+	this.domNode = domNode;
+	this.assignDomNodeClasses();
 	// Add a keyboard event handler
 	$tw.utils.addEventListeners(domNode,[
 		{name: "keydown", handlerObject: this, handlerMethod: "handleChangeEvent"}
@@ -90,7 +89,6 @@ KeyboardWidget.prototype.execute = function() {
 	this.key = this.getAttribute("key","");
 	this.tag = this.getAttribute("tag","");
 	this.keyInfoArray = $tw.keyboardManager.parseKeyDescriptors(this.key);
-	this["class"] = this.getAttribute("class","");
 	if(this.key.substr(0,2) === "((" && this.key.substr(-2,2) === "))") {
 		this.shortcutTiddlers = [];
 		var name = this.key.substring(2,this.key.length -2);
@@ -102,14 +100,22 @@ KeyboardWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
+KeyboardWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" ");
+	classes.push("tc-keyboard");
+	this.domNode.className = classes.join(" ");
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 KeyboardWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.message || changedAttributes.param || changedAttributes.key || changedAttributes["class"] || changedAttributes.tag) {
+	if(changedAttributes.message || changedAttributes.param || changedAttributes.key || changedAttributes.tag) {
 		this.refreshSelf();
 		return true;
+	} else if(changedAttributes["class"]) {
+		this.assignDomNodeClasses();
 	}
 	// Update the keyInfoArray if one of its shortcut-config-tiddlers has changed
 	if(this.shortcutTiddlers && $tw.utils.hopArray(changedTiddlers,this.shortcutTiddlers)) {
