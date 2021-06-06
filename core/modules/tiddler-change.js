@@ -68,7 +68,6 @@ TiddlerChangeManager.prototype.handleChangedTiddlerEvent = function(event) {
 	}
 	for(i=0; i<actions.length; i++) {
 		$tw.rootWidget.invokeActionString(actions[i],$tw.rootWidget);
-		console.log("ACTION INVOKED");
 	}
 	return true;
 };
