@@ -38,18 +38,16 @@ TiddlerChangeManager.prototype.updateTiddlerChangeLists = function(tiddlerList) 
 };
 
 TiddlerChangeManager.prototype.handleChangedTiddlerEvent = function(event) {
-	var action;
+	var actions = [];
 	for(var i=0; i<this.actionTiddlers.length; i++) {
 		if(this.tiddlerChangeList[i] !== undefined && $tw.utils.hop(event,this.tiddlerChangeList[i])) {
-			action = this.tiddlerActionList[i];
-			break;
+			actions.push = this.tiddlerActionList[i];
 		}
 	}
-	if(action !== undefined) {
-		$tw.rootWidget.invokeActionString(action,$tw.rootWidget);
-		return true;
+	for(i=0; i<actions.length; i++) {
+		$tw.rootWidget.invokeActionString(actions[i],$tw.rootWidget);
 	}
-	return false;
+	return true;
 };
 
 TiddlerChangeManager.prototype.handleTiddlerChanges = function(changedTiddlers) {
