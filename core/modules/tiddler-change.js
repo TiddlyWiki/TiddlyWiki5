@@ -19,7 +19,7 @@ function TiddlerChangeManager(options) {
 	this.tiddlerActionList = [];
 	this.updateTiddlerChangeLists(this.getTiddlerList());
 	$tw.wiki.addEventListener("change",function(changes) {
-		self.handleShortcutChanges(changes);
+		self.handleTiddlerChanges(changes);
 	});
 }
 
@@ -52,27 +52,7 @@ TiddlerChangeManager.prototype.handleChangedTiddlerEvent = function(event) {
 	return false;
 };
 
-TiddlerChangeManager.prototype.detectNewShortcuts = function(changedTiddlers) {
-	var shortcutConfigTiddlers = [],
-		handled = false;
-	$tw.utils.each(this.lookupNames,function(platformDescriptor) {
-		var descriptorString = "$:/config/" + platformDescriptor + "/";
-		Object.keys(changedTiddlers).forEach(function(configTiddler) {
-			var configString = configTiddler.substr(0, configTiddler.lastIndexOf("/") + 1);
-			if(configString === descriptorString) {
-				shortcutConfigTiddlers.push(configTiddler);
-				handled = true;
-			}
-		});
-	});
-	if(handled) {
-		return $tw.utils.hopArray(changedTiddlers,shortcutConfigTiddlers);
-	} else {
-		return false;
-	}
-};
-
-TiddlerChangeManager.prototype.handleShortcutChanges = function(changedTiddlers) {
+TiddlerChangeManager.prototype.handleTiddlerChanges = function(changedTiddlers) {
 	var newList = this.getTiddlerList();
 	var hasChanged = $tw.utils.hopArray(changedTiddlers,this.actionTiddlers) ? true :
 		($tw.utils.hopArray(changedTiddlers,newList) ? true : false);
