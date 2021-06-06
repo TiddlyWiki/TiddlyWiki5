@@ -324,7 +324,7 @@ KeyboardManager.prototype.handleKeydownEvent = function(event) {
 	if(key !== undefined) {
 		event.preventDefault();
 		event.stopPropagation();
-		$tw.rootWidget.invokeActionString(action,$tw.rootWidget);
+		$tw.rootWidget.invokeActionString(action,$tw.rootWidget,event);
 		return true;
 	}
 	return false;
