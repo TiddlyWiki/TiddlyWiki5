@@ -179,7 +179,7 @@ Key descriptors have the following format:
 	ctrl+enter
 	ctrl+shift+alt+A
 */
-KeyboardManager.prototype.parseKeyDescriptor = function(keyDescriptor) {
+KeyboardManager.prototype.parseKeyDescriptor = function(keyDescriptor,options) {
 	var components = keyDescriptor.split(/\+|\-/),
 		info = {
 			keyCode: 0,
@@ -205,6 +205,9 @@ KeyboardManager.prototype.parseKeyDescriptor = function(keyDescriptor) {
 		if(this.namedKeys[s]) {
 			info.keyCode = this.namedKeys[s];
 		}
+	}
+	if(options.keyDescriptor) {
+		info.keyDescriptor = options.keyDescriptor;
 	}
 	if(info.keyCode) {
 		return info;
@@ -237,6 +240,7 @@ KeyboardManager.prototype.parseKeyDescriptors = function(keyDescriptors,options)
 					lookupName = function(configName) {
 						var keyDescriptors = wiki.getTiddlerText("$:/config/" + configName + "/" + name);
 						if(keyDescriptors) {
+							options.keyDescriptor = keyDescriptor;
 							result.push.apply(result,self.parseKeyDescriptors(keyDescriptors,options));
 						}
 					};
@@ -245,7 +249,7 @@ KeyboardManager.prototype.parseKeyDescriptors = function(keyDescriptors,options)
 				});
 			}
 		} else {
-			result.push(self.parseKeyDescriptor(keyDescriptor));
+			result.push(self.parseKeyDescriptor(keyDescriptor,options));
 		}
 	});
 	return result;
@@ -276,12 +280,16 @@ KeyboardManager.prototype.checkKeyDescriptor = function(event,keyInfo) {
 };
 
 KeyboardManager.prototype.checkKeyDescriptors = function(event,keyInfoArray) {
+	return (this.getMatchingKeyDescriptor(event,keyInfoArray) !== null);
+};
+
+KeyboardManager.prototype.getMatchingKeyDescriptor = function(event,keyInfoArray) {
 	for(var t=0; t<keyInfoArray.length; t++) {
 		if(this.checkKeyDescriptor(event,keyInfoArray[t])) {
-			return true;
+			return keyInfoArray[t];
 		}
 	}
-	return false;
+	return null;
 };
 
 KeyboardManager.prototype.getEventModifierKeyDescriptor = function(event) {
