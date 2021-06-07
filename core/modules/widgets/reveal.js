@@ -260,16 +260,18 @@ RevealWidget.prototype.updateState = function() {
 
 	}
 	if(this.isOpen) {
+		clearTimeout(this.closeTimeout);
 		domNode.removeAttribute("hidden");
-        $tw.anim.perform(this.openAnimation,domNode);
+        $tw.anim.perform(this.openAnimation,domNode,{widget: this});
 	} else {
+		clearTimeout(this.openTimeout);
 		$tw.anim.perform(this.closeAnimation,domNode,{callback: function() {
 			//make sure that the state hasn't changed during the close animation
 			self.readState()
 			if(!self.isOpen) {
 				domNode.setAttribute("hidden","true");
 			}
-		}});
+		},widget: this});
 	}
 };
 
