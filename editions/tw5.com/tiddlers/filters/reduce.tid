@@ -1,6 +1,6 @@
 caption: reduce
 created: 20201004154131193
-modified: 20201208185109549
+modified: 20210522162536854
 op-input: a [[selection of titles|Title Selection]] passed as input to the filter
 op-output: the final result of running the subfilter <<.place S>>
 op-parameter: a [[filter expression|Filter Expression]]. Optional second parameter for initial value for accumulator
@@ -18,6 +18,7 @@ The following variables are available within the subfilter:
 
 * ''accumulator'' - the result of the previous subfilter run
 * ''currentTiddler'' - the input title
+* ''..currentTiddler'' - the value of the variable `currentTiddler` outside the subfilter. <<.from-version "5.1.24">>
 * ''index'' - the numeric index of the current list item (with zero being the first item in the list)
 * ''revIndex'' - the reverse numeric index of the current list item (with zero being the last item in the list)
 * ''length'' - the total length of the input list

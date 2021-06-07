@@ -10,6 +10,7 @@ description: {{$:/language/Buttons/NewHere/Hint}}
 </$set>
 \end
 \define newHereButton()
+\whitespace trim
 <$button actions=<<newHereActions>> tooltip={{$:/language/Buttons/NewHere/Hint}} aria-label={{$:/language/Buttons/NewHere/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/new-here-button}}

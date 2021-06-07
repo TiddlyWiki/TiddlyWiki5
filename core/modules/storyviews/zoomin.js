@@ -48,7 +48,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
-	if(!(targetElement instanceof Element)) {
+	if(targetElement === undefined || targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
 	// Make the new tiddler be position absolute and visible so that we can measure it
@@ -130,7 +130,7 @@ function findTitleDomNode(widget,targetClass) {
 ZoominListView.prototype.insert = function(widget) {
 	var targetElement = widget.findFirstDomNode();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
-	if(!(targetElement instanceof Element)) {
+	if(targetElement === undefined || targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
 	// Make the newly inserted node position absolute and hidden
@@ -147,7 +147,7 @@ ZoominListView.prototype.remove = function(widget) {
 			widget.removeChildDomNodes();
 		};
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
-	if(!(targetElement instanceof Element)) {
+	if(targetElement === undefined || targetElement.nodeType === Node.TEXT_NODE) {
 		removeElement();
 		return;
 	}

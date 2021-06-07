@@ -27,7 +27,7 @@ exports.makeDraggable = function(options) {
 		domNode = options.domNode;
 	// Make the dom node draggable (not necessary for anchor tags)
 	if((domNode.tagName || "").toLowerCase() !== "a") {
-		domNode.setAttribute("draggable","true");		
+		domNode.setAttribute("draggable","true");
 	}
 	// Add event handlers
 	$tw.utils.addEventListeners(domNode,[
@@ -80,7 +80,7 @@ exports.makeDraggable = function(options) {
 				}
 				// Set up the data transfer
 				if(dataTransfer.clearData) {
-					dataTransfer.clearData();					
+					dataTransfer.clearData();
 				}
 				var jsonData = [];
 				if(titles.length > 1) {
@@ -203,6 +203,18 @@ function parseJSONTiddlers(json,fallbackTitle) {
 		fields.title = fields.title || fallbackTitle;
 	});
 	return data;
+};
+
+exports.dragEventContainsFiles = function(event) {
+	if(event.dataTransfer.types) {
+		for(var i=0; i<event.dataTransfer.types.length; i++) {
+			if(event.dataTransfer.types[i] === "Files") {
+				return true;
+				break;
+			}
+		}
+	}
+	return false;
 };
 
 })();

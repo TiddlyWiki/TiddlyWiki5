@@ -1,18 +1,15 @@
 title: $:/language/Help/server
-description: Proporciona interfaz de servidor HTTP a TiddlyWiki
+description: Proporciona interfaz de servidor HTTP a TiddlyWiki (en desuso a favor del nuevo comando listen)
 
-El servidor compilado para TiddlyWiki5 es muy simple. Aunque es compatible con TiddlyWeb, no soporta muchas de las características necesarias para un uso robusto en Internet. 
-
-En la raíz, sirve un tiddler específico<br>
-Fuera de la raíz, sirve tiddlers individuales codificados en JSON, y soporta operaciones básicas HTTP de `GET`, `PUT` y `DELETE`.
+Comando obsoleto para servir una wiki a través de HTTP.
 
 ```
---server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host> <pathprefix>
+--server <port> <root-tiddler> <root-render-type> <root-serve-type> <username> <password> <host> <path-prefix> <debug-level>
 ```
 
 Los parámetros son
 
-* ''port'' - número de puerto desde el que sirve (por defecto, "8080")
+* ''port'' - número de puerto desde el que sirve; valores no numéricos se interpretan como una variable de entorno del sistema de la que se extrae el número de puerto (por defecto, "8080")
 * ''roottiddler'' - tiddler que se sirve desde la raíz (por defecto, "$:/core/save/all")
 * ''rendertype'' - tipo de contenido con el que se genera el tiddler raíz (por defecto "text/plain")
 * ''servetype'' - tipo de contenido con el que se sirve el tiddler raíz (por defecto "text/html")
@@ -20,8 +17,9 @@ Los parámetros son
 * ''password'' - contraseña opcional para autenticación básica
 * ''host'' - nombre opcional del servidor desde el que se sirve (por defecto, "127.0.0.1" o "localhost")
 * ''pathprefix'' - prefijo opcional para rutas
+* ''debug-level'' - nivel de depuración opcional; establecer en "debug" para ver los detalles de la solicitud (el valor predeterminado es "none")
 
-Si se ha definido contraseña, el navegador pedirá que se introduzca nombre y contraseña. <br>Nótese que la contraseña se transmite en modo texto por lo que esta implementación no es apropiada para uso general.
+Si se ha definido contraseña, el navegador pedirá que se introduzca nombre y contraseña. <br>Nótese que la contraseña se transmite en modo texto por lo que esta implementación solo debe usarse en redes seguras or utilizando HTTPS.
 
 Por ejemplo:
 
@@ -35,4 +33,10 @@ El nombre de usuario y la contraseña pueden ser especificados como cadenas de s
 --server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
 ```
 
+El uso de una dirección como esta expone tu sistema a la red local. Para obtener información sobre cómo abrir tu instancia a toda la red local y posibles problemas de seguridad, consulta el tiddler de WebServer en TiddlyWiki.com.
+
 Para ejecutar simultáneamente múltiples servidores TiddlyWiki, deberán configurarse cada uno en un puerto diferente
+
+```
+--server MY_PORT_NUMBER $:/core/save/all text/plain text/html MyUserName passw0rd
+```

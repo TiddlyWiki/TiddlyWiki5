@@ -1,0 +1,50 @@
+created: 20210429084127864
+modified: 20210525130830934
+tags: 
+title: Keyboard Codes (Macros)
+type: text/vnd.tiddlywiki
+
+\define key-test-prefix() $:/key-test
+
+\define codeState() $:/state/code/$(currentTiddler)$
+
+\define getText() 
+<$vars tv-wikilinks="no">
+
+* event-key: ''$(event-key)$''
+* event-code: ''$(event-code)$''
+* modifier: ''$(modifier)$''
+</$vars>
+\end
+
+\define pinDetails()
+  <$action-setfield $tiddler=<<codeState>> text="open"/>
+\end
+
+\define unpinDetails()
+  <$action-deletetiddler $tiddler=<<codeState>> />
+\end
+
+\define toggleDetails(text)
+<$list filter="[<codeState>!has[title]]" variable="ignore">
+  <$button class="tc-btn-invisible" actions=<<pinDetails>> >$text$ {{$:/core/images/unfold-button}}</$button>
+</$list>
+<$list filter="[<codeState>has[title]]" variable="ignore">
+  <$button class="tc-btn-invisible" actions=<<unpinDetails>> >$text$ {{$:/core/images/fold-button}}</$button>
+</$list>
+\end
+
+\define actionKey()
+<$action-setfield $tiddler="$:/key-test/action" text=<<getText>> />
+\end
+
+\define showCode()
+
+''<<toggleDetails """Toggle this tiddler code""">>''
+
+<$list filter="[<codeState>has[title]]" variable=ignore>
+<pre><code><$view /></code></pre>
+</$list>
+\end
+
+<pre><code><$view /></code></pre>

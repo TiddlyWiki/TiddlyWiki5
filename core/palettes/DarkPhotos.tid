@@ -5,6 +5,7 @@ name: DarkPhotos
 tags: $:/tags/Palette
 title: $:/palettes/DarkPhotos
 type: application/x-tiddler-dictionary
+color-scheme: light
 
 alert-background: #ffe476
 alert-border: #b99e2f

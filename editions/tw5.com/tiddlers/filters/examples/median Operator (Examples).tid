@@ -1,0 +1,10 @@
+created: 20210426131042769
+modified: 20210426131553560
+tags: [[Operator Examples]] [[median Operator]]
+title: median Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "=1 =3 =4 =5 +[median[]]">>
+
+Note that if there is no input the operator returns `NaN`
+<<.operator-example 2 "[title[NotATiddler]get[price]] +[median[]]">>

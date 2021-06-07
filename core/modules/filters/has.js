@@ -61,7 +61,7 @@ exports.has = function(source,operator,options) {
 				if(tiddler && $tw.utils.hop(tiddler.fields,operator.operand) && (tiddler.fields[operator.operand].length !== 0)) {
 					results.push(title);
 				}
-			});				
+			});
 		}
 	}
 	return results;

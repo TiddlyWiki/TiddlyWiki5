@@ -16,26 +16,6 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var ScrollableWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
-	this.scaleFactor = 1;
-	this.addEventListeners([
-		{type: "tm-scroll", handler: "handleScrollEvent"}
-	]);
-	if($tw.browser) {
-		this.requestAnimationFrame = window.requestAnimationFrame ||
-			window.webkitRequestAnimationFrame ||
-			window.mozRequestAnimationFrame ||
-			function(callback) {
-				return window.setTimeout(callback, 1000/60);
-			};
-		this.cancelAnimationFrame = window.cancelAnimationFrame ||
-			window.webkitCancelAnimationFrame ||
-			window.webkitCancelRequestAnimationFrame ||
-			window.mozCancelAnimationFrame ||
-			window.mozCancelRequestAnimationFrame ||
-			function(id) {
-				window.clearTimeout(id);
-			};
-	}
 };
 
 /*
@@ -61,7 +41,7 @@ ScrollableWidget.prototype.handleScrollEvent = function(event) {
 	if(event.paramObject && event.paramObject.selector) {
 		this.scrollSelectorIntoView(null,event.paramObject.selector);
 	} else {
-		this.scrollIntoView(event.target);			
+		this.scrollIntoView(event.target);
 	}
 	return false; // Handled event
 };
@@ -117,7 +97,7 @@ ScrollableWidget.prototype.scrollIntoView = function(element) {
 			if(duration <= 0) {
 				t = 1;
 			} else {
-				t = ((Date.now()) - self.startTime) / duration;	
+				t = ((Date.now()) - self.startTime) / duration;
 			}
 			if(t >= 1) {
 				self.cancelScroll();
@@ -138,7 +118,7 @@ ScrollableWidget.prototype.scrollSelectorIntoView = function(baseElement,selecto
 	baseElement = baseElement || document.body;
 	var element = baseElement.querySelector(selector);
 	if(element) {
-		this.scrollIntoView(element,callback);		
+		this.scrollIntoView(element,callback);
 	}
 };
 
@@ -147,6 +127,26 @@ Render this widget into the DOM
 */
 ScrollableWidget.prototype.render = function(parent,nextSibling) {
 	var self = this;
+	this.scaleFactor = 1;
+	this.addEventListeners([
+		{type: "tm-scroll", handler: "handleScrollEvent"}
+	]);
+	if($tw.browser) {
+		this.requestAnimationFrame = window.requestAnimationFrame ||
+			window.webkitRequestAnimationFrame ||
+			window.mozRequestAnimationFrame ||
+			function(callback) {
+				return window.setTimeout(callback, 1000/60);
+			};
+		this.cancelAnimationFrame = window.cancelAnimationFrame ||
+			window.webkitCancelAnimationFrame ||
+			window.webkitCancelRequestAnimationFrame ||
+			window.mozCancelAnimationFrame ||
+			window.mozCancelRequestAnimationFrame ||
+			function(id) {
+				window.clearTimeout(id);
+			};
+	}
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state

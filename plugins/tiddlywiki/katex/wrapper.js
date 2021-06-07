@@ -15,18 +15,6 @@ Wrapper for `katex.min.js` that provides a `<$latex>` widget. It is also availab
 var katex = require("$:/plugins/tiddlywiki/katex/katex.min.js"),
     chemParse = require("$:/plugins/tiddlywiki/katex/mhchem.min.js"),
 	Widget = require("$:/core/modules/widgets/widget.js").widget;
-// Add \ce, \pu, and \tripledash to the KaTeX macros.
-katex.__defineMacro("\\ce", function(context) {
-  return chemParse(context.consumeArgs(1)[0], "ce")
-});
-katex.__defineMacro("\\pu", function(context) {
-  return chemParse(context.consumeArgs(1)[0], "pu");
-});
-//  Needed for \bond for the ~ forms
-//  Raise by 2.56mu, not 2mu. We're raising a hyphen-minus, U+002D, not 
-//  a mathematical minus, U+2212. So we need that extra 0.56.
-katex.__defineMacro("\\tripledash", "{\\vphantom{-}\\raisebox{2.56mu}{$\\mkern2mu"
-+ "\\tiny\\text{-}\\mkern1mu\\text{-}\\mkern1mu\\text{-}\\mkern2mu$}}");
 
 var KaTeXWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

@@ -65,7 +65,7 @@ TagSubIndexer.prototype.rebuild = function() {
 			} else {
 				self.index[tag].titles.push(title);
 			}
-		});		
+		});
 	});
 };
 
@@ -83,7 +83,7 @@ TagSubIndexer.prototype.lookup = function(tag) {
 		if(!indexRecord.isSorted) {
 			if(this.indexer.wiki.sortByList) {
 				indexRecord.titles = this.indexer.wiki.sortByList(indexRecord.titles,tag);
-			}			
+			}
 			indexRecord.isSorted = true;
 		}
 		return indexRecord.titles;

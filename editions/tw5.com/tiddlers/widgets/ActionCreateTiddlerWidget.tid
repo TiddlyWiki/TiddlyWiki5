@@ -1,6 +1,6 @@
 caption: action-createtiddler
 created: 20161020152745942
-modified: 20200131151847266
+modified: 20210601092956998
 tags: Widgets ActionWidgets
 title: ActionCreateTiddlerWidget
 type: text/vnd.tiddlywiki
@@ -16,16 +16,20 @@ There are several differences from the [[tm-new-tiddler message|WidgetMessage: t
 
 ! Content and Attributes
 
-The ''action-createtiddler'' widget is invisible. Any content within it is ignored.
+The ''action-createtiddler'' widget is invisible.
+
+<<.from-version "5.1.24">> The action widgets contained within the ''action-createtiddler'' widget are executed after the new tiddler has been created with the title of the tiddler in the variable `createTiddler-title` and `createTiddler-draftTitle`.
 
 |!Attribute |!Description |
 |$basetitle |The initial title that will be attempted. If a tiddler with that title already exists, then a numerical counter is added to the title and incremented until it is unique|
-|$savetitle |A text reference identifying a field or index into which the title of the newly created tiddler will be stored after it is created |
-|$savedrafttitle |<<.from-version "5.1.20">> A text reference identifying a field or index into which the draft title associated with the newly created tiddler will be stored after it is created. This is useful when using a sequence of action widgets to create a new tiddler, put it into edit mode, and position it within the list of its parent tag |
+|$savetitle |//(deprecated – see below))// A text reference identifying a field or index into which the title of the newly created tiddler will be stored after it is created |
+|$savedrafttitle |//(deprecated – see below))// <<.from-version "5.1.20">> A text reference identifying a field or index into which the draft title associated with the newly created tiddler will be stored after it is created. This is useful when using a sequence of action widgets to create a new tiddler, put it into edit mode, and position it within the list of its parent tag |
 |$timestamp |Specifies whether the timestamp(s) of the target tiddler will be updated (''modified'' and ''modifier'', plus ''created'' and ''creator'' for newly created tiddlers). Can be "yes" (the default) or "no" |
-|$template |<<.from-version "5.1.22">>  The title of a template tiddler, that will be used to create a new tiddler |
-|$overwrite |<<.from-version "5.1.22">>  If set to "yes", it will overwrite existing tiddlers. ''Be careful!'' |
+|$template |<<.from-version "5.1.22">> The title of a template tiddler, that will be used to create a new tiddler |
+|$overwrite |<<.from-version "5.1.22">> If set to "yes", it will overwrite existing tiddlers. ''Be careful!'' |
 |//{any attributes not starting with $}// |Each attribute name specifies a field to be created in the new tiddler  |
+
+<<.from-version "5.1.24">> Note that the attributes `$savetitle` and `$savedrafttitle` are no longer needed. Instead, any action widgets that need to use the title of the newly created tiddler should be contained within the ''action-createtiddler'' widget, and reference the variables `createTiddler-title` and `createTiddler-draftTitle` to obtain the title.
 
 ! Examples
 

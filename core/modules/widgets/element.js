@@ -81,7 +81,7 @@ ElementWidget.prototype.refresh = function(changedTiddlers) {
 	if(hasChangedAttributes) {
 		if(!this.isReplaced) {
 			// Update our attributes
-			this.assignAttributes(this.domNodes[0],{excludeEventAttributes: true});			
+			this.assignAttributes(this.domNodes[0],{excludeEventAttributes: true});
 		} else {
 			// If we were replaced then completely refresh ourselves
 			return this.refreshSelf();

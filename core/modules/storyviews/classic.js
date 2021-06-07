@@ -27,12 +27,12 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
-	if(!(targetElement instanceof Element)) {
+	if(targetElement === undefined || targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
 	if(duration) {
 		// Scroll the node into view
-		this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});	
+		this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});
 	} else {
 		targetElement.scrollIntoView();
 	}
@@ -43,7 +43,7 @@ ClassicStoryView.prototype.insert = function(widget) {
 	if(duration) {
 		var targetElement = widget.findFirstDomNode();
 		// Abandon if the list entry isn't a DOM element (it might be a text node)
-		if(!(targetElement instanceof Element)) {
+		if(targetElement === undefined || targetElement.nodeType === Node.TEXT_NODE) {
 			return;
 		}
 		// Get the current height of the tiddler
@@ -83,7 +83,7 @@ ClassicStoryView.prototype.remove = function(widget) {
 				widget.removeChildDomNodes();
 			};
 		// Abandon if the list entry isn't a DOM element (it might be a text node)
-		if(!(targetElement instanceof Element)) {
+		if(targetElement === undefined || targetElement.nodeType === Node.TEXT_NODE) {
 			removeElement();
 			return;
 		}

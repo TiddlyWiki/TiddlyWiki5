@@ -22,12 +22,12 @@ Encryption/RepeatPassword: Repetiu la contrasenya
 Encryption/SetPassword: Indiqueu la contrasenya
 Encryption/Username: Usuari
 Error/Caption: S'ha produït un error
-Error/EditConflict: El fitxer ha canviat al servidor
 Error/Filter: S'ha produït un error del filtre
 Error/FilterSyntax: S'ha produït un error de sintaxi en l'expressió del filtre
 Error/IsFilterOperator: S'ha produït un error del filtre: operant desconegut per a l’operador de filtre "is"
 Error/LoadingPluginLibrary: S'ha produït un error en carregar la biblioteca del connector
 Error/NetworkErrorAlert: `<h2>''Error de la xarxa''</h2>Sembla que s'ha perdut la connexió amb el servidor. Això pot indicar un problema amb la vostra connexió de la xarxa. Intenteu restaurar la connectivitat de xarxa abans de continuar.<br><br>' Qualsevol canvi no guardat es sincronitzarà automàticament quan es restableixi la connectivitat''.'
+Error/PutEditConflict: El fitxer ha canviat al servidor
 Error/RecursiveTransclusion: S'ha produït un error de transclusió recursiva en el widget de transclusió
 Error/RetrievingSkinny: S'ha produït un error en recuperar la llista de tiddler parcials
 Error/SavingToTWEdit: S'ha produït un error en desar a TWEdit

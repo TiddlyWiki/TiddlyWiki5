@@ -22,7 +22,7 @@ exports.editiondescription = function(source,operator,options) {
 		if(editionInfo) {
 			source(function(tiddler,title) {
 				if($tw.utils.hop(editionInfo,title)) {
-					results.push(editionInfo[title].description || "");				
+					results.push(editionInfo[title].description || "");
 				}
 			});
 		}

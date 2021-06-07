@@ -44,7 +44,7 @@ MacroCallWidget.prototype.execute = function() {
 	var params = this.parseTreeNode.params ? this.parseTreeNode.params.slice(0) : [];
 	$tw.utils.each(this.attributes,function(attribute,name) {
 		if(name.charAt(0) !== "$") {
-			params.push({name: name, value: attribute});			
+			params.push({name: name, value: attribute});
 		}
 	});
 	// Get the macro value

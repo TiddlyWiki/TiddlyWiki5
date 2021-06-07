@@ -1,0 +1,4 @@
+title: $:/config/Editor/EnableImportFilter
+type: text/vnd.tiddlywiki
+
+[all[current]type[text/vnd.tiddlywiki]] [all[current]!has[type]]

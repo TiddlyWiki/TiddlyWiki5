@@ -20,6 +20,7 @@ Syncer.prototype.titleIsAnonymous = "$:/status/IsAnonymous";
 Syncer.prototype.titleIsReadOnly = "$:/status/IsReadOnly";
 Syncer.prototype.titleUserName = "$:/status/UserName";
 Syncer.prototype.titleSyncFilter = "$:/config/SyncFilter";
+Syncer.prototype.titleSyncDisablePolling = "$:/config/SyncDisablePolling";
 Syncer.prototype.titleSyncPollingInterval = "$:/config/SyncPollingInterval";
 Syncer.prototype.titleSyncDisableLazyLoading = "$:/config/SyncDisableLazyLoading";
 Syncer.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
@@ -89,7 +90,7 @@ function Syncer(options) {
 		if(filteredChanges.length > 0) {
 			self.processTaskQueue();
 		} else {
-			// Look for deletions of tiddlers we're already syncing	
+			// Look for deletions of tiddlers we're already syncing
 			var outstandingDeletion = false
 			$tw.utils.each(changes,function(change,title,object) {
 				if(change.deleted && $tw.utils.hop(self.tiddlerInfo,title)) {
@@ -121,7 +122,7 @@ function Syncer(options) {
 				self.login(username,password,function() {});
 			} else {
 				// No username and password, so we display a prompt
-				self.handleLoginEvent();				
+				self.handleLoginEvent();
 			}
 		});
 		$tw.rootWidget.addEventListener("tm-logout",function() {
@@ -138,7 +139,7 @@ function Syncer(options) {
 	if(!this.disableUI && this.wiki.getTiddlerText(this.titleSyncDisableLazyLoading) !== "yes") {
 		this.wiki.addEventListener("lazyLoad",function(title) {
 			self.handleLazyLoadEvent(title);
-		});		
+		});
 	}
 	// Get the login status
 	this.getStatus(function(err,isLoggedIn) {
@@ -173,8 +174,8 @@ Syncer.prototype.getTiddlerRevision = function(title) {
 	if(this.syncadaptor && this.syncadaptor.getTiddlerRevision) {
 		return this.syncadaptor.getTiddlerRevision(title);
 	} else {
-		return this.wiki.getTiddler(title).fields.revision;	
-	} 
+		return this.wiki.getTiddler(title).fields.revision;
+	}
 };
 
 /*
@@ -267,7 +268,7 @@ Syncer.prototype.getStatus = function(callback) {
 		// Mark us as not logged in
 		this.wiki.addTiddler({title: this.titleIsLoggedIn,text: "no"});
 		// Get login status
-		this.syncadaptor.getStatus(function(err,isLoggedIn,username,isReadOnly,isAnonymous) {
+		this.syncadaptor.getStatus(function(err,isLoggedIn,username,isReadOnly,isAnonymous,isPollingDisabled) {
 			if(err) {
 				self.logger.alert(err);
 			} else {
@@ -277,6 +278,9 @@ Syncer.prototype.getStatus = function(callback) {
 				self.wiki.addTiddler({title: self.titleIsLoggedIn,text: isLoggedIn ? "yes" : "no"});
 				if(isLoggedIn) {
 					self.wiki.addTiddler({title: self.titleUserName,text: username || ""});
+				}
+				if(isPollingDisabled) {
+					self.wiki.addTiddler({title: self.titleSyncDisablePolling, text: "yes"});
 				}
 			}
 			// Invoke the callback
@@ -301,12 +305,15 @@ Syncer.prototype.syncFromServer = function() {
 			}
 		},
 		triggerNextSync = function() {
-			self.pollTimerId = setTimeout(function() {
-				self.pollTimerId = null;
-				self.syncFromServer.call(self);
-			},self.pollTimerInterval);
+			if(pollingEnabled) {
+				self.pollTimerId = setTimeout(function() {
+					self.pollTimerId = null;
+					self.syncFromServer.call(self);
+				},self.pollTimerInterval);
+			}
 		},
-		syncSystemFromServer = (self.wiki.getTiddlerText("$:/config/SyncSystemTiddlersFromServer") === "yes" ? true : false);
+		syncSystemFromServer = (self.wiki.getTiddlerText("$:/config/SyncSystemTiddlersFromServer") === "yes"),
+		pollingEnabled = (self.wiki.getTiddlerText(self.titleSyncDisablePolling) !== "yes");
 	if(this.syncadaptor && this.syncadaptor.getUpdatedTiddlers) {
 		this.logger.log("Retrieving updated tiddler list");
 		cancelNextSync();
@@ -329,7 +336,7 @@ Syncer.prototype.syncFromServer = function() {
 				});
 				if(updates.modifications.length > 0 || updates.deletions.length > 0) {
 					self.processTaskQueue();
-				}				
+				}
 			}
 		});
 	} else if(this.syncadaptor && this.syncadaptor.getSkinnyTiddlers) {
@@ -509,7 +516,7 @@ Syncer.prototype.processTaskQueue = function() {
 				} else {
 					self.updateDirtyStatus();
 					// Process the next task
-					self.processTaskQueue.call(self);					
+					self.processTaskQueue.call(self);
 				}
 			});
 		} else {
@@ -517,11 +524,11 @@ Syncer.prototype.processTaskQueue = function() {
 			this.updateDirtyStatus();
 			// And trigger a timeout if there is a pending task
 			if(task === true) {
-				this.triggerTimeout();				
+				this.triggerTimeout();
 			}
 		}
 	} else {
-		this.updateDirtyStatus();		
+		this.updateDirtyStatus();
 	}
 };
 
@@ -555,7 +562,7 @@ Syncer.prototype.chooseNextTask = function() {
 				isReadyToSave = !tiddlerInfo || !tiddlerInfo.timestampLastSaved || tiddlerInfo.timestampLastSaved < thresholdLastSaved;
 			if(hasChanged) {
 				if(isReadyToSave) {
-					return new SaveTiddlerTask(this,title); 					
+					return new SaveTiddlerTask(this,title);
 				} else {
 					havePending = true;
 				}
@@ -594,7 +601,10 @@ SaveTiddlerTask.prototype.run = function(callback) {
 		tiddler = this.syncer.wiki.tiddlerExists(this.title) && this.syncer.wiki.getTiddler(this.title);
 	this.syncer.logger.log("Dispatching 'save' task:",this.title);
 	if(tiddler) {
-		this.syncer.syncadaptor.saveTiddler(tiddler,function(err,adaptorInfo,revision) {
+		this.syncer.syncadaptor.saveTiddler(tiddler,{
+			changeCount: changeCount,
+			tiddlerInfo: self.syncer.tiddlerInfo[self.title]
+		},function(err,adaptorInfo,revision) {
 			// If there's an error, exit without changing any internal state
 			if(err) {
 				return callback(err);
@@ -608,8 +618,6 @@ SaveTiddlerTask.prototype.run = function(callback) {
 			};
 			// Invoke the callback
 			callback(null);
-		},{
-			tiddlerInfo: self.syncer.tiddlerInfo[self.title]
 		});
 	} else {
 		this.syncer.logger.log(" Not Dispatching 'save' task:",this.title,"tiddler does not exist");
@@ -626,21 +634,17 @@ function DeleteTiddlerTask(syncer,title) {
 DeleteTiddlerTask.prototype.run = function(callback) {
 	var self = this;
 	this.syncer.logger.log("Dispatching 'delete' task:",this.title);
-	this.syncer.syncadaptor.deleteTiddler(this.title,function(err) {
+	this.syncer.syncadaptor.deleteTiddler(this.title,{
+		tiddlerInfo: self.syncer.tiddlerInfo[this.title]
+	},function(err,adaptorInfo) {
 		// If there's an error, exit without changing any internal state
 		if(err) {
 			return callback(err);
 		}
 		// Remove the info stored about this tiddler
 		delete self.syncer.tiddlerInfo[self.title];
-		if($tw.boot.files){
-			// Remove the tiddler from $tw.boot.files
-			delete $tw.boot.files[self.title];
-		}
 		// Invoke the callback
 		callback(null);
-	},{
-		tiddlerInfo: self.syncer.tiddlerInfo[this.title]
 	});
 };
 

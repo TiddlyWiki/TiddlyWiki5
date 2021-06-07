@@ -285,7 +285,7 @@ KeyboardManager.prototype.checkKeyDescriptors = function(event,keyInfoArray) {
 };
 
 KeyboardManager.prototype.getEventModifierKeyDescriptor = function(event) {
-	return event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey ? "ctrl" : 
+	return event.ctrlKey && !event.shiftKey	&& !event.altKey && !event.metaKey ? "ctrl" : 
 		event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey ? "shift" : 
 		event.ctrlKey && event.shiftKey && !event.altKey && !event.metaKey ? "ctrl-shift" : 
 		event.altKey && !event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt" : 
@@ -295,7 +295,7 @@ KeyboardManager.prototype.getEventModifierKeyDescriptor = function(event) {
 		event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey ? "meta" : 
 		event.metaKey && event.ctrlKey && !event.shiftKey && !event.altKey ? "meta-ctrl" :
 		event.metaKey && event.ctrlKey && event.shiftKey && !event.altKey ? "meta-ctrl-shift" :
-		event.metaKey && event.ctrlKey & event.shiftKey && event.altKey ? "meta-ctrl-alt-shift" : "normal";
+		event.metaKey && event.ctrlKey && event.shiftKey && event.altKey ? "meta-ctrl-alt-shift" : "normal";
 };
 
 KeyboardManager.prototype.getShortcutTiddlerList = function() {
@@ -324,7 +324,7 @@ KeyboardManager.prototype.handleKeydownEvent = function(event) {
 	if(key !== undefined) {
 		event.preventDefault();
 		event.stopPropagation();
-		$tw.rootWidget.invokeActionString(action,$tw.rootWidget);
+		$tw.rootWidget.invokeActionString(action,$tw.rootWidget,event);
 		return true;
 	}
 	return false;

@@ -161,7 +161,7 @@ exports.parse = function() {
 				// Move the caption to the first row if it isn't already
 				if(table.children.length !== 1) {
 					table.children.pop(); // Take rowContainer out of the children array
-					table.children.splice(0,0,rowContainer); // Insert it at the bottom						
+					table.children.splice(0,0,rowContainer); // Insert it at the bottom
 				}
 				// Set the alignment - TODO: figure out why TW did this
 //				rowContainer.attributes.align = rowCount === 0 ? "top" : "bottom";

@@ -1,0 +1,68 @@
+created: 20210203184649726
+modified: 20210208152038746
+tags: HookMechanism
+title: Hook: th-before-importing
+type: text/vnd.tiddlywiki
+
+This hook allows plugins to inspect or modify the `importTiddler` object ''before'' any tiddlers are imported. It is invoked after the final "Import" button is clicked, but ''before'' the selected tiddlers are being imported into the store.
+
+''Intended Usecases'':
+
+* Manipulate the import "selection state"
+* Eg: create a customized "log-tiddler" that contains a heading, that should only be written once
+
+''Important'': 
+
+* This hook ''should not'' be used to manpulate the `importTiddler.fields.text` element!
+* If you want to give the users a possibility to verify the imported data, use ùpgraders like: `$:/core/modules/upgraders/` instead
+* If you need to manipulate the imported tiddler content, without default user interaction, consider: [[Hook: th-importing-tiddler]] instead
+
+The hook is part of the `NavigatorWidget.prototype.handlePerformImportEvent` function.
+
+Hook function parameters:
+
+* ''importTiddler'': an object, that contains information about "selected / unselected" tiddlers and more
+
+Return value:
+
+* ''importTiddler'': object
+
+The hook must return the `importTiddler` object. For many usecases the object will be returned unmodified.
+
+''Example code how to implement a hook in your project''
+
+```
+/*\
+title: $:/plugins/<author>/<plugin>/th-before-importing.js
+type: application/javascript
+module-type: startup
+
+YOUR DISCRCRIPTION COMES HERE!
+
+\*/
+(function(){
+
+/*jslint node: true, browser: true */
+/*global $tw: false, exports: true */
+"use strict";
+
+// Export name and synchronous status
+exports.name = "<yournamecomesherewithoutspaces>";
+exports.platforms = ["browser"];
+exports.after = ["startup"];
+exports.synchronous = true;
+
+// Define your variables here!
+
+exports.startup = function() {
+	$tw.hooks.addHook("th-before-importing",function(importTiddler) {
+
+// YOUR CODE !
+
+		return importTiddler;
+	});
+};
+
+})();
+
+```
