@@ -1,6 +1,6 @@
 created: 20200514194751926
 creator: FBB
-modified: 20210519132102202
+modified: 20210602215314673
 modifier: FBB
 tags: Widgets
 title: TranscludeWidget
@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 ! Einleitung
 
-Das ~TranscludeWidget importiert dynamisch Inhalte aus einem anderen [[Tiddler]].
+Das <<.wid1 "Transclude">>-Widget importiert dynamisch Inhalte aus einem anderen [[Tiddler]].
 
 
 ! Attribute
@@ -27,7 +27,7 @@ TiddlyWiki interpretiert Text in zwei Modi:
 * Der ''inline''-Modus erkennt Zeichenformatierungen wie Hervorhebung und Verweise
 * Der ''block''-Modus erkennt die sämtliche Inline-Formatierungen und fügt Blockformatierungen wie Tabellen, Überschriften und Listen hinzu.
 
-Normalerweise wird der Modus dadurch bestimmt, ob das ~TranscludeWidget selbst im ''block''- oder ''inline''-Modus geparst wurde. Dies kann mit dem ''mode''-Attribut überschrieben werden.
+Normalerweise wird der Modus dadurch bestimmt, ob das <<.wid1 "Transclude">>-Widget selbst im ''block''- oder ''inline''-Modus geparst wurde. Dies kann mit dem ''mode''-Attribut überschrieben werden.
 
 Als Beispiel betrachte Tiddler "A" mit diesem Inhalt:
 
@@ -75,3 +75,7 @@ Das folgende Beispiel schließt die Core-Version des Tiddlers [[$:/DefaultTiddle
 
 * [[TranscludeWidget (Beispiel)]]
 
+
+<<.hr>>
+
+Siehe: <<wikidokulink "~TranscludeWidget">> (englisch)

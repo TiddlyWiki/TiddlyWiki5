@@ -1,0 +1,30 @@
+created: 20201119071028068
+creator: FBB
+modified: 20210603201126882
+modifier: FBB
+tags: $:/tags/Macro $:/_fbb/Macro
+title: $:/_fbb/wikidokulink Macro
+type: text/vnd.tiddlywiki
+
+\define wikidokulink(_:"HelloThere")
+<$wikify name="link" text="{{$:/_fbb/wikidokulink}}#$_$">
+<a href=<<link>> target="_blank">$_$ <span class="doc-icon">{{link-image.svg}}</span></a>
+</$wikify>
+\end
+
+!! Code
+
+```
+\define wikidokulink(_:"HelloThere")
+<$wikify name="link" text="{{$:/_fbb/wikidokulink}}#$_$">
+<a href=<<link>> target="_blank">$_$ <span class="doc-icon">{{link-image.svg}}</span></a>
+</$wikify>
+\end
+```
+
+!! Aufruf
+
+`<<wikidokulink "Tiddler-Name">>`
+
+;Angezeigt als:
+:<<wikidokulink "Tiddler-Name">>

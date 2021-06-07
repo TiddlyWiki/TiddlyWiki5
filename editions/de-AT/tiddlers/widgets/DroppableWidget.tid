@@ -1,12 +1,12 @@
 created: 20200924201850463
 creator: FBB
-modified: 20210519132101199
+modified: 20210602202533693
 modifier: FBB
 tags: Widgets
 title: DroppableWidget
 type: text/vnd.tiddlywiki
 
-Das ~DropableWidget erzeugt ein DOM-Element, auf das gezogene Elemente vom Benutzer fallen gelassen werden können, wodurch wiederum die angegebenen Aktionen ausgelöst werden. Es funktioniert nur auf Browsern, die Drag und Drop unterstützen, was normalerweise Desktop-Browser bedeutet. Aber mit einem [[Offiziellem Plugin|Offizielle Plugins]] ([ext[Mobile Drag And Drop Shim Plugin|https://tiddlywiki.com/#Mobile Drag And Drop Shim Plugin]]) gibt es die Möglichkeit Drag and Drop auch auf Mobilen Browser zu ermöglichen.
+Das <<.wid1 "Droppable">>-Widget erzeugt ein DOM-Element, auf das gezogene Elemente vom Benutzer fallen gelassen werden können, wodurch wiederum die angegebenen Aktionen ausgelöst werden. Es funktioniert nur auf Browsern, die Drag und Drop unterstützen, was normalerweise Desktop-Browser bedeutet. Aber mit einem [[Offiziellem Plugin|Offizielle Plugins]] ([ext[Mobile Drag And Drop Shim Plugin|https://tiddlywiki.com/#Mobile Drag And Drop Shim Plugin]]) gibt es die Möglichkeit Drag and Drop auch auf Mobilen Browser zu ermöglichen.
 
 !! Inhalt und Attribute
 
@@ -17,18 +17,28 @@ Das ~DropableWidget erzeugt ein DOM-Element, auf das gezogene Elemente vom Benut
 |tag |Optional: Tag, um die Vorgabe eines "div"-Elements zu überschreiben, wenn das Widget im Blockmodus gerendert wird, oder eines "span"-Elements, wenn es im Inline-Modus gerendert wird |
 |enable |<<.fromVersion "5.1.22">> Optional: Optionaler Wert "no", um die droppbare Funktionalität zu deaktivieren (Standardwert ist "yes") |
 
-Innerhalb der <<.param actions>>-Zeichenfolge gibt es zwei Variablen, die durch das DroppableWidget erzeugt werden:
+Innerhalb der <<.param actions>>-Zeichenfolge gibt es zwei Variablen, die durch das <<.wid1 "Droppable">>-Widget erzeugt werden:
 
 * Die [[actionTiddler Variable]] enthält den Titel des zu löschenden Elements
 * Die [[modifier Variable]] enthält die Modifikator-Taste, welche während des Ziehens gehalten wird (ist normalerweise, <<.attr ctrl>>, <<.attr shift>> oder <<.attr ctrl>> & <<.attr shift>> sein)
 
 Wenn mehrere Elemente fallengelassen werden, werden die Aktionen wiederholt ausgeführt, einmal für jedes fallengelassene Element.
 
-<<.hinweisMacro "Beachte, dass die Variable [[actionTiddler||actionTiddler Variable]] einen einzelnen, nicht zitierten Titel enthält. Dies ist anders als das DraggableWidget, das dieselbe Variable verwendet, um eine zitierte Titelliste zu übergeben." >>
+<<.tipMacro """Beachte, dass die Variable [[actionTiddler||actionTiddler Variable]] einen einzelnen, nicht zitierten Titel enthält. Dies ist anders als das DraggableWidget, das dieselbe Variable verwendet, um eine zitierte Titelliste zu übergeben.""" "Hinweis">>
+
+!! Beispiel
+
+In diesem Beispiel wird eine Palette mit Symbolen angezeigt. Durch Ziehen eines Tiddlers auf eines der Symbole wird dieses Symbol dem Tiddler zugewiesen.
+
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/Image]sort[title]]">
+<$droppable actions=<<droppable-image-actions>>>
+<$transclude/>
+</$droppable>
+</$list>
 
 <<.hr>>
 
-siehe auch:
+Siehe auch:
 
-:[ext[https://tiddlywiki.com/#DroppableWidget]]
-:[ext[https://tiddlywiki.com/#DragAndDropMechanism]]
+:<<wikidokulink "~DroppableWidget">> (englisch)
+:<<wikidokulink "~DragAndDropMechanism">> (englisch)

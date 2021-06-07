@@ -1,12 +1,12 @@
 created: 20200831204517038
 creator: FBB
-modified: 20210519132101581
+modified: 20210602211216994
 modifier: FBB
 tags: Widgets
 title: LinkCatcherWidget
 type: text/vnd.tiddlywiki
 
-Das <a href="#LinkCatcherWidget" class="doc-widget">$linkcatcher</a>-Widget fängt die [[Widget-Meldungen]] von <<.param tm-navigate>> ab, welche innerhalb seines untergeordneten Inhalts versendet werden, indem es eine oder alle dieser Aktionen ausführt:
+Das <<.wid2 "LinkCatcher" "linkcatcher">>-Widget fängt die [[Widget-Meldungen]] von <<.param tm-navigate>> ab, welche innerhalb seines untergeordneten Inhalts versendet werden, indem es eine oder alle dieser Aktionen ausführt:
 
 * Senden einer anderen Widget-Nachricht
 * Setzen eines Tiddlers auf den Titel des navigierten Tiddlers
@@ -22,8 +22,8 @@ Der Inhalt des <a href="#LinkCatcherWidget" class="doc-widget">$linkcatcher</a>-
 |message |Optionaler Bezeichner für eine [[Widget-Meldung|Widget-Meldungen]], die gesendet werden soll, wenn eine Navigation abgefangen wird  |
 |set |Optionaler Titel des Tiddlers, der beim Navigieren auf einen bestimmten Wert gesetzt wird |
 |setTo |Wert, der durch das Attribut <<.attr "set">> zugewiesen werden soll |
-|actions |Aktionen, die ausgeführt werden sollen, wenn ein Link aufgefangen wird. Innerhalb des Aktions-Strings enthält die Variable <<.var "navigateTo">> den Titel des Tiddlers, zu dem navigiert wird. <br/><<.fromVersion "5.1.23">> Die <<.var "modifier">>-Variable listet die Modifier-Tasten auf, die gedrückt werden, wenn die Aktion aufgerufen wird. Die möglichen Modifikatoren sind ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' und ''ctrl-alt-shift'' |
+|actions |Aktionen, die ausgeführt werden sollen, wenn ein Link aufgefangen wird. Innerhalb des Aktions-Strings enthält die Variable <<.var "navigateTo">> den Titel des Tiddlers, zu dem navigiert wird. <br/><<.from-version "5.1.23">> Die <<.var "modifier">>-Variable listet die Modifier-Tasten auf, die gedrückt werden, wenn die Aktion aufgerufen wird. Die möglichen Modifikatoren sind ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' und ''ctrl-alt-shift'' |
 
 <<.hr>>
 
-siehe: <<wikidokulink "~LinkCatcherWidget">> (englisch)
+Siehe: <<wikidokulink "~LinkCatcherWidget">> (englisch)

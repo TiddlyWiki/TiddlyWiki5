@@ -1,6 +1,6 @@
 created: 20201102220358782
 creator: FBB
-modified: 20210519132101639
+modified: 20210602212503342
 modifier: FBB
 tags: Widgets
 title: MacroCallWidget
@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 ! Einführung
 
-Das ''~MacroCallWidget'' bietet eine alternative Syntax für den Aufruf von [[Makros|Makro]]. Der Vorteil der Widget-Form besteht darin, dass Makro-Parameter als Widget-Attribute angegeben werden können, so dass Referenzen und Makro-Werte gesetzt werden können.
+Das <<.wid2 "MacroCall" "macrocall">>-Widget bietet eine alternative Syntax für den Aufruf von [[Makros|Makro]]. Der Vorteil der Widget-Form besteht darin, dass Makro-Parameter als Widget-Attribute angegeben werden können, so dass Referenzen und Makro-Werte gesetzt werden können.
 
 Beispielsweise kann ein Makro namens <<.var kursiv>>, das einen einzigen Parameter namens <<.param Text>> aufnimmt, auf jede dieser Arten aufgerufen werden:
 
@@ -28,7 +28,7 @@ Innerhalb des TiddlyWiki-Core gibt es mehrere Beispiele für das Makroaufruf-Wid
 
 ! Inhalt und Attribute
 
-Der Inhalt des <<.var $macrocall>>-Widgets-Tags wird ignoriert.
+Der Inhalt des <<.wid2 "MacroCall" "macrocall">>-Widgets-Tags wird ignoriert.
 
 |!Attribute |!Beschreibung |
 |$name |Name des aufzurufenden Makros |
@@ -38,4 +38,4 @@ Der Inhalt des <<.var $macrocall>>-Widgets-Tags wird ignoriert.
 
 <<.hr>>
 
-https://tiddlywiki.com/#MacroCallWidget
+Siehe: <<wikidokulink "MacroCallWidget">> (englisch)

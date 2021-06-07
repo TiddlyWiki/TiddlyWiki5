@@ -1,6 +1,6 @@
 created: 20200831210534312
 creator: FBB
-modified: 20210519132101631
+modified: 20210602212209892
 modifier: FBB
 tags: Widgets
 title: ListWidget
@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 ! Einleitung
 
-Das <<.wid List>>-Widget zeigt eine Reihe von Tiddlern an, die einem Tiddler-Filter entsprechen. Es kann für viele Zwecke verwendet werden:
+Das <<.wid1 List>>-Widget zeigt eine Reihe von Tiddlern an, die einem Tiddler-Filter entsprechen. Es kann für viele Zwecke verwendet werden:
 
 * Anzeige von benutzerdefinierten Linklisten, wie in der Seitenleiste von ~TiddlyWiki
 * Benutzerdefinierte Listen, wie z.B. "alle Tiddler, die mit 'Aufgabe' markiert sind und nicht mit 'erledigt' markiert sind".
@@ -66,7 +66,7 @@ Wird angezeigt als:
 
 <<<
 
-Unter [[gruppierte Listen]] erfährst du, wie man mit dem <<.wid List>>-Widget verschachtelte und gruppierte Listen erzeugen kann.
+Unter [[gruppierte Listen]] erfährst du, wie man mit dem <<.wid1 List>>-Widget verschachtelte und gruppierte Listen erzeugen kann.
 
 ! Inhalt und Attribute
 
@@ -91,7 +91,7 @@ Die Aktion des Listen-Widgets hängt von den Ergebnissen des Filters kombiniert 
 
 !! Bearbeitungsmodus
 
-Das <<.wid List>>-Widget kann optional den Entwurf von Tiddlern durch eine andere Vorlage rendern, um die Bearbeitung zu handhaben, siehe [[Entwurfs-Mechanismus]].
+Das <<.wid1 List>>-Widget kann optional den Entwurf von Tiddlern durch eine andere Vorlage rendern, um die Bearbeitung zu handhaben, siehe [[Entwurfs-Mechanismus]].
 
 !! <<.param storyview>> Attribut
 
@@ -105,15 +105,15 @@ Damit die Storyviews korrekt animiert werden, sollte jeder Eintrag in der Liste 
 
 !! History und Navigation
 
-Das optionale Attribut <<.param history>> gibt den Namen eines Tiddlers an, der verwendet wird, um den aktuellen Tiddler zu Navigationszwecken zu erfassen. Wenn der History-Tiddler die Listenansicht ändert, reagiert die Listenansicht, indem sie der Listenansicht signalisiert, die Navigation zu dem neuen Tiddler zu übernehmen.
+Das optionale Attribut <<.attr history>> gibt den Namen eines Tiddlers an, der verwendet wird, um den aktuellen Tiddler zu Navigationszwecken zu erfassen. Wenn der History-Tiddler die Listenansicht ändert, reagiert die Listenansicht, indem sie der Listenansicht signalisiert, die Navigation zu dem neuen Tiddler zu übernehmen.
 
 Wenn der History-Tiddler die Listenansicht ändert, wird damit signalisiert das die Listenansicht die Naviagation zum neuen Tiddler übernimmt. Siehe dazu: [[History-Mechanismus]].
 
 !! Zusätzliche Anmerkungen und Soderfälle
 
-* Wenn das Attribut <<.param filter>> nicht vorhanden ist, wird die Voreinstellung `[!is[system]sort[title]]]` verwendet.
+* Wenn das Attribut <<.attr filter>> nicht vorhanden ist, wird die Voreinstellung `[!is[system]sort[title]]]` verwendet.
 * Wenn das Listen-Widget vollständig leer ist (d.h. nur Leerraum zwischen dem öffnenden und dem schließenden Tag), dann verhält es sich so, als ob der Inhalt ein ''DIV''- oder ein ''SPAN''-Element wäre, der einen Link zum aktuellen Tiddler enthält (//es ist ein ''DIV'', wenn das Listen-Widget im Block-Modus ist, oder ein ''SPAN'', wenn es im Inline-Modus ist//)
-* Wenn das Attribut <<.param template>> nicht vorhanden ist, wird der Inhalt des Listen-Widgets als Vorlage verwendet, es sei denn, das Widget ist vollständig leer. In diesem Fall wird eine Standardvorlage verwendet.
+* Wenn das Attribut <<.attr template>> nicht vorhanden ist, wird der Inhalt des Listen-Widgets als Vorlage verwendet, es sei denn, das Widget ist vollständig leer. In diesem Fall wird eine Standardvorlage verwendet.
 
 <<.hr>>
 

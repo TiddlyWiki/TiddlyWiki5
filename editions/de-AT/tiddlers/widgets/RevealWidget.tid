@@ -1,7 +1,7 @@
 created: 20200831204539858
 creator: FBB
 jeremy: tiddlywiki
-modified: 20210519132101923
+modified: 20210602214450055
 modifier: FBB
 tags: Widgets
 title: RevealWidget
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 ! Einführung
 
-Das <<.wid "reveal">>-Widget verbirgt oder zeigt seinen Inhalt je nach dem Wert eines [[Zustands-Tiddlers|Status-Mechanismus]]. Der Typ des Widgets bestimmt die Bedingung für den anzuzeigenden Inhalt:
+Das <<.wid1 "reveal">>-Widget verbirgt oder zeigt seinen Inhalt je nach dem Wert eines [[Zustands-Tiddlers|Status-Mechanismus]]. Der Typ des Widgets bestimmt die Bedingung für den anzuzeigenden Inhalt:
 
 
 * type=''match'': der Inhalt wird angezeigt, wenn der Status-Tiddler mit dem Wert des Textattributs übereinstimmt
@@ -22,7 +22,7 @@ Das <<.wid "reveal">>-Widget verbirgt oder zeigt seinen Inhalt je nach dem Wert 
 
 ! Inhalt und Attribute
 
-Der Inhalt des <<.wid "reveal">>-Widgets wird nach den oben angegebenen Regeln angezeigt.
+Der Inhalt des <<.wid1 "reveal">>-Widgets wird nach den oben angegebenen Regeln angezeigt.
 
 |Attribute |Beschreibung |h
 |state |Eine Text-Referenz, welche den Status enthält |
@@ -40,11 +40,9 @@ Der Inhalt des <<.wid "reveal">>-Widgets wird nach den oben angegebenen Regeln a
 |animate |Auf <<.value yes>> setzen, um das Öffnen und Schließen zu animieren (Standardeinstellung ist <<.value no>>; erfordert, dass <<.attr retain>> auf <<.value yes>> gesetzt wird) |
 |retain |Setzen Sie diese Option auf <<.value yes>>, um zu erzwingen, dass der Inhalt beibehalten wird, auch wenn er versteckt ist (Standardeinstellung <<.value no>>) |
 
-|,{{note-image.svg}}&nbsp; Hinweis |h
-|<<.fromVersion 5.1.18>> <<.attr stateTitle>>-, <<.attr stateField>>- und <<.attr stateIndex>>-Attribute ermöglichen es, Tiddler-Zustände direkt zu spezifizieren, ohne sie als Text-Referenzen zu interpretieren. <br/>&nbsp;  |
+<<.tipMacro """<$macrocall $name=".attr" _="stateTitle"/>, <$macrocall $name=".attr" _="stateField"/> und <$macrocall $name=".attr" _="stateIndex"/>-Attribute ermöglichen es, Tiddler-Zustände direkt zu spezifizieren, ohne sie als Text-Referenzen zu interpretieren.""" "Hinweis" >>
 
-|,{{note-image.svg}}&nbsp; Hinweis |h
-|Die Beibehaltung des Inhalts im ausgeblendeten Zustand kann zu einer schlechten Leistung führen, da der ausgeblendete Inhalt eine Aktualisierungsverarbeitung erfordert, obwohl er nicht angezeigt wird. Auf der anderen Seite kann der Inhalt viel schneller aufgezeigt werden. Beachten Sie, dass die Einstellung ''animate="yes"'' auch ''retain="yes"'' erfordert. <br/>&nbsp;  |
+<<.tipMacro """Die Beibehaltung des Inhalts im ausgeblendeten Zustand kann zu einer schlechten Leistung führen, da der ausgeblendete Inhalt eine Aktualisierungsverarbeitung erfordert, obwohl er nicht angezeigt wird. Auf der anderen Seite kann der Inhalt viel schneller aufgezeigt werden. Beachten Sie, dass die Einstellung ''animate="yes"'' auch ''retain="yes"'' erfordert. """ "Hinweis">>
 
 !Beispiele
 
@@ -111,7 +109,7 @@ Und dies ist ein ''Text''
 
 !! Popup-Fenster
 
-Hier ist ein einfaches Beispiel für ein Popup, das mit dem ~RevealWidget erstellt wurde:
+Hier ist ein einfaches Beispiel für ein Popup, das mit dem <<.wid Reveal>>-Widget erstellt wurde:
 
 ```
 <$button popup="$:/SamplePopupState">Pop me up!</$button>
@@ -148,7 +146,7 @@ Hier ist ein einfaches Beispiel, wie Textreferenzen mit Feldinhalt zur Steuerung
 ```
 <$reveal type="match" state="!!jeremy" text="tiddlywiki">
 
-!! Meldung
+<h2>Meldung</h2>
 @@border-color:red;
 <<<
 ~TiddlyWiki!
@@ -162,15 +160,14 @@ Hier ist ein einfaches Beispiel, wie Textreferenzen mit Feldinhalt zur Steuerung
 
 !!! Wird angezeigt als:
 
-!! Meldung
+<h2>Meldung</h2>
+
 @@border-color:red;
 <<<
 ~TiddlyWiki!
 <<<
 @@
 
-</$reveal>
-
 <<.hr>>
 
-siehe: [ext[https://tiddlywiki.com/#RevealWidget]]
+Siehe: <<wikidokulink "~RevealWidget">> (englisch)

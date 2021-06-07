@@ -1,9 +1,43 @@
 created: 20140913190644927
 creator: pmario
-modified: 20210519132100279
+modified: 20210602210556376
 modifier: pmario
 tags: Widgets Lexikon
 title: ImportVariablesWidget
 type: text/vnd.tiddlywiki
 
-Siehe: https://tiddlywiki.com/#ImportVariablesWidget
+Das <<.wid2 "ImportVariables" "importvariables">>-Widget importiert Makro- und Variablendefinitionen aus einer Liste von anderen Tiddlern und stellt sie seinen Unterobjekten zur Verfügung. Ein Beispiel:
+
+```
+<$importvariables filter="[tag[meineSpezialMacros]]">
+Alle in Tiddlern definierten Makros mit dem Tag "meineSpezialMacros" sind hier verfügbar
+</$importvariables>
+```
+
+!! Attribute und Inhalte
+
+|Attribute |Beschreibung |h
+|filter |[[Filter]], der die Tiddler definiert, aus denen Makrodefinitionen importiert werden sollen. |
+
+!! Globale Macros
+
+Sogenannte "//globale Makros//" werden innerhalb der Hauptseitenvorlage ($:/core/ui/PageTemplate) implementiert. Dazu wird der Seiteninhalt in das folgende <<.wid2 "ImportVariables" "importvariables">>-Widget eingeschlossen:
+
+```
+<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
+...
+</$importvariables>
+
+```
+
+! Das `\import` Pragma
+
+<<.from-version "5.1.18">> Das `\import`-Pragma ist eine alternative Syntax für die Verwendung des <<.wid2 "ImportVariables" "importvariables">>-Widget. Das vorherige Beispiel könnte zum Beispiel wie folgt ausgedrückt werden:
+
+```
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+```
+
+<<.hr>>
+
+Siehe: <<wikidokulink "ImportVariablesWidget">> (englisch)

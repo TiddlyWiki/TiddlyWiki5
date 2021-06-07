@@ -1,7 +1,5 @@
-created: 20210519182110915
-modified: 20210519183152081
-title: $:/config/FileSystemPaths
-type: text/vnd.tiddlywiki
+[prefix[$:/_fbb/]removeprefix[$:/_fbb]addprefix[system/fbb]]
+[prefix[$:/]removeprefix[$:]addprefix[system/]]
 
 [tag[WikiText]addprefix[wikitext/]]
 [tag[Makros]addprefix[makros/]]
@@ -11,4 +9,6 @@ type: text/vnd.tiddlywiki
 [tag[InhaltsVerzeichnis]addprefix[InhaltsVerzeichnis/]]
 [tag[Widgets]addprefix[widgets/]]
 [tag[Was kann TiddlyWiki]addprefix[was-kann-TiddlyWiki/]]
-
+[tag[Plugin-Mechanismus]addprefix[plugins/]]
+[tag[Offizielle Plugins]addprefix[offizielle-plugins/]]
+[tag[TODO]addprefix[todo/]]

@@ -1,12 +1,12 @@
 created: 20200526203838882
 creator: FBB
-modified: 20210519132101764
+modified: 20210603203207819
 modifier: FBB
 tags: Plugin-Mechanismus
 title: Plugin-Ordner
 type: text/vnd.tiddlywiki
 
-Auf dem Server können [[Plugins]] als gewöhnliche JSON-[[Tiddler]] gespeichert werden. Aber es ist oft bequemer, sie als separate Tiddler-Dateien in Ordnern zu speichern. Der Ordner `plugins` muss eine Datei `plugin.info` enthalten, in der die Metadaten für das Plugin enthalten sind. Sie kann optional auch Dateien außerhalb des Plugin-Ordners bestimmen, die als Tiddler geladen werden sollen.
+Auf dem Server können [[Plugins]] als gewöhnliche [[JSON-Tiddler]] gespeichert werden. Aber es ist oft bequemer, sie als separate Tiddler-Dateien in Ordnern zu speichern. Der Ordner `plugins` muss eine Datei `plugin.info` enthalten, in der die Metadaten für das Plugin enthalten sind. Sie kann optional auch Dateien außerhalb des Plugin-Ordners bestimmen, die als Tiddler geladen werden sollen.
 
 Die Datei `pugin.info` enthält die folgende JSON-Struktur:
 

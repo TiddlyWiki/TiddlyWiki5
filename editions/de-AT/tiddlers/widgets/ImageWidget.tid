@@ -1,6 +1,6 @@
 created: 20140913185748692
 creator: pmario
-modified: 20210519132100275
+modified: 20210602204252381
 modifier: FBB
 tags: Widgets
 title: ImageWidget
@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 !! Einleitung
 
-Das <<.wid Image>>-Widget kann Bilder anzeigen. Dazu kann entweder eine externe [[URL]] angegeben werden oder ein Tiddler-Titel welcher das Bild enthält.
+Das <<.wid1 Image>>-Widget kann Bilder anzeigen. Dazu kann entweder eine externe [[URL]] angegeben werden oder ein Tiddler-Titel welcher das Bild enthält.
 
 !! Inhalte und Attribute
 
@@ -28,8 +28,8 @@ Die Breite und die Höhe können als Pixelwerte (z.B. "23" oder "23px") oder Pro
 
 Wenn das <<.wid Image>>-Widget zur Anzeige von Tiddler-basierten Bildern verwendet wird, arbeitet es in zwei verschiedenen Modi:
 
-* Wenn das <<.var _canonical_uri>>-Feld vorhanden ist, wird es als <<.var src>>-Attribut des generierten <<.attr img>>-Elements verwendet und das Textfeld wird ignoriert.
-* Ohne das <<.var _canonical_uri>>-Feld erzeugt das Bildwidget ein <<.attr img>>-Element, das die Bilddaten direkt über die <<.attr data:>>-URI einbettet.
+* Wenn das <<.field _canonical_uri>>-Feld vorhanden ist, wird es als <<.attr src>>-Attribut des generierten <<.attr img>>-Elements verwendet und das Textfeld wird ignoriert.
+* Ohne das <<.field _canonical_uri>>-Feld erzeugt das <<.wid1 Image>>-Widget ein <<.attr img>>-Element, das die Bilddaten direkt über die <<.attr data:>>-URI einbettet.
 
 Siehe [[Externe Bilder]] für weitere Details.
 

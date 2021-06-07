@@ -1,6 +1,6 @@
 created: 20200901192626425
 creator: FBB
-modified: 20210519132101957
+modified: 20210602214947000
 modifier: FBB
 tags: Widgets
 title: SetWidget
@@ -8,21 +8,21 @@ type: text/vnd.tiddlywiki
 
 ! Einleitung
 
-Das Set-Widget weist einer angegebenen Variablen einen Wert zu. Der neue Wert der Variable ist für den Inhalt innerhalb des gesetzten Variablen-Widgets verfügbar.
+Das <<.wid1 Set>>-Widget weist einer angegebenen Variablen einen Wert zu. Der neue Wert der Variable ist für den Inhalt innerhalb des gesetzten Variablen-Widgets verfügbar.
 
 ! Inhalt und Attribute
 
-Der Inhalt des Set-Widgets ist der Bereich für den Wert, der zugewiesen Variable.
+Der Inhalt des <<.wid1 Set>>-Widgets ist der Bereich für den Wert, der zugewiesen Variable.
 
 |!Attribute |!Beschreibung |
 |name |Der Name der Variablen, die zugewiesen werden soll (Standardwert ist [[currentTiddler |currentTiddler Variable]]) |
 |value |Der Wert, welcher der Variablen zugewiesen werden soll, wenn der Filter fehlt oder nicht leer ist. |
-|tiddler |<<.fromVersion "5.1.15">> Optionaler Titel des Tiddlers, von dem der Wert abgelesen werden soll |
-|subtiddler |<<.fromVersion "5.1.16">> Gibt optional den Titel eines Subtiddlers innerhalb eines Plugin-Tiddlers an, der durch das <<.param tiddler>>-Attribut identifiziert wird |
-|field |<<.fromVersion "5.1.15">> Optionales Feld des Tiddlers, aus dem der Wert abgelesen werden soll (nur verwendet, wenn <<.param tiddler>> verwendet wird) |
-|index |<<.fromVersion "5.1.15">> Optionaler Index des Tiddlers, von dem der Wert gelesen werden soll (wird nur verwendet, wenn <<.param tiddler>> verwendet wird) |
+|tiddler |<<.from-version "5.1.15">> Optionaler Titel des Tiddlers, von dem der Wert abgelesen werden soll |
+|subtiddler |<<.from-version "5.1.16">> Gibt optional den Titel eines Subtiddlers innerhalb eines Plugin-Tiddlers an, der durch das <<.attr tiddler>>-Attribut identifiziert wird |
+|field |<<.from-version "5.1.15">> Optionales Feld des Tiddlers, aus dem der Wert abgelesen werden soll (nur verwendet, wenn <<.attr tiddler>> verwendet wird) |
+|index |<<.from-version "5.1.15">> Optionaler Index des Tiddlers, von dem der Wert gelesen werden soll (wird nur verwendet, wenn <<.attr tiddler>> verwendet wird) |
 |filter |Ein optionaler Filter, der ausgewertet und der Variablen zugewiesen werden kann (siehe unten  'Variablenzuweisung in gefilterter Liste') |
-|select |<<.fromVersion "5.1.14">> Ein optionaler nullbasierter Index des von der Filterausgabe zurückzugebenden Elements (siehe unten 'Zuweisung transkludierter Variablen') |
+|select |<<.from-version "5.1.14">> Ein optionaler nullbasierter Index des von der Filterausgabe zurückzugebenden Elements (siehe unten 'Zuweisung transkludierter Variablen') |
 |emptyValue |Der Wert, der der Variablen zugewiesen werden soll, wenn der angegebene Wert fehlt oder leer ist (siehe unten 'Bedingte Variablenzuweisung') |
 
 ! Einfache Variablenzuweisung
@@ -64,11 +64,11 @@ Diese Form des Set-Variablen-Widgets wertet den Filter aus und weist das Ergebni
 
 ! Variablenzuweisung für gefilterte Elemente
 
-<<.fromVersion 5.1.14 >> Diese Form des Set-Widgets wertet den Filter aus und weist das angegebene Ergebnis der Variable als einzelnes Element zu (d.h. keine Verwendung von doppelten eckigen Klammern für Titel, die Leerzeichen enthalten).
+<<.from-version 5.1.14 >> Diese Form des Set-Widgets wertet den Filter aus und weist das angegebene Ergebnis der Variable als einzelnes Element zu (d.h. keine Verwendung von doppelten eckigen Klammern für Titel, die Leerzeichen enthalten).
 
 ! Zuweisung transkludierter Variablen
 
-<<.fromVersion 5.1.15 >> Diese Form des Set-Widgets erhält den der Variable zuzuweisenden Wert aus einem Tiddler-Feld oder Index. Zum Beispiel:
+<<.from-version 5.1.15 >> Diese Form des Set-Widgets erhält den der Variable zuzuweisenden Wert aus einem Tiddler-Feld oder Index. Zum Beispiel:
 
 ```
 <$set name="myVariable" tiddler="TiddlyWiki" field="text">
@@ -83,3 +83,7 @@ Das obige Beispiel könnte auch geschrieben werden als `<$set name="myVariable" 
 <$text text=<<myVariable>>/>
 </$set>
 ```
+
+<<.hr>>
+
+Siehe: <<wikidokulink "~SetWidget">> (englisch)

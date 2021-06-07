@@ -1,6 +1,6 @@
 created: 20201119201556364
 creator: FBB
-modified: 20210519132101888
+modified: 20210603202038341
 modifier: FBB
 tags: [[Offizielle Plugins]]
 title: Railroad Plugin
@@ -12,4 +12,6 @@ Alternativ kann die [[Diagrammnotation|$:/plugins/tiddlywiki/railroad/syntax]] i
 
 Das Plugin basiert auf einer Bibliothek von [[Tab Atkins|https://github.com/tabatkins]] und wurde erweitert, um es flexibler zu gestalten. So können Komponenten eines Diagramms als Links fungieren oder von anderen Tiddlern übernommen werden.
 
-siehe Plugin-Tiddler: [[$:/plugins/tiddlywiki/railroad]]
+<<.hr>>
+
+Siehe Plugin-Tiddler: [[$:/plugins/tiddlywiki/railroad]]

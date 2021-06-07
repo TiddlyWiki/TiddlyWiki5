@@ -1,12 +1,12 @@
 created: 20210421204448428
 creator: FBB
-modified: 20210519132101127
+modified: 20210603201900734
 modifier: FBB
 tags: Widgets
 title: ButtonWidget
 type: text/vnd.tiddlywiki
 
-Das <<.wid Button>>-Widget zeigt ein HTML `<button>`-Element an, das beim Anklicken eine Kombination von mehreren optionalen Aktionen ausführen kann:
+Das <<.wid1 Button>>-Widget zeigt ein HTML `<button>`-Element an, das beim Anklicken eine Kombination von mehreren optionalen Aktionen ausführen kann:
 
 * Ausführen von beliebigen [[ActionWidgets|ActionWidget]], die im Attribut <<.attr actions>> übergeben werden
 * Ausführen von beliebigen ~ActionWidgets, die unmittelbare Nachfolger des Schaltflächen-Widgets sind
@@ -20,12 +20,12 @@ Die integrierten Aktionen werden als Verknüpfung zum Aufrufen allgemeiner Aktio
 
 ! Attribute und Inhalte
 
-Alles zwischen den Tags des <<.wid Button>>-Widgets wird als Beschriftung auf dem Button angezeigt.
+Alles zwischen den Tags des <<.wid1 Button>>-Widgets wird als Beschriftung auf dem Button angezeigt.
 
 |!Attribut |!Beschreibung |
-|actions |Eine Zeichenkette mit einem oder mehreren [[ActionWidget]]s, die bei der Erkennung des Tasten-Events ausgelöst werden sollen. <br/><<.fromVersion 5.23.1>> Die [[modifier Variable]] listet die Modifier-Keys auf, welche betätigt werden, wenn die Aktion aufgerufen wird. Mögliche Modifier-Keys sind ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' und ''ctrl-alt-shift'' |
+|actions |Eine Zeichenkette mit einem oder mehreren [[ActionWidget]]s, die bei der Erkennung des Tasten-Events ausgelöst werden sollen. <br/><<.from-version 5.23.1>> Die [[modifier Variable]] listet die Modifier-Keys auf, welche betätigt werden, wenn die Aktion aufgerufen wird. Mögliche Modifier-Keys sind ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' und ''ctrl-alt-shift'' |
 |to |Der Titel des Tiddlers, zu dem navigiert werden soll |
-|message |Der Name der [[Widget-Meldung|Widget-Meldungen]], die gesendet werden soll, wenn der Button angeklickt 5.1.23wird |
+|message |Der Name der [[Widget-Meldung|Widget-Meldungen]], die gesendet werden soll, wenn der Button angeklickt wird. |
 |param |Ein optionaler Parameter für die Widget-Meldung |
 |set |Eine [[Text-Referenz]], der ein neuer Wert zugewiesen werden soll |
 |setTitle |Der Titel, dem ein neuer Wert zugewiesen werden soll (''ohne'' Text-Referenz).  Wird gegenüber der Methode mit <<.attr set>> bevorzugt. |
@@ -44,11 +44,11 @@ Alles zwischen den Tags des <<.wid Button>>-Widgets wird als Beschriftung auf de
 |dragTiddler |Ein optionaler Tiddler-Titel, den Button verschiebbar macht und den Payload-Tiddler identifiziert. Siehe [[DraggableWidget]] für weitere Details |
 |dragFilter |Ein optionaler Filter, den Button verschiebbar macht und die Liste der Payload-Tiddler identifiziert. Siehe [[DraggableWidget]] für weitere Details |
 |tabindex |Das Attribut <<.attr tabindex>> des Buttons wird auf den angegebenen Wert geändert |
-|disabled|<<.fromVersion "5.1.23">> Optional. Angabe ''yes'' deaktiviert den Button. Standardwert ist ''no'' |
+|disabled|<<.from-version "5.1.23">> Optional. Angabe ''yes'' deaktiviert den Button. Standardwert ist ''no'' |
 
 ''Hinweis'': In fast allen Fällen, in denen eine Text-Referenz als Widget-Attribut verwendet wird, wird diese zwischen geschweiften Klammern platziert, um den aktuell dort gespeicherten Wert zu [[transkludieren|Transklusion in WikiText]].
 
-Wenn man jedoch beim <<.wid Button>>-Widget eine Text-Referenz als Wert des <<.attr Set>>-Attributs verwendet, wird auf den Speicherort selbst verwiesen und nicht auf den dort gespeicherten Wert, weshalb dort keine geschweiften Klammern verwendet werden müssen. Beispielsweise lässt sich ein <<.wid Button>>-Widget schreiben welches das Beschriftungsfeld von TiddlerA so einstellt, dass es mit dem von TiddlerB übereinstimmt:
+Wenn man jedoch beim <<.wid1 Button>>-Widget eine Text-Referenz als Wert des <<.attr Set>>-Attributs verwendet, wird auf den Speicherort selbst verwiesen und nicht auf den dort gespeicherten Wert, weshalb dort keine geschweiften Klammern verwendet werden müssen. Beispielsweise lässt sich ein <<.wid Button>>-Widget schreiben welches das Beschriftungsfeld von TiddlerA so einstellt, dass es mit dem von TiddlerB übereinstimmt:
 
 <<wikitext-example-without-html """<$button set="Test-Tiddler!!text" setTo={{Releases!!text}} >
    Klick mich!
@@ -56,10 +56,10 @@ Wenn man jedoch beim <<.wid Button>>-Widget eine Text-Referenz als Wert des <<.a
 
 <br/>
 
-<<.tip2 """<$macrocall $name=".from-version" version="5.1.18"/> <$macrocall $name=".attr" _="setTitle"/>, <$macrocall $name=".attr" _="setField"/> and <$macrocall $name=".attr" _="setIndex"/>-Attribute erlauben es, Tiddler-Zustände direkt zu spezifizieren, ohne sie als Text-Referenzen zu interpretieren. Dies ist nützlich für Grenzfälle, in denen Titel Zeichen enthalten können, die zur Kennzeichnung von Tiddler-Feldern oder -Indizes verwendet werden (`!!`, `##`)
+<<.tipMacro """<$macrocall $name=".from-version" version="5.1.18"/> <$macrocall $name=".attr" _="setTitle"/>, <$macrocall $name=".attr" _="setField"/> and <$macrocall $name=".attr" _="setIndex"/>-Attribute erlauben es, Tiddler-Zustände direkt zu spezifizieren, ohne sie als Text-Referenzen zu interpretieren. Dies ist nützlich für Grenzfälle, in denen Titel Zeichen enthalten können, die zur Kennzeichnung von Tiddler-Feldern oder -Indizes verwendet werden (`!!`, `##`)
 """ "Tipp">>
 
-<<.tip2 """
+<<.tipMacro """
 Setze das Attribut <$macrocall $name=".attr" _="class"/> auf <$macrocall $name=".value" _="tc-btn-invisible tc-tiddlylink"/>, um eine Schaltfläche wie einen internen Link aussehen zu lassen.
 """ "Tipp">>
 

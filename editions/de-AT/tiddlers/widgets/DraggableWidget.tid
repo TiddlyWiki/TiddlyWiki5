@@ -1,12 +1,12 @@
 created: 20200924201921016
 creator: FBB
-modified: 20210519132101196
+modified: 20210602202602608
 modifier: FBB
 tags: Widgets
 title: DraggableWidget
 type: text/vnd.tiddlywiki
 
-Das ~DraggableWidget erzeugt ein DOM-Element, das vom Benutzer verschoben werden kann. Es funktioniert nur auf Browsern, die Drag und Drop unterstützen, was normalerweise Desktop-Browser bedeutet. Aber mit einem [[Offiziellem Plugin|Offizielle Plugins]] ([ext[Mobile Drag And Drop Shim Plugin|https://tiddlywiki.com/#Mobile Drag And Drop Shim Plugin]]) gibt es die Möglichkeit Drag and Drop auch auf Mobilen Browser zu ermöglichen.
+Das <<.wid1 "Draggable">>-Widget erzeugt ein DOM-Element, das vom Benutzer verschoben werden kann. Es funktioniert nur auf Browsern, die Drag und Drop unterstützen, was normalerweise Desktop-Browser bedeutet. Aber mit einem [[Offiziellem Plugin|Offizielle Plugins]] ([ext[Mobile Drag And Drop Shim Plugin|https://tiddlywiki.com/#Mobile Drag And Drop Shim Plugin]]) gibt es die Möglichkeit Drag and Drop auch auf Mobilen Browser zu ermöglichen.
 
 Dem verschiebbaren Element kann eine Liste von Tiddlern zugewiesen werden, die als zusätzlichen Payload verwendet werden. Falls gewünscht, kann es Aktionen aufrufen, wenn das Ziehen beginnt und wenn es endet.
 
@@ -26,11 +26,11 @@ Die [[actionTiddler Variable]] ist sowohl in Startaktionen als auch in Endaktion
 
 <<.hinweisMacro "Beachte, dass die Variable [[actionTiddler|actionTiddler Variable]] eine mit doppelten eckigen Klammern zitierte Titelliste enthält. Dies ist anders als das DroppableWidget, das dieselbe Variable verwendet, um einen einzigen nicht zitierten Titel zu übergeben.">>
 
-Das LinkWidget beinhaltet die Funktionalität des ~DraggableWidget über das Attribut <<.param draggable>>.
+Das <<.wid1 Link>>-Widget beinhaltet die Funktionalität des ~DraggableWidget über das Attribut <<.param draggable>>.
 
 <<.hr>>
 
-siehe auch:
+Siehe auch:
 
-:[ext[https://tiddlywiki.com/#DraggableWidget]]
-:[ext[https://tiddlywiki.com/#DragAndDropMechanism]]
+: <<wikidokulink "~DraggableWidget">> (englisch)
+: <<wikidokulink "~DragAndDropMechanism">> (englisch)
