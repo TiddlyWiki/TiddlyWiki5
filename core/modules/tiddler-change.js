@@ -33,7 +33,7 @@ TiddlerChangeManager.prototype.updateTiddlerFilterLists = function(tiddlerList) 
 			tiddlerFields = $tw.wiki.getTiddler(title).fields;
 		this.tiddlerFilters[i] = tiddlerFields["tiddler-filter"] !== undefined ? tiddlerFields["tiddler-filter"] : undefined;
 		this.tiddlerActions[i] = tiddlerFields.text;
-		this.tiddlerFilterLists[i] = $tw.wiki.filterTiddlers(this.tiddlerChangeList[i]);
+		this.tiddlerFilterLists[i] = $tw.wiki.filterTiddlers(this.tiddlerFilters[i]);
 	}
 };
 
