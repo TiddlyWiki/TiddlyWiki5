@@ -1,0 +1,37 @@
+created: 20140918095353295
+creator: pmario
+modified: 20150513154206176
+modifier: pmario
+tags: InhaltsVerzeichnis Intro
+title: Einführung
+type: text/vnd.tiddlywiki
+
+~TiddlyWiki ist eine Web-Applikation, die Sie frei herunterladen können. Sie können sie speichern, wo Sie wollen:
+
+* Auf Ihrem Laufwerk,
+* USB-Wechselspeicher
+* oder Ihrem "Cloud Speicher"
+
+Sie sind der Herr über Ihre Daten!
+
+Sie können ~TiddlyWiki verwenden um Ihre Notizen zu erstellen / organisieren / oder mit Freunden zu teilen, in einer Weise, die kein anderes Textverarbeitungsprogramm vermag. ~TiddlyWiki speichert Ihre Texte in einer "nicht-linearen" Form, mit Hilfe von [[Tags]], [[Hyperlinks]] und vielen weiteren Möglichkeiten. So können Sie Ihre Notizen strukturieren, in einer 
+Weise, die mehr dem entspricht, "wie wir denken", nicht in einem vom Entwickler vorgegebenen starren Korsett. 
+
+Sie können TiddlyWiki als eine einzige Datei speichern, die Sie mit dem Web-Browser, online oder offline, verwenden können. Für geübte Benutzer kann ~TiddlyWiki als [[Node.js Applikation|Node.js]] verwendet werden, die jeden [[Tiddler]] als einzelne Datei behandelt und dabei als zentrales Archiv fungiert.
+
+!!! Wie können Sie ~TiddlyWiki nun für sich nutzen?
+
+* Im Anschluss sind einige Links aufgeführt, mit denen Sie starten sollten, oder Sie können jederzeit das InhaltsVerzeichnis verwenden.
+
+* Das ~InhaltsVerzeichnis kann auch über den Reiter "Inhalt" auf der rechten Seite aufgerufen werden.
+
+* ''Starten Sie jetzt mit "ErsteSchritte".'' Viel Spaß!
+
+!!! Weitere Links
+
+* ''ErsteSchritte''
+* [[TiddlyWiki Syntax|WikiText]] 
+* [[Liste aller HowTo's]]
+* [[Was kann TiddlyWiki]] 
+* [[WikiText mehr Beispiele]] 
+* [[Was geschah mit dem alten TiddlyWiki?|Was geschah mit dem alten TiddlyWiki]]

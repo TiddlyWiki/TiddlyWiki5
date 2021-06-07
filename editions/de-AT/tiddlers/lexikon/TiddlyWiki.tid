@@ -1,0 +1,13 @@
+created: 20140908132950428
+creator: pmario
+modified: 20140921170714471
+modifier: pmario
+tags: Lexikon
+title: TiddlyWiki
+type: text/vnd.tiddlywiki
+
+~TiddlyWiki ist eine Wiki-Software, die komplett ohne Server auskommt - die gesamte Programmlogik befindet sich als ~JavaScript-Programm in der HTML-Seite (schauen Sie ruhig einmal in den Quelltext dieser Seite).
+
+~TiddlyWiki wird von einem Team um JeremyRuston entwickelt und gepflegt. Das Team ist organisiert unter der Organisation UnaMesa, einer Non-Profit-Organisation zur Entwicklung und Pflege von elektronischen Lernsystemen.
+
+Nähere Informationen und auch die jeweils aktuellste Fassung von ~TiddlyWiki finden Sie unter https://www.tiddlywiki.com/.

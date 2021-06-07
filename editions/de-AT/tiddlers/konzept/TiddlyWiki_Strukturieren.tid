@@ -1,0 +1,13 @@
+created: 20150518115646924
+modified: 20150518121920209
+origin: https://tiddlywiki.com/#Structuring%20TiddlyWiki
+tags: Konzept
+title: TiddlyWiki Strukturieren
+type: text/vnd.tiddlywiki
+
+~TiddlyWiki bietet mehrere Möglichkeiten um eine "Story" zu strukturieren, und Beziehungen zwischen Tiddlern herzustellen. 
+
+* WikiLinks
+* [[Tags]]
+* [[Titel Listen]]
+* DataTiddlers

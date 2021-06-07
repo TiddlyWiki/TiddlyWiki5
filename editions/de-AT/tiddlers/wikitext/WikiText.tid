@@ -1,0 +1,14 @@
+created: 20131205155227468
+creator: pmario
+list: [[Formatierungen in WikiText]] [[Überschriften in WikiText]] [[Listen in WikiText]] [[Zitate in WikiText]] [[Verknüpfungen in WikiText]] [[Trennlinie in WikiText]] [[Paragraphs in WikiText]] [[Bilder in WikiText]] [[Code Block in WikiText]] [[Definitionen in WikiText]] [[Tabellen in WikiText]] [[Zeilenumbruch in WikiText]] [[Typisierte Blöcke in WikiText]]
+modified: 20140922132638761
+modifier: ChrisK
+tags: Konzept Referenz InhaltsVerzeichnis
+title: WikiText
+type: text/vnd.tiddlywiki
+
+~WikiText ist eine Auszeichnungssprache, die es erlaubt, auf einfache Weise Texte und ihre Formatierung in Textform einzugeben. Das erlaubt es Ihnen, sich auf das Schreiben zu konzentrieren und nicht auf eine komplexe Oberfläche, die vom Wesentlichen ablenkt. Für Anwender, die bereits MarkDown kennen, sollte es relativ leicht sein, sich in ~WikiText einzuarbeiten. WikiText bietet mehr Möglichkeiten zum Verlinken und zur Erstellung von interaktiven Inhalten. 
+
+Die folgenden Elemente sind im TW Kern enthalten:
+
+<<list-links "[tag[WikiText]]">>

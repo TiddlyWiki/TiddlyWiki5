@@ -1,0 +1,36 @@
+caption: Willkommen!
+created: 20130822170200000
+creator: pmario
+list: [[A Gentle Guide to TiddlyWiki]] [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[What happened to the original TiddlyWiki?]]
+modified: 20150518143131326
+modifier: pmario
+tags: InhaltsVerzeichnis
+title: HelloThere
+type: text/vnd.tiddlywiki
+
+! Willkommen!
+
+''Haben Sie schon jemals das Gefühl gehabt, Ihr Gehirn sei nicht groß genug, um sich alles zu merken, was Ihnen wichtig ist?''
+
+Willkommen bei ''~TiddlyWiki'', dem einzigartigen [[nicht-linearen|Philosophy von Tiddlern]] Web-Notizbuch, das Ihnen hilft Ihre Ideen zu [[sammeln|Erstellen von Notizen]], zu [[strukturieren|TiddlyWiki Strukturieren]] und [[weiter zu geben|Informationen weitergeben]]. 
+
+<div style="font-size:0.7em;text-align:center;margin-top:2em;margin-bottom:2em;">
+<<list-thumbnails filter:"[tag[HelloThumbnail]]" width:"168" height:"95">>
+</div>
+
+Anders, als bei herkömmlichen Online-Diensten, lässt Ihnen ~TiddlyWiki die Freiheit, wo sie ihre Daten speichern. Da ~TiddlyWiki alle Daten als simplen Text speichert, sind Notizen, die Sie heute machen, garantiert in Jahrzehnten noch einfach lesbar. 
+
+<div style="font-size:0.7em;text-align:center;margin-top:3em;margin-bottom:3em;">
+<a href="http://groups.google.com/group/TiddlyWiki" class="tc-btn-big-green" style="background-color:#FF8C19;" target="_blank">
+{{$:/core/images/mail}} ~TiddlyWiki Mailing List
+</a>
+<a href="https://twitter.com/TiddlyWiki" class="tc-btn-big-green" style="background-color:#5E9FCA;" target="_blank">
+{{$:/core/images/twitter}} @~TiddlyWiki on Twitter
+</a>
+<a href="https://github.com/Jermolene/TiddlyWiki5" class="tc-btn-big-green" style="background-color:#444;" target="_blank">
+{{$:/core/images/github}} ~TiddlyWiki on ~GitHub
+</a>
+<a href="https://tiddlywiki.com" class="tc-btn-big-green" style="background-color:#green;" target="_blank">
+{{Motovun Jack.svg}} ~TiddlyWiki Homepage
+</a>
+</div>

@@ -1,0 +1,27 @@
+created: 20140923102233467
+creator: pmario
+modified: 20140923173538799
+modifier: pmario
+tags: [[Was kann TiddlyWiki]] TaskManagement
+title: Task Management mit Tags
+type: text/vnd.tiddlywiki
+
+Mit TiddlyWiki kann man sehr einfach ein Task Management System aufbauen. Die Idee hier ist, dass einzelne Aktivitäten (Tasks) mit "task" und "done" getaggt werden. 
+
+Damit können dynamische Listen erstellt werden. 
+
+!! Offene Aktivität
+
+<$list filter="[!has[draft.of]tag[task]!tag[done]sort[created]]">
+
+<$checkbox tag="done"> <$link to={{!!title}}><$view field="title"/></$link></$checkbox>
+
+</$list>
+
+!! Erledigte Aktivität
+
+<$list filter="[!has[draft.of]tag[task]tag[done]sort[created]]">
+
+<$checkbox tag="done"> ~~<$link to={{!!title}}><$view field="title"/></$link>~~</$checkbox>
+
+</$list>

@@ -1,0 +1,14 @@
+created: 20140923135826602
+creator: pmario
+modified: 20140923175428869
+modifier: pmario
+tags: $:/_tags/ListIcon
+title: list-check.svg
+type: image/svg+xml
+
+<svg xmlns="http://www.w3.org/2000/svg" class="tc-list-image-check tc-list-image" height="15" width="15" >
+<g stroke-linejoin="round" stroke="#e15a2d" stroke-linecap="round" stroke-miterlimit="4" stroke-dasharray="none" stroke-width="2.4" fill="none">
+<path d="M10.209,10.056v-1.1683c7.449-4.9934-0.719-9.2766-3.331-4.7527"/>
+<path d="m9.855,13.771,0.67115,0"/>
+</g>
+</svg>
