@@ -1,45 +1,73 @@
 title: $:/core/macros/toolbar
 tags: $:/tags/Macro
 
-\define toolbar-filter-display(tag, prefix:"")
-<$set name="config" filter="[[$prefix$]match[]]" 
+\define toolbar-filter-display(tag, config)
+<$set name="config" filter="[[$config$]match[]]" 
 		value="[all[shadows+tiddlers]tag[$tag$]!has[draft.of]]" 
-		emptyValue="[all[shadows+tiddlers]tag[$tag$]!has[draft.of]] :filter[lookup:show[$prefix$]!match[hide]]">
+		emptyValue="[all[shadows+tiddlers]tag[$tag$]!has[draft.of]] :filter[lookup:show[$config$]!match[hide]]" >
 	<<config>>
 </$set>
 \end
 
-\define toolbar-filter-drop-down(tag, prefix)
-[all[shadows+tiddlers]tag[$tag$]!has[draft.of]] -[all[current]] :filter[lookup:show[$prefix$]match[hide]]
-\end
-
-\define toolbar-drop-down-list(tag, prefix, template:"")
-<$set name="template_transclusion" 
-		filter="[[$template$]!match[]]"
-		value="""<$transclude tiddler="$template$" />""" 
-		emptyValue="""<$transclude />""" >
-	<$vars tv-config-toolbar-icons="yes" 
-			tv-config-toolbar-text="yes" 
-			tv-config-toolbar-class="tc-btn-invisible">
-		<$list filter=<<toolbar-filter-drop-down "$tag$" "$prefix$">> variable="listItem">
-			<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] ">
-				<<template_transclusion>>
-			</$set>
-		</$list>
-	</$vars>
-</$set>
-\end
-
-\define toolbar(tag, prefix:"", template:"")
+\define basic-buttons(tag, config, class)
 \whitespace trim
-<$set name="template_transclusion" 
-		filter="[[$template$]!match[]]"
-		value="""<$transclude tiddler="$template$" />""" 
-		emptyValue="""<$transclude />""" >
-	<$list filter=<<toolbar-filter-display "$tag$" "$prefix$">> >
-		<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
-			<<template_transclusion>>
-		</$set>
-	</$list>
+<$list filter=<<toolbar-filter-display "$tag$" "$config$">> variable="listItem">
+	<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] [<__class__>]" >
+		<$transclude tiddler=<<listItem>>/>
+	</$set>
+</$list>
+\end
+
+\define buttons-with-template(tag, config, class, template)
+\whitespace trim
+<$list filter=<<toolbar-filter-display "$tag$" "$config$">> >
+	<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] [<__class__>]" >
+		<$transclude tiddler="$template$" />
+	</$set>
+</$list>
+\end
+
+\define toolbar(tag, config, class, template)
+\whitespace trim
+<$set name="buttons" 
+		filter="[<__template__>!match[]]" 
+		value="""<$macrocall $name="buttons-with-template" tag=<<__tag__>> config= <<__config__>> class=<<__class__>> template=<<__template__>> />""" 
+		emptyValue="""<$macrocall $name="basic-buttons" tag=<<__tag__>> config= <<__config__>> class=<<__class__>> />""" >
+	<<buttons>>
 </$set>
+\end
+
+
+\define toolbar-filter-drop-down(tag, config)
+[all[shadows+tiddlers]tag[$tag$]!has[draft.of]] :filter[lookup:show[$config$]match[hide]]
+\end
+
+\define toolbar-basic-drop-down-list(tag, config, class)
+<$list filter=<<toolbar-filter-drop-down "$tag$" "$config$">> variable="listItem">
+	<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] [<__class__>]" >
+		<$transclude tiddler=<<listItem>>/>
+	</$set>
+</$list>
+\end
+
+\define toolbar-drop-down-list-wt(tag, config, class, template)
+<$list filter=<<toolbar-filter-drop-down "$tag$" "$config$">> >
+    <$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] [<__class__>]" >
+		<$transclude tiddler="$template$" />
+	</$set>
+</$list>
+\end
+
+\define toolbar-drop-down-list(tag, config, class, template)
+\whitespace trim
+<$vars tv-config-toolbar-icons="yes" 
+		tv-config-toolbar-text="yes" 
+		tv-config-toolbar-class="tc-btn-invisible">
+    <$set name="drop-down" 
+			filter=" [<__template__>!match[]]" 
+			value="""<$macrocall $name="toolbar-drop-down-list-wt" tag=<<__tag__>> config= <<__config__>> class=<<__class__>> template=<<__template__>> />""" 
+			emptyValue="""<$macrocall $name="toolbar-basic-drop-down-list" tag=<<__tag__>> config= <<__config__>> class=<<__class__>> />""" >
+		<<drop-down>>
+	</$set>
+</$vars>
 \end
