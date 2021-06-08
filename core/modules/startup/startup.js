@@ -70,14 +70,6 @@ exports.startup = function() {
 	if($tw.node) {
 		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Node");
 	}
-	// Kick off the tiddler-change manager
-	$tw.tiddlerChangeManager = new $tw.TiddlerChangeManager();
-	// Listen for changed tiddlers
-	if($tw.browser) {
-		$tw.wiki.addEventListener("change",function(changes) {
-			$tw.tiddlerChangeManager.handleChangedTiddlerEvent(changes);
-		});
-	}
 	// Kick off the language manager and switcher
 	$tw.language = new $tw.Language();
 	$tw.languageSwitcher = new $tw.PluginSwitcher({
@@ -117,6 +109,14 @@ exports.startup = function() {
 			handlerObject: $tw.keyboardManager,
 			handlerMethod: "handleKeydownEvent"
 		}]);
+	}
+	// Kick off the tiddler-change manager
+	$tw.tiddlerChangeManager = new $tw.TiddlerChangeManager();
+	// Listen for changed tiddlers
+	if($tw.browser) {
+		$tw.wiki.addEventListener("change",function(changes) {
+			$tw.tiddlerChangeManager.handleChangedTiddlerEvent(changes);
+		});
 	}
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
