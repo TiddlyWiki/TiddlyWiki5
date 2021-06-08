@@ -1,0 +1,69 @@
+created: 20210527175240898
+modified: 20210605164200328
+tags: Macros
+title: toolbar Macro
+
+With the following macros you will generate the group of buttons, which have a specific [[tag|Tagging]], for a toolbars or the drop-down of a toolbar.
+
+;<<.var toolbar>>
+: A group/list of aligned buttons horizontally, like a toolbar.
+
+;<<.var toolbar-drop-down-list>>
+: A group of button that are aligned vertically (and each button with their caption on the right).
+
+<br>
+The buttons can be [[ordered|Order of Tagged Tiddlers]] by means of the <<.field list>> field of the tag tiddler. By default, they are ordered by creation date.
+<br>
+
+!! Parameters
+
+;tag
+: The tag that the buttons have in common.
+
+;config
+: Optionally, the config is the common prefix of config tiddlers where we can set state (show/hide) of the button. It uses to return which buttons will be displayed.
+
+;class
+: Optionally, additional [[CSS|Cascading Style Sheets]] classes for buttons. Multiple classes can be separated with spaces.
+
+;template
+: Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the buttons.
+<br>
+
+!! Examples
+
+!!!__''~TiddlyWiki ~PageControls''__<br>
+```
+<div class="tc-page-controls">
+<<toolbar "$:/tags/PageControls" "$:/config/PageControlButtons/Visibility/">>
+</div>
+```
+<div class="tc-page-controls">
+<<toolbar "$:/tags/PageControls" "$:/config/PageControlButtons/Visibility/">>
+</div>
+<br>
+
+!!!__''~TiddlyWiki ~PageControls with class "//tc-btn-rounded//", without change the general style for toolbar buttons''__<br>
+```
+<div class="tc-page-controls">
+<<toolbar "$:/tags/PageControls" "$:/config/PageControlButtons/Visibility/" "tc-btn-rounded">>
+</div>
+```
+<div class="tc-page-controls">
+<<toolbar "$:/tags/PageControls" "$:/config/PageControlButtons/Visibility/" "tc-btn-rounded">>
+</div>
+<br>
+
+!!!__''drop-down of the ~ViewToolbar''__<br>
+```
+<div class="tc-tittle-bar tc-tiddler-controls"  style="float:initial;>
+<div class="tc-drop-down">
+<<toolbar-drop-down-list "$:/tags/ViewToolbar" "$:/config/ViewToolbarButtons/Visibility/">>
+</div>
+</div>
+```
+<div class="tc-titlebar tc-tiddler-controls" style="float:initial;">
+<div class="tc-drop-down">
+<<toolbar-drop-down-list "$:/tags/ViewToolbar" "$:/config/ViewToolbarButtons/Visibility/">>
+</div>
+</div>
