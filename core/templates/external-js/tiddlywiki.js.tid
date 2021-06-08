@@ -1,4 +1,4 @@
-title: $:/core/templates/twcore.js
+title: $:/core/templates/tiddlywiki5.js
 
 \rules only filteredtranscludeinline transcludeinline codeinline
 
@@ -10,6 +10,6 @@ title: $:/core/templates/twcore.js
 <!--~~ Boot prefix ~~-->
 {{ $:/boot/bootprefix.js ||$:/core/templates/plain-text-tiddler}}
 <!--~~ Core plugin ~~-->
-{{$:/core/templates/twcore.js/tiddlers}}
+{{$:/core/templates/tiddlywiki5.js/tiddlers}}
 <!--~~ Boot kernel ~~-->
 {{ $:/boot/boot.js ||$:/core/templates/plain-text-tiddler}}
