@@ -24,7 +24,7 @@ PopStoryView.prototype.navigateTo = function(historyInfo) {
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
-	if(targetElement === undefined || targetElement.nodeType === Node.TEXT_NODE) {
+	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
 	// Scroll the node into view
@@ -35,7 +35,7 @@ PopStoryView.prototype.insert = function(widget) {
 	var targetElement = widget.findFirstDomNode(),
 		duration = $tw.utils.getAnimationDuration();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
-	if(targetElement === undefined || targetElement.nodeType === Node.TEXT_NODE) {
+	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
 	// Reset once the transition is over
@@ -77,7 +77,7 @@ PopStoryView.prototype.remove = function(widget) {
 			}
 		};
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
-	if(targetElement === undefined || targetElement.nodeType === Node.TEXT_NODE) {
+	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 		removeElement();
 		return;
 	}
