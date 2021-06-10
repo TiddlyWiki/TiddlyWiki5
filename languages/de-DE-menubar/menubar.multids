@@ -2,7 +2,7 @@ title: $:/language/tiddlywiki/menubar/
 
 items/contents/caption: Inhalt
 items/contents/description: Inhaltsverzeichnis
-items/hamburger/caption: Manü-Icon
+items/hamburger/caption: Menü-Icon
 items/hamburger/description: Zeige ein Menü-Icon statt Volltext bei schmalen Anzeigen
 items/pagecontrols/caption: Seiten Toolbar
 items/pagecontrols/description: Elemente des Seiten-"Toolbars" anzeigen
