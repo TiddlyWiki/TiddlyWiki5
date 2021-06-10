@@ -1,0 +1,19 @@
+title: $:/core/ui/Buttons/export-twcore
+tags: $:/tags/PageControls
+caption: {{$:/core/images/star-filled}} {{$:/language/Buttons/ExportTWCore/Caption}}
+description: {{$:/language/Buttons/ExportTWCore/Hint}}
+
+\whitespace trim
+\define jsFileName() twcore-$(version)$.js
+
+<$set name=isButtonOff filter="[[$:/boot/boot.js]is[missing]then[yes]else[no]]">
+<$button tooltip={{$:/language/Buttons/ExportTWCore/Hint}} aria-label={{$:/language/Buttons/ExportTWCore/Caption}} class=<<tv-config-toolbar-class>> disabled=<<isButtonOff>>>
+<$action-sendmessage $message="tm-download-file" $param="$:/core/templates/tiddlywiki5.js" filename=<<jsFileName>>/>
+<$list filter="[<tv-config-toolbar-icons>match[yes]]" variable="listItem">
+{{$:/core/images/star-filled}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/ExportTWCore/Caption}}/></span>
+</$list>
+</$button>
+</$set>
