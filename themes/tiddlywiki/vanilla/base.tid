@@ -510,6 +510,10 @@ button:disabled.tc-btn-invisible  {
 	color: <<colour muted-foreground>>;
 }
 
+button:disabled > .tc-btn-text {
+	color: <<colour muted-foreground>>;
+}
+
 .tc-btn-boxed {
 	font-size: 0.6em;
 	padding: 0.2em;
@@ -883,7 +887,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	fill: <<colour sidebar-controls-foreground>>;
 }
 
-.tc-page-controls button:hover svg, .tc-page-controls a:hover svg {
+.tc-page-controls button:not(:disabled):hover svg, .tc-page-controls a:hover svg {
 	fill: <<colour sidebar-controls-foreground-hover>>;
 }
 
