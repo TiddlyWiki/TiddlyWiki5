@@ -40,9 +40,10 @@ exports.startup = function() {
 	// Install the tm-focus-selector message
 	$tw.rootWidget.addEventListener("tm-focus-selector",function(event) {
 		var selector = event.param || "",
-			element;
+			element,
+		    	doc = event.event ? event.event.target.ownerDocument : document;
 		try {
-			element = document.querySelector(selector);
+			element = doc.querySelector(selector);
 		} catch(e) {
 			console.log("Error in selector: ",selector)
 		}

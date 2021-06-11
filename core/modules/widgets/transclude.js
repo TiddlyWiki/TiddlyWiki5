@@ -60,6 +60,8 @@ TranscludeWidget.prototype.execute = function() {
 							subTiddler: this.transcludeSubTiddler
 						}),
 		parseTreeNodes = parser ? parser.tree : this.parseTreeNode.children;
+	this.sourceText = parser ? parser.source : null;
+	this.parserType = parser? parser.type : null;
 	// Set context variables for recursion detection
 	var recursionMarker = this.makeRecursionMarker();
 	if(this.recursionMarker === "yes") {
@@ -98,12 +100,17 @@ TranscludeWidget.prototype.makeRecursionMarker = function() {
 	return output.join("");
 };
 
+TranscludeWidget.prototype.parserNeedsRefresh = function() {
+	var parserInfo = this.wiki.getTextReferenceParserInfo(this.transcludeTitle,this.transcludeField,this.transcludeIndex,{subTiddler:this.transcludeSubTiddler});
+	return (this.sourceText === undefined || parserInfo.sourceText !== this.sourceText || parserInfo.parserType !== this.parserType)
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 TranscludeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedTiddlers[this.transcludeTitle]) {
+	if(($tw.utils.count(changedAttributes) > 0) || (changedTiddlers[this.transcludeTitle] && this.parserNeedsRefresh())) {
 		this.refreshSelf();
 		return true;
 	} else {
