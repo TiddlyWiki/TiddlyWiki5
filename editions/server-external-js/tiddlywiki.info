@@ -11,7 +11,7 @@
 	],
 	"build": {
 		"listen": [
-			"--listen","root-tiddler=$:/core/save/all-external-js"],
+			"--listen","root-tiddler=$:/core/save/all-external-js","use-browser-cache=yes"],
 		"index": [
 			"--rendertiddler","$:/core/save/offline-external-js","index.html","text/plain",
 			"--render","$:/core/templates/tiddlywiki5.js","[[twcore-]addsuffix<version>addsuffix[.js]]","text/plain"],
