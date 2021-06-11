@@ -18,6 +18,7 @@ type: text/vnd.tiddlywiki
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5369">> [[links Operator]] to use new linked list implementation
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5383">> unneeded escaping of double quotes in tiddler DIVs inside single file wikis (saving about 10% from the size of empty.html)
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5436">> Network performance for node.js
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5736">> refreshing of transclude widget.
 
 ! Usability Improvements
 
@@ -145,7 +146,6 @@ type: text/vnd.tiddlywiki
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5469">> configuration list of HTML5 block elements
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5692">> shape and color for disabled button to work with `tc-btn-invisible` class
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5473">> inconsistent spacing of ViewToolbar items
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/582b156d5f2b9b8b92f9289aa1288e1edb637450">> a [[bug|https://github.com/Jermolene/TiddlyWiki5/issues/5744]] where non-action widgets are not refreshed before invocation
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
