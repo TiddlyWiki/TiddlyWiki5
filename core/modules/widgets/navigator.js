@@ -364,8 +364,8 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 
 // Take a tiddler out of edit mode without saving the changes
 NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
-	event = $tw.hooks.invokeHook("th-cancelling-tiddler", event),
-	win = event.event && event.event.view ? event.event.view : window;
+	event = $tw.hooks.invokeHook("th-cancelling-tiddler", event);
+	var win = event.event && event.event.view ? event.event.view : window;
 	// Flip the specified tiddler from draft back to the original
 	var draftTitle = event.param || event.tiddlerTitle,
 		draftTiddler = this.wiki.getTiddler(draftTitle),
