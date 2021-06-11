@@ -1,8 +1,8 @@
-caption: 5.1.24
+caption: 5.2.0
 created: 20201229120443187
-modified: 20201229120443187
+modified: 20210604142913752
 tags: ReleaseNotes
-title: Release 5.1.24
+title: Release 5.2.0
 type: text/vnd.tiddlywiki
 
 \define contributor(username)
@@ -17,6 +17,8 @@ type: text/vnd.tiddlywiki
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5362">> [[all Operator]] to use new linked list implementation
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5369">> [[links Operator]] to use new linked list implementation
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5383">> unneeded escaping of double quotes in tiddler DIVs inside single file wikis (saving about 10% from the size of empty.html)
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5436">> Network performance for node.js
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5736">> refreshing of transclude widget.
 
 ! Usability Improvements
 
@@ -29,14 +31,26 @@ type: text/vnd.tiddlywiki
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/commit/caec6bc3fea9155eb2b0aae64d577c565dd7b088">> SVG optimiser script
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/c325380231a8c592a6e51d4498c1e6c3a241b539">> plus/minus SVG icons: <<.icon $:/core/images/plus-button>> and <<.icon $:/core/images/minus-button>>
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5294">> support for [[dynamic toolbar buttons|How to create dynamic editor toolbar buttons]]
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5612">> [[average Operator]], [[median Operator]], [[variance Operator]] and [[standard-deviation Operator]] for calculating the arithmetic mean of a list of numbers
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/cf56a17f28f1e44dcb62c5e161be4ac29e27c3f2">> unusedtitle macro to use the prefix parameter
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5672">> link to the existing tiddler when the warning Target tiddler already exists is displayed in EditTemplate
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5699">> (and again [[here|https://github.com/Jermolene/TiddlyWiki5/pull/5705]]) ability to drag 'n drop images in the editor to import and insert
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5707">> text operation [[insert-text|WidgetMessage: tm-edit-text-operation]]
+* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/5467">> syncadaptor "save" "load" and "delete" methods
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5479">> possibility to import formerly blocked system tiddlers
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5720">> color-scheme field to all themes to differentiate between light and dark themes
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5727">> class to make tags in EditTemplate look like the tag-pills in the ViewTemplate
 
+! Filter improvements
+
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5612">> [[average Operator]], [[median Operator]], [[variance Operator]] and [[standard-deviation Operator]] for calculating the arithmetic mean of a list of numbers
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5673">> [[deserializers filter Operator|deserializers Operator]]
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5665">> [[format:titlelist operator|format Operator]]
 
 ! Hackability Improvements
 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/9eda02868f21e9dd1733ffe26352bd7ac96285b4">> new MessageCatcherWidget
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/d25e540dd2f0decf61c52fdc665a28a5dfeda93f">> support for `image/vnd.microsoft.icon` content type
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5458">> Add throttling for changed tiddlers prefixed with $:/volatile/
 
 ! Widget Improvements
 * <<.link-badge-modified "https://github.com/Jermolene/TiddlyWiki5/commit/b9647b2c48152dac069a1099a0822b32375a66cf">> [[FieldManglerWidget]] to ensure it doesn't propogate events that it traps
@@ -49,6 +63,8 @@ type: text/vnd.tiddlywiki
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/07caa16e8714afe9a64eb202375e4a2f95da1508">> [[DropzoneWidget]] to also use the specified deserializer for strings either dropped or pasted on to the dropzone
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/44df6fe52f79bee88357afb4fc3d6f4800aa6dde">> issue with widget not being available to filter operator
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/3f986861538a3cc5c3c6da578b45d0d9138a6b2b">> [[ActionPopupWidget]] to create floating popups that must be manually cleared
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5648">> [[KeyboardWidget]] to allow for more flexibility 
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/9faaa312998d48c56bd50335820b6b881266af4b">> [[ActionCreateTiddlerWidget]] to make new title available as a variable
 
 ! Client-server Improvements
 
@@ -93,10 +109,13 @@ type: text/vnd.tiddlywiki
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5377">> the Jasmine test suite output
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/9f9ce6595b08032a602981f82940ca113cff8211">> wikitext parser with a subclassing mechanism
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/ef76349c37662e9706acfffc2c2edb51a920183d">> added support for ''utils-browser'' modules
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5464">> th-before-importing hook mechanism to allow plugins to inspect or modify the `importTiddler` object ''before'' any tiddlers are imported
 
 ! Translation improvements
 
 * <<.link-badge-improved>> Chinese translations
+* <<.link-badge-improved>> French translations
+* <<.link-badge-improved>> Spanish translations
 
 
 ! Other Bug Fixes
@@ -117,7 +136,16 @@ type: text/vnd.tiddlywiki
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/d56e8764a1f02a214df5da1cc95191be2da2491b">> accessibility of button widget when controlling a popup
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/d6ea369f5ef9d3092a360a4286a99902df37782b">> EditTextWidget to use default text for missing fields
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5552">> css-escape-polyfill to work under Node.js
-
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/dbd3f835bf8399ed1a3da7cc322ec9b6ab783d53">> crash when sorting by non-string fields
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5711">> some bugs in the [[EventCatcherWidget]] and introduced new `stopPorpagation` attribute
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5691">> CurrentTiddler variable consistency in subfilters and prefixes
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/485779f5b2136b7bcd739352b56188d94b0eb9e4">> crash when accessing variables in filters that don't have a widget context
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/8fbf52e419e71d726ea32b6c44e3ccfc4245d825">> unnecessary triggering reload warning when javascript tiddlers are not subsequently imported
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5521">> minor issue with import pragma 
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5700">> leading and trailing whitespace in themes
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5469">> configuration list of HTML5 block elements
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5692">> shape and color for disabled button to work with `tc-btn-invisible` class
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5473">> inconsistent spacing of ViewToolbar items
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 

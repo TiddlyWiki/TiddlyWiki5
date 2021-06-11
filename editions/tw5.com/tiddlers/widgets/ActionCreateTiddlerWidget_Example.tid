@@ -4,9 +4,11 @@ tags: ActionCreateTiddlerWidget
 title: ActionCreateTiddlerWidget Example
 type: text/vnd.tiddlywiki
 
-New button caption: <$edit-text tiddler="$:/state/new-button-caption" tag="input" default=""/>
+Caption for new button: <$edit-text tiddler="$:/state/new-button-caption" tag="input" default=""/>
 
 <$button>
-<$action-createtiddler $basetitle="Homemade Button" tags="$:/tags/PageControls" text={{$:/state/new-button-caption}}/>
-Create non-functional page control button
+<$action-createtiddler $basetitle="Homemade Button" tags="$:/tags/PageControls" text={{$:/state/new-button-caption}}>
+<$action-navigate $to=<<createTiddler-title>>/>
+</$action-createtiddler>
+Create a new non-functional page control button and open the tiddler
 </$button>
