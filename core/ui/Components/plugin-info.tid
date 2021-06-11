@@ -70,7 +70,7 @@ $:/config/Plugins/Disabled/$(currentTiddler)$
 					<div style="float:right;">
 						<$reveal type="nomatch" state=<<plugin-disable-title>> text="yes">
 							<$button set=<<plugin-disable-title>> setTo="yes" tooltip={{$:/language/ControlPanel/Plugins/Disable/Hint}} aria-label={{$:/language/ControlPanel/Plugins/Disable/Caption}}>
-							<<lingo Disable/Caption>>
+								<<lingo Disable/Caption>>
 							</$button>
 						</$reveal>
 						<$reveal type="match" state=<<plugin-disable-title>> text="yes">
