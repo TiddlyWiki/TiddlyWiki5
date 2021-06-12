@@ -1,7 +1,7 @@
 caption: keyboard
 created: 20140302192136805
 list: [[Keyboard Codes]] [[Key Codes (Example)]] [[Key Codes (Example 1)]] [[Possible Keys (Example 2)]]
-modified: 20210525102143381
+modified: 20210612101618855
 tags: Widgets
 title: KeyboardWidget
 type: text/vnd.tiddlywiki
@@ -30,6 +30,7 @@ The content of the `<$keyboard>` widget is rendered normally. The keyboard short
 |!Variables |!Description |
 |`event-key` |The <<.var event-key>> variable contains the character, if possible. eg: `1`. You can experiment with some settings at: [[Key Codes (Example)]] |
 |`event-code` |The <<.var event-code>> variable contains a character description. eg:  `Digit1` instead of `1`. Or `Space` instead of an empty string ` `, which is hard to see|
+|`event-key-descriptor` |The <<.var event-key-descriptor>> variable is available if the keyboard event captured was configured using a [[keyboard shortcut descriptor|Keyboard Shortcut Descriptor]] of the form `((my-shortcut))` which references a configuration tiddler. |
 |`modifier` |The [[modifier Variable]] contains the Modifier Key held during the event (can be <kbd>normal</kbd>, <kbd>ctrl</kbd>, <kbd>shift</kbd>, <kbd>alt</kbd> or combinations thereof) |
 
 ! Key Strings
