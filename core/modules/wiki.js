@@ -712,7 +712,7 @@ exports.getTiddlersAsJson = function(filter,options) {
 	}
 	var tiddlers = this.filterTiddlers(filter),
 		spaces = (options.spaces === undefined) ? $tw.config.preferences.jsonSpaces : options.spaces,
-		data = [],
+		jsonLines = [],
 		t,fields,tiddler;
 	for(t=0;t<tiddlers.length; t++) {
 		tiddler = this.getTiddler(tiddlers[t]);
@@ -721,10 +721,10 @@ exports.getTiddlersAsJson = function(filter,options) {
 			for(var field in tiddler.fields) {
 				fields[field] = tiddler.getFieldString(field);
 			}
-			data.push(fields);
+			jsonLines.push(JSON.stringify(fields,null,spaces));
 		}
 	}
-	var json = JSON.stringify(data,null,spaces);
+	var json = "[\n" + jsonLines.join(",\n") + "\n]";
 	if(options.escapeUnsafeScriptCharacters) {
 		function escapeUnsafeChars(unsafeChar) {
 			return {
