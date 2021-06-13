@@ -3,11 +3,14 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/print-button}} {{$:/language/Buttons/Print/Caption}}
 description: {{$:/language/Buttons/Print/Hint}}
 
+\whitespace trim
 <$button message="tm-print" tooltip={{$:/language/Buttons/Print/Hint}} aria-label={{$:/language/Buttons/Print/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/print-button}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/Print/Caption}}/></span>
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/Print/Caption}}/>
+</span>
 </$list>
 </$button>

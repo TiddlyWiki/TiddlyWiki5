@@ -8,6 +8,7 @@ description: {{$:/language/Buttons/NewJournalHere/Hint}}
 [[$(currentTiddlerTag)$]] $(journalTags)$
 \end
 \define journalButton()
+\whitespace trim
 <$button tooltip={{$:/language/Buttons/NewJournalHere/Hint}} aria-label={{$:/language/Buttons/NewJournalHere/Caption}} class=<<tv-config-toolbar-class>>>
 <$wikify name="journalTitle" text="""<$macrocall $name="now" format=<<journalTitleTemplate>>/>""">
 <$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<journalButtonTags>>/>

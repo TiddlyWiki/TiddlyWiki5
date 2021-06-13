@@ -1,0 +1,38 @@
+title: $:/language/Help/fetch
+description: Obtener tiddlers del wiki por URL
+
+Obtiene uno o más archivos a través de HTTP/HTTPS e importe los tiddlers que coincidan con un filtro, transformando opcionalmente los títulos entrantes.
+
+```
+--fetch file <url> <import-filter> <transform-filter>
+--fetch files <url-filter> <import-filter> <transform-filter>
+--fetch raw-file <url> <transform-filter>
+--fetch raw-files <url-filter> <transform-filter>
+```
+
+Las opciones "file" y "files" obtienen los archivos especificados e intentan importar los tiddlers dentro de ellos (el mismo procesamiento que si los archivos se arrastraran a la ventana del navegador). Las variantes "raw-file" y "raw-files" obtienen los archivos especificados y almacenan los datos del archivo sin procesar en tiddlers, sin aplicar la lógica de importación.
+
+Con las opciones "file" y "raw-file", solo se obtiene un archivo y el primer parámetro es la URL del archivo que se va a leer.
+
+Con las opciones "files" y "raw-files", se obtienen varios archivos y el primer parámetro es un filtro que produce una lista de URL de los archivos a leer. Por ejemplo, dado un conjunto de tiddlers etiquetados como "servidor-remoto" que tienen un campo "url", el filtro `[tag[servidor-remoto]get[url]]` recuperará todas las URL disponibles.
+
+Para las opciones "file" y "files", el parámetro `<import-filter>` especifica un filtro que determina qué tiddlers se importan. El valor predeterminado es "[all[tiddlers]]" si no se proporciona.
+
+Para todas las opciones, el parámetro `<transform-filter>` especifica un filtro opcional que transforma los títulos de los tiddlers importados. Por ejemplo, `[addprefix[$:/myimports/]]` agregaría el prefijo `$:/myimports/` a cada título.
+
+Si precede al comando `--fetch` con `--verbose`, se generará información de progreso durante la importación.
+
+Ten en cuenta que TiddlyWiki no obtendrá una versión anterior de un complemento ya cargado.
+
+El siguiente ejemplo recupera todos los tiddlers que no son del sistema de https://tiddlywiki.com y los guarda en un archivo JSON:
+
+```
+tiddlywiki --verbose --fetch file "https://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
+```
+
+El siguiente ejemplo recupera el archivo "favicon" de tiddlywiki.com y lo guarda en un archivo llamado "output.ico". Ten en cuenta que el tiddler intermedio "Icon Tiddler" se cita en el comando "--fetch" porque se usa como un filtro de transformación para reemplazar el título predeterminado, mientras que no hay comillas para el comando "--savetiddler" porque es se utiliza directamente como título.
+
+```
+tiddlywiki --verbose --fetch raw-file "https://tiddlywiki.com/favicon.ico" "[[Icon Tiddler]]" --savetiddler "Icon Tiddler" output.ico
+```
+

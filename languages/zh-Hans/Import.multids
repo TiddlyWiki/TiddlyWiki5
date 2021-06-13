@@ -1,5 +1,6 @@
 title: $:/language/Import/
 
+Editor/Import/Heading: 导入图像并将其插入至编辑器。
 Imported/Hint:  下列条目已被导入：
 Listing/Cancel/Caption: 取消
 Listing/Hint: 这些条目已备妥导入：
@@ -22,7 +23,11 @@ Upgrader/Plugins/Suppressed/Incompatible: 封锁的不兼容或过时插件。
 Upgrader/Plugins/Suppressed/Version: 封锁的插件 (由于传入的 <<incoming>> 不比现有版本 <<existing>> 新)。
 Upgrader/Plugins/Upgraded: 升级插件，从 <<incoming>> 到 <<upgraded>>。
 Upgrader/State/Suppressed: 封锁的暂存状态条目。
+Upgrader/System/Disabled: 已禁用系統条目。
 Upgrader/System/Suppressed: 封锁的系统条目。
 Upgrader/System/Warning: 核心模块条目。
 Upgrader/System/Alert: 您即将导入一个条目会覆盖一个核心模块条目。不建议这样做，因为可能会使系统不稳定。
 Upgrader/ThemeTweaks/Created: 从 <$text text=<<from>>/> 迁移布景主题。
+Upgrader/Tiddler/Disabled: 已禁用系統条目。
+Upgrader/Tiddler/Selected: 用户选定。
+Upgrader/Tiddler/Unselected: 未选定的条目

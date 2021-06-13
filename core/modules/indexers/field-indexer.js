@@ -121,7 +121,7 @@ FieldIndexer.prototype.update = function(updateDescriptor) {
 					indexEntry[value].push(updateDescriptor["new"].tiddler.fields.title);
 				}
 			}
-		});		
+		});
 	}
 };
 

@@ -58,7 +58,7 @@ FieldManglerWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return this.refreshChildren(changedTiddlers);		
+		return this.refreshChildren(changedTiddlers);
 	}
 };
 
@@ -119,7 +119,7 @@ FieldManglerWidget.prototype.handleAddTagEvent = function(event) {
 		if(tag !== "") {
 			modification.tags = (tiddler.fields.tags || []).slice(0);
 			$tw.utils.pushTop(modification.tags,tag);
-			this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));			
+			this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));
 		}
 	} else if(typeof event.param === "string" && event.param.trim() !== "" && this.mangleTitle.trim() !== "") {
 		var tag = [];

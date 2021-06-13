@@ -1,6 +1,6 @@
 title: $:/language/Import/
 
-Editor/Import/Heading: Import images and insert into the editor.
+Editor/Import/Heading: Import images and insert them into the editor.
 Imported/Hint: The following tiddlers were imported:
 Listing/Cancel/Caption: Cancel
 Listing/Hint: These tiddlers are ready to import:
@@ -23,7 +23,11 @@ Upgrader/Plugins/Suppressed/Incompatible: Blocked incompatible or obsolete plugi
 Upgrader/Plugins/Suppressed/Version: Blocked plugin (due to incoming <<incoming>> not being newer than existing <<existing>>).
 Upgrader/Plugins/Upgraded: Upgraded plugin from <<incoming>> to <<upgraded>>.
 Upgrader/State/Suppressed: Blocked temporary state tiddler.
+Upgrader/System/Disabled: Disabled system tiddler.
 Upgrader/System/Suppressed: Blocked system tiddler.
 Upgrader/System/Warning: Core module tiddler.
 Upgrader/System/Alert: You are about to import a tiddler that will overwrite a core module tiddler. This is not recommended as it may make the system unstable.
 Upgrader/ThemeTweaks/Created: Migrated theme tweak from <$text text=<<from>>/>.
+Upgrader/Tiddler/Disabled: Disabled tiddler.
+Upgrader/Tiddler/Selected: User selected.
+Upgrader/Tiddler/Unselected: Unselected tiddler.
