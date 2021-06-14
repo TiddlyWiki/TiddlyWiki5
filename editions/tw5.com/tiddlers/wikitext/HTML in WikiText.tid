@@ -1,9 +1,11 @@
 caption: HTML
 created: 20131205160816081
-modified: 20201125094415933
+modified: 20210614100305329
 tags: WikiText
 title: HTML in WikiText
 type: text/vnd.tiddlywiki
+
+! HTML tags and comments
 
 HTML tags and comments can be used directly in WikiText. For example:
 
@@ -14,7 +16,22 @@ This is my nice and simple block of text. HelloThere
 </article>
 ```
 
-[[Widgets share the same syntax as HTML tags|Widgets in WikiText]], and so the following information applies to them, too.
+!! Pragma Comments
+
+<<.from-version 5.2.0>> Comments can now be freely intermixed with pragmas as well as within the main body of a block of wikitext.
+
+```
+<!-- NEW: Comment that describes the macro -->
+\define test()
+some text <!-- inline comment -->
+\end
+
+<<test>>
+```
+
+! Important
+
+<<.tip """[[Widgets share the same syntax as HTML tags|Widgets in WikiText]], and so the following information applies to them, too.""">>
 
 ! Block mode versus Inline mode
 
