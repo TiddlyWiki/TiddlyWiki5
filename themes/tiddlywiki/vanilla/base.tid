@@ -1052,6 +1052,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-view-field-value {
+	word-break: break-all;
 }
 
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
