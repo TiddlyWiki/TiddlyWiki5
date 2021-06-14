@@ -5,10 +5,6 @@ tags: [[$:/tags/Stylesheet]]
 <$text text={{{ [{$:/config/plugins/menubar/breakpoint}removesuffix[px]add[1]addsuffix[px]] ~[{$:/config/plugins/menubar/breakpoint}] }}} />
 \end
 
-\define sidebarbreakpoint-minus-one()
-<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}} />
-\end
-
 \define set-sidebar-scrollable-top-if-hamburger()
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/MenuBar]] -[all[tiddlers+shadows]prefix[$:/config/plugins/menubar/MenuItems/Visibility/]regexp:text[hide]removeprefix[$:/config/plugins/menubar/MenuItems/Visibility/]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]] -[all[tiddlers+shadows]tag[$:/tags/TopRightBar]limit[1]then[$:/plugins/tiddlywiki/menubar/items/toprightbar]] -$:/plugins/tiddlywiki/menubar/items/hamburger +[limit[1]]">
 
