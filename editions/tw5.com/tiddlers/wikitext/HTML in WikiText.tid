@@ -1,6 +1,6 @@
 caption: HTML
 created: 20131205160816081
-modified: 20210614100102924
+modified: 20210614100305329
 tags: WikiText
 title: HTML in WikiText
 type: text/vnd.tiddlywiki
@@ -16,9 +16,7 @@ This is my nice and simple block of text. HelloThere
 </article>
 ```
 
-!! Comments
-
-A html-comment as described above has been possible since ~TiddlyWiki Version 5.1.0.
+!! Pragma Comments
 
 <<.from-version 5.2.0>> Comments can now be freely intermixed with pragmas as well as within the main body of a block of wikitext.
 
