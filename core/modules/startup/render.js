@@ -70,11 +70,23 @@ exports.startup = function() {
 	var deferredChanges = Object.create(null),
 		timerId;
 	function refresh() {
+		// Save the scroll position
+		var scrollX = window.scrollX,
+			scrollY = window.scrollY;
+		// Get the currently focused Dom Node
+		var currentlyFocusedDomNode = document.activeElement.tagName.toUpperCase() !== "IFRAME" ? document.activeElement :
+			document.activeElement.contentWindow.document.activeElement;
+		// Generate the widget-info object
+		var focusWidgetInfo = $tw.focusManager.getFocusWidgetInfo($tw.rootWidget,currentlyFocusedDomNode);
 		// Process the refresh
 		$tw.hooks.invokeHook("th-page-refreshing");
 		$tw.pageWidgetNode.refresh(deferredChanges);
 		deferredChanges = Object.create(null);
 		$tw.hooks.invokeHook("th-page-refreshed");
+		// Restore the focus to a focusable Dom Node
+		$tw.focusManager.restoreFocus($tw.rootWidget,focusWidgetInfo);
+		// Restore the scroll position
+		window.scroll(scrollX,scrollY);
 	}
 	// Add the change event handler
 	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
