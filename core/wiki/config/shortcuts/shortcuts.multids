@@ -5,8 +5,12 @@ advanced-search: ctrl-shift-A
 advanced-search-sidebar: alt-Enter
 cancel-edit-tiddler: escape
 change-sidebar-layout: shift-alt-Down
+close-focus-tiddler: alt-C
 delete-field: shift-alt-D
+edit-focus-tiddler: alt-E
 excise: ctrl-E
+focus-next-tiddler: alt-Down
+focus-previous-tiddler: alt-Up
 sidebar-search: ctrl-shift-F
 heading-1: ctrl-1
 heading-2: ctrl-2
