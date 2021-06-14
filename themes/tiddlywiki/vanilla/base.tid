@@ -333,6 +333,10 @@ table tfoot tr td {
 	height: 600px;
 }
 
+:root {
+	color-scheme: {{{ [{$:/palette}get[color-scheme]] }}};
+}
+
 /*
 ** Links
 */
@@ -1008,6 +1012,14 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	border: 1px solid <<colour tiddler-border>>;
 }
 
+.tc-story-river .tc-tiddler-frame:focus-within, .tc-story-river .tc-tiddler-frame:focus, .tc-story-river .tc-tiddler-frame.tc-focused {
+	border: 1px solid <<colour foreground>>;
+}
+
+.tc-story-river .tc-tiddler-frame, .tc-story-river .tc-tiddler-pad-frame {
+	outline: none;
+}
+
 {{$:/themes/tiddlywiki/vanilla/sticky}}
 
 .tc-tiddler-info {
@@ -1048,13 +1060,15 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-view-field-value {
-	word-break: break-all;
 }
 
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 	.tc-tiddler-frame {
-		padding: 14px 14px 14px 14px;
 		margin-bottom: .5em;
+	}
+
+	.tc-tiddler-pad-frame {
+		padding: 14px 14px 14px 14px;
 	}
 
 	.tc-tiddler-info {
@@ -1064,9 +1078,12 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 @media (min-width: <<sidebarbreakpoint>>) {
 	.tc-tiddler-frame {
-		padding: 28px 42px 42px 42px;
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
 		border-radius: 2px;
+	}
+
+	.tc-tiddler-pad-frame {
+		padding: 28px 42px 42px 42px;
 	}
 
 <<if-no-sidebar "
