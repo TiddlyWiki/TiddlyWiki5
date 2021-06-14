@@ -46,6 +46,7 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	$tw.utils.addEventListeners(domNode,[
 		{name: "keydown", handlerObject: this, handlerMethod: "handleChangeEvent"}
 	]);
+	this.assignMissingAttributes(domNode);
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
