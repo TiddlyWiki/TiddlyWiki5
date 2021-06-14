@@ -69,6 +69,24 @@ function SimpleEngine(options) {
 }
 
 /*
+Get an object containing the selectionStart and selectionEnd values
+*/
+SimpleEngine.prototype.getSelectionRange = function() {
+	return {
+		selectionStart: this.domNode.selectionStart,
+		selectionEnd: this.domNode.selectionEnd
+	}
+};
+
+/*
+Set the selection-range
+*/
+SimpleEngine.prototype.setSelectionRange = function(selectionStart,selectionEnd) {
+	this.domNode.selectionStart = selectionStart;
+	this.domNode.selectionEnd = selectionEnd;
+};
+
+/*
 Set the text of the engine if it doesn't currently have focus
 */
 SimpleEngine.prototype.setText = function(text,type) {
