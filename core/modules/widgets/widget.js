@@ -236,6 +236,36 @@ Widget.prototype.hasVariable = function(name,value) {
 };
 
 /*
+Find the widget, walking up the widget-tree, that has a different transclusion variable than the current widget
+*/
+Widget.prototype.findParentTransclusionWidget = function() {
+	var node = this;
+	var transclusionVariable = this.getVariable("transclusion");
+	while(node && node.getVariable("transclusion") === transclusionVariable) {
+		node = node.parentWidget;
+	}
+	return (node !== this) ? node : null;
+};
+
+/*
+Generate the "transclusion-footprint" of the current widget in the widget-tree up to the next widget that changes the transclusion variable
+*/
+Widget.prototype.generateWidgetTreeFootprint = function() {
+	var parentTransclusionWidget = this.findParentTransclusionWidget(),
+	    node = this,
+	    footprint = node.parentWidget.children.indexOf(node);
+	while(node) {
+		node = node.parentWidget;
+		if(node === parentTransclusionWidget) {
+			break;
+		} else if(node.parentWidget && node.parentWidget.children) {
+			footprint = footprint + "-" + node.parentWidget.children.indexOf(node);
+		}
+	}
+	return footprint;
+};
+
+/*
 Construct a qualifying string based on a hash of concatenating the values of a given variable in the parent chain
 */
 Widget.prototype.getStateQualifier = function(name) {
@@ -323,6 +353,29 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 					domNode.setAttributeNS("http://www.w3.org/1999/xlink",b[1],v);
 				} else {
 					domNode.setAttributeNS(null,a,v);
+				}
+			} catch(e) {
+			}
+		}
+	});
+};
+
+Widget.prototype.assignMissingAttributes = function(domNode,options) {
+	options = options || {};
+	var self = this;
+	$tw.utils.each(this.attributes,function(v,a) {
+		// Check exclusions
+		if(options.excludeEventAttributes && a.substr(0,2) === "on") {
+			v = undefined;
+		}
+		if(v !== undefined && a.substr(0,4) === "dom-") {
+			var name = a.substr(4);
+			var b = name.split(":");
+			try {
+				if (b.length == 2 && b[0] == "xlink"){
+					domNode.setAttributeNS("http://www.w3.org/1999/xlink",b[1],v);
+				} else {
+					domNode.setAttributeNS(null,name,v);
 				}
 			} catch(e) {
 			}
@@ -569,6 +622,7 @@ Widget.prototype.invokeActions = function(triggeringWidget,event) {
 	// For each child widget
 	for(var t=0; t<this.children.length; t++) {
 		var child = this.children[t];
+		// Rerender the child to ensure the attribute values are up to date
 		// Invoke the child if it is an action widget
 		if(child.invokeAction) {
 			child.refreshSelf();
