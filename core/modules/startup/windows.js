@@ -73,21 +73,35 @@ exports.startup = function() {
 		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
+			// Save the scroll position
+			var scrollX = srcWindow.scrollX,
+				scrollY = srcWindow.scrollY;
+			// Get the currently focused Dom Node
+			var currentlyFocusedDomNode = srcDocument.activeElement.tagName.toUpperCase() !== "IFRAME" ? srcDocument.activeElement :
+				srcDocument.activeElement.contentWindow.document.activeElement;
+			// Generate the widget-info object
+			var focusWidgetInfo = $tw.focusManager.getFocusWidgetInfo(widgetNode,currentlyFocusedDomNode);
 			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
 				styleElement.innerHTML = styleContainer.textContent;
 			}
 			widgetNode.refresh(changes);
+			// Restore the focus to a focusable Dom Node
+			$tw.focusManager.restoreFocus(widgetNode,focusWidgetInfo);
+			// Restore the scroll position
+			srcWindow.scroll(scrollX,scrollY);
 		};
 		$tw.wiki.addEventListener("change",refreshHandler);
 		// Listen for keyboard shortcuts
 		$tw.utils.addEventListeners(srcDocument,[{
 			name: "keydown",
 			handlerObject: $tw.keyboardManager,
-			handlerMethod: "handleKeydownEvent"
+			handlerMethod: "handleKeydownEvent",
+			document: srcDocument
 		}]);
 		srcWindow.document.documentElement.addEventListener("click",$tw.popup,true);
 		srcWindow.haveInitialisedWindow = true;
 	});
+	$tw.windows["rootWindow"] = window;
 	// Close open windows when unloading main window
 	$tw.addUnloadTask(function() {
 		$tw.utils.each($tw.windows,function(win) {
