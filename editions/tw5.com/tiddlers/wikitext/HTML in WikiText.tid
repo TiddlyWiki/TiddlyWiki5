@@ -1,6 +1,6 @@
 caption: HTML
 created: 20131205160816081
-modified: 20210610082955193
+modified: 20210614100102924
 tags: WikiText
 title: HTML in WikiText
 type: text/vnd.tiddlywiki
@@ -20,7 +20,7 @@ This is my nice and simple block of text. HelloThere
 
 A html-comment as described above has been possible since ~TiddlyWiki Version 5.1.0.
 
-<<.from-version 5.2.0>> It will be possible to use "performant" ''html-comments together with pragmas''. Comments as described below can be cached by the TW core, so they are performant.
+<<.from-version 5.2.0>> Comments can now be freely intermixed with pragmas as well as within the main body of a block of wikitext.
 
 ```
 <!-- NEW: Comment that describes the macro -->
@@ -28,19 +28,7 @@ A html-comment as described above has been possible since ~TiddlyWiki Version 5.
 some text <!-- inline comment -->
 \end
 
-<!-- This has always been possible -->
 <<test>>
-```
-
-If a macro use "text substitution" as described in [[Macro Definitions in WikiText]], you ''can use'' html-comments, ''but'' the will be ''slower'', since the core isn't allowed to cache them. Eg:
-
-```
-\define test(text)
-<!-- This comment will be slower, since it's not cached. -->
-$text$ or $(currentTiddler)$
-\end
-
-<<test "some text">>
 ```
 
 ! Important
