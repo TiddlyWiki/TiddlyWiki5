@@ -168,6 +168,32 @@ function CodeMirrorEngine(options) {
 }
 
 /*
+Get an object containing the selectionStart and selectionEnd values
+*/
+CodeMirrorEngine.prototype.getSelectionRange = function() {
+	var selections = this.cm.listSelections(),
+		anchorPos,
+		headPos;
+	if(selections.length > 0) {
+		anchorPos = this.cm.indexFromPos(selections[0].anchor),
+		headPos = this.cm.indexFromPos(selections[0].head);
+	} else {
+		anchorPos = headPos = this.cm.indexFromPos(this.cm.getCursor());
+	}
+	return {
+		selectionStart: anchorPos,
+		selectionEnd: headPos
+	}
+};
+
+/*
+Set the selection-range
+*/
+CodeMirrorEngine.prototype.setSelectionRange = function(selectionStart,selectionEnd) {
+	this.cm.setSelection(this.cm.posFromIndex(selectionStart),this.cm.posFromIndex(selectionEnd));
+};
+
+/*
 Set the text of the engine if it doesn't currently have focus
 */
 CodeMirrorEngine.prototype.setText = function(text,type) {
@@ -198,7 +224,8 @@ Fix the height of textarea to fit content
 CodeMirrorEngine.prototype.fixHeight = function() {
 	if(this.widget.editAutoHeight) {
 		// Resize to fit
-		this.cm.setSize(null,null);
+		console.log("resizing to fit");
+		this.cm.setSize("100%","2.5em");
 	} else {
 		var fixedHeight = parseInt(this.widget.wiki.getTiddlerText(HEIGHT_VALUE_TITLE,"400px"),10);
 		fixedHeight = Math.max(fixedHeight,20);
