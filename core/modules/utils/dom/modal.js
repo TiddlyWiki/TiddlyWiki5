@@ -173,11 +173,25 @@ Modal.prototype.display = function(title,options) {
 		importPageMacros: true
 	});
 	footerWidgetNode.render(modalFooterButtons,null);
+	navigatorWidgetNode.children = [headerWidgetNode,bodyWidgetNode,footerWidgetNode];
 	// Set up the refresh handler
 	refreshHandler = function(changes) {
+		// Save the current scroll position
+		var scrollX = modalBody.scrollLeft,
+			scrollY = modalBody.scrollTop;
+		// Detect the currently focused domNode
+		var currentlyFocusedDomNode = self.srcDocument.activeElement.tagName.toUpperCase() !== "IFRAME" ? self.srcDocument.activeElement :
+			self.srcDocument.activeElement.contentWindow.document.activeElement;
+		// Generate the widget-info object
+		var focusWidgetInfo = $tw.focusManager.getFocusWidgetInfo(navigatorWidgetNode,currentlyFocusedDomNode);
 		headerWidgetNode.refresh(changes,modalHeader,null);
 		bodyWidgetNode.refresh(changes,modalBody,null);
 		footerWidgetNode.refresh(changes,modalFooterButtons,null);
+		// Restore the focus to a focusable Dom Node
+		$tw.focusManager.restoreFocus(navigatorWidgetNode,focusWidgetInfo);
+		// Restore the scroll position
+		modalBody.scrollLeft = scrollX;
+		modalBody.scrollTop = scrollY;
 	};
 	this.wiki.addEventListener("change",refreshHandler);
 	// Add the close event handler
