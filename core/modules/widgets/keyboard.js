@@ -53,7 +53,8 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 };
 
 KeyboardWidget.prototype.handleChangeEvent = function(event) {
-	if($tw.keyboardManager.checkKeyDescriptors(event,this.keyInfoArray)) {
+	var keyInfo = $tw.keyboardManager.getMatchingKeyDescriptor(event,this.keyInfoArray);
+	if(keyInfo) {
 		var handled = this.invokeActions(this,event);
 		if(this.actions) {
 			var variables = {
@@ -61,6 +62,9 @@ KeyboardWidget.prototype.handleChangeEvent = function(event) {
 					"event-code": event.code,
 					"modifier": $tw.keyboardManager.getEventModifierKeyDescriptor(event)
 				};
+			if(keyInfo.keyDescriptor) {
+				variables["event-key-descriptor"] = keyInfo.keyDescriptor;
+			}
 			this.invokeActionString(this.actions,this,event,variables);
 		}
 		this.dispatchMessage(event);
