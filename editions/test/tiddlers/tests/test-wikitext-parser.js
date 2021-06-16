@@ -117,7 +117,14 @@ describe("WikiText parser tests", function() {
 			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isMacroDefinition : true } ]
 
 		);
+	});
 
+	it("should parse comment in pragma area. Comment will be INVISIBLE", function() {
+		expect(parse("<!-- comment in pragma area -->\n\\define aMacro()\nnothing\n\\end\n")).toEqual(
+
+			[ { type : 'set', attributes : { name : { type : 'string', value : 'aMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isMacroDefinition : true } ]
+
+		);
 	});
 
 	it("should parse inline macro calls", function() {
