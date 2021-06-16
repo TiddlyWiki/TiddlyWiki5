@@ -62,10 +62,6 @@ Returns false if the request couldn't be authenticated having sent an appropriat
 BasicAuthenticator.prototype.authenticateRequest = function(request,response,state) {
 	// Extract the incoming username and password from the request
 	var header = request.headers.authorization || "";
-	if(!header && state.allowAnon) {
-		// If there's no header and anonymous access is allowed then we don't set authenticatedUsername
-		return true;
-	}
 	var token = header.split(/\s+/).pop() || "",
 		auth = $tw.utils.base64Decode(token),
 		parts = auth.split(/:/),
@@ -80,6 +76,10 @@ BasicAuthenticator.prototype.authenticateRequest = function(request,response,sta
 		state.authenticatedUsername = incomingUsername;
 		return true;
 	} else {
+		if(state.allowAnon) {
+			// If no matching credentials and anonymous access is allowed then we don't set authenticatedUsername
+			return true;
+		}
 		// If not, return an authentication challenge
 		response.writeHead(401,"Authentication required",{
 			"WWW-Authenticate": 'Basic realm="Please provide your username and password to login to ' + state.server.servername + '"'
