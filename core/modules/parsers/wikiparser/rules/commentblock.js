@@ -7,6 +7,12 @@ Wiki text block rule for HTML comments. For example:
 
 ```
 <!-- This is a comment -->
+\define macroX()
+<!-- This is a comment -->
+xxxx
+\end
+<!-- This is a comment -->
+
 ```
 
 Note that the syntax for comments is simplified to an opening "<!--" sequence and a closing "-->" sequence -- HTML itself implements a more complex format (see http://ostermiller.org/findhtmlcomment.html)
@@ -19,7 +25,7 @@ Note that the syntax for comments is simplified to an opening "<!--" sequence an
 "use strict";
 
 exports.name = "commentblock";
-exports.types = {block: true};
+exports.types = {block:true, pragma:true};
 
 exports.init = function(parser) {
 	this.parser = parser;

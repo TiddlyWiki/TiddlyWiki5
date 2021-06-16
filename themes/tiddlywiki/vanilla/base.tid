@@ -333,10 +333,6 @@ table tfoot tr td {
 	height: 600px;
 }
 
-:root {
-	color-scheme: {{{ [{$:/palette}get[color-scheme]] }}};
-}
-
 /*
 ** Links
 */
@@ -1052,6 +1048,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-view-field-value {
+	word-break: break-all;
 }
 
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
