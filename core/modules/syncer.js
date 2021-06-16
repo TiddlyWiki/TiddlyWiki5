@@ -453,7 +453,7 @@ Syncer.prototype.login = function(username,password,callback) {
 		this.syncadaptor.login(username,password,function(err) {
 			if(err) {
 				// Mark us as not logged in
-				self.wiki.addTiddler({title: this.titleIsLoggedIn,text: "no"});
+				self.wiki.addTiddler({title: self.titleIsLoggedIn,text: "no"});
 				return callback(err);
 			}
 			self.getStatus(function(err,isLoggedIn,username) {
@@ -477,7 +477,7 @@ Syncer.prototype.handleLogoutEvent = function() {
 		this.syncadaptor.logout(function(err) {
 			if(err) {
 				// Mark us as not logged in
-				self.wiki.addTiddler({title: this.titleIsLoggedIn,text: "no"});
+				self.wiki.addTiddler({title: self.titleIsLoggedIn,text: "no"});
 				self.logger.alert(err);
 			} else {
 				self.getStatus();
