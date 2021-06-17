@@ -474,7 +474,7 @@ The syncer tracks changes to the store and synchronises them to a remote data st
 		if(this.syncadaptor.logout) {
 			this.syncadaptor.logout(function(err) {
 				if(err) {
-					self.logger.alert(err);
+					self.displayError("Syncer error during logout", err);
 				} else {
 					self.getStatus();
 				}
