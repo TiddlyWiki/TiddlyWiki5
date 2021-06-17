@@ -43,8 +43,8 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 </$select>
 \end
 
-\define setDefault(title)
-<$set name=metrics value="$:/themes/tiddlywiki/vanilla/metrics/$title$">
+\define setDefault(title, theme:"vanilla")
+<$set name=metrics value="$:/themes/tiddlywiki/$theme$/metrics/$title$">
 <$list filter="[<metrics>is[tiddler]is[shadow]]" >
 <$button class="tc-btn-invisible" tooltip={{$:/language/ThemeTweaks/Button/Default/Tooltip}} >
 <$action-deletetiddler $tiddler=<<metrics>> />
@@ -88,7 +88,7 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 |<$link to="$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize"><<lingo Metrics/BodyFontSize>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize" default="" tag="input"/> |<<setDefault bodyfontsize>> |
 |<$link to="$:/themes/tiddlywiki/vanilla/metrics/bodylineheight"><<lingo Metrics/BodyLineHeight>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodylineheight" default="" tag="input"/> |<<setDefault bodylineheight>> |
 |<$link to="$:/themes/tiddlywiki/vanilla/metrics/storytop"><<lingo Metrics/StoryTop>></$link><br>//<<lingo Metrics/StoryTop/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storytop" default="" tag="input"/> |^<<setDefault storytop>> |
-|<$link to="$:/themes/tiddlywiki/centralised/metrics/storywidth"><<lingo Metrics/StoryWidth>></$link><br>//<<lingo Metrics/StoryWidth/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/centralised/metrics/storywidth" default="" tag="input" disabled={{{ [<lookupDict>getindex[storywidth]] }}} /> |^<<setDefault storywidth>> |
+|<$link to="$:/themes/tiddlywiki/centralised/metrics/storywidth"><<lingo Metrics/StoryWidth>></$link><br>//<<lingo Metrics/StoryWidth/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/centralised/metrics/storywidth" default="" tag="input" disabled={{{ [<lookupDict>getindex[storywidth]] }}} /> |^<<setDefault title:"storywidth" theme:"centralised">> |
 |<$link to="$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint"><<lingo Metrics/SidebarBreakpoint>></$link><br>//<<lingo Metrics/SidebarBreakpoint/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint" default="" tag="input"/> |^<<setDefault sidebarbreakpoint>> |
 |<$link to="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth"><<lingo Metrics/SidebarWidth>></$link><br>//<<lingo Metrics/SidebarWidth/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" default="" tag="input" disabled={{{ [<lookupDict>getindex[sidebarwidth]] }}}/> |^<<setDefault sidebarwidth>> |
 
