@@ -26,7 +26,7 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 </div>
 \end
 
-\define lookupDict() $:/themes/tiddlywiki/vanilla/themetweaks/$(lookupTiddler)$
+\define lookupDict() $:/themes/tiddlywiki/centralised/themetweaks/$(lookupTiddler)$
 
 \define backgroundimageattachment-dropdown()
 <$select tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment" default="scroll">
@@ -57,7 +57,7 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 \define selectLayout()
 \whitespace trim
 <$select tiddler="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" >
-  <option value="fixed-fluid"><<lingo Options/SidebarLayout/Fixed-Fluid>></option>
+  <option value="centered-fluid"><<lingo Options/SidebarLayout/Centered-Fluid>></option>
   <option value="fluid-fixed"><<lingo Options/SidebarLayout/Fluid-Fixed>></option>
 </$select>
 \end
@@ -88,10 +88,7 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 |<$link to="$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize"><<lingo Metrics/BodyFontSize>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize" default="" tag="input"/> |<<setDefault bodyfontsize>> |
 |<$link to="$:/themes/tiddlywiki/vanilla/metrics/bodylineheight"><<lingo Metrics/BodyLineHeight>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodylineheight" default="" tag="input"/> |<<setDefault bodylineheight>> |
 |<$link to="$:/themes/tiddlywiki/vanilla/metrics/storytop"><<lingo Metrics/StoryTop>></$link><br>//<<lingo Metrics/StoryTop/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storytop" default="" tag="input"/> |^<<setDefault storytop>> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storyleft"><<lingo Metrics/StoryLeft>></$link><br>//<<lingo Metrics/StoryLeft/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyleft" default="" tag="input" disabled={{{ [<lookupDict>getindex[storyleft]] }}}/> |^<<setDefault storyleft>> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storyright"><<lingo Metrics/StoryRight>></$link><br>//<<lingo Metrics/StoryRight/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" default="" tag="input"  disabled={{{ [<lookupDict>getindex[storyright]] }}} /> |^<<setDefault storyright>> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storywidth"><<lingo Metrics/StoryWidth>></$link><br>//<<lingo Metrics/StoryWidth/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storywidth" default="" tag="input" disabled={{{ [<lookupDict>getindex[storywidth]] }}} /> |^<<setDefault storywidth>> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth"><<lingo Metrics/TiddlerWidth>></$link><br>//<<lingo Metrics/TiddlerWidth/Hint>>//<br> |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth" default="" tag="input" disabled={{{ [<lookupDict>getindex[tiddlerwidth]] }}} /> |^<<setDefault tiddlerwidth>> |
+|<$link to="$:/themes/tiddlywiki/centralised/metrics/storywidth"><<lingo Metrics/StoryWidth>></$link><br>//<<lingo Metrics/StoryWidth/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/centralised/metrics/storywidth" default="" tag="input" disabled={{{ [<lookupDict>getindex[storywidth]] }}} /> |^<<setDefault storywidth>> |
 |<$link to="$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint"><<lingo Metrics/SidebarBreakpoint>></$link><br>//<<lingo Metrics/SidebarBreakpoint/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint" default="" tag="input"/> |^<<setDefault sidebarbreakpoint>> |
 |<$link to="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth"><<lingo Metrics/SidebarWidth>></$link><br>//<<lingo Metrics/SidebarWidth/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" default="" tag="input" disabled={{{ [<lookupDict>getindex[sidebarwidth]] }}}/> |^<<setDefault sidebarwidth>> |
 

@@ -1,10 +1,11 @@
 title: $:/language/ThemeTweaks/
 
+Button/Default/Tooltip: Back to default value
 ThemeTweaks: Theme Tweaks
 ThemeTweaks/Hint: You can tweak certain aspects of the ''Vanilla'' theme.
 Options: Options
 Options/SidebarLayout: Sidebar layout
-Options/SidebarLayout/Centered-Fixed: Centered story, fixed sidebar
+Options/SidebarLayout/Centered-Fluid: Centered story, fluid sidebar
 Options/SidebarLayout/Fixed-Fluid: Fixed story, fluid sidebar
 Options/SidebarLayout/Fluid-Fixed: Fluid story, fixed sidebar
 Options/StickyTitles: Sticky titles

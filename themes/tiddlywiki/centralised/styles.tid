@@ -1,26 +1,112 @@
 title: $:/themes/tiddlywiki/centralised/styles.tid
 tags: [[$:/tags/Stylesheet]]
 
-\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+\define if-fluid-fixed(text,hiddenSidebarText)
+<$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="fluid-fixed">
+$text$
+<$reveal state="$:/state/sidebar" type="nomatch" text="yes" default="yes">
+$hiddenSidebarText$
+</$reveal>
+</$reveal>
+\end
+
+\define if-centered-fluid(text,hiddenSidebarText)
+<$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="centered-fluid">
+$text$
+<$reveal state="$:/state/sidebar" type="nomatch" text="yes" default="yes">
+$hiddenSidebarText$
+</$reveal>
+</$reveal>
+\end
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
 @media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 
-	html .tc-page-container {
-		text-align: center;
-	}
+<<if-fluid-fixed text:"""
 
-	html .tc-story-river {
+	.tc-story-river {
+		padding-right: 0;
 		position: relative;
-		width: 770px;
-		padding: 42px;
-		margin: 0 auto;
-		text-align: left;
+		width: auto;
+		left: 0;
+		margin-left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
+		margin-right: {{$:/themes/tiddlywiki/centralised/metrics/sidebarwidth}};
 	}
 
-	html .tc-sidebar-scrollable {
-		text-align: left;
-		left: 50%;
-		right: 0;
-		margin-left: 343px;
+	.tc-tiddler-frame {
+		width: 100%;
 	}
+
+	.tc-sidebar-scrollable {
+		left: auto;
+		bottom: 0;
+		right: 0;
+		width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
+	}
+
+	body.tc-body .tc-storyview-zoomin-tiddler {
+		width: 100%;
+		width: calc(100% - 42px);
+	}
+
+""" hiddenSidebarText:"""
+
+	.tc-story-river {
+		padding-right: 3em;
+		margin-right: 0;
+	}
+
+	body.tc-body .tc-storyview-zoomin-tiddler {
+		width: 100%;
+		width: calc(100% - 84px);
+	}
+
+""">>
+/*
+** These settings allow us to improve overall readability, since it limits the width for big screens
+** The sidebar is closer to the story river. 
+*/
+
+<<if-centered-fluid text:"""
+	.tc-page-container {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: {{$:/themes/tiddlywiki/centralised/metrics/storywidth}};
+	}
+	.tc-story-river {
+		position: relative;
+		width: auto;
+		left: 0;
+	}
+	.tc-tiddler-frame {
+		width: 100%;
+	}
+
+	.tc-sidebar-scrollable {
+		left: calc(50vw + {{$:/themes/tiddlywiki/centralised/metrics/storywidth}} / 2 - 8px);
+		bottom: 0;
+		right: 0;
+		width: auto;
+	}
+
+	body.tc-body .tc-storyview-zoomin-tiddler {
+		width: 100%;
+		width: calc(100% - 84px);
+	}
+
+""" hiddenSidebarText:"""
+
+	.tc-story-river {
+		padding-right: 3em;
+		margin-right: 0;
+	}
+
+	body.tc-body .tc-storyview-zoomin-tiddler {
+		width: 100%;
+		width: calc(100% - 84px);
+	}
+
+""">>
+
 }

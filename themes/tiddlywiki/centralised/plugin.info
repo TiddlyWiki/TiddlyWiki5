@@ -1,7 +1,7 @@
 {
 	"title": "$:/themes/tiddlywiki/centralised",
 	"name": "Centralised",
-	"author": "JeremyRuston",
+	"author": "PMario",
 	"core-version": ">=5.0.0",
 	"plugin-type": "theme",
 	"description": "Centralises the story river",

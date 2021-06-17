@@ -38,15 +38,6 @@ $hiddenSidebarText$
 </$reveal>
 \end
 
-\define if-centered-fixed(text,hiddenSidebarText)
-<$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="centered-fixed">
-$text$
-<$reveal state="$:/state/sidebar" type="nomatch" text="yes" default="yes">
-$hiddenSidebarText$
-</$reveal>
-</$reveal>
-\end
-
 \define if-editor-height-fixed(then,else)
 <$reveal state="$:/config/TextEditor/EditorHeight/Mode" type="match" text="fixed">
 $then$
@@ -966,6 +957,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
 		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}};
+		min-width: 500px;
 		padding: 42px 42px 42px 42px;
 	}
 
@@ -1074,6 +1066,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	.tc-tiddler-frame {
 		padding: 28px 42px 42px 42px;
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
+		min-width: 500px;
 		border-radius: 2px;
 	}
 
@@ -1330,7 +1323,7 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 /*
-** Adjustments for fluid-fixed and centered-fixed mode
+** Adjustments for fluid-fixed mode
 */
 
 @media (min-width: <<sidebarbreakpoint>>) {
@@ -1348,53 +1341,6 @@ html body.tc-body.tc-single-tiddler-window {
 
 	.tc-tiddler-frame {
 		width: 100%;
-	}
-
-	.tc-sidebar-scrollable {
-		left: auto;
-		bottom: 0;
-		right: 0;
-		width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
-	}
-
-	body.tc-body .tc-storyview-zoomin-tiddler {
-		width: 100%;
-		width: calc(100% - 42px);
-	}
-
-""" hiddenSidebarText:"""
-
-	.tc-story-river {
-		padding-right: 3em;
-		margin-right: 0;
-	}
-
-	body.tc-body .tc-storyview-zoomin-tiddler {
-		width: 100%;
-		width: calc(100% - 84px);
-	}
-
-""">>
-
-/*
-** These settings allow us to improve overall readability, since it limits the width for big screens 
-*/
-
-<<if-centered-fixed text:"""
-
-	.tc-story-river {
-		padding-right: 0;
-		position: relative;
-		width: auto;
-		left: 0;
-		margin-left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
-		margin-right: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
-	}
-
-	.tc-tiddler-frame {
-		margin-left: auto;
-		margin-right: auto;
-		width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
 	}
 
 	.tc-sidebar-scrollable {
