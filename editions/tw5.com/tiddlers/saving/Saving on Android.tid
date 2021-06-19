@@ -19,7 +19,7 @@ The Tiddloid apps makes it possible to edit and save changes to TiddlyWiki HTML 
 
 !!! Features
 
-* Creating new TiddlyWiki files with latest template
+* Creating new ~TiddlyWiki files with latest template
 * Importing existing TiddlyWiki files stored on a writable source
 * Adding a folder containing TiddlyWiki-based index.htm(l)
 * Receiving a TiddlyWiki site URL shared from Browser and save as a new file or a bookmark
