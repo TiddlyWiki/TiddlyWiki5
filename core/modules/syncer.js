@@ -265,7 +265,7 @@ The syncer tracks changes to the store and synchronises them to a remote data st
 			// Get login status
 			this.syncadaptor.getStatus(function(err,isLoggedIn,username,isReadOnly,isAnonymous,isPollingDisabled) {
 				if(err) {
-					self.logger.alert(err);
+					self.displayError("Syncer error getting status", err);
 				} else {
 					// Set the various status tiddlers
 					self.wiki.addTiddler({title: self.titleIsReadOnly,text: isReadOnly ? "yes" : "no"});

@@ -334,10 +334,9 @@ Server.prototype.listen = function(port,host,prefix) {
 		}
 	}
 	if(missing.length > 0) {
-		var error = "Error: Plugin(s) required for client-server operation are missing.\n"+
-			"Include the following plugins from the command line or in the tiddlywiki.info file:\n"+
+		var error = "Warning: Plugin(s) required for client-server operation are missing.\n"+
 			"\""+ missing.join("\", \"")+"\"";
-		$tw.utils.error(error);
+		$tw.utils.warning(error);
 	}
 	// Create the server
 	var server;
