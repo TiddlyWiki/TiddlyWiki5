@@ -11,24 +11,26 @@ title: Saving on Android
 type: text/vnd.tiddlywiki
 url: https://github.com/donmor/Tiddloid
 
-The Tiddloid and Tiddloid Lite app are Android apps that makes it possible to edit and save changes to TiddlyWiki HTML files. 
+The Tiddloid apps makes it possible to edit and save changes to TiddlyWiki HTML files. 
 
-* For more information: [[Tiddloid|https://github.com/donmor/Tiddloid]] [[Tiddloid Lite|https://github.com/donmor/TiddloidLite]].
-* Download apks: [[Tiddloid|https://github.com/donmor/Tiddloid/releases]], [[TiddloidLite|https://github.com/donmor/TiddloidLite/releases]]
+* For more information: [[Tiddloid project page|https://github.com/donmor/Tiddloid]]
+* Download apks: [[Tiddloid release page|https://github.com/donmor/Tiddloid/releases]]
 
 
 !!! Features
 
-* Create new ~TiddlyWiki importing latest edition from internet
-* Import existing ~TiddlyWikis stored on device/internal storage. ([[TiddloidLite|https://github.com/donmor/TiddloidLite/releases]] supports external SD card too)
-* Fork interesting ~Tiddlywikis from internet  (Supports TW5 only)
-* TiddlyWiki detection
-* Locally stored ~Tiddlywikis are updated simultaneously on saving changes to ~TiddlyWikis imported to the app
-* Backup system that is compatible with TiddlyDesktop, the desktop TiddlyWiki saver
-* Creating shortcuts to existing ~TiddlyWiki  on Android Homepage
-* [[TiddloidLite|https://github.com/donmor/TiddloidLite/releases]] supports cloud storages like GDrive and ~OneDrive
+* Creating new TiddlyWiki files with latest template
+* Importing existing TiddlyWiki files stored on a writable source
+* Adding a folder containing TiddlyWiki-based index.htm(l)
+* Receiving a TiddlyWiki site URL shared from Browser and save as a new file or a bookmark
+* Opening an HTML file and adding to the list if it is a valid TiddlyWiki
+* Applying theme color to the UI with some in-wiki configurations, as well as other tweaks
+* Saving changes by clicking the Save button
+* A Backup system that preserves your previous versions in case of misoperations
+* Convenient operations like Create shortcut, Clone and Delete
+* Importing or exporting wiki list data
 
 !!! Please note
 
-* Tiddloid Lite feature better support for devices running Android Q or later. It also supports cloud storages like GDrive and ~OneDrive, while Tiddloid keeps the compatibility to TiddlyWikiClassic. To know more about differences between Tiddloid and  Tiddloid Lite, please visit [[Tiddloid's homepage|https://github.com/donmor/Tiddloid]].
+* Tiddloid Lite has been discontinued because all of its unique features have been merged into version 2.0.0 of Tiddloid. For more about this, please visit the [[project page|https://github.com/donmor/TiddloidLite]].
 * You should keep the `.html` or `.htm` extension of the files to be imported.
