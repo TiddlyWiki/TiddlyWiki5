@@ -28,6 +28,6 @@ Upgrader/System/Suppressed: Unterdrückte "System Tiddler".
 Upgrader/System/Warning: "Core Modul Tiddler".
 Upgrader/System/Alert: Sie sind dabei einen Tiddler zu importieren, der einen "Core Tiddler" überschreibt. Diese Aktion wird nicht empfohlen! Das System kann instabil werden.
 Upgrader/ThemeTweaks/Created: Migrieren der "theme tweaks" von: <$text text=<<from>>/>.
-Upgrader/Tiddler/Disabled: Deaktivierter "Tiddler".
+Upgrader/Tiddler/Disabled: Deaktivierter Tiddler.
 Upgrader/Tiddler/Selected: Vom Anwender ausgewählt.
 Upgrader/Tiddler/Unselected: Auswahl aufgehoben.

@@ -66,8 +66,8 @@ MissingTiddler/Hint: Fehlender Tiddler "<$text text=<<currentTiddler>>/>" - klic
 No: Nein
 OfficialPluginLibrary: Offizielles ~TiddlyWiki Plugin-Verzeichnis
 OfficialPluginLibrary/Hint: Offizielles ~TiddlyWiki Plugin-Verzeichnis auf tiddlywiki.com. Plugin, Themes und Sprach Dateien werden vom "core team" gewartet.
-PageTemplate/Description: das Standard ~TiddlyWiki "Layout"
-PageTemplate/Name: Standard "~PageTemplate"
+PageTemplate/Description: das Standard ~TiddlyWiki Layout
+PageTemplate/Name: Standard ~PageTemplate
 PluginReloadWarning: Das Wiki muss gespeichert {{$:/core/ui/Buttons/save-wiki}} und neu gladen {{$:/core/ui/Buttons/refresh}} werden, damit die ~JavaScript Plugins ausgeführt werden.
 RecentChanges/DateFormat: YYYY MMM DD
 Shortcuts/Input/AdvancedSearch/Hint: Öffne den ~AdvancedSearch Tiddler vom "Suchmenü" aus
@@ -79,8 +79,8 @@ Shortcuts/Input/Up/Hint: Gehe zum vorherigen Element
 Shortcuts/Input/Tab-Left/Hint: Gehe zum vorherigen Tab 
 Shortcuts/Input/Tab-Right/Hint: Gehe zum nächsten Tab
 Shortcuts/SidebarLayout/Hint: Das Layout des rechten Menüs ändern
-Switcher/Subtitle/theme: "Theme" auswählen
-Switcher/Subtitle/layout: "Layout" auswählen
+Switcher/Subtitle/theme: Theme auswählen
+Switcher/Subtitle/layout: Layout auswählen
 Switcher/Subtitle/language: Sprache auswählen
 Switcher/Subtitle/palette: Palette auswählen
 SystemTiddler/Tooltip: Das ist ein System-Tiddler
