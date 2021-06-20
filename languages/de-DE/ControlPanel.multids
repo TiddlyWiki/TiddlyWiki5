@@ -123,7 +123,7 @@ Saving/TiddlySpot/BackupDir: Verzeichnis für das "Backup"
 Saving/TiddlySpot/ControlPanel: ~TiddlySpot Control Panel
 Saving/TiddlySpot/Backups: "Backups"
 Saving/TiddlySpot/Caption: Speichern auf ~TiddlySpot
-Saving/TiddlySpot/Description: Diese Einstellungen sind nur für [[TiddlySpot|http://tiddlyspot.com]], [[TiddlyHost|https://tiddlyhost.com]], und kompatible Server aktiv! [[Diese Beschreibung|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] enthält weiteregehende Informationen. 
+Saving/TiddlySpot/Description: Diese Einstellungen sind nur für [[TiddlySpot|http://tiddlyspot.com]], [[TiddlyHost|https://tiddlyhost.com]], und kompatible Server aktiv! [[Diese Beschreibung|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] enthält weitergehende Informationen. 
 Saving/TiddlySpot/Filename: Dateiname für den "Upload"
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //Die Standard-Server-URL ist `http://<wikiname>.tiddlyspot.com/store.cgi` und kann im Feld 'Server-URL' verändert werden. zB: http://example.com/store.php//
