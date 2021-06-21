@@ -4,13 +4,10 @@ tags: $:/tags/ViewTemplate
 \define lingo-base() $:/language/Import/
 
 \define confirmCancel()
-<$wikify name="message" text="""{{||$:/language/Import/Listing/Cancel/Warning/1}}&nbsp;
-{{||$:/language/Import/Listing/Cancel/Warning/2}}""">
-<$action-confirm $message=<<message>> >
+<$action-confirm $message={{$:/language/Import/Listing/Cancel/Warning}} >
 <$action-deletetiddler $tiddler=<<currentTiddler>>/>
 <$action-sendmessage $message="tm-close-tiddler" title=<<currentTiddler>>/>
 </$action-confirm>
-</$wikify>
 \end
 
 \define buttons()
