@@ -141,6 +141,11 @@ The syncer tracks changes to the store and synchronises them to a remote data st
 				self.handleLazyLoadEvent(title);
 			});
 		}
+		// Get the login status
+		this.getStatus(function(err,isLoggedIn) {
+			// Do a sync from the server
+			self.syncFromServer();
+		});
 	}
 	
 	/*
