@@ -1,5 +1,6 @@
  title: $:/language/Import/
 
+Editor/Import/Heading: Bilder in den Editor importieren.
 Imported/Hint:  Folgende Tiddler wurden importiert: 
 Listing/Cancel/Caption: Abbrechen
 Listing/Hint: Diese Tiddler können importiert werden: 
@@ -22,7 +23,11 @@ Upgrader/Plugins/Suppressed/Incompatible: Unterdrückte, inkompatible oder veral
 Upgrader/Plugins/Suppressed/Version: Einige "plugins" weden unterdrückt! Importierte plugins: <<incoming>> sind älter als existierende: <<existing>>.
 Upgrader/Plugins/Upgraded:  Aktualisieren der plugins von: <<incoming>> nach: <<upgraded>>.
 Upgrader/State/Suppressed: Unterdrückte temporäre Status Tiddler.
+Upgrader/System/Disabled: Deaktivierter "System-Tiddler".
 Upgrader/System/Suppressed: Unterdrückte "System Tiddler".
 Upgrader/System/Warning: "Core Modul Tiddler".
 Upgrader/System/Alert: Sie sind dabei einen Tiddler zu importieren, der einen "Core Tiddler" überschreibt. Diese Aktion wird nicht empfohlen! Das System kann instabil werden.
 Upgrader/ThemeTweaks/Created: Migrieren der "theme tweaks" von: <$text text=<<from>>/>.
+Upgrader/Tiddler/Disabled: Deaktivierter Tiddler.
+Upgrader/Tiddler/Selected: Vom Anwender ausgewählt.
+Upgrader/Tiddler/Unselected: Auswahl aufgehoben.

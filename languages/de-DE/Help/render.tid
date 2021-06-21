@@ -8,7 +8,7 @@ Optionell kann eine Template-Datei angegeben werden. In diesem Fall wird nicht d
 Es können noch zusätzliche Variablen per Name und Wert gesetzt werden.
 
 ```
---render <tiddler-filter> [<filename-filter>] [<render-type>] [<template>] [<name>] [<value>]
+--render <tiddler-filter> [<filename-filter>] [<render-type>] [<template>] [ [<name>] [<value>] ]*
 ```
 
 * ''tiddler-filter'': Ein Filter, der die Auszugebenden Tiddler eindeutig spezifiziert. 
@@ -28,6 +28,7 @@ Wichtig:
 * Verzeichnisse und Dateien werden automatisch angelegt, sollten sie nicht vorhanden sein.
 * Wenn eine Datei Leerzeichen enthält, dann muss dies ''doppelt'' angezeigt werden. Für TiddlyWiki mit eckigen Klammern `[[]]` und für die Kommandozeile mit Hochkomma "". Zum Beispiel: `--render "[[Motovun Jack.jpg]]"`
 * Dateinamens-Filter zeigen immer auf den Titel, des gerade umzusetzenden Tiddlers. Das erlaubt uns, diesen als Basis für den Dateinamen zu verwenden. zB: `[encodeuricomponent[]addprefix[static/]]` ... Verwendet eine URI-Enkodierung für jeden Dateinamen und stellt das Wort `static/` als Pfadname voran. 
+* Es können mehrere ''name/value'' Paare verwendet werden.
 * Der `--render` Befehl ist flexibler und ersetzt daher `--rendertiddler` und `--rendertiddlers`, welche mit V5.1.15 auslaufen!
 
 Beispiel:
