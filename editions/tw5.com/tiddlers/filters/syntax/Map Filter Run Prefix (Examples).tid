@@ -1,0 +1,16 @@
+created: 20210618134753828
+modified: 20210618140945870
+tags: [[Filter Syntax]] [[Filter Run Prefix Examples]] [[Map Filter Run Prefix]]
+title: Map Filter Run Prefix (Examples)
+type: text/vnd.tiddlywiki
+
+Replace the input titles with the caption field if it exists, otherwise preserve the input title:
+
+<<.operator-example 1 "[tag[Widgets]] :map[get[caption]else{!!title}]">>
+
+<<.tip "The above example is equivalent to `[tag[Widgets]] :map[get[{!!caption}!is[blank]else{!!title}]`. Note that referencing a field as a text reference such as `{!!caption}` returns an empty string for a non-existent or empty caption field. Therefore a check for `is[blank]` is needed before the `else` operator">>
+
+
+For each title in a shopping list, calculate the total cost of purchasing each item:
+
+<<.operator-example 2 "[tag[shopping]] :map[get[quantity]else[0]multiply{!!price}]">>
