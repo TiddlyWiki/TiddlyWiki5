@@ -41,6 +41,8 @@ Modal.prototype.display = function(title,options) {
 	if(!tiddler) {
 		return;
 	}
+	// Make tiddler.fields available
+	this.tiddler = tiddler;
 	// Create the variables
 	var variables = $tw.utils.extend({
 			currentTiddler: title,
@@ -243,7 +245,9 @@ Modal.prototype.adjustPageClass = function() {
 	if(windowContainer) {
 		$tw.utils.toggleClass(windowContainer,"tc-modal-displayed",this.modalCount > 0);
 	}
-	$tw.utils.toggleClass(this.srcDocument.body,"tc-modal-prevent-scroll",this.modalCount > 0);
+	if (this.tiddler.fields && this.tiddler.fields["prevent-scroll-chain"] === "yes") {
+		$tw.utils.toggleClass(this.srcDocument.body,"tc-modal-prevent-scroll",this.modalCount > 0);
+	}
 };
 
 exports.Modal = Modal;
