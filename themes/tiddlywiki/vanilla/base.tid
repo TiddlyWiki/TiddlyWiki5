@@ -1932,6 +1932,7 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-modal-body {
 	padding: 15px;
+	overscroll-behavior: contain;
 }
 
 .tc-modal-footer {
