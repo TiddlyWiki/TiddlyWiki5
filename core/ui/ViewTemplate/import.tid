@@ -3,8 +3,15 @@ tags: $:/tags/ViewTemplate
 
 \define lingo-base() $:/language/Import/
 
+\define confirmCancel()
+<$action-confirm $message={{$:/language/Import/Listing/Cancel/Warning}} >
+<$action-deletetiddler $tiddler=<<currentTiddler>>/>
+<$action-sendmessage $message="tm-close-tiddler" title=<<currentTiddler>>/>
+</$action-confirm>
+\end
+
 \define buttons()
-<$button message="tm-delete-tiddler" param=<<currentTiddler>>><<lingo Listing/Cancel/Caption>></$button>
+<$button actions=<<confirmCancel>> ><<lingo Listing/Cancel/Caption>></$button>
 <$button message="tm-perform-import" param=<<currentTiddler>>><<lingo Listing/Import/Caption>></$button>
 <<lingo Listing/Preview>> <$select tiddler="$:/state/importpreviewtype" default="$:/core/ui/ImportPreviews/Text">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ImportPreview]!has[draft.of]]">
