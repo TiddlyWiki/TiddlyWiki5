@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/tiddlyweb/syncer-actions/download-tiddlywikicore
+tags: $:/tags/SyncerDropdown
+
+\define tiddlywikicoreFilename() tiddlywikicore-$(version)$.js
+<$reveal state="$:/config/SaveWikiButton/Template" type="match" text="$:/core/save/offline-external-js">
+<a class="tc-tiddlylink" style="font-weight:unset" href="%24%3A%2Fcore%2Ftemplates%2Ftiddlywiki5.js" download=<<tiddlywikicoreFilename>>>{{$:/core/images/download-button}} Save ~TiddlyWiki core for offline use</a>
+</$reveal>

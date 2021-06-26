@@ -53,7 +53,7 @@
 			"--rendertiddler","$:/core/templates/static.template.css","static/static.css","text/plain"],
 		"external-js": [
 			"--rendertiddler","$:/core/save/offline-external-js","index.html","text/plain",
-			"--render","$:/core/templates/tiddlywiki5.js","[[twcore-]addsuffix<version>addsuffix[.js]]","text/plain"]
+			"--render","$:/core/templates/tiddlywiki5.js","[[tiddlywikicore-]addsuffix<version>addsuffix[.js]]","text/plain"]
 	},
 	"config": {
 		"retain-original-tiddler-path": true

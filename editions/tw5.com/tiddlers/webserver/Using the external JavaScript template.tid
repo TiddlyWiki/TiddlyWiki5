@@ -87,24 +87,24 @@ The "server-external-js" edition lets you save the snapshot from the command lin
 tiddlywiki YOUR_WIKI_FOLDER --build index
 ```
 
-Two files "index.html" and "twcore-5.x.x.js" will be saved in your wiki folder's `output` directory:
+Two files "index.html" and "tiddlywikicore-5.x.x.js" will be saved in your wiki folder's `output` directory:
 
  
 !! Obtaining the ~TiddlyWiki core with tiddlywiki command
 
-You can run the following command to obtain the core ~JavaScript. The file "twcore-5.x.x.js" will be saved in the`output` directory of your wiki folder:
+You can run the following command to obtain the core ~JavaScript. The file "tiddlywikicore-5.x.x.js" will be saved in the`output` directory of your wiki folder:
 
 ```
 tiddlywiki YOUR_WIKI_FOLDER \
     --render '$:/core/templates/tiddlywiki5.js' \
-    '[[twcore-]addsuffix<version>addsuffix[.js]]' \
+    '[[tiddlywikicore-]addsuffix<version>addsuffix[.js]]' \
     'text/plain'
 ```
 
 The "server-external-js" edition has the shortcut set up for you. Just run:
 
 ```
-tiddlywiki YOUR_WIKI_FOLDER --build twcore
+tiddlywiki YOUR_WIKI_FOLDER --build tiddlywikicore
 ```
 
 <a id=<<qualify "#upgrade">>></a>
