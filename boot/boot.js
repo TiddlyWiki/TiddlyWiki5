@@ -1754,7 +1754,7 @@ $tw.loadTiddlersBrowser = function() {
 		"#storeArea",
 		"#systemArea",
 		// Classes for new-style v5.2.x JSON tiddler stores
-		".tiddlywiki-tiddler-store"
+		"script.tiddlywiki-tiddler-store"
 	];
 	for(var t=0; t<containerSelectors.length; t++) {
 		var nodes = document.querySelectorAll(containerSelectors[t]);
