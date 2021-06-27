@@ -818,6 +818,12 @@ function runTests(wiki) {
 	it("should handle the deserializers operator", function() {
 	expect(wiki.filterTiddlers("[deserializers[]]").join(",")).toBe("application/javascript,application/json,application/x-tiddler,application/x-tiddler-html-div,application/x-tiddlers,text/css,text/html,text/plain");
 	});
+	
+	it("should handle the charcode operator", function() {
+		expect(wiki.filterTiddlers("[charcode[9]]").join(" ")).toBe(String.fromCharCode(9));
+		expect(wiki.filterTiddlers("[charcode[9],[10]]").join(" ")).toBe(String.fromCharCode(9) + String.fromCharCode(10));
+		expect(wiki.filterTiddlers("[charcode[]]").join(" ")).toBe("");
+	});
 
 }
 

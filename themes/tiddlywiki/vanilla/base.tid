@@ -1942,6 +1942,9 @@ html body.tc-body.tc-single-tiddler-window {
 	border-top: 1px solid <<colour modal-footer-border>>;
 }
 
+.tc-modal-prevent-scroll {
+	overflow: hidden;
+}
 
 /*
 ** Centered modals

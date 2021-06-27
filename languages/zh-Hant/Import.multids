@@ -3,6 +3,7 @@ title: $:/language/Import/
 Editor/Import/Heading: 導入圖像並將其插入至編輯器。
 Imported/Hint:  下列條目已被導入：
 Listing/Cancel/Caption: 取消
+Listing/Cancel/Warning: 您要取消導入嗎？
 Listing/Hint: 這些條目已備妥導入：
 Listing/Import/Caption: 導入
 Listing/Select/Caption: 選擇
