@@ -1,6 +1,5 @@
 title: $:/core/ui/ControlPanel/Modals/AddPlugins
 subtitle: {{$:/core/images/download-button}} {{$:/language/ControlPanel/Plugins/Add/Caption}}
-prevent-scroll-chain: yes
 
 \define install-plugin-actions()
 <$action-sendmessage $message="tm-load-plugin-from-library" url={{!!url}} title={{$(assetInfo)$!!original-title}}/>

@@ -245,12 +245,7 @@ Modal.prototype.adjustPageClass = function() {
 	if(windowContainer) {
 		$tw.utils.toggleClass(windowContainer,"tc-modal-displayed",this.modalCount > 0);
 	}
-	if (this.tiddler.fields && this.tiddler.fields["prevent-scroll-chain"] === "yes") {
-		$tw.utils.toggleClass(this.srcDocument.body,"tc-modal-prevent-scroll",this.modalCount > 0);
-	} else if (this.modalCount === 0) {
-		// if the last modal didn't contain a prevent-scroll-chain field
-		$tw.utils.toggleClass(this.srcDocument.body,"tc-modal-prevent-scroll",false);
-	}
+	$tw.utils.toggleClass(this.srcDocument.body,"tc-modal-prevent-scroll",this.modalCount > 0);
 };
 
 exports.Modal = Modal;
