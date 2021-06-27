@@ -160,6 +160,7 @@ NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 
 // Close a specified tiddler
 NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
+	event = $tw.hooks.invokeHook("th-closing-tiddler",event);
 	var title = event.param || event.tiddlerTitle,
 		storyList = this.getStoryList();
 	// Look for tiddlers with this title to close
