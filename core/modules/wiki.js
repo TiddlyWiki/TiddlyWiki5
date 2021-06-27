@@ -731,16 +731,7 @@ exports.getTiddlersAsJson = function(filter,options) {
 		json = JSON.stringify(data,null,spaces);
 	}
 	if(options.escapeUnsafeScriptCharacters) {
-		function escapeUnsafeChars(unsafeChar) {
-			return {
-				"<":      "\\u003C",
-				">":      "\\u003E",
-				"/":      "\\u002F",
-				"\u2028": "\\u2028",
-				"\u2029": "\\u2029"
-			}[unsafeChar];
-		}
-		json = json.replace(/</g,escapeUnsafeChars);
+		json = json.replace(/</g,"\\u003C");
 	}
 	return json;
 };
