@@ -1,7 +1,6 @@
 created: 20140912145537860
 footer: <$button message="tm-close-tiddler">Close</$button>
-modified: 20210621223203244
-prevent-scroll-chain: yes
+modified: 20210627054504823
 subtitle: I'm a modal wizard
 title: SampleWizard
 type: text/vnd.tiddlywiki
