@@ -41,8 +41,6 @@ Modal.prototype.display = function(title,options) {
 	if(!tiddler) {
 		return;
 	}
-	// Make tiddler.fields available
-	this.tiddler = tiddler;
 	// Create the variables
 	var variables = $tw.utils.extend({
 			currentTiddler: title,
