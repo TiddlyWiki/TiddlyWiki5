@@ -1,7 +1,7 @@
 created: 20210525165258247
 modified: 20210614134705320
-tags: Data-Storage doc
-title: Data-Storage in Single File TiddlyWiki
+tags: Data-Storage doc [[Data Storage]]
+title: Data Storage in Single File TiddlyWiki
 
 The single file version of ~TiddlyWiki saves the tiddlers within the HTML file. 
 
@@ -47,8 +47,7 @@ If the ~TiddlyWiki is configured to encrypt its content, the tiddlers are stored
 <pre id="encryptedStoreArea" type="text/plain" style="display:none;">
 ```
 
-~TiddlyWiki uses the Standford [[JavaScript Crypto Library|http://bitwiseshiftleft.github.io/sjcl/]]. 
-
+~TiddlyWiki uses the [[Stanford JavaScript Crypto Library|http://bitwiseshiftleft.github.io/sjcl/]]. 
 
 ---
 
