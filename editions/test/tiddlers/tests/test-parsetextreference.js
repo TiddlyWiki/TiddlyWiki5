@@ -31,7 +31,7 @@ describe("Wiki.parseTextReference tests", function() {
 		modified: "201304152211"});
 	wiki.addTiddler({
 		title: "Tiddler Three",
-		text: '{"oct":31,"nov":30,"dec":31}',
+		text: '{"oct":31,"nov":30,"dec":31,"jan":""}',
 		tags: ["one","two"],
 		type: "application/json",
 		modifier: "John",
@@ -41,7 +41,7 @@ describe("Wiki.parseTextReference tests", function() {
 		text: "The quick brown fox in $:/TiddlerTwo",
 		tags: ["one"],
 		type: "text/vnd.tiddlywiki",
-		authors: "Joe Bloggs",
+		authors: "",
 		modifier: "JoeBloggs",
 		modified: "201304152222"});
 	// Add a plugin containing some shadow tiddlers
@@ -68,7 +68,8 @@ describe("Wiki.parseTextReference tests", function() {
 				title: "Tiddler8",
 				text: "Tidd",
 				tags: ["one"],
-				"test-field": "JoeBloggs"
+				"test-field": "JoeBloggs",
+				"myfield":""
 			}
 		}
 	};
@@ -106,12 +107,20 @@ describe("Wiki.parseTextReference tests", function() {
 		expect(parseAndGetSource("MissingTiddler",null,"missing-index")).toEqual(null);
 		// Existing tiddler with non existent field
 		expect(parseAndGetSource("TiddlerOne","missing-field")).toEqual(null);
+		// Existing tiddler with blank field
+		expect(parseAndGetSource("TiddlerFour","authors")).toEqual("");
 		// Data tiddler with index specified
 		expect(parseAndGetSource("Tiddler Three",null,"oct")).toEqual("31");
+		// Data tiddler with blank index
+		expect(parseAndGetSource("Tiddler Three",null,"jan")).toEqual("");
+		// Data tiddler with non-existent index
+		expect(parseAndGetSource("Tiddler Three",null,"feb")).toEqual(null);
 		// Existing tiddler with a text field, type set to vnd.tiddlywiki
 		expect(parseAndGetSource("TiddlerFour")).toEqual("The quick brown fox in $:/TiddlerTwo");
 		// Existing subtiddler of a plugin
 		expect(parseAndGetSource("$:/ShadowPlugin","text",null,"Tiddler8")).toEqual("Tidd");
+		// Existing blank field of a subtiddler of a plugin
+		expect(parseAndGetSource("$:/ShadowPlugin","myfield",null,"Tiddler8")).toEqual("");
 		// Non-existent subtiddler of a plugin
 		expect(parseAndGetSource("$:/ShadowPlugin","text",null,"MyMissingTiddler")).toEqual(null);
 		// Plain text tiddler

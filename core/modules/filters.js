@@ -253,7 +253,8 @@ exports.compileFilter = function(filterString) {
 					if(operand.indirect) {
 						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
 					} else if(operand.variable) {
-						operand.value = widget.getVariable(operand.text,{defaultValue: ""});
+						var varTree = $tw.utils.parseFilterVariable(operand.text);
+						operand.value = widget.getVariable(varTree.name,{params:varTree.params,defaultValue: ""});
 					} else {
 						operand.value = operand.text;
 					}
