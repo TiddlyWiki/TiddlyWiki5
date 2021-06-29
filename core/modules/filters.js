@@ -253,8 +253,8 @@ exports.compileFilter = function(filterString) {
 					if(operand.indirect) {
 						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
 					} else if(operand.variable) {
-						var varInfo = $tw.utils.parseFilterVariable(operand.text);
-						operand.value = widget.getVariable(varInfo.name,{params:varInfo.params,defaultValue: ""});
+						var varTree = $tw.utils.parseFilterVariable(operand.text);
+						operand.value = widget.getVariable(varTree.name,{params:varTree.params,defaultValue: ""});
 					} else {
 						operand.value = operand.text;
 					}
@@ -305,7 +305,7 @@ exports.compileFilter = function(filterString) {
 					return filterRunPrefixes["and"](operationSubFunction, options);
 				case "~": // This operation is unioned into the result only if the main result so far is empty
 					return filterRunPrefixes["else"](operationSubFunction, options);
-				default:
+				default: 
 					if(operation.namedPrefix && filterRunPrefixes[operation.namedPrefix]) {
 						return filterRunPrefixes[operation.namedPrefix](operationSubFunction, options);
 					} else {
