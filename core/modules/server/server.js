@@ -45,6 +45,8 @@ function Server(options) {
 		}
 	}
 	$tw.utils.extend({},this.defaultVariables,options.variables);
+	// Setup the default required plugins
+	this.requiredPlugins = (options.requiredPlugins || "tiddlywiki/filesystem,tiddlywiki/tiddlyweb").split(',');
 	// Initialise CSRF
 	this.csrfDisable = this.get("csrf-disable") === "yes";
 	// Initialize Gzip compression
@@ -161,11 +163,7 @@ Server.prototype.defaultVariables = {
 	"system-tiddler-render-template": "$:/core/templates/wikified-tiddler",
 	"debug-level": "none",
 	"gzip": "no",
-	"use-browser-cache": "no",
-	"required-plugins": [
-		"tiddlywiki/filesystem",
-		"tiddlywiki/tiddlyweb"
-	]
+	"use-browser-cache": "no"
 };
 
 Server.prototype.get = function(name) {
@@ -329,8 +327,8 @@ Server.prototype.listen = function(port,host,prefix) {
 	}
 	// Warn if required plugins are missing
 	var missing = [];
-	for (var index=0; index<this.variables["required-plugins"].length; index++) {
-		var name = this.variables["required-plugins"][index];
+	for (var index=0; index<this.requiredPlugins.length; index++) {
+		var name = this.requiredPlugins[index];
 		if (!this.wiki.getTiddler("$:/plugins/"+name)) {
 			missing.push(name);
 		}
