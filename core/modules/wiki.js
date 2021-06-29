@@ -700,40 +700,21 @@ exports.getTiddlerAsJson = function(title) {
 	}
 };
 
-/*
-Options:
-spaces: number of spaces. The special value -1 results in a line break in between each tiddler
-escapeUnsafeScriptCharacters: true to force escaping of characters that cannot be embedded in HTML
-*/
-exports.getTiddlersAsJson = function(filter,options) {
-	options = options || {};
-	if(typeof options === "string") {
-		options = {spaces: options};
-	}
-	var titles = this.filterTiddlers(filter),
-		spaces = (options.spaces === undefined) ? $tw.config.preferences.jsonSpaces : options.spaces,
-		data = [],
-		t;
-	for(t=0;t<titles.length; t++) {
-		var tiddler = this.getTiddler(titles[t]);
-		if(tiddler) {
-			data.push(tiddler.getFieldStrings());
-		}
-	}
-	var json;
-	if(spaces === -1) {
-		var jsonLines = [];
-		for(t=0;t<data.length; t++) {
-			jsonLines.push(JSON.stringify(data[t]));
-		}
-		json = "[\n" + jsonLines.join(",\n") + "\n]";
-	} else {
-		json = JSON.stringify(data,null,spaces);
-	}
-	if(options.escapeUnsafeScriptCharacters) {
-		json = json.replace(/</g,"\\u003C");
-	}
-	return json;
+exports.getTiddlersAsJson = function(filter,spaces) {
+    var tiddlers = this.filterTiddlers(filter),
+        spaces = (spaces === undefined) ? $tw.config.preferences.jsonSpaces : spaces,
+        data = [];
+    for(var t=0;t<tiddlers.length; t++) {
+        var tiddler = this.getTiddler(tiddlers[t]);
+        if(tiddler) {
+            var fields = new Object();
+            for(var field in tiddler.fields) {
+                fields[field] = tiddler.getFieldString(field);
+            }
+            data.push(fields);
+        }
+    }
+    return JSON.stringify(data,null,spaces);
 };
 
 /*

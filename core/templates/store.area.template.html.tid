@@ -5,9 +5,16 @@ title: $:/core/templates/store.area.template.html
 <$list filter="[[$:/isEncrypted]get[text]else[no]match[no]]">
     <$list filter="[[storeAreaFormat]is[variable]getvariable[]else[json]match[json]]">
         <!-- New-style JSON store area, with an old-style store area for compatibility with v5.1.x tooling -->
-        `<script class="tiddlywiki-tiddler-store" type="application/json">`
-            <$macrocall $name="jsontiddlers" filter=<<saveTiddlerFilter>> spaces="-1" escapeUnsafeScriptCharacters="yes" $output="text/raw"/>
-        `</script>`
+        `<script class="tiddlywiki-tiddler-store" type="application/json">[`
+            <$vars newline={{{ [charcode[10]] }}}>
+                <$text text=<<newline>>/>
+                <$list filter=<<saveTiddlerFilter>> counter="counter" template="$:/core/templates/html-json-tiddler"/>
+                <$vars numTiddlers={{{ [subfilter<saveTiddlerFilter>count[]] }}}>
+                    <$list filter={{{ [<skinnySaveTiddlerFilter>] }}} counter="counter" template="$:/core/templates/html-json-skinny-tiddler"/>
+                </$vars>
+                <$text text=<<newline>>/>
+            </$vars>
+        `]</script>`
         `<div id="storeArea" style="display:none;">`
         `</div>`
     </$list>
