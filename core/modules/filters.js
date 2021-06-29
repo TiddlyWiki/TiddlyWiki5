@@ -53,7 +53,7 @@ function parseFilterOperation(operators,filterString,p) {
 				$tw.utils.each(subsuffix.split(","),function(entry) {
 					entry = $tw.utils.trim(entry);
 					if(entry) {
-						operator.suffixes[operator.suffixes.length - 1].push(entry);
+						operator.suffixes[operator.suffixes.length - 1].push(entry); 
 					}
 				});
 			});
@@ -305,7 +305,7 @@ exports.compileFilter = function(filterString) {
 					return filterRunPrefixes["and"](operationSubFunction, options);
 				case "~": // This operation is unioned into the result only if the main result so far is empty
 					return filterRunPrefixes["else"](operationSubFunction, options);
-				default: 
+				default:
 					if(operation.namedPrefix && filterRunPrefixes[operation.namedPrefix]) {
 						return filterRunPrefixes[operation.namedPrefix](operationSubFunction, options);
 					} else {
