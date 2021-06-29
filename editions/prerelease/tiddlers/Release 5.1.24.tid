@@ -16,7 +16,6 @@ type: text/vnd.tiddlywiki
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5380">> (and again [[here|https://github.com/Jermolene/TiddlyWiki5/pull/5488]]) the efficiency of the linked list implementation
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5362">> [[all Operator]] to use new linked list implementation
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5369">> [[links Operator]] to use new linked list implementation
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5383">> unneeded escaping of double quotes in tiddler DIVs inside single file wikis (saving about 10% from the size of empty.html)
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5436">> Network performance for node.js
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5736">> refreshing of transclude widget.
 
