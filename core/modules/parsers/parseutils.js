@@ -114,7 +114,7 @@ exports.parseStringLiteral = function(source,pos) {
 	var match = reString.exec(source);
 	if(match && match.index === pos) {
 		node.value = match[1] !== undefined ? match[1] :(
-			match[2] !== undefined ? match[2] : match[3] 
+			match[2] !== undefined ? match[2] : match[3]
 					);
 		node.end = pos + match[0].length;
 		return node;
@@ -206,6 +206,28 @@ exports.parseMacroInvocation = function(source,pos) {
 	// Update the end position
 	node.end = pos;
 	return node;
+};
+
+exports.parseFilterVariable = function(source) {
+	var name = "",
+		pos = 0,
+		params = [],
+		reName = /([^\s>"'=]+)/g;
+		// Get the variable name
+	var nameMatch = $tw.utils.parseTokenRegExp(source,pos,reName);
+	if(nameMatch) {
+		name = nameMatch.match[1];
+		pos = nameMatch.end;
+		// Process parameters
+		var parameter = $tw.utils.parseMacroParameter(source,pos);
+		while(parameter) {
+			params.push(parameter);
+			pos = parameter.end;
+			// Get the next parameter
+			parameter = $tw.utils.parseMacroParameter(source,pos);
+		}
+	}
+	return {name: name, params: params};
 };
 
 /*
