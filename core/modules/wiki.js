@@ -701,20 +701,20 @@ exports.getTiddlerAsJson = function(title) {
 };
 
 exports.getTiddlersAsJson = function(filter,spaces) {
-    var tiddlers = this.filterTiddlers(filter),
-        spaces = (spaces === undefined) ? $tw.config.preferences.jsonSpaces : spaces,
-        data = [];
-    for(var t=0;t<tiddlers.length; t++) {
-        var tiddler = this.getTiddler(tiddlers[t]);
-        if(tiddler) {
-            var fields = new Object();
-            for(var field in tiddler.fields) {
-                fields[field] = tiddler.getFieldString(field);
-            }
-            data.push(fields);
-        }
-    }
-    return JSON.stringify(data,null,spaces);
+	var tiddlers = this.filterTiddlers(filter),
+		spaces = (spaces === undefined) ? $tw.config.preferences.jsonSpaces : spaces,
+		data = [];
+	for(var t=0;t<tiddlers.length; t++) {
+		var tiddler = this.getTiddler(tiddlers[t]);
+		if(tiddler) {
+			var fields = new Object();
+			for(var field in tiddler.fields) {
+				fields[field] = tiddler.getFieldString(field);
+			}
+			data.push(fields);
+		}
+	}
+	return JSON.stringify(data,null,spaces);
 };
 
 /*
