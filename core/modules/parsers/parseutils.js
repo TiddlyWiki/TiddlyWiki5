@@ -213,7 +213,7 @@ exports.parseFilterVariable = function(source) {
 		pos = 0,
 		params = [],
 		reName = /([^\s>"'=]+)/g;
-		// Get the variable name
+	// Get the variable name
 	var nameMatch = $tw.utils.parseTokenRegExp(source,pos,reName);
 	if(nameMatch) {
 		name = nameMatch.match[1];
