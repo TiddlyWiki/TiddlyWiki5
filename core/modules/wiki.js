@@ -977,7 +977,7 @@ exports.getTextReferenceParserInfo = function(title,field,index,options) {
 		if(field === "title") {
 			parserInfo.sourceText = title;
 		} else if(tiddler && tiddler.fields) {
-			parserInfo.sourceText = tiddler.fields[field] ? tiddler.fields[field].toString() : null;
+			parserInfo.sourceText = tiddler.hasField(field) ? tiddler.fields[field].toString() : null;
 		}
 	} else if(index) {
 		this.getTiddlerText(title); // Force the tiddler to be lazily loaded

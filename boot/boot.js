@@ -1985,7 +1985,7 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 		pluginInfo.dependents = pluginInfo.dependents || [];
 		pluginInfo.type = "application/json";
 		// Set plugin text
-		pluginInfo.text = JSON.stringify({tiddlers: pluginInfo.tiddlers},null,4);
+		pluginInfo.text = JSON.stringify({tiddlers: pluginInfo.tiddlers});
 		delete pluginInfo.tiddlers;
 		// Deserialise array fields (currently required for the dependents field)
 		for(var field in pluginInfo) {
