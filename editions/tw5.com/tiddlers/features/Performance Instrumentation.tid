@@ -18,7 +18,7 @@ The information above should be interpreted as follows:
 
 * mainRender is the time taken for the initial display of the page template
 * styleRefresh is the time taken to refresh the page stylesheet
-* mainRender is the time taken to refresh the main page template
+* mainRefresh is the time taken to refresh the main page template
 
 As an example, try switching between the sidebar tabs to compare how long they take to render.
 
