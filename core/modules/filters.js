@@ -53,7 +53,7 @@ function parseFilterOperation(operators,filterString,p) {
 				$tw.utils.each(subsuffix.split(","),function(entry) {
 					entry = $tw.utils.trim(entry);
 					if(entry) {
-						operator.suffixes[operator.suffixes.length - 1].push(entry);
+						operator.suffixes[operator.suffixes.length - 1].push(entry); 
 					}
 				});
 			});

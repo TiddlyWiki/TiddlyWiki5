@@ -835,6 +835,18 @@ function runTests(wiki) {
 	  expect($tw.utils.parseFilterVariable("now DDMM UTC")).toEqual(
 		{ name: 'now', params: [{ type: 'macro-parameter', start: 3, value: 'DDMM', end: 8 }, { type: 'macro-parameter', start: 8, value: 'UTC', end: 12 }] }
 	  );
+	  expect($tw.utils.parseFilterVariable("now format:DDMM")).toEqual(
+		{ name: 'now', params: [{ type: 'macro-parameter', name:'format', start: 3, value: 'DDMM', end: 15 }] }	  	
+	  );
+	  expect($tw.utils.parseFilterVariable("now format:'DDMM'")).toEqual(
+		{ name: 'now', params: [{ type: 'macro-parameter', name:'format', start: 3, value: 'DDMM', end: 17 }] }	  	
+	  );
+	  expect($tw.utils.parseFilterVariable("nowformat:'DDMM'")).toEqual(
+		{ name: 'nowformat:\'DDMM\'', params: [] }
+	  );
+	  expect($tw.utils.parseFilterVariable("nowformat:'DD MM'")).toEqual(
+		{ name: 'nowformat:', params: [{ type: 'macro-parameter', start: 10, value: 'DD MM', end: 17 }] }
+	  );
 	  expect($tw.utils.parseFilterVariable("")).toEqual(
 		{ name: '', params: [] }
 	  );
