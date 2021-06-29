@@ -825,6 +825,42 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("[charcode[]]").join(" ")).toBe("");
 	});
 
+	it("should parse filter variable parameters", function(){
+	  expect($tw.utils.parseFilterVariable("currentTiddler")).toEqual(
+		{ name: 'currentTiddler', params: [  ] }
+	  );
+	  expect($tw.utils.parseFilterVariable("now DDMM")).toEqual(
+		{ name: 'now', params: [{ type: 'macro-parameter', start: 3, value: 'DDMM', end: 8 }] }
+	  );
+	  expect($tw.utils.parseFilterVariable("now DDMM UTC")).toEqual(
+		{ name: 'now', params: [{ type: 'macro-parameter', start: 3, value: 'DDMM', end: 8 }, { type: 'macro-parameter', start: 8, value: 'UTC', end: 12 }] }
+	  );
+	  expect($tw.utils.parseFilterVariable("now format:DDMM")).toEqual(
+		{ name: 'now', params: [{ type: 'macro-parameter', name:'format', start: 3, value: 'DDMM', end: 15 }] }	  	
+	  );
+	  expect($tw.utils.parseFilterVariable("now format:'DDMM'")).toEqual(
+		{ name: 'now', params: [{ type: 'macro-parameter', name:'format', start: 3, value: 'DDMM', end: 17 }] }	  	
+	  );
+	  expect($tw.utils.parseFilterVariable("nowformat:'DDMM'")).toEqual(
+		{ name: 'nowformat:\'DDMM\'', params: [] }
+	  );
+	  expect($tw.utils.parseFilterVariable("nowformat:'DD MM'")).toEqual(
+		{ name: 'nowformat:', params: [{ type: 'macro-parameter', start: 10, value: 'DD MM', end: 17 }] }
+	  );
+	  expect($tw.utils.parseFilterVariable("now [UTC]YYYY0MM0DD0hh0mm0ssXXX")).toEqual(
+		{ name: 'now', params: [{ type: 'macro-parameter', start: 3, value: '[UTC]YYYY0MM0DD0hh0mm0ssXXX', end: 31 }] }
+	  );
+	  expect($tw.utils.parseFilterVariable("now '[UTC]YYYY0MM0DD0hh0mm0ssXXX'")).toEqual(
+		{ name: 'now', params: [{ type: 'macro-parameter', start: 3, value: '[UTC]YYYY0MM0DD0hh0mm0ssXXX', end: 33 }] }
+	  );
+	  expect($tw.utils.parseFilterVariable("now format:'[UTC]YYYY0MM0DD0hh0mm0ssXXX'")).toEqual(
+		{ name: 'now', params: [{ type: 'macro-parameter', start: 3, name:'format', value: '[UTC]YYYY0MM0DD0hh0mm0ssXXX', end: 40 }] }
+	  );
+	  expect($tw.utils.parseFilterVariable("")).toEqual(
+		{ name: '', params: [] }
+	  );
+	});
+
 }
 
 });
