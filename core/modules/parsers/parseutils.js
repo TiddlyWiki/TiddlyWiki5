@@ -114,7 +114,7 @@ exports.parseStringLiteral = function(source,pos) {
 	var match = reString.exec(source);
 	if(match && match.index === pos) {
 		node.value = match[1] !== undefined ? match[1] :(
-			match[2] !== undefined ? match[2] : match[3] 
+			match[2] !== undefined ? match[2] : match[3]
 					);
 		node.end = pos + match[0].length;
 		return node;
@@ -122,6 +122,19 @@ exports.parseStringLiteral = function(source,pos) {
 		return null;
 	}
 };
+
+exports.parseMacroParameters = function(node,source,pos) {
+	// Process parameters
+	var parameter = $tw.utils.parseMacroParameter(source,pos);
+	while(parameter) {
+		node.params.push(parameter);
+		pos = parameter.end;
+		// Get the next parameter
+		parameter = $tw.utils.parseMacroParameter(source,pos);
+	}
+	node.end = pos;
+	return node;
+}
 
 /*
 Look for a macro invocation parameter. Returns null if not found, or {type: "macro-parameter", name:, value:, start:, end:}
@@ -187,14 +200,8 @@ exports.parseMacroInvocation = function(source,pos) {
 	}
 	node.name = name.match[1];
 	pos = name.end;
-	// Process parameters
-	var parameter = $tw.utils.parseMacroParameter(source,pos);
-	while(parameter) {
-		node.params.push(parameter);
-		pos = parameter.end;
-		// Get the next parameter
-		parameter = $tw.utils.parseMacroParameter(source,pos);
-	}
+	node = $tw.utils.parseMacroParameters(node,source,pos);
+	pos = node.end;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for a double greater than sign
@@ -209,25 +216,26 @@ exports.parseMacroInvocation = function(source,pos) {
 };
 
 exports.parseFilterVariable = function(source) {
-	var name = "",
+	var node = {
+			name: "",
+			params: [],
+		},
 		pos = 0,
-		params = [],
 		reName = /([^\s>"'=]+)/g;
+	// If there is no whitespace or it is an empty string then there are no macro parameters
+	if(/^\S*$/.test(source)) {
+		node.name = source;
+		return node;
+	}
 	// Get the variable name
 	var nameMatch = $tw.utils.parseTokenRegExp(source,pos,reName);
 	if(nameMatch) {
-		name = nameMatch.match[1];
+		node.name = nameMatch.match[1];
 		pos = nameMatch.end;
-		// Process parameters
-		var parameter = $tw.utils.parseMacroParameter(source,pos);
-		while(parameter) {
-			params.push(parameter);
-			pos = parameter.end;
-			// Get the next parameter
-			parameter = $tw.utils.parseMacroParameter(source,pos);
-		}
+		node = $tw.utils.parseMacroParameters(node,source,pos);
+		delete node.end;
 	}
-	return {name: name, params: params};
+	return node;
 };
 
 /*
