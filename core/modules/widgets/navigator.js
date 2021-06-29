@@ -543,7 +543,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 		}
 	});
 	// Save the $:/Import tiddler
-	newFields.text = JSON.stringify(importData,null,$tw.config.preferences.jsonSpaces);
+	newFields.text = JSON.stringify(importData,null,$tw.config.preferences.jsonString);
 	this.wiki.addTiddler(new $tw.Tiddler(importTiddler,newFields));
 	// Update the story and history details
 	var autoOpenOnImport = event.autoOpenOnImport ? event.autoOpenOnImport : this.getVariable("tv-auto-open-on-import");  

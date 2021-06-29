@@ -78,10 +78,10 @@ WikifyWidget.prototype.getResult = function() {
 			result = this.wikifyContainer.innerHTML;
 			break;
 		case "parsetree":
-			result = JSON.stringify(this.wikifyParser.tree,0,$tw.config.preferences.jsonSpaces);
+			result = JSON.stringify(this.wikifyParser.tree,0,$tw.config.preferences.jsonString);
 			break;
 		case "widgettree":
-			result = JSON.stringify(this.getWidgetTree(),0,$tw.config.preferences.jsonSpaces);
+			result = JSON.stringify(this.getWidgetTree(),0,$tw.config.preferences.jsonString);
 			break;
 	}
 	return result;

@@ -36,7 +36,7 @@ exports.startup = function() {
 			title: TITLE_INFO_PLUGIN,
 			type: "application/json",
 			"plugin-type": "info",
-			text: JSON.stringify(json,null,$tw.config.preferences.jsonSpaces)
+			text: JSON.stringify(json,null,$tw.config.preferences.jsonString)
 		};
 		$tw.wiki.addTiddler(new $tw.Tiddler(fields));
 

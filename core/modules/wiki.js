@@ -711,7 +711,7 @@ exports.getTiddlersAsJson = function(filter,options) {
 		options = {spaces: options};
 	}
 	var titles = this.filterTiddlers(filter),
-		spaces = (options.spaces === undefined) ? $tw.config.preferences.jsonSpaces : options.spaces,
+		spaces = (options.spaces === undefined) ? $tw.config.preferences.jsonString : options.spaces,
 		data = [],
 		t;
 	for(t=0;t<titles.length; t++) {

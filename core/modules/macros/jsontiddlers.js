@@ -28,8 +28,9 @@ exports.params = [
 Run the macro
 */
 exports.run = function(filter,spaces,escapeUnsafeScriptCharacters) {
-	var json = this.wiki.getTiddlersAsJson(filter,{
-		spaces: $tw.utils.parseInt(spaces),
+	var jsonString = ((spaces) === "-9") ? "\t" : null,
+		json = this.wiki.getTiddlersAsJson(filter,{
+		spaces: (jsonString) ? jsonString : $tw.utils.parseInt(spaces),
 		escapeUnsafeScriptCharacters: escapeUnsafeScriptCharacters === "yes"
 	});
 	return json;

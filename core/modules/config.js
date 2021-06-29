@@ -15,7 +15,8 @@ Core configuration constants
 exports.preferences = {};
 
 exports.preferences.notificationDuration = 3 * 1000;
-exports.preferences.jsonSpaces = 4;
+exports.preferences.jsonSpaces = 2;
+exports.preferences.jsonString = "\t";
 
 exports.textPrimitives = {
 	upperLetter: "[A-Z\u00c0-\u00d6\u00d8-\u00de\u0150\u0170]",

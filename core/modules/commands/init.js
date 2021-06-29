@@ -50,7 +50,7 @@ Command.prototype.execute = function() {
 	var packagePath = $tw.boot.wikiPath + "/tiddlywiki.info",
 		packageJson = JSON.parse(fs.readFileSync(packagePath));
 	delete packageJson.includeWikis;
-	fs.writeFileSync(packagePath,JSON.stringify(packageJson,null,$tw.config.preferences.jsonSpaces));
+	fs.writeFileSync(packagePath,JSON.stringify(packageJson,null,$tw.config.preferences.jsonString));
 	return null;
 };
 

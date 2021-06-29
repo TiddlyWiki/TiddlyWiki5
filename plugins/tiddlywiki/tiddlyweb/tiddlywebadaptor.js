@@ -307,6 +307,7 @@ TiddlyWebAdaptor.prototype.convertTiddlerToTiddlyWebFormat = function(tiddler) {
 	// Default the content type
 	result.type = result.type || "text/vnd.tiddlywiki";
 	return JSON.stringify(result,null,$tw.config.preferences.jsonSpaces);
+//	return JSON.stringify(result);
 };
 
 /*

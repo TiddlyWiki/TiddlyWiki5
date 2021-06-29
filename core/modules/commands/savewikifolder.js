@@ -180,7 +180,7 @@ WikiFolderMaker.prototype.saveTiddler = function(directory,tiddler) {
 };
 
 WikiFolderMaker.prototype.saveJSONFile = function(filename,json) {
-	this.saveTextFile(filename,JSON.stringify(json,null,$tw.config.preferences.jsonSpaces));
+	this.saveTextFile(filename,JSON.stringify(json,null,$tw.config.preferences.jsonString));
 };
 
 WikiFolderMaker.prototype.saveTextFile = function(filename,data) {

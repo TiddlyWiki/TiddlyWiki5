@@ -34,7 +34,7 @@ exports.run = function(title) {
 			fields[field] = tiddler.getFieldString(field);
 		}
 	}
-	return JSON.stringify(fields,null,$tw.config.preferences.jsonSpaces);
+	return JSON.stringify(fields,null,$tw.config.preferences.jsonString);
 };
 
 })();
