@@ -25,7 +25,7 @@ exports.params = [
 /*
 Run the macro
 */
-exports.run = function(title) {
+exports.run = function(title,spaces) {
 	title = title || this.getVariable("currentTiddler");
 	var tiddler = !!title && this.wiki.getTiddler(title),
 		fields = new Object();

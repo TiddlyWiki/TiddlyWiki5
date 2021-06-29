@@ -3,4 +3,4 @@ tags: $:/tags/Exporter
 description: {{$:/language/Exporters/JsonFile}}
 extension: .json
 
-<$macrocall $name="jsontiddlers" filter=<<exportFilter>> spaces="-9" $output="text/raw"/>
+<$macrocall $name="jsontiddlers" filter=<<exportFilter>> spaces={{{[charcode[9]]}}} $output="text/raw"/>

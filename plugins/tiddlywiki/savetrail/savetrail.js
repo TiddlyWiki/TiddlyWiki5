@@ -155,6 +155,7 @@ function saveTiddlerFile(tiddler,options) {
 	for(var field in tiddler.fields) {
 		fields[field] = tiddler.getFieldString(field);
 	}
+	// TODO JSON .. I don't know the plugin - didn't change .jsonSpaces
 	var text = JSON.stringify([fields],null,$tw.config.preferences.jsonSpaces),
 		link = document.createElement("a");
 	link.setAttribute("target","_blank");

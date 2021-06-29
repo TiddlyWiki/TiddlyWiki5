@@ -306,8 +306,8 @@ TiddlyWebAdaptor.prototype.convertTiddlerToTiddlyWebFormat = function(tiddler) {
 	}
 	// Default the content type
 	result.type = result.type || "text/vnd.tiddlywiki";
-	return JSON.stringify(result,null,$tw.config.preferences.jsonSpaces);
-//	return JSON.stringify(result);
+//	return JSON.stringify(result,null,$tw.config.preferences.jsonSpaces);
+	return JSON.stringify(result);  // TODO JSON IMO no need to transfer whitespace over the wire.
 };
 
 /*

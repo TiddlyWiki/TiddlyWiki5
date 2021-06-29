@@ -90,7 +90,7 @@ XLSXImporter.prototype.processRow = function(rowImportSpecTitle) {
 			if(!this.tiddlerFields.title) {
 				this.logger.alert("Missing title field for " + JSON.stringify(this.tiddlerFields));
 			}
-			this.results.push(this.tiddlerFields);								
+			this.results.push(this.tiddlerFields);
 		}
 	}
 };

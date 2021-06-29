@@ -728,6 +728,7 @@ exports.getTiddlersAsJson = function(filter,options) {
 		}
 		json = "[\n" + jsonLines.join(",\n") + "\n]";
 	} else {
+		spaces = (spaces === "\t") ? spaces : $tw.utils.parseInt(spaces);
 		json = JSON.stringify(data,null,spaces);
 	}
 	if(options.escapeUnsafeScriptCharacters) {
@@ -824,6 +825,7 @@ exports.setTiddlerData = function(title,data,fields) {
 		newFields.text = $tw.utils.makeTiddlerDictionary(data);
 	} else {
 		newFields.type = "application/json";
+		// We use default space indent here, since the TW editor can't create tabs
 		newFields.text = JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
 	}
 	this.addTiddler(new $tw.Tiddler(this.getCreationFields(),existingTiddler,fields,newFields,this.getModificationFields()));

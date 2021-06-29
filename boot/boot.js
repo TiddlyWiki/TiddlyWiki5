@@ -1995,8 +1995,8 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 		}
 		pluginInfo.dependents = pluginInfo.dependents || [];
 		pluginInfo.type = "application/json";
-		// Set plugin text
-		pluginInfo.text = JSON.stringify({tiddlers: pluginInfo.tiddlers},null,4);
+		// Set plugin text. No indent for smallest file size
+		pluginInfo.text = JSON.stringify({tiddlers: pluginInfo.tiddlers},null,0);
 		delete pluginInfo.tiddlers;
 		// Deserialise array fields (currently required for the dependents field)
 		for(var field in pluginInfo) {
@@ -2152,7 +2152,7 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 			}
 		}
 		if(Object.keys(output).length > 0){
-			$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
+			$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output,null,"\t")});
 		}
 	}
 	// Load any plugins within the wiki folder

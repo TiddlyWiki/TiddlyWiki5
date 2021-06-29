@@ -81,7 +81,7 @@ function saveTiddlerToLocalStorage(title,options) {
 	var tiddler = $tw.wiki.getTiddler(title);
 	if(tiddler) {
 		console.log("browser-storage: Saving",title);
-		// Get the JSON of the tiddler				
+		// Get the JSON of the tiddler
 		var json = JSON.stringify(tiddler.getFieldStrings());
 		// Try to save it to local storage
 		try {

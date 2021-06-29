@@ -26,7 +26,7 @@ window.addEventListener("message",function listener(event){
 					cookies: event.data.cookies,
 					url: event.data.url,
 					type: "application/json",
-					body: JSON.stringify(assetList,null,4)
+					body: JSON.stringify(assetList,null,"\t")
 				},"*");
 			} else if(event.data.url.indexOf("recipes/library/tiddlers/") === 0) {
 				var url = "recipes/library/tiddlers/" + encodeURIComponent(removePrefix(event.data.url,"recipes/library/tiddlers/"));
