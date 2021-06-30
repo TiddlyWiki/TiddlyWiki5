@@ -17,7 +17,7 @@ exports.name = "favicon";
 exports.platforms = ["browser"];
 exports.after = ["startup"];
 exports.synchronous = true;
-		
+
 // Favicon tiddler
 var FAVICON_TITLE = "$:/favicon.ico";
 

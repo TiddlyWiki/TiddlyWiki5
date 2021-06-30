@@ -99,28 +99,49 @@ SaveTrailSyncAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 /*
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
-SaveTrailSyncAdaptor.prototype.saveTiddler = function(tiddler,callback) {
+SaveTrailSyncAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
+	// Check for pre v5.2.0 method signature:
+	if(typeof callback !== "function" && typeof options === "function"){
+		var optionsArg = callback;
+		callback = options;
+		options = optionsArg;
+	}
+	options = options || {};
 	if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
 		var isDraft = $tw.utils.hop(tiddler.fields,"draft.of");
 		if(!isDraft || $tw.wiki.checkTiddlerText(ENABLE_DRAFTS_TIDDLER_TITLE,"yes")) {
 			saveTiddlerFile(tiddler,{reason: "modified"});
 		}
 	}
-	callback(null);
+	callback(null,null);
 };
 
 /*
 Load a tiddler and invoke the callback with (err,tiddlerFields)
 */
-SaveTrailSyncAdaptor.prototype.loadTiddler = function(title,callback) {
+SaveTrailSyncAdaptor.prototype.loadTiddler = function(title,options,callback) {
+	// Check for pre v5.2.0 method signature:
+	if(typeof callback !== "function" && typeof options === "function"){
+		var optionsArg = callback;
+		callback = options;
+		options = optionsArg;
+	}
+	options = options || {};
 	callback(null,null);
 };
 
 /*
 Delete a tiddler and invoke the callback with (err)
 */
-SaveTrailSyncAdaptor.prototype.deleteTiddler = function(title,callback,options) {
-	callback(null);
+SaveTrailSyncAdaptor.prototype.deleteTiddler = function(title,options,callback) {
+	// Check for pre v5.2.0 method signature:
+	if(typeof callback !== "function" && typeof options === "function"){
+		var optionsArg = callback;
+		callback = options;
+		options = optionsArg;
+	}
+	options = options || {};
+	callback(null,null);
 };
 
 function saveTiddlerFile(tiddler,options) {
@@ -139,8 +160,8 @@ function saveTiddlerFile(tiddler,options) {
 	link.setAttribute("target","_blank");
 	link.setAttribute("rel","noopener noreferrer");
 	if(Blob !== undefined) {
-		var blob = new Blob([text], {type: "text/plain"});
-		link.setAttribute("href", URL.createObjectURL(blob));
+		var blob = new Blob([text],{type: "text/plain"});
+		link.setAttribute("href",URL.createObjectURL(blob));
 	} else {
 		link.setAttribute("href","data:text/plain," + encodeURIComponent(text));
 	}

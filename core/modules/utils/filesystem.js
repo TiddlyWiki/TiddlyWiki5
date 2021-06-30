@@ -213,13 +213,13 @@ Options include:
 	extFilters: optional array of filters to be used to generate the base path
 	wiki: optional wiki for evaluating the pathFilters,
 	fileInfo: an existing fileInfo to check against
-	originalpath: a preferred filepath if no pathFilters match
 */
 exports.generateTiddlerFileInfo = function(tiddler,options) {
 	var fileInfo = {}, metaExt;
 	// Propagate the isEditableFile flag
-	if(options.fileInfo) {
-		fileInfo.isEditableFile = options.fileInfo.isEditableFile || false;
+	if(options.fileInfo && !!options.fileInfo.isEditableFile) {
+		fileInfo.isEditableFile = true;
+		fileInfo.originalpath = options.fileInfo.originalpath;
 	}
 	// Check if the tiddler has any unsafe fields that can't be expressed in a .tid or .meta file: containing control characters, or leading/trailing whitespace
 	var hasUnsafeFields = false;
@@ -228,6 +228,7 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 			hasUnsafeFields = hasUnsafeFields || /[\x00-\x1F]/mg.test(value);
 			hasUnsafeFields = hasUnsafeFields || ($tw.utils.trim(value) !== value);
 		}
+		hasUnsafeFields = hasUnsafeFields || /:/mg.test(fieldName);
 	});
 	// Check for field values 
 	if(hasUnsafeFields) {
@@ -247,12 +248,12 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 			fileInfo.hasMetaFile = true;
 		}
 		if(options.extFilters) {
-			// Check for extension override
+			// Check for extension overrides
 			metaExt = $tw.utils.generateTiddlerExtension(tiddler.fields.title,{
 				extFilters: options.extFilters,
 				wiki: options.wiki
 			});
-			if(metaExt){
+			if(metaExt) {
 				if(metaExt === ".tid") {
 					// Overriding to the .tid extension needs special handling
 					fileInfo.type = "application/x-tiddler";
@@ -279,8 +280,7 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 		directory: options.directory,
 		pathFilters: options.pathFilters,
 		wiki: options.wiki,
-		fileInfo: options.fileInfo,
-		originalpath: options.originalpath
+		fileInfo: options.fileInfo
 	});
 	return fileInfo;
 };
@@ -292,8 +292,7 @@ Options include:
 	wiki: optional wiki for evaluating the extFilters
 */
 exports.generateTiddlerExtension = function(title,options) {
-	var self = this,
-		extension;
+	var extension;
 	// Check if any of the extFilters applies
 	if(options.extFilters && options.wiki) { 
 		$tw.utils.each(options.extFilters,function(filter) {
@@ -319,11 +318,10 @@ Options include:
 	fileInfo: an existing fileInfo object to check against
 */
 exports.generateTiddlerFilepath = function(title,options) {
-	var self = this,
-		directory = options.directory || "",
+	var directory = options.directory || "",
 		extension = options.extension || "",
-		originalpath = options.originalpath || "",
-		filepath;	
+		originalpath = (options.fileInfo && options.fileInfo.originalpath) ? options.fileInfo.originalpath : "",
+		filepath;
 	// Check if any of the pathFilters applies
 	if(options.pathFilters && options.wiki) {
 		$tw.utils.each(options.pathFilters,function(filter) {
@@ -336,7 +334,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 			}
 		});
 	}
-	if(!filepath && originalpath !== "") {
+	if(!filepath && !!originalpath) {
 		//Use the originalpath without the extension
 		var ext = path.extname(originalpath);
 		filepath = originalpath.substring(0,originalpath.length - ext.length);
@@ -345,29 +343,37 @@ exports.generateTiddlerFilepath = function(title,options) {
 		// Remove any forward or backward slashes so we don't create directories
 		filepath = filepath.replace(/\/|\\/g,"_");
 	}
-	//If the path does not start with "." or ".." and a path seperator, then
+	// Replace any Windows control codes
+	filepath = filepath.replace(/^(con|prn|aux|nul|com[0-9]|lpt[0-9])$/i,"_$1_");
+	// Replace any leading spaces with the same number of underscores
+	filepath = filepath.replace(/^ +/,function (u) { return u.replace(/ /g, "_")});
+	//If the path does not start with "." or ".." && a path seperator, then
 	if(!/^\.{1,2}[/\\]/g.test(filepath)) {
 		// Don't let the filename start with any dots because such files are invisible on *nix
-		filepath = filepath.replace(/^\.+/g,"_");
+		filepath = filepath.replace(/^\.+/g,function (u) { return u.replace(/\./g, "_")});
+	}
+	// Replace any Unicode control codes
+	filepath = filepath.replace(/[\x00-\x1f\x80-\x9f]/g,"_");
+	// Replace any characters that can't be used in cross-platform filenames
+	filepath = $tw.utils.transliterate(filepath.replace(/<|>|~|\:|\"|\||\?|\*|\^/g,"_"));
+	// Replace any dots or spaces at the end of the extension with the same number of underscores
+	extension = extension.replace(/[\. ]+$/, function (u) { return u.replace(/[\. ]/g, "_")});
+	// Truncate the extension if it is too long
+	if(extension.length > 32) {
+		extension = extension.substr(0,32);
 	}
 	// If the filepath already ends in the extension then remove it
 	if(filepath.substring(filepath.length - extension.length) === extension) {
 		filepath = filepath.substring(0,filepath.length - extension.length);
 	}
-	// Remove any characters that can't be used in cross-platform filenames
-	filepath = $tw.utils.transliterate(filepath.replace(/<|>|~|\:|\"|\||\?|\*|\^/g,"_"));
 	// Truncate the filename if it is too long
 	if(filepath.length > 200) {
 		filepath = filepath.substr(0,200);
 	}
-	// Truncate the extension if it is too long
-	if(extension.length > 32) {
-		extension = extension.substr(0,32);
-	}
-	// If the resulting filename is blank (eg because the title is just punctuation characters)
-	if(!filepath) {
+	// If the resulting filename is blank (eg because the title is just punctuation)
+	if(!filepath || /^_+$/g.test(filepath)) {
 		// ...then just use the character codes of the title
-		filepath = "";	
+		filepath = "";
 		$tw.utils.each(title.split(""),function(char) {
 			if(filepath) {
 				filepath += "-";
@@ -386,22 +392,21 @@ exports.generateTiddlerFilepath = function(title,options) {
 		count++;
 	} while(fs.existsSync(fullPath));
 	// If the last write failed with an error, or if path does not start with:
-	//	the resolved options.directory, the resolved wikiPath directory, or the wikiTiddlersPath directory, 
-	//	then encodeURIComponent() and resolve to tiddler directory
-	var newPath = fullPath,
+	//	the resolved options.directory, the resolved wikiPath directory, the wikiTiddlersPath directory, 
+	//	or the 'originalpath' directory, then encodeURIComponent() and resolve to tiddler directory.
+	var writePath = $tw.hooks.invokeHook("th-make-tiddler-path",fullPath,fullPath),
 		encode = (options.fileInfo || {writeError: false}).writeError == true;
-	if(!encode){
-		encode = !(fullPath.indexOf(path.resolve(directory)) == 0 ||
-			fullPath.indexOf(path.resolve($tw.boot.wikiPath)) == 0 ||
-			fullPath.indexOf($tw.boot.wikiTiddlersPath) == 0);
+	if(!encode) {
+		encode = !(writePath.indexOf($tw.boot.wikiTiddlersPath) == 0 ||
+			writePath.indexOf(path.resolve(directory)) == 0 ||
+			writePath.indexOf(path.resolve($tw.boot.wikiPath)) == 0 ||
+			writePath.indexOf(path.resolve($tw.boot.wikiTiddlersPath,originalpath)) == 0 );
 		}
-	if(encode){
-		fullPath = path.resolve(directory, encodeURIComponent(fullPath));
+	if(encode) {
+		writePath = path.resolve(directory,encodeURIComponent(fullPath));
 	}
-	// Call hook to allow plugins to modify the final path
-	fullPath = $tw.hooks.invokeHook("th-make-tiddler-path", newPath, fullPath);
 	// Return the full path to the file
-	return fullPath;
+	return writePath;
 };
 
 /*
@@ -415,18 +420,33 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 	if(fileInfo.hasMetaFile) {
 		// Save the tiddler as a separate body and meta file
 		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
-		fs.writeFile(fileInfo.filepath,tiddler.fields.text,typeInfo.encoding,function(err) {
+		fs.writeFile(fileInfo.filepath,tiddler.fields.text || "",typeInfo.encoding,function(err) {
 			if(err) {
 				return callback(err);
 			}
-			fs.writeFile(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8",callback);
+			fs.writeFile(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8",function(err) {
+				if(err) {
+					return callback(err);
+				}
+				return callback(null,fileInfo);
+			});
 		});
 	} else {
 		// Save the tiddler as a self contained templated file
 		if(fileInfo.type === "application/x-tiddler") {
-			fs.writeFile(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8",callback);
+			fs.writeFile(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8",function(err) {
+				if(err) {
+					return callback(err);
+				}
+				return callback(null,fileInfo);
+			});
 		} else {
-			fs.writeFile(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8",callback);
+			fs.writeFile(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8",function(err) {
+				if(err) {
+					return callback(err);
+				}
+				return callback(null,fileInfo);
+			});
 		}
 	}
 };
@@ -442,7 +462,7 @@ exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 	if(fileInfo.hasMetaFile) {
 		// Save the tiddler as a separate body and meta file
 		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
-		fs.writeFileSync(fileInfo.filepath,tiddler.fields.text,typeInfo.encoding);
+		fs.writeFileSync(fileInfo.filepath,tiddler.fields.text || "",typeInfo.encoding);
 		fs.writeFileSync(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8");
 	} else {
 		// Save the tiddler as a self contained templated file
@@ -452,31 +472,44 @@ exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 			fs.writeFileSync(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8");
 		}
 	}
+	return fileInfo;
 };
 
 /*
 Delete a file described by the fileInfo if it exits
 */
-exports.deleteTiddlerFile = function(fileInfo, callback) {
+exports.deleteTiddlerFile = function(fileInfo,callback) {
 	//Only attempt to delete files that exist on disk
 	if(!fileInfo.filepath || !fs.existsSync(fileInfo.filepath)) {
-		return callback(null);
+		//For some reason, the tiddler is only in memory or we can't modify the file at this path
+		$tw.syncer.displayError("Server deleteTiddlerFile task failed for filepath: "+fileInfo.filepath);
+		return callback(null,fileInfo);
 	}
 	// Delete the file
 	fs.unlink(fileInfo.filepath,function(err) {
 		if(err) {
 			return callback(err);
-		}	
+		}
 		// Delete the metafile if present
 		if(fileInfo.hasMetaFile && fs.existsSync(fileInfo.filepath + ".meta")) {
 			fs.unlink(fileInfo.filepath + ".meta",function(err) {
 				if(err) {
 					return callback(err);
 				}
-				return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),callback);
+				return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),function(err) {
+					if(err) {
+						return callback(err);
+					}
+					return callback(null,fileInfo);
+				});
 			});
 		} else {
-			return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),callback);
+			return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),function(err) {
+				if(err) {
+					return callback(err);
+				}
+				return callback(null,fileInfo);
+			});
 		}
 	});
 };
@@ -486,25 +519,25 @@ Cleanup old files on disk, by comparing the options values:
 	adaptorInfo from $tw.syncer.tiddlerInfo
 	bootInfo from $tw.boot.files
 */
-exports.cleanupTiddlerFiles = function(options, callback) {
+exports.cleanupTiddlerFiles = function(options,callback) {
 	var adaptorInfo = options.adaptorInfo || {},
 	bootInfo = options.bootInfo || {},
 	title = options.title || "undefined";
 	if(adaptorInfo.filepath && bootInfo.filepath && adaptorInfo.filepath !== bootInfo.filepath) {
-		return $tw.utils.deleteTiddlerFile(adaptorInfo, function(err){
+		$tw.utils.deleteTiddlerFile(adaptorInfo,function(err) {
 			if(err) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the previous file on disk, should fail gracefully
-					$tw.syncer.displayError("Server desynchronized. Error cleaning up previous file for tiddler: "+title, err);
-					return callback(null);
+					$tw.syncer.displayError("Server desynchronized. Error cleaning up previous file for tiddler: \""+title+"\"",err);
+					return callback(null,bootInfo);
 				} else {
 					return callback(err);
 				}
 			}
-			return callback(null);
+			return callback(null,bootInfo);
 		});
 	} else {
-		return callback(null);
+		return callback(null,bootInfo);
 	}
 };
 

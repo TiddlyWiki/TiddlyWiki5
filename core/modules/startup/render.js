@@ -82,7 +82,7 @@ exports.startup = function() {
 		var onlyThrottledTiddlersHaveChanged = true;
 		for(var title in changes) {
 			var tiddler = $tw.wiki.getTiddler(title);
-			if(!tiddler || !(tiddler.hasField("draft.of") || tiddler.hasField("throttle.refresh"))) {
+			if(!$tw.wiki.isVolatileTiddler(title) && (!tiddler || !(tiddler.hasField("draft.of") || tiddler.hasField("throttle.refresh")))) {
 				onlyThrottledTiddlersHaveChanged = false;
 			}
 		}

@@ -49,7 +49,7 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 			{name: "dragover", handlerObject: this, handlerMethod: "handleDragOverEvent"},
 			{name: "dragleave", handlerObject: this, handlerMethod: "handleDragLeaveEvent"},
 			{name: "drop", handlerObject: this, handlerMethod: "handleDropEvent"}
-		]);		
+		]);
 	} else {
 		$tw.utils.addClass(this.domNode,this.disabledClass);
 	}
@@ -155,7 +155,7 @@ DroppableWidget.prototype.execute = function() {
 DroppableWidget.prototype.assignDomNodeClasses = function() {
 	var classes = this.getAttribute("class","").split(" ");
 	classes.push("tc-droppable");
-	this.domNode.className = classes.join(" ");	
+	this.domNode.className = classes.join(" ");
 };
 
 /*

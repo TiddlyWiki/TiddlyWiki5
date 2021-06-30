@@ -17,6 +17,8 @@ Basics/NewJournal/Tags/Prompt: Tags pour les nouveaux tiddlers journaux
 Basics/NewTiddler/Title/Prompt: Modèle pour les titres des nouveaux tiddlers
 Basics/NewTiddler/Tags/Prompt: Tags pour les nouveaux tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Nombre de tiddlers //shadow// modifiés
+Basics/RemoveTags: Mettre à jour vers le format courant
+Basics/RemoveTags/Hint: Met à jour la configuration des tags vers le format le plus récent
 Basics/ShadowTiddlers/Prompt: Nombre de tiddlers //shadow//
 Basics/Subtitle/Prompt: Sous-titre
 Basics/SystemTiddlers/Prompt: Nombre de tiddlers système :
@@ -44,6 +46,7 @@ KeyboardShortcuts/Platform/Linux: Plate-forme Linux seulement
 KeyboardShortcuts/Platform/NonLinux: Plate-formes non-Linux seulement
 KeyboardShortcuts/Platform/Windows: Plate-forme Windows seulement
 KeyboardShortcuts/Platform/NonWindows: Plates-formes non-Windows seulement
+LayoutSwitcher/Caption: Mise en page
 LoadedModules/Caption: Modules chargés
 LoadedModules/Hint: Liste des modules chargés, liés à leurs tiddlers sources. Les italiques indiquent que les tiddlers sources n'existent pas, le plus souvent parce que le module a été créé lors du processus d'amorçage.
 Palette/Caption: Palette
@@ -119,11 +122,12 @@ Saving/TiddlySpot/Advanced/Heading: Paramètres avancés
 Saving/TiddlySpot/BackupDir: Dossier des //sauvegardes//
 Saving/TiddlySpot/Backups: Sauvegardes
 Saving/TiddlySpot/Caption: Enregistreur ~TiddlySpot
-Saving/TiddlySpot/Description: Ces paramètres ne servent que lors de la sauvegarde vers http://tiddlyspot.com ou vers un serveur distant compatible
+Saving/TiddlySpot/Description: Ces paramètres ne servent que lors de la sauvegarde vers [[TiddlySpot|http://tiddlyspot.com]], [[TiddlyHost|https://tiddlyhost.com]] ou vers un serveur distant compatible. Voir [[here|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] pour plus d'informations sur la configuration de la sauvegarde sur ~TiddlySpot et ~TiddlyHost.
 Saving/TiddlySpot/Filename: Nom du fichier enregistré
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //L'URL par défaut est `http://<nom du wiki>.tiddlyspot.com/store.cgi`. Elle peut être remplacée par une adresse serveur personnalisée, comme `http://example.com/store.php`.//
 Saving/TiddlySpot/Password: Mot de passe
+Saving/TiddlySpot/ReadOnly: Notez que [[TiddlySpot|http://tiddlyspot.com]] n'autorise plus la création de nouveaux sites. Pour les nouveaux sites vous pouvez utiliser [[TiddlyHost|https://tiddlyhost.com]], un nouveau service d'hébergement qui remplace ~TiddlySpot.
 Saving/TiddlySpot/ServerURL: URL du serveur
 Saving/TiddlySpot/UploadDir: Dossier des dépôts
 Saving/TiddlySpot/UserName: Nom utilisé pour ce Wiki

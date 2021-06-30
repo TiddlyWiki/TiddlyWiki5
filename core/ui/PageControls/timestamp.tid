@@ -11,7 +11,9 @@ description: {{$:/language/Buttons/Timestamp/Hint}}
 {{$:/core/images/timestamp-on}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/Timestamp/On/Caption}}/></span>
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/Timestamp/On/Caption}}/>
+</span>
 </$list>
 </$button>
 </$reveal>
@@ -22,7 +24,9 @@ description: {{$:/language/Buttons/Timestamp/Hint}}
 {{$:/core/images/timestamp-off}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/Timestamp/Off/Caption}}/></span>
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/Timestamp/Off/Caption}}/>
+</span>
 </$list>
 </$button>
 </$reveal>

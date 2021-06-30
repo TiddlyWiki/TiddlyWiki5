@@ -107,7 +107,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /empty.html			Empty
 # /empty.hta			For Internet Explorer
 node $TW5_BUILD_TIDDLYWIKI \
-	./editions/empty \
+	$TW5_BUILD_MAIN_EDITION \
 	--verbose \
 	--output $TW5_BUILD_OUTPUT \
 	--build empty \

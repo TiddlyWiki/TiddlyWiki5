@@ -70,7 +70,12 @@ NavigateWidget.prototype.invokeAction = function(triggeringWidget,event) {
 		navigateFromNode: triggeringWidget,
 		navigateFromClientRect: bounds && { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 		},
-		navigateSuppressNavigation: suppressNavigation
+		navigateSuppressNavigation: suppressNavigation,
+		metaKey: event.metaKey,
+		ctrlKey: event.ctrlKey,
+		altKey: event.altKey,
+		shiftKey: event.shiftKey,
+		event: event
 	});
 	return true; // Action was invoked
 };

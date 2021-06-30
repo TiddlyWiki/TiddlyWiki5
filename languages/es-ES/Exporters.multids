@@ -1,6 +1,6 @@
 title: $:/language/Exporters/
 
-CsvFile: Archivo de tipo .CSV
-JsonFile: Archivo de tipo .JSON
 StaticRiver: Cadena de tiddlers como .HTML estático
+JsonFile: Archivo de tipo .JSON
+CsvFile: Archivo de tipo .CSV
 TidFile: Tiddler individual como archivo ".tid" 

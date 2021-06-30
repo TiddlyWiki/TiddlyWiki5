@@ -58,7 +58,7 @@ FieldManglerWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return this.refreshChildren(changedTiddlers);		
+		return this.refreshChildren(changedTiddlers);
 	}
 };
 
@@ -67,7 +67,7 @@ FieldManglerWidget.prototype.handleRemoveFieldEvent = function(event) {
 		deletion = {};
 	deletion[event.param] = undefined;
 	this.wiki.addTiddler(new $tw.Tiddler(tiddler,deletion));
-	return true;
+	return false;
 };
 
 FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
@@ -105,7 +105,7 @@ FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
 		}
 	}
 	this.wiki.addTiddler(new $tw.Tiddler(tiddler,addition));
-	return true;
+	return false;
 };
 
 FieldManglerWidget.prototype.handleRemoveTagEvent = function(event) {
@@ -122,7 +122,7 @@ FieldManglerWidget.prototype.handleRemoveTagEvent = function(event) {
 			this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));
 		}
 	}
-	return true;
+	return false;
 };
 
 FieldManglerWidget.prototype.handleAddTagEvent = function(event) {
@@ -133,14 +133,14 @@ FieldManglerWidget.prototype.handleAddTagEvent = function(event) {
 		if(tag !== "") {
 			modification.tags = (tiddler.fields.tags || []).slice(0);
 			$tw.utils.pushTop(modification.tags,tag);
-			this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));			
+			this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));
 		}
 	} else if(typeof event.param === "string" && event.param.trim() !== "" && this.mangleTitle.trim() !== "") {
 		var tag = [];
 		tag.push(event.param.trim());
 		this.wiki.addTiddler(new $tw.Tiddler({title: this.mangleTitle, tags: tag},modification));
 	}
-	return true;
+	return false;
 };
 
 exports.fieldmangler = FieldManglerWidget;

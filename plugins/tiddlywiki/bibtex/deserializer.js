@@ -28,7 +28,8 @@ exports["application/x-bibtex"] = function(text,fields) {
 	}
 	if(typeof data === "string") {
 		return [{
-			title: "BibTeX import error: " + data,
+			title: "BibTeX import error",
+			text: data
 		}];
 	}
 	// Convert each entry
@@ -38,7 +39,7 @@ exports["application/x-bibtex"] = function(text,fields) {
 			"bibtex-entry-type": entry.entryType
 		};
 		$tw.utils.each(entry.entryTags,function(value,name) {
-			fields["bibtex-" + name] = value;
+			fields["bibtex-" + name.toLowerCase()] = value;
 		});
 		results.push(fields);
 	});

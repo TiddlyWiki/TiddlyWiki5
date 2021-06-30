@@ -22,11 +22,11 @@ Encryption/RepeatPassword: Επαναλάβατε το συνθηματικό
 Encryption/SetPassword: Ορίστε το συνθηματικό
 Encryption/Username: Όνομα χρήστη
 Error/Caption: Σφάλμα
-Error/EditConflict: Το αρχείο στον εξυπηρετητή είναι διαφορετικό
 Error/Filter: Σφάλμα φίλτρου
 Error/FilterSyntax: Συντακτικό σφάλμα στην έκφραση του φίλτρου
 Error/IsFilterOperator: Σφάλμα φίλτρου: Άγνωστος τελεστέος για τον τελεστή φίλτρου 'is'
 Error/LoadingPluginLibrary: Σφάλμα κατά την φόρτωση της βιβλιοθήκης του πρόσθετου
+Error/PutEditConflict: Το αρχείο στον εξυπηρετητή είναι διαφορετικό
 Error/RecursiveTransclusion: Σφάλμα αναδρομής σε transclusion στο transclude widget
 Error/RetrievingSkinny: Σφάλμα κατά την ανάκληση της skinny tiddler λίστας
 Error/SavingToTWEdit: Σφάλμα κατά την αποθήκευση στο TWEdit

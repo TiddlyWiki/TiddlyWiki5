@@ -23,7 +23,7 @@ exports.constructor = function(parseTreeNode,options) {
 exports.prototype = {};
 
 exports.prototype.render = function(event) {
-	Object.getPrototypeOf(Object.getPrototypeOf(this)).render.call(this,event);	
+	Object.getPrototypeOf(Object.getPrototypeOf(this)).render.call(this,event);
 	Object.getPrototypeOf(Object.getPrototypeOf(this)).log.call(this);
 }
 

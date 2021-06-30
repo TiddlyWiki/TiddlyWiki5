@@ -14,22 +14,6 @@ Tests the filtering mechanism.
 /* global $tw, require */
 "use strict";
 
-// This wrapper method is used to collect warnings which should be emitted
-// by certain deprecated tests.
-function collectLog(block) {
-	var messages = [];
-	var oldLog = console.log;
-	console.log = function(a) {
-		messages.push(Array.prototype.join.call(arguments, " "));
-	}
-	try {
-		block();
-	} finally {
-		console.log = oldLog;
-	}
-	return messages;
-};
-
 describe("Filter tests", function() {
 
 	// Test filter parsing
@@ -265,14 +249,12 @@ function runTests(wiki) {
 	// The following 2 tests should write a log -> WARNING: Filter modifier has a deprecated regexp operand XXXX
 	// The test should pass anyway.
 	it("should handle the field operator with a regular expression operand", function() {
-		var warnings = collectLog(function() {
-			expect(wiki.filterTiddlers("[modifier/JoeBloggs/]").join(",")).toBe("TiddlerOne");
-		});
-		expect(warnings).toEqual(["WARNING: Filter modifier has a deprecated regexp operand /JoeBloggs/"]);
-		warnings = collectLog(function() {
-			expect(wiki.filterTiddlers("[modifier/Jo/]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
-		});
-		expect(warnings).toEqual(["WARNING: Filter modifier has a deprecated regexp operand /Jo/"]);
+		spyOn(console, 'log');
+		expect(wiki.filterTiddlers("[modifier/JoeBloggs/]").join(",")).toBe("TiddlerOne");
+		expect(console.log).toHaveBeenCalledWith("WARNING: Filter", "modifier", "has a deprecated regexp operand", /JoeBloggs/);
+		console.log.calls.reset();
+		expect(wiki.filterTiddlers("[modifier/Jo/]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
+		expect(console.log).toHaveBeenCalledWith("WARNING: Filter", "modifier", "has a deprecated regexp operand", /Jo/);
 	});
 
 	it("should handle the prefix operator", function() {
@@ -768,6 +750,7 @@ function runTests(wiki) {
 		rootWidget.setVariable("sort1","[length[]]");
 		rootWidget.setVariable("sort2","[get[text]else[]length[]]");
 		rootWidget.setVariable("sort3","[{!!value}divide{!!cost}]");
+		rootWidget.setVariable("sort4","[{!!title}]");
 		expect(wiki.filterTiddlers("[sortsub:number<sort1>]",anchorWidget).join(",")).toBe("one,hasList,TiddlerOne,has filter,$:/TiddlerTwo,Tiddler Three,$:/ShadowPlugin,a fourth tiddler,filter regexp test");
 		expect(wiki.filterTiddlers("[!sortsub:number<sort1>]",anchorWidget).join(",")).toBe("filter regexp test,a fourth tiddler,$:/ShadowPlugin,$:/TiddlerTwo,Tiddler Three,TiddlerOne,has filter,hasList,one");
 		expect(wiki.filterTiddlers("[sortsub:string<sort1>]",anchorWidget).join(",")).toBe("TiddlerOne,has filter,$:/TiddlerTwo,Tiddler Three,$:/ShadowPlugin,a fourth tiddler,filter regexp test,one,hasList");
@@ -777,6 +760,7 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("[sortsub:string<sort2>]",anchorWidget).join(",")).toBe("one,TiddlerOne,hasList,has filter,$:/ShadowPlugin,a fourth tiddler,Tiddler Three,$:/TiddlerTwo,filter regexp test");
 		expect(wiki.filterTiddlers("[!sortsub:string<sort2>]",anchorWidget).join(",")).toBe("filter regexp test,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,$:/ShadowPlugin,has filter,hasList,TiddlerOne,one");
 		expect(wiki.filterTiddlers("[[TiddlerOne]] [[$:/TiddlerTwo]] [[Tiddler Three]] [[a fourth tiddler]] +[!sortsub:number<sort3>]",anchorWidget).join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne,a fourth tiddler");
+		expect(wiki.filterTiddlers("a1 a10 a2 a3 b10 b3 b1 c9 c11 c1 +[sortsub:alphanumeric<sort4>]",anchorWidget).join(",")).toBe("a1,a2,a3,a10,b1,b3,b10,c1,c9,c11");
 	});
 	
 	it("should handle the toggle operator", function() {
@@ -814,6 +798,69 @@ function runTests(wiki) {
 	expect(wiki.filterTiddlers("[[12]pad[9],[abc]]").join(",")).toBe("abcabca12");
 	expect(wiki.filterTiddlers("[[12]pad:suffix[9],[abc]]").join(",")).toBe("12abcabca");
 	});
+
+	it("should handle the escapecss operator", function() {
+	expect(wiki.filterTiddlers("[[Hello There]escapecss[]]").join(",")).toBe("Hello\\ There");
+	expect(wiki.filterTiddlers('\'"Reveal.js" by Devin Weaver[1]\' +[escapecss[]]').join(",")).toBe('\\"Reveal\\.js\\"\\ by\\ Devin\\ Weaver\\[1\\]');
+	expect(wiki.filterTiddlers(".foo#bar (){} '--a' 0 \0 +[escapecss[]]").join(",")).toBe("\\.foo\\#bar,\\(\\)\\{\\},--a,\\30 ,\ufffd");
+	expect(wiki.filterTiddlers("'' +[escapecss[]]").join(",")).toBe("");
+	expect(wiki.filterTiddlers("1234 +[escapecss[]]").join(",")).toBe("\\31 234");
+	expect(wiki.filterTiddlers("'-25' +[escapecss[]]").join(",")).toBe("-\\32 5");
+	expect(wiki.filterTiddlers("'-' +[escapecss[]]").join(",")).toBe("\\-");
+	});
+	
+	it("should handle the format operator", function() {
+		expect(wiki.filterTiddlers("[[Hello There]] [[GettingStarted]] +[format:titlelist[]]").join(" ")).toBe("[[Hello There]] GettingStarted");
+		expect(wiki.filterTiddlers("[title[Hello There]] +[format:titlelist[]]").join(" ")).toBe("[[Hello There]]");
+		expect(wiki.filterTiddlers("[title[HelloThere]] +[format:titlelist[]]").join(" ")).toBe("HelloThere");		
+	});
+
+	it("should handle the deserializers operator", function() {
+	expect(wiki.filterTiddlers("[deserializers[]]").join(",")).toBe("application/javascript,application/json,application/x-tiddler,application/x-tiddler-html-div,application/x-tiddlers,text/css,text/html,text/plain");
+	});
+	
+	it("should handle the charcode operator", function() {
+		expect(wiki.filterTiddlers("[charcode[9]]").join(" ")).toBe(String.fromCharCode(9));
+		expect(wiki.filterTiddlers("[charcode[9],[10]]").join(" ")).toBe(String.fromCharCode(9) + String.fromCharCode(10));
+		expect(wiki.filterTiddlers("[charcode[]]").join(" ")).toBe("");
+	});
+
+	it("should parse filter variable parameters", function(){
+	  expect($tw.utils.parseFilterVariable("currentTiddler")).toEqual(
+		{ name: 'currentTiddler', params: [  ] }
+	  );
+	  expect($tw.utils.parseFilterVariable("now DDMM")).toEqual(
+		{ name: 'now', params: [{ type: 'macro-parameter', start: 3, value: 'DDMM', end: 8 }] }
+	  );
+	  expect($tw.utils.parseFilterVariable("now DDMM UTC")).toEqual(
+		{ name: 'now', params: [{ type: 'macro-parameter', start: 3, value: 'DDMM', end: 8 }, { type: 'macro-parameter', start: 8, value: 'UTC', end: 12 }] }
+	  );
+	  expect($tw.utils.parseFilterVariable("now format:DDMM")).toEqual(
+		{ name: 'now', params: [{ type: 'macro-parameter', name:'format', start: 3, value: 'DDMM', end: 15 }] }	  	
+	  );
+	  expect($tw.utils.parseFilterVariable("now format:'DDMM'")).toEqual(
+		{ name: 'now', params: [{ type: 'macro-parameter', name:'format', start: 3, value: 'DDMM', end: 17 }] }	  	
+	  );
+	  expect($tw.utils.parseFilterVariable("nowformat:'DDMM'")).toEqual(
+		{ name: 'nowformat:\'DDMM\'', params: [] }
+	  );
+	  expect($tw.utils.parseFilterVariable("nowformat:'DD MM'")).toEqual(
+		{ name: 'nowformat:', params: [{ type: 'macro-parameter', start: 10, value: 'DD MM', end: 17 }] }
+	  );
+	  expect($tw.utils.parseFilterVariable("now [UTC]YYYY0MM0DD0hh0mm0ssXXX")).toEqual(
+		{ name: 'now', params: [{ type: 'macro-parameter', start: 3, value: '[UTC]YYYY0MM0DD0hh0mm0ssXXX', end: 31 }] }
+	  );
+	  expect($tw.utils.parseFilterVariable("now '[UTC]YYYY0MM0DD0hh0mm0ssXXX'")).toEqual(
+		{ name: 'now', params: [{ type: 'macro-parameter', start: 3, value: '[UTC]YYYY0MM0DD0hh0mm0ssXXX', end: 33 }] }
+	  );
+	  expect($tw.utils.parseFilterVariable("now format:'[UTC]YYYY0MM0DD0hh0mm0ssXXX'")).toEqual(
+		{ name: 'now', params: [{ type: 'macro-parameter', start: 3, name:'format', value: '[UTC]YYYY0MM0DD0hh0mm0ssXXX', end: 40 }] }
+	  );
+	  expect($tw.utils.parseFilterVariable("")).toEqual(
+		{ name: '', params: [] }
+	  );
+	});
+
 }
 
 });
