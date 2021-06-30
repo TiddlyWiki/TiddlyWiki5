@@ -31,6 +31,7 @@ JSONTiddlerWidget.prototype.render = function(parent,nextSibling) {
     this.parentDomNode = parent;
     this.computeAttributes();
     this.execute();
+    // Collect the fields from the optional base tiddler
     var fields = {};
     if(this.attTiddler) {
         var tiddler = this.wiki.getTiddler(this.attTiddler);
@@ -38,15 +39,19 @@ JSONTiddlerWidget.prototype.render = function(parent,nextSibling) {
             fields = tiddler.getFieldStrings({exclude: this.attExclude.split(" ")});
         }
     }
+    // Add custom fields specified in attributes starting with $
 	$tw.utils.each(this.attributes,function(attribute,name) {
 		if(name.charAt(0) === "$") {
             fields[name.slice(1)] = attribute;
 		}
 	});
+    // JSONify
     var json = JSON.stringify(fields);
+    // Escape unsafe script characters
     if(this.attEscapeUnsafeScriptChars) {
 		json = json.replace(/</g,"\\u003C");
     }
+    // Update the DOM
     var textNode = this.document.createTextNode(json);
     parent.insertBefore(textNode,nextSibling);
     this.domNodes.push(textNode);
