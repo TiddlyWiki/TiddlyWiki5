@@ -49,7 +49,7 @@ JSONTiddlerWidget.prototype.render = function(parent,nextSibling) {
 	var json = JSON.stringify(fields);
 	// Escape unsafe script characters
 	if(this.attEscapeUnsafeScriptChars) {
-		json = json.replace(/</g,"\\u003C");
+		json = json.replace(/</g,"\\x3C");
 	}
 	// Update the DOM
 	var textNode = this.document.createTextNode(json);
