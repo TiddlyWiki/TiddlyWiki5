@@ -171,7 +171,15 @@ Server.prototype.get = function(name) {
 };
 
 Server.prototype.addRoute = function(route) {
+	// Find out if the route exists
+	let index = this.routes.findIndex((thisRoute) => thisRoute.path.toString() === route.path.toString());
+	if (index === -1) {
+	// Push the new route if not found
 	this.routes.push(route);
+	} else {
+	// else replace the old route
+	this.routes[index] = route;
+	}
 };
 
 Server.prototype.addAuthenticator = function(AuthenticatorClass) {
