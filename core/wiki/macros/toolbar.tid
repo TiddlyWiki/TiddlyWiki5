@@ -1,15 +1,15 @@
 title: $:/core/macros/toolbar
 tags: $:/tags/Macro
 
-\define toolbar-filter-display(tag, config)
-<$set name="config" filter="[[$config$]match[]]" 
+\define toolbar-filter-display(tag,config)
+<$set name="config" filter="[<__config__>]match[]]" 
 		value="[all[shadows+tiddlers]tag[$tag$]!has[draft.of]]" 
 		emptyValue="[all[shadows+tiddlers]tag[$tag$]!has[draft.of]] :filter[lookup:show[$config$]!match[hide]]" >
 	<<config>>
 </$set>
 \end
 
-\define basic-buttons(tag, config, class)
+\define basic-buttons(tag,config,class)
 \whitespace trim
 <$list filter=<<toolbar-filter-display "$tag$" "$config$">> variable="listItem">
 	<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] [<__class__>]" >
@@ -18,7 +18,7 @@ tags: $:/tags/Macro
 </$list>
 \end
 
-\define buttons-with-template(tag, config, class, template)
+\define buttons-with-template(tag,config,class,template)
 \whitespace trim
 <$list filter=<<toolbar-filter-display "$tag$" "$config$">> >
 	<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] [<__class__>]" >
@@ -27,7 +27,7 @@ tags: $:/tags/Macro
 </$list>
 \end
 
-\define toolbar(tag, config, class, template)
+\define toolbar(tag,config,class,template)
 \whitespace trim
 <$set name="buttons" 
 		filter="[<__template__>!match[]]" 
@@ -38,11 +38,11 @@ tags: $:/tags/Macro
 \end
 
 
-\define toolbar-filter-drop-down(tag, config)
+\define toolbar-filter-drop-down(tag,config)
 [all[shadows+tiddlers]tag[$tag$]!has[draft.of]] :filter[lookup:show[$config$]match[hide]]
 \end
 
-\define toolbar-basic-drop-down-list(tag, config, class)
+\define toolbar-basic-drop-down-list(tag,config,class)
 <$list filter=<<toolbar-filter-drop-down "$tag$" "$config$">> variable="listItem">
 	<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] [<__class__>]" >
 		<$transclude tiddler=<<listItem>>/>
@@ -50,7 +50,7 @@ tags: $:/tags/Macro
 </$list>
 \end
 
-\define toolbar-drop-down-list-wt(tag, config, class, template)
+\define toolbar-drop-down-list-wt(tag,config,class,template)
 <$list filter=<<toolbar-filter-drop-down "$tag$" "$config$">> >
     <$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] [<__class__>]" >
 		<$transclude tiddler="$template$" />
@@ -58,7 +58,7 @@ tags: $:/tags/Macro
 </$list>
 \end
 
-\define toolbar-drop-down-list(tag, config, class, template)
+\define toolbar-drop-down-list(tag,config,class,template)
 \whitespace trim
 <$vars tv-config-toolbar-icons="yes" 
 		tv-config-toolbar-text="yes" 
