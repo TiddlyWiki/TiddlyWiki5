@@ -30,4 +30,4 @@ The buttons can be [[ordered|Order of Tagged Tiddlers]] by means of the <<.field
 : Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the buttons.
 <br>
 
-[[Examples|Table-of-Contents Macros (Examples)]]
+[[Examples|toolbar Macro (Examples)]]
