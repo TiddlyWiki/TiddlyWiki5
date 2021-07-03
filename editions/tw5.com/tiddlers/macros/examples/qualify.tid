@@ -15,6 +15,4 @@ eg="""<ul>
 <li><code><<transclusion>></code></li>
 </ul>"""/>
 
-<blockquote>
 {{$:/editions/tw5.com/macro-examples/qualify-transcluded}}
-</blockquote>
