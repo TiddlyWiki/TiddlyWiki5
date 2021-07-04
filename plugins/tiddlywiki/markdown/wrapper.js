@@ -97,7 +97,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 			// If the paragraph is a "tight" layout paragraph, don't wrap children in a <p> tag.
 			if (currentNode.tight) {
 				i = withChildren(i, currentNode.level, "paragraph_close", remarkableTree, function(children) {
-					out.push(...children);
+					Array.prototype.push.apply(out, children);
 				});
 			} else {
 				i = wrappedElement("p", i, currentNode.level, "paragraph_close", remarkableTree);
