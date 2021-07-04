@@ -457,3 +457,5 @@ Joe Bordes, @joebordes, 2021/05/30
 Frank Bruns-Ballhausen, @FBB-de, 2021/06/09
 
 Álvaro González Rincón, @Alzacon, 2021/06/10
+
+RJ Skerry-Ryan, @rryan, 2021/07/03
