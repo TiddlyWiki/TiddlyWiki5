@@ -16,7 +16,7 @@
 			}
 		},
 		{
-			"file": "remarkable-katex.js",
+			"file": "remarkable-katex.min.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/markdown/remarkable-katex.js",
