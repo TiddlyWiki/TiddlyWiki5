@@ -133,7 +133,7 @@ function parseCSSColor(css_str) {
   var str = css_str.replace(/ /g, '').toLowerCase();
 
   // Color keywords (and transparent) lookup.
-  if (str in kCSSColorTable) return kCSSColorTable[str].slice();  // dup.
+  if (kCSSColorTable.hasOwnProperty(str)) return kCSSColorTable[str].slice();  // dup.
 
   // #abc and #abc123 syntax.
   if (str[0] === '#') {
