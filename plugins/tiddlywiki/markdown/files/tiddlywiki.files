@@ -9,6 +9,13 @@
 			}
 		},
 		{
+			"file": "remarkable-license.txt",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/markdown/remarkable-license"
+			}
+		},
+		{
 			"file": "remarkable-katex.js",
 			"fields": {
 				"type": "application/javascript",
