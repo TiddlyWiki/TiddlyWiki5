@@ -17,6 +17,13 @@
 			},
 			"prefix": "(function(realRequire) {var require = function(m) {if(m===\"katex\"){m = \"$:/plugins/tiddlywiki/katex/katex.min.js\"};return realRequire(m);};",
 			"suffix": "})(require);\n"
+		},
+		{
+			"file": "remarkable-katex-license.txt",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/markdown/remarkable-katex-license"
+			}
 		}
 	]
 }
