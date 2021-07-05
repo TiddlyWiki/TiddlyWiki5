@@ -99,14 +99,7 @@ SaveTrailSyncAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 /*
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
-SaveTrailSyncAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
-	// Check for pre v5.2.0 method signature:
-	if(typeof callback !== "function" && typeof options === "function"){
-		var optionsArg = callback;
-		callback = options;
-		options = optionsArg;
-	}
-	options = options || {};
+SaveTrailSyncAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 	if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
 		var isDraft = $tw.utils.hop(tiddler.fields,"draft.of");
 		if(!isDraft || $tw.wiki.checkTiddlerText(ENABLE_DRAFTS_TIDDLER_TITLE,"yes")) {
@@ -119,28 +112,14 @@ SaveTrailSyncAdaptor.prototype.saveTiddler = function(tiddler,options,callback) 
 /*
 Load a tiddler and invoke the callback with (err,tiddlerFields)
 */
-SaveTrailSyncAdaptor.prototype.loadTiddler = function(title,options,callback) {
-	// Check for pre v5.2.0 method signature:
-	if(typeof callback !== "function" && typeof options === "function"){
-		var optionsArg = callback;
-		callback = options;
-		options = optionsArg;
-	}
-	options = options || {};
+SaveTrailSyncAdaptor.prototype.loadTiddler = function(title,callback) {
 	callback(null,null);
 };
 
 /*
 Delete a tiddler and invoke the callback with (err)
 */
-SaveTrailSyncAdaptor.prototype.deleteTiddler = function(title,options,callback) {
-	// Check for pre v5.2.0 method signature:
-	if(typeof callback !== "function" && typeof options === "function"){
-		var optionsArg = callback;
-		callback = options;
-		options = optionsArg;
-	}
-	options = options || {};
+SaveTrailSyncAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 	callback(null,null);
 };
 
