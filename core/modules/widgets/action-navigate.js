@@ -70,6 +70,12 @@ NavigateWidget.prototype.invokeAction = function(triggeringWidget,event) {
 		navigateFromNode: triggeringWidget,
 		navigateFromClientRect: bounds && { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 		},
+		navigateFromClientTop: bounds && bounds.top,
+		navigateFromClientLeft: bounds && bounds.left,
+		navigateFromClientWidth: bounds && bounds.width,
+		navigateFromClientRight: bounds && bounds.right,
+		navigateFromClientBottom: bounds && bounds.bottom,
+		navigateFromClientHeight: bounds && bounds.height,
 		navigateSuppressNavigation: suppressNavigation,
 		metaKey: event.metaKey,
 		ctrlKey: event.ctrlKey,
