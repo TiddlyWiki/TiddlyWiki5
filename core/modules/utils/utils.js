@@ -223,6 +223,7 @@ exports.removeArrayEntries = function(array,value) {
 			array.splice(p,1);
 		}
 	}
+	return array;
 };
 
 /*
