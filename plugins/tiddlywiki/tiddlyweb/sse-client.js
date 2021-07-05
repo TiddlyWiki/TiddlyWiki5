@@ -40,15 +40,18 @@ function debounce(callback) {
 }
 
 function setupEvents(host) {
-	if(window.EventSource) {
-		var events = new EventSource(host + "events/plugins/tiddlywiki/tiddlyweb");
+	if (window.EventSource) {
+		var source = exports.eventsource = new EventSource(host + "events/plugins/tiddlywiki/tiddlyweb/wiki-change");
 		var debouncedSync = debounce($tw.syncer.syncFromServer.bind($tw.syncer));
-		events.addEventListener("change",debouncedSync);
-		events.onerror = function() {
-			events.close();
-			setTimeout(function() {
+		source.addEventListener("change", debouncedSync);
+		source.onerror = function (event) {
+			if (source.readyState === source.CONNECTING) return;
+			setTimeout(function () {
+				//sync from server manually here to make sure we stay up to date
+				$tw.syncer.syncFromServer();
+				//call this function to set everything up again
 				setupEvents(host);
-			},$tw.syncer.errorRetryInterval);
+			}, $tw.syncer.errorRetryInterval);
 		};
 	}
 }

@@ -3,92 +3,69 @@ title: $:/plugins/tiddlywiki/tiddlyweb/sse-server.js
 type: application/javascript
 module-type: route
 
-GET /events/plugins/tiddlywiki/tiddlyweb
+GET /events/plugins/tiddlywiki/tiddlyweb/(channel)
 
 \*/
-(function(){
+(function () {
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
 
 var wikis = [];
-var connections = [];
+
+// Import the ServerSentEvents class
+var Journal = require("$:/core/modules/server/server-sent-events.js").Journal;
 
 /*
 Setup up the array for this wiki and add the change listener
 */
 function setupWiki(wiki) {
-	var index = wikis.length;
-	// Add a new array for this wiki (object references work as keys)
-	wikis.push(wiki);
-	connections.push([]);
-	// Listen to change events for this wiki
-	wiki.addEventListener("change",function(changes) {
-		var jsonChanges = JSON.stringify(changes);
-		getWikiConnections(wiki).forEach(function(item) {
-			item.emit("change",jsonChanges);
-		});
-	});
-	return index;
+    function filter(conn) {
+        return conn.state.wiki === wiki;
+    }
+    // Listen to change events for this wiki
+    wiki.addEventListener("change", function (changes) {
+        var jsonChanges = JSON.stringify(changes);
+        eventServer.emitEvent("wiki-change", "change", jsonChanges, filter);
+    });
+    wikis.push(wiki);
 }
 
 /*
 Setup this particular wiki if we haven't seen it before
 */
-function ensureWikiSetup(wiki) {
-	if(wikis.indexOf(wiki) === -1) {
-		setupWiki(wiki);
-	}
+function ensureChannelSetup(channel, wiki) {
+    // setup wikis for the wiki-change channel
+    if (channel === "wiki-change" && wikis.indexOf(wiki) === -1) setupWiki(wiki);
 }
 
-/*
-Return the array of connections for a particular wiki
-*/
-function getWikiConnections(wiki) {
-	return connections[wikis.indexOf(wiki)];
+var eventServer = new Journal();
+
+// this filter is called for the emitter route, which recieves 
+// messages from clients and forwards them to all listeners. It 
+// does not affect messages sent directly by the server. 
+// We don't use it in tiddlyweb so just set it to false
+eventServer.emitterFilter = function (sender) {
+    // do not allow clients to broadcast
+    return function () { return false; };
 }
 
-function addWikiConnection(wiki,connection) {
-	getWikiConnections(wiki).push(connection);
-}
-
-function removeWikiConnection(wiki,connection) {
-	var wikiConnections = getWikiConnections(wiki);
-	var index = wikiConnections.indexOf(connection);
-	if(index !== -1) {
-		wikiConnections.splice(index,1);
-	}
-}
-
-function handleConnection(request,state,emit,end) {
-	if(isDisabled(state)) {
-		return;
-	}
-
-	ensureWikiSetup(state.wiki);
-	// Add the connection to the list of connections for this wiki
-	var connection = {
-		request: request,
-		state: state,
-		emit: emit,
-		end: end
-	};
-	addWikiConnection(state.wiki,connection);
-	request.on("close",function() {
-		removeWikiConnection(state.wiki,connection);
-	});
-}
-
-function isDisabled(state) {
-	return state.server.get("sse-enabled") !== "yes";
-}
-
-// Import the ServerSentEvents class
-var ServerSentEvents = require("$:/core/modules/server/server-sent-events.js").ServerSentEvents;
-// Instantiate the class
-var events = new ServerSentEvents("plugins/tiddlywiki/tiddlyweb", handleConnection);
-// Export the route definition for this server sent events instance
-module.exports = events.getExports();
-
+// Export the route definition for this server sent events handler. 
+// We don't need an emitter route, otherwise we could put the common 
+// instance in a library tiddler export and require it in both files.
+module.exports = eventServer.handlerExports(
+    "plugins/tiddlywiki/tiddlyweb",
+    function (request, response, state) {
+        if (state.server.get("tiddlyweb-sse-enabled") !== "yes"
+            || state.params[0] !== "wiki-change"
+        ) {
+            response.writeHead(404);
+            response.end();
+            return;
+        }
+        ensureChannelSetup(state.params[0], state.wiki);
+        eventServer.handler(request, response, state);
+    }
+);
 })();
