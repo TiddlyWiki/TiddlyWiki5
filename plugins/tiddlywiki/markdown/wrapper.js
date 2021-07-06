@@ -100,7 +100,14 @@ function convertNodes(remarkableTree, isStartOfInline) {
 		var currentNode = remarkableTree[i];
 		switch (currentNode.type) {
 		case "paragraph_open":
-			i = wrappedElement("p", i, currentNode.level, "paragraph_close", remarkableTree);
+			// If the paragraph is a "tight" layout paragraph, don't wrap children in a <p> tag.
+			if (currentNode.tight) {
+				i = withChildren(i, currentNode.level, "paragraph_close", remarkableTree, function(children) {
+					Array.prototype.push.apply(out, children);
+				});
+			} else {
+				i = wrappedElement("p", i, currentNode.level, "paragraph_close", remarkableTree);
+			}
 			break;
 
 		case "heading_open":
