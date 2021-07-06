@@ -33,7 +33,7 @@ export class Journal {
     connections: Record<string, SSEClient[]> = {};
     entryIDs: Record<string, number> = {};
     records: Record<string, JournalRecord[]> = {};
-
+    responseHeaders: Record<string, string> = {};
     cleanJournal(ts: number, channel: string) {
         let maxage = ts - this.JOURNALAGE;
         while (this.records[channel][0].Timestamp < maxage)
@@ -42,7 +42,7 @@ export class Journal {
 
     initjournal(key: string) {
         if (!this.connections[key]) this.connections[key] = [];
-        if (!this.records[key]) this.records[key] = [];
+        if (!this.records[key]) this.records[key] = [new JournalRecord("", "", 0, Date.now())];
         if (!this.entryIDs[key]) this.entryIDs[key] = 1;
     }
 
@@ -56,7 +56,7 @@ export class Journal {
             for (let i = 0; i < this.records[channel].length; i++) {
                 let tag = this.records[channel][i].EventIDString;
                 if (found) conn.writeJournalRecord(this.records[channel][i]);
-                else if (tag === id) { found = true; conn.start(); }
+                else if (tag === id) { found = true; conn.start(200, this.responseHeaders); }
             }
             // If not found return 409 Conflict since that event id is not found
             // this way the client can retry manually if needed.
@@ -64,7 +64,7 @@ export class Journal {
         } else {
             let index = this.records[channel].length - 1;
             let latest = index > -1 ? this.records[channel][index] : null;
-            conn.start(200, {}, latest?.EventIDString);
+            conn.start(200, this.responseHeaders, latest?.EventIDString);
         }
         conn.onended = this.handleConnectionEnded.bind(this, conn);
         this.connections[channel].push(conn);
@@ -180,26 +180,26 @@ export class SSEClient implements AnyClient<"stream"> {
     start(
         statusCode: number = 200,
         headers: Record<string, string> = {},
-        eventID: string | null = null
+        eventID: string = ""
     ) {
         if (this.ended()) return false;
 
         this.response.writeHead(statusCode, $tw.utils.extend({
             "Content-Type": "text/event-stream",
             "Cache-Control": "no-cache",
-            "Connection": "close",
+            'Connection': 'keep-alive',
         }, headers));
+        
+        // write the retry interval and event id immediately
+        this.write("", "", eventID);
 
-        this.response.write(
-            (eventID ? "id: " + eventID + "\n" : "")
-            + "retry: " + SSEClient.retryInterval + "\n"
-            + "\n\n", "utf8");
-            
+        // setTimeout(() => { this.end(); }, 10000);
+
         return true;
     }
 
     writeJournalRecord(data: JournalRecord) {
-        return this.write(data.Type, data.Data.toString(), data.EventIDString);
+        return this.write(data.Type, data.Data, data.EventIDString);
     }
 
     write(event: string, data: string, eventID: string) {
@@ -212,11 +212,12 @@ export class SSEClient implements AnyClient<"stream"> {
             throw new Error("Data must be a string");
         }
 
-        this.response.write("event: " + event + "\n"
-            + data.split('\n').map(e => "data: " + e).join('\n') + "\n"
-            + (eventID ? "id: " + eventID + "\n" : "")
-            + "retry: " + SSEClient.retryInterval + "\n"
-            + "\n\n", "utf8");
+        this.response.write(
+            (event ? "event: " + event + "\n" : "") +
+            (data ? data.split('\n').map(e => "data: " + e + "\n").join('') : "") +
+            (eventID ? "id: " + eventID + "\n" : "") +
+            ("retry: " + SSEClient.retryInterval.toString() + "\n") +
+            "\n", "utf8");
 
         return true;
     }

@@ -10,6 +10,7 @@ var Journal = /** @class */ (function () {
         this.connections = {};
         this.entryIDs = {};
         this.records = {};
+        this.responseHeaders = {};
         this.emitterFilter = function (conn) { return function (conn) { return true; }; };
     }
     Journal.prototype.cleanJournal = function (ts, channel) {
@@ -21,7 +22,7 @@ var Journal = /** @class */ (function () {
         if (!this.connections[key])
             this.connections[key] = [];
         if (!this.records[key])
-            this.records[key] = [];
+            this.records[key] = [new JournalRecord("", "", 0, Date.now())];
         if (!this.entryIDs[key])
             this.entryIDs[key] = 1;
     };
@@ -38,7 +39,7 @@ var Journal = /** @class */ (function () {
                     conn.writeJournalRecord(this.records[channel][i]);
                 else if (tag === id) {
                     found = true;
-                    conn.start();
+                    conn.start(200, this.responseHeaders);
                 }
             }
             // If not found return 409 Conflict since that event id is not found
@@ -51,7 +52,7 @@ var Journal = /** @class */ (function () {
         else {
             var index = this.records[channel].length - 1;
             var latest = index > -1 ? this.records[channel][index] : null;
-            conn.start(200, {}, latest === null || latest === void 0 ? void 0 : latest.EventIDString);
+            conn.start(200, this.responseHeaders, latest === null || latest === void 0 ? void 0 : latest.EventIDString);
         }
         conn.onended = this.handleConnectionEnded.bind(this, conn);
         this.connections[channel].push(conn);
@@ -170,21 +171,21 @@ var SSEClient = /** @class */ (function () {
     SSEClient.prototype.start = function (statusCode, headers, eventID) {
         if (statusCode === void 0) { statusCode = 200; }
         if (headers === void 0) { headers = {}; }
-        if (eventID === void 0) { eventID = null; }
+        if (eventID === void 0) { eventID = ""; }
         if (this.ended())
             return false;
         this.response.writeHead(statusCode, $tw.utils.extend({
             "Content-Type": "text/event-stream",
             "Cache-Control": "no-cache",
-            "Connection": "close",
+            'Connection': 'keep-alive',
         }, headers));
-        this.response.write((eventID ? "id: " + eventID + "\n" : "")
-            + "retry: " + SSEClient.retryInterval + "\n"
-            + "\n\n", "utf8");
+        // write the retry interval and event id immediately
+        this.write("", "", eventID);
+        // setTimeout(() => { this.end(); }, 10000);
         return true;
     };
     SSEClient.prototype.writeJournalRecord = function (data) {
-        return this.write(data.Type, data.Data.toString(), data.EventIDString);
+        return this.write(data.Type, data.Data, data.EventIDString);
     };
     SSEClient.prototype.write = function (event, data, eventID) {
         if (this.ended())
@@ -195,11 +196,11 @@ var SSEClient = /** @class */ (function () {
         if (typeof data !== "string") {
             throw new Error("Data must be a string");
         }
-        this.response.write("event: " + event + "\n"
-            + data.split('\n').map(function (e) { return "data: " + e; }).join('\n') + "\n"
-            + (eventID ? "id: " + eventID + "\n" : "")
-            + "retry: " + SSEClient.retryInterval + "\n"
-            + "\n\n", "utf8");
+        this.response.write((event ? "event: " + event + "\n" : "") +
+            (data ? data.split('\n').map(function (e) { return "data: " + e + "\n"; }).join('') : "") +
+            (eventID ? "id: " + eventID + "\n" : "") +
+            ("retry: " + SSEClient.retryInterval.toString() + "\n") +
+            "\n", "utf8");
         return true;
     };
     SSEClient.prototype.end = function () {

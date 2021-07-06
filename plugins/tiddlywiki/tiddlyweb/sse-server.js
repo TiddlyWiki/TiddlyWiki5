@@ -14,7 +14,7 @@ GET /events/plugins/tiddlywiki/tiddlyweb/(channel)
 
 var wikis = [];
 
-// Import the ServerSentEvents class
+// Import the Journal class
 var Journal = require("$:/core/modules/server/server-sent-events.js").Journal;
 
 /*
@@ -48,6 +48,7 @@ var eventServer = new Journal();
 // We don't use it in tiddlyweb so just set it to false
 eventServer.emitterFilter = function (sender) {
     // do not allow clients to broadcast
+    // they can't anyway unless a route is specified
     return function () { return false; };
 }
 
