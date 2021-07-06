@@ -122,7 +122,7 @@ function debounce(callback) {
 }
 
 TiddlyWebAdaptor.prototype.setupSSE = function(host,refresh) {
-	if (window.EventSource) {
+	if(window.EventSource) {
 		var self = this;
 		if(this.eventsource && this.eventsource.readyState !== this.eventsource.CLOSED) {
 			this.eventsource.close();
@@ -134,7 +134,7 @@ TiddlyWebAdaptor.prototype.setupSSE = function(host,refresh) {
 		source.addEventListener("change",debouncedSync);
 		source.onerror = function() {
 			// set this to a no-op since we only want to sync on the first open
-			source.onopen = function(){};
+			source.onopen = function() { };
 			// return if we're reconnecting because that's handled automatically
 			if(source.readyState === source.CONNECTING) { return; }
 			// wait for the errorRetryInterval
@@ -144,7 +144,7 @@ TiddlyWebAdaptor.prototype.setupSSE = function(host,refresh) {
 			},$tw.syncer.errorRetryInterval);
 		};
 		// call syncFromServer on open if necessary
-		if (refresh) {
+		if(refresh) {
 			source.onopen = function() {
 				//sync from server manually here to make sure we stay up to date
 				$tw.syncer.syncFromServer();
