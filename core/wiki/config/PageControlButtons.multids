@@ -4,6 +4,7 @@ core/ui/Buttons/advanced-search: hide
 core/ui/Buttons/close-all: hide
 core/ui/Buttons/encryption: hide
 core/ui/Buttons/export-page: hide
+core/ui/Buttons/export-tiddlywikicore: hide
 core/ui/Buttons/fold-all: hide
 core/ui/Buttons/full-screen: hide
 core/ui/Buttons/home: hide

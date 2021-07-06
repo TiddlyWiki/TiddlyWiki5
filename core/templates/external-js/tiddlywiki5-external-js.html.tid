@@ -2,7 +2,7 @@ title: $:/core/templates/tiddlywiki5-external-js.html
 
 \rules only filteredtranscludeinline transcludeinline
 <!doctype html>
-{{$:/core/templates/MOTW.html}}<html lang="`<$text text={{{ [{$:/language}get[name]] }}}/>`">
+{{$:/core/templates/MOTW.html}}<html lang="{{{ [{$:/language}get[name]] }}}">
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <!--~~ Raw markup for the top of the head section ~~-->
@@ -43,5 +43,6 @@ title: $:/core/templates/tiddlywiki5-external-js.html
 <!--~~ Raw markup for the bottom of the body section ~~-->
 {{{ [all[shadows+tiddlers]tag[$:/tags/RawMarkupWikified/BottomBody]] ||$:/core/templates/raw-static-tiddler}}}
 </body>
-<script src="%24%3A%2Fcore%2Ftemplates%2Ftiddlywiki5.js" onerror="alert('Error: Cannot load tiddlywiki.js');"></script>
+<!--~~ Load external JS ~~-->
+<script src="{{{ [<coreURL>] }}}" onerror="alert('Error: Cannot load {{{ [<coreURL>] }}}');"></script>
 </html>
