@@ -93,7 +93,7 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 				self.isAnonymous = !!json.anonymous;
 
 				var isSseEnabled = !!json.tiddlyweb_sse_enabled && !!window.EventSource;
-				if(isSseEnabled) self.startSSE();
+				if(isSseEnabled) { self.startSSE(); }
 			}
 			// Invoke the callback if present
 			if(callback) {
@@ -121,31 +121,34 @@ function debounce(callback) {
 	};
 }
 
-TiddlyWebAdaptor.prototype.setupSSE = function (host, refresh) {
+TiddlyWebAdaptor.prototype.setupSSE = function(host,refresh) {
 	if (window.EventSource) {
 		var self = this;
-		if(this.eventsource && this.eventsource.readyState !== this.eventsource.CLOSED)
+		if(this.eventsource && this.eventsource.readyState !== this.eventsource.CLOSED) {
 			this.eventsource.close();
-		var source = this.eventsource = new EventSource(host + "events/plugins/tiddlywiki/tiddlyweb/wiki-change", {
+		}
+		var source = this.eventsource = new EventSource(host + "events/plugins/tiddlywiki/tiddlyweb/wiki-change",{
 			withCredentials: true
 		});
 		var debouncedSync = debounce($tw.syncer.syncFromServer.bind($tw.syncer));
-		source.addEventListener("change", debouncedSync);
-		source.onerror = function () {
+		source.addEventListener("change",debouncedSync);
+		source.onerror = function() {
 			// set this to a no-op since we only want to sync on the first open
 			source.onopen = function(){};
 			// return if we're reconnecting because that's handled automatically
-			if (source.readyState === source.CONNECTING) return;
+			if(source.readyState === source.CONNECTING) { return; }
 			// wait for the errorRetryInterval
-			setTimeout(function () {
+			setTimeout(function() {
 				//call this function to set everything up again
-				self.setupSSE(host, true);
-			}, $tw.syncer.errorRetryInterval);
+				self.setupSSE(host,true);
+			},$tw.syncer.errorRetryInterval);
 		};
 		// call syncFromServer on open if necessary
-		if (refresh) source.onopen = function () {
-			//sync from server manually here to make sure we stay up to date
-			$tw.syncer.syncFromServer();
+		if (refresh) {
+			source.onopen = function() {
+				//sync from server manually here to make sure we stay up to date
+				$tw.syncer.syncFromServer();
+			}
 		}
 	}
 }

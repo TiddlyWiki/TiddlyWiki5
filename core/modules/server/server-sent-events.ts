@@ -36,26 +36,27 @@ export class Journal {
     responseHeaders: Record<string, string> = {};
     cleanJournal(ts: number, channel: string) {
         let maxage = ts - this.JOURNALAGE;
-        while (this.records[channel][0].Timestamp < maxage)
+        while (this.records[channel][0].Timestamp < maxage) {
             this.records[channel].shift();
+        }
     }
 
-    initjournal(key: string) {
-        if (!this.connections[key]) this.connections[key] = [];
-        if (!this.records[key]) this.records[key] = [new JournalRecord("", "", 0, Date.now())];
-        if (!this.entryIDs[key]) this.entryIDs[key] = 1;
+    initJournal(key: string) {
+        if (!this.connections[key]) { this.connections[key] = []; }
+        if (!this.records[key]) { this.records[key] = [new JournalRecord("", "", 0, Date.now())]; }
+        if (!this.entryIDs[key]) { this.entryIDs[key] = 1; }
     }
 
     handleConnection(conn: SSEClient) {
         var channel = conn.channel;
-        this.initjournal(channel);
+        this.initJournal(channel);
         if (conn.request.headers["last-event-id"]) {
             let id = conn.request.headers["last-event-id"];
             let found = false;
             // find the specified event ID the client last recieved and return everything since then
             for (let i = 0; i < this.records[channel].length; i++) {
                 let tag = this.records[channel][i].EventIDString;
-                if (found) conn.writeJournalRecord(this.records[channel][i]);
+                if (found) { conn.writeJournalRecord(this.records[channel][i]); }
                 else if (tag === id) { found = true; conn.start(200, this.responseHeaders); }
             }
             // If not found return 409 Conflict since that event id is not found
@@ -89,7 +90,7 @@ export class Journal {
         };
     }
 
-    isEventStreamRequest(request) {
+    isEventStreamRequest(request: IncomingMessage) {
         return request.headers.accept &&
             request.headers.accept.match(/^text\/event-stream/);
     }
@@ -102,9 +103,11 @@ export class Journal {
         this.connections[channel].forEach((conn, i) => {
             success[i] = !filter(conn) || conn.writeJournalRecord(data);
         });
-        for (let i = success.length - 1; i > -1; i--)
-            if (!success[i])
+        for (let i = success.length - 1; i > -1; i--) {
+            if (!success[i]) {
                 this.connections[channel].splice(i, 1);
+            }
+        }
 
         this.records[channel].push(data);
         this.cleanJournal(data.Timestamp, channel);
@@ -113,7 +116,7 @@ export class Journal {
     repeater(request: IncomingMessage, response: ServerResponse, state: HandlerState<"string">) {
         const conn = { request, response, state };
         const channel = state.params[0];
-        this.initjournal(channel);
+        this.initJournal(channel);
         let event = state.params[1];
         let data = this.emitEvent(channel, event, state.data, this.repeaterFilter(conn));
         response.writeHead(200);
@@ -167,7 +170,7 @@ export class SSEClient implements AnyClient<"stream"> {
         response.on("error", this.onerror.bind(this));
         response.on("close", this.onclose.bind(this));
     }
-    onerror(err) {
+    onerror(err: any) {
         console.log("response error", err.message);
         this.response.destroy();
         this.onended && this.onended();
@@ -182,14 +185,14 @@ export class SSEClient implements AnyClient<"stream"> {
         headers: Record<string, string> = {},
         eventID: string = ""
     ) {
-        if (this.ended()) return false;
+        if (this.ended()) { return false; }
 
         this.response.writeHead(statusCode, $tw.utils.extend({
             "Content-Type": "text/event-stream",
             "Cache-Control": "no-cache",
             'Connection': 'keep-alive',
         }, headers));
-        
+
         // write the retry interval and event id immediately
         this.write("", "", eventID);
 
@@ -203,7 +206,7 @@ export class SSEClient implements AnyClient<"stream"> {
     }
 
     write(event: string, data: string, eventID: string) {
-        if (this.ended()) return false;
+        if (this.ended()) { return false; }
 
         if (typeof event !== "string" || event.indexOf("\n") !== -1) {
             throw new Error("Type must be a single-line string");
@@ -223,7 +226,7 @@ export class SSEClient implements AnyClient<"stream"> {
     }
 
     end() {
-        if (this.ended()) return false;
+        if (this.ended()) { return false; }
         this.response.end();
         return true;
     }

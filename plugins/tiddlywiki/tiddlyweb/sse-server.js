@@ -35,9 +35,9 @@ function setupWiki(wiki) {
 /*
 Setup this particular wiki if we haven't seen it before
 */
-function ensureChannelSetup(channel, wiki) {
+function ensureChannelSetup(channel,wiki) {
     // setup wikis for the wiki-change channel
-    if (channel === "wiki-change" && wikis.indexOf(wiki) === -1) setupWiki(wiki);
+    if(channel === "wiki-change" && wikis.indexOf(wiki) === -1) { setupWiki(wiki); }
 }
 
 var eventServer = new Journal();
@@ -46,10 +46,10 @@ var eventServer = new Journal();
 // messages from clients and forwards them to all listeners. It 
 // does not affect messages sent directly by the server. 
 // We don't use it in tiddlyweb so just set it to false
-eventServer.emitterFilter = function (sender) {
+eventServer.emitterFilter = function(sender) {
     // do not allow clients to broadcast
     // they can't anyway unless a route is specified
-    return function () { return false; };
+    return function() { return false; };
 }
 
 // Export the route definition for this server sent events handler. 
@@ -57,16 +57,16 @@ eventServer.emitterFilter = function (sender) {
 // instance in a library tiddler export and require it in both files.
 module.exports = eventServer.handlerExports(
     "plugins/tiddlywiki/tiddlyweb",
-    function (request, response, state) {
-        if (state.server.get("tiddlyweb-sse-enabled") !== "yes"
+    function(request,response,state) {
+        if(state.server.get("tiddlyweb-sse-enabled") !== "yes"
             || state.params[0] !== "wiki-change"
         ) {
             response.writeHead(404);
             response.end();
             return;
         }
-        ensureChannelSetup(state.params[0], state.wiki);
-        eventServer.handler(request, response, state);
+        ensureChannelSetup(state.params[0],state.wiki);
+        eventServer.handler(request,response,state);
     }
 );
 })();
