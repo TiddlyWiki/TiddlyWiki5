@@ -11,7 +11,7 @@ var Journal = /** @class */ (function () {
         this.entryIDs = {};
         this.records = {};
         this.responseHeaders = {};
-        this.emitterFilter = function (conn) { return function (conn) { return true; }; };
+        this.repeaterFilter = function (conn) { return function (conn) { return true; }; };
     }
     Journal.prototype.cleanJournal = function (ts, channel) {
         var maxage = ts - this.JOURNALAGE;
@@ -98,18 +98,18 @@ var Journal = /** @class */ (function () {
         this.cleanJournal(data.Timestamp, channel);
         return data;
     };
-    Journal.prototype.emitter = function (request, response, state) {
+    Journal.prototype.repeater = function (request, response, state) {
         var conn = { request: request, response: response, state: state };
         var channel = state.params[0];
         this.initjournal(channel);
         var event = state.params[1];
-        var data = this.emitEvent(channel, event, state.data, this.emitterFilter(conn));
+        var data = this.emitEvent(channel, event, state.data, this.repeaterFilter(conn));
         response.writeHead(200);
-        response.write(data.EntryID + "\n" + data.Timestamp);
+        response.write(data.EventIDString);
         response.end();
     };
-    Journal.prototype.emitterExports = function (method, prefix, handler) {
-        if (handler === void 0) { handler = this.emitter.bind(this); }
+    Journal.prototype.repeaterExports = function (method, prefix, handler) {
+        if (handler === void 0) { handler = this.repeater.bind(this); }
         return {
             bodyFormat: "string",
             method: method,

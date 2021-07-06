@@ -110,18 +110,18 @@ export class Journal {
         this.cleanJournal(data.Timestamp, channel);
         return data;
     }
-    emitter(request: IncomingMessage, response: ServerResponse, state: HandlerState<"string">) {
+    repeater(request: IncomingMessage, response: ServerResponse, state: HandlerState<"string">) {
         const conn = { request, response, state };
         const channel = state.params[0];
         this.initjournal(channel);
         let event = state.params[1];
-        let data = this.emitEvent(channel, event, state.data, this.emitterFilter(conn));
+        let data = this.emitEvent(channel, event, state.data, this.repeaterFilter(conn));
         response.writeHead(200);
-        response.write(data.EntryID + "\n" + data.Timestamp);
+        response.write(data.EventIDString);
         response.end();
     }
-    emitterFilter = (conn: AnyClient<"string">) => (conn: AnyClient<"stream">) => true;
-    emitterExports(method: string, prefix: string, handler = this.emitter.bind(this)): RouteDef<"string"> {
+    repeaterFilter = (conn: AnyClient<"string">) => (conn: AnyClient<"stream">) => true;
+    repeaterExports(method: string, prefix: string, handler = this.repeater.bind(this)): RouteDef<"string"> {
         return {
             bodyFormat: "string", method, handler,
             path: new RegExp("^/events/" + prefix + "/([^/]+)/([^/]+)$")
