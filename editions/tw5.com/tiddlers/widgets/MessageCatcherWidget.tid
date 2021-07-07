@@ -17,6 +17,7 @@ The content of the `<$messagecatcher>` widget is displayed normally.
 |!Attribute |!Description |
 |type |Name of the message be trapped, for example "tm-scroll" or "tm-navigate" |
 |actions |Action string to be invoked when a matching message is trapped |
+|//{any attributes starting with $}// |Each attribute name (excluding the $) specifies the name of a message, and the value specifies the action string to be invoked  |
 
 ! Variables
 

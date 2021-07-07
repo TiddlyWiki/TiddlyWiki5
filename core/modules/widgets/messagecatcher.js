@@ -33,12 +33,44 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
-	// Add our message handler
-	if(this.messageType) {
-		this.addEventListeners([
-			{type: this.messageType, handler: "handleEvent"}
-		]);
+	// Helper to add an event handler
+	var addEventHandler = function(type,actions) {
+		if(type && actions) {
+			self.addEventListener(
+				type,
+				function(event) {
+					// Collect all the event properties into variables
+					var collectProps = function(obj,prefix) {
+						prefix = prefix || "";
+						var props = {};
+						$tw.utils.each(obj,function(value,name) {
+							if(["string","boolean","number"].indexOf(typeof value) !== -1) {
+								props[prefix + name] = value.toString();
+							}
+						});
+						return props;
+					};
+					var variables = $tw.utils.extend(
+						{},
+						collectProps(event.paramObject,"event-paramObject-"),
+						collectProps(event,"event-"),
+						{
+							modifier: $tw.keyboardManager.getEventModifierKeyDescriptor(event)
+						});
+					self.invokeActionString(actions,self,event,variables);
+					return false;
+				}
+			);
+		}
 	}
+	// Add the main event handler
+	addEventHandler(this.getAttribute("type"),this.getAttribute("actions"));
+	// Add any other event handlers
+	$tw.utils.each(this.attributes,function(value,key) {
+		if(key.charAt(0) === "$") {
+			addEventHandler(key.slice(1),value);
+		}
+	});
 	// Render children
 	this.renderChildren(parent,null);
 };
@@ -47,40 +79,8 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 MessageCatcherWidget.prototype.execute = function() {
-	var self = this;
-	// Get attributes that require a refresh on change
-	this.messageType = this.getAttribute("type");
-	this.messageActions = this.getAttribute("actions");
 	// Make child widgets
 	this.makeChildWidgets();
-};
-
-/*
-Handle an event
-*/
-MessageCatcherWidget.prototype.handleEvent = function(event) {
-	if(this.messageActions) {
-		// Collect all the event properties into variables
-		var collectProps = function(obj,prefix) {
-				prefix = prefix || "";
-				var props = {};
-				$tw.utils.each(obj,function(value,name) {
-					if(["string","boolean","number"].indexOf(typeof value) !== -1) {
-						props[prefix + name] = value.toString();
-					}
-				});
-				return props;
-			};
-		var variables = $tw.utils.extend(
-			{},
-			collectProps(event.paramObject,"event-paramObject-"),
-			collectProps(event,"event-"),
-			{
-				modifier: $tw.keyboardManager.getEventModifierKeyDescriptor(event)
-			});
-		this.invokeActionString(this.messageActions,this,event,variables);
-	}
-	return false;
 };
 
 /*
@@ -88,7 +88,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 MessageCatcherWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes["type"]) {
+	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
 		return true;
 	}

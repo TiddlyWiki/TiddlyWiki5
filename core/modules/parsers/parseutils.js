@@ -123,6 +123,19 @@ exports.parseStringLiteral = function(source,pos) {
 	}
 };
 
+exports.parseMacroParameters = function(node,source,pos) {
+	// Process parameters
+	var parameter = $tw.utils.parseMacroParameter(source,pos);
+	while(parameter) {
+		node.params.push(parameter);
+		pos = parameter.end;
+		// Get the next parameter
+		parameter = $tw.utils.parseMacroParameter(source,pos);
+	}
+	node.end = pos;
+	return node;
+}
+
 /*
 Look for a macro invocation parameter. Returns null if not found, or {type: "macro-parameter", name:, value:, start:, end:}
 */
@@ -187,14 +200,8 @@ exports.parseMacroInvocation = function(source,pos) {
 	}
 	node.name = name.match[1];
 	pos = name.end;
-	// Process parameters
-	var parameter = $tw.utils.parseMacroParameter(source,pos);
-	while(parameter) {
-		node.params.push(parameter);
-		pos = parameter.end;
-		// Get the next parameter
-		parameter = $tw.utils.parseMacroParameter(source,pos);
-	}
+	node = $tw.utils.parseMacroParameters(node,source,pos);
+	pos = node.end;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for a double greater than sign
@@ -205,6 +212,29 @@ exports.parseMacroInvocation = function(source,pos) {
 	pos = token.end;
 	// Update the end position
 	node.end = pos;
+	return node;
+};
+
+exports.parseFilterVariable = function(source) {
+	var node = {
+			name: "",
+			params: [],
+		},
+		pos = 0,
+		reName = /([^\s"']+)/g;
+	// If there is no whitespace or it is an empty string then there are no macro parameters
+	if(/^\S*$/.test(source)) {
+		node.name = source;
+		return node;
+	}
+	// Get the variable name
+	var nameMatch = $tw.utils.parseTokenRegExp(source,pos,reName);
+	if(nameMatch) {
+		node.name = nameMatch.match[1];
+		pos = nameMatch.end;
+		node = $tw.utils.parseMacroParameters(node,source,pos);
+		delete node.end;
+	}
 	return node;
 };
 
