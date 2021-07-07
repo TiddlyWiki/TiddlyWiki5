@@ -21,7 +21,6 @@ exports.handler = function(request,response,state) {
 		username: state.authenticatedUsername || state.server.get("anon-username") || "",
 		anonymous: !state.authenticatedUsername,
 		read_only: !state.server.isAuthorized("writers",state.authenticatedUsername),
-		tiddlyweb_sse_enabled: state.server.get("tiddlyweb-sse-enabled") === "yes",
 		space: {
 			recipe: "default"
 		},

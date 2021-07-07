@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/tiddlyweb/sse-server.js
+title: $:/plugins/tiddlywiki/tiddlyweb-sse/sse-server.js
 type: application/javascript
 module-type: route
 
@@ -56,7 +56,7 @@ eventServer.emitterFilter = function(sender) {
 // We don't need an emitter route, otherwise we could put the common 
 // instance in a library tiddler export and require it in both files.
 module.exports = eventServer.handlerExports(
-	"plugins/tiddlywiki/tiddlyweb",
+	"plugins/tiddlywiki/tiddlyweb-sse",
 	function(request,response,state) {
 		if(state.server.get("tiddlyweb-sse-enabled") !== "yes"
 			|| state.params[0] !== "wiki-change"

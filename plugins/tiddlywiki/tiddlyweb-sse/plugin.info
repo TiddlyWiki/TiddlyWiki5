@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/tiddlyweb-sse",
+	"name": "TiddlyWeb SSE",
+	"description": "Sync changes immediately from the browser to TW5 (node.js) using SSE",
+	"list": "readme",
+	"plugin-priority": 10
+}
