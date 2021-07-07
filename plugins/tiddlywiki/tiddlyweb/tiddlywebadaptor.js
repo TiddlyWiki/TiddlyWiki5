@@ -23,6 +23,7 @@ function TiddlyWebAdaptor(options) {
 	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
 	this.isLoggedIn = false;
 	this.isReadOnly = false;
+	this.isPollingDisabled = false;
 }
 
 TiddlyWebAdaptor.prototype.name = "tiddlyweb";
