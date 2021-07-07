@@ -18,20 +18,18 @@ exports.after = ["startup"];
 exports.platforms = ["browser"];
 exports.synchronous = true;
 exports.startup = function() {
-	$tw.hooks.addHook("th-syncadaptor-status-response",function(args) {
-		var err = args[0],
-			isLoggedIn = args[1],
-			username = args[2],
-			isReadOnly = args[3],
-			isAnonymous = args[4],
-			isPollingDisabled = args[5];
-		if(err || $tw.syncer.syncadaptor.name !== "tiddlyweb") { return; }
+	var source = null;
+	$tw.hooks.addHook("th-syncer-status-response",function(syncer, success) {
+		// technically any syncer instance can be used, but we only use the global one for this
+		if(!success || syncer.syncadaptor.name !== "tiddlyweb" || $tw.syncer !== syncer) { return; }
+		// check if we have a previous one and close it if we do
+		if(source && source.readyState !== source.CLOSED) { source.close(); }
 		// Get the mount point in case a path prefix is used
-		var host = $tw.syncer.syncadaptor.getHost();
+		var host = syncer.syncadaptor.getHost();
 		// Make sure it ends with a slash (it usually does)
 		if(host[host.length - 1] !== "/") { host += "/"; }
 		// Setup the event listener
-		setupSSE(host);
+		source = setupSSE(host, syncer);
 	});
 }
 
@@ -43,13 +41,10 @@ function debounce(callback) {
 	};
 }
 
-var source = null;
-
-function setupSSE(host,refresh) {
+exports.setupSSE = function setupSSE(host,syncer,refresh) {
 	if(window.EventSource) {
-		if(source && source.readyState !== source.CLOSED) { source.close(); }
-		source = new EventSource(host + "events/plugins/tiddlywiki/tiddlyweb-sse/wiki-change",{ withCredentials: true });
-		var debouncedSync = debounce($tw.syncer.syncFromServer.bind($tw.syncer));
+		var source = new EventSource(host + "events/plugins/tiddlywiki/tiddlyweb-sse/wiki-change",{ withCredentials: true });
+		var debouncedSync = debounce(syncer.syncFromServer.bind(syncer));
 		source.addEventListener("change",debouncedSync);
 		source.onerror = function() {
 			// return if we're reconnecting because that's handled automatically
@@ -58,16 +53,19 @@ function setupSSE(host,refresh) {
 			setTimeout(function() {
 				//call this function to set everything up again
 				setupSSE(host,true);
-			},$tw.syncer.errorRetryInterval);
+			},syncer.errorRetryInterval);
 		};
 		source.onopen = function() {
 			// only run this on first open, not on auto reconnect
 			source.onopen = function() { };
 			// once we've properly opened, disable polling
-			$tw.syncer.wiki.addTiddler({ title: $tw.syncer.titleSyncDisablePolling,text: "yes" });
+			syncer.wiki.addTiddler({ title: syncer.titleSyncDisablePolling,text: "yes" });
 			//sync from server manually here to make sure we stay up to date
-			if(refresh) { $tw.syncer.syncFromServer(); }
+			if(refresh) { syncer.syncFromServer(); }
 		}
+		return source;
+	} else {
+		return null;
 	}
 }
 

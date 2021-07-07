@@ -283,7 +283,7 @@ Syncer.prototype.getStatus = function(callback) {
 					self.wiki.addTiddler({title: self.titleSyncDisablePolling, text: "yes"});
 				}
 			}
-			$tw.hooks.invokeHook("th-syncadaptor-status-response",Array.prototype.slice.apply(arguments));
+			$tw.hooks.invokeHook("th-syncer-status-response",self,!err);
 			// Invoke the callback
 			if(callback) {
 				callback(err,isLoggedIn,username);
