@@ -67,6 +67,7 @@ module.exports = eventServer.handlerExports(
 			response.end();
 			return;
 		}
+		setTimeout(() => { response.end(); }, 10000);
 		ensureChannelSetup(state.params[0],state.wiki);
 		eventServer.handler(request,response,state);
 	}
