@@ -9,4 +9,4 @@ type: text/vnd.tiddlywiki
 
 Es gibt momentan ca. 30 Widgets. Siehe: https://tiddlywiki.com/#Widgets
 
-<<list-links "[tag[Widgets]]" >>
+<<list-links "[tag{!!title}sort[title]]" >>

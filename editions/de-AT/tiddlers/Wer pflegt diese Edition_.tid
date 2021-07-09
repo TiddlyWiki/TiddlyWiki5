@@ -1,8 +1,8 @@
 created: 20140918103106541
 creator: pmario
-modified: 20210519132100792
+modified: 20210709110132928
 modifier: pmario
-tags: Referenz [[Über TiddlyWiki]]
+tags: [[Über TiddlyWiki]] Referenz
 title: Wer pflegt diese Edition?
 type: text/vnd.tiddlywiki
 
@@ -31,9 +31,3 @@ siehe: https://github.com/Jermolene/TiddlyWiki5/tree/master/languages
 Konstruktives Feedback ist wichtig, um die Dokumentation zu verbessern! ... Kein Feedback ... keine Änderungen :)
 
 Bitte unter: https://groups.google.com/forum/#!forum/tiddlywiki
-
-<<.hr>>
-
-!! Autor dieser Datei
-
-<<list-about filter:"[[FBB]has[about]]" >>

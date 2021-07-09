@@ -1,7 +1,6 @@
-author: FBB
-created: 20200428191050680
-creator: FBB
-modified: 20210519132100370
+created: 20140923192541820
+creator: pmario
+modified: 20210709100703129
 modifier: FBB
 tags: InhaltsVerzeichnis
 title: Makros
@@ -40,4 +39,4 @@ Hier werden die globalen Makros aufgelistet, die in diesem Wiki beschrieben werd
 
 <<list-links "[tag[Makros]]" >>
 
-Weitere Makros siehe: https://tiddlywiki.com/#Macros
+Weitere Makros siehe: <<wikidokulink "Macros">> (englisch)
