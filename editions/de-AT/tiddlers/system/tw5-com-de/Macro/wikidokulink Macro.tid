@@ -1,0 +1,13 @@
+created: 20201119071028068
+creator: FBB
+modified: 20210706085812886
+modifier: FBB
+tags: $:/tags/Macro
+title: $:/editions/tw5.com/de/Macro/wikidokulink Macro
+type: text/vnd.tiddlywiki
+
+\define wikidokulink(_:"HelloThere")
+<$wikify name="link" text="{{$:/_fbb/wikidokulink}}#$_$">
+<a href=<<link>> target="_blank">$_$ <span class="doc-icon">{{link-image.svg}}</span></a>
+</$wikify>
+\end

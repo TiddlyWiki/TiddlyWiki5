@@ -1,0 +1,11 @@
+created: 20210401204825020
+creator: FBB
+modified: 20210706085803816
+modifier: FBB
+tags: $:/tags/Macro
+title: $:/editions/tw5.com/de/Macro/keywords Macro
+type: text/vnd.tiddlywiki
+
+\define .keywords( keywords:"keyword" )
+<span style="color: #fff;;font-size: 1px">$keywords$</span>
+\end

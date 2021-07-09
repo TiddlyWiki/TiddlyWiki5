@@ -1,0 +1,23 @@
+created: 20200806075846817
+creator: FBB
+modified: 20210706123222044
+modifier: FBB
+tags: $:/tags/Macro
+title: $:/editions/tw5.com/de/Macro/bildMacro
+type: text/vnd.tiddlywiki
+
+\define .bildMacro(src:"Image.png",folder:"./Media/", width:"", height:"")
+
+<a href="$folder$$src$" title="open: $src$" target="_blank">
+<img class="tc-image" src="$folder$$src$" style="width:$width$;height:$height$" />
+</a>
+
+\end
+
+\define .bildlinkMacro(src:"Image.png",folder:"./", width:"", height:"")
+
+<a href="$folder$$src$" target="_blank">
+<img class="tc-image" src="$folder$$src$" style="width:$width$;height:$height$" />
+</a>
+
+\end

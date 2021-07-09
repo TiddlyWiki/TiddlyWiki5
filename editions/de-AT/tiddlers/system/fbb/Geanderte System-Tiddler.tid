@@ -1,0 +1,9 @@
+caption: Geänderte System Tiddler
+created: 20200929191254295
+creator: FBB
+modified: 20210709082839560
+modifier: FBB
+title: $:/_fbb/Geänderte System-Tiddler
+type: text/vnd.tiddlywiki
+
+<<list-links filter:"[is[system]modifier[FBB]!sort[modified]]" "ul" "li" "list" "- Nothing listed -">>

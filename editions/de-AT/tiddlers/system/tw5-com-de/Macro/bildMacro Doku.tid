@@ -1,0 +1,28 @@
+caption: bildMacro Doku
+created: 20210706123232978
+creator: FBB
+modified: 20210708201151331
+modifier: FBB
+tags: $:/tags/MacroDoku
+title: $:/editions/tw5.com/de/Macro/bildMacro Doku
+type: text/vnd.tiddlywiki
+
+Macro zum einbinden externer [[Bilder|Bilder in WikiText]] ähnlich dem <<.wid2 Image Image>>-Widget
+
+!! Definition
+
+Gespeichert iin [[$:/editions/tw5.com/de/Macro/bildMacro]]
+
+<$codeblock code={{$:/editions/tw5.com/de/Macro/bildMacro}} />
+
+!! Aufrufe
+
+`<<.bildMacro "Image.png" >>`mit
+
+oder
+
+`<<.bildMacro "quest-image.svg" "file:../Media/" "100%" "50px">`
+
+<br/>
+
+; Beispiel: [[bildMacro|Beispiel bildMacro]]

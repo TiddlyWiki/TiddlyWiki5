@@ -1,0 +1,9 @@
+created: 20210706085934315
+modified: 20210706092455984
+tags: $:/tags/Macro
+title: $:/editions/tw5.com/de/Macro/lingo Macro
+type: text/vnd.tiddlywiki
+
+\define .lingo( name:"title" )
+<span>{{$:/language/Docs/Fields/$name$}}</span>
+\end

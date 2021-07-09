@@ -1,0 +1,12 @@
+caption: note-image
+created: 20200430095002881
+creator: FBB
+modified: 20210708155943794
+modifier: FBB
+tags: $:/_tags/icon
+title: note-image.svg
+type: text/vnd.tiddlywiki
+
+<svg viewBox="0 0 25 25" width="25px" height="25px" >
+<path d="m9.4 14h3.2v3.2h-3.2zm-0.043-9.8h3.2l-0.4 8.1h-2.3zm1.6-4.4a11 11 0 0 0-11 11 11 11 0 0 0 11 11 11 11 0 0 0 11-11 11 11 0 0 0-11-11zm0 1.9a9.1 9.1 0 0 1 9.1 9.1 9.1 9.1 0 0 1-9.1 9.1 9.1 9.1 0 0 1-9.1-9.1 9.1 9.1 0 0 1 9.1-9.1z"/>
+</svg>

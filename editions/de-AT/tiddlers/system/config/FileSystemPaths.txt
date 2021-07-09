@@ -1,4 +1,5 @@
 [prefix[$:/_fbb/]removeprefix[$:/_fbb]addprefix[system/fbb]]
+[prefix[$:/editions/tw5.com/de/]removeprefix[$:/editions/tw5.com/de]addprefix[system/tw5-com-de]]
 [prefix[$:/]removeprefix[$:]addprefix[system/]]
 
 [tag[WikiText]addprefix[wikitext/]]

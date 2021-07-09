@@ -1,0 +1,20 @@
+created: 20200605200513281
+creator: FBB
+modified: 20210624213332865
+modifier: FBB
+tags: $:/tags/Macro
+title: $:/editions/tw5.com/de/Macro/from-version-de Macros
+type: text/vnd.tiddlywiki
+
+\define .fromVersion(version)
+<!-- alte FBB Variante, nicht mehr nutzen //-->
+<sup>([[from-version-de|$:/editions/tw5.com/de/Macro/from-version-de Doku]])</sup><span class="doc-from-version" style="color:red;">{{$:/core/images/warning}} Neu ab: <b>$version$</b></span>
+\end
+
+\define .from-version-de(version)
+<span class="doc-from-version">{{$:/core/images/warning}} Neu ab: <b>$version$</b></span>
+\end
+
+\define .deprecated-since-de(version, superseded:"Setze einen TODO-Link")
+<span  class="doc-deprecated-version ">{{$:/core/images/warning}} Deprecated ab Version $version$ </span> <sup>([[$superseded$]]). </sup>
+\end

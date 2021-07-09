@@ -1,0 +1,47 @@
+caption: tipMacros Doku
+created: 20210708114650400
+modified: 20210708201444281
+tags: $:/tags/MacroDoku
+title: $:/editions/tw5.com/de/Macro/tipMacros Doku
+type: text/vnd.tiddlywiki
+
+Das ''tipMacro'' generiert eine hervorgehobene Textbox für Hinweise oder Warnungen.
+Es ist das Haupt-Makro welches die Funktionen für die Unter-Makros `<<.tip-de >>`, `<<note-de >>`, `<<.warn-de >>` und `<<.alert-de >>` bereitstellt.
+Alle diese Makros können mit den gleichen Parametern aufgerufen werden. Die Unter-Makros definieren jedoch eigene Defaultwerte um den Umgang damit zu vereinfachen.
+
+! Definition
+
+Gespeichert in [[$:/editions/tw5.com/de/Macro/tipMacros]]
+
+<$codeblock code={{$:/editions/tw5.com/de/Macro/tipMacros}}/>
+
+! Parameter
+
+|Nr |Name|Beschreibung |h
+|1|textbox |Der Text für den Inhalt der Textbox. |
+|2|title |Eine Überschrift für die Textbox. Deiser Test wird fett dargestellt. Wird ein Leerzeichen ` ` statt Text übergeben, wird keine Überberschrift angezeigt. |
+|3|symbol |Ein Symbol welches links neben der Textbox angezeigt wird. <br/>Als Default-Wert wird `note-image.svg` verwendet. |
+|4|color |Farbe für die linke Rahmenfarbe und die Hintergrundfarbe für die Textbox (Die Hintergrundfarbe ist die Rahmenfarbe mit teilweiser Transparenz) <br/>Als Default-Wert ist `#cecece` festgelegt. |
+|5|symfill |Farbe in welcher das Symbol eingefärbt wird. (Funktioniert nur bei Symbolen ohne die Eigenschaft <<.param "fill">>)<br/>Als Default-Wert ist `#828282` festgelegt. |
+
+
+! Aufruf
+
+`<<.tip-de "Testtext für einen Tipp" >>`
+
+`<<.note-de "Testtext für Hinweis" "Einfacher Hinweis">>`
+
+`<<.warn-de "Testtext für Warnung" "Wichtige Warnung">>`
+
+`<<.alert-de "Testtext für Alert" "Sehr wichtige Warnung">>`
+
+
+! Beispiele
+
+<<.tip-de "Testtext für einen Tipp" >>
+
+<<.note-de "Testtext für Hinweis" "Einfacher Hinweis">>
+
+<<.warn-de "Testtext für Warnung" "Wichtige Warnung">>
+
+<<.alert-de "Testtext für Alert" "Sehr wichtige Warnung">>

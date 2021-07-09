@@ -1,0 +1,44 @@
+caption: hinweisMacro Doku
+created: 20200430091235719
+creator: FBB
+modified: 20210708201355879
+modifier: FBB
+tags: $:/tags/MacroDoku
+title: $:/editions/tw5.com/de/Macro/hinweisMacro Doku
+type: text/vnd.tiddlywiki
+
+Das ''hinweisMacro'' erzeugt eine Textbox mit abgessetzter Überschrift und wahlweise anderen Symbolen.
+
+!! Definition
+
+Gespeichert in [[$:/editions/tw5.com/de/Macro/hinweisMacro]]
+
+<$codeblock code={{$:/editions/tw5.com/de/Macro/hinweisMacro}} />
+
+!! Aufruf
+
+`<<.hinweisMacro "Teste das Hinweis Makro">>`
+
+: oder
+
+`<<.hinweisMacro "Teste das Hinweis Makro" "Test Hinweis" "note">>`
+
+: oder
+
+`<<.hinweisMacro "Teste das Makro als Warnung!" "Achtung" "warn">>`
+
+!! Beispiele
+
+<<.hinweisMacro "Teste das Hinweis Makro">>
+
+: oder
+
+<<.hinweisMacro
+"Teste das Hinweis Makro
+Bei einem Umbruch mache in der nächsten Zeile drei
+Leerzeichen."
+"Test Hinweis" "note">>
+
+: oder
+
+<<.hinweisMacro "Teste das Makro als Warnung!" "Achtung" "warn">>

@@ -1,0 +1,13 @@
+created: 20210706115403525
+modified: 20210706115525280
+tags: $:/tags/Macro
+title: $:/editions/tw5.com/de/Macro/hinweisMacro
+type: text/vnd.tiddlywiki
+
+\define .hinweisMacro(textbox:"", titel:"Hinweis", symbol:"X")
+<div style="max-width:850px; margin: 10px 40px;padding:0px;">
+ <div style="background-color:#dfdfdf; border: solid 1px #010101; padding:3px;">{{$symbol$-image.svg}}&nbsp;<b style="vertical-align:super;"> $titel$</b></div>
+ <div style="border: solid 1px #010101;border-top:none; padding: 8px; white-space:pre-wrap;">$textbox$</div>
+</div>
+
+\end

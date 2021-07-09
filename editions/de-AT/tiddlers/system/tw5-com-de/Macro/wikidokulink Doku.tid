@@ -1,0 +1,19 @@
+caption: wikidokulink Doku
+created: 20201119071028068
+creator: FBB
+modified: 20210708201421667
+modifier: FBB
+tags: $:/tags/MacroDoku
+title: $:/editions/tw5.com/de/Macro/wikidokulink Doku
+type: text/vnd.tiddlywiki
+
+!! Code
+
+<$codeblock code={{$:/editions/tw5.com/de/Macro/wikidokulink Macro}} />
+
+!! Aufruf
+
+`<<wikidokulink "Tiddler-Name">>`
+
+;Angezeigt als:
+:<<wikidokulink "Tiddler-Name">>
