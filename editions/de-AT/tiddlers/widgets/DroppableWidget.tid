@@ -1,6 +1,6 @@
 created: 20200924201850463
 creator: FBB
-modified: 20210602202533693
+modified: 20210709183628894
 modifier: FBB
 tags: Widgets
 title: DroppableWidget
@@ -15,7 +15,7 @@ Das <<.wid1 "Droppable">>-Widget erzeugt ein DOM-Element, auf das gezogene Eleme
 |actions |Aktionen, die ausgeführt werden, sobald Elemente fallengelassen werden |
 |class |Optional: CSS-Klassen, die dem verschiebbaren Element zugewiesen werden. Die Klasse `tc-droppable` wird automatisch hinzugefügt, und die Klasse `tc-dragover` wird angewendet, während ein Element über das ablegbare Element gezogen wird. |
 |tag |Optional: Tag, um die Vorgabe eines "div"-Elements zu überschreiben, wenn das Widget im Blockmodus gerendert wird, oder eines "span"-Elements, wenn es im Inline-Modus gerendert wird |
-|enable |<<.fromVersion "5.1.22">> Optional: Optionaler Wert "no", um die droppbare Funktionalität zu deaktivieren (Standardwert ist "yes") |
+|enable |<<.from-version-de "5.1.22">> Optional: Optionaler Wert "no", um die droppbare Funktionalität zu deaktivieren (Standardwert ist "yes") |
 
 Innerhalb der <<.param actions>>-Zeichenfolge gibt es zwei Variablen, die durch das <<.wid1 "Droppable">>-Widget erzeugt werden:
 
@@ -24,7 +24,7 @@ Innerhalb der <<.param actions>>-Zeichenfolge gibt es zwei Variablen, die durch 
 
 Wenn mehrere Elemente fallengelassen werden, werden die Aktionen wiederholt ausgeführt, einmal für jedes fallengelassene Element.
 
-<<.tipMacro """Beachte, dass die Variable [[actionTiddler||actionTiddler Variable]] einen einzelnen, nicht zitierten Titel enthält. Dies ist anders als das DraggableWidget, das dieselbe Variable verwendet, um eine zitierte Titelliste zu übergeben.""" "Hinweis">>
+<<.note-de """Beachte, dass die Variable [[actionTiddler||actionTiddler Variable]] einen einzelnen, nicht zitierten Titel enthält. Dies ist anders als das DraggableWidget, das dieselbe Variable verwendet, um eine zitierte Titelliste zu übergeben.""" "" "" "#758bff" "#5555ff">>
 
 !! Beispiel
 

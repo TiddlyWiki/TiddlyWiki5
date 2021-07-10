@@ -1,6 +1,6 @@
 created: 20200526182828742
 creator: FBB
-modified: 20210519132101516
+modified: 20210709175254324
 modifier: FBB
 tags: Plugins [[TiddlyWiki mit Node.js]]
 title: Installieren eines Plugins aus der Plugin-Bibliothek
@@ -30,7 +30,7 @@ Befolgen Sie diese Anweisungen, wenn Sie TiddlyWiki mit Node.js verwenden.
 
 Identifiziere das Plugin, welches du installieren möchtest, über die Registerkarte Plugins des [[Control-Panels|$:/ControlPanel]], wie im Abschnitt ''"Standalone" Konfiguration'' bis Punkt ''6''' beschrieben. Plugins werden durch ihren Typ (d.h. Sprache, Thema oder Plugin) dem Herausgeber und den Namen identifiziert.
 
-<<.hinweisMacro "Das Plugin darf nicht vom ''Control-Panel'' aus installiert werden! <b/>Alle Plugins werden über [[Node.js]] und den zugrundeliegenden Mechanismen eingebunden." "Achtung" "warn" >>
+<<.warn-de "Das Plugin darf nicht vom ''Control-Panel'' aus installiert werden! <b/>Alle Plugins werden über [[Node.js]] und den zugrundeliegenden Mechanismen eingebunden." "Achtung"  >>
 
 # Nach dem identifizieren des Plugins, beende die laufenden Serverinstanz.
 # Öffne die `tiddlywiki.info`-Datei (ist JSON-Format) und suche den Abschnitt Plugins, Themen oder Sprachen (siehe Beispiel-Code unten)

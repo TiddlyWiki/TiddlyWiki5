@@ -1,6 +1,6 @@
 created: 20200525184141053
 creator: FBB
-modified: 20210603202410818
+modified: 20210709175916723
 modifier: FBB
 tags: Konzept InhaltsVerzeichnis
 title: Plugins
@@ -14,7 +14,7 @@ Intern sind Plugins ein Bündel von Tiddlern, die zu einem einzigen Tiddler geb�
 
 Plugins können JavaScript-Module, Stylesheets und Vorlagen enthalten. Plugins können auch verwendet werden, um gewöhnlichen Text, Bilder oder andere Inhalte einzubinden.
 
-<<.hinweisMacro "Es gibt ein Plugin namens $:/core, das den Kerncode (Core) von ~TiddlyWiki enthält. Es ist immer vorhanden, und es ist die Quelle der Standard-[[ShadowTiddler]]. Man kann die Details dazu auf dem Control-Panel auf der Unter-Registerkarte Plugins sehen." "Hinweis" "note">>
+<<.tip-de "Es gibt ein Plugin namens $:/core, das den Kerncode (Core) von ~TiddlyWiki enthält. Es ist immer vorhanden, und es ist die Quelle der Standard-[[ShadowTiddler]]. Man kann die Details dazu auf dem Control-Panel auf der Unter-Registerkarte Plugins sehen." "Hinweis" "note-image.svg" "" "#bc0000">>
 
 <<list-links "[tag[Plugins]]">>
 

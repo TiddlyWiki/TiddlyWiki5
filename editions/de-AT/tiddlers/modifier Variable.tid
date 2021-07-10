@@ -1,6 +1,6 @@
 created: 20200909200040209
 creator: FBB
-modified: 20210519132101664
+modified: 20210709175723112
 modifier: FBB
 tags: [[Core Variablen]] Variablen
 title: modifier Variable
@@ -30,7 +30,7 @@ Die Variable enthält eine Zeichenfolge, anhand dieser werden die Tasten identif
 
 <br/>
 
-<<.tipMacro "Einige Betriebssysteme können das Event der ''Meta''-Taste abfangen, so dass diese nie erkannt werden kann." "Hinweis" "" "#ccaaff">>
+<<.note-de "Einige Betriebssysteme können das Event der ''Meta''-Taste abfangen, so dass diese nie erkannt werden kann.">>
 
 Mit diesem Button kannst du die Tasten ausprobieren:
 

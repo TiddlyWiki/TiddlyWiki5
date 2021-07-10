@@ -1,7 +1,7 @@
 created: 20210706121244635
 creator: FBB
 description: spezielles Makros für die de-AT Dokumentation
-modified: 20210706121925409
+modified: 20210709162435761
 modifier: FBB
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/de/Macro/doc-macros
@@ -9,6 +9,8 @@ type: text/vnd.tiddlywiki
 
 \define .tid(_) <code class="doc-tiddler">$_$</code>
 \define .tag2(_) <span class="doc-tag">{{$_$||$:/core/ui/TagTemplate}}</span>
+
+\define .code(_) <code class="doc_code">$_$</code>
 
 \define .vlink(_) <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#$_$ Variable"><code class="doc-var">$_$</code></a>
 \define .mlink(_) <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#$_$ Makro"><code class="doc-var">$_$</code></a>
@@ -20,9 +22,5 @@ type: text/vnd.tiddlywiki
 \define .mark(_) <mark>$_$</mark>
 \define .bmark(_) <mark class="bmark">$_$</mark>
 \define .hr() <br/><hr style="border:solid #acacac 1px;" />
-
-\define .tip2(_,_2) <div class="doc-icon-block"><div><b>$_2$</b></div><div class="doc-block-icon">{{$:/core/images/tip}}</div> $_$</div><br/>
-
-\define .fromVersion( version:"" ) <span style="color: #fff;border: solid 1px #fff; border-radius:20px; background-color:#a8a6a6;padding: 0 5px;font-size: 0.8em">Neu ab: <b>$version$</b></span>
 
 <$codeblock code={{!!text}} />

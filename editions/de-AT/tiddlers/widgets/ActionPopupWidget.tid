@@ -1,6 +1,6 @@
 created: 20210421204736552
 creator: FBB
-modified: 20210603201509902
+modified: 20210710183940686
 modifier: FBB
 tags: Widgets
 title: ActionPopupWidget
@@ -14,7 +14,7 @@ Das <<.wid2 "ActionPopup" "Action-Popup">>-Widget ist ein Aktions-Widget, das di
 |$state |Der Titel des Status-Tiddlers für das Popup |
 |$coords |Optionale Koordinaten für den Punkt, auf den das Popup positioniert wird. Wird im Format `(x,y,w,h)` übergeben. |
 
-<<.from-version "5.1.23">> Wenn das Attribut <<.param "$coords">> fehlt oder leer ist, werden alle Popups abgebrochen.
+<<.from-version-de "5.1.23">> Wenn das Attribut <<.param "$coords">> fehlt oder leer ist, werden alle Popups abgebrochen.
 
 ! Beispiele
 

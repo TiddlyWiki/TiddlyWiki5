@@ -1,6 +1,6 @@
 created: 20201026204228437
 creator: FBB
-modified: 20210519132102280
+modified: 20210709182909044
 modifier: FBB
 tags: [[Core Variablen]] [[Konfigurations Variablen]] Variablen
 title: tv-wikilink-template Variable
@@ -8,8 +8,8 @@ type: text/vnd.tiddlywiki
 
 Die Variable <<.var "tv-wikilink-template">> steuert den Wert des <<.attr href>>-Attributs auf dem [[HTML|HyperText Markup Language]] `a`-Element, das vom <<.wid Link>>-Widget generiert wird. Die Variable <<.vlink "tv-filter-export-link">> hat, falls definiert, Vorrang vor der <<.var "tv-wikilink-template">> Variable.
 
-<<.hinweisMacro "Diese Variable hat keine nützliche Wirkung, wenn ~TiddlyWiki in einem Browser ausgeführt wird, da das `href`-Attribut dort ignoriert wird - Links zwischen Tiddlern werden stattdessen von [[JavaScript]] ausgeführt. Die Variable kommt ins Spiel, wenn man die [[Node.js Konfiguration|TiddlyWiki mit Node.js]] verwendet, um eine statische Version des Wikis zu erzeugen.
-" "" "note">>
+<<.note-de "Diese Variable hat keine nützliche Wirkung, wenn ~TiddlyWiki in einem Browser ausgeführt wird, da das `href`-Attribut dort ignoriert wird - Links zwischen Tiddlern werden stattdessen von [[JavaScript]] ausgeführt. Die Variable kommt ins Spiel, wenn man die [[Node.js Konfiguration|TiddlyWiki mit Node.js]] verwendet, um eine statische Version des Wikis zu erzeugen.
+">>
 
 Die Variable wird behandelt, als wäre sie ein [[Makro]] mit den folgenden Parametern:
 

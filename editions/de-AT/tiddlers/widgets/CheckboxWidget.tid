@@ -1,6 +1,6 @@
 created: 20210413193435671
 creator: FBB
-modified: 20210519132101132
+modified: 20210710184200073
 modifier: FBB
 status: offen
 tags: Widgets
@@ -21,15 +21,15 @@ Der Inhalt des <<.wid2 "CheckBox" "checkbox">>-Widgets wird innerhalb eines HTML
 |tag |Der Name des Tags, an den das Kontrollkästchen gebunden ist. Ist der Tag vorhanden, ist das Kontrollkästchen aktiv. |
 |invertTag |Wenn auf <<.value "yes">> gesetzt, wird die Tag-Bindungslogik umgedreht. Das Fehlen des Tags aktiviert jetzt das Kontrollkästchen.  |
 |field |Der Name des Feldes, an das das Kontrollkästchen gebunden ist.  |
-|index|<<.from-version "5.1.14">> Der Index eines [[Daten-Tiddlers|Daten-Tiddler]], an den das Kontrollkästchen gebunden ist.<<.tipMacro "Den Tiddler //korrekt// einstellen!" " ">>|
+|index|<<.from-version-de "5.1.14">> Der Index eines [[Daten-Tiddlers|Daten-Tiddler]], an den das Kontrollkästchen gebunden ist.<<.tip-de "Den Tiddler //korrekt// einstellen!" " ">>|
 |checked |Der Wert des Feldes, das dem aktivierten Kontrollkästchen entspricht. |
 |unchecked |Der Wert des Feldes, das dem __nicht__ aktivierten Kontrollkästchen entspricht |
 |default |Der Standardwert wenn das Feld nicht definiert ist. |
 |class |Die Klasse, welche dem Label-Element zugewiesen wird |
-|actions |<<.from-version "5.1.14">> Ein String, der <<.wid Action>>-Widgets enthält. Die Widgets werden ausgelöst, wenn sich der Status des Kontrollkästchens ändert (markiert oder nicht markiert) |
-|uncheckactions |<<.from-version "5.1.16">> Ein String, der <<.wid Action>>-Widgets enthält. Die Widgets werden ausgelöst, wenn der Status des Kontrollkästchens sich auf ''unchecked'' ändert. |
-|checkactions |<<.from-version "5.1.20">> Ein String, der <<.wid Action>>-Widgets enthält. Die Widgets werden ausgelöst, wenn der Status des Kontrollkästchens sich auf ''checked'' ändert |
-|disabled|<<.from-version "5.1.23">> Optional, deaktiviert das Kontrollkästchen, wenn es auf <<.value "yes">> gesetzt ist. Standardmäßig ist <<.value "no">> eingestellt. |
+|actions |<<.from-version-de "5.1.14">> Ein String, der <<.wid Action>>-Widgets enthält. Die Widgets werden ausgelöst, wenn sich der Status des Kontrollkästchens ändert (markiert oder nicht markiert) |
+|uncheckactions |<<.from-version-de "5.1.16">> Ein String, der <<.wid Action>>-Widgets enthält. Die Widgets werden ausgelöst, wenn der Status des Kontrollkästchens sich auf ''unchecked'' ändert. |
+|checkactions |<<.from-version-de "5.1.20">> Ein String, der <<.wid Action>>-Widgets enthält. Die Widgets werden ausgelöst, wenn der Status des Kontrollkästchens sich auf ''checked'' ändert |
+|disabled|<<.from-version-de "5.1.23">> Optional, deaktiviert das Kontrollkästchen, wenn es auf <<.value "yes">> gesetzt ist. Standardmäßig ist <<.value "no">> eingestellt. |
 
 !! Tag Modus
 

@@ -1,6 +1,6 @@
 created: 20201124210132107
 creator: FBB
-modified: 20210708202934336
+modified: 20210709174332473
 modifier: FBB
 tags: $:/tags/Stylesheet
 title: $:/editions/tw5.com/de/stylesheet
@@ -95,17 +95,11 @@ line-height: 1.5;
 vertical-align: text-bottom;
 }
 
-.doc-from-version{
-color: #fff;
-fill: #ffffff; 
-border: solid 1px #fff;
-border-radius:20px; 
-background-color:#a8a6a6;
-padding: 0px 5px;
-font-size: 0.8em
+.doc-from-version-de{
+background-color:#a8a6a6 !important;
 }
 
-.doc-deprecated-version svg, .doc-from-version svg{
+.doc-deprecated-version svg, .doc-from-version-de svg{
 width: 1em;
 height: 1em;
 vertical-align: middle;

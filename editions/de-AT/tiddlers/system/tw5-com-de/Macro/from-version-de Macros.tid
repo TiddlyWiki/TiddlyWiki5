@@ -1,6 +1,6 @@
 created: 20200605200513281
 creator: FBB
-modified: 20210624213332865
+modified: 20210709174119630
 modifier: FBB
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/de/Macro/from-version-de Macros
@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define .from-version-de(version)
-<span class="doc-from-version">{{$:/core/images/warning}} Neu ab: <b>$version$</b></span>
+<span class="doc-from-version doc-from-version-de" >{{$:/core/images/warning}} Neu ab: <b>$version$</b></span>
 \end
 
 \define .deprecated-since-de(version, superseded:"Setze einen TODO-Link")

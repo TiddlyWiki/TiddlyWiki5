@@ -1,6 +1,6 @@
 created: 20140908144020397
 creator: pmario
-modified: 20210519132100702
+modified: 20210709182553768
 modifier: FBB
 tags: howto Lexikon
 title: TiddlyWiki mit Node.js
@@ -12,7 +12,7 @@ Das Ausführen von TiddlyWiki auf [[Node.js]] bringt mehrere entscheidende Vorte
 * Einzelne Tiddler werden in einzelnen Dateien gespeichert, welche du nach Belieben organisieren kannst.
 * Die Möglichkeit, zahlreiche Wikis zu erstellen, welche aus verschiedenen Kombinationen gemeinsamer und individueller Inhalte bestehen.
 
-<<.hinweisMacro "Beachten Sie, dass TiddlyWiki unter Node.js während der Laufzeit keine direkten Änderungen der Tiddler-Dateien über das Dateisystem unterstützt." "Achtung" "warn">>
+<<.warn-de "Beachte, dass TiddlyWiki unter Node.js während der Laufzeit keine direkten Änderungen der Tiddler-Dateien über das Dateisystem unterstützt." "Achtung">>
 
 Weiter Informationen sind hier zu finden:
 
@@ -20,4 +20,4 @@ Weiter Informationen sind hier zu finden:
 
 <<.hr>>
 
-siehe auch: [ext[https://tiddlywiki.com/#TiddlyWiki on Node.js]]
+Siehe auch: <<wikidokulink "TiddlyWiki on Node.js">> (englisch)

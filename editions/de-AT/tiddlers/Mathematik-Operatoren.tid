@@ -1,12 +1,12 @@
 created: 20200629184937631
 creator: FBB
-modified: 20210519132101655
+modified: 20210709175503764
 modifier: FBB
 tags: Filter
 title: Mathematik-Operatoren
 type: text/vnd.tiddlywiki
 
-<<.fromVersion 5.1.20>> Die mathematischen Filteroperatoren ermöglichen die Durchführung numerischer Berechnungen innerhalb von Filtern.
+<<.from-version-de 5.1.20>> Die mathematischen Filteroperatoren ermöglichen die Durchführung numerischer Berechnungen innerhalb von Filtern.
 
 Die Mathematik-Operatoren interpretieren ihre Argumente als Zahlen nach den folgenden Regeln:
 
@@ -14,7 +14,7 @@ Die Mathematik-Operatoren interpretieren ihre Argumente als Zahlen nach den folg
 * Wenn das Argument nicht als Zahl interpretiert werden kann, wird der Wert `0` verwendet (z.B. wird `foo` als die Zahl `0` interpretiert).
 * Die speziellen Werte `Infinity` und `-Infinity` können verwendet werden, um eine positive bzw. negative unendliche Menge darzustellen.
 
-<<.hinweisMacro "Einige Filteroperatoren entfernen doppelte Elemente, die bei Verwendung der Mathematikoperatoren zu unerwarteten Ergebnissen führen könnten. " "Wichtig!">>
+<<.note-de "Einige Filteroperatoren entfernen doppelte Elemente, die bei Verwendung der Mathematikoperatoren zu unerwarteten Ergebnissen führen könnten. " "Wichtig!">>
 
 Die mathematischen Operatoren gibt es in drei verschiedene Formen:
 
@@ -57,8 +57,6 @@ Die durchschnittliche Länge von <$text text=<<number-of-tiddlers>>/> Tiddlern m
 
 <<list-links "[tag[Mathematik-Operator]]">>
 
-"""
+<<.hr>>
 
-"""
-
-LInk: [ext[https://tiddlywiki.com/#Mathematics Operators]]
+Siehe auch: <<wikidokulink "Mathematics Operators">> (englisch)

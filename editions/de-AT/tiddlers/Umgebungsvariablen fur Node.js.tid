@@ -1,6 +1,6 @@
 created: 20200519201531710
 creator: FBB
-modified: 20210519132102298
+modified: 20210709182944539
 modifier: FBB
 tags: [[TiddlyWiki mit Node.js]]
 title: Umgebungsvariablen für Node.js
@@ -13,7 +13,7 @@ TiddlyWiki unter Node.js unterstützt die folgenden Umgebungsvariablen zur Angab
 * `TIDDLYWIKI_LANGUAGE_PATH` - Suchpfad für [[Sprachen]]
 * `TIDDLYWIKI_EDITION_PATH` - Suchpfad für Editionen (wird verwendet von  InitCommand)
 
-<<.hinweisMacro "Das Trennzeichen kann je nach Betriebssystem variieren! <br/>Während unter Windows ein Semikolon `;` verwendet wird, nutzt Linux einen Doppelpunkt `:`." "Hinweis" "note">>
+<<.note-de "Das Trennzeichen kann je nach Betriebssystem variieren! <br/>Während unter Windows ein Semikolon `;` verwendet wird, nutzt Linux einen Doppelpunkt `:`.">>
 
 Die zusätzlichen Pfade sollten jeweils auf Ordner verweisen, die so strukturiert sind wie die Verzeichnisse im ~TiddlyWiki5 GitHub-Repository:
 

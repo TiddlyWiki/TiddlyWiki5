@@ -1,6 +1,6 @@
 created: 20210428174720056
 creator: FBB
-modified: 20210519132101136
+modified: 20210709163220163
 modifier: FBB
 tags: Widgets
 title: CodeBlockWidget
@@ -26,7 +26,7 @@ Das Attribut <<.attr "language">> aktzeptiert einen der folgenden Werte:
 
 Nachfolgend ein Beispiel für das Einbetten eines Tiddlers als Codeblock:
 
-<$macrocall $name='wikitext-example-without-html' src='<$codeblock code={{$:/_fbb/Macro/halloWelt}} />' />
+<$macrocall $name='wikitext-example-without-html' src='<$codeblock code={{$:/editions/tw5.com/de/Macro/halloWelt}} />' />
 
 Hier ein weiteres Beispiel mit einer angegebenen Sprache:
 
@@ -34,6 +34,6 @@ Hier ein weiteres Beispiel mit einer angegebenen Sprache:
 src='<$codeblock code="SELECT * FROM users WHERE deleted = false" language="sql" />' />
 
 
-<<.tipMacro """Das Plugin [[Highlight Plugin]] ist nicht installiert und kann deshalb die Syntax nicht hervorheben.""" "Hinweis" >>
+<<.note-de """Wenn das Plugin [[Highlight Plugin]] nicht installiert ist, kann die Syntax nicht hervorgehoben werden.""" "Hinweis" "" "" "#b90000">>
 
 Siehe: <<wikidokulink "CodeBlockWidget">> (englisch)

@@ -1,6 +1,6 @@
 created: 20210119214824777
 creator: FBB
-modified: 20210603201331746
+modified: 20210710185328030
 modifier: FBB
 tags: Widgets
 title: ViewWidget
@@ -19,7 +19,7 @@ Wird das <<.wid1 View>>-Widget ohne die Übergabe eines Parameters aufgerufen `<
 |format |Das Format für die Anzeige des Feldes (siehe unten Abschnitt ''Format'') |
 |template |Optionale Template-Zeichenfolge. Wird verwendet, wenn das Attribut <<.attr format>> auf <<.value "date">> gesetzt ist |
 |subtiddler |Optionaler Titel des Sub-Tiddler, wenn der Ziel-Tiddler ein [[Plugin|Plugins]] ist (siehe unten) |
-|mode |<<.from-version "5.1.15">> Optionaler [[Transklusions|Transklusion]]- bzw. Parsing-Modus für wikifizierte Formate. Der Wert kann <<.value "inline">> oder <<.value "block">> (default) sein |
+|mode |<<.from-version-de "5.1.15">> Optionaler [[Transklusions|Transklusion]]- bzw. Parsing-Modus für wikifizierte Formate. Der Wert kann <<.value "inline">> oder <<.value "block">> (default) sein |
 
 ! Format
 

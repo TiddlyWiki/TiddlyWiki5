@@ -1,7 +1,7 @@
 chapter: 3
 created: 20210503193802506
 creator: FBB
-modified: 20210519132102216
+modified: 20210710183435129
 modifier: FBB
 tags: [[Transklusion in WikiText]]
 title: Transklusion - grundlegende Verwendung
@@ -30,9 +30,7 @@ Der aktuelle Tiddler {{!!title}} wurde zuletzt geändert am {{!!modified}}
 
 ! Rekursionsfehler ^^(Recursion Errors)^^
 
-<<.tipMacro """
-Die Verwendung von `{{!!text}}` oder `{{}}` verursacht einen rekursiver Fehler!
-""" "Achtung" "warn-image.svg" "#ff0000">>
+<<.alert-de """Die Verwendung von `{{!!text}}` oder `{{}}` verursacht einen rekursiver Fehler!""">>
 
 Dieser Transklusions-Fehler erzeugt das <<.wid "Transclude">>-Widget, weil es keinen Sinn macht, den Inhalt des Textfeldes vom aktuellen Tiddler in sich selbst einzubinden. Wenn die Fehlermeldung erscheint wird versucht etwas direkt oder indirekt in sich selbst zu inkludieren. Wenn man aus dem Beispiel oben, den Tiddler EinsA1 in Tiddler EinsB einbindet und anschließend Tiddler EinsB in Tiddler EinsA, wird es quasi eine endlose Rekursion geben und das Widget gibt den Fehler aus.
 

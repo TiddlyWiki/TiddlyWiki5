@@ -1,6 +1,6 @@
 created: 20200615212415719
 creator: FBB
-modified: 20210519132101254
+modified: 20210709183652743
 modifier: FBB
 tags: Filter-Syntax
 title: Filter-Ausdruck
@@ -19,10 +19,10 @@ Ein Filter-Ausdruck ist die äußerste Ebene der [[Filter-Syntax]]. Er besteht a
 !!! Wenn ein Durchlauf stattgefunden hat:
 
 * ohne Präfix -- An die Ausgabe des Filters werden die Ausgabetitel [[vorrangig angehängt|Dominantes Anhängen]]
-*  `=` Präfix <<.fromVersion 5.1.20>> -- Ausgabe-Titel werden ohne Deduplizierung an die Ausgabe des Filters angehängt.
+*  `=` Präfix <<.from-version-de 5.1.20>> -- Ausgabe-Titel werden ohne Deduplizierung an die Ausgabe des Filters angehängt.
 * `-` Präfix -- Die Ausgabe-Titel werden aus der Ausgabe des Filters entfernt, falls solche Tiddler existieren.
 * `+` Präfix -- Empfängt die Filterausgabe so weit wie seine Eingabe; die Ausgabe ersetzt dann alle bisherigen Filterausgaben und bildet die Eingabe für den nächsten Lauf.
-* `~` Präfix <<.fromVersion 5.1.18>> -- Wenn die bisherige Filterausgabe eine leere Liste ist, werden die Ausgabetitel des Laufs [[vorrangig|Dominantes Anhängen]] an die Ausgabe des Filters angehängt. Wenn die bisherige Ausgabe des Filters keine leere Liste ist, wird der Lauf ignoriert.
+* `~` Präfix <<.from-version-de 5.1.18>> -- Wenn die bisherige Filterausgabe eine leere Liste ist, werden die Ausgabetitel des Laufs [[vorrangig|Dominantes Anhängen]] an die Ausgabe des Filters angehängt. Wenn die bisherige Ausgabe des Filters keine leere Liste ist, wird der Lauf ignoriert.
 
 !!! Nach technischen / logischen Begriffen:
 

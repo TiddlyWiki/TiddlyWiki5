@@ -1,5 +1,5 @@
 created: 20210708113541496
-modified: 20210708193144290
+modified: 20210709154958184
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/de/Macro/tipMacros
 type: text/vnd.tiddlywiki
@@ -13,17 +13,17 @@ type: text/vnd.tiddlywiki
 \end
 
 \define .tip-de(textbox:"", title:"Tipp" , symbol:"tip-image.svg", color:"#758bff", symfill:"#758bff")
-<<.tipMacro textbox:"$textbox$" title:"$title$" symbol:"$symbol$" color:"$color$" symfill:"$symfill$">>
+<<.tipMacro textbox:"""$textbox$""" title:"$title$" symbol:"$symbol$" color:"$color$" symfill:"$symfill$">>
 \end
 
 \define .note-de(textbox:"", title:"Hinweis" , symbol:"note-image.svg",color:"#cecece", symfill:"#828282" )
-<<.tipMacro textbox:"$textbox$" title:"$title$" symbol:"$symbol$" color:"$color$" symfill:"$symfill$" >>
+<<.tipMacro textbox:"""$textbox$""" title:"$title$" symbol:"$symbol$" color:"$color$" symfill:"$symfill$" >>
 \end
 
 \define .warn-de(textbox:"", title:"Warnung", symbol:"warn-image.svg", color:"#f7f320", symfill:"#828282")
-<<.tipMacro textbox:"$textbox$" title:"$title$" symbol:"$symbol$" color:"$color$" symfill:"$symfill$" >>
+<<.tipMacro textbox:"""$textbox$""" title:"$title$" symbol:"$symbol$" color:"$color$" symfill:"$symfill$" >>
 \end
 
 \define .alert-de(textbox:"", title:"Achtung", symbol:"alert-image.svg", color:"#ff0000", symfill:"#ff0000")
-<<.tipMacro textbox:"$textbox$" title:"$title$" symbol:"$symbol$" color:"$color$" symfill:"$symfill$">>
+<<.tipMacro textbox:"""$textbox$""" title:"$title$" symbol:"$symbol$" color:"$color$" symfill:"$symfill$">>
 \end

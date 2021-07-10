@@ -1,6 +1,6 @@
 created: 20200525191624711
 creator: FBB
-modified: 20210519132101647
+modified: 20210709184144348
 modifier: FBB
 tags: Plugins
 title: Manuelle Installation eines Plugins
@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 # Ziehe den Link [[$:/plugins/tiddlywiki/beispiel]] auf das Browser-Fenster mit deinem ~TiddlyWiki
 # Speichere dein ~TiddlyWiki  (<<.icon $:/core/images/save-button>>)
 # Wenn am oberen Rand des Fensters ein gelber Warnbalken erscheint. Aktualisiere das Fenster, damit ~TiddlyWiki die Installation des [[Plugins]] abschließen kann.
-#* <<.from-version "5.1.22">>: Es ist nicht mehr notwendig, ~TiddlyWiki zu aktualisieren, wenn Plugins gelöscht werden, welche das dynamische Laden unterstützen. Siehe [[Plugin-Mechanismus]] für weitere Details.
+#* <<.from-version-de "5.1.22">>: Es ist nicht mehr notwendig, ~TiddlyWiki zu aktualisieren, wenn Plugins gelöscht werden, welche das dynamische Laden unterstützen. Siehe [[Plugin-Mechanismus]] für weitere Details.
 # Das Plugin sollte nun zur Verfügung stehen und kann verwendet werden.
 
 

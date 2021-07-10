@@ -1,6 +1,6 @@
 created: 20200525203817519
 creator: FBB
-modified: 20210519132101175
+modified: 20210709183600682
 modifier: FBB
 tags: Plugins [[TiddlyWiki mit Node.js]]
 title: Deinstallieren eines Plugins
@@ -17,7 +17,7 @@ Folgen Sie diesen Anweisungen, wenn Sie ~TiddlyWiki als einzelne HTML-Datei verw
 # Klicke auf den "''Mehr''"-Button und dann auf den Eintrag ''löschen''.
 # Speichere das ~TiddlyWiki
 # Wenn am oberen Rand des Fensters ein gelber Warnbalken erscheint. Aktualisiere das Fenster, damit ~TiddlyWiki die Installation des [[Plugins]] abschließen kann.
-#* <<.fromVersion "5.1.22">>: Es ist nicht mehr notwendig, ~TiddlyWiki zu aktualisieren, wenn Plugins gelöscht werden, welche das dynamische Laden unterstützen. Siehe [[Plugin-Mechanismus]] für weitere Details.
+#* <<.from-version-de "5.1.22">>: Es ist nicht mehr notwendig, ~TiddlyWiki zu aktualisieren, wenn Plugins gelöscht werden, welche das dynamische Laden unterstützen. Siehe [[Plugin-Mechanismus]] für weitere Details.
 # Das Plugin sollte nicht mehr aktiv oder verfügbar sein.
 
 ! "Client-Server" Konfiguration

@@ -1,13 +1,13 @@
 caption: fields
 created: 20200623210722250
 creator: FBB
-modified: 20210519165120649
+modified: 20210709184341377
 modifier: FBB
 op-input: eine [[Titelselektion]]
 op-output: alle Feldnamen, die in den Eingabe-Tiddlern enthalten sind
-op-parameter: <<.fromVersion "5.1.22">> optional: eine Liste der Feldnamen
+op-parameter: <<.from-version-de "5.1.22">> optional: eine Liste der Feldnamen
 op-purpose: alle Feldnamen der Eingabe-Titel auswählen
-op-suffix: <<.fromVersion "5.1.22">> optional: `include`, `exclude` Parameterliste
+op-suffix: <<.from-version-de "5.1.22">> optional: `include`, `exclude` Parameterliste
 tags: Filter-Operator Feld-Operator
 title: fields Operator
 type: text/vnd.tiddlywiki
@@ -16,4 +16,6 @@ Jeder Eingabe-Titel wird der Reihe nach bearbeitet. Seine Liste von Feldnamen wi
 
 Wenn das `include`-Suffix verwendet wird, werden Felder nur dann einbezogen, wenn sie existieren. Dabei spielt es keine Rolle, ob Felder einen Wert haben.
 
-<<.from-version "5.1.22">>: Das `exclude`-Suffix dient der Vereinfachung, da man einen zweiten Filterlauf verwenden könnte. Weitere Informationen finden Sie in den [ext[Beispielen.|https://tiddlywiki.com/#fields%20Operator%20(Examples)]]
+<<.from-version-de "5.1.22">>: Das `exclude`-Suffix dient der Vereinfachung, da man einen zweiten Filterlauf verwenden könnte. Weitere Informationen finden man in den [ext[Beispielen.|https://tiddlywiki.com/#fields%20Operator%20(Examples)]]
+
+Siehe: <<wikidokulink "fields Operator">> (englisch)

@@ -1,7 +1,7 @@
 caption: is
 created: 20200615184053587
 creator: FBB
-modified: 20210519165018727
+modified: 20210709183831509
 modifier: FBB
 op-input: eine [[Titelselektion]]
 op-neg-output: die Eingabe-Tiddler, die ''nicht'' zur Kategorie //''{{!!op-parameter-name}}''//  gehören
@@ -25,10 +25,10 @@ Der Parameter ''//{{!!op-parameter-name}}//'' entspricht einer der folgenden Bas
 |^`system` |ist ein [[System-Tiddler]], d.h. sein Titel beginnt mit `$:/` |
 |^`tag` |ist als Tag in Verwendung |
 |^`tiddler` |existiert als Nicht-Schatten-Tiddler |
-|^`variable` |<<.fromVersion "5.1.20">> existiert als Variable (unabhängig davon, ob diese Variable einen nicht-leeren Wert hat oder nicht) |
-|^`blank` |<<.fromVersion "5.1.20">> ist leer (d.h. ist eine Zeichenkette der Länge Null) |
+|^`variable` |<<.from-version-de "5.1.20">> existiert als Variable (unabhängig davon, ob diese Variable einen nicht-leeren Wert hat oder nicht) |
+|^`blank` |<<.from-version-de "5.1.20">> ist leer (d.h. ist eine Zeichenkette der Länge Null) |
 
-Wenn ''//{{!!op-parameter-name}}//'' etwas anderes ist, wird eine Fehlermeldung zurückgegeben. <<.fromVersion "5.1.14">> wenn ''//{{!!op-parameter-name}}//'' leer ist, wird die Ausgabe unverändert durchgereicht (in früheren Versionen wurde eine Fehlermeldung zurückgegeben).
+Wenn ''//{{!!op-parameter-name}}//'' etwas anderes ist, wird eine Fehlermeldung zurückgegeben. <<.from-version-de "5.1.14">> wenn ''//{{!!op-parameter-name}}//'' leer ist, wird die Ausgabe unverändert durchgereicht (in früheren Versionen wurde eine Fehlermeldung zurückgegeben).
 
 `!is[tiddler]` ist ein Synonym für `is[missing]`, und umgekehrt.
 
