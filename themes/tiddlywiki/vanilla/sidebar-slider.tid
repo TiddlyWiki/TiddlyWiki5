@@ -58,12 +58,14 @@ tags: $:/tags/Stylesheet
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
+iframe {
+	pointer-events: none;
+}
+
 </$list>
 
 .tc-sidebar-scrollable {
-
-width: clamp({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}, calc(100% - ({{$:/state/sidebar-slider!!event-fromcatcher-posx}}px - {{$:/state/sidebar-slider!!slider-event-fromselected-posx}}px)), calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}}));
-
+	width: clamp({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}, calc(100% - ({{$:/state/sidebar-slider!!event-fromcatcher-posx}}px - {{$:/state/sidebar-slider!!slider-event-fromselected-posx}}px)), calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}}));
 }
 
 <$list filter="[{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]]">
