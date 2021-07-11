@@ -1,5 +1,5 @@
 created: 20210309133636211
-modified: 20210309133636211
+modified: 20210711171232457
 tags: Widgets
 title: MessageCatcherWidget
 type: text/vnd.tiddlywiki
@@ -15,9 +15,7 @@ The message catcher widget traps [[messages|Messages]] dispatched within its chi
 The content of the `<$messagecatcher>` widget is displayed normally.
 
 |!Attribute |!Description |
-|type |Name of the message be trapped, for example "tm-scroll" or "tm-navigate" |
-|actions |Action string to be invoked when a matching message is trapped |
-|//{any attributes starting with $}// |Each attribute name (excluding the $) specifies the name of a message, and the value specifies the action string to be invoked  |
+|//{any attributes starting with $}// |Each attribute name (excluding the $) specifies the name of a message, and the value specifies the action string to be invoked. For example `$tm-navigate=<<navigateActions>>`  |
 
 ! Variables
 
@@ -35,7 +33,7 @@ The message catcher widget
 <$action-log/>
 \end
 
-<$messagecatcher type="tm-navigate" actions=<<actions>>>
+<$messagecatcher $tm-navigate=<<actions>>>
 
 Click on [[this link]] to fire an action. See the browser JavaScript console for the output
 

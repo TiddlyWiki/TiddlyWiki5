@@ -63,9 +63,7 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 			);
 		}
 	}
-	// Add the main event handler
-	addEventHandler(this.getAttribute("type"),this.getAttribute("actions"));
-	// Add any other event handlers
+	// Add  event handlers
 	$tw.utils.each(this.attributes,function(value,key) {
 		if(key.charAt(0) === "$") {
 			addEventHandler(key.slice(1),value);
