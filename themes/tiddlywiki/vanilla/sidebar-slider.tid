@@ -19,6 +19,7 @@ tags: $:/tags/Stylesheet
 	width: 42px;
 	top: 0;
 	height: 100%;
+	cursor: col-resize;
 }
 
 <$list filter="[{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]]">
