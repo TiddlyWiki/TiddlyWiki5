@@ -1726,8 +1726,10 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/dom","tiddlerdeserializer",{
 		if(node) {
 			var type = (node.getAttribute && node.getAttribute("type")) || null;
 			if(type) {
+				// A new-style container with an explicit deserialization type
 				result = $tw.wiki.deserializeTiddlers(type,node.textContent);
 			} else {
+				// An old-style container of classic DIV-based tiddlers
 				for(t = 0; t < node.childNodes.length; t++) {
 					var childNode = node.childNodes[t],
 						tiddlers = extractTextTiddlers(childNode);
