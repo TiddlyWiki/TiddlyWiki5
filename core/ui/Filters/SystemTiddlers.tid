@@ -1,5 +1,5 @@
 title: $:/core/Filters/SystemTiddlers
 tags: $:/tags/Filter
-filter: [is[system]sort[title]]
+filter: [is[system]sort[title]] -$:/state/pointerdown
 description: {{$:/language/Filters/SystemTiddlers}}
 
