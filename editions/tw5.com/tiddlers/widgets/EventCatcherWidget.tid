@@ -34,7 +34,7 @@ The content of the `<$eventcatcher>` widget is displayed normally.
 |events |//(deprecated – see below)// Space separated list of JavaScript events to be trapped, for example "click" or "click dblclick" |
 |actions-* |//(deprecated – see below)// Action strings to be invoked when a matching event is trapped. Each event is mapped to an action attribute name of the form <code>actions-<em>event</em></code> where <code><em>event</em></code> represents the type of the event. For example: `actions-click` or `actions-dblclick` |
 
-<<.from-version "5.1.24">> Note that the attributes `events` and `actions-*` are no longer needed. Instead you can use attributes starting with $ where the attribute name (excluding the $) specifies the name of the event and the value specifies the action string to be invoked.
+<<.from-version "5.1.24">> Note that the attributes `events` and `actions-*` are no longer needed. Instead you can use attributes starting with $ where the attribute name (excluding the $) specifies the name of the event and the value specifies the action string to be invoked. If any attributes with the prefix $ are present then the `types` attribute is ignored
 
 ! Variables
 
@@ -89,4 +89,3 @@ And here
 
 </$eventcatcher>
 ```
-
