@@ -1,6 +1,6 @@
 caption: list
 created: 20131024141900000
-modified: 20210416175333981
+modified: 20210711122847337
 tags: Widgets Lists
 title: ListWidget
 type: text/vnd.tiddlywiki
@@ -91,10 +91,11 @@ The action of the list widget depends on the results of the filter combined with
 
 The optional `counter` attribute specifies the name of a variable to hold the 1-based numeric index of the current item in the list.
 
-Two additional variables are also set to indicate the first and last items in the list:
+Three additional variables are also set to indicate the first and last items in the list and the total number of items in the list:
 
 * `<counter-variable-name>-first` is set to `yes` for the first entry in the list, `no` for the others
 * `<counter-variable-name>-last` is set to `yes` for the last entry in the list, `no` for the others
+* `<counter-variable-name>-total` is set to the number of items in the list
 
 For example:
 
@@ -102,7 +103,7 @@ For example:
 ```
 <$list filter="[tag[About]sort[title]]" counter="counter">
 <div>
-<<counter>>: ''<$text text=<<currentTiddler>>/>'' (is first: <<counter-first>>, is last: <<counter-last>>)
+<<counter>> of <<counter-total>>: ''<$text text=<<currentTiddler>>/>'' (is first: <<counter-first>>, is last: <<counter-last>>)
 </div>
 </$list>
 ```
@@ -112,7 +113,7 @@ Displays as:
 <<<
 <$list filter="[tag[About]sort[title]]" counter="counter">
 <div>
-<<counter>>: ''<$text text=<<currentTiddler>>/>'' (is first: <<counter-first>>, is last: <<counter-last>>)
+<<counter>> of <<counter-total>>: ''<$text text=<<currentTiddler>>/>'' (is first: <<counter-first>>, is last: <<counter-last>>)
 </div>
 </$list>
 <<<

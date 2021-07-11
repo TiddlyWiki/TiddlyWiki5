@@ -135,6 +135,7 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 		parseTreeNode.counterName = this.counterName;
 		parseTreeNode.isFirst = index === 0;
 		parseTreeNode.isLast = index === this.list.length - 1;
+		parseTreeNode.counterTotal = this.list.length;
 	}
 	return parseTreeNode;
 };
@@ -341,6 +342,7 @@ ListItemWidget.prototype.execute = function() {
 		this.setVariable(this.parseTreeNode.counterName,this.parseTreeNode.counter);
 		this.setVariable(this.parseTreeNode.counterName + "-first",this.parseTreeNode.isFirst ? "yes" : "no");
 		this.setVariable(this.parseTreeNode.counterName + "-last",this.parseTreeNode.isLast ? "yes" : "no");
+		this.setVariable(this.parseTreeNode.counterName + "-total",this.parseTreeNode.counterTotal.toString());
 	}
 	// Construct the child widgets
 	this.makeChildWidgets();
