@@ -1,5 +1,5 @@
 created: 20201123113532200
-modified: 20210520162813234
+modified: 20210711165425543
 tags: Widgets
 title: EventCatcherWidget
 type: text/vnd.tiddlywiki
@@ -25,12 +25,16 @@ Use of the event catcher widget is beneficial when using large numbers of other 
 The content of the `<$eventcatcher>` widget is displayed normally.
 
 |!Attribute |!Description |
-|events |Space separated list of JavaScript events to be trapped, for example "click" or "click dblclick" |
+
 |selector |A CSS selector. Only events originating inside a DOM node with this selector will be trapped |
-|actions-* |Action strings to be invoked when a matching event is trapped. Each event is mapped to an action attribute name of the form <code>actions-<em>event</em></code> where <code><em>event</em></code> represents the type of the event. For example: `actions-click` or `actions-dblclick` |
+|//{any attributes starting with $}// |<<.from-version "5.1.24">> Each attribute name (excluding the $) specifies the name of an event, and the value specifies the action string to be invoked. For example: `$click=<<clickActions>>`  |
 |tag |Optional. The HTML element the widget creates to capture the events, defaults to:<br>» `span` when parsed in inline-mode<br>» `div` when parsed in block-mode |
 |class |Optional. A CSS class name (or names) to be assigned to the widget HTML element |
 |stopPropagation |<<.from-version "5.1.24">> Optional. Set to "always" to always stop event propagation even if there are no corresponding actions to invoke, "never" to never stop event propagation, or the default value "onaction" with which event propagation is only stopped if there are corresponding actions that are invoked. |
+|events |//(deprecated – see below)// Space separated list of JavaScript events to be trapped, for example "click" or "click dblclick" |
+|actions-* |//(deprecated – see below)// Action strings to be invoked when a matching event is trapped. Each event is mapped to an action attribute name of the form <code>actions-<em>event</em></code> where <code><em>event</em></code> represents the type of the event. For example: `actions-click` or `actions-dblclick` |
+
+<<.from-version "5.1.24">> Note that the attributes `events` and `actions-*` are no longer needed. Instead you can use attributes starting with $ where the attribute name (excluding the $) specifies the name of the event and the value specifies the action string to be invoked. If any attributes with the prefix $ are present then the `types` attribute is ignored.
 
 ! Variables
 
@@ -65,7 +69,7 @@ This example uses the ActionLogWidget and will log the `data-item-id` attribute 
 <$action-log item=<<dom-data-item-id>> event=<<event-type>>/>
 \end
 
-<$eventcatcher events="click contextmenu" selector=".item" actions-click=<<clickactions>> actions-contextmenu=<<contextmenu-actions>> tag="div">
+<$eventcatcher selector=".item" $click=<<clickactions>> $contextmenu=<<contextmenu-actions>> tag="div">
 
 <div class="item" data-item-id="item1">
 Click events here will be trapped
@@ -85,4 +89,3 @@ And here
 
 </$eventcatcher>
 ```
-
