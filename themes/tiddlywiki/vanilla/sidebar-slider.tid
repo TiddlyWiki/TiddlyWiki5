@@ -20,7 +20,6 @@ tags: $:/tags/Stylesheet
 			top: 0;
 			height: 100%;
 			cursor: col-resize;
-			background-color: <<colour foreground>>;
 		}
 
 		<$list filter="[{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]]">
