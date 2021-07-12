@@ -4,87 +4,93 @@ tags: $:/tags/Stylesheet
 \define sidebarbreakpoint() <$text text={{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}/>
 \define sidebarbreakpoint-minus-one() <$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
 
-<$list filter="[[$:/state/sidebar]is[missing]] [{$:/state/sidebar}match[yes]] +[limit[1]]" emptyMessage="""
+@media (min-width: <<sidebarbreakpoint>>) {
 
+	.tc-sidebar-slider {
+		position: fixed;
+		width: 42px;
+		top: 0;
+		height: 100%;
+		cursor: col-resize;
+	}
+
+	<$list filter="[{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]]">
+
+		.tc-sidebar-slider {
+			left: calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}});
+			left: clamp({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}}, calc({{$:/state/sidebar-slider!!event-fromselected-posx}}px - {{$:/state/sidebar-slider!!slider-event-fromselected-posx}}px), calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}));
+		}
+
+		<$list filter="[[$:/state/sidebar]is[missing]] [{$:/state/sidebar}match[yes]] +[limit[1]]">
+
+			.tc-story-river {
+				width: clamp({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}}, calc({{$:/state/sidebar-slider!!event-fromselected-posx}}px - {{$:/state/sidebar-slider!!slider-event-fromselected-posx}}px), calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}));
+			}
+
+		</$list>
+
+		.tc-sidebar-scrollable {
+			width: clamp({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}, calc(100% - ({{$:/state/sidebar-slider!!event-fromselected-posx}}px - {{$:/state/sidebar-slider!!slider-event-fromselected-posx}}px)), calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}}));
+		}
+
+	</$list>
+
+	<$list filter="[{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]]">
+
+		.tc-sidebar-slider {
+			left: calc({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} - 42px);
+			left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} - 42px), calc({{$:/state/sidebar-slider!!event-fromselected-posx}}px - {{$:/state/sidebar-slider!!slider-event-fromselected-posx}}px), calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - 42px));
+		}
+
+		<$list filter="[[$:/state/sidebar]is[missing]] [{$:/state/sidebar}match[yes]] +[limit[1]]">
+
+			.tc-story-river {
+				width: clamp({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}}, calc({{$:/state/sidebar-slider!!event-fromselected-posx}}px - {{$:/state/sidebar-slider!!slider-event-fromselected-posx}}px + 42px), calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}));
+				margin-right: clamp({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}, calc(100% - ({{$:/state/sidebar-slider!!event-fromselected-posx}}px - {{$:/state/sidebar-slider!!slider-event-fromselected-posx}}px + 42px)), calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}}));
+			}
+
+		</$list>
+
+		.tc-sidebar-scrollable {
+			left: clamp({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}}, calc({{$:/state/sidebar-slider!!event-fromselected-posx}}px - {{$:/state/sidebar-slider!!slider-event-fromselected-posx}}px + 42px), calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}));
+		}
+
+		.tc-tiddler-frame {
+			width: 100%;
+		}
+
+	</$list>
+
+	<$list filter="[{$:/state/dragging}match[yes]]">
+
+		.tc-page-container {
+		  -webkit-touch-callout: none; /* iOS Safari */
+		    -webkit-user-select: none; /* Safari */
+		     -khtml-user-select: none; /* Konqueror HTML */
+		       -moz-user-select: none; /* Old versions of Firefox */
+		        -ms-user-select: none; /* Internet Explorer/Edge */
+		            user-select: none; /* Non-prefixed version, currently
+		                                  supported by Chrome, Edge, Opera and Firefox */
+		}
+
+		iframe {
+			pointer-events: none;
+		}
+
+	</$list>
+
+}
+
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 	.tc-sidebar-slider {
 		display: none;
 	}
+}
 
-""">
+<$list filter="[{$:/state/sidebar}match[no]]">
 
-	@media (min-width: <<sidebarbreakpoint>>) {
-
-		.tc-sidebar-slider {
-			position: fixed;
-			width: 42px;
-			top: 0;
-			height: 100%;
-			cursor: col-resize;
-		}
-
-		<$list filter="[{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]]">
-
-			.tc-sidebar-slider {
-				left: calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}});
-				left: clamp({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}}, calc({{$:/state/sidebar-slider!!event-fromcatcher-posx}}px - {{$:/state/sidebar-slider!!slider-event-fromselected-posx}}px), calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}));
-			}
-
-			.tc-story-river {
-				width: clamp({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}}, calc({{$:/state/sidebar-slider!!event-fromcatcher-posx}}px - {{$:/state/sidebar-slider!!slider-event-fromselected-posx}}px), calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}));
-			}
-
-			.tc-sidebar-scrollable {
-				width: clamp({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}, calc(100% - ({{$:/state/sidebar-slider!!event-fromcatcher-posx}}px - {{$:/state/sidebar-slider!!slider-event-fromselected-posx}}px)), calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}}));
-			}
-
-		</$list>
-
-		<$list filter="[{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]]">
-
-			.tc-sidebar-slider {
-				left: calc({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} - 42px);
-				left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} - 42px), calc({{$:/state/sidebar-slider!!event-fromcatcher-posx}}px - {{$:/state/sidebar-slider!!slider-event-fromselected-posx}}px), calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - 42px));
-			}
-
-			.tc-story-river {
-				width: clamp({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}}, calc({{$:/state/sidebar-slider!!event-fromcatcher-posx}}px - {{$:/state/sidebar-slider!!slider-event-fromselected-posx}}px + 42px), calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}));
-				margin-right: clamp({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}, calc(100% - ({{$:/state/sidebar-slider!!event-fromcatcher-posx}}px - {{$:/state/sidebar-slider!!slider-event-fromselected-posx}}px + 42px)), calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}}));
-			}
-
-			.tc-sidebar-scrollable {
-				left: clamp({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}}, calc({{$:/state/sidebar-slider!!event-fromcatcher-posx}}px - {{$:/state/sidebar-slider!!slider-event-fromselected-posx}}px + 42px), calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}));
-			}
-
-			.tc-tiddler-frame {
-				width: 100%;
-			}
-
-		</$list>
-
-		<$list filter="[{$:/state/dragging}match[yes]]">
-
-			.tc-page-container {
-			  -webkit-touch-callout: none; /* iOS Safari */
-			    -webkit-user-select: none; /* Safari */
-			     -khtml-user-select: none; /* Konqueror HTML */
-			       -moz-user-select: none; /* Old versions of Firefox */
-			        -ms-user-select: none; /* Internet Explorer/Edge */
-			            user-select: none; /* Non-prefixed version, currently
-			                                  supported by Chrome, Edge, Opera and Firefox */
-			}
-
-			iframe {
-				pointer-events: none;
-			}
-
-		</$list>
-
-	}
-
-	@media (max-width: <<sidebarbreakpoint-minus-one>>) {
-		.tc-sidebar-slider {
-			display: none;
-		}
+	.tc-sidebar-slider {
+		display: none;
 	}
 
 </$list>

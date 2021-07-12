@@ -6,9 +6,9 @@ description: {{$:/language/PageTemplate/Description}}
 \define containerClasses()
 tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 \end
-\define actions-pointerdown() <$action-setfield $tiddler="$:/state/pointerdown" text="yes"/><$list filter="[{$:/state/dragging}match[yes]]"><$action-setfield $tiddler={{$:/state/dragging!!state-title}} event-fromselected-posx=<<event-fromselected-posx>> event-fromcatcher-posx=<<event-fromcatcher-posx>> event-fromselected-posy=<<event-fromselected-posy>> event-fromcatcher-posy=<<event-fromcatcher-posy>>/></$list>
+\define actions-pointerdown() <$action-setfield $tiddler="$:/state/pointerdown" text="yes"/><$list filter="[{$:/state/dragging}match[yes]]"><$action-setfield $tiddler={{$:/state/dragging!!state-title}} event-fromselected-posx=<<event-fromselected-posx>> event-fromselected-posy=<<event-fromselected-posy>> starting-event-fromselected-posx=<<event-fromselected-posx>> starting-event-fromselected-posy=<<event-fromselected-posy>>/></$list>
 \define actions-pointerup() <$action-deletetiddler $tiddler="$:/state/dragging"/><$action-deletetiddler $tiddler="$:/state/pointerdown"/>
-\define actions-pointermove() <$list filter="[{$:/state/dragging}match[yes]]"><$list filter="[{$:/state/pointerdown}match[yes]]"><$action-setfield $tiddler={{$:/state/dragging!!state-title}} event-fromselected-posx=<<event-fromselected-posx>> event-fromcatcher-posx=<<event-fromcatcher-posx>> event-fromselected-posy=<<event-fromselected-posy>> event-fromcatcher-posy=<<event-fromcatcher-posy>>/></$list></$list>
+\define actions-pointermove() <$list filter="[{$:/state/dragging}match[yes]]"><$list filter="[{$:/state/pointerdown}match[yes]]"><$action-setfield $tiddler={{$:/state/dragging!!state-title}} event-fromselected-posx=<<event-fromselected-posx>> event-fromselected-posy=<<event-fromselected-posy>>/></$list></$list>
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
 
 <$vars
