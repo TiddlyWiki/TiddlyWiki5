@@ -1,6 +1,6 @@
 created: 20210331214915693
 creator: FBB
-modified: 20210519132101938
+modified: 20210710185446904
 modifier: FBB
 tags: Konzept
 title: SafeMode
@@ -10,7 +10,7 @@ Der ''~SafeMode'' (abgesicherte Modus) bietet eine Möglichkeit, die meisten Anp
 
 Ein besonderes Problem ist, dass einige Anpassungen kaputt gehen, wenn auf eine neuere Core-Version von ~TiddlyWiki aktualisiert wird (insbesondere während der Beta-Phase).
 
-<<.tipMacro "Der abgesicherte Modus sollte nur mit der Einzeldateikonfiguration von TiddlyWiki verwendet werden, und dann auch nur mit Speichermechanismen, die keine automatische Speicherung durchführen. Die Verwendung des ~SafeMode in der Client-Server-Konfiguration kann zu Datenverlusten führen." "Warnung" "" "darkred">>
+<<.alert-de "Der abgesicherte Modus sollte nur mit der Einzeldateikonfiguration von TiddlyWiki verwendet werden, und dann auch nur mit Speichermechanismen, die keine automatische Speicherung durchführen. Die Verwendung des ~SafeMode in der Client-Server-Konfiguration kann zu Datenverlusten führen." "Warnung">>
 
 ! ~SafeMode einschalten
 

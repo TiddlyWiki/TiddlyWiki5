@@ -1,0 +1,23 @@
+created: 20200525191624711
+creator: FBB
+modified: 20210709184144348
+modifier: FBB
+tags: Plugins
+title: Manuelle Installation eines Plugins
+type: text/vnd.tiddlywiki
+
+# Erstelle ein Backup deiner aktuellen ~TiddlyWiki-HTML-Datei (nur für den Fall der Fälle)
+# Öffne dein ~TiddlyWiki im Browser
+# Suchen Sie in einem anderen Browserfenster einen Link zum Plugin, z.B. [[$:/plugins/tiddlywiki/beispiel]]. Typischerweise finden Sie diese Links auf der Startseite des Plugins (z.B.&nbsp;[ext[https://tiddlywiki.com/plugins/tiddlywiki/katex/]])
+# Ziehe den Link [[$:/plugins/tiddlywiki/beispiel]] auf das Browser-Fenster mit deinem ~TiddlyWiki
+# Speichere dein ~TiddlyWiki  (<<.icon $:/core/images/save-button>>)
+# Wenn am oberen Rand des Fensters ein gelber Warnbalken erscheint. Aktualisiere das Fenster, damit ~TiddlyWiki die Installation des [[Plugins]] abschließen kann.
+#* <<.from-version-de "5.1.22">>: Es ist nicht mehr notwendig, ~TiddlyWiki zu aktualisieren, wenn Plugins gelöscht werden, welche das dynamische Laden unterstützen. Siehe [[Plugin-Mechanismus]] für weitere Details.
+# Das Plugin sollte nun zur Verfügung stehen und kann verwendet werden.
+
+
+Siehe auch: [[Installieren eines Plugins aus der Plugin-Bibliothek]]
+
+<<.hr>>
+
+Siehe <<wikidokulink "Manually installing a plugin">> (englisch)

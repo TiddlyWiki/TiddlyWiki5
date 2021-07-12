@@ -1,16 +1,16 @@
 caption: {{$:/language/SideBar/Contents/Caption}}
 created: 20140918100037381
 creator: pmario
-list: HelloThere Einführung WikiText [[Was kann TiddlyWiki]] Makros
-list-after: $:/core/ui/SideBar/Open
-modified: 20150513154508531
-modifier: pmario
+list: HelloThere Einführung WikiText [[Was kann TiddlyWiki]] Konzept Lexikon Makros picture howto Plugins Widgets Referenz TiddlyFox TWclassic Video [[Über TiddlyWiki]]
+list-before: $:/core/ui/SideBar/Open
+modified: 20210709112533431
+modifier: FBB
 tags: $:/tags/SideBar
 title: InhaltsVerzeichnis
 type: text/vnd.tiddlywiki
 
 <div class="tc-table-of-contents">
 
-<<toc-selective-expandable 'InhaltsVerzeichnis'>>
+<<toc-selective-expandable 'InhaltsVerzeichnis' >>
 
 </div>

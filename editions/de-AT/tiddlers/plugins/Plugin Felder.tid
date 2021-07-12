@@ -1,6 +1,6 @@
 created: 20200602220454166
 creator: FBB
-modified: 20210603202708142
+modified: 20210710185056254
 modifier: FBB
 tags: Plugin-Mechanismus
 title: Plugin Felder
@@ -16,9 +16,13 @@ Plugins werden als Tiddler mit den folgenden Feldern gespeichert:
 |name |Kurzname des Plugins |
 |plugin-priority |//(optional)// Numerische Priorität (höhere Zahlen werden später installiert, das Core-Plugin hat eine Priorität von Null. |
 |plugin-type |Allgemein ''Plugin'', ''Sprache'' oder ''Thema''; siehe [[Plugin Typen]] für Details |
-|parent-plugin |//(optional)// <<.from-version "5.1.22">> Titel des Plugins, unter dem dieses Plugin als Sub-Plugin in der Plugin-Auswahl des [[Control-Panels|$:/ControlPanel]] angezeigt werden soll. |
+|parent-plugin |//(optional)// <<.from-version-de "5.1.22">> Titel des Plugins, unter dem dieses Plugin als Sub-Plugin in der Plugin-Auswahl des [[Control-Panels|$:/ControlPanel]] angezeigt werden soll. |
 |source |//(optional)// Quell-URL des Plugins |
 |text |Eine in JSON geschriebene Liste des Tiddlers, welche das Plugin beinhaltet. |
 |title |Title des Plugins |
 |type |Der Typ muss ''application/json'' sein. |
 |version |//(optional)// Versionsangabe als &lt;String&gt; (sollte der [ext[SemanticVersioning|http://semver.org/]]-Konvention entsprechen) |
+
+<<.hr>>
+
+Siehe: <<wikidokulink "Plugin Fields">> (englisch)

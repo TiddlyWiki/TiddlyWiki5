@@ -1,6 +1,6 @@
 created: 20201126204805318
 creator: FBB
-modified: 20210519132101220
+modified: 20210709162614428
 modifier: FBB
 tags: [[Was kann TiddlyWiki]]
 title: Erstellen und Bearbeiten von Journal-Tiddlern
@@ -33,11 +33,14 @@ Um zu konfigurieren, wie neue Journaleinträge erstellt werden, öffne im [[Cont
 * "Titel des neuen Journal-Tiddlers" gibt an, wie diese Tiddler benannt werden sollen, als [[Datumsformat-String|Datumsformat]]. Die Voreinstellung `YYYY MMM 0DD` bewirkt, dass neue Einträge Titel der Form "2020 November 26" haben.
 * "Tags des neuen Journal-Tiddlers" legt einen oder mehrere [[spezielle Tags|Titellisten]] fest, die automatisch bei neuen Journaleinträgen eingefügt werden. Beispielsweise: `Journal [[Sommerurlaub]]`
 
-;Tipp:
-:Tipp: Wenn du jedes Mal, wenn du auf "Neues Journal" klickst, einen separaten Journal-Tiddler erstellen möchtest (auch wenn du dies mehrmals am selben Tag tust), kannst du die Uhrzeit in das Titelformat aufnehmen. Gib als Datumsformat etwa `0DD.0MM.YYYY um 0hh:0mm:0ss` ein.
+"""
 
-;Tipp 2:
-: Ein weiterer nützlicher Trick ist es, `<<currentTiddler>>` irgendwo im Titelformat einzufügen. Das bedeutet, dass, wenn Sie bei mehreren verschiedenen Tiddlern auf "Neues Journal hier" klicken, wird der Titel jedes dieser Tiddler Teil des Namens der resultierenden Journaleinträge sein.
+"""
+
+<<.tip-de """Wenn du jedes Mal, wenn du auf "Neues Journal" klickst, einen separaten Journal-Tiddler erstellen möchtest (auch wenn du dies mehrmals am selben Tag tust), kannst du die Uhrzeit in das Titelformat aufnehmen. Gib als Datumsformat etwa `0DD.0MM.YYYY um 0hh:0mm:0ss` ein.""">>
+
+
+<<.tip-de """Ein weiterer nützlicher Trick ist es, <$macrocall $name=".code" _="&lt;&lt;currentTiddler&gt;&gt;"/>  irgendwo im Titelformat einzufügen. Das bedeutet, dass, wenn Sie bei mehreren verschiedenen Tiddlern auf "Neues Journal hier" klicken, wird der Titel jedes dieser Tiddler Teil des Namens der resultierenden Journaleinträge sein.""" "Tipp 2">>
 
 
 

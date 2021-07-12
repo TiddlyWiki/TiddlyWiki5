@@ -1,0 +1,13 @@
+created: 20210706114315734
+modified: 20210706115048786
+tags: $:/tags/Macro
+title: $:/editions/tw5.com/de/Macro/chapterMacro
+type: text/vnd.tiddlywiki
+
+\define chapterMacro(chapter1:"-")
+,,Kapitel
+@@background-color:#dfdfdf;color:#ff0f0f;padding:3px;
+&nbsp;$chapter1$&nbsp;
+@@
+,,
+\end

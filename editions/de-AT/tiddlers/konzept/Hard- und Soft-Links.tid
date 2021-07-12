@@ -1,6 +1,6 @@
 created: 20200615191530135
 creator: FBB
-modified: 20210519132101378
+modified: 20210709175117598
 modifier: FBB
 tags: Konzept
 title: Hard- und Soft-Links
@@ -14,4 +14,4 @@ Eine Verknüpfung ist ''soft'' wenn:
 * der Link über ein [[Makro]] oder eine [[Variable]] eingebunden wird.
 * er von einem [[LinkWidget]] erzeugt wird, dessen Attribut eine Transklusion, ein Makro oder eine Variable ist.
 
-<<.hinweisMacro "Soft-Links werden von auf den Link bezogenen [[Filteroperatoren|Filter-Operator]] wie [[backlinks|backlinks Operator]], [[link|links Operator]], [[all|all Operator]] und [[is|is Operator]] nicht erkannt." "" "note">>
+<<.note-de "Soft-Links werden von auf den Link bezogenen [[Filteroperatoren|Filter-Operator]] wie [[backlinks|backlinks Operator]], [[link|links Operator]], [[all|all Operator]] und [[is|is Operator]] nicht erkannt." >>

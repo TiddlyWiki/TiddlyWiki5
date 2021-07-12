@@ -2,13 +2,13 @@ caption: $:/_tags/ListIcon
 created: 20140923175452015
 creator: pmario
 description: ein benutzerdefinierte ~SystemTag, für eigene Icons
-modified: 20210519132102029
+modified: 20210709084537606
 modifier: FBB
 tags: SystemTags
 title: System: $:/_tags/ListIcon
 type: text/vnd.tiddlywiki
 
-Dieser Tag wird als SystemTag bezeichnet. Er dient dazu Tag basierte Listen erstellen zu können. Der Tag selbst soll aber für den Endanwender unsichtbar bleiben.
+Dieser Tag <<.field {{!!caption}}>> wird als SystemTag bezeichnet. Er dient dazu Tag basierte Listen erstellen zu können. Der Tag selbst soll aber für den Endanwender unsichtbar bleiben.
 
 Die Kennung für einen System-Tag ist `$:/`. Der Rest des Tags ist nur eine Namenskonvention, die je nach Anwendungsfall unterschiedlich sein kann.
 

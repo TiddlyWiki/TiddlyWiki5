@@ -1,0 +1,32 @@
+caption: chapterMacro Doku
+created: 20200430065107021
+creator: FBB
+modified: 20210708201216921
+modifier: FBB
+tags: $:/tags/MacroDoku
+title: $:/editions/tw5.com/de/Macro/chapterMacro Doku
+type: text/vnd.tiddlywiki
+
+Dieses Makro fügt einen kleinen Hinweis zur Kapitelnummer in einen Tiddler ein.
+
+!! Definition
+
+Gespeichert in [[$:/editions/tw5.com/de/Macro/chapterMacro]]
+
+<$codeblock code={{$:/editions/tw5.com/de/Macro/chapterMacro}} />
+
+!! Aufruf
+
+``<<chapterMacro "<$view field=chapter >" >> ``
+
+: oder
+
+``<<chapterMacro "4711" >> ``
+
+!! Ausgabe
+
+<<chapterMacro "<$view field=chapter >" >>
+
+: oder
+
+<<chapterMacro "4711" >>

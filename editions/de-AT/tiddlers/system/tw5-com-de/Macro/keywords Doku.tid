@@ -1,0 +1,25 @@
+caption: keywords Doku
+created: 20210401204825020
+creator: FBB
+modified: 20210708201520007
+modifier: FBB
+tags: $:/tags/MacroDoku
+title: $:/editions/tw5.com/de/Macro/keywords Doku
+type: text/vnd.tiddlywiki
+
+Dieses Macro dient dazu, um sogenannte Keywords im Tiddler zu platzieren. Die Wörter sind im Text nicht sichtbar aber die Suche berücksichtigt diese Einträge.
+
+! Definition
+
+<$codeblock code={{$:/editions/tw5.com/de/Macro/keywords Macro}} />
+
+! Parameter
+
+|Nr |Name|Beschreibung |h
+|1 |keywords |Eine Liste von Wörtern über die der Tiddler später gefunden werrden soll. |
+
+! Beispiel
+
+`<<.keywords "Test, Keyword, Beispiel">>`
+
+Hier zwischen den Strichen markieren \ <<.keywords "Test, Keyword, Beispiel">> \ um die dazwischen stehenden Wörter zu sehen.

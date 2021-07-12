@@ -1,0 +1,28 @@
+caption: returncolor Doku
+color: #d2fcfb
+created: 20201124153433152
+creator: FBB
+modified: 20210708201108031
+modifier: FBB
+tags: $:/tags/MacroDoku
+title: $:/editions/tw5.com/de/Macro/returncolor Doku
+type: text/vnd.tiddlywiki
+
+Das Makro ''returncolor'' gibt ein `span`-Element mit dem angegebenen Text und einer angegebene Farbe als Hintergrund wieder.
+
+!! Definition
+
+Gespeichert in [[$:/editions/tw5.com/de/Macro/returncolor Macro]]
+
+<$codeblock code={{$:/editions/tw5.com/de/Macro/returncolor Macro}} />
+
+!! Aufruf
+`<<returncolor "#cfcfcf" "Das ist grau!" >>`
+
+<<returncolor "#cfcfcf" "Das ist grau!" >>
+
+: oder
+
+``<$macrocall $name="returncolor"  _col_={{!!color}} _txt_="{{!!caption}} " />``
+
+<$macrocall $name="returncolor"  _col_={{!!color}} _txt_={{!!caption}} />

@@ -1,6 +1,6 @@
 created: 20210421204448428
 creator: FBB
-modified: 20210603201900734
+modified: 20210709183110822
 modifier: FBB
 tags: Widgets
 title: ButtonWidget
@@ -23,7 +23,7 @@ Die integrierten Aktionen werden als Verknüpfung zum Aufrufen allgemeiner Aktio
 Alles zwischen den Tags des <<.wid1 Button>>-Widgets wird als Beschriftung auf dem Button angezeigt.
 
 |!Attribut |!Beschreibung |
-|actions |Eine Zeichenkette mit einem oder mehreren [[ActionWidget]]s, die bei der Erkennung des Tasten-Events ausgelöst werden sollen. <br/><<.from-version 5.23.1>> Die [[modifier Variable]] listet die Modifier-Keys auf, welche betätigt werden, wenn die Aktion aufgerufen wird. Mögliche Modifier-Keys sind ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' und ''ctrl-alt-shift'' |
+|actions |Eine Zeichenkette mit einem oder mehreren [[ActionWidget]]s, die bei der Erkennung des Tasten-Events ausgelöst werden sollen. <br/><<.from-version-de 5.23.1>> Die [[modifier Variable]] listet die Modifier-Keys auf, welche betätigt werden, wenn die Aktion aufgerufen wird. Mögliche Modifier-Keys sind ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' und ''ctrl-alt-shift'' |
 |to |Der Titel des Tiddlers, zu dem navigiert werden soll |
 |message |Der Name der [[Widget-Meldung|Widget-Meldungen]], die gesendet werden soll, wenn der Button angeklickt wird. |
 |param |Ein optionaler Parameter für die Widget-Meldung |
@@ -44,9 +44,11 @@ Alles zwischen den Tags des <<.wid1 Button>>-Widgets wird als Beschriftung auf d
 |dragTiddler |Ein optionaler Tiddler-Titel, den Button verschiebbar macht und den Payload-Tiddler identifiziert. Siehe [[DraggableWidget]] für weitere Details |
 |dragFilter |Ein optionaler Filter, den Button verschiebbar macht und die Liste der Payload-Tiddler identifiziert. Siehe [[DraggableWidget]] für weitere Details |
 |tabindex |Das Attribut <<.attr tabindex>> des Buttons wird auf den angegebenen Wert geändert |
-|disabled|<<.from-version "5.1.23">> Optional. Angabe ''yes'' deaktiviert den Button. Standardwert ist ''no'' |
+|disabled|<<.from-version-de "5.1.23">> Optional. Angabe ''yes'' deaktiviert den Button. Standardwert ist ''no'' |
 
-''Hinweis'': In fast allen Fällen, in denen eine Text-Referenz als Widget-Attribut verwendet wird, wird diese zwischen geschweiften Klammern platziert, um den aktuell dort gespeicherten Wert zu [[transkludieren|Transklusion in WikiText]].
+<br/>
+
+<<.note-de "In fast allen Fällen, in denen eine Text-Referenz als Widget-Attribut verwendet wird, wird diese zwischen geschweiften Klammern platziert, um den aktuell dort gespeicherten Wert zu [[transkludieren|Transklusion in WikiText]].">>
 
 Wenn man jedoch beim <<.wid1 Button>>-Widget eine Text-Referenz als Wert des <<.attr Set>>-Attributs verwendet, wird auf den Speicherort selbst verwiesen und nicht auf den dort gespeicherten Wert, weshalb dort keine geschweiften Klammern verwendet werden müssen. Beispielsweise lässt sich ein <<.wid Button>>-Widget schreiben welches das Beschriftungsfeld von TiddlerA so einstellt, dass es mit dem von TiddlerB übereinstimmt:
 
@@ -56,12 +58,12 @@ Wenn man jedoch beim <<.wid1 Button>>-Widget eine Text-Referenz als Wert des <<.
 
 <br/>
 
-<<.tipMacro """<$macrocall $name=".from-version" version="5.1.18"/> <$macrocall $name=".attr" _="setTitle"/>, <$macrocall $name=".attr" _="setField"/> and <$macrocall $name=".attr" _="setIndex"/>-Attribute erlauben es, Tiddler-Zustände direkt zu spezifizieren, ohne sie als Text-Referenzen zu interpretieren. Dies ist nützlich für Grenzfälle, in denen Titel Zeichen enthalten können, die zur Kennzeichnung von Tiddler-Feldern oder -Indizes verwendet werden (`!!`, `##`)
-""" "Tipp">>
+<<.tip-de """<$macrocall $name=".from-version-de" version="5.1.18"/> <$macrocall $name=".attr" _="setTitle"/>, <$macrocall $name=".attr" _="setField"/> and <$macrocall $name=".attr" _="setIndex"/>-Attribute erlauben es, Tiddler-Zustände direkt zu spezifizieren, ohne sie als Text-Referenzen zu interpretieren. Dies ist nützlich für Grenzfälle, in denen Titel Zeichen enthalten können, die zur Kennzeichnung von Tiddler-Feldern oder -Indizes verwendet werden (`!!`, `##`)
+""" >>
 
-<<.tipMacro """
+<<.tip-de """
 Setze das Attribut <$macrocall $name=".attr" _="class"/> auf <$macrocall $name=".value" _="tc-btn-invisible tc-tiddlylink"/>, um eine Schaltfläche wie einen internen Link aussehen zu lassen.
-""" "Tipp">>
+""" >>
 
 <<.hr>>
 

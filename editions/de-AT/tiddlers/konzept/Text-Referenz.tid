@@ -1,6 +1,6 @@
 created: 20200826190151593
 creator: FBB
-modified: 20210519132102180
+modified: 20210709182424224
 modifier: FBB
 tags: Konzept Lexikon
 title: Text-Referenz
@@ -25,10 +25,10 @@ Textverweise können an mehreren Stellen verwendet werden:
 * Als Operand einer einfachen [[Transklusion]] (z.B. `{{MyTiddler!!title}}`)
 * Als <<.attr state>> Attribut vom RevealWidget und dem LinkCatcherWidget
 
-<<.hinweisMacro "Beachten Sie die Unterscheidung zwischen einer Textreferenz wie ''foo!!bar'' und einer Tranklusion einer Textreferenz wie `{{foo!!bar}}`" "" note"">>
+<<.note-de "Beachte die Unterscheidung zwischen einer Textreferenz wie ''foo!!bar'' und einer Tranklusion einer Textreferenz wie `{{foo!!bar}}`">>
 
 
 <<.hr>>
 
-siehe: [ext[https://tiddlywiki.com/#TextReference]]
+Siehe: <<wikidokulink "~TextReference" >> (englisch)
 

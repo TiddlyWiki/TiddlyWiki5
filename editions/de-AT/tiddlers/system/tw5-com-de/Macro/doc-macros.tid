@@ -1,0 +1,26 @@
+created: 20210706121244635
+creator: FBB
+description: spezielles Makros für die de-AT Dokumentation
+modified: 20210709162435761
+modifier: FBB
+tags: $:/tags/Macro
+title: $:/editions/tw5.com/de/Macro/doc-macros
+type: text/vnd.tiddlywiki
+
+\define .tid(_) <code class="doc-tiddler">$_$</code>
+\define .tag2(_) <span class="doc-tag">{{$_$||$:/core/ui/TagTemplate}}</span>
+
+\define .code(_) <code class="doc_code">$_$</code>
+
+\define .vlink(_) <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#$_$ Variable"><code class="doc-var">$_$</code></a>
+\define .mlink(_) <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#$_$ Makro"><code class="doc-var">$_$</code></a>
+
+\define .wid1(_) <a href="#$_$Widget" class="doc-widget" >$$_$</a>
+\define .wid2(_1, _2) <a href="#$_1$Widget" class="doc-widget">$$_2$</a>
+\define .def(_) <b style="color:darkslategray;">$_$</b>
+
+\define .mark(_) <mark>$_$</mark>
+\define .bmark(_) <mark class="bmark">$_$</mark>
+\define .hr() <br/><hr style="border:solid #acacac 1px;" />
+
+<$codeblock code={{!!text}} />

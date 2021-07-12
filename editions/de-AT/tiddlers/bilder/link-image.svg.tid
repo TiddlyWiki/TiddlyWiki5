@@ -1,0 +1,14 @@
+caption: link-image
+created: 20201109215354049
+creator: FBB
+modified: 20210708202352418
+modifier: FBB
+tags: $:/_tags/icon
+title: link-image.svg
+type: text/vnd.tiddlywiki
+
+<svg viewbox="1.1" height="22pt" width="22pt">
+	<path d="M12.853 13.661H2.309V.79h10.544" fill="navy" />
+	<path d="M10.857 11.224H4.305V3.226h6.552" fill="#fff" />
+	<path d="M17.063 18.713H6.519V5.842h10.544" fill="#9292ef" />
+	<path d="M15.067 16.277H8.515V8.279h6.552" fill="#fff" /></svg>

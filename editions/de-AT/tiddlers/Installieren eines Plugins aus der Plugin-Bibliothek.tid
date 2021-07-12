@@ -1,0 +1,60 @@
+created: 20200526182828742
+creator: FBB
+modified: 20210709175254324
+modifier: FBB
+tags: Plugins [[TiddlyWiki mit Node.js]]
+title: Installieren eines Plugins aus der Plugin-Bibliothek
+type: text/vnd.tiddlywiki
+
+! "Standalone" Konfiguration
+
+Folgen Sie diesen Anweisungen, wenn Sie TiddlyWiki als einzelne HTML-Datei verwenden:
+
+# Erstelle ein Backup deiner aktuellen ~TiddlyWiki-HTML-Datei (nur für den Fall der Fälle)
+# Öffne dein ~TiddlyWiki im Browser
+# Öffnen das [[Control-Panel|$:/ControlPanel]] und klicke auf die Registerkarte ''Plugins''.
+# Klicke auf den blauen Button  der mit ''Suche'' beschriftet ist.
+# Im öffnenden, modalen Popup auf den Button mit der Beschriftung ''Öffne das Plugin-Verzeichnis'' klicken.
+# Wenn das Bibliothek-Listing geladen ist:
+#* Benutze die Tabs, um zwischen Plugins, Themen und Sprachen zu wählen.
+#* Mit Hilfe des Suchfeldes kannst du nach Details des gewünschten Plugins suchen.
+# Klicke den ''Installieren''-Button um das gewünschte Plugin zu installieren.
+# Speichere dein ~TiddlyWiki um die Installation abzuschließen.
+# Wenn am oberen Rand des Fensters ein gelber Warnbalken erscheint. Aktualisiere das Fenster, damit TiddlyWiki das Plugin und den Inhalt neu laden kann
+# Das Plugin sollte jetzt aktiv und verfügbar sein.
+
+
+! "Client-Server" Konfiguration
+
+Befolgen Sie diese Anweisungen, wenn Sie TiddlyWiki mit Node.js verwenden.
+
+Identifiziere das Plugin, welches du installieren möchtest, über die Registerkarte Plugins des [[Control-Panels|$:/ControlPanel]], wie im Abschnitt ''"Standalone" Konfiguration'' bis Punkt ''6''' beschrieben. Plugins werden durch ihren Typ (d.h. Sprache, Thema oder Plugin) dem Herausgeber und den Namen identifiziert.
+
+<<.warn-de "Das Plugin darf nicht vom ''Control-Panel'' aus installiert werden! <b/>Alle Plugins werden über [[Node.js]] und den zugrundeliegenden Mechanismen eingebunden." "Achtung"  >>
+
+# Nach dem identifizieren des Plugins, beende die laufenden Serverinstanz.
+# Öffne die `tiddlywiki.info`-Datei (ist JSON-Format) und suche den Abschnitt Plugins, Themen oder Sprachen (siehe Beispiel-Code unten)
+# Füge die Einträge hinzu, welche dem Plugin entsprechen, das hinzugefügt werden soll. Achte darauf, dass die Kommas zur Trennung der Einträge beibehalten werden. Aber beende den letzten Eintrag in der Liste nicht mit einem Komma!
+# Starte den Server neu.
+
+
+```
+...
+{
+   "plugins": [
+      "tiddlywiki/codemirror"
+   ],
+   "themes": [
+      "tiddlywiki/vanilla",
+      "tiddlywiki/snowwhite"
+   ],
+   "languages": [
+      "es-ES",
+      "fr-FR",
+      "en-EN"
+   ]
+}
+...
+```
+
+Siehe auch: [[Installieren benutzerdefinierter Plugins unter Node.js]].

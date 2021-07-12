@@ -1,0 +1,12 @@
+caption: warn-image
+created: 20210708100213252
+creator: FBB
+modified: 20210708160117774
+modifier: FBB
+tags: $:/_tags/icon
+title: alert-image.svg
+type: text/vnd.tiddlywiki
+
+<svg class="tc-image-button" viewBox="0 0 25 25" height="25px" width="25px">
+<path d="m11 1.1c-1.1-0.029-2.2 0.57-2.8 1.6l-7.8 13c-0.58 1-0.58 2.2-0.062 3.1 0.53 0.98 1.6 1.6 2.8 1.6l16 0.024c1.2 0.0018 2.2-0.59 2.8-1.5 0.58-0.95 0.61-2.2-2e-3 -3.2l-7.8-13c-0.58-1-1.6-1.6-2.7-1.6zm-1.9 3h3.7l-0.46 9.3h-2.7zm1.9 11a2.1 2.1 0 0 1 2.1 2.1 2.1 2.1 0 0 1-2.1 2.1 2.1 2.1 0 0 1-2.1-2.1 2.1 2.1 0 0 1 2.1-2.1z"/>
+</svg>

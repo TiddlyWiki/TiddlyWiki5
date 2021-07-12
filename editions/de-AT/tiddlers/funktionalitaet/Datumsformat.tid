@@ -1,13 +1,13 @@
 chapter: 20210201200507181
 created: 20210119214351492
 creator: FBB
-modified: 20210519132101170
+modified: 20210709183531824
 modifier: FBB
 tags: Funktionalität
 title: Datumsformat
 type: text/vnd.tiddlywiki
 
-Wenn das <<.wid "View">>-Widget zur Anzeige von Datumswerten verwendet wird (mit dem <<.attr Format>>-Attribut auf ''date'' gesetzt), akzeptiert es ein <<.attr "Template">>-Attribut, mit dem das Format der Datumswerte festgelegt werden kann. Nachfolgende Tabelle listet die verfügbaren Format-Codes auf, als Beispiel-Datum wird <<.param "01.02.2021 21:05:07">> verwendet:
+Wenn das <<.wid1 "View">>-Widget zur Anzeige von Datumswerten verwendet wird (mit dem <<.attr Format>>-Attribut auf ''date'' gesetzt), akzeptiert es ein <<.attr "Template">>-Attribut, mit dem das Format der Datumswerte festgelegt werden kann. Nachfolgende Tabelle listet die verfügbaren Format-Codes auf, als Beispiel-Datum wird <<.param "01.02.2021 21:05:07">> verwendet:
 
 |!Format-Code |!Ausgegebenes Datumsformat |
 |`DDD` |Wochentag ausgeschrieben (z.B. ''Montag'') |
@@ -24,9 +24,9 @@ Wenn das <<.wid "View">>-Widget zur Anzeige von Datumswerten verwendet wird (mit
 |`YYYY` |Jahr lang  (z.B. ''2021'') |
 |`YY` |Jahr kurz  (z.B. ''21'') |
 |`wYYYY` |Jahr lang, in Relation zur Kalenderwoche |
-|`aYYYY` |<<.fromVersion "5.1.23">> Jahr lang, aber negative Daten werden als positiv angezeigt |
+|`aYYYY` |<<.from-version-de "5.1.23">> Jahr lang, aber negative Daten werden als positiv angezeigt |
 |`wYY` |Jahr kurz, in Relation zur Kalenderwoche |
-|`{era:BCE||CE}` |<<.fromVersion "5.1.23">> Zeigt eine andere Zeichenfolge für Jahre an, welche negativ, null oder positiv ist (siehe unten) |
+|`{era:BCE||CE}` |<<.from-version-de "5.1.23">> Zeigt eine andere Zeichenfolge für Jahre an, welche negativ, null oder positiv ist (siehe unten) |
 |`hh` |Stunde (z.B. ''9'') |
 |`0hh` |Stunde mit führender Null  (z.B. ''21'') |
 |`hh12` |Stunden im 12 Uhr Format (z.B. ''9'') |

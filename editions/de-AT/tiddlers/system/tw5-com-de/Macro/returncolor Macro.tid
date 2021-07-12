@@ -1,0 +1,11 @@
+created: 20201124153433152
+creator: FBB
+modified: 20210706125213865
+modifier: FBB
+tags: $:/tags/Macro
+title: $:/editions/tw5.com/de/Macro/returncolor Macro
+type: text/vnd.tiddlywiki
+
+\define returncolor(_col_,_txt_)
+<span style="background-color:$_col_$; padding:3px 10px; border-radius: 20px">$_txt_$</span>
+\end

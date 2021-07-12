@@ -1,6 +1,6 @@
 created: 20140913190644927
 creator: pmario
-modified: 20210602210556376
+modified: 20210710183850938
 modifier: pmario
 tags: Widgets Lexikon
 title: ImportVariablesWidget
@@ -32,7 +32,7 @@ Sogenannte "//globale Makros//" werden innerhalb der Hauptseitenvorlage ($:/core
 
 ! Das `\import` Pragma
 
-<<.from-version "5.1.18">> Das `\import`-Pragma ist eine alternative Syntax für die Verwendung des <<.wid2 "ImportVariables" "importvariables">>-Widget. Das vorherige Beispiel könnte zum Beispiel wie folgt ausgedrückt werden:
+<<.from-version-de "5.1.18">> Das `\import`-Pragma ist eine alternative Syntax für die Verwendung des <<.wid2 "ImportVariables" "importvariables">>-Widget. Das vorherige Beispiel könnte zum Beispiel wie folgt ausgedrückt werden:
 
 ```
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]

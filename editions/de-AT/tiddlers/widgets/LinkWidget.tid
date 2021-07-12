@@ -1,6 +1,6 @@
 created: 20140913133329379
 creator: pmario
-modified: 20210602211756308
+modified: 20210710184820370
 modifier: FBB
 tags: Widgets
 title: LinkWidget
@@ -23,7 +23,7 @@ Der Inhalt des <<.wid Link>>-Widgets wird innerhalb des `<a>`-Tags gerendert, we
 |draggable |"yes", damit der Link verschiebbar ist (Standardwert ist "yes") |
 |tag |Optionales Tag zum Überschreiben des Standardelements "a". |
 |class|Optionale [[CSS Klassen]] //zusätzlich zu// den Standardklassen (siehe unten) |
-|overrideClass|<<.from-version "5.1.16">> Optionale CSS Klassen //anstelle der// Standardklassen |
+|overrideClass|<<.from-version-de "5.1.16">> Optionale CSS Klassen //anstelle der// Standardklassen |
 
 Die Draggable-Funktionalität ist äquivalent zur Verwendung des <<.wid1 Draggable>>-Widget mit dem Tiddler-Attribut, das auf das Link-Ziel gesetzt ist.
 
@@ -75,7 +75,7 @@ Der folgende Prozess wird benutzt, um das <<.attr href>>-Attribut des generierte
 
 # Wenn die Variable <<.vlink tv-get-export-link>> definiert ist, wird sie aufgerufen, um den Titel des Ziel-Tiddlers in das <<.attr href>>-Attribut umzuwandeln
 #* In der Praxis wird nur ein [[JavaScript-Makro|Makros]] verwendet
-# <<.from-version "5.1.15">> Wenn die Variable <<.vlink tv-filter-export-link>> definiert ist, wird diese als Filter interpretiert, welcher den Ziel-Tiddler-Titel in das <<.attr href>>-Attribut umwandelt.
+# <<.from-version-de "5.1.15">> Wenn die Variable <<.vlink tv-filter-export-link>> definiert ist, wird diese als Filter interpretiert, welcher den Ziel-Tiddler-Titel in das <<.attr href>>-Attribut umwandelt.
 # Wenn <<.vlink tv-wikilink-template>> definiert ist, wird es als ein besonderes Makro behandelt, das eine begrenzte Konvertierung des Ziel-Tiddler-Titels in das <<.attr href>>-Attribut durchführt.
 #Andernfalls wird der Titel des Ziel-Tiddlers URI-kodiert, um das <<.attr href>>-Attribut zu erzeugen.
 

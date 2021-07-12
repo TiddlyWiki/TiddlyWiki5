@@ -1,6 +1,6 @@
 created: 20200526211433140
 creator: FBB
-modified: 20210603203001674
+modified: 20210710185140791
 modifier: FBB
 tags: Funktionalität Plugins
 title: Plugin-Mechanismus
@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 
 [[Plugins]] sind Pakete von [[Tiddlern|Tiddler]], die als eine Einheit verteilt und verwaltet werden. Benutzer können sie per Drag and Drop oder mit Hilfe der [[Plugin-Bibliothek|Installieren eines Plugins aus der Plugin-Bibliothek]] installieren.
 
-<<.from-version "5.1.22">>: Plugins, die JavaScript-Module enthalten, erfordern ein Neuladen des Wikis, bevor sie funktionieren. Plugins, die keine ~JavaScript-Module enthalten, werden automatisch dynamisch geladen und entladen.
+<<.from-version-de "5.1.22">>: Plugins, die JavaScript-Module enthalten, erfordern ein Neuladen des Wikis, bevor sie funktionieren. Plugins, die keine ~JavaScript-Module enthalten, werden automatisch dynamisch geladen und entladen.
 
 Plugins können zum Verpacken beliebiger Tiddler-Inhalte verwendet werden, einschließlich ~JavaScript-Module, die die Kernfunktionalität von ~TiddlyWiki5 erweitern und verbessern. Die Tiddler innerhalb registrierter Plugins sind [[ShadowTiddler]]: sie können frei überschrieben werden, indem ein Tiddler mit dem gleichen Titel erstellt wird. Aber das Löschen dieses Tiddlers stellt den ursprünglichen Tiddler aus dem Plugin wieder her.
 

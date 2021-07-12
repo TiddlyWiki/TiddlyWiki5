@@ -1,0 +1,45 @@
+caption: from-version-de Doku
+created: 20200605200513281
+creator: FBB
+modified: 20210708201315404
+modifier: FBB
+tags: $:/tags/MacroDoku
+title: $:/editions/tw5.com/de/Macro/from-version-de Doku
+type: text/vnd.tiddlywiki
+
+! ''.from-version-de''
+
+Dieses Macro dient dazu, um für die Beschreibung von bestimmten Features von TiddlyWiki welche erst ab einer bestimmten Version verfügbar sind einen deutlich sichtbaren Tag einzubinden.
+
+!! Definition
+
+<$codeblock code={{$:/editions/tw5.com/de/Macro/from-version-de Macros}} />
+
+!! Parameter
+
+|Position |Name|Beschreibung |h
+|1 |version |Versionsnummer ab der das Feature verfügbar ist |
+
+!! Beispiel
+
+`<<.from-version-de "5.1.23">> ist Funktion ''X'' verfügbar.`
+
+<<.from-version-de "5.1.23">> ist Funktion ''X'' verfügbar.
+
+<<.hr>>
+
+! ''.deprecated-since-de''
+
+Dieses Macro dient dazu, um für die Beschreibung von bestimmten Features von ~TiddlyWiki die nicht mehr weiterentwickelt werden bzw. eingestellt werden einen deutlich sichtbaren Tag einzubinden. Im zweiten Parameter kann ein Tiddler angegeben werden der die Migration erläutert.
+
+!! Parameter
+
+|Position |Name|Beschreibung |h
+|1 |version |Versionsnummer ab der das Feature nicht mehr verfügbar ist |
+|2 |superseded |Hier kann ein Tiddler angegeben werden, in dem der mögliche Ersatz dieses Features beschrieben wird. |
+
+!! Beispiel
+
+`<<.deprecated-since-de "5.1.0" "fehlt">>`
+
+<<.deprecated-since-de "5.1.0" "fehlt">>

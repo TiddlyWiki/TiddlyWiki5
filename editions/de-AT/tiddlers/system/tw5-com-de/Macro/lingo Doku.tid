@@ -1,0 +1,29 @@
+caption: lingo Doku
+created: 20210430202414482
+creator: FBB
+modified: 20210708201253058
+modifier: FBB
+tags: $:/tags/MacroDoku
+title: $:/editions/tw5.com/de/Macro/lingo Doku
+type: text/vnd.tiddlywiki
+
+Dieses Macro dient dazu, die Beschreibungstexte der [[Tiddler-Felder]] auszugeben.
+
+! Definition
+
+<$codeblock code={{$:/editions/tw5.com/de/Macro/lingo Macro}} />
+
+! Parameter
+
+|Name|Beschreibung |h
+|name |Name des Feldes |
+
+! Beispiel
+
+`<<.lingo "title">>`
+
+! Ausgabe
+
+<<.lingo "title">>
+
+

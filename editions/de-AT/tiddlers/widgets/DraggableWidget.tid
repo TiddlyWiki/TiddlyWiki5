@@ -1,6 +1,6 @@
 created: 20200924201921016
 creator: FBB
-modified: 20210602202602608
+modified: 20210709174546202
 modifier: FBB
 tags: Widgets
 title: DraggableWidget
@@ -24,7 +24,7 @@ Eines oder beide der ''[[Tiddler]]-'' und ''[[Filterparameter|Filter-Parameter]]
 
 Die [[actionTiddler Variable]] ist sowohl in Startaktionen als auch in Endaktionen verfügbar. Sie enthält die durch die Tiddler- und Filterparameter spezifizierte(n) Payload(s) als [[Titelliste|Titellisten]]. Dabei werden doppelte eckige Klammern verwendet, um Titel mit Leerzeichen zu zitieren.
 
-<<.hinweisMacro "Beachte, dass die Variable [[actionTiddler|actionTiddler Variable]] eine mit doppelten eckigen Klammern zitierte Titelliste enthält. Dies ist anders als das DroppableWidget, das dieselbe Variable verwendet, um einen einzigen nicht zitierten Titel zu übergeben.">>
+<<.note-de "Beachte, dass die Variable [[actionTiddler|actionTiddler Variable]] eine mit doppelten eckigen Klammern zitierte Titelliste enthält. Dies ist anders als das DroppableWidget, das dieselbe Variable verwendet, um einen einzigen nicht zitierten Titel zu übergeben.">>
 
 Das <<.wid1 Link>>-Widget beinhaltet die Funktionalität des ~DraggableWidget über das Attribut <<.param draggable>>.
 
