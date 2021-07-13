@@ -32,6 +32,8 @@ ExportTiddler/Caption: 导出此条目
 ExportTiddler/Hint: 导出此条目
 ExportTiddlers/Caption: 导出条目
 ExportTiddlers/Hint: 导出条目
+ExportTiddlyWikiCore/Caption: 导出 ~TiddlyWiki 核心
+ExportTiddlyWikiCore/Hint: 导出 ~TiddlyWiki 核心代码，适用于以外部 ~JavaScript 运行
 SidebarSearch/Hint: 选择侧边栏的查找字段
 Fold/Caption: 收合条目
 Fold/Hint: 收合此条目的内容
@@ -52,7 +54,7 @@ Help/Hint: 显示帮助面板
 Home/Caption: 首页
 Home/Hint: 开启首页条目
 Import/Caption: 导入
-Import/Hint: 导入许多类型的文件包括文本、图像、TiddlyWiki 或 JSON
+Import/Hint: 导入许多类型的文件包括文本、图像、~TiddlyWiki 或 JSON
 Info/Caption: 信息
 Info/Hint: 显示此条目的信息
 Language/Caption: 语言

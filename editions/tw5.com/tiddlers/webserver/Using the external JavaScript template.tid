@@ -1,23 +1,95 @@
 created: 20180905075846391
-modified: 20200814110131083
+modified: 20210611055708739
 tags: [[WebServer Guides]]
 title: Using the external JavaScript template
 type: text/vnd.tiddlywiki
 
-Setting the [[root-tiddler|WebServer Parameter: root-tiddler]] parameter to `$:/core/save/all-external-js` switches to a special template that externalises TiddlyWiki's core ~JavaScript into a separate file. For example:
+You can use a special template to externalise TiddlyWiki's core code into a separate file. This configuration allows the browser to cache the core for improved efficiency. 
 
-```
-tiddlywiki editions/tw5.com-server/ --listen host=0.0.0.0 "root-tiddler=$:/core/save/all-external-js"
-```
-
-To ensure that the "save changes" button saves a full, standalone wiki, it is also necessary to set the tiddler $:/config/SaveWikiButton/Template to contain `$:/core/save/all-external-js`.
-
-The provided edition `server-external-js` contains all the configuration necessary to use the external ~JavaScript template.
-
-!! Background
+! Background
 
 TiddlyWiki in the single file configuration ordinarily packs everything into a single file: your data, and the ~JavaScript, CSS and HTML comprising TiddlyWiki itself. This lack of dependencies is usually very convenient: it means that it is impossible for the parts of a TiddlyWiki to become separated, and enormously improves the chances of it still functioning in the future.
 
 However, there is some inefficiency in this arrangement because the core code is repeatedly loaded and saved every time the content of the wiki is saved. This inefficiency is partially ameliorated when working in the client server configuration because once the wiki is loaded by the browser the synchronisation process only transmits individual tiddlers back and forth to the server.
 
 The remaining inefficiency when working in the client server configuration is that the single page wiki that is initially loaded will contain a copy of the entire core code of TiddlyWiki, making it impossible for the browser to cache it.
+
+! A quickstart
+
+The mechanism will be activated by setting the [[root-tiddler|WebServer Parameter: root-tiddler]] parameter to `$:/core/save/all-external-js`. This template externalises TiddlyWiki's core JavaScript into a separate file. For example, the following command will start your server with caching enabled. It will transfer the wiki with two GET requests, and the core can be cached by the browser.
+
+```
+tiddlywiki YOUR_WIKI_FOLDER --listen 'root-tiddler=$:/core/save/all-external-js' use-browser-cache=yes
+```
+
+<<.tip """You can activate your browser's ''Developer Tools: Network'' tab and reload the page to see how it works.""">>
+
+<<.tip """On Windows, Command Prompt (CMD) users need to replace single quotes `'` with double quotation marks `"`.""">>
+
+! Initializing a new wiki
+
+The provided edition `server-external-js` contains all the configuration necessary to use the external ~JavaScript template. Here is an example:
+
+```
+tiddlywiki ./myNewWiki --init server-external-js
+tiddlywiki ./myNewWiki --build listen
+```
+
+The above commands perform the following:
+
+* Create a new wiki with external-js customization included.
+* Start the server with external-js enabled. The server listens on port 8080. Visit http://localhost:8080 in your browser.
+
+To customize your `--build listen` command, see [[tiddlywiki.info Files]] and [[ListenCommand]].
+
+! Standalone wiki with the external-js template
+
+You can use the "external-js" template with your standalone wiki, but this requires that you have ~TiddlyWiki's core ~JavaScript saved alongside your html file. You may prefer this configuration, for example, if you have several wikis on a ~WebDav server. (See: [[Saving via WebDAV]])
+
+<<.warning "Since working with several files, that belong together, will open up all kinds of synchronisation challenges, this functionality is intended for advanced users.">>
+
+!! Saving your snapshots
+
+If you start your ~TiddlyWiki server in the "external-js" configuration, snapshots you saved from the wiki will also have the external-js configuration: 
+
+* Click on the "cloud" button and choose <<.icon $:/core/images/download-button>>  ''Save snapshot for offline use''. The html wiki you saved will have a reduced file size compared to a regular snapshot because the ~TiddlyWiki core code has been externalized. However, to be able to use this wiki, you ''must'' also own a copy of ~TiddlyWiki's core ~JavaScript. 
+* Click on the "cloud" button and choose <<.icon $:/core/images/download-button>> ''Save ~TiddlyWiki core for offline use'' to download the core ~JavaScript from the server. Save this file in the same folder as your html wiki. <<.from-version "5.2.0">>
+
+The "server-external-js" edition lets you save the snapshot from the command line:
+
+```
+tiddlywiki YOUR_WIKI_FOLDER --build index
+```
+
+Files "index.html" and "tiddlywikicore-5.x.x.js" will be saved in your wiki folder's `output` directory.
+
+!! Obtaining the ~TiddlyWiki core with tiddlywiki command
+
+You can also run the following command to obtain the core ~JavaScript. The file "tiddlywikicore-5.x.x.js" will be saved in the`output` directory of your wiki folder:
+
+```
+tiddlywiki YOUR_WIKI_FOLDER \
+    --render '$:/core/templates/tiddlywiki5.js' \
+    '[[tiddlywikicore-]addsuffix<version>addsuffix[.js]]' \
+    'text/plain'
+```
+
+The "server-external-js" edition has the shortcut set up for you. Just run:
+
+```
+tiddlywiki YOUR_WIKI_FOLDER --build tiddlywikicore
+```
+
+! Upgrading your standalone wiki <span style="font-size:0.65em">(experimental)</span>
+
+Before you proceed, backup your wiki first! Follow the steps below to upgrade a single-file wiki with the external-js template:
+
+# Proceed with the [[Upgrade Process for Standalone TiddlyWikis|Upgrading]]. Your wiki will be converted to a full standalone HTML.
+
+# Open your upgraded wiki in the browser. If you'd like to revert to using the regular template, restore the original shadow tiddler `$:/config/SaveWikiButton/Template` by deleting any custom copy. Save your wiki and you are done. 
+
+# Otherwise, from your wiki, select the ''Tools'' tab from the sidebar and click on the <<.icon $:/core/images/star-filled>> ''export tiddlywiki core'' button to obtain the core from your wiki.
+
+# Verify that `$:/config/SaveWikiButton/Template` still contains `$:/core/save/offline-external-js`. Modify if necessary.
+
+# Save your wiki again. Your wiki is now converted to using the external core.
