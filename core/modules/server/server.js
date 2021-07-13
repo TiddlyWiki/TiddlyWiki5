@@ -337,11 +337,11 @@ Server.prototype.listen = function(port,host,prefix) {
 	var missing = [];
 	for (var index=0; index<this.requiredPlugins.length; index++) {
 		var name = this.requiredPlugins[index];
-		if (!this.wiki.getTiddler("$:/plugins/"+name)) {
+		if (!this.wiki.getTiddler(name)) {
 			missing.push(name);
 		}
 	}
-	if(missing.length > 0) {
+	if(missing.length > 0) {debugger;
 		var error = "Warning: Plugin(s) required for client-server operation are missing.\n"+
 			"\""+ missing.join("\", \"")+"\"";
 		$tw.utils.warning(error);

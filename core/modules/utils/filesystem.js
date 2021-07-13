@@ -276,6 +276,7 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 	var contentTypeInfo = $tw.config.contentTypeInfo[fileInfo.type] || {extension: ""};
 	// Generate the filepath
 	fileInfo.filepath = $tw.utils.generateTiddlerFilepath(tiddler.fields.title,{
+		boot: options.boot,
 		extension: metaExt || contentTypeInfo.extension,
 		directory: options.directory,
 		pathFilters: options.pathFilters,
@@ -318,7 +319,8 @@ Options include:
 	fileInfo: an existing fileInfo object to check against
 */
 exports.generateTiddlerFilepath = function(title,options) {
-	var directory = options.directory || "",
+	var boot = options.boot || $tw.boot,
+		directory = options.directory || "",
 		extension = options.extension || "",
 		originalpath = (options.fileInfo && options.fileInfo.originalpath) ? options.fileInfo.originalpath : "",
 		filepath;
@@ -397,10 +399,10 @@ exports.generateTiddlerFilepath = function(title,options) {
 	var writePath = $tw.hooks.invokeHook("th-make-tiddler-path",fullPath,fullPath),
 		encode = (options.fileInfo || {writeError: false}).writeError == true;
 	if(!encode) {
-		encode = !(writePath.indexOf($tw.boot.wikiTiddlersPath) == 0 ||
+		encode = !(writePath.indexOf(boot.wikiTiddlersPath) == 0 ||
 			writePath.indexOf(path.resolve(directory)) == 0 ||
-			writePath.indexOf(path.resolve($tw.boot.wikiPath)) == 0 ||
-			writePath.indexOf(path.resolve($tw.boot.wikiTiddlersPath,originalpath)) == 0 );
+			writePath.indexOf(path.resolve(boot.wikiPath)) == 0 ||
+			writePath.indexOf(path.resolve(boot.wikiTiddlersPath,originalpath)) == 0 );
 		}
 	if(encode) {
 		writePath = path.resolve(directory,encodeURIComponent(fullPath));
