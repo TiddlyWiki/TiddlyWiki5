@@ -22,8 +22,8 @@ The ''action-createtiddler'' widget is invisible.
 
 |!Attribute |!Description |
 |$basetitle |The initial title that will be attempted. If a tiddler with that title already exists, then a numerical counter is added to the title and incremented until it is unique|
-|$savetitle |//(deprecated – see below))// A text reference identifying a field or index into which the title of the newly created tiddler will be stored after it is created |
-|$savedrafttitle |//(deprecated – see below))// <<.from-version "5.1.20">> A text reference identifying a field or index into which the draft title associated with the newly created tiddler will be stored after it is created. This is useful when using a sequence of action widgets to create a new tiddler, put it into edit mode, and position it within the list of its parent tag |
+|$savetitle |//(deprecated – see below)// A text reference identifying a field or index into which the title of the newly created tiddler will be stored after it is created |
+|$savedrafttitle |//(deprecated – see below)// <<.from-version "5.1.20">> A text reference identifying a field or index into which the draft title associated with the newly created tiddler will be stored after it is created. This is useful when using a sequence of action widgets to create a new tiddler, put it into edit mode, and position it within the list of its parent tag |
 |$timestamp |Specifies whether the timestamp(s) of the target tiddler will be updated (''modified'' and ''modifier'', plus ''created'' and ''creator'' for newly created tiddlers). Can be "yes" (the default) or "no" |
 |$template |<<.from-version "5.1.22">> The title of a template tiddler, that will be used to create a new tiddler |
 |$overwrite |<<.from-version "5.1.22">> If set to "yes", it will overwrite existing tiddlers. ''Be careful!'' |
