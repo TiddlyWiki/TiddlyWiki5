@@ -1,0 +1,81 @@
+title: $:/core/ui/ControlPanel/Publishing
+tags: $:/tags/ControlPanel
+caption: {{$:/language/ControlPanel/Publishing/Caption}}
+
+{{$:/language/ControlPanel/Publishing/Hint}}
+
+<div class="tc-publishing-job-listing">
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/PublishingJob]]" variable="job">
+
+<div class="tc-publishing-job">
+
+<h2>Job: <$link to=<<job>>><$transclude tiddler=<<job>> field="caption" mode="inline"/></$link></h2>
+
+Publisher: <$select tiddler=<<job>> field="publisher">
+<$list filter="[[publisher]modules[]moduleproperty[name]]">
+<option value=<<currentTiddler>>><$text text=<<currentTiddler>>/></option>
+</$list>
+</$select>
+
+Base URL: <$edit-text tiddler=<<job>> size="50" field="baseurl"/>
+
+Logs: <$view tiddler=<<job>> field="list"/>
+
+<$set name="publisher-name" value={{{ [<job>get[publisher]] }}}>
+
+<$set name="publisher-module" value={{{ [[publisher]modules[name],<publisher-name>] }}}>
+
+<div class="tc-publishing-job-publisher">
+
+<h2>Publisher: <$text text=<<publisher-name>>/></h2>
+
+<$set name="publisher-ui" value={{{ [<publisher-module>modulestring[ui],{$:/language}] }}}>
+
+<$tiddler tiddler=<<job>>>
+
+<<publisher-ui>>
+
+</$tiddler>
+
+</$set>
+
+</div>
+
+<$vars sitemap={{{ [<job>get[sitemap]] }}}>
+
+<div class="tc-publishing-sitemap">
+
+<h2>Sitemap: <$link to=<<sitemap>>><$view tiddler=<<sitemap>> field="caption"><$text text=<<sitemap>>/></$view></$link></h2>
+
+<$list filter="[<sitemap>get[list]enlist-input[]]" variable="route">
+
+<div class="tc-publishing-route">
+
+<h2>Route: <$link to=<<route>>><$view tiddler=<<route>> field="caption"><$text text=<<route>>/></$view></$link></h2>
+
+route type: <$view tiddler=<<route>> field="route-type"/>
+
+path: <$edit-text tiddler=<<route>> size="50" field="route-path"/>
+
+filter: <$edit-text tiddler=<<route>> size="50" field="route-tiddler-filter"/>
+
+template: <$edit-text tiddler=<<route>> size="50" field="route-template"/>
+
+</div>
+
+</$list>
+
+</div>
+
+</$vars>
+
+</$set>
+
+</$set>
+
+</div>
+
+</$list>
+
+</div>

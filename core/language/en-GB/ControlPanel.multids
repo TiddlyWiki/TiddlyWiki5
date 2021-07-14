@@ -96,6 +96,8 @@ Plugins/Updates/Caption: Updates
 Plugins/Updates/Hint: Available updates to installed plugins
 Plugins/Updates/UpdateAll/Caption: Update <<update-count>> plugins
 Plugins/SubPluginPrompt: With <<count>> sub-plugins available
+Publishing/Caption: Publishing
+Publishing/Hint: Settings used for publishing extracts from this TiddlyWiki as separate files through a "publisher" module
 Saving/Caption: Saving
 Saving/DownloadSaver/AutoSave/Description: Permit automatic saving for the download saver
 Saving/DownloadSaver/AutoSave/Hint: Enable Autosave for Download Saver

@@ -40,10 +40,8 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 	var widgetPointer = this;
 	// Got to flush all the accumulated variables
 	this.variables = new this.variablesConstructor();
-	// Get our parameters
-	this.filter = this.getAttribute("filter");
 	// Compute the filter
-	this.tiddlerList = tiddlerList || this.wiki.filterTiddlers(this.filter,this);
+	this.tiddlerList = tiddlerList || this.getTiddlerList();
 	// Accumulate the <$set> widgets from each tiddler
 	$tw.utils.each(this.tiddlerList,function(title) {
 		var parser = widgetPointer.wiki.parseTiddler(title);
@@ -86,12 +84,17 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 			}
 		} 
 	});
-
 	if (widgetPointer != this) {
 		widgetPointer.parseTreeNode.children = this.parseTreeNode.children;
 	} else {
 		widgetPointer.makeChildWidgets();
 	}
+};
+
+ImportVariablesWidget.prototype.getTiddlerList = function() {
+	var filter = this.getAttribute("filter"),
+		title = this.getAttribute("tiddler");
+	return (filter && this.wiki.filterTiddlers(filter,this)) || (title && [title]) || [];
 };
 
 /*
@@ -100,7 +103,9 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 ImportVariablesWidget.prototype.refresh = function(changedTiddlers) {
 	// Recompute our attributes and the filter list
 	var changedAttributes = this.computeAttributes(),
-		tiddlerList = this.wiki.filterTiddlers(this.getAttribute("filter"),this);
+		filter = this.getAttribute("filter"),
+		title = this.getAttribute("tiddler"),
+		tiddlerList = this.getTiddlerList();
 	// Refresh if the filter has changed, or the list of tiddlers has changed, or any of the tiddlers in the list has changed
 	function haveListedTiddlersChanged() {
 		var changed = false;
@@ -111,7 +116,7 @@ ImportVariablesWidget.prototype.refresh = function(changedTiddlers) {
 		});
 		return changed;
 	}
-	if(changedAttributes.filter || !$tw.utils.isArrayEqual(this.tiddlerList,tiddlerList) || haveListedTiddlersChanged()) {
+	if(changedAttributes.filter || changedAttributes.tiddler || !$tw.utils.isArrayEqual(this.tiddlerList,tiddlerList) || haveListedTiddlersChanged()) {
 		// Compute the filter
 		this.removeChildDomNodes();
 		this.execute(tiddlerList);

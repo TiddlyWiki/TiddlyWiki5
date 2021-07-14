@@ -1,0 +1,9 @@
+title: $:/config/PublishingJobs/Default
+tags: $:/tags/PublishingJob
+caption: Demo static site
+publisher: filesystem
+sitemap: $:/core/sitemaps/StaticSite
+jszip-output-filename: myzipfile.zip
+baseurl: https://example.com
+enabled: yes
+export-filter: [!is[image]!is[system]] [is[image]!is[system]]

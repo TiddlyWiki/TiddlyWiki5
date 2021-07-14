@@ -1,0 +1,7 @@
+title: $:/core/routes/StaticSite/HTML
+caption: Static HTML
+tags: $:/tags/Route
+route-type: render
+route-path: static/$title_slugify$.html
+route-tiddler-filter: [!is[system]!is[image]]
+route-template: $:/core/templates/static.tiddler.html

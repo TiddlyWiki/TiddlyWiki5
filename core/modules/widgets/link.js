@@ -98,6 +98,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		var wikiLinkTemplateMacro = this.getVariable("tv-wikilink-template"),
 			wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.trim() : "#$uri_encoded$";
 		wikiLinkText = $tw.utils.replaceString(wikiLinkTemplate,"$uri_encoded$",encodeURIComponent(this.to));
+		wikiLinkText = $tw.utils.replaceString(wikiLinkText,"$title_slugify$",this.wiki.slugify(this.to));
 		wikiLinkText = $tw.utils.replaceString(wikiLinkText,"$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
 	}
 	// Override with the value of tv-get-export-link if defined

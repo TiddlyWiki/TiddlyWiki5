@@ -14,7 +14,7 @@ GET /
 
 exports.method = "GET";
 
-exports.path = /^\/$/;
+exports.path = /^\/index.html$/;
 
 exports.handler = function(request,response,state) {
 	var text = state.wiki.renderTiddler(state.server.get("root-render-type"),state.server.get("root-tiddler")),

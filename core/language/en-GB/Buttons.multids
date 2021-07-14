@@ -85,6 +85,8 @@ Permaview/Caption: permaview
 Permaview/Hint: Set browser address bar to a direct link to all the tiddlers in this story
 Print/Caption: print page
 Print/Hint: Print the current page
+Publish/Caption: publish
+Publish/Hint: Publish from the wiki
 Refresh/Caption: refresh
 Refresh/Hint: Perform a full refresh of the wiki
 Save/Caption: ok

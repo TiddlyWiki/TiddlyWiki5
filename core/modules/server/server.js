@@ -63,10 +63,7 @@ function Server(options) {
 		self.addAuthenticator(authenticatorDefinition.AuthenticatorClass);
 	});
 	// Load route handlers
-	$tw.modules.forEachModuleOfType("route", function(title,routeDefinition) {
-		// console.log("Loading server route " + title);
-		self.addRoute(routeDefinition);
-	});
+	this.addRouteHandlers();
 	// Initialise the http vs https
 	this.listenOptions = null;
 	this.protocol = "http";
@@ -182,11 +179,43 @@ Server.prototype.addAuthenticator = function(AuthenticatorClass) {
 	}
 };
 
-Server.prototype.findMatchingRoute = function(request,state) {
+Server.prototype.addRouteHandlers = function() {
+	var self = this;
+	// Load route handlers from sitemap if present, or just load all route modules
+	if(this.variables.sitemap) {
+		this.sitemap = new $tw.Sitemap(this.variables.sitemap,{
+			wiki: this.wiki,
+			variables: {}
+		});
+		this.sitemap.load();
+		$tw.utils.each(this.sitemap.getServerRoutes(),function(routeInfo) {
+			self.addRoute({
+				method: "GET",
+				path: routeInfo.regexp,
+				handler: function(request,response,state) {
+					var fileDetails = routeInfo.handler(state.params);
+					if(fileDetails) {
+						response.writeHead(200, {"Content-Type": fileDetails.type});
+						response.end(fileDetails.text,fileDetails.isBase64 ? "base64" : "utf8");
+					} else {
+						response.writeHead(404);
+						response.end();
+					}
+				}
+			});
+		});
+	} else {
+		$tw.modules.forEachModuleOfType("route",function(title,routeDefinition) {
+			self.addRoute(routeDefinition);
+		});
+	}
+};
+
+Server.prototype.findMatchingRoute = function(request,state,options) {
+	options = options || {};
 	for(var t=0; t<this.routes.length; t++) {
 		var potentialRoute = this.routes[t],
-			pathRegExp = potentialRoute.path,
-			pathname = state.urlInfo.pathname,
+			pathname = options.pathname || state.urlInfo.pathname,
 			match;
 		if(state.pathPrefix) {
 			if(pathname.substr(0,state.pathPrefix.length) === state.pathPrefix) {
@@ -263,6 +292,15 @@ Server.prototype.requestHandler = function(request,response,options) {
 	}
 	// Find the route that matches this path
 	var route = self.findMatchingRoute(request,state);
+	if(!route) {
+		// Try with the default document
+		var defaultDocumentPathname = state.urlInfo.pathname;
+		if(defaultDocumentPathname.substr(-1) !== "/") {
+			defaultDocumentPathname = defaultDocumentPathname + "/";
+		}
+		defaultDocumentPathname = defaultDocumentPathname + "index.html";
+		route = self.findMatchingRoute(request,state,{pathname: defaultDocumentPathname});
+	}
 	// Optionally output debug info
 	if(self.get("debug-level") !== "none") {
 		console.log("Request path:",JSON.stringify(state.urlInfo));

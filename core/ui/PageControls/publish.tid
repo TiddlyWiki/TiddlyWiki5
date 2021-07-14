@@ -1,0 +1,19 @@
+title: $:/core/ui/Buttons/publish
+tags: $:/tags/PageControls
+caption: {{$:/core/images/publish}} {{$:/language/Buttons/Publish/Caption}}
+description: {{$:/language/Buttons/Publish/Hint}}
+
+\define publish-actions()
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/PublishingJob]has[enabled]field:enabled[yes]]" variable="job">
+	<$action-sendmessage $message="tm-publish" job=<<job>>/>
+</$list>
+\end
+
+<$button actions=<<publish-actions>> tooltip={{$:/language/Buttons/Publish/Hint}} aria-label={{$:/language/Buttons/Publish/Caption}} class=<<tv-config-toolbar-class>>>
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{$:/core/images/publish}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/Publish/Caption}}/></span>
+</$list>
+</$button>

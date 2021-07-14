@@ -1,0 +1,69 @@
+created: 20210315092524275
+modified: 20210315093103563
+tags: [[Working with TiddlyWiki]]
+title: Publishing
+
+You can publish extracts from a wiki as a collection of interconnected static files that can be hosted on the Internet independently from TiddlyWiki.
+
+This is a work in progress: see the Pull Request for more details: https://github.com/Jermolene/TiddlyWiki5/pull/5559
+
+!! Usage
+
+In the browser, publishing jobs are configured in [[$:/ControlPanel]]. Clicking the ''publish'' button in the sidebar initiates publishing of all enabled publishing jobs.
+
+Under Node.js, the PublishCommand is used to initiate publishing.
+
+!! Terminology
+
+TiddlyWiki has pluggable ''publisher modules'' that provide the means to publish to specific platforms, referred to by a short name:
+
+* ''jszip'': The JSZip publisher packs the output files in a ZIP file which is automatically downloaded by the browser
+* ''filesystem'': The filesystem publisher saves the output files directly to the file system (it is only available under Node.js)
+* ''github'': The GitHub publisher uploads the output files to a GitHub repository suitable for GitHub Pages
+
+Publisher modules can optionally present a configuration user interface. For example, the JSZip publisher requires the name of the zip file to be configured.
+
+A ''publishing job'' describes a self-contained publishing operation. Jobs are defined as configuration tiddlers with the following fields:
+
+* ''title'' -- by convention, prefixed with `$:/config/PublishingJobs/`
+* ''caption'' -- human readable short name for the publishing job
+* ''tags'' -- `$:/tags/PublishingJob`
+* ''enabled'' -- must be set to `yes` for the publishing job to be recognised
+* ''export-filter'' -- a filter defining which tiddlers are to be exported
+* ''publisher'' -- the name of the publisher module to be used
+* ''&lt;publisher-name&gt;-&lt;parameter-name&gt;'' -- parameters required by the publisher module
+* ''sitemap'' -- title of the site map tiddler to be used
+* ''text'' -- optional variable/macro definitions as sequential `\define` pragmas or nested `<$set>` widgets (the same format as global macros)
+
+A ''site map'' describes the layout and types of files in a publishing job. Site maps are defined as configuration tiddlers with the following fields:
+
+* ''title'' -- by convention, the prefix `$:/core/sitemaps/` is used for sitemaps defined in the core, `$:/plugins/<publisher-name>/<plugin-name>/sitemaps/` is used for sitemaps defined in other plugins, and `$:/config/sitemaps/` for user defined sitemaps
+* ''caption'' -- human readable short name for the sitemap
+* ''description'' -- longer human readable description for the sitemap
+* ''tags'' -- `$:/tags/SiteMap`
+* ''list'' -- list of titles of routes making up this sitemap
+* ''text'' -- optional variable/macro definitions as sequential `\define` pragmas or nested `<$set>` widgets (the same format as global macros)
+
+A ''route'' describes how a group of one or more files is to be created during the export. Routes are defined as configuration tiddlers with the following fields:
+
+* ''title'' -- by convention, the prefix `$:/core/routes/` is used for sitemaps defined in the core, `$:/plugins/<publisher-name>/<plugin-name>/routes/` is used for sitemaps defined in other plugins, and `$:/config/routes/` for user defined sitemaps
+* ''caption'' -- human readable short name for the route
+* ''tags'' -- `$:/tags/Route`
+* ''route-tiddler-filter'' -- a filter defining the tiddlers included in the route
+* ''route-path'' - a parameterised path defining how the ''output path'' is derived from the field values of a particular tiddler
+* ''route-template'' -- optional title of a tiddler used as a template for "render" route types
+* ''route-type'' which can be set to "raw" or "render":
+** ''"raw"'' indicates that the raw tiddler is to be saved, without any rendering
+** ''"render"'' indicates that the tiddler is to be rendered through a specified template
+* ''text'' -- optional variable/macro definitions as sequential `\define` pragmas or nested `<$set>` widgets (the same format as global macros)
+
+The route tiddler filter is passed the tiddlers resulting from the job export filter. In order to respect the restrictions of the job export filter, route filters must be carefully constructed to ensure they pull their titles from the incoming list.
+
+Parameterised paths are strings which may contain optional tokens of the format `fieldname_functionname`. These tokens are replaced by the value of the specified field passed through the specified encoding function. The available encoding functions are:
+
+* ''encoded'' -- applies URI encoding to the value
+* ''doubleencoded'' -- applies double URI encoding to the value
+* ''slugify'' -- applies the [[slugify Operator]] to the value
+* ''extension'' -- interprets the value as a content type and returns the associated file extension
+
+For backwards compatibility, the field "uri" is accepted as a synonym for "title".
