@@ -8,6 +8,7 @@ Welcome to the developer documentation for TiddlyWiki (https://tiddlywiki.com/).
 
 * An assignment by Christian Jurke and Christian Heigele, two students working on their Master's degree in Information Technology at the Gießen University of Applied Sciences (Technische Hochschule Mittelhessen). Their work can be seen in the [[Introduction]] and the tiddlers that link from it.
 * New developer documentation
+** [[Data Storage in Single File TiddlyWiki]]
 ** [[Continuous Deployment]]
 ** [[GitHub Branches]]
 ** HookMechanism

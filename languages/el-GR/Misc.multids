@@ -34,7 +34,6 @@ Error/WhileSaving: Σφάλμα κατά την αποθήκευση
 Error/XMLHttpRequest: XMLHttpRequest κωδικός σφάλματος
 InternalJavaScriptError/Hint: Λοιπόν, αυτό είναι αδιέξοδο. Συνιστάτε να επανεκκινήσετε το TiddlyWiki κάνοντας ανανέωση στον φυλλομετρητή σας
 InternalJavaScriptError/Title: Εσωτερικό σφάλμα σε JavaScript
-InvalidFieldName: Μη έγκυροι χαρακτήρες στο όνομα πεδίου "<$text text=<<fieldName>>/>". Τα ονόματα πεδίων μπορούν να περιέχουν μόνο πεζούς χαρακτήρες, ψηφία και τους χαρακτήρες κάτω παύλα (`_`), μείον (`-`) και τελεία (`.`)
 LazyLoadingWarning: <p>Γίνεται φόρτωση εξωτερικού κειμένου από ''<$text text={{!!_canonical_uri}}/>''</p><p>Αν αυτό το μήνυμα δεν εξαφανιστεί ίσως το πρόγραμμα περιήγησης που χρησιμοποιείται να μην υποστηρίζει εξωτερικό κείμενο στις τρέχουσες του ρυθμίσεις. Δείτε σχετικά στο  https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Είσοδος χρήστη στο TiddlySpace
 Manager/Controls/FilterByTag/None: (κανένα)

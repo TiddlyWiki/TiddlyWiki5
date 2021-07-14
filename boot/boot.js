@@ -1724,13 +1724,20 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/dom","tiddlerdeserializer",{
 			},
 			t,result = [];
 		if(node) {
-			for(t = 0; t < node.childNodes.length; t++) {
+			var type = (node.getAttribute && node.getAttribute("type")) || null;
+			if(type) {
+				// A new-style container with an explicit deserialization type
+				result = $tw.wiki.deserializeTiddlers(type,node.textContent);
+			} else {
+				// An old-style container of classic DIV-based tiddlers
+				for(t = 0; t < node.childNodes.length; t++) {
 					var childNode = node.childNodes[t],
 						tiddlers = extractTextTiddlers(childNode);
 					tiddlers = tiddlers || extractModuleTiddlers(childNode);
 					if(tiddlers) {
 						result.push.apply(result,tiddlers);
 					}
+				}
 			}
 		}
 		return result;
@@ -1739,17 +1746,23 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/dom","tiddlerdeserializer",{
 
 $tw.loadTiddlersBrowser = function() {
 	// In the browser, we load tiddlers from certain elements
-	var containerIds = [
-		"libraryModules",
-		"modules",
-		"bootKernelPrefix",
-		"bootKernel",
-		"styleArea",
-		"storeArea",
-		"systemArea"
+	var containerSelectors = [
+		// IDs for old-style v5.1.x tiddler stores
+		"#libraryModules",
+		"#modules",
+		"#bootKernelPrefix",
+		"#bootKernel",
+		"#styleArea",
+		"#storeArea",
+		"#systemArea",
+		// Classes for new-style v5.2.x JSON tiddler stores
+		"script.tiddlywiki-tiddler-store"
 	];
-	for(var t=0; t<containerIds.length; t++) {
-		$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById(containerIds[t])));
+	for(var t=0; t<containerSelectors.length; t++) {
+		var nodes = document.querySelectorAll(containerSelectors[t]);
+		for(var n=0; n<nodes.length; n++) {
+			$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",nodes[n]));
+		}
 	}
 };
 
