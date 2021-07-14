@@ -26,7 +26,6 @@ The content of the `<$keyboard>` widget is rendered normally. The keyboard short
 
 <<.from-version "5.2.0">> The following variables are made available to the actions:
 
-|column-1-20 |k
 |!Variables |!Description |
 |`event-key` |The <<.var event-key>> variable contains the character, if possible. eg: `1`. You can experiment with some settings at: [[Key Codes (Example)]] |
 |`event-code` |The <<.var event-code>> variable contains a character description. eg:  `Digit1` instead of `1`. Or `Space` instead of an empty string ` `, which is hard to see|
