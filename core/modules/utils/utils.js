@@ -223,6 +223,7 @@ exports.removeArrayEntries = function(array,value) {
 			array.splice(p,1);
 		}
 	}
+	return array;
 };
 
 /*
@@ -740,9 +741,8 @@ exports.isValidFieldName = function(name) {
 	if(!name || typeof name !== "string") {
 		return false;
 	}
-	name = name.toLowerCase().trim();
-	var fieldValidatorRegEx = /^[a-z0-9\-\._]+$/mg;
-	return fieldValidatorRegEx.test(name);
+	// Since v5.2.x, there are no restrictions on characters in field names
+	return name;
 };
 
 /*

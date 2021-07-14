@@ -17,7 +17,7 @@ Export our filter function
 */
 exports.regexp = function(source,operator,options) {
 	var results = [],
-		fieldname = (operator.suffix || "title").toLowerCase(),
+		fieldname = operator.suffix || "title",
 		regexpString, regexp, flags = "", match,
 		getFieldString = function(tiddler,title) {
 			if(tiddler) {

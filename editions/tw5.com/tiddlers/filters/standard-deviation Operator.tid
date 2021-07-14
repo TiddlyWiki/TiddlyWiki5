@@ -8,7 +8,7 @@ tags: [[Reducing Mathematics Operators]] [[Filter Operators]] [[Mathematics Oper
 title: standard-deviation Operator
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.1.24">> See [[Mathematics Operators]] for an overview.
+<<.from-version "5.2.0">> See [[Mathematics Operators]] for an overview.
 
 <<.tip """ The `standard-deviation` operator treats the input as a complete population and not a sample""">>
 

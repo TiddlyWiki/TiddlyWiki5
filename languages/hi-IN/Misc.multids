@@ -12,7 +12,6 @@ DefaultNewTiddlerTitle: नया Tiddler
 DropMessage: यहाँ ड्रॉप (या रद्द करने से बचने के लिए क्लिक करें)
 Encryption/ConfirmClearPassword: आप पासवर्ड को स्पष्ट करना चाहते हैं?  यह एन्क्रिप्शन को हटा देगा जब इस विकि बचत लागू किया
 Encryption/PromptSetPassword: इस टिड्लीविकि के लिए एक नया पासवर्ड सेट करें
-InvalidFieldName: फ़ील्ड के नाम पर अवैध वर्ण "<$ पाठ पाठ = << FIELDNAME >> />"। फील्ड्स केवल छोटे अक्षरों, अंकों में हो सकते हैं और अक्षर, हाइफन (`-`) और अवधि (_``) अंडरस्कोर (`.`)
 MissingTiddler/Hint:  लापता Tiddler बनाने के लिए "<$ पाठ पाठ = << currentTiddler >> />" - क्लिक करें {{$: / कोर / छवियों / संपादित करें बटन}} बनाने के लिए
 RecentChanges/DateFormat: दिनांक / माह / वर्ष
 SystemTiddler/Tooltip: यह एक ऐसी प्रणाली tiddler है

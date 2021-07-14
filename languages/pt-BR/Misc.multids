@@ -33,7 +33,6 @@ Error/WhileSaving: Erro ao gravar
 Error/XMLHttpRequest: Código de erro XMLHttpRequest
 InternalJavaScriptError/Hint: Bem, isto é embaraçoso. Para corrigir, reinicie a sua TiddlyWiki recarregando a página em seu navegador. Normalmente o atalho é (F5)
 InternalJavaScriptError/Title: Erro interno JavaScript
-InvalidFieldName: Caracteres ilegais no nome do arquivo "<$text text=<<fieldName>>/>". Os campos apenas podem conter letras minúsculas, dígitos e os caracteres sublinhado (`_`), hífen (`-`) e ponto final (`.`)
 LazyLoadingWarning: <p>Carregando um texto externo de ''<$text text={{!!_canonical_uri}}/>''</p><p>Se esta mensagem não desaparecer pode ser que esteja usando um navegador que não suporte textos remoto com esta configuração. Veja http://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Entrar em TiddlySpace
 Manager/Controls/FilterByTag/None: (nenhum)

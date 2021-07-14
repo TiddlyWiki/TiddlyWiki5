@@ -172,4 +172,14 @@ exports.pad = function(source,operator,options) {
 	return results;
 }
 
+exports.charcode = function(source,operator,options) {
+	var chars = [];
+	$tw.utils.each(operator.operands,function(operand) {
+		if(operand !== "") {
+			chars.push(String.fromCharCode($tw.utils.parseInt(operand)));
+		}
+	});
+	return [chars.join("")];
+};
+
 })();

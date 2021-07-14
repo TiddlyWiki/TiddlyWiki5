@@ -21,9 +21,10 @@ Mögliche Parameter:
 * ''username'' - Benutzername für die Basis-Authentifizierung
 * ''password'' - Passwort für die Basis-Authentifizierung
 * ''authenticated-user-header'' - HTTP Header-Name für vertrauenswürdige, authentifizierte Benutzer
-* ''readers'' - Komma separierte Liste für Benutzer, mit Schreiberlaubnis
-* ''writers'' - Komma separierte Liste für Benutzer, mit Leseerlaubnis
+* ''readers'' - Komma-separierte Liste für Benutzer, mit Schreiberlaubnis
+* ''writers'' - Komma-separierte Liste für Benutzer, mit Leseerlaubnis
 * ''csrf-disable'' - "yes" bedeutet, dass CSRF checks deaktiviert sind. (Standard: "no")
+* ''sse-enabled'' - "yes" bedeuted, dass "Server-sent events" aktiv sind (Standard: "no")
 * ''root-tiddler'' - Tiddler, der für den "Root-Pfad" verwendet wird. (Standard: "$:/core/save/all")
 * ''root-render-type'' - Darstellungs-Type, die für den Root-Tiddler verwendet wird. (Standard: "text/plain")
 * ''root-serve-type'' - Inhalts-Type, die für den Root-Tiddler verwendet wird. (Standard: "text/html")

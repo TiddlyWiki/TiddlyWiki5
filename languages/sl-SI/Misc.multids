@@ -34,7 +34,6 @@ Error/WhileSaving: Napaka med shranjevanjem
 Error/XMLHttpRequest: Koda napake XMLHttpRequest
 InternalJavaScriptError/Hint: No, to je neprijetno. Priporočamo, da znova zaženete TiddlyWiki tako, da osvežite brskalnik
 InternalJavaScriptError/Title: Notranja napaka JavaScript
-InvalidFieldName: Neveljavni znaki v imenu polja "<$text text=<<fieldName>>/>". Imena polj lahko vsebujejo samo male črke, številke, podčrtaj (`_`), minus (`-`) in piko (`.`).
 LazyLoadingWarning: <p>Nalaganje zunanjega besedila z ''<$text text={{!!_canonical_uri}}/>''</p><p>Če to sporočilo ne izgine, morda uporabljate brskalnik, ki ne podpira zunanjega besedila v tej konfiguraciji. Oglejte si  http://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Prijavite se v TiddlySpace
 Manager/Controls/FilterByTag/None: (nobena)
