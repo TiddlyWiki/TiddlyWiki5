@@ -13,8 +13,13 @@ type: text/vnd.tiddlywiki
 
 ! Unrestricted Fieldnames and the New JSON Store Area
 
+The major change in this release is that the format used to store tiddlers in TiddlyWiki's HTML file has changed from an HTML DIV-based format to a new JSON-based format. The consequences of this change are far-reaching, and justify the move from v5.1.x to v5.2.x:
 
-https://github.com/Jermolene/TiddlyWiki5/pull/5708
+Firstly, the ''characters that can be used in field names are now unrestricted'' (just like tiddler titles), making it possible to use fieldnames like `My^Field` or `☃️`. This became possible because every other part of TiddlyWiki was already capable of dealing with unrestricted field names apart from saving as an HTML file.
+
+Secondly, external tools that read, write or otherwise process TiddlyWiki HTML files will need modification to understand the new store area format.  The details are documented in the [[/dev wiki|https://tiddlywiki.com/prerelease/dev/#Data%20Storage%20in%20Single%20File%20TiddlyWiki]].
+
+For more details, see ticket [[#5708|https://github.com/Jermolene/TiddlyWiki5/pull/5708]] on GitHub.
 
 ! Performance Improvements
 
