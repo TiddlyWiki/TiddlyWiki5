@@ -28,7 +28,7 @@ Simple filter operations can be concatenated together directly (eg `[tag[HelloTh
 </$vars>
 ```
 
-Note that within the subfilter, the "currentTiddler" variable is set to the title of the tiddler being processed. The value of currentTiddler outside the subfilter is available in the variable "..currentTiddler". <<.from-version "5.1.24">>
+Note that within the subfilter, the "currentTiddler" variable is set to the title of the tiddler being processed. The value of currentTiddler outside the subfilter is available in the variable "..currentTiddler". <<.from-version "5.2.0">>
 
 <<.tip "Compare with the similar [[subfilter|subfilter Operator]] operator which runs a subfilter and directly returns the results">>
 

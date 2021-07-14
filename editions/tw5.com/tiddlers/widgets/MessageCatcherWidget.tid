@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-<<.from-version "5.1.24">>
+<<.from-version "5.2.0">>
 
 The message catcher widget traps [[messages|Messages]] dispatched within its child content, and allows invoking a series of ActionWidgets in response to those messages.
 

@@ -16,7 +16,7 @@ The ''action-popup'' widget is invisible. Any content within it is ignored.
 |!Attribute |!Description |
 |$state |The title of the state tiddler for the popup |
 |$coords |Optional coordinates for the handle to which popup is positioned (in the format `(x,y,w,h)`) |
-|$floating |<<.from-version "5.1.24">> Optional. Defaults to `no`. Set to `yes` to create a popup that must be closed explicitly. |
+|$floating |<<.from-version "5.2.0">> Optional. Defaults to `no`. Set to `yes` to create a popup that must be closed explicitly. |
 
 <<.from-version "5.1.23">> If the ''$coords'' attribute is missing or empty then all popups are cancelled.
 

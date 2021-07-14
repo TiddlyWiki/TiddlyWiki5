@@ -8,6 +8,6 @@ tags: [[Filter Operators]] [[Mathematics Operators]]
 title: median Operator
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.1.24">> See [[Mathematics Operators]] for an overview.
+<<.from-version "5.2.0">> See [[Mathematics Operators]] for an overview.
 
 <<.operator-examples "median">>

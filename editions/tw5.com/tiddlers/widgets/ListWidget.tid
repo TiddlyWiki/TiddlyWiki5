@@ -82,7 +82,7 @@ The action of the list widget depends on the results of the filter combined with
 |template |The title of a template tiddler for transcluding each tiddler in the list. When no template is specified, the body of the ListWidget serves as the item template. With no body, a simple link to the tiddler is returned. |
 |editTemplate |An alternative template to use for [[DraftTiddlers|DraftMechanism]] in edit mode |
 |variable |The name for a [[variable|Variables]] in which the title of each listed tiddler is stored. Defaults to ''currentTiddler'' |
-|counter |<<.from-version "5.1.24">> Optional name for a [[variable|Variables]] in which the 1-based numeric index of each listed tiddler is stored (see below) |
+|counter |<<.from-version "5.2.0">> Optional name for a [[variable|Variables]] in which the 1-based numeric index of each listed tiddler is stored (see below) |
 |emptyMessage |Message to be displayed when the list is empty |
 |storyview |Optional name of module responsible for animating/processing the list |
 |history |The title of the tiddler containing the navigation history |

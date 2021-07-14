@@ -17,7 +17,7 @@ The content of the `<$radio>` widget is displayed within an HTML `<label>` eleme
 |tiddler |Title of the tiddler to manipulate (defaults to the [[current tiddler|Current Tiddler]]) |
 |field |The field of the //tiddler// bound to the radio button |
 |index|<<.from-version "5.1.14">> The index of the //tiddler// being [[DataTiddler|DataTiddlers]] bound to the radio button (takes precedence over //field//) |
-|default |<<.from-version "5.1.24">> The default value to be used for matching if the tiddler, field or index are missing |
+|default |<<.from-version "5.2.0">> The default value to be used for matching if the tiddler, field or index are missing |
 |value |The value for the //field// or //index// of the //tiddler// |
 |class |The CSS classes assigned to the label around the radio button <<.from-version "5.1.14">> `tc-radio` is always applied by default, as well as `tc-radio-selected` when selected |
 |actions|<<.from-version "5.1.23">> Optional string containing ActionWidgets to be triggered when the value changes. <br>The variable: ''actionValue'' is available for the actions  |

@@ -10,7 +10,7 @@ tags: [[Filter Operators]]
 title: charcode Operator
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.1.24">>
+<<.from-version "5.2.0">>
 
 This operator returns a string formed from concatenating the characters specified by the numeric codes given in one or more operands. It is useful for generating special characters such as tab (`charcode[9]`) or new line (`charcode[13],[10]`).
 

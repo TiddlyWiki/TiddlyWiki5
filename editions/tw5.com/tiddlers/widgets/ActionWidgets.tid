@@ -44,7 +44,7 @@ Click me!
 
 ! Action Execution Modes
 
-<<.from-version "5.1.24">> The default behaviour of action widgets has some peculiarities that often cause confusion. There is now an improved mode that simplifies how things work, but due to BackwardsCompatibility constraints, it must be explicitly engaged in order to take advantage of it.
+<<.from-version "5.2.0">> The default behaviour of action widgets has some peculiarities that often cause confusion. There is now an improved mode that simplifies how things work, but due to BackwardsCompatibility constraints, it must be explicitly engaged in order to take advantage of it.
 
 The peculiarities relate to the way that the results of previous action widgets are available to subsequent action widgets. By default, action widgets are refreshed before each execution which ensure that they reflect the results of previous actions. However, ordinary widgets are not updated in the same way.
 
