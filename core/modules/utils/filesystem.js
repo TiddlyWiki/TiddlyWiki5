@@ -228,6 +228,7 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 			hasUnsafeFields = hasUnsafeFields || /[\x00-\x1F]/mg.test(value);
 			hasUnsafeFields = hasUnsafeFields || ($tw.utils.trim(value) !== value);
 		}
+		hasUnsafeFields = hasUnsafeFields || /:/mg.test(fieldName);
 	});
 	// Check for field values 
 	if(hasUnsafeFields) {

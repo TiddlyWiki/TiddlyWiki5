@@ -1,5 +1,5 @@
 created: 20150124182421000
-modified: 20210522162642994
+modified: 20210618153333369
 tags: [[Filter Syntax]]
 title: Filter Expression
 type: text/vnd.tiddlywiki
@@ -26,14 +26,17 @@ If a run has:
 * named prefix `:intersection` replaces all filter output so far with titles that are present in the output of this run, as well as the output from previous runs. Forms the input for the next run. <<.from-version "5.1.23">>
 * named prefix `:reduce` replaces all filter output so far with a single item by repeatedly applying a formula to each input title. A typical use is to add up the values in a given field of each input title. <<.from-version "5.1.23">>
 ** [[Examples|Filter Run Prefix (Examples)]]
-* named prefix `:sort` sorts all filter output so far by applying this run to each input title and sorting according to that output. <<.from-version "5.1.24">>
+* named prefix `:sort` sorts all filter output so far by applying this run to each input title and sorting according to that output. <<.from-version "5.2.0">>
 ** See [[Sort Filter Run Prefix]].
+* named prefix `:map` transforms all filter output so far by applying this run to each input title and replacing the input title with the output of this run for that title.
+** See [[Map Filter Run Prefix]]. <<.from-version "5.2.0">>
+
 
 <<.tip "Compare named filter run prefix `:filter` with [[filter Operator]] which applies a subfilter to every input title, removing the titles that return an empty result from the subfilter">>
 
 <<.tip "Compare named filter run prefix `:reduce` with [[reduce Operator]] which is used to used to flatten a list of items down to a single item by repeatedly applying a subfilter.">> 
 
-<<.tip """Within the filter runs prefixed with `:reduce`, `:sort` and `:filter`, the "currentTiddler" variable is set to the title of the tiddler being processed. The value of currentTiddler outside the subfilter is available in the variable "..currentTiddler".<<.from-version "5.1.24">>""" >>
+<<.tip """Within the filter runs prefixed with `:reduce`, `:sort`, `:map` and `:filter`, the "currentTiddler" variable is set to the title of the tiddler being processed. The value of currentTiddler outside the subfilter is available in the variable "..currentTiddler".<<.from-version "5.2.0">>""" >>
 
 In technical / logical terms:
 

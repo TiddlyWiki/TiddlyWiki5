@@ -46,7 +46,7 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 	$tw.utils.each(this.types,function(type) {
 		domNode.addEventListener(type,function(event) {
 			var selector = self.getAttribute("selector"),
-				actions = self.getAttribute("actions-"+type),
+				actions = self.getAttribute("$"+type) || self.getAttribute("actions-"+type),
 				stopPropagation = self.getAttribute("stopPropagation","onaction"),
 				selectedNode = event.target,
 				selectedNodeRect,
@@ -135,7 +135,15 @@ Compute the internal state of the widget
 EventWidget.prototype.execute = function() {
 	var self = this;
 	// Get attributes that require a refresh on change
-	this.types = this.getAttribute("events","").split(" ");
+	this.types = [];
+	$tw.utils.each(this.attributes,function(value,key) {
+		if(key.charAt(0) === "$") {
+			self.types.push(key.slice(1));
+		}
+	});
+	if(!this.types.length) {
+		this.types = this.getAttribute("events","").split(" ");
+	}
 	this.elementTag = this.getAttribute("tag");
 	// Make child widgets
 	this.makeChildWidgets();
@@ -151,12 +159,13 @@ EventWidget.prototype.assignDomNodeClasses = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 EventWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
-	if(changedAttributes["events"] || changedAttributes["tag"]) {
+	var changedAttributes = this.computeAttributes(),
+		changedAttributesCount = $tw.utils.count(changedAttributes);
+	if(changedAttributesCount === 1 && changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	} else if(changedAttributesCount > 0) {
 		this.refreshSelf();
 		return true;
-	} else if(changedAttributes["class"]) {
-		this.assignDomNodeClasses();
 	}
 	return this.refreshChildren(changedTiddlers);
 };

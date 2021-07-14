@@ -220,6 +220,7 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 	wiki.addTiddler({
 		title: "Brownies",
 		text: "//This is a sample shopping list item for the [[Shopping List Example]]//",
+		description: "A square of rich chocolate cake",
 		tags: ["shopping","food"],
 		price: "4.99",
 		quantity: "1"
@@ -228,6 +229,7 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		title: "Chick Peas",
 		text: "//This is a sample shopping list item for the [[Shopping List Example]]//",
 		tags: ["shopping","food"],
+		description: "a round yellow seed",
 		price: "1.32",
 		quantity: "5"
 	});
@@ -242,6 +244,7 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		title: "Rice Pudding",
 		price: "2.66",
 		quantity: "4",
+		description: "",
 		tags: ["shopping", "dairy"],
 		text: "//This is a sample shopping list item for the [[Shopping List Example]]//"
 	});
@@ -373,6 +376,14 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(wiki.filterTiddlers("[tag[cakes]] :sort:string[{!!title}]").join(",")).toBe("Cheesecake,cheesecake,Chocolate Cake,chocolate cake,Persian love cake,Pound cake");
 		expect(wiki.filterTiddlers("[tag[cakes]] :sort:string:casesensitive[{!!title}]").join(",")).toBe("Cheesecake,Chocolate Cake,Persian love cake,Pound cake,cheesecake,chocolate cake");
 		expect(wiki.filterTiddlers("[tag[cakes]] :sort:string:casesensitive,reverse[{!!title}]").join(",")).toBe("chocolate cake,cheesecake,Pound cake,Persian love cake,Chocolate Cake,Cheesecake");
+	});
+
+	it("should handle the :map prefix", function() {
+		expect(wiki.filterTiddlers("[tag[shopping]] :map[get[title]]").join(",")).toBe("Brownies,Chick Peas,Milk,Rice Pudding");
+		expect(wiki.filterTiddlers("[tag[shopping]] :map[get[description]]").join(",")).toBe("A square of rich chocolate cake,a round yellow seed,,");
+		expect(wiki.filterTiddlers("[tag[shopping]] :map[get[description]else{!!title}]").join(",")).toBe("A square of rich chocolate cake,a round yellow seed,Milk,Rice Pudding");
+		// Return the first title from :map if the filter returns more than one result
+		expect(wiki.filterTiddlers("[tag[shopping]] :map[tags[]]").join(",")).toBe("shopping,shopping,shopping,shopping");
 	});
 });
 
