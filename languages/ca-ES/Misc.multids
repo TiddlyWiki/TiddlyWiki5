@@ -35,7 +35,6 @@ Error/WhileSaving: S'ha produït un error en desar
 Error/XMLHttpRequest: Codi d'error XMLHttpRequest
 InternalJavaScriptError/Hint: Bé, això és compromès. Es recomana que reinicieu TiddlyWiki actualitzant el navegador
 InternalJavaScriptError/Title: S'ha produït un error intern de JavaScript
-InvalidFieldName: Hi ha caràcters il·legals al nom del camp "<$text text=<<fieldName>>/>". Els camps només poden utilitzar minúscules, digits i els caràcters subratllat (`_`), guió (`-`) i punt (`.`)
 LazyLoadingWarning: <p>S'està tractant de carregar contingut extern de ''<$text text={{!!_canonical_uri}}/>''</p><p>Si aquest missatge no desapareix, o bé el tipus de contingut del tiddler no coincideix amb el tipus de contingut extern o bé esteu utilitzant un navegador que no admet contingut extern per als wikis carregats com a fitxers independents. Mireu https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Inicieu la sessió a TiddlySpace
 Manager/Controls/FilterByTag/None: (cap)

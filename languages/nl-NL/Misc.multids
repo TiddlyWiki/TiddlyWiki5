@@ -38,7 +38,6 @@ Error/WhileSaving: Fout bij opslaan
 Error/XMLHttpRequest: XMLHttpRequest foutcode
 InternalJavaScriptError/Hint: Er is een probleem. Herstart TiddlyWiki door je browser te verversen
 InternalJavaScriptError/Title: Interne JavaScript fout
-InvalidFieldName: Illegale lettertekens in veldnaam "<$text text=<<fieldName>>/>". Velden kunnen alleen kleine letters, cijfers en de lettertekens liggend streepje (`_`), koppelteken (`-`) en punt (`.`)
 LazyLoadingWarning: <p>Er wordt externe tekst geladen van ''<$text text={{!!_canonical_uri}}/>''</p><p>Als deze mededeling niet verdwijnt ondersteunt de gebruikte browser in deze configuratie mogelijk geen externe tekst. Zie https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Login bij TiddlySpace
 Manager/Controls/FilterByTag/None: (geen)

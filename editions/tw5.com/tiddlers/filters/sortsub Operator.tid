@@ -17,7 +17,7 @@ Each item in the list of input titles is passed to the subfilter in turn. The su
 
 Note that within the subfilter, the "currentTiddler" variable is set to the title of the tiddler being processed. This permits subfilters like `[{!!value}divide{!!cost}]` to be used for computation. 
 
-The value of currentTiddler outside the subfilter is available in the variable "..currentTiddler". <<.from-version "5.1.24">>
+The value of currentTiddler outside the subfilter is available in the variable "..currentTiddler". <<.from-version "5.2.0">>
 
 The suffix <<.place T>> determines how the items are compared and can be:
 
@@ -26,7 +26,7 @@ The suffix <<.place T>> determines how the items are compared and can be:
 * "integer" - invalid integers are interpreted as zero
 * "date" - invalid dates are interpreted as 1st January 1970
 * "version" - invalid versions are interpreted as "v0.0.0"
-* "alphanumeric" - treat items as alphanumerics <<.from-version "5.1.24">>
+* "alphanumeric" - treat items as alphanumerics <<.from-version "5.2.0">>
 
 Note that subfilters should return the same number of items that they are passed. Any missing entries will be treated as zero or the empty string. In particular, when retrieving the value of a field with the [[get Operator]] it is helpful to guard against a missing field value using the [[else Operator]]. For example `[get[myfield]else[default-value]...`.
 

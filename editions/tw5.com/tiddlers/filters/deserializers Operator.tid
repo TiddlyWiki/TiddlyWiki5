@@ -1,6 +1,6 @@
 caption: deserializers
 created: 20210506115203172
-from-version: 5.1.24
+from-version: 5.2.0
 modified: 20210506130322593
 op-input: ignored
 op-output: the title of each available deserializer

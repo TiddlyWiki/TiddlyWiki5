@@ -15,10 +15,10 @@ It uses the same method as the create new tiddler button, a number is appended t
 : A string specifying the desired base name, defaulting to `New Tiddler`. <br>The default setting can be adjusted in the $:/ControlPanel '': Info : Basics - tab.''
 
 ; separator
-: <<.from-version "5.1.24">> An ''optional'' string specifying the separator between baseName and the unique number. eg: `separator:"-"`. Defaults to a space: `" "`. If you need an empty separator use the ''template''!
+: <<.from-version "5.2.0">> An ''optional'' string specifying the separator between baseName and the unique number. eg: `separator:"-"`. Defaults to a space: `" "`. If you need an empty separator use the ''template''!
 
 ; template
-: <<.from-version "5.1.24">> A ''optional'' template string can be used to allow you maximum flexibility. If the template string is used, there will always be a counter value. 
+: <<.from-version "5.2.0">> A ''optional'' template string can be used to allow you maximum flexibility. If the template string is used, there will always be a counter value. 
 
 !! Template String
 

@@ -29,7 +29,7 @@ The following formats can be specified in the `format` attribute:
 |!Format |!Description |
 |''text'' |Plain text (default) |
 |''htmlencoded'' |The field is displayed with HTML encoding |
-|''htmltextencoded'' |<<.from-version "5.1.24">> The field is displayed with HTML encoding, only double quotes (") are not escaped. This creates a more compact htmlencoding appropriate for html text content, but //not// for attributes. |
+|''htmltextencoded'' |<<.from-version "5.2.0">> The field is displayed with HTML encoding, only double quotes (") are not escaped. This creates a more compact htmlencoding appropriate for html text content, but //not// for attributes. |
 |''urlencoded'' |The field is displayed with URL encoding |
 |''doubleurlencoded'' |The field is displayed with double URL encoding |
 |''htmlwikified'' |The field is wikified according to the mode attribute and the resulting HTML returned as plain text (ie HTML elements will appear in plain text) |
