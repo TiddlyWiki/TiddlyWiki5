@@ -18,7 +18,7 @@ There are several differences from the [[tm-new-tiddler message|WidgetMessage: t
 
 The ''action-createtiddler'' widget is invisible.
 
-<<.from-version "5.1.24">> The action widgets contained within the ''action-createtiddler'' widget are executed after the new tiddler has been created with the title of the tiddler in the variable `createTiddler-title` and `createTiddler-draftTitle`.
+<<.from-version "5.2.0">> The action widgets contained within the ''action-createtiddler'' widget are executed after the new tiddler has been created with the title of the tiddler in the variable `createTiddler-title` and `createTiddler-draftTitle`.
 
 |!Attribute |!Description |
 |$basetitle |The initial title that will be attempted. If a tiddler with that title already exists, then a numerical counter is added to the title and incremented until it is unique|
@@ -29,7 +29,7 @@ The ''action-createtiddler'' widget is invisible.
 |$overwrite |<<.from-version "5.1.22">> If set to "yes", it will overwrite existing tiddlers. ''Be careful!'' |
 |//{any attributes not starting with $}// |Each attribute name specifies a field to be created in the new tiddler  |
 
-<<.from-version "5.1.24">> Note that the attributes `$savetitle` and `$savedrafttitle` are no longer needed. Instead, any action widgets that need to use the title of the newly created tiddler should be contained within the ''action-createtiddler'' widget, and reference the variables `createTiddler-title` and `createTiddler-draftTitle` to obtain the title.
+<<.from-version "5.2.0">> Note that the attributes `$savetitle` and `$savedrafttitle` are no longer needed. Instead, any action widgets that need to use the title of the newly created tiddler should be contained within the ''action-createtiddler'' widget, and reference the variables `createTiddler-title` and `createTiddler-draftTitle` to obtain the title.
 
 ! Examples
 

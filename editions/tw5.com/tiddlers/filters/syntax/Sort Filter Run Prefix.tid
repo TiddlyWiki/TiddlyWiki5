@@ -4,7 +4,7 @@ tags: [[Filter Syntax]] [[Filter Run Prefix]]
 title: Sort Filter Run Prefix
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.1.24">>
+<<.from-version "5.2.0">>
 
 |''purpose'' |sort the input titles by the result of evaluating this filter run for each item |
 |''input'' |all titles from previous filter runs |

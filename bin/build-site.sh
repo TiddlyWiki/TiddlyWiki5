@@ -5,7 +5,7 @@
 # Default to the current version number for building the plugin library
 
 if [  -z "$TW5_BUILD_VERSION" ]; then
-    TW5_BUILD_VERSION=v5.1.24
+    TW5_BUILD_VERSION=v5.2.0
 fi
 
 echo "Using TW5_BUILD_VERSION as [$TW5_BUILD_VERSION]"
