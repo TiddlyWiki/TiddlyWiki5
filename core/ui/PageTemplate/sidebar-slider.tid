@@ -1,6 +1,6 @@
 title: $:/core/ui/PageTemplate/sidebar-slider
 tags: $:/tags/PageTemplate
 
-<$eventcatcher stopPropagation="never" selector=".tc-sidebar-slider" events="pointerdown" $pointerdown="""<$action-setfield $tiddler="$:/state/dragging" text="yes" state-title="$:/state/sidebar-slider"/><$action-setfield $tiddler="$:/state/sidebar-slider" slider-event-fromselected-posx=<<event-fromselected-posx>>/>""">
+<$eventcatcher stopPropagation="never" selector=".tc-sidebar-slider" $pointerdown="""<$action-setfield $tiddler="$:/state/dragging" text="yes" state-title="$:/state/sidebar-slider"/><$action-setfield $tiddler="$:/state/sidebar-slider" slider-event-fromselected-posx=<<event-fromselected-posx>>/>""">
 <div class="tc-sidebar-slider"/>
 </$eventcatcher>

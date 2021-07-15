@@ -20,7 +20,7 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 	storyviewTitle={{$:/view}}
 	languageTitle={{{ [{$:/language}get[name]] }}}>
 
-<$eventcatcher selector=".tc-page-container" stopPropagation="never" events="pointerdown pointerup pointermove" $pointerdown=<<actions-pointerdown>> $pointerup=<<actions-pointerup>> $pointermove=<<actions-pointermove>>>
+<$eventcatcher selector=".tc-page-container" stopPropagation="never" $pointerdown=<<actions-pointerdown>> $pointerup=<<actions-pointerup>> $pointermove=<<actions-pointermove>>>
 
 <div class=<<containerClasses>>>
 
