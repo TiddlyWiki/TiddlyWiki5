@@ -18,8 +18,8 @@ input-accept: Enter
 input-accept-variant: ctrl-Enter
 input-cancel: Escape
 input-down: Down
-input-tab-left: alt-Left
-input-tab-right: alt-Right
+input-tab-left: alt-ctrl-Left
+input-tab-right: alt-ctrl-Right
 input-up: Up
 layout-switcher: ctrl-shift-L
 link: ctrl-L
