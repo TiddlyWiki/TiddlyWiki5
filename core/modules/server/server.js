@@ -171,15 +171,7 @@ Server.prototype.get = function(name) {
 };
 
 Server.prototype.addRoute = function(route) {
-	// Find out if the route exists
-	let index = this.routes.findIndex((thisRoute) => thisRoute.path.toString() === route.path.toString());
-	if (index === -1) {
-	// Push the new route if not found
 	this.routes.push(route);
-	} else {
-	// else replace the old route
-	this.routes[index] = route;
-	}
 };
 
 Server.prototype.addAuthenticator = function(AuthenticatorClass) {
@@ -341,7 +333,7 @@ Server.prototype.listen = function(port,host,prefix) {
 			missing.push(name);
 		}
 	}
-	if(missing.length > 0) {debugger;
+	if(missing.length > 0) {
 		var error = "Warning: Plugin(s) required for client-server operation are missing.\n"+
 			"\""+ missing.join("\", \"")+"\"";
 		$tw.utils.warning(error);
