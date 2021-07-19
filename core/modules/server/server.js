@@ -46,7 +46,7 @@ function Server(options) {
 	}
 	$tw.utils.extend({},this.defaultVariables,options.variables);
 	// Setup the default required plugins
-	this.requiredPlugins = (options.requiredPlugins || "tiddlywiki/filesystem,tiddlywiki/tiddlyweb").split(',');
+	this.requiredPlugins = (options.requiredPlugins || "$:/plugins/tiddlywiki/filesystem,$:/plugins/tiddlywiki/tiddlyweb").split(',');
 	// Initialise CSRF
 	this.csrfDisable = this.get("csrf-disable") === "yes";
 	// Initialize Gzip compression
