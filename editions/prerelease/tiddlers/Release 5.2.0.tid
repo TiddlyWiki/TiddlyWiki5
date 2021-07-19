@@ -11,7 +11,9 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.23...master]]//
 
-! Unrestricted Fieldnames and the New JSON Store Area
+! Highlights
+
+!! Unrestricted Fieldnames and the New JSON Store Area
 
 The major change in this release is that the format used to store tiddlers in TiddlyWiki's HTML file has changed from an HTML DIV-based format to a new JSON-based format. The consequences of this change are far-reaching, and justify the move from v5.1.x to v5.2.x:
 
@@ -20,6 +22,27 @@ Firstly, the ''characters that can be used in field names are now unrestricted''
 Secondly, external tools that read, write or otherwise process TiddlyWiki HTML files will need modification to understand the new store area format.  The details are documented in the [[/dev wiki|https://tiddlywiki.com/prerelease/dev/#Data%20Storage%20in%20Single%20File%20TiddlyWiki]].
 
 For more details, see ticket [[#5708|https://github.com/Jermolene/TiddlyWiki5/pull/5708]] on GitHub.
+
+!! Dragging and Dropping Images into the Editor
+
+It is now possible to drag and drop an image file directly into the tiddler text editor. A popup allows the incoming image tiddler to be renamed, and then `[img[title]]` is automatically inserted into the tiddler text at the insertion point.
+
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5699">> (and again [[here|https://github.com/Jermolene/TiddlyWiki5/pull/5705]]) ability to drag and drop images directly in the editor
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5479">> ability to import previously blocked system tiddlers
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5812">> warning message when cancelling a pending import
+
+!! Simplified Access to Tiddler Title with ActionCreateTiddlerWidget
+
+It is now possible to embed actions within the body of the ActionCreateTiddlerWidget, and those can access to the title of the newly created tidddler via the variable `createTiddler-title`, and the title of the corresponding draft in the variable `createTiddler-draftTitle`. The old `$savetitle` and `$savedrafttitle` attributes are now deprecated.
+
+```
+<$button>
+<$action-createtiddler $basetitle="Homemade Button" tags="$:/tags/PageControls" text={{$:/state/new-button-caption}}>
+<$action-navigate $to=<<createTiddler-title>>/>
+</$action-createtiddler>
+Create a new non-functional page control button and open the tiddler
+</$button>
+```
 
 ! Performance Improvements
 
@@ -31,7 +54,7 @@ For more details, see ticket [[#5708|https://github.com/Jermolene/TiddlyWiki5/pu
 
 ! Usability Improvements
 
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5699">> (and again [[here|https://github.com/Jermolene/TiddlyWiki5/pull/5705]]) ability to drag and drop images in the editor to import and insert
+* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/commit/f97850dd05693e84dd36b8af5d72b22fbfd74958">> the default fonts in the "Snow White" theme to be thicker and more legible
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5816">> modal mechanism to prevent page from scrolling while modals are displayed
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/a360adbba924d222c5b55709133c18890c04398d">> size of dropzone when story river is empty
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5326">> fill colour for "remove tag" button
@@ -40,11 +63,10 @@ For more details, see ticket [[#5708|https://github.com/Jermolene/TiddlyWiki5/pu
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/commit/caec6bc3fea9155eb2b0aae64d577c565dd7b088">> SVG optimiser script
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/c325380231a8c592a6e51d4498c1e6c3a241b539">> plus/minus SVG icons: <<.icon $:/core/images/plus-button>> and <<.icon $:/core/images/minus-button>>
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5672">> link to the existing tiddler when the warning "Target tiddler already exists" is displayed in the edit template
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5479">> ability to import previously blocked system tiddlers
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5727">> class to make tag pills in the edit template look like those in the ViewTemplate
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5812">> warning message when cancelling a pending import
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5726">> the HTML comment syntax to enable it to be used before and in between pragmas such as macro definitions
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/1661">> overflow of long field values that do not contain whitespace
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/a4421f50c6886b02c3595b7ffa6ba72674d6bf21>> GitHub, Gitea and GitLab savers to wikify the commit message, enabling macros to be used in the message
 
 ! Filter improvements
 
@@ -94,7 +116,6 @@ For more details, see ticket [[#5708|https://github.com/Jermolene/TiddlyWiki5/pu
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/5483">> issue with encoding of $:/config/OriginalTiddlerPaths outside the wiki folder
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/5628">> the TiddlySpot Saver settings form
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5638">> 401 and 403 error messages for PUT saver
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/d8ac00a10856b1b64311b8e0496344d5b0c1b987">> fixed crash if browser doesn't support Server Sent Events
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5570">> the [[external JavaScript template|Using the external JavaScript template]] to be easier to use and work more smoothly when offline
 
 ! Node.js Improvements
@@ -131,7 +152,6 @@ For more details, see ticket [[#5708|https://github.com/Jermolene/TiddlyWiki5/pu
 
 ! Developer Experience Improvements
 
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5279">> support for [[server sent events|https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events]]
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5382">> the widget subclassing mechanism to work with widgets that add event listeners in their constructor
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5377">> the Jasmine test suite output
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/9f9ce6595b08032a602981f82940ca113cff8211">> wikitext parser with a subclassing mechanism
@@ -167,7 +187,7 @@ For more details, see ticket [[#5708|https://github.com/Jermolene/TiddlyWiki5/pu
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5711">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/pull/5868]]) some bugs in the [[EventCatcherWidget]], introduced new `stopPorpagation` attribute and new syntax for specifying actions
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5691">> CurrentTiddler variable consistency in subfilters and prefixes
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/485779f5b2136b7bcd739352b56188d94b0eb9e4">> crash when accessing variables in filters that don't have a widget context
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/8fbf52e419e71d726ea32b6c44e3ccfc4245d825">> unnecessary triggering reload warning when javascript tiddlers are not subsequently imported
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/8fbf52e419e71d726ea32b6c44e3ccfc4245d825">> unnecessary triggering of reload warning when JavaScript tiddlers are not subsequently imported
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5521">> minor issue with import pragma 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5700">> leading and trailing whitespace in themes
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5469">> configuration list of HTML5 block elements
