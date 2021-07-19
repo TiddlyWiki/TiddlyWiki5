@@ -23,7 +23,6 @@ function TiddlyWebAdaptor(options) {
 	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
 	this.isLoggedIn = false;
 	this.isReadOnly = false;
-	this.isPollingDisabled = false;
 }
 
 TiddlyWebAdaptor.prototype.name = "tiddlyweb";
@@ -92,15 +91,10 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 				self.isLoggedIn = json.username !== "GUEST";
 				self.isReadOnly = !!json["read_only"];
 				self.isAnonymous = !!json.anonymous;
-
-				// set whether the syncer should be polling for changes
-				// this allows the syncer to still call for manual polls 
-				// when requested by the user
-				self.isPollingDisabled = false;
 			}
 			// Invoke the callback if present
 			if(callback) {
-				callback(null,self.isLoggedIn,json.username,self.isReadOnly,self.isAnonymous,self.isPollingDisabled);
+				callback(null,self.isLoggedIn,json.username,self.isReadOnly,self.isAnonymous);
 			}
 		}
 	});

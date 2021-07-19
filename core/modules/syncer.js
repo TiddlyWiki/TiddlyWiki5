@@ -268,7 +268,7 @@ Syncer.prototype.getStatus = function(callback) {
 		// Mark us as not logged in
 		this.wiki.addTiddler({title: this.titleIsLoggedIn,text: "no"});
 		// Get login status
-		this.syncadaptor.getStatus(function(err,isLoggedIn,username,isReadOnly,isAnonymous,isPollingDisabled) {
+		this.syncadaptor.getStatus(function(err,isLoggedIn,username,isReadOnly,isAnonymous) {
 			if(err) {
 				self.logger.alert(err);
 			} else {
@@ -278,9 +278,6 @@ Syncer.prototype.getStatus = function(callback) {
 				self.wiki.addTiddler({title: self.titleIsLoggedIn,text: isLoggedIn ? "yes" : "no"});
 				if(isLoggedIn) {
 					self.wiki.addTiddler({title: self.titleUserName,text: username || ""});
-				}
-				if(isPollingDisabled) {
-					self.wiki.addTiddler({title: self.titleSyncDisablePolling, text: "yes"});
 				}
 			}
 			$tw.hooks.invokeHook("th-syncer-status-response",self,!err);
