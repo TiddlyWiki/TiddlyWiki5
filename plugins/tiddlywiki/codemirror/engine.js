@@ -174,7 +174,7 @@ Set the text of the engine if it doesn't currently have focus
 CodeMirrorEngine.prototype.setText = function(text,type) {
 	var self = this;
 	self.cm.setOption("mode",type);
-	if(!this.cm.hasFocus()) {
+	if(text !== this.getValue()) {
 		this.updateDomNodeText(text);
 	}
 };
