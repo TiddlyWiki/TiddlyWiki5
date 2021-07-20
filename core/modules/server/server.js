@@ -34,7 +34,7 @@ function Server(options) {
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
-	this.servername = $tw.utils.transliterateToSafeASCII(this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
+	this.servername = $tw.utils.transliterateToSafeASCII(options.servername || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
 	if(options.variables) {
@@ -45,6 +45,8 @@ function Server(options) {
 		}
 	}
 	$tw.utils.extend({},this.defaultVariables,options.variables);
+	// Setup the default required plugins
+	this.requiredPlugins = (options.requiredPlugins || "$:/plugins/tiddlywiki/filesystem,$:/plugins/tiddlywiki/tiddlyweb").split(',');
 	// Initialise CSRF
 	this.csrfDisable = this.get("csrf-disable") === "yes";
 	// Initialize Gzip compression
@@ -71,11 +73,13 @@ function Server(options) {
 	this.listenOptions = null;
 	this.protocol = "http";
 	var tlsKeyFilepath = this.get("tls-key"),
-		tlsCertFilepath = this.get("tls-cert");
+		tlsCertFilepath = this.get("tls-cert"),
+		tlsPassphrase = this.get("tls-passphrase");
 	if(tlsCertFilepath && tlsKeyFilepath) {
 		this.listenOptions = {
 			key: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsKeyFilepath),"utf8"),
-			cert: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsCertFilepath),"utf8")
+			cert: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsCertFilepath),"utf8"),
+			passphrase: tlsPassphrase || ''
 		};
 		this.protocol = "https";
 	}
@@ -322,8 +326,17 @@ Server.prototype.listen = function(port,host,prefix) {
 		port = process.env[port] || 8080;
 	}
 	// Warn if required plugins are missing
-	if(!this.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !this.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
-		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
+	var missing = [];
+	for (var index=0; index<this.requiredPlugins.length; index++) {
+		var name = this.requiredPlugins[index];
+		if (!this.wiki.getTiddler(name)) {
+			missing.push(name);
+		}
+	}
+	if(missing.length > 0) {
+		var error = "Warning: Plugin(s) required for client-server operation are missing.\n"+
+			"\""+ missing.join("\", \"")+"\"";
+		$tw.utils.warning(error);
 	}
 	// Create the server
 	var server;
