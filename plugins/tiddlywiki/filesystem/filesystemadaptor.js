@@ -62,6 +62,7 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 		extFilters = this.wiki.getTiddlerText("$:/config/FileSystemExtensions","").split("\n");
 	}
 	newInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
+		boot: this.boot,
 		directory: this.boot.wikiTiddlersPath,
 		pathFilters: pathFilters,
 		extFilters: extFilters,
