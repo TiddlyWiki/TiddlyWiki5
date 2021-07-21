@@ -34,7 +34,6 @@ Error/WhileSaving: خطا  در حین ذخیره
 Error/XMLHttpRequest: XMLHttpRequest error code
 InternalJavaScriptError/Hint: اوه این خجالت آوره. پیشنهاد می‌کنیم که با ریفرش کردن مرورگرتون تیدلی‌ویکی رو دوباره باز کنین
 InternalJavaScriptError/Title: خطای  JavaScript داخلی
-InvalidFieldName: Illegal characters in field name "<$text text=<<fieldName>>/>". Fields can only contain lowercase letters, digits and the characters underscore (`_`), hyphen (`-`) and period (`.`)
 LazyLoadingWarning: <p>Loading external text from ''<$text text={{!!_canonical_uri}}/>''</p><p>If this message doesn't disappear you may be using a browser that doesn't support external text in this configuration. See https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Login to TiddlySpace
 Manager/Controls/FilterByTag/None: (هیچ)

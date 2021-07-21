@@ -41,7 +41,6 @@ Error/WhileSaving: 保存时，发生错误
 Error/XMLHttpRequest: XMLHttpRequest 错误代码
 InternalJavaScriptError/Title: 内部的 JavaScript 错误
 InternalJavaScriptError/Hint: 喔，真是令人尴尬。建议刷新您的浏览器，重新启动 TiddlyWiki
-InvalidFieldName: 字段名称 "<$text text=<<fieldName>>/>" 包含无效字符，字段名称只能包含小写字母、数字、底线 (`_`)、 连字号 (`-`) 和小数点 (`.`)
 LayoutSwitcher/Description: 打开布局切换器
 LazyLoadingWarning: <p>正在从 ''<$text text={{!!_canonical_uri}}/>'' 加载外部内容 ...</p><p>如果此信息未消失，可能是条目内容类型与外部内容的类型不匹配，或是您可能正在使用的浏览器，不支援单文件式维基的外部内容。请参阅 https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: 登录 TiddlySpace

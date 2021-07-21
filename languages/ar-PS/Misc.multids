@@ -37,7 +37,6 @@ Error/WhileSaving: حدث خطأ أثناء الحفظ
 InternalJavaScriptError/Hint: حسنا، هذا أمر محرج. من المستحسن إعادة تشغيل تدلي ويكي عن طريق إنعاش المتصفح الخاص بك
 InternalJavaScriptError/Title: خطأ جافا سكربت داخلي
 
-InvalidFieldName: أحرف غير صحيحة في اسم الحقل  "<$text text=<<fieldName>>/>". يمكن أن تحتوي الحقول فقط على الأحرف الانجليزية الصغيرة والأرقام والأحرف السفلية (`_`) والواصلة (` -`) والنقطة (`.`)
 LoginToTiddlySpace: تسجيل الدخول إلى تدلي سبيس
 
 Manager/Controls/FilterByTag/None: (بلا)

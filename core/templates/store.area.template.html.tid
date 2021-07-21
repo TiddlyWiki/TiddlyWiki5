@@ -1,14 +1,37 @@
 title: $:/core/templates/store.area.template.html
 
-<$reveal type="nomatch" state="$:/isEncrypted" text="yes">
-`<div id="storeArea" style="display:none;">`
-<$list filter=<<saveTiddlerFilter>> template="$:/core/templates/html-div-tiddler"/>
-<$list filter={{{ [<skinnySaveTiddlerFilter>] }}} template="$:/core/templates/html-div-skinny-tiddler"/>
-`</div>`
-</$reveal>
-<$reveal type="match" state="$:/isEncrypted" text="yes">
-`<!--~~ Encrypted tiddlers ~~-->`
-`<pre id="encryptedStoreArea" type="text/plain" style="display:none;">`
-<$encrypt filter=<<saveTiddlerFilter>>/>
-`</pre>`
-</$reveal>
+\whitespace trim
+<!-- Unencrypted -->
+<$list filter="[[$:/isEncrypted]get[text]else[no]match[no]]">
+    <$list filter="[[storeAreaFormat]is[variable]getvariable[]else[json]match[json]]">
+        <!-- New-style JSON store area, with an old-style store area for compatibility with v5.1.x tooling -->
+        `<script class="tiddlywiki-tiddler-store" type="application/json">[`
+            <$vars newline={{{ [charcode[10]] }}}>
+                <$text text=<<newline>>/>
+                <$list filter=<<saveTiddlerFilter>> counter="counter" template="$:/core/templates/html-json-tiddler"/>
+                <$vars numTiddlers={{{ [subfilter<saveTiddlerFilter>count[]] }}}>
+                    <$list filter={{{ [<skinnySaveTiddlerFilter>] }}} counter="counter" template="$:/core/templates/html-json-skinny-tiddler"/>
+                </$vars>
+                <$text text=<<newline>>/>
+            </$vars>
+        `]</script>`
+        `<div id="storeArea" style="display:none;">`
+        `</div>`
+    </$list>
+    <$list filter="[[storeAreaFormat]is[variable]getvariable[]else[json]match[div]]">
+        <!-- Old-style DIV/PRE-based store area -->
+        <$reveal type="nomatch" state="$:/isEncrypted" text="yes">
+            `<div id="storeArea" style="display:none;">`
+                <$list filter=<<saveTiddlerFilter>> template="$:/core/templates/html-div-tiddler"/>
+                <$list filter={{{ [<skinnySaveTiddlerFilter>] }}} template="$:/core/templates/html-div-skinny-tiddler"/>
+            `</div>`
+        </$reveal>
+    </$list>
+</$list>
+<!-- Encrypted -->
+<$list filter="[[$:/isEncrypted]get[text]else[no]match[yes]]">
+    `<!--~~ Encrypted tiddlers ~~-->`
+    `<pre id="encryptedStoreArea" type="text/plain" style="display:none;">`
+        <$encrypt filter=<<saveTiddlerFilter>>/>
+    `</pre>`
+</$list>

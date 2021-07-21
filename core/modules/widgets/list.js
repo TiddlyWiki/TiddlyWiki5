@@ -236,6 +236,11 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 					hasRefreshed = hasRefreshed || refreshed;
 				}
 			}
+			// If there are items to remove and we have not refreshed then recreate the item that will now be at the last position
+			if(!hasRefreshed && this.children.length > this.list.length) {
+				this.removeListItem(this.list.length-1);
+				this.insertListItem(this.list.length-1,this.list[this.list.length-1]);
+			}
 		} else {
 			// Cycle through the list, inserting and removing list items as needed
 			for(t=0; t<this.list.length; t++) {

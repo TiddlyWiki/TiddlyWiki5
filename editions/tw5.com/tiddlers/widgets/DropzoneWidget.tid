@@ -19,9 +19,9 @@ It sends a [[WidgetMessage: tm-import-tiddlers]] carrying a JSON representation 
 |class |<<.from-version "5.1.22">> Optional CSS class to be assigned to the DOM node created by the dropzone (defaults to "tc-dropzone") |
 |autoOpenOnImport |<<.from-version "5.1.23">> Optional value "no" or "yes" that can override tv-auto-open-on-import |
 |importTitle|<<.from-version "5.1.23">> Optional tiddler title to use for import process instead of ~$:/Import |
-|actions|<<.from-version "5.1.24">> Optional actions string to be invoked after the `tm-import-tiddlers` message has been sent. The variable `importTitle` provides the title of the tiddler used for the import process. |
-|contentTypesFilter |<<.from-version "5.1.24">> Optional filter that specifies the [[content types|ContentType]] accepted by the dropzone. |
-|filesOnly|<<.from-version "5.1.24">> Optional. When set to "yes", the dropzone only accepts files and not string data. Defaults to "no" |
+|actions|<<.from-version "5.2.0">> Optional actions string to be invoked after the `tm-import-tiddlers` message has been sent. The variable `importTitle` provides the title of the tiddler used for the import process. |
+|contentTypesFilter |<<.from-version "5.2.0">> Optional filter that specifies the [[content types|ContentType]] accepted by the dropzone. |
+|filesOnly|<<.from-version "5.2.0">> Optional. When set to "yes", the dropzone only accepts files and not string data. Defaults to "no" |
 
 <<.tip """Use the `prefix` filter operator to easily accept multiple related content types. For example this filter will accept all image content types: `[prefix[image/]]`""">>
 
