@@ -61,6 +61,12 @@ $else$
 </$set>
 \end
 
+\define hide-more-tiddler-actions-button()
+.tc-tiddler-frame.tc-tiddler-view-frame .tc-tiddler-controls button.$(uriEncodedClass)$ {
+	display: none;
+}
+\end
+
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
 /*
@@ -1155,6 +1161,20 @@ button.tc-btn-invisible.tc-remove-tag-button {
 .tc-tiddler-controls button svg, .tc-tiddler-controls button img {
 	height: 0.75em;
 }
+
+<$set name="toolbarButtonCount" value={{{ [all[tiddlers+shadows]tag[$:/tags/ViewToolbar]!match[$:/core/ui/Buttons/fold-bar]count[]] }}}>
+
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/ViewToolbar]!match[$:/core/ui/Buttons/fold-bar]lookup[$:/config/ViewToolbarButtons/Visibility/]!match[hide]count[]match<toolbarButtonCount>]">
+
+		<$set name="uriEncodedClass" value={{{ [[tc-btn-$:/core/ui/Buttons/more-tiddler-actions]encodeuricomponent[]escapecss[]] }}}>
+
+			<<hide-more-tiddler-actions-button>>
+
+		</$set>
+
+	</$list>
+
+</$set>
 
 .tc-search button svg, .tc-search a svg {
 	height: 1.2em;
