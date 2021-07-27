@@ -1,0 +1,15 @@
+title: TiddlyWiki Drag and Drop Interoperability
+
+It is straightforward to allow any HTML file to interoperate with TiddlyWiki's drag and drop implementation.
+
+This example shows how to attach draggable data to a DOM element. The data is provided in two different forms:
+
+* the string data is used if the element is dragged onto a text editing area
+* the tiddler data is used if the element is dragged into TiddlyWiki's import area
+
+<$button>
+<$action-sendmessage $message="tm-download-file" $param="$:/dev/save/dragndropinterop" filename="index.html"/>
+Download this sample code
+</$button>
+
+<$codeblock code={{DragAndDropInterop}} language="text/html"/>
