@@ -70,7 +70,7 @@ Create a new non-functional page control button and open the tiddler
 
 ! Filter improvements
 
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5813">> new [[:map filter run prefix|Filter Expression]]
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5813">> new [[:map filter run prefix|Map Filter Run Prefix]]
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5653">> new [[:sort filter run prefix|Sort Filter Run Prefix]]
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5612">> [[average Operator]], [[median Operator]], [[variance Operator]] and [[standard-deviation Operator]] for calculating averages of a list of numbers
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5673">> [[deserializers filter Operator|deserializers Operator]] for obtaining a list of the available deserializers
