@@ -98,7 +98,6 @@ BrowseWidget.prototype.execute = function() {
 
 BrowseWidget.prototype.assignDomNodeClasses = function() {
 	var classes = this.getAttribute("class","").split(" ");
-	classes.push("tc-eventcatcher");
 	this.domNode.className = classes.join(" ");
 };
 
