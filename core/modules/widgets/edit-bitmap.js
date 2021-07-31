@@ -72,6 +72,11 @@ EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 			name: "mouseup", handlerObject: this, handlerMethod: "handleMouseUpEvent"
 		}]
 	});
+	this.domNode = this.canvasDomNode;
+	// Assign classes
+	this.assignDomNodeClasses();
+	// Assign styles
+	this.assignDomNodeStyles();
 	// Set the width and height variables
 	this.setVariable("tv-bitmap-editor-width",this.canvasDomNode.width + "px");
 	this.setVariable("tv-bitmap-editor-height",this.canvasDomNode.height + "px");
@@ -111,10 +116,27 @@ EditBitmapWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
+EditBitmapWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class").split(" ");
+	this.domNode.className = classes.join(" ");
+};
+
+EditBitmapWidget.prototype.assignDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
+};
+
 /*
 Just refresh the toolbar
 */
 EditBitmapWidget.prototype.refresh = function(changedTiddlers) {
+	var changedAttributes = this.computeAttributes(),
+		changedAttributesCount = $tw.utils.count(changedAttributes);
+	if(changedAttributesCount === 1 && changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
+		this.assignDomNodeStyles();
+	}
 	return this.refreshChildren(changedTiddlers);
 };
 

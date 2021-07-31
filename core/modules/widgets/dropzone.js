@@ -299,12 +299,12 @@ DropZoneWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-DroppableWidget.prototype.assignDomNodeClasses = function() {
+DropzoneWidget.prototype.assignDomNodeClasses = function() {
 	var classes = this.getAttribute("class","tc-dropzone").split(" ");
 	this.domNode.className = classes.join(" ");
 };
 
-DroppableWidget.prototype.assignDomNodeStyles = function() {
+DropzoneWidget.prototype.assignDomNodeStyles = function() {
 	var styles = this.getAttribute("style");
 	this.domNode.style = styles;
 };
