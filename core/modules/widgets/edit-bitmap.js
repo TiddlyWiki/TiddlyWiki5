@@ -117,7 +117,7 @@ EditBitmapWidget.prototype.execute = function() {
 };
 
 EditBitmapWidget.prototype.assignDomNodeClasses = function() {
-	var classes = this.getAttribute("class").split(" ");
+	var classes = this.getAttribute("class","").split(" ");
 	this.domNode.className = classes.join(" ");
 };
 

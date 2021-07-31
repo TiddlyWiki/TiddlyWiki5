@@ -31,14 +31,11 @@ EditShortcutWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	this.inputNode = this.document.createElement("input");
+	this.domNode = this.inputNode;
 	// Assign classes
-	if(this.shortcutClass) {
-		this.inputNode.className = this.shortcutClass;
-	}
-	// Assign other attributes
-	if(this.shortcutStyle) {
-		this.inputNode.setAttribute("style",this.shortcutStyle);
-	}
+	this.assignDomNodeClasses();
+	// Assign styles
+	this.assignDomNodeStyles();
 	if(this.shortcutTooltip) {
 		this.inputNode.setAttribute("title",this.shortcutTooltip);
 	}
@@ -72,8 +69,6 @@ EditShortcutWidget.prototype.execute = function() {
 	this.shortcutIndex = this.getAttribute("index");
 	this.shortcutPlaceholder = this.getAttribute("placeholder");
 	this.shortcutDefault = this.getAttribute("default","");
-	this.shortcutClass = this.getAttribute("class");
-	this.shortcutStyle = this.getAttribute("style");
 	this.shortcutTooltip = this.getAttribute("tooltip");
 	this.shortcutAriaLabel = this.getAttribute("aria-label");
 	this.shortcutFocus = this.getAttribute("focus");
@@ -133,14 +128,29 @@ EditShortcutWidget.prototype.focus = function() {
 	}
 };
 
+EditShortcutWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" ");
+	this.domNode.className = classes.join(" ");
+};
+
+EditShortcutWidget.prototype.assignDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget needed re-rendering
 */
 EditShortcutWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.placeholder || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.style || changedAttributes.tooltip || changedAttributes["aria-label"] || changedAttributes.focus) {
+	var changedAttributes = this.computeAttributes(),
+		changedAttributesCount = $tw.utils.count(changedAttributes);
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.placeholder || changedAttributes["default"] || changedAttributes.tooltip || changedAttributes["aria-label"] || changedAttributes.focus) {
 		this.refreshSelf();
 		return true;
+	} else if(changedAttributesCount === 1 && changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
+		this.assignDomNodeStyles();
 	} else if(changedTiddlers[this.shortcutTiddler]) {
 		this.updateInputNode();
 		return true;
