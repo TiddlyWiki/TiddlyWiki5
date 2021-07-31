@@ -96,9 +96,10 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	// Create the element and assign the attributes
 	var domNode = this.document.createElement(tag);
 	domNode.setAttribute("src",src);
-	if(this.imageClass) {
-		domNode.setAttribute("class",this.imageClass);
-	}
+	// Assign classes
+	this.assignDomNodeClasses();
+	// Assign styles
+	this.assignDomNodeStyles();
 	if(this.imageWidth) {
 		domNode.setAttribute("width",this.imageWidth);
 	}
@@ -129,14 +130,29 @@ ImageWidget.prototype.execute = function() {
 	this.imageAlt = this.getAttribute("alt");
 };
 
+ImageWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" ");
+	this.domNode.className = classes.join(" ");
+};
+
+ImageWidget.prototype.assignDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ImageWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.source || changedAttributes.width || changedAttributes.height || changedAttributes["class"] || changedAttributes.tooltip || changedTiddlers[this.imageSource]) {
+	var changedAttributes = this.computeAttributes(),
+		changedAttributesCount = $tw.utils.count(changedAttributes);
+	if(changedAttributes.source || changedAttributes.width || changedAttributes.height || changedAttributes.tooltip || changedTiddlers[this.imageSource]) {
 		this.refreshSelf();
 		return true;
+	} else if(changedAttributesCount === 1 && changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
+		this.assignDomNodeStyles();
 	} else {
 		return false;
 	}

@@ -116,7 +116,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	}
 	this.domNode = domNode;
 	// Assign styles
-	this.assignDomNodeStyles();
+	this.updateDomNodeStyles();
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
