@@ -192,8 +192,6 @@ ScrollableWidget.prototype.assignDomNodeStyles = function() {
 	this.domNode.style = styles;
 };
 
-	this.outerDomNode.className = this["class"] || "";
-
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
