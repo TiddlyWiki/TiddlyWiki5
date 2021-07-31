@@ -161,8 +161,11 @@ ScrollableWidget.prototype.render = function(parent,nextSibling) {
 	]);
 	this.innerDomNode = this.document.createElement("div");
 	this.outerDomNode.appendChild(this.innerDomNode);
+	this.domNode = this.outerDomNode;
 	// Assign classes
-	this.outerDomNode.className = this["class"] || "";
+	this.assignDomNodeClasses();
+	// Assign styles
+	this.assignDomNodeStyles();
 	// Insert element
 	parent.insertBefore(this.outerDomNode,nextSibling);
 	this.renderChildren(this.innerDomNode,null);
@@ -175,10 +178,21 @@ Compute the internal state of the widget
 ScrollableWidget.prototype.execute = function() {
 	// Get attributes
 	this.fallthrough = this.getAttribute("fallthrough","yes");
-	this["class"] = this.getAttribute("class");
 	// Make child widgets
 	this.makeChildWidgets();
 };
+
+ScrollableWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" ");
+	this.domNode.className = classes.join(" ");
+};
+
+ScrollableWidget.prototype.assignDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
+};
+
+	this.outerDomNode.className = this["class"] || "";
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
@@ -186,8 +200,10 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 ScrollableWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes["class"]) {
-		this.refreshSelf();
-		return true;
+		this.assignDomNodeClasses();
+	}
+	if(changedAttributes["style"]) {
+		this.assignDomNodeStyles();
 	}
 	return this.refreshChildren(changedTiddlers);
 };
