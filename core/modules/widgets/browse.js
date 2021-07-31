@@ -70,6 +70,11 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 		}
 		return false;
 	},false);
+	this.domNode = domNode;
+	// Assign classes
+	this.assignDomNodeClasses();
+	// Assign styles
+	this.assignDomNodeStyles();
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -91,10 +96,28 @@ BrowseWidget.prototype.execute = function() {
 	this.nwdirectory = this.getAttribute("nwdirectory");
 };
 
+BrowseWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" ");
+	classes.push("tc-eventcatcher");
+	this.domNode.className = classes.join(" ");
+};
+
+BrowseWidget.prototype.assignDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 BrowseWidget.prototype.refresh = function(changedTiddlers) {
+	var changedAttributes = this.computeAttributes(),
+		changedAttributesCount = $tw.utils.count(changedAttributes);
+	if(changedAttributesCount === 1 && changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
+		this.assignDomNodeStyles();
+	}
 	return false;
 };
 
