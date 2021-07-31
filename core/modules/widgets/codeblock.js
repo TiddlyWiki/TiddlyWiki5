@@ -34,6 +34,11 @@ CodeBlockWidget.prototype.render = function(parent,nextSibling) {
 		domNode = this.document.createElement("pre");
 	codeNode.appendChild(this.document.createTextNode(this.getAttribute("code")));
 	domNode.appendChild(codeNode);
+	this.domNode = domNode;
+	// Assign classes
+	this.assignDomNodeClasses();
+	// Assign styles
+	this.assignDomNodeStyles();
 	parent.insertBefore(domNode,nextSibling);
 	this.domNodes.push(domNode);
 	if(this.postRender) {
@@ -48,10 +53,27 @@ CodeBlockWidget.prototype.execute = function() {
 	this.language = this.getAttribute("language");
 };
 
+CodeBlockWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" ");
+	this.domNode.className = classes.join(" ");
+};
+
+CodeBlockWidget.prototype.assignDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 CodeBlockWidget.prototype.refresh = function(changedTiddlers) {
+	var changedAttributes = this.computeAttributes(),
+		changedAttributesCount = $tw.utils.count(changedAttributes);
+	if(changedAttributesCount === 1 && changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
+		this.assignDomNodeStyles();
+	}
 	return false;
 };
 

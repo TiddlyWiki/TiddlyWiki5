@@ -43,10 +43,6 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	var domNode = this.document.createElement(tag);
 	// Assign classes
 	var classes = ["tc-draggable"];
-	if(this.draggableClasses) {
-		classes.push(this.draggableClasses);
-	}
-	domNode.setAttribute("class",classes.join(" "));
 	// Add event handlers
 	$tw.utils.makeDraggable({
 		domNode: domNode,
@@ -56,6 +52,11 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 		endActions: self.endActions,
 		widget: this
 	});
+	this.domNode = domNode;
+	// Assign classes
+	this.assignDomNodeClasses();
+	// Assign styles
+	this.assignDomNodeStyles();
 	// Insert the link into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -75,14 +76,30 @@ DraggableWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
+DraggableWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" ");
+	classes.push("tc-draggable");
+	this.domNode.className = classes.join(" ");
+};
+
+DraggableWidget.prototype.assignDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 DraggableWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tag || changedAttributes["class"]) {
+	var changedAttributes = this.computeAttributes(),
+		changedAttributesCount = $tw.utils.count(changedAttributes);
+	if(changedAttributes.tag) {
 		this.refreshSelf();
 		return true;
+	} else if(changedAttributesCount === 1 && changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
+		this.assignDomNodeStyles();
 	}
 	return this.refreshChildren(changedTiddlers);
 };
