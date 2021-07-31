@@ -39,6 +39,10 @@ DropZoneWidget.prototype.render = function(parent,nextSibling) {
 	var domNode = this.document.createElement("div");
 	this.domNode = domNode;
 	domNode.className = this.dropzoneClass || "tc-dropzone";
+	// Assign classes
+	this.assignDomNodeClasses();
+	// Assign styles
+	this.assignDomNodeStyles();
 	// Add event handlers
 	if(this.dropzoneEnable) {
 		$tw.utils.addEventListeners(domNode,[
@@ -295,12 +299,27 @@ DropZoneWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
+DroppableWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","tc-dropzone").split(" ");
+	this.domNode.className = classes.join(" ");
+};
+
+DroppableWidget.prototype.assignDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 DropZoneWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
-	if($tw.utils.count(changedAttributes) > 0) {
+	var changedAttributes = this.computeAttributes(),
+		changedAttributesCount = $tw.utils.count(changedAttributes);
+	if(changedAttributesCount === 1 && changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
+		this.assignDomNodeStyles();
+	} else if(changedAttributesCount > 0) {
 		this.refreshSelf();
 		return true;
 	}
