@@ -106,7 +106,6 @@ RadioWidget.prototype.execute = function() {
 	this.radioField = this.getAttribute("field","text");
 	this.radioIndex = this.getAttribute("index");
 	this.radioValue = this.getAttribute("value");
-	this.radioClass = this.getAttribute("class","");
 	this.radioDefault = this.getAttribute("default");
 	this.isDisabled = this.getAttribute("disabled","no");
 	this.radioActions = this.getAttribute("actions","");

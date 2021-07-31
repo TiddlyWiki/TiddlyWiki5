@@ -36,7 +36,6 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 	// Create our elements
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","range");
-	this.inputDomNode.setAttribute("class",this.elementClass);
 	if(this.minValue){
 		this.inputDomNode.setAttribute("min", this.minValue);
 	}
@@ -57,6 +56,11 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 		{name:"change",    handlerObject:this, handlerMethod:"handleChangeEvent"},
 		{name:"input",     handlerObject:this, handlerMethod:"handleInputEvent"},
 	]);
+	this.domNode = this.inputDomNode;
+	// Assign classes
+	this.assignDomNodeClasses();
+	// Assign styles
+	this.assignDomNodeStyles();
 	// Insert the label into the DOM and render any children
 	parent.insertBefore(this.inputDomNode,nextSibling);
 	this.domNodes.push(this.inputDomNode);
@@ -158,7 +162,6 @@ RangeWidget.prototype.execute = function() {
 	this.maxValue = this.getAttribute("max");
 	this.increment = this.getAttribute("increment");
 	this.defaultValue = this.getAttribute("default","");
-	this.elementClass = this.getAttribute("class","");
 	this.isDisabled = this.getAttribute("disabled","no");
 	// Actions since 5.1.23
 	// Next 2 only fire once!
@@ -170,25 +173,39 @@ RangeWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
+RangeWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" ");
+	this.domNode.className = classes.join(" ");
+};
+
+RangeWidget.prototype.assignDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 RangeWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
-	if($tw.utils.count(changedAttributes) > 0) {
+	var changedAttributes = this.computeAttributes(),
+		changedAttributesCount = $tw.utils.count(changedAttributes);
+	if(changedAttributesCount === 1 && changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
+		this.assignDomNodeStyles();
+	} else if(changedAttributesCount > 0) {
 		this.refreshSelf();
 		return true;
-	} else {
-		var refreshed = false;
-		if(changedTiddlers[this.tiddlerTitle]) {
-			var value = this.getValue();
-			if(this.inputDomNode.value !== value) {
-				this.inputDomNode.value = value;
-			}
-			refreshed = true;
-		}
-		return this.refreshChildren(changedTiddlers) || refreshed;
 	}
+	var refreshed = false;
+	if(changedTiddlers[this.tiddlerTitle]) {
+		var value = this.getValue();
+		if(this.inputDomNode.value !== value) {
+			this.inputDomNode.value = value;
+		}
+		refreshed = true;
+	}
+	return this.refreshChildren(changedTiddlers) || refreshed;
 };
 
 exports.range = RangeWidget;
