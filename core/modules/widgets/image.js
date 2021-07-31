@@ -96,6 +96,7 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	// Create the element and assign the attributes
 	var domNode = this.document.createElement(tag);
 	domNode.setAttribute("src",src);
+	this.domNode = domNode;
 	// Assign classes
 	this.assignDomNodeClasses();
 	// Assign styles
