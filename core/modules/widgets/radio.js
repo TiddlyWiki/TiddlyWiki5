@@ -136,7 +136,7 @@ RadioWidget.prototype.refresh = function(changedTiddlers) {
 		changedAttributesCount = $tw.utils.count(changedAttributes);
 	if(changedAttributesCount === 1 && changedAttributes["class"]) {
 		this.assignDomNodeClasses();
-	} else if(hangedAttributesCount === 1 && changedAttributes["style"]) {
+	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
 		this.assignDomNodeStyles();
 	} else if (($tw.utils.count(changedAttributes) > 0)) {
 		this.refreshSelf();
