@@ -36,7 +36,10 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	}
 	var domNode = this.document.createElement(tag);
 	this.domNode = domNode;
+	// Assign classes
 	this.assignDomNodeClasses();
+	// Assign styles
+	this.assignDomNodeStyles();
 	if(this.style) {
 		domNode.setAttribute("style",this.style);
 	}
@@ -110,7 +113,6 @@ RevealWidget.prototype.execute = function() {
 	this.position = this.getAttribute("position");
 	this.positionAllowNegative = this.getAttribute("positionAllowNegative") === "yes";
 	// class attribute handled in assignDomNodeClasses()
-	this.style = this.getAttribute("style","");
 	this["default"] = this.getAttribute("default","");
 	this.animate = this.getAttribute("animate","no");
 	this.retain = this.getAttribute("retain","no");
@@ -208,6 +210,11 @@ RevealWidget.prototype.assignDomNodeClasses = function() {
 	this.domNode.className = classes.join(" ");
 };
 
+RevealWidget.prototype.assignDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
@@ -230,7 +237,7 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 			this.positionPopup(this.domNode);
 		}
 		if(changedAttributes.style) {
-			this.domNode.style = this.getAttribute("style","");
+			this.assignDomNodeStyles();
 		}
 		if(changedAttributes["class"]) {
 			this.assignDomNodeClasses();
