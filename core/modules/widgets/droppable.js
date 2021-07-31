@@ -41,7 +41,10 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	// Create element and assign classes
 	domNode = this.document.createElement(tag);
 	this.domNode = domNode;
+	// Assign classes
 	this.assignDomNodeClasses();
+	// Assign styles
+	this.assignDomNodeStyles();
 	// Add event handlers
 	if(this.droppableEnable) {
 		$tw.utils.addEventListeners(domNode,[
@@ -158,6 +161,11 @@ DroppableWidget.prototype.assignDomNodeClasses = function() {
 	this.domNode.className = classes.join(" ");
 };
 
+DroppableWidget.prototype.assignDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
@@ -168,6 +176,8 @@ DroppableWidget.prototype.refresh = function(changedTiddlers) {
 		return true;
 	} else if(changedAttributes["class"]) {
 		this.assignDomNodeClasses();
+	} else if(changedAttributes["style"]) {
+		this.assignDomNodeStyles();
 	}
 	return this.refreshChildren(changedTiddlers);
 };
