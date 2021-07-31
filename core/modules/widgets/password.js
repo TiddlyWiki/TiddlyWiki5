@@ -43,6 +43,11 @@ PasswordWidget.prototype.render = function(parent,nextSibling) {
 	$tw.utils.addEventListeners(domNode,[
 		{name: "change", handlerObject: this, handlerMethod: "handleChangeEvent"}
 	]);
+	this.domNode = domNode;
+	// Assign classes
+	this.assignDomNodeClasses();
+	// Assign styles
+	this.assignDomNodeStyles();
 	// Insert the label into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -64,6 +69,16 @@ PasswordWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
+PasswordWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" ");
+	this.domNode.className = classes.join(" ");
+};
+
+PasswordWidget.prototype.assignDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
@@ -72,9 +87,13 @@ PasswordWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.name) {
 		this.refreshSelf();
 		return true;
-	} else {
-		return this.refreshChildren(changedTiddlers);
 	}
+	if(changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	} if(changedAttributes["style"]) {
+		this.assignDomNodeStyles();
+	}
+	return this.refreshChildren(changedTiddlers);
 };
 
 exports.password = PasswordWidget;

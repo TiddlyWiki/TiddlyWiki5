@@ -42,6 +42,8 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	// Assign classes
 	this.domNode = domNode;
 	this.assignDomNodeClasses();
+	// Assign styles
+	this.assignDomNodeStyles();
 	// Add a keyboard event handler
 	$tw.utils.addEventListeners(domNode,[
 		{name: "keydown", handlerObject: this, handlerMethod: "handleChangeEvent"}
@@ -110,6 +112,11 @@ KeyboardWidget.prototype.assignDomNodeClasses = function() {
 	this.domNode.className = classes.join(" ");
 };
 
+KeyboardWidget.prototype.assignDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
@@ -120,6 +127,8 @@ KeyboardWidget.prototype.refresh = function(changedTiddlers) {
 		return true;
 	} else if(changedAttributes["class"]) {
 		this.assignDomNodeClasses();
+	} else if(changedAttributes["style"]) {
+		this.assignDomNodeStyles();
 	}
 	// Update the keyInfoArray if one of its shortcut-config-tiddlers has changed
 	if(this.shortcutTiddlers && $tw.utils.hopArray(changedTiddlers,this.shortcutTiddlers)) {
