@@ -125,9 +125,11 @@ KeyboardWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.message || changedAttributes.param || changedAttributes.key || changedAttributes.tag) {
 		this.refreshSelf();
 		return true;
-	} else if(changedAttributes["class"]) {
+	}
+	if(changedAttributes["class"]) {
 		this.assignDomNodeClasses();
-	} else if(changedAttributes["style"]) {
+	}
+	if(changedAttributes["style"]) {
 		this.assignDomNodeStyles();
 	}
 	// Update the keyInfoArray if one of its shortcut-config-tiddlers has changed

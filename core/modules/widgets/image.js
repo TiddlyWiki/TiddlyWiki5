@@ -145,18 +145,18 @@ ImageWidget.prototype.assignDomNodeStyles = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ImageWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes(),
-		changedAttributesCount = $tw.utils.count(changedAttributes);
+	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.source || changedAttributes.width || changedAttributes.height || changedAttributes.tooltip || changedTiddlers[this.imageSource]) {
 		this.refreshSelf();
 		return true;
-	} else if(changedAttributesCount === 1 && changedAttributes["class"]) {
-		this.assignDomNodeClasses();
-	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
-		this.assignDomNodeStyles();
-	} else {
-		return false;
 	}
+	if(changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	}
+	if(changedAttributes["style"]) {
+		this.assignDomNodeStyles();
+	}
+	return false;
 };
 
 exports.image = ImageWidget;

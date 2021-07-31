@@ -67,11 +67,11 @@ CodeBlockWidget.prototype.assignDomNodeStyles = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 CodeBlockWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes(),
-		changedAttributesCount = $tw.utils.count(changedAttributes);
-	if(changedAttributesCount === 1 && changedAttributes["class"]) {
+	var changedAttributes = this.computeAttributes();
+	if(changedAttributes["class"]) {
 		this.assignDomNodeClasses();
-	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
+	}
+	if(changedAttributes["style"]) {
 		this.assignDomNodeStyles();
 	}
 	return false;

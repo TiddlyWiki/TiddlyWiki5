@@ -149,18 +149,18 @@ DiffTextWidget.prototype.assignDomNodeStyles = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 DiffTextWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes(),
-		changedAttributesCount = $tw.utils.count(changedAttributes);
+	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.source || changedAttributes.dest || changedAttributes.cleanup) {
 		this.refreshSelf();
 		return true;
-	} else if(changedAttributesCount === 1 && changedAttributes["class"]) {
-		this.assignDomNodeClasses();
-	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
-		this.assignDomNodeStyles();
-	} else {
-		return this.refreshChildren(changedTiddlers);
 	}
+	if(changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	}
+	if(changedAttributes["style"]) {
+		this.assignDomNodeStyles();
+	}
+	return this.refreshChildren(changedTiddlers);
 };
 
 exports["diff-text"] = DiffTextWidget;

@@ -130,11 +130,11 @@ EditBitmapWidget.prototype.assignDomNodeStyles = function() {
 Just refresh the toolbar
 */
 EditBitmapWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes(),
-		changedAttributesCount = $tw.utils.count(changedAttributes);
-	if(changedAttributesCount === 1 && changedAttributes["class"]) {
+	var changedAttributes = this.computeAttributes();
+	if(changedAttributes["class"]) {
 		this.assignDomNodeClasses();
-	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
+	}
+	if(changedAttributes["style"]) {
 		this.assignDomNodeStyles();
 	}
 	return this.refreshChildren(changedTiddlers);

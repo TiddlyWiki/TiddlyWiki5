@@ -172,6 +172,9 @@ EventWidget.prototype.refresh = function(changedTiddlers) {
 		this.assignDomNodeClasses();
 	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
 		this.assignDomNodeStyles();
+	} else if(changedAttributesCount === 2 && changedAttributes["class"] && changedAttributes["style"]) {
+		this.assignDomNodeClasses();
+		this.assignDomNodeStyles();
 	} else if(changedAttributesCount > 0) {
 		this.refreshSelf();
 		return true;

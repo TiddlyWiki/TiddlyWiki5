@@ -174,9 +174,11 @@ DroppableWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.tag || changedAttributes.enable || changedAttributes.disabledClass || changedAttributes.actions || changedAttributes.effect) {
 		this.refreshSelf();
 		return true;
-	} else if(changedAttributes["class"]) {
+	}
+	if(changedAttributes["class"]) {
 		this.assignDomNodeClasses();
-	} else if(changedAttributes["style"]) {
+	}
+	if(changedAttributes["style"]) {
 		this.assignDomNodeStyles();
 	}
 	return this.refreshChildren(changedTiddlers);

@@ -132,16 +132,18 @@ RadioWidget.prototype.assignDomNodeStyles = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 RadioWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes(),
-		changedAttributesCount = $tw.utils.count(changedAttributes);
-	if(changedAttributesCount === 1 && changedAttributes["class"]) {
-		this.assignDomNodeClasses();
-	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
-		this.assignDomNodeStyles();
-	} else if (($tw.utils.count(changedAttributes) > 0)) {
+	var changedAttributes = this.computeAttributes();
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.value || changedAttributes.default || changedAttributes.disabled || changedAttributes.actions) {
 		this.refreshSelf();
 		return true;
-	} else if(changedTiddlers[this.radioTitle]) {
+	}
+	if(changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	}
+	if(changedAttributesCount === 1 && changedAttributes["style"]) {
+		this.assignDomNodeStyles();
+	}
+	if(changedTiddlers[this.radioTitle]) {
 		this.inputDomNode.checked = this.getValue() === this.radioValue;
 		return this.refreshChildren(changedTiddlers);
 	} else {

@@ -142,21 +142,22 @@ EditShortcutWidget.prototype.assignDomNodeStyles = function() {
 Selectively refreshes the widget if needed. Returns true if the widget needed re-rendering
 */
 EditShortcutWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes(),
-		changedAttributesCount = $tw.utils.count(changedAttributes);
+	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.placeholder || changedAttributes["default"] || changedAttributes.tooltip || changedAttributes["aria-label"] || changedAttributes.focus) {
 		this.refreshSelf();
 		return true;
-	} else if(changedAttributesCount === 1 && changedAttributes["class"]) {
+	}
+	if(changedAttributes["class"]) {
 		this.assignDomNodeClasses();
-	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
+	}
+	if(changedAttributes["style"]) {
 		this.assignDomNodeStyles();
-	} else if(changedTiddlers[this.shortcutTiddler]) {
+	}
+	if(changedTiddlers[this.shortcutTiddler]) {
 		this.updateInputNode();
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 };
 
 exports["edit-shortcut"] = EditShortcutWidget;

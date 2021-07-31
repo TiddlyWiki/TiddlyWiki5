@@ -254,9 +254,11 @@ ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled) {
 		this.refreshSelf();
 		return true;
-	} else if(changedAttributes["class"]) {
+	}
+	if(changedAttributes["class"]) {
 		this.updateDomNodeClasses();
-	} else if(changedAttributes["style"]) {
+	}
+	if(changedAttributes["style"]) {
 		this.updateDomNodeStyles();
 	}
 	return this.refreshChildren(changedTiddlers);

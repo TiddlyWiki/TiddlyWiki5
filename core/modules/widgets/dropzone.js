@@ -287,7 +287,6 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 Compute the internal state of the widget
 */
 DropZoneWidget.prototype.execute = function() {
-	this.dropzoneClass = this.getAttribute("class");
 	this.dropzoneDeserializer = this.getAttribute("deserializer");
 	this.dropzoneEnable = (this.getAttribute("enable") || "yes") === "yes";
 	this.autoOpenOnImport = this.getAttribute("autoOpenOnImport");
@@ -313,15 +312,16 @@ DropZoneWidget.prototype.assignDomNodeStyles = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 DropZoneWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes(),
-		changedAttributesCount = $tw.utils.count(changedAttributes);
-	if(changedAttributesCount === 1 && changedAttributes["class"]) {
-		this.assignDomNodeClasses();
-	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
-		this.assignDomNodeStyles();
-	} else if(changedAttributesCount > 0) {
+	var changedAttributes = this.computeAttributes();
+	if(changedAttributes.deserializer || changedAttributes.enable || changedAttributes["autoOpenOnImport"] || changedAttributes["importTitle"] || changedAttributes.actions || changedAttributes["contentTypesFilter"] || changedAttributes["filesOnly"]) {
 		this.refreshSelf();
 		return true;
+	}
+	if(changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	}
+	if(changedAttributes["style"]) {
+		this.assignDomNodeStyles();
 	}
 	return this.refreshChildren(changedTiddlers);
 };
