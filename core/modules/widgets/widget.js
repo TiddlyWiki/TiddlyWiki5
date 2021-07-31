@@ -622,6 +622,22 @@ Widget.prototype.allowActionPropagation = function() {
 	return true;
 };
 
+Widget.prototype.assignDomNodeClasses = function(classArray,fallbackClass) {
+	var fallbackClass = fallbackClass || "";
+	var classes = this.getAttribute("class",fallbackClass).split(" ");
+	if(classArray) {
+		for(var i=0; i<classArray.length; i++) {
+			classes.push(classArray[i]);
+		}
+	}
+	this.domNode.className = classes.join(" ");
+};
+
+Widget.prototype.assignDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
+};
+
 exports.widget = Widget;
 
 })();

@@ -41,7 +41,7 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	var domNode = this.document.createElement(tag);
 	// Assign classes
 	this.domNode = domNode;
-	this.assignDomNodeClasses();
+	this.assignDomNodeClasses(["tc-keyboard"]);
 	// Assign styles
 	this.assignDomNodeStyles();
 	// Add a keyboard event handler
@@ -106,17 +106,6 @@ KeyboardWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-KeyboardWidget.prototype.assignDomNodeClasses = function() {
-	var classes = this.getAttribute("class","").split(" ");
-	classes.push("tc-keyboard");
-	this.domNode.className = classes.join(" ");
-};
-
-KeyboardWidget.prototype.assignDomNodeStyles = function() {
-	var styles = this.getAttribute("style");
-	this.domNode.style = styles;
-};
-
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
@@ -127,7 +116,7 @@ KeyboardWidget.prototype.refresh = function(changedTiddlers) {
 		return true;
 	}
 	if(changedAttributes["class"]) {
-		this.assignDomNodeClasses();
+		this.assignDomNodeClasses(["tc-keyboard"]);
 	}
 	if(changedAttributes["style"]) {
 		this.assignDomNodeStyles();

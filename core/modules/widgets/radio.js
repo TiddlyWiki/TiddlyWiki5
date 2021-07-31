@@ -123,11 +123,6 @@ RadioWidget.prototype.assignDomNodeClasses = function() {
 	this.domNode.className = classes.join(" ");
 };
 
-RadioWidget.prototype.assignDomNodeStyles = function() {
-	var styles = this.getAttribute("style");
-	this.domNode.style = styles;
-};
-
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */

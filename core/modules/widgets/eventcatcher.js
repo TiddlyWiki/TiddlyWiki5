@@ -41,7 +41,7 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 	var domNode = this.document.createElement(tag);
 	this.domNode = domNode;
 	// Assign classes
-	this.assignDomNodeClasses();
+	this.assignDomNodeClasses(["tc-eventcatcher"]);
 	// Assign styles
 	this.assignDomNodeStyles();
 	// Add our event handler
@@ -151,17 +151,6 @@ EventWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-EventWidget.prototype.assignDomNodeClasses = function() {
-	var classes = this.getAttribute("class","").split(" ");
-	classes.push("tc-eventcatcher");
-	this.domNode.className = classes.join(" ");
-};
-
-EventWidget.prototype.assignDomNodeStyles = function() {
-	var styles = this.getAttribute("style");
-	this.domNode.style = styles;
-};
-
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
@@ -169,11 +158,11 @@ EventWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes(),
 		changedAttributesCount = $tw.utils.count(changedAttributes);
 	if(changedAttributesCount === 1 && changedAttributes["class"]) {
-		this.assignDomNodeClasses();
+		this.assignDomNodeClasses(["tc-eventcatcher"]);
 	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
 		this.assignDomNodeStyles();
 	} else if(changedAttributesCount === 2 && changedAttributes["class"] && changedAttributes["style"]) {
-		this.assignDomNodeClasses();
+		this.assignDomNodeClasses(["tc-eventcatcher"]);
 		this.assignDomNodeStyles();
 	} else if(changedAttributesCount > 0) {
 		this.refreshSelf();

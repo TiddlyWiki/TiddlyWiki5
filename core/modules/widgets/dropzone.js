@@ -38,9 +38,8 @@ DropZoneWidget.prototype.render = function(parent,nextSibling) {
 	// Create element
 	var domNode = this.document.createElement("div");
 	this.domNode = domNode;
-	domNode.className = this.dropzoneClass || "tc-dropzone";
 	// Assign classes
-	this.assignDomNodeClasses();
+	this.assignDomNodeClasses(undefined,"tc-dropzone");
 	// Assign styles
 	this.assignDomNodeStyles();
 	// Add event handlers
@@ -298,16 +297,6 @@ DropZoneWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-DropZoneWidget.prototype.assignDomNodeClasses = function() {
-	var classes = this.getAttribute("class","tc-dropzone").split(" ");
-	this.domNode.className = classes.join(" ");
-};
-
-DropZoneWidget.prototype.assignDomNodeStyles = function() {
-	var styles = this.getAttribute("style");
-	this.domNode.style = styles;
-};
-
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
@@ -318,7 +307,7 @@ DropZoneWidget.prototype.refresh = function(changedTiddlers) {
 		return true;
 	}
 	if(changedAttributes["class"]) {
-		this.assignDomNodeClasses();
+		this.assignDomNodeClasses(undefined,"tc-dropzone");
 	}
 	if(changedAttributes["style"]) {
 		this.assignDomNodeStyles();

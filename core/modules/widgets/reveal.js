@@ -37,12 +37,9 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	var domNode = this.document.createElement(tag);
 	this.domNode = domNode;
 	// Assign classes
-	this.assignDomNodeClasses();
+	this.assignDomNodeClasses(["tc-reveal"]);
 	// Assign styles
 	this.assignDomNodeStyles();
-	if(this.style) {
-		domNode.setAttribute("style",this.style);
-	}
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	if(!domNode.isTiddlyWikiFakeDom && this.type === "popup" && this.isOpen) {
@@ -204,17 +201,6 @@ RevealWidget.prototype.readPopupState = function(state) {
 	}
 };
 
-RevealWidget.prototype.assignDomNodeClasses = function() {
-	var classes = this.getAttribute("class","").split(" ");
-	classes.push("tc-reveal");
-	this.domNode.className = classes.join(" ");
-};
-
-RevealWidget.prototype.assignDomNodeStyles = function() {
-	var styles = this.getAttribute("style");
-	this.domNode.style = styles;
-};
-
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
@@ -240,7 +226,7 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 			this.assignDomNodeStyles();
 		}
 		if(changedAttributes["class"]) {
-			this.assignDomNodeClasses();
+			this.assignDomNodeClasses(["tc-reveal"]);
 		}
 		return this.refreshChildren(changedTiddlers);
 	}

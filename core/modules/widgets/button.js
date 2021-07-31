@@ -116,7 +116,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	}
 	this.domNode = domNode;
 	// Assign styles
-	this.updateDomNodeStyles();
+	this.assignDomNodeStyles();
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -241,11 +241,6 @@ ButtonWidget.prototype.updateDomNodeClasses = function() {
 	this.domNode.className = domNodeClasses.join(" ");
 };
 
-ButtonWidget.prototype.updateDomNodeStyles = function() {
-	var styles = this.getAttribute("style");
-	this.domNode.style = styles;
-};
-
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
@@ -259,7 +254,7 @@ ButtonWidget.prototype.refresh = function(changedTiddlers) {
 		this.updateDomNodeClasses();
 	}
 	if(changedAttributes["style"]) {
-		this.updateDomNodeStyles();
+		this.assignDomNodeStyles();
 	}
 	return this.refreshChildren(changedTiddlers);
 };

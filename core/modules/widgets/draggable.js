@@ -41,8 +41,6 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Create our element
 	var domNode = this.document.createElement(tag);
-	// Assign classes
-	var classes = ["tc-draggable"];
 	// Add event handlers
 	$tw.utils.makeDraggable({
 		domNode: domNode,
@@ -54,7 +52,7 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	});
 	this.domNode = domNode;
 	// Assign classes
-	this.assignDomNodeClasses();
+	this.assignDomNodeClasses(["tc-draggable"]);
 	// Assign styles
 	this.assignDomNodeStyles();
 	// Insert the link into the DOM and render any children
@@ -76,17 +74,6 @@ DraggableWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-DraggableWidget.prototype.assignDomNodeClasses = function() {
-	var classes = this.getAttribute("class","").split(" ");
-	classes.push("tc-draggable");
-	this.domNode.className = classes.join(" ");
-};
-
-DraggableWidget.prototype.assignDomNodeStyles = function() {
-	var styles = this.getAttribute("style");
-	this.domNode.style = styles;
-};
-
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
@@ -97,7 +84,7 @@ DraggableWidget.prototype.refresh = function(changedTiddlers) {
 		return true;
 	}
 	if(changedAttributes["class"]) {
-		this.assignDomNodeClasses();
+		this.assignDomNodeClasses(["tc-draggable"]);
 	}
 	if(changedAttributes["style"]) {
 		this.assignDomNodeStyles();

@@ -42,7 +42,7 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	domNode = this.document.createElement(tag);
 	this.domNode = domNode;
 	// Assign classes
-	this.assignDomNodeClasses();
+	this.assignDomNodeClasses(["tc-droppable"]);
 	// Assign styles
 	this.assignDomNodeStyles();
 	// Add event handlers
@@ -155,17 +155,6 @@ DroppableWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-DroppableWidget.prototype.assignDomNodeClasses = function() {
-	var classes = this.getAttribute("class","").split(" ");
-	classes.push("tc-droppable");
-	this.domNode.className = classes.join(" ");
-};
-
-DroppableWidget.prototype.assignDomNodeStyles = function() {
-	var styles = this.getAttribute("style");
-	this.domNode.style = styles;
-};
-
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
@@ -176,7 +165,7 @@ DroppableWidget.prototype.refresh = function(changedTiddlers) {
 		return true;
 	}
 	if(changedAttributes["class"]) {
-		this.assignDomNodeClasses();
+		this.assignDomNodeClasses(["tc-droppable"]);
 	}
 	if(changedAttributes["style"]) {
 		this.assignDomNodeStyles();

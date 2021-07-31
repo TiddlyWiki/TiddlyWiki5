@@ -53,9 +53,9 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	]);
 	this.domNode = this.labelDomNode;
 	// Assign classes
-
+	this.assignDomNodeClasses();
 	// Assign styles
-
+	this.assignDomNodeStyles();
 	// Insert the label into the DOM and render any children
 	parent.insertBefore(this.labelDomNode,nextSibling);
 	this.renderChildren(this.spanDomNode,null);
@@ -192,16 +192,6 @@ CheckboxWidget.prototype.execute = function() {
 	this.isDisabled = this.getAttribute("disabled","no");
 	// Make the child widgets
 	this.makeChildWidgets();
-};
-
-CheckboxWidget.prototype.assignDomNodeClasses = function() {
-	var classes = this.getAttribute("class","").split(" ");
-	this.domNode.className = classes.join(" ");
-};
-
-CheckboxWidget.prototype.assignDomNodeStyles = function() {
-	var styles = this.getAttribute("style");
-	this.domNode.style = styles;
 };
 
 /*

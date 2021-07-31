@@ -128,16 +128,6 @@ EditShortcutWidget.prototype.focus = function() {
 	}
 };
 
-EditShortcutWidget.prototype.assignDomNodeClasses = function() {
-	var classes = this.getAttribute("class","").split(" ");
-	this.domNode.className = classes.join(" ");
-};
-
-EditShortcutWidget.prototype.assignDomNodeStyles = function() {
-	var styles = this.getAttribute("style");
-	this.domNode.style = styles;
-};
-
 /*
 Selectively refreshes the widget if needed. Returns true if the widget needed re-rendering
 */

@@ -116,16 +116,6 @@ EditBitmapWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-EditBitmapWidget.prototype.assignDomNodeClasses = function() {
-	var classes = this.getAttribute("class","").split(" ");
-	this.domNode.className = classes.join(" ");
-};
-
-EditBitmapWidget.prototype.assignDomNodeStyles = function() {
-	var styles = this.getAttribute("style");
-	this.domNode.style = styles;
-};
-
 /*
 Just refresh the toolbar
 */
