@@ -42,6 +42,8 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 	this.domNode = domNode;
 	// Assign classes
 	this.assignDomNodeClasses();
+	// Assign styles
+	this.assignDomNodeStyles();
 	// Add our event handler
 	$tw.utils.each(this.types,function(type) {
 		domNode.addEventListener(type,function(event) {
@@ -155,6 +157,11 @@ EventWidget.prototype.assignDomNodeClasses = function() {
 	this.domNode.className = classes.join(" ");
 };
 
+EventWidget.prototype.assignDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
@@ -163,6 +170,8 @@ EventWidget.prototype.refresh = function(changedTiddlers) {
 		changedAttributesCount = $tw.utils.count(changedAttributes);
 	if(changedAttributesCount === 1 && changedAttributes["class"]) {
 		this.assignDomNodeClasses();
+	} else if(changedAttributesCount === 1 && changedAttributes["style"]) {
+		this.assignDomNodeStyles();
 	} else if(changedAttributesCount > 0) {
 		this.refreshSelf();
 		return true;
