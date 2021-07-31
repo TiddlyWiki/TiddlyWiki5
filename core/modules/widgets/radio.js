@@ -35,9 +35,6 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	var isChecked = this.getValue() === this.radioValue;
 	// Create our elements
 	this.labelDomNode = this.document.createElement("label");
-	this.labelDomNode.setAttribute("class",
-		"tc-radio " + this.radioClass + (isChecked ? " tc-radio-selected" : "")
-	);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","radio");
 	if(isChecked) {
@@ -46,6 +43,11 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	if(this.isDisabled === "yes") {
 		this.inputDomNode.setAttribute("disabled",true);
 	}
+	this.domNode = this.labelDomNode;
+	// Assign classes
+	this.assignDomNodeClasses();
+	// Assign styles
+	this.assignDomNodeStyles();
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");
 	this.labelDomNode.appendChild(this.spanDomNode);
@@ -112,12 +114,32 @@ RadioWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
+RadioWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" ");
+	classes.push("tc-radio");
+	var isChecked = this.getValue() === this.radioValue;
+	if(isChecked) {
+		classes.push("tc-radio-selected");
+	}
+	this.domNode.className = classes.join(" ");
+};
+
+RadioWidget.prototype.assignDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 RadioWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
-	if(($tw.utils.count(changedAttributes) > 0)) {
+	var changedAttributes = this.computeAttributes(),
+		changedAttributesCount = $tw.utils.count(changedAttributes);
+	if(changedAttributesCount === 1 && changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	} else if(hangedAttributesCount === 1 && changedAttributes["style"]) {
+		this.assignDomNodeStyles();
+	} else if (($tw.utils.count(changedAttributes) > 0)) {
 		this.refreshSelf();
 		return true;
 	} else if(changedTiddlers[this.radioTitle]) {
