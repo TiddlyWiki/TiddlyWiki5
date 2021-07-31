@@ -57,9 +57,6 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	}
 	domNode.className = classes.join(" ");
 	// Assign other attributes
-	if(this.style) {
-		domNode.setAttribute("style",this.style);
-	}
 	if(this.tooltip) {
 		domNode.setAttribute("title",this.tooltip);
 	}
@@ -117,6 +114,9 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 			widget: this
 		});
 	}
+	this.domNode = domNode;
+	// Assign styles
+	this.assignDomNodeStyles();
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -207,7 +207,6 @@ ButtonWidget.prototype.execute = function() {
 	this.hover = this.getAttribute("hover");
 	this["aria-label"] = this.getAttribute("aria-label");
 	this.tooltip = this.getAttribute("tooltip");
-	this.style = this.getAttribute("style");
 	this["class"] = this.getAttribute("class","");
 	this.selectedClass = this.getAttribute("selectedClass");
 	this.defaultSetValue = this.getAttribute("default","");
@@ -240,18 +239,25 @@ ButtonWidget.prototype.updateDomNodeClasses = function() {
 	//Add new classes from updated class attribute.
 	$tw.utils.pushTop(domNodeClasses,newClasses);
 	this.domNode.className = domNodeClasses.join(" ");
-}
+};
+
+ButtonWidget.prototype.updateDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
+};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled) {
+	if(changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled) {
 		this.refreshSelf();
 		return true;
 	} else if(changedAttributes["class"]) {
 		this.updateDomNodeClasses();
+	} else if(changedAttributes["style"]) {
+		this.updateDomNodeStyles();
 	}
 	return this.refreshChildren(changedTiddlers);
 };
