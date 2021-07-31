@@ -40,6 +40,10 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
+	// Assign classes
+	this.assignDomNodeClasses();
+	// Assign styles
+	this.assignDomNodeStyles();
 	this.renderChildren(parent,nextSibling);
 	this.setSelectValue();
 	$tw.utils.addEventListeners(this.getSelectDomNode(),[
@@ -138,7 +142,6 @@ SelectWidget.prototype.execute = function() {
 	this.selectTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.selectField = this.getAttribute("field","text");
 	this.selectIndex = this.getAttribute("index");
-	this.selectClass = this.getAttribute("class");
 	this.selectDefault = this.getAttribute("default");
 	this.selectMultiple = this.getAttribute("multiple", false);
 	this.selectSize = this.getAttribute("size");
@@ -161,7 +164,18 @@ SelectWidget.prototype.execute = function() {
 	if(this.selectTooltip) {
 		$tw.utils.addAttributeToParseTreeNode(selectNode,"title",this.selectTooltip);
 	}
+	this.domNode = selectNode;
 	this.makeChildWidgets([selectNode]);
+};
+
+SelectWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" ");
+	this.domNode.className = classes.join(" ");
+};
+
+SelectWidget.prototype.assignDomNodeStyles = function() {
+	var styles = this.getAttribute("style");
+	this.domNode.style = styles;
 };
 
 /*
@@ -173,14 +187,19 @@ SelectWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.tooltip) {
 		this.refreshSelf();
 		return true;
-	// If the target tiddler value has changed, just update setting and refresh the children
-	} else {
-		var childrenRefreshed = this.refreshChildren(changedTiddlers);
-		if(changedTiddlers[this.selectTitle] || childrenRefreshed) {
-			this.setSelectValue();
-		} 
-		return childrenRefreshed;
 	}
+	if(changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	}
+	if(changedAttributes["style"]) {
+		this.assignDomNodeStyles();
+	}
+	// If the target tiddler value has changed, just update setting and refresh the children
+	var childrenRefreshed = this.refreshChildren(changedTiddlers);
+	if(changedTiddlers[this.selectTitle] || childrenRefreshed) {
+		this.setSelectValue();
+	} 
+	return childrenRefreshed;
 };
 
 exports.select = SelectWidget;
