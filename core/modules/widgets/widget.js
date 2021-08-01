@@ -623,7 +623,7 @@ Widget.prototype.allowActionPropagation = function() {
 };
 
 Widget.prototype.assignDomNodeClasses = function(classArray,fallbackClass) {
-	var fallbackClass = fallbackClass || "";
+	fallbackClass = fallbackClass || "";
 	var classes = this.getAttribute("class",fallbackClass).split(" ");
 	if(classArray) {
 		for(var i=0; i<classArray.length; i++) {
