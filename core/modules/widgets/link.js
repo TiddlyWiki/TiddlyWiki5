@@ -191,6 +191,7 @@ LinkWidget.prototype.execute = function() {
 
 LinkWidget.prototype.updateDomNodeClasses = function() {
 	var classes = [];
+	this.linkClasses = this.getAttribute("class");
 	if(this.overrideClasses === undefined) {
 		classes.push("tc-tiddlylink");
 		if(this.isShadow) {
