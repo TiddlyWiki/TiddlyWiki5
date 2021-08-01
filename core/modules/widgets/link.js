@@ -34,15 +34,20 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 	// Execute our logic
 	this.execute();
 	// Get the value of the tv-wikilinks configuration macro
-	var wikiLinksMacro = this.getVariable("tv-wikilinks"),
-		useWikiLinks = wikiLinksMacro ? (wikiLinksMacro.trim() !== "no") : true,
-		missingLinksEnabled = !(this.hideMissingLinks && this.isMissing && !this.isShadow);
+	var wikiLinksMacro = this.getVariable("tv-wikilinks");
+		this.useWikiLinks = wikiLinksMacro ? (wikiLinksMacro.trim() !== "no") : true;
+		this.missingLinksEnabled = !(this.hideMissingLinks && this.isMissing && !this.isShadow);
 	// Render the link if required
-	if(useWikiLinks && missingLinksEnabled) {
+	if(this.useWikiLinks && this.missingLinksEnabled) {
 		this.renderLink(parent,nextSibling);
 	} else {
 		// Just insert the link text
 		var domNode = this.document.createElement("span");
+		this.domNode = domNode;
+		// Assign classes
+		this.assignDomNodeClasses();
+		// Assign styles
+		this.assignDomNodeStyles();
 		parent.insertBefore(domNode,nextSibling);
 		this.renderChildren(domNode,null);
 		this.domNodes.push(domNode);
@@ -62,29 +67,11 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	// Create our element
 	var namespace = this.getVariable("namespace",{defaultValue: "http://www.w3.org/1999/xhtml"}),
 		domNode = this.document.createElementNS(namespace,tag);
+	this.domNode = domNode;
 	// Assign classes
-	var classes = [];
-	if(this.overrideClasses === undefined) {
-		classes.push("tc-tiddlylink");
-		if(this.isShadow) {
-			classes.push("tc-tiddlylink-shadow");
-		}
-		if(this.isMissing && !this.isShadow) {
-			classes.push("tc-tiddlylink-missing");
-		} else {
-			if(!this.isMissing) {
-				classes.push("tc-tiddlylink-resolves");
-			}
-		}
-		if(this.linkClasses) {
-			classes.push(this.linkClasses);
-		}
-	} else if(this.overrideClasses !== "") {
-		classes.push(this.overrideClasses)
-	}
-	if(classes.length > 0) {
-		domNode.setAttribute("class",classes.join(" "));
-	}
+	this.updateDomNodeClasses();
+	// Assign styles
+	this.assignDomNodeStyles();
 	// Set an href
 	var wikilinkTransformFilter = this.getVariable("tv-filter-export-link"),
 		wikiLinkText;
@@ -202,6 +189,31 @@ LinkWidget.prototype.execute = function() {
 	this.makeChildWidgets(templateTree);
 };
 
+LinkWidget.prototype.updateDomNodeClasses = function() {
+	var classes = [];
+	if(this.overrideClasses === undefined) {
+		classes.push("tc-tiddlylink");
+		if(this.isShadow) {
+			classes.push("tc-tiddlylink-shadow");
+		}
+		if(this.isMissing && !this.isShadow) {
+			classes.push("tc-tiddlylink-missing");
+		} else {
+			if(!this.isMissing) {
+				classes.push("tc-tiddlylink-resolves");
+			}
+		}
+		if(this.linkClasses) {
+			classes.push(this.linkClasses);
+		}
+	} else if(this.overrideClasses !== "") {
+		classes.push(this.overrideClasses)
+	}
+	if(classes.length > 0) {
+		this.domNode.setAttribute("class",classes.join(" "));
+	}
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
@@ -210,6 +222,14 @@ LinkWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.to || changedTiddlers[this.to] || changedAttributes["aria-label"] || changedAttributes.tooltip) {
 		this.refreshSelf();
 		return true;
+	}
+	if(changedAttributes["class"] && this.useWikiLinks && this.missingLinksEnabled) {
+		this.updateDomNodeClasses();
+	} else if(changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	}
+	if(changedAttributes["style"]) {
+		this.assignDomNodeStyles();
 	}
 	return this.refreshChildren(changedTiddlers);
 };
