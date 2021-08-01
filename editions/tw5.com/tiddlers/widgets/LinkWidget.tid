@@ -21,7 +21,8 @@ The content of the link widget is rendered within the `<a>` tag representing the
 |tabindex |Optional numeric [[tabindex|https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex]] |
 |draggable |"yes" to enable the link to be draggable (defaults to "yes") |
 |tag |Optional tag to override the default "a" element |
-|class|Optional CSS classes //in addition to// the default classes (see below)|
+|class |Optional CSS classes //in addition to// the default classes (see below)|
+|style |<<.from-version "5.2.0">> An optional CSS style attribute to be assigned to the HTML element |
 |overrideClass|<<.from-version "5.1.16">> Optional CSS classes //instead of// the default classes |
 
 The draggable functionality is equivalent to using the DraggableWidget with the ''tiddler'' attribute set to the link target.
