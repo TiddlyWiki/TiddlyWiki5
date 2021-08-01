@@ -19,6 +19,8 @@ The content of the `<$codeblock>` widget is ignored.
 |!Attribute |!Description |
 |code |Contents of the block to render as code |
 |language |Programming language for syntax highlighting |
+|class |<<.from-version "5.2.0">> An optional CSS class name to be assigned to the HTML element |
+|style |<<.from-version "5.2.0">> An optional CSS style attribute to be assigned to the HTML element |
 
 The `language` attribute accepts either:
 

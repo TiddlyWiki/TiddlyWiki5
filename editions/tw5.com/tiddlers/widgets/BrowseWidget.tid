@@ -20,6 +20,8 @@ The content of the `<$browse>` widget is ignored.
 |accept |<<.from-version "5.1.23">> Optional comma delimited [[list of file accepted extensions|https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers]] and/or MIME types |
 |message |Optional override of widget message to be generated. The files will be passed in the JavaScript object `event.target.files` |
 |param |Optional parameter to be passed with the custom message |
+|class |<<.from-version "5.2.0">> An optional CSS class name to be assigned to the HTML element |
+|style |<<.from-version "5.2.0">> An optional CSS style attribute to be assigned to the HTML element |
 
 On iPhone/iPad choosing the multiple option will remove the ability to take photographs/videos directly into TiddlyWiki.
 

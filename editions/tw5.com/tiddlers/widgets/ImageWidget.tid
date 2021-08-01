@@ -19,6 +19,7 @@ Any content of the `<$image>` widget is ignored.
 |tooltip |The tooltip to be displayed over the image |
 |alt |The alternative text to be associated with the image |
 |class |CSS classes to be assigned to the `<img>` element |
+|style |<<.from-version "5.2.0">> An optional CSS style attribute to be assigned to the `<img>` element |
 
 The width and the height can be specified as pixel values (eg "23" or "23px") or percentages (eg "23%"). They are both optional; if not provided the browser will use CSS rules to size the image.
 

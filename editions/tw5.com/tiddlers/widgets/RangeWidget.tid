@@ -22,6 +22,7 @@ The content of the `<$range>` widget is ignored.
 |increment |The minimum amount by which a value may be changed.  Defaults to 1 |
 |default |If the field is missing or empty this is the default position for the widget handle relative to the min and max values|
 |class |CSS classes to be assigned to the label around the range slider |
+|style |<<.from-version "5.2.0">> An optional CSS style attribute to be assigned to the label element |
 |actions|<<.from-version "5.1.23">> Optional, A string containing ActionWidgets to be triggered when the value changes. <br>The variable: ''actionValue'' is available for ''all'' actions.<br>The variable: ''actionValueHasChanged'' is always `yes` here.|
 |actionsStart|<<.from-version "5.1.23">> Optional, A string containing ~ActionWidgets to be triggered when the "handle" is ''clicked''. <br>The variable: ''actionValueHasChanged'' is always `no` here|
 |actionsStop|<<.from-version "5.1.23">> Optional, A string containing ~ActionWidgets to be triggered when the "handle" is ''released''. <br>The variable: ''actionValueHasChanged'' is `yes`, ''if'' the new-value is different to the start-value |

@@ -29,6 +29,7 @@ See DragAndDropMechanism for an overview.
 |!Attribute |!Description |
 |actions |Actions to be performed when items are dropped |
 |class |Optional CSS classes to assign to the draggable element. The class `tc-droppable` is added automatically, and the class `tc-dragover` is applied while an item is being dragged over the droppable element |
+|style |<<.from-version "5.2.0">> An optional CSS style attribute to be assigned to the HTML element |
 |tag |Optional tag to override the default of a "div" element when the widget is rendered in block mode, or a "span" element when it is rendered in inline mode |
 |enable |<<.from-version "5.1.22">> Optional value "no" to disable the droppable functionality (defaults to "yes") |
 

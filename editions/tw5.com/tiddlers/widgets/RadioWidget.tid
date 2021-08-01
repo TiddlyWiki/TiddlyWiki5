@@ -20,6 +20,7 @@ The content of the `<$radio>` widget is displayed within an HTML `<label>` eleme
 |default |<<.from-version "5.2.0">> The default value to be used for matching if the tiddler, field or index are missing |
 |value |The value for the //field// or //index// of the //tiddler// |
 |class |The CSS classes assigned to the label around the radio button <<.from-version "5.1.14">> `tc-radio` is always applied by default, as well as `tc-radio-selected` when selected |
+|style |<<.from-version "5.2.0">> An optional CSS style attribute to be assigned to the label element |
 |actions|<<.from-version "5.1.23">> Optional string containing ActionWidgets to be triggered when the value changes. <br>The variable: ''actionValue'' is available for the actions  |
 |disabled|<<.from-version "5.1.23">> Optional. Set to "yes" to disable the radio input. Defaults to "no" |
 

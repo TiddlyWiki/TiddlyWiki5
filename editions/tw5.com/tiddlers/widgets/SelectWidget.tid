@@ -35,6 +35,7 @@ The content of the `<$select>` widget should be one or more HTML `<option>` or `
 |field |The field name for the value in the current tiddler (defaults to "text") |
 |index |The index of a property in a [[DataTiddler|DataTiddlers]] (takes precedence over the field attribute) |
 |class |CSS classes to be assigned to the HTML select element |
+|style |<<.from-version "5.2.0">> An optional CSS style attribute to be assigned to the HTML element |
 |tooltip |Optional tooltip |
 |default |Default value to be used if the tiddler, field or index specifies a missing value |
 |multiple |If present, switches to multiple selection mode |

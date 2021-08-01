@@ -15,6 +15,8 @@ The content of the `<$edit-bitmap>` widget is ignored.
 
 |!Attribute |!Description |
 |tiddler |The tiddler to edit (defaults to the [[current tiddler|Current Tiddler]]) |
+|class |<<.from-version "5.2.0">> An optional CSS class name to be assigned to the HTML canvas element |
+|style |<<.from-version "5.2.0">> An optional CSS style attribute to be assigned to the HTML canvas element |
 
 ! Configuration
 

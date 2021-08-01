@@ -40,6 +40,8 @@ In other words, these three invocations are all equivalent:
 |source |The source text |
 |dest |The destination text |
 |cleanup |See below |
+|class |<<.from-version "5.2.0">> An optional CSS class name to be assigned to the HTML element |
+|style |<<.from-version "5.2.0">> An optional CSS style attribute to be assigned to the HTML element |
 
 The ''cleanup'' attribute determines which optional post-processing should be applied to the diffs:
 

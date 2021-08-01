@@ -17,6 +17,7 @@ See DragAndDropMechanism for an overview.
 |tiddler |Optional title of the payload tiddler for the drag |
 |filter |Optional filter defining the payload tiddlers for the drag |
 |class |Optional CSS classes to assign to the draggable element. The class `tc-draggable` is added automatically, and the class `tc-dragging` is applied while the element is being dragged |
+|style |<<.from-version "5.2.0">> An optional CSS style attribute to be assigned to the HTML element |
 |tag |Optional tag to override the default "div" element |
 |startactions |Optional action string that gets invoked when dragging ''starts'' |
 |endactions |Optional action string that gets invoked when dragging ''ends'' |
