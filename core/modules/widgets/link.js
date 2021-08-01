@@ -208,6 +208,7 @@ LinkWidget.prototype.updateDomNodeClasses = function() {
 			classes.push(this.linkClasses);
 		}
 	} else if(this.overrideClasses !== "") {
+		this.overrideClasses = this.getAttribute("overrideClass");
 		classes.push(this.overrideClasses)
 	}
 	if(classes.length > 0) {
