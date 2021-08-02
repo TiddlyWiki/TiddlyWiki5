@@ -50,6 +50,8 @@ ExportTiddler/Caption: exporta el tiddler
 ExportTiddler/Hint: Exporta aquest tiddler
 ExportTiddlers/Caption: exporta tiddlers
 ExportTiddlers/Hint: Exporta els tiddlers
+ExportTiddlyWikiCore/Caption: exporta el nucli del TiddlyWiki
+ExportTiddlyWikiCore/Hint: Exporta el codi del nucli del ~TiddlyWiki per tal d'executar-ho amb ~JavaScript extern
 Fold/Caption: expandeix el tiddler
 Fold/FoldBar/Caption: barra d'expansió
 Fold/FoldBar/Hint: Barres opcionals per a contraure i expandir els tiddlers

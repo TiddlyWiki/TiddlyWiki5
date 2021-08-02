@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Drag and Drop Interoperability with TiddlyWiki Demo</title>
+    <style>
+        #draggable {
+            padding: 1em;
+            margin: 1em;
+            background: #ecc;
+        }
+    </style>
+</head>
+<body>
+    <div id="draggable" draggable="true">
+        Drag me to a TiddlyWiki window
+    </div>
+</body>
+<script>
+
+    var titleString = "This is the string that appears when the block is dragged to a text input";
+    var tiddlerData = [
+        {title: "Tiddler One", text: "This is one of the payload tiddlers"},
+        {title: "Tiddler Two", text: "This is another of the payload tiddlers", "custom-field": "A custom field value"}
+    ];
+
+    document.getElementById("draggable").addEventListener("dragstart",function(event) {
+        event.dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURIComponent(JSON.stringify(tiddlerData)));
+        event.dataTransfer.setData("Text",titleString);
+        event.stopPropagation();
+        return false;
+    });
+    
+</script>
+</html>

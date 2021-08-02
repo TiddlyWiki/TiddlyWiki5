@@ -66,11 +66,11 @@ Create a new non-functional page control button and open the tiddler
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5727">> class to make tag pills in the edit template look like those in the ViewTemplate
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5726">> the HTML comment syntax to enable it to be used before and in between pragmas such as macro definitions
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/1661">> overflow of long field values that do not contain whitespace
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/a4421f50c6886b02c3595b7ffa6ba72674d6bf21>> GitHub, Gitea and GitLab savers to wikify the commit message, enabling macros to be used in the message
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/a4421f50c6886b02c3595b7ffa6ba72674d6bf21">> GitHub, Gitea and GitLab savers to wikify the commit message, enabling macros to be used in the message
 
 ! Filter improvements
 
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5813">> new [[:map filter run prefix|Filter Expression]]
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5813">> new [[:map filter run prefix|Map Filter Run Prefix]]
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5653">> new [[:sort filter run prefix|Sort Filter Run Prefix]]
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5612">> [[average Operator]], [[median Operator]], [[variance Operator]] and [[standard-deviation Operator]] for calculating averages of a list of numbers
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5673">> [[deserializers filter Operator|deserializers Operator]] for obtaining a list of the available deserializers
