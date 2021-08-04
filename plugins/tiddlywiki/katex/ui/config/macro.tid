@@ -3,9 +3,9 @@ tags: $:/tags/katex/config
 caption: Custom macro editor
 
 \define katex-escape(text)
-<$set filter="[[$text$]search-replace:g:regexp[(?<!\\)#(\d)],[\#_$1]]">
+<$list filter="[[$text$]search-replace:g:regexp[(?<!\\)#(\d)],[\#_$1]]">
 <$latex text=<<currentTiddler>>/>
-</$set>
+</$list>
 \end
 
 Note that the macros are loaded on startup, so please refresh the page when new macros are added (or deleted).
