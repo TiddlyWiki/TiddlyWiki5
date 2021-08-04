@@ -2,12 +2,6 @@ title: $:/plugins/tiddlywiki/katex/ui/config/macro
 tags: $:/tags/katex/config
 caption: Custom macro editor
 
-\define katex-escape(text)
-<$list filter="[[$text$]search-replace:g:regexp[(?<!\\)#(\d)],[\#_$1]]">
-<$latex text=<<currentTiddler>>/>
-</$list>
-\end
-
 Note that the macros are loaded on startup, so please refresh the page when new macros are added (or deleted).
 
 <table>
@@ -20,9 +14,15 @@ Note that the macros are loaded on startup, so please refresh the page when new 
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/katex/macro]!has[draft.of]sort[macro]]">
 <tr>
-<td><tt>{{!!macro}}</tt></td>
-<td><tt>{{!!text}}</tt></td>
-<td><$macrocall $name=katex-escape text={{!!text}}/></td>
+<td><tt><$text text={{!!macro}}/></tt></td>
+<td><tt><$text text={{!!text}}/></tt></td>
+<td>
+<$vars t={{!!text}}>
+<$list filter="[<t>search-replace:g:regexp[(?<!\\)#(\d)],[{\#_$1}]]">
+<$latex text=<<currentTiddler>>/>
+</$list>
+</$vars>
+</td>
 <td>
 <$button>
 <$action-navigate $to={{!!title}}/>
@@ -41,7 +41,7 @@ Note that the macros are loaded on startup, so please refresh the page when new 
 <td><$edit-text tiddler="$:/state/katex-new-command" tag="input" default=""/></td>
 <td></td>
 <td><$button>
-<$action-createtiddler $basetitle="$:/plugins/tiddlywiki/katex/macros/macro" tags="$:/tags/katex/macro" macro={{$:/state/katex-new-macro}} text={{$:/state/katex-new-command}}/>
+<$action-createtiddler $basetitle="$:/plugins/tiddlywiki/katex/macros/macro" tags="$:/tags/katex/macro" type="text/plain" macro={{$:/state/katex-new-macro}} text={{$:/state/katex-new-command}}/>
 {{$:/language/EditTemplate/Fields/Add/Button}}
 </$button></td>
 </tr>
