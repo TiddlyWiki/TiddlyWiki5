@@ -1,0 +1,60 @@
+title: $:/plugins/tiddlywiki/katex/ui/config/macro
+tags: $:/tags/katex/config
+caption: Custom macro editor
+
+\define katex-escape(text)
+<$set filter="[[$text$]search-replace:g:regexp[(?<!\\)#(\d)],[\#_$1]]">
+<$latex text=<<currentTiddler>>/>
+</$set>
+\end
+
+Note that the macros are loaded on startup, so please refresh the page when new macros are added (or deleted).
+
+<table>
+<tr>
+<th>Macro</th>
+<th>Command</th>
+<th>Preview</th>
+<th></th>
+</tr>
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/katex/macro]!has[draft.of]sort[macro]]">
+<tr>
+<td><tt>{{!!macro}}</tt></td>
+<td><tt>{{!!text}}</tt></td>
+<td><$macrocall $name=katex-escape text={{!!text}}/></td>
+<td>
+<$button>
+<$action-navigate $to={{!!title}}/>
+{{$:/core/images/folder}}
+</$button>
+<$button>
+<$action-deletetiddler $tiddler={{!!title}}/>
+{{$:/core/images/delete-button}}
+</$button>
+</td>
+</tr>
+</$list>
+
+<tr>
+<td><$edit-text tiddler="$:/state/katex-new-macro" tag="input" default=""/></td>
+<td><$edit-text tiddler="$:/state/katex-new-command" tag="input" default=""/></td>
+<td></td>
+<td><$button>
+<$action-createtiddler $basetitle="$:/plugins/tiddlywiki/katex/macros/macro" tags="$:/tags/katex/macro" macro={{$:/state/katex-new-macro}} text={{$:/state/katex-new-command}}/>
+{{$:/language/EditTemplate/Fields/Add/Button}}
+</$button></td>
+</tr>
+</table>
+
+<details>
+<summary>Usage</summary>
+<ul>
+<li>
+You can add entries like `\ZZ`, `\mathbb{Z}`, which will render as <$latex text="\mathbb{Z}"/>.
+</li>
+<li>
+An entry mapping `\dd` to `\frac{d#1}{d#2}` will create a macro with two arguments; `\dd{f}{x}` will then render as <$latex text="\frac{df}{dx}"/>. The arguments should only appear in the command and not the macro itself.
+</li>
+</ul>
+</details>

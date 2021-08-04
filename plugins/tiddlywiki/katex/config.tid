@@ -1,0 +1,13 @@
+title: $:/plugins/tiddlywiki/katex/config
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/katex/config]!has[draft.of]]">
+
+<div>
+
+!! <$link><$transclude field="caption"/></$link>
+
+<$transclude>
+
+</div>
+
+</$list>
