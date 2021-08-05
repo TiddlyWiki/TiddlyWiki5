@@ -24,7 +24,7 @@ katex.updateMacros = function() {
 	for (var i=0; i < tiddlers.length; i++) {
 		tid = $tw.wiki.getTiddler(tiddlers[i]);
 		try {
-			macro = tid.fields["macro"];
+			macro = tid.fields["caption"];
 			macro = macro.replace(regex, "");
 			cmd = tid.fields["text"];
 			katex.macros[macro] = cmd;
