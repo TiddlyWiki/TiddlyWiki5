@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/katex/ui/config/macro
-tags: $:/tags/katex/config
+tags: $:/tags/KaTeX/Config
 caption: Custom macro editor
 
 \define katex-escape(text)
@@ -18,7 +18,7 @@ caption: Custom macro editor
 <th></th>
 </tr>
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/katex/macro]!has[draft.of]sort[macro]]">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/KaTeX/Macro]!has[draft.of]sort[macro]]">
 <tr>
 <td><tt><$text text={{!!macro}}/></tt></td>
 <td><tt><$text text={{!!text}}/></tt></td>
@@ -41,7 +41,7 @@ caption: Custom macro editor
 <td><$edit-text tiddler="$:/state/katex-new-command" tag="input" default=""/></td>
 <td><<katex-escape {{$:/state/katex-new-command}}>></td>
 <td><$button>
-<$action-createtiddler $basetitle="$:/plugins/tiddlywiki/katex/macros/macro" tags="$:/tags/katex/macro" type="text/plain" macro={{$:/state/katex-new-macro}} text={{$:/state/katex-new-command}}/>
+<$action-createtiddler $basetitle="$:/plugins/tiddlywiki/katex/macros/macro" tags="$:/tags/KaTeX/Macro" type="text/plain" macro={{$:/state/katex-new-macro}} text={{$:/state/katex-new-command}}/>
 {{$:/language/EditTemplate/Fields/Add/Button}}
 </$button></td>
 </tr>

@@ -18,7 +18,7 @@ var katex = require("$:/plugins/tiddlywiki/katex/katex.min.js"),
 
 katex.macros = {};
 katex.updateMacros = function() {
-	var tiddlers = $tw.wiki.getTiddlersWithTag("$:/tags/katex/macro"),
+	var tiddlers = $tw.wiki.getTiddlersWithTag("$:/tags/KaTeX/Macro"),
 		regex = /#\d/g, // Remove the arguments like #1#2
 		tid, macro, cmd;
 	for (var i=0; i < tiddlers.length; i++) {
