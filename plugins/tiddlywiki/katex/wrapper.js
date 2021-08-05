@@ -18,10 +18,11 @@ var katex = require("$:/plugins/tiddlywiki/katex/katex.min.js"),
 
 katex.macros = {};
 katex.updateMacros = function() {
-	var tid, macro, cmd;
-	const regex = /#\d/g; // Remove the arguments like #1#2
-	for (const t of $tw.wiki.getTiddlersWithTag("$:/tags/katex/macro")) {
-		tid = $tw.wiki.getTiddler(t);
+	var tiddlers = $tw.wiki.getTiddlersWithTag("$:/tags/katex/macro"),
+		regex = /#\d/g, // Remove the arguments like #1#2
+		tid, macro, cmd;
+	for (var i=0; i < tiddlers.length; i++) {
+		tid = $tw.wiki.getTiddler(tiddlers[i]);
 		macro = tid.fields["macro"];
 		macro = macro.replace(regex, "");
 		cmd = tid.fields["text"];
