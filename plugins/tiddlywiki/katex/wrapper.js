@@ -17,15 +17,18 @@ var katex = require("$:/plugins/tiddlywiki/katex/katex.min.js"),
 	Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 katex.macros = {};
-(function() {
-	var tid, m, v;
+katex.updateMacros = function() {
+	var tid, macro, cmd;
+	const regex = /#\d/g; // Remove the arguments like #1#2
 	for (const t of $tw.wiki.getTiddlersWithTag("$:/tags/katex/macro")) {
 		tid = $tw.wiki.getTiddler(t);
-		m = tid.fields["macro"];
-		v = tid.fields["text"];
-		katex.macros[m] = v;
+		macro = tid.fields["macro"];
+		macro = macro.replace(regex, "");
+		cmd = tid.fields["text"];
+		katex.macros[macro] = cmd;
 	};
-})();
+};
+
 var KaTeXWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
@@ -46,6 +49,7 @@ KaTeXWidget.prototype.render = function(parent,nextSibling) {
 	// Get the source text
 	var text = this.getAttribute("text",this.parseTreeNode.text || "");
 	var displayMode = this.getAttribute("displayMode",this.parseTreeNode.displayMode || "false") === "true";
+	katex.updateMacros();
 	// Render it into a span
 	var span = this.document.createElement("span"),
 		options = {throwOnError: false, displayMode: displayMode, macros: katex.macros};

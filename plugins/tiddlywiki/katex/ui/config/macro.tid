@@ -2,7 +2,13 @@ title: $:/plugins/tiddlywiki/katex/ui/config/macro
 tags: $:/tags/katex/config
 caption: Custom macro editor
 
-Note that the macros are loaded on startup, so please refresh the page when new macros are added (or deleted).
+\define katex-escape(text)
+<$vars t=$text$>
+<$list filter="[<t>search-replace:g:regexp[(?<!\\)#(\d)],[{\#_$1}]]">
+<$latex text=<<currentTiddler>>/>
+</$list>
+</$vars>
+\end
 
 <table>
 <tr>
@@ -16,19 +22,13 @@ Note that the macros are loaded on startup, so please refresh the page when new 
 <tr>
 <td><tt><$text text={{!!macro}}/></tt></td>
 <td><tt><$text text={{!!text}}/></tt></td>
+<td><<katex-escape {{!!text}}>></td>
 <td>
-<$vars t={{!!text}}>
-<$list filter="[<t>search-replace:g:regexp[(?<!\\)#(\d)],[{\#_$1}]]">
-<$latex text=<<currentTiddler>>/>
-</$list>
-</$vars>
-</td>
-<td>
-<$button>
+<$button class="tc-btn-invisible tc-btn-dropdown">
 <$action-navigate $to={{!!title}}/>
 {{$:/core/images/folder}}
 </$button>
-<$button>
+<$button class="tc-btn-invisible tc-btn-dropdown">
 <$action-deletetiddler $tiddler={{!!title}}/>
 {{$:/core/images/delete-button}}
 </$button>
@@ -39,7 +39,7 @@ Note that the macros are loaded on startup, so please refresh the page when new 
 <tr>
 <td><$edit-text tiddler="$:/state/katex-new-macro" tag="input" default=""/></td>
 <td><$edit-text tiddler="$:/state/katex-new-command" tag="input" default=""/></td>
-<td></td>
+<td><<katex-escape {{$:/state/katex-new-command}}>></td>
 <td><$button>
 <$action-createtiddler $basetitle="$:/plugins/tiddlywiki/katex/macros/macro" tags="$:/tags/katex/macro" type="text/plain" macro={{$:/state/katex-new-macro}} text={{$:/state/katex-new-command}}/>
 {{$:/language/EditTemplate/Fields/Add/Button}}
@@ -54,7 +54,10 @@ Note that the macros are loaded on startup, so please refresh the page when new 
 You can add entries like `\ZZ`, `\mathbb{Z}`, which will render as <$latex text="\mathbb{Z}"/>.
 </li>
 <li>
-An entry mapping `\dd` to `\frac{d#1}{d#2}` will create a macro with two arguments; `\dd{f}{x}` will then render as <$latex text="\frac{df}{dx}"/>. The arguments should only appear in the command and not the macro itself.
+An entry mapping `\dd#1#2` to `\frac{d#1}{d#2}` will create a macro with two arguments; `\dd{f}{x}` will then render as <$latex text="\frac{df}{dx}"/>.
+</li>
+<li>
+Note that the macros defined here have higher priority than those defined using `\gdef`. Also, deleted macros will continue to exist until a full refresh.
 </li>
 </ul>
 </details>
