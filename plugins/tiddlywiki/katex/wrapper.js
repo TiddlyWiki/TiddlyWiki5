@@ -23,10 +23,13 @@ katex.updateMacros = function() {
 		tid, macro, cmd;
 	for (var i=0; i < tiddlers.length; i++) {
 		tid = $tw.wiki.getTiddler(tiddlers[i]);
-		macro = tid.fields["macro"];
-		macro = macro.replace(regex, "");
-		cmd = tid.fields["text"];
-		katex.macros[macro] = cmd;
+		try {
+			macro = tid.fields["macro"];
+			macro = macro.replace(regex, "");
+			cmd = tid.fields["text"];
+			katex.macros[macro] = cmd;
+		} catch(ex) {// Catch the bad ones
+		};
 	};
 };
 
