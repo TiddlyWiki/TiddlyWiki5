@@ -86,6 +86,10 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 						catcherNodeRect = self.domNode.getBoundingClientRect();
 						variables["event-fromcatcher-posx"] = (event.clientX - catcherNodeRect.left).toString();
 						variables["event-fromcatcher-posy"] = (event.clientY - catcherNodeRect.top).toString();
+
+						//Add variables for event X and Y position relative to the viewport
+						variables["event-fromviewport-posx"] = event.clientX.toString();
+						variables["event-fromviewport-posy"] = event.clientY.toString();
 					}
 				} else {
 					return false;
