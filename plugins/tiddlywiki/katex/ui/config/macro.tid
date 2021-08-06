@@ -30,7 +30,7 @@ caption: Custom macro editor
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/KaTeX/Macro]!has[draft.of]sort[caption]]">
 <tr>
 <td><tt><$text text={{!!caption}}/></tt></td>
-<td><tt><$text text={{!!text}}/></tt></td>
+<td><$edit-text tiddler=<<currentTiddler>> tag="input" default=""/></td>
 <td><<katex-escape {{!!text}}>></td>
 <td>
 <$button class="tc-btn-invisible tc-btn-dropdown">
@@ -45,6 +45,9 @@ caption: Custom macro editor
 </tr>
 </$list>
 
+<tr>
+<td colspan="4" align="left">Add a new macro</td>
+</tr>
 <tr>
 <td><$edit-text tiddler="$:/state/katex-new-macro" tag="input" default=""/></td>
 <td><$edit-text tiddler="$:/state/katex-new-command" tag="input" default=""/></td>
