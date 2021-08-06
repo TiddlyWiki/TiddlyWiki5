@@ -11,12 +11,12 @@ caption: Custom macro editor
 \end
 
 \define katex-create-macro()
-<$vars t={{$:/state/katex-new-macro}}>
+<$vars t={{$:/temp/katex/new-macro-name}}>
 <$list filter="[<t>addprefix[$:/plugins/tiddlywiki/katex/macros/]]">
-<$action-setfield $tiddler="$:/state/katex-new-macro-location" text=<<currentTiddler>>/>
+<$action-setfield $tiddler="$:/temp/katex/new-macro-location" text=<<currentTiddler>>/>
 </$list>
 </$vars>
-<$action-createtiddler $basetitle={{$:/state/katex-new-macro-location}} tags="$:/tags/KaTeX/Macro" type="text/plain" caption={{$:/state/katex-new-macro}} text={{$:/state/katex-new-command}}/>
+<$action-createtiddler $basetitle={{$:/temp/katex/new-macro-location}} tags="$:/tags/KaTeX/Macro" type="text/plain" caption={{$:/temp/katex/new-macro-name}} text={{$:/temp/katex/new-macro-command}}/>
 \end
 
 <table>
@@ -49,9 +49,9 @@ caption: Custom macro editor
 <td colspan="4" align="left">Add a new macro</td>
 </tr>
 <tr>
-<td><$edit-text tiddler="$:/state/katex-new-macro" tag="input" default=""/></td>
-<td><$edit-text tiddler="$:/state/katex-new-command" tag="input" default=""/></td>
-<td><<katex-escape {{$:/state/katex-new-command}}>></td>
+<td><$edit-text tiddler="$:/temp/katex/new-macro-name" tag="input" default=""/></td>
+<td><$edit-text tiddler="$:/temp/katex/new-macro-command" tag="input" default=""/></td>
+<td><<katex-escape {{$:/temp/katex/new-macro-command}}>></td>
 <td><$button actions=<<katex-create-macro>>>
 {{$:/language/EditTemplate/Fields/Add/Button}}
 </$button></td>
