@@ -4,19 +4,44 @@ caption: Custom macro editor
 
 \define katex-escape(text)
 <$vars t=$text$>
-<$list filter="[<t>search-replace:g:regexp[(?<!\\)#(\d)],[{\#_$1}]]">
-<$latex text=<<currentTiddler>>/>
-</$list>
+<$latex text={{{[<t>search-replace:g:regexp[(?<!\\)#(\d)],[{\#_$1}]]}}}>
 </$vars>
 \end
 
 \define katex-create-macro()
-<$vars t={{$:/temp/katex/new-macro-name}}>
-<$list filter="[<t>addprefix[$:/plugins/tiddlywiki/katex/macros/]]">
-<$action-setfield $tiddler="$:/temp/katex/new-macro-location" text=<<currentTiddler>>/>
-</$list>
+<$vars loc={{$:/temp/katex/new-macro-name}}>
+<$action-createtiddler $basetitle={{{[<loc>addprefix[$:/plugins/tiddlywiki/katex/macros/]]}}} tags="$:/tags/KaTeX/Macro" type="text/plain" caption={{$:/temp/katex/new-macro-name}} text={{$:/temp/katex/new-macro-command}} $overwrite=yes/>
 </$vars>
-<$action-createtiddler $basetitle={{$:/temp/katex/new-macro-location}} tags="$:/tags/KaTeX/Macro" type="text/plain" caption={{$:/temp/katex/new-macro-name}} text={{$:/temp/katex/new-macro-command}}/>
+\end
+
+\define katex-edit-cell()
+<$reveal state="$:/temp/katex/edit-macro" type=match text={{!!title}}>
+<$edit-text tiddler=<<currentTiddler>> tag="input" default=""/>
+</$reveal>
+\end
+
+\define katex-view-cell()
+<$reveal state="$:/temp/katex/edit-macro" type=nomatch text={{!!title}}>
+<tt><$view field=text/></tt>
+</$reveal>
+\end
+
+\define katex-edit-macro-button()
+<$reveal state="$:/temp/katex/edit-macro" type=nomatch text={{!!title}}>
+<$button class="tc-btn-invisible tc-btn-dropdown">
+<$action-setfield $tiddler="$:/temp/katex/edit-macro" text={{!!title}}/>
+{{$:/core/images/edit-button}}
+</$button>
+</$reveal>
+\end
+
+\define katex-save-macro-button()
+<$reveal state="$:/temp/katex/edit-macro" type=match text={{!!title}}>
+<$button class="tc-btn-invisible tc-btn-dropdown">
+<$action-deletetiddler $tiddler="$:/temp/katex/edit-macro"/>
+{{$:/core/images/done-button}}
+</$button>
+</$reveal>
 \end
 
 <table>
@@ -30,13 +55,11 @@ caption: Custom macro editor
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/KaTeX/Macro]!has[draft.of]sort[caption]]">
 <tr>
 <td><tt><$text text={{!!caption}}/></tt></td>
-<td><$edit-text tiddler=<<currentTiddler>> tag="input" default=""/></td>
+<td><<katex-edit-cell>><<katex-view-cell>></td>
 <td><<katex-escape {{!!text}}>></td>
 <td>
-<$button class="tc-btn-invisible tc-btn-dropdown">
-<$action-navigate $to={{!!title}}/>
-{{$:/core/images/folder}}
-</$button>
+<<katex-edit-macro-button>>
+<<katex-save-macro-button>>
 <$button class="tc-btn-invisible tc-btn-dropdown">
 <$action-deletetiddler $tiddler={{!!title}}/>
 {{$:/core/images/delete-button}}
@@ -56,8 +79,45 @@ caption: Custom macro editor
 {{$:/language/EditTemplate/Fields/Add/Button}}
 </$button></td>
 </tr>
+
+<tr><td colspan="4" align="left">
+<details>
+<summary>Import</summary>
+<$edit-text tiddler="$:/temp/katex/import-macro" tag="textarea" default="" class="tc-edit-texteditor" placeholder="You can type commands like \def\ZZ{\mathbb{Z}} and import them automatically."/>
+
+<$vars macros={{$:/temp/katex/import-macro}} sep="%.*\n|\n+" re="^\\g?def([^{]*){(.*)}.*">
+
+<$button>
+<$list filter="[<macros>splitregexp<sep>regexp<re>]" variable=line>
+<$vars m={{{[<line>search-replace:g:regexp<re>,[$1]]}}} c={{{[<line>search-replace:g:regexp<re>,[$2]]}}}>
+<$action-createtiddler $basetitle={{{[<m>addprefix[$:/plugins/tiddlywiki/katex/macros/]]}}} tags="$:/tags/KaTeX/Macro" type="text/plain" caption=<<m>> text=<<c>> $overwrite=yes/>
+</$vars>
+</$list>
+Import
+</$button>
+<$button>
+<$action-setfield $tiddler="$:/temp/katex/import-macro" text=""/>
+Clear
+</$button>
+
+''Preview''
+<table>
+<$list filter="[<macros>splitregexp<sep>regexp<re>]" variable=line>
+<$vars m={{{[<line>search-replace:g:regexp<re>,[$1]]}}} c={{{[<line>search-replace:g:regexp<re>,[$2]]}}}>
+<tr>
+<td><tt><<m>></tt></td>
+<td><tt><<c>></tt></td>
+<td><$macrocall $name=katex-escape text="<<c>>"/></td></tr>
+</$vars>
+</$list>
 </table>
 
+</$vars>
+</details>
+</td>
+</tr>
+
+<tr><td colspan="4" align="left">
 <details>
 <summary>Usage</summary>
 <ul>
@@ -72,3 +132,6 @@ Note that the macros defined here have higher priority than those defined using 
 </li>
 </ul>
 </details>
+</td>
+</tr>
+</table>
