@@ -23,10 +23,20 @@ $button$
 </$droppable>
 \end
 
+\define open-tab-close-tiddler-button()
+<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini tc-small-gap-right">{{$:/core/images/close-button}}</$button>
+\end
+
+<!-- Override one or both of the following 2 macros with a global macro -->
+<!-- of the same name if you need to change how elements are displayed  -->
+\define open-tab-link()<$link to={{!!title}}><$view field="title"/></$link>
+
+\define open-tab-element()<<open-tab-close-tiddler-button>><<open-tab-link>>
+
 <div class="tc-sidebar-tab-open">
 <$list filter="[list<tv-story-list>]" history=<<tv-history-list>> storyview="pop">
 <div class="tc-sidebar-tab-open-item">
-<$macrocall $name="droppable-item" button="""<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini tc-small-gap-right">{{$:/core/images/close-button}}</$button><$link to={{!!title}}><$view field="title"/></$link>"""/>
+<$macrocall $name="droppable-item" button="<<open-tab-element>>"/>
 </div>
 </$list>
 <$tiddler tiddler="">
