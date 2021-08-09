@@ -3,8 +3,9 @@ modified: 20141212110330815
 tags: $:/tags/Macro
 title: $:/core/macros/timeline
 
-<!-- Override one or both of the following 2 macros with a global macro -->
-<!-- of the same name if you need to change how titles are displayed on the timeline -->
+<!-- Override one or both of the following two macros with a global or local macro of the same name 
+if you need to change how titles are displayed on a timeline -->
+
 \define timeline-title() <$view field="title"/>
 \define timeline-link() <$link to={{!!title}}><<timeline-title>></$link>
 \define timeline(limit:"100",format:"DDth MMM YYYY",subfilter:"",dateField:"modified")
