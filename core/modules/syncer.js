@@ -472,7 +472,7 @@ Syncer.prototype.handleLogoutEvent = function() {
 	if(this.syncadaptor.logout) {
 		this.syncadaptor.logout(function(err) {
 			if(err) {
-				self.logger.alert(err);
+				self.displayError("Logout Error",err);
 			} else {
 				self.getStatus();
 			}
