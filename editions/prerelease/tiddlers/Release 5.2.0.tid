@@ -31,20 +31,6 @@ It is now possible to drag and drop an image file directly into the tiddler text
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5479">> ability to import previously blocked system tiddlers
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5812">> warning message when cancelling a pending import
 
-!! Optimised Refreshing of Transclusions
-
-This simple-sounding change has several important consequences:
-
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5736">> the TranscludeWidget to avoid triggering a refresh unless the transcluded field changes (previously it was also triggered for changes to other fields).
-
-The first consequence is that it makes the TranscludeWidget much more efficient, and improves the performance of the refresh cycle.
-
-The second consequence resolves a long-standing difficulty for many users: it is now possible to use an EditWidget to edit another field of the same tiddler. Previously, the edit widget would not work properly in such cases because it would be refreshed on every keypress, leading to the current editing caret/selection position being lost.
-
-As sometimes happens, the third consequence is that constructions that relied on the old, buggy behaviour may no longer work as expected. A common example of such a construction is an invocation of a JavaScript macro. The problem stems from the fact that JavaScript macros are designed to be as simple as possible from the developers perspective, being pure functions that have no side effects, and that always return the same value for the same parameters. In particular, JavaScript macros cannot participate in TiddlyWiki's refresh mechansim, so they cannot force themselves to be updated when underlying data changes (for situations where such processing is needed, JavaScript widgets should be used instead of JavaScript macros).
-
-However, developers have sometimes worked around this limitation by using the TranscludeWidget to force refreshing of a macro invocation when a particular tiddler changes. The newer, more selective behaviour means that sometimes such widgets will avoid a refresh that was previously relied upon to update the JavaScript macro.
-
 !! Simplified Access to Tiddler Title with ActionCreateTiddlerWidget
 
 It is now possible to embed actions within the body of the ActionCreateTiddlerWidget, and those can access to the title of the newly created tidddler via the variable `createTiddler-title`, and the title of the corresponding draft in the variable `createTiddler-draftTitle`. The old `$savetitle` and `$savedrafttitle` attributes are now deprecated.
@@ -61,6 +47,22 @@ Create a new non-functional page control button and open the tiddler
 For more details:
 
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/9faaa312998d48c56bd50335820b6b881266af4b">> [[ActionCreateTiddlerWidget]] to make the new title available as a variable
+
+!! Optimised Refreshing of Transclusions
+
+This simple-sounding change has several important consequences:
+
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5736">> the TranscludeWidget to avoid triggering a refresh unless the transcluded field changes (previously it was also triggered for changes to other fields).
+
+The first consequence is that it makes the TranscludeWidget much more efficient, and improves the performance of the refresh cycle.
+
+The second consequence resolves a long-standing difficulty for many users: it is now possible to use an EditWidget to edit another field of the same tiddler. Previously, the edit widget would not work properly in such cases because it would be refreshed on every keypress, leading to the current editing caret/selection position being lost.
+
+As sometimes happens, the third consequence is that constructions that relied on the old, buggy behaviour may no longer work as expected. A common example of such a construction is an invocation of a JavaScript macro. The problem stems from the fact that JavaScript macros are designed to be as simple as possible from the developers perspective, being pure functions that have no side effects, and that always return the same value for the same parameters. In particular, JavaScript macros cannot participate in TiddlyWiki's refresh mechansim, so they cannot force themselves to be updated when underlying data changes (for situations where such processing is needed, JavaScript widgets should be used instead of JavaScript macros).
+
+However, developers have sometimes worked around this limitation by using the TranscludeWidget to force refreshing of a macro invocation when a particular tiddler changes. The newer, more selective behaviour means that sometimes such widgets will avoid a refresh that was previously relied upon to update the JavaScript macro.
+
+For end users, if an upgrade to v5.2.0 causes problems then consult the discussion [[Forums]] to see if other users have encountered the same problem, and make a new posting if needed.
 
 ! Performance Improvements
 
