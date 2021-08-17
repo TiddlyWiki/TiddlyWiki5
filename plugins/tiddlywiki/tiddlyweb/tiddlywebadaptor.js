@@ -114,6 +114,10 @@ TiddlyWebAdaptor.prototype.login = function(username,password,callback) {
 		},
 		callback: function(err) {
 			callback(err);
+		},
+		headers: {
+			"accept": "application/json",
+			"X-Requested-With": "TiddlyWiki"
 		}
 	};
 	this.logger.log("Logging in:",options);
@@ -132,6 +136,10 @@ TiddlyWebAdaptor.prototype.logout = function(callback) {
 		},
 		callback: function(err,data) {
 			callback(err);
+		},
+		headers: {
+			"accept": "application/json",
+			"X-Requested-With": "TiddlyWiki"
 		}
 	};
 	this.logger.log("Logging out:",options);
