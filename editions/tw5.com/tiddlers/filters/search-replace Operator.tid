@@ -18,7 +18,7 @@ The <<.op search-replace>> operator uses an extended syntax that allows for mult
 [search-replace:<flag list>:<regexp-mode>[<search-term>],[<replacement>]]
 ```
 
-* ''flag-list'': ''g'' for global mode to replace all matches, ''i'' for case-insensitive mode, "gi" for both. (optional)
+* ''flag-list'': ''g'' for global mode to replace all matches, ''i'' for case-insensitive mode, ''m'' for multiline mode, "gim" for all. (optional)
 * ''regexp-mode'': ''regexp'' to treat the first parameter as a regular expression (optional).
 * ''search-term'': string or regular expression that should be replaced
 * ''replacement'': string that should replace the search-term
