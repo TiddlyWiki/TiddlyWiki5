@@ -119,7 +119,7 @@ exports["search-replace"] = function(source,operator,options) {
 	var results = [],
 		suffixes = operator.suffixes || [],
 		flagSuffix = (suffixes[0] ? (suffixes[0][0] || "") : ""),
-		flags = (flagSuffix.indexOf("g") !== -1 ? "g" : "") + (flagSuffix.indexOf("i") !== -1 ? "i" : ""),
+		flags = (flagSuffix.indexOf("g") !== -1 ? "g" : "") + (flagSuffix.indexOf("i") !== -1 ? "i" : "") + (flagSuffix.indexOf("m") !== -1 ? "m" : ""),
 		isRegExp = (suffixes[1] && suffixes[1][0] === "regexp") ? true : false,
 		searchTerm,
 		regExp;

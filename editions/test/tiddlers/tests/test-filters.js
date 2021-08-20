@@ -778,14 +778,17 @@ function runTests(wiki) {
 		rootWidget.makeChildWidgets();
 		var anchorWidget = rootWidget.children[0];
 		rootWidget.setVariable("var1","different");
-		rootWidget.setVariable("myregexp","e|o");
+		rootWidget.setVariable("myregexp1","e|o");
+		rootWidget.setVariable("myregexp2","^(?!^Unlike.*\n).*");
 		rootWidget.setVariable("name","(\w+)\s(\w+)");
 		expect(wiki.filterTiddlers("[[Welcome to TiddlyWiki, a unique non-linear webpage.]search-replace[webpage],[notebook]]").join(",")).toBe("Welcome to TiddlyWiki, a unique non-linear notebook.");
 		expect(wiki.filterTiddlers("[[Welcome to TiddlyWiki, a unique non-linear notebook.]search-replace[unique],<var1>]",anchorWidget).join(",")).toBe("Welcome to TiddlyWiki, a different non-linear notebook.");
 		expect(wiki.filterTiddlers("[[Welcome to TiddlyWiki, a unique non-linear notebook.]search-replace[TiddlyWiki],{one}]",anchorWidget).join(",")).toBe("Welcome to This is the text of tiddler [[one]], a unique non-linear notebook.");
-		expect(wiki.filterTiddlers("[[Hello There]search-replace:g:regexp<myregexp>,[]]",anchorWidget).join(",")).toBe("Hll Thr");
-		expect(wiki.filterTiddlers("[[Hello There]search-replace::regexp<myregexp>,[]]",anchorWidget).join(",")).toBe("Hllo There");
-		expect(wiki.filterTiddlers("[[Hello There]search-replace:gi[H],[]]",anchorWidget).join(",")).toBe("ello Tere");	
+		expect(wiki.filterTiddlers("[[Hello There]search-replace:g:regexp<myregexp1>,[]]",anchorWidget).join(",")).toBe("Hll Thr");
+		expect(wiki.filterTiddlers("[[Hello There]search-replace::regexp<myregexp1>,[]]",anchorWidget).join(",")).toBe("Hllo There");
+		expect(wiki.filterTiddlers("[[Hello There]search-replace:gi[H],[]]",anchorWidget).join(",")).toBe("ello Tere");
+		expect(wiki.filterTiddlers("[[Unlike conventional online services, TiddlyWiki lets you choose where to keep your data]search-replace:gm[c],[C]]",anchorWidget).join(",")).toBe("Unlike Conventional online serviCes, TiddlyWiki lets you Choose where to keep your data");
+		expect(wiki.filterTiddlers("[[Hello There\nUnlike conventional online services, TiddlyWiki lets you choose where to keep your data\nguaranteeing that in the decades to come you will still be able to use the notes you take today.]search-replace:gm:regexp<myregexp2>,[]]",anchorWidget).join(",")).toBe("\nUnlike conventional online services, TiddlyWiki lets you choose where to keep your data\n");
 	});
 	
 	it("should handle the pad operator", function() {
