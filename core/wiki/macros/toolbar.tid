@@ -12,7 +12,7 @@ tags: $:/tags/Macro
 
 \define basic-buttons(tag,config,class)
 \whitespace trim
-<$list filter=<<toolbar-filter-display "$tag$" "$config$">> variable="listItem">
+<$list filter=<<toolbar-filter-display "$tag$" "$config$">> storyview="pop" variable="listItem">
 	<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] [<__class__>]">
 		<$transclude tiddler=<<listItem>>/>
 	</$set>
@@ -21,7 +21,7 @@ tags: $:/tags/Macro
 
 \define buttons-with-template(tag,config,class,template)
 \whitespace trim
-<$list filter=<<toolbar-filter-display "$tag$" "$config$">> >
+<$list filter=<<toolbar-filter-display "$tag$" "$config$">> storyview="pop">
 	<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] [<__class__>]">
 		<$transclude tiddler="$template$"/>
 	</$set>
