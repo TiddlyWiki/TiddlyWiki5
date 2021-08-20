@@ -1,5 +1,5 @@
 created: 20210527175240898
-modified: 20210628094122287
+modified: 20210820150549251
 tags: Macros
 title: toolbar Macro
 
@@ -11,9 +11,7 @@ With the following macros you will generate the group of buttons, which have a s
 ;<<.var toolbar-drop-down-list>>
 : A group of button that are aligned vertically (and each button with their caption on the right).
 
-<br>
 The buttons can be [[ordered|Order of Tagged Tiddlers]] by means of the <<.field list>> field of the tag tiddler. By default, they are ordered by creation date.
-<br>
 
 !! Parameters
 
@@ -25,9 +23,9 @@ The buttons can be [[ordered|Order of Tagged Tiddlers]] by means of the <<.field
 
 ;class
 : Optionally, additional [[CSS|Cascading Style Sheets]] classes for buttons. Multiple classes can be separated with spaces.
+: __Warning__: If you use a template then it must use <<.var tv-config-toolbar-class>> to add the classes.
 
 ;template
 : Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the buttons.
-<br>
 
 [[Examples|toolbar Macro (Examples)]]

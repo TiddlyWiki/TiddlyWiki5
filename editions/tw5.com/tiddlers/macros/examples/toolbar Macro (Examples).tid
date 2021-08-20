@@ -1,26 +1,28 @@
 created: 20210623113149086
-modified: 20210628094054417
+modified: 20210820150135977
 tags: [[Macro Examples]] [[toolbar Macros]]
 title: toolbar Macro (Examples)
 
 This example create a replica of ~TiddlyWiki ~PageControls:
-
 <$macrocall $name=".example" n="1" eg="""<div class="tc-page-controls">
 <<toolbar "$:/tags/PageControls" "$:/config/PageControlButtons/Visibility/">>
 </div>"""/>
 
-
 This example create a replica of ~TiddlyWiki ~PageControls with class "//tc-btn-rounded//", without change the general style for toolbar buttons:
-
 <$macrocall $name=".example" n="2" eg="""<div class="tc-page-controls">
 <<toolbar "$:/tags/PageControls" "$:/config/PageControlButtons/Visibility/" "tc-btn-rounded">>
 </div>"""/>
 
-
 This example create a replica of drop-down of the ~ViewToolbar:
-
 <$macrocall $name=".example" n="3" eg="""<div class="tc-titlebar tc-tiddler-controls" style="float:initial; width: 380px;">
 <div class="tc-drop-down">
 <<toolbar-drop-down-list "$:/tags/ViewToolbar" "$:/config/ViewToolbarButtons/Visibility/">>
 </div>
+</div>"""/>
+
+This example create a replica of ~TiddlyWiki ~EditorToolbar when the tiddler is text ~TiddlyWiki type (as this tiddler is):
+<$macrocall $name=".example" n="4" eg="""<div class="tc-editor-toolbar">
+<$set name="targetTiddler" value=<<currentTiddler>> >
+<<toolbar "$:/tags/EditorToolbar" "$:/config/EditorToolbarButtons/Visibility/" template:"$:/core/ui/EditTemplate/body/toolbar/button">>
+</$set>
 </div>"""/>
