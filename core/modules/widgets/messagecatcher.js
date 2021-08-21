@@ -42,18 +42,21 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 					// Collect all the event properties into variables
 					var collectProps = function(obj,prefix) {
 						prefix = prefix || "";
-						var props = {};
+						var props = {},
+							names = [];
 						$tw.utils.each(obj,function(value,name) {
 							if(["string","boolean","number"].indexOf(typeof value) !== -1) {
-								props[prefix + name] = value.toString();
+								names.push(name);
+								props[prefix + "-" + name] = value.toString();
 							}
 						});
+						props["list-" + prefix] = $tw.utils.stringifyList(names);
 						return props;
 					};
 					var variables = $tw.utils.extend(
 						{},
-						collectProps(event.paramObject,"event-paramObject-"),
-						collectProps(event,"event-"),
+						collectProps(event.paramObject,"event-paramObject"),
+						collectProps(event,"event"),
 						{
 							modifier: $tw.keyboardManager.getEventModifierKeyDescriptor(event)
 						});
