@@ -3,7 +3,7 @@ title: $:/core/ui/EditorToolbar/stamp-dropdown
 \define toolbar-button-stamp-inner()
 <$button tag="a">
 
-<$list filter="[[$(snippetTitle)$]addsuffix[/prefix]is[missing]removesuffix[/prefix]addsuffix[/suffix]is[missing]]">
+<$list filter="[[$(snippetTitle)$]addsuffix[/prefix]!is[tiddler]!is[shadow]removesuffix[/prefix]addsuffix[/suffix]!is[tiddler]!is[shadow]]">
 
 <$action-sendmessage
 	$message="tm-edit-text-operation"
@@ -14,13 +14,13 @@ title: $:/core/ui/EditorToolbar/stamp-dropdown
 </$list>
 
 
-<$list filter="[[$(snippetTitle)$]addsuffix[/prefix]is[missing]removesuffix[/prefix]addsuffix[/suffix]!is[missing]] [[$(snippetTitle)$]addsuffix[/prefix]!is[missing]removesuffix[/prefix]addsuffix[/suffix]is[missing]] [[$(snippetTitle)$]addsuffix[/prefix]!is[missing]removesuffix[/prefix]addsuffix[/suffix]!is[missing]]">
+<$list filter="[[$(snippetTitle)$]addsuffix[/prefix]] [[$(snippetTitle)$]addsuffix[/suffix]] +[is[shadow]] :else[is[tiddler]] +[limit[1]]">
 
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
 	prefix={{{ [[$(snippetTitle)$]addsuffix[/prefix]get[text]] }}}
-suffix={{{ [[$(snippetTitle)$]addsuffix[/suffix]get[text]] }}}
+	suffix={{{ [[$(snippetTitle)$]addsuffix[/suffix]get[text]] }}}
 />
 
 </$list>
