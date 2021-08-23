@@ -44,12 +44,31 @@ Create a new non-functional page control button and open the tiddler
 </$button>
 ```
 
+For more details:
+
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/9faaa312998d48c56bd50335820b6b881266af4b">> [[ActionCreateTiddlerWidget]] to make the new title available as a variable
+
+!! Optimised Refreshing of Transclusions
+
+This simple-sounding change has several important consequences:
+
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5736">> the TranscludeWidget to avoid triggering a refresh unless the transcluded field changes (previously it was also triggered for changes to other fields).
+
+The first consequence is that it makes the TranscludeWidget much more efficient, and improves the performance of the refresh cycle.
+
+The second consequence resolves a long-standing difficulty for many users: it is now possible to use an EditWidget to edit another field of the same tiddler. Previously, the edit widget would not work properly in such cases because it would be refreshed on every keypress, leading to the current editing caret/selection position being lost.
+
+As sometimes happens, the third consequence is that constructions that relied on the old, buggy behaviour may no longer work as expected. A common example of such a construction is an invocation of a JavaScript macro. The problem stems from the fact that JavaScript macros are designed to be as simple as possible from the developers perspective, being pure functions that have no side effects, and that always return the same value for the same parameters. In particular, JavaScript macros cannot participate in TiddlyWiki's refresh mechansim, so they cannot force themselves to be updated when underlying data changes (for situations where such processing is needed, JavaScript widgets should be used instead of JavaScript macros).
+
+However, developers have sometimes worked around this limitation by using the TranscludeWidget to force refreshing of a macro invocation when a particular tiddler changes. The newer, more selective behaviour means that sometimes such widgets will avoid a refresh that was previously relied upon to update the JavaScript macro.
+
+For end users, if an upgrade to v5.2.0 causes problems then consult the discussion [[Forums]] to see if other users have encountered the same problem, and make a new posting if needed.
+
 ! Performance Improvements
 
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5380">> (and again [[here|https://github.com/Jermolene/TiddlyWiki5/pull/5488]]) the efficiency of the linked list implementation used in filter processing
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5362">> the [[all Operator]] and ([[here|https://github.com/Jermolene/TiddlyWiki5/pull/5369"]]) the [[links Operator]] to use the new linked list implementation
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5436">> [[ETag|https://en.wikipedia.org/wiki/HTTP_ETag]]-based browser-side caching for all resources and GZip or Deflate compression for all responses to GET requests
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5736">> transclude widget to avoid triggering a refresh unless the transcluded field changes (previously it was also triggered for changes to other fields)
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/70e60cd93fe26e9cde1e350e3236578fa5abfe48">> plugin internal formatting to remove unneeded whitespace, saving about 6% on the size of the $:/core plugin
 
 ! Usability Improvements
@@ -94,7 +113,6 @@ Create a new non-functional page control button and open the tiddler
 
 ! Widget Improvements
 
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/9faaa312998d48c56bd50335820b6b881266af4b">> [[ActionCreateTiddlerWidget]] to make the new title available as a variable
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5611">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/4a99e0cc7d4a6b9e7071c0b2a9a0f63c3c7d2492]]) [[ListWidget]] with optional `counter` attribute specifying a variable to contain the numeric index of each list item
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/9eda02868f21e9dd1733ffe26352bd7ac96285b4">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/f87b3bfcdba79b6ad198af286bd827c61044891f]]) new MessageCatcherWidget to catch arbitrary messages and execute action strings
 * <<.link-badge-modified "https://github.com/Jermolene/TiddlyWiki5/commit/b9647b2c48152dac069a1099a0822b32375a66cf">> [[FieldManglerWidget]] to ensure it doesn't propogate events that it traps
