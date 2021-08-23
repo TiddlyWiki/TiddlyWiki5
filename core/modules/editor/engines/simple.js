@@ -85,7 +85,11 @@ SimpleEngine.prototype.setText = function(text,type) {
 Update the DomNode with the new text
 */
 SimpleEngine.prototype.updateDomNodeText = function(text) {
-	this.domNode.value = text;
+	try {
+		this.domNode.value = text;
+	} catch(e) {
+		// Ignore
+	}
 };
 
 /*

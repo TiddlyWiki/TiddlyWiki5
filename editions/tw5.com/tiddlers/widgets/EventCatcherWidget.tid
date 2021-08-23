@@ -1,5 +1,5 @@
 created: 20201123113532200
-modified: 20210711165425543
+modified: 20210805083352068
 tags: Widgets
 title: EventCatcherWidget
 type: text/vnd.tiddlywiki
@@ -55,6 +55,8 @@ The following variables are made available to the actions:
 |`event-fromselected-posy` |`y` position of the event relative to the selected DOM node |
 |`event-fromcatcher-posx` |`x` position of the event relative to the event catcher DOM node |
 |`event-fromcatcher-posy` |`y` position of the event relative to the event catcher DOM node |
+|`event-fromviewport-posx` |<<.from-version "5.2.0">> `x` position of the event relative to the viewport |
+|`event-fromviewport-posy` |<<.from-version "5.2.0">> `y` position of the event relative to the viewport |
 
 ! Example
 

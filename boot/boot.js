@@ -1602,8 +1602,8 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
 				}
 				for(var f in data) {
 					if($tw.utils.hop(data,f)) {
-						// Check field name doesn't contain whitespace or control characters
-						if(typeof(data[f]) !== "string" || /[\x00-\x1F\s]/.test(f)) {
+						// Check field name doesn't contain control characters
+						if(typeof(data[f]) !== "string" || /[\x00-\x1F]/.test(f)) {
 							return false;
 						}
 					}

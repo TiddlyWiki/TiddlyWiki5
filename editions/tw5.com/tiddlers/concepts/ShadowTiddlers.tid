@@ -1,11 +1,19 @@
-title: ShadowTiddlers
-tags: Concepts
-modified: 201308091623
+\define actions()
+<$action-setfield $tiddler="$:/state/tab/moresidebar-1850697562" $field="text" $value="$:/core/ui/MoreSideBar/Shadows"/>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" $field="text" $value="$:/core/ui/SideBar/More"/>
+\end
+\define click(text)
+<$button actions=<<actions>>>$text$</$button>
+\end
 
 ShadowTiddlers are tiddlers that are loaded from within [[Plugins]]. Unlike ordinary tiddlers, they don't appear in most lists.
 
 ShadowTiddlers can be overridden with an ordinary tiddler of the same name. If that tiddler is subsequently deleted then the original shadow tiddler is automatically restored.
 
-The current shadow tiddlers are:
+!! Overridden Shadow Tiddlers
 
-<$list filter="[all[shadows]sort[title]]"/>
+<<list-links "[is[tiddler]is[shadow]sort[title]]">>
+
+!! Shadow Tiddlers
+
+A full list of shadow tiddlers can be found in the sidebar in the "More" -> "Shadows" tab

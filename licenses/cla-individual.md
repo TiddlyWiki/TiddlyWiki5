@@ -449,3 +449,13 @@ J. Wilhelm, @jeremyredhead, 2021/01/27
 Quentin Minster, @laomaiweng, 2021/03/10
 
 Cindy Ruan, @cdruan, 2021/03/18
+
+Urban Alič, @ualich, 2021/05/06
+
+Joe Bordes, @joebordes, 2021/05/30
+
+Frank Bruns-Ballhausen, @FBB-de, 2021/06/09
+
+Álvaro González Rincón, @Alzacon, 2021/06/10
+
+RJ Skerry-Ryan, @rryan, 2021/07/03
