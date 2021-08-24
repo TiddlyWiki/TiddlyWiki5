@@ -779,7 +779,7 @@ function runTests(wiki) {
 		var anchorWidget = rootWidget.children[0];
 		rootWidget.setVariable("var1","different");
 		rootWidget.setVariable("myregexp1","e|o");
-		rootWidget.setVariable("myregexp2","^(?!^Unlike.*\n).*");
+		rootWidget.setVariable("myregexp2","^(?!Unlike).*$");
 		rootWidget.setVariable("name","(\w+)\s(\w+)");
 		expect(wiki.filterTiddlers("[[Welcome to TiddlyWiki, a unique non-linear webpage.]search-replace[webpage],[notebook]]").join(",")).toBe("Welcome to TiddlyWiki, a unique non-linear notebook.");
 		expect(wiki.filterTiddlers("[[Welcome to TiddlyWiki, a unique non-linear notebook.]search-replace[unique],<var1>]",anchorWidget).join(",")).toBe("Welcome to TiddlyWiki, a different non-linear notebook.");
