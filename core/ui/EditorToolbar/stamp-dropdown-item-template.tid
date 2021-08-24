@@ -1,0 +1,43 @@
+title: $:/core/ui/EditorToolbar/StampDropdown/ItemTemplate
+
+<$linkcatcher actions="""
+
+<$list filter="[<currentTiddler>addsuffix[/prefix]is[missing]removesuffix[/prefix]addsuffix[/suffix]is[missing]]" variable="ignore">
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="replace-selection"
+	text={{{ [<currentTiddler>get[text]] }}}
+/>
+
+</$list>
+
+
+<$list filter="[<currentTiddler>addsuffix[/prefix]is[missing]removesuffix[/prefix]addsuffix[/suffix]!is[missing]] [<currentTiddler>addsuffix[/prefix]!is[missing]removesuffix[/prefix]addsuffix[/suffix]is[missing]] [<currentTiddler>addsuffix[/prefix]!is[missing]removesuffix[/prefix]addsuffix[/suffix]!is[missing]]" variable="ignore">
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix={{{ [<currentTiddler>addsuffix[/prefix]get[text]] }}}
+  suffix={{{ [<currentTiddler>addsuffix[/suffix]get[text]] }}}
+/>
+
+</$list>
+
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+
+""">
+
+<$link>
+
+<$transclude tiddler=<<currentTiddler>> field="caption" mode="inline">
+
+<$view tiddler=<<currentTiddler>> field="title" />
+
+</$transclude>
+
+</$link>
+
+</$linkcatcher>
