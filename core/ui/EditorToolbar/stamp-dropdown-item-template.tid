@@ -2,6 +2,8 @@ title: $:/core/ui/EditorToolbar/StampDropdown/ItemTemplate
 
 <$linkcatcher actions="""
 
+<$list filter="[<modifier>!match[ctrl]]" variable="ignore">
+
 <$list filter="[<currentTiddler>addsuffix[/prefix]is[missing]removesuffix[/prefix]addsuffix[/suffix]is[missing]]" variable="ignore">
 
 <$action-sendmessage
@@ -21,6 +23,14 @@ title: $:/core/ui/EditorToolbar/StampDropdown/ItemTemplate
 	prefix={{{ [<currentTiddler>addsuffix[/prefix]get[text]] }}}
   suffix={{{ [<currentTiddler>addsuffix[/suffix]get[text]] }}}
 />
+
+</$list>
+
+</$list>
+
+<$list filter="[<modifier>match[ctrl]]" variable="ignore">
+
+<$action-sendmessage $message="tm-edit-tiddler"/>
 
 </$list>
 
