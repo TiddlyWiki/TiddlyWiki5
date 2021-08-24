@@ -40,7 +40,7 @@ title: $:/core/ui/EditorToolbar/StampDropdown/ItemTemplate
 
 """>
 
-<$link>
+<$link tooltip={{{ [<currentTiddler>get[description]] }}}>
 
 <$transclude tiddler=<<currentTiddler>> field="caption" mode="inline">
 
