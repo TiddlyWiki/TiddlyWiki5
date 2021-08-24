@@ -27,6 +27,6 @@ You can also use regular expression capture groups in the replacement string:
 
 To replace everything but a match using a regular expression and the ''multiline'' (m) flag:
 `\define myregexp2() ^(?!Unlike).*$`
-<<.operator-example 5 """[[Hello There]get[text]search-replace:gm:regexp<myregexp2>,[]]""">>
+<<.operator-example 5 """[[HelloThere]get[text]search-replace:gm:regexp<myregexp2>,[]]""">>
 
 {{How to remove stop words}}
