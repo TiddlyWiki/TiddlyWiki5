@@ -146,6 +146,7 @@ Popup.prototype.show = function(options) {
 	} else {
 		options.wiki.setTextReference(options.title,popupRect);
 	}
+	console.log(options);
 	if(options.popupOpenActions && options.widget) {
 		options.widget.invokeActionString(options.popupOpenActions);
 	}

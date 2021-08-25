@@ -1,5 +1,11 @@
 title: $:/core/ui/EditTemplate/body/toolbar/button
 
+\define popup-open-actions()
+<$action-setfield $tiddler="$:/state/current-popup" text=<<storyTiddler>> popup-tiddler=<<currentTiddler>>/>
+\end
+\define popup-close-actions()
+<$action-deletetiddler $tiddler="$:/state/current-popup"/>
+\end
 \define toolbar-button-icon()
 <$list
 
@@ -69,8 +75,8 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
   tooltip=<<tooltip-text>>
   actions={{!!actions}}
   disabled=<<disabled>>
-  popupOpenActions={{!!popup-open-actions}}
-  popupCloseActions={{!!popup-close-actions}}
+  popup-open-actions=<<popup-open-actions>>
+  popup-close-actions=<<popup-close-actions>>
 
 ><span
 
