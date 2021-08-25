@@ -8,11 +8,24 @@ title: $:/core/ui/EditorToolbar/picture-dropdown
 
 <$macrocall $name="image-picker" actions="""
 
+<$list filter="[<modifier>!match[ctrl]]" variable="ignore">
+
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="replace-selection"
 	text=<<replacement-text>>
 />
+
+</$list>
+
+<$list filter="[<modifier>match[ctrl]]" variable="ignore">
+
+<$action-sendmessage
+	$message="tm-edit-tiddler"
+	$param=<<imageTitle>>
+/>
+
+</$list>
 
 <$action-deletetiddler
 	$tiddler=<<dropdown-state>>
