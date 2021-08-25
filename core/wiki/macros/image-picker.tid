@@ -5,8 +5,7 @@ title: $:/core/macros/image-picker
 type: text/vnd.tiddlywiki
 
 \define image-picker-thumbnail(actions)
-<$button tag="a" tooltip="""$(imageTitle)$""">
-$actions$
+<$button tag="a" tooltip="""$(imageTitle)$""" actions="""$actions$""">
 <$transclude tiddler=<<imageTitle>>/>
 </$button>
 \end
