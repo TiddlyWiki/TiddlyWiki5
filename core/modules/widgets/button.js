@@ -171,13 +171,19 @@ ButtonWidget.prototype.triggerPopup = function(event) {
 			domNode: this.domNodes[0],
 			title: this.popupTitle,
 			wiki: this.wiki,
+			widget: this,
+			popupOpenActions: this.popupOpenActions,
+			popupCloseActions: this.popupCloseActions,
 			noStateReference: true
 		});
 	} else {
 		$tw.popup.triggerPopup({
 			domNode: this.domNodes[0],
 			title: this.popup,
-			wiki: this.wiki
+			wiki: this.wiki,
+			widget: this,
+			popupOpenActions: this.popupOpenActions,
+			popupCloseActions: this.popupCloseActions
 		});
 	}
 };
@@ -220,6 +226,8 @@ ButtonWidget.prototype.execute = function() {
 	this.popupTitle = this.getAttribute("popupTitle");
 	this.tabIndex = this.getAttribute("tabindex");
 	this.isDisabled = this.getAttribute("disabled","no");
+	this.popupOpenActions = this.getAttribute("popup-open-actions");
+	this.popupCloseActions = this.getAttribute("popup-close-actions");
 	// Make child widgets
 	this.makeChildWidgets();
 };

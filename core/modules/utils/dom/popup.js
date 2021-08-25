@@ -121,7 +121,10 @@ Popup.prototype.show = function(options) {
 			title: options.title,
 			wiki: options.wiki,
 			domNode: options.domNode,
-			noStateReference: options.noStateReference
+			widget: options.widget,
+			noStateReference: options.noStateReference,
+			popupOpenActions: options.popupOpenActions,
+			popupCloseActions: options.popupCloseActions
 		});
 	}
 	// Set the state tiddler
@@ -143,6 +146,9 @@ Popup.prototype.show = function(options) {
 	} else {
 		options.wiki.setTextReference(options.title,popupRect);
 	}
+	if(options.popupOpenActions) {
+		options.widget.invokeActionString(options.popupOpenActions);
+	}
 	// Add the click handler if we have any popups
 	if(this.popups.length > 0) {
 		this.rootElement.addEventListener("click",this,true);
@@ -163,7 +169,10 @@ Popup.prototype.cancel = function(level) {
 				popup.wiki.deleteTiddler(popup.title);
 			} else {
 				popup.wiki.deleteTiddler($tw.utils.parseTextReference(popup.title).title);
-        		}
+        	}
+        	if(popup.popupCloseActions) {
+        		popup.widget.invokeActionString(popup.popupCloseActions);
+        	}
 		}
 	}
 	if(this.popups.length === 0) {
