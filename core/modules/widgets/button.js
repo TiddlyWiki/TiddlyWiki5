@@ -166,8 +166,6 @@ ButtonWidget.prototype.dispatchMessage = function(event) {
 };
 
 ButtonWidget.prototype.triggerPopup = function(event) {
-	console.log("TRIGGERING POPUP");
-	console.log(this.popupOpenActions);
 	if(this.popupTitle) {
 		$tw.popup.triggerPopup({
 			domNode: this.domNodes[0],
