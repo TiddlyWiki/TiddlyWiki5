@@ -3,7 +3,7 @@ title: $:/core/ui/Components/plugin-info
 \define lingo-base() $:/language/ControlPanel/Plugins/
 
 \define popup-state-macro()
-$(qualified-state)$-$(currentTiddler)$
+$:/state$(qualified-state)$-$(currentTiddler)$
 \end
 
 \define tabs-state-macro()
