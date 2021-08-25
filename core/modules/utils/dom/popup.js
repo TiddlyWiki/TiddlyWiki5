@@ -146,7 +146,7 @@ Popup.prototype.show = function(options) {
 	} else {
 		options.wiki.setTextReference(options.title,popupRect);
 	}
-	if(options.popupOpenActions) {
+	if(options.popupOpenActions && options.widget) {
 		options.widget.invokeActionString(options.popupOpenActions);
 	}
 	// Add the click handler if we have any popups
@@ -170,7 +170,7 @@ Popup.prototype.cancel = function(level) {
 			} else {
 				popup.wiki.deleteTiddler($tw.utils.parseTextReference(popup.title).title);
         	}
-        	if(popup.popupCloseActions) {
+        	if(popup.popupCloseActions && popup.widget) {
         		popup.widget.invokeActionString(popup.popupCloseActions);
         	}
 		}

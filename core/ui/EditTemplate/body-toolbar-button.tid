@@ -69,6 +69,8 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
   tooltip=<<tooltip-text>>
   actions={{!!actions}}
   disabled=<<disabled>>
+  popupOpenActions={{!!popup-open-actions}}
+  popupCloseActions={{!!popup-close-actions}}
 
 ><span
 
