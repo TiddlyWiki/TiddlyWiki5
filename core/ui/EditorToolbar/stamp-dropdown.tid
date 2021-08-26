@@ -20,7 +20,7 @@ title: $:/core/ui/EditorToolbar/stamp-dropdown
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
 	prefix={{{ [[$(snippetTitle)$]addsuffix[/prefix]get[text]] }}}
-suffix={{{ [[$(snippetTitle)$]addsuffix[/suffix]get[text]] }}}
+	suffix={{{ [[$(snippetTitle)$]addsuffix[/suffix]get[text]] }}}
 />
 
 </$list>

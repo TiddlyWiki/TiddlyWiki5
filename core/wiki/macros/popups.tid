@@ -1,0 +1,45 @@
+title: $:/core/macros/popups
+tags: $:/tags/Macro
+
+\define popup-actions-remove-tag()
+<$action-listops $tiddler="$:/config/keyboardshortcuts/backup" $subfilter="[[$(shortcutTiddler)$]]"/>
+<$fieldmangler tiddler="$(shortcutTiddler)$">
+	<$action-sendmessage $message="tm-remove-tag" $param="$:/tags/KeyboardShortcut"/>
+</$fieldmangler>
+\end
+\define global-popup-open-actions()
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/KeyboardShortcut]]" variable="shortcutTiddler">
+	<$set name="key" value={{{ [<currentTiddler>get[key]] }}}>
+		<$wikify name="keyResolved" text="""<$macrocall $name="displayshortcuts" shortcuts=<<key>>/>""">
+			<$list filter="[<keyResolved>match[Down]]">
+				<<popup-actions-remove-tag>>
+			</$list>
+			<$list filter="[<keyResolved>match[Up]]">
+				<<popup-actions-remove-tag>>
+			</$list>
+			<$list filter="[<keyResolved>match[Enter]]">
+				<<popup-actions-remove-tag>>
+			</$list>
+		</$wikify>
+	</$set>
+</$list>
+<$list filter="$:/core/ui/KeyboardShortcuts/Popups/Down $:/core/ui/KeyboardShortcuts/Popups/Up $:/core/ui/KeyboardShortcuts/Popups/Enter" variable="shortcutTiddler">
+	<$fieldmangler tiddler=<<shortcutTiddler>>>
+		<$action-sendmessage $message="tm-add-tag" $param="$:/tags/KeyboardShortcut"/>
+	</$fieldmangler>
+</$list>
+\end
+\define global-popup-close-actions()
+<$list filter="$:/core/ui/KeyboardShortcuts/Popups/Down $:/core/ui/KeyboardShortcuts/Popups/Up $:/core/ui/KeyboardShortcuts/Popups/Enter" variable="shortcutTiddler">
+	<$fieldmangler tiddler=<<shortcutTiddler>>>
+		<$action-sendmessage $message="tm-remove-tag" $param="$:/tags/KeyboardShortcut"/>
+	</$fieldmangler>
+</$list>
+<$list filter="[list[$:/config/keyboardshortcuts/backup]]" variable="shortcutTiddler">
+	<$fieldmangler tiddler=<<shortcutTiddler>>>
+		<$action-sendmessage $message="tm-add-tag" $param="$:/tags/KeyboardShortcut"/>
+	</$fieldmangler>
+</$list>
+<$action-deletetiddler $tiddler="$:/config/keyboardshortcuts/backup"/>
+<$action-deletetiddler $tiddler="$:/state/current-popup"/>
+\end

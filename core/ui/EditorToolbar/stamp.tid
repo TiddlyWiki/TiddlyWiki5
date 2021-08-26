@@ -7,3 +7,4 @@ condition: [<targetTiddler>type[]] [<targetTiddler>get[type]prefix[text/]] [<tar
 shortcuts: ((stamp))
 dropdown: $:/core/ui/EditorToolbar/stamp-dropdown
 text:
+dropdown-list-filter: [all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]]

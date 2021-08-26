@@ -2,9 +2,10 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
 
 \define popup-open-actions()
 <$action-setfield $tiddler="$:/state/current-popup" text=<<storyTiddler>> popup-state-tiddler="$(dropdown-state)$" popup-actions-tiddler=<<currentTiddler>>/>
+<<global-popup-open-actions>>
 \end
 \define popup-close-actions()
-<$action-deletetiddler $tiddler="$:/state/current-popup"/>
+<<global-popup-close-actions>>
 \end
 \define toolbar-button-icon()
 <$list
