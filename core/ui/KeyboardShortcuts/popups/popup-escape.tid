@@ -1,0 +1,6 @@
+title: $:/core/ui/KeyboardShortcuts/Popups/Escape
+key: Escape
+
+\import $:/core/macros/popups
+<$action-deletetiddler $tiddler={{{ [[$:/state/current-popup]get[popup-state-tiddler]] }}}/>
+<<global-popup-close-actions>>
