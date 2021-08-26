@@ -80,10 +80,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			{type: "tm-edit-text-operation", handler: "handleEditTextOperationMessage"}
 		]);
 		$tw.hooks.addHook("th-external-text-operation",function(event) {
-			console.log("GOT HOOK");
 			event = event || {};
-			console.log(event.paramObject["current-widget-id"]);
-			console.log(self.editWidgetId);
 			if(event.paramObject.tiddler && (event.paramObject["current-widget-id"] === self.editWidgetId) && (self.getVariable("currentTiddler") === event.paramObject.tiddler)) {
 				self.handleEditTextOperationMessage(event);
 			}
@@ -159,7 +156,6 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	Handle an edit text operation message from the toolbar
 	*/
 	EditTextWidget.prototype.handleEditTextOperationMessage = function(event) {
-		console.log(event);
 		// Prepare information about the operation
 		var operation = this.engine.createTextOperation();
 		if(operation) {
