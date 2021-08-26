@@ -3,8 +3,11 @@ title: $:/core/ui/EditorToolbar/picture-dropdown
 \define replacement-text()
 [img[$(imageTitle)$]]
 \end
+\define notIsSystem() !is[system]
 
 ''{{$:/language/Buttons/Picture/Hint}}''
+
+<$set name="subfilter" value={{{ [<qualify "$:/state/image-picker/system">get[text]!match[show]then<notIsSystem>] [<qualify "$:/state/image-picker/system">is[missing]then<notIsSystem>] }}}>
 
 <$macrocall $name="image-picker" actions="""
 
@@ -18,4 +21,6 @@ title: $:/core/ui/EditorToolbar/picture-dropdown
 	$tiddler=<<dropdown-state>>
 />
 
-"""/>
+""" class="""{{{ [[$:/state/current-popup]get[selected-entry]match[$(imageTitle)$]then[tc-selected]] }}}""" subfilter=<<subfilter>>/>
+
+</$set>

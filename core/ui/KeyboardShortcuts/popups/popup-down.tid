@@ -1,16 +1,28 @@
 title: $:/core/ui/KeyboardShortcuts/Popups/Down
 key: Down
 
-<$set name="popupActionsTiddler" value={{{ [[$:/state/current-popup]get[popup-actions-tiddler]] }}}>
-	<$set name="dropdownListFilter" filter={{{ [<popupActionsTiddler>get[dropdown-list-filter]] }}}>
-		<$vars firstDropdownEntry={{{ [enlist<dropdownListFilter>first[]] }}} lastDropdownEntry={{{ [enlist<dropdownListFilter>last[]] }}}>
-			<$set name="selectedDropdownEntry" value={{{ [[$:/state/current-popup]get[selected-entry]] }}}>
-				<$list filter="[<selectedDropdownEntry>match[]] [<selectedDropdownEntry>match<lastDropdownEntry>]" emptyMessage="""
-					<$action-setfield $tiddler="$:/state/current-popup" selected-entry={{{ [enlist<dropdownListFilter>after<selectedDropdownEntry>] }}}/>
-				""">
-					<$action-setfield $tiddler="$:/state/current-popup" selected-entry=<<firstDropdownEntry>>/>
-				</$list>
-			</$set>
-		</$vars>
+\define get-is-system-filter()
+\whitespace trim
+<$list filter="[{$:/state/image-picker/system}!match[show]]">
+[!is[system]]
+</$list>
+<$list filter="[{$:/state/image-picker/system}match[show]]">
+[is[tiddler+system]]
+</$list>
+\end
+<$wikify name="isSystemFilter" text=<<get-is-system-filter>>>
+	<$set name="popupActionsTiddler" value={{{ [[$:/state/current-popup]get[popup-actions-tiddler]] }}}>
+		<$set name="dropdownListFilter" filter={{{ [<popupActionsTiddler>get[dropdown-list-filter]] }}}>
+			<$action-log dropdownListFilter=<<dropdownListFilter>>/>
+			<$vars firstDropdownEntry={{{ [enlist<dropdownListFilter>first[]] }}} lastDropdownEntry={{{ [enlist<dropdownListFilter>last[]] }}}>
+				<$set name="selectedDropdownEntry" value={{{ [[$:/state/current-popup]get[selected-entry]] }}}>
+					<$list filter="[<selectedDropdownEntry>match[]] [<selectedDropdownEntry>match<lastDropdownEntry>]" emptyMessage="""
+						<$action-setfield $tiddler="$:/state/current-popup" selected-entry={{{ [enlist<dropdownListFilter>after<selectedDropdownEntry>] }}}/>
+					""">
+						<$action-setfield $tiddler="$:/state/current-popup" selected-entry=<<firstDropdownEntry>>/>
+					</$list>
+				</$set>
+			</$vars>
+		</$set>
 	</$set>
-</$set>
+</$wikify>

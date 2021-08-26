@@ -38,7 +38,7 @@ title: $:/core/ui/EditorToolbar/stamp-dropdown
 </$button>
 \end
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]]" variable="snippetTitle">
+<$list filter={{{ [<currentTiddler>get[dropdown-list-filter]] }}} variable="snippetTitle">
 
 <<toolbar-button-stamp-inner>>
 

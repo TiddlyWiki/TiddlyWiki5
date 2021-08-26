@@ -2,6 +2,7 @@ title: $:/Manager/ItemSidebar/Icon
 tags: $:/tags/Manager/ItemSidebar
 caption: {{$:/language/Manager/Item/Icon}}
 
+\define notIsSystem() !is[system]
 <p>
 <div class="tc-manager-icon-editor">
 <$button popup=<<qualify "$:/state/popup/image-picker">> class="tc-btn-invisible">
@@ -15,7 +16,7 @@ caption: {{$:/language/Manager/Item/Icon}}
 <$macrocall $name="image-picker-include-tagged-images" actions="""
 <$action-setfield $field="icon" $value=<<imageTitle>>/>
 <$action-deletetiddler $tiddler=<<qualify "$:/state/popup/image-picker">>/>
-"""/>
+""" subfilter={{{ [{$:/state/image-picker/system}!match[show]then<notIsSystem>] }}}/>
 </div>
 </$reveal>
 </div>
