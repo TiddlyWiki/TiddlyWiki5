@@ -1,6 +1,6 @@
 title: $:/core/ui/EditTemplate/body/editor
 
-<$set name="widgetId" value=<<qualify>>>
+<$set name="widgetId" value=<<current-widget-id>>>
 
 <$edit
 
