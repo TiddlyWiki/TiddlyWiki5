@@ -1,4 +1,5 @@
 title: $:/core/ui/KeyboardShortcuts/Popups/Up
+key: Up
 
 <$set name="popupActionsTiddler" value={{{ [[$:/state/current-popup]get[popup-actions-tiddler]] }}}>
 	<$set name="dropdownListFilter" filter={{{ [<popupActionsTiddler>get[dropdown-list-filter]] }}}>

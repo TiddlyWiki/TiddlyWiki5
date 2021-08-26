@@ -13,6 +13,7 @@ Text editor operation to excise the selection to a new tiddler
 "use strict";
 
 exports["excise"] = function(event,operation) {
+	operation = operation || {};
 	var editTiddler = this.wiki.getTiddler(this.editTitle),
 		editTiddlerTitle = this.editTitle;
 	if(editTiddler && editTiddler.fields["draft.of"]) {

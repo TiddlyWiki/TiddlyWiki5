@@ -13,6 +13,7 @@ Text editor operation to make a link
 "use strict";
 
 exports["make-link"] = function(event,operation) {
+	operation = operation || {};
 	if(operation.selection) {
 		operation.replacement = "[[" + operation.selection + "|" + event.paramObject.text + "]]";
 		operation.cutStart = operation.selStart;

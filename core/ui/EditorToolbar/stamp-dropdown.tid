@@ -1,7 +1,7 @@
 title: $:/core/ui/EditorToolbar/stamp-dropdown
 
 \define toolbar-button-stamp-inner()
-<$button tag="a">
+<$button tag="a" class={{{ [[$:/state/current-popup]contains:current-tiddler<storyTiddler>get[selected-entry]match[$(snippetTitle)$]then[tc-selected]] }}}>
 
 <$list filter="[[$(snippetTitle)$]addsuffix[/prefix]is[missing]removesuffix[/prefix]addsuffix[/suffix]is[missing]]">
 

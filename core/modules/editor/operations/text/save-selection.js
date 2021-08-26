@@ -13,6 +13,7 @@ Text editor operation to save the current selection in a specified tiddler
 "use strict";
 
 exports["save-selection"] = function(event,operation) {
+	operation = operation || {};
 	var tiddler = event.paramObject.tiddler,
 		field = event.paramObject.field || "text";
 	if(tiddler && field) {

@@ -1,6 +1,7 @@
 title: $:/core/ui/EditTemplate/body/toolbar/button
 
 \define popup-open-actions()
+<$action-listops $tiddler="$:/state/current-popup" $field="current-tiddler" $subfilter="[[$(storyTiddler)$]]"/>
 <$action-setfield $tiddler="$:/state/current-popup" text=<<storyTiddler>> popup-state-tiddler="$(dropdown-state)$" popup-actions-tiddler=<<currentTiddler>>/>
 <<global-popup-open-actions>>
 \end

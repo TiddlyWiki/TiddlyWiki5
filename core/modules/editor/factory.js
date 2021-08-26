@@ -40,6 +40,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	Render this widget into the DOM
 	*/
 	EditTextWidget.prototype.render = function(parent,nextSibling) {
+		var self = this;
 		// Save the parent dom node
 		this.parentDomNode = parent;
 		// Compute our attributes
@@ -78,6 +79,14 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.addEventListeners([
 			{type: "tm-edit-text-operation", handler: "handleEditTextOperationMessage"}
 		]);
+		$tw.hooks.addHook("th-external-text-operation",function(event) {
+			console.log("GOT HOOK");
+			event = event || {};
+			if(event.paramObject.tiddler && (self.getVariable("currentTiddler") === event.paramObject.tiddler)) {
+				self.handleEditTextOperationMessage(event);
+			}
+			return event;
+		});
 	};
 
 	/*
@@ -148,6 +157,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	Handle an edit text operation message from the toolbar
 	*/
 	EditTextWidget.prototype.handleEditTextOperationMessage = function(event) {
+		console.log(event);
 		// Prepare information about the operation
 		var operation = this.engine.createTextOperation();
 		// Invoke the handler for the selected operation
@@ -275,8 +285,8 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 					});
 				if($tw.keyboardManager.checkKeyDescriptors(event,keyInfoArray)) {
 					var clickEvent = this.document.createEvent("Events");
-				    clickEvent.initEvent("click",true,false);
-				    el.dispatchEvent(clickEvent);
+					clickEvent.initEvent("click",true,false);
+					el.dispatchEvent(clickEvent);
 					event.preventDefault();
 					event.stopPropagation();
 					return true;
