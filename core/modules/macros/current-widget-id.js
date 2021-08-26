@@ -3,7 +3,7 @@ title: $:/core/modules/macros/current-widget-id.js
 type: application/javascript
 module-type: macro
 
-Macro to qualify a state tiddler title according
+Macro to qualify a state tiddler title according to the current widget-tree
 
 \*/
 (function(){
