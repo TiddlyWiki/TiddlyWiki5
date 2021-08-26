@@ -20,7 +20,7 @@ tags: $:/tags/Macro
 				<<popup-actions-remove-key>>
 			</$list>
 			<$list filter="[<__additional-actions__>match[true]]">
-				<$list filter="[<keyResolved>match[Ctrl-Enter]]">
+				<$list filter="[<keyResolved>match[ctrl-Enter]]">
 					<<popup-actions-remove-key>>
 				</$list>
 			</$list>
@@ -45,6 +45,13 @@ tags: $:/tags/Macro
 	<$fieldmangler tiddler=<<shortcutTiddler>>>
 		<$action-sendmessage $message="tm-add-tag" $param="$:/tags/KeyboardShortcut"/>
 	</$fieldmangler>
+</$list>
+<$list filter="[<__additional-actions__>match[true]]">
+	<$set name="shortcutTiddler" value="$:/core/ui/KeyboardShortcuts/Popups/Ctrl-Enter">
+		<$fieldmangler tiddler=<<shortcutTiddler>>>
+			<$action-sendmessage $message="tm-add-tag" $param="$:/tags/KeyboardShortcut"/>
+		</$fieldmangler>
+	</$set>
 </$list>
 \end
 \define global-popup-close-actions()

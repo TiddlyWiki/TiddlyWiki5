@@ -14,7 +14,6 @@ key: Down
 <$wikify name="isSystemFilter" text=<<get-is-system-filter>>>
 	<$set name="popupActionsTiddler" value={{{ [[$:/state/current-popup]get[popup-actions-tiddler]] }}}>
 		<$set name="dropdownListFilter" filter={{{ [<popupActionsTiddler>get[dropdown-list-filter]] }}}>
-			<$action-log dropdownListFilter=<<dropdownListFilter>>/>
 			<$vars firstDropdownEntry={{{ [enlist<dropdownListFilter>first[]] }}} lastDropdownEntry={{{ [enlist<dropdownListFilter>last[]] }}}>
 				<$set name="selectedDropdownEntry" value={{{ [[$:/state/current-popup]get[selected-entry]] }}}>
 					<$list filter="[<selectedDropdownEntry>match[]] [<selectedDropdownEntry>match<lastDropdownEntry>]" emptyMessage="""
