@@ -1,0 +1,15 @@
+title: $:/core/ui/KeyboardShortcuts/Popups/Down
+
+<$set name="popupActionsTiddler" value={{{ [[$:/state/current-popup]get[popup-actions-tiddler]] }}}>
+	<$set name="dropdownListFilter" filter={{{ [<popupActionsTiddler>get[dropdown-list-filter]] }}}>
+		<$vars firstDropdownEntry={{{ [enlist<dropdownListFilter>first[]] }}} lastDropdownEntry={{{ [enlist<dropdownListFilter>last[]] }}}>
+			<$set name="selectedDropdownEntry" value={{{ [[$:/state/current-popup]get[selected-entry]] }}}>
+				<$list filter="[<selectedDropdownEntry>match[]] [<selectedDropdownEntry>match<lastDropdownEntry>]" emptyMessage="""
+					<$action-setfield $tiddler="$:/state/current-popup" selected-entry={{{ [enlist<dropdownListFilter>after<selectedDropdownEntry>] }}}/>
+				""">
+					<$action-setfield $tiddler="$:/state/current-popup" selected-entry=<<firstDropdownEntry>>/>
+				</$list>
+			</$set>
+		</$vars>
+	</$set>
+</$set>
