@@ -13,7 +13,6 @@ Text editor operation insert text at the caret position. If there is a selection
 "use strict";
 
 exports["insert-text"] = function(event,operation) {
-	operation = operation || {};
 	operation.replacement = event.paramObject.text;
 	operation.cutStart = operation.selStart;
 	operation.cutEnd = operation.selEnd;

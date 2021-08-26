@@ -13,7 +13,6 @@ Text editor operation to wrap the selection with the specified prefix and suffix
 "use strict";
 
 exports["wrap-selection"] = function(event,operation) {
-	operation = operation || {};
 	if(operation.selStart === operation.selEnd) {
 		// No selection; check if we're within the prefix/suffix
 		if(operation.text.substring(operation.selStart - event.paramObject.prefix.length,operation.selStart + event.paramObject.suffix.length) === event.paramObject.prefix + event.paramObject.suffix) {

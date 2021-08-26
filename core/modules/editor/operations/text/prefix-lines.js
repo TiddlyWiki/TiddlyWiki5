@@ -13,7 +13,6 @@ Text editor operation to add a prefix to the selected lines
 "use strict";
 
 exports["prefix-lines"] = function(event,operation) {
-	operation = operation || {};
 	var targetCount = parseInt(event.paramObject.count + "",10);
 	// Cut just past the preceding line break, or the start of the text
 	operation.cutStart = $tw.utils.findPrecedingLineBreak(operation.text,operation.selStart);

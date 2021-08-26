@@ -13,7 +13,6 @@ Text editor operation to wrap the selected lines with a prefix and suffix
 "use strict";
 
 exports["wrap-lines"] = function(event,operation) {
-	operation = operation || {};
 	// Cut just past the preceding line break, or the start of the text
 	operation.cutStart = $tw.utils.findPrecedingLineBreak(operation.text,operation.selStart);
 	// Cut to just past the following line break, or to the end of the text

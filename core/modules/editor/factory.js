@@ -82,7 +82,9 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		$tw.hooks.addHook("th-external-text-operation",function(event) {
 			console.log("GOT HOOK");
 			event = event || {};
-			if(event.paramObject.tiddler && (self.getVariable("currentTiddler") === event.paramObject.tiddler)) {
+			console.log(event.paramObject["current-widget-id"]);
+			console.log(self.editWidgetId);
+			if(event.paramObject.tiddler && (event.paramObject["current-widget-id"] === self.editWidgetId) && (self.getVariable("currentTiddler") === event.paramObject.tiddler)) {
 				self.handleEditTextOperationMessage(event);
 			}
 			return event;
@@ -160,16 +162,18 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		console.log(event);
 		// Prepare information about the operation
 		var operation = this.engine.createTextOperation();
-		// Invoke the handler for the selected operation
-		var handler = this.editorOperations[event.param];
-		if(handler) {
-			handler.call(this,event,operation);
+		if(operation) {
+			// Invoke the handler for the selected operation
+			var handler = this.editorOperations[event.param];
+			if(handler) {
+				handler.call(this,event,operation);
+			}
+			// Execute the operation via the engine
+			var newText = this.engine.executeTextOperation(operation);
+			// Fix the tiddler height and save changes
+			this.engine.fixHeight();
+			this.saveChanges(newText);
 		}
-		// Execute the operation via the engine
-		var newText = this.engine.executeTextOperation(operation);
-		// Fix the tiddler height and save changes
-		this.engine.fixHeight();
-		this.saveChanges(newText);
 	};
 
 	/*
@@ -196,6 +200,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editRefreshTitle = this.getAttribute("refreshTitle");
 		this.editAutoComplete = this.getAttribute("autocomplete");
 		this.isDisabled = this.getAttribute("disabled","no");
+		this.editWidgetId = this.getAttribute("current-widget-id");
 		this.isFileDropEnabled = this.getAttribute("fileDrop","no") === "yes";
 		// Get the default editor element tag and type
 		var tag,type;
@@ -228,7 +233,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedAttributes.disabled || changedAttributes.fileDrop) {
+		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedAttributes.disabled || changedAttributes.fileDrop || changedAttributes["current-widget-id"]) {
 			this.refreshSelf();
 			return true;
 		} else if (changedTiddlers[this.editRefreshTitle]) {

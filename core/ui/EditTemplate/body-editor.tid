@@ -1,5 +1,7 @@
 title: $:/core/ui/EditTemplate/body/editor
 
+<$set name="widgetId" value=<<qualify>>>
+
 <$edit
 
   field="text"
@@ -9,6 +11,7 @@ title: $:/core/ui/EditTemplate/body/editor
   focus={{{ [{$:/config/AutoFocus}match[text]then[true]] ~[[false]] }}}
   cancelPopups="yes"
   fileDrop={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}}
+  current-widget-id=<<widgetId>>
 
 ><$set
 
@@ -39,4 +42,4 @@ title: $:/core/ui/EditTemplate/body/editor
 	filter={{!!condition}}
 	variable="list-condition"
 ><$transclude/>
-</$list></$list></$set></$edit>
+</$list></$list></$set></$edit></$set>
