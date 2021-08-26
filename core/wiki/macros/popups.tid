@@ -12,21 +12,17 @@ tags: $:/tags/Macro
 	<$action-sendmessage $message="tm-remove-tag" $param="$:/tags/KeyboardShortcut"/>
 </$fieldmangler>
 \end
-\define global-popup-open-actions()
+\define global-popup-open-actions(additional-actions:"false")
 <$list filter="[all[tiddlers+shadows]prefix[$:/config/shortcuts]]" variable="shortcutTiddler">
 	<$set name="key" value={{{ [<shortcutTiddler>get[text]] }}}>
 		<$wikify name="keyResolved" text="""<$macrocall $name="displayshortcuts" shortcuts=<<key>>/>""">
-			<$list filter="[<keyResolved>match[Down]]">
+			<$list filter="[<keyResolved>match[Down]] [<keyResolved>match[Up]] [<keyResolved>match[Enter]] [<keyResolved>match[Escape]]">
 				<<popup-actions-remove-key>>
 			</$list>
-			<$list filter="[<keyResolved>match[Up]]">
-				<<popup-actions-remove-key>>
-			</$list>
-			<$list filter="[<keyResolved>match[Enter]]">
-				<<popup-actions-remove-key>>
-			</$list>
-			<$list filter="[<keyResolved>match[Escape]]">
-				<<popup-actions-remove-key>>
+			<$list filter="[<__additional-actions__>match[true]]">
+				<$list filter="[<keyResolved>match[Ctrl-Enter]]">
+					<<popup-actions-remove-key>>
+				</$list>
 			</$list>
 		</$wikify>
 	</$set>
@@ -34,17 +30,13 @@ tags: $:/tags/Macro
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/KeyboardShortcut]]" variable="shortcutTiddler">
 	<$set name="key" value={{{ [<currentTiddler>get[key]] }}}>
 		<$wikify name="keyResolved" text="""<$macrocall $name="displayshortcuts" shortcuts=<<key>>/>""">
-			<$list filter="[<keyResolved>match[Down]]">
+			<$list filter="[<keyResolved>match[Down]] [<keyResolved>match[Up]] [<keyResolved>match[Enter]] [<keyResolved>match[Escape]]">
 				<<popup-actions-remove-tag>>
 			</$list>
-			<$list filter="[<keyResolved>match[Up]]">
-				<<popup-actions-remove-tag>>
-			</$list>
-			<$list filter="[<keyResolved>match[Enter]]">
-				<<popup-actions-remove-tag>>
-			</$list>
-			<$list filter="[<keyResolved>match[Escape]]">
-				<<popup-actions-remove-tag>>
+			<$list filter="[<__additional-actions__>match[true]]">
+				<$list filter="[<keyResolved>match[Ctrl-Enter]]">
+					<<popup-actions-remove-tag>>
+				</$list>
 			</$list>
 		</$wikify>
 	</$set>
@@ -56,7 +48,7 @@ tags: $:/tags/Macro
 </$list>
 \end
 \define global-popup-close-actions()
-<$list filter="$:/core/ui/KeyboardShortcuts/Popups/Down $:/core/ui/KeyboardShortcuts/Popups/Up $:/core/ui/KeyboardShortcuts/Popups/Enter $:/core/ui/KeyboardShortcuts/Popups/Escape" variable="shortcutTiddler">
+<$list filter="$:/core/ui/KeyboardShortcuts/Popups/Down $:/core/ui/KeyboardShortcuts/Popups/Up $:/core/ui/KeyboardShortcuts/Popups/Enter $:/core/ui/KeyboardShortcuts/Popups/Escape $:/core/ui/KeyboardShortcuts/Popups/Ctrl-Enter" variable="shortcutTiddler">
 	<$fieldmangler tiddler=<<shortcutTiddler>>>
 		<$action-sendmessage $message="tm-remove-tag" $param="$:/tags/KeyboardShortcut"/>
 	</$fieldmangler>

@@ -8,3 +8,5 @@ shortcuts: ((picture))
 dropdown: $:/core/ui/EditorToolbar/picture-dropdown
 dropdown-list-filter: [all[shadows+tiddlers]is[image]] -[type[application/pdf]] +[!has[draft.of]sort[title]] +[filter<isSystemFilter>]
 popup-actions: <$vars openingBracket="[" closingBracket="]"><$action-sendmessage $message="tm-edit-text-operation" $param="replace-selection" text={{{ [<openingBracket>addsuffix[img]addsuffix<openingBracket>addsuffix{$:/state/current-popup!!selected-entry}addsuffix<closingBracket>addsuffix<closingBracket>] }}} tiddler={{$:/state/current-popup}} current-widget-id={{{ [[$:/state/current-popup]get[current-widget-id]] }}}/><$action-deletetiddler $tiddler={{{ [[$:/state/current-popup]get[popup-state-tiddler]] }}}/></$vars>
+additional-actions: true
+popup-ctrl-enter-actions: <$list filter="[<current-tiddler-image-picker-system-state>is[missing]] [<current-tiddler-image-picker-system-state>get[text]match[hide]]" emptyMessage="""<$action-setfield $tiddler=<<current-tiddler-image-picker-system-state>> text="hide"/>"""><$action-setfield $tiddler=<<current-tiddler-image-picker-system-state>> text="show"/></$list>

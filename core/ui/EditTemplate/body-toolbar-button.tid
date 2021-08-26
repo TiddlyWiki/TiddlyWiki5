@@ -4,7 +4,11 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
 <$action-listops $tiddler="$:/state/current-popup" $field="current-tiddler" $subfilter="[[$(storyTiddler)$]]"/>
 <$action-setfield $tiddler="$:/state/current-popup" text=<<storyTiddler>> popup-state-tiddler="$(dropdown-state)$" popup-actions-tiddler=<<currentTiddler>> current-widget-id=<<widgetId>>/>
 <$list filter="[<currentTiddler>!contains:search-field[true]]" variable="ignore">
+<$list filter="[<currentTiddler>!contains:additional-actions[true]]" variable="ignore" emptyMessage="""
+<<global-popup-open-actions "true">>
+""">
 <<global-popup-open-actions>>
+</$list>
 </$list>
 \end
 \define popup-close-actions()

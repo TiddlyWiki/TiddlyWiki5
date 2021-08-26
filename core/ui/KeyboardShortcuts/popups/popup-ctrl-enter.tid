@@ -1,0 +1,8 @@
+title: $:/core/ui/KeyboardShortcuts/Popups/Ctrl-Enter
+key: Ctrl-Enter
+
+<$set name="currentActionTiddler" value={{{ [[$:/state/current-popup]get[popup-actions-tiddler]] }}}>
+	<$set name="popupCtrlEnterActions" value={{{ [<currentActionTiddler>get[popup-ctrl-enter-actions]] }}}>
+		<<popupCtrlEnterActions>>
+	</$set>
+</$set>
