@@ -1,0 +1,5 @@
+title: $:/core/wiki/startupactions
+tags: $:/tags/StartupAction
+
+\import $:/core/macros/popups
+<<global-popup-close-actions>>
