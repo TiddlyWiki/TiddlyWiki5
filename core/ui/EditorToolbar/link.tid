@@ -7,4 +7,4 @@ condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]
 button-classes: tc-text-editor-toolbar-item-start-group
 shortcuts: ((link))
 dropdown: $:/core/ui/EditorToolbar/link-dropdown
-
+search-field: true

@@ -3,7 +3,9 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
 \define popup-open-actions()
 <$action-listops $tiddler="$:/state/current-popup" $field="current-tiddler" $subfilter="[[$(storyTiddler)$]]"/>
 <$action-setfield $tiddler="$:/state/current-popup" text=<<storyTiddler>> popup-state-tiddler="$(dropdown-state)$" popup-actions-tiddler=<<currentTiddler>> current-widget-id=<<widgetId>>/>
+<$list filter="[<currentTiddler>!contains:search-field[true]]" variable="ignore">
 <<global-popup-open-actions>>
+</$list>
 \end
 \define popup-close-actions()
 <<global-popup-close-actions>>
