@@ -169,10 +169,10 @@ Popup.prototype.cancel = function(level) {
 				popup.wiki.deleteTiddler(popup.title);
 			} else {
 				popup.wiki.deleteTiddler($tw.utils.parseTextReference(popup.title).title);
-        	}
-        	if(popup.popupCloseActions && popup.widget) {
-        		popup.widget.invokeActionString(popup.popupCloseActions);
-        	}
+			}
+			if(popup.popupCloseActions && popup.widget) {
+				popup.widget.invokeActionString(popup.popupCloseActions);
+			}
 		}
 	}
 	if(this.popups.length === 0) {
