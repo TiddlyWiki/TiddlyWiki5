@@ -7,7 +7,9 @@ title: $:/core/ui/EditorToolbar/picture-dropdown
 
 ''{{$:/language/Buttons/Picture/Hint}}''
 
-<$set name="subfilter" value={{{ [<qualify "$:/state/image-picker/system">get[text]!match[show]then<notIsSystem>] [<qualify "$:/state/image-picker/system">is[missing]then<notIsSystem>] }}}>
+<$set name="state" value=<<qualify "$:/state/image-picker/system">>>
+
+<$set name="subfilter" value={{{ [<state>get[text]!match[show]then<notIsSystem>] [<state>is[missing]then<notIsSystem>] }}}>
 
 <$macrocall $name="image-picker" actions="""
 
@@ -21,6 +23,8 @@ title: $:/core/ui/EditorToolbar/picture-dropdown
 	$tiddler=<<dropdown-state>>
 />
 
-""" class="""{{{ [[$:/state/current-popup]get[selected-entry]match[$(imageTitle)$]then[tc-selected]] }}}""" subfilter=<<subfilter>>/>
+""" class="""{{{ [[$:/state/current-popup]get[selected-entry]match[$(imageTitle)$]then[tc-selected]] }}}""" subfilter=<<subfilter>> state=<<state>>/>
+
+</$set>
 
 </$set>

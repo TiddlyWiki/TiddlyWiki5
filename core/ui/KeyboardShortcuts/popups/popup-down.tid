@@ -3,12 +3,13 @@ key: Down
 
 \define get-is-system-filter()
 \whitespace trim
-<$list filter="[{$:/state/image-picker/system}!match[show]]">
+<$list filter="[all[tiddlers]prefix[$:/state/image-picker/system]get[text]!match[show]]">
 [!is[system]]
 </$list>
-<$list filter="[{$:/state/image-picker/system}match[show]]">
+<$list filter="[all[tiddlers]prefix[$:/state/image-picker/system]get[text]match[show]]">
 [is[tiddler+system]]
 </$list>
+<$list filter="[all[tiddlers]prefix[$:/state/image-picker/system]get[text]]" emptyMessage="""[!is[system]]""" variable="ignore"></$list>
 \end
 <$wikify name="isSystemFilter" text=<<get-is-system-filter>>>
 	<$set name="popupActionsTiddler" value={{{ [[$:/state/current-popup]get[popup-actions-tiddler]] }}}>

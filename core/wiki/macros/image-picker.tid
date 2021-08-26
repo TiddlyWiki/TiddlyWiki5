@@ -19,12 +19,12 @@ $actions$
 </$list>
 \end
 
-\define image-picker(actions,filter:"""[all[shadows+tiddlers]is[image]] -[type[application/pdf]] +[!has[draft.of]$subfilter$sort[title]]""",subfilter:"",class:"")
+\define image-picker(actions,filter:"""[all[shadows+tiddlers]is[image]] -[type[application/pdf]] +[!has[draft.of]$subfilter$sort[title]]""",subfilter:"",class:"",state:"")
 <div class="tc-image-chooser">
-<$checkbox tiddler=<<qualify "$:/state/image-picker/system">> field="text" checked="show" unchecked="hide" default="hide">
+<$checkbox tiddler={{{ [[$state$]!match[]else<qualify "$:/state/image-picker/system">] }}} field="text" checked="show" unchecked="hide" default="hide">
 {{$:/language/SystemTiddlers/Include/Prompt}}
 </$checkbox><br>
-<$macrocall $name="image-picker-list" filter="""$filter$""" actions="""$actions$""" class=<<__class__>> subfilter=<<subFilter>>/>
+<$macrocall $name="image-picker-list" filter="""$filter$""" actions="""$actions$""" class=<<__class__>>/>
 </div>
 \end
 
