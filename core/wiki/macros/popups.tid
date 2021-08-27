@@ -16,13 +16,13 @@ tags: $:/tags/Macro
 <$list filter="[all[tiddlers+shadows]prefix[$:/config/shortcuts]]" variable="shortcutTiddler">
 	<$set name="key" value={{{ [<shortcutTiddler>get[text]] }}}>
 		<$wikify name="keyResolved" text="""<$macrocall $name="displayshortcuts" shortcuts=<<key>>/>""">
-			<$vars downRegexp="[^Down]" upRegexp="[^Up]" enterRegexp="[^Enter]" escapeRegexp="[^Escape]">
+			<$vars downRegexp="\b(?!Down\b)\w+" upRegexp="\b(?!Up\b)\w+" enterRegexp="\b(?!Enter\b)\w+" escapeRegexp="\b(?!Escape\b)\w+">
 				<$list filter="[<keyResolved>search-replace:g:regexp<downRegexp>,[]match[Down]] [<keyResolved>search-replace:g:regexp<upRegexp>,[]match[Up]] [<keyResolved>search-replace:g:regexp<enterRegexp>,[]match[Enter]] [<keyResolved>search-replace:g:regexp<escapeRegexp>,[]match[Escape]]">
 					<<popup-actions-remove-key>>
 				</$list>
 			</$vars>
 			<$list filter="[<__additional-actions__>match[true]]">
-				<$set name="ctrlEnterRegexp" value="[^ctrl-Enter]">
+				<$set name="ctrlEnterRegexp" value="\b(?!ctrl-Enter\b)\w+">
 					<$list filter="[<keyResolved>search-replace:g:regexp<ctrlEnterRegexp>,[]match[ctrl-Enter]]">
 						<<popup-actions-remove-key>>
 					</$list>
@@ -34,14 +34,18 @@ tags: $:/tags/Macro
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/KeyboardShortcut]]" variable="shortcutTiddler">
 	<$set name="key" value={{{ [<currentTiddler>get[key]] }}}>
 		<$wikify name="keyResolved" text="""<$macrocall $name="displayshortcuts" shortcuts=<<key>>/>""">
-			<$list filter="[<keyResolved>match[Down]] [<keyResolved>match[Up]] [<keyResolved>match[Enter]] [<keyResolved>match[Escape]]">
-				<<popup-actions-remove-tag>>
-			</$list>
-			<$list filter="[<__additional-actions__>match[true]]">
-				<$list filter="[<keyResolved>match[Ctrl-Enter]]">
+			<$vars downRegexp="\b(?!Down\b)\w+" upRegexp="\b(?!Up\b)\w+" enterRegexp="\b(?!Enter\b)\w+" escapeRegexp="\b(?!Escape\b)\w+">
+				<$list filter="[<keyResolved>search-replace:g:regexp<downRegexp>,[]match[Down]] [<keyResolved>search-replace:g:regexp<upRegexp>,[]match[Up]] [<keyResolved>search-replace:g:regexp<enterRegexp>,[]match[Enter]] [<keyResolved>search-replace:g:regexp<escapeRegexp>,[]match[Escape]]">
 					<<popup-actions-remove-tag>>
 				</$list>
-			</$list>
+				<$list filter="[<__additional-actions__>match[true]]">
+					<$set name="ctrlEnterRegexp" value="\b(?!ctrl-Enter\b)\w+">
+						<$list filter="[<keyResolved>search-replace:g:regexp<ctrlEnterRegexp>,[]match[ctrl-Enter]]">
+							<<popup-actions-remove-tag>>
+						</$list>
+					</$set>
+				</$list>
+			</$vars>
 		</$wikify>
 	</$set>
 </$list>
