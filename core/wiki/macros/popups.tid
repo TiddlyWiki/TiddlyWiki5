@@ -1,0 +1,19 @@
+title: $:/core/macros/popups
+tags: $:/tags/Macro
+
+\define navigate-popup(filter,afterOrBefore,listItem1,listItem2)
+<$vars firstListItem={{{ [enlist<__filter__>] +[first[]] }}} lastListItem={{{ [enlist<__filter__>] +[last[]] }}}>
+	<$list filter="[<dropdown-state>!has[selected-item]]" emptyMessage="""
+		<$set name="selectedItem" value={{{ [<dropdown-state>get[selected-item]] }}}>
+			<$list filter="[<selectedItem>!match<$listItem1$>]">
+				<$action-setfield $tiddler=<<dropdown-state>> selected-item={{{ [enlist<__filter__>$afterOrBefore$<currentTiddler>] }}}/>
+			</$list>
+			<$list filter="[<selectedItem>match<$listItem1$>]">
+				<$action-setfield $tiddler=<<dropdown-state>> selected-item=<<$listItem2$>>/>
+			</$list>
+		</$set>
+	""">
+		<$action-setfield $tiddler=<<dropdown-state>> selected-item=<<$listItem2$>>/>
+	</$list>
+</$vars>
+\end

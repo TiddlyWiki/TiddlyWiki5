@@ -20,22 +20,6 @@ suffix={{{ [<dropdown-state>get[selected-item]addsuffix[/suffix]get[text]] }}}
 	$tiddler=<<dropdown-state>>
 />
 \end
-\define navigate-popup(afterOrBefore,listItem1,listItem2)
-<$vars firstListItem={{{ [all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]] +[first[]] }}} lastListItem={{{ [all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]] +[last[]] }}}>
-	<$list filter="[<dropdown-state>!has[selected-item]]" emptyMessage="""
-		<$set name="selectedItem" value={{{ [<dropdown-state>get[selected-item]] }}}>
-			<$list filter="[<selectedItem>!match<$listItem1$>]">
-				<$action-setfield $tiddler=<<dropdown-state>> selected-item={{{ [all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]$afterOrBefore$<currentTiddler>] }}}/>
-			</$list>
-			<$list filter="[<selectedItem>match<$listItem1$>]">
-				<$action-setfield $tiddler=<<dropdown-state>> selected-item=<<$listItem2$>>/>
-			</$list>
-		</$set>
-	""">
-		<$action-setfield $tiddler=<<dropdown-state>> selected-item=<<$listItem2$>>/>
-	</$list>
-</$vars>
-\end
 \define toolbar-button-stamp-inner()
 <$button tag="a" class={{{ [<dropdown-state>get[selected-item]match[$(snippetTitle)$]then[tc-selected]] }}}>
 
@@ -74,9 +58,11 @@ suffix={{{ [[$(snippetTitle)$]addsuffix[/suffix]get[text]] }}}
 </$button>
 \end
 
-<$keyboard key="((popup-down))" actions=<<navigate-popup "after" "lastListItem" "firstListItem">> tag="span">
+<$set name="snippetFilter" filter={{{ [<currentTiddler>get[filter]] }}}>
 
-<$keyboard key="((popup-up))" actions=<<navigate-popup "before" "firstListItem" "lastListItem">> tag="span">
+<$keyboard key="((popup-down))" actions="""<$macrocall $name="navigate-popup" afterOrBefore="after" listItem1="lastListItem" listItem2="firstListItem" filter=<<snippetFilter>>/>""" tag="span">
+
+<$keyboard key="((popup-up))" actions="""<$macrocall $name="navigate-popup" afterOrBefore="before" listItem1="firstListItem" listItem2="lastListItem" filter=<<snippetFilter>>/>""" tag="span">
 
 <$keyboard key="((popup-escape))" actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=""/>""" tag="span">
 
@@ -84,7 +70,7 @@ suffix={{{ [[$(snippetTitle)$]addsuffix[/suffix]get[text]] }}}
 
 <$focus tabindex="1" tag="div" class="tc-drop-down-focus-item tc-stamp-button-dropdown">
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]]" variable="snippetTitle">
+<$list filter="[enlist<snippetFilter>]" variable="snippetTitle">
 
 <<toolbar-button-stamp-inner>>
 
@@ -122,3 +108,5 @@ suffix={{{ [[$(snippetTitle)$]addsuffix[/suffix]get[text]] }}}
 </$keyboard>
 
 </$keyboard>
+
+</$set>
