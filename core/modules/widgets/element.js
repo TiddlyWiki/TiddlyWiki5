@@ -29,7 +29,6 @@ Render this widget into the DOM
 ElementWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
-	this.execute();
 	// Neuter blacklisted elements
 	this.tag = this.parseTreeNode.tag;
 	if($tw.config.htmlUnsafeElements.indexOf(this.tag) !== -1) {
@@ -70,14 +69,7 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	this.assignAttributes(domNode,{excludeEventAttributes: true});
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
-	if(this.focusOnRender) {
-		domNode.focus();
-	}
 	this.domNodes.push(domNode);
-};
-
-ElementWidget.prototype.execute = function() {
-	this.focusOnRender = this.getAttribute("focus-on-render","no") === "yes";
 };
 
 /*

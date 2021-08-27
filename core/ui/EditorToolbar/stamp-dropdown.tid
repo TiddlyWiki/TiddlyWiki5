@@ -2,27 +2,20 @@ title: $:/core/ui/EditorToolbar/stamp-dropdown
 
 \define select-focused-item-actions()
 <$list filter="[<dropdown-state>get[selected-item]addsuffix[/prefix]is[missing]removesuffix[/prefix]addsuffix[/suffix]is[missing]]">
-
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="replace-selection"
 	text={{{ [<dropdown-state>get[selected-item]get[text]] }}}
 />
-
 </$list>
-
-
 <$list filter="[<dropdown-state>get[selected-item]addsuffix[/prefix]is[missing]removesuffix[/prefix]addsuffix[/suffix]!is[missing]] [<dropdown-state>get[selected-item]addsuffix[/prefix]!is[missing]removesuffix[/prefix]addsuffix[/suffix]is[missing]] [<dropdown-state>get[selected-item]addsuffix[/prefix]!is[missing]removesuffix[/prefix]addsuffix[/suffix]!is[missing]]">
-
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
 	prefix={{{ [<dropdown-state>get[selected-item]addsuffix[/prefix]get[text]] }}}
 suffix={{{ [<dropdown-state>get[selected-item]addsuffix[/suffix]get[text]] }}}
 />
-
 </$list>
-
 <$action-deletetiddler
 	$tiddler=<<dropdown-state>>
 />
