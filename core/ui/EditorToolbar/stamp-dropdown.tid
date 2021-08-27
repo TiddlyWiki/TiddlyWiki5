@@ -20,35 +20,19 @@ suffix={{{ [<dropdown-state>get[selected-item]addsuffix[/suffix]get[text]] }}}
 	$tiddler=<<dropdown-state>>
 />
 \end
-\define navigate-popup-down()
+\define navigate-popup(afterOrBefore,listItem1,listItem2)
 <$vars firstListItem={{{ [all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]] +[first[]] }}} lastListItem={{{ [all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]] +[last[]] }}}>
 	<$list filter="[<dropdown-state>!has[selected-item]]" emptyMessage="""
 		<$set name="selectedItem" value={{{ [<dropdown-state>get[selected-item]] }}}>
-			<$list filter="[<selectedItem>!match<lastListItem>]">
-				<$action-setfield $tiddler=<<dropdown-state>> selected-item={{{ [all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]after<currentTiddler>] }}}/>
+			<$list filter="[<selectedItem>!match<$listItem1$>]">
+				<$action-setfield $tiddler=<<dropdown-state>> selected-item={{{ [all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]$afterOrBefore$<currentTiddler>] }}}/>
 			</$list>
-			<$list filter="[<selectedItem>match<lastListItem>]">
-				<$action-setfield $tiddler=<<dropdown-state>> selected-item=<<firstListItem>>/>
-			</$list>
-		</$set>
-	""">
-		<$action-setfield $tiddler=<<dropdown-state>> selected-item=<<firstListItem>>/>
-	</$list>
-</$vars>
-\end
-\define navigate-popup-up()
-<$vars firstListItem={{{ [all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]] +[first[]] }}} lastListItem={{{ [all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]] +[last[]] }}}>
-	<$list filter="[<dropdown-state>!has[selected-item]]" emptyMessage="""
-		<$set name="selectedItem" value={{{ [<dropdown-state>get[selected-item]] }}}>
-			<$list filter="[<selectedItem>!match<firstListItem>]">
-				<$action-setfield $tiddler=<<dropdown-state>> selected-item={{{ [all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]before<currentTiddler>] }}}/>
-			</$list>
-			<$list filter="[<selectedItem>match<firstListItem>]">
-				<$action-setfield $tiddler=<<dropdown-state>> selected-item=<<lastListItem>>/>
+			<$list filter="[<selectedItem>match<$listItem1$>]">
+				<$action-setfield $tiddler=<<dropdown-state>> selected-item=<<$listItem2$>>/>
 			</$list>
 		</$set>
 	""">
-		<$action-setfield $tiddler=<<dropdown-state>> selected-item=<<lastListItem>>/>
+		<$action-setfield $tiddler=<<dropdown-state>> selected-item=<<$listItem2$>>/>
 	</$list>
 </$vars>
 \end
@@ -90,9 +74,9 @@ suffix={{{ [[$(snippetTitle)$]addsuffix[/suffix]get[text]] }}}
 </$button>
 \end
 
-<$keyboard key="((popup-down))" actions=<<navigate-popup-down>> tag="span">
+<$keyboard key="((popup-down))" actions=<<navigate-popup "after" "lastListItem" "firstListItem">> tag="span">
 
-<$keyboard key="((popup-up))" actions=<<navigate-popup-up>> tag="span">
+<$keyboard key="((popup-up))" actions=<<navigate-popup "before" "firstListItem" "lastListItem">> tag="span">
 
 <$keyboard key="((popup-escape))" actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=""/>""" tag="span">
 
