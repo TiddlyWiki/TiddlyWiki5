@@ -86,7 +86,6 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
   position="below"
   animate="yes"
   tag="span"
-  focus-selector={{!!focus-selector}}
 
 ><div
 

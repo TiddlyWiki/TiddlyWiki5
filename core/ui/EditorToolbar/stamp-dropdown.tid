@@ -105,7 +105,7 @@ suffix={{{ [[$(snippetTitle)$]addsuffix[/suffix]get[text]] }}}
 
 <$keyboard key="((popup-select))" actions=<<select-focused-item-actions>> tag="span">
 
-<div tabindex="1" class="tc-drop-down-focus-item tc-stamp-button-dropdown">
+<div tabindex="1" class="tc-drop-down-focus-item tc-stamp-button-dropdown" focus-on-render="yes">
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]]" variable="snippetTitle">
 
