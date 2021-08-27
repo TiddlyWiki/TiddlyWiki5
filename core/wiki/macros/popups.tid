@@ -15,9 +15,9 @@ tags: $:/tags/Macro
 \define global-popup-open-actions(additional-actions:"false")
 <$list filter="[all[tiddlers+shadows]prefix[$:/config/shortcuts]]" variable="shortcutTiddler">
 	<$set name="key" value={{{ [<shortcutTiddler>get[text]] }}}>
-		<$wikify name="keyResolved" text="""<$macrocall $name="displayshortcuts" shortcuts=<<key>>/>""">
+		<$wikify name="keyResolved" text="""<$macrocall $name="displayshortcuts" shortcuts=<<key>> separator=" "/>""">
 			<$vars downRegexp="\b(?!Down\b)\w+" upRegexp="\b(?!Up\b)\w+" enterRegexp="\b(?!Enter\b)\w+" escapeRegexp="\b(?!Escape\b)\w+">
-				<$list filter="[<keyResolved>search-replace:g:regexp<downRegexp>,[]match[Down]] [<keyResolved>search-replace:g:regexp<upRegexp>,[]match[Up]] [<keyResolved>search-replace:g:regexp<enterRegexp>,[]match[Enter]] [<keyResolved>search-replace:g:regexp<escapeRegexp>,[]match[Escape]]">
+				<$list filter="[<keyResolved>search-replace:g:regexp<downRegexp>,[]search-replace[ ],[]match[Down]] [<keyResolved>search-replace:g:regexp<upRegexp>,[]search-replace[ ],[]match[Up]] [<keyResolved>search-replace:g:regexp<enterRegexp>,[]search-replace[ ],[]match[Enter]] [<keyResolved>search-replace:g:regexp<escapeRegexp>,[]search-replace[ ],[]match[Escape]]">
 					<<popup-actions-remove-key>>
 				</$list>
 			</$vars>
@@ -33,9 +33,9 @@ tags: $:/tags/Macro
 </$list>
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/KeyboardShortcut]]" variable="shortcutTiddler">
 	<$set name="key" value={{{ [<currentTiddler>get[key]] }}}>
-		<$wikify name="keyResolved" text="""<$macrocall $name="displayshortcuts" shortcuts=<<key>>/>""">
+		<$wikify name="keyResolved" text="""<$macrocall $name="displayshortcuts" shortcuts=<<key>> separator=" "/>""">
 			<$vars downRegexp="\b(?!Down\b)\w+" upRegexp="\b(?!Up\b)\w+" enterRegexp="\b(?!Enter\b)\w+" escapeRegexp="\b(?!Escape\b)\w+">
-				<$list filter="[<keyResolved>search-replace:g:regexp<downRegexp>,[]match[Down]] [<keyResolved>search-replace:g:regexp<upRegexp>,[]match[Up]] [<keyResolved>search-replace:g:regexp<enterRegexp>,[]match[Enter]] [<keyResolved>search-replace:g:regexp<escapeRegexp>,[]match[Escape]]">
+				<$list filter="[<keyResolved>search-replace:g:regexp<downRegexp>,[]search-replace[ ],[]match[Down]] [<keyResolved>search-replace:g:regexp<upRegexp>,[]search-replace[ ],[]match[Up]] [<keyResolved>search-replace:g:regexp<enterRegexp>,[]search-replace[ ],[]match[Enter]] [<keyResolved>search-replace:g:regexp<escapeRegexp>,[]search-replace[ ],[]match[Escape]]">
 					<<popup-actions-remove-tag>>
 				</$list>
 				<$list filter="[<__additional-actions__>match[true]]">
