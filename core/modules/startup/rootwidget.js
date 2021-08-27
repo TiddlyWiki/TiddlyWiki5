@@ -52,7 +52,6 @@ exports.startup = function() {
 		}
 	});
 	$tw.rootWidget.addEventListener("tm-edit-text-operation",function(event) {
-		event.tiddlerTitle = event.paramObject.tiddler;
 		$tw.hooks.invokeHook("th-external-text-operation",event);
 	});
 	// Install the scroller
