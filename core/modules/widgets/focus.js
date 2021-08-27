@@ -77,6 +77,8 @@ FocusWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.tag || changedAttributes.tabindex) {
 		this.refreshSelf();
 		return true;
+	} else if(changedAttributes["class"]) {
+		this.assignDomNodeClasses();
 	}
 	return this.refreshChildren(changedTiddlers);
 };
