@@ -60,9 +60,9 @@ suffix={{{ [[$(snippetTitle)$]addsuffix[/suffix]get[text]] }}}
 
 <$set name="snippetFilter" filter={{{ [<currentTiddler>get[filter]] }}}>
 
-<$keyboard key="((popup-down))" actions="""<$macrocall $name="navigate-popup" afterOrBefore="after" listItem1="lastListItem" listItem2="firstListItem" filter=<<snippetFilter>>/>""" tag="span">
+<$keyboard key="((popup-down))" actions="""<$macrocall $name="navigate-popup" afterOrBefore="after" listItem1="lastListItem" listItem2="firstListItem" filter=<<snippetFilter>> state=<<dropdown-state>>/>""" tag="span">
 
-<$keyboard key="((popup-up))" actions="""<$macrocall $name="navigate-popup" afterOrBefore="before" listItem1="firstListItem" listItem2="lastListItem" filter=<<snippetFilter>>/>""" tag="span">
+<$keyboard key="((popup-up))" actions="""<$macrocall $name="navigate-popup" afterOrBefore="before" listItem1="firstListItem" listItem2="lastListItem" filter=<<snippetFilter>> state=<<dropdown-state>>/>""" tag="span">
 
 <$keyboard key="((popup-escape))" actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=""/>""" tag="span">
 
