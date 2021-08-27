@@ -23,7 +23,7 @@ tags: $:/tags/Macro
 			</$vars>
 			<$list filter="[<__additional-actions__>match[true]]">
 				<$set name="ctrlEnterRegexp" value="\b(?!ctrl-Enter\b)\w+">
-					<$list filter="[<keyResolved>search-replace:g:regexp<ctrlEnterRegexp>,[]match[ctrl-Enter]]">
+					<$list filter="[<keyResolved>search-replace:g:regexp<ctrlEnterRegexp>,[]search-replace[ ],[]match[ctrl-Enter]]">
 						<<popup-actions-remove-key>>
 					</$list>
 				</$set>
@@ -40,7 +40,7 @@ tags: $:/tags/Macro
 				</$list>
 				<$list filter="[<__additional-actions__>match[true]]">
 					<$set name="ctrlEnterRegexp" value="\b(?!ctrl-Enter\b)\w+">
-						<$list filter="[<keyResolved>search-replace:g:regexp<ctrlEnterRegexp>,[]match[ctrl-Enter]]">
+						<$list filter="[<keyResolved>search-replace:g:regexp<ctrlEnterRegexp>,[]search-replace[ ],[]match[ctrl-Enter]]">
 							<<popup-actions-remove-tag>>
 						</$list>
 					</$set>
