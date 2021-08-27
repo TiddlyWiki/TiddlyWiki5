@@ -1,7 +1,66 @@
 title: $:/core/ui/EditorToolbar/stamp-dropdown
 
+\define select-focused-item-actions()
+<$list filter="[<dropdown-state>get[selected-item]addsuffix[/prefix]is[missing]removesuffix[/prefix]addsuffix[/suffix]is[missing]]">
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="replace-selection"
+	text={{{ [<dropdown-state>get[selected-item]get[text]] }}}
+/>
+
+</$list>
+
+
+<$list filter="[<dropdown-state>get[selected-item]addsuffix[/prefix]is[missing]removesuffix[/prefix]addsuffix[/suffix]!is[missing]] [<dropdown-state>get[selected-item]addsuffix[/prefix]!is[missing]removesuffix[/prefix]addsuffix[/suffix]is[missing]] [<dropdown-state>get[selected-item]addsuffix[/prefix]!is[missing]removesuffix[/prefix]addsuffix[/suffix]!is[missing]]">
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix={{{ [<dropdown-state>get[selected-item]addsuffix[/prefix]get[text]] }}}
+suffix={{{ [<dropdown-state>get[selected-item]addsuffix[/suffix]get[text]] }}}
+/>
+
+</$list>
+
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+\end
+\define navigate-popup-down()
+<$vars firstListItem={{{ [all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]] +[first[]] }}} lastListItem={{{ [all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]] +[last[]] }}}>
+	<$list filter="[<dropdown-state>!has[selected-item]]" emptyMessage="""
+		<$set name="selectedItem" value={{{ [<dropdown-state>get[selected-item]] }}}>
+			<$list filter="[<selectedItem>!match<lastListItem>]">
+				<$action-setfield $tiddler=<<dropdown-state>> selected-item={{{ [all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]after<currentTiddler>] }}}/>
+			</$list>
+			<$list filter="[<selectedItem>match<lastListItem>]">
+				<$action-setfield $tiddler=<<dropdown-state>> selected-item=<<firstListItem>>/>
+			</$list>
+		</$set>
+	""">
+		<$action-setfield $tiddler=<<dropdown-state>> selected-item=<<firstListItem>>/>
+	</$list>
+</$vars>
+\end
+\define navigate-popup-up()
+<$vars firstListItem={{{ [all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]] +[first[]] }}} lastListItem={{{ [all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]] +[last[]] }}}>
+	<$list filter="[<dropdown-state>!has[selected-item]]" emptyMessage="""
+		<$set name="selectedItem" value={{{ [<dropdown-state>get[selected-item]] }}}>
+			<$list filter="[<selectedItem>!match<firstListItem>]">
+				<$action-setfield $tiddler=<<dropdown-state>> selected-item={{{ [all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]before<currentTiddler>] }}}/>
+			</$list>
+			<$list filter="[<selectedItem>match<firstListItem>]">
+				<$action-setfield $tiddler=<<dropdown-state>> selected-item=<<lastListItem>>/>
+			</$list>
+		</$set>
+	""">
+		<$action-setfield $tiddler=<<dropdown-state>> selected-item=<<lastListItem>>/>
+	</$list>
+</$vars>
+\end
 \define toolbar-button-stamp-inner()
-<$button tag="a">
+<$button tag="a" class={{{ [<dropdown-state>get[selected-item]match[$(snippetTitle)$]then[tc-selected]] }}}>
 
 <$list filter="[[$(snippetTitle)$]addsuffix[/prefix]is[missing]removesuffix[/prefix]addsuffix[/suffix]is[missing]]">
 
@@ -38,6 +97,16 @@ suffix={{{ [[$(snippetTitle)$]addsuffix[/suffix]get[text]] }}}
 </$button>
 \end
 
+<$keyboard key="((popup-down))" actions=<<navigate-popup-down>> tag="span">
+
+<$keyboard key="((popup-up))" actions=<<navigate-popup-up>> tag="span">
+
+<$keyboard key="((popup-escape))" actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=""/>""" tag="span">
+
+<$keyboard key="((popup-select))" actions=<<select-focused-item-actions>> tag="span">
+
+<div tabindex="1" class="tc-drop-down-focus-item tc-stamp-button-dropdown">
+
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]]" variable="snippetTitle">
 
 <<toolbar-button-stamp-inner>>
@@ -66,3 +135,13 @@ suffix={{{ [[$(snippetTitle)$]addsuffix[/suffix]get[text]] }}}
 </em>
 
 </$button>
+
+</div>
+
+</$keyboard>
+
+</$keyboard>
+
+</$keyboard>
+
+</$keyboard>

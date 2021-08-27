@@ -1292,8 +1292,9 @@ html body.tc-body.tc-single-tiddler-window {
 	margin-left: 11px;
 }
 
-.tc-editor-toolbar button.tc-selected {
+.tc-editor-toolbar button.tc-selected, .tc-editor-toolbar a.tc-selected {
 	background-color: <<colour primary>>;
+	color: <<colour tiddler-background>>;
 }
 
 .tc-editor-toolbar button svg {
@@ -1852,6 +1853,10 @@ html body.tc-body.tc-single-tiddler-window {
 	left: 0;
 	right: 0;
 	margin: auto;
+}
+
+.tc-drop-down .tc-drop-down-focus-item {
+	outline: none;
 }
 
 /*

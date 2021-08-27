@@ -96,6 +96,17 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 	}
 	domNode.style.left = left + "px";
 	domNode.style.top = top + "px";
+	if(this.focusSelector) {
+		var focusDomNode;
+		try {
+			focusDomNode = this.document.querySelector(this.focusSelector);
+		} catch(e) {
+			console.log("Error in selector: ",this.focusSelector);
+		}
+		if(focusDomNode) {
+			focusDomNode.focus();
+		}
+	}
 };
 
 /*
@@ -122,6 +133,7 @@ RevealWidget.prototype.execute = function() {
 	this.stateTitle = this.getAttribute("stateTitle");
 	this.stateField = this.getAttribute("stateField");
 	this.stateIndex = this.getAttribute("stateIndex");
+	this.focusSelector = this.getAttribute("focus-selector");
 	this.readState();
 	// Construct the child widgets
 	var childNodes = this.isOpen ? this.parseTreeNode.children : [];
@@ -213,7 +225,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RevealWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes.positionAllowNegative || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex) {
+	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes.positionAllowNegative || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex || changedAttributes["focus-selector"]) {
 		this.refreshSelf();
 		return true;
 	} else {
