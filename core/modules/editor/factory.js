@@ -81,7 +81,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		]);
 		$tw.hooks.addHook("th-external-text-operation",function(event) {
 			event = event || {};
-			if(event.paramObject.tiddler && (event.paramObject["current-widget-id"] === self.editWidgetId) && (self.getVariable("currentTiddler") === event.paramObject.tiddler)) {
+			if(event.paramObject.tiddler && (event.paramObject["current-widget-id"] !== undefined) && (event.paramObject["current-widget-id"] === self.editWidgetId) && (self.getVariable("currentTiddler") === event.paramObject.tiddler)) {
 				self.handleEditTextOperationMessage(event);
 			}
 			return event;
