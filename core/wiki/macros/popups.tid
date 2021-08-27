@@ -6,7 +6,7 @@ tags: $:/tags/Macro
 	<$list filter="[<__state__>!has[selected-item]]" emptyMessage="""
 		<$set name="selectedItem" value={{{ [<__state__>get[selected-item]] }}}>
 			<$list filter="[<selectedItem>!match<$listItem1$>]">
-				<$action-setfield $tiddler=<<__state__>> selected-item={{{ [enlist<__filter__>$afterOrBefore$<currentTiddler>] }}}/>
+				<$action-setfield $tiddler=<<__state__>> selected-item={{{ [enlist<__filter__>$afterOrBefore$<currentTiddler>] ~[<$listItem2$>] }}}/>
 			</$list>
 			<$list filter="[<selectedItem>match<$listItem1$>]">
 				<$action-setfield $tiddler=<<__state__>> selected-item=<<$listItem2$>>/>

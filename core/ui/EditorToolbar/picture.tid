@@ -6,4 +6,4 @@ description: {{$:/language/Buttons/Picture/Hint}}
 condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
 shortcuts: ((picture))
 dropdown: $:/core/ui/EditorToolbar/picture-dropdown
-
+filter: [all[shadows+tiddlers]is[image]] -[type[application/pdf]] +[!has[draft.of]sort[title]] +[filter<isSystemFilter>]
