@@ -39,7 +39,7 @@ title: $:/core/ui/EditorToolbar/picture-dropdown
 
 <$keyboard key="((popup-up))" actions="""<$macrocall $name="navigate-popup" afterOrBefore="before" listItem1="firstListItem" listItem2="lastListItem" filter=<<pictureFilter>> state=<<dropdown-state>>/>""" tag="span">
 
-<$keyboard key="((popup-escape))" actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="insert-text" text=""/>""" tag="span">
+<$keyboard key="((popup-escape))" actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="focus-editor"/>""" tag="span">
 
 <$keyboard key="((popup-select))" actions=<<select-focused-item-actions>> tag="span">
 
