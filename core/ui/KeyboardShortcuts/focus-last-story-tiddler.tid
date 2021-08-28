@@ -1,0 +1,13 @@
+title: $:/core/ui/KeyboardShortcuts/focus-last-tiddler
+tags: $:/tags/KeyboardShortcut
+key: ((focus-last-tiddler))
+
+\import $:/core/macros/templates
+<$set name="lastStoryTiddler" value={{{ [list[$:/StoryList]last[]] }}}>
+<$navigator story="$:/StoryList" history="$:/HistoryList">
+<$action-navigate $to=<<lastStoryTiddler>>/>
+</$navigator>
+<$set name="cssEscapedTitle" value={{{ [<lastStoryTiddler>escapecss[]] }}}>
+<$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>> preventScroll="true"/>
+</$set>
+</$set>

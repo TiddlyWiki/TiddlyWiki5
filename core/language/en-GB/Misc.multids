@@ -71,6 +71,8 @@ PluginReloadWarning: Please save {{$:/core/ui/Buttons/save-wiki}} and reload {{$
 RecentChanges/DateFormat: DDth MMM YYYY
 Shortcuts/CloseFocusTiddler/Hint: Close the focused tiddler
 Shortcuts/EditFocusTiddler/Hint: Edit the focused tiddler
+Shortcuts/FocusFirstStoryTiddler/Hint: Focus the first tiddler in the ~StoryRiver
+Shortcuts/FocusLastStoryTiddler/Hint: Focus the last tiddler in the ~StoryRiver
 Shortcuts/FocusNextTiddler/Hint: Focus the next tiddler in the ~StoryRiver
 Shortcuts/FocusPreviousTiddler/Hint: Focus the previous tiddler in the ~StoryRiver
 Shortcuts/Input/AdvancedSearch/Hint: Open the ~AdvancedSearch panel from within the sidebar search field

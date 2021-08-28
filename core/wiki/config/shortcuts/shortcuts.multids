@@ -9,6 +9,8 @@ close-focus-tiddler: alt-C
 delete-field: shift-alt-D
 edit-focus-tiddler: alt-E
 excise: ctrl-E
+focus-first-tiddler: alt-Home
+focus-last-tiddler: alt-End
 focus-next-tiddler: alt-Down
 focus-previous-tiddler: alt-Up
 sidebar-search: ctrl-shift-F

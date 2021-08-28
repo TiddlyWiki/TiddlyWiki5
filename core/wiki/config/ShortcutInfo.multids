@@ -10,6 +10,8 @@ close-focus-tiddler: {{$:/language/Shortcuts/CloseFocusTiddler/Hint}}
 delete-field: {{$:/language/EditTemplate/Field/Remove/Hint}}
 edit-focus-tiddler: {{$:/language/Shortcuts/EditFocusTiddler/Hint}}
 excise: {{$:/language/Buttons/Excise/Hint}}
+focus-first-tiddler: {{$:/language/Shortcuts/FocusFirstStoryTiddler/Hint}}
+focus-last-tiddler: {{$:/language/Shortcuts/FocusLastStoryTiddler/Hint}}
 focus-next-tiddler: {{$:/language/Shortcuts/FocusNextTiddler/Hint}}
 focus-previous-tiddler: {{$:/language/Shortcuts/FocusPreviousTiddler/Hint}}
 heading-1: {{$:/language/Buttons/Heading1/Hint}}

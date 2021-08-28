@@ -1,0 +1,13 @@
+title: $:/core/ui/KeyboardShortcuts/focus-first-tiddler
+tags: $:/tags/KeyboardShortcut
+key: ((focus-first-tiddler))
+
+\import $:/core/macros/templates
+<$set name="firstStoryTiddler" value={{{ [list[$:/StoryList]first[]] }}}>
+<$navigator story="$:/StoryList" history="$:/HistoryList">
+<$action-navigate $to=<<firstStoryTiddler>>/>
+</$navigator>
+<$set name="cssEscapedTitle" value={{{ [<firstStoryTiddler>escapecss[]] }}}>
+<$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>> preventScroll="true"/>
+</$set>
+</$set>
