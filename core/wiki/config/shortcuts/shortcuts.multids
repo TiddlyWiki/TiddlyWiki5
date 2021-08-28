@@ -32,6 +32,7 @@ picture: ctrl-shift-I
 popup-down: Down
 popup-escape: Escape
 popup-select: Enter
+popup-select-variant: ctrl-Enter
 popup-up: Up
 preview: alt-P
 quote: ctrl-Q

@@ -4,6 +4,13 @@ title: $:/core/ui/EditorToolbar/picture-dropdown
 \whitespace trim
 <$list filter="[<state>get[text]match[hide]]">[!is[system]]</$list><$list filter="[<state>get[text]match[show]]">[is[tiddler+system]]</$list><$list filter="[<state>!has[text]] [<state>has[text]match[]]">[!is[system]]</$list><$list filter="[<state>get[text]!match[hide]!match[show]]">[!is[system]]</$list>
 \end
+\define popup-select-variant-actions()
+<$list filter="[<state>is[missing]] [<state>get[text]match[hide]]" emptyMessage="""
+<$action-setfield $tiddler=<<state>> text="hide"/>
+""">
+<$action-setfield $tiddler=<<state>> text="show"/>
+</$list>
+\end
 \define select-focused-item-actions()
 <$vars openingBracket="[" closingBracket="]" imageTitle={{{ [<dropdown-state>get[selected-item]] }}}>
 <$action-sendmessage
@@ -36,6 +43,8 @@ title: $:/core/ui/EditorToolbar/picture-dropdown
 
 <$keyboard key="((popup-select))" actions=<<select-focused-item-actions>> tag="span">
 
+<$keyboard key="((popup-select-variant))" actions=<<popup-select-variant-actions>> tag="span">
+
 <$focus tag="div" tabindex="1" class="tc-drop-down-focus-item">
 
 ''{{$:/language/Buttons/Picture/Hint}}''
@@ -54,11 +63,13 @@ title: $:/core/ui/EditorToolbar/picture-dropdown
 	$tiddler=<<dropdown-state>>
 />
 
-""" class="""{{{ [<dropdown-state>get[selected-item]match[$(imageTitle)$]then[tc-selected]] }}}""" subfilter=<<subfilter>> state=<<state>>/>
+""" class="""{{{ [<dropdown-state>get[selected-item]match[$(imageTitle)$]then[tc-selected]] }}}""" subfilter=<<subfilter>> state=<<state>> singleFilter="true"/>
 
 </$set>
 
 </$focus>
+
+</$keyboard>
 
 </$keyboard>
 
