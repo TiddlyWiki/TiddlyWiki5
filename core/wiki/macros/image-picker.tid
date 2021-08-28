@@ -28,6 +28,6 @@ $actions$
 </div>
 \end
 
-\define image-picker-include-tagged-images(actions,subfilter)
-<$macrocall $name="image-picker" filter="[all[shadows+tiddlers]is[image]] [all[shadows+tiddlers]tag[$:/tags/Image]] -[type[application/pdf]] +[!has[draft.of]$subfilter$sort[title]]" actions="""$actions$"""/>
+\define image-picker-include-tagged-images(actions,state,subfilter)
+<$macrocall $name="image-picker" filter="[all[shadows+tiddlers]is[image]] [all[shadows+tiddlers]tag[$:/tags/Image]] -[type[application/pdf]] +[!has[draft.of]$subfilter$sort[title]]" actions="""$actions$""" state=<<__state__>>/>
 \end
