@@ -59,6 +59,7 @@ EditShortcutWidget.prototype.render = function(parent,nextSibling) {
 	this.domNodes.push(this.inputNode);
 	// Focus the input Node if focus === "yes" or focus === "true"
 	if(this.shortcutFocus === "yes" || this.shortcutFocus === "true") {
+		$tw.focusManager.interceptFocusPreservation = true;
 		this.focus();
 	}
 };
