@@ -141,7 +141,9 @@ function CodeMirrorEngine(options) {
 		}
 	});
 	this.cm.on("blur",function(cm,event) {
-		$tw.focusManager.focusWidgetAnyway = true;
+		if(!$tw.focusManager.interceptFocusPreservation) {
+			$tw.focusManager.focusWidgetAnyway = true;
+		}
 	});
 	// Add drag and drop event listeners if fileDrop is enabled
 	if(this.widget.isFileDropEnabled) {

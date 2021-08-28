@@ -186,7 +186,9 @@ SimpleEngine.prototype.handleFocusEvent = function(event) {
 Handle a dom "blur" event
 */
 SimpleEngine.prototype.handleBlurEvent = function(event) {
-	$tw.focusManager.focusWidgetAnyway = true;
+	if(!$tw.focusManager.interceptFocusPreservation) {
+		$tw.focusManager.focusWidgetAnyway = true;
+	}
 };
 
 /*
