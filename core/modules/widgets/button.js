@@ -68,6 +68,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	}
 	if(this.popup || this.popupTitle) {
 		domNode.setAttribute("aria-expanded",isPoppedUp ? "true" : "false");
+		this.registerPopup();
 	}
 	// Set the tabindex
 	if(this.tabIndex) {
@@ -163,6 +164,20 @@ ButtonWidget.prototype.navigateTo = function(event) {
 
 ButtonWidget.prototype.dispatchMessage = function(event) {
 	this.dispatchEvent({type: this.message, param: this.param, tiddlerTitle: this.getVariable("currentTiddler"), event: event});
+};
+
+ButtonWidget.prototype.registerPopup = function() {
+	var options = {
+		domNode: this.domNode,
+		title: this.popupTitle ? this.popupTitle : this.popup,
+		wiki: this.wiki,
+		noStateReference: this.popupTitle ? true : false
+	}
+	var index = $tw.popup.findPopup($tw.popup.registeredPopups,this.popupTitle ? this.popupTitle : this.popup);
+	if(index > -1) {
+		$tw.popup.registeredPopups.splice(index,1);
+	}
+	$tw.utils.pushTop($tw.popup.registeredPopups,options);
 };
 
 ButtonWidget.prototype.triggerPopup = function(event) {

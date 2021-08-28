@@ -20,6 +20,7 @@ var Popup = function(options) {
 	options = options || {};
 	this.rootElement = options.rootElement || document.documentElement;
 	this.popups = []; // Array of {title:,wiki:,domNode:} objects
+	this.registeredPopups = [];
 };
 
 /*
@@ -33,7 +34,7 @@ Trigger a popup open or closed. Parameters are in a hashmap:
 */
 Popup.prototype.triggerPopup = function(options) {
 	// Check if this popup is already active
-	var index = this.findPopup(options.title);
+	var index = this.findPopup(this.popups,options.title);
 	// Compute the new state
 	var state = index === -1;
 	if(options.force !== undefined) {
@@ -47,10 +48,16 @@ Popup.prototype.triggerPopup = function(options) {
 	}
 };
 
-Popup.prototype.findPopup = function(title) {
+Popup.prototype.triggerRegisteredPopup = function(title) {
+	var index = this.findPopup(this.registeredPopups,title);
+	var options = this.registeredPopups[index];
+	this.triggerPopup(options);
+};
+
+Popup.prototype.findPopup = function(array,title) {
 	var index = -1;
-	for(var t=0; t<this.popups.length; t++) {
-		if(this.popups[t].title === title) {
+	for(var t=0; t<array.length; t++) {
+		if(array[t].title === title) {
 			index = t;
 		}
 	}
@@ -116,7 +123,7 @@ Popup.prototype.show = function(options) {
 	this.cancel(info.popupLevel);
 
 	// Store the popup details if not already there
-	if(!options.floating && this.findPopup(options.title) === -1) {
+	if(!options.floating && this.findPopup(this.popups,options.title) === -1) {
 		this.popups.push({
 			title: options.title,
 			wiki: options.wiki,
@@ -163,7 +170,10 @@ Popup.prototype.cancel = function(level) {
 				popup.wiki.deleteTiddler(popup.title);
 			} else {
 				popup.wiki.deleteTiddler($tw.utils.parseTextReference(popup.title).title);
-        		}
+			}
+			var index = this.findPopup(this.registeredPopups,popup.title);
+			this.registeredPopups.splice(index,1);
+			console.log(this.registeredPopups);
 		}
 	}
 	if(this.popups.length === 0) {

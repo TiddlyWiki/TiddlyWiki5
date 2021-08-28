@@ -56,24 +56,28 @@ ActionPopupWidget.prototype.refresh = function(changedTiddlers) {
 Invoke the action associated with this widget
 */
 ActionPopupWidget.prototype.invokeAction = function(triggeringWidget,event) {
-	// Trigger the popup
-	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/,
-		match = popupLocationRegExp.exec(this.actionCoords || "");
-	if(match) {
-		$tw.popup.triggerPopup({
-			domNode: null,
-			domNodeRect: {
-				left: parseFloat(match[1]),
-				top: parseFloat(match[2]),
-				width: parseFloat(match[3]),
-				height: parseFloat(match[4])
-			},
-			title: this.actionState,
-			wiki: this.wiki,
-			floating: this.floating
-		});
+	if($tw.popup.findPopup($tw.popup.registeredPopups,this.actionState) > -1) {
+		$tw.popup.triggerRegisteredPopup(this.actionState);
 	} else {
-		$tw.popup.cancel(0);
+		// Trigger the popup
+		var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/,
+			match = popupLocationRegExp.exec(this.actionCoords || "");
+		if(match) {
+			$tw.popup.triggerPopup({
+				domNode: null,
+				domNodeRect: {
+					left: parseFloat(match[1]),
+					top: parseFloat(match[2]),
+					width: parseFloat(match[3]),
+					height: parseFloat(match[4])
+				},
+				title: this.actionState,
+				wiki: this.wiki,
+				floating: this.floating
+			});
+		} else {
+			$tw.popup.cancel(0);
+		}
 	}
 	return true; // Action was invoked
 };
