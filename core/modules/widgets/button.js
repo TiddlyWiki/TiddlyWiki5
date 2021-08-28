@@ -255,7 +255,7 @@ ButtonWidget.prototype.updateDomNodeClasses = function() {
 	//Add new classes from updated class attribute.
 	$tw.utils.pushTop(domNodeClasses,newClasses);
 	this.domNode.className = domNodeClasses.join(" ");
-}
+};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
