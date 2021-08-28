@@ -173,7 +173,6 @@ Popup.prototype.cancel = function(level) {
 			}
 			var index = this.findPopup(this.registeredPopups,popup.title);
 			this.registeredPopups.splice(index,1);
-			console.log(this.registeredPopups);
 		}
 	}
 	if(this.popups.length === 0) {
