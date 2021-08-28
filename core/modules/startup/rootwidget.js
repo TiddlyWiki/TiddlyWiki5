@@ -48,6 +48,9 @@ exports.startup = function() {
 			console.log("Error in selector: ",selector)
 		}
 		if(element && element.focus) {
+			if(event.paramObject.forceFocus === "true") {
+				$tw.focusManager.focusWidgetAnyway = true;
+			};
 			element.focus(event.paramObject);
 		}
 	});

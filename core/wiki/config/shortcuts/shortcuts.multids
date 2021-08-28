@@ -34,6 +34,8 @@ list-bullet: ctrl-shift-L
 list-number: ctrl-shift-N
 mono-block: ctrl-shift-M
 mono-line: ctrl-M
+move-tiddler-down: alt-shift-Down
+move-tiddler-up: alt-shift-Up
 picture: ctrl-shift-I
 preview: alt-P
 quote: ctrl-Q

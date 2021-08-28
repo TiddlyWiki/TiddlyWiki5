@@ -83,6 +83,8 @@ Shortcuts/Input/Down/Hint: Select the next item
 Shortcuts/Input/Tab-Left/Hint: Select the previous Tab
 Shortcuts/Input/Tab-Right/Hint: Select the next Tab
 Shortcuts/Input/Up/Hint: Select the previous item
+Shortcuts/MoveTiddlerDown/Hint: Move the tiddler 1 step down in the ~StoryRiver
+Shortcuts/MoveTiddlerUp/Hint: Move the tiddler 1 step up in the ~StoryRiver
 Shortcuts/SidebarLayout/Hint: Change the sidebar layout
 Switcher/Subtitle/theme: Switch Theme
 Switcher/Subtitle/layout: Switch Layout

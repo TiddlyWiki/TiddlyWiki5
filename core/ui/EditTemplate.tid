@@ -36,6 +36,8 @@ title: $:/core/ui/EditTemplate
 <$keyboard key="((focus-previous-tiddler))" actions=<<focus-tiddler-actions "before">>>
 <$keyboard key="((cancel-edit-tiddler))" actions=<<cancel-delete-tiddler-actions "cancel">>>
 <$keyboard key="((save-tiddler))" actions=<<save-tiddler-actions>>>
+<$keyboard key="((move-tiddler-down))" actions=<<move-tiddler-actions "after">>>
+<$keyboard key="((move-tiddler-up))" actions=<<move-tiddler-actions "before">>>
 <div data-tiddler-title=<<currentTiddler>> data-tags={{!!tags}} class={{{ tc-tiddler-frame tc-tiddler-edit-frame [<currentTiddler>is[tiddler]then[tc-tiddler-exists]] [<currentTiddler>is[missing]!is[shadow]then[tc-tiddler-missing]] [<currentTiddler>is[shadow]then[tc-tiddler-exists tc-tiddler-shadow]] [<currentTiddler>is[system]then[tc-tiddler-system]] [{!!class}] [<currentTiddler>tags[]encodeuricomponent[]addprefix[tc-tagged-]] +[join[ ]] }}} tabindex={{$:/config/EditTabIndex}}>
 <$fieldmangler>
 <$vars storyTiddler=<<currentTiddler>> newTagNameTiddler=<<qualify "$:/temp/NewTagName">> newFieldNameTiddler=<<qualify "$:/temp/NewFieldName">> newFieldValueTiddler=<<qualify "$:/temp/NewFieldValue">> newFieldNameInputTiddler=<<qualify "$:/temp/NewFieldName/input">> newFieldNameSelectionTiddler=<<qualify "$:/temp/NewFieldName/selected-item">> newTagNameInputTiddler=<<qualify "$:/temp/NewTagName/input">> newTagNameSelectionTiddler=<<qualify "$:/temp/NewTagName/selected-item">> typeInputTiddler=<<qualify "$:/temp/Type/input">> typeSelectionTiddler=<<qualify "$:/temp/Type/selected-item">>>
@@ -47,6 +49,8 @@ title: $:/core/ui/EditTemplate
 </$vars>
 </$fieldmangler>
 </div>
+</$keyboard>
+</$keyboard>
 </$keyboard>
 </$keyboard>
 </$keyboard>

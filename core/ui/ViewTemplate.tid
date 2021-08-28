@@ -33,11 +33,15 @@ $:/state/folded/$(currentTiddler)$
 <$keyboard key="((focus-previous-tiddler))" actions=<<focus-tiddler-actions "before">>>
 <$keyboard key="((edit-focus-tiddler))" actions="""<$action-sendmessage $message="tm-edit-tiddler"/>""">
 <$keyboard key="((close-focus-tiddler))" actions=<<close-tiddler-actions>>>
+<$keyboard key="((move-tiddler-down))" actions=<<move-tiddler-actions "after">>>
+<$keyboard key="((move-tiddler-up))" actions=<<move-tiddler-actions "before">>>
 <$vars storyTiddler=<<currentTiddler>> tiddlerInfoState=<<qualify "$:/state/popup/tiddler-info">>><div data-tiddler-title=<<currentTiddler>> data-tags={{!!tags}} class={{{ tc-tiddler-frame tc-tiddler-view-frame [<currentTiddler>is[tiddler]then[tc-tiddler-exists]] [<currentTiddler>is[missing]!is[shadow]then[tc-tiddler-missing]] [<currentTiddler>is[shadow]then[tc-tiddler-exists tc-tiddler-shadow]] [<currentTiddler>is[shadow]is[tiddler]then[tc-tiddler-overridden-shadow]] [<currentTiddler>is[system]then[tc-tiddler-system]] [{!!class}] [<currentTiddler>tags[]encodeuricomponent[]addprefix[tc-tagged-]] +[join[ ]] }}} tabindex={{$:/config/EditTabIndex}}>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewTemplate]!has[draft.of]]" variable="listItem"><$transclude tiddler=<<listItem>>/>
 </$list>
 </div>
 </$vars>
+</$keyboard>
+</$keyboard>
 </$keyboard>
 </$keyboard>
 </$keyboard>

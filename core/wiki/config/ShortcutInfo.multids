@@ -35,6 +35,8 @@ list-bullet: {{$:/language/Buttons/ListBullet/Hint}}
 list-number: {{$:/language/Buttons/ListNumber/Hint}}
 mono-block: {{$:/language/Buttons/MonoBlock/Hint}}
 mono-line: {{$:/language/Buttons/MonoLine/Hint}}
+move-tiddler-down: {{$:/language/Shortcuts/MoveTiddlerDown/Hint}}
+move-tiddler-up: {{$:/language/Shortcuts/MoveTiddlerUp/Hint}}
 new-image: {{$:/language/Buttons/NewImage/Hint}}
 new-journal: {{$:/language/Buttons/NewJournal/Hint}}
 new-tiddler: {{$:/language/Buttons/NewTiddler/Hint}}

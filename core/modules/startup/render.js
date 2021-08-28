@@ -108,6 +108,9 @@ exports.startup = function() {
 			$tw.focusManager.focusWidget(refreshedWidget,renderTreeFootprint,widgetInfo);
 		}
 		// Restore the scroll position
+		console.log("restoring scroll position to");
+		console.log(scrollX);
+		console.log(scrollY);
 		window.scroll(scrollX,scrollY);
 	}
 	// Add the change event handler

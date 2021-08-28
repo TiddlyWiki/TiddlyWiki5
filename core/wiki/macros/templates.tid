@@ -14,6 +14,21 @@ tags: $:/tags/Macro
 </$set>
 \end
 
+\define move-tiddler-actions(afterOrBefore)
+<$set name="nextTiddler" value={{{ [list[$:/StoryList]$afterOrBefore$<currentTiddler>] }}}>
+<$list filter="[[$afterOrBefore$]match[after]]" variable="ignore">
+<$action-listops $tiddler="$:/StoryList" $subfilter="+[insertbefore:currentTiddler<nextTiddler>]"/>
+</$list>
+<$list filter="[[$afterOrBefore$]match[before]]" variable="ignore">
+<$action-listops $tiddler="$:/StoryList" $subfilter="+[insertbefore:nextTiddler<currentTiddler>]"/>
+</$list>
+</$set>
+<$set name="cssEscapedTitle" value={{{ [<currentTiddler>escapecss[]] }}}>
+<$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>> preventScroll="true" forceFocus="true"/>
+</$set>
+<$action-navigate $to=<<currentTiddler>>/>
+\end
+
 \define get-focus-selector()
 [data-tiddler-title="$(cssEscapedTitle)$"].tc-tiddler-frame
 \end
