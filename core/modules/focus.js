@@ -180,7 +180,7 @@ FocusManager.prototype.focusWidget = function(widget,footprint,widgetInfo) {
 		}
 		// Set an eventual selection-range
 		if(widget.engine && widget.engine.setSelectionRange) {
-			widget.engine.setSelectionRange(widgetInfo.selectionStart,widgetInfo.selectionEnd);
+			widget.engine.setSelectionRange(widgetInfo.selectionStart,widgetInfo.selectionEnd,widgetInfo.comprisesFullText,widgetInfo.atEndPos);
 			savedDomNode.scrollLeft = widget.engine.getScrollLeft();
 		}
 		// Now focus the DomNode

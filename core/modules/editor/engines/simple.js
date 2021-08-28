@@ -81,17 +81,27 @@ Get an object containing the selectionStart and selectionEnd values
 */
 SimpleEngine.prototype.getSelectionRange = function() {
 	return {
+		atEndPos: ((this.domNode.selectionStart === this.getText().length) && (this.domNode.selectionEnd === this.getText().length)) ? true : false,
+		comprisesFullText: ((this.domNode.selectionStart === 0) && (this.getText().length === this.domNode.selectionEnd)) ? true : false,
 		selectionStart: this.domNode.selectionStart,
 		selectionEnd: this.domNode.selectionEnd
-	}
+	};
 };
 
 /*
 Set the selection-range
 */
-SimpleEngine.prototype.setSelectionRange = function(selectionStart,selectionEnd) {
-	this.domNode.selectionStart = selectionStart;
-	this.domNode.selectionEnd = selectionEnd;
+SimpleEngine.prototype.setSelectionRange = function(selectionStart,selectionEnd,comprisesFullText,atEndPos) {
+	if(comprisesFullText) {
+		this.domNode.selectionStart = 0;
+		this.domNode.selectionEnd = this.getText().length;
+	} else if(atEndPos) {
+		this.domNode.selectionStart = this.getText().length;
+		this.domNode.selectionEnd = this.getText().length;		
+	} else {
+		this.domNode.selectionStart = selectionStart;
+		this.domNode.selectionEnd = selectionEnd;
+	}
 };
 
 /*

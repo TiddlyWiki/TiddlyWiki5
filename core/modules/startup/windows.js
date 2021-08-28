@@ -92,6 +92,8 @@ exports.startup = function() {
 				widgetQualifier = focusWidget.getStateQualifier() + "_" + focusWidget.getCurrentWidgetId();
 				if(focusWidget.engine && focusWidget.engine.getSelectionRange) {
 					var selections = focusWidget.engine.getSelectionRange();
+					widgetInfo.atEndPos = selections.atEndPos,
+					widgetInfo.comprisesFullText = selections.comprisesFullText,
 					widgetInfo.selectionStart = selections.selectionStart,
 					widgetInfo.selectionEnd = selections.selectionEnd;
 				}

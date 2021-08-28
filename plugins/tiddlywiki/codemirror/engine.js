@@ -193,7 +193,11 @@ CodeMirrorEngine.prototype.getSelectionRange = function() {
 	} else {
 		anchorPos = headPos = this.cm.indexFromPos(this.cm.getCursor());
 	}
+	var startPos = anchorPos < headPos ? anchorPos : headPos;
+	var endPos = headPos > anchorPos ? headPos : anchorPos;
 	return {
+		atEndPos: (anchorPos === headPos === this.getText().length) ? true : false,
+		comprisesFullText: (this.getText().length === endPos && startPos === 0) ? true : false,
 		selectionStart: anchorPos,
 		selectionEnd: headPos
 	}
@@ -202,8 +206,12 @@ CodeMirrorEngine.prototype.getSelectionRange = function() {
 /*
 Set the selection-range
 */
-CodeMirrorEngine.prototype.setSelectionRange = function(selectionStart,selectionEnd) {
-	this.cm.setSelection(this.cm.posFromIndex(selectionStart),this.cm.posFromIndex(selectionEnd));
+CodeMirrorEngine.prototype.setSelectionRange = function(selectionStart,selectionEnd,comprisesFullText) {
+	if(comprisesFullText) {
+		this.cm.setSelection(this.cm.posFromIndex(0),this.cm.posFromIndex(this.cm.getValue().length));
+	} else {
+		this.cm.setSelection(this.cm.posFromIndex(selectionStart),this.cm.posFromIndex(selectionEnd));
+	}
 };
 
 /*
