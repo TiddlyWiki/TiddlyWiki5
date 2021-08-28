@@ -6,8 +6,12 @@ advanced-search-sidebar: {{$:/language/Shortcuts/Input/AdvancedSearch/Hint}}
 bold: {{$:/language/Buttons/Bold/Hint}}
 cancel-edit-tiddler: {{$:/language/Buttons/Cancel/Hint}}
 change-sidebar-layout: {{$:/language/Shortcuts/SidebarLayout/Hint}}
+close-focus-tiddler: {{$:/language/Shortcuts/CloseFocusTiddler/Hint}}
 delete-field: {{$:/language/EditTemplate/Field/Remove/Hint}}
+edit-focus-tiddler: {{$:/language/Shortcuts/EditFocusTiddler/Hint}}
 excise: {{$:/language/Buttons/Excise/Hint}}
+focus-next-tiddler: {{$:/language/Shortcuts/FocusNextTiddler/Hint}}
+focus-previous-tiddler: {{$:/language/Shortcuts/FocusPreviousTiddler/Hint}}
 heading-1: {{$:/language/Buttons/Heading1/Hint}}
 heading-2: {{$:/language/Buttons/Heading2/Hint}}
 heading-3: {{$:/language/Buttons/Heading3/Hint}}

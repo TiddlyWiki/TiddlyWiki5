@@ -70,11 +70,43 @@ exports.startup = function() {
 	var deferredChanges = Object.create(null),
 		timerId;
 	function refresh() {
+		// Save the current scroll position
+		var scrollX = window.scrollX,
+		    scrollY = window.scrollY;
+		// Detect the currently focused domNode
+		var currentlyFocusedDomNode = document.activeElement.tagName !== "IFRAME" ? document.activeElement : document.activeElement.contentWindow.document.activeElement;
+		// Find the widget owning the currently focused domNode
+		var focusWidget = $tw.focusManager.findWidgetOwningDomNode($tw.rootWidget,currentlyFocusedDomNode);
+		var renderTreeFootprint;
+		if(focusWidget) {
+			renderTreeFootprint = $tw.focusManager.generateRenderTreeFootprint(focusWidget,currentlyFocusedDomNode);
+		}
+		var widgetTreeFootprint,
+			widgetQualifier,
+			widgetInfo = {};
+		if(focusWidget) {
+			widgetTreeFootprint = $tw.focusManager.generateWidgetTreeFootprint(focusWidget);
+			widgetQualifier = focusWidget.getStateQualifier() + "_" + focusWidget.getCurrentWidgetId();
+			if(focusWidget.engine && focusWidget.engine.getSelectionRange) {
+				var selections = focusWidget.engine.getSelectionRange();
+				widgetInfo.selectionStart = selections.selectionStart,
+				widgetInfo.selectionEnd = selections.selectionEnd;
+			}
+		}
 		// Process the refresh
 		$tw.hooks.invokeHook("th-page-refreshing");
 		$tw.pageWidgetNode.refresh(deferredChanges);
 		deferredChanges = Object.create(null);
 		$tw.hooks.invokeHook("th-page-refreshed");
+		var refreshedWidget;
+		if(widgetTreeFootprint) {
+			refreshedWidget = $tw.focusManager.findWidgetByFootprint(widgetTreeFootprint,$tw.rootWidget,widgetQualifier);
+		}
+		if(refreshedWidget) {
+			$tw.focusManager.focusWidget(refreshedWidget,renderTreeFootprint,widgetInfo);
+		}
+		// Restore the scroll position
+		window.scroll(scrollX,scrollY);
 	}
 	// Add the change event handler
 	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {

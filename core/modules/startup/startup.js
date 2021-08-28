@@ -102,6 +102,8 @@ exports.startup = function() {
 	});
 	// Kick off the keyboard manager
 	$tw.keyboardManager = new $tw.KeyboardManager();
+	// Kick off the focus manager
+	$tw.focusManager = new $tw.FocusManager();
 	// Listen for shortcuts
 	if($tw.browser) {
 		$tw.utils.addEventListeners(document,[{

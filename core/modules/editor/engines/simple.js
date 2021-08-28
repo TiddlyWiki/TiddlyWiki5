@@ -61,12 +61,38 @@ function SimpleEngine(options) {
 	// Add an input event handler
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},
-		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"}
+		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"},
+		{name: "blur", handlerObject: this, handlerMethod: "handleBlurEvent"}
 	]);
 	// Insert the element into the DOM
 	this.parentNode.insertBefore(this.domNode,this.nextSibling);
 	this.widget.domNodes.push(this.domNode);
-}
+};
+
+/*
+Get the scrollLeft position of the domNode
+*/
+SimpleEngine.prototype.getScrollLeft = function() {
+	return this.domNode.scrollLeft;
+};
+
+/*
+Get an object containing the selectionStart and selectionEnd values
+*/
+SimpleEngine.prototype.getSelectionRange = function() {
+	return {
+		selectionStart: this.domNode.selectionStart,
+		selectionEnd: this.domNode.selectionEnd
+	}
+};
+
+/*
+Set the selection-range
+*/
+SimpleEngine.prototype.setSelectionRange = function(selectionStart,selectionEnd) {
+	this.domNode.selectionStart = selectionStart;
+	this.domNode.selectionEnd = selectionEnd;
+};
 
 /*
 Set the text of the engine if it doesn't currently have focus
@@ -154,6 +180,13 @@ SimpleEngine.prototype.handleFocusEvent = function(event) {
 		});
 	}
 	return true;
+};
+
+/*
+Handle a dom "blur" event
+*/
+SimpleEngine.prototype.handleBlurEvent = function(event) {
+	$tw.focusManager.focusWidgetAnyway = true;
 };
 
 /*

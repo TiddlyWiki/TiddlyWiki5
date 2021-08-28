@@ -140,6 +140,9 @@ function CodeMirrorEngine(options) {
 			$tw.popup.cancel(0);	
 		}
 	});
+	this.cm.on("blur",function(cm,event) {
+		$tw.focusManager.focusWidgetAnyway = true;
+	});
 	// Add drag and drop event listeners if fileDrop is enabled
 	if(this.widget.isFileDropEnabled) {
 		// If the drag event contains Files, prevent the default CodeMirror handling
@@ -166,7 +169,40 @@ function CodeMirrorEngine(options) {
 			self.widget.handlePasteEvent.call(self.widget,event);
 		});
 	}
-}
+};
+
+/*
+Get the scrollLeft position of the CM domNode
+*/
+CodeMirrorEngine.prototype.getScrollLeft = function() {
+	return this.domNode.lastChild.scrollLeft;
+};
+
+/*
+Get an object containing the selectionStart and selectionEnd values
+*/
+CodeMirrorEngine.prototype.getSelectionRange = function() {
+	var selections = this.cm.listSelections(),
+	    anchorPos,
+	    headPos;
+	if(selections.length > 0) {
+		anchorPos = this.cm.indexFromPos(selections[0].anchor),
+		headPos = this.cm.indexFromPos(selections[0].head);
+	} else {
+		anchorPos = headPos = this.cm.indexFromPos(this.cm.getCursor());
+	}
+	return {
+		selectionStart: anchorPos,
+		selectionEnd: headPos
+	}
+};
+
+/*
+Set the selection-range
+*/
+CodeMirrorEngine.prototype.setSelectionRange = function(selectionStart,selectionEnd) {
+	this.cm.setSelection(this.cm.posFromIndex(selectionStart),this.cm.posFromIndex(selectionEnd));
+};
 
 /*
 Set the text of the engine if it doesn't currently have focus

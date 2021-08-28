@@ -69,6 +69,10 @@ PageTemplate/Description: the default ~TiddlyWiki layout
 PageTemplate/Name: Default ~PageTemplate
 PluginReloadWarning: Please save {{$:/core/ui/Buttons/save-wiki}} and reload {{$:/core/ui/Buttons/refresh}} to allow changes to ~JavaScript plugins to take effect
 RecentChanges/DateFormat: DDth MMM YYYY
+Shortcuts/CloseFocusTiddler/Hint: Close the focused tiddler
+Shortcuts/EditFocusTiddler/Hint: Edit the focused tiddler
+Shortcuts/FocusNextTiddler/Hint: Focus the next tiddler in the ~StoryRiver
+Shortcuts/FocusPreviousTiddler/Hint: Focus the previous tiddler in the ~StoryRiver
 Shortcuts/Input/AdvancedSearch/Hint: Open the ~AdvancedSearch panel from within the sidebar search field
 Shortcuts/Input/Accept/Hint: Accept the selected item
 Shortcuts/Input/AcceptVariant/Hint: Accept the selected item (variant)

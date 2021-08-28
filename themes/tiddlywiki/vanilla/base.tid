@@ -1008,6 +1008,14 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	border: 1px solid <<colour tiddler-border>>;
 }
 
+.tc-story-river .tc-tiddler-frame:focus-within, .tc-story-river .tc-tiddler-frame:focus, .tc-story-river .tc-tiddler-frame.tc-focused {
+	border: 1px solid <<colour foreground>>;
+}
+
+.tc-story-river .tc-tiddler-frame {
+	outline: none;
+}
+
 {{$:/themes/tiddlywiki/vanilla/sticky}}
 
 .tc-tiddler-info {

@@ -236,6 +236,36 @@ Widget.prototype.hasVariable = function(name,value) {
 };
 
 /*
+Find the widget, walking up the widget-tree, that has a different transclusion variable than the current widget
+*/
+Widget.prototype.findParentTransclusionWidget = function() {
+	var node = this;
+	var transclusionVariable = this.getVariable("transclusion");
+	while(node && node.getVariable("transclusion") === transclusionVariable) {
+		node = node.parentWidget;
+	}
+	return (node !== this) ? node : null;
+};
+
+/*
+Generate the "transclusion-footprint" of the current widget in the widget-tree up to the next widget that changes the transclusion variable
+*/
+Widget.prototype.getCurrentWidgetId = function() {
+	var parentTransclusionWidget = this.findParentTransclusionWidget(),
+	    node = this,
+	    footprint = node.parentWidget.children.indexOf(node);
+	while(node) {
+		node = node.parentWidget;
+		if(node === parentTransclusionWidget) {
+			break;
+		} else if(node.parentWidget && node.parentWidget.children) {
+			footprint = footprint + "-" + node.parentWidget.children.indexOf(node);
+		}
+	}
+	return footprint;
+};
+
+/*
 Construct a qualifying string based on a hash of concatenating the values of a given variable in the parent chain
 */
 Widget.prototype.getStateQualifier = function(name) {

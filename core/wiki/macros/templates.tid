@@ -1,0 +1,19 @@
+title: $:/core/macros/templates
+tags: $:/tags/Macro
+
+\define if-last-tiddler-actions()
+<$set name="lastTiddler" value={{{ [list<tv-story-list>last[]] }}}>
+<$list filter="[<currentTiddler>match<lastTiddler>]" variable="ignore">
+<$set name="nextTiddler" value={{{ [list<tv-story-list>before<currentTiddler>] }}}>
+<$set name="cssEscapedTitle" value={{{ [<nextTiddler>escapecss[]] }}}>
+<$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>> preventScroll="true"/>
+<$action-navigate $to=<<nextTiddler>>/>
+</$set>
+</$set>
+</$list>
+</$set>
+\end
+
+\define get-focus-selector()
+[data-tiddler-title="$(cssEscapedTitle)$"].tc-tiddler-frame
+\end
