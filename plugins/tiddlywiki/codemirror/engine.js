@@ -196,7 +196,7 @@ CodeMirrorEngine.prototype.getSelectionRange = function() {
 	var startPos = anchorPos < headPos ? anchorPos : headPos;
 	var endPos = headPos > anchorPos ? headPos : anchorPos;
 	return {
-		atEndPos: (anchorPos === headPos === this.getText().length) ? true : false,
+		atEndPos: ((anchorPos === this.getText().length) && (headPos === this.getText().length)) ? true : false,
 		comprisesFullText: (this.getText().length === endPos && startPos === 0) ? true : false,
 		selectionStart: anchorPos,
 		selectionEnd: headPos
