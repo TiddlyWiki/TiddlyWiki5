@@ -226,7 +226,7 @@ FramedEngine.prototype.handleFocusEvent = function(event) {
 	if(this.widget.editCancelPopups) {
 		$tw.popup.cancel(0);
 	}
-	var currentTiddler = this.widget.document.querySelector('[data-tiddler-title="' + CSS.escape(this.widget.editTitle) + '"].tc-tiddler-frame');
+	var currentTiddler = this.widget.document.querySelector('[data-tiddler-title="' + $tw.utils.escapeCSS(this.widget.editTitle) + '"].tc-tiddler-frame');
 	if(currentTiddler) {
 		$tw.utils.addClass(currentTiddler,"tc-focused");
 	}
@@ -239,7 +239,7 @@ FramedEngine.prototype.handleBlurEvent = function(event) {
 	if(!$tw.focusManager.interceptFocusPreservation) {
 		$tw.focusManager.focusWidgetAnyway = true;
 	}
-	var currentTiddler = this.widget.document.querySelector('[data-tiddler-title="' + CSS.escape(this.widget.editTitle) + '"].tc-tiddler-frame');
+	var currentTiddler = this.widget.document.querySelector('[data-tiddler-title="' + $tw.utils.escapeCSS(this.widget.editTitle) + '"].tc-tiddler-frame');
 	if(currentTiddler) {
 		$tw.utils.removeClass(currentTiddler,"tc-focused");
 	}
