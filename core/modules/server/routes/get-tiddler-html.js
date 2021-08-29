@@ -17,7 +17,7 @@ exports.method = "GET";
 exports.path = /^\/([^\/]+)$/;
 
 exports.handler = function(request,response,state) {
-	var title = decodeURIComponent(state.params[0]),
+	var title = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		tiddler = state.wiki.getTiddler(title);
 	if(tiddler) {
 		var renderType = tiddler.getFieldString("_render_type"),

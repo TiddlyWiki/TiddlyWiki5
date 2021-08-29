@@ -149,7 +149,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 					out.push({
 						type: "link",
 						attributes: {
-							to: { type: "string", value: decodeURI(currentNode.href.substr(1)) }
+							to: { type: "string", value: $tw.utils.decodeURISafe(currentNode.href.substr(1)) }
 						},
 						children: children
 					});
@@ -180,7 +180,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				type: "image",
 				attributes: {
 					tooltip: { type: "string", value: currentNode.alt },
-					source: { type: "string", value: decodeURIComponent(currentNode.src) }
+					source: { type: "string", value: $tw.utils.decodeURIComponentSafe(currentNode.src) }
 				}
 			});
 			break;
