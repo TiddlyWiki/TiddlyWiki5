@@ -35,7 +35,7 @@ exports.startup = function() {
 			variables = $tw.utils.extend({},paramObject,{currentTiddler: title});
 		// Open the window
 		var srcWindow,
-		    srcDocument;
+			srcDocument;
 		// In case that popup blockers deny opening a new window
 		try {
 			srcWindow = window.open("","external-" + title,"scrollbars,width=" + width + ",height=" + height),
@@ -75,7 +75,7 @@ exports.startup = function() {
 		refreshHandler = function(changes) {
 			// Save the scroll position
 			var scrollX = srcWindow.scrollX,
-			    scrollY = srcWindow.scrollY;
+				scrollY = srcWindow.scrollY;
 			// Detect the currently focused domNode
 			var currentlyFocusedDomNode = srcDocument.activeElement.tagName !== "IFRAME" ? srcDocument.activeElement : srcDocument.activeElement.contentWindow.document.activeElement;
 			// Find the widget owning the currently focused domNode

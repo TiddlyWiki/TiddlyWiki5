@@ -57,7 +57,7 @@ exports.startup = function() {
 		$tw.utils.addClass($tw.pageContainer,"tc-page-container-wrapper");
 		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
 		$tw.pageWidgetNode.render($tw.pageContainer,null);
-   		$tw.hooks.invokeHook("th-page-refreshed");
+		$tw.hooks.invokeHook("th-page-refreshed");
 	})();
 	// Remove any splash screen elements
 	var removeList = document.querySelectorAll(".tc-remove-when-wiki-loaded");
@@ -72,7 +72,7 @@ exports.startup = function() {
 	function refresh() {
 		// Save the current scroll position
 		var scrollX = window.scrollX,
-		    scrollY = window.scrollY;
+			scrollY = window.scrollY;
 		// Detect the currently focused domNode
 		var currentlyFocusedDomNode = document.activeElement.tagName !== "IFRAME" ? document.activeElement : document.activeElement.contentWindow.document.activeElement;
 		// Find the widget owning the currently focused domNode
