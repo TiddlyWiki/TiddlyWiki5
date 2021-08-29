@@ -162,9 +162,10 @@ FramedEngine.prototype.getScrollLeft = function() {
 Get an object containing the selectionStart and selectionEnd values
 */
 FramedEngine.prototype.getSelectionRange = function() {
+	var textLength = this.getText().length;
 	return {
-		atEndPos: ((this.domNode.selectionStart === this.getText().length) && (this.domNode.selectionEnd === this.getText().length)) ? true : false,
-		comprisesFullText: ((this.domNode.selectionStart === 0) && (this.getText().length === this.domNode.selectionEnd)) ? true : false,
+		atEndPos: ((this.domNode.selectionStart === textLength) && (this.domNode.selectionEnd === textLength)) ? true : false,
+		comprisesFullText: ((this.domNode.selectionStart === 0) && (textLength === this.domNode.selectionEnd)) ? true : false,
 		selectionStart: this.domNode.selectionStart,
 		selectionEnd: this.domNode.selectionEnd
 	};
