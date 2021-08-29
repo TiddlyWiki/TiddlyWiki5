@@ -1,15 +1,32 @@
 title: $:/core/macros/translink
 tags: $:/tags/Macro
 
+\define get-translink-state() $:/state/translink<<current-widget-id>>
 \define translink(title,mode:"block")
-<div style="border:1px solid #ccc; padding: 0.5em; background: black; foreground; white;">
-<$link to="""$title$""">
-<$text text="""$title$"""/>
+<div class="tc-translink-outer">
+<$link to=<<__title__>>>
+<$text text=<<__title__>>/>
 </$link>
-<div style="border:1px solid #ccc; padding: 0.5em; background: white; foreground; black;">
-<$transclude tiddler="""$title$""" mode="$mode$">
-"<$text text="""$title$"""/>" is missing
+<$wikify name="state" text=<<get-translink-state>>>
+<span style="float: right;">
+<$reveal state=<<state>> type="nomatch" text="show">
+<$button class=<<tv-config-toolbar-class>> set=<<state>> setTo="show">
+{{$:/core/images/down-arrow}}
+</$button>
+</$reveal>
+<$reveal state=<<state>> type="match" text="show">
+<$button class=<<tv-config-toolbar-class>> set=<<state>> setTo="hide">
+{{$:/core/images/up-arrow}}
+</$button>
+</$reveal>
+</span>
+<$reveal state=<<state>> type="match" text="show">
+<div class="tc-translink-inner">
+<$transclude tiddler=<<__title__>> mode="$mode$">
+"<$text text=<<__title__>>/>" is missing
 </$transclude>
 </div>
+</$reveal>
+</$wikify>
 </div>
 \end

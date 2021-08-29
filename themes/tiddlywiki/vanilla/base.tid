@@ -2979,6 +2979,25 @@ select {
 }
 
 /*
+** Translink macro
+*/
+
+.tc-translink-outer {
+	border:1px solid <<colour muted-foreground>>;
+	border-radius: 4px;
+	padding: 0.5em;
+	background: black;
+	color: <<colour tiddler-background>>;
+}
+
+.tc-translink-inner {
+	border:1px solid <<colour muted-foreground>>;
+	padding: 0.5em;
+	background: <<colour tiddler-background>>;
+	color: <<colour foreground>>;
+}
+
+/*
 ** Utility classes for SVG icons
 */
 
