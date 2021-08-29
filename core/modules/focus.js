@@ -188,8 +188,10 @@ FocusManager.prototype.focusWidget = function(widget,footprint,widgetInfo) {
 			savedDomNode.scrollLeft = widget.engine.getScrollLeft();
 		}
 		// Now focus the DomNode
-		if(savedDomNode && savedDomNode.focus) {
+		if(savedDomNode && savedDomNode.focus && !this.interceptFocusPreservation) {
 			savedDomNode.focus({preventScroll: true});
+		} else if(this.interceptFocusPreservation) {
+			this.interceptFocusPreservation = false;
 		}
 		this.focusWidgetAnyway = false;
 	} else {
