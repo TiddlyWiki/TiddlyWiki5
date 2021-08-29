@@ -21,7 +21,7 @@ title: $:/core/ui/EditorToolbar/StampDropdown/ItemTemplate
 	$message="tm-edit-text-operation"
 	$param="wrap-selection"
 	prefix={{{ [<currentTiddler>addsuffix[/prefix]get[text]] }}}
-  suffix={{{ [<currentTiddler>addsuffix[/suffix]get[text]] }}}
+	suffix={{{ [<currentTiddler>addsuffix[/suffix]get[text]] }}}
 />
 
 </$list>
@@ -40,7 +40,7 @@ title: $:/core/ui/EditorToolbar/StampDropdown/ItemTemplate
 
 """>
 
-<$link tooltip={{{ [<currentTiddler>get[description]] }}}>
+<$link tooltip={{{ [<currentTiddler>get[description]] }}} class={{{ [<dropdown-state>get[selected-item]match<currentTiddler>then[tc-selected]] }}}>
 
 <$transclude tiddler=<<currentTiddler>> field="caption" mode="inline">
 

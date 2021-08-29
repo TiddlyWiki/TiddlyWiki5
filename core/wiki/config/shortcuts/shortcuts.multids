@@ -29,6 +29,11 @@ list-number: ctrl-shift-N
 mono-block: ctrl-shift-M
 mono-line: ctrl-M
 picture: ctrl-shift-I
+popup-down: Down
+popup-escape: Escape
+popup-select: Enter
+popup-select-variant: ctrl-Enter
+popup-up: Up
 preview: alt-P
 quote: ctrl-Q
 save-tiddler: ctrl+enter

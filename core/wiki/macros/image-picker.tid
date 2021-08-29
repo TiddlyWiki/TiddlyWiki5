@@ -4,35 +4,42 @@ tags: $:/tags/Macro
 title: $:/core/macros/image-picker
 type: text/vnd.tiddlywiki
 
-\define image-picker-thumbnail(actions)
-<$button tag="a" tooltip="""$(imageTitle)$""">
+\define image-picker-thumbnail(actions,class)
+<$wikify name="class" text="""$class$""">
+<$button tag="a" tooltip="""$(imageTitle)$""" class=<<class>>>
 $actions$
 <$transclude tiddler=<<imageTitle>>/>
 </$button>
+</$wikify>
 \end
 
-\define image-picker-list(filter,actions)
+\define image-picker-list(filter,actions,class)
 <$list filter="""$filter$""" variable="imageTitle">
-<$macrocall $name="image-picker-thumbnail" actions="""$actions$"""/>
+<$macrocall $name="image-picker-thumbnail" actions="""$actions$""" class=<<__class__>>/>
 </$list>
 \end
 
-\define image-picker(actions,filter:"[all[shadows+tiddlers]is[image]] -[type[application/pdf]] +[!has[draft.of]$subfilter$sort[title]]",subfilter:"")
+\define image-picker(actions,filter:"""[all[shadows+tiddlers]is[image]] -[type[application/pdf]] +[!has[draft.of]$subfilter$sort[title]]""",subfilter:"",class:"",state:"",singleFilter:"false")
 <div class="tc-image-chooser">
-<$vars state-system=<<qualify "$:/state/image-picker/system">>>
-<$checkbox tiddler=<<state-system>> field="text" checked="show" unchecked="hide" default="hide">
+<$set name="state-system" value=<<qualify "$:/state/image-picker/system">>>
+<$checkbox tiddler={{{ [[$state$]!match[]else<state-system>] }}} field="text" checked="show" unchecked="hide" default="hide">
 {{$:/language/SystemTiddlers/Include/Prompt}}
-</$checkbox>
+</$checkbox><br>
+<$list filter="[<__singleFilter__>match[false]]" variable="ignore">
 <$reveal state=<<state-system>> type="match" text="hide" default="hide" tag="div">
-<$macrocall $name="image-picker-list" filter="""$filter$ +[!is[system]]""" actions="""$actions$"""/>
+<$macrocall $name="image-picker-list" filter="""$filter$ +[!is[system]]""" actions="""$actions$""" class=<<__class__>>/>
 </$reveal>
 <$reveal state=<<state-system>> type="nomatch" text="hide" default="hide" tag="div">
-<$macrocall $name="image-picker-list" filter="""$filter$""" actions="""$actions$"""/>
+<$macrocall $name="image-picker-list" filter="""$filter$""" actions="""$actions$""" class=<<__class__>>/>
 </$reveal>
-</$vars>
+</$list>
+<$list filter="[<__singleFilter__>match[true]]" variable="ignore">
+<$macrocall $name="image-picker-list" filter="""$filter$""" actions="""$actions$""" class=<<__class__>>/>
+</$list>
+</$set>
 </div>
 \end
 
-\define image-picker-include-tagged-images(actions)
-<$macrocall $name="image-picker" filter="[all[shadows+tiddlers]is[image]] [all[shadows+tiddlers]tag[$:/tags/Image]] -[type[application/pdf]] +[!has[draft.of]sort[title]]" actions="""$actions$"""/>
+\define image-picker-include-tagged-images(actions,state,subfilter,singleFilter:"false")
+<$macrocall $name="image-picker" filter="[all[shadows+tiddlers]is[image]] [all[shadows+tiddlers]tag[$:/tags/Image]] -[type[application/pdf]] +[!has[draft.of]$subfilter$sort[title]]" actions="""$actions$""" state=<<__state__>> singleFilter=<<__singleFilter__>>/>
 \end

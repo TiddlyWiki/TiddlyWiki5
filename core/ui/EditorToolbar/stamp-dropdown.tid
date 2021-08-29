@@ -1,8 +1,35 @@
 title: $:/core/ui/EditorToolbar/stamp-dropdown
 
+\define select-focused-item-actions()
+<$list filter="[<dropdown-state>get[selected-item]addsuffix[/prefix]!is[tiddler]!is[shadow]removesuffix[/prefix]addsuffix[/suffix]!is[tiddler]!is[shadow]]">
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="replace-selection"
+	text={{{ [<dropdown-state>get[selected-item]get[text]] }}}
+/>
+</$list>
+<$list filter="[<dropdown-state>get[selected-item]addsuffix[/prefix]] [<dropdown-state>get[selected-item]addsuffix[/suffix]] +[is[shadow]] :else[is[tiddler]] +[limit[1]]">
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix={{{ [<dropdown-state>get[selected-item]addsuffix[/prefix]get[text]] }}}
+	suffix={{{ [<dropdown-state>get[selected-item]addsuffix[/suffix]get[text]] }}}
+/>
+</$list>
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+\end
+
+<$set name="snippetFilter" filter={{{ [<currentTiddler>get[filter]] }}}>
+<$keyboard key="((popup-down))" actions="""<$macrocall $name="navigate-popup" afterOrBefore="after" listItem1="lastListItem" listItem2="firstListItem" filter=<<snippetFilter>> state=<<dropdown-state>>/>""" tag="span">
+<$keyboard key="((popup-up))" actions="""<$macrocall $name="navigate-popup" afterOrBefore="before" listItem1="firstListItem" listItem2="lastListItem" filter=<<snippetFilter>> state=<<dropdown-state>>/>""" tag="span">
+<$keyboard key="((popup-escape))" actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="focus-editor"/>""" tag="span">
+<$keyboard key="((popup-select))" actions=<<select-focused-item-actions>> tag="span">
+<$focus tabindex="1" tag="div" class="tc-drop-down-focus-item tc-stamp-button-dropdown">
 <$macrocall $name="list-tagged-draggable" tag="$:/tags/TextEditor/Snippet" subFilter="!is[draft]" itemTemplate="$:/core/ui/EditorToolbar/StampDropdown/ItemTemplate"/>
 
-----
+<hr>
 
 <$button tag="a">
 
@@ -24,3 +51,9 @@ title: $:/core/ui/EditorToolbar/stamp-dropdown
 </em>
 
 </$button>
+</$focus>
+</$keyboard>
+</$keyboard>
+</$keyboard>
+</$keyboard>
+</$set>

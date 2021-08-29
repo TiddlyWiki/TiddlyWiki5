@@ -33,6 +33,11 @@ new-image: {{$:/language/Buttons/NewImage/Hint}}
 new-journal: {{$:/language/Buttons/NewJournal/Hint}}
 new-tiddler: {{$:/language/Buttons/NewTiddler/Hint}}
 picture: {{$:/language/Buttons/Picture/Hint}}
+popup-down: {{$:/language/Shortcuts/Popups/Down/Hint}}
+popup-escape: {{$:/language/Shortcuts/Popups/Escape/Hint}}
+popup-select: {{$:/language/Shortcuts/Popups/Select/Hint}}
+popup-select-variant: {{$:/language/Shortcuts/Popups/SelectVariant/Hint}}
+popup-up: {{$:/language/Shortcuts/Popups/Up/Hint}}
 preview: {{$:/language/Buttons/Preview/Hint}}
 quote: {{$:/language/Buttons/Quote/Hint}}
 save-tiddler: {{$:/language/Buttons/Save/Hint}}

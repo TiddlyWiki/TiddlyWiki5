@@ -1,10 +1,55 @@
 title: $:/core/ui/EditorToolbar/picture-dropdown
 
+\define get-is-system-filter()
+\whitespace trim
+<$list filter="[<state>get[text]match[hide]]">[!is[system]]</$list><$list filter="[<state>get[text]match[show]]">[is[tiddler+system]]</$list><$list filter="[<state>!has[text]] [<state>has[text]match[]]">[!is[system]]</$list><$list filter="[<state>get[text]!match[hide]!match[show]]">[!is[system]]</$list>
+\end
+\define popup-select-variant-actions()
+<$list filter="[<state>is[missing]] [<state>get[text]match[hide]]" emptyMessage="""
+<$action-setfield $tiddler=<<state>> text="hide"/>
+""">
+<$action-setfield $tiddler=<<state>> text="show"/>
+</$list>
+\end
+\define select-focused-item-actions()
+<$vars openingBracket="[" closingBracket="]" imageTitle={{{ [<dropdown-state>get[selected-item]] }}}>
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="replace-selection"
+	text={{{ [<openingBracket>addsuffix[img]addsuffix<openingBracket>addsuffix<imageTitle>addsuffix<closingBracket>addsuffix<closingBracket>] }}}
+/>
+
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+</$vars>
+\end
 \define replacement-text()
 [img[$(imageTitle)$]]
 \end
+\define notIsSystem() !is[system]
+
+<$set name="state" value=<<qualify "$:/state/image-picker/system">>>
+
+<$wikify name="isSystemFilter" text=<<get-is-system-filter>>>
+
+<$set name="pictureFilter" filter={{{ [<currentTiddler>get[filter]] }}}>
+
+<$keyboard key="((popup-down))" actions="""<$macrocall $name="navigate-popup" afterOrBefore="after" listItem1="lastListItem" listItem2="firstListItem" filter=<<pictureFilter>> state=<<dropdown-state>>/>""" tag="span">
+
+<$keyboard key="((popup-up))" actions="""<$macrocall $name="navigate-popup" afterOrBefore="before" listItem1="firstListItem" listItem2="lastListItem" filter=<<pictureFilter>> state=<<dropdown-state>>/>""" tag="span">
+
+<$keyboard key="((popup-escape))" actions="""<$action-sendmessage $message="tm-edit-text-operation" $param="focus-editor"/>""" tag="span">
+
+<$keyboard key="((popup-select))" actions=<<select-focused-item-actions>> tag="span">
+
+<$keyboard key="((popup-select-variant))" actions=<<popup-select-variant-actions>> tag="span">
+
+<$focus tag="div" tabindex="1" class="tc-drop-down-focus-item">
 
 ''{{$:/language/Buttons/Picture/Hint}}''
+
+<$set name="subfilter" value={{{ [<state>get[text]!match[show]then<notIsSystem>] [<state>is[missing]then<notIsSystem>] }}}>
 
 <$macrocall $name="image-picker" actions="""
 
@@ -18,4 +63,24 @@ title: $:/core/ui/EditorToolbar/picture-dropdown
 	$tiddler=<<dropdown-state>>
 />
 
-"""/>
+""" class="""{{{ [<dropdown-state>get[selected-item]match[$(imageTitle)$]then[tc-selected]] }}}""" subfilter=<<subfilter>> state=<<state>> singleFilter="true"/>
+
+</$set>
+
+</$focus>
+
+</$keyboard>
+
+</$keyboard>
+
+</$keyboard>
+
+</$keyboard>
+
+</$keyboard>
+
+</$set>
+
+</$wikify>
+
+</$set>

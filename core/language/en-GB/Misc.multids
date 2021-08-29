@@ -77,6 +77,11 @@ Shortcuts/Input/Down/Hint: Select the next item
 Shortcuts/Input/Tab-Left/Hint: Select the previous Tab
 Shortcuts/Input/Tab-Right/Hint: Select the next Tab
 Shortcuts/Input/Up/Hint: Select the previous item
+Shortcuts/Popups/Down/Hint: Select the next popup item
+Shortcuts/Popups/Escape/Hint: Close the popup
+Shortcuts/Popups/Select/Hint: Accept the selected popup item
+Shortcuts/Popups/SelectVariant/Hint: A variant action in the currently open popup
+Shortcuts/Popups/Up/Hint: Select the previous popup item
 Shortcuts/SidebarLayout/Hint: Change the sidebar layout
 Switcher/Subtitle/theme: Switch Theme
 Switcher/Subtitle/layout: Switch Layout
