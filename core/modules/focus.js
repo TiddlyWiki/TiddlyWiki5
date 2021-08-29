@@ -72,7 +72,10 @@ FocusManager.prototype.generateWidgetTreeFootprint = function(widget) {
 		footprint = [];
 	while(node) {
 		if(node.parentWidget && node.parentWidget.children) {
-			footprint.push(node.parentWidget.children.indexOf(node));
+			var index = node.parentWidget.children.indexOf(node);
+				if(index > -1) {
+				footprint.push(node.parentWidget.children.indexOf(node));
+			}
 		}
 		node = node.parentWidget;
 	}
