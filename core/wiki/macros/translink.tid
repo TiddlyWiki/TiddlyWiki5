@@ -22,7 +22,9 @@ tags: $:/tags/Macro
 <$reveal state=<<state>> type="match" text="show">
 <div class="tc-translink-inner">
 <$transclude tiddler=<<__title__>> mode="$mode$">
-"<$text text=<<__title__>>/>" is missing
+<$tiddler tiddler=<<__title__>>>
+<$transclude tiddler="$:/language/MissingTiddler/Hint"/>
+</$tiddler>
 </$transclude>
 </div>
 </$reveal>
