@@ -54,7 +54,7 @@ title="New tiddler"
 
 #* Asígnale la etiqueta <<.tag ~$:/tags/ViewToolbar]]>>
 
-# Hay que crear un tiddler que le diga a ~TiddlyWIki si el botón será o no visible en la barra. Llamémosle por ejemplo <<.tid "~$:/config/ViewToolbarButtons/Visibility/Receta"">>. Escribe `reveal` en el cuerpo y guárdalo.
+# Hay que crear un tiddler que le diga a ~TiddlyWIki si el botón será o no visible en la barra. Llamémosle por ejemplo <<.tid "~$:/config/ViewToolbarButtons/Visibility/Receta"">>. Escribe `show` en el cuerpo y guárdalo.
 
 # Habrá que posicionar el botón adecuadamente. Abre el tiddler <<.tid ~$:/tags/ViewToolbar>> e inserta el nombre de tu botón en el lugar adecuado del campo <<.field list>>.
 
