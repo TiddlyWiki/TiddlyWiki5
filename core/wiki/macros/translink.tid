@@ -1,13 +1,12 @@
 title: $:/core/macros/translink
 tags: $:/tags/Macro
 
-\define get-translink-state() $:/state/translink<<current-widget-id>>
 \define translink(title,mode:"block")
 <div class="tc-translink-outer">
 <$link to=<<__title__>>>
 <$text text=<<__title__>>/>
 </$link>
-<$wikify name="state" text=<<get-translink-state>>>
+<$set name="state" value=<<current-widget-id "$:/state/translink">>>
 <span style="float: right;">
 <$reveal state=<<state>> type="nomatch" text="show">
 <$button class=<<tv-config-toolbar-class>> set=<<state>> setTo="show">
@@ -27,6 +26,6 @@ tags: $:/tags/Macro
 </$transclude>
 </div>
 </$reveal>
-</$wikify>
+</$set>
 </div>
 \end
