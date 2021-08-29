@@ -25,7 +25,6 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 </$list>
 
 <$set name="edit-preview-state" value=<<qualify "$:/state/showeditpreview">>>
-
 <$list filter="[all[current]!has[_canonical_uri]]">
 <$vars importTitle=<<qualify $:/ImportImage>> importState=<<qualify $:/state/ImportImage>> >
 <$dropzone importTitle=<<importTitle>> autoOpenOnImport="no" contentTypesFilter={{$:/config/Editor/ImportContentTypesFilter}} class="tc-dropzone-editor" enable={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}} filesOnly="yes" actions=<<importFileActions>> ><$reveal stateTitle=<<edit-preview-state>> type="match" text="yes">
@@ -54,5 +53,4 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 </$dropzone>
 </$vars>
 </$list>
-
 </$set>
