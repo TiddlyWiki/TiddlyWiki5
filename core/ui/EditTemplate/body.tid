@@ -10,8 +10,6 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 <$action-popup $state=<<importState>> $coords="(0,0,0,0)" $floating="yes"/>
 \end
 
-\define edit-preview-state() $:/state/showeditpreview/$(storyTiddler)$
-
 <$list filter="[all[current]has[_canonical_uri]]">
 
 <div class="tc-message-box">
@@ -25,6 +23,8 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 </div>
 
 </$list>
+
+<$set name="edit-preview-state" value=<<qualify "$:/state/showeditpreview">>>
 
 <$list filter="[all[current]!has[_canonical_uri]]">
 <$vars importTitle=<<qualify $:/ImportImage>> importState=<<qualify $:/state/ImportImage>> >
@@ -54,3 +54,5 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 </$dropzone>
 </$vars>
 </$list>
+
+</$set>
