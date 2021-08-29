@@ -61,8 +61,9 @@ FocusManager.prototype.generateRenderTreeFootprint = function(widget,domNode) {
 		footprint.push(domNodeIndex);
 		domNode = domNode.parentNode;
 	}
-	if(widget.domNodes.indexOf(domNode) > -1) {
-		footprint.push(widget.domNodes.indexOf(domNode));
+	var index = widget.domNodes.indexOf(domNode);
+	if(index > -1) {
+		footprint.push(index);
 	}
 	return footprint.reverse();
 };
