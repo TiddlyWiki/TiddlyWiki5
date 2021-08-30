@@ -127,7 +127,6 @@ FocusManager.prototype.findWidgetByRenderTreeFootprint = function(footprint,star
 };
 
 FocusManager.prototype.findWidgetByFootprint = function(rootWidget,widgetInfo) {
-	console.log(widgetInfo);
 	var widget = this.findWidgetByQualifier(widgetInfo.widgetQualifier,rootWidget);
 	if(!widget) {
 		widget = this.findWidgetByRenderTreeFootprint(widgetInfo.widgetTreeFootprint,rootWidget);
