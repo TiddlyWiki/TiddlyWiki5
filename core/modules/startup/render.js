@@ -75,38 +75,15 @@ exports.startup = function() {
 			scrollY = window.scrollY;
 		// Detect the currently focused domNode
 		var currentlyFocusedDomNode = document.activeElement.tagName !== "IFRAME" ? document.activeElement : document.activeElement.contentWindow.document.activeElement;
-		// Find the widget owning the currently focused domNode
-		var focusWidget = $tw.focusManager.findWidgetOwningDomNode($tw.rootWidget,currentlyFocusedDomNode);
-		var renderTreeFootprint;
-		if(focusWidget) {
-			renderTreeFootprint = $tw.focusManager.generateRenderTreeFootprint(focusWidget,currentlyFocusedDomNode);
-		}
-		var widgetTreeFootprint,
-			widgetQualifier,
-			widgetInfo = {};
-		if(focusWidget) {
-			widgetTreeFootprint = $tw.focusManager.generateWidgetTreeFootprint(focusWidget);
-			widgetQualifier = focusWidget.getStateQualifier() + "_" + focusWidget.getCurrentWidgetId();
-			if(focusWidget.engine && focusWidget.engine.getSelectionRange) {
-				var selections = focusWidget.engine.getSelectionRange();
-				widgetInfo.atEndPos = selections.atEndPos,
-				widgetInfo.comprisesFullText = selections.comprisesFullText,
-				widgetInfo.selectionStart = selections.selectionStart,
-				widgetInfo.selectionEnd = selections.selectionEnd;
-			}
-		}
+		// Generate the widget-info object
+		var focusWidgetInfo = $tw.focusManager.getFocusWidgetInfo($tw.rootWidget,currentlyFocusedDomNode);
 		// Process the refresh
 		$tw.hooks.invokeHook("th-page-refreshing");
 		$tw.pageWidgetNode.refresh(deferredChanges);
 		deferredChanges = Object.create(null);
 		$tw.hooks.invokeHook("th-page-refreshed");
-		var refreshedWidget;
-		if(widgetTreeFootprint) {
-			refreshedWidget = $tw.focusManager.findWidgetByFootprint(widgetTreeFootprint,$tw.rootWidget,widgetQualifier);
-		}
-		if(refreshedWidget) {
-			$tw.focusManager.focusWidget(refreshedWidget,renderTreeFootprint,widgetInfo);
-		}
+		// Restore the focus to a focusable Dom Node
+		$tw.focusManager.restoreFocus($tw.rootWidget,focusWidgetInfo);
 		// Restore the scroll position
 		window.scroll(scrollX,scrollY);
 	}

@@ -78,37 +78,14 @@ exports.startup = function() {
 				scrollY = srcWindow.scrollY;
 			// Detect the currently focused domNode
 			var currentlyFocusedDomNode = srcDocument.activeElement.tagName !== "IFRAME" ? srcDocument.activeElement : srcDocument.activeElement.contentWindow.document.activeElement;
-			// Find the widget owning the currently focused domNode
-			var focusWidget = $tw.focusManager.findWidgetOwningDomNode(widgetNode,currentlyFocusedDomNode);
-			var renderTreeFootprint;
-			if(focusWidget) {
-				renderTreeFootprint = $tw.focusManager.generateRenderTreeFootprint(focusWidget,currentlyFocusedDomNode);
-			}
-			var widgetTreeFootprint,
-				widgetQualifier,
-				widgetInfo = {};
-			if(focusWidget) {
-				widgetTreeFootprint = $tw.focusManager.generateWidgetTreeFootprint(focusWidget);
-				widgetQualifier = focusWidget.getStateQualifier() + "_" + focusWidget.getCurrentWidgetId();
-				if(focusWidget.engine && focusWidget.engine.getSelectionRange) {
-					var selections = focusWidget.engine.getSelectionRange();
-					widgetInfo.atEndPos = selections.atEndPos,
-					widgetInfo.comprisesFullText = selections.comprisesFullText,
-					widgetInfo.selectionStart = selections.selectionStart,
-					widgetInfo.selectionEnd = selections.selectionEnd;
-				}
-			}
+			// Generate the widget-info object
+			var focusWidgetInfo = $tw.focusManager.getFocusWidgetInfo(widgetNode,currentlyFocusedDomNode);
 			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
 				styleElement.innerHTML = styleContainer.textContent;
 			}
 			widgetNode.refresh(changes);
-			var refreshedWidget;
-			if(widgetTreeFootprint) {
-				refreshedWidget = $tw.focusManager.findWidgetByFootprint(widgetTreeFootprint,widgetNode,widgetQualifier);
-			}
-			if(refreshedWidget) {
-				$tw.focusManager.focusWidget(refreshedWidget,renderTreeFootprint,widgetInfo);
-			}
+			// Restore the focus to a focusable Dom Node
+			$tw.focusManager.restoreFocus(widgetNode,focusWidgetInfo);
 			// Restore the scroll position
 			srcWindow.scroll(scrollX,scrollY);
 		};
@@ -117,7 +94,8 @@ exports.startup = function() {
 		$tw.utils.addEventListeners(srcDocument,[{
 			name: "keydown",
 			handlerObject: $tw.keyboardManager,
-			handlerMethod: "handleKeydownEvent"
+			handlerMethod: "handleKeydownEvent",
+			document: srcDocument
 		}]);
 		srcWindow.document.documentElement.addEventListener("click",$tw.popup,true);
 		srcWindow.haveInitialisedWindow = true;

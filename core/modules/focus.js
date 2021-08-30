@@ -105,29 +105,32 @@ FocusManager.prototype.findWidgetByRenderTreeFootprint = function(footprint,star
 		count = 0,
 		widget = startingWidget,
 		lastFoundWidget;
-	while(count < footprint.length) {
-		index = footprint[count],
-		lastFoundWidget = widget;
-		if(widget && widget.children) {
-			widget = widget.children[index];
+	if(footprint) {
+		while(count < footprint.length) {
+			index = footprint[count],
+			lastFoundWidget = widget;
+			if(widget && widget.children) {
+				widget = widget.children[index];
+			}
+			if(widget === undefined) {
+				break;
+			}
+			count++;
 		}
-		if(widget === undefined) {
-			break;
+		if(widget) {
+			return widget;
+		} else if(lastFoundWidget) {
+			return lastFoundWidget;
 		}
-		count++;
-	}
-	if(widget) {
-		return widget;
-	} else if(lastFoundWidget) {
-		return lastFoundWidget;
 	}
 	return null;
 };
 
-FocusManager.prototype.findWidgetByFootprint = function(footprint,startingWidget,widgetQualifier) {
-	var widget = this.findWidgetByQualifier(widgetQualifier,startingWidget);
+FocusManager.prototype.findWidgetByFootprint = function(rootWidget,widgetInfo) {
+	console.log(widgetInfo);
+	var widget = this.findWidgetByQualifier(widgetInfo.widgetQualifier,rootWidget);
 	if(!widget) {
-		widget = this.findWidgetByRenderTreeFootprint(footprint,startingWidget);
+		widget = this.findWidgetByRenderTreeFootprint(widgetInfo.widgetTreeFootprint,rootWidget);
 	}
 	return widget;
 };
@@ -145,57 +148,84 @@ FocusManager.prototype.findParentWidgetWithDomNodes = function(widget) {
 	return null;
 };
 
-FocusManager.prototype.focusWidget = function(widget,footprint,widgetInfo) {
-	if(!this.interceptFocusPreservation || this.focusWidgetAnyway === true) {
-		// Find the DomNode corresponding to the widget
-		var counter = 0,
-			savedDomNode,
-			domNode = widget.domNodes[footprint[0]];
-		while(domNode) {
-			counter++;
-			savedDomNode = domNode;
-			domNode = domNode.childNodes[footprint[counter]];
+FocusManager.prototype.getFocusWidgetInfo = function(rootWidget,domNode) {
+	// Get the widget owning the currently focused Dom Node
+	var focusWidget = this.findWidgetOwningDomNode(rootWidget,domNode),
+		renderTreeFootprint,
+		widgetTreeFootprint,
+		widgetQualifier,
+		widgetInfo = {};
+	// Collect information about our widget
+	if(focusWidget) {
+		widgetInfo.renderTreeFootprint = this.generateRenderTreeFootprint(focusWidget,domNode);
+		widgetInfo.widgetTreeFootprint = this.generateWidgetTreeFootprint(focusWidget);
+		widgetInfo.widgetQualifier = focusWidget.getStateQualifier() + "_" + focusWidget.getCurrentWidgetId();
+		if(focusWidget.engine && focusWidget.engine.getSelectionRange) {
+			var selections = focusWidget.engine.getSelectionRange();
+			widgetInfo.comprisesFullText = selections.comprisesFullText;
+			widgetInfo.atEndPos = selections.atEndPos;
+			widgetInfo.selectionStart = selections.selectionStart;
+			widgetInfo.selectionEnd = selections.selectionEnd;
 		}
-		// If we haven't found a DomNode
-		if(savedDomNode === undefined) {
-			savedDomNode = this.findParentWidgetWithDomNodes(widget);
-		}
-		// If the DomNode is hidden
-		if(savedDomNode && savedDomNode.getAttribute && savedDomNode.getAttribute("hidden") === "true") {
-			while(savedDomNode && savedDomNode.getAttribute && savedDomNode.getAttribute("hidden") === "true") {
-				savedDomNode = this.findParentWidgetWithDomNodes(widget);
+	}
+	return widgetInfo;
+};
+
+FocusManager.prototype.restoreFocus = function(rootWidget,widgetInfo) {
+	var widget = this.findWidgetByFootprint(rootWidget,widgetInfo);
+	if(widget) {
+		if(!this.interceptFocusPreservation || this.focusWidgetAnyway === true) {
+			// Find the DomNode corresponding to the widget
+			var footprint = widgetInfo.renderTreeFootprint,
+				counter = 0,
+				foundDomNode,
+				domNode = widget.domNodes[footprint[0]];
+			while(domNode) {
+				counter++;
+				foundDomNode = domNode;
+				domNode = domNode.childNodes[footprint[counter]];
 			}
-		}
-		// If the DomNode is a Text Node, use the parent DomNode
-		if(savedDomNode && (savedDomNode.nodeType === Node.TEXT_NODE)) {
-			savedDomNode = savedDomNode.parentNode;
-		}
-		// If the DomNode doesn't have the tabindex attribute set,
-		// detect if it's a focusable DomNode
-		if(savedDomNode && savedDomNode.getAttribute && savedDomNode.getAttribute("tabindex") === null) {
-			var validTagNames = ["BUTTON","A","INPUT","TEXTAREA"];
-			while((savedDomNode.getAttribute && savedDomNode.getAttribute("tabindex") === null) && (savedDomNode && savedDomNode.tagName && validTagNames.indexOf(savedDomNode.tagName.toUpperCase()) === -1)) {
-				if(savedDomNode.tagName && savedDomNode.tagName.toUpperCase() === "SPAN" && savedDomNode.childNodes[0]) {
-					savedDomNode = savedDomNode.childNodes[0];
-				} else {
-					savedDomNode = savedDomNode.parentNode;
+			// If we haven't found a DomNode
+			if(foundDomNode === undefined) {
+				foundDomNode = this.findParentWidgetWithDomNodes(widget);
+			}
+			// If the DomNode is hidden
+			if(foundDomNode && foundDomNode.getAttribute && foundDomNode.getAttribute("hidden") === "true") {
+				while(foundDomNode && foundDomNode.getAttribute && foundDomNode.getAttribute("hidden") === "true") {
+					foundDomNode = this.findParentWidgetWithDomNodes(widget);
 				}
 			}
-		}
-		// Set an eventual selection-range
-		if(widget.engine && widget.engine.setSelectionRange) {
-			widget.engine.setSelectionRange(widgetInfo.selectionStart,widgetInfo.selectionEnd,widgetInfo.comprisesFullText,widgetInfo.atEndPos);
-			savedDomNode.scrollLeft = widget.engine.getScrollLeft();
-		}
-		// Now focus the DomNode
-		if(savedDomNode && savedDomNode.focus && !this.interceptFocusPreservation) {
-			savedDomNode.focus({preventScroll: true});
-		} else if(this.interceptFocusPreservation) {
+			// If the DomNode is a Text Node, use the parent DomNode
+			if(foundDomNode && (foundDomNode.nodeType === Node.TEXT_NODE)) {
+				foundDomNode = foundDomNode.parentNode;
+			}
+			// If the DomNode doesn't have the tabindex attribute set,
+			// detect if it's a focusable DomNode
+			if(foundDomNode && foundDomNode.getAttribute && foundDomNode.getAttribute("tabindex") === null) {
+				var validTagNames = ["BUTTON","A","INPUT","TEXTAREA"];
+				while((foundDomNode.getAttribute && foundDomNode.getAttribute("tabindex") === null) && (foundDomNode && foundDomNode.tagName && validTagNames.indexOf(foundDomNode.tagName.toUpperCase()) === -1)) {
+					if(foundDomNode.tagName && foundDomNode.tagName.toUpperCase() === "SPAN" && foundDomNode.childNodes[0]) {
+						foundDomNode = foundDomNode.childNodes[0];
+					} else {
+						foundDomNode = foundDomNode.parentNode;
+					}
+				}
+			}
+			// Set an eventual selection-range
+			if(widget.engine && widget.engine.setSelectionRange) {
+				widget.engine.setSelectionRange(widgetInfo.selectionStart,widgetInfo.selectionEnd,widgetInfo.comprisesFullText,widgetInfo.atEndPos);
+				foundDomNode.scrollLeft = widget.engine.getScrollLeft();
+			}
+			// Now focus the DomNode
+			if(foundDomNode && foundDomNode.focus && !this.interceptFocusPreservation) {
+				foundDomNode.focus({preventScroll: true});
+			} else if(this.interceptFocusPreservation) {
+				this.interceptFocusPreservation = false;
+			}
+			this.focusWidgetAnyway = false;
+		} else {
 			this.interceptFocusPreservation = false;
 		}
-		this.focusWidgetAnyway = false;
-	} else {
-		this.interceptFocusPreservation = false;
 	}
 };
 
