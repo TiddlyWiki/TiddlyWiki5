@@ -17,7 +17,7 @@ var rawHash = document.location.hash.substring(1);
 if(rawHash.charAt(0) === "#") {
 	var hash;
 	try{
-		hash = decodeURIComponent(rawHash.substring(1));
+		hash = $tw.utils.decodeURIComponentSafe(rawHash.substring(1));
 	} catch(ex) {
 		console.log("Share plugin: Error decoding location hash",ex);
 	}

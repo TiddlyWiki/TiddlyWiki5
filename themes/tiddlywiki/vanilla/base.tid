@@ -1321,6 +1321,15 @@ html body.tc-body.tc-single-tiddler-window {
 	padding: 0;
 }
 
+.tc-editor-toolbar button.tc-editortoolbar-stamp-button + .tc-popup .tc-drop-down > p {
+	margin: 0;
+	padding: 0;
+}
+
+.tc-editor-toolbar button.tc-editortoolbar-stamp-button + .tc-popup .tc-drop-down a.tc-tiddlylink {
+	font-weight: normal;
+}
+
 /*
 ** Adjustments for fluid-fixed mode
 */
