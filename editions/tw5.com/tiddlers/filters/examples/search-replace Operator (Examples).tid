@@ -6,6 +6,8 @@ type: text/vnd.tiddlywiki
 
 \define myregexp() e|o
 
+\define myregexp2() ^(?!Unlike).*$
+
 \define names() (\w+)\s(\w+)
 
 Replace one string with another:
@@ -22,5 +24,9 @@ Replace all matches of a string irrespective of case:
 You can also use regular expression capture groups in the replacement string:
 `\define names() (\w+)\s(\w+)`
 <<.operator-example 4 """[[John Smith]search-replace::regexp<names>,[$2,$1]]""" >>
+
+To replace everything but a match using a regular expression and the ''multiline'' (m) flag:
+`\define myregexp2() ^(?!Unlike).*$`
+<<.operator-example 5 """[[HelloThere]get[text]search-replace:gm:regexp<myregexp2>,[]]""">>
 
 {{How to remove stop words}}
