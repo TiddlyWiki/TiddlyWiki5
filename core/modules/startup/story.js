@@ -120,10 +120,10 @@ function openStartupTiddlers(options) {
 		var hash = $tw.locationHash.substr(1),
 			split = hash.indexOf(":");
 		if(split === -1) {
-			target = decodeURIComponent(hash.trim());
+			target = $tw.utils.decodeURIComponentSafe(hash.trim());
 		} else {
-			target = decodeURIComponent(hash.substr(0,split).trim());
-			storyFilter = decodeURIComponent(hash.substr(split + 1).trim());
+			target = $tw.utils.decodeURIComponentSafe(hash.substr(0,split).trim());
+			storyFilter = $tw.utils.decodeURIComponentSafe(hash.substr(split + 1).trim());
 		}
 	}
 	// If the story wasn't specified use the current tiddlers or a blank story

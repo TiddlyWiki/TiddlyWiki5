@@ -164,7 +164,7 @@ var importDataTypes = [
 	}},
 	{type: "URL", IECompatible: true, toTiddlerFieldsArray: function(data,fallbackTitle) {
 		// Check for tiddler data URI
-		var match = decodeURIComponent(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
+		var match = $tw.utils.decodeURIComponentSafe(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
 		if(match) {
 			return parseJSONTiddlers(match[1],fallbackTitle);
 		} else {
@@ -173,7 +173,7 @@ var importDataTypes = [
 	}},
 	{type: "text/x-moz-url", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
 		// Check for tiddler data URI
-		var match = decodeURIComponent(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
+		var match = $tw.utils.decodeURIComponentSafe(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
 		if(match) {
 			return parseJSONTiddlers(match[1],fallbackTitle);
 		} else {

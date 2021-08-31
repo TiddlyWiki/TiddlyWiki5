@@ -346,8 +346,8 @@ TiddlyWebAdaptor.prototype.parseEtag = function(etag) {
 		return null;
 	} else {
 		return {
-			bag: decodeURIComponent(etag.substring(1,firstSlash)),
-			title: decodeURIComponent(etag.substring(firstSlash + 1,lastSlash)),
+			bag: $tw.utils.decodeURIComponentSafe(etag.substring(1,firstSlash)),
+			title: $tw.utils.decodeURIComponentSafe(etag.substring(firstSlash + 1,lastSlash)),
 			revision: etag.substring(lastSlash + 1,colon)
 		};
 	}
