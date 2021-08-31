@@ -236,9 +236,6 @@ FramedEngine.prototype.handleFocusEvent = function(event) {
 Handle a blur event
 */
 FramedEngine.prototype.handleBlurEvent = function(event) {
-	if(!$tw.focusManager.interceptFocusPreservation) {
-		$tw.focusManager.focusWidgetAnyway = true;
-	}
 	var currentTiddler = this.widget.document.querySelector('[data-tiddler-title="' + $tw.utils.escapeCSS(this.widget.editTitle) + '"].tc-tiddler-frame');
 	if(currentTiddler) {
 		$tw.utils.removeClass(currentTiddler,"tc-focused");

@@ -49,7 +49,7 @@ exports.startup = function() {
 		}
 		if(element && element.focus) {
 			if(event.paramObject.forceFocus === "true") {
-				$tw.focusManager.focusWidgetAnyway = true;
+				$tw.focusManager.interceptFocusPreservation = true;
 			};
 			element.focus(event.paramObject);
 		}

@@ -140,11 +140,6 @@ function CodeMirrorEngine(options) {
 			$tw.popup.cancel(0);	
 		}
 	});
-	this.cm.on("blur",function(cm,event) {
-		if(!$tw.focusManager.interceptFocusPreservation) {
-			$tw.focusManager.focusWidgetAnyway = true;
-		}
-	});
 	// Add drag and drop event listeners if fileDrop is enabled
 	if(this.widget.isFileDropEnabled) {
 		// If the drag event contains Files, prevent the default CodeMirror handling
