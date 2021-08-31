@@ -38,7 +38,7 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 		targetElement.scrollIntoView();
 	}
 	var currentTiddler = this.listWidget.document.querySelector('[data-tiddler-title="' + $tw.utils.escapeCSS(historyInfo.title) + '"].tc-tiddler-frame');
-	if(currentTiddler) {
+	if(currentTiddler && !$tw.focusManager.interceptFocusPreservation) {
 		$tw.focusManager.interceptFocusPreservation = true;
 		currentTiddler.focus({preventScroll: true});
 	}
