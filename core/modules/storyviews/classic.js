@@ -19,6 +19,7 @@ var ClassicStoryView = function(listWidget) {
 };
 
 ClassicStoryView.prototype.navigateTo = function(historyInfo) {
+	var self = this;
 	var duration = $tw.utils.getAnimationDuration()
 	var listElementIndex = this.listWidget.findListItem(0,historyInfo.title);
 	if(listElementIndex === undefined) {
@@ -35,6 +36,11 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 		this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});
 	} else {
 		targetElement.scrollIntoView();
+	}
+	var currentTiddler = this.listWidget.document.querySelector('[data-tiddler-title="' + $tw.utils.escapeCSS(historyInfo.title) + '"].tc-tiddler-frame');
+	if(currentTiddler) {
+		$tw.focusManager.interceptFocusPreservation = true;
+		currentTiddler.focus({preventScroll: true});
 	}
 };
 

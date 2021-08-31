@@ -29,6 +29,11 @@ PopStoryView.prototype.navigateTo = function(historyInfo) {
 	}
 	// Scroll the node into view
 	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});
+	var currentTiddler = this.listWidget.document.querySelector('[data-tiddler-title="' + $tw.utils.escapeCSS(historyInfo.title) + '"].tc-tiddler-frame');
+	if(currentTiddler) {
+		$tw.focusManager.interceptFocusPreservation = true;
+		currentTiddler.focus({preventScroll: true});
+	}
 };
 
 PopStoryView.prototype.insert = function(widget) {

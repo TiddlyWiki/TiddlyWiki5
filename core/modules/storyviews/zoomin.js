@@ -111,6 +111,11 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 			}
 		},duration);
 	}
+	var currentTiddler = this.listWidget.document.querySelector('[data-tiddler-title="' + $tw.utils.escapeCSS(historyInfo.title) + '"].tc-tiddler-frame');
+	if(currentTiddler) {
+		$tw.focusManager.interceptFocusPreservation = true;
+		currentTiddler.focus({preventScroll: true});
+	}
 	// Scroll the target into view
 //	$tw.pageScroller.scrollIntoView(targetElement);
 };
