@@ -207,10 +207,8 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 LinkWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	var hideMissingLinks = (this.getVariable("tv-show-missing-links") || "yes") === "no";
 	if(changedAttributes.to || changedTiddlers[this.to] || changedAttributes["aria-label"] || changedAttributes.tooltip ||
-		changedAttributes["class"] || changedAttributes.tabindex || changedAttributes.draggable || changedAttributes.tag ||
-		hideMissingLinks !== this.hideMissingLinks) {
+		changedAttributes["class"] || changedAttributes.tabindex || changedAttributes.draggable || changedAttributes.tag) {
 		this.refreshSelf();
 		return true;
 	}
