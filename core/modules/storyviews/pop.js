@@ -38,18 +38,19 @@ PopStoryView.prototype.insert = function(widget) {
 	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
+	var scrollContainer = $tw.utils.getScrollContainer(targetElement);
 	// Reset once the transition is over
 	setTimeout(function() {
 		$tw.utils.setStyle(targetElement,[
 			{transition: "none"},
 			{transform: "none"}
 		]);
-		$tw.utils.setStyle(widget.document.body,[
+		$tw.utils.setStyle(scrollContainer,[
 			{"overflow-x": ""}
 		]);
 	},duration);
 	// Prevent the page from overscrolling due to the zoom factor
-	$tw.utils.setStyle(widget.document.body,[
+	$tw.utils.setStyle(scrollContainer,[
 		{"overflow-x": "hidden"}
 	]);
 	// Set up the initial position of the element
