@@ -68,7 +68,7 @@ exports.toggleClass = function(el,className,status) {
 Get the first parent element that has scrollbars or use the body as fallback.
 From https://stackoverflow.com/questions/35939886/find-first-scrollable-parent
 */
-exports.getScrollContainer = function(el) {
+exports.getScrollContainer = function(el,includeHidden) {
 	var doc = el.ownerDocument;
 	var style = getComputedStyle(el);
 	var excludeStaticParent = style.position === "absolute";
