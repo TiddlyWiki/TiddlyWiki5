@@ -76,7 +76,7 @@ exports.getScrollContainer = function(el,includeHidden) {
 	if(style.position === "fixed") {
 		return doc.body;
 	}
-	for(var parent=el;(parent = parent.parentElement);) {
+	for(var parent=el;parent = parent.parentElement;) {
 		style = getComputedStyle(parent);
 		if(excludeStaticParent && style.position === "static") {
 			continue;
