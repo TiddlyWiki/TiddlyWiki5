@@ -79,6 +79,7 @@ exports.getScrollableElements = function(doc) {
 /*
 Get the first parent element that has scrollbars or use the body as fallback.
 From https://stackoverflow.com/questions/35939886/find-first-scrollable-parent/42543908#42543908
+Also, fix for scrollTop bug: https://dev.opera.com/articles/fixing-the-scrolltop-bug/
 */
 exports.getScrollContainer = function(el,includeHidden) {
 	var doc = el.ownerDocument;
