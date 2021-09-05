@@ -69,7 +69,7 @@ exports.getScrollableElements = function(doc) {
 		scrollers = [];
 	for(var i=0; i<elements.length; i++) {
 		var scrollContainer = $tw.utils.getScrollContainer(elements[i]);
-		if(scrollers.indexOf(scrollContainer) === -1 && $tw.utils.domContains(doc,scrollContainer)) {
+		if(scrollers.indexOf(scrollContainer) === -1) {
 			scrollers.push(scrollContainer);
 		}
 	}
