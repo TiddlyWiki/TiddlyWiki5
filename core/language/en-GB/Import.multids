@@ -30,5 +30,5 @@ Upgrader/System/Warning: Core module tiddler.
 Upgrader/System/Alert: You are about to import a tiddler that will overwrite a core module tiddler. This is not recommended as it may make the system unstable.
 Upgrader/ThemeTweaks/Created: Migrated theme tweak from <$text text=<<from>>/>.
 Upgrader/Tiddler/Disabled: Disabled tiddler.
-Upgrader/Tiddler/Selected: User selected.
+Upgrader/Tiddler/Selected: Selected tiddler.
 Upgrader/Tiddler/Unselected: Unselected tiddler.
