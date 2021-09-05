@@ -167,7 +167,7 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 Gets the bounding rectangle of an element in absolute page coordinates
 */
 exports.getBoundingPageRect = function(element) {
-	var scrollPos = $tw.utils.getScrollPosition(element.ownerDocument.defaultView),
+	var scrollPos = $tw.utils.getScrollPosition($tw.utils.getScrollContainer(element)),
 		clientRect = element.getBoundingClientRect();
 	return {
 		left: clientRect.left + scrollPos.x,
