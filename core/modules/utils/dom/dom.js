@@ -64,13 +64,16 @@ exports.toggleClass = function(el,className,status) {
 	}
 };
 
-exports.getScrollableElements = function(doc) {
+exports.getScrollableDescriptors = function(doc) {
 	var elements = doc.querySelectorAll("*"),
 		scrollers = [];
 	for(var i=0; i<elements.length; i++) {
 		var scrollContainer = $tw.utils.getScrollContainer(elements[i]);
 		if(scrollers.indexOf(scrollContainer) === -1) {
-			scrollers.push(scrollContainer);
+			scrollers.push({
+				scrollContainer: scrollContainer,
+				scrollPosition: $tw.utils.getScrollPosition(scrollContainer)
+			});
 		}
 	}
 	return scrollers;
@@ -129,7 +132,9 @@ exports.getScrollPosition = function(scrollContainer) {
 	}
 };
 
-exports.setScrollPosition = function(scrollContainer,scrollPosition) {
+exports.setScrollPosition = function(scrollDescriptor) {
+	var scrollContainer = scrollDescriptor.scrollContainer,
+		scrollPosition = scrollDescriptor.scrollPosition;
 	if("scrollX" in scrollContainer) {
 		scrollContainer.scrollX = scrollPosition.x;
 		scrollContainer.scrollY = scrollPosition.y;

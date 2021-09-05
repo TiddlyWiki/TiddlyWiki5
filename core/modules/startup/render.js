@@ -70,18 +70,14 @@ exports.startup = function() {
 	var deferredChanges = Object.create(null),
 		timerId;
 	function refresh() {
-		var scrollableElements = $tw.utils.getScrollableElements(document);
-		var scrollPositions = [];
-		for(var i=0; i<scrollableElements.length; i++) {
-			scrollPositions.push($tw.utils.getScrollPosition(scrollableElements[i]));
-		}
+		var scrollableDescriptors = $tw.utils.getScrollableDescriptors(document);
 		// Process the refresh
 		$tw.hooks.invokeHook("th-page-refreshing");
 		$tw.pageWidgetNode.refresh(deferredChanges);
 		deferredChanges = Object.create(null);
 		$tw.hooks.invokeHook("th-page-refreshed");
-		for(var k=0; k<scrollableElements.length; k++) {
-			$tw.utils.setScrollPosition(scrollableElements[k],scrollPositions[k]);
+		for(var k=0; k<scrollableDescriptors.length; k++) {
+			$tw.utils.setScrollPosition(scrollableDescriptors[k]);
 		}
 	}
 	// Add the change event handler
