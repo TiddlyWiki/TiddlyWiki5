@@ -67,6 +67,7 @@ exports.toggleClass = function(el,className,status) {
 /*
 Get the first parent element that has scrollbars or use the body as fallback.
 From https://stackoverflow.com/questions/35939886/find-first-scrollable-parent/42543908#42543908
+Also, fix for scrollTop bug: https://dev.opera.com/articles/fixing-the-scrolltop-bug/
 */
 exports.getScrollContainer = function(el,includeHidden) {
 	var doc = el.ownerDocument;
@@ -74,7 +75,13 @@ exports.getScrollContainer = function(el,includeHidden) {
 	var excludeStaticParent = style.position === "absolute";
 	var overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
 	if(style.position === "fixed") {
-		return doc.body;
+		if("scrollingElement" in doc) {
+			return doc.scrollingElement;
+		}
+		if(navigator.userAgent.indexOf("WebKit") !== -1) {
+			return doc.body;
+		}
+		return doc.documentElement;
 	}
 	for(var parent=el; parent=parent.parentElement; ) {
 		style = getComputedStyle(parent);
@@ -85,7 +92,13 @@ exports.getScrollContainer = function(el,includeHidden) {
 			return parent;
 		}
 	}
-	return doc.body;
+	if("scrollingElement" in doc) {
+		return doc.scrollingElement;
+	}
+	if(navigator.userAgent.indexOf("WebKit") !== -1) {
+		return doc.body;
+	}
+	return doc.documentElement;
 };
 
 /*
