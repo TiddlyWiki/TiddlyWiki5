@@ -64,16 +64,13 @@ exports.toggleClass = function(el,className,status) {
 	}
 };
 
-exports.getScrollableDescriptors = function(doc) {
+exports.getScrollableElements = function(doc) {
 	var elements = doc.querySelectorAll("*"),
 		scrollers = [];
 	for(var i=0; i<elements.length; i++) {
 		var scrollContainer = $tw.utils.getScrollContainer(elements[i]);
-		if(scrollers.indexOf(scrollContainer) === -1) {
-			scrollers.push({
-				scrollContainer: scrollContainer,
-				scrollPosition: $tw.utils.getScrollPosition(scrollContainer)
-			});
+		if(scrollers.indexOf(scrollContainer) === -1 && $tw.utils.domContains(doc,scrollContainer)) {
+			scrollers.push(scrollContainer);
 		}
 	}
 	return scrollers;
@@ -132,9 +129,7 @@ exports.getScrollPosition = function(scrollContainer) {
 	}
 };
 
-exports.setScrollPosition = function(scrollDescriptor) {
-	var scrollContainer = scrollDescriptor.scrollContainer,
-		scrollPosition = scrollDescriptor.scrollPosition;
+exports.setScrollPosition = function(scrollContainer,scrollPosition) {
 	if("scrollX" in scrollContainer) {
 		scrollContainer.scrollX = scrollPosition.x;
 		scrollContainer.scrollY = scrollPosition.y;
