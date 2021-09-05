@@ -64,18 +64,52 @@ exports.toggleClass = function(el,className,status) {
 	}
 };
 
-/*
-Get the first parent element that has scrollbars or use the body as fallback.
-*/
-exports.getScrollContainer = function(el) {
-	var doc = el.ownerDocument;
-	while(el.parentNode) {
-		el = el.parentNode;
-		if(el.scrollTop) {
-			return el;
+exports.getScrollableElements = function(doc) {
+	var elements = doc.querySelectorAll("*"),
+		scrollers = [];
+	for(var i=0; i<elements.length; i++) {
+		var scrollContainer = $tw.utils.getScrollContainer(elements[i]);
+		if(scrollers.indexOf(scrollContainer) === -1) {
+			scrollers.push(scrollContainer);
 		}
 	}
-	return doc.body;
+	return scrollers;
+};
+
+/*
+Get the first parent element that has scrollbars or use the body as fallback.
+From https://stackoverflow.com/questions/35939886/find-first-scrollable-parent/42543908#42543908
+*/
+exports.getScrollContainer = function(el,includeHidden) {
+	var doc = el.ownerDocument;
+	var style = getComputedStyle(el);
+	var excludeStaticParent = style.position === "absolute";
+	var overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
+	if(style.position === "fixed") {
+		if("scrollingElement" in doc) {
+			return doc.scrollingElement;
+		}
+		if(navigator.userAgent.indexOf("WebKit") !== -1) {
+			return doc.body;
+		}
+		return doc.documentElement;
+	}
+	for(var parent=el; parent=parent.parentElement; ) {
+		style = getComputedStyle(parent);
+		if(excludeStaticParent && style.position === "static") {
+			continue;
+		}
+		if(overflowRegex.test(style.overflow + style.overflowY + style.overflowX)) {
+			return parent;
+		}
+	}
+	if("scrollingElement" in doc) {
+		return doc.scrollingElement;
+	}
+	if(navigator.userAgent.indexOf("WebKit") !== -1) {
+		return doc.body;
+	}
+	return doc.documentElement;
 };
 
 /*
@@ -86,12 +120,21 @@ Returns:
 		y: vertical scroll position in pixels
 	}
 */
-exports.getScrollPosition = function(srcWindow) {
-	var scrollWindow = srcWindow || window;
-	if("scrollX" in scrollWindow) {
-		return {x: scrollWindow.scrollX, y: scrollWindow.scrollY};
+exports.getScrollPosition = function(scrollContainer) {
+	if("scrollX" in scrollContainer) {
+		return {x: scrollContainer.scrollX, y: scrollContainer.scrollY};
 	} else {
-		return {x: scrollWindow.document.documentElement.scrollLeft, y: scrollWindow.document.documentElement.scrollTop};
+		return {x: scrollContainer.scrollLeft, y: scrollContainer.scrollTop};
+	}
+};
+
+exports.setScrollPosition = function(scrollContainer,scrollPosition) {
+	if("scrollX" in scrollContainer) {
+		scrollContainer.scrollX = scrollPosition.x;
+		scrollContainer.scrollY = scrollPosition.y;
+	} else {
+		scrollContainer.scrollLeft = scrollPosition.x;
+		scrollContainer.scrollTop = scrollPosition.y;
 	}
 };
 

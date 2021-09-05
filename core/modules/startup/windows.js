@@ -73,10 +73,18 @@ exports.startup = function() {
 		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
+			var scrollableElements = $tw.utils.getScrollableElements(document);
+			var scrollPositions = [];
+			for(var i=0; i<scrollableElements.length; i++) {
+				scrollPositions.push($tw.utils.getScrollPosition(scrollableElements[i]));
+			}
 			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
 				styleElement.innerHTML = styleContainer.textContent;
 			}
 			widgetNode.refresh(changes);
+			for(var k=0; k<scrollableElements.length; k++) {
+				$tw.utils.setScrollPosition(scrollableElements[k],scrollPositions[k]);
+			}
 		};
 		$tw.wiki.addEventListener("change",refreshHandler);
 		// Listen for keyboard shortcuts
