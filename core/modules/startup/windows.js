@@ -73,7 +73,7 @@ exports.startup = function() {
 		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
-			var scrollableElements = $tw.utils.getScrollableElements(document);
+			var scrollableElements = $tw.utils.getScrollableElements(srcDocument);
 			var scrollPositions = [];
 			for(var i=0; i<scrollableElements.length; i++) {
 				scrollPositions.push($tw.utils.getScrollPosition(scrollableElements[i]));
