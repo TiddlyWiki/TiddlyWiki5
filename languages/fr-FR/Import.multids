@@ -1,9 +1,10 @@
 title: $:/language/Import/
 
 Editor/Import/Heading: Images à importer et à insérer dans l'éditeur.
-Imported/Hint:  Les tiddlers suivants ont été importés :
+Imported/Hint:  Les tiddlers suivants ont été importés :
 Listing/Cancel/Caption: Annuler
-Listing/Hint: Les tiddlers suivants sont prêts pour l'importation :
+Listing/Cancel/Warning: Souhaitez-vous annuler l'importation ?
+Listing/Hint: Les tiddlers suivants sont prêts pour l'importation :
 Listing/Import/Caption: Importer
 Listing/Select/Caption: Sélectionner
 Listing/Status/Caption: Statut
@@ -18,12 +19,16 @@ Listing/Rename/Tooltip: Renommer le tiddler avant l'importation
 Listing/Rename/Prompt: Renommer en :
 Listing/Rename/ConfirmRename: Renommer le tiddler
 Listing/Rename/CancelRename: Annuler
-Listing/Rename/OverwriteWarning: Un tiddler avec le même titre existe déjà
-Upgrader/Plugins/Suppressed/Incompatible: Plugin bloqué : incompatible ou obsolète
-Upgrader/Plugins/Suppressed/Version: Plugin bloqué (la version <<incoming>> en cours d'importation est plus ancienne que la version <<existing>> actuelle)
-Upgrader/Plugins/Upgraded: Plugin mis à jour depuis <<incoming>> vers <<upgraded>>
-Upgrader/State/Suppressed: Tiddler d'état temporaire bloqué
-Upgrader/System/Suppressed: Tiddler système bloqué
-Upgrader/System/Warning: Tiddler du module //core//
-Upgrader/System/Alert: Vous êtes sur le point d'importer un tiddler qui écrasera un tiddler du module //core//. Ceci est déconseillé car cela peut rendre le système instable
-Upgrader/ThemeTweaks/Created: Thème modifié à partir de <$text text=<<from>>/>
+Listing/Rename/OverwriteWarning: Un tiddler avec le même titre existe déjà.
+Upgrader/Plugins/Suppressed/Incompatible: Plugin bloqué : incompatible ou obsolète.
+Upgrader/Plugins/Suppressed/Version: Plugin bloqué (la version <<incoming>> en cours d'importation est plus ancienne que la version <<existing>> actuelle).
+Upgrader/Plugins/Upgraded: Plugin mis à jour depuis <<incoming>> vers <<upgraded>>.
+Upgrader/State/Suppressed: Tiddler d'état temporaire bloqué.
+Upgrader/System/Disabled: Tiddler système désactivé.
+Upgrader/System/Suppressed: Tiddler système bloqué.
+Upgrader/System/Warning: Tiddler du module //core//.
+Upgrader/System/Alert: Vous êtes sur le point d'importer un tiddler qui écrasera un tiddler du module //core//. Ceci est déconseillé car cela peut rendre le système instable.
+Upgrader/ThemeTweaks/Created: Thème modifié à partir de <$text text=<<from>>/>.
+Upgrader/Tiddler/Disabled: Tiddler désactivé.
+Upgrader/Tiddler/Selected: Tiddler sélectionné.
+Upgrader/Tiddler/Unselected: Tiddler désélectionné.
