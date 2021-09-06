@@ -30,5 +30,5 @@ Upgrader/System/Warning: 核心模块条目。
 Upgrader/System/Alert: 您即将导入一个条目会覆盖一个核心模块条目。不建议这样做，因为可能会使系统不稳定。
 Upgrader/ThemeTweaks/Created: 从 <$text text=<<from>>/> 迁移布景主题。
 Upgrader/Tiddler/Disabled: 已禁用系統条目。
-Upgrader/Tiddler/Selected: 用户选定。
-Upgrader/Tiddler/Unselected: 未选定的条目
+Upgrader/Tiddler/Selected: 选定的条目。
+Upgrader/Tiddler/Unselected: 未选定的条目。
