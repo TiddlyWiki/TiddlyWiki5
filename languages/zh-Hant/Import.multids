@@ -30,5 +30,5 @@ Upgrader/System/Warning: 核心模組條目。
 Upgrader/System/Alert: 您即將導入一個條目會覆蓋一個核心模組條目。不建議這樣做，因為可能會使系統不穩定。
 Upgrader/ThemeTweaks/Created: 從 <$text text=<<from>>/> 遷移佈景主題。
 Upgrader/Tiddler/Disabled: 停用條目。
-Upgrader/Tiddler/Selected: 使用者選定。
+Upgrader/Tiddler/Selected: 選定的條目。
 Upgrader/Tiddler/Unselected: 未選定的條目。
