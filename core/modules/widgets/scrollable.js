@@ -162,7 +162,9 @@ ScrollableWidget.prototype.render = function(parent,nextSibling) {
 	this.innerDomNode = this.document.createElement("div");
 	this.outerDomNode.appendChild(this.innerDomNode);
 	// Assign classes
-	this.outerDomNode.className = this["class"] || "";
+	var classes = (this["class"] || "").split(" ");
+	classes.push("tc-scrollable-element");
+	this.outerDomNode.className = classes.join(" ");
 	// Insert element
 	parent.insertBefore(this.outerDomNode,nextSibling);
 	this.renderChildren(this.innerDomNode,null);
