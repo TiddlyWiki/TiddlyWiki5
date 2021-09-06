@@ -66,16 +66,39 @@ exports.toggleClass = function(el,className,status) {
 
 /*
 Get the first parent element that has scrollbars or use the body as fallback.
+From https://stackoverflow.com/questions/35939886/find-first-scrollable-parent/42543908#42543908
+Also, fix for scrollTop bug: https://dev.opera.com/articles/fixing-the-scrolltop-bug/
 */
-exports.getScrollContainer = function(el) {
+exports.getScrollContainer = function(el,includeHidden) {
 	var doc = el.ownerDocument;
-	while(el.parentNode) {
-		el = el.parentNode;
-		if(el.scrollTop) {
-			return el;
+	var style = getComputedStyle(el);
+	var excludeStaticParent = style.position === "absolute";
+	var overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
+	if(style.position === "fixed") {
+		if("scrollingElement" in doc) {
+			return doc.scrollingElement;
+		}
+		if(navigator.userAgent.indexOf("WebKit") !== -1) {
+			return doc.body;
+		}
+		return doc.documentElement;
+	}
+	for(var parent=el; parent=parent.parentElement; ) {
+		style = getComputedStyle(parent);
+		if(excludeStaticParent && style.position === "static") {
+			continue;
+		}
+		if(overflowRegex.test(style.overflow + style.overflowY + style.overflowX)) {
+			return parent;
 		}
 	}
-	return doc.body;
+	if("scrollingElement" in doc) {
+		return doc.scrollingElement;
+	}
+	if(navigator.userAgent.indexOf("WebKit") !== -1) {
+		return doc.body;
+	}
+	return doc.documentElement;
 };
 
 /*
@@ -86,12 +109,11 @@ Returns:
 		y: vertical scroll position in pixels
 	}
 */
-exports.getScrollPosition = function(srcWindow) {
-	var scrollWindow = srcWindow || window;
-	if("scrollX" in scrollWindow) {
-		return {x: scrollWindow.scrollX, y: scrollWindow.scrollY};
+exports.getScrollPosition = function(scrollContainer) {
+	if("scrollX" in scrollContainer) {
+		return {x: scrollContainer.scrollX, y: scrollContainer.scrollY};
 	} else {
-		return {x: scrollWindow.document.documentElement.scrollLeft, y: scrollWindow.document.documentElement.scrollTop};
+		return {x: scrollContainer.scrollLeft, y: scrollContainer.scrollTop};
 	}
 };
 
@@ -124,7 +146,7 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 Gets the bounding rectangle of an element in absolute page coordinates
 */
 exports.getBoundingPageRect = function(element) {
-	var scrollPos = $tw.utils.getScrollPosition(element.ownerDocument.defaultView),
+	var scrollPos = $tw.utils.getScrollPosition($tw.utils.getScrollContainer(element)),
 		clientRect = element.getBoundingClientRect();
 	return {
 		left: clientRect.left + scrollPos.x,
