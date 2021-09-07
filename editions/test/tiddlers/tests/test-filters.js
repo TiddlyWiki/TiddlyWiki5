@@ -491,6 +491,20 @@ function runTests(wiki) {
 		expect(wiki.filterTiddlers("[list[TiddlerSeventh]before[MissingTiddler]]").join(",")).toBe("a fourth tiddler");
 	});
 
+	it("should handle the range operator", function() {
+		expect(wiki.filterTiddlers("[range[10:0:2]]").join(",")).toBe("10,8,6,4,2,0");
+		expect(wiki.filterTiddlers("[range[10;0;2]]").join(",")).toBe("10,8,6,4,2,0");
+		expect(wiki.filterTiddlers("[range[1.001,5,1]]").join(",")).toBe("1.001,2.001,3.001,4.001");
+		expect(wiki.filterTiddlers("[range[0,10]]").join(",")).toBe("0,1,2,3,4,5,6,7,8,9,10");
+		expect(wiki.filterTiddlers("[range[0],[10]]").join(",")).toBe("0,1,2,3,4,5,6,7,8,9,10");
+		expect(wiki.filterTiddlers("[range[10,0]]").join(",")).toBe("10,9,8,7,6,5,4,3,2,1,0");
+		expect(wiki.filterTiddlers("[range[10],[0]]").join(",")).toBe("10,9,8,7,6,5,4,3,2,1,0");
+		expect(wiki.filterTiddlers("[range[0,10,2]]").join(",")).toBe("0,2,4,6,8,10");
+		expect(wiki.filterTiddlers("[range[0],[10],[2]]").join(",")).toBe("0,2,4,6,8,10");
+		expect(wiki.filterTiddlers("[range[10,0,2]]").join(",")).toBe("10,8,6,4,2,0");
+		expect(wiki.filterTiddlers("[range[10],[0],[2]]").join(",")).toBe("10,8,6,4,2,0");
+	});
+
 	it("should handle the string operators", function() {
 		expect(wiki.filterTiddlers("John Paul George Ringo +[length[]]").join(",")).toBe("4,4,6,5");
 		expect(wiki.filterTiddlers("John Paul George Ringo +[uppercase[]]").join(",")).toBe("JOHN,PAUL,GEORGE,RINGO");
