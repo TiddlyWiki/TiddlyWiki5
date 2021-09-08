@@ -29,6 +29,70 @@ FileSystemAdaptor.prototype.name = "filesystem";
 
 FileSystemAdaptor.prototype.supportsLazyLoading = false;
 
+/*
+Show a filesystem errorlog alert
+*/
+FileSystemAdaptor.prototype.displayError = function(msg,err) {
+	// Check if there is an existing alert with the same title
+	var self = this,
+		alertTitle = "_alerts/filesytem/error",
+		logTitle = "_logs/filesytem/error",
+		alertTid = this.wiki.getTiddler(alertTitle),
+		logTid = this.wiki.getTiddler(logTitle),
+		alertFields = alertTid? $tw.utils.extend({},alertTid.fields): null,
+		logFields = logTid? $tw.utils.extend({},logTid.fields): null,
+		existingCount,
+		text = "<span style='float:left;margin:2pt 4pt 8pt 4pt'>{{$:/core/images/warning}}</span> " + msg + "; " + err.toString();
+	this.logger.alert(Array.prototype.join.call([
+		$tw.language.getString("Error/WhileSaving") + ":",
+		msg + ":",
+		err.toString()
+	]," "));
+	if(alertFields) {
+		alertFields.text = Array.prototype.join.call([
+			alertFields.text,
+			text
+		],"\n\n")
+		existingCount = alertFields.count || 1;
+	} else {
+		alertFields = {
+			title: alertTitle,
+			text: Array.prototype.join.call([
+				$tw.language.getString("Error/WhileSaving") + ":",
+				text
+			],"\n\n"),
+			tags: ["$:/tags/Alert"],
+			component: this.logger.componentName
+		};
+		existingCount = 0;
+	}
+	alertFields.modified = new Date();
+	if(++existingCount > 1) {
+		alertFields.count = existingCount;
+	} else {
+		alertFields.count = undefined;
+	}
+	this.wiki.addTiddler(new $tw.Tiddler(alertFields));
+	// Alerts are deleted when dismissed, save a copy as a log
+	if(logFields) {
+		logFields.text = Array.prototype.join.call([
+			logFields.text,
+			text
+		],"\n\n")
+	} else {
+		logFields = {
+			title: logTitle,
+			text: Array.prototype.join.call([
+				$tw.language.getString("Error/WhileSaving") + ":",
+				text
+			],"\n\n"),
+			component: this.logger.componentName
+		};
+	}
+	logFields.modified = new Date();
+	this.wiki.addTiddler(new $tw.Tiddler(logFields));
+};
+
 FileSystemAdaptor.prototype.isReady = function() {
 	// The file system adaptor is always ready
 	return true;
@@ -84,16 +148,17 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 		}
 		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err,fileInfo) {
 			if(err) {
+				var message = "Save file failed for [["+tiddler.fields.title+"]] at path `"+options.adaptorInfo.filepath || "undefined"+"`";
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
 					fileInfo = fileInfo || self.boot.files[tiddler.fields.title];
 					fileInfo.writeError = true;
 					self.boot.files[tiddler.fields.title] = fileInfo;
-					$tw.syncer.logger.log("Sync failed for \""+tiddler.fields.title+"\" and will be retried with encoded filepath",encodeURIComponent(fileInfo.filepath));
-					return callback(err);
-				} else {
-					return callback(err);
+					message = message + " and will be retried with an encoded filepath";
 				}
+				self.displayError(message,err);
+				return callback(err);
 			}
+			self.logger.log("Saved \'"+fileInfo.filepath+"\'");
 			// Store new boot info only after successful writes
 			self.boot.files[tiddler.fields.title] = fileInfo;
 			// Cleanup duplicates if the file moved or changed extensions
@@ -104,7 +169,8 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 			};
 			$tw.utils.cleanupTiddlerFiles(options,function(err,fileInfo) {
 				if(err) {
-					return callback(err);
+					// Error deleting the previous file on disk, should fail gracefully
+					self.displayError("Clean up of previous file failed for [["+options.title+"]] at path `"+options.adaptorInfo.filepath || "undefined"+"`",err);
 				}
 				return callback(null,fileInfo);
 			});
@@ -131,13 +197,10 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 	if(fileInfo) {
 		$tw.utils.deleteTiddlerFile(fileInfo,function(err,fileInfo) {
 			if(err) {
-				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
-					// Error deleting the file on disk, should fail gracefully
-					$tw.syncer.displayError("Server desynchronized. Error deleting file for deleted tiddler \"" + title + "\"",err);
-					return callback(null,fileInfo);
-				} else {
-					return callback(err);
-				}
+				// Error deleting the file on disk, should fail gracefully
+				self.displayError("Delete file failed for [[" + title + "]] at path `"+fileInfo.filepath || "undefined"+"`",err);
+			} else {
+				self.logger.log("Deleted \'"+fileInfo.filepath+"\'");
 			}
 			// Remove the tiddler from self.boot.files & return null adaptorInfo
 			delete self.boot.files[title];
