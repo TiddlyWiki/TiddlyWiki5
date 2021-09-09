@@ -129,7 +129,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 		}
 		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err,fileInfo) {
 			if(err) {
-				var message = "Save file failed for [["+tiddler.fields.title+"]] at path `"+options.adaptorInfo.filepath || "undefined"+"`";
+				var message = "Save file failed for [["+tiddler.fields.title+"]] at path `"+(options.adaptorInfo.filepath || "undefined")+"`";
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
 					fileInfo = fileInfo || self.boot.files[tiddler.fields.title];
 					fileInfo.writeError = true;
@@ -151,7 +151,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 			$tw.utils.cleanupTiddlerFiles(options,function(err,fileInfo) {
 				if(err) {
 					// Error deleting the previous file on disk, should fail gracefully
-					self.displayError("Clean up of previous file failed for [["+options.title+"]] at path `"+options.adaptorInfo.filepath || "undefined"+"`",err);
+					self.displayError("Clean up of previous file failed for [["+options.title+"]] at path `"+(options.adaptorInfo.filepath || "undefined")+"`",err);
 				}
 				return callback(null,fileInfo);
 			});
@@ -179,7 +179,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 		$tw.utils.deleteTiddlerFile(fileInfo,function(err) {
 			if(err) {
 				// Error deleting the file on disk, should fail gracefully
-				self.displayError("Delete file failed for [[" + title + "]] at path `"+fileInfo.filepath || "undefined"+"`",err);
+				self.displayError("Delete file failed for [[" + title + "]] at path `"+(fileInfo.filepath || "undefined")+"`",err);
 			} else {
 				self.logger.log("Deleted \'"+fileInfo.filepath+"\'");
 			}
