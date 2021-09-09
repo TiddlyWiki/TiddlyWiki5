@@ -54,7 +54,7 @@ FileSystemAdaptor.prototype.displayError = function(msg,err) {
 	} else {
 		alertFields = {
 			title: alertTitle,
-			text: Array.prototype.join.call([ "<span style='margin:2pt 2pt 2pt 2pt'>{{$:/core/images/warning}}</span> " + $tw.language.getString("Error/WhileSaving") + ":",text],"\n\n"),
+			text: Array.prototype.join.call([ "!! {{$:/core/images/warning}} " + $tw.language.getString("Error/WhileSaving") + ":",text],"\n\n"),
 			tags: ["$:/tags/Alert"],
 			component: this.logger.componentName
 		};
