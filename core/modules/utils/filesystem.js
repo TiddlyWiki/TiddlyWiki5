@@ -482,7 +482,7 @@ exports.deleteTiddlerFile = function(fileInfo,callback) {
 	//Only attempt to delete files that exist on disk
 	if(!fileInfo.filepath || !fs.existsSync(fileInfo.filepath)) {
 		//For some reason, the tiddler is only in memory or we can't modify the file at this path
-		let err = new Error("Non-existant filepath: "+fileInfo.filepath)
+		var err = new Error("Invalid filepath: "+fileInfo.filepath)
 		err.code = "EACCES",
 		err.syscall = "unlink"
 		return callback(err);

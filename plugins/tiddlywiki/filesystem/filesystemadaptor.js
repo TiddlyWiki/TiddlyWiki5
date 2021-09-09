@@ -29,38 +29,30 @@ FileSystemAdaptor.prototype.name = "filesystem";
 
 FileSystemAdaptor.prototype.supportsLazyLoading = false;
 
+FileSystemAdaptor.prototype.setLoggerSaveBuffer = function(loggerForSaving) {
+	this.logger.setSaveBuffer(loggerForSaving);
+};
+
 /*
 Show a filesystem errorlog alert
 */
 FileSystemAdaptor.prototype.displayError = function(msg,err) {
 	// Check if there is an existing alert with the same title
 	var self = this,
-		alertTitle = "_alerts/filesytem/error",
-		logTitle = "_logs/filesytem/error",
+		alertTitle = "_filesytem/errors/alert",
+		logTitle = "_filesytem/errors/log",
 		alertTid = this.wiki.getTiddler(alertTitle),
-		logTid = this.wiki.getTiddler(logTitle),
 		alertFields = alertTid? $tw.utils.extend({},alertTid.fields): null,
-		logFields = logTid? $tw.utils.extend({},logTid.fields): null,
 		existingCount,
 		text = "<span style='float:left;margin:2pt 4pt 8pt 4pt'>{{$:/core/images/warning}}</span> " + msg + "; " + err.toString();
-	this.logger.alert(Array.prototype.join.call([
-		$tw.language.getString("Error/WhileSaving") + ":",
-		msg + ":",
-		err.toString()
-	]," "));
+	this.logger.log(Array.prototype.join.call([$tw.language.getString("Error/WhileSaving") + ":",msg + ":",err.toString()]," "));
 	if(alertFields) {
-		alertFields.text = Array.prototype.join.call([
-			alertFields.text,
-			text
-		],"\n\n")
+		alertFields.text = Array.prototype.join.call([alertFields.text,text],"\n\n")
 		existingCount = alertFields.count || 1;
 	} else {
 		alertFields = {
 			title: alertTitle,
-			text: Array.prototype.join.call([
-				$tw.language.getString("Error/WhileSaving") + ":",
-				text
-			],"\n\n"),
+			text: Array.prototype.join.call([$tw.language.getString("Error/WhileSaving") + ":",text],"\n\n"),
 			tags: ["$:/tags/Alert"],
 			component: this.logger.componentName
 		};
@@ -74,23 +66,12 @@ FileSystemAdaptor.prototype.displayError = function(msg,err) {
 	}
 	this.wiki.addTiddler(new $tw.Tiddler(alertFields));
 	// Alerts are deleted when dismissed, save a copy as a log
-	if(logFields) {
-		logFields.text = Array.prototype.join.call([
-			logFields.text,
-			text
-		],"\n\n")
-	} else {
-		logFields = {
-			title: logTitle,
-			text: Array.prototype.join.call([
-				$tw.language.getString("Error/WhileSaving") + ":",
-				text
-			],"\n\n"),
-			component: this.logger.componentName
-		};
-	}
-	logFields.modified = new Date();
-	this.wiki.addTiddler(new $tw.Tiddler(logFields));
+	this.wiki.addTiddler(new $tw.Tiddler({
+		title: logTitle,
+		text: $tw.utils.getSystemInfo() + "\n\nLog:\n" + self.logger.getBuffer(),
+		component: this.logger.componentName,
+		modified: new Date()
+	}));
 };
 
 FileSystemAdaptor.prototype.isReady = function() {
