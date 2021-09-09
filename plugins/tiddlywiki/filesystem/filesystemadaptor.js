@@ -44,9 +44,9 @@ FileSystemAdaptor.prototype.displayError = function(msg,err) {
 		alertTid = this.wiki.getTiddler(alertTitle),
 		alertFields = alertTid? $tw.utils.extend({},alertTid.fields): null,
 		existingCount,
-		text = "<span style='float:left;margin:2pt 4pt 8pt 4pt'>{{$:/core/images/warning}}</span> " + msg + "; " + err.toString();
+		text = "&#9888; " + msg + "; " + err.toString();
 	// Print an orange message to the console
-	console.error("\x1b[1;33m" + $tw.language.getString("Error/WhileSaving") + ":" + "\x1b[0m");
+	console.error("\x1b[1;33m" + $tw.language.getString("Error/WhileSaving") + ": see the tiddler '_filesystem/errors/log' for details." + "\x1b[0m");
 	this.logger.log(Array.prototype.join.call([$tw.language.getString("Error/WhileSaving") + ":",msg + ":",err.toString()]," "));
 	if(alertFields) {
 		alertFields.text = Array.prototype.join.call([alertFields.text,text],"\n\n")
@@ -54,7 +54,7 @@ FileSystemAdaptor.prototype.displayError = function(msg,err) {
 	} else {
 		alertFields = {
 			title: alertTitle,
-			text: Array.prototype.join.call([$tw.language.getString("Error/WhileSaving") + ":",text],"\n\n"),
+			text: Array.prototype.join.call([ "{{$:/core/images/warning}} " + $tw.language.getString("Error/WhileSaving") + ":",text],"\n\n"),
 			tags: ["$:/tags/Alert"],
 			component: this.logger.componentName
 		};
