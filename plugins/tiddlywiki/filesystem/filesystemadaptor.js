@@ -176,7 +176,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 		fileInfo = this.boot.files[title];
 	// Only delete the tiddler if we have writable information for the file
 	if(fileInfo) {
-		$tw.utils.deleteTiddlerFile(fileInfo,function(err,fileInfo) {
+		$tw.utils.deleteTiddlerFile(fileInfo,function(err) {
 			if(err) {
 				// Error deleting the file on disk, should fail gracefully
 				self.displayError("Delete file failed for [[" + title + "]] at path `"+fileInfo.filepath || "undefined"+"`",err);
