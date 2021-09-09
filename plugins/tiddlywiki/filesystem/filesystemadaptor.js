@@ -46,7 +46,7 @@ FileSystemAdaptor.prototype.displayError = function(msg,err) {
 		existingCount,
 		text = "&#9888; " + msg + "; " + err.toString();
 	// Print an orange message to the console
-	console.error("\x1b[1;33m" + $tw.language.getString("Error/WhileSaving") + ": see the tiddler '_filesystem/errors/log' for details." + "\x1b[0m");
+	console.error("\x1b[1;33m" + $tw.language.getString("Error/WhileSaving") + ": see the '_filesystem/errors/log' tiddler for details." + "\x1b[0m");
 	this.logger.log(Array.prototype.join.call([$tw.language.getString("Error/WhileSaving") + ":",msg + ":",err.toString()]," "));
 	if(alertFields) {
 		alertFields.text = Array.prototype.join.call([alertFields.text,text],"\n\n")
@@ -54,7 +54,7 @@ FileSystemAdaptor.prototype.displayError = function(msg,err) {
 	} else {
 		alertFields = {
 			title: alertTitle,
-			text: Array.prototype.join.call([ "{{$:/core/images/warning}} " + $tw.language.getString("Error/WhileSaving") + ":",text],"\n\n"),
+			text: Array.prototype.join.call([ "<span style='margin:2pt 2pt 2pt 2pt'>{{$:/core/images/warning}}</span> " + $tw.language.getString("Error/WhileSaving") + ":",text],"\n\n"),
 			tags: ["$:/tags/Alert"],
 			component: this.logger.componentName
 		};
@@ -132,7 +132,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 		}
 		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err,fileInfo) {
 			if(err) {
-				var message = "Save file failed for [["+tiddler.fields.title+"]] at path `"+(options.adaptorInfo.filepath || "undefined")+"`";
+				var message = "Save file failed for [["+tiddler.fields.title+"]]";
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
 					fileInfo = fileInfo || self.boot.files[tiddler.fields.title];
 					fileInfo.writeError = true;
@@ -154,7 +154,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 			$tw.utils.cleanupTiddlerFiles(options,function(err,fileInfo) {
 				if(err) {
 					// Error deleting the previous file on disk, should fail gracefully
-					self.displayError("Clean up of previous file failed for [["+options.title+"]] at path `"+(options.adaptorInfo.filepath || "undefined")+"`",err);
+					self.displayError("Clean up of previous file failed for [["+options.title+"]]",err);
 				}
 				return callback(null,fileInfo);
 			});
@@ -182,7 +182,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 		$tw.utils.deleteTiddlerFile(fileInfo,function(err) {
 			if(err) {
 				// Error deleting the file on disk, should fail gracefully
-				self.displayError("Delete file failed for [[" + title + "]] at path `"+(fileInfo.filepath || "undefined")+"`",err);
+				self.displayError("Delete file failed for [[" + title + "]]",err);
 			} else {
 				self.logger.log("Deleted \'"+fileInfo.filepath+"\'");
 			}
