@@ -45,6 +45,8 @@ FileSystemAdaptor.prototype.displayError = function(msg,err) {
 		alertFields = alertTid? $tw.utils.extend({},alertTid.fields): null,
 		existingCount,
 		text = "<span style='float:left;margin:2pt 4pt 8pt 4pt'>{{$:/core/images/warning}}</span> " + msg + "; " + err.toString();
+	// Print an orange message to the console
+	console.error("\x1b[1;33m" + $tw.language.getString("Error/WhileSaving") + ":" + "\x1b[0m");
 	this.logger.log(Array.prototype.join.call([$tw.language.getString("Error/WhileSaving") + ":",msg + ":",err.toString()]," "));
 	if(alertFields) {
 		alertFields.text = Array.prototype.join.call([alertFields.text,text],"\n\n")
