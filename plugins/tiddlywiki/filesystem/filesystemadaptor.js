@@ -68,6 +68,7 @@ FileSystemAdaptor.prototype.displayError = function(msg,err) {
 	// Alerts are deleted when dismissed, save a copy as a log
 	this.wiki.addTiddler(new $tw.Tiddler({
 		title: logTitle,
+		type: "text/plain",
 		text: $tw.utils.getSystemInfo() + "\n\nLog:\n" + self.logger.getBuffer(),
 		component: this.logger.componentName,
 		modified: new Date()
