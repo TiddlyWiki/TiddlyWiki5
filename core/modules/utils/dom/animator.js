@@ -15,12 +15,17 @@ Orchestrates animations and transitions
 function Animator() {
 	// Get the registered animation modules
 	this.animations = {};
+	this.timerId = null;
 	$tw.modules.applyMethods("animation",this.animations);
 }
 
 Animator.prototype.perform = function(type,domNode,options) {
 	options = options || {};
 	// Find an animation that can handle this type
+	if(this.timerId) {
+		clearTimeout(this.timerId);
+		this.timerId = null;
+	}
 	var chosenAnimation;
 	$tw.utils.each(this.animations,function(animation,name) {
 		if($tw.utils.hop(animation,type)) {
@@ -35,7 +40,7 @@ Animator.prototype.perform = function(type,domNode,options) {
 		};
 	}
 	// Call the animation
-	chosenAnimation(domNode,options);
+	this.timerId = chosenAnimation(domNode,options);
 };
 
 exports.Animator = Animator;

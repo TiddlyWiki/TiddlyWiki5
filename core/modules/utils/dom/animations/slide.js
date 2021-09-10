@@ -23,7 +23,7 @@ function slideOpen(domNode,options) {
 		currPaddingTop = parseInt(computedStyle.paddingTop,10),
 		currHeight = domNode.offsetHeight;
 	// Reset the margin once the transition is over
-	setTimeout(function() {
+	var id = setTimeout(function() {
 		$tw.utils.setStyle(domNode,[
 			{transition: "none"},
 			{marginBottom: ""},
@@ -63,6 +63,7 @@ function slideOpen(domNode,options) {
 		{height: currHeight + "px"},
 		{opacity: "1"}
 	]);
+	return id;
 }
 
 function slideClosed(domNode,options) {
@@ -70,7 +71,7 @@ function slideClosed(domNode,options) {
 	var duration = options.duration || $tw.utils.getAnimationDuration(),
 		currHeight = domNode.offsetHeight;
 	// Clear the properties we've set when the animation is over
-	setTimeout(function() {
+	var id = setTimeout(function() {
 		$tw.utils.setStyle(domNode,[
 			{transition: "none"},
 			{marginBottom: ""},
@@ -105,6 +106,7 @@ function slideClosed(domNode,options) {
 		{height: "0px"},
 		{opacity: "0"}
 	]);
+	return id;
 }
 
 exports.slide = {
