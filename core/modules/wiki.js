@@ -844,7 +844,7 @@ exports.clearGlobalCache = function() {
 exports.getCacheForTiddler = function(title,cacheName,initializer) {
 	this.caches = this.caches || Object.create(null);
 	var caches = this.caches[title];
-	if(caches && caches[cacheName]) {
+	if(caches && caches[cacheName] !== undefined) {
 		return caches[cacheName];
 	} else {
 		if(!caches) {
