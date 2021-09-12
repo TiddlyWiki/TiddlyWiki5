@@ -383,6 +383,9 @@ exports.formatDateString = function(date,template) {
 			[/^0WW/, function() {
 				return $tw.utils.pad($tw.utils.getWeek(date));
 			}],
+			[/^dddd/, function() {
+				return [7,1,2,3,4,5,6][date.getDay()];
+			}],
 			[/^ddd/, function() {
 				return $tw.language.getString("Date/Short/Day/" + date.getDay());
 			}],

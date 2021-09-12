@@ -1,5 +1,5 @@
 created: 20140418142957325
-modified: 20201201154521138
+modified: 20210912115121622
 tags: Features
 title: DateFormat
 type: text/vnd.tiddlywiki
@@ -9,6 +9,7 @@ When used to display date values (with the `format` attribute set to ''date''), 
 |!Token |!Substituted Value |
 |`DDD` |Day of week in full (eg, "Monday") |
 |`ddd` |Short day of week (eg, "Mon") |
+|`dddd` |<<.from-version "5.2.0">> Weekday number from 1 through 7, beginning with Monday and ending with Sunday |
 |`DD` |Day of month |
 |`0DD` |Adds a leading zero |
 |`DDth` |Adds a suffix |
