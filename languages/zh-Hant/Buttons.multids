@@ -32,8 +32,6 @@ ExportTiddler/Caption: 導出此條目
 ExportTiddler/Hint: 導出此條目
 ExportTiddlers/Caption: 導出條目
 ExportTiddlers/Hint: 導出條目
-ExportTiddlyWikiCore/Caption: 導出 TiddlyWiki 核心
-ExportTiddlyWikiCore/Hint: 導出 ~TiddlyWiki 核心程式碼，適用於以外部 ~JavaScript 執行
 SidebarSearch/Hint: 選擇側邊欄的搜尋欄位
 Fold/Caption: 收合條目
 Fold/Hint: 收合此條目的內容
