@@ -46,7 +46,7 @@ FileSystemAdaptor.prototype.displayError = function(msg,err) {
 		existingCount,
 		text = "&#9888; " + msg + "; " + err.toString();
 	// Print an orange message to the console
-	console.error("\x1b[1;33m" + $tw.language.getString("Error/WhileSaving") + ": see the '_filesystem/errors/log' tiddler for details." + "\x1b[0m");
+	console.error("\x1b[1;33m" + $tw.language.getString("Error/WhileSaving") + ": see the '" + logTitle + "' tiddler for details." + "\x1b[0m");
 	this.logger.log(Array.prototype.join.call([$tw.language.getString("Error/WhileSaving") + ":",msg + ":",err.toString()]," "));
 	if(alertFields) {
 		alertFields.text = Array.prototype.join.call([alertFields.text,text],"\n\n")
