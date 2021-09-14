@@ -4,9 +4,6 @@ caption: {{$:/core/images/down-arrow}} {{$:/language/Buttons/More/Caption}}
 description: {{$:/language/Buttons/More/Hint}}
 
 \whitespace trim
-\define config-title()
-$:/config/PageControlButtons/Visibility/$(listItem)$
-\end
 <$button popup=<<qualify "$:/state/popup/more">> tooltip={{$:/language/Buttons/More/Hint}} aria-label={{$:/language/Buttons/More/Caption}} class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/down-arrow}}
@@ -20,31 +17,7 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 
 <div class="tc-drop-down">
 
-<$set name="tv-config-toolbar-icons" value="yes">
-
-<$set name="tv-config-toolbar-text" value="yes">
-
-<$set name="tv-config-toolbar-class" value="tc-btn-invisible">
-
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]] -[[$:/core/ui/Buttons/more-page-actions]]" variable="listItem">
-
-<$reveal type="match" state=<<config-title>> text="hide">
-
-<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
-
-<$transclude tiddler=<<listItem>> mode="inline"/>
-
-</$set>
-
-</$reveal>
-
-</$list>
-
-</$set>
-
-</$set>
-
-</$set>
+<<toolbar-drop-down-list "$:/tags/PageControls" "$:/config/PageControlButtons/Visibility/">>
 
 </div>
 
