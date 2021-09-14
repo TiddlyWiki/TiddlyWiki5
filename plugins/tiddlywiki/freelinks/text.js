@@ -81,12 +81,13 @@ TextNodeWidget.prototype.execute = function() {
 			$tw.utils.each(sortedTitles,function(title) {
 				if(title.substring(0,3) !== "$:/") {
 					titles.push(title);
-					reparts.push("(\\b" + $tw.utils.escapeRegExp(title) + "\\b)");
+					reparts.push("(" + $tw.utils.escapeRegExp(title) + ")");
 				}
 			});
+			var regexpStr = "\\b(?:" + reparts.join("|") + ")\\b";
 			return {
 				titles: titles,
-				regexp: new RegExp(reparts.join("|"),ignoreCase ? "i" : "")
+				regexp: new RegExp(regexpStr,ignoreCase ? "i" : "")
 			};
 		});
 		// Repeatedly linkify
