@@ -16,20 +16,13 @@ Filter operator returning all the selected tiddlers that are untagged
 Export our filter function
 */
 exports.untagged = function(source,operator,options) {
-	var results = [];
-	if(operator.prefix === "!") {
-		source(function(tiddler,title) {
-			if(tiddler && $tw.utils.isArray(tiddler.fields.tags) && tiddler.fields.tags.length > 0) {
-				$tw.utils.pushTop(results,title);
-			}
-		});
-	} else {
-		source(function(tiddler,title) {
-			if(!tiddler || !tiddler.hasField("tags") || ($tw.utils.isArray(tiddler.fields.tags) && tiddler.fields.tags.length === 0)) {
-				$tw.utils.pushTop(results,title);
-			}
-		});
-	}
+	var results = [],
+		expected = (operator.prefix === "!");
+	source(function(tiddler,title) {
+		if((tiddler && $tw.utils.isArray(tiddler.fields.tags) && tiddler.fields.tags.length > 0) === expected) {
+			results.push(title);
+		}
+	});
 	return results;
 };
 
