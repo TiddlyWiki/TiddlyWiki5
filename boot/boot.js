@@ -1212,8 +1212,12 @@ $tw.Wiki = function(options) {
 			index,titlesLength,title;
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
-			var shadowInfo = shadowTiddlers[title];
-			callback(shadowInfo.tiddler,title);
+			if(tiddlers[title]) {
+				callback(tiddlers[title],title);
+			} else {
+				var shadowInfo = shadowTiddlers[title];
+				callback(shadowInfo.tiddler,title);
+			}
 		}
 	};
 
