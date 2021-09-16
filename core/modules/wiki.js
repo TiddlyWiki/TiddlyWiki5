@@ -339,21 +339,60 @@ exports.countTiddlers = function(excludeTag) {
 	return $tw.utils.count(tiddlers);
 };
 
+exports.makeTiddlerIteratorFromGenerator = function(generator) {
+	var self = this,
+		generator = function(callback) {
+		var iter,pair;
+		if (callback === undefined) {
+			return generator();
+		} else {
+			iter = generator();
+			while((pair = iter.next()).done == false) {
+				callback(self.getTiddler(pair.value),pair.value);
+			}
+		}
+	};
+	generator.iterable = true;
+	return generator;
+};
+
 /*
 Returns a function iterator(callback) that iterates through the specified titles, and invokes the callback with callback(tiddler,title)
 */
 exports.makeTiddlerIterator = function(titles) {
-	var self = this;
-	if(!$tw.utils.isArray(titles)) {
-		titles = Object.keys(titles);
+	var self = this, generator;
+	if (typeof titles === "function") {
+		generator = function(callback) {
+			if (callback === undefined) {
+				return new $tw.utils.Iterator(titles);
+			} else {
+				var title;
+				// Don't bother with Iterator object, just exhaust the
+				// titles method right now.
+				while ((title = titles()) !== undefined) {
+					callback(self.getTiddler(title),title);
+				}
+			}
+		};
 	} else {
-		titles = titles.slice(0);
+		if($tw.utils.isArray(titles)) {
+			titles = titles.slice(0);
+		} else {
+			titles = Object.keys(titles);
+		}
+		generator = function(callback) {
+			var ptr = 0;
+			if (callback === undefined) {
+				return new $tw.utils.Iterator(function() { return titles[ptr++]; });
+			} else {
+				titles.forEach(function(title) {
+					callback(self.getTiddler(title),title);
+				});
+			}
+		};
 	}
-	return function(callback) {
-		titles.forEach(function(title) {
-			callback(self.getTiddler(title),title);
-		});
-	};
+	generator.iterable = true;
+	return generator;
 };
 
 /*

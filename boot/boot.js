@@ -1194,12 +1194,20 @@ $tw.Wiki = function(options) {
 	// Iterate through all tiddler titles
 	this.each = function(callback) {
 		var titles = getTiddlerTitles(),
-			index,titlesLength,title;
-		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
+			index = 0,
+			titlesLength,
+			title;
+		if(callback === undefined) {
+			return new $tw.utils.Iterator(function() {
+				return titles[index++];
+			});
+		}
+		for(titlesLength=titles.length; index < titlesLength; index++) {
 			title = titles[index];
 			callback(tiddlers[title],title);
 		}
 	};
+	this.each.iterable = true;
 
 	// Get an array of all shadow tiddler titles
 	this.allShadowTitles = function() {
@@ -1209,8 +1217,15 @@ $tw.Wiki = function(options) {
 	// Iterate through all shadow tiddler titles
 	this.eachShadow = function(callback) {
 		var titles = getShadowTiddlerTitles(),
-			index,titlesLength,title;
-		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
+			index = 0,
+			title,
+			titlesLength;
+		if(callback === undefined) {
+			return new $tw.utils.Iterator(function() {
+				return titles[index++];
+			});
+		}
+		for(titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
 			if(tiddlers[title]) {
 				callback(tiddlers[title],title);
@@ -1220,31 +1235,75 @@ $tw.Wiki = function(options) {
 			}
 		}
 	};
+	this.eachShadow.iterable = true;
 
 	// Iterate through all tiddlers and then the shadows
 	this.eachTiddlerPlusShadows = function(callback) {
-		var index,titlesLength,title,
-			titles = getTiddlerTitles();
-		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
+		var index = 0,
+			titlesLength,title,
+			titles = getTiddlerTitles(),
+			shadows = getShadowTiddlerTitles();
+		if(callback === undefined) {
+			return new $tw.utils.Iterator(function() {
+				if (titles) {
+					if (index < titlesLength) {
+						return titles[index++];
+					}
+					titles = null;
+					index = 0;
+					titlesLength = shadows.length;
+				}
+				while (index < titlesLength) {
+					if(!tiddlers[title]) {
+						return shadows[index++];
+					}
+					index++;
+				}
+				return undefined;
+			});
+		}
+		for(titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
 			callback(tiddlers[title],title);
 		}
-		titles = getShadowTiddlerTitles();
-		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
-			title = titles[index];
+		for(index = 0, titlesLength = shadows.length; index < titlesLength; index++) {
+			title = shadows[index];
 			if(!tiddlers[title]) {
 				var shadowInfo = shadowTiddlers[title];
 				callback(shadowInfo.tiddler,title);
 			}
 		}
 	};
+	this.eachTiddlerPlusShadows.iterable = true;
 
 	// Iterate through all the shadows and then the tiddlers
 	this.eachShadowPlusTiddlers = function(callback) {
-		var index,titlesLength,title,
-			titles = getShadowTiddlerTitles();
-		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
-			title = titles[index];
+		var index = 0,
+			title,
+			shadows = getShadowTiddlerTitles(),
+			titles = getTiddlerTitles(),
+			titlesLength = shadows.length;
+		if(callback === undefined) {
+			return new $tw.utils.Iterator(function() {
+				if (shadows) {
+					if (index < titlesLength) {
+						return shadows[index++];
+					}
+					shadows = null;
+					index = 0;
+					titlesLength = titles.length;
+				}
+				while (index < titlesLength) {
+					if(!shadowTiddlers[title]) {
+						return titles[index++];
+					}
+					index++;
+				}
+				return undefined;
+			});
+		}
+		for(; index < titlesLength; index++) {
+			title = shadows[index];
 			if(tiddlers[title]) {
 				callback(tiddlers[title],title);
 			} else {
@@ -1260,6 +1319,7 @@ $tw.Wiki = function(options) {
 			}
 		}
 	};
+	this.eachShadowPlusTiddlers.iterable = true;
 
 	// Test for the existence of a tiddler (excludes shadow tiddlers)
 	this.tiddlerExists = function(title) {

@@ -16,21 +16,30 @@ Filter operator for checking if a title starts with a prefix
 Export our filter function
 */
 exports.prefix = function(source,operator,options) {
-	var results = [];
-	if(operator.prefix === "!") {
-		source(function(tiddler,title) {
-			if(title.substr(0,operator.operand.length) !== operator.operand) {
-				results.push(title);
+	var expected = (operator.prefix === "!"),
+		iter = source();
+	return options.wiki.makeTiddlerIterator(function() {
+		var pair;
+		while ((pair = iter.next()).done == false) {
+			if((pair.value.substr(0,operator.operand.length) !== operator.operand) === expected) {
+				return pair.value;
 			}
-		});
-	} else {
-		source(function(tiddler,title) {
-			if(title.substr(0,operator.operand.length) === operator.operand) {
-				results.push(title);
-			}
-		});
-	}
-	return results;
+		}
+		return undefined;
+	});
 };
+
+/*
+exports.prefix = function(source,operator,options) {
+	var expected = (operator.prefix === "!");
+	return options.wiki.makeTiddlerIteratorFromGenerator(function*() {
+		for (var title of source) {
+			if((pair.value.substr(0,operator.operand.length) !== operator.operand) === expected) {
+				yield title;
+			}
+		}
+	});
+};
+*/
 
 })();

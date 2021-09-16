@@ -323,6 +323,8 @@ exports.compileFilter = function(filterString) {
 			source = self.each;
 		} else if(typeof source === "object") { // Array or hashmap
 			source = self.makeTiddlerIterator(source);
+		} else if(!source.iterable) { // Deprecated method. Wrap it.
+			source = updateDeprecatedSource(source);
 		}
 		if(!widget) {
 			widget = $tw.rootWidget;
@@ -333,6 +335,21 @@ exports.compileFilter = function(filterString) {
 		});
 		return results.toArray();
 	});
+};
+
+function updateDeprecatedSource(source) {
+	return function(callback) {
+		var titles = [],
+			ptr = 0;
+		if (callback === undefined) {
+			source(function(tiddler,title) {
+				titles.push(title);
+			});
+			return new $tw.utils.Iterator(function() { return titles[ptr++]; });
+		} else {
+			source(callback);
+		}
+	};
 };
 
 })();
