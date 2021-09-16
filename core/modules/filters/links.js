@@ -20,7 +20,7 @@ exports.links = function(source,operator,options) {
 	source(function(tiddler,title) {
 		results.pushTop(options.wiki.getTiddlerLinks(title));
 	});
-	return results.tiddlerIterator(options.wiki);
+	return results.makeTiddlerIterator(options.wiki);
 };
 
 })();

@@ -95,7 +95,7 @@ LinkedList.prototype.toArray = function() {
 	return output;
 };
 
-LinkedList.prototype.tiddlerIterator = function(wiki) {
+LinkedList.prototype.makeTiddlerIterator = function(wiki) {
 	var self = this;
 	return function(callback) {
 		self.each(function(title) {
