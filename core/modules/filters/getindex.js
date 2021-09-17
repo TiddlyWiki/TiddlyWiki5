@@ -34,7 +34,11 @@ exports.getindex = function(source,operator,options) {
 	return [];
 };
 
-/*
+// LOOK HERE
+/* This is what the getindex would look like if it used for..of and yield.
+ * It's... not that much better, which is why I'm not sure maintaining
+ * forward-compatibility is a great idea.
+ *
 exports.getindex = function(source,operator,options) {
 	var iter;
 	if(operator.operand) {

@@ -339,6 +339,12 @@ exports.countTiddlers = function(excludeTag) {
 	return $tw.utils.count(tiddlers);
 };
 
+/**This creates a tiddler iterator from a function*() method, which is an
+ * ECMA 2015 feature. Basically, the only people who would use this are
+ * people writing plugins who don't care about backward compatibility.
+ * If we decide not to be forward-compatible with for..of and yield, then
+ * this function can be removed.
+ */
 exports.makeTiddlerIteratorFromGenerator = function(generator) {
 	var self = this,
 		generator = function(callback) {

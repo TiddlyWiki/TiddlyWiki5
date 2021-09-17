@@ -1207,6 +1207,9 @@ $tw.Wiki = function(options) {
 			callback(tiddlers[title],title);
 		}
 	};
+	// This .iterable is attached to each tiddler traversing method. It's
+	// required to maintain backward compatibility with old method(callback)
+	// functions people might pass to wiki.filterTiddlers as source.
 	this.each.iterable = true;
 
 	// Get an array of all shadow tiddler titles

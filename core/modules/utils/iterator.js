@@ -8,6 +8,9 @@ compatible with ECMA 2015's yield statements and generator functions.
 
 Objects returned by next() are {value: value, done: false}, but the next method
 returned by this need only return a string or null.
+
+If we decide not to be forward-compatible with for..of and yield, then we
+can scrap this and just pass around iterator methods instead.
 \*/
 
 function Iterator(next) {

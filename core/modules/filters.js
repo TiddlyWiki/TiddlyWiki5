@@ -337,6 +337,13 @@ exports.compileFilter = function(filterString) {
 	});
 };
 
+/**For backward compatibility.
+ * Some plugins may still call filterTiddlers and pass a method as a source.
+ * That method won't be able to manage both the callback(tiddler,title)
+ * style and the lazy iterable style, so we've got to wrap it.
+ * Methods passed with .iterable = true will be recognized as true
+ * tiddler iterators.
+ */
 function updateDeprecatedSource(source) {
 	return function(callback) {
 		var titles = [],

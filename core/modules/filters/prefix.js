@@ -29,17 +29,4 @@ exports.prefix = function(source,operator,options) {
 	});
 };
 
-/*
-exports.prefix = function(source,operator,options) {
-	var expected = (operator.prefix === "!");
-	return options.wiki.makeTiddlerIteratorFromGenerator(function*() {
-		for (var title of source) {
-			if((pair.value.substr(0,operator.operand.length) !== operator.operand) === expected) {
-				yield title;
-			}
-		}
-	});
-};
-*/
-
 })();
